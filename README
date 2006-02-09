@@ -1,0 +1,8 @@
+compiz - OpenGL window and compositing manager
+
+Compiz is an OpenGL compositing manager that use GLX_EXT_texture_from_pixmap
+for binding redirected top-level windows to texture objects. It has a flexible
+plug-in system and it is designed to run well on most graphics hardware. 
+
+David Reveman
+davidr@novell.com
