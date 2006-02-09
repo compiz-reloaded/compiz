@@ -1,5 +1,8 @@
 #include "qdecorator.h"
 
+#include "qwmutils.h"
+
+#include <QtDebug>
 #include <QX11Info>
 
 #include <X11/Xlib.h>
@@ -18,6 +21,14 @@ QDecorator::QDecorator(int &argc, char **argv)
     win_decor_atom	= XInternAtom(xdisplay, "_NET_WINDOW_DECOR", false);
     //win_decor_sync_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR_SYNC", false);
     wm_move_resize_atom = XInternAtom(xdisplay, "_NET_WM_MOVERESIZE", false);
+
+
+    XSelectInput(xdisplay,
+                 RootWindow(xdisplay, DefaultScreen(xdisplay)),
+                 SubstructureNotifyMask | ExposureMask |
+                 StructureNotifyMask | PropertyChangeMask);
+
+    setEventFilter(QWM::eventFilter);
 }
 
 QDecorator::~QDecorator()
@@ -28,20 +39,24 @@ QDecorator::~QDecorator()
 bool QDecorator::x11EventFilter(XEvent *xevent)
 {
     long        xid = 0;
-
+    qDebug()<<"event filter in decorator";
     switch (xevent->type) {
     case ButtonPress:
     case ButtonRelease:
+        qDebug()<<"button";
 	xid = frameTable[xevent->xbutton.window];
 	break;
     case EnterNotify:
     case LeaveNotify:
+        qDebug()<<"enter/leave";
 	xid = frameTable[xevent->xcrossing.window];
 	break;
     case MotionNotify:
+        qDebug()<<"motion";
 	xid = frameTable[xevent->xmotion.window];
 	break;
     case PropertyNotify:
+        qDebug()<<"property";
 #if 0
 	if (xevent->xproperty.atom == frame_window_atom)
 	{
@@ -63,6 +78,7 @@ bool QDecorator::x11EventFilter(XEvent *xevent)
 #endif
 	break;
     case DestroyNotify:
+        qDebug()<<"destroy";
 	frameTable.remove(xevent->xproperty.window);
     default:
 	break;

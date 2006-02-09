@@ -51,14 +51,14 @@ static bool check_dm_hint ()
 
 int main(int argc, char **argv)
 {
+    QDecorator app(argc, argv);
+
     if (check_dm_hint())
     {
 	fprintf(stderr, "%s: Another window decorator is already running\n",
 		argv[0]);
 	return 1;
     }
-
-    QDecorator app(argc, argv);
 
     return app.exec();
 }

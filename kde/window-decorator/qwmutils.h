@@ -5,6 +5,7 @@ namespace QWM
 {
     void trapXError(void);
     int  popXError(void);
+    bool eventFilter(void *message, long *result);
 }
 
 #endif
