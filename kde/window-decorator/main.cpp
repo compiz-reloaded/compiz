@@ -1,4 +1,5 @@
 #include "qdecorator.h"
+#include "qwmutils.h"
 
 #include <QtGui>
 #include <QX11Info>
@@ -35,13 +36,13 @@ static bool check_dm_hint ()
 
 	XFree(data);
 
-	//gdk_error_trap_push();
+	QWM::trapXError();
 
 	XGetWindowAttributes(xdisplay, window, &attr);
 	XSync(xdisplay, false);
 
-	//if (!gdk_error_trap_pop())
-        //  dm = true;
+	if (!QWM::popXError())
+            dm = true;
     }
 
     return dm;

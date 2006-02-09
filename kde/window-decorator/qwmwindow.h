@@ -1,14 +1,21 @@
 #ifndef QWMWINDOW_H
 #define QWMWINDOW_H
 
+#include <QObject>
+#include <QPixmap>
+#include <QString>
+#include <QRect>
+
+class QWidget;
 
 enum QWMState
 {};
 enum QWMActions
 {};
 
-class QWMWindow
+class QWMWindow : public QObject
 {
+    Q_OBJECT
 public:
     QWMWindow(long xid);
 
