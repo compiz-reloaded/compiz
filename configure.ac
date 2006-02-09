@@ -183,14 +183,18 @@ AC_ARG_ENABLE(kde,
   [use_kde=$enableval], [use_kde=yes])
 
 if test "x$use_kde" = "xyes"; then
-  PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR, QtCore,
+  PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR, 
+		    QtCore QtGui,
 		    [use_kde=yes], [use_kde=no])
 fi
 
 AM_CONDITIONAL(USE_KDE, test "x$use_kde" = "xyes")
 if test "$use_kde" = yes; then
   AC_DEFINE(USE_KDE, 1, [Build kde window decorator])
+  QT_MOC=`$PKG_CONFIG --variable=exec_prefix QtCore`
+  QT_MOC=${QT_MOC}/bin/moc
 fi
+AC_SUBST(QT_MOC)
 
 AC_OUTPUT([
 compiz.pc
