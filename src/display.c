@@ -40,7 +40,6 @@
 #include <X11/Xatom.h>
 #include <X11/extensions/Xcomposite.h>
 #include <X11/extensions/Xrandr.h>
-/* #include <X11/extensions/Xevie.h> */
 #include <X11/extensions/shape.h>
 
 #include <compiz.h>
