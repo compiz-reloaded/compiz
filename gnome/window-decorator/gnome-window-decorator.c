@@ -29,6 +29,8 @@
 #include <gtk/gtkwindow.h>
 #include <gdk/gdkx.h>
 
+#include <gconf/gconf-client.h>
+
 #define WNCK_I_KNOW_THIS_IS_UNSTABLE
 #include <libwnck/libwnck.h>
 #include <libwnck/window-action-menu.h>
@@ -48,9 +50,17 @@
 #include <math.h>
 #include <limits.h>
 
+#define GCONF_DIR "/apps/metacity/general"
+
+#define COMPIZ_USE_SYSTEM_FONT_KEY	 \
+    GCONF_DIR "/titlebar_uses_system_font"
+
+#define COMPIZ_TITLEBAR_FONT_KEY \
+    GCONF_DIR "/titlebar_font"
+
 #define LEFT_SPACE   12
 #define RIGHT_SPACE  14
-#define TOP_SPACE    27
+#define TOP_SPACE    10
 #define BOTTOM_SPACE 14
 
 #define ICON_SPACE   20
@@ -344,7 +354,7 @@ static const guint8 _large_shadow[] __attribute__ ((__aligned__ (4))) =
   "\0\0\0\0\0\0\0"
 };
 
-static extents _win_extents = {  6,  6, 21,  6 };
+static extents _win_extents = {  6,  6, 4,  6 };
 
 static quad _win_quads[] = {
     {
@@ -554,6 +564,11 @@ static gint	     tooltip_timer_tag = 0;
 static GSList *draw_list = NULL;
 static guint  draw_idle_id = 0;
 
+static PangoFontDescription *titlebar_font = NULL;
+static gboolean		    use_system_font = FALSE;
+static gint		    text_height;
+static gint		    titlebar_height;
+
 static void
 send_decor_sync_notify (decor_t	*d)
 {
@@ -654,6 +669,25 @@ decoration_to_property (long	*data,
 }
 
 static void
+decor_quads_init8 (quad *dst,
+		   quad *src,
+		   int  height)
+{
+    memcpy (dst, src, 8 * sizeof (quad));
+
+    dst[0].p1.y -= height;
+    dst[1].p1.y -= height;
+    dst[2].p1.y -= height;
+
+    dst[3].m.y0 += height;
+    dst[4].m.y0 += height;
+
+    dst[5].m.y0 += height;
+    dst[6].m.y0 += height;
+    dst[7].m.y0 += height;
+}
+
+static void
 decor_update_window_property (decor_t *d)
 {
     long    data[128];
@@ -662,9 +696,17 @@ decor_update_window_property (decor_t *d)
     gint    nButtonQuad = sizeof (_win_button_quads) /
 	sizeof (_win_button_quads[0]);
     quad    quads[nQuad + nButtonQuad];
+    extents extents = _win_extents;
 
-    memcpy (quads, _win_quads, nQuad * sizeof (quad));
+    /* this is kinda hard to read */
+
+    decor_quads_init8 (quads, _win_quads, titlebar_height);
+
     memcpy (quads + nQuad, _win_button_quads, nButtonQuad * sizeof (quad));
+
+    quads[8].p1.y  -= titlebar_height;
+    quads[9].p1.y  -= titlebar_height;
+    quads[10].p1.y -= titlebar_height;
 
     quads[2].m.x0 = quads[4].m.x0 = quads[7].m.x0 = d->width - RIGHT_SPACE;
     quads[1].m.xx = 1.0;
@@ -681,8 +723,10 @@ decor_update_window_property (decor_t *d)
 
     nQuad += nButtonQuad;
 
+    extents.top += titlebar_height;
+
     decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &_win_extents, quads, nQuad);
+			    &extents, quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -1005,6 +1049,7 @@ draw_window_decoration (decor_t *d)
     double        alpha;
     double        x1, y1, x2, y2, x, y, sx, sy;
     int		  corners = SHADE_LEFT | SHADE_RIGHT | SHADE_TOP | SHADE_BOTTOM;
+    int		  top;
 
     if (!d->pixmap)
 	return;
@@ -1026,6 +1071,8 @@ draw_window_decoration (decor_t *d)
 
     cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
+    top = _win_extents.top + titlebar_height;
+
     x1 = LEFT_SPACE - _win_extents.left;
     y1 = TOP_SPACE - _win_extents.top;
     x2 = d->width - RIGHT_SPACE + _win_extents.right;
@@ -1045,7 +1092,7 @@ draw_window_decoration (decor_t *d)
 				x1 + 0.5,
 				y1 + 0.5,
 				_win_extents.left - 0.5,
-				_win_extents.top - 0.5,
+				top - 0.5,
 				5.0, CORNER_TOPLEFT & corners,
 				&title_color[0], 1.0, &title_color[1], alpha,
 				SHADE_TOP | SHADE_LEFT);
@@ -1055,7 +1102,7 @@ draw_window_decoration (decor_t *d)
 				y1 + 0.5,
 				x2 - x1 - _win_extents.left -
 				_win_extents.right,
-				_win_extents.top - 0.5,
+				top - 0.5,
 				5.0, 0,
 				&title_color[0], 1.0, &title_color[1], alpha,
 				SHADE_TOP);
@@ -1064,7 +1111,7 @@ draw_window_decoration (decor_t *d)
 				x2 - _win_extents.right,
 				y1 + 0.5,
 				_win_extents.right - 0.5,
-				_win_extents.top - 0.5,
+				top - 0.5,
 				5.0, CORNER_TOPRIGHT & corners,
 				&title_color[0], 1.0, &title_color[1], alpha,
 				SHADE_TOP | SHADE_RIGHT);
@@ -1077,7 +1124,7 @@ draw_window_decoration (decor_t *d)
 				x1 + 0.5,
 				y1 + 0.5,
 				_win_extents.left - 0.5,
-				_win_extents.top - 0.5,
+				top - 0.5,
 				5.0, CORNER_TOPLEFT & corners,
 				&color, 1.0, &color, alpha,
 				SHADE_TOP | SHADE_LEFT);
@@ -1087,7 +1134,7 @@ draw_window_decoration (decor_t *d)
 				y1 + 0.5,
 				x2 - x1 - _win_extents.left -
 				_win_extents.right,
-				_win_extents.top - 0.5,
+				top - 0.5,
 				5.0, 0,
 				&color, 1.0, &color, alpha,
 				SHADE_TOP);
@@ -1096,7 +1143,7 @@ draw_window_decoration (decor_t *d)
 				x2 - _win_extents.right,
 				y1 + 0.5,
 				_win_extents.right - 0.5,
-				_win_extents.top - 0.5,
+				top - 0.5,
 				5.0, CORNER_TOPRIGHT & corners,
 				&color, 1.0, &color, alpha,
 				SHADE_TOP | SHADE_RIGHT);
@@ -1104,7 +1151,7 @@ draw_window_decoration (decor_t *d)
 
     fill_rounded_rectangle (cr,
 			    x1 + 0.5,
-			    y1 + _win_extents.top,
+			    y1 + top,
 			    _win_extents.left - 0.5,
 			    1,
 			    5.0, 0,
@@ -1113,7 +1160,7 @@ draw_window_decoration (decor_t *d)
 
     fill_rounded_rectangle (cr,
 			    x2 - _win_extents.right,
-			    y1 + _win_extents.top,
+			    y1 + top,
 			    _win_extents.right - 0.5,
 			    1,
 			    5.0, 0,
@@ -1150,7 +1197,7 @@ draw_window_decoration (decor_t *d)
 			    SHADE_BOTTOM | SHADE_RIGHT);
 
     cairo_rectangle (cr,
-		     LEFT_SPACE, TOP_SPACE,
+		     LEFT_SPACE, titlebar_height + TOP_SPACE,
 		     d->width - LEFT_SPACE - RIGHT_SPACE, 1);
     gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
     cairo_fill (cr);
@@ -1163,7 +1210,7 @@ draw_window_decoration (decor_t *d)
 					  &style->fg[GTK_STATE_NORMAL],
 					  0.7);
 
-	cairo_move_to (cr, x1 + 0.5, y1 + _win_extents.top - 0.5);
+	cairo_move_to (cr, x1 + 0.5, y1 + top - 0.5);
 	cairo_rel_line_to (cr, x2 - x1 - 1.0, 0.0);
 
 	cairo_stroke (cr);
@@ -1222,7 +1269,8 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
     {
 	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 39.0,
-			      11.0, d->button_states[0], &x, &y, &sx, &sy);
+			      titlebar_height / 2 + 3.0,
+			      d->button_states[0], &x, &y, &sx, &sy);
 
 	if (d->active)
 	{
@@ -1256,7 +1304,8 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
     {
 	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 21.0,
-			      11.0, d->button_states[1], &x, &y, &sx, &sy);
+			      titlebar_height / 2 + 3.0,
+			      d->button_states[1], &x, &y, &sx, &sy);
 
 	cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 
@@ -1310,7 +1359,8 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
     {
 	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 3.0,
-			      11.0, d->button_states[2], &x, &y, &sx, &sy);
+			      titlebar_height / 2 + 3.0,
+			      d->button_states[2], &x, &y, &sx, &sy);
 
 	if (d->active)
 	{
@@ -1349,21 +1399,25 @@ draw_window_decoration (decor_t *d)
 
 	if (d->active)
 	{
-	    cairo_move_to (cr, 33.0, 9.0);
+	    cairo_move_to (cr,
+			   33.0,
+			   9.0 + (titlebar_height - text_height) / 2.0);
 
 	    pango_cairo_show_layout (cr, d->layout);
 
 	    cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
 	}
 
-	cairo_move_to (cr, 32.0, 8.0);
+	cairo_move_to (cr,
+		       32.0,
+		       8.0 + (titlebar_height - text_height) / 2.0);
 
 	pango_cairo_show_layout (cr, d->layout);
     }
 
     if (d->icon)
     {
-	cairo_translate (cr, LEFT_SPACE, 9.0);
+	cairo_translate (cr, LEFT_SPACE, titlebar_height / 2 + 1.0);
 	cairo_set_source (cr, d->icon);
 	cairo_rectangle (cr, 0.0, 0.0, 16.0, 16.0);
 	cairo_clip (cr);
@@ -1496,8 +1550,10 @@ update_default_decorations (GdkScreen *screen)
     GdkDisplay *gdkdisplay = gdk_display_get_default ();
     Display    *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
     Atom       atom;
-    int	       nQuad;
     decor_t    d;
+    gint       nQuad = sizeof (_win_quads) / sizeof (_win_quads[0]);
+    quad       quads[nQuad];
+    extents    extents = _win_extents;
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
@@ -1512,28 +1568,33 @@ update_default_decorations (GdkScreen *screen)
 		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
 
     d.width  = LEFT_SPACE + 1 + RIGHT_SPACE;
-    d.height = TOP_SPACE + 1 + BOTTOM_SPACE;
+    d.height = titlebar_height + TOP_SPACE + 1 + BOTTOM_SPACE;
 
-    if (!decor_normal_pixmap)
-	decor_normal_pixmap = create_pixmap (d.width, d.height);
+    decor_quads_init8 (quads, _win_quads, titlebar_height);
+
+    extents.top += titlebar_height;
+
+    d.buffer_pixmap = NULL;
+    d.layout	    = NULL;
+    d.icon	    = NULL;
+    d.state	    = 0;
+    d.actions	    = 0;
+    d.prop_xid	    = 0;
 
     if (decor_normal_pixmap)
+	gdk_pixmap_unref (decor_normal_pixmap);
+
+    decor_normal_pixmap = create_pixmap (d.width, d.height);
+    if (decor_normal_pixmap)
     {
-	d.pixmap	= decor_normal_pixmap;
-	d.buffer_pixmap = NULL;
-	d.active	= FALSE;
-	d.layout	= NULL;
-	d.icon		= NULL;
-	d.state		= 0;
-	d.actions	= 0;
-	d.prop_xid	= 0;
+	d.pixmap = decor_normal_pixmap;
+	d.active = FALSE;
 
 	draw_window_decoration (&d);
 
 	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_NORMAL", FALSE);
-	nQuad = sizeof (_win_quads) / sizeof (_win_quads[0]);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&_win_extents, _win_quads, nQuad);
+				&extents, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 atom,
@@ -1541,26 +1602,20 @@ update_default_decorations (GdkScreen *screen)
 			 32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
     }
 
-    if (!decor_active_pixmap)
-	decor_active_pixmap = create_pixmap (d.width, d.height);
+    if (decor_active_pixmap)
+	gdk_pixmap_unref (decor_active_pixmap);
 
+    decor_active_pixmap = create_pixmap (d.width, d.height);
     if (decor_active_pixmap)
     {
-	d.pixmap	= decor_active_pixmap;
-	d.buffer_pixmap = NULL;
-	d.active	= TRUE;
-	d.layout	= NULL;
-	d.icon		= NULL;
-	d.state		= 0;
-	d.actions	= 0;
-	d.prop_xid	= 0;
+	d.pixmap = decor_active_pixmap;
+	d.active = TRUE;
 
 	draw_window_decoration (&d);
 
 	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_ACTIVE", FALSE);
-	nQuad = sizeof (_win_quads) / sizeof (_win_quads[0]);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&_win_extents, _win_quads, nQuad);
+				&extents, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 atom,
@@ -1908,7 +1963,7 @@ update_window_decoration_size (WnckWindow *win)
 	width = MAX (ICON_SPACE + BUTTON_SPACE, w);
 
     width  += LEFT_SPACE + RIGHT_SPACE;
-    height  = TOP_SPACE + 1 + BOTTOM_SPACE;
+    height  = titlebar_height + TOP_SPACE + 1 + BOTTOM_SPACE;
 
     if (width == d->width && height == d->height)
 	return FALSE;
@@ -2095,7 +2150,7 @@ window_name_changed (WnckWindow *win)
 
     if (d->decorated)
     {
-	if (update_window_decoration_size (win))
+	if (!update_window_decoration_size (win))
 	    queue_decor_draw (d);
     }
 }
@@ -3047,22 +3102,141 @@ style_changed (GtkWidget *widget)
     windows = wnck_screen_get_windows (screen);
     while (windows != NULL)
     {
-	queue_decor_draw (g_object_get_data (G_OBJECT (windows->data),
-					     "decor"));
+	update_window_decoration_size (WNCK_WINDOW (windows->data));
+	update_event_windows (WNCK_WINDOW (windows->data));
 	windows = windows->next;
+    }
+}
+
+static const PangoFontDescription *
+get_titlebar_font (void)
+{
+    if (use_system_font)
+    {
+	return NULL;
+    }
+    else
+	return titlebar_font;
+}
+
+static void
+titlebar_font_changed (GConfClient *client)
+{
+    gchar *str;
+
+    str = gconf_client_get_string (client,
+				   COMPIZ_TITLEBAR_FONT_KEY,
+				   NULL);
+    if (!str)
+	str = g_strdup ("Sans Bold 12");
+
+    if (titlebar_font)
+	pango_font_description_free (titlebar_font);
+
+    titlebar_font = pango_font_description_from_string (str);
+
+    g_free (str);
+}
+
+static void
+update_titlebar_font (void)
+{
+    const PangoFontDescription *font_desc;
+    PangoFontMetrics	       *metrics;
+    PangoLanguage	       *lang;
+
+    font_desc = get_titlebar_font ();
+    if (!font_desc)
+    {
+	GtkStyle *default_style;
+
+	default_style = gtk_widget_get_default_style ();
+	font_desc = default_style->font_desc;
+    }
+
+    pango_context_set_font_description (pango_context, font_desc);
+
+    lang    = pango_context_get_language (pango_context);
+    metrics = pango_context_get_metrics (pango_context, font_desc, lang);
+
+    text_height = PANGO_PIXELS (pango_font_metrics_get_ascent (metrics) +
+				pango_font_metrics_get_descent (metrics));
+
+    titlebar_height = text_height;
+    if (titlebar_height < 17)
+	titlebar_height = 17;
+
+    pango_font_metrics_unref (metrics);
+}
+
+static void
+value_changed (GConfClient *client,
+	       const gchar *key,
+	       GConfValue  *value,
+	       void        *data)
+{
+    gboolean changed = FALSE;
+
+    if (strcmp (key, COMPIZ_USE_SYSTEM_FONT_KEY) == 0)
+    {
+	if (gconf_client_get_bool (client,
+				   COMPIZ_USE_SYSTEM_FONT_KEY,
+				   NULL) != use_system_font)
+	{
+	    use_system_font = !use_system_font;
+	    changed = TRUE;
+	}
+    }
+    else if (strcmp (key, COMPIZ_TITLEBAR_FONT_KEY) == 0)
+    {
+	titlebar_font_changed (client);
+	changed = !use_system_font;
+    }
+
+    if (changed)
+    {
+	GdkDisplay *gdkdisplay;
+	GdkScreen  *gdkscreen;
+	WnckScreen *screen = data;
+	GList	   *windows;
+
+	gdkdisplay = gdk_display_get_default ();
+	gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
+
+	update_titlebar_font ();
+
+	update_default_decorations (gdkscreen);
+
+	windows = wnck_screen_get_windows (screen);
+	while (windows != NULL)
+	{
+	    update_window_decoration_size (WNCK_WINDOW (windows->data));
+	    update_event_windows (WNCK_WINDOW (windows->data));
+	    windows = windows->next;
+	}
     }
 }
 
 static gboolean
 init_settings (WnckScreen *screen)
 {
-    PangoFontDescription *desc;
-    GtkSettings		 *settings;
+    GtkSettings	*settings;
+    GConfClient	*gconf;
+
+    gconf = gconf_client_get_default ();
+
+    gconf_client_add_dir (gconf,
+			  GCONF_DIR,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
+
+    g_signal_connect (G_OBJECT (gconf),
+		      "value_changed",
+		      G_CALLBACK (value_changed),
+		      screen);
 
     style_window = gtk_window_new (GTK_WINDOW_POPUP);
     gtk_widget_ensure_style (style_window);
-
-    style_changed (style_window);
 
     g_signal_connect_object (style_window, "style-set",
 			     G_CALLBACK (style_changed),
@@ -3075,9 +3249,15 @@ init_settings (WnckScreen *screen)
 
     pango_context = gtk_widget_create_pango_context (style_window);
 
-    desc = pango_font_description_from_string ("Sans Bold 10");
+    use_system_font = gconf_client_get_bool (gconf,
+					     COMPIZ_USE_SYSTEM_FONT_KEY,
+					     NULL);
 
-    pango_context_set_font_description (pango_context, desc);
+    titlebar_font_changed (gconf);
+
+    update_titlebar_font ();
+
+    style_changed (style_window);
 
     return TRUE;
 }

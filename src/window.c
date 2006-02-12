@@ -1323,14 +1323,13 @@ addWindow (CompScreen *screen,
     w->output.top    = 0;
     w->output.bottom = 0;
 
-    w->paint.opacity	= OPAQUE;
-    w->paint.brightness = 0xffff;
-    w->paint.saturation = COLOR;
+    w->paint.opacity	= w->opacity    = OPAQUE;
+    w->paint.brightness = w->brightness = 0xffff;
+    w->paint.saturation = w->saturation = COLOR;
     w->paint.xScale	= 1.0f;
     w->paint.yScale	= 1.0f;
 
-    w->alive	  = TRUE;
-    w->saturation = COLOR;
+    w->alive = TRUE;
 
     w->scaled = FALSE;
 
@@ -1490,15 +1489,21 @@ addWindow (CompScreen *screen,
 	w->protocols = getProtocols (w->screen->display, w->id);
 
 	if (!(w->type & CompWindowTypeDesktopMask))
-	    w->paint.opacity =
+	    w->opacity =
 		getWindowProp32 (w->screen->display, w->id,
 				 w->screen->display->winOpacityAtom,
 				 OPAQUE);
 
-	w->paint.brightness =
+	w->brightness =
 		getWindowProp32 (w->screen->display, w->id,
 				 w->screen->display->winBrightnessAtom,
 				 BRIGHT);
+
+	if (w->alive)
+	{
+	    w->paint.opacity    = w->opacity;
+	    w->paint.brightness = w->brightness;
+	}
 
 	if (w->screen->canDoSaturated)
 	{

@@ -243,13 +243,13 @@ fadePaintWindow (CompWindow		 *w,
 	brightness = fw->brightness;
 	if (attrib->brightness > fw->brightness)
 	{
-	    brightness = fw->brightness + fs->steps;
+	    brightness = fw->brightness + (fs->steps / 12);
 	    if (brightness > attrib->brightness)
 		brightness = attrib->brightness;
 	}
 	else if (attrib->brightness < fw->brightness)
 	{
-	    brightness = fw->brightness - fs->steps;
+	    brightness = fw->brightness - (fs->steps / 12);
 	    if (brightness < attrib->brightness)
 		brightness = attrib->brightness;
 	}
@@ -263,7 +263,7 @@ fadePaintWindow (CompWindow		 *w,
 	}
 	else if (attrib->saturation < fw->saturation)
 	{
-	    saturation = fw->saturation - (fs->steps / 12);
+	    saturation = fw->saturation - (fs->steps / 6);
 	    if (saturation < attrib->saturation)
 		saturation = attrib->saturation;
 	}
@@ -350,6 +350,7 @@ fadeAddDisplayModal (CompDisplay *d,
 		if (fw->dModal)
 		    continue;
 
+		w->paint.brightness = 0x8080;
 		w->paint.saturation = 0;
 	    }
 
@@ -385,7 +386,10 @@ fadeRemoveDisplayModal (CompDisplay *d,
 		    continue;
 
 		if (w->alive)
+		{
+		    w->paint.brightness = w->brightness;
 		    w->paint.saturation = w->saturation;
+		}
 	    }
 
 	    damageScreen (s);

@@ -46,6 +46,14 @@
 #define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY				   \
     "/apps/compiz/general/allscreens/options/action_double_click_titlebar"
 
+#define GCONF_DIR "/apps/metacity/general"
+
+#define COMPIZ_USE_SYSTEM_FONT_KEY         \
+    GCONF_DIR "/titlebar_uses_system_font"
+
+#define COMPIZ_TITLEBAR_FONT_KEY \
+    GCONF_DIR "/titlebar_font"
+
 enum {
     DOUBLE_CLICK_MAXIMIZE
 };
@@ -54,7 +62,8 @@ static GnomeWindowManagerClass *parent_class;
 
 struct _CompizWindowManagerPrivate {
     GConfClient *gconf;
-    char	*mouse_modifier;
+    gchar	*mouse_modifier;
+    gchar	*font;
 };
 
 static void
@@ -95,6 +104,11 @@ compiz_change_settings (GnomeWindowManager    *wm,
     CompizWindowManager *cwm;
 
     cwm = COMPIZ_WINDOW_MANAGER (wm);
+
+    if (settings->flags & GNOME_WM_SETTING_FONT)
+	gconf_client_set_string (cwm->p->gconf,
+				 COMPIZ_TITLEBAR_FONT_KEY,
+				 settings->font, NULL);
 
     if (settings->flags & GNOME_WM_SETTING_MOUSE_FOCUS)
 	gconf_client_set_bool (cwm->p->gconf,
@@ -158,6 +172,27 @@ compiz_get_settings (GnomeWindowManager *wm,
     to_get = settings->flags;
     settings->flags = 0;
 
+    if (to_get & GNOME_WM_SETTING_FONT)
+    {
+	char *str;
+
+	str = gconf_client_get_string (cwm->p->gconf,
+				       COMPIZ_TITLEBAR_FONT_KEY,
+				       NULL);
+
+	if (!str)
+	    str = g_strdup ("Sans Bold 12");
+
+	if (cwm->p->font)
+	    g_free (cwm->p->font);
+
+	cwm->p->font = str;
+
+	settings->font = cwm->p->font;
+
+	settings->flags |= GNOME_WM_SETTING_FONT;
+    }
+
     if (to_get & GNOME_WM_SETTING_MOUSE_FOCUS)
     {
 	settings->focus_follows_mouse =
@@ -213,16 +248,10 @@ compiz_get_settings (GnomeWindowManager *wm,
 	else
 	    new = NULL;
 
-	if (new && cwm->p->mouse_modifier &&
-	    strcmp (new, cwm->p->mouse_modifier) == 0)
-	{
-	    /* unchanged */;
-	}
-	else
-	{
+	if (cwm->p->mouse_modifier)
 	    g_free (cwm->p->mouse_modifier);
-	    cwm->p->mouse_modifier = g_strdup (new ? new : "");
-	}
+
+	cwm->p->mouse_modifier = g_strdup (new ? new : "");
 
 	g_free (str);
 
@@ -261,7 +290,7 @@ static int
 compiz_get_settings_mask (GnomeWindowManager *wm)
 {
     return
-/*      GNOME_WM_SETTING_FONT                | */
+	GNOME_WM_SETTING_FONT                |
 	GNOME_WM_SETTING_MOUSE_FOCUS         |
 	GNOME_WM_SETTING_AUTORAISE           |
 	GNOME_WM_SETTING_AUTORAISE_DELAY     |
@@ -317,11 +346,18 @@ compiz_window_manager_init (CompizWindowManager	     *cwm,
     cwm->p		   = g_new0 (CompizWindowManagerPrivate, 1);
     cwm->p->gconf	   = gconf_client_get_default ();
     cwm->p->mouse_modifier = NULL;
+    cwm->p->font	   = NULL;
 
     gconf_client_add_dir (cwm->p->gconf,
 			  "/apps/compiz",
 			  GCONF_CLIENT_PRELOAD_ONELEVEL,
 			  NULL);
+
+    gconf_client_add_dir (cwm->p->gconf,
+			  GCONF_DIR,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
+
 
     g_signal_connect (G_OBJECT (cwm->p->gconf),
 		      "value_changed",
@@ -342,6 +378,12 @@ compiz_window_manager_finalize (GObject *object)
     g_signal_handlers_disconnect_by_func (G_OBJECT (cwm->p->gconf),
 					  G_CALLBACK (value_changed),
 					  cwm);
+
+    if (cwm->p->mouse_modifier)
+	g_free (cwm->p->mouse_modifier);
+
+    if (cwm->p->font)
+	g_free (cwm->p->font);
 
     g_object_unref (G_OBJECT (cwm->p->gconf));
     g_free (cwm->p);

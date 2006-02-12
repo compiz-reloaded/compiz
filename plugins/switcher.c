@@ -30,14 +30,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#ifndef GTK_DISABLE_DEPRECATED
-#define GTK_DISABLE_DEPRECATED
-#endif
-
-#include <gtk/gtk.h>
-#include <gdk/gdkx.h>
-
 #include <X11/Xatom.h>
+#include <X11/extensions/Xrender.h>
 
 #include <compiz.h>
 
@@ -59,6 +53,11 @@
 #define SWITCH_TIMESTEP_MIN       0.1f
 #define SWITCH_TIMESTEP_MAX       50.0f
 #define SWITCH_TIMESTEP_PRECISION 0.1f
+
+#define SWITCH_COLOR_RED_DEFAULT   0x8080
+#define SWITCH_COLOR_GREEN_DEFAULT 0x8080
+#define SWITCH_COLOR_BLUE_DEFAULT  0x8080
+#define SWITCH_COLOR_ALPHA_DEFAULT 0x8080
 
 static char *winType[] = {
     "Toolbar",
@@ -85,7 +84,8 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_SPEED	  3
 #define SWITCH_SCREEN_OPTION_TIMESTEP	  4
 #define SWITCH_SCREEN_OPTION_WINDOW_TYPE  5
-#define SWITCH_SCREEN_OPTION_NUM          6
+#define SWITCH_SCREEN_OPTION_COLOR        6
+#define SWITCH_SCREEN_OPTION_NUM          7
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -95,7 +95,6 @@ typedef struct _SwitchScreen {
 
     CompOption opt[SWITCH_SCREEN_OPTION_NUM];
 
-    pid_t  pid;
     Window popupWindow;
 
     Window	 selectedWindow;
@@ -119,19 +118,25 @@ typedef struct _SwitchScreen {
     int move;
 } SwitchScreen;
 
+#define MwmHintsDecorations (1L << 1)
+
+typedef struct {
+    unsigned long flags;
+    unsigned long functions;
+    unsigned long decorations;
+} MwmHints;
+
+#define COLOR_TO_ARGB_PIXEL(c) \
+    (((c[3] & 0xff00) << 16) | \
+     ((c[2] & 0xff00) <<  8) | \
+     ((c[1] & 0xff00) <<  0) | \
+     ((c[0]	      >>  8)))
+
 #define POPUP_WIN_PROP  "_SWITCH_POPUP_WINDOW"
 #define SELECT_WIN_PROP "_SWITCH_SELECT_WINDOW"
 
-static Atom visibleNameAtom;
-static Atom nameAtom;
-static Atom utf8StringAtom;
-
-static GtkWidget *topPane, *bottomPane;
-static GdkWindow *foreign = NULL;
-
 #define WIDTH  212
 #define HEIGHT 192
-#define BORDER 6
 #define SPACE  10
 
 #define BOX_WIDTH 3
@@ -159,8 +164,8 @@ static float _boxVertices[] =
      (WIDTH >> 1), HEIGHT - BOX_WIDTH
 };
 
-#define WINDOW_WIDTH(count) (WIDTH * (count) + (BORDER << 1) + (SPACE << 1))
-#define WINDOW_HEIGHT (HEIGHT + (BORDER << 1) + (SPACE << 1) + 40)
+#define WINDOW_WIDTH(count) (WIDTH * (count) + (SPACE << 1))
+#define WINDOW_HEIGHT (HEIGHT + (SPACE << 1))
 
 #define GET_SWITCH_DISPLAY(d)				       \
     ((SwitchDisplay *) (d)->privates[displayPrivateIndex].ptr)
@@ -235,6 +240,19 @@ switchSetScreenOption (CompScreen      *screen,
 	    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
 	}
+	break;
+    case SWITCH_SCREEN_OPTION_COLOR:
+	if (compSetColorOption (o, value))
+	{
+	    if (ss->popupWindow)
+	    {
+		XSetWindowBackground (screen->display->display, ss->popupWindow,
+				      COLOR_TO_ARGB_PIXEL (o->value.c));
+		XClearWindow (screen->display->display, ss->popupWindow);
+	    }
+
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -252,7 +270,7 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE];
     o->name			  = "initiate";
     o->shortDesc		  = "Initiate";
-    o->longDesc			  = "Layout and start transforming windows";
+    o->longDesc			  = "Show switcher";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_INITIATE_MODIFIERS_DEFAULT;
@@ -263,7 +281,7 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_TERMINATE];
     o->name			  = "terminate";
     o->shortDesc		  = "Terminate";
-    o->longDesc			  = "Return from expose view";
+    o->longDesc			  = "End switching";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_TERMINATE_MODIFIERS_DEFAULT;
@@ -274,7 +292,7 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_NEXT_WINDOW];
     o->name			  = "next_window";
     o->shortDesc		  = "Next Window";
-    o->longDesc			  = "Focus next window";
+    o->longDesc			  = "Select next window";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_NEXT_WINDOW_MODIFIERS_DEFAULT;
@@ -285,7 +303,7 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
     o->name		= "speed";
     o->shortDesc	= "Speed";
-    o->longDesc		= "Expose speed";
+    o->longDesc		= "Switcher speed";
     o->type		= CompOptionTypeFloat;
     o->value.f		= SWITCH_SPEED_DEFAULT;
     o->rest.f.min	= SWITCH_SPEED_MIN;
@@ -295,7 +313,7 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
     o->shortDesc	= "Timestep";
-    o->longDesc		= "Expose timestep";
+    o->longDesc		= "Switcher timestep";
     o->type		= CompOptionTypeFloat;
     o->value.f		= SWITCH_TIMESTEP_DEFAULT;
     o->rest.f.min	= SWITCH_TIMESTEP_MIN;
@@ -305,7 +323,7 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_TYPE];
     o->name	         = "window_types";
     o->shortDesc         = "Window Types";
-    o->longDesc	         = "Window types that should scaled in expose mode";
+    o->longDesc	         = "Window types that should shown in switcher";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_WIN_TYPE;
@@ -316,363 +334,16 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->rest.s.nString    = nWindowTypeString;
 
     ss->wMask = compWindowTypeMaskFromStringList (&o->value);
-}
 
-static char *
-text_property_to_utf8 (const XTextProperty *prop)
-{
-    char **list;
-    int  count;
-    char *retval;
-
-    list = NULL;
-
-    count =
-	gdk_text_property_to_utf8_list (gdk_x11_xatom_to_atom (prop->encoding),
-					prop->format,
-					prop->value,
-					prop->nitems,
-					&list);
-    if (count == 0)
-	return NULL;
-
-    retval = list[0];
-    list[0] = g_strdup ("");
-
-    g_strfreev (list);
-
-    return retval;
-}
-
-static char *
-_get_text_property (Window  xwindow,
-		    Atom    atom)
-{
-    XTextProperty text;
-    char	  *retval;
-
-    text.nitems = 0;
-    if (XGetTextProperty (gdk_display,
-			  xwindow,
-			  &text,
-			  atom))
-    {
-	retval = text_property_to_utf8 (&text);
-
-	if (text.value)
-	    XFree (text.value);
-    }
-    else
-    {
-	retval = NULL;
-    }
-
-    return retval;
-}
-
-static char *
-_get_utf8_property (Window  xwindow,
-		    Atom    atom)
-{
-    Atom   type;
-    int	   format;
-    gulong nitems;
-    gulong bytes_after;
-    gchar  *val;
-    int	   result;
-    gchar  *retval;
-
-    type = None;
-    val  = NULL;
-
-    result = XGetWindowProperty (gdk_display, xwindow, atom,
-				 0, G_MAXLONG,
-				 FALSE, utf8StringAtom,
-				 &type, &format, &nitems,
-				 &bytes_after, (guchar **) &val);
-
-    if (result != Success)
-	return NULL;
-
-    if (type != utf8StringAtom || format != 8 || nitems == 0)
-    {
-	if (val)
-	    XFree (val);
-
-	return NULL;
-    }
-
-    if (!g_utf8_validate (val, nitems, NULL))
-    {
-	XFree (val);
-
-	return NULL;
-    }
-
-    retval = g_strndup (val, nitems);
-
-    XFree (val);
-
-    return retval;
-}
-
-static char *
-_get_window_name (Window xwindow)
-{
-    char *name;
-
-    name = _get_utf8_property (xwindow, visibleNameAtom);
-    if (!name)
-    {
-	name = _get_utf8_property (xwindow, nameAtom);
-	if (!name)
-	    name = _get_text_property (xwindow, XA_WM_NAME);
-    }
-
-    return name;
-}
-
-static gboolean
-paintWidget (GtkWidget	    *widget,
-	     GdkEventExpose *event,
-	     gpointer	    data)
-{
-    cairo_t *cr;
-    GList   *child;
-
-    cr = gdk_cairo_create (widget->window);
-
-    /* draw colored border */
-    gdk_draw_rectangle (widget->window,
-			widget->style->bg_gc[GTK_STATE_SELECTED],
-			TRUE,
-			widget->allocation.x,
-			widget->allocation.y,
-			widget->allocation.width - 1,
-			widget->allocation.height - 1);
-
-    /* draw black outer outline */
-    gdk_draw_rectangle (widget->window,
-			widget->style->black_gc,
-			FALSE,
-			widget->allocation.x,
-			widget->allocation.y,
-			widget->allocation.width - 1,
-			widget->allocation.height - 1);
-
-    /* draw inner outline */
-    gdk_draw_rectangle (widget->window,
-			widget->style->fg_gc[GTK_STATE_INSENSITIVE],
-			FALSE,
-			widget->allocation.x + BORDER - 1,
-			widget->allocation.y + BORDER - 1,
-			widget->allocation.width  - 2 * BORDER + 1,
-			widget->allocation.height - 2 * BORDER + 1);
-
-    /* draw top pane background */
-    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-
-    cairo_set_source_rgba (cr,
-			   widget->style->bg[GTK_STATE_NORMAL].red   / 65535.0,
-			   widget->style->bg[GTK_STATE_NORMAL].green / 65535.0,
-			   widget->style->bg[GTK_STATE_NORMAL].blue  / 65535.0,
-			   0.8);
-
-    cairo_rectangle (cr,
-		     topPane->allocation.x,
-		     topPane->allocation.y,
-		     topPane->allocation.width,
-		     topPane->allocation.height);
-
-    cairo_fill (cr);
-
-    cairo_rectangle (cr,
-		     topPane->allocation.x,
-		     topPane->allocation.y,
-		     topPane->allocation.width,
-		     topPane->allocation.height);
-
-    cairo_fill (cr);
-
-    /* draw bottom pane background */
-    cairo_set_source_rgba (cr,
-			   widget->style->bg[GTK_STATE_ACTIVE].red   / 65535.0,
-			   widget->style->bg[GTK_STATE_ACTIVE].green / 65535.0,
-			   widget->style->bg[GTK_STATE_ACTIVE].blue  / 65535.0,
-			   0.8);
-
-    cairo_rectangle (cr,
-		     bottomPane->allocation.x,
-		     bottomPane->allocation.y,
-		     bottomPane->allocation.width,
-		     bottomPane->allocation.height);
-
-    cairo_fill (cr);
-
-    /* draw pane separator */
-    gdk_draw_line (widget->window,
-		   widget->style->dark_gc[GTK_STATE_NORMAL],
-		   bottomPane->allocation.x,
-		   bottomPane->allocation.y,
-		   bottomPane->allocation.x + bottomPane->allocation.width - 1,
-		   bottomPane->allocation.y);
-
-    cairo_destroy (cr);
-
-    child = gtk_container_get_children (GTK_CONTAINER (widget));
-
-    for (; child; child = child->next)
-	gtk_container_propagate_expose (GTK_CONTAINER (widget),
-					GTK_WIDGET (child->data),
-					event);
-
-    return TRUE;
-}
-
-static GdkFilterReturn
-switchNameChangeFilterFunc (GdkXEvent *gdkxevent,
-			    GdkEvent  *event,
-			    gpointer  data)
-{
-    Display   *xdisplay;
-    XEvent    *xevent = gdkxevent;
-    GtkWidget *label = data;
-    gchar     *name;
-    gchar     *markup = NULL;
-
-    xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-
-    switch (xevent->type) {
-    case PropertyNotify:
-	if (!foreign || GDK_WINDOW_XID (foreign) != xevent->xproperty.window)
-	    return GDK_FILTER_CONTINUE;
-
-	gdk_error_trap_push ();
-
-	name = _get_window_name (xevent->xproperty.window);
-
-	gdk_flush ();
-	if (!gdk_error_trap_pop () && name)
-	{
-	    markup = g_markup_printf_escaped ("<span size=\"x-large\">"
-					      "%s"
-					      "</span>",
-					      name);
-	    g_free (name);
-	}
-
-	if (markup)
-	{
-	    gtk_label_set_markup (GTK_LABEL (label), markup);
-	    g_free (markup);
-	}
-	else
-	    gtk_label_set_text (GTK_LABEL (label), "");
-    default:
-	break;
-    }
-
-    return GDK_FILTER_CONTINUE;
-}
-
-static GdkFilterReturn
-switchSelectWindowFilterFunc (GdkXEvent *gdkxevent,
-			      GdkEvent  *event,
-			      gpointer  data)
-{
-    Display   *xdisplay;
-    XEvent    *xevent = gdkxevent;
-    GtkWidget *label = data;
-    gchar     *markup = NULL;
-
-    xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-
-    switch (xevent->type) {
-    case ClientMessage:
-	if (foreign)
-	{
-	    gdk_error_trap_push ();
-
-	    gdk_window_set_events (foreign, 0);
-	    gdk_window_unref (foreign);
-
-	    gdk_flush ();
-	    gdk_error_trap_pop ();
-	}
-
-	gdk_error_trap_push ();
-
-	foreign = gdk_window_foreign_new (xevent->xclient.data.l[0]);
-
-	gdk_flush ();
-	if (!gdk_error_trap_pop () && foreign)
-	{
-	    gchar *name;
-
-	    gdk_window_add_filter (foreign,
-				   switchNameChangeFilterFunc,
-				   data);
-
-	    gdk_error_trap_push ();
-
-	    gdk_window_set_events (foreign, GDK_PROPERTY_CHANGE_MASK);
-	    name = _get_window_name (xevent->xclient.data.l[0]);
-
-	    gdk_flush ();
-	    if (!gdk_error_trap_pop () && name)
-	    {
-		markup = g_markup_printf_escaped ("<span size=\"x-large\">"
-						  "%s"
-						  "</span>",
-						  name);
-		g_free (name);
-	    }
-	}
-
-	if (markup)
-	{
-	    gtk_label_set_markup (GTK_LABEL (label), markup);
-	    g_free (markup);
-	}
-	else
-	    gtk_label_set_text (GTK_LABEL (label), "");
-    default:
-	break;
-    }
-
-    return GDK_FILTER_CONTINUE;
-}
-
-
-static void
-switchSendPopupNotify (GdkScreen *screen,
-		       Window    xwindow)
-{
-    Display *xdisplay;
-    Screen  *xscreen;
-    XEvent  xev;
-
-    xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    xscreen  = gdk_x11_screen_get_xscreen (screen);
-
-    xev.xclient.type	     = ClientMessage;
-    xev.xclient.serial	     = 0;
-    xev.xclient.send_event   = TRUE;
-    xev.xclient.display	     = xdisplay;
-    xev.xclient.window	     = RootWindowOfScreen (xscreen);
-    xev.xclient.message_type = XInternAtom (xdisplay, POPUP_WIN_PROP, FALSE);
-    xev.xclient.format	     = 32;
-    xev.xclient.data.l[0]    = xwindow;
-    xev.xclient.data.l[1]    = 0;
-    xev.xclient.data.l[2]    = 0;
-    xev.xclient.data.l[3]    = 0;
-    xev.xclient.data.l[4]    = 0;
-
-    XSendEvent (xdisplay,
-		RootWindowOfScreen (xscreen),
-		FALSE,
-		SubstructureRedirectMask | SubstructureNotifyMask,
-		&xev);
+    o = &ss->opt[SWITCH_SCREEN_OPTION_COLOR];
+    o->name	  = "color";
+    o->shortDesc  = "Window Color";
+    o->longDesc	  = "Window switcher background color";
+    o->type	  = CompOptionTypeColor;
+    o->value.c[0] = SWITCH_COLOR_RED_DEFAULT;
+    o->value.c[1] = SWITCH_COLOR_GREEN_DEFAULT;
+    o->value.c[2] = SWITCH_COLOR_BLUE_DEFAULT;
+    o->value.c[3] = SWITCH_COLOR_ALPHA_DEFAULT;
 }
 
 static void
@@ -784,9 +455,11 @@ switchUpdateWindowList (CompScreen *s,
     ss->move = 0;
 
     if (ss->popupWindow)
-	XResizeWindow (s->display->display, ss->popupWindow,
-		       WINDOW_WIDTH (count),
-		       WINDOW_HEIGHT);
+	XMoveResizeWindow (s->display->display, ss->popupWindow,
+			   s->width  / 2 - WINDOW_WIDTH (count) / 2,
+			   s->height / 2 - WINDOW_HEIGHT / 2,
+			   WINDOW_WIDTH (count),
+			   WINDOW_HEIGHT);
 }
 
 static void
@@ -882,6 +555,45 @@ switchCountWindows (CompScreen *s)
     return count;
 }
 
+static Visual *
+findArgbVisual (Display *dpy, int scr)
+{
+    XVisualInfo		*xvi;
+    XVisualInfo		template;
+    int			nvi;
+    int			i;
+    XRenderPictFormat	*format;
+    Visual		*visual;
+
+    template.screen = scr;
+    template.depth  = 32;
+    template.class  = TrueColor;
+
+    xvi = XGetVisualInfo (dpy,
+			  VisualScreenMask |
+			  VisualDepthMask  |
+			  VisualClassMask,
+			  &template,
+			  &nvi);
+    if (!xvi)
+	return 0;
+
+    visual = 0;
+    for (i = 0; i < nvi; i++)
+    {
+	format = XRenderFindVisualFormat (dpy, xvi[i].visual);
+	if (format->type == PictTypeDirect && format->direct.alphaMask)
+	{
+	    visual = xvi[i].visual;
+	    break;
+	}
+    }
+
+    XFree (xvi);
+
+    return visual;
+}
+
 static void
 switchInitiate (CompScreen *s)
 {
@@ -896,101 +608,71 @@ switchInitiate (CompScreen *s)
     if (count < 2)
 	return;
 
-    if (!ss->pid)
+    if (!ss->popupWindow)
     {
-	ss->pid = fork ();
+	Display		     *dpy = s->display->display;
+	XSizeHints	     xsh;
+	XWMHints	     xwmh;
+	Atom		     state[4];
+	int		     nState = 0;
+	XSetWindowAttributes attr;
+	Visual		     *visual;
+	Atom		     mwmHintsAtom;
+	MwmHints	     mwmHints;
+	CompOption	     *color = &ss->opt[SWITCH_SCREEN_OPTION_COLOR];
 
-	if (ss->pid == 0)
-	{
-	    GtkWidget  *window, *vbox;
-	    GdkDisplay *display;
-	    GdkScreen  *screen;
-	    GdkVisual  *visual;
-	    GdkAtom    selectWinAtom;
+	visual = findArgbVisual (dpy, s->screenNum);
+	if (!visual)
+	    return;
 
-	    gtk_init (&programArgc, &programArgv);
+	count -= (count + 1) & 1;
+	if (count < 3)
+	    count = 3;
 
-	    window = gtk_window_new (GTK_WINDOW_POPUP);
+	xsh.flags  = PSize | PPosition;
+	xsh.width  = WINDOW_WIDTH (count);
+	xsh.height = WINDOW_HEIGHT;
 
-	    /* check for visual with depth 32 */
-	    visual = gdk_visual_get_best_with_depth (32);
-	    if (visual)
-	    {
-		GdkColormap *colormap;
+	xwmh.flags = InputHint;
+	xwmh.input = 0;
 
-		/* create colormap for depth 32 visual and use it with our
-		   top level window. */
-		colormap = gdk_colormap_new (visual, FALSE);
-		gtk_widget_set_colormap (window, colormap);
-	    }
+	attr.background_pixel = COLOR_TO_ARGB_PIXEL (color->value.c);
+	attr.border_pixel     = 0;
+	attr.colormap	      = XCreateColormap (dpy, s->root, visual,
+						 AllocNone);
 
-	    display = gdk_display_get_default ();
+	ss->popupWindow =
+	    XCreateWindow (dpy, s->root,
+			   s->width  / 2 - xsh.width / 2,
+			   s->height / 2 - xsh.height / 2,
+			   xsh.width, xsh.height, 0,
+			   32, InputOutput, visual,
+			   CWBackPixel | CWBorderPixel | CWColormap, &attr);
 
-	    screen = gdk_display_get_screen (display, s->screenNum);
+	XSetWMProperties (dpy, ss->popupWindow, NULL, NULL,
+			  programArgv, programArgc,
+			  &xsh, &xwmh, NULL);
 
-	    gtk_window_set_screen (GTK_WINDOW (window), screen);
+	mwmHintsAtom = XInternAtom (dpy, "_MOTIF_WM_HINTS", 0);
 
-	    gtk_window_set_position (GTK_WINDOW (window),
-				     GTK_WIN_POS_CENTER_ALWAYS);
+	memset (&mwmHints, 0, sizeof (mwmHints));
 
-	    count -= (count + 1) & 1;
-	    if (count < 3)
-		count = 3;
+	mwmHints.flags	     = MwmHintsDecorations;
+	mwmHints.decorations = 0;
 
-	    /* enable resizing, to get never-shrink behavior */
-	    gtk_window_set_resizable (GTK_WINDOW (window), TRUE);
-	    gtk_window_set_default_size (GTK_WINDOW (window),
-					 WINDOW_WIDTH (count),
-					 WINDOW_HEIGHT);
+	XChangeProperty (dpy, ss->popupWindow, mwmHintsAtom, mwmHintsAtom,
+			 8, PropModeReplace, (unsigned char *) &mwmHints,
+			 sizeof (mwmHints));
 
-	    vbox = gtk_vbox_new (FALSE, 0);
-	    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
-	    gtk_container_add (GTK_CONTAINER (window), vbox);
+	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_ABOVE", 0);
+	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_STICKY", 0);
+	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_SKIP_TASKBAR", 0);
+	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_SKIP_PAGER", 0);
 
-	    topPane = gtk_event_box_new ();
-	    gtk_event_box_set_visible_window (GTK_EVENT_BOX (topPane), FALSE);
-	    gtk_widget_set_size_request (topPane, 0, HEIGHT + (SPACE << 1));
-	    gtk_box_pack_start (GTK_BOX (vbox), topPane, FALSE, FALSE, 0);
-
-	    bottomPane = gtk_label_new ("");
-	    gtk_label_set_ellipsize (GTK_LABEL (bottomPane),
-				     PANGO_ELLIPSIZE_END);
-	    gtk_label_set_line_wrap (GTK_LABEL (bottomPane), FALSE);
-	    gtk_box_pack_end (GTK_BOX (vbox), bottomPane, TRUE, TRUE, 0);
-
-	    gtk_widget_realize (window);
-
-	    selectWinAtom   = gdk_atom_intern (SELECT_WIN_PROP, FALSE);
-
-	    visibleNameAtom = XInternAtom (GDK_DISPLAY_XDISPLAY (display),
-					   "_NET_WM_VISIBLE_NAME", FALSE);
-	    nameAtom	    = XInternAtom (GDK_DISPLAY_XDISPLAY (display),
-					   "_NET_WM_NAME", FALSE);
-	    utf8StringAtom  = XInternAtom (GDK_DISPLAY_XDISPLAY (display),
-					   "UTF8_STRING", FALSE);
-
-	    gdk_display_add_client_message_filter (display,
-						   selectWinAtom,
-						   switchSelectWindowFilterFunc,
-						   bottomPane);
-	    gdk_window_set_events (window->window, GDK_ALL_EVENTS_MASK);
-
-	    g_signal_connect (G_OBJECT (window),
-			      "expose-event",
-			      G_CALLBACK (paintWidget),
-			      NULL);
-
-	    gdk_window_set_type_hint (window->window,
-				      GDK_WINDOW_TYPE_HINT_NORMAL);
-
-	    gtk_widget_show_all (window);
-
-	    switchSendPopupNotify (screen, GDK_WINDOW_XID (window->window));
-
-	    gtk_main ();
-
-	    exit (0);
-	}
+	XChangeProperty (dpy, ss->popupWindow,
+			 XInternAtom (dpy, "_NET_WM_STATE", 0),
+			 XA_ATOM, 32, PropModeReplace,
+			 (unsigned char *) state, nState);
     }
 
     if (!ss->grabIndex)
@@ -1315,11 +997,11 @@ switchPaintWindow (CompWindow		   *w,
 	    status = (*s->paintWindow) (w, attrib, region, mask);
 	    WRAP (ss, s, paintWindow, switchPaintWindow);
 
-	    x1 = w->attrib.x + BORDER + SPACE;
-	    x2 = w->attrib.x + w->width - BORDER - SPACE;
+	    x1 = w->attrib.x + SPACE;
+	    x2 = w->attrib.x + w->width - SPACE;
 
 	    x = x1 + ss->pos;
-	    y = w->attrib.y + BORDER + SPACE;
+	    y = w->attrib.y + SPACE;
 
 	    for (i = 0; i < ss->nWindows; i++)
 	    {
@@ -1469,7 +1151,6 @@ switchInitScreen (CompPlugin *p,
     if (!ss)
 	return FALSE;
 
-    ss->pid	    = 0;
     ss->popupWindow = None;
 
     ss->selectedWindow = None;

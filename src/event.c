@@ -468,9 +468,9 @@ handleEvent (CompDisplay *display,
 		opacity = getWindowProp32 (display, w->id,
 					   display->winOpacityAtom,
 					   OPAQUE);
-		if (opacity != w->paint.opacity)
+		if (opacity != w->opacity)
 		{
-		    w->paint.opacity = opacity;
+		    w->opacity = w->paint.opacity = opacity;
 		    addWindowDamage (w);
 		}
 	    }
@@ -485,10 +485,14 @@ handleEvent (CompDisplay *display,
 		brightness = getWindowProp32 (display, w->id,
 					      display->winBrightnessAtom,
 					      BRIGHT);
-		if (brightness != w->paint.brightness)
+		if (brightness != w->brightness)
 		{
-		    w->paint.brightness = brightness;
-		    addWindowDamage (w);
+		    w->brightness = brightness;
+		    if (w->alive)
+		    {
+			w->paint.brightness = w->brightness;
+			addWindowDamage (w);
+		    }
 		}
 	    }
 	}
@@ -678,6 +682,7 @@ handleEvent (CompDisplay *display,
 		    {
 			w->alive	    = TRUE;
 			w->paint.saturation = w->saturation;
+			w->paint.brightness = w->brightness;
 
 			addWindowDamage (w);
 		    }

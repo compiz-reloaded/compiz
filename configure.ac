@@ -1,6 +1,6 @@
 AC_PREREQ(2.57)
 
-AC_INIT([compiz], [0.0.1], [davidr@novell.com])
+AC_INIT([compiz], [0.0.2], [davidr@novell.com])
 
 AC_CONFIG_AUX_DIR(config)
 
@@ -159,7 +159,7 @@ AC_ARG_ENABLE(gnome,
 
 if test "x$use_gnome" = "xyes"; then
   PKG_CHECK_MODULES(GNOME_WINDOW_DECORATOR,
-		    gtk+-2.0 libwnck-1.0 pangocairo,
+		    gtk+-2.0 gconf-2.0 libwnck-1.0 pangocairo,
 		    [use_gnome=yes], [use_gnome=no])
   if test "x$use_gnome" = "xyes"; then
     PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,

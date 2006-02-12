@@ -150,10 +150,11 @@ gconfSetValue (CompDisplay     *d,
     case CompOptionTypeColor: {
 	gchar *color;
 
-	color = g_strdup_printf ("#%.2x%.2x%.2x",
+	color = g_strdup_printf ("#%.2x%.2x%.2x%.2x",
 				 value->c[0] / 256,
 				 value->c[1] / 256,
-				 value->c[2] / 256);
+				 value->c[2] / 256,
+				 value->c[3] / 256);
 
 	gconf_value_set_string (gvalue, color);
 
@@ -329,16 +330,16 @@ gconfGetValue (CompDisplay     *d,
 	     gvalue->type == GCONF_VALUE_STRING)
     {
 	const gchar *color;
-	gint        c[3];
+	gint        c[4];
 
 	color = gconf_value_get_string (gvalue);
 
-	if (sscanf (color, "#%2x%2x%2x", &c[0], &c[1], &c[2]) == 3)
+	if (sscanf (color, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 3)
 	{
 	    value->c[0] = c[0] << 8 | c[0];
 	    value->c[1] = c[1] << 8 | c[1];
 	    value->c[2] = c[2] << 8 | c[2];
-	    value->c[3] = 0xffff;
+	    value->c[3] = c[3] << 8 | c[3];
 
 	    return TRUE;
 	}

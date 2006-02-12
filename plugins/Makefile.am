@@ -38,6 +38,10 @@ libdecoration_la_LDFLAGS = -module -avoid-version -no-undefined
 libdecoration_la_LIBADD = @COMPIZ_LIBS@
 libdecoration_la_SOURCES = decoration.c
 
+libswitcher_la_LDFLAGS = -module -avoid-version -no-undefined
+libswitcher_la_LIBADD = @COMPIZ_LIBS@
+libswitcher_la_SOURCES = switcher.c
+
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
@@ -72,5 +76,6 @@ module_LTLIBRARIES =	      \
 	libmove.la	      \
 	libresize.la	      \
 	libdecoration.la      \
+	libswitcher.la	      \
 	$(libgconf_module)    \
 	$(libplace_module)

@@ -1,5 +1,25 @@
+2006-02-11  David Reveman  <davidr@novell.com>
+
+	* configure.ac: Bump version to 0.0.2.
+
+	* src/window.c:
+	* src/event.c:
+	* plugins/fade.c:
+	* src/display.c:
+	* include/compiz.h: Lower brightness of windows that are not responding
+	and all windows when showing logout dialog.
+
+	* gnome/window-decorator/gnome-window-decorator.c: Use metacity
+	titlebar font settings.
+
+	* gnome/compiz-window-manager.c: Add titlebar font setting.
+
+	* plugins/Makefile.am:
+	* plugins/switcher.c: Add switcher plugin.
+
+	* plugins/gconf.c: Add alpha to color options.
+
 2006-02-10  David Reveman  <davidr@novell.com>
 
 	* src/screen.c:
 	* src/display.c: Do not include X11/extensions/Xevie.h.
-
