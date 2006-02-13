@@ -125,19 +125,6 @@ if test "$use_place" = yes; then
   AC_DEFINE(USE_PLACE, 1, [Build placement plugin])
 fi
 
-AC_ARG_ENABLE(menu,
-  [  --disable-menu          Disable window menu plugin],
-  [use_menu=$enableval], [use_menu=yes])
-
-if test "x$use_menu" = "xyes"; then
-  PKG_CHECK_MODULES(MENU, gtk+-2.0, [use_menu=yes], [use_menu=no])
-fi
-
-AM_CONDITIONAL(MENU_PLUGIN, test "x$use_menu" = "xyes")
-if test "$use_menu" = yes; then
-  AC_DEFINE(USE_MENU, 1, [Build menu plugin])
-fi
-
 AC_ARG_ENABLE(libsvg-cairo,
   [  --enable-libsvg-cairo   Enable svg support],
   [use_libsvg_cairo=$enableval], [use_libsvg_cairo=no])
@@ -159,7 +146,7 @@ AC_ARG_ENABLE(gnome,
 
 if test "x$use_gnome" = "xyes"; then
   PKG_CHECK_MODULES(GNOME_WINDOW_DECORATOR,
-		    gtk+-2.0 gconf-2.0 libwnck-1.0 pangocairo,
+		    gtk+-2.0 >= 2.8.0 gconf-2.0 libwnck-1.0 pangocairo,
 		    [use_gnome=yes], [use_gnome=no])
   if test "x$use_gnome" = "xyes"; then
     PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,
