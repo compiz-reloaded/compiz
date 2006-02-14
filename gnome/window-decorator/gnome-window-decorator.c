@@ -1417,7 +1417,7 @@ draw_window_decoration (decor_t *d)
 
     if (d->icon)
     {
-	cairo_translate (cr, LEFT_SPACE, titlebar_height / 2 + 1.0);
+	cairo_translate (cr, LEFT_SPACE + 1, titlebar_height / 2 + 1.0);
 	cairo_set_source (cr, d->icon);
 	cairo_rectangle (cr, 0.0, 0.0, 16.0, 16.0);
 	cairo_clip (cr);

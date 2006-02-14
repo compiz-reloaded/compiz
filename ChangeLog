@@ -1,3 +1,11 @@
+2006-02-14  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c
+	(draw_window_decoration): Make sure complete icon is visible.
+
+	* src/display.c (eventLoop):
+	(getTimeToNextRedraw): Handle clock rollback.
+
 2006-02-13  David Reveman  <davidr@novell.com>
 
 	* configure.ac: Remove menu plugin check.

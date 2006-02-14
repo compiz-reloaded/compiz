@@ -455,6 +455,10 @@ getTimeToNextRedraw (CompScreen     *s,
 
     diff = TIMEVALDIFF (&tv, lastTv);
 
+    /* handle clock rollback */
+    if (diff < 0)
+	diff = 0;
+
     if (idle)
     {
 	if (timeMult > 1)
@@ -997,6 +1001,10 @@ eventLoop (void)
 		gettimeofday (&tv, 0);
 
 		timeDiff = TIMEVALDIFF (&tv, &lastTimeout);
+
+		/* handle clock rollback */
+		if (timeDiff < 0)
+		    timeDiff = 0;
 
 		for (t = timeouts; t; t = t->next)
 		    t->left -= timeDiff;
