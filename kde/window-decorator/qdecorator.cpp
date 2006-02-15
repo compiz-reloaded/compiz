@@ -83,12 +83,11 @@ bool QDecorator::x11EventFilter(XEvent *xevent)
     default:
 	break;
     }
+
 #if 0
     if (xid)
     {
-	WnckWindow *win;
-
-	win = wnck_window_get (xid);
+	QWnWindow *win = screen->window(xid);
 	if (win)
 	{
 	    static event_callback callback[3][3] = {

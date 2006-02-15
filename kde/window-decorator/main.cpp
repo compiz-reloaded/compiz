@@ -7,6 +7,8 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+//#define I_KNOW_WHAT_I_AM_DOING
+
 static bool check_dm_hint ()
 {
     Window	  xroot;
@@ -59,6 +61,11 @@ int main(int argc, char **argv)
 		argv[0]);
 	return 1;
     }
+
+#ifndef I_KNOW_WHAT_I_AM_DOING
+    fprintf(stderr, "Qt decorator is not yet ready!\n");
+    exit(1);
+#endif
 
     return app.exec();
 }
