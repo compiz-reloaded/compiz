@@ -1,5 +1,7 @@
 2006-02-16  David Reveman  <davidr@novell.com>
 
+	* configure.ac: Remove menu.
+
 	* plugins/switcher.c (switchNextWindow): Damage new and previously
 	selected window.
 	(switchInitiate): Damage screen initiating switching.
