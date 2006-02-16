@@ -522,8 +522,12 @@ switchNextWindow (CompScreen *s)
 
     if (w)
     {
+	Window old = ss->selectedWindow;
+
 	ss->lastActiveNum  = w->activeNum;
 	ss->selectedWindow = w->id;
+
+	addWindowDamage (w);
 
 	ss->move -= WIDTH;
 	ss->moreAdjust = 1;
@@ -535,6 +539,13 @@ switchNextWindow (CompScreen *s)
 		addWindowDamage (w);
 
 	    sendSelectWindowMessage (s);
+	}
+
+	if (old)
+	{
+	    w = findWindowAtScreen (s, old);
+	    if (w)
+		addWindowDamage (w);
 	}
     }
 }
@@ -688,6 +699,8 @@ switchInitiate (CompScreen *s)
 
 	    if (ss->popupWindow)
 		XMapRaised (s->display->display, ss->popupWindow);
+
+	    damageScreen (s);
 	}
     }
 }
@@ -717,6 +730,8 @@ switchTerminate (CompScreen *s,
 
 	ss->selectedWindow = None;
 	ss->lastActiveNum  = 0;
+
+	damageScreen (s);
     }
 }
 
@@ -905,6 +920,17 @@ switchDonePaintScreen (CompScreen *s)
 }
 
 static void
+switchMoveWindow (CompWindow *w,
+		  int        dx,
+		  int        dy)
+{
+    w->attrib.x += dx;
+    w->attrib.y += dy;
+
+    XOffsetRegion (w->region, dx, dy);
+}
+
+static void
 switchPaintThumb (CompWindow		  *w,
 		  const WindowPaintAttrib *attrib,
 		  unsigned int		  mask,
@@ -918,6 +944,7 @@ switchPaintThumb (CompWindow		  *w,
     int		      wx, wy;
     float	      width, height;
     REGION	      reg;
+    CompMatrix	      matrix;
 
     width  = WIDTH  - (SPACE << 1);
     height = HEIGHT - (SPACE << 1);
@@ -949,9 +976,13 @@ switchPaintThumb (CompWindow		  *w,
     dx = wx - w->attrib.x;
     dy = wy - w->attrib.y;
 
-    moveWindow (w, dx, dy, FALSE);
+    switchMoveWindow (w, dx, dy);
 
-    mask = mask | PAINT_WINDOW_TRANSFORMED_MASK;
+    matrix = w->texture.matrix;
+    matrix.x0 -= (w->attrib.x * w->matrix.xx);
+    matrix.y0 -= (w->attrib.y * w->matrix.yy);
+
+    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
     if (w->alpha)
 	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
     else if (sAttrib.opacity == OPAQUE)
@@ -966,11 +997,22 @@ switchPaintThumb (CompWindow		  *w,
     reg.extents.x2 = wx + (x2 - wx) / sAttrib.xScale;
 
     w->vCount = 0;
-    addWindowGeometry (w, &w->matrix, 1, w->region, &reg);
+    addWindowGeometry (w, &matrix, 1, w->region, &reg);
     if (w->vCount)
+    {
+	DrawWindowGeometryProc oldDrawWindowGeometry;
+
+	/* Wrap drawWindowGeometry to make sure the general
+	   drawWindowGeometry function is used */
+	oldDrawWindowGeometry = w->screen->drawWindowGeometry;
+	w->screen->drawWindowGeometry = drawWindowGeometry;
+
 	drawWindowTexture (w, &w->texture, &sAttrib, mask);
 
-    moveWindow (w, -dx, -dy, FALSE);
+	w->screen->drawWindowGeometry = oldDrawWindowGeometry;
+    }
+
+    switchMoveWindow (w, -dx, -dy);
 }
 
 static Bool

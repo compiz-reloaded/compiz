@@ -1,3 +1,16 @@
+2006-02-16  David Reveman  <davidr@novell.com>
+
+	* plugins/switcher.c (switchNextWindow): Damage new and previously
+	selected window.
+	(switchInitiate): Damage screen initiating switching.
+	(switchTerminate): Damage screen terminating switching.
+	(switchPaintThumb): Draw thumbnail without calling any function that
+	can be wrapped.
+
+	* gnome/window-decorator/gnome-window-decorator.c
+	(update_window_decoration_size): Make sure title isn't rendered
+	when it doesn't fit.
+
 2006-02-14  David Reveman  <davidr@novell.com>
 
 	* gnome/window-decorator/gnome-window-decorator.c

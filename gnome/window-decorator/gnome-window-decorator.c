@@ -1966,7 +1966,10 @@ update_window_decoration_size (WnckWindow *win)
     height  = titlebar_height + TOP_SPACE + 1 + BOTTOM_SPACE;
 
     if (width == d->width && height == d->height)
+    {
+	update_window_decoration_name (win);
 	return FALSE;
+    }
 
     pixmap = create_pixmap (width, height);
     if (!pixmap)
