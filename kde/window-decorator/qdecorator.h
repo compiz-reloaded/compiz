@@ -2,7 +2,11 @@
 #define QDECORATOR_H
 
 #include <QApplication>
-#include <qhash.h>
+#include <QHash>
+
+#include <X11/Xdefs.h>
+
+class QWMScreen;
 
 class QDecorator : public QApplication
 {
@@ -15,7 +19,7 @@ public:
 
 private:
     QHash<long, long> frameTable;
-
+    QWMScreen *m_screen;
 };
 
 #endif

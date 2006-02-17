@@ -1,6 +1,7 @@
 #include "qdecorator.h"
 
 #include "qwmutils.h"
+#include "qwmscreen.h"
 
 #include <QtDebug>
 #include <QX11Info>
@@ -8,27 +9,36 @@
 #include <X11/Xlib.h>
 #include <X11/X.h>
 
-static Atom frame_window_atom;
-static Atom win_decor_atom;
-static Atom win_decor_sync_atom;
-static Atom wm_move_resize_atom;
+Atom net_frame_window;
+Atom net_window_decor;
+Atom net_window_decor_sync;
+Atom net_wm_moveresize;
+Atom net_active_window;
+
+static void initAtoms()
+{
+
+    Display *xdisplay     = QX11Info::display();
+
+    net_frame_window     = XInternAtom(xdisplay, "_NET_FRAME_WINDOW", false);
+    net_window_decor	  = XInternAtom(xdisplay, "_NET_WINDOW_DECOR", false);
+    net_window_decor_sync   = XInternAtom(xdisplay, "_NET_WINDOW_DECOR_SYNC", false);
+    net_wm_moveresize   = XInternAtom(xdisplay, "_NET_WM_MOVERESIZE", false);
+    net_active_window = XInternAtom(xdisplay, "_NET_ACTIVE_WINDOW", false);
+
+}
 
 QDecorator::QDecorator(int &argc, char **argv)
     : QApplication(argc, argv)
 {
     Display *xdisplay   = QX11Info::display();
-    frame_window_atom	= XInternAtom(xdisplay, "_NET_FRAME_WINDOW", false);
-    win_decor_atom	= XInternAtom(xdisplay, "_NET_WINDOW_DECOR", false);
-    //win_decor_sync_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR_SYNC", false);
-    wm_move_resize_atom = XInternAtom(xdisplay, "_NET_WM_MOVERESIZE", false);
 
+    initAtoms();
 
-    XSelectInput(xdisplay,
-                 RootWindow(xdisplay, DefaultScreen(xdisplay)),
+    m_screen = new QWMScreen(DefaultScreen(xdisplay));
+    XSelectInput(xdisplay, m_screen->rootWindow(),
                  SubstructureNotifyMask | ExposureMask |
-                 StructureNotifyMask | PropertyChangeMask);
-
-    setEventFilter(QWM::eventFilter);
+                 StructureNotifyMask    | PropertyChangeMask);
 }
 
 QDecorator::~QDecorator()
@@ -39,7 +49,7 @@ QDecorator::~QDecorator()
 bool QDecorator::x11EventFilter(XEvent *xevent)
 {
     long        xid = 0;
-    qDebug()<<"event filter in decorator";
+    //qDebug()<<"event filter in decorator";
     switch (xevent->type) {
     case ButtonPress:
     case ButtonRelease:
@@ -77,11 +87,33 @@ bool QDecorator::x11EventFilter(XEvent *xevent)
 	}
 #endif
 	break;
+    case ConfigureNotify:
+    {
+        qDebug()<<"configure notify";
+        break;
+    }
+    break;
     case DestroyNotify:
         qDebug()<<"destroy";
-	frameTable.remove(xevent->xproperty.window);
+        m_screen->destroyNotify(reinterpret_cast<XDestroyWindowEvent*>(xevent));
+        break;
+    case Expose:
+        qDebug()<<"expose";
+        break;
+    case ClientMessage:
+#ifdef HAVE_STARTUP_NOTIFICATION && 0
+        sn_display_process_event(_wnck_screen_get_sn_display (s),
+                                 xevent);
+#endif /* HAVE_STARTUP_NOTIFICATION */
+        break;
+    case MapNotify:
+        m_screen->mapNotify(reinterpret_cast<XMapEvent*>(xevent));
+        break;
+    case CreateNotify:
+        qDebug()<<"create notify";
+        break;
     default:
-	break;
+        break;
     }
 
 #if 0

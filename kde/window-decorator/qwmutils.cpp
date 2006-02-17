@@ -1,9 +1,11 @@
 #include "qwmutils.h"
 
+#include <QX11Info>
 #include <QtDebug>
 
 #include <X11/Xlib.h>
 #include <X11/X.h>
+#include <X11/Xatom.h>
 
 static int trapped_error_code = 0;
 static int (*old_error_handler) (Display *d, XErrorEvent *e);
@@ -29,38 +31,45 @@ int popXError(void)
 
 }
 
-bool QWM::eventFilter(void *message, long *result)
+void *readXProperty(Window window, Atom property, Atom type, int *items)
 {
-    XEvent *xevent = reinterpret_cast<XEvent*>(message);
+    long offset = 0, length = 2048l;
+    Atom actual_type;
+    int actual_format;
+    unsigned long nitems, bytes_remaining;
+    unsigned char *data = 0l;
 
-    switch (xevent->type)
-    {
-    case PropertyNotify:
-    {
-        qDebug()<<"property notify";
-        return true;
+    int result = XGetWindowProperty(QX11Info::display(), window, property, offset, length,
+                                    false, type,
+                                     &actual_type, &actual_format, &nitems,
+                                     &bytes_remaining, &data);
+
+    if (result == Success && actual_type == type
+         && actual_format == 32 && nitems > 0) {
+        if (items)
+            *items = nitems;
+
+        return reinterpret_cast< void* >(data);
     }
-    break;
 
-    case ConfigureNotify:
-    {
-        qDebug()<<"configure notify";
-        return true;
-    }
-    break;
+    if (data)
+        XFree(data);
 
-    case SelectionClear:
-    {
-        qDebug()<<"selection clear";
-        return true;
-    }
-    break;
+    if (items)
+        *items = 0;
 
-    case ClientMessage:
-#ifdef HAVE_STARTUP_NOTIFICATION && 0
-        sn_display_process_event (_wnck_screen_get_sn_display (s),
-                                  xevent);
-#endif /* HAVE_STARTUP_NOTIFICATION */
+    return NULL;
+}
+
+bool QWM::readWindowProperty(long window, long property, long *value)
+{
+    void *data = readXProperty(window, property, XA_WINDOW, NULL);
+
+    if (data) {
+        if (value)
+            *value = *reinterpret_cast<int *>(data);
+        XFree(data);
+
         return true;
     }
 

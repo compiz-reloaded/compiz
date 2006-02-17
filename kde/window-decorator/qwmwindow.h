@@ -1,7 +1,6 @@
 #ifndef QWMWINDOW_H
 #define QWMWINDOW_H
 
-#include <QObject>
 #include <QPixmap>
 #include <QString>
 #include <QRect>
@@ -13,9 +12,8 @@ enum QWMState
 enum QWMActions
 {};
 
-class QWMWindow : public QObject
+class QWMWindow
 {
-    Q_OBJECT
 public:
     QWMWindow(long xid);
 
@@ -38,6 +36,14 @@ public:
     void minimize();
 
     QWidget *createActionMenu();
+
+protected:
+    bool fetchFrame();
+
+private:
+    long   m_xid;
+    QRect  m_geometry;
+    long   m_frame;
 };
 
 #endif
