@@ -524,8 +524,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	glPopMatrix ();
     }
 
-    /* outside 4 side cube */
-    if (s->size == 4 && cs->invert == 1)
+    /* outside cube */
+    if (cs->invert == 1)
     {
 	if (sAttrib->xRotate != 0.0f)
 	{

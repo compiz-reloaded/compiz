@@ -1,3 +1,8 @@
+2006-02-17  David Reveman  <davidr@novell.com>
+
+	* plugins/cube.c (cubePaintTransformedScreen): Fix drawing with size
+	 greater than 4.
+
 2006-02-16  David Reveman  <davidr@novell.com>
 
 	* configure.ac: Remove menu.
