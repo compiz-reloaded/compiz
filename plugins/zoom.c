@@ -38,7 +38,7 @@
 #define ZOOM_POINTER_SENSITIVITY_MAX       100.0f
 #define ZOOM_POINTER_SENSITIVITY_PRECISION 0.01f
 
-#define ZOOM_POINTER_SENSITIVITY_FACTOR 0.0015f
+#define ZOOM_POINTER_SENSITIVITY_FACTOR 0.001f
 
 #define ZOOM_INITIATE_BUTTON_DEFAULT    Button3
 #define ZOOM_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompSuperMask)
@@ -62,6 +62,8 @@
 #define ZOOM_TIMESTEP_MAX       50.0f
 #define ZOOM_TIMESTEP_PRECISION 0.1f
 
+#define ZOOM_FILTER_LINEAR_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _ZoomDisplay {
@@ -77,7 +79,8 @@ typedef struct _ZoomDisplay {
 #define ZOOM_SCREEN_OPTION_OUT		       5
 #define ZOOM_SCREEN_OPTION_SPEED	       6
 #define ZOOM_SCREEN_OPTION_TIMESTEP	       7
-#define ZOOM_SCREEN_OPTION_NUM		       8
+#define ZOOM_SCREEN_OPTION_FILTER_LINEAR       8
+#define ZOOM_SCREEN_OPTION_NUM		       9
 
 typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -200,6 +203,9 @@ zoomSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case ZOOM_SCREEN_OPTION_FILTER_LINEAR:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -285,23 +291,28 @@ zoomScreenInitOptions (ZoomScreen *zs,
     o->rest.f.min	= ZOOM_TIMESTEP_MIN;
     o->rest.f.max	= ZOOM_TIMESTEP_MAX;
     o->rest.f.precision = ZOOM_TIMESTEP_PRECISION;
-}
 
-#define MIN_Z 0.001f
+    o = &zs->opt[ZOOM_SCREEN_OPTION_FILTER_LINEAR];
+    o->name	  = "filter_linear";
+    o->shortDesc  = "Filter Linear";
+    o->longDesc	  = "USe linear filter when zoomed in";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = ZOOM_FILTER_LINEAR_DEFAULT;
+}
 
 static int
 adjustZoomVelocity (ZoomScreen *zs)
 {
     float d, adjust, amount;
 
-    d = (zs->newZoom - zs->currentZoom) * 200.0f;
+    d = (zs->newZoom - zs->currentZoom) * 75.0f;
 
     adjust = d * 0.002f;
     amount = fabs (d);
     if (amount < 1.0f)
 	amount = 1.0f;
-    else if (amount > 10.0f)
-	amount = 10.0f;
+    else if (amount > 5.0f)
+	amount = 5.0f;
 
     zs->zVelocity = (amount * zs->zVelocity + adjust) / (amount + 1.0f);
 
@@ -370,10 +381,10 @@ zoomPreparePaintScreen (CompScreen *s,
 	    }
 
 	    zs->ztrans = DEFAULT_Z_CAMERA * zs->currentZoom;
-	    if (zs->ztrans <= 0.0f)
+	    if (zs->ztrans <= 0.1f)
 	    {
 		zs->zVelocity = 0.0f;
-		zs->ztrans = 0.0f;
+		zs->ztrans = 0.1f;
 	    }
 
 	    zs->xtrans = -zs->xTranslate * (1.0f - zs->currentZoom);
@@ -428,6 +439,7 @@ zoomPaintScreen (CompScreen		 *s,
     if (zs->grabIndex)
     {
 	ScreenPaintAttrib sa = *sAttrib;
+	int		  saveFilter;
 
 	sa.xTranslate += zs->xtrans;
 	sa.yTranslate += zs->ytrans;
@@ -443,9 +455,19 @@ zoomPaintScreen (CompScreen		 *s,
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
 
+	saveFilter = s->filter[SCREEN_TRANS_FILTER];
+
+	if (zs->opt[ZOOM_SCREEN_OPTION_FILTER_LINEAR].value.b ||
+	    zs->zVelocity != 0.0f)
+	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_GOOD;
+	else
+	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
+
 	UNWRAP (zs, s, paintScreen);
 	status = (*s->paintScreen) (s, &sa, region, mask);
 	WRAP (zs, s, paintScreen, zoomPaintScreen);
+
+	s->filter[SCREEN_TRANS_FILTER] = saveFilter;
     }
     else
     {
@@ -483,17 +505,20 @@ zoomIn (CompScreen *s,
     {
 	zs->grabbed = TRUE;
 
-	zs->newZoom /= 2.0f;
-
-	damageScreen (s);
-
-	if (zs->currentZoom == 1.0f)
+	if (zs->newZoom / 2.0f * DEFAULT_Z_CAMERA >= 0.1f)
 	{
-	    zs->xTranslate = (x - s->width / 2) / (float) s->width;
-	    zs->yTranslate = (y - s->height / 2) / (float) s->height;
+	    zs->newZoom /= 2.0f;
 
-	    zs->xTranslate /= zs->newZoom;
-	    zs->yTranslate /= zs->newZoom;
+	    damageScreen (s);
+
+	    if (zs->currentZoom == 1.0f)
+	    {
+		zs->xTranslate = (x - s->width / 2) / (s->width * 2.0f);
+		zs->yTranslate = (y - s->height / 2) / (s->height * 2.0f);
+
+		zs->xTranslate /= zs->newZoom;
+		zs->yTranslate /= zs->newZoom;
+	    }
 	}
     }
 }

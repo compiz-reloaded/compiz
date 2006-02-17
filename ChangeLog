@@ -1,5 +1,20 @@
 2006-02-17  David Reveman  <davidr@novell.com>
 
+	* configure.ac: Bump version to 0.0.3.
+
+	* plugins/zoom.c (zoomIn): Translate less.
+	(zoomPaintScreen): Use selected filter.
+	(adjustZoomVelocity): Made zoom animation nicer.
+	(zoomPreparePaintScreen): Don't zoom to much.
+	ADd filter selection option.
+
+	* plugins/decoration.c (decorPaintWindow):
+	* src/paint.c (drawWindowTexture): Use screen filters.
+
+	* include/compiz.h: Add support for adjusting filters.
+
+	* plugins/scale.c (scaleHandleEvent): Only button 1.
+
 	* plugins/cube.c (cubePaintTransformedScreen): Fix drawing with size
 	 greater than 4.
 

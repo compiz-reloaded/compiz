@@ -220,12 +220,6 @@ decorPaintWindow (CompWindow		  *w,
 		    {
 			int filter;
 
-			if ((mask & PAINT_WINDOW_TRANSFORMED_MASK) ||
-			    (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK))
-			    filter = COMP_TEXTURE_FILTER_GOOD;
-			else
-			    filter = COMP_TEXTURE_FILTER_FAST;
-
 			glEnable (GL_BLEND);
 
 			glPushMatrix ();
@@ -235,6 +229,16 @@ decorPaintWindow (CompWindow		  *w,
 			    glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
 			    glScalef (attrib->xScale, attrib->yScale, 0.0f);
 			    glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
+
+			    filter = w->screen->filter[WINDOW_TRANS_FILTER];
+			}
+			else if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
+			{
+			    filter = w->screen->filter[SCREEN_TRANS_FILTER];
+			}
+			else
+			{
+			    filter = w->screen->filter[NOTHING_TRANS_FILTER];
 			}
 
 			enableTexture (w->screen, &wd->decor->texture->texture,

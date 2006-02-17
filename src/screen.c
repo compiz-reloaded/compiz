@@ -1402,6 +1402,10 @@ addScreen (CompDisplay *display,
 
     XDefineCursor (dpy, s->root, s->normalCursor);
 
+    s->filter[NOTHING_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
+    s->filter[SCREEN_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
+    s->filter[WINDOW_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
+
     return TRUE;
 }
 

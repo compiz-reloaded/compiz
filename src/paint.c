@@ -508,15 +508,15 @@ drawWindowTexture (CompWindow		   *w,
 	glScalef (attrib->xScale, attrib->yScale, 0.0f);
 	glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
 
-	filter = COMP_TEXTURE_FILTER_GOOD;
+	filter = w->screen->filter[WINDOW_TRANS_FILTER];
     }
     else if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
     {
-	filter = COMP_TEXTURE_FILTER_GOOD;
+	filter = w->screen->filter[SCREEN_TRANS_FILTER];
     }
     else
     {
-	filter = COMP_TEXTURE_FILTER_FAST;
+	filter = w->screen->filter[NOTHING_TRANS_FILTER];
     }
 
     if (w->screen->canDoSaturated && attrib->saturation != COLOR)

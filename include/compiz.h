@@ -941,6 +941,10 @@ typedef struct _CompStartupSequence {
     SnStartupSequence		*sequence;
 } CompStartupSequence;
 
+#define NOTHING_TRANS_FILTER 0
+#define SCREEN_TRANS_FILTER  1
+#define WINDOW_TRANS_FILTER  2
+
 struct _CompScreen {
     CompScreen  *next;
     CompDisplay *display;
@@ -984,6 +988,8 @@ struct _CompScreen {
     SnMonitorContext    *snContext;
     CompStartupSequence *startupSequences;
     unsigned int        startupSequenceTimeoutHandle;
+
+    int filter[3];
 
     CompGroup *groups;
 

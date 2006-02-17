@@ -1,6 +1,6 @@
 AC_PREREQ(2.57)
 
-AC_INIT([compiz], [0.0.2], [davidr@novell.com])
+AC_INIT([compiz], [0.0.3], [davidr@novell.com])
 
 AC_CONFIG_AUX_DIR(config)
 
@@ -170,7 +170,7 @@ AC_ARG_ENABLE(kde,
   [use_kde=$enableval], [use_kde=yes])
 
 if test "x$use_kde" = "xyes"; then
-  PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR, 
+  PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
 		    QtCore QtGui,
 		    [use_kde=yes], [use_kde=no])
 fi

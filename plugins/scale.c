@@ -985,9 +985,10 @@ scaleHandleEvent (CompDisplay *d,
 
 	    state = ss->state;
 
-	    if (ss->grabIndex		       &&
-		ss->state   != SCALE_STATE_IN &&
-		event->type == ButtonPress)
+	    if (ss->grabIndex				&&
+		ss->state	      != SCALE_STATE_IN &&
+		event->type	      == ButtonPress	&&
+		event->xbutton.button == Button1)
 	    {
 		if (scaleSelectWindowAt (s,
 					 event->xbutton.x_root,
