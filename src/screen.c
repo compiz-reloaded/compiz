@@ -2017,6 +2017,12 @@ updateWorkareaForScreen (CompScreen *s)
 static Bool
 isClientListWindow (CompWindow *w)
 {
+    /* windows with client id less than 2 have been destroyed and only exists
+       because some plugin keeps a reference to them. they should not be in
+       client lists */
+    if (w->id < 2)
+	return FALSE;
+
     if (w->attrib.override_redirect)
 	return FALSE;
 

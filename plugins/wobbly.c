@@ -1765,7 +1765,7 @@ wobblyDonePaintScreen (CompScreen *s)
 {
     WOBBLY_SCREEN (s);
 
-    if (ws->wobblyWindows & WobblyVelocity)
+    if (ws->wobblyWindows & (WobblyVelocity | WobblyInitial))
 	damagePendingOnScreen (s);
 
     UNWRAP (ws, s, donePaintScreen);

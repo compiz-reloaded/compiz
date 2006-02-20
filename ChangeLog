@@ -1,3 +1,25 @@
+2006-02-20  David Reveman  <davidr@novell.com>
+
+	* src/window.c (focusWindow):
+	(moveInputFocusToWindow):
+	 Allow focusing windows with input hint set to false.
+	 (activateWindow): Fix so that dock windows can be active.	 
+
+	* src/screen.c (isClientListWindow): Don't put destroyed windows in
+	client lists.
+
+	* src/event.c (handleEvent): Fix so that dock windows can be active.
+	(handleEvent): Avoid focusing windows with input hint set to false
+	when mapped.
+
+2006-02-18  David Reveman  <davidr@novell.com>
+
+	* src/window.c (unmapWindow): Windows not being minimized should be
+	placed again at next map.
+
+	* plugins/wobbly.c (wobblyDonePaintScreen): Also add pending damage
+	if any window is in initial wobbly state.
+
 2006-02-17  David Reveman  <davidr@novell.com>
 
 	* configure.ac: Bump version to 0.0.3.

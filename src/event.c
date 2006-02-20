@@ -323,7 +323,10 @@ handleEvent (CompDisplay *display,
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
-		    activateWindow (w);
+		{
+		    if (!(w->type & CompWindowTypeDockMask))
+			activateWindow (w);
+		}
 	    }
 
 	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW], event))
@@ -799,7 +802,9 @@ handleEvent (CompDisplay *display,
 		updateWindowAttributes (w);
 
 		if (!(w->type & (CompWindowTypeDesktopMask |
-				 CompWindowTypeDockMask)))
+				 CompWindowTypeDockMask)) &&
+		    (w->inputHint ||
+		     (w->protocols & CompWindowProtocolTakeFocusMask)))
 		    moveInputFocusToWindow (w);
 	    }
 	}

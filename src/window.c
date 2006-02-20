@@ -1657,6 +1657,10 @@ unmapWindow (CompWindow *w)
 
     w->attrib.map_state = IsUnmapped;
 
+    /* if window is not being minimized it should be re-placed at map */
+    if (!w->minimized)
+	w->placed = FALSE;
+
     setWmState (w->screen->display, IconicState, w->id);
 
     w->invisible = TRUE;
@@ -2058,10 +2062,7 @@ focusWindow (CompWindow *w)
 	w->attrib.y >= w->screen->height)
 	return FALSE;
 
-    if (w->inputHint || (w->protocols & CompWindowProtocolTakeFocusMask))
-	return TRUE;
-
-    return FALSE;
+    return TRUE;
 }
 
 void
@@ -2167,11 +2168,8 @@ moveInputFocusToWindow (CompWindow *w)
 	w = modalTransient;
 
     if (w->id != d->activeWindow)
-    {
-	if (w->inputHint || (w->protocols & CompWindowProtocolTakeFocusMask))
-	    XSetInputFocus (d->display, w->id, RevertToPointerRoot,
-			    CurrentTime);
-    }
+	XSetInputFocus (d->display, w->id, RevertToPointerRoot,
+			CurrentTime);
 }
 
 static Bool
@@ -2650,9 +2648,7 @@ activateWindow (CompWindow *w)
 	return;
 
     updateWindowAttributes (w);
-
-    if (!(w->type & CompWindowTypeDockMask))
-	moveInputFocusToWindow (w);
+    moveInputFocusToWindow (w);
 }
 
 void
