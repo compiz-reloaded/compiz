@@ -1,5 +1,8 @@
 2006-02-20  David Reveman  <davidr@novell.com>
 
+	* plugins/decoration.c (decorWindowUpdate): Decorate window
+	MwmDecorTitle is present.
+
 	* src/window.c (focusWindow):
 	(moveInputFocusToWindow):
 	 Allow focusing windows with input hint set to false.

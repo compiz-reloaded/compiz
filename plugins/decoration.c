@@ -753,7 +753,7 @@ decorWindowUpdate (CompWindow *w,
 	    case CompWindowTypeModalDialogMask:
 	    case CompWindowTypeUtilMask:
 	    case CompWindowTypeNormalMask:
-		if (w->mwmDecor & MwmDecorAll)
+		if (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))
 		{
 		    if (w->id == w->screen->display->activeWindow)
 			decor = ds->decor[DECOR_ACTIVE];
