@@ -572,7 +572,6 @@ static cairo_pattern_t *shadow_pattern;
 
 static Atom frame_window_atom;
 static Atom win_decor_atom;
-static Atom win_decor_sync_atom;
 static Atom wm_move_resize_atom;
 static Atom select_window_atom;
 
@@ -644,7 +643,6 @@ typedef void (*event_callback) (WnckWindow *win, XEvent *event);
 
 static GtkWidget     *style_window;
 
-static gboolean      double_buffering = TRUE;
 static GHashTable    *frame_table;
 static GtkWidget     *action_menu = NULL;
 static gboolean      action_menu_mapped = FALSE;
@@ -669,41 +667,6 @@ static GdkPixmap *switcher_pixmap = NULL;
 static GdkPixmap *switcher_buffer_pixmap = NULL;
 static gint      switcher_width;
 static gint      switcher_height;
-
-static void
-send_decor_sync_notify (decor_t	*d)
-{
-    Display    *xdisplay;
-    GdkDisplay *gdkdisplay;
-    GdkScreen  *screen;
-    Window     xroot;
-    XEvent     ev;
-
-    gdkdisplay = gdk_display_get_default ();
-    xdisplay   = GDK_DISPLAY_XDISPLAY (gdkdisplay);
-    screen     = gdk_display_get_default_screen (gdkdisplay);
-    xroot      = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
-
-    ev.xclient.type    = ClientMessage;
-    ev.xclient.display = xdisplay;
-
-    ev.xclient.serial	  = 0;
-    ev.xclient.send_event = TRUE;
-
-    ev.xclient.window	    = xroot;
-    ev.xclient.message_type = win_decor_sync_atom;
-    ev.xclient.format	    = 32;
-
-    ev.xclient.data.l[0] = GDK_PIXMAP_XID (d->pixmap);
-    ev.xclient.data.l[1] = 0;
-    ev.xclient.data.l[2] = 0;
-    ev.xclient.data.l[3] = 0;
-    ev.xclient.data.l[4] = 0;
-
-    XSendEvent (xdisplay, xroot, FALSE,
-		SubstructureRedirectMask | SubstructureNotifyMask,
-		&ev);
-}
 
 /*
   decoration property
@@ -899,18 +862,18 @@ rounded_rectangle (cairo_t *cr,
 #define SHADE_BOTTOM (1 << 3)
 
 static void
-fill_rounded_rectangle (cairo_t    *cr,
-			double     x,
-			double     y,
-			double     w,
-			double     h,
-			double     radius,
-			int	   corner,
+fill_rounded_rectangle (cairo_t       *cr,
+			double        x,
+			double        y,
+			double        w,
+			double        h,
+			double	      radius,
+			int	      corner,
 			decor_color_t *c0,
-			double     alpha0,
+			double        alpha0,
 			decor_color_t *c1,
-			double	   alpha1,
-			int	   gravity)
+			double	      alpha1,
+			int	      gravity)
 {
     cairo_pattern_t *pattern;
 
@@ -1547,8 +1510,6 @@ draw_window_decoration (decor_t *d)
 	decor_update_window_property (d);
 	d->prop_xid = 0;
     }
-
-    send_decor_sync_notify (d);
 }
 
 static void
@@ -2389,14 +2350,11 @@ update_window_decoration_size (WnckWindow *win)
     if (!pixmap)
 	return FALSE;
 
-    if (double_buffering)
+    buffer_pixmap = create_pixmap (width, height);
+    if (!buffer_pixmap)
     {
-	buffer_pixmap = create_pixmap (width, height);
-	if (!buffer_pixmap)
-	{
-	    gdk_pixmap_unref (pixmap);
-	    return FALSE;
-	}
+	gdk_pixmap_unref (pixmap);
+	return FALSE;
     }
 
     if (d->pixmap)
@@ -3876,7 +3834,6 @@ main (int argc, char *argv[])
 
     frame_window_atom	= XInternAtom (xdisplay, "_NET_FRAME_WINDOW", FALSE);
     win_decor_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR", FALSE);
-    win_decor_sync_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR_SYNC", FALSE);
     wm_move_resize_atom = XInternAtom (xdisplay, "_NET_WM_MOVERESIZE", FALSE);
     select_window_atom	= XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW", FALSE);
 

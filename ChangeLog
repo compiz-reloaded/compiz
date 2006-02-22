@@ -4,6 +4,8 @@
 	(draw_shadow_background): Fix drawing of bottom and bottom right
 	shadow rectangle.
 	Add switcher window decorations.
+	Remove sync hack.
+	Always use double buffering.
 
 	* plugins/switcher.c: Remove background color option.
 	Use property instead of client message to indicate change of selected
