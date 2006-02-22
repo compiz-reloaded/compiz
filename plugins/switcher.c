@@ -54,11 +54,6 @@
 #define SWITCH_TIMESTEP_MAX       50.0f
 #define SWITCH_TIMESTEP_PRECISION 0.1f
 
-#define SWITCH_COLOR_RED_DEFAULT   0x8080
-#define SWITCH_COLOR_GREEN_DEFAULT 0x8080
-#define SWITCH_COLOR_BLUE_DEFAULT  0x8080
-#define SWITCH_COLOR_ALPHA_DEFAULT 0x8080
-
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -74,7 +69,6 @@ typedef struct _SwitchDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
-    Atom popupWinAtom;
     Atom selectWinAtom;
 } SwitchDisplay;
 
@@ -84,8 +78,7 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_SPEED	  3
 #define SWITCH_SCREEN_OPTION_TIMESTEP	  4
 #define SWITCH_SCREEN_OPTION_WINDOW_TYPE  5
-#define SWITCH_SCREEN_OPTION_COLOR        6
-#define SWITCH_SCREEN_OPTION_NUM          7
+#define SWITCH_SCREEN_OPTION_NUM          6
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -126,13 +119,6 @@ typedef struct {
     unsigned long decorations;
 } MwmHints;
 
-#define COLOR_TO_ARGB_PIXEL(c) \
-    (((c[3] & 0xff00) << 16) | \
-     ((c[2] & 0xff00) <<  8) | \
-     ((c[1] & 0xff00) <<  0) | \
-     ((c[0]	      >>  8)))
-
-#define POPUP_WIN_PROP  "_SWITCH_POPUP_WINDOW"
 #define SELECT_WIN_PROP "_SWITCH_SELECT_WINDOW"
 
 #define WIDTH  212
@@ -240,19 +226,6 @@ switchSetScreenOption (CompScreen      *screen,
 	    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
 	}
-	break;
-    case SWITCH_SCREEN_OPTION_COLOR:
-	if (compSetColorOption (o, value))
-	{
-	    if (ss->popupWindow)
-	    {
-		XSetWindowBackground (screen->display->display, ss->popupWindow,
-				      COLOR_TO_ARGB_PIXEL (o->value.c));
-		XClearWindow (screen->display->display, ss->popupWindow);
-	    }
-
-	    return TRUE;
-	}
     default:
 	break;
     }
@@ -334,44 +307,17 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->rest.s.nString    = nWindowTypeString;
 
     ss->wMask = compWindowTypeMaskFromStringList (&o->value);
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_COLOR];
-    o->name	  = "color";
-    o->shortDesc  = "Window Color";
-    o->longDesc	  = "Window switcher background color";
-    o->type	  = CompOptionTypeColor;
-    o->value.c[0] = SWITCH_COLOR_RED_DEFAULT;
-    o->value.c[1] = SWITCH_COLOR_GREEN_DEFAULT;
-    o->value.c[2] = SWITCH_COLOR_BLUE_DEFAULT;
-    o->value.c[3] = SWITCH_COLOR_ALPHA_DEFAULT;
 }
 
 static void
-sendSelectWindowMessage (CompScreen *s)
+setSelectedWindowHint (CompScreen *s)
 {
-    XEvent xev;
-
     SWITCH_DISPLAY (s->display);
     SWITCH_SCREEN (s);
 
-    xev.xclient.type	     = ClientMessage;
-    xev.xclient.serial	     = 0;
-    xev.xclient.send_event   = TRUE;
-    xev.xclient.display	     = s->display->display;
-    xev.xclient.window	     = ss->popupWindow;
-    xev.xclient.message_type = sd->selectWinAtom;
-    xev.xclient.format	     = 32;
-    xev.xclient.data.l[0]    = ss->selectedWindow;
-    xev.xclient.data.l[1]    = 0;
-    xev.xclient.data.l[2]    = 0;
-    xev.xclient.data.l[3]    = 0;
-    xev.xclient.data.l[4]    = 0;
-
-    XSendEvent (s->display->display,
-		ss->popupWindow,
-		FALSE,
-		SubstructureRedirectMask | SubstructureNotifyMask,
-		&xev);
+    XChangeProperty (s->display->display, ss->popupWindow, sd->selectWinAtom,
+		     XA_WINDOW, 32, PropModeReplace,
+		     (unsigned char *) &ss->selectedWindow, 1);
 }
 
 static Bool
@@ -538,7 +484,7 @@ switchNextWindow (CompScreen *s)
 	    if (w)
 		addWindowDamage (w);
 
-	    sendSelectWindowMessage (s);
+	    setSelectedWindowHint (s);
 	}
 
 	if (old)
@@ -630,7 +576,6 @@ switchInitiate (CompScreen *s)
 	Visual		     *visual;
 	Atom		     mwmHintsAtom;
 	MwmHints	     mwmHints;
-	CompOption	     *color = &ss->opt[SWITCH_SCREEN_OPTION_COLOR];
 
 	visual = findArgbVisual (dpy, s->screenNum);
 	if (!visual)
@@ -647,7 +592,7 @@ switchInitiate (CompScreen *s)
 	xwmh.flags = InputHint;
 	xwmh.input = 0;
 
-	attr.background_pixel = COLOR_TO_ARGB_PIXEL (color->value.c);
+	attr.background_pixel = 0;
 	attr.border_pixel     = 0;
 	attr.colormap	      = XCreateColormap (dpy, s->root, visual,
 						 AllocNone);
@@ -794,23 +739,6 @@ switchHandleEvent (CompDisplay *d,
 	    else if (event->type	 == KeyPress &&
 		     event->xkey.keycode == s->escapeKeyCode)
 		switchTerminate (s, FALSE);
-	}
-	break;
-    case ClientMessage:
-	s = findScreenAtDisplay (d, event->xclient.window);
-	if (s)
-	{
-	    SWITCH_SCREEN (s);
-
-	    if (event->xclient.message_type == sd->popupWinAtom)
-	    {
-		ss->popupWindow = event->xclient.data.l[0];
-
-		if (ss->grabIndex)
-		    sendSelectWindowMessage (s);
-		else
-		    XUnmapWindow (d->display, ss->popupWindow);
-	    }
 	}
     default:
 	break;
@@ -1158,7 +1086,6 @@ switchInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    sd->popupWinAtom  = XInternAtom (d->display, POPUP_WIN_PROP, 0);
     sd->selectWinAtom = XInternAtom (d->display, SELECT_WIN_PROP, 0);
 
     WRAP (sd, d, handleEvent, switchHandleEvent);

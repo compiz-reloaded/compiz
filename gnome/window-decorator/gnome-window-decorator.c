@@ -414,7 +414,7 @@ static quad _win_quads[] = {
 
     {
 	{ -LEFT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ 0, 16, GRAVITY_SOUTH | GRAVITY_WEST },
+	{ 0, BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_WEST },
 	SHRT_MAX, SHRT_MAX,
 	0,
 	{
@@ -469,6 +469,100 @@ static quad _win_button_quads[] = {
     }
 };
 
+#define SWITCHER_SPACE 40
+
+static extents _switcher_extents = { 0, 0, 0, 0 };
+
+static quad _switcher_quads[] = {
+    {
+	{ -LEFT_SPACE, -BOTTOM_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
+	{ 0, 0, GRAVITY_NORTH | GRAVITY_WEST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    1.0, 0.0,
+	    0.0, 1.0,
+	    0.0, 0.0
+	}
+    }, {
+	{ 0, -BOTTOM_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
+	{ 0, 0, GRAVITY_NORTH | GRAVITY_EAST },
+	SHRT_MAX, SHRT_MAX,
+	ALIGN_LEFT,
+	{
+	    0.0, 0.0,
+	    0.0, 1.0,
+	    LEFT_SPACE + 1, 0.0
+	}
+    }, {
+	{ 0, -BOTTOM_SPACE, GRAVITY_NORTH | GRAVITY_EAST },
+	{ RIGHT_SPACE, 0, GRAVITY_NORTH | GRAVITY_EAST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    1.0, 0.0,
+	    0.0, 1.0,
+	    LEFT_SPACE + 1.0, 0.0
+	}
+    },
+
+    {
+	{ -LEFT_SPACE, 0, GRAVITY_NORTH | GRAVITY_WEST },
+	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    1.0, 0.0,
+	    0.0, 0.0,
+	    0.0, BOTTOM_SPACE
+	}
+    }, {
+
+	{  0, 0, GRAVITY_NORTH | GRAVITY_EAST },
+	{ RIGHT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_EAST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    1.0, 0.0,
+	    0.0, 0.0,
+	    LEFT_SPACE + 1.0, BOTTOM_SPACE
+	}
+    },
+
+    {
+	{ -LEFT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_WEST },
+	{ 0, SWITCHER_SPACE + BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_WEST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    1.0, 0.0,
+	    0.0, 1.0,
+	    0.0, BOTTOM_SPACE + 1
+	}
+    }, {
+	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
+	{ 0, SWITCHER_SPACE + BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_EAST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    0.0, 0.0,
+	    0.0, 1.0,
+	    LEFT_SPACE + 1, BOTTOM_SPACE + 1
+	}
+    }, {
+	{ 0, 0, GRAVITY_SOUTH | GRAVITY_EAST },
+	{ RIGHT_SPACE, SWITCHER_SPACE + BOTTOM_SPACE,
+	  GRAVITY_SOUTH | GRAVITY_EAST },
+	SHRT_MAX, SHRT_MAX,
+	0,
+	{
+	    1.0, 0.0,
+	    0.0, 1.0,
+	    LEFT_SPACE + 1, BOTTOM_SPACE + 1
+	}
+    }
+};
+
 static GdkPixmap *shadow_pixmap = NULL;
 static GdkPixmap *large_shadow_pixmap = NULL;
 static GdkPixmap *decor_normal_pixmap = NULL;
@@ -480,6 +574,7 @@ static Atom frame_window_atom;
 static Atom win_decor_atom;
 static Atom win_decor_sync_atom;
 static Atom wm_move_resize_atom;
+static Atom select_window_atom;
 
 #define C(name) { 0, XC_ ## name }
 
@@ -542,6 +637,7 @@ typedef struct _decor {
     WnckWindowState   state;
     WnckWindowActions actions;
     XID		      prop_xid;
+    void	      (*draw) (struct _decor *d);
 } decor_t;
 
 typedef void (*event_callback) (WnckWindow *win, XEvent *event);
@@ -568,6 +664,11 @@ static PangoFontDescription *titlebar_font = NULL;
 static gboolean		    use_system_font = FALSE;
 static gint		    text_height;
 static gint		    titlebar_height;
+
+static GdkPixmap *switcher_pixmap = NULL;
+static GdkPixmap *switcher_buffer_pixmap = NULL;
+static gint      switcher_width;
+static gint      switcher_height;
 
 static void
 send_decor_sync_notify (decor_t	*d)
@@ -918,15 +1019,15 @@ draw_shadow_background (decor_t *d,
     cairo_rectangle (cr, x2, 13.0, 14.0, h);
     cairo_fill (cr);
 
-    /* bottom right */
-    cairo_matrix_init_translate (&matrix, 0.0, -15.0);
+    /* bottom left */
+    cairo_matrix_init_translate (&matrix, 0.0, 13.0 - y2);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
     cairo_set_source (cr, shadow_pattern);
     cairo_rectangle (cr, 0.0, y2, 13.0, 14.0);
     cairo_fill (cr);
 
     /* bottom */
-    cairo_matrix_init_translate (&matrix, 13.0, -15.0);
+    cairo_matrix_init_translate (&matrix, 13.0, 13.0 - y2);
     cairo_matrix_scale (&matrix, 1.0 / w, 1.0);
     cairo_matrix_translate (&matrix, -13.0, 0.0);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
@@ -934,7 +1035,7 @@ draw_shadow_background (decor_t *d,
     cairo_rectangle (cr, 13.0, y2, w, 14.0);
     cairo_fill (cr);
 
-    /* right */
+    /* bottom right */
     cairo_matrix_init_translate (&matrix, 13.0 - x2, 13.0 - y2);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
     cairo_set_source (cr, shadow_pattern);
@@ -1450,15 +1551,327 @@ draw_window_decoration (decor_t *d)
     send_decor_sync_notify (d);
 }
 
+static void
+decor_update_switcher_property (decor_t *d)
+{
+    long    data[128];
+    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    gint    nQuad = sizeof (_switcher_quads) / sizeof (_switcher_quads[0]);
+    quad    quads[nQuad];
+    extents extents = _switcher_extents;
+
+    decor_quads_init8 (quads, _switcher_quads, 0);
+
+    quads[2].m.x0 = quads[4].m.x0 = quads[7].m.x0 = d->width - RIGHT_SPACE;
+    quads[6].m.xx = 1.0;
+
+    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			    &extents, quads, nQuad);
+
+    gdk_error_trap_push ();
+    XChangeProperty (xdisplay, d->prop_xid,
+		     win_decor_atom,
+		     XA_INTEGER,
+		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
+    XSync (xdisplay, FALSE);
+    gdk_error_trap_pop ();
+}
+
+#define SWITCHER_ALPHA 0xa0a0
+
+static void
+draw_switcher_background (decor_t *d)
+{
+    Display	  *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    cairo_t	  *cr;
+    GtkStyle	  *style;
+    decor_color_t color;
+    double	  alpha = SWITCHER_ALPHA / 65535.0;
+    double	  x1, y1, x2, y2;
+    int		  top;
+    unsigned long pixel;
+    ushort	  a = SWITCHER_ALPHA;
+
+    if (!d->buffer_pixmap)
+	return;
+
+    style = gtk_widget_get_style (style_window);
+
+    color.r = style->bg[GTK_STATE_NORMAL].red   / 65535.0;
+    color.g = style->bg[GTK_STATE_NORMAL].green / 65535.0;
+    color.b = style->bg[GTK_STATE_NORMAL].blue  / 65535.0;
+
+    cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
+
+    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+    top = _win_extents.bottom;
+
+    x1 = LEFT_SPACE - _win_extents.left;
+    y1 = BOTTOM_SPACE - _win_extents.bottom;
+    x2 = d->width - RIGHT_SPACE + _win_extents.right;
+    y2 = d->height - BOTTOM_SPACE + _win_extents.bottom;
+
+    cairo_set_line_width (cr, 1.0);
+
+    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+    draw_shadow_background (d, cr);
+
+    fill_rounded_rectangle (cr,
+			    x1 + 0.5,
+			    y1 + 0.5,
+			    _win_extents.left - 0.5,
+			    top - 0.5,
+			    5.0, CORNER_TOPLEFT,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_TOP | SHADE_LEFT);
+
+    fill_rounded_rectangle (cr,
+			    x1 + _win_extents.left,
+			    y1 + 0.5,
+			    x2 - x1 - _win_extents.left -
+			    _win_extents.right,
+			    top - 0.5,
+			    5.0, 0,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_TOP);
+
+    fill_rounded_rectangle (cr,
+			    x2 - _win_extents.right,
+			    y1 + 0.5,
+			    _win_extents.right - 0.5,
+			    top - 0.5,
+			    5.0, CORNER_TOPRIGHT,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_TOP | SHADE_RIGHT);
+
+    fill_rounded_rectangle (cr,
+			    x1 + 0.5,
+			    y1 + top,
+			    _win_extents.left - 0.5,
+			    SWITCHER_SPACE + 1,
+			    5.0, 0,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_LEFT);
+
+    fill_rounded_rectangle (cr,
+			    x2 - _win_extents.right,
+			    y1 + top,
+			    _win_extents.right - 0.5,
+			    SWITCHER_SPACE + 1,
+			    5.0, 0,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_RIGHT);
+
+    fill_rounded_rectangle (cr,
+			    x1 + 0.5,
+			    y2 - _win_extents.bottom,
+			    _win_extents.left - 0.5,
+			    _win_extents.bottom - 0.5,
+			    5.0, CORNER_BOTTOMLEFT,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_BOTTOM | SHADE_LEFT);
+
+    fill_rounded_rectangle (cr,
+			    x1 + _win_extents.left,
+			    y2 - _win_extents.bottom,
+			    x2 - x1 - _win_extents.left -
+			    _win_extents.right,
+			    _win_extents.bottom - 0.5,
+			    5.0, 0,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_BOTTOM);
+
+    fill_rounded_rectangle (cr,
+			    x2 - _win_extents.right,
+			    y2 - _win_extents.bottom,
+			    _win_extents.right - 0.5,
+			    _win_extents.bottom - 0.5,
+			    5.0, CORNER_BOTTOMRIGHT,
+			    &color, alpha, &color, alpha * 0.75,
+			    SHADE_BOTTOM | SHADE_RIGHT);
+
+    cairo_rectangle (cr, x1 + _win_extents.left,
+		     y1 + top,
+		     x2 - x1 - _win_extents.left - _win_extents.right,
+		     SWITCHER_SPACE + 1);
+    gdk_cairo_set_source_color_alpha (cr,
+				      &style->bg[GTK_STATE_NORMAL],
+				      alpha);
+    cairo_fill (cr);
+
+    cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+
+    rounded_rectangle (cr,
+		       x1 + 0.5, y1 + 0.5,
+		       x2 - x1 - 1.0, y2 - y1 - 1.0,
+		       5.0,
+		       CORNER_TOPLEFT | CORNER_TOPRIGHT | CORNER_BOTTOMLEFT |
+		       CORNER_BOTTOMRIGHT);
+
+    cairo_clip (cr);
+
+    cairo_translate (cr, 1.0, 1.0);
+
+    rounded_rectangle (cr,
+		       x1 + 0.5, y1 + 0.5,
+		       x2 - x1 - 1.0, y2 - y1 - 1.0,
+		       5.0,
+		       CORNER_TOPLEFT | CORNER_TOPRIGHT | CORNER_BOTTOMLEFT |
+		       CORNER_BOTTOMRIGHT);
+
+    cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.4);
+    cairo_stroke (cr);
+
+    cairo_translate (cr, -2.0, -2.0);
+
+    rounded_rectangle (cr,
+		       x1 + 0.5, y1 + 0.5,
+		       x2 - x1 - 1.0, y2 - y1 - 1.0,
+		       5.0,
+		       CORNER_TOPLEFT | CORNER_TOPRIGHT | CORNER_BOTTOMLEFT |
+		       CORNER_BOTTOMRIGHT);
+
+    cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, 0.1);
+    cairo_stroke (cr);
+
+    cairo_translate (cr, 1.0, 1.0);
+
+    cairo_reset_clip (cr);
+
+    rounded_rectangle (cr,
+		       x1 + 0.5, y1 + 0.5,
+		       x2 - x1 - 1.0, y2 - y1 - 1.0,
+		       5.0,
+		       CORNER_TOPLEFT | CORNER_TOPRIGHT | CORNER_BOTTOMLEFT |
+		       CORNER_BOTTOMRIGHT);
+
+    gdk_cairo_set_source_color_alpha (cr,
+				      &style->fg[GTK_STATE_NORMAL],
+				      alpha);
+
+    cairo_stroke (cr);
+
+    cairo_destroy (cr);
+
+    gdk_draw_drawable  (d->pixmap,
+			d->gc,
+			d->buffer_pixmap,
+			0,
+			0,
+			0,
+			0,
+			d->width,
+			d->height);
+
+    pixel = ((((a * style->bg[GTK_STATE_NORMAL].red  ) >> 24) & 0x0000ff) |
+	     (((a * style->bg[GTK_STATE_NORMAL].green) >> 16) & 0x00ff00) |
+	     (((a * style->bg[GTK_STATE_NORMAL].blue ) >>  8) & 0xff0000) |
+	     (((a & 0xff00) << 16)));
+
+    decor_update_switcher_property (d);
+
+    gdk_error_trap_push ();
+    XSetWindowBackground (xdisplay, d->prop_xid, pixel);
+    XClearWindow (xdisplay, d->prop_xid);
+    XSync (xdisplay, FALSE);
+    gdk_error_trap_pop ();
+
+    d->prop_xid = 0;
+}
+
+static void
+draw_switcher_foreground (decor_t *d)
+{
+    cairo_t	  *cr;
+    GtkStyle	  *style;
+    decor_color_t color;
+    double	  alpha = SWITCHER_ALPHA / 65535.0;
+    double	  x1, y1, x2;
+    int		  top;
+
+    if (!d->pixmap || !d->buffer_pixmap)
+	return;
+
+    style = gtk_widget_get_style (style_window);
+
+    color.r = style->bg[GTK_STATE_NORMAL].red   / 65535.0;
+    color.g = style->bg[GTK_STATE_NORMAL].green / 65535.0;
+    color.b = style->bg[GTK_STATE_NORMAL].blue  / 65535.0;
+
+    top = _win_extents.bottom;
+
+    x1 = LEFT_SPACE - _win_extents.left;
+    y1 = BOTTOM_SPACE - _win_extents.bottom;
+    x2 = d->width - RIGHT_SPACE + _win_extents.right;
+
+    cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
+
+    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+    cairo_rectangle (cr, x1 + _win_extents.left,
+		     y1 + top,
+		     x2 - x1 - _win_extents.left - _win_extents.right,
+		     SWITCHER_SPACE + 1);
+
+    gdk_cairo_set_source_color_alpha (cr,
+				      &style->bg[GTK_STATE_NORMAL],
+				      alpha);
+    cairo_fill (cr);
+
+    if (d->layout)
+    {
+	int w;
+
+	cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+
+	gdk_cairo_set_source_color_alpha (cr,
+					  &style->fg[GTK_STATE_NORMAL],
+					  1.0);
+
+	pango_layout_get_pixel_size (d->layout, &w, NULL);
+
+	cairo_move_to (cr, d->width / 2 - w / 2, SWITCHER_SPACE - 12.0);
+
+	pango_cairo_show_layout (cr, d->layout);
+    }
+
+    cairo_destroy (cr);
+
+    gdk_draw_drawable  (d->pixmap,
+			d->gc,
+			d->buffer_pixmap,
+			0,
+			0,
+			0,
+			0,
+			d->width,
+			d->height);
+}
+
+static void
+draw_switcher_decoration (decor_t *d)
+{
+    if (d->prop_xid)
+	draw_switcher_background (d);
+
+    draw_switcher_foreground (d);
+}
+
 static gboolean
 draw_decor_list (void *data)
 {
-    GSList *list;
+    GSList  *list;
+    decor_t *d;
 
     draw_idle_id = 0;
 
     for (list = draw_list; list; list = list->next)
-	draw_window_decoration ((decor_t *) list->data);
+    {
+	d = (decor_t *) list->data;
+	(*d->draw) (d);
+    }
 
     g_slist_free (draw_list);
     draw_list = NULL;
@@ -1580,6 +1993,7 @@ update_default_decorations (GdkScreen *screen)
     d.state	    = 0;
     d.actions	    = 0;
     d.prop_xid	    = 0;
+    d.draw	    = draw_window_decoration;
 
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
@@ -1590,7 +2004,7 @@ update_default_decorations (GdkScreen *screen)
 	d.pixmap = decor_normal_pixmap;
 	d.active = FALSE;
 
-	draw_window_decoration (&d);
+	(*d.draw) (&d);
 
 	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_NORMAL", FALSE);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
@@ -1611,7 +2025,7 @@ update_default_decorations (GdkScreen *screen)
 	d.pixmap = decor_active_pixmap;
 	d.active = TRUE;
 
-	draw_window_decoration (&d);
+	(*d.draw) (&d);
 
 	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_ACTIVE", FALSE);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
@@ -2088,6 +2502,162 @@ add_frame_window (WnckWindow *win,
     }
 }
 
+static gboolean
+update_switcher_window (WnckWindow *win,
+			Window     selected)
+{
+    decor_t    *d = g_object_get_data (G_OBJECT (win), "decor");
+    GdkPixmap  *pixmap, *buffer_pixmap = NULL;
+    gint       height, width = 0;
+    WnckWindow *selected_win;
+
+    wnck_window_get_geometry (win, NULL, NULL, &width, NULL);
+
+    width  += LEFT_SPACE + RIGHT_SPACE;
+    height  = BOTTOM_SPACE + SWITCHER_SPACE + BOTTOM_SPACE;
+
+    d->decorated = FALSE;
+    d->draw	 = draw_switcher_decoration;
+
+    if (!d->pixmap && switcher_pixmap)
+    {
+	gdk_pixmap_ref (switcher_pixmap);
+	d->pixmap = switcher_pixmap;
+    }
+
+    if (!d->buffer_pixmap && switcher_buffer_pixmap)
+    {
+	gdk_pixmap_ref (switcher_buffer_pixmap);
+	d->buffer_pixmap = switcher_buffer_pixmap;
+    }
+
+    if (!d->width)
+	d->width = switcher_width;
+
+    if (!d->height)
+	d->height = switcher_height;
+
+    selected_win = wnck_window_get (selected);
+    if (selected_win)
+    {
+	glong		name_length;
+	PangoLayoutLine *line;
+	const gchar	*name;
+
+	if (d->name)
+	{
+	    g_free (d->name);
+	    d->name = NULL;
+	}
+
+	name = wnck_window_get_name (selected_win);
+	if (name && (name_length = strlen (name)))
+	{
+	    gint n_line;
+
+	    if (!d->layout)
+	    {
+		d->layout = pango_layout_new (pango_context);
+		if (d->layout)
+		    pango_layout_set_wrap (d->layout, PANGO_WRAP_CHAR);
+	    }
+
+	    if (d->layout)
+	    {
+		pango_layout_set_width (d->layout,
+					(d->width - 64) * PANGO_SCALE);
+		pango_layout_set_text (d->layout, name, name_length);
+
+		n_line = pango_layout_get_line_count (d->layout);
+
+		line = pango_layout_get_line (d->layout, 0);
+
+		name_length = line->length;
+		if (pango_layout_get_line_count (d->layout) > 1)
+		{
+		    if (name_length < 4)
+		    {
+			g_object_unref (G_OBJECT (d->layout));
+			d->layout = NULL;
+		    }
+		    else
+		    {
+			d->name = g_strndup (name, name_length);
+			strcpy (d->name + name_length - 3, "...");
+		    }
+		}
+		else
+		    d->name = g_strndup (name, name_length);
+
+		if (d->layout)
+		    pango_layout_set_text (d->layout, d->name, name_length);
+	    }
+	}
+	else if (d->layout)
+	{
+	    g_object_unref (G_OBJECT (d->layout));
+	    d->layout = NULL;
+	}
+    }
+
+    if (width == d->width && height == d->height)
+    {
+	if (!d->gc)
+	    d->gc = gdk_gc_new (d->pixmap);
+
+	queue_decor_draw (d);
+	return FALSE;
+    }
+
+    pixmap = create_pixmap (width, height);
+    if (!pixmap)
+	return FALSE;
+
+    buffer_pixmap = create_pixmap (width, height);
+    if (!buffer_pixmap)
+    {
+	gdk_pixmap_unref (pixmap);
+	return FALSE;
+    }
+
+    if (switcher_pixmap)
+	gdk_pixmap_unref (switcher_pixmap);
+
+    if (switcher_buffer_pixmap)
+	gdk_pixmap_unref (switcher_buffer_pixmap);
+
+    if (d->pixmap)
+	gdk_pixmap_unref (d->pixmap);
+
+    if (d->buffer_pixmap)
+	gdk_pixmap_unref (d->buffer_pixmap);
+
+    if (d->gc)
+	gdk_gc_unref (d->gc);
+
+    switcher_pixmap	   = pixmap;
+    switcher_buffer_pixmap = buffer_pixmap;
+
+    switcher_width  = width;
+    switcher_height = height;
+
+    gdk_pixmap_ref (pixmap);
+    gdk_pixmap_ref (buffer_pixmap);
+
+    d->pixmap	     = pixmap;
+    d->buffer_pixmap = buffer_pixmap;
+    d->gc	     = gdk_gc_new (pixmap);
+
+    d->width  = width;
+    d->height = height;
+
+    d->prop_xid = wnck_window_get_xid (win);
+
+    queue_decor_draw (d);
+
+    return TRUE;
+}
+
 static void
 remove_frame_window (WnckWindow *win)
 {
@@ -2260,7 +2830,7 @@ window_opened (WnckScreen *screen,
 	       WnckWindow *win)
 {
     decor_t *d;
-    Window  frame;
+    Window  window;
     gulong  xid;
 
     d = g_malloc (sizeof (decor_t));
@@ -2289,14 +2859,22 @@ window_opened (WnckScreen *screen,
 
     d->decorated = FALSE;
 
+    d->draw = draw_window_decoration;
+
     g_object_set_data (G_OBJECT (win), "decor", d);
 
     connect_window (win);
 
     xid = wnck_window_get_xid (win);
 
-    if (get_window_prop (xid, frame_window_atom, &frame))
-	add_frame_window (win, frame);
+    if (get_window_prop (xid, frame_window_atom, &window))
+    {
+	add_frame_window (win, window);
+    }
+    else if (get_window_prop (xid, select_window_atom, &window))
+    {
+	update_switcher_window (win, window);
+    }
 }
 
 static void
@@ -2845,6 +3423,21 @@ event_filter_func (GdkXEvent *gdkxevent,
 		    remove_frame_window (win);
 	    }
 	}
+	else if (xevent->xproperty.atom == select_window_atom)
+	{
+	    WnckWindow *win;
+
+	    xid = xevent->xproperty.window;
+
+	    win = wnck_window_get (xid);
+	    if (win)
+	    {
+		Window select;
+
+		if (get_window_prop (xid, select_window_atom, &select))
+		    update_switcher_window (win, select);
+	    }
+	}
 	break;
     case DestroyNotify:
 	g_hash_table_remove (frame_table,
@@ -3285,6 +3878,7 @@ main (int argc, char *argv[])
     win_decor_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR", FALSE);
     win_decor_sync_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR_SYNC", FALSE);
     wm_move_resize_atom = XInternAtom (xdisplay, "_NET_WM_MOVERESIZE", FALSE);
+    select_window_atom	= XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW", FALSE);
 
     for (i = 0; i < 3; i++)
     {

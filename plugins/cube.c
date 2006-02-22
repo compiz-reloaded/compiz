@@ -612,15 +612,21 @@ cubeHandleEvent (CompDisplay *d,
 
 	    if (EV_KEY (&cs->opt[CUBE_SCREEN_OPTION_NEXT], event))
 	    {
-		cubeLoadSvg (s, (cs->svgCurFile + 1) % cs->svgNFile);
-		damageScreen (s);
+		if (cs->svgNFile)
+		{
+		    cubeLoadSvg (s, (cs->svgCurFile + 1) % cs->svgNFile);
+		    damageScreen (s);
+		}
 	    }
 
 	    if (EV_KEY (&cs->opt[CUBE_SCREEN_OPTION_PREV], event))
 	    {
-		cubeLoadSvg (s, (cs->svgCurFile - 1 + cs->svgNFile) %
-			     cs->svgNFile);
-		damageScreen (s);
+		if (cs->svgNFile)
+		{
+		    cubeLoadSvg (s, (cs->svgCurFile - 1 + cs->svgNFile) %
+				 cs->svgNFile);
+		    damageScreen (s);
+		}
 	    }
 	}
 	break;

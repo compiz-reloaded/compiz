@@ -1,3 +1,18 @@
+2006-02-22  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c
+	(draw_shadow_background): Fix drawing of bottom and bottom right
+	shadow rectangle.
+	Add switcher window decorations.
+
+	* plugins/switcher.c: Remove background color option.
+	Use property instead of client message to indicate change of selected
+	window.
+
+2006-02-21  David Reveman  <davidr@novell.com>
+
+	* plugins/cube.c (cubeHandleEvent): Only load new SVG when available.
+
 2006-02-20  David Reveman  <davidr@novell.com>
 
 	* plugins/decoration.c (decorWindowUpdate): Decorate window
@@ -6,7 +21,7 @@
 	* src/window.c (focusWindow):
 	(moveInputFocusToWindow):
 	 Allow focusing windows with input hint set to false.
-	 (activateWindow): Fix so that dock windows can be active.	 
+	 (activateWindow): Fix so that dock windows can be active.
 
 	* src/screen.c (isClientListWindow): Don't put destroyed windows in
 	client lists.
