@@ -44,6 +44,11 @@
 #define SWITCH_NEXT_WINDOW_KEY_DEFAULT       "Tab"
 #define SWITCH_NEXT_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
+#define SWITCH_PREV_WINDOW_KEY_DEFAULT       "Tab"
+#define SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT (CompPressMask | \
+					      CompAltMask   | \
+					      ShiftMask)
+
 #define SWITCH_SPEED_DEFAULT   1.5f
 #define SWITCH_SPEED_MIN       0.1f
 #define SWITCH_SPEED_MAX       50.0f
@@ -75,10 +80,11 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_INITIATE     0
 #define SWITCH_SCREEN_OPTION_TERMINATE    1
 #define SWITCH_SCREEN_OPTION_NEXT_WINDOW  2
-#define SWITCH_SCREEN_OPTION_SPEED	  3
-#define SWITCH_SCREEN_OPTION_TIMESTEP	  4
-#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  5
-#define SWITCH_SCREEN_OPTION_NUM          6
+#define SWITCH_SCREEN_OPTION_PREV_WINDOW  3
+#define SWITCH_SCREEN_OPTION_SPEED	  4
+#define SWITCH_SCREEN_OPTION_TIMESTEP	  5
+#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  6
+#define SWITCH_SCREEN_OPTION_NUM          7
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -203,6 +209,7 @@ switchSetScreenOption (CompScreen      *screen,
 	break;
     case SWITCH_SCREEN_OPTION_TERMINATE:
     case SWITCH_SCREEN_OPTION_NEXT_WINDOW:
+    case SWITCH_SCREEN_OPTION_PREV_WINDOW:
 	if (compSetBindingOption (o, value))
 	    return TRUE;
 	break;
@@ -272,6 +279,17 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (SWITCH_NEXT_WINDOW_KEY_DEFAULT));
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW];
+    o->name			  = "prev_window";
+    o->shortDesc		  = "Prev Window";
+    o->longDesc			  = "Select previous window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (SWITCH_PREV_WINDOW_KEY_DEFAULT));
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -420,7 +438,8 @@ switchActivateWindow (CompWindow *w)
 }
 
 static void
-switchNextWindow (CompScreen *s)
+switchToWindow (CompScreen *s,
+		Bool	   toNext)
 {
     CompWindow *next = NULL;
     CompWindow *prev = NULL;
@@ -442,8 +461,16 @@ switchNextWindow (CompScreen *s)
 	    {
 		if (next)
 		{
-		    if (w->activeNum > next->activeNum)
-			next = w;
+		    if (toNext)
+		    {
+			if (w->activeNum > next->activeNum)
+			    next = w;
+		    }
+		    else
+		    {
+			if (w->activeNum < next->activeNum)
+			    next = w;
+		    }
 		}
 		else
 		    next = w;
@@ -452,8 +479,16 @@ switchNextWindow (CompScreen *s)
 	    {
 		if (prev)
 		{
-		    if (w->activeNum > prev->activeNum)
-			prev = w;
+		    if (toNext)
+		    {
+			if (w->activeNum > prev->activeNum)
+			    prev = w;
+		    }
+		    else
+		    {
+			if (w->activeNum < prev->activeNum)
+			    prev = w;
+		    }
 		}
 		else
 		    prev = w;
@@ -461,10 +496,20 @@ switchNextWindow (CompScreen *s)
 	}
     }
 
-    if (next)
-	w = next;
+    if (toNext)
+    {
+	if (next)
+	    w = next;
+	else
+	    w = prev;
+    }
     else
-	w = prev;
+    {
+	if (prev)
+	    w = prev;
+	else
+	    w = next;
+    }
 
     if (w)
     {
@@ -475,7 +520,11 @@ switchNextWindow (CompScreen *s)
 
 	addWindowDamage (w);
 
-	ss->move -= WIDTH;
+	if (toNext)
+	    ss->move -= WIDTH;
+	else
+	    ss->move += WIDTH;
+
 	ss->moreAdjust = 1;
 
 	if (ss->popupWindow)
@@ -731,8 +780,10 @@ switchHandleEvent (CompDisplay *d,
 	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_INITIATE], event))
 		switchInitiate (s);
 
-	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_NEXT_WINDOW], event))
-		switchNextWindow (s);
+	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW], event))
+		switchToWindow (s, FALSE);
+	    else if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_NEXT_WINDOW], event))
+		switchToWindow (s, TRUE);
 
 	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_TERMINATE], event))
 		switchTerminate (s, TRUE);

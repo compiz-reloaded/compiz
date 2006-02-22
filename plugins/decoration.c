@@ -81,10 +81,6 @@ typedef struct _DecorTexture {
     Pixmap		 pixmap;
     Damage		 damage;
     CompTexture		 texture;
-
-    XRectangle *damageRects;
-    int	       sizeDamage;
-    int	       nDamage;
 } DecorTexture;
 
 typedef struct _Decoration {
@@ -118,7 +114,6 @@ typedef struct _DecorDisplay {
     Atom	    winDecorBareAtom;
     Atom	    winDecorNormalAtom;
     Atom	    winDecorActiveAtom;
-    Atom	    winDecorSyncAtom;
 } DecorDisplay;
 
 typedef struct _DecorScreen {
@@ -372,10 +367,6 @@ decorGetTexture (CompScreen *screen,
     texture->refCount = 1;
     texture->pixmap   = pixmap;
     texture->next     = dd->textures;
-
-    texture->damageRects = 0;
-    texture->sizeDamage  = 0;
-    texture->nDamage	 = 0;
 
     dd->textures = texture;
 
@@ -940,28 +931,25 @@ decorHandleEvent (CompDisplay *d,
 	    {
 		if (t->pixmap == de->drawable)
 		{
-		    if (t->nDamage == t->sizeDamage)
+		    DecorWindow *dw;
+		    DecorScreen *ds;
+		    CompScreen  *s;
+
+		    for (s = d->screens; s; s = s->next)
 		    {
-			if (t->damageRects)
+			ds = GET_DECOR_SCREEN (s, dd);
+
+			for (w = s->windows; w; w = w->next)
 			{
-			    t->damageRects = realloc (t->damageRects,
-						      (t->sizeDamage + 1) *
-						      sizeof (XRectangle));
-			    t->sizeDamage += 1;
-			}
-			else
-			{
-			    t->damageRects = malloc (sizeof (XRectangle));
-			    t->sizeDamage  = 1;
+			    if (!w->attrib.override_redirect && w->mapNum)
+			    {
+				dw = GET_DECOR_WINDOW (w, ds);
+
+				if (dw->wd && dw->wd->decor->texture == t)
+				    damageWindowOutputExtents (w);
+			    }
 			}
 		    }
-
-		    t->damageRects[t->nDamage].x      = de->area.x;
-		    t->damageRects[t->nDamage].y      = de->area.y;
-		    t->damageRects[t->nDamage].width  = de->area.width;
-		    t->damageRects[t->nDamage].height = de->area.height;
-		    t->nDamage++;
-
 		    return;
 		}
 	    }
@@ -1010,42 +998,6 @@ decorHandleEvent (CompDisplay *d,
 	    s = findScreenAtDisplay (d, event->xproperty.window);
 	    if (s)
 		decorCheckForDmOnScreen (s, TRUE);
-	}
-	break;
-    case ClientMessage:
-	if (event->xclient.message_type == dd->winDecorSyncAtom)
-	{
-	    DecorTexture *t;
-
-	    for (t = dd->textures; t; t = t->next)
-		if (t->pixmap == event->xclient.data.l[0])
-		    break;
-
-	    if (t)
-	    {
-		DecorWindow *dw;
-		DecorScreen *ds;
-		CompScreen  *s;
-
-		if (!t->nDamage)
-		    return;
-
-		for (s = d->screens; s; s = s->next)
-		{
-		    ds = GET_DECOR_SCREEN (s, dd);
-
-		    for (w = s->windows; w; w = w->next)
-		    {
-			if (!w->attrib.override_redirect && w->mapNum)
-			{
-			    dw = GET_DECOR_WINDOW (w, ds);
-
-			    if (dw->wd && dw->wd->decor->texture == t)
-				damageWindowOutputExtents (w);
-			}
-		    }
-		}
-	    }
 	}
 	break;
     case MapRequest:
@@ -1153,8 +1105,6 @@ decorInitDisplay (CompPlugin  *p,
 	XInternAtom (d->display, "_NET_WINDOW_DECOR_NORMAL", 0);
     dd->winDecorActiveAtom =
 	XInternAtom (d->display, "_NET_WINDOW_DECOR_ACTIVE", 0);
-    dd->winDecorSyncAtom =
-	XInternAtom (d->display, "_NET_WINDOW_DECOR_SYNC", 0);
 
     WRAP (dd, d, handleEvent, decorHandleEvent);
 
