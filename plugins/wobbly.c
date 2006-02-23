@@ -99,6 +99,7 @@ typedef struct _Model {
     Object	 *anchorObject;
     float	 steps;
     Vector	 scale;
+    Point	 scaleOrigin;
     Bool	 transformed;
     Point	 topLeft;
     Point	 bottomRight;
@@ -124,12 +125,6 @@ typedef struct _Model {
 #define WOBBLY_MIN_GRID_SIZE_MIN      4
 #define WOBBLY_MIN_GRID_SIZE_MAX      128
 
-#define WOBBLY_WOBBLE_ON_GRAB_DEFAULT   FALSE
-
-#define WOBBLY_WOBBLE_ON_MOVE_DEFAULT   TRUE
-
-#define WOBBLY_WOBBLE_ON_RESIZE_DEFAULT FALSE
-
 typedef enum {
     WobblyEffectNone = 0,
     WobblyEffectShiver
@@ -147,19 +142,25 @@ static WobblyEffect effectType[] = {
 
 #define NUM_EFFECT (sizeof (effectType) / sizeof (effectType[0]))
 
-#define WOBBLY_MAP_DEFAULT   (effectName[0])
-#define WOBBLY_FOCUS_DEFAULT (effectName[0])
+#define WOBBLY_MAP_DEFAULT   (effectName[1])
+#define WOBBLY_FOCUS_DEFAULT (effectName[1])
 
-static char *winType[] = {
+static char *mapWinType[] = {
+    "Splash",
+    "Unknown"
+};
+#define N_MAP_WIN_TYPE (sizeof (mapWinType) / sizeof (mapWinType[0]))
+#define N_FOCUS_WIN_TYPE (0)
+
+static char *moveWinType[] = {
     "Toolbar",
     "Menu",
     "Utility",
-    "Splash",
     "Dialog",
-    "Normal",
-    "Unknown"
+    "Normal"
 };
-#define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
+#define N_MOVE_WIN_TYPE (sizeof (moveWinType) / sizeof (moveWinType[0]))
+#define N_GRAB_WIN_TYPE (0)
 
 #define WOBBLY_SNAP_KEY_DEFAULT       "Control_L"
 #define WOBBLY_SNAP_MODIFIERS_DEFAULT (CompPressMask | ControlMask)
@@ -171,18 +172,18 @@ typedef struct _WobblyDisplay {
     HandleEventProc handleEvent;
 } WobblyDisplay;
 
-#define WOBBLY_SCREEN_OPTION_FRICTION	      0
-#define WOBBLY_SCREEN_OPTION_SPRING_K	      1
-#define WOBBLY_SCREEN_OPTION_GRID_RESOLUTION  2
-#define WOBBLY_SCREEN_OPTION_MIN_GRID_SIZE    3
-#define WOBBLY_SCREEN_OPTION_MAP_EFFECT	      4
-#define WOBBLY_SCREEN_OPTION_FOCUS_EFFECT     5
-#define WOBBLY_SCREEN_OPTION_WINDOW_TYPE      6
-#define WOBBLY_SCREEN_OPTION_WOBBLE_ON_GRAB   7
-#define WOBBLY_SCREEN_OPTION_WOBBLE_ON_MOVE   8
-#define WOBBLY_SCREEN_OPTION_WOBBLE_ON_RESIZE 9
-#define WOBBLY_SCREEN_OPTION_SNAP	      10
-#define WOBBLY_SCREEN_OPTION_NUM	      11
+#define WOBBLY_SCREEN_OPTION_FRICTION	       0
+#define WOBBLY_SCREEN_OPTION_SPRING_K	       1
+#define WOBBLY_SCREEN_OPTION_GRID_RESOLUTION   2
+#define WOBBLY_SCREEN_OPTION_MIN_GRID_SIZE     3
+#define WOBBLY_SCREEN_OPTION_MAP_EFFECT	       4
+#define WOBBLY_SCREEN_OPTION_FOCUS_EFFECT      5
+#define WOBBLY_SCREEN_OPTION_MAP_WINDOW_TYPE   6
+#define WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_TYPE 7
+#define WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE  8
+#define WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE  9
+#define WOBBLY_SCREEN_OPTION_SNAP	       10
+#define WOBBLY_SCREEN_OPTION_NUM	       11
 
 typedef struct _WobblyScreen {
     int	windowPrivateIndex;
@@ -208,7 +209,10 @@ typedef struct _WobblyScreen {
     WobblyEffect mapEffect;
     WobblyEffect focusEffect;
 
-    unsigned int wMask;
+    unsigned int mapWMask;
+    unsigned int focusWMask;
+    unsigned int moveWMask;
+    unsigned int grabWMask;
 } WobblyScreen;
 
 #define WobblyInitial  (1L << 0)
@@ -312,18 +316,33 @@ wobblySetScreenOption (CompScreen      *screen,
 	    }
 	}
 	break;
-    case WOBBLY_SCREEN_OPTION_WINDOW_TYPE:
+    case WOBBLY_SCREEN_OPTION_MAP_WINDOW_TYPE:
 	if (compSetOptionList (o, value))
 	{
-	    ws->wMask = compWindowTypeMaskFromStringList (&o->value);
+	    ws->mapWMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
 	}
 	break;
-    case WOBBLY_SCREEN_OPTION_WOBBLE_ON_GRAB:
-    case WOBBLY_SCREEN_OPTION_WOBBLE_ON_MOVE:
-    case WOBBLY_SCREEN_OPTION_WOBBLE_ON_RESIZE:
-	if (compSetBoolOption (o, value))
+    case WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_TYPE:
+	if (compSetOptionList (o, value))
+	{
+	    ws->focusWMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
+	}
+	break;
+    case WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE:
+	if (compSetOptionList (o, value))
+	{
+	    ws->moveWMask = compWindowTypeMaskFromStringList (&o->value);
+	    return TRUE;
+	}
+	break;
+    case WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE:
+	if (compSetOptionList (o, value))
+	{
+	    ws->grabWMask = compWindowTypeMaskFromStringList (&o->value);
+	    return TRUE;
+	}
 	break;
     case WOBBLY_SCREEN_OPTION_SNAP:
 	if (value->bind.type == CompBindingTypeButton)
@@ -401,41 +420,61 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o->rest.s.string  = effectName;
     o->rest.s.nString = NUM_EFFECT;
 
-    o = &ws->opt[WOBBLY_SCREEN_OPTION_WINDOW_TYPE];
-    o->name	         = "window_types";
-    o->shortDesc         = "Window Types";
-    o->longDesc	         = "Window types that should wobbly";
+    o = &ws->opt[WOBBLY_SCREEN_OPTION_MAP_WINDOW_TYPE];
+    o->name	         = "map_window_types";
+    o->shortDesc         = "Map Window Types";
+    o->longDesc	         = "Window types that should wobbly when mapped";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_WIN_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
-    for (i = 0; i < N_WIN_TYPE; i++)
-	o->value.list.value[i].s = strdup (winType[i]);
+    o->value.list.nValue = N_MAP_WIN_TYPE;
+    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_MAP_WIN_TYPE);
+    for (i = 0; i < N_MAP_WIN_TYPE; i++)
+	o->value.list.value[i].s = strdup (mapWinType[i]);
     o->rest.s.string     = windowTypeString;
     o->rest.s.nString    = nWindowTypeString;
 
-    ws->wMask = compWindowTypeMaskFromStringList (&o->value);
+    ws->mapWMask = compWindowTypeMaskFromStringList (&o->value);
 
-    o = &ws->opt[WOBBLY_SCREEN_OPTION_WOBBLE_ON_GRAB];
-    o->name      = "wobble_on_grab";
-    o->shortDesc = "Wobble On Grab";
-    o->longDesc  = "Wobble when windows are grabbed";
-    o->type      = CompOptionTypeBool;
-    o->value.b   = WOBBLY_WOBBLE_ON_GRAB_DEFAULT;
+    o = &ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_TYPE];
+    o->name	         = "focus_window_types";
+    o->shortDesc         = "Focus Window Types";
+    o->longDesc	         = "Window types that should wobbly when focused";
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeString;
+    o->value.list.nValue = N_FOCUS_WIN_TYPE;
+    o->value.list.value  = NULL;
+    o->rest.s.string     = windowTypeString;
+    o->rest.s.nString    = nWindowTypeString;
 
-    o = &ws->opt[WOBBLY_SCREEN_OPTION_WOBBLE_ON_MOVE];
-    o->name      = "wobble_on_move";
-    o->shortDesc = "Wobble On Move";
-    o->longDesc  = "Wobble when windows are moved";
-    o->type      = CompOptionTypeBool;
-    o->value.b   = WOBBLY_WOBBLE_ON_MOVE_DEFAULT;
+    ws->focusWMask = compWindowTypeMaskFromStringList (&o->value);
 
-    o = &ws->opt[WOBBLY_SCREEN_OPTION_WOBBLE_ON_RESIZE];
-    o->name      = "wobble_on_resize";
-    o->shortDesc = "Wobble On Resize";
-    o->longDesc  = "Wobble when windows are resize";
-    o->type      = CompOptionTypeBool;
-    o->value.b   = WOBBLY_WOBBLE_ON_RESIZE_DEFAULT;
+    o = &ws->opt[WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE];
+    o->name	         = "move_window_types";
+    o->shortDesc         = "Move Window Types";
+    o->longDesc	         = "Window types that should wobbly when moved";
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeString;
+    o->value.list.nValue = N_MOVE_WIN_TYPE;
+    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_MOVE_WIN_TYPE);
+    for (i = 0; i < N_MOVE_WIN_TYPE; i++)
+	o->value.list.value[i].s = strdup (moveWinType[i]);
+    o->rest.s.string     = windowTypeString;
+    o->rest.s.nString    = nWindowTypeString;
+
+    ws->moveWMask = compWindowTypeMaskFromStringList (&o->value);
+
+    o = &ws->opt[WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE];
+    o->name	         = "grab_window_types";
+    o->shortDesc         = "Grab Window Types";
+    o->longDesc	         = "Window types that should wobbly when grabbed";
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeString;
+    o->value.list.nValue = N_GRAB_WIN_TYPE;
+    o->value.list.value  = NULL;
+    o->rest.s.string     = windowTypeString;
+    o->rest.s.nString    = nWindowTypeString;
+
+    ws->grabWMask = compWindowTypeMaskFromStringList (&o->value);
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_SNAP];
     o->name			  = "snap";
@@ -872,21 +911,22 @@ modelSetMiddleAnchor (Model *model,
 		      int   width,
 		      int   height)
 {
-    float w, h;
+    float gx, gy, x0, y0;
+
+    x0 = model->scaleOrigin.x;
+    y0 = model->scaleOrigin.y;
+
+    gx = ((GRID_WIDTH  - 1) / 2 * width)  / (float) (GRID_WIDTH  - 1);
+    gy = ((GRID_HEIGHT - 1) / 2 * height) / (float) (GRID_HEIGHT - 1);
 
     if (model->anchorObject)
 	model->anchorObject->immobile = FALSE;
 
-    w = (float) width  * model->scale.x;
-    h = (float) height * model->scale.y;
-
     model->anchorObject = &model->objects[GRID_WIDTH *
 					  ((GRID_HEIGHT - 1) / 2) +
 					  (GRID_WIDTH - 1) / 2];
-    model->anchorObject->position.x = x +
-	((GRID_WIDTH - 1) / 2 * w) / (float) (GRID_WIDTH - 1);
-    model->anchorObject->position.y = y +
-	((GRID_HEIGHT - 1) / 2 * h) / (float) (GRID_HEIGHT - 1);
+    model->anchorObject->position.x = x + (gx - x0) * model->scale.x + x0;
+    model->anchorObject->position.y = y + (gy - y0) * model->scale.y + y0;
 
     model->anchorObject->immobile = TRUE;
 }
@@ -899,18 +939,21 @@ modelInitObjects (Model *model,
 		  int	height)
 {
     int	  gridX, gridY, i = 0;
-    float w, h;
+    float gw, gh, x0, y0;
 
-    w = (float) width  * model->scale.x;
-    h = (float) height * model->scale.y;
+    x0 = model->scaleOrigin.x;
+    y0 = model->scaleOrigin.y;
+
+    gw = GRID_WIDTH  - 1;
+    gh = GRID_HEIGHT - 1;
 
     for (gridY = 0; gridY < GRID_HEIGHT; gridY++)
     {
 	for (gridX = 0; gridX < GRID_WIDTH; gridX++)
 	{
 	    objectInit (&model->objects[i],
-			x + (gridX * w) / (float) (GRID_WIDTH - 1),
-			y + (gridY * h) / (float) (GRID_HEIGHT - 1),
+			x + (((gridX * width)  / gw) - x0) * model->scale.x + x0,
+			y + (((gridY * height) / gh) - y0) * model->scale.y + y0,
 			0, 0);
 	    i++;
 	}
@@ -1087,28 +1130,22 @@ modelInitSprings (Model *model,
 		  int   height)
 {
     int   gridX, gridY, i = 0;
-    float hp, hpad, vpad;
-    float w, h;
+    float hpad, vpad;
 
     model->numSprings = 0;
 
-    w = (float) width  * model->scale.x;
-    h = (float) height * model->scale.y;
-
-    hpad = w / (GRID_WIDTH - 1);
-    vpad = h / (GRID_HEIGHT - 1);
+    hpad = ((float) width  * model->scale.x) / (GRID_WIDTH  - 1);
+    vpad = ((float) height * model->scale.y) / (GRID_HEIGHT - 1);
 
     for (gridY = 0; gridY < GRID_HEIGHT; gridY++)
     {
-	hp = hpad;
-
 	for (gridX = 0; gridX < GRID_WIDTH; gridX++)
 	{
 	    if (gridX > 0)
 		modelAddSpring (model,
 				&model->objects[i - 1],
 				&model->objects[i],
-				hp, 0);
+				hpad, 0);
 
 	    if (gridY > 0)
 		modelAddSpring (model,
@@ -1160,6 +1197,9 @@ createModel (int	  x,
 
     model->scale.x = 1.0f;
     model->scale.y = 1.0f;
+
+    model->scaleOrigin.x = 0.0f;
+    model->scaleOrigin.y = 0.0f;
 
     model->transformed = FALSE;
 
@@ -1635,14 +1675,10 @@ modelFindNearestObject (Model *model,
 static Bool
 isWobblyWin (CompWindow *w)
 {
-    WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
 
     if (ww->model)
 	return TRUE;
-
-    if (!(ws->wMask & w->type))
-	return FALSE;
 
     /* avoid tiny windows */
     if (w->width == 1 && w->height == 1)
@@ -1709,7 +1745,7 @@ wobblyPreparePaintScreen (CompScreen *s,
 			    ww->wobbly |= WobblyInitial;
 			}
 		    }
-		    else
+		    else if (!ww->model->transformed)
 		    {
 			ww->model = 0;
 
@@ -1985,15 +2021,26 @@ wobblyPaintWindow (CompWindow		   *w,
 
     if (ww->wobbly)
     {
+	WindowPaintAttrib wAttrib = *attrib;
+
 	if (mask & PAINT_WINDOW_SOLID_MASK)
 	    return FALSE;
 
 	mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-    }
 
-    UNWRAP (ws, w->screen, paintWindow);
-    status = (*w->screen->paintWindow) (w, attrib, region, mask);
-    WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
+	wAttrib.xScale = 1.0f;
+	wAttrib.yScale = 1.0f;
+
+	UNWRAP (ws, w->screen, paintWindow);
+	status = (*w->screen->paintWindow) (w, &wAttrib, region, mask);
+	WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
+    }
+    else
+    {
+	UNWRAP (ws, w->screen, paintWindow);
+	status = (*w->screen->paintWindow) (w, attrib, region, mask);
+	WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
+    }
 
     return status;
 }
@@ -2100,7 +2147,9 @@ wobblyHandleEvent (CompDisplay *d,
 		    WOBBLY_WINDOW (w);
 		    WOBBLY_SCREEN (w->screen);
 
-		    if (ws->focusEffect && wobblyEnsureModel (w))
+		    if ((ws->focusWMask & w->type) &&
+			ws->focusEffect		   &&
+			wobblyEnsureModel (w))
 		    {
 			switch (ws->focusEffect) {
 			case WobblyEffectShiver:
@@ -2115,6 +2164,7 @@ wobblyHandleEvent (CompDisplay *d,
 
 			ww->wobbly |= WobblyInitial;
 			ws->wobblyWindows |= ww->wobbly;
+
 			damagePendingOnScreen (w->screen);
 		    }
 		}
@@ -2162,12 +2212,14 @@ wobblyDamageWindowRect (CompWindow *w,
 
     if (initial)
     {
-	if (isWobblyWin (w) && (w->type & ~CompWindowTypeNormalMask))
+	if (isWobblyWin (w))
 	{
 	    WOBBLY_WINDOW (w);
 	    WOBBLY_SCREEN (w->screen);
 
-	    if (ws->mapEffect && wobblyEnsureModel (w))
+	    if ((ws->mapWMask & w->type) &&
+		ws->mapEffect		 &&
+		wobblyEnsureModel (w))
 	    {
 		switch (ws->mapEffect) {
 		case WobblyEffectShiver:
@@ -2209,6 +2261,9 @@ wobblySetWindowScale (CompWindow *w,
 	    ww->model->scale.x = xScale;
 	    ww->model->scale.y = yScale;
 
+	    ww->model->scaleOrigin.x = w->output.left;
+	    ww->model->scaleOrigin.y = w->output.top;
+
 	    modelInitObjects (ww->model,
 			      WIN_X (w), WIN_Y (w),
 			      WIN_W (w), WIN_H (w));
@@ -2216,11 +2271,6 @@ wobblySetWindowScale (CompWindow *w,
 	    modelInitSprings (ww->model,
 			      WIN_X (w), WIN_Y (w),
 			      WIN_W (w), WIN_H (w));
-
-	    /*
-	    ww->wobbly |= WobblyInitial;
-	    ws->wobblyWindows |= ww->wobbly;
-	    */
 	}
 
 	if (ww->model->scale.x != 1.0f || ww->model->scale.y != 1.0f)
@@ -2288,8 +2338,8 @@ wobblyWindowGrabNotify (CompWindow   *w,
 {
     WOBBLY_SCREEN (w->screen);
 
-    if ((mask & CompWindowGrabButtonMask)		     &&
-	ws->opt[WOBBLY_SCREEN_OPTION_WOBBLE_ON_MOVE].value.b &&
+    if ((mask & CompWindowGrabButtonMask) &&
+	(ws->moveWMask & w->type)         &&
 	isWobblyWin (w))
     {
 	WOBBLY_WINDOW (w);
@@ -2318,7 +2368,7 @@ wobblyWindowGrabNotify (CompWindow   *w,
 		    modelUpdateSnapping (w, ww->model);
 	    }
 
-	    if (ws->opt[WOBBLY_SCREEN_OPTION_WOBBLE_ON_GRAB].value.b)
+	    if (ws->grabWMask & w->type)
 	    {
 		for (i = 0; i < ww->model->numSprings; i++)
 		{
