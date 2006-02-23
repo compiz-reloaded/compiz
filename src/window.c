@@ -1658,7 +1658,7 @@ unmapWindow (CompWindow *w)
     w->attrib.map_state = IsUnmapped;
 
     /* if window is not being minimized it should be re-placed at map */
-    if (!w->minimized)
+    if (!w->minimized && !(w->type & w->screen->showingDesktopMask))
 	w->placed = FALSE;
 
     setWmState (w->screen->display, IconicState, w->id);

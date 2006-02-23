@@ -1,5 +1,8 @@
 2006-02-23  David Reveman  <davidr@novell.com>
 
+	* src/window.c (unmapWindow): Not minimized and not part of showing
+	desktop mode.
+
 	* plugins/wobbly.c: Fix handling of scaled windows.
 	Update options so that user gets more control over which windows
 	that should wobble and when.
