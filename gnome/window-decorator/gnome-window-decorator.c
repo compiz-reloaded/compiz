@@ -2831,6 +2831,7 @@ window_opened (WnckScreen *screen,
     }
     else if (get_window_prop (xid, select_window_atom, &window))
     {
+	d->prop_xid = wnck_window_get_xid (win);
 	update_switcher_window (win, window);
     }
 }

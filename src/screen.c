@@ -162,6 +162,16 @@ setScreenOption (CompScreen      *screen,
 	break;
     case COMP_SCREEN_OPTION_COMMAND0:
     case COMP_SCREEN_OPTION_COMMAND1:
+    case COMP_SCREEN_OPTION_COMMAND2:
+    case COMP_SCREEN_OPTION_COMMAND3:
+    case COMP_SCREEN_OPTION_COMMAND4:
+    case COMP_SCREEN_OPTION_COMMAND5:
+    case COMP_SCREEN_OPTION_COMMAND6:
+    case COMP_SCREEN_OPTION_COMMAND7:
+    case COMP_SCREEN_OPTION_COMMAND8:
+    case COMP_SCREEN_OPTION_COMMAND9:
+    case COMP_SCREEN_OPTION_COMMAND10:
+    case COMP_SCREEN_OPTION_COMMAND11:
 	if (compSetStringOption (o, value))
 	    return TRUE;
 	break;
@@ -170,6 +180,16 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_RUN_DIALOG:
     case COMP_SCREEN_OPTION_RUN_COMMAND0:
     case COMP_SCREEN_OPTION_RUN_COMMAND1:
+    case COMP_SCREEN_OPTION_RUN_COMMAND2:
+    case COMP_SCREEN_OPTION_RUN_COMMAND3:
+    case COMP_SCREEN_OPTION_RUN_COMMAND4:
+    case COMP_SCREEN_OPTION_RUN_COMMAND5:
+    case COMP_SCREEN_OPTION_RUN_COMMAND6:
+    case COMP_SCREEN_OPTION_RUN_COMMAND7:
+    case COMP_SCREEN_OPTION_RUN_COMMAND8:
+    case COMP_SCREEN_OPTION_RUN_COMMAND9:
+    case COMP_SCREEN_OPTION_RUN_COMMAND10:
+    case COMP_SCREEN_OPTION_RUN_COMMAND11:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -262,41 +282,36 @@ compScreenInitOptions (CompScreen *screen)
 	XKeysymToKeycode (screen->display->display,
 			  XStringToKeysym (RUN_DIALOG_KEY_DEFAULT));
 
-    o = &screen->opt[COMP_SCREEN_OPTION_COMMAND0];
-    o->name			  = "command0";
-    o->shortDesc		  = "Command line";
-    o->longDesc			  = "Command line to be executed in shell";
-    o->type			  = CompOptionTypeString;
-    o->value.s			  = strdup ("");
-    o->rest.s.string		  = NULL;
-    o->rest.s.nString		  = 0;
+#define COMMAND_OPTION(num, cname, rname)				    \
+    o = &screen->opt[COMP_SCREEN_OPTION_COMMAND ## num ];		    \
+    o->name			  = cname;				    \
+    o->shortDesc		  = "Command line";			    \
+    o->longDesc			  = "Command line to be executed in shell"; \
+    o->type			  = CompOptionTypeString;		    \
+    o->value.s			  = strdup ("");			    \
+    o->rest.s.string		  = NULL;				    \
+    o->rest.s.nString		  = 0;					    \
+    o = &screen->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num ];		    \
+    o->name			  =  rname;				    \
+    o->shortDesc		  = "Run command";			    \
+    o->longDesc			  = "Run shell command";		    \
+    o->type			  = CompOptionTypeBinding;		    \
+    o->value.bind.type		  = CompBindingTypeKey;			    \
+    o->value.bind.u.key.modifiers = 0;					    \
+    o->value.bind.u.key.keycode   = 0
 
-    o = &screen->opt[COMP_SCREEN_OPTION_RUN_COMMAND0];
-    o->name			  = "run_command0";
-    o->shortDesc		  = "Run command";
-    o->longDesc			  = "Run shell command";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
-
-    o = &screen->opt[COMP_SCREEN_OPTION_COMMAND1];
-    o->name			  = "command1";
-    o->shortDesc		  = "Command line";
-    o->longDesc			  = "Command line to be executed in shell";
-    o->type			  = CompOptionTypeString;
-    o->value.s			  = strdup ("");
-    o->rest.s.string		  = NULL;
-    o->rest.s.nString		  = 0;
-
-    o = &screen->opt[COMP_SCREEN_OPTION_RUN_COMMAND1];
-    o->name			  = "run_command1";
-    o->shortDesc		  = "Run command";
-    o->longDesc			  = "Run shell command";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
+    COMMAND_OPTION (0, "command0", "run_command0");
+    COMMAND_OPTION (1, "command1", "run_command1");
+    COMMAND_OPTION (2, "command2", "run_command2");
+    COMMAND_OPTION (3, "command3", "run_command3");
+    COMMAND_OPTION (4, "command4", "run_command4");
+    COMMAND_OPTION (5, "command5", "run_command5");
+    COMMAND_OPTION (6, "command6", "run_command6");
+    COMMAND_OPTION (7, "command7", "run_command7");
+    COMMAND_OPTION (8, "command8", "run_command8");
+    COMMAND_OPTION (9, "command9", "run_command9");
+    COMMAND_OPTION (10, "command10", "run_command10");
+    COMMAND_OPTION (11, "command11", "run_command11");
 }
 
 static Bool
@@ -1303,6 +1318,18 @@ addScreen (CompDisplay *display,
 
 	if (s->activeTexture && s->clientActiveTexture)
 	    glGetIntegerv (GL_MAX_TEXTURE_UNITS_ARB, &s->maxTextureUnits);
+    }
+
+    s->mipmap = 0;
+    if (s->textureNonPowerOfTwo)
+    {
+	if (strstr (glExtensions, "GL_EXT_framebuffer_object"))
+	{
+	    s->generateMipmap = (GLGenerateMipmapProc)
+		getProcAddress (s, "glGenerateMipmapEXT");
+	    if (s->generateMipmap)
+		s->mipmap = 1;
+	}
     }
 
     initTexture (s, &s->backgroundTexture);

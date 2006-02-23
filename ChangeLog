@@ -1,4 +1,27 @@
+2006-02-23  David Reveman  <davidr@novell.com>
+
+	* configure.ac: Bump version to 0.0.4.
+
+	* gnome/window-decorator/gnome-window-decorator.c (window_opened): Make
+	sure decoration property for switcher window is set.
+
+	* plugins/decoration.c (decorHandleEvent):
+	* src/event.c (handleEvent):
+	* plugins/switcher.c:
+	* src/screen.c (addScreen, setScreenOption)
+	(compScreenInitOptions):
+	* src/texture.c: 
+	* include/compiz.h: Mipmap support. Add more RUN_COMMAND options.
+
 2006-02-22  David Reveman  <davidr@novell.com>
+
+	* src/display.c (realToVirtualModMask): Remove modifiers that should
+	be ignored.
+	(addDisplay): Select ButtonPress and ButtonRelease events on root
+	window.
+
+	* include/compiz.h (EV_KEY):
+	(EV_BUTTON):  Modifiers should match exactly.
 
 	* plugins/switcher.c: Add binding for selecting previous window.
 

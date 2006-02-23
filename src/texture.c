@@ -39,12 +39,13 @@ void
 initTexture (CompScreen  *screen,
 	     CompTexture *texture)
 {
-    texture->name   = 0;
-    texture->target = GL_TEXTURE_2D;
-    texture->pixmap = None;
-    texture->filter = COMP_TEXTURE_FILTER_FAST;
-    texture->wrap   = GL_CLAMP_TO_EDGE;
-    texture->matrix = _identity_matrix;
+    texture->name	= 0;
+    texture->target	= GL_TEXTURE_2D;
+    texture->pixmap	= None;
+    texture->filter	= GL_NEAREST;
+    texture->wrap	= GL_CLAMP_TO_EDGE;
+    texture->matrix     = _identity_matrix;
+    texture->oldMipmaps = TRUE;
 }
 
 void
@@ -110,7 +111,7 @@ imageToTexture (CompScreen   *screen,
 
 		  data);
 
-    texture->filter = COMP_TEXTURE_FILTER_FAST;
+    texture->filter = GL_NEAREST;
 
     glTexParameteri (texture->target, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri (texture->target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -257,7 +258,7 @@ bindPixmapToTexture (CompScreen  *screen,
 	return FALSE;
     }
 
-    texture->filter = COMP_TEXTURE_FILTER_FAST;
+    texture->filter = GL_NEAREST;
 
     glTexParameteri (texture->target, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri (texture->target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -304,28 +305,63 @@ enableTexture (CompScreen	 *screen,
     glEnable (texture->target);
     glBindTexture (texture->target, texture->name);
 
-    if (filter != texture->filter)
+    if (filter == COMP_TEXTURE_FILTER_FAST)
     {
-	switch (filter) {
-	case COMP_TEXTURE_FILTER_FAST:
+	if (texture->filter != GL_NEAREST)
+	{
 	    glTexParameteri (texture->target,
 			     GL_TEXTURE_MIN_FILTER,
 			     GL_NEAREST);
 	    glTexParameteri (texture->target,
 			     GL_TEXTURE_MAG_FILTER,
 			     GL_NEAREST);
-	break;
-	case COMP_TEXTURE_FILTER_GOOD:
-	    glTexParameteri (texture->target,
-			     GL_TEXTURE_MIN_FILTER,
-			     screen->display->textureFilter);
-	    glTexParameteri (texture->target,
-			     GL_TEXTURE_MAG_FILTER,
-			     screen->display->textureFilter);
-	    break;
-	}
 
-	texture->filter = filter;
+	    texture->filter = GL_NEAREST;
+	}
+    }
+    else if (texture->filter != screen->display->textureFilter)
+    {
+	if (screen->display->textureFilter == GL_LINEAR_MIPMAP_LINEAR)
+	{
+	    if (screen->mipmap)
+	    {
+		if (texture->oldMipmaps)
+		    (*screen->generateMipmap) (texture->target);
+
+		glTexParameteri (texture->target,
+				 GL_TEXTURE_MIN_FILTER,
+				 GL_LINEAR_MIPMAP_LINEAR);
+
+		if (texture->filter != GL_LINEAR)
+		    glTexParameteri (texture->target,
+				     GL_TEXTURE_MAG_FILTER,
+				     GL_LINEAR);
+
+		texture->filter = GL_LINEAR_MIPMAP_LINEAR;
+	    }
+	    else if (texture->filter != GL_LINEAR)
+	    {
+		glTexParameteri (texture->target,
+				 GL_TEXTURE_MIN_FILTER,
+				 GL_LINEAR);
+		glTexParameteri (texture->target,
+				 GL_TEXTURE_MAG_FILTER,
+				 GL_LINEAR);
+
+		texture->filter = GL_LINEAR;
+	    }
+	}
+	else
+	{
+	    glTexParameteri (texture->target,
+			     GL_TEXTURE_MIN_FILTER,
+			     screen->display->textureFilter);
+	    glTexParameteri (texture->target,
+			     GL_TEXTURE_MAG_FILTER,
+			     screen->display->textureFilter);
+
+	    texture->filter = screen->display->textureFilter;
+	}
     }
 }
 

@@ -935,6 +935,8 @@ decorHandleEvent (CompDisplay *d,
 		    DecorScreen *ds;
 		    CompScreen  *s;
 
+		    t->texture.oldMipmaps = TRUE;
+
 		    for (s = d->screens; s; s = s->next)
 		    {
 			ds = GET_DECOR_SCREEN (s, dd);

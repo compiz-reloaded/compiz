@@ -59,6 +59,8 @@
 #define SWITCH_TIMESTEP_MAX       50.0f
 #define SWITCH_TIMESTEP_PRECISION 0.1f
 
+#define SWITCH_MIPMAP_DEFAULT TRUE
+
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -84,7 +86,8 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_SPEED	  4
 #define SWITCH_SCREEN_OPTION_TIMESTEP	  5
 #define SWITCH_SCREEN_OPTION_WINDOW_TYPE  6
-#define SWITCH_SCREEN_OPTION_NUM          7
+#define SWITCH_SCREEN_OPTION_MIPMAP       7
+#define SWITCH_SCREEN_OPTION_NUM          8
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -233,6 +236,10 @@ switchSetScreenOption (CompScreen      *screen,
 	    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
 	}
+	break;
+    case SWITCH_SCREEN_OPTION_MIPMAP:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -325,6 +332,13 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->rest.s.nString    = nWindowTypeString;
 
     ss->wMask = compWindowTypeMaskFromStringList (&o->value);
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_MIPMAP];
+    o->name	  = "mipmap";
+    o->shortDesc  = "Mipmap";
+    o->longDesc	  = "Generate mipmaps when possible for higher quality scaling";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = SWITCH_MIPMAP_DEFAULT;
 }
 
 static void
@@ -1009,7 +1023,8 @@ switchPaintWindow (CompWindow		   *w,
     {
 	if (w->id == ss->popupWindow)
 	{
-	    int	x, y, x1, x2, cx, i;
+	    GLenum filter;
+	    int	   x, y, x1, x2, cx, i;
 
 	    if (mask & PAINT_WINDOW_SOLID_MASK)
 		return FALSE;
@@ -1023,6 +1038,11 @@ switchPaintWindow (CompWindow		   *w,
 
 	    x = x1 + ss->pos;
 	    y = w->attrib.y + SPACE;
+
+	    filter = s->display->textureFilter;
+
+	    if (ss->opt[SWITCH_SCREEN_OPTION_MIPMAP].value.b)
+		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
 
 	    for (i = 0; i < ss->nWindows; i++)
 	    {
@@ -1043,6 +1063,8 @@ switchPaintWindow (CompWindow		   *w,
 
 		x += WIDTH;
 	    }
+
+	    s->display->textureFilter = filter;
 
 	    cx = w->attrib.x + (w->width >> 1);
 

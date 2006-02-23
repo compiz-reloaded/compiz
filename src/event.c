@@ -338,11 +338,22 @@ handleEvent (CompDisplay *display,
 	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
 		panelAction (s, s->display->panelActionRunDialogAtom);
 
-	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND0], event))
-		runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND0].value.s);
+#define EV_COMMAND(num)							   \
+    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num], event)) \
+	runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND ## num].value.s)
 
-	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND1], event))
-		runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND1].value.s);
+	    EV_COMMAND (0);
+	    EV_COMMAND (1);
+	    EV_COMMAND (2);
+	    EV_COMMAND (3);
+	    EV_COMMAND (4);
+	    EV_COMMAND (5);
+	    EV_COMMAND (6);
+	    EV_COMMAND (7);
+	    EV_COMMAND (8);
+	    EV_COMMAND (9);
+	    EV_COMMAND (10);
+	    EV_COMMAND (11);
 	}
 	break;
     case ButtonRelease:
@@ -935,6 +946,8 @@ handleEvent (CompDisplay *display,
 
 	    if (w)
 	    {
+		w->texture.oldMipmaps = TRUE;
+
 		if (w->syncWait)
 		{
 		    if (w->nDamage == w->sizeDamage)

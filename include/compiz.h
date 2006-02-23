@@ -757,13 +757,14 @@ typedef enum {
 } CompTextureFilter;
 
 struct _CompTexture {
-    GLuint            name;
-    GLenum            target;
-    GLfloat	      dx, dy;
-    GLXPixmap	      pixmap;
-    CompTextureFilter filter;
-    GLenum            wrap;
-    CompMatrix        matrix;
+    GLuint     name;
+    GLenum     target;
+    GLfloat    dx, dy;
+    GLXPixmap  pixmap;
+    GLenum     filter;
+    GLenum     wrap;
+    CompMatrix matrix;
+    Bool       oldMipmaps;
 };
 
 void
@@ -831,7 +832,27 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_RUN_COMMAND0	       7
 #define COMP_SCREEN_OPTION_COMMAND1	       8
 #define COMP_SCREEN_OPTION_RUN_COMMAND1	       9
-#define COMP_SCREEN_OPTION_NUM		       10
+#define COMP_SCREEN_OPTION_COMMAND2	       10
+#define COMP_SCREEN_OPTION_RUN_COMMAND2	       11
+#define COMP_SCREEN_OPTION_COMMAND3	       12
+#define COMP_SCREEN_OPTION_RUN_COMMAND3	       13
+#define COMP_SCREEN_OPTION_COMMAND4	       14
+#define COMP_SCREEN_OPTION_RUN_COMMAND4	       15
+#define COMP_SCREEN_OPTION_COMMAND5	       16
+#define COMP_SCREEN_OPTION_RUN_COMMAND5	       17
+#define COMP_SCREEN_OPTION_COMMAND6	       18
+#define COMP_SCREEN_OPTION_RUN_COMMAND6	       19
+#define COMP_SCREEN_OPTION_COMMAND7	       20
+#define COMP_SCREEN_OPTION_RUN_COMMAND7	       21
+#define COMP_SCREEN_OPTION_COMMAND8	       22
+#define COMP_SCREEN_OPTION_RUN_COMMAND8	       23
+#define COMP_SCREEN_OPTION_COMMAND9	       24
+#define COMP_SCREEN_OPTION_RUN_COMMAND9	       25
+#define COMP_SCREEN_OPTION_COMMAND10	       26
+#define COMP_SCREEN_OPTION_RUN_COMMAND10       27
+#define COMP_SCREEN_OPTION_COMMAND11	       28
+#define COMP_SCREEN_OPTION_RUN_COMMAND11       29
+#define COMP_SCREEN_OPTION_NUM		       30
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -857,6 +878,7 @@ typedef void    (*GLXQueryDrawableProc)   (Display	 *display,
 
 typedef void (*GLActiveTextureProc) (GLenum texture);
 typedef void (*GLClientActiveTextureProc) (GLenum texture);
+typedef void (*GLGenerateMipmapProc) (GLenum target);
 
 
 #define MAX_DEPTH 32
@@ -973,6 +995,7 @@ struct _CompScreen {
     int		      textureEnvCombine;
     int		      textureEnvCrossbar;
     int		      textureBorderClamp;
+    int		      mipmap;
     int		      maxTextureUnits;
     Cursor	      invisibleCursor;
     XRectangle        *exposeRects;
@@ -1036,6 +1059,7 @@ struct _CompScreen {
 
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;
+    GLGenerateMipmapProc      generateMipmap;
 
     GLXContext ctx;
 
