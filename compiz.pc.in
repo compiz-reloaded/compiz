@@ -3,10 +3,10 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: glxcompmgr
+Name: compiz
 Description: OpenGL compositing manager
 Version: @VERSION@
 
-Requires: @GLXCOMP_REQUIRES@
-Libs: @GLXCOMP_LIBS@ @GL_LIBS@
-Cflags: @GLXCOMP_CFLAGS@ @GL_CFLAGS@ -I${includedir}/glxcomp
+Requires: @COMPIZ_REQUIRES@
+Libs: @COMPIZ_LIBS@ @GL_LIBS@
+Cflags: @COMPIZ_CFLAGS@ @GL_CFLAGS@ -I${includedir}/compiz

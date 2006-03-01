@@ -68,6 +68,8 @@ paintTransformedScreen (CompScreen		*screen,
     int	       windowMask;
     int	       backgroundMask;
 
+    screenLighting (screen, TRUE);
+
     glPushMatrix ();
 
     translateRotateScreen (sAttrib);
@@ -157,6 +159,8 @@ paintScreen (CompScreen		     *screen,
     }
     else
 	return FALSE;
+
+    screenLighting (screen, FALSE);
 
     glPushMatrix ();
 
@@ -666,7 +670,7 @@ drawWindowTexture (CompWindow		   *w,
 	disableTexture (texture);
 
 	glColor4usv (defaultColor);
-	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	screenTexEnvMode (w->screen, GL_REPLACE);
 
 	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
 	    glDisable (GL_BLEND);
@@ -684,13 +688,13 @@ drawWindowTexture (CompWindow		   *w,
 
 		color = (attrib->opacity * attrib->brightness) >> 16;
 
-		glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		screenTexEnvMode (w->screen, GL_MODULATE);
 		glColor4us (color, color, color, attrib->opacity);
 
 		(*w->screen->drawWindowGeometry) (w);
 
 		glColor4usv (defaultColor);
-		glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		screenTexEnvMode (w->screen, GL_REPLACE);
 	    }
 	    else
 	    {
@@ -701,14 +705,14 @@ drawWindowTexture (CompWindow		   *w,
 	}
 	else if (attrib->brightness != BRIGHT)
 	{
-	    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	    screenTexEnvMode (w->screen, GL_MODULATE);
 	    glColor4us (attrib->brightness, attrib->brightness,
 			attrib->brightness, BRIGHT);
 
 	    (*w->screen->drawWindowGeometry) (w);
 
 	    glColor4usv (defaultColor);
-	    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	    screenTexEnvMode (w->screen, GL_REPLACE);
 	}
 	else
 	{

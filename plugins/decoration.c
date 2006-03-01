@@ -244,10 +244,10 @@ decorPaintWindow (CompWindow		  *w,
 			{
 			    GLushort color;
 
-			    color = (attrib->opacity * attrib->brightness) >> 16;
+			    color = (attrib->opacity *
+				     attrib->brightness) >> 16;
 
-			    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,
-				       GL_MODULATE);
+			    screenTexEnvMode (w->screen, GL_MODULATE);
 			    glColor4us (color, color, color, attrib->opacity);
 			}
 
@@ -279,8 +279,7 @@ decorPaintWindow (CompWindow		  *w,
 			    attrib->brightness != BRIGHT)
 			{
 			    glColor4usv (defaultColor);
-			    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,
-				       GL_REPLACE);
+			    screenTexEnvMode (w->screen, GL_REPLACE);
 			}
 
 			glDisable (GL_BLEND);

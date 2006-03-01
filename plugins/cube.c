@@ -493,6 +493,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
     if (cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f)
     {
+	screenLighting (s, TRUE);
+
 	glColor3usv (cs->color);
 
 	glPushMatrix ();
@@ -508,6 +510,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
 
+	glNormal3f (0.0f, -1.0f, 0.0f);
+
 	if (cs->invert == 1 && s->size == 4 && cs->texture.name)
 	{
 	    enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
@@ -518,8 +522,12 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	else
 	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
 
+	glNormal3f (0.0f, 1.0f, 0.0f);
+
 	glDrawArrays (GL_TRIANGLE_FAN, cs->nvertices >> 1,
 		      cs->nvertices >> 1);
+
+	glNormal3f (0.0f, 0.0f, -1.0f);
 
 	glPopMatrix ();
     }

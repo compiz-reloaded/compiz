@@ -57,6 +57,8 @@
 #define RUN_DIALOG_KEY_DEFAULT       "F2"
 #define RUN_DIALOG_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
+#define LIGHTING_DEFAULT TRUE
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -136,6 +138,7 @@ setScreenOption (CompScreen      *screen,
 
     switch (index) {
     case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
+    case COMP_SCREEN_OPTION_LIGHTING:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -230,6 +233,13 @@ compScreenInitOptions (CompScreen *screen)
     o->longDesc   = "Automatic detection of refresh rate";
     o->type       = CompOptionTypeBool;
     o->value.b    = DETECT_REFRESH_RATE_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_LIGHTING];
+    o->name       = "lighting";
+    o->shortDesc  = "Lighting";
+    o->longDesc   = "Use diffuse light when screen is transformed";
+    o->type       = CompOptionTypeBool;
+    o->value.b    = LIGHTING_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_REFRESH_RATE];
     o->name       = "refresh_rate";
@@ -898,6 +908,10 @@ addScreen (CompDisplay *display,
     const char		 *glxExtensions, *glExtensions;
     GLint	         stencilBits;
     XSetWindowAttributes attrib;
+    GLfloat              globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 1.0f };
+    GLfloat              ambientLight[]   = { 0.0f, 0.0f,  0.0f, 1.0f };
+    GLfloat              diffuseLight[]   = { 1.0f, 1.0f,  1.0f, 1.0f };
+    GLfloat              light0Position[] = { 0.0f, 0.0f, -9.0f, 1.0f };
     CompWindow		 *w;
 
     s = malloc (sizeof (CompScreen));
@@ -1365,6 +1379,19 @@ addScreen (CompDisplay *display,
     s->optimalRedrawTime = s->redrawTime;
 
     reshape (s, s->attrib.width, s->attrib.height);
+
+    glLightModelfv (GL_LIGHT_MODEL_AMBIENT, globalAmbient);
+
+    glEnable (GL_LIGHT0);
+    glLightfv (GL_LIGHT0, GL_AMBIENT, ambientLight);
+    glLightfv (GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+    glLightfv (GL_LIGHT0, GL_POSITION, light0Position);
+
+    glColorMaterial (GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+    glNormal3f (0.0f, 0.0f, -1.0f);
+
+    s->lighting = FALSE;
 
     s->next = display->screens;
     display->screens = s;
@@ -2555,4 +2582,40 @@ sendWindowActivationRequest (CompScreen *s,
 		FALSE,
 		SubstructureRedirectMask | SubstructureNotifyMask,
 		&xev);
+}
+
+void
+screenTexEnvMode (CompScreen *s,
+		  GLenum     mode)
+{
+    if (s->lighting)
+	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    else
+	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, mode);
+}
+
+void
+screenLighting (CompScreen *s,
+		Bool       lighting)
+{
+    if (s->lighting != lighting)
+    {
+	if (!s->opt[COMP_SCREEN_OPTION_LIGHTING].value.b)
+	    lighting = FALSE;
+
+	if (lighting)
+	{
+	    glEnable (GL_COLOR_MATERIAL);
+	    glEnable (GL_LIGHTING);
+	}
+	else
+	{
+	    glDisable (GL_COLOR_MATERIAL);
+	    glDisable (GL_LIGHTING);
+	}
+
+	s->lighting = lighting;
+
+	screenTexEnvMode (s, GL_REPLACE);
+    }
 }

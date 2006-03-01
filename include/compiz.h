@@ -823,36 +823,37 @@ disableTexture (CompTexture *texture);
 /* screen.c */
 
 #define COMP_SCREEN_OPTION_DETECT_REFRESH_RATE 0
-#define COMP_SCREEN_OPTION_REFRESH_RATE	       1
-#define COMP_SCREEN_OPTION_SIZE		       2
-#define COMP_SCREEN_OPTION_CLOSE_WINDOW	       3
-#define COMP_SCREEN_OPTION_MAIN_MENU	       4
-#define COMP_SCREEN_OPTION_RUN_DIALOG	       5
-#define COMP_SCREEN_OPTION_COMMAND0	       6
-#define COMP_SCREEN_OPTION_RUN_COMMAND0	       7
-#define COMP_SCREEN_OPTION_COMMAND1	       8
-#define COMP_SCREEN_OPTION_RUN_COMMAND1	       9
-#define COMP_SCREEN_OPTION_COMMAND2	       10
-#define COMP_SCREEN_OPTION_RUN_COMMAND2	       11
-#define COMP_SCREEN_OPTION_COMMAND3	       12
-#define COMP_SCREEN_OPTION_RUN_COMMAND3	       13
-#define COMP_SCREEN_OPTION_COMMAND4	       14
-#define COMP_SCREEN_OPTION_RUN_COMMAND4	       15
-#define COMP_SCREEN_OPTION_COMMAND5	       16
-#define COMP_SCREEN_OPTION_RUN_COMMAND5	       17
-#define COMP_SCREEN_OPTION_COMMAND6	       18
-#define COMP_SCREEN_OPTION_RUN_COMMAND6	       19
-#define COMP_SCREEN_OPTION_COMMAND7	       20
-#define COMP_SCREEN_OPTION_RUN_COMMAND7	       21
-#define COMP_SCREEN_OPTION_COMMAND8	       22
-#define COMP_SCREEN_OPTION_RUN_COMMAND8	       23
-#define COMP_SCREEN_OPTION_COMMAND9	       24
-#define COMP_SCREEN_OPTION_RUN_COMMAND9	       25
-#define COMP_SCREEN_OPTION_COMMAND10	       26
-#define COMP_SCREEN_OPTION_RUN_COMMAND10       27
-#define COMP_SCREEN_OPTION_COMMAND11	       28
-#define COMP_SCREEN_OPTION_RUN_COMMAND11       29
-#define COMP_SCREEN_OPTION_NUM		       30
+#define COMP_SCREEN_OPTION_LIGHTING	       1
+#define COMP_SCREEN_OPTION_REFRESH_RATE	       2
+#define COMP_SCREEN_OPTION_SIZE		       3
+#define COMP_SCREEN_OPTION_CLOSE_WINDOW	       4
+#define COMP_SCREEN_OPTION_MAIN_MENU	       5
+#define COMP_SCREEN_OPTION_RUN_DIALOG	       6
+#define COMP_SCREEN_OPTION_COMMAND0	       7
+#define COMP_SCREEN_OPTION_RUN_COMMAND0	       8
+#define COMP_SCREEN_OPTION_COMMAND1	       9
+#define COMP_SCREEN_OPTION_RUN_COMMAND1	       10
+#define COMP_SCREEN_OPTION_COMMAND2	       11
+#define COMP_SCREEN_OPTION_RUN_COMMAND2	       12
+#define COMP_SCREEN_OPTION_COMMAND3	       13
+#define COMP_SCREEN_OPTION_RUN_COMMAND3	       14
+#define COMP_SCREEN_OPTION_COMMAND4	       15
+#define COMP_SCREEN_OPTION_RUN_COMMAND4	       16
+#define COMP_SCREEN_OPTION_COMMAND5	       17
+#define COMP_SCREEN_OPTION_RUN_COMMAND5	       18
+#define COMP_SCREEN_OPTION_COMMAND6	       19
+#define COMP_SCREEN_OPTION_RUN_COMMAND6	       20
+#define COMP_SCREEN_OPTION_COMMAND7	       21
+#define COMP_SCREEN_OPTION_RUN_COMMAND7	       22
+#define COMP_SCREEN_OPTION_COMMAND8	       23
+#define COMP_SCREEN_OPTION_RUN_COMMAND8	       24
+#define COMP_SCREEN_OPTION_COMMAND9	       25
+#define COMP_SCREEN_OPTION_RUN_COMMAND9	       26
+#define COMP_SCREEN_OPTION_COMMAND10	       27
+#define COMP_SCREEN_OPTION_RUN_COMMAND10       28
+#define COMP_SCREEN_OPTION_COMMAND11	       29
+#define COMP_SCREEN_OPTION_RUN_COMMAND11       30
+#define COMP_SCREEN_OPTION_NUM		       31
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -1048,6 +1049,8 @@ struct _CompScreen {
 
     GLint stencilRef;
 
+    Bool lighting;
+
     XRectangle workArea;
 
     unsigned int showingDesktopMask;
@@ -1227,6 +1230,14 @@ leaveShowDesktopMode (CompScreen *s);
 void
 sendWindowActivationRequest (CompScreen *s,
 			     Window	id);
+
+void
+screenTexEnvMode (CompScreen *s,
+		  GLenum     mode);
+
+void
+screenLighting (CompScreen *s,
+		Bool       lighting);
 
 /* window.c */
 

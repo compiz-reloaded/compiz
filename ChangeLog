@@ -1,3 +1,14 @@
+2006-03-01  David Reveman  <davidr@novell.com>
+
+	* plugins/cube.c:
+	* plugins/decoration.c:
+	* src/main.c:
+	* include/compiz.h:
+	* src/paint.c:
+	* src/screen.c: Ligthing support.
+
+	* compiz.pc.in: Fix.
+
 2006-02-23  David Reveman  <davidr@novell.com>
 
 	* src/window.c (unmapWindow): Not minimized and not part of showing

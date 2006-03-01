@@ -41,7 +41,7 @@ char *windowImage = "window.png";
 
 REGION   emptyRegion;
 REGION   infiniteRegion;
-GLushort defaultColor[4] = { 0, 0, 0, 0 };
+GLushort defaultColor[4] = { 0xffff, 0xffff, 0xffff, 0xffff };
 Window   currentRoot = 0;
 
 int  defaultRefreshRate = 50;
