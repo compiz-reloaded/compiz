@@ -350,7 +350,7 @@ fadeAddDisplayModal (CompDisplay *d,
 		if (fw->dModal)
 		    continue;
 
-		w->paint.brightness = 0x8080;
+		w->paint.brightness = 0xa8a8;
 		w->paint.saturation = 0;
 	    }
 

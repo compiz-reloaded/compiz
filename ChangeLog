@@ -1,8 +1,12 @@
 2006-03-01  David Reveman  <davidr@novell.com>
 
+	* plugins/fade.c (fadeAddDisplayModal): Higher brightness when showing
+	display modal dialogs.
+
 	* plugins/switcher.c (switchPreparePaintScreen): Continue adjusting
 	window selection even though we're not grabbing the screen.
 	(switchPaintWindow): Use last used paint attributes for thumbnails.
+	(switchPaintWindow): Use blending when drawing selection rectangle.
 
 	* plugins/fade.c (fadeHandleEvent): unmap. -> map.
 	(fadeDamageWindowRect): Only zero opacity if we're not already
