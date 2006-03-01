@@ -57,6 +57,9 @@
 #define RUN_DIALOG_KEY_DEFAULT       "F2"
 #define RUN_DIALOG_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
+#define SLOW_ANIMATIONS_KEY_DEFAULT       "F10"
+#define SLOW_ANIMATIONS_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
+
 #define LIGHTING_DEFAULT TRUE
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
@@ -193,6 +196,7 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_RUN_COMMAND9:
     case COMP_SCREEN_OPTION_RUN_COMMAND10:
     case COMP_SCREEN_OPTION_RUN_COMMAND11:
+    case COMP_SCREEN_OPTION_SLOW_ANIMATIONS:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -322,6 +326,17 @@ compScreenInitOptions (CompScreen *screen)
     COMMAND_OPTION (9, "command9", "run_command9");
     COMMAND_OPTION (10, "command10", "run_command10");
     COMMAND_OPTION (11, "command11", "run_command11");
+
+    o = &screen->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS];
+    o->name			  = "slow_animations";
+    o->shortDesc		  = "Slow Animations";
+    o->longDesc			  = "Toggle use of slow animations";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = SLOW_ANIMATIONS_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (screen->display->display,
+			  XStringToKeysym (SLOW_ANIMATIONS_KEY_DEFAULT));
 }
 
 static Bool
@@ -1169,6 +1184,20 @@ addScreen (CompDisplay *display,
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_MAIN_MENU].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_DIALOG].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND0].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND1].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND2].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND3].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND4].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND5].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND6].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND7].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND8].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND9].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND10].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND11].value.bind);
+    addScreenBinding (s,
+		      &s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS].value.bind);
 
     glXGetConfig (dpy, visinfo, GLX_DOUBLEBUFFER, &value);
     if (!value)
@@ -1405,7 +1434,8 @@ addScreen (CompDisplay *display,
 
     glNormal3f (0.0f, 0.0f, -1.0f);
 
-    s->lighting = FALSE;
+    s->lighting	      = FALSE;
+    s->slowAnimations = FALSE;
 
     s->next = display->screens;
     display->screens = s;
@@ -1779,6 +1809,9 @@ addPassiveKeyGrab (CompScreen	  *s,
     CompKeyGrab  *keyGrab;
     unsigned int modifiers, mask, ignore;
     int          i;
+
+    if (!key->keycode)
+	return FALSE;
 
     modifiers = key->modifiers & ~(CompPressMask | CompReleaseMask);
     if (modifiers == key->modifiers)

@@ -761,7 +761,10 @@ paintWindow (CompWindow		     *w,
     w->vCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);
     if (w->vCount)
+    {
+	w->lastPaint = *attrib;
 	drawWindowTexture (w, &w->texture, attrib, mask);
+    }
 
     return TRUE;
 }

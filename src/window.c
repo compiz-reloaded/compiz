@@ -1352,6 +1352,8 @@ addWindow (CompScreen *screen,
     w->paint.xScale	= 1.0f;
     w->paint.yScale	= 1.0f;
 
+    w->lastPaint = w->paint;
+
     w->alive = TRUE;
 
     w->scaled = FALSE;
@@ -1661,7 +1663,14 @@ mapWindow (CompWindow *w)
 void
 unmapWindow (CompWindow *w)
 {
-    w->mapNum = 0;
+    if (w->mapNum)
+    {
+	/* if window is not being minimized it should be re-placed at map */
+	if (!w->minimized && !(w->type & w->screen->showingDesktopMask))
+	    w->placed = FALSE;
+
+	w->mapNum = 0;
+    }
 
     if (w->frame)
 	XUnmapWindow (w->screen->display->display, w->frame);
@@ -1679,10 +1688,6 @@ unmapWindow (CompWindow *w)
     addWindowDamage (w);
 
     w->attrib.map_state = IsUnmapped;
-
-    /* if window is not being minimized it should be re-placed at map */
-    if (!w->minimized && !(w->type & w->screen->showingDesktopMask))
-	w->placed = FALSE;
 
     setWmState (w->screen->display, IconicState, w->id);
 

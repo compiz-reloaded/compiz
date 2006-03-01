@@ -857,7 +857,7 @@ switchPreparePaintScreen (CompScreen *s,
 {
     SWITCH_SCREEN (s);
 
-    if (ss->grabIndex && ss->moreAdjust)
+    if (ss->moreAdjust)
     {
 	int   steps, m;
 	float amount, chunk;
@@ -878,6 +878,8 @@ switchPreparePaintScreen (CompScreen *s,
 	    }
 
 	    m = ss->velocity * chunk;
+	    if (!m)
+		m = (ss->move > 0) ? 1 : -1;
 
 	    ss->move -= m;
 	    ss->pos  += m;
@@ -1019,75 +1021,74 @@ switchPaintWindow (CompWindow		   *w,
 
     SWITCH_SCREEN (s);
 
-    if (ss->grabIndex && w->id != ss->selectedWindow)
+    if (w->id == ss->popupWindow)
     {
-	if (w->id == ss->popupWindow)
+	GLenum filter;
+	int    x, y, x1, x2, cx, i;
+
+	if (mask & PAINT_WINDOW_SOLID_MASK)
+	    return FALSE;
+
+	UNWRAP (ss, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, region, mask);
+	WRAP (ss, s, paintWindow, switchPaintWindow);
+
+	x1 = w->attrib.x + SPACE;
+	x2 = w->attrib.x + w->width - SPACE;
+
+	x = x1 + ss->pos;
+	y = w->attrib.y + SPACE;
+
+	filter = s->display->textureFilter;
+
+	if (ss->opt[SWITCH_SCREEN_OPTION_MIPMAP].value.b)
+	    s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
+
+	for (i = 0; i < ss->nWindows; i++)
 	{
-	    GLenum filter;
-	    int	   x, y, x1, x2, cx, i;
-
-	    if (mask & PAINT_WINDOW_SOLID_MASK)
-		return FALSE;
-
-	    UNWRAP (ss, s, paintWindow);
-	    status = (*s->paintWindow) (w, attrib, region, mask);
-	    WRAP (ss, s, paintWindow, switchPaintWindow);
-
-	    x1 = w->attrib.x + SPACE;
-	    x2 = w->attrib.x + w->width - SPACE;
-
-	    x = x1 + ss->pos;
-	    y = w->attrib.y + SPACE;
-
-	    filter = s->display->textureFilter;
-
-	    if (ss->opt[SWITCH_SCREEN_OPTION_MIPMAP].value.b)
-		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
-
-	    for (i = 0; i < ss->nWindows; i++)
-	    {
-		if (x + WIDTH > x1)
-		    switchPaintThumb (ss->windows[i], attrib, mask,
-				      x, y, x1, x2);
-
-		x += WIDTH;
-	    }
-
-	    for (i = 0; i < ss->nWindows; i++)
-	    {
-		if (x > x2)
-		    break;
-
-		switchPaintThumb (ss->windows[i], attrib, mask,
+	    if (x + WIDTH > x1)
+		switchPaintThumb (ss->windows[i], &w->lastPaint, mask,
 				  x, y, x1, x2);
 
-		x += WIDTH;
-	    }
-
-	    s->display->textureFilter = filter;
-
-	    cx = w->attrib.x + (w->width >> 1);
-
-	    glColor4us (0, 0, 0, attrib->opacity);
-	    glPushMatrix ();
-	    glTranslatef (cx, y, 0.0f);
-	    glVertexPointer (2, GL_FLOAT, 0, _boxVertices);
-	    glDrawArrays (GL_QUADS, 0, 16);
-	    glPopMatrix ();
+	    x += WIDTH;
 	}
-	else
+
+	for (i = 0; i < ss->nWindows; i++)
 	{
-	    WindowPaintAttrib sAttrib = *attrib;
+	    if (x > x2)
+		break;
 
-	    sAttrib.brightness = (2 * sAttrib.brightness) / 3;
+	    switchPaintThumb (ss->windows[i], &w->lastPaint, mask,
+			      x, y, x1, x2);
 
-	    if (ss->wMask & w->type)
-		sAttrib.opacity >>= 1;
-
-	    UNWRAP (ss, s, paintWindow);
-	    status = (*s->paintWindow) (w, &sAttrib, region, mask);
-	    WRAP (ss, s, paintWindow, switchPaintWindow);
+	    x += WIDTH;
 	}
+
+	s->display->textureFilter = filter;
+
+	cx = w->attrib.x + (w->width >> 1);
+
+	glEnable (GL_BLEND);
+	glColor4us (0, 0, 0, w->lastPaint.opacity);
+	glPushMatrix ();
+	glTranslatef (cx, y, 0.0f);
+	glVertexPointer (2, GL_FLOAT, 0, _boxVertices);
+	glDrawArrays (GL_QUADS, 0, 16);
+	glDisable (GL_BLEND);
+	glPopMatrix ();
+    }
+    else if (ss->grabIndex && w->id != ss->selectedWindow)
+    {
+	WindowPaintAttrib sAttrib = *attrib;
+
+	sAttrib.brightness = (2 * sAttrib.brightness) / 3;
+
+	if (ss->wMask & w->type)
+	    sAttrib.opacity >>= 1;
+
+	UNWRAP (ss, s, paintWindow);
+	status = (*s->paintWindow) (w, &sAttrib, region, mask);
+	WRAP (ss, s, paintWindow, switchPaintWindow);
     }
     else
     {

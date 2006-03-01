@@ -862,7 +862,14 @@ eventLoop (void)
 
 		s->stencilRef = 0;
 
-		(*s->preparePaintScreen) (s, idle ? s->redrawTime : timeDiff);
+		if (s->slowAnimations)
+		{
+		    (*s->preparePaintScreen) (s, idle ? 2 :
+					      (timeDiff << 1) / s->redrawTime);
+		}
+		else
+		    (*s->preparePaintScreen) (s, idle ? s->redrawTime :
+					      timeDiff);
 
 		if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
 		{

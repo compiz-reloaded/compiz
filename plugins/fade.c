@@ -449,7 +449,7 @@ fadeHandleEvent (CompDisplay *d,
 	}
 	break;
     case MapNotify:
-	w = findWindowAtDisplay (d, event->xunmap.window);
+	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
 	    FADE_WINDOW (w);
@@ -506,10 +506,8 @@ fadeDamageWindowRect (CompWindow *w,
     {
 	FADE_WINDOW (w);
 
-	if (fs->wMask & w->type)
+	if ((fs->wMask & w->type) && fw->opacity == w->paint.opacity)
 	    fw->opacity = 0;
-	else
-	    fw->opacity = w->paint.opacity;
     }
 
     UNWRAP (fs, w->screen, damageWindowRect);

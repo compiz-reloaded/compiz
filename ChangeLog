@@ -1,5 +1,21 @@
 2006-03-01  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c (switchPreparePaintScreen): Continue adjusting
+	window selection even though we're not grabbing the screen.
+	(switchPaintWindow): Use last used paint attributes for thumbnails.
+
+	* plugins/fade.c (fadeHandleEvent): unmap. -> map.
+	(fadeDamageWindowRect): Only zero opacity if we're not already
+	fading the window.
+
+	* src/window.c (unmapWindow): 'placed' variable should be reset on
+	first call to unmapWindow.
+
+	* src/screen.c:
+	* src/event.c (handleEvent):
+	* src/display.c (eventLoop):
+	* include/compiz.h: Add slow animation option.
+
 	* src/window.c (recalcNormalHints): Constrain window dimensions to
 	max texture size.
 

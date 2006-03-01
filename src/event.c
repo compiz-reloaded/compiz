@@ -338,22 +338,25 @@ handleEvent (CompDisplay *display,
 	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
 		panelAction (s, s->display->panelActionRunDialogAtom);
 
-#define EV_COMMAND(num)							   \
+#define EV_BUTTON_COMMAND(num)						   \
     if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num], event)) \
 	runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND ## num].value.s)
 
-	    EV_COMMAND (0);
-	    EV_COMMAND (1);
-	    EV_COMMAND (2);
-	    EV_COMMAND (3);
-	    EV_COMMAND (4);
-	    EV_COMMAND (5);
-	    EV_COMMAND (6);
-	    EV_COMMAND (7);
-	    EV_COMMAND (8);
-	    EV_COMMAND (9);
-	    EV_COMMAND (10);
-	    EV_COMMAND (11);
+	    EV_BUTTON_COMMAND (0);
+	    EV_BUTTON_COMMAND (1);
+	    EV_BUTTON_COMMAND (2);
+	    EV_BUTTON_COMMAND (3);
+	    EV_BUTTON_COMMAND (4);
+	    EV_BUTTON_COMMAND (5);
+	    EV_BUTTON_COMMAND (6);
+	    EV_BUTTON_COMMAND (7);
+	    EV_BUTTON_COMMAND (8);
+	    EV_BUTTON_COMMAND (9);
+	    EV_BUTTON_COMMAND (10);
+	    EV_BUTTON_COMMAND (11);
+
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS], event))
+		s->slowAnimations = !s->slowAnimations;
 	}
 	break;
     case ButtonRelease:
@@ -371,11 +374,25 @@ handleEvent (CompDisplay *display,
 	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
 		panelAction (s, s->display->panelActionRunDialogAtom);
 
-	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND0], event))
-		runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND0].value.s);
+#define EV_KEY_COMMAND(num)						\
+    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num], event)) \
+	runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND ## num].value.s)
 
-	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND1], event))
-		runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND1].value.s);
+	    EV_KEY_COMMAND (0);
+	    EV_KEY_COMMAND (1);
+	    EV_KEY_COMMAND (2);
+	    EV_KEY_COMMAND (3);
+	    EV_KEY_COMMAND (4);
+	    EV_KEY_COMMAND (5);
+	    EV_KEY_COMMAND (6);
+	    EV_KEY_COMMAND (7);
+	    EV_KEY_COMMAND (8);
+	    EV_KEY_COMMAND (9);
+	    EV_KEY_COMMAND (10);
+	    EV_KEY_COMMAND (11);
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS], event))
+		s->slowAnimations = !s->slowAnimations;
 	}
 	break;
     case KeyRelease:

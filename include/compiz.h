@@ -853,7 +853,8 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_RUN_COMMAND10       28
 #define COMP_SCREEN_OPTION_COMMAND11	       29
 #define COMP_SCREEN_OPTION_RUN_COMMAND11       30
-#define COMP_SCREEN_OPTION_NUM		       31
+#define COMP_SCREEN_OPTION_SLOW_ANIMATIONS     31
+#define COMP_SCREEN_OPTION_NUM		       32
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -1051,6 +1052,7 @@ struct _CompScreen {
     GLint stencilRef;
 
     Bool lighting;
+    Bool slowAnimations;
 
     XRectangle workArea;
 
@@ -1324,6 +1326,7 @@ struct _CompWindow {
     GLushort saturation;
 
     WindowPaintAttrib paint;
+    WindowPaintAttrib lastPaint;
     Bool	      scaled;
 
     CompWindowExtents input;
