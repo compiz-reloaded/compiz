@@ -1,6 +1,6 @@
 AC_PREREQ(2.57)
 
-AC_INIT([compiz], [0.0.4], [davidr@novell.com])
+AC_INIT([compiz], [0.0.5], [davidr@novell.com])
 
 AC_CONFIG_AUX_DIR(config)
 
