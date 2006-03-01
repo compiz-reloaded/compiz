@@ -1,7 +1,19 @@
 2006-03-01  David Reveman  <davidr@novell.com>
 
+	* src/window.c (recalcNormalHints): Constrain window dimensions to
+	max texture size.
+
+	* src/screen.c (addScreen): Get max texture size.
+
+	* gnome/window-decorator/gnome-window-decorator.c: Nicer drop shadow
+	on windows without decorations.
+
+	* src/window.c (addWindow): Move initialization of sync alarm.
+
 	* plugins/cube.c:
 	* plugins/decoration.c:
+	(decorCreateDecoration): Fix minimum size check.
+
 	* src/main.c:
 	* include/compiz.h:
 	* src/paint.c:

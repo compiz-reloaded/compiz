@@ -455,7 +455,7 @@ decorCreateDecoration (CompScreen *screen,
     if (result != Success || !n || !data)
 	return NULL;
 
-    if (n < 9 + 14)
+    if (n < 5 + 9)
     {
 	XFree (data);
 	return NULL;

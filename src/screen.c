@@ -1287,16 +1287,30 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    s->textureRectangle = 0;
     glExtensions = (const char *) glGetString (GL_EXTENSIONS);
-    if (strstr (glExtensions, "GL_NV_texture_rectangle")  ||
-	strstr (glExtensions, "GL_EXT_texture_rectangle") ||
-	strstr (glExtensions, "GL_ARB_texture_rectangle"))
-	s->textureRectangle = 1;
 
     s->textureNonPowerOfTwo = 0;
     if (strstr (glExtensions, "GL_ARB_texture_non_power_of_two"))
 	s->textureNonPowerOfTwo = 1;
+
+    glGetIntegerv (GL_MAX_TEXTURE_SIZE, &s->maxTextureSize);
+
+    s->textureRectangle = 0;
+    if (strstr (glExtensions, "GL_NV_texture_rectangle")  ||
+	strstr (glExtensions, "GL_EXT_texture_rectangle") ||
+	strstr (glExtensions, "GL_ARB_texture_rectangle"))
+    {
+	s->textureRectangle = 1;
+
+	if (!s->textureNonPowerOfTwo)
+	{
+	    GLint maxTextureSize;
+
+	    glGetIntegerv (GL_MAX_RECTANGLE_TEXTURE_SIZE_NV, &maxTextureSize);
+	    if (maxTextureSize < s->maxTextureSize)
+		s->maxTextureSize = maxTextureSize;
+	}
+    }
 
     if (!(s->textureRectangle || s->textureNonPowerOfTwo))
     {

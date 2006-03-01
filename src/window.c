@@ -88,6 +88,11 @@ freeWindowPrivateIndex (CompScreen *screen,
 static void
 recalcNormalHints (CompWindow *window)
 {
+    int maxSize;
+
+    maxSize = window->screen->maxTextureSize;
+    maxSize -= window->attrib.border_width * 2;
+
     window->sizeHints.x      = window->attrib.x;
     window->sizeHints.y      = window->attrib.y;
     window->sizeHints.width  = window->attrib.width;
@@ -142,6 +147,24 @@ recalcNormalHints (CompWindow *window)
 
     if (window->sizeHints.max_height < 1)
 	window->sizeHints.max_height = 1;
+
+    if (window->sizeHints.max_width > maxSize)
+	window->sizeHints.max_width = maxSize;
+
+    if (window->sizeHints.max_height > maxSize)
+	window->sizeHints.max_height = maxSize;
+
+    if (window->sizeHints.min_width > maxSize)
+	window->sizeHints.min_width = maxSize;
+
+    if (window->sizeHints.min_height > maxSize)
+	window->sizeHints.min_height = maxSize;
+
+    if (window->sizeHints.base_width > maxSize)
+	window->sizeHints.base_width = maxSize;
+
+    if (window->sizeHints.base_height > maxSize)
+	window->sizeHints.base_height = maxSize;
 
     if (window->sizeHints.flags & PResizeInc)
     {
@@ -1335,6 +1358,10 @@ addWindow (CompScreen *screen,
 
     w->mwmDecor = MwmDecorAll;
 
+    w->syncAlarm      = None;
+    w->syncCounter    = 0;
+    w->syncWaitHandle = 0;
+
     if (screen->windowPrivateLen)
     {
 	w->privates = malloc (screen->windowPrivateLen * sizeof (CompPrivate));
@@ -1379,10 +1406,6 @@ addWindow (CompScreen *screen,
 
     w->serverX = w->attrib.x;
     w->serverY = w->attrib.y;
-
-    w->syncAlarm      = None;
-    w->syncCounter    = 0;
-    w->syncWaitHandle = 0;
 
     w->syncWait	       = FALSE;
     w->syncX	       = w->attrib.x;
@@ -2742,7 +2765,7 @@ constrainNewWindowSize (CompWindow *w,
 
     if (hints->flags & PMaxSize)
     {
-	max_width = hints->max_width ;
+	max_width = hints->max_width;
 	max_height = hints->max_height;
     }
 
@@ -2779,7 +2802,8 @@ constrainNewWindowSize (CompWindow *w,
 
 	if (min_aspect_x * height > width * min_aspect_y)
 	{
-	    delta = FLOOR64 (height - width * min_aspect_y / min_aspect_x, yinc);
+	    delta = FLOOR64 (height - width * min_aspect_y / min_aspect_x,
+			     yinc);
 	    if (height - delta >= min_height)
 		height -= delta;
 	    else
@@ -2793,7 +2817,8 @@ constrainNewWindowSize (CompWindow *w,
 
 	if (width * max_aspect_y > max_aspect_x * height)
 	{
-	    delta = FLOOR64 (width - height * max_aspect_x / max_aspect_y, xinc);
+	    delta = FLOOR64 (width - height * max_aspect_x / max_aspect_y,
+			     xinc);
 	    if (width - delta >= min_width)
 		width -= delta;
 	    else

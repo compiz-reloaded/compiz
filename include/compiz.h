@@ -996,6 +996,7 @@ struct _CompScreen {
     int		      textureEnvCombine;
     int		      textureEnvCrossbar;
     int		      textureBorderClamp;
+    GLint	      maxTextureSize;
     int		      mipmap;
     int		      maxTextureUnits;
     Cursor	      invisibleCursor;
