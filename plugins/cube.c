@@ -530,6 +530,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	glNormal3f (0.0f, 0.0f, -1.0f);
 
 	glPopMatrix ();
+
+	glColor4usv (defaultColor);
     }
 
     /* outside cube */

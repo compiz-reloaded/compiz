@@ -978,7 +978,7 @@ switchPaintThumb (CompWindow		  *w,
     matrix.y0 -= (w->attrib.y * w->matrix.yy);
 
     mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-    if (w->alpha)
+    if (w->alpha || sAttrib.opacity != OPAQUE)
 	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
     else if (sAttrib.opacity == OPAQUE)
 	mask &= ~PAINT_WINDOW_TRANSLUCENT_MASK;
@@ -1074,6 +1074,7 @@ switchPaintWindow (CompWindow		   *w,
 	glTranslatef (cx, y, 0.0f);
 	glVertexPointer (2, GL_FLOAT, 0, _boxVertices);
 	glDrawArrays (GL_QUADS, 0, 16);
+	glColor4usv (defaultColor);
 	glDisable (GL_BLEND);
 	glPopMatrix ();
     }
