@@ -1786,7 +1786,7 @@ removeScreenGrab (CompScreen *s,
 	{
 	    XChangeActivePointerGrab (s->display->display,
 				      POINTER_GRAB_MASK,
-				      s->grabs[s->maxGrab - 1].cursor,
+				      s->grabs[maxGrab - 1].cursor,
 				      CurrentTime);
 	}
 	else
