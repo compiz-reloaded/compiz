@@ -803,8 +803,13 @@ rotateHandleEvent (CompDisplay *d,
 		    event->xmotion.x_root > s->width  - 50 ||
 		    event->xmotion.y_root > s->height - 50)
 		{
+		    XEvent ev;
+
 		    rs->prevPointerX = s->width / 2;
 		    rs->prevPointerY = s->height / 2;
+
+		    XSync (d->display, FALSE);
+		    while (XCheckTypedEvent (d->display, MotionNotify, &ev));
 
 		    XWarpPointer (d->display, None, s->root, 0, 0, 0, 0,
 				  rs->prevPointerX, rs->prevPointerY);
