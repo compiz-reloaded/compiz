@@ -616,6 +616,7 @@ rotateInitiate (CompScreen *s,
     rs->prevPointerY = y;
 
     rs->moving = FALSE;
+    rs->moveTo = 0.0f;
 
     /* some other plugin have already grabbed the screen */
     if (s->maxGrab - rs->grabIndex)
@@ -732,7 +733,8 @@ rotateHandleEvent (CompDisplay *d,
 		rotateInitiate (s, event->xkey.x_root, event->xkey.y_root);
 
 	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW], event))
-		rotateWithWindow (s, event->xkey.x_root, event->xkey.y_root, -1);
+		rotateWithWindow (s, event->xkey.x_root, event->xkey.y_root,
+				  -1);
 	    else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
 		rotate (s, event->xkey.x_root, event->xkey.y_root, -1);
 
@@ -811,7 +813,8 @@ rotateHandleEvent (CompDisplay *d,
 		if (rs->pointerInvertY)
 		    pointerDy = -pointerDy;
 
-		rs->xVelocity += pointerDx * rs->pointerSensitivity * rs->invert;
+		rs->xVelocity += pointerDx * rs->pointerSensitivity *
+		    rs->invert;
 		rs->yVelocity += pointerDy * rs->pointerSensitivity;
 
 		damageScreen (s);
@@ -828,7 +831,13 @@ rotateHandleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
+		ROTATE_SCREEN (w->screen);
+
 		s = w->screen;
+
+		/* reset movement */
+		rs->moving = TRUE;
+		rs->moveTo = 0.0f;
 
 		if (w->attrib.x >= s->width || w->attrib.x + w->width <= 0)
 		{

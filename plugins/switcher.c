@@ -441,17 +441,6 @@ switchUpdateWindowList (CompScreen *s,
 }
 
 static void
-switchActivateWindow (CompWindow *w)
-{
-    if ((*w->screen->focusWindow) (w))
-    {
-	activateWindow (w);
-    }
-    else
-	sendWindowActivationRequest (w->screen, w->id);
-}
-
-static void
 switchToWindow (CompScreen *s,
 		Bool	   toNext)
 {
@@ -733,7 +722,7 @@ switchTerminate (CompScreen *s,
 
 	    w = findWindowAtScreen (s, ss->selectedWindow);
 	    if (w)
-		switchActivateWindow (w);
+		sendWindowActivationRequest (w->screen, w->id);
 	}
 
 	ss->selectedWindow = None;
