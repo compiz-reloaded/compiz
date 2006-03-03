@@ -1,3 +1,8 @@
+2006-03-03  David Reveman  <davidr@novell.com>
+
+	* src/event.c (handleEvent): Avoid panel actions when screen is
+	grabbed.
+
 2006-03-03  Radek Doulik  <rodo@novell.com>
 
 	* src/main.c (main): init and close session when sm is not

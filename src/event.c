@@ -332,11 +332,15 @@ handleEvent (CompDisplay *display,
 	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW], event))
 		closeActiveWindow (s);
 
-	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_MAIN_MENU], event))
-		panelAction (s, s->display->panelActionMainMenuAtom);
+	    /* avoid panel actions when screen is grabbed */
+	    if (!display->screens->maxGrab)
+	    {
+		if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_MAIN_MENU], event))
+		    panelAction (s, s->display->panelActionMainMenuAtom);
 
-	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
-		panelAction (s, s->display->panelActionRunDialogAtom);
+		if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
+		    panelAction (s, s->display->panelActionRunDialogAtom);
+	    }
 
 #define EV_BUTTON_COMMAND(num)						   \
     if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num], event)) \
@@ -368,11 +372,15 @@ handleEvent (CompDisplay *display,
 	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW], event))
 		closeActiveWindow (s);
 
-	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_MAIN_MENU], event))
-		panelAction (s, s->display->panelActionMainMenuAtom);
+	    /* avoid panel actions when screen is grabbed */
+	    if (!display->screens->maxGrab)
+	    {
+		if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_MAIN_MENU], event))
+		    panelAction (s, s->display->panelActionMainMenuAtom);
 
-	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
-		panelAction (s, s->display->panelActionRunDialogAtom);
+		if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
+		    panelAction (s, s->display->panelActionRunDialogAtom);
+	    }
 
 #define EV_KEY_COMMAND(num)						\
     if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num], event)) \
