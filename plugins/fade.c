@@ -69,6 +69,7 @@ typedef struct _FadeScreen {
     PaintWindowProc	   paintWindow;
     DamageWindowRectProc   damageWindowRect;
     FocusWindowProc	   focusWindow;
+    WindowResizeNotifyProc windowResizeNotify;
 
     int wMask;
 } FadeScreen;
@@ -199,6 +200,24 @@ fadePreparePaintScreen (CompScreen *s,
     WRAP (fs, s, preparePaintScreen, fadePreparePaintScreen);
 }
 
+static void
+fadeWindowStop (CompWindow *w)
+{
+    FADE_WINDOW (w);
+
+    while (fw->unmapCnt)
+    {
+	unmapWindow (w);
+	fw->unmapCnt--;
+    }
+
+    while (fw->destroyCnt)
+    {
+	destroyWindow (w);
+	fw->destroyCnt--;
+    }
+}
+
 static Bool
 fadePaintWindow (CompWindow		 *w,
 		 const WindowPaintAttrib *attrib,
@@ -296,17 +315,7 @@ fadePaintWindow (CompWindow		 *w,
 	{
 	    fw->opacity = 0;
 
-	    while (fw->unmapCnt)
-	    {
-		unmapWindow (w);
-		fw->unmapCnt--;
-	    }
-
-	    while (fw->destroyCnt)
-	    {
-		destroyWindow (w);
-		fw->destroyCnt--;
-	    }
+	    fadeWindowStop (w);
 
 	    return (mask & PAINT_WINDOW_SOLID_MASK) ? FALSE : TRUE;
 	}
@@ -418,6 +427,9 @@ fadeHandleEvent (CompDisplay *d,
 
 		w->paint.opacity = 0;
 
+		if (fw->opacity == 0xffff)
+		    fw->opacity = 0xfffe;
+
 		fw->destroyCnt++;
 		w->destroyRefCnt++;
 
@@ -439,6 +451,9 @@ fadeHandleEvent (CompDisplay *d,
 
 		w->paint.opacity = 0;
 
+		if (fw->opacity == 0xffff)
+		    fw->opacity = 0xfffe;
+
 		fw->unmapCnt++;
 		w->unmapRefCnt++;
 
@@ -452,18 +467,12 @@ fadeHandleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
-	    FADE_WINDOW (w);
-
 	    if (!(w->type & CompWindowTypeDesktopMask))
 		w->paint.opacity = getWindowProp32 (d, w->id,
 						    d->winOpacityAtom,
 						    OPAQUE);
 
-	    while (fw->unmapCnt)
-	    {
-		unmapWindow (w);
-		fw->unmapCnt--;
-	    }
+	    fadeWindowStop (w);
 
 	    if (w->state & CompWindowStateDisplayModalMask)
 		fadeAddDisplayModal (d, w);
@@ -535,6 +544,19 @@ fadeFocusWindow (CompWindow *w)
     return status;
 }
 
+static void
+fadeWindowResizeNotify (CompWindow *w)
+{
+    FADE_SCREEN (w->screen);
+
+    if (!w->mapNum)
+	fadeWindowStop (w);
+
+    UNWRAP (fs, w->screen, windowResizeNotify);
+    (*w->screen->windowResizeNotify) (w);
+    WRAP (fs, w->screen, windowResizeNotify, fadeWindowResizeNotify);
+}
+
 static Bool
 fadeInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -602,6 +624,7 @@ fadeInitScreen (CompPlugin *p,
     WRAP (fs, s, paintWindow, fadePaintWindow);
     WRAP (fs, s, damageWindowRect, fadeDamageWindowRect);
     WRAP (fs, s, focusWindow, fadeFocusWindow);
+    WRAP (fs, s, windowResizeNotify, fadeWindowResizeNotify);
 
     s->privates[fd->screenPrivateIndex].ptr = fs;
 
@@ -620,6 +643,7 @@ fadeFiniScreen (CompPlugin *p,
     UNWRAP (fs, s, paintWindow);
     UNWRAP (fs, s, damageWindowRect);
     UNWRAP (fs, s, focusWindow);
+    UNWRAP (fs, s, windowResizeNotify);
 
     free (fs);
 }
@@ -663,12 +687,7 @@ fadeFiniWindow (CompPlugin *p,
     FADE_WINDOW (w);
 
     fadeRemoveDisplayModal (w->screen->display, w);
-
-    while (fw->unmapCnt--)
-	unmapWindow (w);
-
-    while (fw->destroyCnt--)
-	destroyWindow (w);
+    fadeWindowStop (w);
 
     free (fw);
 }

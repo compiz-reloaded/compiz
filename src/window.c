@@ -1765,7 +1765,7 @@ resizeWindow (CompWindow *w,
 	pw = width  + borderWidth * 2;
 	ph = height + borderWidth * 2;
 
-	if (!w->invisible)
+	if (w->mapNum)
 	{
 	    pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
 						 w->id);
@@ -1781,7 +1781,7 @@ resizeWindow (CompWindow *w,
 				   &i, &i, &actualWidth, &actualHeight,
 				   &ui, &ui);
 
-	    if (actualWidth != pw || actualHeight != ph)
+	    if (!result || actualWidth != pw || actualHeight != ph)
 	    {
 		XFreePixmap (w->screen->display->display, pixmap);
 

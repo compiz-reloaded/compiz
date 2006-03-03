@@ -1,5 +1,13 @@
 2006-03-03  David Reveman  <davidr@novell.com>
 
+	* plugins/fade.c (fadeHandleEvent): Make sure opacity isn't opaque
+	when fading out.
+	Stop fading if window is resized.
+
+	* src/window.c (resizeWindow): Only verify pixmap size if window is
+	mapped.
+	(resizeWindow): Check XGetGeometry result.
+
 	* plugins/switcher.c: Make sure switcher is correctly updated
 	even though the previously selected window isn't selectable by
 	switcher.
