@@ -1,5 +1,9 @@
 2006-03-03  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c: Make sure switcher is correctly updated
+	even though the previously selected window isn't selectable by
+	switcher.
+
 	* src/event.c (handleEvent): Avoid panel actions when screen is
 	grabbed.
 

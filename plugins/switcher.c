@@ -432,6 +432,8 @@ switchUpdateWindowList (CompScreen *s,
     ss->pos  = ((count >> 1) - ss->nWindows) * WIDTH;
     ss->move = 0;
 
+    ss->selectedWindow = ss->windows[0]->id;
+
     if (ss->popupWindow)
 	XMoveResizeWindow (s->display->display, ss->popupWindow,
 			   s->width  / 2 - WINDOW_WIDTH (count) / 2,
@@ -523,12 +525,15 @@ switchToWindow (CompScreen *s,
 
 	addWindowDamage (w);
 
-	if (toNext)
-	    ss->move -= WIDTH;
-	else
-	    ss->move += WIDTH;
+	if (old != w->id)
+	{
+	    if (toNext)
+		ss->move -= WIDTH;
+	    else
+		ss->move += WIDTH;
 
-	ss->moreAdjust = 1;
+	    ss->moreAdjust = 1;
+	}
 
 	if (ss->popupWindow)
 	{
@@ -689,8 +694,7 @@ switchInitiate (CompScreen *s)
 
 	if (ss->grabIndex)
 	{
-	    ss->lastActiveNum  = s->activeNum;
-	    ss->selectedWindow = s->display->activeWindow;
+	    ss->lastActiveNum = s->activeNum;
 
 	    switchUpdateWindowList (s, count);
 
@@ -751,8 +755,7 @@ switchWindowRemove (CompDisplay *d,
 	    {
 		if (ss->windows[i] == w)
 		{
-		    ss->lastActiveNum  = w->screen->activeNum;
-		    ss->selectedWindow = d->activeWindow;
+		    ss->lastActiveNum = w->screen->activeNum;
 
 		    switchUpdateWindowList (w->screen,
 					    switchCountWindows (w->screen));
@@ -1105,8 +1108,7 @@ switchDamageWindowRect (CompWindow *w,
 	{
 	    if (isSwitchWin (w))
 	    {
-		ss->lastActiveNum  = w->screen->activeNum;
-		ss->selectedWindow = w->screen->display->activeWindow;
+		ss->lastActiveNum = w->screen->activeNum;
 
 		switchUpdateWindowList (w->screen,
 					switchCountWindows (w->screen));
