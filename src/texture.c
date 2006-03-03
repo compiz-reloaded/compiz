@@ -131,7 +131,7 @@ imageToTexture (CompScreen   *screen,
 Bool
 readImageToTexture (CompScreen   *screen,
 		    CompTexture  *texture,
-		    char	 *imageFileName,
+		    const char	 *imageFileName,
 		    unsigned int *returnWidth,
 		    unsigned int *returnHeight)
 {
@@ -150,8 +150,10 @@ readImageToTexture (CompScreen   *screen,
 
     free (image);
 
-    *returnWidth = width;
-    *returnHeight = height;
+    if (returnWidth)
+	*returnWidth = width;
+    if (returnHeight)
+	*returnHeight = height;
 
     return status;
 }
@@ -177,8 +179,10 @@ readImageBufferToTexture (CompScreen	      *screen,
 
     free (image);
 
-    *returnWidth = width;
-    *returnHeight = height;
+    if (returnWidth)
+	*returnWidth = width;
+    if (returnHeight)
+	*returnHeight = height;
 
     return status;
 }

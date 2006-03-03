@@ -778,7 +778,7 @@ finiTexture (CompScreen  *screen,
 Bool
 readImageToTexture (CompScreen   *screen,
 		    CompTexture  *texture,
-		    char	 *imageFileName,
+		    const char	 *imageFileName,
 		    unsigned int *width,
 		    unsigned int *height);
 

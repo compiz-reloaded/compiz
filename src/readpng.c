@@ -263,4 +263,3 @@ readPngBuffer (const unsigned char *buffer,
 
     return status;
 }
-

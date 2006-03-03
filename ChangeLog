@@ -1,5 +1,11 @@
 2006-03-03  David Reveman  <davidr@novell.com>
 
+	* src/texture.c (readImageBufferToTexture):
+	(readImageToTexture): Check that returnWidth and returnHeight are
+	not NULL.
+
+	* plugins/cube.c: Skydome support. Thanks to MacSlow.
+
 	* plugins/fade.c (fadeHandleEvent): Make sure opacity isn't opaque
 	when fading out.
 	Stop fading if window is resized.
