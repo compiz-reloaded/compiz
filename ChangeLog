@@ -1,3 +1,11 @@
+2006-03-03  Radek Doulik  <rodo@novell.com>
+
+	* src/main.c (main): init and close session when sm is not
+	disabled. Enable sm by default.
+
+	* src/session.c: added minimal session support so that compiz at
+	least register with session manager to avoid registering timeouts
+
 2006-03-03  David Reveman  <davidr@novell.com>
 
 	* src/screen.c (removeScreenGrab): Use correct cursor when changing

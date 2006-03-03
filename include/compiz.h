@@ -1650,4 +1650,13 @@ pushPlugin (CompPlugin *p);
 CompPlugin *
 popPlugin (void);
 
+
+/* session.c */
+
+void
+initSession (char *smPrevClientId);
+
+void
+closeSession (void);
+
 #endif

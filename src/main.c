@@ -112,7 +112,7 @@ main (int argc, char **argv)
     char *displayName = 0;
     char *plugin[256];
     int  i, nPlugin = 0;
-    Bool disableSm = TRUE;
+    Bool disableSm = FALSE;
     char *clientId = NULL;
     char *saveFile = NULL;
 
@@ -202,10 +202,16 @@ main (int argc, char **argv)
 	}
     }
 
+    if (!disableSm)
+	initSession (clientId);
+
     if (!addDisplay (displayName, plugin, nPlugin))
 	return 1;
 
     eventLoop ();
+
+    if (!disableSm)
+	closeSession ();
 
     return 0;
 }
