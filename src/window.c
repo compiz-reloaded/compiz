@@ -2658,6 +2658,35 @@ updateWindowAttributes (CompWindow *w)
     }
 }
 
+static void
+ensureWindowVisibility (CompWindow *w)
+{
+    int x1, y1, x2, y2;
+    int dx = 0;
+    int dy = 0;
+
+    x1 = w->screen->workArea.x - w->screen->width * w->screen->x;
+    y1 = w->screen->workArea.y;
+    x2 = x1 + w->screen->workArea.width + w->screen->size * w->screen->width;
+    y2 = y1 + w->screen->workArea.height;
+
+    if (w->attrib.x - w->input.left >= x2)
+	dx = (x2 - 25) - w->attrib.x;
+    else if (w->attrib.x + w->width + w->input.right <= x1)
+	dx = (x1 + 25) - (w->attrib.x + w->width);
+
+    if (w->attrib.y - w->input.top >= y2)
+	dy = (y2 - 25) - w->attrib.y;
+    else if (w->attrib.y + w->height + w->input.bottom <= y1)
+	dy = (y1 + 25) - (w->attrib.y + w->height);
+
+    if (dx || dy)
+    {
+	moveWindow (w, dx, dy, TRUE);
+	syncWindowPosition (w);
+    }
+}
+
 void
 activateWindow (CompWindow *w)
 {
@@ -2675,6 +2704,7 @@ activateWindow (CompWindow *w)
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
+    ensureWindowVisibility (w);
     updateWindowAttributes (w);
     moveInputFocusToWindow (w);
 }
@@ -2684,7 +2714,7 @@ closeWindow (CompWindow *w)
 {
     CompDisplay *display = w->screen->display;
 
-    if (w->actions & CompWindowActionCloseMask)
+    if (w->protocols & CompWindowProtocolDeleteMask)
     {
 	XEvent ev;
 

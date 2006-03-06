@@ -111,9 +111,7 @@ typedef struct _DecorDisplay {
     DecorTexture    *textures;
     Atom	    supportingDmCheckAtom;
     Atom	    winDecorAtom;
-    Atom	    winDecorBareAtom;
-    Atom	    winDecorNormalAtom;
-    Atom	    winDecorActiveAtom;
+    Atom	    decorAtom[DECOR_NUM];
 } DecorDisplay;
 
 typedef struct _DecorScreen {
@@ -182,132 +180,25 @@ decorPaintWindow (CompWindow		  *w,
 	    box.rects	 = &box.extents;
 	    box.numRects = 1;
 
-	    if (w->alpha && wd->decor == ds->decor[DECOR_BARE])
+	    w->vCount = 0;
+
+	    for (i = 0; i < wd->nQuad; i++)
 	    {
-		if (attrib->saturation == COLOR)
+		box.extents = wd->quad[i].box;
+
+		if (box.extents.x1 < box.extents.x2 &&
+		    box.extents.y1 < box.extents.y2)
 		{
-		    CompMatrix matrix[2];
-
-		    if (!w->texture.pixmap)
-			bindWindow (w);
-
-		    matrix[1] = w->texture.matrix;
-
-		    w->vCount = 0;
-
-		    for (i = 0; i < wd->nQuad; i++)
-		    {
-			box.extents = wd->quad[i].box;
-
-			if (box.extents.x1 < box.extents.x2 &&
-			    box.extents.y1 < box.extents.y2)
-			{
-			    matrix[0] = wd->quad[i].matrix;
-
-			    (*w->screen->addWindowGeometry) (w,
-							     matrix, 2,
-							     &box,
-							     region);
-			}
-		    }
-
-		    if (w->vCount)
-		    {
-			int filter;
-
-			glEnable (GL_BLEND);
-
-			glPushMatrix ();
-
-			if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-			{
-			    glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
-			    glScalef (attrib->xScale, attrib->yScale, 0.0f);
-			    glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
-
-			    filter = w->screen->filter[WINDOW_TRANS_FILTER];
-			}
-			else if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
-			{
-			    filter = w->screen->filter[SCREEN_TRANS_FILTER];
-			}
-			else
-			{
-			    filter = w->screen->filter[NOTHING_TRANS_FILTER];
-			}
-
-			enableTexture (w->screen, &wd->decor->texture->texture,
-				       filter);
-
-			if (attrib->opacity    != OPAQUE ||
-			    attrib->brightness != BRIGHT)
-			{
-			    GLushort color;
-
-			    color = (attrib->opacity *
-				     attrib->brightness) >> 16;
-
-			    screenTexEnvMode (w->screen, GL_MODULATE);
-			    glColor4us (color, color, color, attrib->opacity);
-			}
-
-			w->screen->activeTexture (GL_TEXTURE1_ARB);
-
-			enableTexture (w->screen, &w->texture, filter);
-
-			glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,
-				   GL_MODULATE);
-
-			w->screen->clientActiveTexture (GL_TEXTURE1_ARB);
-			glEnableClientState (GL_TEXTURE_COORD_ARRAY);
-			w->screen->clientActiveTexture (GL_TEXTURE0_ARB);
-
-			(*w->screen->drawWindowGeometry) (w);
-
-			disableTexture (&w->texture);
-			w->screen->activeTexture (GL_TEXTURE0_ARB);
-
-			w->screen->clientActiveTexture (GL_TEXTURE1_ARB);
-			glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-			w->screen->clientActiveTexture (GL_TEXTURE0_ARB);
-
-			disableTexture (&wd->decor->texture->texture);
-
-			glPopMatrix ();
-
-			if (attrib->opacity    != OPAQUE ||
-			    attrib->brightness != BRIGHT)
-			{
-			    glColor4usv (defaultColor);
-			    screenTexEnvMode (w->screen, GL_REPLACE);
-			}
-
-			glDisable (GL_BLEND);
-		    }
+		    (*w->screen->addWindowGeometry) (w,
+						     &wd->quad[i].matrix, 1,
+						     &box,
+						     region);
 		}
 	    }
-	    else
-	    {
-		w->vCount = 0;
 
-		for (i = 0; i < wd->nQuad; i++)
-		{
-		    box.extents = wd->quad[i].box;
-
-		    if (box.extents.x1 < box.extents.x2 &&
-			box.extents.y1 < box.extents.y2)
-		    {
-			(*w->screen->addWindowGeometry) (w,
-							 &wd->quad[i].matrix, 1,
-							 &box,
-							 region);
-		    }
-		}
-
-		if (w->vCount)
-		    drawWindowTexture (w, &wd->decor->texture->texture, attrib,
-				       mask | PAINT_WINDOW_TRANSLUCENT_MASK);
-	    }
+	    if (w->vCount)
+		drawWindowTexture (w, &wd->decor->texture->texture, attrib,
+				   mask | PAINT_WINDOW_TRANSLUCENT_MASK);
 	}
     }
 
@@ -617,8 +508,10 @@ setDecorationMatrices (CompWindow *w)
     {
 	wd->quad[i].matrix = wd->decor->texture->texture.matrix;
 
-	wd->quad[i].matrix.x0 += wd->decor->quad[i].m.x0 * wd->quad[i].matrix.xx;
-	wd->quad[i].matrix.y0 += wd->decor->quad[i].m.y0 * wd->quad[i].matrix.yy;
+	wd->quad[i].matrix.x0 += wd->decor->quad[i].m.x0 *
+	    wd->quad[i].matrix.xx;
+	wd->quad[i].matrix.y0 += wd->decor->quad[i].m.y0 *
+	    wd->quad[i].matrix.yy;
 
 	wd->quad[i].matrix.xx *= wd->decor->quad[i].m.xx;
 	wd->quad[i].matrix.yy *= wd->decor->quad[i].m.yy;
@@ -733,7 +626,7 @@ decorWindowUpdate (CompWindow *w,
     {
 	if (w->attrib.override_redirect)
 	{
-	    if (w->region->numRects == 1)
+	    if (w->region->numRects == 1 && !w->alpha)
 		decor = ds->decor[DECOR_BARE];
 	}
 	else
@@ -758,7 +651,7 @@ decorWindowUpdate (CompWindow *w,
 	    case CompWindowTypeMenuMask:
 	    case CompWindowTypeUnknownMask:
 	    case CompWindowTypeDockMask:
-		if (w->region->numRects == 1)
+		if (w->region->numRects == 1 && !w->alpha)
 		    decor = ds->decor[DECOR_BARE];
 		break;
 	    default:
@@ -861,22 +754,16 @@ decorCheckForDmOnScreen (CompScreen *s,
     if (dmWin != ds->dmWin)
     {
 	CompWindow *w;
+	int	   i;
 
 	if (dmWin)
 	{
-	    ds->decor[DECOR_BARE] =
-		decorCreateDecoration (s, s->root, dd->winDecorBareAtom);
-
-	    ds->decor[DECOR_NORMAL] =
-		decorCreateDecoration (s, s->root, dd->winDecorNormalAtom);
-
-	    ds->decor[DECOR_ACTIVE] =
-		decorCreateDecoration (s, s->root, dd->winDecorActiveAtom);
+	    for (i = 0; i < DECOR_NUM; i++)
+		ds->decor[i] =
+		    decorCreateDecoration (s, s->root, dd->decorAtom[i]);
 	}
 	else
 	{
-	    int i;
-
 	    for (i = 0; i < DECOR_NUM; i++)
 	    {
 		if (ds->decor[i])
@@ -992,13 +879,40 @@ decorHandleEvent (CompDisplay *d,
 	    if (w)
 		decorWindowUpdate (w, TRUE);
 	}
-	else if (event->xproperty.atom == dd->supportingDmCheckAtom)
+	else
 	{
 	    CompScreen *s;
 
 	    s = findScreenAtDisplay (d, event->xproperty.window);
 	    if (s)
-		decorCheckForDmOnScreen (s, TRUE);
+	    {
+		if (event->xproperty.atom == dd->supportingDmCheckAtom)
+		{
+		    decorCheckForDmOnScreen (s, TRUE);
+		}
+		else
+		{
+		    int i;
+
+		    for (i = 0; i < DECOR_NUM; i++)
+		    {
+			if (event->xproperty.atom == dd->decorAtom[i])
+			{
+			    DECOR_SCREEN (s);
+
+			    if (ds->decor[i])
+				decorReleaseDecoration (s, ds->decor[i]);
+
+			    ds->decor[i] =
+				decorCreateDecoration (s, s->root,
+						       dd->decorAtom[i]);
+
+			    for (w = s->windows; w; w = w->next)
+				decorWindowUpdate (w, TRUE);
+			}
+		    }
+		}
+	    }
 	}
 	break;
     case MapRequest:
@@ -1100,11 +1014,11 @@ decorInitDisplay (CompPlugin  *p,
     dd->supportingDmCheckAtom =
 	XInternAtom (d->display, "_NET_SUPPORTING_DM_CHECK", 0);
     dd->winDecorAtom = XInternAtom (d->display, "_NET_WINDOW_DECOR", 0);
-    dd->winDecorBareAtom =
+    dd->decorAtom[DECOR_BARE] =
 	XInternAtom (d->display, "_NET_WINDOW_DECOR_BARE", 0);
-    dd->winDecorNormalAtom =
+    dd->decorAtom[DECOR_NORMAL] =
 	XInternAtom (d->display, "_NET_WINDOW_DECOR_NORMAL", 0);
-    dd->winDecorActiveAtom =
+    dd->decorAtom[DECOR_ACTIVE] =
 	XInternAtom (d->display, "_NET_WINDOW_DECOR_ACTIVE", 0);
 
     WRAP (dd, d, handleEvent, decorHandleEvent);

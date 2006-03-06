@@ -1,3 +1,15 @@
+2006-03-06  David Reveman  <davidr@novell.com>
+
+	* src/window.c: Ensure window visibility when activating window.
+
+2006-03-05  David Reveman  <davidr@novell.com>
+
+	* src/window.c (closeWindow): Use protocol mask to determine if
+	Client Message should be send or if we should kill the client.
+
+	* plugins/decoration.c: Don't draw shadow only decorations around
+	windows with alpha channel.
+
 2006-03-03  David Reveman  <davidr@novell.com>
 
 	* src/texture.c (readImageBufferToTexture):
