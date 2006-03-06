@@ -21,6 +21,7 @@
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  * Author: David Reveman <davidr@novell.com>
+ *         Mirco Müller <macslow@bangang.de> (Skydome support)
  */
 
 #ifdef HAVE_CONFIG_H
@@ -57,6 +58,8 @@
 
 #define CUBE_SKYDOME_DEFAULT FALSE
 
+#define CUBE_SKYDOME_ANIMATE_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _CubeDisplay {
@@ -64,14 +67,15 @@ typedef struct _CubeDisplay {
     HandleEventProc handleEvent;
 } CubeDisplay;
 
-#define CUBE_SCREEN_OPTION_COLOR       0
-#define CUBE_SCREEN_OPTION_IN          1
-#define CUBE_SCREEN_OPTION_SVGS        2
-#define CUBE_SCREEN_OPTION_NEXT        3
-#define CUBE_SCREEN_OPTION_PREV        4
-#define CUBE_SCREEN_OPTION_SKYDOME     5
-#define CUBE_SCREEN_OPTION_SKYDOME_IMG 6
-#define CUBE_SCREEN_OPTION_NUM         7
+#define CUBE_SCREEN_OPTION_COLOR        0
+#define CUBE_SCREEN_OPTION_IN           1
+#define CUBE_SCREEN_OPTION_SVGS         2
+#define CUBE_SCREEN_OPTION_NEXT         3
+#define CUBE_SCREEN_OPTION_PREV         4
+#define CUBE_SCREEN_OPTION_SKYDOME      5
+#define CUBE_SCREEN_OPTION_SKYDOME_IMG  6
+#define CUBE_SCREEN_OPTION_SKYDOME_ANIM 7
+#define CUBE_SCREEN_OPTION_NUM          8
 
 typedef struct _CubeScreen {
     PaintTransformedScreenProc paintTransformedScreen;
@@ -89,6 +93,9 @@ typedef struct _CubeScreen {
 
     GLfloat  *vertices;
     int      nvertices;
+
+    GLuint skyListId;
+    Bool   animateSkyDome;
 
     Pixmap	    pixmap;
     int		    pw, ph;
@@ -353,14 +360,12 @@ cubeUpdateSkyDomeTexture (CompScreen *screen)
     if (!cs->opt[CUBE_SCREEN_OPTION_SKYDOME].value.b)
 	return;
 
-    if (strlen (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG].value.s))
-    {
-	readImageToTexture (screen,
-			    &cs->sky,
-			    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG].value.s,
-			    NULL, NULL);
-    }
-    else
+    if (strlen (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG].value.s) == 0 ||
+	!readImageToTexture (screen,
+			     &cs->sky,
+			     cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG].value.s,
+			     NULL,
+			     NULL))
     {
 	GLfloat aaafTextureData[128][128][3];
 
@@ -422,6 +427,183 @@ cubeUpdateSkyDomeTexture (CompScreen *screen)
 }
 
 static Bool
+fillCircleTable (GLfloat   **ppSint,
+		 GLfloat   **ppCost,
+		 const int n)
+{
+    const GLfloat angle = 2 * M_PI / (GLfloat) ((n == 0) ? 1 : n);
+    const int	  size = abs (n);
+    int		  i;
+
+    *ppSint = (GLfloat *) calloc (sizeof (GLfloat), size + 1);
+    *ppCost = (GLfloat *) calloc (sizeof (GLfloat), size + 1);
+
+    if (!(*ppSint) || !(*ppCost))
+    {
+	free (*ppSint);
+	free (*ppCost);
+
+	return FALSE;
+    }
+
+    (*ppSint)[0] = 0.0;
+    (*ppCost)[0] = 1.0;
+
+    for (i = 1; i < size; i++)
+    {
+	(*ppSint)[i] = sin (angle * i);
+	(*ppCost)[i] = cos (angle * i);
+    }
+
+    (*ppSint)[size] = (*ppSint)[0];
+    (*ppCost)[size] = (*ppCost)[0];
+
+    return TRUE;
+}
+
+static void
+cubeUpdateSkyDomeList (CompScreen *s,
+		       GLfloat	  fRadius)
+{
+    GLint   iSlices = 128;
+    GLint   iStacks = 64;
+    GLfloat afTexCoordX[4];
+    GLfloat afTexCoordY[4];
+    GLfloat *sint1;
+    GLfloat *cost1;
+    GLfloat *sint2;
+    GLfloat *cost2;
+    GLfloat r;
+    GLfloat x;
+    GLfloat y;
+    GLfloat z;
+    int	    i;
+    int	    j;
+    int	    iStacksStart;
+    int	    iStacksEnd;
+    int	    iSlicesStart;
+    int	    iSlicesEnd;
+    GLfloat fStepX;
+    GLfloat fStepY;
+
+    CUBE_SCREEN (s);
+
+    if (cs->animateSkyDome)
+    {
+	iStacksStart = 11; /* min.   0 */
+	iStacksEnd = 53;   /* max.  64 */
+	iSlicesStart = 0;  /* min.   0 */
+	iSlicesEnd = 128;  /* max. 128 */
+    }
+    else
+    {
+	iStacksStart = 21; /* min.   0 */
+	iStacksEnd = 43;   /* max.  64 */
+	iSlicesStart = 21; /* min.   0 */
+	iSlicesEnd = 44;   /* max. 128 */
+    }
+
+    fStepX = 1.0 / (GLfloat) (iSlicesEnd - iSlicesStart);
+    fStepY = 1.0 / (GLfloat) (iStacksEnd - iStacksStart);
+
+    if (!fillCircleTable (&sint1, &cost1, -iSlices))
+	return;
+
+    if (!fillCircleTable (&sint2, &cost2, iStacks * 2))
+    {
+	free (sint1);
+	free (cost1);
+	return;
+    }
+
+    afTexCoordX[0] = 1.0f;
+    afTexCoordY[0] = fStepY;
+    afTexCoordX[1] = 1.0f - fStepX;
+    afTexCoordY[1] = fStepY;
+    afTexCoordX[2] = 1.0f - fStepX;
+    afTexCoordY[2] = 0.0f;
+    afTexCoordX[3] = 1.0f;
+    afTexCoordY[3] = 0.0f;
+
+    if (!cs->skyListId)
+	cs->skyListId = glGenLists (1);
+
+    glNewList (cs->skyListId, GL_COMPILE);
+
+    enableTexture (s, &cs->sky, COMP_TEXTURE_FILTER_GOOD);
+
+    glBegin (GL_QUADS);
+
+    for (i = iStacksStart; i < iStacksEnd; i++)
+    {
+	afTexCoordX[0] = 1.0f;
+	afTexCoordX[1] = 1.0f - fStepX;
+	afTexCoordX[2] = 1.0f - fStepX;
+	afTexCoordX[3] = 1.0f;
+
+	for (j = iSlicesStart; j < iSlicesEnd; j++)
+	{
+	    /* bottom-right */
+	    z = cost2[i];
+	    r = sint2[i];
+	    x = cost1[j];
+	    y = sint1[j];
+
+	    glTexCoord2f (afTexCoordX[3], afTexCoordY[3]);
+	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
+
+	    /* top-right */
+	    z = cost2[i + 1];
+	    r = sint2[i + 1];
+	    x = cost1[j];
+	    y = sint1[j];
+
+	    glTexCoord2f (afTexCoordX[0], afTexCoordY[0]);
+	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
+
+	    /* top-left */
+	    z = cost2[i + 1];
+	    r = sint2[i + 1];
+	    x = cost1[j + 1];
+	    y = sint1[j + 1];
+
+	    glTexCoord2f (afTexCoordX[1], afTexCoordY[1]);
+	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
+
+	    /* bottom-left */
+	    z = cost2[i];
+	    r = sint2[i];
+	    x = cost1[j + 1];
+	    y = sint1[j + 1];
+
+	    glTexCoord2f (afTexCoordX[2], afTexCoordY[2]);
+	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
+
+	    afTexCoordX[0] -= fStepX;
+	    afTexCoordX[1] -= fStepX;
+	    afTexCoordX[2] -= fStepX;
+	    afTexCoordX[3] -= fStepX;
+	}
+
+	afTexCoordY[0] += fStepY;
+	afTexCoordY[1] += fStepY;
+	afTexCoordY[2] += fStepY;
+	afTexCoordY[3] += fStepY;
+    }
+
+    glEnd ();
+
+    disableTexture (&cs->sky);
+
+    glEndList ();
+
+    free (sint1);
+    free (cost1);
+    free (sint2);
+    free (cost2);
+}
+
+static Bool
 cubeSetScreenOption (CompScreen      *screen,
 		     char	     *name,
 		     CompOptionValue *value)
@@ -475,6 +657,7 @@ cubeSetScreenOption (CompScreen      *screen,
 	if (compSetBoolOption (o, value))
 	{
 	    cubeUpdateSkyDomeTexture (screen);
+	    cubeUpdateSkyDomeList (screen, 1.0f);
 	    damageScreen (screen);
 	    return TRUE;
 	}
@@ -483,9 +666,21 @@ cubeSetScreenOption (CompScreen      *screen,
 	if (compSetStringOption (o, value))
 	{
 	    cubeUpdateSkyDomeTexture (screen);
+	    cubeUpdateSkyDomeList (screen, 1.0f);
 	    damageScreen (screen);
 	    return TRUE;
 	}
+	break;
+    case CUBE_SCREEN_OPTION_SKYDOME_ANIM:
+	if (compSetBoolOption (o, value))
+	{
+	    cs->animateSkyDome = o->value.b;
+	    cubeUpdateSkyDomeTexture (screen);
+	    cubeUpdateSkyDomeList (screen, 1.0f);
+	    damageScreen (screen);
+	    return TRUE;
+	}
+	break;
     default:
 	break;
     }
@@ -562,154 +757,13 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->value.s	      = strdup ("");
     o->rest.s.string  = 0;
     o->rest.s.nString = 0;
-}
 
-static Bool
-fillCircleTable (GLfloat   **ppSint,
-		 GLfloat   **ppCost,
-		 const int n)
-{
-    const GLfloat angle = 2 * M_PI / (GLfloat) ((n == 0) ? 1 : n);
-    const int	  size = abs (n);
-    int		  i;
-
-    *ppSint = (GLfloat *) calloc (sizeof (GLfloat), size + 1);
-    *ppCost = (GLfloat *) calloc (sizeof (GLfloat), size + 1);
-
-    if (!(*ppSint) || !(*ppCost))
-    {
-	free (*ppSint);
-	free (*ppCost);
-
-	return FALSE;
-    }
-
-    (*ppSint)[0] = 0.0;
-    (*ppCost)[0] = 1.0;
-
-    for (i = 1; i < size; i++)
-    {
-	(*ppSint)[i] = sin (angle * i);
-	(*ppCost)[i] = cos (angle * i);
-    }
-
-    (*ppSint)[size] = (*ppSint)[0];
-    (*ppCost)[size] = (*ppCost)[0];
-
-    return TRUE;
-}
-
-static void
-paintSkyDome (CompScreen *s,
-	      GLfloat	 fRadius)
-{
-    GLint   iSlices = 128;
-    GLint   iStacks = 64;
-    GLfloat afTexCoordX[4];
-    GLfloat afTexCoordY[4];
-    GLfloat fStepX = 1.0 / 22.0f;
-    GLfloat fStepY = 1.0 / 22.0f;
-    GLfloat *sint1;
-    GLfloat *cost1;
-    GLfloat *sint2;
-    GLfloat *cost2;
-    GLfloat r;
-    GLfloat x;
-    GLfloat y;
-    GLfloat z;
-    int	    i;
-    int	    j;
-
-    CUBE_SCREEN (s);
-
-    if (!fillCircleTable (&sint1, &cost1, -iSlices))
-	return;
-
-    if (!fillCircleTable (&sint2, &cost2, iStacks * 2))
-    {
-	free (sint1);
-	free (cost1);
-	return;
-    }
-
-    afTexCoordX[0] = 1.0f;
-    afTexCoordY[0] = fStepY;
-    afTexCoordX[1] = 1.0f - fStepX;
-    afTexCoordY[1] = fStepY;
-    afTexCoordX[2] = 1.0f - fStepX;
-    afTexCoordY[2] = 0.0f;
-    afTexCoordX[3] = 1.0f;
-    afTexCoordY[3] = 0.0f;
-
-    enableTexture (s, &cs->sky, COMP_TEXTURE_FILTER_GOOD);
-
-    glBegin (GL_QUADS);
-
-    for (i = 21; i < 43; i++) /* iStacks: 64 */
-    {
-	afTexCoordX[0] = 1.0f;
-	afTexCoordX[1] = 1.0f - fStepX;
-	afTexCoordX[2] = 1.0f - fStepX;
-	afTexCoordX[3] = 1.0f;
-
-	for (j = 21; j < 44; j++) /* iSlices: 128 */
-	{
-	    /* bottom-right */
-	    z = cost2[i];
-	    r = sint2[i];
-	    x = cost1[j];
-	    y = sint1[j];
-
-	    glTexCoord2f (afTexCoordX[3], afTexCoordY[3]);
-	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
-
-	    /* top-right */
-	    z = cost2[i + 1];
-	    r = sint2[i + 1];
-	    x = cost1[j];
-	    y = sint1[j];
-
-	    glTexCoord2f (afTexCoordX[0], afTexCoordY[0]);
-	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
-
-	    /* top-left */
-	    z = cost2[i + 1];
-	    r = sint2[i + 1];
-	    x = cost1[j + 1];
-	    y = sint1[j + 1];
-
-	    glTexCoord2f (afTexCoordX[1], afTexCoordY[1]);
-	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
-
-	    /* bottom-left */
-	    z = cost2[i];
-	    r = sint2[i];
-	    x = cost1[j + 1];
-	    y = sint1[j + 1];
-
-	    glTexCoord2f (afTexCoordX[2], afTexCoordY[2]);
-	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
-
-	    afTexCoordX[0] -= fStepX;
-	    afTexCoordX[1] -= fStepX;
-	    afTexCoordX[2] -= fStepX;
-	    afTexCoordX[3] -= fStepX;
-	}
-
-	afTexCoordY[0] += fStepY;
-	afTexCoordY[1] += fStepY;
-	afTexCoordY[2] += fStepY;
-	afTexCoordY[3] += fStepY;
-    }
-
-    glEnd ();
-
-    disableTexture (&cs->sky);
-
-    free (sint1);
-    free (cost1);
-    free (sint2);
-    free (cost2);
+    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM];
+    o->name	  = "skydome_animated";
+    o->shortDesc  = "Animate Skydome";
+    o->longDesc	  = "Animate skydome when rotating cube";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = CUBE_SKYDOME_ANIMATE_DEFAULT;
 }
 
 static void
@@ -730,8 +784,18 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	screenLighting (s, FALSE);
 
 	glPushMatrix ();
-	glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
-	paintSkyDome (s, 1.0f);
+
+	if (cs->animateSkyDome)
+	{
+	    glRotatef (sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
+	    glRotatef (sAttrib->vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
+	}
+	else
+	{
+	    glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
+	}
+
+	glCallList (cs->skyListId);
 	glPopMatrix ();
     }
     else
@@ -1032,6 +1096,9 @@ cubeInitScreen (CompPlugin *p,
     cs->nvertices = 0;
     cs->vertices  = NULL;
 
+    cs->skyListId      = 0;
+    cs->animateSkyDome = CUBE_SKYDOME_ANIMATE_DEFAULT;
+
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
     cs->paintTopBottom = FALSE;
@@ -1064,6 +1131,9 @@ cubeFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     CUBE_SCREEN (s);
+
+    if (cs->skyListId)
+	glDeleteLists (cs->skyListId, 1);
 
     UNWRAP (cs, s, paintTransformedScreen);
     UNWRAP (cs, s, paintBackground);
