@@ -654,6 +654,7 @@ static cairo_pattern_t *shadow_pattern;
 static Atom frame_window_atom;
 static Atom win_decor_atom;
 static Atom wm_move_resize_atom;
+static Atom restack_window_atom;
 static Atom select_window_atom;
 
 #define C(name) { 0, XC_ ## name }
@@ -2476,7 +2477,7 @@ add_frame_window (WnckWindow *win,
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-    attr.event_mask	   = ButtonPressMask | EnterWindowMask | LeaveWindowMask;
+    attr.event_mask = ButtonPressMask | EnterWindowMask | LeaveWindowMask;
     attr.override_redirect = TRUE;
 
     gdk_error_trap_push ();
@@ -3002,6 +3003,61 @@ move_resize_window (WnckWindow *win,
     XSync (xdisplay, FALSE);
 }
 
+static void
+lower_window (WnckWindow *win)
+{
+    Display    *xdisplay;
+    GdkDisplay *gdkdisplay;
+    GdkScreen  *screen;
+    Window     xroot;
+    XEvent     ev;
+    WnckWindow *sibling;
+    GList      *windows, *tmp;
+
+    gdkdisplay = gdk_display_get_default ();
+    xdisplay   = GDK_DISPLAY_XDISPLAY (gdkdisplay);
+    screen     = gdk_display_get_default_screen (gdkdisplay);
+    xroot      = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
+
+    if (action_menu_mapped)
+    {
+	gtk_object_destroy (GTK_OBJECT (action_menu));
+	action_menu_mapped = FALSE;
+	action_menu = NULL;
+	return;
+    }
+
+    windows = wnck_screen_get_windows_stacked (wnck_screen_get_default ());
+    if (!windows)
+	return;
+
+    sibling = WNCK_WINDOW (windows->data);
+    if (sibling == win)
+	return;
+
+    ev.xclient.type    = ClientMessage;
+    ev.xclient.display = xdisplay;
+
+    ev.xclient.serial	  = 0;
+    ev.xclient.send_event = TRUE;
+
+    ev.xclient.window	    = wnck_window_get_xid (win);
+    ev.xclient.message_type = restack_window_atom;
+    ev.xclient.format	    = 32;
+
+    ev.xclient.data.l[0] = 2;
+    ev.xclient.data.l[1] = wnck_window_get_xid (sibling);
+    ev.xclient.data.l[2] = Below;
+    ev.xclient.data.l[3] = 0;
+    ev.xclient.data.l[4] = 0;
+
+    XSendEvent (xdisplay, xroot, FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask,
+		&ev);
+
+    XSync (xdisplay, FALSE);
+}
+
 /* stolen from gtktooltip.c */
 
 #define DEFAULT_DELAY 500           /* Default delay in ms */
@@ -3352,6 +3408,10 @@ title_event (WnckWindow *win,
 
 	    move_resize_window (win, WM_MOVERESIZE_MOVE, xevent);
 	}
+    }
+    else if (xevent->xbutton.button == 2)
+    {
+	lower_window (win);
     }
     else if (xevent->xbutton.button == 3)
     {
@@ -3918,7 +3978,9 @@ main (int argc, char *argv[])
     frame_window_atom	= XInternAtom (xdisplay, "_NET_FRAME_WINDOW", FALSE);
     win_decor_atom	= XInternAtom (xdisplay, "_NET_WINDOW_DECOR", FALSE);
     wm_move_resize_atom = XInternAtom (xdisplay, "_NET_WM_MOVERESIZE", FALSE);
-    select_window_atom	= XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW", FALSE);
+    restack_window_atom = XInternAtom (xdisplay, "_NET_RESTACK_WINDOW", FALSE);
+    select_window_atom	= XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW",
+				       FALSE);
 
     for (i = 0; i < 3; i++)
     {

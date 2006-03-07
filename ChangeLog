@@ -1,4 +1,21 @@
+2006-03-07  David Reveman  <davidr@novell.com>
+
+	* src/event.c:
+	* src/display.c:
+	* src/window.c:
+	* src/screen.c:
+	* include/compiz.h: Better window stacking support.
+
+	* gnome/window-decorator/gnome-window-decorator.c: Lower window
+	when clicking button 2 on titlebar.
+
+	* src/window.c (ensureWindowVisibility): Only ensure that window is
+	visible if it isn't a override redirect window, dock window or
+	window with struts.
+
 2006-03-06  David Reveman  <davidr@novell.com>
+
+	* configure.ac: Bump version to 0.0.6.
 
 	* plugins/cube.c: Skydome update. (MacSlow)
 

@@ -1641,6 +1641,7 @@ mapWindow (CompWindow *w)
     w->mapNum = w->screen->mapNum++;
 
     updateWindowRegion (w);
+    updateWindowSize (w);
 
     if (w->frame)
 	XMapWindow (w->screen->display->display, w->frame);
@@ -2254,7 +2255,7 @@ stackLayerCheck (CompWindow *w,
 /* goes through the stack, top-down until we find a window we should
    stack above, normal windows can be stacked above fullscreen windows. */
 static CompWindow *
-findSibilingBelow (CompWindow *w)
+findSiblingBelow (CompWindow *w)
 {
     CompWindow   *below;
     Window	 clientLeader = w->clientLeader;
@@ -2315,6 +2316,135 @@ findSibilingBelow (CompWindow *w)
     return NULL;
 }
 
+/* goes through the stack, top-down and returns the lowest window we
+   can stack above. */
+static CompWindow *
+findLowestSiblingBelow (CompWindow *w)
+{
+    CompWindow   *below, *lowest = w->screen->reverseWindows;
+    Window	 clientLeader = w->clientLeader;
+    unsigned int type = w->type;
+
+    /* normal stacking fullscreen windows with below state */
+    if ((type & CompWindowTypeFullscreenMask) &&
+	(w->state & CompWindowStateBelowMask))
+	type = CompWindowTypeNormalMask;
+
+    if (w->transientFor || isGroupTransient (w, clientLeader))
+	clientLeader = None;
+
+    for (below = w->screen->reverseWindows; below; below = below->prev)
+    {
+	if (below == w)
+	    continue;
+
+	if (below->attrib.override_redirect)
+	    continue;
+
+	if (below->attrib.map_state != IsViewable || below->mapNum == 0)
+	    continue;
+
+	/* always above desktop windows */
+	if (below->type & CompWindowTypeDesktopMask)
+	    return below;
+
+	/* always above ancestor */
+	if (isAncestorTo (w, below))
+	    return below;
+
+	switch (type) {
+	case CompWindowTypeDesktopMask:
+	    /* desktop window layer */
+	    break;
+	case CompWindowTypeFullscreenMask:
+	case CompWindowTypeDockMask:
+	    /* fullscreen and dock layer */
+	    if (below->type & (CompWindowTypeFullscreenMask |
+			       CompWindowTypeDockMask))
+	    {
+		if (!stackLayerCheck (below, clientLeader, w))
+		    return lowest;
+	    }
+	    else
+	    {
+		return lowest;
+	    }
+	    break;
+	default:
+	    /* fullscreen and normal layer */
+	    if (!(below->type & CompWindowTypeDockMask))
+	    {
+		if (!stackLayerCheck (below, clientLeader, w))
+		    return lowest;
+	    }
+	    break;
+	}
+
+	lowest = below;
+    }
+
+    return lowest;
+}
+
+static Bool
+validSiblingBelow (CompWindow *w,
+		   CompWindow *sibling)
+{
+    Window	 clientLeader = w->clientLeader;
+    unsigned int type = w->type;
+
+    /* normal stacking fullscreen windows with below state */
+    if ((type & CompWindowTypeFullscreenMask) &&
+	(w->state & CompWindowStateBelowMask))
+	type = CompWindowTypeNormalMask;
+
+    if (w->transientFor || isGroupTransient (w, clientLeader))
+	clientLeader = None;
+
+    if (sibling == w)
+	return FALSE;
+
+    if (sibling->attrib.override_redirect)
+	return FALSE;
+
+    if (sibling->attrib.map_state != IsViewable || sibling->mapNum == 0)
+	return FALSE;
+
+    /* always above desktop windows */
+    if (sibling->type & CompWindowTypeDesktopMask)
+	return TRUE;
+
+    switch (type) {
+    case CompWindowTypeDesktopMask:
+	/* desktop window layer */
+	break;
+    case CompWindowTypeFullscreenMask:
+    case CompWindowTypeDockMask:
+	/* fullscreen and dock layer */
+	if (sibling->type & (CompWindowTypeFullscreenMask |
+			     CompWindowTypeDockMask))
+	{
+	    if (stackLayerCheck (w, clientLeader, sibling))
+		return TRUE;
+	}
+	else
+	{
+	    return TRUE;
+	}
+	break;
+    default:
+	/* fullscreen and normal layer */
+	if (!(sibling->type & CompWindowTypeDockMask))
+	{
+	    if (stackLayerCheck (w, clientLeader, sibling))
+		return TRUE;
+	}
+	break;
+    }
+
+    return FALSE;
+}
+
 static void
 saveWindowGeometry (CompWindow *w,
 		    int	       mask)
@@ -2369,6 +2499,7 @@ restoreWindowGeometry (CompWindow     *w,
 
     return m;
 }
+
 static void
 configureXWindow (Display	 *dpy,
 		  CompWindow	 *w,
@@ -2463,88 +2594,54 @@ stackAncestors (CompWindow     *w,
     }
 }
 
-void
-updateWindowAttributes (CompWindow *w)
+static int
+addWindowSizeChanges (CompWindow     *w,
+		      XWindowChanges *xwc)
 {
-    CompWindow	   *sibiling;
-    XWindowChanges xwc;
-    int		   mask = 0;
+    int mask = 0;
 
-    if (w->state & CompWindowStateHiddenMask)
-	return;
-
-    xwc.stack_mode = Above;
-    xwc.sibling    = None;
-
-    sibiling = findSibilingBelow (w);
-    if (sibiling)
-	xwc.sibling = sibiling->id;
-
-    if (xwc.sibling != w->id)
+    if (w->type & CompWindowTypeFullscreenMask)
     {
-	if (w->prev)
-	{
-	    if (xwc.sibling == None)
-	    {
-		XLowerWindow (w->screen->display->display, w->id);
-		if (w->frame)
-		    XLowerWindow (w->screen->display->display, w->frame);
-	    }
-	    else if (xwc.sibling != w->prev->id)
-		mask |= CWSibling | CWStackMode;
-	}
-	else if (xwc.sibling != None)
-	    mask |= CWSibling | CWStackMode;
+	saveWindowGeometry (w,
+			    CWX | CWY | CWWidth | CWHeight |
+			    CWBorderWidth);
+
+	xwc->width	  = w->screen->width;
+	xwc->height	  = w->screen->height;
+	xwc->border_width = 0;
+
+	mask |= CWWidth | CWHeight | CWBorderWidth;
     }
-
-    /* only update fullscreen and maximized size if window is visible on
-       current viewport. Size is updated once we switch to the windows
-       viewport. */
-    if (w->attrib.x < w->screen->width && w->attrib.x + w->width > 0)
+    else
     {
-	if (w->type & CompWindowTypeFullscreenMask)
+	mask |= restoreWindowGeometry (w, xwc, CWBorderWidth);
+
+	if (w->state & CompWindowStateMaximizedVertMask)
 	{
-	    saveWindowGeometry (w,
-				CWX | CWY | CWWidth | CWHeight |
-				CWBorderWidth);
+	    saveWindowGeometry (w, CWY | CWHeight);
 
-	    xwc.width	     = w->screen->width;
-	    xwc.height	     = w->screen->height;
-	    xwc.border_width = 0;
+	    xwc->height = w->screen->workArea.height - w->input.top -
+		w->input.bottom - w->attrib.border_width * 2;
 
-	    mask |= CWWidth | CWHeight | CWBorderWidth;
+	    mask |= CWHeight;
 	}
 	else
 	{
-	    mask |= restoreWindowGeometry (w, &xwc, CWBorderWidth);
+	    mask |= restoreWindowGeometry (w, xwc, CWY | CWHeight);
+	}
 
-	    if (w->state & CompWindowStateMaximizedVertMask)
-	    {
-		saveWindowGeometry (w, CWY | CWHeight);
+	if (w->state & CompWindowStateMaximizedHorzMask)
+	{
+	    saveWindowGeometry (w, CWX | CWWidth);
 
-		xwc.height = w->screen->workArea.height - w->input.top -
-		    w->input.bottom - w->attrib.border_width * 2;
+	    xwc->width = w->screen->workArea.width - w->input.left -
+		w->input.right - w->attrib.border_width * 2;
 
-		mask |= CWHeight;
-	    }
-	    else
-	    {
-		mask |= restoreWindowGeometry (w, &xwc, CWY | CWHeight);
-	    }
-
-	    if (w->state & CompWindowStateMaximizedHorzMask)
-	    {
-		saveWindowGeometry (w, CWX | CWWidth);
-
-		xwc.width = w->screen->workArea.width - w->input.left -
-		    w->input.right - w->attrib.border_width * 2;
-
-		mask |= CWWidth;
-	    }
-	    else
-	    {
-		mask |= restoreWindowGeometry (w, &xwc, CWX | CWWidth);
-	    }
+	    mask |= CWWidth;
+	}
+	else
+	{
+	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
 	}
     }
 
@@ -2552,8 +2649,8 @@ updateWindowAttributes (CompWindow *w)
     {
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
-	    xwc.x = 0;
-	    xwc.y = 0;
+	    xwc->x = 0;
+	    xwc->y = 0;
 
 	    mask |= CWX | CWY;
 	}
@@ -2561,16 +2658,16 @@ updateWindowAttributes (CompWindow *w)
 	{
 	    int width, height, max;
 
-	    width  = (mask & CWWidth)  ? xwc.width  : w->attrib.width;
-	    height = (mask & CWHeight) ? xwc.height : w->attrib.height;
+	    width  = (mask & CWWidth)  ? xwc->width  : w->attrib.width;
+	    height = (mask & CWHeight) ? xwc->height : w->attrib.height;
 
-	    xwc.width  = w->attrib.width;
-	    xwc.height = w->attrib.height;
+	    xwc->width  = w->attrib.width;
+	    xwc->height = w->attrib.height;
 
 	    if (constrainNewWindowSize (w, width, height, &width, &height))
 	    {
-		xwc.width  = width;
-		xwc.height = height;
+		xwc->width  = width;
+		xwc->height = height;
 	    }
 	    else
 		mask &= ~(CWWidth | CWHeight);
@@ -2579,17 +2676,17 @@ updateWindowAttributes (CompWindow *w)
 	    {
 		if (w->attrib.y < w->screen->workArea.y + w->input.top)
 		{
-		    xwc.y = w->screen->workArea.y + w->input.top;
+		    xwc->y = w->screen->workArea.y + w->input.top;
 		    mask |= CWY;
 		}
 		else
 		{
-		    height = xwc.height + w->attrib.border_width * 2;
+		    height = xwc->height + w->attrib.border_width * 2;
 
 		    max = w->screen->workArea.y + w->screen->workArea.height;
 		    if (w->attrib.y + height + w->input.bottom > max)
 		    {
-			xwc.y = max - height - w->input.bottom;
+			xwc->y = max - height - w->input.bottom;
 			mask |= CWY;
 		    }
 		}
@@ -2599,17 +2696,17 @@ updateWindowAttributes (CompWindow *w)
 	    {
 		if (w->attrib.x < w->screen->workArea.x + w->input.left)
 		{
-		    xwc.x = w->screen->workArea.x + w->input.left;
+		    xwc->x = w->screen->workArea.x + w->input.left;
 		    mask |= CWX;
 		}
 		else
 		{
-		    width = xwc.width + w->attrib.border_width * 2;
+		    width = xwc->width + w->attrib.border_width * 2;
 
 		    max = w->screen->workArea.x + w->screen->workArea.width;
 		    if (w->attrib.x + width + w->input.right > max)
 		    {
-			xwc.x = max - width - w->input.right;
+			xwc->x = max - width - w->input.right;
 			mask |= CWX;
 		    }
 		}
@@ -2617,32 +2714,139 @@ updateWindowAttributes (CompWindow *w)
 	}
     }
 
-    if (!mask)
-	return;
+    return mask;
+}
 
-    if (mask & (CWSibling | CWStackMode))
+void
+updateWindowSize (CompWindow *w)
+{
+    XWindowChanges xwc;
+    int		   mask;
+
+    mask = addWindowSizeChanges (w, &xwc);
+    if (mask)
+	configureXWindow (w->screen->display->display, w, mask, &xwc);
+}
+
+static int
+addWindowStackChanges (CompWindow     *w,
+		       XWindowChanges *xwc,
+		       CompWindow     *sibling)
+{
+    int	mask = 0;
+
+    if (!sibling || sibling->id != w->id)
+    {
+	if (w->prev)
+	{
+	    if (!sibling)
+	    {
+		XLowerWindow (w->screen->display->display, w->id);
+		if (w->frame)
+		    XLowerWindow (w->screen->display->display, w->frame);
+	    }
+	    else if (sibling->id != w->prev->id)
+	    {
+		mask |= CWSibling | CWStackMode;
+
+		xwc->stack_mode = Above;
+		xwc->sibling    = sibling->id;
+	    }
+	}
+	else if (sibling)
+	{
+	    mask |= CWSibling | CWStackMode;
+
+	    xwc->stack_mode = Above;
+	    xwc->sibling    = sibling->id;
+	}
+    }
+
+    if (sibling && mask)
     {
 	/* a normal window can be stacked above fullscreen windows but we
 	   don't wont normal windows to be stacked above dock window so if
-	   the sibiling we're stacking above is a fullscreen window we also
+	   the sibling we're stacking above is a fullscreen window we also
 	   update all dock windows. */
-	if ((sibiling->type & CompWindowTypeFullscreenMask) &&
+	if ((sibling->type & CompWindowTypeFullscreenMask) &&
 	    (!(w->type & (CompWindowTypeFullscreenMask |
 			  CompWindowTypeDockMask))))
 	{
 	    CompWindow *dw;
 
 	    for (dw = w->screen->reverseWindows; dw; dw = dw->prev)
-		if (dw == sibiling)
+		if (dw == sibling)
 		    break;
 
 	    for (; dw; dw = dw->prev)
 		if (dw->type & CompWindowTypeDockMask)
 		    configureXWindow (w->screen->display->display, dw,
-				      CWSibling | CWStackMode,
-				      &xwc);
+				      mask, xwc);
 	}
+    }
 
+    return mask;
+}
+
+void
+raiseWindow (CompWindow *w)
+{
+    XWindowChanges xwc;
+    int		   mask;
+
+    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w));
+    if (mask)
+	configureXWindow (w->screen->display->display, w, mask, &xwc);
+}
+
+void
+lowerWindow (CompWindow *w)
+{
+    XWindowChanges xwc;
+    int		   mask;
+
+    mask = addWindowStackChanges (w, &xwc, findLowestSiblingBelow (w));
+    if (mask)
+	configureXWindow (w->screen->display->display, w, mask, &xwc);
+}
+
+void
+restackWindowAbove (CompWindow *w,
+		    CompWindow *sibling)
+{
+    if (validSiblingBelow (w, sibling))
+    {
+	XWindowChanges xwc;
+	int	       mask;
+
+	mask = addWindowStackChanges (w, &xwc, sibling);
+	if (mask)
+	    configureXWindow (w->screen->display->display, w, mask, &xwc);
+    }
+}
+
+void
+updateWindowAttributes (CompWindow *w)
+{
+    XWindowChanges xwc;
+    int		   mask;
+
+    if (w->state & CompWindowStateHiddenMask)
+	return;
+
+    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w));
+
+    /* only update fullscreen and maximized size if window is visible on
+       current viewport. Size is updated once we switch to the windows
+       viewport. */
+    if (w->attrib.x < w->screen->width && w->attrib.x + w->width > 0)
+	mask |= addWindowSizeChanges (w, &xwc);
+
+    if (!mask)
+	return;
+
+    if (mask & (CWSibling | CWStackMode))
+    {
 	/* transient children above */
 	if (stackTransients (w, NULL, &xwc))
 	{
@@ -2664,6 +2868,12 @@ ensureWindowVisibility (CompWindow *w)
     int x1, y1, x2, y2;
     int dx = 0;
     int dy = 0;
+
+    if (w->struts || w->attrib.override_redirect)
+	return;
+
+    if (w->type & (CompWindowTypeDockMask | CompWindowTypeUnknownMask))
+	return;
 
     x1 = w->screen->workArea.x - w->screen->width * w->screen->x;
     y1 = w->screen->workArea.y;

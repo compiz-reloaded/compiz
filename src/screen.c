@@ -62,6 +62,9 @@
 
 #define LIGHTING_DEFAULT TRUE
 
+#define LOWER_WINDOW_BUTTON_DEFAULT    Button2
+#define LOWER_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -197,6 +200,7 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_RUN_COMMAND10:
     case COMP_SCREEN_OPTION_RUN_COMMAND11:
     case COMP_SCREEN_OPTION_SLOW_ANIMATIONS:
+    case COMP_SCREEN_OPTION_LOWER_WINDOW:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -337,6 +341,15 @@ compScreenInitOptions (CompScreen *screen)
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (screen->display->display,
 			  XStringToKeysym (SLOW_ANIMATIONS_KEY_DEFAULT));
+
+    o = &screen->opt[COMP_SCREEN_OPTION_LOWER_WINDOW];
+    o->name			     = "lower_window";
+    o->shortDesc		     = "Lower Window";
+    o->longDesc			     = "Lower window beneath other windows";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeButton;
+    o->value.bind.u.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = LOWER_WINDOW_BUTTON_DEFAULT;
 }
 
 static Bool
@@ -821,6 +834,7 @@ setSupported (CompScreen *s)
 
     data[i++] = d->wmMoveResizeAtom;
     data[i++] = d->moveResizeWindowAtom;
+    data[i++] = d->restackWindowAtom;
 
     XChangeProperty (d->display, s->root, d->supportedAtom, XA_ATOM, 32,
 		     PropModeReplace, (unsigned char *) data, i);
@@ -1198,6 +1212,7 @@ addScreen (CompDisplay *display,
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND11].value.bind);
     addScreenBinding (s,
 		      &s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS].value.bind);
+    addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_LOWER_WINDOW].value.bind);
 
     glXGetConfig (dpy, visinfo, GLX_DOUBLEBUFFER, &value);
     if (!value)
@@ -2285,16 +2300,6 @@ getActiveWindow (CompDisplay *display,
     }
 
     return w;
-}
-
-void
-closeActiveWindow (CompScreen *s)
-{
-    CompWindow *w;
-
-    w = findWindowAtDisplay (s->display, s->display->activeWindow);
-    if (w)
-	closeWindow (w);
 }
 
 void

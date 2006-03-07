@@ -312,12 +312,11 @@ handleEvent (CompDisplay *display,
 	    circulateWindow (w, &event->xcirculate);
 	break;
     case ButtonPress:
-	if (!display->screens->maxGrab)
-	    XAllowEvents (display->display, ReplayPointer, event->xbutton.time);
-
 	s = findScreenAtDisplay (display, event->xbutton.root);
 	if (s)
 	{
+	    int eventMode = ReplayPointer;
+
 	    if (event->xbutton.button == Button1 ||
 		event->xbutton.button == Button3)
 	    {
@@ -330,21 +329,36 @@ handleEvent (CompDisplay *display,
 	    }
 
 	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW], event))
-		closeActiveWindow (s);
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    closeWindow (w);
+
+		eventMode = AsyncPointer;
+	    }
 
 	    /* avoid panel actions when screen is grabbed */
 	    if (!display->screens->maxGrab)
 	    {
 		if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_MAIN_MENU], event))
+		{
 		    panelAction (s, s->display->panelActionMainMenuAtom);
+		    eventMode = AsyncPointer;
+		}
 
 		if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_DIALOG], event))
+		{
 		    panelAction (s, s->display->panelActionRunDialogAtom);
+		    eventMode = AsyncPointer;
+		}
 	    }
 
 #define EV_BUTTON_COMMAND(num)						   \
     if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_RUN_COMMAND ## num], event)) \
-	runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND ## num].value.s)
+    {									   \
+	runCommand (s, s->opt[COMP_SCREEN_OPTION_COMMAND ## num].value.s); \
+	eventMode = AsyncPointer;					   \
+    }
 
 	    EV_BUTTON_COMMAND (0);
 	    EV_BUTTON_COMMAND (1);
@@ -360,8 +374,26 @@ handleEvent (CompDisplay *display,
 	    EV_BUTTON_COMMAND (11);
 
 	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS], event))
+	    {
 		s->slowAnimations = !s->slowAnimations;
+		eventMode = AsyncPointer;
+	    }
+
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_LOWER_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    lowerWindow (w);
+
+		eventMode = AsyncPointer;
+	    }
+
+	    if (!display->screens->maxGrab)
+		XAllowEvents (display->display, eventMode, event->xbutton.time);
 	}
+	else if (!display->screens->maxGrab)
+	    XAllowEvents (display->display, ReplayPointer,
+			  event->xbutton.time);
 	break;
     case ButtonRelease:
 	break;
@@ -370,7 +402,11 @@ handleEvent (CompDisplay *display,
 	if (s)
 	{
 	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW], event))
-		closeActiveWindow (s);
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    closeWindow (w);
+	    }
 
 	    /* avoid panel actions when screen is grabbed */
 	    if (!display->screens->maxGrab)
@@ -401,6 +437,13 @@ handleEvent (CompDisplay *display,
 
 	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS], event))
 		s->slowAnimations = !s->slowAnimations;
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_LOWER_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    lowerWindow (w);
+	    }
 	}
 	break;
     case KeyRelease:
@@ -410,7 +453,8 @@ handleEvent (CompDisplay *display,
 	{
 	    Window newActiveWindow;
 
-	    newActiveWindow = getActiveWindow (display, event->xproperty.window);
+	    newActiveWindow = getActiveWindow (display,
+					       event->xproperty.window);
 	    if (newActiveWindow != display->activeWindow)
 	    {
 		display->activeWindow = newActiveWindow;
@@ -794,6 +838,42 @@ handleEvent (CompDisplay *display,
 	    XConfigureWindow (display->display,
 			      event->xclient.window,
 			      xwcm, &xwc);
+	}
+	else if (event->xclient.message_type == display->restackWindowAtom)
+	{
+	    w = findWindowAtDisplay (display, event->xclient.window);
+	    if (w)
+	    {
+		CompWindow *sibling = NULL;
+
+		/* TODO: other stack modes than Above and Below */
+		if (event->xclient.data.l[2] == Above)
+		{
+		    sibling = findWindowAtDisplay (display,
+						   event->xclient.data.l[1]);
+		}
+		else if (event->xclient.data.l[2] == Below)
+		{
+		    sibling = findWindowAtDisplay (display,
+						   event->xclient.data.l[1]);
+
+		    for (sibling = sibling->prev;
+			 sibling;
+			 sibling = sibling->prev)
+		    {
+			if (sibling->attrib.override_redirect)
+			    continue;
+
+			if (sibling->mapNum == 0)
+			    continue;
+
+			break;
+		    }
+
+		    if (sibling)
+			restackWindowAbove (w, sibling);
+		}
+	    }
 	}
 	else if (event->xclient.message_type == display->wmChangeStateAtom)
 	{

@@ -465,6 +465,7 @@ struct _CompDisplay {
     Atom closeWindowAtom;
     Atom wmMoveResizeAtom;
     Atom moveResizeWindowAtom;
+    Atom restackWindowAtom;
 
     Atom showingDesktopAtom;
 
@@ -854,7 +855,8 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_COMMAND11	       29
 #define COMP_SCREEN_OPTION_RUN_COMMAND11       30
 #define COMP_SCREEN_OPTION_SLOW_ANIMATIONS     31
-#define COMP_SCREEN_OPTION_NUM		       32
+#define COMP_SCREEN_OPTION_LOWER_WINDOW        32
+#define COMP_SCREEN_OPTION_NUM		       33
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -1187,9 +1189,6 @@ updateClientListForScreen (CompScreen *s);
 Window
 getActiveWindow (CompDisplay *display,
 		 Window      root);
-
-void
-closeActiveWindow (CompScreen *s);
 
 void
 panelAction (CompScreen *s,
@@ -1537,6 +1536,19 @@ windowUngrabNotify (CompWindow *w);
 
 void
 moveInputFocusToWindow (CompWindow *w);
+
+void
+updateWindowSize (CompWindow *w);
+
+void
+raiseWindow (CompWindow *w);
+
+void
+lowerWindow (CompWindow *w);
+
+void
+restackWindowAbove (CompWindow *w,
+		    CompWindow *sibling);
 
 void
 updateWindowAttributes (CompWindow *w);

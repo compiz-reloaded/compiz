@@ -1309,7 +1309,8 @@ addDisplay (char *name,
 	XInternAtom (dpy, "_NET_WM_STATE_DISPLAY_MODAL", 0);
 
     d->winActionMoveAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_MOVE", 0);
-    d->winActionResizeAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_RESIZE", 0);
+    d->winActionResizeAtom	 =
+	XInternAtom (dpy, "_NET_WM_ACTION_RESIZE", 0);
     d->winActionStickAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_STICK", 0);
     d->winActionMinimizeAtom	 =
 	XInternAtom (dpy, "_NET_WM_ACTION_MINIMIZE", 0);
@@ -1349,6 +1350,7 @@ addDisplay (char *name,
     d->closeWindowAtom	    = XInternAtom (dpy, "_NET_CLOSE_WINDOW", 0);
     d->wmMoveResizeAtom	    = XInternAtom (dpy, "_NET_WM_MOVERESIZE", 0);
     d->moveResizeWindowAtom = XInternAtom (dpy, "_NET_MOVERESIZE_WINDOW", 0);
+    d->restackWindowAtom    = XInternAtom (dpy, "_NET_RESTACK_WINDOW", 0);
 
     d->showingDesktopAtom = XInternAtom (dpy, "_NET_SHOWING_DESKTOP", 0);
 
