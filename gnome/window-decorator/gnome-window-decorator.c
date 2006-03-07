@@ -3012,7 +3012,7 @@ lower_window (WnckWindow *win)
     Window     xroot;
     XEvent     ev;
     WnckWindow *sibling;
-    GList      *windows, *tmp;
+    GList      *windows;
 
     gdkdisplay = gdk_display_get_default ();
     xdisplay   = GDK_DISPLAY_XDISPLAY (gdkdisplay);
