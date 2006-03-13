@@ -880,6 +880,13 @@ typedef void    (*GLXQueryDrawableProc)   (Display	 *display,
 					   int		 attribute,
 					   unsigned int  *value);
 
+typedef void (*GLXCopySubBufferProc) (Display     *display,
+				      GLXDrawable drawable,
+				      int	  x,
+				      int	  y,
+				      int	  width,
+				      int	  height);
+
 typedef void (*GLActiveTextureProc) (GLenum texture);
 typedef void (*GLClientActiveTextureProc) (GLenum texture);
 typedef void (*GLGenerateMipmapProc) (GLenum target);
@@ -1064,6 +1071,7 @@ struct _CompScreen {
     GLXBindTexImageProc    bindTexImage;
     GLXReleaseTexImageProc releaseTexImage;
     GLXQueryDrawableProc   queryDrawable;
+    GLXCopySubBufferProc   copySubBuffer;
 
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;

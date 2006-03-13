@@ -909,58 +909,56 @@ eventLoop (void)
 			BoxPtr pBox;
 			int    nBox, y;
 
-			/*
 			pBox = tmpRegion->rects;
 			nBox = tmpRegion->numRects;
-			while (nBox--)
+
+			if (s->copySubBuffer)
 			{
-			    y = s->height - pBox->y2;
+			    while (nBox--)
+			    {
+				y = s->height - pBox->y2;
 
-			    glXCopySubBufferMESA (s->display->display,
-						  s->root,
-						  pBox->x1, y,
-						  pBox->x2 - pBox->x1,
-						  pBox->y2 - pBox->y1);
+				(*s->copySubBuffer) (s->display->display,
+						     s->root,
+						     pBox->x1, y,
+						     pBox->x2 - pBox->x1,
+						     pBox->y2 - pBox->y1);
 
-			    pBox++;
+				pBox++;
+			    }
 			}
-
-			*/ /* ugly empty rect flush hack */ /*
-			glXCopySubBufferMESA (s->display->display, s->root,
-					      0, 0, 0, 0);
-			*/
-
-			glEnable (GL_SCISSOR_TEST);
-			glDrawBuffer (GL_FRONT);
-
-			pBox = tmpRegion->rects;
-			nBox = tmpRegion->numRects;
-			while (nBox--)
+			else
 			{
-			    y = s->height - pBox->y2;
+			    glEnable (GL_SCISSOR_TEST);
+			    glDrawBuffer (GL_FRONT);
 
-			    glBitmap (0, 0, 0, 0,
-				      pBox->x1 - s->rasterX, y - s->rasterY,
-				      NULL);
+			    while (nBox--)
+			    {
+				y = s->height - pBox->y2;
 
-			    s->rasterX = pBox->x1;
-			    s->rasterY = y;
+				glBitmap (0, 0, 0, 0,
+					  pBox->x1 - s->rasterX, y - s->rasterY,
+					  NULL);
 
-			    glScissor (pBox->x1, y,
-				       pBox->x2 - pBox->x1,
-				       pBox->y2 - pBox->y1);
+				s->rasterX = pBox->x1;
+				s->rasterY = y;
 
-			    glCopyPixels (pBox->x1, y,
-					  pBox->x2 - pBox->x1,
-					  pBox->y2 - pBox->y1,
-					  GL_COLOR);
+				glScissor (pBox->x1, y,
+					   pBox->x2 - pBox->x1,
+					   pBox->y2 - pBox->y1);
 
-			    pBox++;
+				glCopyPixels (pBox->x1, y,
+					      pBox->x2 - pBox->x1,
+					      pBox->y2 - pBox->y1,
+					      GL_COLOR);
+
+				pBox++;
+			    }
+
+			    glDrawBuffer (GL_BACK);
+			    glDisable (GL_SCISSOR_TEST);
+			    glFlush ();
 			}
-
-			glDrawBuffer (GL_BACK);
-			glDisable (GL_SCISSOR_TEST);
-			glFlush ();
 		    }
 		    else
 		    {

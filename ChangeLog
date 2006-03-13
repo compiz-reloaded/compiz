@@ -1,3 +1,9 @@
+2006-03-13  David Reveman  <davidr@novell.com>
+
+	* src/display.c (eventLoop):
+	* include/compiz.h:
+	* src/screen.c (addScreen): CopySubBufferMESA support.
+
 2006-03-07  David Reveman  <davidr@novell.com>
 
 	* gnome/window-decorator/gnome-window-decorator.c (lower_window):

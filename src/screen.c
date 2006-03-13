@@ -1331,6 +1331,11 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
+    s->copySubBuffer = NULL;
+    if (strstr (glxExtensions, "GLX_MESA_copy_sub_buffer"))
+	s->copySubBuffer = (GLXCopySubBufferProc)
+	    getProcAddress (s, "glXCopySubBufferMESA");
+
     glExtensions = (const char *) glGetString (GL_EXTENSIONS);
 
     s->textureNonPowerOfTwo = 0;
