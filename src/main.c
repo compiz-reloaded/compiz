@@ -23,6 +23,10 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#ifdef HAVE_CONFIG_H
+#  include "../config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -85,7 +89,8 @@ usage (void)
 	    "[--sm-disable] "
 	    "[--sm-save-file] "
 	    "[--sm-client-id] "
-	    "[--help] "
+	    "[--version] "
+	    "[--help]\n       "
 	    "[PLUGIN]...\n",
 	    programName);
 }
@@ -143,6 +148,11 @@ main (int argc, char **argv)
 	if (!strcmp (argv[i], "--help"))
 	{
 	    usage ();
+	    return 0;
+	}
+	else if (!strcmp (argv[i], "--version"))
+	{
+	    printf (PACKAGE_STRING "\n");
 	    return 0;
 	}
 	else if (!strcmp (argv[i], "--display"))
