@@ -1,3 +1,14 @@
+2006-03-14  Radek Doulik  <rodo@novell.com>
+
+	* src/event.c (handleEvent): handle minimize/maximize/unmaximize
+	window keybindings
+
+	* src/screen.c: added minimize/maximize/unmaximize window
+	options/keybindings
+
+	* src/window.c (maximizeWindow): new helper function
+	(unmaximizeWindow): ditto
+
 2006-03-14  David Reveman  <davidr@novell.com>
 
 	* plugins/scale.c: Add darken background option (Daniel G. Taylor).

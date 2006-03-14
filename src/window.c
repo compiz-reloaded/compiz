@@ -3172,3 +3172,43 @@ unminimizeWindow (CompWindow *w)
 	forEachWindowOnScreen (w->screen, unminimizeTransients, (void *) w);
     }
 }
+
+void
+maximizeWindow (CompWindow *w)
+{
+    if (w->attrib.override_redirect)
+	return;
+
+    if ((w->state & CompWindowStateMaximizedHorzMask) &&
+	(w->state & CompWindowStateMaximizedVertMask))
+	return;
+
+    w->state |= (CompWindowStateMaximizedHorzMask |
+		 CompWindowStateMaximizedVertMask);
+
+    recalcWindowType (w);
+
+    updateWindowAttributes (w);
+
+    setWindowState (w->screen->display, w->state, w->id);
+}
+
+void
+unmaximizeWindow (CompWindow *w)
+{
+    if (w->attrib.override_redirect)
+	return;
+
+    if (!(w->state & (CompWindowStateMaximizedHorzMask |
+		      CompWindowStateMaximizedVertMask)))
+	return;
+
+    w->state &= ~(CompWindowStateMaximizedHorzMask |
+		  CompWindowStateMaximizedVertMask);
+
+    recalcWindowType (w);
+
+    updateWindowAttributes (w);
+
+    setWindowState (w->screen->display, w->state, w->id);
+}

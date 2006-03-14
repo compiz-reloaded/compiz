@@ -337,6 +337,34 @@ handleEvent (CompDisplay *display,
 		eventMode = AsyncPointer;
 	    }
 
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_MAXIMIZE_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    maximizeWindow (w);
+
+		eventMode = AsyncPointer;
+	    }
+
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW],
+			   event))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    unmaximizeWindow (w);
+
+		eventMode = AsyncPointer;
+	    }
+
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_MINIMIZE_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    minimizeWindow (w);
+
+		eventMode = AsyncPointer;
+	    }
+
 	    /* avoid panel actions when screen is grabbed */
 	    if (!display->screens->maxGrab)
 	    {
@@ -406,6 +434,27 @@ handleEvent (CompDisplay *display,
 		w = findTopLevelWindowAtScreen (s, display->activeWindow);
 		if (w)
 		    closeWindow (w);
+	    }
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_MAXIMIZE_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    maximizeWindow (w);
+	    }
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    unmaximizeWindow (w);
+	    }
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_MINIMIZE_WINDOW], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    minimizeWindow (w);
 	    }
 
 	    /* avoid panel actions when screen is grabbed */

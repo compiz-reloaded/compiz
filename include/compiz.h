@@ -856,7 +856,10 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_RUN_COMMAND11       30
 #define COMP_SCREEN_OPTION_SLOW_ANIMATIONS     31
 #define COMP_SCREEN_OPTION_LOWER_WINDOW        32
-#define COMP_SCREEN_OPTION_NUM		       33
+#define COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW   33
+#define COMP_SCREEN_OPTION_MINIMIZE_WINDOW   34
+#define COMP_SCREEN_OPTION_MAXIMIZE_WINDOW   35
+#define COMP_SCREEN_OPTION_NUM		       36
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -1590,6 +1593,11 @@ minimizeWindow (CompWindow *w);
 void
 unminimizeWindow (CompWindow *w);
 
+void
+maximizeWindow (CompWindow *w);
+
+void
+unmaximizeWindow (CompWindow *w);
 
 /* plugin.c */
 

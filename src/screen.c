@@ -48,14 +48,23 @@
 #define SCREEN_SIZE_MIN	    4
 #define SCREEN_SIZE_MAX	    32
 
-#define CLOSE_WINDOW_KEY_DEFAULT       "F4"
-#define CLOSE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
-
 #define MAIN_MENU_KEY_DEFAULT       "F1"
 #define MAIN_MENU_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
 #define RUN_DIALOG_KEY_DEFAULT       "F2"
 #define RUN_DIALOG_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define CLOSE_WINDOW_KEY_DEFAULT       "F4"
+#define CLOSE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define UNMAXIMIZE_WINDOW_KEY_DEFAULT       "F5"
+#define UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define MINIMIZE_WINDOW_KEY_DEFAULT       "F9"
+#define MINIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define MAXIMIZE_WINDOW_KEY_DEFAULT       "F10"
+#define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
 #define SLOW_ANIMATIONS_KEY_DEFAULT       "F10"
 #define SLOW_ANIMATIONS_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
@@ -187,6 +196,9 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_CLOSE_WINDOW:
     case COMP_SCREEN_OPTION_MAIN_MENU:
     case COMP_SCREEN_OPTION_RUN_DIALOG:
+    case COMP_SCREEN_OPTION_MINIMIZE_WINDOW:
+    case COMP_SCREEN_OPTION_MAXIMIZE_WINDOW:
+    case COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW:
     case COMP_SCREEN_OPTION_RUN_COMMAND0:
     case COMP_SCREEN_OPTION_RUN_COMMAND1:
     case COMP_SCREEN_OPTION_RUN_COMMAND2:
@@ -299,6 +311,39 @@ compScreenInitOptions (CompScreen *screen)
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (screen->display->display,
 			  XStringToKeysym (RUN_DIALOG_KEY_DEFAULT));
+
+    o = &screen->opt[COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW];
+    o->name			  = "unmaximize_window";
+    o->shortDesc		  = "Unmaximize Window";
+    o->longDesc			  = "Unmaximize active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (screen->display->display,
+			  XStringToKeysym (UNMAXIMIZE_WINDOW_KEY_DEFAULT));
+
+    o = &screen->opt[COMP_SCREEN_OPTION_MINIMIZE_WINDOW];
+    o->name			  = "minimize_window";
+    o->shortDesc		  = "Minimize Window";
+    o->longDesc			  = "Minimize active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = MINIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (screen->display->display,
+			  XStringToKeysym (MINIMIZE_WINDOW_KEY_DEFAULT));
+
+    o = &screen->opt[COMP_SCREEN_OPTION_MAXIMIZE_WINDOW];
+    o->name			  = "maximize_window";
+    o->shortDesc		  = "Maximize Window";
+    o->longDesc			  = "Maximize active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = MAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (screen->display->display,
+			  XStringToKeysym (MAXIMIZE_WINDOW_KEY_DEFAULT));
 
 #define COMMAND_OPTION(num, cname, rname)				    \
     o = &screen->opt[COMP_SCREEN_OPTION_COMMAND ## num ];		    \
@@ -1198,6 +1243,12 @@ addScreen (CompDisplay *display,
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_CLOSE_WINDOW].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_MAIN_MENU].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_DIALOG].value.bind);
+    addScreenBinding (s,
+		      &s->opt[COMP_SCREEN_OPTION_MINIMIZE_WINDOW].value.bind);
+    addScreenBinding (s,
+		      &s->opt[COMP_SCREEN_OPTION_MAXIMIZE_WINDOW].value.bind);
+    addScreenBinding (s,
+		      &s->opt[COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND0].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND1].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_RUN_COMMAND2].value.bind);
