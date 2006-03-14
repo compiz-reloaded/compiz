@@ -1670,6 +1670,10 @@ unmapWindow (CompWindow *w)
 	if (!w->minimized && !(w->type & w->screen->showingDesktopMask))
 	    w->placed = FALSE;
 
+	setWmState (w->screen->display,
+		    (w->minimized) ? IconicState : WithdrawnState,
+		    w->id);
+
 	w->mapNum = 0;
     }
 
@@ -1689,8 +1693,6 @@ unmapWindow (CompWindow *w)
     addWindowDamage (w);
 
     w->attrib.map_state = IsUnmapped;
-
-    setWmState (w->screen->display, IconicState, w->id);
 
     w->invisible = TRUE;
 

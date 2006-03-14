@@ -1,5 +1,8 @@
 2006-03-14  David Reveman  <davidr@novell.com>
 
+	* src/window.c (unmapWindow): Put window in withdrawn state when
+	being unmapped. Should make it work better with KDE. (Tim Northover)
+
 	* src/screen.c (addScreen): Fix ambient and diffuse light.
 
 	* src/main.c (main): Add --version command line option.
