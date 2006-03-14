@@ -2033,6 +2033,11 @@ syncWindowPosition (CompWindow *w)
 		     w->attrib.x,
 		     w->attrib.y);
 
+	if (w->frame)
+	    XMoveWindow (w->screen->display->display, w->frame,
+			 w->attrib.x - w->input.left,
+			 w->attrib.y - w->input.top);
+
 	if (0 && !w->attrib.override_redirect)
 	{
 	    XConfigureEvent ce;

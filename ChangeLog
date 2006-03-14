@@ -1,5 +1,8 @@
 2006-03-14  David Reveman  <davidr@novell.com>
 
+	* src/window.c (syncWindowPosition): Move frame window now instead of
+	waiting for client window to change before moving it.
+
 	* plugins/move.c (moveTerminate): Sync window position before
 	releasing pointer grab so that the EnterNotify event from the release
 	go to the correct window.
