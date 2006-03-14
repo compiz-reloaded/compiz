@@ -74,6 +74,16 @@
 #define LOWER_WINDOW_BUTTON_DEFAULT    Button2
 #define LOWER_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
+#define OPACITY_STEP_DEFAULT 10
+#define OPACITY_STEP_MIN     1
+#define OPACITY_STEP_MAX     50
+
+#define OPACITY_INCREASE_BUTTON_DEFAULT    Button4
+#define OPACITY_INCREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define OPACITY_DECREASE_BUTTON_DEFAULT    Button5
+#define OPACITY_DECREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -178,6 +188,13 @@ setScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case COMP_SCREEN_OPTION_OPACITY_STEP:
+	if (compSetIntOption (o, value))
+	{
+	    screen->opacityStep = o->value.i;
+	    return TRUE;
+	}
+	break;
     case COMP_SCREEN_OPTION_COMMAND0:
     case COMP_SCREEN_OPTION_COMMAND1:
     case COMP_SCREEN_OPTION_COMMAND2:
@@ -213,6 +230,8 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_RUN_COMMAND11:
     case COMP_SCREEN_OPTION_SLOW_ANIMATIONS:
     case COMP_SCREEN_OPTION_LOWER_WINDOW:
+    case COMP_SCREEN_OPTION_OPACITY_INCREASE:
+    case COMP_SCREEN_OPTION_OPACITY_DECREASE:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -395,6 +414,33 @@ compScreenInitOptions (CompScreen *screen)
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = LOWER_WINDOW_BUTTON_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_STEP];
+    o->name		= "opacity_step";
+    o->shortDesc	= "Opacity Step";
+    o->longDesc		= "Opacity change step";
+    o->type		= CompOptionTypeInt;
+    o->value.i		= OPACITY_STEP_DEFAULT;
+    o->rest.i.min	= OPACITY_STEP_MIN;
+    o->rest.i.max	= OPACITY_STEP_MAX;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_INCREASE];
+    o->name			     = "opacity_increase";
+    o->shortDesc		     = "Increase Opacity";
+    o->longDesc			     = "Increase window opacity";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeButton;
+    o->value.bind.u.button.modifiers = OPACITY_INCREASE_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = OPACITY_INCREASE_BUTTON_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_DECREASE];
+    o->name			     = "opacity_decrease";
+    o->shortDesc		     = "Decrease Opacity";
+    o->longDesc			     = "Decrease window opacity";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeButton;
+    o->value.bind.u.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = OPACITY_DECREASE_BUTTON_DEFAULT;
 }
 
 static Bool
@@ -1151,6 +1197,8 @@ addScreen (CompDisplay *display,
 
     s->stencilRef = 0x1;
 
+    s->opacityStep = OPACITY_STEP_DEFAULT;
+
     s->nextRedraw  = 0;
     s->frameStatus = 0;
 
@@ -1264,6 +1312,10 @@ addScreen (CompDisplay *display,
     addScreenBinding (s,
 		      &s->opt[COMP_SCREEN_OPTION_SLOW_ANIMATIONS].value.bind);
     addScreenBinding (s, &s->opt[COMP_SCREEN_OPTION_LOWER_WINDOW].value.bind);
+    addScreenBinding (s,
+		      &s->opt[COMP_SCREEN_OPTION_OPACITY_INCREASE].value.bind);
+    addScreenBinding (s,
+		      &s->opt[COMP_SCREEN_OPTION_OPACITY_DECREASE].value.bind);
 
     glXGetConfig (dpy, visinfo, GLX_DOUBLEBUFFER, &value);
     if (!value)

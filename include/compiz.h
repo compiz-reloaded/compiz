@@ -857,9 +857,12 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_SLOW_ANIMATIONS     31
 #define COMP_SCREEN_OPTION_LOWER_WINDOW        32
 #define COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW   33
-#define COMP_SCREEN_OPTION_MINIMIZE_WINDOW   34
-#define COMP_SCREEN_OPTION_MAXIMIZE_WINDOW   35
-#define COMP_SCREEN_OPTION_NUM		       36
+#define COMP_SCREEN_OPTION_MINIMIZE_WINDOW     34
+#define COMP_SCREEN_OPTION_MAXIMIZE_WINDOW     35
+#define COMP_SCREEN_OPTION_OPACITY_STEP	       36
+#define COMP_SCREEN_OPTION_OPACITY_INCREASE    37
+#define COMP_SCREEN_OPTION_OPACITY_DECREASE    38
+#define COMP_SCREEN_OPTION_NUM		       39
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -1065,6 +1068,8 @@ struct _CompScreen {
 
     Bool lighting;
     Bool slowAnimations;
+
+    int opacityStep;
 
     XRectangle workArea;
 

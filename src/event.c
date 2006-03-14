@@ -184,6 +184,41 @@ autoRaiseTimeout (void *closure)
     return FALSE;
 }
 
+static void
+changeWindowOpacity (CompWindow *w,
+		     int	direction)
+{
+    int step, opacity;
+
+    if (w->attrib.override_redirect)
+	return;
+
+    if (w->type & CompWindowTypeDesktopMask)
+	return;
+
+    step = (OPAQUE * w->screen->opacityStep) / 100;
+
+    opacity = w->paint.opacity + step * direction;
+    if (opacity > OPAQUE)
+    {
+	opacity = OPAQUE;
+    }
+    else if (opacity < step)
+    {
+	opacity = step;
+    }
+
+    if (w->paint.opacity != opacity)
+    {
+	w->paint.opacity = opacity;
+
+	setWindowProp32 (w->screen->display, w->id,
+			 w->screen->display->winOpacityAtom,
+			 w->paint.opacity);
+	addWindowDamage (w);
+    }
+}
+
 void
 handleEvent (CompDisplay *display,
 	     XEvent      *event)
@@ -416,6 +451,24 @@ handleEvent (CompDisplay *display,
 		eventMode = AsyncPointer;
 	    }
 
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_OPACITY_INCREASE], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    changeWindowOpacity (w, 1);
+
+		eventMode = AsyncPointer;
+	    }
+
+	    if (EV_BUTTON (&s->opt[COMP_SCREEN_OPTION_OPACITY_DECREASE], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    changeWindowOpacity (w, -1);
+
+		eventMode = AsyncPointer;
+	    }
+
 	    if (!display->screens->maxGrab)
 		XAllowEvents (display->display, eventMode, event->xbutton.time);
 	}
@@ -492,6 +545,20 @@ handleEvent (CompDisplay *display,
 		w = findTopLevelWindowAtScreen (s, display->activeWindow);
 		if (w)
 		    lowerWindow (w);
+	    }
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_OPACITY_INCREASE], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    changeWindowOpacity (w, 1);
+	    }
+
+	    if (EV_KEY (&s->opt[COMP_SCREEN_OPTION_OPACITY_DECREASE], event))
+	    {
+		w = findTopLevelWindowAtScreen (s, display->activeWindow);
+		if (w)
+		    changeWindowOpacity (w, -1);
 	    }
 	}
 	break;
