@@ -1,5 +1,9 @@
 2006-03-14  David Reveman  <davidr@novell.com>
 
+	* plugins/move.c (moveTerminate): Sync window position before
+	releasing pointer grab so that the EnterNotify event from the release
+	go to the correct window.
+
 	* src/window.c (unmapWindow): Put window in withdrawn state when
 	being unmapped. Should make it work better with KDE. (Tim Northover)
 

@@ -208,15 +208,16 @@ moveTerminate (CompDisplay *d)
     {
 	MOVE_SCREEN (md->w->screen);
 
+	(md->w->screen->windowUngrabNotify) (md->w);
+
+	syncWindowPosition (md->w);
+
 	if (ms->grabIndex)
 	{
 	    removeScreenGrab (md->w->screen, ms->grabIndex, NULL);
 	    ms->grabIndex = 0;
 	}
 
-	(md->w->screen->windowUngrabNotify) (md->w);
-
-	syncWindowPosition (md->w);
 	md->w = 0;
     }
 }
