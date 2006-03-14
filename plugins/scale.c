@@ -68,6 +68,8 @@
 #define SCALE_STATE_WAIT 2
 #define SCALE_STATE_IN   3
 
+#define SCALE_DARKEN_BACK_DEFAULT TRUE
+
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -98,7 +100,8 @@ typedef struct _ScaleDisplay {
 #define SCALE_SCREEN_OPTION_SPEED	 5
 #define SCALE_SCREEN_OPTION_TIMESTEP	 6
 #define SCALE_SCREEN_OPTION_WINDOW_TYPE  7
-#define SCALE_SCREEN_OPTION_NUM          8
+#define SCALE_SCREEN_OPTION_DARKEN_BACK  8
+#define SCALE_SCREEN_OPTION_NUM          9
 
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
@@ -139,6 +142,8 @@ typedef struct _ScaleScreen {
     int        nWindows;
 
     GLfloat scale;
+
+    Bool darkenBack;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -243,6 +248,14 @@ scaleSetScreenOption (CompScreen      *screen,
 	    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
 	}
+	break;
+    case SCALE_SCREEN_OPTION_DARKEN_BACK:
+	if (compSetBoolOption (o, value))
+	{
+	    ss->darkenBack = o->value.b;
+	    return TRUE;
+	}
+	break;
     default:
 	break;
     }
@@ -340,6 +353,13 @@ scaleScreenInitOptions (ScaleScreen *ss,
     o->rest.s.nString    = nWindowTypeString;
 
     ss->wMask = compWindowTypeMaskFromStringList (&o->value);
+
+    o = &ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK];
+    o->name      = "darken_back";
+    o->shortDesc = "Darken Background";
+    o->longDesc  = "Darken background when scaling windows";
+    o->type      = CompOptionTypeBool;
+    o->value.b   = SCALE_DARKEN_BACK_DEFAULT;
 }
 
 static Bool
@@ -348,14 +368,28 @@ scalePaintWindow (CompWindow		  *w,
 		  Region		  region,
 		  unsigned int		  mask)
 {
-    CompScreen *s = w->screen;
-    Bool       status;
+    WindowPaintAttrib sAttrib;
+    CompScreen	      *s = w->screen;
+    Bool	      status;
 
     SCALE_SCREEN (s);
     SCALE_WINDOW (w);
 
-    if (ss->grabIndex && (sw->adjust || sw->slot))
-	mask |= PAINT_WINDOW_TRANSFORMED_MASK;
+    if (ss->grabIndex)
+    {
+	if (sw->adjust || sw->slot)
+	{
+	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
+	}
+	else if (ss->darkenBack && ss->state != SCALE_STATE_IN)
+	{
+	    /* Modify brightness of the other windows */
+	    sAttrib = *attrib;
+	    attrib  = &sAttrib;
+
+	    sAttrib.brightness = (2 * sAttrib.brightness) / 3;
+	}
+    }
 
     UNWRAP (ss, s, paintWindow);
     status = (*s->paintWindow) (w, attrib, region, mask);
