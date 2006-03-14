@@ -1,5 +1,8 @@
 2006-03-14  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c: Opacity, brightness and saturation as adjustable
+	options. (Greg)	
+
 	* src/window.c (syncWindowPosition): Move frame window now instead of
 	waiting for client window to change before moving it.
 

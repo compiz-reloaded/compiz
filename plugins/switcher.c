@@ -61,6 +61,18 @@
 
 #define SWITCH_MIPMAP_DEFAULT TRUE
 
+#define SWITCH_SATURATION_DEFAULT 100
+#define SWITCH_SATURATION_MIN     0
+#define SWITCH_SATURATION_MAX     100
+
+#define SWITCH_BRIGHTNESS_DEFAULT 65
+#define SWITCH_BRIGHTNESS_MIN     0
+#define SWITCH_BRIGHTNESS_MAX     100
+
+#define SWITCH_OPACITY_DEFAULT    40
+#define SWITCH_OPACITY_MIN        0
+#define SWITCH_OPACITY_MAX        100
+
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -87,7 +99,10 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_TIMESTEP	  5
 #define SWITCH_SCREEN_OPTION_WINDOW_TYPE  6
 #define SWITCH_SCREEN_OPTION_MIPMAP       7
-#define SWITCH_SCREEN_OPTION_NUM          8
+#define SWITCH_SCREEN_OPTION_SATURATION   8
+#define SWITCH_SCREEN_OPTION_BRIGHTNESS   9
+#define SWITCH_SCREEN_OPTION_OPACITY     10
+#define SWITCH_SCREEN_OPTION_NUM         11
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -118,6 +133,10 @@ typedef struct _SwitchScreen {
 
     int pos;
     int move;
+
+    GLushort saturation;
+    GLushort brightness;
+    GLushort opacity;
 } SwitchScreen;
 
 #define MwmHintsDecorations (1L << 1)
@@ -239,7 +258,29 @@ switchSetScreenOption (CompScreen      *screen,
 	break;
     case SWITCH_SCREEN_OPTION_MIPMAP:
 	if (compSetBoolOption (o, value))
+		return TRUE;
+    break;
+    case SWITCH_SCREEN_OPTION_SATURATION:
+	if (compSetIntOption (o, value))
+	{
+	    ss->saturation = (COLOR * o->value.i) / 100;
 	    return TRUE;
+	}
+	break;
+    case SWITCH_SCREEN_OPTION_BRIGHTNESS:
+	if (compSetIntOption (o, value))
+	{
+	    ss->brightness = (0xffff * o->value.i) / 100;
+	    return TRUE;
+	}
+	break;
+    case SWITCH_SCREEN_OPTION_OPACITY:
+	if (compSetIntOption (o, value))
+	{
+	    ss->opacity = (OPAQUE * o->value.i) / 100;
+	    return TRUE;
+	}
+	break;
     default:
 	break;
     }
@@ -339,6 +380,33 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->longDesc	  = "Generate mipmaps when possible for higher quality scaling";
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_MIPMAP_DEFAULT;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_SATURATION];
+    o->name	  = "saturation";
+    o->shortDesc  = "Saturation";
+    o->longDesc	  = "Amount of saturation in percent";
+    o->type	  = CompOptionTypeInt;
+    o->value.i    = SWITCH_SATURATION_DEFAULT;
+    o->rest.i.min = SWITCH_SATURATION_MIN;
+    o->rest.i.max = SWITCH_SATURATION_MAX;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS];
+    o->name	  = "brightness";
+    o->shortDesc  = "Brightness";
+    o->longDesc	  = "Amount of brightness in percent";
+    o->type	  = CompOptionTypeInt;
+    o->value.i    = SWITCH_BRIGHTNESS_DEFAULT;
+    o->rest.i.min = SWITCH_BRIGHTNESS_MIN;
+    o->rest.i.max = SWITCH_BRIGHTNESS_MAX;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_OPACITY];
+    o->name	  = "opacity";
+    o->shortDesc  = "Opacity";
+    o->longDesc	  = "Amount of opacity in percent";
+    o->type	  = CompOptionTypeInt;
+    o->value.i    = SWITCH_OPACITY_DEFAULT;
+    o->rest.i.min = SWITCH_OPACITY_MIN;
+    o->rest.i.max = SWITCH_OPACITY_MAX;
 }
 
 static void
@@ -1074,10 +1142,11 @@ switchPaintWindow (CompWindow		   *w,
     {
 	WindowPaintAttrib sAttrib = *attrib;
 
-	sAttrib.brightness = (2 * sAttrib.brightness) / 3;
+	sAttrib.saturation = (sAttrib.saturation * ss->saturation) >> 16;
+	sAttrib.brightness = (sAttrib.brightness * ss->brightness) >> 16;
 
 	if (ss->wMask & w->type)
-	    sAttrib.opacity >>= 1;
+	    sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
 
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, &sAttrib, region, mask);
@@ -1205,6 +1274,10 @@ switchInitScreen (CompPlugin *p,
     ss->moreAdjust = 0;
 
     ss->velocity = 0.0f;
+
+    ss->saturation = (COLOR  * SWITCH_SATURATION_DEFAULT) / 100;
+    ss->brightness = (0xffff * SWITCH_BRIGHTNESS_DEFAULT) / 100;
+    ss->opacity    = (OPAQUE * SWITCH_OPACITY_DEFAULT)    / 100;
 
     switchScreenInitOptions (ss, s->display->display);
 
