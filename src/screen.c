@@ -1028,9 +1028,9 @@ addScreen (CompDisplay *display,
     const char		 *glxExtensions, *glExtensions;
     GLint	         stencilBits;
     XSetWindowAttributes attrib;
-    GLfloat              globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 1.0f };
-    GLfloat              ambientLight[]   = { 0.0f, 0.0f,  0.0f, 1.0f };
-    GLfloat              diffuseLight[]   = { 1.0f, 1.0f,  1.0f, 1.0f };
+    GLfloat              globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 0.1f };
+    GLfloat              ambientLight[]   = { 0.0f, 0.0f,  0.0f, 0.0f };
+    GLfloat              diffuseLight[]   = { 0.9f, 0.9f,  0.9f, 0.9f };
     GLfloat              light0Position[] = { 0.0f, 0.0f, -9.0f, 1.0f };
     CompWindow		 *w;
 

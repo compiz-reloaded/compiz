@@ -1,5 +1,7 @@
 2006-03-14  David Reveman  <davidr@novell.com>
 
+	* src/screen.c (addScreen): Fix ambient and diffuse light.
+
 	* src/main.c (main): Add --version command line option.
 
 	* src/event.c:
