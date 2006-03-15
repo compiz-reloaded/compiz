@@ -2833,6 +2833,25 @@ restackWindowAbove (CompWindow *w,
 }
 
 void
+restackWindowBelow (CompWindow *w,
+		    CompWindow *sibling)
+{
+    for (sibling = sibling->prev; sibling; sibling = sibling->prev)
+    {
+	if (sibling->attrib.override_redirect)
+	    continue;
+
+	if (sibling->mapNum == 0)
+	    continue;
+
+	break;
+    }
+    
+    if (sibling)
+	restackWindowAbove (w, sibling);
+}
+
+void
 updateWindowAttributes (CompWindow *w)
 {
     XWindowChanges xwc;

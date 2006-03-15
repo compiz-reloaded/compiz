@@ -1567,6 +1567,10 @@ restackWindowAbove (CompWindow *w,
 		    CompWindow *sibling);
 
 void
+restackWindowBelow (CompWindow *w,
+		    CompWindow *sibling);
+
+void
 updateWindowAttributes (CompWindow *w);
 
 void

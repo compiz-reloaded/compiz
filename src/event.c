@@ -960,34 +960,17 @@ handleEvent (CompDisplay *display,
 	    w = findWindowAtDisplay (display, event->xclient.window);
 	    if (w)
 	    {
-		CompWindow *sibling = NULL;
+		CompWindow *sibling;
 
-		/* TODO: other stack modes than Above and Below */
-		if (event->xclient.data.l[2] == Above)
+		sibling = findWindowAtDisplay (display,
+					       event->xclient.data.l[1]);
+		if (sibling)
 		{
-		    sibling = findWindowAtDisplay (display,
-						   event->xclient.data.l[1]);
-		}
-		else if (event->xclient.data.l[2] == Below)
-		{
-		    sibling = findWindowAtDisplay (display,
-						   event->xclient.data.l[1]);
-
-		    for (sibling = sibling->prev;
-			 sibling;
-			 sibling = sibling->prev)
-		    {
-			if (sibling->attrib.override_redirect)
-			    continue;
-
-			if (sibling->mapNum == 0)
-			    continue;
-
-			break;
-		    }
-
-		    if (sibling)
+		    /* TODO: other stack modes than Above and Below */
+		    if (event->xclient.data.l[2] == Above)
 			restackWindowAbove (w, sibling);
+		    else if (event->xclient.data.l[2] == Below)
+			restackWindowBelow (w, sibling);
 		}
 	    }
 	}
@@ -1058,11 +1041,12 @@ handleEvent (CompDisplay *display,
 	  xwc.height	   = event->xconfigurerequest.height;
 	  xwc.border_width = event->xconfigurerequest.border_width;
 
-	    /* TODO: gravity */
+	  /* TODO: gravity */
 
 	  if (xwcm & (CWX | CWY))
 	  {
-	      w = findWindowAtDisplay (display, event->xconfigurerequest.window);
+	      w = findWindowAtDisplay (display,
+				       event->xconfigurerequest.window);
 	      if (w)
 	      {
 		  xwc.x += w->input.left;
