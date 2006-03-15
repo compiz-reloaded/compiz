@@ -1,5 +1,8 @@
 2006-03-15  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c (switchPaintWindow): Fix paint attribute
+	calculations.
+
 	* include/compiz.h:
 	* src/event.c (handleEvent):
 	* src/window.c: Add restackWindowBelow.

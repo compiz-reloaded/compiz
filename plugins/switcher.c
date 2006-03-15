@@ -1142,10 +1142,13 @@ switchPaintWindow (CompWindow		   *w,
     {
 	WindowPaintAttrib sAttrib = *attrib;
 
-	sAttrib.saturation = (sAttrib.saturation * ss->saturation) >> 16;
-	sAttrib.brightness = (sAttrib.brightness * ss->brightness) >> 16;
+	if (ss->saturation != COLOR)
+	    sAttrib.saturation = (sAttrib.saturation * ss->saturation) >> 16;
 
-	if (ss->wMask & w->type)
+	if (ss->brightness != 0xffff)
+	    sAttrib.brightness = (sAttrib.brightness * ss->brightness) >> 16;
+
+	if ((ss->wMask & w->type) && ss->opacity != OPAQUE)
 	    sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
 
 	UNWRAP (ss, s, paintWindow);
