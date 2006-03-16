@@ -2547,6 +2547,9 @@ stackAncestors (CompWindow     *w,
 	    if (!stackTransients (ancestor, w, xwc))
 		return;
 
+	    if (ancestor->type & CompWindowTypeDesktopMask)
+		return;
+
 	    if (ancestor->mapNum)
 		configureXWindow (w->screen->display->display, ancestor,
 				  CWSibling | CWStackMode,
@@ -2570,6 +2573,9 @@ stackAncestors (CompWindow     *w,
 
 		if (!stackTransients (a, w, xwc))
 		    break;
+
+		if (a->type & CompWindowTypeDesktopMask)
+		    continue;
 
 		if (a->mapNum)
 		    configureXWindow (w->screen->display->display, a,
