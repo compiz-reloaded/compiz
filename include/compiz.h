@@ -1327,6 +1327,8 @@ struct _CompWindow {
     Bool placed;
     Bool minimized;
 
+    int pendingUnmaps;
+
     char *startupId;
     char *resName;
     char *resClass;
@@ -1468,6 +1470,9 @@ removeWindow (CompWindow *w);
 
 void
 destroyWindow (CompWindow *w);
+
+void
+sendConfigureNotify (CompWindow *w);
 
 void
 mapWindow (CompWindow *w);

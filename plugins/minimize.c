@@ -533,29 +533,42 @@ minHandleEvent (CompDisplay *d,
 	break;
     case UnmapNotify:
 	w = findWindowAtDisplay (d, event->xunmap.window);
-	if (w && (w->state & CompWindowStateHiddenMask))
+	if (w)
 	{
 	    MIN_SCREEN (w->screen);
 
-	    if (!w->invisible && (ms->wMask & w->type))
+	    if (w->pendingUnmaps) /* Normal -> Iconic */
+	    {
+		if (!w->invisible && (ms->wMask & w->type))
+		{
+		    MIN_WINDOW (w);
+
+		    mw->newState = IconicState;
+
+		    if (minGetWindowIconGeometry (w, &mw->icon))
+		    {
+			mw->adjust     = TRUE;
+			ms->moreAdjust = TRUE;
+
+			mw->unmapCnt++;
+			w->unmapRefCnt++;
+
+			addWindowDamage (w);
+		    }
+		    else
+		    {
+			mw->state = mw->newState;
+		    }
+		}
+	    }
+	    else  /* X -> Withdrawn */
 	    {
 		MIN_WINDOW (w);
 
-		mw->newState = IconicState;
-
-		if (minGetWindowIconGeometry (w, &mw->icon))
+		if (mw->state == IconicState)
 		{
-		    mw->adjust     = TRUE;
-		    ms->moreAdjust = TRUE;
-
-		    mw->unmapCnt++;
-		    w->unmapRefCnt++;
-
-		    addWindowDamage (w);
-		}
-		else
-		{
-		    mw->state = mw->newState;
+		    (*w->screen->setWindowScale) (w, 1.0f, 1.0f);
+		    mw->state = NormalState;
 		}
 	    }
 	}

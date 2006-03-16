@@ -321,6 +321,28 @@ handleEvent (CompDisplay *display,
 	w = findWindowAtDisplay (display, event->xunmap.window);
 	if (w)
 	{
+	    /* Normal -> Iconic */
+	    if (w->pendingUnmaps)
+	    {
+		setWmState (w->screen->display, IconicState, w->id);
+		w->pendingUnmaps--;
+	    }
+	    else /* X -> Withdrawn */
+	    {
+		/* Iconic -> Withdrawn */
+		if (w->state & CompWindowStateHiddenMask)
+		{
+		    w->minimized = FALSE;
+		    w->state &= ~CompWindowStateHiddenMask;
+
+		    setWindowState (w->screen->display, w->state, w->id);
+		    updateClientListForScreen (w->screen);
+		}
+
+		setWmState (w->screen->display, WithdrawnState, w->id);
+		w->placed = FALSE;
+	    }
+
 	    unmapWindow (w);
 	    moveInputFocusToOtherWindow (w);
 	}
@@ -1043,20 +1065,33 @@ handleEvent (CompDisplay *display,
 
 	  /* TODO: gravity */
 
-	  if (xwcm & (CWX | CWY))
+	  w = findWindowAtDisplay (display, event->xconfigurerequest.window);
+	  if (w)
 	  {
-	      w = findWindowAtDisplay (display,
-				       event->xconfigurerequest.window);
-	      if (w)
+	      if (xwcm & (CWX | CWY))
 	      {
 		  xwc.x += w->input.left;
 		  xwc.y += w->input.top;
+	      }
+
+	      /* See ICCCM 4.1.5 for when to send ConfigureNotify */
+
+	      /* We only send configure notify if we don't resize, since
+		 the client window may then not get a real event */
+	      if (xwc.width	   != w->attrib.width  ||
+		  xwc.height       != w->attrib.height ||
+		  xwc.border_width != w->attrib.border_width)
+	      {
+		  w = NULL;
 	      }
 	  }
 
 	  XConfigureWindow (display->display,
 			    event->xconfigurerequest.window,
 			    xwcm, &xwc);
+
+	  if (w)
+	      sendConfigureNotify (w);
     } break;
     case CirculateRequest:
 	break;

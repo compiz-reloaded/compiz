@@ -1308,6 +1308,8 @@ addWindow (CompScreen *screen,
     w->placed    = FALSE;
     w->minimized = FALSE;
 
+    w->pendingUnmaps = 0;
+
     w->startupId = NULL;
     w->resName   = NULL;
     w->resClass  = NULL;
@@ -1596,7 +1598,7 @@ destroyWindow (CompWindow *w)
     }
 }
 
-static void
+void
 sendConfigureNotify (CompWindow *w)
 {
     XConfigureEvent xev;
@@ -1604,8 +1606,8 @@ sendConfigureNotify (CompWindow *w)
     xev.type	     = ConfigureNotify;
     xev.event	     = w->id;
     xev.window	     = w->id;
-    xev.x	     = w->serverX;
-    xev.y	     = w->serverY;
+    xev.x	     = w->attrib.x;
+    xev.y	     = w->attrib.y;
     xev.width	     = w->attrib.width;
     xev.height	     = w->attrib.height;
     xev.border_width = w->attrib.border_width;
@@ -1654,9 +1656,12 @@ mapWindow (CompWindow *w)
     if (w->type & CompWindowTypeDesktopMask)
 	w->screen->desktopWindowCount++;
 
-    if (w->protocols & CompWindowProtocolSyncRequestMask)
+    if (w->attrib.override_redirect)
     {
-	sendSyncRequest (w);
+	if (w->protocols & CompWindowProtocolSyncRequestMask)
+	    sendSyncRequest (w);
+
+	/* initial map is handled same as configure request */
 	sendConfigureNotify (w);
     }
 }
@@ -1666,19 +1671,11 @@ unmapWindow (CompWindow *w)
 {
     if (w->mapNum)
     {
-	/* if window is not being minimized it should be re-placed at map */
-	if (!w->minimized && !(w->type & w->screen->showingDesktopMask))
-	    w->placed = FALSE;
-
-	setWmState (w->screen->display,
-		    (w->minimized) ? IconicState : WithdrawnState,
-		    w->id);
+	if (w->frame)
+	    XUnmapWindow (w->screen->display->display, w->frame);
 
 	w->mapNum = 0;
     }
-
-    if (w->frame)
-	XUnmapWindow (w->screen->display->display, w->frame);
 
     w->unmapRefCnt--;
     if (w->unmapRefCnt > 0)
@@ -2038,26 +2035,8 @@ syncWindowPosition (CompWindow *w)
 			 w->attrib.x - w->input.left,
 			 w->attrib.y - w->input.top);
 
-	if (0 && !w->attrib.override_redirect)
-	{
-	    XConfigureEvent ce;
-
-	    ce.type		 = ConfigureNotify;
-	    ce.display		 = w->screen->display->display;
-	    ce.event		 = w->id;
-	    ce.window		 = w->id;
-	    ce.x		 = w->attrib.x;
-	    ce.y		 = w->attrib.y;
-	    ce.width		 = w->attrib.width;
-	    ce.height		 = w->attrib.height;
-	    ce.border_width	 = w->attrib.border_width;
-	    ce.above		 = (w->prev) ? w->prev->id : None;
-	    ce.override_redirect = FALSE;
-
-	    XSendEvent (w->screen->display->display,
-			w->id, FALSE, StructureNotifyMask,
-			(XEvent *) &ce);
-	}
+	if (!w->attrib.override_redirect)
+	    sendConfigureNotify (w);
     }
 }
 
@@ -3130,6 +3109,8 @@ hideWindow (CompWindow *w)
 
     w->state |= CompWindowStateHiddenMask;
 
+    w->pendingUnmaps++;
+
     XUnmapWindow (w->screen->display->display, w->id);
 
     setWindowState (w->screen->display, w->state, w->id);
@@ -3165,6 +3146,9 @@ minimizeTransients (CompWindow *w,
 void
 minimizeWindow (CompWindow *w)
 {
+    if (!(w->actions & CompWindowActionMinimizeMask))
+	return;
+
     if (!w->minimized)
     {
 	w->minimized = TRUE;
@@ -3202,15 +3186,23 @@ unminimizeWindow (CompWindow *w)
 void
 maximizeWindow (CompWindow *w)
 {
+    int state = 0;
+
     if (w->attrib.override_redirect)
 	return;
 
-    if ((w->state & CompWindowStateMaximizedHorzMask) &&
-	(w->state & CompWindowStateMaximizedVertMask))
+    if (w->actions & CompWindowActionMaximizeHorzMask)
+	state |= CompWindowStateMaximizedHorzMask;
+
+    if (w->actions & CompWindowActionMaximizeVertMask)
+	state |= CompWindowStateMaximizedVertMask;
+
+    state &= ~w->state;
+
+    if (!state)
 	return;
 
-    w->state |= (CompWindowStateMaximizedHorzMask |
-		 CompWindowStateMaximizedVertMask);
+    w->state |= state;
 
     recalcWindowType (w);
 

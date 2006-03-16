@@ -1,3 +1,15 @@
+2006-03-16  David Reveman  <davidr@novell.com>
+
+	* plugins/minimize.c:
+	* src/event.c (handleEvent):
+	* src/window.c:
+	Handle window state changes correctly.
+	(maximizeWindow): Use actions to determine if we're allowed maximize
+	window.
+
+	* src/event.c (handleEvent):
+	* src/window.c: Send configure notifies correctly.
+
 2006-03-15  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c (switchPaintWindow): Fix paint attribute
