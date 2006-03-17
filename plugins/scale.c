@@ -70,6 +70,10 @@
 
 #define SCALE_DARKEN_BACK_DEFAULT TRUE
 
+#define SCALE_OPACITY_DEFAULT 75
+#define SCALE_OPACITY_MIN     0
+#define SCALE_OPACITY_MAX     100
+
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -101,7 +105,8 @@ typedef struct _ScaleDisplay {
 #define SCALE_SCREEN_OPTION_TIMESTEP	 6
 #define SCALE_SCREEN_OPTION_WINDOW_TYPE  7
 #define SCALE_SCREEN_OPTION_DARKEN_BACK  8
-#define SCALE_SCREEN_OPTION_NUM          9
+#define SCALE_SCREEN_OPTION_OPACITY      9
+#define SCALE_SCREEN_OPTION_NUM          10
 
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
@@ -143,7 +148,8 @@ typedef struct _ScaleScreen {
 
     GLfloat scale;
 
-    Bool darkenBack;
+    Bool     darkenBack;
+    GLushort opacity;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -255,7 +261,12 @@ scaleSetScreenOption (CompScreen      *screen,
 	    ss->darkenBack = o->value.b;
 	    return TRUE;
 	}
-	break;
+    case SCALE_SCREEN_OPTION_OPACITY:
+	if (compSetIntOption (o, value))
+	{
+	    ss->opacity = (OPAQUE * o->value.i) / 100;
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -360,6 +371,15 @@ scaleScreenInitOptions (ScaleScreen *ss,
     o->longDesc  = "Darken background when scaling windows";
     o->type      = CompOptionTypeBool;
     o->value.b   = SCALE_DARKEN_BACK_DEFAULT;
+
+    o = &ss->opt[SCALE_SCREEN_OPTION_OPACITY];
+    o->name	  = "opacity";
+    o->shortDesc  = "Opacity";
+    o->longDesc	  = "Amount of opacity in percent";
+    o->type	  = CompOptionTypeInt;
+    o->value.i    = SCALE_OPACITY_DEFAULT;
+    o->rest.i.min = SCALE_OPACITY_MIN;
+    o->rest.i.max = SCALE_OPACITY_MAX;
 }
 
 static Bool
@@ -380,10 +400,21 @@ scalePaintWindow (CompWindow		  *w,
 	if (sw->adjust || sw->slot)
 	{
 	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
+
+	    if (w->id	    != s->display->activeWindow &&
+		ss->opacity != OPAQUE			&&
+		ss->state   != SCALE_STATE_IN)
+	    {
+		/* modify opacity of windows that are not active */
+		sAttrib = *attrib;
+		attrib  = &sAttrib;
+
+		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
+	    }
 	}
 	else if (ss->darkenBack && ss->state != SCALE_STATE_IN)
 	{
-	    /* Modify brightness of the other windows */
+	    /* modify brightness of the other windows */
 	    sAttrib = *attrib;
 	    attrib  = &sAttrib;
 
@@ -1179,6 +1210,7 @@ scaleInitScreen (CompPlugin *p,
 
     ss->speed    = SCALE_SPEED_DEFAULT;
     ss->timestep = SCALE_TIMESTEP_DEFAULT;
+    ss->opacity  = (OPAQUE * SCALE_OPACITY_DEFAULT) / 100;
 
     scaleScreenInitOptions (ss, s->display->display);
 
