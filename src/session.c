@@ -29,11 +29,53 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <poll.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <X11/SM/SMlib.h>
+#include <X11/ICE/ICElib.h>
+
 #include <compiz.h>
 
-static SmcConn smcConnection;
-static Bool    connected = FALSE;
+#define SM_DEBUG(x)
+
+static SmcConn		 smcConnection;
+static CompWatchFdHandle iceWatchFdHandle;
+static Bool		 connected = 0;
+static Bool		 iceConnected = 0;
+
+static void iceInit (void);
+
+static void
+saveYourselfCallback (SmcConn	connection,
+		      SmPointer client_data,
+		      int	saveType,
+		      Bool	shutdown,
+		      int	interact_Style,
+		      Bool	fast)
+{
+    SmcSaveYourselfDone (connection, 1);
+}
+
+static void
+dieCallback (SmcConn   connection,
+	     SmPointer clientData)
+{
+    closeSession ();
+    exit (0);
+}
+
+static void
+saveCompleteCallback (SmcConn	connection,
+		      SmPointer clientData)
+{
+}
+
+static void
+shutdownCancelledCallback (SmcConn   connection,
+			   SmPointer clientData)
+{
+}
 
 void
 initSession (char *smPrevClientId)
@@ -45,18 +87,36 @@ initSession (char *smPrevClientId)
     {
 	char errorBuffer[1024];
 
+	iceInit ();
+
+	callbacks.save_yourself.callback    = saveYourselfCallback;
+	callbacks.save_yourself.client_data = NULL;
+
+	callbacks.die.callback	  = dieCallback;
+	callbacks.die.client_data = NULL;
+
+	callbacks.save_complete.callback    = saveCompleteCallback;
+	callbacks.save_complete.client_data = NULL;
+
+	callbacks.shutdown_cancelled.callback	 = shutdownCancelledCallback;
+	callbacks.shutdown_cancelled.client_data = NULL;
+
 	smcConnection = SmcOpenConnection (NULL,
 					   NULL,
 					   SmProtoMajor,
 					   SmProtoMinor,
-					   0,
+					   SmcSaveYourselfProcMask |
+					   SmcDieProcMask	   |
+					   SmcSaveCompleteProcMask |
+					   SmcShutdownCancelledProcMask,
 					   &callbacks,
 					   smPrevClientId,
 					   &smClientId,
 					   sizeof (errorBuffer),
 					   errorBuffer);
 	if (!smcConnection)
-	    fprintf (stderr, "SmcOpenConnection failed: %s\n", errorBuffer);
+	    fprintf (stderr, "%s: SmcOpenConnection failed: %s\n",
+		     programName, errorBuffer);
 	else
 	    connected = TRUE;
     }
@@ -69,5 +129,102 @@ closeSession (void)
     {
 	if (SmcCloseConnection (smcConnection, 0, NULL) != SmcConnectionInUse)
 	    connected = FALSE;
+    }
+}
+
+/* ice connection handling taken and updated from gnome-ice.c
+ * original gnome-ice.c code written by Tom Tromey <tromey@cygnus.com>
+ */
+
+/* This is called when data is available on an ICE connection. */
+static Bool
+iceProcessMessages (void *data)
+{
+    IceConn		     connection = (IceConn) data;
+    IceProcessMessagesStatus status;
+
+    SM_DEBUG (printf ("ICE connection process messages\n"));
+
+    status = IceProcessMessages (connection, NULL, NULL);
+
+    if (status == IceProcessMessagesIOError)
+    {
+	SM_DEBUG (printf ("ICE connection process messages"
+			  " - error => shutting down the connection\n"));
+
+	IceSetShutdownNegotiation (connection, False);
+	IceCloseConnection (connection);
+    }
+
+    return 1;
+}
+
+/* This is called when a new ICE connection is made.  It arranges for
+   the ICE connection to be handled via the event loop.  */
+static void
+iceNewConnection (IceConn    connection,
+		  IcePointer clientData,
+		  Bool	     opening,
+		  IcePointer *watchData)
+{
+    if (opening)
+    {
+	SM_DEBUG (printf ("ICE connection opening\n"));
+
+	/* Make sure we don't pass on these file descriptors to any
+	   exec'ed children */
+	fcntl (IceConnectionNumber (connection), F_SETFD,
+	       fcntl (IceConnectionNumber (connection),
+		      F_GETFD,0) | FD_CLOEXEC);
+
+	iceWatchFdHandle = compAddWatchFd (IceConnectionNumber (connection),
+					   POLLIN | POLLPRI | POLLHUP | POLLERR,
+					   iceProcessMessages, connection);
+
+	iceConnected = 1;
+    }
+    else
+    {
+	SM_DEBUG (printf ("ICE connection closing\n"));
+
+	if (iceConnected)
+	{
+	    compRemoveWatchFd (iceWatchFdHandle);
+
+	    iceWatchFdHandle = 0;
+	    iceConnected = 0;
+	}
+    }
+}
+
+static IceIOErrorHandler oldIceHandler;
+
+static void
+iceErrorHandler (IceConn connection)
+{
+    if (oldIceHandler)
+	(*oldIceHandler) (connection);
+}
+
+/* We call any handler installed before (or after) iceInit but
+   avoid calling the default libICE handler which does an exit() */
+static void
+iceInit (void)
+{
+    static Bool iceInitialized = 0;
+
+    if (!iceInitialized)
+    {
+	IceIOErrorHandler defaultIceHandler;
+
+	oldIceHandler	  = IceSetIOErrorHandler (NULL);
+	defaultIceHandler = IceSetIOErrorHandler (iceErrorHandler);
+
+	if (oldIceHandler == defaultIceHandler)
+	    oldIceHandler = NULL;
+
+	IceAddConnectionWatch (iceNewConnection, NULL);
+
+	iceInitialized = 1;
     }
 }

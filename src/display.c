@@ -62,6 +62,19 @@ static CompTimeout       *timeouts = 0;
 static struct timeval    lastTimeout;
 static CompTimeoutHandle lastTimeoutHandle = 1;
 
+typedef struct _CompWatchFd {
+    struct _CompWatchFd *next;
+    int			fd;
+    CallBackProc	callBack;
+    void		*closure;
+    CompWatchFdHandle   handle;
+} CompWatchFd;
+
+static CompWatchFd       *watchFds = 0;
+static CompWatchFdHandle lastWatchFdHandle = 1;
+static struct pollfd     *watchPollFds = 0;
+static int               nWatchFds = 0;
+
 #define CLICK_TO_FOCUS_DEFAULT TRUE
 
 #define AUTORAISE_DEFAULT TRUE
@@ -435,6 +448,70 @@ compRemoveTimeout (CompTimeoutHandle handle)
     }
 }
 
+CompWatchFdHandle
+compAddWatchFd (int	     fd,
+		short int    events,
+		CallBackProc callBack,
+		void	     *closure)
+{
+    CompWatchFd *watchFd;
+
+    watchFd = malloc (sizeof (CompWatchFd));
+    if (!watchFd)
+	return 0;
+
+    watchFd->fd	      = fd;
+    watchFd->callBack = callBack;
+    watchFd->closure  = closure;
+    watchFd->handle   = lastWatchFdHandle++;
+
+    if (lastWatchFdHandle == MAXSHORT)
+	lastWatchFdHandle = 1;
+
+    watchFd->next = watchFds;
+    watchFds = watchFd;
+
+    nWatchFds++;
+
+    watchPollFds = realloc (watchPollFds, nWatchFds * sizeof (struct pollfd));
+
+    watchPollFds[nWatchFds - 1].fd     = fd;
+    watchPollFds[nWatchFds - 1].events = events;
+
+    return watchFd->handle;
+}
+
+void
+compRemoveWatchFd (CompWatchFdHandle handle)
+{
+    CompWatchFd *p = 0, *w;
+    int i;
+
+    for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+    {
+	if (w->handle == handle)
+	    break;
+
+	p = w;
+    }
+
+    if (w)
+    {
+	if (p)
+	    p->next = w->next;
+	else
+	    watchFds = w->next;
+
+	nWatchFds--;
+
+	if (i < nWatchFds)
+	    memmove (&watchPollFds[i], &watchPollFds[i + 1],
+		     (nWatchFds - i) * sizeof (struct pollfd));
+
+	free (w);
+    }
+}
+
 #define TIMEVALDIFF(tv1, tv2)						   \
     ((tv1)->tv_sec == (tv2)->tv_sec || (tv1)->tv_usec >= (tv2)->tv_usec) ? \
     ((((tv1)->tv_sec - (tv2)->tv_sec) * 1000000) +			   \
@@ -691,11 +768,31 @@ realToVirtualModMask (CompDisplay  *d,
     return modMask;
 }
 
+static int
+doPoll (int timeout)
+{
+    int rv;
+
+    rv = poll (watchPollFds, nWatchFds, timeout);
+    if (rv)
+    {
+	CompWatchFd *w;
+	int	    i;
+
+	for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+	{
+	    if (watchPollFds[i].revents != 0 && w->callBack)
+		w->callBack (w->closure);
+	}
+    }
+
+    return rv;
+}
+
 void
 eventLoop (void)
 {
     XEvent	   event;
-    struct pollfd  ufd;
     int		   timeDiff;
     struct timeval tv;
     Region	   tmpRegion;
@@ -715,8 +812,7 @@ eventLoop (void)
 	return;
     }
 
-    ufd.fd = ConnectionNumber (display->display);
-    ufd.events = POLLIN;
+    compAddWatchFd (ConnectionNumber (display->display), POLLIN, NULL, NULL);
 
     for (;;)
     {
@@ -852,7 +948,7 @@ eventLoop (void)
 
 	    timeToNextRedraw = getTimeToNextRedraw (s, &s->lastRedraw, idle);
 	    if (timeToNextRedraw)
-		timeToNextRedraw = poll (&ufd, 1, timeToNextRedraw);
+		timeToNextRedraw = doPoll (timeToNextRedraw);
 
 	    if (timeToNextRedraw == 0)
 	    {
@@ -1001,7 +1097,7 @@ eventLoop (void)
 	    if (timeouts)
 	    {
 		if (timeouts->left > 0)
-		    poll (&ufd, 1, timeouts->left);
+		    doPoll (timeouts->left);
 
 		gettimeofday (&tv, 0);
 
@@ -1033,7 +1129,7 @@ eventLoop (void)
 	    }
 	    else
 	    {
-		poll (&ufd, 1, 1000);
+		doPoll (1000);
 	    }
 
 	    idle = TRUE;

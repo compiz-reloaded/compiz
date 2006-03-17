@@ -1,3 +1,18 @@
+2006-03-17  Radek Doulik  <rodo@novell.com>
+
+	* src/session.c: added all mandatory SM client callbacks, handle
+	ICE connection and process ICE messages
+
+	* src/display.c (compAddWatchFd): new function, adds new fd watch
+	- for poll io multiplexing
+	(compRemoveWatchFd): new function, remove fd watch added by
+	compAddWatchFd
+	(doPoll): new helper function, does call poll and calls callbacks
+	for watch fd's. returns the value of poll call
+	(eventLoop): use doPoll, we use NULL for display fd watch so that
+	it doesn't call anything and just use return value from poll as
+	before
+
 2006-03-17  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c (switchDamageWindowRect): Update window

@@ -337,6 +337,7 @@ compWindowTypeMaskFromStringList (CompOptionValue *value);
 /* display.c */
 
 typedef int CompTimeoutHandle;
+typedef int CompWatchFdHandle;
 
 #define COMP_DISPLAY_OPTION_ACTIVE_PLUGINS  0
 #define COMP_DISPLAY_OPTION_TEXTURE_FILTER  1
@@ -535,6 +536,15 @@ compAddTimeout (int	     time,
 
 void
 compRemoveTimeout (CompTimeoutHandle handle);
+
+CompWatchFdHandle
+compAddWatchFd (int	     fd,
+		short int    events,
+		CallBackProc callBack,
+		void	     *closure);
+
+void
+compRemoveWatchFd (CompWatchFdHandle handle);
 
 int
 compCheckForError (Display *dpy);
