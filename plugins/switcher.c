@@ -61,6 +61,8 @@
 
 #define SWITCH_MIPMAP_DEFAULT TRUE
 
+#define SWITCH_BRINGTOFRONT_DEFAULT FALSE
+
 #define SWITCH_SATURATION_DEFAULT 100
 #define SWITCH_SATURATION_MIN     0
 #define SWITCH_SATURATION_MAX     100
@@ -101,8 +103,9 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_MIPMAP       7
 #define SWITCH_SCREEN_OPTION_SATURATION   8
 #define SWITCH_SCREEN_OPTION_BRIGHTNESS   9
-#define SWITCH_SCREEN_OPTION_OPACITY     10
-#define SWITCH_SCREEN_OPTION_NUM         11
+#define SWITCH_SCREEN_OPTION_OPACITY      10
+#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 11
+#define SWITCH_SCREEN_OPTION_NUM          12
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -137,6 +140,8 @@ typedef struct _SwitchScreen {
     GLushort saturation;
     GLushort brightness;
     GLushort opacity;
+
+    Bool bringToFront;
 } SwitchScreen;
 
 #define MwmHintsDecorations (1L << 1)
@@ -281,6 +286,12 @@ switchSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case SWITCH_SCREEN_OPTION_BRINGTOFRONT:
+	if (compSetBoolOption (o, value))
+	{
+	    ss->bringToFront = o->value.b;
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -407,6 +418,13 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->value.i    = SWITCH_OPACITY_DEFAULT;
     o->rest.i.min = SWITCH_OPACITY_MIN;
     o->rest.i.max = SWITCH_OPACITY_MAX;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT];
+    o->name	  = "bring_to_front";
+    o->shortDesc  = "Bring To Front";
+    o->longDesc	  = "Bring selected window to front";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = SWITCH_BRINGTOFRONT_DEFAULT;
 }
 
 static void
@@ -591,8 +609,6 @@ switchToWindow (CompScreen *s,
 	ss->lastActiveNum  = w->activeNum;
 	ss->selectedWindow = w->id;
 
-	addWindowDamage (w);
-
 	if (old != w->id)
 	{
 	    if (toNext)
@@ -605,12 +621,21 @@ switchToWindow (CompScreen *s,
 
 	if (ss->popupWindow)
 	{
-	    w = findWindowAtScreen (s, ss->popupWindow);
-	    if (w)
-		addWindowDamage (w);
+	    CompWindow *popup;
+
+	    popup = findWindowAtScreen (s, ss->popupWindow);
+	    if (popup)
+	    {
+		if (ss->bringToFront)
+		    restackWindowBelow (w, popup);
+
+		addWindowDamage (popup);
+	    }
 
 	    setSelectedWindowHint (s);
 	}
+
+	addWindowDamage (w);
 
 	if (old)
 	{
@@ -745,10 +770,10 @@ switchInitiate (CompScreen *s)
 			 8, PropModeReplace, (unsigned char *) &mwmHints,
 			 sizeof (mwmHints));
 
-	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_ABOVE", 0);
-	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_STICKY", 0);
-	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_SKIP_TASKBAR", 0);
-	state[nState++] = XInternAtom (dpy, "_NET_WM_STATE_SKIP_PAGER", 0);
+	state[nState++] = s->display->winStateAboveAtom;
+	state[nState++] = s->display->winStateStickyAtom;
+	state[nState++] = s->display->winStateSkipTaskbarAtom;
+	state[nState++] = s->display->winStateSkipPagerAtom;
 
 	XChangeProperty (dpy, ss->popupWindow,
 			 XInternAtom (dpy, "_NET_WM_STATE", 0),
@@ -767,7 +792,7 @@ switchInitiate (CompScreen *s)
 	    switchUpdateWindowList (s, count);
 
 	    if (ss->popupWindow)
-		XMapRaised (s->display->display, ss->popupWindow);
+		XMapWindow (s->display->display, ss->popupWindow);
 
 	    damageScreen (s);
 	}
@@ -1185,6 +1210,10 @@ switchDamageWindowRect (CompWindow *w,
 		switchUpdateWindowList (w->screen,
 					switchCountWindows (w->screen));
 	    }
+	    else if (w->id == ss->popupWindow)
+	    {
+		updateWindowAttributes (w);
+	    }
 	}
 	else if (!ss->moreAdjust)
 	{
@@ -1281,6 +1310,8 @@ switchInitScreen (CompPlugin *p,
     ss->saturation = (COLOR  * SWITCH_SATURATION_DEFAULT) / 100;
     ss->brightness = (0xffff * SWITCH_BRIGHTNESS_DEFAULT) / 100;
     ss->opacity    = (OPAQUE * SWITCH_OPACITY_DEFAULT)    / 100;
+
+    ss->bringToFront = SWITCH_BRINGTOFRONT_DEFAULT;
 
     switchScreenInitOptions (ss, s->display->display);
 

@@ -1,6 +1,12 @@
 2006-03-17  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c (switchDamageWindowRect): Update window
+	attributes for popup window. We never get a MapRequest for this
+	window so it most be done here.
+	Add "bring to front" option. (Greg)
+
 	* src/window.c (stackAncestors): Never raise desktop windows.
+	Made restackWindowAbove and restackWindowBelow smarter.
 
 2006-03-16  David Reveman  <davidr@novell.com>
 

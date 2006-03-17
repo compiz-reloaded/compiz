@@ -2806,7 +2806,11 @@ void
 restackWindowAbove (CompWindow *w,
 		    CompWindow *sibling)
 {
-    if (validSiblingBelow (w, sibling))
+    for (; sibling; sibling = sibling->next)
+	if (validSiblingBelow (w, sibling))
+	    break;
+
+    if (sibling)
     {
 	XWindowChanges xwc;
 	int	       mask;
@@ -2822,18 +2826,18 @@ restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling)
 {
     for (sibling = sibling->prev; sibling; sibling = sibling->prev)
-    {
-	if (sibling->attrib.override_redirect)
-	    continue;
+	if (validSiblingBelow (w, sibling))
+	    break;
 
-	if (sibling->mapNum == 0)
-	    continue;
-
-	break;
-    }
-    
     if (sibling)
-	restackWindowAbove (w, sibling);
+    {
+	XWindowChanges xwc;
+	int	       mask;
+
+	mask = addWindowStackChanges (w, &xwc, sibling);
+	if (mask)
+	    configureXWindow (w->screen->display->display, w, mask, &xwc);
+    }
 }
 
 void
