@@ -2,6 +2,15 @@
 
 	reviewed by: David Reveman
 
+	* autogen.sh:
+	Be consistent with rest of modular xorg by using same
+	autogen.sh.  This allows it to be run using a different
+	work directory.
+
+2006-03-17  Jeremy C. Reed  <reed@reedmedia.net>
+
+	reviewed by: David Reveman
+
 	* INSTALL:
 	Mention startup-notification requirement.
 
