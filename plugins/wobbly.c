@@ -2061,7 +2061,7 @@ wobblyHandleEvent (CompDisplay *d,
 	    activeWindow = d->activeWindow;
 	break;
     case MapNotify:
-	w = findWindowAtDisplay (d, event->xunmap.window);
+	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
 	    WOBBLY_WINDOW (w);
