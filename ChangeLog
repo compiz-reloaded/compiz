@@ -1,5 +1,8 @@
 2006-03-20  David Reveman  <davidr@novell.com>
 
+	* src/screen.c (isClientListWindow): All type of windows should go into
+	the client lists (Thanks to Quinn Storm).
+
 	* src/window.c (freeWindow): Destroy frame window.
 	(mapWindow): Fix so the sync requests are sent correctly when a window
 	is mapped but disable it for now as it seems to be causing problems

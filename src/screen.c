@@ -2256,10 +2256,7 @@ isClientListWindow (CompWindow *w)
 	    return FALSE;
     }
 
-    if (w->type & CompWindowTypeNormalMask)
-	return TRUE;
-
-    return FALSE;
+    return TRUE;
 }
 
 static void
