@@ -2923,9 +2923,15 @@ static void
 window_closed (WnckScreen *screen,
 	       WnckWindow *win)
 {
+    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
 
     remove_frame_window (win);
+
+    gdk_error_trap_push ();
+    XDeleteProperty (xdisplay, wnck_window_get_xid (win), win_decor_atom);
+    XSync (xdisplay, FALSE);
+    gdk_error_trap_pop ();
 
     g_free (d);
 }

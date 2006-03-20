@@ -1,3 +1,19 @@
+2006-03-20  David Reveman  <davidr@novell.com>
+
+	* src/window.c (freeWindow): Destroy frame window.
+	(mapWindow): Fix so the sync requests are sent correctly when a window
+	is mapped but disable it for now as it seems to be causing problems
+	with some applications.
+
+	* src/event.c (handleEvent): Remove event mask and button grabs
+	when window is reparented.
+	(handleEvent): Update client list when window type changes.
+	(handleEvent): Use constrainNewWindowSize on move/resize client
+	messages and configure requests.
+
+	* gnome/window-decorator/gnome-window-decorator.c (window_closed):
+	Delete decor property when window is closed.
+
 2006-03-17  Jeremy C. Reed  <reed@reedmedia.net>
 
 	reviewed by: David Reveman

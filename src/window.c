@@ -913,6 +913,9 @@ freeWindow (CompWindow *w)
     if (w->texture.name)
 	finiTexture (w->screen, &w->texture);
 
+    if (w->frame)
+	XDestroyWindow (w->screen->display->display, w->frame);
+
     if (w->clip)
 	XDestroyRegion (w->clip);
 
@@ -1656,14 +1659,17 @@ mapWindow (CompWindow *w)
     if (w->type & CompWindowTypeDesktopMask)
 	w->screen->desktopWindowCount++;
 
-    if (w->attrib.override_redirect)
+#if 0 /* causing some windows to not redraw correctly */
+    if (!w->attrib.override_redirect)
     {
 	if (w->protocols & CompWindowProtocolSyncRequestMask)
+	{
 	    sendSyncRequest (w);
-
-	/* initial map is handled same as configure request */
-	sendConfigureNotify (w);
+	    sendConfigureNotify (w);
+	}
     }
+#endif
+
 }
 
 void

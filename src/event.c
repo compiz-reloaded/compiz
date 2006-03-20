@@ -324,7 +324,7 @@ handleEvent (CompDisplay *display,
 	    /* Normal -> Iconic */
 	    if (w->pendingUnmaps)
 	    {
-		setWmState (w->screen->display, IconicState, w->id);
+		setWmState (display, IconicState, w->id);
 		w->pendingUnmaps--;
 	    }
 	    else /* X -> Withdrawn */
@@ -339,7 +339,7 @@ handleEvent (CompDisplay *display,
 		    updateClientListForScreen (w->screen);
 		}
 
-		setWmState (w->screen->display, WithdrawnState, w->id);
+		setWmState (display, WithdrawnState, w->id);
 		w->placed = FALSE;
 	    }
 
@@ -358,6 +358,13 @@ handleEvent (CompDisplay *display,
 	    w = findWindowAtDisplay (display, event->xreparent.window);
 	    if (w)
 	    {
+		/* This is the only case where a window is removed but not
+		   destroyed. We must remove our event mask and all passive
+		   grabs. */
+		XSelectInput (display->display, w->id, NoEventMask);
+		XShapeSelectInput (display->display, w->id, NoEventMask);
+		XUngrabButton (display->display, AnyButton, AnyModifier, w->id);
+
 		destroyWindow (w);
 		moveInputFocusToOtherWindow (w);
 	    }
@@ -631,6 +638,8 @@ handleEvent (CompDisplay *display,
 
 		    if (w->type & CompWindowTypeDesktopMask)
 			w->paint.opacity = OPAQUE;
+
+		    updateClientListForScreen (w->screen);
 		}
 	    }
 	}
@@ -931,51 +940,73 @@ handleEvent (CompDisplay *display,
 	}
 	else if (event->xclient.message_type == display->moveResizeWindowAtom)
 	{
-	    unsigned int   xwcm = 0;
-	    XWindowChanges xwc;
-
-	    if (event->xclient.data.l[0] & (1 << 7))
+	    w = findWindowAtDisplay (display, event->xclient.window);
+	    if (w)
 	    {
-		xwcm |= CWX;
-		xwc.x = event->xclient.data.l[1];
-	    }
+		unsigned int   xwcm = 0;
+		XWindowChanges xwc;
 
-	    if (event->xclient.data.l[0] & (1 << 8))
-	    {
-		xwcm |= CWY;
-		xwc.y = event->xclient.data.l[2];
-	    }
+		xwc.x      = w->attrib.x;
+		xwc.y      = w->attrib.y;
+		xwc.width  = w->attrib.width;
+		xwc.height = w->attrib.height;
 
-	    if (event->xclient.data.l[0] & (1 << 9))
-	    {
-		xwcm |= CWWidth;
-		xwc.width = event->xclient.data.l[3];
-	    }
-
-	    if (event->xclient.data.l[0] & (1 << 10))
-	    {
-		xwcm |= CWHeight;
-		xwc.height = event->xclient.data.l[4];
-	    }
-
-	    /* TODO: gravity */
-
-	    if (xwcm & (CWX | CWY))
-	    {
-		w = findWindowAtDisplay (display, event->xclient.window);
-		if (w)
+		if (event->xclient.data.l[0] & (1 << 7))
 		{
-		    if (xwcm & CWX)
-			xwc.x += w->input.left;
-
-		    if (xwcm & CWY)
-			xwc.y += w->input.top;
+		    xwcm |= CWX;
+		    xwc.x = event->xclient.data.l[1];
 		}
-	    }
 
-	    XConfigureWindow (display->display,
-			      event->xclient.window,
-			      xwcm, &xwc);
+		if (event->xclient.data.l[0] & (1 << 8))
+		{
+		    xwcm |= CWY;
+		    xwc.y = event->xclient.data.l[2];
+		}
+
+		if (event->xclient.data.l[0] & (1 << 9))
+		{
+		    xwcm |= CWWidth;
+		    xwc.width = event->xclient.data.l[3];
+		}
+
+		if (event->xclient.data.l[0] & (1 << 10))
+		{
+		    xwcm |= CWHeight;
+		    xwc.height = event->xclient.data.l[4];
+		}
+
+		/* TODO: gravity */
+
+		if (xwcm & (CWX | CWY))
+		{
+		    xwc.x += w->input.left;
+		    xwc.y += w->input.top;
+		}
+
+		if (xwcm & (CWWidth | CWHeight))
+		{
+		    int width, height;
+
+		    if (constrainNewWindowSize (w,
+						xwc.width, xwc.height,
+						&width, &height))
+		    {
+			xwc.width  = width;
+			xwc.height = height;
+
+			sendSyncRequest (w);
+		    }
+		    else
+		    {
+			xwcm &= ~(CWWidth | CWHeight);
+		    }
+		}
+
+
+		XConfigureWindow (display->display,
+				  event->xclient.window,
+				  xwcm, &xwc);
+	    }
 	}
 	else if (event->xclient.message_type == display->restackWindowAtom)
 	{
@@ -1051,47 +1082,58 @@ handleEvent (CompDisplay *display,
 	}
 	break;
     case ConfigureRequest: {
-	  unsigned int   xwcm;
-	  XWindowChanges xwc;
-
-	  xwcm = event->xconfigurerequest.value_mask &
-	      (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
-
-	  xwc.x		   = event->xconfigurerequest.x;
-	  xwc.y		   = event->xconfigurerequest.y;
-	  xwc.width	   = event->xconfigurerequest.width;
-	  xwc.height	   = event->xconfigurerequest.height;
-	  xwc.border_width = event->xconfigurerequest.border_width;
-
-	  /* TODO: gravity */
-
 	  w = findWindowAtDisplay (display, event->xconfigurerequest.window);
 	  if (w)
 	  {
+	      unsigned int   xwcm;
+	      XWindowChanges xwc;
+
+	      xwcm = event->xconfigurerequest.value_mask &
+		  (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+
+	      xwc.x	       = event->xconfigurerequest.x;
+	      xwc.y	       = event->xconfigurerequest.y;
+	      xwc.width	       = event->xconfigurerequest.width;
+	      xwc.height       = event->xconfigurerequest.height;
+	      xwc.border_width = event->xconfigurerequest.border_width;
+
+	      /* TODO: gravity */
+
 	      if (xwcm & (CWX | CWY))
 	      {
 		  xwc.x += w->input.left;
 		  xwc.y += w->input.top;
 	      }
 
-	      /* See ICCCM 4.1.5 for when to send ConfigureNotify */
-
-	      /* We only send configure notify if we don't resize, since
-		 the client window may then not get a real event */
-	      if (xwc.width	   != w->attrib.width  ||
-		  xwc.height       != w->attrib.height ||
-		  xwc.border_width != w->attrib.border_width)
+	      if (xwcm & (CWWidth | CWHeight))
 	      {
-		  w = NULL;
+		  int width, height;
+
+		  if (constrainNewWindowSize (w,
+					      xwc.width, xwc.height,
+					      &width, &height))
+		  {
+		      xwc.width  = width;
+		      xwc.height = height;
+
+		      sendSyncRequest (w);
+		  }
+		  else
+		  {
+		      xwcm &= ~(CWWidth | CWHeight);
+		  }
 	      }
+
+	      if (xwcm & CWBorderWidth)
+	      {
+		  if (xwc.border_width == w->attrib.border_width)
+		      xwcm &= ~CWBorderWidth;
+	      }
+
+	      XConfigureWindow (display->display,
+				event->xconfigurerequest.window,
+				xwcm, &xwc);
 	  }
-
-	  XConfigureWindow (display->display,
-			    event->xconfigurerequest.window,
-			    xwcm, &xwc);
-
-	  if (w)
-	      sendConfigureNotify (w);
     } break;
     case CirculateRequest:
 	break;
