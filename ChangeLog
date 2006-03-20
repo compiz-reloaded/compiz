@@ -4,6 +4,8 @@
 	(mapWindow): Fix so the sync requests are sent correctly when a window
 	is mapped but disable it for now as it seems to be causing problems
 	with some applications.
+	(recalcWindowActions): Allow dialog window actions on util and
+	toolbar windows.
 
 	* src/event.c (handleEvent): Remove event mask and button grabs
 	when window is reparented.

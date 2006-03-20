@@ -497,14 +497,14 @@ recalcWindowActions (CompWindow *w)
 	/* fall-through */
     case CompWindowTypeDialogMask:
     case CompWindowTypeModalDialogMask:
+    case CompWindowTypeUtilMask:
+    case CompWindowTypeToolbarMask:
 	actions |=
 	    CompWindowActionMoveMask   |
 	    CompWindowActionResizeMask |
 	    CompWindowActionStickMask  |
 	    CompWindowActionCloseMask;
 	break;
-    case CompWindowTypeUtilMask:
-    case CompWindowTypeToolbarMask:
     case CompWindowTypeMenuMask:
     case CompWindowTypeSplashMask:
     case CompWindowTypeDesktopMask:
