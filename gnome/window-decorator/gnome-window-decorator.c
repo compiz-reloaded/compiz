@@ -3017,8 +3017,8 @@ lower_window (WnckWindow *win)
     GdkScreen  *screen;
     Window     xroot;
     XEvent     ev;
-    WnckWindow *sibling;
-    GList      *windows;
+    WnckWindow *sibling = NULL;
+    GList      *windows, *w;
 
     gdkdisplay = gdk_display_get_default ();
     xdisplay   = GDK_DISPLAY_XDISPLAY (gdkdisplay);
@@ -3034,10 +3034,23 @@ lower_window (WnckWindow *win)
     }
 
     windows = wnck_screen_get_windows_stacked (wnck_screen_get_default ());
-    if (!windows)
+    for (w = windows; w; w = w->next)
+    {
+	sibling = WNCK_WINDOW (w->data);
+
+	if (wnck_window_get_state (sibling) & WNCK_WINDOW_STATE_HIDDEN)
+	    continue;
+
+	if (wnck_window_get_window_type (sibling) == WNCK_WINDOW_DESKTOP)
+	    continue;
+
+	break;
+    }
+
+    if (!w)
 	return;
 
-    sibling = WNCK_WINDOW (windows->data);
+    sibling = WNCK_WINDOW (w->data);
     if (sibling == win)
 	return;
 
