@@ -37,6 +37,10 @@
 #define MOVE_TERMINATE_BUTTON_DEFAULT    Button1
 #define MOVE_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
 
+#define MOVE_OPACITY_DEFAULT 100
+#define MOVE_OPACITY_MIN     1
+#define MOVE_OPACITY_MAX     100
+
 struct _MoveKeys {
     char *name;
     int  dx;
@@ -64,10 +68,13 @@ typedef struct _MoveDisplay {
 
 #define MOVE_SCREEN_OPTION_INITIATE  0
 #define MOVE_SCREEN_OPTION_TERMINATE 1
-#define MOVE_SCREEN_OPTION_NUM	     2
+#define MOVE_SCREEN_OPTION_OPACITY   2
+#define MOVE_SCREEN_OPTION_NUM	     3
 
 typedef struct _MoveScreen {
     CompOption opt[MOVE_SCREEN_OPTION_NUM];
+
+    PaintWindowProc paintWindow;
 
     int grabIndex;
 
@@ -75,6 +82,8 @@ typedef struct _MoveScreen {
 
     int prevPointerX;
     int prevPointerY;
+
+    GLushort moveOpacity;
 } MoveScreen;
 
 #define GET_MOVE_DISPLAY(d)				      \
@@ -129,6 +138,12 @@ moveSetScreenOption (CompScreen      *screen,
 	if (compSetBindingOption (o, value))
 	    return TRUE;
 	break;
+    case MOVE_SCREEN_OPTION_OPACITY:
+	if (compSetIntOption (o, value))
+	{
+	    ms->moveOpacity = (o->value.i * OPAQUE) / 100;
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -159,6 +174,15 @@ moveScreenInitOptions (MoveScreen *ms,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = MOVE_TERMINATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = MOVE_TERMINATE_BUTTON_DEFAULT;
+
+    o = &ms->opt[MOVE_SCREEN_OPTION_OPACITY];
+    o->name	  = "opacity";
+    o->shortDesc  = "Opacity";
+    o->longDesc	  = "Opacity level of moving windows";
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = MOVE_OPACITY_DEFAULT;
+    o->rest.i.min = MOVE_OPACITY_MIN;
+    o->rest.i.max = MOVE_OPACITY_MAX;
 }
 
 static void
@@ -426,6 +450,39 @@ moveHandleEvent (CompDisplay *d,
 }
 
 static Bool
+movePaintWindow (CompWindow		 *w,
+		 const WindowPaintAttrib *attrib,
+		 Region			 region,
+		 unsigned int		 mask)
+{
+    WindowPaintAttrib sAttrib;
+    CompScreen	      *s = w->screen;
+    Bool	      status;
+
+    MOVE_SCREEN (s);
+
+    if (ms->grabIndex)
+    {
+	MOVE_DISPLAY (s->display);
+
+	if (md->w == w && ms->moveOpacity != OPAQUE)
+	{
+	    /* modify opacity of windows that are not active */
+	    sAttrib = *attrib;
+	    attrib  = &sAttrib;
+
+	    sAttrib.opacity = (sAttrib.opacity * ms->moveOpacity) >> 16;
+	}
+    }
+
+    UNWRAP (ms, s, paintWindow);
+    status = (*s->paintWindow) (w, attrib, region, mask);
+    WRAP (ms, s, paintWindow, movePaintWindow);
+
+    return status;
+}
+
+static Bool
 moveInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
@@ -486,11 +543,15 @@ moveInitScreen (CompPlugin *p,
     ms->prevPointerX = 0;
     ms->prevPointerY = 0;
 
+    ms->moveOpacity = (MOVE_OPACITY_DEFAULT * OPAQUE) / 100;
+
     moveScreenInitOptions (ms, s->display->display);
 
     ms->moveCursor = XCreateFontCursor (s->display->display, XC_plus);
 
     addScreenBinding (s, &ms->opt[MOVE_SCREEN_OPTION_INITIATE].value.bind);
+
+    WRAP (ms, s, paintWindow, movePaintWindow);
 
     s->privates[md->screenPrivateIndex].ptr = ms;
 
@@ -502,6 +563,8 @@ moveFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     MOVE_SCREEN (s);
+
+    UNWRAP (ms, s, paintWindow);
 
     free (ms);
 }
@@ -523,6 +586,10 @@ moveFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+CompPluginDep moveDeps[] = {
+    { CompPluginRuleAfter, "fade" }
+};
+
 CompPluginVTable moveVTable = {
     "move",
     "Move Window",
@@ -539,8 +606,8 @@ CompPluginVTable moveVTable = {
     0, /* SetDisplayOption */
     moveGetScreenOptions,
     moveSetScreenOption,
-    NULL,
-    0
+    moveDeps,
+    sizeof (moveDeps) / sizeof (moveDeps[0])
 };
 
 CompPluginVTable *

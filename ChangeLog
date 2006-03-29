@@ -1,6 +1,11 @@
 2006-03-29  David Reveman  <davidr@novell.com>
 
-	* plugins/Makefile.am: Add water plugin.
+	* plugins/move.c: Add opacity option.
+
+	* plugins/Makefile.am: Add water plugin. It's not very useful yet
+	and it needs more work but it's a good example of how to use
+	GL_ARB_fragment_program and GL_EXT_framebuffer_object for visual
+	effects.
 
 	* src/screen.c (addScreen): Fix light position.
 
