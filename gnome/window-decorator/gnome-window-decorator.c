@@ -58,6 +58,8 @@
 #define COMPIZ_TITLEBAR_FONT_KEY \
     GCONF_DIR "/titlebar_font"
 
+#define STROKE_ALPHA 0.6
+
 #define LEFT_SPACE   12
 #define RIGHT_SPACE  14
 #define TOP_SPACE    10
@@ -1168,22 +1170,61 @@ draw_min_button (decor_t *d,
     cairo_close_path (cr);
 }
 
+typedef void (*draw_proc) (cairo_t *cr);
+
 static void
 button_state_offsets (gdouble x,
 		      gdouble y,
 		      guint   state,
 		      gdouble *return_x,
-		      gdouble *return_y,
-		      gdouble *return_sx,
-		      gdouble *return_sy)
+		      gdouble *return_y)
 {
-    static double off[]	= { 0.0, 0.0, 0.0, 1.0 };
-    static double shadow_off[] = { 1.0, 1.0, 1.0, 0.0 };
+    static double off[]	= { 0.0, 0.0, 0.0, 0.5 };
 
     *return_x  = x + off[state];
     *return_y  = y + off[state];
-    *return_sx = x + shadow_off[state];
-    *return_sy = y + shadow_off[state];
+}
+
+static void
+button_state_paint (cairo_t	  *cr,
+		    GtkStyle	  *style,
+		    decor_color_t *color,
+		    guint	  state)
+{
+
+#define IN_STATE (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW)
+
+    if ((state & IN_STATE) == IN_STATE)
+    {
+	if (state & IN_EVENT_WINDOW)
+	    cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+	else
+	    cairo_set_source_rgba (cr, color->r, color->g, color->b, 0.95);
+
+	cairo_fill_preserve (cr);
+
+	gdk_cairo_set_source_color_alpha (cr,
+					  &style->fg[GTK_STATE_NORMAL],
+					  STROKE_ALPHA);
+
+	cairo_set_line_width (cr, 1.0);
+	cairo_stroke (cr);
+	cairo_set_line_width (cr, 2.0);
+    }
+    else
+    {
+	gdk_cairo_set_source_color_alpha (cr,
+					  &style->fg[GTK_STATE_NORMAL],
+					  STROKE_ALPHA);
+	cairo_stroke_preserve (cr);
+
+	if (state & IN_EVENT_WINDOW)
+	    cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+	else
+	    cairo_set_source_rgba (cr, color->r, color->g, color->b, 0.95);
+
+	cairo_fill (cr);
+    }
 }
 
 static void
@@ -1193,7 +1234,7 @@ draw_window_decoration (decor_t *d)
     GtkStyle	  *style;
     decor_color_t color;
     double        alpha;
-    double        x1, y1, x2, y2, x, y, sx, sy;
+    double        x1, y1, x2, y2, x, y;
     int		  corners = SHADE_LEFT | SHADE_RIGHT | SHADE_TOP | SHADE_BOTTOM;
     int		  top;
 
@@ -1412,29 +1453,19 @@ draw_window_decoration (decor_t *d)
 
     cairo_stroke (cr);
 
+    cairo_set_line_width (cr, 2.0);
+
     if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
     {
 	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 39.0,
 			      titlebar_height / 2 + 3.0,
-			      d->button_states[0], &x, &y, &sx, &sy);
+			      d->button_states[0], &x, &y);
 
 	if (d->active)
 	{
-	    gdk_cairo_set_source_color_alpha (cr,
-					      &style->fg[GTK_STATE_NORMAL],
-					      alpha);
-	    cairo_move_to (cr, sx, sy);
-	    draw_close_button (d, cr, 3.0);
-	    cairo_fill (cr);
-
-	    if (d->button_states[0] & IN_EVENT_WINDOW)
-		cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-	    else
-		cairo_set_source_rgba (cr, color.r, color.g, color.b, 0.95);
-
 	    cairo_move_to (cr, x, y);
 	    draw_close_button (d, cr, 3.0);
-	    cairo_fill (cr);
+	    button_state_paint (cr, style, &color, d->button_states[0]);
 	}
 	else
 	{
@@ -1451,7 +1482,7 @@ draw_window_decoration (decor_t *d)
     {
 	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 21.0,
 			      titlebar_height / 2 + 3.0,
-			      d->button_states[1], &x, &y, &sx, &sy);
+			      d->button_states[1], &x, &y);
 
 	cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 
@@ -1459,22 +1490,7 @@ draw_window_decoration (decor_t *d)
 	{
 	    gdk_cairo_set_source_color_alpha (cr,
 					      &style->fg[GTK_STATE_NORMAL],
-					      alpha);
-	    cairo_move_to (cr, sx, sy);
-
-	    if (d->state & (WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY |
-			    WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY))
-		draw_unmax_button (d, cr, 4.0);
-	    else
-		draw_max_button (d, cr, 4.0);
-
-	    cairo_fill (cr);
-
-	    if (d->button_states[1] & IN_EVENT_WINDOW)
-		cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-	    else
-		cairo_set_source_rgba (cr, color.r, color.g, color.b, 0.95);
-
+					      STROKE_ALPHA);
 	    cairo_move_to (cr, x, y);
 
 	    if (d->state & (WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY |
@@ -1483,7 +1499,7 @@ draw_window_decoration (decor_t *d)
 	    else
 		draw_max_button (d, cr, 4.0);
 
-	    cairo_fill (cr);
+	    button_state_paint (cr, style, &color, d->button_states[1]);
 	}
 	else
 	{
@@ -1506,25 +1522,16 @@ draw_window_decoration (decor_t *d)
     {
 	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 3.0,
 			      titlebar_height / 2 + 3.0,
-			      d->button_states[2], &x, &y, &sx, &sy);
+			      d->button_states[2], &x, &y);
 
 	if (d->active)
 	{
 	    gdk_cairo_set_source_color_alpha (cr,
 					      &style->fg[GTK_STATE_NORMAL],
-					      alpha);
-	    cairo_move_to (cr, sx, sy);
-	    draw_min_button (d, cr, 4.0);
-	    cairo_fill (cr);
-
-	    if (d->button_states[2] & IN_EVENT_WINDOW)
-		cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-	    else
-		cairo_set_source_rgba (cr, color.r, color.g, color.b, 0.95);
-
+					      STROKE_ALPHA);
 	    cairo_move_to (cr, x, y);
 	    draw_min_button (d, cr, 4.0);
-	    cairo_fill (cr);
+	    button_state_paint (cr, style, &color, d->button_states[2]);
 	}
 	else
 	{
@@ -1539,19 +1546,26 @@ draw_window_decoration (decor_t *d)
 
     if (d->layout)
     {
-	gdk_cairo_set_source_color_alpha (cr,
-					  &style->fg[GTK_STATE_NORMAL],
-					  alpha);
-
 	if (d->active)
 	{
 	    cairo_move_to (cr,
-			   33.0,
-			   9.0 + (titlebar_height - text_height) / 2.0);
+			   32.0,
+			   8.0 + (titlebar_height - text_height) / 2.0);
 
-	    pango_cairo_show_layout (cr, d->layout);
+	    gdk_cairo_set_source_color_alpha (cr,
+					      &style->fg[GTK_STATE_NORMAL],
+					      STROKE_ALPHA);
+
+	    pango_cairo_layout_path (cr, d->layout);
+	    cairo_stroke (cr);
 
 	    cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+	}
+	else
+	{
+	    gdk_cairo_set_source_color_alpha (cr,
+					      &style->fg[GTK_STATE_NORMAL],
+					      alpha);
 	}
 
 	cairo_move_to (cr,

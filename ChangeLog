@@ -1,5 +1,8 @@
 2006-03-29  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c: Draw outline around
+	window title text and buttons instead of small shadow.
+
 	* src/event.c (handleEvent):
 	* include/compiz.h:
 	* src/window.c: Set allowed window actions more correctly.
