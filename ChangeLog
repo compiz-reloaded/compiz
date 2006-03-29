@@ -1,5 +1,9 @@
 2006-03-29  David Reveman  <davidr@novell.com>
 
+	* src/event.c (handleEvent):
+	* include/compiz.h:
+	* src/window.c: Set allowed window actions more correctly.
+
 	* plugins/move.c: Add opacity option.
 
 	* plugins/Makefile.am: Add water plugin. It's not very useful yet

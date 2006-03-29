@@ -1459,6 +1459,9 @@ setWindowState (CompDisplay  *display,
 		unsigned int state,
 		Window       id);
 
+void
+recalcWindowActions (CompWindow *w);
+
 unsigned int
 getWindowType (CompDisplay *display,
 	       Window      id);

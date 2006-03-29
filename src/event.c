@@ -635,6 +635,7 @@ handleEvent (CompDisplay *display,
 		    w->wmType = type;
 
 		    recalcWindowType (w);
+		    recalcWindowActions (w);
 
 		    if (w->type & CompWindowTypeDesktopMask)
 			w->paint.opacity = OPAQUE;
@@ -657,6 +658,7 @@ handleEvent (CompDisplay *display,
 		    w->state = state;
 
 		    recalcWindowType (w);
+		    recalcWindowActions (w);
 
 		    if (w->type & CompWindowTypeDesktopMask)
 			w->paint.opacity = OPAQUE;
@@ -667,7 +669,10 @@ handleEvent (CompDisplay *display,
 	{
 	    w = findWindowAtDisplay (display, event->xproperty.window);
 	    if (w)
+	    {
 		updateNormalHints (w);
+		recalcWindowActions (w);
+	    }
 	}
 	else if (event->xproperty.atom == XA_WM_HINTS)
 	{
@@ -893,6 +898,7 @@ handleEvent (CompDisplay *display,
 		    w->state = wState;
 
 		    recalcWindowType (w);
+		    recalcWindowActions (w);
 
 		    if (!w->attrib.override_redirect)
 			updateWindowAttributes (w);

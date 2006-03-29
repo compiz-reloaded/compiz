@@ -481,7 +481,7 @@ setWindowActions (CompDisplay  *display,
 		     (unsigned char *) data, i);
 }
 
-static void
+void
 recalcWindowActions (CompWindow *w)
 {
     unsigned int actions = 0;
@@ -489,21 +489,25 @@ recalcWindowActions (CompWindow *w)
     switch (w->type) {
     case CompWindowTypeFullscreenMask:
     case CompWindowTypeNormalMask:
-	actions |=
-	    CompWindowActionMinimizeMask     |
-	    CompWindowActionMaximizeHorzMask |
-	    CompWindowActionMaximizeVertMask |
-	    CompWindowActionFullscreenMask;
-	/* fall-through */
-    case CompWindowTypeDialogMask:
-    case CompWindowTypeModalDialogMask:
     case CompWindowTypeUtilMask:
     case CompWindowTypeToolbarMask:
-	actions |=
-	    CompWindowActionMoveMask   |
-	    CompWindowActionResizeMask |
-	    CompWindowActionStickMask  |
-	    CompWindowActionCloseMask;
+	actions =
+		CompWindowActionMaximizeHorzMask |
+		CompWindowActionMaximizeVertMask |
+		CompWindowActionFullscreenMask   |
+		CompWindowActionMoveMask         |
+		CompWindowActionResizeMask       |
+		CompWindowActionStickMask        |
+		CompWindowActionMinimizeMask     |
+		CompWindowActionCloseMask;
+	break;
+    case CompWindowTypeDialogMask:
+    case CompWindowTypeModalDialogMask:
+	actions =
+		CompWindowActionMoveMask   |
+		CompWindowActionResizeMask |
+		CompWindowActionStickMask  |
+		CompWindowActionCloseMask;
 	break;
     case CompWindowTypeMenuMask:
     case CompWindowTypeSplashMask:
@@ -513,6 +517,10 @@ recalcWindowActions (CompWindow *w)
     default:
 	break;
     }
+
+    if (w->sizeHints.min_width  == w->sizeHints.max_width &&
+	w->sizeHints.min_height == w->sizeHints.max_height)
+	actions &= ~CompWindowActionResizeMask;
 
     if (actions != w->actions)
     {
@@ -1517,6 +1525,8 @@ addWindow (CompScreen *screen,
 
 	w->mwmDecor  = getMwmDecor (w->screen->display, w->id);
 	w->protocols = getProtocols (w->screen->display, w->id);
+
+	recalcWindowActions (w);
 
 	if (!(w->type & CompWindowTypeDesktopMask))
 	    w->opacity =
@@ -3221,6 +3231,7 @@ maximizeWindow (CompWindow *w)
     w->state |= state;
 
     recalcWindowType (w);
+    recalcWindowActions (w);
 
     updateWindowAttributes (w);
 
@@ -3241,6 +3252,7 @@ unmaximizeWindow (CompWindow *w)
 		  CompWindowStateMaximizedVertMask);
 
     recalcWindowType (w);
+    recalcWindowActions (w);
 
     updateWindowAttributes (w);
 
