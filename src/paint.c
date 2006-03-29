@@ -763,7 +763,7 @@ paintWindow (CompWindow		     *w,
     if (w->vCount)
     {
 	w->lastPaint = *attrib;
-	drawWindowTexture (w, &w->texture, attrib, mask);
+	(*w->screen->drawWindowTexture) (w, &w->texture, attrib, mask);
     }
 
     return TRUE;

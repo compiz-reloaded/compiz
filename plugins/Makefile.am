@@ -42,6 +42,10 @@ libswitcher_la_LDFLAGS = -module -avoid-version -no-undefined
 libswitcher_la_LIBADD = @COMPIZ_LIBS@
 libswitcher_la_SOURCES = switcher.c
 
+libwater_la_LDFLAGS = -module -avoid-version -no-undefined
+libwater_la_LIBADD = @COMPIZ_LIBS@
+libwater_la_SOURCES = water.c
+
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
@@ -77,5 +81,6 @@ module_LTLIBRARIES =	      \
 	libresize.la	      \
 	libdecoration.la      \
 	libswitcher.la	      \
+	libwater.la	      \
 	$(libgconf_module)    \
 	$(libplace_module)

@@ -1028,10 +1028,10 @@ addScreen (CompDisplay *display,
     const char		 *glxExtensions, *glExtensions;
     GLint	         stencilBits;
     XSetWindowAttributes attrib;
-    GLfloat              globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 0.1f };
-    GLfloat              ambientLight[]   = { 0.0f, 0.0f,  0.0f, 0.0f };
-    GLfloat              diffuseLight[]   = { 0.9f, 0.9f,  0.9f, 0.9f };
-    GLfloat              light0Position[] = { 0.0f, 0.0f, -9.0f, 1.0f };
+    GLfloat		 globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 0.1f };
+    GLfloat		 ambientLight[]   = { 0.0f, 0.0f,  0.0f, 0.0f };
+    GLfloat		 diffuseLight[]   = { 0.9f, 0.9f,  0.9f, 0.9f };
+    GLfloat		 light0Position[] = { -0.5f, 0.5f, -9.0f, 1.0f };
     CompWindow		 *w;
 
     s = malloc (sizeof (CompScreen));
@@ -1219,6 +1219,7 @@ addScreen (CompDisplay *display,
     s->paintBackground        = paintBackground;
     s->paintWindow            = paintWindow;
     s->addWindowGeometry      = addWindowGeometry;
+    s->drawWindowTexture      = drawWindowTexture;
     s->drawWindowGeometry     = drawWindowGeometry;
     s->damageWindowRect       = damageWindowRect;
     s->focusWindow	      = focusWindow;
@@ -1500,16 +1501,51 @@ addScreen (CompDisplay *display,
 	    glGetIntegerv (GL_MAX_TEXTURE_UNITS_ARB, &s->maxTextureUnits);
     }
 
-    s->mipmap = 0;
-    if (s->textureNonPowerOfTwo)
+    s->fragmentProgram = 0;
+    if (strstr (glExtensions, "GL_ARB_fragment_program"))
     {
-	if (strstr (glExtensions, "GL_EXT_framebuffer_object"))
-	{
-	    s->generateMipmap = (GLGenerateMipmapProc)
-		getProcAddress (s, "glGenerateMipmapEXT");
-	    if (s->generateMipmap)
-		s->mipmap = 1;
-	}
+	s->genPrograms = (GLGenProgramsProc)
+	    getProcAddress (s, "glGenProgramsARB");
+	s->deletePrograms = (GLDeleteProgramsProc)
+	    getProcAddress (s, "glDeleteProgramsARB");
+	s->bindProgram = (GLBindProgramProc)
+	    getProcAddress (s, "glBindProgramARB");
+	s->programString = (GLProgramStringProc)
+	    getProcAddress (s, "glProgramStringARB");
+	s->programLocalParameter4f = (GLProgramLocalParameter4fProc)
+	    getProcAddress (s, "glProgramLocalParameter4fARB");
+
+	if (s->genPrograms    &&
+	    s->deletePrograms &&
+	    s->bindProgram    &&
+	    s->programString  &&
+	    s->programLocalParameter4f)
+	    s->fragmentProgram = 1;
+    }
+
+    s->fbo = 0;
+    if (strstr (glExtensions, "GL_EXT_framebuffer_object"))
+    {
+	s->genFramebuffers = (GLGenFramebuffersProc)
+	    getProcAddress (s, "glGenFramebuffersEXT");
+	s->deleteFramebuffers = (GLDeleteFramebuffersProc)
+	    getProcAddress (s, "glDeleteFramebuffersEXT");
+	s->bindFramebuffer = (GLBindFramebufferProc)
+	    getProcAddress (s, "glBindFramebufferEXT");
+	s->checkFramebufferStatus = (GLCheckFramebufferStatusProc)
+	    getProcAddress (s, "glCheckFramebufferStatusEXT");
+	s->framebufferTexture2D = (GLFramebufferTexture2DProc)
+	    getProcAddress (s, "glFramebufferTexture2DEXT");
+	s->generateMipmap = (GLGenerateMipmapProc)
+	    getProcAddress (s, "glGenerateMipmapEXT");
+
+	if (s->genFramebuffers	      &&
+	    s->deleteFramebuffers     &&
+	    s->bindFramebuffer	      &&
+	    s->checkFramebufferStatus &&
+	    s->framebufferTexture2D   &&
+	    s->generateMipmap)
+	    s->fbo = 1;
     }
 
     initTexture (s, &s->backgroundTexture);

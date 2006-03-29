@@ -263,8 +263,8 @@ switchSetScreenOption (CompScreen      *screen,
 	break;
     case SWITCH_SCREEN_OPTION_MIPMAP:
 	if (compSetBoolOption (o, value))
-		return TRUE;
-    break;
+	    return TRUE;
+	break;
     case SWITCH_SCREEN_OPTION_SATURATION:
 	if (compSetIntOption (o, value))
 	{
@@ -1087,7 +1087,7 @@ switchPaintThumb (CompWindow		  *w,
 	oldDrawWindowGeometry = w->screen->drawWindowGeometry;
 	w->screen->drawWindowGeometry = drawWindowGeometry;
 
-	drawWindowTexture (w, &w->texture, &sAttrib, mask);
+	(*w->screen->drawWindowTexture) (w, &w->texture, &sAttrib, mask);
 
 	w->screen->drawWindowGeometry = oldDrawWindowGeometry;
     }

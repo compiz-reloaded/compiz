@@ -327,7 +327,7 @@ enableTexture (CompScreen	 *screen,
     {
 	if (screen->display->textureFilter == GL_LINEAR_MIPMAP_LINEAR)
 	{
-	    if (screen->mipmap)
+	    if (screen->textureNonPowerOfTwo && screen->fbo)
 	    {
 		if (texture->oldMipmaps)
 		    (*screen->generateMipmap) (texture->target);

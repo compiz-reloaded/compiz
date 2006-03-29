@@ -197,8 +197,10 @@ decorPaintWindow (CompWindow		  *w,
 	    }
 
 	    if (w->vCount)
-		drawWindowTexture (w, &wd->decor->texture->texture, attrib,
-				   mask | PAINT_WINDOW_TRANSLUCENT_MASK);
+		(*w->screen->drawWindowTexture) (w,
+						 &wd->decor->texture->texture,
+						 attrib, mask |
+						 PAINT_WINDOW_TRANSLUCENT_MASK);
 	}
     }
 

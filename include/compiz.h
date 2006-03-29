@@ -691,6 +691,11 @@ typedef void (*AddWindowGeometryProc) (CompWindow *window,
 				       Region	  region,
 				       Region	  clip);
 
+typedef void (*DrawWindowTextureProc) (CompWindow	       *w,
+				       CompTexture	       *texture,
+				       const WindowPaintAttrib *attrib,
+				       unsigned int	       mask);
+
 typedef void (*DrawWindowGeometryProc) (CompWindow *window);
 
 #define PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK (1 << 0)
@@ -905,8 +910,37 @@ typedef void (*GLXCopySubBufferProc) (Display     *display,
 
 typedef void (*GLActiveTextureProc) (GLenum texture);
 typedef void (*GLClientActiveTextureProc) (GLenum texture);
-typedef void (*GLGenerateMipmapProc) (GLenum target);
 
+typedef void (*GLGenProgramsProc) (GLsizei n,
+				   GLuint  *programs);
+typedef void (*GLDeleteProgramsProc) (GLsizei n,
+				      GLuint  *programs);
+typedef void (*GLBindProgramProc) (GLenum target,
+				   GLuint program);
+typedef void (*GLProgramStringProc) (GLenum	  target,
+				     GLenum	  format,
+				     GLsizei	  len,
+				     const GLvoid *string);
+typedef void (*GLProgramLocalParameter4fProc) (GLenum  target,
+					       GLuint  index,
+					       GLfloat x,
+					       GLfloat y,
+					       GLfloat z,
+					       GLfloat w);
+
+typedef void (*GLGenFramebuffersProc) (GLsizei n,
+				       GLuint  *framebuffers);
+typedef void (*GLDeleteFramebuffersProc) (GLsizei n,
+					  GLuint  *framebuffers);
+typedef void (*GLBindFramebufferProc) (GLenum target,
+				       GLuint framebuffer);
+typedef GLenum (*GLCheckFramebufferStatusProc) (GLenum target);
+typedef void (*GLFramebufferTexture2DProc) (GLenum target,
+					    GLenum attachment,
+					    GLenum textarget,
+					    GLuint texture,
+					    GLint  level);
+typedef void (*GLGenerateMipmapProc) (GLenum target);
 
 #define MAX_DEPTH 32
 
@@ -1023,7 +1057,8 @@ struct _CompScreen {
     int		      textureEnvCrossbar;
     int		      textureBorderClamp;
     GLint	      maxTextureSize;
-    int		      mipmap;
+    int		      fbo;
+    int		      fragmentProgram;
     int		      maxTextureUnits;
     Cursor	      invisibleCursor;
     XRectangle        *exposeRects;
@@ -1093,7 +1128,19 @@ struct _CompScreen {
 
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;
-    GLGenerateMipmapProc      generateMipmap;
+
+    GLGenProgramsProc		  genPrograms;
+    GLDeleteProgramsProc	  deletePrograms;
+    GLBindProgramProc		  bindProgram;
+    GLProgramStringProc		  programString;
+    GLProgramLocalParameter4fProc programLocalParameter4f;
+
+    GLGenFramebuffersProc        genFramebuffers;
+    GLDeleteFramebuffersProc     deleteFramebuffers;
+    GLBindFramebufferProc        bindFramebuffer;
+    GLCheckFramebufferStatusProc checkFramebufferStatus;
+    GLFramebufferTexture2DProc   framebufferTexture2D;
+    GLGenerateMipmapProc         generateMipmap;
 
     GLXContext ctx;
 
@@ -1113,6 +1160,7 @@ struct _CompScreen {
     PaintWindowProc	         paintWindow;
     AddWindowGeometryProc        addWindowGeometry;
     DrawWindowGeometryProc       drawWindowGeometry;
+    DrawWindowTextureProc	 drawWindowTexture;
     DamageWindowRectProc         damageWindowRect;
     FocusWindowProc		 focusWindow;
     SetWindowScaleProc		 setWindowScale;
