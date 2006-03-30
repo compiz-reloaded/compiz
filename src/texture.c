@@ -329,9 +329,6 @@ enableTexture (CompScreen	 *screen,
 	{
 	    if (screen->textureNonPowerOfTwo && screen->fbo)
 	    {
-		if (texture->oldMipmaps)
-		    (*screen->generateMipmap) (texture->target);
-
 		glTexParameteri (texture->target,
 				 GL_TEXTURE_MIN_FILTER,
 				 GL_LINEAR_MIPMAP_LINEAR);
@@ -366,6 +363,12 @@ enableTexture (CompScreen	 *screen,
 
 	    texture->filter = screen->display->textureFilter;
 	}
+    }
+
+    if (texture->filter == GL_LINEAR_MIPMAP_LINEAR)
+    {
+	if (texture->oldMipmaps)
+	    (*screen->generateMipmap) (texture->target);
     }
 }
 

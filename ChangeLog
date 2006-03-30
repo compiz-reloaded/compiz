@@ -1,3 +1,8 @@
+2006-03-30  David Reveman  <davidr@novell.com>
+
+	* src/texture.c (enableTexture): Always make sure mipmaps are up to
+	date when using GL_LINEAR_MIPMAP_LINEAR filter.
+
 2006-03-29  David Reveman  <davidr@novell.com>
 
 	* gnome/window-decorator/gnome-window-decorator.c: Draw outline around
