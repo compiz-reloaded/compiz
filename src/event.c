@@ -1066,8 +1066,11 @@ handleEvent (CompDisplay *display,
 	    if (w->minimized)
 		unminimizeWindow (w);
 
-	    if (w->screen->showingDesktopMask)
-		leaveShowDesktopMode (w->screen);
+	    if (w->inShowDesktopMode)
+	    {
+		w->inShowDesktopMode = FALSE;
+		showWindow (w);
+	    }
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {

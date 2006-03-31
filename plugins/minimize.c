@@ -590,13 +590,15 @@ minDamageWindowRect (CompWindow *w,
 
     MIN_SCREEN (w->screen);
 
-    if (initial && !w->invisible && (ms->wMask & w->type))
+    if (initial)
     {
 	MIN_WINDOW (w);
 
 	if (mw->state == IconicState)
 	{
-	    if (minGetWindowIconGeometry (w, &mw->icon))
+	    if (!w->invisible	      &&
+		(ms->wMask & w->type) &&
+		minGetWindowIconGeometry (w, &mw->icon))
 	    {
 		if (!mw->adjust)
 		{
@@ -617,6 +619,15 @@ minDamageWindowRect (CompWindow *w,
 
 		    addWindowDamage (w);
 		}
+	    }
+	    else
+	    {
+		moveWindow (w,
+			    w->serverX - w->attrib.x,
+			    w->serverY - w->attrib.y,
+			    FALSE);
+
+		(*w->screen->setWindowScale) (w, 1.0f, 1.0f);
 	    }
 	}
 

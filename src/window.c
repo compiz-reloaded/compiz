@@ -1316,8 +1316,9 @@ addWindow (CompScreen *screen,
 
     w->frame = None;
 
-    w->placed    = FALSE;
-    w->minimized = FALSE;
+    w->placed		 = FALSE;
+    w->minimized	 = FALSE;
+    w->inShowDesktopMode = FALSE;
 
     w->pendingUnmaps = 0;
 
@@ -2936,8 +2937,7 @@ activateWindow (CompWindow *w)
 	if (w->minimized)
 	    unminimizeWindow (w);
 
-	if (w->screen->showingDesktopMask)
-	    leaveShowDesktopMode (w->screen);
+	w->inShowDesktopMode = FALSE;
 
 	showWindow (w);
     }
@@ -3130,7 +3130,7 @@ hideWindow (CompWindow *w)
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
-    if (!w->minimized && !(w->type & w->screen->showingDesktopMask))
+    if (!w->minimized && !w->inShowDesktopMode)
 	return;
 
     w->state |= CompWindowStateHiddenMask;
@@ -3148,7 +3148,7 @@ showWindow (CompWindow *w)
     if (!(w->state & CompWindowStateHiddenMask))
 	return;
 
-    if (w->minimized || (w->type & w->screen->showingDesktopMask))
+    if (w->minimized || w->inShowDesktopMode)
 	return;
 
     w->state &= ~CompWindowStateHiddenMask;

@@ -2501,9 +2501,6 @@ moveScreenViewport (CompScreen *s,
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    if (w->attrib.map_state != IsViewable)
-		continue;
-
 	    if (w->attrib.override_redirect)
 		continue;
 
@@ -2726,7 +2723,16 @@ enterShowDesktopMode (CompScreen *s)
 			      CompWindowTypeDockMask);
 
     for (w = s->windows; w; w = w->next)
-	hideWindow (w);
+    {
+	if (s->showingDesktopMask & w->type)
+	{
+	    if ((*s->focusWindow) (w))
+	    {
+		w->inShowDesktopMode = TRUE;
+		hideWindow (w);
+	    }
+	}
+    }
 
     XChangeProperty (s->display->display, s->root,
 		     s->display->showingDesktopAtom,
@@ -2743,7 +2749,11 @@ leaveShowDesktopMode (CompScreen *s)
     s->showingDesktopMask = 0;
 
     for (w = s->windows; w; w = w->next)
+    {
+	w->inShowDesktopMode = FALSE;
+
 	showWindow (w);
+    }
 
     XChangeProperty (s->display->display, s->root,
 		     s->display->showingDesktopAtom,

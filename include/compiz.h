@@ -1384,6 +1384,7 @@ struct _CompWindow {
 
     Bool placed;
     Bool minimized;
+    Bool inShowDesktopMode;
 
     int pendingUnmaps;
 

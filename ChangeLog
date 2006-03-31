@@ -1,5 +1,16 @@
 2006-03-31  David Reveman  <davidr@novell.com>
 
+	* plugins/minimize.c (minDamageWindowRect): Never leave windows
+	in scaled state.
+
+	* src/screen.c (moveScreenViewport): Move hidden windows as well.
+
+	* src/window.c (addWindow, activateWindow, hideWindow)
+	(showWindow):
+	* src/screen.c (enterShowDesktopMode, leaveShowDesktopMode):
+	* src/event.c (handleEvent):
+	* include/compiz.h: Fix up show desktop mode.
+
 	* plugins/water.c (fboVertices): return 1.
 
 2006-03-30  David Reveman  <davidr@novell.com>
