@@ -563,6 +563,8 @@ fboVertices (CompScreen *s,
     glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
     fboEpilogue (s);
+
+    return 1;
 }
 
 static void
