@@ -1,3 +1,8 @@
+2006-04-02  David Reveman  <davidr@novell.com>
+
+	* plugins/gconf.c (gconfGetValue): Fix typo that caused color
+        parsing to be incomplete (Quinn Storm).
+
 2006-04-01  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c: Add "initiate all" binding which brings up the

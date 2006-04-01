@@ -334,7 +334,7 @@ gconfGetValue (CompDisplay     *d,
 
 	color = gconf_value_get_string (gvalue);
 
-	if (sscanf (color, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 3)
+	if (sscanf (color, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 4)
 	{
 	    value->c[0] = c[0] << 8 | c[0];
 	    value->c[1] = c[1] << 8 | c[1];
