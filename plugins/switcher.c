@@ -38,6 +38,11 @@
 #define SWITCH_INITIATE_KEY_DEFAULT       "Tab"
 #define SWITCH_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
+#define SWITCH_INITIATE_ALL_KEY_DEFAULT       "Tab"
+#define SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT (CompPressMask | \
+					       ControlMask   | \
+					       CompAltMask)
+
 #define SWITCH_TERMINATE_KEY_DEFAULT       "Alt_L"
 #define SWITCH_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
 
@@ -93,19 +98,20 @@ typedef struct _SwitchDisplay {
     Atom selectWinAtom;
 } SwitchDisplay;
 
-#define SWITCH_SCREEN_OPTION_INITIATE     0
-#define SWITCH_SCREEN_OPTION_TERMINATE    1
-#define SWITCH_SCREEN_OPTION_NEXT_WINDOW  2
-#define SWITCH_SCREEN_OPTION_PREV_WINDOW  3
-#define SWITCH_SCREEN_OPTION_SPEED	  4
-#define SWITCH_SCREEN_OPTION_TIMESTEP	  5
-#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  6
-#define SWITCH_SCREEN_OPTION_MIPMAP       7
-#define SWITCH_SCREEN_OPTION_SATURATION   8
-#define SWITCH_SCREEN_OPTION_BRIGHTNESS   9
-#define SWITCH_SCREEN_OPTION_OPACITY      10
-#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 11
-#define SWITCH_SCREEN_OPTION_NUM          12
+#define SWITCH_SCREEN_OPTION_INITIATE	  0
+#define SWITCH_SCREEN_OPTION_INITIATE_ALL 1
+#define SWITCH_SCREEN_OPTION_TERMINATE	  2
+#define SWITCH_SCREEN_OPTION_NEXT_WINDOW  3
+#define SWITCH_SCREEN_OPTION_PREV_WINDOW  4
+#define SWITCH_SCREEN_OPTION_SPEED	  5
+#define SWITCH_SCREEN_OPTION_TIMESTEP	  6
+#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  7
+#define SWITCH_SCREEN_OPTION_MIPMAP	  8
+#define SWITCH_SCREEN_OPTION_SATURATION	  9
+#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  10
+#define SWITCH_SCREEN_OPTION_OPACITY	  11
+#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 12
+#define SWITCH_SCREEN_OPTION_NUM	  13
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -142,6 +148,7 @@ typedef struct _SwitchScreen {
     GLushort opacity;
 
     Bool bringToFront;
+    Bool allWindows;
 } SwitchScreen;
 
 #define MwmHintsDecorations (1L << 1)
@@ -226,6 +233,7 @@ switchSetScreenOption (CompScreen      *screen,
 
     switch (index) {
     case SWITCH_SCREEN_OPTION_INITIATE:
+    case SWITCH_SCREEN_OPTION_INITIATE_ALL:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -316,6 +324,17 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (SWITCH_INITIATE_KEY_DEFAULT));
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL];
+    o->name			  = "initiate_all";
+    o->shortDesc		  = "Initiate All Windows";
+    o->longDesc			  = "Show switcher for all windows";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (SWITCH_INITIATE_ALL_KEY_DEFAULT));
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_TERMINATE];
     o->name			  = "terminate";
@@ -454,6 +473,12 @@ isSwitchWin (CompWindow *w)
 
     if (w->state & CompWindowStateSkipPagerMask)
 	return FALSE;
+
+    if (!ss->allWindows)
+    {
+	if (!(*w->screen->focusWindow) (w))
+	    return FALSE;
+    }
 
     return TRUE;
 }
@@ -702,7 +727,8 @@ findArgbVisual (Display *dpy, int scr)
 }
 
 static void
-switchInitiate (CompScreen *s)
+switchInitiate (CompScreen *s,
+		Bool	   allWindows)
 {
     int count;
 
@@ -710,6 +736,8 @@ switchInitiate (CompScreen *s)
 
     if (ss->grabIndex)
 	return;
+
+    ss->allWindows = allWindows;
 
     count = switchCountWindows (s);
     if (count < 2)
@@ -794,6 +822,8 @@ switchInitiate (CompScreen *s)
 	    if (ss->popupWindow)
 		XMapWindow (s->display->display, ss->popupWindow);
 
+	    setSelectedWindowHint (s);
+
 	    damageScreen (s);
 	}
     }
@@ -876,8 +906,10 @@ switchHandleEvent (CompDisplay *d,
 	{
 	    SWITCH_SCREEN (s);
 
-	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_INITIATE], event))
-		switchInitiate (s);
+	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL], event))
+		switchInitiate (s, TRUE);
+	    else if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_INITIATE], event))
+		switchInitiate (s, FALSE);
 
 	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW], event))
 		switchToWindow (s, FALSE);
@@ -1312,10 +1344,13 @@ switchInitScreen (CompPlugin *p,
     ss->opacity    = (OPAQUE * SWITCH_OPACITY_DEFAULT)    / 100;
 
     ss->bringToFront = SWITCH_BRINGTOFRONT_DEFAULT;
+    ss->allWindows   = FALSE;
 
     switchScreenInitOptions (ss, s->display->display);
 
     addScreenBinding (s, &ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind);
+    addScreenBinding (s,
+		      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL].value.bind);
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);

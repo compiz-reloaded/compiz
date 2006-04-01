@@ -1,3 +1,9 @@
+2006-04-01  David Reveman  <davidr@novell.com>
+
+	* plugins/switcher.c: Add "initiate all" binding which brings up the
+	switcher window with all mapped windows and "initiate" binding will
+	now bring up the switcher window with only the visible windows.
+
 2006-03-31  David Reveman  <davidr@novell.com>
 
 	* plugins/minimize.c (minDamageWindowRect): Never leave windows
