@@ -57,6 +57,9 @@
 #define WATER_TERMINATE_KEY_DEFAULT       "Super_L"
 #define WATER_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
 
+#define WATER_TOGGLE_RAIN_KEY_DEFAULT       "F9"
+#define WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
+
 static int displayPrivateIndex;
 
 typedef struct _WaterDisplay {
@@ -64,9 +67,10 @@ typedef struct _WaterDisplay {
     HandleEventProc handleEvent;
 } WaterDisplay;
 
-#define WATER_SCREEN_OPTION_INITIATE  0
-#define WATER_SCREEN_OPTION_TERMINATE 1
-#define WATER_SCREEN_OPTION_NUM       2
+#define WATER_SCREEN_OPTION_INITIATE    0
+#define WATER_SCREEN_OPTION_TERMINATE   1
+#define WATER_SCREEN_OPTION_TOGGLE_RAIN 2
+#define WATER_SCREEN_OPTION_NUM         3
 
 typedef struct _WaterScreen {
     int	waterTime;
@@ -98,6 +102,8 @@ typedef struct _WaterScreen {
     float	  *d0;
     float	  *d1;
     unsigned char *t0;
+
+    CompTimeoutHandle timeoutHandle;
 } WaterScreen;
 
 #define GET_WATER_DISPLAY(d)				      \
@@ -185,6 +191,17 @@ waterScreenInitOptions (WaterScreen *ws,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (WATER_TERMINATE_KEY_DEFAULT));
+
+    o = &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN];
+    o->name			  = "toggle_rain";
+    o->shortDesc		  = "Toggle rain";
+    o->longDesc			  = "Toggle rain effect";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (WATER_TOGGLE_RAIN_KEY_DEFAULT));
 }
 
 static const char *saturateFpString =
@@ -914,6 +931,22 @@ waterVertices (CompScreen *s,
 	ws->count = 3000;
 }
 
+static Bool
+waterTimeout (void *closure)
+{
+    CompScreen *s = closure;
+    XPoint     p;
+
+    p.x = (int) (s->width  * (rand () / (float) RAND_MAX));
+    p.y = (int) (s->height * (rand () / (float) RAND_MAX));
+
+    waterVertices (s, GL_POINTS, &p, 1, 0.8f * (rand () / (float) RAND_MAX));
+
+    damageScreen (s);
+
+    return TRUE;
+}
+
 static void
 waterReset (CompScreen *s)
 {
@@ -1222,6 +1255,19 @@ waterHandleEvent (CompDisplay *d,
 	if (s)
 	{
 	    WATER_SCREEN (s);
+	    
+	    if (EV_KEY (&ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN], event))
+	    {
+		if (!ws->timeoutHandle)
+		{
+		    ws->timeoutHandle = compAddTimeout (250, waterTimeout, s);
+		}
+		else
+		{
+		    compRemoveTimeout (ws->timeoutHandle);
+		    ws->timeoutHandle = 0;
+		}
+	    }
 
 	    /* check if some other plugin has already grabbed the screen */
 	    if (s->maxGrab - ws->grabIndex)
@@ -1317,6 +1363,7 @@ waterInitScreen (CompPlugin *p,
     waterScreenInitOptions (ws, s->display->display);
 
     addScreenBinding (s, &ws->opt[WATER_SCREEN_OPTION_INITIATE].value.bind);
+    addScreenBinding (s, &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN].value.bind);
 
     WRAP (ws, s, preparePaintScreen, waterPreparePaintScreen);
     WRAP (ws, s, donePaintScreen, waterDonePaintScreen);
@@ -1336,6 +1383,9 @@ waterFiniScreen (CompPlugin *p,
     int i;
 
     WATER_SCREEN (s);
+
+    if (ws->timeoutHandle)
+	compRemoveTimeout (ws->timeoutHandle);
 
     if (ws->fbo)
 	(*s->deleteFramebuffers) (1, &ws->fbo);
