@@ -789,6 +789,39 @@ doPoll (int timeout)
     return rv;
 }
 
+static void
+handleTimeouts (struct timeval *tv)
+{
+    CompTimeout *t;
+    int		timeDiff;
+
+    timeDiff = TIMEVALDIFF (tv, &lastTimeout);
+
+    /* handle clock rollback */
+    if (timeDiff < 0)
+	timeDiff = 0;
+
+    for (t = timeouts; t; t = t->next)
+	t->left -= timeDiff;
+
+    while (timeouts && timeouts->left <= 0)
+    {
+	t = timeouts;
+	if ((*t->callBack) (t->closure))
+	{
+	    timeouts = t->next;
+	    addTimeout (t);
+	}
+	else
+	{
+	    timeouts = t->next;
+	    free (t);
+	}
+    }
+
+    lastTimeout = *tv;
+}
+
 void
 eventLoop (void)
 {
@@ -802,7 +835,6 @@ eventLoop (void)
     CompWindow	   *move = 0;
     int		   px = 0, py = 0;
     int		   moveX = 0, moveY = 0;
-    CompTimeout    *t;
     Bool	   idle = TRUE;
 
     tmpRegion = XCreateRegion ();
@@ -954,7 +986,14 @@ eventLoop (void)
 	    {
 		gettimeofday (&tv, 0);
 
+		if (timeouts)
+		    handleTimeouts (&tv);
+
 		timeDiff = TIMEVALDIFF (&tv, &s->lastRedraw);
+
+		/* handle clock rollback */
+		if (timeDiff < 0)
+		    timeDiff = 0;
 
 		s->stencilRef = 0;
 
@@ -1101,31 +1140,7 @@ eventLoop (void)
 
 		gettimeofday (&tv, 0);
 
-		timeDiff = TIMEVALDIFF (&tv, &lastTimeout);
-
-		/* handle clock rollback */
-		if (timeDiff < 0)
-		    timeDiff = 0;
-
-		for (t = timeouts; t; t = t->next)
-		    t->left -= timeDiff;
-
-		while (timeouts && timeouts->left <= 0)
-		{
-		    t = timeouts;
-		    if ((*t->callBack) (t->closure))
-		    {
-			timeouts = t->next;
-			addTimeout (t);
-		    }
-		    else
-		    {
-			timeouts = t->next;
-			free (t);
-		    }
-		}
-
-		lastTimeout = tv;
+		handleTimeouts (&tv);
 	    }
 	    else
 	    {

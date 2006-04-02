@@ -1,3 +1,8 @@
+2006-04-03  David Reveman  <davidr@novell.com>
+
+	* src/display.c: Change so that timeouts are not only triggered
+	when we're idle.
+
 2006-04-02  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: Add scale and bias to normal so that light can be
