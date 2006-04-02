@@ -34,16 +34,18 @@
 
 #define K 0.1964f
 
-#define PROGRAM_BUMP     0
-#define PROGRAM_BUMP_SAT 1
-#define PROGRAM_WATER    2
-#define PROGRAM_NUM      3
+#define PROGRAM_BUMP	      0
+#define PROGRAM_BUMP_RECT     1
+#define PROGRAM_BUMP_SAT      2
+#define PROGRAM_BUMP_SAT_RECT 3
+#define PROGRAM_WATER	      4
+#define PROGRAM_NUM	      5
 
 #define TEXTURE_NUM  3
 
 #define TINDEX(ws, i) (((ws)->tIndex + (i)) % TEXTURE_NUM)
 
-#define CLAMP(v, max, min) \
+#define CLAMP(v, min, max) \
     if ((v) > (max))	   \
 	(v) = (max);	   \
     else if ((v) < (min))  \
@@ -165,7 +167,7 @@ waterScreenInitOptions (WaterScreen *ws,
     o = &ws->opt[WATER_SCREEN_OPTION_INITIATE];
     o->name			  = "initiate";
     o->shortDesc		  = "Initiate";
-    o->longDesc			  = "Show switcher";
+    o->longDesc			  = "Enable pointer water effects";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = WATER_INITIATE_MODIFIERS_DEFAULT;
@@ -176,7 +178,7 @@ waterScreenInitOptions (WaterScreen *ws,
     o = &ws->opt[WATER_SCREEN_OPTION_TERMINATE];
     o->name			  = "terminate";
     o->shortDesc		  = "Terminate";
-    o->longDesc			  = "End switching";
+    o->longDesc			  = "Disable pointer water effects";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = WATER_TERMINATE_MODIFIERS_DEFAULT;
@@ -187,22 +189,23 @@ waterScreenInitOptions (WaterScreen *ws,
 
 static const char *saturateFpString =
     "MUL temp, rgb, { 1.0, 1.0, 1.0, 0.0 };"
-    "DP3 temp, temp, program.local[0];"
-    "LRP rgb.xyz, program.local[0].w, rgb, temp;";
+    "DP3 temp, temp, program.local[1];"
+    "LRP rgb.xyz, program.local[1].w, rgb, temp;";
 
 static const char *bumpFpString =
     "!!ARBfp1.0"
 
     "PARAM light0color = state.light[0].diffuse;"
-    "PARAM ambient = state.lightmodel.ambient;"
 
-    "TEMP rgb, normal, temp, total, bump;"
+    "TEMP rgb, normal, temp, total, bump, offset;"
 
-    /* get texture data */
-    "TEX rgb, fragment.texcoord[0], texture[0], %s;"
+    /* get normal from normal map */
     "TEX normal, fragment.texcoord[1], texture[1], %s;"
 
-    /* remove scale and bias from the normal map */
+    /* save height */
+    "MOV offset, normal;"
+
+    /* remove scale and bias from normal */
     "SUB normal, normal, 0.5;"
     "MUL normal, normal, 2.0;"
 
@@ -211,22 +214,28 @@ static const char *bumpFpString =
     "RSQ temp, temp.x;"
     "MUL normal, normal, temp;"
 
+    /* scale down normal by height and constant and use as offset in texture */
+    "MUL offset, normal, offset.w;"
+    "MUL offset, offset, program.local[0];"
+    "ADD offset, fragment.texcoord[0].xyzw, offset.yxzz;"
+
+    /* get texture data */
+    "TEX rgb, offset, texture[0], %s;"
+
     /* normal dot lightdir, this should eventually be changed to a real light
        vector */
-    "DP3 bump, normal, { 0.0, 0.0, 1.0, 0.0 };"
+    "DP3 bump, normal, { 0.707, 0.707, 0.0, 0.0 };"
+    "MUL bump, bump, light0color;"
 
-    /* add light0 color */
-    "MUL_SAT total, bump, light0color;"
-    "MUL total, total, 1.9;"
-
-    /* diffuse per-vertex lighting, opacity and brightness */
-    "MUL rgb, fragment.color, rgb;"
+    /* diffuse per-vertex lighting, opacity and brightness
+       and add lightsource bump color */
+    "MAD rgb, fragment.color, rgb, bump;"
 
     /* saturation */
     "%s"
 
-    /* multiply by regular texture map color */
-    "MUL_SAT result.color, rgb, total;"
+    /* output */
+    "MOV result.color, rgb;"
 
     "END";
 
@@ -256,18 +265,21 @@ static const char *waterFpString =
     "TEX c12, t12, texture[1], %s;"
 
     /* x/y normals from height */
-    "MOV v, { 0.0, 0.0, 1.0, 0.0 };"
+    "MOV v, { 0.0, 0.0, 0.75, 0.0 };"
     "SUB v.x, c12.w, c10.w;"
     "SUB v.y, c21.w, c01.w;"
 
     /* bumpiness */
-    "MUL v, v, { 4.0, 4.0, 1.0, 0.0 };"
+    "MUL v, v, 1.5;"
 
     /* normalize */
     "MAD temp, v.x, v.x, 1.0;"
     "MAD temp, v.y, v.y, temp;"
     "RSQ temp, temp.x;"
-    "MUL_SAT v, v, temp;"
+    "MUL v, v, temp;"
+
+    /* add scale and bias to normal */
+    "MAD v, v, 0.5, 0.5;"
 
     /* done with computing the normal, continue with computing the next
        height value */
@@ -288,14 +300,38 @@ static const char *waterFpString =
     "END";
 
 static int
-loadWaterPrograms (CompScreen *s)
+loadFragmentProgram (CompScreen *s,
+		     GLuint	*program,
+		     GLubyte	*string)
+{
+    GLint errorPos;
+
+    if (!*program)
+	(*s->genPrograms) (1, program);
+
+    (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, *program);
+    (*s->programString) (GL_FRAGMENT_PROGRAM_ARB,
+			 GL_PROGRAM_FORMAT_ASCII_ARB,
+			 strlen (string), string);
+
+    glGetIntegerv (GL_PROGRAM_ERROR_POSITION_ARB, &errorPos);
+    if (glGetError () != GL_NO_ERROR || errorPos != -1)
+    {
+	(*s->deletePrograms) (1, program);
+	*program = 0;
+
+	return 0;
+    }
+
+    return 1;
+}
+
+static int
+loadWaterProgram (CompScreen *s)
 {
     char buffer[1024];
 
     WATER_SCREEN (s);
-
-    if (!ws->program[PROGRAM_WATER])
-	(*s->genPrograms) (1, &ws->program[PROGRAM_WATER]);
 
     if (ws->target == GL_TEXTURE_2D)
 	sprintf (buffer, waterFpString,
@@ -309,18 +345,17 @@ loadWaterPrograms (CompScreen *s)
 		 1.0f, 1.0f, 1.0f, 1.0f,
 		 "RECT", "RECT", "RECT", "RECT");
 
-    (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, ws->program[PROGRAM_WATER]);
-    (*s->programString) (GL_FRAGMENT_PROGRAM_ARB,
-			 GL_PROGRAM_FORMAT_ASCII_ARB,
-			 strlen (buffer), buffer);
-
-    return 1;
+    return loadFragmentProgram (s, &ws->program[PROGRAM_WATER], buffer);
 }
 
 static int
-loadBumpMapPrograms (CompScreen *s)
+loadBumpMapProgram (CompScreen *s,
+		    int	       program)
 {
-    char buffer[1024];
+    const char *normalTarget  = "2D";
+    const char *textureTarget = "2D";
+    const char *saturation    = "";
+    char       buffer[1024];
 
     WATER_SCREEN (s);
 
@@ -331,41 +366,38 @@ loadBumpMapPrograms (CompScreen *s)
 	return 0;
     }
 
-    if (ws->target == GL_TEXTURE_2D)
-	sprintf (buffer, bumpFpString, "2D", "2D", "");
-    else
-	sprintf (buffer, bumpFpString, "RECT", "RECT", "");
+    switch (program) {
+    case PROGRAM_BUMP_SAT:
+	saturation = saturateFpString;
+	/* fall-through */
+    case PROGRAM_BUMP:
+	break;
+    case PROGRAM_BUMP_SAT_RECT:
+	saturation = saturateFpString;
+	/* fall-through */
+    case PROGRAM_BUMP_RECT:
+	textureTarget = "RECT";
+	break;
+    }
 
-    if (!ws->program[PROGRAM_BUMP])
-	(*s->genPrograms) (1, &ws->program[PROGRAM_BUMP]);
+    if (ws->target != GL_TEXTURE_2D)
+	normalTarget = "RECT";
 
-    (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, ws->program[PROGRAM_BUMP]);
-    (*s->programString) (GL_FRAGMENT_PROGRAM_ARB,
-			 GL_PROGRAM_FORMAT_ASCII_ARB,
-			 strlen (buffer), buffer);
+    sprintf (buffer, bumpFpString, normalTarget, textureTarget, saturation);
 
-    if (ws->target == GL_TEXTURE_2D)
-	sprintf (buffer, bumpFpString, "2D", "2D", saturateFpString);
-    else
-	sprintf (buffer, bumpFpString, "RECT", "RECT", saturateFpString);
-
-    if (!ws->program[PROGRAM_BUMP_SAT])
-	(*s->genPrograms) (1, &ws->program[PROGRAM_BUMP_SAT]);
-
-    (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, ws->program[PROGRAM_BUMP_SAT]);
-    (*s->programString) (GL_FRAGMENT_PROGRAM_ARB,
-			 GL_PROGRAM_FORMAT_ASCII_ARB,
-			 strlen (buffer), buffer);
-
-    return 1;
+    return loadFragmentProgram (s, &ws->program[program], buffer);
 }
 
 static int
-ensureBumpMapPrograms (CompScreen *s)
+ensureBumpMapProgram (CompScreen *s,
+		      int	 program)
 {
     WATER_SCREEN (s);
 
-    return (ws->program[PROGRAM_BUMP] != 0);
+    if (!ws->program[program])
+	return loadBumpMapProgram (s, program);
+
+    return 1;
 }
 
 static void
@@ -574,39 +606,50 @@ softwareUpdate (CompScreen *s,
 {
     float	   *dTmp;
     int		   i, j;
-    float	   v[2], inv;
+    float	   v0, v1, inv;
     float	   accel, value;
     unsigned char *t0, *t;
     int		  dWidth, dHeight;
+    float	  *d01, *d10, *d11, *d12;
 
     WATER_SCREEN (s);
 
     if (!ws->texture[TINDEX (ws, 0)])
 	allocTexture (s, TINDEX (ws, 0));
 
-    dt   *= K * 2.0f;
+    dt *= K * 2.0f;
     fade *= 0.99f;
 
     dWidth  = ws->width  + 2;
     dHeight = ws->height + 2;
 
-#define D(d, i, j) (*((d) + dWidth * (i) + (j)))
+#define D(d, j) (*((d) + (j)))
+
+    d01 = ws->d0 + dWidth;
+    d10 = ws->d1;
+    d11 = d10 + dWidth;
+    d12 = d11 + dWidth;
 
     for (i = 1; i < dHeight - 1; i++)
     {
 	for (j = 1; j < dWidth - 1; j++)
 	{
-	    accel = dt * (D (ws->d1, i - 1, j) +
-			  D (ws->d1, i + 1, j) +
-			  D (ws->d1, i, j - 1) +
-			  D (ws->d1, i, j + 1) - 4.0f * D (ws->d1, i, j));
+	    accel = dt * (D (d10, j)     +
+			  D (d12, j)     +
+			  D (d11, j - 1) +
+			  D (d11, j + 1) - 4.0f * D (d11, j));
 
-	    value = (2.0f * D (ws->d1, i, j) - D (ws->d0, i, j) + accel) * fade;
+	    value = (2.0f * D (d11, j) - D (d01, j) + accel) * fade;
 
-	    CLAMP (value, 0.999f, 0.001f);
+	    CLAMP (value, 0.0f, 1.0f);
 
-	    D (ws->d0, i, j) = value;
+	    D (d01, j) = value;
 	}
+
+	d01 += dWidth;
+	d10 += dWidth;
+	d11 += dWidth;
+	d12 += dWidth;
     }
 
     /* update border */
@@ -615,39 +658,52 @@ softwareUpdate (CompScreen *s,
 	    ws->d0 + dWidth * (dHeight - 2),
 	    dWidth * sizeof (GLfloat));
 
+    d01 = ws->d0 + dWidth;
+
     for (i = 1; i < dHeight - 1; i++)
     {
-	D (ws->d0, i, 0)	  = D (ws->d0, i, 1);
-	D (ws->d0, i, dWidth - 1) = D (ws->d0, i, dWidth - 2);
+	D (d01, 0)	    = D (d01, 1);
+	D (d01, dWidth - 1) = D (d01, dWidth - 2);
+
+	d01 += dWidth;
     }
 
-#undef D
+    d10 = ws->d1;
+    d11 = d10 + dWidth;
+    d12 = d11 + dWidth;
 
-#define D(d, i, j) (*((d) + dWidth * (i + 1) + (j + 1)))
+    t0 = ws->t0;
 
     /* update texture */
     for (i = 0; i < ws->height; i++)
     {
-	t0 = ws->t0 + (ws->width * 4 * i);
-
 	for (j = 0; j < ws->width; j++)
 	{
-	    v[0] = (D (ws->d1, i + 1, j) - D (ws->d1, i - 1, j)) * 4.0f;
-	    v[1] = (D (ws->d1, i, j + 1) - D (ws->d1, i, j - 1)) * 4.0f;
+	    v0 = (D (d12, j)     - D (d10, j))     * 1.5f;
+	    v1 = (D (d11, j + 1) - D (d11, j - 1)) * 1.5f;
 
-	    inv = 1.0f / sqrtf (v[0] * v[0] + v[1] * v[1] + 1.0f);
-	    v[0] *= inv;
-	    v[1] *= inv;
+	    /* 0.5 for scale */
+	    inv = 0.5f / sqrtf (v0 * v0 + v1 * v1 + 1.0f);
 
-	    CLAMP (v[0], 1.0f, 0.0f);
-	    CLAMP (v[1], 1.0f, 0.0f);
+	    /* add scale and bias to normal */
+	    v0 = v0 * inv + 0.5f;
+	    v1 = v1 * inv + 0.5f;
 
 	    /* store normal map in RGB components */
 	    t = t0 + (j * 4);
-	    t[0] = (unsigned char) (inv  * 255.0f);
-	    t[1] = (unsigned char) (v[1] * 255.0f);
-	    t[2] = (unsigned char) (v[0] * 255.0f);
+	    t[0] = (unsigned char) ((inv + 0.5f) * 255.0f);
+	    t[1] = (unsigned char) (v1 * 255.0f);
+	    t[2] = (unsigned char) (v0 * 255.0f);
+
+	    /* store height in A component */
+	    t[3] = (unsigned char) (D (d11, j) * 255.0f);
 	}
+
+	d10 += dWidth;
+	d11 += dWidth;
+	d12 += dWidth;
+
+	t0 += ws->width * 4;
     }
 
 #undef D
@@ -846,7 +902,7 @@ waterVertices (CompScreen *s,
 {
     WATER_SCREEN (s);
 
-    if (!ensureBumpMapPrograms (s))
+    if (!ensureBumpMapProgram (s, PROGRAM_BUMP))
 	return;
 
     scaleVertices (s, p, n);
@@ -881,12 +937,12 @@ waterReset (CompScreen *s)
 	ws->ty = ws->height;
     }
 
-    if (!loadBumpMapPrograms (s))
+    if (!loadBumpMapProgram (s, PROGRAM_BUMP))
 	return;
 
     if (s->fbo)
     {
-	loadWaterPrograms (s);
+	loadWaterProgram (s);
 	if (!ws->fbo)
 	    (*s->genFramebuffers) (1, &ws->fbo);
     }
@@ -937,32 +993,17 @@ waterDrawWindowTexture (CompWindow		*w,
     {
 	Bool    lighting = w->screen->lighting;
 	GLfloat plane[4];
-	int     filter;
+	int	program;
 
 	screenLighting (w->screen, TRUE);
 
 	glPushMatrix ();
 
-	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-	{
-	    glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
-	    glScalef (attrib->xScale, attrib->yScale, 0.0f);
-	    glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
-
-	    filter = w->screen->filter[WINDOW_TRANS_FILTER];
-	}
-	else if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
-	{
-	    filter = w->screen->filter[SCREEN_TRANS_FILTER];
-	}
-	else
-	{
-	    filter = w->screen->filter[NOTHING_TRANS_FILTER];
-	}
-
-	enableTexture (w->screen, texture, filter);
+	enableTexture (w->screen, texture,
+		       w->screen->filter[WINDOW_TRANS_FILTER]);
 
 	(*w->screen->activeTexture) (GL_TEXTURE1_ARB);
+
 	glBindTexture (ws->target, ws->texture[TINDEX (ws, 0)]);
 
 	plane[1] = plane[2] = 0.0f;
@@ -981,14 +1022,33 @@ waterDrawWindowTexture (CompWindow		*w,
 	glTexGenfv (GL_T, GL_EYE_PLANE, plane);
 	glEnable (GL_TEXTURE_GEN_T);
 
+	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	{
+	    glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
+	    glScalef (attrib->xScale, attrib->yScale, 0.0f);
+	    glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
+	}
+
 	glEnable (GL_FRAGMENT_PROGRAM_ARB);
 
 	if (w->screen->canDoSaturated && attrib->saturation != COLOR)
 	{
+	    if (texture->target == GL_TEXTURE_2D)
+		program = PROGRAM_BUMP_SAT;
+	    else
+		program = PROGRAM_BUMP_SAT_RECT;
+
+	    ensureBumpMapProgram (w->screen, program);
+
 	    (*w->screen->bindProgram) (GL_FRAGMENT_PROGRAM_ARB,
-				       ws->program[PROGRAM_BUMP_SAT]);
+				       ws->program[program]);
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 0,
+						   texture->matrix.yy * 50.0f,
+						   -texture->matrix.xx * 50.0f,
+						   0.0f, 0.0f);
+
+	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 1,
 						   RED_SATURATION_WEIGHT,
 						   GREEN_SATURATION_WEIGHT,
 						   BLUE_SATURATION_WEIGHT,
@@ -997,8 +1057,20 @@ waterDrawWindowTexture (CompWindow		*w,
 	}
 	else
 	{
+	    if (texture->target == GL_TEXTURE_2D)
+		program = PROGRAM_BUMP;
+	    else
+		program = PROGRAM_BUMP_RECT;
+
+	    ensureBumpMapProgram (w->screen, program);
+
 	    (*w->screen->bindProgram) (GL_FRAGMENT_PROGRAM_ARB,
-				       ws->program[PROGRAM_BUMP]);
+				       ws->program[program]);
+
+	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 0,
+						   texture->matrix.yy * 50.0f,
+						   -texture->matrix.xx * 50.0f,
+						   0.0f, 0.0f);
 	}
 
 	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
