@@ -1,6 +1,8 @@
 2006-04-03  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: Use char everywhere instead.
+	Fix offset direction (P-a Bäckström).
+	Add offset scale option.
 
 	* plugins/water.c: (loadFragmentProgram): GLubyte -> const GLbyte.
 	(loadWaterProgram): char -> GLbyte.

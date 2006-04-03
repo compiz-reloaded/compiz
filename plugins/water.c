@@ -60,6 +60,11 @@
 #define WATER_TOGGLE_RAIN_KEY_DEFAULT       "F9"
 #define WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
 
+#define WATER_OFFSET_SCALE_DEFAULT    1.0f
+#define WATER_OFFSET_SCALE_MIN        0.0f
+#define WATER_OFFSET_SCALE_MAX       10.0f
+#define WATER_OFFSET_SCALE_PRECISION  0.1f
+
 static int displayPrivateIndex;
 
 typedef struct _WaterDisplay {
@@ -67,10 +72,11 @@ typedef struct _WaterDisplay {
     HandleEventProc handleEvent;
 } WaterDisplay;
 
-#define WATER_SCREEN_OPTION_INITIATE    0
-#define WATER_SCREEN_OPTION_TERMINATE   1
-#define WATER_SCREEN_OPTION_TOGGLE_RAIN 2
-#define WATER_SCREEN_OPTION_NUM         3
+#define WATER_SCREEN_OPTION_INITIATE     0
+#define WATER_SCREEN_OPTION_TERMINATE    1
+#define WATER_SCREEN_OPTION_TOGGLE_RAIN  2
+#define WATER_SCREEN_OPTION_OFFSET_SCALE 3
+#define WATER_SCREEN_OPTION_NUM          4
 
 typedef struct _WaterScreen {
     int	waterTime;
@@ -104,6 +110,8 @@ typedef struct _WaterScreen {
     unsigned char *t0;
 
     CompTimeoutHandle timeoutHandle;
+
+    float offsetScale;
 } WaterScreen;
 
 #define GET_WATER_DISPLAY(d)				      \
@@ -157,6 +165,13 @@ waterSetScreenOption (CompScreen      *screen,
     case WATER_SCREEN_OPTION_TERMINATE:
 	if (compSetBindingOption (o, value))
 	    return TRUE;
+	break;
+    case WATER_SCREEN_OPTION_OFFSET_SCALE:
+	if (compSetFloatOption (o, value))
+	{
+	    ws->offsetScale = o->value.f  * 50.0f;
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -202,6 +217,16 @@ waterScreenInitOptions (WaterScreen *ws,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (WATER_TOGGLE_RAIN_KEY_DEFAULT));
+
+    o = &ws->opt[WATER_SCREEN_OPTION_OFFSET_SCALE];
+    o->name		= "offset_scale";
+    o->shortDesc	= "Offset Scale";
+    o->longDesc		= "Water offset scale";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= WATER_OFFSET_SCALE_DEFAULT;
+    o->rest.f.min	= WATER_OFFSET_SCALE_MIN;
+    o->rest.f.max	= WATER_OFFSET_SCALE_MAX;
+    o->rest.f.precision = WATER_OFFSET_SCALE_PRECISION;
 }
 
 static const char *saturateFpString =
@@ -284,7 +309,7 @@ static const char *waterFpString =
     /* x/y normals from height */
     "MOV v, { 0.0, 0.0, 0.75, 0.0 };"
     "SUB v.x, c12.w, c10.w;"
-    "SUB v.y, c21.w, c01.w;"
+    "SUB v.y, c01.w, c21.w;"
 
     /* bumpiness */
     "MUL v, v, 1.5;"
@@ -703,7 +728,7 @@ softwareUpdate (CompScreen *s,
 	for (j = 0; j < ws->width; j++)
 	{
 	    v0 = (D (d12, j)     - D (d10, j))     * 1.5f;
-	    v1 = (D (d11, j + 1) - D (d11, j - 1)) * 1.5f;
+	    v1 = (D (d11, j - 1) - D (d11, j + 1)) * 1.5f;
 
 	    /* 0.5 for scale */
 	    inv = 0.5f / sqrtf (v0 * v0 + v1 * v1 + 1.0f);
@@ -1083,8 +1108,10 @@ waterDrawWindowTexture (CompWindow		*w,
 				       ws->program[program]);
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 0,
-						   texture->matrix.yy * 50.0f,
-						   -texture->matrix.xx * 50.0f,
+						   texture->matrix.yy *
+						   ws->offsetScale,
+						   -texture->matrix.xx *
+						   ws->offsetScale,
 						   0.0f, 0.0f);
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 1,
@@ -1107,8 +1134,10 @@ waterDrawWindowTexture (CompWindow		*w,
 				       ws->program[program]);
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 0,
-						   texture->matrix.yy * 50.0f,
-						   -texture->matrix.xx * 50.0f,
+						   texture->matrix.yy *
+						   ws->offsetScale,
+						   -texture->matrix.xx *
+						   ws->offsetScale,
 						   0.0f, 0.0f);
 	}
 
@@ -1365,6 +1394,8 @@ waterInitScreen (CompPlugin *p,
 	return FALSE;
 
     ws->grabIndex = 0;
+
+    ws->offsetScale = WATER_OFFSET_SCALE_DEFAULT * 50.0f;
 
     waterScreenInitOptions (ws, s->display->display);
 
