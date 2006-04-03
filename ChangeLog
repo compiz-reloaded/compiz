@@ -1,6 +1,7 @@
 2006-04-03  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: Add simple rain effect.
+	(loadFragmentProgram): Clear any previous error.
 
 	* src/display.c: Change so that timeouts are not only triggered
 	when we're idle.

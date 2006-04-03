@@ -323,6 +323,9 @@ loadFragmentProgram (CompScreen *s,
 {
     GLint errorPos;
 
+    /* clear errors */
+    glGetError ();
+
     if (!*program)
 	(*s->genPrograms) (1, program);
 
@@ -334,6 +337,9 @@ loadFragmentProgram (CompScreen *s,
     glGetIntegerv (GL_PROGRAM_ERROR_POSITION_ARB, &errorPos);
     if (glGetError () != GL_NO_ERROR || errorPos != -1)
     {
+	fprintf (stderr, "%s: water: failed to load bump map program\n",
+		 programName);
+
 	(*s->deletePrograms) (1, program);
 	*program = 0;
 
@@ -1255,7 +1261,7 @@ waterHandleEvent (CompDisplay *d,
 	if (s)
 	{
 	    WATER_SCREEN (s);
-	    
+
 	    if (EV_KEY (&ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN], event))
 	    {
 		if (!ws->timeoutHandle)
