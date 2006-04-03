@@ -317,9 +317,9 @@ static const char *waterFpString =
     "END";
 
 static int
-loadFragmentProgram (CompScreen *s,
-		     GLuint	*program,
-		     GLubyte	*string)
+loadFragmentProgram (CompScreen   *s,
+		     GLuint	  *program,
+		     const GLbyte *string)
 {
     GLint errorPos;
 
@@ -352,7 +352,7 @@ loadFragmentProgram (CompScreen *s,
 static int
 loadWaterProgram (CompScreen *s)
 {
-    char buffer[1024];
+    GLbyte buffer[1024];
 
     WATER_SCREEN (s);
 
@@ -378,7 +378,7 @@ loadBumpMapProgram (CompScreen *s,
     const char *normalTarget  = "2D";
     const char *textureTarget = "2D";
     const char *saturation    = "";
-    char       buffer[1024];
+    GLbyte     buffer[1024];
 
     WATER_SCREEN (s);
 

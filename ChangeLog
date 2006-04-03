@@ -1,5 +1,9 @@
 2006-04-03  David Reveman  <davidr@novell.com>
 
+	* plugins/water.c: (loadFragmentProgram): GLubyte -> const GLbyte.
+	(loadWaterProgram): char -> GLbyte.
+	(loadBumpMapProgram): char -> GLbyte.
+
 	* configure.ac: Bump version to 0.0.8.
 
 	* plugins/water.c: Add simple rain effect.
