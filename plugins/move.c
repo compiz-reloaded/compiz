@@ -41,6 +41,8 @@
 #define MOVE_OPACITY_MIN     1
 #define MOVE_OPACITY_MAX     100
 
+#define MOVE_CONSTRAIN_Y_DEFAULT TRUE
+
 struct _MoveKeys {
     char *name;
     int  dx;
@@ -66,10 +68,11 @@ typedef struct _MoveDisplay {
     KeyCode    key[NUM_KEYS];
 } MoveDisplay;
 
-#define MOVE_SCREEN_OPTION_INITIATE  0
-#define MOVE_SCREEN_OPTION_TERMINATE 1
-#define MOVE_SCREEN_OPTION_OPACITY   2
-#define MOVE_SCREEN_OPTION_NUM	     3
+#define MOVE_SCREEN_OPTION_INITIATE    0
+#define MOVE_SCREEN_OPTION_TERMINATE   1
+#define MOVE_SCREEN_OPTION_OPACITY     2
+#define MOVE_SCREEN_OPTION_CONSTRAIN_Y 3
+#define MOVE_SCREEN_OPTION_NUM	       4
 
 typedef struct _MoveScreen {
     CompOption opt[MOVE_SCREEN_OPTION_NUM];
@@ -144,6 +147,10 @@ moveSetScreenOption (CompScreen      *screen,
 	    ms->moveOpacity = (o->value.i * OPAQUE) / 100;
 	    return TRUE;
 	}
+	break;
+    case MOVE_SCREEN_OPTION_CONSTRAIN_Y:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -183,6 +190,13 @@ moveScreenInitOptions (MoveScreen *ms,
     o->value.i	  = MOVE_OPACITY_DEFAULT;
     o->rest.i.min = MOVE_OPACITY_MIN;
     o->rest.i.max = MOVE_OPACITY_MAX;
+
+    o = &ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y];
+    o->name	  = "constrain_y";
+    o->shortDesc  = "Constrain Y";
+    o->longDesc	  = "Constrain Y coordinate to workspace area";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = MOVE_CONSTRAIN_Y_DEFAULT;
 }
 
 static void
@@ -264,8 +278,6 @@ moveHandleMotionEvent (CompScreen *s,
 
 	pointerDx = xRoot - ms->prevPointerX;
 	pointerDy = yRoot - ms->prevPointerY;
-	ms->prevPointerX = xRoot;
-	ms->prevPointerY = yRoot;
 
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
@@ -298,10 +310,31 @@ moveHandleMotionEvent (CompScreen *s,
 		else if (w->attrib.x + pointerDx > max)
 		    pointerDx = max - w->attrib.x;
 	    }
+
+	    if (ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y].value.b)
+	    {
+		min = s->workArea.y + w->input.top;
+		max = s->workArea.y + s->workArea.height;
+
+		if (w->attrib.y + pointerDy < min)
+		    pointerDy = min - w->attrib.y;
+		else if (w->attrib.y + pointerDy > max)
+		    pointerDy = max - w->attrib.y;
+	    }
 	}
 
 	if (pointerDx || pointerDy)
+	{
 	    moveWindow (md->w, pointerDx, pointerDy, TRUE);
+
+	    ms->prevPointerX += pointerDx;
+	    ms->prevPointerY += pointerDy;
+	}
+
+	if (ms->prevPointerX != xRoot || ms->prevPointerY != yRoot)
+	    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0,
+			  ms->prevPointerX - xRoot,
+			  ms->prevPointerY - yRoot);
     }
 }
 

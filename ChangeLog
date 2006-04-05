@@ -1,5 +1,8 @@
 2006-04-05  David Reveman  <davidr@novell.com>
 
+	* plugins/move.c: Add constrain_y option that constrains window
+	movement so that top of window is always visible (on by default).
+
 	* src/event.c (handleEvent): Change active window property even though
 	it's not different than the window we currently have as active.
 
