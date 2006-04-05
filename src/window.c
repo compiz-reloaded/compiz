@@ -2199,9 +2199,7 @@ moveInputFocusToWindow (CompWindow *w)
     if (modalTransient)
 	w = modalTransient;
 
-    if (w->id != d->activeWindow)
-	XSetInputFocus (d->display, w->id, RevertToPointerRoot,
-			CurrentTime);
+    XSetInputFocus (d->display, w->id, RevertToPointerRoot, CurrentTime);
 }
 
 static Bool

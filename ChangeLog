@@ -1,3 +1,11 @@
+2006-04-05  David Reveman  <davidr@novell.com>
+
+	* src/event.c (handleEvent): Change active window property even though
+	it's not different than the window we currently have as active.
+
+	* src/window.c (moveInputFocusToWindow): Set focus even though
+	the window is considered the active window.
+
 2006-04-03  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: Use char everywhere instead.

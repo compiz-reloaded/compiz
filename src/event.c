@@ -1147,8 +1147,7 @@ handleEvent (CompDisplay *display,
     case CirculateRequest:
 	break;
     case FocusIn:
-	if (event->xfocus.window != display->activeWindow &&
-	    event->xfocus.mode   != NotifyGrab)
+	if (event->xfocus.mode != NotifyGrab)
 	{
 	    w = findWindowAtDisplay (display, event->xfocus.window);
 	    if (w)
