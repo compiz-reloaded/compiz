@@ -533,6 +533,16 @@ fboEpilogue (CompScreen *s)
 {
     (*s->bindFramebuffer) (GL_FRAMEBUFFER_EXT, 0);
 
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+    glMatrixMode (GL_MODELVIEW);
+    glLoadIdentity ();
+    glDepthRange (0, 1);
+    glViewport (-1, -1, 2, 2);
+    glRasterPos2f (0, 0);
+
+    s->rasterX = s->rasterY = 0;
+
     glViewport (0, 0, s->width, s->height);
     glMatrixMode (GL_PROJECTION);
     glPopMatrix ();

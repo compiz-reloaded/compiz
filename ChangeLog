@@ -1,5 +1,8 @@
 2006-04-05  David Reveman  <davidr@novell.com>
 
+	* plugins/water.c (fboEpilogue): Reset raster position. Avoids
+	an FBO/raster-position issue found in newer nvidia drivers.
+
 	* plugins/move.c: Add constrain_y option that constrains window
 	movement so that top of window is always visible (on by default).
 
