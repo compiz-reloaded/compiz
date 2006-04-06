@@ -1564,7 +1564,7 @@ addWindow (CompScreen *screen,
 	mapWindow (w);
 
 	if (!w->attrib.override_redirect)
-	    updateWindowAttributes (w);
+	    updateWindowAttributes (w, FALSE);
     }
 
     windowInitPlugins (w);
@@ -2254,15 +2254,23 @@ stackLayerCheck (CompWindow *w,
 }
 
 /* goes through the stack, top-down until we find a window we should
-   stack above, normal windows can be stacked above fullscreen windows. */
+   stack above, normal windows can be stacked above fullscreen windows
+   if aboveFs is TRUE. */
 static CompWindow *
-findSiblingBelow (CompWindow *w)
+findSiblingBelow (CompWindow *w,
+		  Bool	     aboveFs)
 {
     CompWindow   *below;
     Window	 clientLeader = w->clientLeader;
     unsigned int type = w->type;
+    unsigned int belowMask;
 
-    /* normal stacking fullscreen windows with below state */
+    if (aboveFs)
+	belowMask = CompWindowTypeDockMask;
+    else
+	belowMask = CompWindowTypeDockMask | CompWindowTypeFullscreenMask;
+
+    /* normal stacking of fullscreen windows with below state */
     if ((type & CompWindowTypeFullscreenMask) &&
 	(w->state & CompWindowStateBelowMask))
 	type = CompWindowTypeNormalMask;
@@ -2305,7 +2313,7 @@ findSiblingBelow (CompWindow *w)
 	    break;
 	default:
 	    /* fullscreen and normal layer */
-	    if (!(below->type & CompWindowTypeDockMask))
+	    if (!(below->type & belowMask))
 	    {
 		if (stackLayerCheck (w, clientLeader, below))
 		    return below;
@@ -2801,7 +2809,7 @@ raiseWindow (CompWindow *w)
     XWindowChanges xwc;
     int		   mask;
 
-    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w));
+    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w, FALSE));
     if (mask)
 	configureXWindow (w->screen->display->display, w, mask, &xwc);
 }
@@ -2856,7 +2864,8 @@ restackWindowBelow (CompWindow *w,
 }
 
 void
-updateWindowAttributes (CompWindow *w)
+updateWindowAttributes (CompWindow *w,
+			Bool	   aboveFs)
 {
     XWindowChanges xwc;
     int		   mask;
@@ -2864,7 +2873,7 @@ updateWindowAttributes (CompWindow *w)
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
-    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w));
+    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
 
     /* only update fullscreen and maximized size if window is visible on
        current viewport. Size is updated once we switch to the windows
@@ -2944,7 +2953,7 @@ activateWindow (CompWindow *w)
 	return;
 
     ensureWindowVisibility (w);
-    updateWindowAttributes (w);
+    updateWindowAttributes (w, TRUE);
     moveInputFocusToWindow (w);
 }
 
@@ -3231,7 +3240,7 @@ maximizeWindow (CompWindow *w)
     recalcWindowType (w);
     recalcWindowActions (w);
 
-    updateWindowAttributes (w);
+    updateWindowAttributes (w, FALSE);
 
     setWindowState (w->screen->display, w->state, w->id);
 }
@@ -3252,7 +3261,7 @@ unmaximizeWindow (CompWindow *w)
     recalcWindowType (w);
     recalcWindowActions (w);
 
-    updateWindowAttributes (w);
+    updateWindowAttributes (w, FALSE);
 
     setWindowState (w->screen->display, w->state, w->id);
 }

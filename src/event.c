@@ -178,7 +178,7 @@ autoRaiseTimeout (void *closure)
 
 	w = findWindowAtDisplay (display, display->autoRaiseWindow);
 	if (w)
-	    updateWindowAttributes (w);
+	    updateWindowAttributes (w, FALSE);
     }
 
     return FALSE;
@@ -781,7 +781,7 @@ handleEvent (CompDisplay *display,
 	    {
 		w->mwmDecor = getMwmDecor (w->screen->display, w->id);
 
-		updateWindowAttributes (w);
+		updateWindowAttributes (w, FALSE);
 	    }
 	}
 	else if (event->xproperty.atom == display->wmProtocolsAtom)
@@ -901,7 +901,7 @@ handleEvent (CompDisplay *display,
 		    recalcWindowActions (w);
 
 		    if (!w->attrib.override_redirect)
-			updateWindowAttributes (w);
+			updateWindowAttributes (w, FALSE);
 
 		    setWindowState (display, wState, w->id);
 		}
@@ -1076,7 +1076,7 @@ handleEvent (CompDisplay *display,
 	    {
 		XMapWindow (display->display, event->xmaprequest.window);
 
-		updateWindowAttributes (w);
+		updateWindowAttributes (w, FALSE);
 
 		if (!(w->type & (CompWindowTypeDesktopMask |
 				 CompWindowTypeDockMask)) &&
@@ -1204,7 +1204,7 @@ handleEvent (CompDisplay *display,
 						    display);
 			    }
 			    else
-				updateWindowAttributes (w);
+				updateWindowAttributes (w, FALSE);
 			}
 		    }
 		}

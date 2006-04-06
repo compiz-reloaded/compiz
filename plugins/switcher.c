@@ -868,23 +868,20 @@ switchWindowRemove (CompDisplay *d,
     w = findWindowAtDisplay (d, id);
     if (w)
     {
+	int i;
+
 	SWITCH_SCREEN (w->screen);
 
-	if (ss->grabIndex)
+	for (i = 0; i < ss->nWindows; i++)
 	{
-	    int i;
-
-	    for (i = 0; i < ss->nWindows; i++)
+	    if (ss->windows[i] == w)
 	    {
-		if (ss->windows[i] == w)
-		{
-		    ss->lastActiveNum = w->screen->activeNum;
+		ss->lastActiveNum = w->screen->activeNum;
 
-		    switchUpdateWindowList (w->screen,
-					    switchCountWindows (w->screen));
+		switchUpdateWindowList (w->screen,
+					switchCountWindows (w->screen));
 
-		    break;
-		}
+		break;
 	    }
 	}
     }
@@ -1244,7 +1241,7 @@ switchDamageWindowRect (CompWindow *w,
 	    }
 	    else if (w->id == ss->popupWindow)
 	    {
-		updateWindowAttributes (w);
+		updateWindowAttributes (w, TRUE);
 	    }
 	}
 	else if (!ss->moreAdjust)

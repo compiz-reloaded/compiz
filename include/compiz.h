@@ -1638,7 +1638,8 @@ restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling);
 
 void
-updateWindowAttributes (CompWindow *w);
+updateWindowAttributes (CompWindow *w,
+			Bool	   aboveFs);
 
 void
 activateWindow (CompWindow *w);

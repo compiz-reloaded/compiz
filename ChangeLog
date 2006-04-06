@@ -1,3 +1,20 @@
+2006-04-06  David Reveman  <davidr@novell.com>
+
+	* plugins/switcher.c (switchDamageWindowRect)
+	(switchWindowRemove): Update switcher list even when screen isn't
+	grabbed.
+
+	* plugins/switcher.c (switchDamageWindowRect):
+	* include/compiz.h:
+	* src/event.c (handleEvent):
+	* src/window.c:	Made it possible to select if window should be
+	stacked above fullscreen windows or not.
+	
+	* src/window.c (findSiblingBelow): Only find a fullscreen sibling
+	if aboveFs is TRUE.
+	(activateWindow): Allow stacking of window above fullscreen windows
+	when being activated.
+
 2006-04-05  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c (fboEpilogue): Reset raster position. Avoids
