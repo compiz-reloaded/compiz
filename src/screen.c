@@ -581,6 +581,37 @@ compScreenSnEvent (SnMonitorEvent *event,
 }
 
 static void
+updateScreenEdges (CompScreen *s)
+{
+    struct screenEdgeGeometry {
+	int xw, x0;
+	int yh, y0;
+	int ww, w0;
+	int hh, h0;
+    } geometry[SCREEN_EDGE_NUM] = {
+	{ 0,  0,   0,  1,   0,  1,   1, -2 }, /* left */
+	{ 1, -1,   0,  1,   0,  1,   1, -2 }, /* right */
+	{ 0,  1,   0,  0,   1, -2,   0,  1 }, /* top */
+	{ 0,  1,   1, -1,   1, -2,   0,  1 }, /* bottom */
+	{ 0,  0,   0,  0,   0,  1,   0,  1 }, /* top-left */
+	{ 1, -1,   0,  0,   0,  1,   0,  1 }, /* top-right */
+	{ 0,  0,   1, -1,   0,  1,   0,  1 }, /* bottom-left */
+	{ 1, -1,   1, -1,   0,  1,   0,  1 }  /* bottom-right */
+    };
+    int i;
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+    {
+	if (s->screenEdge[i].id)
+	    XMoveResizeWindow (s->display->display, s->screenEdge[i].id,
+			       geometry[i].xw * s->width  + geometry[i].x0,
+			       geometry[i].yh * s->height + geometry[i].y0,
+			       geometry[i].ww * s->width  + geometry[i].w0,
+			       geometry[i].hh * s->height + geometry[i].h0);
+    }
+}
+
+static void
 frustum (GLfloat left,
 	 GLfloat right,
 	 GLfloat bottom,
@@ -656,6 +687,7 @@ reshape (CompScreen *s,
     s->region.extents.y2 = h;
     s->region.size = 1;
 
+    updateScreenEdges (s);
     updateWorkareaForScreen (s);
 }
 
@@ -1064,6 +1096,12 @@ addScreen (CompDisplay *display,
 
     s->x    = 0;
     s->size = 4;
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+    {
+	s->screenEdge[i].id    = None;
+	s->screenEdge[i].count = 0;
+    }
 
     s->buttonGrab  = 0;
     s->nButtonGrab = 0;
@@ -1636,8 +1674,24 @@ addScreen (CompDisplay *display,
 				   CopyFromParent, InputOnly,
 				   CopyFromParent, CWOverrideRedirect,
 				   &attrib);
-
     XMapWindow (dpy, s->grabWindow);
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+    {
+	s->screenEdge[i].id = XCreateWindow (dpy, s->root, -100, -100, 1, 1, 0,
+					     CopyFromParent, InputOnly,
+					     CopyFromParent, CWOverrideRedirect,
+					     &attrib);
+
+	XSelectInput (dpy, s->screenEdge[i].id,
+		      EnterWindowMask   |
+		      LeaveWindowMask   |
+		      ButtonPressMask   |
+		      ButtonReleaseMask |
+		      PointerMotionMask);
+    }
+
+    updateScreenEdges (s);
 
     if (testMode)
     {
@@ -2821,4 +2875,22 @@ screenLighting (CompScreen *s,
 
 	screenTexEnvMode (s, GL_REPLACE);
     }
+}
+
+void
+enableScreenEdge (CompScreen *s,
+		  int	     edge)
+{
+    s->screenEdge[edge].count++;
+    if (s->screenEdge[edge].count == 1)
+	XMapRaised (s->display->display, s->screenEdge[edge].id);
+}
+
+void
+disableScreenEdge (CompScreen *s,
+		   int	      edge)
+{
+    s->screenEdge[edge].count--;
+    if (s->screenEdge[edge].count == 0)
+	XUnmapWindow (s->display->display, s->screenEdge[edge].id);
 }

@@ -1,5 +1,9 @@
 2006-04-06  David Reveman  <davidr@novell.com>
 
+	* include/compiz.h:
+	* src/screen.c: Add screen edges and simple interface for enabling
+	and disabling them.
+
 	* plugins/switcher.c (switchDamageWindowRect)
 	(switchWindowRemove): Update switcher list even when screen isn't
 	grabbed.
@@ -9,7 +13,7 @@
 	* src/event.c (handleEvent):
 	* src/window.c:	Made it possible to select if window should be
 	stacked above fullscreen windows or not.
-	
+
 	* src/window.c (findSiblingBelow): Only find a fullscreen sibling
 	if aboveFs is TRUE.
 	(activateWindow): Allow stacking of window above fullscreen windows

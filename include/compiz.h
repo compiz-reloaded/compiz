@@ -1028,6 +1028,21 @@ typedef struct _CompStartupSequence {
 #define SCREEN_TRANS_FILTER  1
 #define WINDOW_TRANS_FILTER  2
 
+#define SCREEN_EDGE_LEFT	0
+#define SCREEN_EDGE_RIGHT	1
+#define SCREEN_EDGE_TOP		2
+#define SCREEN_EDGE_BOTTOM	3
+#define SCREEN_EDGE_TOPLEFT	4
+#define SCREEN_EDGE_TOPRIGHT	5
+#define SCREEN_EDGE_BOTTOMLEFT	6
+#define SCREEN_EDGE_BOTTOMRIGHT 7
+#define SCREEN_EDGE_NUM		8
+
+typedef struct _CompScreenEdge {
+    Window	 id;
+    unsigned int count;
+} CompScreenEdge;
+
 struct _CompScreen {
     CompScreen  *next;
     CompDisplay *display;
@@ -1070,6 +1085,8 @@ struct _CompScreen {
     KeyCode	      escapeKeyCode;
     unsigned int      mapNum;
     unsigned int      activeNum;
+
+    CompScreenEdge screenEdge[SCREEN_EDGE_NUM];
 
     SnMonitorContext    *snContext;
     CompStartupSequence *startupSequences;
@@ -1314,6 +1331,15 @@ screenTexEnvMode (CompScreen *s,
 void
 screenLighting (CompScreen *s,
 		Bool       lighting);
+
+void
+enableScreenEdge (CompScreen *s,
+		  int	     edge);
+
+void
+disableScreenEdge (CompScreen *s,
+		   int	      edge);
+
 
 /* window.c */
 
