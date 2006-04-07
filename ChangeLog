@@ -1,5 +1,9 @@
 2006-04-07  David Reveman  <davidr@novell.com>
 
+	* configure.ac: Bump version to 0.0.9.
+
+	* plugins/Makefile.am (CLEANFILES, EXTRA_DIST): Fix.
+
 	* plugins/rotate.c (ROTATE_SPEED_DEFAULT): 1.5.
 
 2006-04-07  Dan Winship  <danw@novell.com>
