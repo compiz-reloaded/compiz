@@ -64,6 +64,8 @@ gconfTypeToString (CompOptionType type)
 	return "float";
     case CompOptionTypeString:
 	return "string";
+    case CompOptionTypeList:
+	return "list";
     default:
 	break;
     }
@@ -93,6 +95,30 @@ gconfValueToString (CompDisplay	    *d,
     case CompOptionTypeString:
 	escaped = g_markup_escape_text (value->s, -1);
 	return escaped;
+    case CompOptionTypeList: {
+	char *tmp2, *tmp3;
+	int  i;
+
+	tmp = g_strdup_printf ("[");
+
+	for (i = 0; i < value->list.nValue; i++)
+	{
+	    tmp2 = gconfValueToString (d, value->list.type,
+				       &value->list.value[i]);
+	    tmp3 = g_strdup_printf ("%s%s%s", tmp, tmp2,
+				    ((i + 1) < value->list.nValue) ? "," : "");
+	    g_free (tmp);
+	    g_free (tmp2);
+
+	    tmp = tmp3;
+	}
+
+	tmp2 = g_strdup_printf ("%s]", tmp);
+	g_free (tmp);
+	escaped = g_markup_escape_text (tmp2, -1);
+	g_free (tmp2);
+	return escaped;
+	}
     default:
 	break;
     }
@@ -115,6 +141,9 @@ gconfDumpToSchema (CompDisplay *d,
 		 APP_NAME, path, screen, o->name);
     gconfPrintf (3, "<owner>compiz</owner>\n");
     gconfPrintf (3, "<type>%s</type>\n", gconfTypeToString (o->type));
+    if (o->type == CompOptionTypeList)
+	gconfPrintf (3, "<list_type>%s</list_type>\n",
+		     gconfTypeToString (o->value.list.type));
     value = gconfValueToString (d, o->type, &o->value);
     gconfPrintf (3, "<default>%s</default>\n", value);
     g_free (value);

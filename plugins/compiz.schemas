@@ -11,8 +11,9 @@
             <key>/schemas/apps/compiz/general/allscreens/options/active_plugins</key>
             <applyto>/apps/compiz/general/allscreens/options/active_plugins</applyto>
             <owner>compiz</owner>
-            <type>unknown</type>
-            <default>unknown</default>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[gconf,decoration,wobbly,fade,minimize,cube,rotate,zoom,scale,move,resize,place,switcher,water]</default>
             <locale name="C">
                 <short>Active Plugins</short>
                 <long>
