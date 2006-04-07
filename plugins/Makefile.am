@@ -49,12 +49,18 @@ libwater_la_SOURCES = water.c
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
-libgconf_la_SOURCES = gconf.c gconf-compiz-utils.c
+libgconf_la_SOURCES =	     \
+	gconf.c		     \
+	gconf-compiz-utils.c \
+	gconf-compiz-utils.h
 libgconf_module = libgconf.la
 
 libgconf_dump_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_dump_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
-libgconf_dump_la_SOURCES = gconf-dump.c gconf-compiz-utils.c
+libgconf_dump_la_SOURCES =   \
+	gconf-dump.c	     \
+	gconf-compiz-utils.c \
+	gconf-compiz-utils.h
 libgconf_dump_module = libgconf-dump.la
 
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
