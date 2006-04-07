@@ -1,5 +1,7 @@
 2006-04-07  David Reveman  <davidr@novell.com>
 
+	* plugins/gconf-dump.c: Dump list options correctly.
+
 	* plugins/rotate.c: Add flip_move option, edge flipping is only
 	used when moving windows if this option is enabled.
 	(rotateHandleEvent): Make we don't rotate when some other plugin
