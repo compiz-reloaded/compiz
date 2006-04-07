@@ -1,5 +1,10 @@
 2006-04-07  David Reveman  <davidr@novell.com>
 
+	* plugins/rotate.c: Add flip_move option, edge flipping is only
+	used when moving windows if this option is enabled.
+	(rotateHandleEvent): Make we don't rotate when some other plugin
+	has grabbed the screen.
+
 	* plugins/scale.c: Change default key-binding to F11.
 	(scaleInitiate): Make sure screen isn't grabbed by some other plugin.
 	(scaleInitScreen): Initialize darkenBack properly.

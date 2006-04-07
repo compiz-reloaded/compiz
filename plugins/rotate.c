@@ -89,6 +89,8 @@
 #define ROTATE_FLIPTIME_MIN     0
 #define ROTATE_FLIPTIME_MAX     1000
 
+#define ROTATE_FLIPMOVE_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _RotateDisplay {
@@ -110,13 +112,16 @@ typedef struct _RotateDisplay {
 #define ROTATE_SCREEN_OPTION_TIMESTEP		 11
 #define ROTATE_SCREEN_OPTION_EDGEFLIP		 12
 #define ROTATE_SCREEN_OPTION_FLIPTIME		 13
-#define ROTATE_SCREEN_OPTION_NUM		 14
+#define ROTATE_SCREEN_OPTION_FLIPMOVE		 14
+#define ROTATE_SCREEN_OPTION_NUM		 15
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
     PaintScreenProc		 paintScreen;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
+    WindowGrabNotifyProc	 windowGrabNotify;
+    WindowUngrabNotifyProc	 windowUngrabNotify;
 
     CompOption opt[ROTATE_SCREEN_OPTION_NUM];
 
@@ -150,6 +155,7 @@ typedef struct _RotateScreen {
     int		      flipTime;
     CompTimeoutHandle rotateHandle;
     Bool	      slow;
+    unsigned int      grabMask;
 } RotateScreen;
 
 #define GET_ROTATE_DISPLAY(d)				       \
@@ -283,6 +289,10 @@ rotateSetScreenOption (CompScreen      *screen,
 	    rs->flipTime = o->value.i;
 	    return TRUE;
 	}
+	break;
+    case ROTATE_SCREEN_OPTION_FLIPMOVE:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -429,6 +439,13 @@ rotateScreenInitOptions (RotateScreen *rs,
     o->value.i	  = ROTATE_FLIPTIME_DEFAULT;
     o->rest.i.min = ROTATE_FLIPTIME_MIN;
     o->rest.i.max = ROTATE_FLIPTIME_MAX;
+
+    o = &rs->opt[ROTATE_SCREEN_OPTION_FLIPMOVE];
+    o->name      = "flip_move";
+    o->shortDesc = "Flip Move";
+    o->longDesc  = "Only allow viewport flipping when moving windows";
+    o->type      = CompOptionTypeBool;
+    o->value.b   = ROTATE_FLIPMOVE_DEFAULT;
 }
 
 static int
@@ -836,19 +853,24 @@ rotateHandleEvent (CompDisplay *d,
 	{
 	    ROTATE_SCREEN (s);
 
-	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
-		rotateInitiate (s, event->xkey.x_root, event->xkey.y_root);
+	    /* only if screen isn't grabbed by someone else */
+	    if ((s->maxGrab - rs->grabIndex) == 0)
+	    {
+		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
+		    rotateInitiate (s, event->xkey.x_root, event->xkey.y_root);
 
-	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW], event))
-		rotateWithWindow (s, event->xkey.x_root, event->xkey.y_root,
-				  -1);
-	    else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
-		rotate (s, event->xkey.x_root, event->xkey.y_root, -1);
+		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW], event))
+		    rotateWithWindow (s, event->xkey.x_root, event->xkey.y_root,
+				      -1);
+		else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
+		    rotate (s, event->xkey.x_root, event->xkey.y_root, -1);
 
-	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW], event))
-		rotateWithWindow (s, event->xkey.x_root, event->xkey.y_root, 1);
-	    else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT], event))
-		rotate (s, event->xkey.x_root, event->xkey.y_root, 1);
+		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW], event))
+		    rotateWithWindow (s, event->xkey.x_root,
+				      event->xkey.y_root, 1);
+		else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT], event))
+		    rotate (s, event->xkey.x_root, event->xkey.y_root, 1);
+	    }
 
 	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TERMINATE], event))
 		rotateTerminate (s);
@@ -868,22 +890,30 @@ rotateHandleEvent (CompDisplay *d,
 	{
 	    ROTATE_SCREEN (s);
 
-	    if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
-		rotateInitiate (s,
-				event->xbutton.x_root,
-				event->xbutton.y_root);
+	    /* only if screen isn't grabbed by someone else */
+	    if ((s->maxGrab - rs->grabIndex) == 0)
+	    {
+		if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
+		    rotateInitiate (s,
+				    event->xbutton.x_root,
+				    event->xbutton.y_root);
 
-	    if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW], event))
-		rotateWithWindow (s, event->xbutton.x_root,
-				  event->xbutton.y_root, -1);
-	    else if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
-		rotate (s, event->xbutton.x_root, event->xbutton.y_root, -1);
+		if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW],
+			       event))
+		    rotateWithWindow (s, event->xbutton.x_root,
+				      event->xbutton.y_root, -1);
+		else if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
+		    rotate (s, event->xbutton.x_root,
+			    event->xbutton.y_root, -1);
 
-	    if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW], event))
-		rotateWithWindow (s, event->xbutton.x_root,
-				  event->xbutton.y_root, 1);
-	    else if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT], event))
-		rotate (s, event->xbutton.x_root, event->xbutton.y_root, 1);
+		if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW],
+			       event))
+		    rotateWithWindow (s, event->xbutton.x_root,
+				      event->xbutton.y_root, 1);
+		else if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT],
+				    event))
+		    rotate (s, event->xbutton.x_root, event->xbutton.y_root, 1);
+	    }
 
 	    if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_TERMINATE], event))
 		rotateTerminate (s);
@@ -954,6 +984,10 @@ rotateHandleEvent (CompDisplay *d,
 
 		s = w->screen;
 
+		/* check if screen is grabbed by someone else */
+		if (s->maxGrab - rs->grabIndex)
+		    break;
+
 		/* reset movement */
 		rs->moving = TRUE;
 		rs->moveTo = 0.0f;
@@ -988,6 +1022,12 @@ rotateHandleEvent (CompDisplay *d,
 	    {
 		int dx;
 
+		ROTATE_SCREEN (s);
+
+		/* check if screen is grabbed by someone else */
+		if (s->maxGrab - rs->grabIndex)
+		    break;
+
 		dx = event->xclient.data.l[0] / s->width - s->x;
 		if (dx)
 		{
@@ -1019,6 +1059,20 @@ rotateHandleEvent (CompDisplay *d,
 		Window id = event->xcrossing.window;
 
 		ROTATE_SCREEN (s);
+
+		/* check if screen is grabbed by someone else */
+		if (s->maxGrab - rs->grabIndex)
+		{
+		    /* break if no window is being moved */
+		    if (!rs->grabMask)
+			break;
+		}
+		else
+		{
+		    /* break if we should only flip on window move */
+		    if (rs->opt[ROTATE_SCREEN_OPTION_FLIPMOVE].value.b)
+			break;
+		}
 
 		if (rs->edges && id == s->screenEdge[SCREEN_EDGE_LEFT].id)
 		{
@@ -1103,6 +1157,34 @@ rotateHandleEvent (CompDisplay *d,
 	XWarpPointer (d->display, None, None, 0, 0, 0, 0,
 		      warpX + warpMove, warpY);
     }
+}
+
+static void
+rotateWindowGrabNotify (CompWindow   *w,
+			int	     x,
+			int	     y,
+			unsigned int state,
+			unsigned int mask)
+{
+    ROTATE_SCREEN (w->screen);
+
+    rs->grabMask = mask;
+
+    UNWRAP (rs, w->screen, windowGrabNotify);
+    (*w->screen->windowGrabNotify) (w, x, y, state, mask);
+    WRAP (rs, w->screen, windowGrabNotify, rotateWindowGrabNotify);
+}
+
+static void
+rotateWindowUngrabNotify (CompWindow *w)
+{
+    ROTATE_SCREEN (w->screen);
+
+    rs->grabMask = 0;
+
+    UNWRAP (rs, w->screen, windowUngrabNotify);
+    (*w->screen->windowUngrabNotify) (w);
+    WRAP (rs, w->screen, windowUngrabNotify, rotateWindowUngrabNotify);
 }
 
 static void
@@ -1214,7 +1296,8 @@ rotateInitScreen (CompPlugin *p,
     rs->grabbed = FALSE;
     rs->snapTop = FALSE;
 
-    rs->slow = FALSE;
+    rs->slow     = FALSE;
+    rs->grabMask = FALSE;
 
     rs->acceleration = ROTATE_ACCELERATION_DEFAULT;
 
@@ -1240,6 +1323,8 @@ rotateInitScreen (CompPlugin *p,
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
     WRAP (rs, s, paintScreen, rotatePaintScreen);
     WRAP (rs, s, setScreenOptionForPlugin, rotateSetScreenOptionForPlugin);
+    WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
+    WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
 
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
@@ -1276,6 +1361,8 @@ rotateFiniScreen (CompPlugin *p,
     UNWRAP (rs, s, donePaintScreen);
     UNWRAP (rs, s, paintScreen);
     UNWRAP (rs, s, setScreenOptionForPlugin);
+    UNWRAP (rs, s, windowGrabNotify);
+    UNWRAP (rs, s, windowUngrabNotify);
 
     free (rs);
 }
