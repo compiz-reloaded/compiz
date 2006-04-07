@@ -35,29 +35,9 @@
 
 #include <compiz.h>
 
-#define APP_NAME "/apps/compiz"
+#include <gconf-compiz-utils.h>
+
 #define KEY_CHANGE_TIMEOUT 250
-
-struct _GConfModifier {
-    char *name;
-    int  modifier;
-} modifiers[] = {
-    { "<Shift>",      ShiftMask		 },
-    { "<Control>",    ControlMask	 },
-    { "<Mod1>",	      Mod1Mask		 },
-    { "<Mod2>",	      Mod2Mask		 },
-    { "<Mod3>",	      Mod3Mask		 },
-    { "<Mod4>",	      Mod4Mask		 },
-    { "<Mod5>",	      Mod5Mask		 },
-    { "<Alt>",	      CompAltMask        },
-    { "<Meta>",	      CompMetaMask       },
-    { "<Super>",      CompSuperMask      },
-    { "<Hyper>",      CompHyperMask	 },
-    { "<ModeSwitch>", CompModeSwitchMask },
-    { "<Release>",    CompReleaseMask    }
-};
-
-#define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _GConfModifier))
 
 static int displayPrivateIndex;
 
@@ -89,19 +69,6 @@ typedef struct _GConfScreen {
 
 #define GCONF_SCREEN(s)						           \
     GConfScreen *gs = GET_GCONF_SCREEN (s, GET_GCONF_DISPLAY (s->display))
-
-static int
-strcmpskipifequal (char **ptr, char *s)
-{
-    int ret, len;
-
-    len = strlen (s);
-    ret = strncmp (*ptr, s, len);
-    if (ret == 0)
-	*ptr = (*ptr) + len;
-
-    return ret;
-}
 
 static GConfValueType
 gconfTypeFromCompType (CompOptionType type)
@@ -161,64 +128,12 @@ gconfSetValue (CompDisplay     *d,
 	g_free (color);
     } break;
     case CompOptionTypeBinding: {
-	guint modMask;
+	char *binding;
 
-	if (value->bind.type == CompBindingTypeButton)
-	    modMask = value->bind.u.button.modifiers;
-	else
-	    modMask = value->bind.u.key.modifiers;
+	binding = gconfBindingToString (d, value);
+	gconf_value_set_string (gvalue, binding);
+	g_free (binding);
 
-	if (modMask & (CompPressMask | CompReleaseMask))
-	{
-	    gchar *m, *mods = g_strdup ("");
-	    gchar *binding;
-	    gint  i;
-
-	    for (i = 0; i < N_MODIFIERS; i++)
-	    {
-		if (modMask & modifiers[i].modifier)
-		{
-		    m = g_strconcat (mods, modifiers[i].name, NULL);
-		    if (m)
-		    {
-			free (mods);
-			mods = m;
-		    }
-		}
-	    }
-
-	    if (value->bind.type == CompBindingTypeButton)
-	    {
-		binding = g_strdup_printf ("%sButton%d", mods,
-					   value->bind.u.button.button);
-	    }
-	    else
-	    {
-		KeySym keysym;
-		gchar  *keyname;
-
-		keysym = XKeycodeToKeysym (d->display,
-					   value->bind.u.key.keycode,
-					   0);
-		keyname = XKeysymToString (keysym);
-
-		if (keyname)
-		    binding = g_strdup_printf ("%s%s", mods, keyname);
-		else
-		    binding = g_strdup_printf ("%s0x%x", mods,
-					       value->bind.u.key.keycode);
-
-	    }
-
-	    gconf_value_set_string (gvalue, binding);
-
-	    g_free (binding);
-	    g_free (mods);
-	}
-	else
-	{
-	    gconf_value_set_string (gvalue, "Disabled");
-	}
     } break;
     default:
 	break;
@@ -254,11 +169,19 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeString:
     case CompOptionTypeColor:
     case CompOptionTypeBinding:
+    {
+	GConfValue *existingValue;
+
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
 	gconfSetValue (d, &o->value, o->type, gvalue);
-	gconf_client_set (gd->client, key, gvalue, NULL);
+	existingValue = gconf_client_get (gd->client, key, NULL);
+	if (!existingValue || gconf_value_compare (existingValue, gvalue))
+	    gconf_client_set (gd->client, key, gvalue, NULL);
 	gconf_value_free (gvalue);
+	if (existingValue)
+	    gconf_value_free (existingValue);
 	break;
+    }
     case CompOptionTypeList: {
 	GConfValueType type;
 	GSList         *list = NULL;
@@ -347,80 +270,11 @@ gconfGetValue (CompDisplay     *d,
     else if (type         == CompOptionTypeBinding &&
 	     gvalue->type == GCONF_VALUE_STRING)
     {
-	gchar *binding, *ptr;
-	gint  i;
-	guint mods = 0;
+	const char *binding = gconf_value_get_string (gvalue);
 
-	binding = (gchar *) gconf_value_get_string (gvalue);
-	if (strcasecmp (binding, "disabled") == 0)
-	{
-	    value->bind.type = CompBindingTypeButton;
-	    value->bind.u.button.button = 1;
-	    value->bind.u.button.modifiers = 0;
-	}
-	else
-	{
-	    for (i = 0; i < N_MODIFIERS; i++)
-	    {
-		if (strcasestr (binding, modifiers[i].name))
-		    mods |= modifiers[i].modifier;
-	    }
-
-	    /* if not explicetly set to be triggered at release
-	       assume it to be triggered at press */
-	    if (!(mods & CompReleaseMask))
-		mods |= CompPressMask;
-
-	    ptr = strrchr (binding, '>');
-	    if (ptr)
-		binding = ptr + 1;
-
-	    while (*binding && !isalnum (*binding))
-		binding++;
-
-	    if (strcmpskipifequal (&binding, "Button") == 0)
-	    {
-		gint button;
-
-		if (sscanf (binding, "%d", &button) == 1)
-		{
-		    value->bind.type = CompBindingTypeButton;
-		    value->bind.u.button.button = button;
-		    value->bind.u.button.modifiers = mods;
-
-		    return TRUE;
-		}
-	    }
-	    else
-	    {
-		KeySym keysym;
-
-		keysym = XStringToKeysym (binding);
-		if (keysym != NoSymbol)
-		{
-		    KeyCode keycode;
-
-		    keycode = XKeysymToKeycode (d->display, keysym);
-		    if (keycode)
-		    {
-			value->bind.type = CompBindingTypeKey;
-			value->bind.u.key.keycode = keycode;
-			value->bind.u.key.modifiers = mods;
-
-			return TRUE;
-		    }
-		}
-
-		if (strncmp (binding, "0x", 2) == 0)
-		{
-		    value->bind.type = CompBindingTypeKey;
-		    value->bind.u.key.keycode = strtol (binding, NULL, 0);
-		    value->bind.u.key.modifiers = mods;
-
-		    return TRUE;
-		}
-	    }
-	}
+	binding = gconf_value_get_string (gvalue);
+	if (gconfStringToBinding (d, binding, value))
+	    return TRUE;
     }
 
     return FALSE;

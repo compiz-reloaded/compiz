@@ -104,7 +104,14 @@ AC_ARG_ENABLE(gconf,
   [use_gconf=$enableval], [use_gconf=yes])
 
 if test "x$use_gconf" = "xyes"; then
-  PKG_CHECK_MODULES(GCONF, gconf-2.0, [use_gconf=yes], [use_gconf=no])
+  PKG_CHECK_MODULES(GCONF, gconf-2.0)
+
+  AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
+  if test x"$GCONFTOOL" = xno; then
+    AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
+  fi
+
+  AM_GCONF_SOURCE_2
 fi
 
 AM_CONDITIONAL(GCONF_PLUGIN, test "x$use_gconf" = "xyes")

@@ -222,6 +222,7 @@ typedef enum {
 } CompOptionType;
 
 typedef enum {
+    CompBindingTypeNone,
     CompBindingTypeKey,
     CompBindingTypeButton
 } CompBindingType;
@@ -339,12 +340,50 @@ compWindowTypeMaskFromStringList (CompOptionValue *value);
 typedef int CompTimeoutHandle;
 typedef int CompWatchFdHandle;
 
-#define COMP_DISPLAY_OPTION_ACTIVE_PLUGINS  0
-#define COMP_DISPLAY_OPTION_TEXTURE_FILTER  1
-#define COMP_DISPLAY_OPTION_CLICK_TO_FOCUS  2
-#define COMP_DISPLAY_OPTION_AUTORAISE	    3
-#define COMP_DISPLAY_OPTION_AUTORAISE_DELAY 4
-#define COMP_DISPLAY_OPTION_NUM		    5
+#define COMP_DISPLAY_OPTION_ACTIVE_PLUGINS                0
+#define COMP_DISPLAY_OPTION_TEXTURE_FILTER                1
+#define COMP_DISPLAY_OPTION_CLICK_TO_FOCUS                2
+#define COMP_DISPLAY_OPTION_AUTORAISE                     3
+#define COMP_DISPLAY_OPTION_AUTORAISE_DELAY               4
+#define COMP_DISPLAY_OPTION_CLOSE_WINDOW                  5
+#define COMP_DISPLAY_OPTION_MAIN_MENU                     6
+#define COMP_DISPLAY_OPTION_RUN_DIALOG                    7
+#define COMP_DISPLAY_OPTION_COMMAND0                      8
+#define COMP_DISPLAY_OPTION_RUN_COMMAND0                  9
+#define COMP_DISPLAY_OPTION_COMMAND1                      10
+#define COMP_DISPLAY_OPTION_RUN_COMMAND1                  11
+#define COMP_DISPLAY_OPTION_COMMAND2                      12
+#define COMP_DISPLAY_OPTION_RUN_COMMAND2                  13
+#define COMP_DISPLAY_OPTION_COMMAND3                      14
+#define COMP_DISPLAY_OPTION_RUN_COMMAND3                  15
+#define COMP_DISPLAY_OPTION_COMMAND4                      16
+#define COMP_DISPLAY_OPTION_RUN_COMMAND4                  17
+#define COMP_DISPLAY_OPTION_COMMAND5                      18
+#define COMP_DISPLAY_OPTION_RUN_COMMAND5                  19
+#define COMP_DISPLAY_OPTION_COMMAND6                      20
+#define COMP_DISPLAY_OPTION_RUN_COMMAND6                  21
+#define COMP_DISPLAY_OPTION_COMMAND7                      22
+#define COMP_DISPLAY_OPTION_RUN_COMMAND7                  23
+#define COMP_DISPLAY_OPTION_COMMAND8                      24
+#define COMP_DISPLAY_OPTION_RUN_COMMAND8                  25
+#define COMP_DISPLAY_OPTION_COMMAND9                      26
+#define COMP_DISPLAY_OPTION_RUN_COMMAND9                  27
+#define COMP_DISPLAY_OPTION_COMMAND10                     28
+#define COMP_DISPLAY_OPTION_RUN_COMMAND10                 29
+#define COMP_DISPLAY_OPTION_COMMAND11                     30
+#define COMP_DISPLAY_OPTION_RUN_COMMAND11                 31
+#define COMP_DISPLAY_OPTION_SLOW_ANIMATIONS               32
+#define COMP_DISPLAY_OPTION_LOWER_WINDOW                  33
+#define COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW             34
+#define COMP_DISPLAY_OPTION_MINIMIZE_WINDOW               35
+#define COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW               36
+#define COMP_DISPLAY_OPTION_OPACITY_INCREASE              37
+#define COMP_DISPLAY_OPTION_OPACITY_DECREASE              38
+#define COMP_DISPLAY_OPTION_COMMAND_SCREENSHOT            39
+#define COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT        40
+#define COMP_DISPLAY_OPTION_COMMAND_WINDOW_SCREENSHOT     41
+#define COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT 42
+#define COMP_DISPLAY_OPTION_NUM                           43
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -548,6 +587,10 @@ compRemoveWatchFd (CompWatchFdHandle handle);
 
 int
 compCheckForError (Display *dpy);
+
+void
+addScreenToDisplay (CompDisplay *display,
+		    CompScreen *s);
 
 Bool
 addDisplay (char *name,
@@ -842,42 +885,8 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_LIGHTING	       1
 #define COMP_SCREEN_OPTION_REFRESH_RATE	       2
 #define COMP_SCREEN_OPTION_SIZE		       3
-#define COMP_SCREEN_OPTION_CLOSE_WINDOW	       4
-#define COMP_SCREEN_OPTION_MAIN_MENU	       5
-#define COMP_SCREEN_OPTION_RUN_DIALOG	       6
-#define COMP_SCREEN_OPTION_COMMAND0	       7
-#define COMP_SCREEN_OPTION_RUN_COMMAND0	       8
-#define COMP_SCREEN_OPTION_COMMAND1	       9
-#define COMP_SCREEN_OPTION_RUN_COMMAND1	       10
-#define COMP_SCREEN_OPTION_COMMAND2	       11
-#define COMP_SCREEN_OPTION_RUN_COMMAND2	       12
-#define COMP_SCREEN_OPTION_COMMAND3	       13
-#define COMP_SCREEN_OPTION_RUN_COMMAND3	       14
-#define COMP_SCREEN_OPTION_COMMAND4	       15
-#define COMP_SCREEN_OPTION_RUN_COMMAND4	       16
-#define COMP_SCREEN_OPTION_COMMAND5	       17
-#define COMP_SCREEN_OPTION_RUN_COMMAND5	       18
-#define COMP_SCREEN_OPTION_COMMAND6	       19
-#define COMP_SCREEN_OPTION_RUN_COMMAND6	       20
-#define COMP_SCREEN_OPTION_COMMAND7	       21
-#define COMP_SCREEN_OPTION_RUN_COMMAND7	       22
-#define COMP_SCREEN_OPTION_COMMAND8	       23
-#define COMP_SCREEN_OPTION_RUN_COMMAND8	       24
-#define COMP_SCREEN_OPTION_COMMAND9	       25
-#define COMP_SCREEN_OPTION_RUN_COMMAND9	       26
-#define COMP_SCREEN_OPTION_COMMAND10	       27
-#define COMP_SCREEN_OPTION_RUN_COMMAND10       28
-#define COMP_SCREEN_OPTION_COMMAND11	       29
-#define COMP_SCREEN_OPTION_RUN_COMMAND11       30
-#define COMP_SCREEN_OPTION_SLOW_ANIMATIONS     31
-#define COMP_SCREEN_OPTION_LOWER_WINDOW        32
-#define COMP_SCREEN_OPTION_UNMAXIMIZE_WINDOW   33
-#define COMP_SCREEN_OPTION_MINIMIZE_WINDOW     34
-#define COMP_SCREEN_OPTION_MAXIMIZE_WINDOW     35
-#define COMP_SCREEN_OPTION_OPACITY_STEP	       36
-#define COMP_SCREEN_OPTION_OPACITY_INCREASE    37
-#define COMP_SCREEN_OPTION_OPACITY_DECREASE    38
-#define COMP_SCREEN_OPTION_NUM		       39
+#define COMP_SCREEN_OPTION_OPACITY_STEP        4
+#define COMP_SCREEN_OPTION_NUM		       5
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);

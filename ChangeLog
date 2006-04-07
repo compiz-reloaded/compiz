@@ -1,5 +1,42 @@
 2006-04-07  David Reveman  <davidr@novell.com>
 
+	* plugins/rotate.c (ROTATE_SPEED_DEFAULT): 1.5.
+
+2006-04-07  Dan Winship  <danw@novell.com>
+
+	(Much of this patch was written by Radek Doulik
+	<rodo@novell.com>.)
+
+	* src/display.c:
+	* src/event.c:
+	* src/screen.c: Move keybinding stuff to CompDisplay, making it no
+	longer settable per-screen. Add bindings for screenshots (for
+	compatibility with metacity, which handles that keybinding in
+	GNOME for historical reasons).
+
+	* include/compiz.h: add an explicit CompBindingTypeNone rather
+	than relying on modifiers==0 to mean none. Update bindings stuff.
+
+	* src/screen.c (removePassiveKeyGrab, removePassiveButtonGrab):
+	Fix these to remove the right grab rather than always removing the
+	most-recently-added one.
+	(addScreenBinding): deal with CompBindingTypeNone
+
+	* plugins/gconf-dump.c: hacky plugin to dump information about the
+	other plugins to a gconf schemas file (used to regenerate
+	compiz.schemas)
+
+	* plugins/gconf-compiz-utils.c: shared code between gconf.c and
+	gconf-dump.c
+
+	* plugins/Makefile.am: add gconf-dump plugin and compiz.schemas,
+	and code to install compiz.schemas.
+
+	* configure.ac: Update gconf test to set macros needed for schema
+	install.
+
+2006-04-07  David Reveman  <davidr@novell.com>
+
 	* plugins/rotate.c: Add edge flipping support.
 
 	* plugins/scale.c: Allow corner screen edges to be used for
@@ -20,8 +57,8 @@
 	* plugins/place.c:
 	* plugins/move.c:
 	* plugins/zoom.c:
-	* plugins/rotate.c: 
-	* plugins/scale.c: 
+	* plugins/rotate.c:
+	* plugins/scale.c:
 	* src/event.c:
 	* include/compiz.h:
 	Add previous pointer position that can be shared between multiple

@@ -49,8 +49,23 @@ libwater_la_SOURCES = water.c
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
-libgconf_la_SOURCES = gconf.c
+libgconf_la_SOURCES = gconf.c gconf-compiz-utils.c
 libgconf_module = libgconf.la
+
+libgconf_dump_la_LDFLAGS = -module -avoid-version -no-undefined
+libgconf_dump_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
+libgconf_dump_la_SOURCES = gconf-dump.c gconf-compiz-utils.c
+libgconf_dump_module = libgconf-dump.la
+
+schemadir = $(GCONF_SCHEMA_FILE_DIR)
+schema_DATA = compiz.schemas
+
+if GCONF_SCHEMAS_INSTALL
+install-data-local:
+	if test -z "$(DESTDIR)" ; then \
+		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
+        fi
+endif
 endif
 
 if PLACE_PLUGIN
@@ -69,18 +84,22 @@ INCLUDES =			\
 
 moduledir = $(plugindir)
 
-module_LTLIBRARIES =	      \
-	libfade.la	      \
-	libcube.la	      \
-	librotate.la	      \
-	libzoom.la	      \
-	libscale.la	      \
-	libwobbly.la	      \
-	libminimize.la	      \
-	libmove.la	      \
-	libresize.la	      \
-	libdecoration.la      \
-	libswitcher.la	      \
-	libwater.la	      \
-	$(libgconf_module)    \
+module_LTLIBRARIES =		\
+	libfade.la		\
+	libcube.la		\
+	librotate.la		\
+	libzoom.la		\
+	libscale.la		\
+	libwobbly.la		\
+	libminimize.la		\
+	libmove.la		\
+	libresize.la		\
+	libdecoration.la	\
+	libswitcher.la		\
+	libwater.la		\
+	$(libgconf_module)	\
+	$(libgconf_dump_module) \
 	$(libplace_module)
+
+CLEANFILES = $schema_DATA
+EXTRA_DIST = $schema_DATA

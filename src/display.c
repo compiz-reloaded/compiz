@@ -83,6 +83,46 @@ static int               nWatchFds = 0;
 #define AUTORAISE_DELAY_MIN	0
 #define AUTORAISE_DELAY_MAX	10000
 
+#define SLOW_ANIMATIONS_KEY_DEFAULT       "F10"
+#define SLOW_ANIMATIONS_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
+
+#define MAIN_MENU_KEY_DEFAULT       "F1"
+#define MAIN_MENU_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define RUN_DIALOG_KEY_DEFAULT       "F2"
+#define RUN_DIALOG_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define CLOSE_WINDOW_KEY_DEFAULT       "F4"
+#define CLOSE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define UNMAXIMIZE_WINDOW_KEY_DEFAULT       "F5"
+#define UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define MINIMIZE_WINDOW_KEY_DEFAULT       "F9"
+#define MINIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define MAXIMIZE_WINDOW_KEY_DEFAULT       "F10"
+#define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define LOWER_WINDOW_BUTTON_DEFAULT    Button2
+#define LOWER_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define OPACITY_INCREASE_BUTTON_DEFAULT    Button4
+#define OPACITY_INCREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define OPACITY_DECREASE_BUTTON_DEFAULT    Button5
+#define OPACITY_DECREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define COMMAND_SCREENSHOT_DEFAULT               "gnome-screenshot"
+#define RUN_COMMAND_SCREENSHOT_KEY_DEFAULT       "Print"
+#define RUN_COMMAND_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask)
+
+#define COMMAND_WINDOW_SCREENSHOT_DEFAULT \
+    "gnome-screenshot --window"
+#define RUN_COMMAND_WINDOW_SCREENSHOT_KEY_DEFAULT       "Print"
+#define RUN_COMMAND_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask | \
+							 CompAltMask)
+
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static char *textureFilter[] = { "Fast", "Good", "Best" };
@@ -184,6 +224,182 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.i	  = AUTORAISE_DELAY_DEFAULT;
     o->rest.i.min = AUTORAISE_DELAY_MIN;
     o->rest.i.max = AUTORAISE_DELAY_MAX;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW];
+    o->name			  = "close_window";
+    o->shortDesc		  = "Close Window";
+    o->longDesc			  = "Close active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = CLOSE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (CLOSE_WINDOW_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_MAIN_MENU];
+    o->name			  = "main_menu";
+    o->shortDesc		  = "Main Menu";
+    o->longDesc			  = "Open main menu";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = MAIN_MENU_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (MAIN_MENU_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_DIALOG];
+    o->name			  = "run";
+    o->shortDesc		  = "Run";
+    o->longDesc			  = "Run application";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = RUN_DIALOG_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (RUN_DIALOG_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW];
+    o->name			  = "unmaximize_window";
+    o->shortDesc		  = "Unmaximize Window";
+    o->longDesc			  = "Unmaximize active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (UNMAXIMIZE_WINDOW_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW];
+    o->name			  = "minimize_window";
+    o->shortDesc		  = "Minimize Window";
+    o->longDesc			  = "Minimize active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = MINIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (MINIMIZE_WINDOW_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW];
+    o->name			  = "maximize_window";
+    o->shortDesc		  = "Maximize Window";
+    o->longDesc			  = "Maximize active window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = MAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (MAXIMIZE_WINDOW_KEY_DEFAULT));
+
+#define COMMAND_OPTION(num, cname, rname)				    \
+    o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
+    o->name			  = cname;				    \
+    o->shortDesc		  = "Command line";			    \
+    o->longDesc			  = "Command line to be executed in shell"; \
+    o->type			  = CompOptionTypeString;		    \
+    o->value.s			  = strdup ("");			    \
+    o->rest.s.string		  = NULL;				    \
+    o->rest.s.nString		  = 0;					    \
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num ];		    \
+    o->name			  =  rname;				    \
+    o->shortDesc		  = "Run command";			    \
+    o->longDesc			  = "Run shell command";		    \
+    o->type			  = CompOptionTypeBinding;		    \
+    o->value.bind.type		  = CompBindingTypeKey;			    \
+    o->value.bind.u.key.modifiers = 0;					    \
+    o->value.bind.u.key.keycode   = 0
+
+    COMMAND_OPTION (0, "command0", "run_command0");
+    COMMAND_OPTION (1, "command1", "run_command1");
+    COMMAND_OPTION (2, "command2", "run_command2");
+    COMMAND_OPTION (3, "command3", "run_command3");
+    COMMAND_OPTION (4, "command4", "run_command4");
+    COMMAND_OPTION (5, "command5", "run_command5");
+    COMMAND_OPTION (6, "command6", "run_command6");
+    COMMAND_OPTION (7, "command7", "run_command7");
+    COMMAND_OPTION (8, "command8", "run_command8");
+    COMMAND_OPTION (9, "command9", "run_command9");
+    COMMAND_OPTION (10, "command10", "run_command10");
+    COMMAND_OPTION (11, "command11", "run_command11");
+
+    o = &display->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS];
+    o->name			  = "slow_animations";
+    o->shortDesc		  = "Slow Animations";
+    o->longDesc			  = "Toggle use of slow animations";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = SLOW_ANIMATIONS_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (SLOW_ANIMATIONS_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW];
+    o->name			     = "lower_window";
+    o->shortDesc		     = "Lower Window";
+    o->longDesc			     = "Lower window beneath other windows";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeButton;
+    o->value.bind.u.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = LOWER_WINDOW_BUTTON_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE];
+    o->name			     = "opacity_increase";
+    o->shortDesc		     = "Increase Opacity";
+    o->longDesc			     = "Increase window opacity";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeButton;
+    o->value.bind.u.button.modifiers = OPACITY_INCREASE_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = OPACITY_INCREASE_BUTTON_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE];
+    o->name			     = "opacity_decrease";
+    o->shortDesc		     = "Decrease Opacity";
+    o->longDesc			     = "Decrease window opacity";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeButton;
+    o->value.bind.u.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = OPACITY_DECREASE_BUTTON_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT];
+    o->name			  = "run_command_screenshot";
+    o->shortDesc		  = "Take a screenshot";
+    o->longDesc			  = "Take a screenshot";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = RUN_COMMAND_SCREENSHOT_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (RUN_COMMAND_SCREENSHOT_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_COMMAND_SCREENSHOT];
+    o->name			  = "command_screenshot";
+    o->shortDesc		  = "Screenshot command line";
+    o->longDesc			  = "Screenshot command line";
+    o->type			  = CompOptionTypeString;
+    o->value.s			  = strdup (COMMAND_SCREENSHOT_DEFAULT);
+    o->rest.s.string		  = NULL;
+    o->rest.s.nString		  = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT];
+    o->name			  = "run_command_window_screenshot";
+    o->shortDesc		  = "Take a screenshot of a window";
+    o->longDesc			  = "Take a screenshot of a window";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers =
+	RUN_COMMAND_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (RUN_COMMAND_WINDOW_SCREENSHOT_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_COMMAND_WINDOW_SCREENSHOT];
+    o->name			  = "command_window_screenshot";
+    o->shortDesc		  = "Window screenshot command line";
+    o->longDesc			  = "Window screenshot command line";
+    o->type			  = CompOptionTypeString;
+    o->value.s			  = strdup (COMMAND_WINDOW_SCREENSHOT_DEFAULT);
+    o->rest.s.string		  = NULL;
+    o->rest.s.nString		  = 0;
 }
 
 CompOption *
@@ -192,6 +408,27 @@ compGetDisplayOptions (CompDisplay *display,
 {
     *count = NUM_OPTIONS (display);
     return display->opt;
+}
+
+static Bool
+addDisplayBinding (CompDisplay *display, CompBinding *binding)
+{
+    CompScreen *s;
+
+    for (s = display->screens; s; s = s->next)
+	if (!addScreenBinding (s, binding))
+	    return FALSE;
+
+    return TRUE;
+}
+
+static void
+removeDisplayBinding (CompDisplay *display, CompBinding *binding)
+{
+    CompScreen *s;
+
+    for (s = display->screens; s; s = s->next)
+	removeScreenBinding (s, binding);
 }
 
 static Bool
@@ -241,6 +478,56 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_AUTORAISE_DELAY:
 	if (compSetIntOption (o, value))
 	    return TRUE;
+	break;
+    case COMP_DISPLAY_OPTION_COMMAND0:
+    case COMP_DISPLAY_OPTION_COMMAND1:
+    case COMP_DISPLAY_OPTION_COMMAND2:
+    case COMP_DISPLAY_OPTION_COMMAND3:
+    case COMP_DISPLAY_OPTION_COMMAND4:
+    case COMP_DISPLAY_OPTION_COMMAND5:
+    case COMP_DISPLAY_OPTION_COMMAND6:
+    case COMP_DISPLAY_OPTION_COMMAND7:
+    case COMP_DISPLAY_OPTION_COMMAND8:
+    case COMP_DISPLAY_OPTION_COMMAND9:
+    case COMP_DISPLAY_OPTION_COMMAND10:
+    case COMP_DISPLAY_OPTION_COMMAND11:
+    case COMP_DISPLAY_OPTION_COMMAND_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_COMMAND_WINDOW_SCREENSHOT:
+	if (compSetStringOption (o, value))
+	    return TRUE;
+	break;
+    case COMP_DISPLAY_OPTION_CLOSE_WINDOW:
+    case COMP_DISPLAY_OPTION_MAIN_MENU:
+    case COMP_DISPLAY_OPTION_RUN_DIALOG:
+    case COMP_DISPLAY_OPTION_MINIMIZE_WINDOW:
+    case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW:
+    case COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND0:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND1:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND2:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND3:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND4:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND5:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND6:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND7:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND8:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND9:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND10:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND11:
+    case COMP_DISPLAY_OPTION_SLOW_ANIMATIONS:
+    case COMP_DISPLAY_OPTION_LOWER_WINDOW:
+    case COMP_DISPLAY_OPTION_OPACITY_INCREASE:
+    case COMP_DISPLAY_OPTION_OPACITY_DECREASE:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT:
+	if (addDisplayBinding (display, &value->bind))
+	{
+	    removeDisplayBinding (display, &o->value.bind);
+
+	    if (compSetBindingOption (o, value))
+		return TRUE;
+	}
+	break;
     default:
 	break;
     }
@@ -1287,6 +1574,50 @@ pingTimeout (void *closure)
     return TRUE;
 }
 
+static void
+addScreenBindings (CompDisplay *d, CompScreen *s)
+{
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_MAIN_MENU].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND0].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND1].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND2].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND3].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND4].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND5].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND6].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND7].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND8].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND9].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND10].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND11].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT].value.bind);
+}
+
+void
+addScreenToDisplay (CompDisplay *display, CompScreen *s)
+{
+    s->next = display->screens;
+    display->screens = s;
+
+    addScreenBindings (display, s);
+}
+
 Bool
 addDisplay (char *name,
 	    char **plugin,
@@ -1320,8 +1651,6 @@ addDisplay (char *name,
     d->plugin.list.nValue = 0;
     d->plugin.list.value  = 0;
 
-    compDisplayInitOptions (d, plugin, nPlugin);
-
     d->textureFilter = GL_LINEAR;
     d->below	     = None;
 
@@ -1337,6 +1666,8 @@ addDisplay (char *name,
 		 programName, XDisplayName (name));
 	return FALSE;
     }
+
+    compDisplayInitOptions (d, plugin, nPlugin);
 
     snprintf (d->displayString, 255, "DISPLAY=%s", DisplayString (dpy));
 
