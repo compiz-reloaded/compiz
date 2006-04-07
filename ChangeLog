@@ -1,5 +1,9 @@
 2006-04-07  David Reveman  <davidr@novell.com>
 
+	* plugins/scale.c: Change default key-binding to F11.
+	(scaleInitiate): Make sure screen isn't grabbed by some other plugin.
+	(scaleInitScreen): Initialize darkenBack properly.
+
 	* configure.ac: Bump version to 0.0.9.
 
 	* plugins/Makefile.am (CLEANFILES, EXTRA_DIST): Fix.

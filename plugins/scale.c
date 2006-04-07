@@ -44,10 +44,10 @@
 
 #define SCALE_SLOPPY_FOCUS_DEFAULT FALSE
 
-#define SCALE_INITIATE_KEY_DEFAULT       "F12"
+#define SCALE_INITIATE_KEY_DEFAULT       "F11"
 #define SCALE_INITIATE_MODIFIERS_DEFAULT CompPressMask
 
-#define SCALE_TERMINATE_KEY_DEFAULT       "F12"
+#define SCALE_TERMINATE_KEY_DEFAULT       "F11"
 #define SCALE_TERMINATE_MODIFIERS_DEFAULT CompPressMask
 
 #define SCALE_NEXT_WINDOW_KEY_DEFAULT       "Right"
@@ -923,7 +923,13 @@ scaleInitiate (CompScreen *s)
 	ss->state != SCALE_STATE_OUT)
     {
 	if (!ss->grabIndex)
+	{
+	    /* check if screen is grabbed by someone else */
+	    if (s->maxGrab)
+		return;
+
 	    ss->grabIndex = pushScreenGrab (s, ss->cursor);
+	}
 
 	if (ss->grabIndex)
 	{
@@ -1317,6 +1323,7 @@ scaleInitScreen (CompPlugin *p,
     ss->timestep = SCALE_TIMESTEP_DEFAULT;
     ss->opacity  = (OPAQUE * SCALE_OPACITY_DEFAULT) / 100;
 
+    ss->darkenBack = SCALE_DARKEN_BACK_DEFAULT;
     ss->cornerMask = 0;
 
     scaleScreenInitOptions (ss, s->display->display);
