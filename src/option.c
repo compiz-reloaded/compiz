@@ -56,7 +56,14 @@ Bool
 compSetBoolOption (CompOption	   *option,
 		   CompOptionValue *value)
 {
-    option->value.i = (value->b) ? TRUE : FALSE;
+    int b;
+
+    b = (value->b) ? TRUE : FALSE;
+
+    if (option->value.b == b)
+	return FALSE;
+
+    option->value.b = b;
 
     return TRUE;
 }

@@ -83,9 +83,6 @@ typedef struct _MoveScreen {
 
     Cursor moveCursor;
 
-    int prevPointerX;
-    int prevPointerY;
-
     GLushort moveOpacity;
 } MoveScreen;
 
@@ -225,8 +222,8 @@ moveInitiate (CompWindow   *w,
 
     md->w = w;
 
-    ms->prevPointerX = x;
-    ms->prevPointerY = y;
+    w->screen->prevPointerX = x;
+    w->screen->prevPointerY = y;
 
     if (!ms->grabIndex)
 	ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor);
@@ -260,32 +257,37 @@ moveTerminate (CompDisplay *d)
     }
 }
 
-static void
+static Bool
 moveHandleMotionEvent (CompScreen *s,
 		       int	  xRoot,
-		       int	  yRoot)
+		       int	  yRoot,
+		       int	  *wrapX,
+		       int	  *wrapY)
 {
     MOVE_SCREEN (s);
 
     if (ms->grabIndex)
     {
 	CompWindow *w;
-	int	   pointerDx, pointerDy;
+	int	   pointerDx, pointerDy, dx, dy;
 
 	MOVE_DISPLAY (s->display);
 
 	w = md->w;
 
-	pointerDx = xRoot - ms->prevPointerX;
-	pointerDy = yRoot - ms->prevPointerY;
+	pointerDx = xRoot - s->prevPointerX;
+	pointerDy = yRoot - s->prevPointerY;
 
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
-	    pointerDx = pointerDy = 0;
+	    dx = dy = 0;
 	}
 	else
 	{
 	    int min, max;
+
+	    dx = pointerDx;
+	    dy = pointerDy;
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
@@ -294,9 +296,9 @@ moveHandleMotionEvent (CompScreen *s,
 		    w->input.bottom - w->height;
 
 		if (w->attrib.y + pointerDy < min)
-		    pointerDy = min - w->attrib.y;
+		    dy = min - w->attrib.y;
 		else if (w->attrib.y + pointerDy > max)
-		    pointerDy = max - w->attrib.y;
+		    dy = max - w->attrib.y;
 	    }
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
@@ -306,9 +308,9 @@ moveHandleMotionEvent (CompScreen *s,
 		    w->input.right - w->width;
 
 		if (w->attrib.x + pointerDx < min)
-		    pointerDx = min - w->attrib.x;
+		    dx = min - w->attrib.x;
 		else if (w->attrib.x + pointerDx > max)
-		    pointerDx = max - w->attrib.x;
+		    dx = max - w->attrib.x;
 	    }
 
 	    if (ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y].value.b)
@@ -316,33 +318,35 @@ moveHandleMotionEvent (CompScreen *s,
 		min = s->workArea.y + w->input.top;
 		max = s->workArea.y + s->workArea.height;
 
-		if (w->attrib.y + pointerDy < min)
-		    pointerDy = min - w->attrib.y;
-		else if (w->attrib.y + pointerDy > max)
-		    pointerDy = max - w->attrib.y;
+		if (w->attrib.y + dy < min)
+		    dy = min - w->attrib.y;
+		else if (w->attrib.y + dy > max)
+		    dy = max - w->attrib.y;
 	    }
 	}
 
-	if (pointerDx || pointerDy)
+	if (dx || dy)
+	    moveWindow (md->w, dx, dy, TRUE, FALSE);
+
+	if (dx != pointerDx || dy != pointerDy)
 	{
-	    moveWindow (md->w, pointerDx, pointerDy, TRUE);
+	    *wrapX = s->prevPointerX + dx;
+	    *wrapY = s->prevPointerY + dy;
 
-	    ms->prevPointerX += pointerDx;
-	    ms->prevPointerY += pointerDy;
+	    return TRUE;
 	}
-
-	if (ms->prevPointerX != xRoot || ms->prevPointerY != yRoot)
-	    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0,
-			  ms->prevPointerX - xRoot,
-			  ms->prevPointerY - yRoot);
     }
+
+    return FALSE;
 }
 
 static void
 moveHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
-    CompScreen *s;
+    CompScreen *s = NULL;
+    Bool       warp = FALSE;
+    int	       warpX = 0 , warpY = 0;
 
     MOVE_DISPLAY (d);
 
@@ -414,9 +418,21 @@ moveHandleEvent (CompDisplay *d,
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
-	    moveHandleMotionEvent (s,
-				   event->xmotion.x_root,
-				   event->xmotion.y_root);
+	    warp = moveHandleMotionEvent (s,
+					  event->xmotion.x_root,
+					  event->xmotion.y_root,
+					  &warpX,
+					  &warpY);
+	break;
+    case EnterNotify:
+    case LeaveNotify:
+	s = findScreenAtDisplay (d, event->xcrossing.root);
+	if (s)
+	    warp = moveHandleMotionEvent (s,
+					  event->xcrossing.x_root,
+					  event->xcrossing.y_root,
+					  &warpX,
+					  &warpY);
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->wmMoveResizeAtom)
@@ -431,13 +447,13 @@ moveHandleEvent (CompDisplay *d,
 		{
 		    int	xRoot, yRoot;
 
+		    s = w->screen;
+
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
-			xRoot = w->attrib.x + w->width / 2;
-			yRoot = w->attrib.y + w->height / 2;
-
-			XWarpPointer (d->display, None, w->screen->root,
-				      0, 0, 0, 0, xRoot, yRoot);
+			warpX = xRoot = w->attrib.x + w->width / 2;
+			warpY = yRoot = w->attrib.y + w->height / 2;
+			warp  = TRUE;
 
 			moveInitiate (w, xRoot, yRoot, 0);
 		    }
@@ -451,7 +467,7 @@ moveHandleEvent (CompDisplay *d,
 				       &root, &child, &xRoot, &yRoot,
 				       &i, &i, &state);
 
-			/* TODO: not only button 1*/
+			/* TODO: not only button 1 */
 			if (state & Button1Mask)
 			{
 			    moveInitiate (w,
@@ -459,7 +475,9 @@ moveHandleEvent (CompDisplay *d,
 					  event->xclient.data.l[1],
 					  state | CompPressMask);
 
-			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
+			    warp = moveHandleMotionEvent (w->screen,
+							  xRoot, yRoot,
+							  &warpX, &warpY);
 			}
 		    }
 		}
@@ -480,6 +498,15 @@ moveHandleEvent (CompDisplay *d,
     UNWRAP (md, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (md, d, handleEvent, moveHandleEvent);
+
+    if (warp)
+    {
+	s->prevPointerX = warpX;
+	s->prevPointerY = warpY;
+
+	XWarpPointer (d->display, None, s->root, 0, 0, 0, 0,
+		      warpX, warpY);
+    }
 }
 
 static Bool
@@ -573,9 +600,6 @@ moveInitScreen (CompPlugin *p,
 
     ms->grabIndex = 0;
 
-    ms->prevPointerX = 0;
-    ms->prevPointerY = 0;
-
     ms->moveOpacity = (MOVE_OPACITY_DEFAULT * OPAQUE) / 100;
 
     moveScreenInitOptions (ms, s->display->display);
@@ -619,10 +643,6 @@ moveFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
-CompPluginDep moveDeps[] = {
-    { CompPluginRuleAfter, "fade" }
-};
-
 CompPluginVTable moveVTable = {
     "move",
     "Move Window",
@@ -639,8 +659,8 @@ CompPluginVTable moveVTable = {
     0, /* SetDisplayOption */
     moveGetScreenOptions,
     moveSetScreenOption,
-    moveDeps,
-    sizeof (moveDeps) / sizeof (moveDeps[0])
+    NULL,
+    0
 };
 
 CompPluginVTable *

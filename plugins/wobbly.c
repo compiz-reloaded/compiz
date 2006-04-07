@@ -1754,7 +1754,7 @@ wobblyPreparePaintScreen (CompScreen *s,
 				    w->attrib.x,
 				    model->topLeft.y + w->output.top -
 				    w->attrib.y,
-				    TRUE);
+				    TRUE, TRUE);
 
 			ww->model = model;
 
@@ -2303,14 +2303,15 @@ wobblyWindowResizeNotify (CompWindow *w)
 static void
 wobblyWindowMoveNotify (CompWindow *w,
 			int	   dx,
-			int	   dy)
+			int	   dy,
+			Bool	   immediate)
 {
     WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
 
     if (ww->model)
     {
-	if (ww->grabbed)
+	if (ww->grabbed && !immediate)
 	{
 	    ww->model->anchorObject->position.x += dx;
 	    ww->model->anchorObject->position.y += dy;
@@ -2325,7 +2326,7 @@ wobblyWindowMoveNotify (CompWindow *w,
     }
 
     UNWRAP (ws, w->screen, windowMoveNotify);
-    (*w->screen->windowMoveNotify) (w, dx, dy);
+    (*w->screen->windowMoveNotify) (w, dx, dy, immediate);
     WRAP (ws, w->screen, windowMoveNotify, wobblyWindowMoveNotify);
 }
 

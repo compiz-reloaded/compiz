@@ -977,7 +977,8 @@ typedef void (*WindowResizeNotifyProc) (CompWindow *window);
 
 typedef void (*WindowMoveNotifyProc) (CompWindow *window,
 				      int	 dx,
-				      int	 dy);
+				      int	 dy,
+				      Bool	 immediate);
 
 #define CompWindowGrabKeyMask    (1 << 0)
 #define CompWindowGrabButtonMask (1 << 1)
@@ -1117,6 +1118,9 @@ struct _CompScreen {
     CompGrab *grabs;
     int	     grabSize;
     int	     maxGrab;
+
+    int prevPointerX;
+    int prevPointerY;
 
     int		   rasterX;
     int		   rasterY;
@@ -1578,7 +1582,8 @@ void
 moveWindow (CompWindow *w,
 	    int        dx,
 	    int        dy,
-	    Bool       damage);
+	    Bool       damage,
+	    Bool       immediate);
 
 void
 syncWindowPosition (CompWindow *w);
@@ -1631,7 +1636,8 @@ windowResizeNotify (CompWindow *w);
 void
 windowMoveNotify (CompWindow *w,
 		  int	     dx,
-		  int	     dy);
+		  int	     dy,
+		  Bool	     immediate);
 
 void
 windowGrabNotify (CompWindow   *w,

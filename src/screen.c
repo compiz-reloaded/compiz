@@ -1112,6 +1112,9 @@ addScreen (CompDisplay *display,
     s->grabSize = 0;
     s->maxGrab  = 0;
 
+    s->prevPointerX = 0;
+    s->prevPointerY = 0;
+
     s->pendingDestroys = 0;
 
     s->clientList  = 0;
@@ -2575,7 +2578,7 @@ moveScreenViewport (CompScreen *s,
 	    if (w->saveMask & CWX)
 		w->saveWc.x += wx;
 
-	    moveWindow (w, wx, 0, sync);
+	    moveWindow (w, wx, 0, sync, TRUE);
 
 	    if (sync)
 		syncWindowPosition (w);
@@ -2635,7 +2638,7 @@ moveWindowToViewportPosition (CompWindow *w,
 	if (w->saveMask & CWX)
 	    w->saveWc.x += wx;
 
-	moveWindow (w, wx, 0, sync);
+	moveWindow (w, wx, 0, sync, TRUE);
 
 	if (sync)
 	    syncWindowPosition (w);

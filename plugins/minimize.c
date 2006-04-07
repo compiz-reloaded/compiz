@@ -403,7 +403,7 @@ minPreparePaintScreen (CompScreen *s,
 		    dx = (w->serverX + mw->tx) - w->attrib.x;
 		    dy = (w->serverY + mw->ty) - w->attrib.y;
 
-		    moveWindow (w, dx, dy, FALSE);
+		    moveWindow (w, dx, dy, FALSE, FALSE);
 
 		    (*s->setWindowScale) (w, mw->xScale, mw->yScale);
 
@@ -613,7 +613,7 @@ minDamageWindowRect (CompWindow *w,
 		    moveWindow (w,
 				mw->icon.x - w->attrib.x,
 				mw->icon.y - w->attrib.y,
-				FALSE);
+				FALSE, TRUE);
 
 		    (*w->screen->setWindowScale) (w, mw->xScale, mw->yScale);
 
@@ -625,7 +625,7 @@ minDamageWindowRect (CompWindow *w,
 		moveWindow (w,
 			    w->serverX - w->attrib.x,
 			    w->serverY - w->attrib.y,
-			    FALSE);
+			    FALSE, TRUE);
 
 		(*w->screen->setWindowScale) (w, 1.0f, 1.0f);
 	    }

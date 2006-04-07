@@ -498,6 +498,9 @@ handleEvent (CompDisplay *display,
 		eventMode = AsyncPointer;
 	    }
 
+	    s->prevPointerX = event->xbutton.x_root;
+	    s->prevPointerY = event->xbutton.y_root;
+
 	    if (!display->screens->maxGrab)
 		XAllowEvents (display->display, eventMode, event->xbutton.time);
 	}
@@ -589,6 +592,9 @@ handleEvent (CompDisplay *display,
 		if (w)
 		    changeWindowOpacity (w, -1);
 	    }
+
+	    s->prevPointerX = event->xkey.x_root;
+	    s->prevPointerY = event->xkey.y_root;
 	}
 	break;
     case KeyRelease:
@@ -792,6 +798,12 @@ handleEvent (CompDisplay *display,
 	}
 	break;
     case MotionNotify:
+	s = findScreenAtDisplay (display, event->xmotion.root);
+	if (s)
+	{
+	    s->prevPointerX = event->xmotion.x_root;
+	    s->prevPointerY = event->xmotion.y_root;
+	}
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == display->winActiveAtom)
@@ -1172,7 +1184,12 @@ handleEvent (CompDisplay *display,
 
 	    s = findScreenAtDisplay (display, event->xcrossing.root);
 	    if (s)
+	    {
+		s->prevPointerX = event->xcrossing.x_root;
+		s->prevPointerY = event->xcrossing.y_root;
+
 		w = findTopLevelWindowAtScreen (s, event->xcrossing.window);
+	    }
 	    else
 		w = NULL;
 
@@ -1210,8 +1227,24 @@ handleEvent (CompDisplay *display,
 		}
 	    }
 	}
+	else
+	{
+	    s = findScreenAtDisplay (display, event->xcrossing.root);
+	    if (s)
+	    {
+		s->prevPointerX = event->xcrossing.x_root;
+		s->prevPointerY = event->xcrossing.y_root;
+	    }
+	}
 	break;
     case LeaveNotify:
+	s = findScreenAtDisplay (display, event->xcrossing.root);
+	if (s)
+	{
+	    s->prevPointerX = event->xcrossing.x_root;
+	    s->prevPointerY = event->xcrossing.y_root;
+	}
+
 	if (event->xcrossing.detail != NotifyInferior)
 	{
 	    if (event->xcrossing.window == display->below)

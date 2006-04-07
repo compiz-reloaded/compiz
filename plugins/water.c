@@ -90,8 +90,6 @@ typedef struct _WaterScreen {
     int grabIndex;
     int width, height;
 
-    XPoint p;
-
     GLuint program[PROGRAM_NUM];
     GLuint texture[TEXTURE_NUM];
 
@@ -1281,16 +1279,14 @@ waterHandleEvent (CompDisplay *d,
 	    {
 		XPoint p[2];
 
-		p[0] = ws->p;
+		p[0].x = s->prevPointerX;
+		p[0].y = s->prevPointerY;
 
 		p[1].x = event->xmotion.x_root;
 		p[1].y = event->xmotion.y_root;
 
 		waterVertices (s, GL_LINES, p, 2, 0.2f);
 		damageScreen (s);
-
-		ws->p.x = event->xmotion.x_root;
-		ws->p.y = event->xmotion.y_root;
 	    }
 	}
 	break;
@@ -1327,8 +1323,6 @@ waterHandleEvent (CompDisplay *d,
 
 		p.x = event->xkey.x_root;
 		p.y = event->xkey.y_root;
-
-		ws->p = p;
 
 		waterVertices (s, GL_POINTS, &p, 1, 0.8f);
 		damageScreen (s);

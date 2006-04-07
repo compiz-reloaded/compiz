@@ -89,9 +89,6 @@ typedef struct _ResizeScreen {
     Cursor downCursor;
     Cursor downLeftCursor;
     Cursor downRightCursor;
-
-    int prevPointerX;
-    int prevPointerY;
 } ResizeScreen;
 
 #define GET_RESIZE_DISPLAY(d)				       \
@@ -216,8 +213,8 @@ resizeInitiate (CompScreen   *s,
 	rd->width  = w->attrib.width;
 	rd->height = w->attrib.height;
 
-	rs->prevPointerX = x;
-	rs->prevPointerY = y;
+	s->prevPointerX = x;
+	s->prevPointerY = y;
 
 	if (!rs->grabIndex)
 	{
@@ -349,10 +346,8 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	RESIZE_DISPLAY (s->display);
 
-	pointerDx = xRoot - rs->prevPointerX;
-	pointerDy = yRoot - rs->prevPointerY;
-	rs->prevPointerX = xRoot;
-	rs->prevPointerY = yRoot;
+	pointerDx = xRoot - s->prevPointerX;
+	pointerDy = yRoot - s->prevPointerY;
 
 	if (pointerDx || pointerDy)
 	{
@@ -458,6 +453,14 @@ resizeHandleEvent (CompDisplay *d,
 	    resizeHandleMotionEvent (s,
 				     event->xmotion.x_root,
 				     event->xmotion.y_root);
+	break;
+    case EnterNotify:
+    case LeaveNotify:
+	s = findScreenAtDisplay (d, event->xcrossing.root);
+	if (s)
+	    resizeHandleMotionEvent (s,
+				     event->xcrossing.x_root,
+				     event->xcrossing.y_root);
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->wmMoveResizeAtom)
@@ -610,9 +613,6 @@ resizeInitScreen (CompPlugin *p,
 	return FALSE;
 
     rs->grabIndex = 0;
-
-    rs->prevPointerX = 0;
-    rs->prevPointerY = 0;
 
     resizeScreenInitOptions (rs, s->display->display);
 

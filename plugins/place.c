@@ -964,7 +964,7 @@ placeDamageWindowRect (CompWindow *w,
 
 	if (newX != w->attrib.x || newY != w->attrib.y)
 	{
-	    moveWindow (w, newX - w->attrib.x, newY - w->attrib.y, FALSE);
+	    moveWindow (w, newX - w->attrib.x, newY - w->attrib.y, FALSE, TRUE);
 	    syncWindowPosition (w);
 	}
     }

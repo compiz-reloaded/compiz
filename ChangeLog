@@ -1,3 +1,32 @@
+2006-04-07  David Reveman  <davidr@novell.com>
+
+	* plugins/rotate.c: Add edge flipping support.
+
+	* plugins/scale.c: Allow corner screen edges to be used for
+	initiating scale mode.
+
+	* src/option.c (compSetBoolOption): Only return TRUE if value changed.
+
+	* src/screen.c:
+	* src/window.c:
+	* plugins/minimize.c:
+	* plugins/decoration.c:
+	* include/compiz.h: Add immediate argument to MoveNotify, immediate
+	means that any animations should be avoided.
+
+	* src/screen.c:
+	* plugins/water.c:
+	* plugins/resize.c:
+	* plugins/place.c:
+	* plugins/move.c:
+	* plugins/zoom.c:
+	* plugins/rotate.c: 
+	* plugins/scale.c: 
+	* src/event.c:
+	* include/compiz.h:
+	Add previous pointer position that can be shared between multiple
+	plugins.
+
 2006-04-06  David Reveman  <davidr@novell.com>
 
 	* include/compiz.h:

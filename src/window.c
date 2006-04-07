@@ -1839,7 +1839,7 @@ resizeWindow (CompWindow *w,
 	dx = x - w->attrib.x;
 	dy = y - w->attrib.y;
 
-	moveWindow (w, dx, dy, TRUE);
+	moveWindow (w, dx, dy, TRUE, TRUE);
     }
 
     return TRUE;
@@ -2015,7 +2015,8 @@ void
 moveWindow (CompWindow *w,
 	    int        dx,
 	    int        dy,
-	    Bool       damage)
+	    Bool       damage,
+	    Bool       immediate)
 {
     if (dx || dy)
     {
@@ -2031,7 +2032,7 @@ moveWindow (CompWindow *w,
 
 	w->invisible = WINDOW_INVISIBLE (w);
 
-	(*w->screen->windowMoveNotify) (w, dx, dy);
+	(*w->screen->windowMoveNotify) (w, dx, dy, immediate);
 
 	if (damage)
 	    addWindowDamage (w);
@@ -2105,7 +2106,8 @@ windowResizeNotify (CompWindow *w)
 void
 windowMoveNotify (CompWindow *w,
 		  int	     dx,
-		  int	     dy)
+		  int	     dy,
+		  Bool	     immediate)
 {
 }
 
@@ -2931,7 +2933,7 @@ ensureWindowVisibility (CompWindow *w)
 
     if (dx || dy)
     {
-	moveWindow (w, dx, dy, TRUE);
+	moveWindow (w, dx, dy, TRUE, FALSE);
 	syncWindowPosition (w);
     }
 }

@@ -714,7 +714,7 @@ decorWindowUpdate (CompWindow *w,
     }
 
     if (move)
-	moveWindow (w, dx, dy, TRUE);
+	moveWindow (w, dx, dy, TRUE, TRUE);
 
     return TRUE;
 }
@@ -955,7 +955,8 @@ decorDamageWindowRect (CompWindow *w,
 static void
 decorWindowMoveNotify (CompWindow *w,
 		       int	  dx,
-		       int	  dy)
+		       int	  dy,
+		       Bool	  immediate)
 {
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
@@ -977,7 +978,7 @@ decorWindowMoveNotify (CompWindow *w,
     }
 
     UNWRAP (ds, w->screen, windowMoveNotify);
-    (*w->screen->windowMoveNotify) (w, dx, dy);
+    (*w->screen->windowMoveNotify) (w, dx, dy, immediate);
     WRAP (ds, w->screen, windowMoveNotify, decorWindowMoveNotify);
 }
 
