@@ -65,6 +65,10 @@
 #define WATER_OFFSET_SCALE_MAX       10.0f
 #define WATER_OFFSET_SCALE_PRECISION  0.1f
 
+#define WATER_RAIN_DELAY_DEFAULT 250
+#define WATER_RAIN_DELAY_MIN	 0
+#define WATER_RAIN_DELAY_MAX	 3600000 /* an hour is probably long enough */
+
 static int displayPrivateIndex;
 
 typedef struct _WaterDisplay {
@@ -76,7 +80,8 @@ typedef struct _WaterDisplay {
 #define WATER_SCREEN_OPTION_TERMINATE    1
 #define WATER_SCREEN_OPTION_TOGGLE_RAIN  2
 #define WATER_SCREEN_OPTION_OFFSET_SCALE 3
-#define WATER_SCREEN_OPTION_NUM          4
+#define WATER_SCREEN_OPTION_RAIN_DELAY	 4
+#define WATER_SCREEN_OPTION_NUM          5
 
 typedef struct _WaterScreen {
     int	waterTime;
@@ -126,6 +131,9 @@ typedef struct _WaterScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static Bool
+waterTimeout (void *closure);
+
 static CompOption *
 waterGetScreenOptions (CompScreen *screen,
 		       int	  *count)
@@ -167,7 +175,18 @@ waterSetScreenOption (CompScreen      *screen,
     case WATER_SCREEN_OPTION_OFFSET_SCALE:
 	if (compSetFloatOption (o, value))
 	{
-	    ws->offsetScale = o->value.f  * 50.0f;
+	    ws->offsetScale = o->value.f * 50.0f;
+	    return TRUE;
+	}
+    case WATER_SCREEN_OPTION_RAIN_DELAY:
+	if (compSetIntOption (o, value))
+	{
+	    if (ws->timeoutHandle)
+	    {
+		compRemoveTimeout (ws->timeoutHandle);
+		ws->timeoutHandle = compAddTimeout (value->i, waterTimeout,
+						    screen);
+	    }
 	    return TRUE;
 	}
     default:
@@ -225,6 +244,15 @@ waterScreenInitOptions (WaterScreen *ws,
     o->rest.f.min	= WATER_OFFSET_SCALE_MIN;
     o->rest.f.max	= WATER_OFFSET_SCALE_MAX;
     o->rest.f.precision = WATER_OFFSET_SCALE_PRECISION;
+
+    o = &ws->opt[WATER_SCREEN_OPTION_RAIN_DELAY];
+    o->name	  = "rain_delay";
+    o->shortDesc  = "Rain Delay";
+    o->longDesc	  = "Delay (in ms) between each rain-drop";
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = WATER_RAIN_DELAY_DEFAULT;
+    o->rest.i.min = WATER_RAIN_DELAY_MIN;
+    o->rest.i.max = WATER_RAIN_DELAY_MAX;
 }
 
 static const char *saturateFpString =
@@ -1301,7 +1329,10 @@ waterHandleEvent (CompDisplay *d,
 	    {
 		if (!ws->timeoutHandle)
 		{
-		    ws->timeoutHandle = compAddTimeout (250, waterTimeout, s);
+		    int delay;
+
+		    delay = ws->opt[WATER_SCREEN_OPTION_RAIN_DELAY].value.i;
+		    ws->timeoutHandle = compAddTimeout (delay, waterTimeout, s);
 		}
 		else
 		{
