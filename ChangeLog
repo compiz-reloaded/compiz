@@ -1,3 +1,12 @@
+2006-04-09  David Reveman  <davidr@novell.com>
+
+	* include/compiz.h:
+	* src/texture.c:
+	* src/screen.c (addScreen): Switch to using GLX 1.3 functions.
+	 (James Jones)
+
+	* src/main.c: Indirect rendering option. (James Jones)
+
 2006-04-08  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: Add rain delay option. (Emilie Roberts)

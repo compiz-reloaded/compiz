@@ -74,6 +74,7 @@ CompWindow *lastFoundWindow = 0;
 CompWindow *lastDamagedWindow = 0;
 
 Bool replaceCurrentWm = FALSE;
+Bool indirectRendering = FALSE;
 
 static void
 usage (void)
@@ -84,6 +85,7 @@ usage (void)
 	    "[--window-image PNG]\n       "
 	    "[--refresh-rate RATE] "
 	    "[--fast-filter] "
+	    "[--indirect-rendering] "
 	    "[--test-mode] "
 	    "[--replace]\n       "
 	    "[--sm-disable] "
@@ -172,6 +174,10 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--fast-filter"))
 	{
 	    defaultTextureFilter = "Fast";
+	}
+	else if (!strcmp (argv[i], "--indirect-rendering"))
+	{
+	    indirectRendering = TRUE;
 	}
 	else if (!strcmp (argv[i], "--test-mode"))
 	{

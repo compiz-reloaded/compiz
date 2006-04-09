@@ -152,6 +152,7 @@ extern Bool       restartSignal;
 extern CompWindow *lastFoundWindow;
 extern CompWindow *lastDamagedWindow;
 extern Bool       replaceCurrentWm;
+extern Bool       indirectRendering;
 
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
@@ -824,6 +825,7 @@ struct _CompTexture {
     GLenum     wrap;
     CompMatrix matrix;
     Bool       oldMipmaps;
+    Bool       mipmap;
 };
 
 void
@@ -897,11 +899,20 @@ typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
 #define GLX_TEXTURE_RECTANGLE_EXT           0x6003
 #define GLX_NO_TEXTURE_EXT                  0x6004
 #define GLX_FRONT_LEFT_EXT                  0x6005
+#define GLX_TEXTURE_FORMAT_EXT              0x6006
+#define GLX_TEXTURE_FORMAT_RGB_EXT          0x6007
+#define GLX_TEXTURE_FORMAT_RGBA_EXT         0x6008
+#define GLX_Y_INVERTED_EXT                  0x6009
+#define GLX_BIND_TO_TEXTURE_RGB_EXT         0x600A
+#define GLX_BIND_TO_TEXTURE_RGBA_EXT        0x600B
+#define GLX_BIND_TO_MIPMAP_TEXTURE_EXT      0x600C
+#define GLX_MIPMAP_TEXTURE_EXT              0x600D
 #endif
 
 typedef Bool    (*GLXBindTexImageProc)    (Display	 *display,
 					   GLXDrawable	 drawable,
-					   int		 buffer);
+					   int		 buffer,
+					   int       *attribList);
 typedef Bool    (*GLXReleaseTexImageProc) (Display	 *display,
 					   GLXDrawable	 drawable,
 					   int		 buffer);
@@ -916,6 +927,22 @@ typedef void (*GLXCopySubBufferProc) (Display     *display,
 				      int	  y,
 				      int	  width,
 				      int	  height);
+
+#ifndef GLX_VERSION_1_3
+typedef struct __GLXFBConfigRec *GLXFBConfig;
+#endif
+
+typedef GLXFBConfig *(*GLXGetFBConfigsProc) (Display *display,
+					     int     screen,
+					     int     *nElements);
+typedef int (*GLXGetFBConfigAttribProc) (Display     *display,
+					 GLXFBConfig config,
+					 int	     attribute,
+					 int	     *value);
+typedef GLXPixmap (*GLXCreatePixmapProc) (Display     *display,
+					  GLXFBConfig config,
+					  Pixmap      pixmap,
+					  const int   *attribList);
 
 typedef void (*GLActiveTextureProc) (GLenum texture);
 typedef void (*GLClientActiveTextureProc) (GLenum texture);
@@ -1034,6 +1061,13 @@ typedef struct _CompStartupSequence {
     SnStartupSequence		*sequence;
 } CompStartupSequence;
 
+typedef struct _CompFBConfig {
+    GLXFBConfig fbConfig;
+    int         yInverted;
+    int         mipmap;
+    int         textureFormat;
+} CompFBConfig;
+
 #define NOTHING_TRANS_FILTER 0
 #define SCREEN_TRANS_FILTER  1
 #define WINDOW_TRANS_FILTER  2
@@ -1075,7 +1109,7 @@ struct _CompScreen {
     Window	      fake[2];
     XWindowAttributes attrib;
     Window	      grabWindow;
-    XVisualInfo       *glxPixmapVisuals[MAX_DEPTH + 1];
+    CompFBConfig      glxPixmapFBConfigs[MAX_DEPTH + 1];
     int		      textureRectangle;
     int		      textureNonPowerOfTwo;
     int		      textureEnvCombine;
@@ -1150,11 +1184,14 @@ struct _CompScreen {
 
     unsigned int showingDesktopMask;
 
-    GLXGetProcAddressProc  getProcAddress;
-    GLXBindTexImageProc    bindTexImage;
-    GLXReleaseTexImageProc releaseTexImage;
-    GLXQueryDrawableProc   queryDrawable;
-    GLXCopySubBufferProc   copySubBuffer;
+    GLXGetProcAddressProc    getProcAddress;
+    GLXBindTexImageProc      bindTexImage;
+    GLXReleaseTexImageProc   releaseTexImage;
+    GLXQueryDrawableProc     queryDrawable;
+    GLXCopySubBufferProc     copySubBuffer;
+    GLXGetFBConfigsProc      getFBConfigs;
+    GLXGetFBConfigAttribProc getFBConfigAttrib;
+    GLXCreatePixmapProc      createPixmap;
 
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;

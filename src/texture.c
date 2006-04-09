@@ -46,6 +46,7 @@ initTexture (CompScreen  *screen,
     texture->wrap	= GL_CLAMP_TO_EDGE;
     texture->matrix     = _identity_matrix;
     texture->oldMipmaps = TRUE;
+    texture->mipmap	= FALSE;
 }
 
 void
@@ -120,6 +121,7 @@ imageToTexture (CompScreen   *screen,
     glTexParameteri (texture->target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     texture->wrap = GL_CLAMP_TO_EDGE;
+    texture->mipmap = TRUE;
 
     glBindTexture (texture->target, 0);
 
@@ -195,43 +197,68 @@ bindPixmapToTexture (CompScreen  *screen,
 		     int	 height,
 		     int	 depth)
 {
-    XVisualInfo  *visinfo;
     unsigned int target;
+    CompFBConfig *config = &screen->glxPixmapFBConfigs[depth];
+    int          attribs[] = {
+	GLX_TEXTURE_FORMAT_EXT, config->textureFormat,
+	GLX_MIPMAP_TEXTURE_EXT, config->mipmap,
+	None
+    };
 
-    visinfo = screen->glxPixmapVisuals[depth];
-    if (!visinfo)
+    if (!config->fbConfig)
     {
-	fprintf (stderr, "%s: No GL visual for depth %d\n",
+	fprintf (stderr, "%s: No GLXFBConfig for depth %d\n",
 		 programName, depth);
 
 	return FALSE;
     }
 
-    texture->pixmap = glXCreateGLXPixmap (screen->display->display,
-					  visinfo, pixmap);
+    texture->pixmap = (*screen->createPixmap) (screen->display->display,
+					       config->fbConfig, pixmap,
+					       attribs);
     if (!texture->pixmap)
     {
-	fprintf (stderr, "%s: glXCreateGLXPixmap failed\n", programName);
+	fprintf (stderr, "%s: glXCreatePixmap failed\n", programName);
 
 	return FALSE;
     }
 
-    screen->queryDrawable (screen->display->display,
-			   texture->pixmap,
-			   GLX_TEXTURE_TARGET_EXT,
-			   &target);
+    texture->mipmap = config->mipmap;
+
+    (*screen->queryDrawable) (screen->display->display,
+			      texture->pixmap,
+			      GLX_TEXTURE_TARGET_EXT,
+			      &target);
     switch (target) {
     case GLX_TEXTURE_2D_EXT:
 	texture->target = GL_TEXTURE_2D;
+
 	texture->matrix.xx = 1.0f / width;
-	texture->matrix.yy = -1.0f / height;
-	texture->matrix.y0 = 1.0f;
+	if (config->yInverted)
+	{
+	    texture->matrix.yy = 1.0f / height;
+	    texture->matrix.y0 = 0.0f;
+	}
+	else
+	{
+	    texture->matrix.yy = -1.0f / height;
+	    texture->matrix.y0 = 1.0f;
+	}
 	break;
     case GLX_TEXTURE_RECTANGLE_EXT:
 	texture->target = GL_TEXTURE_RECTANGLE_ARB;
+
 	texture->matrix.xx = 1.0f;
-	texture->matrix.yy = -1.0f;
-	texture->matrix.y0 = height;
+	if (config->yInverted)
+	{
+	    texture->matrix.yy = 1.0f;
+	    texture->matrix.y0 = 0;
+	}
+	else
+	{
+	    texture->matrix.yy = -1.0f;
+	    texture->matrix.y0 = height;
+	}
 	break;
     case GLX_NO_TEXTURE_EXT:
 	fprintf (stderr, "%s: pixmap 0x%x can't be bound to texture\n",
@@ -250,9 +277,10 @@ bindPixmapToTexture (CompScreen  *screen,
 
     glBindTexture (texture->target, texture->name);
 
-    if (!screen->bindTexImage (screen->display->display,
-			       texture->pixmap,
-			       GLX_FRONT_LEFT_EXT))
+    if (!(*screen->bindTexImage) (screen->display->display,
+				  texture->pixmap,
+				  GLX_FRONT_LEFT_EXT,
+				  NULL))
     {
 	fprintf (stderr, "%s: glXBindTexImage failed\n", programName);
 
@@ -288,9 +316,9 @@ releasePixmapFromTexture (CompScreen  *screen,
 	    glEnable (texture->target);
 	    glBindTexture (texture->target, texture->name);
 
-	    screen->releaseTexImage (screen->display->display,
-				     texture->pixmap,
-				     GLX_FRONT_LEFT_EXT);
+	    (*screen->releaseTexImage) (screen->display->display,
+					texture->pixmap,
+					GLX_FRONT_LEFT_EXT);
 
 	    glBindTexture (texture->target, 0);
 	    glDisable (texture->target);
@@ -327,7 +355,7 @@ enableTexture (CompScreen	 *screen,
     {
 	if (screen->display->textureFilter == GL_LINEAR_MIPMAP_LINEAR)
 	{
-	    if (screen->textureNonPowerOfTwo && screen->fbo)
+	    if (screen->textureNonPowerOfTwo && screen->fbo && texture->mipmap)
 	    {
 		glTexParameteri (texture->target,
 				 GL_TEXTURE_MIN_FILTER,

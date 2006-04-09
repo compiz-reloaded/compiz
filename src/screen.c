@@ -844,11 +844,11 @@ addScreen (CompDisplay *display,
     Pixmap		 bitmap;
     XVisualInfo		 templ;
     XVisualInfo		 *visinfo;
-    VisualID		 visualIDs[MAX_DEPTH + 1];
+    GLXFBConfig		 *fbConfigs;
     Window		 rootReturn, parentReturn;
     Window		 *children;
     unsigned int	 nchildren;
-    int			 defaultDepth, nvisinfo, value, i;
+    int			 defaultDepth, nvisinfo, nElements, value, i;
     const char		 *glxExtensions, *glExtensions;
     GLint	         stencilBits;
     XSetWindowAttributes attrib;
@@ -1131,7 +1131,7 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    s->ctx = glXCreateContext (dpy, visinfo, NULL, TRUE);
+    s->ctx = glXCreateContext (dpy, visinfo, NULL, !indirectRendering);
     if (!s->ctx)
     {
 	fprintf (stderr, "%s: glXCreateContext failed\n", programName);
@@ -1140,73 +1140,17 @@ addScreen (CompDisplay *display,
 
     XFree (visinfo);
 
-    /* we don't want to allocate back, stencil or depth buffers for pixmaps
-       so lets see if we can find an approriate visual without these buffers */
-    for (i = 0; i <= MAX_DEPTH; i++)
-    {
-	int j, db, stencil, depth;
-
-	visualIDs[i] = 0;
-
-	db	= MAXSHORT;
-	stencil = MAXSHORT;
-	depth	= MAXSHORT;
-
-	templ.depth = i;
-
-	visinfo = XGetVisualInfo (dpy, VisualDepthMask, &templ, &nvisinfo);
-	for (j = 0; j < nvisinfo; j++)
-	{
-	    glXGetConfig (dpy, &visinfo[j], GLX_USE_GL, &value);
-	    if (!value)
-		continue;
-
-	    glXGetConfig (dpy, &visinfo[j], GLX_DOUBLEBUFFER, &value);
-	    if (value > db)
-		continue;
-
-	    db = value;
-	    glXGetConfig (dpy, &visinfo[j], GLX_STENCIL_SIZE, &value);
-	    if (value > stencil)
-		continue;
-
-	    stencil = value;
-	    glXGetConfig (dpy, &visinfo[j], GLX_DEPTH_SIZE, &value);
-	    if (value > depth)
-		continue;
-
-	    depth = value;
-	    visualIDs[i] = visinfo[j].visualid;
-	}
-
-	if (nvisinfo)
-	    XFree (visinfo);
-    }
-
-    /* create contexts for supported depths */
-    for (i = 0; i <= MAX_DEPTH; i++)
-    {
-	templ.visualid = visualIDs[i];
-	s->glxPixmapVisuals[i] = XGetVisualInfo (dpy,
-						 VisualIDMask,
-						 &templ,
-						 &nvisinfo);
-    }
-
-    if (!s->glxPixmapVisuals[defaultDepth])
-    {
-	fprintf (stderr, "%s: No GL visual for default depth, "
-		 "this isn't going to work.\n", programName);
-	return FALSE;
-    }
-
-    glXMakeCurrent (dpy, s->root, s->ctx);
-    currentRoot = s->root;
-
     glxExtensions = glXQueryExtensionsString (s->display->display, screenNum);
     if (!testMode && !strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
     {
 	fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
+		 programName);
+	return FALSE;
+    }
+
+    if (!strstr (glxExtensions, "GLX_SGIX_fbconfig"))
+    {
+	fprintf (stderr, "%s: GLX_SGIX_fbconfig is missing\n",
 		 programName);
 	return FALSE;
     }
@@ -1219,6 +1163,12 @@ addScreen (CompDisplay *display,
 	getProcAddress (s, "glXReleaseTexImageEXT");
     s->queryDrawable = (GLXQueryDrawableProc)
 	getProcAddress (s, "glXQueryDrawable");
+    s->getFBConfigs = (GLXGetFBConfigsProc)
+	getProcAddress (s, "glXGetFBConfigs");
+    s->getFBConfigAttrib = (GLXGetFBConfigAttribProc)
+	getProcAddress (s, "glXGetFBConfigAttrib");
+    s->createPixmap = (GLXCreatePixmapProc)
+	getProcAddress (s, "glXCreatePixmap");
 
     if (!testMode && !s->bindTexImage)
     {
@@ -1233,9 +1183,12 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    if (!testMode && !s->queryDrawable)
+    if (!s->queryDrawable     ||
+	!s->getFBConfigs      ||
+	!s->getFBConfigAttrib ||
+	!s->createPixmap)
     {
-	fprintf (stderr, "%s: glXQueryDrawable is missing\n", programName);
+	fprintf (stderr, "%s: fbconfig functions missing\n", programName);
 	return FALSE;
     }
 
@@ -1243,6 +1196,9 @@ addScreen (CompDisplay *display,
     if (strstr (glxExtensions, "GLX_MESA_copy_sub_buffer"))
 	s->copySubBuffer = (GLXCopySubBufferProc)
 	    getProcAddress (s, "glXCopySubBufferMESA");
+
+    glXMakeCurrent (dpy, s->root, s->ctx);
+    currentRoot = s->root;
 
     glExtensions = (const char *) glGetString (GL_EXTENSIONS);
 
@@ -1350,6 +1306,132 @@ addScreen (CompDisplay *display,
 	    s->framebufferTexture2D   &&
 	    s->generateMipmap)
 	    s->fbo = 1;
+    }
+
+    fbConfigs = (*s->getFBConfigs) (dpy,
+				    screenNum,
+				    &nElements);
+
+    for (i = 0; i <= MAX_DEPTH; i++)
+    {
+	int j, db, stencil, depth, alpha, mipmap, rgba;
+
+	s->glxPixmapFBConfigs[i].fbConfig      = NULL;
+	s->glxPixmapFBConfigs[i].mipmap        = 0;
+	s->glxPixmapFBConfigs[i].yInverted     = 0;
+	s->glxPixmapFBConfigs[i].textureFormat = 0;
+
+	db      = MAXSHORT;
+	stencil = MAXSHORT;
+	depth   = MAXSHORT;
+	mipmap  = 0;
+	rgba    = 0;
+
+	for (j = 0; j < nElements; j++)
+	{
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_ALPHA_SIZE,
+				     &alpha);
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_BUFFER_SIZE,
+				     &value);
+	    if (value != i && (value - alpha) != i)
+		continue;
+
+	    value = 0;
+	    if (i == 32)
+	    {
+		(*s->getFBConfigAttrib) (dpy,
+					 fbConfigs[j],
+					 GLX_BIND_TO_TEXTURE_RGBA_EXT,
+					 &value);
+
+		if (value)
+		{
+		    rgba = 1;
+
+		    s->glxPixmapFBConfigs[i].textureFormat =
+			GLX_BIND_TO_TEXTURE_RGBA_EXT;
+		}
+	    }
+
+	    if (!value)
+	    {
+		if (rgba)
+		    continue;
+
+		(*s->getFBConfigAttrib) (dpy,
+					 fbConfigs[j],
+					 GLX_BIND_TO_TEXTURE_RGB_EXT,
+					 &value);
+		if (!value)
+		    continue;
+
+		s->glxPixmapFBConfigs[i].textureFormat =
+		    GLX_BIND_TO_TEXTURE_RGB_EXT;
+	    }
+
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_DOUBLEBUFFER,
+				     &value);
+	    if (value > db)
+		continue;
+
+	    db = value;
+
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_STENCIL_SIZE,
+				     &value);
+	    if (value > stencil)
+		continue;
+
+	    stencil = value;
+
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_DEPTH_SIZE,
+				     &value);
+	    if (value > depth)
+		continue;
+
+	    depth = value;
+
+	    if (s->fbo)
+	    {
+		(*s->getFBConfigAttrib) (dpy,
+					 fbConfigs[j],
+					 GLX_BIND_TO_MIPMAP_TEXTURE_EXT,
+					 &value);
+		if (value < mipmap)
+		    continue;
+
+		mipmap = value;
+	    }
+
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_Y_INVERTED_EXT,
+				     &value);
+
+	    s->glxPixmapFBConfigs[i].yInverted = value;
+	    s->glxPixmapFBConfigs[i].fbConfig  = fbConfigs[j];
+	    s->glxPixmapFBConfigs[i].mipmap    = mipmap;
+	}
+    }
+
+    if (nElements)
+	XFree (fbConfigs);
+
+    if (!s->glxPixmapFBConfigs[defaultDepth].fbConfig)
+    {
+	fprintf (stderr, "%s: No GLXFBConfig for default depth, "
+		 "this isn't going to work.\n",
+		 programName);
+	return FALSE;
     }
 
     initTexture (s, &s->backgroundTexture);
