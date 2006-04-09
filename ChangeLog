@@ -1,5 +1,12 @@
 2006-04-09  David Reveman  <davidr@novell.com>
 
+	* include/compiz.h:
+	* src/display.c:
+	* src/main.c:
+	* src/screen.c:
+	* src/texture.c:
+	* src/window.c: Remove test mode.
+
 	* plugins/Makefile.am: Remove schema from CLEANFILES.
 
 	* plugins/compiz.schemas:

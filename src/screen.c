@@ -578,7 +578,7 @@ updateScreenBackground (CompScreen  *screen,
 	}
     }
 
-    if (!testMode && pixmap)
+    if (pixmap)
     {
 	if (pixmap == texture->pixmap)
 	    return;
@@ -933,86 +933,6 @@ addScreen (CompDisplay *display,
     s->wmSnAtom		   = wmSnAtom;
     s->wmSnTimestamp	   = wmSnTimestamp;
 
-    if (testMode)
-    {
-	XWMHints   *wmHints;
-	XSizeHints *normalHints;
-	XClassHint *classHint;
-	int	   glx_attrib[] = {
-	    GLX_RGBA,
-	    GLX_RED_SIZE, 1,
-	    GLX_STENCIL_SIZE, 2,
-	    GLX_DOUBLEBUFFER,
-	    None
-	};
-
-	visinfo = glXChooseVisual (dpy, screenNum, glx_attrib);
-	if (!visinfo)
-	{
-	    int glx_attrib2[] = {
-		GLX_RGBA,
-		GLX_RED_SIZE, 1,
-		GLX_DOUBLEBUFFER,
-		None
-	    };
-
-	    visinfo = glXChooseVisual (dpy, screenNum, glx_attrib2);
-	    if (!visinfo)
-	    {
-		fprintf (stderr, "%s: Couldn't find a double buffered "
-			 "RGB visual.\n", programName);
-		return FALSE;
-	    }
-	}
-
-	attrib.colormap = XCreateColormap (dpy, s->root, visinfo->visual,
-					   AllocNone);
-
-	normalHints = XAllocSizeHints ();
-	normalHints->flags = 0;
-	normalHints->x = 0;
-	normalHints->y = 0;
-	normalHints->width = 800;
-	normalHints->height = 600;
-
-	classHint = XAllocClassHint ();
-	classHint->res_name = "compiz";
-	classHint->res_class = "Compiz";
-
-	wmHints = XAllocWMHints ();
-	wmHints->flags = InputHint;
-	wmHints->input = TRUE;
-
-	s->root = XCreateWindow (dpy, s->root, 0, 0,
-				 normalHints->width, normalHints->height, 0,
-				 visinfo->depth, InputOutput, visinfo->visual,
-				 CWColormap, &attrib);
-
-	XSelectInput (dpy, s->root,
-		      SubstructureNotifyMask |
-		      ExposureMask	     |
-		      ButtonPressMask	     |
-		      ButtonReleaseMask	     |
-		      ButtonMotionMask);
-
-	XRRSelectInput (dpy, s->root, RRScreenChangeNotifyMask);
-
-	XSetWMProtocols (dpy, s->root, &display->wmDeleteWindowAtom, 1);
-
-	XmbSetWMProperties (dpy, s->root,
-			    "glxcompmgr - Test mode", "glxcompmgr",
-			    programArgv, programArgc,
-			    normalHints, wmHints, classHint);
-
-	XMapWindow (dpy, s->root);
-
-	XFree (wmHints);
-	XFree (classHint);
-	XFree (normalHints);
-    }
-
-    s->fake[0] = s->fake[1] = 0;
-
     s->escapeKeyCode = XKeysymToKeycode (display->display,
 					 XStringToKeysym ("Escape"));
 
@@ -1141,7 +1061,7 @@ addScreen (CompDisplay *display,
     XFree (visinfo);
 
     glxExtensions = glXQueryExtensionsString (s->display->display, screenNum);
-    if (!testMode && !strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
+    if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
     {
 	fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
 		 programName);
@@ -1170,13 +1090,13 @@ addScreen (CompDisplay *display,
     s->createPixmap = (GLXCreatePixmapProc)
 	getProcAddress (s, "glXCreatePixmap");
 
-    if (!testMode && !s->bindTexImage)
+    if (!s->bindTexImage)
     {
 	fprintf (stderr, "%s: glXBindTexImageEXT is missing\n", programName);
 	return FALSE;
     }
 
-    if (!testMode && !s->releaseTexImage)
+    if (!s->releaseTexImage)
     {
 	fprintf (stderr, "%s: glXReleaseTexImageEXT is missing\n",
 		 programName);
@@ -1539,17 +1459,6 @@ addScreen (CompDisplay *display,
     }
 
     updateScreenEdges (s);
-
-    if (testMode)
-    {
-	s->fake[0] = XCreateWindow (dpy, s->root, 64, 32, 1, 1, 0,
-				    CopyFromParent, InputOutput,
-				    CopyFromParent, 0, NULL);
-
-	s->fake[1] = XCreateWindow (dpy, s->root, 256, 256, 1, 1, 0,
-				    CopyFromParent, InputOutput,
-				    CopyFromParent, 0, NULL);
-    }
 
     setDesktopHints (s);
     setSupportingWmCheck (s);

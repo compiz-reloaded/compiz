@@ -851,43 +851,24 @@ setWindowMatrix (CompWindow *w)
 void
 bindWindow (CompWindow *w)
 {
-    if (testMode)
+    if (!w->pixmap)
     {
-	unsigned int width, height;
-
-	if (readImageToTexture (w->screen, &w->texture,
-				windowImage, &width, &height))
-	{
-	    XResizeWindow (w->screen->display->display, w->id, width, height);
-
-	    w->width  = width;
-	    w->height = height;
-	}
-
-	w->pixmap	  = 1;
-	w->texture.pixmap = 1;
-    }
-    else
-    {
+	w->pixmap =
+	    XCompositeNameWindowPixmap (w->screen->display->display,
+					w->id);
 	if (!w->pixmap)
 	{
-	    w->pixmap =
-		XCompositeNameWindowPixmap (w->screen->display->display,
-					    w->id);
-	    if (!w->pixmap)
-	    {
-		fprintf (stderr, "%s: XCompositeNameWindowPixmap failed\n",
-			 programName);
-	    }
+	    fprintf (stderr, "%s: XCompositeNameWindowPixmap failed\n",
+		     programName);
 	}
+    }
 
-	if (!bindPixmapToTexture (w->screen, &w->texture, w->pixmap,
-				  w->width, w->height,
-				  w->attrib.depth))
-	{
-	    fprintf (stderr, "%s: Couldn't bind redirected window 0x%x to "
-		     "texture\n", programName, (int) w->id);
-	}
+    if (!bindPixmapToTexture (w->screen, &w->texture, w->pixmap,
+			      w->width, w->height,
+			      w->attrib.depth))
+    {
+	fprintf (stderr, "%s: Couldn't bind redirected window 0x%x to "
+		 "texture\n", programName, (int) w->id);
     }
 
     setWindowMatrix (w);
@@ -899,9 +880,7 @@ releaseWindow (CompWindow *w)
     if (w->pixmap)
     {
 	releasePixmapFromTexture (w->screen, &w->texture);
-
-	if (!testMode)
-	    XFreePixmap (w->screen->display->display, w->pixmap);
+	XFreePixmap (w->screen->display->display, w->pixmap);
 
 	w->pixmap = None;
     }
@@ -1488,22 +1467,6 @@ addWindow (CompScreen *screen,
     {
 	w->damage = None;
 	w->attrib.map_state = IsUnmapped;
-    }
-
-    if (testMode)
-    {
-	static int useAlpha = 0;
-
-	w->attrib.map_state = IsViewable;
-	w->damaged	    = TRUE;
-
-	w->attrib.width  = 0;
-	w->attrib.height = 0;
-
-	bindWindow (w);
-
-	w->alpha = useAlpha;
-	useAlpha = !useAlpha;
     }
 
     w->invisible = TRUE;

@@ -67,7 +67,6 @@ char *windowTypeString[] = {
 int  nWindowTypeString =
     sizeof (windowTypeString) / sizeof (windowTypeString[0]);
 
-Bool testMode = FALSE;
 Bool restartSignal = FALSE;
 
 CompWindow *lastFoundWindow = 0;
@@ -178,10 +177,6 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--indirect-rendering"))
 	{
 	    indirectRendering = TRUE;
-	}
-	else if (!strcmp (argv[i], "--test-mode"))
-	{
-	    testMode = TRUE;
 	}
 	else if (!strcmp (argv[i], "--replace"))
 	{

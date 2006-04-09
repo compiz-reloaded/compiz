@@ -879,48 +879,6 @@ getTimeToNextRedraw (CompScreen     *s,
     return s->redrawTime - diff;
 }
 
-static CompWindow *
-findWindowAt (CompDisplay *d,
-	      Window      root,
-	      int	  x,
-	      int	  y)
-{
-    CompScreen *s;
-    CompWindow *w;
-
-    for (s = d->screens; s; s = s->next)
-    {
-	if (s->root == root && s->maxGrab == 0)
-	{
-	    for (w = s->reverseWindows; w; w = w->prev)
-	    {
-		if (x >= w->attrib.x &&
-		    y >= w->attrib.y &&
-		    x <  w->attrib.x + w->width &&
-		    y <  w->attrib.y + w->height)
-		    return w;
-	    }
-	}
-    }
-
-    return 0;
-}
-
-static Window
-translateToRootWindow (CompDisplay *d,
-		       Window      child)
-{
-    CompScreen *s;
-
-    for (s = d->screens; s; s = s->next)
-    {
-	if (s->root == child || s->grabWindow == child)
-	    return s->root;
-    }
-
-    return child;
-}
-
 void
 updateModifierMappings (CompDisplay *d)
 {
@@ -1121,9 +1079,6 @@ eventLoop (void)
     CompDisplay    *display = compDisplays;
     CompScreen	   *s = display->screens;
     int		   timeToNextRedraw = 0;
-    CompWindow	   *move = 0;
-    int		   px = 0, py = 0;
-    int		   moveX = 0, moveY = 0;
     Bool	   idle = TRUE;
 
     tmpRegion = XCreateRegion ();
@@ -1149,83 +1104,6 @@ eventLoop (void)
 	while (XPending (display->display))
 	{
 	    XNextEvent (display->display, &event);
-
-	    /* translate root window coordinates */
-	    if (testMode)
-	    {
-		Window root, child;
-
-		switch (event.type) {
-		case ButtonPress:
-		    if (!move)
-		    {
-			px = event.xbutton.x;
-			py = event.xbutton.y;
-
-			move = findWindowAt (display, event.xbutton.window,
-					     px, py);
-			if (move)
-			{
-			    moveX = move->attrib.x;
-			    moveY = move->attrib.y;
-			    XRaiseWindow (display->display, move->id);
-			    continue;
-			}
-		    }
-		    /* fall-through */
-		case ButtonRelease:
-		    move = 0;
-
-		    root = translateToRootWindow (display,
-						  event.xbutton.window);
-		    XTranslateCoordinates (display->display,
-					   event.xbutton.root, root,
-					   event.xbutton.x_root,
-					   event.xbutton.y_root,
-					   &event.xbutton.x_root,
-					   &event.xbutton.y_root,
-					   &child);
-		    event.xbutton.root = root;
-		    break;
-		case KeyPress:
-		case KeyRelease:
-		    root = translateToRootWindow (display, event.xkey.window);
-		    XTranslateCoordinates (display->display,
-					   event.xkey.root, root,
-					   event.xkey.x_root,
-					   event.xkey.y_root,
-					   &event.xkey.x_root,
-					   &event.xkey.y_root,
-					   &child);
-		    event.xkey.root = root;
-		    break;
-		case MotionNotify:
-		    if (move)
-		    {
-			moveX += event.xbutton.x - px;
-			moveY += event.xbutton.y - py;
-			px = event.xbutton.x;
-			py = event.xbutton.y;
-
-			XMoveWindow (display->display, move->id, moveX, moveY);
-
-			continue;
-		    }
-
-		    root = translateToRootWindow (display,
-						  event.xmotion.window);
-		    XTranslateCoordinates (display->display,
-					   event.xmotion.root, root,
-					   event.xmotion.x_root,
-					   event.xmotion.y_root,
-					   &event.xmotion.x_root,
-					   &event.xmotion.y_root,
-					   &child);
-		    event.xmotion.root = root;
-		default:
-		    break;
-		}
-	    }
 
 	    /* add virtual modifiers */
 	    switch (event.type) {
@@ -1629,6 +1507,7 @@ addDisplay (char *name,
     Display	*dpy;
     Window	focus;
     int		revertTo, i;
+    int		compositeMajor, compositeMinor;
 
     d = &compDisplay;
 
@@ -1820,53 +1699,39 @@ addDisplay (char *name,
 
     d->lastPing = 1;
 
-    if (testMode)
+    if (!XQueryExtension (dpy,
+			  COMPOSITE_NAME,
+			  &d->compositeOpcode,
+			  &d->compositeEvent,
+			  &d->compositeError))
     {
-	d->compositeOpcode = MAXSHORT;
-	d->compositeEvent  = MAXSHORT;
-	d->compositeError  = MAXSHORT;
-
-	d->damageEvent = MAXSHORT;
-	d->damageError = MAXSHORT;
+	fprintf (stderr, "%s: No composite extension\n", programName);
+	return FALSE;
     }
-    else
+
+    XCompositeQueryVersion (dpy, &compositeMajor, &compositeMinor);
+    if (compositeMajor == 0 && compositeMinor < 2)
     {
-	int compositeMajor, compositeMinor;
+	fprintf (stderr, "%s: Old composite extension\n", programName);
+	return FALSE;
+    }
 
-	if (!XQueryExtension (dpy,
-			      COMPOSITE_NAME,
-			      &d->compositeOpcode,
-			      &d->compositeEvent,
-			      &d->compositeError))
-	{
-	    fprintf (stderr, "%s: No composite extension\n", programName);
-	    return FALSE;
-	}
+    if (!XDamageQueryExtension (dpy, &d->damageEvent, &d->damageError))
+    {
+	fprintf (stderr, "%s: No damage extension\n", programName);
+	return FALSE;
+    }
 
-	XCompositeQueryVersion (dpy, &compositeMajor, &compositeMinor);
-	if (compositeMajor == 0 && compositeMinor < 2)
-	{
-	    fprintf (stderr, "%s: Old composite extension\n", programName);
-	    return FALSE;
-	}
+    if (!XRRQueryExtension (dpy, &d->randrEvent, &d->randrError))
+    {
+	fprintf (stderr, "%s: No RandR extension\n", programName);
+	return FALSE;
+    }
 
-	if (!XDamageQueryExtension (dpy, &d->damageEvent, &d->damageError))
-	{
-	    fprintf (stderr, "%s: No damage extension\n", programName);
-	    return FALSE;
-	}
-
-	if (!XRRQueryExtension (dpy, &d->randrEvent, &d->randrError))
-	{
-	    fprintf (stderr, "%s: No RandR extension\n", programName);
-	    return FALSE;
-	}
-
-	if (!XSyncQueryExtension (dpy, &d->syncEvent, &d->syncError))
-	{
-	    fprintf (stderr, "%s: No sync extension\n", programName);
-	    return FALSE;
-	}
+    if (!XSyncQueryExtension (dpy, &d->syncEvent, &d->syncError))
+    {
+	fprintf (stderr, "%s: No sync extension\n", programName);
+	return FALSE;
     }
 
     d->shapeExtension = XShapeQueryExtension (dpy,
@@ -1875,148 +1740,141 @@ addDisplay (char *name,
 
     compDisplays = d;
 
-    if (testMode)
+    for (i = 0; i < ScreenCount (dpy); i++)
     {
-	addScreen (d, 0, None, 0, 0);
-    }
-    else
-    {
-	for (i = 0; i < ScreenCount (dpy); i++)
+	Window		 newWmSnOwner = None;
+	Atom		 wmSnAtom = 0;
+	Time		 wmSnTimestamp = 0;
+	XEvent		 event;
+	XSetWindowAttributes attr;
+	Window		 currentWmSnOwner;
+	char		 buf[128];
+
+	sprintf (buf, "WM_S%d", i);
+	wmSnAtom = XInternAtom (dpy, buf, 0);
+
+	currentWmSnOwner = XGetSelectionOwner (dpy, wmSnAtom);
+
+	if (currentWmSnOwner != None)
 	{
-	    Window		 newWmSnOwner = None;
-	    Atom		 wmSnAtom = 0;
-	    Time		 wmSnTimestamp = 0;
-	    XEvent		 event;
-	    XSetWindowAttributes attr;
-	    Window		 currentWmSnOwner;
-	    char		 buf[128];
-
-	    sprintf (buf, "WM_S%d", i);
-	    wmSnAtom = XInternAtom (dpy, buf, 0);
-
-	    currentWmSnOwner = XGetSelectionOwner (dpy, wmSnAtom);
-
-	    if (currentWmSnOwner != None)
-	    {
-		if (!replaceCurrentWm)
-		{
-		    fprintf (stderr,
-			     "%s: Screen %d on display \"%s\" already "
-			     "has a window manager; try using the "
-			     "--replace option to replace the current "
-			     "window manager.\n",
-			     programName, i, DisplayString (dpy));
-
-		    continue;
-		}
-
-		XSelectInput (dpy, currentWmSnOwner,
-			      StructureNotifyMask);
-	    }
-
-	    attr.override_redirect = TRUE;
-	    attr.event_mask	   = PropertyChangeMask;
-
-	    newWmSnOwner =
-		XCreateWindow (dpy, XRootWindow (dpy, i),
-			       -100, -100, 1, 1, 0,
-			       CopyFromParent, CopyFromParent,
-			       CopyFromParent,
-			       CWOverrideRedirect | CWEventMask,
-			       &attr);
-
-	    XChangeProperty (dpy,
-			     newWmSnOwner,
-			     d->wmNameAtom,
-			     d->utf8StringAtom, 8,
-			     PropModeReplace,
-			     (unsigned char *) PACKAGE,
-			     strlen (PACKAGE));
-
-	    XWindowEvent (dpy,
-			  newWmSnOwner,
-			  PropertyChangeMask,
-			  &event);
-
-	    wmSnTimestamp = event.xproperty.time;
-
-	    XSetSelectionOwner (dpy, wmSnAtom, newWmSnOwner,
-				wmSnTimestamp);
-
-	    if (XGetSelectionOwner (dpy, wmSnAtom) != newWmSnOwner)
+	    if (!replaceCurrentWm)
 	    {
 		fprintf (stderr,
-			 "%s: Could not acquire window manager "
-			 "selection on screen %d display \"%s\"\n",
+			 "%s: Screen %d on display \"%s\" already "
+			 "has a window manager; try using the "
+			 "--replace option to replace the current "
+			 "window manager.\n",
 			 programName, i, DisplayString (dpy));
 
-		XDestroyWindow (dpy, newWmSnOwner);
-
 		continue;
 	    }
 
-	    /* Send client message indicating that we are now the WM */
-	    event.xclient.type	   = ClientMessage;
-	    event.xclient.window       = XRootWindow (dpy, i);
-	    event.xclient.message_type = d->managerAtom;
-	    event.xclient.format       = 32;
-	    event.xclient.data.l[0]    = wmSnTimestamp;
-	    event.xclient.data.l[1]    = wmSnAtom;
-	    event.xclient.data.l[2]    = 0;
-	    event.xclient.data.l[3]    = 0;
-	    event.xclient.data.l[4]    = 0;
+	    XSelectInput (dpy, currentWmSnOwner,
+			  StructureNotifyMask);
+	}
 
-	    XSendEvent (dpy, XRootWindow (dpy, i), FALSE,
-			StructureNotifyMask, &event);
+	attr.override_redirect = TRUE;
+	attr.event_mask	   = PropertyChangeMask;
 
-	    /* Wait for old window manager to go away */
-	    if (currentWmSnOwner != None)
-	    {
-		do {
-		    XWindowEvent (dpy, currentWmSnOwner,
-				  StructureNotifyMask, &event);
-		} while (event.type != DestroyNotify);
-	    }
+	newWmSnOwner =
+	    XCreateWindow (dpy, XRootWindow (dpy, i),
+			   -100, -100, 1, 1, 0,
+			   CopyFromParent, CopyFromParent,
+			   CopyFromParent,
+			   CWOverrideRedirect | CWEventMask,
+			   &attr);
 
-	    compCheckForError (dpy);
+	XChangeProperty (dpy,
+			 newWmSnOwner,
+			 d->wmNameAtom,
+			 d->utf8StringAtom, 8,
+			 PropModeReplace,
+			 (unsigned char *) PACKAGE,
+			 strlen (PACKAGE));
 
-	    XCompositeRedirectSubwindows (dpy, XRootWindow (dpy, i),
-					  CompositeRedirectManual);
+	XWindowEvent (dpy,
+		      newWmSnOwner,
+		      PropertyChangeMask,
+		      &event);
 
-	    if (compCheckForError (dpy))
-	    {
-		fprintf (stderr, "%s: Another composite manager is already "
-			 "running on screen: %d\n", programName, i);
+	wmSnTimestamp = event.xproperty.time;
 
-		continue;
-	    }
+	XSetSelectionOwner (dpy, wmSnAtom, newWmSnOwner,
+			    wmSnTimestamp);
 
-	    XSelectInput (dpy, XRootWindow (dpy, i),
-			  SubstructureRedirectMask |
-			  SubstructureNotifyMask   |
-			  StructureNotifyMask      |
-			  PropertyChangeMask       |
-			  LeaveWindowMask	   |
-			  EnterWindowMask	   |
-			  KeyPressMask		   |
-			  KeyReleaseMask	   |
-			  FocusChangeMask	   |
-			  ExposureMask);
+	if (XGetSelectionOwner (dpy, wmSnAtom) != newWmSnOwner)
+	{
+	    fprintf (stderr,
+		     "%s: Could not acquire window manager "
+		     "selection on screen %d display \"%s\"\n",
+		     programName, i, DisplayString (dpy));
 
-	    if (compCheckForError (dpy))
-	    {
-		fprintf (stderr, "%s: Another window manager is "
-			 "already running on screen: %d\n",
-			 programName, i);
+	    XDestroyWindow (dpy, newWmSnOwner);
 
-		continue;
-	    }
+	    continue;
+	}
 
-	    if (!addScreen (d, i, newWmSnOwner, wmSnAtom, wmSnTimestamp))
-	    {
-		fprintf (stderr, "%s: Failed to manage screen: %d\n",
-			 programName, i);
-	    }
+	/* Send client message indicating that we are now the WM */
+	event.xclient.type	   = ClientMessage;
+	event.xclient.window       = XRootWindow (dpy, i);
+	event.xclient.message_type = d->managerAtom;
+	event.xclient.format       = 32;
+	event.xclient.data.l[0]    = wmSnTimestamp;
+	event.xclient.data.l[1]    = wmSnAtom;
+	event.xclient.data.l[2]    = 0;
+	event.xclient.data.l[3]    = 0;
+	event.xclient.data.l[4]    = 0;
+
+	XSendEvent (dpy, XRootWindow (dpy, i), FALSE,
+		    StructureNotifyMask, &event);
+
+	/* Wait for old window manager to go away */
+	if (currentWmSnOwner != None)
+	{
+	    do {
+		XWindowEvent (dpy, currentWmSnOwner,
+			      StructureNotifyMask, &event);
+	    } while (event.type != DestroyNotify);
+	}
+
+	compCheckForError (dpy);
+
+	XCompositeRedirectSubwindows (dpy, XRootWindow (dpy, i),
+				      CompositeRedirectManual);
+
+	if (compCheckForError (dpy))
+	{
+	    fprintf (stderr, "%s: Another composite manager is already "
+		     "running on screen: %d\n", programName, i);
+
+	    continue;
+	}
+
+	XSelectInput (dpy, XRootWindow (dpy, i),
+		      SubstructureRedirectMask |
+		      SubstructureNotifyMask   |
+		      StructureNotifyMask      |
+		      PropertyChangeMask       |
+		      LeaveWindowMask	       |
+		      EnterWindowMask	       |
+		      KeyPressMask	       |
+		      KeyReleaseMask	       |
+		      FocusChangeMask	       |
+		      ExposureMask);
+
+	if (compCheckForError (dpy))
+	{
+	    fprintf (stderr, "%s: Another window manager is "
+		     "already running on screen: %d\n",
+		     programName, i);
+
+	    continue;
+	}
+
+	if (!addScreen (d, i, newWmSnOwner, wmSnAtom, wmSnTimestamp))
+	{
+	    fprintf (stderr, "%s: Failed to manage screen: %d\n",
+		     programName, i);
 	}
     }
 

@@ -147,7 +147,6 @@ extern REGION     emptyRegion;
 extern REGION     infiniteRegion;
 extern GLushort   defaultColor[4];
 extern Window     currentRoot;
-extern Bool       testMode;
 extern Bool       restartSignal;
 extern CompWindow *lastFoundWindow;
 extern CompWindow *lastDamagedWindow;
@@ -1106,7 +1105,6 @@ struct _CompScreen {
     Region	      damage;
     unsigned long     damageMask;
     Window	      root;
-    Window	      fake[2];
     XWindowAttributes attrib;
     Window	      grabWindow;
     CompFBConfig      glxPixmapFBConfigs[MAX_DEPTH + 1];

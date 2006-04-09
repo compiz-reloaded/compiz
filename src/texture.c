@@ -311,20 +311,18 @@ releasePixmapFromTexture (CompScreen  *screen,
 {
     if (texture->pixmap)
     {
-	if (!testMode)
-	{
-	    glEnable (texture->target);
-	    glBindTexture (texture->target, texture->name);
+	glEnable (texture->target);
+	glBindTexture (texture->target, texture->name);
 
-	    (*screen->releaseTexImage) (screen->display->display,
-					texture->pixmap,
-					GLX_FRONT_LEFT_EXT);
+	(*screen->releaseTexImage) (screen->display->display,
+				    texture->pixmap,
+				    GLX_FRONT_LEFT_EXT);
 
-	    glBindTexture (texture->target, 0);
-	    glDisable (texture->target);
+	glBindTexture (texture->target, 0);
+	glDisable (texture->target);
 
-	    glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
-	}
+	glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
+
 	texture->pixmap = None;
     }
 }
