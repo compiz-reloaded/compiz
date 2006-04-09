@@ -295,7 +295,8 @@ compDisplayInitOptions (CompDisplay *display,
     o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
     o->name			  = cname;				    \
     o->shortDesc		  = "Command line";			    \
-    o->longDesc			  = "Command line to be executed in shell"; \
+    o->longDesc			  = "Command line to be executed in shell " \
+	"when " rname " is invoked";					    \
     o->type			  = CompOptionTypeString;		    \
     o->value.s			  = strdup ("");			    \
     o->rest.s.string		  = NULL;				    \
@@ -303,7 +304,8 @@ compDisplayInitOptions (CompDisplay *display,
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num ];		    \
     o->name			  =  rname;				    \
     o->shortDesc		  = "Run command";			    \
-    o->longDesc			  = "Run shell command";		    \
+    o->longDesc			  = "A keybinding that when invoked, will " \
+	"run the shell command identified by " cname ;			    \
     o->type			  = CompOptionTypeBinding;		    \
     o->value.bind.type		  = CompBindingTypeKey;			    \
     o->value.bind.u.key.modifiers = 0;					    \
