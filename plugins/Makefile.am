@@ -107,5 +107,4 @@ module_LTLIBRARIES =		\
 	$(libgconf_dump_module) \
 	$(libplace_module)
 
-CLEANFILES = $(schema_DATA)
 EXTRA_DIST = $(schema_DATA)

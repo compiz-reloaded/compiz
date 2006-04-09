@@ -1,5 +1,7 @@
 2006-04-09  David Reveman  <davidr@novell.com>
 
+	* plugins/Makefile.am: Remove schema from CLEANFILES.
+
 	* plugins/compiz.schemas:
 	* src/display.c:
 	Improve documentation for runcommand keys slightly. (Mike Hearn)
