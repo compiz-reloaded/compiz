@@ -725,7 +725,7 @@ cubeScreenInitOptions (CubeScreen *cs,
     o = &cs->opt[CUBE_SCREEN_OPTION_NEXT];
     o->name			  = "next_slide";
     o->shortDesc		  = "Next Slide";
-    o->longDesc			  = "Adavence to next slide";
+    o->longDesc			  = "Advance to next slide";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = CUBE_NEXT_MODIFIERS_DEFAULT;

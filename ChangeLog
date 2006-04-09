@@ -1,3 +1,17 @@
+2006-04-09  Dan Winship  <danw@novell.com>
+
+	* plugins/gconf-dump.c: add plugin options, and add information
+	about restrictions (numeric ranges, specific string values) to the
+	long description. Make gconf-dump refuse to run if gconf is
+	running (since you want the defaults it writes out to be coming
+	from the defaults in the source code, not from any gconf
+	overrides).
+
+	* plugins/compiz.schemas: regen
+
+	* plugins/gconf.c (gconfGetOptionValue): don't call gconfSetOption
+	from here, or we'll get an infinite loop when anything changes
+
 2006-04-09  David Reveman  <davidr@novell.com>
 
 	* include/compiz.h:

@@ -423,7 +423,7 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAP_WINDOW_TYPE];
     o->name	         = "map_window_types";
     o->shortDesc         = "Map Window Types";
-    o->longDesc	         = "Window types that should wobbly when mapped";
+    o->longDesc	         = "Window types that should wobble when mapped";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_MAP_WIN_TYPE;
@@ -438,7 +438,7 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o = &ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_TYPE];
     o->name	         = "focus_window_types";
     o->shortDesc         = "Focus Window Types";
-    o->longDesc	         = "Window types that should wobbly when focused";
+    o->longDesc	         = "Window types that should wobble when focused";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_FOCUS_WIN_TYPE;
@@ -451,7 +451,7 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE];
     o->name	         = "move_window_types";
     o->shortDesc         = "Move Window Types";
-    o->longDesc	         = "Window types that should wobbly when moved";
+    o->longDesc	         = "Window types that should wobble when moved";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_MOVE_WIN_TYPE;
@@ -466,7 +466,7 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o = &ws->opt[WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE];
     o->name	         = "grab_window_types";
     o->shortDesc         = "Grab Window Types";
-    o->longDesc	         = "Window types that should wobbly when grabbed";
+    o->longDesc	         = "Window types that should wobble when grabbed";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_GRAB_WIN_TYPE;

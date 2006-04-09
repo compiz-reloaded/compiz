@@ -31,7 +31,7 @@
             <locale name="C">
                 <short>Texture Filter</short>
                 <long>
-                    Texture filtering
+                    Texture filtering (Fast, Good, Best)
                 </long>
             </locale>
         </schema>
@@ -73,7 +73,7 @@
             <locale name="C">
                 <short>Auto-Raise Delay</short>
                 <long>
-                    Interval before raising selected windows
+                    Interval before raising selected windows (0-10000)
                 </long>
             </locale>
         </schema>
@@ -649,7 +649,7 @@
             <locale name="C">
                 <short>Refresh Rate</short>
                 <long>
-                    The rate at which the screen is redrawn (times/second)
+                    The rate at which the screen is redrawn (times/second) (1-200)
                 </long>
             </locale>
         </schema>
@@ -663,7 +663,7 @@
             <locale name="C">
                 <short>Virtual Size</short>
                 <long>
-                    Screen size multiplier for virtual size
+                    Screen size multiplier for virtual size (4-32)
                 </long>
             </locale>
         </schema>
@@ -677,7 +677,1123 @@
             <locale name="C">
                 <short>Opacity Step</short>
                 <long>
-                    Opacity change step
+                    Opacity change step (1-50)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/color</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/color</applyto>
+            <owner>compiz</owner>
+            <type>unknown</type>
+            <default>unknown</default>
+            <locale name="C">
+                <short>Cube Color</short>
+                <long>
+                    Color of top and bottom sides of the cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/in</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/in</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Inside Cube</short>
+                <long>
+                    Inside cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/svgs</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/svgs</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>SVG files</short>
+                <long>
+                    List of SVG files rendered on top face of cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/next_slide</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/next_slide</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>space</default>
+            <locale name="C">
+                <short>Next Slide</short>
+                <long>
+                    Advance to next slide
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/prev_slide</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/prev_slide</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>BackSpace</default>
+            <locale name="C">
+                <short>Previous Slide</short>
+                <long>
+                    Go back to previous slide
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/skydome</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/skydome</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Skydome</short>
+                <long>
+                    Render skydome
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/skydome_image</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/skydome_image</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Skydome Image</short>
+                <long>
+                    Image to use as texture for the skydome
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/skydome_animated</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/skydome_animated</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Animate Skydome</short>
+                <long>
+                    Animate skydome when rotating cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/fade/screen0/options/fade_speed</key>
+            <applyto>/apps/compiz/plugins/fade/screen0/options/fade_speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>5.000000</default>
+            <locale name="C">
+                <short>Fade Speed</short>
+                <long>
+                    Window fade speed (0.1-10.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/fade/screen0/options/window_types</key>
+            <applyto>/apps/compiz/plugins/fade/screen0/options/window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[Dock,Toolbar,Menu,Utility,Splash,Normal,Dialog,ModalDialog,Unknown]</default>
+            <locale name="C">
+                <short>Window Types</short>
+                <long>
+                    Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/minimize/screen0/options/speed</key>
+            <applyto>/apps/compiz/plugins/minimize/screen0/options/speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.500000</default>
+            <locale name="C">
+                <short>Speed</short>
+                <long>
+                    Minimize speed (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/minimize/screen0/options/timestep</key>
+            <applyto>/apps/compiz/plugins/minimize/screen0/options/timestep</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>0.500000</default>
+            <locale name="C">
+                <short>Timestep</short>
+                <long>
+                    Minimize timestep (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/minimize/screen0/options/window_types</key>
+            <applyto>/apps/compiz/plugins/minimize/screen0/options/window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[Toolbar,Utility,Dialog,Normal]</default>
+            <locale name="C">
+                <short>Window Types</short>
+                <long>
+                    Window types that should be transformed when minimized (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/move/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/move/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Alt&gt;Button1</default>
+            <locale name="C">
+                <short>Initiate Window Move</short>
+                <long>
+                    Start moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/move/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/move/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Release&gt;Button1</default>
+            <locale name="C">
+                <short>Terminate Window Move</short>
+                <long>
+                    Stop moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/move/screen0/options/opacity</key>
+            <applyto>/apps/compiz/plugins/move/screen0/options/opacity</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>100</default>
+            <locale name="C">
+                <short>Opacity</short>
+                <long>
+                    Opacity level of moving windows (1-100)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/move/screen0/options/constrain_y</key>
+            <applyto>/apps/compiz/plugins/move/screen0/options/constrain_y</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Constrain Y</short>
+                <long>
+                    Constrain Y coordinate to workspace area
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/place/screen0/options/workarounds</key>
+            <applyto>/apps/compiz/plugins/place/screen0/options/workarounds</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Workarounds</short>
+                <long>
+                    Window placement workarounds
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/resize/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/resize/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Alt&gt;Button3</default>
+            <locale name="C">
+                <short>Initiate Window Resize</short>
+                <long>
+                    Start moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/resize/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/resize/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Release&gt;Button3</default>
+            <locale name="C">
+                <short>Terminate Window Resize</short>
+                <long>
+                    Stop moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/invert_y</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/invert_y</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Pointer Invert Y</short>
+                <long>
+                    Invert Y axis for pointer movement
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/sensitivity</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/sensitivity</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.000000</default>
+            <locale name="C">
+                <short>Pointer Sensitivity</short>
+                <long>
+                    Sensitivity of pointer movement (0.01-100.00)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/acceleration</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/acceleration</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>4.000000</default>
+            <locale name="C">
+                <short>Acceleration</short>
+                <long>
+                    Rotation Acceleration (1.0-20.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;Button1</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Start Rotation
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Release&gt;Button1</default>
+            <locale name="C">
+                <short>Terminate</short>
+                <long>
+                    Stop Rotation
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_left</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_left</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;Left</default>
+            <locale name="C">
+                <short>Rotate Left</short>
+                <long>
+                    Rotate left
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_right</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_right</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;Right</default>
+            <locale name="C">
+                <short>Rotate Right</short>
+                <long>
+                    Rotate right
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_left_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_left_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Shift&gt;&lt;Control&gt;&lt;Alt&gt;Left</default>
+            <locale name="C">
+                <short>Rotate Left with Window</short>
+                <long>
+                    Rotate left and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_right_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_right_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Shift&gt;&lt;Control&gt;&lt;Alt&gt;Right</default>
+            <locale name="C">
+                <short>Rotate Right with Window</short>
+                <long>
+                    Rotate right and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/snap_top</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/snap_top</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Snap To Top Face</short>
+                <long>
+                    Snap Cube Rotation to Top Face
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/speed</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.500000</default>
+            <locale name="C">
+                <short>Speed</short>
+                <long>
+                    Rotation Speed (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/timestep</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/timestep</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.200000</default>
+            <locale name="C">
+                <short>Timestep</short>
+                <long>
+                    Rotation Timestep (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/edge_flip</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/edge_flip</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Edge Flip</short>
+                <long>
+                    Flip to next viewport when moving pointer to screen edge
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/flip_time</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/flip_time</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>350</default>
+            <locale name="C">
+                <short>Flip Time</short>
+                <long>
+                    Timeout before flipping viewport (0-1000)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/flip_move</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/flip_move</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Flip Move</short>
+                <long>
+                    Only allow viewport flipping when moving windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Alt&gt;Tab</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Show switcher
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/initiate_all</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/initiate_all</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;Tab</default>
+            <locale name="C">
+                <short>Initiate All Windows</short>
+                <long>
+                    Show switcher for all windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Release&gt;Alt_L</default>
+            <locale name="C">
+                <short>Terminate</short>
+                <long>
+                    End switching
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/next_window</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/next_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Alt&gt;Tab</default>
+            <locale name="C">
+                <short>Next Window</short>
+                <long>
+                    Select next window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/prev_window</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/prev_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Shift&gt;&lt;Alt&gt;Tab</default>
+            <locale name="C">
+                <short>Prev Window</short>
+                <long>
+                    Select previous window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/speed</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.500000</default>
+            <locale name="C">
+                <short>Speed</short>
+                <long>
+                    Switcher speed (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/timestep</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/timestep</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.200000</default>
+            <locale name="C">
+                <short>Timestep</short>
+                <long>
+                    Switcher timestep (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/window_types</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[Toolbar,Utility,Dialog,Fullscreen,Normal]</default>
+            <locale name="C">
+                <short>Window Types</short>
+                <long>
+                    Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/mipmap</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/mipmap</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Mipmap</short>
+                <long>
+                    Generate mipmaps when possible for higher quality scaling
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/saturation</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/saturation</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>100</default>
+            <locale name="C">
+                <short>Saturation</short>
+                <long>
+                    Amount of saturation in percent (0-100)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/brightness</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/brightness</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>65</default>
+            <locale name="C">
+                <short>Brightness</short>
+                <long>
+                    Amount of brightness in percent (0-100)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/opacity</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/opacity</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>40</default>
+            <locale name="C">
+                <short>Opacity</short>
+                <long>
+                    Amount of opacity in percent (0-100)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/bring_to_front</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/bring_to_front</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Bring To Front</short>
+                <long>
+                    Bring selected window to front
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/spacing</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/spacing</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>25</default>
+            <locale name="C">
+                <short>Spacing</short>
+                <long>
+                    Space between windows (0-250)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/sloppy_focus</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/sloppy_focus</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Sloppy Focus</short>
+                <long>
+                    Focus window when mouse moves over them
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>F11</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Layout and start transforming windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>F11</default>
+            <locale name="C">
+                <short>Terminate</short>
+                <long>
+                    Return from scale view
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/next_window</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/next_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Right</default>
+            <locale name="C">
+                <short>Next Window</short>
+                <long>
+                    Focus next window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/speed</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.500000</default>
+            <locale name="C">
+                <short>Speed</short>
+                <long>
+                    Scale speed (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/timestep</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/timestep</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.200000</default>
+            <locale name="C">
+                <short>Timestep</short>
+                <long>
+                    Scale timestep (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/window_types</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[Toolbar,Utility,Dialog,Normal]</default>
+            <locale name="C">
+                <short>Window Types</short>
+                <long>
+                    Window types that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/darken_back</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/darken_back</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Darken Background</short>
+                <long>
+                    Darken background when scaling windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/opacity</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/opacity</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>75</default>
+            <locale name="C">
+                <short>Opacity</short>
+                <long>
+                    Amount of opacity in percent (0-100)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/corners</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/corners</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[TopRight]</default>
+            <locale name="C">
+                <short>Corners</short>
+                <long>
+                    Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, BottomRight)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/friction</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/friction</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>3.000000</default>
+            <locale name="C">
+                <short>Friction</short>
+                <long>
+                    Spring Friction (0.1-10.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/spring_k</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/spring_k</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>8.000000</default>
+            <locale name="C">
+                <short>Spring K</short>
+                <long>
+                    Spring Konstant (0.1-10.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/grid_resolution</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/grid_resolution</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>8</default>
+            <locale name="C">
+                <short>Grid Resolution</short>
+                <long>
+                    Vertex Grid Resolution (1-64)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/min_grid_size</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/min_grid_size</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>8</default>
+            <locale name="C">
+                <short>Minimum Grid Size</short>
+                <long>
+                    Minimum Vertex Grid Size (4-128)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/map_effect</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/map_effect</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Shiver</default>
+            <locale name="C">
+                <short>Map Effect</short>
+                <long>
+                    Map Window Effect (None, Shiver)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/focus_effect</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/focus_effect</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Shiver</default>
+            <locale name="C">
+                <short>Focus Effect</short>
+                <long>
+                    Focus Window Effect (None, Shiver)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/map_window_types</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/map_window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[Splash,Unknown]</default>
+            <locale name="C">
+                <short>Map Window Types</short>
+                <long>
+                    Window types that should wobble when mapped (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/focus_window_types</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/focus_window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Focus Window Types</short>
+                <long>
+                    Window types that should wobble when focused (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/grab_window_types</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/grab_window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Grab Window Types</short>
+                <long>
+                    Window types that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/move_window_types</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/move_window_types</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[Toolbar,Menu,Utility,Dialog,Normal]</default>
+            <locale name="C">
+                <short>Move Window Types</short>
+                <long>
+                    Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/snap</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/snap</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;Control_L</default>
+            <locale name="C">
+                <short>Snap windows</short>
+                <long>
+                    Toggle window snapping
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/invert_y</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/invert_y</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Pointer Invert Y</short>
+                <long>
+                    Invert Y axis for pointer movement
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/sensitivity</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/sensitivity</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.000000</default>
+            <locale name="C">
+                <short>Pointer Sensitivity</short>
+                <long>
+                    Sensitivity of pointer movement (0.01-100.00)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Super&gt;Button3</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Zoom In
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Release&gt;Button3</default>
+            <locale name="C">
+                <short>Terminate</short>
+                <long>
+                    Zoom to Normal View
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/zoom_in</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/zoom_in</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Super&gt;Button4</default>
+            <locale name="C">
+                <short>Zoom In</short>
+                <long>
+                    Zoom In
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/zoom_out</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/zoom_out</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Super&gt;Button5</default>
+            <locale name="C">
+                <short>Zoom Out</short>
+                <long>
+                    Zoom Out
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/speed</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.500000</default>
+            <locale name="C">
+                <short>Speed</short>
+                <long>
+                    Zoom Speed (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/timestep</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/timestep</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.200000</default>
+            <locale name="C">
+                <short>Timestep</short>
+                <long>
+                    Zoom Timestep (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/filter_linear</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/filter_linear</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Filter Linear</short>
+                <long>
+                    USe linear filter when zoomed in
                 </long>
             </locale>
         </schema>

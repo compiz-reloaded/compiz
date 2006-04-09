@@ -21,8 +21,10 @@
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <math.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
 #include <gconf/gconf-client.h>
 
 #include <compiz.h>
@@ -126,19 +128,68 @@ gconfValueToString (CompDisplay	    *d,
     return g_strdup ("unknown");
 }
 
+static char *
+gconfDescForOption (CompOption *o)
+{
+    if (o->type == CompOptionTypeInt)
+    {
+	return g_strdup_printf ("%s (%d-%d)", o->longDesc,
+				o->rest.i.min, o->rest.i.max);
+    }
+    else if (o->type == CompOptionTypeFloat)
+    {
+	int prec = -(logf (o->rest.f.precision) / logf (10));
+	return g_strdup_printf ("%s (%.*f-%.*f)", o->longDesc,
+				prec, o->rest.f.min, prec, o->rest.f.max);
+    }
+    else if (o->type == CompOptionTypeString ||
+	     (o->type == CompOptionTypeList &&
+	      o->value.list.type == CompOptionTypeString))
+    {
+	GString *str = g_string_new (o->longDesc);
+	int i;
+
+	if (o->rest.s.nString)
+	{
+	    g_string_append (str, " (");
+	    for (i = 0; i < o->rest.s.nString; i++)
+	    {
+		if (i > 0)
+		    g_string_append (str, ", ");
+		g_string_append (str, o->rest.s.string[i]);
+	    }
+	    g_string_append (str, ")");
+	}
+
+	return g_string_free (str, FALSE);
+    }
+    else
+	return g_strdup (o->longDesc);
+}
+
 static void
 gconfDumpToSchema (CompDisplay *d,
 		   CompOption  *o,
-		   char	       *path,
+		   char	       *plugin,
 		   char	       *screen)
 {
-    char *value;
+    char *value, *desc;
 
     gconfPrintf (2, "<schema>\n");
-    gconfPrintf (3, "<key>/schemas%s/%s/%s/options/%s</key>\n",
-		 APP_NAME, path, screen, o->name);
-    gconfPrintf (3, "<applyto>%s/%s/%s/options/%s</applyto>\n",
-		 APP_NAME, path, screen, o->name);
+    if (plugin)
+    {
+	gconfPrintf (3, "<key>/schemas%s/plugins/%s/%s/options/%s</key>\n",
+		     APP_NAME, plugin, screen, o->name);
+	gconfPrintf (3, "<applyto>%s/plugins/%s/%s/options/%s</applyto>\n",
+		     APP_NAME, plugin, screen, o->name);
+    }
+    else
+    {
+	gconfPrintf (3, "<key>/schemas%s/general/%s/options/%s</key>\n",
+		     APP_NAME, screen, o->name);
+	gconfPrintf (3, "<applyto>%s/general/%s/options/%s</applyto>\n",
+		     APP_NAME, screen, o->name);
+    }
     gconfPrintf (3, "<owner>compiz</owner>\n");
     gconfPrintf (3, "<type>%s</type>\n", gconfTypeToString (o->type));
     if (o->type == CompOptionTypeList)
@@ -150,7 +201,9 @@ gconfDumpToSchema (CompDisplay *d,
     gconfPrintf (3, "<locale name=\"C\">\n");
     gconfPrintf (4, "<short>%s</short>\n", o->shortDesc);
     gconfPrintf (4, "<long>\n");
-    gconfPrintf (5, "%s\n", o->longDesc);
+    desc = gconfDescForOption (o);
+    gconfPrintf (5, "%s\n", desc);
+    g_free (desc);
     gconfPrintf (4, "</long>\n");
     gconfPrintf (3, "</locale>\n");
     gconfPrintf (2, "</schema>\n\n");
@@ -178,18 +231,55 @@ gconfInitDisplay (CompPlugin  *p,
 {
     CompOption   *option;
     int	         nOption;
+    int          i;
 
     gconfPrintf (2, "<!-- display options -->\n\n");
 
     option = compGetDisplayOptions (d, &nOption);
     while (nOption--)
-	gconfDumpToSchema (d, option++, "general", "allscreens");
+    {
+	if (!strcmp (option->name, "active_plugins"))
+	{
+	    /* "Fix" it for the schema file */
+	    memmove (option->value.list.value + 1,
+		     option->value.list.value,
+		     (option->value.list.nValue - 1) *
+		     sizeof (CompOptionValue));
+	    option->value.list.value[0].s = strdup ("gconf");
+	}
+	gconfDumpToSchema (d, option++, NULL, "allscreens");
+    }
+
+    for (i = 0; i < p->vTable->nDeps; i++)
+    {
+	CompPlugin *plugin = findActivePlugin (p->vTable->deps[i].plugin);
+	if (!plugin)
+	{
+	    fprintf (stderr, "Could not find plugin '%s'\n",
+		     p->vTable->deps[i].plugin);
+	    return FALSE;
+	}
+
+	if (plugin->vTable->getDisplayOptions)
+	{
+	    option = plugin->vTable->getDisplayOptions (d, &nOption);
+	    while (nOption--)
+		gconfDumpToSchema (d, option++, plugin->vTable->name,
+				   "allscreens");
+	}
+    }
 
     displayDone = TRUE;
 
     gconfTryCloseSchema ();
 
     return TRUE;
+}
+
+static void
+gconfFiniDisplay (CompPlugin  *p,
+		  CompDisplay *d)
+{
 }
 
 static Bool
@@ -199,6 +289,7 @@ gconfInitScreen (CompPlugin *p,
     CompOption   *option;
     int	         nOption;
     char         *screenName;
+    int          i;
 
     screenName = g_strdup_printf ("screen%d", s->screenNum);
 
@@ -206,7 +297,22 @@ gconfInitScreen (CompPlugin *p,
 
     option = compGetScreenOptions (s, &nOption);
     while (nOption--)
-	gconfDumpToSchema (s->display, option++, "general", screenName);
+	gconfDumpToSchema (s->display, option++, NULL, screenName);
+
+    for (i = 0; i < p->vTable->nDeps; i++)
+    {
+	CompPlugin *plugin = findActivePlugin (p->vTable->deps[i].plugin);
+	if (!plugin)
+	    return FALSE;
+
+	if (plugin->vTable->getScreenOptions)
+	{
+	    option = plugin->vTable->getScreenOptions (s, &nOption);
+	    while (nOption--)
+		gconfDumpToSchema (s->display, option++, plugin->vTable->name,
+				   screenName);
+	}
+    }
 
     g_free (screenName);
 
@@ -217,9 +323,23 @@ gconfInitScreen (CompPlugin *p,
     return TRUE;
 }
 
+static void
+gconfFiniScreen (CompPlugin *p,
+		 CompScreen *s)
+{
+}
+
 static Bool
 gconfInit (CompPlugin *p)
 {
+    if (findActivePlugin ("gconf"))
+    {
+	fprintf (stderr, "Can't use gconf-dump plugin with gconf plugin\n");
+	return FALSE;
+    }
+
+    g_type_init ();
+
     schemaFile = fopen ("compiz.schemas.dump", "w");
 
     if (!schemaFile)
@@ -239,12 +359,24 @@ gconfInit (CompPlugin *p)
     return TRUE;
 }
 
+static void
+gconfFini (CompPlugin *p)
+{
+}
+
 static CompPluginDep gconfDeps[] = {
-    { CompPluginRuleBefore, "decoration" },
-    { CompPluginRuleBefore, "wobbly" },
-    { CompPluginRuleBefore, "fade" },
-    { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleAfter, "cube" },
+    { CompPluginRuleAfter, "decoration" },
+    { CompPluginRuleAfter, "fade" },
+    { CompPluginRuleAfter, "minimize" },
+    { CompPluginRuleAfter, "move" },
+    { CompPluginRuleAfter, "place" },
+    { CompPluginRuleAfter, "resize" },
+    { CompPluginRuleAfter, "rotate" },
+    { CompPluginRuleAfter, "switcher" },
+    { CompPluginRuleAfter, "scale" },
+    { CompPluginRuleAfter, "wobbly" },
+    { CompPluginRuleAfter, "zoom" },
 };
 
 CompPluginVTable gconfVTable = {
@@ -252,17 +384,17 @@ CompPluginVTable gconfVTable = {
     "GConf dump",
     "GConf dump - dumps gconf schemas",
     gconfInit,
-    NULL,
+    gconfFini,
     gconfInitDisplay,
-    NULL,
+    gconfFiniDisplay,
     gconfInitScreen,
-    NULL,
+    gconfFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
-    0,  /* SetScreenOption */
+    0, /* SetScreenOption */
     gconfDeps,
     sizeof (gconfDeps) / sizeof (gconfDeps[0])
 };

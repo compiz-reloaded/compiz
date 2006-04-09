@@ -454,19 +454,6 @@ gconfGetOptionValue (CompDisplay *d,
 		    free (value.list.value);
 	    }
 	}
-
-	if (!status)
-	{
-	    gchar *screen = 0;
-
-	    if (s)
-		screen = g_strdup_printf ("screen%d", s->screenNum);
-
-	    gconfSetOption (d, o, screen, pluginPtr);
-
-	    if (screen)
-		g_free (screen);
-	}
     }
 
     if (pluginPtr)
