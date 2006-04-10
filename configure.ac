@@ -119,6 +119,15 @@ if test "$use_gconf" = yes; then
   AC_DEFINE(USE_GCONF, 1, [Build gconf plugin])
 fi
 
+AC_ARG_ENABLE(gconf-dump,
+  [  --enable-gconf-dump     Enable gconf-dump plugin (for developers)],
+  [use_gconf_dump=$enableval], [use_gconf_dump=no])
+
+AM_CONDITIONAL(GCONF_DUMP_PLUGIN, test "x$use_gconf_dump" = "xyes")
+if test "$use_gconf_dump" = yes; then
+  AC_DEFINE(USE_GCONF_DUMP, 1, [Build gconf-dump plugin])
+fi
+
 AC_ARG_ENABLE(place,
   [  --disable-place         Disable window placement plugin],
   [use_place=$enableval], [use_place=yes])

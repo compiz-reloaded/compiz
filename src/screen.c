@@ -695,9 +695,9 @@ setSupported (CompScreen *s)
 
 /*
     data[i++] = d->wmPidAtom;
-    data[i++] = d->wmUserTimeAtom;
 */
 
+    data[i++] = d->wmUserTimeAtom;
     data[i++] = d->frameExtentsAtom;
     data[i++] = d->frameWindowAtom;
 

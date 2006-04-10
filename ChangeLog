@@ -1,3 +1,25 @@
+2006-04-10  Dan Winship  <danw@novell.com>
+
+	* src/window.c (focusWindowOnMap): new function to decide whether
+	or not to focus a newly-mapped window. In addition to the old
+	checks, this also checks that _NET_WM_USER_TIME isn't 0, to allow
+	a window to explicitly request to not get focus.
+
+	* src/event.c (handleEvent): use focusWindowOnMap when processing
+	MapRequest.
+
+	* plugins/rotate.c (rotateHandleEvent): fix _NET_ACTIVE_WINDOW
+	handling so this doesn't interfere with focusable panel applets.
+
+	* plugins/compiz.schemas: regen (fixing cube top/bottom color)
+
+	* plugins/gconf-dump.c: Handle CompOptionTypeColor.
+
+	* configure.ac: Add --enable-gconf-dump so that the gconf-dump
+	plugin doesn't get built in normal builds
+
+	* plugins/Makefile.am: make gconf-dump optional.
+
 2006-04-09  Dan Winship  <danw@novell.com>
 
 	* plugins/gconf-dump.c: add plugin options, and add information

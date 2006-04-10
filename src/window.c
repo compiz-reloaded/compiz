@@ -3230,3 +3230,62 @@ unmaximizeWindow (CompWindow *w)
 
     setWindowState (w->screen->display, w->state, w->id);
 }
+
+Bool
+getWindowUserTime (CompWindow *w,
+		   Time       *time)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *data;
+
+    result = XGetWindowProperty (w->screen->display->display, w->id,
+				 w->screen->display->wmUserTimeAtom,
+				 0L, 1L, False, XA_CARDINAL, &actual, &format,
+				 &n, &left, &data);
+
+    if (result == Success && n && data)
+    {
+	CARD32 value;
+
+	memcpy (&value, data, sizeof (Window));
+	XFree ((void *) data);
+
+	*time = (Time) value;
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+void
+setWindowUserTime (CompWindow *w,
+		   Time       time)
+{
+    CARD32 value = (CARD32) time;
+
+    XChangeProperty (w->screen->display->display, w->id,
+		     w->screen->display->wmUserTimeAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) &value, 1);
+}
+
+Bool
+focusWindowOnMap (CompWindow *w)
+{
+    Time userTime;
+
+    if (w->type & (CompWindowTypeDesktopMask |
+		   CompWindowTypeDockMask))
+	return FALSE;
+
+    if (!w->inputHint &&
+	!(w->protocols & CompWindowProtocolTakeFocusMask))
+	return FALSE;
+
+    if (getWindowUserTime (w, &userTime) && userTime == 0)
+	return FALSE;
+
+    return TRUE;
+}

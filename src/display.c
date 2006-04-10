@@ -1648,6 +1648,8 @@ addDisplay (char *name,
     d->wmStrutAtom	  = XInternAtom (dpy, "_NET_WM_STRUT", 0);
     d->wmStrutPartialAtom = XInternAtom (dpy, "_NET_WM_STRUT_PARTIAL", 0);
 
+    d->wmUserTimeAtom = XInternAtom (dpy, "_NET_WM_USER_TIME", 0);
+
     d->clientListAtom	      = XInternAtom (dpy, "_NET_CLIENT_LIST", 0);
     d->clientListStackingAtom =
 	XInternAtom (dpy, "_NET_CLIENT_LIST_STACKING", 0);

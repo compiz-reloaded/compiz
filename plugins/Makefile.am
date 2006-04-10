@@ -55,6 +55,7 @@ libgconf_la_SOURCES =	     \
 	gconf-compiz-utils.h
 libgconf_module = libgconf.la
 
+if GCONF_DUMP_PLUGIN
 libgconf_dump_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_dump_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
 libgconf_dump_la_SOURCES =   \
@@ -62,6 +63,7 @@ libgconf_dump_la_SOURCES =   \
 	gconf-compiz-utils.c \
 	gconf-compiz-utils.h
 libgconf_dump_module = libgconf-dump.la
+endif
 
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
 schema_DATA = compiz.schemas

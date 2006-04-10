@@ -989,7 +989,7 @@ rotateHandleEvent (CompDisplay *d,
 		    break;
 
 		/* reset movement */
-		rs->moving = TRUE;
+		rs->moving = FALSE;
 		rs->moveTo = 0.0f;
 
 		if (w->attrib.x >= s->width || w->attrib.x + w->width <= 0)

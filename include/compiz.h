@@ -484,6 +484,8 @@ struct _CompDisplay {
     Atom wmStrutAtom;
     Atom wmStrutPartialAtom;
 
+    Atom wmUserTimeAtom;
+
     Atom clientListAtom;
     Atom clientListStackingAtom;
 
@@ -1751,6 +1753,18 @@ maximizeWindow (CompWindow *w);
 
 void
 unmaximizeWindow (CompWindow *w);
+
+Bool
+getWindowUserTime (CompWindow *w,
+		   Time       *time);
+
+void
+setWindowUserTime (CompWindow *w,
+		   Time       time);
+
+Bool
+focusWindowOnMap (CompWindow *w);
+
 
 /* plugin.c */
 

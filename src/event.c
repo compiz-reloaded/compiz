@@ -1116,10 +1116,7 @@ handleEvent (CompDisplay *d,
 
 		updateWindowAttributes (w, FALSE);
 
-		if (!(w->type & (CompWindowTypeDesktopMask |
-				 CompWindowTypeDockMask)) &&
-		    (w->inputHint ||
-		     (w->protocols & CompWindowProtocolTakeFocusMask)))
+		if (focusWindowOnMap (w))
 		    moveInputFocusToWindow (w);
 	    }
 	}
