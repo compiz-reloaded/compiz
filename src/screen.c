@@ -1273,7 +1273,7 @@ addScreen (CompDisplay *display,
 		    rgba = 1;
 
 		    s->glxPixmapFBConfigs[i].textureFormat =
-			GLX_BIND_TO_TEXTURE_RGBA_EXT;
+			GLX_TEXTURE_FORMAT_RGBA_EXT;
 		}
 	    }
 
@@ -1290,7 +1290,7 @@ addScreen (CompDisplay *display,
 		    continue;
 
 		s->glxPixmapFBConfigs[i].textureFormat =
-		    GLX_BIND_TO_TEXTURE_RGB_EXT;
+		    GLX_TEXTURE_FORMAT_RGB_EXT;
 	    }
 
 	    (*s->getFBConfigAttrib) (dpy,
