@@ -485,12 +485,11 @@ gconfInitOption (CompDisplay *d,
     }
 
     entry = gconf_client_get_entry (gd->client, key, NULL, FALSE, NULL);
-
-    if (!gconfGetOptionValue (d, entry))
-	gconfSetOption (d, o, screen, plugin);
-
     if (entry)
+    {
+	gconfGetOptionValue (d, entry);
 	gconf_entry_free (entry);
+    }
 
     g_free (key);
 }

@@ -9,6 +9,15 @@
 	self-resizing windows don't dance (although I'm pretty sure this
 	is a symptom of mishandling gravity somewhere else).
 
+	* plugins/gconf.c (gconfInitOption): Request the default value of
+	the key from gconf, rather than initializing the key to the
+	internal default value if it hasn't yet been set by the user.
+	Notably, this makes it so that "compiz gconf" on a new account
+	will use the default value of active_plugins rather than the
+	(effectively empty) list of plugins on the command line. (It also
+	makes it so that the sysadmin can override defaults via sabayon or
+	whatever.)
+
 2006-04-13  David Reveman  <davidr@novell.com>
 
 	* src/window.c (mapWindow): Maybe not, disable it again. :(
