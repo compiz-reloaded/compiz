@@ -435,13 +435,15 @@ handleEvent (CompDisplay *d,
 	    {
 		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
 		{
-		    panelAction (s, s->display->panelActionMainMenuAtom);
+		    panelAction (s, s->display->panelActionMainMenuAtom,
+				 event->xbutton.time);
 		    eventMode = AsyncPointer;
 		}
 
 		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
 		{
-		    panelAction (s, s->display->panelActionRunDialogAtom);
+		    panelAction (s, s->display->panelActionRunDialogAtom,
+				 event->xbutton.time);
 		    eventMode = AsyncPointer;
 		}
 	    }
@@ -566,10 +568,16 @@ handleEvent (CompDisplay *d,
 	    if (!d->screens->maxGrab)
 	    {
 		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
-		    panelAction (s, s->display->panelActionMainMenuAtom);
+		{
+		    panelAction (s, s->display->panelActionMainMenuAtom,
+				 event->xkey.time);
+		}
 
 		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
-		    panelAction (s, s->display->panelActionRunDialogAtom);
+		{
+		    panelAction (s, s->display->panelActionRunDialogAtom,
+				 event->xkey.time);
+		}
 	    }
 
 #define EV_KEY_COMMAND(num)						 \

@@ -1333,7 +1333,8 @@ getActiveWindow (CompDisplay *display,
 
 void
 panelAction (CompScreen *s,
-	     Atom	panelAction);
+	     Atom	panelAction,
+	     Time       eventTime);
 
 void
 runCommand (CompScreen *s,

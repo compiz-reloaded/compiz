@@ -1,3 +1,10 @@
+2006-04-13  Dan Winship  <danw@novell.com>
+
+	* src/screen.c (panelAction): take a timestamp and pass that to
+	the panel rather than using CurrentTime
+
+	* src/event.c (handleEvent): update for that
+
 2006-04-13  David Reveman  <davidr@novell.com>
 
 	* src/window.c (mapWindow): Maybe not, disable it again. :(
