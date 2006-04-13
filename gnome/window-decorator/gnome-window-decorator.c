@@ -3455,7 +3455,17 @@ title_event (WnckWindow *win,
 	screen     = gdk_display_get_default_screen (gdkdisplay);
 
 	if (action_menu)
-	    gtk_object_destroy (GTK_OBJECT (action_menu));
+	{
+	    if (action_menu_mapped)
+	    {
+		gtk_widget_destroy (action_menu);
+		action_menu_mapped = FALSE;
+		action_menu = NULL;
+		return;
+	    }
+	    else
+		gtk_widget_destroy (action_menu);
+	}
 
 	action_menu = wnck_create_window_action_menu (win);
 
@@ -3832,8 +3842,13 @@ style_changed (GtkWidget *widget)
     windows = wnck_screen_get_windows (screen);
     while (windows != NULL)
     {
-	update_window_decoration_size (WNCK_WINDOW (windows->data));
-	update_event_windows (WNCK_WINDOW (windows->data));
+	decor_t *d = g_object_get_data (G_OBJECT (windows->data), "decor");
+
+	if (d->decorated)
+	{
+	    update_window_decoration_size (WNCK_WINDOW (windows->data));
+	    update_event_windows (WNCK_WINDOW (windows->data));
+	}
 	windows = windows->next;
     }
 }
@@ -3940,8 +3955,13 @@ value_changed (GConfClient *client,
 	windows = wnck_screen_get_windows (screen);
 	while (windows != NULL)
 	{
-	    update_window_decoration_size (WNCK_WINDOW (windows->data));
-	    update_event_windows (WNCK_WINDOW (windows->data));
+	    decor_t *d = g_object_get_data (G_OBJECT (windows->data), "decor");
+
+	    if (d->decorated)
+	    {
+		update_window_decoration_size (WNCK_WINDOW (windows->data));
+		update_event_windows (WNCK_WINDOW (windows->data));
+	    }
 	    windows = windows->next;
 	}
     }

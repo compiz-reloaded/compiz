@@ -1526,8 +1526,7 @@ addWindow (CompScreen *screen,
 
 	mapWindow (w);
 
-	if (!w->attrib.override_redirect)
-	    updateWindowAttributes (w, FALSE);
+	updateWindowAttributes (w, FALSE);
     }
 
     windowInitPlugins (w);
@@ -2000,6 +1999,121 @@ moveWindow (CompWindow *w,
 	if (damage)
 	    addWindowDamage (w);
     }
+}
+
+void
+moveResizeWindow (CompWindow     *w,
+		  XWindowChanges *xwc,
+		  unsigned int   xwcm,
+		  int            gravity)
+{
+    xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+
+    if (gravity == 0)
+	gravity = w->sizeHints.win_gravity;
+
+    if (!(xwcm & CWX))
+	xwc->x = w->attrib.x;
+    if (!(xwcm & CWY))
+	xwc->y = w->attrib.y;
+    if (!(xwcm & CWWidth))
+	xwc->width = w->attrib.width;
+    if (!(xwcm & CWHeight))
+	xwc->height = w->attrib.height;
+
+    if (xwcm & (CWWidth | CWHeight))
+    {
+	int width, height;
+
+	if (constrainNewWindowSize (w,
+				    xwc->width, xwc->height,
+				    &width, &height))
+	{
+	    xwcm |= (CWWidth | CWHeight);
+	    xwc->width = width;
+	    xwc->height = height;
+
+	    sendSyncRequest (w);
+	}
+	else
+	    xwcm &= ~(CWWidth | CWHeight);
+    }
+
+    if (xwcm & (CWX | CWWidth))
+    {
+	switch (gravity)
+	{
+	case NorthWestGravity:
+	case WestGravity:
+	case SouthWestGravity:
+	    xwc->x += w->input.left;
+	    break;
+
+	case NorthGravity:
+	case CenterGravity:
+	case SouthGravity:
+	    xwc->x += w->input.left;
+	    if (!(xwcm & CWX))
+		xwc->x += (w->attrib.width - xwc->width) / 2;
+	    break;
+
+	case NorthEastGravity:
+	case EastGravity:
+	case SouthEastGravity:
+	    xwc->x -= w->input.right;
+	    if (!(xwcm & CWY))
+		xwc->x += w->attrib.width - xwc->width;
+	    break;
+
+	case StaticGravity:
+	default:
+	    break;
+	}
+
+	xwcm |= CWX;
+    }
+
+    if (xwcm & (CWY | CWHeight))
+    {
+	switch (gravity)
+	{
+	case NorthWestGravity:
+	case NorthGravity:
+	case NorthEastGravity:
+	    xwc->y += w->input.top;
+	    break;
+
+	case WestGravity:
+	case CenterGravity:
+	case EastGravity:
+	    xwc->y += w->input.top;
+	    if (!(xwcm & CWY))
+		xwc->y += (w->attrib.height - xwc->height) / 2;
+	    break;
+
+	case SouthWestGravity:
+	case SouthGravity:
+	case SouthEastGravity:
+	    xwc->y -= w->input.bottom;
+	    if (!(xwcm & CWY))
+		xwc->y += w->attrib.height - xwc->height;
+	    break;
+
+	case StaticGravity:
+	default:
+	    break;
+	}
+
+	xwcm |= CWY;
+    }
+
+    if (xwcm & CWBorderWidth)
+    {
+	if (xwc->border_width == w->attrib.border_width)
+	    xwcm &= ~CWBorderWidth;
+    }
+
+    XConfigureWindow (w->screen->display->display, w->id, xwcm, xwc);
 }
 
 void
@@ -2835,6 +2949,8 @@ updateWindowAttributes (CompWindow *w,
     XWindowChanges xwc;
     int		   mask;
 
+    if (w->attrib.override_redirect)
+	return;
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
@@ -3249,7 +3365,7 @@ getWindowUserTime (CompWindow *w,
     {
 	CARD32 value;
 
-	memcpy (&value, data, sizeof (Window));
+	memcpy (&value, data, sizeof (CARD32));
 	XFree ((void *) data);
 
 	*time = (Time) value;

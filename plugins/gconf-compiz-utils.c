@@ -60,6 +60,9 @@ gconfBindingToString (CompDisplay     *d,
 {
     guint modMask;
 
+    if (value->bind.type == CompBindingTypeNone)
+	return g_strdup ("Disabled");
+
     if (value->bind.type == CompBindingTypeButton)
 	modMask = value->bind.u.button.modifiers;
     else

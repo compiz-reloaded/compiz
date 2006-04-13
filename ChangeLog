@@ -1,3 +1,31 @@
+2006-04-12  Dan Winship  <danw@novell.com>
+
+	* src/window.c (moveResizeWindow): move duplicated code from
+	_NET_MOVERESIZE_WINDOW and ConfigureRequest handlers in event.c to
+	here, and handle gravity as well. (Fixes bnc 163058.)
+	(updateWindowAttributes): Do nothing if the window is
+	override_redirect (and remove a few now-redundant checks of that
+	elsewhere). Previously we were forgetting to check
+	!override_redirect in the case where the motif hints changed. (bnc
+	163931)
+	(getWindowUserTime): fix a cut-and-paste-o that caused a crash on
+	64bit machines.
+
+	* src/event.c (handleEvent): fix the _NET_MOVERESIZE_WINDOW bit
+	manipulation to correspond to what the EWMH means rather than what
+	it says, and use moveResizeWindow for that and for
+	ConfigureRequest.
+
+	* plugins/gconf-compiz-utils.c (gconfBindingToString): DTRT with
+	"None" bindings.
+
+	* gnome/window-decorator/gnome-window-decorator.c (title_event):
+	if the user right-clicks on the titlebar while the context menu is
+	popped up, just pop it down and eat the click, like all other
+	GNOME context menus do.
+	(style_changed, value_changed): Don't add decorations to
+	previously-undecorated windows. (bnc 165393)
+
 2006-04-11  David Reveman  <davidr@novell.com>
 
 	* src/screen.c (addScreen): Fix typo.

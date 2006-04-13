@@ -939,8 +939,7 @@ handleEvent (CompDisplay *d,
 		    recalcWindowType (w);
 		    recalcWindowActions (w);
 
-		    if (!w->attrib.override_redirect)
-			updateWindowAttributes (w, FALSE);
+		    updateWindowAttributes (w, FALSE);
 
 		    setWindowState (d, wState, w->id);
 		}
@@ -990,67 +989,37 @@ handleEvent (CompDisplay *d,
 	    {
 		unsigned int   xwcm = 0;
 		XWindowChanges xwc;
+		int            gravity;
 
-		xwc.x      = w->attrib.x;
-		xwc.y      = w->attrib.y;
-		xwc.width  = w->attrib.width;
-		xwc.height = w->attrib.height;
+		memset (&xwc, 0, sizeof (xwc));
 
-		if (event->xclient.data.l[0] & (1 << 7))
+		if (event->xclient.data.l[0] & (1 << 8))
 		{
 		    xwcm |= CWX;
 		    xwc.x = event->xclient.data.l[1];
 		}
 
-		if (event->xclient.data.l[0] & (1 << 8))
+		if (event->xclient.data.l[0] & (1 << 9))
 		{
 		    xwcm |= CWY;
 		    xwc.y = event->xclient.data.l[2];
 		}
 
-		if (event->xclient.data.l[0] & (1 << 9))
+		if (event->xclient.data.l[0] & (1 << 10))
 		{
 		    xwcm |= CWWidth;
 		    xwc.width = event->xclient.data.l[3];
 		}
 
-		if (event->xclient.data.l[0] & (1 << 10))
+		if (event->xclient.data.l[0] & (1 << 11))
 		{
 		    xwcm |= CWHeight;
 		    xwc.height = event->xclient.data.l[4];
 		}
 
-		/* TODO: gravity */
+		gravity = event->xclient.data.l[0] & 0xFF;
 
-		if (xwcm & (CWX | CWY))
-		{
-		    xwc.x += w->input.left;
-		    xwc.y += w->input.top;
-		}
-
-		if (xwcm & (CWWidth | CWHeight))
-		{
-		    int width, height;
-
-		    if (constrainNewWindowSize (w,
-						xwc.width, xwc.height,
-						&width, &height))
-		    {
-			xwc.width  = width;
-			xwc.height = height;
-
-			sendSyncRequest (w);
-		    }
-		    else
-		    {
-			xwcm &= ~(CWWidth | CWHeight);
-		    }
-		}
-
-
-		XConfigureWindow (d->display,
-				  event->xclient.window,
-				  xwcm, &xwc);
+		moveResizeWindow (w, &xwc, xwcm, gravity);
 	    }
 	}
 	else if (event->xclient.message_type == d->restackWindowAtom)
@@ -1129,11 +1098,9 @@ handleEvent (CompDisplay *d,
 	  w = findWindowAtDisplay (d, event->xconfigurerequest.window);
 	  if (w)
 	  {
-	      unsigned int   xwcm;
 	      XWindowChanges xwc;
 
-	      xwcm = event->xconfigurerequest.value_mask &
-		  (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+	      memset (&xwc, 0, sizeof (xwc));
 
 	      xwc.x	       = event->xconfigurerequest.x;
 	      xwc.y	       = event->xconfigurerequest.y;
@@ -1141,42 +1108,8 @@ handleEvent (CompDisplay *d,
 	      xwc.height       = event->xconfigurerequest.height;
 	      xwc.border_width = event->xconfigurerequest.border_width;
 
-	      /* TODO: gravity */
-
-	      if (xwcm & (CWX | CWY))
-	      {
-		  xwc.x += w->input.left;
-		  xwc.y += w->input.top;
-	      }
-
-	      if (xwcm & (CWWidth | CWHeight))
-	      {
-		  int width, height;
-
-		  if (constrainNewWindowSize (w,
-					      xwc.width, xwc.height,
-					      &width, &height))
-		  {
-		      xwc.width  = width;
-		      xwc.height = height;
-
-		      sendSyncRequest (w);
-		  }
-		  else
-		  {
-		      xwcm &= ~(CWWidth | CWHeight);
-		  }
-	      }
-
-	      if (xwcm & CWBorderWidth)
-	      {
-		  if (xwc.border_width == w->attrib.border_width)
-		      xwcm &= ~CWBorderWidth;
-	      }
-
-	      XConfigureWindow (d->display,
-				event->xconfigurerequest.window,
-				xwcm, &xwc);
+	      moveResizeWindow (w, &xwc,
+				event->xconfigurerequest.value_mask, 0);
 	  }
     } break;
     case CirculateRequest:

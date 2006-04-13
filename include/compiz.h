@@ -1632,6 +1632,12 @@ moveWindow (CompWindow *w,
 	    Bool       immediate);
 
 void
+moveResizeWindow (CompWindow     *w,
+		  XWindowChanges *xwc,
+		  unsigned int   xwcm,
+		  int            gravity);
+
+void
 syncWindowPosition (CompWindow *w);
 
 void
