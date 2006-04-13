@@ -5,6 +5,10 @@
 
 	* src/event.c (handleEvent): update for that
 
+	* src/window.c (moveResizeWindow): fix the gravity handling so
+	self-resizing windows don't dance (although I'm pretty sure this
+	is a symptom of mishandling gravity somewhere else).
+
 2006-04-13  David Reveman  <davidr@novell.com>
 
 	* src/window.c (mapWindow): Maybe not, disable it again. :(
