@@ -285,6 +285,35 @@ resizeTerminate (CompDisplay *d)
     }
 }
 
+/* Initiate the resize in the direction suggested by the quarter
+ * of the window the mouse is in, eg drag in top left will resize
+ * up and to the left. */
+static void
+interiorResizeInitiate (CompScreen   *s,
+			Window	     window,
+			int	     x,
+			int	     y,
+			unsigned int state)
+{
+    CompWindow   *w;
+    unsigned int mask;
+
+    w = findTopLevelWindowAtScreen (s, window);
+    if (!w)
+	return;
+
+    x -= w->attrib.x;
+    y -= w->attrib.y;
+
+    mask  = (x < (w->width  >> 1)) ? ResizeLeftMask : ResizeRightMask;
+    mask |= (y < (w->height >> 1)) ? ResizeUpMask   : ResizeDownMask;
+
+    x += w->attrib.x;
+    y += w->attrib.y;
+
+    resizeInitiate (s, window, x, y, state, mask, 0);
+}
+
 static void
 resizeUpdateWindowSize (CompDisplay *d)
 {
@@ -383,13 +412,11 @@ resizeHandleEvent (CompDisplay *d,
 	    RESIZE_SCREEN (s);
 
 	    if (EV_KEY (&rs->opt[RESIZE_SCREEN_OPTION_INITIATE], event))
-		resizeInitiate (s,
-				event->xkey.window,
-				event->xkey.x_root,
-				event->xkey.y_root,
-				event->xkey.state,
-				ResizeDownMask | ResizeRightMask,
-				0);
+		interiorResizeInitiate (s,
+					event->xkey.window,
+					event->xkey.x_root,
+					event->xkey.y_root,
+					event->xkey.state);
 
 	    if (EV_KEY (&rs->opt[RESIZE_SCREEN_OPTION_TERMINATE], event) ||
 		(event->type	     == KeyPress &&
@@ -430,13 +457,11 @@ resizeHandleEvent (CompDisplay *d,
 	    RESIZE_SCREEN (s);
 
 	    if (EV_BUTTON (&rs->opt[RESIZE_SCREEN_OPTION_INITIATE], event))
-		resizeInitiate (s,
-				event->xbutton.window,
-				event->xbutton.x_root,
-				event->xbutton.y_root,
-				event->xbutton.state,
-				ResizeDownMask | ResizeRightMask,
-				0);
+		interiorResizeInitiate (s,
+					event->xbutton.window,
+					event->xbutton.x_root,
+					event->xbutton.y_root,
+					event->xbutton.state);
 
 	    if (EV_BUTTON (&rs->opt[RESIZE_SCREEN_OPTION_TERMINATE], event))
 		resizeTerminate (d);
