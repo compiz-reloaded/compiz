@@ -1,3 +1,8 @@
+2006-04-13  David Reveman  <davidr@novell.com>
+
+	* src/window.c (mapWindow): Enable draw synchronization on map
+	again. Should be working correctly with CVS version of X server.
+
 2006-04-12  Dan Winship  <danw@novell.com>
 
 	* src/window.c (moveResizeWindow): move duplicated code from
