@@ -1632,6 +1632,7 @@ mapWindow (CompWindow *w)
     if (w->type & CompWindowTypeDesktopMask)
 	w->screen->desktopWindowCount++;
 
+#if 0 /* causing some windows to not redraw correctly */
     if (!w->attrib.override_redirect)
     {
 	if (w->protocols & CompWindowProtocolSyncRequestMask)
@@ -1640,6 +1641,8 @@ mapWindow (CompWindow *w)
 	    sendConfigureNotify (w);
 	}
     }
+#endif
+
 }
 
 void

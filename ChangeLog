@@ -1,5 +1,7 @@
 2006-04-13  David Reveman  <davidr@novell.com>
 
+	* src/window.c (mapWindow): Maybe not, disable it again. :(
+
 	* src/window.c (mapWindow): Enable draw synchronization on map
 	again. Should be working correctly with CVS version of X server.
 
