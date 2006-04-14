@@ -54,6 +54,8 @@
 #define OPACITY_STEP_MIN     1
 #define OPACITY_STEP_MAX     50
 
+#define UNREDIRECT_FS_DEFAULT FALSE
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -134,6 +136,7 @@ setScreenOption (CompScreen      *screen,
     switch (index) {
     case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
     case COMP_SCREEN_OPTION_LIGHTING:
+    case COMP_SCREEN_OPTION_UNREDIRECT_FS:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -233,6 +236,13 @@ compScreenInitOptions (CompScreen *screen)
     o->rest.i.min	= OPACITY_STEP_MIN;
     o->rest.i.max	= OPACITY_STEP_MAX;
 
+    o = &screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS];
+    o->name       = "unredirect_fullscreen_windows";
+    o->shortDesc  = "Unredirect Fullscreen Windows";
+    o->longDesc   = "Allow drawing of fullscreen windows to not be redirected "
+	"to offscreen pixmaps";
+    o->type       = CompOptionTypeBool;
+    o->value.b    = UNREDIRECT_FS_DEFAULT;
 }
 
 static Bool
@@ -956,6 +966,8 @@ addScreen (CompDisplay *display,
     s->frameStatus = 0;
 
     s->showingDesktopMask = 0;
+
+    s->overlayWindowCount = 0;
 
     gettimeofday (&s->lastRedraw, 0);
 

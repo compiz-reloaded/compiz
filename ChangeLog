@@ -1,5 +1,14 @@
 2006-04-14  David Reveman  <davidr@novell.com>
 
+	* src/event.c (handleWindowDamageRect): Ignore damage from windows
+	that aren't redirected.
+
+	* include/compiz.h:
+	* src/window.c:
+	* src/display.c (eventLoop):
+	* src/screen.c: Add support for automatic unredirecting of fullscreen
+	windows.
+
 	* plugins/scale.c (scaleInitiate): Layout thumbnails before we
 	grab the screen to make sure some window exist.
 

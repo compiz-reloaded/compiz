@@ -889,7 +889,8 @@ disableTexture (CompTexture *texture);
 #define COMP_SCREEN_OPTION_REFRESH_RATE	       2
 #define COMP_SCREEN_OPTION_SIZE		       3
 #define COMP_SCREEN_OPTION_OPACITY_STEP        4
-#define COMP_SCREEN_OPTION_NUM		       5
+#define COMP_SCREEN_OPTION_UNREDIRECT_FS       5
+#define COMP_SCREEN_OPTION_NUM		       6
 
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
@@ -1129,6 +1130,8 @@ struct _CompScreen {
     KeyCode	      escapeKeyCode;
     unsigned int      mapNum;
     unsigned int      activeNum;
+
+    int overlayWindowCount;
 
     CompScreenEdge screenEdge[SCREEN_EDGE_NUM];
 
@@ -1456,6 +1459,7 @@ struct _CompWindow {
     Bool	      invisible;
     Bool	      destroyed;
     Bool	      damaged;
+    Bool	      redirected;
     int		      destroyRefCnt;
     int		      unmapRefCnt;
 
@@ -1771,6 +1775,12 @@ setWindowUserTime (CompWindow *w,
 
 Bool
 focusWindowOnMap (CompWindow *w);
+
+void
+unredirectWindow (CompWindow *w);
+
+void
+redirectWindow (CompWindow *w);
 
 
 /* plugin.c */

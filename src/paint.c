@@ -183,6 +183,8 @@ paintScreen (CompScreen		     *screen,
     }
     else
     {
+	int cnt = 0;
+
 	if (!tmpRegion)
 	{
 	    tmpRegion = XCreateRegion ();
@@ -202,11 +204,24 @@ paintScreen (CompScreen		     *screen,
 	    {
 		if ((*screen->paintWindow) (w, &w->paint, tmpRegion,
 					    PAINT_WINDOW_SOLID_MASK))
+		{
 		    XSubtractRegion (tmpRegion, w->region, tmpRegion);
+
+		    /* unredirect top most fullscreen windows. */
+		    if (cnt == 0					      &&
+			!REGION_NOT_EMPTY (tmpRegion)			      &&
+			screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
+			XEqualRegion (w->region, &screen->region))
+		    {
+			unredirectWindow (w);
+		    }
+		}
 	    }
 
 	    /* copy region */
 	    XSubtractRegion (tmpRegion, &emptyRegion, w->clip);
+
+	    cnt++;
 	}
 
 	if (tmpRegion->numRects)

@@ -1080,6 +1080,7 @@ eventLoop (void)
     CompScreen	   *s = display->screens;
     int		   timeToNextRedraw = 0;
     Bool	   idle = TRUE;
+    CompWindow	   *w;
 
     tmpRegion = XCreateRegion ();
     if (!tmpRegion)
@@ -1172,6 +1173,27 @@ eventLoop (void)
 		else
 		    (*s->preparePaintScreen) (s, idle ? s->redrawTime :
 					      timeDiff);
+
+		/* substract top most overlay window region */
+		if (s->overlayWindowCount)
+		{
+		    for (w = s->reverseWindows; w; w = w->prev)
+		    {
+			if (w->destroyed || w->invisible)
+			    continue;
+
+			if (!w->redirected)
+			    XSubtractRegion (s->damage, w->region, s->damage);
+
+			break;
+		    }
+
+		    if (s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
+		    {
+			s->damageMask &= ~COMP_SCREEN_DAMAGE_ALL_MASK;
+			s->damageMask |= COMP_SCREEN_DAMAGE_REGION_MASK;
+		    }
+		}
 
 		if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
 		{

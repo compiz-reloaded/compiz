@@ -851,6 +851,8 @@ setWindowMatrix (CompWindow *w)
 void
 bindWindow (CompWindow *w)
 {
+    redirectWindow (w);
+
     if (!w->pixmap)
     {
 	w->pixmap =
@@ -1307,10 +1309,11 @@ addWindow (CompScreen *screen,
 
     initTexture (screen, &w->texture);
 
-    w->screen    = screen;
-    w->pixmap    = None;
-    w->destroyed = FALSE;
-    w->damaged   = FALSE;
+    w->screen     = screen;
+    w->pixmap     = None;
+    w->destroyed  = FALSE;
+    w->damaged    = FALSE;
+    w->redirected = TRUE;
 
     w->destroyRefCnt = 1;
     w->unmapRefCnt   = 1;
@@ -1552,6 +1555,9 @@ removeWindow (CompWindow *w)
 	updateClientListForScreen (w->screen);
     }
 
+    if (!w->redirected)
+	w->screen->overlayWindowCount--;
+
     windowFiniPlugins (w);
 
     freeWindow (w);
@@ -1744,7 +1750,7 @@ resizeWindow (CompWindow *w,
 	pw = width  + borderWidth * 2;
 	ph = height + borderWidth * 2;
 
-	if (w->mapNum)
+	if (w->mapNum && w->redirected)
 	{
 	    pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
 						 w->id);
@@ -3400,4 +3406,32 @@ focusWindowOnMap (CompWindow *w)
 	return FALSE;
 
     return TRUE;
+}
+
+void
+unredirectWindow (CompWindow *w)
+{
+    if (!w->redirected)
+	return;
+
+    releaseWindow (w);
+
+    XCompositeUnredirectWindow (w->screen->display->display, w->id,
+				CompositeRedirectManual);
+
+    w->redirected = FALSE;
+    w->screen->overlayWindowCount++;
+}
+
+void
+redirectWindow (CompWindow *w)
+{
+    if (w->redirected)
+	return;
+
+    XCompositeRedirectWindow (w->screen->display->display, w->id,
+			      CompositeRedirectManual);
+
+    w->redirected = TRUE;
+    w->screen->overlayWindowCount--;
 }

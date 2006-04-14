@@ -645,7 +645,7 @@
             <applyto>/apps/compiz/general/screen0/options/refresh_rate</applyto>
             <owner>compiz</owner>
             <type>int</type>
-            <default>75</default>
+            <default>60</default>
             <locale name="C">
                 <short>Refresh Rate</short>
                 <long>
@@ -678,6 +678,20 @@
                 <short>Opacity Step</short>
                 <long>
                     Opacity change step (1-50)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/unredirect_fullscreen_windows</key>
+            <applyto>/apps/compiz/general/screen0/options/unredirect_fullscreen_windows</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Unredirect Fullscreen Windows</short>
+                <long>
+                    Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps
                 </long>
             </locale>
         </schema>
