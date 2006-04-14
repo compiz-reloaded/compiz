@@ -383,6 +383,7 @@ static CompPluginDep gconfDeps[] = {
     { CompPluginRuleAfter, "rotate" },
     { CompPluginRuleAfter, "switcher" },
     { CompPluginRuleAfter, "scale" },
+    { CompPluginRuleAfter, "water" },
     { CompPluginRuleAfter, "wobbly" },
     { CompPluginRuleAfter, "zoom" },
 };

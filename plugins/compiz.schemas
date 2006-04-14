@@ -1529,6 +1529,76 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/water/screen0/options/initiate</key>
+            <applyto>/apps/compiz/plugins/water/screen0/options/initiate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;Super_L</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Enable pointer water effects
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/screen0/options/terminate</key>
+            <applyto>/apps/compiz/plugins/water/screen0/options/terminate</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Release&gt;Super_L</default>
+            <locale name="C">
+                <short>Terminate</short>
+                <long>
+                    Disable pointer water effects
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/screen0/options/toggle_rain</key>
+            <applyto>/apps/compiz/plugins/water/screen0/options/toggle_rain</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Shift&gt;F9</default>
+            <locale name="C">
+                <short>Toggle rain</short>
+                <long>
+                    Toggle rain effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/screen0/options/offset_scale</key>
+            <applyto>/apps/compiz/plugins/water/screen0/options/offset_scale</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.000000</default>
+            <locale name="C">
+                <short>Offset Scale</short>
+                <long>
+                    Water offset scale (0.0-10.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/screen0/options/rain_delay</key>
+            <applyto>/apps/compiz/plugins/water/screen0/options/rain_delay</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>250</default>
+            <locale name="C">
+                <short>Rain Delay</short>
+                <long>
+                    Delay (in ms) between each rain-drop (0-3600000)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/friction</key>
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/friction</applyto>
             <owner>compiz</owner>

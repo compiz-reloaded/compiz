@@ -1,3 +1,9 @@
+2006-04-14  Dan Winship  <danw@novell.com>
+
+	* plugins/gconf-dump.c: add "water" to gconfDeps
+
+	* plugins/compiz.schemas: regen including the water options
+
 2006-04-14  David Reveman  <davidr@novell.com>
 
 	* src/event.c (handleWindowDamageRect): Ignore damage from windows
