@@ -1,5 +1,8 @@
 2006-04-14  David Reveman  <davidr@novell.com>
 
+	* plugins/scale.c (scaleInitiate): Layout thumbnails before we
+	grab the screen to make sure some window exist.
+
 	* plugins/resize.c: Allow 4-way resize. (Mike Hearn)
 
 2006-04-13  Dan Winship  <danw@novell.com>

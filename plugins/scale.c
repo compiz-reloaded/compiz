@@ -922,6 +922,9 @@ scaleInitiate (CompScreen *s)
     if (ss->state != SCALE_STATE_WAIT &&
 	ss->state != SCALE_STATE_OUT)
     {
+	if (!layoutThumbs (s))
+	    return;
+
 	if (!ss->grabIndex)
 	{
 	    /* check if screen is grabbed by someone else */
@@ -936,11 +939,8 @@ scaleInitiate (CompScreen *s)
 	    if (!sd->lastActiveNum)
 		sd->lastActiveNum = s->activeNum - 1;
 
-	    if (layoutThumbs (s))
-	    {
-		ss->state = SCALE_STATE_OUT;
-		damageScreen (s);
-	    }
+	    ss->state = SCALE_STATE_OUT;
+	    damageScreen (s);
 	}
     }
 }
