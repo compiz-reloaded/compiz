@@ -813,7 +813,7 @@ softwareUpdate (CompScreen *s,
 }
 
 
-#define SET(x, y, v) *((ws->d1) + (ws->width + 2) * (y) + (x)) = (v)
+#define SET(x, y, v) *((ws->d1) + (ws->width + 2) * (y + 1) + (x + 1)) = (v)
 
 static void
 softwarePoints (CompScreen *s,
