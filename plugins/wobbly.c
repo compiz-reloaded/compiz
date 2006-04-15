@@ -157,6 +157,7 @@ static char *moveWinType[] = {
     "Menu",
     "Utility",
     "Dialog",
+    "ModalDialog",
     "Normal"
 };
 #define N_MOVE_WIN_TYPE (sizeof (moveWinType) / sizeof (moveWinType[0]))
