@@ -138,6 +138,81 @@ readPngData (png_struct	  *png,
 }
 
 Bool
+openImageFile (const char *filename,
+	       char	  **returnFilename,
+	       FILE	  **returnFile)
+{
+    FILE *file;
+    char *image = NULL;
+
+    file = fopen (filename, "r");
+    if (!file)
+    {
+	char *home;
+
+	home = getenv ("HOME");
+	if (home)
+	{
+	    image = malloc (strlen (home) +
+			    strlen (HOME_IMAGEDIR) +
+			    strlen (filename) + 3);
+	    if (image)
+	    {
+		sprintf (image, "%s/%s/%s", home, HOME_IMAGEDIR, filename);
+		file = fopen (image, "r");
+		if (!file)
+		{
+		    free (image);
+		    image = NULL;
+		}
+	    }
+	}
+
+	if (!file)
+	{
+	    image = malloc (strlen (IMAGEDIR) + strlen (filename) + 2);
+	    if (image)
+	    {
+		sprintf (image, "%s/%s", IMAGEDIR, filename);
+		file = fopen (image, "r");
+	    }
+
+	    if (!file)
+	    {
+		if (image)
+		    free (image);
+
+		return FALSE;
+	    }
+	}
+    }
+
+    if (returnFilename)
+    {
+	if (image)
+	    *returnFilename = image;
+	else
+	    *returnFilename = strdup (filename);
+    }
+    else
+    {
+	if (image)
+	    free (image);
+    }
+
+    if (returnFile)
+    {
+	*returnFile = file;
+    }
+    else
+    {
+	fclose (file);
+    }
+
+    return TRUE;
+}
+
+Bool
 readPng (const char   *filename,
 	 char	      **data,
 	 unsigned int *width,
@@ -150,39 +225,8 @@ readPng (const char   *filename,
     png_info	  *info;
     Bool	  status;
 
-    file = fopen (filename, "r");
-    if (!file)
-    {
-	char *home, *imagedir;
-
-	home = getenv ("HOME");
-	if (home)
-	{
-	    imagedir = malloc (strlen (home) +
-			       strlen (HOME_IMAGEDIR) +
-			       strlen (filename) + 3);
-	    if (imagedir)
-	    {
-		sprintf (imagedir, "%s/%s/%s", home, HOME_IMAGEDIR, filename);
-		file = fopen (imagedir, "r");
-		free (imagedir);
-	    }
-	}
-
-	if (!file)
-	{
-	    imagedir = malloc (strlen (IMAGEDIR) + strlen (filename) + 2);
-	    if (imagedir)
-	    {
-		sprintf (imagedir, "%s/%s", IMAGEDIR, filename);
-		file = fopen (imagedir, "r");
-		free (imagedir);
-	    }
-
-	    if (!file)
-		return FALSE;
-	}
-    }
+    if (!openImageFile (filename, NULL, &file))
+	return FALSE;
 
     sig_bytes = fread (png_sig, 1, PNG_SIG_SIZE, file);
     if (png_check_sig (png_sig, sig_bytes) == 0)

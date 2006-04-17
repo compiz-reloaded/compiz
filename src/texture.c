@@ -142,11 +142,7 @@ readImageToTexture (CompScreen   *screen,
     Bool	 status;
 
     if (!readPng (imageFileName, &image, &width, &height))
-    {
-	fprintf (stderr, "%s: Failed to load image: %s\n",
-		 programName, imageFileName);
 	return FALSE;
-    }
 
     status = imageToTexture (screen, texture, image, width, height);
 
@@ -172,10 +168,7 @@ readImageBufferToTexture (CompScreen	      *screen,
     Bool	 status;
 
     if (!readPngBuffer (imageBuffer, &image, &width, &height))
-    {
-	fprintf (stderr, "%s: Failed to load image buffer\n", programName);
 	return FALSE;
-    }
 
     status = imageToTexture (screen, texture, image, width, height);
 

@@ -50,6 +50,8 @@
 
 #define CUBE_IN_DEFAULT FALSE
 
+#define CUBE_SCALE_IMAGE_DEFAULT FALSE
+
 #define CUBE_NEXT_KEY_DEFAULT       "space"
 #define CUBE_NEXT_MODIFIERS_DEFAULT CompPressMask
 
@@ -69,13 +71,14 @@ typedef struct _CubeDisplay {
 
 #define CUBE_SCREEN_OPTION_COLOR        0
 #define CUBE_SCREEN_OPTION_IN           1
-#define CUBE_SCREEN_OPTION_SVGS         2
-#define CUBE_SCREEN_OPTION_NEXT         3
-#define CUBE_SCREEN_OPTION_PREV         4
-#define CUBE_SCREEN_OPTION_SKYDOME      5
-#define CUBE_SCREEN_OPTION_SKYDOME_IMG  6
-#define CUBE_SCREEN_OPTION_SKYDOME_ANIM 7
-#define CUBE_SCREEN_OPTION_NUM          8
+#define CUBE_SCREEN_OPTION_SCALE_IMAGE  2
+#define CUBE_SCREEN_OPTION_IMAGES       3
+#define CUBE_SCREEN_OPTION_NEXT         4
+#define CUBE_SCREEN_OPTION_PREV         5
+#define CUBE_SCREEN_OPTION_SKYDOME      6
+#define CUBE_SCREEN_OPTION_SKYDOME_IMG  7
+#define CUBE_SCREEN_OPTION_SKYDOME_ANIM 8
+#define CUBE_SCREEN_OPTION_NUM          9
 
 typedef struct _CubeScreen {
     PaintTransformedScreenProc paintTransformedScreen;
@@ -101,12 +104,13 @@ typedef struct _CubeScreen {
     int		    pw, ph;
     CompTexture     texture, sky;
 
+    int		    imgNFile;
+    int		    imgCurFile;
+    CompOptionValue *imgFiles;
+
 #ifdef USE_LIBSVG_CAIRO
     cairo_t	    *cr;
     svg_cairo_t	    *svgc;
-    int		    svgNFile;
-    int		    svgCurFile;
-    CompOptionValue *svgFiles;
 #endif
 
 } CubeScreen;
@@ -125,7 +129,6 @@ typedef struct _CubeScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-#ifdef USE_LIBSVG_CAIRO
 static void
 cubeInitSvg (CompScreen *s)
 
@@ -134,8 +137,12 @@ cubeInitSvg (CompScreen *s)
 
     cs->pixmap = None;
     cs->pw = cs->ph = 0;
+
+#ifdef USE_LIBSVG_CAIRO
     cs->cr = 0;
     cs->svgc = 0;
+#endif
+
 }
 
 static void
@@ -144,144 +151,204 @@ cubeFiniSvg (CompScreen *s)
 {
     CUBE_SCREEN (s);
 
+#ifdef USE_LIBSVG_CAIRO
     if (cs->svgc)
 	svg_cairo_destroy (cs->svgc);
 
     if (cs->cr)
 	cairo_destroy (cs->cr);
+#endif
 
     if (cs->pixmap)
 	XFreePixmap (s->display->display, cs->pixmap);
 }
 
-static void
-cubeLoadSvg (CompScreen *s,
-	     int	n)
+static Bool
+readSvgToTexture (CompScreen   *s,
+		  CompTexture  *texture,
+		  const char   *svgFileName,
+		  unsigned int *returnWidth,
+		  unsigned int *returnHeight)
 {
-    unsigned int width, height;
+
+#ifdef USE_LIBSVG_CAIRO
+    unsigned int  width, height, pw, ph;
+    char	 *name;
 
     CUBE_SCREEN (s);
-
-    if (!cs->svgNFile || cs->pw != s->width || cs->ph != s->height)
-    {
-	finiTexture (s, &cs->texture);
-	initTexture (s, &cs->texture);
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
-
-	if (!cs->svgNFile)
-	    return;
-    }
-
-    if (!cs->pixmap)
-    {
-	cairo_surface_t *surface;
-	Visual		*visual;
-	int		depth;
-
-	cs->pw = s->width;
-	cs->ph = s->height;
-
-	depth = DefaultDepth (s->display->display, s->screenNum);
-	cs->pixmap = XCreatePixmap (s->display->display, s->root,
-				    s->width, s->height,
-				    depth);
-
-	if (!bindPixmapToTexture (s, &cs->texture, cs->pixmap,
-				  s->width, s->height, depth))
-	{
-	    fprintf (stderr, "%s: Couldn't bind slide pixmap 0x%x to "
-		     "texture\n", programName, (int) cs->pixmap);
-	}
-
-	if (cs->texture.target == GL_TEXTURE_RECTANGLE_ARB)
-	{
-	    cs->tc[0] = s->width / 2.0f;
-	    cs->tc[1] = s->height / 2.0f;
-
-	    cs->tc[2] = s->width;
-	    cs->tc[3] = s->height;
-
-	    cs->tc[4] = 0.0f;
-	    cs->tc[5] = s->height;
-
-	    cs->tc[6] = 0.0f;
-	    cs->tc[7] = 0.0f;
-
-	    cs->tc[8] = s->width;
-	    cs->tc[9] = 0.0f;
-
-	    cs->tc[10] = s->width;
-	    cs->tc[11] = s->height;
-	}
-	else
-	{
-	    cs->tc[0] = 0.5f;
-	    cs->tc[1] = 0.5f;
-
-	    cs->tc[2] = 1.0f;
-	    cs->tc[3] = 1.0f;
-
-	    cs->tc[4] = 0.0f;
-	    cs->tc[5] = 1.0f;
-
-	    cs->tc[6] = 0.0f;
-	    cs->tc[7] = 0.0f;
-
-	    cs->tc[8] = 1.0f;
-	    cs->tc[9] = 0.0f;
-
-	    cs->tc[10] = 1.0;
-	    cs->tc[11] = 1.0f;
-	}
-
-	visual = DefaultVisual (s->display->display, s->screenNum);
-	surface = cairo_xlib_surface_create (s->display->display,
-					     cs->pixmap, visual,
-					     s->width, s->height);
-	cs->cr = cairo_create (surface);
-	cairo_surface_destroy (surface);
-    }
-
-    cs->svgCurFile = n % cs->svgNFile;
 
     if (cs->svgc)
 	svg_cairo_destroy (cs->svgc);
 
     if (svg_cairo_create (&cs->svgc))
-    {
-	fprintf (stderr, "%s: Failed to create svg_cairo_t.\n",
-		 programName);
-	return;
-    }
+	return FALSE;
 
-    svg_cairo_set_viewport_dimension (cs->svgc, s->width, s->height);
+    if (!openImageFile (svgFileName, &name, NULL))
+	return FALSE;
 
-    if (svg_cairo_parse (cs->svgc, cs->svgFiles[cs->svgCurFile].s))
-    {
-	fprintf (stderr, "%s: Failed to load svg: %s.\n",
-		 programName, cs->svgFiles[cs->svgCurFile].s);
-	return;
-    }
+    if (svg_cairo_parse (cs->svgc, name) != SVG_CAIRO_STATUS_SUCCESS)
+	return FALSE;
+
+    free (name);
 
     svg_cairo_get_size (cs->svgc, &width, &height);
+
+    if (cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE].value.b)
+    {
+	pw = s->width;
+	ph = s->height;
+    }
+    else
+    {
+	pw = width;
+	ph = height;
+    }
+
+    svg_cairo_set_viewport_dimension (cs->svgc, pw, ph);
+
+    if (!cs->pixmap || cs->pw != pw || cs->ph != ph)
+    {
+	cairo_surface_t *surface;
+	Visual		*visual;
+	int		depth;
+
+	if (cs->pixmap)
+	    XFreePixmap (s->display->display, cs->pixmap);
+
+	cs->pw = width;
+	cs->ph = height;
+
+	depth = DefaultDepth (s->display->display, s->screenNum);
+	cs->pixmap = XCreatePixmap (s->display->display, s->root,
+				    cs->pw, cs->ph,
+				    depth);
+
+	if (!bindPixmapToTexture (s, texture, cs->pixmap,
+				  cs->pw, cs->ph, depth))
+	{
+	    fprintf (stderr, "%s: Couldn't bind slide pixmap 0x%x to "
+		     "texture\n", programName, (int) cs->pixmap);
+
+	    return FALSE;
+	}
+
+	visual = DefaultVisual (s->display->display, s->screenNum);
+	surface = cairo_xlib_surface_create (s->display->display,
+					     cs->pixmap, visual,
+					     cs->pw, cs->ph);
+	cs->cr = cairo_create (surface);
+	cairo_surface_destroy (surface);
+    }
 
     cairo_save (cs->cr);
     cairo_set_source_rgb (cs->cr,
 			  (double) cs->color[0] / 0xffff,
 			  (double) cs->color[1] / 0xffff,
 			  (double) cs->color[2] / 0xffff);
-    cairo_rectangle (cs->cr, 0, 0, s->width, s->height);
+    cairo_rectangle (cs->cr, 0, 0, cs->pw, cs->ph);
     cairo_fill (cs->cr);
 
-    cairo_scale (cs->cr,
-		 (double) s->width / width,
-		 (double) s->height / height);
+    cairo_scale (cs->cr, (double) cs->pw / width, (double) cs->ph / height);
 
     svg_cairo_render (cs->svgc, cs->cr);
     cairo_restore (cs->cr);
-}
+
+    *returnWidth  = cs->pw;
+    *returnHeight = cs->ph;
+
+    return TRUE;
+#else
+    return FALSE;
 #endif
+
+}
+
+static void
+cubeLoadImg (CompScreen *s,
+	     int	n)
+{
+    unsigned int width, height;
+
+    CUBE_SCREEN (s);
+
+    if (!cs->imgNFile || cs->pw != s->width || cs->ph != s->height)
+    {
+	finiTexture (s, &cs->texture);
+	initTexture (s, &cs->texture);
+	cubeFiniSvg (s);
+	cubeInitSvg (s);
+
+	if (!cs->imgNFile)
+	    return;
+    }
+
+    cs->imgCurFile = n % cs->imgNFile;
+
+    if (readImageToTexture (s, &cs->texture,
+			    cs->imgFiles[cs->imgCurFile].s,
+			    &width, &height))
+    {
+	cubeFiniSvg (s);
+	cubeInitSvg (s);
+    }
+    else if (!readSvgToTexture (s, &cs->texture,
+				cs->imgFiles[cs->imgCurFile].s,
+				&width, &height))
+    {
+	fprintf (stderr, "%s: Failed to load slide: %s\n",
+		 programName, cs->imgFiles[cs->imgCurFile].s);
+
+	finiTexture (s, &cs->texture);
+	initTexture (s, &cs->texture);
+	cubeFiniSvg (s);
+	cubeInitSvg (s);
+
+	return;
+    }
+
+    cs->tc[0] = COMP_TEX_COORD_X (&cs->texture.matrix, width / 2.0f);
+    cs->tc[1] = COMP_TEX_COORD_Y (&cs->texture.matrix, height / 2.0f);
+
+    if (cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE].value.b)
+    {
+	cs->tc[2] = COMP_TEX_COORD_X (&cs->texture.matrix, width);
+	cs->tc[3] = COMP_TEX_COORD_Y (&cs->texture.matrix, 0.0f);
+
+	cs->tc[4] = COMP_TEX_COORD_X (&cs->texture.matrix, 0.0f);
+	cs->tc[5] = COMP_TEX_COORD_Y (&cs->texture.matrix, 0.0f);
+
+	cs->tc[6] = COMP_TEX_COORD_X (&cs->texture.matrix, 0.0f);
+	cs->tc[7] = COMP_TEX_COORD_Y (&cs->texture.matrix, height);
+
+	cs->tc[8] = COMP_TEX_COORD_X (&cs->texture.matrix, width);
+	cs->tc[9] = COMP_TEX_COORD_Y (&cs->texture.matrix, height);
+
+	cs->tc[10] = COMP_TEX_COORD_X (&cs->texture.matrix, width);
+	cs->tc[11] = COMP_TEX_COORD_Y (&cs->texture.matrix, 0.0f);
+    }
+    else
+    {
+	float x1 = width  / 2.0f - s->width  / 2.0f;
+	float y1 = height / 2.0f - s->height / 2.0f;
+	float x2 = width  / 2.0f + s->width  / 2.0f;
+	float y2 = height / 2.0f + s->height / 2.0f;
+
+	cs->tc[2] = COMP_TEX_COORD_X (&cs->texture.matrix, x2);
+	cs->tc[3] = COMP_TEX_COORD_Y (&cs->texture.matrix, y1);
+
+	cs->tc[4] = COMP_TEX_COORD_X (&cs->texture.matrix, x1);
+	cs->tc[5] = COMP_TEX_COORD_Y (&cs->texture.matrix, y1);
+
+	cs->tc[6] = COMP_TEX_COORD_X (&cs->texture.matrix, x1);
+	cs->tc[7] = COMP_TEX_COORD_Y (&cs->texture.matrix, y2);
+
+	cs->tc[8] = COMP_TEX_COORD_X (&cs->texture.matrix, x2);
+	cs->tc[9] = COMP_TEX_COORD_Y (&cs->texture.matrix, y2);
+
+	cs->tc[10] = COMP_TEX_COORD_X (&cs->texture.matrix, x2);
+	cs->tc[11] = COMP_TEX_COORD_Y (&cs->texture.matrix, y1);
+    }
+}
 
 static Bool
 cubeUpdateGeometry (CompScreen *s,
@@ -633,17 +700,23 @@ cubeSetScreenOption (CompScreen      *screen,
 		return TRUE;
 	}
 	break;
-    case CUBE_SCREEN_OPTION_SVGS:
+    case CUBE_SCREEN_OPTION_SCALE_IMAGE:
+	if (compSetBoolOption (o, value))
+	{
+	    cubeLoadImg (screen, cs->imgCurFile);
+	    damageScreen (screen);
+
+	    return TRUE;
+	}
+	break;
+    case CUBE_SCREEN_OPTION_IMAGES:
 	if (compSetOptionList (o, value))
 	{
+	    cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
+	    cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
 
-#ifdef USE_LIBSVG_CAIRO
-	    cs->svgFiles = cs->opt[CUBE_SCREEN_OPTION_SVGS].value.list.value;
-	    cs->svgNFile = cs->opt[CUBE_SCREEN_OPTION_SVGS].value.list.nValue;
-
-	    cubeLoadSvg (screen, cs->svgCurFile);
+	    cubeLoadImg (screen, cs->imgCurFile);
 	    damageScreen (screen);
-#endif
 
 	    return TRUE;
 	}
@@ -711,10 +784,18 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_IN_DEFAULT;
 
-    o = &cs->opt[CUBE_SCREEN_OPTION_SVGS];
-    o->name	         = "svgs";
-    o->shortDesc         = "SVG files";
-    o->longDesc	         = "List of SVG files rendered on top face of cube";
+    o = &cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE];
+    o->name	  = "scale_image";
+    o->shortDesc  = "Scale image";
+    o->longDesc	  = "Scale images to cover top face of cube";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = CUBE_SCALE_IMAGE_DEFAULT;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_IMAGES];
+    o->name	         = "images";
+    o->shortDesc         = "Image files";
+    o->longDesc	         = "List of PNG and SVG files that should be rendered "
+	"on top face of cube";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = 0;
@@ -945,7 +1026,6 @@ cubePaintBackground (CompScreen   *s,
     WRAP (cs, s, paintBackground, cubePaintBackground);
 }
 
-#ifdef USE_LIBSVG_CAIRO
 static void
 cubeHandleEvent (CompDisplay *d,
 		 XEvent      *event)
@@ -964,19 +1044,19 @@ cubeHandleEvent (CompDisplay *d,
 
 	    if (EV_KEY (&cs->opt[CUBE_SCREEN_OPTION_NEXT], event))
 	    {
-		if (cs->svgNFile)
+		if (cs->imgNFile)
 		{
-		    cubeLoadSvg (s, (cs->svgCurFile + 1) % cs->svgNFile);
+		    cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
 		    damageScreen (s);
 		}
 	    }
 
 	    if (EV_KEY (&cs->opt[CUBE_SCREEN_OPTION_PREV], event))
 	    {
-		if (cs->svgNFile)
+		if (cs->imgNFile)
 		{
-		    cubeLoadSvg (s, (cs->svgCurFile - 1 + cs->svgNFile) %
-				 cs->svgNFile);
+		    cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) %
+				 cs->imgNFile);
 		    damageScreen (s);
 		}
 	    }
@@ -991,14 +1071,14 @@ cubeHandleEvent (CompDisplay *d,
 
 	    if (EV_BUTTON (&cs->opt[CUBE_SCREEN_OPTION_NEXT], event))
 	    {
-		cubeLoadSvg (s, (cs->svgCurFile + 1) % cs->svgNFile);
+		cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
 		damageScreen (s);
 	    }
 
 	    if (EV_BUTTON (&cs->opt[CUBE_SCREEN_OPTION_PREV], event))
 	    {
-		cubeLoadSvg (s, (cs->svgCurFile - 1 + cs->svgNFile) %
-			     cs->svgNFile);
+		cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) %
+			     cs->imgNFile);
 		damageScreen (s);
 	    }
 	}
@@ -1010,7 +1090,6 @@ cubeHandleEvent (CompDisplay *d,
     (*d->handleEvent) (d, event);
     WRAP (cd, d, handleEvent, cubeHandleEvent);
 }
-#endif
 
 static Bool
 cubeSetGlobalScreenOption (CompScreen      *s,
@@ -1048,9 +1127,7 @@ cubeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-#ifdef USE_LIBSVG_CAIRO
     WRAP (cd, d, handleEvent, cubeHandleEvent);
-#endif
 
     d->privates[displayPrivateIndex].ptr = cd;
 
@@ -1065,9 +1142,7 @@ cubeFiniDisplay (CompPlugin  *p,
 
     freeScreenPrivateIndex (d, cd->screenPrivateIndex);
 
-#ifdef USE_LIBSVG_CAIRO
     UNWRAP (cd, d, handleEvent);
-#endif
 
     free (cd);
 }
@@ -1106,13 +1181,11 @@ cubeInitScreen (CompPlugin *p,
     initTexture (s, &cs->texture);
     initTexture (s, &cs->sky);
 
-#ifdef USE_LIBSVG_CAIRO
     cubeInitSvg (s);
 
-    cs->svgFiles   = 0;
-    cs->svgNFile   = 0;
-    cs->svgCurFile = 0;
-#endif
+    cs->imgFiles   = 0;
+    cs->imgNFile   = 0;
+    cs->imgCurFile = 0;
 
     cubeScreenInitOptions (cs, s->display->display);
 
@@ -1142,9 +1215,7 @@ cubeFiniScreen (CompPlugin *p,
     finiTexture (s, &cs->texture);
     finiTexture (s, &cs->sky);
 
-#ifdef USE_LIBSVG_CAIRO
     cubeFiniSvg (s);
-#endif
 
     free (cs);
 }

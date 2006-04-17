@@ -1,3 +1,12 @@
+2006-04-17  David Reveman  <davidr@novell.com>
+
+	* include/compiz.h:
+	* src/readpng.c: Add openImageFile.
+
+	* plugins/cube.c: Support for PNGs on top face.
+	Add scale image option which is used to determine if top face
+	image should be scaled or not.
+
 2006-04-15  David Reveman  <davidr@novell.com>
 
 	* plugins/wobbly.c: Add modal dialog type to default list of windows

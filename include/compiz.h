@@ -26,6 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
+#include <stdio.h>
 #include <sys/time.h>
 
 #include <X11/Xlib.h>
@@ -196,6 +197,11 @@ freePrivateIndex (int  len,
 
 
 /* readpng.c */
+
+Bool
+openImageFile (const char *filename,
+	       char	  **returnFilename,
+	       FILE	  **returnFile);
 
 Bool
 readPng (const char   *filename,
