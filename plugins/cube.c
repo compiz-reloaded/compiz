@@ -50,6 +50,11 @@
 
 #define CUBE_IN_DEFAULT FALSE
 
+static char *cubeImages[] = {
+    "novell.png"
+};
+#define N_CUBE_IMAGES (sizeof (cubeImages) / sizeof (cubeImages[0]))
+
 #define CUBE_SCALE_IMAGE_DEFAULT FALSE
 
 #define CUBE_NEXT_KEY_DEFAULT       "space"
@@ -766,6 +771,7 @@ cubeScreenInitOptions (CubeScreen *cs,
 		       Display    *display)
 {
     CompOption *o;
+    int	       i;
 
     o = &cs->opt[CUBE_SCREEN_OPTION_COLOR];
     o->name	  = "color";
@@ -798,8 +804,10 @@ cubeScreenInitOptions (CubeScreen *cs,
 	"on top face of cube";
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = 0;
-    o->value.list.value  = 0;
+    o->value.list.nValue = N_CUBE_IMAGES;
+    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_CUBE_IMAGES);
+    for (i = 0; i < N_CUBE_IMAGES; i++)
+	o->value.list.value[i].s = strdup (cubeImages[i]);
     o->rest.s.string     = 0;
     o->rest.s.nString    = 0;
 
@@ -1189,12 +1197,21 @@ cubeInitScreen (CompPlugin *p,
 
     cubeScreenInitOptions (cs, s->display->display);
 
+    cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
+    cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
+
     WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
 
     if (!cubeUpdateGeometry (s, s->size, cs->invert))
 	return FALSE;
+
+    if (cs->imgNFile)
+    {
+	cubeLoadImg (s, cs->imgCurFile);
+	damageScreen (s);
+    }
 
     return TRUE;
 }

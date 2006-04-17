@@ -1,6 +1,9 @@
 2006-04-17  David Reveman  <davidr@novell.com>
 
+	* plugins/cube.c: Put PNG on top face by default.
+
 	* images/Makefile.am: Remove window.png.
+	Add novell.png.
 
 	* include/compiz.h:
 	* src/readpng.c: Add openImageFile.
