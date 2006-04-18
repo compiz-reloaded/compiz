@@ -41,7 +41,6 @@ char **programArgv;
 int  programArgc;
 
 char *backgroundImage = "background.png";
-char *windowImage = "window.png";
 
 REGION   emptyRegion;
 REGION   infiniteRegion;
@@ -82,18 +81,17 @@ usage (void)
     printf ("Usage: %s "
 	    "[--display DISPLAY] "
 	    "[--bg-image PNG] "
-	    "[--window-image PNG]\n       "
-	    "[--refresh-rate RATE] "
+	    "[--refresh-rate RATE]\n       "
 	    "[--fast-filter] "
-	    "[--indirect-rendering]\n       "
+	    "[--indirect-rendering] "
 	    "[--strict-binding] "
-	    "[--test-mode] "
+	    "[--test-mode]\n       "
 	    "[--replace] "
-	    "[--sm-disable]\n       "
+	    "[--sm-disable] "
 	    "[--sm-save-file] "
 	    "[--sm-client-id] "
-	    "[--version] "
-	    "[--help]\n       "
+	    "[--version]\n       "
+	    "[--help] "
 	    "[PLUGIN]...\n",
 	    programName);
 }
@@ -206,11 +204,6 @@ main (int argc, char **argv)
 	{
 	    if (i + 1 < argc)
 		backgroundImage = argv[++i];
-	}
-	else if (!strcmp (argv[i], "--window-image"))
-	{
-	    if (i + 1 < argc)
-		windowImage = argv[++i];
 	}
 	else
 	{

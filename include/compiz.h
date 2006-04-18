@@ -143,7 +143,6 @@ extern char       *programName;
 extern char       **programArgv;
 extern int        programArgc;
 extern char       *backgroundImage;
-extern char       *windowImage;
 extern REGION     emptyRegion;
 extern REGION     infiniteRegion;
 extern GLushort   defaultColor[4];
@@ -153,6 +152,7 @@ extern CompWindow *lastFoundWindow;
 extern CompWindow *lastDamagedWindow;
 extern Bool       replaceCurrentWm;
 extern Bool       indirectRendering;
+extern Bool       strictBinding;
 
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
@@ -885,7 +885,8 @@ enableTextureClampToEdge (CompScreen	    *screen,
 			  CompTextureFilter filter);
 
 void
-disableTexture (CompTexture *texture);
+disableTexture (CompScreen  *screen,
+		CompTexture *texture);
 
 
 /* screen.c */
