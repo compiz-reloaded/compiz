@@ -362,10 +362,59 @@ resizeUpdateWindowSize (CompDisplay *d)
     }
 }
 
-static void
+void
+reszieConstrainMinMax (CompWindow *w,
+		       int        width,
+		       int        height,
+		       int        *newWidth,
+		       int        *newHeight)
+{
+    const XSizeHints *hints = &w->sizeHints;
+    int		     min_width = 0;
+    int		     min_height = 0;
+    int		     max_width = MAXSHORT;
+    int		     max_height = MAXSHORT;
+
+    if ((hints->flags & PBaseSize) && (hints->flags & PMinSize))
+    {
+	min_width = hints->min_width;
+	min_height = hints->min_height;
+    }
+    else if (hints->flags & PBaseSize)
+    {
+	min_width = hints->base_width;
+	min_height = hints->base_height;
+    }
+    else if (hints->flags & PMinSize)
+    {
+	min_width = hints->min_width;
+	min_height = hints->min_height;
+    }
+
+    if (hints->flags & PMaxSize)
+    {
+	max_width = hints->max_width;
+	max_height = hints->max_height;
+    }
+
+#define CLAMP(v, min, max) ((v) <= (min) ? (min) : (v) >= (max) ? (max) : (v))
+
+    /* clamp width and height to min and max values */
+    width  = CLAMP (width, min_width, max_width);
+    height = CLAMP (height, min_height, max_height);
+
+#undef CLAMP
+
+    *newWidth  = width;
+    *newHeight = height;
+}
+
+static Bool
 resizeHandleMotionEvent (CompScreen *s,
 			 int	    xRoot,
-			 int	    yRoot)
+			 int	    yRoot,
+			 int	    *wrapX,
+			 int	    *wrapY)
 {
     RESIZE_SCREEN (s);
 
@@ -380,26 +429,62 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	if (pointerDx || pointerDy)
 	{
+	    int w, h, dx, dy;
+
+	    w = rd->width;
+	    h = rd->height;
+
 	    if (rd->mask & ResizeLeftMask)
-		rd->width -= pointerDx;
+		w -= pointerDx;
 	    else if (rd->mask & ResizeRightMask)
-		rd->width += pointerDx;
+		w += pointerDx;
 
 	    if (rd->mask & ResizeUpMask)
-		rd->height -= pointerDy;
+		h -= pointerDy;
 	    else if (rd->mask & ResizeDownMask)
-		rd->height += pointerDy;
+		h += pointerDy;
+
+	    resizeConstrainMinMax (rd->w, w, h, &w, &h);
+
+	    if (rd->mask & ResizeLeftMask)
+		dx = rd->width - w;
+	    else if (rd->mask & ResizeRightMask)
+		dx = w - rd->width;
+	    else
+		dx = 0;
+
+	    if (rd->mask & ResizeUpMask)
+		dy = rd->height - h;
+	    else if (rd->mask & ResizeDownMask)
+		dy = h - rd->height;
+	    else
+		dy = 0;
+
+	    rd->width  = w;
+	    rd->height = h;
 
 	    resizeUpdateWindowSize (s->display);
+
+	    if (dx != pointerDx || dy != pointerDy)
+	    {
+		*wrapX = s->prevPointerX + dx;
+		*wrapY = s->prevPointerY + dy;
+
+		return TRUE;
+	    }
 	}
     }
+
+    return FALSE;
 }
 
 static void
 resizeHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
-    CompScreen *s;
+    CompScreen *s = NULL;
+    Bool       warp = FALSE;
+    int	       warpX = 0 , warpY = 0;
 
     RESIZE_DISPLAY (d);
 
@@ -475,17 +560,21 @@ resizeHandleEvent (CompDisplay *d,
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
-	    resizeHandleMotionEvent (s,
-				     event->xmotion.x_root,
-				     event->xmotion.y_root);
+	    warp = resizeHandleMotionEvent (s,
+					    event->xmotion.x_root,
+					    event->xmotion.y_root,
+					    &warpX,
+					    &warpY);
 	break;
     case EnterNotify:
     case LeaveNotify:
 	s = findScreenAtDisplay (d, event->xcrossing.root);
 	if (s)
-	    resizeHandleMotionEvent (s,
-				     event->xcrossing.x_root,
-				     event->xcrossing.y_root);
+	    warp = resizeHandleMotionEvent (s,
+					    event->xcrossing.x_root,
+					    event->xcrossing.y_root,
+					    &warpX,
+					    &warpY);
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->wmMoveResizeAtom)
@@ -544,7 +633,9 @@ resizeHandleEvent (CompDisplay *d,
 					    event->xclient.data.l[3] ?
 					    event->xclient.data.l[3] : -1);
 
-			    resizeHandleMotionEvent (w->screen, xRoot, yRoot);
+			    warp = resizeHandleMotionEvent (s = w->screen,
+							    xRoot, yRoot,
+							    &warpX, &warpY);
 			}
 		    }
 		}
@@ -577,6 +668,15 @@ resizeHandleEvent (CompDisplay *d,
     UNWRAP (rd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (rd, d, handleEvent, resizeHandleEvent);
+
+    if (warp)
+    {
+	s->prevPointerX = warpX;
+	s->prevPointerY = warpY;
+
+	XWarpPointer (d->display, None, s->root, 0, 0, 0, 0,
+		      warpX, warpY);
+    }
 }
 
 static Bool

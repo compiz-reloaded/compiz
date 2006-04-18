@@ -3189,7 +3189,7 @@ constrainNewWindowSize (CompWindow *w,
 		width -= delta;
 	    else
 	    {
-		delta = FLOOR64 (width * min_aspect_y / max_aspect_y - height,
+		delta = FLOOR64 (width * min_aspect_y / min_aspect_x - height,
 				 yinc);
 		if (height + delta <= max_height)
 		    height += delta;
@@ -3197,8 +3197,9 @@ constrainNewWindowSize (CompWindow *w,
 	}
     }
 
-#undef FLOOR
+#undef CLAMP
 #undef FLOOR64
+#undef FLOOR
 
     if (width != w->attrib.width || height != w->attrib.height)
     {
