@@ -29,13 +29,17 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#include <compiz.h>
+
 #include <glib.h>
 #include <glib/gprintf.h>
 #include <gconf/gconf-client.h>
 
-#include <compiz.h>
-
 #include <gconf-compiz-utils.h>
+
+/* From gconf-internal.h. Bleah. */
+int gconf_value_compare (const GConfValue *value_a,
+			 const GConfValue *value_b);
 
 #define KEY_CHANGE_TIMEOUT 250
 

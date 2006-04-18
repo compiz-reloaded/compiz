@@ -383,7 +383,6 @@ handleEvent (CompDisplay *d,
 	if (s)
 	{
 	    int	       eventMode = ReplayPointer;
-	    CompOption *opt;
 
 	    if (event->xbutton.button == Button1 ||
 		event->xbutton.button == Button3)
@@ -509,17 +508,16 @@ handleEvent (CompDisplay *d,
 	    s->prevPointerX = event->xbutton.x_root;
 	    s->prevPointerY = event->xbutton.y_root;
 
-	    opt = &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT];
-	    if (EV_BUTTON (opt, event))
+	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT], event))
 	    {
-		runCommand (s, opt->value.s);
+		runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
 		eventMode = AsyncPointer;
 	    }
 
-	    opt = &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT];
-	    if (EV_BUTTON (opt, event))
+	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT],
+			   event))
 	    {
-		runCommand (s, opt->value.s);
+		runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
 		eventMode = AsyncPointer;
 	    }
 
@@ -537,8 +535,6 @@ handleEvent (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xkey.root);
 	if (s)
 	{
-	    CompOption *opt;
-
 	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW], event))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
@@ -624,13 +620,12 @@ handleEvent (CompDisplay *d,
 		    changeWindowOpacity (w, -1);
 	    }
 
-	    opt = &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT];
-	    if (EV_KEY (opt, event))
-		runCommand (s, opt->value.s);
-
-	    opt = &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT];
-	    if (EV_KEY (opt, event))
-		runCommand (s, opt->value.s);
+	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT],
+			event))
+		runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
+	    else if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT],
+			     event))
+		runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
 
 	    s->prevPointerX = event->xkey.x_root;
 	    s->prevPointerY = event->xkey.y_root;

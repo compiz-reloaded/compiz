@@ -1,3 +1,21 @@
+2006-04-18  Dan Winship  <danw@novell.com>
+
+	* src/event.c (handleEvent): Fix a crasher in the screenshot
+	binding code (and rename some of the #defines to make them not so
+	ridiculously long). Also temporarily hack around a bug in EV_KEY
+	by putting the check for WINDOW_SCREENSHOT before the check for
+	SCREENSHOT.
+
+	* plugins/scale.c: Change the keybinding again, now to "Pause".
+	(F11 is the "fullscreen mode" binding for many apps.)
+
+	* plugins/compiz.schemas: update
+
+	* plugins/gconf.c: 
+	* plugins/gconf-compiz-utils.c: 
+	* plugins/gconf-dump.c: Rearrange #includes to prevent warning
+	about TRUE and FALSE being redefined
+
 2006-04-18  David Reveman  <davidr@novell.com>
 
 	* plugins/rotate.c (ROTATE_FLIPMOVE_DEFAULT): Changed to TRUE.

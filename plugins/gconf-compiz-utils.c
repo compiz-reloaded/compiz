@@ -26,11 +26,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <glib.h>
-#include <gconf/gconf-client.h>
 
 #include <compiz.h>
 
+#include <glib.h>
+#include <gconf/gconf-client.h>
 #include <gconf-compiz-utils.h>
 
 struct _GConfModifier {

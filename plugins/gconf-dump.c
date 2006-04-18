@@ -25,10 +25,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#include <gconf/gconf-client.h>
 
 #include <compiz.h>
 
+#include <gconf/gconf-client.h>
 #include <gconf-compiz-utils.h>
 
 static FILE *schemaFile;

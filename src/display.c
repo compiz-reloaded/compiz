@@ -113,15 +113,13 @@ static int               nWatchFds = 0;
 #define OPACITY_DECREASE_BUTTON_DEFAULT    Button5
 #define OPACITY_DECREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
-#define COMMAND_SCREENSHOT_DEFAULT               "gnome-screenshot"
-#define RUN_COMMAND_SCREENSHOT_KEY_DEFAULT       "Print"
-#define RUN_COMMAND_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask)
+#define SCREENSHOT_DEFAULT               "gnome-screenshot"
+#define RUN_SCREENSHOT_KEY_DEFAULT       "Print"
+#define RUN_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask)
 
-#define COMMAND_WINDOW_SCREENSHOT_DEFAULT \
-    "gnome-screenshot --window"
-#define RUN_COMMAND_WINDOW_SCREENSHOT_KEY_DEFAULT       "Print"
-#define RUN_COMMAND_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask | \
-							 CompAltMask)
+#define WINDOW_SCREENSHOT_DEFAULT               "gnome-screenshot --window"
+#define RUN_WINDOW_SCREENSHOT_KEY_DEFAULT       "Print"
+#define RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
@@ -362,44 +360,44 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.bind.u.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = OPACITY_DECREASE_BUTTON_DEFAULT;
 
-    o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT];
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT];
     o->name			  = "run_command_screenshot";
     o->shortDesc		  = "Take a screenshot";
     o->longDesc			  = "Take a screenshot";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = RUN_COMMAND_SCREENSHOT_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.modifiers = RUN_SCREENSHOT_MODIFIERS_DEFAULT;
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display->display,
-			  XStringToKeysym (RUN_COMMAND_SCREENSHOT_KEY_DEFAULT));
+			  XStringToKeysym (RUN_SCREENSHOT_KEY_DEFAULT));
 
-    o = &display->opt[COMP_DISPLAY_OPTION_COMMAND_SCREENSHOT];
+    o = &display->opt[COMP_DISPLAY_OPTION_SCREENSHOT];
     o->name			  = "command_screenshot";
     o->shortDesc		  = "Screenshot command line";
     o->longDesc			  = "Screenshot command line";
     o->type			  = CompOptionTypeString;
-    o->value.s			  = strdup (COMMAND_SCREENSHOT_DEFAULT);
+    o->value.s			  = strdup (SCREENSHOT_DEFAULT);
     o->rest.s.string		  = NULL;
     o->rest.s.nString		  = 0;
 
-    o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT];
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT];
     o->name			  = "run_command_window_screenshot";
     o->shortDesc		  = "Take a screenshot of a window";
     o->longDesc			  = "Take a screenshot of a window";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers =
-	RUN_COMMAND_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT;
+	RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT;
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display->display,
-			  XStringToKeysym (RUN_COMMAND_WINDOW_SCREENSHOT_KEY_DEFAULT));
+			  XStringToKeysym (RUN_WINDOW_SCREENSHOT_KEY_DEFAULT));
 
-    o = &display->opt[COMP_DISPLAY_OPTION_COMMAND_WINDOW_SCREENSHOT];
+    o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT];
     o->name			  = "command_window_screenshot";
     o->shortDesc		  = "Window screenshot command line";
     o->longDesc			  = "Window screenshot command line";
     o->type			  = CompOptionTypeString;
-    o->value.s			  = strdup (COMMAND_WINDOW_SCREENSHOT_DEFAULT);
+    o->value.s			  = strdup (WINDOW_SCREENSHOT_DEFAULT);
     o->rest.s.string		  = NULL;
     o->rest.s.nString		  = 0;
 }
@@ -493,8 +491,8 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_COMMAND9:
     case COMP_DISPLAY_OPTION_COMMAND10:
     case COMP_DISPLAY_OPTION_COMMAND11:
-    case COMP_DISPLAY_OPTION_COMMAND_SCREENSHOT:
-    case COMP_DISPLAY_OPTION_COMMAND_WINDOW_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT:
 	if (compSetStringOption (o, value))
 	    return TRUE;
 	break;
@@ -520,8 +518,8 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_LOWER_WINDOW:
     case COMP_DISPLAY_OPTION_OPACITY_INCREASE:
     case COMP_DISPLAY_OPTION_OPACITY_DECREASE:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_RUN_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT:
 	if (addDisplayBinding (display, &value->bind))
 	{
 	    removeDisplayBinding (display, &o->value.bind);
@@ -1507,8 +1505,8 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
 		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE].value.bind);
     addScreenBinding (s,
 		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_SCREENSHOT].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND_WINDOW_SCREENSHOT].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.bind);
 }
 
 void
