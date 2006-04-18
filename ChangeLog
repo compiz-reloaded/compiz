@@ -1,3 +1,11 @@
+2006-04-19  David Reveman  <davidr@novell.com>
+
+	* plugins/water.c:
+	* plugins/cube.c:
+	* src/texture.c:
+	* src/paint.c:
+	* src/main.c: Add strict-binding option.
+
 2006-04-18  Dan Winship  <danw@novell.com>
 
 	* src/event.c (handleEvent): Fix a crasher in the screenshot

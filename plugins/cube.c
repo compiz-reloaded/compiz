@@ -665,7 +665,7 @@ cubeUpdateSkyDomeList (CompScreen *s,
 
     glEnd ();
 
-    disableTexture (&cs->sky);
+    disableTexture (s, &cs->sky);
 
     glEndList ();
 
@@ -948,7 +948,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
 	    glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
 	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
-	    disableTexture (&cs->texture);
+	    disableTexture (s, &cs->texture);
 	}
 	else
 	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);

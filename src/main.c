@@ -74,6 +74,7 @@ CompWindow *lastDamagedWindow = 0;
 
 Bool replaceCurrentWm = FALSE;
 Bool indirectRendering = FALSE;
+Bool strictBinding = FALSE;
 
 static void
 usage (void)
@@ -84,10 +85,11 @@ usage (void)
 	    "[--window-image PNG]\n       "
 	    "[--refresh-rate RATE] "
 	    "[--fast-filter] "
-	    "[--indirect-rendering] "
+	    "[--indirect-rendering]\n       "
+	    "[--strict-binding] "
 	    "[--test-mode] "
-	    "[--replace]\n       "
-	    "[--sm-disable] "
+	    "[--replace] "
+	    "[--sm-disable]\n       "
 	    "[--sm-save-file] "
 	    "[--sm-client-id] "
 	    "[--version] "
@@ -177,6 +179,10 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--indirect-rendering"))
 	{
 	    indirectRendering = TRUE;
+	}
+	else if (!strcmp (argv[i], "--strict-binding"))
+	{
+	    strictBinding = TRUE;
 	}
 	else if (!strcmp (argv[i], "--replace"))
 	{

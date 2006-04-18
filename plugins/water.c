@@ -1222,7 +1222,7 @@ waterDrawWindowTexture (CompWindow		*w,
 
 	glBindTexture (ws->target, 0);
 	(*w->screen->activeTexture) (GL_TEXTURE0_ARB);
-	disableTexture (texture);
+	disableTexture (w->screen, texture);
 
 	glPopMatrix ();
 

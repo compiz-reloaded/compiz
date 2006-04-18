@@ -270,17 +270,20 @@ bindPixmapToTexture (CompScreen  *screen,
 
     glBindTexture (texture->target, texture->name);
 
-    if (!(*screen->bindTexImage) (screen->display->display,
-				  texture->pixmap,
-				  GLX_FRONT_LEFT_EXT,
-				  NULL))
+    if (!strictBinding)
     {
-	fprintf (stderr, "%s: glXBindTexImage failed\n", programName);
+	if (!(*screen->bindTexImage) (screen->display->display,
+				      texture->pixmap,
+				      GLX_FRONT_LEFT_EXT,
+				      NULL))
+	{
+	    fprintf (stderr, "%s: glXBindTexImage failed\n", programName);
 
-	glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
-	texture->pixmap = None;
+	    glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
+	    texture->pixmap = None;
 
-	return FALSE;
+	    return FALSE;
+	}
     }
 
     texture->filter = GL_NEAREST;
@@ -305,11 +308,14 @@ releasePixmapFromTexture (CompScreen  *screen,
     if (texture->pixmap)
     {
 	glEnable (texture->target);
-	glBindTexture (texture->target, texture->name);
+	if (!strictBinding)
+	{
+	    glBindTexture (texture->target, texture->name);
 
-	(*screen->releaseTexImage) (screen->display->display,
-				    texture->pixmap,
-				    GLX_FRONT_LEFT_EXT);
+	    (*screen->releaseTexImage) (screen->display->display,
+					texture->pixmap,
+					GLX_FRONT_LEFT_EXT);
+	}
 
 	glBindTexture (texture->target, 0);
 	glDisable (texture->target);
@@ -327,6 +333,22 @@ enableTexture (CompScreen	 *screen,
 {
     glEnable (texture->target);
     glBindTexture (texture->target, texture->name);
+
+    if (strictBinding)
+    {
+	if (!(*screen->bindTexImage) (screen->display->display,
+				      texture->pixmap,
+				      GLX_FRONT_LEFT_EXT,
+				      NULL))
+	{
+	    fprintf (stderr, "%s: glXBindTexImage failed\n", programName);
+
+	    glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
+	    texture->pixmap = None;
+
+	    return;
+	}
+    }
 
     if (filter == COMP_TEXTURE_FILTER_FAST)
     {
@@ -392,8 +414,18 @@ enableTexture (CompScreen	 *screen,
 }
 
 void
-disableTexture (CompTexture *texture)
+disableTexture (CompScreen  *screen,
+		CompTexture *texture)
 {
-   glBindTexture (texture->target, 0);
-   glDisable (texture->target);
+    if (strictBinding)
+    {
+	glBindTexture (texture->target, texture->name);
+
+	(*screen->releaseTexImage) (screen->display->display,
+				    texture->pixmap,
+				    GLX_FRONT_LEFT_EXT);
+    }
+
+    glBindTexture (texture->target, 0);
+    glDisable (texture->target);
 }

@@ -638,7 +638,7 @@ drawWindowTexture (CompWindow		   *w,
 
 		(*w->screen->drawWindowGeometry) (w);
 
-		disableTexture (texture);
+		disableTexture (w->screen, texture);
 
 		glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
@@ -649,7 +649,7 @@ drawWindowTexture (CompWindow		   *w,
 		(*w->screen->drawWindowGeometry) (w);
 	    }
 
-	    disableTexture (texture);
+	    disableTexture (w->screen, texture);
 
 	    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
@@ -676,13 +676,13 @@ drawWindowTexture (CompWindow		   *w,
 	    (*w->screen->drawWindowGeometry) (w);
 	}
 
-	disableTexture (texture);
+	disableTexture (w->screen, texture);
 
 	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 	w->screen->activeTexture (GL_TEXTURE0_ARB);
 
-	disableTexture (texture);
+	disableTexture (w->screen, texture);
 
 	glColor4usv (defaultColor);
 	screenTexEnvMode (w->screen, GL_REPLACE);
@@ -734,7 +734,7 @@ drawWindowTexture (CompWindow		   *w,
 	    (*w->screen->drawWindowGeometry) (w);
 	}
 
-	disableTexture (texture);
+	disableTexture (w->screen, texture);
     }
 
     glPopMatrix ();
@@ -872,7 +872,7 @@ paintBackground (CompScreen   *s,
 
 	glDrawArrays (GL_QUADS, 0, nBox * 4);
 
-	disableTexture (bg);
+	disableTexture (s, bg);
     }
 
     if (mask & PAINT_BACKGROUND_WITH_STENCIL_MASK)
