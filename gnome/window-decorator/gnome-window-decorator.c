@@ -65,8 +65,7 @@
 #define TOP_SPACE    10
 #define BOTTOM_SPACE 14
 
-#define ICON_SPACE   20
-#define BUTTON_SPACE 52
+#define ICON_SPACE 20
 
 typedef struct _extents {
     gint left;
@@ -530,8 +529,8 @@ static quad _win_quads[] = {
 
 static quad _win_button_quads[] = {
     {
-	{ 0 /* + title width */, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ -BUTTON_SPACE, 0, GRAVITY_NORTH | GRAVITY_EAST },
+	{ 0 /* + title width  */, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
+	{ 0 /* - button width */, 0, GRAVITY_NORTH | GRAVITY_EAST },
 	SHRT_MAX, SHRT_MAX,
 	0,
 	{
@@ -542,7 +541,7 @@ static quad _win_button_quads[] = {
     }, {
 	{ 0 /* title width + 1 */, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
 	{ 0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	BUTTON_SPACE, SHRT_MAX,
+	0 /* button width */, SHRT_MAX,
 	ALIGN_RIGHT,
 	{
 	    1.0, 0.0,
@@ -688,9 +687,9 @@ static struct _pos {
 	{  2, 17, 10, 10,   1, 1, 0, 0 }
     }
 }, bpos[3] = {
-    { -10, 6, 16, 16,   1, 0, 0, 0 },
-    { -26, 6, 16, 16,   1, 0, 0, 0 },
-    { -42, 6, 16, 16,   1, 0, 0, 0 }
+    { 0, 6, 16, 16,   1, 0, 0, 0 },
+    { 0, 6, 16, 16,   1, 0, 0, 0 },
+    { 0, 6, 16, 16,   1, 0, 0, 0 }
 };
 
 typedef struct _decor_color {
@@ -709,6 +708,7 @@ typedef struct _decor {
     GdkPixmap	      *pixmap;
     GdkPixmap	      *buffer_pixmap;
     GdkGC	      *gc;
+    gint	      button_width;
     gint	      width;
     gint	      height;
     gboolean	      decorated;
@@ -859,15 +859,16 @@ decor_update_window_property (decor_t *d)
     quads[2].m.x0 = quads[4].m.x0 = quads[7].m.x0 = d->width - RIGHT_SPACE;
     quads[1].m.xx = 1.0;
 
-    quads[1].max_width = d->width - LEFT_SPACE - RIGHT_SPACE - BUTTON_SPACE;
+    quads[1].max_width = d->width - LEFT_SPACE - RIGHT_SPACE - d->button_width;
 
-    quads[8].p1.x = d->width - LEFT_SPACE - RIGHT_SPACE - BUTTON_SPACE;
-    quads[8].m.x0 = d->width - RIGHT_SPACE - BUTTON_SPACE;
+    quads[8].p1.x = d->width - LEFT_SPACE - RIGHT_SPACE - d->button_width;
+    quads[8].p2.x = -d->button_width;
+    quads[8].m.x0 = d->width - RIGHT_SPACE - d->button_width;
 
-    quads[9].p1.x = d->width - LEFT_SPACE - RIGHT_SPACE - BUTTON_SPACE;
-    quads[9].m.x0 = d->width - RIGHT_SPACE - BUTTON_SPACE;
+    quads[9].p1.x = d->width - LEFT_SPACE - RIGHT_SPACE - d->button_width;
+    quads[9].m.x0 = d->width - RIGHT_SPACE - d->button_width;
 
-    quads[9].max_width = BUTTON_SPACE;
+    quads[9].max_width = d->button_width;
 
     nQuad += nButtonQuad;
 
@@ -1237,6 +1238,7 @@ draw_window_decoration (decor_t *d)
     double        x1, y1, x2, y2, x, y;
     int		  corners = SHADE_LEFT | SHADE_RIGHT | SHADE_TOP | SHADE_BOTTOM;
     int		  top;
+    int		  button_x;
 
     if (!d->pixmap)
 	return;
@@ -1455,11 +1457,15 @@ draw_window_decoration (decor_t *d)
 
     cairo_set_line_width (cr, 2.0);
 
+    button_x = d->width - RIGHT_SPACE - 13;
+
     if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
     {
-	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 39.0,
+	button_state_offsets (button_x,
 			      titlebar_height / 2 + 3.0,
 			      d->button_states[0], &x, &y);
+
+	button_x -= 17;
 
 	if (d->active)
 	{
@@ -1480,9 +1486,11 @@ draw_window_decoration (decor_t *d)
 
     if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
     {
-	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 21.0,
+	button_state_offsets (button_x,
 			      titlebar_height / 2 + 3.0,
 			      d->button_states[1], &x, &y);
+
+	button_x -= 17;
 
 	cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 
@@ -1520,9 +1528,11 @@ draw_window_decoration (decor_t *d)
 
     if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
     {
-	button_state_offsets (d->width - RIGHT_SPACE - BUTTON_SPACE + 3.0,
+	button_state_offsets (button_x,
 			      titlebar_height / 2 + 3.0,
 			      d->button_states[2], &x, &y);
+
+	button_x -= 17;
 
 	if (d->active)
 	{
@@ -2218,6 +2228,7 @@ update_event_windows (WnckWindow *win)
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     gint    x0, y0, width, height, x, y, w, h;
     gint    i, j;
+    gint    button_x = 10;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
@@ -2277,6 +2288,9 @@ update_event_windows (WnckWindow *win)
 	    y = bpos[i].y + bpos[i].yh * height;
 	    w = bpos[i].w + bpos[i].ww * width;
 	    h = bpos[i].h + bpos[i].hh * height;
+
+	    x -= button_x;
+	    button_x += 16;
 
 	    XMapWindow (xdisplay, d->button_windows[i]);
 	    XMoveResizeWindow (xdisplay, d->button_windows[i], x, y, w, h);
@@ -2338,7 +2352,8 @@ update_window_decoration_name (WnckWindow *win)
     {
 	gint w, n_line;
 
-	w = d->width - LEFT_SPACE - RIGHT_SPACE - BUTTON_SPACE - ICON_SPACE - 4;
+	w  = d->width - LEFT_SPACE - RIGHT_SPACE - ICON_SPACE - 4;
+	w -= d->button_width;
 	if (w < 1)
 	    w = 1;
 
@@ -2421,6 +2436,40 @@ update_window_decoration_actions (WnckWindow *win)
 }
 
 static gboolean
+update_window_button_size (WnckWindow *win)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    gint    button_width;
+
+    button_width = 0;
+
+    if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
+	button_width += 17;
+
+    if (d->actions & (WNCK_WINDOW_ACTION_MAXIMIZE_HORIZONTALLY   |
+		      WNCK_WINDOW_ACTION_MAXIMIZE_VERTICALLY     |
+		      WNCK_WINDOW_ACTION_UNMAXIMIZE_HORIZONTALLY |
+		      WNCK_WINDOW_ACTION_UNMAXIMIZE_VERTICALLY))
+	button_width += 17;
+
+    if (d->actions & (WNCK_WINDOW_ACTION_MINIMIZE |
+		      WNCK_WINDOW_ACTION_MINIMIZE))
+	button_width += 17;
+
+    if (button_width)
+	button_width++;
+
+    if (button_width != d->button_width)
+    {
+	d->button_width = button_width;
+
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+static gboolean
 update_window_decoration_size (WnckWindow *win)
 {
     decor_t   *d = g_object_get_data (G_OBJECT (win), "decor");
@@ -2428,11 +2477,11 @@ update_window_decoration_size (WnckWindow *win)
     gint      width, height;
     gint      w;
 
-    width = max_window_name_width (win) + BUTTON_SPACE + ICON_SPACE;
+    width = max_window_name_width (win) + d->button_width + ICON_SPACE;
 
     wnck_window_get_geometry (win, NULL, NULL, &w, NULL);
     if (w < width)
-	width = MAX (ICON_SPACE + BUTTON_SPACE, w);
+	width = MAX (ICON_SPACE + d->button_width, w);
 
     width  += LEFT_SPACE + RIGHT_SPACE;
     height  = titlebar_height + TOP_SPACE + 1 + BOTTOM_SPACE;
@@ -2547,6 +2596,7 @@ add_frame_window (WnckWindow *win,
 	update_window_decoration_state (win);
 	update_window_decoration_actions (win);
 	update_window_decoration_icon (win);
+	update_window_button_size (win);
 	update_window_decoration_size (win);
 
 	update_event_windows (win);
@@ -2827,7 +2877,15 @@ window_actions_changed (WnckWindow *win)
     if (d->decorated)
     {
 	update_window_decoration_actions (win);
-	queue_decor_draw (d);
+	if (update_window_button_size (win))
+	{
+	    update_window_decoration_size (win);
+	    update_event_windows (win);
+	}
+	else
+	{
+	    queue_decor_draw (d);
+	}
     }
 }
 
@@ -2898,6 +2956,8 @@ window_opened (WnckScreen *screen,
 
     d->icon	   = NULL;
     d->icon_pixmap = NULL;
+
+    d->button_width = 0;
 
     d->width  = 0;
     d->height = 0;

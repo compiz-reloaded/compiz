@@ -520,7 +520,10 @@ recalcWindowActions (CompWindow *w)
 
     if (w->sizeHints.min_width  == w->sizeHints.max_width &&
 	w->sizeHints.min_height == w->sizeHints.max_height)
-	actions &= ~CompWindowActionResizeMask;
+	actions &= ~(CompWindowActionResizeMask	      |
+		     CompWindowActionMaximizeHorzMask |
+		     CompWindowActionMaximizeVertMask |
+		     CompWindowActionFullscreenMask);
 
     if (actions != w->actions)
     {

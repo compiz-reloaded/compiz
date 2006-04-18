@@ -1,5 +1,11 @@
 2006-04-18  David Reveman  <davidr@novell.com>
 
+	* src/window.c (recalcWindowActions): Remove maximize and fullscreen
+	actions when resizing isn't allowed.
+
+	* gnome/window-decorator/gnome-window-decorator.c: Dynamic positioning
+	of window buttons.
+
 	* plugins/cube.c (readSvgToTexture): Fix typo.
 
 	* plugins/resize.c: Constrain cursor movement to min/max window size.
