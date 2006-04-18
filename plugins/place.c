@@ -22,9 +22,10 @@
 
 #include <math.h>
 #include <stdlib.h>
-#include <glib.h>
 
 #include <compiz.h>
+
+#include <glib.h>
 
 #define PLACE_WORKAROUND_DEFAULT TRUE
 
