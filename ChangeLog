@@ -1,5 +1,7 @@
 2006-04-18  David Reveman  <davidr@novell.com>
 
+	* plugins/rotate.c (ROTATE_FLIPMOVE_DEFAULT): Changed to TRUE.
+
 	* src/window.c (recalcWindowActions): Remove maximize and fullscreen
 	actions when resizing isn't allowed.
 

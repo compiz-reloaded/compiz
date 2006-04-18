@@ -89,7 +89,7 @@
 #define ROTATE_FLIPTIME_MIN     0
 #define ROTATE_FLIPTIME_MAX     1000
 
-#define ROTATE_FLIPMOVE_DEFAULT FALSE
+#define ROTATE_FLIPMOVE_DEFAULT TRUE
 
 static int displayPrivateIndex;
 
