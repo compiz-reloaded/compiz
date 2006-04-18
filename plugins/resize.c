@@ -362,8 +362,8 @@ resizeUpdateWindowSize (CompDisplay *d)
     }
 }
 
-void
-reszieConstrainMinMax (CompWindow *w,
+static void
+resizeConstrainMinMax (CompWindow *w,
 		       int        width,
 		       int        height,
 		       int        *newWidth,
