@@ -220,8 +220,8 @@ readSvgToTexture (CompScreen   *s,
 	if (cs->pixmap)
 	    XFreePixmap (s->display->display, cs->pixmap);
 
-	cs->pw = width;
-	cs->ph = height;
+	cs->pw = pw;
+	cs->ph = ph;
 
 	depth = DefaultDepth (s->display->display, s->screenNum);
 	cs->pixmap = XCreatePixmap (s->display->display, s->root,

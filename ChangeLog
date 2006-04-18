@@ -1,5 +1,7 @@
 2006-04-18  David Reveman  <davidr@novell.com>
 
+	* plugins/cube.c (readSvgToTexture): Fix typo.
+
 	* plugins/resize.c: Constrain cursor movement to min/max window size.
 
 	* src/window.c (constrainNewWindowSize): Fix aspect ratio calculations.
