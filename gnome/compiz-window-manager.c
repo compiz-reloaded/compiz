@@ -54,6 +54,9 @@
 #define COMPIZ_TITLEBAR_FONT_KEY \
     GCONF_DIR "/titlebar_font"
 
+#define COMPIZ_THEME_KEY \
+    GCONF_DIR "/theme"
+
 enum {
     DOUBLE_CLICK_MAXIMIZE
 };
@@ -64,6 +67,7 @@ struct _CompizWindowManagerPrivate {
     GConfClient *gconf;
     gchar	*mouse_modifier;
     gchar	*font;
+    gchar	*theme;
 };
 
 static void
@@ -136,6 +140,11 @@ compiz_change_settings (GnomeWindowManager    *wm,
 				 value, NULL);
 	g_free (value);
     }
+
+    if (settings->flags & GNOME_WM_SETTING_THEME)
+	gconf_client_set_string (cwm->p->gconf,
+				 COMPIZ_THEME_KEY,
+				 settings->theme, NULL);
 
 /*
     if (settings->flags & GNOME_WM_SETTING_DOUBLE_CLICK_ACTION)
@@ -260,29 +269,28 @@ compiz_get_settings (GnomeWindowManager *wm,
 	settings->flags |= GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER;
     }
 
-    if (to_get & GNOME_WM_SETTING_DOUBLE_CLICK_ACTION)
+    if (to_get & GNOME_WM_SETTING_THEME)
     {
-/*
 	char *str;
 
 	str = gconf_client_get_string (cwm->p->gconf,
-				       COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY,
+				       COMPIZ_THEME_KEY,
 				       NULL);
 
 	if (str == NULL)
-	    str = g_strdup ("toggle_shade");
+	    str = g_strdup ("Atlanta");
 
-	if (strcmp (str, "toggle_shade") == 0)
-	    settings->double_click_action = DOUBLE_CLICK_SHADE;
-	else if (strcmp (str, "toggle_maximize") == 0)
-	    settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
-	else
-	    settings->double_click_action = DOUBLE_CLICK_SHADE;
+	g_free (cwm->p->theme);
+	cwm->p->theme = str;
+	settings->theme = cwm->p->theme;
 
-	g_free (str);
+	settings->flags |= GNOME_WM_SETTING_THEME;
+    }
 
+    if (to_get & GNOME_WM_SETTING_DOUBLE_CLICK_ACTION)
+    {
+	settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
 	settings->flags |= GNOME_WM_SETTING_DOUBLE_CLICK_ACTION;
-*/
     }
 }
 
@@ -295,8 +303,8 @@ compiz_get_settings_mask (GnomeWindowManager *wm)
 	GNOME_WM_SETTING_AUTORAISE           |
 	GNOME_WM_SETTING_AUTORAISE_DELAY     |
 	GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER |
-/*      GNOME_WM_SETTING_THEME               | */
-/*      GNOME_WM_SETTING_DOUBLE_CLICK_ACTION */ 0;
+	GNOME_WM_SETTING_THEME               |
+	GNOME_WM_SETTING_DOUBLE_CLICK_ACTION;
 }
 
 static GList *
@@ -347,6 +355,7 @@ compiz_window_manager_init (CompizWindowManager	     *cwm,
     cwm->p->gconf	   = gconf_client_get_default ();
     cwm->p->mouse_modifier = NULL;
     cwm->p->font	   = NULL;
+    cwm->p->theme	   = NULL;
 
     gconf_client_add_dir (cwm->p->gconf,
 			  "/apps/compiz",
@@ -384,6 +393,9 @@ compiz_window_manager_finalize (GObject *object)
 
     if (cwm->p->font)
 	g_free (cwm->p->font);
+
+    if (cwm->p->theme)
+	g_free (cwm->p->theme);
 
     g_object_unref (G_OBJECT (cwm->p->gconf));
     g_free (cwm->p);

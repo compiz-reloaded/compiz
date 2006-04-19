@@ -1,5 +1,8 @@
 2006-04-19  David Reveman  <davidr@novell.com>
 
+	* gnome/compiz-window-manager.c: Be nice to gnome-theme-manager
+	and return a theme even though we currently don't support it.
+
 	* include/compiz.h:
 	* src/main.c: Remove window-image option.
 
