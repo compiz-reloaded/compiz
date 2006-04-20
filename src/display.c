@@ -104,7 +104,7 @@ static int               nWatchFds = 0;
 #define MAXIMIZE_WINDOW_KEY_DEFAULT       "F10"
 #define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
-#define LOWER_WINDOW_BUTTON_DEFAULT    Button2
+#define LOWER_WINDOW_BUTTON_DEFAULT    6
 #define LOWER_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
 #define OPACITY_INCREASE_BUTTON_DEFAULT    Button4
@@ -120,6 +120,9 @@ static int               nWatchFds = 0;
 #define WINDOW_SCREENSHOT_DEFAULT               "gnome-screenshot --window"
 #define RUN_WINDOW_SCREENSHOT_KEY_DEFAULT       "Print"
 #define RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+
+#define WINDOW_MENU_BUTTON_DEFAULT    Button3
+#define WINDOW_MENU_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
@@ -400,6 +403,15 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.s			  = strdup (WINDOW_SCREENSHOT_DEFAULT);
     o->rest.s.string		  = NULL;
     o->rest.s.nString		  = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_MENU];
+    o->name			     = "window_menu";
+    o->shortDesc		     = "Window Menu";
+    o->longDesc			     = "Open window menu";
+    o->type			     = CompOptionTypeBinding;
+    o->value.bind.type		     = CompBindingTypeKey;
+    o->value.bind.u.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
+    o->value.bind.u.button.button    = WINDOW_MENU_BUTTON_DEFAULT;
 }
 
 CompOption *
@@ -520,6 +532,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_OPACITY_DECREASE:
     case COMP_DISPLAY_OPTION_RUN_SCREENSHOT:
     case COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_WINDOW_MENU:
 	if (addDisplayBinding (display, &value->bind))
 	{
 	    removeDisplayBinding (display, &o->value.bind);
@@ -1507,6 +1520,7 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
 		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU].value.bind);
 }
 
 void
@@ -1706,6 +1720,8 @@ addDisplay (char *name,
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", 0);
     d->toolkitActionRunDialogAtom =
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", 0);
+    d->toolkitActionWindowMenuAtom  =
+	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", 0);
 
     d->mwmHintsAtom = XInternAtom (dpy, "_MOTIF_WM_HINTS", 0);
 

@@ -2277,19 +2277,22 @@ void
 toolkitAction (CompScreen *s,
 	       Atom	  toolkitAction,
 	       Time       eventTime,
-	       Window     window)
+	       Window	  window,
+	       long	  data0,
+	       long	  data1,
+	       long	  data2)
 {
     XEvent ev;
 
     ev.type		    = ClientMessage;
-    ev.xclient.window	    = s->root;
+    ev.xclient.window	    = window;
     ev.xclient.message_type = s->display->toolkitActionAtom;
     ev.xclient.format	    = 32;
     ev.xclient.data.l[0]    = toolkitAction;
     ev.xclient.data.l[1]    = eventTime;
-    ev.xclient.data.l[2]    = window;
-    ev.xclient.data.l[3]    = 0;
-    ev.xclient.data.l[4]    = 0;
+    ev.xclient.data.l[2]    = data0;
+    ev.xclient.data.l[3]    = data1;
+    ev.xclient.data.l[4]    = data2;
 
     XUngrabPointer (s->display->display, CurrentTime);
     XUngrabKeyboard (s->display->display, CurrentTime);

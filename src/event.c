@@ -438,14 +438,25 @@ handleEvent (CompDisplay *d,
 		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
 		{
 		    toolkitAction (s, s->display->toolkitActionMainMenuAtom,
-				   event->xbutton.time, None);
+				   event->xbutton.time, s->root, 0, 0, 0);
 		    eventMode = AsyncPointer;
 		}
 
 		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
 		{
 		    toolkitAction (s, s->display->toolkitActionRunDialogAtom,
-				   event->xbutton.time, None);
+				   event->xbutton.time, s->root, 0, 0, 0);
+		    eventMode = AsyncPointer;
+		}
+
+		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU], event))
+		{
+		    toolkitAction (s, s->display->toolkitActionWindowMenuAtom,
+				   event->xbutton.time,
+				   event->xbutton.window,
+				   event->xbutton.button,
+				   event->xbutton.x_root,
+				   event->xbutton.y_root);
 		    eventMode = AsyncPointer;
 		}
 	    }
@@ -569,13 +580,23 @@ handleEvent (CompDisplay *d,
 		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
 		{
 		    toolkitAction (s, s->display->toolkitActionMainMenuAtom,
-				   event->xkey.time, None);
+				   event->xkey.time, s->root, 0, 0, 0);
 		}
 
 		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
 		{
 		    toolkitAction (s, s->display->toolkitActionRunDialogAtom,
-				   event->xkey.time, None);
+				   event->xkey.time, s->root, 0, 0, 0);
+		}
+
+		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU], event))
+		{
+		    toolkitAction (s, s->display->toolkitActionWindowMenuAtom,
+				   event->xkey.time,
+				   d->activeWindow,
+				   0,
+				   event->xkey.x_root,
+				   event->xkey.y_root);
 		}
 	    }
 

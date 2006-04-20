@@ -36,10 +36,10 @@
 #define ResizeLeftMask  (1L << 2)
 #define ResizeRightMask (1L << 3)
 
-#define RESIZE_INITIATE_BUTTON_DEFAULT    Button3
+#define RESIZE_INITIATE_BUTTON_DEFAULT    Button2
 #define RESIZE_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
 
-#define RESIZE_TERMINATE_BUTTON_DEFAULT    Button3
+#define RESIZE_TERMINATE_BUTTON_DEFAULT    Button2
 #define RESIZE_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
 
 struct _ResizeKeys {

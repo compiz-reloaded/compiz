@@ -661,6 +661,7 @@ static Atom select_window_atom;
 static Atom toolkit_action_atom;
 static Atom toolkit_action_main_menu_atom;
 static Atom toolkit_action_run_dialog_atom;
+static Atom toolkit_action_window_menu_atom;
 
 static Atom panel_action_atom;
 static Atom panel_action_main_menu_atom;
@@ -3476,6 +3477,48 @@ action_menu_unmap (GObject *object)
 }
 
 static void
+action_menu_map (WnckWindow *win,
+		 long	    button,
+		 Time	    time)
+{
+    GdkDisplay *gdkdisplay;
+    GdkScreen  *screen;
+
+    gdkdisplay = gdk_display_get_default ();
+    screen     = gdk_display_get_default_screen (gdkdisplay);
+
+    if (action_menu)
+    {
+	if (action_menu_mapped)
+	{
+	    gtk_widget_destroy (action_menu);
+	    action_menu_mapped = FALSE;
+	    action_menu = NULL;
+	    return;
+	}
+	else
+	    gtk_widget_destroy (action_menu);
+    }
+
+    action_menu = wnck_create_window_action_menu (win);
+
+    gtk_menu_set_screen (GTK_MENU (action_menu), screen);
+
+    g_signal_connect_object (G_OBJECT (action_menu), "unmap",
+			     G_CALLBACK (action_menu_unmap),
+			     0, 0);
+
+    gtk_widget_show (action_menu);
+    gtk_menu_popup (GTK_MENU (action_menu),
+		    NULL, NULL,
+		    NULL, NULL,
+		    button,
+		    time);
+
+    action_menu_mapped = TRUE;
+}
+
+static void
 title_event (WnckWindow *win,
 	     XEvent     *xevent)
 {
@@ -3516,41 +3559,9 @@ title_event (WnckWindow *win,
     }
     else if (xevent->xbutton.button == 3)
     {
-	GdkDisplay *gdkdisplay;
-	GdkScreen  *screen;
-
-	gdkdisplay = gdk_display_get_default ();
-	screen     = gdk_display_get_default_screen (gdkdisplay);
-
-	if (action_menu)
-	{
-	    if (action_menu_mapped)
-	    {
-		gtk_widget_destroy (action_menu);
-		action_menu_mapped = FALSE;
-		action_menu = NULL;
-		return;
-	    }
-	    else
-		gtk_widget_destroy (action_menu);
-	}
-
-	action_menu = wnck_create_window_action_menu (win);
-
-	gtk_menu_set_screen (GTK_MENU (action_menu), screen);
-
-	g_signal_connect_object (G_OBJECT (action_menu), "unmap",
-				 G_CALLBACK (action_menu_unmap),
-				 0, 0);
-
-	gtk_widget_show (action_menu);
-	gtk_menu_popup (GTK_MENU (action_menu),
-			NULL, NULL,
-			NULL, NULL,
-			xevent->xbutton.button,
-			xevent->xbutton.time);
-
-	action_menu_mapped = TRUE;
+	action_menu_map (win,
+			 xevent->xbutton.button,
+			 xevent->xbutton.time);
     }
 }
 
@@ -3693,6 +3704,18 @@ event_filter_func (GdkXEvent *gdkxevent,
 		panel_action (xdisplay, xevent->xclient.window,
 			      panel_action_run_dialog_atom,
 			      xevent->xclient.data.l[1]);
+	    }
+	    else if (action == toolkit_action_window_menu_atom)
+	    {
+		WnckWindow *win;
+
+		win = wnck_window_get (xevent->xclient.window);
+		if (win)
+		{
+		    action_menu_map (win,
+				     xevent->xclient.data.l[2],
+				     xevent->xclient.data.l[1]);
+		}
 	    }
 	}
     default:
@@ -4150,6 +4173,8 @@ main (int argc, char *argv[])
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", FALSE);
     toolkit_action_run_dialog_atom =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", FALSE);
+    toolkit_action_window_menu_atom =
+	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", FALSE);
 
     panel_action_atom		 =
 	XInternAtom (xdisplay, "_GNOME_PANEL_ACTION", FALSE);

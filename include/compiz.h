@@ -389,7 +389,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_RUN_SCREENSHOT                40
 #define COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT             41
 #define COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT         42
-#define COMP_DISPLAY_OPTION_NUM                           43
+#define COMP_DISPLAY_OPTION_WINDOW_MENU                   43
+#define COMP_DISPLAY_OPTION_NUM                           44
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -522,6 +523,7 @@ struct _CompDisplay {
     Atom toolkitActionAtom;
     Atom toolkitActionMainMenuAtom;
     Atom toolkitActionRunDialogAtom;
+    Atom toolkitActionWindowMenuAtom;
 
     Atom mwmHintsAtom;
 
@@ -1345,7 +1347,10 @@ void
 toolkitAction (CompScreen *s,
 	       Atom	  toolkitAction,
 	       Time       eventTime,
-	       Window	  window);
+	       Window	  window,
+	       long	  data0,
+	       long	  data1,
+	       long	  data2);
 
 void
 runCommand (CompScreen *s,
