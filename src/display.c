@@ -1470,6 +1470,19 @@ pingTimeout (void *closure)
 			w->paint.brightness = 0xa8a8;
 			w->paint.saturation = 0;
 
+			if (w->closeRequests)
+			{
+			    toolkitAction (s,
+					   d->toolkitActionForceQuitDialogAtom,
+					   w->lastCloseRequestTime,
+					   w->id,
+					   TRUE,
+					   0,
+					   0);
+
+			    w->closeRequests = 0;
+			}
+
 			addWindowDamage (w);
 		    }
 		}
@@ -1722,6 +1735,8 @@ addDisplay (char *name,
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", 0);
     d->toolkitActionWindowMenuAtom  =
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", 0);
+    d->toolkitActionForceQuitDialogAtom  =
+	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_FORCE_QUIT_DIALOG", 0);
 
     d->mwmHintsAtom = XInternAtom (dpy, "_MOTIF_WM_HINTS", 0);
 

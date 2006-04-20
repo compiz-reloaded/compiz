@@ -524,6 +524,7 @@ struct _CompDisplay {
     Atom toolkitActionMainMenuAtom;
     Atom toolkitActionRunDialogAtom;
     Atom toolkitActionWindowMenuAtom;
+    Atom toolkitActionForceQuitDialogAtom;
 
     Atom mwmHintsAtom;
 
@@ -1520,6 +1521,9 @@ struct _CompWindow {
     int	 syncHeight;
     int	 syncBorderWidth;
 
+    Bool closeRequests;
+    Time lastCloseRequestTime;
+
     XRectangle *damageRects;
     int	       sizeDamage;
     int	       nDamage;
@@ -1747,7 +1751,8 @@ void
 activateWindow (CompWindow *w);
 
 void
-closeWindow (CompWindow *w);
+closeWindow (CompWindow *w,
+	     Time	serverTime);
 
 void
 getOuterRectOfWindow (CompWindow *w,

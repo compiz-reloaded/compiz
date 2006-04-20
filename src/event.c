@@ -399,7 +399,7 @@ handleEvent (CompDisplay *d,
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
-		    closeWindow (w);
+		    closeWindow (w, event->xbutton.time);
 
 		eventMode = AsyncPointer;
 	    }
@@ -550,7 +550,7 @@ handleEvent (CompDisplay *d,
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
-		    closeWindow (w);
+		    closeWindow (w, event->xkey.time);
 	    }
 
 	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW], event))
@@ -985,6 +985,19 @@ handleEvent (CompDisplay *d,
 			w->paint.saturation = w->saturation;
 			w->paint.brightness = w->brightness;
 
+			if (w->lastCloseRequestTime)
+			{
+			    toolkitAction (w->screen,
+					   d->toolkitActionForceQuitDialogAtom,
+					   w->lastCloseRequestTime,
+					   w->id,
+					   FALSE,
+					   0,
+					   0);
+
+			    w->lastCloseRequestTime = 0;
+			}
+
 			addWindowDamage (w);
 		    }
 		    w->lastPong = d->lastPing;
@@ -995,7 +1008,7 @@ handleEvent (CompDisplay *d,
 	{
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
-		closeWindow (w);
+		closeWindow (w, event->xclient.data.l[0]);
 	}
 	else if (event->xclient.message_type == d->desktopGeometryAtom)
 	{

@@ -1363,6 +1363,9 @@ addWindow (CompScreen *screen,
     w->syncCounter    = 0;
     w->syncWaitHandle = 0;
 
+    w->closeRequests	    = 0;
+    w->lastCloseRequestTime = 0;
+
     if (screen->windowPrivateLen)
     {
 	w->privates = malloc (screen->windowPrivateLen * sizeof (CompPrivate));
@@ -3050,30 +3053,48 @@ activateWindow (CompWindow *w)
 }
 
 void
-closeWindow (CompWindow *w)
+closeWindow (CompWindow *w,
+	     Time	serverTime)
 {
     CompDisplay *display = w->screen->display;
 
-    if (w->protocols & CompWindowProtocolDeleteMask)
+    if (w->alive)
     {
-	XEvent ev;
+	if (w->protocols & CompWindowProtocolDeleteMask)
+	{
+	    XEvent ev;
 
-	ev.type			= ClientMessage;
-	ev.xclient.window	= w->id;
-	ev.xclient.message_type = display->wmProtocolsAtom;
-	ev.xclient.format	= 32;
-	ev.xclient.data.l[0]    = display->wmDeleteWindowAtom;
-	ev.xclient.data.l[1]    = CurrentTime;
-	ev.xclient.data.l[2]    = 0;
-	ev.xclient.data.l[3]    = 0;
-	ev.xclient.data.l[4]    = 0;
+	    ev.type		    = ClientMessage;
+	    ev.xclient.window	    = w->id;
+	    ev.xclient.message_type = display->wmProtocolsAtom;
+	    ev.xclient.format	    = 32;
+	    ev.xclient.data.l[0]    = display->wmDeleteWindowAtom;
+	    ev.xclient.data.l[1]    = serverTime;
+	    ev.xclient.data.l[2]    = 0;
+	    ev.xclient.data.l[3]    = 0;
+	    ev.xclient.data.l[4]    = 0;
 
-	XSendEvent (display->display, w->id, FALSE, NoEventMask, &ev);
+	    XSendEvent (display->display, w->id, FALSE, NoEventMask, &ev);
+	}
+	else
+	{
+	    XKillClient (display->display, w->id);
+	}
+
+	w->closeRequests++;
     }
     else
     {
-	XKillClient (display->display, w->id);
+	toolkitAction (w->screen,
+		       w->screen->display->toolkitActionForceQuitDialogAtom,
+		       serverTime,
+		       w->id,
+		       TRUE,
+		       0,
+		       0);
     }
+
+    w->lastCloseRequestTime = serverTime;
 }
 
 void
