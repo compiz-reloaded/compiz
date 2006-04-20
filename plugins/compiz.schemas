@@ -475,7 +475,7 @@
             <applyto>/apps/compiz/general/allscreens/options/lower_window</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Alt&gt;Button2</default>
+            <default>&lt;Alt&gt;Button6</default>
             <locale name="C">
                 <short>Lower Window</short>
                 <long>
@@ -610,6 +610,20 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/window_menu</key>
+            <applyto>/apps/compiz/general/allscreens/options/window_menu</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Alt&gt;Button3</default>
+            <locale name="C">
+                <short>Window Menu</short>
+                <long>
+                    Open window menu
+                </long>
+            </locale>
+        </schema>
+
         <!-- screen0 options -->
 
         <schema>
@@ -725,16 +739,30 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/cube/screen0/options/svgs</key>
-            <applyto>/apps/compiz/plugins/cube/screen0/options/svgs</applyto>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/scale_image</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/scale_image</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Scale image</short>
+                <long>
+                    Scale images to cover top face of cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/images</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/images</applyto>
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[]</default>
+            <default>[novell.png]</default>
             <locale name="C">
-                <short>SVG files</short>
+                <short>Image files</short>
                 <long>
-                    List of SVG files rendered on top face of cube
+                    List of PNG and SVG files that should be rendered on top face of cube
                 </long>
             </locale>
         </schema>
@@ -956,7 +984,7 @@
             <applyto>/apps/compiz/plugins/resize/screen0/options/initiate</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Alt&gt;Button3</default>
+            <default>&lt;Alt&gt;Button2</default>
             <locale name="C">
                 <short>Initiate Window Resize</short>
                 <long>
@@ -970,7 +998,7 @@
             <applyto>/apps/compiz/plugins/resize/screen0/options/terminate</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Release&gt;Button3</default>
+            <default>&lt;Release&gt;Button2</default>
             <locale name="C">
                 <short>Terminate Window Resize</short>
                 <long>
@@ -1180,11 +1208,347 @@
             <applyto>/apps/compiz/plugins/rotate/screen0/options/flip_move</applyto>
             <owner>compiz</owner>
             <type>bool</type>
-            <default>false</default>
+            <default>true</default>
             <locale name="C">
                 <short>Flip Move</short>
                 <long>
                     Only allow viewport flipping when moving windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_1</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_1</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 1</short>
+                <long>
+                    Rotate to face 1
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_2</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_2</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 2</short>
+                <long>
+                    Rotate to face 2
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_3</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_3</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 3</short>
+                <long>
+                    Rotate to face 3
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_4</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_4</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 4</short>
+                <long>
+                    Rotate to face 4
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_5</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_5</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 5</short>
+                <long>
+                    Rotate to face 5
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_6</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_6</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 6</short>
+                <long>
+                    Rotate to face 6
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_7</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_7</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 7</short>
+                <long>
+                    Rotate to face 7
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_8</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_8</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 8</short>
+                <long>
+                    Rotate to face 8
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_9</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_9</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 9</short>
+                <long>
+                    Rotate to face 9
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_10</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_10</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 10</short>
+                <long>
+                    Rotate to face 10
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_11</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_11</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 11</short>
+                <long>
+                    Rotate to face 11
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_12</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_12</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 12</short>
+                <long>
+                    Rotate to face 12
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_1_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_1_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 1 with Window</short>
+                <long>
+                    Rotate to face 1 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_2_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_2_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 2 with Window</short>
+                <long>
+                    Rotate to face 2 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_3_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_3_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 3 with Window</short>
+                <long>
+                    Rotate to face 3 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_4_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_4_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 4 with Window</short>
+                <long>
+                    Rotate to face 4 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_5_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_5_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 5 with Window</short>
+                <long>
+                    Rotate to face 5 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_6_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_6_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 6 with Window</short>
+                <long>
+                    Rotate to face 6 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_7_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_7_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 7 with Window</short>
+                <long>
+                    Rotate to face 7 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_8_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_8_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 8 with Window</short>
+                <long>
+                    Rotate to face 8 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_9_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_9_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 9 with Window</short>
+                <long>
+                    Rotate to face 9 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_10_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_10_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 10 with Window</short>
+                <long>
+                    Rotate to face 10 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_11_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_11_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 11 with Window</short>
+                <long>
+                    Rotate to face 11 and bring active window along
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/rotate_to_12_window</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/rotate_to_12_window</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Rotate To Face 12 with Window</short>
+                <long>
+                    Rotate to face 12 and bring active window along
                 </long>
             </locale>
         </schema>
@@ -1733,7 +2097,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[Toolbar,Menu,Utility,Dialog,Normal]</default>
+            <default>[Toolbar,Menu,Utility,Dialog,ModalDialog,Normal]</default>
             <locale name="C">
                 <short>Move Window Types</short>
                 <long>

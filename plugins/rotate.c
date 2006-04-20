@@ -113,7 +113,31 @@ typedef struct _RotateDisplay {
 #define ROTATE_SCREEN_OPTION_EDGEFLIP		 12
 #define ROTATE_SCREEN_OPTION_FLIPTIME		 13
 #define ROTATE_SCREEN_OPTION_FLIPMOVE		 14
-#define ROTATE_SCREEN_OPTION_NUM		 15
+#define ROTATE_SCREEN_OPTION_TO_1		 15
+#define ROTATE_SCREEN_OPTION_TO_2		 16
+#define ROTATE_SCREEN_OPTION_TO_3		 17
+#define ROTATE_SCREEN_OPTION_TO_4		 18
+#define ROTATE_SCREEN_OPTION_TO_5		 19
+#define ROTATE_SCREEN_OPTION_TO_6		 20
+#define ROTATE_SCREEN_OPTION_TO_7		 21
+#define ROTATE_SCREEN_OPTION_TO_8		 22
+#define ROTATE_SCREEN_OPTION_TO_9		 23
+#define ROTATE_SCREEN_OPTION_TO_10		 24
+#define ROTATE_SCREEN_OPTION_TO_11		 25
+#define ROTATE_SCREEN_OPTION_TO_12		 26
+#define ROTATE_SCREEN_OPTION_TO_1_WINDOW	 27
+#define ROTATE_SCREEN_OPTION_TO_2_WINDOW	 28
+#define ROTATE_SCREEN_OPTION_TO_3_WINDOW	 29
+#define ROTATE_SCREEN_OPTION_TO_4_WINDOW	 30
+#define ROTATE_SCREEN_OPTION_TO_5_WINDOW	 31
+#define ROTATE_SCREEN_OPTION_TO_6_WINDOW	 32
+#define ROTATE_SCREEN_OPTION_TO_7_WINDOW	 33
+#define ROTATE_SCREEN_OPTION_TO_8_WINDOW	 34
+#define ROTATE_SCREEN_OPTION_TO_9_WINDOW	 35
+#define ROTATE_SCREEN_OPTION_TO_10_WINDOW	 36
+#define ROTATE_SCREEN_OPTION_TO_11_WINDOW	 37
+#define ROTATE_SCREEN_OPTION_TO_12_WINDOW	 38
+#define ROTATE_SCREEN_OPTION_NUM		 39
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -222,8 +246,32 @@ rotateSetScreenOption (CompScreen      *screen,
     case ROTATE_SCREEN_OPTION_INITIATE:
     case ROTATE_SCREEN_OPTION_LEFT:
     case ROTATE_SCREEN_OPTION_RIGHT:
+    case ROTATE_SCREEN_OPTION_TO_1:
+    case ROTATE_SCREEN_OPTION_TO_2:
+    case ROTATE_SCREEN_OPTION_TO_3:
+    case ROTATE_SCREEN_OPTION_TO_4:
+    case ROTATE_SCREEN_OPTION_TO_5:
+    case ROTATE_SCREEN_OPTION_TO_6:
+    case ROTATE_SCREEN_OPTION_TO_7:
+    case ROTATE_SCREEN_OPTION_TO_8:
+    case ROTATE_SCREEN_OPTION_TO_9:
+    case ROTATE_SCREEN_OPTION_TO_10:
+    case ROTATE_SCREEN_OPTION_TO_11:
+    case ROTATE_SCREEN_OPTION_TO_12:
     case ROTATE_SCREEN_OPTION_LEFT_WINDOW:
     case ROTATE_SCREEN_OPTION_RIGHT_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_1_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_2_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_3_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_4_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_5_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_6_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_7_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_8_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_9_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_10_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_11_WINDOW:
+    case ROTATE_SCREEN_OPTION_TO_12_WINDOW:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -396,6 +444,35 @@ rotateScreenInitOptions (RotateScreen *rs,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (ROTATE_RIGHT_WINDOW_KEY_DEFAULT));
+
+#define ROTATE_TO_OPTION(n)						 \
+    o = &rs->opt[ROTATE_SCREEN_OPTION_TO_ ## n];			 \
+    o->name			  = "rotate_to_" #n;			 \
+    o->shortDesc		  = "Rotate To Face " #n;		 \
+    o->longDesc			  = "Rotate to face " #n;		 \
+    o->type			  = CompOptionTypeBinding;		 \
+    o->value.bind.type		  = CompBindingTypeNone;		 \
+									 \
+    o = &rs->opt[ROTATE_SCREEN_OPTION_TO_ ## n ## _WINDOW];		 \
+    o->name			  = "rotate_to_" #n "_window";		 \
+    o->shortDesc		  = "Rotate To Face " #n " with Window"; \
+    o->longDesc			  = "Rotate to face " #n " and bring "	 \
+	"active window along";						 \
+    o->type			  = CompOptionTypeBinding;		 \
+    o->value.bind.type		  = CompBindingTypeNone
+
+    ROTATE_TO_OPTION (1);
+    ROTATE_TO_OPTION (2);
+    ROTATE_TO_OPTION (3);
+    ROTATE_TO_OPTION (4);
+    ROTATE_TO_OPTION (5);
+    ROTATE_TO_OPTION (6);
+    ROTATE_TO_OPTION (7);
+    ROTATE_TO_OPTION (8);
+    ROTATE_TO_OPTION (9);
+    ROTATE_TO_OPTION (10);
+    ROTATE_TO_OPTION (11);
+    ROTATE_TO_OPTION (12);
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_SNAP_TOP];
     o->name      = "snap_top";
@@ -841,7 +918,7 @@ rotateHandleEvent (CompDisplay *d,
 {
     CompScreen *s = NULL;
     Bool       warp = FALSE;
-    int	       warpX = 0, warpY = 0, warpMove = 0;
+    int	       warpX = 0, warpY = 0, warpMove = 0, face;
 
     ROTATE_DISPLAY (d);
 
@@ -870,6 +947,24 @@ rotateHandleEvent (CompDisplay *d,
 				      event->xkey.y_root, 1);
 		else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT], event))
 		    rotate (s, event->xkey.x_root, event->xkey.y_root, 1);
+
+		for (face = 0; face < 12 && face < s->size; face++)
+		{
+		    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TO_1_WINDOW
+					 + face], event))
+		    {
+			rotateWithWindow (s, event->xkey.x_root,
+					  event->xkey.y_root, face - s->x);
+			break;
+		    }
+		    else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TO_1 + face],
+				     event))
+		    {
+			rotate (s, event->xkey.x_root, event->xkey.y_root,
+				face - s->x);
+			break;
+		    }
+		}
 	    }
 
 	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TERMINATE], event))

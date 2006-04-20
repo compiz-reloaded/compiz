@@ -409,7 +409,7 @@ compDisplayInitOptions (CompDisplay *display,
     o->shortDesc		     = "Window Menu";
     o->longDesc			     = "Open window menu";
     o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeKey;
+    o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = WINDOW_MENU_BUTTON_DEFAULT;
 }

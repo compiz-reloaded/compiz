@@ -1,3 +1,15 @@
+2006-04-20  Dan Winship  <danw@novell.com>
+
+	* plugins/rotate.c: add 12 go-directly-to-cube-face and 12
+	go-directly-to-cube-face-with-window bindings.
+
+	* src/display.c (compDisplayInitOptions): fix the binding type on
+	WINDOW_MENU.
+
+	* plugins/compiz.schemas: Regen. (lower_window, window_menu,
+	scale_image, images, resize, flip_move, move_window_types, and the
+	new rotate bindings)
+
 2006-04-20  David Reveman  <davidr@novell.com>
 
 	* src/window.c:
