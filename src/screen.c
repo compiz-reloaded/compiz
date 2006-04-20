@@ -2274,19 +2274,20 @@ getActiveWindow (CompDisplay *display,
 }
 
 void
-panelAction (CompScreen *s,
-	     Atom	panelAction,
-	     Time       eventTime)
+toolkitAction (CompScreen *s,
+	       Atom	  toolkitAction,
+	       Time       eventTime,
+	       Window     window)
 {
     XEvent ev;
 
     ev.type		    = ClientMessage;
     ev.xclient.window	    = s->root;
-    ev.xclient.message_type = s->display->panelActionAtom;
+    ev.xclient.message_type = s->display->toolkitActionAtom;
     ev.xclient.format	    = 32;
-    ev.xclient.data.l[0]    = panelAction;
+    ev.xclient.data.l[0]    = toolkitAction;
     ev.xclient.data.l[1]    = eventTime;
-    ev.xclient.data.l[2]    = 0;
+    ev.xclient.data.l[2]    = window;
     ev.xclient.data.l[3]    = 0;
     ev.xclient.data.l[4]    = 0;
 

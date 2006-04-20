@@ -1,5 +1,14 @@
 2006-04-20  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c: Pick up toolkit
+	actions from compiz and send gnome panel actions for "main menu" and
+	"run dialog" actions.
+
+	* src/event.c (handleEvent):
+	* src/screen.c:
+	* include/compiz.h:
+	* src/display.c (addDisplay): panel action -> toolkit action.
+
 	* src/window.c (getModalTransient): Group transient must not be an
 	ancestor to the window we've currently found as the window to focus.
 	(getModalTransient): Check for child modal transient.

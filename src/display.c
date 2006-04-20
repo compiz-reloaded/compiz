@@ -1700,11 +1700,12 @@ addDisplay (char *name,
     d->xBackgroundAtom[0] = XInternAtom (dpy, "_XSETROOT_ID", 0);
     d->xBackgroundAtom[1] = XInternAtom (dpy, "_XROOTPMAP_ID", 0);
 
-    d->panelActionAtom	        = XInternAtom (dpy, "_GNOME_PANEL_ACTION", 0);
-    d->panelActionMainMenuAtom  =
-	XInternAtom (dpy, "_GNOME_PANEL_ACTION_MAIN_MENU", 0);
-    d->panelActionRunDialogAtom =
-	XInternAtom (dpy, "_GNOME_PANEL_ACTION_RUN_DIALOG", 0);
+    d->toolkitActionAtom	  =
+	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION", 0);
+    d->toolkitActionMainMenuAtom  =
+	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", 0);
+    d->toolkitActionRunDialogAtom =
+	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", 0);
 
     d->mwmHintsAtom = XInternAtom (dpy, "_MOTIF_WM_HINTS", 0);
 

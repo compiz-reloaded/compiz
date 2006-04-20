@@ -519,9 +519,9 @@ struct _CompDisplay {
 
     Atom xBackgroundAtom[2];
 
-    Atom panelActionAtom;
-    Atom panelActionMainMenuAtom;
-    Atom panelActionRunDialogAtom;
+    Atom toolkitActionAtom;
+    Atom toolkitActionMainMenuAtom;
+    Atom toolkitActionRunDialogAtom;
 
     Atom mwmHintsAtom;
 
@@ -1342,9 +1342,10 @@ getActiveWindow (CompDisplay *display,
 		 Window      root);
 
 void
-panelAction (CompScreen *s,
-	     Atom	panelAction,
-	     Time       eventTime);
+toolkitAction (CompScreen *s,
+	       Atom	  toolkitAction,
+	       Time       eventTime,
+	       Window	  window);
 
 void
 runCommand (CompScreen *s,

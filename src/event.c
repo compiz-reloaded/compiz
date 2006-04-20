@@ -432,20 +432,20 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    /* avoid panel actions when screen is grabbed */
+	    /* avoid toolkit actions when screen is grabbed */
 	    if (!d->screens->maxGrab)
 	    {
 		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
 		{
-		    panelAction (s, s->display->panelActionMainMenuAtom,
-				 event->xbutton.time);
+		    toolkitAction (s, s->display->toolkitActionMainMenuAtom,
+				   event->xbutton.time, None);
 		    eventMode = AsyncPointer;
 		}
 
 		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
 		{
-		    panelAction (s, s->display->panelActionRunDialogAtom,
-				 event->xbutton.time);
+		    toolkitAction (s, s->display->toolkitActionRunDialogAtom,
+				   event->xbutton.time, None);
 		    eventMode = AsyncPointer;
 		}
 	    }
@@ -563,19 +563,19 @@ handleEvent (CompDisplay *d,
 		    minimizeWindow (w);
 	    }
 
-	    /* avoid panel actions when screen is grabbed */
+	    /* avoid toolkit actions when screen is grabbed */
 	    if (!d->screens->maxGrab)
 	    {
 		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
 		{
-		    panelAction (s, s->display->panelActionMainMenuAtom,
-				 event->xkey.time);
+		    toolkitAction (s, s->display->toolkitActionMainMenuAtom,
+				   event->xkey.time, None);
 		}
 
 		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
 		{
-		    panelAction (s, s->display->panelActionRunDialogAtom,
-				 event->xkey.time);
+		    toolkitAction (s, s->display->toolkitActionRunDialogAtom,
+				   event->xkey.time, None);
 		}
 	    }
 
