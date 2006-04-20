@@ -2227,6 +2227,24 @@ isGroupTransient (CompWindow *w,
     return FALSE;
 }
 
+static Bool
+isAncestorTo (CompWindow *transient,
+	      CompWindow *ancestor)
+{
+    if (transient->transientFor)
+    {
+	if (transient->transientFor == ancestor->id)
+	    return TRUE;
+
+	transient = findWindowAtScreen (transient->screen,
+					transient->transientFor);
+	if (transient)
+	    return isAncestorTo (transient, ancestor);
+    }
+
+    return FALSE;
+}
+
 static CompWindow *
 getModalTransient (CompWindow *window)
 {
@@ -2256,11 +2274,18 @@ getModalTransient (CompWindow *window)
 	    if (w == modalTransient || w->mapNum == 0)
 		continue;
 
+	    if (isAncestorTo (modalTransient, w))
+		continue;
+
 	    if (isGroupTransient (w, modalTransient->clientLeader))
 	    {
 		if (w->state & CompWindowStateModalMask)
 		{
 		    modalTransient = w;
+		    w = getModalTransient (w);
+		    if (w)
+			modalTransient = w;
+
 		    break;
 		}
 	    }
@@ -2285,25 +2310,6 @@ moveInputFocusToWindow (CompWindow *w)
 
     XSetInputFocus (d->display, w->id, RevertToPointerRoot, CurrentTime);
 }
-
-static Bool
-isAncestorTo (CompWindow *transient,
-	      CompWindow *ancestor)
-{
-    if (transient->transientFor)
-    {
-	if (transient->transientFor == ancestor->id)
-	    return TRUE;
-
-	transient = findWindowAtScreen (transient->screen,
-					transient->transientFor);
-	if (transient)
-	    return isAncestorTo (transient, ancestor);
-    }
-
-    return FALSE;
-}
-
 
 static Bool
 stackLayerCheck (CompWindow *w,
