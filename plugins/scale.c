@@ -321,6 +321,7 @@ scaleSetScreenOption (CompScreen      *screen,
 	    ss->darkenBack = o->value.b;
 	    return TRUE;
 	}
+	break;
     case SCALE_SCREEN_OPTION_OPACITY:
 	if (compSetIntOption (o, value))
 	{
