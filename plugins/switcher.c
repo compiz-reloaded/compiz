@@ -820,7 +820,20 @@ switchInitiate (CompScreen *s,
 	    switchUpdateWindowList (s, count);
 
 	    if (ss->popupWindow)
-		XMapWindow (s->display->display, ss->popupWindow);
+	    {
+		CompWindow *w;
+
+		w = findWindowAtScreen (s, ss->popupWindow);
+		if (w)
+		{
+		    w->hidden = FALSE;
+		    showWindow (w);
+		}
+		else
+		{
+		    XMapWindow (s->display->display, ss->popupWindow);
+		}
+	    }
 
 	    setSelectedWindowHint (s);
 
@@ -837,16 +850,27 @@ switchTerminate (CompScreen *s,
 
     if (ss->grabIndex)
     {
+	CompWindow *w;
+
 	if (ss->popupWindow)
-	    XUnmapWindow (s->display->display, ss->popupWindow);
+	{
+	    w = findWindowAtScreen (s, ss->popupWindow);
+	    if (w)
+	    {
+		w->hidden = TRUE;
+		hideWindow (w);
+	    }
+	    else
+	    {
+		XUnmapWindow (s->display->display, ss->popupWindow);
+	    }
+	}
 
 	removeScreenGrab (s, ss->grabIndex, 0);
 	ss->grabIndex = 0;
 
 	if (select && ss->selectedWindow)
 	{
-	    CompWindow *w;
-
 	    w = findWindowAtScreen (s, ss->selectedWindow);
 	    if (w)
 		sendWindowActivationRequest (w->screen, w->id);
@@ -1146,6 +1170,9 @@ switchPaintWindow (CompWindow		   *w,
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
+
+	if (!(mask & PAINT_WINDOW_TRANSFORMED_MASK) && region->numRects == 0)
+	    return TRUE;
 
 	x1 = w->attrib.x + SPACE;
 	x2 = w->attrib.x + w->width - SPACE;

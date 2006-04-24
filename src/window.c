@@ -1303,6 +1303,7 @@ addWindow (CompScreen *screen,
     w->placed		 = FALSE;
     w->minimized	 = FALSE;
     w->inShowDesktopMode = FALSE;
+    w->hidden		 = FALSE;
 
     w->pendingUnmaps = 0;
 
@@ -3251,7 +3252,7 @@ hideWindow (CompWindow *w)
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
-    if (!w->minimized && !w->inShowDesktopMode)
+    if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
 	return;
 
     w->state |= CompWindowStateHiddenMask;
@@ -3269,7 +3270,7 @@ showWindow (CompWindow *w)
     if (!(w->state & CompWindowStateHiddenMask))
 	return;
 
-    if (w->minimized || w->inShowDesktopMode)
+    if (w->minimized || w->inShowDesktopMode || w->hidden)
 	return;
 
     w->state &= ~CompWindowStateHiddenMask;

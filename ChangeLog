@@ -1,5 +1,13 @@
 2006-04-24  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c: Use hideWindow and showWindow so that the
+	decoration doesn't have to be redrawn every time the switcher window
+	is mapped.
+
+	* src/window.c:
+	* include/compiz.h: Add hidden flag, that can be used to hide windows
+	without minimizing them.
+
 	* plugins/compiz.schemas: Regen (drop-shadow options).
 
 	* configure.ac: xrender 0.9, required for g-w-d.
