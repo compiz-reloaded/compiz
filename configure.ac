@@ -162,7 +162,11 @@ AC_ARG_ENABLE(gnome,
 
 if test "x$use_gnome" = "xyes"; then
   PKG_CHECK_MODULES(GNOME_WINDOW_DECORATOR,
-		    gtk+-2.0 >= 2.8.0 gconf-2.0 libwnck-1.0 pangocairo,
+		    xrender >= 0.9    \
+		    gtk+-2.0 >= 2.8.0 \
+		    gconf-2.0	      \
+		    libwnck-1.0	      \
+		    pangocairo,
 		    [use_gnome=yes], [use_gnome=no])
   if test "x$use_gnome" = "xyes"; then
     PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,

@@ -1,3 +1,16 @@
+2006-04-24  David Reveman  <davidr@novell.com>
+
+	* plugins/compiz.schemas: Regen (drop-shadow options).
+
+	* configure.ac: xrender 0.9, required for g-w-d.
+
+	* gnome/window-decorator/gnome-window-decorator.c:
+	* plugins/decoration.c: Add configurable drop-shadows. A minor issue is
+	that shadows around "tiny" windows are not rendered correctly when
+	large shadow offsets are used. Solution is to have the decorator set
+	a minimum size for which a decoration can be used so that no shadows
+	are rendered around "tiny" windows.
+
 2006-04-20  Dan Winship  <danw@novell.com>
 
 	* plugins/rotate.c: add 12 go-directly-to-cube-face and 12

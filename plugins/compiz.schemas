@@ -624,6 +624,62 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/shadow_radius</key>
+            <applyto>/apps/compiz/plugins/decoration/allscreens/options/shadow_radius</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>8.000000</default>
+            <locale name="C">
+                <short>Shadow Radius</short>
+                <long>
+                    Drop shadow radius (0.0-48.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/shadow_opacity</key>
+            <applyto>/apps/compiz/plugins/decoration/allscreens/options/shadow_opacity</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>0.500000</default>
+            <locale name="C">
+                <short>Shadow Opacity</short>
+                <long>
+                    Drop shadow opacity (0.01-6.00)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/shadow_offset_x</key>
+            <applyto>/apps/compiz/plugins/decoration/allscreens/options/shadow_offset_x</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>1</default>
+            <locale name="C">
+                <short>Shadow Offset X</short>
+                <long>
+                    Drop shadow X offset (-16-16)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/shadow_offset_y</key>
+            <applyto>/apps/compiz/plugins/decoration/allscreens/options/shadow_offset_y</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>1</default>
+            <locale name="C">
+                <short>Shadow Offset Y</short>
+                <long>
+                    Drop shadow Y offset (-16-16)
+                </long>
+            </locale>
+        </schema>
+
         <!-- screen0 options -->
 
         <schema>

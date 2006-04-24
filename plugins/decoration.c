@@ -33,20 +33,20 @@
 
 #include <compiz.h>
 
-#define GRAVITY_WEST  (0)
-#define GRAVITY_EAST  (1 << 0)
-#define GRAVITY_NORTH (0)
-#define GRAVITY_SOUTH (1 << 1)
+#define GRAVITY_WEST  (1 << 0)
+#define GRAVITY_EAST  (1 << 1)
+#define GRAVITY_NORTH (1 << 2)
+#define GRAVITY_SOUTH (1 << 3)
 
 #define ALIGN_LEFT   (0)
 #define ALIGN_RIGHT  (1 << 0)
 #define ALIGN_TOP    (0)
 #define ALIGN_BOTTOM (1 << 1)
 
-#define XX_MASK (1 << 6)
-#define XY_MASK (1 << 7)
-#define YX_MASK (1 << 8)
-#define YY_MASK (1 << 9)
+#define XX_MASK (1 << 10)
+#define XY_MASK (1 << 11)
+#define YX_MASK (1 << 12)
+#define YY_MASK (1 << 13)
 
 typedef struct _Point {
     int	x;
@@ -103,6 +103,26 @@ typedef struct _WindowDecoration {
     int	       nQuad;
 } WindowDecoration;
 
+#define DECOR_SHADOW_RADIUS_DEFAULT    8.0f
+#define DECOR_SHADOW_RADIUS_MIN        0.0f
+#define DECOR_SHADOW_RADIUS_MAX       48.0f
+#define DECOR_SHADOW_RADIUS_PRECISION  0.1f
+
+#define DECOR_SHADOW_OPACITY_DEFAULT   0.5f
+#define DECOR_SHADOW_OPACITY_MIN       0.01f
+#define DECOR_SHADOW_OPACITY_MAX       6.0f
+#define DECOR_SHADOW_OPACITY_PRECISION 0.01f
+
+#define DECOR_SHADOW_OFFSET_DEFAULT   1
+#define DECOR_SHADOW_OFFSET_MIN     -16
+#define DECOR_SHADOW_OFFSET_MAX      16
+
+#define DECOR_DISPLAY_OPTION_SHADOW_RADIUS   0
+#define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
+#define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X 2
+#define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y 3
+#define DECOR_DISPLAY_OPTION_NUM             4
+
 static int displayPrivateIndex;
 
 typedef struct _DecorDisplay {
@@ -112,6 +132,8 @@ typedef struct _DecorDisplay {
     Atom	    supportingDmCheckAtom;
     Atom	    winDecorAtom;
     Atom	    decorAtom[DECOR_NUM];
+
+    CompOption opt[DECOR_DISPLAY_OPTION_NUM];
 } DecorDisplay;
 
 typedef struct _DecorScreen {
@@ -145,7 +167,7 @@ typedef struct _DecorWindow {
 #define DECOR_SCREEN(s)							   \
     DecorScreen *ds = GET_DECOR_SCREEN (s, GET_DECOR_DISPLAY (s->display))
 
-#define GET_DECOR_WINDOW(w, ds)				   \
+#define GET_DECOR_WINDOW(w, ds)					  \
     ((DecorWindow *) (w)->privates[(ds)->windowPrivateIndex].ptr)
 
 #define DECOR_WINDOW(w)					       \
@@ -153,6 +175,92 @@ typedef struct _DecorWindow {
 		      GET_DECOR_SCREEN  (w->screen,	       \
 		      GET_DECOR_DISPLAY (w->screen->display)))
 
+#define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
+
+static CompOption *
+decorGetDisplayOptions (CompDisplay *display,
+			int	    *count)
+{
+    DECOR_DISPLAY (display);
+
+    *count = NUM_OPTIONS (dd);
+    return dd->opt;
+}
+
+static Bool
+decorSetDisplayOption (CompDisplay     *display,
+		       char	       *name,
+		       CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    DECOR_DISPLAY (display);
+
+    o = compFindOption (dd->opt, NUM_OPTIONS (dd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case DECOR_DISPLAY_OPTION_SHADOW_RADIUS:
+    case DECOR_DISPLAY_OPTION_SHADOW_OPACITY:
+	if (compSetFloatOption (o, value))
+	    return TRUE;
+	break;
+    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X:
+    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y:
+	if (compSetIntOption (o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+decorDisplayInitOptions (DecorDisplay *dd)
+{
+    CompOption *o;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_RADIUS];
+    o->name		= "shadow_radius";
+    o->shortDesc	= "Shadow Radius";
+    o->longDesc		= "Drop shadow radius";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= DECOR_SHADOW_RADIUS_DEFAULT;
+    o->rest.f.min	= DECOR_SHADOW_RADIUS_MIN;
+    o->rest.f.max	= DECOR_SHADOW_RADIUS_MAX;
+    o->rest.f.precision = DECOR_SHADOW_RADIUS_PRECISION;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OPACITY];
+    o->name		= "shadow_opacity";
+    o->shortDesc	= "Shadow Opacity";
+    o->longDesc		= "Drop shadow opacity";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= DECOR_SHADOW_OPACITY_DEFAULT;
+    o->rest.f.min	= DECOR_SHADOW_OPACITY_MIN;
+    o->rest.f.max	= DECOR_SHADOW_OPACITY_MAX;
+    o->rest.f.precision = DECOR_SHADOW_OPACITY_PRECISION;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X];
+    o->name		= "shadow_offset_x";
+    o->shortDesc	= "Shadow Offset X";
+    o->longDesc		= "Drop shadow X offset";
+    o->type		= CompOptionTypeInt;
+    o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
+    o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
+    o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y];
+    o->name		= "shadow_offset_y";
+    o->shortDesc	= "Shadow Offset Y";
+    o->longDesc		= "Drop shadow Y offset";
+    o->type		= CompOptionTypeInt;
+    o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
+    o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
+    o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
+}
 
 static Bool
 decorPaintWindow (CompWindow		  *w,
@@ -168,14 +276,14 @@ decorPaintWindow (CompWindow		  *w,
     {
 	DECOR_WINDOW (w);
 
-	if (dw->wd)
+	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	    region = &infiniteRegion;
+
+	if (dw->wd && region->numRects)
 	{
 	    WindowDecoration *wd = dw->wd;
 	    REGION	     box;
 	    int		     i;
-
-	    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-		region = &infiniteRegion;
 
 	    box.rects	 = &box.extents;
 	    box.numRects = 1;
@@ -310,8 +418,9 @@ decorReleaseTexture (CompScreen   *screen,
 
   flags
 
-  1st and 2nd bit p1 gravity, 3rd and 4th bit p2 gravity,
-  5rd and 6th bit alignment, 7th bit XX, 8th bit XY, 9th bit YX, 10th bit YY.
+  1st to 4nd bit p1 gravity, 5rd to 8th bit p2 gravity,
+  9rd and 10th bit alignment, 11th bit XX, 12th bit XY, 13th bit YX,
+  14th bit YY.
 
   data[4 + n * 9 + 1] = flags
   data[4 + n * 9 + 2] = p1 x
@@ -398,10 +507,10 @@ decorCreateDecoration (CompScreen *screen,
     {
 	flags = *prop++;
 
-	quad->p1.gravity = (flags >> 0) & 0x3;
-	quad->p2.gravity = (flags >> 2) & 0x3;
+	quad->p1.gravity = (flags >> 0) & 0xf;
+	quad->p2.gravity = (flags >> 4) & 0xf;
 
-	quad->align = (flags >> 4) & 0x3;
+	quad->align = (flags >> 8) & 0x3;
 
 	quad->m.xx = (flags & XX_MASK) ? 1.0f : 0.0f;
 	quad->m.xy = (flags & XY_MASK) ? 1.0f : 0.0f;
@@ -499,6 +608,7 @@ setDecorationMatrices (CompWindow *w)
 {
     WindowDecoration *wd;
     int		     i;
+    float	     x0, y0;
 
     DECOR_WINDOW (w);
 
@@ -510,10 +620,16 @@ setDecorationMatrices (CompWindow *w)
     {
 	wd->quad[i].matrix = wd->decor->texture->texture.matrix;
 
-	wd->quad[i].matrix.x0 += wd->decor->quad[i].m.x0 *
-	    wd->quad[i].matrix.xx;
-	wd->quad[i].matrix.y0 += wd->decor->quad[i].m.y0 *
-	    wd->quad[i].matrix.yy;
+	x0 = wd->decor->quad[i].m.x0;
+	if (wd->decor->quad[i].align & ALIGN_RIGHT)
+	    x0 -= wd->quad[i].box.x2 - wd->quad[i].box.x1;
+
+	y0 = wd->decor->quad[i].m.y0;
+	if (wd->decor->quad[i].align & ALIGN_BOTTOM)
+	    y0 -= wd->quad[i].box.y2 - wd->quad[i].box.y1;
+
+	wd->quad[i].matrix.x0 += x0 * wd->quad[i].matrix.xx;
+	wd->quad[i].matrix.y0 += y0 * wd->quad[i].matrix.yy;
 
 	wd->quad[i].matrix.xx *= wd->decor->quad[i].m.xx;
 	wd->quad[i].matrix.yy *= wd->decor->quad[i].m.yy;
@@ -541,13 +657,17 @@ applyGravity (int gravity,
 {
     if (gravity & GRAVITY_EAST)
 	*return_x = x + width;
-    else
+    else if (gravity & GRAVITY_WEST)
 	*return_x = x;
+    else
+	*return_x = (width >> 1) + x;
 
     if (gravity & GRAVITY_SOUTH)
 	*return_y = y + height;
-    else
+    else if (gravity & GRAVITY_NORTH)
 	*return_y = y;
+    else
+	*return_y = (height >> 1) + y;
 }
 
 static void
@@ -1024,6 +1144,8 @@ decorInitDisplay (CompPlugin  *p,
     dd->decorAtom[DECOR_ACTIVE] =
 	XInternAtom (d->display, "_NET_WINDOW_DECOR_ACTIVE", 0);
 
+    decorDisplayInitOptions (dd);
+
     WRAP (dd, d, handleEvent, decorHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = dd;
@@ -1178,8 +1300,8 @@ static CompPluginVTable decorVTable = {
     decorFiniScreen,
     decorInitWindow,
     decorFiniWindow,
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
+    decorGetDisplayOptions,
+    decorSetDisplayOption,
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
     decorDeps,

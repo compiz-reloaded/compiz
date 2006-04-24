@@ -20,6 +20,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
+#include <X11/extensions/Xrender.h>
 
 #ifndef GTK_DISABLE_DEPRECATED
 #define GTK_DISABLE_DEPRECATED
@@ -53,20 +54,29 @@
 #include <sys/types.h>
 #include <signal.h>
 
-#define GCONF_DIR "/apps/metacity/general"
+#define METACITY_GCONF_DIR "/apps/metacity/general"
 
-#define COMPIZ_USE_SYSTEM_FONT_KEY	 \
-    GCONF_DIR "/titlebar_uses_system_font"
+#define COMPIZ_USE_SYSTEM_FONT_KEY		    \
+    METACITY_GCONF_DIR "/titlebar_uses_system_font"
 
-#define COMPIZ_TITLEBAR_FONT_KEY \
-    GCONF_DIR "/titlebar_font"
+#define COMPIZ_TITLEBAR_FONT_KEY	\
+    METACITY_GCONF_DIR "/titlebar_font"
+
+#define GCONF_DIR "/apps/compiz/plugins/decoration/allscreens/options"
+
+#define COMPIZ_SHADOW_RADIUS_KEY \
+    GCONF_DIR "/shadow_radius"
+
+#define COMPIZ_SHADOW_OPACITY_KEY \
+    GCONF_DIR "/shadow_opacity"
+
+#define COMPIZ_SHADOW_OFFSET_X_KEY \
+    GCONF_DIR "/shadow_offset_x"
+
+#define COMPIZ_SHADOW_OFFSET_Y_KEY \
+    GCONF_DIR "/shadow_offset_y"
 
 #define STROKE_ALPHA 0.6
-
-#define LEFT_SPACE   12
-#define RIGHT_SPACE  14
-#define TOP_SPACE    10
-#define BOTTOM_SPACE 14
 
 #define ICON_SPACE 20
 
@@ -77,20 +87,20 @@ typedef struct _extents {
     gint bottom;
 } extents;
 
-#define GRAVITY_WEST  (0)
-#define GRAVITY_EAST  (1 << 0)
-#define GRAVITY_NORTH (0)
-#define GRAVITY_SOUTH (1 << 1)
+#define GRAVITY_WEST  (1 << 0)
+#define GRAVITY_EAST  (1 << 1)
+#define GRAVITY_NORTH (1 << 2)
+#define GRAVITY_SOUTH (1 << 3)
 
 #define ALIGN_LEFT   (0)
 #define ALIGN_RIGHT  (1 << 0)
 #define ALIGN_TOP    (0)
 #define ALIGN_BOTTOM (1 << 1)
 
-#define XX_MASK (1 << 6)
-#define XY_MASK (1 << 7)
-#define YX_MASK (1 << 8)
-#define YY_MASK (1 << 9)
+#define XX_MASK (1 << 10)
+#define XY_MASK (1 << 11)
+#define YX_MASK (1 << 12)
+#define YY_MASK (1 << 13)
 
 #define WM_MOVERESIZE_SIZE_TOPLEFT      0
 #define WM_MOVERESIZE_SIZE_TOP          1
@@ -103,6 +113,13 @@ typedef struct _extents {
 #define WM_MOVERESIZE_MOVE              8
 #define WM_MOVERESIZE_SIZE_KEYBOARD     9
 #define WM_MOVERESIZE_MOVE_KEYBOARD    10
+
+#define SHADOW_RADIUS   8.0
+#define SHADOW_OPACITY  0.5
+#define SHADOW_OFFSET_X 1
+#define SHADOW_OFFSET_Y 1
+
+#define N_QUADS_MAX 24
 
 typedef struct _point {
     gint x;
@@ -119,541 +136,52 @@ typedef struct _quad {
     cairo_matrix_t m;
 } quad;
 
-#ifdef __SUNPRO_C
-#pragma align 4 (_shadow)
-#endif
-#ifdef __GNUC__
-static const guint8 _shadow[] __attribute__ ((__aligned__ (4))) =
-#else
-static const guint8 _shadow[] =
-#endif
-{ ""
-  /* Pixbuf magic (0x47646b50) */
-  "GdkP"
-  /* length: header (24) + pixel_data (1705) */
-  "\0\0\6\301"
-  /* pixdata_type (0x2010002) */
-  "\2\1\0\2"
-  /* rowstride (96) */
-  "\0\0\0`"
-  /* width (24) */
-  "\0\0\0\30"
-  /* height (22) */
-  "\0\0\0\26"
-  /* pixel_data: */
-  "\207\0\0\0\0\212\0\0\0\1\214\0\0\0\0\2\0\0\0\1\0\0\0\2\202\0\0\0\3\202"
-  "\0\0\0\4\202\0\0\0\5\202\0\0\0\4\202\0\0\0\3\2\0\0\0\2\0\0\0\1\210\0"
-  "\0\0\0\10\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\5\0\0\0\6\0\0\0\10\0\0\0\11\0"
-  "\0\0\12\202\0\0\0\13\10\0\0\0\12\0\0\0\11\0\0\0\10\0\0\0\6\0\0\0\5\0"
-  "\0\0\3\0\0\0\2\0\0\0\1\206\0\0\0\0\10\0\0\0\2\0\0\0\3\0\0\0\6\0\0\0\11"
-  "\0\0\0\14\0\0\0\17\0\0\0\22\0\0\0\23\202\0\0\0\24\11\0\0\0\23\0\0\0\22"
-  "\0\0\0\17\0\0\0\14\0\0\0\11\0\0\0\6\0\0\0\3\0\0\0\2\0\0\0\1\204\0\0\0"
-  "\0\11\0\0\0\1\0\0\0\3\0\0\0\6\0\0\0\12\0\0\0\17\0\0\0\24\0\0\0\32\0\0"
-  "\0\36\0\0\0\40\202\0\0\0\"\11\0\0\0\40\0\0\0\36\0\0\0\32\0\0\0\24\0\0"
-  "\0\17\0\0\0\12\0\0\0\6\0\0\0\3\0\0\0\1\203\0\0\0\0\12\0\0\0\1\0\0\0\2"
-  "\0\0\0\5\0\0\0\11\0\0\0\17\0\0\0\26\0\0\0\36\0\0\0&\0\0\0,\0\0\0""0\202"
-  "\0\0\0""2\12\0\0\0""0\0\0\0,\0\0\0&\0\0\0\37\0\0\0\27\0\0\0\17\0\0\0"
-  "\11\0\0\0\5\0\0\0\2\0\0\0\1\202\0\0\0\0\12\0\0\0\1\0\0\0\3\0\0\0\6\0"
-  "\0\0\14\0\0\0\24\0\0\0\37\0\0\0)\0\0\0""4\0\0\0<\0\0\0A\202\0\0\0D\12"
-  "\0\0\0A\0\0\0<\0\0\0""4\0\0\0)\0\0\0\37\0\0\0\24\0\0\0\14\0\0\0\6\0\0"
-  "\0\3\0\0\0\1\202\0\0\0\0\12\0\0\0\1\0\0\0\4\0\0\0\10\0\0\0\17\0\0\0\31"
-  "\0\0\0&\0\0\0""3\0\0\0@\0\0\0J\0\0\0Q\202\0\0\0T\12\0\0\0Q\0\0\0J\0\0"
-  "\0@\0\0\0""3\0\0\0&\0\0\0\32\0\0\0\17\0\0\0\10\0\0\0\4\0\0\0\1\202\0"
-  "\0\0\0\12\0\0\0\1\0\0\0\4\0\0\0\11\0\0\0\22\0\0\0\35\0\0\0,\0\0\0;\0"
-  "\0\0J\0\0\0V\0\0\0]\202\0\0\0a\12\0\0\0]\0\0\0V\0\0\0J\0\0\0<\0\0\0,"
-  "\0\0\0\36\0\0\0\22\0\0\0\11\0\0\0\4\0\0\0\2\202\0\0\0\0\12\0\0\0\2\0"
-  "\0\0\5\0\0\0\12\0\0\0\23\0\0\0\40\0\0\0""0\0\0\0A\0\0\0Q\0\0\0^\0\0\0"
-  "f\202\0\0\0k\12\0\0\0f\0\0\0^\0\0\0Q\0\0\0A\0\0\0""0\0\0\0\40\0\0\0\24"
-  "\0\0\0\12\0\0\0\5\0\0\0\2\202\0\0\0\0\12\0\0\0\2\0\0\0\5\0\0\0\13\0\0"
-  "\0\24\0\0\0\"\0\0\0""2\0\0\0D\0\0\0T\0\0\0a\0\0\0j\202\0\0\0o\12\0\0"
-  "\0j\0\0\0a\0\0\0T\0\0\0D\0\0\0""2\0\0\0\"\0\0\0\24\0\0\0\13\0\0\0\5\0"
-  "\0\0\2\202\0\0\0\0\12\0\0\0\2\0\0\0\5\0\0\0\13\0\0\0\24\0\0\0\"\0\0\0"
-  "2\0\0\0D\0\0\0T\0\0\0a\0\0\0j\202\0\0\0o\12\0\0\0j\0\0\0a\0\0\0T\0\0"
-  "\0D\0\0\0""2\0\0\0\"\0\0\0\24\0\0\0\13\0\0\0\5\0\0\0\2\202\0\0\0\0\12"
-  "\0\0\0\2\0\0\0\5\0\0\0\12\0\0\0\23\0\0\0\40\0\0\0""0\0\0\0A\0\0\0Q\0"
-  "\0\0^\0\0\0f\202\0\0\0k\12\0\0\0f\0\0\0^\0\0\0Q\0\0\0A\0\0\0""0\0\0\0"
-  "\40\0\0\0\24\0\0\0\12\0\0\0\5\0\0\0\2\202\0\0\0\0\12\0\0\0\1\0\0\0\4"
-  "\0\0\0\11\0\0\0\22\0\0\0\35\0\0\0,\0\0\0;\0\0\0J\0\0\0V\0\0\0]\202\0"
-  "\0\0a\12\0\0\0]\0\0\0V\0\0\0J\0\0\0<\0\0\0,\0\0\0\36\0\0\0\22\0\0\0\11"
-  "\0\0\0\4\0\0\0\2\202\0\0\0\0\12\0\0\0\1\0\0\0\4\0\0\0\10\0\0\0\17\0\0"
-  "\0\31\0\0\0&\0\0\0""3\0\0\0@\0\0\0J\0\0\0Q\202\0\0\0T\12\0\0\0Q\0\0\0"
-  "J\0\0\0@\0\0\0""3\0\0\0&\0\0\0\32\0\0\0\17\0\0\0\10\0\0\0\4\0\0\0\1\202"
-  "\0\0\0\0\12\0\0\0\1\0\0\0\3\0\0\0\6\0\0\0\14\0\0\0\24\0\0\0\37\0\0\0"
-  ")\0\0\0""4\0\0\0<\0\0\0A\202\0\0\0D\12\0\0\0A\0\0\0<\0\0\0""4\0\0\0)"
-  "\0\0\0\37\0\0\0\24\0\0\0\14\0\0\0\6\0\0\0\3\0\0\0\1\202\0\0\0\0\12\0"
-  "\0\0\1\0\0\0\2\0\0\0\5\0\0\0\11\0\0\0\17\0\0\0\26\0\0\0\36\0\0\0&\0\0"
-  "\0,\0\0\0""0\202\0\0\0""2\12\0\0\0""0\0\0\0,\0\0\0&\0\0\0\37\0\0\0\27"
-  "\0\0\0\17\0\0\0\11\0\0\0\5\0\0\0\2\0\0\0\1\203\0\0\0\0\11\0\0\0\1\0\0"
-  "\0\3\0\0\0\6\0\0\0\12\0\0\0\17\0\0\0\24\0\0\0\32\0\0\0\36\0\0\0\40\202"
-  "\0\0\0\"\11\0\0\0\40\0\0\0\36\0\0\0\32\0\0\0\24\0\0\0\17\0\0\0\12\0\0"
-  "\0\6\0\0\0\3\0\0\0\1\205\0\0\0\0\10\0\0\0\2\0\0\0\3\0\0\0\6\0\0\0\11"
-  "\0\0\0\14\0\0\0\17\0\0\0\22\0\0\0\23\202\0\0\0\24\11\0\0\0\23\0\0\0\22"
-  "\0\0\0\17\0\0\0\14\0\0\0\11\0\0\0\6\0\0\0\3\0\0\0\2\0\0\0\1\205\0\0\0"
-  "\0\10\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\5\0\0\0\6\0\0\0\10\0\0\0\11\0\0\0"
-  "\12\202\0\0\0\13\10\0\0\0\12\0\0\0\11\0\0\0\10\0\0\0\6\0\0\0\5\0\0\0"
-  "\3\0\0\0\2\0\0\0\1\210\0\0\0\0\2\0\0\0\1\0\0\0\2\202\0\0\0\3\202\0\0"
-  "\0\4\202\0\0\0\5\202\0\0\0\4\202\0\0\0\3\2\0\0\0\2\0\0\0\1\214\0\0\0"
-  "\0\212\0\0\0\1\207\0\0\0\0"
-};
+static double decoration_alpha = 0.5;
 
-static extents _shadow_extents = { 0, 0, 0, 0 };
-
-static quad _shadow_quads[] = {
-    {
-	{ -6, -5, GRAVITY_NORTH | GRAVITY_WEST },
-	{ -5, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	11, SHRT_MAX,
-	ALIGN_LEFT,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, 0.0
-	}
-    }, {
-	{ 5, -5, GRAVITY_NORTH | GRAVITY_WEST },
-	{ -4, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    11.0, 0.0
-	}
-    }, {
-	{ -4, -5, GRAVITY_NORTH | GRAVITY_EAST },
-	{ 8, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	12, SHRT_MAX,
-	ALIGN_RIGHT,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    12.0, 0.0
-	}
-    },
-
-    {
-	{ -6, 0, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, -5, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, 5,
-	ALIGN_TOP,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, 6.0
-	}
-    }, {
-	{ -6, 5, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, -4, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 0.0,
-	    0.0, 11.0
-	}
-    }, {
-	{ -6, 6, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, 4,
-	ALIGN_BOTTOM,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, 12.0
-	}
-    },
-
-    {
-	{ 0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	{ 8, -5, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, 5,
-	ALIGN_TOP,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    16.0, 6.0
-	}
-    }, {
-	{ 0, 5, GRAVITY_NORTH | GRAVITY_EAST },
-	{ 8, -4, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 0.0,
-	    16.0, 11.0
-	}
-    }, {
-	{ 0, 6, GRAVITY_NORTH | GRAVITY_EAST },
-	{ 8, 0, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, 4,
-	ALIGN_BOTTOM,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    16.0, 12.0
-	}
-    },
-
-    {
-	{ -6, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ -5, 7, GRAVITY_SOUTH | GRAVITY_EAST },
-	11, SHRT_MAX,
-	ALIGN_LEFT,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, 15.0
-	}
-    }, {
-	{ 5,  0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ -4, 7, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    11.0, 15.0
-	}
-    }, {
-	{ -4, 0, GRAVITY_SOUTH | GRAVITY_EAST },
-	{ 8, 7, GRAVITY_SOUTH | GRAVITY_EAST },
-	12, SHRT_MAX,
-	ALIGN_RIGHT,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    12.0, 15.0
-	}
-    }
-};
-
-#ifdef __SUNPRO_C
-#pragma align 4 (_large_shadow)
-#endif
-#ifdef __GNUC__
-static const guint8 _large_shadow[] __attribute__ ((__aligned__ (4))) =
-#else
-    static const guint8 _large_shadow[] =
-#endif
-{ ""
-  /* Pixbuf magic (0x47646b50) */
-  "GdkP"
-  /* length: header (24) + pixel_data (2916) */
-  "\0\0\13|"
-  /* pixdata_type (0x1010002) */
-  "\1\1\0\2"
-  /* rowstride (108) */
-  "\0\0\0l"
-  /* width (27) */
-  "\0\0\0\33"
-  /* height (27) */
-  "\0\0\0\33"
-  /* pixel_data: */
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\2\0\0"
-  "\0\2\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\1\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\4\0\0\0\5\0\0\0\5\0\0\0\6\0\0\0\6"
-  "\0\0\0\6\0\0\0\5\0\0\0\4\0\0\0\4\0\0\0\2\0\0\0\2\0\0\0\1\0\0\0\1\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\4\0\0\0\6\0\0\0\10\0\0\0\12\0\0\0\13\0"
-  "\0\0\15\0\0\0\15\0\0\0\14\0\0\0\13\0\0\0\11\0\0\0\7\0\0\0\5\0\0\0\4\0"
-  "\0\0\2\0\0\0\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\5\0\0\0\10\0\0\0\13\0\0\0\16"
-  "\0\0\0\22\0\0\0\24\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\23\0\0\0\21\0\0\0"
-  "\15\0\0\0\12\0\0\0\7\0\0\0\5\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\6\0\0\0\11\0\0"
-  "\0\16\0\0\0\23\0\0\0\30\0\0\0\35\0\0\0\40\0\0\0#\0\0\0#\0\0\0\"\0\0\0"
-  "\37\0\0\0\33\0\0\0\26\0\0\0\21\0\0\0\14\0\0\0\10\0\0\0\5\0\0\0\2\0\0"
-  "\0\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0\3\0\0\0\5"
-  "\0\0\0\12\0\0\0\17\0\0\0\26\0\0\0\35\0\0\0$\0\0\0+\0\0\0""0\0\0\0""4"
-  "\0\0\0""4\0\0\0""2\0\0\0.\0\0\0)\0\0\0\"\0\0\0\32\0\0\0\23\0\0\0\15\0"
-  "\0\0\10\0\0\0\5\0\0\0\2\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0"
-  "\2\0\0\0\4\0\0\0\10\0\0\0\16\0\0\0\26\0\0\0\37\0\0\0(\0\0\0""2\0\0\0"
-  ";\0\0\0A\0\0\0F\0\0\0G\0\0\0D\0\0\0@\0\0\0""8\0\0\0/\0\0\0%\0\0\0\34"
-  "\0\0\0\23\0\0\0\14\0\0\0\7\0\0\0\4\0\0\0\2\0\0\0\1\0\0\0\0\0\0\0\1\0"
-  "\0\0\1\0\0\0\3\0\0\0\7\0\0\0\13\0\0\0\23\0\0\0\35\0\0\0)\0\0\0""5\0\0"
-  "\0A\0\0\0L\0\0\0S\0\0\0X\0\0\0Y\0\0\0W\0\0\0Q\0\0\0I\0\0\0=\0\0\0""1"
-  "\0\0\0%\0\0\0\32\0\0\0\21\0\0\0\12\0\0\0\5\0\0\0\2\0\0\0\1\0\0\0\0\0"
-  "\0\0\1\0\0\0\2\0\0\0\4\0\0\0\10\0\0\0\17\0\0\0\31\0\0\0%\0\0\0""3\0\0"
-  "\0A\0\0\0P\0\0\0[\0\0\0d\0\0\0i\0\0\0k\0\0\0h\0\0\0b\0\0\0X\0\0\0L\0"
-  "\0\0=\0\0\0/\0\0\0\"\0\0\0\26\0\0\0\15\0\0\0\7\0\0\0\4\0\0\0\2\0\0\0"
-  "\1\0\0\0\1\0\0\0\2\0\0\0\5\0\0\0\13\0\0\0\23\0\0\0\36\0\0\0,\0\0\0=\0"
-  "\0\0M\0\0\0\\\0\0\0i\0\0\0r\0\0\0w\0\0\0y\0\0\0v\0\0\0p\0\0\0e\0\0\0"
-  "X\0\0\0I\0\0\0""8\0\0\0)\0\0\0\33\0\0\0\21\0\0\0\12\0\0\0\5\0\0\0\2\0"
-  "\0\0\1\0\0\0\1\0\0\0\3\0\0\0\7\0\0\0\15\0\0\0\26\0\0\0#\0\0\0""3\0\0"
-  "\0D\0\0\0V\0\0\0f\0\0\0s\0\0\0|\0\0\0\202\0\0\0\203\0\0\0\200\0\0\0z"
-  "\0\0\0p\0\0\0b\0\0\0R\0\0\0@\0\0\0/\0\0\0\40\0\0\0\24\0\0\0\13\0\0\0"
-  "\6\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\4\0\0\0\7\0\0\0\16\0\0\0\31\0\0\0'\0"
-  "\0\0""8\0\0\0K\0\0\0^\0\0\0n\0\0\0{\0\0\0\204\0\0\0\211\0\0\0\213\0\0"
-  "\0\210\0\0\0\202\0\0\0x\0\0\0k\0\0\0Z\0\0\0G\0\0\0""5\0\0\0%\0\0\0\27"
-  "\0\0\0\15\0\0\0\7\0\0\0\3\0\0\0\1\0\0\0\1\0\0\0\4\0\0\0\10\0\0\0\20\0"
-  "\0\0\33\0\0\0*\0\0\0<\0\0\0O\0\0\0b\0\0\0s\0\0\0\200\0\0\0\211\0\0\0"
-  "\216\0\0\0\217\0\0\0\215\0\0\0\210\0\0\0~\0\0\0p\0\0\0_\0\0\0M\0\0\0"
-  "9\0\0\0(\0\0\0\31\0\0\0\16\0\0\0\10\0\0\0\4\0\0\0\1\0\0\0\1\0\0\0\3\0"
-  "\0\0\7\0\0\0\16\0\0\0\27\0\0\0%\0\0\0""6\0\0\0I\0\0\0[\0\0\0k\0\0\0y"
-  "\0\0\0\202\0\0\0\210\0\0\0\211\0\0\0\210\0\0\0\202\0\0\0y\0\0\0k\0\0"
-  "\0[\0\0\0I\0\0\0""6\0\0\0%\0\0\0\27\0\0\0\16\0\0\0\7\0\0\0\3\0\0\0\1"
-  "\0\0\0\1\0\0\0\2\0\0\0\6\0\0\0\14\0\0\0\25\0\0\0!\0\0\0""1\0\0\0A\0\0"
-  "\0S\0\0\0c\0\0\0p\0\0\0z\0\0\0\200\0\0\0\202\0\0\0\200\0\0\0z\0\0\0p"
-  "\0\0\0c\0\0\0S\0\0\0A\0\0\0""0\0\0\0!\0\0\0\24\0\0\0\14\0\0\0\6\0\0\0"
-  "\3\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\5\0\0\0\12\0\0\0\21\0\0\0\34\0\0\0)"
-  "\0\0\0""9\0\0\0I\0\0\0X\0\0\0e\0\0\0n\0\0\0t\0\0\0v\0\0\0t\0\0\0n\0\0"
-  "\0e\0\0\0X\0\0\0I\0\0\0""9\0\0\0)\0\0\0\34\0\0\0\21\0\0\0\12\0\0\0\5"
-  "\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\4\0\0\0\10\0\0\0\16\0\0\0\27\0"
-  "\0\0\"\0\0\0/\0\0\0=\0\0\0K\0\0\0W\0\0\0`\0\0\0e\0\0\0h\0\0\0e\0\0\0"
-  "`\0\0\0W\0\0\0K\0\0\0=\0\0\0/\0\0\0\"\0\0\0\27\0\0\0\16\0\0\0\10\0\0"
-  "\0\4\0\0\0\2\0\0\0\1\0\0\0\0\0\0\0\1\0\0\0\2\0\0\0\5\0\0\0\12\0\0\0\21"
-  "\0\0\0\32\0\0\0%\0\0\0""1\0\0\0=\0\0\0G\0\0\0O\0\0\0U\0\0\0V\0\0\0U\0"
-  "\0\0O\0\0\0G\0\0\0=\0\0\0""1\0\0\0%\0\0\0\32\0\0\0\21\0\0\0\12\0\0\0"
-  "\5\0\0\0\2\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\2\0\0\0\4\0\0\0\7\0"
-  "\0\0\14\0\0\0\23\0\0\0\34\0\0\0%\0\0\0.\0\0\0""7\0\0\0>\0\0\0B\0\0\0"
-  "C\0\0\0B\0\0\0>\0\0\0""7\0\0\0.\0\0\0%\0\0\0\34\0\0\0\23\0\0\0\14\0\0"
-  "\0\7\0\0\0\4\0\0\0\2\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\2"
-  "\0\0\0\5\0\0\0\10\0\0\0\15\0\0\0\23\0\0\0\32\0\0\0!\0\0\0(\0\0\0,\0\0"
-  "\0""0\0\0\0""1\0\0\0""0\0\0\0,\0\0\0(\0\0\0!\0\0\0\32\0\0\0\23\0\0\0"
-  "\15\0\0\0\10\0\0\0\5\0\0\0\2\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\5\0\0\0\10\0\0\0\14\0\0\0\20\0\0\0\26"
-  "\0\0\0\32\0\0\0\36\0\0\0\40\0\0\0!\0\0\0\40\0\0\0\36\0\0\0\32\0\0\0\26"
-  "\0\0\0\20\0\0\0\14\0\0\0\10\0\0\0\5\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\4\0\0\0"
-  "\7\0\0\0\12\0\0\0\15\0\0\0\20\0\0\0\23\0\0\0\24\0\0\0\24\0\0\0\24\0\0"
-  "\0\23\0\0\0\20\0\0\0\15\0\0\0\12\0\0\0\7\0\0\0\4\0\0\0\2\0\0\0\1\0\0"
-  "\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1"
-  "\0\0\0\1\0\0\0\2\0\0\0\4\0\0\0\5\0\0\0\7\0\0\0\10\0\0\0\12\0\0\0\13\0"
-  "\0\0\13\0\0\0\13\0\0\0\12\0\0\0\10\0\0\0\7\0\0\0\5\0\0\0\4\0\0\0\2\0"
-  "\0\0\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\2\0\0\0\4\0\0\0\4\0"
-  "\0\0\5\0\0\0\5\0\0\0\6\0\0\0\5\0\0\0\5\0\0\0\4\0\0\0\4\0\0\0\2\0\0\0"
-  "\2\0\0\0\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0"
-  "\1\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\2\0\0\0\1\0"
-  "\0\0\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0"
-  "\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-  "\0\0\0\0\0\0\0"
-};
-
-static extents _win_extents = {  6,  6, 4,  6 };
-
-static quad _win_quads[] = {
-    {
-	{ -LEFT_SPACE, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_NORTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, 0.0
-	}
-    }, {
-	{ 0, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	ALIGN_LEFT,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1, 0.0
-	}
-    }, {
-	{ 0, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_EAST },
-	{ RIGHT_SPACE, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1.0, 0.0
-	}
-    },
-
-    {
-	{ -LEFT_SPACE, 0, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 0.0,
-	    0.0, TOP_SPACE + 1.0
-	}
-    }, {
-
-	{  0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	{ RIGHT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 0.0,
-	    LEFT_SPACE + 1.0, TOP_SPACE + 1.0
-	}
-    },
-
-    {
-	{ -LEFT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ 0, BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, TOP_SPACE + 1
-	}
-    }, {
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ 0, BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE, TOP_SPACE + 1
-	}
-    }, {
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_EAST },
-	{ RIGHT_SPACE, BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1, TOP_SPACE + 1
-	}
-    }
-};
-
-static quad _win_button_quads[] = {
-    {
-	{ 0 /* + title width  */, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0 /* - button width */, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    0.0 /* title width */, 0.0
-	}
-    }, {
-	{ 0 /* title width + 1 */, -TOP_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	0 /* button width */, SHRT_MAX,
-	ALIGN_RIGHT,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0 /* title width + 1.0 */, 0.0
-	}
-    }
-};
-
-#define SWITCHER_SPACE 40
-
+static extents _shadow_extents   = { 0, 0, 0, 0 };
+static extents _win_extents      = { 6, 6, 4, 6 };
 static extents _switcher_extents = { 0, 0, 0, 0 };
 
-static quad _switcher_quads[] = {
-    {
-	{ -LEFT_SPACE, -BOTTOM_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_NORTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, 0.0
-	}
-    }, {
-	{ 0, -BOTTOM_SPACE, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	ALIGN_LEFT,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1, 0.0
-	}
-    }, {
-	{ 0, -BOTTOM_SPACE, GRAVITY_NORTH | GRAVITY_EAST },
-	{ RIGHT_SPACE, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1.0, 0.0
-	}
-    },
+#define SWITCHER_SPACE     40
+#define SWITCHER_TOP_EXTRA 4
 
-    {
-	{ -LEFT_SPACE, 0, GRAVITY_NORTH | GRAVITY_WEST },
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 0.0,
-	    0.0, BOTTOM_SPACE
-	}
-    }, {
+static gint left_space   = 6;
+static gint right_space  = 6;
+static gint top_space    = 4;
+static gint bottom_space = 6;
 
-	{  0, 0, GRAVITY_NORTH | GRAVITY_EAST },
-	{ RIGHT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 0.0,
-	    LEFT_SPACE + 1.0, BOTTOM_SPACE
-	}
-    },
+static gint left_corner_space   = 0;
+static gint right_corner_space  = 0;
+static gint top_corner_space    = 0;
+static gint bottom_corner_space = 0;
 
-    {
-	{ -LEFT_SPACE, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ 0, SWITCHER_SPACE + BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_WEST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    0.0, BOTTOM_SPACE + 1
-	}
-    }, {
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_WEST },
-	{ 0, SWITCHER_SPACE + BOTTOM_SPACE, GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    0.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1, BOTTOM_SPACE + 1
-	}
-    }, {
-	{ 0, 0, GRAVITY_SOUTH | GRAVITY_EAST },
-	{ RIGHT_SPACE, SWITCHER_SPACE + BOTTOM_SPACE,
-	  GRAVITY_SOUTH | GRAVITY_EAST },
-	SHRT_MAX, SHRT_MAX,
-	0,
-	{
-	    1.0, 0.0,
-	    0.0, 1.0,
-	    LEFT_SPACE + 1, BOTTOM_SPACE + 1
-	}
-    }
-};
+static gint titlebar_height = 17;
+
+static gint normal_top_corner_space      = 0;
+static gint switcher_top_corner_space    = 0;
+static gint switcher_bottom_corner_space = 0;
+
+static gint shadow_left_space   = 0;
+static gint shadow_right_space  = 0;
+static gint shadow_top_space    = 0;
+static gint shadow_bottom_space = 0;
+
+static gint shadow_left_corner_space   = 0;
+static gint shadow_right_corner_space  = 0;
+static gint shadow_top_corner_space    = 0;
+static gint shadow_bottom_corner_space = 0;
+
+static gdouble shadow_radius   = SHADOW_RADIUS;
+static gdouble shadow_opacity  = SHADOW_OPACITY;
+static gint    shadow_offset_x = SHADOW_OFFSET_X;
+static gint    shadow_offset_y = SHADOW_OFFSET_Y;
 
 static GdkPixmap *shadow_pixmap = NULL;
 static GdkPixmap *large_shadow_pixmap = NULL;
 static GdkPixmap *decor_normal_pixmap = NULL;
 static GdkPixmap *decor_active_pixmap = NULL;
 
-static cairo_pattern_t *shadow_pattern;
+static cairo_pattern_t *shadow_pattern = NULL;
 
 static Atom frame_window_atom;
 static Atom win_decor_atom;
@@ -759,7 +287,6 @@ static guint  draw_idle_id = 0;
 static PangoFontDescription *titlebar_font = NULL;
 static gboolean		    use_system_font = FALSE;
 static gint		    text_height;
-static gint		    titlebar_height;
 
 static GdkPixmap *switcher_pixmap = NULL;
 static GdkPixmap *switcher_buffer_pixmap = NULL;
@@ -779,8 +306,9 @@ static gint      switcher_height;
 
   flags
 
-  1st and 2nd bit p1 gravity, 3rd and 4th bit p2 gravity,
-  5rd and 6th bit alignment, 7th bit XX, 8th bit XY, 9th bit YX, 10th bit YY.
+  1st to 4nd bit p1 gravity, 5rd to 8th bit p2 gravity,
+  9rd and 10th bit alignment, 11th bit XX, 12th bit XY, 13th bit YX,
+  14th bit YY.
 
   data[4 + n * 9 + 1] = flags
   data[4 + n * 9 + 2] = p1 x
@@ -810,8 +338,8 @@ decoration_to_property (long	*data,
     {
 	*data++ =
 	    (quad->p1.gravity << 0)    |
-	    (quad->p2.gravity << 2)    |
-	    (quad->align      << 4)    |
+	    (quad->p2.gravity << 4)    |
+	    (quad->align      << 8)    |
 	    (quad->m.xx ? XX_MASK : 0) |
 	    (quad->m.xy ? XY_MASK : 0) |
 	    (quad->m.yx ? YX_MASK : 0) |
@@ -830,61 +358,305 @@ decoration_to_property (long	*data,
     }
 }
 
-static void
-decor_quads_init8 (quad *dst,
-		   quad *src,
-		   int  height)
+static gint
+set_horz_quad_line (quad   *q,
+		    int    left,
+		    int    left_corner,
+		    int    right,
+		    int    right_corner,
+		    int    top,
+		    int	   bottom,
+		    int    gravity,
+		    int	   width,
+		    double x0,
+		    double y0)
 {
-    memcpy (dst, src, 8 * sizeof (quad));
+    gint nQuad = 0;
 
-    dst[0].p1.y -= height;
-    dst[1].p1.y -= height;
-    dst[2].p1.y -= height;
+    q->p1.x	  = -left;
+    q->p1.y	  = top;
+    q->p1.gravity = gravity | GRAVITY_WEST;
+    q->p2.x	  = 0;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity;
+    q->max_width  = left + left_corner;
+    q->max_height = SHRT_MAX;
+    q->align	  = ALIGN_LEFT;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0;
+    q->m.y0	  = y0;
 
-    dst[3].m.y0 += height;
-    dst[4].m.y0 += height;
+    q++; nQuad++;
 
-    dst[5].m.y0 += height;
-    dst[6].m.y0 += height;
-    dst[7].m.y0 += height;
+    q->p1.x	  = left_corner;
+    q->p1.y	  = top;
+    q->p1.gravity = gravity | GRAVITY_WEST;
+    q->p2.x	  = -right_corner;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity | GRAVITY_EAST;
+    q->max_width  = SHRT_MAX;
+    q->max_height = SHRT_MAX;
+    q->align	  = 0;
+    q->m.xx	  = 0.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0 + left + left_corner;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    q->p1.x	  = 0;
+    q->p1.y	  = top;
+    q->p1.gravity = gravity;
+    q->p2.x	  = right;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity | GRAVITY_EAST;
+    q->max_width  = right_corner + right;
+    q->max_height = SHRT_MAX;
+    q->align	  = ALIGN_RIGHT;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0 + width;
+    q->m.y0	  = y0;
+
+    nQuad++;
+
+    return nQuad;
+}
+
+static gint
+set_vert_quad_row (quad   *q,
+		   int    top,
+		   int    top_corner,
+		   int    bottom,
+		   int    bottom_corner,
+		   int    left,
+		   int	  right,
+		   int    gravity,
+		   int	  height,
+		   double x0,
+		   double y0)
+{
+    gint nQuad = 0;
+
+    q->p1.x	  = left;
+    q->p1.y	  = -top;
+    q->p1.gravity = gravity | GRAVITY_NORTH;
+    q->p2.x	  = right;
+    q->p2.y	  = 0;
+    q->p2.gravity = gravity;
+    q->max_width  = SHRT_MAX;
+    q->max_height = top + top_corner;
+    q->align	  = ALIGN_TOP;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    q->p1.x	  = left;
+    q->p1.y	  = top_corner;
+    q->p1.gravity = gravity | GRAVITY_NORTH;
+    q->p2.x	  = right;
+    q->p2.y	  = -bottom_corner;
+    q->p2.gravity = gravity | GRAVITY_SOUTH;
+    q->max_width  = SHRT_MAX;
+    q->max_height = SHRT_MAX;
+    q->align	  = 0;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 0.0;
+    q->m.x0	  = x0;
+    q->m.y0	  = y0 + top + top_corner;
+
+    q++; nQuad++;
+
+    q->p1.x	  = left;
+    q->p1.y	  = 0;
+    q->p1.gravity = gravity;
+    q->p2.x	  = right;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity | GRAVITY_SOUTH;
+    q->max_width  = SHRT_MAX;
+    q->max_height = bottom_corner + bottom;
+    q->align	  = ALIGN_BOTTOM;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0;
+    q->m.y0	  = y0 + height;
+
+    nQuad++;
+
+    return nQuad;
+}
+
+static int
+set_window_quads (quad *q,
+		  int  width,
+		  int  height,
+		  int  button_width)
+{
+    gint    n, nQuad = 0;
+    int     top_left, top_right, y;
+    double  y0;
+
+    top_right = button_width;
+    top_left  = width - left_space - right_space - top_right - 1;
+
+    /* special case which can happen with large shadows */
+    if (right_corner_space > top_right || left_corner_space > top_left)
+    {
+	y  = -titlebar_height;
+	y0 = top_space;
+
+	/* top quads */
+	n = set_horz_quad_line (q,
+				left_space,
+				left_corner_space,
+				right_space,
+				right_corner_space,
+				-top_space - titlebar_height,
+				y,
+				GRAVITY_NORTH,
+				width,
+				0.0,
+				0.0);
+
+	q += n; nQuad += n;
+    }
+    else
+    {
+	y  = -top_space - titlebar_height;
+	y0 = 0.0;
+    }
+
+    /* 3 top/titlebar quads */
+    q->p1.x	  = -left_space;
+    q->p1.y	  = y;
+    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
+    q->p2.x	  = -top_right;
+    q->p2.y	  = 0;
+    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
+    q->max_width  = left_space + top_left;
+    q->max_height = SHRT_MAX;
+    q->align	  = ALIGN_LEFT;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = 0.0;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    q->p1.x	  = top_left;
+    q->p1.y	  = y;
+    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
+    q->p2.x	  = -top_right;
+    q->p2.y	  = 0;
+    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
+    q->max_width  = SHRT_MAX;
+    q->max_height = SHRT_MAX;
+    q->align	  = 0;
+    q->m.xx	  = 0.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = left_space + top_left;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    q->p1.x	  = top_left;
+    q->p1.y	  = y;
+    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
+    q->p2.x	  = right_space;
+    q->p2.y	  = 0;
+    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
+    q->max_width  = right_space + top_right;
+    q->max_height = SHRT_MAX;
+    q->align	  = ALIGN_RIGHT;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = width;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    /* left quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   normal_top_corner_space,
+			   0,
+			   bottom_corner_space,
+			   -left_space,
+			   0,
+			   GRAVITY_WEST,
+			   height - top_space - titlebar_height - bottom_space,
+			   0.0,
+			   top_space + titlebar_height + 1.0);
+
+    q += n; nQuad += n;
+
+    /* right quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   normal_top_corner_space,
+			   0,
+			   bottom_corner_space,
+			   0,
+			   right_space,
+			   GRAVITY_EAST,
+			   height - top_space - titlebar_height - bottom_space,
+			   width - right_space,
+			   top_space + titlebar_height + 1.0);
+
+    q += n; nQuad += n;
+
+    /* bottom quads */
+    n = set_horz_quad_line (q,
+			    left_space,
+			    left_corner_space,
+			    right_space,
+			    right_corner_space,
+			    0,
+			    bottom_space,
+			    GRAVITY_SOUTH,
+			    width,
+			    0.0,
+			    top_space + titlebar_height +
+			    normal_top_corner_space +
+			    bottom_corner_space + 2.0);
+
+    nQuad += n;
+
+    return nQuad;
 }
 
 static void
 decor_update_window_property (decor_t *d)
 {
-    long    data[128];
+    long    data[256];
     Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    gint    nQuad = sizeof (_win_quads) / sizeof (_win_quads[0]);
-    gint    nButtonQuad = sizeof (_win_button_quads) /
-	sizeof (_win_button_quads[0]);
-    quad    quads[nQuad + nButtonQuad];
     extents extents = _win_extents;
+    gint    nQuad;
+    quad    quads[N_QUADS_MAX];
 
-    /* this is kinda hard to read */
-
-    decor_quads_init8 (quads, _win_quads, titlebar_height);
-
-    memcpy (quads + nQuad, _win_button_quads, nButtonQuad * sizeof (quad));
-
-    quads[8].p1.y  -= titlebar_height;
-    quads[9].p1.y  -= titlebar_height;
-    quads[10].p1.y -= titlebar_height;
-
-    quads[2].m.x0 = quads[4].m.x0 = quads[7].m.x0 = d->width - RIGHT_SPACE;
-    quads[1].m.xx = 1.0;
-
-    quads[1].max_width = d->width - LEFT_SPACE - RIGHT_SPACE - d->button_width;
-
-    quads[8].p1.x = d->width - LEFT_SPACE - RIGHT_SPACE - d->button_width;
-    quads[8].p2.x = -d->button_width;
-    quads[8].m.x0 = d->width - RIGHT_SPACE - d->button_width;
-
-    quads[9].p1.x = d->width - LEFT_SPACE - RIGHT_SPACE - d->button_width;
-    quads[9].m.x0 = d->width - RIGHT_SPACE - d->button_width;
-
-    quads[9].max_width = d->button_width;
-
-    nQuad += nButtonQuad;
+    nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
 
     extents.top += titlebar_height;
 
@@ -896,8 +668,180 @@ decor_update_window_property (decor_t *d)
 		     win_decor_atom,
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
+		     XSync (xdisplay, FALSE);
+    gdk_error_trap_pop ();
+}
+
+static int
+set_switcher_quads (quad *q,
+		    int  width,
+		    int  height)
+{
+    gint n, nQuad = 0;
+
+    /* 1 top quads */
+    q->p1.x	  = -left_space;
+    q->p1.y	  = -top_space - SWITCHER_TOP_EXTRA;
+    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
+    q->p2.x	  = right_space;
+    q->p2.y	  = 0;
+    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
+    q->max_width  = SHRT_MAX;
+    q->max_height = SHRT_MAX;
+    q->align	  = 0;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = 0.0;
+    q->m.y0	  = 0.0;
+
+    q++; nQuad++;
+
+    /* left quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   switcher_top_corner_space,
+			   0,
+			   bottom_corner_space,
+			   -left_space,
+			   0,
+			   GRAVITY_WEST,
+			   height - top_space - titlebar_height - bottom_space,
+			   0.0,
+			   top_space + SWITCHER_TOP_EXTRA);
+
+    q += n; nQuad += n;
+
+    /* right quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   switcher_top_corner_space,
+			   0,
+			   switcher_bottom_corner_space,
+			   0,
+			   right_space,
+			   GRAVITY_EAST,
+			   height - top_space - titlebar_height - bottom_space,
+			   width - right_space,
+			   top_space + SWITCHER_TOP_EXTRA);
+
+    q += n; nQuad += n;
+
+    /* 1 bottom quad */
+    q->p1.x	  = -left_space;
+    q->p1.y	  = 0;
+    q->p1.gravity = GRAVITY_SOUTH | GRAVITY_WEST;
+    q->p2.x	  = right_space;
+    q->p2.y	  = bottom_space + SWITCHER_SPACE;
+    q->p2.gravity = GRAVITY_SOUTH | GRAVITY_EAST;
+    q->max_width  = SHRT_MAX;
+    q->max_height = SHRT_MAX;
+    q->align	  = 0;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = 0.0;
+    q->m.y0	  = height - bottom_space - SWITCHER_SPACE;
+
+    nQuad++;
+
+    return nQuad;
+}
+
+static void
+decor_update_switcher_property (decor_t *d)
+{
+    long    data[256];
+    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    gint    nQuad;
+    quad    quads[N_QUADS_MAX];
+    extents extents = _switcher_extents;
+
+    nQuad = set_switcher_quads (quads, d->width, d->height);
+
+    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			    &extents, quads, nQuad);
+
+    gdk_error_trap_push ();
+    XChangeProperty (xdisplay, d->prop_xid,
+		     win_decor_atom,
+		     XA_INTEGER,
+		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
     XSync (xdisplay, FALSE);
     gdk_error_trap_pop ();
+}
+
+static int
+set_shadow_quads (quad *q,
+		  gint width,
+		  gint height)
+{
+    gint n, nQuad = 0;
+
+    /* top quads */
+    n = set_horz_quad_line (q,
+			    shadow_left_space,
+			    shadow_left_corner_space,
+			    shadow_right_space,
+			    shadow_right_corner_space,
+			    -shadow_top_space,
+			    0,
+			    GRAVITY_NORTH,
+			    width,
+			    0.0,
+			    0.0);
+
+    q += n; nQuad += n;
+
+    /* left quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   shadow_top_corner_space,
+			   0,
+			   shadow_bottom_corner_space,
+			   -shadow_left_space,
+			   0,
+			   GRAVITY_WEST,
+			   height - shadow_top_space - shadow_bottom_space,
+			   0.0,
+			   shadow_top_space);
+
+    q += n; nQuad += n;
+
+    /* right quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   shadow_top_corner_space,
+			   0,
+			   shadow_bottom_corner_space,
+			   0,
+			   shadow_right_space,
+			   GRAVITY_EAST,
+			   height - shadow_top_space - shadow_bottom_space,
+			   width - shadow_right_space,
+			   shadow_top_space);
+
+    q += n; nQuad += n;
+
+    /* bottom quads */
+    n = set_horz_quad_line (q,
+			    shadow_left_space,
+			    shadow_left_corner_space,
+			    shadow_right_space,
+			    shadow_right_corner_space,
+			    0,
+			    shadow_bottom_space,
+			    GRAVITY_SOUTH,
+			    width,
+			    0.0,
+			    shadow_top_space + shadow_top_corner_space +
+			    shadow_bottom_corner_space + 1.0);
+
+    nQuad += n;
+
+    return nQuad;
 }
 
 static void
@@ -1033,75 +977,118 @@ draw_shadow_background (decor_t *d,
 {
     cairo_matrix_t matrix;
     double	   w, h, x2, y2;
+    gint	   width, height;
+    gint	   left, right, top, bottom;
 
-    w = d->width - 13.0 - 14.0;
-    h = d->height - 13.0 - 14.0;
+    if (!large_shadow_pixmap)
+    {
+	cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, 0.0);
+	cairo_paint (cr);
 
-    x2 = d->width - 14.0;
-    y2 = d->height - 14.0;
+	return;
+    }
+
+    gdk_drawable_get_size (large_shadow_pixmap, &width, &height);
+
+    left   = left_space   + left_corner_space;
+    right  = right_space  + right_corner_space;
+    top    = top_space    + top_corner_space;
+    bottom = bottom_space + bottom_corner_space;
+
+    if (d->width - left - right < 0)
+    {
+	left = d->width / 2;
+	right = d->width - left;
+    }
+
+    if (d->height - top - bottom < 0)
+    {
+	top = d->height / 2;
+	bottom = d->height - top;
+    }
+
+    w = d->width - left - right;
+    h = d->height - top - bottom;
+
+    x2 = d->width - right;
+    y2 = d->height - bottom;
 
     /* top left */
     cairo_matrix_init_identity (&matrix);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
     cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, 0.0, 0.0, 13.0, 13.0);
+    cairo_rectangle (cr, 0.0, 0.0, left, top);
     cairo_fill (cr);
 
     /* top */
-    cairo_matrix_init_translate (&matrix, 13.0, 0.0);
-    cairo_matrix_scale (&matrix, 1.0 / w, 1.0);
-    cairo_matrix_translate (&matrix, -13.0, 0.0);
-    cairo_pattern_set_matrix (shadow_pattern, &matrix);
-    cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, 13.0, 0.0, w, 13.0);
-    cairo_fill (cr);
+    if (w > 0)
+    {
+	cairo_matrix_init_translate (&matrix, left, 0.0);
+	cairo_matrix_scale (&matrix, 1.0 / w, 1.0);
+	cairo_matrix_translate (&matrix, -left, 0.0);
+	cairo_pattern_set_matrix (shadow_pattern, &matrix);
+	cairo_set_source (cr, shadow_pattern);
+	cairo_rectangle (cr, left, 0.0, w, top);
+	cairo_fill (cr);
+    }
 
     /* top right */
-    cairo_matrix_init_translate (&matrix, 13.0 - x2, 0.0);
+    cairo_matrix_init_translate (&matrix, width - right - x2, 0.0);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
     cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, x2, 0.0, 14.0, 13.0);
+    cairo_rectangle (cr, x2, 0.0, right, top);
     cairo_fill (cr);
 
     /* left */
-    cairo_matrix_init_translate (&matrix, 0.0, 13.0);
-    cairo_matrix_scale (&matrix, 1.0, 1.0 / h);
-    cairo_matrix_translate (&matrix, 0.0, -13.0);
-    cairo_pattern_set_matrix (shadow_pattern, &matrix);
-    cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, 0.0, 13.0, 13.0, h);
-    cairo_fill (cr);
+    if (h > 0)
+    {
+	cairo_matrix_init_translate (&matrix, 0.0, top);
+	cairo_matrix_scale (&matrix, 1.0, 1.0 / h);
+	cairo_matrix_translate (&matrix, 0.0, -top);
+	cairo_pattern_set_matrix (shadow_pattern, &matrix);
+	cairo_set_source (cr, shadow_pattern);
+	cairo_rectangle (cr, 0.0, top, left, h);
+	cairo_fill (cr);
+    }
 
     /* right */
-    cairo_matrix_init_translate (&matrix, 13.0 - x2, 13.0);
-    cairo_matrix_scale (&matrix, 1.0, 1.0 / h);
-    cairo_matrix_translate (&matrix, 0.0, -13.0);
-    cairo_pattern_set_matrix (shadow_pattern, &matrix);
-    cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, x2, 13.0, 14.0, h);
-    cairo_fill (cr);
+    if (h > 0)
+    {
+	cairo_matrix_init_translate (&matrix, width - right - x2, top);
+	cairo_matrix_scale (&matrix, 1.0, 1.0 / h);
+	cairo_matrix_translate (&matrix, 0.0, -top);
+	cairo_pattern_set_matrix (shadow_pattern, &matrix);
+	cairo_set_source (cr, shadow_pattern);
+	cairo_rectangle (cr, x2, top, right, h);
+	cairo_fill (cr);
+    }
 
     /* bottom left */
-    cairo_matrix_init_translate (&matrix, 0.0, 13.0 - y2);
+    cairo_matrix_init_translate (&matrix, 0.0, height - bottom - y2);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
     cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, 0.0, y2, 13.0, 14.0);
+    cairo_rectangle (cr, 0.0, y2, left, bottom);
     cairo_fill (cr);
 
     /* bottom */
-    cairo_matrix_init_translate (&matrix, 13.0, 13.0 - y2);
-    cairo_matrix_scale (&matrix, 1.0 / w, 1.0);
-    cairo_matrix_translate (&matrix, -13.0, 0.0);
-    cairo_pattern_set_matrix (shadow_pattern, &matrix);
-    cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, 13.0, y2, w, 14.0);
-    cairo_fill (cr);
+    if (w > 0)
+    {
+	cairo_matrix_init_translate (&matrix, left,
+				     height - bottom - y2);
+	cairo_matrix_scale (&matrix, 1.0 / w, 1.0);
+	cairo_matrix_translate (&matrix, -left, 0.0);
+	cairo_pattern_set_matrix (shadow_pattern, &matrix);
+	cairo_set_source (cr, shadow_pattern);
+	cairo_rectangle (cr, left, y2, w, bottom);
+	cairo_fill (cr);
+    }
 
     /* bottom right */
-    cairo_matrix_init_translate (&matrix, 13.0 - x2, 13.0 - y2);
+    cairo_matrix_init_translate (&matrix, width - right - x2,
+				 height - bottom - y2);
     cairo_pattern_set_matrix (shadow_pattern, &matrix);
     cairo_set_source (cr, shadow_pattern);
-    cairo_rectangle (cr, x2, y2, 14.0, 14.0);
+    cairo_rectangle (cr, x2, y2, right, bottom);
     cairo_fill (cr);
 }
 
@@ -1151,8 +1138,8 @@ draw_max_button (decor_t *d,
 
 static void
 draw_unmax_button (decor_t *d,
-		 cairo_t *cr,
-		 double  s)
+		   cairo_t *cr,
+		   double  s)
 {
     cairo_rel_move_to (cr, 1.0, 1.0);
 
@@ -1249,7 +1236,7 @@ draw_window_decoration (decor_t *d)
     GtkStyle	  *style;
     decor_color_t color;
     double        alpha;
-    double        x1, y1, x2, y2, x, y;
+    double        x1, y1, x2, y2, x, y, h;
     int		  corners = SHADE_LEFT | SHADE_RIGHT | SHADE_TOP | SHADE_BOTTOM;
     int		  top;
     int		  button_x;
@@ -1276,10 +1263,12 @@ draw_window_decoration (decor_t *d)
 
     top = _win_extents.top + titlebar_height;
 
-    x1 = LEFT_SPACE - _win_extents.left;
-    y1 = TOP_SPACE - _win_extents.top;
-    x2 = d->width - RIGHT_SPACE + _win_extents.right;
-    y2 = d->height - BOTTOM_SPACE + _win_extents.bottom;
+    x1 = left_space - _win_extents.left;
+    y1 = top_space - _win_extents.top;
+    x2 = d->width - right_space + _win_extents.right;
+    y2 = d->height - bottom_space + _win_extents.bottom;
+
+    h = d->height - top_space - titlebar_height - bottom_space;
 
     cairo_set_line_width (cr, 1.0);
 
@@ -1289,7 +1278,7 @@ draw_window_decoration (decor_t *d)
     {
 	decor_color_t *title_color = _title_color;
 
-	alpha = 0.8;
+	alpha = decoration_alpha + 0.3;
 
 	fill_rounded_rectangle (cr,
 				x1 + 0.5,
@@ -1321,7 +1310,7 @@ draw_window_decoration (decor_t *d)
     }
     else
     {
-	alpha = 0.5;
+	alpha = decoration_alpha;
 
 	fill_rounded_rectangle (cr,
 				x1 + 0.5,
@@ -1356,7 +1345,7 @@ draw_window_decoration (decor_t *d)
 			    x1 + 0.5,
 			    y1 + top,
 			    _win_extents.left - 0.5,
-			    1,
+			    h,
 			    5.0, 0,
 			    &color, 1.0, &color, alpha,
 			    SHADE_LEFT);
@@ -1365,7 +1354,7 @@ draw_window_decoration (decor_t *d)
 			    x2 - _win_extents.right,
 			    y1 + top,
 			    _win_extents.right - 0.5,
-			    1,
+			    h,
 			    5.0, 0,
 			    &color, 1.0, &color, alpha,
 			    SHADE_RIGHT);
@@ -1400,8 +1389,10 @@ draw_window_decoration (decor_t *d)
 			    SHADE_BOTTOM | SHADE_RIGHT);
 
     cairo_rectangle (cr,
-		     LEFT_SPACE, titlebar_height + TOP_SPACE,
-		     d->width - LEFT_SPACE - RIGHT_SPACE, 1);
+		     left_space,
+		     titlebar_height + top_space,
+		     d->width - left_space - right_space,
+		     h);
     gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
     cairo_fill (cr);
 
@@ -1471,12 +1462,12 @@ draw_window_decoration (decor_t *d)
 
     cairo_set_line_width (cr, 2.0);
 
-    button_x = d->width - RIGHT_SPACE - 13;
+    button_x = d->width - right_space - 13;
 
     if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
     {
 	button_state_offsets (button_x,
-			      titlebar_height / 2 + 3.0,
+			      y1 - 3.0 + titlebar_height / 2,
 			      d->button_states[0], &x, &y);
 
 	button_x -= 17;
@@ -1501,7 +1492,7 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
     {
 	button_state_offsets (button_x,
-			      titlebar_height / 2 + 3.0,
+			      y1 - 3.0 + titlebar_height / 2,
 			      d->button_states[1], &x, &y);
 
 	button_x -= 17;
@@ -1543,7 +1534,7 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
     {
 	button_state_offsets (button_x,
-			      titlebar_height / 2 + 3.0,
+			      y1 - 3.0 + titlebar_height / 2,
 			      d->button_states[2], &x, &y);
 
 	button_x -= 17;
@@ -1573,8 +1564,8 @@ draw_window_decoration (decor_t *d)
 	if (d->active)
 	{
 	    cairo_move_to (cr,
-			   32.0,
-			   8.0 + (titlebar_height - text_height) / 2.0);
+			   left_space + 21.0,
+			   y1 + 2.0 + (titlebar_height - text_height) / 2.0);
 
 	    gdk_cairo_set_source_color_alpha (cr,
 					      &style->fg[GTK_STATE_NORMAL],
@@ -1593,15 +1584,15 @@ draw_window_decoration (decor_t *d)
 	}
 
 	cairo_move_to (cr,
-		       32.0,
-		       8.0 + (titlebar_height - text_height) / 2.0);
+		       left_space + 21.0,
+		       y1 + 2.0 + (titlebar_height - text_height) / 2.0);
 
 	pango_cairo_show_layout (cr, d->layout);
     }
 
     if (d->icon)
     {
-	cairo_translate (cr, LEFT_SPACE + 1, titlebar_height / 2 + 1.0);
+	cairo_translate (cr, left_space + 1, y1 - 5.0 + titlebar_height / 2);
 	cairo_set_source (cr, d->icon);
 	cairo_rectangle (cr, 0.0, 0.0, 16.0, 16.0);
 	cairo_clip (cr);
@@ -1632,32 +1623,6 @@ draw_window_decoration (decor_t *d)
     }
 }
 
-static void
-decor_update_switcher_property (decor_t *d)
-{
-    long    data[128];
-    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    gint    nQuad = sizeof (_switcher_quads) / sizeof (_switcher_quads[0]);
-    quad    quads[nQuad];
-    extents extents = _switcher_extents;
-
-    decor_quads_init8 (quads, _switcher_quads, 0);
-
-    quads[2].m.x0 = quads[4].m.x0 = quads[7].m.x0 = d->width - RIGHT_SPACE;
-    quads[6].m.xx = 1.0;
-
-    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, quads, nQuad);
-
-    gdk_error_trap_push ();
-    XChangeProperty (xdisplay, d->prop_xid,
-		     win_decor_atom,
-		     XA_INTEGER,
-		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
-    XSync (xdisplay, FALSE);
-    gdk_error_trap_pop ();
-}
-
 #define SWITCHER_ALPHA 0xa0a0
 
 static void
@@ -1668,7 +1633,7 @@ draw_switcher_background (decor_t *d)
     GtkStyle	  *style;
     decor_color_t color;
     double	  alpha = SWITCHER_ALPHA / 65535.0;
-    double	  x1, y1, x2, y2;
+    double	  x1, y1, x2, y2, h;
     int		  top;
     unsigned long pixel;
     ushort	  a = SWITCHER_ALPHA;
@@ -1688,10 +1653,12 @@ draw_switcher_background (decor_t *d)
 
     top = _win_extents.bottom;
 
-    x1 = LEFT_SPACE - _win_extents.left;
-    y1 = BOTTOM_SPACE - _win_extents.bottom;
-    x2 = d->width - RIGHT_SPACE + _win_extents.right;
-    y2 = d->height - BOTTOM_SPACE + _win_extents.bottom;
+    x1 = left_space - _win_extents.left;
+    y1 = top_space - _win_extents.top;
+    x2 = d->width - right_space + _win_extents.right;
+    y2 = d->height - bottom_space + _win_extents.bottom;
+
+    h = y2 - y1 - _win_extents.bottom - _win_extents.bottom;
 
     cairo_set_line_width (cr, 1.0);
 
@@ -1731,7 +1698,7 @@ draw_switcher_background (decor_t *d)
 			    x1 + 0.5,
 			    y1 + top,
 			    _win_extents.left - 0.5,
-			    SWITCHER_SPACE + 1,
+			    h,
 			    5.0, 0,
 			    &color, alpha, &color, alpha * 0.75,
 			    SHADE_LEFT);
@@ -1740,7 +1707,7 @@ draw_switcher_background (decor_t *d)
 			    x2 - _win_extents.right,
 			    y1 + top,
 			    _win_extents.right - 0.5,
-			    SWITCHER_SPACE + 1,
+			    h,
 			    5.0, 0,
 			    &color, alpha, &color, alpha * 0.75,
 			    SHADE_RIGHT);
@@ -1776,7 +1743,7 @@ draw_switcher_background (decor_t *d)
     cairo_rectangle (cr, x1 + _win_extents.left,
 		     y1 + top,
 		     x2 - x1 - _win_extents.left - _win_extents.right,
-		     SWITCHER_SPACE + 1);
+		     h);
     gdk_cairo_set_source_color_alpha (cr,
 				      &style->bg[GTK_STATE_NORMAL],
 				      alpha);
@@ -1836,15 +1803,15 @@ draw_switcher_background (decor_t *d)
 
     cairo_destroy (cr);
 
-    gdk_draw_drawable  (d->pixmap,
-			d->gc,
-			d->buffer_pixmap,
-			0,
-			0,
-			0,
-			0,
-			d->width,
-			d->height);
+    gdk_draw_drawable (d->pixmap,
+		       d->gc,
+		       d->buffer_pixmap,
+		       0,
+		       0,
+		       0,
+		       0,
+		       d->width,
+		       d->height);
 
     pixel = ((((a * style->bg[GTK_STATE_NORMAL].red  ) >> 24) & 0x0000ff) |
 	     (((a * style->bg[GTK_STATE_NORMAL].green) >> 16) & 0x00ff00) |
@@ -1883,18 +1850,18 @@ draw_switcher_foreground (decor_t *d)
 
     top = _win_extents.bottom;
 
-    x1 = LEFT_SPACE - _win_extents.left;
-    y1 = BOTTOM_SPACE - _win_extents.bottom;
-    x2 = d->width - RIGHT_SPACE + _win_extents.right;
+    x1 = left_space - _win_extents.left;
+    y1 = top_space - _win_extents.top;
+    x2 = d->width - right_space + _win_extents.right;
 
     cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
 
     cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
     cairo_rectangle (cr, x1 + _win_extents.left,
-		     y1 + top,
+		     y1 + top + switcher_top_corner_space,
 		     x2 - x1 - _win_extents.left - _win_extents.right,
-		     SWITCHER_SPACE + 1);
+		     SWITCHER_SPACE);
 
     gdk_cairo_set_source_color_alpha (cr,
 				      &style->bg[GTK_STATE_NORMAL],
@@ -1913,7 +1880,9 @@ draw_switcher_foreground (decor_t *d)
 
 	pango_layout_get_pixel_size (d->layout, &w, NULL);
 
-	cairo_move_to (cr, d->width / 2 - w / 2, SWITCHER_SPACE - 12.0);
+	cairo_move_to (cr, d->width / 2 - w / 2,
+		       y1 + top + switcher_top_corner_space +
+		       SWITCHER_SPACE / 2 - text_height / 2);
 
 	pango_cairo_show_layout (cr, d->layout);
     }
@@ -2024,48 +1993,48 @@ pixmap_new_from_pixbuf (GdkPixbuf *pixbuf)
     return pixmap;
 }
 
-static GdkPixmap *
-pixmap_new_from_inline (const guint8 *data)
-{
-    GdkPixbuf *pixbuf;
-
-    pixbuf = gdk_pixbuf_new_from_inline (-1, data, FALSE, NULL);
-    if (!pixbuf)
-	return NULL;
-
-    return pixmap_new_from_pixbuf (pixbuf);
-}
-
 static void
 update_default_decorations (GdkScreen *screen)
 {
-    long       data[128];
+    long       data[256];
     Window     xroot;
     GdkDisplay *gdkdisplay = gdk_display_get_default ();
     Display    *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
     Atom       atom;
     decor_t    d;
-    gint       nShadowQuad;
-    gint       nQuad = sizeof (_win_quads) / sizeof (_win_quads[0]);
-    quad       quads[nQuad];
+    gint       nQuad;
+    quad       quads[N_QUADS_MAX];
     extents    extents = _win_extents;
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
     atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_BARE", FALSE);
-    nShadowQuad = sizeof (_shadow_quads) / sizeof (_shadow_quads[0]);
-    decoration_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
-			    &_shadow_extents, _shadow_quads, nShadowQuad);
+    if (shadow_pixmap)
+    {
+	int width, height;
 
-    XChangeProperty (xdisplay, xroot,
-		     atom,
-		     XA_INTEGER,
-		     32, PropModeReplace, (guchar *) data, 5 + 9 * nShadowQuad);
+	gdk_drawable_get_size (shadow_pixmap, &width, &height);
 
-    d.width  = LEFT_SPACE + 1 + RIGHT_SPACE;
-    d.height = titlebar_height + TOP_SPACE + 1 + BOTTOM_SPACE;
+	nQuad = set_shadow_quads (quads, width, height);
 
-    decor_quads_init8 (quads, _win_quads, titlebar_height);
+	decoration_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
+				&_shadow_extents, quads, nQuad);
+
+	XChangeProperty (xdisplay, xroot,
+			 atom,
+			 XA_INTEGER,
+			 32, PropModeReplace, (guchar *) data,
+			 5 + 9 * nQuad);
+    }
+    else
+    {
+	XDeleteProperty (xdisplay, xroot, atom);
+    }
+
+    d.width  = left_space + left_corner_space + 1 + right_corner_space +
+	right_space;
+    d.height = top_space + titlebar_height + normal_top_corner_space + 2 +
+	bottom_corner_space + bottom_space;
 
     extents.top += titlebar_height;
 
@@ -2075,10 +2044,13 @@ update_default_decorations (GdkScreen *screen)
     d.state	    = 0;
     d.actions	    = 0;
     d.prop_xid	    = 0;
+    d.button_width  = 0;
     d.draw	    = draw_window_decoration;
 
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
+
+    nQuad = set_window_quads (quads, d.width, d.height, right_corner_space);
 
     decor_normal_pixmap = create_pixmap (d.width, d.height);
     if (decor_normal_pixmap)
@@ -2366,7 +2338,7 @@ update_window_decoration_name (WnckWindow *win)
     {
 	gint w, n_line;
 
-	w  = d->width - LEFT_SPACE - RIGHT_SPACE - ICON_SPACE - 4;
+	w  = d->width - left_space - right_space - ICON_SPACE - 4;
 	w -= d->button_width;
 	if (w < 1)
 	    w = 1;
@@ -2497,8 +2469,11 @@ update_window_decoration_size (WnckWindow *win)
     if (w < width)
 	width = MAX (ICON_SPACE + d->button_width, w);
 
-    width  += LEFT_SPACE + RIGHT_SPACE;
-    height  = titlebar_height + TOP_SPACE + 1 + BOTTOM_SPACE;
+    width  = MAX (width, left_corner_space + right_corner_space);
+    width += left_space + 1 + right_space;
+
+    height  = titlebar_height + normal_top_corner_space + bottom_corner_space;
+    height += top_space + 2 + bottom_space;
 
     if (width == d->width && height == d->height)
     {
@@ -2632,8 +2607,9 @@ update_switcher_window (WnckWindow *win,
 
     wnck_window_get_geometry (win, NULL, NULL, &width, NULL);
 
-    width  += LEFT_SPACE + RIGHT_SPACE;
-    height  = BOTTOM_SPACE + SWITCHER_SPACE + BOTTOM_SPACE;
+    width  += left_space + right_space;
+    height  = top_space + SWITCHER_TOP_EXTRA + switcher_top_corner_space +
+	SWITCHER_SPACE + switcher_bottom_corner_space + bottom_space;
 
     d->decorated = FALSE;
     d->draw	 = draw_switcher_decoration;
@@ -4118,8 +4094,8 @@ hls_to_rgb (gdouble *h,
 
 static void
 shade (const decor_color_t *a,
-       decor_color_t	 *b,
-       float		 k)
+       decor_color_t	   *b,
+       float		   k)
 {
     double red;
     double green;
@@ -4151,18 +4127,10 @@ shade (const decor_color_t *a,
 }
 
 static void
-style_changed (GtkWidget *widget)
+update_style (GtkWidget *widget)
 {
-    GdkDisplay    *gdkdisplay;
-    GdkScreen     *gdkscreen;
     GtkStyle      *style;
     decor_color_t spot_color;
-    WnckScreen    *screen;
-    GList	  *windows;
-
-    gdkdisplay = gdk_display_get_default ();
-    gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
-    screen     = wnck_screen_get_default ();
 
     style = gtk_widget_get_style (widget);
 
@@ -4172,6 +4140,389 @@ style_changed (GtkWidget *widget)
 
     shade (&spot_color, &_title_color[0], 1.05);
     shade (&_title_color[0], &_title_color[1], 0.85);
+}
+
+static XFixed *
+create_gaussian_kernel (double radius,
+			double sigma,
+			double alpha,
+			double opacity,
+			int    *r_size,
+			int    *n_params)
+{
+    XFixed *params;
+    double *amp, scale, xy_scale, sum;
+    int    size, half_size, x, y, i, n;
+
+    scale = 1.0f / (2.0f * M_PI * sigma * sigma);
+    half_size = alpha + 0.5f;
+
+    if (half_size == 0)
+	half_size = 1;
+
+    size = half_size * 2 + 1;
+    xy_scale = 2.0f * radius / size;
+
+    if (size < 3)
+	return NULL;
+
+    n = size * size;
+
+    amp = g_malloc (sizeof (double) * n);
+    if (!amp)
+	return NULL;
+
+    n += 2;
+
+    params = g_malloc (sizeof (XFixed) * n);
+    if (!params)
+	return NULL;
+
+    i   = 0;
+    sum = 0.0f;
+
+    for (y = 0; y < size; y++)
+    {
+	double fx, fy;
+
+	fy = xy_scale * (y - half_size);
+
+	for (x = 0; x < size; x++)
+	{
+	    fx = xy_scale * (x - half_size);
+
+	    amp[i] = scale * exp ((-1.0f * (fx * fx + fy * fy)) /
+				  (2.0f * sigma * sigma));
+
+	    sum += amp[i];
+
+	    i++;
+	}
+    }
+
+    /* normalize */
+    if (sum != 0.0)
+	sum = 1.0 / sum;
+
+    params[0] = params[1] = size << 16;
+
+    for (i = 2; i < n; i++)
+	params[i] = XDoubleToFixed (amp[i - 2] * sum * opacity);
+
+    g_free (amp);
+
+    *n_params = n;
+    *r_size   = size;
+
+    return params;
+}
+
+/* to save some memory, value is specific to current decorations */
+#define CORNER_REDUCTION 3
+
+#define SIGMA(r) ((r) / 2.0)
+#define ALPHA(r) (r)
+
+/* TODO: when offset != 0, a minimium window size for which the decoration
+   can be used with must be computed and communicated to the decoration
+   plugin. */
+static int
+update_shadow (void)
+{
+    Display		*xdisplay = gdk_display;
+    XRenderPictFormat   *format;
+    GdkPixmap		*pixmap;
+    Picture		src, mask, dst;
+    XFixed		*params;
+    XFilters		*filters;
+    char		*filter = NULL;
+    int			size, n_params;
+    cairo_t		*cr;
+    decor_t		d;
+    double		save_decoration_alpha;
+    static XRenderColor color = { 0x0000, 0x0000, 0x0000, 0xffff };
+    static XRenderColor clear = { 0x0000, 0x0000, 0x0000, 0x0000 };
+    static XRenderColor white = { 0xffff, 0xffff, 0xffff, 0xffff };
+    XTransform          transform = {
+	{
+	    { 1 << 16, 0,       -shadow_offset_x << 16 },
+	    { 0,       1 << 16, -shadow_offset_y << 16 },
+	    { 0,       0,                      1 << 16 },
+	}
+    };
+
+    /* compute a gaussian convolution kernel */
+    params = create_gaussian_kernel (shadow_radius,
+				     SIGMA (shadow_radius),
+				     ALPHA (shadow_radius),
+				     shadow_opacity,
+				     &size, &n_params);
+    if (!params)
+	shadow_offset_x = shadow_offset_y = size = 0;
+
+    if (shadow_radius <= 0.0 && shadow_offset_x == 0 && shadow_offset_y == 0)
+	size = 0;
+
+    size = size >> 1;
+
+    left_space   = _win_extents.left   + size - shadow_offset_x;
+    right_space  = _win_extents.right  + size + shadow_offset_x;
+    top_space    = _win_extents.top    + size - shadow_offset_y;
+    bottom_space = _win_extents.bottom + size + shadow_offset_y;
+
+    left_space   = MAX (_win_extents.left,   left_space);
+    right_space  = MAX (_win_extents.right,  right_space);
+    top_space    = MAX (_win_extents.top,    top_space);
+    bottom_space = MAX (_win_extents.bottom, bottom_space);
+
+    shadow_left_space   = MAX (0, size - shadow_offset_x);
+    shadow_right_space  = MAX (0, size + shadow_offset_x);
+    shadow_top_space    = MAX (0, size - shadow_offset_y);
+    shadow_bottom_space = MAX (0, size + shadow_offset_y);
+
+    shadow_left_corner_space   = MAX (0, size + shadow_offset_x);
+    shadow_right_corner_space  = MAX (0, size - shadow_offset_x);
+    shadow_top_corner_space    = MAX (0, size + shadow_offset_y);
+    shadow_bottom_corner_space = MAX (0, size - shadow_offset_y);
+
+    left_corner_space   = MAX (0, shadow_left_corner_space - CORNER_REDUCTION);
+    right_corner_space  = MAX (0, shadow_right_corner_space - CORNER_REDUCTION);
+    top_corner_space    = MAX (0, shadow_top_corner_space - CORNER_REDUCTION);
+    bottom_corner_space =
+	MAX (0, shadow_bottom_corner_space - CORNER_REDUCTION);
+
+    normal_top_corner_space = MAX (0, top_corner_space - titlebar_height);
+    switcher_top_corner_space = MAX (0, top_corner_space - SWITCHER_TOP_EXTRA);
+    switcher_bottom_corner_space =
+	MAX (0, bottom_corner_space - SWITCHER_SPACE);
+
+    d.buffer_pixmap = NULL;
+    d.layout	    = NULL;
+    d.icon	    = NULL;
+    d.state	    = 0;
+    d.actions	    = 0;
+    d.prop_xid	    = 0;
+    d.button_width  = 0;
+    d.draw	    = draw_window_decoration;
+    d.active	    = TRUE;
+
+    d.width  = left_space + left_corner_space + 1 + right_corner_space +
+	right_space;
+    d.height = top_space + titlebar_height + normal_top_corner_space + 2 +
+	bottom_corner_space + bottom_space;
+
+    /* all pixmaps are ARGB32 */
+    format = XRenderFindStandardFormat (xdisplay, PictStandardARGB32);
+
+    /* shadow color */
+    src = XRenderCreateSolidFill (xdisplay, &color);
+
+
+    if (large_shadow_pixmap)
+    {
+	gdk_pixmap_unref (large_shadow_pixmap);
+	large_shadow_pixmap = NULL;
+    }
+
+    if (shadow_pattern)
+    {
+	cairo_pattern_destroy (shadow_pattern);
+	shadow_pattern = NULL;
+    }
+
+    if (shadow_pixmap)
+    {
+	gdk_pixmap_unref (shadow_pixmap);
+	shadow_pixmap = NULL;
+    }
+
+    /* no shadow */
+    if (size <= 0)
+    {
+	if (params)
+	    g_free (params);
+
+	return 1;
+    }
+
+    /* create shadow pixmap */
+    pixmap = create_pixmap (d.width, d.height);
+    if (!pixmap)
+    {
+	g_free (params);
+	return 0;
+    }
+
+    /* query server for convolution filter */
+    filters = XRenderQueryFilters (xdisplay, GDK_PIXMAP_XID (pixmap));
+    if (filters)
+    {
+	int i;
+
+	for (i = 0; i < filters->nfilter; i++)
+	{
+	    if (strcmp (filters->filter[i], FilterConvolution) == 0)
+	    {
+		filter = FilterConvolution;
+		break;
+	    }
+	}
+    }
+
+    if (!filter)
+    {
+	fprintf (stderr, "can't generate shadows, X server doesn't support "
+		 "convolution filters\n");
+
+	g_free (params);
+	gdk_pixmap_unref (pixmap);
+	return 1;
+    }
+
+
+    /* WINDOWS WITH DECORATION */
+
+    /* create temporary decoration pixmap */
+    d.pixmap = create_pixmap (d.width, d.height);
+    if (!d.pixmap)
+    {
+	g_free (params);
+	gdk_pixmap_unref (pixmap);
+	return 0;
+    }
+
+    /* create shadow from opaque decoration */
+    save_decoration_alpha = decoration_alpha;
+    decoration_alpha = 1.0;
+
+    /* draw decorations */
+    (*d.draw) (&d);
+
+    decoration_alpha = save_decoration_alpha;
+
+    mask = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (d.pixmap), format,
+				 0, NULL);
+
+    /* set gaussion convolution filter on decoration pixmap */
+    XRenderSetPictureFilter (xdisplay, mask, filter, params, n_params);
+
+    /* for shadow offset */
+    XRenderSetPictureTransform (xdisplay, mask, &transform);
+
+    dst = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
+				format, 0, NULL);
+
+   /* create shadow by compositing a solid color to the shadow pixmap with a
+      gaussian convolution filtered decoration as mask. */
+    XRenderComposite (xdisplay,
+		      PictOpSrc,
+		      src,
+		      mask,
+		      dst,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      d.width, d.height);
+
+    XRenderFreePicture (xdisplay, mask);
+    XRenderFreePicture (xdisplay, dst);
+
+    gdk_pixmap_unref (d.pixmap);
+
+    large_shadow_pixmap = pixmap;
+
+    cr = gdk_cairo_create (GDK_DRAWABLE (large_shadow_pixmap));
+    shadow_pattern = cairo_pattern_create_for_surface (cairo_get_target (cr));
+    cairo_pattern_set_filter (shadow_pattern, CAIRO_FILTER_NEAREST);
+    cairo_destroy (cr);
+
+
+    /* WINDOWS WITHOUT DECORATIONS */
+
+    d.width  = shadow_left_space + shadow_left_corner_space + 1 +
+	shadow_right_space + shadow_right_corner_space;
+    d.height = shadow_top_space + shadow_top_corner_space + 1 +
+	shadow_bottom_space + shadow_bottom_corner_space;
+
+    /* create temporary decoration pixmap */
+    d.pixmap = create_pixmap (d.width, d.height);
+    if (!d.pixmap)
+    {
+	g_free (params);
+	return 0;
+    }
+
+    mask = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (d.pixmap), format,
+				 0, NULL);
+
+    /* draw rectangle */
+    XRenderFillRectangle (xdisplay, PictOpSrc, mask, &clear,
+			  0,
+			  0,
+			  d.width,
+			  d.height);
+    XRenderFillRectangle (xdisplay, PictOpSrc, mask, &white,
+			  shadow_left_space,
+			  shadow_top_space,
+			  d.width - shadow_left_space - shadow_right_space,
+			  d.height - shadow_top_space - shadow_bottom_space);
+
+    /* set gaussion convolution filter on decoration pixmap */
+    XRenderSetPictureFilter (xdisplay, mask, filter, params, n_params);
+
+    /* for shadow offset */
+    XRenderSetPictureTransform (xdisplay, mask, &transform);
+
+    /* create shadow pixmap */
+    pixmap = create_pixmap (d.width, d.height);
+    if (!pixmap)
+    {
+	gdk_pixmap_unref (d.pixmap);
+	g_free (params);
+	return 0;
+    }
+
+    dst = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
+				format, 0, NULL);
+
+   /* create shadow by compositing a solid color to the shadow pixmap with a
+      gaussian convolution filtered decoration as mask. */
+    XRenderComposite (xdisplay,
+		      PictOpSrc,
+		      src,
+		      mask,
+		      dst,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      d.width, d.height);
+
+    XRenderFreePicture (xdisplay, mask);
+    XRenderFreePicture (xdisplay, dst);
+    XRenderFreePicture (xdisplay, src);
+
+    gdk_pixmap_unref (d.pixmap);
+
+    g_free (params);
+
+    shadow_pixmap = pixmap;
+
+    return 1;
+}
+
+static void
+style_changed (GtkWidget *widget)
+{
+    GdkDisplay *gdkdisplay;
+    GdkScreen  *gdkscreen;
+    WnckScreen *screen;
+    GList      *windows;
+
+    gdkdisplay = gdk_display_get_default ();
+    gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
+    screen     = wnck_screen_get_default ();
+
+    update_style (widget);
 
     update_default_decorations (gdkscreen);
 
@@ -4182,6 +4533,9 @@ style_changed (GtkWidget *widget)
 
 	if (d->decorated)
 	{
+	    /* force size update */
+	    d->width = d->height = 0;
+
 	    update_window_decoration_size (WNCK_WINDOW (windows->data));
 	    update_event_windows (WNCK_WINDOW (windows->data));
 	}
@@ -4250,6 +4604,56 @@ update_titlebar_font (void)
     pango_font_metrics_unref (metrics);
 }
 
+static gboolean
+shadow_settings_changed (GConfClient *client)
+{
+    double   radius, opacity;
+    int      offset;
+    gboolean changed = FALSE;
+
+    radius = gconf_client_get_float (client,
+				     COMPIZ_SHADOW_RADIUS_KEY,
+				     NULL);
+    radius = MAX (0.0, MIN (radius, 48.0));
+    if (shadow_radius != radius)
+    {
+	shadow_radius = radius;
+	changed = TRUE;
+    }
+
+    opacity = gconf_client_get_float (client,
+				      COMPIZ_SHADOW_OPACITY_KEY,
+				      NULL);
+    opacity = MAX (0.0, MIN (opacity, 6.0));
+    if (shadow_opacity != opacity)
+    {
+	shadow_opacity = opacity;
+	changed = TRUE;
+    }
+
+    offset = gconf_client_get_int (client,
+				   COMPIZ_SHADOW_OFFSET_X_KEY,
+				   NULL);
+    offset = MAX (-16, MIN (offset, 16));
+    if (shadow_offset_x != offset)
+    {
+	shadow_offset_x = offset;
+	changed = TRUE;
+    }
+
+    offset = gconf_client_get_int (client,
+				   COMPIZ_SHADOW_OFFSET_Y_KEY,
+				   NULL);
+    offset = MAX (-16, MIN (offset, 16));
+    if (shadow_offset_y != offset)
+    {
+	shadow_offset_y = offset;
+	changed = TRUE;
+    }
+
+    return changed;
+}
+
 static void
 value_changed (GConfClient *client,
 	       const gchar *key,
@@ -4273,6 +4677,14 @@ value_changed (GConfClient *client,
 	titlebar_font_changed (client);
 	changed = !use_system_font;
     }
+    else if (strcmp (key, COMPIZ_SHADOW_RADIUS_KEY)   == 0 ||
+	     strcmp (key, COMPIZ_SHADOW_OPACITY_KEY)  == 0 ||
+	     strcmp (key, COMPIZ_SHADOW_OFFSET_X_KEY) == 0 ||
+	     strcmp (key, COMPIZ_SHADOW_OFFSET_Y_KEY) == 0)
+    {
+	if (shadow_settings_changed (client))
+	    changed = TRUE;
+    }
 
     if (changed)
     {
@@ -4285,6 +4697,7 @@ value_changed (GConfClient *client,
 	gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
 
 	update_titlebar_font ();
+	update_shadow ();
 
 	update_default_decorations (gdkscreen);
 
@@ -4295,6 +4708,8 @@ value_changed (GConfClient *client,
 
 	    if (d->decorated)
 	    {
+		d->width = d->height = 0;
+
 		update_window_decoration_size (WNCK_WINDOW (windows->data));
 		update_event_windows (WNCK_WINDOW (windows->data));
 	    }
@@ -4312,9 +4727,15 @@ init_settings (WnckScreen *screen)
     gconf = gconf_client_get_default ();
 
     gconf_client_add_dir (gconf,
+			  METACITY_GCONF_DIR,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
+
+    gconf_client_add_dir (gconf,
 			  GCONF_DIR,
 			  GCONF_CLIENT_PRELOAD_ONELEVEL,
 			  NULL);
+
 
     g_signal_connect (G_OBJECT (gconf),
 		      "value_changed",
@@ -4339,11 +4760,11 @@ init_settings (WnckScreen *screen)
 					     COMPIZ_USE_SYSTEM_FONT_KEY,
 					     NULL);
 
+    update_style (style_window);
     titlebar_font_changed (gconf);
-
     update_titlebar_font ();
-
-    style_changed (style_window);
+    shadow_settings_changed (gconf);
+    update_shadow ();
 
     return TRUE;
 }
@@ -4355,7 +4776,6 @@ main (int argc, char *argv[])
     Display    *xdisplay;
     GdkScreen  *gdkscreen;
     WnckScreen *screen;
-    cairo_t    *cr;
     gint       i, j;
 
     gtk_init (&argc, &argv);
@@ -4371,13 +4791,13 @@ main (int argc, char *argv[])
     select_window_atom	= XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW",
 				       FALSE);
 
-    toolkit_action_atom		   =
+    toolkit_action_atom			  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION", FALSE);
-    toolkit_action_main_menu_atom  =
+    toolkit_action_main_menu_atom	  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", FALSE);
-    toolkit_action_run_dialog_atom =
+    toolkit_action_run_dialog_atom	  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", FALSE);
-    toolkit_action_window_menu_atom =
+    toolkit_action_window_menu_atom	  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", FALSE);
     toolkit_action_force_quit_dialog_atom =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_FORCE_QUIT_DIALOG",
@@ -4409,19 +4829,6 @@ main (int argc, char *argv[])
 	return 1;
     }
 
-    shadow_pixmap = pixmap_new_from_inline (_shadow);
-    large_shadow_pixmap = pixmap_new_from_inline (_large_shadow);
-
-    if (!shadow_pixmap || !large_shadow_pixmap)
-    {
-	fprintf (stderr, "%s, Failed to load shadow images\n", argv[0]);
-	return 1;
-    }
-
-    cr = gdk_cairo_create (GDK_DRAWABLE (large_shadow_pixmap));
-    shadow_pattern = cairo_pattern_create_for_surface (cairo_get_target (cr));
-    cairo_destroy (cr);
-
     if (!create_tooltip_window ())
     {
 	fprintf (stderr, "%s, Couldn't create tooltip window\n", argv[0]);
@@ -4443,6 +4850,8 @@ main (int argc, char *argv[])
     }
 
     set_dm_check_hint (gdk_display_get_default_screen (gdkdisplay));
+
+    update_default_decorations (gdkscreen);
 
     gtk_main ();
 
