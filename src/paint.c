@@ -178,7 +178,8 @@ paintScreen (CompScreen		     *screen,
 	    if (w->destroyed || w->attrib.map_state != IsViewable)
 		continue;
 
-	    (*screen->paintWindow) (w, &w->paint, region, 0);
+	    if (w->damaged)
+		(*screen->paintWindow) (w, &w->paint, region, 0);
 	}
     }
     else
@@ -200,14 +201,17 @@ paintScreen (CompScreen		     *screen,
 	    if (w->destroyed || w->attrib.map_state != IsViewable)
 		continue;
 
+	    if (!w->damaged)
+		continue;
+
 	    if ((*screen->paintWindow) (w, &w->paint, tmpRegion,
 					PAINT_WINDOW_SOLID_MASK))
 	    {
 		XSubtractRegion (tmpRegion, w->region, tmpRegion);
 
 		/* unredirect top most fullscreen windows. */
-		if (cnt == 0					      &&
-		    !REGION_NOT_EMPTY (tmpRegion)			      &&
+		if (cnt == 0						  &&
+		    !REGION_NOT_EMPTY (tmpRegion)			  &&
 		    screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
 		    XEqualRegion (w->region, &screen->region))
 		{
@@ -230,8 +234,9 @@ paintScreen (CompScreen		     *screen,
 	    if (w->destroyed || w->attrib.map_state != IsViewable)
 		continue;
 
-	    (*screen->paintWindow) (w, &w->paint, w->clip,
-				    PAINT_WINDOW_TRANSLUCENT_MASK);
+	    if (w->damaged)
+		(*screen->paintWindow) (w, &w->paint, w->clip,
+					PAINT_WINDOW_TRANSLUCENT_MASK);
 	}
     }
 
