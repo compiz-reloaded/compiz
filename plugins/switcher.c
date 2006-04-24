@@ -316,7 +316,7 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE];
     o->name			  = "initiate";
-    o->shortDesc		  = "Initiate";
+    o->shortDesc		  = "Initiate Window Switcher";
     o->longDesc			  = "Show switcher";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;

@@ -366,7 +366,7 @@ scaleScreenInitOptions (ScaleScreen *ss,
 
     o = &ss->opt[SCALE_SCREEN_OPTION_INITIATE];
     o->name			  = "initiate";
-    o->shortDesc		  = "Initiate";
+    o->shortDesc		  = "Initiate Window Picker";
     o->longDesc			  = "Layout and start transforming windows";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
