@@ -197,24 +197,21 @@ paintScreen (CompScreen		     *screen,
 	/* paint solid windows */
 	for (w = screen->reverseWindows; w; w = w->prev)
 	{
-	    if (w->destroyed || w->invisible)
+	    if (w->destroyed || w->attrib.map_state != IsViewable)
 		continue;
 
-	    if (tmpRegion->numRects)
+	    if ((*screen->paintWindow) (w, &w->paint, tmpRegion,
+					PAINT_WINDOW_SOLID_MASK))
 	    {
-		if ((*screen->paintWindow) (w, &w->paint, tmpRegion,
-					    PAINT_WINDOW_SOLID_MASK))
-		{
-		    XSubtractRegion (tmpRegion, w->region, tmpRegion);
+		XSubtractRegion (tmpRegion, w->region, tmpRegion);
 
-		    /* unredirect top most fullscreen windows. */
-		    if (cnt == 0					      &&
-			!REGION_NOT_EMPTY (tmpRegion)			      &&
-			screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
-			XEqualRegion (w->region, &screen->region))
-		    {
-			unredirectWindow (w);
-		    }
+		/* unredirect top most fullscreen windows. */
+		if (cnt == 0					      &&
+		    !REGION_NOT_EMPTY (tmpRegion)			      &&
+		    screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
+		    XEqualRegion (w->region, &screen->region))
+		{
+		    unredirectWindow (w);
 		}
 	    }
 
@@ -230,12 +227,11 @@ paintScreen (CompScreen		     *screen,
 	/* paint translucent windows */
 	for (w = screen->windows; w; w = w->next)
 	{
-	    if (w->destroyed || w->invisible)
+	    if (w->destroyed || w->attrib.map_state != IsViewable)
 		continue;
 
-	    if (w->clip->numRects)
-		(*screen->paintWindow) (w, &w->paint, w->clip,
-					PAINT_WINDOW_TRANSLUCENT_MASK);
+	    (*screen->paintWindow) (w, &w->paint, w->clip,
+				    PAINT_WINDOW_TRANSLUCENT_MASK);
 	}
     }
 
@@ -746,6 +742,12 @@ paintWindow (CompWindow		     *w,
 	     Region		     region,
 	     unsigned int	     mask)
 {
+    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	region = &infiniteRegion;
+
+    if (!region->numRects)
+	return TRUE;
+
     if (mask & PAINT_WINDOW_SOLID_MASK)
     {
 	if (w->alpha)
@@ -769,9 +771,6 @@ paintWindow (CompWindow		     *w,
 
     if (!w->texture.pixmap)
 	bindWindow (w);
-
-    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-	region = &infiniteRegion;
 
     w->vCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);

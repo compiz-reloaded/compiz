@@ -1,5 +1,10 @@
 2006-04-24  David Reveman  <davidr@novell.com>
 
+	* src/paint.c (paintScreen): Always call paintWindow when window
+	is visible. Fixes so that window animations (fade, minimize...) aren't
+	paused when if window becomes invisible.
+	(paintWindow): Return early if region is empty.
+
 	* plugins/switcher.c: Use hideWindow and showWindow so that the
 	decoration doesn't have to be redrawn every time the switcher window
 	is mapped.
