@@ -1,5 +1,7 @@
 2006-04-25  David Reveman  <davidr@novell.com>
 
+	* plugins/rotate.c (rotateInitScreen): Initialize rotateHandle.
+
 	* src/paint.c (paintScreen): Only paint windows that have been 
 	damaged.
 

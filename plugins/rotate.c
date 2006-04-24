@@ -1404,6 +1404,8 @@ rotateInitScreen (CompPlugin *p,
     rs->timestep = ROTATE_TIMESTEP_DEFAULT;
     rs->flipTime = ROTATE_FLIPTIME_DEFAULT;
 
+    rs->rotateHandle = 0;
+
     rotateScreenInitOptions (rs, s->display->display);
 
     addScreenBinding (s, &rs->opt[ROTATE_SCREEN_OPTION_INITIATE].value.bind);
