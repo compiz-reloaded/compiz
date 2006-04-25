@@ -1072,7 +1072,7 @@ scaleWindowRemove (CompDisplay *d,
     {
 	SCALE_SCREEN (w->screen);
 
-	if (ss->grabIndex)
+	if (ss->grabIndex && ss->state != SCALE_STATE_IN)
 	{
 	    int i;
 
@@ -1145,7 +1145,19 @@ scaleHandleEvent (CompDisplay *d,
 		if (scaleSelectWindowAt (s,
 					 event->xbutton.x_root,
 					 event->xbutton.y_root))
+		{
 		    scaleTerminate (s);
+		}
+		else if (event->xbutton.x_root > s->workArea.x &&
+			 event->xbutton.x_root < (s->workArea.x +
+						  s->workArea.width) &&
+			 event->xbutton.y_root > s->workArea.y &&
+			 event->xbutton.y_root < (s->workArea.y +
+						  s->workArea.height))
+		{
+		    scaleTerminate (s);
+		    enterShowDesktopMode (s);
+		}
 	    }
 
 	    if (EV_BUTTON (&ss->opt[SCALE_SCREEN_OPTION_INITIATE], event))

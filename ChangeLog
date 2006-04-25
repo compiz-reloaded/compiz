@@ -1,5 +1,8 @@
 2006-04-25  David Reveman  <davidr@novell.com>
 
+	* plugins/scale.c: Click on background leaves scale mode and enters
+	show desktop mode. (Dan Winship)
+
 	* plugins/minimize.c (minHandleEvent): Initialize scale and
 	translate properly.
 
