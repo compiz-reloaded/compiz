@@ -1386,7 +1386,8 @@ void
 enterShowDesktopMode (CompScreen *s);
 
 void
-leaveShowDesktopMode (CompScreen *s);
+leaveShowDesktopMode (CompScreen *s,
+		      CompWindow *window);
 
 void
 sendWindowActivationRequest (CompScreen *s,

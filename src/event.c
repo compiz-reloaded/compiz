@@ -1099,7 +1099,7 @@ handleEvent (CompDisplay *d,
 		if (event->xclient.data.l[0])
 		    enterShowDesktopMode (s);
 		else
-		    leaveShowDesktopMode (s);
+		    leaveShowDesktopMode (s, NULL);
 	    }
 	}
 	break;
@@ -1113,11 +1113,7 @@ handleEvent (CompDisplay *d,
 	    if (w->minimized)
 		unminimizeWindow (w);
 
-	    if (w->inShowDesktopMode)
-	    {
-		w->inShowDesktopMode = FALSE;
-		showWindow (w);
-	    }
+	    leaveShowDesktopMode (w->screen, w);
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {

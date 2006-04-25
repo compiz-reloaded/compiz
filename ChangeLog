@@ -1,5 +1,12 @@
 2006-04-25  David Reveman  <davidr@novell.com>
 
+	* src/window.c (activateWindow):
+	* src/event.c (handleEvent):
+	* src/screen.c: Add window parameter to leaveShowDesktopMode and
+	use this function for making one window leave show desktop mode.
+	Fixes so that we're leaving show desktop mode when no windows
+	are longer hidden.
+
 	* plugins/scale.c (scaleSetScreenOption): Add missing break statement.
 
 	* plugins/rotate.c (rotateInitScreen): Initialize rotateHandle.

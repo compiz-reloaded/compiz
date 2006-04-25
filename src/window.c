@@ -3040,9 +3040,7 @@ activateWindow (CompWindow *w)
 	if (w->minimized)
 	    unminimizeWindow (w);
 
-	w->inShowDesktopMode = FALSE;
-
-	showWindow (w);
+	leaveShowDesktopMode (w->screen, w);
     }
 
     if (w->state & CompWindowStateHiddenMask)

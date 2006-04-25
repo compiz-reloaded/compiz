@@ -2576,18 +2576,37 @@ enterShowDesktopMode (CompScreen *s)
 }
 
 void
-leaveShowDesktopMode (CompScreen *s)
+leaveShowDesktopMode (CompScreen *s,
+		      CompWindow *window)
 {
     CompWindow    *w;
     unsigned long data = 0;
 
-    s->showingDesktopMask = 0;
-
-    for (w = s->windows; w; w = w->next)
+    if (window)
     {
-	w->inShowDesktopMode = FALSE;
+	if (!window->inShowDesktopMode)
+	    return;
 
-	showWindow (w);
+	window->inShowDesktopMode = FALSE;
+	showWindow (window);
+
+	/* return if some other window is still in show desktop mode */
+	for (w = s->windows; w; w = w->next)
+	    if (w->inShowDesktopMode)
+		return;
+
+	s->showingDesktopMask = 0;
+    }
+    else
+    {
+	s->showingDesktopMask = 0;
+
+	for (w = s->windows; w; w = w->next)
+	{
+	    w->inShowDesktopMode = FALSE;
+
+	    showWindow (w);
+	}
     }
 
     XChangeProperty (s->display->display, s->root,
