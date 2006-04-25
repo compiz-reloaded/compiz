@@ -43,10 +43,13 @@
 #define ALIGN_TOP    (0)
 #define ALIGN_BOTTOM (1 << 1)
 
-#define XX_MASK (1 << 10)
-#define XY_MASK (1 << 11)
-#define YX_MASK (1 << 12)
-#define YY_MASK (1 << 13)
+#define CLAMP_HORZ (1 << 0)
+#define CLAMP_VERT (1 << 1)
+
+#define XX_MASK (1 << 12)
+#define XY_MASK (1 << 13)
+#define YX_MASK (1 << 14)
+#define YY_MASK (1 << 15)
 
 typedef struct _Point {
     int	x;
@@ -67,6 +70,7 @@ typedef struct _Quad {
     int	       maxWidth;
     int	       maxHeight;
     int	       align;
+    int	       clamp;
     CompMatrix m;
 } Quad;
 
@@ -88,6 +92,8 @@ typedef struct _Decoration {
     DecorTexture      *texture;
     CompWindowExtents output;
     CompWindowExtents input;
+    int		      minWidth;
+    int		      minHeight;
     Quad	      *quad;
     int		      nQuad;
 } Decoration;
@@ -405,6 +411,8 @@ decorReleaseTexture (CompScreen   *screen,
     free (texture);
 }
 
+int dcnt = 0;
+
 /*
   decoration property
   -------------------
@@ -416,21 +424,24 @@ decorReleaseTexture (CompScreen   *screen,
   data[3] = input top
   data[4] = input bottom
 
+  data[5] = min width
+  data[6] = min height
+
   flags
 
   1st to 4nd bit p1 gravity, 5rd to 8th bit p2 gravity,
-  9rd and 10th bit alignment, 11th bit XX, 12th bit XY, 13th bit YX,
-  14th bit YY.
+  9rd and 10th bit alignment, 11rd and 12th bit clamp,
+  13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[4 + n * 9 + 1] = flags
-  data[4 + n * 9 + 2] = p1 x
-  data[4 + n * 9 + 3] = p1 y
-  data[4 + n * 9 + 4] = p2 x
-  data[4 + n * 9 + 5] = p2 y
-  data[4 + n * 9 + 6] = widthMax
-  data[4 + n * 9 + 7] = heightMax
-  data[4 + n * 9 + 8] = x0
-  data[4 + n * 9 + 9] = y0
+  data[6 + n * 9 + 1] = flags
+  data[6 + n * 9 + 2] = p1 x
+  data[6 + n * 9 + 3] = p1 y
+  data[6 + n * 9 + 4] = p2 x
+  data[6 + n * 9 + 5] = p2 y
+  data[6 + n * 9 + 6] = widthMax
+  data[6 + n * 9 + 7] = heightMax
+  data[6 + n * 9 + 8] = x0
+  data[6 + n * 9 + 9] = y0
  */
 static Decoration *
 decorCreateDecoration (CompScreen *screen,
@@ -487,7 +498,10 @@ decorCreateDecoration (CompScreen *screen,
     decoration->input.top    = *prop++;
     decoration->input.bottom = *prop++;
 
-    nQuad = (n - 5) / 9;
+    decoration->minWidth  = *prop++;
+    decoration->minHeight = *prop++;
+
+    nQuad = (n - 7) / 9;
 
     quad = malloc (sizeof (Quad) * nQuad);
     if (!quad)
@@ -510,7 +524,8 @@ decorCreateDecoration (CompScreen *screen,
 	quad->p1.gravity = (flags >> 0) & 0xf;
 	quad->p2.gravity = (flags >> 4) & 0xf;
 
-	quad->align = (flags >> 8) & 0x3;
+	quad->align = (flags >> 8)  & 0x3;
+	quad->clamp = (flags >> 10) & 0x3;
 
 	quad->m.xx = (flags & XX_MASK) ? 1.0f : 0.0f;
 	quad->m.xy = (flags & XY_MASK) ? 1.0f : 0.0f;
@@ -561,7 +576,9 @@ decorReleaseDecoration (CompScreen *screen,
 	return;
 
     decorReleaseTexture (screen, decoration->texture);
+
     free (decoration->quad);
+    free (decoration);
 }
 
 static void
@@ -590,6 +607,8 @@ createWindowDecoration (Decoration *d)
     if (!wd)
 	return NULL;
 
+    d->refCount++;
+
     wd->decor = d;
     wd->quad  = (ScaledQuad *) (wd + 1);
     wd->nQuad = d->nQuad;
@@ -598,8 +617,10 @@ createWindowDecoration (Decoration *d)
 }
 
 static void
-destroyWindowDecoration (WindowDecoration *wd)
+destroyWindowDecoration (CompScreen	  *screen,
+			 WindowDecoration *wd)
 {
+    decorReleaseDecoration (screen, wd->decor);
     free (wd);
 }
 
@@ -677,6 +698,7 @@ updateWindowDecorationScale (CompWindow *w)
     int		     x1, y1, x2, y2;
     int		     maxWidth, maxHeight;
     int		     align;
+    int		     clamp;
     int		     i;
 
     DECOR_WINDOW (w);
@@ -700,6 +722,23 @@ updateWindowDecorationScale (CompWindow *w)
 	maxWidth  = wd->decor->quad[i].maxWidth;
 	maxHeight = wd->decor->quad[i].maxHeight;
 	align	  = wd->decor->quad[i].align;
+	clamp	  = wd->decor->quad[i].clamp;
+
+	if (clamp & CLAMP_HORZ)
+	{
+	    if (x1 < 0)
+		x1 = 0;
+	    if (x2 > w->width)
+		x2 = w->width;
+	}
+
+	if (clamp & CLAMP_VERT)
+	{
+	    if (y1 < 0)
+		y1 = 0;
+	    if (y2 > w->height)
+		y2 = w->height;
+	}
 
 	if (maxWidth < x2 - x1)
 	{
@@ -727,6 +766,13 @@ updateWindowDecorationScale (CompWindow *w)
 }
 
 static Bool
+decorCheckSize (CompWindow *w,
+		Decoration *decor)
+{
+    return (decor->minWidth <= w->width && decor->minHeight <= w->height);
+}
+
+static Bool
 decorWindowUpdate (CompWindow *w,
 		   Bool	      move)
 {
@@ -740,7 +786,7 @@ decorWindowUpdate (CompWindow *w,
     wd = dw->wd;
     old = (wd) ? wd->decor : NULL;
 
-    if (dw->decor)
+    if (dw->decor && decorCheckSize (w, dw->decor))
     {
 	decor = dw->decor;
     }
@@ -780,6 +826,12 @@ decorWindowUpdate (CompWindow *w,
 		break;
 	    }
 	}
+
+	if (decor)
+	{
+	    if (!decorCheckSize (w, decor))
+		decor = NULL;
+	}
     }
 
     if (!ds->dmWin)
@@ -791,14 +843,7 @@ decorWindowUpdate (CompWindow *w,
     if (old)
     {
 	damageWindowOutputExtents (w);
-
-	if (wd->decor == dw->decor)
-	{
-	    decorReleaseDecoration (w->screen, dw->decor);
-	    dw->decor = NULL;
-	}
-
-	destroyWindowDecoration (wd);
+	destroyWindowDecoration (w->screen, wd);
     }
 
     if (decor)
@@ -892,6 +937,17 @@ decorCheckForDmOnScreen (CompScreen *s,
 		{
 		    decorReleaseDecoration (s, ds->decor[i]);
 		    ds->decor[i] = 0;
+		}
+	    }
+
+	    for (w = s->windows; w; w = w->next)
+	    {
+		DECOR_WINDOW (w);
+
+		if (dw->decor)
+		{
+		    decorReleaseDecoration (s, dw->decor);
+		    dw->decor = 0;
 		}
 	    }
 	}
@@ -1256,7 +1312,7 @@ decorFiniWindow (CompPlugin *p,
     DECOR_WINDOW (w);
 
     if (dw->wd)
-	destroyWindowDecoration (dw->wd);
+	destroyWindowDecoration (w->screen, dw->wd);
 
     if (dw->decor)
 	decorReleaseDecoration (w->screen, dw->decor);

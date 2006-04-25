@@ -97,10 +97,13 @@ typedef struct _extents {
 #define ALIGN_TOP    (0)
 #define ALIGN_BOTTOM (1 << 1)
 
-#define XX_MASK (1 << 10)
-#define XY_MASK (1 << 11)
-#define YX_MASK (1 << 12)
-#define YY_MASK (1 << 13)
+#define CLAMP_HORZ (1 << 0)
+#define CLAMP_VERT (1 << 1)
+
+#define XX_MASK (1 << 12)
+#define XY_MASK (1 << 13)
+#define YX_MASK (1 << 14)
+#define YY_MASK (1 << 15)
 
 #define WM_MOVERESIZE_SIZE_TOPLEFT      0
 #define WM_MOVERESIZE_SIZE_TOP          1
@@ -133,6 +136,7 @@ typedef struct _quad {
     gint	   max_width;
     gint	   max_height;
     gint	   align;
+    gint	   clamp;
     cairo_matrix_t m;
 } quad;
 
@@ -304,26 +308,31 @@ static gint      switcher_height;
   data[3] = input top
   data[4] = input bottom
 
+  data[5] = min width
+  data[6] = min height
+
   flags
 
   1st to 4nd bit p1 gravity, 5rd to 8th bit p2 gravity,
-  9rd and 10th bit alignment, 11th bit XX, 12th bit XY, 13th bit YX,
-  14th bit YY.
+  9rd and 10th bit alignment, 11rd and 12th bit clamp,
+  13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[4 + n * 9 + 1] = flags
-  data[4 + n * 9 + 2] = p1 x
-  data[4 + n * 9 + 3] = p1 y
-  data[4 + n * 9 + 4] = p2 x
-  data[4 + n * 9 + 5] = p2 y
-  data[4 + n * 9 + 6] = widthMax
-  data[4 + n * 9 + 7] = heightMax
-  data[4 + n * 9 + 8] = x0
-  data[4 + n * 9 + 9] = y0
+  data[6 + n * 9 + 1] = flags
+  data[6 + n * 9 + 2] = p1 x
+  data[6 + n * 9 + 3] = p1 y
+  data[6 + n * 9 + 4] = p2 x
+  data[6 + n * 9 + 5] = p2 y
+  data[6 + n * 9 + 6] = widthMax
+  data[6 + n * 9 + 7] = heightMax
+  data[6 + n * 9 + 8] = x0
+  data[6 + n * 9 + 9] = y0
  */
 static void
 decoration_to_property (long	*data,
 			Pixmap	pixmap,
 			extents	*input,
+			int	min_width,
+			int	min_height,
 			quad	*quad,
 			int	nQuad)
 {
@@ -334,12 +343,16 @@ decoration_to_property (long	*data,
     *data++ = input->top;
     *data++ = input->bottom;
 
+    *data++ = min_width;
+    *data++ = min_height;
+
     while (nQuad--)
     {
 	*data++ =
 	    (quad->p1.gravity << 0)    |
 	    (quad->p2.gravity << 4)    |
 	    (quad->align      << 8)    |
+	    (quad->clamp      << 10)   |
 	    (quad->m.xx ? XX_MASK : 0) |
 	    (quad->m.xy ? XY_MASK : 0) |
 	    (quad->m.yx ? YX_MASK : 0) |
@@ -371,17 +384,20 @@ set_horz_quad_line (quad   *q,
 		    double x0,
 		    double y0)
 {
-    gint nQuad = 0;
+    gint dx, nQuad = 0;
+
+    dx = (left_corner - right_corner) >> 1;
 
     q->p1.x	  = -left;
     q->p1.y	  = top;
     q->p1.gravity = gravity | GRAVITY_WEST;
-    q->p2.x	  = 0;
+    q->p2.x	  = dx;
     q->p2.y	  = bottom;
     q->p2.gravity = gravity;
     q->max_width  = left + left_corner;
     q->max_height = SHRT_MAX;
     q->align	  = ALIGN_LEFT;
+    q->clamp	  = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -400,6 +416,7 @@ set_horz_quad_line (quad   *q,
     q->max_width  = SHRT_MAX;
     q->max_height = SHRT_MAX;
     q->align	  = 0;
+    q->clamp	  = 0;
     q->m.xx	  = 0.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -409,7 +426,7 @@ set_horz_quad_line (quad   *q,
 
     q++; nQuad++;
 
-    q->p1.x	  = 0;
+    q->p1.x	  = dx;
     q->p1.y	  = top;
     q->p1.gravity = gravity;
     q->p2.x	  = right;
@@ -418,6 +435,7 @@ set_horz_quad_line (quad   *q,
     q->max_width  = right_corner + right;
     q->max_height = SHRT_MAX;
     q->align	  = ALIGN_RIGHT;
+    q->clamp	  = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -443,17 +461,20 @@ set_vert_quad_row (quad   *q,
 		   double x0,
 		   double y0)
 {
-    gint nQuad = 0;
+    gint dy, nQuad = 0;
+
+    dy = (top_corner - bottom_corner) >> 1;
 
     q->p1.x	  = left;
     q->p1.y	  = -top;
     q->p1.gravity = gravity | GRAVITY_NORTH;
     q->p2.x	  = right;
-    q->p2.y	  = 0;
+    q->p2.y	  = dy;
     q->p2.gravity = gravity;
     q->max_width  = SHRT_MAX;
     q->max_height = top + top_corner;
     q->align	  = ALIGN_TOP;
+    q->clamp	  = CLAMP_VERT;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -472,6 +493,7 @@ set_vert_quad_row (quad   *q,
     q->max_width  = SHRT_MAX;
     q->max_height = SHRT_MAX;
     q->align	  = 0;
+    q->clamp	  = CLAMP_VERT;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -482,7 +504,7 @@ set_vert_quad_row (quad   *q,
     q++; nQuad++;
 
     q->p1.x	  = left;
-    q->p1.y	  = 0;
+    q->p1.y	  = dy;
     q->p1.gravity = gravity;
     q->p2.x	  = right;
     q->p2.y	  = bottom;
@@ -490,6 +512,7 @@ set_vert_quad_row (quad   *q,
     q->max_width  = SHRT_MAX;
     q->max_height = bottom_corner + bottom;
     q->align	  = ALIGN_BOTTOM;
+    q->clamp	  = CLAMP_VERT;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -498,6 +521,63 @@ set_vert_quad_row (quad   *q,
     q->m.y0	  = y0 + height;
 
     nQuad++;
+
+    return nQuad;
+}
+
+static int
+set_common_window_quads (quad *q,
+			 int  width,
+			 int  height)
+{
+    gint n, nQuad = 0;
+
+    /* left quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   normal_top_corner_space,
+			   0,
+			   bottom_corner_space,
+			   -left_space,
+			   0,
+			   GRAVITY_WEST,
+			   height - top_space - titlebar_height - bottom_space,
+			   0.0,
+			   top_space + titlebar_height + 1.0);
+
+    q += n; nQuad += n;
+
+    /* right quads */
+    n = set_vert_quad_row (q,
+			   0,
+			   normal_top_corner_space,
+			   0,
+			   bottom_corner_space,
+			   0,
+			   right_space,
+			   GRAVITY_EAST,
+			   height - top_space - titlebar_height - bottom_space,
+			   width - right_space,
+			   top_space + titlebar_height + 1.0);
+
+    q += n; nQuad += n;
+
+    /* bottom quads */
+    n = set_horz_quad_line (q,
+			    left_space,
+			    left_corner_space,
+			    right_space,
+			    right_corner_space,
+			    0,
+			    bottom_space,
+			    GRAVITY_SOUTH,
+			    width,
+			    0.0,
+			    top_space + titlebar_height +
+			    normal_top_corner_space +
+			    bottom_corner_space + 2.0);
+
+    nQuad += n;
 
     return nQuad;
 }
@@ -552,6 +632,7 @@ set_window_quads (quad *q,
     q->max_width  = left_space + top_left;
     q->max_height = SHRT_MAX;
     q->align	  = ALIGN_LEFT;
+    q->clamp	  = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -570,6 +651,7 @@ set_window_quads (quad *q,
     q->max_width  = SHRT_MAX;
     q->max_height = SHRT_MAX;
     q->align	  = 0;
+    q->clamp	  = 0;
     q->m.xx	  = 0.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -579,7 +661,7 @@ set_window_quads (quad *q,
 
     q++; nQuad++;
 
-    q->p1.x	  = top_left;
+    q->p1.x	  = 0;
     q->p1.y	  = y;
     q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
     q->p2.x	  = right_space;
@@ -588,6 +670,7 @@ set_window_quads (quad *q,
     q->max_width  = right_space + top_right;
     q->max_height = SHRT_MAX;
     q->align	  = ALIGN_RIGHT;
+    q->clamp	  = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -597,50 +680,36 @@ set_window_quads (quad *q,
 
     q++; nQuad++;
 
-    /* left quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   normal_top_corner_space,
-			   0,
-			   bottom_corner_space,
-			   -left_space,
-			   0,
-			   GRAVITY_WEST,
-			   height - top_space - titlebar_height - bottom_space,
-			   0.0,
-			   top_space + titlebar_height + 1.0);
+    n = set_common_window_quads (q, width, height);
 
-    q += n; nQuad += n;
+    nQuad += n;
 
-    /* right quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   normal_top_corner_space,
-			   0,
-			   bottom_corner_space,
-			   0,
-			   right_space,
-			   GRAVITY_EAST,
-			   height - top_space - titlebar_height - bottom_space,
-			   width - right_space,
-			   top_space + titlebar_height + 1.0);
+    return nQuad;
+}
 
-    q += n; nQuad += n;
+static int
+set_no_title_window_quads (quad *q,
+			   int  width,
+			   int  height)
+{
+    gint n, nQuad = 0;
 
-    /* bottom quads */
+    /* top quads */
     n = set_horz_quad_line (q,
 			    left_space,
 			    left_corner_space,
 			    right_space,
 			    right_corner_space,
+			    -top_space - titlebar_height,
 			    0,
-			    bottom_space,
-			    GRAVITY_SOUTH,
+			    GRAVITY_NORTH,
 			    width,
 			    0.0,
-			    top_space + titlebar_height +
-			    normal_top_corner_space +
-			    bottom_corner_space + 2.0);
+			    0.0);
+
+    q += n; nQuad += n;
+
+    n = set_common_window_quads (q, width, height);
 
     nQuad += n;
 
@@ -661,13 +730,16 @@ decor_update_window_property (decor_t *d)
     extents.top += titlebar_height;
 
     decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, quads, nQuad);
+			    &extents,
+			    ICON_SPACE + d->button_width,
+			    0,
+			    quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
 		     win_decor_atom,
 		     XA_INTEGER,
-		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
+		     32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
 		     XSync (xdisplay, FALSE);
     gdk_error_trap_pop ();
 }
@@ -689,6 +761,7 @@ set_switcher_quads (quad *q,
     q->max_width  = SHRT_MAX;
     q->max_height = SHRT_MAX;
     q->align	  = 0;
+    q->clamp	  = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -738,6 +811,7 @@ set_switcher_quads (quad *q,
     q->max_width  = SHRT_MAX;
     q->max_height = SHRT_MAX;
     q->align	  = 0;
+    q->clamp	  = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -762,13 +836,13 @@ decor_update_switcher_property (decor_t *d)
     nQuad = set_switcher_quads (quads, d->width, d->height);
 
     decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, quads, nQuad);
+			    &extents, 0, 0, quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
 		     win_decor_atom,
 		     XA_INTEGER,
-		     32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
+		     32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
     XSync (xdisplay, FALSE);
     gdk_error_trap_pop ();
 }
@@ -2018,13 +2092,13 @@ update_default_decorations (GdkScreen *screen)
 	nQuad = set_shadow_quads (quads, width, height);
 
 	decoration_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
-				&_shadow_extents, quads, nQuad);
+				&_shadow_extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 atom,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data,
-			 5 + 9 * nQuad);
+			 7 + 9 * nQuad);
     }
     else
     {
@@ -2050,7 +2124,7 @@ update_default_decorations (GdkScreen *screen)
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
 
-    nQuad = set_window_quads (quads, d.width, d.height, right_corner_space);
+    nQuad = set_no_title_window_quads (quads, d.width, d.height);
 
     decor_normal_pixmap = create_pixmap (d.width, d.height);
     if (decor_normal_pixmap)
@@ -2062,12 +2136,12 @@ update_default_decorations (GdkScreen *screen)
 
 	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_NORMAL", FALSE);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&extents, quads, nQuad);
+				&extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 atom,
 			 XA_INTEGER,
-			 32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
+			 32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
     }
 
     if (decor_active_pixmap)
@@ -2083,12 +2157,12 @@ update_default_decorations (GdkScreen *screen)
 
 	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_ACTIVE", FALSE);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&extents, quads, nQuad);
+				&extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 atom,
 			 XA_INTEGER,
-			 32, PropModeReplace, (guchar *) data, 5 + 9 * nQuad);
+			 32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
     }
 }
 
@@ -2463,9 +2537,11 @@ update_window_decoration_size (WnckWindow *win)
     gint      width, height;
     gint      w;
 
-    width = max_window_name_width (win) + d->button_width + ICON_SPACE;
-
     wnck_window_get_geometry (win, NULL, NULL, &w, NULL);
+    if (w < ICON_SPACE + d->button_width)
+	return FALSE;
+
+    width = max_window_name_width (win) + d->button_width + ICON_SPACE;
     if (w < width)
 	width = MAX (ICON_SPACE + d->button_width, w);
 

@@ -1,5 +1,10 @@
 2006-04-25  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c:
+	* plugins/decoration.c: Add clamp and min size.
+
+	* plugins/decoration.c (decorReleaseDecoration): Fix memory leak.
+
 	* plugins/scale.c: Click on background leaves scale mode and enters
 	show desktop mode. (Dan Winship)
 
