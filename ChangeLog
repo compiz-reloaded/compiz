@@ -1,5 +1,8 @@
 2006-04-25  David Reveman  <davidr@novell.com>
 
+	* plugins/minimize.c (minHandleEvent): Initialize scale and
+	translate properly.
+
 	* src/window.c (activateWindow):
 	* src/event.c (handleEvent):
 	* src/screen.c: Add window parameter to leaveShowDesktopMode and

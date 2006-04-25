@@ -547,6 +547,11 @@ minHandleEvent (CompDisplay *d,
 
 		    if (minGetWindowIconGeometry (w, &mw->icon))
 		    {
+			mw->xScale = w->paint.xScale;
+			mw->yScale = w->paint.yScale;
+			mw->tx	   = w->attrib.x - w->serverX;
+			mw->ty	   = w->attrib.y - w->serverY;
+
 			mw->adjust     = TRUE;
 			ms->moreAdjust = TRUE;
 
