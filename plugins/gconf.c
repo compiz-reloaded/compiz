@@ -150,7 +150,7 @@ gconfSetOption (CompDisplay *d,
 		gchar	    *screen,
 		gchar	    *plugin)
 {
-    GConfValue *gvalue;
+    GConfValue *gvalue, *existingValue;
     gchar      *key;
 
     GCONF_DISPLAY (d);
@@ -166,6 +166,8 @@ gconfSetOption (CompDisplay *d,
 			 NULL);
     }
 
+    existingValue = gconf_client_get (gd->client, key, NULL);
+
     switch (o->type) {
     case CompOptionTypeBool:
     case CompOptionTypeInt:
@@ -174,16 +176,11 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeColor:
     case CompOptionTypeBinding:
     {
-	GConfValue *existingValue;
-
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
 	gconfSetValue (d, &o->value, o->type, gvalue);
-	existingValue = gconf_client_get (gd->client, key, NULL);
 	if (!existingValue || gconf_value_compare (existingValue, gvalue))
 	    gconf_client_set (gd->client, key, gvalue, NULL);
 	gconf_value_free (gvalue);
-	if (existingValue)
-	    gconf_value_free (existingValue);
 	break;
     }
     case CompOptionTypeList: {
@@ -205,7 +202,8 @@ gconfSetOption (CompDisplay *d,
 
 	gconf_value_set_list_type (gvalue, type);
 	gconf_value_set_list (gvalue, list);
-	gconf_client_set (gd->client, key, gvalue, NULL);
+	if (!existingValue || gconf_value_compare (existingValue, gvalue))
+	    gconf_client_set (gd->client, key, gvalue, NULL);
 
 	for (i = 0; i < o->value.list.nValue; i++)
 	{
@@ -219,6 +217,8 @@ gconfSetOption (CompDisplay *d,
 	break;
     }
 
+    if (existingValue)
+	gconf_value_free (existingValue);
     g_free (key);
 }
 
@@ -488,7 +488,7 @@ gconfInitOption (CompDisplay *d,
 			 o->name, NULL);
     }
 
-    entry = gconf_client_get_entry (gd->client, key, NULL, FALSE, NULL);
+    entry = gconf_client_get_entry (gd->client, key, NULL, TRUE, NULL);
     if (entry)
     {
 	gconfGetOptionValue (d, entry);

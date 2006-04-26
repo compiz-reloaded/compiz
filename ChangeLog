@@ -1,3 +1,11 @@
+2006-04-26  Dan Winship  <danw@novell.com>
+
+	* plugins/gconf.c (gconfSetOption): gconf_value_compare against
+	the old value for list-type options too.
+	(gconfInitOption): Change the call to gconf_client_get_entry to
+	request the default value again; the fix to gconfSetOption will
+	prevent the infinite loops that happened before.
+
 2006-04-26  David Reveman  <davidr@novell.com>
 
 	* gnome/window-decorator/gnome-window-decorator.c (update_shadow): 
