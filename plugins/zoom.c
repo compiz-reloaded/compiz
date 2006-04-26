@@ -657,13 +657,9 @@ zoomHandleEvent (CompDisplay *d,
     WRAP (zd, d, handleEvent, zoomHandleEvent);
 
     if (warp)
-    {
-	s->prevPointerX += warpX;
-	s->prevPointerY += warpY;
-
-	XWarpPointer (d->display, None, None, 0, 0, 0, 0,
-		      warpX, warpY);
-    }
+	warpPointerToScreenPos (s,
+				s->prevPointerX + warpX,
+				s->prevPointerY + warpY);
 }
 
 static void

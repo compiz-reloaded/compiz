@@ -1409,6 +1409,11 @@ void
 disableScreenEdge (CompScreen *s,
 		   int	      edge);
 
+void
+warpPointerToScreenPos (CompScreen *s,
+			int	   warpX,
+			int	   warpY);
+
 
 /* window.c */
 

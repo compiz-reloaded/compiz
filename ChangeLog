@@ -1,3 +1,19 @@
+2006-04-26  David Reveman  <davidr@novell.com>
+
+	* plugins/move.c: Support for maximized windows snap-off. Based on
+	patch by Colin Guthrie.
+
+	* plugins/rotate.c (rotateHandleEvent): Don't do edge flipping
+	when a horizontally maximized or fullscreen window is grabbed.
+
+	* plugins/zoom.c:
+	* plugins/rotate.c:
+	* plugins/resize.c:
+	* plugins/move.c:
+	* src/screen.c:
+	* include/compiz.h: Add warpPointerToScreenPos and use it everywhere
+	we want to invisibly warp the pointer.
+
 2006-04-25  David Reveman  <davidr@novell.com>
 
 	* gnome/window-decorator/gnome-window-decorator.c:

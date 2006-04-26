@@ -43,6 +43,8 @@
 
 #define MOVE_CONSTRAIN_Y_DEFAULT TRUE
 
+#define MOVE_SNAPOFF_MAXIMIZED_DEFAULT TRUE
+
 struct _MoveKeys {
     char *name;
     int  dx;
@@ -58,6 +60,9 @@ struct _MoveKeys {
 
 #define KEY_MOVE_INC 24
 
+#define SNAP_BACK 20
+#define SNAP_OFF  100
+
 static int displayPrivateIndex;
 
 typedef struct _MoveDisplay {
@@ -68,11 +73,12 @@ typedef struct _MoveDisplay {
     KeyCode    key[NUM_KEYS];
 } MoveDisplay;
 
-#define MOVE_SCREEN_OPTION_INITIATE    0
-#define MOVE_SCREEN_OPTION_TERMINATE   1
-#define MOVE_SCREEN_OPTION_OPACITY     2
-#define MOVE_SCREEN_OPTION_CONSTRAIN_Y 3
-#define MOVE_SCREEN_OPTION_NUM	       4
+#define MOVE_SCREEN_OPTION_INITIATE	     0
+#define MOVE_SCREEN_OPTION_TERMINATE	     1
+#define MOVE_SCREEN_OPTION_OPACITY	     2
+#define MOVE_SCREEN_OPTION_CONSTRAIN_Y	     3
+#define MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED 4
+#define MOVE_SCREEN_OPTION_NUM		     5
 
 typedef struct _MoveScreen {
     CompOption opt[MOVE_SCREEN_OPTION_NUM];
@@ -84,9 +90,14 @@ typedef struct _MoveScreen {
     Cursor moveCursor;
 
     GLushort moveOpacity;
+
+    unsigned int origState;
+
+    int	snapOffY;
+    int	snapBackY;
 } MoveScreen;
 
-#define GET_MOVE_DISPLAY(d)				      \
+#define GET_MOVE_DISPLAY(d)				     \
     ((MoveDisplay *) (d)->privates[displayPrivateIndex].ptr)
 
 #define MOVE_DISPLAY(d)		           \
@@ -148,6 +159,10 @@ moveSetScreenOption (CompScreen      *screen,
     case MOVE_SCREEN_OPTION_CONSTRAIN_Y:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
+	break;
+    case MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -194,6 +209,14 @@ moveScreenInitOptions (MoveScreen *ms,
     o->longDesc	  = "Constrain Y coordinate to workspace area";
     o->type	  = CompOptionTypeBool;
     o->value.b    = MOVE_CONSTRAIN_Y_DEFAULT;
+
+    o = &ms->opt[MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED];
+    o->name      = "snapoff_maximized";
+    o->shortDesc = "Snapoff maximized windows";
+    o->longDesc  = "Snapoff and auto unmaximized maximized windows "
+	"when dragging";
+    o->type      = CompOptionTypeBool;
+    o->value.b   = MOVE_SNAPOFF_MAXIMIZED_DEFAULT;
 }
 
 static void
@@ -224,6 +247,11 @@ moveInitiate (CompWindow   *w,
 
     w->screen->prevPointerX = x;
     w->screen->prevPointerY = y;
+
+    ms->origState = w->state;
+
+    ms->snapBackY = w->serverY;
+    ms->snapOffY  = y;
 
     if (!ms->grabIndex)
 	ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor);
@@ -261,15 +289,17 @@ static Bool
 moveHandleMotionEvent (CompScreen *s,
 		       int	  xRoot,
 		       int	  yRoot,
-		       int	  *wrapX,
-		       int	  *wrapY)
+		       int	  *warpX,
+		       int	  *warpY)
 {
     MOVE_SCREEN (s);
 
     if (ms->grabIndex)
     {
 	CompWindow *w;
-	int	   pointerDx, pointerDy, dx, dy;
+	int	   pointerDx, pointerDy, dx, dy, wx, wy;
+	Bool	   move = TRUE;
+	Bool	   warp = TRUE;
 
 	MOVE_DISPLAY (s->display);
 
@@ -280,38 +310,15 @@ moveHandleMotionEvent (CompScreen *s,
 
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
-	    dx = dy = 0;
+	    wx = wy = dx = dy = 0;
 	}
 	else
 	{
-	    int min, max;
+	    unsigned int state = w->state;
+	    int		 min, max;
 
-	    dx = pointerDx;
-	    dy = pointerDy;
-
-	    if (w->state & CompWindowStateMaximizedVertMask)
-	    {
-		min = s->workArea.y + w->input.top;
-		max = s->workArea.y + s->workArea.height -
-		    w->input.bottom - w->height;
-
-		if (w->attrib.y + pointerDy < min)
-		    dy = min - w->attrib.y;
-		else if (w->attrib.y + pointerDy > max)
-		    dy = max - w->attrib.y;
-	    }
-
-	    if (w->state & CompWindowStateMaximizedHorzMask)
-	    {
-		min = s->workArea.x + w->input.left;
-		max = s->workArea.x + s->workArea.width -
-		    w->input.right - w->width;
-
-		if (w->attrib.x + pointerDx < min)
-		    dx = min - w->attrib.x;
-		else if (w->attrib.x + pointerDx > max)
-		    dx = max - w->attrib.x;
-	    }
+	    wx = dx = pointerDx;
+	    wy = dy = pointerDy;
 
 	    if (ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y].value.b)
 	    {
@@ -322,16 +329,95 @@ moveHandleMotionEvent (CompScreen *s,
 		    dy = min - w->attrib.y;
 		else if (w->attrib.y + dy > max)
 		    dy = max - w->attrib.y;
+
+		wy = dy;
+	    }
+
+	    if (ms->opt[MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED].value.b)
+	    {
+		if ((w->state & CompWindowStateMaximizedVertMask) &&
+		    (w->state & CompWindowStateMaximizedHorzMask))
+		{
+		    warp = FALSE;
+
+		    if (yRoot - ms->snapOffY >= SNAP_OFF)
+		    {
+			w->saveMask |= CWX | CWY;
+
+			w->saveWc.x = xRoot - (w->saveWc.width >> 1);
+			w->saveWc.y = yRoot + (w->input.top >> 1);
+
+			move = FALSE;
+
+			unmaximizeWindow (w);
+
+			ms->snapOffY = ms->snapBackY;
+		    }
+		}
+		else if ((ms->origState & CompWindowStateMaximizedVertMask) &&
+			 (ms->origState & CompWindowStateMaximizedHorzMask))
+		{
+		    if (yRoot - ms->snapBackY < SNAP_BACK)
+		    {
+			/* if screen isn't grabbed by someone else */
+			if ((s->maxGrab - ms->grabIndex) == 0)
+			{
+			    maximizeWindow (w);
+
+			    wy  = s->workArea.y + (w->input.top >> 1);
+			    wy += w->sizeHints.height_inc >> 1;
+			    wy -= s->prevPointerY;
+
+			    if (wy > 0)
+				wy = 0;
+
+			    move = FALSE;
+			}
+		    }
+		}
+	    }
+
+	    if (state & CompWindowStateMaximizedVertMask)
+	    {
+		min = s->workArea.y + w->input.top;
+		max = s->workArea.y + s->workArea.height -
+		    w->input.bottom - w->height;
+
+		if (w->attrib.y + pointerDy < min)
+		    dy = min - w->attrib.y;
+		else if (w->attrib.y + pointerDy > max)
+		    dy = max - w->attrib.y;
+
+		if (warp)
+		    wy = dy;
+	    }
+
+	    if (state & CompWindowStateMaximizedHorzMask)
+	    {
+		if (w->attrib.x > s->width || w->attrib.x + w->width < 0)
+		    return FALSE;
+
+		min = s->workArea.x + w->input.left;
+		max = s->workArea.x + s->workArea.width -
+		    w->input.right - w->width;
+
+		if (w->attrib.x + pointerDx < min)
+		    dx = min - w->attrib.x;
+		else if (w->attrib.x + pointerDx > max)
+		    dx = max - w->attrib.x;
+
+		if (warp)
+		    wx = dx;
 	    }
 	}
 
-	if (dx || dy)
+	if (move)
 	    moveWindow (md->w, dx, dy, TRUE, FALSE);
 
-	if (dx != pointerDx || dy != pointerDy)
+	if (wx != pointerDx || wy != pointerDy)
 	{
-	    *wrapX = s->prevPointerX + dx;
-	    *wrapY = s->prevPointerY + dy;
+	    *warpX = s->prevPointerX + wx;
+	    *warpY = s->prevPointerY + wy;
 
 	    return TRUE;
 	}
@@ -500,13 +586,7 @@ moveHandleEvent (CompDisplay *d,
     WRAP (md, d, handleEvent, moveHandleEvent);
 
     if (warp)
-    {
-	s->prevPointerX = warpX;
-	s->prevPointerY = warpY;
-
-	XWarpPointer (d->display, None, s->root, 0, 0, 0, 0,
-		      warpX, warpY);
-    }
+	warpPointerToScreenPos (s, warpX, warpY);
 }
 
 static Bool

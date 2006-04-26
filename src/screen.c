@@ -1773,8 +1773,9 @@ removeScreenGrab (CompScreen *s,
 	else
 	{
 	    if (restorePointer)
-		XWarpPointer (s->display->display, None, s->root, 0, 0, 0, 0,
-			      restorePointer->x, restorePointer->y);
+		warpPointerToScreenPos (s,
+					restorePointer->x,
+					restorePointer->y);
 
 	    XUngrabPointer (s->display->display, CurrentTime);
 	    XUngrabKeyboard (s->display->display, CurrentTime);
@@ -2693,4 +2694,34 @@ disableScreenEdge (CompScreen *s,
     s->screenEdge[edge].count--;
     if (s->screenEdge[edge].count == 0)
 	XUnmapWindow (s->display->display, s->screenEdge[edge].id);
+}
+
+void
+warpPointerToScreenPos (CompScreen *s,
+			int	   warpX,
+			int	   warpY)
+{
+    XEvent event;
+
+    if (warpX >= s->width)
+	warpX = s->width - 1;
+    else if (warpX < 0)
+	warpX = 0;
+
+    if (warpY >= s->height)
+	warpY = s->height - 1;
+    else if (warpY < 0)
+	warpY = 0;
+
+    s->prevPointerX = warpX;
+    s->prevPointerY = warpY;
+
+    XWarpPointer (s->display->display, None, s->root, 0, 0, 0, 0, warpX, warpY);
+    XSync (s->display->display, FALSE);
+
+    while (XCheckMaskEvent (s->display->display,
+			    LeaveWindowMask |
+			    EnterWindowMask |
+			    PointerMotionMask,
+			    &event));
 }

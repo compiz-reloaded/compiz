@@ -180,6 +180,7 @@ typedef struct _RotateScreen {
     CompTimeoutHandle rotateHandle;
     Bool	      slow;
     unsigned int      grabMask;
+    CompWindow	      *grabWindow;
 } RotateScreen;
 
 #define GET_ROTATE_DISPLAY(d)				       \
@@ -874,17 +875,16 @@ rotateLeft (void *closure)
 
     ROTATE_SCREEN (s);
 
-    warpX    = s->width;
+    warpX    = s->prevPointerX + s->width;
     warpMove = -10;
-
-    s->prevPointerX += warpX;
 
     rotate (s, 0, s->prevPointerY, -1);
 
-    rs->savedPointer.x = s->prevPointerX + warpMove;
+    warpPointerToScreenPos (s, warpX, s->prevPointerY);
 
-    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0,
-		  warpX + warpMove, 0);
+    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, warpMove, 0);
+
+    rs->savedPointer.x = s->prevPointerX + warpMove;
 
     return FALSE;
 }
@@ -897,17 +897,16 @@ rotateRight (void *closure)
 
     ROTATE_SCREEN (s);
 
-    warpX    = -s->width;
+    warpX    = s->prevPointerX - s->width;
     warpMove = 10;
-
-    s->prevPointerX += warpX;
 
     rotate (s, 0, s->prevPointerY, 1);
 
-    rs->savedPointer.x = s->prevPointerX + warpMove;
+    warpPointerToScreenPos (s, warpX, s->prevPointerY);
 
-    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0,
-		  warpX + warpMove, 0);
+    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, warpMove, 0);
+
+    rs->savedPointer.x = s->prevPointerX + warpMove;
 
     return FALSE;
 }
@@ -1034,18 +1033,9 @@ rotateHandleEvent (CompDisplay *d,
 			event->xmotion.x_root > s->width  - 50 ||
 			event->xmotion.y_root > s->height - 50)
 		    {
-			XEvent ev;
-
-			warpX = (s->width  / 2) - event->xmotion.x_root;
-			warpY = (s->height / 2) - event->xmotion.y_root;
+			warpX = (s->width  / 2);
+			warpY = (s->height / 2);
 			warp  = TRUE;
-
-			XSync (d->display, FALSE);
-			while (XCheckMaskEvent (d->display,
-						PointerMotionMask |
-						EnterWindowMask   |
-						LeaveWindowMask,
-						&ev));
 		    }
 
 		    if (rs->pointerInvertY)
@@ -1155,12 +1145,23 @@ rotateHandleEvent (CompDisplay *d,
 
 		ROTATE_SCREEN (s);
 
-		/* check if screen is grabbed by someone else */
-		if (s->maxGrab - rs->grabIndex)
+		/* check if screen is grabbed */
+		if (s->maxGrab)
 		{
 		    /* break if no window is being moved */
 		    if (!rs->grabMask)
 			break;
+
+		    /* break if window is horizontally maximized or
+		       fullscreen */
+		    if (rs->grabWindow)
+		    {
+			CompWindow *w = rs->grabWindow;
+
+			if (w->state & (CompWindowStateMaximizedHorzMask |
+					CompWindowStateFullscreenMask))
+			    break;
+		    }
 		}
 		else
 		{
@@ -1173,14 +1174,14 @@ rotateHandleEvent (CompDisplay *d,
 		{
 		    if (rs->flipTime == 0 || rs->grabIndex)
 		    {
-			warpX    = s->width;
+			warpX    = event->xcrossing.x_root + s->width;
+			warpY    = event->xcrossing.y_root;
 			warpMove = -10;
 			warp     = TRUE;
 
 			rotate (s, 0, event->xcrossing.y_root, -1);
 
-			rs->savedPointer.x = event->xcrossing.x_root +
-			    warpX + warpMove;
+			rs->savedPointer.x = warpX + warpMove;
 		    }
 		    else
 		    {
@@ -1199,14 +1200,14 @@ rotateHandleEvent (CompDisplay *d,
 		{
 		    if (rs->flipTime == 0 || rs->grabIndex)
 		    {
-			warpX    = -s->width;
+			warpX    = event->xcrossing.x_root - s->width;
+			warpY    = event->xcrossing.y_root;
 			warpMove = 10;
 			warp     = TRUE;
 
 			rotate (s, 0, event->xcrossing.y_root, 1);
 
-			rs->savedPointer.x = event->xcrossing.x_root +
-			    warpX + warpMove;
+			rs->savedPointer.x = warpX + warpMove;
 		    }
 		    else
 		    {
@@ -1246,11 +1247,8 @@ rotateHandleEvent (CompDisplay *d,
 
     if (warp)
     {
-	s->prevPointerX += warpX;
-	s->prevPointerY += warpY;
-
-	XWarpPointer (d->display, None, None, 0, 0, 0, 0,
-		      warpX + warpMove, warpY);
+	warpPointerToScreenPos (s, warpX, warpY);
+	XWarpPointer (d->display, None, None, 0, 0, 0, 0, warpMove, 0);
     }
 }
 
@@ -1263,7 +1261,8 @@ rotateWindowGrabNotify (CompWindow   *w,
 {
     ROTATE_SCREEN (w->screen);
 
-    rs->grabMask = mask;
+    rs->grabMask   = mask;
+    rs->grabWindow = w;
 
     UNWRAP (rs, w->screen, windowGrabNotify);
     (*w->screen->windowGrabNotify) (w, x, y, state, mask);
@@ -1275,7 +1274,8 @@ rotateWindowUngrabNotify (CompWindow *w)
 {
     ROTATE_SCREEN (w->screen);
 
-    rs->grabMask = 0;
+    rs->grabMask   = 0;
+    rs->grabWindow = NULL;
 
     UNWRAP (rs, w->screen, windowUngrabNotify);
     (*w->screen->windowUngrabNotify) (w);
@@ -1391,8 +1391,9 @@ rotateInitScreen (CompPlugin *p,
     rs->grabbed = FALSE;
     rs->snapTop = FALSE;
 
-    rs->slow     = FALSE;
-    rs->grabMask = FALSE;
+    rs->slow       = FALSE;
+    rs->grabMask   = FALSE;
+    rs->grabWindow = NULL;
 
     rs->acceleration = ROTATE_ACCELERATION_DEFAULT;
 

@@ -670,13 +670,7 @@ resizeHandleEvent (CompDisplay *d,
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 
     if (warp)
-    {
-	s->prevPointerX = warpX;
-	s->prevPointerY = warpY;
-
-	XWarpPointer (d->display, None, s->root, 0, 0, 0, 0,
-		      warpX, warpY);
-    }
+	warpPointerToScreenPos (s, warpX, warpY);
 }
 
 static Bool
