@@ -4299,9 +4299,6 @@ create_gaussian_kernel (double radius,
 #define SIGMA(r) ((r) / 2.0)
 #define ALPHA(r) (r)
 
-/* TODO: when offset != 0, a minimium window size for which the decoration
-   can be used with must be computed and communicated to the decoration
-   plugin. */
 static int
 update_shadow (void)
 {
