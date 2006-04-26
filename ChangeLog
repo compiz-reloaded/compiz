@@ -1,5 +1,8 @@
 2006-04-26  Dan Winship  <danw@novell.com>
 
+	* src/event.c (handleEvent): activate window on Button2 click in
+	addition to Button1 and Button3.
+
 	* plugins/gconf.c (gconfSetOption): gconf_value_compare against
 	the old value for list-type options too.
 	(gconfInitOption): Change the call to gconf_client_get_entry to

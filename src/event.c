@@ -385,6 +385,7 @@ handleEvent (CompDisplay *d,
 	    int	       eventMode = ReplayPointer;
 
 	    if (event->xbutton.button == Button1 ||
+		event->xbutton.button == Button2 ||
 		event->xbutton.button == Button3)
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
