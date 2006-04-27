@@ -1289,8 +1289,8 @@ waterHandleEvent (CompDisplay *d,
 	    {
 		XPoint p;
 
-		p.x = event->xbutton.x_root;
-		p.y = event->xbutton.y_root;
+		p.x = pointerX;
+		p.y = pointerY;
 
 		waterVertices (s, GL_POINTS, &p, 1, 0.8f);
 		damageScreen (s);
@@ -1307,11 +1307,11 @@ waterHandleEvent (CompDisplay *d,
 	    {
 		XPoint p[2];
 
-		p[0].x = s->prevPointerX;
-		p[0].y = s->prevPointerY;
+		p[0].x = lastPointerX;
+		p[0].y = lastPointerY;
 
-		p[1].x = event->xmotion.x_root;
-		p[1].y = event->xmotion.y_root;
+		p[1].x = pointerX;
+		p[1].y = pointerY;
 
 		waterVertices (s, GL_LINES, p, 2, 0.2f);
 		damageScreen (s);

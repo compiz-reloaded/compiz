@@ -488,15 +488,12 @@ zoomIn (CompScreen *s,
     if (s->maxGrab - zs->grabIndex)
 	return;
 
-    s->prevPointerX = x;
-    s->prevPointerY = y;
-
     if (!zs->grabIndex)
     {
 	zs->grabIndex = pushScreenGrab (s, s->invisibleCursor);
 
-	zs->savedPointer.x = s->prevPointerX;
-	zs->savedPointer.y = s->prevPointerY;
+	zs->savedPointer.x = pointerX;
+	zs->savedPointer.y = pointerY;
     }
 
     if (zs->grabIndex)
@@ -557,9 +554,7 @@ static void
 zoomHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
-    CompScreen *s = NULL;
-    Bool       warp = FALSE;
-    int	       warpX = 0, warpY = 0;
+    CompScreen *s;
 
     ZOOM_DISPLAY (d);
 
@@ -617,26 +612,17 @@ zoomHandleEvent (CompDisplay *d,
 		GLfloat pointerDx;
 		GLfloat pointerDy;
 
-		pointerDx = event->xmotion.x_root - s->prevPointerX;
-		pointerDy = event->xmotion.y_root - s->prevPointerY;
+		pointerDx = pointerX - lastPointerX;
+		pointerDy = pointerY - lastPointerY;
 
 		if (event->xmotion.x_root < 50	           ||
 		    event->xmotion.y_root < 50	           ||
 		    event->xmotion.x_root > s->width  - 50 ||
 		    event->xmotion.y_root > s->height - 50)
 		{
-		    XEvent ev;
-
-		    warpX = (s->width  / 2) - event->xmotion.x_root;
-		    warpY = (s->height / 2) - event->xmotion.y_root;
-		    warp  = TRUE;
-
-		    XSync (d->display, FALSE);
-		    while (XCheckMaskEvent (d->display,
-					    PointerMotionMask |
-					    EnterWindowMask   |
-					    LeaveWindowMask,
-					    &ev));
+		    warpPointer (d,
+				 (s->width  / 2) - pointerX,
+				 (s->height / 2) - pointerY);
 		}
 
 		if (zs->pointerInvertY)
@@ -655,11 +641,6 @@ zoomHandleEvent (CompDisplay *d,
     UNWRAP (zd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (zd, d, handleEvent, zoomHandleEvent);
-
-    if (warp)
-	warpPointerToScreenPos (s,
-				s->prevPointerX + warpX,
-				s->prevPointerY + warpY);
 }
 
 static void

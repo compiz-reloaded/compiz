@@ -160,6 +160,11 @@ extern char *defaultTextureFilter;
 extern char *windowTypeString[];
 extern int  nWindowTypeString;
 
+extern int lastPointerX;
+extern int lastPointerY;
+extern int pointerX;
+extern int pointerY;
+
 #define RESTRICT_VALUE(value, min, max)				     \
     (((value) < (min)) ? (min): ((value) > (max)) ? (max) : (value))
 
@@ -641,6 +646,11 @@ handleSelectionRequest (CompDisplay *display,
 void
 handleSelectionClear (CompDisplay *display,
 		      XEvent      *event);
+
+void
+warpPointer (CompDisplay *display,
+	     int	 dx,
+	     int	 dy);
 
 
 /* event.c */
@@ -1175,9 +1185,6 @@ struct _CompScreen {
     int	     grabSize;
     int	     maxGrab;
 
-    int prevPointerX;
-    int prevPointerY;
-
     int		   rasterX;
     int		   rasterY;
     struct timeval lastRedraw;
@@ -1408,11 +1415,6 @@ enableScreenEdge (CompScreen *s,
 void
 disableScreenEdge (CompScreen *s,
 		   int	      edge);
-
-void
-warpPointerToScreenPos (CompScreen *s,
-			int	   warpX,
-			int	   warpY);
 
 
 /* window.c */

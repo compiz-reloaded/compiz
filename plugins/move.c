@@ -245,8 +245,8 @@ moveInitiate (CompWindow   *w,
 
     md->w = w;
 
-    w->screen->prevPointerX = x;
-    w->screen->prevPointerY = y;
+    lastPointerX = x;
+    lastPointerY = y;
 
     ms->origState = w->state;
 
@@ -285,12 +285,10 @@ moveTerminate (CompDisplay *d)
     }
 }
 
-static Bool
+static void
 moveHandleMotionEvent (CompScreen *s,
 		       int	  xRoot,
-		       int	  yRoot,
-		       int	  *warpX,
-		       int	  *warpY)
+		       int	  yRoot)
 {
     MOVE_SCREEN (s);
 
@@ -305,8 +303,8 @@ moveHandleMotionEvent (CompScreen *s,
 
 	w = md->w;
 
-	pointerDx = xRoot - s->prevPointerX;
-	pointerDy = yRoot - s->prevPointerY;
+	pointerDx = xRoot - lastPointerX;
+	pointerDy = yRoot - lastPointerY;
 
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
@@ -366,7 +364,7 @@ moveHandleMotionEvent (CompScreen *s,
 
 			    wy  = s->workArea.y + (w->input.top >> 1);
 			    wy += w->sizeHints.height_inc >> 1;
-			    wy -= s->prevPointerY;
+			    wy -= lastPointerY;
 
 			    if (wy > 0)
 				wy = 0;
@@ -395,7 +393,7 @@ moveHandleMotionEvent (CompScreen *s,
 	    if (state & CompWindowStateMaximizedHorzMask)
 	    {
 		if (w->attrib.x > s->width || w->attrib.x + w->width < 0)
-		    return FALSE;
+		    return;
 
 		min = s->workArea.x + w->input.left;
 		max = s->workArea.x + s->workArea.width -
@@ -415,24 +413,17 @@ moveHandleMotionEvent (CompScreen *s,
 	    moveWindow (md->w, dx, dy, TRUE, FALSE);
 
 	if (wx != pointerDx || wy != pointerDy)
-	{
-	    *warpX = s->prevPointerX + wx;
-	    *warpY = s->prevPointerY + wy;
-
-	    return TRUE;
-	}
+	    warpPointer (s->display,
+			 (lastPointerX + wx) - pointerX,
+			 (lastPointerY + wy) - pointerY);
     }
-
-    return FALSE;
 }
 
 static void
 moveHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
-    CompScreen *s = NULL;
-    Bool       warp = FALSE;
-    int	       warpX = 0 , warpY = 0;
+    CompScreen *s;
 
     MOVE_DISPLAY (d);
 
@@ -451,8 +442,8 @@ moveHandleEvent (CompDisplay *d,
 		w = findWindowAtScreen (s, event->xkey.window);
 		if (w)
 		    moveInitiate (w,
-				  event->xkey.x_root,
-				  event->xkey.y_root,
+				  pointerX,
+				  pointerY,
 				  event->xkey.state);
 	    }
 
@@ -492,8 +483,8 @@ moveHandleEvent (CompDisplay *d,
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
 		    moveInitiate (w,
-				  event->xbutton.x_root,
-				  event->xbutton.y_root,
+				  pointerX,
+				  pointerY,
 				  event->xbutton.state);
 	    }
 
@@ -504,21 +495,13 @@ moveHandleEvent (CompDisplay *d,
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
-	    warp = moveHandleMotionEvent (s,
-					  event->xmotion.x_root,
-					  event->xmotion.y_root,
-					  &warpX,
-					  &warpY);
+	    moveHandleMotionEvent (s, pointerX, pointerY);
 	break;
     case EnterNotify:
     case LeaveNotify:
 	s = findScreenAtDisplay (d, event->xcrossing.root);
 	if (s)
-	    warp = moveHandleMotionEvent (s,
-					  event->xcrossing.x_root,
-					  event->xcrossing.y_root,
-					  &warpX,
-					  &warpY);
+	    moveHandleMotionEvent (s, pointerX, pointerY);
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->wmMoveResizeAtom)
@@ -537,9 +520,9 @@ moveHandleEvent (CompDisplay *d,
 
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
-			warpX = xRoot = w->attrib.x + w->width / 2;
-			warpY = yRoot = w->attrib.y + w->height / 2;
-			warp  = TRUE;
+			warpPointer (d,
+				     (w->attrib.x + w->width  / 2) - pointerX,
+				     (w->attrib.y + w->height / 2) - pointerY);
 
 			moveInitiate (w, xRoot, yRoot, 0);
 		    }
@@ -561,9 +544,7 @@ moveHandleEvent (CompDisplay *d,
 					  event->xclient.data.l[1],
 					  state | CompPressMask);
 
-			    warp = moveHandleMotionEvent (w->screen,
-							  xRoot, yRoot,
-							  &warpX, &warpY);
+			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
 			}
 		    }
 		}
@@ -584,9 +565,6 @@ moveHandleEvent (CompDisplay *d,
     UNWRAP (md, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (md, d, handleEvent, moveHandleEvent);
-
-    if (warp)
-	warpPointerToScreenPos (s, warpX, warpY);
 }
 
 static Bool

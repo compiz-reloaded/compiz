@@ -75,6 +75,13 @@ static CompWatchFdHandle lastWatchFdHandle = 1;
 static struct pollfd     *watchPollFds = 0;
 static int               nWatchFds = 0;
 
+static Bool inHandleEvent = FALSE;
+
+int lastPointerX = 0;
+int lastPointerY = 0;
+int pointerX     = 0;
+int pointerY     = 0;
+
 #define CLICK_TO_FOCUS_DEFAULT TRUE
 
 #define AUTORAISE_DEFAULT TRUE
@@ -1123,33 +1130,62 @@ eventLoop (void)
 		event.xbutton.state |= CompPressMask;
 		event.xbutton.state =
 		    realToVirtualModMask (display, event.xbutton.state);
+
+		pointerX = event.xbutton.x_root;
+		pointerY = event.xbutton.y_root;
 		break;
 	    case ButtonRelease:
 		event.xbutton.state |= CompReleaseMask;
 		event.xbutton.state =
 		    realToVirtualModMask (display, event.xbutton.state);
+
+		pointerX = event.xbutton.x_root;
+		pointerY = event.xbutton.y_root;
 		break;
 	    case KeyPress:
 		event.xkey.state |= CompPressMask;
 		event.xkey.state = realToVirtualModMask (display,
 							 event.xkey.state);
+
+		pointerX = event.xkey.x_root;
+		pointerY = event.xkey.y_root;
 		break;
 	    case KeyRelease:
 		event.xkey.state |= CompReleaseMask;
 		event.xkey.state = realToVirtualModMask (display,
 							 event.xkey.state);
+
+		pointerX = event.xkey.x_root;
+		pointerY = event.xkey.y_root;
 		break;
 	    case MotionNotify:
 		event.xmotion.state =
 		    realToVirtualModMask (display, event.xmotion.state);
+
+		pointerX = event.xmotion.x_root;
+		pointerY = event.xmotion.y_root;
 		break;
+	    case EnterNotify:
+	    case LeaveNotify:
+		event.xcrossing.state =
+		    realToVirtualModMask (display, event.xcrossing.state);
+
+		pointerX = event.xcrossing.x_root;
+		pointerY = event.xcrossing.y_root;
 	    default:
 		break;
 	    }
 
 	    sn_display_process_event (display->snDisplay, &event);
 
+	    inHandleEvent = TRUE;
+
 	    (*display->handleEvent) (display, &event);
+
+	    inHandleEvent = FALSE;
+
+	    lastPointerX = pointerX;
+	    lastPointerY = pointerY;
 	}
 
 	if (s->damageMask)
@@ -1796,13 +1832,16 @@ addDisplay (char *name,
 
     for (i = 0; i < ScreenCount (dpy); i++)
     {
-	Window		 newWmSnOwner = None;
-	Atom		 wmSnAtom = 0;
-	Time		 wmSnTimestamp = 0;
-	XEvent		 event;
+	Window		     newWmSnOwner = None;
+	Atom		     wmSnAtom = 0;
+	Time		     wmSnTimestamp = 0;
+	XEvent		     event;
 	XSetWindowAttributes attr;
-	Window		 currentWmSnOwner;
-	char		 buf[128];
+	Window		     currentWmSnOwner;
+	char		     buf[128];
+	Window		     rootDummy, childDummy;
+	unsigned int	     uDummy;
+	int		     x, y, dummy;
 
 	sprintf (buf, "WM_S%d", i);
 	wmSnAtom = XInternAtom (dpy, buf, 0);
@@ -1929,6 +1968,14 @@ addDisplay (char *name,
 	{
 	    fprintf (stderr, "%s: Failed to manage screen: %d\n",
 		     programName, i);
+	}
+
+	if (XQueryPointer (dpy, XRootWindow (dpy, i),
+			   &rootDummy, &childDummy,
+			   &x, &y, &dummy, &dummy, &uDummy))
+	{
+	    lastPointerX = pointerX = x;
+	    lastPointerY = pointerY = y;
 	}
     }
 
@@ -2212,4 +2259,45 @@ handleSelectionClear (CompDisplay *display,
     /* removeScreen (screen); */
 
     exit (0);
+}
+
+void
+warpPointer (CompDisplay *display,
+	     int	 dx,
+	     int	 dy)
+{
+    CompScreen *s = display->screens;
+    XEvent     event;
+
+    pointerX += dx;
+    pointerY += dy;
+
+    if (pointerX >= s->width)
+	pointerX = s->width - 1;
+    else if (pointerX < 0)
+	pointerX = 0;
+
+    if (pointerY >= s->height)
+	pointerY = s->height - 1;
+    else if (pointerY < 0)
+	pointerY = 0;
+
+    XWarpPointer (display->display,
+		  None, s->root,
+		  0, 0, 0, 0,
+		  pointerX, pointerY);
+
+    XSync (display->display, FALSE);
+
+    while (XCheckMaskEvent (display->display,
+			    LeaveWindowMask |
+			    EnterWindowMask |
+			    PointerMotionMask,
+			    &event));
+
+    if (!inHandleEvent)
+    {
+	lastPointerX = pointerX;
+	lastPointerY = pointerY;
+    }
 }

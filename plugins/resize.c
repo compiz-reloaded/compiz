@@ -213,8 +213,8 @@ resizeInitiate (CompScreen   *s,
 	rd->width  = w->attrib.width;
 	rd->height = w->attrib.height;
 
-	s->prevPointerX = x;
-	s->prevPointerY = y;
+	lastPointerX = x;
+	lastPointerY = y;
 
 	if (!rs->grabIndex)
 	{
@@ -409,12 +409,10 @@ resizeConstrainMinMax (CompWindow *w,
     *newHeight = height;
 }
 
-static Bool
+static void
 resizeHandleMotionEvent (CompScreen *s,
 			 int	    xRoot,
-			 int	    yRoot,
-			 int	    *wrapX,
-			 int	    *wrapY)
+			 int	    yRoot)
 {
     RESIZE_SCREEN (s);
 
@@ -424,8 +422,8 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	RESIZE_DISPLAY (s->display);
 
-	pointerDx = xRoot - s->prevPointerX;
-	pointerDy = yRoot - s->prevPointerY;
+	pointerDx = xRoot - lastPointerX;
+	pointerDy = yRoot - lastPointerY;
 
 	if (pointerDx || pointerDy)
 	{
@@ -466,25 +464,18 @@ resizeHandleMotionEvent (CompScreen *s,
 	    resizeUpdateWindowSize (s->display);
 
 	    if (dx != pointerDx || dy != pointerDy)
-	    {
-		*wrapX = s->prevPointerX + dx;
-		*wrapY = s->prevPointerY + dy;
-
-		return TRUE;
-	    }
+		warpPointer (s->display,
+			     (lastPointerX + dx) - pointerX,
+			     (lastPointerY + dy) - pointerY);
 	}
     }
-
-    return FALSE;
 }
 
 static void
 resizeHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
-    CompScreen *s = NULL;
-    Bool       warp = FALSE;
-    int	       warpX = 0 , warpY = 0;
+    CompScreen *s;
 
     RESIZE_DISPLAY (d);
 
@@ -499,8 +490,8 @@ resizeHandleEvent (CompDisplay *d,
 	    if (EV_KEY (&rs->opt[RESIZE_SCREEN_OPTION_INITIATE], event))
 		interiorResizeInitiate (s,
 					event->xkey.window,
-					event->xkey.x_root,
-					event->xkey.y_root,
+					pointerX,
+					pointerY,
 					event->xkey.state);
 
 	    if (EV_KEY (&rs->opt[RESIZE_SCREEN_OPTION_TERMINATE], event) ||
@@ -560,21 +551,13 @@ resizeHandleEvent (CompDisplay *d,
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
-	    warp = resizeHandleMotionEvent (s,
-					    event->xmotion.x_root,
-					    event->xmotion.y_root,
-					    &warpX,
-					    &warpY);
+	    resizeHandleMotionEvent (s, pointerX, pointerY);
 	break;
     case EnterNotify:
     case LeaveNotify:
 	s = findScreenAtDisplay (d, event->xcrossing.root);
 	if (s)
-	    warp = resizeHandleMotionEvent (s,
-					    event->xcrossing.x_root,
-					    event->xcrossing.y_root,
-					    &warpX,
-					    &warpY);
+	    resizeHandleMotionEvent (s, pointerX, pointerY);
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->wmMoveResizeAtom)
@@ -594,8 +577,7 @@ resizeHandleEvent (CompDisplay *d,
 			x = w->attrib.x + w->width / 2;
 			y = w->attrib.y + w->height / 2;
 
-			XWarpPointer (d->display, None, w->screen->root,
-				      0, 0, 0, 0, x, y);
+			warpPointer (d, x - pointerX, y - pointerY);
 
 			resizeInitiate (w->screen, event->xclient.window,
 					x, y, 0,
@@ -633,9 +615,8 @@ resizeHandleEvent (CompDisplay *d,
 					    event->xclient.data.l[3] ?
 					    event->xclient.data.l[3] : -1);
 
-			    warp = resizeHandleMotionEvent (s = w->screen,
-							    xRoot, yRoot,
-							    &warpX, &warpY);
+			    resizeHandleMotionEvent (w->screen,
+						     xRoot, yRoot);
 			}
 		    }
 		}
@@ -668,9 +649,6 @@ resizeHandleEvent (CompDisplay *d,
     UNWRAP (rd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (rd, d, handleEvent, resizeHandleEvent);
-
-    if (warp)
-	warpPointerToScreenPos (s, warpX, warpY);
 }
 
 static Bool

@@ -1022,6 +1022,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/move/screen0/options/snapoff_maximized</key>
+            <applyto>/apps/compiz/plugins/move/screen0/options/snapoff_maximized</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Snapoff maximized windows</short>
+                <long>
+                    Snapoff and auto unmaximized maximized windows when dragging
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/place/screen0/options/workarounds</key>
             <applyto>/apps/compiz/plugins/place/screen0/options/workarounds</applyto>
             <owner>compiz</owner>
@@ -2172,6 +2186,20 @@
                 <short>Snap windows</short>
                 <long>
                     Toggle window snapping
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/maximize_effect</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/maximize_effect</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Maximize Effect</short>
+                <long>
+                    Wobble effect when maximizing and unmaximizing windows
                 </long>
             </locale>
         </schema>

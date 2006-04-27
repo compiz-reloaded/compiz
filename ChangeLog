@@ -1,3 +1,20 @@
+2006-04-27  David Reveman  <davidr@novell.com>
+
+	* plugins/compiz.schemas: Regen (snapoff and maximize_effect).
+
+	* plugins/wobbly.c: Add maximize effect.
+
+	* plugins/zoom.c:
+	* plugins/water.c:
+	* plugins/rotate.c:
+	* plugins/resize.c:
+	* plugins/move.c:
+	* src/event.c:
+	* src/screen.c:
+	* src/display.c:
+	* include/compiz.h: Add proper warp pointer interface and update
+	all plugins to use it.
+
 2006-04-26  Dan Winship  <danw@novell.com>
 
 	* src/event.c (handleEvent): activate window on Button2 click in

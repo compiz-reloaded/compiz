@@ -871,20 +871,18 @@ static Bool
 rotateLeft (void *closure)
 {
     CompScreen *s = closure;
-    int	       warpX, warpMove;
+    int        warpX;
 
     ROTATE_SCREEN (s);
 
-    warpX    = s->prevPointerX + s->width;
-    warpMove = -10;
+    warpX = pointerX + s->width;
+    warpPointer (s->display, s->width - 10, 0);
+    lastPointerX = warpX;
 
-    rotate (s, 0, s->prevPointerY, -1);
+    rotate (s, 0, pointerY, -1);
 
-    warpPointerToScreenPos (s, warpX, s->prevPointerY);
-
-    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, warpMove, 0);
-
-    rs->savedPointer.x = s->prevPointerX + warpMove;
+    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, -1, 0);
+    rs->savedPointer.x = lastPointerX - 9;
 
     return FALSE;
 }
@@ -893,20 +891,19 @@ static Bool
 rotateRight (void *closure)
 {
     CompScreen *s = closure;
-    int	       warpX, warpMove;
+    int        warpX;
 
     ROTATE_SCREEN (s);
 
-    warpX    = s->prevPointerX - s->width;
-    warpMove = 10;
+    warpX = pointerX - s->width;
+    warpPointer (s->display, 10 - s->width, 0);
+    lastPointerX = warpX;
 
-    rotate (s, 0, s->prevPointerY, 1);
+    rotate (s, 0, lastPointerY, 1);
 
-    warpPointerToScreenPos (s, warpX, s->prevPointerY);
+    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, 1, 0);
 
-    XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, warpMove, 0);
-
-    rs->savedPointer.x = s->prevPointerX + warpMove;
+    rs->savedPointer.x = lastPointerX + 9;
 
     return FALSE;
 }
@@ -915,9 +912,7 @@ static void
 rotateHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
-    CompScreen *s = NULL;
-    Bool       warp = FALSE;
-    int	       warpX = 0, warpY = 0, warpMove = 0, face;
+    CompScreen *s;
 
     ROTATE_DISPLAY (d);
 
@@ -932,6 +927,8 @@ rotateHandleEvent (CompDisplay *d,
 	    /* only if screen isn't grabbed by someone else */
 	    if ((s->maxGrab - rs->grabIndex) == 0)
 	    {
+		int face;
+
 		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
 		    rotateInitiate (s, event->xkey.x_root, event->xkey.y_root);
 
@@ -1025,17 +1022,17 @@ rotateHandleEvent (CompDisplay *d,
 		{
 		    GLfloat pointerDx, pointerDy;
 
-		    pointerDx = event->xmotion.x_root - s->prevPointerX;
-		    pointerDy = event->xmotion.y_root - s->prevPointerY;
+		    pointerDx = pointerX - lastPointerX;
+		    pointerDy = pointerY - lastPointerY;
 
 		    if (event->xmotion.x_root < 50	       ||
 			event->xmotion.y_root < 50	       ||
 			event->xmotion.x_root > s->width  - 50 ||
 			event->xmotion.y_root > s->height - 50)
 		    {
-			warpX = (s->width  / 2);
-			warpY = (s->height / 2);
-			warp  = TRUE;
+			warpPointer (d,
+				     (s->width  / 2) - pointerX,
+				     (s->height / 2) - pointerY);
 		    }
 
 		    if (rs->pointerInvertY)
@@ -1049,10 +1046,8 @@ rotateHandleEvent (CompDisplay *d,
 		}
 		else
 		{
-		    rs->savedPointer.x += event->xmotion.x_root -
-			s->prevPointerX;
-		    rs->savedPointer.y += event->xmotion.y_root -
-			s->prevPointerY;
+		    rs->savedPointer.x += pointerX - lastPointerX;
+		    rs->savedPointer.y += pointerY - lastPointerY;
 		}
 	    }
 	}
@@ -1174,14 +1169,18 @@ rotateHandleEvent (CompDisplay *d,
 		{
 		    if (rs->flipTime == 0 || rs->grabIndex)
 		    {
-			warpX    = event->xcrossing.x_root + s->width;
-			warpY    = event->xcrossing.y_root;
-			warpMove = -10;
-			warp     = TRUE;
+			int pointerDx = pointerX - lastPointerX;
+			int warpX;
 
-			rotate (s, 0, event->xcrossing.y_root, -1);
+			warpX = pointerX + s->width;
+			warpPointer (s->display, s->width - 10, 0);
+			lastPointerX = warpX - pointerDx;
 
-			rs->savedPointer.x = warpX + warpMove;
+			rotate (s, 0, pointerY, -1);
+
+			XWarpPointer (s->display->display, None, None,
+				      0, 0, 0, 0, -1, 0);
+			rs->savedPointer.x = lastPointerX - 9;
 		    }
 		    else
 		    {
@@ -1200,14 +1199,18 @@ rotateHandleEvent (CompDisplay *d,
 		{
 		    if (rs->flipTime == 0 || rs->grabIndex)
 		    {
-			warpX    = event->xcrossing.x_root - s->width;
-			warpY    = event->xcrossing.y_root;
-			warpMove = 10;
-			warp     = TRUE;
+			int pointerDx = pointerX - lastPointerX;
+			int warpX;
 
-			rotate (s, 0, event->xcrossing.y_root, 1);
+			warpX = pointerX - s->width;
+			warpPointer (s->display, 10 - s->width, 0);
+			lastPointerX = warpX - pointerDx;
 
-			rs->savedPointer.x = warpX + warpMove;
+			rotate (s, 0, pointerY, 1);
+
+			XWarpPointer (s->display->display, None, None,
+				      0, 0, 0, 0, 1, 0);
+			rs->savedPointer.x = lastPointerX + 9;
 		    }
 		    else
 		    {
@@ -1244,12 +1247,6 @@ rotateHandleEvent (CompDisplay *d,
     UNWRAP (rd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (rd, d, handleEvent, rotateHandleEvent);
-
-    if (warp)
-    {
-	warpPointerToScreenPos (s, warpX, warpY);
-	XWarpPointer (d->display, None, None, 0, 0, 0, 0, warpMove, 0);
-    }
 }
 
 static void

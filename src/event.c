@@ -517,9 +517,6 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    s->prevPointerX = event->xbutton.x_root;
-	    s->prevPointerY = event->xbutton.y_root;
-
 	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT], event))
 	    {
 		runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
@@ -648,9 +645,6 @@ handleEvent (CompDisplay *d,
 	    else if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT],
 			     event))
 		runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
-
-	    s->prevPointerX = event->xkey.x_root;
-	    s->prevPointerY = event->xkey.y_root;
 	}
 	break;
     case KeyRelease:
@@ -853,12 +847,6 @@ handleEvent (CompDisplay *d,
 	}
 	break;
     case MotionNotify:
-	s = findScreenAtDisplay (d, event->xmotion.root);
-	if (s)
-	{
-	    s->prevPointerX = event->xmotion.x_root;
-	    s->prevPointerY = event->xmotion.y_root;
-	}
 	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->winActiveAtom)
@@ -1178,9 +1166,6 @@ handleEvent (CompDisplay *d,
 	    s = findScreenAtDisplay (d, event->xcrossing.root);
 	    if (s)
 	    {
-		s->prevPointerX = event->xcrossing.x_root;
-		s->prevPointerY = event->xcrossing.y_root;
-
 		w = findTopLevelWindowAtScreen (s, event->xcrossing.window);
 	    }
 	    else
@@ -1219,24 +1204,8 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 	}
-	else
-	{
-	    s = findScreenAtDisplay (d, event->xcrossing.root);
-	    if (s)
-	    {
-		s->prevPointerX = event->xcrossing.x_root;
-		s->prevPointerY = event->xcrossing.y_root;
-	    }
-	}
 	break;
     case LeaveNotify:
-	s = findScreenAtDisplay (d, event->xcrossing.root);
-	if (s)
-	{
-	    s->prevPointerX = event->xcrossing.x_root;
-	    s->prevPointerY = event->xcrossing.y_root;
-	}
-
 	if (event->xcrossing.detail != NotifyInferior)
 	{
 	    if (event->xcrossing.window == d->below)

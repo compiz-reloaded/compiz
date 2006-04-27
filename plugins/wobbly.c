@@ -38,6 +38,9 @@
 #define WIN_W(w) ((w)->width + (w)->output.left + (w)->output.right)
 #define WIN_H(w) ((w)->height + (w)->output.top + (w)->output.bottom)
 
+#define MAXIMIZE_STATE (CompWindowStateMaximizedVertMask | \
+			CompWindowStateMaximizedHorzMask)
+
 #define GRID_WIDTH  4
 #define GRID_HEIGHT 4
 
@@ -166,6 +169,8 @@ static char *moveWinType[] = {
 #define WOBBLY_SNAP_KEY_DEFAULT       "Control_L"
 #define WOBBLY_SNAP_MODIFIERS_DEFAULT (CompPressMask | ControlMask)
 
+#define WOBBLY_MAXIMIZE_EFFECT_DEFAULT TRUE
+
 static int displayPrivateIndex;
 
 typedef struct _WobblyDisplay {
@@ -184,7 +189,8 @@ typedef struct _WobblyDisplay {
 #define WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE  8
 #define WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE  9
 #define WOBBLY_SCREEN_OPTION_SNAP	       10
-#define WOBBLY_SCREEN_OPTION_NUM	       11
+#define WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT   11
+#define WOBBLY_SCREEN_OPTION_NUM	       12
 
 typedef struct _WobblyScreen {
     int	windowPrivateIndex;
@@ -214,6 +220,9 @@ typedef struct _WobblyScreen {
     unsigned int focusWMask;
     unsigned int moveWMask;
     unsigned int grabWMask;
+
+    unsigned int grabMask;
+    CompWindow	 *grabWindow;
 } WobblyScreen;
 
 #define WobblyInitial  (1L << 0)
@@ -221,10 +230,11 @@ typedef struct _WobblyScreen {
 #define WobblyVelocity (1L << 2)
 
 typedef struct _WobblyWindow {
-    Model *model;
-    int   wobbly;
-    Bool  grabbed;
-    Bool  velocity;
+    Model	 *model;
+    int		 wobbly;
+    Bool	 grabbed;
+    Bool	 velocity;
+    unsigned int state;
 } WobblyWindow;
 
 #define GET_WOBBLY_DISPLAY(d)				       \
@@ -350,6 +360,10 @@ wobblySetScreenOption (CompScreen      *screen,
 	    return FALSE;
 
 	if (compSetBindingOption (o, value))
+	    return TRUE;
+	break;
+    case WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT:
+	if (compSetBoolOption (o, value))
 	    return TRUE;
     default:
 	break;
@@ -487,6 +501,13 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (WOBBLY_SNAP_KEY_DEFAULT));
+
+    o = &ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT];
+    o->name	  = "maximize_effect";
+    o->shortDesc  = "Maximize Effect";
+    o->longDesc	  = "Wobble effect when maximizing and unmaximizing windows";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = WOBBLY_MAXIMIZE_EFFECT_DEFAULT;
 }
 
 static void
@@ -933,6 +954,118 @@ modelSetMiddleAnchor (Model *model,
 }
 
 static void
+modelAddEdgeAnchors (Model *model,
+		     int   x,
+		     int   y,
+		     int   width,
+		     int   height)
+{
+    Object *o;
+    float  x0, y0;
+
+    x0 = model->scaleOrigin.x;
+    y0 = model->scaleOrigin.y;
+
+    o = &model->objects[0];
+    o->position.x = x + (0      - x0) * model->scale.x + x0;
+    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    o->immobile = TRUE;
+
+    o = &model->objects[GRID_WIDTH - 1];
+    o->position.x = x + (width  - x0) * model->scale.x + x0;
+    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    o->immobile = TRUE;
+
+    o = &model->objects[GRID_WIDTH * (GRID_HEIGHT - 1)];
+    o->position.x = x + (0      - x0) * model->scale.x + x0;
+    o->position.y = y + (height - y0) * model->scale.y + y0;
+    o->immobile = TRUE;
+
+    o = &model->objects[model->numObjects - 1];
+    o->position.x = x + (width  - x0) * model->scale.x + x0;
+    o->position.y = y + (height - y0) * model->scale.y + y0;
+    o->immobile = TRUE;
+
+    if (!model->anchorObject)
+	model->anchorObject = &model->objects[0];
+}
+
+static void
+modelRemoveEdgeAnchors (Model *model,
+			int   x,
+			int   y,
+			int   width,
+			int   height)
+{
+    Object *o;
+    float  x0, y0;
+
+    x0 = model->scaleOrigin.x;
+    y0 = model->scaleOrigin.y;
+
+    o = &model->objects[0];
+    o->position.x = x + (0      - x0) * model->scale.x + x0;
+    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    if (o != model->anchorObject)
+	o->immobile = FALSE;
+
+    o = &model->objects[GRID_WIDTH - 1];
+    o->position.x = x + (width  - x0) * model->scale.x + x0;
+    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    if (o != model->anchorObject)
+	o->immobile = FALSE;
+
+    o = &model->objects[GRID_WIDTH * (GRID_HEIGHT - 1)];
+    o->position.x = x + (0      - x0) * model->scale.x + x0;
+    o->position.y = y + (height - y0) * model->scale.y + y0;
+    if (o != model->anchorObject)
+	o->immobile = FALSE;
+
+    o = &model->objects[model->numObjects - 1];
+    o->position.x = x + (width  - x0) * model->scale.x + x0;
+    o->position.y = y + (height - y0) * model->scale.y + y0;
+    if (o != model->anchorObject)
+	o->immobile = FALSE;
+}
+
+static void
+modelAdjustObjectPosition (Model  *model,
+			   Object *object,
+			   int    x,
+			   int    y,
+			   int    width,
+			   int    height)
+{
+    Object *o;
+    float  x0, y0;
+    int	   gridX, gridY, i = 0;
+
+    x0 = model->scaleOrigin.x;
+    y0 = model->scaleOrigin.y;
+
+    for (gridY = 0; gridY < GRID_HEIGHT; gridY++)
+    {
+	for (gridX = 0; gridX < GRID_WIDTH; gridX++)
+	{
+	    o = &model->objects[i];
+	    if (o == object)
+	    {
+		o->position.x = x +
+		    (((gridX * width) / (GRID_WIDTH - 1)) - x0) *
+		    model->scale.x + x0;
+		o->position.y = y +
+		    (((gridY * height) / (GRID_HEIGHT - 1)) - y0) *
+		    model->scale.y + y0;
+
+		return;
+	    }
+
+	    i++;
+	}
+    }
+}
+
+static void
 modelInitObjects (Model *model,
 		  int	x,
 		  int   y,
@@ -953,8 +1086,10 @@ modelInitObjects (Model *model,
 	for (gridX = 0; gridX < GRID_WIDTH; gridX++)
 	{
 	    objectInit (&model->objects[i],
-			x + (((gridX * width)  / gw) - x0) * model->scale.x + x0,
-			y + (((gridY * height) / gh) - y0) * model->scale.y + y0,
+			x + (((gridX * width)  / gw) - x0) *
+			model->scale.x + x0,
+			y + (((gridY * height) / gh) - y0) *
+			model->scale.y + y0,
 			0, 0);
 	    i++;
 	}
@@ -1736,6 +1871,9 @@ wobblyPreparePaintScreen (CompScreen *s,
 					    msSinceLastPaint :
 					    s->redrawTime);
 
+		    if ((ww->state & MAXIMIZE_STATE) && ww->grabbed)
+			ww->wobbly |= WobblyForce;
+
 		    if (ww->wobbly)
 		    {
 			/* snapped to more than one edge, we have to reduce
@@ -2135,13 +2273,47 @@ wobblyHandleEvent (CompDisplay *d,
     WRAP (wd, d, handleEvent, wobblyHandleEvent);
 
     switch (event->type) {
+    case MotionNotify:
+	s = findScreenAtDisplay (d, event->xmotion.root);
+	if (s)
+	{
+	    WOBBLY_SCREEN (s);
+
+	    if (ws->grabWindow			       &&
+		(ws->moveWMask & ws->grabWindow->type) &&
+		ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
+	    {
+		WOBBLY_WINDOW (ws->grabWindow);
+
+		if (ww->state & (CompWindowStateMaximizedVertMask |
+				 CompWindowStateMaximizedHorzMask))
+		{
+		    WOBBLY_WINDOW (ws->grabWindow);
+
+		    if (ww->model && ww->grabbed)
+		    {
+			int dx, dy;
+
+			dx = pointerX - lastPointerX;
+			dy = pointerY - lastPointerY;
+
+			ww->model->anchorObject->position.x += dx;
+			ww->model->anchorObject->position.y += dy;
+
+			ww->wobbly |= WobblyInitial;
+			ws->wobblyWindows |= ww->wobbly;
+
+			damagePendingOnScreen (s);
+		    }
+		}
+	    }
+	}
+	break;
     case PropertyNotify:
 	if (event->xproperty.atom == d->winActiveAtom)
 	{
 	    if (d->activeWindow != activeWindow)
 	    {
-		CompWindow *w;
-
 		w = findWindowAtDisplay (d, d->activeWindow);
 		if (w && isWobblyWin (w))
 		{
@@ -2218,6 +2390,9 @@ wobblyDamageWindowRect (CompWindow *w,
 	    WOBBLY_WINDOW (w);
 	    WOBBLY_SCREEN (w->screen);
 
+	    if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
+		wobblyEnsureModel (w);
+
 	    if ((ws->mapWMask & w->type) &&
 		ws->mapEffect		 &&
 		wobblyEnsureModel (w))
@@ -2287,7 +2462,44 @@ wobblyWindowResizeNotify (CompWindow *w)
     WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
 
-    if (ww->model)
+    if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b &&
+	isWobblyWin (w)					      &&
+	((w->state ^ ww->state) & MAXIMIZE_STATE))
+    {
+	if (wobblyEnsureModel (w))
+	{
+	    if (w->state & MAXIMIZE_STATE)
+	    {
+		if (!ww->grabbed && ww->model->anchorObject)
+		{
+		    ww->model->anchorObject->immobile = FALSE;
+		    ww->model->anchorObject = NULL;
+		}
+
+		modelAddEdgeAnchors (ww->model,
+				     WIN_X (w), WIN_Y (w),
+				     WIN_W (w), WIN_H (w));
+	    }
+	    else
+	    {
+		modelRemoveEdgeAnchors (ww->model,
+					WIN_X (w), WIN_Y (w),
+					WIN_W (w), WIN_H (w));
+		modelSetMiddleAnchor (ww->model,
+				      WIN_X (w), WIN_Y (w),
+				      WIN_W (w), WIN_H (w));
+	    }
+
+	    modelInitSprings (ww->model,
+			      WIN_X (w), WIN_Y (w), WIN_W (w), WIN_H (w));
+
+	    ww->wobbly |= WobblyInitial;
+	    ws->wobblyWindows |= ww->wobbly;
+
+	    damagePendingOnScreen (w->screen);
+	}
+    }
+    else if (ww->model)
     {
 	modelInitObjects (ww->model,
 			  WIN_X (w), WIN_Y (w), WIN_W (w), WIN_H (w));
@@ -2295,6 +2507,25 @@ wobblyWindowResizeNotify (CompWindow *w)
 	modelInitSprings (ww->model,
 			  WIN_X (w), WIN_Y (w), WIN_W (w), WIN_H (w));
     }
+
+    /* update grab */
+    if (ww->model && ww->grabbed)
+    {
+	if (ww->model->anchorObject)
+	    ww->model->anchorObject->immobile = FALSE;
+
+	ww->model->anchorObject = modelFindNearestObject (ww->model,
+							  pointerX,
+							  pointerY);
+	ww->model->anchorObject->immobile = TRUE;
+
+	modelAdjustObjectPosition (ww->model,
+				   ww->model->anchorObject,
+				   WIN_X (w), WIN_Y (w),
+				   WIN_W (w), WIN_H (w));
+    }
+
+    ww->state = w->state;
 
     UNWRAP (ws, w->screen, windowResizeNotify);
     (*w->screen->windowResizeNotify) (w);
@@ -2314,8 +2545,24 @@ wobblyWindowMoveNotify (CompWindow *w,
     {
 	if (ww->grabbed && !immediate)
 	{
-	    ww->model->anchorObject->position.x += dx;
-	    ww->model->anchorObject->position.y += dy;
+	    if (ww->state & MAXIMIZE_STATE)
+	    {
+		int i;
+
+		for (i = 0; i < ww->model->numObjects; i++)
+		{
+		    if (ww->model->objects[i].immobile)
+		    {
+			ww->model->objects[i].position.x += dx;
+			ww->model->objects[i].position.y += dy;
+		    }
+		}
+	    }
+	    else
+	    {
+		ww->model->anchorObject->position.x += dx;
+		ww->model->anchorObject->position.y += dy;
+	    }
 
 	    ww->wobbly |= WobblyInitial;
 	    ws->wobblyWindows |= ww->wobbly;
@@ -2340,19 +2587,43 @@ wobblyWindowGrabNotify (CompWindow   *w,
 {
     WOBBLY_SCREEN (w->screen);
 
+    ws->grabMask   = mask;
+    ws->grabWindow = w;
+
     if ((mask & CompWindowGrabButtonMask) &&
 	(ws->moveWMask & w->type)         &&
 	isWobblyWin (w))
     {
 	WOBBLY_WINDOW (w);
 
-	if (ww->model || wobblyEnsureModel (w))
+	if (wobblyEnsureModel (w))
 	{
 	    Spring *s;
 	    int	   i;
 
-	    if (ww->model->anchorObject)
-		ww->model->anchorObject->immobile = FALSE;
+	    if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
+	    {
+		if (w->state & MAXIMIZE_STATE)
+		{
+		    modelAddEdgeAnchors (ww->model,
+					 WIN_X (w), WIN_Y (w),
+					 WIN_W (w), WIN_H (w));
+		}
+		else
+		{
+		    modelRemoveEdgeAnchors (ww->model,
+					    WIN_X (w), WIN_Y (w),
+					    WIN_W (w), WIN_H (w));
+
+		    if (ww->model->anchorObject)
+			ww->model->anchorObject->immobile = FALSE;
+		}
+	    }
+	    else
+	    {
+		if (ww->model->anchorObject)
+		    ww->model->anchorObject->immobile = FALSE;
+	    }
 
 	    ww->model->anchorObject = modelFindNearestObject (ww->model, x, y);
 	    ww->model->anchorObject->immobile = TRUE;
@@ -2407,6 +2678,9 @@ wobblyWindowUngrabNotify (CompWindow *w)
     WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
 
+    ws->grabMask   = 0;
+    ws->grabWindow = NULL;
+
     if (ww->grabbed)
     {
 	if (ww->model)
@@ -2415,6 +2689,14 @@ wobblyWindowUngrabNotify (CompWindow *w)
 		ww->model->anchorObject->immobile = FALSE;
 
 	    ww->model->anchorObject = NULL;
+
+	    if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
+	    {
+		if (ww->state & MAXIMIZE_STATE)
+		    modelAddEdgeAnchors (ww->model,
+					 WIN_X (w), WIN_Y (w),
+					 WIN_W (w), WIN_H (w));
+	    }
 
 	    ww->wobbly |= WobblyInitial;
 	    ws->wobblyWindows |= ww->wobbly;
@@ -2512,6 +2794,9 @@ wobblyInitScreen (CompPlugin *p,
     ws->mapEffect   = WobblyEffectShiver;
     ws->focusEffect = WobblyEffectNone;
 
+    ws->grabMask   = 0;
+    ws->grabWindow = NULL;
+
     wobblyScreenInitOptions (ws, s->display->display);
 
     WRAP (ws, s, preparePaintScreen, wobblyPreparePaintScreen);
@@ -2574,8 +2859,15 @@ wobblyInitWindow (CompPlugin *p,
     ww->model   = 0;
     ww->wobbly  = 0;
     ww->grabbed = FALSE;
+    ww->state   = w->state;
 
     w->privates[ws->windowPrivateIndex].ptr = ww;
+
+    if (w->mapNum && ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
+    {
+	if (isWobblyWin (w))
+	    wobblyEnsureModel (w);
+    }
 
     return TRUE;
 }
