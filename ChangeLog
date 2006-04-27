@@ -1,5 +1,7 @@
 2006-04-27  David Reveman  <davidr@novell.com>
 
+	* src/window.c (addWindow): Check if window is minimized. (Dan Winship)
+
 	* plugins/compiz.schemas: Regen (snapoff and maximize_effect).
 
 	* plugins/wobbly.c: Add maximize effect.

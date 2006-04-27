@@ -1538,6 +1538,11 @@ addWindow (CompScreen *screen,
 
 	updateWindowAttributes (w, FALSE);
     }
+    else if (!w->attrib.override_redirect)
+    {
+	if (getWmState (screen->display, w->id) == IconicState)
+	    w->minimized = TRUE;
+    }
 
     windowInitPlugins (w);
 }
