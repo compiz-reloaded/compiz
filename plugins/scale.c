@@ -1204,7 +1204,12 @@ scaleHandleEvent (CompDisplay *d,
 		    if (id == s->screenEdge[scaleEdge[i]].id)
 		    {
 			if (ss->cornerMask & (1 << i))
-			    scaleInitiate (s);
+			{
+			    if (ss->grabIndex == 0)
+				scaleInitiate (s);
+			    else
+				scaleTerminate (s);
+			}
 		    }
 		}
 

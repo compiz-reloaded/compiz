@@ -1,3 +1,12 @@
+2006-04-27  Dan Winship  <danw@novell.com>
+
+	* plugins/rotate.c (rotateHandleEvent): for the
+	rotate-to-specific-face keys, rotate counterclockwise when that's
+	faster. (bnc 169427)
+
+	* plugins/scale.c (scaleHandleEvent): Make the corners toggle
+	scale mode rather than only activating it. (bnc 169408)
+
 2006-04-27  David Reveman  <davidr@novell.com>
 
 	* configure.ac: Bump version to 0.0.10.

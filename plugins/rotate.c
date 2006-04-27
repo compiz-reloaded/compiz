@@ -927,7 +927,7 @@ rotateHandleEvent (CompDisplay *d,
 	    /* only if screen isn't grabbed by someone else */
 	    if ((s->maxGrab - rs->grabIndex) == 0)
 	    {
-		int face;
+		int face, delta;
 
 		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
 		    rotateInitiate (s, event->xkey.x_root, event->xkey.y_root);
@@ -946,18 +946,24 @@ rotateHandleEvent (CompDisplay *d,
 
 		for (face = 0; face < 12 && face < s->size; face++)
 		{
+		    delta = face - s->x;
+		    if (delta > s->size / 2)
+			delta -= s->size;
+		    else if (delta < -(s->size / 2))
+			delta += s->size;
+
 		    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TO_1_WINDOW
 					 + face], event))
 		    {
 			rotateWithWindow (s, event->xkey.x_root,
-					  event->xkey.y_root, face - s->x);
+					  event->xkey.y_root, delta);
 			break;
 		    }
 		    else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TO_1 + face],
 				     event))
 		    {
 			rotate (s, event->xkey.x_root, event->xkey.y_root,
-				face - s->x);
+				delta);
 			break;
 		    }
 		}
