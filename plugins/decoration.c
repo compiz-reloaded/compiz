@@ -411,8 +411,6 @@ decorReleaseTexture (CompScreen   *screen,
     free (texture);
 }
 
-int dcnt = 0;
-
 /*
   decoration property
   -------------------
