@@ -1359,19 +1359,21 @@ eventMatches (CompDisplay *display,
 	if (bind->type != CompBindingTypeKey)
 	    return FALSE;
 
+	modMask = REAL_MOD_MASK & ~display->ignoredModMask;
+	bindMods = virtualToRealModMask (display, bind->u.key.modifiers);
+
 	if (bind->u.key.keycode == 0)
 	{
 	    state = keycodeToModifiers (display, event->xkey.keycode);
 	    if (state == 0)
 		return FALSE;
+	    modMask = state;
 	}
 	else if (bind->u.key.keycode != event->xkey.keycode)
 	    return FALSE;
 
-	modMask = REAL_MOD_MASK & ~display->ignoredModMask;
-	bindMods = virtualToRealModMask (display, bind->u.key.modifiers);
 	state |= event->xkey.state;
-		
+
 	return (bindMods & modMask) == (state & modMask);
 
     default:
