@@ -1,5 +1,10 @@
 2006-04-28  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c: Back out last change
+	as it clearly didn't fix anything. XFixed being defined as "int"
+	is perfectly fine of course. libXrender is currently broken on 64bit.
+	See Bug #6774 for a fix.
+
 	* src/event.c (handleEvent):
 	* src/display.c:
 	* include/compiz.h:
