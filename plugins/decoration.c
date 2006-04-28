@@ -1292,13 +1292,11 @@ decorInitWindow (CompPlugin *p,
 
     w->privates[ds->windowPrivateIndex].ptr = dw;
 
-    if (w->attrib.map_state == IsViewable)
-    {
-	if (!w->attrib.override_redirect)
-	    decorWindowUpdateDecoration (w);
+    if (!w->attrib.override_redirect)
+	decorWindowUpdateDecoration (w);
 
+    if (w->attrib.map_state == IsViewable)
 	decorWindowUpdate (w, FALSE);
-    }
 
     return TRUE;
 }
