@@ -1271,6 +1271,33 @@ waterDonePaintScreen (CompScreen *s)
 }
 
 static void
+waterHandleMotionEvent (CompDisplay *d,
+			Window	    root)
+{
+    CompScreen *s;
+
+    s = findScreenAtDisplay (d, root);
+    if (s)
+    {
+	WATER_SCREEN (s);
+
+	if (ws->grabIndex)
+	{
+	    XPoint p[2];
+
+	    p[0].x = lastPointerX;
+	    p[0].y = lastPointerY;
+
+	    p[1].x = pointerX;
+	    p[1].y = pointerY;
+
+	    waterVertices (s, GL_LINES, p, 2, 0.2f);
+	    damageScreen (s);
+	}
+    }
+}
+
+static void
 waterHandleEvent (CompDisplay *d,
 		  XEvent      *event)
 {
@@ -1297,26 +1324,12 @@ waterHandleEvent (CompDisplay *d,
 	    }
 	}
 	break;
+    case EnterNotify:
+    case LeaveNotify:
+	waterHandleMotionEvent (d, event->xcrossing.root);
+	break;
     case MotionNotify:
-	s = findScreenAtDisplay (d, event->xmotion.root);
-	if (s)
-	{
-	    WATER_SCREEN (s);
-
-	    if (ws->grabIndex)
-	    {
-		XPoint p[2];
-
-		p[0].x = lastPointerX;
-		p[0].y = lastPointerY;
-
-		p[1].x = pointerX;
-		p[1].y = pointerY;
-
-		waterVertices (s, GL_LINES, p, 2, 0.2f);
-		damageScreen (s);
-	    }
-	}
+	waterHandleMotionEvent (d, event->xmotion.root);
 	break;
     case KeyPress:
     case KeyRelease:

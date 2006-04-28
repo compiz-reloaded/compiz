@@ -1,5 +1,7 @@
 2006-04-28  David Reveman  <davidr@novell.com>
 
+	* plugins/water.c: Handle enter/leave notify events.
+
 	* plugins/decoration.c (decorInitWindow): Check for window specific
 	decoration on both mapped and unmapped windows so that initially
 	minimized windows get properly decorated. (Dan Winship)
