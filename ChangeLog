@@ -1,3 +1,11 @@
+2006-04-28  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c: Use xfixed_16_16_t
+	instead of XFixed to avoid 64bit issue with XFixed being defined as
+	"int".
+
+	* configure.ac: xrender 0.8.4 is good enough.
+
 2006-04-27  Dan Winship  <danw@novell.com>
 
 	* plugins/rotate.c (rotateHandleEvent): for the

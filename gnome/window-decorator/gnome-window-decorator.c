@@ -54,6 +54,8 @@
 #include <sys/types.h>
 #include <signal.h>
 
+typedef int32_t	xfixed_16_16_t;
+
 #define METACITY_GCONF_DIR "/apps/metacity/general"
 
 #define COMPIZ_USE_SYSTEM_FONT_KEY		    \
@@ -4218,7 +4220,7 @@ update_style (GtkWidget *widget)
     shade (&_title_color[0], &_title_color[1], 0.85);
 }
 
-static XFixed *
+static xfixed_16_16_t *
 create_gaussian_kernel (double radius,
 			double sigma,
 			double alpha,
@@ -4226,9 +4228,9 @@ create_gaussian_kernel (double radius,
 			int    *r_size,
 			int    *n_params)
 {
-    XFixed *params;
-    double *amp, scale, xy_scale, sum;
-    int    size, half_size, x, y, i, n;
+    xfixed_16_16_t *params;
+    double	   *amp, scale, xy_scale, sum;
+    int		   size, half_size, x, y, i, n;
 
     scale = 1.0f / (2.0f * M_PI * sigma * sigma);
     half_size = alpha + 0.5f;
@@ -4250,7 +4252,7 @@ create_gaussian_kernel (double radius,
 
     n += 2;
 
-    params = g_malloc (sizeof (XFixed) * n);
+    params = g_malloc (sizeof (xfixed_16_16_t) * n);
     if (!params)
 	return NULL;
 
@@ -4306,7 +4308,7 @@ update_shadow (void)
     XRenderPictFormat   *format;
     GdkPixmap		*pixmap;
     Picture		src, mask, dst;
-    XFixed		*params;
+    xfixed_16_16_t	*params;
     XFilters		*filters;
     char		*filter = NULL;
     int			size, n_params = 0;
@@ -4477,7 +4479,8 @@ update_shadow (void)
 				 0, NULL);
 
     /* set gaussion convolution filter on decoration pixmap */
-    XRenderSetPictureFilter (xdisplay, mask, filter, params, n_params);
+    XRenderSetPictureFilter (xdisplay, mask, filter,
+			     (XFixed *) params, n_params);
 
     /* for shadow offset */
     XRenderSetPictureTransform (xdisplay, mask, &transform);
@@ -4541,7 +4544,8 @@ update_shadow (void)
 			  d.height - shadow_top_space - shadow_bottom_space);
 
     /* set gaussion convolution filter on decoration pixmap */
-    XRenderSetPictureFilter (xdisplay, mask, filter, params, n_params);
+    XRenderSetPictureFilter (xdisplay, mask, filter,
+			     (XFixed *) params, n_params);
 
     /* for shadow offset */
     XRenderSetPictureTransform (xdisplay, mask, &transform);
