@@ -4218,6 +4218,37 @@ update_style (GtkWidget *widget)
     shade (&_title_color[0], &_title_color[1], 0.85);
 }
 
+#if G_MAXINT != G_MAXLONG
+/* XRenderSetPictureFilter used to be broken on LP64. This
+ * works with either the broken or fixed version.
+ */
+static void
+XRenderSetPictureFilter_wrapper (Display *dpy,
+				 Picture picture,
+				 char    *filter,
+				 XFixed  *params,
+				 int     nparams)
+{
+    gdk_error_trap_push ();
+    XRenderSetPictureFilter (dpy, picture, filter, params, nparams);
+    XSync (dpy, False);
+    if (gdk_error_trap_pop ())
+    {
+	long *long_params = g_new (long, nparams);
+	int  i;
+
+	for (i = 0; i < nparams; i++)
+	    long_params[i] = params[i];
+
+	XRenderSetPictureFilter (dpy, picture, filter,
+				 (XFixed *) long_params, nparams);
+	g_free (long_params);
+    }
+}
+
+#define XRenderSetPictureFilter XRenderSetPictureFilter_wrapper
+#endif
+
 static XFixed *
 create_gaussian_kernel (double radius,
 			double sigma,

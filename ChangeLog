@@ -4,6 +4,8 @@
 	as it clearly didn't fix anything. XFixed being defined as "int"
 	is perfectly fine of course. libXrender is currently broken on 64bit.
 	See Bug #6774 for a fix.
+	(XRenderSetPictureFilter_wrapper): Add workaround for 64bit
+	issue in libXrender. (Dan Winship)
 
 	* src/event.c (handleEvent):
 	* src/display.c:
