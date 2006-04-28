@@ -3704,7 +3704,7 @@ get_client_machine (Window xwindow)
 {
     Atom   atom, type;
     gulong nitems, bytes_after;
-    guchar *str = NULL;
+    gchar  *str = NULL;
     int    format, result;
     char   *retval;
 
@@ -4309,7 +4309,7 @@ update_shadow (void)
     XFixed		*params;
     XFilters		*filters;
     char		*filter = NULL;
-    int			size, n_params;
+    int			size, n_params = 0;
     cairo_t		*cr;
     decor_t		d;
     double		save_decoration_alpha;
