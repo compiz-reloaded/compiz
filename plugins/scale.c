@@ -45,13 +45,13 @@
 #define SCALE_SLOPPY_FOCUS_DEFAULT FALSE
 
 #define SCALE_INITIATE_KEY_DEFAULT       "Pause"
-#define SCALE_INITIATE_MODIFIERS_DEFAULT CompPressMask
+#define SCALE_INITIATE_MODIFIERS_DEFAULT 0
 
 #define SCALE_TERMINATE_KEY_DEFAULT       "Pause"
-#define SCALE_TERMINATE_MODIFIERS_DEFAULT CompPressMask
+#define SCALE_TERMINATE_MODIFIERS_DEFAULT 0
 
 #define SCALE_NEXT_WINDOW_KEY_DEFAULT       "Right"
-#define SCALE_NEXT_WINDOW_MODIFIERS_DEFAULT CompPressMask
+#define SCALE_NEXT_WINDOW_MODIFIERS_DEFAULT 0
 
 #define SCALE_SPEED_DEFAULT   1.5f
 #define SCALE_SPEED_MIN       0.1f
@@ -1112,15 +1112,17 @@ scaleHandleEvent (CompDisplay *d,
 
 	    state = ss->state;
 
-	    if (EV_KEY (&ss->opt[SCALE_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event, &ss->opt[SCALE_SCREEN_OPTION_INITIATE]))
 		scaleInitiate (s);
 
 	    if (ss->grabIndex &&
-		EV_KEY (&ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW], event))
+		eventMatches (d, event,
+			      &ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW]))
 		scaleNextWindow (s);
 
 	    if (state == ss->state &&
-		(EV_KEY (&ss->opt[SCALE_SCREEN_OPTION_TERMINATE], event) ||
+		(eventMatches (d, event,
+			       &ss->opt[SCALE_SCREEN_OPTION_TERMINATE]) ||
 		 (event->type	      == KeyPress &&
 		  event->xkey.keycode == s->escapeKeyCode)))
 		scaleTerminate (s);
@@ -1160,15 +1162,17 @@ scaleHandleEvent (CompDisplay *d,
 		}
 	    }
 
-	    if (EV_BUTTON (&ss->opt[SCALE_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event, &ss->opt[SCALE_SCREEN_OPTION_INITIATE]))
 		scaleInitiate (s);
 
 	    if (ss->grabIndex &&
-		EV_BUTTON (&ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW], event))
+		eventMatches (d, event,
+			      &ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW]))
 		scaleNextWindow (s);
 
 	    if (state == ss->state &&
-		EV_BUTTON (&ss->opt[SCALE_SCREEN_OPTION_TERMINATE], event))
+		eventMatches (d, event,
+			      &ss->opt[SCALE_SCREEN_OPTION_TERMINATE]))
 		scaleTerminate (s);
 	}
 	break;

@@ -49,7 +49,6 @@ struct _GConfModifier {
     { "<Super>",      CompSuperMask      },
     { "<Hyper>",      CompHyperMask	 },
     { "<ModeSwitch>", CompModeSwitchMask },
-    { "<Release>",    CompReleaseMask    }
 };
 
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _GConfModifier))
@@ -59,6 +58,8 @@ gconfBindingToString (CompDisplay     *d,
 		      CompOptionValue *value)
 {
     guint modMask;
+    GString *binding;
+    gint  i;
 
     if (value->bind.type == CompBindingTypeNone)
 	return g_strdup ("Disabled");
@@ -68,56 +69,35 @@ gconfBindingToString (CompDisplay     *d,
     else
 	modMask = value->bind.u.key.modifiers;
 
-    if (modMask & (CompPressMask | CompReleaseMask))
+    binding = g_string_new (NULL);
+    for (i = 0; i < N_MODIFIERS; i++)
     {
-	gchar *m, *mods = g_strdup ("");
-	gchar *binding;
-	gint  i;
+	if (modMask & modifiers[i].modifier)
+	    g_string_append (binding, modifiers[i].name);
+    }
 
-	for (i = 0; i < N_MODIFIERS; i++)
-	{
-	    if (modMask & modifiers[i].modifier)
-	    {
-		m = g_strconcat (mods, modifiers[i].name, NULL);
-		if (m)
-		{
-		    g_free (mods);
-		    mods = m;
-		}
-	    }
-	}
+    if (value->bind.type == CompBindingTypeButton)
+    {
+	g_string_append_printf (binding, "Button%d",
+				value->bind.u.button.button);
+    }
+    else if (value->bind.u.key.keycode != 0)
+    {
+	KeySym keysym;
+	gchar  *keyname;
 
-	if (value->bind.type == CompBindingTypeButton)
-	{
-	    binding = g_strdup_printf ("%sButton%d", mods,
-				       value->bind.u.button.button);
-	}
+	keysym = XKeycodeToKeysym (d->display,
+				   value->bind.u.key.keycode,
+				   0);
+	keyname = XKeysymToString (keysym);
+
+	if (keyname)
+	    g_string_append (binding, keyname);
 	else
-	{
-	    KeySym keysym;
-	    gchar  *keyname;
-
-	    keysym = XKeycodeToKeysym (d->display,
-				       value->bind.u.key.keycode,
-				       0);
-	    keyname = XKeysymToString (keysym);
-
-	    if (keyname)
-		binding = g_strdup_printf ("%s%s", mods, keyname);
-	    else
-		binding = g_strdup_printf ("%s0x%x", mods,
-					   value->bind.u.key.keycode);
-
-	}
-
-	g_free (mods);
-
-	return binding;
+	    g_string_append_printf (binding, "0x%x", value->bind.u.key.keycode);
     }
-    else
-    {
-	return g_strdup ("Disabled");
-    }
+
+    return g_string_free (binding, FALSE);
 }
 
 int
@@ -140,11 +120,6 @@ gconfStringToBinding (CompDisplay     *d,
 	if (strcasestr (binding, modifiers[i].name))
 	    mods |= modifiers[i].modifier;
     }
-
-    /* if not explicetly set to be triggered at release
-       assume it to be triggered at press */
-    if (!(mods & CompReleaseMask))
-	mods |= CompPressMask;
 
     ptr = strrchr (binding, '>');
     if (ptr)
@@ -191,6 +166,15 @@ gconfStringToBinding (CompDisplay     *d,
 	{
 	    value->bind.type = CompBindingTypeKey;
 	    value->bind.u.key.keycode = strtol (binding, NULL, 0);
+	    value->bind.u.key.modifiers = mods;
+
+	    return TRUE;
+	}
+
+	if (!*binding)
+	{
+	    value->bind.type = CompBindingTypeKey;
+	    value->bind.u.key.keycode = 0;
 	    value->bind.u.key.modifiers = mods;
 
 	    return TRUE;

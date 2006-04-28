@@ -980,20 +980,6 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/move/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/move/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Release&gt;Button1</default>
-            <locale name="C">
-                <short>Terminate Window Move</short>
-                <long>
-                    Stop moving window
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
             <key>/schemas/apps/compiz/plugins/move/screen0/options/opacity</key>
             <applyto>/apps/compiz/plugins/move/screen0/options/opacity</applyto>
             <owner>compiz</owner>
@@ -1064,20 +1050,6 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/resize/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/resize/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Release&gt;Button2</default>
-            <locale name="C">
-                <short>Terminate Window Resize</short>
-                <long>
-                    Stop moving window
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
             <key>/schemas/apps/compiz/plugins/rotate/screen0/options/invert_y</key>
             <applyto>/apps/compiz/plugins/rotate/screen0/options/invert_y</applyto>
             <owner>compiz</owner>
@@ -1129,20 +1101,6 @@
                 <short>Initiate</short>
                 <long>
                     Start Rotation
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/rotate/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Release&gt;Button1</default>
-            <locale name="C">
-                <short>Terminate</short>
-                <long>
-                    Stop Rotation
                 </long>
             </locale>
         </schema>
@@ -1642,39 +1600,11 @@
             <applyto>/apps/compiz/plugins/switcher/screen0/options/initiate_all</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Control&gt;&lt;Alt&gt;Tab</default>
+            <default>&lt;Control&gt;</default>
             <locale name="C">
                 <short>Initiate All Windows</short>
                 <long>
-                    Show switcher for all windows
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/switcher/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Release&gt;Alt_L</default>
-            <locale name="C">
-                <short>Terminate</short>
-                <long>
-                    End switching
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/next_window</key>
-            <applyto>/apps/compiz/plugins/switcher/screen0/options/next_window</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Alt&gt;Tab</default>
-            <locale name="C">
-                <short>Next Window</short>
-                <long>
-                    Select next window
+                    Modifier to show switcher for all windows
                 </long>
             </locale>
         </schema>
@@ -1684,11 +1614,11 @@
             <applyto>/apps/compiz/plugins/switcher/screen0/options/prev_window</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Shift&gt;&lt;Alt&gt;Tab</default>
+            <default>&lt;Shift&gt;</default>
             <locale name="C">
                 <short>Prev Window</short>
                 <long>
-                    Select previous window
+                    Modifier key to select previous window
                 </long>
             </locale>
         </schema>
@@ -1967,25 +1897,11 @@
             <applyto>/apps/compiz/plugins/water/screen0/options/initiate</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Control&gt;Super_L</default>
+            <default>&lt;Control&gt;&lt;Super&gt;</default>
             <locale name="C">
                 <short>Initiate</short>
                 <long>
                     Enable pointer water effects
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/water/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/water/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Release&gt;Super_L</default>
-            <locale name="C">
-                <short>Terminate</short>
-                <long>
-                    Disable pointer water effects
                 </long>
             </locale>
         </schema>
@@ -2181,7 +2097,7 @@
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/snap</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Control&gt;Control_L</default>
+            <default>&lt;Control&gt;</default>
             <locale name="C">
                 <short>Snap windows</short>
                 <long>
@@ -2242,20 +2158,6 @@
                 <short>Initiate</short>
                 <long>
                     Zoom In
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/zoom/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Release&gt;Button3</default>
-            <locale name="C">
-                <short>Terminate</short>
-                <long>
-                    Zoom to Normal View
                 </long>
             </locale>
         </schema>

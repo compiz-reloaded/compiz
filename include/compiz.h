@@ -66,9 +66,6 @@ typedef struct _CompTexture CompTexture;
 #define CompNumLockMask    (1 << 21)
 #define CompScrollLockMask (1 << 22)
 
-#define CompPressMask      (1 << 23)
-#define CompReleaseMask    (1 << 24)
-
 #define CompNoMask         (1 << 25)
 
 #define CompWindowProtocolDeleteMask	  (1 << 0)
@@ -550,8 +547,9 @@ struct _CompDisplay {
     Window below;
     char   displayString[256];
 
-    unsigned int modMask[CompModNum];
-    unsigned int ignoredModMask;
+    XModifierKeymap *modMap;
+    unsigned int    modMask[CompModNum];
+    unsigned int    ignoredModMask;
 
     CompOption opt[COMP_DISPLAY_OPTION_NUM];
 
@@ -636,6 +634,10 @@ virtualToRealModMask (CompDisplay  *d,
 void
 updateModifierMappings (CompDisplay *d);
 
+unsigned int
+keycodeToModifiers (CompDisplay *d,
+		    int         keycode);
+
 void
 eventLoop (void);
 
@@ -655,18 +657,6 @@ warpPointer (CompDisplay *display,
 
 /* event.c */
 
-#define EV_BUTTON(opt, event)						\
-    ((opt)->value.bind.type == CompBindingTypeButton &&			\
-     (opt)->value.bind.u.button.button == (event)->xbutton.button &&	\
-     ((opt)->value.bind.u.button.modifiers & (event)->xbutton.state) == \
-     (opt)->value.bind.u.button.modifiers)
-
-#define EV_KEY(opt, event)					  \
-    ((opt)->value.bind.type == CompBindingTypeKey &&		  \
-     (opt)->value.bind.u.key.keycode == (event)->xkey.keycode &&  \
-     ((opt)->value.bind.u.key.modifiers & (event)->xkey.state) == \
-     (opt)->value.bind.u.key.modifiers)
-
 void
 handleEvent (CompDisplay *display,
 	     XEvent      *event);
@@ -674,6 +664,15 @@ handleEvent (CompDisplay *display,
 void
 handleSyncAlarm (CompWindow *w);
 
+Bool
+eventMatches (CompDisplay *display,
+	      XEvent      *event,
+	      CompOption  *option);
+
+Bool
+eventTerminates (CompDisplay *display,
+		 XEvent      *event,
+		 CompOption  *option);
 
 /* paint.c */
 

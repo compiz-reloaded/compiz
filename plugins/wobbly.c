@@ -166,8 +166,7 @@ static char *moveWinType[] = {
 #define N_MOVE_WIN_TYPE (sizeof (moveWinType) / sizeof (moveWinType[0]))
 #define N_GRAB_WIN_TYPE (0)
 
-#define WOBBLY_SNAP_KEY_DEFAULT       "Control_L"
-#define WOBBLY_SNAP_MODIFIERS_DEFAULT (CompPressMask | ControlMask)
+#define WOBBLY_SNAP_MODIFIERS_DEFAULT ControlMask
 
 #define WOBBLY_MAXIMIZE_EFFECT_DEFAULT TRUE
 
@@ -359,6 +358,9 @@ wobblySetScreenOption (CompScreen      *screen,
 	if (value->bind.type == CompBindingTypeButton)
 	    return FALSE;
 
+	/* Ignore the key, for backward compat */
+	value->bind.u.key.keycode = 0;
+
 	if (compSetBindingOption (o, value))
 	    return TRUE;
 	break;
@@ -498,9 +500,7 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = WOBBLY_SNAP_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (WOBBLY_SNAP_KEY_DEFAULT));
+    o->value.bind.u.key.keycode   = 0;
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT];
     o->name	  = "maximize_effect";
@@ -2221,11 +2221,7 @@ wobblyHandleEvent (CompDisplay *d,
 	{
 	    WOBBLY_SCREEN (s);
 
-#define EV_SNAP_KEY(opt, event)				       \
-    ((opt)->value.bind.type == CompBindingTypeKey &&	       \
-     (opt)->value.bind.u.key.keycode == (event)->xkey.keycode)
-
-	    if (EV_SNAP_KEY (&ws->opt[WOBBLY_SCREEN_OPTION_SNAP], event))
+	    if (eventMatches (d, event, &ws->opt[WOBBLY_SCREEN_OPTION_SNAP]))
 	    {
 		for (w = s->windows; w; w = w->next)
 		{
@@ -2243,10 +2239,9 @@ wobblyHandleEvent (CompDisplay *d,
 	{
 	    WOBBLY_SCREEN (s);
 
-	    if (EV_SNAP_KEY (&ws->opt[WOBBLY_SCREEN_OPTION_SNAP], event))
+	    if (eventTerminates (d, event,
+				 &ws->opt[WOBBLY_SCREEN_OPTION_SNAP]))
 	    {
-		WOBBLY_SCREEN (s);
-
 		for (w = s->windows; w; w = w->next)
 		{
 		    WOBBLY_WINDOW (w);

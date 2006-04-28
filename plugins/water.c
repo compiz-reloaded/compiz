@@ -51,14 +51,10 @@
     else if ((v) < (min))  \
 	(v) = (min)
 
-#define WATER_INITIATE_KEY_DEFAULT       "Super_L"
-#define WATER_INITIATE_MODIFIERS_DEFAULT (CompPressMask | ControlMask)
-
-#define WATER_TERMINATE_KEY_DEFAULT       "Super_L"
-#define WATER_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
+#define WATER_INITIATE_MODIFIERS_DEFAULT (ControlMask | CompSuperMask)
 
 #define WATER_TOGGLE_RAIN_KEY_DEFAULT       "F9"
-#define WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
+#define WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT ShiftMask
 
 #define WATER_OFFSET_SCALE_DEFAULT    1.0f
 #define WATER_OFFSET_SCALE_MIN        0.0f
@@ -77,11 +73,10 @@ typedef struct _WaterDisplay {
 } WaterDisplay;
 
 #define WATER_SCREEN_OPTION_INITIATE     0
-#define WATER_SCREEN_OPTION_TERMINATE    1
-#define WATER_SCREEN_OPTION_TOGGLE_RAIN  2
-#define WATER_SCREEN_OPTION_OFFSET_SCALE 3
-#define WATER_SCREEN_OPTION_RAIN_DELAY	 4
-#define WATER_SCREEN_OPTION_NUM          5
+#define WATER_SCREEN_OPTION_TOGGLE_RAIN  1
+#define WATER_SCREEN_OPTION_OFFSET_SCALE 2
+#define WATER_SCREEN_OPTION_RAIN_DELAY	 3
+#define WATER_SCREEN_OPTION_NUM          4
 
 typedef struct _WaterScreen {
     int	waterTime;
@@ -160,6 +155,14 @@ waterSetScreenOption (CompScreen      *screen,
 
     switch (index) {
     case WATER_SCREEN_OPTION_INITIATE:
+	/* Backward-compat */
+	if (value->bind.type == CompBindingTypeKey &&
+	    value->bind.u.key.keycode != 0) {
+	    value->bind.u.key.modifiers |=
+		keycodeToModifiers (screen->display, value->bind.u.key.keycode);
+	    value->bind.u.key.keycode = 0;
+	}
+
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -167,10 +170,6 @@ waterSetScreenOption (CompScreen      *screen,
 	    if (compSetBindingOption (o, value))
 		return TRUE;
 	}
-	break;
-    case WATER_SCREEN_OPTION_TERMINATE:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
 	break;
     case WATER_SCREEN_OPTION_OFFSET_SCALE:
 	if (compSetFloatOption (o, value))
@@ -209,20 +208,7 @@ waterScreenInitOptions (WaterScreen *ws,
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = WATER_INITIATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (WATER_INITIATE_KEY_DEFAULT));
-
-    o = &ws->opt[WATER_SCREEN_OPTION_TERMINATE];
-    o->name			  = "terminate";
-    o->shortDesc		  = "Terminate";
-    o->longDesc			  = "Disable pointer water effects";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = WATER_TERMINATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (WATER_TERMINATE_KEY_DEFAULT));
+    o->value.bind.u.key.keycode   = 0;
 
     o = &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN];
     o->name			  = "toggle_rain";
@@ -1338,7 +1324,8 @@ waterHandleEvent (CompDisplay *d,
 	{
 	    WATER_SCREEN (s);
 
-	    if (EV_KEY (&ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN], event))
+	    if (eventMatches (d, event,
+			      &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN]))
 	    {
 		if (!ws->timeoutHandle)
 		{
@@ -1358,7 +1345,8 @@ waterHandleEvent (CompDisplay *d,
 	    if (s->maxGrab - ws->grabIndex)
 		break;
 
-	    if (EV_KEY (&ws->opt[WATER_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event,
+			      &ws->opt[WATER_SCREEN_OPTION_INITIATE]))
 	    {
 		XPoint p;
 
@@ -1372,9 +1360,8 @@ waterHandleEvent (CompDisplay *d,
 		damageScreen (s);
 	    }
 
-	    if (EV_KEY (&ws->opt[WATER_SCREEN_OPTION_TERMINATE], event) ||
-		(event->type	     == KeyPress &&
-		 event->xkey.keycode == s->escapeKeyCode))
+	    if (eventTerminates (d, event,
+				 &ws->opt[WATER_SCREEN_OPTION_INITIATE]))
 	    {
 		if (ws->grabIndex)
 		{

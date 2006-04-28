@@ -41,16 +41,13 @@
 #define ZOOM_POINTER_SENSITIVITY_FACTOR 0.001f
 
 #define ZOOM_INITIATE_BUTTON_DEFAULT    Button3
-#define ZOOM_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompSuperMask)
-
-#define ZOOM_TERMINATE_BUTTON_DEFAULT    Button3
-#define ZOOM_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
+#define ZOOM_INITIATE_MODIFIERS_DEFAULT CompSuperMask
 
 #define ZOOM_IN_BUTTON_DEFAULT    Button4
-#define ZOOM_IN_MODIFIERS_DEFAULT (CompPressMask | CompSuperMask)
+#define ZOOM_IN_MODIFIERS_DEFAULT CompSuperMask
 
 #define ZOOM_OUT_BUTTON_DEFAULT    Button5
-#define ZOOM_OUT_MODIFIERS_DEFAULT (CompPressMask | CompSuperMask)
+#define ZOOM_OUT_MODIFIERS_DEFAULT CompSuperMask
 
 #define ZOOM_SPEED_DEFAULT   1.5f
 #define ZOOM_SPEED_MIN       0.1f
@@ -74,13 +71,12 @@ typedef struct _ZoomDisplay {
 #define ZOOM_SCREEN_OPTION_POINTER_INVERT_Y    0
 #define ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY 1
 #define ZOOM_SCREEN_OPTION_INITIATE	       2
-#define ZOOM_SCREEN_OPTION_TERMINATE	       3
-#define ZOOM_SCREEN_OPTION_IN		       4
-#define ZOOM_SCREEN_OPTION_OUT		       5
-#define ZOOM_SCREEN_OPTION_SPEED	       6
-#define ZOOM_SCREEN_OPTION_TIMESTEP	       7
-#define ZOOM_SCREEN_OPTION_FILTER_LINEAR       8
-#define ZOOM_SCREEN_OPTION_NUM		       9
+#define ZOOM_SCREEN_OPTION_IN		       3
+#define ZOOM_SCREEN_OPTION_OUT		       4
+#define ZOOM_SCREEN_OPTION_SPEED	       5
+#define ZOOM_SCREEN_OPTION_TIMESTEP	       6
+#define ZOOM_SCREEN_OPTION_FILTER_LINEAR       7
+#define ZOOM_SCREEN_OPTION_NUM		       8
 
 typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -182,7 +178,6 @@ zoomSetScreenOption (CompScreen      *screen,
 		return TRUE;
 	}
 	break;
-    case ZOOM_SCREEN_OPTION_TERMINATE:
     case ZOOM_SCREEN_OPTION_OUT:
 	if (compSetBindingOption (o, value))
 	    return TRUE;
@@ -242,15 +237,6 @@ zoomScreenInitOptions (ZoomScreen *zs,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = ZOOM_INITIATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = ZOOM_INITIATE_BUTTON_DEFAULT;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_TERMINATE];
-    o->name			     = "terminate";
-    o->shortDesc		     = "Terminate";
-    o->longDesc			     = "Zoom to Normal View";
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = ZOOM_TERMINATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = ZOOM_TERMINATE_BUTTON_DEFAULT;
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_IN];
     o->name			     = "zoom_in";
@@ -566,18 +552,18 @@ zoomHandleEvent (CompDisplay *d,
 	{
 	    ZOOM_SCREEN (s);
 
-	    if (EV_KEY (&zs->opt[ZOOM_SCREEN_OPTION_INITIATE], event) ||
-		EV_KEY (&zs->opt[ZOOM_SCREEN_OPTION_IN], event))
+	    if (eventMatches (d, event
+			      , &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]) ||
+		eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_IN]))
 		zoomIn (s,
 			event->xkey.x_root,
 			event->xkey.y_root);
 
-	    if (EV_KEY (&zs->opt[ZOOM_SCREEN_OPTION_OUT], event))
+	    if (eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_OUT]))
 		zoomOut (s);
 
-	    if (EV_KEY (&zs->opt[ZOOM_SCREEN_OPTION_TERMINATE], event) ||
-		(event->type	     == KeyPress &&
-		 event->xkey.keycode == s->escapeKeyCode))
+	    if (eventTerminates (d, event,
+				 &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]))
 		zoomTerminate (s);
 	}
 	break;
@@ -588,16 +574,18 @@ zoomHandleEvent (CompDisplay *d,
 	{
 	    ZOOM_SCREEN (s);
 
-	    if (EV_BUTTON (&zs->opt[ZOOM_SCREEN_OPTION_INITIATE], event) ||
-		EV_BUTTON (&zs->opt[ZOOM_SCREEN_OPTION_IN], event))
+	    if (eventMatches (d, event,
+			      &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]) ||
+		eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_IN]))
 		zoomIn (s,
 			event->xbutton.x_root,
 			event->xbutton.y_root);
 
-	    if (EV_BUTTON (&zs->opt[ZOOM_SCREEN_OPTION_OUT], event))
+	    if (eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_OUT]))
 		zoomOut (s);
 
-	    if (EV_BUTTON (&zs->opt[ZOOM_SCREEN_OPTION_TERMINATE], event))
+	    if (eventTerminates (d, event,
+				 &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]))
 		zoomTerminate (s);
 	}
 	break;

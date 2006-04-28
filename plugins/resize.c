@@ -37,10 +37,7 @@
 #define ResizeRightMask (1L << 3)
 
 #define RESIZE_INITIATE_BUTTON_DEFAULT    Button2
-#define RESIZE_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
-
-#define RESIZE_TERMINATE_BUTTON_DEFAULT    Button2
-#define RESIZE_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
+#define RESIZE_INITIATE_MODIFIERS_DEFAULT CompAltMask
 
 struct _ResizeKeys {
     char *name;
@@ -73,8 +70,7 @@ typedef struct _ResizeDisplay {
 } ResizeDisplay;
 
 #define RESIZE_SCREEN_OPTION_INITIATE  0
-#define RESIZE_SCREEN_OPTION_TERMINATE 1
-#define RESIZE_SCREEN_OPTION_NUM       2
+#define RESIZE_SCREEN_OPTION_NUM       1
 
 typedef struct _ResizeScreen {
     CompOption opt[RESIZE_SCREEN_OPTION_NUM];
@@ -139,10 +135,6 @@ resizeSetScreenOption (CompScreen      *screen,
 		return TRUE;
 	}
 	break;
-    case RESIZE_SCREEN_OPTION_TERMINATE:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
     default:
 	break;
     }
@@ -164,15 +156,6 @@ resizeScreenInitOptions (ResizeScreen *rs,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = RESIZE_INITIATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = RESIZE_INITIATE_BUTTON_DEFAULT;
-
-    o = &rs->opt[RESIZE_SCREEN_OPTION_TERMINATE];
-    o->name			     = "terminate";
-    o->shortDesc		     = "Terminate Window Resize";
-    o->longDesc			     = "Stop moving window";
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = RESIZE_TERMINATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = RESIZE_TERMINATE_BUTTON_DEFAULT;
 }
 
 static void
@@ -487,16 +470,16 @@ resizeHandleEvent (CompDisplay *d,
 	{
 	    RESIZE_SCREEN (s);
 
-	    if (EV_KEY (&rs->opt[RESIZE_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event,
+			      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
 		interiorResizeInitiate (s,
 					event->xkey.window,
 					pointerX,
 					pointerY,
 					event->xkey.state);
 
-	    if (EV_KEY (&rs->opt[RESIZE_SCREEN_OPTION_TERMINATE], event) ||
-		(event->type	     == KeyPress &&
-		 event->xkey.keycode == s->escapeKeyCode))
+	    if (eventTerminates (d, event,
+				 &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
 		resizeTerminate (d);
 
 	    if (rs->grabIndex && rd->w && event->type == KeyPress)
@@ -532,14 +515,16 @@ resizeHandleEvent (CompDisplay *d,
 	{
 	    RESIZE_SCREEN (s);
 
-	    if (EV_BUTTON (&rs->opt[RESIZE_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event,
+			      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
 		interiorResizeInitiate (s,
 					event->xbutton.window,
 					event->xbutton.x_root,
 					event->xbutton.y_root,
 					event->xbutton.state);
 
-	    if (EV_BUTTON (&rs->opt[RESIZE_SCREEN_OPTION_TERMINATE], event))
+	    if (eventTerminates (d, event,
+				      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
 		resizeTerminate (d);
 
 	    if (event->type == ButtonRelease &&
@@ -610,7 +595,7 @@ resizeHandleEvent (CompDisplay *d,
 			    resizeInitiate (w->screen, event->xclient.window,
 					    event->xclient.data.l[0],
 					    event->xclient.data.l[1],
-					    state | CompPressMask,
+					    state,
 					    mask[event->xclient.data.l[2]],
 					    event->xclient.data.l[3] ?
 					    event->xclient.data.l[3] : -1);

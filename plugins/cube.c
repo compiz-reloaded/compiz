@@ -58,10 +58,10 @@ static char *cubeImages[] = {
 #define CUBE_SCALE_IMAGE_DEFAULT FALSE
 
 #define CUBE_NEXT_KEY_DEFAULT       "space"
-#define CUBE_NEXT_MODIFIERS_DEFAULT CompPressMask
+#define CUBE_NEXT_MODIFIERS_DEFAULT 0
 
 #define CUBE_PREV_KEY_DEFAULT       "BackSpace"
-#define CUBE_PREV_MODIFIERS_DEFAULT CompPressMask
+#define CUBE_PREV_MODIFIERS_DEFAULT 0
 
 #define CUBE_SKYDOME_DEFAULT FALSE
 
@@ -1050,7 +1050,7 @@ cubeHandleEvent (CompDisplay *d,
 	{
 	    CUBE_SCREEN (s);
 
-	    if (EV_KEY (&cs->opt[CUBE_SCREEN_OPTION_NEXT], event))
+	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_NEXT]))
 	    {
 		if (cs->imgNFile)
 		{
@@ -1059,7 +1059,7 @@ cubeHandleEvent (CompDisplay *d,
 		}
 	    }
 
-	    if (EV_KEY (&cs->opt[CUBE_SCREEN_OPTION_PREV], event))
+	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_PREV]))
 	    {
 		if (cs->imgNFile)
 		{
@@ -1077,13 +1077,13 @@ cubeHandleEvent (CompDisplay *d,
 	{
 	    CUBE_SCREEN (s);
 
-	    if (EV_BUTTON (&cs->opt[CUBE_SCREEN_OPTION_NEXT], event))
+	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_NEXT]))
 	    {
 		cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
 		damageScreen (s);
 	    }
 
-	    if (EV_BUTTON (&cs->opt[CUBE_SCREEN_OPTION_PREV], event))
+	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_PREV]))
 	    {
 		cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) %
 			     cs->imgNFile);

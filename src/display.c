@@ -91,45 +91,45 @@ int pointerY     = 0;
 #define AUTORAISE_DELAY_MAX	10000
 
 #define SLOW_ANIMATIONS_KEY_DEFAULT       "F10"
-#define SLOW_ANIMATIONS_MODIFIERS_DEFAULT (CompPressMask | ShiftMask)
+#define SLOW_ANIMATIONS_MODIFIERS_DEFAULT ShiftMask
 
 #define MAIN_MENU_KEY_DEFAULT       "F1"
-#define MAIN_MENU_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define MAIN_MENU_MODIFIERS_DEFAULT CompAltMask
 
 #define RUN_DIALOG_KEY_DEFAULT       "F2"
-#define RUN_DIALOG_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define RUN_DIALOG_MODIFIERS_DEFAULT CompAltMask
 
 #define CLOSE_WINDOW_KEY_DEFAULT       "F4"
-#define CLOSE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define CLOSE_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
 #define UNMAXIMIZE_WINDOW_KEY_DEFAULT       "F5"
-#define UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
 #define MINIMIZE_WINDOW_KEY_DEFAULT       "F9"
-#define MINIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define MINIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
 #define MAXIMIZE_WINDOW_KEY_DEFAULT       "F10"
-#define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
 #define LOWER_WINDOW_BUTTON_DEFAULT    6
-#define LOWER_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define LOWER_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
 #define OPACITY_INCREASE_BUTTON_DEFAULT    Button4
-#define OPACITY_INCREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define OPACITY_INCREASE_MODIFIERS_DEFAULT CompAltMask
 
 #define OPACITY_DECREASE_BUTTON_DEFAULT    Button5
-#define OPACITY_DECREASE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define OPACITY_DECREASE_MODIFIERS_DEFAULT CompAltMask
 
 #define SCREENSHOT_DEFAULT               "gnome-screenshot"
 #define RUN_SCREENSHOT_KEY_DEFAULT       "Print"
-#define RUN_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask)
+#define RUN_SCREENSHOT_MODIFIERS_DEFAULT 0
 
 #define WINDOW_SCREENSHOT_DEFAULT               "gnome-screenshot --window"
 #define RUN_WINDOW_SCREENSHOT_KEY_DEFAULT       "Print"
-#define RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT CompAltMask
 
 #define WINDOW_MENU_BUTTON_DEFAULT    Button3
-#define WINDOW_MENU_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define WINDOW_MENU_MODIFIERS_DEFAULT CompAltMask
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
@@ -315,9 +315,7 @@ compDisplayInitOptions (CompDisplay *display,
     o->longDesc			  = "A keybinding that when invoked, will " \
 	"run the shell command identified by " cname ;			    \
     o->type			  = CompOptionTypeBinding;		    \
-    o->value.bind.type		  = CompBindingTypeKey;			    \
-    o->value.bind.u.key.modifiers = 0;					    \
-    o->value.bind.u.key.keycode   = 0
+    o->value.bind.type		  = CompBindingTypeNone;
 
     COMMAND_OPTION (0, "command0", "run_command0");
     COMMAND_OPTION (1, "command1", "run_command1");
@@ -897,10 +895,15 @@ getTimeToNextRedraw (CompScreen     *s,
     return s->redrawTime - diff;
 }
 
+static const int maskTable[] = {
+    ShiftMask, LockMask, ControlMask, Mod1Mask,
+    Mod2Mask, Mod3Mask, Mod4Mask, Mod5Mask
+};
+static const int maskTableSize = sizeof (maskTable) / sizeof (int);
+
 void
 updateModifierMappings (CompDisplay *d)
 {
-    XModifierKeymap *modmap;
     unsigned int    modMask[CompModNum];
     int		    i, minKeycode, maxKeycode, keysymsPerKeycode = 0;
 
@@ -911,34 +914,33 @@ updateModifierMappings (CompDisplay *d)
     XGetKeyboardMapping (d->display, minKeycode, (maxKeycode - minKeycode + 1),
 			 &keysymsPerKeycode);
 
-    modmap = XGetModifierMapping (d->display);
-    if (modmap && modmap->max_keypermod > 0)
+    if (d->modMap)
+	XFreeModifiermap (d->modMap);
+
+    d->modMap = XGetModifierMapping (d->display);
+    if (d->modMap && d->modMap->max_keypermod > 0)
     {
-	static int maskTable[] = {
-	    ShiftMask, LockMask, ControlMask, Mod1Mask,
-	    Mod2Mask, Mod3Mask, Mod4Mask, Mod5Mask
-	};
 	KeySym keysym;
 	int    index, size, mask;
 
-	size = (sizeof (maskTable) / sizeof (int)) * modmap->max_keypermod;
+	size = maskTableSize * d->modMap->max_keypermod;
 
 	for (i = 0; i < size; i++)
 	{
-	    if (!modmap->modifiermap[i])
+	    if (!d->modMap->modifiermap[i])
 		continue;
 
 	    index = 0;
 	    do
 	    {
 		keysym = XKeycodeToKeysym (d->display,
-					   modmap->modifiermap[i],
+					   d->modMap->modifiermap[i],
 					   index++);
 	    } while (!keysym && index < keysymsPerKeycode);
 
 	    if (keysym)
 	    {
-		mask = maskTable[i / modmap->max_keypermod];
+		mask = maskTable[i / d->modMap->max_keypermod];
 
 		if (keysym == XK_Alt_L ||
 		    keysym == XK_Alt_R)
@@ -974,9 +976,6 @@ updateModifierMappings (CompDisplay *d)
 		}
 	    }
 	}
-
-	if (modmap)
-	    XFreeModifiermap (modmap);
 
 	for (i = 0; i < CompModNum; i++)
 	{
@@ -1015,22 +1014,27 @@ virtualToRealModMask (CompDisplay  *d,
 	}
     }
 
-    return (modMask & ~(CompPressMask | CompReleaseMask));
+    return modMask;
 }
 
-static unsigned int
-realToVirtualModMask (CompDisplay  *d,
-		      unsigned int modMask)
+unsigned int
+keycodeToModifiers (CompDisplay *d,
+		    int         keycode)
 {
-    int i;
+    unsigned int mods = 0;
+    int mod, k;
 
-    for (i = 0; i < CompModNum; i++)
+    for (mod = 0; mod < maskTableSize; mod++)
     {
-	if (modMask & d->modMask[i])
-	    modMask |= virtualModMask[i];
+	for (k = 0; k < d->modMap->max_keypermod; k++)
+	{
+	    if (d->modMap->modifiermap[mod * d->modMap->max_keypermod + k] ==
+		keycode)
+		mods |= maskTable[mod];
+	}
     }
 
-    return modMask;
+    return mods;
 }
 
 static int
@@ -1124,54 +1128,26 @@ eventLoop (void)
 	{
 	    XNextEvent (display->display, &event);
 
-	    /* add virtual modifiers */
 	    switch (event.type) {
 	    case ButtonPress:
-		event.xbutton.state |= CompPressMask;
-		event.xbutton.state =
-		    realToVirtualModMask (display, event.xbutton.state);
-
-		pointerX = event.xbutton.x_root;
-		pointerY = event.xbutton.y_root;
-		break;
 	    case ButtonRelease:
-		event.xbutton.state |= CompReleaseMask;
-		event.xbutton.state =
-		    realToVirtualModMask (display, event.xbutton.state);
-
 		pointerX = event.xbutton.x_root;
 		pointerY = event.xbutton.y_root;
 		break;
 	    case KeyPress:
-		event.xkey.state |= CompPressMask;
-		event.xkey.state = realToVirtualModMask (display,
-							 event.xkey.state);
-
-		pointerX = event.xkey.x_root;
-		pointerY = event.xkey.y_root;
-		break;
 	    case KeyRelease:
-		event.xkey.state |= CompReleaseMask;
-		event.xkey.state = realToVirtualModMask (display,
-							 event.xkey.state);
-
 		pointerX = event.xkey.x_root;
 		pointerY = event.xkey.y_root;
 		break;
 	    case MotionNotify:
-		event.xmotion.state =
-		    realToVirtualModMask (display, event.xmotion.state);
-
 		pointerX = event.xmotion.x_root;
 		pointerY = event.xmotion.y_root;
 		break;
 	    case EnterNotify:
 	    case LeaveNotify:
-		event.xcrossing.state =
-		    realToVirtualModMask (display, event.xcrossing.state);
-
 		pointerX = event.xcrossing.x_root;
 		pointerY = event.xcrossing.y_root;
+		break;
 	    default:
 		break;
 	    }
@@ -1605,6 +1581,8 @@ addDisplay (char *name,
 
     d->screenPrivateIndices = 0;
     d->screenPrivateLen     = 0;
+
+    d->modMap = 0;
 
     for (i = 0; i < CompModNum; i++)
 	d->modMask[i] = CompNoMask;

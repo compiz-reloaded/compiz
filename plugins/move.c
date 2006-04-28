@@ -32,10 +32,7 @@
 #include <compiz.h>
 
 #define MOVE_INITIATE_BUTTON_DEFAULT    Button1
-#define MOVE_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
-
-#define MOVE_TERMINATE_BUTTON_DEFAULT    Button1
-#define MOVE_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
+#define MOVE_INITIATE_MODIFIERS_DEFAULT CompAltMask
 
 #define MOVE_OPACITY_DEFAULT 100
 #define MOVE_OPACITY_MIN     1
@@ -74,11 +71,10 @@ typedef struct _MoveDisplay {
 } MoveDisplay;
 
 #define MOVE_SCREEN_OPTION_INITIATE	     0
-#define MOVE_SCREEN_OPTION_TERMINATE	     1
-#define MOVE_SCREEN_OPTION_OPACITY	     2
-#define MOVE_SCREEN_OPTION_CONSTRAIN_Y	     3
-#define MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED 4
-#define MOVE_SCREEN_OPTION_NUM		     5
+#define MOVE_SCREEN_OPTION_OPACITY	     1
+#define MOVE_SCREEN_OPTION_CONSTRAIN_Y	     2
+#define MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED 3
+#define MOVE_SCREEN_OPTION_NUM		     4
 
 typedef struct _MoveScreen {
     CompOption opt[MOVE_SCREEN_OPTION_NUM];
@@ -145,10 +141,6 @@ moveSetScreenOption (CompScreen      *screen,
 		return TRUE;
 	}
 	break;
-    case MOVE_SCREEN_OPTION_TERMINATE:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
     case MOVE_SCREEN_OPTION_OPACITY:
 	if (compSetIntOption (o, value))
 	{
@@ -184,15 +176,6 @@ moveScreenInitOptions (MoveScreen *ms,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = MOVE_INITIATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = MOVE_INITIATE_BUTTON_DEFAULT;
-
-    o = &ms->opt[MOVE_SCREEN_OPTION_TERMINATE];
-    o->name			     = "terminate";
-    o->shortDesc		     = "Terminate Window Move";
-    o->longDesc			     = "Stop moving window";
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = MOVE_TERMINATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = MOVE_TERMINATE_BUTTON_DEFAULT;
 
     o = &ms->opt[MOVE_SCREEN_OPTION_OPACITY];
     o->name	  = "opacity";
@@ -435,7 +418,7 @@ moveHandleEvent (CompDisplay *d,
 	{
 	    MOVE_SCREEN (s);
 
-	    if (EV_KEY (&ms->opt[MOVE_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event, &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
 	    {
 		CompWindow *w;
 
@@ -446,10 +429,8 @@ moveHandleEvent (CompDisplay *d,
 				  pointerY,
 				  event->xkey.state);
 	    }
-
-	    if (EV_KEY (&ms->opt[MOVE_SCREEN_OPTION_TERMINATE], event) ||
-		(event->type	     == KeyPress &&
-		 event->xkey.keycode == s->escapeKeyCode))
+	    else if (eventTerminates (d, event,
+				      &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
 		moveTerminate (d);
 
 	    if (ms->grabIndex && event->type == KeyPress)
@@ -478,7 +459,7 @@ moveHandleEvent (CompDisplay *d,
 
 	    MOVE_SCREEN (s);
 
-	    if (EV_BUTTON (&ms->opt[MOVE_SCREEN_OPTION_INITIATE], event))
+	    if (eventMatches (d, event, &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -487,8 +468,8 @@ moveHandleEvent (CompDisplay *d,
 				  pointerY,
 				  event->xbutton.state);
 	    }
-
-	    if (EV_BUTTON (&ms->opt[MOVE_SCREEN_OPTION_TERMINATE], event))
+	    else if (eventTerminates (d, event,
+				      &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
 		moveTerminate (d);
 	}
 	break;
@@ -542,7 +523,7 @@ moveHandleEvent (CompDisplay *d,
 			    moveInitiate (w,
 					  event->xclient.data.l[0],
 					  event->xclient.data.l[1],
-					  state | CompPressMask);
+					  state);
 
 			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
 			}

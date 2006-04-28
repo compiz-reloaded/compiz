@@ -49,27 +49,21 @@
 #define ROTATE_ACCELERATION_PRECISION 0.1f
 
 #define ROTATE_INITIATE_BUTTON_DEFAULT    Button1
-#define ROTATE_INITIATE_MODIFIERS_DEFAULT       \
-    (CompPressMask | ControlMask | CompAltMask)
-
-#define ROTATE_TERMINATE_BUTTON_DEFAULT    Button1
-#define ROTATE_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
+#define ROTATE_INITIATE_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
 
 #define ROTATE_LEFT_KEY_DEFAULT       "Left"
-#define ROTATE_LEFT_MODIFIERS_DEFAULT	        \
-    (CompPressMask | ControlMask | CompAltMask)
+#define ROTATE_LEFT_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
 
 #define ROTATE_RIGHT_KEY_DEFAULT       "Right"
-#define ROTATE_RIGHT_MODIFIERS_DEFAULT		\
-    (CompPressMask | ControlMask | CompAltMask)
+#define ROTATE_RIGHT_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
 
 #define ROTATE_LEFT_WINDOW_KEY_DEFAULT       "Left"
 #define ROTATE_LEFT_WINDOW_MODIFIERS_DEFAULT		    \
-    (CompPressMask | ShiftMask | ControlMask | CompAltMask)
+    (ShiftMask | ControlMask | CompAltMask)
 
 #define ROTATE_RIGHT_WINDOW_KEY_DEFAULT       "Right"
 #define ROTATE_RIGHT_WINDOW_MODIFIERS_DEFAULT		    \
-    (CompPressMask | ShiftMask | ControlMask | CompAltMask)
+    (ShiftMask | ControlMask | CompAltMask)
 
 #define ROTATE_SNAP_TOP_DEFAULT FALSE
 
@@ -102,42 +96,41 @@ typedef struct _RotateDisplay {
 #define ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY 1
 #define ROTATE_SCREEN_OPTION_ACCELERATION        2
 #define ROTATE_SCREEN_OPTION_INITIATE		 3
-#define ROTATE_SCREEN_OPTION_TERMINATE		 4
-#define ROTATE_SCREEN_OPTION_LEFT		 5
-#define ROTATE_SCREEN_OPTION_RIGHT		 6
-#define ROTATE_SCREEN_OPTION_LEFT_WINDOW	 7
-#define ROTATE_SCREEN_OPTION_RIGHT_WINDOW	 8
-#define ROTATE_SCREEN_OPTION_SNAP_TOP		 9
-#define ROTATE_SCREEN_OPTION_SPEED		 10
-#define ROTATE_SCREEN_OPTION_TIMESTEP		 11
-#define ROTATE_SCREEN_OPTION_EDGEFLIP		 12
-#define ROTATE_SCREEN_OPTION_FLIPTIME		 13
-#define ROTATE_SCREEN_OPTION_FLIPMOVE		 14
-#define ROTATE_SCREEN_OPTION_TO_1		 15
-#define ROTATE_SCREEN_OPTION_TO_2		 16
-#define ROTATE_SCREEN_OPTION_TO_3		 17
-#define ROTATE_SCREEN_OPTION_TO_4		 18
-#define ROTATE_SCREEN_OPTION_TO_5		 19
-#define ROTATE_SCREEN_OPTION_TO_6		 20
-#define ROTATE_SCREEN_OPTION_TO_7		 21
-#define ROTATE_SCREEN_OPTION_TO_8		 22
-#define ROTATE_SCREEN_OPTION_TO_9		 23
-#define ROTATE_SCREEN_OPTION_TO_10		 24
-#define ROTATE_SCREEN_OPTION_TO_11		 25
-#define ROTATE_SCREEN_OPTION_TO_12		 26
-#define ROTATE_SCREEN_OPTION_TO_1_WINDOW	 27
-#define ROTATE_SCREEN_OPTION_TO_2_WINDOW	 28
-#define ROTATE_SCREEN_OPTION_TO_3_WINDOW	 29
-#define ROTATE_SCREEN_OPTION_TO_4_WINDOW	 30
-#define ROTATE_SCREEN_OPTION_TO_5_WINDOW	 31
-#define ROTATE_SCREEN_OPTION_TO_6_WINDOW	 32
-#define ROTATE_SCREEN_OPTION_TO_7_WINDOW	 33
-#define ROTATE_SCREEN_OPTION_TO_8_WINDOW	 34
-#define ROTATE_SCREEN_OPTION_TO_9_WINDOW	 35
-#define ROTATE_SCREEN_OPTION_TO_10_WINDOW	 36
-#define ROTATE_SCREEN_OPTION_TO_11_WINDOW	 37
-#define ROTATE_SCREEN_OPTION_TO_12_WINDOW	 38
-#define ROTATE_SCREEN_OPTION_NUM		 39
+#define ROTATE_SCREEN_OPTION_LEFT		 4
+#define ROTATE_SCREEN_OPTION_RIGHT		 5
+#define ROTATE_SCREEN_OPTION_LEFT_WINDOW	 6
+#define ROTATE_SCREEN_OPTION_RIGHT_WINDOW	 7
+#define ROTATE_SCREEN_OPTION_SNAP_TOP		 8
+#define ROTATE_SCREEN_OPTION_SPEED		 9
+#define ROTATE_SCREEN_OPTION_TIMESTEP		 10
+#define ROTATE_SCREEN_OPTION_EDGEFLIP		 11
+#define ROTATE_SCREEN_OPTION_FLIPTIME		 12
+#define ROTATE_SCREEN_OPTION_FLIPMOVE		 13
+#define ROTATE_SCREEN_OPTION_TO_1		 14
+#define ROTATE_SCREEN_OPTION_TO_2		 15
+#define ROTATE_SCREEN_OPTION_TO_3		 16
+#define ROTATE_SCREEN_OPTION_TO_4		 17
+#define ROTATE_SCREEN_OPTION_TO_5		 18
+#define ROTATE_SCREEN_OPTION_TO_6		 19
+#define ROTATE_SCREEN_OPTION_TO_7		 20
+#define ROTATE_SCREEN_OPTION_TO_8		 21
+#define ROTATE_SCREEN_OPTION_TO_9		 22
+#define ROTATE_SCREEN_OPTION_TO_10		 23
+#define ROTATE_SCREEN_OPTION_TO_11		 24
+#define ROTATE_SCREEN_OPTION_TO_12		 25
+#define ROTATE_SCREEN_OPTION_TO_1_WINDOW	 26
+#define ROTATE_SCREEN_OPTION_TO_2_WINDOW	 27
+#define ROTATE_SCREEN_OPTION_TO_3_WINDOW	 28
+#define ROTATE_SCREEN_OPTION_TO_4_WINDOW	 29
+#define ROTATE_SCREEN_OPTION_TO_5_WINDOW	 30
+#define ROTATE_SCREEN_OPTION_TO_6_WINDOW	 31
+#define ROTATE_SCREEN_OPTION_TO_7_WINDOW	 32
+#define ROTATE_SCREEN_OPTION_TO_8_WINDOW	 33
+#define ROTATE_SCREEN_OPTION_TO_9_WINDOW	 34
+#define ROTATE_SCREEN_OPTION_TO_10_WINDOW	 35
+#define ROTATE_SCREEN_OPTION_TO_11_WINDOW	 36
+#define ROTATE_SCREEN_OPTION_TO_12_WINDOW	 37
+#define ROTATE_SCREEN_OPTION_NUM		 38
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -281,10 +274,6 @@ rotateSetScreenOption (CompScreen      *screen,
 		return TRUE;
 	}
 	break;
-    case ROTATE_SCREEN_OPTION_TERMINATE:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
     case ROTATE_SCREEN_OPTION_SNAP_TOP:
 	if (compSetBoolOption (o, value))
 	{
@@ -390,15 +379,6 @@ rotateScreenInitOptions (RotateScreen *rs,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = ROTATE_INITIATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = ROTATE_INITIATE_BUTTON_DEFAULT;
-
-    o = &rs->opt[ROTATE_SCREEN_OPTION_TERMINATE];
-    o->name			     = "terminate";
-    o->shortDesc		     = "Terminate";
-    o->longDesc			     = "Stop Rotation";
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = ROTATE_TERMINATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = ROTATE_TERMINATE_BUTTON_DEFAULT;
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_LEFT];
     o->name			  = "rotate_left";
@@ -929,19 +909,24 @@ rotateHandleEvent (CompDisplay *d,
 	    {
 		int face, delta;
 
-		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
+		if (eventMatches (d, event,
+				  &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
 		    rotateInitiate (s, event->xkey.x_root, event->xkey.y_root);
 
-		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW], event))
+		if (eventMatches (d, event,
+				  &rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW]))
 		    rotateWithWindow (s, event->xkey.x_root, event->xkey.y_root,
 				      -1);
-		else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
+		else if (eventMatches (d, event,
+				       &rs->opt[ROTATE_SCREEN_OPTION_LEFT]))
 		    rotate (s, event->xkey.x_root, event->xkey.y_root, -1);
 
-		if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW], event))
+		if (eventMatches (d, event,
+				  &rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW]))
 		    rotateWithWindow (s, event->xkey.x_root,
 				      event->xkey.y_root, 1);
-		else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT], event))
+		else if (eventMatches (d, event
+				       , &rs->opt[ROTATE_SCREEN_OPTION_RIGHT]))
 		    rotate (s, event->xkey.x_root, event->xkey.y_root, 1);
 
 		for (face = 0; face < 12 && face < s->size; face++)
@@ -952,15 +937,17 @@ rotateHandleEvent (CompDisplay *d,
 		    else if (delta < -(s->size / 2))
 			delta += s->size;
 
-		    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TO_1_WINDOW
-					 + face], event))
+		    if (eventMatches (d, event,
+				      &rs->opt[ROTATE_SCREEN_OPTION_TO_1_WINDOW
+					       + face]))
 		    {
 			rotateWithWindow (s, event->xkey.x_root,
 					  event->xkey.y_root, delta);
 			break;
 		    }
-		    else if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TO_1 + face],
-				     event))
+		    else if (eventMatches (d, event,
+					   &rs->opt[ROTATE_SCREEN_OPTION_TO_1
+						    + face]))
 		    {
 			rotate (s, event->xkey.x_root, event->xkey.y_root,
 				delta);
@@ -969,15 +956,16 @@ rotateHandleEvent (CompDisplay *d,
 		}
 	    }
 
-	    if (EV_KEY (&rs->opt[ROTATE_SCREEN_OPTION_TERMINATE], event))
-		rotateTerminate (s);
-
 	    if (event->type	    == KeyPress &&
 		event->xkey.keycode == s->escapeKeyCode)
 	    {
 		rs->snapTop = FALSE;
 		rotateTerminate (s);
 	    }
+
+	    if (eventTerminates (d, event,
+				 &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
+		rotateTerminate (s);
 	}
 	break;
     case ButtonPress:
@@ -990,29 +978,32 @@ rotateHandleEvent (CompDisplay *d,
 	    /* only if screen isn't grabbed by someone else */
 	    if ((s->maxGrab - rs->grabIndex) == 0)
 	    {
-		if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_INITIATE], event))
+		if (eventMatches (d, event,
+				  &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
 		    rotateInitiate (s,
 				    event->xbutton.x_root,
 				    event->xbutton.y_root);
 
-		if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW],
-			       event))
+		if (eventMatches (d, event,
+				  &rs->opt[ROTATE_SCREEN_OPTION_LEFT_WINDOW]))
 		    rotateWithWindow (s, event->xbutton.x_root,
 				      event->xbutton.y_root, -1);
-		else if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_LEFT], event))
+		else if (eventMatches (d, event,
+				       &rs->opt[ROTATE_SCREEN_OPTION_LEFT]))
 		    rotate (s, event->xbutton.x_root,
 			    event->xbutton.y_root, -1);
 
-		if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW],
-			       event))
+		if (eventMatches (d, event,
+				  &rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW]))
 		    rotateWithWindow (s, event->xbutton.x_root,
 				      event->xbutton.y_root, 1);
-		else if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_RIGHT],
-				    event))
+		else if (eventMatches (d, event,
+				       &rs->opt[ROTATE_SCREEN_OPTION_RIGHT]))
 		    rotate (s, event->xbutton.x_root, event->xbutton.y_root, 1);
 	    }
 
-	    if (EV_BUTTON (&rs->opt[ROTATE_SCREEN_OPTION_TERMINATE], event))
+	    if (eventTerminates (d, event,
+				 &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
 		rotateTerminate (s);
 	}
 	break;

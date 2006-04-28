@@ -1,3 +1,48 @@
+2006-04-28  Dan Winship  <danw@novell.com>
+
+	* src/event.c (eventMatches): new method that replaces EV_KEY and
+	EV_BUTTON. Tests if an event matches a binding, being more precise
+	about modifier state than EV_KEY and EV_BUTTON were.
+	(eventTerminates): Tests if an event is "the opposite" of a
+	binding. (Eg, button or modifier key release.) Replaces
+	CompReleaseMask and "terminate" bindings.
+	(handleEvent): Use eventMatches
+
+	* src/screen.c (addPassiveKeyGrab, removePassiveKeyGrab,
+	updatePassiveKeyGrabs): When passed a keybinding containing just
+	modifiers, grab/ungrab every keypress event that would result in
+	that modifier state (eg, both left and right modifier keys, and
+	allow them to be pressed in any order).
+
+	* src/display.c: Remove CompPressMask from default bindings.
+	(eventLoop): don't add virtual modifiers to event state.
+	(updateModifierMappings): store the XModifierKeymap for later
+	use.
+	
+	* plugins/*.c: Use eventMatches and eventTerminates. Remove
+	CompPressMask and "terminate" bindings (except from scale, which
+	is different from the others).
+
+	* plugins/switcher.c: Make initiate_all be just the modifier key
+	used in addition to the initiate binding ("<Control>"). Remove
+	next_window since it doesn't make a lot of sense to have it be
+	different from initiate_all, and make prev_window be just a
+	modifier key as well. ("<Shift>").
+	(SwitchScreen): add extra options to store the fully-composed
+	initiate_all, prev, and prev_all bindings.
+	(switchScreenInitOptions, switchSetScreenOption): Generate and
+	regenerate initiate_all, prev, and prev_all bindings as needed.
+	(switchHandleEvent): update
+
+	* plugins/gconf-compiz-utils.c: Remove "<Release>" handling.
+
+	* plugins/compiz.schemas: regen, dropping the terminate bindings
+	and updating a few others.
+
+	* include/compiz.h: remove CompPressMask, CompReleaseMask,
+	EV_BUTTON, and EV_KEY. Add eventMatches, eventTerminates, and
+	keycodeToModifiers. Add modMap field to CompDisplay.
+
 2006-04-28  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: Handle enter/leave notify events.

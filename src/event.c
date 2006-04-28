@@ -396,7 +396,8 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -405,7 +406,8 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -414,8 +416,8 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW],
-			   event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -424,7 +426,8 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -436,21 +439,24 @@ handleEvent (CompDisplay *d,
 	    /* avoid toolkit actions when screen is grabbed */
 	    if (!d->screens->maxGrab)
 	    {
-		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
+		if (eventMatches (d, event,
+				  &d->opt[COMP_DISPLAY_OPTION_MAIN_MENU]))
 		{
 		    toolkitAction (s, s->display->toolkitActionMainMenuAtom,
 				   event->xbutton.time, s->root, 0, 0, 0);
 		    eventMode = AsyncPointer;
 		}
 
-		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
+		if (eventMatches (d, event,
+				  &d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG]))
 		{
 		    toolkitAction (s, s->display->toolkitActionRunDialogAtom,
 				   event->xbutton.time, s->root, 0, 0, 0);
 		    eventMode = AsyncPointer;
 		}
 
-		if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU], event))
+		if (eventMatches (d, event,
+				  &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU]))
 		{
 		    toolkitAction (s, s->display->toolkitActionWindowMenuAtom,
 				   event->xbutton.time,
@@ -462,8 +468,9 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 
-#define EV_BUTTON_COMMAND(num)						    \
-    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num], event)) \
+#define EV_BUTTON_COMMAND(num)							    \
+    if (eventMatches (d, event,						    \
+		      &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num]))	    \
     {									    \
 	runCommand (s, d->opt[COMP_DISPLAY_OPTION_COMMAND ## num].value.s); \
 	eventMode = AsyncPointer;					    \
@@ -482,13 +489,15 @@ handleEvent (CompDisplay *d,
 	    EV_BUTTON_COMMAND (10);
 	    EV_BUTTON_COMMAND (11);
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS]))
 	    {
 		s->slowAnimations = !s->slowAnimations;
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -497,8 +506,8 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE],
-			   event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -507,8 +516,8 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE],
-			   event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
@@ -517,14 +526,15 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT]))
 	    {
 		runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
 		eventMode = AsyncPointer;
 	    }
 
-	    if (EV_BUTTON (&d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT],
-			   event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT]))
 	    {
 		runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
 		eventMode = AsyncPointer;
@@ -544,28 +554,32 @@ handleEvent (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xkey.root);
 	if (s)
 	{
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    closeWindow (w, event->xkey.time);
 	    }
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    maximizeWindow (w);
 	    }
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    unmaximizeWindow (w);
 	    }
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
@@ -575,19 +589,22 @@ handleEvent (CompDisplay *d,
 	    /* avoid toolkit actions when screen is grabbed */
 	    if (!d->screens->maxGrab)
 	    {
-		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_MAIN_MENU], event))
+		if (eventMatches (d, event,
+				  &d->opt[COMP_DISPLAY_OPTION_MAIN_MENU]))
 		{
 		    toolkitAction (s, s->display->toolkitActionMainMenuAtom,
 				   event->xkey.time, s->root, 0, 0, 0);
 		}
 
-		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG], event))
+		if (eventMatches (d, event,
+				  &d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG]))
 		{
 		    toolkitAction (s, s->display->toolkitActionRunDialogAtom,
 				   event->xkey.time, s->root, 0, 0, 0);
 		}
 
-		if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU], event))
+		if (eventMatches (d, event,
+				  &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU]))
 		{
 		    toolkitAction (s, s->display->toolkitActionWindowMenuAtom,
 				   event->xkey.time,
@@ -598,9 +615,10 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 
-#define EV_KEY_COMMAND(num)						 \
-    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num], event)) \
-	runCommand (s, d->opt[COMP_DISPLAY_OPTION_COMMAND ## num].value.s)
+#define EV_KEY_COMMAND(num)						    \
+    if (eventMatches (d, event,						    \
+		      &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num]))	    \
+	runCommand (s, d->opt[COMP_DISPLAY_OPTION_COMMAND ## num].value.s); \
 
 	    EV_KEY_COMMAND (0);
 	    EV_KEY_COMMAND (1);
@@ -615,36 +633,41 @@ handleEvent (CompDisplay *d,
 	    EV_KEY_COMMAND (10);
 	    EV_KEY_COMMAND (11);
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS]))
 		s->slowAnimations = !s->slowAnimations;
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    lowerWindow (w);
 	    }
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    changeWindowOpacity (w, 1);
 	    }
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE], event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    changeWindowOpacity (w, -1);
 	    }
 
-	    if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT],
-			event))
-		runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
-	    else if (EV_KEY (&d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT],
-			     event))
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT]))
 		runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT]))
+		runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
 	}
 	break;
     case KeyRelease:
@@ -1309,3 +1332,87 @@ handleEvent (CompDisplay *d,
 	break;
     }
 }
+
+#define REAL_MOD_MASK (ShiftMask | ControlMask | Mod1Mask | \
+		       Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask)
+
+Bool
+eventMatches (CompDisplay *display,
+	      XEvent      *event,
+	      CompOption  *option)
+{
+    unsigned int modMask, bindMods, state = 0;
+    CompBinding *bind = &option->value.bind;
+
+    switch (event->type) {
+    case ButtonPress:
+	if (bind->type != CompBindingTypeButton ||
+	    bind->u.button.button != event->xbutton.button)
+	    return FALSE;
+
+	modMask = REAL_MOD_MASK & ~display->ignoredModMask;
+	bindMods = virtualToRealModMask (display, bind->u.button.modifiers);
+
+	return (bindMods & modMask) == (event->xbutton.state & modMask);
+
+    case KeyPress:
+	if (bind->type != CompBindingTypeKey)
+	    return FALSE;
+
+	if (bind->u.key.keycode == 0)
+	{
+	    state = keycodeToModifiers (display, event->xkey.keycode);
+	    if (state == 0)
+		return FALSE;
+	}
+	else if (bind->u.key.keycode != event->xkey.keycode)
+	    return FALSE;
+
+	modMask = REAL_MOD_MASK & ~display->ignoredModMask;
+	bindMods = virtualToRealModMask (display, bind->u.key.modifiers);
+	state |= event->xkey.state;
+		
+	return (bindMods & modMask) == (state & modMask);
+
+    default:
+	return FALSE;
+    }
+}
+
+Bool
+eventTerminates (CompDisplay *display,
+		 XEvent      *event,
+		 CompOption  *option)
+{
+    unsigned int modMask, bindMods, state;
+    CompBinding *bind = &option->value.bind;
+    CompScreen *s;
+
+    switch (event->type) {
+    case ButtonRelease:
+	return (bind->type == CompBindingTypeButton &&
+		bind->u.button.button == event->xbutton.button);
+
+    case KeyPress:
+	s = findScreenAtDisplay (display, event->xkey.root);
+	return (s && event->xkey.keycode == s->escapeKeyCode);
+
+    case KeyRelease:
+	if (bind->type != CompBindingTypeKey)
+	    return FALSE;
+
+	state = keycodeToModifiers (display, event->xkey.keycode);
+	if (state == 0)
+	    return FALSE;
+
+	modMask = REAL_MOD_MASK & ~display->ignoredModMask;
+	bindMods = virtualToRealModMask (display, bind->u.key.modifiers);
+	state = event->xkey.state & ~state;
+
+	return (state & modMask & bindMods) != bindMods;
+
+    default:
+	return FALSE;
+    }
+}
+

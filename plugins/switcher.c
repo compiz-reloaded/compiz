@@ -36,23 +36,11 @@
 #include <compiz.h>
 
 #define SWITCH_INITIATE_KEY_DEFAULT       "Tab"
-#define SWITCH_INITIATE_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
+#define SWITCH_INITIATE_MODIFIERS_DEFAULT CompAltMask
 
-#define SWITCH_INITIATE_ALL_KEY_DEFAULT       "Tab"
-#define SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT (CompPressMask | \
-					       ControlMask   | \
-					       CompAltMask)
+#define SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT ControlMask
 
-#define SWITCH_TERMINATE_KEY_DEFAULT       "Alt_L"
-#define SWITCH_TERMINATE_MODIFIERS_DEFAULT CompReleaseMask
-
-#define SWITCH_NEXT_WINDOW_KEY_DEFAULT       "Tab"
-#define SWITCH_NEXT_WINDOW_MODIFIERS_DEFAULT (CompPressMask | CompAltMask)
-
-#define SWITCH_PREV_WINDOW_KEY_DEFAULT       "Tab"
-#define SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT (CompPressMask | \
-					      CompAltMask   | \
-					      ShiftMask)
+#define SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT ShiftMask
 
 #define SWITCH_SPEED_DEFAULT   1.5f
 #define SWITCH_SPEED_MIN       0.1f
@@ -100,18 +88,16 @@ typedef struct _SwitchDisplay {
 
 #define SWITCH_SCREEN_OPTION_INITIATE	  0
 #define SWITCH_SCREEN_OPTION_INITIATE_ALL 1
-#define SWITCH_SCREEN_OPTION_TERMINATE	  2
-#define SWITCH_SCREEN_OPTION_NEXT_WINDOW  3
-#define SWITCH_SCREEN_OPTION_PREV_WINDOW  4
-#define SWITCH_SCREEN_OPTION_SPEED	  5
-#define SWITCH_SCREEN_OPTION_TIMESTEP	  6
-#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  7
-#define SWITCH_SCREEN_OPTION_MIPMAP	  8
-#define SWITCH_SCREEN_OPTION_SATURATION	  9
-#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  10
-#define SWITCH_SCREEN_OPTION_OPACITY	  11
-#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 12
-#define SWITCH_SCREEN_OPTION_NUM	  13
+#define SWITCH_SCREEN_OPTION_PREV_WINDOW  2
+#define SWITCH_SCREEN_OPTION_SPEED	  3
+#define SWITCH_SCREEN_OPTION_TIMESTEP	  4
+#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  5
+#define SWITCH_SCREEN_OPTION_MIPMAP	  6
+#define SWITCH_SCREEN_OPTION_SATURATION	  7
+#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  8
+#define SWITCH_SCREEN_OPTION_OPACITY	  9
+#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 10
+#define SWITCH_SCREEN_OPTION_NUM	  11
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -120,6 +106,7 @@ typedef struct _SwitchScreen {
     DamageWindowRectProc   damageWindowRect;
 
     CompOption opt[SWITCH_SCREEN_OPTION_NUM];
+    CompOption init_all_bind, prev_bind, prev_all_bind;
 
     Window popupWindow;
 
@@ -222,8 +209,9 @@ switchSetScreenOption (CompScreen      *screen,
 		       char	       *name,
 		       CompOptionValue *value)
 {
-    CompOption *o;
-    int	       index;
+    CompOption  *o;
+    int	        index;
+    CompBinding binding;
 
     SWITCH_SCREEN (screen);
 
@@ -233,21 +221,44 @@ switchSetScreenOption (CompScreen      *screen,
 
     switch (index) {
     case SWITCH_SCREEN_OPTION_INITIATE:
-    case SWITCH_SCREEN_OPTION_INITIATE_ALL:
-	if (addScreenBinding (screen, &value->bind))
-	{
-	    removeScreenBinding (screen, &o->value.bind);
+	if (value->bind.type != CompBindingTypeKey)
+	    return FALSE;
+	if (!addScreenBinding (screen, &value->bind))
+	    return FALSE;
+	removeScreenBinding (screen, &o->value.bind);
 
-	    if (compSetBindingOption (o, value))
-		return TRUE;
-	}
-	break;
-    case SWITCH_SCREEN_OPTION_TERMINATE:
-    case SWITCH_SCREEN_OPTION_NEXT_WINDOW:
+	/* fall through */
+    case SWITCH_SCREEN_OPTION_INITIATE_ALL:
     case SWITCH_SCREEN_OPTION_PREV_WINDOW:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
+	if (value->bind.type != CompBindingTypeKey)
+	    return FALSE;
+	if (!compSetBindingOption (o, value))
+	    return FALSE;
+
+	binding = ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind;
+	binding.u.key.modifiers |=
+	    ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL].value.bind.u.key.modifiers;
+	if (addScreenBinding (screen, &binding)) {
+	    removeScreenBinding (screen, &ss->init_all_bind.value.bind);
+	    ss->init_all_bind.value.bind = binding;
+	}
+
+	binding.u.key.modifiers |=
+	    ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW].value.bind.u.key.modifiers;
+	if (addScreenBinding (screen, &binding)) {
+	    removeScreenBinding (screen, &ss->prev_all_bind.value.bind);
+	    ss->prev_all_bind.value.bind = binding;
+	}
+
+	binding = ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind;
+	binding.u.key.modifiers |=
+	    ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW].value.bind.u.key.modifiers;
+	if (addScreenBinding (screen, &binding)) {
+	    removeScreenBinding (screen, &ss->prev_bind.value.bind);
+	    ss->prev_bind.value.bind = binding;
+	}
+
+	return TRUE;
     case SWITCH_SCREEN_OPTION_SPEED:
 	if (compSetFloatOption (o, value))
 	{
@@ -325,49 +336,35 @@ switchScreenInitOptions (SwitchScreen *ss,
 	XKeysymToKeycode (display,
 			  XStringToKeysym (SWITCH_INITIATE_KEY_DEFAULT));
 
+    ss->init_all_bind = ss->prev_bind = ss->prev_all_bind = *o;
+
     o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL];
     o->name			  = "initiate_all";
     o->shortDesc		  = "Initiate All Windows";
-    o->longDesc			  = "Show switcher for all windows";
+    o->longDesc			  = "Modifier to show switcher for all windows";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_INITIATE_ALL_KEY_DEFAULT));
+    o->value.bind.u.key.keycode   = 0;
 
-    o = &ss->opt[SWITCH_SCREEN_OPTION_TERMINATE];
-    o->name			  = "terminate";
-    o->shortDesc		  = "Terminate";
-    o->longDesc			  = "End switching";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SWITCH_TERMINATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_TERMINATE_KEY_DEFAULT));
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_NEXT_WINDOW];
-    o->name			  = "next_window";
-    o->shortDesc		  = "Next Window";
-    o->longDesc			  = "Select next window";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SWITCH_NEXT_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_NEXT_WINDOW_KEY_DEFAULT));
+    ss->init_all_bind.value.bind.u.key.modifiers |=
+	o->value.bind.u.key.modifiers;
+    ss->prev_all_bind.value.bind.u.key.modifiers |=
+	o->value.bind.u.key.modifiers;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW];
     o->name			  = "prev_window";
     o->shortDesc		  = "Prev Window";
-    o->longDesc			  = "Select previous window";
+    o->longDesc			  = "Modifier key to select previous window";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_PREV_WINDOW_KEY_DEFAULT));
+    o->value.bind.u.key.keycode   = 0;
+
+    ss->prev_bind.value.bind.u.key.modifiers |=
+	o->value.bind.u.key.modifiers;
+    ss->prev_all_bind.value.bind.u.key.modifiers |=
+	o->value.bind.u.key.modifiers;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -927,21 +924,24 @@ switchHandleEvent (CompDisplay *d,
 	{
 	    SWITCH_SCREEN (s);
 
-	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL], event))
-		switchInitiate (s, TRUE);
-	    else if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_INITIATE], event))
-		switchInitiate (s, FALSE);
+	    if (!ss->grabIndex) {
+		if (eventMatches (d, event,
+				  &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]))
+		    switchInitiate (s, FALSE);
+		else if (eventMatches (d, event, &ss->init_all_bind))
+		    switchInitiate (s, TRUE);
+	    }
 
-	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW], event))
-		switchToWindow (s, FALSE);
-	    else if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_NEXT_WINDOW], event))
+	    if (eventMatches (d, event,
+			      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]) ||
+		eventMatches (d, event, &ss->init_all_bind))
 		switchToWindow (s, TRUE);
-
-	    if (EV_KEY (&ss->opt[SWITCH_SCREEN_OPTION_TERMINATE], event))
+	    else if (eventMatches (d, event, &ss->prev_bind) ||
+		     eventMatches (d, event, &ss->prev_all_bind))
+		switchToWindow (s, FALSE);
+	    else if (eventTerminates (d, event,
+				      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]))
 		switchTerminate (s, TRUE);
-	    else if (event->type	 == KeyPress &&
-		     event->xkey.keycode == s->escapeKeyCode)
-		switchTerminate (s, FALSE);
 	}
     default:
 	break;
@@ -1373,8 +1373,7 @@ switchInitScreen (CompPlugin *p,
     switchScreenInitOptions (ss, s->display->display);
 
     addScreenBinding (s, &ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind);
-    addScreenBinding (s,
-		      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL].value.bind);
+    addScreenBinding (s, &ss->init_all_bind.value.bind);
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
