@@ -114,6 +114,9 @@ int pointerY     = 0;
 #define LOWER_WINDOW_BUTTON_DEFAULT    6
 #define LOWER_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
+#define SHOW_DESKTOP_KEY_DEFAULT       "d"
+#define SHOW_DESKTOP_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
+
 #define OPACITY_INCREASE_BUTTON_DEFAULT    Button4
 #define OPACITY_INCREASE_MODIFIERS_DEFAULT CompAltMask
 
@@ -298,6 +301,17 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (MAXIMIZE_WINDOW_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
+    o->name			  = "show_desktop";
+    o->shortDesc		  = "Show Desktop";
+    o->longDesc			  = "Hide all windows and focus desktop";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = SHOW_DESKTOP_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (SHOW_DESKTOP_KEY_DEFAULT));
 
 #define COMMAND_OPTION(num, cname, rname)				    \
     o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
@@ -519,6 +533,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_MINIMIZE_WINDOW:
     case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW:
     case COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW:
+    case COMP_DISPLAY_OPTION_SHOW_DESKTOP:
     case COMP_DISPLAY_OPTION_RUN_COMMAND0:
     case COMP_DISPLAY_OPTION_RUN_COMMAND1:
     case COMP_DISPLAY_OPTION_RUN_COMMAND2:
@@ -1524,6 +1539,7 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
 		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW].value.bind);
     addScreenBinding (s,
 		      &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW].value.bind);
+    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND0].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND1].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND2].value.bind);

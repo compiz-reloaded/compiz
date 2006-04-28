@@ -436,6 +436,17 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP]))
+	    {
+		if (s->showingDesktopMask == 0)
+		    enterShowDesktopMode (s);
+		else
+		    leaveShowDesktopMode (s, NULL);
+
+		eventMode = AsyncPointer;
+	    }
+
 	    /* avoid toolkit actions when screen is grabbed */
 	    if (!d->screens->maxGrab)
 	    {
@@ -584,6 +595,15 @@ handleEvent (CompDisplay *d,
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    minimizeWindow (w);
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP]))
+	    {
+		if (s->showingDesktopMask == 0)
+		    enterShowDesktopMode (s);
+		else
+		    leaveShowDesktopMode (s, NULL);
 	    }
 
 	    /* avoid toolkit actions when screen is grabbed */

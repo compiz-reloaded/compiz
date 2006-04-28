@@ -392,7 +392,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT             41
 #define COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT         42
 #define COMP_DISPLAY_OPTION_WINDOW_MENU                   43
-#define COMP_DISPLAY_OPTION_NUM                           44
+#define COMP_DISPLAY_OPTION_SHOW_DESKTOP                  44
+#define COMP_DISPLAY_OPTION_NUM                           45
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);

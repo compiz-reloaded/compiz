@@ -527,6 +527,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/show_desktop</key>
+            <applyto>/apps/compiz/general/allscreens/options/show_desktop</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;d</default>
+            <locale name="C">
+                <short>Show Desktop</short>
+                <long>
+                    Hide all windows and focus desktop
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/allscreens/options/opacity_increase</key>
             <applyto>/apps/compiz/general/allscreens/options/opacity_increase</applyto>
             <owner>compiz</owner>

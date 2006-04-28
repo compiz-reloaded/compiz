@@ -1,5 +1,10 @@
 2006-04-28  David Reveman  <davidr@novell.com>
 
+	* src/event.c (handleEvent):
+	* src/display.c:
+	* include/compiz.h:
+	Add show desktop binding. (Martin Szulecki)
+
 	* plugins/rotate.c: Reset timout handle correctly.
 
 	* plugins/move.c:
