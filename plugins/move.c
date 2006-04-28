@@ -107,6 +107,8 @@ typedef struct _MoveScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static const char *allowedGrabs[] = { "move" };
+
 static CompOption *
 moveGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -211,8 +213,7 @@ moveInitiate (CompWindow   *w,
     MOVE_DISPLAY (w->screen->display);
     MOVE_SCREEN (w->screen);
 
-    /* some plugin has already grabbed the screen */
-    if (w->screen->maxGrab)
+    if (otherScreenGrabExist (w->screen, allowedGrabs, 1))
 	return;
 
     if (md->w)
@@ -237,7 +238,7 @@ moveInitiate (CompWindow   *w,
     ms->snapOffY  = y;
 
     if (!ms->grabIndex)
-	ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor);
+	ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor, "move");
 
     if (ms->grabIndex)
 	(w->screen->windowGrabNotify) (w, x, y, state,
@@ -340,8 +341,7 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if (yRoot - ms->snapBackY < SNAP_BACK)
 		    {
-			/* if screen isn't grabbed by someone else */
-			if ((s->maxGrab - ms->grabIndex) == 0)
+			if (!otherScreenGrabExist (s, allowedGrabs, 1))
 			{
 			    maximizeWindow (w);
 

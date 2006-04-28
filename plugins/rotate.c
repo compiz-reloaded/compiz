@@ -190,6 +190,8 @@ typedef struct _RotateScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static const char *allowedGrabs[] = { "rotate", "move" };
+
 static CompOption *
 rotateGetScreenOptions (CompScreen *screen,
 			int	   *count)
@@ -758,7 +760,7 @@ rotateInitiate (CompScreen *s,
 
     if (!rs->grabIndex)
     {
-	rs->grabIndex = pushScreenGrab (s, s->invisibleCursor);
+	rs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "rotate");
 	if (rs->grabIndex)
 	{
 	    rs->savedPointer.x = x;
@@ -855,6 +857,14 @@ rotateLeft (void *closure)
 
     ROTATE_SCREEN (s);
 
+    if (otherScreenGrabExist (s, allowedGrabs, 2))
+    {
+	rs->moveTo = 0.0f;
+	rs->slow = FALSE;
+
+	return FALSE;
+    }
+
     warpX = pointerX + s->width;
     warpPointer (s->display, s->width - 10, 0);
     lastPointerX = warpX;
@@ -863,6 +873,8 @@ rotateLeft (void *closure)
 
     XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, -1, 0);
     rs->savedPointer.x = lastPointerX - 9;
+
+    rs->rotateHandle = 0;
 
     return FALSE;
 }
@@ -875,6 +887,14 @@ rotateRight (void *closure)
 
     ROTATE_SCREEN (s);
 
+    if (otherScreenGrabExist (s, allowedGrabs, 2))
+    {
+	rs->moveTo = 0.0f;
+	rs->slow = FALSE;
+
+	return FALSE;
+    }
+
     warpX = pointerX - s->width;
     warpPointer (s->display, 10 - s->width, 0);
     lastPointerX = warpX;
@@ -884,6 +904,8 @@ rotateRight (void *closure)
     XWarpPointer (s->display->display, None, None, 0, 0, 0, 0, 1, 0);
 
     rs->savedPointer.x = lastPointerX + 9;
+
+    rs->rotateHandle = 0;
 
     return FALSE;
 }
@@ -904,8 +926,7 @@ rotateHandleEvent (CompDisplay *d,
 	{
 	    ROTATE_SCREEN (s);
 
-	    /* only if screen isn't grabbed by someone else */
-	    if ((s->maxGrab - rs->grabIndex) == 0)
+	    if (!otherScreenGrabExist (s, allowedGrabs, 1))
 	    {
 		int face, delta;
 
@@ -925,8 +946,8 @@ rotateHandleEvent (CompDisplay *d,
 				  &rs->opt[ROTATE_SCREEN_OPTION_RIGHT_WINDOW]))
 		    rotateWithWindow (s, event->xkey.x_root,
 				      event->xkey.y_root, 1);
-		else if (eventMatches (d, event
-				       , &rs->opt[ROTATE_SCREEN_OPTION_RIGHT]))
+		else if (eventMatches (d, event,
+				       &rs->opt[ROTATE_SCREEN_OPTION_RIGHT]))
 		    rotate (s, event->xkey.x_root, event->xkey.y_root, 1);
 
 		for (face = 0; face < 12 && face < s->size; face++)
@@ -975,8 +996,7 @@ rotateHandleEvent (CompDisplay *d,
 	{
 	    ROTATE_SCREEN (s);
 
-	    /* only if screen isn't grabbed by someone else */
-	    if ((s->maxGrab - rs->grabIndex) == 0)
+	    if (!otherScreenGrabExist (s, allowedGrabs, 1))
 	    {
 		if (eventMatches (d, event,
 				  &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
@@ -1061,8 +1081,7 @@ rotateHandleEvent (CompDisplay *d,
 
 		s = w->screen;
 
-		/* check if screen is grabbed by someone else */
-		if (s->maxGrab - rs->grabIndex)
+		if (otherScreenGrabExist (s, allowedGrabs, 1))
 		    break;
 
 		/* reset movement */
@@ -1099,10 +1118,7 @@ rotateHandleEvent (CompDisplay *d,
 	    {
 		int dx;
 
-		ROTATE_SCREEN (s);
-
-		/* check if screen is grabbed by someone else */
-		if (s->maxGrab - rs->grabIndex)
+		if (otherScreenGrabExist (s, allowedGrabs, 1))
 		    break;
 
 		dx = event->xclient.data.l[0] / s->width - s->x;
@@ -1137,14 +1153,12 @@ rotateHandleEvent (CompDisplay *d,
 
 		ROTATE_SCREEN (s);
 
-		/* check if screen is grabbed */
-		if (s->maxGrab)
-		{
-		    /* break if no window is being moved */
-		    if (!rs->grabMask)
-			break;
+		if (otherScreenGrabExist (s, allowedGrabs, 2))
+		    break;
 
-		    /* break if window is horizontally maximized or
+		if (otherScreenGrabExist (s, allowedGrabs, 1))
+		{
+		    /* bail out if window is horizontally maximized or
 		       fullscreen */
 		    if (rs->grabWindow)
 		    {

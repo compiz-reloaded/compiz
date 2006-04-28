@@ -1,3 +1,20 @@
+2006-04-28  David Reveman  <davidr@novell.com>
+
+	* plugins/rotate.c: Reset timout handle correctly.
+
+	* plugins/move.c:
+	* plugins/resize.c:
+	* plugins/rotate.c:
+	* plugins/scale.c:
+	* plugins/switcher.c:
+	* plugins/water.c:
+	* plugins/zoom.c: Track screen grab changes changes.
+
+	* src/screen.c:
+	* include/compiz.h: Associate all screen grabs with a name. Add
+	otherScreenGrabExist function which can be used to check if screen
+	is grabbed by other plugins.
+
 2006-04-28  Dan Winship  <danw@novell.com>
 
 	* src/event.c (eventMatches): new method that replaces EV_KEY and

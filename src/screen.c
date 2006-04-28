@@ -1690,7 +1690,8 @@ unhookWindowFromScreen (CompScreen *s,
 			   PointerMotionMask)
 int
 pushScreenGrab (CompScreen *s,
-		Cursor     cursor)
+		Cursor     cursor,
+		const char *name)
 {
     if (s->maxGrab == 0)
     {
@@ -1734,6 +1735,7 @@ pushScreenGrab (CompScreen *s,
 
     s->grabs[s->maxGrab].cursor = cursor;
     s->grabs[s->maxGrab].active = TRUE;
+    s->grabs[s->maxGrab].name   = name;
 
     s->maxGrab++;
 
@@ -1780,6 +1782,37 @@ removeScreenGrab (CompScreen *s,
 
 	s->maxGrab = maxGrab;
     }
+}
+
+Bool
+otherScreenGrabExist (CompScreen *s,
+		      const char **name,
+		      int	 nName)
+{
+    int i, j;
+
+    if (!nName)
+    {
+	if (s->maxGrab)
+	    return TRUE;
+    }
+
+    for (i = 0; i < s->maxGrab; i++)
+    {
+	if (s->grabs[i].active)
+	{
+	    for (j = 0; j < nName; j++)
+	    {
+		if (strcmp (name[j], s->grabs[i].name) == 0)
+		    break;
+	    }
+
+	    if (j == nName)
+		return TRUE;
+	}
+    }
+
+    return FALSE;
 }
 
 static void

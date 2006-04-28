@@ -1067,8 +1067,9 @@ typedef struct _CompButtonGrab {
 } CompButtonGrab;
 
 typedef struct _CompGrab {
-    Bool   active;
-    Cursor cursor;
+    Bool       active;
+    Cursor     cursor;
+    const char *name;
 } CompGrab;
 
 typedef struct _CompGroup {
@@ -1322,12 +1323,18 @@ findTopLevelWindowAtScreen (CompScreen *s,
 
 int
 pushScreenGrab (CompScreen *s,
-		Cursor     cursor);
+		Cursor     cursor,
+		const char *name);
 
 void
 removeScreenGrab (CompScreen *s,
 		  int	     index,
 		  XPoint     *restorePointer);
+
+Bool
+otherScreenGrabExist (CompScreen *s,
+		      const char **name,
+		      int	 nName);
 
 Bool
 addScreenBinding (CompScreen  *s,

@@ -808,7 +808,7 @@ switchInitiate (CompScreen *s,
 
     if (!ss->grabIndex)
     {
-	ss->grabIndex = pushScreenGrab (s, s->invisibleCursor);
+	ss->grabIndex = pushScreenGrab (s, s->invisibleCursor, "switcher");
 
 	if (ss->grabIndex)
 	{

@@ -126,6 +126,8 @@ typedef struct _WaterScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static const char *allowedGrabs[] = { "water" };
+
 static Bool
 waterTimeout (void *closure);
 
@@ -1341,8 +1343,7 @@ waterHandleEvent (CompDisplay *d,
 		}
 	    }
 
-	    /* check if some other plugin has already grabbed the screen */
-	    if (s->maxGrab - ws->grabIndex)
+	    if (otherScreenGrabExist (s, allowedGrabs, 1))
 		break;
 
 	    if (eventMatches (d, event,
@@ -1351,7 +1352,7 @@ waterHandleEvent (CompDisplay *d,
 		XPoint p;
 
 		if (!ws->grabIndex)
-		    ws->grabIndex = pushScreenGrab (s, None);
+		    ws->grabIndex = pushScreenGrab (s, None, "water");
 
 		p.x = event->xkey.x_root;
 		p.y = event->xkey.y_root;
