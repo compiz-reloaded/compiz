@@ -1,3 +1,67 @@
+2006-04-30  David Reveman  <davidr@novell.com>
+
+	* plugins/compiz.schemas: Regen.
+
+	* plugins/decoration.c (decorWindowUpdate): Don't decorate fullscreen
+	windows.
+
+	* plugins/cube.c: Add initial support for unfolding the cube. Default
+	key-binding is <Control><Alt>Down.
+
+	* plugins/rotate.c (rotateHandleEvent): Fix absolute rotation.
+
+	* plugins/switcher.c: Fix so that bring-to-front doesn't change
+	the actual stacking order.
+	Add zoom option, enable it by default so it gets some testing.
+	Made bring-to-front enabled by default as it makes zoom functionality
+	more useful.
+	Made switcher window always rendered above all other windows and
+	not affected by screen transformations.
+
+	* src/event.c (handleEvent): Send configure notify before mapping
+	window if PPosition or USPosition is set.
+
+	* src/screen.c (insertWindowIntoScreen): Sibling above doesn't have to
+	be mapped. This change seem to currently by causing the
+	stacking order of some override-redirect windows to be incorrect.
+	Don't insert window when aboveId doesn't match an existing window.
+	(removeScreenGrab): ifdef DEBUG around abort.
+
+	* src/event.c (handleEvent): Only update active window property
+	when it's changing.
+
+	* src/window.c (sendConfigureNotify): Make sure the latest
+	window attributes are put in the ConfigureNotify.
+	(moveResizeWindow): Only send sync request if window is mapped.
+
+	* plugins/rotate.c: Add support for edge-flipping when using
+	drag-and-drop. Remove edge_flip and flip_move options and add
+	edge_flip_pointer, edge_flip_move, edge_flip_dnd.
+
+	* src/screen.c:
+	* src/display.c:
+	* include/compiz.h:
+	Make screen edges drag-and-drop aware.
+
+	* plugins/zoom.c:
+	* plugins/water.c:
+	* plugins/switcher.c:
+	* plugins/scale.c:
+	* plugins/rotate.c:
+	* plugins/resize.c:
+	* plugins/move.c:
+	* src/scren.c:
+	* include/compiz.h:
+	Variable argument list to otherScreenGrabExist, last argument must
+	be 0.
+
+	* src/event.c:
+	* src/display.c:
+	* include/compiz.h: Add raise-on-click option.
+
+	* gnome/window-decorator/gnome-window-decorator.c (title_event):
+	Activate window when clicking titlebar.
+
 2006-04-28  David Reveman  <davidr@novell.com>
 
 	* gnome/window-decorator/gnome-window-decorator.c: Back out last change

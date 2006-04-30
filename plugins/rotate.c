@@ -77,19 +77,21 @@
 #define ROTATE_TIMESTEP_MAX       50.0f
 #define ROTATE_TIMESTEP_PRECISION 0.1f
 
-#define ROTATE_EDGEFLIP_DEFAULT TRUE
+#define ROTATE_EDGEFLIP_POINTER_DEFAULT FALSE
+#define ROTATE_EDGEFLIP_WINDOW_DEFAULT  TRUE
+#define ROTATE_EDGEFLIP_DND_DEFAULT     TRUE
 
 #define ROTATE_FLIPTIME_DEFAULT 350
 #define ROTATE_FLIPTIME_MIN     0
 #define ROTATE_FLIPTIME_MAX     1000
-
-#define ROTATE_FLIPMOVE_DEFAULT TRUE
 
 static int displayPrivateIndex;
 
 typedef struct _RotateDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
+
+    Window xdndWindow;
 } RotateDisplay;
 
 #define ROTATE_SCREEN_OPTION_POINTER_INVERT_Y	 0
@@ -103,34 +105,35 @@ typedef struct _RotateDisplay {
 #define ROTATE_SCREEN_OPTION_SNAP_TOP		 8
 #define ROTATE_SCREEN_OPTION_SPEED		 9
 #define ROTATE_SCREEN_OPTION_TIMESTEP		 10
-#define ROTATE_SCREEN_OPTION_EDGEFLIP		 11
-#define ROTATE_SCREEN_OPTION_FLIPTIME		 12
-#define ROTATE_SCREEN_OPTION_FLIPMOVE		 13
-#define ROTATE_SCREEN_OPTION_TO_1		 14
-#define ROTATE_SCREEN_OPTION_TO_2		 15
-#define ROTATE_SCREEN_OPTION_TO_3		 16
-#define ROTATE_SCREEN_OPTION_TO_4		 17
-#define ROTATE_SCREEN_OPTION_TO_5		 18
-#define ROTATE_SCREEN_OPTION_TO_6		 19
-#define ROTATE_SCREEN_OPTION_TO_7		 20
-#define ROTATE_SCREEN_OPTION_TO_8		 21
-#define ROTATE_SCREEN_OPTION_TO_9		 22
-#define ROTATE_SCREEN_OPTION_TO_10		 23
-#define ROTATE_SCREEN_OPTION_TO_11		 24
-#define ROTATE_SCREEN_OPTION_TO_12		 25
-#define ROTATE_SCREEN_OPTION_TO_1_WINDOW	 26
-#define ROTATE_SCREEN_OPTION_TO_2_WINDOW	 27
-#define ROTATE_SCREEN_OPTION_TO_3_WINDOW	 28
-#define ROTATE_SCREEN_OPTION_TO_4_WINDOW	 29
-#define ROTATE_SCREEN_OPTION_TO_5_WINDOW	 30
-#define ROTATE_SCREEN_OPTION_TO_6_WINDOW	 31
-#define ROTATE_SCREEN_OPTION_TO_7_WINDOW	 32
-#define ROTATE_SCREEN_OPTION_TO_8_WINDOW	 33
-#define ROTATE_SCREEN_OPTION_TO_9_WINDOW	 34
-#define ROTATE_SCREEN_OPTION_TO_10_WINDOW	 35
-#define ROTATE_SCREEN_OPTION_TO_11_WINDOW	 36
-#define ROTATE_SCREEN_OPTION_TO_12_WINDOW	 37
-#define ROTATE_SCREEN_OPTION_NUM		 38
+#define ROTATE_SCREEN_OPTION_EDGEFLIP_POINTER	 11
+#define ROTATE_SCREEN_OPTION_EDGEFLIP_WINDOW	 12
+#define ROTATE_SCREEN_OPTION_EDGEFLIP_DND	 13
+#define ROTATE_SCREEN_OPTION_FLIPTIME		 14
+#define ROTATE_SCREEN_OPTION_TO_1		 15
+#define ROTATE_SCREEN_OPTION_TO_2		 16
+#define ROTATE_SCREEN_OPTION_TO_3		 17
+#define ROTATE_SCREEN_OPTION_TO_4		 18
+#define ROTATE_SCREEN_OPTION_TO_5		 19
+#define ROTATE_SCREEN_OPTION_TO_6		 20
+#define ROTATE_SCREEN_OPTION_TO_7		 21
+#define ROTATE_SCREEN_OPTION_TO_8		 22
+#define ROTATE_SCREEN_OPTION_TO_9		 23
+#define ROTATE_SCREEN_OPTION_TO_10		 24
+#define ROTATE_SCREEN_OPTION_TO_11		 25
+#define ROTATE_SCREEN_OPTION_TO_12		 26
+#define ROTATE_SCREEN_OPTION_TO_1_WINDOW	 27
+#define ROTATE_SCREEN_OPTION_TO_2_WINDOW	 28
+#define ROTATE_SCREEN_OPTION_TO_3_WINDOW	 29
+#define ROTATE_SCREEN_OPTION_TO_4_WINDOW	 30
+#define ROTATE_SCREEN_OPTION_TO_5_WINDOW	 31
+#define ROTATE_SCREEN_OPTION_TO_6_WINDOW	 32
+#define ROTATE_SCREEN_OPTION_TO_7_WINDOW	 33
+#define ROTATE_SCREEN_OPTION_TO_8_WINDOW	 34
+#define ROTATE_SCREEN_OPTION_TO_9_WINDOW	 35
+#define ROTATE_SCREEN_OPTION_TO_10_WINDOW	 36
+#define ROTATE_SCREEN_OPTION_TO_11_WINDOW	 37
+#define ROTATE_SCREEN_OPTION_TO_12_WINDOW	 38
+#define ROTATE_SCREEN_OPTION_NUM		 39
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -189,8 +192,6 @@ typedef struct _RotateScreen {
     RotateScreen *rs = GET_ROTATE_SCREEN (s, GET_ROTATE_DISPLAY (s->display))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
-
-static const char *allowedGrabs[] = { "rotate", "move" };
 
 static CompOption *
 rotateGetScreenOptions (CompScreen *screen,
@@ -297,7 +298,9 @@ rotateSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case ROTATE_SCREEN_OPTION_EDGEFLIP:
+    case ROTATE_SCREEN_OPTION_EDGEFLIP_POINTER:
+    case ROTATE_SCREEN_OPTION_EDGEFLIP_WINDOW:
+    case ROTATE_SCREEN_OPTION_EDGEFLIP_DND:
 	if (compSetBoolOption (o, value))
 	{
 	    if (o->value.b)
@@ -310,9 +313,11 @@ rotateSetScreenOption (CompScreen      *screen,
 		    rs->edges = TRUE;
 		}
 	    }
-	    else
+	    else if (rs->edges)
 	    {
-		if (rs->edges)
+		if (!rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_POINTER].value.b &&
+		    !rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_WINDOW].value.b  &&
+		    !rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_DND].value.b)
 		{
 		    disableScreenEdge (screen, SCREEN_EDGE_LEFT);
 		    disableScreenEdge (screen, SCREEN_EDGE_RIGHT);
@@ -320,6 +325,7 @@ rotateSetScreenOption (CompScreen      *screen,
 		    rs->edges = FALSE;
 		}
 	    }
+
 	    return TRUE;
 	}
 	break;
@@ -329,10 +335,6 @@ rotateSetScreenOption (CompScreen      *screen,
 	    rs->flipTime = o->value.i;
 	    return TRUE;
 	}
-	break;
-    case ROTATE_SCREEN_OPTION_FLIPMOVE:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
 	break;
     }
@@ -484,12 +486,26 @@ rotateScreenInitOptions (RotateScreen *rs,
     o->rest.f.max	= ROTATE_TIMESTEP_MAX;
     o->rest.f.precision = ROTATE_TIMESTEP_PRECISION;
 
-    o = &rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP];
-    o->name      = "edge_flip";
-    o->shortDesc = "Edge Flip";
+    o = &rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_POINTER];
+    o->name      = "edge_flip_pointer";
+    o->shortDesc = "Edge Flip Pointer";
     o->longDesc  = "Flip to next viewport when moving pointer to screen edge";
     o->type      = CompOptionTypeBool;
-    o->value.b   = ROTATE_EDGEFLIP_DEFAULT;
+    o->value.b   = ROTATE_EDGEFLIP_POINTER_DEFAULT;
+
+    o = &rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_WINDOW];
+    o->name      = "edge_flip_move";
+    o->shortDesc = "Edge Flip Move";
+    o->longDesc  = "Flip to next viewport when moving window to screen edge";
+    o->type      = CompOptionTypeBool;
+    o->value.b   = ROTATE_EDGEFLIP_WINDOW_DEFAULT;
+
+    o = &rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_DND];
+    o->name      = "edge_flip_dnd";
+    o->shortDesc = "Edge Flip DnD";
+    o->longDesc  = "Flip to next viewport when dragging object to screen edge";
+    o->type      = CompOptionTypeBool;
+    o->value.b   = ROTATE_EDGEFLIP_DND_DEFAULT;
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_FLIPTIME];
     o->name	  = "flip_time";
@@ -499,13 +515,6 @@ rotateScreenInitOptions (RotateScreen *rs,
     o->value.i	  = ROTATE_FLIPTIME_DEFAULT;
     o->rest.i.min = ROTATE_FLIPTIME_MIN;
     o->rest.i.max = ROTATE_FLIPTIME_MAX;
-
-    o = &rs->opt[ROTATE_SCREEN_OPTION_FLIPMOVE];
-    o->name      = "flip_move";
-    o->shortDesc = "Flip Move";
-    o->longDesc  = "Only allow viewport flipping when moving windows";
-    o->type      = CompOptionTypeBool;
-    o->value.b   = ROTATE_FLIPMOVE_DEFAULT;
 }
 
 static int
@@ -783,17 +792,15 @@ rotate (CompScreen *s,
 {
     ROTATE_SCREEN (s);
 
+    /* we allow the grab to fail here so that we can rotate on drag-and-drop */
     if (!rs->grabIndex)
 	rotateInitiate (s, x, y);
 
-    if (rs->grabIndex)
-    {
-	rs->moving  = TRUE;
-	rs->moveTo += (360.0f / s->size) * direction;
-	rs->grabbed = FALSE;
+    rs->moving  = TRUE;
+    rs->moveTo += (360.0f / s->size) * direction;
+    rs->grabbed = FALSE;
 
-	damageScreen (s);
-    }
+    damageScreen (s);
 }
 
 static void
@@ -857,7 +864,7 @@ rotateLeft (void *closure)
 
     ROTATE_SCREEN (s);
 
-    if (otherScreenGrabExist (s, allowedGrabs, 2))
+    if (otherScreenGrabExist (s, "rotate", "move", 0))
     {
 	rs->moveTo = 0.0f;
 	rs->slow = FALSE;
@@ -887,7 +894,7 @@ rotateRight (void *closure)
 
     ROTATE_SCREEN (s);
 
-    if (otherScreenGrabExist (s, allowedGrabs, 2))
+    if (otherScreenGrabExist (s, "rotate", "move", 0))
     {
 	rs->moveTo = 0.0f;
 	rs->slow = FALSE;
@@ -911,6 +918,104 @@ rotateRight (void *closure)
 }
 
 static void
+handleEnterScreenEdge (CompScreen *s,
+		       Window     id)
+{
+    ROTATE_SCREEN (s);
+
+    if (rs->edges && id == s->screenEdge[SCREEN_EDGE_LEFT].id)
+    {
+	if (rs->flipTime == 0 || rs->grabIndex)
+	{
+	    int pointerDx = pointerX - lastPointerX;
+	    int warpX;
+
+	    warpX = pointerX + s->width;
+	    warpPointer (s->display, s->width - 10, 0);
+	    lastPointerX = warpX - pointerDx;
+
+	    rotate (s, 0, pointerY, -1);
+
+	    XWarpPointer (s->display->display, None, None,
+			  0, 0, 0, 0, -1, 0);
+	    rs->savedPointer.x = lastPointerX - 9;
+	}
+	else
+	{
+	    if (!rs->rotateHandle)
+		rs->rotateHandle =
+		    compAddTimeout (rs->flipTime, rotateLeft, s);
+
+	    rs->moving  = TRUE;
+	    rs->moveTo -= 360.0f / s->size;
+	    rs->slow    = TRUE;
+
+	    damageScreen (s);
+	}
+    }
+    else if (rs->edges && id == s->screenEdge[SCREEN_EDGE_RIGHT].id)
+    {
+	if (rs->flipTime == 0 || rs->grabIndex)
+	{
+	    int pointerDx = pointerX - lastPointerX;
+	    int warpX;
+
+	    warpX = pointerX - s->width;
+	    warpPointer (s->display, 10 - s->width, 0);
+	    lastPointerX = warpX - pointerDx;
+
+	    rotate (s, 0, pointerY, 1);
+
+	    XWarpPointer (s->display->display, None, None,
+			  0, 0, 0, 0, 1, 0);
+	    rs->savedPointer.x = lastPointerX + 9;
+	}
+	else
+	{
+	    if (!rs->rotateHandle)
+		rs->rotateHandle =
+		    compAddTimeout (rs->flipTime, rotateRight, s);
+
+	    rs->moving  = TRUE;
+	    rs->moveTo += 360.0f / s->size;
+	    rs->slow    = TRUE;
+
+	    damageScreen (s);
+	}
+    }
+    else if (rs->rotateHandle)
+    {
+	compRemoveTimeout (rs->rotateHandle);
+	rs->rotateHandle = 0;
+
+	if (rs->slow)
+	{
+	    rs->moveTo = 0.0f;
+	    rs->slow = FALSE;
+	}
+
+	damageScreen (s);
+    }
+}
+
+static int
+rotateRotationTo (CompScreen *s,
+		  int	     face)
+{
+    int delta;
+
+    ROTATE_SCREEN (s);
+
+    delta = face - s->x - (rs->moveTo / (360.0f / s->size));
+    if (delta > s->size / 2)
+	delta -= s->size;
+    else if (delta < -(s->size / 2))
+	delta += s->size;
+
+    return delta;
+}
+
+static void
 rotateHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
@@ -926,9 +1031,9 @@ rotateHandleEvent (CompDisplay *d,
 	{
 	    ROTATE_SCREEN (s);
 
-	    if (!otherScreenGrabExist (s, allowedGrabs, 1))
+	    if (!otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
 	    {
-		int face, delta;
+		int face;
 
 		if (eventMatches (d, event,
 				  &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
@@ -952,18 +1057,13 @@ rotateHandleEvent (CompDisplay *d,
 
 		for (face = 0; face < 12 && face < s->size; face++)
 		{
-		    delta = face - s->x;
-		    if (delta > s->size / 2)
-			delta -= s->size;
-		    else if (delta < -(s->size / 2))
-			delta += s->size;
-
 		    if (eventMatches (d, event,
 				      &rs->opt[ROTATE_SCREEN_OPTION_TO_1_WINDOW
 					       + face]))
 		    {
 			rotateWithWindow (s, event->xkey.x_root,
-					  event->xkey.y_root, delta);
+					  event->xkey.y_root,
+					  rotateRotationTo (s, face));
 			break;
 		    }
 		    else if (eventMatches (d, event,
@@ -971,7 +1071,7 @@ rotateHandleEvent (CompDisplay *d,
 						    + face]))
 		    {
 			rotate (s, event->xkey.x_root, event->xkey.y_root,
-				delta);
+				rotateRotationTo (s, face));
 			break;
 		    }
 		}
@@ -996,7 +1096,7 @@ rotateHandleEvent (CompDisplay *d,
 	{
 	    ROTATE_SCREEN (s);
 
-	    if (!otherScreenGrabExist (s, allowedGrabs, 1))
+	    if (!otherScreenGrabExist (s, "rotate", "cube", 0))
 	    {
 		if (eventMatches (d, event,
 				  &rs->opt[ROTATE_SCREEN_OPTION_INITIATE]))
@@ -1081,7 +1181,7 @@ rotateHandleEvent (CompDisplay *d,
 
 		s = w->screen;
 
-		if (otherScreenGrabExist (s, allowedGrabs, 1))
+		if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
 		    break;
 
 		/* reset movement */
@@ -1118,7 +1218,7 @@ rotateHandleEvent (CompDisplay *d,
 	    {
 		int dx;
 
-		if (otherScreenGrabExist (s, allowedGrabs, 1))
+		if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
 		    break;
 
 		dx = event->xclient.data.l[0] / s->width - s->x;
@@ -1140,6 +1240,42 @@ rotateHandleEvent (CompDisplay *d,
 		}
 	    }
 	}
+	else if (event->xclient.message_type == d->xdndEnterAtom)
+	{
+	    rd->xdndWindow = event->xclient.window;
+	}
+	else if (event->xclient.message_type == d->xdndLeaveAtom)
+	{
+	    if (!rd->xdndWindow)
+	    {
+		CompWindow *w;
+
+		w = findWindowAtDisplay (d, event->xclient.window);
+		if (w)
+		    handleEnterScreenEdge (w->screen, None);
+	    }
+	}
+	else if (event->xclient.message_type == d->xdndPositionAtom)
+	{
+	    if (rd->xdndWindow == event->xclient.window)
+	    {
+		CompWindow *w;
+
+		w = findWindowAtDisplay (d, event->xclient.window);
+		if (w)
+		{
+		    ROTATE_SCREEN (w->screen);
+
+		    if (rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_DND].value.b)
+		    {
+			if (!otherScreenGrabExist (w->screen, "rotate", 0))
+			    handleEnterScreenEdge (w->screen, rd->xdndWindow);
+		    }
+		}
+
+		rd->xdndWindow = None;
+	    }
+	}
 	break;
     case EnterNotify:
 	if (event->xcrossing.mode   != NotifyGrab   &&
@@ -1149,15 +1285,16 @@ rotateHandleEvent (CompDisplay *d,
 	    s = findScreenAtDisplay (d, event->xcrossing.root);
 	    if (s)
 	    {
-		Window id = event->xcrossing.window;
-
 		ROTATE_SCREEN (s);
 
-		if (otherScreenGrabExist (s, allowedGrabs, 2))
+		if (otherScreenGrabExist (s, "rotate", "move", 0))
 		    break;
 
-		if (otherScreenGrabExist (s, allowedGrabs, 1))
+		if (otherScreenGrabExist (s, "rotate", 0))
 		{
+		    if (!rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_WINDOW].value.b)
+			break;
+
 		    /* bail out if window is horizontally maximized or
 		       fullscreen */
 		    if (rs->grabWindow)
@@ -1171,84 +1308,11 @@ rotateHandleEvent (CompDisplay *d,
 		}
 		else
 		{
-		    /* break if we should only flip on window move */
-		    if (rs->opt[ROTATE_SCREEN_OPTION_FLIPMOVE].value.b)
+		    if (!rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_POINTER].value.b)
 			break;
 		}
 
-		if (rs->edges && id == s->screenEdge[SCREEN_EDGE_LEFT].id)
-		{
-		    if (rs->flipTime == 0 || rs->grabIndex)
-		    {
-			int pointerDx = pointerX - lastPointerX;
-			int warpX;
-
-			warpX = pointerX + s->width;
-			warpPointer (s->display, s->width - 10, 0);
-			lastPointerX = warpX - pointerDx;
-
-			rotate (s, 0, pointerY, -1);
-
-			XWarpPointer (s->display->display, None, None,
-				      0, 0, 0, 0, -1, 0);
-			rs->savedPointer.x = lastPointerX - 9;
-		    }
-		    else
-		    {
-			if (!rs->rotateHandle)
-			    rs->rotateHandle =
-				compAddTimeout (rs->flipTime, rotateLeft, s);
-
-			rs->moving  = TRUE;
-			rs->moveTo -= 360.0f / s->size;
-			rs->slow    = TRUE;
-
-			damageScreen (s);
-		    }
-		}
-		else if (rs->edges && id == s->screenEdge[SCREEN_EDGE_RIGHT].id)
-		{
-		    if (rs->flipTime == 0 || rs->grabIndex)
-		    {
-			int pointerDx = pointerX - lastPointerX;
-			int warpX;
-
-			warpX = pointerX - s->width;
-			warpPointer (s->display, 10 - s->width, 0);
-			lastPointerX = warpX - pointerDx;
-
-			rotate (s, 0, pointerY, 1);
-
-			XWarpPointer (s->display->display, None, None,
-				      0, 0, 0, 0, 1, 0);
-			rs->savedPointer.x = lastPointerX + 9;
-		    }
-		    else
-		    {
-			if (!rs->rotateHandle)
-			    rs->rotateHandle =
-				compAddTimeout (rs->flipTime, rotateRight, s);
-
-			rs->moving  = TRUE;
-			rs->moveTo += 360.0f / s->size;
-			rs->slow    = TRUE;
-
-			damageScreen (s);
-		    }
-		}
-		else if (rs->rotateHandle)
-		{
-		    compRemoveTimeout (rs->rotateHandle);
-		    rs->rotateHandle = 0;
-
-		    if (rs->slow)
-		    {
-			rs->moveTo = 0.0f;
-			rs->slow = FALSE;
-		    }
-
-		    damageScreen (s);
-		}
+		handleEnterScreenEdge (s, event->xcrossing.window);
 	    }
 	}
     default:
@@ -1347,6 +1411,8 @@ rotateInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
+    rd->xdndWindow = None;
+
     WRAP (rd, d, handleEvent, rotateHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = rd;
@@ -1436,7 +1502,9 @@ rotateInitScreen (CompPlugin *p,
 
     rotateUpdateCubeOptions (s);
 
-    if (rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP].value.b)
+    if (rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_POINTER].value.b ||
+	rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_WINDOW].value.b  ||
+	rs->opt[ROTATE_SCREEN_OPTION_EDGEFLIP_DND].value.b)
     {
 	enableScreenEdge (s, SCREEN_EDGE_LEFT);
 	enableScreenEdge (s, SCREEN_EDGE_RIGHT);

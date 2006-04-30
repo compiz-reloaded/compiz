@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <math.h>
 #include <dlfcn.h>
 #include <string.h>
@@ -1454,10 +1455,16 @@ addScreen (CompDisplay *display,
 
     for (i = 0; i < SCREEN_EDGE_NUM; i++)
     {
+	long xdndVersion = 3;
+
 	s->screenEdge[i].id = XCreateWindow (dpy, s->root, -100, -100, 1, 1, 0,
 					     CopyFromParent, InputOnly,
 					     CopyFromParent, CWOverrideRedirect,
 					     &attrib);
+
+	XChangeProperty (dpy, s->screenEdge[i].id, display->xdndAwareAtom,
+			 XA_ATOM, 32, PropModeReplace,
+			 (unsigned char *) &xdndVersion, 1);
 
 	XSelectInput (dpy, s->screenEdge[i].id,
 		      EnterWindowMask   |
@@ -1606,28 +1613,31 @@ insertWindowIntoScreen (CompScreen *s,
 	{
 	    for (p = s->windows; p; p = p->next)
 	    {
-		if (p->next)
+		if (p->id == aboveId)
 		{
-		    if (p->id == aboveId && p->mapNum)
+		    if (p->next)
 		    {
 			w->next = p->next;
 			w->prev = p;
 			p->next->prev = w;
 			p->next = w;
-
-			break;
 		    }
-		}
-		else
-		{
-		    p->next = w;
-		    w->next = NULL;
-		    w->prev = p;
-		    s->reverseWindows = w;
-
+		    else
+		    {
+			p->next = w;
+			w->next = NULL;
+			w->prev = p;
+			s->reverseWindows = w;
+		    }
 		    break;
 		}
 	    }
+
+#ifdef DEBUG
+	    if (!p)
+		abort ();
+#endif
+
 	}
     }
     else
@@ -1750,8 +1760,11 @@ removeScreenGrab (CompScreen *s,
     int maxGrab;
 
     index--;
+
+#ifdef DEBUG
     if (index < 0 || index >= s->maxGrab)
 	abort ();
+#endif
 
     s->grabs[index].cursor = None;
     s->grabs[index].active = FALSE;
@@ -1785,29 +1798,30 @@ removeScreenGrab (CompScreen *s,
 }
 
 Bool
-otherScreenGrabExist (CompScreen *s,
-		      const char **name,
-		      int	 nName)
+otherScreenGrabExist (CompScreen *s, ...)
 {
-    int i, j;
-
-    if (!nName)
-    {
-	if (s->maxGrab)
-	    return TRUE;
-    }
+    va_list ap;
+    char    *name;
+    int	    i;
 
     for (i = 0; i < s->maxGrab; i++)
     {
 	if (s->grabs[i].active)
 	{
-	    for (j = 0; j < nName; j++)
+	    va_start (ap, s);
+
+	    name = va_arg (ap, char *);
+	    while (name)
 	    {
-		if (strcmp (name[j], s->grabs[i].name) == 0)
+		if (strcmp (name, s->grabs[i].name) == 0)
 		    break;
+
+		name = va_arg (ap, char *);
 	    }
 
-	    if (j == nName)
+	    va_end (ap);
+
+	    if (!name)
 		return TRUE;
 	}
     }

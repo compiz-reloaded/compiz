@@ -134,6 +134,8 @@ int pointerY     = 0;
 #define WINDOW_MENU_BUTTON_DEFAULT    Button3
 #define WINDOW_MENU_MODIFIERS_DEFAULT CompAltMask
 
+#define RAISE_ON_CLICK_DEFAULT TRUE
+
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static char *textureFilter[] = { "Fast", "Good", "Best" };
@@ -431,6 +433,13 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = WINDOW_MENU_BUTTON_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK];
+    o->name	      = "raise_on_click";
+    o->shortDesc      = "Raise On Click";
+    o->longDesc	      = "Raise windows when clicked";
+    o->type	      = CompOptionTypeBool;
+    o->value.b	      = RAISE_ON_CLICK_DEFAULT;
 }
 
 CompOption *
@@ -499,10 +508,8 @@ setDisplayOption (CompDisplay     *display,
 	}
 	break;
     case COMP_DISPLAY_OPTION_CLICK_TO_FOCUS:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case COMP_DISPLAY_OPTION_AUTORAISE:
+    case COMP_DISPLAY_OPTION_RAISE_ON_CLICK:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -1163,6 +1170,12 @@ eventLoop (void)
 		pointerX = event.xcrossing.x_root;
 		pointerY = event.xcrossing.y_root;
 		break;
+	    case ClientMessage:
+		if (event.xclient.message_type == display->xdndPositionAtom)
+		{
+		    pointerX = event.xclient.data.l[2] >> 16;
+		    pointerY = event.xclient.data.l[2] & 0xffff;
+		}
 	    default:
 		break;
 	    }
@@ -1769,6 +1782,11 @@ addDisplay (char *name,
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_FORCE_QUIT_DIALOG", 0);
 
     d->mwmHintsAtom = XInternAtom (dpy, "_MOTIF_WM_HINTS", 0);
+
+    d->xdndAwareAtom    = XInternAtom (dpy, "XdndAware", 0);
+    d->xdndEnterAtom    = XInternAtom (dpy, "XdndEnter", 0);
+    d->xdndLeaveAtom    = XInternAtom (dpy, "XdndLeave", 0);
+    d->xdndPositionAtom = XInternAtom (dpy, "XdndPosition", 0);
 
     d->managerAtom   = XInternAtom (dpy, "MANAGER", 0);
     d->targetsAtom   = XInternAtom (dpy, "TARGETS", 0);

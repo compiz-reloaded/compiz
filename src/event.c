@@ -382,7 +382,7 @@ handleEvent (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xbutton.root);
 	if (s)
 	{
-	    int	       eventMode = ReplayPointer;
+	    int	eventMode = ReplayPointer;
 
 	    if (event->xbutton.button == Button1 ||
 		event->xbutton.button == Button2 ||
@@ -392,7 +392,16 @@ handleEvent (CompDisplay *d,
 		if (w)
 		{
 		    if (!(w->type & CompWindowTypeDockMask))
-			activateWindow (w);
+		    {
+			if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
+			{
+			    activateWindow (w);
+			}
+			else
+			{
+			    moveInputFocusToWindow (w);
+			}
+		    }
 		}
 	    }
 
@@ -1149,6 +1158,10 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
+		if ((w->sizeHints.flags & PPosition) ||
+		    (w->sizeHints.flags & USPosition))
+		    sendConfigureNotify (w);
+
 		XMapWindow (d->display, event->xmaprequest.window);
 
 		updateWindowAttributes (w, FALSE);
@@ -1162,31 +1175,30 @@ handleEvent (CompDisplay *d,
 	    XMapWindow (d->display, event->xmaprequest.window);
 	}
 	break;
-    case ConfigureRequest: {
-	  w = findWindowAtDisplay (d, event->xconfigurerequest.window);
-	  if (w)
-	  {
-	      XWindowChanges xwc;
+    case ConfigureRequest:
+	w = findWindowAtDisplay (d, event->xconfigurerequest.window);
+	if (w)
+	{
+	    XWindowChanges xwc;
 
-	      memset (&xwc, 0, sizeof (xwc));
+	    memset (&xwc, 0, sizeof (xwc));
 
-	      xwc.x	       = event->xconfigurerequest.x;
-	      xwc.y	       = event->xconfigurerequest.y;
-	      xwc.width	       = event->xconfigurerequest.width;
-	      xwc.height       = event->xconfigurerequest.height;
-	      xwc.border_width = event->xconfigurerequest.border_width;
+	    xwc.x	     = event->xconfigurerequest.x;
+	    xwc.y	     = event->xconfigurerequest.y;
+	    xwc.width	     = event->xconfigurerequest.width;
+	    xwc.height       = event->xconfigurerequest.height;
+	    xwc.border_width = event->xconfigurerequest.border_width;
 
-	      moveResizeWindow (w, &xwc,
-				event->xconfigurerequest.value_mask, 0);
-	  }
-    } break;
+	    moveResizeWindow (w, &xwc,  event->xconfigurerequest.value_mask, 0);
+	}
+	break;
     case CirculateRequest:
 	break;
     case FocusIn:
 	if (event->xfocus.mode != NotifyGrab)
 	{
 	    w = findWindowAtDisplay (d, event->xfocus.window);
-	    if (w)
+	    if (w && w->id != d->activeWindow)
 	    {
 		XChangeProperty (d->display, w->screen->root,
 				 d->winActiveAtom,

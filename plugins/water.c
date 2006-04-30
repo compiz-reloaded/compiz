@@ -126,8 +126,6 @@ typedef struct _WaterScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-static const char *allowedGrabs[] = { "water" };
-
 static Bool
 waterTimeout (void *closure);
 
@@ -1343,7 +1341,7 @@ waterHandleEvent (CompDisplay *d,
 		}
 	    }
 
-	    if (otherScreenGrabExist (s, allowedGrabs, 1))
+	    if (otherScreenGrabExist (s, "water", 0))
 		break;
 
 	    if (eventMatches (d, event,

@@ -527,20 +527,6 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/general/allscreens/options/show_desktop</key>
-            <applyto>/apps/compiz/general/allscreens/options/show_desktop</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Control&gt;&lt;Alt&gt;d</default>
-            <locale name="C">
-                <short>Show Desktop</short>
-                <long>
-                    Hide all windows and focus desktop
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
             <key>/schemas/apps/compiz/general/allscreens/options/opacity_increase</key>
             <applyto>/apps/compiz/general/allscreens/options/opacity_increase</applyto>
             <owner>compiz</owner>
@@ -634,6 +620,34 @@
                 <short>Window Menu</short>
                 <long>
                     Open window menu
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/show_desktop</key>
+            <applyto>/apps/compiz/general/allscreens/options/show_desktop</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;d</default>
+            <locale name="C">
+                <short>Show Desktop</short>
+                <long>
+                    Hide all windows and focus desktop
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/raise_on_click</key>
+            <applyto>/apps/compiz/general/allscreens/options/raise_on_click</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Raise On Click</short>
+                <long>
+                    Raise windows when clicked
                 </long>
             </locale>
         </schema>
@@ -903,6 +917,76 @@
                 <short>Animate Skydome</short>
                 <long>
                     Animate skydome when rotating cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/unfold</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/unfold</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;Down</default>
+            <locale name="C">
+                <short>Unfold</short>
+                <long>
+                    Unfold cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/acceleration</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/acceleration</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>4.000000</default>
+            <locale name="C">
+                <short>Acceleration</short>
+                <long>
+                    Fold Acceleration (1.0-20.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/speed</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/speed</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.500000</default>
+            <locale name="C">
+                <short>Speed</short>
+                <long>
+                    Fold Speed (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/timestep</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/timestep</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.200000</default>
+            <locale name="C">
+                <short>Timestep</short>
+                <long>
+                    Fold Timestep (0.1-50.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/screen0/options/mipmap</key>
+            <applyto>/apps/compiz/plugins/cube/screen0/options/mipmap</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Mipmap</short>
+                <long>
+                    Generate mipmaps when possible for higher quality scaling
                 </long>
             </locale>
         </schema>
@@ -1218,15 +1302,43 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/edge_flip</key>
-            <applyto>/apps/compiz/plugins/rotate/screen0/options/edge_flip</applyto>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/edge_flip_pointer</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/edge_flip_pointer</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Edge Flip Pointer</short>
+                <long>
+                    Flip to next viewport when moving pointer to screen edge
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/edge_flip_move</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/edge_flip_move</applyto>
             <owner>compiz</owner>
             <type>bool</type>
             <default>true</default>
             <locale name="C">
-                <short>Edge Flip</short>
+                <short>Edge Flip Move</short>
                 <long>
-                    Flip to next viewport when moving pointer to screen edge
+                    Flip to next viewport when moving window to screen edge
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/edge_flip_dnd</key>
+            <applyto>/apps/compiz/plugins/rotate/screen0/options/edge_flip_dnd</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Edge Flip DnD</short>
+                <long>
+                    Flip to next viewport when dragging object to screen edge
                 </long>
             </locale>
         </schema>
@@ -1241,20 +1353,6 @@
                 <short>Flip Time</short>
                 <long>
                     Timeout before flipping viewport (0-1000)
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/rotate/screen0/options/flip_move</key>
-            <applyto>/apps/compiz/plugins/rotate/screen0/options/flip_move</applyto>
-            <owner>compiz</owner>
-            <type>bool</type>
-            <default>true</default>
-            <locale name="C">
-                <short>Flip Move</short>
-                <long>
-                    Only allow viewport flipping when moving windows
                 </long>
             </locale>
         </schema>
@@ -1741,11 +1839,25 @@
             <applyto>/apps/compiz/plugins/switcher/screen0/options/bring_to_front</applyto>
             <owner>compiz</owner>
             <type>bool</type>
-            <default>false</default>
+            <default>true</default>
             <locale name="C">
                 <short>Bring To Front</short>
                 <long>
                     Bring selected window to front
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/zoom</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/zoom</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.000000</default>
+            <locale name="C">
+                <short>Zoom</short>
+                <long>
+                    Distance desktop should be zoom out while switching windows (0.0-5.0)
                 </long>
             </locale>
         </schema>

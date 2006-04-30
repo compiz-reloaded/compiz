@@ -393,7 +393,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT         42
 #define COMP_DISPLAY_OPTION_WINDOW_MENU                   43
 #define COMP_DISPLAY_OPTION_SHOW_DESKTOP                  44
-#define COMP_DISPLAY_OPTION_NUM                           45
+#define COMP_DISPLAY_OPTION_RAISE_ON_CLICK                45
+#define COMP_DISPLAY_OPTION_NUM                           46
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -530,6 +531,11 @@ struct _CompDisplay {
     Atom toolkitActionForceQuitDialogAtom;
 
     Atom mwmHintsAtom;
+
+    Atom xdndAwareAtom;
+    Atom xdndEnterAtom;
+    Atom xdndLeaveAtom;
+    Atom xdndPositionAtom;
 
     Atom managerAtom;
     Atom targetsAtom;
@@ -1333,9 +1339,7 @@ removeScreenGrab (CompScreen *s,
 		  XPoint     *restorePointer);
 
 Bool
-otherScreenGrabExist (CompScreen *s,
-		      const char **name,
-		      int	 nName);
+otherScreenGrabExist (CompScreen *s, ...);
 
 Bool
 addScreenBinding (CompScreen  *s,

@@ -67,6 +67,26 @@ static char *cubeImages[] = {
 
 #define CUBE_SKYDOME_ANIMATE_DEFAULT FALSE
 
+#define CUBE_UNFOLD_KEY_DEFAULT       "Down"
+#define CUBE_UNFOLD_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
+
+#define CUBE_ACCELERATION_DEFAULT   4.0f
+#define CUBE_ACCELERATION_MIN       1.0f
+#define CUBE_ACCELERATION_MAX       20.0f
+#define CUBE_ACCELERATION_PRECISION 0.1f
+
+#define CUBE_SPEED_DEFAULT   1.5f
+#define CUBE_SPEED_MIN       0.1f
+#define CUBE_SPEED_MAX       50.0f
+#define CUBE_SPEED_PRECISION 0.1f
+
+#define CUBE_TIMESTEP_DEFAULT   1.2f
+#define CUBE_TIMESTEP_MIN       0.1f
+#define CUBE_TIMESTEP_MAX       50.0f
+#define CUBE_TIMESTEP_PRECISION 0.1f
+
+#define CUBE_MIPMAP_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _CubeDisplay {
@@ -83,9 +103,17 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_SKYDOME      6
 #define CUBE_SCREEN_OPTION_SKYDOME_IMG  7
 #define CUBE_SCREEN_OPTION_SKYDOME_ANIM 8
-#define CUBE_SCREEN_OPTION_NUM          9
+#define CUBE_SCREEN_OPTION_UNFOLD       9
+#define CUBE_SCREEN_OPTION_ACCELERATION 10
+#define CUBE_SCREEN_OPTION_SPEED	11
+#define CUBE_SCREEN_OPTION_TIMESTEP	12
+#define CUBE_SCREEN_OPTION_MIPMAP	13
+#define CUBE_SCREEN_OPTION_NUM          14
 
 typedef struct _CubeScreen {
+    PreparePaintScreenProc     preparePaintScreen;
+    DonePaintScreenProc	       donePaintScreen;
+    PaintScreenProc	       paintScreen;
     PaintTransformedScreenProc paintTransformedScreen;
     PaintBackgroundProc	       paintBackground;
     SetScreenOptionProc	       setScreenOption;
@@ -98,6 +126,15 @@ typedef struct _CubeScreen {
     Bool     paintTopBottom;
     GLushort color[3];
     GLfloat  tc[12];
+
+    int grabIndex;
+
+    float acceleration;
+    float speed;
+    float timestep;
+
+    Bool    unfolded;
+    GLfloat unfold, unfoldVelocity;
 
     GLfloat  *vertices;
     int      nvertices;
@@ -731,6 +768,15 @@ cubeSetScreenOption (CompScreen      *screen,
 	if (compSetBindingOption (o, value))
 	    return TRUE;
 	break;
+    case CUBE_SCREEN_OPTION_UNFOLD:
+	if (addScreenBinding (screen, &value->bind))
+	{
+	    removeScreenBinding (screen, &o->value.bind);
+
+	    if (compSetBindingOption (o, value))
+		return TRUE;
+	}
+	break;
     case CUBE_SCREEN_OPTION_SKYDOME:
 	if (compSetBoolOption (o, value))
 	{
@@ -759,6 +805,30 @@ cubeSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case CUBE_SCREEN_OPTION_ACCELERATION:
+	if (compSetFloatOption (o, value))
+	{
+	    cs->acceleration = o->value.f;
+	    return TRUE;
+	}
+	break;
+    case CUBE_SCREEN_OPTION_SPEED:
+	if (compSetFloatOption (o, value))
+	{
+	    cs->speed = o->value.f;
+	    return TRUE;
+	}
+	break;
+    case CUBE_SCREEN_OPTION_TIMESTEP:
+	if (compSetFloatOption (o, value))
+	{
+	    cs->timestep = o->value.f;
+	    return TRUE;
+	}
+	break;
+    case CUBE_SCREEN_OPTION_MIPMAP:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -853,6 +923,158 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->longDesc	  = "Animate skydome when rotating cube";
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_SKYDOME_ANIMATE_DEFAULT;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_UNFOLD];
+    o->name			  = "unfold";
+    o->shortDesc		  = "Unfold";
+    o->longDesc			  = "Unfold cube";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = CUBE_UNFOLD_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (CUBE_UNFOLD_KEY_DEFAULT));
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_ACCELERATION];
+    o->name		= "acceleration";
+    o->shortDesc	= "Acceleration";
+    o->longDesc		= "Fold Acceleration";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= CUBE_ACCELERATION_DEFAULT;
+    o->rest.f.min	= CUBE_ACCELERATION_MIN;
+    o->rest.f.max	= CUBE_ACCELERATION_MAX;
+    o->rest.f.precision = CUBE_ACCELERATION_PRECISION;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_SPEED];
+    o->name		= "speed";
+    o->shortDesc	= "Speed";
+    o->longDesc		= "Fold Speed";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= CUBE_SPEED_DEFAULT;
+    o->rest.f.min	= CUBE_SPEED_MIN;
+    o->rest.f.max	= CUBE_SPEED_MAX;
+    o->rest.f.precision = CUBE_SPEED_PRECISION;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_TIMESTEP];
+    o->name		= "timestep";
+    o->shortDesc	= "Timestep";
+    o->longDesc		= "Fold Timestep";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= CUBE_TIMESTEP_DEFAULT;
+    o->rest.f.min	= CUBE_TIMESTEP_MIN;
+    o->rest.f.max	= CUBE_TIMESTEP_MAX;
+    o->rest.f.precision = CUBE_TIMESTEP_PRECISION;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_MIPMAP];
+    o->name	  = "mipmap";
+    o->shortDesc  = "Mipmap";
+    o->longDesc	  = "Generate mipmaps when possible for higher quality scaling";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = CUBE_MIPMAP_DEFAULT;
+}
+
+static int
+adjustVelocity (CubeScreen *cs)
+{
+    float unfold, adjust, amount;
+
+    if (cs->unfolded)
+	unfold = 1.0f - cs->unfold;
+    else
+	unfold = 0.0f - cs->unfold;
+
+    adjust = unfold * 0.02f * cs->acceleration;
+    amount = fabs (unfold);
+    if (amount < 1.0f)
+	amount = 1.0f;
+    else if (amount > 3.0f)
+	amount = 3.0f;
+
+    cs->unfoldVelocity = (amount * cs->unfoldVelocity + adjust) /
+	(amount + 2.0f);
+
+    return (fabs (unfold) < 0.002f && fabs (cs->unfoldVelocity) < 0.01f);
+}
+
+static void
+cubePreparePaintScreen (CompScreen *s,
+			int	   msSinceLastPaint)
+{
+    CUBE_SCREEN (s);
+
+    if (cs->grabIndex)
+    {
+	int   steps;
+	float amount, chunk;
+
+	amount = msSinceLastPaint * 0.2f * cs->speed;
+	steps  = amount / (0.5f * cs->timestep);
+	if (!steps) steps = 1;
+	chunk  = amount / (float) steps;
+
+	while (steps--)
+	{
+	    cs->unfold += cs->unfoldVelocity * chunk;
+	    if (cs->unfold > 1.0f)
+		cs->unfold = 1.0f;
+
+	    if (adjustVelocity (cs))
+	    {
+		if (cs->unfold < 0.5f)
+		{
+		    if (cs->grabIndex)
+		    {
+			removeScreenGrab (s, cs->grabIndex, NULL);
+			cs->grabIndex = 0;
+		    }
+
+		    cs->unfold = 0.0f;
+		}
+		break;
+	    }
+	}
+    }
+
+    UNWRAP (cs, s, preparePaintScreen);
+    (*s->preparePaintScreen) (s, msSinceLastPaint);
+    WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
+
+}
+
+static Bool
+cubePaintScreen (CompScreen		 *s,
+		 const ScreenPaintAttrib *sAttrib,
+		 Region			 region,
+		 unsigned int		 mask)
+{
+    Bool status;
+
+    CUBE_SCREEN (s);
+
+    if (cs->grabIndex)
+    {
+	mask &= ~PAINT_SCREEN_REGION_MASK;
+	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
+    }
+
+    UNWRAP (cs, s, paintScreen);
+    status = (*s->paintScreen) (s, sAttrib, region, mask);
+    WRAP (cs, s, paintScreen, cubePaintScreen);
+
+    return status;
+}
+
+static void
+cubeDonePaintScreen (CompScreen *s)
+{
+    CUBE_SCREEN (s);
+
+    if (cs->grabIndex)
+	damageScreen (s);
+
+    UNWRAP (cs, s, donePaintScreen);
+    (*s->donePaintScreen) (s);
+    WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
 }
 
 static void
@@ -862,6 +1084,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 {
     ScreenPaintAttrib sa = *sAttrib;
     int		      xMove = 0;
+    float	      size = s->size;
 
     CUBE_SCREEN (s);
 
@@ -895,34 +1118,68 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    glClear (GL_COLOR_BUFFER_BIT);
     }
 
-    if (sa.vRotate > 100.0f)
-	sa.vRotate = 100.0f;
-    else if (sAttrib->vRotate < -100.0f)
-	sa.vRotate = -100.0f;
-    else
-	sa.vRotate = sAttrib->vRotate;
-
     UNWRAP (cs, s, paintTransformedScreen);
 
     sa.xTranslate = sAttrib->xTranslate;
     sa.yTranslate = sAttrib->yTranslate;
-    sa.zTranslate = -cs->invert * cs->distance;
 
-    sa.xRotate = sAttrib->xRotate * cs->invert;
-    if (sa.xRotate > 0.0f)
+    if (cs->grabIndex)
     {
-	cs->xrotations = (int) (s->size * sa.xRotate) / 360;
-	sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / s->size;
+	sa.vRotate = 0.0f;
+
+	size += cs->unfold * 8.0f;
+	size += powf (cs->unfold, 6) * 64.0;
+	size += powf (cs->unfold, 16) * 2048.0;
+
+	sa.zTranslate = -cs->invert * (0.5f / tanf (M_PI / size));
+
+	/* distance we move the camera back when unfolding the cube.
+	   currently hardcoded to 1.5 but it should probably be optional. */
+	sa.zCamera -= cs->unfold * 1.5f;
+
+	sa.xRotate = sAttrib->xRotate * cs->invert;
+	if (sa.xRotate > 0.0f)
+	{
+	    cs->xrotations = (int) (s->size * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / s->size;
+	}
+	else
+	{
+	    cs->xrotations = (int) (s->size * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate -
+		(360.0f * cs->xrotations) / s->size + 360.0f / s->size;
+	    cs->xrotations--;
+	}
+
+	sa.xRotate = sa.xRotate / size * s->size;
     }
     else
     {
-	cs->xrotations = (int) (s->size * sa.xRotate) / 360;
-	sa.xRotate = sa.xRotate -
-	    (360.0f * cs->xrotations) / s->size + 360.0f / s->size;
-	cs->xrotations--;
+	if (sAttrib->vRotate > 100.0f)
+	    sa.vRotate = 100.0f;
+	else if (sAttrib->vRotate < -100.0f)
+	    sa.vRotate = -100.0f;
+	else
+	    sa.vRotate = sAttrib->vRotate;
+
+	sa.zTranslate = -cs->invert * cs->distance;
+	sa.xRotate = sAttrib->xRotate * cs->invert;
+	if (sa.xRotate > 0.0f)
+	{
+	    cs->xrotations = (int) (size * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / size;
+	}
+	else
+	{
+	    cs->xrotations = (int) (size * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate -
+		(360.0f * cs->xrotations) / size + 360.0f / size;
+	    cs->xrotations--;
+	}
     }
 
-    if (cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f)
+    if (cs->grabIndex == 0 &&
+	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
 	screenLighting (s, TRUE);
 
@@ -932,9 +1189,9 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	if (sAttrib->xRotate > 0.0f)
 	{
-	    sa.yRotate += 360.0f / s->size;
+	    sa.yRotate += 360.0f / size;
 	    translateRotateScreen (&sa);
-	    sa.yRotate -= 360.0f / s->size;
+	    sa.yRotate -= 360.0f / size;
 	}
 	else
 	    translateRotateScreen (&sa);
@@ -968,53 +1225,114 @@ cubePaintTransformedScreen (CompScreen		    *s,
     /* outside cube */
     if (cs->invert == 1)
     {
-	if (sAttrib->xRotate != 0.0f)
+	if (cs->grabIndex)
 	{
-	    xMove = cs->xrotations;
+	    GLenum filter;
+	    int    i;
+
+	    xMove = cs->xrotations - ((s->size >> 1) - 1);
+	    sa.yRotate += (360.0f / size) * ((s->size >> 1) - 1);
+
+	    filter = s->display->textureFilter;
+	    if (cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
+		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
+
+	    for (i = 0; i < s->size; i++)
+	    {
+		moveScreenViewport (s, xMove, FALSE);
+		(*s->paintTransformedScreen) (s, &sa, mask);
+		moveScreenViewport (s, -xMove, FALSE);
+
+		sa.yRotate -= 360.0f / size;
+		xMove++;
+	    }
+
+	    s->display->textureFilter = filter;
+	}
+	else
+	{
+	    if (sAttrib->xRotate != 0.0f)
+	    {
+		xMove = cs->xrotations;
+
+		moveScreenViewport (s, xMove, FALSE);
+		(*s->paintTransformedScreen) (s, &sa, mask);
+		moveScreenViewport (s, -xMove, FALSE);
+
+		xMove++;
+
+		moveScreenViewport (s, xMove, FALSE);
+	    }
+
+	    sa.yRotate -= 360.0f / size;
+
+	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    moveScreenViewport (s, -xMove, FALSE);
+	}
+    }
+    else
+    {
+	if (sa.xRotate > 180.0f / size)
+	{
+	    sa.yRotate -= 360.0f / size;
+	    cs->xrotations++;
+	}
+
+	sa.yRotate -= 360.0f / size;
+	xMove = -1 - cs->xrotations;
+
+	if (cs->grabIndex)
+	{
+	    GLenum filter;
+	    int    i;
+
+	    filter = s->display->textureFilter;
+	    if (cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
+		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
+
+	    if (sa.xRotate > 180.0f / size)
+	    {
+		xMove -= ((s->size >> 1) - 2);
+		sa.yRotate -= (360.0f / size) * ((s->size >> 1) - 2);
+	    }
+	    else
+	    {
+		xMove -= ((s->size >> 1) - 1);
+		sa.yRotate -= (360.0f / size) * ((s->size >> 1) - 1);
+	    }
+
+	    for (i = 0; i < s->size; i++)
+	    {
+		moveScreenViewport (s, xMove, FALSE);
+		(*s->paintTransformedScreen) (s, &sa, mask);
+		moveScreenViewport (s, -xMove, FALSE);
+
+		sa.yRotate += 360.0f / size;
+		xMove++;
+	    }
+
+	    s->display->textureFilter = filter;
+	}
+	else
+	{
+	    moveScreenViewport (s, xMove, FALSE);
+	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    moveScreenViewport (s, -xMove, FALSE);
+
+	    sa.yRotate += 360.0f / size;
+	    xMove = -cs->xrotations;
 
 	    moveScreenViewport (s, xMove, FALSE);
 	    (*s->paintTransformedScreen) (s, &sa, mask);
 	    moveScreenViewport (s, -xMove, FALSE);
 
-	    xMove++;
+	    sa.yRotate += 360.0f / size;
+	    xMove = 1 - cs->xrotations;
 
 	    moveScreenViewport (s, xMove, FALSE);
+	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    moveScreenViewport (s, -xMove, FALSE);
 	}
-
-	sa.yRotate -= 360.0f / s->size;
-
-	(*s->paintTransformedScreen) (s, &sa, mask);
-
-	moveScreenViewport (s, -xMove, FALSE);
-    }
-    else
-    {
-	if (sa.xRotate > 180.0f / s->size)
-	{
-	    sa.yRotate -= 360.0f / s->size;
-	    cs->xrotations++;
-	}
-
-	sa.yRotate -= 360.0f / s->size;
-	xMove = -1 - cs->xrotations;
-
-	moveScreenViewport (s, xMove, FALSE);
-	(*s->paintTransformedScreen) (s, &sa, mask);
-	moveScreenViewport (s, -xMove, FALSE);
-
-	sa.yRotate += 360.0f / s->size;
-	xMove = -cs->xrotations;
-
-	moveScreenViewport (s, xMove, FALSE);
-	(*s->paintTransformedScreen) (s, &sa, mask);
-	moveScreenViewport (s, -xMove, FALSE);
-
-	sa.yRotate += 360.0f / s->size;
-	xMove = 1 - cs->xrotations;
-
-	moveScreenViewport (s, xMove, FALSE);
-	(*s->paintTransformedScreen) (s, &sa, mask);
-	moveScreenViewport (s, -xMove, FALSE);
     }
 
     WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
@@ -1035,6 +1353,30 @@ cubePaintBackground (CompScreen   *s,
 }
 
 static void
+cubeUnfold (CompScreen *s)
+{
+    CUBE_SCREEN (s);
+
+    if (!cs->grabIndex)
+	cs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "cube");
+
+    cs->unfolded = TRUE;
+    damageScreen (s);
+}
+
+static void
+cubeFold (CompScreen *s)
+{
+    CUBE_SCREEN (s);
+
+    if (cs->grabIndex)
+    {
+	cs->unfolded = FALSE;
+	damageScreen (s);
+    }
+}
+
+static void
 cubeHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
@@ -1049,6 +1391,9 @@ cubeHandleEvent (CompDisplay *d,
 	if (s)
 	{
 	    CUBE_SCREEN (s);
+
+	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_UNFOLD]))
+		cubeUnfold (s);
 
 	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_NEXT]))
 	    {
@@ -1068,6 +1413,10 @@ cubeHandleEvent (CompDisplay *d,
 		    damageScreen (s);
 		}
 	    }
+
+	    if (eventTerminates (d, event,
+				 &cs->opt[CUBE_SCREEN_OPTION_UNFOLD]))
+		cubeFold (s);
 	}
 	break;
     case ButtonPress:
@@ -1179,6 +1528,8 @@ cubeInitScreen (CompPlugin *p,
     cs->nvertices = 0;
     cs->vertices  = NULL;
 
+    cs->grabIndex = 0;
+
     cs->skyListId      = 0;
     cs->animateSkyDome = CUBE_SKYDOME_ANIMATE_DEFAULT;
 
@@ -1195,11 +1546,25 @@ cubeInitScreen (CompPlugin *p,
     cs->imgNFile   = 0;
     cs->imgCurFile = 0;
 
+    cs->acceleration = CUBE_ACCELERATION_DEFAULT;
+    cs->speed        = CUBE_SPEED_DEFAULT;
+    cs->timestep     = CUBE_TIMESTEP_DEFAULT;
+
+    cs->unfolded = FALSE;
+    cs->unfold   = 0.0f;
+
+    cs->unfoldVelocity = 0.0f;
+
     cubeScreenInitOptions (cs, s->display->display);
 
     cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
     cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
 
+    addScreenBinding (s, &cs->opt[CUBE_SCREEN_OPTION_UNFOLD].value.bind);
+
+    WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
+    WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
+    WRAP (cs, s, paintScreen, cubePaintScreen);
     WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
@@ -1225,6 +1590,9 @@ cubeFiniScreen (CompPlugin *p,
     if (cs->skyListId)
 	glDeleteLists (cs->skyListId, 1);
 
+    UNWRAP (cs, s, preparePaintScreen);
+    UNWRAP (cs, s, donePaintScreen);
+    UNWRAP (cs, s, paintScreen);
     UNWRAP (cs, s, paintTransformedScreen);
     UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, setScreenOption);

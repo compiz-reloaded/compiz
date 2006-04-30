@@ -200,8 +200,6 @@ typedef struct _ScaleWindow {
 		      GET_SCALE_SCREEN  (w->screen,	       \
 		      GET_SCALE_DISPLAY (w->screen->display)))
 
-static const char *allowedGrabs[] = { "scale" };
-
 static int scaleEdge[] = {
     SCREEN_EDGE_TOPLEFT,
     SCREEN_EDGE_TOPRIGHT,
@@ -929,7 +927,7 @@ scaleInitiate (CompScreen *s)
 
 	if (!ss->grabIndex)
 	{
-	    if (otherScreenGrabExist (s, allowedGrabs, 1))
+	    if (otherScreenGrabExist (s, "scale", 0))
 		return;
 
 	    ss->grabIndex = pushScreenGrab (s, ss->cursor, "scale");

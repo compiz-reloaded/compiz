@@ -786,7 +786,8 @@ decorWindowUpdate (CompWindow *w,
 
     if (dw->decor && decorCheckSize (w, dw->decor))
     {
-	decor = dw->decor;
+	if (w->type != CompWindowTypeFullscreenMask)
+	    decor = dw->decor;
     }
     else
     {

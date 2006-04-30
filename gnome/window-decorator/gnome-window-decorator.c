@@ -3617,6 +3617,8 @@ title_event (WnckWindow *win,
 	    last_button_xwindow = xevent->xbutton.window;
 	    last_button_time	= xevent->xbutton.time;
 
+	    wnck_window_activate (win, last_button_time);
+
 	    move_resize_window (win, WM_MOVERESIZE_MOVE, xevent);
 	}
     }

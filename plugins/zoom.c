@@ -128,8 +128,6 @@ typedef struct _ZoomScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-static const char *allowedGrabs[] = { "zoom" };
-
 static CompOption *
 zoomGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -472,7 +470,7 @@ zoomIn (CompScreen *s,
 {
     ZOOM_SCREEN (s);
 
-    if (otherScreenGrabExist (s, allowedGrabs, 1))
+    if (otherScreenGrabExist (s, "zoom", "scale", 0))
 	return;
 
     if (!zs->grabIndex)

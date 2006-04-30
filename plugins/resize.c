@@ -101,8 +101,6 @@ typedef struct _ResizeScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-static const char *allowedGrabs[] = { "resize" };
-
 static CompOption *
 resizeGetScreenOptions (CompScreen *screen,
 			int	   *count)
@@ -173,7 +171,7 @@ resizeInitiate (CompScreen   *s,
 
     RESIZE_DISPLAY (s->display);
 
-    if (otherScreenGrabExist (s, allowedGrabs, 1))
+    if (otherScreenGrabExist (s, "resize", 0))
 	return;
 
     if (rd->w)
