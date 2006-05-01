@@ -2737,3 +2737,18 @@ disableScreenEdge (CompScreen *s,
     if (s->screenEdge[edge].count == 0)
 	XUnmapWindow (s->display->display, s->screenEdge[edge].id);
 }
+
+Window
+getTopWindow (CompScreen *s)
+{
+    CompWindow *w;
+
+    /* return first window that has not been destroyed */
+    for (w = s->reverseWindows; w; w = w->prev)
+    {
+	if (w->id > 1)
+	    return w->id;
+    }
+
+    return None;
+}

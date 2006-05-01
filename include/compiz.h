@@ -1427,6 +1427,9 @@ void
 disableScreenEdge (CompScreen *s,
 		   int	      edge);
 
+Window
+getTopWindow (CompScreen *s);
+
 
 /* window.c */
 

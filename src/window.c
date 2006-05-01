@@ -2018,8 +2018,8 @@ circulateWindow (CompWindow	 *w,
 {
     Window newAboveId;
 
-    if (ce->place == PlaceOnTop && w->screen->reverseWindows)
-	newAboveId = w->screen->reverseWindows->id;
+    if (ce->place == PlaceOnTop)
+	newAboveId = getTopWindow (w->screen);
     else
 	newAboveId = 0;
 

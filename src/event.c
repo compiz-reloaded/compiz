@@ -303,8 +303,7 @@ handleEvent (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xcreatewindow.parent);
 	if (s)
 	{
-	    addWindow (s, event->xcreatewindow.window,
-		       s->reverseWindows ? s->reverseWindows->id : 0);
+	    addWindow (s, event->xcreatewindow.window, getTopWindow (s));
 	}
 	break;
     case DestroyNotify:
