@@ -1,5 +1,8 @@
 2006-05-02  David Reveman  <davidr@novell.com>
 
+	* plugins/cube.c (cubePaintTransformedScreen): Bump up size a bit more
+	to make sure the cube unfolds completely.
+
 	* src/event.c (handleEvent): Not constraints should be applied to
 	ConfigureRequests for withdrawn windows. (bnc 171143)
 

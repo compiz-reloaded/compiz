@@ -1129,7 +1129,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	size += cs->unfold * 8.0f;
 	size += powf (cs->unfold, 6) * 64.0;
-	size += powf (cs->unfold, 16) * 2048.0;
+	size += powf (cs->unfold, 16) * 8192.0;
 
 	sa.zTranslate = -cs->invert * (0.5f / tanf (M_PI / size));
 
