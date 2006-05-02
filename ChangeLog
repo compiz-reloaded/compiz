@@ -1,5 +1,10 @@
 2006-05-02  David Reveman  <davidr@novell.com>
 
+	* include/compiz.h:
+	* configure.ac: Don't require glproto, include necessary enums in
+	compiz.h.
+
+	* src/texture.c:
 	* include/compiz.h: Update to latest EXT_tfp spec. Requires an
 	X server that has also been updated.
 
