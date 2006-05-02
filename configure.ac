@@ -72,13 +72,14 @@ AC_SUBST(plugindir)
 imagedir=$datadir/compiz
 AC_SUBST(imagedir)
 
-COMPIZ_REQUIRES="libpng	    \
-		 xcomposite \
-		 xfixes	    \
-		 xdamage    \
-		 xrandr	    \
-		 ice	    \
-		 sm	    \
+COMPIZ_REQUIRES="libpng		  \
+		 xcomposite	  \
+		 xfixes		  \
+		 xdamage	  \
+		 xrandr		  \
+		 ice		  \
+		 sm		  \
+		 glproto >= 1.4.7 \
 		 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)

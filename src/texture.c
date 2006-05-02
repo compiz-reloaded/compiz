@@ -253,12 +253,10 @@ bindPixmapToTexture (CompScreen  *screen,
 	    texture->matrix.y0 = height;
 	}
 	break;
-    case GLX_NO_TEXTURE_EXT:
+    default:
 	fprintf (stderr, "%s: pixmap 0x%x can't be bound to texture\n",
 		 programName, (int) pixmap);
 
-	/* fall-through */
-    default:
 	glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
 	texture->pixmap = None;
 
@@ -272,18 +270,10 @@ bindPixmapToTexture (CompScreen  *screen,
 
     if (!strictBinding)
     {
-	if (!(*screen->bindTexImage) (screen->display->display,
-				      texture->pixmap,
-				      GLX_FRONT_LEFT_EXT,
-				      NULL))
-	{
-	    fprintf (stderr, "%s: glXBindTexImage failed\n", programName);
-
-	    glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
-	    texture->pixmap = None;
-
-	    return FALSE;
-	}
+	(*screen->bindTexImage) (screen->display->display,
+				 texture->pixmap,
+				 GLX_FRONT_LEFT_EXT,
+				 NULL);
     }
 
     texture->filter = GL_NEAREST;
@@ -336,18 +326,10 @@ enableTexture (CompScreen	 *screen,
 
     if (strictBinding)
     {
-	if (!(*screen->bindTexImage) (screen->display->display,
-				      texture->pixmap,
-				      GLX_FRONT_LEFT_EXT,
-				      NULL))
-	{
-	    fprintf (stderr, "%s: glXBindTexImage failed\n", programName);
-
-	    glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
-	    texture->pixmap = None;
-
-	    return;
-	}
+	(*screen->bindTexImage) (screen->display->display,
+				 texture->pixmap,
+				 GLX_FRONT_LEFT_EXT,
+				 NULL);
     }
 
     if (filter == COMP_TEXTURE_FILTER_FAST)

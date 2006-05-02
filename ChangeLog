@@ -1,3 +1,10 @@
+2006-05-02  David Reveman  <davidr@novell.com>
+
+	* include/compiz.h: Update to latest EXT_tfp spec. Requires an
+	X server that has also been updated.
+
+	* configure.ac: Require glproto >= 1.4.7 with final EXT_tfp tokens.
+
 2006-05-01  David Reveman  <davidr@novell.com>
 
 	* src/window.c (circulateWindow):
