@@ -498,27 +498,6 @@ gconfInitOption (CompDisplay *d,
     g_free (key);
 }
 
-static void
-gconfInitPlugin (CompDisplay *d,
-		 CompPlugin  *p)
-{
-    gchar *gconfpath, *key;
-
-    GCONF_DISPLAY (d);
-
-    gconfpath = g_strjoin ("/", APP_NAME "/plugins", p->vTable->name, NULL);
-
-    key = g_strconcat (gconfpath, "/short_description", NULL);
-    gconf_client_set_string (gd->client, key, p->vTable->shortDesc, NULL);
-    g_free (key);
-
-    key = g_strconcat (gconfpath, "/long_description", NULL);
-    gconf_client_set_string (gd->client, key, p->vTable->longDesc, NULL);
-    g_free (key);
-
-    g_free (gconfpath);
-}
-
 static Bool
 gconfSetDisplayOption (CompDisplay     *d,
 		       char	       *name,
@@ -659,9 +638,6 @@ gconfInitPluginForDisplay (CompPlugin  *p,
     UNWRAP (gd, d, initPluginForDisplay);
     status = (*d->initPluginForDisplay) (p, d);
     WRAP (gd, d, initPluginForDisplay, gconfInitPluginForDisplay);
-
-    if (status)
-	gconfInitPlugin (d, p);
 
     if (status && p->vTable->getDisplayOptions)
     {
@@ -851,7 +827,7 @@ CompPluginDep gconfDeps[] = {
     { CompPluginRuleBefore, "wobbly" },
     { CompPluginRuleBefore, "fade" },
     { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleBefore, "scale" }
 };
 
 CompPluginVTable gconfVTable = {

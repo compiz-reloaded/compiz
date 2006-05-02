@@ -2902,7 +2902,7 @@ wobblyFini (CompPlugin *p)
 CompPluginDep wobblyDeps[] = {
     { CompPluginRuleBefore, "fade" },
     { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleBefore, "scale" }
 };
 
 CompPluginVTable wobblyVTable = {

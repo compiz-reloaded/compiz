@@ -68,6 +68,13 @@ endif
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
 schema_DATA = compiz.schemas
 
+schema_modules = $(patsubst gconf%,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))
+
+compiz.schemas:
+	COMPIZ_SCHEMA_PLUGINS="$(schema_modules)" COMPIZ_SCHEMA_GENERAL=1 \
+	compiz --replace $(schema_modules) gconf-dump &&		  \
+	mv compiz.schemas.dump compiz.schemas
+
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)" ; then \
@@ -92,21 +99,23 @@ INCLUDES =			\
 
 moduledir = $(plugindir)
 
+# NOTE: the order here determines the default active_plugins order in
+# compiz.schemas
 module_LTLIBRARIES =		\
+	$(libgconf_module)	\
+	libdecoration.la	\
+	libwobbly.la		\
 	libfade.la		\
+	libminimize.la		\
 	libcube.la		\
 	librotate.la		\
 	libzoom.la		\
 	libscale.la		\
-	libwobbly.la		\
-	libminimize.la		\
 	libmove.la		\
 	libresize.la		\
-	libdecoration.la	\
+	$(libplace_module)	\
 	libswitcher.la		\
 	libwater.la		\
-	$(libgconf_module)	\
-	$(libgconf_dump_module) \
-	$(libplace_module)
+	$(libgconf_dump_module)
 
 EXTRA_DIST = $(schema_DATA)

@@ -1338,7 +1338,7 @@ CompPluginDep decorDeps[] = {
     { CompPluginRuleBefore, "wobbly" },
     { CompPluginRuleBefore, "fade" },
     { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleBefore, "scale" }
 };
 
 static CompPluginVTable decorVTable = {

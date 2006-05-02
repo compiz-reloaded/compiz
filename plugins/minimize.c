@@ -819,7 +819,7 @@ minFini (CompPlugin *p)
 
 CompPluginDep minDeps[] = {
     { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleBefore, "scale" }
 };
 
 static CompPluginVTable minVTable = {

@@ -711,7 +711,7 @@ fadeFini (CompPlugin *p)
 
 CompPluginDep fadeDeps[] = {
     { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleBefore, "scale" }
 };
 
 static CompPluginVTable fadeVTable = {

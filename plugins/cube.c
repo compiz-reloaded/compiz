@@ -1623,7 +1623,7 @@ cubeFini (CompPlugin *p)
 }
 
 CompPluginDep cubeDeps[] = {
-    { CompPluginRuleBefore, "expose" }
+    { CompPluginRuleBefore, "scale" }
 };
 
 CompPluginVTable cubeVTable = {

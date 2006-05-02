@@ -166,7 +166,7 @@ screenFiniPlugins (CompScreen *s)
     for (p = plugins; p; p = p->next)
     {
 	if (p->vTable->finiScreen)
-	    (*s->initPluginForScreen) (p, s);
+	    (*s->finiPluginForScreen) (p, s);
     }
 }
 

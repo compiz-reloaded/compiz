@@ -1,3 +1,18 @@
+2006-05-02  Dan Winship  <danw@novell.com>
+
+	* plugins/gconf-dump.c: rewrite to make compiz.schema regeneration
+	a little easier, and to make it possible to generate schema files
+	for third-party plugins. Include plugin descriptions and
+	dependency information in the schema.
+
+	* plugins/Makefile.am: add a rule to generate compiz.schemas
+
+	* plugins/compiz.schemas: regen
+
+	* plugins/cube.c, plugins/decoration.c, plugins/fade.c,
+	plugins/gconf.c, plugins/minimize.c, plugins/wobbly.c:
+	s/expose/scale/ in dependencies
+
 2006-05-02  David Reveman  <davidr@novell.com>
 
 	* include/compiz.h:
