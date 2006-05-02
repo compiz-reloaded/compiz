@@ -2180,9 +2180,6 @@ syncWindowPosition (CompWindow *w)
 	    XMoveWindow (w->screen->display->display, w->frame,
 			 w->attrib.x - w->input.left,
 			 w->attrib.y - w->input.top);
-
-	if (!w->attrib.override_redirect)
-	    sendConfigureNotify (w);
     }
 }
 

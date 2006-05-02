@@ -1,3 +1,11 @@
+2006-05-02  David Reveman  <davidr@novell.com>
+
+	* src/event.c (handleEvent): Not constraints should be applied to
+	ConfigureRequests for withdrawn windows. (bnc 171143)
+
+	* src/window.c (syncWindowPosition): We never need to send synthetic
+	ConfigureNotify events as we're not reparenting windows.
+
 2006-05-02  Dan Winship  <danw@novell.com>
 
 	* plugins/gconf-dump.c: rewrite to make compiz.schema regeneration

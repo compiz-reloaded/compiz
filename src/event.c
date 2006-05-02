@@ -1157,9 +1157,7 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
-		if ((w->sizeHints.flags & PPosition) ||
-		    (w->sizeHints.flags & USPosition))
-		    sendConfigureNotify (w);
+		w->mapNum = w->screen->mapNum++;
 
 		XMapWindow (d->display, event->xmaprequest.window);
 
@@ -1176,7 +1174,7 @@ handleEvent (CompDisplay *d,
 	break;
     case ConfigureRequest:
 	w = findWindowAtDisplay (d, event->xconfigurerequest.window);
-	if (w)
+	if (w && w->mapNum)
 	{
 	    XWindowChanges xwc;
 
@@ -1188,7 +1186,24 @@ handleEvent (CompDisplay *d,
 	    xwc.height       = event->xconfigurerequest.height;
 	    xwc.border_width = event->xconfigurerequest.border_width;
 
-	    moveResizeWindow (w, &xwc,  event->xconfigurerequest.value_mask, 0);
+	    moveResizeWindow (w, &xwc, event->xconfigurerequest.value_mask, 0);
+	}
+	else
+	{
+	    XWindowChanges xwc;
+	    unsigned int   xwcm;
+
+	    xwcm = event->xconfigurerequest.value_mask &
+		(CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+
+	    xwc.x	     = event->xconfigurerequest.x;
+	    xwc.y	     = event->xconfigurerequest.y;
+	    xwc.width	     = event->xconfigurerequest.width;
+	    xwc.height	     = event->xconfigurerequest.height;
+	    xwc.border_width = event->xconfigurerequest.border_width;
+
+	    XConfigureWindow (d->display, event->xconfigurerequest.window,
+			      xwcm, &xwc);
 	}
 	break;
     case CirculateRequest:
