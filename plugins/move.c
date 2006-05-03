@@ -67,6 +67,8 @@ typedef struct _MoveDisplay {
     HandleEventProc handleEvent;
 
     CompWindow *w;
+    int	       x;
+    int	       y;
     KeyCode    key[NUM_KEYS];
 } MoveDisplay;
 
@@ -226,6 +228,8 @@ moveInitiate (CompWindow   *w,
 	return;
 
     md->w = w;
+    md->x = 0;
+    md->y = 0;
 
     lastPointerX = x;
     lastPointerY = y;
@@ -277,28 +281,26 @@ moveHandleMotionEvent (CompScreen *s,
     if (ms->grabIndex)
     {
 	CompWindow *w;
-	int	   pointerDx, pointerDy, dx, dy, wx, wy;
-	Bool	   move = TRUE;
-	Bool	   warp = TRUE;
+	int	   dx, dy;
 
 	MOVE_DISPLAY (s->display);
 
 	w = md->w;
 
-	pointerDx = xRoot - lastPointerX;
-	pointerDy = yRoot - lastPointerY;
+	md->x += xRoot - lastPointerX;
+	md->y += yRoot - lastPointerY;
 
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
-	    wx = wy = dx = dy = 0;
+	    dx = dy = 0;
 	}
 	else
 	{
 	    unsigned int state = w->state;
 	    int		 min, max;
 
-	    wx = dx = pointerDx;
-	    wy = dy = pointerDy;
+	    dx = md->x;
+	    dy = md->y;
 
 	    if (ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y].value.b)
 	    {
@@ -309,17 +311,12 @@ moveHandleMotionEvent (CompScreen *s,
 		    dy = min - w->attrib.y;
 		else if (w->attrib.y + dy > max)
 		    dy = max - w->attrib.y;
-
-		wy = dy;
 	    }
 
 	    if (ms->opt[MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED].value.b)
 	    {
-		if ((w->state & CompWindowStateMaximizedVertMask) &&
-		    (w->state & CompWindowStateMaximizedHorzMask))
+		if (w->state & CompWindowStateMaximizedVertMask)
 		{
-		    warp = FALSE;
-
 		    if (yRoot - ms->snapOffY >= SNAP_OFF)
 		    {
 			w->saveMask |= CWX | CWY;
@@ -327,11 +324,13 @@ moveHandleMotionEvent (CompScreen *s,
 			w->saveWc.x = xRoot - (w->saveWc.width >> 1);
 			w->saveWc.y = yRoot + (w->input.top >> 1);
 
-			move = FALSE;
+			md->x = md->y = 0;
 
 			unmaximizeWindow (w);
 
 			ms->snapOffY = ms->snapBackY;
+
+			return;
 		    }
 		}
 		else if ((ms->origState & CompWindowStateMaximizedVertMask) &&
@@ -341,16 +340,16 @@ moveHandleMotionEvent (CompScreen *s,
 		    {
 			if (!otherScreenGrabExist (s, "move", 0))
 			{
+			    int wy;
+
 			    maximizeWindow (w);
 
 			    wy  = s->workArea.y + (w->input.top >> 1);
 			    wy += w->sizeHints.height_inc >> 1;
-			    wy -= lastPointerY;
 
-			    if (wy > 0)
-				wy = 0;
+			    warpPointer (s->display, 0, wy - pointerY);
 
-			    move = FALSE;
+			    return;
 			}
 		    }
 		}
@@ -362,13 +361,10 @@ moveHandleMotionEvent (CompScreen *s,
 		max = s->workArea.y + s->workArea.height -
 		    w->input.bottom - w->height;
 
-		if (w->attrib.y + pointerDy < min)
+		if (w->attrib.y + dy < min)
 		    dy = min - w->attrib.y;
-		else if (w->attrib.y + pointerDy > max)
+		else if (w->attrib.y + dy > max)
 		    dy = max - w->attrib.y;
-
-		if (warp)
-		    wy = dy;
 	    }
 
 	    if (state & CompWindowStateMaximizedHorzMask)
@@ -380,23 +376,17 @@ moveHandleMotionEvent (CompScreen *s,
 		max = s->workArea.x + s->workArea.width -
 		    w->input.right - w->width;
 
-		if (w->attrib.x + pointerDx < min)
+		if (w->attrib.x + dx < min)
 		    dx = min - w->attrib.x;
-		else if (w->attrib.x + pointerDx > max)
+		else if (w->attrib.x + dx > max)
 		    dx = max - w->attrib.x;
-
-		if (warp)
-		    wx = dx;
 	    }
 	}
 
-	if (move)
-	    moveWindow (md->w, dx, dy, TRUE, FALSE);
+	moveWindow (md->w, dx, dy, TRUE, FALSE);
 
-	if (wx != pointerDx || wy != pointerDy)
-	    warpPointer (s->display,
-			 (lastPointerX + wx) - pointerX,
-			 (lastPointerY + wy) - pointerY);
+	md->x -= dx;
+	md->y -= dy;
     }
 }
 

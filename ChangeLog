@@ -1,5 +1,9 @@
 2006-05-03  David Reveman  <davidr@novell.com>
 
+	* plugins/move.c:
+	* plugins/resize.c (resizeHandleMotionEvent): Don't constrain the
+	cursor.
+
 	* plugins/rotate.c (rotateHandleEvent): Use defaultViewportForWindow
 	to figure out which viewport we should move to. (bnc 152677)
 

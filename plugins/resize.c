@@ -409,7 +409,7 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	if (pointerDx || pointerDy)
 	{
-	    int w, h, dx, dy;
+	    int w, h;
 
 	    w = rd->width;
 	    h = rd->height;
@@ -426,29 +426,10 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	    resizeConstrainMinMax (rd->w, w, h, &w, &h);
 
-	    if (rd->mask & ResizeLeftMask)
-		dx = rd->width - w;
-	    else if (rd->mask & ResizeRightMask)
-		dx = w - rd->width;
-	    else
-		dx = 0;
-
-	    if (rd->mask & ResizeUpMask)
-		dy = rd->height - h;
-	    else if (rd->mask & ResizeDownMask)
-		dy = h - rd->height;
-	    else
-		dy = 0;
-
 	    rd->width  = w;
 	    rd->height = h;
 
 	    resizeUpdateWindowSize (s->display);
-
-	    if (dx != pointerDx || dy != pointerDy)
-		warpPointer (s->display,
-			     (lastPointerX + dx) - pointerX,
-			     (lastPointerY + dy) - pointerY);
 	}
     }
 }
