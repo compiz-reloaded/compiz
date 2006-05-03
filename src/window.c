@@ -2747,12 +2747,13 @@ addWindowSizeChanges (CompWindow     *w,
 		      XWindowChanges *xwc)
 {
     int mask = 0;
+    int x;
+
+    x = (defaultViewportForWindow (w) - w->screen->x) * w->screen->width;
 
     if (w->type & CompWindowTypeFullscreenMask)
     {
-	saveWindowGeometry (w,
-			    CWX | CWY | CWWidth | CWHeight |
-			    CWBorderWidth);
+	saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
 
 	xwc->width	  = w->screen->width;
 	xwc->height	  = w->screen->height;
@@ -2797,7 +2798,7 @@ addWindowSizeChanges (CompWindow     *w,
     {
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
-	    xwc->x = 0;
+	    xwc->x = x;
 	    xwc->y = 0;
 
 	    mask |= CWX | CWY;
@@ -2842,16 +2843,16 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
-		if (w->attrib.x < w->screen->workArea.x + w->input.left)
+		if (w->attrib.x < x + w->screen->workArea.x + w->input.left)
 		{
-		    xwc->x = w->screen->workArea.x + w->input.left;
+		    xwc->x = x + w->screen->workArea.x + w->input.left;
 		    mask |= CWX;
 		}
 		else
 		{
 		    width = xwc->width + w->attrib.border_width * 2;
 
-		    max = w->screen->workArea.x + w->screen->workArea.width;
+		    max = x + w->screen->workArea.x + w->screen->workArea.width;
 		    if (w->attrib.x + width + w->input.right > max)
 		    {
 			xwc->x = max - width - w->input.right;
@@ -3008,13 +3009,8 @@ updateWindowAttributes (CompWindow *w,
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
-    mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
-
-    /* only update fullscreen and maximized size if window is visible on
-       current viewport. Size is updated once we switch to the windows
-       viewport. */
-    if (w->attrib.x < w->screen->width && w->attrib.x + w->width > 0)
-	mask |= addWindowSizeChanges (w, &xwc);
+    mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+    mask |= addWindowSizeChanges (w, &xwc);
 
     if (!mask)
 	return;
@@ -3503,4 +3499,26 @@ redirectWindow (CompWindow *w)
 
     w->redirected = TRUE;
     w->screen->overlayWindowCount--;
+}
+
+/* Returns the current viewport for a window. If the window spans more than
+   one viewport the most appropriate viewport is returned. How the most
+   appropriate viewport is computed can be made optional if necessary. It is
+   currently computed as the viewport where the center of the window is
+   located, except for when the window is visible in the current viewport as
+   the current viewport is then always returned. */
+int
+defaultViewportForWindow (CompWindow *w)
+{
+    CompScreen *s = w->screen;
+    int	       x;
+
+    if (w->attrib.x < s->width && w->attrib.x + w->width > 0)
+	return s->x;
+
+    x = w->attrib.x + (w->width >> 1);
+    if (x < 0)
+	return s->x + ((x / s->width) - 1) % s->size;
+    else
+	return s->x + (x / s->width) % s->size;
 }

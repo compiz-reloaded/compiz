@@ -1828,6 +1828,9 @@ unredirectWindow (CompWindow *w);
 void
 redirectWindow (CompWindow *w);
 
+int
+defaultViewportForWindow (CompWindow *w);
+
 
 /* plugin.c */
 

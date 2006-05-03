@@ -1177,6 +1177,8 @@ rotateHandleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
+		int dx;
+
 		ROTATE_SCREEN (w->screen);
 
 		s = w->screen;
@@ -1188,19 +1190,15 @@ rotateHandleEvent (CompDisplay *d,
 		rs->moving = FALSE;
 		rs->moveTo = 0.0f;
 
-		if (w->attrib.x >= s->width || w->attrib.x + w->width <= 0)
+		dx = defaultViewportForWindow (w) - s->x;
+		if (dx)
 		{
 		    Window	 win;
-		    int		 i, x, y, dx;
+		    int		 i, x, y;
 		    unsigned int ui;
 
 		    XQueryPointer (d->display, s->root,
 				   &win, &win, &x, &y, &i, &i, &ui);
-
-		    if (w->attrib.x >= s->width)
-			dx = w->attrib.x / s->width;
-		    else
-			dx = ((w->attrib.x + w->width) / s->width) - 1;
 
 		    if (dx > (s->size + 1) / 2)
 			dx -= s->size;

@@ -1,3 +1,16 @@
+2006-05-03  David Reveman  <davidr@novell.com>
+
+	* plugins/rotate.c (rotateHandleEvent): Use defaultViewportForWindow
+	to figure out which viewport we should move to. (bnc 152677)
+
+	* src/window.c (addWindowSizeChanges): Offset x coordinate with
+	default viewport coordinate. (bnc 171465)
+	(updateWindowAttributes): Always add windows size changes. (bnc 171465)
+
+	* include/compiz.h:
+	* src/window.c (defaultViewportForWindow): Add defaultViewportForWindow
+	function that computes the default viewport for a window.
+
 2006-05-02  David Reveman  <davidr@novell.com>
 
 	* plugins/cube.c (cubePaintTransformedScreen): Bump up size a bit more
