@@ -1,3 +1,8 @@
+2006-05-04  David Reveman  <davidr@novell.com>
+
+	* src/window.c (getModalTransient): Avoid infinite recursion when more
+	than one group transient got modal state.
+
 2006-05-03  David Reveman  <davidr@novell.com>
 
 	* plugins/move.c:

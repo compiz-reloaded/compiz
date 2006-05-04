@@ -2312,6 +2312,11 @@ getModalTransient (CompWindow *window)
 
     if (modalTransient == window)
     {
+	/* don't look for group transients with modal state if current window
+	   has modal state */
+	if (window->state & CompWindowStateModalMask)
+	    return NULL;
+
 	for (w = window->screen->reverseWindows; w; w = w->prev)
 	{
 	    if (w == modalTransient || w->mapNum == 0)
