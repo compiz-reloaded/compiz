@@ -128,6 +128,8 @@ typedef struct _Model {
 #define WOBBLY_MIN_GRID_SIZE_MIN      4
 #define WOBBLY_MIN_GRID_SIZE_MAX      128
 
+#define WOBBLY_VISUAL_BELL_DEFAULT FALSE
+
 typedef enum {
     WobblyEffectNone = 0,
     WobblyEffectShiver
@@ -189,7 +191,8 @@ typedef struct _WobblyDisplay {
 #define WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE  9
 #define WOBBLY_SCREEN_OPTION_SNAP	       10
 #define WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT   11
-#define WOBBLY_SCREEN_OPTION_NUM	       12
+#define WOBBLY_SCREEN_OPTION_VISUAL_BELL       12
+#define WOBBLY_SCREEN_OPTION_NUM	       13
 
 typedef struct _WobblyScreen {
     int	windowPrivateIndex;
@@ -365,6 +368,7 @@ wobblySetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	break;
     case WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT:
+    case WOBBLY_SCREEN_OPTION_VISUAL_BELL:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
     default:
@@ -508,6 +512,13 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o->longDesc	  = "Wobble effect when maximizing and unmaximizing windows";
     o->type	  = CompOptionTypeBool;
     o->value.b    = WOBBLY_MAXIMIZE_EFFECT_DEFAULT;
+
+    o = &ws->opt[WOBBLY_SCREEN_OPTION_VISUAL_BELL];
+    o->name	  = "visual_bell";
+    o->shortDesc  = "Visual Bell";
+    o->longDesc	  = "Wobble effect on system beep";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = WOBBLY_VISUAL_BELL_DEFAULT;
 }
 
 static void
@@ -2259,7 +2270,46 @@ wobblyHandleEvent (CompDisplay *d,
 		}
 	    }
 	}
+	break;
     default:
+	if (event->type == d->xkbEvent)
+	{
+	    XkbAnyEvent *xkbEvent = (XkbAnyEvent *) event;
+
+	    if (xkbEvent->xkb_type == XkbBellNotify)
+	    {
+		XkbBellNotifyEvent *xkbBellEvent = (XkbBellNotifyEvent *)
+		    xkbEvent;
+
+		w = findWindowAtDisplay (d, xkbBellEvent->window);
+		if (!w)
+		    w = findWindowAtDisplay (d, d->activeWindow);
+
+		if (w)
+		{
+		    WOBBLY_SCREEN (w->screen);
+
+		    if (ws->opt[WOBBLY_SCREEN_OPTION_VISUAL_BELL].value.b &&
+			isWobblyWin (w)					  &&
+			wobblyEnsureModel (w))
+		    {
+			WOBBLY_WINDOW (w);
+
+			modelSetMiddleAnchor (ww->model,
+					      WIN_X (w), WIN_Y (w),
+					      WIN_W (w), WIN_H (w));
+			modelAdjustObjectsForShiver (ww->model,
+						     WIN_X (w), WIN_Y (w),
+						     WIN_W (w), WIN_H (w));
+
+			ww->wobbly |= WobblyInitial;
+			ws->wobblyWindows |= ww->wobbly;
+
+			damagePendingOnScreen (w->screen);
+		    }
+		}
+	    }
+	}
 	break;
     }
 

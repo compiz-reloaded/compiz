@@ -65,6 +65,8 @@
 #define WATER_RAIN_DELAY_MIN	 0
 #define WATER_RAIN_DELAY_MAX	 3600000 /* an hour is probably long enough */
 
+#define WATER_VISUAL_BELL_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _WaterDisplay {
@@ -76,7 +78,8 @@ typedef struct _WaterDisplay {
 #define WATER_SCREEN_OPTION_TOGGLE_RAIN  1
 #define WATER_SCREEN_OPTION_OFFSET_SCALE 2
 #define WATER_SCREEN_OPTION_RAIN_DELAY	 3
-#define WATER_SCREEN_OPTION_NUM          4
+#define WATER_SCREEN_OPTION_VISUAL_BELL	 4
+#define WATER_SCREEN_OPTION_NUM          5
 
 typedef struct _WaterScreen {
     int	waterTime;
@@ -188,6 +191,10 @@ waterSetScreenOption (CompScreen      *screen,
 	    }
 	    return TRUE;
 	}
+	break;
+    case WATER_SCREEN_OPTION_VISUAL_BELL:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -239,6 +246,13 @@ waterScreenInitOptions (WaterScreen *ws,
     o->value.i	  = WATER_RAIN_DELAY_DEFAULT;
     o->rest.i.min = WATER_RAIN_DELAY_MIN;
     o->rest.i.max = WATER_RAIN_DELAY_MAX;
+
+    o = &ws->opt[WATER_SCREEN_OPTION_VISUAL_BELL];
+    o->name	  = "visual_bell";
+    o->shortDesc  = "Visual Bell";
+    o->longDesc	  = "Water effect on system beep";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = WATER_VISUAL_BELL_DEFAULT;
 }
 
 static const char *saturateFpString =
@@ -1369,7 +1383,43 @@ waterHandleEvent (CompDisplay *d,
 		}
 	    }
 	}
+	break;
     default:
+	if (event->type == d->xkbEvent)
+	{
+	    XkbAnyEvent *xkbEvent = (XkbAnyEvent *) event;
+
+	    if (xkbEvent->xkb_type == XkbBellNotify)
+	    {
+		CompWindow	   *w;
+		XkbBellNotifyEvent *xkbBellEvent = (XkbBellNotifyEvent *)
+		    xkbEvent;
+
+		w = findWindowAtDisplay (d, xkbBellEvent->window);
+		if (!w)
+		    w = findWindowAtDisplay (d, d->activeWindow);
+
+		if (w)
+		{
+		    WATER_SCREEN (w->screen);
+
+		    if (ws->opt[WATER_SCREEN_OPTION_VISUAL_BELL].value.b)
+		    {
+			XPoint p[2];
+
+			p[0].x = w->attrib.x - w->input.left;
+			p[0].y = w->attrib.y - (w->input.top >> 2);
+
+			p[1].x = w->attrib.x + w->width + w->input.right;
+			p[1].y = p[0].y;
+
+			waterVertices (w->screen, GL_LINES, p, 2, 0.15f);
+
+			damageScreen (w->screen);
+		    }
+		}
+	    }
+	}
 	break;
     }
 

@@ -136,6 +136,8 @@ int pointerY     = 0;
 
 #define RAISE_ON_CLICK_DEFAULT TRUE
 
+#define AUDIBLE_BELL_DEFAULT TRUE
+
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static char *textureFilter[] = { "Fast", "Good", "Best" };
@@ -440,6 +442,13 @@ compDisplayInitOptions (CompDisplay *display,
     o->longDesc	      = "Raise windows when clicked";
     o->type	      = CompOptionTypeBool;
     o->value.b	      = RAISE_ON_CLICK_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_AUDIBLE_BELL];
+    o->name	      = "audible_bell";
+    o->shortDesc      = "Audible Bell";
+    o->longDesc	      = "Audible system beep";
+    o->type	      = CompOptionTypeBool;
+    o->value.b	      = AUDIBLE_BELL_DEFAULT;
 }
 
 CompOption *
@@ -469,6 +478,17 @@ removeDisplayBinding (CompDisplay *display, CompBinding *binding)
 
     for (s = display->screens; s; s = s->next)
 	removeScreenBinding (s, binding);
+}
+
+static void
+setAudibleBell (CompDisplay *display,
+		Bool	    audible)
+{
+    if (display->xkbExtension)
+	XkbChangeEnabledControls (display->display,
+				  XkbUseCoreKbd,
+				  XkbAudibleBellMask,
+				  audible ? XkbAudibleBellMask : 0);
 }
 
 static Bool
@@ -568,6 +588,12 @@ setDisplayOption (CompDisplay     *display,
 		return TRUE;
 	}
 	break;
+    case COMP_DISPLAY_OPTION_AUDIBLE_BELL:
+	if (compSetBoolOption (o, value))
+	{
+	    setAudibleBell (display, o->value.b);
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -1596,6 +1622,7 @@ addDisplay (char *name,
     Window	focus;
     int		revertTo, i;
     int		compositeMajor, compositeMinor;
+    int		xkbOpcode;
 
     d = &compDisplay;
 
@@ -1840,6 +1867,25 @@ addDisplay (char *name,
 					      &d->shapeEvent,
 					      &d->shapeError);
 
+    d->xkbExtension = XkbQueryExtension (dpy,
+					 &xkbOpcode,
+					 &d->xkbEvent,
+					 &d->xkbError,
+					 NULL, NULL);
+    if (d->xkbExtension)
+    {
+	XkbSelectEvents (dpy,
+			 XkbUseCoreKbd,
+			 XkbBellNotifyMask,
+			 XkbBellNotifyMask);
+    }
+    else
+    {
+	fprintf (stderr, "%s: No XKB extension\n", programName);
+
+	d->xkbEvent = d->xkbError = -1;
+    }
+
     compDisplays = d;
 
     for (i = 0; i < ScreenCount (dpy); i++)
@@ -1997,6 +2043,8 @@ addDisplay (char *name,
 		 programName, XDisplayName (name));
 	return FALSE;
     }
+
+    setAudibleBell (d, d->opt[COMP_DISPLAY_OPTION_AUDIBLE_BELL].value.b);
 
     XGetInputFocus (dpy, &focus, &revertTo);
 

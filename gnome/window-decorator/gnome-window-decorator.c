@@ -76,6 +76,24 @@
 #define COMPIZ_SHADOW_OFFSET_Y_KEY \
     GCONF_DIR "/shadow_offset_y"
 
+#define META_AUDIBLE_BELL_KEY	       \
+    METACITY_GCONF_DIR "/audible_bell"
+
+#define META_VISUAL_BELL_KEY	      \
+    METACITY_GCONF_DIR "/visual_bell"
+
+#define META_VISUAL_BELL_TYPE_KEY	   \
+    METACITY_GCONF_DIR "/visual_bell_type"
+
+#define COMPIZ_AUDIBLE_BELL_KEY				   \
+    "/apps/compiz/general/allscreens/options/audible_bell"
+
+#define COMPIZ_VISUAL_BELL_KEY				    \
+    "/apps/compiz/plugins/fade/screen0/options/visual_bell"
+
+#define COMPIZ_FULLSCREEN_VISUAL_BELL_KEY			       \
+    "/apps/compiz/plugins/fade/screen0/options/fullscreen_visual_bell"
+
 #define STROKE_ALPHA 0.6
 
 #define ICON_SPACE 20
@@ -4761,6 +4779,47 @@ shadow_settings_changed (GConfClient *client)
 }
 
 static void
+bell_settings_changed (GConfClient *client)
+{
+    gboolean audible, visual, fullscreen;
+    gchar    *type;
+
+    audible = gconf_client_get_bool (client,
+				     META_AUDIBLE_BELL_KEY,
+				     NULL);
+
+    visual = gconf_client_get_bool (client,
+				    META_VISUAL_BELL_KEY,
+				    NULL);
+
+    type = gconf_client_get_string (client,
+				    META_VISUAL_BELL_TYPE_KEY,
+				    NULL);
+
+    if (type && strcmp (type, "fullscreen") == 0)
+	fullscreen = TRUE;
+    else
+	fullscreen = FALSE;
+
+    g_free (type);
+
+    gconf_client_set_bool (client,
+			   COMPIZ_AUDIBLE_BELL_KEY,
+			   audible,
+			   NULL);
+
+    gconf_client_set_bool (client,
+			   COMPIZ_VISUAL_BELL_KEY,
+			   visual,
+			   NULL);
+
+    gconf_client_set_bool (client,
+			   COMPIZ_FULLSCREEN_VISUAL_BELL_KEY,
+			   fullscreen,
+			   NULL);
+}
+
+static void
 value_changed (GConfClient *client,
 	       const gchar *key,
 	       GConfValue  *value,
@@ -4790,6 +4849,12 @@ value_changed (GConfClient *client,
     {
 	if (shadow_settings_changed (client))
 	    changed = TRUE;
+    }
+    else if (strcmp (key, META_AUDIBLE_BELL_KEY)     == 0 ||
+	     strcmp (key, META_VISUAL_BELL_KEY)      == 0 ||
+	     strcmp (key, META_VISUAL_BELL_TYPE_KEY) == 0)
+    {
+	bell_settings_changed (client);
     }
 
     if (changed)
@@ -4870,6 +4935,7 @@ init_settings (WnckScreen *screen)
     titlebar_font_changed (gconf);
     update_titlebar_font ();
     shadow_settings_changed (gconf);
+    bell_settings_changed (gconf);
     update_shadow ();
 
     return TRUE;

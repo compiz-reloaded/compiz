@@ -46,6 +46,10 @@ static char *winType[] = {
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
+#define FADE_VISUAL_BELL_DEFAULT FALSE
+
+#define FADE_FULLSCREEN_VISUAL_BELL_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _FadeDisplay {
@@ -54,9 +58,11 @@ typedef struct _FadeDisplay {
     int		    displayModals;
 } FadeDisplay;
 
-#define FADE_SCREEN_OPTION_FADE_SPEED     0
-#define FADE_SCREEN_OPTION_WINDOW_TYPE    1
-#define FADE_SCREEN_OPTION_NUM            2
+#define FADE_SCREEN_OPTION_FADE_SPEED		  0
+#define FADE_SCREEN_OPTION_WINDOW_TYPE		  1
+#define FADE_SCREEN_OPTION_VISUAL_BELL		  2
+#define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL 3
+#define FADE_SCREEN_OPTION_NUM			  4
 
 typedef struct _FadeScreen {
     int			   windowPrivateIndex;
@@ -146,6 +152,11 @@ fadeSetScreenOption (CompScreen      *screen,
 	    fs->wMask &= ~CompWindowTypeDesktopMask;
 	    return TRUE;
 	}
+	break;
+    case FADE_SCREEN_OPTION_VISUAL_BELL:
+    case FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -183,6 +194,20 @@ fadeScreenInitOptions (FadeScreen *fs)
     o->rest.s.nString    = nWindowTypeString;
 
     fs->wMask = compWindowTypeMaskFromStringList (&o->value);
+
+    o = &fs->opt[FADE_SCREEN_OPTION_VISUAL_BELL];
+    o->name	  = "visual_bell";
+    o->shortDesc  = "Visual Bell";
+    o->longDesc	  = "Fade effect on system beep";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = FADE_VISUAL_BELL_DEFAULT;
+
+    o = &fs->opt[FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL];
+    o->name	  = "fullscreen_visual_bell";
+    o->shortDesc  = "Fullscreen Visual Bell";
+    o->longDesc	  = "Fullscreen fade effect on system beep";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = FADE_FULLSCREEN_VISUAL_BELL_DEFAULT;
 }
 
 static void
@@ -477,7 +502,64 @@ fadeHandleEvent (CompDisplay *d,
 	    if (w->state & CompWindowStateDisplayModalMask)
 		fadeAddDisplayModal (d, w);
 	}
+	break;
     default:
+	if (event->type == d->xkbEvent)
+	{
+	    XkbAnyEvent *xkbEvent = (XkbAnyEvent *) event;
+
+	    if (xkbEvent->xkb_type == XkbBellNotify)
+	    {
+		XkbBellNotifyEvent *xkbBellEvent = (XkbBellNotifyEvent *)
+		    xkbEvent;
+
+		w = findWindowAtDisplay (d, xkbBellEvent->window);
+		if (!w)
+		    w = findWindowAtDisplay (d, d->activeWindow);
+
+		if (w)
+		{
+		    CompScreen *s = w->screen;
+
+		    FADE_SCREEN (s);
+
+		    if (fs->opt[FADE_SCREEN_OPTION_VISUAL_BELL].value.b)
+		    {
+			int option;
+
+			option = FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL;
+			if (fs->opt[option].value.b)
+			{
+			    for (w = s->windows; w; w = w->next)
+			    {
+				if (w->destroyed)
+				    continue;
+
+				if (w->attrib.map_state != IsViewable)
+				    continue;
+
+				if (w->damaged)
+				{
+				    FADE_WINDOW (w);
+
+				    fw->brightness = w->paint.brightness / 2;
+				}
+			    }
+
+			    damageScreen (s);
+			}
+			else
+			{
+			    FADE_WINDOW (w);
+
+			    fw->brightness = w->paint.brightness / 2;
+
+			    addWindowDamage (w);
+			}
+		    }
+		}
+	    }
+	}
 	break;
     }
 

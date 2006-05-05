@@ -34,6 +34,7 @@
 #include <X11/extensions/Xdamage.h>
 #include <X11/extensions/sync.h>
 #include <X11/Xregion.h>
+#include <X11/XKBlib.h>
 
 #define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
@@ -394,7 +395,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_WINDOW_MENU                   43
 #define COMP_DISPLAY_OPTION_SHOW_DESKTOP                  44
 #define COMP_DISPLAY_OPTION_RAISE_ON_CLICK                45
-#define COMP_DISPLAY_OPTION_NUM                           46
+#define COMP_DISPLAY_OPTION_AUDIBLE_BELL                  46
+#define COMP_DISPLAY_OPTION_NUM                           47
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -434,6 +436,9 @@ struct _CompDisplay {
 
     Bool shapeExtension;
     int  shapeEvent, shapeError;
+
+    Bool xkbExtension;
+    int  xkbEvent, xkbError;
 
     SnDisplay *snDisplay;
 

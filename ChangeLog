@@ -1,3 +1,15 @@
+2006-05-05  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c: Forward
+	metacity's bell settings to compiz.
+
+	* plugins/water.c:
+	* plugins/wobbly.c:
+	* plugins/fade.c: Add visual bell.
+
+	* include/compiz.h:
+	* src/display.c: Add audible bell option.
+
 2006-05-04  David Reveman  <davidr@novell.com>
 
 	* src/window.c (getModalTransient): Avoid infinite recursion when more
