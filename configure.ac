@@ -15,6 +15,13 @@ AC_PROG_LIBTOOL
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 
+ALL_LINGUAS=""
+AM_GLIB_GNU_GETTEXT
+IT_PROG_INTLTOOL
+GETTEXT_PACKAGE=compiz
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
+AC_SUBST(GETTEXT_PACKAGE)
+
 if test "x$GCC" = "xyes"; then
   case " $CFLAGS " in
   *[[\ \	]]-Wall[[\ \	]]*) ;;
@@ -215,6 +222,7 @@ gnome/window-decorator/Makefile
 gnome/compiz.desktop
 kde/Makefile
 kde/window-decorator/Makefile
+po/Makefile.in
 ])
 
 echo ""

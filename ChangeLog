@@ -1,5 +1,15 @@
 2006-05-05  Dan Winship  <danw@novell.com>
 
+	* Makefile.am: 
+	* autogen.sh:
+	* configure.ac: require intltool for option-description
+	translation
+
+	* plugins/Makefile.am: translate compiz.schemas.in into
+	compiz.schemas
+
+2006-05-05  Dan Winship  <danw@novell.com>
+
 	* src/display.c (COMMAND_OPTION): Put numbers into the shortDescs
 	of the command and run_command options
 

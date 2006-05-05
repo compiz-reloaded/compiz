@@ -22,9 +22,9 @@
  */
 
 /* This is a hack to generate GConf schema files for compiz and its
- * plugins. To regenerate the base compiz.schemas file, just do
+ * plugins. To regenerate the base compiz.schemas.in file, just do
  *
- *   rm compiz.schemas; make compiz.schemas
+ *   rm compiz.schemas.in; make compiz.schemas.in
  *
  * To generate a schema file for third-party plugins, do something
  * like:

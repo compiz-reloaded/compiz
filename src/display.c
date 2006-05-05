@@ -253,8 +253,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAIN_MENU];
     o->name			  = "main_menu";
-    o->shortDesc		  = "Main Menu";
-    o->longDesc			  = "Open main menu";
+    o->shortDesc		  = "Show Main Menu";
+    o->longDesc			  = "Show the main menu";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = MAIN_MENU_MODIFIERS_DEFAULT;
@@ -308,7 +308,7 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
     o->name			  = "show_desktop";
-    o->shortDesc		  = "Show Desktop";
+    o->shortDesc		  = "Hide all windows and focus desktop";
     o->longDesc			  = "Hide all windows and focus desktop";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
