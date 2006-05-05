@@ -653,6 +653,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/audible_bell</key>
+            <applyto>/apps/compiz/general/allscreens/options/audible_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Audible Bell</short>
+                <long>
+                    Audible system beep
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/screen0/options/detect_refresh_rate</key>
             <applyto>/apps/compiz/general/screen0/options/detect_refresh_rate</applyto>
             <owner>compiz</owner>
@@ -1107,6 +1121,34 @@
                 <short>Window Types</short>
                 <long>
                     Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/fade/screen0/options/visual_bell</key>
+            <applyto>/apps/compiz/plugins/fade/screen0/options/visual_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Visual Bell</short>
+                <long>
+                    Fade effect on system beep
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/fade/screen0/options/fullscreen_visual_bell</key>
+            <applyto>/apps/compiz/plugins/fade/screen0/options/fullscreen_visual_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Fullscreen Visual Bell</short>
+                <long>
+                    Fullscreen fade effect on system beep
                 </long>
             </locale>
         </schema>
@@ -2323,6 +2365,20 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/screen0/options/visual_bell</key>
+            <applyto>/apps/compiz/plugins/water/screen0/options/visual_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Visual Bell</short>
+                <long>
+                    Water effect on system beep
+                </long>
+            </locale>
+        </schema>
+
         <!-- wobbly options -->
 
         <schema>
@@ -2522,6 +2578,20 @@
                 <short>Maximize Effect</short>
                 <long>
                     Wobble effect when maximizing and unmaximizing windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/visual_bell</key>
+            <applyto>/apps/compiz/plugins/wobbly/screen0/options/visual_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Visual Bell</short>
+                <long>
+                    Wobble effect on system beep
                 </long>
             </locale>
         </schema>
