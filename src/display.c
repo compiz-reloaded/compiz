@@ -264,8 +264,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_DIALOG];
     o->name			  = "run";
-    o->shortDesc		  = "Run";
-    o->longDesc			  = "Run application";
+    o->shortDesc		  = "Run Dialog";
+    o->longDesc			  = "Show Run Application dialog";
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = RUN_DIALOG_MODIFIERS_DEFAULT;
@@ -320,7 +320,7 @@ compDisplayInitOptions (CompDisplay *display,
 #define COMMAND_OPTION(num, cname, rname)				    \
     o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
     o->name			  = cname;				    \
-    o->shortDesc		  = "Command line";			    \
+    o->shortDesc		  = "Command line " #num;		    \
     o->longDesc			  = "Command line to be executed in shell " \
 	"when " rname " is invoked";					    \
     o->type			  = CompOptionTypeString;		    \
@@ -329,7 +329,7 @@ compDisplayInitOptions (CompDisplay *display,
     o->rest.s.nString		  = 0;					    \
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num ];		    \
     o->name			  =  rname;				    \
-    o->shortDesc		  = "Run command";			    \
+    o->shortDesc		  = "Run command " #num;		    \
     o->longDesc			  = "A keybinding that when invoked, will " \
 	"run the shell command identified by " cname ;			    \
     o->type			  = CompOptionTypeBinding;		    \

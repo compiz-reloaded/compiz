@@ -168,7 +168,7 @@ static char *moveWinType[] = {
 #define N_MOVE_WIN_TYPE (sizeof (moveWinType) / sizeof (moveWinType[0]))
 #define N_GRAB_WIN_TYPE (0)
 
-#define WOBBLY_SNAP_MODIFIERS_DEFAULT ControlMask
+#define WOBBLY_SNAP_MODIFIERS_DEFAULT ShiftMask
 
 #define WOBBLY_MAXIMIZE_EFFECT_DEFAULT TRUE
 

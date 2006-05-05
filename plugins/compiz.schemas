@@ -113,9 +113,9 @@
             <type>string</type>
             <default>&lt;Alt&gt;F2</default>
             <locale name="C">
-                <short>Run</short>
+                <short>Run Dialog</short>
                 <long>
-                    Run application
+                    Show Run Application dialog
                 </long>
             </locale>
         </schema>
@@ -127,7 +127,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 0</short>
                 <long>
                     Command line to be executed in shell when run_command0 is invoked
                 </long>
@@ -141,7 +141,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 0</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command0
                 </long>
@@ -155,7 +155,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 1</short>
                 <long>
                     Command line to be executed in shell when run_command1 is invoked
                 </long>
@@ -169,7 +169,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 1</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command1
                 </long>
@@ -183,7 +183,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 2</short>
                 <long>
                     Command line to be executed in shell when run_command2 is invoked
                 </long>
@@ -197,7 +197,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 2</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command2
                 </long>
@@ -211,7 +211,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 3</short>
                 <long>
                     Command line to be executed in shell when run_command3 is invoked
                 </long>
@@ -225,7 +225,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 3</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command3
                 </long>
@@ -239,7 +239,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 4</short>
                 <long>
                     Command line to be executed in shell when run_command4 is invoked
                 </long>
@@ -253,7 +253,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 4</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command4
                 </long>
@@ -267,7 +267,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 5</short>
                 <long>
                     Command line to be executed in shell when run_command5 is invoked
                 </long>
@@ -281,7 +281,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 5</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command5
                 </long>
@@ -295,7 +295,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 6</short>
                 <long>
                     Command line to be executed in shell when run_command6 is invoked
                 </long>
@@ -309,7 +309,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 6</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command6
                 </long>
@@ -323,7 +323,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 7</short>
                 <long>
                     Command line to be executed in shell when run_command7 is invoked
                 </long>
@@ -337,7 +337,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 7</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command7
                 </long>
@@ -351,7 +351,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 8</short>
                 <long>
                     Command line to be executed in shell when run_command8 is invoked
                 </long>
@@ -365,7 +365,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 8</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command8
                 </long>
@@ -379,7 +379,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 9</short>
                 <long>
                     Command line to be executed in shell when run_command9 is invoked
                 </long>
@@ -393,7 +393,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 9</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command9
                 </long>
@@ -407,7 +407,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 10</short>
                 <long>
                     Command line to be executed in shell when run_command10 is invoked
                 </long>
@@ -421,7 +421,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 10</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command10
                 </long>
@@ -435,7 +435,7 @@
             <type>string</type>
             <default></default>
             <locale name="C">
-                <short>Command line</short>
+                <short>Command line 11</short>
                 <long>
                     Command line to be executed in shell when run_command11 is invoked
                 </long>
@@ -449,7 +449,7 @@
             <type>string</type>
             <default>Disabled</default>
             <locale name="C">
-                <short>Run command</short>
+                <short>Run command 11</short>
                 <long>
                     A keybinding that when invoked, will run the shell command identified by command11
                 </long>
@@ -2559,7 +2559,7 @@
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/snap</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Control&gt;</default>
+            <default>&lt;Shift&gt;</default>
             <locale name="C">
                 <short>Snap windows</short>
                 <long>

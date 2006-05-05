@@ -1,3 +1,15 @@
+2006-05-05  Dan Winship  <danw@novell.com>
+
+	* src/display.c (COMMAND_OPTION): Put numbers into the shortDescs
+	of the command and run_command options
+
+	* plugins/wobbly.c (WOBBLY_SNAP_MODIFIERS_DEFAULT): Use Shift
+	rather than Control, for consistency with Metacity, and to remove
+	the ambiguity about whether Ctrl+Alt+Button1 should be "grab cube"
+	or "move with snapping". (bnc 169402)
+
+	* plugins/compiz.schemas: regen
+
 2006-05-05  David Reveman  <davidr@novell.com>
 
 	* plugins/compiz.schemas: Regen.
