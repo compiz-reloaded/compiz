@@ -1413,7 +1413,7 @@ eventMatches (CompDisplay *display,
 	    state = keycodeToModifiers (display, event->xkey.keycode);
 	    if (state == 0)
 		return FALSE;
-	    modMask = state;
+	    modMask = bindMods;
 	}
 	else if (bind->u.key.keycode != event->xkey.keycode)
 	    return FALSE;
