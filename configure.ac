@@ -163,6 +163,18 @@ if test "$use_libsvg_cairo" = yes; then
   AC_DEFINE(USE_LIBSVG_CAIRO, 1, [libsvg-cairo for SVG support])
 fi
 
+AC_ARG_WITH(scale-corner,
+  [  --with-scale-corner     Set default scale plugin activation corner],
+  [case $withval in
+   no) SCALE_CORNER="" ;;
+   TopLeft|TopRight|BottomLeft|BottomRight) SCALE_CORNER="$withval" ;;
+   *) AC_MSG_ERROR([Unrecognized scale corner "$withval"]) ;;
+   esac], [SCALE_CORNER="TopRight"])
+if test -n "$SCALE_CORNER"; then
+  AC_DEFINE_UNQUOTED(SCALE_CORNER, "$SCALE_CORNER", [Default scale plugin activation corner])
+fi
+AC_SUBST(SCALE_CORNER)
+
 AC_ARG_ENABLE(gnome,
   [  --disable-gnome         Disable gnome window decorator and settings module],
   [use_gnome=$enableval], [use_gnome=yes])
@@ -216,6 +228,7 @@ Makefile
 src/Makefile
 include/Makefile
 plugins/Makefile
+plugins/compiz.schemas.in
 images/Makefile
 gnome/Makefile
 gnome/window-decorator/Makefile

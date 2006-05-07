@@ -92,7 +92,9 @@ int  nCornerTypeString =
     sizeof (cornerTypeString) / sizeof (cornerTypeString[0]);
 
 static char *cornerType[] = {
-    "TopRight"
+#ifdef SCALE_CORNER
+    SCALE_CORNER
+#endif
 };
 #define N_CORNER_TYPE (sizeof (cornerType) / sizeof (cornerType[0]))
 

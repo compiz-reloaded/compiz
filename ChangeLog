@@ -1,5 +1,10 @@
 2006-05-07  Dan Winship  <danw@novell.com>
 
+	* configure.ac: Add --with-scale-corner option and make
+	compiz.schemas reflect it; the best corner to use depends on where
+	the panels are and what's on them, so distros will want to
+	override this to match their default panel layout.
+
 	* src/event.c (eventMatches): Fix the the "water plugin gets
 	mysteriously activated when activating some other keybinding" bug.
 

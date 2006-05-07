@@ -68,15 +68,17 @@ endif
 @INTLTOOL_SCHEMAS_RULE@
 
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
-schema_in_files = compiz.schemas.in
-schema_DATA = $(schema_in_files:.schemas.in=.schemas)
+schema_in_in_files = compiz.schemas.in.in
+schema_DATA = $(schema_in_in_files:.schemas.in.in=.schemas)
 
 schema_modules = $(patsubst gconf%,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))
 
-compiz.schemas.in:
+compiz.schemas.in.in:
 	COMPIZ_SCHEMA_PLUGINS="$(schema_modules)" COMPIZ_SCHEMA_GENERAL=1 \
 	compiz --replace $(schema_modules) gconf-dump &&		  \
-	mv compiz.schemas.dump compiz.schemas.in
+	sed -e 's/\[@SCALE_CORNER@\]/[\@SCALE_CORNER\@]/'		  \
+	  < compiz.schemas.dump > compiz.schemas.in.in;			  \
+	rm -f compiz.schemas.dump
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
@@ -121,4 +123,4 @@ module_LTLIBRARIES =		\
 	libwater.la		\
 	$(libgconf_dump_module)
 
-EXTRA_DIST = $(schema_in_files)
+EXTRA_DIST = $(schema_in_in_files)

@@ -2099,7 +2099,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[TopRight]</default>
+            <default>[@SCALE_CORNER@]</default>
             <locale name="C">
                 <short>Corners</short>
                 <long>
@@ -2515,7 +2515,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[]</default>
+            <default>[@SCALE_CORNER@]</default>
             <locale name="C">
                 <short>Focus Window Types</short>
                 <long>
@@ -2530,7 +2530,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[]</default>
+            <default>[@SCALE_CORNER@]</default>
             <locale name="C">
                 <short>Grab Window Types</short>
                 <long>
