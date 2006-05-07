@@ -750,6 +750,20 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/default_icon</key>
+            <applyto>/apps/compiz/general/screen0/options/default_icon</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>icon.png</default>
+            <locale name="C">
+                <short>Default Icon</short>
+                <long>
+                    Default window icon image
+                </long>
+            </locale>
+        </schema>
+
         <!-- cube options -->
 
         <schema>
@@ -2289,6 +2303,34 @@
                 <short>Zoom</short>
                 <long>
                     Distance desktop should be zoom out while switching windows (0.0-5.0)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/icon</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/icon</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Icon</short>
+                <long>
+                    Show icon next to thumbnail
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/minimized</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/minimized</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Minimized</short>
+                <long>
+                    Show minimized windows
                 </long>
             </locale>
         </schema>
