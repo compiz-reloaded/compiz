@@ -350,26 +350,24 @@ handleEvent (CompDisplay *d,
 	}
 	break;
     case ReparentNotify:
+	w = findWindowAtDisplay (d, event->xreparent.window);
 	s = findScreenAtDisplay (d, event->xreparent.parent);
-	if (s)
+	if (s && !w)
 	{
-	    addWindow (s, event->xreparent.window, 0);
+	    addWindow (s, event->xreparent.window, getTopWindow (s));
 	}
-	else
+	else if (w)
 	{
-	    w = findWindowAtDisplay (d, event->xreparent.window);
-	    if (w)
-	    {
-		/* This is the only case where a window is removed but not
-		   destroyed. We must remove our event mask and all passive
-		   grabs. */
-		XSelectInput (d->display, w->id, NoEventMask);
-		XShapeSelectInput (d->display, w->id, NoEventMask);
-		XUngrabButton (d->display, AnyButton, AnyModifier, w->id);
+	    /* This is the only case where a window is removed but not
+	       destroyed. We must remove our event mask and all passive
+	       grabs. */
+	    XSelectInput (d->display, w->id, NoEventMask);
+	    XShapeSelectInput (d->display, w->id, NoEventMask);
+	    XUngrabButton (d->display, AnyButton, AnyModifier, w->id);
 
-		destroyWindow (w);
-		moveInputFocusToOtherWindow (w);
-	    }
+	    moveInputFocusToOtherWindow (w);
+
+	    destroyWindow (w);
 	}
 	break;
     case CirculateNotify:
@@ -895,6 +893,12 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
 		w->protocols = getProtocols (d, w->id);
+	}
+	else if (event->xproperty.atom == d->wmIconAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xproperty.window);
+	    if (w)
+		freeWindowIcons (w);
 	}
 	break;
     case MotionNotify:

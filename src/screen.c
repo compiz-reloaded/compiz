@@ -38,6 +38,7 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/Xproto.h>
 #include <X11/extensions/Xrandr.h>
 #include <X11/cursorfont.h>
 
@@ -56,6 +57,8 @@
 #define OPACITY_STEP_MAX     50
 
 #define UNREDIRECT_FS_DEFAULT FALSE
+
+#define DEFAULT_ICON_DEFAULT "icon.png"
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
@@ -114,6 +117,44 @@ setVirtualScreenSize (CompScreen *screen,
     screen->size = size;
 }
 
+static Bool
+updateDefaultIcon (CompScreen *screen)
+{
+    CompIcon *icon;
+    char     *data;
+    int	     width, height;
+
+    if (!readPng (screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON].value.s,
+		  &data, &width, &height))
+	return FALSE;
+
+    icon = malloc (sizeof (CompIcon) + width * height * sizeof (CARD32));
+    if (!icon)
+    {
+	free (data);
+	return FALSE;
+    }
+
+    if (screen->defaultIcon)
+    {
+	finiTexture (screen, &screen->defaultIcon->texture);
+	free (screen->defaultIcon);
+    }
+
+    initTexture (screen, &icon->texture);
+
+    icon->width  = width;
+    icon->height = height;
+
+    memcpy (icon + 1, data, + width * height * sizeof (CARD32));
+
+    screen->defaultIcon = icon;
+
+    free (data);
+
+    return TRUE;
+}
+
 CompOption *
 compGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -169,6 +210,9 @@ setScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case COMP_SCREEN_OPTION_DEFAULT_ICON:
+	if (compSetStringOption (o, value))
+	    return updateDefaultIcon (screen);
     default:
 	break;
     }
@@ -244,6 +288,15 @@ compScreenInitOptions (CompScreen *screen)
 	"to offscreen pixmaps";
     o->type       = CompOptionTypeBool;
     o->value.b    = UNREDIRECT_FS_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON];
+    o->name	      = "default_icon";
+    o->shortDesc      = "Default Icon";
+    o->longDesc	      = "Default window icon image";
+    o->type	      = CompOptionTypeString;
+    o->value.s	      = strdup (DEFAULT_ICON_DEFAULT);
+    o->rest.s.string  = 0;
+    o->rest.s.nString = 0;
 }
 
 static Bool
@@ -1365,6 +1418,14 @@ addScreen (CompDisplay *display,
     }
 
     initTexture (s, &s->backgroundTexture);
+
+    s->defaultIcon = NULL;
+    if (!updateDefaultIcon (s))
+    {
+	fprintf (stderr, "%s: Couldn't load default window icon.\n",
+		 programName);
+	return FALSE;
+    }
 
     s->desktopWindowCount = 0;
 

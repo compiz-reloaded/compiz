@@ -1,3 +1,23 @@
+2006-05-07  David Reveman  <davidr@novell.com>
+
+	* plugins/switcher.c: Add icon support, minimized windows support
+	and allow switcher to show up when only one selectable window exist.
+
+	* images/Makefile.am: Add default icon image.
+
+	* include/compiz.h:
+	* src/texture.c:
+	* src/event.c (handleEvent):
+	* src/screen.c:
+	* src/display.c:
+	* src/window.c: Add WM icon interface.
+
+	* gnome/window-decorator/gnome-window-decorator.c: Compute
+	switcher title text width correctly.
+
+	* src/event.c (handleEvent): Insert windows correctly when
+	reparenting.
+
 2006-05-07  Dan Winship  <danw@novell.com>
 
 	* configure.ac: Add --with-scale-corner option and make

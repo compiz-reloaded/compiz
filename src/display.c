@@ -1767,6 +1767,8 @@ addDisplay (char *name,
 
     d->wmUserTimeAtom = XInternAtom (dpy, "_NET_WM_USER_TIME", 0);
 
+    d->wmIconAtom = XInternAtom (dpy,"_NET_WM_ICON", 0);
+
     d->clientListAtom	      = XInternAtom (dpy, "_NET_CLIENT_LIST", 0);
     d->clientListStackingAtom =
 	XInternAtom (dpy, "_NET_CLIENT_LIST_STACKING", 0);

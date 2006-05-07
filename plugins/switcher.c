@@ -73,6 +73,10 @@
 #define SWITCH_ZOOM_MAX       5.0f
 #define SWITCH_ZOOM_PRECISION 0.1f
 
+#define SWITCH_ICON_DEFAULT TRUE
+
+#define SWITCH_MINIMIZED_DEFAULT TRUE
+
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -103,7 +107,9 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_OPACITY	  9
 #define SWITCH_SCREEN_OPTION_BRINGTOFRONT 10
 #define SWITCH_SCREEN_OPTION_ZOOM	  11
-#define SWITCH_SCREEN_OPTION_NUM	  12
+#define SWITCH_SCREEN_OPTION_ICON	  12
+#define SWITCH_SCREEN_OPTION_MINIMIZED	  13
+#define SWITCH_SCREEN_OPTION_NUM	  14
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -173,6 +179,8 @@ typedef struct {
 #define SWITCH_ZOOM 0.1f
 
 #define BOX_WIDTH 3
+
+#define ICON_SIZE 48
 
 static float _boxVertices[] =
 {
@@ -301,6 +309,8 @@ switchSetScreenOption (CompScreen      *screen,
 	}
 	break;
     case SWITCH_SCREEN_OPTION_MIPMAP:
+    case SWITCH_SCREEN_OPTION_ICON:
+    case SWITCH_SCREEN_OPTION_MINIMIZED:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -489,6 +499,20 @@ switchScreenInitOptions (SwitchScreen *ss,
     o->rest.f.min	= SWITCH_ZOOM_MIN;
     o->rest.f.max	= SWITCH_ZOOM_MAX;
     o->rest.f.precision = SWITCH_ZOOM_PRECISION;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_ICON];
+    o->name	  = "icon";
+    o->shortDesc  = "Icon";
+    o->longDesc	  = "Show icon next to thumbnail";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = SWITCH_ICON_DEFAULT;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_MINIMIZED];
+    o->name	  = "minimized";
+    o->shortDesc  = "Minimized";
+    o->longDesc	  = "Show minimized windows";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = SWITCH_MINIMIZED_DEFAULT;
 }
 
 static void
@@ -508,7 +532,17 @@ isSwitchWin (CompWindow *w)
     SWITCH_SCREEN (w->screen);
 
     if (!w->mapNum || w->attrib.map_state != IsViewable)
-	return FALSE;
+    {
+	if (ss->opt[SWITCH_SCREEN_OPTION_MINIMIZED].value.b)
+	{
+	    if (!w->minimized && !w->inShowDesktopMode)
+		return FALSE;
+	}
+	else
+	{
+	    return FALSE;
+	}
+    }
 
     if (w->attrib.override_redirect)
 	return FALSE;
@@ -521,8 +555,19 @@ isSwitchWin (CompWindow *w)
 
     if (!ss->allWindows)
     {
-	if (!(*w->screen->focusWindow) (w))
-	    return FALSE;
+	if (!w->mapNum || w->attrib.map_state != IsViewable)
+	{
+	    if (w->serverX + w->width  <= 0    ||
+		w->serverY + w->height <= 0    ||
+		w->serverX >= w->screen->width ||
+		w->serverY >= w->screen->height)
+		return FALSE;
+	}
+	else
+	{
+	    if (!(*w->screen->focusWindow) (w))
+		return FALSE;
+	}
     }
 
     return TRUE;
@@ -581,9 +626,12 @@ switchUpdateWindowList (CompScreen *s,
 	switchAddWindowToList (s, ss->windows[1]);
     }
 
-    count -= (count + 1) & 1;
-    if (count < 3)
-	count = 3;
+    if (count > 1)
+    {
+	count -= (count + 1) & 1;
+	if (count < 3)
+	    count = 3;
+    }
 
     ss->pos  = ((count >> 1) - ss->nWindows) * WIDTH;
     ss->move = 0;
@@ -783,7 +831,7 @@ switchInitiate (CompScreen *s,
     ss->allWindows = allWindows;
 
     count = switchCountWindows (s);
-    if (count < 2)
+    if (count < 1)
 	return;
 
     if (!ss->popupWindow)
@@ -802,9 +850,12 @@ switchInitiate (CompScreen *s,
 	if (!visual)
 	    return;
 
-	count -= (count + 1) & 1;
-	if (count < 3)
-	    count = 3;
+	if (count > 1)
+	{
+	    count -= (count + 1) & 1;
+	    if (count < 3)
+		count = 3;
+	}
 
 	xsh.flags  = PSize | PPosition;
 	xsh.width  = WINDOW_WIDTH (count);
@@ -1003,6 +1054,9 @@ switchHandleEvent (CompDisplay *d,
 	    else if (eventMatches (d, event, &ss->prev_bind) ||
 		     eventMatches (d, event, &ss->prev_all_bind))
 		switchToWindow (s, FALSE);
+	    else if (event->type	 == KeyPress &&
+		     event->xkey.keycode == s->escapeKeyCode)
+		switchTerminate (s, FALSE);
 	    else if (eventTerminates (d, event,
 				      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]))
 		switchTerminate (s, TRUE);
@@ -1078,7 +1132,7 @@ adjustSwitchVelocity (CompScreen *s)
 
 	if (ss->selectedWindow == ss->zoomedWindow)
 	{
-	    if (fabs (dx) < 0.1f   && fabs (ss->mVelocity) < 0.2f  &&
+	    if (fabs (dx) < 0.1f   && fabs (ss->mVelocity) < 0.2f   &&
 		fabs (dt) < 0.002f && fabs (ss->tVelocity) < 0.002f &&
 		fabs (ds) < 0.002f && fabs (ss->sVelocity) < 0.002f)
 	    {
@@ -1311,80 +1365,171 @@ switchPaintThumb (CompWindow		  *w,
 		  int			  x1,
 		  int			  x2)
 {
-    WindowPaintAttrib sAttrib = *attrib;
-    int		      dx, dy;
-    int		      wx, wy;
-    float	      width, height;
-    REGION	      reg;
-    CompMatrix	      matrix;
+    DrawWindowGeometryProc oldDrawWindowGeometry;
+    WindowPaintAttrib	   sAttrib = *attrib;
+    int			   dx, dy;
+    int			   wx, wy;
+    float		   width, height;
+    REGION		   reg;
+    CompMatrix		   matrix;
+    CompIcon		   *icon = NULL;
 
-    width  = WIDTH  - (SPACE << 1);
-    height = HEIGHT - (SPACE << 1);
-
-    if (w->width > width)
-	sAttrib.xScale = width / w->width;
-    else
-	sAttrib.xScale = 1.0f;
-
-    if (w->height > height)
-	sAttrib.yScale = height / w->height;
-    else
-	sAttrib.yScale = 1.0f;
-
-    if (sAttrib.xScale < sAttrib.yScale)
-	sAttrib.yScale = sAttrib.xScale;
-    else
-	sAttrib.xScale = sAttrib.yScale;
-
-    width  = w->width  * sAttrib.xScale;
-    height = w->height * sAttrib.yScale;
-
-    wx = x + SPACE + ((WIDTH  - (SPACE << 1)) - width)  / 2;
-    wy = y + SPACE + ((HEIGHT - (SPACE << 1)) - height) / 2;
-
-    if (!w->texture.pixmap)
-	bindWindow (w);
-
-    dx = wx - w->attrib.x;
-    dy = wy - w->attrib.y;
-
-    switchMoveWindow (w, dx, dy);
-
-    matrix = w->texture.matrix;
-    matrix.x0 -= (w->attrib.x * w->matrix.xx);
-    matrix.y0 -= (w->attrib.y * w->matrix.yy);
+    /* Wrap drawWindowGeometry to make sure the general
+       drawWindowGeometry function is used */
+    oldDrawWindowGeometry = w->screen->drawWindowGeometry;
+    w->screen->drawWindowGeometry = drawWindowGeometry;
 
     mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-    if (w->alpha || sAttrib.opacity != OPAQUE)
-	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
-    else if (sAttrib.opacity == OPAQUE)
-	mask &= ~PAINT_WINDOW_TRANSLUCENT_MASK;
 
     reg.rects    = &reg.extents;
     reg.numRects = 1;
 
     reg.extents.y1 = MINSHORT;
     reg.extents.y2 = MAXSHORT;
-    reg.extents.x1 = wx + (x1 - wx) / sAttrib.xScale;
-    reg.extents.x2 = wx + (x2 - wx) / sAttrib.xScale;
 
-    w->vCount = 0;
-    addWindowGeometry (w, &matrix, 1, w->region, &reg);
-    if (w->vCount)
+    if (w->mapNum)
     {
-	DrawWindowGeometryProc oldDrawWindowGeometry;
+	SWITCH_SCREEN (w->screen);
 
-	/* Wrap drawWindowGeometry to make sure the general
-	   drawWindowGeometry function is used */
-	oldDrawWindowGeometry = w->screen->drawWindowGeometry;
-	w->screen->drawWindowGeometry = drawWindowGeometry;
+	width  = WIDTH  - (SPACE << 1);
+	height = HEIGHT - (SPACE << 1);
 
-	(*w->screen->drawWindowTexture) (w, &w->texture, &sAttrib, mask);
+	if (w->width > width)
+	    sAttrib.xScale = width / w->width;
+	else
+	    sAttrib.xScale = 1.0f;
 
-	w->screen->drawWindowGeometry = oldDrawWindowGeometry;
+	if (w->height > height)
+	    sAttrib.yScale = height / w->height;
+	else
+	    sAttrib.yScale = 1.0f;
+
+	if (sAttrib.xScale < sAttrib.yScale)
+	    sAttrib.yScale = sAttrib.xScale;
+	else
+	    sAttrib.xScale = sAttrib.yScale;
+
+	width  = w->width  * sAttrib.xScale;
+	height = w->height * sAttrib.yScale;
+
+	wx = x + SPACE + ((WIDTH  - (SPACE << 1)) - width)  / 2;
+	wy = y + SPACE + ((HEIGHT - (SPACE << 1)) - height) / 2;
+
+	if (!w->texture.pixmap)
+	    bindWindow (w);
+
+	dx = wx - w->attrib.x;
+	dy = wy - w->attrib.y;
+
+	switchMoveWindow (w, dx, dy);
+
+	matrix = w->texture.matrix;
+	matrix.x0 -= (w->attrib.x * w->matrix.xx);
+	matrix.y0 -= (w->attrib.y * w->matrix.yy);
+
+	if (w->alpha || sAttrib.opacity != OPAQUE)
+	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+	else if (sAttrib.opacity == OPAQUE)
+	    mask &= ~PAINT_WINDOW_TRANSLUCENT_MASK;
+
+	reg.extents.x1 = wx + (x1 - wx) / sAttrib.xScale;
+	reg.extents.x2 = wx + (x2 - wx) / sAttrib.xScale;
+
+	w->vCount = 0;
+	addWindowGeometry (w, &matrix, 1, w->region, &reg);
+	if (w->vCount)
+	    (*w->screen->drawWindowTexture) (w, &w->texture, &sAttrib, mask);
+
+	switchMoveWindow (w, -dx, -dy);
+
+	if (ss->opt[SWITCH_SCREEN_OPTION_ICON].value.b)
+	{
+	    icon = getWindowIcon (w, ICON_SIZE, ICON_SIZE);
+	    if (icon)
+	    {
+		sAttrib.xScale = sAttrib.yScale = 1.0f;
+
+		wx = x + WIDTH  - icon->width  - SPACE;
+		wy = y + HEIGHT - icon->height - SPACE;
+	    }
+	}
+    }
+    else
+    {
+	width  = WIDTH  - (WIDTH  >> 2);
+	height = HEIGHT - (HEIGHT >> 2);
+
+	icon = getWindowIcon (w, width, height);
+	if (!icon)
+	    icon = w->screen->defaultIcon;
+
+	if (icon)
+	{
+	    int iw, ih;
+
+	    iw = width  - SPACE;
+	    ih = height - SPACE;
+
+	    if (icon->width < (iw >> 1))
+		sAttrib.xScale = (iw / icon->width);
+	    else
+		sAttrib.xScale = 1.0f;
+
+	    if (icon->height < (ih >> 1))
+		sAttrib.yScale = (ih / icon->height);
+	    else
+		sAttrib.yScale = 1.0f;
+
+	    if (sAttrib.xScale < sAttrib.yScale)
+		sAttrib.yScale = sAttrib.xScale;
+	    else
+		sAttrib.xScale = sAttrib.yScale;
+
+	    width  = icon->width  * sAttrib.xScale;
+	    height = icon->height * sAttrib.yScale;
+
+	    wx = x + SPACE + ((WIDTH  - (SPACE << 1)) - width)  / 2;
+	    wy = y + SPACE + ((HEIGHT - (SPACE << 1)) - height) / 2;
+	}
     }
 
-    switchMoveWindow (w, -dx, -dy);
+    if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
+    {
+	REGION iconReg;
+
+	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
+	dx = wx - w->attrib.x;
+	dy = wy - w->attrib.y;
+
+	switchMoveWindow (w, dx, dy);
+
+	iconReg.rects    = &iconReg.extents;
+	iconReg.numRects = 1;
+
+	iconReg.extents.x1 = w->attrib.x;
+	iconReg.extents.y1 = w->attrib.y;
+	iconReg.extents.x2 = w->attrib.x + icon->width;
+	iconReg.extents.y2 = w->attrib.y + icon->height;
+
+	matrix = icon->texture.matrix;
+	matrix.x0 -= (wx * icon->texture.matrix.xx);
+	matrix.y0 -= (wy * icon->texture.matrix.yy);
+
+	reg.extents.x1 = wx + (x1 - wx) / sAttrib.xScale;
+	reg.extents.x2 = wx + (x2 - wx) / sAttrib.xScale;
+
+	w->vCount = 0;
+	addWindowGeometry (w, &matrix, 1, &iconReg, &reg);
+	if (w->vCount)
+	    (*w->screen->drawWindowTexture) (w,
+					     &icon->texture, &sAttrib,
+					     mask);
+
+	switchMoveWindow (w, -dx, -dy);
+    }
+
+    w->screen->drawWindowGeometry = oldDrawWindowGeometry;
 }
 
 static Bool
@@ -1525,7 +1670,7 @@ switchDamageWindowRect (CompWindow *w,
 
     SWITCH_SCREEN (w->screen);
 
-    if (ss->grabIndex)
+    if (ss->grabIndex && ss->switching)
     {
 	if (initial)
 	{

@@ -47,6 +47,7 @@ typedef struct _CompDisplay CompDisplay;
 typedef struct _CompScreen  CompScreen;
 typedef struct _CompWindow  CompWindow;
 typedef struct _CompTexture CompTexture;
+typedef struct _CompIcon    CompIcon;
 
 /* virtual modifiers */
 
@@ -502,6 +503,8 @@ struct _CompDisplay {
 
     Atom wmUserTimeAtom;
 
+    Atom wmIconAtom;
+
     Atom clientListAtom;
     Atom clientListStackingAtom;
 
@@ -882,6 +885,10 @@ readImageBufferToTexture (CompScreen	      *screen,
 			  unsigned int	      *returnHeight);
 
 Bool
+iconToTexture (CompScreen *screen,
+	       CompIcon   *icon);
+
+Bool
 bindPixmapToTexture (CompScreen  *screen,
 		     CompTexture *texture,
 		     Pixmap	 pixmap,
@@ -921,7 +928,8 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_SIZE		       3
 #define COMP_SCREEN_OPTION_OPACITY_STEP        4
 #define COMP_SCREEN_OPTION_UNREDIRECT_FS       5
-#define COMP_SCREEN_OPTION_NUM		       6
+#define COMP_SCREEN_OPTION_DEFAULT_ICON        6
+#define COMP_SCREEN_OPTION_NUM		       7
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -1126,6 +1134,12 @@ typedef struct _CompScreenEdge {
     unsigned int count;
 } CompScreenEdge;
 
+struct _CompIcon {
+    CompTexture texture;
+    int		width;
+    int		height;
+};
+
 struct _CompScreen {
     CompScreen  *next;
     CompDisplay *display;
@@ -1179,6 +1193,8 @@ struct _CompScreen {
     int filter[3];
 
     CompGroup *groups;
+
+    CompIcon *defaultIcon;
 
     Bool canDoSaturated;
     Bool canDoSlightlySaturated;
@@ -1538,6 +1554,9 @@ struct _CompWindow {
 
     CompStruts *struts;
 
+    CompIcon **icon;
+    int	     nIcon;
+
     XWindowChanges saveWc;
     int		   saveMask;
 
@@ -1835,6 +1854,14 @@ redirectWindow (CompWindow *w);
 
 int
 defaultViewportForWindow (CompWindow *w);
+
+CompIcon *
+getWindowIcon (CompWindow *w,
+	       int	  width,
+	       int	  height);
+
+void
+freeWindowIcons (CompWindow *w);
 
 
 /* plugin.c */

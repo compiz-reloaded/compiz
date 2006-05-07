@@ -2753,8 +2753,10 @@ update_switcher_window (WnckWindow *win,
 
 	    if (d->layout)
 	    {
-		pango_layout_set_width (d->layout,
-					(d->width - 64) * PANGO_SCALE);
+		int tw;
+
+		tw = width - left_space - right_space - 64;
+		pango_layout_set_width (d->layout, tw * PANGO_SCALE);
 		pango_layout_set_text (d->layout, name, name_length);
 
 		n_line = pango_layout_get_line_count (d->layout);

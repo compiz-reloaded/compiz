@@ -183,6 +183,17 @@ readImageBufferToTexture (CompScreen	      *screen,
 }
 
 Bool
+iconToTexture (CompScreen *screen,
+	       CompIcon   *icon)
+{
+    return imageToTexture (screen,
+			   &icon->texture,
+			   (char *) (icon + 1),
+			   icon->width,
+			   icon->height);
+}
+
+Bool
 bindPixmapToTexture (CompScreen  *screen,
 		     CompTexture *texture,
 		     Pixmap	 pixmap,

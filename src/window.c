@@ -935,6 +935,9 @@ freeWindow (CompWindow *w)
     if (w->struts)
 	free (w->struts);
 
+    if (w->icon)
+	freeWindowIcons (w);
+
     if (w->startupId)
 	free (w->startupId);
 
@@ -1335,6 +1338,9 @@ addWindow (CompScreen *screen,
     w->vCount     = 0;
 
     w->struts = 0;
+
+    w->icon  = 0;
+    w->nIcon = 0;
 
     w->input.left   = 0;
     w->input.right  = 0;
@@ -3526,4 +3532,149 @@ defaultViewportForWindow (CompWindow *w)
 	return s->x + ((x / s->width) - 1) % s->size;
     else
 	return s->x + (x / s->width) % s->size;
+}
+
+
+/* returns icon with dimensions as close as possible to width and height
+   but never greater. */
+CompIcon *
+getWindowIcon (CompWindow *w,
+	       int	  width,
+	       int	  height)
+{
+    CompIcon *icon;
+    int	     i, wh, diff, oldDiff;
+
+    /* need to fetch icon property */
+    if (w->nIcon == 0)
+    {
+	Atom	      actual;
+	int	      result, format;
+	unsigned long n, left;
+	unsigned long *data;
+
+	result = XGetWindowProperty (w->screen->display->display, w->id,
+				     w->screen->display->wmIconAtom,
+				     0L, 65536L,
+				     FALSE, XA_CARDINAL,
+				     &actual, &format, &n,
+				     &left, (unsigned char **) &data);
+
+	if (result == Success && n)
+	{
+	    CompIcon **pIcon;
+	    CARD32   *p;
+	    CARD32   alpha, red, green, blue;
+	    int      iw, ih, j;
+
+	    for (i = 0; i + 2 < n; i += iw * ih + 2)
+	    {
+		iw  = data[i];
+		ih = data[i + 1];
+
+		if (iw * ih + 2 > n - i)
+		    break;
+
+		if (iw && ih)
+		{
+		    icon = malloc (sizeof (CompIcon) +
+				   iw * ih * sizeof (CARD32));
+		    if (!icon)
+			continue;
+
+		    pIcon = realloc (w->icon,
+				     sizeof (CompIcon *) * (w->nIcon + 1));
+		    if (!pIcon)
+		    {
+			free (icon);
+			continue;
+		    }
+
+		    w->icon = pIcon;
+		    w->icon[w->nIcon] = icon;
+		    w->nIcon++;
+
+		    icon->width  = iw;
+		    icon->height = ih;
+
+		    initTexture (w->screen, &icon->texture);
+
+		    p = (CARD32 *) (icon + 1);
+
+		    /* EWMH doesn't say if icon data is premultiplied or
+		       not but most applications seem to assume data should
+		       be unpremultiplied. */
+		    for (j = 0; j < iw * ih; j++)
+		    {
+			alpha = (data[i + j + 2] >> 24) & 0xff;
+			red   = (data[i + j + 2] >> 16) & 0xff;
+			green = (data[i + j + 2] >>  8) & 0xff;
+			blue  = (data[i + j + 2] >>  0) & 0xff;
+
+			red   = (red   * alpha) >> 8;
+			green = (green * alpha) >> 8;
+			blue  = (blue  * alpha) >> 8;
+
+			p[j] =
+			    (alpha << 24) |
+			    (red   << 16) |
+			    (green <<  8) |
+			    (blue  <<  0);
+		    }
+		}
+	    }
+
+	    XFree (data);
+	}
+
+	/* don't fetch property again */
+	if (w->nIcon == 0)
+	    w->nIcon = -1;
+    }
+
+    /* no icons available for this window */
+    if (w->nIcon == -1)
+	return NULL;
+
+    icon = NULL;
+    wh   = width + height;
+
+    for (i = 0; i < w->nIcon; i++)
+    {
+	if (w->icon[i]->width > width || w->icon[i]->height > height)
+	    continue;
+
+	if (icon)
+	{
+	    diff    = wh - (w->icon[i]->width + w->icon[i]->height);
+	    oldDiff = wh - (icon->width + icon->height);
+
+	    if (diff < oldDiff)
+		icon = w->icon[i];
+	}
+	else
+	    icon = w->icon[i];
+    }
+
+    return icon;
+}
+
+void
+freeWindowIcons (CompWindow *w)
+{
+    int i;
+
+    for (i = 0; i < w->nIcon; i++)
+    {
+	finiTexture (w->screen, &w->icon[i]->texture);
+	free (w->icon[i]);
+    }
+
+    if (w->icon)
+    {
+	free (w->icon);
+	w->icon = NULL;
+    }
+
+    w->nIcon = 0;
 }
