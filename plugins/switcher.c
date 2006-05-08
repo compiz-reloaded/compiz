@@ -1041,9 +1041,11 @@ switchHandleEvent (CompDisplay *d,
 	    if (!ss->switching)
 	    {
 		if (eventMatches (d, event,
-				  &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]))
+				  &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]) ||
+		    eventMatches (d, event, &ss->prev_bind))
 		    switchInitiate (s, FALSE);
-		else if (eventMatches (d, event, &ss->init_all_bind))
+		else if (eventMatches (d, event, &ss->init_all_bind) ||
+			 eventMatches (d, event, &ss->prev_all_bind))
 		    switchInitiate (s, TRUE);
 	    }
 
@@ -1801,6 +1803,8 @@ switchInitScreen (CompPlugin *p,
 
     addScreenBinding (s, &ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind);
     addScreenBinding (s, &ss->init_all_bind.value.bind);
+    addScreenBinding (s, &ss->prev_bind.value.bind);
+    addScreenBinding (s, &ss->prev_all_bind.value.bind);
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
