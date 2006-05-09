@@ -85,7 +85,7 @@ static char *cubeImages[] = {
 #define CUBE_TIMESTEP_MAX       50.0f
 #define CUBE_TIMESTEP_PRECISION 0.1f
 
-#define CUBE_MIPMAP_DEFAULT FALSE
+#define CUBE_MIPMAP_DEFAULT TRUE
 
 static int displayPrivateIndex;
 

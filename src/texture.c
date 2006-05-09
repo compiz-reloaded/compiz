@@ -402,7 +402,10 @@ enableTexture (CompScreen	 *screen,
     if (texture->filter == GL_LINEAR_MIPMAP_LINEAR)
     {
 	if (texture->oldMipmaps)
+	{
 	    (*screen->generateMipmap) (texture->target);
+	    texture->oldMipmaps = FALSE;
+	}
     }
 }
 
