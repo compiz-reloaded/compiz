@@ -1391,6 +1391,12 @@ switchPaintThumb (CompWindow		  *w,
 
     if (w->mapNum)
     {
+	if (!w->texture.pixmap)
+	    bindWindow (w);
+    }
+
+    if (w->mapNum)
+    {
 	SWITCH_SCREEN (w->screen);
 
 	width  = WIDTH  - (SPACE << 1);
@@ -1416,9 +1422,6 @@ switchPaintThumb (CompWindow		  *w,
 
 	wx = x + SPACE + ((WIDTH  - (SPACE << 1)) - width)  / 2;
 	wy = y + SPACE + ((HEIGHT - (SPACE << 1)) - height) / 2;
-
-	if (!w->texture.pixmap)
-	    bindWindow (w);
 
 	dx = wx - w->attrib.x;
 	dy = wy - w->attrib.y;

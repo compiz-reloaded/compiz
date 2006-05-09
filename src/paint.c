@@ -775,7 +775,11 @@ paintWindow (CompWindow		     *w,
     }
 
     if (!w->texture.pixmap)
+    {
 	bindWindow (w);
+	if (!w->mapNum)
+	    return FALSE;
+    }
 
     w->vCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);

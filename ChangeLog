@@ -1,3 +1,22 @@
+2006-05-09  David Reveman  <davidr@novell.com>
+
+	* plugins/switcher.c (switchPaintThumb): Rearrange code so we handle
+	the case when bindWindow fails.
+
+	* src/paint.c (paintWindow): Bail out if window is not mapped.
+
+	* src/window.c (bindWindow): Make sure window is mapped when
+	getting the window pixmap. (bnc 173248)
+
+	* plugins/compiz.schemas.in.in: Regen.
+
+	* plugins/cube.c (CUBE_MIPMAP_DEFAULT): Enable by default as
+	performance seem to be OK now when new mipmaps are only generated
+	when necessary.
+
+	* src/texture.c (enableTexture): Don't generate new mipmaps
+	every time the texture is used.
+
 2006-05-08  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c: Allow switcher to be initiated with prev

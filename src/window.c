@@ -858,14 +858,24 @@ bindWindow (CompWindow *w)
 
     if (!w->pixmap)
     {
-	w->pixmap =
-	    XCompositeNameWindowPixmap (w->screen->display->display,
-					w->id);
-	if (!w->pixmap)
+	XWindowAttributes attr;
+
+	/* We have to grab the server here to make sure that window
+	   is mapped when getting the window pixmap */
+	XGrabServer (w->screen->display->display);
+	XGetWindowAttributes (w->screen->display->display, w->id, &attr);
+	if (attr.map_state != IsViewable)
 	{
-	    fprintf (stderr, "%s: XCompositeNameWindowPixmap failed\n",
-		     programName);
+	    XUngrabServer (w->screen->display->display);
+	    finiTexture (w->screen, &w->texture);
+	    w->mapNum = 0;
+	    return;
 	}
+
+	w->pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
+						w->id);
+
+	XUngrabServer (w->screen->display->display);
     }
 
     if (!bindPixmapToTexture (w->screen, &w->texture, w->pixmap,
@@ -1808,14 +1818,6 @@ resizeWindow (CompWindow *w,
 	{
 	    pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
 						 w->id);
-	    if (!pixmap)
-	    {
-		fprintf (stderr, "%s: XCompositeNameWindowPixmap failed\n",
-			 programName);
-
-		return FALSE;
-	    }
-
 	    result = XGetGeometry (w->screen->display->display, pixmap, &root,
 				   &i, &i, &actualWidth, &actualHeight,
 				   &ui, &ui);
