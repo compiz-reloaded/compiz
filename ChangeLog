@@ -1,5 +1,11 @@
 2006-05-11  David Reveman  <davidr@novell.com>
 
+	* src/window.c (moveResizeWindow): Fix typo, CWY should be CWX.
+	(moveResizeWindow): Constrain Y position so that window titlebar is
+	visible.
+	(restoreWindowGeometry): Fix issue with going from maximized state
+	to non-maximized state without changing the window size.
+
 	* gnome/window-decorator/gnome-window-decorator.c
 	(max_window_name_width): Make sure title text fit in titlebar.
 

@@ -2122,7 +2122,7 @@ moveResizeWindow (CompWindow     *w,
 	case EastGravity:
 	case SouthEastGravity:
 	    xwc->x -= w->input.right;
-	    if (!(xwcm & CWY))
+	    if (!(xwcm & CWX))
 		xwc->x += w->attrib.width - xwc->width;
 	    break;
 
@@ -2164,6 +2164,19 @@ moveResizeWindow (CompWindow     *w,
 	}
 
 	xwcm |= CWY;
+    }
+
+    if (xwcm & CWY)
+    {
+	int min, max;
+
+	min = w->screen->workArea.y + w->input.top;
+	max = w->screen->workArea.y + w->screen->workArea.height;
+
+	if (xwc->y < min)
+	    xwc->y = min;
+	else if (xwc->y > max)
+	    xwc->y = max;
     }
 
     if (xwcm & CWBorderWidth)
@@ -2642,10 +2655,34 @@ restoreWindowGeometry (CompWindow     *w,
 	xwc->y = w->saveWc.y;
 
     if (m & CWWidth)
+    {
 	xwc->width = w->saveWc.width;
 
+	/* This is not perfect but it works OK for now. If the saved width is
+	   the same as the current width then make it a little be smaller so
+	   the user can see that it changed and it also makes sure that
+	   windowResizeNotify is called and plugins are notified. */
+	if (xwc->width == w->attrib.width)
+	{
+	    xwc->width -= 10;
+	    if (m & CWX)
+		xwc->x += 5;
+	}
+    }
+
     if (m & CWHeight)
+    {
 	xwc->height = w->saveWc.height;
+
+	/* As above, if the saved height is the same as the current height
+	   then make it a little be smaller. */
+	if (xwc->height == w->attrib.height)
+	{
+	    xwc->height -= 10;
+	    if (m & CWY)
+		xwc->y += 5;
+	}
+    }
 
     if (m & CWBorderWidth)
 	xwc->border_width = w->saveWc.border_width;
