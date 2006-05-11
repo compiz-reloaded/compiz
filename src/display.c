@@ -2003,6 +2003,8 @@ addDisplay (char *name,
 	    continue;
 	}
 
+	XGrabServer (dpy);
+
 	XSelectInput (dpy, XRootWindow (dpy, i),
 		      SubstructureRedirectMask |
 		      SubstructureNotifyMask   |
@@ -2021,6 +2023,7 @@ addDisplay (char *name,
 		     "already running on screen: %d\n",
 		     programName, i);
 
+	    XUngrabServer (dpy);
 	    continue;
 	}
 
@@ -2037,6 +2040,8 @@ addDisplay (char *name,
 	    lastPointerX = pointerX = x;
 	    lastPointerY = pointerY = y;
 	}
+
+	XUngrabServer (dpy);
     }
 
     if (!d->screens)

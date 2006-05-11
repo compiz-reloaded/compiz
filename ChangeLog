@@ -1,5 +1,10 @@
 2006-05-11  David Reveman  <davidr@novell.com>
 
+	* src/display.c (addDisplay):
+	* src/screen.c (addScreen): Move server grab to addDisplay to make
+	sure that no windows are created between XSelectInput and XQueryTree
+	as that would result in them being added two times.
+
 	* src/window.c (moveResizeWindow): Fix typo, CWY should be CWX.
 	(moveResizeWindow): Constrain Y position so that window titlebar is
 	visible.

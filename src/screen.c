@@ -1479,8 +1479,6 @@ addScreen (CompDisplay *display,
 
     detectRefreshRateOfScreen (s);
 
-    XGrabServer (dpy);
-
     XQueryTree (dpy, s->root,
 		&rootReturn, &parentReturn,
 		&children, &nchildren);
@@ -1502,8 +1500,6 @@ addScreen (CompDisplay *display,
 	    w->placed = TRUE;
 	}
     }
-
-    XUngrabServer (dpy);
 
     XFree (children);
 
