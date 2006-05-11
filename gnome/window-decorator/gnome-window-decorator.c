@@ -3587,6 +3587,22 @@ action_menu_map (WnckWindow *win,
 	    gtk_widget_destroy (action_menu);
     }
 
+    switch (wnck_window_get_window_type (win)) {
+    case WNCK_WINDOW_DESKTOP:
+    case WNCK_WINDOW_DOCK:
+	/* don't allow window action */
+	return;
+    case WNCK_WINDOW_NORMAL:
+    case WNCK_WINDOW_DIALOG:
+    case WNCK_WINDOW_MODAL_DIALOG:
+    case WNCK_WINDOW_TOOLBAR:
+    case WNCK_WINDOW_MENU:
+    case WNCK_WINDOW_UTILITY:
+    case WNCK_WINDOW_SPLASHSCREEN:
+	/* allow window action menu */
+	break;
+    }
+
     action_menu = wnck_create_window_action_menu (win);
 
     gtk_menu_set_screen (GTK_MENU (action_menu), screen);

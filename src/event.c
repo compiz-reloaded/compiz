@@ -475,12 +475,16 @@ handleEvent (CompDisplay *d,
 		if (eventMatches (d, event,
 				  &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU]))
 		{
-		    toolkitAction (s, s->display->toolkitActionWindowMenuAtom,
-				   event->xbutton.time,
-				   event->xbutton.window,
-				   event->xbutton.button,
-				   event->xbutton.x_root,
-				   event->xbutton.y_root);
+		    w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		    if (w)
+			toolkitAction (s,
+				       s->display->toolkitActionWindowMenuAtom,
+				       event->xbutton.time,
+				       w->id,
+				       event->xbutton.button,
+				       event->xbutton.x_root,
+				       event->xbutton.y_root);
+
 		    eventMode = AsyncPointer;
 		}
 	    }
