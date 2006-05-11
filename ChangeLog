@@ -5,6 +5,12 @@
 
 2006-05-11  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c (action_menu_map):
+	Don't show window action menu on desktop and dock windows.
+
+	* src/event.c (handleEvent): Allow click on window decorations
+	to trigger window action menu.
+
 	* plugins/place.c (placeWindow): Place fullscreen and maximized
 	windows correctly.
 	(placeWindow): Only clip dialog position to screen if parent is
