@@ -2408,7 +2408,7 @@ max_window_name_width (WnckWindow *win)
     if (d->name)
 	pango_layout_set_text (d->layout, d->name, strlen (d->name));
 
-    return w + 4;
+    return w + 6;
 }
 
 static void

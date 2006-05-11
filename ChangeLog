@@ -1,3 +1,8 @@
+2006-05-11  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c
+	(max_window_name_width): Make sure title text fit in titlebar.
+
 2006-05-11  Dan Winship  <danw@novell.com>
 
 	* plugins/gconf-compiz-utils.c (gconfStringToBinding): Treat "" as
