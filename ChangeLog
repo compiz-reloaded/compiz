@@ -1,3 +1,8 @@
+2006-05-11  Dan Winship  <danw@novell.com>
+
+	* plugins/gconf-compiz-utils.c (gconfStringToBinding): Treat "" as
+	meaning "disabled"
+
 2006-05-11  David Reveman  <davidr@novell.com>
 
 	* plugins/place.c (placeWindow): Place fullscreen and maximized

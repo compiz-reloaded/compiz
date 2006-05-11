@@ -109,7 +109,7 @@ gconfStringToBinding (CompDisplay     *d,
     gint  i;
     guint mods = 0;
 
-    if (strcasecmp (binding, "disabled") == 0)
+    if (strcasecmp (binding, "disabled") == 0 || !*binding)
     {
 	value->bind.type = CompBindingTypeNone;
 	return TRUE;
