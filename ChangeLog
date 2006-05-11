@@ -1,3 +1,10 @@
+2006-05-11  David Reveman  <davidr@novell.com>
+
+	* plugins/place.c (placeWindow): Place fullscreen and maximized
+	windows correctly.
+	(placeWindow): Only clip dialog position to screen if parent is
+	visible in current viewport.
+
 2006-05-09  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c (switchPaintThumb): Rearrange code so we handle

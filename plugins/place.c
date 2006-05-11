@@ -701,6 +701,24 @@ placeWindow (CompWindow *window,
 	break;
     }
 
+    if (window->type & CompWindowTypeFullscreenMask)
+    {
+	x = y = 0;
+	goto done_no_constraints;
+    }
+
+    if (window->state & (CompWindowStateMaximizedVertMask |
+			 CompWindowStateMaximizedHorzMask))
+    {
+	if (window->state & CompWindowStateMaximizedVertMask)
+	    y = window->screen->workArea.y + window->input.top;
+
+	if (window->state & CompWindowStateMaximizedHorzMask)
+	    x = window->screen->workArea.x + window->input.left;
+
+	goto done;
+    }
+
     if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
     {
 	/* workarounds enabled */
@@ -758,8 +776,7 @@ placeWindow (CompWindow *window,
 				      window->transientFor);
 	if (parent)
 	{
-	    int	       w;
-	    XRectangle area;
+	    int	w;
 
 	    x = parent->attrib.x;
 	    y = parent->attrib.y;
@@ -780,19 +797,23 @@ placeWindow (CompWindow *window,
 	    /* put top of child's frame, not top of child's client */
 	    y += window->input.top;
 
-	    /* clip to screen */
-	    area = parent->screen->workArea;
+	    /* clip to screen if parent is visible in current viewport */
+	    if (parent->attrib.x < parent->screen->width &&
+		parent->attrib.x + parent->screen->width > 0)
+	    {
+		XRectangle area = parent->screen->workArea;
 
-	    if (x + window->width > area.x + area.width)
-		x = area.x + area.width - window->width;
-	    if (y + window->height > area.y + area.height)
-		y = area.y + area.height - window->height;
-	    if (x < area.x) x = area.x;
-	    if (y < area.y) y = area.y;
+		if (x + window->width > area.x + area.width)
+		    x = area.x + area.width - window->width;
+		if (y + window->height > area.y + area.height)
+		    y = area.y + area.height - window->height;
+		if (x < area.x) x = area.x;
+		if (y < area.y) y = area.y;
+	    }
 
 	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
 
-	    goto done;
+	    goto done_no_x_constraints;
 	}
     }
 
@@ -929,6 +950,7 @@ done:
     if (x - window->input.left < window->screen->workArea.x)
 	x = window->screen->workArea.x + window->input.left;
 
+done_no_x_constraints:
     if (y + window->height + window->input.bottom >
 	window->screen->workArea.y + window->screen->workArea.height)
 	y = window->screen->workArea.y + window->screen->workArea.height
