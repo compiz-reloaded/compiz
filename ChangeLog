@@ -1,5 +1,21 @@
 2006-05-12  David Reveman  <davidr@novell.com>
 
+	* src/screen.c (enterShowDesktopMode): Only go into show desktop mode
+	when some window is being hidden.
+
+	* src/event.c (handleWindowDamageRect): Make sure placed is set to true
+	when no plugin is doing placement.
+	(handleEvent): Don't set WM_STATE on override redirect windows.
+
+	* plugins/switcher.c (isSwitchWin): Don't show windows that ask not to
+	be in tasklists.
+
+	* plugins/rotate.c (rotateHandleEvent): Only adjust viewport if window
+	has been placed.
+
+	* plugins/minimize.c (minHandleEvent): Reset everything when going
+	into withdrawn state.
+
 	* src/window.c (moveResizeWindow): Handle west and north gravity
 	correctly.
 

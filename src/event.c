@@ -72,6 +72,9 @@ handleWindowDamageRect (CompWindow *w,
 	if (initial)
 	    damageWindowOutputExtents (w);
     }
+
+    if (!w->attrib.override_redirect)
+	w->placed = TRUE;
 }
 
 void
@@ -341,12 +344,17 @@ handleEvent (CompDisplay *d,
 		    updateClientListForScreen (w->screen);
 		}
 
-		setWmState (d, WithdrawnState, w->id);
+		if (!w->attrib.override_redirect)
+		    setWmState (d, WithdrawnState, w->id);
+
 		w->placed = FALSE;
 	    }
 
-	    unmapWindow (w);
-	    moveInputFocusToOtherWindow (w);
+	    if (w->mapNum)
+	    {
+		unmapWindow (w);
+		moveInputFocusToOtherWindow (w);
+	    }
 	}
 	break;
     case ReparentNotify:

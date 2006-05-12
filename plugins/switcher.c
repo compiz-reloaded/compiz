@@ -550,7 +550,7 @@ isSwitchWin (CompWindow *w)
     if (!(ss->wMask & w->type))
 	return FALSE;
 
-    if (w->state & CompWindowStateSkipPagerMask)
+    if (w->state & CompWindowStateSkipTaskbarMask)
 	return FALSE;
 
     if (!ss->allWindows)

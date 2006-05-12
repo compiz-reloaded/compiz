@@ -2653,6 +2653,7 @@ enterShowDesktopMode (CompScreen *s)
 {
     CompWindow    *w;
     unsigned long data = 1;
+    int		  count = 0;
 
     s->showingDesktopMask = ~(CompWindowTypeDesktopMask |
 			      CompWindowTypeDockMask);
@@ -2667,6 +2668,15 @@ enterShowDesktopMode (CompScreen *s)
 		hideWindow (w);
 	    }
 	}
+
+	if (w->inShowDesktopMode)
+	    count++;
+    }
+
+    if (!count)
+    {
+	s->showingDesktopMask = 0;
+	data = 0;
     }
 
     XChangeProperty (s->display->display, s->root,

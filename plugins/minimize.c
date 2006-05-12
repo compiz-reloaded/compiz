@@ -570,11 +570,18 @@ minHandleEvent (CompDisplay *d,
 	    {
 		MIN_WINDOW (w);
 
-		if (mw->state == IconicState)
+		if (mw->adjust)
 		{
+		    mw->adjust = FALSE;
+		    mw->xScale = mw->yScale = 1.0f;
+		    mw->tx = mw->ty = 0.0f;
+		    mw->xVelocity = mw->yVelocity = 0.0f;
+		    mw->xScaleVelocity = mw->yScaleVelocity = 1.0f;
+
 		    (*w->screen->setWindowScale) (w, 1.0f, 1.0f);
-		    mw->state = NormalState;
 		}
+
+		mw->state = NormalState;
 	    }
 	}
     default:
