@@ -1,3 +1,8 @@
+2006-05-14  David Reveman  <davidr@novell.com>
+
+	* src/event.c (handleEvent): mapNum might be 0 if we found the window
+	unmapped when trying to bind it to a texture.
+
 2006-05-12  David Reveman  <davidr@novell.com>
 
 	* src/screen.c (enterShowDesktopMode): Only go into show desktop mode

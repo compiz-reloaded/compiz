@@ -350,11 +350,8 @@ handleEvent (CompDisplay *d,
 		w->placed = FALSE;
 	    }
 
-	    if (w->mapNum)
-	    {
-		unmapWindow (w);
-		moveInputFocusToOtherWindow (w);
-	    }
+	    unmapWindow (w);
+	    moveInputFocusToOtherWindow (w);
 	}
 	break;
     case ReparentNotify:
