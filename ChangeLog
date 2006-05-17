@@ -1,5 +1,8 @@
 2006-05-17  David Reveman  <davidr@novell.com>
 
+	* plugins/minimize.c (minHandleEvent): Restore window position
+	when transitioning to withdrawn state.
+
 	* plugins/scale.c: Remove next_window binding and fix so that arrow
 	keys can be used to select window.
 	Focus new window when pointer enter window decorations and sloppy focus

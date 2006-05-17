@@ -579,6 +579,11 @@ minHandleEvent (CompDisplay *d,
 		    mw->xScaleVelocity = mw->yScaleVelocity = 1.0f;
 
 		    (*w->screen->setWindowScale) (w, 1.0f, 1.0f);
+
+		    moveWindow (w,
+				w->serverX - w->attrib.x,
+				w->serverY - w->attrib.y,
+				FALSE, TRUE);
 		}
 
 		mw->state = NormalState;
