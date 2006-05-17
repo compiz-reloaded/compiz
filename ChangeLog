@@ -1,3 +1,9 @@
+2006-05-17  Dan Winship  <danw@novell.com>
+
+	* src/display.c (handleSelectionClear, eventLoop): don't process
+	exit-on-selection-clear until the event queue is empty, or else
+	MapRequest and ConfigureRequest events could get lost. bnc 175558
+
 2006-05-14  David Reveman  <davidr@novell.com>
 
 	* src/event.c (handleEvent): mapNum might be 0 if we found the window

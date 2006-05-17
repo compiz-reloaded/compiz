@@ -77,6 +77,8 @@ static int               nWatchFds = 0;
 
 static Bool inHandleEvent = FALSE;
 
+static Bool shutDown = FALSE;
+
 int lastPointerX = 0;
 int lastPointerY = 0;
 int pointerX     = 0;
@@ -1170,6 +1172,10 @@ eventLoop (void)
 	{
 	     execvp (programName, programArgv);
 	     exit (1);
+	}
+	else if (shutDown)
+	{
+	    exit (0);
 	}
 
 	while (XPending (display->display))
@@ -2320,12 +2326,8 @@ handleSelectionClear (CompDisplay *display,
 				     event->xselectionclear.window,
 				     event->xselectionclear.selection);
 
-    if (!screen)
-	return;
-
-    /* removeScreen (screen); */
-
-    exit (0);
+    if (screen)
+	shutDown = TRUE;
 }
 
 void
