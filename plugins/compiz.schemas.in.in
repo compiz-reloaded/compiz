@@ -2023,20 +2023,6 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/scale/screen0/options/next_window</key>
-            <applyto>/apps/compiz/plugins/scale/screen0/options/next_window</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>Right</default>
-            <locale name="C">
-                <short>Next Window</short>
-                <long>
-                    Focus next window
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
             <key>/schemas/apps/compiz/plugins/scale/screen0/options/speed</key>
             <applyto>/apps/compiz/plugins/scale/screen0/options/speed</applyto>
             <owner>compiz</owner>
@@ -2118,6 +2104,20 @@
                 <short>Corners</short>
                 <long>
                     Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, BottomRight)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/overlay_icon</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/overlay_icon</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Emblem</default>
+            <locale name="C">
+                <short>Overlay Icon</short>
+                <long>
+                    Overlay an icon on windows once they are scaled (None, Emblem, Big)
                 </long>
             </locale>
         </schema>
