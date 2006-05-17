@@ -1,5 +1,9 @@
 2006-05-17  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c: Add minimal
+	option that can be used to run g-w-d with drop-shadows but without full
+	window decorations.
+
 	* plugins/minimize.c (minHandleEvent): Restore window position
 	when transitioning to withdrawn state.
 

@@ -158,6 +158,8 @@ typedef struct _quad {
     cairo_matrix_t m;
 } quad;
 
+static gboolean minimal = FALSE;
+
 static double decoration_alpha = 0.5;
 
 static extents _shadow_extents   = { 0, 0, 0, 0 };
@@ -2092,7 +2094,7 @@ update_default_decorations (GdkScreen *screen)
     Window     xroot;
     GdkDisplay *gdkdisplay = gdk_display_get_default ();
     Display    *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
-    Atom       atom;
+    Atom       bareAtom, normalAtom, activeAtom;
     decor_t    d;
     gint       nQuad;
     quad       quads[N_QUADS_MAX];
@@ -2100,7 +2102,10 @@ update_default_decorations (GdkScreen *screen)
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
-    atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_BARE", FALSE);
+    bareAtom   = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_BARE", FALSE);
+    normalAtom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_NORMAL", FALSE);
+    activeAtom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_ACTIVE", FALSE);
+
     if (shadow_pixmap)
     {
 	int width, height;
@@ -2113,15 +2118,38 @@ update_default_decorations (GdkScreen *screen)
 				&_shadow_extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
-			 atom,
+			 bareAtom,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data,
 			 7 + 9 * nQuad);
+
+	if (minimal)
+	{
+	    XChangeProperty (xdisplay, xroot,
+			     normalAtom,
+			     XA_INTEGER,
+			     32, PropModeReplace, (guchar *) data,
+			     7 + 9 * nQuad);
+	    XChangeProperty (xdisplay, xroot,
+			     activeAtom,
+			     XA_INTEGER,
+			     32, PropModeReplace, (guchar *) data,
+			     7 + 9 * nQuad);
+	}
     }
     else
     {
-	XDeleteProperty (xdisplay, xroot, atom);
+	XDeleteProperty (xdisplay, xroot, bareAtom);
+
+	if (minimal)
+	{
+	    XDeleteProperty (xdisplay, xroot, normalAtom);
+	    XDeleteProperty (xdisplay, xroot, activeAtom);
+	}
     }
+
+    if (minimal)
+	return;
 
     d.width  = left_space + left_corner_space + 1 + right_corner_space +
 	right_space;
@@ -2152,12 +2180,11 @@ update_default_decorations (GdkScreen *screen)
 
 	(*d.draw) (&d);
 
-	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_NORMAL", FALSE);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
 				&extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
-			 atom,
+			 normalAtom,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
     }
@@ -2173,12 +2200,11 @@ update_default_decorations (GdkScreen *screen)
 
 	(*d.draw) (&d);
 
-	atom = XInternAtom (xdisplay, "_NET_WINDOW_DECOR_ACTIVE", FALSE);
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
 				&extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
-			 atom,
+			 activeAtom,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
     }
@@ -4668,6 +4694,9 @@ style_changed (GtkWidget *widget)
 
     update_default_decorations (gdkscreen);
 
+    if (minimal)
+	return;
+
     windows = wnck_screen_get_windows (screen);
     while (windows != NULL)
     {
@@ -4890,6 +4919,9 @@ value_changed (GConfClient *client,
 
 	update_default_decorations (gdkscreen);
 
+	if (minimal)
+	    return;
+
 	windows = wnck_screen_get_windows (screen);
 	while (windows != NULL)
 	{
@@ -4970,6 +5002,12 @@ main (int argc, char *argv[])
 
     gtk_init (&argc, &argv);
 
+    for (i = 0; i < argc; i++)
+    {
+	if (strcmp (argv[i], "--minimal") == 0)
+	    minimal = TRUE;
+    }
+
     gdkdisplay = gdk_display_get_default ();
     xdisplay   = gdk_x11_display_get_xdisplay (gdkdisplay);
     gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
@@ -5027,11 +5065,14 @@ main (int argc, char *argv[])
 
     screen = wnck_screen_get_default ();
 
-    gdk_window_add_filter (NULL,
-			   event_filter_func,
-			   NULL);
+    if (!minimal)
+    {
+	gdk_window_add_filter (NULL,
+			       event_filter_func,
+			       NULL);
 
-    connect_screen (screen);
+	connect_screen (screen);
+    }
 
     if (!init_settings (screen))
     {
