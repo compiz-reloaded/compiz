@@ -1,5 +1,10 @@
 2006-05-17  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c (switchPaintScreen): Don't remove switcher
+	from window list, just temporarily mark it as destroyed. This fixes
+	issue with switcher decorations disappearing when some window is
+	unmapped.
+
 	* src/screen.c (updateDefaultIcon): width and height should be
 	unsigned.
 

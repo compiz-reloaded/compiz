@@ -1250,7 +1250,7 @@ switchPaintScreen (CompScreen		   *s,
 	CompWindow	  *zoomed;
 	CompWindow	  *switcher;
 	Window		  zoomedAbove = None;
-	Window		  switcherAbove = None;
+	Bool		  saveDestroyed = FALSE;
 
 	if (ss->zooming)
 	{
@@ -1263,8 +1263,8 @@ switchPaintScreen (CompScreen		   *s,
 	switcher = findWindowAtScreen (s, ss->popupWindow);
 	if (switcher)
 	{
-	    switcherAbove = (switcher->prev) ? switcher->prev->id : None;
-	    unhookWindowFromScreen (s, switcher);
+	    saveDestroyed = switcher->destroyed;
+	    switcher->destroyed = TRUE;
 	}
 
 	if (ss->bringToFront)
@@ -1272,7 +1272,11 @@ switchPaintScreen (CompScreen		   *s,
 	    zoomed = findWindowAtScreen (s, ss->zoomedWindow);
 	    if (zoomed)
 	    {
-		zoomedAbove = (zoomed->prev) ? zoomed->prev->id : None;
+		CompWindow *w;
+
+		for (w = zoomed->prev; w && w->id <= 1; w = w->prev);
+		zoomedAbove = (w) ? w->id : None;
+
 		unhookWindowFromScreen (s, zoomed);
 		insertWindowIntoScreen (s, zoomed, s->reverseWindows->id);
 	    }
@@ -1294,7 +1298,7 @@ switchPaintScreen (CompScreen		   *s,
 
 	if (switcher)
 	{
-	    insertWindowIntoScreen (s, switcher, switcherAbove);
+	    switcher->destroyed = saveDestroyed;
 
 	    glPushMatrix ();
 	    glTranslatef (-0.5f, -0.5f, -DEFAULT_Z_CAMERA);
