@@ -1,3 +1,13 @@
+2006-05-17  David Reveman  <davidr@novell.com>
+
+	* plugins/scale.c: Remove next_window binding and fix so that arrow
+	keys can be used to select window.
+	Focus new window when pointer enter window decorations and sloppy focus
+	is used.
+	Remove scaleSelectWindow.
+
+	* plugins/scale.c: Icon support (Nat Friedman).
+
 2006-05-17  Dan Winship  <danw@novell.com>
 
 	* src/display.c (handleSelectionClear, eventLoop): don't process

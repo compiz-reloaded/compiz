@@ -50,9 +50,6 @@
 #define SCALE_TERMINATE_KEY_DEFAULT       "Pause"
 #define SCALE_TERMINATE_MODIFIERS_DEFAULT 0
 
-#define SCALE_NEXT_WINDOW_KEY_DEFAULT       "Right"
-#define SCALE_NEXT_WINDOW_MODIFIERS_DEFAULT 0
-
 #define SCALE_SPEED_DEFAULT   1.5f
 #define SCALE_SPEED_MIN       0.1f
 #define SCALE_SPEED_MAX       50.0f
@@ -98,6 +95,25 @@ static char *cornerType[] = {
 };
 #define N_CORNER_TYPE (sizeof (cornerType) / sizeof (cornerType[0]))
 
+typedef enum {
+    ScaleIconNone = 0,
+    ScaleIconEmblem,
+    ScaleIconBig
+} IconOverlay;
+
+static char *iconOverlayString[] = {
+    "None",
+    "Emblem",
+    "Big"
+};
+
+static IconOverlay iconOverlay[] = {
+    ScaleIconNone,
+    ScaleIconEmblem,
+    ScaleIconBig
+};
+#define N_ICON_TYPE (sizeof (iconOverlayString) / sizeof (iconOverlayString[0]))
+#define SCALE_SCREEN_ICON_DEFAULT (iconOverlayString[1])
 
 static int displayPrivateIndex;
 
@@ -111,19 +127,20 @@ typedef struct _ScaleDisplay {
     HandleEventProc handleEvent;
 
     unsigned int lastActiveNum;
+    KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
 } ScaleDisplay;
 
 #define SCALE_SCREEN_OPTION_SPACING      0
 #define SCALE_SCREEN_OPTION_SLOPPY_FOCUS 1
 #define SCALE_SCREEN_OPTION_INITIATE     2
 #define SCALE_SCREEN_OPTION_TERMINATE    3
-#define SCALE_SCREEN_OPTION_NEXT_WINDOW  4
-#define SCALE_SCREEN_OPTION_SPEED	 5
-#define SCALE_SCREEN_OPTION_TIMESTEP	 6
-#define SCALE_SCREEN_OPTION_WINDOW_TYPE  7
-#define SCALE_SCREEN_OPTION_DARKEN_BACK  8
-#define SCALE_SCREEN_OPTION_OPACITY      9
-#define SCALE_SCREEN_OPTION_CORNERS      10
+#define SCALE_SCREEN_OPTION_SPEED	 4
+#define SCALE_SCREEN_OPTION_TIMESTEP	 5
+#define SCALE_SCREEN_OPTION_WINDOW_TYPE  6
+#define SCALE_SCREEN_OPTION_DARKEN_BACK  7
+#define SCALE_SCREEN_OPTION_OPACITY      8
+#define SCALE_SCREEN_OPTION_CORNERS      9
+#define SCALE_SCREEN_OPTION_ICON         10
 #define SCALE_SCREEN_OPTION_NUM          11
 
 typedef struct _ScaleScreen {
@@ -170,6 +187,8 @@ typedef struct _ScaleScreen {
     GLushort opacity;
 
     unsigned int cornerMask;
+
+    IconOverlay iconOverlay;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -266,6 +285,7 @@ scaleSetScreenOption (CompScreen      *screen,
     SCALE_SCREEN (screen);
 
     o = compFindOption (ss->opt, NUM_OPTIONS (ss), name, &index);
+
     if (!o)
 	return FALSE;
 
@@ -291,7 +311,6 @@ scaleSetScreenOption (CompScreen      *screen,
 	}
 	break;
     case SCALE_SCREEN_OPTION_TERMINATE:
-    case SCALE_SCREEN_OPTION_NEXT_WINDOW:
 	if (compSetBindingOption (o, value))
 	    return TRUE;
 	break;
@@ -336,6 +355,22 @@ scaleSetScreenOption (CompScreen      *screen,
 	    ss->cornerMask = scaleUpdateCorners (screen, o);
 	    return TRUE;
 	}
+	break;
+    case SCALE_SCREEN_OPTION_ICON:
+	if (compSetStringOption (o, value))
+	{
+	    int i;
+
+	    for (i = 0; i < N_ICON_TYPE; i++)
+	    {
+		if (strcmp (o->value.s, iconOverlayString[i]) == 0)
+		{
+		    ss->iconOverlay = iconOverlay[i];
+		    return TRUE;
+		}
+	    }
+	}
+	break;
     default:
 	break;
     }
@@ -387,17 +422,6 @@ scaleScreenInitOptions (ScaleScreen *ss,
     o->value.bind.u.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (SCALE_TERMINATE_KEY_DEFAULT));
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW];
-    o->name			  = "next_window";
-    o->shortDesc		  = "Next Window";
-    o->longDesc			  = "Focus next window";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SCALE_NEXT_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SCALE_NEXT_WINDOW_KEY_DEFAULT));
 
     o = &ss->opt[SCALE_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -462,53 +486,15 @@ scaleScreenInitOptions (ScaleScreen *ss,
 	o->value.list.value[i].s = strdup (cornerType[i]);
     o->rest.s.string     = cornerTypeString;
     o->rest.s.nString    = nCornerTypeString;
-}
 
-static Bool
-scalePaintWindow (CompWindow		  *w,
-		  const WindowPaintAttrib *attrib,
-		  Region		  region,
-		  unsigned int		  mask)
-{
-    WindowPaintAttrib sAttrib;
-    CompScreen	      *s = w->screen;
-    Bool	      status;
-
-    SCALE_SCREEN (s);
-    SCALE_WINDOW (w);
-
-    if (ss->grabIndex)
-    {
-	if (sw->adjust || sw->slot)
-	{
-	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-
-	    if (w->id	    != s->display->activeWindow &&
-		ss->opacity != OPAQUE			&&
-		ss->state   != SCALE_STATE_IN)
-	    {
-		/* modify opacity of windows that are not active */
-		sAttrib = *attrib;
-		attrib  = &sAttrib;
-
-		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
-	    }
-	}
-	else if (ss->darkenBack && ss->state != SCALE_STATE_IN)
-	{
-	    /* modify brightness of the other windows */
-	    sAttrib = *attrib;
-	    attrib  = &sAttrib;
-
-	    sAttrib.brightness = (2 * sAttrib.brightness) / 3;
-	}
-    }
-
-    UNWRAP (ss, s, paintWindow);
-    status = (*s->paintWindow) (w, attrib, region, mask);
-    WRAP (ss, s, paintWindow, scalePaintWindow);
-
-    return status;
+    o = &ss->opt[SCALE_SCREEN_OPTION_ICON];
+    o->name	      = "overlay_icon";
+    o->shortDesc      = "Overlay Icon";
+    o->longDesc	      = "Overlay an icon on windows once they are scaled";
+    o->type	      = CompOptionTypeString;
+    o->value.s	      = strdup (SCALE_SCREEN_ICON_DEFAULT);
+    o->rest.s.string  = iconOverlayString;
+    o->rest.s.nString = N_ICON_TYPE;
 }
 
 static Bool
@@ -526,6 +512,146 @@ isScaleWin (CompWindow *w)
 	return FALSE;
 
     return TRUE;
+}
+
+static Bool
+scalePaintWindow (CompWindow		  *w,
+		  const WindowPaintAttrib *attrib,
+		  Region		  region,
+		  unsigned int		  mask)
+{
+    CompScreen *s = w->screen;
+    Bool       status;
+
+    SCALE_SCREEN (s);
+
+    if (ss->grabIndex)
+    {
+	WindowPaintAttrib sAttrib = *attrib;
+
+	SCALE_WINDOW (w);
+
+	if (sw->adjust || sw->slot)
+	{
+	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
+
+	    if (w->id	    != s->display->activeWindow &&
+		ss->opacity != OPAQUE			&&
+		ss->state   != SCALE_STATE_IN)
+	    {
+		/* modify opacity of windows that are not active */
+		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
+	    }
+	}
+	else if (ss->darkenBack && ss->state != SCALE_STATE_IN)
+	{
+	    /* modify brightness of the other windows */
+	    sAttrib.brightness = sAttrib.brightness / 2;
+	}
+
+	UNWRAP (ss, s, paintWindow);
+	status = (*s->paintWindow) (w, &sAttrib, region, mask);
+	WRAP (ss, s, paintWindow, scalePaintWindow);
+
+	if ((ss->iconOverlay != ScaleIconNone) && (sw->adjust || sw->slot))
+	{
+	    CompIcon *icon;
+
+	    icon = getWindowIcon (w, 96, 96);
+	    if (!icon)
+		icon = w->screen->defaultIcon;
+
+	    if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
+	    {
+		REGION	    iconReg;
+		CompMatrix  matrix;
+		int	    wx, wy, width, height;
+		int	    scaledWinWidth, scaledWinHeight;
+		float	    ds;
+
+		scaledWinWidth  = w->width  * sw->scale;
+		scaledWinHeight = w->height * sw->scale;
+
+		switch (ss->iconOverlay) {
+		case ScaleIconNone:
+		case ScaleIconEmblem:
+		    sAttrib.xScale = sAttrib.yScale = 1.0f;
+		    break;
+		case ScaleIconBig:
+		    sAttrib.opacity /= 3;
+		    sAttrib.xScale = sAttrib.yScale =
+			MIN (((float) scaledWinWidth / (float) icon->width),
+			     ((float) scaledWinHeight / (float) icon->height));
+		default:
+		    break;
+		}
+
+		width  = icon->width  * sAttrib.xScale;
+		height = icon->height * sAttrib.yScale;
+
+		switch (ss->iconOverlay) {
+		case ScaleIconNone:
+		case ScaleIconEmblem:
+		    wx = w->attrib.x + (w->width  * sw->scale) - icon->width;
+		    wy = w->attrib.y + (w->height * sw->scale) - icon->height;
+		    break;
+		case ScaleIconBig:
+		    wx = w->attrib.x + ((scaledWinWidth - width) / 2) /
+			sAttrib.xScale;
+		    wy = w->attrib.y + ((scaledWinHeight - height) / 2) /
+			sAttrib.yScale;
+		    break;
+		default:
+		    wx = wy = 0;
+		    break;
+		}
+
+		ds = 1.0f - ss->scale;
+		if (ds)
+		{
+		    sAttrib.opacity =
+			(fabs (1.0f - sw->scale) * sAttrib.opacity) / ds;
+		}
+		else if (!sw->slot)
+		{
+		    sAttrib.opacity = 0;
+		}
+
+		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
+		iconReg.rects    = &iconReg.extents;
+		iconReg.numRects = 1;
+
+		iconReg.extents.x1 = wx;
+		iconReg.extents.y1 = wy;
+		iconReg.extents.x2 = iconReg.extents.x1 + width;
+		iconReg.extents.y2 = iconReg.extents.y1 + height;
+
+		matrix = icon->texture.matrix;
+		matrix.x0 -= wx * icon->texture.matrix.xx;
+		matrix.y0 -= wy * icon->texture.matrix.yy;
+
+		w->vCount = 0;
+		if (iconReg.extents.x1 < iconReg.extents.x2 &&
+		    iconReg.extents.y1 < iconReg.extents.y2)
+		    (*w->screen->addWindowGeometry) (w, &matrix, 1, &iconReg,
+						     &iconReg);
+
+		if (w->vCount)
+		    (*w->screen->drawWindowTexture) (w,
+						     &icon->texture, &sAttrib,
+						     mask);
+	    }
+	}
+    }
+    else
+    {
+	UNWRAP (ss, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, region, mask);
+	WRAP (ss, s, paintWindow, scalePaintWindow);
+    }
+
+    return status;
 }
 
 static int
@@ -902,10 +1028,10 @@ scaleCheckForWindowAt (CompScreen *s,
 
 	if (sw->slot)
 	{
-	    x1 = w->attrib.x;
-	    y1 = w->attrib.y;
-	    x2 = x1 + ((float) w->width  * sw->scale);
-	    y2 = y1 + ((float) w->height * sw->scale);
+	    x1 = w->attrib.x - w->input.left * sw->scale;
+	    y1 = w->attrib.y - w->input.top  * sw->scale;
+	    x2 = w->attrib.x + (w->width  + w->input.right)  * sw->scale;
+	    y2 = w->attrib.y + (w->height + w->input.bottom) * sw->scale;
 
 	    if (x1 <= x && y1 <= y && x2 > x && y2 > y)
 		return w;
@@ -983,12 +1109,6 @@ scaleTerminate (CompScreen *s)
     }
 }
 
-static void
-scaleSelectWindow (CompWindow *w)
-{
-    activateWindow (w);
-}
-
 static Bool
 scaleSelectWindowAt (CompScreen *s,
 		     int	 x,
@@ -1000,7 +1120,7 @@ scaleSelectWindowAt (CompScreen *s,
     w = scaleCheckForWindowAt (s, x, y);
     if (w && isScaleWin (w))
     {
-	scaleSelectWindow (w);
+	activateWindow (w);
 
 	return TRUE;
     }
@@ -1009,55 +1129,60 @@ scaleSelectWindowAt (CompScreen *s,
 }
 
 static void
-scaleNextWindow (CompScreen *s)
+scaleMoveFocusWindow (CompScreen *s,
+		      int	 dx,
+		      int	 dy)
 
 {
-    CompWindow *next = NULL;
-    CompWindow *prev = NULL;
-    CompWindow *w;
+    CompWindow *active;
 
-    SCALE_DISPLAY (s->display);
-
-    for (w = s->windows; w; w = w->next)
+    active = findWindowAtScreen (s, s->display->activeWindow);
+    if (active)
     {
-	if (s->display->activeWindow == w->id)
-	    continue;
+	CompWindow *w, *focus = NULL;
+	ScaleSlot  *slot;
+	int	   x, y, cx, cy, d, min = MAXSHORT;
 
-	if (isScaleWin (w))
+	SCALE_SCREEN (s);
+	SCALE_WINDOW (active);
+
+	if (!sw->slot)
+	    return;
+
+	cx = (sw->slot->x1 + sw->slot->x2) / 2;
+	cy = (sw->slot->y1 + sw->slot->y2) / 2;
+
+	for (w = s->windows; w; w = w->next)
 	{
-	    if (w->activeNum < sd->lastActiveNum)
+	    slot = GET_SCALE_WINDOW (w, ss)->slot;
+	    if (!slot)
+		continue;
+
+	    x = (slot->x1 + slot->x2) / 2;
+	    y = (slot->y1 + slot->y2) / 2;
+
+	    d = abs (x - cx) + abs (y - cy);
+	    if (d < min)
 	    {
-		if (next)
-		{
-		    if (w->activeNum > next->activeNum)
-			next = w;
-		}
-		else
-		    next = w;
-	    }
-	    else if (w->activeNum > sd->lastActiveNum)
-	    {
-		if (prev)
-		{
-		    if (w->activeNum < prev->activeNum)
-			prev = w;
-		}
-		else
-		    prev = w;
+		if ((dx > 0 && x < sw->slot->x2) ||
+		    (dx < 0 && x > sw->slot->x1) ||
+		    (dy > 0 && y < sw->slot->y2) ||
+		    (dy < 0 && y > sw->slot->y1))
+		    continue;
+
+		min   = d;
+		focus = w;
 	    }
 	}
-    }
 
-    if (next)
-	w = next;
-    else
-	w = prev;
+	if (focus)
+	{
+	    SCALE_DISPLAY (s->display);
 
-    if (w)
-    {
-	sd->lastActiveNum = w->activeNum;
+	    sd->lastActiveNum = focus->activeNum;
 
-	scaleSelectWindow (w);
+	    activateWindow (focus);
+	}
     }
 }
 
@@ -1115,10 +1240,17 @@ scaleHandleEvent (CompDisplay *d,
 	    if (eventMatches (d, event, &ss->opt[SCALE_SCREEN_OPTION_INITIATE]))
 		scaleInitiate (s);
 
-	    if (ss->grabIndex &&
-		eventMatches (d, event,
-			      &ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW]))
-		scaleNextWindow (s);
+	    if (ss->grabIndex && event->type == KeyPress)
+	    {
+		if (event->xkey.keycode == sd->leftKeyCode)
+		    scaleMoveFocusWindow (s, -1, 0);
+		else if (event->xkey.keycode == sd->rightKeyCode)
+		    scaleMoveFocusWindow (s, 1, 0);
+		else if (event->xkey.keycode == sd->upKeyCode)
+		    scaleMoveFocusWindow (s, 0, -1);
+		else if (event->xkey.keycode == sd->downKeyCode)
+		    scaleMoveFocusWindow (s, 0, 1);
+	    }
 
 	    if (state == ss->state &&
 		(eventMatches (d, event,
@@ -1165,11 +1297,6 @@ scaleHandleEvent (CompDisplay *d,
 	    if (eventMatches (d, event, &ss->opt[SCALE_SCREEN_OPTION_INITIATE]))
 		scaleInitiate (s);
 
-	    if (ss->grabIndex &&
-		eventMatches (d, event,
-			      &ss->opt[SCALE_SCREEN_OPTION_NEXT_WINDOW]))
-		scaleNextWindow (s);
-
 	    if (state == ss->state &&
 		eventMatches (d, event,
 			      &ss->opt[SCALE_SCREEN_OPTION_TERMINATE]))
@@ -1182,7 +1309,7 @@ scaleHandleEvent (CompDisplay *d,
 	{
 	    SCALE_SCREEN (s);
 
-	    if (ss->grabIndex		     &&
+	    if (ss->grabIndex		    &&
 		ss->state != SCALE_STATE_IN &&
 		ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b)
 		scaleSelectWindowAt (s,
@@ -1285,6 +1412,11 @@ scaleInitDisplay (CompPlugin  *p,
 
     sd->lastActiveNum = None;
 
+    sd->leftKeyCode  = XKeysymToKeycode (d->display, XStringToKeysym ("Left"));
+    sd->rightKeyCode = XKeysymToKeycode (d->display, XStringToKeysym ("Right"));
+    sd->upKeyCode    = XKeysymToKeycode (d->display, XStringToKeysym ("Up"));
+    sd->downKeyCode  = XKeysymToKeycode (d->display, XStringToKeysym ("Down"));
+
     WRAP (sd, d, handleEvent, scaleHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = sd;
@@ -1347,6 +1479,8 @@ scaleInitScreen (CompPlugin *p,
 
     ss->darkenBack = SCALE_DARKEN_BACK_DEFAULT;
     ss->cornerMask = 0;
+
+    ss->iconOverlay = ScaleIconEmblem;
 
     scaleScreenInitOptions (ss, s->display->display);
 
