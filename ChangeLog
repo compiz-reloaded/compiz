@@ -1,5 +1,8 @@
 2006-05-17  David Reveman  <davidr@novell.com>
 
+	* src/screen.c (updateDefaultIcon): width and height should be
+	unsigned.
+
 	* gnome/window-decorator/gnome-window-decorator.c: Add minimal
 	option that can be used to run g-w-d with drop-shadows but without full
 	window decorations.

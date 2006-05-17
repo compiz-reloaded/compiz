@@ -120,9 +120,9 @@ setVirtualScreenSize (CompScreen *screen,
 static Bool
 updateDefaultIcon (CompScreen *screen)
 {
-    CompIcon *icon;
-    char     *data;
-    int	     width, height;
+    CompIcon     *icon;
+    char         *data;
+    unsigned int width, height;
 
     if (!readPng (screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON].value.s,
 		  &data, &width, &height))
