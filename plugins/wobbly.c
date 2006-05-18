@@ -148,7 +148,7 @@ static WobblyEffect effectType[] = {
 #define NUM_EFFECT (sizeof (effectType) / sizeof (effectType[0]))
 
 #define WOBBLY_MAP_DEFAULT   (effectName[1])
-#define WOBBLY_FOCUS_DEFAULT (effectName[1])
+#define WOBBLY_FOCUS_DEFAULT (effectName[0])
 
 static char *mapWinType[] = {
     "Splash",

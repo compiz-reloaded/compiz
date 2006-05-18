@@ -1,5 +1,12 @@
 2006-05-18  Dan Winship  <danw@novell.com>
 
+	* plugins/wobbly.c (WOBBLY_FOCUS_DEFAULT): Set this to "None" to
+	match wobblyInitScreen() so that it actually works right.
+
+	* plugins/compiz.schemas.in.in: regen
+
+2006-05-18  Dan Winship  <danw@novell.com>
+
 	* src/session.c (saveYourselfCallback): if we have a
 	RestartCommand registered with the session manager, update the
 	--sm-client-id in it to match the id we were assigned. bnc 176746

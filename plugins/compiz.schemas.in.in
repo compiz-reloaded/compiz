@@ -2099,7 +2099,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[@SCALE_CORNER@]</default>
+            <default>[]</default>
             <locale name="C">
                 <short>Corners</short>
                 <long>
@@ -2527,7 +2527,7 @@
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/focus_effect</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>Shiver</default>
+            <default>None</default>
             <locale name="C">
                 <short>Focus Effect</short>
                 <long>
@@ -2557,7 +2557,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[@SCALE_CORNER@]</default>
+            <default>[]</default>
             <locale name="C">
                 <short>Focus Window Types</short>
                 <long>
@@ -2572,7 +2572,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[@SCALE_CORNER@]</default>
+            <default>[]</default>
             <locale name="C">
                 <short>Grab Window Types</short>
                 <long>
