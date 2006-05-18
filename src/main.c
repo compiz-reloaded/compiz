@@ -88,8 +88,7 @@ usage (void)
 	    "[--test-mode]\n       "
 	    "[--replace] "
 	    "[--sm-disable] "
-	    "[--sm-save-file] "
-	    "[--sm-client-id] "
+	    "[--sm-client-id ID] "
 	    "[--version]\n       "
 	    "[--help] "
 	    "[PLUGIN]...\n",
@@ -120,7 +119,6 @@ main (int argc, char **argv)
     int  i, nPlugin = 0;
     Bool disableSm = FALSE;
     char *clientId = NULL;
-    char *saveFile = NULL;
 
     programName = argv[0];
     programArgc = argc;
@@ -194,11 +192,6 @@ main (int argc, char **argv)
 	{
 	    if (i + 1 < argc)
 		clientId = argv[++i];
-	}
-	else if (!strcmp (argv[i], "--sm-save-file"))
-	{
-	    if (i + 1 < argc)
-		saveFile = argv[++i];
 	}
 	else if (!strcmp (argv[i], "--bg-image"))
 	{

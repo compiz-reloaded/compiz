@@ -1,3 +1,12 @@
+2006-05-18  Dan Winship  <danw@novell.com>
+
+	* src/session.c (saveYourselfCallback): if we have a
+	RestartCommand registered with the session manager, update the
+	--sm-client-id in it to match the id we were assigned. bnc 176746
+
+	* src/main.c (main, usage): remove unused --sm-save-file arg and
+	fix documentation of --sm-client-id.
+
 2006-05-17  David Reveman  <davidr@novell.com>
 
 	* plugins/compiz.schemas.in.in: Regen (Overlay Icon).

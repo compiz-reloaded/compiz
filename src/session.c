@@ -32,6 +32,7 @@
 #include <poll.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
 #include <X11/SM/SMlib.h>
 #include <X11/ICE/ICElib.h>
 
@@ -43,8 +44,40 @@ static SmcConn		 smcConnection;
 static CompWatchFdHandle iceWatchFdHandle;
 static Bool		 connected = 0;
 static Bool		 iceConnected = 0;
+static char		 *smClientId;
 
 static void iceInit (void);
+
+static void
+saveYourselfGotProps (SmcConn   connection,
+		      SmPointer client_data,
+		      int       num_props,
+		      SmProp    **props)
+{
+    int p, i;
+
+    for (p = 0; p < num_props; p++) {
+	if (!strcmp (props[p]->name, SmRestartCommand)) {
+	    for (i = 0; i < props[p]->num_vals - 1; i++) {
+		if (!strncmp (props[p]->vals[i].value,
+			      "--sm-client-id",
+			      props[p]->vals[i].length)) {
+		    SmPropValue oldVal = props[p]->vals[i + 1];
+
+		    props[p]->vals[i + 1].value = smClientId;
+		    props[p]->vals[i + 1].length = strlen (smClientId);
+		    SmcSetProperties (connection, 1, &props[p]);
+		    props[p]->vals[i + 1] = oldVal;
+
+		    SmcSaveYourselfDone (connection, 1);
+		    return;
+		}
+	    }
+	}
+    }
+
+    SmcSaveYourselfDone (connection, 1);
+}
 
 static void
 saveYourselfCallback (SmcConn	connection,
@@ -54,7 +87,8 @@ saveYourselfCallback (SmcConn	connection,
 		      int	interact_Style,
 		      Bool	fast)
 {
-    SmcSaveYourselfDone (connection, 1);
+    if (!SmcGetProperties (connection, saveYourselfGotProps, NULL))
+	SmcSaveYourselfDone (connection, 1);
 }
 
 static void
@@ -81,7 +115,6 @@ void
 initSession (char *smPrevClientId)
 {
     static SmcCallbacks callbacks;
-    static char		*smClientId;
 
     if (getenv ("SESSION_MANAGER"))
     {
@@ -129,6 +162,10 @@ closeSession (void)
     {
 	if (SmcCloseConnection (smcConnection, 0, NULL) != SmcConnectionInUse)
 	    connected = FALSE;
+	if (smClientId) {
+	    free (smClientId);
+	    smClientId = NULL;
+	}
     }
 }
 
