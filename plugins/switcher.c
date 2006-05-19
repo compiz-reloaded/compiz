@@ -180,7 +180,7 @@ typedef struct {
 
 #define BOX_WIDTH 3
 
-#define ICON_SIZE 48
+#define ICON_SIZE 64
 
 static float _boxVertices[] =
 {
