@@ -1,5 +1,7 @@
 2006-05-21  David Reveman  <davidr@novell.com>
 
+	* src/display.c (addDisplay): Select for button events on root windows.
+
 	* configure.ac: Bump version to 0.0.11.
 
 	* gnome/window-decorator/gnome-window-decorator.c: Fix shadow

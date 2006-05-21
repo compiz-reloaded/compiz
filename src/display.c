@@ -2020,6 +2020,8 @@ addDisplay (char *name,
 		      EnterWindowMask	       |
 		      KeyPressMask	       |
 		      KeyReleaseMask	       |
+		      ButtonPressMask	       |
+		      ButtonReleaseMask	       |
 		      FocusChangeMask	       |
 		      ExposureMask);
 
