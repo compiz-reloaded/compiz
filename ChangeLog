@@ -1,3 +1,22 @@
+2006-05-21  David Reveman  <davidr@novell.com>
+
+	* src/window.c (mapWindow): Give sync request on map another try, it
+	seems to be working now.
+
+	* src/window.c (addWindow): Allow XGetWindowAttributes to fail.
+	(bnc 173416).
+
+	* src/window.c (addWindow): Initialize managed to false. Set managed
+	to true if widows is viewable.
+
+	* src/event.c (handleEvent): Set managed to false when window
+	transitions to withdrawn state.
+	(handleEvent): Set managed to true when we get MapRequest.
+	(handleEvent): Constrain configure request if window is managed.
+
+	* include/compiz.h: Add "managed" variable that is true while
+	windows is managed.
+
 2006-05-19  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c (ICON_SIZE): Allow use of larger window icons.

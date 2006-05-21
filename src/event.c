@@ -347,7 +347,8 @@ handleEvent (CompDisplay *d,
 		if (!w->attrib.override_redirect)
 		    setWmState (d, WithdrawnState, w->id);
 
-		w->placed = FALSE;
+		w->placed  = FALSE;
+		w->managed = FALSE;
 	    }
 
 	    unmapWindow (w);
@@ -494,7 +495,7 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 
-#define EV_BUTTON_COMMAND(num)							    \
+#define EV_BUTTON_COMMAND(num)						    \
     if (eventMatches (d, event,						    \
 		      &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num]))	    \
     {									    \
@@ -1168,10 +1169,10 @@ handleEvent (CompDisplay *d,
 
 	    leaveShowDesktopMode (w->screen, w);
 
+	    w->managed = TRUE;
+
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
-		w->mapNum = w->screen->mapNum++;
-
 		XMapWindow (d->display, event->xmaprequest.window);
 
 		updateWindowAttributes (w, FALSE);
@@ -1187,7 +1188,7 @@ handleEvent (CompDisplay *d,
 	break;
     case ConfigureRequest:
 	w = findWindowAtDisplay (d, event->xconfigurerequest.window);
-	if (w && w->mapNum)
+	if (w && w->managed)
 	{
 	    XWindowChanges xwc;
 
