@@ -1,5 +1,9 @@
 2006-05-21  David Reveman  <davidr@novell.com>
 
+	* gnome/window-decorator/gnome-window-decorator.c: Fix shadow
+	performance by separating the convolution filter into one vertical and
+	one horizontal pass.
+
 	* src/window.c (mapWindow): Give sync request on map another try, it
 	seems to be working now.
 

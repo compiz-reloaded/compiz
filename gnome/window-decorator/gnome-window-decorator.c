@@ -4313,17 +4313,33 @@ XRenderSetPictureFilter_wrapper (Display *dpy,
 #define XRenderSetPictureFilter XRenderSetPictureFilter_wrapper
 #endif
 
+static void
+set_picture_transform (Display *xdisplay,
+		       Picture p,
+		       int     dx,
+		       int     dy)
+{
+    XTransform transform = {
+	{
+	    { 1 << 16, 0,       -dx << 16 },
+	    { 0,       1 << 16, -dy << 16 },
+	    { 0,       0,         1 << 16 },
+	}
+    };
+
+    XRenderSetPictureTransform (xdisplay, p, &transform);
+}
+
 static XFixed *
 create_gaussian_kernel (double radius,
 			double sigma,
 			double alpha,
 			double opacity,
-			int    *r_size,
-			int    *n_params)
+			int    *r_size)
 {
     XFixed *params;
-    double *amp, scale, xy_scale, sum;
-    int    size, half_size, x, y, i, n;
+    double *amp, scale, x_scale, fx, sum;
+    int    size, half_size, x, i, n;
 
     scale = 1.0f / (2.0f * M_PI * sigma * sigma);
     half_size = alpha + 0.5f;
@@ -4332,12 +4348,12 @@ create_gaussian_kernel (double radius,
 	half_size = 1;
 
     size = half_size * 2 + 1;
-    xy_scale = 2.0f * radius / size;
+    x_scale = 2.0f * radius / size;
 
     if (size < 3)
 	return NULL;
 
-    n = size * size;
+    n = size;
 
     amp = g_malloc (sizeof (double) * n);
     if (!amp)
@@ -4352,38 +4368,29 @@ create_gaussian_kernel (double radius,
     i   = 0;
     sum = 0.0f;
 
-    for (y = 0; y < size; y++)
+    for (x = 0; x < size; x++)
     {
-	double fx, fy;
+	fx = x_scale * (x - half_size);
 
-	fy = xy_scale * (y - half_size);
+	amp[i] = scale * exp ((-1.0f * (fx * fx)) / (2.0f * sigma * sigma));
 
-	for (x = 0; x < size; x++)
-	{
-	    fx = xy_scale * (x - half_size);
+	sum += amp[i];
 
-	    amp[i] = scale * exp ((-1.0f * (fx * fx + fy * fy)) /
-				  (2.0f * sigma * sigma));
-
-	    sum += amp[i];
-
-	    i++;
-	}
+	i++;
     }
 
     /* normalize */
     if (sum != 0.0)
 	sum = 1.0 / sum;
 
-    params[0] = params[1] = size << 16;
+    params[0] = params[1] = 0;
 
     for (i = 2; i < n; i++)
-	params[i] = XDoubleToFixed (amp[i - 2] * sum * opacity);
+	params[i] = XDoubleToFixed (amp[i - 2] * sum * opacity * 1.2);
 
     g_free (amp);
 
-    *n_params = n;
-    *r_size   = size;
+    *r_size = size;
 
     return params;
 }
@@ -4400,7 +4407,7 @@ update_shadow (void)
     Display		*xdisplay = gdk_display;
     XRenderPictFormat   *format;
     GdkPixmap		*pixmap;
-    Picture		src, mask, dst;
+    Picture		src, dst, tmp;
     XFixed		*params;
     XFilters		*filters;
     char		*filter = NULL;
@@ -4411,27 +4418,21 @@ update_shadow (void)
     static XRenderColor color = { 0x0000, 0x0000, 0x0000, 0xffff };
     static XRenderColor clear = { 0x0000, 0x0000, 0x0000, 0x0000 };
     static XRenderColor white = { 0xffff, 0xffff, 0xffff, 0xffff };
-    XTransform          transform = {
-	{
-	    { 1 << 16, 0,       -shadow_offset_x << 16 },
-	    { 0,       1 << 16, -shadow_offset_y << 16 },
-	    { 0,       0,                      1 << 16 },
-	}
-    };
 
     /* compute a gaussian convolution kernel */
     params = create_gaussian_kernel (shadow_radius,
 				     SIGMA (shadow_radius),
 				     ALPHA (shadow_radius),
 				     shadow_opacity,
-				     &size, &n_params);
+				     &size);
     if (!params)
 	shadow_offset_x = shadow_offset_y = size = 0;
 
     if (shadow_radius <= 0.0 && shadow_offset_x == 0 && shadow_offset_y == 0)
 	size = 0;
 
-    size = size >> 1;
+    n_params = size + 2;
+    size     = size / 2;
 
     left_space   = _win_extents.left   + size - shadow_offset_x;
     right_space  = _win_extents.right  + size + shadow_offset_x;
@@ -4485,7 +4486,6 @@ update_shadow (void)
     /* shadow color */
     src = XRenderCreateSolidFill (xdisplay, &color);
 
-
     if (large_shadow_pixmap)
     {
 	gdk_pixmap_unref (large_shadow_pixmap);
@@ -4513,7 +4513,6 @@ update_shadow (void)
 	return 1;
     }
 
-    /* create shadow pixmap */
     pixmap = create_pixmap (d.width, d.height);
     if (!pixmap)
     {
@@ -4550,7 +4549,6 @@ update_shadow (void)
 
     /* WINDOWS WITH DECORATION */
 
-    /* create temporary decoration pixmap */
     d.pixmap = create_pixmap (d.width, d.height);
     if (!d.pixmap)
     {
@@ -4568,36 +4566,49 @@ update_shadow (void)
 
     decoration_alpha = save_decoration_alpha;
 
-    mask = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (d.pixmap), format,
-				 0, NULL);
-
-    /* set gaussion convolution filter on decoration pixmap */
-    XRenderSetPictureFilter (xdisplay, mask, filter, params, n_params);
-
-    /* for shadow offset */
-    XRenderSetPictureTransform (xdisplay, mask, &transform);
-
-    dst = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
+    dst = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (d.pixmap),
+				format, 0, NULL);
+    tmp = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
 				format, 0, NULL);
 
-   /* create shadow by compositing a solid color to the shadow pixmap with a
-      gaussian convolution filtered decoration as mask. */
+    /* first pass */
+    params[0] = (n_params - 2) << 16;
+    params[1] = 1 << 16;
+
+    set_picture_transform (xdisplay, dst, shadow_offset_x, 0);
+    XRenderSetPictureFilter (xdisplay, dst, filter, params, n_params);
     XRenderComposite (xdisplay,
 		      PictOpSrc,
 		      src,
-		      mask,
+		      dst,
+		      tmp,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      d.width, d.height);
+
+    /* second pass */
+    params[0] = 1 << 16;
+    params[1] = (n_params - 2) << 16;
+
+    set_picture_transform (xdisplay, tmp, 0, shadow_offset_y);
+    XRenderSetPictureFilter (xdisplay, tmp, filter, params, n_params);
+    XRenderComposite (xdisplay,
+		      PictOpSrc,
+		      src,
+		      tmp,
 		      dst,
 		      0, 0,
 		      0, 0,
 		      0, 0,
 		      d.width, d.height);
 
-    XRenderFreePicture (xdisplay, mask);
+    XRenderFreePicture (xdisplay, tmp);
     XRenderFreePicture (xdisplay, dst);
 
-    gdk_pixmap_unref (d.pixmap);
+    gdk_pixmap_unref (pixmap);
 
-    large_shadow_pixmap = pixmap;
+    large_shadow_pixmap = d.pixmap;
 
     cr = gdk_cairo_create (GDK_DRAWABLE (large_shadow_pixmap));
     shadow_pattern = cairo_pattern_create_for_surface (cairo_get_target (cr));
@@ -4612,68 +4623,80 @@ update_shadow (void)
     d.height = shadow_top_space + shadow_top_corner_space + 1 +
 	shadow_bottom_space + shadow_bottom_corner_space;
 
-    /* create temporary decoration pixmap */
-    d.pixmap = create_pixmap (d.width, d.height);
-    if (!d.pixmap)
+    pixmap = create_pixmap (d.width, d.height);
+    if (!pixmap)
     {
 	g_free (params);
 	return 0;
     }
 
-    mask = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (d.pixmap), format,
-				 0, NULL);
+    d.pixmap = create_pixmap (d.width, d.height);
+    if (!d.pixmap)
+    {
+	gdk_pixmap_unref (pixmap);
+	g_free (params);
+	return 0;
+    }
+
+    dst = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (d.pixmap),
+				format, 0, NULL);
 
     /* draw rectangle */
-    XRenderFillRectangle (xdisplay, PictOpSrc, mask, &clear,
+    XRenderFillRectangle (xdisplay, PictOpSrc, dst, &clear,
 			  0,
 			  0,
 			  d.width,
 			  d.height);
-    XRenderFillRectangle (xdisplay, PictOpSrc, mask, &white,
+    XRenderFillRectangle (xdisplay, PictOpSrc, dst, &white,
 			  shadow_left_space,
 			  shadow_top_space,
 			  d.width - shadow_left_space - shadow_right_space,
 			  d.height - shadow_top_space - shadow_bottom_space);
 
-    /* set gaussion convolution filter on decoration pixmap */
-    XRenderSetPictureFilter (xdisplay, mask, filter, params, n_params);
-
-    /* for shadow offset */
-    XRenderSetPictureTransform (xdisplay, mask, &transform);
-
-    /* create shadow pixmap */
-    pixmap = create_pixmap (d.width, d.height);
-    if (!pixmap)
-    {
-	gdk_pixmap_unref (d.pixmap);
-	g_free (params);
-	return 0;
-    }
-
-    dst = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
+    tmp = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
 				format, 0, NULL);
 
-   /* create shadow by compositing a solid color to the shadow pixmap with a
-      gaussian convolution filtered decoration as mask. */
+    /* first pass */
+    params[0] = (n_params - 2) << 16;
+    params[1] = 1 << 16;
+
+    set_picture_transform (xdisplay, dst, shadow_offset_x, 0);
+    XRenderSetPictureFilter (xdisplay, dst, filter, params, n_params);
     XRenderComposite (xdisplay,
 		      PictOpSrc,
 		      src,
-		      mask,
+		      dst,
+		      tmp,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      d.width, d.height);
+
+    /* second pass */
+    params[0] = 1 << 16;
+    params[1] = (n_params - 2) << 16;
+
+    set_picture_transform (xdisplay, tmp, 0, shadow_offset_y);
+    XRenderSetPictureFilter (xdisplay, tmp, filter, params, n_params);
+    XRenderComposite (xdisplay,
+		      PictOpSrc,
+		      src,
+		      tmp,
 		      dst,
 		      0, 0,
 		      0, 0,
 		      0, 0,
 		      d.width, d.height);
 
-    XRenderFreePicture (xdisplay, mask);
+    XRenderFreePicture (xdisplay, tmp);
     XRenderFreePicture (xdisplay, dst);
     XRenderFreePicture (xdisplay, src);
 
-    gdk_pixmap_unref (d.pixmap);
+    gdk_pixmap_unref (pixmap);
 
     g_free (params);
 
-    shadow_pixmap = pixmap;
+    shadow_pixmap = d.pixmap;
 
     return 1;
 }
