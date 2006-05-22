@@ -2200,17 +2200,33 @@ moveResizeWindow (CompWindow     *w,
 	xwcm |= CWY;
     }
 
-    if (xwcm & CWY)
+    if (!(w->type & (CompWindowTypeDockMask | CompWindowTypeUnknownMask)))
     {
-	int min, max;
+	if (xwcm & CWY)
+	{
+	    int min, max;
 
-	min = w->screen->workArea.y + w->input.top;
-	max = w->screen->workArea.y + w->screen->workArea.height;
+	    min = w->screen->workArea.y + w->input.top;
+	    max = w->screen->workArea.y + w->screen->workArea.height;
 
-	if (xwc->y < min)
-	    xwc->y = min;
-	else if (xwc->y > max)
-	    xwc->y = max;
+	    if (xwc->y < min)
+		xwc->y = min;
+	    else if (xwc->y > max)
+		xwc->y = max;
+	}
+
+	if (xwcm & CWX)
+	{
+	    int min, max;
+
+	    min = w->screen->workArea.x + w->input.left;
+	    max = w->screen->workArea.x + w->screen->workArea.width;
+
+	    if (xwc->x < min)
+		xwc->x = min;
+	    else if (xwc->x > max)
+		xwc->x = max;
+	}
     }
 
     if (xwcm & CWBorderWidth)
