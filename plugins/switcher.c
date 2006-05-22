@@ -1040,13 +1040,13 @@ switchHandleEvent (CompDisplay *d,
 
 	    if (!ss->switching)
 	    {
-		if (eventMatches (d, event,
-				  &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]) ||
-		    eventMatches (d, event, &ss->prev_bind))
-		    switchInitiate (s, FALSE);
-		else if (eventMatches (d, event, &ss->init_all_bind) ||
-			 eventMatches (d, event, &ss->prev_all_bind))
+		if (eventMatches (d, event, &ss->init_all_bind) ||
+		    eventMatches (d, event, &ss->prev_all_bind))
 		    switchInitiate (s, TRUE);
+		else if (eventMatches (d, event,
+				       &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]) ||
+			 eventMatches (d, event, &ss->prev_bind))
+		    switchInitiate (s, FALSE);
 	    }
 
 	    if (eventMatches (d, event,

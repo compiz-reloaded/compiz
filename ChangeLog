@@ -1,3 +1,10 @@
+2006-05-22  Dan Winship  <danw@novell.com>
+
+	* plugins/switcher.c (switchHandleEvent): Check init_all binding
+	before init, so you can bind "<Alt>" to init_all and so end up
+	with "<Alt>Tab" being init_all rather than init (but with no way
+	to get "init"...). bnc 173376
+
 2006-05-21  David Reveman  <davidr@novell.com>
 
 	* src/display.c (addDisplay): Select for button events on root windows.
