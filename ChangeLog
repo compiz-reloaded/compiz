@@ -1,3 +1,14 @@
+2006-05-23  David Reveman  <davidr@novell.com>
+
+	* plugins/water.c: GL_UNSIGNED_INT_8_8_8_8_REV as pixel data type on
+	MSBFirst machines.
+
+	* src/texture.c: Include config.h before compiz.h so that
+	IMAGE_BYTE_ORDER is defined correctly. (bnc 178171)
+
+	* include/compiz.h: Define LSBFirst, MSBFirst, IMAGE_BYTE_ORDER,
+	BITMAP_BIT_ORDER. (bnc 178171)
+
 2006-05-23  Dan Winship  <danw@novell.com>
 
 	* plugins/switcher.c (switchToWindow): use ss->windows here as

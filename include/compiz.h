@@ -42,6 +42,21 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 
+/*
+ * WORDS_BIGENDIAN should be defined before including this file for
+ * IMAGE_BYTE_ORDER and BITMAP_BIT_ORDER to be set correctly.
+ */
+#define LSBFirst 0
+#define MSBFirst 1
+
+#ifdef WORDS_BIGENDIAN
+#  define IMAGE_BYTE_ORDER MSBFirst
+#  define BITMAP_BIT_ORDER MSBFirst
+#else
+#  define IMAGE_BYTE_ORDER LSBFirst
+#  define BITMAP_BIT_ORDER LSBFirst
+#endif
+
 typedef struct _CompPlugin  CompPlugin;
 typedef struct _CompDisplay CompDisplay;
 typedef struct _CompScreen  CompScreen;

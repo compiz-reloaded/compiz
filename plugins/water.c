@@ -23,6 +23,10 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#ifdef HAVE_CONFIG_H
+#  include "../config.h"
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -495,7 +499,13 @@ allocTexture (CompScreen *s,
 		  ws->height,
 		  0,
 		  GL_BGRA,
+
+#if IMAGE_BYTE_ORDER == MSBFirst
+		  GL_UNSIGNED_INT_8_8_8_8_REV,
+#else
 		  GL_UNSIGNED_BYTE,
+#endif
+
 		  ws->t0);
 }
 
@@ -807,7 +817,13 @@ softwareUpdate (CompScreen *s,
 		      ws->height,
 		      0,
 		      GL_BGRA,
-		      GL_UNSIGNED_BYTE,
+
+#if IMAGE_BYTE_ORDER == MSBFirst
+		  GL_UNSIGNED_INT_8_8_8_8_REV,
+#else
+		  GL_UNSIGNED_BYTE,
+#endif
+
 		      ws->t0);
     }
 }
