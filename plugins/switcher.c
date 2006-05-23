@@ -650,75 +650,27 @@ static void
 switchToWindow (CompScreen *s,
 		Bool	   toNext)
 {
-    CompWindow *next = NULL;
-    CompWindow *prev = NULL;
     CompWindow *w;
+    int cur;
 
     SWITCH_SCREEN (s);
 
     if (!ss->grabIndex)
 	return;
 
-    for (w = s->windows; w; w = w->next)
+    for (cur = 0; cur < ss->nWindows; cur++)
     {
-	if (w->id == ss->selectedWindow)
-	    continue;
-
-	if (isSwitchWin (w))
-	{
-	    if (w->activeNum < ss->lastActiveNum)
-	    {
-		if (next)
-		{
-		    if (toNext)
-		    {
-			if (w->activeNum > next->activeNum)
-			    next = w;
-		    }
-		    else
-		    {
-			if (w->activeNum < next->activeNum)
-			    next = w;
-		    }
-		}
-		else
-		    next = w;
-	    }
-	    else if (w->activeNum > ss->lastActiveNum)
-	    {
-		if (prev)
-		{
-		    if (toNext)
-		    {
-			if (w->activeNum > prev->activeNum)
-			    prev = w;
-		    }
-		    else
-		    {
-			if (w->activeNum < prev->activeNum)
-			    prev = w;
-		    }
-		}
-		else
-		    prev = w;
-	    }
-	}
+	if (ss->windows[cur]->id == ss->selectedWindow)
+	    break;
     }
+
+    if (cur == ss->nWindows)
+	return;
 
     if (toNext)
-    {
-	if (next)
-	    w = next;
-	else
-	    w = prev;
-    }
+	w = ss->windows[(cur + 1) % ss->nWindows];
     else
-    {
-	if (prev)
-	    w = prev;
-	else
-	    w = next;
-    }
+	w = ss->windows[(cur + ss->nWindows - 1) % ss->nWindows];
 
     if (w)
     {
@@ -975,13 +927,13 @@ switchTerminate (CompScreen *s,
 		sendWindowActivationRequest (w->screen, w->id);
 	}
 
+	removeScreenGrab (s, ss->grabIndex, 0);
+	ss->grabIndex = 0;
+
 	if (!ss->zooming)
 	{
 	    ss->selectedWindow = None;
 	    ss->zoomedWindow   = None;
-
-	    removeScreenGrab (s, ss->grabIndex, 0);
-	    ss->grabIndex = 0;
 	}
 	else
 	{
@@ -1191,11 +1143,11 @@ switchPreparePaintScreen (CompScreen *s,
 			ss->translate  = 0.0f;
 			ss->sTranslate = ss->zoom;
 
+			ss->selectedWindow = None;
+			ss->zoomedWindow   = None;
+
 			if (ss->grabIndex)
 			{
-			    ss->selectedWindow = None;
-			    ss->zoomedWindow   = None;
-
 			    removeScreenGrab (s, ss->grabIndex, 0);
 			    ss->grabIndex = 0;
 			}
@@ -1244,7 +1196,7 @@ switchPaintScreen (CompScreen		   *s,
 
     SWITCH_SCREEN (s);
 
-    if (ss->grabIndex)
+    if (ss->grabIndex || ss->zooming)
     {
 	ScreenPaintAttrib sa = *sAttrib;
 	CompWindow	  *zoomed;
@@ -1330,7 +1282,7 @@ switchDonePaintScreen (CompScreen *s)
 {
     SWITCH_SCREEN (s);
 
-    if (ss->grabIndex && ss->moreAdjust)
+    if ((ss->grabIndex || ss->zooming) && ss->moreAdjust)
     {
 	if (ss->zooming)
 	{
