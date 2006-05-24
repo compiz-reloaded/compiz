@@ -1,3 +1,11 @@
+2006-05-24  David Reveman  <davidr@novell.com>
+
+	* plugins/scale.c (scaleMoveFocusWindow): When moving to window on
+	left, make sure the window we're moving to is completely left of
+	currently selected window. And same thing when moving to window on
+	right, top, bottom.
+	 (layoutThumbs): Set slot->x2 and slot->y2 correctly. (bnc 178216)
+
 2006-05-23  David Reveman  <davidr@novell.com>
 
 	* plugins/water.c: GL_UNSIGNED_INT_8_8_8_8_REV as pixel data type on

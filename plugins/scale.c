@@ -831,10 +831,16 @@ layoutThumbs (CompScreen *s)
 	{
 	    ss->slots[i].y1 += ss->windows[i]->input.top;
 	    ss->slots[i].x1 += ss->windows[i]->input.left;
+	    ss->slots[i].y2 += ss->windows[i]->input.top;
+	    ss->slots[i].x2 += ss->windows[i]->input.left;
 	    ss->slots[i].y1 = (float) ss->slots[i].y1 * ss->scale;
 	    ss->slots[i].x1 = (float) ss->slots[i].x1 * ss->scale;
+	    ss->slots[i].y2 = (float) ss->slots[i].y2 * ss->scale;
+	    ss->slots[i].x2 = (float) ss->slots[i].x2 * ss->scale;
 	    ss->slots[i].x1 += s->workArea.x;
 	    ss->slots[i].y1 += s->workArea.y;
+	    ss->slots[i].x2 += s->workArea.x;
+	    ss->slots[i].y2 += s->workArea.y;
 	}
     }
 
@@ -1164,10 +1170,10 @@ scaleMoveFocusWindow (CompScreen *s,
 	    d = abs (x - cx) + abs (y - cy);
 	    if (d < min)
 	    {
-		if ((dx > 0 && x < sw->slot->x2) ||
-		    (dx < 0 && x > sw->slot->x1) ||
-		    (dy > 0 && y < sw->slot->y2) ||
-		    (dy < 0 && y > sw->slot->y1))
+		if ((dx > 0 && slot->x1 < sw->slot->x2) ||
+		    (dx < 0 && slot->x2 > sw->slot->x1) ||
+		    (dy > 0 && slot->y1 < sw->slot->y2) ||
+		    (dy < 0 && slot->y2 > sw->slot->y1))
 		    continue;
 
 		min   = d;
