@@ -423,7 +423,29 @@ handleEvent (CompDisplay *d,
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
-		    maximizeWindow (w);
+		    maximizeWindow (w, MAXIMIZE_STATE);
+
+		eventMode = AsyncPointer;
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    maximizeWindow (w, w->state |
+				    CompWindowStateMaximizedHorzMask);
+
+		eventMode = AsyncPointer;
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    maximizeWindow (w, w->state |
+				    CompWindowStateMaximizedVertMask);
 
 		eventMode = AsyncPointer;
 	    }
@@ -433,7 +455,7 @@ handleEvent (CompDisplay *d,
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
-		    unmaximizeWindow (w);
+		    maximizeWindow (w, 0);
 
 		eventMode = AsyncPointer;
 	    }
@@ -567,6 +589,37 @@ handleEvent (CompDisplay *d,
 		eventMode = AsyncPointer;
 	    }
 
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		{
+		    if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+			maximizeWindow (w, 0);
+		    else
+			maximizeWindow (w, MAXIMIZE_STATE);
+		}
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    maximizeWindow (w, w->state ^
+				    CompWindowStateMaximizedHorzMask);
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    maximizeWindow (w, w->state ^
+				    CompWindowStateMaximizedVertMask);
+	    }
+
 	    if (!d->screens->maxGrab)
 		XAllowEvents (d->display, eventMode, event->xbutton.time);
 	}
@@ -594,7 +647,25 @@ handleEvent (CompDisplay *d,
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
-		    maximizeWindow (w);
+		    maximizeWindow (w, MAXIMIZE_STATE);
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ]))
+	    {
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		    maximizeWindow (w, w->state |
+				    CompWindowStateMaximizedHorzMask);
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT]))
+	    {
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		    maximizeWindow (w, w->state |
+				    CompWindowStateMaximizedVertMask);
 	    }
 
 	    if (eventMatches (d, event,
@@ -602,7 +673,7 @@ handleEvent (CompDisplay *d,
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
-		    unmaximizeWindow (w);
+		    maximizeWindow (w, 0);
 	    }
 
 	    if (eventMatches (d, event,
@@ -704,6 +775,37 @@ handleEvent (CompDisplay *d,
 	    if (eventMatches (d, event,
 			      &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT]))
 		runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED]))
+	    {
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		{
+		    if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+			maximizeWindow (w, 0);
+		    else
+			maximizeWindow (w, MAXIMIZE_STATE);
+		}
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ]))
+	    {
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		    maximizeWindow (w, w->state ^
+				    CompWindowStateMaximizedHorzMask);
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT]))
+	    {
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		    maximizeWindow (w, w->state ^
+				    CompWindowStateMaximizedVertMask);
+	    }
 	}
 	break;
     case KeyRelease:

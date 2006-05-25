@@ -38,9 +38,6 @@
 #define WIN_W(w) ((w)->width + (w)->output.left + (w)->output.right)
 #define WIN_H(w) ((w)->height + (w)->output.top + (w)->output.bottom)
 
-#define MAXIMIZE_STATE (CompWindowStateMaximizedVertMask | \
-			CompWindowStateMaximizedHorzMask)
-
 #define GRID_WIDTH  4
 #define GRID_HEIGHT 4
 
@@ -2330,8 +2327,7 @@ wobblyHandleEvent (CompDisplay *d,
 	    {
 		WOBBLY_WINDOW (ws->grabWindow);
 
-		if (ww->state & (CompWindowStateMaximizedVertMask |
-				 CompWindowStateMaximizedHorzMask))
+		if (ww->state & MAXIMIZE_STATE)
 		{
 		    WOBBLY_WINDOW (ws->grabWindow);
 
@@ -2339,8 +2335,15 @@ wobblyHandleEvent (CompDisplay *d,
 		    {
 			int dx, dy;
 
-			dx = pointerX - lastPointerX;
-			dy = pointerY - lastPointerY;
+			if (ww->state & CompWindowStateMaximizedHorzMask)
+			    dx = pointerX - lastPointerX;
+			else
+			    dx = 0;
+
+			if (ww->state & CompWindowStateMaximizedVertMask)
+			    dy = pointerY - lastPointerY;
+			else
+			    dy = 0;
 
 			ww->model->anchorObject->position.x += dx;
 			ww->model->anchorObject->position.y += dy;

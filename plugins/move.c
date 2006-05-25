@@ -296,8 +296,7 @@ moveHandleMotionEvent (CompScreen *s,
 	}
 	else
 	{
-	    unsigned int state = w->state;
-	    int		 min, max;
+	    int	min, max;
 
 	    dx = md->x;
 	    dy = md->y;
@@ -319,22 +318,26 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if (yRoot - ms->snapOffY >= SNAP_OFF)
 		    {
+			int width = w->attrib.width;
+
 			w->saveMask |= CWX | CWY;
 
-			w->saveWc.x = xRoot - (w->saveWc.width >> 1);
+			if (w->saveMask & CWWidth)
+			    width = w->saveWc.width;
+
+			w->saveWc.x = xRoot - (width >> 1);
 			w->saveWc.y = yRoot + (w->input.top >> 1);
 
 			md->x = md->y = 0;
 
-			unmaximizeWindow (w);
+			maximizeWindow (w, 0);
 
 			ms->snapOffY = ms->snapBackY;
 
 			return;
 		    }
 		}
-		else if ((ms->origState & CompWindowStateMaximizedVertMask) &&
-			 (ms->origState & CompWindowStateMaximizedHorzMask))
+		else if (ms->origState & CompWindowStateMaximizedVertMask)
 		{
 		    if (yRoot - ms->snapBackY < SNAP_BACK)
 		    {
@@ -342,7 +345,7 @@ moveHandleMotionEvent (CompScreen *s,
 			{
 			    int wy;
 
-			    maximizeWindow (w);
+			    maximizeWindow (w, ms->origState);
 
 			    wy  = s->workArea.y + (w->input.top >> 1);
 			    wy += w->sizeHints.height_inc >> 1;
@@ -355,7 +358,7 @@ moveHandleMotionEvent (CompScreen *s,
 		}
 	    }
 
-	    if (state & CompWindowStateMaximizedVertMask)
+	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
 		min = s->workArea.y + w->input.top;
 		max = s->workArea.y + s->workArea.height -
@@ -367,7 +370,7 @@ moveHandleMotionEvent (CompScreen *s,
 		    dy = max - w->attrib.y;
 	    }
 
-	    if (state & CompWindowStateMaximizedHorzMask)
+	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
 		if (w->attrib.x > s->width || w->attrib.x + w->width < 0)
 		    return;

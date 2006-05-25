@@ -2135,13 +2135,6 @@ moveResizeWindow (CompWindow     *w,
     if (xwcm & (CWX | CWWidth))
     {
 	switch (gravity) {
-	case NorthWestGravity:
-	case WestGravity:
-	case SouthWestGravity:
-	    if (xwcm & CWX)
-		xwc->x += w->input.left;
-	    break;
-
 	case NorthGravity:
 	case CenterGravity:
 	case SouthGravity:
@@ -2169,13 +2162,6 @@ moveResizeWindow (CompWindow     *w,
     if (xwcm & (CWY | CWHeight))
     {
 	switch (gravity) {
-	case NorthWestGravity:
-	case NorthGravity:
-	case NorthEastGravity:
-	    if (xwcm & CWY)
-		xwc->y += w->input.top;
-	    break;
-
 	case WestGravity:
 	case CenterGravity:
 	case EastGravity:
@@ -3465,46 +3451,25 @@ unminimizeWindow (CompWindow *w)
 }
 
 void
-maximizeWindow (CompWindow *w)
+maximizeWindow (CompWindow *w,
+		int	   state)
 {
-    int state = 0;
-
     if (w->attrib.override_redirect)
 	return;
 
-    if (w->actions & CompWindowActionMaximizeHorzMask)
-	state |= CompWindowStateMaximizedHorzMask;
+    if (!(w->actions & CompWindowActionMaximizeHorzMask))
+	state &= ~CompWindowStateMaximizedHorzMask;
 
-    if (w->actions & CompWindowActionMaximizeVertMask)
-	state |= CompWindowStateMaximizedVertMask;
+    if (!(w->actions & CompWindowActionMaximizeVertMask))
+	state &= ~CompWindowStateMaximizedVertMask;
 
-    state &= ~w->state;
+    state &= MAXIMIZE_STATE;
 
-    if (!state)
+    if (state == (w->state & MAXIMIZE_STATE))
 	return;
 
+    w->state &= ~MAXIMIZE_STATE;
     w->state |= state;
-
-    recalcWindowType (w);
-    recalcWindowActions (w);
-
-    updateWindowAttributes (w, FALSE);
-
-    setWindowState (w->screen->display, w->state, w->id);
-}
-
-void
-unmaximizeWindow (CompWindow *w)
-{
-    if (w->attrib.override_redirect)
-	return;
-
-    if (!(w->state & (CompWindowStateMaximizedHorzMask |
-		      CompWindowStateMaximizedVertMask)))
-	return;
-
-    w->state &= ~(CompWindowStateMaximizedHorzMask |
-		  CompWindowStateMaximizedVertMask);
 
     recalcWindowType (w);
     recalcWindowActions (w);

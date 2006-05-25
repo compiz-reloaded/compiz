@@ -308,6 +308,24 @@ compDisplayInitOptions (CompDisplay *display,
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (MAXIMIZE_WINDOW_KEY_DEFAULT));
 
+    o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ];
+    o->name			  = "maximize_window_horizontally";
+    o->shortDesc		  = "Maximize Window Horizontally";
+    o->longDesc			  = "Maximize active window horizontally";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeNone;
+    o->value.bind.u.key.modifiers = 0;
+    o->value.bind.u.key.keycode   = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT];
+    o->name			  = "maximize_window_vertically";
+    o->shortDesc		  = "Maximize Window Vertically";
+    o->longDesc			  = "Maximize active window vertically";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeNone;
+    o->value.bind.u.key.modifiers = 0;
+    o->value.bind.u.key.keycode   = 0;
+
     o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
     o->name			  = "show_desktop";
     o->shortDesc		  = "Hide all windows and focus desktop";
@@ -451,6 +469,35 @@ compDisplayInitOptions (CompDisplay *display,
     o->longDesc	      = "Audible system beep";
     o->type	      = CompOptionTypeBool;
     o->value.b	      = AUDIBLE_BELL_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED];
+    o->name			  = "toggle_window_maximized";
+    o->shortDesc		  = "Toggle Window Maximized";
+    o->longDesc			  = "Toggle active window maximized";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeNone;
+    o->value.bind.u.key.modifiers = 0;
+    o->value.bind.u.key.keycode   = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ];
+    o->name			  = "toggle_window_maximized_horizontally";
+    o->shortDesc		  = "Toggle Window Maximized Horizontally";
+    o->longDesc			  =
+	"Toggle active window maximized horizontally";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeNone;
+    o->value.bind.u.key.modifiers = 0;
+    o->value.bind.u.key.keycode   = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT];
+    o->name			  = "toggle_window_maximized_vertically";
+    o->shortDesc		  = "Toggle Window Maximized Vertically";
+    o->longDesc			  =
+	"Toggle active window maximized vertically";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeNone;
+    o->value.bind.u.key.modifiers = 0;
+    o->value.bind.u.key.keycode   = 0;
 }
 
 CompOption *
@@ -561,6 +608,8 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_RUN_DIALOG:
     case COMP_DISPLAY_OPTION_MINIMIZE_WINDOW:
     case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW:
+    case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ:
+    case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT:
     case COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW:
     case COMP_DISPLAY_OPTION_SHOW_DESKTOP:
     case COMP_DISPLAY_OPTION_RUN_COMMAND0:
@@ -582,6 +631,9 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_RUN_SCREENSHOT:
     case COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT:
     case COMP_DISPLAY_OPTION_WINDOW_MENU:
+    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED:
+    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ:
+    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT:
 	if (addDisplayBinding (display, &value->bind))
 	{
 	    removeDisplayBinding (display, &o->value.bind);
@@ -1583,6 +1635,10 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
     addScreenBinding (s,
 		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW].value.bind);
     addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT].value.bind);
+    addScreenBinding (s,
 		      &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND0].value.bind);
@@ -1607,6 +1663,13 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.bind);
     addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ].value.bind);
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT].value.bind);
+
 }
 
 void

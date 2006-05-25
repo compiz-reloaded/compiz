@@ -116,6 +116,9 @@ typedef struct _CompIcon    CompIcon;
 #define CompWindowStateDemandsAttentationMask (1 << 11)
 #define CompWindowStateDisplayModalMask	      (1 << 12)
 
+#define MAXIMIZE_STATE (CompWindowStateMaximizedHorzMask | \
+			CompWindowStateMaximizedVertMask)
+
 #define CompWindowActionMoveMask	 (1 << 0)
 #define CompWindowActionResizeMask	 (1 << 1)
 #define CompWindowActionStickMask	 (1 << 2)
@@ -402,17 +405,22 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW             34
 #define COMP_DISPLAY_OPTION_MINIMIZE_WINDOW               35
 #define COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW               36
-#define COMP_DISPLAY_OPTION_OPACITY_INCREASE              37
-#define COMP_DISPLAY_OPTION_OPACITY_DECREASE              38
-#define COMP_DISPLAY_OPTION_SCREENSHOT                    39
-#define COMP_DISPLAY_OPTION_RUN_SCREENSHOT                40
-#define COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT             41
-#define COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT         42
-#define COMP_DISPLAY_OPTION_WINDOW_MENU                   43
-#define COMP_DISPLAY_OPTION_SHOW_DESKTOP                  44
-#define COMP_DISPLAY_OPTION_RAISE_ON_CLICK                45
-#define COMP_DISPLAY_OPTION_AUDIBLE_BELL                  46
-#define COMP_DISPLAY_OPTION_NUM                           47
+#define COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ          37
+#define COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT          38
+#define COMP_DISPLAY_OPTION_OPACITY_INCREASE              39
+#define COMP_DISPLAY_OPTION_OPACITY_DECREASE              40
+#define COMP_DISPLAY_OPTION_SCREENSHOT                    41
+#define COMP_DISPLAY_OPTION_RUN_SCREENSHOT                42
+#define COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT             43
+#define COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT         44
+#define COMP_DISPLAY_OPTION_WINDOW_MENU                   45
+#define COMP_DISPLAY_OPTION_SHOW_DESKTOP                  46
+#define COMP_DISPLAY_OPTION_RAISE_ON_CLICK                47
+#define COMP_DISPLAY_OPTION_AUDIBLE_BELL                  48
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED       49
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ  50
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT  51
+#define COMP_DISPLAY_OPTION_NUM                           52
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -1846,10 +1854,8 @@ void
 unminimizeWindow (CompWindow *w);
 
 void
-maximizeWindow (CompWindow *w);
-
-void
-unmaximizeWindow (CompWindow *w);
+maximizeWindow (CompWindow *w,
+		int	   state);
 
 Bool
 getWindowUserTime (CompWindow *w,

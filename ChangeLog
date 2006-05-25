@@ -1,5 +1,28 @@
 2006-05-25  David Reveman  <davidr@novell.com>
 
+	* plugins/compiz.schemas.in.in:
+	* include/compiz.h:
+	* src/event.c (handleEvent):
+	* src/display.c: Add maximize_window_horizontally,
+	maximize_window_vertically, toggle_window_maximized,
+	toggle_window_maximized_horizontally,
+	toggle_window_maximized_vertically.
+
+	* src/event.c (handleEvent): Track changes to maximizeWindow function.
+
+	* plugins/move.c (moveHandleMotionEvent): Make sure we have a saved
+	width before we use it. Track changes to maximizeWindow function.
+
+	* plugins/wobbly.c (wobblyHandleEvent): Handle the case where
+	window is not both vertically and horizontally maximized better.
+
+	* include/compiz.h: Add MAXIMIZE_STATE macro.
+
+	* include/compiz.h:
+	* src/window.c: Remove unmaximizeWindow and make maximizeWindow
+	take a state mask so it can be used for both maximizing and
+	unmaximizing.
+
 	* plugins/switcher.c: Don't add windows that appear after the switcher
 	is popped up. (bnc 178350)
 	(switchWindowRemove): Don't create a new list. Instead remove
