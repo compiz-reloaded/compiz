@@ -1225,7 +1225,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     /* outside cube */
     if (cs->invert == 1)
     {
-	if (cs->grabIndex)
+	if (cs->grabIndex || s->size > 4)
 	{
 	    GLenum filter;
 	    int    i;
@@ -1234,7 +1234,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    sa.yRotate += (360.0f / size) * ((s->size >> 1) - 1);
 
 	    filter = s->display->textureFilter;
-	    if (cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
+	    if (cs->grabIndex && cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
 		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
 
 	    for (i = 0; i < s->size; i++)

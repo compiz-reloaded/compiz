@@ -1,3 +1,8 @@
+2006-05-26  David Reveman  <davidr@novell.com>
+
+	* plugins/cube.c (cubePaintTransformedScreen): Avoid optimized case
+	when more than 4 cube sides.
+
 2006-05-25  David Reveman  <davidr@novell.com>
 
 	* plugins/compiz.schemas.in.in: Regen.
