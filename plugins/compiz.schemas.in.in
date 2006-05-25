@@ -527,6 +527,34 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/maximize_window_horizontally</key>
+            <applyto>/apps/compiz/general/allscreens/options/maximize_window_horizontally</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Maximize Window Horizontally</short>
+                <long>
+                    Maximize active window horizontally
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/maximize_window_vertically</key>
+            <applyto>/apps/compiz/general/allscreens/options/maximize_window_vertically</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Maximize Window Vertically</short>
+                <long>
+                    Maximize active window vertically
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/allscreens/options/opacity_increase</key>
             <applyto>/apps/compiz/general/allscreens/options/opacity_increase</applyto>
             <owner>compiz</owner>
@@ -662,6 +690,48 @@
                 <short>Audible Bell</short>
                 <long>
                     Audible system beep
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/toggle_window_maximized</key>
+            <applyto>/apps/compiz/general/allscreens/options/toggle_window_maximized</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Toggle Window Maximized</short>
+                <long>
+                    Toggle active window maximized
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/toggle_window_maximized_horizontally</key>
+            <applyto>/apps/compiz/general/allscreens/options/toggle_window_maximized_horizontally</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Toggle Window Maximized Horizontally</short>
+                <long>
+                    Toggle active window maximized horizontally
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/toggle_window_maximized_vertically</key>
+            <applyto>/apps/compiz/general/allscreens/options/toggle_window_maximized_vertically</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Toggle Window Maximized Vertically</short>
+                <long>
+                    Toggle active window maximized vertically
                 </long>
             </locale>
         </schema>
