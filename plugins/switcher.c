@@ -116,7 +116,6 @@ typedef struct _SwitchScreen {
     DonePaintScreenProc    donePaintScreen;
     PaintScreenProc	   paintScreen;
     PaintWindowProc        paintWindow;
-    DamageWindowRectProc   damageWindowRect;
 
     CompOption opt[SWITCH_SCREEN_OPTION_NUM];
     CompOption init_all_bind, prev_bind, prev_all_bind;
@@ -606,6 +605,32 @@ static void
 switchUpdateWindowList (CompScreen *s,
 			int	   count)
 {
+    SWITCH_SCREEN (s);
+
+    if (count > 1)
+    {
+	count -= (count + 1) & 1;
+	if (count < 3)
+	    count = 3;
+    }
+
+    ss->pos  = ((count >> 1) - ss->nWindows) * WIDTH;
+    ss->move = 0;
+
+    ss->selectedWindow = ss->windows[0]->id;
+
+    if (ss->popupWindow)
+	XMoveResizeWindow (s->display->display, ss->popupWindow,
+			   s->width  / 2 - WINDOW_WIDTH (count) / 2,
+			   s->height / 2 - WINDOW_HEIGHT / 2,
+			   WINDOW_WIDTH (count),
+			   WINDOW_HEIGHT);
+}
+
+static void
+switchCreateWindowList (CompScreen *s,
+			int	   count)
+{
     CompWindow *w;
 
     SWITCH_SCREEN (s);
@@ -626,24 +651,7 @@ switchUpdateWindowList (CompScreen *s,
 	switchAddWindowToList (s, ss->windows[1]);
     }
 
-    if (count > 1)
-    {
-	count -= (count + 1) & 1;
-	if (count < 3)
-	    count = 3;
-    }
-
-    ss->pos  = ((count >> 1) - ss->nWindows) * WIDTH;
-    ss->move = 0;
-
-    ss->selectedWindow = ss->windows[0]->id;
-
-    if (ss->popupWindow)
-	XMoveResizeWindow (s->display->display, ss->popupWindow,
-			   s->width  / 2 - WINDOW_WIDTH (count) / 2,
-			   s->height / 2 - WINDOW_HEIGHT / 2,
-			   WINDOW_WIDTH (count),
-			   WINDOW_HEIGHT);
+    switchUpdateWindowList (s, count);
 }
 
 static void
@@ -864,7 +872,7 @@ switchInitiate (CompScreen *s,
 	{
 	    ss->lastActiveNum = s->activeNum;
 
-	    switchUpdateWindowList (s, count);
+	    switchCreateWindowList (s, count);
 
 	    ss->sTranslate = ss->zoom;
 
@@ -955,21 +963,103 @@ switchWindowRemove (CompDisplay *d,
     w = findWindowAtDisplay (d, id);
     if (w)
     {
-	int i;
+	Bool   inList = FALSE;
+	int    count, j, i = 0;
+	Window selected, old;
 
 	SWITCH_SCREEN (w->screen);
 
-	for (i = 0; i < ss->nWindows; i++)
+	if (isSwitchWin (w))
+	    return;
+
+	old = selected = ss->selectedWindow;
+
+	while (i < ss->nWindows)
 	{
 	    if (ss->windows[i] == w)
 	    {
-		ss->lastActiveNum = w->screen->activeNum;
+		inList = TRUE;
 
-		switchUpdateWindowList (w->screen,
-					switchCountWindows (w->screen));
+		if (w->id == selected)
+		{
+		    if (i < ss->nWindows)
+			selected = ss->windows[i + 1]->id;
+		    else
+			selected = ss->windows[0]->id;
+		}
 
-		break;
+		ss->nWindows--;
+		for (j = i; j < ss->nWindows; j++)
+		    ss->windows[j] = ss->windows[j + 1];
 	    }
+	    else
+	    {
+		i++;
+	    }
+	}
+
+	if (!inList)
+	    return;
+
+	count = ss->nWindows;
+
+	if (ss->nWindows == 2)
+	{
+	    if (ss->windows[0] == ss->windows[1])
+	    {
+		ss->nWindows--;
+		count = 1;
+	    }
+	    else
+	    {
+		switchAddWindowToList (w->screen, ss->windows[0]);
+		switchAddWindowToList (w->screen, ss->windows[1]);
+	    }
+	}
+
+	if (ss->nWindows == 0)
+	{
+	    switchTerminate (w->screen, FALSE);
+	    return;
+	}
+
+	if (!ss->grabIndex)
+	    return;
+
+	switchUpdateWindowList (w->screen, count);
+
+	for (i = 0; i < ss->nWindows; i++)
+	{
+	    ss->selectedWindow = ss->windows[i]->id;
+
+	    if (ss->selectedWindow == selected)
+		break;
+
+	    ss->pos -= WIDTH;
+	    if (ss->pos < -ss->nWindows * WIDTH)
+		ss->pos += ss->nWindows * WIDTH;
+	}
+
+	if (ss->popupWindow)
+	{
+	    CompWindow *popup;
+
+	    popup = findWindowAtScreen (w->screen, ss->popupWindow);
+	    if (popup)
+		addWindowDamage (popup);
+
+	    setSelectedWindowHint (w->screen);
+	}
+
+	if (old != ss->selectedWindow)
+	{
+	    addWindowDamage (w);
+
+	    w = findWindowAtScreen (w->screen, old);
+	    if (w)
+		addWindowDamage (w);
+
+	    ss->moreAdjust = 1;
 	}
     }
 }
@@ -1623,52 +1713,6 @@ switchPaintWindow (CompWindow		   *w,
 }
 
 static Bool
-switchDamageWindowRect (CompWindow *w,
-			Bool	   initial,
-			BoxPtr     rect)
-{
-    Bool status;
-
-    SWITCH_SCREEN (w->screen);
-
-    if (ss->grabIndex && ss->switching)
-    {
-	if (initial)
-	{
-	    if (isSwitchWin (w))
-	    {
-		ss->lastActiveNum = w->screen->activeNum;
-
-		switchUpdateWindowList (w->screen,
-					switchCountWindows (w->screen));
-	    }
-	    else if (w->id == ss->popupWindow)
-	    {
-		updateWindowAttributes (w, TRUE);
-	    }
-	}
-	else if (!ss->moreAdjust)
-	{
-	    if (isSwitchWin (w))
-	    {
-		CompWindow *popup;
-
-		popup = findWindowAtScreen (w->screen, ss->popupWindow);
-		if (popup)
-		    addWindowDamage (popup);
-
-	    }
-	}
-    }
-
-    UNWRAP (ss, w->screen, damageWindowRect);
-    status = (*w->screen->damageWindowRect) (w, initial, rect);
-    WRAP (ss, w->screen, damageWindowRect, switchDamageWindowRect);
-
-    return status;
-}
-
-static Bool
 switchInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
 {
@@ -1769,7 +1813,6 @@ switchInitScreen (CompPlugin *p,
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
     WRAP (ss, s, paintScreen, switchPaintScreen);
     WRAP (ss, s, paintWindow, switchPaintWindow);
-    WRAP (ss, s, damageWindowRect, switchDamageWindowRect);
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
 
@@ -1786,7 +1829,6 @@ switchFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, donePaintScreen);
     UNWRAP (ss, s, paintScreen);
     UNWRAP (ss, s, paintWindow);
-    UNWRAP (ss, s, damageWindowRect);
 
     if (ss->windowsSize)
 	free (ss->windows);

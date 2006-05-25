@@ -1,3 +1,11 @@
+2006-05-25  David Reveman  <davidr@novell.com>
+
+	* plugins/switcher.c: Don't add windows that appear after the switcher
+	is popped up. (bnc 178350)
+	(switchWindowRemove): Don't create a new list. Instead remove
+	window from the existing list and make sure we're positioned
+	correctly.
+
 2006-05-24  David Reveman  <davidr@novell.com>
 
 	* plugins/scale.c (scaleMoveFocusWindow): When moving to window on
