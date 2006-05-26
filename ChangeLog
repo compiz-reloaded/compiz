@@ -1,5 +1,9 @@
 2006-05-26  David Reveman  <davidr@novell.com>
 
+	* plugins/compiz.schemas.in.in: Regen.
+
+	* plugins/scale.c (SCALE_SLOPPY_FOCUS_DEFAULT): TRUE.
+
 	* plugins/decoration.c (decorWindowUpdate): No drop-shadow decoration
 	on windows with below state.
 
