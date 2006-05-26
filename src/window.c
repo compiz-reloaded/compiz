@@ -592,6 +592,9 @@ recalcWindowType (CompWindow *w)
 	    type = CompWindowTypeDialogMask;
     }
 
+    if (type == CompWindowTypeDockMask && (w->state & CompWindowStateBelowMask))
+	type = CompWindowTypeNormalMask;
+
     if ((type & (CompWindowTypeNormalMask | CompWindowTypeDialogMask)) &&
 	(w->state & CompWindowStateModalMask))
 	type = CompWindowTypeModalDialogMask;

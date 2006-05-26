@@ -1,5 +1,11 @@
 2006-05-26  David Reveman  <davidr@novell.com>
 
+	* plugins/decoration.c (decorWindowUpdate): No drop-shadow decoration
+	on windows with below state.
+
+	* src/window.c (recalcWindowType): Treat dock windows with below state
+	as normal windows. (bnc #178316)
+
 	* plugins/cube.c (cubePaintTransformedScreen): Avoid optimized case
 	when more than 4 cube sides.
 
