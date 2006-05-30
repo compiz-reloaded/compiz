@@ -1,3 +1,13 @@
+2006-05-30  Dan Winship  <danw@novell.com>
+
+	* configure.ac: Check libwnck for wnck_window_has_name (new in
+	HEAD).
+
+	* gnome/window-decorator/gnome-window-decorator.c
+	(wnck_window_get_real_name): #if HAVE_WNCK_WINDOW_HAS_NAME,
+	redefine wnck_window_get_name to return NULL if the window only
+	has a fallback name. bnc 173059.
+
 2006-05-26  David Reveman  <davidr@novell.com>
 
 	* plugins/compiz.schemas.in.in: Regen.

@@ -17,6 +17,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
@@ -2406,6 +2410,15 @@ update_event_windows (WnckWindow *win)
     XSync (xdisplay, FALSE);
     gdk_error_trap_pop ();
 }
+
+#if HAVE_WNCK_WINDOW_HAS_NAME
+static const char *
+wnck_window_get_real_name (WnckWindow *win)
+{
+    return wnck_window_has_name (win) ? wnck_window_get_name (win) : NULL;
+}
+#define wnck_window_get_name wnck_window_get_real_name
+#endif
 
 static gint
 max_window_name_width (WnckWindow *win)

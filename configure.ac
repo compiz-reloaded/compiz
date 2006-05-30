@@ -188,6 +188,15 @@ if test "x$use_gnome" = "xyes"; then
 		    pangocairo,
 		    [use_gnome=yes], [use_gnome=no])
   if test "x$use_gnome" = "xyes"; then
+    save_CFLAGS="$CFLAGS"
+    save_LIBSS="$LIBS"
+    CFLAGS="$CFLAGS $GNOME_WINDOW_DECORATOR_CFLAGS"
+    LIBS="$LIBS $GNOME_WINDOW_DECORATOR_LIBS"
+    AC_CHECK_FUNCS(wnck_window_has_name)
+    CFLAGS="$save_CFLAGS"
+    LIBS="$save_LIBS"
+  fi
+  if test "x$use_gnome" = "xyes"; then
     PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,
 		      gnome-window-settings-2.0 gnome-desktop-2.0,
 		      [use_gnome=yes], [use_gnome=no])
