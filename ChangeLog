@@ -8,6 +8,10 @@
 	redefine wnck_window_get_name to return NULL if the window only
 	has a fallback name. bnc 173059.
 
+	* src/event.c (handleEvent): call moveInputFocusToOtherWindow()
+	before destroyWindow() when processing a DestroyNotify, or else
+	the input focus can get stranded.
+
 2006-05-26  David Reveman  <davidr@novell.com>
 
 	* plugins/compiz.schemas.in.in: Regen.

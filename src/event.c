@@ -313,8 +313,8 @@ handleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xdestroywindow.window);
 	if (w)
 	{
-	    destroyWindow (w);
 	    moveInputFocusToOtherWindow (w);
+	    destroyWindow (w);
 	}
 	break;
     case MapNotify:
