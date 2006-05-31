@@ -1665,9 +1665,14 @@ switchPaintWindow (CompWindow		   *w,
 		glTranslatef (0.0f, 0.0f, MIN (ss->translate, ss->sTranslate));
 	}
 
+	glPushAttrib (GL_STENCIL_BUFFER_BIT);
+	glDisable (GL_STENCIL_TEST);
+
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
+
+	glPopAttrib ();
 
 	glPopMatrix ();
     }
@@ -1689,9 +1694,14 @@ switchPaintWindow (CompWindow		   *w,
 	    glPushMatrix ();
 	    glTranslatef (0.0f, 0.0f, MIN (ss->translate, ss->sTranslate));
 
+	    glPushAttrib (GL_STENCIL_BUFFER_BIT);
+	    glDisable (GL_STENCIL_TEST);
+
 	    UNWRAP (ss, s, paintWindow);
 	    status = (*s->paintWindow) (w, &sAttrib, region, mask);
 	    WRAP (ss, s, paintWindow, switchPaintWindow);
+
+	    glPopAttrib ();
 
 	    glPopMatrix ();
 	}
