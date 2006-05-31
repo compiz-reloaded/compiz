@@ -1,5 +1,8 @@
 2006-05-31  David Reveman  <davidr@novell.com>
 
+	* plugins/move.c (moveHandleEvent): Initialize xRoot and yRoot.
+	(bnc 179902)
+
 	* src/Makefile.am (INCLUDES): Add @GL_CFLAGS@. (Eric Work)
 
 2006-05-30  Dan Winship  <danw@novell.com>

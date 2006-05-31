@@ -492,10 +492,10 @@ moveHandleEvent (CompDisplay *d,
 
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
-			warpPointer (d,
-				     (w->attrib.x + w->width  / 2) - pointerX,
-				     (w->attrib.y + w->height / 2) - pointerY);
+			xRoot = w->attrib.x + (w->width  / 2);
+			yRoot = w->attrib.y + (w->height / 2);
 
+			warpPointer (d, xRoot - pointerX, yRoot - pointerY);
 			moveInitiate (w, xRoot, yRoot, 0);
 		    }
 		    else
