@@ -1,5 +1,20 @@
 2006-05-31  David Reveman  <davidr@novell.com>
 
+	* include/compiz.h:
+	* src/screen.c:
+	* src/display.c: Add hide_skip_taskbar_windows option. (bnc 180055)
+
+	* include/compiz.h:
+	* src/window.c: Add getStartupId.
+
+	* src/screen.c: Save initial viewport when startup notification
+	is received. Fix implementation of applyStartupProperties.
+	(bnc 180224)
+
+	* src/event.c (handleEvent): Handle startup ID property changes.
+
+	* plugins/place.c: Adjust work area to initial viewport.
+
 	* plugins/cube.c (cubePaintTransformedScreen): Disable skydome
 	animation while cube is unfolded. (bnc 179833)
 

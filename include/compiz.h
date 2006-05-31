@@ -420,7 +420,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED       49
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ  50
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT  51
-#define COMP_DISPLAY_OPTION_NUM                           52
+#define COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS     52
+#define COMP_DISPLAY_OPTION_NUM                           53
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -574,6 +575,8 @@ struct _CompDisplay {
     Atom timestampAtom;
     Atom versionAtom;
     Atom atomPairAtom;
+
+    Atom startupIdAtom;
 
     unsigned int      lastPing;
     CompTimeoutHandle pingHandle;
@@ -1129,6 +1132,7 @@ typedef struct _CompGroup {
 typedef struct _CompStartupSequence {
     struct _CompStartupSequence *next;
     SnStartupSequence		*sequence;
+    unsigned int		viewport;
 } CompStartupSequence;
 
 typedef struct _CompFBConfig {
@@ -1549,6 +1553,8 @@ struct _CompWindow {
     int		      destroyRefCnt;
     int		      unmapRefCnt;
 
+    unsigned int initialViewport;
+
     Bool placed;
     Bool minimized;
     Bool inShowDesktopMode;
@@ -1675,6 +1681,9 @@ updateWindowClassHints (CompWindow *window);
 
 Window
 getClientLeader (CompWindow *w);
+
+char *
+getStartupId (CompWindow *w);
 
 int
 getWmState (CompDisplay *display,

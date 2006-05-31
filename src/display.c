@@ -140,6 +140,8 @@ int pointerY     = 0;
 
 #define AUDIBLE_BELL_DEFAULT TRUE
 
+#define HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT TRUE
+
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static char *textureFilter[] = { "Fast", "Good", "Best" };
@@ -498,6 +500,14 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.bind.type		  = CompBindingTypeNone;
     o->value.bind.u.key.modifiers = 0;
     o->value.bind.u.key.keycode   = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
+    o->name	 = "hide_skip_taskbar_windows";
+    o->shortDesc = "Hide Skip Taskbar Windows";
+    o->longDesc	 = "Hide windows not in taskbar when entering show "
+	"desktop mode";
+    o->type	 = CompOptionTypeBool;
+    o->value.b	 = HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT;
 }
 
 CompOption *
@@ -579,6 +589,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_CLICK_TO_FOCUS:
     case COMP_DISPLAY_OPTION_AUTORAISE:
     case COMP_DISPLAY_OPTION_RAISE_ON_CLICK:
+    case COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -1892,6 +1903,8 @@ addDisplay (char *name,
     d->timestampAtom = XInternAtom (dpy, "TIMESTAMP", 0);
     d->versionAtom   = XInternAtom (dpy, "VERSION", 0);
     d->atomPairAtom  = XInternAtom (dpy, "ATOM_PAIR", 0);
+
+    d->startupIdAtom = XInternAtom (dpy, "_NET_STARTUP_ID", 0);
 
     d->snDisplay = sn_display_new (dpy, NULL, NULL);
     if (!d->snDisplay)

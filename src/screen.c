@@ -368,6 +368,7 @@ addSequence (CompScreen        *screen,
 
     s->next     = screen->startupSequences;
     s->sequence = sequence;
+    s->viewport = screen->x;
 
     screen->startupSequences = s;
 
@@ -2588,79 +2589,50 @@ void
 applyStartupProperties (CompScreen *screen,
 			CompWindow *window)
 {
-    CompStartupSequence *s = NULL;
+    CompStartupSequence *s;
     const char	        *startupId = window->startupId;
-
-    printf ("Applying startup props to %d id \"%s\"\n",
-	    (int) window->id, window->startupId ? window->startupId : "(none)");
 
     if (!startupId)
     {
-	const char *wmClass;
+	CompWindow *leader;
 
-	for (s = screen->startupSequences; s; s = s->next)
-	{
-	    wmClass = sn_startup_sequence_get_wmclass (s->sequence);
-	    if (!wmClass)
-		continue;
-
-	    if ((window->resClass && strcmp (wmClass, window->resClass) == 0) ||
-		(window->resName  && strcmp (wmClass, window->resName)  == 0))
-	    {
-		startupId = sn_startup_sequence_get_id (s->sequence);
-
-		window->startupId = strdup (startupId);
-
-		printf ("Ending legacy sequence %s due to window %d\n",
-			startupId, (int) window->id);
-
-		sn_startup_sequence_complete (s->sequence);
-		break;
-	    }
-	}
+	leader = findWindowAtScreen (screen, window->clientLeader);
+	if (leader)
+	    startupId = leader->startupId;
 
 	if (!startupId)
 	    return;
     }
 
-    if (!s)
+    for (s = screen->startupSequences; s; s = s->next)
     {
 	const char *id;
 
-	for (s = screen->startupSequences; s; s = s->next)
-	{
-	    id = sn_startup_sequence_get_id (s->sequence);
-
-	    if (strcmp (id, startupId) == 0)
-		break;
-	}
+	id = sn_startup_sequence_get_id (s->sequence);
+	if (strcmp (id, startupId) == 0)
+	    break;
     }
 
     if (s)
-    {
-	printf ("Found startup sequence for window %d ID \"%s\"\n",
-		(int) window->id, startupId);
-    }
-    else
-    {
-	printf ("Did not find startup sequence for window %d ID \"%s\"\n",
-		(int) window->id, startupId);
-    }
+	window->initialViewport = s->viewport;
 }
 
 void
 enterShowDesktopMode (CompScreen *s)
 {
+    CompDisplay   *d = s->display;
     CompWindow    *w;
     unsigned long data = 1;
     int		  count = 0;
+    CompOption    *st = &d->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
 
     s->showingDesktopMask = ~(CompWindowTypeDesktopMask |
 			      CompWindowTypeDockMask);
 
     for (w = s->windows; w; w = w->next)
     {
-	if (s->showingDesktopMask & w->type)
+	if ((s->showingDesktopMask & w->type) &&
+	    (!(w->state & CompWindowStateSkipTaskbarMask) || st->value.b))
 	{
 	    if ((*s->focusWindow) (w))
 	    {

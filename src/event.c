@@ -1012,6 +1012,17 @@ handleEvent (CompDisplay *d,
 	    if (w)
 		freeWindowIcons (w);
 	}
+	else if (event->xproperty.atom == d->startupIdAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xproperty.window);
+	    if (w)
+	    {
+		if (w->startupId)
+		    free (w->startupId);
+
+		w->startupId = getStartupId (w);
+	    }
+	}
 	break;
     case MotionNotify:
 	break;
@@ -1275,6 +1286,10 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
+		w->initialViewport = w->screen->x;
+
+		applyStartupProperties (w->screen, w);
+
 		XMapWindow (d->display, event->xmaprequest.window);
 
 		updateWindowAttributes (w, FALSE);

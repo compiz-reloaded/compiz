@@ -311,6 +311,34 @@ getClientLeader (CompWindow *w)
     return getClientLeaderOfAncestor (w);
 }
 
+char *
+getStartupId (CompWindow *w)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *data;
+
+    result = XGetWindowProperty (w->screen->display->display, w->id,
+				 w->screen->display->startupIdAtom,
+				 0L, 1024L, False,
+				 w->screen->display->utf8StringAtom,
+				 &actual, &format,
+				 &n, &left, &data);
+
+    if (result == Success && n && data)
+    {
+	char *id;
+
+	id = strdup ((char *) data);
+	XFree ((void *) data);
+
+	return id;
+    }
+
+    return NULL;
+}
+
 int
 getWmState (CompDisplay *display,
 	    Window      id)
@@ -1349,6 +1377,8 @@ addWindow (CompScreen *screen,
     w->inShowDesktopMode = FALSE;
     w->hidden		 = FALSE;
 
+    w->initialViewport = screen->x;
+
     w->pendingUnmaps = 0;
 
     w->startupId = NULL;
@@ -1541,6 +1571,8 @@ addWindow (CompScreen *screen,
 			      w->id, &w->transientFor);
 
 	w->clientLeader = getClientLeader (w);
+	if (!w->clientLeader)
+	    w->startupId = getStartupId (w);
 
 	w->wmType = getWindowType (w->screen->display, w->id);
 
@@ -3529,6 +3561,9 @@ focusWindowOnMap (CompWindow *w)
 
     if (w->type & (CompWindowTypeDesktopMask |
 		   CompWindowTypeDockMask))
+	return FALSE;
+
+    if (w->initialViewport != w->screen->x)
 	return FALSE;
 
     if (!w->inputHint &&

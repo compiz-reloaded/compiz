@@ -593,6 +593,8 @@ find_first_fit (CompWindow *window,
     getOuterRectOfWindow (window, &rect);
 
     work_area = window->screen->workArea;
+    work_area.x += (window->initialViewport - window->screen->x) *
+	window->screen->width;
 
     center_tile_rect_in_area (&rect, &work_area);
 
@@ -675,8 +677,14 @@ placeWindow (CompWindow *window,
 {
     CompWindow *wi;
     GList      *windows;
+    XRectangle work_area;
+    int	       x0 = (window->initialViewport - window->screen->x) *
+	window->screen->width;
 
     PLACE_SCREEN (window->screen);
+
+    work_area = window->screen->workArea;
+    work_area.x += x0;
 
     windows = NULL;
 
@@ -703,7 +711,8 @@ placeWindow (CompWindow *window,
 
     if (window->type & CompWindowTypeFullscreenMask)
     {
-	x = y = 0;
+	x = x0;
+	y = 0;
 	goto done_no_constraints;
     }
 
@@ -711,10 +720,10 @@ placeWindow (CompWindow *window,
 			 CompWindowStateMaximizedHorzMask))
     {
 	if (window->state & CompWindowStateMaximizedVertMask)
-	    y = window->screen->workArea.y + window->input.top;
+	    y = work_area.y + window->input.top;
 
 	if (window->state & CompWindowStateMaximizedHorzMask)
-	    x = window->screen->workArea.x + window->input.left;
+	    x = work_area.x + window->input.left;
 
 	goto done;
     }
@@ -842,7 +851,13 @@ placeWindow (CompWindow *window,
      */
     for (wi = window->screen->windows; wi; wi = wi->next)
     {
-	if (WINDOW_INVISIBLE (wi))
+	if (wi->attrib.map_state != IsViewable)
+	    continue;
+
+	if (wi->attrib.x >= work_area.x + work_area.width  ||
+	    wi->attrib.x + wi->width <= work_area.x	   ||
+	    wi->attrib.y >= work_area.y + work_area.height ||
+	    wi->attrib.y + wi->height <= work_area.y)
 	    continue;
 
 	if (wi->state & (CompWindowTypeDesktopMask    |
@@ -856,7 +871,8 @@ placeWindow (CompWindow *window,
     }
 
     /* "Origin" placement algorithm */
-    x = y = 0;
+    x = x0;
+    y = 0;
 
     if (find_first_fit (window, windows, x, y, &x, &y))
 	goto done_check_denied_focus;
@@ -942,22 +958,20 @@ done_check_denied_focus:
     g_list_free (windows);
 
 done:
-    if (x + window->width + window->input.right >
-	window->screen->workArea.x + window->screen->workArea.width)
-	x = window->screen->workArea.x + window->screen->workArea.width
-	    - window->width - window->input.right;
+    if (x + window->width + window->input.right > work_area.x + work_area.width)
+	x = work_area.x + work_area.width - window->width - window->input.right;
 
-    if (x - window->input.left < window->screen->workArea.x)
-	x = window->screen->workArea.x + window->input.left;
+    if (x - window->input.left < work_area.x)
+	x = work_area.x + window->input.left;
 
 done_no_x_constraints:
     if (y + window->height + window->input.bottom >
-	window->screen->workArea.y + window->screen->workArea.height)
-	y = window->screen->workArea.y + window->screen->workArea.height
+	work_area.y + work_area.height)
+	y = work_area.y + work_area.height
 	    - window->height - window->input.bottom;
 
-    if (y - window->input.top < window->screen->workArea.y)
-	y = window->screen->workArea.y + window->input.top;
+    if (y - window->input.top < work_area.y)
+	y = work_area.y + window->input.top;
 
 done_no_constraints:
     *new_x = x;
