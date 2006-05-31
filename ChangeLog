@@ -1,5 +1,8 @@
 2006-05-31  David Reveman  <davidr@novell.com>
 
+	* plugins/cube.c (cubePaintTransformedScreen): Disable skydome
+	animation while cube is unfolded. (bnc 179833)
+
 	* plugins/switcher.c (switchPaintWindow): Make sure selected window is
 	not clipped incorrectly when some window is transformed. (bnc 179828)
 
