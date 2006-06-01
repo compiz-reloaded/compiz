@@ -488,6 +488,7 @@ struct _CompDisplay {
     Atom winBrightnessAtom;
     Atom winSaturationAtom;
     Atom winActiveAtom;
+    Atom winDesktopAtom;
 
     Atom workareaAtom;
 

@@ -1791,6 +1791,8 @@ addDisplay (char *name,
 
     d->winActiveAtom = XInternAtom (dpy, "_NET_ACTIVE_WINDOW", 0);
 
+    d->winDesktopAtom = XInternAtom (dpy, "_NET_WM_DESKTOP", 0);
+
     d->workareaAtom = XInternAtom (dpy, "_NET_WORKAREA", 0);
 
     d->desktopViewportAtom  = XInternAtom (dpy, "_NET_DESKTOP_VIEWPORT", 0);

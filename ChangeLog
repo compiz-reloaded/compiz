@@ -1,3 +1,13 @@
+2006-06-01  Dan Winship  <danw@novell.com>
+
+	* src/event.c (handleEvent): If we receive a _NET_SHOWING_DESKTOP
+	request with no window set, set the flag on all screens. (Fixes
+	the KDE "show desktop" applet.) Also, don't allow a client to
+	change its _NET_WM_DESKTOP.
+
+	* src/window.c (addWindow): Set _NET_WM_DESKTOP on all windows to
+	0; KDE's pager and tasklist require this to be set. (bnc 178320)
+
 2006-06-01  David Reveman  <davidr@novell.com>
 
 	* include/compiz.h:

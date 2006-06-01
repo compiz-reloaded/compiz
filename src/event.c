@@ -1023,6 +1023,12 @@ handleEvent (CompDisplay *d,
 		w->startupId = getStartupId (w);
 	    }
 	}
+	else if (event->xproperty.atom == d->winDesktopAtom)
+	{
+	    if (getWindowProp32 (d, event->xproperty.window,
+				 d->winDesktopAtom, 1) != 0)
+		setWindowProp32 (d, w->id, d->winDesktopAtom, 0);
+	}
 	break;
     case MotionNotify:
 	break;
@@ -1260,13 +1266,16 @@ handleEvent (CompDisplay *d,
 	}
 	else if (event->xclient.message_type == d->showingDesktopAtom)
 	{
-	    s = findScreenAtDisplay (d, event->xclient.window);
-	    if (s)
+	    for (s = d->screens; s; s = s->next)
 	    {
-		if (event->xclient.data.l[0])
-		    enterShowDesktopMode (s);
-		else
-		    leaveShowDesktopMode (s, NULL);
+		if (event->xclient.window == s->root ||
+		    event->xclient.window == None)
+		{
+		    if (event->xclient.data.l[0])
+			enterShowDesktopMode (s);
+		    else
+			leaveShowDesktopMode (s, NULL);
+		}
 	    }
 	}
 	break;

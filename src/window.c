@@ -1596,6 +1596,10 @@ addWindow (CompScreen *screen,
 
 	updateWmHints (w);
 
+	setWindowProp32 (w->screen->display, w->id,
+			 w->screen->display->winDesktopAtom,
+			 0);
+
 	XGetTransientForHint (w->screen->display->display,
 			      w->id, &w->transientFor);
 
