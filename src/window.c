@@ -339,6 +339,35 @@ getStartupId (CompWindow *w)
     return NULL;
 }
 
+void
+updateWindowClass (CompWindow *w)
+{
+    XClassHint classHint;
+    int	       status;
+
+    if (w->resName)
+    {
+	free (w->resName);
+	w->resName = NULL;
+    }
+
+    if (w->resClass)
+    {
+	free (w->resClass);
+	w->resClass = NULL;
+    }
+
+    status = XGetClassHint (w->screen->display->display, w->id, &classHint);
+    if (status)
+    {
+	if (classHint.res_name)
+	    w->resName = strdup (classHint.res_name);
+
+	if (classHint.res_class)
+	    w->resClass = strdup (classHint.res_class);
+    }
+}
+
 int
 getWmState (CompDisplay *display,
 	    Window      id)
