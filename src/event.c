@@ -1027,7 +1027,8 @@ handleEvent (CompDisplay *d,
 	{
 	    if (getWindowProp32 (d, event->xproperty.window,
 				 d->winDesktopAtom, 1) != 0)
-		setWindowProp32 (d, w->id, d->winDesktopAtom, 0);
+		setWindowProp32 (d, event->xproperty.window,
+				 d->winDesktopAtom, 0);
 	}
 	break;
     case MotionNotify:
