@@ -3452,8 +3452,7 @@ handle_tooltip_event (WnckWindow *win,
 	}
 	break;
     case LeaveNotify:
-	if (xevent->xcrossing.mode != NotifyGrab)
-	    hide_tooltip ();
+	hide_tooltip ();
 	break;
     }
 }
