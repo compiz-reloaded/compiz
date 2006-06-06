@@ -2230,7 +2230,9 @@ moveResizeWindow (CompWindow     *w,
 	xwcm |= CWY;
     }
 
-    if (!(w->type & (CompWindowTypeDockMask | CompWindowTypeUnknownMask)))
+    if (!(w->type & (CompWindowTypeDockMask       |
+		     CompWindowTypeFullscreenMask |
+		     CompWindowTypeUnknownMask)))
     {
 	if (xwcm & CWY)
 	{
@@ -3172,7 +3174,9 @@ ensureWindowVisibility (CompWindow *w)
     if (w->struts || w->attrib.override_redirect)
 	return;
 
-    if (w->type & (CompWindowTypeDockMask | CompWindowTypeUnknownMask))
+    if (w->type & (CompWindowTypeDockMask	|
+		   CompWindowTypeFullscreenMask |
+		   CompWindowTypeUnknownMask))
 	return;
 
     x1 = w->screen->workArea.x - w->screen->width * w->screen->x;

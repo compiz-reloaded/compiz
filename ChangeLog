@@ -1,5 +1,9 @@
 2006-06-06  David Reveman  <davidr@novell.com>
 
+	* src/window.c (moveResizeWindow, ensureWindowVisibility):
+	Don't make sure fullscreen windows are in workarea.
+	(fdo #7115) (bnc #181907)
+
 	* src/event.c (handleEvent): Track XA_WM_CLASS property changes.
 
 	* src/window.c:
