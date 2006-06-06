@@ -116,6 +116,7 @@ typedef struct _SwitchScreen {
     DonePaintScreenProc    donePaintScreen;
     PaintScreenProc	   paintScreen;
     PaintWindowProc        paintWindow;
+    DamageWindowRectProc   damageWindowRect;
 
     CompOption opt[SWITCH_SCREEN_OPTION_NUM];
     CompOption init_all_bind, prev_bind, prev_all_bind;
@@ -1286,7 +1287,7 @@ switchPaintScreen (CompScreen		   *s,
 
     SWITCH_SCREEN (s);
 
-    if (ss->grabIndex || ss->zooming)
+    if (ss->grabIndex || (ss->zooming && ss->translate > 0.001f))
     {
 	ScreenPaintAttrib sa = *sAttrib;
 	CompWindow	  *zoomed;
@@ -1351,7 +1352,8 @@ switchPaintScreen (CompScreen		   *s,
 		switcher->attrib.map_state == IsViewable &&
 		switcher->damaged)
 	    {
-		(*s->paintWindow) (switcher, &switcher->paint, region, 0);
+		(*s->paintWindow) (switcher, &switcher->paint,
+				   &infiniteRegion, 0);
 	    }
 
 	    glPopMatrix ();
@@ -1723,6 +1725,40 @@ switchPaintWindow (CompWindow		   *w,
 }
 
 static Bool
+switchDamageWindowRect (CompWindow *w,
+			Bool	   initial,
+			BoxPtr     rect)
+{
+    Bool status;
+
+    SWITCH_SCREEN (w->screen);
+
+    if (ss->grabIndex)
+    {
+	CompWindow *popup;
+	int	   i;
+
+	for (i = 0; i < ss->nWindows; i++)
+	{
+	    if (ss->windows[i] == w)
+	    {
+		popup = findWindowAtScreen (w->screen, ss->popupWindow);
+		if (popup)
+		    addWindowDamage (popup);
+
+		break;
+	    }
+	}
+    }
+
+    UNWRAP (ss, w->screen, damageWindowRect);
+    status = (*w->screen->damageWindowRect) (w, initial, rect);
+    WRAP (ss, w->screen, damageWindowRect, switchDamageWindowRect);
+
+    return status;
+}
+
+static Bool
 switchInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
 {
@@ -1823,6 +1859,7 @@ switchInitScreen (CompPlugin *p,
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
     WRAP (ss, s, paintScreen, switchPaintScreen);
     WRAP (ss, s, paintWindow, switchPaintWindow);
+    WRAP (ss, s, damageWindowRect, switchDamageWindowRect);
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
 
@@ -1839,6 +1876,7 @@ switchFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, donePaintScreen);
     UNWRAP (ss, s, paintScreen);
     UNWRAP (ss, s, paintWindow);
+    UNWRAP (ss, s, damageWindowRect);
 
     if (ss->windowsSize)
 	free (ss->windows);
@@ -1863,6 +1901,10 @@ switchFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+CompPluginDep switchDeps[] = {
+    { CompPluginRuleAfter, "cube" }
+};
+
 CompPluginVTable switchVTable = {
     "switcher",
     "Application Switcher",
@@ -1879,8 +1921,8 @@ CompPluginVTable switchVTable = {
     0, /* SetDisplayOption */
     switchGetScreenOptions,
     switchSetScreenOption,
-    NULL,
-    0
+    switchDeps,
+    sizeof (switchDeps) / sizeof (switchDeps[0])
 };
 
 CompPluginVTable *

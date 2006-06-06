@@ -1,5 +1,14 @@
 2006-06-06  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c: Track thumbnail damage correctly.
+	(switchPaintScreen): Only intercept paintScreen when screen is
+	grabbed or we're zooming and ss->translate > 0.001.
+	(switchPaintScreen): Paint switcher window correctly when we're
+	not zooming.
+	Add cube as a dependency to make sure background is rendered
+	correctly when zooming.
+	(bnc #181909)
+
 	* src/window.c (moveResizeWindow, ensureWindowVisibility):
 	Don't make sure fullscreen windows are in workarea.
 	(fdo #7115) (bnc #181907)
