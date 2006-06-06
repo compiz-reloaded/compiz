@@ -1686,9 +1686,6 @@ getClientLeader (CompWindow *w);
 char *
 getStartupId (CompWindow *w);
 
-void
-updateWindowClass (CompWindow *w);
-
 int
 getWmState (CompDisplay *display,
 	    Window      id);

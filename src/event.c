@@ -1030,6 +1030,12 @@ handleEvent (CompDisplay *d,
 		setWindowProp32 (d, event->xproperty.window,
 				 d->winDesktopAtom, 0);
 	}
+	else if (event->xproperty.atom == XA_WM_CLASS)
+	{
+	    w = findWindowAtDisplay (d, event->xproperty.window);
+	    if (w)
+		updateWindowClassHints (w);
+	}
 	break;
     case MotionNotify:
 	break;
