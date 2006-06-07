@@ -34,6 +34,9 @@
 #define MOVE_INITIATE_BUTTON_DEFAULT    Button1
 #define MOVE_INITIATE_MODIFIERS_DEFAULT CompAltMask
 
+#define MOVE_INITIATE_KBD_KEY_DEFAULT       "F7"
+#define MOVE_INITIATE_KBD_MODIFIERS_DEFAULT CompAltMask
+
 #define MOVE_OPACITY_DEFAULT 100
 #define MOVE_OPACITY_MIN     1
 #define MOVE_OPACITY_MAX     100
@@ -73,10 +76,11 @@ typedef struct _MoveDisplay {
 } MoveDisplay;
 
 #define MOVE_SCREEN_OPTION_INITIATE	     0
-#define MOVE_SCREEN_OPTION_OPACITY	     1
-#define MOVE_SCREEN_OPTION_CONSTRAIN_Y	     2
-#define MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED 3
-#define MOVE_SCREEN_OPTION_NUM		     4
+#define MOVE_SCREEN_OPTION_INITIATE_KBD	     1
+#define MOVE_SCREEN_OPTION_OPACITY	     2
+#define MOVE_SCREEN_OPTION_CONSTRAIN_Y	     3
+#define MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED 4
+#define MOVE_SCREEN_OPTION_NUM		     5
 
 typedef struct _MoveScreen {
     CompOption opt[MOVE_SCREEN_OPTION_NUM];
@@ -135,6 +139,7 @@ moveSetScreenOption (CompScreen      *screen,
 
     switch (index) {
     case MOVE_SCREEN_OPTION_INITIATE:
+    case MOVE_SCREEN_OPTION_INITIATE_KBD:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -178,6 +183,17 @@ moveScreenInitOptions (MoveScreen *ms,
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = MOVE_INITIATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = MOVE_INITIATE_BUTTON_DEFAULT;
+
+    o = &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD];
+    o->name			  = "initiate_keyboard";
+    o->shortDesc		  = "Initiate Keyboard Window Move";
+    o->longDesc			  = "Start moving window using keyboard";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = MOVE_INITIATE_KBD_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (MOVE_INITIATE_KBD_KEY_DEFAULT));
 
     o = &ms->opt[MOVE_SCREEN_OPTION_OPACITY];
     o->name	  = "opacity";
@@ -394,6 +410,19 @@ moveHandleMotionEvent (CompScreen *s,
 }
 
 static void
+moveInitiateKeyboard (CompWindow *w)
+{
+    int xRoot, yRoot;
+
+    xRoot = w->attrib.x + (w->width  / 2);
+    yRoot = w->attrib.y + (w->height / 2);
+
+    warpPointer (w->screen->display, xRoot - pointerX, yRoot - pointerY);
+
+    moveInitiate (w, xRoot, yRoot, 0);
+}
+
+static void
 moveHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
@@ -413,7 +442,7 @@ moveHandleEvent (CompDisplay *d,
 	    {
 		CompWindow *w;
 
-		w = findWindowAtScreen (s, event->xkey.window);
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
 		if (w)
 		    moveInitiate (w,
 				  pointerX,
@@ -422,7 +451,18 @@ moveHandleEvent (CompDisplay *d,
 	    }
 	    else if (eventTerminates (d, event,
 				      &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
+	    {
 		moveTerminate (d);
+	    }
+	    else if (eventMatches (d, event,
+				   &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD]))
+	    {
+		CompWindow *w;
+
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		    moveInitiateKeyboard (w);
+	    }
 
 	    if (ms->grabIndex && event->type == KeyPress)
 	    {
@@ -461,7 +501,16 @@ moveHandleEvent (CompDisplay *d,
 	    }
 	    else if (eventTerminates (d, event,
 				      &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
+	    {
 		moveTerminate (d);
+	    }
+	    else if (eventMatches (d, event,
+				   &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    moveInitiateKeyboard (w);
+	    }
 	}
 	break;
     case MotionNotify:
@@ -492,11 +541,7 @@ moveHandleEvent (CompDisplay *d,
 
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
-			xRoot = w->attrib.x + (w->width  / 2);
-			yRoot = w->attrib.y + (w->height / 2);
-
-			warpPointer (d, xRoot - pointerX, yRoot - pointerY);
-			moveInitiate (w, xRoot, yRoot, 0);
+			moveInitiateKeyboard (w);
 		    }
 		    else
 		    {
@@ -637,6 +682,7 @@ moveInitScreen (CompPlugin *p,
     ms->moveCursor = XCreateFontCursor (s->display->display, XC_plus);
 
     addScreenBinding (s, &ms->opt[MOVE_SCREEN_OPTION_INITIATE].value.bind);
+    addScreenBinding (s, &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD].value.bind);
 
     WRAP (ms, s, paintWindow, movePaintWindow);
 

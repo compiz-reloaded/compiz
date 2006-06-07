@@ -39,6 +39,9 @@
 #define RESIZE_INITIATE_BUTTON_DEFAULT    Button2
 #define RESIZE_INITIATE_MODIFIERS_DEFAULT CompAltMask
 
+#define RESIZE_INITIATE_KBD_KEY_DEFAULT       "F8"
+#define RESIZE_INITIATE_KBD_MODIFIERS_DEFAULT CompAltMask
+
 struct _ResizeKeys {
     char *name;
     int  dx;
@@ -69,8 +72,9 @@ typedef struct _ResizeDisplay {
     KeyCode      key[NUM_KEYS];
 } ResizeDisplay;
 
-#define RESIZE_SCREEN_OPTION_INITIATE  0
-#define RESIZE_SCREEN_OPTION_NUM       1
+#define RESIZE_SCREEN_OPTION_INITIATE     0
+#define RESIZE_SCREEN_OPTION_INITIATE_KBD 1
+#define RESIZE_SCREEN_OPTION_NUM          2
 
 typedef struct _ResizeScreen {
     CompOption opt[RESIZE_SCREEN_OPTION_NUM];
@@ -127,6 +131,7 @@ resizeSetScreenOption (CompScreen      *screen,
 
     switch (index) {
     case RESIZE_SCREEN_OPTION_INITIATE:
+    case RESIZE_SCREEN_OPTION_INITIATE_KBD:
 	if (addScreenBinding (screen, &value->bind))
 	{
 	    removeScreenBinding (screen, &o->value.bind);
@@ -151,11 +156,22 @@ resizeScreenInitOptions (ResizeScreen *rs,
     o = &rs->opt[RESIZE_SCREEN_OPTION_INITIATE];
     o->name			     = "initiate";
     o->shortDesc		     = "Initiate Window Resize";
-    o->longDesc			     = "Start moving window";
+    o->longDesc			     = "Start resizing window";
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = RESIZE_INITIATE_MODIFIERS_DEFAULT;
     o->value.bind.u.button.button    = RESIZE_INITIATE_BUTTON_DEFAULT;
+
+    o = &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD];
+    o->name			  = "initiate_keyboard";
+    o->shortDesc		  = "Initiate Keyboard Window Resize";
+    o->longDesc			  = "Start resizing window using keyboard";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = RESIZE_INITIATE_KBD_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (RESIZE_INITIATE_KBD_KEY_DEFAULT));
 }
 
 static void
@@ -435,6 +451,22 @@ resizeHandleMotionEvent (CompScreen *s,
 }
 
 static void
+resizeInitiateKeyboard (CompWindow *w)
+{
+    int xRoot, yRoot;
+
+    xRoot = w->attrib.x + (w->width / 2);
+    yRoot = w->attrib.y + (w->height / 2);
+
+    warpPointer (w->screen->display, xRoot - pointerX, yRoot - pointerY);
+
+    resizeInitiate (w->screen, w->id,
+		    xRoot, yRoot, 0,
+		    ResizeDownMask | ResizeRightMask,
+		    0);
+}
+
+static void
 resizeHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
@@ -452,15 +484,27 @@ resizeHandleEvent (CompDisplay *d,
 
 	    if (eventMatches (d, event,
 			      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
+	    {
 		interiorResizeInitiate (s,
 					event->xkey.window,
 					pointerX,
 					pointerY,
 					event->xkey.state);
-
-	    if (eventTerminates (d, event,
-				 &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
+	    }
+	    else if (eventTerminates (d, event,
+				      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
+	    {
 		resizeTerminate (d);
+	    }
+	    else if (eventMatches (d, event,
+				   &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD]))
+	    {
+		CompWindow *w;
+
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		    resizeInitiateKeyboard (w);
+	    }
 
 	    if (rs->grabIndex && rd->w && event->type == KeyPress)
 	    {
@@ -497,15 +541,27 @@ resizeHandleEvent (CompDisplay *d,
 
 	    if (eventMatches (d, event,
 			      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
+	    {
 		interiorResizeInitiate (s,
 					event->xbutton.window,
 					event->xbutton.x_root,
 					event->xbutton.y_root,
 					event->xbutton.state);
-
-	    if (eventTerminates (d, event,
+	    }
+	    else if (eventTerminates (d, event,
 				      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
+	    {
 		resizeTerminate (d);
+	    }
+	    else if (eventMatches (d, event,
+				   &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD]))
+	    {
+		CompWindow *w;
+
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		    resizeInitiateKeyboard (w);
+	    }
 
 	    if (event->type == ButtonRelease &&
 		(rd->releaseButton     == -1 ||
@@ -537,17 +593,7 @@ resizeHandleEvent (CompDisplay *d,
 		{
 		    if (event->xclient.data.l[2] == WmMoveResizeSizeKeyboard)
 		    {
-			int x, y;
-
-			x = w->attrib.x + w->width / 2;
-			y = w->attrib.y + w->height / 2;
-
-			warpPointer (d, x - pointerX, y - pointerY);
-
-			resizeInitiate (w->screen, event->xclient.window,
-					x, y, 0,
-					ResizeDownMask | ResizeRightMask,
-					0);
+			resizeInitiateKeyboard (w);
 		    }
 		    else
 		    {
@@ -694,6 +740,8 @@ resizeInitScreen (CompPlugin *p,
 					     XC_bottom_right_corner);
 
     addScreenBinding (s, &rs->opt[RESIZE_SCREEN_OPTION_INITIATE].value.bind);
+    addScreenBinding (s,
+		      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD].value.bind);
 
     s->privates[rd->screenPrivateIndex].ptr = rs;
 

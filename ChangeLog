@@ -1,3 +1,11 @@
+2006-06-07  David Reveman  <davidr@novell.com>
+
+	* plugins/compiz.schemas.in.in:
+	* plugins/resize.c:
+	* plugins/move.c: Add initiat_keyboard binding which is more
+	appropriate for key-binding as it moves the cursor to middle of
+	window.
+
 2006-06-06  David Reveman  <davidr@novell.com>
 
 	* plugins/switcher.c: Track thumbnail damage correctly.
