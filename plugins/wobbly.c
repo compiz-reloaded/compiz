@@ -2137,6 +2137,7 @@ wobblyDrawWindowGeometry (CompWindow *w)
 	    if (texUnit != currentTexUnit)
 	    {
 		w->screen->clientActiveTexture (GL_TEXTURE0_ARB + texUnit);
+		glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 		currentTexUnit = texUnit;
 	    }
 	    vertices -= 2;
@@ -2144,6 +2145,19 @@ wobblyDrawWindowGeometry (CompWindow *w)
 	}
 
 	glDrawElements (GL_QUADS, w->vCount, GL_UNSIGNED_SHORT, w->indices);
+
+	/* disable all texture coordinate arrays except 0 */
+	texUnit = w->texUnits;
+	if (texUnit > 1)
+	{
+	    while (--texUnit)
+	    {
+		(*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
+		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	    }
+
+	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB);
+	}
     }
     else
     {

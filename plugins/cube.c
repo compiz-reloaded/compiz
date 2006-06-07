@@ -1206,9 +1206,13 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
 	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
 	    disableTexture (s, &cs->texture);
+	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 	}
 	else
+	{
+	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
+	}
 
 	glNormal3f (0.0f, 1.0f, 0.0f);
 
@@ -1220,6 +1224,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	glPopMatrix ();
 
 	glColor4usv (defaultColor);
+	glEnableClientState (GL_TEXTURE_COORD_ARRAY);
     }
 
     /* outside cube */

@@ -1,8 +1,14 @@
 2006-06-07  David Reveman  <davidr@novell.com>
 
+	* plugins/cube.c (cubePaintTransformedScreen):
+	* plugins/wobbly.c (wobblyDrawWindowGeometry):
+	* plugins/switcher.c (switchPaintWindow):
+	* src/paint.c (drawWindowGeometry): Disable client-side texture
+	coordinate arrays that are not used. (bnc #182430)
+
 	* plugins/compiz.schemas.in.in:
 	* plugins/resize.c:
-	* plugins/move.c: Add initiat_keyboard binding which is more
+	* plugins/move.c: Add initiate_keyboard binding which is more
 	appropriate for key-binding as it moves the cursor to middle of
 	window.
 

@@ -1646,16 +1646,17 @@ switchPaintWindow (CompWindow		   *w,
 
 	cx = w->attrib.x + (w->width >> 1);
 
+	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 	glEnable (GL_BLEND);
 	glColor4us (0, 0, 0, w->lastPaint.opacity);
 	glPushMatrix ();
 	glTranslatef (cx, y, 0.0f);
 	glVertexPointer (2, GL_FLOAT, 0, _boxVertices);
 	glDrawArrays (GL_QUADS, 0, 16);
+	glPopMatrix ();
 	glColor4usv (defaultColor);
 	glDisable (GL_BLEND);
-	glPopMatrix ();
-
+	glEnableClientState (GL_TEXTURE_COORD_ARRAY);
     }
     else if (w->id == ss->selectedWindow)
     {
