@@ -4557,7 +4557,7 @@ update_shadow (void)
 		break;
 	    }
 	}
-	
+
 	XFree (filters);
     }
 
