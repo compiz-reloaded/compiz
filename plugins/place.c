@@ -851,7 +851,7 @@ placeWindow (CompWindow *window,
      */
     for (wi = window->screen->windows; wi; wi = wi->next)
     {
-	if (wi->attrib.map_state != IsViewable)
+	if (!wi->shaded && wi->attrib.map_state != IsViewable)
 	    continue;
 
 	if (wi->attrib.x >= work_area.x + work_area.width  ||

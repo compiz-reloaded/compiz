@@ -1010,7 +1010,10 @@ decorHandleEvent (CompDisplay *d,
 
 			for (w = s->windows; w; w = w->next)
 			{
-			    if (!w->attrib.override_redirect && w->mapNum)
+			    if (w->attrib.override_redirect)
+				continue;
+
+			    if (w->shaded || w->mapNum)
 			    {
 				dw = GET_DECOR_WINDOW (w, ds);
 

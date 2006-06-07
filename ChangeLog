@@ -2,6 +2,46 @@
 
 	* plugins/compiz.schemas.in.in: Regen.
 
+	* src/window.c: Add window shading support.
+
+	* src/screen.c:
+	* src/paint.c:
+	* src/event.c: Adjust for window shading support.
+	(handleEvent): Handle RESTACK client messages with sibling None
+	correctly.
+
+	* src/event.c:
+	* src/display.c: Add toggle window shade binding.
+
+	* plugins/minimize.c: Add window shading animation support.
+
+	* plugins/fade.c:
+	* plugins/place.c:
+	* plugins/resize.c:
+	* plugins/scale.c:
+	* plugins/switcher.c:
+	* plugins/decoration.c: Adjust for window shading support.
+
+	* include/compiz.h: Add window shading support.
+
+	* gnome/window-decorator/gnome-window-decorator.c: lower_window ->
+	restack_window and change it so it can be used for both
+	raising and lowering a window.
+	Add support for double_click_titlebar setting.
+	(title_event): Don't activate window on titlebar click only
+	raise it. Use double_click_action to determine what should be
+	done when titlebar is double clicked.
+	(update_event_windows): Remove vertical resize event windows
+	when top level window is shaded.
+	(window_state_changed): Update event windows when window state
+	changed.
+
+	* gnome/window-decorator/gnome-window-decorator.c:
+	* gnome/compiz-window-manager.c: Add support for shade double click
+	setting.
+
+	* plugins/compiz.schemas.in.in: Regen.
+
 	* plugins/cube.c (cubePaintTransformedScreen):
 	* plugins/wobbly.c (wobblyDrawWindowGeometry):
 	* plugins/switcher.c (switchPaintWindow):

@@ -798,6 +798,7 @@ setSupported (CompScreen *s)
     data[i++] = d->winActionMaximizeVertAtom;
     data[i++] = d->winActionFullscreenAtom;
     data[i++] = d->winActionCloseAtom;
+    data[i++] = d->winActionShadeAtom;
 
     data[i++] = d->winTypeAtom;
     data[i++] = d->winTypeDesktopAtom;
@@ -2493,9 +2494,6 @@ moveWindowToViewportPosition (CompWindow *w,
     if (tx)
     {
 	int m, wx;
-
-	if (w->attrib.map_state != IsViewable)
-	    return;
 
 	if (w->attrib.override_redirect)
 	    return;

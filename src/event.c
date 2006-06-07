@@ -320,7 +320,16 @@ handleEvent (CompDisplay *d,
     case MapNotify:
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
+	{
+	    /* been shaded */
+	    if (w->height == 0)
+	    {
+		if (w->id == d->activeWindow)
+		    moveInputFocusToWindow (w);
+	    }
+
 	    mapWindow (w);
+	}
 	break;
     case UnmapNotify:
 	w = findWindowAtDisplay (d, event->xunmap.window);
@@ -352,7 +361,9 @@ handleEvent (CompDisplay *d,
 	    }
 
 	    unmapWindow (w);
-	    moveInputFocusToOtherWindow (w);
+
+	    if (!w->shaded)
+		moveInputFocusToOtherWindow (w);
 	}
 	break;
     case ReparentNotify:
@@ -394,17 +405,11 @@ handleEvent (CompDisplay *d,
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
 		if (w)
 		{
+		    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
+			updateWindowAttributes (w, TRUE);
+
 		    if (!(w->type & CompWindowTypeDockMask))
-		    {
-			if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
-			{
-			    activateWindow (w);
-			}
-			else
-			{
-			    moveInputFocusToWindow (w);
-			}
-		    }
+			moveInputFocusToWindow (w);
 		}
 	    }
 
@@ -620,6 +625,20 @@ handleEvent (CompDisplay *d,
 				    CompWindowStateMaximizedVertMask);
 	    }
 
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED]))
+	    {
+		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
+		if (w)
+		{
+		    w->state ^= CompWindowStateShadedMask;
+		    if (w->state & CompWindowStateShadedMask)
+			w->state &= ~MAXIMIZE_STATE;
+
+		    updateWindowAttributes (w, FALSE);
+		}
+	    }
+
 	    if (!d->screens->maxGrab)
 		XAllowEvents (d->display, eventMode, event->xbutton.time);
 	}
@@ -805,6 +824,17 @@ handleEvent (CompDisplay *d,
 		if (w)
 		    maximizeWindow (w, w->state ^
 				    CompWindowStateMaximizedVertMask);
+	    }
+
+	    if (eventMatches (d, event,
+			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED]))
+	    {
+		w = findTopLevelWindowAtScreen (s, d->activeWindow);
+		if (w)
+		{
+		    w->state ^= CompWindowStateShadedMask;
+		    updateWindowAttributes (w, FALSE);
+		}
 	    }
 	}
 	break;
@@ -1139,6 +1169,22 @@ handleEvent (CompDisplay *d,
 		    }
 		}
 
+		wState = constrainWindowState (wState, w->actions);
+
+		/* unshade when maximizing and unmaximize when shading */
+		if (wState & MAXIMIZE_STATE)
+		{
+		    /* maximizing */
+		    if ((wState & ~w->state) & MAXIMIZE_STATE)
+		    {
+			wState &= ~CompWindowStateShadedMask;
+		    }
+		    else
+		    {
+			wState &= ~MAXIMIZE_STATE;
+		    }
+		}
+
 		if (wState != w->state)
 		{
 		    w->state = wState;
@@ -1148,7 +1194,7 @@ handleEvent (CompDisplay *d,
 
 		    updateWindowAttributes (w, FALSE);
 
-		    setWindowState (d, wState, w->id);
+		    setWindowState (d, w->state, w->id);
 		}
 	    }
 	}
@@ -1247,16 +1293,26 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
-		CompWindow *sibling;
-
-		sibling = findWindowAtDisplay (d, event->xclient.data.l[1]);
-		if (sibling)
+		/* TODO: other stack modes than Above and Below */
+		if (event->xclient.data.l[1])
 		{
-		    /* TODO: other stack modes than Above and Below */
+		    CompWindow *sibling;
+
+		    sibling = findWindowAtDisplay (d, event->xclient.data.l[1]);
+		    if (sibling)
+		    {
+			if (event->xclient.data.l[2] == Above)
+			    restackWindowAbove (w, sibling);
+			else if (event->xclient.data.l[2] == Below)
+			    restackWindowBelow (w, sibling);
+		    }
+		}
+		else
+		{
 		    if (event->xclient.data.l[2] == Above)
-			restackWindowAbove (w, sibling);
+			raiseWindow (w);
 		    else if (event->xclient.data.l[2] == Below)
-			restackWindowBelow (w, sibling);
+			lowerWindow (w);
 		}
 	    }
 	}
@@ -1359,7 +1415,7 @@ handleEvent (CompDisplay *d,
 	if (event->xfocus.mode != NotifyGrab)
 	{
 	    w = findWindowAtDisplay (d, event->xfocus.window);
-	    if (w && w->id != d->activeWindow)
+	    if (w && w->managed && w->id != d->activeWindow)
 	    {
 		XChangeProperty (d->display, w->screen->root,
 				 d->winActiveAtom,

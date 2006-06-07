@@ -535,7 +535,7 @@ isSwitchWin (CompWindow *w)
     {
 	if (ss->opt[SWITCH_SCREEN_OPTION_MINIMIZED].value.b)
 	{
-	    if (!w->minimized && !w->inShowDesktopMode)
+	    if (!w->minimized && !w->inShowDesktopMode && !w->shaded)
 		return FALSE;
 	}
 	else

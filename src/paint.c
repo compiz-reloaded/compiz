@@ -94,12 +94,17 @@ paintTransformedScreen (CompScreen		*screen,
 
 	    for (w = screen->windows; w; w = w->next)
 	    {
-		if (w->destroyed || w->attrib.map_state != IsViewable)
+		if (w->destroyed)
 		    continue;
 
-		if (w->damaged)
-		    (*screen->paintWindow) (w, &w->paint, &screen->region,
-					    windowMask);
+		if (!w->shaded)
+		{
+		    if (w->attrib.map_state != IsViewable || !w->damaged)
+			continue;
+		}
+
+		(*screen->paintWindow) (w, &w->paint, &screen->region,
+					windowMask);
 	    }
 
 	    glDisable (GL_STENCIL_TEST);
@@ -116,11 +121,16 @@ paintTransformedScreen (CompScreen		*screen,
 
     for (w = screen->windows; w; w = w->next)
     {
-	if (w->destroyed || w->attrib.map_state != IsViewable)
+	if (w->destroyed)
 	    continue;
 
-	if (w->damaged)
-	    (*screen->paintWindow) (w, &w->paint, &screen->region, windowMask);
+	if (!w->shaded)
+	{
+	    if (w->attrib.map_state != IsViewable || !w->damaged)
+		continue;
+	}
+
+	(*screen->paintWindow) (w, &w->paint, &screen->region, windowMask);
     }
 
     glPopMatrix ();
@@ -175,11 +185,16 @@ paintScreen (CompScreen		     *screen,
 	/* paint all windows from bottom to top */
 	for (w = screen->windows; w; w = w->next)
 	{
-	    if (w->destroyed || w->attrib.map_state != IsViewable)
+	    if (w->destroyed)
 		continue;
 
-	    if (w->damaged)
-		(*screen->paintWindow) (w, &w->paint, region, 0);
+	    if (!w->shaded)
+	    {
+		if (w->attrib.map_state != IsViewable || !w->damaged)
+		    continue;
+	    }
+
+	    (*screen->paintWindow) (w, &w->paint, region, 0);
 	}
     }
     else
@@ -198,11 +213,14 @@ paintScreen (CompScreen		     *screen,
 	/* paint solid windows */
 	for (w = screen->reverseWindows; w; w = w->prev)
 	{
-	    if (w->destroyed || w->attrib.map_state != IsViewable)
+	    if (w->destroyed)
 		continue;
 
-	    if (!w->damaged)
-		continue;
+	    if (!w->shaded)
+	    {
+		if (w->attrib.map_state != IsViewable || !w->damaged)
+		    continue;
+	    }
 
 	    if ((*screen->paintWindow) (w, &w->paint, tmpRegion,
 					PAINT_WINDOW_SOLID_MASK))
@@ -231,12 +249,17 @@ paintScreen (CompScreen		     *screen,
 	/* paint translucent windows */
 	for (w = screen->windows; w; w = w->next)
 	{
-	    if (w->destroyed || w->attrib.map_state != IsViewable)
+	    if (w->destroyed)
 		continue;
 
-	    if (w->damaged)
-		(*screen->paintWindow) (w, &w->paint, w->clip,
-					PAINT_WINDOW_TRANSLUCENT_MASK);
+	    if (!w->shaded)
+	    {
+		if (w->attrib.map_state != IsViewable || !w->damaged)
+		    continue;
+	    }
+
+	    (*screen->paintWindow) (w, &w->paint, w->clip,
+				    PAINT_WINDOW_TRANSLUCENT_MASK);
 	}
     }
 
@@ -769,6 +792,9 @@ paintWindow (CompWindow		     *w,
 
     if (mask & PAINT_WINDOW_SOLID_MASK)
     {
+	if (w->attrib.map_state != IsViewable)
+	    return FALSE;
+
 	if (w->alpha)
 	    return FALSE;
 
@@ -782,6 +808,9 @@ paintWindow (CompWindow		     *w,
     }
     else
     {
+	if (w->attrib.map_state != IsViewable)
+	    return TRUE;
+
 	if (w->alpha || attrib->opacity != OPAQUE)
 	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 	else

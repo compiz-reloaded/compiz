@@ -508,6 +508,8 @@ setWindowActions (CompDisplay  *display,
 	data[i++] = display->winActionFullscreenAtom;
     if (actions & CompWindowActionCloseMask)
 	data[i++] = display->winActionCloseAtom;
+    if (actions & CompWindowActionShadeMask)
+	data[i++] = display->winActionShadeAtom;
 
     XChangeProperty (display->display, id, display->wmAllowedActionsAtom,
 		     XA_ATOM, 32, PropModeReplace,
@@ -525,22 +527,23 @@ recalcWindowActions (CompWindow *w)
     case CompWindowTypeUtilMask:
     case CompWindowTypeToolbarMask:
 	actions =
-		CompWindowActionMaximizeHorzMask |
-		CompWindowActionMaximizeVertMask |
-		CompWindowActionFullscreenMask   |
-		CompWindowActionMoveMask         |
-		CompWindowActionResizeMask       |
-		CompWindowActionStickMask        |
-		CompWindowActionMinimizeMask     |
-		CompWindowActionCloseMask;
+	    CompWindowActionMaximizeHorzMask |
+	    CompWindowActionMaximizeVertMask |
+	    CompWindowActionFullscreenMask   |
+	    CompWindowActionMoveMask         |
+	    CompWindowActionResizeMask       |
+	    CompWindowActionStickMask        |
+	    CompWindowActionMinimizeMask     |
+	    CompWindowActionCloseMask	     |
+	    CompWindowActionShadeMask;
 	break;
     case CompWindowTypeDialogMask:
     case CompWindowTypeModalDialogMask:
 	actions =
-		CompWindowActionMoveMask   |
-		CompWindowActionResizeMask |
-		CompWindowActionStickMask  |
-		CompWindowActionCloseMask;
+	    CompWindowActionMoveMask   |
+	    CompWindowActionResizeMask |
+	    CompWindowActionStickMask  |
+	    CompWindowActionCloseMask;
 	break;
     case CompWindowTypeMenuMask:
     case CompWindowTypeSplashMask:
@@ -564,6 +567,26 @@ recalcWindowActions (CompWindow *w)
 	setWindowActions (w->screen->display, actions, w->id);
     }
 }
+
+unsigned int
+constrainWindowState (unsigned int state,
+		      unsigned int actions)
+{
+    if (!(actions & CompWindowActionMaximizeHorzMask))
+	state &= ~CompWindowStateMaximizedHorzMask;
+
+    if (!(actions & CompWindowActionMaximizeVertMask))
+	state &= ~CompWindowStateMaximizedVertMask;
+
+    if (!(actions & CompWindowActionShadeMask))
+	state &= ~CompWindowStateShadedMask;
+
+    if (!(actions & CompWindowActionFullscreenMask))
+	state &= ~CompWindowStateFullscreenMask;
+
+    return state;
+}
+
 
 unsigned int
 getWindowType (CompDisplay *display,
@@ -757,6 +780,7 @@ updateFrameWindow (CompWindow *w)
     {
 	XRectangle rects[4];
 	int	   x, y, width, height;
+	int	   i = 0;
 
 	x      = w->serverX - w->input.left;
 	y      = w->serverY - w->input.top;
@@ -790,7 +814,7 @@ updateFrameWindow (CompWindow *w)
 	    XConfigureWindow (w->screen->display->display, w->frame,
 			      CWSibling | CWStackMode, &xwc);
 
-	    if (w->mapNum)
+	    if (w->mapNum || w->shaded)
 		XMapWindow (w->screen->display->display, w->frame);
 
 	    XChangeProperty (w->screen->display->display, w->id,
@@ -801,25 +825,37 @@ updateFrameWindow (CompWindow *w)
 
 	XResizeWindow (w->screen->display->display, w->frame, width, height);
 
-	rects[0].x	= 0;
-	rects[0].y	= 0;
-	rects[0].width  = width;
-	rects[0].height = w->input.top;
+	rects[i].x	= 0;
+	rects[i].y	= 0;
+	rects[i].width  = width;
+	rects[i].height = w->input.top;
 
-	rects[1].x	= 0;
-	rects[1].y	= w->input.top;
-	rects[1].width  = w->input.left;
-	rects[1].height = height - w->input.top - w->input.bottom;
+	if (rects[i].width && rects[i].height)
+	    i++;
 
-	rects[2].x	= width - w->input.right;
-	rects[2].y	= w->input.top;
-	rects[2].width  = w->input.right;
-	rects[2].height = height - w->input.top - w->input.bottom;
+	rects[i].x	= 0;
+	rects[i].y	= w->input.top;
+	rects[i].width  = w->input.left;
+	rects[i].height = height - w->input.top - w->input.bottom;
 
-	rects[3].x	= 0;
-	rects[3].y	= height - w->input.bottom;
-	rects[3].width  = width;
-	rects[3].height = w->input.bottom;
+	if (rects[i].width && rects[i].height)
+	    i++;
+
+	rects[i].x	= width - w->input.right;
+	rects[i].y	= w->input.top;
+	rects[i].width  = w->input.right;
+	rects[i].height = height - w->input.top - w->input.bottom;
+
+	if (rects[i].width && rects[i].height)
+	    i++;
+
+	rects[i].x	= 0;
+	rects[i].y	= height - w->input.bottom;
+	rects[i].width  = width;
+	rects[i].height = w->input.bottom;
+
+	if (rects[i].width && rects[i].height)
+	    i++;
 
 	XShapeCombineRectangles (w->screen->display->display,
 				 w->frame,
@@ -827,7 +863,7 @@ updateFrameWindow (CompWindow *w)
 				 0,
 				 0,
 				 rects,
-				 4,
+				 i,
 				 ShapeSet,
 				 YXBanded);
     }
@@ -1033,7 +1069,7 @@ damageWindowOutputExtents (CompWindow *w)
     if (w->screen->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
 	return;
 
-    if (w->attrib.map_state == IsViewable && w->damaged)
+    if (w->shaded || (w->attrib.map_state == IsViewable && w->damaged))
     {
 	REGION reg;
 
@@ -1088,7 +1124,7 @@ addWindowDamage (CompWindow *w)
     if (w->screen->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
 	return;
 
-    if (w->attrib.map_state == IsViewable && w->damaged)
+    if (w->shaded || (w->attrib.map_state == IsViewable && w->damaged))
     {
 	REGION region;
 
@@ -1380,6 +1416,7 @@ addWindow (CompScreen *screen,
     w->placed		 = FALSE;
     w->minimized	 = FALSE;
     w->inShowDesktopMode = FALSE;
+    w->shaded		 = FALSE;
     w->hidden		 = FALSE;
 
     w->initialViewport = screen->x;
@@ -1634,7 +1671,7 @@ addWindow (CompScreen *screen,
     else if (!w->attrib.override_redirect)
     {
 	if (getWmState (screen->display, w->id) == IconicState)
-	    w->minimized = TRUE;
+	    w->minimized = w->managed = TRUE;
     }
 
     windowInitPlugins (w);
@@ -1786,6 +1823,13 @@ mapWindow (CompWindow *w)
 	    sendSyncRequest (w);
 	    sendConfigureNotify (w);
 	}
+
+	/* been shaded */
+	if (!w->height)
+	    resizeWindow (w,
+			  w->attrib.x, w->attrib.y,
+			  w->attrib.width, ++w->attrib.height - 1,
+			  w->attrib.border_width);
     }
 }
 
@@ -1794,7 +1838,7 @@ unmapWindow (CompWindow *w)
 {
     if (w->mapNum)
     {
-	if (w->frame)
+	if (w->frame && !w->shaded)
 	    XUnmapWindow (w->screen->display->display, w->frame);
 
 	w->mapNum = 0;
@@ -1817,6 +1861,12 @@ unmapWindow (CompWindow *w)
     w->invisible = TRUE;
 
     releaseWindow (w);
+
+    if (w->shaded && w->height)
+	resizeWindow (w,
+		      w->attrib.x, w->attrib.y,
+		      w->attrib.width, ++w->attrib.height - 1,
+		      w->attrib.border_width);
 
     if (w->struts)
 	updateWorkareaForScreen (w->screen);
@@ -1902,6 +1952,10 @@ resizeWindow (CompWindow *w,
 
 		return FALSE;
 	    }
+	}
+	else if (w->shaded)
+	{
+	    ph = 0;
 	}
 
 	addWindowDamage (w);
@@ -2314,7 +2368,7 @@ focusWindow (CompWindow *w)
     if (w->attrib.override_redirect)
 	return FALSE;
 
-    if (!w->mapNum || w->attrib.map_state != IsViewable)
+    if (!w->shaded && (!w->mapNum || w->attrib.map_state != IsViewable))
 	return FALSE;
 
     if (w->attrib.x + w->width  <= 0	||
@@ -2452,14 +2506,25 @@ getModalTransient (CompWindow *window)
 void
 moveInputFocusToWindow (CompWindow *w)
 {
-    CompDisplay *d = w->screen->display;
+    CompScreen  *s = w->screen;
+    CompDisplay *d = s->display;
     CompWindow  *modalTransient;
 
     modalTransient = getModalTransient (w);
     if (modalTransient)
 	w = modalTransient;
 
-    XSetInputFocus (d->display, w->id, RevertToPointerRoot, CurrentTime);
+    if (w->state & CompWindowStateHiddenMask)
+    {
+	XSetInputFocus (d->display, w->frame, RevertToPointerRoot, CurrentTime);
+	XChangeProperty (d->display, s->root, d->winActiveAtom,
+			 XA_WINDOW, 32, PropModeReplace,
+			 (unsigned char *) &w->id, 1);
+    }
+    else
+    {
+	XSetInputFocus (d->display, w->id, RevertToPointerRoot, CurrentTime);
+    }
 }
 
 static Bool
@@ -2494,6 +2559,21 @@ stackLayerCheck (CompWindow *w,
     return FALSE;
 }
 
+static Bool
+avoidStackingRelativeTo (CompWindow *w)
+{
+    if (w->attrib.override_redirect)
+	return TRUE;
+
+    if (!w->shaded)
+    {
+	if (w->attrib.map_state != IsViewable || w->mapNum == 0)
+	    return TRUE;
+    }
+
+    return FALSE;
+}
+
 /* goes through the stack, top-down until we find a window we should
    stack above, normal windows can be stacked above fullscreen windows
    if aboveFs is TRUE. */
@@ -2521,13 +2601,7 @@ findSiblingBelow (CompWindow *w,
 
     for (below = w->screen->reverseWindows; below; below = below->prev)
     {
-	if (below == w)
-	    continue;
-
-	if (below->attrib.override_redirect)
-	    continue;
-
-	if (below->attrib.map_state != IsViewable || below->mapNum == 0)
+	if (below == w || avoidStackingRelativeTo (below))
 	    continue;
 
 	/* always above desktop windows */
@@ -2585,13 +2659,7 @@ findLowestSiblingBelow (CompWindow *w)
 
     for (below = w->screen->reverseWindows; below; below = below->prev)
     {
-	if (below == w)
-	    continue;
-
-	if (below->attrib.override_redirect)
-	    continue;
-
-	if (below->attrib.map_state != IsViewable || below->mapNum == 0)
+	if (below == w || avoidStackingRelativeTo (below))
 	    continue;
 
 	/* always above desktop windows */
@@ -2651,13 +2719,7 @@ validSiblingBelow (CompWindow *w,
     if (w->transientFor || isGroupTransient (w, clientLeader))
 	clientLeader = None;
 
-    if (sibling == w)
-	return FALSE;
-
-    if (sibling->attrib.override_redirect)
-	return FALSE;
-
-    if (sibling->attrib.map_state != IsViewable || sibling->mapNum == 0)
+    if (sibling == w || avoidStackingRelativeTo (sibling))
 	return FALSE;
 
     /* always above desktop windows */
@@ -3138,8 +3200,15 @@ updateWindowAttributes (CompWindow *w,
 
     if (w->attrib.override_redirect)
 	return;
-    if (w->state & CompWindowStateHiddenMask)
-	return;
+
+    if (w->state & CompWindowStateShadedMask)
+    {
+	hideWindow (w);
+    }
+    else if (w->shaded)
+    {
+	showWindow (w);
+    }
 
     mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
     mask |= addWindowSizeChanges (w, &xwc);
@@ -3210,6 +3279,10 @@ activateWindow (CompWindow *w)
 	    unminimizeWindow (w);
 
 	leaveShowDesktopMode (w->screen, w);
+
+	w->state &= ~CompWindowStateShadedMask;
+	if (w->shaded)
+	    showWindow (w);
     }
 
     if (w->state & CompWindowStateHiddenMask)
@@ -3413,18 +3486,39 @@ constrainNewWindowSize (CompWindow *w,
 void
 hideWindow (CompWindow *w)
 {
+    if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
+    {
+	if (w->state & CompWindowStateShadedMask)
+	{
+	    w->shaded = TRUE;
+	}
+	else
+	{
+	    return;
+	}
+    }
+    else
+    {
+	addWindowDamage (w);
+
+	w->shaded = FALSE;
+
+	if ((w->state & CompWindowStateShadedMask) && w->frame)
+	    XUnmapWindow (w->screen->display->display, w->frame);
+    }
+
     if (w->attrib.map_state != IsViewable)
 	return;
 
     if (w->state & CompWindowStateHiddenMask)
 	return;
 
-    if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
-	return;
-
     w->state |= CompWindowStateHiddenMask;
 
     w->pendingUnmaps++;
+
+    if (w->shaded && w->id == w->screen->display->activeWindow)
+	moveInputFocusToWindow (w);
 
     XUnmapWindow (w->screen->display->display, w->id);
 
@@ -3439,6 +3533,29 @@ showWindow (CompWindow *w)
 
     if (w->minimized || w->inShowDesktopMode || w->hidden)
 	return;
+
+    /* transition from minimized to shaded */
+    if (w->state & CompWindowStateShadedMask)
+    {
+	w->shaded = TRUE;
+
+	if (w->frame)
+	    XMapWindow (w->screen->display->display, w->frame);
+
+	if (w->height)
+	    resizeWindow (w,
+			  w->attrib.x, w->attrib.y,
+			  w->attrib.width, ++w->attrib.height - 1,
+			  w->attrib.border_width);
+
+	addWindowDamage (w);
+
+	return;
+    }
+    else
+    {
+	w->shaded = FALSE;
+    }
 
     w->state &= ~CompWindowStateHiddenMask;
 
@@ -3505,11 +3622,7 @@ maximizeWindow (CompWindow *w,
     if (w->attrib.override_redirect)
 	return;
 
-    if (!(w->actions & CompWindowActionMaximizeHorzMask))
-	state &= ~CompWindowStateMaximizedHorzMask;
-
-    if (!(w->actions & CompWindowActionMaximizeVertMask))
-	state &= ~CompWindowStateMaximizedVertMask;
+    state = constrainWindowState (state, w->actions);
 
     state &= MAXIMIZE_STATE;
 
@@ -3518,6 +3631,10 @@ maximizeWindow (CompWindow *w,
 
     w->state &= ~MAXIMIZE_STATE;
     w->state |= state;
+
+    /* unshade window when maximizing */
+    if (w->state & MAXIMIZE_STATE)
+	w->state &= ~CompWindowStateShadedMask;
 
     recalcWindowType (w);
     recalcWindowActions (w);

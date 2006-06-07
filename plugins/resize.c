@@ -206,6 +206,9 @@ resizeInitiate (CompScreen   *s,
 	if (w->attrib.override_redirect)
 	    return;
 
+	if (w->shaded)
+	    mask &= ~(ResizeUpMask | ResizeDownMask);
+
 	rd->w	   = w;
 	rd->mask   = mask;
 	rd->width  = w->attrib.width;

@@ -66,6 +66,9 @@
 #define COMPIZ_TITLEBAR_FONT_KEY	\
     METACITY_GCONF_DIR "/titlebar_font"
 
+#define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY	       \
+    METACITY_GCONF_DIR "/action_double_click_titlebar"
+
 #define GCONF_DIR "/apps/compiz/plugins/decoration/allscreens/options"
 
 #define COMPIZ_SHADOW_RADIUS_KEY \
@@ -161,6 +164,13 @@ typedef struct _quad {
     gint	   clamp;
     cairo_matrix_t m;
 } quad;
+
+enum {
+    DOUBLE_CLICK_SHADE,
+    DOUBLE_CLICK_MAXIMIZE
+};
+
+int double_click_action = DOUBLE_CLICK_SHADE;
 
 static gboolean minimal = FALSE;
 
@@ -2335,12 +2345,23 @@ update_event_windows (WnckWindow *win)
     Display *xdisplay;
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     gint    x0, y0, width, height, x, y, w, h;
-    gint    i, j;
+    gint    i, j, k, l;
     gint    button_x = 10;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
     wnck_window_get_geometry (win, &x0, &y0, &width, &height);
+
+    if (d->state & WNCK_WINDOW_STATE_SHADED)
+    {
+	height = 0;
+	k = l = 1;
+    }
+    else
+    {
+	k = 0;
+	l = 2;
+    }
 
     gdk_error_trap_push ();
 
@@ -2364,7 +2385,7 @@ update_event_windows (WnckWindow *win)
 
 	for (j = 0; j < 3; j++)
 	{
-	    if (d->actions & event_window_actions[i][j])
+	    if (d->actions & event_window_actions[i][j] && i >= k && i <= l)
 	    {
 		x = pos[i][j].x + pos[i][j].xw * width;
 		y = pos[i][j].y + pos[i][j].yh * height;
@@ -2999,6 +3020,7 @@ window_state_changed (WnckWindow *win)
     {
 	update_window_decoration_state (win);
 	queue_decor_draw (d);
+	update_event_windows (win);
     }
 }
 
@@ -3219,15 +3241,14 @@ move_resize_window (WnckWindow *win,
 }
 
 static void
-lower_window (WnckWindow *win)
+restack_window (WnckWindow *win,
+		int	   stack_mode)
 {
     Display    *xdisplay;
     GdkDisplay *gdkdisplay;
     GdkScreen  *screen;
     Window     xroot;
     XEvent     ev;
-    WnckWindow *sibling = NULL;
-    GList      *windows, *w;
 
     gdkdisplay = gdk_display_get_default ();
     xdisplay   = GDK_DISPLAY_XDISPLAY (gdkdisplay);
@@ -3242,27 +3263,6 @@ lower_window (WnckWindow *win)
 	return;
     }
 
-    windows = wnck_screen_get_windows_stacked (wnck_screen_get_default ());
-    for (w = windows; w; w = w->next)
-    {
-	sibling = WNCK_WINDOW (w->data);
-
-	if (wnck_window_get_state (sibling) & WNCK_WINDOW_STATE_HIDDEN)
-	    continue;
-
-	if (wnck_window_get_window_type (sibling) == WNCK_WINDOW_DESKTOP)
-	    continue;
-
-	break;
-    }
-
-    if (!w)
-	return;
-
-    sibling = WNCK_WINDOW (w->data);
-    if (sibling == win)
-	return;
-
     ev.xclient.type    = ClientMessage;
     ev.xclient.display = xdisplay;
 
@@ -3274,8 +3274,8 @@ lower_window (WnckWindow *win)
     ev.xclient.format	    = 32;
 
     ev.xclient.data.l[0] = 2;
-    ev.xclient.data.l[1] = wnck_window_get_xid (sibling);
-    ev.xclient.data.l[2] = Below;
+    ev.xclient.data.l[1] = None;
+    ev.xclient.data.l[2] = stack_mode;
     ev.xclient.data.l[3] = 0;
     ev.xclient.data.l[4] = 0;
 
@@ -3676,10 +3676,21 @@ title_event (WnckWindow *win,
 	    xevent->xbutton.window == last_button_xwindow &&
 	    xevent->xbutton.time < last_button_time + double_click_timeout)
 	{
-	    if (wnck_window_is_maximized (win))
-		wnck_window_unmaximize (win);
-	    else
-		wnck_window_maximize (win);
+	    switch (double_click_action) {
+	    case DOUBLE_CLICK_SHADE:
+		if (wnck_window_is_shaded (win))
+		    wnck_window_unshade (win);
+		else
+		    wnck_window_shade (win);
+		break;
+	    case DOUBLE_CLICK_MAXIMIZE:
+		if (wnck_window_is_maximized (win))
+		    wnck_window_unmaximize (win);
+		else
+		    wnck_window_maximize (win);
+	    default:
+		break;
+	    }
 
 	    last_button_num	= 0;
 	    last_button_xwindow = None;
@@ -3691,14 +3702,14 @@ title_event (WnckWindow *win,
 	    last_button_xwindow = xevent->xbutton.window;
 	    last_button_time	= xevent->xbutton.time;
 
-	    wnck_window_activate (win, last_button_time);
+	    restack_window (win, Above);
 
 	    move_resize_window (win, WM_MOVERESIZE_MOVE, xevent);
 	}
     }
     else if (xevent->xbutton.button == 2)
     {
-	lower_window (win);
+	restack_window (win, Below);
     }
     else if (xevent->xbutton.button == 3)
     {
@@ -4546,6 +4557,8 @@ update_shadow (void)
 		break;
 	    }
 	}
+	
+	XFree (filters);
     }
 
     if (!filter)
@@ -4780,6 +4793,25 @@ titlebar_font_changed (GConfClient *client)
 }
 
 static void
+double_click_titlebar_changed (GConfClient *client)
+{
+    gchar *action;
+
+    double_click_action = DOUBLE_CLICK_MAXIMIZE;
+
+    action = gconf_client_get_string (client,
+				      COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY,
+				      NULL);
+    if (action)
+    {
+	if (strcmp (action, "toggle_shade") == 0)
+	    double_click_action = DOUBLE_CLICK_SHADE;
+	else if (strcmp (action, "toggle_maximize") == 0)
+	    double_click_action = DOUBLE_CLICK_MAXIMIZE;
+    }
+}
+
+static void
 update_titlebar_font (void)
 {
     const PangoFontDescription *font_desc;
@@ -4924,6 +4956,10 @@ value_changed (GConfClient *client,
 	titlebar_font_changed (client);
 	changed = !use_system_font;
     }
+    else if (strcmp (key, COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY) == 0)
+    {
+	double_click_titlebar_changed (client);
+    }
     else if (strcmp (key, COMPIZ_SHADOW_RADIUS_KEY)   == 0 ||
 	     strcmp (key, COMPIZ_SHADOW_OPACITY_KEY)  == 0 ||
 	     strcmp (key, COMPIZ_SHADOW_OFFSET_X_KEY) == 0 ||
@@ -5019,6 +5055,7 @@ init_settings (WnckScreen *screen)
     update_style (style_window);
     titlebar_font_changed (gconf);
     update_titlebar_font ();
+    double_click_titlebar_changed (gconf);
     shadow_settings_changed (gconf);
     bell_settings_changed (gconf);
     update_shadow ();

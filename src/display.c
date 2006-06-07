@@ -142,6 +142,9 @@ int pointerY     = 0;
 
 #define HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT TRUE
 
+#define TOGGLE_WINDOW_SHADING_KEY_DEFAULT       "s"
+#define TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
+
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static char *textureFilter[] = { "Fast", "Good", "Best" };
@@ -508,6 +511,17 @@ compDisplayInitOptions (CompDisplay *display,
 	"desktop mode";
     o->type	 = CompOptionTypeBool;
     o->value.b	 = HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED];
+    o->name			  = "toggle_window_shaded";
+    o->shortDesc		  = "Toggle Window Shaded";
+    o->longDesc			  = "Toggle active window shaded";
+    o->type			  = CompOptionTypeBinding;
+    o->value.bind.type		  = CompBindingTypeKey;
+    o->value.bind.u.key.modifiers = TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT;
+    o->value.bind.u.key.keycode   =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (TOGGLE_WINDOW_SHADING_KEY_DEFAULT));
 }
 
 CompOption *
@@ -645,6 +659,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED:
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ:
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT:
+    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED:
 	if (addDisplayBinding (display, &value->bind))
 	{
 	    removeDisplayBinding (display, &o->value.bind);
@@ -1680,7 +1695,8 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
 		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ].value.bind);
     addScreenBinding (s,
 		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT].value.bind);
-
+    addScreenBinding (s,
+		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED].value.bind);
 }
 
 void
@@ -1841,6 +1857,7 @@ addDisplay (char *name,
     d->winActionFullscreenAtom	 =
 	XInternAtom (dpy, "_NET_WM_ACTION_FULLSCREEN", 0);
     d->winActionCloseAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_CLOSE", 0);
+    d->winActionShadeAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_SHADE", 0);
 
     d->wmAllowedActionsAtom = XInternAtom (dpy, "_NET_WM_ALLOWED_ACTIONS", 0);
 

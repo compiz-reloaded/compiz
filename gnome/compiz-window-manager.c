@@ -43,10 +43,10 @@
 #define COMPIZ_MOUSE_MOVE_KEY				 \
     "/apps/compiz/plugins/move/screen0/options/initiate"
 
-#define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY				   \
-    "/apps/compiz/general/allscreens/options/action_double_click_titlebar"
-
 #define GCONF_DIR "/apps/metacity/general"
+
+#define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY      \
+    GCONF_DIR "/action_double_click_titlebar"
 
 #define COMPIZ_USE_SYSTEM_FONT_KEY         \
     GCONF_DIR "/titlebar_uses_system_font"
@@ -58,6 +58,7 @@
     GCONF_DIR "/theme"
 
 enum {
+    DOUBLE_CLICK_SHADE,
     DOUBLE_CLICK_MAXIMIZE
 };
 
@@ -146,7 +147,6 @@ compiz_change_settings (GnomeWindowManager    *wm,
 				 COMPIZ_THEME_KEY,
 				 settings->theme, NULL);
 
-/*
     if (settings->flags & GNOME_WM_SETTING_DOUBLE_CLICK_ACTION)
     {
 	const char *action = NULL;
@@ -161,12 +161,10 @@ compiz_change_settings (GnomeWindowManager    *wm,
 	}
 
 	if (action)
-	    gconf_client_set_string (meta_wm->p->gconf,
+	    gconf_client_set_string (cwm->p->gconf,
 				     COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY,
 				     action, NULL);
     }
-*/
-
 }
 
 static void
@@ -289,7 +287,22 @@ compiz_get_settings (GnomeWindowManager *wm,
 
     if (to_get & GNOME_WM_SETTING_DOUBLE_CLICK_ACTION)
     {
+	char *str;
+
 	settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
+
+	str = gconf_client_get_string (cwm->p->gconf,
+				       COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY,
+				       NULL);
+
+	if (str)
+	{
+	    if (strcmp (str, "toggle_shade") == 0)
+		settings->double_click_action = DOUBLE_CLICK_SHADE;
+	    else if (strcmp (str, "toggle_maximize") == 0)
+		settings->double_click_action = DOUBLE_CLICK_MAXIMIZE;
+	}
+
 	settings->flags |= GNOME_WM_SETTING_DOUBLE_CLICK_ACTION;
     }
 }
@@ -325,6 +338,7 @@ compiz_get_double_click_actions (GnomeWindowManager             *wm,
 				 int                            *n_actions_p)
 {
     static GnomeWMDoubleClickAction actions[] = {
+	{ DOUBLE_CLICK_SHADE,    "Shade"    },
 	{ DOUBLE_CLICK_MAXIMIZE, "Maximize" }
     };
     static gboolean initialized = FALSE;

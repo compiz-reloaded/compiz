@@ -127,6 +127,7 @@ typedef struct _CompIcon    CompIcon;
 #define CompWindowActionMaximizeVertMask (1 << 5)
 #define CompWindowActionFullscreenMask	 (1 << 6)
 #define CompWindowActionCloseMask	 (1 << 7)
+#define CompWindowActionShadeMask	 (1 << 8)
 
 #define MwmDecorAll      (1L << 0)
 #define MwmDecorBorder   (1L << 1)
@@ -421,7 +422,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ  50
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT  51
 #define COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS     52
-#define COMP_DISPLAY_OPTION_NUM                           53
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED          53
+#define COMP_DISPLAY_OPTION_NUM                           54
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
@@ -520,6 +522,7 @@ struct _CompDisplay {
     Atom winActionMaximizeVertAtom;
     Atom winActionFullscreenAtom;
     Atom winActionCloseAtom;
+    Atom winActionShadeAtom;
 
     Atom wmAllowedActionsAtom;
 
@@ -1559,6 +1562,7 @@ struct _CompWindow {
     Bool placed;
     Bool minimized;
     Bool inShowDesktopMode;
+    Bool shaded;
     Bool hidden;
 
     int pendingUnmaps;
@@ -1643,6 +1647,10 @@ setWindowState (CompDisplay  *display,
 
 void
 recalcWindowActions (CompWindow *w);
+
+unsigned int
+constrainWindowState (unsigned int state,
+		      unsigned int actions);
 
 unsigned int
 getWindowType (CompDisplay *display,

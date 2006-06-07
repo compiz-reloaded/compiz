@@ -41,6 +41,10 @@
 #define MIN_TIMESTEP_MAX       50.0f
 #define MIN_TIMESTEP_PRECISION 0.1f
 
+#define MIN_SHADE_RESISTANCE_DEFAULT   75
+#define MIN_SHADE_RESISTANCE_MIN       0
+#define MIN_SHADE_RESISTANCE_MAX       100
+
 static char *winType[] = {
     "Toolbar",
     "Utility",
@@ -58,10 +62,11 @@ typedef struct _MinDisplay {
     Atom	    winIconGeometryAtom;
 } MinDisplay;
 
-#define MIN_SCREEN_OPTION_SPEED       0
-#define MIN_SCREEN_OPTION_TIMESTEP    1
-#define MIN_SCREEN_OPTION_WINDOW_TYPE 2
-#define MIN_SCREEN_OPTION_NUM         3
+#define MIN_SCREEN_OPTION_SPEED		   0
+#define MIN_SCREEN_OPTION_TIMESTEP	   1
+#define MIN_SCREEN_OPTION_WINDOW_TYPE	   2
+#define MIN_SCREEN_OPTION_SHADE_RESISTANCE 3
+#define MIN_SCREEN_OPTION_NUM		   4
 
 typedef struct _MinScreen {
     int	windowPrivateIndex;
@@ -78,6 +83,8 @@ typedef struct _MinScreen {
     float speed;
     float timestep;
 
+    int shadeStep;
+
     unsigned int wMask;
 
     int moreAdjust;
@@ -93,6 +100,9 @@ typedef struct _MinWindow {
     XRectangle icon;
 
     int state, newState;
+
+    int    shade;
+    Region region;
 
     int unmapCnt;
 } MinWindow;
@@ -164,6 +174,17 @@ minSetScreenOption (CompScreen      *screen,
 	    ms->wMask = compWindowTypeMaskFromStringList (&o->value);
 	    return TRUE;
 	}
+	break;
+    case MIN_SCREEN_OPTION_SHADE_RESISTANCE:
+	if (compSetIntOption (o, value))
+	{
+	    if (o->value.i)
+		ms->shadeStep = MIN_SHADE_RESISTANCE_MAX - o->value.i + 1;
+	    else
+		ms->shadeStep = 0;
+
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -212,6 +233,46 @@ minScreenInitOptions (MinScreen *ms)
     o->rest.s.nString    = nWindowTypeString;
 
     ms->wMask = compWindowTypeMaskFromStringList (&o->value);
+
+    o = &ms->opt[MIN_SCREEN_OPTION_SHADE_RESISTANCE];
+    o->name		= "shade_resistance";
+    o->shortDesc	= "Shade Resistance";
+    o->longDesc		= "Shade resistance";
+    o->type		= CompOptionTypeInt;
+    o->value.i		= MIN_SHADE_RESISTANCE_DEFAULT;
+    o->rest.i.min	= MIN_SHADE_RESISTANCE_MIN;
+    o->rest.i.max	= MIN_SHADE_RESISTANCE_MAX;
+}
+
+static void
+minSetShade (CompWindow *w,
+	     int	shade)
+{
+    REGION rect;
+    int	   h = w->attrib.height + w->attrib.border_width * 2;
+
+    MIN_WINDOW (w);
+
+    EMPTY_REGION (w->region);
+
+    rect.rects = &rect.extents;
+    rect.numRects = rect.size = 1;
+
+    w->height = shade;
+
+    rect.extents.x1 = 0;
+    rect.extents.y1 = h - shade;
+    rect.extents.x2 = w->width;
+    rect.extents.y2 = h;
+
+    XIntersectRegion (mw->region, &rect, w->region);
+    XOffsetRegion (w->region, w->attrib.x, w->attrib.y - (h - shade));
+
+    w->matrix = w->texture.matrix;
+    w->matrix.x0 -= (w->attrib.x * w->matrix.xx);
+    w->matrix.y0 -= ((w->attrib.y - (h - shade)) * w->matrix.yy);
+
+    (*w->screen->windowResizeNotify) (w);
 }
 
 static Bool
@@ -373,7 +434,7 @@ minPreparePaintScreen (CompScreen *s,
     if (ms->moreAdjust)
     {
 	CompWindow *w;
-	int        steps, dx, dy;
+	int        steps, dx, dy, h;
 	float      amount, chunk;
 
 	amount = msSinceLastPaint * 0.05f * ms->speed;
@@ -418,6 +479,55 @@ minPreparePaintScreen (CompScreen *s,
 			}
 		    }
 		}
+		else if (mw->region && w->damaged)
+		{
+		    if (w->shaded)
+		    {
+			if (mw->shade > 0)
+			{
+			    mw->shade -= (chunk * ms->shadeStep) + 1;
+
+			    if (mw->shade > 0)
+			    {
+				ms->moreAdjust = TRUE;
+			    }
+			    else
+			    {
+				mw->shade = 0;
+
+				while (mw->unmapCnt)
+				{
+				    unmapWindow (w);
+				    mw->unmapCnt--;
+				}
+			    }
+			}
+		    }
+		    else
+		    {
+			h = w->attrib.height + w->attrib.border_width * 2;
+			if (mw->shade < h)
+			{
+			    mw->shade += (chunk * ms->shadeStep) + 1;
+
+			    if (mw->shade < h)
+			    {
+				ms->moreAdjust = TRUE;
+			    }
+			    else
+			    {
+				mw->shade = MAXSHORT;
+
+				minSetShade (w, h);
+
+				XDestroyRegion (mw->region);
+				mw->region = NULL;
+
+				addWindowDamage (w);
+			    }
+			}
+		    }
+		}
 	    }
 
 	    if (!ms->moreAdjust)
@@ -431,7 +541,18 @@ minPreparePaintScreen (CompScreen *s,
 		MIN_WINDOW (w);
 
 		if (mw->adjust)
+		{
 		    addWindowDamage (w);
+		}
+		else if (mw->region && w->damaged)
+		{
+		    h = w->attrib.height + w->attrib.border_width * 2;
+		    if (mw->shade && mw->shade < h)
+		    {
+			minSetShade (w, mw->shade);
+			addWindowDamage (w);
+		    }
+		}
 	    }
 	}
     }
@@ -449,13 +570,22 @@ minDonePaintScreen (CompScreen *s)
     if (ms->moreAdjust)
     {
 	CompWindow *w;
+	int	   h;
 
 	for (w = s->windows; w; w = w->next)
 	{
 	    MIN_WINDOW (w);
 
 	    if (mw->adjust)
+	    {
 		addWindowDamage (w);
+	    }
+	    else if (mw->region)
+	    {
+		h = w->attrib.height + w->attrib.border_width * 2;
+		if (mw->shade && mw->shade < h)
+		    addWindowDamage (w);
+	    }
 	}
     }
 
@@ -524,6 +654,9 @@ minHandleEvent (CompDisplay *d,
 	    if (mw->adjust)
 		mw->state = mw->newState;
 
+	    if (mw->region)
+		w->height = 0;
+
 	    while (mw->unmapCnt)
 	    {
 		unmapWindow (w);
@@ -539,10 +672,31 @@ minHandleEvent (CompDisplay *d,
 
 	    if (w->pendingUnmaps) /* Normal -> Iconic */
 	    {
-		if (!w->invisible && (ms->wMask & w->type))
-		{
-		    MIN_WINDOW (w);
+		MIN_WINDOW (w);
 
+		if (w->shaded)
+		{
+		    if (!mw->region)
+			mw->region = XCreateRegion ();
+
+		    if (mw->region && ms->shadeStep)
+		    {
+			XSubtractRegion (w->region, &emptyRegion, mw->region);
+			XOffsetRegion (mw->region, -w->attrib.x, -w->attrib.y);
+
+			mw->shade = w->height;
+
+			mw->adjust     = FALSE;
+			ms->moreAdjust = TRUE;
+
+			mw->unmapCnt++;
+			w->unmapRefCnt++;
+
+			addWindowDamage (w);
+		    }
+		}
+		else if (!w->invisible && (ms->wMask & w->type))
+		{
 		    mw->newState = IconicState;
 
 		    if (minGetWindowIconGeometry (w, &mw->icon))
@@ -551,6 +705,14 @@ minHandleEvent (CompDisplay *d,
 			mw->yScale = w->paint.yScale;
 			mw->tx	   = w->attrib.x - w->serverX;
 			mw->ty	   = w->attrib.y - w->serverY;
+
+			if (mw->region)
+			{
+			    XDestroyRegion (mw->region);
+			    mw->region = NULL;
+			}
+
+			mw->shade = MAXSHORT;
 
 			mw->adjust     = TRUE;
 			ms->moreAdjust = TRUE;
@@ -577,6 +739,13 @@ minHandleEvent (CompDisplay *d,
 		    mw->tx = mw->ty = 0.0f;
 		    mw->xVelocity = mw->yVelocity = 0.0f;
 		    mw->xScaleVelocity = mw->yScaleVelocity = 1.0f;
+		    mw->shade = MAXSHORT;
+
+		    if (mw->region)
+		    {
+			XDestroyRegion (mw->region);
+			mw->region = NULL;
+		    }
 
 		    (*w->screen->setWindowScale) (w, 1.0f, 1.0f);
 
@@ -645,6 +814,24 @@ minDamageWindowRect (CompWindow *w,
 			    FALSE, TRUE);
 
 		(*w->screen->setWindowScale) (w, 1.0f, 1.0f);
+	    }
+	}
+	else if (mw->region && mw->shade < w->height)
+	{
+	    if (ms->shadeStep && !w->invisible)
+	    {
+		XSubtractRegion (w->region, &emptyRegion, mw->region);
+		XOffsetRegion (mw->region, -w->attrib.x, -w->attrib.y);
+
+		/* bind pixmap here so we have something to unshade with */
+		if (!w->texture.pixmap)
+		    bindWindow (w);
+
+		ms->moreAdjust = TRUE;
+	    }
+	    else
+	    {
+		mw->shade = MAXSHORT;
 	    }
 	}
 
@@ -738,8 +925,9 @@ minInitScreen (CompPlugin *p,
 
     ms->moreAdjust = FALSE;
 
-    ms->speed    = MIN_SPEED_DEFAULT;
-    ms->timestep = MIN_TIMESTEP_DEFAULT;
+    ms->speed     = MIN_SPEED_DEFAULT;
+    ms->timestep  = MIN_TIMESTEP_DEFAULT;
+    ms->shadeStep = MIN_SHADE_RESISTANCE_MAX - MIN_SHADE_RESISTANCE_DEFAULT + 1;
 
     minScreenInitOptions (ms);
 
@@ -790,6 +978,8 @@ minInitWindow (CompPlugin *p,
     mw->adjust = FALSE;
     mw->xVelocity = mw->yVelocity = 0.0f;
     mw->xScaleVelocity = mw->yScaleVelocity = 1.0f;
+    mw->shade = MAXSHORT;
+    mw->region = NULL;
 
     mw->unmapCnt = 0;
 
@@ -808,6 +998,9 @@ minFiniWindow (CompPlugin *p,
 
     while (mw->unmapCnt--)
 	unmapWindow (w);
+
+    if (mw->region)
+	XDestroyRegion (mw->region);
 
     free (mw);
 }

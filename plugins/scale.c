@@ -511,6 +511,9 @@ isScaleWin (CompWindow *w)
     if (w->state & CompWindowStateSkipPagerMask)
 	return FALSE;
 
+    if (w->state & CompWindowStateShadedMask)
+	return FALSE;
+
     return TRUE;
 }
 

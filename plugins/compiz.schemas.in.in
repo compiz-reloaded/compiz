@@ -751,6 +751,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/toggle_window_shaded</key>
+            <applyto>/apps/compiz/general/allscreens/options/toggle_window_shaded</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;s</default>
+            <locale name="C">
+                <short>Toggle Window Shaded</short>
+                <long>
+                    Toggle active window shaded
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/screen0/options/detect_refresh_rate</key>
             <applyto>/apps/compiz/general/screen0/options/detect_refresh_rate</applyto>
             <owner>compiz</owner>
@@ -1321,6 +1335,20 @@
                 <short>Window Types</short>
                 <long>
                     Window types that should be transformed when minimized (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/minimize/screen0/options/shade_resistance</key>
+            <applyto>/apps/compiz/plugins/minimize/screen0/options/shade_resistance</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>75</default>
+            <locale name="C">
+                <short>Shade Resistance</short>
+                <long>
+                    Shade resistance (0-100)
                 </long>
             </locale>
         </schema>
