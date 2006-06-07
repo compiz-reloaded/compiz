@@ -737,6 +737,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/hide_skip_taskbar_windows</key>
+            <applyto>/apps/compiz/general/allscreens/options/hide_skip_taskbar_windows</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Hide Skip Taskbar Windows</short>
+                <long>
+                    Hide windows not in taskbar when entering show desktop mode
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/screen0/options/detect_refresh_rate</key>
             <applyto>/apps/compiz/general/screen0/options/detect_refresh_rate</applyto>
             <owner>compiz</owner>
@@ -2232,6 +2246,21 @@
                 <short>Application Switcher</short>
                 <long>
                     Application Switcher
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/requires</key>
+            <applyto>/apps/compiz/plugins/switcher/requires</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[cube]</default>
+            <locale name="C">
+                <short>Plugins that this requires</short>
+                <long>
+                    Do not modify
                 </long>
             </locale>
         </schema>
