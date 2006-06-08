@@ -882,7 +882,7 @@ switchInitiate (CompScreen *s,
 		CompWindow *w;
 
 		w = findWindowAtScreen (s, ss->popupWindow);
-		if (w)
+		if (w && (w->state & CompWindowStateHiddenMask))
 		{
 		    w->hidden = FALSE;
 		    showWindow (w);
@@ -916,7 +916,7 @@ switchTerminate (CompScreen *s,
 	if (ss->popupWindow)
 	{
 	    w = findWindowAtScreen (s, ss->popupWindow);
-	    if (w)
+	    if (w && w->managed && w->mapNum)
 	    {
 		w->hidden = TRUE;
 		hideWindow (w);

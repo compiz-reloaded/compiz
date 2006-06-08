@@ -1,5 +1,10 @@
 2006-06-08  David Reveman  <davidr@novell.com>
 
+	* plugins/switcher.c (switchTerminate): Only use hideWindow
+	if switcher window is managed and mapped.
+	(switchInitiate): Only use showWindow if switcher window is
+	hidden. (bnc 182519)
+
 	* plugins/minimize.c (minHandleEvent): Make sure we adjust the window
 	region correctly when it's being unshaded.
 
