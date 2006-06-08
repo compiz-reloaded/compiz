@@ -981,12 +981,21 @@ minInitWindow (CompPlugin *p,
     mw->adjust = FALSE;
     mw->xVelocity = mw->yVelocity = 0.0f;
     mw->xScaleVelocity = mw->yScaleVelocity = 1.0f;
-    mw->shade = MAXSHORT;
-    mw->region = NULL;
 
     mw->unmapCnt = 0;
 
-    mw->state = mw->newState = minGetWindowState (w);
+    if (w->shaded)
+    {
+	mw->state = mw->newState = NormalState;
+	mw->shade = 0;
+	mw->region = XCreateRegion ();
+    }
+    else
+    {
+	mw->state = mw->newState = minGetWindowState (w);
+	mw->shade = MAXSHORT;
+	mw->region = NULL;
+    }
 
     w->privates[ms->windowPrivateIndex].ptr = mw;
 

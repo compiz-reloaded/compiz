@@ -1,5 +1,10 @@
 2006-06-08  David Reveman  <davidr@novell.com>
 
+	* plugins/decoration.c (decorInitWindow):
+	* plugins/minimize.c (minInitWindow):
+	* src/window.c (addWindow): Handle initially shaded windows
+	correctly.
+
 	* plugins/switcher.c (switchTerminate): Only use hideWindow
 	if switcher window is managed and mapped.
 	(switchInitiate): Only use showWindow if switcher window is

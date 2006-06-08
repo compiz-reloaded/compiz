@@ -1671,10 +1671,23 @@ addWindow (CompScreen *screen,
     else if (!w->attrib.override_redirect)
     {
 	if (getWmState (screen->display, w->id) == IconicState)
-	    w->minimized = w->managed = TRUE;
+	{
+	    w->managed = TRUE;
+
+	    if (w->state & CompWindowStateShadedMask)
+		w->shaded = TRUE;
+	    else
+		w->minimized = TRUE;
+	}
     }
 
     windowInitPlugins (w);
+
+    if (w->shaded)
+	resizeWindow (w,
+		      w->attrib.x, w->attrib.y,
+		      w->attrib.width, ++w->attrib.height - 1,
+		      w->attrib.border_width);
 }
 
 void
