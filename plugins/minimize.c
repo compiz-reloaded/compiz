@@ -682,7 +682,10 @@ minHandleEvent (CompDisplay *d,
 		    if (mw->region && ms->shadeStep)
 		    {
 			XSubtractRegion (w->region, &emptyRegion, mw->region);
-			XOffsetRegion (mw->region, -w->attrib.x, -w->attrib.y);
+			XOffsetRegion (mw->region, -w->attrib.x,
+				       w->attrib.height +
+				       w->attrib.border_width * 2 -
+				       w->height - w->attrib.y);
 
 			mw->shade = w->height;
 
