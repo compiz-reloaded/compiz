@@ -629,7 +629,7 @@ handleEvent (CompDisplay *d,
 			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED]))
 	    {
 		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
-		if (w)
+		if (w && (w->actions & CompWindowActionShadeMask))
 		{
 		    w->state ^= CompWindowStateShadedMask;
 		    if (w->state & CompWindowStateShadedMask)
@@ -830,7 +830,7 @@ handleEvent (CompDisplay *d,
 			      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED]))
 	    {
 		w = findTopLevelWindowAtScreen (s, d->activeWindow);
-		if (w)
+		if (w && (w->actions & CompWindowActionShadeMask))
 		{
 		    w->state ^= CompWindowStateShadedMask;
 		    updateWindowAttributes (w, FALSE);

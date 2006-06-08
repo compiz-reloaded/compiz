@@ -534,8 +534,10 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionResizeMask       |
 	    CompWindowActionStickMask        |
 	    CompWindowActionMinimizeMask     |
-	    CompWindowActionCloseMask	     |
-	    CompWindowActionShadeMask;
+	    CompWindowActionCloseMask;
+
+	if (w->input.top)
+	    actions |= CompWindowActionShadeMask;
 	break;
     case CompWindowTypeDialogMask:
     case CompWindowTypeModalDialogMask:
@@ -875,6 +877,8 @@ updateFrameWindow (CompWindow *w)
 	    w->frame = None;
 	}
     }
+
+    recalcWindowActions (w);
 }
 
 void

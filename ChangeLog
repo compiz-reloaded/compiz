@@ -1,3 +1,10 @@
+2006-06-09  David Reveman  <davidr@novell.com>
+
+	* src/window.c: Only allow shading on windows with top decoration.
+
+	* src/event.c (handleEvent): Check that shade action is allowed
+	before shading a window.
+
 2006-06-08  David Reveman  <davidr@novell.com>
 
 	* plugins/decoration.c (decorInitWindow):
