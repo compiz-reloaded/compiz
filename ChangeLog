@@ -1,10 +1,17 @@
 2006-06-09  David Reveman  <davidr@novell.com>
 
+	* plugins/move.c (moveHandleMotionEvent): Handle shaded windows
+	better.
+
+	* src/window.c (maximizeWindow):
+	* src/event.c (handleEvent): Allow windows to be both maximized
+	and shaded.
+
 	* src/window.c:  Update addWindowSizeChanges so it can be used by
 	moveResizeWindow.
 	(updateWindowAttributes): Add missing sendSyncRequest call.
 	(addWindowSizeChanges): Make maximized window placement a bit better.
-	(moveResizeWindow): Adjust window geometry using 
+	(moveResizeWindow): Adjust window geometry using
 	addWindowSizeChanges. (bnc 183121)
 
 	* src/window.c: Only allow shading on windows with top decoration.

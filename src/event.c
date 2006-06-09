@@ -632,9 +632,6 @@ handleEvent (CompDisplay *d,
 		if (w && (w->actions & CompWindowActionShadeMask))
 		{
 		    w->state ^= CompWindowStateShadedMask;
-		    if (w->state & CompWindowStateShadedMask)
-			w->state &= ~MAXIMIZE_STATE;
-
 		    updateWindowAttributes (w, FALSE);
 		}
 	    }
@@ -1170,20 +1167,6 @@ handleEvent (CompDisplay *d,
 		}
 
 		wState = constrainWindowState (wState, w->actions);
-
-		/* unshade when maximizing and unmaximize when shading */
-		if (wState & MAXIMIZE_STATE)
-		{
-		    /* maximizing */
-		    if ((wState & ~w->state) & MAXIMIZE_STATE)
-		    {
-			wState &= ~CompWindowStateShadedMask;
-		    }
-		    else
-		    {
-			wState &= ~MAXIMIZE_STATE;
-		    }
-		}
 
 		if (wState != w->state)
 		{

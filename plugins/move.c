@@ -378,7 +378,8 @@ moveHandleMotionEvent (CompScreen *s,
 	    {
 		min = s->workArea.y + w->input.top;
 		max = s->workArea.y + s->workArea.height -
-		    w->input.bottom - w->height;
+		    w->input.bottom - w->attrib.height -
+		    w->attrib.border_width * 2;
 
 		if (w->attrib.y + dy < min)
 		    dy = min - w->attrib.y;
@@ -393,7 +394,8 @@ moveHandleMotionEvent (CompScreen *s,
 
 		min = s->workArea.x + w->input.left;
 		max = s->workArea.x + s->workArea.width -
-		    w->input.right - w->width;
+		    w->input.right - w->attrib.width -
+		    w->attrib.border_width * 2;
 
 		if (w->attrib.x + dx < min)
 		    dx = min - w->attrib.x;

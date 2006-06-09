@@ -3688,10 +3688,6 @@ maximizeWindow (CompWindow *w,
     w->state &= ~MAXIMIZE_STATE;
     w->state |= state;
 
-    /* unshade window when maximizing */
-    if (w->state & MAXIMIZE_STATE)
-	w->state &= ~CompWindowStateShadedMask;
-
     recalcWindowType (w);
     recalcWindowActions (w);
 
