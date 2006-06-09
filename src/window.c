@@ -2209,139 +2209,6 @@ moveWindow (CompWindow *w,
 }
 
 void
-moveResizeWindow (CompWindow     *w,
-		  XWindowChanges *xwc,
-		  unsigned int   xwcm,
-		  int            gravity)
-{
-    xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
-
-    if (gravity == 0)
-	gravity = w->sizeHints.win_gravity;
-
-    if (!(xwcm & CWX))
-	xwc->x = w->attrib.x;
-    if (!(xwcm & CWY))
-	xwc->y = w->attrib.y;
-    if (!(xwcm & CWWidth))
-	xwc->width = w->attrib.width;
-    if (!(xwcm & CWHeight))
-	xwc->height = w->attrib.height;
-
-    if (xwcm & (CWWidth | CWHeight))
-    {
-	int width, height;
-
-	if (constrainNewWindowSize (w,
-				    xwc->width, xwc->height,
-				    &width, &height))
-	{
-	    xwcm |= (CWWidth | CWHeight);
-	    xwc->width = width;
-	    xwc->height = height;
-
-	    if (w->mapNum)
-		sendSyncRequest (w);
-	}
-	else
-	    xwcm &= ~(CWWidth | CWHeight);
-    }
-
-    if (xwcm & (CWX | CWWidth))
-    {
-	switch (gravity) {
-	case NorthGravity:
-	case CenterGravity:
-	case SouthGravity:
-	    if (!(xwcm & CWX))
-		xwc->x += (w->attrib.width - xwc->width) / 2;
-	    break;
-
-	case NorthEastGravity:
-	case EastGravity:
-	case SouthEastGravity:
-	    if (xwcm & CWX)
-		xwc->x -= w->input.right;
-	    else
-		xwc->x += w->attrib.width - xwc->width;
-	    break;
-
-	case StaticGravity:
-	default:
-	    break;
-	}
-
-	xwcm |= CWX;
-    }
-
-    if (xwcm & (CWY | CWHeight))
-    {
-	switch (gravity) {
-	case WestGravity:
-	case CenterGravity:
-	case EastGravity:
-	    if (!(xwcm & CWY))
-		xwc->y += (w->attrib.height - xwc->height) / 2;
-	    break;
-
-	case SouthWestGravity:
-	case SouthGravity:
-	case SouthEastGravity:
-	    if (xwcm & CWY)
-		xwc->y -= w->input.bottom;
-	    else
-		xwc->y += w->attrib.height - xwc->height;
-	    break;
-
-	case StaticGravity:
-	default:
-	    break;
-	}
-
-	xwcm |= CWY;
-    }
-
-    if (!(w->type & (CompWindowTypeDockMask       |
-		     CompWindowTypeFullscreenMask |
-		     CompWindowTypeUnknownMask)))
-    {
-	if (xwcm & CWY)
-	{
-	    int min, max;
-
-	    min = w->screen->workArea.y + w->input.top;
-	    max = w->screen->workArea.y + w->screen->workArea.height;
-
-	    if (xwc->y < min)
-		xwc->y = min;
-	    else if (xwc->y > max)
-		xwc->y = max;
-	}
-
-	if (xwcm & CWX)
-	{
-	    int min, max;
-
-	    min = w->screen->workArea.x + w->input.left;
-	    max = w->screen->workArea.x + w->screen->workArea.width;
-
-	    if (xwc->x < min)
-		xwc->x = min;
-	    else if (xwc->x > max)
-		xwc->x = max;
-	}
-    }
-
-    if (xwcm & CWBorderWidth)
-    {
-	if (xwc->border_width == w->attrib.border_width)
-	    xwcm &= ~CWBorderWidth;
-    }
-
-    XConfigureWindow (w->screen->display->display, w->id, xwcm, xwc);
-}
-
-void
 syncWindowPosition (CompWindow *w)
 {
     if (w->attrib.x != w->serverX || w->attrib.y != w->serverY)
@@ -2955,7 +2822,12 @@ stackAncestors (CompWindow     *w,
 
 static int
 addWindowSizeChanges (CompWindow     *w,
-		      XWindowChanges *xwc)
+		      XWindowChanges *xwc,
+		      int	     oldX,
+		      int	     oldY,
+		      int	     oldWidth,
+		      int	     oldHeight,
+		      int	     oldBorderWidth)
 {
     int mask = 0;
     int x;
@@ -2981,7 +2853,7 @@ addWindowSizeChanges (CompWindow     *w,
 	    saveWindowGeometry (w, CWY | CWHeight);
 
 	    xwc->height = w->screen->workArea.height - w->input.top -
-		w->input.bottom - w->attrib.border_width * 2;
+		w->input.bottom - oldBorderWidth * 2;
 
 	    mask |= CWHeight;
 	}
@@ -2995,7 +2867,7 @@ addWindowSizeChanges (CompWindow     *w,
 	    saveWindowGeometry (w, CWX | CWWidth);
 
 	    xwc->width = w->screen->workArea.width - w->input.left -
-		w->input.right - w->attrib.border_width * 2;
+		w->input.right - oldBorderWidth * 2;
 
 	    mask |= CWWidth;
 	}
@@ -3018,11 +2890,11 @@ addWindowSizeChanges (CompWindow     *w,
 	{
 	    int width, height, max;
 
-	    width  = (mask & CWWidth)  ? xwc->width  : w->attrib.width;
-	    height = (mask & CWHeight) ? xwc->height : w->attrib.height;
+	    width  = (mask & CWWidth)  ? xwc->width  : oldWidth;
+	    height = (mask & CWHeight) ? xwc->height : oldHeight;
 
-	    xwc->width  = w->attrib.width;
-	    xwc->height = w->attrib.height;
+	    xwc->width  = oldWidth;
+	    xwc->height = oldHeight;
 
 	    if (constrainNewWindowSize (w, width, height, &width, &height))
 	    {
@@ -3034,19 +2906,26 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
-		if (w->attrib.y < w->screen->workArea.y + w->input.top)
+		if (oldY < w->screen->workArea.y + w->input.top)
 		{
 		    xwc->y = w->screen->workArea.y + w->input.top;
 		    mask |= CWY;
 		}
 		else
 		{
-		    height = xwc->height + w->attrib.border_width * 2;
+		    height = xwc->height + oldBorderWidth * 2;
 
 		    max = w->screen->workArea.y + w->screen->workArea.height;
-		    if (w->attrib.y + height + w->input.bottom > max)
+		    if (oldY + oldHeight + w->input.bottom > max)
 		    {
 			xwc->y = max - height - w->input.bottom;
+			mask |= CWY;
+		    }
+		    else if (oldY + height + w->input.bottom > max)
+		    {
+			xwc->y = w->screen->workArea.y +
+			    (w->screen->workArea.height - w->input.top -
+			     height - w->input.bottom) / 2 + w->input.top;
 			mask |= CWY;
 		    }
 		}
@@ -3054,19 +2933,26 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
-		if (w->attrib.x < x + w->screen->workArea.x + w->input.left)
+		if (oldX < x + w->screen->workArea.x + w->input.left)
 		{
 		    xwc->x = x + w->screen->workArea.x + w->input.left;
 		    mask |= CWX;
 		}
 		else
 		{
-		    width = xwc->width + w->attrib.border_width * 2;
+		    width = xwc->width + oldBorderWidth * 2;
 
 		    max = x + w->screen->workArea.x + w->screen->workArea.width;
-		    if (w->attrib.x + width + w->input.right > max)
+		    if (oldX + oldWidth + w->input.right > max)
 		    {
 			xwc->x = max - width - w->input.right;
+			mask |= CWX;
+		    }
+		    else if (oldX + width + w->input.right > max)
+		    {
+			xwc->x = w->screen->workArea.x +
+			    (w->screen->workArea.width - w->input.left -
+			     width - w->input.right) / 2 + w->input.left;
 			mask |= CWX;
 		    }
 		}
@@ -3078,14 +2964,161 @@ addWindowSizeChanges (CompWindow     *w,
 }
 
 void
+moveResizeWindow (CompWindow     *w,
+		  XWindowChanges *xwc,
+		  unsigned int   xwcm,
+		  int            gravity)
+{
+    xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+
+    if (gravity == 0)
+	gravity = w->sizeHints.win_gravity;
+
+    if (!(xwcm & CWX))
+	xwc->x = w->attrib.x;
+    if (!(xwcm & CWY))
+	xwc->y = w->attrib.y;
+    if (!(xwcm & CWWidth))
+	xwc->width = w->attrib.width;
+    if (!(xwcm & CWHeight))
+	xwc->height = w->attrib.height;
+
+    if (xwcm & (CWWidth | CWHeight))
+    {
+	int width, height;
+
+	if (constrainNewWindowSize (w,
+				    xwc->width, xwc->height,
+				    &width, &height))
+	{
+	    xwcm |= (CWWidth | CWHeight);
+
+	    xwc->width = width;
+	    xwc->height = height;
+	}
+	else
+	    xwcm &= ~(CWWidth | CWHeight);
+    }
+
+    if (xwcm & (CWX | CWWidth))
+    {
+	switch (gravity) {
+	case NorthGravity:
+	case CenterGravity:
+	case SouthGravity:
+	    if (!(xwcm & CWX))
+		xwc->x += (w->attrib.width - xwc->width) / 2;
+	    break;
+
+	case NorthEastGravity:
+	case EastGravity:
+	case SouthEastGravity:
+	    if (xwcm & CWX)
+		xwc->x -= w->input.right;
+	    else
+		xwc->x += w->attrib.width - xwc->width;
+	    break;
+
+	case StaticGravity:
+	default:
+	    break;
+	}
+
+	xwcm |= CWX;
+    }
+
+    if (xwcm & (CWY | CWHeight))
+    {
+	switch (gravity) {
+	case WestGravity:
+	case CenterGravity:
+	case EastGravity:
+	    if (!(xwcm & CWY))
+		xwc->y += (w->attrib.height - xwc->height) / 2;
+	    break;
+
+	case SouthWestGravity:
+	case SouthGravity:
+	case SouthEastGravity:
+	    if (xwcm & CWY)
+		xwc->y -= w->input.bottom;
+	    else
+		xwc->y += w->attrib.height - xwc->height;
+	    break;
+
+	case StaticGravity:
+	default:
+	    break;
+	}
+
+	xwcm |= CWY;
+    }
+
+    if (!(w->type & (CompWindowTypeDockMask       |
+		     CompWindowTypeFullscreenMask |
+		     CompWindowTypeUnknownMask)))
+    {
+	if (xwcm & CWY)
+	{
+	    int min, max;
+
+	    min = w->screen->workArea.y + w->input.top;
+	    max = w->screen->workArea.y + w->screen->workArea.height;
+
+	    if (xwc->y < min)
+		xwc->y = min;
+	    else if (xwc->y > max)
+		xwc->y = max;
+	}
+
+	if (xwcm & CWX)
+	{
+	    int min, max;
+
+	    min = w->screen->workArea.x + w->input.left;
+	    max = w->screen->workArea.x + w->screen->workArea.width;
+
+	    if (xwc->x < min)
+		xwc->x = min;
+	    else if (xwc->x > max)
+		xwc->x = max;
+	}
+    }
+
+    if (xwcm & CWBorderWidth)
+    {
+	if (xwc->border_width == w->attrib.border_width)
+	    xwcm &= ~CWBorderWidth;
+    }
+
+    xwcm |= addWindowSizeChanges (w, xwc,
+				  xwc->x, xwc->y,
+				  xwc->width, xwc->height,
+				  xwc->border_width);
+
+    if (w->mapNum && (xwcm & (CWWidth | CWHeight)))
+	sendSyncRequest (w);
+
+    XConfigureWindow (w->screen->display->display, w->id, xwcm, xwc);
+}
+
+void
 updateWindowSize (CompWindow *w)
 {
     XWindowChanges xwc;
     int		   mask;
 
-    mask = addWindowSizeChanges (w, &xwc);
+    mask = addWindowSizeChanges (w, &xwc,
+				 w->attrib.x, w->attrib.y,
+				 w->attrib.width, w->attrib.height,
+				 w->attrib.border_width);
     if (mask)
+    {
+	if (w->mapNum && (mask & (CWWidth | CWHeight)))
+	    sendSyncRequest (w);
+
 	configureXWindow (w->screen->display->display, w, mask, &xwc);
+    }
 }
 
 static int
@@ -3228,10 +3261,16 @@ updateWindowAttributes (CompWindow *w,
     }
 
     mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
-    mask |= addWindowSizeChanges (w, &xwc);
+    mask |= addWindowSizeChanges (w, &xwc,
+				  w->attrib.x, w->attrib.y,
+				  w->attrib.width, w->attrib.height,
+				  w->attrib.border_width);
 
     if (!mask)
 	return;
+
+    if (w->mapNum && (mask & (CWWidth | CWHeight)))
+	sendSyncRequest (w);
 
     if (mask & (CWSibling | CWStackMode))
     {

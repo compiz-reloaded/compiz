@@ -1,5 +1,12 @@
 2006-06-09  David Reveman  <davidr@novell.com>
 
+	* src/window.c:  Update addWindowSizeChanges so it can be used by
+	moveResizeWindow.
+	(updateWindowAttributes): Add missing sendSyncRequest call.
+	(addWindowSizeChanges): Make maximized window placement a bit better.
+	(moveResizeWindow): Adjust window geometry using 
+	addWindowSizeChanges. (bnc 183121)
+
 	* src/window.c: Only allow shading on windows with top decoration.
 
 	* src/event.c (handleEvent): Check that shade action is allowed
