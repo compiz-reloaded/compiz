@@ -1628,7 +1628,8 @@ cubeFini (CompPlugin *p)
 }
 
 CompPluginDep cubeDeps[] = {
-    { CompPluginRuleBefore, "scale" }
+    { CompPluginRuleBefore, "scale" },
+    { CompPluginRuleBefore, "switcher" }
 };
 
 CompPluginVTable cubeVTable = {

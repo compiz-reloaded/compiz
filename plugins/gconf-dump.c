@@ -292,8 +292,9 @@ dumpGeneralOptions (CompDisplay *d)
 static void
 dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 {
-    CompOption   *option, info;
+    CompOption   *option, info, bopt, ropt;
     int	         nOption;
+    GArray       *reqs, *before;
 
     if (!strcmp (p->vTable->name, "gconf-dump"))
 	return;
@@ -308,14 +309,14 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
     info.value.s   = "";
     gconfDumpToSchema (d, &info, p->vTable->name, NULL);
 
+    reqs   = g_array_new (FALSE, FALSE, sizeof (CompOptionValue));
+    before = g_array_new (FALSE, FALSE, sizeof (CompOptionValue));
+
     if (p->vTable->deps)
     {
-	GArray          *reqs, *before;
 	int             i;
 	CompOptionValue value;
 
-	reqs   = g_array_new (FALSE, FALSE, sizeof (CompOptionValue));
-	before = g_array_new (FALSE, FALSE, sizeof (CompOptionValue));
 	for (i = 0; i < p->vTable->nDeps; i++)
 	{
 	    value.s = p->vTable->deps[i].plugin;
@@ -324,38 +325,30 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 	    else
 		g_array_append_val (reqs, value);
 	}
-
-	if (before->len) {
-	    CompOption bopt;
-
-	    memset (&bopt, 0, sizeof (bopt));
-	    bopt.name		   = "load_before";
-	    bopt.shortDesc	   = _("Plugins that this must load before");
-	    bopt.longDesc	   = _("Do not modify");
-	    bopt.type		   = CompOptionTypeList;
-	    bopt.value.list.type   = CompOptionTypeString;
-	    bopt.value.list.nValue = before->len;
-	    bopt.value.list.value  = (CompOptionValue *)before->data;
-	    gconfDumpToSchema (d, &bopt, p->vTable->name, NULL);
-	}
-
-	if (reqs->len) {
-	    CompOption ropt;
-
-	    memset (&ropt, 0, sizeof (ropt));
-	    ropt.name		   = "requires";
-	    ropt.shortDesc	   = _("Plugins that this requires");
-	    ropt.longDesc	   = _("Do not modify");
-	    ropt.type		   = CompOptionTypeList;
-	    ropt.value.list.type   = CompOptionTypeString;
-	    ropt.value.list.nValue = reqs->len;
-	    ropt.value.list.value  = (CompOptionValue *)reqs->data;
-	    gconfDumpToSchema (d, &ropt, p->vTable->name, NULL);
-	}
-
-	g_array_free (before, TRUE);
-	g_array_free (reqs, TRUE);
     }
+
+    memset (&bopt, 0, sizeof (bopt));
+    bopt.name		   = "load_before";
+    bopt.shortDesc	   = _("Plugins that this must load before");
+    bopt.longDesc	   = _("Do not modify");
+    bopt.type		   = CompOptionTypeList;
+    bopt.value.list.type   = CompOptionTypeString;
+    bopt.value.list.nValue = before->len;
+    bopt.value.list.value  = (CompOptionValue *)before->data;
+    gconfDumpToSchema (d, &bopt, p->vTable->name, NULL);
+
+    memset (&ropt, 0, sizeof (ropt));
+    ropt.name		   = "requires";
+    ropt.shortDesc	   = _("Plugins that this requires");
+    ropt.longDesc	   = _("Do not modify");
+    ropt.type		   = CompOptionTypeList;
+    ropt.value.list.type   = CompOptionTypeString;
+    ropt.value.list.nValue = reqs->len;
+    ropt.value.list.value  = (CompOptionValue *)reqs->data;
+    gconfDumpToSchema (d, &ropt, p->vTable->name, NULL);
+
+    g_array_free (before, TRUE);
+    g_array_free (reqs, TRUE);
 
     if (p->vTable->getDisplayOptions)
     {

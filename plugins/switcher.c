@@ -1902,10 +1902,6 @@ switchFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
-CompPluginDep switchDeps[] = {
-    { CompPluginRuleAfter, "cube" }
-};
-
 CompPluginVTable switchVTable = {
     "switcher",
     "Application Switcher",
@@ -1922,8 +1918,8 @@ CompPluginVTable switchVTable = {
     0, /* SetDisplayOption */
     switchGetScreenOptions,
     switchSetScreenOption,
-    switchDeps,
-    sizeof (switchDeps) / sizeof (switchDeps[0])
+    NULL,
+    0
 };
 
 CompPluginVTable *

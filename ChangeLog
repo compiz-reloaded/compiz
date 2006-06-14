@@ -1,3 +1,16 @@
+2006-06-12  Dan Winship  <danw@novell.com>
+
+	* plugins/cube.c: 
+	* plugins/switcher.c: Mark cube as needing to load before switcher
+	rather than marking switcher as requiring cube. bnc #183676.
+
+	* plugins/gconf-dump.c (dumpPluginOptions): Output load_before and
+	requires for all plugins, even if the list is empty, to ensure
+	that an empty value in a new release overrides a non-empty value
+	in an older release.
+
+	* plugins/compiz.schemas.in.in: regen
+
 2006-06-09  Dan Winship  <danw@novell.com>
 
 	* configure.ac: add translations
