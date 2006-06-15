@@ -1,5 +1,16 @@
 2006-06-15  David Reveman  <davidr@novell.com>
 
+	* plugins/cube.c (cubePaintTransformedScreen): Remove
+	PAINT_SCREEN_CLEAR_MASK from mask.
+
+	* plugins/switcher.c (switchPaintScreen): Add PAINT_SCREEN_CLEAR_MASK
+	when zooming. (bnc 183676)
+
+	* src/paint.c (paintTransformedScreen): Clear color buffer if
+	PAINT_SCREEN_CLEAR_MASK is present.
+
+	* include/compiz.h: Add PAINT_SCREEN_CLEAR_MASK.
+
 	* gnome/window-decorator/gnome-window-decorator.c: Add DM selection
 	support and --repalce option so it's possible to replace an
 	existing window decorator in the same way as it's possible to replace

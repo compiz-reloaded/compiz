@@ -1118,6 +1118,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    glClear (GL_COLOR_BUFFER_BIT);
     }
 
+    mask &= ~PAINT_SCREEN_CLEAR_MASK;
+
     UNWRAP (cs, s, paintTransformedScreen);
 
     sa.xTranslate = sAttrib->xTranslate;

@@ -772,6 +772,7 @@ typedef void (*DonePaintScreenProc) (CompScreen *screen);
 #define PAINT_SCREEN_FULL_MASK			   (1 << 1)
 #define PAINT_SCREEN_TRANSFORMED_MASK		   (1 << 2)
 #define PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK (1 << 3)
+#define PAINT_SCREEN_CLEAR_MASK			   (1 << 4)
 
 typedef Bool (*PaintScreenProc) (CompScreen		 *screen,
 				 const ScreenPaintAttrib *sAttrib,

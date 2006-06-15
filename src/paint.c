@@ -68,6 +68,9 @@ paintTransformedScreen (CompScreen		*screen,
     int	       windowMask;
     int	       backgroundMask;
 
+    if (mask & PAINT_SCREEN_CLEAR_MASK)
+	glClear (GL_COLOR_BUFFER_BIT);
+
     screenLighting (screen, TRUE);
 
     glPushMatrix ();

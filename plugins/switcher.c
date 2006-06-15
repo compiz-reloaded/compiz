@@ -1298,7 +1298,7 @@ switchPaintScreen (CompScreen		   *s,
 	if (ss->zooming)
 	{
 	    mask &= ~PAINT_SCREEN_REGION_MASK;
-	    mask |= PAINT_SCREEN_TRANSFORMED_MASK;
+	    mask |= PAINT_SCREEN_TRANSFORMED_MASK | PAINT_SCREEN_CLEAR_MASK;
 
 	    sa.zCamera -= ss->translate;
 	}
