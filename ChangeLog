@@ -1,3 +1,13 @@
+2006-06-15  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c: Add DM selection
+	support and --repalce option so it's possible to replace an
+	existing window decorator in the same way as it's possible to replace
+	a window manager. (bnc 185296)
+	(close_button_event):
+	(max_button_event):
+	(min_button_event): De-highlight on NotifyGrab. (bnc 185293)
+
 2006-06-12  Dan Winship  <danw@novell.com>
 
 	* plugins/cube.c: 

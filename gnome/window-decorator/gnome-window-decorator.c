@@ -237,6 +237,19 @@ static Atom panel_action_atom;
 static Atom panel_action_main_menu_atom;
 static Atom panel_action_run_dialog_atom;
 
+static Atom manager_atom;
+static Atom targets_atom;
+static Atom multiple_atom;
+static Atom timestamp_atom;
+static Atom version_atom;
+static Atom atom_pair_atom;
+
+static Atom utf8_string_atom;
+
+static Atom dm_name_atom;
+
+static Time dm_sn_timestamp;
+
 #define C(name) { 0, XC_ ## name }
 
 static struct _cursor {
@@ -304,6 +317,8 @@ typedef struct _decor {
 } decor_t;
 
 typedef void (*event_callback) (WnckWindow *win, XEvent *event);
+
+static char *program_name;
 
 static GtkWidget     *style_window;
 
@@ -2258,49 +2273,6 @@ set_dm_check_hint (GdkScreen *screen)
 }
 
 static gboolean
-check_dm_hint (GdkScreen *screen)
-{
-    Window	  xroot;
-    GdkDisplay	  *gdkdisplay = gdk_display_get_default ();
-    Display	  *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
-    Atom	  actual;
-    int		  result, format;
-    unsigned long n, left;
-    unsigned char *data;
-    Atom	  atom;
-    gboolean	  dm = FALSE;
-
-    xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
-
-    atom = XInternAtom (xdisplay, "_NET_SUPPORTING_DM_CHECK", FALSE);
-
-    result = XGetWindowProperty (xdisplay, xroot,
-				 atom, 0L, 1L, FALSE,
-				 XA_WINDOW, &actual, &format,
-				 &n, &left, &data);
-
-    if (result == Success && n && data)
-    {
-	XWindowAttributes attr;
-	Window		  window;
-
-	memcpy (&window, data, sizeof (Window));
-
-	XFree (data);
-
-	gdk_error_trap_push ();
-
-	XGetWindowAttributes (xdisplay, window, &attr);
-	XSync (xdisplay, FALSE);
-
-	if (!gdk_error_trap_pop ())
-	    dm = TRUE;
-    }
-
-    return dm;
-}
-
-static gboolean
 get_window_prop (Window xwindow,
 		 Atom   atom,
 		 Window *val)
@@ -3480,8 +3452,7 @@ close_button_event (WnckWindow *win,
 	d->button_states[0] |= IN_EVENT_WINDOW;
 	break;
     case LeaveNotify:
-	if (xevent->xcrossing.mode != NotifyGrab)
-	    d->button_states[0] &= ~IN_EVENT_WINDOW;
+	d->button_states[0] &= ~IN_EVENT_WINDOW;
 	break;
     }
 
@@ -3520,8 +3491,7 @@ max_button_event (WnckWindow *win,
 	d->button_states[1] |= IN_EVENT_WINDOW;
 	break;
     case LeaveNotify:
-	if (xevent->xcrossing.mode != NotifyGrab)
-	    d->button_states[1] &= ~IN_EVENT_WINDOW;
+	d->button_states[1] &= ~IN_EVENT_WINDOW;
 	break;
     }
 
@@ -3554,8 +3524,7 @@ min_button_event (WnckWindow *win,
 	    tooltip_start_delay ("Minimize Window");
 	break;
     case LeaveNotify:
-	if (xevent->xcrossing.mode != NotifyGrab)
-	    d->button_states[2] &= ~IN_EVENT_WINDOW;
+	d->button_states[2] &= ~IN_EVENT_WINDOW;
 	break;
     }
 
@@ -3947,6 +3916,226 @@ hide_force_quit_dialog (WnckWindow *win)
     }
 }
 
+/* from fvwm2, Copyright Matthias Clasen, Dominik Vogt */
+static gboolean
+convert_property (Display *xdisplay,
+		  Window  w,
+		  Atom    target,
+		  Atom    property)
+{
+
+#define N_TARGETS 4
+
+    Atom conversion_targets[N_TARGETS];
+    long icccm_version[] = { 2, 0 };
+
+    conversion_targets[0] = targets_atom;
+    conversion_targets[1] = multiple_atom;
+    conversion_targets[2] = timestamp_atom;
+    conversion_targets[3] = version_atom;
+
+    if (target == targets_atom)
+	XChangeProperty (xdisplay, w, property,
+			 XA_ATOM, 32, PropModeReplace,
+			 (unsigned char *) conversion_targets, N_TARGETS);
+    else if (target == timestamp_atom)
+	XChangeProperty (xdisplay, w, property,
+			 XA_INTEGER, 32, PropModeReplace,
+			 (unsigned char *) &dm_sn_timestamp, 1);
+    else if (target == version_atom)
+	XChangeProperty (xdisplay, w, property,
+			 XA_INTEGER, 32, PropModeReplace,
+			 (unsigned char *) icccm_version, 2);
+    else
+	return FALSE;
+
+    /* Be sure the PropertyNotify has arrived so we
+     * can send SelectionNotify
+     */
+    XSync (xdisplay, FALSE);
+
+    return TRUE;
+}
+
+static void
+handle_selection_request (Display *xdisplay,
+			  XEvent  *event)
+{
+    XSelectionEvent reply;
+
+    reply.type	    = SelectionNotify;
+    reply.display   = xdisplay;
+    reply.requestor = event->xselectionrequest.requestor;
+    reply.selection = event->xselectionrequest.selection;
+    reply.target    = event->xselectionrequest.target;
+    reply.property  = None;
+    reply.time	    = event->xselectionrequest.time;
+
+    if (event->xselectionrequest.target == multiple_atom)
+    {
+	if (event->xselectionrequest.property != None)
+	{
+	    Atom	  type, *adata;
+	    int		  i, format;
+	    unsigned long num, rest;
+	    unsigned char *data;
+
+	    if (XGetWindowProperty (xdisplay,
+				    event->xselectionrequest.requestor,
+				    event->xselectionrequest.property,
+				    0, 256, FALSE,
+				    atom_pair_atom,
+				    &type, &format, &num, &rest,
+				    &data) != Success)
+		return;
+
+	    /* FIXME: to be 100% correct, should deal with rest > 0,
+	     * but since we have 4 possible targets, we will hardly ever
+	     * meet multiple requests with a length > 8
+	     */
+	    adata = (Atom *) data;
+	    i = 0;
+	    while (i < (int) num)
+	    {
+		if (!convert_property (xdisplay,
+				       event->xselectionrequest.requestor,
+				       adata[i], adata[i + 1]))
+		    adata[i + 1] = None;
+
+		i += 2;
+	    }
+
+	    XChangeProperty (xdisplay,
+			     event->xselectionrequest.requestor,
+			     event->xselectionrequest.property,
+			     atom_pair_atom,
+			     32, PropModeReplace, data, num);
+	}
+    }
+    else
+    {
+	if (event->xselectionrequest.property == None)
+	    event->xselectionrequest.property = event->xselectionrequest.target;
+
+	if (convert_property (xdisplay,
+			      event->xselectionrequest.requestor,
+			      event->xselectionrequest.target,
+			      event->xselectionrequest.property))
+	    reply.property = event->xselectionrequest.property;
+    }
+
+    XSendEvent (xdisplay,
+		event->xselectionrequest.requestor,
+		FALSE, 0L, (XEvent *) &reply);
+}
+
+static void
+handle_selection_clear (Display *xdisplay,
+			XEvent  *xevent)
+{
+    exit (0);
+}
+
+static gboolean
+acquire_dm_session (Display  *xdisplay,
+		    int	     screen,
+		    gboolean replace_current_dm)
+{
+    Atom		 dm_sn_atom;
+    XEvent		 event;
+    XSetWindowAttributes attr;
+    Window		 current_dm_sn_owner, new_dm_sn_owner;
+    char		 buf[128];
+
+    sprintf (buf, "DM_S%d", screen);
+    dm_sn_atom = XInternAtom (xdisplay, buf, 0);
+
+    current_dm_sn_owner = XGetSelectionOwner (xdisplay, dm_sn_atom);
+
+    if (current_dm_sn_owner != None)
+    {
+	if (!replace_current_dm)
+	{
+	    fprintf (stderr,
+		     "%s: Screen %d on display \"%s\" already "
+		     "has a decoration manager; try using the "
+		     "--replace option to replace the current "
+		     "decoration manager.\n",
+		     program_name, screen, DisplayString (xdisplay));
+
+	    return FALSE;
+	}
+
+	XSelectInput (xdisplay, current_dm_sn_owner, StructureNotifyMask);
+    }
+
+    attr.override_redirect = TRUE;
+    attr.event_mask	   = PropertyChangeMask;
+
+    new_dm_sn_owner =
+	XCreateWindow (xdisplay, XRootWindow (xdisplay, screen),
+		       -100, -100, 1, 1, 0,
+		       CopyFromParent, CopyFromParent,
+		       CopyFromParent,
+		       CWOverrideRedirect | CWEventMask,
+		       &attr);
+
+    XChangeProperty (xdisplay,
+		     new_dm_sn_owner,
+		     dm_name_atom,
+		     utf8_string_atom, 8,
+		     PropModeReplace,
+		     (unsigned char *) "gwd",
+		     strlen ("gwd"));
+
+    XWindowEvent (xdisplay,
+		  new_dm_sn_owner,
+		  PropertyChangeMask,
+		  &event);
+
+    dm_sn_timestamp = event.xproperty.time;
+
+    XSetSelectionOwner (xdisplay, dm_sn_atom, new_dm_sn_owner,
+			dm_sn_timestamp);
+
+    if (XGetSelectionOwner (xdisplay, dm_sn_atom) != new_dm_sn_owner)
+    {
+	fprintf (stderr,
+		 "%s: Could not acquire decoration manager "
+		 "selection on screen %d display \"%s\"\n",
+		 program_name, screen, DisplayString (xdisplay));
+
+	XDestroyWindow (xdisplay, new_dm_sn_owner);
+
+	return FALSE;
+    }
+
+    /* Send client message indicating that we are now the DM */
+    event.xclient.type	       = ClientMessage;
+    event.xclient.window       = XRootWindow (xdisplay, screen);
+    event.xclient.message_type = manager_atom;
+    event.xclient.format       = 32;
+    event.xclient.data.l[0]    = dm_sn_timestamp;
+    event.xclient.data.l[1]    = dm_sn_atom;
+    event.xclient.data.l[2]    = 0;
+    event.xclient.data.l[3]    = 0;
+    event.xclient.data.l[4]    = 0;
+
+    XSendEvent (xdisplay, XRootWindow (xdisplay, screen), FALSE,
+		StructureNotifyMask, &event);
+
+    /* Wait for old decoration manager to go away */
+    if (current_dm_sn_owner != None)
+    {
+	do {
+	    XWindowEvent (xdisplay, current_dm_sn_owner,
+			  StructureNotifyMask, &event);
+	} while (event.type != DestroyNotify);
+    }
+
+    return TRUE;
+}
+
 static GdkFilterReturn
 event_filter_func (GdkXEvent *gdkxevent,
 		   GdkEvent  *event,
@@ -4102,6 +4291,32 @@ event_filter_func (GdkXEvent *gdkxevent,
 
     return GDK_FILTER_CONTINUE;
 }
+
+static GdkFilterReturn
+selection_event_filter_func (GdkXEvent *gdkxevent,
+			     GdkEvent  *event,
+			     gpointer  data)
+{
+    Display    *xdisplay;
+    GdkDisplay *gdkdisplay;
+    XEvent     *xevent = gdkxevent;
+
+    gdkdisplay = gdk_display_get_default ();
+    xdisplay   = GDK_DISPLAY_XDISPLAY (gdkdisplay);
+
+    switch (xevent->type) {
+    case SelectionRequest:
+	handle_selection_request (xdisplay, xevent);
+	break;
+    case SelectionClear:
+	handle_selection_clear (xdisplay, xevent);
+    default:
+	break;
+    }
+
+    return GDK_FILTER_CONTINUE;
+}
+
 
 /* from clearlooks theme */
 static void
@@ -5071,13 +5286,28 @@ main (int argc, char *argv[])
     GdkScreen  *gdkscreen;
     WnckScreen *screen;
     gint       i, j;
+    gboolean   replace = FALSE;
+
+    program_name = argv[0];
 
     gtk_init (&argc, &argv);
 
     for (i = 0; i < argc; i++)
     {
 	if (strcmp (argv[i], "--minimal") == 0)
+	{
 	    minimal = TRUE;
+	}
+	else  if (strcmp (argv[i], "--replace") == 0)
+	{
+	    replace = TRUE;
+	}
+	else  if (strcmp (argv[i], "--help") == 0)
+	{
+	    fprintf (stderr, "%s [--minimal] [--replace] [--help]\n",
+		     program_name);
+	    return 0;
+	}
     }
 
     gdkdisplay = gdk_display_get_default ();
@@ -5110,6 +5340,20 @@ main (int argc, char *argv[])
     panel_action_run_dialog_atom =
 	XInternAtom (xdisplay, "_GNOME_PANEL_ACTION_RUN_DIALOG", FALSE);
 
+    manager_atom   = XInternAtom (xdisplay, "MANAGER", FALSE);
+    targets_atom   = XInternAtom (xdisplay, "TARGETS", FALSE);
+    multiple_atom  = XInternAtom (xdisplay, "MULTIPLE", FALSE);
+    timestamp_atom = XInternAtom (xdisplay, "TIMESTAMP", FALSE);
+    version_atom   = XInternAtom (xdisplay, "VERSION", FALSE);
+    atom_pair_atom = XInternAtom (xdisplay, "ATOM_PAIR", FALSE);
+
+    utf8_string_atom = XInternAtom (xdisplay, "UTF8_STRING", FALSE);
+
+    dm_name_atom = XInternAtom (xdisplay, "_NET_DM_NAME", FALSE);
+
+    if (!acquire_dm_session (xdisplay, 0, replace))
+	return 1;
+
     for (i = 0; i < 3; i++)
     {
 	for (j = 0; j < 3; j++)
@@ -5122,13 +5366,6 @@ main (int argc, char *argv[])
 
     frame_table = g_hash_table_new (NULL, NULL);
 
-    if (check_dm_hint (gdkscreen))
-    {
-	fprintf (stderr, "%s: Another window decorator is already running\n",
-		 argv[0]);
-	return 1;
-    }
-
     if (!create_tooltip_window ())
     {
 	fprintf (stderr, "%s, Couldn't create tooltip window\n", argv[0]);
@@ -5136,6 +5373,10 @@ main (int argc, char *argv[])
     }
 
     screen = wnck_screen_get_default ();
+
+    gdk_window_add_filter (NULL,
+			   selection_event_filter_func,
+			   NULL);
 
     if (!minimal)
     {
