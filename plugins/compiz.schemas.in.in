@@ -2391,7 +2391,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[Toolbar,Utility,Dialog,Normal]</default>
+            <default>[Toolbar,Utility,Dialog,ModalDialog,Fullscreen,Normal]</default>
             <locale name="C">
                 <short>Window Types</short>
                 <long>
@@ -2579,7 +2579,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[Toolbar,Utility,Dialog,Fullscreen,Normal]</default>
+            <default>[Toolbar,Utility,Dialog,ModalDialog,Fullscreen,Normal]</default>
             <locale name="C">
                 <short>Window Types</short>
                 <long>

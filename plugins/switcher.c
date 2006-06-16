@@ -81,6 +81,7 @@ static char *winType[] = {
     "Toolbar",
     "Utility",
     "Dialog",
+    "ModalDialog",
     "Fullscreen",
     "Normal",
 };
