@@ -1,3 +1,9 @@
+2006-06-16  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c: Track motif
+	WM hints and disable decorations when application wants no
+	titlebar. (bnc 185852)
+
 2006-06-15  David Reveman  <davidr@novell.com>
 
 	* plugins/cube.c (cubePaintTransformedScreen): Remove

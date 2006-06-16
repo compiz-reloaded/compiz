@@ -165,6 +165,24 @@ typedef struct _quad {
     cairo_matrix_t m;
 } quad;
 
+#define MWM_HINTS_DECORATIONS (1L << 1)
+
+#define MWM_DECOR_ALL      (1L << 0)
+#define MWM_DECOR_BORDER   (1L << 1)
+#define MWM_DECOR_HANDLE   (1L << 2)
+#define MWM_DECOR_TITLE    (1L << 3)
+#define MWM_DECOR_MENU     (1L << 4)
+#define MWM_DECOR_MINIMIZE (1L << 5)
+#define MWM_DECOR_MAXIMIZE (1L << 6)
+
+#define PROP_MOTIF_WM_HINT_ELEMENTS 3
+
+typedef struct {
+    unsigned long flags;
+    unsigned long functions;
+    unsigned long decorations;
+} MwmHints;
+
 enum {
     DOUBLE_CLICK_SHADE,
     DOUBLE_CLICK_MAXIMIZE
@@ -226,6 +244,7 @@ static Atom win_decor_atom;
 static Atom wm_move_resize_atom;
 static Atom restack_window_atom;
 static Atom select_window_atom;
+static Atom mwm_hints_atom;
 
 static Atom toolkit_action_atom;
 static Atom toolkit_action_main_menu_atom;
@@ -2311,6 +2330,37 @@ get_window_prop (Window xwindow,
     return TRUE;
 }
 
+static unsigned int
+get_mwm_prop (Window xwindow)
+{
+    Display	  *xdisplay;
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    MwmHints	  *mwm_hints;
+    unsigned int  decor = MWM_DECOR_ALL;
+
+    xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+
+    result = XGetWindowProperty (xdisplay, xwindow, mwm_hints_atom,
+				 0L, 20L, FALSE, mwm_hints_atom,
+				 &actual, &format, &n, &left,
+				 (unsigned char **) &mwm_hints);
+
+    if (result == Success && n && mwm_hints)
+    {
+	if (n >= PROP_MOTIF_WM_HINT_ELEMENTS)
+	{
+	    if (mwm_hints->flags & MWM_HINTS_DECORATIONS)
+		decor = mwm_hints->decorations;
+	}
+
+	XFree (mwm_hints);
+    }
+
+    return decor;
+}
+
 static void
 update_event_windows (WnckWindow *win)
 {
@@ -2694,7 +2744,8 @@ add_frame_window (WnckWindow *win,
     XSync (xdisplay, FALSE);
     if (!gdk_error_trap_pop ())
     {
-	d->decorated = TRUE;
+	if (get_mwm_prop (xid) & (MWM_DECOR_ALL | MWM_DECOR_TITLE))
+	    d->decorated = TRUE;
 
 	for (i = 0; i < 3; i++)
 	    for (j = 0; j < 3; j++)
@@ -4185,6 +4236,41 @@ event_filter_func (GdkXEvent *gdkxevent,
 		    remove_frame_window (win);
 	    }
 	}
+	else if (xevent->xproperty.atom == mwm_hints_atom)
+	{
+	    WnckWindow *win;
+
+	    xid = xevent->xproperty.window;
+
+	    win = wnck_window_get (xid);
+	    if (win)
+	    {
+		decor_t  *d = g_object_get_data (G_OBJECT (win), "decor");
+		gboolean decorated = FALSE;
+
+		if (get_mwm_prop (xid) & (MWM_DECOR_ALL | MWM_DECOR_TITLE))
+		    decorated = TRUE;
+
+		if (decorated != d->decorated)
+		{
+		    d->decorated = decorated;
+		    if (decorated)
+		    {
+			d->width = d->height = 0;
+
+			update_window_decoration_size (win);
+			update_event_windows (win);
+		    }
+		    else
+		    {
+			gdk_error_trap_push ();
+			XDeleteProperty (xdisplay, xid, win_decor_atom);
+			XSync (xdisplay, FALSE);
+			gdk_error_trap_pop ();
+		    }
+		}
+	    }
+	}
 	else if (xevent->xproperty.atom == select_window_atom)
 	{
 	    WnckWindow *win;
@@ -5320,6 +5406,7 @@ main (int argc, char *argv[])
     restack_window_atom = XInternAtom (xdisplay, "_NET_RESTACK_WINDOW", FALSE);
     select_window_atom	= XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW",
 				       FALSE);
+    mwm_hints_atom	= XInternAtom (xdisplay, "_MOTIF_WM_HINTS", FALSE);
 
     toolkit_action_atom			  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION", FALSE);
