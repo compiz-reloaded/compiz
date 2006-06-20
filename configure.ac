@@ -15,7 +15,7 @@ AC_PROG_LIBTOOL
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 
-ALL_LINGUAS="cs de es fi fr hu it ja pt_BR zh_CN zh_TW"
+ALL_LINGUAS="cs de es fi fr hu it ja pl pt_BR zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL
 GETTEXT_PACKAGE=compiz
