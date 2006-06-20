@@ -2875,6 +2875,20 @@ addWindowSizeChanges (CompWindow     *w,
 	{
 	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
 	}
+
+	/* constrain window width if greater than maximum width */
+	if (!(mask & CWWidth) && w->attrib.width > w->sizeHints.max_width)
+	{
+	    xwc->width = w->attrib.width;
+	    mask |= CWWidth;
+	}
+
+	/* constrain window height if greater than maximum height */
+	if (!(mask & CWHeight) && w->attrib.height > w->sizeHints.max_height)
+	{
+	    xwc->height = w->attrib.height;
+	    mask |= CWHeight;
+	}
     }
 
     if (mask & (CWWidth | CWHeight))

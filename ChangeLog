@@ -1,5 +1,8 @@
 2006-06-20  David Reveman  <davidr@novell.com>
 
+	* src/window.c (addWindowSizeChanges): Constrain window
+	dimensions if they are too large.
+
 	* gnome/window-decorator/gnome-window-decorator.c (get_mwm_prop):
 	Trap X errors.
 
