@@ -1,3 +1,8 @@
+2006-06-20  David Reveman  <davidr@novell.com>
+
+	* gnome/window-decorator/gnome-window-decorator.c (get_mwm_prop):
+	Trap X errors.
+
 2006-06-20  Dan Winship  <danw@novell.com>
 
 	* configure.ac (ALL_LINGUAS): Add pl

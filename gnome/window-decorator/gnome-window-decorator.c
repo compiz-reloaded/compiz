@@ -2335,19 +2335,25 @@ get_mwm_prop (Window xwindow)
 {
     Display	  *xdisplay;
     Atom	  actual;
-    int		  result, format;
+    int		  err, result, format;
     unsigned long n, left;
     MwmHints	  *mwm_hints;
     unsigned int  decor = MWM_DECOR_ALL;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
+    gdk_error_trap_push ();
+
     result = XGetWindowProperty (xdisplay, xwindow, mwm_hints_atom,
 				 0L, 20L, FALSE, mwm_hints_atom,
 				 &actual, &format, &n, &left,
 				 (unsigned char **) &mwm_hints);
 
-    if (result == Success && n && mwm_hints)
+    err = gdk_error_trap_pop ();
+    if (err != Success || result != Success)
+	return decor;
+
+    if (n && mwm_hints)
     {
 	if (n >= PROP_MOTIF_WM_HINT_ELEMENTS)
 	{
