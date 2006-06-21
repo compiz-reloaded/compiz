@@ -1,3 +1,8 @@
+2006-06-21  David Reveman  <davidr@novell.com>
+
+	* src/window.c: Add updateTransientHint to protect against circular
+	transient dependencies. (bnc 186825)
+
 2006-06-20  David Reveman  <davidr@novell.com>
 
 	* src/window.c (addWindowSizeChanges): Constrain window

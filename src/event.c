@@ -927,8 +927,7 @@ handleEvent (CompDisplay *d,
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
-		XGetTransientForHint (d->display,
-				      w->id, &w->transientFor);
+		updateTransientHint (w);
 	}
 	else if (event->xproperty.atom == d->wmClientLeaderAtom)
 	{
@@ -1649,4 +1648,3 @@ eventTerminates (CompDisplay *display,
 	return FALSE;
     }
 }
-

@@ -85,6 +85,24 @@ freeWindowPrivateIndex (CompScreen *screen,
 		      index);
 }
 
+static Bool
+isAncestorTo (CompWindow *transient,
+	      CompWindow *ancestor)
+{
+    if (transient->transientFor)
+    {
+	if (transient->transientFor == ancestor->id)
+	    return TRUE;
+
+	transient = findWindowAtScreen (transient->screen,
+					transient->transientFor);
+	if (transient)
+	    return isAncestorTo (transient, ancestor);
+    }
+
+    return FALSE;
+}
+
 static void
 recalcNormalHints (CompWindow *window)
 {
@@ -268,6 +286,33 @@ updateWindowClassHints (CompWindow *w)
 	    w->resClass = strdup (classHint.res_class);
 	    XFree (classHint.res_class);
 	}
+    }
+}
+
+void
+updateTransientHint (CompWindow *w)
+{
+    Window transientFor;
+    Status status;
+
+    w->transientFor = None;
+
+    status = XGetTransientForHint (w->screen->display->display,
+				   w->id, &transientFor);
+
+    if (status)
+    {
+	CompWindow *ancestor;
+
+	ancestor = findWindowAtScreen (w->screen, transientFor);
+	if (!ancestor)
+	    return;
+
+	/* protect against circular transient dependencies */
+	if (transientFor == w->id || isAncestorTo (ancestor, w))
+	    return;
+
+	w->transientFor = transientFor;
     }
 }
 
@@ -1617,8 +1662,7 @@ addWindow (CompScreen *screen,
 			 w->screen->display->winDesktopAtom,
 			 0);
 
-	XGetTransientForHint (w->screen->display->display,
-			      w->id, &w->transientFor);
+	updateTransientHint (w);
 
 	w->clientLeader = getClientLeader (w);
 	if (!w->clientLeader)
@@ -2306,24 +2350,6 @@ isGroupTransient (CompWindow *w,
 	    if (w->clientLeader == clientLeader)
 		return TRUE;
 	}
-    }
-
-    return FALSE;
-}
-
-static Bool
-isAncestorTo (CompWindow *transient,
-	      CompWindow *ancestor)
-{
-    if (transient->transientFor)
-    {
-	if (transient->transientFor == ancestor->id)
-	    return TRUE;
-
-	transient = findWindowAtScreen (transient->screen,
-					transient->transientFor);
-	if (transient)
-	    return isAncestorTo (transient, ancestor);
     }
 
     return FALSE;

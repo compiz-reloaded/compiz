@@ -1689,6 +1689,9 @@ updateWmHints (CompWindow *w);
 void
 updateWindowClassHints (CompWindow *window);
 
+void
+updateTransientHint (CompWindow *w);
+
 Window
 getClientLeader (CompWindow *w);
 
