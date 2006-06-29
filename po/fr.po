@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-09 09:43-0400\n"
-"PO-Revision-Date: 2006-06-09 10:29-0400\n"
+"POT-Creation-Date: 2006-06-13 10:25+0000\n"
+"PO-Revision-Date: 2006-06-21 12:04\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +125,7 @@ msgstr "Ajoute des effets d'eau à différentes opérations du bureau"
 
 #: ../plugins/compiz.schemas.in.in.h:16
 msgid "Advance to next slide"
-msgstr "Passer à la dispositive suivante"
+msgstr "Passer à la diapositive suivante"
 
 #: ../plugins/compiz.schemas.in.in.h:17
 msgid ""
@@ -196,7 +196,7 @@ msgstr "Cliquer pour obtenir le focus"
 
 #: ../plugins/compiz.schemas.in.in.h:33
 msgid "Click on window moves input focus to it"
-msgstr "Si vous cliquez sur la fenêtre, vous déplacez le focus dessus. "
+msgstr "Si vous cliquez sur la fenêtre, vous déplacez le focus dessus"
 
 #: ../plugins/compiz.schemas.in.in.h:34
 msgid "Close Window"
@@ -424,7 +424,7 @@ msgstr "Effet de fondu au signal sonore du système"
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
 "Apparition en fondu des fenêtres en mode mapped et disparition en fondu des "
-"fenêtres en mode unmapped "
+"fenêtres en mode unmapped"
 
 #: ../plugins/compiz.schemas.in.in.h:87
 msgid "Fading Windows"
@@ -516,7 +516,7 @@ msgstr "Résolution de la grille"
 
 #: ../plugins/compiz.schemas.in.in.h:107
 msgid "Hide Skip Taskbar Windows"
-msgstr ""
+msgstr "Masquer les fenêtres de la barre des tâches Ignorer"
 
 #: ../plugins/compiz.schemas.in.in.h:108
 msgid "Hide all windows and focus desktop"
@@ -525,6 +525,8 @@ msgstr "Masquer toutes les fenêtres et focus du bureau"
 #: ../plugins/compiz.schemas.in.in.h:109
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
+"Masquer les fenêtres qui ne se trouvent pas dans la barre des tâches lorsque "
+"vous passez en mode d'affichage du bureau"
 
 #: ../plugins/compiz.schemas.in.in.h:110
 msgid ""
@@ -563,14 +565,12 @@ msgid "Initiate All Windows"
 msgstr "Lancer toutes les fenêtres"
 
 #: ../plugins/compiz.schemas.in.in.h:118
-#, fuzzy
 msgid "Initiate Keyboard Window Move"
-msgstr "Lancer le déplacement de fenêtre"
+msgstr "Lancer le déplacement de la fenêtre au clavier"
 
 #: ../plugins/compiz.schemas.in.in.h:119
-#, fuzzy
 msgid "Initiate Keyboard Window Resize"
-msgstr "Lancer le redimensionnement de fenêtre"
+msgstr "Lancer le redimensionnement de la fenêtre au clavier"
 
 #: ../plugins/compiz.schemas.in.in.h:120
 msgid "Initiate Window Move"
@@ -606,7 +606,7 @@ msgstr "Insérer l'axe Y pour le mouvement du pointeur"
 
 #: ../plugins/compiz.schemas.in.in.h:128
 msgid "Layout and start transforming windows"
-msgstr "Disposer et commencer à transformer les fenêtres "
+msgstr "Disposer et commencer à transformer les fenêtres"
 
 #: ../plugins/compiz.schemas.in.in.h:129
 msgid "Lighting"
@@ -755,11 +755,13 @@ msgstr "Ouvrir le menu de la fenêtre"
 
 #: ../plugins/compiz.schemas.in.in.h:165
 msgid "Overlay Icon"
-msgstr ""
+msgstr "Superposer l'icône"
 
 #: ../plugins/compiz.schemas.in.in.h:166
 msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
 msgstr ""
+"Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle "
+"(Aucun, Emblème, Grand)"
 
 #: ../plugins/compiz.schemas.in.in.h:167
 msgid "Place Windows"
@@ -1171,12 +1173,11 @@ msgstr "Sensibilité du mouvement du pointeur (0,01-100,00)"
 
 #: ../plugins/compiz.schemas.in.in.h:269
 msgid "Shade Resistance"
-msgstr ""
+msgstr "Ombrer la résistance"
 
 #: ../plugins/compiz.schemas.in.in.h:270
-#, fuzzy
 msgid "Shade resistance (0-100)"
-msgstr "Intervalle d'échelle (0,1-50,0)"
+msgstr "Ombrer la résistance (0-100)"
 
 #: ../plugins/compiz.schemas.in.in.h:271
 msgid "Shadow Offset X"
@@ -1289,18 +1290,16 @@ msgid "Start moving window"
 msgstr "Démarrer le déplacement de la fenêtre"
 
 #: ../plugins/compiz.schemas.in.in.h:298
-#, fuzzy
 msgid "Start moving window using keyboard"
-msgstr "Démarrer le déplacement de la fenêtre"
+msgstr "Commencer à déplacer la fenêtre avec le clavier"
 
 #: ../plugins/compiz.schemas.in.in.h:299
-#, fuzzy
 msgid "Start resizing window"
-msgstr "Démarrer le déplacement de la fenêtre"
+msgstr "Commencer à redimensionner la fenêtre"
 
 #: ../plugins/compiz.schemas.in.in.h:300
 msgid "Start resizing window using keyboard"
-msgstr ""
+msgstr "Commencer à redimensionner la fenêtre avec le clavier"
 
 #: ../plugins/compiz.schemas.in.in.h:301
 msgid "Switcher speed (0.1-50.0)"
@@ -1344,37 +1343,35 @@ msgstr "Intervalle"
 
 #: ../plugins/compiz.schemas.in.in.h:311
 msgid "Toggle Window Maximized"
-msgstr "Basculer l'état d'agrandissement"
+msgstr "Basculer la fenêtre agrandie"
 
 #: ../plugins/compiz.schemas.in.in.h:312
 msgid "Toggle Window Maximized Horizontally"
-msgstr ""
+msgstr "Basculer la fenêtre agrandie horizontalement"
 
 #: ../plugins/compiz.schemas.in.in.h:313
 msgid "Toggle Window Maximized Vertically"
-msgstr ""
+msgstr "Basculer la fenêtre agrandie verticalement"
 
 #: ../plugins/compiz.schemas.in.in.h:314
 msgid "Toggle Window Shaded"
-msgstr "Basculer l'état de réduction"
+msgstr "Basculer la fenêtre ombrée"
 
 #: ../plugins/compiz.schemas.in.in.h:315
-#, fuzzy
 msgid "Toggle active window maximized"
-msgstr "Fermer la fenêtre active"
+msgstr "Basculer la fenêtre active agrandie"
 
 #: ../plugins/compiz.schemas.in.in.h:316
 msgid "Toggle active window maximized horizontally"
-msgstr ""
+msgstr "Basculer la fenêtre active agrandie horizontalement"
 
 #: ../plugins/compiz.schemas.in.in.h:317
 msgid "Toggle active window maximized vertically"
-msgstr ""
+msgstr "Basculer la fenêtre active agrandie verticalement"
 
 #: ../plugins/compiz.schemas.in.in.h:318
-#, fuzzy
 msgid "Toggle active window shaded"
-msgstr "Fermer la fenêtre active"
+msgstr "Basculer la fenêtre active ombrée"
 
 #: ../plugins/compiz.schemas.in.in.h:319
 msgid "Toggle rain"

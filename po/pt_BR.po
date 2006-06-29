@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-09 09:43-0400\n"
-"PO-Revision-Date: 2006-06-09 10:39-0400\n"
+"POT-Creation-Date: 2006-06-13 10:25+0000\n"
+"PO-Revision-Date: 2006-06-22 10:34\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -511,7 +511,7 @@ msgstr "Resolução de Grade"
 
 #: ../plugins/compiz.schemas.in.in.h:107
 msgid "Hide Skip Taskbar Windows"
-msgstr ""
+msgstr "Ocultar Janelas Ignorar Barra de Tarefas"
 
 #: ../plugins/compiz.schemas.in.in.h:108
 msgid "Hide all windows and focus desktop"
@@ -520,6 +520,8 @@ msgstr "Ocultar todas as janelas e enfocar área de trabalho"
 #: ../plugins/compiz.schemas.in.in.h:109
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
+"Ocultar as janelas que não estão na barra de tarefas ao entrar no modo "
+"mostrar área de trabalho"
 
 #: ../plugins/compiz.schemas.in.in.h:110
 msgid ""
@@ -558,14 +560,12 @@ msgid "Initiate All Windows"
 msgstr "Iniciar Todas as Janelas"
 
 #: ../plugins/compiz.schemas.in.in.h:118
-#, fuzzy
 msgid "Initiate Keyboard Window Move"
-msgstr "Iniciar Movimento de Janelas"
+msgstr "Iniciar Movimentação de Janela pelo Teclado"
 
 #: ../plugins/compiz.schemas.in.in.h:119
-#, fuzzy
 msgid "Initiate Keyboard Window Resize"
-msgstr "Iniciar Redimensionamento de Janelas"
+msgstr "Iniciar Redimensionamento de Janela pelo Teclado"
 
 #: ../plugins/compiz.schemas.in.in.h:120
 msgid "Initiate Window Move"
@@ -658,14 +658,12 @@ msgid "Maximize active window"
 msgstr "Maximizar janela ativa"
 
 #: ../plugins/compiz.schemas.in.in.h:142
-#, fuzzy
 msgid "Maximize active window horizontally"
-msgstr "Maximizar janela ativa"
+msgstr "Maximizar janela ativa horizontalmente"
 
 #: ../plugins/compiz.schemas.in.in.h:143
-#, fuzzy
 msgid "Maximize active window vertically"
-msgstr "Maximizar janela ativa"
+msgstr "Maximizar janela ativa verticalmente"
 
 #: ../plugins/compiz.schemas.in.in.h:144
 msgid "Minimize Effect"
@@ -753,11 +751,13 @@ msgstr "Abrir menu de janelas"
 
 #: ../plugins/compiz.schemas.in.in.h:165
 msgid "Overlay Icon"
-msgstr ""
+msgstr "Ícone de Instalação Sobreposta"
 
 #: ../plugins/compiz.schemas.in.in.h:166
 msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
 msgstr ""
+"Instalação sobreposta de um ícone nas janelas quando elas são dimensionadas "
+"(Nenhuma, Emblema, Grande)"
 
 #: ../plugins/compiz.schemas.in.in.h:167
 msgid "Place Windows"
@@ -1169,12 +1169,11 @@ msgstr "Sensibilidade do movimento do ponteiro (0.01-100.00)"
 
 #: ../plugins/compiz.schemas.in.in.h:269
 msgid "Shade Resistance"
-msgstr ""
+msgstr "Resistência de Sombra"
 
 #: ../plugins/compiz.schemas.in.in.h:270
-#, fuzzy
 msgid "Shade resistance (0-100)"
-msgstr "Dimensionar timestep (0.1-50.0)"
+msgstr "Resistência de sombra (0-100)"
 
 #: ../plugins/compiz.schemas.in.in.h:271
 msgid "Shadow Offset X"
@@ -1286,18 +1285,16 @@ msgid "Start moving window"
 msgstr "Iniciar movimento da janela"
 
 #: ../plugins/compiz.schemas.in.in.h:298
-#, fuzzy
 msgid "Start moving window using keyboard"
-msgstr "Iniciar movimento da janela"
+msgstr "Iniciar movimentação da janela usando o teclado"
 
 #: ../plugins/compiz.schemas.in.in.h:299
-#, fuzzy
 msgid "Start resizing window"
-msgstr "Iniciar movimento da janela"
+msgstr "Iniciar redimensionamento da janela"
 
 #: ../plugins/compiz.schemas.in.in.h:300
 msgid "Start resizing window using keyboard"
-msgstr ""
+msgstr "Iniciar redimensionamento da janela usando o teclado"
 
 #: ../plugins/compiz.schemas.in.in.h:301
 msgid "Switcher speed (0.1-50.0)"
@@ -1341,37 +1338,35 @@ msgstr "Timestep"
 
 #: ../plugins/compiz.schemas.in.in.h:311
 msgid "Toggle Window Maximized"
-msgstr "Alternar estado de maximização"
+msgstr "Alternar Janela Maximizada"
 
 #: ../plugins/compiz.schemas.in.in.h:312
 msgid "Toggle Window Maximized Horizontally"
-msgstr ""
+msgstr "Alternar Janela Maximizada Horizontalmente"
 
 #: ../plugins/compiz.schemas.in.in.h:313
 msgid "Toggle Window Maximized Vertically"
-msgstr ""
+msgstr "Alternar Janela Maximizada Verticalmente"
 
 #: ../plugins/compiz.schemas.in.in.h:314
 msgid "Toggle Window Shaded"
-msgstr "Alternar estado sombreado"
+msgstr "Alternar Janela Sombreada"
 
 #: ../plugins/compiz.schemas.in.in.h:315
-#, fuzzy
 msgid "Toggle active window maximized"
-msgstr "Fechar a janela ativa"
+msgstr "Alternar janela ativa maximizada"
 
 #: ../plugins/compiz.schemas.in.in.h:316
 msgid "Toggle active window maximized horizontally"
-msgstr ""
+msgstr "Alternar janela ativa maximizada horizontalmente"
 
 #: ../plugins/compiz.schemas.in.in.h:317
 msgid "Toggle active window maximized vertically"
-msgstr ""
+msgstr "Alternar janela ativa maximizada verticalmente"
 
 #: ../plugins/compiz.schemas.in.in.h:318
-#, fuzzy
 msgid "Toggle active window shaded"
-msgstr "Fechar a janela ativa"
+msgstr "Alternar janela ativa sombreada"
 
 #: ../plugins/compiz.schemas.in.in.h:319
 msgid "Toggle rain"
