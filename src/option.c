@@ -297,3 +297,75 @@ compWindowTypeMaskFromStringList (CompOptionValue *value)
 
     return mask;
 }
+
+Bool
+getBoolOptionNamed (CompOption *option,
+		    int	       nOption,
+		    char       *name,
+		    Bool       defaultValue)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeBool)
+	    if (strcmp (option->name, name) == 0)
+		return option->value.b;
+
+	option++;
+    }
+
+    return defaultValue;
+}
+
+int
+getIntOptionNamed (CompOption *option,
+		   int	      nOption,
+		   char	      *name,
+		   int	      defaultValue)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeInt)
+	    if (strcmp (option->name, name) == 0)
+		return option->value.i;
+
+	option++;
+    }
+
+    return defaultValue;
+}
+
+float
+getFloatOptionNamed (CompOption *option,
+		     int	nOption,
+		     char	*name,
+		     float	defaultValue)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeFloat)
+	    if (strcmp (option->name, name) == 0)
+		return option->value.f;
+
+	option++;
+    }
+
+    return defaultValue;
+}
+
+char *
+getStringOptionNamed (CompOption *option,
+		      int	 nOption,
+		      char	 *name,
+		      char	 *defaultValue)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeString)
+	    if (strcmp (option->name, name) == 0)
+		return option->value.s;
+
+	option++;
+    }
+
+    return defaultValue;
+}

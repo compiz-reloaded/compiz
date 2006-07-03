@@ -392,6 +392,30 @@ compSetOptionList (CompOption      *option,
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value);
 
+Bool
+getBoolOptionNamed (CompOption *option,
+		    int	       nOption,
+		    char       *name,
+		    Bool       defaultValue);
+
+int
+getIntOptionNamed (CompOption *option,
+		   int	      nOption,
+		   char	      *name,
+		   int	      defaultValue);
+
+float
+getFloatOptionNamed (CompOption *option,
+		     int	nOption,
+		     char	*name,
+		     float	defaultValue);
+
+char *
+getStringOptionNamed (CompOption *option,
+		      int	 nOption,
+		      char	 *name,
+		      char	 *defaultValue);
+
 
 /* display.c */
 
