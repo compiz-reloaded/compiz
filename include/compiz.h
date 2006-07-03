@@ -386,6 +386,10 @@ compSetBindingOption (CompOption      *option,
 		      CompOptionValue *value);
 
 Bool
+compSetActionOption (CompOption      *option,
+		     CompOptionValue *value);
+
+Bool
 compSetOptionList (CompOption      *option,
 		   CompOptionValue *value);
 
