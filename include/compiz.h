@@ -247,6 +247,7 @@ typedef enum {
     CompOptionTypeString,
     CompOptionTypeColor,
     CompOptionTypeBinding,
+    CompOptionTypeAction,
     CompOptionTypeList
 } CompOptionType;
 
@@ -255,6 +256,13 @@ typedef enum {
     CompBindingTypeKey    = 1 << 0,
     CompBindingTypeButton = 1 << 1
 } CompBindingType;
+
+typedef enum {
+    CompBindingStateInitKey    = 1 << 0,
+    CompBindingStateTermKey    = 1 << 1,
+    CompBindingStateInitButton = 1 << 2,
+    CompBindingStateTermButton = 1 << 3
+} CompBindingState;
 
 typedef struct _CompKeyBinding {
     int		 keycode;
@@ -276,6 +284,26 @@ typedef struct {
 
 typedef union _CompOptionValue CompOptionValue;
 
+typedef struct _CompOption CompOption;
+typedef struct _CompAction CompAction;
+
+typedef Bool (*CompActionCallBackProc) (CompDisplay	 *d,
+					CompAction	 *action,
+					CompBindingState state,
+					CompOption	 *option,
+					int		 nOption);
+
+struct _CompAction {
+    CompActionCallBackProc initiate;
+    CompActionCallBackProc terminate;
+
+    CompBindingType  type;
+    CompBindingState state;
+
+    CompKeyBinding    key;
+    CompButtonBinding button;
+};
+
 typedef struct {
     CompOptionType  type;
     CompOptionValue *value;
@@ -289,6 +317,7 @@ union _CompOptionValue {
     char	   *s;
     unsigned short c[4];
     CompBinding    bind;
+    CompAction     action;
     CompListValue  list;
 };
 
@@ -314,14 +343,14 @@ typedef union {
     CompOptionStringRestriction s;
 } CompOptionRestriction;
 
-typedef struct _CompOption {
+struct _CompOption {
     char		  *name;
     char		  *shortDesc;
     char		  *longDesc;
     CompOptionType	  type;
     CompOptionValue	  value;
     CompOptionRestriction rest;
-} CompOption;
+};
 
 typedef CompOption *(*DisplayOptionsProc) (CompDisplay *display, int *count);
 typedef CompOption *(*ScreenOptionsProc) (CompScreen *screen, int *count);
