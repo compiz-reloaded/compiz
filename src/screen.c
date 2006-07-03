@@ -2798,3 +2798,27 @@ getTopWindow (CompScreen *s)
 
     return None;
 }
+
+void
+makeScreenCurrent (CompScreen *s)
+{
+    if (currentRoot != s->root)
+    {
+	glXMakeCurrent (s->display->display, s->root, s->ctx);
+	currentRoot = s->root;
+
+	s->pendingCommands = TRUE;
+    }
+}
+
+void
+finishScreenDrawing (CompScreen *s)
+{
+    if (s->pendingCommands)
+    {
+	makeScreenCurrent (s);
+	glFinish ();
+
+	s->pendingCommands = FALSE;
+    }
+}

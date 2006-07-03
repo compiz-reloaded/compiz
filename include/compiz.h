@@ -1492,6 +1492,12 @@ disableScreenEdge (CompScreen *s,
 Window
 getTopWindow (CompScreen *s);
 
+void
+makeScreenCurrent (CompScreen *s);
+
+void
+finishScreenDrawing (CompScreen *s);
+
 
 /* window.c */
 
