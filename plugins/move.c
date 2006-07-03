@@ -31,11 +31,11 @@
 
 #include <compiz.h>
 
-#define MOVE_INITIATE_BUTTON_DEFAULT    Button1
-#define MOVE_INITIATE_MODIFIERS_DEFAULT CompAltMask
+#define MOVE_INITIATE_BUTTON_DEFAULT	       Button1
+#define MOVE_INITIATE_BUTTON_MODIFIERS_DEFAULT CompAltMask
 
-#define MOVE_INITIATE_KBD_KEY_DEFAULT       "F7"
-#define MOVE_INITIATE_KBD_MODIFIERS_DEFAULT CompAltMask
+#define MOVE_INITIATE_KEY_DEFAULT	    "F7"
+#define MOVE_INITIATE_KEY_MODIFIERS_DEFAULT CompAltMask
 
 #define MOVE_OPACITY_DEFAULT 100
 #define MOVE_OPACITY_MIN     1
@@ -65,33 +65,32 @@ struct _MoveKeys {
 
 static int displayPrivateIndex;
 
+#define MOVE_DISPLAY_OPTION_INITIATE	      0
+#define MOVE_DISPLAY_OPTION_OPACITY	      1
+#define MOVE_DISPLAY_OPTION_CONSTRAIN_Y	      2
+#define MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED 3
+#define MOVE_DISPLAY_OPTION_NUM		      4
+
 typedef struct _MoveDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
+
+    CompOption opt[MOVE_DISPLAY_OPTION_NUM];
 
     CompWindow *w;
     int	       x;
     int	       y;
     KeyCode    key[NUM_KEYS];
+
+    GLushort moveOpacity;
 } MoveDisplay;
 
-#define MOVE_SCREEN_OPTION_INITIATE	     0
-#define MOVE_SCREEN_OPTION_INITIATE_KBD	     1
-#define MOVE_SCREEN_OPTION_OPACITY	     2
-#define MOVE_SCREEN_OPTION_CONSTRAIN_Y	     3
-#define MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED 4
-#define MOVE_SCREEN_OPTION_NUM		     5
-
 typedef struct _MoveScreen {
-    CompOption opt[MOVE_SCREEN_OPTION_NUM];
-
     PaintWindowProc paintWindow;
 
     int grabIndex;
 
     Cursor moveCursor;
-
-    GLushort moveOpacity;
 
     unsigned int origState;
 
@@ -113,159 +112,95 @@ typedef struct _MoveScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-static CompOption *
-moveGetScreenOptions (CompScreen *screen,
-		      int	 *count)
-{
-    MOVE_SCREEN (screen);
-
-    *count = NUM_OPTIONS (ms);
-    return ms->opt;
-}
-
 static Bool
-moveSetScreenOption (CompScreen      *screen,
-		     char	     *name,
-		     CompOptionValue *value)
+moveInitiate (CompDisplay      *d,
+	      CompAction       *action,
+	      CompBindingState state,
+	      CompOption       *option,
+	      int	       nOption)
 {
-    CompOption *o;
-    int	       index;
+    CompWindow *w;
+    Window     xid;
 
-    MOVE_SCREEN (screen);
+    MOVE_DISPLAY (d);
 
-    o = compFindOption (ms->opt, NUM_OPTIONS (ms), name, &index);
-    if (!o)
-	return FALSE;
+    xid = getIntOptionNamed (option, nOption, "window", 0);
 
-    switch (index) {
-    case MOVE_SCREEN_OPTION_INITIATE:
-    case MOVE_SCREEN_OPTION_INITIATE_KBD:
-	if (addScreenBinding (screen, &value->bind))
+    w = findWindowAtDisplay (d, xid);
+    if (w)
+    {
+	unsigned int mods;
+	int          x, y;
+
+	MOVE_SCREEN (w->screen);
+
+	mods = getIntOptionNamed (option, nOption, "modifiers", 0);
+
+	x = getIntOptionNamed (option, nOption, "x",
+			       w->attrib.x + (w->width / 2));
+	y = getIntOptionNamed (option, nOption, "y",
+			       w->attrib.y + (w->height / 2));
+
+	if (otherScreenGrabExist (w->screen, "move", 0))
+	    return FALSE;
+
+	if (md->w)
+	    return FALSE;
+
+	if (w->type & (CompWindowTypeDesktopMask |
+		       CompWindowTypeDockMask    |
+		       CompWindowTypeFullscreenMask))
+	    return FALSE;
+
+	if (w->attrib.override_redirect)
+	    return FALSE;
+
+	if (state & CompBindingStateInitButton)
+	    action->state |= CompBindingStateTermButton;
+
+	md->x = 0;
+	md->y = 0;
+
+	lastPointerX = x;
+	lastPointerY = y;
+
+	ms->origState = w->state;
+
+	ms->snapBackY = w->serverY;
+	ms->snapOffY  = y;
+
+	if (!ms->grabIndex)
+	    ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor, "move");
+
+	if (ms->grabIndex)
 	{
-	    removeScreenBinding (screen, &o->value.bind);
+	    md->w = w;
 
-	    if (compSetBindingOption (o, value))
-		return TRUE;
+	    (w->screen->windowGrabNotify) (w, x, y, mods,
+					   CompWindowGrabMoveMask |
+					   CompWindowGrabButtonMask);
+
+	    if (state & CompBindingStateInitKey)
+	    {
+		int xRoot, yRoot;
+
+		xRoot = w->attrib.x + (w->width  / 2);
+		yRoot = w->attrib.y + (w->height / 2);
+
+		warpPointer (d, xRoot - pointerX, yRoot - pointerY);
+	    }
 	}
-	break;
-    case MOVE_SCREEN_OPTION_OPACITY:
-	if (compSetIntOption (o, value))
-	{
-	    ms->moveOpacity = (o->value.i * OPAQUE) / 100;
-	    return TRUE;
-	}
-	break;
-    case MOVE_SCREEN_OPTION_CONSTRAIN_Y:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-    default:
-	break;
     }
 
     return FALSE;
 }
 
-static void
-moveScreenInitOptions (MoveScreen *ms,
-		       Display    *display)
-{
-    CompOption *o;
-
-    o = &ms->opt[MOVE_SCREEN_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = "Initiate Window Move";
-    o->longDesc			     = "Start moving window";
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = MOVE_INITIATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = MOVE_INITIATE_BUTTON_DEFAULT;
-
-    o = &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD];
-    o->name			  = "initiate_keyboard";
-    o->shortDesc		  = "Initiate Keyboard Window Move";
-    o->longDesc			  = "Start moving window using keyboard";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = MOVE_INITIATE_KBD_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (MOVE_INITIATE_KBD_KEY_DEFAULT));
-
-    o = &ms->opt[MOVE_SCREEN_OPTION_OPACITY];
-    o->name	  = "opacity";
-    o->shortDesc  = "Opacity";
-    o->longDesc	  = "Opacity level of moving windows";
-    o->type	  = CompOptionTypeInt;
-    o->value.i	  = MOVE_OPACITY_DEFAULT;
-    o->rest.i.min = MOVE_OPACITY_MIN;
-    o->rest.i.max = MOVE_OPACITY_MAX;
-
-    o = &ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y];
-    o->name	  = "constrain_y";
-    o->shortDesc  = "Constrain Y";
-    o->longDesc	  = "Constrain Y coordinate to workspace area";
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = MOVE_CONSTRAIN_Y_DEFAULT;
-
-    o = &ms->opt[MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED];
-    o->name      = "snapoff_maximized";
-    o->shortDesc = "Snapoff maximized windows";
-    o->longDesc  = "Snapoff and auto unmaximized maximized windows "
-	"when dragging";
-    o->type      = CompOptionTypeBool;
-    o->value.b   = MOVE_SNAPOFF_MAXIMIZED_DEFAULT;
-}
-
-static void
-moveInitiate (CompWindow   *w,
-	      int	   x,
-	      int	   y,
-	      unsigned int state)
-{
-    MOVE_DISPLAY (w->screen->display);
-    MOVE_SCREEN (w->screen);
-
-    if (otherScreenGrabExist (w->screen, "move", 0))
-	return;
-
-    if (md->w)
-	return;
-
-    if (w->type & (CompWindowTypeDesktopMask |
-		   CompWindowTypeDockMask    |
-		   CompWindowTypeFullscreenMask))
-	return;
-
-    if (w->attrib.override_redirect)
-	return;
-
-    md->w = w;
-    md->x = 0;
-    md->y = 0;
-
-    lastPointerX = x;
-    lastPointerY = y;
-
-    ms->origState = w->state;
-
-    ms->snapBackY = w->serverY;
-    ms->snapOffY  = y;
-
-    if (!ms->grabIndex)
-	ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor, "move");
-
-    if (ms->grabIndex)
-	(w->screen->windowGrabNotify) (w, x, y, state,
-				       CompWindowGrabMoveMask |
-				       CompWindowGrabButtonMask);
-}
-
-static void
-moveTerminate (CompDisplay *d)
+static Bool
+moveTerminate (CompDisplay	*d,
+	       CompAction	*action,
+	       CompBindingState state,
+	       CompOption	*option,
+	       int		nOption)
 {
     MOVE_DISPLAY (d);
 
@@ -285,6 +220,10 @@ moveTerminate (CompDisplay *d)
 
 	md->w = 0;
     }
+
+    action->state &= ~(CompBindingStateTermKey | CompBindingStateTermButton);
+
+    return FALSE;
 }
 
 static void
@@ -317,7 +256,7 @@ moveHandleMotionEvent (CompScreen *s,
 	    dx = md->x;
 	    dy = md->y;
 
-	    if (ms->opt[MOVE_SCREEN_OPTION_CONSTRAIN_Y].value.b)
+	    if (md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b)
 	    {
 		min = s->workArea.y + w->input.top;
 		max = s->workArea.y + s->workArea.height;
@@ -328,7 +267,7 @@ moveHandleMotionEvent (CompScreen *s,
 		    dy = max - w->attrib.y;
 	    }
 
-	    if (ms->opt[MOVE_SCREEN_OPTION_SNAPOFF_MAXIMIZED].value.b)
+	    if (md->opt[MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED].value.b)
 	    {
 		if (w->state & CompWindowStateMaximizedVertMask)
 		{
@@ -412,19 +351,6 @@ moveHandleMotionEvent (CompScreen *s,
 }
 
 static void
-moveInitiateKeyboard (CompWindow *w)
-{
-    int xRoot, yRoot;
-
-    xRoot = w->attrib.x + (w->width  / 2);
-    yRoot = w->attrib.y + (w->height / 2);
-
-    warpPointer (w->screen->display, xRoot - pointerX, yRoot - pointerY);
-
-    moveInitiate (w, xRoot, yRoot, 0);
-}
-
-static void
 moveHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
@@ -440,32 +366,6 @@ moveHandleEvent (CompDisplay *d,
 	{
 	    MOVE_SCREEN (s);
 
-	    if (eventMatches (d, event, &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
-	    {
-		CompWindow *w;
-
-		w = findTopLevelWindowAtScreen (s, d->activeWindow);
-		if (w)
-		    moveInitiate (w,
-				  pointerX,
-				  pointerY,
-				  event->xkey.state);
-	    }
-	    else if (eventTerminates (d, event,
-				      &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
-	    {
-		moveTerminate (d);
-	    }
-	    else if (eventMatches (d, event,
-				   &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD]))
-	    {
-		CompWindow *w;
-
-		w = findTopLevelWindowAtScreen (s, d->activeWindow);
-		if (w)
-		    moveInitiateKeyboard (w);
-	    }
-
 	    if (ms->grabIndex && event->type == KeyPress)
 	    {
 		int i;
@@ -480,38 +380,6 @@ moveHandleEvent (CompDisplay *d,
 			break;
 		    }
 		}
-	    }
-	}
-	break;
-    case ButtonPress:
-    case ButtonRelease:
-	s = findScreenAtDisplay (d, event->xbutton.root);
-	if (s)
-	{
-	    CompWindow *w;
-
-	    MOVE_SCREEN (s);
-
-	    if (eventMatches (d, event, &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
-	    {
-		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
-		if (w)
-		    moveInitiate (w,
-				  pointerX,
-				  pointerY,
-				  event->xbutton.state);
-	    }
-	    else if (eventTerminates (d, event,
-				      &ms->opt[MOVE_SCREEN_OPTION_INITIATE]))
-	    {
-		moveTerminate (d);
-	    }
-	    else if (eventMatches (d, event,
-				   &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD]))
-	    {
-		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
-		if (w)
-		    moveInitiateKeyboard (w);
 	    }
 	}
 	break;
@@ -537,31 +405,50 @@ moveHandleEvent (CompDisplay *d,
 		w = findWindowAtDisplay (d, event->xclient.window);
 		if (w)
 		{
-		    int	xRoot, yRoot;
+		    CompOption o[4];
+		    int	       xRoot, yRoot;
+		    CompAction *action =
+			&md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action;
 
-		    s = w->screen;
+		    o[0].type    = CompOptionTypeInt;
+		    o[0].name    = "window";
+		    o[0].value.i = event->xclient.window;
 
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
-			moveInitiateKeyboard (w);
+			moveInitiate (d, action,
+				      CompBindingStateInitKey,
+				      o, 1);
 		    }
 		    else
 		    {
-			unsigned int state;
+			unsigned int mods;
 			Window	     root, child;
 			int	     i;
 
 			XQueryPointer (d->display, w->screen->root,
 				       &root, &child, &xRoot, &yRoot,
-				       &i, &i, &state);
+				       &i, &i, &mods);
 
 			/* TODO: not only button 1 */
-			if (state & Button1Mask)
+			if (mods & Button1Mask)
 			{
-			    moveInitiate (w,
-					  event->xclient.data.l[0],
-					  event->xclient.data.l[1],
-					  state);
+			    o[1].type	 = CompOptionTypeInt;
+			    o[1].name	 = "modifiers";
+			    o[1].value.i = mods;
+
+			    o[2].type	 = CompOptionTypeInt;
+			    o[2].name	 = "x";
+			    o[2].value.i = event->xclient.data.l[0];
+
+			    o[3].type	 = CompOptionTypeInt;
+			    o[3].name	 = "y";
+			    o[3].value.i = event->xclient.data.l[1];
+
+			    moveInitiate (d,
+					  action,
+					  CompBindingStateInitButton,
+					  o, 4);
 
 			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
 			}
@@ -572,11 +459,15 @@ moveHandleEvent (CompDisplay *d,
 	break;
     case DestroyNotify:
 	if (md->w && md->w->id == event->xdestroywindow.window)
-	    moveTerminate (d);
+	    moveTerminate (d,
+			   &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action,
+			   0, NULL, 0);
 	break;
     case UnmapNotify:
 	if (md->w && md->w->id == event->xunmap.window)
-	    moveTerminate (d);
+	    moveTerminate (d,
+			   &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action,
+			   0, NULL, 0);
     default:
 	break;
     }
@@ -602,13 +493,13 @@ movePaintWindow (CompWindow		 *w,
     {
 	MOVE_DISPLAY (s->display);
 
-	if (md->w == w && ms->moveOpacity != OPAQUE)
+	if (md->w == w && md->moveOpacity != OPAQUE)
 	{
 	    /* modify opacity of windows that are not active */
 	    sAttrib = *attrib;
 	    attrib  = &sAttrib;
 
-	    sAttrib.opacity = (sAttrib.opacity * ms->moveOpacity) >> 16;
+	    sAttrib.opacity = (sAttrib.opacity * md->moveOpacity) >> 16;
 	}
     }
 
@@ -617,6 +508,104 @@ movePaintWindow (CompWindow		 *w,
     WRAP (ms, s, paintWindow, movePaintWindow);
 
     return status;
+}
+
+static void
+moveDisplayInitOptions (MoveDisplay *md,
+			Display     *display)
+{
+    CompOption *o;
+
+    o = &md->opt[MOVE_DISPLAY_OPTION_INITIATE];
+    o->name			     = "initiate";
+    o->shortDesc		     = "Initiate Window Move";
+    o->longDesc			     = "Start moving window";
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = moveInitiate;
+    o->value.action.terminate	     = moveTerminate;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.state	     = CompBindingStateInitButton;
+    o->value.action.button.modifiers = MOVE_INITIATE_BUTTON_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = MOVE_INITIATE_BUTTON_DEFAULT;
+    o->value.action.type	    |= CompBindingTypeKey;
+    o->value.action.state	    |= CompBindingStateInitKey;
+    o->value.action.key.modifiers    = MOVE_INITIATE_KEY_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode      =
+	XKeysymToKeycode (display, XStringToKeysym (MOVE_INITIATE_KEY_DEFAULT));
+
+    o = &md->opt[MOVE_DISPLAY_OPTION_OPACITY];
+    o->name	  = "opacity";
+    o->shortDesc  = "Opacity";
+    o->longDesc	  = "Opacity level of moving windows";
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = MOVE_OPACITY_DEFAULT;
+    o->rest.i.min = MOVE_OPACITY_MIN;
+    o->rest.i.max = MOVE_OPACITY_MAX;
+
+    o = &md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y];
+    o->name	  = "constrain_y";
+    o->shortDesc  = "Constrain Y";
+    o->longDesc	  = "Constrain Y coordinate to workspace area";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = MOVE_CONSTRAIN_Y_DEFAULT;
+
+    o = &md->opt[MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED];
+    o->name      = "snapoff_maximized";
+    o->shortDesc = "Snapoff maximized windows";
+    o->longDesc  = "Snapoff and auto unmaximized maximized windows "
+	"when dragging";
+    o->type      = CompOptionTypeBool;
+    o->value.b   = MOVE_SNAPOFF_MAXIMIZED_DEFAULT;
+}
+
+static CompOption *
+moveGetDisplayOptions (CompDisplay *display,
+		       int	   *count)
+{
+    MOVE_DISPLAY (display);
+
+    *count = NUM_OPTIONS (md);
+    return md->opt;
+}
+
+static Bool
+moveSetDisplayOption (CompDisplay    *display,
+		      char	     *name,
+		      CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    MOVE_DISPLAY (display);
+
+    o = compFindOption (md->opt, NUM_OPTIONS (md), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case MOVE_DISPLAY_OPTION_INITIATE:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+	break;
+    case MOVE_DISPLAY_OPTION_OPACITY:
+	if (compSetIntOption (o, value))
+	{
+	    md->moveOpacity = (o->value.i * OPAQUE) / 100;
+	    return TRUE;
+	}
+	break;
+    case MOVE_DISPLAY_OPTION_CONSTRAIN_Y:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
+	break;
+    case MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
 }
 
 static Bool
@@ -636,6 +625,10 @@ moveInitDisplay (CompPlugin  *p,
 	free (md);
 	return FALSE;
     }
+
+    md->moveOpacity = (MOVE_OPACITY_DEFAULT * OPAQUE) / 100;
+
+    moveDisplayInitOptions (md, d->display);
 
     md->w = 0;
 
@@ -677,14 +670,9 @@ moveInitScreen (CompPlugin *p,
 
     ms->grabIndex = 0;
 
-    ms->moveOpacity = (MOVE_OPACITY_DEFAULT * OPAQUE) / 100;
-
-    moveScreenInitOptions (ms, s->display->display);
-
     ms->moveCursor = XCreateFontCursor (s->display->display, XC_plus);
 
-    addScreenBinding (s, &ms->opt[MOVE_SCREEN_OPTION_INITIATE].value.bind);
-    addScreenBinding (s, &ms->opt[MOVE_SCREEN_OPTION_INITIATE_KBD].value.bind);
+    addScreenAction (s, &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action);
 
     WRAP (ms, s, paintWindow, movePaintWindow);
 
@@ -733,10 +721,10 @@ CompPluginVTable moveVTable = {
     moveFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    moveGetScreenOptions,
-    moveSetScreenOption,
+    moveGetDisplayOptions,
+    moveSetDisplayOption,
+    0, /* GetScreenOptions */
+    0, /* SetScreenOption */
     NULL,
     0
 };
