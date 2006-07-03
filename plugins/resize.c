@@ -37,10 +37,10 @@
 #define ResizeRightMask (1L << 3)
 
 #define RESIZE_INITIATE_BUTTON_DEFAULT    Button2
-#define RESIZE_INITIATE_MODIFIERS_DEFAULT CompAltMask
+#define RESIZE_INITIATE_BUTTON_MODIFIERS_DEFAULT CompAltMask
 
-#define RESIZE_INITIATE_KBD_KEY_DEFAULT       "F8"
-#define RESIZE_INITIATE_KBD_MODIFIERS_DEFAULT CompAltMask
+#define RESIZE_INITIATE_KEY_DEFAULT           "F8"
+#define RESIZE_INITIATE_KEY_MODIFIERS_DEFAULT CompAltMask
 
 struct _ResizeKeys {
     char *name;
@@ -58,9 +58,14 @@ struct _ResizeKeys {
 #define MIN_KEY_WIDTH_INC  24
 #define MIN_KEY_HEIGHT_INC 24
 
+#define RESIZE_DISPLAY_OPTION_INITIATE 0
+#define RESIZE_DISPLAY_OPTION_NUM      1
+
 static int displayPrivateIndex;
 
 typedef struct _ResizeDisplay {
+    CompOption opt[RESIZE_DISPLAY_OPTION_NUM];
+
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
@@ -72,13 +77,7 @@ typedef struct _ResizeDisplay {
     KeyCode      key[NUM_KEYS];
 } ResizeDisplay;
 
-#define RESIZE_SCREEN_OPTION_INITIATE     0
-#define RESIZE_SCREEN_OPTION_INITIATE_KBD 1
-#define RESIZE_SCREEN_OPTION_NUM          2
-
 typedef struct _ResizeScreen {
-    CompOption opt[RESIZE_SCREEN_OPTION_NUM];
-
     int grabIndex;
 
     Cursor leftCursor;
@@ -103,108 +102,71 @@ typedef struct _ResizeScreen {
 #define RESIZE_SCREEN(s)						      \
     ResizeScreen *rs = GET_RESIZE_SCREEN (s, GET_RESIZE_DISPLAY (s->display))
 
-#define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
-
-static CompOption *
-resizeGetScreenOptions (CompScreen *screen,
-			int	   *count)
-{
-    RESIZE_SCREEN (screen);
-
-    *count = NUM_OPTIONS (rs);
-    return rs->opt;
-}
+#define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static Bool
-resizeSetScreenOption (CompScreen      *screen,
-		       char	       *name,
-		       CompOptionValue *value)
-{
-    CompOption *o;
-    int	       index;
-
-    RESIZE_SCREEN (screen);
-
-    o = compFindOption (rs->opt, NUM_OPTIONS (rs), name, &index);
-    if (!o)
-	return FALSE;
-
-    switch (index) {
-    case RESIZE_SCREEN_OPTION_INITIATE:
-    case RESIZE_SCREEN_OPTION_INITIATE_KBD:
-	if (addScreenBinding (screen, &value->bind))
-	{
-	    removeScreenBinding (screen, &o->value.bind);
-
-	    if (compSetBindingOption (o, value))
-		return TRUE;
-	}
-	break;
-    default:
-	break;
-    }
-
-    return FALSE;
-}
-
-static void
-resizeScreenInitOptions (ResizeScreen *rs,
-			 Display      *display)
-{
-    CompOption *o;
-
-    o = &rs->opt[RESIZE_SCREEN_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = "Initiate Window Resize";
-    o->longDesc			     = "Start resizing window";
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = RESIZE_INITIATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = RESIZE_INITIATE_BUTTON_DEFAULT;
-
-    o = &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD];
-    o->name			  = "initiate_keyboard";
-    o->shortDesc		  = "Initiate Keyboard Window Resize";
-    o->longDesc			  = "Start resizing window using keyboard";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = RESIZE_INITIATE_KBD_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (RESIZE_INITIATE_KBD_KEY_DEFAULT));
-}
-
-static void
-resizeInitiate (CompScreen   *s,
-		Window	     window,
-		int	     x,
-		int	     y,
-		unsigned int state,
-		unsigned int mask,
-		int	     releaseButton)
+resizeInitiate (CompDisplay      *d,
+		CompAction       *action,
+		CompBindingState state,
+		CompOption       *option,
+		int	         nOption)
 {
     CompWindow *w;
+    Window     xid;
 
-    RESIZE_DISPLAY (s->display);
+    RESIZE_DISPLAY (d);
 
-    if (otherScreenGrabExist (s, "resize", 0))
-	return;
+    xid = getIntOptionNamed (option, nOption, "window", 0);
 
-    if (rd->w)
-	return;
-
-    w = findTopLevelWindowAtScreen (s, window);
+    w = findWindowAtDisplay (d, xid);
     if (w)
     {
-	RESIZE_SCREEN (s);
+	unsigned int mods;
+	unsigned int mask;
+	int          x, y;
+	int	     button;
+
+	RESIZE_SCREEN (w->screen);
+
+	mods = getIntOptionNamed (option, nOption, "modifiers", 0);
+
+	x = getIntOptionNamed (option, nOption, "x",
+			       w->attrib.x + (w->width / 2));
+	y = getIntOptionNamed (option, nOption, "y",
+			       w->attrib.y + (w->height / 2));
+
+	button = getIntOptionNamed (option, nOption, "button", -1);
+
+	mask = getIntOptionNamed (option, nOption, "direction", 0);
+
+	/* Initiate the resize in the direction suggested by the quarter
+	 * of the window the mouse is in, eg drag in top left will resize
+	 * up and to the left. */
+	if (!mask)
+	{
+	    mask |= ((x - w->attrib.x) < (w->width / 2)) ?
+		ResizeLeftMask : ResizeRightMask;
+
+	    mask |= ((y - w->attrib.y) < (w->height / 2)) ?
+		ResizeUpMask : ResizeDownMask;
+	}
+
+	if (otherScreenGrabExist (w->screen, "resize", 0))
+	    return FALSE;
+
+	if (rd->w)
+	    return FALSE;
 
 	if (w->type & (CompWindowTypeDesktopMask |
 		       CompWindowTypeDockMask	 |
 		       CompWindowTypeFullscreenMask))
-	    return;
+	    return FALSE;
 
 	if (w->attrib.override_redirect)
-	    return;
+	    return FALSE;
+
+	if (state & CompBindingStateInitButton)
+	    action->state |= CompBindingStateTermButton;
 
 	if (w->shaded)
 	    mask &= ~(ResizeUpMask | ResizeDownMask);
@@ -248,22 +210,38 @@ resizeInitiate (CompScreen   *s,
 		cursor = rs->downCursor;
 	    }
 
-	    rs->grabIndex = pushScreenGrab (s, cursor, "resize");
+	    rs->grabIndex = pushScreenGrab (w->screen, cursor, "resize");
 	}
 
 	if (rs->grabIndex)
 	{
-	    rd->releaseButton = releaseButton;
+	    rd->releaseButton = button;
 
-	    (s->windowGrabNotify) (w, x, y, state,
-				   CompWindowGrabResizeMask |
-				   CompWindowGrabButtonMask);
+	    (w->screen->windowGrabNotify) (w, x, y, state,
+					   CompWindowGrabResizeMask |
+					   CompWindowGrabButtonMask);
+
+	    if (state & CompBindingStateInitKey)
+	    {
+		int xRoot, yRoot;
+
+		xRoot = w->attrib.x + (w->width  / 2);
+		yRoot = w->attrib.y + (w->height / 2);
+
+		warpPointer (d, xRoot - pointerX, yRoot - pointerY);
+	    }
 	}
     }
+
+    return FALSE;
 }
 
-static void
-resizeTerminate (CompDisplay *d)
+static Bool
+resizeTerminate (CompDisplay	  *d,
+		 CompAction	  *action,
+		 CompBindingState state,
+		 CompOption	  *option,
+		 int		  nOption)
 {
     RESIZE_DISPLAY (d);
 
@@ -271,48 +249,23 @@ resizeTerminate (CompDisplay *d)
     {
 	RESIZE_SCREEN (rd->w->screen);
 
+	(rd->w->screen->windowUngrabNotify) (rd->w);
+
 	if (rs->grabIndex)
 	{
 	    removeScreenGrab (rd->w->screen, rs->grabIndex, NULL);
 	    rs->grabIndex = 0;
 	}
 
-	(rd->w->screen->windowUngrabNotify) (rd->w);
-
 	syncWindowPosition (rd->w);
 
 	rd->w		  = 0;
 	rd->releaseButton = 0;
     }
-}
 
-/* Initiate the resize in the direction suggested by the quarter
- * of the window the mouse is in, eg drag in top left will resize
- * up and to the left. */
-static void
-interiorResizeInitiate (CompScreen   *s,
-			Window	     window,
-			int	     x,
-			int	     y,
-			unsigned int state)
-{
-    CompWindow   *w;
-    unsigned int mask;
+    action->state &= ~(CompBindingStateTermKey | CompBindingStateTermButton);
 
-    w = findTopLevelWindowAtScreen (s, window);
-    if (!w)
-	return;
-
-    x -= w->attrib.x;
-    y -= w->attrib.y;
-
-    mask  = (x < (w->width  >> 1)) ? ResizeLeftMask : ResizeRightMask;
-    mask |= (y < (w->height >> 1)) ? ResizeUpMask   : ResizeDownMask;
-
-    x += w->attrib.x;
-    y += w->attrib.y;
-
-    resizeInitiate (s, window, x, y, state, mask, 0);
+    return FALSE;
 }
 
 static void
@@ -454,22 +407,6 @@ resizeHandleMotionEvent (CompScreen *s,
 }
 
 static void
-resizeInitiateKeyboard (CompWindow *w)
-{
-    int xRoot, yRoot;
-
-    xRoot = w->attrib.x + (w->width / 2);
-    yRoot = w->attrib.y + (w->height / 2);
-
-    warpPointer (w->screen->display, xRoot - pointerX, yRoot - pointerY);
-
-    resizeInitiate (w->screen, w->id,
-		    xRoot, yRoot, 0,
-		    ResizeDownMask | ResizeRightMask,
-		    0);
-}
-
-static void
 resizeHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
@@ -484,30 +421,6 @@ resizeHandleEvent (CompDisplay *d,
 	if (s)
 	{
 	    RESIZE_SCREEN (s);
-
-	    if (eventMatches (d, event,
-			      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
-	    {
-		interiorResizeInitiate (s,
-					event->xkey.window,
-					pointerX,
-					pointerY,
-					event->xkey.state);
-	    }
-	    else if (eventTerminates (d, event,
-				      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
-	    {
-		resizeTerminate (d);
-	    }
-	    else if (eventMatches (d, event,
-				   &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD]))
-	    {
-		CompWindow *w;
-
-		w = findTopLevelWindowAtScreen (s, d->activeWindow);
-		if (w)
-		    resizeInitiateKeyboard (w);
-	    }
 
 	    if (rs->grabIndex && rd->w && event->type == KeyPress)
 	    {
@@ -535,43 +448,24 @@ resizeHandleEvent (CompDisplay *d,
 	    }
 	}
 	break;
-    case ButtonPress:
-    case ButtonRelease:
-	s = findScreenAtDisplay (d, event->xbutton.root);
-	if (s)
+    case ButtonRelease: {
+	CompAction *action =
+	    &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action;
+
+	if (action->state & CompBindingStateTermButton)
 	{
-	    RESIZE_SCREEN (s);
-
-	    if (eventMatches (d, event,
-			      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
-	    {
-		interiorResizeInitiate (s,
-					event->xbutton.window,
-					event->xbutton.x_root,
-					event->xbutton.y_root,
-					event->xbutton.state);
-	    }
-	    else if (eventTerminates (d, event,
-				      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE]))
-	    {
-		resizeTerminate (d);
-	    }
-	    else if (eventMatches (d, event,
-				   &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD]))
-	    {
-		CompWindow *w;
-
-		w = findTopLevelWindowAtScreen (s, event->xbutton.window);
-		if (w)
-		    resizeInitiateKeyboard (w);
-	    }
-
 	    if (event->type == ButtonRelease &&
 		(rd->releaseButton     == -1 ||
 		 event->xbutton.button == rd->releaseButton))
-		resizeTerminate (d);
+	    {
+		resizeTerminate (d,
+				 action,
+				 CompBindingStateTermButton,
+				 NULL,
+				 0);
+	    }
 	}
-	break;
+    } break;
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
@@ -594,9 +488,23 @@ resizeHandleEvent (CompDisplay *d,
 		w = findWindowAtDisplay (d, event->xclient.window);
 		if (w)
 		{
+		    CompOption o[6];
+		    CompAction *action =
+			&rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action;
+
+		    o[0].type    = CompOptionTypeInt;
+		    o[0].name    = "window";
+		    o[0].value.i = event->xclient.window;
+
 		    if (event->xclient.data.l[2] == WmMoveResizeSizeKeyboard)
 		    {
-			resizeInitiateKeyboard (w);
+			o[1].type    = CompOptionTypeInt;
+			o[1].name    = "button";
+			o[1].value.i = 0;
+
+			resizeInitiate (d, action,
+					CompBindingStateInitKey,
+					o, 2);
 		    }
 		    else
 		    {
@@ -610,27 +518,44 @@ resizeHandleEvent (CompDisplay *d,
 			    ResizeDownMask | ResizeLeftMask,
 			    ResizeLeftMask,
 			};
-			unsigned int	    state;
-			Window		    root, child;
-			int		    xRoot, yRoot, i;
+			unsigned int mods;
+			Window	     root, child;
+			int	     xRoot, yRoot, i;
 
 			XQueryPointer (d->display, w->screen->root,
 				       &root, &child, &xRoot, &yRoot,
-				       &i, &i, &state);
+				       &i, &i, &mods);
 
 			/* TODO: not only button 1 */
-			if (state & Button1Mask)
+			if (mods & Button1Mask)
 			{
-			    resizeInitiate (w->screen, event->xclient.window,
-					    event->xclient.data.l[0],
-					    event->xclient.data.l[1],
-					    state,
-					    mask[event->xclient.data.l[2]],
-					    event->xclient.data.l[3] ?
-					    event->xclient.data.l[3] : -1);
+			    o[1].type	 = CompOptionTypeInt;
+			    o[1].name	 = "modifiers";
+			    o[1].value.i = mods;
 
-			    resizeHandleMotionEvent (w->screen,
-						     xRoot, yRoot);
+			    o[2].type	 = CompOptionTypeInt;
+			    o[2].name	 = "x";
+			    o[2].value.i = event->xclient.data.l[0];
+
+			    o[3].type	 = CompOptionTypeInt;
+			    o[3].name	 = "y";
+			    o[3].value.i = event->xclient.data.l[1];
+
+			    o[4].type	 = CompOptionTypeInt;
+			    o[4].name	 = "direction";
+			    o[4].value.i = mask[event->xclient.data.l[2]];
+
+			    o[5].type	 = CompOptionTypeInt;
+			    o[5].name	 = "button";
+			    o[5].value.i = event->xclient.data.l[3] ?
+				event->xclient.data.l[3] : -1;
+
+			    resizeInitiate (d,
+					    action,
+					    CompBindingStateInitButton,
+					    o, 6);
+
+			    resizeHandleMotionEvent (w->screen, xRoot, yRoot);
 			}
 		    }
 		}
@@ -639,11 +564,22 @@ resizeHandleEvent (CompDisplay *d,
 	break;
     case DestroyNotify:
 	if (rd->w && rd->w->id == event->xdestroywindow.window)
-	    resizeTerminate (d);
+	{
+	    CompAction *action =
+		&rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action;
+
+	    resizeTerminate (d, action, 0, NULL, 0);
+	}
 	break;
     case UnmapNotify:
 	if (rd->w && rd->w->id == event->xunmap.window)
-	    resizeTerminate (d);
+	{
+	    CompAction *action =
+		&rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action;
+
+	    resizeTerminate (d, action, 0, NULL, 0);
+	}
+	break;
     default:
 	if (event->type == d->syncEvent + XSyncAlarmNotify)
 	{
@@ -665,6 +601,66 @@ resizeHandleEvent (CompDisplay *d,
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 }
 
+static CompOption *
+resizeGetDisplayOptions (CompDisplay *display,
+			 int	     *count)
+{
+    RESIZE_DISPLAY (display);
+
+    *count = NUM_OPTIONS (rd);
+    return rd->opt;
+}
+
+static Bool
+resizeSetDisplayOption (CompDisplay     *display,
+			char	        *name,
+			CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    RESIZE_DISPLAY (display);
+
+    o = compFindOption (rd->opt, NUM_OPTIONS (rd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case RESIZE_DISPLAY_OPTION_INITIATE:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+resizeDisplayInitOptions (ResizeDisplay *rd,
+			  Display       *display)
+{
+    CompOption *o;
+
+    o = &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE];
+    o->name			     = "initiate";
+    o->shortDesc		     = "Initiate Window Resize";
+    o->longDesc			     = "Start resizing window";
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = resizeInitiate;
+    o->value.action.terminate	     = resizeTerminate;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.state	     = CompBindingStateInitButton;
+    o->value.action.button.modifiers = RESIZE_INITIATE_BUTTON_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = RESIZE_INITIATE_BUTTON_DEFAULT;
+    o->value.action.type	    |= CompBindingTypeKey;
+    o->value.action.state	    |= CompBindingStateInitKey;
+    o->value.action.key.modifiers    = RESIZE_INITIATE_KEY_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode      =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (RESIZE_INITIATE_KEY_DEFAULT));
+}
+
 static Bool
 resizeInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
@@ -682,6 +678,8 @@ resizeInitDisplay (CompPlugin  *p,
 	free (rd);
 	return FALSE;
     }
+
+    resizeDisplayInitOptions (rd, d->display);
 
     rd->w = 0;
 
@@ -725,8 +723,6 @@ resizeInitScreen (CompPlugin *p,
 
     rs->grabIndex = 0;
 
-    resizeScreenInitOptions (rs, s->display->display);
-
     rs->leftCursor	= XCreateFontCursor (s->display->display, XC_left_side);
     rs->rightCursor	= XCreateFontCursor (s->display->display, XC_right_side);
     rs->upCursor	= XCreateFontCursor (s->display->display,
@@ -742,9 +738,7 @@ resizeInitScreen (CompPlugin *p,
     rs->downRightCursor = XCreateFontCursor (s->display->display,
 					     XC_bottom_right_corner);
 
-    addScreenBinding (s, &rs->opt[RESIZE_SCREEN_OPTION_INITIATE].value.bind);
-    addScreenBinding (s,
-		      &rs->opt[RESIZE_SCREEN_OPTION_INITIATE_KBD].value.bind);
+    addScreenAction (s, &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action);
 
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
@@ -789,10 +783,10 @@ CompPluginVTable resizeVTable = {
     resizeFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    resizeGetScreenOptions,
-    resizeSetScreenOption,
+    resizeGetDisplayOptions,
+    resizeSetDisplayOption,
+    0, /* GetScreenOptions */
+    0, /* SetScreenOption */
     NULL,
     0
 };
