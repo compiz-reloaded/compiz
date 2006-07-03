@@ -251,9 +251,9 @@ typedef enum {
 } CompOptionType;
 
 typedef enum {
-    CompBindingTypeNone,
-    CompBindingTypeKey,
-    CompBindingTypeButton
+    CompBindingTypeNone   = 0,
+    CompBindingTypeKey    = 1 << 0,
+    CompBindingTypeButton = 1 << 1
 } CompBindingType;
 
 typedef struct _CompKeyBinding {
