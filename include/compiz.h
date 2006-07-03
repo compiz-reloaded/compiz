@@ -1466,6 +1466,14 @@ void
 removeScreenBinding (CompScreen  *s,
 		     CompBinding *binding);
 
+Bool
+addScreenAction (CompScreen *s,
+		 CompAction *action);
+
+void
+removeScreenAction (CompScreen *s,
+		    CompAction *action);
+
 void
 updatePassiveGrabs (CompScreen *s);
 

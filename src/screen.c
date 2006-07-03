@@ -2140,6 +2140,41 @@ removeScreenBinding (CompScreen  *s,
 	removePassiveButtonGrab (s, &binding->u.button);
 }
 
+Bool
+addScreenAction (CompScreen *s,
+		 CompAction *action)
+{
+    if (action->type & CompBindingTypeKey)
+    {
+	if (!addPassiveKeyGrab (s, &action->key))
+	    return FALSE;
+    }
+
+    if (action->type & CompBindingTypeButton)
+    {
+	if (!addPassiveButtonGrab (s, &action->button))
+	{
+	    if (action->type & CompBindingTypeKey)
+		removePassiveKeyGrab (s, &action->key);
+
+	    return FALSE;
+	}
+    }
+
+    return TRUE;
+}
+
+void
+removeScreenAction (CompScreen *s,
+		    CompAction *action)
+{
+    if (action->type & CompBindingTypeKey)
+	removePassiveKeyGrab (s, &action->key);
+
+    if (action->type & CompBindingTypeButton)
+	removePassiveButtonGrab (s, &action->button);
+}
+
 void
 updatePassiveGrabs (CompScreen *s)
 {
