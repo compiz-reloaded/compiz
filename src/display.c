@@ -1735,10 +1735,17 @@ addScreenBindings (CompDisplay *d, CompScreen *s)
 }
 
 void
-addScreenToDisplay (CompDisplay *display, CompScreen *s)
+addScreenToDisplay (CompDisplay *display,
+		    CompScreen  *s)
 {
-    s->next = display->screens;
-    display->screens = s;
+    CompScreen *prev;
+
+    for (prev = display->screens; prev && prev->next; prev = prev->next);
+
+    if (prev)
+	prev->next = s;
+    else
+	display->screens = s;
 
     addScreenBindings (display, s);
 }
