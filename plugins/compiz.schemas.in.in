@@ -1460,8 +1460,22 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/move/screen0/options/initiate</key>
-            <applyto>/apps/compiz/plugins/move/screen0/options/initiate</applyto>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/initiate_key</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/initiate_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Alt&gt;F7</default>
+            <locale name="C">
+                <short>Initiate Window Move</short>
+                <long>
+                    Start moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/initiate_button</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/initiate_button</applyto>
             <owner>compiz</owner>
             <type>string</type>
             <default>&lt;Alt&gt;Button1</default>
@@ -1474,22 +1488,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/move/screen0/options/initiate_keyboard</key>
-            <applyto>/apps/compiz/plugins/move/screen0/options/initiate_keyboard</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Alt&gt;F7</default>
-            <locale name="C">
-                <short>Initiate Keyboard Window Move</short>
-                <long>
-                    Start moving window using keyboard
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/move/screen0/options/opacity</key>
-            <applyto>/apps/compiz/plugins/move/screen0/options/opacity</applyto>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/opacity</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/opacity</applyto>
             <owner>compiz</owner>
             <type>int</type>
             <default>100</default>
@@ -1502,8 +1502,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/move/screen0/options/constrain_y</key>
-            <applyto>/apps/compiz/plugins/move/screen0/options/constrain_y</applyto>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/constrain_y</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/constrain_y</applyto>
             <owner>compiz</owner>
             <type>bool</type>
             <default>true</default>
@@ -1516,8 +1516,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/move/screen0/options/snapoff_maximized</key>
-            <applyto>/apps/compiz/plugins/move/screen0/options/snapoff_maximized</applyto>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/snapoff_maximized</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/snapoff_maximized</applyto>
             <owner>compiz</owner>
             <type>bool</type>
             <default>true</default>
@@ -1636,11 +1636,11 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/resize/screen0/options/initiate</key>
-            <applyto>/apps/compiz/plugins/resize/screen0/options/initiate</applyto>
+            <key>/schemas/apps/compiz/plugins/resize/allscreens/options/initiate_key</key>
+            <applyto>/apps/compiz/plugins/resize/allscreens/options/initiate_key</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Alt&gt;Button2</default>
+            <default>&lt;Alt&gt;F8</default>
             <locale name="C">
                 <short>Initiate Window Resize</short>
                 <long>
@@ -1650,15 +1650,15 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/resize/screen0/options/initiate_keyboard</key>
-            <applyto>/apps/compiz/plugins/resize/screen0/options/initiate_keyboard</applyto>
+            <key>/schemas/apps/compiz/plugins/resize/allscreens/options/initiate_button</key>
+            <applyto>/apps/compiz/plugins/resize/allscreens/options/initiate_button</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>&lt;Alt&gt;F8</default>
+            <default>&lt;Alt&gt;Button2</default>
             <locale name="C">
-                <short>Initiate Keyboard Window Resize</short>
+                <short>Initiate Window Resize</short>
                 <long>
-                    Start resizing window using keyboard
+                    Start resizing window
                 </long>
             </locale>
         </schema>

@@ -105,6 +105,8 @@ gconfTypeToString (CompOptionType type)
 	return "float";
     case CompOptionTypeString:
 	return "string";
+    case CompOptionTypeAction:
+	return "string";
     case CompOptionTypeList:
 	return "list";
     default:
@@ -122,11 +124,6 @@ gconfValueToString (CompDisplay	    *d,
     char *tmp, *escaped;
 
     switch (type) {
-    case CompOptionTypeBinding:
-	tmp = gconfBindingToString (d, value);
-	escaped = g_markup_escape_text (tmp, -1);
-	g_free (tmp);
-	return escaped;
     case CompOptionTypeBool:
 	return g_strdup (value->b ? "true" : "false");
     case CompOptionTypeColor:
@@ -141,6 +138,17 @@ gconfValueToString (CompDisplay	    *d,
 	return g_strdup_printf ("%f", value->f);
     case CompOptionTypeString:
 	escaped = g_markup_escape_text (value->s, -1);
+	return escaped;
+    case CompOptionTypeBinding:
+	if (value->bind.type == CompBindingTypeKey)
+	    tmp = gconfKeyBindingToString (d, &value->bind.u.key);
+	else if (value->bind.type == CompBindingTypeButton)
+	    tmp = gconfButtonBindingToString (d, &value->bind.u.button);
+	else
+	    tmp = g_strdup ("Disabled");
+
+	escaped = g_markup_escape_text (tmp, -1);
+	g_free (tmp);
 	return escaped;
     case CompOptionTypeList: {
 	char *tmp2, *tmp3;
@@ -171,6 +179,39 @@ gconfValueToString (CompDisplay	    *d,
     }
 
     return g_strdup ("unknown");
+}
+
+static char *
+gconfActionValueToString (CompDisplay	  *d,
+			  CompBindingType type,
+			  CompOptionValue *value)
+{
+    char *tmp, *escaped;
+
+    if (type == CompBindingTypeKey)
+    {
+	if (value->action.type & CompBindingTypeKey)
+	{
+	    tmp = gconfKeyBindingToString (d, &value->action.key);
+	    escaped = g_markup_escape_text (tmp, -1);
+	    g_free (tmp);
+	}
+	else
+	    escaped = g_strdup ("Disabled");
+    }
+    else
+    {
+	if (value->action.type & CompBindingTypeButton)
+	{
+	    tmp = gconfButtonBindingToString (d, &value->action.button);
+	    escaped = g_markup_escape_text (tmp, -1);
+	    g_free (tmp);
+	}
+	else
+	    escaped = g_strdup ("Disabled");
+    }
+
+    return escaped;
 }
 
 static char *
@@ -215,6 +256,7 @@ gconfDescForOption (CompOption *o)
 static void
 gconfDumpToSchema (CompDisplay *d,
 		   CompOption  *o,
+		   char	       *name,
 		   char	       *plugin,
 		   char	       *screen)
 {
@@ -224,30 +266,48 @@ gconfDumpToSchema (CompDisplay *d,
     if (plugin && screen)
     {
 	gconfPrintf (3, "<key>/schemas%s/plugins/%s/%s/options/%s</key>\n",
-		     APP_NAME, plugin, screen, o->name);
+		     APP_NAME, plugin, screen, name);
 	gconfPrintf (3, "<applyto>%s/plugins/%s/%s/options/%s</applyto>\n",
-		     APP_NAME, plugin, screen, o->name);
+		     APP_NAME, plugin, screen, name);
     }
     else if (plugin)
     {
 	gconfPrintf (3, "<key>/schemas%s/plugins/%s/%s</key>\n",
-		     APP_NAME, plugin, o->name);
+		     APP_NAME, plugin, name);
 	gconfPrintf (3, "<applyto>%s/plugins/%s/%s</applyto>\n",
-		     APP_NAME, plugin, o->name);
+		     APP_NAME, plugin, name);
     }
     else
     {
 	gconfPrintf (3, "<key>/schemas%s/general/%s/options/%s</key>\n",
-		     APP_NAME, screen, o->name);
+		     APP_NAME, screen, name);
 	gconfPrintf (3, "<applyto>%s/general/%s/options/%s</applyto>\n",
-		     APP_NAME, screen, o->name);
+		     APP_NAME, screen, name);
     }
     gconfPrintf (3, "<owner>compiz</owner>\n");
     gconfPrintf (3, "<type>%s</type>\n", gconfTypeToString (o->type));
     if (o->type == CompOptionTypeList)
+    {
 	gconfPrintf (3, "<list_type>%s</list_type>\n",
 		     gconfTypeToString (o->value.list.type));
-    value = gconfValueToString (d, o->type, &o->value);
+	value = gconfValueToString (d, o->type, &o->value);
+    }
+    else if (o->type == CompOptionTypeAction)
+    {
+	gint len;
+
+	len = strlen (name);
+	if (strcmp (name + len - 3, "key") == 0)
+	    value = gconfActionValueToString (d, CompBindingTypeKey, &o->value);
+	else
+	    value = gconfActionValueToString (d, CompBindingTypeButton,
+					      &o->value);
+    }
+    else
+    {
+	value = gconfValueToString (d, o->type, &o->value);
+    }
+
     gconfPrintf (3, "<default>%s</default>\n", value);
     g_free (value);
     gconfPrintf (3, "<locale name=\"C\">\n");
@@ -281,12 +341,51 @@ dumpGeneralOptions (CompDisplay *d)
 		     sizeof (CompOptionValue));
 	    option->value.list.value[0].s = strdup ("gconf");
 	}
-	gconfDumpToSchema (d, option++, NULL, "allscreens");
+
+	if (option->type == CompOptionTypeAction)
+	{
+	    gchar *name1, *name2;
+
+	    name1 = g_strdup_printf ("%s%s", option->name, "_key");
+	    name2 = g_strdup_printf ("%s%s", option->name, "_button");
+
+	    gconfDumpToSchema (d, option, name1, NULL, "allscreens");
+	    gconfDumpToSchema (d, option, name2, NULL, "allscreens");
+
+	    g_free (name1);
+	    g_free (name2);
+	}
+	else
+	{
+	    gconfDumpToSchema (d, option, option->name, NULL, "allscreens");
+	}
+
+	option++;
     }
 
     option = compGetScreenOptions (&d->screens[0], &nOption);
     while (nOption--)
-	gconfDumpToSchema (d, option++, NULL, "screen0");
+    {
+	if (option->type == CompOptionTypeAction)
+	{
+	    gchar *name1, *name2;
+
+	    name1 = g_strdup_printf ("%s%s", option->name, "_key");
+	    name2 = g_strdup_printf ("%s%s", option->name, "_button");
+
+	    gconfDumpToSchema (d, option, name1, NULL, "screen0");
+	    gconfDumpToSchema (d, option, name2, NULL, "screen0");
+
+	    g_free (name1);
+	    g_free (name2);
+	}
+	else
+	{
+	    gconfDumpToSchema (d, option, option->name, NULL, "screen0");
+	}
+
+	option++;
+    }
 }
 
 static void
@@ -307,7 +406,7 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
     info.longDesc  = p->vTable->longDesc;
     info.type      = CompOptionTypeString;
     info.value.s   = "";
-    gconfDumpToSchema (d, &info, p->vTable->name, NULL);
+    gconfDumpToSchema (d, &info, info.name, p->vTable->name, NULL);
 
     reqs   = g_array_new (FALSE, FALSE, sizeof (CompOptionValue));
     before = g_array_new (FALSE, FALSE, sizeof (CompOptionValue));
@@ -335,7 +434,7 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
     bopt.value.list.type   = CompOptionTypeString;
     bopt.value.list.nValue = before->len;
     bopt.value.list.value  = (CompOptionValue *)before->data;
-    gconfDumpToSchema (d, &bopt, p->vTable->name, NULL);
+    gconfDumpToSchema (d, &bopt, bopt.name, p->vTable->name, NULL);
 
     memset (&ropt, 0, sizeof (ropt));
     ropt.name		   = "requires";
@@ -345,7 +444,7 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
     ropt.value.list.type   = CompOptionTypeString;
     ropt.value.list.nValue = reqs->len;
     ropt.value.list.value  = (CompOptionValue *)reqs->data;
-    gconfDumpToSchema (d, &ropt, p->vTable->name, NULL);
+    gconfDumpToSchema (d, &ropt, ropt.name, p->vTable->name, NULL);
 
     g_array_free (before, TRUE);
     g_array_free (reqs, TRUE);
@@ -354,14 +453,60 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
     {
 	option = p->vTable->getDisplayOptions (d, &nOption);
 	while (nOption--)
-	    gconfDumpToSchema (d, option++, p->vTable->name, "allscreens");
+	{
+	    if (option->type == CompOptionTypeAction)
+	    {
+		gchar *name1, *name2;
+
+		name1 = g_strdup_printf ("%s%s", option->name, "_key");
+		name2 = g_strdup_printf ("%s%s", option->name, "_button");
+
+		gconfDumpToSchema (d, option, name1, p->vTable->name,
+				   "allscreens");
+		gconfDumpToSchema (d, option, name2, p->vTable->name,
+				   "allscreens");
+
+		g_free (name1);
+		g_free (name2);
+	    }
+	    else
+	    {
+		gconfDumpToSchema (d, option, option->name, p->vTable->name,
+				   "allscreens");
+	    }
+
+	    option++;
+	}
     }
 
     if (p->vTable->getScreenOptions)
     {
 	option = p->vTable->getScreenOptions (&d->screens[0], &nOption);
 	while (nOption--)
-	    gconfDumpToSchema (d, option++, p->vTable->name, "screen0");
+	{
+	    if (option->type == CompOptionTypeAction)
+	    {
+		gchar *name1, *name2;
+
+		name1 = g_strdup_printf ("%s%s", option->name, "_key");
+		name2 = g_strdup_printf ("%s%s", option->name, "_button");
+
+		gconfDumpToSchema (d, option, name1, p->vTable->name,
+				   "screen0");
+		gconfDumpToSchema (d, option, name2, p->vTable->name,
+				   "screen0");
+
+		g_free (name1);
+		g_free (name2);
+	    }
+	    else
+	    {
+		gconfDumpToSchema (d, option, option->name, p->vTable->name,
+				   "screen0");
+	    }
+
+	    option++;
+	}
     }
 }
 

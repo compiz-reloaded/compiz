@@ -53,21 +53,12 @@ struct _GConfModifier {
 
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _GConfModifier))
 
-char *
-gconfBindingToString (CompDisplay     *d,
-		      CompOptionValue *value)
+static GString *
+gconfModifiersToString (CompDisplay *d,
+			guint	    modMask)
 {
-    guint modMask;
     GString *binding;
-    gint  i;
-
-    if (value->bind.type == CompBindingTypeNone)
-	return g_strdup ("Disabled");
-
-    if (value->bind.type == CompBindingTypeButton)
-	modMask = value->bind.u.button.modifiers;
-    else
-	modMask = value->bind.u.key.modifiers;
+    gint    i;
 
     binding = g_string_new (NULL);
     for (i = 0; i < N_MODIFIERS; i++)
@@ -76,50 +67,116 @@ gconfBindingToString (CompDisplay     *d,
 	    g_string_append (binding, modifiers[i].name);
     }
 
-    if (value->bind.type == CompBindingTypeButton)
-    {
-	g_string_append_printf (binding, "Button%d",
-				value->bind.u.button.button);
-    }
-    else if (value->bind.u.key.keycode != 0)
+    return binding;
+}
+
+char *
+gconfKeyBindingToString (CompDisplay    *d,
+			 CompKeyBinding *key)
+{
+    GString *binding;
+
+    binding = gconfModifiersToString (d, key->modifiers);
+
+    if (key->keycode != 0)
     {
 	KeySym keysym;
 	gchar  *keyname;
 
-	keysym = XKeycodeToKeysym (d->display,
-				   value->bind.u.key.keycode,
-				   0);
+	keysym  = XKeycodeToKeysym (d->display, key->keycode, 0);
 	keyname = XKeysymToString (keysym);
 
 	if (keyname)
 	    g_string_append (binding, keyname);
 	else
-	    g_string_append_printf (binding, "0x%x", value->bind.u.key.keycode);
+	    g_string_append_printf (binding, "0x%x", key->keycode);
     }
 
     return g_string_free (binding, FALSE);
 }
 
-int
-gconfStringToBinding (CompDisplay     *d,
-		      const char      *binding,
-		      CompOptionValue *value)
+char *
+gconfButtonBindingToString (CompDisplay       *d,
+			    CompButtonBinding *button)
 {
-    gchar *ptr;
-    gint  i;
-    guint mods = 0;
+    GString *binding;
 
-    if (strcasecmp (binding, "disabled") == 0 || !*binding)
-    {
-	value->bind.type = CompBindingTypeNone;
-	return TRUE;
-    }
+    binding = gconfModifiersToString (d, button->modifiers);
+
+    g_string_append_printf (binding, "Button%d", button->button);
+
+    return g_string_free (binding, FALSE);
+}
+
+static guint
+gconfStringToModifiers (CompDisplay *d,
+			const char  *binding)
+{
+    guint mods = 0;
+    gint  i;
 
     for (i = 0; i < N_MODIFIERS; i++)
     {
 	if (strcasestr (binding, modifiers[i].name))
 	    mods |= modifiers[i].modifier;
     }
+
+    return mods;
+}
+
+int
+gconfStringToKeyBinding (CompDisplay    *d,
+			 const char     *binding,
+			 CompKeyBinding *key)
+{
+    gchar  *ptr;
+    guint  mods;
+    KeySym keysym;
+
+    mods = gconfStringToModifiers (d, binding);
+
+    ptr = strrchr (binding, '>');
+    if (ptr)
+	binding = ptr + 1;
+
+    while (*binding && !isalnum (*binding))
+	binding++;
+
+    keysym = XStringToKeysym (binding);
+    if (keysym != NoSymbol)
+    {
+	KeyCode keycode;
+
+	keycode = XKeysymToKeycode (d->display, keysym);
+	if (keycode)
+	{
+	    key->keycode   = keycode;
+	    key->modifiers = mods;
+
+	    return TRUE;
+	}
+    }
+
+    if (strncmp (binding, "0x", 2) == 0)
+    {
+	key->keycode   = strtol (binding, NULL, 0);
+	key->modifiers = mods;
+
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+int
+gconfStringToButtonBinding (CompDisplay	      *d,
+			    const char	      *binding,
+			    CompButtonBinding *button)
+{
+    gchar *ptr;
+    guint mods;
+
+    mods = gconfStringToModifiers (d, binding);
 
     ptr = strrchr (binding, '>');
     if (ptr)
@@ -131,51 +188,12 @@ gconfStringToBinding (CompDisplay     *d,
     ptr = (gchar *) binding;
     if (strcmpskipifequal (&ptr, "Button") == 0)
     {
-	gint button;
+	gint buttonNum;
 
-	if (sscanf (ptr, "%d", &button) == 1)
+	if (sscanf (ptr, "%d", &buttonNum) == 1)
 	{
-	    value->bind.type = CompBindingTypeButton;
-	    value->bind.u.button.button = button;
-	    value->bind.u.button.modifiers = mods;
-
-	    return TRUE;
-	}
-    }
-    else
-    {
-	KeySym keysym;
-
-	keysym = XStringToKeysym (binding);
-	if (keysym != NoSymbol)
-	{
-	    KeyCode keycode;
-
-	    keycode = XKeysymToKeycode (d->display, keysym);
-	    if (keycode)
-	    {
-		value->bind.type = CompBindingTypeKey;
-		value->bind.u.key.keycode = keycode;
-		value->bind.u.key.modifiers = mods;
-
-		return TRUE;
-	    }
-	}
-
-	if (strncmp (binding, "0x", 2) == 0)
-	{
-	    value->bind.type = CompBindingTypeKey;
-	    value->bind.u.key.keycode = strtol (binding, NULL, 0);
-	    value->bind.u.key.modifiers = mods;
-
-	    return TRUE;
-	}
-
-	if (!*binding)
-	{
-	    value->bind.type = CompBindingTypeKey;
-	    value->bind.u.key.keycode = 0;
-	    value->bind.u.key.modifiers = mods;
+	    button->button    = buttonNum;
+	    button->modifiers = mods;
 
 	    return TRUE;
 	}

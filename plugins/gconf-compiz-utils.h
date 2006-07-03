@@ -27,10 +27,28 @@ char *
 gconfBindingToString (CompDisplay     *display,
 		      CompOptionValue *value);
 
+char *
+gconfKeyBindingToString (CompDisplay    *d,
+			 CompKeyBinding *key);
+
+char *
+gconfButtonBindingToString (CompDisplay       *d,
+			    CompButtonBinding *button);
+
 int
 gconfStringToBinding (CompDisplay     *display,
 		      const char      *binding,
 		      CompOptionValue *value);
+
+int
+gconfStringToKeyBinding (CompDisplay    *d,
+			 const char     *binding,
+			 CompKeyBinding *key);
+
+int
+gconfStringToButtonBinding (CompDisplay	      *d,
+			    const char	      *binding,
+			    CompButtonBinding *button);
 
 int
 strcmpskipifequal (char **ptr,
