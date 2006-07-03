@@ -2033,6 +2033,8 @@ addDisplay (char *name,
 
     compDisplays = d;
 
+    d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));
+
     for (i = 0; i < ScreenCount (dpy); i++)
     {
 	Window		     newWmSnOwner = None;

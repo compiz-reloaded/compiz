@@ -649,6 +649,8 @@ struct _CompDisplay {
     unsigned int    modMask[CompModNum];
     unsigned int    ignoredModMask;
 
+    KeyCode escapeKeyCode;
+
     CompOption opt[COMP_DISPLAY_OPTION_NUM];
 
     CompTimeoutHandle autoRaiseHandle;
