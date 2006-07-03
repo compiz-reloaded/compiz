@@ -2021,8 +2021,8 @@ addDisplay (char *name,
     {
 	XkbSelectEvents (dpy,
 			 XkbUseCoreKbd,
-			 XkbBellNotifyMask,
-			 XkbBellNotifyMask);
+			 XkbBellNotifyMask | XkbStateNotifyMask,
+			 XkbAllEventsMask);
     }
     else
     {
