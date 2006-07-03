@@ -2511,3 +2511,35 @@ warpPointer (CompDisplay *display,
 	lastPointerY = pointerY;
     }
 }
+
+Bool
+setDisplayAction (CompDisplay     *display,
+		  CompOption      *o,
+		  CompOptionValue *value)
+{
+    CompScreen *s;
+
+    for (s = display->screens; s; s = s->next)
+	if (!addScreenAction (s, &value->action))
+	    break;
+
+    if (s)
+    {
+	CompScreen *failed = s;
+
+	for (s = display->screens; s && s != failed; s = s->next)
+	    removeScreenAction (s, &value->action);
+
+	return FALSE;
+    }
+    else
+    {
+	for (s = display->screens; s; s = s->next)
+	    removeScreenAction (s, &o->value.action);
+    }
+
+    if (compSetActionOption (o, value))
+	return TRUE;
+
+    return FALSE;
+}

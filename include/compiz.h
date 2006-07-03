@@ -758,6 +758,11 @@ warpPointer (CompDisplay *display,
 	     int	 dx,
 	     int	 dy);
 
+Bool
+setDisplayAction (CompDisplay     *display,
+		  CompOption      *o,
+		  CompOptionValue *value);
+
 
 /* event.c */
 
