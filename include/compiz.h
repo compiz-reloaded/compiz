@@ -1255,8 +1255,12 @@ struct _CompScreen {
     struct timeval lastRedraw;
     int		   nextRedraw;
     int		   redrawTime;
-    int            optimalRedrawTime;
-    int            frameStatus;
+    int		   optimalRedrawTime;
+    int		   frameStatus;
+    int		   timeMult;
+    Bool	   idle;
+    int		   timeLeft;
+    Bool	   pendingCommands;
 
     GLint stencilRef;
 

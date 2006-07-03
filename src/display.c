@@ -959,7 +959,6 @@ getTimeToNextRedraw (CompScreen     *s,
 {
     struct timeval tv;
     int		   diff, next;
-    static int     timeMult = 1;
 
     gettimeofday (&tv, 0);
 
@@ -971,11 +970,11 @@ getTimeToNextRedraw (CompScreen     *s,
 
     if (idle)
     {
-	if (timeMult > 1)
+	if (s->timeMult > 1)
 	{
 	    s->frameStatus = -1;
 	    s->redrawTime = s->optimalRedrawTime;
-	    timeMult--;
+	    s->timeMult--;
 	}
     }
     else
@@ -985,13 +984,13 @@ getTimeToNextRedraw (CompScreen     *s,
 	    if (s->frameStatus > 0)
 		s->frameStatus = 0;
 
-	    next = s->optimalRedrawTime * (timeMult + 1);
+	    next = s->optimalRedrawTime * (s->timeMult + 1);
 	    if (diff > next)
 	    {
 		s->frameStatus--;
 		if (s->frameStatus < -1)
 		{
-		    timeMult++;
+		    s->timeMult++;
 		    s->redrawTime = diff = next;
 		}
 	    }
@@ -1001,15 +1000,15 @@ getTimeToNextRedraw (CompScreen     *s,
 	    if (s->frameStatus < 0)
 		s->frameStatus = 0;
 
-	    if (timeMult > 1)
+	    if (s->timeMult > 1)
 	    {
-		next = s->optimalRedrawTime * (timeMult - 1);
+		next = s->optimalRedrawTime * (s->timeMult - 1);
 		if (diff < next)
 		{
 		    s->frameStatus++;
 		    if (s->frameStatus > 4)
 		    {
-			timeMult--;
+			s->timeMult--;
 			s->redrawTime = next;
 		    }
 		}

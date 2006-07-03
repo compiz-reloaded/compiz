@@ -1018,6 +1018,11 @@ addScreen (CompDisplay *display,
 
     s->nextRedraw  = 0;
     s->frameStatus = 0;
+    s->timeMult    = 1;
+    s->idle	   = TRUE;
+    s->timeLeft    = 0;
+
+    s->pendingCommands = TRUE;
 
     s->showingDesktopMask = 0;
 
