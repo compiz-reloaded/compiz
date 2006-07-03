@@ -923,6 +923,7 @@ addScreen (CompDisplay *display,
     GLfloat		 diffuseLight[]   = { 0.9f, 0.9f,  0.9f, 0.9f };
     GLfloat		 light0Position[] = { -0.5f, 0.5f, -9.0f, 1.0f };
     CompWindow		 *w;
+    GLXContext		 shareList = 0;
 
     s = malloc (sizeof (CompScreen));
     if (!s)
@@ -1116,7 +1117,10 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    s->ctx = glXCreateContext (dpy, visinfo, NULL, !indirectRendering);
+    if (display->screens)
+	shareList = display->screens->ctx;
+
+    s->ctx = glXCreateContext (dpy, visinfo, shareList, !indirectRendering);
     if (!s->ctx)
     {
 	fprintf (stderr, "%s: glXCreateContext failed\n", programName);
