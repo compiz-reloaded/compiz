@@ -225,12 +225,455 @@ changeWindowOpacity (CompWindow *w,
     }
 }
 
+#define REAL_MOD_MASK (ShiftMask | ControlMask | Mod1Mask | \
+		       Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask)
+
+static Bool
+isCallBackBinding (CompOption	    *option,
+		   CompBindingType  type,
+		   CompBindingState state)
+{
+    if (option->type != CompOptionTypeAction)
+	return FALSE;
+
+    if (!(option->value.action.type & type))
+	return FALSE;
+
+    if (!(option->value.action.state & state))
+	return FALSE;
+
+    return TRUE;
+}
+
+static Bool
+isInitiateBinding (CompOption	    *option,
+		   CompBindingType  type,
+		   CompBindingState state,
+		   CompAction	    **action)
+{
+    if (!isCallBackBinding (option, type, state))
+	return FALSE;
+
+    if (!option->value.action.initiate)
+	return FALSE;
+
+    *action = &option->value.action;
+
+    return TRUE;
+}
+
+static Bool
+isTerminateBinding (CompOption	     *option,
+		    CompBindingType  type,
+		    CompBindingState state,
+		    CompAction       **action)
+{
+    if (!isCallBackBinding (option, type, state))
+	return FALSE;
+
+    if (!option->value.action.terminate)
+	return FALSE;
+
+    *action = &option->value.action;
+
+    return TRUE;
+}
+
+static Bool
+triggerButtonPressBindings (CompDisplay *d,
+			    CompOption  *option,
+			    int		nOption,
+			    XEvent	*event,
+			    CompOption  *argument,
+			    int		nArgument)
+{
+    CompBindingState state = CompBindingStateInitButton;
+    CompAction	     *action;
+    unsigned int     modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int     bindMods;
+
+    while (nOption--)
+    {
+	if (isInitiateBinding (option, CompBindingTypeButton, state, &action))
+	{
+	    if (action->button.button == event->xbutton.button)
+	    {
+		bindMods = virtualToRealModMask (d, action->button.modifiers);
+
+		if ((bindMods & modMask) == (event->xbutton.state & modMask))
+		    if ((*action->initiate) (d, action, state,
+					     argument, nArgument))
+			return TRUE;
+	    }
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static Bool
+triggerButtonReleaseBindings (CompDisplay *d,
+			      CompOption  *option,
+			      int	  nOption,
+			      XEvent	  *event,
+			      CompOption  *argument,
+			      int	  nArgument)
+{
+    CompBindingState state = CompBindingStateTermButton;
+    CompAction	     *action;
+
+    while (nOption--)
+    {
+	if (isTerminateBinding (option, CompBindingTypeButton, state, &action))
+	{
+	    if (action->button.button == event->xbutton.button)
+	    {
+		if ((*action->terminate) (d, action, state,
+					  argument, nArgument))
+		    return TRUE;
+	    }
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static Bool
+triggerKeyPressBindings (CompDisplay *d,
+			 CompOption  *option,
+			 int	     nOption,
+			 XEvent	     *event,
+			 CompOption  *argument,
+			 int	     nArgument)
+{
+    CompBindingState state = CompBindingStateInitKey;
+    CompAction	     *action;
+    unsigned int     modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int     bindMods;
+
+    if (event->xkey.keycode == d->escapeKeyCode)
+    {
+	while (nOption--)
+	{
+	    if (option->type == CompOptionTypeAction)
+	    {
+		if (option->value.action.terminate)
+		    (*option->value.action.terminate) (d, &option->value.action,
+						       0, NULL, 0);
+	    }
+
+	    option++;
+	}
+
+	return FALSE;
+    }
+
+    while (nOption--)
+    {
+	if (isInitiateBinding (option, CompBindingTypeKey, state, &action))
+	{
+	    bindMods = virtualToRealModMask (d, action->key.modifiers);
+
+	    if (action->key.keycode == event->xkey.keycode)
+	    {
+		if ((bindMods & modMask) == (event->xbutton.state & modMask))
+		    if ((*action->initiate) (d, action, state,
+					     argument, nArgument))
+			break;
+	    }
+	    else if (!d->xkbEvent && action->key.keycode == 0)
+	    {
+		if (bindMods == (event->xbutton.state & modMask))
+		    if ((*action->initiate) (d, action, state,
+					     argument, nArgument))
+			return TRUE;
+	    }
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static Bool
+triggerKeyReleaseBindings (CompDisplay *d,
+			   CompOption  *option,
+			   int	       nOption,
+			   XEvent      *event,
+			   CompOption  *argument,
+			   int	       nArgument)
+{
+    if (!d->xkbEvent)
+    {
+	CompBindingState state = CompBindingStateTermKey;
+	CompAction	 *action;
+	unsigned int	 modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+	unsigned int	 bindMods;
+	unsigned int	 mods;
+
+	mods = keycodeToModifiers (d, event->xkey.keycode);
+	if (mods == 0)
+	    return FALSE;
+
+	while (nOption--)
+	{
+	    if (isTerminateBinding (option, CompBindingTypeKey, state, &action))
+	    {
+		bindMods = virtualToRealModMask (d, action->key.modifiers);
+
+		if ((mods & modMask & bindMods) != bindMods)
+		{
+		    if ((*action->terminate) (d, action, state,
+					      argument, nArgument))
+			return TRUE;
+		}
+	    }
+
+	    option++;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
+triggerStateNotifyBindings (CompDisplay		*d,
+			    CompOption		*option,
+			    int			nOption,
+			    XkbStateNotifyEvent *event,
+			    CompOption		*argument,
+			    int			nArgument)
+{
+    CompBindingState state;
+    CompAction       *action;
+    unsigned int     modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int     bindMods;
+
+    if (event->event_type == KeyPress)
+    {
+	state = CompBindingStateInitKey;
+
+	while (nOption--)
+	{
+	    if (isInitiateBinding (option, CompBindingTypeKey, state, &action))
+	    {
+		if (action->key.keycode == 0)
+		{
+		    bindMods = virtualToRealModMask (d, action->key.modifiers);
+
+		    if ((event->mods & modMask & bindMods) == bindMods)
+		    {
+			if ((*action->initiate) (d, action, state,
+						 argument, nArgument))
+			    return TRUE;
+		    }
+		}
+	    }
+
+	    option++;
+	}
+    }
+    else
+    {
+	state = CompBindingStateTermKey;
+
+	while (nOption--)
+	{
+	    if (isTerminateBinding (option, CompBindingTypeKey, state, &action))
+	    {
+		bindMods = virtualToRealModMask (d, action->key.modifiers);
+
+		if ((event->mods & modMask & bindMods) != bindMods)
+		{
+		    if ((*action->terminate) (d, action, state,
+					      argument, nArgument))
+			return TRUE;
+		}
+	    }
+
+	    option++;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
+handleBindingEvent (CompDisplay *d,
+		    XEvent      *event)
+{
+    CompOption *option;
+    int	       nOption;
+    CompPlugin *p;
+    CompOption o[5];
+
+    o[0].type = CompOptionTypeInt;
+    o[0].name = "window";
+
+    o[1].type = CompOptionTypeInt;
+    o[1].name = "modifiers";
+
+    o[2].type = CompOptionTypeInt;
+    o[2].name = "x";
+
+    o[3].type = CompOptionTypeInt;
+    o[3].name = "y";
+
+    switch (event->type) {
+    case ButtonPress:
+	o[0].value.i = event->xbutton.window;
+	o[1].value.i = event->xbutton.state;
+	o[2].value.i = event->xbutton.x_root;
+	o[3].value.i = event->xbutton.y_root;
+
+	o[4].type    = CompOptionTypeInt;
+	o[4].name    = "button";
+	o[4].value.i = event->xbutton.button;
+
+	for (p = getPlugins (); p; p = p->next)
+	{
+	    if (p->vTable->getDisplayOptions)
+	    {
+		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		if (triggerButtonPressBindings (d, option, nOption, event,
+						o, 5))
+		    return TRUE;
+	    }
+	}
+
+	option = compGetDisplayOptions (d, &nOption);
+	if (triggerButtonPressBindings (d, option, nOption, event, o, 5))
+	    return TRUE;
+
+	break;
+    case ButtonRelease:
+	o[0].value.i = event->xbutton.window;
+	o[1].value.i = event->xbutton.state;
+	o[2].value.i = event->xbutton.x_root;
+	o[3].value.i = event->xbutton.y_root;
+
+	o[4].type    = CompOptionTypeInt;
+	o[4].name    = "button";
+	o[4].value.i = event->xbutton.button;
+
+	for (p = getPlugins (); p; p = p->next)
+	{
+	    if (p->vTable->getDisplayOptions)
+	    {
+		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		if (triggerButtonReleaseBindings (d, option, nOption, event,
+						  o, 5))
+		    return TRUE;
+	    }
+	}
+
+	option = compGetDisplayOptions (d, &nOption);
+	if (triggerButtonReleaseBindings (d, option, nOption, event, o, 4))
+	    return TRUE;
+
+	break;
+    case KeyPress:
+	o[0].value.i = d->activeWindow;
+	o[1].value.i = event->xkey.state;
+	o[2].value.i = event->xkey.x_root;
+	o[3].value.i = event->xkey.y_root;
+
+	o[4].type    = CompOptionTypeInt;
+	o[4].name    = "keycode";
+	o[4].value.i = event->xkey.keycode;
+
+
+	for (p = getPlugins (); p; p = p->next)
+	{
+	    if (p->vTable->getDisplayOptions)
+	    {
+		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		if (triggerKeyPressBindings (d, option, nOption, event, o, 2))
+		    return TRUE;
+	    }
+	}
+
+	option = compGetDisplayOptions (d, &nOption);
+	if (triggerKeyPressBindings (d, option, nOption, event, o, 2))
+	    return TRUE;
+
+	break;
+    case KeyRelease:
+	o[0].value.i = d->activeWindow;
+	o[1].value.i = event->xkey.state;
+	o[2].value.i = event->xkey.x_root;
+	o[3].value.i = event->xkey.y_root;
+
+	o[4].type    = CompOptionTypeInt;
+	o[4].name    = "keycode";
+	o[4].value.i = event->xkey.keycode;
+
+	for (p = getPlugins (); p; p = p->next)
+	{
+	    if (p->vTable->getDisplayOptions)
+	    {
+		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		if (triggerKeyReleaseBindings (d, option, nOption, event, o, 2))
+		    return TRUE;
+	    }
+	}
+
+	option = compGetDisplayOptions (d, &nOption);
+	if (triggerKeyReleaseBindings (d, option, nOption, event, o, 2))
+	    return TRUE;
+
+	break;
+    default:
+	if (event->type == d->xkbEvent)
+	{
+	    XkbAnyEvent *xkbEvent = (XkbAnyEvent *) event;
+
+	    if (xkbEvent->xkb_type == XkbStateNotify)
+	    {
+		XkbStateNotifyEvent *stateEvent = (XkbStateNotifyEvent *) event;
+
+		option = compGetDisplayOptions (d, &nOption);
+
+		o[0].value.i = d->activeWindow;
+		o[1].value.i = stateEvent->mods;
+
+		for (p = getPlugins (); p; p = p->next)
+		{
+		    if (p->vTable->getDisplayOptions)
+		    {
+			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			if (triggerStateNotifyBindings (d, option, nOption,
+							stateEvent, o, 2))
+			    return TRUE;
+		    }
+		}
+
+		option = compGetDisplayOptions (d, &nOption);
+		if (triggerStateNotifyBindings (d, option, nOption, stateEvent,
+						o, 2))
+		    return TRUE;
+	    }
+	}
+	break;
+    }
+
+    return FALSE;
+}
+
 void
 handleEvent (CompDisplay *d,
 	     XEvent      *event)
 {
     CompScreen *s;
     CompWindow *w;
+
+    if (handleBindingEvent (d, event))
+	return;
 
     switch (event->type) {
     case Expose:
