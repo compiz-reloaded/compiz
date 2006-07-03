@@ -2064,6 +2064,9 @@ pushPlugin (CompPlugin *p);
 CompPlugin *
 popPlugin (void);
 
+CompPlugin *
+getPlugins (void);
+
 
 /* session.c */
 

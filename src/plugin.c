@@ -402,3 +402,9 @@ popPlugin (void)
 
     return p;
 }
+
+CompPlugin *
+getPlugins (void)
+{
+    return plugins;
+}
