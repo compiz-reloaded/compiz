@@ -258,11 +258,12 @@ typedef enum {
 } CompBindingType;
 
 typedef enum {
-    CompBindingStateInitKey    = 1 << 0,
-    CompBindingStateTermKey    = 1 << 1,
-    CompBindingStateInitButton = 1 << 2,
-    CompBindingStateTermButton = 1 << 3
-} CompBindingState;
+    CompActionStateInitKey    = 1 << 0,
+    CompActionStateTermKey    = 1 << 1,
+    CompActionStateInitButton = 1 << 2,
+    CompActionStateTermButton = 1 << 3,
+    CompActionStateInitBell   = 1 << 4
+} CompActionState;
 
 typedef struct _CompKeyBinding {
     int		 keycode;
@@ -287,21 +288,23 @@ typedef union _CompOptionValue CompOptionValue;
 typedef struct _CompOption CompOption;
 typedef struct _CompAction CompAction;
 
-typedef Bool (*CompActionCallBackProc) (CompDisplay	 *d,
-					CompAction	 *action,
-					CompBindingState state,
-					CompOption	 *option,
-					int		 nOption);
+typedef Bool (*CompActionCallBackProc) (CompDisplay	*d,
+					CompAction	*action,
+					CompActionState state,
+					CompOption	*option,
+					int		nOption);
 
 struct _CompAction {
     CompActionCallBackProc initiate;
     CompActionCallBackProc terminate;
 
-    CompBindingType  type;
-    CompBindingState state;
+    CompActionState state;
 
+    CompBindingType   type;
     CompKeyBinding    key;
     CompButtonBinding button;
+
+    Bool bell;
 };
 
 typedef struct {

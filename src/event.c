@@ -229,9 +229,9 @@ changeWindowOpacity (CompWindow *w,
 		       Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask)
 
 static Bool
-isCallBackBinding (CompOption	    *option,
-		   CompBindingType  type,
-		   CompBindingState state)
+isCallBackBinding (CompOption	   *option,
+		   CompBindingType type,
+		   CompActionState state)
 {
     if (option->type != CompOptionTypeAction)
 	return FALSE;
@@ -246,10 +246,10 @@ isCallBackBinding (CompOption	    *option,
 }
 
 static Bool
-isInitiateBinding (CompOption	    *option,
-		   CompBindingType  type,
-		   CompBindingState state,
-		   CompAction	    **action)
+isInitiateBinding (CompOption	   *option,
+		   CompBindingType type,
+		   CompActionState state,
+		   CompAction	   **action)
 {
     if (!isCallBackBinding (option, type, state))
 	return FALSE;
@@ -263,10 +263,10 @@ isInitiateBinding (CompOption	    *option,
 }
 
 static Bool
-isTerminateBinding (CompOption	     *option,
-		    CompBindingType  type,
-		    CompBindingState state,
-		    CompAction       **action)
+isTerminateBinding (CompOption	    *option,
+		    CompBindingType type,
+		    CompActionState state,
+		    CompAction      **action)
 {
     if (!isCallBackBinding (option, type, state))
 	return FALSE;
@@ -287,10 +287,10 @@ triggerButtonPressBindings (CompDisplay *d,
 			    CompOption  *argument,
 			    int		nArgument)
 {
-    CompBindingState state = CompBindingStateInitButton;
-    CompAction	     *action;
-    unsigned int     modMask = REAL_MOD_MASK & ~d->ignoredModMask;
-    unsigned int     bindMods;
+    CompActionState state = CompActionStateInitButton;
+    CompAction	    *action;
+    unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int    bindMods;
 
     while (nOption--)
     {
@@ -321,8 +321,8 @@ triggerButtonReleaseBindings (CompDisplay *d,
 			      CompOption  *argument,
 			      int	  nArgument)
 {
-    CompBindingState state = CompBindingStateTermButton;
-    CompAction	     *action;
+    CompActionState state = CompActionStateTermButton;
+    CompAction	    *action;
 
     while (nOption--)
     {
@@ -350,10 +350,10 @@ triggerKeyPressBindings (CompDisplay *d,
 			 CompOption  *argument,
 			 int	     nArgument)
 {
-    CompBindingState state = CompBindingStateInitKey;
-    CompAction	     *action;
-    unsigned int     modMask = REAL_MOD_MASK & ~d->ignoredModMask;
-    unsigned int     bindMods;
+    CompActionState state = CompActionStateInitKey;
+    CompAction	    *action;
+    unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int    bindMods;
 
     if (event->xkey.keycode == d->escapeKeyCode)
     {
@@ -410,11 +410,11 @@ triggerKeyReleaseBindings (CompDisplay *d,
 {
     if (!d->xkbEvent)
     {
-	CompBindingState state = CompBindingStateTermKey;
-	CompAction	 *action;
-	unsigned int	 modMask = REAL_MOD_MASK & ~d->ignoredModMask;
-	unsigned int	 bindMods;
-	unsigned int	 mods;
+	CompActionState state = CompActionStateTermKey;
+	CompAction	*action;
+	unsigned int	modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+	unsigned int	bindMods;
+	unsigned int	mods;
 
 	mods = keycodeToModifiers (d, event->xkey.keycode);
 	if (mods == 0)
@@ -449,14 +449,14 @@ triggerStateNotifyBindings (CompDisplay		*d,
 			    CompOption		*argument,
 			    int			nArgument)
 {
-    CompBindingState state;
-    CompAction       *action;
-    unsigned int     modMask = REAL_MOD_MASK & ~d->ignoredModMask;
-    unsigned int     bindMods;
+    CompActionState state;
+    CompAction      *action;
+    unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int    bindMods;
 
     if (event->event_type == KeyPress)
     {
-	state = CompBindingStateInitKey;
+	state = CompActionStateInitKey;
 
 	while (nOption--)
 	{
@@ -480,7 +480,7 @@ triggerStateNotifyBindings (CompDisplay		*d,
     }
     else
     {
-	state = CompBindingStateTermKey;
+	state = CompActionStateTermKey;
 
 	while (nOption--)
 	{

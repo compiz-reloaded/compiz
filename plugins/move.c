@@ -113,11 +113,11 @@ typedef struct _MoveScreen {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static Bool
-moveInitiate (CompDisplay      *d,
-	      CompAction       *action,
-	      CompBindingState state,
-	      CompOption       *option,
-	      int	       nOption)
+moveInitiate (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
 {
     CompWindow *w;
     Window     xid;
@@ -155,8 +155,8 @@ moveInitiate (CompDisplay      *d,
 	if (w->attrib.override_redirect)
 	    return FALSE;
 
-	if (state & CompBindingStateInitButton)
-	    action->state |= CompBindingStateTermButton;
+	if (state & CompActionStateInitButton)
+	    action->state |= CompActionStateTermButton;
 
 	md->x = 0;
 	md->y = 0;
@@ -180,7 +180,7 @@ moveInitiate (CompDisplay      *d,
 					   CompWindowGrabMoveMask |
 					   CompWindowGrabButtonMask);
 
-	    if (state & CompBindingStateInitKey)
+	    if (state & CompActionStateInitKey)
 	    {
 		int xRoot, yRoot;
 
@@ -196,11 +196,11 @@ moveInitiate (CompDisplay      *d,
 }
 
 static Bool
-moveTerminate (CompDisplay	*d,
-	       CompAction	*action,
-	       CompBindingState state,
-	       CompOption	*option,
-	       int		nOption)
+moveTerminate (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
 {
     MOVE_DISPLAY (d);
 
@@ -221,7 +221,7 @@ moveTerminate (CompDisplay	*d,
 	md->w = 0;
     }
 
-    action->state &= ~(CompBindingStateTermKey | CompBindingStateTermButton);
+    action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
 
     return FALSE;
 }
@@ -417,7 +417,7 @@ moveHandleEvent (CompDisplay *d,
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
 			moveInitiate (d, action,
-				      CompBindingStateInitKey,
+				      CompActionStateInitKey,
 				      o, 1);
 		    }
 		    else
@@ -447,7 +447,7 @@ moveHandleEvent (CompDisplay *d,
 
 			    moveInitiate (d,
 					  action,
-					  CompBindingStateInitButton,
+					  CompActionStateInitButton,
 					  o, 4);
 
 			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
@@ -523,12 +523,13 @@ moveDisplayInitOptions (MoveDisplay *md,
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = moveInitiate;
     o->value.action.terminate	     = moveTerminate;
+    o->value.action.bell	     = FALSE;
     o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.state	     = CompBindingStateInitButton;
+    o->value.action.state	     = CompActionStateInitButton;
     o->value.action.button.modifiers = MOVE_INITIATE_BUTTON_MODIFIERS_DEFAULT;
     o->value.action.button.button    = MOVE_INITIATE_BUTTON_DEFAULT;
     o->value.action.type	    |= CompBindingTypeKey;
-    o->value.action.state	    |= CompBindingStateInitKey;
+    o->value.action.state	    |= CompActionStateInitKey;
     o->value.action.key.modifiers    = MOVE_INITIATE_KEY_MODIFIERS_DEFAULT;
     o->value.action.key.keycode      =
 	XKeysymToKeycode (display, XStringToKeysym (MOVE_INITIATE_KEY_DEFAULT));

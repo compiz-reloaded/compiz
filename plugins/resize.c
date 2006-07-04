@@ -105,11 +105,11 @@ typedef struct _ResizeScreen {
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static Bool
-resizeInitiate (CompDisplay      *d,
-		CompAction       *action,
-		CompBindingState state,
-		CompOption       *option,
-		int	         nOption)
+resizeInitiate (CompDisplay     *d,
+		CompAction      *action,
+		CompActionState state,
+		CompOption      *option,
+		int	        nOption)
 {
     CompWindow *w;
     Window     xid;
@@ -165,8 +165,8 @@ resizeInitiate (CompDisplay      *d,
 	if (w->attrib.override_redirect)
 	    return FALSE;
 
-	if (state & CompBindingStateInitButton)
-	    action->state |= CompBindingStateTermButton;
+	if (state & CompActionStateInitButton)
+	    action->state |= CompActionStateTermButton;
 
 	if (w->shaded)
 	    mask &= ~(ResizeUpMask | ResizeDownMask);
@@ -221,7 +221,7 @@ resizeInitiate (CompDisplay      *d,
 					   CompWindowGrabResizeMask |
 					   CompWindowGrabButtonMask);
 
-	    if (state & CompBindingStateInitKey)
+	    if (state & CompActionStateInitKey)
 	    {
 		int xRoot, yRoot;
 
@@ -237,11 +237,11 @@ resizeInitiate (CompDisplay      *d,
 }
 
 static Bool
-resizeTerminate (CompDisplay	  *d,
-		 CompAction	  *action,
-		 CompBindingState state,
-		 CompOption	  *option,
-		 int		  nOption)
+resizeTerminate (CompDisplay	 *d,
+		 CompAction	 *action,
+		 CompActionState state,
+		 CompOption	 *option,
+		 int		 nOption)
 {
     RESIZE_DISPLAY (d);
 
@@ -263,7 +263,7 @@ resizeTerminate (CompDisplay	  *d,
 	rd->releaseButton = 0;
     }
 
-    action->state &= ~(CompBindingStateTermKey | CompBindingStateTermButton);
+    action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
 
     return FALSE;
 }
@@ -452,7 +452,7 @@ resizeHandleEvent (CompDisplay *d,
 	CompAction *action =
 	    &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action;
 
-	if (action->state & CompBindingStateTermButton)
+	if (action->state & CompActionStateTermButton)
 	{
 	    if (event->type == ButtonRelease &&
 		(rd->releaseButton     == -1 ||
@@ -460,7 +460,7 @@ resizeHandleEvent (CompDisplay *d,
 	    {
 		resizeTerminate (d,
 				 action,
-				 CompBindingStateTermButton,
+				 CompActionStateTermButton,
 				 NULL,
 				 0);
 	    }
@@ -503,7 +503,7 @@ resizeHandleEvent (CompDisplay *d,
 			o[1].value.i = 0;
 
 			resizeInitiate (d, action,
-					CompBindingStateInitKey,
+					CompActionStateInitKey,
 					o, 2);
 		    }
 		    else
@@ -552,7 +552,7 @@ resizeHandleEvent (CompDisplay *d,
 
 			    resizeInitiate (d,
 					    action,
-					    CompBindingStateInitButton,
+					    CompActionStateInitButton,
 					    o, 6);
 
 			    resizeHandleMotionEvent (w->screen, xRoot, yRoot);
@@ -649,12 +649,13 @@ resizeDisplayInitOptions (ResizeDisplay *rd,
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = resizeInitiate;
     o->value.action.terminate	     = resizeTerminate;
+    o->value.action.bell	     = FALSE;
     o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.state	     = CompBindingStateInitButton;
+    o->value.action.state	     = CompActionStateInitButton;
     o->value.action.button.modifiers = RESIZE_INITIATE_BUTTON_MODIFIERS_DEFAULT;
     o->value.action.button.button    = RESIZE_INITIATE_BUTTON_DEFAULT;
     o->value.action.type	    |= CompBindingTypeKey;
-    o->value.action.state	    |= CompBindingStateInitKey;
+    o->value.action.state	    |= CompActionStateInitKey;
     o->value.action.key.modifiers    = RESIZE_INITIATE_KEY_MODIFIERS_DEFAULT;
     o->value.action.key.keycode      =
 	XKeysymToKeycode (display,

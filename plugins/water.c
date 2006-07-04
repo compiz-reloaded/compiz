@@ -1195,11 +1195,11 @@ waterHandleMotionEvent (CompDisplay *d,
 }
 
 static Bool
-waterInitiate (CompDisplay      *d,
-	       CompAction       *action,
-	       CompBindingState state,
-	       CompOption       *option,
-	       int	        nOption)
+waterInitiate (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
 {
     CompScreen   *s;
     unsigned int ui;
@@ -1230,21 +1230,21 @@ waterInitiate (CompDisplay      *d,
 	}
     }
 
-    if (state & CompBindingStateInitButton)
-	action->state |= CompBindingStateTermButton;
+    if (state & CompActionStateInitButton)
+	action->state |= CompActionStateTermButton;
 
-    if (state & CompBindingStateInitKey)
-	action->state |= CompBindingStateTermKey;
+    if (state & CompActionStateInitKey)
+	action->state |= CompActionStateTermKey;
 
     return FALSE;
 }
 
 static Bool
-waterTerminate (CompDisplay	 *d,
-		CompAction	 *action,
-		CompBindingState state,
-		CompOption	 *option,
-		int		 nOption)
+waterTerminate (CompDisplay	*d,
+		CompAction	*action,
+		CompActionState state,
+		CompOption	*option,
+		int		nOption)
 {
     CompScreen *s;
 
@@ -1263,11 +1263,11 @@ waterTerminate (CompDisplay	 *d,
 }
 
 static Bool
-waterToggleRain (CompDisplay      *d,
-		 CompAction       *action,
-		 CompBindingState state,
-		 CompOption       *option,
-		 int	          nOption)
+waterToggleRain (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int	         nOption)
 {
     CompScreen *s;
 
@@ -1449,8 +1449,9 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = waterInitiate;
     o->value.action.terminate	     = waterTerminate;
+    o->value.action.bell	     = FALSE;
     o->value.action.type	     = CompBindingTypeKey;
-    o->value.action.state	     = CompBindingStateInitKey;
+    o->value.action.state	     = CompActionStateInitKey;
     o->value.action.key.modifiers    = WATER_INITIATE_MODIFIERS_DEFAULT;
     o->value.action.key.keycode      = 0;
 
@@ -1461,8 +1462,9 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = waterToggleRain;
     o->value.action.terminate	     = 0;
+    o->value.action.bell	     = FALSE;
     o->value.action.type	     = CompBindingTypeKey;
-    o->value.action.state	     = CompBindingStateInitKey;
+    o->value.action.state	     = CompActionStateInitKey;
     o->value.action.key.modifiers    = WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT;
     o->value.action.key.keycode      =
 	XKeysymToKeycode (display,
