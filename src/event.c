@@ -510,7 +510,7 @@ handleBindingEvent (CompDisplay *d,
     CompOption *option;
     int	       nOption;
     CompPlugin *p;
-    CompOption o[5];
+    CompOption o[6];
 
     o[0].type = CompOptionTypeInt;
     o[0].name = "window";
@@ -524,16 +524,20 @@ handleBindingEvent (CompDisplay *d,
     o[3].type = CompOptionTypeInt;
     o[3].name = "y";
 
+    o[4].type = CompOptionTypeInt;
+    o[4].name = "root";
+
     switch (event->type) {
     case ButtonPress:
 	o[0].value.i = event->xbutton.window;
 	o[1].value.i = event->xbutton.state;
 	o[2].value.i = event->xbutton.x_root;
 	o[3].value.i = event->xbutton.y_root;
+	o[4].value.i = event->xbutton.root;
 
-	o[4].type    = CompOptionTypeInt;
-	o[4].name    = "button";
-	o[4].value.i = event->xbutton.button;
+	o[5].type    = CompOptionTypeInt;
+	o[5].name    = "button";
+	o[5].value.i = event->xbutton.button;
 
 	for (p = getPlugins (); p; p = p->next)
 	{
@@ -541,13 +545,13 @@ handleBindingEvent (CompDisplay *d,
 	    {
 		option = (*p->vTable->getDisplayOptions) (d, &nOption);
 		if (triggerButtonPressBindings (d, option, nOption, event,
-						o, 5))
+						o, 6))
 		    return TRUE;
 	    }
 	}
 
 	option = compGetDisplayOptions (d, &nOption);
-	if (triggerButtonPressBindings (d, option, nOption, event, o, 5))
+	if (triggerButtonPressBindings (d, option, nOption, event, o, 6))
 	    return TRUE;
 
 	break;
@@ -556,10 +560,11 @@ handleBindingEvent (CompDisplay *d,
 	o[1].value.i = event->xbutton.state;
 	o[2].value.i = event->xbutton.x_root;
 	o[3].value.i = event->xbutton.y_root;
+	o[4].value.i = event->xbutton.root;
 
-	o[4].type    = CompOptionTypeInt;
-	o[4].name    = "button";
-	o[4].value.i = event->xbutton.button;
+	o[5].type    = CompOptionTypeInt;
+	o[5].name    = "button";
+	o[5].value.i = event->xbutton.button;
 
 	for (p = getPlugins (); p; p = p->next)
 	{
@@ -567,13 +572,13 @@ handleBindingEvent (CompDisplay *d,
 	    {
 		option = (*p->vTable->getDisplayOptions) (d, &nOption);
 		if (triggerButtonReleaseBindings (d, option, nOption, event,
-						  o, 5))
+						  o, 6))
 		    return TRUE;
 	    }
 	}
 
 	option = compGetDisplayOptions (d, &nOption);
-	if (triggerButtonReleaseBindings (d, option, nOption, event, o, 4))
+	if (triggerButtonReleaseBindings (d, option, nOption, event, o, 6))
 	    return TRUE;
 
 	break;
@@ -582,24 +587,24 @@ handleBindingEvent (CompDisplay *d,
 	o[1].value.i = event->xkey.state;
 	o[2].value.i = event->xkey.x_root;
 	o[3].value.i = event->xkey.y_root;
+	o[4].value.i = event->xkey.root;
 
-	o[4].type    = CompOptionTypeInt;
-	o[4].name    = "keycode";
-	o[4].value.i = event->xkey.keycode;
-
+	o[5].type    = CompOptionTypeInt;
+	o[5].name    = "keycode";
+	o[5].value.i = event->xkey.keycode;
 
 	for (p = getPlugins (); p; p = p->next)
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
 		option = (*p->vTable->getDisplayOptions) (d, &nOption);
-		if (triggerKeyPressBindings (d, option, nOption, event, o, 2))
+		if (triggerKeyPressBindings (d, option, nOption, event, o, 6))
 		    return TRUE;
 	    }
 	}
 
 	option = compGetDisplayOptions (d, &nOption);
-	if (triggerKeyPressBindings (d, option, nOption, event, o, 2))
+	if (triggerKeyPressBindings (d, option, nOption, event, o, 6))
 	    return TRUE;
 
 	break;
@@ -608,23 +613,24 @@ handleBindingEvent (CompDisplay *d,
 	o[1].value.i = event->xkey.state;
 	o[2].value.i = event->xkey.x_root;
 	o[3].value.i = event->xkey.y_root;
+	o[4].value.i = event->xkey.root;
 
-	o[4].type    = CompOptionTypeInt;
-	o[4].name    = "keycode";
-	o[4].value.i = event->xkey.keycode;
+	o[5].type    = CompOptionTypeInt;
+	o[5].name    = "keycode";
+	o[5].value.i = event->xkey.keycode;
 
 	for (p = getPlugins (); p; p = p->next)
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
 		option = (*p->vTable->getDisplayOptions) (d, &nOption);
-		if (triggerKeyReleaseBindings (d, option, nOption, event, o, 2))
+		if (triggerKeyReleaseBindings (d, option, nOption, event, o, 6))
 		    return TRUE;
 	    }
 	}
 
 	option = compGetDisplayOptions (d, &nOption);
-	if (triggerKeyReleaseBindings (d, option, nOption, event, o, 2))
+	if (triggerKeyReleaseBindings (d, option, nOption, event, o, 6))
 	    return TRUE;
 
 	break;
