@@ -2747,8 +2747,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/water/screen0/options/initiate</key>
-            <applyto>/apps/compiz/plugins/water/screen0/options/initiate</applyto>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/initiate_key</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/initiate_key</applyto>
             <owner>compiz</owner>
             <type>string</type>
             <default>&lt;Control&gt;&lt;Super&gt;</default>
@@ -2761,8 +2761,22 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/water/screen0/options/toggle_rain</key>
-            <applyto>/apps/compiz/plugins/water/screen0/options/toggle_rain</applyto>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/initiate_button</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/initiate_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Enable pointer water effects
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</applyto>
             <owner>compiz</owner>
             <type>string</type>
             <default>&lt;Shift&gt;F9</default>
@@ -2775,8 +2789,22 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/water/screen0/options/offset_scale</key>
-            <applyto>/apps/compiz/plugins/water/screen0/options/offset_scale</applyto>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_button</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Toggle rain</short>
+                <long>
+                    Toggle rain effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/offset_scale</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/offset_scale</applyto>
             <owner>compiz</owner>
             <type>float</type>
             <default>1.000000</default>
@@ -2789,8 +2817,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/water/screen0/options/rain_delay</key>
-            <applyto>/apps/compiz/plugins/water/screen0/options/rain_delay</applyto>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/rain_delay</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/rain_delay</applyto>
             <owner>compiz</owner>
             <type>int</type>
             <default>250</default>
@@ -2803,8 +2831,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/water/screen0/options/visual_bell</key>
-            <applyto>/apps/compiz/plugins/water/screen0/options/visual_bell</applyto>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/visual_bell</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/visual_bell</applyto>
             <owner>compiz</owner>
             <type>bool</type>
             <default>false</default>

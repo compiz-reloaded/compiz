@@ -73,23 +73,27 @@
 
 static int displayPrivateIndex;
 
+static int waterLastPointerX = 0;
+static int waterLastPointerY = 0;
+
+#define WATER_DISPLAY_OPTION_INITIATE     0
+#define WATER_DISPLAY_OPTION_TOGGLE_RAIN  1
+#define WATER_DISPLAY_OPTION_OFFSET_SCALE 2
+#define WATER_DISPLAY_OPTION_RAIN_DELAY	  3
+#define WATER_DISPLAY_OPTION_VISUAL_BELL  4
+#define WATER_DISPLAY_OPTION_NUM          5
+
 typedef struct _WaterDisplay {
     int		    screenPrivateIndex;
+
+    CompOption opt[WATER_DISPLAY_OPTION_NUM];
+
     HandleEventProc handleEvent;
+
+    float offsetScale;
 } WaterDisplay;
 
-#define WATER_SCREEN_OPTION_INITIATE     0
-#define WATER_SCREEN_OPTION_TOGGLE_RAIN  1
-#define WATER_SCREEN_OPTION_OFFSET_SCALE 2
-#define WATER_SCREEN_OPTION_RAIN_DELAY	 3
-#define WATER_SCREEN_OPTION_VISUAL_BELL	 4
-#define WATER_SCREEN_OPTION_NUM          5
-
 typedef struct _WaterScreen {
-    int	waterTime;
-
-    CompOption opt[WATER_SCREEN_OPTION_NUM];
-
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc    donePaintScreen;
     DrawWindowTextureProc  drawWindowTexture;
@@ -115,8 +119,6 @@ typedef struct _WaterScreen {
     unsigned char *t0;
 
     CompTimeoutHandle timeoutHandle;
-
-    float offsetScale;
 } WaterScreen;
 
 #define GET_WATER_DISPLAY(d)				      \
@@ -135,129 +137,6 @@ typedef struct _WaterScreen {
 
 static Bool
 waterTimeout (void *closure);
-
-static CompOption *
-waterGetScreenOptions (CompScreen *screen,
-		       int	  *count)
-{
-    WATER_SCREEN (screen);
-
-    *count = NUM_OPTIONS (ws);
-    return ws->opt;
-}
-
-static Bool
-waterSetScreenOption (CompScreen      *screen,
-		      char	      *name,
-		      CompOptionValue *value)
-{
-    CompOption *o;
-    int	       index;
-
-    WATER_SCREEN (screen);
-
-    o = compFindOption (ws->opt, NUM_OPTIONS (ws), name, &index);
-    if (!o)
-	return FALSE;
-
-    switch (index) {
-    case WATER_SCREEN_OPTION_INITIATE:
-	/* Backward-compat */
-	if (value->bind.type == CompBindingTypeKey &&
-	    value->bind.u.key.keycode != 0) {
-	    value->bind.u.key.modifiers |=
-		keycodeToModifiers (screen->display, value->bind.u.key.keycode);
-	    value->bind.u.key.keycode = 0;
-	}
-
-	if (addScreenBinding (screen, &value->bind))
-	{
-	    removeScreenBinding (screen, &o->value.bind);
-
-	    if (compSetBindingOption (o, value))
-		return TRUE;
-	}
-	break;
-    case WATER_SCREEN_OPTION_OFFSET_SCALE:
-	if (compSetFloatOption (o, value))
-	{
-	    ws->offsetScale = o->value.f * 50.0f;
-	    return TRUE;
-	}
-    case WATER_SCREEN_OPTION_RAIN_DELAY:
-	if (compSetIntOption (o, value))
-	{
-	    if (ws->timeoutHandle)
-	    {
-		compRemoveTimeout (ws->timeoutHandle);
-		ws->timeoutHandle = compAddTimeout (value->i, waterTimeout,
-						    screen);
-	    }
-	    return TRUE;
-	}
-	break;
-    case WATER_SCREEN_OPTION_VISUAL_BELL:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-    default:
-	break;
-    }
-
-    return FALSE;
-}
-
-static void
-waterScreenInitOptions (WaterScreen *ws,
-			Display     *display)
-{
-    CompOption *o;
-
-    o = &ws->opt[WATER_SCREEN_OPTION_INITIATE];
-    o->name			  = "initiate";
-    o->shortDesc		  = "Initiate";
-    o->longDesc			  = "Enable pointer water effects";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = WATER_INITIATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   = 0;
-
-    o = &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN];
-    o->name			  = "toggle_rain";
-    o->shortDesc		  = "Toggle rain";
-    o->longDesc			  = "Toggle rain effect";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (WATER_TOGGLE_RAIN_KEY_DEFAULT));
-
-    o = &ws->opt[WATER_SCREEN_OPTION_OFFSET_SCALE];
-    o->name		= "offset_scale";
-    o->shortDesc	= "Offset Scale";
-    o->longDesc		= "Water offset scale";
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= WATER_OFFSET_SCALE_DEFAULT;
-    o->rest.f.min	= WATER_OFFSET_SCALE_MIN;
-    o->rest.f.max	= WATER_OFFSET_SCALE_MAX;
-    o->rest.f.precision = WATER_OFFSET_SCALE_PRECISION;
-
-    o = &ws->opt[WATER_SCREEN_OPTION_RAIN_DELAY];
-    o->name	  = "rain_delay";
-    o->shortDesc  = "Rain Delay";
-    o->longDesc	  = "Delay (in ms) between each rain-drop";
-    o->type	  = CompOptionTypeInt;
-    o->value.i	  = WATER_RAIN_DELAY_DEFAULT;
-    o->rest.i.min = WATER_RAIN_DELAY_MIN;
-    o->rest.i.max = WATER_RAIN_DELAY_MAX;
-
-    o = &ws->opt[WATER_SCREEN_OPTION_VISUAL_BELL];
-    o->name	  = "visual_bell";
-    o->shortDesc  = "Visual Bell";
-    o->longDesc	  = "Water effect on system beep";
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = WATER_VISUAL_BELL_DEFAULT;
-}
 
 static const char *saturateFpString =
     "MUL temp, rgb, { 1.0, 1.0, 1.0, 0.0 };"
@@ -1103,6 +982,7 @@ waterDrawWindowTexture (CompWindow		*w,
 			const WindowPaintAttrib *attrib,
 			unsigned int		mask)
 {
+    WATER_DISPLAY (w->screen->display);
     WATER_SCREEN (w->screen);
 
     if (ws->count)
@@ -1161,9 +1041,9 @@ waterDrawWindowTexture (CompWindow		*w,
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 0,
 						   texture->matrix.yy *
-						   ws->offsetScale,
+						   wd->offsetScale,
 						   -texture->matrix.xx *
-						   ws->offsetScale,
+						   wd->offsetScale,
 						   0.0f, 0.0f);
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 1,
@@ -1187,9 +1067,9 @@ waterDrawWindowTexture (CompWindow		*w,
 
 	    (*w->screen->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, 0,
 						   texture->matrix.yy *
-						   ws->offsetScale,
+						   wd->offsetScale,
 						   -texture->matrix.xx *
-						   ws->offsetScale,
+						   wd->offsetScale,
 						   0.0f, 0.0f);
 	}
 
@@ -1301,16 +1181,118 @@ waterHandleMotionEvent (CompDisplay *d,
 	{
 	    XPoint p[2];
 
-	    p[0].x = lastPointerX;
-	    p[0].y = lastPointerY;
+	    p[0].x = waterLastPointerX;
+	    p[0].y = waterLastPointerY;
 
-	    p[1].x = pointerX;
-	    p[1].y = pointerY;
+	    p[1].x = waterLastPointerX = pointerX;
+	    p[1].y = waterLastPointerY = pointerY;
 
 	    waterVertices (s, GL_LINES, p, 2, 0.2f);
+
 	    damageScreen (s);
 	}
     }
+}
+
+static Bool
+waterInitiate (CompDisplay      *d,
+	       CompAction       *action,
+	       CompBindingState state,
+	       CompOption       *option,
+	       int	        nOption)
+{
+    CompScreen   *s;
+    unsigned int ui;
+    Window	 root, child;
+    int	         xRoot, yRoot, i;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	WATER_SCREEN (s);
+
+	if (otherScreenGrabExist (s, "water", 0))
+	    continue;
+
+	if (!ws->grabIndex)
+	    ws->grabIndex = pushScreenGrab (s, None, "water");
+
+	if (XQueryPointer (d->display, s->root, &root, &child, &xRoot, &yRoot,
+			   &i, &i, &ui))
+	{
+	    XPoint p;
+
+	    p.x = waterLastPointerX = xRoot;
+	    p.y = waterLastPointerY = yRoot;
+
+	    waterVertices (s, GL_POINTS, &p, 1, 0.8f);
+
+	    damageScreen (s);
+	}
+    }
+
+    if (state & CompBindingStateInitButton)
+	action->state |= CompBindingStateTermButton;
+
+    if (state & CompBindingStateInitKey)
+	action->state |= CompBindingStateTermKey;
+
+    return FALSE;
+}
+
+static Bool
+waterTerminate (CompDisplay	 *d,
+		CompAction	 *action,
+		CompBindingState state,
+		CompOption	 *option,
+		int		 nOption)
+{
+    CompScreen *s;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	WATER_SCREEN (s);
+
+	if (ws->grabIndex)
+	{
+	    removeScreenGrab (s, ws->grabIndex, 0);
+	    ws->grabIndex = 0;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
+waterToggleRain (CompDisplay      *d,
+		 CompAction       *action,
+		 CompBindingState state,
+		 CompOption       *option,
+		 int	          nOption)
+{
+    CompScreen *s;
+
+    WATER_DISPLAY (d);
+
+    s = findScreenAtDisplay (d, getIntOptionNamed (option, nOption, "root", 0));
+    if (s)
+    {
+	WATER_SCREEN (s);
+
+	if (!ws->timeoutHandle)
+	{
+	    int delay;
+
+	    delay = wd->opt[WATER_DISPLAY_OPTION_RAIN_DELAY].value.i;
+	    ws->timeoutHandle = compAddTimeout (delay, waterTimeout, s);
+	}
+	else
+	{
+	    compRemoveTimeout (ws->timeoutHandle);
+	    ws->timeoutHandle = 0;
+	}
+    }
+
+    return FALSE;
 }
 
 static void
@@ -1347,59 +1329,6 @@ waterHandleEvent (CompDisplay *d,
     case MotionNotify:
 	waterHandleMotionEvent (d, event->xmotion.root);
 	break;
-    case KeyPress:
-    case KeyRelease:
-	s = findScreenAtDisplay (d, event->xkey.root);
-	if (s)
-	{
-	    WATER_SCREEN (s);
-
-	    if (eventMatches (d, event,
-			      &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN]))
-	    {
-		if (!ws->timeoutHandle)
-		{
-		    int delay;
-
-		    delay = ws->opt[WATER_SCREEN_OPTION_RAIN_DELAY].value.i;
-		    ws->timeoutHandle = compAddTimeout (delay, waterTimeout, s);
-		}
-		else
-		{
-		    compRemoveTimeout (ws->timeoutHandle);
-		    ws->timeoutHandle = 0;
-		}
-	    }
-
-	    if (otherScreenGrabExist (s, "water", 0))
-		break;
-
-	    if (eventMatches (d, event,
-			      &ws->opt[WATER_SCREEN_OPTION_INITIATE]))
-	    {
-		XPoint p;
-
-		if (!ws->grabIndex)
-		    ws->grabIndex = pushScreenGrab (s, None, "water");
-
-		p.x = event->xkey.x_root;
-		p.y = event->xkey.y_root;
-
-		waterVertices (s, GL_POINTS, &p, 1, 0.8f);
-		damageScreen (s);
-	    }
-
-	    if (eventTerminates (d, event,
-				 &ws->opt[WATER_SCREEN_OPTION_INITIATE]))
-	    {
-		if (ws->grabIndex)
-		{
-		    removeScreenGrab (s, ws->grabIndex, 0);
-		    ws->grabIndex = 0;
-		}
-	    }
-	}
-	break;
     default:
 	if (event->type == d->xkbEvent)
 	{
@@ -1417,9 +1346,7 @@ waterHandleEvent (CompDisplay *d,
 
 		if (w)
 		{
-		    WATER_SCREEN (w->screen);
-
-		    if (ws->opt[WATER_SCREEN_OPTION_VISUAL_BELL].value.b)
+		    if (wd->opt[WATER_DISPLAY_OPTION_VISUAL_BELL].value.b)
 		    {
 			XPoint p[2];
 
@@ -1444,6 +1371,130 @@ waterHandleEvent (CompDisplay *d,
     WRAP (wd, d, handleEvent, waterHandleEvent);
 }
 
+static CompOption *
+waterGetDisplayOptions (CompDisplay *display,
+			int	    *count)
+{
+    WATER_DISPLAY (display);
+
+    *count = NUM_OPTIONS (wd);
+    return wd->opt;
+}
+
+static Bool
+waterSetDisplayOption (CompDisplay     *display,
+		       char	       *name,
+		       CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    WATER_DISPLAY (display);
+
+    o = compFindOption (wd->opt, NUM_OPTIONS (wd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case WATER_DISPLAY_OPTION_INITIATE:
+    case WATER_DISPLAY_OPTION_TOGGLE_RAIN:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+	break;
+    case WATER_DISPLAY_OPTION_OFFSET_SCALE:
+	if (compSetFloatOption (o, value))
+	{
+	    wd->offsetScale = o->value.f * 50.0f;
+	    return TRUE;
+	}
+	break;
+    case WATER_DISPLAY_OPTION_RAIN_DELAY:
+	if (compSetIntOption (o, value))
+	{
+	    CompScreen *s;
+
+	    for (s = display->screens; s; s = s->next)
+	    {
+		WATER_SCREEN (s);
+
+		if (!ws->timeoutHandle)
+		    continue;
+
+		compRemoveTimeout (ws->timeoutHandle);
+		ws->timeoutHandle = compAddTimeout (value->i, waterTimeout, s);
+	    }
+	    return TRUE;
+	}
+	break;
+    case WATER_DISPLAY_OPTION_VISUAL_BELL:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+waterDisplayInitOptions (WaterDisplay *wd,
+			 Display      *display)
+{
+    CompOption *o;
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_INITIATE];
+    o->name			     = "initiate";
+    o->shortDesc		     = "Initiate";
+    o->longDesc			     = "Enable pointer water effects";
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = waterInitiate;
+    o->value.action.terminate	     = waterTerminate;
+    o->value.action.type	     = CompBindingTypeKey;
+    o->value.action.state	     = CompBindingStateInitKey;
+    o->value.action.key.modifiers    = WATER_INITIATE_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode      = 0;
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_RAIN];
+    o->name			     = "toggle_rain";
+    o->shortDesc		     = "Toggle rain";
+    o->longDesc			     = "Toggle rain effect";
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = waterToggleRain;
+    o->value.action.terminate	     = 0;
+    o->value.action.type	     = CompBindingTypeKey;
+    o->value.action.state	     = CompBindingStateInitKey;
+    o->value.action.key.modifiers    = WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode      =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (WATER_TOGGLE_RAIN_KEY_DEFAULT));
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_OFFSET_SCALE];
+    o->name		= "offset_scale";
+    o->shortDesc	= "Offset Scale";
+    o->longDesc		= "Water offset scale";
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= WATER_OFFSET_SCALE_DEFAULT;
+    o->rest.f.min	= WATER_OFFSET_SCALE_MIN;
+    o->rest.f.max	= WATER_OFFSET_SCALE_MAX;
+    o->rest.f.precision = WATER_OFFSET_SCALE_PRECISION;
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_RAIN_DELAY];
+    o->name	  = "rain_delay";
+    o->shortDesc  = "Rain Delay";
+    o->longDesc	  = "Delay (in ms) between each rain-drop";
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = WATER_RAIN_DELAY_DEFAULT;
+    o->rest.i.min = WATER_RAIN_DELAY_MIN;
+    o->rest.i.max = WATER_RAIN_DELAY_MAX;
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_VISUAL_BELL];
+    o->name	  = "visual_bell";
+    o->shortDesc  = "Visual Bell";
+    o->longDesc	  = "Water effect on system beep";
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = WATER_VISUAL_BELL_DEFAULT;
+}
+
 static Bool
 waterInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
@@ -1461,6 +1512,10 @@ waterInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
+    wd->offsetScale = WATER_OFFSET_SCALE_DEFAULT * 50.0f;
+
+    waterDisplayInitOptions (wd, d->display);
+
     WRAP (wd, d, handleEvent, waterHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = wd;
@@ -1469,7 +1524,7 @@ waterInitDisplay (CompPlugin  *p,
 }
 
 static void
-waterFiniDisplay (CompPlugin *p,
+waterFiniDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     WATER_DISPLAY (d);
@@ -1495,12 +1550,9 @@ waterInitScreen (CompPlugin *p,
 
     ws->grabIndex = 0;
 
-    ws->offsetScale = WATER_OFFSET_SCALE_DEFAULT * 50.0f;
-
-    waterScreenInitOptions (ws, s->display->display);
-
-    addScreenBinding (s, &ws->opt[WATER_SCREEN_OPTION_INITIATE].value.bind);
-    addScreenBinding (s, &ws->opt[WATER_SCREEN_OPTION_TOGGLE_RAIN].value.bind);
+    addScreenAction (s, &wd->opt[WATER_DISPLAY_OPTION_INITIATE].value.action);
+    addScreenAction (s,
+		     &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_RAIN].value.action);
 
     WRAP (ws, s, preparePaintScreen, waterPreparePaintScreen);
     WRAP (ws, s, donePaintScreen, waterDonePaintScreen);
@@ -1578,10 +1630,10 @@ static CompPluginVTable waterVTable = {
     waterFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    waterGetScreenOptions,
-    waterSetScreenOption,
+    waterGetDisplayOptions,
+    waterSetDisplayOption,
+    0, /* GetScreenOptions */
+    0, /* SetScreenOption */
     NULL,
     0
 };
