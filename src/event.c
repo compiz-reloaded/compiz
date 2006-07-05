@@ -504,8 +504,54 @@ triggerStateNotifyBindings (CompDisplay		*d,
 }
 
 static Bool
-handleBindingEvent (CompDisplay *d,
-		    XEvent      *event)
+isBellAction (CompOption      *option,
+	      CompActionState state,
+	      CompAction      **action)
+{
+    if (option->type != CompOptionTypeAction)
+	return FALSE;
+
+    if (!option->value.action.bell)
+	return FALSE;
+
+    if (!(option->value.action.state & state))
+	return FALSE;
+
+    if (!option->value.action.initiate)
+	return FALSE;
+
+    *action = &option->value.action;
+
+    return TRUE;
+}
+
+static Bool
+triggerBellNotifyBindings (CompDisplay *d,
+			   CompOption  *option,
+			   int	       nOption,
+			   CompOption  *argument,
+			   int	       nArgument)
+{
+    CompActionState state = CompActionStateInitBell;
+    CompAction      *action;
+
+    while (nOption--)
+    {
+	if (isBellAction (option, state, &action))
+	{
+	    if ((*action->initiate) (d, action, state, argument, nArgument))
+		return TRUE;
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static Bool
+handleActionEvent (CompDisplay *d,
+		   XEvent      *event)
 {
     CompOption *option;
     int	       nOption;
@@ -664,6 +710,27 @@ handleBindingEvent (CompDisplay *d,
 						o, 2))
 		    return TRUE;
 	    }
+	    else if (xkbEvent->xkb_type == XkbBellNotify)
+	    {
+		option = compGetDisplayOptions (d, &nOption);
+
+		o[0].value.i = d->activeWindow;
+
+		for (p = getPlugins (); p; p = p->next)
+		{
+		    if (p->vTable->getDisplayOptions)
+		    {
+			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			if (triggerBellNotifyBindings (d, option, nOption,
+						       o, 1))
+			    return TRUE;
+		    }
+		}
+
+		option = compGetDisplayOptions (d, &nOption);
+		if (triggerBellNotifyBindings (d, option, nOption, o, 1))
+		    return TRUE;
+	    }
 	}
 	break;
     }
@@ -678,7 +745,7 @@ handleEvent (CompDisplay *d,
     CompScreen *s;
     CompWindow *w;
 
-    if (handleBindingEvent (d, event))
+    if (handleActionEvent (d, event))
 	return;
 
     switch (event->type) {
