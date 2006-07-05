@@ -1488,6 +1488,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/initiate_bell</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/initiate_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Initiate Window Move</short>
+                <long>
+                    Start moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/move/allscreens/options/opacity</key>
             <applyto>/apps/compiz/plugins/move/allscreens/options/opacity</applyto>
             <owner>compiz</owner>
@@ -1655,6 +1669,20 @@
             <owner>compiz</owner>
             <type>string</type>
             <default>&lt;Alt&gt;Button2</default>
+            <locale name="C">
+                <short>Initiate Window Resize</short>
+                <long>
+                    Start resizing window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/resize/allscreens/options/initiate_bell</key>
+            <applyto>/apps/compiz/plugins/resize/allscreens/options/initiate_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
             <locale name="C">
                 <short>Initiate Window Resize</short>
                 <long>
@@ -2775,6 +2803,20 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/initiate_bell</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/initiate_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Enable pointer water effects
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</key>
             <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</applyto>
             <owner>compiz</owner>
@@ -2794,6 +2836,20 @@
             <owner>compiz</owner>
             <type>string</type>
             <default>Disabled</default>
+            <locale name="C">
+                <short>Toggle rain</short>
+                <long>
+                    Toggle rain effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_bell</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
             <locale name="C">
                 <short>Toggle rain</short>
                 <long>
@@ -2831,15 +2887,43 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/water/allscreens/options/visual_bell</key>
-            <applyto>/apps/compiz/plugins/water/allscreens/options/visual_bell</applyto>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/title_wave_key</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/title_wave_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Title wave</short>
+                <long>
+                    Wave effect from window title
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/title_wave_button</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/title_wave_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Title wave</short>
+                <long>
+                    Wave effect from window title
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/title_wave_bell</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/title_wave_bell</applyto>
             <owner>compiz</owner>
             <type>bool</type>
             <default>false</default>
             <locale name="C">
-                <short>Visual Bell</short>
+                <short>Title wave</short>
                 <long>
-                    Water effect on system beep
+                    Wave effect from window title
                 </long>
             </locale>
         </schema>

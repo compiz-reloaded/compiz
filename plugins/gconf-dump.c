@@ -105,8 +105,6 @@ gconfTypeToString (CompOptionType type)
 	return "float";
     case CompOptionTypeString:
 	return "string";
-    case CompOptionTypeAction:
-	return "string";
     case CompOptionTypeList:
 	return "list";
     default:
@@ -285,9 +283,9 @@ gconfDumpToSchema (CompDisplay *d,
 		     APP_NAME, screen, name);
     }
     gconfPrintf (3, "<owner>compiz</owner>\n");
-    gconfPrintf (3, "<type>%s</type>\n", gconfTypeToString (o->type));
     if (o->type == CompOptionTypeList)
     {
+	gconfPrintf (3, "<type>%s</type>\n", gconfTypeToString (o->type));
 	gconfPrintf (3, "<list_type>%s</list_type>\n",
 		     gconfTypeToString (o->value.list.type));
 	value = gconfValueToString (d, o->type, &o->value);
@@ -298,13 +296,26 @@ gconfDumpToSchema (CompDisplay *d,
 
 	len = strlen (name);
 	if (strcmp (name + len - 3, "key") == 0)
+	{
+	    gconfPrintf (3, "<type>string</type>\n");
 	    value = gconfActionValueToString (d, CompBindingTypeKey, &o->value);
-	else
+	}
+	else if (strcmp (name + len - 6, "button") == 0)
+	{
+	    gconfPrintf (3, "<type>string</type>\n");
 	    value = gconfActionValueToString (d, CompBindingTypeButton,
 					      &o->value);
+	}
+	else
+	{
+	    gconfPrintf (3, "<type>bool</type>\n");
+	    value = g_strdup (o->value.action.bell ? "true" : "false");
+	}
+
     }
     else
     {
+	gconfPrintf (3, "<type>%s</type>\n", gconfTypeToString (o->type));
 	value = gconfValueToString (d, o->type, &o->value);
     }
 
@@ -344,16 +355,19 @@ dumpGeneralOptions (CompDisplay *d)
 
 	if (option->type == CompOptionTypeAction)
 	{
-	    gchar *name1, *name2;
+	    gchar *name1, *name2, *name3;
 
 	    name1 = g_strdup_printf ("%s%s", option->name, "_key");
 	    name2 = g_strdup_printf ("%s%s", option->name, "_button");
+	    name3 = g_strdup_printf ("%s%s", option->name, "_bell");
 
 	    gconfDumpToSchema (d, option, name1, NULL, "allscreens");
 	    gconfDumpToSchema (d, option, name2, NULL, "allscreens");
+	    gconfDumpToSchema (d, option, name3, NULL, "allscreens");
 
 	    g_free (name1);
 	    g_free (name2);
+	    g_free (name3);
 	}
 	else
 	{
@@ -368,16 +382,19 @@ dumpGeneralOptions (CompDisplay *d)
     {
 	if (option->type == CompOptionTypeAction)
 	{
-	    gchar *name1, *name2;
+	    gchar *name1, *name2, *name3;
 
 	    name1 = g_strdup_printf ("%s%s", option->name, "_key");
 	    name2 = g_strdup_printf ("%s%s", option->name, "_button");
+	    name3 = g_strdup_printf ("%s%s", option->name, "_bell");
 
 	    gconfDumpToSchema (d, option, name1, NULL, "screen0");
 	    gconfDumpToSchema (d, option, name2, NULL, "screen0");
+	    gconfDumpToSchema (d, option, name3, NULL, "screen0");
 
 	    g_free (name1);
 	    g_free (name2);
+	    g_free (name3);
 	}
 	else
 	{
@@ -456,18 +473,22 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 	{
 	    if (option->type == CompOptionTypeAction)
 	    {
-		gchar *name1, *name2;
+		gchar *name1, *name2, *name3;
 
 		name1 = g_strdup_printf ("%s%s", option->name, "_key");
 		name2 = g_strdup_printf ("%s%s", option->name, "_button");
+		name3 = g_strdup_printf ("%s%s", option->name, "_bell");
 
 		gconfDumpToSchema (d, option, name1, p->vTable->name,
 				   "allscreens");
 		gconfDumpToSchema (d, option, name2, p->vTable->name,
 				   "allscreens");
+		gconfDumpToSchema (d, option, name3, p->vTable->name,
+				   "allscreens");
 
 		g_free (name1);
 		g_free (name2);
+		g_free (name3);
 	    }
 	    else
 	    {
@@ -486,18 +507,22 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 	{
 	    if (option->type == CompOptionTypeAction)
 	    {
-		gchar *name1, *name2;
+		gchar *name1, *name2, *name3;
 
 		name1 = g_strdup_printf ("%s%s", option->name, "_key");
 		name2 = g_strdup_printf ("%s%s", option->name, "_button");
+		name3 = g_strdup_printf ("%s%s", option->name, "_bell");
 
 		gconfDumpToSchema (d, option, name1, p->vTable->name,
 				   "screen0");
 		gconfDumpToSchema (d, option, name2, p->vTable->name,
 				   "screen0");
+		gconfDumpToSchema (d, option, name3, p->vTable->name,
+				   "screen0");
 
 		g_free (name1);
 		g_free (name2);
+		g_free (name3);
 	    }
 	    else
 	    {
