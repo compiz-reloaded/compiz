@@ -469,17 +469,17 @@ gconfGetOptionValue (CompDisplay *d,
     o = compFindOption (option, nOption, optionName, 0);
     if (!o)
     {
-	optionName[strlen (ptr) - 4] = '\0';
-	o = compFindOption (option, nOption, optionName, 0);
-	if (!o)
+	static int tail[] = { 4, 5, 7 };
+	int	   i = 0;
+
+	while (i < sizeof (tail) / sizeof (tail[0]) && strlen (ptr) > tail[i])
 	{
-	    optionName[strlen (ptr) - 5] = '\0';
+	    optionName[strlen (ptr) - tail[i]] = '\0';
 	    o = compFindOption (option, nOption, optionName, 0);
-	    if (!o)
-	    {
-		optionName[strlen (ptr) - 7] = '\0';
-		o = compFindOption (option, nOption, optionName, 0);
-	    }
+	    if (o)
+		break;
+
+	    i++;
 	}
     }
 
@@ -656,36 +656,23 @@ gconfInitOption (CompDisplay *d,
 
     if (o->type == CompOptionTypeAction)
     {
-	gchar *key1, *key2, *key3;
+	static gchar *tail[] = { "_key", "_button", "_bell" };
+	gchar	     *key1;
+	int	     i;
 
-	key1 = g_strdup_printf ("%s%s", key, "_key");
-	key2 = g_strdup_printf ("%s%s", key, "_button");
-	key3 = g_strdup_printf ("%s%s", key, "_bell");
-
-	entry = gconf_client_get_entry (gd->client, key1, NULL, TRUE, NULL);
-	if (entry)
+	for (i = 0; i < sizeof (tail) / sizeof (tail[0]); i++)
 	{
-	    gconfGetOptionValue (d, entry);
-	    gconf_entry_free (entry);
-	}
+	    key1 = g_strdup_printf ("%s%s", key, tail[0]);
 
-	entry = gconf_client_get_entry (gd->client, key2, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gconfGetOptionValue (d, entry);
-	    gconf_entry_free (entry);
-	}
+	    entry = gconf_client_get_entry (gd->client, key1, NULL, TRUE, NULL);
+	    if (entry)
+	    {
+		gconfGetOptionValue (d, entry);
+		gconf_entry_free (entry);
+	    }
 
-	entry = gconf_client_get_entry (gd->client, key3, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gconfGetOptionValue (d, entry);
-	    gconf_entry_free (entry);
+	    g_free (key1);
 	}
-
-	g_free (key1);
-	g_free (key2);
-	g_free (key3);
     }
     else
     {
