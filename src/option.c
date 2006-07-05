@@ -187,7 +187,7 @@ compSetActionOption (CompOption      *option,
 {
     CompAction *action = &option->value.action;
 
-    if (value->bind.type == action->type)
+    if (value->action.type == action->type)
     {
 	Bool equal = TRUE;
 
