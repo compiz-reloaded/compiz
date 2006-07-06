@@ -60,6 +60,9 @@
 #define WATER_TOGGLE_RAIN_KEY_DEFAULT       "F9"
 #define WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT ShiftMask
 
+#define WATER_TOGGLE_WIPER_KEY_DEFAULT       "F8"
+#define WATER_TOGGLE_WIPER_MODIFIERS_DEFAULT ShiftMask
+
 #define WATER_OFFSET_SCALE_DEFAULT    1.0f
 #define WATER_OFFSET_SCALE_MIN        0.0f
 #define WATER_OFFSET_SCALE_MAX       10.0f
@@ -78,10 +81,11 @@ static int waterLastPointerY = 0;
 
 #define WATER_DISPLAY_OPTION_INITIATE     0
 #define WATER_DISPLAY_OPTION_TOGGLE_RAIN  1
-#define WATER_DISPLAY_OPTION_OFFSET_SCALE 2
-#define WATER_DISPLAY_OPTION_RAIN_DELAY	  3
-#define WATER_DISPLAY_OPTION_TITLE_WAVE   4
-#define WATER_DISPLAY_OPTION_NUM          5
+#define WATER_DISPLAY_OPTION_TOGGLE_WIPER 2
+#define WATER_DISPLAY_OPTION_OFFSET_SCALE 3
+#define WATER_DISPLAY_OPTION_RAIN_DELAY	  4
+#define WATER_DISPLAY_OPTION_TITLE_WAVE   5
+#define WATER_DISPLAY_OPTION_NUM          6
 
 typedef struct _WaterDisplay {
     int		    screenPrivateIndex;
@@ -118,7 +122,11 @@ typedef struct _WaterScreen {
     float	  *d1;
     unsigned char *t0;
 
-    CompTimeoutHandle timeoutHandle;
+    CompTimeoutHandle rainHandle;
+    CompTimeoutHandle wiperHandle;
+
+    float wiperAngle;
+    float wiperSpeed;
 } WaterScreen;
 
 #define GET_WATER_DISPLAY(d)				      \
@@ -136,7 +144,10 @@ typedef struct _WaterScreen {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static Bool
-waterTimeout (void *closure);
+waterRainTimeout (void *closure);
+
+static Bool
+waterWiperTimeout (void *closure);
 
 static const char *saturateFpString =
     "MUL temp, rgb, { 1.0, 1.0, 1.0, 0.0 };"
@@ -851,8 +862,6 @@ waterUpdate (CompScreen *s,
 	else
 	    fade = 0.0f;
     }
-    else
-	fade = 1.0f;
 
     if (!fboUpdate (s, dt, fade))
 	softwareUpdate (s, dt, fade);
@@ -894,7 +903,7 @@ waterVertices (CompScreen *s,
 }
 
 static Bool
-waterTimeout (void *closure)
+waterRainTimeout (void *closure)
 {
     CompScreen *s = closure;
     XPoint     p;
@@ -905,6 +914,24 @@ waterTimeout (void *closure)
     waterVertices (s, GL_POINTS, &p, 1, 0.8f * (rand () / (float) RAND_MAX));
 
     damageScreen (s);
+
+    return TRUE;
+}
+
+static Bool
+waterWiperTimeout (void *closure)
+{
+    CompScreen *s = closure;
+
+    WATER_SCREEN (s);
+
+    if (ws->count)
+    {
+	if (ws->wiperAngle == 0.0f)
+	    ws->wiperSpeed = 2.5f;
+	else if (ws->wiperAngle == 180.0f)
+	    ws->wiperSpeed = -2.5f;
+    }
 
     return TRUE;
 }
@@ -1145,6 +1172,81 @@ waterPreparePaintScreen (CompScreen *s,
 	if (ws->count < 0)
 	    ws->count = 0;
 
+	if (ws->wiperHandle)
+	{
+	    float  step, angle0, angle1;
+	    Bool   wipe = FALSE;
+	    XPoint p[3];
+
+	    p[1].x = s->width / 2;
+	    p[1].y = s->height;
+
+	    step = ws->wiperSpeed * msSinceLastPaint / 20.0f;
+
+	    if (ws->wiperSpeed > 0.0f)
+	    {
+		if (ws->wiperAngle < 180.0f)
+		{
+		    angle0 = ws->wiperAngle;
+
+		    ws->wiperAngle += step;
+		    ws->wiperAngle = MIN (ws->wiperAngle, 180.0f);
+
+		    angle1 = ws->wiperAngle;
+
+		    wipe = TRUE;
+		}
+	    }
+	    else
+	    {
+		if (ws->wiperAngle > 0.0f)
+		{
+		    angle1 = ws->wiperAngle;
+
+		    ws->wiperAngle += step;
+		    ws->wiperAngle = MAX (ws->wiperAngle, 0.0f);
+
+		    angle0 = ws->wiperAngle;
+
+		    wipe = TRUE;
+		}
+	    }
+
+#define TAN(a) (tanf ((a) * (M_PI / 180.0f)))
+
+	    if (wipe)
+	    {
+		if (angle0 > 0.0f)
+		{
+		    p[2].x = s->width / 2 - s->height / TAN (angle0);
+		    p[2].y = 0;
+		}
+		else
+		{
+		    p[2].x = 0;
+		    p[2].y = s->height;
+		}
+
+		if (angle1 < 180.0f)
+		{
+		    p[0].x = s->width / 2 - s->height / TAN (angle1);
+		    p[0].y = 0;
+		}
+		else
+		{
+		    p[0].x = s->width;
+		    p[0].y = s->height;
+		}
+
+		/* software rasterizer doesn't support triangles yet so wiper
+		   effect will only work with FBOs right now */
+		waterVertices (s, GL_TRIANGLES, p, 3, 0.0f);
+	    }
+
+#undef TAN
+
+	}
+
 	waterUpdate (s, 0.8f);
     }
 
@@ -1278,17 +1380,48 @@ waterToggleRain (CompDisplay     *d,
     {
 	WATER_SCREEN (s);
 
-	if (!ws->timeoutHandle)
+	if (!ws->rainHandle)
 	{
 	    int delay;
 
 	    delay = wd->opt[WATER_DISPLAY_OPTION_RAIN_DELAY].value.i;
-	    ws->timeoutHandle = compAddTimeout (delay, waterTimeout, s);
+	    ws->rainHandle = compAddTimeout (delay, waterRainTimeout, s);
 	}
 	else
 	{
-	    compRemoveTimeout (ws->timeoutHandle);
-	    ws->timeoutHandle = 0;
+	    compRemoveTimeout (ws->rainHandle);
+	    ws->rainHandle = 0;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
+waterToggleWiper (CompDisplay     *d,
+		  CompAction      *action,
+		  CompActionState state,
+		  CompOption      *option,
+		  int	          nOption)
+{
+    CompScreen *s;
+
+    s = findScreenAtDisplay (d, getIntOptionNamed (option, nOption, "root", 0));
+    if (s)
+    {
+	WATER_SCREEN (s);
+
+	if (!ws->wiperHandle)
+	{
+	    int delay;
+
+	    delay = 2000;
+	    ws->wiperHandle = compAddTimeout (delay, waterWiperTimeout, s);
+	}
+	else
+	{
+	    compRemoveTimeout (ws->wiperHandle);
+	    ws->wiperHandle = 0;
 	}
     }
 
@@ -1395,6 +1528,7 @@ waterSetDisplayOption (CompDisplay     *display,
     switch (index) {
     case WATER_DISPLAY_OPTION_INITIATE:
     case WATER_DISPLAY_OPTION_TOGGLE_RAIN:
+    case WATER_DISPLAY_OPTION_TOGGLE_WIPER:
     case WATER_DISPLAY_OPTION_TITLE_WAVE:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
@@ -1415,11 +1549,11 @@ waterSetDisplayOption (CompDisplay     *display,
 	    {
 		WATER_SCREEN (s);
 
-		if (!ws->timeoutHandle)
+		if (!ws->rainHandle)
 		    continue;
 
-		compRemoveTimeout (ws->timeoutHandle);
-		ws->timeoutHandle = compAddTimeout (value->i, waterTimeout, s);
+		compRemoveTimeout (ws->rainHandle);
+		ws->rainHandle = compAddTimeout (value->i, waterRainTimeout, s);
 	    }
 	    return TRUE;
 	}
@@ -1463,6 +1597,21 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->value.action.key.keycode      =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (WATER_TOGGLE_RAIN_KEY_DEFAULT));
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_WIPER];
+    o->name			     = "toggle_wiper";
+    o->shortDesc		     = "Toggle wiper";
+    o->longDesc			     = "Toggle wiper effect";
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = waterToggleWiper;
+    o->value.action.terminate	     = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.type	     = CompBindingTypeKey;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.key.modifiers    = WATER_TOGGLE_WIPER_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode      =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (WATER_TOGGLE_WIPER_KEY_DEFAULT));
 
     o = &wd->opt[WATER_DISPLAY_OPTION_OFFSET_SCALE];
     o->name		= "offset_scale";
@@ -1553,6 +1702,8 @@ waterInitScreen (CompPlugin *p,
     addScreenAction (s, &wd->opt[WATER_DISPLAY_OPTION_INITIATE].value.action);
     addScreenAction (s,
 		     &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_RAIN].value.action);
+    addScreenAction (s,
+		     &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_WIPER].value.action);
     addScreenAction (s, &wd->opt[WATER_DISPLAY_OPTION_TITLE_WAVE].value.action);
 
     WRAP (ws, s, preparePaintScreen, waterPreparePaintScreen);
@@ -1574,8 +1725,11 @@ waterFiniScreen (CompPlugin *p,
 
     WATER_SCREEN (s);
 
-    if (ws->timeoutHandle)
-	compRemoveTimeout (ws->timeoutHandle);
+    if (ws->rainHandle)
+	compRemoveTimeout (ws->rainHandle);
+
+    if (ws->wiperHandle)
+	compRemoveTimeout (ws->wiperHandle);
 
     if (ws->fbo)
 	(*s->deleteFramebuffers) (1, &ws->fbo);
