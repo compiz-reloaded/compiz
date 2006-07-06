@@ -34,11 +34,104 @@
 
 CompPlugin *plugins = 0;
 
+Bool
+initPluginForDisplay (CompPlugin  *p,
+		      CompDisplay *d)
+{
+    CompScreen *s, *failedScreen = d->screens;
+    Bool       status = TRUE;
+
+    if (!(*p->vTable->initDisplay) (p, d))
+	return FALSE;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	if (!(*s->initPluginForScreen) (p, s))
+	{
+	    fprintf (stderr, "%s: Plugin '%s':initScreen failed\n",
+		     programName, p->vTable->name);
+	    failedScreen = s;
+	    status = FALSE;
+	    break;
+	}
+    }
+
+    for (s = d->screens; s != failedScreen; s = s->next)
+	(*s->finiPluginForScreen) (p, s);
+
+    return status;
+}
+
+void
+finiPluginForDisplay (CompPlugin  *p,
+		      CompDisplay *d)
+{
+    CompScreen  *s;
+
+    for (s = d->screens; s; s = s->next)
+	(*s->finiPluginForScreen) (p, s);
+
+    (*p->vTable->finiDisplay) (p, d);
+}
+
+Bool
+initPluginForScreen (CompPlugin *p,
+		     CompScreen *s)
+{
+    Bool status = TRUE;
+
+    if (p->vTable->initScreen)
+    {
+	if (!(*p->vTable->initScreen) (p, s))
+	    return FALSE;
+    }
+
+    if (p->vTable->initWindow)
+    {
+	CompWindow *w, *failedWindow = s->windows;
+
+	for (w = s->windows; w; w = w->next)
+	{
+	    if (!(*p->vTable->initWindow) (p, w))
+	    {
+		fprintf (stderr, "%s: Plugin '%s':initWindow "
+			 "failed\n", programName, p->vTable->name);
+		failedWindow = w;
+		status = FALSE;
+		break;
+	    }
+	}
+
+	if (p->vTable->finiWindow)
+	{
+	    for (w = s->windows; w != failedWindow; w = w->next)
+		(*p->vTable->finiWindow) (p, w);
+	}
+    }
+
+    return status;
+}
+
+void
+finiPluginForScreen (CompPlugin *p,
+		     CompScreen *s)
+{
+    if (p->vTable->finiWindow)
+    {
+	CompWindow *w = s->windows;
+
+	for (w = s->windows; w; w = w->next)
+	    (*p->vTable->finiWindow) (p, w);
+    }
+
+    if (p->vTable->finiScreen)
+	(*p->vTable->finiScreen) (p, s);
+}
+
 static Bool
 initPlugin (CompPlugin *p)
 {
     CompDisplay *d = compDisplays;
-    int         failed = 0;
 
     if (!(*p->vTable->init) (p))
     {
@@ -49,63 +142,15 @@ initPlugin (CompPlugin *p)
 
     if (d)
     {
-	if ((*d->initPluginForDisplay) (p, d))
-	{
-	    CompScreen *s, *failedScreen = d->screens;
-
-	    for (s = d->screens; s; s = s->next)
-	    {
-		if (!p->vTable->initScreen || (*s->initPluginForScreen) (p, s))
-		{
-		    CompWindow *w, *failedWindow = s->windows;
-
-		    for (w = s->windows; w; w = w->next)
-		    {
-			if (p->vTable->initWindow &&
-			    !(*p->vTable->initWindow) (p, w))
-			{
-			    fprintf (stderr, "%s: Plugin '%s':initWindow "
-				     "failed\n", programName, p->vTable->name);
-			    failedWindow = w;
-			    failed = 1;
-			    break;
-			}
-		    }
-
-		    for (w = s->windows; w != failedWindow; w = w->next)
-		    {
-			if (p->vTable->finiWindow)
-			    (*p->vTable->finiWindow) (p, w);
-		    }
-		}
-		else
-		{
-		    fprintf (stderr, "%s: Plugin '%s':initScreen failed\n",
-			     programName, p->vTable->name);
-		    failedScreen = s;
-		    failed = 1;
-		    break;
-		}
-	    }
-
-	    for (s = d->screens; s != failedScreen; s = s->next)
-		(*s->finiPluginForScreen) (p, s);
-	}
-	else
+	if (!(*d->initPluginForDisplay) (p, d))
 	{
 	    fprintf (stderr, "%s: Plugin '%s':initDisplay failed\n",
 		     programName, p->vTable->name);
 
-	    failed = 1;
-	    (*d->finiPluginForDisplay) (p, d);
+	    (*p->vTable->fini) (p);
+
+	    return FALSE;
 	}
-    }
-
-    if (failed)
-    {
-	(*p->vTable->fini) (p);
-
-	return FALSE;
     }
 
     return TRUE;

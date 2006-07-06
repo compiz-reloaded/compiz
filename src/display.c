@@ -696,20 +696,6 @@ setDisplayOptionForPlugin (CompDisplay     *display,
     return FALSE;
 }
 
-static Bool
-initPluginForDisplay (CompPlugin  *p,
-		      CompDisplay *d)
-{
-    return (*p->vTable->initDisplay) (p, d);
-}
-
-static void
-finiPluginForDisplay (CompPlugin  *p,
-		      CompDisplay *d)
-{
-    (*p->vTable->finiDisplay) (p, d);
-}
-
 static void
 updatePlugins (CompDisplay *d)
 {

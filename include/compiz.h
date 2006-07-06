@@ -2042,6 +2042,22 @@ struct _CompPlugin {
     CompPluginVTable *vTable;
 };
 
+Bool
+initPluginForDisplay (CompPlugin  *p,
+		      CompDisplay *d);
+
+void
+finiPluginForDisplay (CompPlugin  *p,
+		      CompDisplay *d);
+
+Bool
+initPluginForScreen (CompPlugin *p,
+		     CompScreen *s);
+
+void
+finiPluginForScreen (CompPlugin *p,
+		     CompScreen *s);
+
 CompPluginVTable *
 getCompPluginInfo (void);
 

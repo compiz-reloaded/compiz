@@ -299,24 +299,6 @@ compScreenInitOptions (CompScreen *screen)
     o->rest.s.nString = 0;
 }
 
-static Bool
-initPluginForScreen (CompPlugin *p,
-		     CompScreen *s)
-{
-    if (p->vTable->initScreen)
-	return (*p->vTable->initScreen) (p, s);
-
-    return FALSE;
-}
-
-static void
-finiPluginForScreen (CompPlugin *p,
-		     CompScreen *s)
-{
-    if (p->vTable->finiScreen)
-	(*p->vTable->finiScreen) (p, s);
-}
-
 static void
 updateStartupFeedback (CompScreen *s)
 {
