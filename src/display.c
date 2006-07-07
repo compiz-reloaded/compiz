@@ -2023,12 +2023,12 @@ addDisplay (char *name,
 
     for (i = 0; i < ScreenCount (dpy); i++)
     {
-	Window		     newWmSnOwner = None;
-	Atom		     wmSnAtom = 0;
+	Window		     newWmSnOwner = None, newCmSnOwner = None;
+	Atom		     wmSnAtom = 0, cmSnAtom = 0;
 	Time		     wmSnTimestamp = 0;
 	XEvent		     event;
 	XSetWindowAttributes attr;
-	Window		     currentWmSnOwner;
+	Window		     currentWmSnOwner, currentCmSnOwner;
 	char		     buf[128];
 	Window		     rootDummy, childDummy;
 	unsigned int	     uDummy;
@@ -2057,10 +2057,27 @@ addDisplay (char *name,
 			  StructureNotifyMask);
 	}
 
-	attr.override_redirect = TRUE;
-	attr.event_mask	   = PropertyChangeMask;
+	currentCmSnOwner = XGetSelectionOwner (dpy, cmSnAtom);
 
-	newWmSnOwner =
+	if (currentCmSnOwner != None)
+	{
+	    if (!replaceCurrentWm)
+	    {
+		fprintf (stderr,
+			 "%s: Screen %d on display \"%s\" already "
+			 "has a compositing manager; try using the "
+			 "--replace option to replace the current "
+			 "compositing manager .\n",
+			 programName, i, DisplayString (dpy));
+
+		continue;
+	    }
+	}
+
+	attr.override_redirect = TRUE;
+	attr.event_mask	       = PropertyChangeMask;
+
+	newCmSnOwner = newWmSnOwner =
 	    XCreateWindow (dpy, XRootWindow (dpy, i),
 			   -100, -100, 1, 1, 0,
 			   CopyFromParent, CopyFromParent,
@@ -2083,8 +2100,7 @@ addDisplay (char *name,
 
 	wmSnTimestamp = event.xproperty.time;
 
-	XSetSelectionOwner (dpy, wmSnAtom, newWmSnOwner,
-			    wmSnTimestamp);
+	XSetSelectionOwner (dpy, wmSnAtom, newWmSnOwner, wmSnTimestamp);
 
 	if (XGetSelectionOwner (dpy, wmSnAtom) != newWmSnOwner)
 	{
@@ -2130,6 +2146,21 @@ addDisplay (char *name,
 	{
 	    fprintf (stderr, "%s: Another composite manager is already "
 		     "running on screen: %d\n", programName, i);
+
+	    continue;
+	}
+
+	sprintf (buf, "_NET_WM_CM_S%d", i);
+	cmSnAtom = XInternAtom (dpy, buf, 0);
+
+	XSetSelectionOwner (dpy, cmSnAtom, newCmSnOwner, wmSnTimestamp);
+
+	if (XGetSelectionOwner (dpy, cmSnAtom) != newCmSnOwner)
+	{
+	    fprintf (stderr,
+		     "%s: Could not acquire compositing manager "
+		     "selection on screen %d display \"%s\"\n",
+		     programName, i, DisplayString (dpy));
 
 	    continue;
 	}
