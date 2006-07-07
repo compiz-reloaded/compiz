@@ -2330,6 +2330,48 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_key</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Pause</default>
+            <locale name="C">
+                <short>Initiate Window Picker</short>
+                <long>
+                    Layout and start transforming windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_button</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Initiate Window Picker</short>
+                <long>
+                    Layout and start transforming windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_bell</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Initiate Window Picker</short>
+                <long>
+                    Layout and start transforming windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/scale/screen0/options/spacing</key>
             <applyto>/apps/compiz/plugins/scale/screen0/options/spacing</applyto>
             <owner>compiz</owner>
@@ -2353,34 +2395,6 @@
                 <short>Sloppy Focus</short>
                 <long>
                     Focus window when mouse moves over them
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/scale/screen0/options/initiate</key>
-            <applyto>/apps/compiz/plugins/scale/screen0/options/initiate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>Pause</default>
-            <locale name="C">
-                <short>Initiate Window Picker</short>
-                <long>
-                    Layout and start transforming windows
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/scale/screen0/options/terminate</key>
-            <applyto>/apps/compiz/plugins/scale/screen0/options/terminate</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>Pause</default>
-            <locale name="C">
-                <short>Terminate</short>
-                <long>
-                    Return from scale view
                 </long>
             </locale>
         </schema>
@@ -2854,6 +2868,48 @@
                 <short>Toggle rain</short>
                 <long>
                     Toggle rain effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_key</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Shift&gt;F8</default>
+            <locale name="C">
+                <short>Toggle wiper</short>
+                <long>
+                    Toggle wiper effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_button</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Toggle wiper</short>
+                <long>
+                    Toggle wiper effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_bell</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Toggle wiper</short>
+                <long>
+                    Toggle wiper effect
                 </long>
             </locale>
         </schema>
