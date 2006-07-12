@@ -160,25 +160,9 @@ static void
 finiPlugin (CompPlugin *p)
 {
     CompDisplay *d = compDisplays;
-    CompScreen  *s;
 
     if (d)
-    {
-	for (s = d->screens; s; s = s->next)
-	{
-	    CompWindow *w = s->windows;
-
-	    if (p->vTable->finiWindow)
-	    {
-		for (w = s->windows; w; w = w->next)
-		    (*p->vTable->finiWindow) (p, w);
-	    }
-
-	    (*s->finiPluginForScreen) (p, s);
-	}
-
 	(*d->finiPluginForDisplay) (p, d);
-    }
 
     (*p->vTable->fini) (p);
 }
