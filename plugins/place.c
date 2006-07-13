@@ -709,6 +709,12 @@ placeWindow (CompWindow *window,
 	break;
     }
 
+    /* don't run placement algorithm on windows that can't be moved */
+    if (!(window->actions & CompWindowActionMoveMask))
+    {
+	goto done_no_constraints;
+    }
+
     if (window->type & CompWindowTypeFullscreenMask)
     {
 	x = x0;
