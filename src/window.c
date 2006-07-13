@@ -37,6 +37,7 @@
 
 #include <compiz.h>
 
+#define MwmHintsFunctions   (1L << 0)
 #define MwmHintsDecorations (1L << 1)
 
 #define PropMotifWmHintElements 3
@@ -608,6 +609,27 @@ recalcWindowActions (CompWindow *w)
 		     CompWindowActionMaximizeVertMask |
 		     CompWindowActionFullscreenMask);
 
+    if (!(w->mwmFunc & MwmFuncAll))
+    {
+	if (!(w->mwmFunc & MwmFuncResize))
+	    actions &= ~(CompWindowActionResizeMask	  |
+			 CompWindowActionMaximizeHorzMask |
+			 CompWindowActionMaximizeVertMask |
+			 CompWindowActionFullscreenMask);
+
+	if (!(w->mwmFunc & MwmFuncMove))
+	    actions &= ~(CompWindowActionMoveMask	  |
+			 CompWindowActionMaximizeHorzMask |
+			 CompWindowActionMaximizeVertMask |
+			 CompWindowActionFullscreenMask);
+
+	if (!(w->mwmFunc & MwmFuncIconify))
+	    actions &= ~CompWindowActionMinimizeMask;
+
+	if (!(w->mwmFunc & MwmFuncClose))
+	    actions &= ~CompWindowActionCloseMask;
+    }
+
     if (actions != w->actions)
     {
 	w->actions = actions;
@@ -709,15 +731,19 @@ recalcWindowType (CompWindow *w)
     }
 }
 
-unsigned int
-getMwmDecor (CompDisplay *display,
-	     Window      id)
+void
+getMwmHints (CompDisplay  *display,
+	     Window	  id,
+	     unsigned int *func,
+	     unsigned int *decor)
 {
     Atom	  actual;
     int		  result, format;
     unsigned long n, left;
     MwmHints	  *mwmHints;
-    unsigned int  decor = MwmDecorAll;
+
+    *func  = MwmFuncAll;
+    *decor = MwmDecorAll;
 
     result = XGetWindowProperty (display->display, id, display->mwmHintsAtom,
 				 0L, 20L, FALSE, display->mwmHintsAtom,
@@ -729,13 +755,14 @@ getMwmDecor (CompDisplay *display,
 	if (n >= PropMotifWmHintElements)
 	{
 	    if (mwmHints->flags & MwmHintsDecorations)
-		decor = mwmHints->decorations;
+		*decor = mwmHints->decorations;
+
+	    if (mwmHints->flags & MwmHintsFunctions)
+		*func = mwmHints->functions;
 	}
 
 	XFree (mwmHints);
     }
-
-    return decor;
 }
 
 unsigned int
@@ -1528,6 +1555,7 @@ addWindow (CompScreen *screen,
     w->scaled = FALSE;
 
     w->mwmDecor = MwmDecorAll;
+    w->mwmFunc  = MwmFuncAll;
 
     w->syncAlarm      = None;
     w->syncCounter    = 0;
@@ -1672,7 +1700,8 @@ addWindow (CompScreen *screen,
 
 	recalcWindowType (w);
 
-	w->mwmDecor  = getMwmDecor (w->screen->display, w->id);
+	getMwmHints (w->screen->display, w->id, &w->mwmFunc, &w->mwmDecor);
+
 	w->protocols = getProtocols (w->screen->display, w->id);
 
 	recalcWindowActions (w);

@@ -129,6 +129,19 @@ typedef struct _CompIcon    CompIcon;
 #define CompWindowActionCloseMask	 (1 << 7)
 #define CompWindowActionShadeMask	 (1 << 8)
 
+#define MwmFuncAll      (1L << 0)
+#define MwmFuncResize   (1L << 1)
+#define MwmFuncMove     (1L << 2)
+#define MwmFuncIconify  (1L << 3)
+#define MwmFuncMaximize (1L << 4)
+#define MwmFuncClose    (1L << 5)
+
+#define MwmDecorHandle   (1L << 2)
+#define MwmDecorTitle    (1L << 3)
+#define MwmDecorMenu     (1L << 4)
+#define MwmDecorMinimize (1L << 5)
+#define MwmDecorMaximize (1L << 6)
+
 #define MwmDecorAll      (1L << 0)
 #define MwmDecorBorder   (1L << 1)
 #define MwmDecorHandle   (1L << 2)
@@ -1635,6 +1648,7 @@ struct _CompWindow {
     unsigned int      actions;
     unsigned int      protocols;
     unsigned int      mwmDecor;
+    unsigned int      mwmFunc;
     Bool	      invisible;
     Bool	      destroyed;
     Bool	      damaged;
@@ -1745,9 +1759,11 @@ getWindowType (CompDisplay *display,
 void
 recalcWindowType (CompWindow *w);
 
-unsigned int
-getMwmDecor (CompDisplay *display,
-	     Window      id);
+void
+getMwmHints (CompDisplay  *display,
+	     Window	  id,
+	     unsigned int *func,
+	     unsigned int *decor);
 
 unsigned int
 getProtocols (CompDisplay *display,

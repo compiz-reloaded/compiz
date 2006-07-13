@@ -1537,8 +1537,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
 	    {
-		w->mwmDecor = getMwmDecor (d, w->id);
+		getMwmHints (d, w->id, &w->mwmFunc, &w->mwmDecor);
 
+		recalcWindowActions (w);
 		updateWindowAttributes (w, FALSE);
 	    }
 	}
