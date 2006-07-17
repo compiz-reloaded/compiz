@@ -38,7 +38,7 @@
 #define WIN_W(w) ((w)->width + (w)->input.left + (w)->input.right)
 #define WIN_H(w) ((w)->height + (w)->input.top + (w)->input.bottom)
 
-#define SCALE_SPACING_DEFAULT 25
+#define SCALE_SPACING_DEFAULT 10
 #define SCALE_SPACING_MIN     0
 #define SCALE_SPACING_MAX     250
 
@@ -117,8 +117,9 @@ static IconOverlay iconOverlay[] = {
 static int displayPrivateIndex;
 
 typedef struct _ScaleSlot {
-    int x1, y1, x2, y2;
-    int line;
+    int   x1, y1, x2, y2;
+    int   filled;
+    float scale;
 } ScaleSlot;
 
 #define SCALE_DISPLAY_OPTION_INITIATE 0
@@ -174,16 +175,10 @@ typedef struct _ScaleScreen {
     int        slotsSize;
     int        nSlots;
 
-    int *line;
-    int lineSize;
-    int nLine;
-
     /* only used for sorting */
     CompWindow **windows;
     int        windowsSize;
     int        nWindows;
-
-    GLfloat scale;
 
     Bool     darkenBack;
     GLushort opacity;
@@ -196,9 +191,13 @@ typedef struct _ScaleScreen {
 typedef struct _ScaleWindow {
     ScaleSlot *slot;
 
+    int sid;
+    int distance;
+
     GLfloat xVelocity, yVelocity, scaleVelocity;
     GLfloat scale;
     GLfloat tx, ty;
+    float   delta;
     Bool    adjust;
 } ScaleWindow;
 
@@ -575,15 +574,25 @@ scalePaintWindow (CompWindow		  *w,
 		    break;
 		}
 
-		ds = 1.0f - ss->scale;
-		if (ds)
+		if (sw->slot)
 		{
-		    sAttrib.opacity =
-			(fabs (1.0f - sw->scale) * sAttrib.opacity) / ds;
+		    sw->delta =
+			fabs (sw->slot->x1 - w->serverX) +
+			fabs (sw->slot->y1 - w->serverY) +
+			fabs (1.0f - sw->slot->scale) * 500.0f;
 		}
-		else if (!sw->slot)
+
+		if (sw->delta)
 		{
-		    sAttrib.opacity = 0;
+		    ds =
+			fabs (sw->tx) +
+			fabs (sw->ty) +
+			fabs (1.0f - sw->scale) * 500.0f;
+
+		    if (ds > sw->delta)
+			ds = sw->delta;
+
+		    sAttrib.opacity = (ds * sAttrib.opacity) / sw->delta;
 		}
 
 		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
@@ -624,31 +633,170 @@ scalePaintWindow (CompWindow		  *w,
 }
 
 static int
-compareWindows (const void *elem1,
-		const void *elem2)
+compareWindowsDistance (const void *elem1,
+			const void *elem2)
 {
     CompWindow *w1 = *((CompWindow **) elem1);
     CompWindow *w2 = *((CompWindow **) elem2);
 
-    return w2->activeNum - w1->activeNum;
+    SCALE_SCREEN (w1->screen);
+
+    return
+	GET_SCALE_WINDOW (w1, ss)->distance -
+	GET_SCALE_WINDOW (w2, ss)->distance;
 }
 
-/* TODO: Place window thumbnails at smarter positions */
+static void
+layoutSlots (CompScreen *s)
+{
+    int i, j, x, y, width, height, lines, n;
+
+    SCALE_SCREEN (s);
+
+    ss->nSlots = 0;
+
+    lines = sqrt (ss->nWindows + 1);
+
+    y      = s->workArea.y + ss->spacing;
+    height = (s->workArea.height - (lines + 1) * ss->spacing) / lines;
+
+    for (i = 0; i < lines; i++)
+    {
+	n = MIN (ss->nWindows - ss->nSlots,
+		 ceilf ((float) ss->nWindows / lines));
+
+	x     = s->workArea.x + ss->spacing;
+	width = (s->workArea.width - (n + 1) * ss->spacing) / n;
+
+	for (j = 0; j < n; j++)
+	{
+	    ss->slots[ss->nSlots].x1 = x;
+	    ss->slots[ss->nSlots].y1 = y;
+	    ss->slots[ss->nSlots].x2 = x + width;
+	    ss->slots[ss->nSlots].y2 = y + height;
+
+	    ss->slots[ss->nSlots].filled = FALSE;
+
+	    x += width + ss->spacing;
+
+	    ss->nSlots++;
+	}
+
+	y += height + ss->spacing;
+    }
+}
+
+static void
+findBestSlots (CompScreen *s)
+{
+    CompWindow *w;
+    int        i, j, d, d0 = 0;
+    float      sx, sy, cx, cy;
+
+    SCALE_SCREEN (s);
+
+    for (i = 0; i < ss->nWindows; i++)
+    {
+	w = ss->windows[i];
+
+	SCALE_WINDOW (w);
+
+	if (sw->slot)
+	    continue;
+
+	sw->sid      = 0;
+	sw->distance = MAXSHORT;
+
+	for (j = 0; j < ss->nSlots; j++)
+	{
+	    if (!ss->slots[j].filled)
+	    {
+		sx = (ss->slots[j].x2 + ss->slots[j].x1) / 2;
+		sy = (ss->slots[j].y2 + ss->slots[j].y1) / 2;
+
+		cx = w->serverX + w->width  / 2;
+		cy = w->serverY + w->height / 2;
+
+		cx -= sx;
+		cy -= sy;
+
+		d = sqrt (cx * cx + cy * cy);
+		if (d0 + d < sw->distance)
+		{
+		    sw->sid      = j;
+		    sw->distance = d0 + d;
+		}
+	    }
+	}
+
+	d0 += sw->distance;
+    }
+}
+
+static Bool
+fillInWindows (CompScreen *s)
+{
+    CompWindow *w;
+    int        i, width, height;
+    float      sx, sy, cx, cy;
+
+    SCALE_SCREEN (s);
+
+    for (i = 0; i < ss->nWindows; i++)
+    {
+	w = ss->windows[i];
+
+	SCALE_WINDOW (w);
+
+	if (!sw->slot)
+	{
+	    if (ss->slots[sw->sid].filled)
+		return TRUE;
+
+	    sw->slot = &ss->slots[sw->sid];
+
+	    width  = w->width  + w->input.left + w->input.right;
+	    height = w->height + w->input.top  + w->input.bottom;
+
+	    sx = (float) (sw->slot->x2 - sw->slot->x1) / width;
+	    sy = (float) (sw->slot->y2 - sw->slot->y1) / height;
+
+	    sw->slot->scale = MIN (MIN (sx, sy), 1.0f);
+
+	    sx = w->width  * sw->slot->scale;
+	    sy = w->height * sw->slot->scale;
+	    cx = (sw->slot->x1 + sw->slot->x2) / 2;
+	    cy = (sw->slot->y1 + sw->slot->y2) / 2;
+
+	    cx += (w->input.left - w->input.right)  * sw->slot->scale;
+	    cy += (w->input.top  - w->input.bottom) * sw->slot->scale;
+
+	    sw->slot->x1 = cx - sx / 2;
+	    sw->slot->y1 = cy - sy / 2;
+	    sw->slot->x2 = cx + sx / 2;
+	    sw->slot->y2 = cy + sy / 2;
+
+	    sw->slot->filled = TRUE;
+
+	    sw->adjust = TRUE;
+	}
+    }
+
+    return FALSE;
+}
+
 static Bool
 layoutThumbs (CompScreen *s)
 {
     CompWindow *w;
-    int	       i, j, y2;
-    int        cx, cy;
-    int        lineLength, itemsPerLine;
-    float      scaleW, scaleH;
-    int        totalWidth, totalHeight;
+    int	       i;
 
     SCALE_SCREEN (s);
 
-    cx = cy = ss->nWindows = 0;
+    ss->nWindows = 0;
 
-    for (w = s->windows; w; w = w->next)
+    /* add windows scale list, top most window first */
+    for (w = s->reverseWindows; w; w = w->prev)
     {
 	SCALE_WINDOW (w);
 
@@ -676,141 +824,35 @@ layoutThumbs (CompScreen *s)
     if (ss->nWindows == 0)
 	return FALSE;
 
-    qsort (ss->windows, ss->nWindows, sizeof (CompWindow *), compareWindows);
-
-    itemsPerLine = (sqrt (ss->nWindows) * s->width) / s->height;
-    if (itemsPerLine < 1)
-	itemsPerLine = 1;
-
-    if (ss->lineSize <= ss->nWindows / itemsPerLine + 1)
+    if (ss->slotsSize < ss->nWindows)
     {
-	ss->line = realloc (ss->line, sizeof (int) *
-			    (ss->nWindows / itemsPerLine + 2));
-	if (!ss->line)
-	    return FALSE;
-
-	ss->lineSize = ss->nWindows / itemsPerLine + 2;
-    }
-
-    totalWidth = totalHeight = 0;
-
-    ss->line[0] = 0;
-    ss->nLine = 1;
-    lineLength = itemsPerLine;
-
-    if (ss->slotsSize <= ss->nWindows)
-    {
-	ss->slots = realloc (ss->slots, sizeof (ScaleSlot) *
-			     (ss->nWindows + 1));
+	ss->slots = realloc (ss->slots, sizeof (ScaleSlot) * ss->nWindows);
 	if (!ss->slots)
 	    return FALSE;
 
-	ss->slotsSize = ss->nWindows + 1;
+	ss->slotsSize = ss->nWindows;
     }
-    ss->nSlots = 0;
 
-    for (i = 0; i < ss->nWindows; i++)
+    /* create a grid of slots */
+    layoutSlots (s);
+
+    do
     {
-	SCALE_WINDOW (ss->windows[i]);
+	/* find most appropriate slots for windows */
+	findBestSlots (s);
 
-	w = ss->windows[i];
+	/* sort windows, window with closest distance to a slot first */
+	qsort (ss->windows, ss->nWindows, sizeof (CompWindow *),
+	       compareWindowsDistance);
 
-	/* find a good place between other elements */
-	for (j = 0; j < ss->nSlots; j++)
-	{
-	    y2 = ss->slots[j].y2 + ss->spacing + WIN_H (w);
-	    if (w->width < ss->slots[j].x2 - ss->slots[j].x1 &&
-		y2 <= ss->line[ss->slots[j].line])
-		break;
-	}
-
-	/* otherwise append or start a new line */
-	if (j == ss->nSlots)
-	{
-	    if (lineLength < itemsPerLine)
-	    {
-		lineLength++;
-
-		ss->slots[ss->nSlots].x1 = cx;
-		ss->slots[ss->nSlots].y1 = cy;
-		ss->slots[ss->nSlots].x2 = cx + WIN_W (w);
-		ss->slots[ss->nSlots].y2 = cy + WIN_H (w);
-		ss->slots[ss->nSlots].line = ss->nLine - 1;
-
-		ss->line[ss->nLine - 1] = MAX (ss->line[ss->nLine - 1],
-					       ss->slots[ss->nSlots].y2);
-	    }
-	    else
-	    {
-		lineLength = 1;
-
-		cx = ss->spacing;
-		cy = ss->line[ss->nLine - 1] + ss->spacing;
-
-		ss->slots[ss->nSlots].x1 = cx;
-		ss->slots[ss->nSlots].y1 = cy;
-		ss->slots[ss->nSlots].x2 = cx + WIN_W (w);
-		ss->slots[ss->nSlots].y2 = cy + WIN_H (w);
-		ss->slots[ss->nSlots].line = ss->nLine - 1;
-
-		ss->line[ss->nLine] = ss->slots[ss->nSlots].y2;
-
-		ss->nLine++;
-	    }
-
-	    if (ss->slots[ss->nSlots].y2 > totalHeight)
-		totalHeight = ss->slots[ss->nSlots].y2;
-	}
-	else
-	{
-	    ss->slots[ss->nSlots].x1 = ss->slots[j].x1;
-	    ss->slots[ss->nSlots].y1 = ss->slots[j].y2 + ss->spacing;
-	    ss->slots[ss->nSlots].x2 = ss->slots[ss->nSlots].x1 + WIN_W (w);
-	    ss->slots[ss->nSlots].y2 = ss->slots[ss->nSlots].y1 + WIN_H (w);
-	    ss->slots[ss->nSlots].line = ss->slots[j].line;
-
-	    ss->slots[j].line = 0;
-	}
-
-	cx = ss->slots[ss->nSlots].x2;
-	if (cx > totalWidth)
-	    totalWidth = cx;
-
-	cx += ss->spacing;
-
-	sw->slot = &ss->slots[ss->nSlots];
-	sw->adjust = TRUE;
-
-	ss->nSlots++;
-    }
-
-    totalWidth  += ss->spacing;
-    totalHeight += ss->spacing;
-
-    scaleW = (float) s->workArea.width / totalWidth;
-    scaleH = (float) s->workArea.height / totalHeight;
-
-    ss->scale = MIN (MIN (scaleH, scaleW), 1.0f);
+    } while (fillInWindows (s));
 
     for (i = 0; i < ss->nWindows; i++)
     {
 	SCALE_WINDOW (ss->windows[i]);
 
 	if (sw->slot)
-	{
-	    ss->slots[i].y1 += ss->windows[i]->input.top;
-	    ss->slots[i].x1 += ss->windows[i]->input.left;
-	    ss->slots[i].y2 += ss->windows[i]->input.top;
-	    ss->slots[i].x2 += ss->windows[i]->input.left;
-	    ss->slots[i].y1 = (float) ss->slots[i].y1 * ss->scale;
-	    ss->slots[i].x1 = (float) ss->slots[i].x1 * ss->scale;
-	    ss->slots[i].y2 = (float) ss->slots[i].y2 * ss->scale;
-	    ss->slots[i].x2 = (float) ss->slots[i].x2 * ss->scale;
-	    ss->slots[i].x1 += s->workArea.x;
-	    ss->slots[i].y1 += s->workArea.y;
-	    ss->slots[i].x2 += s->workArea.x;
-	    ss->slots[i].y2 += s->workArea.y;
-	}
+	    sw->adjust = TRUE;
     }
 
     return TRUE;
@@ -822,14 +864,13 @@ adjustScaleVelocity (CompWindow *w)
     float dx, dy, ds, adjust, amount;
     float x1, y1, scale;
 
-    SCALE_SCREEN (w->screen);
     SCALE_WINDOW (w);
 
     if (sw->slot)
     {
 	x1 = sw->slot->x1;
 	y1 = sw->slot->y1;
-	scale = ss->scale;
+	scale = sw->slot->scale;
     }
     else
     {
@@ -1522,11 +1563,6 @@ scaleInitScreen (CompPlugin *p,
     ss->windows = 0;
     ss->windowsSize = 0;
 
-    ss->line = 0;
-    ss->lineSize = 0;
-
-    ss->scale = 1.0f;
-
     ss->spacing = SCALE_SPACING_DEFAULT;
 
     ss->speed    = SCALE_SPEED_DEFAULT;
@@ -1579,9 +1615,6 @@ scaleFiniScreen (CompPlugin *p,
     if (ss->slotsSize)
 	free (ss->slots);
 
-    if (ss->lineSize)
-	free (ss->line);
-
     if (ss->windowsSize)
 	free (ss->windows);
 
@@ -1606,6 +1639,7 @@ scaleInitWindow (CompPlugin *p,
     sw->adjust = FALSE;
     sw->xVelocity = sw->yVelocity = 0.0f;
     sw->scaleVelocity = 1.0f;
+    sw->delta = 1.0f;
 
     w->privates[ss->windowPrivateIndex].ptr = sw;
 
