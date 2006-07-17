@@ -359,7 +359,7 @@ gconfGetValue (CompDisplay     *d,
 	binding = gconf_value_get_string (gvalue);
 	if (strcasecmp (binding, "disabled") == 0 || !*binding)
 	{
-	    value->action.type = 0;
+	    value->bind.type = 0;
 	    return TRUE;
 	}
 	else if (strstr (binding, "Button"))
