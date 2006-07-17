@@ -656,13 +656,13 @@ gconfInitOption (CompDisplay *d,
 
     if (o->type == CompOptionTypeAction)
     {
-	static gchar *tail[] = { "_key", "_button", "_bell" };
+	static gchar *tail[] = { "key", "button", "bell" };
 	gchar	     *key1;
 	int	     i;
 
 	for (i = 0; i < sizeof (tail) / sizeof (tail[0]); i++)
 	{
-	    key1 = g_strdup_printf ("%s%s", key, tail[0]);
+	    key1 = g_strdup_printf ("%s_%s", key, tail[i]);
 
 	    entry = gconf_client_get_entry (gd->client, key1, NULL, TRUE, NULL);
 	    if (entry)
