@@ -194,14 +194,14 @@ compSetActionOption (CompOption      *option,
 
 	if (value->action.type & CompBindingTypeButton)
 	{
-	    if (action->button.button    != value->action.button.button &&
+	    if (action->button.button    != value->action.button.button ||
 		action->button.modifiers != value->action.button.modifiers)
 		equal = FALSE;
 	}
 
 	if (value->action.type & CompBindingTypeKey)
 	{
-	    if (action->key.keycode   != value->action.key.keycode &&
+	    if (action->key.keycode   != value->action.key.keycode ||
 		action->key.modifiers != value->action.key.modifiers)
 		equal = FALSE;
 	}
