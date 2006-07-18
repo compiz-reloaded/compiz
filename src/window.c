@@ -456,7 +456,7 @@ windowStateMask (CompDisplay *display,
     else if (state == display->winStateBelowAtom)
 	return CompWindowStateBelowMask;
     else if (state == display->winStateDemandsAttentionAtom)
-	return CompWindowStateDemandsAttentationMask;
+	return CompWindowStateDemandsAttentionMask;
     else if (state == display->winStateDisplayModalAtom)
 	return CompWindowStateDisplayModalMask;
 
@@ -520,7 +520,7 @@ setWindowState (CompDisplay  *display,
 	data[i++] = display->winStateAboveAtom;
     if (state & CompWindowStateBelowMask)
 	data[i++] = display->winStateBelowAtom;
-    if (state & CompWindowStateDemandsAttentationMask)
+    if (state & CompWindowStateDemandsAttentionMask)
 	data[i++] = display->winStateDemandsAttentionAtom;
     if (state & CompWindowStateDisplayModalMask)
 	data[i++] = display->winStateDisplayModalAtom;
