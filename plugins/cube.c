@@ -1364,6 +1364,9 @@ cubeUnfold (CompScreen *s)
 {
     CUBE_SCREEN (s);
 
+    if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
+	return;
+
     if (!cs->grabIndex)
 	cs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "cube");
 
