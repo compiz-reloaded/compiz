@@ -252,9 +252,6 @@ gconfSetOption (CompDisplay *d,
 	if (!existingValue || gconf_value_compare (existingValue, gvalue))
 	    gconf_client_set (gd->client, key3, gvalue, NULL);
 
-	if (existingValue)
-	    gconf_value_free (existingValue);
-
 	gconf_value_free (gvalue);
 
 	g_free (key1);
