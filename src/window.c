@@ -2547,6 +2547,10 @@ findSiblingBelow (CompWindow *w,
 	if (below->type & CompWindowTypeDesktopMask)
 	    return below;
 
+	/* always above ancestor */
+	if (isAncestorTo (w, below))
+	    return below;
+
 	switch (type) {
 	case CompWindowTypeDesktopMask:
 	    /* desktop window layer */
@@ -2664,6 +2668,10 @@ validSiblingBelow (CompWindow *w,
     /* always above desktop windows */
     if (sibling->type & CompWindowTypeDesktopMask)
 	return TRUE;
+
+    /* always above ancestor */
+    if (isAncestorTo (w, sibling))
+	return FALSE;
 
     switch (type) {
     case CompWindowTypeDesktopMask:
@@ -3227,12 +3235,13 @@ addWindowStackChanges (CompWindow     *w,
     if (sibling && mask)
     {
 	/* a normal window can be stacked above fullscreen windows but we
-	   don't wont normal windows to be stacked above dock window so if
+	   don't want normal windows to be stacked above dock window so if
 	   the sibling we're stacking above is a fullscreen window we also
 	   update all dock windows. */
 	if ((sibling->type & CompWindowTypeFullscreenMask) &&
 	    (!(w->type & (CompWindowTypeFullscreenMask |
-			  CompWindowTypeDockMask))))
+			  CompWindowTypeDockMask))) &&
+	    !isAncestorTo (w, sibling))
 	{
 	    CompWindow *dw;
 
