@@ -1882,7 +1882,8 @@ mapWindow (CompWindow *w)
 
     w->attrib.map_state = IsViewable;
 
-    setWmState (w->screen->display, NormalState, w->id);
+    if (!w->attrib.override_redirect)
+	setWmState (w->screen->display, NormalState, w->id);
 
     w->invisible = TRUE;
     w->damaged   = FALSE;
