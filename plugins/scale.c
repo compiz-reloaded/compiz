@@ -44,8 +44,8 @@
 
 #define SCALE_SLOPPY_FOCUS_DEFAULT TRUE
 
-#define SCALE_INITIATE_KEY_DEFAULT       "Pause"
-#define SCALE_INITIATE_MODIFIERS_DEFAULT 0
+#define SCALE_INITIATE_KEY_DEFAULT       "Up"
+#define SCALE_INITIATE_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
 
 #define SCALE_SPEED_DEFAULT   1.5f
 #define SCALE_SPEED_MIN       0.1f
@@ -1153,10 +1153,12 @@ scaleInitiate (CompDisplay     *d,
 
 		damageScreen (s);
 	    }
-	}
-	else
-	{
-	    scaleTerminate (d, action, state, option, nOption);
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
 	}
     }
 
