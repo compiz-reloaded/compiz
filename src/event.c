@@ -33,6 +33,9 @@
 
 #include <compiz.h>
 
+static Window xdndWindow = None;
+static Window edgeWindow = None;
+
 static void
 handleWindowDamageRect (CompWindow *w,
 			int	   x,
@@ -550,6 +553,107 @@ triggerBellNotifyBindings (CompDisplay *d,
 }
 
 static Bool
+isEdgeAction (CompOption      *option,
+	      CompActionState state,
+	      unsigned int    edge)
+{
+    if (option->type != CompOptionTypeAction)
+	return FALSE;
+
+    if (!(option->value.action.edgeMask & edge))
+	return FALSE;
+
+    if (!(option->value.action.state & state))
+	return FALSE;
+
+    return TRUE;
+}
+
+static Bool
+isEdgeEnterAction (CompOption      *option,
+		   CompActionState state,
+		   unsigned int    edge,
+		   CompAction      **action)
+{
+    if (!isEdgeAction (option, state, edge))
+	return FALSE;
+
+    if (!option->value.action.initiate)
+	return FALSE;
+
+    *action = &option->value.action;
+
+    return TRUE;
+}
+
+static Bool
+isEdgeLeaveAction (CompOption      *option,
+		   CompActionState state,
+		   unsigned int    edge,
+		   CompAction      **action)
+{
+    if (!isEdgeAction (option, state, edge))
+	return FALSE;
+
+    if (!option->value.action.terminate)
+	return FALSE;
+
+    *action = &option->value.action;
+
+    return TRUE;
+}
+
+static Bool
+triggerEdgeEnterBindings (CompDisplay  *d,
+			  CompOption   *option,
+			  int	       nOption,
+			  unsigned int edge,
+			  CompOption   *argument,
+			  int	       nArgument)
+{
+    CompActionState state = CompActionStateInitEdge;
+    CompAction      *action;
+
+    while (nOption--)
+    {
+	if (isEdgeEnterAction (option, state, edge, &action))
+	{
+	    if ((*action->initiate) (d, action, state, argument, nArgument))
+		return TRUE;
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static Bool
+triggerEdgeLeaveBindings (CompDisplay  *d,
+			  CompOption   *option,
+			  int	       nOption,
+			  unsigned int edge,
+			  CompOption   *argument,
+			  int	       nArgument)
+{
+    CompActionState state = CompActionStateTermEdge;
+    CompAction      *action;
+
+    while (nOption--)
+    {
+	if (isEdgeLeaveAction (option, state, edge, &action))
+	{
+	    if ((*action->terminate) (d, action, state, argument, nArgument))
+		return TRUE;
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static Bool
 handleActionEvent (CompDisplay *d,
 		   XEvent      *event)
 {
@@ -679,6 +783,193 @@ handleActionEvent (CompDisplay *d,
 	if (triggerKeyReleaseBindings (d, option, nOption, event, o, 6))
 	    return TRUE;
 
+	break;
+    case EnterNotify:
+	if (event->xcrossing.mode   != NotifyGrab   &&
+	    event->xcrossing.mode   != NotifyUngrab &&
+	    event->xcrossing.detail != NotifyInferior)
+	{
+	    CompScreen   *s;
+	    unsigned int edge = 0;
+
+	    s = findScreenAtDisplay (d, event->xcrossing.root);
+	    if (s)
+	    {
+		unsigned int i;
+
+		for (i = 0; i < SCREEN_EDGE_NUM; i++)
+		{
+		    if (event->xcrossing.window == s->screenEdge[i].id)
+		    {
+			edge = 1 << i;
+			break;
+		    }
+		}
+	    }
+
+	    if (edgeWindow && edgeWindow != event->xcrossing.window)
+	    {
+		o[0].value.i = event->xcrossing.window;
+		o[1].value.i = event->xcrossing.state;
+		o[2].value.i = event->xcrossing.x_root;
+		o[3].value.i = event->xcrossing.y_root;
+		o[4].value.i = event->xcrossing.root;
+
+		for (p = getPlugins (); p; p = p->next)
+		{
+		    if (p->vTable->getDisplayOptions)
+		    {
+			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			if (triggerEdgeLeaveBindings (d, option, nOption, edge,
+						      o, 5))
+			    return TRUE;
+		    }
+		}
+
+		option = compGetDisplayOptions (d, &nOption);
+		if (triggerEdgeLeaveBindings (d, option, nOption, edge, o, 5))
+		    return TRUE;
+	    }
+
+	    if (edge)
+	    {
+		edgeWindow = event->xcrossing.window;
+
+		o[0].value.i = event->xcrossing.window;
+		o[1].value.i = event->xcrossing.state;
+		o[2].value.i = event->xcrossing.x_root;
+		o[3].value.i = event->xcrossing.y_root;
+		o[4].value.i = event->xcrossing.root;
+
+		for (p = getPlugins (); p; p = p->next)
+		{
+		    if (p->vTable->getDisplayOptions)
+		    {
+			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			if (triggerEdgeEnterBindings (d, option, nOption, edge,
+						      o, 5))
+			    return TRUE;
+		    }
+		}
+
+		option = compGetDisplayOptions (d, &nOption);
+		if (triggerEdgeEnterBindings (d, option, nOption, edge, o, 5))
+		    return TRUE;
+	    }
+	    else
+	    {
+		edgeWindow = None;
+	    }
+	} break;
+    case ClientMessage:
+	if (event->xclient.message_type == d->xdndEnterAtom)
+	{
+	    xdndWindow = event->xclient.window;
+	}
+	else if (event->xclient.message_type == d->xdndLeaveAtom)
+	{
+	    unsigned int edge = 0;
+	    Window	 root = None;
+
+	    if (!xdndWindow)
+	    {
+		CompWindow *w;
+
+		w = findWindowAtDisplay (d, event->xclient.window);
+		if (w)
+		{
+		    CompScreen   *s = w->screen;
+		    unsigned int i;
+
+		    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+		    {
+			if (event->xclient.window == s->screenEdge[i].id)
+			{
+			    edge = 1 << i;
+			    root = s->root;
+			    break;
+			}
+		    }
+		}
+	    }
+
+	    if (edge)
+	    {
+		o[0].value.i = event->xclient.window;
+		o[1].value.i = 0; /* fixme */
+		o[2].value.i = 0; /* fixme */
+		o[3].value.i = 0; /* fixme */
+		o[4].value.i = root;
+
+		for (p = getPlugins (); p; p = p->next)
+		{
+		    if (p->vTable->getDisplayOptions)
+		    {
+			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			if (triggerEdgeLeaveBindings (d, option, nOption, edge,
+						      o, 5))
+			    return TRUE;
+		    }
+		}
+
+		option = compGetDisplayOptions (d, &nOption);
+		if (triggerEdgeLeaveBindings (d, option, nOption, edge, o, 5))
+		    return TRUE;
+	    }
+	}
+	else if (event->xclient.message_type == d->xdndPositionAtom)
+	{
+	    unsigned int edge = 0;
+	    Window	 root = None;
+
+	    if (xdndWindow == event->xclient.window)
+	    {
+		CompWindow *w;
+
+		w = findWindowAtDisplay (d, event->xclient.window);
+		if (w)
+		{
+		    CompScreen   *s = w->screen;
+		    unsigned int i;
+
+		    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+		    {
+			if (xdndWindow == s->screenEdge[i].id)
+			{
+			    edge = 1 << i;
+			    root = s->root;
+			    break;
+			}
+		    }
+		}
+	    }
+
+	    if (edge)
+	    {
+		o[0].value.i = xdndWindow;
+		o[1].value.i = 0; /* fixme */
+		o[2].value.i = event->xclient.data.l[2] >> 16;
+		o[3].value.i = event->xclient.data.l[2] & 0xffff;
+		o[4].value.i = root;
+
+		for (p = getPlugins (); p; p = p->next)
+		{
+		    if (p->vTable->getDisplayOptions)
+		    {
+			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			if (triggerEdgeEnterBindings (d, option, nOption, edge,
+						      o, 5))
+			    return TRUE;
+		    }
+		}
+
+		option = compGetDisplayOptions (d, &nOption);
+		if (triggerEdgeEnterBindings (d, option, nOption, edge, o, 5))
+		    return TRUE;
+	    }
+
+	    xdndWindow = None;
+	}
 	break;
     default:
 	if (event->type == d->xkbEvent)

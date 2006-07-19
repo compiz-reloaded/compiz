@@ -1502,6 +1502,21 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate Window Move</short>
+                <long>
+                    Start moving window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/move/allscreens/options/opacity</key>
             <applyto>/apps/compiz/plugins/move/allscreens/options/opacity</applyto>
             <owner>compiz</owner>
@@ -1683,6 +1698,21 @@
             <owner>compiz</owner>
             <type>bool</type>
             <default>false</default>
+            <locale name="C">
+                <short>Initiate Window Resize</short>
+                <long>
+                    Start resizing window
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/resize/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/resize/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
             <locale name="C">
                 <short>Initiate Window Resize</short>
                 <long>
@@ -2372,6 +2402,21 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[@SCALE_CORNER@]</default>
+            <locale name="C">
+                <short>Initiate Window Picker</short>
+                <long>
+                    Layout and start transforming windows
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/scale/screen0/options/spacing</key>
             <applyto>/apps/compiz/plugins/scale/screen0/options/spacing</applyto>
             <owner>compiz</owner>
@@ -2466,21 +2511,6 @@
                 <short>Opacity</short>
                 <long>
                     Amount of opacity in percent (0-100)
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/scale/screen0/options/corners</key>
-            <applyto>/apps/compiz/plugins/scale/screen0/options/corners</applyto>
-            <owner>compiz</owner>
-            <type>list</type>
-            <list_type>string</list_type>
-            <default>[]</default>
-            <locale name="C">
-                <short>Corners</short>
-                <long>
-                    Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, BottomRight)
                 </long>
             </locale>
         </schema>
@@ -2831,6 +2861,21 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>
+                    Enable pointer water effects
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</key>
             <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</applyto>
             <owner>compiz</owner>
@@ -2873,6 +2918,21 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Toggle rain</short>
+                <long>
+                    Toggle rain effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_key</key>
             <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_key</applyto>
             <owner>compiz</owner>
@@ -2906,6 +2966,21 @@
             <owner>compiz</owner>
             <type>bool</type>
             <default>false</default>
+            <locale name="C">
+                <short>Toggle wiper</short>
+                <long>
+                    Toggle wiper effect
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
             <locale name="C">
                 <short>Toggle wiper</short>
                 <long>
@@ -2976,6 +3051,21 @@
             <owner>compiz</owner>
             <type>bool</type>
             <default>false</default>
+            <locale name="C">
+                <short>Title wave</short>
+                <long>
+                    Wave effect from window title
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/title_wave_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/title_wave_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
             <locale name="C">
                 <short>Title wave</short>
                 <long>

@@ -275,7 +275,9 @@ typedef enum {
     CompActionStateTermKey    = 1 << 1,
     CompActionStateInitButton = 1 << 2,
     CompActionStateTermButton = 1 << 3,
-    CompActionStateInitBell   = 1 << 4
+    CompActionStateInitBell   = 1 << 4,
+    CompActionStateInitEdge   = 1 << 5,
+    CompActionStateTermEdge   = 1 << 6
 } CompActionState;
 
 typedef struct _CompKeyBinding {
@@ -318,6 +320,8 @@ struct _CompAction {
     CompButtonBinding button;
 
     Bool bell;
+
+    unsigned int edgeMask;
 };
 
 typedef struct {

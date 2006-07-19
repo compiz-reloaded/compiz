@@ -2143,6 +2143,15 @@ addScreenAction (CompScreen *s,
 	}
     }
 
+    if (action->edgeMask)
+    {
+	int i;
+
+	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	    if (action->edgeMask & (1 << i))
+		enableScreenEdge (s, i);
+    }
+
     return TRUE;
 }
 
@@ -2155,6 +2164,15 @@ removeScreenAction (CompScreen *s,
 
     if (action->type & CompBindingTypeButton)
 	removePassiveButtonGrab (s, &action->button);
+
+    if (action->edgeMask)
+    {
+	int i;
+
+	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	    if (action->edgeMask & (1 << i))
+		disableScreenEdge (s, i);
+    }
 }
 
 void

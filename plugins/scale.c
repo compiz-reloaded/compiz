@@ -78,22 +78,6 @@ static char *winType[] = {
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
-char *cornerTypeString[] = {
-    "TopLeft",
-    "TopRight",
-    "BottomLeft",
-    "BottomRight"
-};
-int  nCornerTypeString =
-    sizeof (cornerTypeString) / sizeof (cornerTypeString[0]);
-
-static char *cornerType[] = {
-#ifdef SCALE_CORNER
-    SCALE_CORNER
-#endif
-};
-#define N_CORNER_TYPE (sizeof (cornerType) / sizeof (cornerType[0]))
-
 typedef enum {
     ScaleIconNone = 0,
     ScaleIconEmblem,
@@ -142,9 +126,8 @@ typedef struct _ScaleDisplay {
 #define SCALE_SCREEN_OPTION_WINDOW_TYPE  4
 #define SCALE_SCREEN_OPTION_DARKEN_BACK  5
 #define SCALE_SCREEN_OPTION_OPACITY      6
-#define SCALE_SCREEN_OPTION_CORNERS      7
-#define SCALE_SCREEN_OPTION_ICON         8
-#define SCALE_SCREEN_OPTION_NUM          9
+#define SCALE_SCREEN_OPTION_ICON         7
+#define SCALE_SCREEN_OPTION_NUM          8
 
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
@@ -183,8 +166,6 @@ typedef struct _ScaleScreen {
     Bool     darkenBack;
     GLushort opacity;
 
-    unsigned int cornerMask;
-
     IconOverlay iconOverlay;
 } ScaleScreen;
 
@@ -221,47 +202,6 @@ typedef struct _ScaleWindow {
     ScaleWindow *sw = GET_SCALE_WINDOW  (w,		       \
 		      GET_SCALE_SCREEN  (w->screen,	       \
 		      GET_SCALE_DISPLAY (w->screen->display)))
-
-static int scaleEdge[] = {
-    SCREEN_EDGE_TOPLEFT,
-    SCREEN_EDGE_TOPRIGHT,
-    SCREEN_EDGE_BOTTOMLEFT,
-    SCREEN_EDGE_BOTTOMRIGHT
-};
-
-static unsigned int
-scaleUpdateCorners (CompScreen *s,
-		    CompOption *o)
-{
-    unsigned int i, mask = 0;
-
-    SCALE_SCREEN (s);
-
-    for (i = 0; i < o->value.list.nValue; i++)
-    {
-	if (!strcasecmp (o->value.list.value[i].s, "topleft"))
-	    mask |= (1 << 0);
-	else if (!strcasecmp (o->value.list.value[i].s, "topright"))
-	    mask |= (1 << 1);
-	else if (!strcasecmp (o->value.list.value[i].s, "bottomleft"))
-	    mask |= (1 << 2);
-	else if (!strcasecmp (o->value.list.value[i].s, "bottomright"))
-	    mask |= (1 << 3);
-    }
-
-    for (i = 0; i < 4; i++)
-    {
-	if ((mask & (1 << i)) != (ss->cornerMask  & (1 << i)))
-	{
-	    if (mask & (1 << i))
-		enableScreenEdge (s, scaleEdge[i]);
-	    else
-		disableScreenEdge (s, scaleEdge[i]);
-	}
-    }
-
-    return mask;
-}
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
@@ -334,13 +274,6 @@ scaleSetScreenOption (CompScreen      *screen,
 	if (compSetIntOption (o, value))
 	{
 	    ss->opacity = (OPAQUE * o->value.i) / 100;
-	    return TRUE;
-	}
-	break;
-    case SCALE_SCREEN_OPTION_CORNERS:
-	if (compSetOptionList (o, value))
-	{
-	    ss->cornerMask = scaleUpdateCorners (screen, o);
 	    return TRUE;
 	}
 	break;
@@ -438,19 +371,6 @@ scaleScreenInitOptions (ScaleScreen *ss)
     o->value.i    = SCALE_OPACITY_DEFAULT;
     o->rest.i.min = SCALE_OPACITY_MIN;
     o->rest.i.max = SCALE_OPACITY_MAX;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_CORNERS];
-    o->name	         = "corners";
-    o->shortDesc         = "Corners";
-    o->longDesc	         = "Hot corners that should initiate scale mode";
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_CORNER_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_CORNER_TYPE);
-    for (i = 0; i < N_CORNER_TYPE; i++)
-	o->value.list.value[i].s = strdup (cornerType[i]);
-    o->rest.s.string     = cornerTypeString;
-    o->rest.s.nString    = nCornerTypeString;
 
     o = &ss->opt[SCALE_SCREEN_OPTION_ICON];
     o->name	      = "overlay_icon";
@@ -1353,38 +1273,6 @@ scaleHandleEvent (CompDisplay *d,
 				     event->xmotion.x_root,
 				     event->xmotion.y_root);
 	}
-	break;
-    case EnterNotify:
-	if (event->xcrossing.mode   != NotifyGrab   &&
-	    event->xcrossing.mode   != NotifyUngrab &&
-	    event->xcrossing.detail != NotifyInferior)
-	{
-	    s = findScreenAtDisplay (d, event->xcrossing.root);
-	    if (s)
-	    {
-		unsigned int i;
-		Window       id = event->xcrossing.window;
-		CompAction *action =
-		    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
-		CompOption o;
-
-		SCALE_SCREEN (s);
-
-		o.type    = CompOptionTypeInt;
-		o.name    = "root";
-		o.value.i = s->root;
-
-		for (i = 0; i < 4; i++)
-		{
-		    if (id == s->screenEdge[scaleEdge[i]].id)
-		    {
-			if (ss->cornerMask & (1 << i))
-			    scaleInitiate (d, action, 0, &o, 1);
-		    }
-		}
-
-	    }
-	}
     default:
 	break;
     }
@@ -1482,8 +1370,10 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.initiate	  = scaleInitiate;
     o->value.action.terminate	  = scaleTerminate;
     o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = (1 << SCREEN_EDGE_TOPRIGHT);
+    o->value.action.state	  = CompActionStateInitEdge;
     o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitKey;
     o->value.action.key.modifiers = SCALE_INITIATE_MODIFIERS_DEFAULT;
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display,
@@ -1572,7 +1462,6 @@ scaleInitScreen (CompPlugin *p,
     ss->opacity  = (OPAQUE * SCALE_OPACITY_DEFAULT) / 100;
 
     ss->darkenBack = SCALE_DARKEN_BACK_DEFAULT;
-    ss->cornerMask = 0;
 
     ss->iconOverlay = ScaleIconEmblem;
 
@@ -1590,9 +1479,6 @@ scaleInitScreen (CompPlugin *p,
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
 
-    ss->cornerMask =
-	scaleUpdateCorners (s, &ss->opt[SCALE_SCREEN_OPTION_CORNERS]);
-
     return TRUE;
 }
 
@@ -1600,13 +1486,7 @@ static void
 scaleFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
-    unsigned int i;
-
     SCALE_SCREEN (s);
-
-    for (i = 0; i < 4; i++)
-	if (ss->cornerMask & (1 << i))
-	    disableScreenEdge (s, scaleEdge[i]);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);

@@ -53,6 +53,17 @@ struct _GConfModifier {
 
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _GConfModifier))
 
+static gchar *edgeName[] = {
+    "Left",
+    "Right",
+    "Top",
+    "Bottom",
+    "TopLeft",
+    "TopRight",
+    "BottomLeft",
+    "BottomRight"
+};
+
 static GString *
 gconfModifiersToString (CompDisplay *d,
 			guint	    modMask)
@@ -214,4 +225,10 @@ strcmpskipifequal (char **ptr,
 	*ptr = (*ptr) + len;
 
     return ret;
+}
+
+gchar *
+gconfEdgeToString (guint edge)
+{
+    return edgeName[edge];
 }

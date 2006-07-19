@@ -1578,6 +1578,7 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->value.action.initiate	     = waterInitiate;
     o->value.action.terminate	     = waterTerminate;
     o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
     o->value.action.type	     = CompBindingTypeKey;
     o->value.action.state	     = CompActionStateInitKey;
     o->value.action.key.modifiers    = WATER_INITIATE_MODIFIERS_DEFAULT;
@@ -1591,6 +1592,7 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->value.action.initiate	     = waterToggleRain;
     o->value.action.terminate	     = 0;
     o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
     o->value.action.type	     = CompBindingTypeKey;
     o->value.action.state	     = CompActionStateInitKey;
     o->value.action.key.modifiers    = WATER_TOGGLE_RAIN_MODIFIERS_DEFAULT;
@@ -1606,6 +1608,7 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->value.action.initiate	     = waterToggleWiper;
     o->value.action.terminate	     = 0;
     o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
     o->value.action.type	     = CompBindingTypeKey;
     o->value.action.state	     = CompActionStateInitKey;
     o->value.action.key.modifiers    = WATER_TOGGLE_WIPER_MODIFIERS_DEFAULT;
@@ -1640,6 +1643,7 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->value.action.initiate  = waterTitleWave;
     o->value.action.terminate = 0;
     o->value.action.bell      = WATER_TITLE_WAVE_BELL_DEFAULT;
+    o->value.action.edgeMask  = 0;
     o->value.action.type      = CompBindingTypeNone;
     o->value.action.state     = CompActionStateInitBell;
 }

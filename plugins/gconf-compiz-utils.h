@@ -65,3 +65,6 @@ gconfOptionForKey (CompDisplay *d,
 		   CompScreen  **s,
 		   char        **plugin,
 		   CompOption  **o);
+
+gchar *
+gconfEdgeToString (guint edge);

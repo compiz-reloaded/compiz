@@ -524,6 +524,7 @@ moveDisplayInitOptions (MoveDisplay *md,
     o->value.action.initiate	     = moveInitiate;
     o->value.action.terminate	     = moveTerminate;
     o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
     o->value.action.type	     = CompBindingTypeButton;
     o->value.action.state	     = CompActionStateInitButton;
     o->value.action.button.modifiers = MOVE_INITIATE_BUTTON_MODIFIERS_DEFAULT;

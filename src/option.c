@@ -187,8 +187,9 @@ compSetActionOption (CompOption      *option,
 {
     CompAction *action = &option->value.action;
 
-    if (value->action.type == action->type &&
-	value->action.bell == action->bell)
+    if (value->action.type     == action->type &&
+	value->action.bell     == action->bell &&
+	value->action.edgeMask == action->edgeMask)
     {
 	Bool equal = TRUE;
 

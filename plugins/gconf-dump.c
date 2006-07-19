@@ -72,6 +72,14 @@ typedef struct _GConfDumpDisplay {
 #define GCONF_DUMP_DISPLAY(d)			      \
     GConfDumpDisplay *gd = GET_GCONF_DUMP_DISPLAY (d)
 
+static gchar *actionSufix[] = {
+    "key",
+    "button",
+    "bell",
+    "edge",
+    NULL
+};
+
 static void
 gconfPrintf (int level, char *format, ...)
 {
@@ -306,12 +314,39 @@ gconfDumpToSchema (CompDisplay *d,
 	    value = gconfActionValueToString (d, CompBindingTypeButton,
 					      &o->value);
 	}
-	else
+	else if (strcmp (name + len - 4, "bell") == 0)
 	{
 	    gconfPrintf (3, "<type>bool</type>\n");
 	    value = g_strdup (o->value.action.bell ? "true" : "false");
 	}
+	else
+	{
+	    char *tmp1, *tmp2 = 0;
+	    int  i;
 
+	    gconfPrintf (3, "<type>list</type>\n");
+	    gconfPrintf (3, "<list_type>string</list_type>\n");
+
+	    tmp1 = g_strdup_printf ("[");
+
+	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	    {
+		if (o->value.action.edgeMask & (1 << i))
+		{
+		    tmp2 = g_strdup_printf ("%s%s%s", tmp1,
+					    (tmp2) ? "," : "",
+					    gconfEdgeToString (i));
+		    g_free (tmp1);
+
+		    tmp1 = tmp2;
+		}
+	    }
+
+	    tmp2 = g_strdup_printf ("%s]", tmp1);
+	    g_free (tmp1);
+	    value = g_markup_escape_text (tmp2, -1);
+	    g_free (tmp2);
+	}
     }
     else
     {
@@ -355,19 +390,17 @@ dumpGeneralOptions (CompDisplay *d)
 
 	if (option->type == CompOptionTypeAction)
 	{
-	    gchar *name1, *name2, *name3;
+	    gchar *name;
+	    int	  i = 0;
 
-	    name1 = g_strdup_printf ("%s%s", option->name, "_key");
-	    name2 = g_strdup_printf ("%s%s", option->name, "_button");
-	    name3 = g_strdup_printf ("%s%s", option->name, "_bell");
+	    while (actionSufix[i])
+	    {
+		name = g_strdup_printf ("%s_%s", option->name, actionSufix[i]);
+		gconfDumpToSchema (d, option, name, NULL, "allscreens");
+		g_free (name);
 
-	    gconfDumpToSchema (d, option, name1, NULL, "allscreens");
-	    gconfDumpToSchema (d, option, name2, NULL, "allscreens");
-	    gconfDumpToSchema (d, option, name3, NULL, "allscreens");
-
-	    g_free (name1);
-	    g_free (name2);
-	    g_free (name3);
+		i++;
+	    }
 	}
 	else
 	{
@@ -382,19 +415,17 @@ dumpGeneralOptions (CompDisplay *d)
     {
 	if (option->type == CompOptionTypeAction)
 	{
-	    gchar *name1, *name2, *name3;
+	    gchar *name;
+	    int	  i = 0;
 
-	    name1 = g_strdup_printf ("%s%s", option->name, "_key");
-	    name2 = g_strdup_printf ("%s%s", option->name, "_button");
-	    name3 = g_strdup_printf ("%s%s", option->name, "_bell");
+	    while (actionSufix[i])
+	    {
+		name = g_strdup_printf ("%s_%s", option->name, actionSufix[i]);
+		gconfDumpToSchema (d, option, name, NULL, "screen0");
+		g_free (name);
 
-	    gconfDumpToSchema (d, option, name1, NULL, "screen0");
-	    gconfDumpToSchema (d, option, name2, NULL, "screen0");
-	    gconfDumpToSchema (d, option, name3, NULL, "screen0");
-
-	    g_free (name1);
-	    g_free (name2);
-	    g_free (name3);
+		i++;
+	    }
 	}
 	else
 	{
@@ -473,22 +504,20 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 	{
 	    if (option->type == CompOptionTypeAction)
 	    {
-		gchar *name1, *name2, *name3;
+		gchar *name;
+		int   i = 0;
 
-		name1 = g_strdup_printf ("%s%s", option->name, "_key");
-		name2 = g_strdup_printf ("%s%s", option->name, "_button");
-		name3 = g_strdup_printf ("%s%s", option->name, "_bell");
+		while (actionSufix[i])
+		{
+		    name = g_strdup_printf ("%s_%s",
+					    option->name,
+					    actionSufix[i]);
+		    gconfDumpToSchema (d, option, name, p->vTable->name,
+				       "allscreens");
+		    g_free (name);
 
-		gconfDumpToSchema (d, option, name1, p->vTable->name,
-				   "allscreens");
-		gconfDumpToSchema (d, option, name2, p->vTable->name,
-				   "allscreens");
-		gconfDumpToSchema (d, option, name3, p->vTable->name,
-				   "allscreens");
-
-		g_free (name1);
-		g_free (name2);
-		g_free (name3);
+		    i++;
+		}
 	    }
 	    else
 	    {
@@ -507,22 +536,20 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 	{
 	    if (option->type == CompOptionTypeAction)
 	    {
-		gchar *name1, *name2, *name3;
+		gchar *name;
+		int   i = 0;
 
-		name1 = g_strdup_printf ("%s%s", option->name, "_key");
-		name2 = g_strdup_printf ("%s%s", option->name, "_button");
-		name3 = g_strdup_printf ("%s%s", option->name, "_bell");
+		while (actionSufix[i])
+		{
+		    name = g_strdup_printf ("%s_%s",
+					    option->name,
+					    actionSufix[i]);
+		    gconfDumpToSchema (d, option, name, p->vTable->name,
+				       "screen0");
+		    g_free (name);
 
-		gconfDumpToSchema (d, option, name1, p->vTable->name,
-				   "screen0");
-		gconfDumpToSchema (d, option, name2, p->vTable->name,
-				   "screen0");
-		gconfDumpToSchema (d, option, name3, p->vTable->name,
-				   "screen0");
-
-		g_free (name1);
-		g_free (name2);
-		g_free (name3);
+		    i++;
+		}
 	    }
 	    else
 	    {
