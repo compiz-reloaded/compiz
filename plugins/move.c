@@ -518,8 +518,8 @@ moveDisplayInitOptions (MoveDisplay *md,
 
     o = &md->opt[MOVE_DISPLAY_OPTION_INITIATE];
     o->name			     = "initiate";
-    o->shortDesc		     = "Initiate Window Move";
-    o->longDesc			     = "Start moving window";
+    o->shortDesc		     = N_("Initiate Window Move");
+    o->longDesc			     = N_("Start moving window");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = moveInitiate;
     o->value.action.terminate	     = moveTerminate;
@@ -536,8 +536,8 @@ moveDisplayInitOptions (MoveDisplay *md,
 
     o = &md->opt[MOVE_DISPLAY_OPTION_OPACITY];
     o->name	  = "opacity";
-    o->shortDesc  = "Opacity";
-    o->longDesc	  = "Opacity level of moving windows";
+    o->shortDesc  = N_("Opacity");
+    o->longDesc	  = N_("Opacity level of moving windows");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = MOVE_OPACITY_DEFAULT;
     o->rest.i.min = MOVE_OPACITY_MIN;
@@ -545,16 +545,16 @@ moveDisplayInitOptions (MoveDisplay *md,
 
     o = &md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y];
     o->name	  = "constrain_y";
-    o->shortDesc  = "Constrain Y";
-    o->longDesc	  = "Constrain Y coordinate to workspace area";
+    o->shortDesc  = N_("Constrain Y");
+    o->longDesc	  = N_("Constrain Y coordinate to workspace area");
     o->type	  = CompOptionTypeBool;
     o->value.b    = MOVE_CONSTRAIN_Y_DEFAULT;
 
     o = &md->opt[MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED];
     o->name      = "snapoff_maximized";
-    o->shortDesc = "Snapoff maximized windows";
-    o->longDesc  = "Snapoff and auto unmaximized maximized windows "
-	"when dragging";
+    o->shortDesc = N_("Snapoff maximized windows");
+    o->longDesc  = N_("Snapoff and auto unmaximized maximized windows "
+		      "when dragging");
     o->type      = CompOptionTypeBool;
     o->value.b   = MOVE_SNAPOFF_MAXIMIZED_DEFAULT;
 }
@@ -712,8 +712,8 @@ moveFini (CompPlugin *p)
 
 CompPluginVTable moveVTable = {
     "move",
-    "Move Window",
-    "Move window",
+    N_("Move Window"),
+    N_("Move window"),
     moveInit,
     moveFini,
     moveInitDisplay,

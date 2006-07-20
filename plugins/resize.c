@@ -644,8 +644,8 @@ resizeDisplayInitOptions (ResizeDisplay *rd,
 
     o = &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE];
     o->name			     = "initiate";
-    o->shortDesc		     = "Initiate Window Resize";
-    o->longDesc			     = "Start resizing window";
+    o->shortDesc		     = N_("Initiate Window Resize");
+    o->longDesc			     = N_("Start resizing window");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = resizeInitiate;
     o->value.action.terminate	     = resizeTerminate;
@@ -774,8 +774,8 @@ resizeFini (CompPlugin *p)
 
 CompPluginVTable resizeVTable = {
     "resize",
-    "Resize Window",
-    "Resize window",
+    N_("Resize Window"),
+    N_("Resize window"),
     resizeInit,
     resizeFini,
     resizeInitDisplay,

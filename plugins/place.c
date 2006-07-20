@@ -101,8 +101,8 @@ placeScreenInitOptions (PlaceScreen *ps)
 
     o = &ps->opt[PLACE_SCREEN_OPTION_WORKAROUND];
     o->name	 = "workarounds";
-    o->shortDesc = "Workarounds";
-    o->longDesc	 = "Window placement workarounds";
+    o->shortDesc = N_("Workarounds");
+    o->longDesc	 = N_("Window placement workarounds");
     o->type	 = CompOptionTypeBool;
     o->value.b	 = PLACE_WORKAROUND_DEFAULT;
 }
@@ -1099,8 +1099,8 @@ placeFini (CompPlugin *p)
 
 static CompPluginVTable placeVTable = {
     "place",
-    "Place Windows",
-    "Place windows at appropriate positions when mapped",
+    N_("Place Windows"),
+    N_("Place windows at appropriate positions when mapped"),
     placeInit,
     placeFini,
     placeInitDisplay,

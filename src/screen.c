@@ -242,22 +242,22 @@ compScreenInitOptions (CompScreen *screen)
 
     o = &screen->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE];
     o->name       = "detect_refresh_rate";
-    o->shortDesc  = "Detect Refresh Rate";
-    o->longDesc   = "Automatic detection of refresh rate";
+    o->shortDesc  = N_("Detect Refresh Rate");
+    o->longDesc   = N_("Automatic detection of refresh rate");
     o->type       = CompOptionTypeBool;
     o->value.b    = DETECT_REFRESH_RATE_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_LIGHTING];
     o->name       = "lighting";
-    o->shortDesc  = "Lighting";
-    o->longDesc   = "Use diffuse light when screen is transformed";
+    o->shortDesc  = N_("Lighting");
+    o->longDesc   = N_("Use diffuse light when screen is transformed");
     o->type       = CompOptionTypeBool;
     o->value.b    = LIGHTING_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_REFRESH_RATE];
     o->name       = "refresh_rate";
-    o->shortDesc  = "Refresh Rate";
-    o->longDesc   = "The rate at which the screen is redrawn (times/second)";
+    o->shortDesc  = N_("Refresh Rate");
+    o->longDesc   = N_("The rate at which the screen is redrawn (times/second)");
     o->type       = CompOptionTypeInt;
     o->value.i    = defaultRefreshRate;
     o->rest.i.min = 1;
@@ -265,8 +265,8 @@ compScreenInitOptions (CompScreen *screen)
 
     o = &screen->opt[COMP_SCREEN_OPTION_SIZE];
     o->name	  = "size";
-    o->shortDesc  = "Virtual Size";
-    o->longDesc	  = "Screen size multiplier for virtual size";
+    o->shortDesc  = N_("Virtual Size");
+    o->longDesc	  = N_("Screen size multiplier for virtual size");
     o->type	  = CompOptionTypeInt;
     o->value.i    = SCREEN_SIZE_DEFAULT;
     o->rest.i.min = SCREEN_SIZE_MIN;
@@ -274,8 +274,8 @@ compScreenInitOptions (CompScreen *screen)
 
     o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_STEP];
     o->name		= "opacity_step";
-    o->shortDesc	= "Opacity Step";
-    o->longDesc		= "Opacity change step";
+    o->shortDesc	= N_("Opacity Step");
+    o->longDesc		= N_("Opacity change step");
     o->type		= CompOptionTypeInt;
     o->value.i		= OPACITY_STEP_DEFAULT;
     o->rest.i.min	= OPACITY_STEP_MIN;
@@ -283,16 +283,16 @@ compScreenInitOptions (CompScreen *screen)
 
     o = &screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS];
     o->name       = "unredirect_fullscreen_windows";
-    o->shortDesc  = "Unredirect Fullscreen Windows";
-    o->longDesc   = "Allow drawing of fullscreen windows to not be redirected "
-	"to offscreen pixmaps";
+    o->shortDesc  = N_("Unredirect Fullscreen Windows");
+    o->longDesc   = N_("Allow drawing of fullscreen windows to not be redirected "
+	"to offscreen pixmaps");
     o->type       = CompOptionTypeBool;
     o->value.b    = UNREDIRECT_FS_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON];
     o->name	      = "default_icon";
-    o->shortDesc      = "Default Icon";
-    o->longDesc	      = "Default window icon image";
+    o->shortDesc      = N_("Default Icon");
+    o->longDesc	      = N_("Default window icon image");
     o->type	      = CompOptionTypeString;
     o->value.s	      = strdup (DEFAULT_ICON_DEFAULT);
     o->rest.s.string  = 0;

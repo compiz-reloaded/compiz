@@ -7,1596 +7,1226 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-13 10:25+0000\n"
-"PO-Revision-Date: 2006-06-22 10:34\n"
+"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"PO-Revision-Date: 2006-07-20 10:20-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plugins/compiz.schemas.in.in.h:1
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
+#: plugins/cube.c:848
+msgid "Cube Color"
+msgstr "Cor do Cubo"
+
+#: plugins/cube.c:849
+msgid "Color of top and bottom sides of the cube"
+msgstr "Cor dos lados superior e inferior do cubo"
+
+#: plugins/cube.c:858
+msgid "Inside Cube"
+msgstr "Dentro do Cubo"
+
+#: plugins/cube.c:859
+msgid "Inside cube"
+msgstr "Dentro do cubo"
+
+#: plugins/cube.c:865
+msgid "Scale image"
+msgstr "Dimensionar imagem"
+
+#: plugins/cube.c:866
+msgid "Scale images to cover top face of cube"
+msgstr "Dimensionar imagens para cobertura da face superior do cubo"
+
+#: plugins/cube.c:872
+msgid "Image files"
+msgstr "Arquivos de imagem"
+
+#: plugins/cube.c:873
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando0"
+"Lista de arquivos PNG e SVG que devem ser renderizados na face superior do "
+"cubo"
 
-#: ../plugins/compiz.schemas.in.in.h:2
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando1"
+#: plugins/cube.c:886
+msgid "Next Slide"
+msgstr "Próximo Slide"
 
-#: ../plugins/compiz.schemas.in.in.h:3
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando10"
-
-#: ../plugins/compiz.schemas.in.in.h:4
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando11"
-
-#: ../plugins/compiz.schemas.in.in.h:5
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando2"
-
-#: ../plugins/compiz.schemas.in.in.h:6
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando3"
-
-#: ../plugins/compiz.schemas.in.in.h:7
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando4"
-
-#: ../plugins/compiz.schemas.in.in.h:8
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando5"
-
-#: ../plugins/compiz.schemas.in.in.h:9
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando6"
-
-#: ../plugins/compiz.schemas.in.in.h:10
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando7"
-
-#: ../plugins/compiz.schemas.in.in.h:11
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando8"
-
-#: ../plugins/compiz.schemas.in.in.h:12
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"Um atalho de teclado que, quando acionado, executa o comando shell "
-"identificado pelo comando9"
-
-#: ../plugins/compiz.schemas.in.in.h:13
-msgid "Acceleration"
-msgstr "Aceleração"
-
-#: ../plugins/compiz.schemas.in.in.h:14
-msgid "Active Plugins"
-msgstr "Plug-ins Ativos"
-
-#: ../plugins/compiz.schemas.in.in.h:15
-msgid "Adds water effects to different desktop actions"
-msgstr "Adiciona efeitos aquáticos a diferentes ações da área de trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:16
+#: plugins/cube.c:887
 msgid "Advance to next slide"
 msgstr "Avançar para o slide seguinte"
 
-#: ../plugins/compiz.schemas.in.in.h:17
+#: plugins/cube.c:896
+msgid "Previous Slide"
+msgstr "Slide Anterior"
+
+#: plugins/cube.c:897
+msgid "Go back to previous slide"
+msgstr "Voltar ao slide anterior"
+
+#: plugins/cube.c:906
+msgid "Skydome"
+msgstr "Skydome"
+
+#: plugins/cube.c:907
+msgid "Render skydome"
+msgstr "Renderizar skydome"
+
+#: plugins/cube.c:913
+msgid "Skydome Image"
+msgstr "Imagem do Skydome"
+
+#: plugins/cube.c:914
+msgid "Image to use as texture for the skydome"
+msgstr "Imagem a usar como textura no skydome"
+
+#: plugins/cube.c:922
+msgid "Animate Skydome"
+msgstr "Animar Skydome"
+
+#: plugins/cube.c:923
+msgid "Animate skydome when rotating cube"
+msgstr "Animar Skydome ao girar o cubo"
+
+#: plugins/cube.c:929
+msgid "Unfold"
+msgstr "Desdobrar"
+
+#: plugins/cube.c:930
+msgid "Unfold cube"
+msgstr "Desdobrar cubo"
+
+#: plugins/cube.c:940 plugins/rotate.c:373
+msgid "Acceleration"
+msgstr "Aceleração"
+
+#: plugins/cube.c:941
+msgid "Fold Acceleration"
+msgstr "Aceleração Dobrada"
+
+#: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
+#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+msgid "Speed"
+msgstr "Velocidade"
+
+#: plugins/cube.c:951
+msgid "Fold Speed"
+msgstr "Velocidade Dobrada"
+
+#: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
+#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+msgid "Timestep"
+msgstr "Timestep"
+
+#: plugins/cube.c:961
+msgid "Fold Timestep"
+msgstr "Timestep Dobrado"
+
+#: plugins/cube.c:970 plugins/switcher.c:454
+msgid "Mipmap"
+msgstr "Mapa"
+
+#: plugins/cube.c:971 plugins/switcher.c:455
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "Gerar mapas quando possível para dimensionamento de melhor qualidade"
+
+#: plugins/cube.c:1639
+msgid "Desktop Cube"
+msgstr "Cubo da Área de Trabalho"
+
+#: plugins/cube.c:1640
+msgid "Place windows on cube"
+msgstr "Colocar janelas no cubo"
+
+#: plugins/decoration.c:234
+msgid "Shadow Radius"
+msgstr "Raio da Sombra"
+
+#: plugins/decoration.c:235
+msgid "Drop shadow radius"
+msgstr "Diminuir raio da sombra"
+
+#: plugins/decoration.c:244
+msgid "Shadow Opacity"
+msgstr "Opacidade da Sombra"
+
+#: plugins/decoration.c:245
+msgid "Drop shadow opacity"
+msgstr "Diminuir opacidade da sombra"
+
+#: plugins/decoration.c:254
+msgid "Shadow Offset X"
+msgstr "Deslocamento X da Sombra"
+
+#: plugins/decoration.c:255
+msgid "Drop shadow X offset"
+msgstr "Diminuir deslocamento X da sombra"
+
+#: plugins/decoration.c:263
+msgid "Shadow Offset Y"
+msgstr "Deslocamento Y da Sombra"
+
+#: plugins/decoration.c:264
+msgid "Drop shadow Y offset"
+msgstr "Diminuir deslocamento Y da sombra"
+
+#: plugins/decoration.c:1353
+msgid "Window Decoration"
+msgstr "Decoração da Janela"
+
+#: plugins/decoration.c:1354
+msgid "Window decorations"
+msgstr "Decorações das janelas"
+
+#: plugins/fade.c:37 src/main.c:55
+msgid "Dock"
+msgstr "Âncora"
+
+#: plugins/fade.c:38 plugins/minimize.c:49 plugins/scale.c:72
+#: plugins/switcher.c:81 plugins/wobbly.c:158 src/main.c:56
+msgid "Toolbar"
+msgstr "Barra de Ferramentas"
+
+#: plugins/fade.c:39 plugins/wobbly.c:159 src/main.c:57
+msgid "Menu"
+msgstr "Menu"
+
+#: plugins/fade.c:40 plugins/minimize.c:50 plugins/scale.c:73
+#: plugins/switcher.c:82 plugins/wobbly.c:160 src/main.c:58
+msgid "Utility"
+msgstr "Utilitário"
+
+#: plugins/fade.c:41 plugins/wobbly.c:151 src/main.c:59
+msgid "Splash"
+msgstr "Tela de Apresentação"
+
+#: plugins/fade.c:42 plugins/minimize.c:52 plugins/scale.c:77
+#: plugins/switcher.c:86 plugins/wobbly.c:163 src/main.c:62
+msgid "Normal"
+msgstr "Normal"
+
+#: plugins/fade.c:43 plugins/minimize.c:51 plugins/scale.c:74
+#: plugins/switcher.c:83 plugins/wobbly.c:161 src/main.c:60
+msgid "Dialog"
+msgstr "Caixa de Diálogo"
+
+#: plugins/fade.c:44 plugins/scale.c:75 plugins/switcher.c:84
+#: plugins/wobbly.c:162 src/main.c:61
+msgid "ModalDialog"
+msgstr "Caixa de Diálogo Modal"
+
+#: plugins/fade.c:45 plugins/wobbly.c:152 src/main.c:64
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: plugins/fade.c:177
+msgid "Fade Speed"
+msgstr "Velocidade de Esmaecimento"
+
+#: plugins/fade.c:178
+msgid "Window fade speed"
+msgstr "Velocidade de esmaecimento das janelas"
+
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/switcher.c:439
+msgid "Window Types"
+msgstr "Tipos de Janelas"
+
+#: plugins/fade.c:188
+msgid "Window types that should be fading"
+msgstr "Tipos de janelas que deveriam esmaecer-se"
+
+#: plugins/fade.c:202 plugins/wobbly.c:515
+msgid "Visual Bell"
+msgstr "Campainha Visual"
+
+#: plugins/fade.c:203
+msgid "Fade effect on system beep"
+msgstr "Efeito de esmaecimento no bip do sistema"
+
+#: plugins/fade.c:209
+msgid "Fullscreen Visual Bell"
+msgstr "Campainha Visual de Tela Inteira"
+
+#: plugins/fade.c:210
+msgid "Fullscreen fade effect on system beep"
+msgstr "Efeito de esmaecimento de tela inteira ao som de bip do sistema"
+
+#: plugins/fade.c:811
+msgid "Fading Windows"
+msgstr "Janelas Esmaecidas"
+
+#: plugins/fade.c:812
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Avivar janelas quando houver mapeamento e esmaecê-las quando não houver "
+"mapeamento"
+
+#. Decimal point character
+#: plugins/gconf-dump.c:80
+msgid "."
+msgstr "."
+
+#: plugins/gconf-dump.c:545
+msgid "Plugins that this must load before"
+msgstr "Plug-ins que devem ser carregados antes de"
+
+#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+msgid "Do not modify"
+msgstr "Não modificar"
+
+#: plugins/gconf-dump.c:555
+msgid "Plugins that this requires"
+msgstr "Plug-ins necessários"
+
+#: plugins/minimize.c:204
+msgid "Minimize speed"
+msgstr "Minimizar velocidade"
+
+#: plugins/minimize.c:214
+msgid "Minimize timestep"
+msgstr "Minimizar timestep"
+
+#: plugins/minimize.c:224
+msgid "Window types that should be transformed when minimized"
+msgstr "Tipos de janelas que deveriam transformar-se quando minimizados"
+
+#: plugins/minimize.c:239
+msgid "Shade Resistance"
+msgstr "Resistência de Sombra"
+
+#: plugins/minimize.c:240
+msgid "Shade resistance"
+msgstr "Resistência de sombra"
+
+#: plugins/minimize.c:1044
+msgid "Minimize Effect"
+msgstr "Minimizar Efeito"
+
+#: plugins/minimize.c:1045
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Transformar janelas quando elas forem minimizadas e desminimizadas"
+
+#: plugins/move.c:521
+msgid "Initiate Window Move"
+msgstr "Iniciar Movimento de Janelas"
+
+#: plugins/move.c:522
+msgid "Start moving window"
+msgstr "Iniciar movimento da janela"
+
+#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+msgid "Opacity"
+msgstr "Opacidade"
+
+#: plugins/move.c:540
+msgid "Opacity level of moving windows"
+msgstr "Nível de opacidade das janelas em movimento"
+
+#: plugins/move.c:548
+msgid "Constrain Y"
+msgstr "Restringir Y"
+
+#: plugins/move.c:549
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Restringir a coordenada Y conforme a área de trabalho"
+
+#: plugins/move.c:555
+msgid "Snapoff maximized windows"
+msgstr "Janelas maximizadas quebradas"
+
+#: plugins/move.c:556
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"Janelas maximizadas quebradas e automaticamente desmaximizadas ao arrastar"
+
+#: plugins/move.c:715
+msgid "Move Window"
+msgstr "Mover Janela"
+
+#: plugins/move.c:716
+msgid "Move window"
+msgstr "Mover janela"
+
+#: plugins/place.c:104
+msgid "Workarounds"
+msgstr "Soluções"
+
+#: plugins/place.c:105
+msgid "Window placement workarounds"
+msgstr "Soluções para colocação de janelas"
+
+#: plugins/place.c:1102
+msgid "Place Windows"
+msgstr "Colocar Janelas"
+
+#: plugins/place.c:1103
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Colocar janelas nas posições apropriadas quando houver mapeamento"
+
+#: plugins/resize.c:647
+msgid "Initiate Window Resize"
+msgstr "Iniciar Redimensionamento de Janelas"
+
+#: plugins/resize.c:648
+msgid "Start resizing window"
+msgstr "Iniciar redimensionamento da janela"
+
+#: plugins/resize.c:777
+msgid "Resize Window"
+msgstr "Redimensionar Janela"
+
+#: plugins/resize.c:778
+msgid "Resize window"
+msgstr "Redimensionar janela"
+
+#: plugins/rotate.c:356 plugins/zoom.c:217
+msgid "Pointer Invert Y"
+msgstr "Inverter Y com o Ponteiro"
+
+#: plugins/rotate.c:357 plugins/zoom.c:218
+msgid "Invert Y axis for pointer movement"
+msgstr "Inverter o eixo Y para movimento do ponteiro"
+
+#: plugins/rotate.c:363 plugins/zoom.c:224
+msgid "Pointer Sensitivity"
+msgstr "Sensibilidade do Ponteiro"
+
+#: plugins/rotate.c:364 plugins/zoom.c:225
+msgid "Sensitivity of pointer movement"
+msgstr "Sensibilidade do movimento do ponteiro"
+
+#: plugins/rotate.c:374
+msgid "Rotation Acceleration"
+msgstr "Aceleração da Rotação"
+
+#: plugins/rotate.c:383 plugins/water.c:1575 plugins/zoom.c:234
+msgid "Initiate"
+msgstr "Iniciar"
+
+#: plugins/rotate.c:384
+msgid "Start Rotation"
+msgstr "Iniciar Rotação"
+
+#: plugins/rotate.c:392
+msgid "Rotate Left"
+msgstr "Girar para a Esquerda"
+
+#: plugins/rotate.c:393
+msgid "Rotate left"
+msgstr "Girar para a esquerda"
+
+#: plugins/rotate.c:403
+msgid "Rotate Right"
+msgstr "Girar para a Direita"
+
+#: plugins/rotate.c:404
+msgid "Rotate right"
+msgstr "Girar para a direita"
+
+#: plugins/rotate.c:414
+msgid "Rotate Left with Window"
+msgstr "Girar para a Esquerda com Janela"
+
+#: plugins/rotate.c:415
+msgid "Rotate left and bring active window along"
+msgstr "Girar para a esquerda e trazer a janela ativa junto"
+
+#: plugins/rotate.c:426
+msgid "Rotate Right with Window"
+msgstr "Girar para a Direita com Janela"
+
+#: plugins/rotate.c:427
+msgid "Rotate right and bring active window along"
+msgstr "Girar para a direita e trazer a janela ativa junto"
+
+#: plugins/rotate.c:436
+#, c-format
+msgid "Rotate To Face %d"
+msgstr "Girar para a Face %d"
+
+#: plugins/rotate.c:437
+#, c-format
+msgid "Rotate to face %d"
+msgstr "Girar para a face %d"
+
+#: plugins/rotate.c:438
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "Girar para a Face %d com Janela"
+
+#: plugins/rotate.c:439
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "Girar para a face %d e trazer a janela ativa junto"
+
+#: plugins/rotate.c:476
+msgid "Snap To Top Face"
+msgstr "Fechar na Face Superior"
+
+#: plugins/rotate.c:477
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Fechar a Rotação do Cubo na Face Superior"
+
+#: plugins/rotate.c:484
+msgid "Rotation Speed"
+msgstr "Velocidade da Rotação"
+
+#: plugins/rotate.c:494
+msgid "Rotation Timestep"
+msgstr "Timestep da Rotação"
+
+#: plugins/rotate.c:503
+msgid "Edge Flip Pointer"
+msgstr "Ponteiro de Inversão de Bordas"
+
+#: plugins/rotate.c:504
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Inverter para o viewport seguinte ao mover o ponteiro para a borda da tela"
+
+#: plugins/rotate.c:510
+msgid "Edge Flip Move"
+msgstr "Movimento de Inversão de Bordas"
+
+#: plugins/rotate.c:511
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Inverter para o viewport seguinte ao mover a janela para a borda da tela"
+
+#: plugins/rotate.c:517
+msgid "Edge Flip DnD"
+msgstr "DnD de Inversão de Bordas"
+
+#: plugins/rotate.c:518
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Inverter para o viewport seguinte ao arrastar o objeto para a borda da tela"
+
+#: plugins/rotate.c:524
+msgid "Flip Time"
+msgstr "Tempo de Inversão"
+
+#: plugins/rotate.c:525
+msgid "Timeout before flipping viewport"
+msgstr "Tempo de espera até a inversão do viewport"
+
+#: plugins/rotate.c:1581
+msgid "Rotate Cube"
+msgstr "Girar Cubo"
+
+#: plugins/rotate.c:1582
+msgid "Rotate desktop cube"
+msgstr "Girar cubo da área de trabalho"
+
+#: plugins/scale.c:76 plugins/switcher.c:85 src/main.c:63
+msgid "Fullscreen"
+msgstr "Tela Inteira"
+
+#: plugins/scale.c:82
+msgid "TopLeft"
+msgstr "Superior Esquerdo"
+
+#: plugins/scale.c:83
+msgid "TopRight"
+msgstr "Superior Direito"
+
+#: plugins/scale.c:84
+msgid "BottomLeft"
+msgstr "Inferior Esquerdo"
+
+#: plugins/scale.c:85
+msgid "BottomRight"
+msgstr "Inferior Direito"
+
+#: plugins/scale.c:104 plugins/wobbly.c:136
+msgid "None"
+msgstr "Nenhuma"
+
+#: plugins/scale.c:105
+msgid "Emblem"
+msgstr "Emblema"
+
+#: plugins/scale.c:106
+msgid "Big"
+msgstr "Grande"
+
+#: plugins/scale.c:378
+msgid "Spacing"
+msgstr "Espaçamento"
+
+#: plugins/scale.c:379
+msgid "Space between windows"
+msgstr "Espaço entre janelas"
+
+#: plugins/scale.c:387
+msgid "Sloppy Focus"
+msgstr "Foco Fraco"
+
+#: plugins/scale.c:388
+msgid "Focus window when mouse moves over them"
+msgstr "Destacar janela quando o mouse estiver sobre ela"
+
+#: plugins/scale.c:395
+msgid "Scale speed"
+msgstr "Dimensionar velocidade"
+
+#: plugins/scale.c:405
+msgid "Scale timestep"
+msgstr "Dimensionar timestep"
+
+#: plugins/scale.c:415
+msgid "Window types that should scaled in scale mode"
+msgstr "Tipos de janelas que deveriam ser dimensionados no modo de escala"
+
+#: plugins/scale.c:429
+msgid "Darken Background"
+msgstr "Escurecer Segundo Plano"
+
+#: plugins/scale.c:430
+msgid "Darken background when scaling windows"
+msgstr "Escurecer segundo plano ao dimensionar janelas"
+
+#: plugins/scale.c:437 plugins/switcher.c:480
+msgid "Amount of opacity in percent"
+msgstr "Volume de opacidade em percentual"
+
+#: plugins/scale.c:445
+msgid "Corners"
+msgstr "Cantos"
+
+#: plugins/scale.c:446
+msgid "Hot corners that should initiate scale mode"
+msgstr "Cantos que devem iniciar o modo de dimensionamento"
+
+#: plugins/scale.c:458
+msgid "Overlay Icon"
+msgstr "Ícone de Instalação Sobreposta"
+
+#: plugins/scale.c:459
+msgid "Overlay an icon on windows once they are scaled"
+msgstr ""
+"Instalação sobreposta de um ícone nas janelas quando elas são dimensionadas"
+
+#: plugins/scale.c:1436
+msgid "Initiate Window Picker"
+msgstr "Iniciar Seletor de Janelas"
+
+#: plugins/scale.c:1437
+msgid "Layout and start transforming windows"
+msgstr "Criar layout das janelas e iniciar sua transformação"
+
+#: plugins/scale.c:1643
+msgid "Scale"
+msgstr "Dimensionar"
+
+#: plugins/scale.c:1644
+msgid "Scale windows"
+msgstr "Dimensionar janelas"
+
+#: plugins/switcher.c:378
+msgid "Initiate Window Switcher"
+msgstr "Iniciar Alternador de Janelas"
+
+#: plugins/switcher.c:379
+msgid "Show switcher"
+msgstr "Mostrar alternador"
+
+#: plugins/switcher.c:391
+msgid "Initiate All Windows"
+msgstr "Iniciar Todas as Janelas"
+
+#: plugins/switcher.c:392
+msgid "Modifier to show switcher for all windows"
+msgstr "Modificador para exibição do alternador para todas as janelas"
+
+#: plugins/switcher.c:405
+msgid "Prev Window"
+msgstr "Janela de Visualização"
+
+#: plugins/switcher.c:406
+msgid "Modifier key to select previous window"
+msgstr "Tecla modificadora para seleção da janela anterior"
+
+#: plugins/switcher.c:420
+msgid "Switcher speed"
+msgstr "Velocidade do alternador"
+
+#: plugins/switcher.c:430
+msgid "Switcher timestep"
+msgstr "Timestep do alternador"
+
+#: plugins/switcher.c:440
+msgid "Window types that should shown in switcher"
+msgstr "Tipos de janelas que deveriam ser mostrados no alternador"
+
+#: plugins/switcher.c:461
+msgid "Saturation"
+msgstr "Saturação"
+
+#: plugins/switcher.c:462
+msgid "Amount of saturation in percent"
+msgstr "Volume de saturação em percentual"
+
+#: plugins/switcher.c:470
+msgid "Brightness"
+msgstr "Brilho"
+
+#: plugins/switcher.c:471
+msgid "Amount of brightness in percent"
+msgstr "Volume de brilho em percentual"
+
+#: plugins/switcher.c:488
+msgid "Bring To Front"
+msgstr "Colocar em Primeiro Plano"
+
+#: plugins/switcher.c:489
+msgid "Bring selected window to front"
+msgstr "Colocar a janela selecionada em primeiro plano"
+
+#: plugins/switcher.c:495
+msgid "Zoom"
+msgstr "Zoom"
+
+#: plugins/switcher.c:496
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr "Durante a troca de janelas, deve-se reduzir a área de trabalho remota"
+
+#: plugins/switcher.c:506
+msgid "Icon"
+msgstr "Ícone"
+
+#: plugins/switcher.c:507
+msgid "Show icon next to thumbnail"
+msgstr "Mostrar ícone ao lado da miniatura"
+
+#: plugins/switcher.c:513
+msgid "Minimized"
+msgstr "Minimizado"
+
+#: plugins/switcher.c:514
+msgid "Show minimized windows"
+msgstr "Mostrar janelas minimizadas"
+
+#: plugins/switcher.c:1908 plugins/switcher.c:1909
+msgid "Application Switcher"
+msgstr "Alternador de Aplicativos"
+
+#: plugins/water.c:1576
+msgid "Enable pointer water effects"
+msgstr "Habilitar ponteiro de efeitos aquáticos"
+
+#: plugins/water.c:1588
+msgid "Toggle rain"
+msgstr "Alternar chuva"
+
+#: plugins/water.c:1589
+msgid "Toggle rain effect"
+msgstr "Alternar efeito de chuva"
+
+#: plugins/water.c:1603
+msgid "Toggle wiper"
+msgstr ""
+
+#: plugins/water.c:1604
+msgid "Toggle wiper effect"
+msgstr ""
+
+#: plugins/water.c:1618
+msgid "Offset Scale"
+msgstr "Escala de Deslocamento"
+
+#: plugins/water.c:1619
+msgid "Water offset scale"
+msgstr "Escala de deslocamento da água"
+
+#: plugins/water.c:1628
+msgid "Rain Delay"
+msgstr "Atraso da Chuva"
+
+#: plugins/water.c:1629
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Intervalo (in ms) entre cada gota de chuva"
+
+#: plugins/water.c:1637
+msgid "Title wave"
+msgstr ""
+
+#: plugins/water.c:1638
+msgid "Wave effect from window title"
+msgstr ""
+
+#: plugins/water.c:1778
+msgid "Water Effect"
+msgstr "Efeito Aquático"
+
+#: plugins/water.c:1779
+msgid "Adds water effects to different desktop actions"
+msgstr "Adiciona efeitos aquáticos a diferentes ações da área de trabalho"
+
+#: plugins/wobbly.c:137
+msgid "Shiver"
+msgstr "Tremor"
+
+#: plugins/wobbly.c:387
+msgid "Friction"
+msgstr "Atrito"
+
+#: plugins/wobbly.c:388
+msgid "Spring Friction"
+msgstr "Atrito do Salto"
+
+#: plugins/wobbly.c:397
+msgid "Spring K"
+msgstr "Salto K"
+
+#: plugins/wobbly.c:398
+msgid "Spring Konstant"
+msgstr "Salto Konstant"
+
+#: plugins/wobbly.c:407
+msgid "Grid Resolution"
+msgstr "Resolução de Grade"
+
+#: plugins/wobbly.c:408
+msgid "Vertex Grid Resolution"
+msgstr "Resolução da Grade de Vértices"
+
+#: plugins/wobbly.c:416
+msgid "Minimum Grid Size"
+msgstr "Tamanho Mínimo da Grade"
+
+#: plugins/wobbly.c:417
+msgid "Minimum Vertex Grid Size"
+msgstr "Tamanho Mínimo do Vértice da Grade"
+
+#: plugins/wobbly.c:425
+msgid "Map Effect"
+msgstr "Efeito de Mapa"
+
+#: plugins/wobbly.c:426
+msgid "Map Window Effect"
+msgstr "Efeito de Mapa da Janela"
+
+#: plugins/wobbly.c:434
+msgid "Focus Effect"
+msgstr "Efeito de Destaque"
+
+#: plugins/wobbly.c:435
+msgid "Focus Window Effect"
+msgstr "Efeito de Destaque da Janela"
+
+#: plugins/wobbly.c:443
+msgid "Map Window Types"
+msgstr "Tipos de Mapa de Janelas"
+
+#: plugins/wobbly.c:444
+msgid "Window types that should wobble when mapped"
+msgstr "Tipos de janelas que deveriam ficar instáveis quando mapeados"
+
+#: plugins/wobbly.c:458
+msgid "Focus Window Types"
+msgstr "Tipos de Destaque de Janelas"
+
+#: plugins/wobbly.c:459
+msgid "Window types that should wobble when focused"
+msgstr "Tipos de janelas que deveriam ficar instáveis quando destacados"
+
+#: plugins/wobbly.c:471
+msgid "Move Window Types"
+msgstr "Tipos de Movimentação de Janelas"
+
+#: plugins/wobbly.c:472
+msgid "Window types that should wobble when moved"
+msgstr "Tipos de janelas que deveriam ficar instáveis quando movidos"
+
+#: plugins/wobbly.c:486
+msgid "Grab Window Types"
+msgstr "Capturar Tipos de Janelas"
+
+#: plugins/wobbly.c:487
+msgid "Window types that should wobble when grabbed"
+msgstr "Tipos de janelas que deveriam ficar instáveis quando capturados"
+
+#: plugins/wobbly.c:499
+msgid "Snap windows"
+msgstr "Fechar janelas"
+
+#: plugins/wobbly.c:500
+msgid "Toggle window snapping"
+msgstr "Alternar fechamento de janelas"
+
+#: plugins/wobbly.c:508
+msgid "Maximize Effect"
+msgstr "Maximizar Efeito"
+
+#: plugins/wobbly.c:509
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Efeito de instabilidade ao maximizar e desmaximizar janelas"
+
+#: plugins/wobbly.c:516
+msgid "Wobble effect on system beep"
+msgstr "Efeito de instabilidade ao som do bip do sistema"
+
+#: plugins/wobbly.c:2977
+msgid "Wobbly Windows"
+msgstr "Janelas Instáveis"
+
+#: plugins/wobbly.c:2978
+msgid "Use spring model for wobbly window effect"
+msgstr "Usar modelo de salto para efeito de instabilidade na janela"
+
+#: plugins/zoom.c:235 plugins/zoom.c:243 plugins/zoom.c:244
+msgid "Zoom In"
+msgstr "Aumentar o zoom"
+
+#: plugins/zoom.c:252 plugins/zoom.c:253
+msgid "Zoom Out"
+msgstr "Diminuir o zoom"
+
+#: plugins/zoom.c:262
+msgid "Zoom Speed"
+msgstr "Velocidade do Zoom"
+
+#: plugins/zoom.c:272
+msgid "Zoom Timestep"
+msgstr "Timestep do Zoom"
+
+#: plugins/zoom.c:281
+msgid "Filter Linear"
+msgstr "Filtro Linear"
+
+#: plugins/zoom.c:282
+msgid "USe linear filter when zoomed in"
+msgstr "Usar filtro linear ao aumentar zoom"
+
+#: plugins/zoom.c:802
+msgid "Zoom Desktop"
+msgstr "Aproximar Área de Trabalho"
+
+#: plugins/zoom.c:803
+msgid "Zoom and pan desktop cube"
+msgstr "Aplicar zoom e pan ao cubo da área de trabalho"
+
+#: src/display.c:152
+msgid "Fast"
+msgstr "Rápida"
+
+#: src/display.c:152
+msgid "Good"
+msgstr "Boa"
+
+#: src/display.c:152
+msgid "Best"
+msgstr "Melhor"
+
+#: src/display.c:208
+msgid "Active Plugins"
+msgstr "Plug-ins Ativos"
+
+#: src/display.c:209
+msgid "List of currently active plugins"
+msgstr "Lista de plug-ins atualmente ativos"
+
+#: src/display.c:223
+msgid "Texture Filter"
+msgstr "Filtro de Textura"
+
+#: src/display.c:224
+msgid "Texture filtering"
+msgstr "Filtragem de textura"
+
+#: src/display.c:232
+msgid "Click To Focus"
+msgstr "Clique para Posicionar o Foco"
+
+#: src/display.c:233
+msgid "Click on window moves input focus to it"
+msgstr "O clique na janela transfere o foco para ela"
+
+#: src/display.c:239
+msgid "Auto-Raise"
+msgstr "Elevação Automática"
+
+#: src/display.c:240
+msgid "Raise selected windows after interval"
+msgstr "Elevar janelas selecionadas após intervalo"
+
+#: src/display.c:246
+msgid "Auto-Raise Delay"
+msgstr "Atraso na Elevação Automática"
+
+#: src/display.c:247
+msgid "Interval before raising selected windows"
+msgstr "Intervalo que precede a elevação das janelas selecionadas"
+
+#: src/display.c:255
+msgid "Close Window"
+msgstr "Fechar Janela"
+
+#: src/display.c:256
+msgid "Close active window"
+msgstr "Fechar a janela ativa"
+
+#: src/display.c:266
+msgid "Show Main Menu"
+msgstr "Mostrar Menu Principal"
+
+#: src/display.c:267
+msgid "Show the main menu"
+msgstr "Mostrar o menu principal"
+
+#: src/display.c:277
+msgid "Run Dialog"
+msgstr "Caixa de Diálogo Executar"
+
+#: src/display.c:278
+msgid "Show Run Application dialog"
+msgstr "Mostrar caixa de diálogo Executar Aplicativo"
+
+#: src/display.c:288
+msgid "Unmaximize Window"
+msgstr "Desmaximizar Janela"
+
+#: src/display.c:289
+msgid "Unmaximize active window"
+msgstr "Desmaximizar janela ativa"
+
+#: src/display.c:299
+msgid "Minimize Window"
+msgstr "Minimizar Janela"
+
+#: src/display.c:300
+msgid "Minimize active window"
+msgstr "Minimizar janela ativa"
+
+#: src/display.c:310
+msgid "Maximize Window"
+msgstr "Maximizar Janela"
+
+#: src/display.c:311
+msgid "Maximize active window"
+msgstr "Maximizar janela ativa"
+
+#: src/display.c:321
+msgid "Maximize Window Horizontally"
+msgstr "Maximizar Janela Horizontalmente"
+
+#: src/display.c:322
+msgid "Maximize active window horizontally"
+msgstr "Maximizar janela ativa horizontalmente"
+
+#: src/display.c:330
+msgid "Maximize Window Vertically"
+msgstr "Maximizar Janela Verticalmente"
+
+#: src/display.c:331
+msgid "Maximize active window vertically"
+msgstr "Maximizar janela ativa verticalmente"
+
+#: src/display.c:339 src/display.c:340
+msgid "Hide all windows and focus desktop"
+msgstr "Ocultar todas as janelas e enfocar área de trabalho"
+
+#: src/display.c:348
+#, c-format
+msgid "Command line %d"
+msgstr "Linha de comando %d"
+
+#: src/display.c:349
+#, c-format
+msgid "Command line to be executed in shell when run_command%d is invoked"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command%d for acionado"
+
+#: src/display.c:351
+#, c-format
+msgid "Run command %d"
+msgstr "Executar comando %d"
+
+#: src/display.c:352
+#, c-format
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command%d"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando%d"
+
+#: src/display.c:390
+msgid "Slow Animations"
+msgstr "Animações Lentas"
+
+#: src/display.c:391
+msgid "Toggle use of slow animations"
+msgstr "Alternar uso de animações lentas"
+
+#: src/display.c:401
+msgid "Lower Window"
+msgstr "Janela Mais Baixa"
+
+#: src/display.c:402
+msgid "Lower window beneath other windows"
+msgstr "Janela mais baixa sob as demais janelas"
+
+#: src/display.c:410
+msgid "Increase Opacity"
+msgstr "Aumentar Opacidade"
+
+#: src/display.c:411
+msgid "Increase window opacity"
+msgstr "Aumentar opacidade da janela"
+
+#: src/display.c:419
+msgid "Decrease Opacity"
+msgstr "Reduzir Opacidade"
+
+#: src/display.c:420
+msgid "Decrease window opacity"
+msgstr "Reduzir opacidade da janela"
+
+#: src/display.c:428 src/display.c:429
+msgid "Take a screenshot"
+msgstr "Efetuar uma captura de tela"
+
+#: src/display.c:439 src/display.c:440
+msgid "Screenshot command line"
+msgstr "Capturar tela da linha de comando"
+
+#: src/display.c:448 src/display.c:449
+msgid "Take a screenshot of a window"
+msgstr "Efetuar captura de tela de uma janela"
+
+#: src/display.c:460 src/display.c:461
+msgid "Window screenshot command line"
+msgstr "Linha de comando para captura de tela de janelas"
+
+#: src/display.c:469
+msgid "Window Menu"
+msgstr "Menu da Janela"
+
+#: src/display.c:470
+msgid "Open window menu"
+msgstr "Abrir menu de janelas"
+
+#: src/display.c:478
+msgid "Raise On Click"
+msgstr "Elevar com um Clique"
+
+#: src/display.c:479
+msgid "Raise windows when clicked"
+msgstr "Elevar janelas quando clicadas"
+
+#: src/display.c:485
+msgid "Audible Bell"
+msgstr "Campainha Audível"
+
+#: src/display.c:486
+msgid "Audible system beep"
+msgstr "Bip do sistema audível"
+
+#: src/display.c:492
+msgid "Toggle Window Maximized"
+msgstr "Alternar Janela Maximizada"
+
+#: src/display.c:493
+msgid "Toggle active window maximized"
+msgstr "Alternar janela ativa maximizada"
+
+#: src/display.c:501
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Alternar Janela Maximizada Horizontalmente"
+
+#: src/display.c:503
+msgid "Toggle active window maximized horizontally"
+msgstr "Alternar janela ativa maximizada horizontalmente"
+
+#: src/display.c:511
+msgid "Toggle Window Maximized Vertically"
+msgstr "Alternar Janela Maximizada Verticalmente"
+
+#: src/display.c:513
+msgid "Toggle active window maximized vertically"
+msgstr "Alternar janela ativa maximizada verticalmente"
+
+#: src/display.c:521
+msgid "Hide Skip Taskbar Windows"
+msgstr "Ocultar Janelas Ignorar Barra de Tarefas"
+
+#: src/display.c:522
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Ocultar as janelas que não estão na barra de tarefas ao entrar no modo "
+"mostrar área de trabalho"
+
+#: src/display.c:529
+msgid "Toggle Window Shaded"
+msgstr "Alternar Janela Sombreada"
+
+#: src/display.c:530
+msgid "Toggle active window shaded"
+msgstr "Alternar janela ativa sombreada"
+
+#: src/main.c:54
+msgid "Desktop"
+msgstr "Área de Trabalho"
+
+#: src/screen.c:245
+msgid "Detect Refresh Rate"
+msgstr "Detectar Taxa de Atualização"
+
+#: src/screen.c:246
+msgid "Automatic detection of refresh rate"
+msgstr "Detecção automática da taxa de atualização"
+
+#: src/screen.c:252
+msgid "Lighting"
+msgstr "Iluminação"
+
+#: src/screen.c:253
+msgid "Use diffuse light when screen is transformed"
+msgstr "Usar luz difusa quando a tela for transformada"
+
+#: src/screen.c:259
+msgid "Refresh Rate"
+msgstr "Taxa de Atualização"
+
+#: src/screen.c:260
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Taxa em que a tela é redesenhada (vezes/segundo)"
+
+#: src/screen.c:268
+msgid "Virtual Size"
+msgstr "Tamanho Virtual"
+
+#: src/screen.c:269
+msgid "Screen size multiplier for virtual size"
+msgstr "Multiplicador de tamanho de tela para tamanho virtual"
+
+#: src/screen.c:277
+msgid "Opacity Step"
+msgstr "Etapa de Opacidade"
+
+#: src/screen.c:278
+msgid "Opacity change step"
+msgstr "Etapa de mudança de opacidade"
+
+#: src/screen.c:286
+msgid "Unredirect Fullscreen Windows"
+msgstr "Anular redirecionamento de janelas de tela inteira"
+
+#: src/screen.c:287
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Permitir que o desenho das janelas em tela inteira não seja redirecionado "
 "para pixmaps fora da tela"
 
-#: ../plugins/compiz.schemas.in.in.h:18
-msgid "Amount of brightness in percent (0-100)"
-msgstr "Volume de brilho em percentual (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:19
-msgid "Amount of opacity in percent (0-100)"
-msgstr "Volume de opacidade em percentual (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:20
-msgid "Amount of saturation in percent (0-100)"
-msgstr "Volume de saturação em percentual (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:21
-msgid "Animate Skydome"
-msgstr "Animar Skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:22
-msgid "Animate skydome when rotating cube"
-msgstr "Animar Skydome ao girar o cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:23
-msgid "Application Switcher"
-msgstr "Alternador de Aplicativos"
-
-#: ../plugins/compiz.schemas.in.in.h:24
-msgid "Audible Bell"
-msgstr "Campainha Audível"
-
-#: ../plugins/compiz.schemas.in.in.h:25
-msgid "Audible system beep"
-msgstr "Bip do sistema audível"
-
-#: ../plugins/compiz.schemas.in.in.h:26
-msgid "Auto-Raise"
-msgstr "Elevação Automática"
-
-#: ../plugins/compiz.schemas.in.in.h:27
-msgid "Auto-Raise Delay"
-msgstr "Atraso na Elevação Automática"
-
-#: ../plugins/compiz.schemas.in.in.h:28
-msgid "Automatic detection of refresh rate"
-msgstr "Detecção automática da taxa de atualização"
-
-#: ../plugins/compiz.schemas.in.in.h:29
-msgid "Brightness"
-msgstr "Brilho"
-
-#: ../plugins/compiz.schemas.in.in.h:30
-msgid "Bring To Front"
-msgstr "Colocar em Primeiro Plano"
-
-#: ../plugins/compiz.schemas.in.in.h:31
-msgid "Bring selected window to front"
-msgstr "Colocar a janela selecionada em primeiro plano"
-
-#: ../plugins/compiz.schemas.in.in.h:32
-msgid "Click To Focus"
-msgstr "Clique para Posicionar o Foco"
-
-#: ../plugins/compiz.schemas.in.in.h:33
-msgid "Click on window moves input focus to it"
-msgstr "O clique na janela transfere o foco para ela"
-
-#: ../plugins/compiz.schemas.in.in.h:34
-msgid "Close Window"
-msgstr "Fechar Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:35
-msgid "Close active window"
-msgstr "Fechar a janela ativa"
-
-#: ../plugins/compiz.schemas.in.in.h:36
-msgid "Color of top and bottom sides of the cube"
-msgstr "Cor dos lados superior e inferior do cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:37
-msgid "Command line 0"
-msgstr "Linha de comando 0"
-
-#: ../plugins/compiz.schemas.in.in.h:38
-msgid "Command line 1"
-msgstr "Linha de comando 1"
-
-#: ../plugins/compiz.schemas.in.in.h:39
-msgid "Command line 10"
-msgstr "Linha de comando 10"
-
-#: ../plugins/compiz.schemas.in.in.h:40
-msgid "Command line 11"
-msgstr "Linha de comando 11"
-
-#: ../plugins/compiz.schemas.in.in.h:41
-msgid "Command line 2"
-msgstr "Linha de comando 2"
-
-#: ../plugins/compiz.schemas.in.in.h:42
-msgid "Command line 3"
-msgstr "Linha de comando 3"
-
-#: ../plugins/compiz.schemas.in.in.h:43
-msgid "Command line 4"
-msgstr "Linha de comando 4"
-
-#: ../plugins/compiz.schemas.in.in.h:44
-msgid "Command line 5"
-msgstr "Linha de comando 5"
-
-#: ../plugins/compiz.schemas.in.in.h:45
-msgid "Command line 6"
-msgstr "Linha de comando 6"
-
-#: ../plugins/compiz.schemas.in.in.h:46
-msgid "Command line 7"
-msgstr "Linha de comando 7"
-
-#: ../plugins/compiz.schemas.in.in.h:47
-msgid "Command line 8"
-msgstr "Linha de comando 8"
-
-#: ../plugins/compiz.schemas.in.in.h:48
-msgid "Command line 9"
-msgstr "Linha de comando 9"
-
-#: ../plugins/compiz.schemas.in.in.h:49
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command0 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:50
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command1 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:51
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command10 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:52
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command11 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:53
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command2 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:54
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command3 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:55
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command4 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:56
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command5 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:57
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command6 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:58
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command7 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:59
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command8 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:60
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-"Linha de comando a ser executada no shell quando run_command9 for acionado"
-
-#: ../plugins/compiz.schemas.in.in.h:61
-msgid "Constrain Y"
-msgstr "Restringir Y"
-
-#: ../plugins/compiz.schemas.in.in.h:62
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Restringir a coordenada Y conforme a área de trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:63
-msgid "Corners"
-msgstr "Cantos"
-
-#: ../plugins/compiz.schemas.in.in.h:64
-msgid "Cube Color"
-msgstr "Cor do Cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:65
-msgid "Darken Background"
-msgstr "Escurecer Segundo Plano"
-
-#: ../plugins/compiz.schemas.in.in.h:66
-msgid "Darken background when scaling windows"
-msgstr "Escurecer segundo plano ao dimensionar janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:67
-msgid "Decrease Opacity"
-msgstr "Reduzir Opacidade"
-
-#: ../plugins/compiz.schemas.in.in.h:68
-msgid "Decrease window opacity"
-msgstr "Reduzir opacidade da janela"
-
-#: ../plugins/compiz.schemas.in.in.h:69
+#: src/screen.c:294
 msgid "Default Icon"
 msgstr "Ícone Padrão"
 
-#: ../plugins/compiz.schemas.in.in.h:70
+#: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Imagem do ícone padrão da janela"
-
-#: ../plugins/compiz.schemas.in.in.h:71
-msgid "Delay (in ms) between each rain-drop (0-3600000)"
-msgstr "Intervalo (in ms) entre cada gota de chuva (0-3600000)"
-
-#: ../plugins/compiz.schemas.in.in.h:72
-msgid "Desktop Cube"
-msgstr "Cubo da Área de Trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:73
-msgid "Detect Refresh Rate"
-msgstr "Detectar Taxa de Atualização"
-
-#: ../plugins/compiz.schemas.in.in.h:74
-msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-msgstr ""
-"Durante a troca de janelas, deve-se reduzir a área de trabalho remota (0.0-"
-"5.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:75
-msgid "Do not modify"
-msgstr "Não modificar"
-
-#: ../plugins/compiz.schemas.in.in.h:76
-msgid "Drop shadow X offset (-16-16)"
-msgstr "Diminuir deslocamento X da sombra (-16-16)"
-
-#: ../plugins/compiz.schemas.in.in.h:77
-msgid "Drop shadow Y offset (-16-16)"
-msgstr "Diminuir deslocamento Y da sombra (-16-16)"
-
-#: ../plugins/compiz.schemas.in.in.h:78
-msgid "Drop shadow opacity (0.01-6.00)"
-msgstr "Diminuir opacidade da sombra (0.01-6.00)"
-
-#: ../plugins/compiz.schemas.in.in.h:79
-msgid "Drop shadow radius (0.0-48.0)"
-msgstr "Diminuir raio da sombra (0.0-48.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:80
-msgid "Edge Flip DnD"
-msgstr "DnD de Inversão de Bordas"
-
-#: ../plugins/compiz.schemas.in.in.h:81
-msgid "Edge Flip Move"
-msgstr "Movimento de Inversão de Bordas"
-
-#: ../plugins/compiz.schemas.in.in.h:82
-msgid "Edge Flip Pointer"
-msgstr "Ponteiro de Inversão de Bordas"
-
-#: ../plugins/compiz.schemas.in.in.h:83
-msgid "Enable pointer water effects"
-msgstr "Habilitar ponteiro de efeitos aquáticos"
-
-#: ../plugins/compiz.schemas.in.in.h:84
-msgid "Fade Speed"
-msgstr "Velocidade de Esmaecimento"
-
-#: ../plugins/compiz.schemas.in.in.h:85
-msgid "Fade effect on system beep"
-msgstr "Efeito de esmaecimento no bip do sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:86
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr ""
-"Avivar janelas quando houver mapeamento e esmaecê-las quando não houver "
-"mapeamento"
-
-#: ../plugins/compiz.schemas.in.in.h:87
-msgid "Fading Windows"
-msgstr "Janelas Esmaecidas"
-
-#: ../plugins/compiz.schemas.in.in.h:88
-msgid "Filter Linear"
-msgstr "Filtro Linear"
-
-#: ../plugins/compiz.schemas.in.in.h:89
-msgid "Flip Time"
-msgstr "Tempo de Inversão"
-
-#: ../plugins/compiz.schemas.in.in.h:90
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
-"Inverter para o viewport seguinte ao arrastar o objeto para a borda da tela"
-
-#: ../plugins/compiz.schemas.in.in.h:91
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-"Inverter para o viewport seguinte ao mover o ponteiro para a borda da tela"
-
-#: ../plugins/compiz.schemas.in.in.h:92
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
-"Inverter para o viewport seguinte ao mover a janela para a borda da tela"
-
-#: ../plugins/compiz.schemas.in.in.h:93
-msgid "Focus Effect"
-msgstr "Efeito de Destaque"
-
-#: ../plugins/compiz.schemas.in.in.h:94
-msgid "Focus Window Effect (None, Shiver)"
-msgstr "Efeito de Destaque da Janela (Nenhum, Tremor)"
-
-#: ../plugins/compiz.schemas.in.in.h:95
-msgid "Focus Window Types"
-msgstr "Tipos de Destaque de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:96
-msgid "Focus window when mouse moves over them"
-msgstr "Destacar janela quando o mouse estiver sobre ela"
-
-#: ../plugins/compiz.schemas.in.in.h:97
-msgid "Fold Acceleration (1.0-20.0)"
-msgstr "Aceleração Dobrada (1.0-20.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:98
-msgid "Fold Speed (0.1-50.0)"
-msgstr "Velocidade Dobrada (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:99
-msgid "Fold Timestep (0.1-50.0)"
-msgstr "Timestep Dobrado (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:100
-msgid "Friction"
-msgstr "Atrito"
-
-#: ../plugins/compiz.schemas.in.in.h:101
-msgid "Fullscreen Visual Bell"
-msgstr "Campainha Visual de Tela Inteira"
-
-#: ../plugins/compiz.schemas.in.in.h:102
-msgid "Fullscreen fade effect on system beep"
-msgstr "Efeito de esmaecimento de tela inteira ao som de bip do sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:103
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "Gerar mapas quando possível para dimensionamento de melhor qualidade"
-
-#: ../plugins/compiz.schemas.in.in.h:104
-msgid "Go back to previous slide"
-msgstr "Voltar ao slide anterior"
-
-#: ../plugins/compiz.schemas.in.in.h:105
-msgid "Grab Window Types"
-msgstr "Capturar Tipos de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:106
-msgid "Grid Resolution"
-msgstr "Resolução de Grade"
-
-#: ../plugins/compiz.schemas.in.in.h:107
-msgid "Hide Skip Taskbar Windows"
-msgstr "Ocultar Janelas Ignorar Barra de Tarefas"
-
-#: ../plugins/compiz.schemas.in.in.h:108
-msgid "Hide all windows and focus desktop"
-msgstr "Ocultar todas as janelas e enfocar área de trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:109
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"Ocultar as janelas que não estão na barra de tarefas ao entrar no modo "
-"mostrar área de trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:110
-msgid ""
-"Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Cantos que devem iniciar o modo de dimensionamento (Superior Esquerdo, "
-"Superior Direito, Inferior Esquerdo, Inferior Direito)"
-
-#: ../plugins/compiz.schemas.in.in.h:111
-msgid "Icon"
-msgstr "Ícone"
-
-#: ../plugins/compiz.schemas.in.in.h:112
-msgid "Image files"
-msgstr "Arquivos de imagem"
-
-#: ../plugins/compiz.schemas.in.in.h:113
-msgid "Image to use as texture for the skydome"
-msgstr "Imagem a usar como textura no skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:114
-msgid "Increase Opacity"
-msgstr "Aumentar Opacidade"
-
-#: ../plugins/compiz.schemas.in.in.h:115
-msgid "Increase window opacity"
-msgstr "Aumentar opacidade da janela"
-
-#: ../plugins/compiz.schemas.in.in.h:116
-msgid "Initiate"
-msgstr "Iniciar"
-
-#: ../plugins/compiz.schemas.in.in.h:117
-msgid "Initiate All Windows"
-msgstr "Iniciar Todas as Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:118
-msgid "Initiate Keyboard Window Move"
-msgstr "Iniciar Movimentação de Janela pelo Teclado"
-
-#: ../plugins/compiz.schemas.in.in.h:119
-msgid "Initiate Keyboard Window Resize"
-msgstr "Iniciar Redimensionamento de Janela pelo Teclado"
-
-#: ../plugins/compiz.schemas.in.in.h:120
-msgid "Initiate Window Move"
-msgstr "Iniciar Movimento de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:121
-msgid "Initiate Window Picker"
-msgstr "Iniciar Seletor de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:122
-msgid "Initiate Window Resize"
-msgstr "Iniciar Redimensionamento de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:123
-msgid "Initiate Window Switcher"
-msgstr "Iniciar Alternador de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:124
-msgid "Inside Cube"
-msgstr "Dentro do Cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:125
-msgid "Inside cube"
-msgstr "Dentro do cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:126
-msgid "Interval before raising selected windows (0-10000)"
-msgstr "Intervalo que precede a elevação das janelas selecionadas (0-10000)"
-
-#: ../plugins/compiz.schemas.in.in.h:127
-msgid "Invert Y axis for pointer movement"
-msgstr "Inverter o eixo Y para movimento do ponteiro"
-
-#: ../plugins/compiz.schemas.in.in.h:128
-msgid "Layout and start transforming windows"
-msgstr "Criar layout das janelas e iniciar sua transformação"
-
-#: ../plugins/compiz.schemas.in.in.h:129
-msgid "Lighting"
-msgstr "Iluminação"
-
-#: ../plugins/compiz.schemas.in.in.h:130
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr ""
-"Lista de arquivos PNG e SVG que devem ser renderizados na face superior do "
-"cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:131
-msgid "List of currently active plugins"
-msgstr "Lista de plug-ins atualmente ativos"
-
-#: ../plugins/compiz.schemas.in.in.h:132
-msgid "Lower Window"
-msgstr "Janela Mais Baixa"
-
-#: ../plugins/compiz.schemas.in.in.h:133
-msgid "Lower window beneath other windows"
-msgstr "Janela mais baixa sob as demais janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:134
-msgid "Map Effect"
-msgstr "Efeito de Mapa"
-
-#: ../plugins/compiz.schemas.in.in.h:135
-msgid "Map Window Effect (None, Shiver)"
-msgstr "Efeito de Mapa da Janela (Nenhum, Tremor)"
-
-#: ../plugins/compiz.schemas.in.in.h:136
-msgid "Map Window Types"
-msgstr "Tipos de Mapa de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:137
-msgid "Maximize Effect"
-msgstr "Maximizar Efeito"
-
-#: ../plugins/compiz.schemas.in.in.h:138
-msgid "Maximize Window"
-msgstr "Maximizar Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:139
-msgid "Maximize Window Horizontally"
-msgstr "Maximizar Janela Horizontalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:140
-msgid "Maximize Window Vertically"
-msgstr "Maximizar Janela Verticalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:141
-msgid "Maximize active window"
-msgstr "Maximizar janela ativa"
-
-#: ../plugins/compiz.schemas.in.in.h:142
-msgid "Maximize active window horizontally"
-msgstr "Maximizar janela ativa horizontalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:143
-msgid "Maximize active window vertically"
-msgstr "Maximizar janela ativa verticalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:144
-msgid "Minimize Effect"
-msgstr "Minimizar Efeito"
-
-#: ../plugins/compiz.schemas.in.in.h:145
-msgid "Minimize Window"
-msgstr "Minimizar Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:146
-msgid "Minimize active window"
-msgstr "Minimizar janela ativa"
-
-#: ../plugins/compiz.schemas.in.in.h:147
-msgid "Minimize speed (0.1-50.0)"
-msgstr "Minimizar velocidade (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:148
-msgid "Minimize timestep (0.1-50.0)"
-msgstr "Minimizar timestep (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:149
-msgid "Minimized"
-msgstr "Minimizado"
-
-#: ../plugins/compiz.schemas.in.in.h:150
-msgid "Minimum Grid Size"
-msgstr "Tamanho Mínimo da Grade"
-
-#: ../plugins/compiz.schemas.in.in.h:151
-msgid "Minimum Vertex Grid Size (4-128)"
-msgstr "Tamanho Mínimo do Vértice da Grade (4-128)"
-
-#: ../plugins/compiz.schemas.in.in.h:152
-msgid "Mipmap"
-msgstr "Mapa"
-
-#: ../plugins/compiz.schemas.in.in.h:153
-msgid "Modifier key to select previous window"
-msgstr "Tecla modificadora para seleção da janela anterior"
-
-#: ../plugins/compiz.schemas.in.in.h:154
-msgid "Modifier to show switcher for all windows"
-msgstr "Modificador para exibição do alternador para todas as janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:155
-msgid "Move Window"
-msgstr "Mover Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:156
-msgid "Move Window Types"
-msgstr "Tipos de Movimentação de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:157
-msgid "Move window"
-msgstr "Mover janela"
-
-#: ../plugins/compiz.schemas.in.in.h:158
-msgid "Next Slide"
-msgstr "Próximo Slide"
-
-#: ../plugins/compiz.schemas.in.in.h:159
-msgid "Offset Scale"
-msgstr "Escala de Deslocamento"
-
-#: ../plugins/compiz.schemas.in.in.h:160
-msgid "Opacity"
-msgstr "Opacidade"
-
-#: ../plugins/compiz.schemas.in.in.h:161
-msgid "Opacity Step"
-msgstr "Etapa de Opacidade"
-
-#: ../plugins/compiz.schemas.in.in.h:162
-msgid "Opacity change step (1-50)"
-msgstr "Etapa de mudança de opacidade (1-50)"
-
-#: ../plugins/compiz.schemas.in.in.h:163
-msgid "Opacity level of moving windows (1-100)"
-msgstr "Nível de opacidade das janelas em movimento (1-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:164
-msgid "Open window menu"
-msgstr "Abrir menu de janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:165
-msgid "Overlay Icon"
-msgstr "Ícone de Instalação Sobreposta"
-
-#: ../plugins/compiz.schemas.in.in.h:166
-msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
-msgstr ""
-"Instalação sobreposta de um ícone nas janelas quando elas são dimensionadas "
-"(Nenhuma, Emblema, Grande)"
-
-#: ../plugins/compiz.schemas.in.in.h:167
-msgid "Place Windows"
-msgstr "Colocar Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:168
-msgid "Place windows at appropriate positions when mapped"
-msgstr "Colocar janelas nas posições apropriadas quando houver mapeamento"
-
-#: ../plugins/compiz.schemas.in.in.h:169
-msgid "Place windows on cube"
-msgstr "Colocar janelas no cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:170
-msgid "Plugins that this must load before"
-msgstr "Plug-ins que devem ser carregados antes de"
-
-#: ../plugins/compiz.schemas.in.in.h:171
-msgid "Plugins that this requires"
-msgstr "Plug-ins necessários"
-
-#: ../plugins/compiz.schemas.in.in.h:172
-msgid "Pointer Invert Y"
-msgstr "Inverter Y com o Ponteiro"
-
-#: ../plugins/compiz.schemas.in.in.h:173
-msgid "Pointer Sensitivity"
-msgstr "Sensibilidade do Ponteiro"
-
-#: ../plugins/compiz.schemas.in.in.h:174
-msgid "Prev Window"
-msgstr "Janela de Visualização"
-
-#: ../plugins/compiz.schemas.in.in.h:175
-msgid "Previous Slide"
-msgstr "Slide Anterior"
-
-#: ../plugins/compiz.schemas.in.in.h:176
-msgid "Rain Delay"
-msgstr "Atraso da Chuva"
-
-#: ../plugins/compiz.schemas.in.in.h:177
-msgid "Raise On Click"
-msgstr "Elevar com um Clique"
-
-#: ../plugins/compiz.schemas.in.in.h:178
-msgid "Raise selected windows after interval"
-msgstr "Elevar janelas selecionadas após intervalo"
-
-#: ../plugins/compiz.schemas.in.in.h:179
-msgid "Raise windows when clicked"
-msgstr "Elevar janelas quando clicadas"
-
-#: ../plugins/compiz.schemas.in.in.h:180
-msgid "Refresh Rate"
-msgstr "Taxa de Atualização"
-
-#: ../plugins/compiz.schemas.in.in.h:181
-msgid "Render skydome"
-msgstr "Renderizar skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:182
-msgid "Resize Window"
-msgstr "Redimensionar Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:183
-msgid "Resize window"
-msgstr "Redimensionar janela"
-
-#: ../plugins/compiz.schemas.in.in.h:184
-msgid "Return from scale view"
-msgstr "Retornar da tela de dimensionamento"
-
-#: ../plugins/compiz.schemas.in.in.h:185
-msgid "Rotate Cube"
-msgstr "Girar Cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:186
-msgid "Rotate Left"
-msgstr "Girar para a Esquerda"
-
-#: ../plugins/compiz.schemas.in.in.h:187
-msgid "Rotate Left with Window"
-msgstr "Girar para a Esquerda com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:188
-msgid "Rotate Right"
-msgstr "Girar para a Direita"
-
-#: ../plugins/compiz.schemas.in.in.h:189
-msgid "Rotate Right with Window"
-msgstr "Girar para a Direita com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:190
-msgid "Rotate To Face 1"
-msgstr "Girar para a Face 1"
-
-#: ../plugins/compiz.schemas.in.in.h:191
-msgid "Rotate To Face 1 with Window"
-msgstr "Girar para a Face 1 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:192
-msgid "Rotate To Face 10"
-msgstr "Girar para a Face 10"
-
-#: ../plugins/compiz.schemas.in.in.h:193
-msgid "Rotate To Face 10 with Window"
-msgstr "Girar para a Face 10 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:194
-msgid "Rotate To Face 11"
-msgstr "Girar para a Face 11"
-
-#: ../plugins/compiz.schemas.in.in.h:195
-msgid "Rotate To Face 11 with Window"
-msgstr "Girar para a Face 11 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:196
-msgid "Rotate To Face 12"
-msgstr "Girar para a Face 12"
-
-#: ../plugins/compiz.schemas.in.in.h:197
-msgid "Rotate To Face 12 with Window"
-msgstr "Girar para a Face 12 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:198
-msgid "Rotate To Face 2"
-msgstr "Girar para a Face 2"
-
-#: ../plugins/compiz.schemas.in.in.h:199
-msgid "Rotate To Face 2 with Window"
-msgstr "Girar para a Face 2 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:200
-msgid "Rotate To Face 3"
-msgstr "Girar para a Face 3"
-
-#: ../plugins/compiz.schemas.in.in.h:201
-msgid "Rotate To Face 3 with Window"
-msgstr "Girar para a Face 3 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:202
-msgid "Rotate To Face 4"
-msgstr "Girar para a Face 4"
-
-#: ../plugins/compiz.schemas.in.in.h:203
-msgid "Rotate To Face 4 with Window"
-msgstr "Girar para a Face 4 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:204
-msgid "Rotate To Face 5"
-msgstr "Girar para a Face 5"
-
-#: ../plugins/compiz.schemas.in.in.h:205
-msgid "Rotate To Face 5 with Window"
-msgstr "Girar para a Face 5 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:206
-msgid "Rotate To Face 6"
-msgstr "Girar para a Face 6"
-
-#: ../plugins/compiz.schemas.in.in.h:207
-msgid "Rotate To Face 6 with Window"
-msgstr "Girar para a Face 6 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:208
-msgid "Rotate To Face 7"
-msgstr "Girar para a Face 7"
-
-#: ../plugins/compiz.schemas.in.in.h:209
-msgid "Rotate To Face 7 with Window"
-msgstr "Girar para a Face 7 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:210
-msgid "Rotate To Face 8"
-msgstr "Girar para a Face 8"
-
-#: ../plugins/compiz.schemas.in.in.h:211
-msgid "Rotate To Face 8 with Window"
-msgstr "Girar para a Face 8 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:212
-msgid "Rotate To Face 9"
-msgstr "Girar para a Face 9"
-
-#: ../plugins/compiz.schemas.in.in.h:213
-msgid "Rotate To Face 9 with Window"
-msgstr "Girar para a Face 9 com Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:214
-msgid "Rotate desktop cube"
-msgstr "Girar cubo da área de trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:215
-msgid "Rotate left"
-msgstr "Girar para a esquerda"
-
-#: ../plugins/compiz.schemas.in.in.h:216
-msgid "Rotate left and bring active window along"
-msgstr "Girar para a esquerda e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:217
-msgid "Rotate right"
-msgstr "Girar para a direita"
-
-#: ../plugins/compiz.schemas.in.in.h:218
-msgid "Rotate right and bring active window along"
-msgstr "Girar para a direita e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:219
-msgid "Rotate to face 1"
-msgstr "Girar para a face 1"
-
-#: ../plugins/compiz.schemas.in.in.h:220
-msgid "Rotate to face 1 and bring active window along"
-msgstr "Girar para a face 1 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:221
-msgid "Rotate to face 10"
-msgstr "Girar para a face 10"
-
-#: ../plugins/compiz.schemas.in.in.h:222
-msgid "Rotate to face 10 and bring active window along"
-msgstr "Girar para a face 10 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:223
-msgid "Rotate to face 11"
-msgstr "Girar para a face 11"
-
-#: ../plugins/compiz.schemas.in.in.h:224
-msgid "Rotate to face 11 and bring active window along"
-msgstr "Girar para a face 11 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:225
-msgid "Rotate to face 12"
-msgstr "Girar para a face 12"
-
-#: ../plugins/compiz.schemas.in.in.h:226
-msgid "Rotate to face 12 and bring active window along"
-msgstr "Girar para a face 12 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:227
-msgid "Rotate to face 2"
-msgstr "Girar para a face 2"
-
-#: ../plugins/compiz.schemas.in.in.h:228
-msgid "Rotate to face 2 and bring active window along"
-msgstr "Girar para a face 2 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:229
-msgid "Rotate to face 3"
-msgstr "Girar para a face 3"
-
-#: ../plugins/compiz.schemas.in.in.h:230
-msgid "Rotate to face 3 and bring active window along"
-msgstr "Girar para a face 3 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:231
-msgid "Rotate to face 4"
-msgstr "Girar para a face 4"
-
-#: ../plugins/compiz.schemas.in.in.h:232
-msgid "Rotate to face 4 and bring active window along"
-msgstr "Girar para a face 4 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:233
-msgid "Rotate to face 5"
-msgstr "Girar para a face 5"
-
-#: ../plugins/compiz.schemas.in.in.h:234
-msgid "Rotate to face 5 and bring active window along"
-msgstr "Girar para a face 5 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:235
-msgid "Rotate to face 6"
-msgstr "Girar para a face 6"
-
-#: ../plugins/compiz.schemas.in.in.h:236
-msgid "Rotate to face 6 and bring active window along"
-msgstr "Girar para a face 6 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:237
-msgid "Rotate to face 7"
-msgstr "Girar para a face 7"
-
-#: ../plugins/compiz.schemas.in.in.h:238
-msgid "Rotate to face 7 and bring active window along"
-msgstr "Girar para a face 7 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:239
-msgid "Rotate to face 8"
-msgstr "Girar para a face 8"
-
-#: ../plugins/compiz.schemas.in.in.h:240
-msgid "Rotate to face 8 and bring active window along"
-msgstr "Girar para a face 8 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:241
-msgid "Rotate to face 9"
-msgstr "Girar para a face 9"
-
-#: ../plugins/compiz.schemas.in.in.h:242
-msgid "Rotate to face 9 and bring active window along"
-msgstr "Girar para a face 9 e trazer a janela ativa junto"
-
-#: ../plugins/compiz.schemas.in.in.h:243
-msgid "Rotation Acceleration (1.0-20.0)"
-msgstr "Aceleração da Rotação (1.0-20.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:244
-msgid "Rotation Speed (0.1-50.0)"
-msgstr "Velocidade da Rotação (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:245
-msgid "Rotation Timestep (0.1-50.0)"
-msgstr "Timestep da Rotação (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:246
-msgid "Run Dialog"
-msgstr "Caixa de Diálogo Executar"
-
-#: ../plugins/compiz.schemas.in.in.h:247
-msgid "Run command 0"
-msgstr "Executar comando 0"
-
-#: ../plugins/compiz.schemas.in.in.h:248
-msgid "Run command 1"
-msgstr "Executar comando 1"
-
-#: ../plugins/compiz.schemas.in.in.h:249
-msgid "Run command 10"
-msgstr "Executar comando 10"
-
-#: ../plugins/compiz.schemas.in.in.h:250
-msgid "Run command 11"
-msgstr "Executar comando 11"
-
-#: ../plugins/compiz.schemas.in.in.h:251
-msgid "Run command 2"
-msgstr "Executar comando 2"
-
-#: ../plugins/compiz.schemas.in.in.h:252
-msgid "Run command 3"
-msgstr "Executar comando 3"
-
-#: ../plugins/compiz.schemas.in.in.h:253
-msgid "Run command 4"
-msgstr "Executar comando 4"
-
-#: ../plugins/compiz.schemas.in.in.h:254
-msgid "Run command 5"
-msgstr "Executar comando 5"
-
-#: ../plugins/compiz.schemas.in.in.h:255
-msgid "Run command 6"
-msgstr "Executar comando 6"
-
-#: ../plugins/compiz.schemas.in.in.h:256
-msgid "Run command 7"
-msgstr "Executar comando 7"
-
-#: ../plugins/compiz.schemas.in.in.h:257
-msgid "Run command 8"
-msgstr "Executar comando 8"
-
-#: ../plugins/compiz.schemas.in.in.h:258
-msgid "Run command 9"
-msgstr "Executar comando 9"
-
-#: ../plugins/compiz.schemas.in.in.h:259
-msgid "Saturation"
-msgstr "Saturação"
-
-#: ../plugins/compiz.schemas.in.in.h:260
-msgid "Scale"
-msgstr "Dimensionar"
-
-#: ../plugins/compiz.schemas.in.in.h:261
-msgid "Scale image"
-msgstr "Dimensionar imagem"
-
-#: ../plugins/compiz.schemas.in.in.h:262
-msgid "Scale images to cover top face of cube"
-msgstr "Dimensionar imagens para cobertura da face superior do cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:263
-msgid "Scale speed (0.1-50.0)"
-msgstr "Dimensionar velocidade (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:264
-msgid "Scale timestep (0.1-50.0)"
-msgstr "Dimensionar timestep (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:265
-msgid "Scale windows"
-msgstr "Dimensionar janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:266
-msgid "Screen size multiplier for virtual size (4-32)"
-msgstr "Multiplicador de tamanho de tela para tamanho virtual (4-32)"
-
-#: ../plugins/compiz.schemas.in.in.h:267
-msgid "Screenshot command line"
-msgstr "Capturar tela da linha de comando"
-
-#: ../plugins/compiz.schemas.in.in.h:268
-msgid "Sensitivity of pointer movement (0.01-100.00)"
-msgstr "Sensibilidade do movimento do ponteiro (0.01-100.00)"
-
-#: ../plugins/compiz.schemas.in.in.h:269
-msgid "Shade Resistance"
-msgstr "Resistência de Sombra"
-
-#: ../plugins/compiz.schemas.in.in.h:270
-msgid "Shade resistance (0-100)"
-msgstr "Resistência de sombra (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:271
-msgid "Shadow Offset X"
-msgstr "Deslocamento X da Sombra"
-
-#: ../plugins/compiz.schemas.in.in.h:272
-msgid "Shadow Offset Y"
-msgstr "Deslocamento Y da Sombra"
-
-#: ../plugins/compiz.schemas.in.in.h:273
-msgid "Shadow Opacity"
-msgstr "Opacidade da Sombra"
-
-#: ../plugins/compiz.schemas.in.in.h:274
-msgid "Shadow Radius"
-msgstr "Raio da Sombra"
-
-#: ../plugins/compiz.schemas.in.in.h:275
-msgid "Show Main Menu"
-msgstr "Mostrar Menu Principal"
-
-#: ../plugins/compiz.schemas.in.in.h:276
-msgid "Show Run Application dialog"
-msgstr "Mostrar caixa de diálogo Executar Aplicativo"
-
-#: ../plugins/compiz.schemas.in.in.h:277
-msgid "Show icon next to thumbnail"
-msgstr "Mostrar ícone ao lado da miniatura"
-
-#: ../plugins/compiz.schemas.in.in.h:278
-msgid "Show minimized windows"
-msgstr "Mostrar janelas minimizadas"
-
-#: ../plugins/compiz.schemas.in.in.h:279
-msgid "Show switcher"
-msgstr "Mostrar alternador"
-
-#: ../plugins/compiz.schemas.in.in.h:280
-msgid "Show the main menu"
-msgstr "Mostrar o menu principal"
-
-#: ../plugins/compiz.schemas.in.in.h:281
-msgid "Skydome"
-msgstr "Skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:282
-msgid "Skydome Image"
-msgstr "Imagem do Skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:283
-msgid "Sloppy Focus"
-msgstr "Foco Fraco"
-
-#: ../plugins/compiz.schemas.in.in.h:284
-msgid "Slow Animations"
-msgstr "Animações Lentas"
-
-#: ../plugins/compiz.schemas.in.in.h:285
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Fechar a Rotação do Cubo na Face Superior"
-
-#: ../plugins/compiz.schemas.in.in.h:286
-msgid "Snap To Top Face"
-msgstr "Fechar na Face Superior"
-
-#: ../plugins/compiz.schemas.in.in.h:287
-msgid "Snap windows"
-msgstr "Fechar janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:288
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
-"Janelas maximizadas quebradas e automaticamente desmaximizadas ao arrastar"
-
-#: ../plugins/compiz.schemas.in.in.h:289
-msgid "Snapoff maximized windows"
-msgstr "Janelas maximizadas quebradas"
-
-#: ../plugins/compiz.schemas.in.in.h:290
-msgid "Space between windows (0-250)"
-msgstr "Espaço entre janelas (0-250)"
-
-#: ../plugins/compiz.schemas.in.in.h:291
-msgid "Spacing"
-msgstr "Espaçamento"
-
-#: ../plugins/compiz.schemas.in.in.h:292
-msgid "Speed"
-msgstr "Velocidade"
-
-#: ../plugins/compiz.schemas.in.in.h:293
-msgid "Spring Friction (0.1-10.0)"
-msgstr "Atrito do Salto (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:294
-msgid "Spring K"
-msgstr "Salto K"
-
-#: ../plugins/compiz.schemas.in.in.h:295
-msgid "Spring Konstant (0.1-10.0)"
-msgstr "Salto Konstant (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:296
-msgid "Start Rotation"
-msgstr "Iniciar Rotação"
-
-#: ../plugins/compiz.schemas.in.in.h:297
-msgid "Start moving window"
-msgstr "Iniciar movimento da janela"
-
-#: ../plugins/compiz.schemas.in.in.h:298
-msgid "Start moving window using keyboard"
-msgstr "Iniciar movimentação da janela usando o teclado"
-
-#: ../plugins/compiz.schemas.in.in.h:299
-msgid "Start resizing window"
-msgstr "Iniciar redimensionamento da janela"
-
-#: ../plugins/compiz.schemas.in.in.h:300
-msgid "Start resizing window using keyboard"
-msgstr "Iniciar redimensionamento da janela usando o teclado"
-
-#: ../plugins/compiz.schemas.in.in.h:301
-msgid "Switcher speed (0.1-50.0)"
-msgstr "Velocidade do alternador (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:302
-msgid "Switcher timestep (0.1-50.0)"
-msgstr "Timestep do alternador (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:303
-msgid "Take a screenshot"
-msgstr "Efetuar uma captura de tela"
-
-#: ../plugins/compiz.schemas.in.in.h:304
-msgid "Take a screenshot of a window"
-msgstr "Efetuar captura de tela de uma janela"
-
-#: ../plugins/compiz.schemas.in.in.h:305
-msgid "Terminate"
-msgstr "Concluir"
-
-#: ../plugins/compiz.schemas.in.in.h:306
-msgid "Texture Filter"
-msgstr "Filtro de Textura"
-
-#: ../plugins/compiz.schemas.in.in.h:307
-msgid "Texture filtering (Fast, Good, Best)"
-msgstr "Filtragem de textura (Rápida, Boa, Melhor)"
-
-#: ../plugins/compiz.schemas.in.in.h:308
-msgid "The rate at which the screen is redrawn (times/second) (1-200)"
-msgstr "Taxa em que a tela é redesenhada (vezes/segundo) (1-200)"
-
-#: ../plugins/compiz.schemas.in.in.h:309
-msgid "Timeout before flipping viewport (0-1000)"
-msgstr "Tempo de espera até a inversão do viewport (0-1000)"
-
-#: ../plugins/compiz.schemas.in.in.h:310
-msgid "Timestep"
-msgstr "Timestep"
-
-#: ../plugins/compiz.schemas.in.in.h:311
-msgid "Toggle Window Maximized"
-msgstr "Alternar Janela Maximizada"
-
-#: ../plugins/compiz.schemas.in.in.h:312
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Alternar Janela Maximizada Horizontalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:313
-msgid "Toggle Window Maximized Vertically"
-msgstr "Alternar Janela Maximizada Verticalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:314
-msgid "Toggle Window Shaded"
-msgstr "Alternar Janela Sombreada"
-
-#: ../plugins/compiz.schemas.in.in.h:315
-msgid "Toggle active window maximized"
-msgstr "Alternar janela ativa maximizada"
-
-#: ../plugins/compiz.schemas.in.in.h:316
-msgid "Toggle active window maximized horizontally"
-msgstr "Alternar janela ativa maximizada horizontalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:317
-msgid "Toggle active window maximized vertically"
-msgstr "Alternar janela ativa maximizada verticalmente"
-
-#: ../plugins/compiz.schemas.in.in.h:318
-msgid "Toggle active window shaded"
-msgstr "Alternar janela ativa sombreada"
-
-#: ../plugins/compiz.schemas.in.in.h:319
-msgid "Toggle rain"
-msgstr "Alternar chuva"
-
-#: ../plugins/compiz.schemas.in.in.h:320
-msgid "Toggle rain effect"
-msgstr "Alternar efeito de chuva"
-
-#: ../plugins/compiz.schemas.in.in.h:321
-msgid "Toggle use of slow animations"
-msgstr "Alternar uso de animações lentas"
-
-#: ../plugins/compiz.schemas.in.in.h:322
-msgid "Toggle window snapping"
-msgstr "Alternar fechamento de janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:323
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "Transformar janelas quando elas forem minimizadas e desminimizadas"
-
-#: ../plugins/compiz.schemas.in.in.h:324
-msgid "USe linear filter when zoomed in"
-msgstr "Usar filtro linear ao aumentar zoom"
-
-#: ../plugins/compiz.schemas.in.in.h:325
-msgid "Unfold"
-msgstr "Desdobrar"
-
-#: ../plugins/compiz.schemas.in.in.h:326
-msgid "Unfold cube"
-msgstr "Desdobrar cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:327
-msgid "Unmaximize Window"
-msgstr "Desmaximizar Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:328
-msgid "Unmaximize active window"
-msgstr "Desmaximizar janela ativa"
-
-#: ../plugins/compiz.schemas.in.in.h:329
-msgid "Unredirect Fullscreen Windows"
-msgstr "Anular redirecionamento de janelas de tela inteira"
-
-#: ../plugins/compiz.schemas.in.in.h:330
-msgid "Use diffuse light when screen is transformed"
-msgstr "Usar luz difusa quando a tela for transformada"
-
-#: ../plugins/compiz.schemas.in.in.h:331
-msgid "Use spring model for wobbly window effect"
-msgstr "Usar modelo de salto para efeito de instabilidade na janela"
-
-#: ../plugins/compiz.schemas.in.in.h:332
-msgid "Vertex Grid Resolution (1-64)"
-msgstr "Resolução da Grade de Vértices (1-64)"
-
-#: ../plugins/compiz.schemas.in.in.h:333
-msgid "Virtual Size"
-msgstr "Tamanho Virtual"
-
-#: ../plugins/compiz.schemas.in.in.h:334
-msgid "Visual Bell"
-msgstr "Campainha Visual"
-
-#: ../plugins/compiz.schemas.in.in.h:335
-msgid "Water Effect"
-msgstr "Efeito Aquático"
-
-#: ../plugins/compiz.schemas.in.in.h:336
-msgid "Water effect on system beep"
-msgstr "Efeito aquático no bip do sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:337
-msgid "Water offset scale (0.0-10.0)"
-msgstr "Escala de deslocamento da água (0.0-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:338
-msgid "Window Decoration"
-msgstr "Decoração da Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:339
-msgid "Window Menu"
-msgstr "Menu da Janela"
-
-#: ../plugins/compiz.schemas.in.in.h:340
-msgid "Window Types"
-msgstr "Tipos de Janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:341
-msgid "Window decorations"
-msgstr "Decorações das janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:342
-msgid "Window fade speed (0.1-10.0)"
-msgstr "Velocidade de esmaecimento das janelas (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:343
-msgid "Window placement workarounds"
-msgstr "Soluções para colocação de janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:344
-msgid "Window screenshot command line"
-msgstr "Linha de comando para captura de tela de janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:345
-msgid ""
-"Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, "
-"Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam esmaecer-se (Área de Trabalho, Âncora, Barra "
-"de Ferramentas, Menu, Utilitário, Tela de Apresentação, Caixa de Diálogo, "
-"Caixa de Diálogo Modal, Normal, Tela Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:346
-msgid ""
-"Window types that should be transformed when minimized (Desktop, Dock, "
-"Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, "
-"Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam transformar-se quando minimizados (Área de "
-"Trabalho, Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de "
-"Apresentação, Caixa de Diálogo, Caixa de Diálogo Modal, Normal, Tela "
-"Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:347
-msgid ""
-"Window types that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam ser dimensionados no modo de escala (Área de "
-"Trabalho, Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de "
-"Apresentação, Caixa de Diálogo, Caixa de Diálogo Modal, Normal, Tela "
-"Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:348
-msgid ""
-"Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam ser mostrados no alternador (Área de Trabalho, "
-"Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de Apresentação, Caixa "
-"de Diálogo, Caixa de Diálogo Modal, Normal, Tela Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:349
-msgid ""
-"Window types that should wobble when focused (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam ficar instáveis quando destacados (Área de "
-"Trabalho, Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de "
-"Apresentação, Caixa de Diálogo, Caixa de Diálogo Modal, Normal, Tela "
-"Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:350
-msgid ""
-"Window types that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam ficar instáveis quando capturados (Área de "
-"Trabalho, Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de "
-"Apresentação, Caixa de Diálogo, Caixa de Diálogo Modal, Normal, Tela "
-"Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:351
-msgid ""
-"Window types that should wobble when mapped (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam ficar instáveis quando mapeados (Área de "
-"Trabalho, Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de "
-"Apresentação, Caixa de Diálogo, Caixa de Diálogo Modal, Normal, Tela "
-"Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:352
-msgid ""
-"Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipos de janelas que deveriam ficar instáveis quando movidos (Área de "
-"Trabalho, Âncora, Barra de Ferramentas, Menu, Utilitário, Tela de "
-"Apresentação, Caixa de Diálogo, Caixa de Diálogo Modal, Normal, Tela "
-"Inteira, Desconhecido)"
-
-#: ../plugins/compiz.schemas.in.in.h:353
-msgid "Wobble effect on system beep"
-msgstr "Efeito de instabilidade ao som do bip do sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:354
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Efeito de instabilidade ao maximizar e desmaximizar janelas"
-
-#: ../plugins/compiz.schemas.in.in.h:355
-msgid "Wobbly Windows"
-msgstr "Janelas Instáveis"
-
-#: ../plugins/compiz.schemas.in.in.h:356
-msgid "Workarounds"
-msgstr "Soluções"
-
-#: ../plugins/compiz.schemas.in.in.h:357
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../plugins/compiz.schemas.in.in.h:358
-msgid "Zoom Desktop"
-msgstr "Aproximar Área de Trabalho"
-
-#: ../plugins/compiz.schemas.in.in.h:359
-msgid "Zoom In"
-msgstr "Aumentar o zoom"
-
-#: ../plugins/compiz.schemas.in.in.h:360
-msgid "Zoom Out"
-msgstr "Diminuir o zoom"
-
-#: ../plugins/compiz.schemas.in.in.h:361
-msgid "Zoom Speed (0.1-50.0)"
-msgstr "Velocidade do Zoom (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:362
-msgid "Zoom Timestep (0.1-50.0)"
-msgstr "Timestep do Zoom (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:363
-msgid "Zoom and pan desktop cube"
-msgstr "Aplicar zoom e pan ao cubo da área de trabalho"
-
-#~ msgid "Focus next window"
-#~ msgstr "Destacar janela seguinte"
-
-#~ msgid "Next Window"
-#~ msgstr "Próxima Janela"

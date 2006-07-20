@@ -27,6 +27,8 @@
 #  include "../config.h"
 #endif
 
+#define _GNU_SOURCE /* for asprintf */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -147,7 +149,7 @@ int pointerY     = 0;
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
-static char *textureFilter[] = { "Fast", "Good", "Best" };
+static char *textureFilter[] = { N_("Fast"), N_("Good"), N_("Best") };
 
 #define NUM_TEXTURE_FILTER (sizeof (textureFilter) / sizeof (textureFilter[0]))
 
@@ -199,11 +201,12 @@ compDisplayInitOptions (CompDisplay *display,
 {
     CompOption *o;
     int        i;
+    char       *str;
 
     o = &display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
     o->name	         = "active_plugins";
-    o->shortDesc         = "Active Plugins";
-    o->longDesc	         = "List of currently active plugins";
+    o->shortDesc         = N_("Active Plugins");
+    o->longDesc	         = N_("List of currently active plugins");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = nPlugin;
@@ -217,8 +220,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_TEXTURE_FILTER];
     o->name	      = "texture_filter";
-    o->shortDesc      = "Texture Filter";
-    o->longDesc	      = "Texture filtering";
+    o->shortDesc      = N_("Texture Filter");
+    o->longDesc	      = N_("Texture filtering");
     o->type	      = CompOptionTypeString;
     o->value.s	      = strdup (defaultTextureFilter);
     o->rest.s.string  = textureFilter;
@@ -226,22 +229,22 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS];
     o->name	      = "click_to_focus";
-    o->shortDesc      = "Click To Focus";
-    o->longDesc	      = "Click on window moves input focus to it";
+    o->shortDesc      = N_("Click To Focus");
+    o->longDesc	      = N_("Click on window moves input focus to it");
     o->type	      = CompOptionTypeBool;
     o->value.b	      = CLICK_TO_FOCUS_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUTORAISE];
     o->name	      = "autoraise";
-    o->shortDesc      = "Auto-Raise";
-    o->longDesc	      = "Raise selected windows after interval";
+    o->shortDesc      = N_("Auto-Raise");
+    o->longDesc	      = N_("Raise selected windows after interval");
     o->type	      = CompOptionTypeBool;
     o->value.b	      = AUTORAISE_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUTORAISE_DELAY];
     o->name	  = "autoraise_delay";
-    o->shortDesc  = "Auto-Raise Delay";
-    o->longDesc	  = "Interval before raising selected windows";
+    o->shortDesc  = N_("Auto-Raise Delay");
+    o->longDesc	  = N_("Interval before raising selected windows");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = AUTORAISE_DELAY_DEFAULT;
     o->rest.i.min = AUTORAISE_DELAY_MIN;
@@ -249,8 +252,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW];
     o->name			  = "close_window";
-    o->shortDesc		  = "Close Window";
-    o->longDesc			  = "Close active window";
+    o->shortDesc		  = N_("Close Window");
+    o->longDesc			  = N_("Close active window");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = CLOSE_WINDOW_MODIFIERS_DEFAULT;
@@ -260,8 +263,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAIN_MENU];
     o->name			  = "main_menu";
-    o->shortDesc		  = "Show Main Menu";
-    o->longDesc			  = "Show the main menu";
+    o->shortDesc		  = N_("Show Main Menu");
+    o->longDesc			  = N_("Show the main menu");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = MAIN_MENU_MODIFIERS_DEFAULT;
@@ -271,8 +274,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_DIALOG];
     o->name			  = "run";
-    o->shortDesc		  = "Run Dialog";
-    o->longDesc			  = "Show Run Application dialog";
+    o->shortDesc		  = N_("Run Dialog");
+    o->longDesc			  = N_("Show Run Application dialog");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = RUN_DIALOG_MODIFIERS_DEFAULT;
@@ -282,8 +285,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW];
     o->name			  = "unmaximize_window";
-    o->shortDesc		  = "Unmaximize Window";
-    o->longDesc			  = "Unmaximize active window";
+    o->shortDesc		  = N_("Unmaximize Window");
+    o->longDesc			  = N_("Unmaximize active window");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
@@ -293,8 +296,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW];
     o->name			  = "minimize_window";
-    o->shortDesc		  = "Minimize Window";
-    o->longDesc			  = "Minimize active window";
+    o->shortDesc		  = N_("Minimize Window");
+    o->longDesc			  = N_("Minimize active window");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = MINIMIZE_WINDOW_MODIFIERS_DEFAULT;
@@ -304,8 +307,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW];
     o->name			  = "maximize_window";
-    o->shortDesc		  = "Maximize Window";
-    o->longDesc			  = "Maximize active window";
+    o->shortDesc		  = N_("Maximize Window");
+    o->longDesc			  = N_("Maximize active window");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = MAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
@@ -315,8 +318,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ];
     o->name			  = "maximize_window_horizontally";
-    o->shortDesc		  = "Maximize Window Horizontally";
-    o->longDesc			  = "Maximize active window horizontally";
+    o->shortDesc		  = N_("Maximize Window Horizontally");
+    o->longDesc			  = N_("Maximize active window horizontally");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeNone;
     o->value.bind.u.key.modifiers = 0;
@@ -324,8 +327,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT];
     o->name			  = "maximize_window_vertically";
-    o->shortDesc		  = "Maximize Window Vertically";
-    o->longDesc			  = "Maximize active window vertically";
+    o->shortDesc		  = N_("Maximize Window Vertically");
+    o->longDesc			  = N_("Maximize active window vertically");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeNone;
     o->value.bind.u.key.modifiers = 0;
@@ -333,8 +336,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
     o->name			  = "show_desktop";
-    o->shortDesc		  = "Hide all windows and focus desktop";
-    o->longDesc			  = "Hide all windows and focus desktop";
+    o->shortDesc		  = N_("Hide all windows and focus desktop");
+    o->longDesc			  = N_("Hide all windows and focus desktop");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SHOW_DESKTOP_MODIFIERS_DEFAULT;
@@ -342,21 +345,30 @@ compDisplayInitOptions (CompDisplay *display,
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (SHOW_DESKTOP_KEY_DEFAULT));
 
+#define COMMAND_OPTION_SHORT N_("Command line %d")
+#define COMMAND_OPTION_LONG  N_("Command line to be executed in shell when " \
+				"run_command%d is invoked")
+#define RUN_OPTION_SHORT     N_("Run command %d")
+#define RUN_OPTION_LONG      N_("A keybinding that when invoked, will run " \
+				"the shell command identified by command%d")
+
 #define COMMAND_OPTION(num, cname, rname)				    \
     o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
     o->name			  = cname;				    \
-    o->shortDesc		  = "Command line " #num;		    \
-    o->longDesc			  = "Command line to be executed in shell " \
-	"when " rname " is invoked";					    \
+    asprintf (&str, COMMAND_OPTION_SHORT, num);				    \
+    o->shortDesc		  = str;				    \
+    asprintf (&str, COMMAND_OPTION_LONG, num);				    \
+    o->longDesc			  = str;				    \
     o->type			  = CompOptionTypeString;		    \
     o->value.s			  = strdup ("");			    \
     o->rest.s.string		  = NULL;				    \
     o->rest.s.nString		  = 0;					    \
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num ];		    \
     o->name			  =  rname;				    \
-    o->shortDesc		  = "Run command " #num;		    \
-    o->longDesc			  = "A keybinding that when invoked, will " \
-	"run the shell command identified by " cname ;			    \
+    asprintf (&str, RUN_OPTION_SHORT, num);				    \
+    o->shortDesc		  = str;				    \
+    asprintf (&str, RUN_OPTION_LONG, num);				    \
+    o->longDesc			  = str;				    \
     o->type			  = CompOptionTypeBinding;		    \
     o->value.bind.type		  = CompBindingTypeNone;
 
@@ -375,8 +387,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS];
     o->name			  = "slow_animations";
-    o->shortDesc		  = "Slow Animations";
-    o->longDesc			  = "Toggle use of slow animations";
+    o->shortDesc		  = N_("Slow Animations");
+    o->longDesc			  = N_("Toggle use of slow animations");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SLOW_ANIMATIONS_MODIFIERS_DEFAULT;
@@ -386,8 +398,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW];
     o->name			     = "lower_window";
-    o->shortDesc		     = "Lower Window";
-    o->longDesc			     = "Lower window beneath other windows";
+    o->shortDesc		     = N_("Lower Window");
+    o->longDesc			     = N_("Lower window beneath other windows");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
@@ -395,8 +407,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE];
     o->name			     = "opacity_increase";
-    o->shortDesc		     = "Increase Opacity";
-    o->longDesc			     = "Increase window opacity";
+    o->shortDesc		     = N_("Increase Opacity");
+    o->longDesc			     = N_("Increase window opacity");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = OPACITY_INCREASE_MODIFIERS_DEFAULT;
@@ -404,8 +416,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE];
     o->name			     = "opacity_decrease";
-    o->shortDesc		     = "Decrease Opacity";
-    o->longDesc			     = "Decrease window opacity";
+    o->shortDesc		     = N_("Decrease Opacity");
+    o->longDesc			     = N_("Decrease window opacity");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
@@ -413,8 +425,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT];
     o->name			  = "run_command_screenshot";
-    o->shortDesc		  = "Take a screenshot";
-    o->longDesc			  = "Take a screenshot";
+    o->shortDesc		  = N_("Take a screenshot");
+    o->longDesc			  = N_("Take a screenshot");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = RUN_SCREENSHOT_MODIFIERS_DEFAULT;
@@ -424,8 +436,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_SCREENSHOT];
     o->name			  = "command_screenshot";
-    o->shortDesc		  = "Screenshot command line";
-    o->longDesc			  = "Screenshot command line";
+    o->shortDesc		  = N_("Screenshot command line");
+    o->longDesc			  = N_("Screenshot command line");
     o->type			  = CompOptionTypeString;
     o->value.s			  = strdup (SCREENSHOT_DEFAULT);
     o->rest.s.string		  = NULL;
@@ -433,8 +445,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT];
     o->name			  = "run_command_window_screenshot";
-    o->shortDesc		  = "Take a screenshot of a window";
-    o->longDesc			  = "Take a screenshot of a window";
+    o->shortDesc		  = N_("Take a screenshot of a window");
+    o->longDesc			  = N_("Take a screenshot of a window");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers =
@@ -445,8 +457,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT];
     o->name			  = "command_window_screenshot";
-    o->shortDesc		  = "Window screenshot command line";
-    o->longDesc			  = "Window screenshot command line";
+    o->shortDesc		  = N_("Window screenshot command line");
+    o->longDesc			  = N_("Window screenshot command line");
     o->type			  = CompOptionTypeString;
     o->value.s			  = strdup (WINDOW_SCREENSHOT_DEFAULT);
     o->rest.s.string		  = NULL;
@@ -454,8 +466,8 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_MENU];
     o->name			     = "window_menu";
-    o->shortDesc		     = "Window Menu";
-    o->longDesc			     = "Open window menu";
+    o->shortDesc		     = N_("Window Menu");
+    o->longDesc			     = N_("Open window menu");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
@@ -463,22 +475,22 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK];
     o->name	      = "raise_on_click";
-    o->shortDesc      = "Raise On Click";
-    o->longDesc	      = "Raise windows when clicked";
+    o->shortDesc      = N_("Raise On Click");
+    o->longDesc	      = N_("Raise windows when clicked");
     o->type	      = CompOptionTypeBool;
     o->value.b	      = RAISE_ON_CLICK_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUDIBLE_BELL];
     o->name	      = "audible_bell";
-    o->shortDesc      = "Audible Bell";
-    o->longDesc	      = "Audible system beep";
+    o->shortDesc      = N_("Audible Bell");
+    o->longDesc	      = N_("Audible system beep");
     o->type	      = CompOptionTypeBool;
     o->value.b	      = AUDIBLE_BELL_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED];
     o->name			  = "toggle_window_maximized";
-    o->shortDesc		  = "Toggle Window Maximized";
-    o->longDesc			  = "Toggle active window maximized";
+    o->shortDesc		  = N_("Toggle Window Maximized");
+    o->longDesc			  = N_("Toggle active window maximized");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeNone;
     o->value.bind.u.key.modifiers = 0;
@@ -486,9 +498,9 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ];
     o->name			  = "toggle_window_maximized_horizontally";
-    o->shortDesc		  = "Toggle Window Maximized Horizontally";
+    o->shortDesc		  = N_("Toggle Window Maximized Horizontally");
     o->longDesc			  =
-	"Toggle active window maximized horizontally";
+	N_("Toggle active window maximized horizontally");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeNone;
     o->value.bind.u.key.modifiers = 0;
@@ -496,9 +508,9 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT];
     o->name			  = "toggle_window_maximized_vertically";
-    o->shortDesc		  = "Toggle Window Maximized Vertically";
+    o->shortDesc		  = N_("Toggle Window Maximized Vertically");
     o->longDesc			  =
-	"Toggle active window maximized vertically";
+	N_("Toggle active window maximized vertically");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeNone;
     o->value.bind.u.key.modifiers = 0;
@@ -506,16 +518,16 @@ compDisplayInitOptions (CompDisplay *display,
 
     o = &display->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
     o->name	 = "hide_skip_taskbar_windows";
-    o->shortDesc = "Hide Skip Taskbar Windows";
-    o->longDesc	 = "Hide windows not in taskbar when entering show "
-	"desktop mode";
+    o->shortDesc = N_("Hide Skip Taskbar Windows");
+    o->longDesc	 = N_("Hide windows not in taskbar when entering show "
+	"desktop mode");
     o->type	 = CompOptionTypeBool;
     o->value.b	 = HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED];
     o->name			  = "toggle_window_shaded";
-    o->shortDesc		  = "Toggle Window Shaded";
-    o->longDesc			  = "Toggle active window shaded";
+    o->shortDesc		  = N_("Toggle Window Shaded");
+    o->longDesc			  = N_("Toggle active window shaded");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT;

@@ -69,20 +69,20 @@
 #define SCALE_OPACITY_MAX     100
 
 static char *winType[] = {
-    "Toolbar",
-    "Utility",
-    "Dialog",
-    "ModalDialog",
-    "Fullscreen",
-    "Normal"
+    N_("Toolbar"),
+    N_("Utility"),
+    N_("Dialog"),
+    N_("ModalDialog"),
+    N_("Fullscreen"),
+    N_("Normal")
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
 char *cornerTypeString[] = {
-    "TopLeft",
-    "TopRight",
-    "BottomLeft",
-    "BottomRight"
+    N_("TopLeft"),
+    N_("TopRight"),
+    N_("BottomLeft"),
+    N_("BottomRight")
 };
 int  nCornerTypeString =
     sizeof (cornerTypeString) / sizeof (cornerTypeString[0]);
@@ -101,9 +101,9 @@ typedef enum {
 } IconOverlay;
 
 static char *iconOverlayString[] = {
-    "None",
-    "Emblem",
-    "Big"
+    N_("None"),
+    N_("Emblem"),
+    N_("Big")
 };
 
 static IconOverlay iconOverlay[] = {
@@ -375,8 +375,8 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_SPACING];
     o->name	  = "spacing";
-    o->shortDesc  = "Spacing";
-    o->longDesc   = "Space between windows";
+    o->shortDesc  = N_("Spacing");
+    o->longDesc   = N_("Space between windows");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = SCALE_SPACING_DEFAULT;
     o->rest.i.min = SCALE_SPACING_MIN;
@@ -384,15 +384,15 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS];
     o->name	  = "sloppy_focus";
-    o->shortDesc  = "Sloppy Focus";
-    o->longDesc   = "Focus window when mouse moves over them";
+    o->shortDesc  = N_("Sloppy Focus");
+    o->longDesc   = N_("Focus window when mouse moves over them");
     o->type	  = CompOptionTypeBool;
     o->value.b	  = SCALE_SLOPPY_FOCUS_DEFAULT;
 
     o = &ss->opt[SCALE_SCREEN_OPTION_SPEED];
     o->name		= "speed";
-    o->shortDesc	= "Speed";
-    o->longDesc		= "Scale speed";
+    o->shortDesc	= N_("Speed");
+    o->longDesc		= N_("Scale speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= SCALE_SPEED_DEFAULT;
     o->rest.f.min	= SCALE_SPEED_MIN;
@@ -401,8 +401,8 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
-    o->shortDesc	= "Timestep";
-    o->longDesc		= "Scale timestep";
+    o->shortDesc	= N_("Timestep");
+    o->longDesc		= N_("Scale timestep");
     o->type		= CompOptionTypeFloat;
     o->value.f		= SCALE_TIMESTEP_DEFAULT;
     o->rest.f.min	= SCALE_TIMESTEP_MIN;
@@ -411,8 +411,8 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_WINDOW_TYPE];
     o->name	         = "window_types";
-    o->shortDesc         = "Window Types";
-    o->longDesc	         = "Window types that should scaled in scale mode";
+    o->shortDesc         = N_("Window Types");
+    o->longDesc	         = N_("Window types that should scaled in scale mode");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_WIN_TYPE;
@@ -426,15 +426,15 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK];
     o->name      = "darken_back";
-    o->shortDesc = "Darken Background";
-    o->longDesc  = "Darken background when scaling windows";
+    o->shortDesc = N_("Darken Background");
+    o->longDesc  = N_("Darken background when scaling windows");
     o->type      = CompOptionTypeBool;
     o->value.b   = SCALE_DARKEN_BACK_DEFAULT;
 
     o = &ss->opt[SCALE_SCREEN_OPTION_OPACITY];
     o->name	  = "opacity";
-    o->shortDesc  = "Opacity";
-    o->longDesc	  = "Amount of opacity in percent";
+    o->shortDesc  = N_("Opacity");
+    o->longDesc	  = N_("Amount of opacity in percent");
     o->type	  = CompOptionTypeInt;
     o->value.i    = SCALE_OPACITY_DEFAULT;
     o->rest.i.min = SCALE_OPACITY_MIN;
@@ -442,8 +442,8 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_CORNERS];
     o->name	         = "corners";
-    o->shortDesc         = "Corners";
-    o->longDesc	         = "Hot corners that should initiate scale mode";
+    o->shortDesc         = N_("Corners");
+    o->longDesc	         = N_("Hot corners that should initiate scale mode");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_CORNER_TYPE;
@@ -455,8 +455,8 @@ scaleScreenInitOptions (ScaleScreen *ss)
 
     o = &ss->opt[SCALE_SCREEN_OPTION_ICON];
     o->name	      = "overlay_icon";
-    o->shortDesc      = "Overlay Icon";
-    o->longDesc	      = "Overlay an icon on windows once they are scaled";
+    o->shortDesc      = N_("Overlay Icon");
+    o->longDesc	      = N_("Overlay an icon on windows once they are scaled");
     o->type	      = CompOptionTypeString;
     o->value.s	      = strdup (SCALE_ICON_DEFAULT);
     o->rest.s.string  = iconOverlayString;
@@ -1433,8 +1433,8 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
 
     o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE];
     o->name			  = "initiate";
-    o->shortDesc		  = "Initiate Window Picker";
-    o->longDesc			  = "Layout and start transforming windows";
+    o->shortDesc		  = N_("Initiate Window Picker");
+    o->longDesc			  = N_("Layout and start transforming windows");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = scaleInitiate;
     o->value.action.terminate	  = scaleTerminate;
@@ -1640,8 +1640,8 @@ scaleFini (CompPlugin *p)
 
 CompPluginVTable scaleVTable = {
     "scale",
-    "Scale",
-    "Scale windows",
+    N_("Scale"),
+    N_("Scale windows"),
     scaleInit,
     scaleFini,
     scaleInitDisplay,

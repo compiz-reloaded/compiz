@@ -51,17 +51,17 @@ int  defaultRefreshRate = 50;
 char *defaultTextureFilter = "Good";
 
 char *windowTypeString[] = {
-    "Desktop",
-    "Dock",
-    "Toolbar",
-    "Menu",
-    "Utility",
-    "Splash",
-    "Dialog",
-    "ModalDialog",
-    "Normal",
-    "Fullscreen",
-    "Unknown"
+    N_("Desktop"),
+    N_("Dock"),
+    N_("Toolbar"),
+    N_("Menu"),
+    N_("Utility"),
+    N_("Splash"),
+    N_("Dialog"),
+    N_("ModalDialog"),
+    N_("Normal"),
+    N_("Fullscreen"),
+    N_("Unknown")
 };
 int  nWindowTypeString =
     sizeof (windowTypeString) / sizeof (windowTypeString[0]);

@@ -214,15 +214,15 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_POINTER_INVERT_Y];
     o->name      = "invert_y";
-    o->shortDesc = "Pointer Invert Y";
-    o->longDesc  = "Invert Y axis for pointer movement";
+    o->shortDesc = N_("Pointer Invert Y");
+    o->longDesc  = N_("Invert Y axis for pointer movement");
     o->type      = CompOptionTypeBool;
     o->value.b   = ZOOM_POINTER_INVERT_Y_DEFAULT;
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY];
     o->name		= "sensitivity";
-    o->shortDesc	= "Pointer Sensitivity";
-    o->longDesc		= "Sensitivity of pointer movement";
+    o->shortDesc	= N_("Pointer Sensitivity");
+    o->longDesc		= N_("Sensitivity of pointer movement");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ZOOM_POINTER_SENSITIVITY_DEFAULT;
     o->rest.f.min	= ZOOM_POINTER_SENSITIVITY_MIN;
@@ -231,8 +231,8 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_INITIATE];
     o->name			     = "initiate";
-    o->shortDesc		     = "Initiate";
-    o->longDesc			     = "Zoom In";
+    o->shortDesc		     = N_("Initiate");
+    o->longDesc			     = N_("Zoom In");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = ZOOM_INITIATE_MODIFIERS_DEFAULT;
@@ -240,8 +240,8 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_IN];
     o->name			     = "zoom_in";
-    o->shortDesc		     = "Zoom In";
-    o->longDesc			     = "Zoom In";
+    o->shortDesc		     = N_("Zoom In");
+    o->longDesc			     = N_("Zoom In");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = ZOOM_IN_MODIFIERS_DEFAULT;
@@ -249,8 +249,8 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_OUT];
     o->name			     = "zoom_out";
-    o->shortDesc		     = "Zoom Out";
-    o->longDesc			     = "Zoom Out";
+    o->shortDesc		     = N_("Zoom Out");
+    o->longDesc			     = N_("Zoom Out");
     o->type			     = CompOptionTypeBinding;
     o->value.bind.type		     = CompBindingTypeButton;
     o->value.bind.u.button.modifiers = ZOOM_OUT_MODIFIERS_DEFAULT;
@@ -258,8 +258,8 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_SPEED];
     o->name		= "speed";
-    o->shortDesc	= "Speed";
-    o->longDesc		= "Zoom Speed";
+    o->shortDesc	= N_("Speed");
+    o->longDesc		= N_("Zoom Speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ZOOM_SPEED_DEFAULT;
     o->rest.f.min	= ZOOM_SPEED_MIN;
@@ -268,8 +268,8 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
-    o->shortDesc	= "Timestep";
-    o->longDesc		= "Zoom Timestep";
+    o->shortDesc	= N_("Timestep");
+    o->longDesc		= N_("Zoom Timestep");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ZOOM_TIMESTEP_DEFAULT;
     o->rest.f.min	= ZOOM_TIMESTEP_MIN;
@@ -278,8 +278,8 @@ zoomScreenInitOptions (ZoomScreen *zs,
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_FILTER_LINEAR];
     o->name	  = "filter_linear";
-    o->shortDesc  = "Filter Linear";
-    o->longDesc	  = "USe linear filter when zoomed in";
+    o->shortDesc  = N_("Filter Linear");
+    o->longDesc	  = N_("USe linear filter when zoomed in");
     o->type	  = CompOptionTypeBool;
     o->value.b    = ZOOM_FILTER_LINEAR_DEFAULT;
 }
@@ -799,8 +799,8 @@ CompPluginDep zoomDeps[] = {
 
 CompPluginVTable zoomVTable = {
     "zoom",
-    "Zoom Desktop",
-    "Zoom and pan desktop cube",
+    N_("Zoom Desktop"),
+    N_("Zoom and pan desktop cube"),
     zoomInit,
     zoomFini,
     zoomInitDisplay,

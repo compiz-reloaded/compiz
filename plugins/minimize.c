@@ -46,10 +46,10 @@
 #define MIN_SHADE_RESISTANCE_MAX       100
 
 static char *winType[] = {
-    "Toolbar",
-    "Utility",
-    "Dialog",
-    "Normal"
+    N_("Toolbar"),
+    N_("Utility"),
+    N_("Dialog"),
+    N_("Normal")
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
@@ -200,8 +200,8 @@ minScreenInitOptions (MinScreen *ms)
 
     o = &ms->opt[MIN_SCREEN_OPTION_SPEED];
     o->name		= "speed";
-    o->shortDesc	= "Speed";
-    o->longDesc		= "Minimize speed";
+    o->shortDesc	= N_("Speed");
+    o->longDesc		= N_("Minimize speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= MIN_SPEED_DEFAULT;
     o->rest.f.min	= MIN_SPEED_MIN;
@@ -210,8 +210,8 @@ minScreenInitOptions (MinScreen *ms)
 
     o = &ms->opt[MIN_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
-    o->shortDesc	= "Timestep";
-    o->longDesc		= "Minimize timestep";
+    o->shortDesc	= N_("Timestep");
+    o->longDesc		= N_("Minimize timestep");
     o->type		= CompOptionTypeFloat;
     o->value.f		= MIN_TIMESTEP_DEFAULT;
     o->rest.f.min	= MIN_TIMESTEP_MIN;
@@ -220,9 +220,9 @@ minScreenInitOptions (MinScreen *ms)
 
     o = &ms->opt[MIN_SCREEN_OPTION_WINDOW_TYPE];
     o->name	         = "window_types";
-    o->shortDesc         = "Window Types";
-    o->longDesc	         = "Window types that should be transformed when "
-	"minimized";
+    o->shortDesc         = N_("Window Types");
+    o->longDesc	         = N_("Window types that should be transformed when "
+	"minimized");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_WIN_TYPE;
@@ -236,8 +236,8 @@ minScreenInitOptions (MinScreen *ms)
 
     o = &ms->opt[MIN_SCREEN_OPTION_SHADE_RESISTANCE];
     o->name		= "shade_resistance";
-    o->shortDesc	= "Shade Resistance";
-    o->longDesc		= "Shade resistance";
+    o->shortDesc	= N_("Shade Resistance");
+    o->longDesc		= N_("Shade resistance");
     o->type		= CompOptionTypeInt;
     o->value.i		= MIN_SHADE_RESISTANCE_DEFAULT;
     o->rest.i.min	= MIN_SHADE_RESISTANCE_MIN;
@@ -1041,8 +1041,8 @@ CompPluginDep minDeps[] = {
 
 static CompPluginVTable minVTable = {
     "minimize",
-    "Minimize Effect",
-    "Transform windows when they are minimized and unminimized",
+    N_("Minimize Effect"),
+    N_("Transform windows when they are minimized and unminimized"),
     minInit,
     minFini,
     minInitDisplay,
