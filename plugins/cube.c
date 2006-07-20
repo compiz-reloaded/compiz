@@ -87,11 +87,16 @@ static char *cubeImages[] = {
 
 #define CUBE_MIPMAP_DEFAULT TRUE
 
+#define CUBE_DISPLAY_OPTION_UNFOLD 0
+#define CUBE_DISPLAY_OPTION_NUM    1
+
 static int displayPrivateIndex;
 
 typedef struct _CubeDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
+
+    CompOption opt[CUBE_DISPLAY_OPTION_NUM];
 } CubeDisplay;
 
 #define CUBE_SCREEN_OPTION_COLOR        0
@@ -103,12 +108,11 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_SKYDOME      6
 #define CUBE_SCREEN_OPTION_SKYDOME_IMG  7
 #define CUBE_SCREEN_OPTION_SKYDOME_ANIM 8
-#define CUBE_SCREEN_OPTION_UNFOLD       9
-#define CUBE_SCREEN_OPTION_ACCELERATION 10
-#define CUBE_SCREEN_OPTION_SPEED	11
-#define CUBE_SCREEN_OPTION_TIMESTEP	12
-#define CUBE_SCREEN_OPTION_MIPMAP	13
-#define CUBE_SCREEN_OPTION_NUM          14
+#define CUBE_SCREEN_OPTION_ACCELERATION 9
+#define CUBE_SCREEN_OPTION_SPEED	10
+#define CUBE_SCREEN_OPTION_TIMESTEP	11
+#define CUBE_SCREEN_OPTION_MIPMAP	12
+#define CUBE_SCREEN_OPTION_NUM          13
 
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
@@ -768,15 +772,6 @@ cubeSetScreenOption (CompScreen      *screen,
 	if (compSetBindingOption (o, value))
 	    return TRUE;
 	break;
-    case CUBE_SCREEN_OPTION_UNFOLD:
-	if (addScreenBinding (screen, &value->bind))
-	{
-	    removeScreenBinding (screen, &o->value.bind);
-
-	    if (compSetBindingOption (o, value))
-		return TRUE;
-	}
-	break;
     case CUBE_SCREEN_OPTION_SKYDOME:
 	if (compSetBoolOption (o, value))
 	{
@@ -923,17 +918,6 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->longDesc	  = "Animate skydome when rotating cube";
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_SKYDOME_ANIMATE_DEFAULT;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_UNFOLD];
-    o->name			  = "unfold";
-    o->shortDesc		  = "Unfold";
-    o->longDesc			  = "Unfold cube";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = CUBE_UNFOLD_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (CUBE_UNFOLD_KEY_DEFAULT));
 
     o = &cs->opt[CUBE_SCREEN_OPTION_ACCELERATION];
     o->name		= "acceleration";
@@ -1359,31 +1343,72 @@ cubePaintBackground (CompScreen   *s,
     WRAP (cs, s, paintBackground, cubePaintBackground);
 }
 
-static void
-cubeUnfold (CompScreen *s)
+static Bool
+cubeUnfold (CompDisplay     *d,
+	    CompAction      *action,
+	    CompActionState state,
+	    CompOption      *option,
+	    int		    nOption)
 {
-    CUBE_SCREEN (s);
+    CompScreen *s;
+    Window     xid;
 
-    if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
-	return;
+    xid = getIntOptionNamed (option, nOption, "root", 0);
 
-    if (!cs->grabIndex)
-	cs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "cube");
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	CUBE_SCREEN (s);
 
-    cs->unfolded = TRUE;
-    damageScreen (s);
+	if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
+	    return FALSE;
+
+	if (!cs->grabIndex)
+	    cs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "cube");
+
+	if (cs->grabIndex)
+	{
+	    cs->unfolded = TRUE;
+	    damageScreen (s);
+	}
+
+	if (state & CompActionStateInitButton)
+	    action->state |= CompActionStateTermButton;
+
+	if (state & CompActionStateInitKey)
+	    action->state |= CompActionStateTermKey;
+    }
+
+    return FALSE;
 }
 
-static void
-cubeFold (CompScreen *s)
+static Bool
+cubeFold (CompDisplay     *d,
+	  CompAction      *action,
+	  CompActionState state,
+	  CompOption      *option,
+	  int		  nOption)
 {
-    CUBE_SCREEN (s);
+    CompScreen *s;
+    Window     xid;
 
-    if (cs->grabIndex)
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    for (s = d->screens; s; s = s->next)
     {
-	cs->unfolded = FALSE;
-	damageScreen (s);
+	CUBE_SCREEN (s);
+
+	if (xid && s->root != xid)
+	    continue;
+
+	if (cs->grabIndex)
+	{
+	    cs->unfolded = FALSE;
+	    damageScreen (s);
+	}
     }
+
+    return FALSE;
 }
 
 static void
@@ -1401,9 +1426,6 @@ cubeHandleEvent (CompDisplay *d,
 	if (s)
 	{
 	    CUBE_SCREEN (s);
-
-	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_UNFOLD]))
-		cubeUnfold (s);
 
 	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_NEXT]))
 	    {
@@ -1423,10 +1445,6 @@ cubeHandleEvent (CompDisplay *d,
 		    damageScreen (s);
 		}
 	    }
-
-	    if (eventTerminates (d, event,
-				 &cs->opt[CUBE_SCREEN_OPTION_UNFOLD]))
-		cubeFold (s);
 	}
 	break;
     case ButtonPress:
@@ -1477,6 +1495,66 @@ cubeSetGlobalScreenOption (CompScreen      *s,
     return status;
 }
 
+static CompOption *
+cubeGetDisplayOptions (CompDisplay *display,
+		       int	   *count)
+{
+    CUBE_DISPLAY (display);
+
+    *count = NUM_OPTIONS (cd);
+    return cd->opt;
+}
+
+static Bool
+cubeSetDisplayOption (CompDisplay     *display,
+		      char	      *name,
+		      CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    CUBE_DISPLAY (display);
+
+    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, &index);
+
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case CUBE_DISPLAY_OPTION_UNFOLD:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+cubeDisplayInitOptions (CubeDisplay *cd,
+			Display     *display)
+{
+    CompOption *o;
+
+    o = &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD];
+    o->name			  = "unfold";
+    o->shortDesc		  = "Unfold";
+    o->longDesc			  = "Unfold cube";
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = cubeUnfold;
+    o->value.action.terminate	  = cubeFold;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitEdge;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.state	 |= CompActionStateInitKey;
+    o->value.action.key.modifiers = CUBE_UNFOLD_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (CUBE_UNFOLD_KEY_DEFAULT));
+}
+
 static Bool
 cubeInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -1493,6 +1571,8 @@ cubeInitDisplay (CompPlugin  *p,
 	free (cd);
 	return FALSE;
     }
+
+    cubeDisplayInitOptions (cd, d->display);
 
     WRAP (cd, d, handleEvent, cubeHandleEvent);
 
@@ -1570,7 +1650,7 @@ cubeInitScreen (CompPlugin *p,
     cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
     cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
 
-    addScreenBinding (s, &cs->opt[CUBE_SCREEN_OPTION_UNFOLD].value.bind);
+    addScreenAction (s, &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD].value.action);
 
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
@@ -1649,8 +1729,8 @@ CompPluginVTable cubeVTable = {
     cubeFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
+    cubeGetDisplayOptions,
+    cubeSetDisplayOption,
     cubeGetScreenOptions,
     cubeSetScreenOption,
     cubeDeps,

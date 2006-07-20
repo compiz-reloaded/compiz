@@ -909,6 +909,63 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/cube/allscreens/options/unfold_key</key>
+            <applyto>/apps/compiz/plugins/cube/allscreens/options/unfold_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;&lt;Alt&gt;Down</default>
+            <locale name="C">
+                <short>Unfold</short>
+                <long>
+                    Unfold cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/allscreens/options/unfold_button</key>
+            <applyto>/apps/compiz/plugins/cube/allscreens/options/unfold_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Unfold</short>
+                <long>
+                    Unfold cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/allscreens/options/unfold_bell</key>
+            <applyto>/apps/compiz/plugins/cube/allscreens/options/unfold_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Unfold</short>
+                <long>
+                    Unfold cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/cube/allscreens/options/unfold_edge</key>
+            <applyto>/apps/compiz/plugins/cube/allscreens/options/unfold_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Unfold</short>
+                <long>
+                    Unfold cube
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/cube/screen0/options/color</key>
             <applyto>/apps/compiz/plugins/cube/screen0/options/color</applyto>
             <owner>compiz</owner>
@@ -1031,20 +1088,6 @@
                 <short>Animate Skydome</short>
                 <long>
                     Animate skydome when rotating cube
-                </long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/cube/screen0/options/unfold</key>
-            <applyto>/apps/compiz/plugins/cube/screen0/options/unfold</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <default>&lt;Control&gt;&lt;Alt&gt;Down</default>
-            <locale name="C">
-                <short>Unfold</short>
-                <long>
-                    Unfold cube
                 </long>
             </locale>
         </schema>
