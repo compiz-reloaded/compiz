@@ -383,14 +383,14 @@ triggerKeyPressBindings (CompDisplay *d,
 
 	    if (action->key.keycode == event->xkey.keycode)
 	    {
-		if ((bindMods & modMask) == (event->xbutton.state & modMask))
+		if ((bindMods & modMask) == (event->xkey.state & modMask))
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			break;
 	    }
 	    else if (!d->xkbEvent && action->key.keycode == 0)
 	    {
-		if (bindMods == (event->xbutton.state & modMask))
+		if (bindMods == (event->xkey.state & modMask))
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
