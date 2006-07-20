@@ -716,7 +716,7 @@ gconfInitOption (CompDisplay *d,
 
     if (o->type == CompOptionTypeAction)
     {
-	static gchar *tail[] = { "key", "button", "bell" };
+	static gchar *tail[] = { "key", "button", "bell", "edge" };
 	gchar	     *key1;
 	int	     i;
 
@@ -1094,7 +1094,7 @@ CompPluginVTable gconfVTable = {
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
-    0,  /* SetScreenOption */
+    0, /* SetScreenOption */
     gconfDeps,
     sizeof (gconfDeps) / sizeof (gconfDeps[0])
 };
