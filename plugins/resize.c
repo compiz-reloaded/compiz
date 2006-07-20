@@ -650,6 +650,7 @@ resizeDisplayInitOptions (ResizeDisplay *rd,
     o->value.action.initiate	     = resizeInitiate;
     o->value.action.terminate	     = resizeTerminate;
     o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
     o->value.action.type	     = CompBindingTypeButton;
     o->value.action.state	     = CompActionStateInitButton;
     o->value.action.button.modifiers = RESIZE_INITIATE_BUTTON_MODIFIERS_DEFAULT;

@@ -106,19 +106,19 @@ typedef struct _CompIcon    CompIcon;
 #define CompWindowTypeFullscreenMask  (1 << 9)
 #define CompWindowTypeUnknownMask     (1 << 10)
 
-#define CompWindowStateModalMask	      (1 <<  0)
-#define CompWindowStateStickyMask	      (1 <<  1)
-#define CompWindowStateMaximizedVertMask      (1 <<  2)
-#define CompWindowStateMaximizedHorzMask      (1 <<  3)
-#define CompWindowStateShadedMask	      (1 <<  4)
-#define CompWindowStateSkipTaskbarMask	      (1 <<  5)
-#define CompWindowStateSkipPagerMask	      (1 <<  6)
-#define CompWindowStateHiddenMask	      (1 <<  7)
-#define CompWindowStateFullscreenMask	      (1 <<  8)
-#define CompWindowStateAboveMask	      (1 <<  9)
-#define CompWindowStateBelowMask	      (1 << 10)
-#define CompWindowStateDemandsAttentationMask (1 << 11)
-#define CompWindowStateDisplayModalMask	      (1 << 12)
+#define CompWindowStateModalMask	    (1 <<  0)
+#define CompWindowStateStickyMask	    (1 <<  1)
+#define CompWindowStateMaximizedVertMask    (1 <<  2)
+#define CompWindowStateMaximizedHorzMask    (1 <<  3)
+#define CompWindowStateShadedMask	    (1 <<  4)
+#define CompWindowStateSkipTaskbarMask	    (1 <<  5)
+#define CompWindowStateSkipPagerMask	    (1 <<  6)
+#define CompWindowStateHiddenMask	    (1 <<  7)
+#define CompWindowStateFullscreenMask	    (1 <<  8)
+#define CompWindowStateAboveMask	    (1 <<  9)
+#define CompWindowStateBelowMask	    (1 << 10)
+#define CompWindowStateDemandsAttentionMask (1 << 11)
+#define CompWindowStateDisplayModalMask	    (1 << 12)
 
 #define MAXIMIZE_STATE (CompWindowStateMaximizedHorzMask | \
 			CompWindowStateMaximizedVertMask)
@@ -279,7 +279,9 @@ typedef enum {
     CompActionStateTermKey    = 1 << 1,
     CompActionStateInitButton = 1 << 2,
     CompActionStateTermButton = 1 << 3,
-    CompActionStateInitBell   = 1 << 4
+    CompActionStateInitBell   = 1 << 4,
+    CompActionStateInitEdge   = 1 << 5,
+    CompActionStateTermEdge   = 1 << 6
 } CompActionState;
 
 typedef struct _CompKeyBinding {
@@ -322,6 +324,8 @@ struct _CompAction {
     CompButtonBinding button;
 
     Bool bell;
+
+    unsigned int edgeMask;
 };
 
 typedef struct {

@@ -266,6 +266,7 @@ static Atom atom_pair_atom;
 static Atom utf8_string_atom;
 
 static Atom dm_name_atom;
+static Atom dm_sn_atom;
 
 static Time dm_sn_timestamp;
 
@@ -4090,7 +4091,8 @@ static void
 handle_selection_clear (Display *xdisplay,
 			XEvent  *xevent)
 {
-    exit (0);
+    if (xevent->xselectionclear.selection == dm_sn_atom)
+	exit (0);
 }
 
 static gboolean
@@ -4098,7 +4100,6 @@ acquire_dm_session (Display  *xdisplay,
 		    int	     screen,
 		    gboolean replace_current_dm)
 {
-    Atom		 dm_sn_atom;
     XEvent		 event;
     XSetWindowAttributes attr;
     Window		 current_dm_sn_owner, new_dm_sn_owner;
