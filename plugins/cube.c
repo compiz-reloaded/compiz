@@ -88,13 +88,14 @@ static char *cubeImages[] = {
 #define CUBE_MIPMAP_DEFAULT TRUE
 
 #define CUBE_DISPLAY_OPTION_UNFOLD 0
-#define CUBE_DISPLAY_OPTION_NUM    1
+#define CUBE_DISPLAY_OPTION_NEXT   1
+#define CUBE_DISPLAY_OPTION_PREV   2
+#define CUBE_DISPLAY_OPTION_NUM    3
 
 static int displayPrivateIndex;
 
 typedef struct _CubeDisplay {
     int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
 
     CompOption opt[CUBE_DISPLAY_OPTION_NUM];
 } CubeDisplay;
@@ -103,16 +104,14 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_IN           1
 #define CUBE_SCREEN_OPTION_SCALE_IMAGE  2
 #define CUBE_SCREEN_OPTION_IMAGES       3
-#define CUBE_SCREEN_OPTION_NEXT         4
-#define CUBE_SCREEN_OPTION_PREV         5
-#define CUBE_SCREEN_OPTION_SKYDOME      6
-#define CUBE_SCREEN_OPTION_SKYDOME_IMG  7
-#define CUBE_SCREEN_OPTION_SKYDOME_ANIM 8
-#define CUBE_SCREEN_OPTION_ACCELERATION 9
-#define CUBE_SCREEN_OPTION_SPEED	10
-#define CUBE_SCREEN_OPTION_TIMESTEP	11
-#define CUBE_SCREEN_OPTION_MIPMAP	12
-#define CUBE_SCREEN_OPTION_NUM          13
+#define CUBE_SCREEN_OPTION_SKYDOME      4
+#define CUBE_SCREEN_OPTION_SKYDOME_IMG  5
+#define CUBE_SCREEN_OPTION_SKYDOME_ANIM 6
+#define CUBE_SCREEN_OPTION_ACCELERATION 7
+#define CUBE_SCREEN_OPTION_SPEED	8
+#define CUBE_SCREEN_OPTION_TIMESTEP	9
+#define CUBE_SCREEN_OPTION_MIPMAP	10
+#define CUBE_SCREEN_OPTION_NUM          11
 
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
@@ -767,11 +766,6 @@ cubeSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case CUBE_SCREEN_OPTION_NEXT:
-    case CUBE_SCREEN_OPTION_PREV:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
     case CUBE_SCREEN_OPTION_SKYDOME:
 	if (compSetBoolOption (o, value))
 	{
@@ -875,26 +869,6 @@ cubeScreenInitOptions (CubeScreen *cs,
 	o->value.list.value[i].s = strdup (cubeImages[i]);
     o->rest.s.string     = 0;
     o->rest.s.nString    = 0;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_NEXT];
-    o->name			  = "next_slide";
-    o->shortDesc		  = "Next Slide";
-    o->longDesc			  = "Advance to next slide";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = CUBE_NEXT_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display, XStringToKeysym (CUBE_NEXT_KEY_DEFAULT));
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_PREV];
-    o->name			  = "prev_slide";
-    o->shortDesc		  = "Previous Slide";
-    o->longDesc			  = "Go back to previous slide";
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = CUBE_PREV_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display, XStringToKeysym (CUBE_PREV_KEY_DEFAULT));
 
     o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME];
     o->name	  = "skydome";
@@ -1411,69 +1385,58 @@ cubeFold (CompDisplay     *d,
     return FALSE;
 }
 
-static void
-cubeHandleEvent (CompDisplay *d,
-		 XEvent      *event)
+static Bool
+cubeNextImage (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
 {
     CompScreen *s;
+    Window     xid;
 
-    CUBE_DISPLAY (d);
+    xid = getIntOptionNamed (option, nOption, "root", 0);
 
-    switch (event->type) {
-    case KeyPress:
-    case KeyRelease:
-	s = findScreenAtDisplay (d, event->xkey.root);
-	if (s)
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	CUBE_SCREEN (s);
+
+	if (cs->imgNFile)
 	{
-	    CUBE_SCREEN (s);
-
-	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_NEXT]))
-	    {
-		if (cs->imgNFile)
-		{
-		    cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
-		    damageScreen (s);
-		}
-	    }
-
-	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_PREV]))
-	    {
-		if (cs->imgNFile)
-		{
-		    cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) %
-				 cs->imgNFile);
-		    damageScreen (s);
-		}
-	    }
+	    cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
+	    damageScreen (s);
 	}
-	break;
-    case ButtonPress:
-    case ButtonRelease:
-	s = findScreenAtDisplay (d, event->xbutton.root);
-	if (s)
-	{
-	    CUBE_SCREEN (s);
-
-	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_NEXT]))
-	    {
-		cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
-		damageScreen (s);
-	    }
-
-	    if (eventMatches (d, event, &cs->opt[CUBE_SCREEN_OPTION_PREV]))
-	    {
-		cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) %
-			     cs->imgNFile);
-		damageScreen (s);
-	    }
-	}
-    default:
-	break;
     }
 
-    UNWRAP (cd, d, handleEvent);
-    (*d->handleEvent) (d, event);
-    WRAP (cd, d, handleEvent, cubeHandleEvent);
+    return FALSE;
+}
+
+static Bool
+cubePrevImage (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	CUBE_SCREEN (s);
+
+	if (cs->imgNFile)
+	{
+	    cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) % cs->imgNFile);
+	    damageScreen (s);
+	}
+    }
+
+    return FALSE;
 }
 
 static Bool
@@ -1524,6 +1487,10 @@ cubeSetDisplayOption (CompDisplay     *display,
     case CUBE_DISPLAY_OPTION_UNFOLD:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
+    case CUBE_DISPLAY_OPTION_NEXT:
+    case CUBE_DISPLAY_OPTION_PREV:
+	if (compSetActionOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -1547,12 +1514,49 @@ cubeDisplayInitOptions (CubeDisplay *cd,
     o->value.action.bell	  = FALSE;
     o->value.action.edgeMask	  = 0;
     o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.type	  = CompBindingTypeKey;
     o->value.action.state	 |= CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
     o->value.action.key.modifiers = CUBE_UNFOLD_MODIFIERS_DEFAULT;
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (CUBE_UNFOLD_KEY_DEFAULT));
+
+    o = &cd->opt[CUBE_DISPLAY_OPTION_NEXT];
+    o->name			  = "next_slide";
+    o->shortDesc		  = "Next Slide";
+    o->longDesc			  = "Advance to next slide";
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = cubeNextImage;
+    o->value.action.terminate	  = 0;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitEdge;
+    o->value.action.state	 |= CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = CUBE_NEXT_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (CUBE_NEXT_KEY_DEFAULT));
+
+    o = &cd->opt[CUBE_DISPLAY_OPTION_PREV];
+    o->name			  = "prev_slide";
+    o->shortDesc		  = "Previous Slide";
+    o->longDesc			  = "Go back to previous slide";
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = cubePrevImage;
+    o->value.action.terminate	  = 0;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitEdge;
+    o->value.action.state	 |= CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = CUBE_PREV_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (CUBE_PREV_KEY_DEFAULT));
 }
 
 static Bool
@@ -1574,8 +1578,6 @@ cubeInitDisplay (CompPlugin  *p,
 
     cubeDisplayInitOptions (cd, d->display);
 
-    WRAP (cd, d, handleEvent, cubeHandleEvent);
-
     d->privates[displayPrivateIndex].ptr = cd;
 
     return TRUE;
@@ -1588,8 +1590,6 @@ cubeFiniDisplay (CompPlugin  *p,
     CUBE_DISPLAY (d);
 
     freeScreenPrivateIndex (d, cd->screenPrivateIndex);
-
-    UNWRAP (cd, d, handleEvent);
 
     free (cd);
 }
