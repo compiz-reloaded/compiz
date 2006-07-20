@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:20-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -104,7 +104,7 @@ msgid "Fold Acceleration"
 msgstr "折叠加速"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "速度"
 
@@ -113,7 +113,7 @@ msgid "Fold Speed"
 msgstr "折叠速度"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "时间区间"
 
@@ -129,11 +129,11 @@ msgstr "Mipmap"
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "生成可能用于更高质量缩放比例的 mipmap"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "桌面立方体"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "将窗口放置在立方体上"
 
@@ -226,7 +226,7 @@ msgstr "减弱速度"
 msgid "Window fade speed"
 msgstr "窗口减弱速度"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "窗口类型"
@@ -266,15 +266,15 @@ msgstr "映射时渐现窗口和不映射时渐弱窗口"
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "必须先装载的插件"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "不修改"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "需要的插件"
 
@@ -316,35 +316,35 @@ msgstr "启动窗口移动"
 msgid "Start moving window"
 msgstr "开始移动窗口"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "不透明度"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "移动窗口的不透明度"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "约束 Y"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "约束工作空间区域的 Y 坐标"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "删除最大化窗口快照"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "拖动时删除快照并自动取消窗口的最大化"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "移动窗口"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "移动窗口"
 
@@ -372,11 +372,11 @@ msgstr "启动窗口大小调整"
 msgid "Start resizing window"
 msgstr "开始调整窗口大小"
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "调整窗口大小"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "调整窗口大小"
 
@@ -520,105 +520,81 @@ msgstr "旋转桌面立方体"
 msgid "Fullscreen"
 msgstr ""
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr ""
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr ""
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr ""
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr ""
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr ""
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "间距"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "窗口之间的空间"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "任意焦点"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "鼠标移至窗口时聚焦该窗口"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "调整大小速度"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "调整大小时间段落"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr ""
 "应在比例模式中调整大小的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、"
 "对话框、模式对话框、常规、全屏和未知）"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "背景变暗"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "调整窗口大小时背景变暗"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "不透明度百分比"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "角"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "应启动比例模式的热角"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr "覆盖图标"
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "窗口缩放后（“无”、“符号”、“大”）后，在窗口上覆盖一个图标"
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "启动窗口检出器"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "布局和开始转换窗口"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "调整大小"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "调整窗口大小"
 
@@ -716,51 +692,51 @@ msgstr "应用程序转换开关"
 msgid "Enable pointer water effects"
 msgstr "启用指针水纹效果"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "转换电子流"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "转换电子流效果"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "偏移比例"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "水纹偏移比例"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "电子流延迟"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "雨滴之间的延迟（以 ms 为单位）(0-3600000)"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "水纹效果"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "将水纹效果添加到不同的桌面操作"
 
@@ -1230,3 +1206,9 @@ msgstr "默认图标"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "默认窗口图标图像"
+
+#~ msgid "Corners"
+#~ msgstr "角"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "应启动比例模式的热角"

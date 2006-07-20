@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:20-0400\n"
 "Last-Translator: Marek Stepien <marcoos@aviary.pl>\n"
 "Language-Team: Polish <i18n@suse.de>\n"
@@ -105,7 +105,7 @@ msgid "Fold Acceleration"
 msgstr "Przyspieszenie wyginania"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "Szybkość"
 
@@ -114,7 +114,7 @@ msgid "Fold Speed"
 msgstr "Prędkość wyginania"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "Opóźnienie"
 
@@ -130,11 +130,11 @@ msgstr "Mipmapa"
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "O ile to możliwe, generuj mitmapy dla lepszej jakości skalowania"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "Kostka pulpitu"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "Umieszczaj okna na kostce"
 
@@ -227,7 +227,7 @@ msgstr "Szybkość pojawiania się/zanikania"
 msgid "Window fade speed"
 msgstr "Szybkość płynnego pojawiania się/zanikania okien"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "Rodzaje okien"
@@ -267,15 +267,15 @@ msgstr ""
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "Wtyczki, które muszą zostać załadowane przed"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "Bez zmian"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "Wtyczki wymagane przez ten element"
 
@@ -315,36 +315,36 @@ msgstr "Rozpocznij przenoszenie okna"
 msgid "Start moving window"
 msgstr "Rozpocznij przenoszenie okna"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "Nieprzezroczystość"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "Poziom nieprzezroczystości przesuwanych okien"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "Ogranicz Y"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Ogranicz współrzędną Y do obszaru roboczego"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "Odepnij zmaksymalizowane okna"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
 "Odepnij i automatycznie cofnij maksymalizację okien podczas przesuwania"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "Przenieś okno"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "Przenieś okno"
 
@@ -372,11 +372,11 @@ msgstr "Rozpocznij zmianę rozmiarów okna"
 msgid "Start resizing window"
 msgstr ""
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "Zmień rozmiar okna"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "Zmień rozmiar okna"
 
@@ -526,103 +526,79 @@ msgstr "Obróć kostkę pulpitu"
 msgid "Fullscreen"
 msgstr ""
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr ""
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr ""
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr ""
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr ""
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr ""
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "Odstępy"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "Odstępy między oknami"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "Luźny fokus"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "Wybierz okno, gdy mysz przemieszcza się nad nim"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "Szybkość skalowania"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "Opóźnienie skalowania"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr "Rodzaje okien, które powinny być skalowane w trybie skalowania"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "Przyciemnij tło"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "Przyciemnij tło podczas skalowania okien"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "Stopień nieprzezroczystości w procentach"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "Narożniki"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "Aktywne narożniki, które uruchamiają tryb skalowania "
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr ""
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "Rozpocznij przeglądanie okien"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "Rozmieść i zacznij przekształcać okna"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "Skaluj"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "Skaluj okna"
 
@@ -720,51 +696,51 @@ msgstr "Przełącznik aplikacji"
 msgid "Enable pointer water effects"
 msgstr "Włącz wodne efekty wskaźnika"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "Przełącz deszcz"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "Przełącz efekt deszczu"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "Skala przesunięcia"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "Skala przesunięcia wody"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "Opóźnienie deszczu"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Opóźnienie (w milisekundach) pomiędzy każdą kroplą deszczu "
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "Efekt wodny"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "Dodaje efekty wodne do różnych operacji na pulpicie"
 
@@ -1228,3 +1204,9 @@ msgstr "Domyślna ikona"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Obraz domyślnej ikony okna"
+
+#~ msgid "Corners"
+#~ msgstr "Narożniki"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "Aktywne narożniki, które uruchamiają tryb skalowania "

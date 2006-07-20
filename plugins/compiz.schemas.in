@@ -6276,6 +6276,67 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/move/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/move/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate Window Move</short>
+                <long>Start moving window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="cs">
+                <short>Iniciovat přesun okna</short>
+                <long>Zahájit pohyb okna (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="de">
+                <short>Fensterverschiebung initiieren</short>
+                <long>Fensterverschiebung starten (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="es">
+                <short>Iniciar movimiento de ventana</short>
+                <long>Empieza a mover la ventana (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fi">
+                <short>Siirrä ikkunaa</short>
+                <long>Aloita ikkunan siirtäminen (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fr">
+                <short>Lancer le déplacement de fenêtre</short>
+                <long>Démarrer le déplacement de la fenêtre (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="hu">
+                <short>Ablakmozgatás indítása</short>
+                <long>Ablakmozgatás indítása (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="it">
+                <short>Avvia Spostamento finestre</short>
+                <long>Avvia finestra mobile (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="ja">
+                <short>ウィンドウの移動を開始</short>
+                <long>ウィンドウの移動を開始 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pl">
+                <short>Rozpocznij przenoszenie okna</short>
+                <long>Rozpocznij przenoszenie okna (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Iniciar Movimento de Janelas</short>
+                <long>Iniciar movimento da janela (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>启动窗口移动</short>
+                <long>开始移动窗口 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>起始化視窗移動</short>
+                <long>開始移動視窗 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/move/allscreens/options/opacity</key>
             <applyto>/apps/compiz/plugins/move/allscreens/options/opacity</applyto>
             <owner>compiz</owner>
@@ -7060,6 +7121,67 @@
             <locale name="zh_TW">
                 <short>起始化視窗調整大小</short>
                 <long>開始調整視窗大小</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/resize/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/resize/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate Window Resize</short>
+                <long>Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="cs">
+                <short>Iniciovat změnu velikosti okna</short>
+                <long>Zahájit změnu velikosti okna (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="de">
+                <short>Fensterskalierung initiieren</short>
+                <long>Fensterskalierung starten (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="es">
+                <short>Iniciar cambio de tamaño de ventanas</short>
+                <long>Empieza a cambiar el tamaño de la ventana (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fi">
+                <short>Muuta ikkunan kokoa</short>
+                <long>Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fr">
+                <short>Lancer le redimensionnement de fenêtre</short>
+                <long>Commencer à redimensionner la fenêtre (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="hu">
+                <short>Ablakátméretezés indítása</short>
+                <long>Ablak átméretezésének indítása (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="it">
+                <short>Avvia Ridimensionamento finestre</short>
+                <long>Avvia il ridimensionamento della finestra (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="ja">
+                <short>ウィンドウのサイズ変更を開始</short>
+                <long>ウィンドウのサイズ変更を開始 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pl">
+                <short>Rozpocznij zmianę rozmiarów okna</short>
+                <long>Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Iniciar Redimensionamento de Janelas</short>
+                <long>Iniciar redimensionamento da janela (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>启动窗口大小调整</short>
+                <long>开始调整窗口大小 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>起始化視窗調整大小</short>
+                <long>開始調整視窗大小 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
             </locale>
         </schema>
 
@@ -9104,7 +9226,7 @@
             <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_key</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>Pause</default>
+            <default>&lt;Control&gt;&lt;Alt&gt;Up</default>
             <locale name="C">
                 <short>Initiate Window Picker</short>
                 <long>Layout and start transforming windows</long>
@@ -9280,11 +9402,72 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[@SCALE_CORNER@]</default>
+            <locale name="C">
+                <short>Initiate Window Picker</short>
+                <long>Layout and start transforming windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="cs">
+                <short>Spustit výběr oken</short>
+                <long>Rozvržení a počátek transformace oken (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="de">
+                <short>Fensterauswahl initiieren</short>
+                <long>Layout erstellen und mit Fensterumformung beginnen (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="es">
+                <short>Iniciar selector de ventanas</short>
+                <long>Disponer e iniciar transformación de ventanas (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fi">
+                <short>Aktivoi ikkunavalitsin</short>
+                <long>Asettele ja mukauta ikkunat valitsemista varten (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fr">
+                <short>Lancer le sélecteur de fenêtre</short>
+                <long>Disposer et commencer à transformer les fenêtres (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="hu">
+                <short>Ablakválasztó indítása</short>
+                <long>Ablaktranszformáció és elrendezés indítása (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="it">
+                <short>Avvia Selettore finestre</short>
+                <long>Disponi e avvia trasformazione finestre (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="ja">
+                <short>ウィンドウピッカーを起動</short>
+                <long>配列してウィンドウの変換を開始する (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pl">
+                <short>Rozpocznij przeglądanie okien</short>
+                <long>Rozmieść i zacznij przekształcać okna (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Iniciar Seletor de Janelas</short>
+                <long>Criar layout das janelas e iniciar sua transformação (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>启动窗口检出器</short>
+                <long>布局和开始转换窗口 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>起始化視窗選擇器</short>
+                <long>配置和開始轉換視窗 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/scale/screen0/options/spacing</key>
             <applyto>/apps/compiz/plugins/scale/screen0/options/spacing</applyto>
             <owner>compiz</owner>
             <type>int</type>
-            <default>25</default>
+            <default>10</default>
             <locale name="C">
                 <short>Spacing</short>
                 <long>Space between windows (0-250)</long>
@@ -9697,67 +9880,6 @@
             <locale name="zh_TW">
                 <short>不透明度</short>
                 <long>不透明度百分比 (0-100)</long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/scale/screen0/options/corners</key>
-            <applyto>/apps/compiz/plugins/scale/screen0/options/corners</applyto>
-            <owner>compiz</owner>
-            <type>list</type>
-            <list_type>string</list_type>
-            <default>[]</default>
-            <locale name="C">
-                <short>Corners</short>
-                <long>Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, BottomRight)</long>
-            </locale>
-            <locale name="cs">
-                <short>Rohy</short>
-                <long>Horké oblasti pro spuštění režimu škálování (TopLeft [Vlevo nahoře], TopRight [Vpravo nahoře], BottomLeft [Vlevo dole], BottomRight [Vpravo dole])</long>
-            </locale>
-            <locale name="de">
-                <short>Ecken</short>
-                <long>Ecken, die Skalierungsmodus auslösen sollten (TopLeft [links oben], TopRight [rechts oben], BottomLeft [links unten], BottomRight [rechts unten])</long>
-            </locale>
-            <locale name="es">
-                <short>Esquinas</short>
-                <long>Esquinas activas que deben iniciar el modo de escala (TopLeft [superior izquierda], TopRight [superior derecha], BottomLeft [inferior izquierda], BottomRight [inferior derecha])</long>
-            </locale>
-            <locale name="fi">
-                <short>Kulmat</short>
-                <long>Nurkat, jotka aktivoivat skaalaustilan (TopLeft [vasen ylänurkka], TopRight [oikea ylänurkka], BottomLeft [vasen alanurkka], BottomRight [oikea alanurkka])</long>
-            </locale>
-            <locale name="fr">
-                <short>Angles</short>
-                <long>Hot corners devant lancer le mode échelle (TopLeft [haut à gauche], TopRight [haut à droite], BottomLeft [bas à gauche], BottomRight [bas à droite])</long>
-            </locale>
-            <locale name="hu">
-                <short>Sarkok</short>
-                <long>Skálázó módot indító sarkok (TopLeft [bal felső], TopRight [jobb felső], BottomLeft [bal alsó], BottomRight [jobb alsó])</long>
-            </locale>
-            <locale name="it">
-                <short>Angoli</short>
-                <long>Angoli che devono avviare la modalità scala (TopLeft [In alto a sinistra], TopRight [In alto a destra], BottomLeft [In basso a sinistra], BottomRight [In basso a destra])</long>
-            </locale>
-            <locale name="ja">
-                <short>コーナー</short>
-                <long>スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、BottomRight) (TopLeft, TopRight, BottomLeft, BottomRight)</long>
-            </locale>
-            <locale name="pl">
-                <short>Narożniki</short>
-                <long>Aktywne narożniki, które uruchamiają tryb skalowania  (TopLeft, TopRight, BottomLeft, BottomRight)</long>
-            </locale>
-            <locale name="pt_BR">
-                <short>Cantos</short>
-                <long>Cantos que devem iniciar o modo de dimensionamento (TopLeft [Superior Esquerdo], TopRight [Superior Direito], BottomLeft [Inferior Esquerdo], BottomRight [Inferior Direito])</long>
-            </locale>
-            <locale name="zh_CN">
-                <short>角</short>
-                <long>应启动比例模式的热角 (TopLeft, TopRight, BottomLeft, BottomRight)</long>
-            </locale>
-            <locale name="zh_TW">
-                <short>角</short>
-                <long>應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角) (TopLeft, TopRight, BottomLeft, BottomRight)</long>
             </locale>
         </schema>
 
@@ -11207,6 +11329,67 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/initiate_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/initiate_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate</short>
+                <long>Enable pointer water effects (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="cs">
+                <short>Iniciovat</short>
+                <long>Povolit vodní efekty ukazatele (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="de">
+                <short>Initiieren</short>
+                <long>Wassereffekte für Mauszeiger aktivieren (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="es">
+                <short>Iniciar</short>
+                <long>Habilitar efectos acuáticos del puntero (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fi">
+                <short>Aktivoi</short>
+                <long>Ota käyttöön osoittimen vesitehosteet (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fr">
+                <short>Lancer</short>
+                <long>Activer les effets d'eau du pointeur (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="hu">
+                <short>Indítás</short>
+                <long>Mutató víz effektus bekapcsolása (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="it">
+                <short>Avvia</short>
+                <long>Abilita effetti acqua puntatore (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="ja">
+                <short>開始</short>
+                <long>ポインタの水効果を有効にする (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pl">
+                <short>Inicjuj</short>
+                <long>Włącz wodne efekty wskaźnika (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Iniciar</short>
+                <long>Habilitar ponteiro de efeitos aquáticos (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>启动</short>
+                <long>启用指针水纹效果 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>起始化</short>
+                <long>啟用指標水波特效 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</key>
             <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_key</applyto>
             <owner>compiz</owner>
@@ -11387,6 +11570,67 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_rain_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_rain_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Toggle rain</short>
+                <long>Toggle rain effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="cs">
+                <short>Přepnout déšť</short>
+                <long>Přepnout efekt deště (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="de">
+                <short>Regen ein/aus</short>
+                <long>Regeneffekt ein/aus (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="es">
+                <short>Activa o desactiva la lluvia</short>
+                <long>Activa o desactiva el efecto de lluvia (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fi">
+                <short>Ota käyttöön sade</short>
+                <long>Ota käyttöön sadetehoste (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="fr">
+                <short>Basculer la pluie</short>
+                <long>Basculer l'effet de pluie (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="hu">
+                <short>"Eső" kapcsoló</short>
+                <long>"Eső" effektus kapcsoló (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="it">
+                <short>Alterna piogge</short>
+                <long>Alterna effetto pioggia (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="ja">
+                <short>雨の切り替え</short>
+                <long>雨効果の切り替え (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pl">
+                <short>Przełącz deszcz</short>
+                <long>Przełącz efekt deszczu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Alternar chuva</short>
+                <long>Alternar efeito de chuva (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>转换电子流</short>
+                <long>转换电子流效果 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>切換下雨</short>
+                <long>切換下雨特效 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_key</key>
             <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_key</applyto>
             <owner>compiz</owner>
@@ -11419,6 +11663,19 @@
             <locale name="C">
                 <short>Toggle wiper</short>
                 <long>Toggle wiper effect</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/toggle_wiper_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/toggle_wiper_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Toggle wiper</short>
+                <long>Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
             </locale>
         </schema>
 
@@ -11571,6 +11828,19 @@
             <locale name="C">
                 <short>Title wave</short>
                 <long>Wave effect from window title</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/water/allscreens/options/title_wave_edge</key>
+            <applyto>/apps/compiz/plugins/water/allscreens/options/title_wave_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Title wave</short>
+                <long>Wave effect from window title (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
             </locale>
         </schema>
 

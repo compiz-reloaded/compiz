@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: Jani-Matti Hätinen <jani-matti.hatinen@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -115,7 +115,7 @@ msgid "Fold Acceleration"
 msgstr "Taittamisen kiihdytys"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "Nopeus"
 
@@ -124,7 +124,7 @@ msgid "Fold Speed"
 msgstr "Taittamisen nopeus"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "Aikaviive"
 
@@ -140,11 +140,11 @@ msgstr "Mipmap"
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Luo mipmap skaalauksen laadun parantamiseksi mikäli se on mahdollista"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "Työpöytäkuutio"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "Asettele ikkunat työpöytäkuution pinnalle"
 
@@ -237,7 +237,7 @@ msgstr "Häivytyksen nopeus"
 msgid "Window fade speed"
 msgstr "Ikkunan häivytysnopeus"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "Ikkunatyypit"
@@ -275,15 +275,15 @@ msgstr "Ikkunat häivytetään näkyvistä/näkyviin"
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "Etukäteen tätä varten ladattavat liitännäiset"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "Älä muuta"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "Tähän vaadittavat liitännäiset"
 
@@ -323,35 +323,35 @@ msgstr "Siirrä ikkunaa"
 msgid "Start moving window"
 msgstr "Aloita ikkunan siirtäminen"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "Peittävyys"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "Liikutettavien ikkunoiden peittävyys"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "Rajoita Y-koordinaatti"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Rajoita Y-koordinaatti työskentelyalueelle"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "Vapauta suurennetut ikkunat"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Vapauta ja palauta suurennetut ikkunat automaattisesti siirrettäessä"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "Siirrä ikkunaa"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "Siirrä ikkunaa"
 
@@ -379,11 +379,11 @@ msgstr "Muuta ikkunan kokoa"
 msgid "Start resizing window"
 msgstr ""
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "Muuta ikkunan kokoa"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "Muuta ikkunan kokoa"
 
@@ -529,103 +529,79 @@ msgstr "Käännä työpöytäkuutiota"
 msgid "Fullscreen"
 msgstr "kokoruutuikkuna"
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr "vasen ylänurkka"
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr "oikea ylänurkka"
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr "vasen alanurkka"
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr "oikea alanurkka"
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr "ei mitään"
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "Tila"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "Ikkunoiden välinen tila"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "Seuraava tarkennus"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "Kohdista ikkunaan osoittimen liikkuessa sen päälle"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "Skaalauksen nopeus"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "Skaalauksen aikaviive"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr "Skaalautuvat ikkunatyypit"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "Tummenna tausta"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "Tummenna tausta ikkunan kokoa muutettaessa"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "Läpikuultavuus prosentteina"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "Kulmat"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "Nurkat, jotka aktivoivat skaalaustilan"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr ""
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "Aktivoi ikkunavalitsin"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "Asettele ja mukauta ikkunat valitsemista varten"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "Skaalaus"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "Ikkunoiden skaalaus"
 
@@ -726,51 +702,51 @@ msgstr "Sovellusten vaihtaja"
 msgid "Enable pointer water effects"
 msgstr "Ota käyttöön osoittimen vesitehosteet"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "Ota käyttöön sade"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "Ota käyttöön sadetehoste"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "Siirtymän skaala"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "Veden siirtymän skaala"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "Sateen viive"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Sadepisaroiden putoamisen välinen viive (0-3600000 ms)"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "Vesitehoste"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "Lisää vesitehosteen erilaisille työpöydän toiminnoille"
 
@@ -1237,3 +1213,21 @@ msgstr "Oletuskuvake"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Oletuskuva ikkunakuvakkeelle"
+
+#~ msgid "TopLeft"
+#~ msgstr "vasen ylänurkka"
+
+#~ msgid "TopRight"
+#~ msgstr "oikea ylänurkka"
+
+#~ msgid "BottomLeft"
+#~ msgstr "vasen alanurkka"
+
+#~ msgid "BottomRight"
+#~ msgstr "oikea alanurkka"
+
+#~ msgid "Corners"
+#~ msgstr "Kulmat"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "Nurkat, jotka aktivoivat skaalaustilan"

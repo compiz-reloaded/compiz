@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -104,7 +104,7 @@ msgid "Fold Acceleration"
 msgstr "アクセラレーションをフォールド(1.0-20.0)"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "速度"
 
@@ -113,7 +113,7 @@ msgid "Fold Speed"
 msgstr "速度をフォールド(0.1-50.0)"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "タイムステップ"
 
@@ -129,11 +129,11 @@ msgstr "ミップマップ"
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "高品質スケーリングが可能な場合ミップマップを生成"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "デスクトップキューブ"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "ウィンドウをキューブに配置する"
 
@@ -226,7 +226,7 @@ msgstr "フェードスピード"
 msgid "Window fade speed"
 msgstr "ウィンドウフェード効果(0.1-10.0)"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "ウィンドウタイプ"
@@ -268,15 +268,15 @@ msgstr ""
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "これを前にロードする必要のあるプラグイン"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "変更しないでください"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "これが必要なプラグイン"
 
@@ -319,35 +319,35 @@ msgstr "ウィンドウの移動を開始"
 msgid "Start moving window"
 msgstr "ウィンドウの移動を開始"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "不透明度"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "移動するウィンドウの不透明度レベル(1-100)"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "Ｙをコンストレイン"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Y座標をワークスペースエリアにコンストレイン"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "最大化したウィンドウのスナップ解除"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "ドラッグ時に、最大化したウィンドウをスナップ解除して最大化を自動解除"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "ウィンドウを移動"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "ウィンドウを移動"
 
@@ -375,11 +375,11 @@ msgstr "ウィンドウのサイズ変更を開始"
 msgid "Start resizing window"
 msgstr "ウィンドウのサイズ変更を開始"
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "ウィンドウのサイズ変更"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "ウィンドウのサイズ変更"
 
@@ -523,110 +523,84 @@ msgstr "デスクトップキューブの回転"
 msgid "Fullscreen"
 msgstr ""
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr ""
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr ""
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr ""
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr ""
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr ""
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "スペース"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "ウィンドウ間のスペース(0-250)"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "スロッピフォーカス"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "マウスの移動時にウィンドウをフォーカス"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "スケール速度(0.1-50.0)"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "スケールタイムステップ(0.1-50.0)"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr ""
 "スケールモードでスケールするウィンドウタイプ(デスクトップ、ドック、ツール"
 "バー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、"
 "標準、全画面、不明)"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "背景を暗くする"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "ウィンドウのスクロール時に背景を暗くする"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "不透明度の割合(0-100)"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "コーナー"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr ""
-"スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
-"BottomRight)"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr "オーバレイアイコン"
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 "ウィンドウがスケールされた場合にアイコンをオーバレイする（なし、エンブレム、"
 "ビッグ）"
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "ウィンドウピッカーを起動"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "配列してウィンドウの変換を開始する"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "スケール"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "スケールウィンドウ"
 
@@ -727,51 +701,51 @@ msgstr "アプリケーションスイッチャ"
 msgid "Enable pointer water effects"
 msgstr "ポインタの水効果を有効にする"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "雨の切り替え"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "雨効果の切り替え"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "オフセットスケール"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "水オフセットスケール(0.0-10.0)"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "雨の待ち時間"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "雨滴間の待ち時間(ms)(0-3600000)"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "水効果"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "異なるデスクトップアクションに水効果を追加する"
 
@@ -1248,3 +1222,11 @@ msgstr "デフォルトのアイコン"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "デフォルトのウィンドウアイコンイメージ"
+
+#~ msgid "Corners"
+#~ msgstr "コーナー"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr ""
+#~ "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
+#~ "BottomRight)"

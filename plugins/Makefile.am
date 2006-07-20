@@ -74,7 +74,7 @@ schema_modules = $(patsubst gconf%,,$(subst lib,,$(subst .la,,$(module_LTLIBRARI
 compiz.schemas.in:
 	COMPIZ_SCHEMA_PLUGINS="$(schema_modules)" COMPIZ_SCHEMA_GENERAL=1 \
 	compiz --replace $(schema_modules) gconf-dump &&		  \
-	sed -e 's/\[@SCALE_CORNER@\]/[\@SCALE_CORNER\@]/'		  \
+	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@]/'			  \
 	  < compiz.schemas.dump > compiz.schemas.in;			  \
 	rm -f compiz.schemas.dump
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:20-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -104,7 +104,7 @@ msgid "Fold Acceleration"
 msgstr "摺疊加速"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "速度"
 
@@ -113,7 +113,7 @@ msgid "Fold Speed"
 msgstr "摺疊速度"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "時間間隔"
 
@@ -129,11 +129,11 @@ msgstr "Mipmap"
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "在可能使用更高品質比例時產生 Mipmap"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "桌面立方體"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "將視窗放到立方體"
 
@@ -226,7 +226,7 @@ msgstr "淡出/淡入速度"
 msgid "Window fade speed"
 msgstr "視窗淡出/淡入速度"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "視窗類型"
@@ -266,15 +266,15 @@ msgstr "在映射時淡入視窗，以及在解除映射時淡出視窗"
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "在此之前必須先載入的外掛程式"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "不要修改"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "這時需要的外掛程式"
 
@@ -316,35 +316,35 @@ msgstr "起始化視窗移動"
 msgid "Start moving window"
 msgstr "開始移動視窗"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "不透明度"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "移動視窗的不透明度等級"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "等比縮放 Y 軸"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "等比縮放 Y 軸對應到工作環境區域"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "解除嵌入最大化視窗"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "在拖曳已最大化視窗時為其解除嵌入和自動解除最大化"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "移動視窗"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "移動視窗"
 
@@ -372,11 +372,11 @@ msgstr "起始化視窗調整大小"
 msgid "Start resizing window"
 msgstr "開始調整視窗大小"
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "調整大小視窗"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "調整大小視窗"
 
@@ -520,105 +520,81 @@ msgstr "旋轉桌面立方體"
 msgid "Fullscreen"
 msgstr ""
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr ""
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr ""
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr ""
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr ""
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr ""
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "間距"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "視窗之間間距"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "寬鬆定焦"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "在滑鼠移動到上方時啟用定焦視窗"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "調整比例速度"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "調整比例時間間隔"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr ""
 "應該要在調整比例模式中調整比例的視窗類型 (桌面、停駐、工具列、功能表、公用程"
 "式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的)"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "暗化背景"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "調整視窗比例時暗化背景"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "不透明度百分比"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "角"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr "重疊圖示"
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "調整比例後在視窗中重疊圖示 (無、標誌、大)"
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "起始化視窗選擇器"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "配置和開始轉換視窗"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "調整比例"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "調整視窗比例"
 
@@ -716,51 +692,51 @@ msgstr "應用程式切換器"
 msgid "Enable pointer water effects"
 msgstr "啟用指標水波特效"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "切換下雨"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "切換下雨特效"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "偏移比例"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "水波偏移比例"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "下雨延遲"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "每個雨滴間的延遲毫秒數"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "水波特效"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "新增水波特效到不同的桌面動作"
 
@@ -1230,3 +1206,9 @@ msgstr "預設圖示"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "預設的視窗圖示影像"
+
+#~ msgid "Corners"
+#~ msgstr "角"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"

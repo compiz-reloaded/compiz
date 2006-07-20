@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: \n"
 "Language-Team:  <hu@li.org>\n"
@@ -106,7 +106,7 @@ msgid "Fold Acceleration"
 msgstr "Hajtás gyorsulása"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "Sebesség"
 
@@ -115,7 +115,7 @@ msgid "Fold Speed"
 msgstr "Hajtás sebessége"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "Időköz"
 
@@ -132,11 +132,11 @@ msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 "MIP térképek készítése, hacsak lehetséges, a jobb minőségű skálázás érdekében"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "Munkaasztal kocka"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "Ablakok elhelyezése a kockán"
 
@@ -229,7 +229,7 @@ msgstr "Elhalványulás sebessége"
 msgid "Window fade speed"
 msgstr "Ablak elhalványulásának sebessége"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "Ablaktípusok"
@@ -267,15 +267,15 @@ msgstr "Leképezés esetén az ablak erősítése, lecsatolás esetén elhalván
 msgid "."
 msgstr ","
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "Kötelezően betöltendő beépülő modulok "
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "Nem módosít"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "Szükséges beépülő modulok"
 
@@ -315,35 +315,35 @@ msgstr "Ablakmozgatás indítása"
 msgid "Start moving window"
 msgstr "Ablakmozgatás indítása"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "Átlátszatlanság"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "Ablakmozgatás átlátszatlanságának szintje"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "Y megszorítás"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Y koordináta-megszorítás a munkafelületre"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "A maximalizált ablakok azonnali visszaállítása"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Az ablakok azonnali, automatikus visszaállítása azok mozgatásakor"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "Ablak mozgatása"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "Ablak mozgatása"
 
@@ -371,11 +371,11 @@ msgstr "Ablakátméretezés indítása"
 msgid "Start resizing window"
 msgstr "Ablak átméretezésének indítása"
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "Ablak átméretezése"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "Ablak átméretezése"
 
@@ -519,103 +519,79 @@ msgstr "A munkaasztalkocka forgatása"
 msgid "Fullscreen"
 msgstr "Teljes képernyős"
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr "bal felső"
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr "jobb felső"
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr "bal alsó"
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr "jobb alsó"
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr "Nincs"
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr "Embléma"
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr "Nagy"
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "Távolság"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "Ablakok közti távolság"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "Lassú fókusz"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "Ablakra fókuszálás, ha az egér fölé kerül"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "Méretezés sebessége"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "Méretezés időköze"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr "Ablaktípusok, amelyek skálázás módban méretezendők"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "Sötétülő háttér"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "Sötétülő háttér az ablakok átméretezésekor"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "Átlátszatlanság (0-100%)"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "Sarkok"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "Skálázó módot indító sarkok"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr "Átfedő ikon"
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Ikon átfedése az ablakon átméretezéskor"
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "Ablakválasztó indítása"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "Ablaktranszformáció és elrendezés indítása"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "Méretarány"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "Ablakok méretezése"
 
@@ -711,51 +687,51 @@ msgstr "Alkalmazásváltó"
 msgid "Enable pointer water effects"
 msgstr "Mutató víz effektus bekapcsolása"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "\"Eső\" kapcsoló"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "\"Eső\" effektus kapcsoló"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "Eltolás skálája"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "Víz eltolás mértéke"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "Eső késleltetése"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Esőcseppek közötti késleltetés (0-3600000 ms)"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "Víz effektus"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "Víz effektus hozzáadása a különböző munkaasztal-műveletekhez"
 
@@ -1220,3 +1196,21 @@ msgstr "Alapértelmezett ikon"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Alapértelmezett ikon képe"
+
+#~ msgid "TopLeft"
+#~ msgstr "bal felső"
+
+#~ msgid "TopRight"
+#~ msgstr "jobb felső"
+
+#~ msgid "BottomLeft"
+#~ msgstr "bal alsó"
+
+#~ msgid "BottomRight"
+#~ msgstr "jobb alsó"
+
+#~ msgid "Corners"
+#~ msgstr "Sarkok"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "Skálázó módot indító sarkok"

@@ -262,7 +262,7 @@ getShortDesc (CompOption *o)
 }
 
 static char *
-getLongDesc (CompOption *o)
+getLongDesc (CompOption *o, const char *option_name)
 {
     char *base, *out;
 
@@ -271,7 +271,35 @@ getLongDesc (CompOption *o)
     else
 	base = g_strdup (_(o->longDesc));
 
-    if (o->type == CompOptionTypeInt)
+    if (o->type == CompOptionTypeAction &&
+	g_str_has_suffix (option_name, "_edge"))
+    {
+	GString *str = g_string_new (base);
+	const char *edge;
+	int i;
+
+	g_string_append (str, " (");
+	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	{
+	    edge = gconfEdgeToString (i);
+
+	    if (i > 0)
+		g_string_append (str, ", ");
+	    if (!strcmp (edge, _(edge)))
+	    {
+		g_string_append (str, edge);
+	    }
+	    else
+	    {
+		g_string_append_printf (str, "%s [%s]",
+					edge, _(edge));
+	    }
+	}
+	g_string_append (str, ")");
+
+	out = g_string_free (str, FALSE);
+    }
+    else if (o->type == CompOptionTypeInt)
     {
 	out = g_strdup_printf ("%s (%d-%d)", base,
 			       o->rest.i.min, o->rest.i.max);
@@ -429,7 +457,7 @@ gconfDumpToSchema (CompDisplay *d,
 
     setlocale (LC_ALL, "C");
     cshort = getShortDesc (o);
-    clong = getLongDesc (o);
+    clong = getLongDesc (o, name);
     gconfPrintf (3, "<locale name=\"C\">\n");
     gconfPrintf (4, "<short>%s</short>\n", cshort);
     gconfPrintf (4, "<long>%s</long>\n", clong);
@@ -444,7 +472,7 @@ gconfDumpToSchema (CompDisplay *d,
 	setlocale (LC_ALL, "");
 
 	lshort = getShortDesc (o);
-	llong = getLongDesc (o);
+	llong = getLongDesc (o, name);
 
 	if (!strcmp (cshort, lshort) && !strcmp (clong, llong))
 	    continue;

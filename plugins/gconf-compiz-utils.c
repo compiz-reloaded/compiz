@@ -54,14 +54,14 @@ struct _GConfModifier {
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _GConfModifier))
 
 static gchar *edgeName[] = {
-    "Left",
-    "Right",
-    "Top",
-    "Bottom",
-    "TopLeft",
-    "TopRight",
-    "BottomLeft",
-    "BottomRight"
+    N_("Left"),
+    N_("Right"),
+    N_("Top"),
+    N_("Bottom"),
+    N_("TopLeft"),
+    N_("TopRight"),
+    N_("BottomLeft"),
+    N_("BottomRight")
 };
 
 static GString *

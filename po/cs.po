@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -110,7 +110,7 @@ msgid "Fold Acceleration"
 msgstr "Zrychlení sbalení"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "Rychlost"
 
@@ -119,7 +119,7 @@ msgid "Fold Speed"
 msgstr "Rychlost sbalení"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "Časový krok"
 
@@ -135,11 +135,11 @@ msgstr "Mipmap"
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Jeli to možné, vytvářet pro kvalitní škálování mipmapy"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "Kostka plochy"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "Rozmístit okna na kostku"
 
@@ -232,7 +232,7 @@ msgstr "Rychlost blednutí"
 msgid "Window fade speed"
 msgstr "Rychlost blednutí oken"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "Typy oken"
@@ -270,15 +270,15 @@ msgstr "Blednutí mapovaných oken a materializace oken nemapovaných"
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "Moduly, které musí být tímto předem načteny"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "Neměnit"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "Moduly, které jsou tímto vyžadovány"
 
@@ -318,35 +318,35 @@ msgstr "Iniciovat přesun okna"
 msgid "Start moving window"
 msgstr "Zahájit pohyb okna"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "Krytí"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "Úroveň krytí pohybujících se oken"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "Omezení Y"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Omezení Y souřadnice na pracovní prostor"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "Odtrhávat maximalizovaná okna"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Snapoff and auto unmaximized maximized windows when dragging"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "Přesunout okno"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "Přesunout okno"
 
@@ -374,11 +374,11 @@ msgstr "Iniciovat změnu velikosti okna"
 msgid "Start resizing window"
 msgstr "Zahájit změnu velikosti okna"
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "Změnit velikost okna"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "Změnit velikost okna"
 
@@ -523,103 +523,79 @@ msgstr "Otočit kostkou ploch"
 msgid "Fullscreen"
 msgstr ""
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr "Vlevo nahoře"
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr "Vpravo nahoře"
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr "Vlevo dole"
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr "Vpravo dole"
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr ""
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "Mezery"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "Mezera mezi okny"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "Sloppy Focus"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "Změřit okno, když se nad něj přesune myš"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "Rychlost škálování"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "Časový krok škálování"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr "Typy oken, které mají být škálovány v režimu škálování"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "Ztmavit pozadí"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "Ztmavit pozadí při škálování oken"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "Krytí v procentech"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "Rohy"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "Horké oblasti pro spuštění režimu škálování"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr "Překrýt ikonou"
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Překrýt okna ikonou po změně jejich velikosti"
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "Spustit výběr oken"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "Rozvržení a počátek transformace oken"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "Měřítko"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "Škálovat okna"
 
@@ -715,51 +691,51 @@ msgstr "Přepínač aplikací"
 msgid "Enable pointer water effects"
 msgstr "Povolit vodní efekty ukazatele"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "Přepnout déšť"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "Přepnout efekt deště"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "Offset Scale"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "Water offset scale"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "Zpoždění deště"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Zpoždění (v ms) mezi kapkami"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "Vodní efekt"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "Do různých akcí plochy přidává efekt vody"
 
@@ -1224,3 +1200,21 @@ msgstr "Výchozí ikona"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Výchozí ikona okna"
+
+#~ msgid "TopLeft"
+#~ msgstr "Vlevo nahoře"
+
+#~ msgid "TopRight"
+#~ msgstr "Vpravo nahoře"
+
+#~ msgid "BottomLeft"
+#~ msgstr "Vlevo dole"
+
+#~ msgid "BottomRight"
+#~ msgstr "Vpravo dole"
+
+#~ msgid "Corners"
+#~ msgstr "Rohy"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "Horké oblasti pro spuštění režimu škálování"

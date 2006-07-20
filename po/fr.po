@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-20 10:14-0400\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
 "PO-Revision-Date: 2006-07-20 10:16-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -104,7 +104,7 @@ msgid "Fold Acceleration"
 msgstr "Accélération de pliage"
 
 #: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
-#: plugins/scale.c:394 plugins/switcher.c:419 plugins/zoom.c:261
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
 msgid "Speed"
 msgstr "Vitesse"
 
@@ -113,7 +113,7 @@ msgid "Fold Speed"
 msgstr "Vitesse de pliage"
 
 #: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
-#: plugins/scale.c:404 plugins/switcher.c:429 plugins/zoom.c:271
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
 msgid "Timestep"
 msgstr "Intervalle"
 
@@ -131,11 +131,11 @@ msgstr ""
 "Générer des mipmaps dans la mesure du possible pour une mise à l'échelle de "
 "meilleure qualité"
 
-#: plugins/cube.c:1639
+#: plugins/cube.c:1642
 msgid "Desktop Cube"
 msgstr "Cube du bureau"
 
-#: plugins/cube.c:1640
+#: plugins/cube.c:1643
 msgid "Place windows on cube"
 msgstr "Placer des fenêtres sur le cube"
 
@@ -228,7 +228,7 @@ msgstr "Vitesse de fondu"
 msgid "Window fade speed"
 msgstr "Vitesse de fondu de la fenêtre"
 
-#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:414
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
 #: plugins/switcher.c:439
 msgid "Window Types"
 msgstr "Types de fenêtres"
@@ -268,15 +268,15 @@ msgstr ""
 msgid "."
 msgstr ","
 
-#: plugins/gconf-dump.c:545
+#: plugins/gconf-dump.c:605
 msgid "Plugins that this must load before"
 msgstr "Plug-ins à charger avant"
 
-#: plugins/gconf-dump.c:546 plugins/gconf-dump.c:556
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
 msgid "Do not modify"
 msgstr "Ne pas modifier"
 
-#: plugins/gconf-dump.c:555
+#: plugins/gconf-dump.c:615
 msgid "Plugins that this requires"
 msgstr "Plug-ins requis"
 
@@ -316,37 +316,37 @@ msgstr "Lancer le déplacement de fenêtre"
 msgid "Start moving window"
 msgstr "Démarrer le déplacement de la fenêtre"
 
-#: plugins/move.c:539 plugins/scale.c:436 plugins/switcher.c:479
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
 msgid "Opacity"
 msgstr "Opacité"
 
-#: plugins/move.c:540
+#: plugins/move.c:541
 msgid "Opacity level of moving windows"
 msgstr "Niveau d'opacité pour déplacer des fenêtres"
 
-#: plugins/move.c:548
+#: plugins/move.c:549
 msgid "Constrain Y"
 msgstr "Contraindre Y"
 
-#: plugins/move.c:549
+#: plugins/move.c:550
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Contraindre la coordonnée Y à être dans la zone de l'espace de travail"
 
-#: plugins/move.c:555
+#: plugins/move.c:556
 msgid "Snapoff maximized windows"
 msgstr "Désactiver l'alignement des fenêtres agrandies"
 
-#: plugins/move.c:556
+#: plugins/move.c:557
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
 "Désactiver l'alignement et la réduction automatique des fenêtres lorsque "
 "vous les faites glisser"
 
-#: plugins/move.c:715
+#: plugins/move.c:716
 msgid "Move Window"
 msgstr "Déplacer la fenêtre"
 
-#: plugins/move.c:716
+#: plugins/move.c:717
 msgid "Move window"
 msgstr "Déplacer la fenêtre"
 
@@ -374,11 +374,11 @@ msgstr "Lancer le redimensionnement de fenêtre"
 msgid "Start resizing window"
 msgstr "Commencer à redimensionner la fenêtre"
 
-#: plugins/resize.c:777
+#: plugins/resize.c:778
 msgid "Resize Window"
 msgstr "Redimensionner la fenêtre"
 
-#: plugins/resize.c:778
+#: plugins/resize.c:779
 msgid "Resize window"
 msgstr "Redimensionner la fenêtre"
 
@@ -528,104 +528,80 @@ msgstr "Rotation du cube de bureau"
 msgid "Fullscreen"
 msgstr "plein écran"
 
-#: plugins/scale.c:82
-msgid "TopLeft"
-msgstr "haut à gauche"
-
-#: plugins/scale.c:83
-msgid "TopRight"
-msgstr "haut à droite"
-
-#: plugins/scale.c:84
-msgid "BottomLeft"
-msgstr "bas à gauche"
-
-#: plugins/scale.c:85
-msgid "BottomRight"
-msgstr "bas à droite"
-
-#: plugins/scale.c:104 plugins/wobbly.c:136
+#: plugins/scale.c:88 plugins/wobbly.c:136
 msgid "None"
 msgstr "Aucun"
 
-#: plugins/scale.c:105
+#: plugins/scale.c:89
 msgid "Emblem"
 msgstr "Emblème"
 
-#: plugins/scale.c:106
+#: plugins/scale.c:90
 msgid "Big"
 msgstr "Grand"
 
-#: plugins/scale.c:378
+#: plugins/scale.c:310
 msgid "Spacing"
 msgstr "Espacement"
 
-#: plugins/scale.c:379
+#: plugins/scale.c:311
 msgid "Space between windows"
 msgstr "Espace entre les fenêtres"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:319
 msgid "Sloppy Focus"
 msgstr "Focus flou"
 
-#: plugins/scale.c:388
+#: plugins/scale.c:320
 msgid "Focus window when mouse moves over them"
 msgstr "Focus de la fenêtre lorsque la souris se déplace sur elle"
 
-#: plugins/scale.c:395
+#: plugins/scale.c:327
 msgid "Scale speed"
 msgstr "Vitesse d'échelle"
 
-#: plugins/scale.c:405
+#: plugins/scale.c:337
 msgid "Scale timestep"
 msgstr "Intervalle d'échelle"
 
-#: plugins/scale.c:415
+#: plugins/scale.c:347
 msgid "Window types that should scaled in scale mode"
 msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
 
-#: plugins/scale.c:429
+#: plugins/scale.c:361
 msgid "Darken Background"
 msgstr "Assombrir l'arrière-plan"
 
-#: plugins/scale.c:430
+#: plugins/scale.c:362
 msgid "Darken background when scaling windows"
 msgstr "Assombrir l'arrière-plan lors de la mise à l'échelle des fenêtres"
 
-#: plugins/scale.c:437 plugins/switcher.c:480
+#: plugins/scale.c:369 plugins/switcher.c:480
 msgid "Amount of opacity in percent"
 msgstr "Quantité d'opacité en pourcentage"
 
-#: plugins/scale.c:445
-msgid "Corners"
-msgstr "Angles"
-
-#: plugins/scale.c:446
-msgid "Hot corners that should initiate scale mode"
-msgstr "Hot corners devant lancer le mode échelle"
-
-#: plugins/scale.c:458
+#: plugins/scale.c:377
 msgid "Overlay Icon"
 msgstr "Superposer l'icône"
 
-#: plugins/scale.c:459
+#: plugins/scale.c:378
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 "Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
 
-#: plugins/scale.c:1436
+#: plugins/scale.c:1367
 msgid "Initiate Window Picker"
 msgstr "Lancer le sélecteur de fenêtre"
 
-#: plugins/scale.c:1437
+#: plugins/scale.c:1368
 msgid "Layout and start transforming windows"
 msgstr "Disposer et commencer à transformer les fenêtres"
 
-#: plugins/scale.c:1643
+#: plugins/scale.c:1559
 msgid "Scale"
 msgstr "Échelle"
 
-#: plugins/scale.c:1644
+#: plugins/scale.c:1560
 msgid "Scale windows"
 msgstr "Mettre les fenêtres à l'échelle"
 
@@ -724,51 +700,51 @@ msgstr "Commutateur d'application"
 msgid "Enable pointer water effects"
 msgstr "Activer les effets d'eau du pointeur"
 
-#: plugins/water.c:1588
+#: plugins/water.c:1589
 msgid "Toggle rain"
 msgstr "Basculer la pluie"
 
-#: plugins/water.c:1589
+#: plugins/water.c:1590
 msgid "Toggle rain effect"
 msgstr "Basculer l'effet de pluie"
 
-#: plugins/water.c:1603
+#: plugins/water.c:1605
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1604
+#: plugins/water.c:1606
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1618
+#: plugins/water.c:1621
 msgid "Offset Scale"
 msgstr "Échelle de décalage"
 
-#: plugins/water.c:1619
+#: plugins/water.c:1622
 msgid "Water offset scale"
 msgstr "Échelle de décalage d'eau"
 
-#: plugins/water.c:1628
+#: plugins/water.c:1631
 msgid "Rain Delay"
 msgstr "Délai de pluie"
 
-#: plugins/water.c:1629
+#: plugins/water.c:1632
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Délai (en ms) en chaque goutte de pluie"
 
-#: plugins/water.c:1637
+#: plugins/water.c:1640
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1638
+#: plugins/water.c:1641
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1778
+#: plugins/water.c:1782
 msgid "Water Effect"
 msgstr "Effet d'eau"
 
-#: plugins/water.c:1779
+#: plugins/water.c:1783
 msgid "Adds water effects to different desktop actions"
 msgstr "Ajoute des effets d'eau à différentes opérations du bureau"
 
@@ -1238,3 +1214,21 @@ msgstr "Icône par défaut"
 #: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Image de l'icône de la fenêtre par défaut"
+
+#~ msgid "TopLeft"
+#~ msgstr "haut à gauche"
+
+#~ msgid "TopRight"
+#~ msgstr "haut à droite"
+
+#~ msgid "BottomLeft"
+#~ msgstr "bas à gauche"
+
+#~ msgid "BottomRight"
+#~ msgstr "bas à droite"
+
+#~ msgid "Corners"
+#~ msgstr "Angles"
+
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "Hot corners devant lancer le mode échelle"
