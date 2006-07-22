@@ -3327,7 +3327,7 @@ updateWindowAttributes (CompWindow *w,
     XWindowChanges xwc;
     int		   mask;
 
-    if (w->attrib.override_redirect)
+    if (w->attrib.override_redirect || !w->managed)
 	return;
 
     if (w->state & CompWindowStateShadedMask)
