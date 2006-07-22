@@ -385,6 +385,20 @@ adjustVelocity (RotateScreen *rs,
 }
 
 static void
+rotateReleaseMoveWindow (CompScreen *s)
+{
+    CompWindow *w;
+
+    ROTATE_SCREEN (s);
+
+    w = findWindowAtScreen (s, rs->moveWindow);
+    if (w)
+	syncWindowPosition (w);
+
+    rs->moveWindow = None;
+}
+
+static void
 rotatePreparePaintScreen (CompScreen *s,
 			  int	     msSinceLastPaint)
 {
@@ -695,6 +709,9 @@ rotate (CompDisplay     *d,
 	if (!direction)
 	    return FALSE;
 
+	if (rs->moveWindow)
+	    rotateReleaseMoveWindow (s);
+
 	/* we allow the grab to fail here so that we can rotate on
 	   drag-and-drop */
 	if (!rs->grabIndex)
@@ -741,8 +758,7 @@ rotateWithWindow (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	CompWindow *w;
-	int	   direction;
+	int direction;
 
 	ROTATE_SCREEN (s);
 
@@ -752,16 +768,23 @@ rotateWithWindow (CompDisplay     *d,
 
 	xid = getIntOptionNamed (option, nOption, "window", 0);
 
-	w = findWindowAtScreen (s, xid);
-	if (w)
+	if (rs->moveWindow != xid)
 	{
-	    if (!(w->type & (CompWindowTypeDesktopMask |
-			     CompWindowTypeDockMask)))
+	    CompWindow *w;
+
+	    rotateReleaseMoveWindow (s);
+
+	    w = findWindowAtScreen (s, xid);
+	    if (w)
 	    {
-		if (!(w->state & CompWindowStateStickyMask))
+		if (!(w->type & (CompWindowTypeDesktopMask |
+				 CompWindowTypeDockMask)))
 		{
-		    rs->moveWindow  = w->id;
-		    rs->moveWindowX = w->attrib.x;
+		    if (!(w->state & CompWindowStateStickyMask))
+		    {
+			rs->moveWindow  = w->id;
+			rs->moveWindowX = w->attrib.x;
+		    }
 		}
 	    }
 	}
