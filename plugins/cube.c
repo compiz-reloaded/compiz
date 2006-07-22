@@ -1382,6 +1382,8 @@ cubeFold (CompDisplay     *d,
 	}
     }
 
+    action->state &= ~(CompActionStateTermButton | CompActionStateTermKey);
+
     return FALSE;
 }
 
@@ -1487,6 +1489,7 @@ cubeSetDisplayOption (CompDisplay     *display,
     case CUBE_DISPLAY_OPTION_UNFOLD:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
+	break;
     case CUBE_DISPLAY_OPTION_NEXT:
     case CUBE_DISPLAY_OPTION_PREV:
 	if (compSetActionOption (o, value))
