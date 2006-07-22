@@ -171,9 +171,16 @@ static char *moveWinType[] = {
 
 static int displayPrivateIndex;
 
+#define WOBBLY_DISPLAY_OPTION_SNAP 0
+#define WOBBLY_DISPLAY_OPTION_NUM  1
+
 typedef struct _WobblyDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
+
+    CompOption opt[WOBBLY_DISPLAY_OPTION_NUM];
+
+    Bool snapping;
 } WobblyDisplay;
 
 #define WOBBLY_SCREEN_OPTION_FRICTION	       0
@@ -186,10 +193,9 @@ typedef struct _WobblyDisplay {
 #define WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_TYPE 7
 #define WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE  8
 #define WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE  9
-#define WOBBLY_SCREEN_OPTION_SNAP	       10
-#define WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT   11
-#define WOBBLY_SCREEN_OPTION_VISUAL_BELL       12
-#define WOBBLY_SCREEN_OPTION_NUM	       13
+#define WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT   10
+#define WOBBLY_SCREEN_OPTION_VISUAL_BELL       11
+#define WOBBLY_SCREEN_OPTION_NUM	       12
 
 typedef struct _WobblyScreen {
     int	windowPrivateIndex;
@@ -354,16 +360,6 @@ wobblySetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case WOBBLY_SCREEN_OPTION_SNAP:
-	if (value->bind.type == CompBindingTypeButton)
-	    return FALSE;
-
-	/* Ignore the key, for backward compat */
-	value->bind.u.key.keycode = 0;
-
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
     case WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT:
     case WOBBLY_SCREEN_OPTION_VISUAL_BELL:
 	if (compSetBoolOption (o, value))
@@ -493,15 +489,6 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o->rest.s.nString    = nWindowTypeString;
 
     ws->grabWMask = compWindowTypeMaskFromStringList (&o->value);
-
-    o = &ws->opt[WOBBLY_SCREEN_OPTION_SNAP];
-    o->name			  = "snap";
-    o->shortDesc		  = N_("Snap windows");
-    o->longDesc			  = N_("Toggle window snapping");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = WOBBLY_SNAP_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   = 0;
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT];
     o->name	  = "maximize_effect";
@@ -2206,6 +2193,75 @@ wobblyPaintWindow (CompWindow		   *w,
     return status;
 }
 
+static Bool
+wobblyEnableSnapping (CompDisplay     *d,
+		      CompAction      *action,
+		      CompActionState state,
+		      CompOption      *option,
+		      int	      nOption)
+{
+    CompScreen *s;
+    CompWindow *w;
+
+    WOBBLY_DISPLAY (d);
+
+    for (s = d->screens; s; s = s->next)
+    {
+	for (w = s->windows; w; w = w->next)
+	{
+	    WOBBLY_WINDOW (w);
+
+	    if (ww->grabbed && ww->model)
+		modelUpdateSnapping (w, ww->model);
+	}
+    }
+
+    wd->snapping = TRUE;
+
+    return FALSE;
+}
+
+static Bool
+wobblyDisableSnapping (CompDisplay     *d,
+		       CompAction      *action,
+		       CompActionState state,
+		       CompOption      *option,
+		       int	       nOption)
+{
+    CompScreen *s;
+    CompWindow *w;
+
+    WOBBLY_DISPLAY (d);
+
+    if (!wd->snapping)
+	return FALSE;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	for (w = s->windows; w; w = w->next)
+	{
+	    WOBBLY_WINDOW (w);
+
+	    if (ww->grabbed && ww->model)
+	    {
+		if (modelDisableSnapping (w, ww->model))
+		{
+		    WOBBLY_SCREEN (w->screen);
+
+		    ww->wobbly |= WobblyInitial;
+		    ws->wobblyWindows |= ww->wobbly;
+
+		    damagePendingOnScreen (w->screen);
+		}
+	    }
+	}
+    }
+
+    wd->snapping = FALSE;
+
+    return FALSE;
+}
+
 static void
 wobblyHandleEvent (CompDisplay *d,
 		   XEvent      *event)
@@ -2237,57 +2293,28 @@ wobblyHandleEvent (CompDisplay *d,
 	    }
 	}
 	break;
-    case KeyPress:
-	s = findScreenAtDisplay (d, event->xkey.root);
-	if (s)
-	{
-	    WOBBLY_SCREEN (s);
-
-	    if (eventMatches (d, event, &ws->opt[WOBBLY_SCREEN_OPTION_SNAP]))
-	    {
-		for (w = s->windows; w; w = w->next)
-		{
-		    WOBBLY_WINDOW (w);
-
-		    if (ww->grabbed && ww->model)
-			modelUpdateSnapping (w, ww->model);
-		}
-	    }
-	}
-	break;
-    case KeyRelease:
-	s = findScreenAtDisplay (d, event->xkey.root);
-	if (s)
-	{
-	    WOBBLY_SCREEN (s);
-
-	    if (eventTerminates (d, event,
-				 &ws->opt[WOBBLY_SCREEN_OPTION_SNAP]))
-	    {
-		for (w = s->windows; w; w = w->next)
-		{
-		    WOBBLY_WINDOW (w);
-
-		    if (ww->grabbed && ww->model)
-		    {
-			if (modelDisableSnapping (w, ww->model))
-			{
-			    ww->wobbly |= WobblyInitial;
-			    ws->wobblyWindows |= ww->wobbly;
-
-			    damagePendingOnScreen (w->screen);
-			}
-		    }
-		}
-	    }
-	}
-	break;
     default:
 	if (event->type == d->xkbEvent)
 	{
 	    XkbAnyEvent *xkbEvent = (XkbAnyEvent *) event;
 
-	    if (xkbEvent->xkb_type == XkbBellNotify)
+	    if (xkbEvent->xkb_type == XkbStateNotify)
+	    {
+		XkbStateNotifyEvent *stateEvent = (XkbStateNotifyEvent *) event;
+		CompAction	    *action;
+		unsigned int	    mods = 0xffffffff;
+
+		action = &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP].value.action;
+
+		if (action->type & CompBindingTypeKey)
+		    mods = action->key.modifiers;
+
+		if ((stateEvent->mods & mods) == mods)
+		    wobblyEnableSnapping (d, NULL, 0, NULL, 0);
+		else
+		    wobblyDisableSnapping (d, NULL, 0, NULL, 0);
+	    }
+	    else if (xkbEvent->xkb_type == XkbBellNotify)
 	    {
 		XkbBellNotifyEvent *xkbBellEvent = (XkbBellNotifyEvent *)
 		    xkbEvent;
@@ -2694,12 +2721,10 @@ wobblyWindowGrabNotify (CompWindow   *w,
 
 	    if (mask & CompWindowGrabMoveMask)
 	    {
-		CompBinding *bind;
-
-		bind = &ws->opt[WOBBLY_SCREEN_OPTION_SNAP].value.bind;
+		WOBBLY_DISPLAY (w->screen->display);
 
 		modelDisableSnapping (w, ww->model);
-		if ((state & bind->u.key.modifiers) == bind->u.key.modifiers)
+		if (wd->snapping)
 		    modelUpdateSnapping (w, ww->model);
 	    }
 
@@ -2795,6 +2820,64 @@ wobblyPaintScreen (CompScreen		   *s,
     return status;
 }
 
+static CompOption *
+wobblyGetDisplayOptions (CompDisplay *display,
+			 int	     *count)
+{
+    WOBBLY_DISPLAY (display);
+
+    *count = NUM_OPTIONS (wd);
+    return wd->opt;
+}
+
+static Bool
+wobblySetDisplayOption (CompDisplay     *display,
+			char	        *name,
+			CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    WOBBLY_DISPLAY (display);
+
+    o = compFindOption (wd->opt, NUM_OPTIONS (wd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case WOBBLY_DISPLAY_OPTION_SNAP:
+	/* ignore the key */
+	value->action.key.keycode = 0;
+
+	if (compSetActionOption (o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+wobblyDisplayInitOptions (WobblyDisplay *wd)
+{
+    CompOption *o;
+
+    o = &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP];
+    o->name			  = "snap";
+    o->shortDesc		  = N_("Snap windows");
+    o->longDesc			  = N_("Toggle window snapping");
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = wobblyEnableSnapping;
+    o->value.action.terminate	  = wobblyDisableSnapping;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = 0;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = WOBBLY_SNAP_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   = 0;
+}
+
 static Bool
 wobblyInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
@@ -2813,6 +2896,10 @@ wobblyInitDisplay (CompPlugin  *p,
     }
 
     WRAP (wd, d, handleEvent, wobblyHandleEvent);
+
+    wd->snapping = FALSE;
+
+    wobblyDisplayInitOptions (wd);
 
     d->privates[displayPrivateIndex].ptr = wd;
 
@@ -2984,8 +3071,8 @@ CompPluginVTable wobblyVTable = {
     wobblyFiniScreen,
     wobblyInitWindow,
     wobblyFiniWindow,
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
+    wobblyGetDisplayOptions,
+    wobblySetDisplayOption,
     wobblyGetScreenOptions,
     wobblySetScreenOption,
     wobblyDeps,
