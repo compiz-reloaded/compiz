@@ -34,15 +34,15 @@
 #define FADE_SPEED_PRECISION  0.1f
 
 static char *winType[] = {
-    "Dock",
-    "Toolbar",
-    "Menu",
-    "Utility",
-    "Splash",
-    "Normal",
-    "Dialog",
-    "ModalDialog",
-    "Unknown"
+    N_("Dock"),
+    N_("Toolbar"),
+    N_("Menu"),
+    N_("Utility"),
+    N_("Splash"),
+    N_("Normal"),
+    N_("Dialog"),
+    N_("ModalDialog"),
+    N_("Unknown")
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
@@ -174,8 +174,8 @@ fadeScreenInitOptions (FadeScreen *fs)
 
     o = &fs->opt[FADE_SCREEN_OPTION_FADE_SPEED];
     o->name		= "fade_speed";
-    o->shortDesc	= "Fade Speed";
-    o->longDesc		= "Window fade speed";
+    o->shortDesc	= N_("Fade Speed");
+    o->longDesc		= N_("Window fade speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= FADE_SPEED_DEFAULT;
     o->rest.f.min	= FADE_SPEED_MIN;
@@ -184,8 +184,8 @@ fadeScreenInitOptions (FadeScreen *fs)
 
     o = &fs->opt[FADE_SCREEN_OPTION_WINDOW_TYPE];
     o->name	         = "window_types";
-    o->shortDesc         = "Window Types";
-    o->longDesc	         = "Window types that should be fading";
+    o->shortDesc         = N_("Window Types");
+    o->longDesc	         = N_("Window types that should be fading");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_WIN_TYPE;
@@ -199,15 +199,15 @@ fadeScreenInitOptions (FadeScreen *fs)
 
     o = &fs->opt[FADE_SCREEN_OPTION_VISUAL_BELL];
     o->name	  = "visual_bell";
-    o->shortDesc  = "Visual Bell";
-    o->longDesc	  = "Fade effect on system beep";
+    o->shortDesc  = N_("Visual Bell");
+    o->longDesc	  = N_("Fade effect on system beep");
     o->type	  = CompOptionTypeBool;
     o->value.b    = FADE_VISUAL_BELL_DEFAULT;
 
     o = &fs->opt[FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL];
     o->name	  = "fullscreen_visual_bell";
-    o->shortDesc  = "Fullscreen Visual Bell";
-    o->longDesc	  = "Fullscreen fade effect on system beep";
+    o->shortDesc  = N_("Fullscreen Visual Bell");
+    o->longDesc	  = N_("Fullscreen fade effect on system beep");
     o->type	  = CompOptionTypeBool;
     o->value.b    = FADE_FULLSCREEN_VISUAL_BELL_DEFAULT;
 }
@@ -808,8 +808,8 @@ CompPluginDep fadeDeps[] = {
 
 static CompPluginVTable fadeVTable = {
     "fade",
-    "Fading Windows",
-    "Fade in windows when mapped and fade out windows when unmapped",
+    N_("Fading Windows"),
+    N_("Fade in windows when mapped and fade out windows when unmapped"),
     fadeInit,
     fadeFini,
     fadeInitDisplay,

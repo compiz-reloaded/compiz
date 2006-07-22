@@ -78,12 +78,12 @@
 #define SWITCH_MINIMIZED_DEFAULT TRUE
 
 static char *winType[] = {
-    "Toolbar",
-    "Utility",
-    "Dialog",
-    "ModalDialog",
-    "Fullscreen",
-    "Normal",
+    N_("Toolbar"),
+    N_("Utility"),
+    N_("Dialog"),
+    N_("ModalDialog"),
+    N_("Fullscreen"),
+    N_("Normal"),
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
@@ -375,8 +375,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE];
     o->name			  = "initiate";
-    o->shortDesc		  = "Initiate Window Switcher";
-    o->longDesc			  = "Show switcher";
+    o->shortDesc		  = N_("Initiate Window Switcher");
+    o->longDesc			  = N_("Show switcher");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_INITIATE_MODIFIERS_DEFAULT;
@@ -388,8 +388,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL];
     o->name			  = "initiate_all";
-    o->shortDesc		  = "Initiate All Windows";
-    o->longDesc			  = "Modifier to show switcher for all windows";
+    o->shortDesc		  = N_("Initiate All Windows");
+    o->longDesc			  = N_("Modifier to show switcher for all windows");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT;
@@ -402,8 +402,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW];
     o->name			  = "prev_window";
-    o->shortDesc		  = "Prev Window";
-    o->longDesc			  = "Modifier key to select previous window";
+    o->shortDesc		  = N_("Prev Window");
+    o->longDesc			  = N_("Modifier key to select previous window");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT;
@@ -416,8 +416,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
     o->name		= "speed";
-    o->shortDesc	= "Speed";
-    o->longDesc		= "Switcher speed";
+    o->shortDesc	= N_("Speed");
+    o->longDesc		= N_("Switcher speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= SWITCH_SPEED_DEFAULT;
     o->rest.f.min	= SWITCH_SPEED_MIN;
@@ -426,8 +426,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
-    o->shortDesc	= "Timestep";
-    o->longDesc		= "Switcher timestep";
+    o->shortDesc	= N_("Timestep");
+    o->longDesc		= N_("Switcher timestep");
     o->type		= CompOptionTypeFloat;
     o->value.f		= SWITCH_TIMESTEP_DEFAULT;
     o->rest.f.min	= SWITCH_TIMESTEP_MIN;
@@ -436,8 +436,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_TYPE];
     o->name	         = "window_types";
-    o->shortDesc         = "Window Types";
-    o->longDesc	         = "Window types that should shown in switcher";
+    o->shortDesc         = N_("Window Types");
+    o->longDesc	         = N_("Window types that should shown in switcher");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_WIN_TYPE;
@@ -451,15 +451,15 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_MIPMAP];
     o->name	  = "mipmap";
-    o->shortDesc  = "Mipmap";
-    o->longDesc	  = "Generate mipmaps when possible for higher quality scaling";
+    o->shortDesc  = N_("Mipmap");
+    o->longDesc	  = N_("Generate mipmaps when possible for higher quality scaling");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_MIPMAP_DEFAULT;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_SATURATION];
     o->name	  = "saturation";
-    o->shortDesc  = "Saturation";
-    o->longDesc	  = "Amount of saturation in percent";
+    o->shortDesc  = N_("Saturation");
+    o->longDesc	  = N_("Amount of saturation in percent");
     o->type	  = CompOptionTypeInt;
     o->value.i    = SWITCH_SATURATION_DEFAULT;
     o->rest.i.min = SWITCH_SATURATION_MIN;
@@ -467,8 +467,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS];
     o->name	  = "brightness";
-    o->shortDesc  = "Brightness";
-    o->longDesc	  = "Amount of brightness in percent";
+    o->shortDesc  = N_("Brightness");
+    o->longDesc	  = N_("Amount of brightness in percent");
     o->type	  = CompOptionTypeInt;
     o->value.i    = SWITCH_BRIGHTNESS_DEFAULT;
     o->rest.i.min = SWITCH_BRIGHTNESS_MIN;
@@ -476,8 +476,8 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_OPACITY];
     o->name	  = "opacity";
-    o->shortDesc  = "Opacity";
-    o->longDesc	  = "Amount of opacity in percent";
+    o->shortDesc  = N_("Opacity");
+    o->longDesc	  = N_("Amount of opacity in percent");
     o->type	  = CompOptionTypeInt;
     o->value.i    = SWITCH_OPACITY_DEFAULT;
     o->rest.i.min = SWITCH_OPACITY_MIN;
@@ -485,16 +485,16 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT];
     o->name	  = "bring_to_front";
-    o->shortDesc  = "Bring To Front";
-    o->longDesc	  = "Bring selected window to front";
+    o->shortDesc  = N_("Bring To Front");
+    o->longDesc	  = N_("Bring selected window to front");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_BRINGTOFRONT_DEFAULT;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_ZOOM];
     o->name		= "zoom";
-    o->shortDesc	= "Zoom";
-    o->longDesc		= "Distance desktop should be zoom out while "
-	"switching windows";
+    o->shortDesc	= N_("Zoom");
+    o->longDesc		= N_("Distance desktop should be zoom out while "
+	"switching windows");
     o->type		= CompOptionTypeFloat;
     o->value.f		= SWITCH_ZOOM_DEFAULT;
     o->rest.f.min	= SWITCH_ZOOM_MIN;
@@ -503,15 +503,15 @@ switchScreenInitOptions (SwitchScreen *ss,
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_ICON];
     o->name	  = "icon";
-    o->shortDesc  = "Icon";
-    o->longDesc	  = "Show icon next to thumbnail";
+    o->shortDesc  = N_("Icon");
+    o->longDesc	  = N_("Show icon next to thumbnail");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_ICON_DEFAULT;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_MINIMIZED];
     o->name	  = "minimized";
-    o->shortDesc  = "Minimized";
-    o->longDesc	  = "Show minimized windows";
+    o->shortDesc  = N_("Minimized");
+    o->longDesc	  = N_("Show minimized windows");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_MINIMIZED_DEFAULT;
 }
@@ -1905,8 +1905,8 @@ switchFini (CompPlugin *p)
 
 CompPluginVTable switchVTable = {
     "switcher",
-    "Application Switcher",
-    "Application Switcher",
+    N_("Application Switcher"),
+    N_("Application Switcher"),
     switchInit,
     switchFini,
     switchInitDisplay,

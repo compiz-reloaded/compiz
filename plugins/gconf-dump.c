@@ -43,7 +43,9 @@
 
 #include <config.h>
 
+#include <ctype.h>
 #include <errno.h>
+#include <locale.h>
 #include <math.h>
 #include <signal.h>
 #include <stdarg.h>
@@ -53,6 +55,8 @@
 #include <unistd.h>
 
 #include <compiz.h>
+#undef _
+#undef N_
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
@@ -71,6 +75,11 @@ typedef struct _GConfDumpDisplay {
 
 #define GCONF_DUMP_DISPLAY(d)			      \
     GConfDumpDisplay *gd = GET_GCONF_DUMP_DISPLAY (d)
+
+/* Decimal point character */
+#define DECIMAL_POINT _(".")
+
+static char **locales;
 
 static gchar *actionSufix[] = {
     "key",
@@ -220,25 +229,100 @@ gconfActionValueToString (CompDisplay	  *d,
     return escaped;
 }
 
+#define COMP_OPTION_IS_NUMERIC(o) \
+	(isdigit ((unsigned char)o->name[strlen (o->name) - 1]))
+
 static char *
-gconfDescForOption (CompOption *o)
+translate_numeric (const char *str)
 {
-    if (o->type == CompOptionTypeInt)
+    char *p, *q, *denum, *out;
+
+    p = strpbrk (str, "0123456789");
+    if (!p)
+	return g_strdup (str);
+    q = p + strspn (p, "0123456789");
+
+    denum = g_strdup_printf ("%.*s%%d%s", (int)(p - str), str, q);
+    if (strcmp (denum, _(denum)) != 0)
+	out = g_strdup_printf (_(denum), strtol (p, NULL, 10));
+    else
+	out = g_strdup (str);
+    g_free (denum);
+
+    return out;
+}
+
+static char *
+getShortDesc (CompOption *o)
+{
+    if (COMP_OPTION_IS_NUMERIC (o))
+	return translate_numeric (o->shortDesc);
+    else
+	return g_strdup (_(o->shortDesc));
+}
+
+static char *
+getLongDesc (CompOption *o, const char *option_name)
+{
+    char *base, *out;
+
+    if (COMP_OPTION_IS_NUMERIC (o))
+	base = translate_numeric (o->longDesc);
+    else
+	base = g_strdup (_(o->longDesc));
+
+    if (o->type == CompOptionTypeAction &&
+	g_str_has_suffix (option_name, "_edge"))
     {
-	return g_strdup_printf ("%s (%d-%d)", o->longDesc,
-				o->rest.i.min, o->rest.i.max);
+	GString *str = g_string_new (base);
+	const char *edge;
+	int i;
+
+	g_string_append (str, " (");
+	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	{
+	    edge = gconfEdgeToString (i);
+
+	    if (i > 0)
+		g_string_append (str, ", ");
+	    if (!strcmp (edge, _(edge)))
+	    {
+		g_string_append (str, edge);
+	    }
+	    else
+	    {
+		g_string_append_printf (str, "%s [%s]",
+					edge, _(edge));
+	    }
+	}
+	g_string_append (str, ")");
+
+	out = g_string_free (str, FALSE);
+    }
+    else if (o->type == CompOptionTypeInt)
+    {
+	out = g_strdup_printf ("%s (%d-%d)", base,
+			       o->rest.i.min, o->rest.i.max);
     }
     else if (o->type == CompOptionTypeFloat)
     {
-	int prec = -(logf (o->rest.f.precision) / logf (10));
-	return g_strdup_printf ("%s (%.*f-%.*f)", o->longDesc,
-				prec, o->rest.f.min, prec, o->rest.f.max);
+	int digits = -(logf (o->rest.f.precision) / logf (10));
+	int invprec = 1.0 / o->rest.f.precision;
+
+	/* Because we're sort of cheating on the locales, %.*f won't
+	 * work here. We need to localize the format ourselves.
+	 */
+	out = g_strdup_printf ("%s (%d%s%0*d-%d%s%0*d)", base,
+			       (int)o->rest.f.min, DECIMAL_POINT,
+			       digits, (int)(o->rest.f.min * invprec) % invprec,
+			       (int)o->rest.f.max, DECIMAL_POINT,
+			       digits, (int)(o->rest.f.max * invprec) % invprec);
     }
     else if (o->type == CompOptionTypeString ||
 	     (o->type == CompOptionTypeList &&
 	      o->value.list.type == CompOptionTypeString))
     {
-	GString *str = g_string_new (o->longDesc);
+	GString *str = g_string_new (base);
 	int i;
 
 	if (o->rest.s.nString)
@@ -248,15 +332,27 @@ gconfDescForOption (CompOption *o)
 	    {
 		if (i > 0)
 		    g_string_append (str, ", ");
-		g_string_append (str, o->rest.s.string[i]);
+		if (!strcmp (o->rest.s.string[i], _(o->rest.s.string[i])))
+		{
+		    g_string_append (str, o->rest.s.string[i]);
+		}
+		else
+		{
+		    g_string_append_printf (str, "%s [%s]",
+					    o->rest.s.string[i],
+					    _(o->rest.s.string[i]));
+		}
 	    }
 	    g_string_append (str, ")");
 	}
 
-	return g_string_free (str, FALSE);
+	out = g_string_free (str, FALSE);
     }
     else
-	return g_strdup (o->longDesc);
+	return base;
+
+    g_free (base);
+    return out;
 }
 
 static void
@@ -266,7 +362,9 @@ gconfDumpToSchema (CompDisplay *d,
 		   char	       *plugin,
 		   char	       *screen)
 {
-    char *value, *desc;
+    char *value;
+    char *cshort, *clong, *lshort, *llong;
+    int l;
 
     gconfPrintf (2, "<schema>\n");
     if (plugin && screen)
@@ -356,14 +454,42 @@ gconfDumpToSchema (CompDisplay *d,
 
     gconfPrintf (3, "<default>%s</default>\n", value);
     g_free (value);
+
+    setlocale (LC_ALL, "C");
+    cshort = getShortDesc (o);
+    clong = getLongDesc (o, name);
     gconfPrintf (3, "<locale name=\"C\">\n");
-    gconfPrintf (4, "<short>%s</short>\n", o->shortDesc);
-    gconfPrintf (4, "<long>\n");
-    desc = gconfDescForOption (o);
-    gconfPrintf (5, "%s\n", desc);
-    g_free (desc);
-    gconfPrintf (4, "</long>\n");
+    gconfPrintf (4, "<short>%s</short>\n", cshort);
+    gconfPrintf (4, "<long>%s</long>\n", clong);
     gconfPrintf (3, "</locale>\n");
+
+    for (l = 0; locales[l]; l++)
+    {
+	/* setlocale (LC_ALL, "fr") won't work (it wants "fr_FR"),
+	 * but this will.
+	 */
+	setenv ("LANGUAGE", locales[l], TRUE);
+	setlocale (LC_ALL, "");
+
+	lshort = getShortDesc (o);
+	llong = getLongDesc (o, name);
+
+	if (!strcmp (cshort, lshort) && !strcmp (clong, llong))
+	    continue;
+
+	gconfPrintf (3, "<locale name=\"%s\">\n", locales[l]);
+	gconfPrintf (4, "<short>%s</short>\n", lshort);
+	gconfPrintf (4, "<long>%s</long>\n", llong);
+	gconfPrintf (3, "</locale>\n");
+
+	g_free (lshort);
+	g_free (llong);
+    }
+
+    g_free (cshort);
+    g_free (clong);
+    setlocale (LC_ALL, "C");
+
     gconfPrintf (2, "</schema>\n\n");
 }
 
@@ -688,6 +814,13 @@ gconfDumpInit (CompPlugin *p)
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
 	return FALSE;
+
+    locales = g_strsplit (ALL_LINGUAS, " ", 0);
+    setenv ("LANG", "en_US.UTF-8", TRUE);
+    setlocale (LC_ALL, "");
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
 
     return TRUE;
 }

@@ -231,8 +231,8 @@ decorDisplayInitOptions (DecorDisplay *dd)
 
     o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_RADIUS];
     o->name		= "shadow_radius";
-    o->shortDesc	= "Shadow Radius";
-    o->longDesc		= "Drop shadow radius";
+    o->shortDesc	= N_("Shadow Radius");
+    o->longDesc		= N_("Drop shadow radius");
     o->type		= CompOptionTypeFloat;
     o->value.f		= DECOR_SHADOW_RADIUS_DEFAULT;
     o->rest.f.min	= DECOR_SHADOW_RADIUS_MIN;
@@ -241,8 +241,8 @@ decorDisplayInitOptions (DecorDisplay *dd)
 
     o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OPACITY];
     o->name		= "shadow_opacity";
-    o->shortDesc	= "Shadow Opacity";
-    o->longDesc		= "Drop shadow opacity";
+    o->shortDesc	= N_("Shadow Opacity");
+    o->longDesc		= N_("Drop shadow opacity");
     o->type		= CompOptionTypeFloat;
     o->value.f		= DECOR_SHADOW_OPACITY_DEFAULT;
     o->rest.f.min	= DECOR_SHADOW_OPACITY_MIN;
@@ -251,8 +251,8 @@ decorDisplayInitOptions (DecorDisplay *dd)
 
     o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X];
     o->name		= "shadow_offset_x";
-    o->shortDesc	= "Shadow Offset X";
-    o->longDesc		= "Drop shadow X offset";
+    o->shortDesc	= N_("Shadow Offset X");
+    o->longDesc		= N_("Drop shadow X offset");
     o->type		= CompOptionTypeInt;
     o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
     o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
@@ -260,8 +260,8 @@ decorDisplayInitOptions (DecorDisplay *dd)
 
     o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y];
     o->name		= "shadow_offset_y";
-    o->shortDesc	= "Shadow Offset Y";
-    o->longDesc		= "Drop shadow Y offset";
+    o->shortDesc	= N_("Shadow Offset Y");
+    o->longDesc		= N_("Drop shadow Y offset");
     o->type		= CompOptionTypeInt;
     o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
     o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
@@ -1350,8 +1350,8 @@ CompPluginDep decorDeps[] = {
 
 static CompPluginVTable decorVTable = {
     "decoration",
-    "Window Decoration",
-    "Window decorations",
+    N_("Window Decoration"),
+    N_("Window decorations"),
     decorInit,
     decorFini,
     decorInitDisplay,

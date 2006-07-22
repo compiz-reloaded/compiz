@@ -16,8 +16,8 @@ AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 
 ALL_LINGUAS="cs de es fi fr hu it ja pl pt_BR zh_CN zh_TW"
+AC_SUBST(ALL_LINGUAS)
 AM_GLIB_GNU_GETTEXT
-IT_PROG_INTLTOOL
 GETTEXT_PACKAGE=compiz
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AC_SUBST(GETTEXT_PACKAGE)
@@ -237,7 +237,7 @@ Makefile
 src/Makefile
 include/Makefile
 plugins/Makefile
-plugins/compiz.schemas.in
+plugins/compiz.schemas
 images/Makefile
 gnome/Makefile
 gnome/window-decorator/Makefile

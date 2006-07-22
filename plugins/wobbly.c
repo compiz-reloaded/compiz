@@ -133,8 +133,8 @@ typedef enum {
 } WobblyEffect;
 
 static char *effectName[] = {
-    "None",
-    "Shiver"
+    N_("None"),
+    N_("Shiver")
 };
 
 static WobblyEffect effectType[] = {
@@ -148,19 +148,19 @@ static WobblyEffect effectType[] = {
 #define WOBBLY_FOCUS_DEFAULT (effectName[0])
 
 static char *mapWinType[] = {
-    "Splash",
-    "Unknown"
+    N_("Splash"),
+    N_("Unknown")
 };
 #define N_MAP_WIN_TYPE (sizeof (mapWinType) / sizeof (mapWinType[0]))
 #define N_FOCUS_WIN_TYPE (0)
 
 static char *moveWinType[] = {
-    "Toolbar",
-    "Menu",
-    "Utility",
-    "Dialog",
-    "ModalDialog",
-    "Normal"
+    N_("Toolbar"),
+    N_("Menu"),
+    N_("Utility"),
+    N_("Dialog"),
+    N_("ModalDialog"),
+    N_("Normal")
 };
 #define N_MOVE_WIN_TYPE (sizeof (moveWinType) / sizeof (moveWinType[0]))
 #define N_GRAB_WIN_TYPE (0)
@@ -384,8 +384,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_FRICTION];
     o->name		= "friction";
-    o->shortDesc	= "Friction";
-    o->longDesc		= "Spring Friction";
+    o->shortDesc	= N_("Friction");
+    o->longDesc		= N_("Spring Friction");
     o->type		= CompOptionTypeFloat;
     o->value.f		= WOBBLY_FRICTION_DEFAULT;
     o->rest.f.min	= WOBBLY_FRICTION_MIN;
@@ -394,8 +394,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_SPRING_K];
     o->name		= "spring_k";
-    o->shortDesc	= "Spring K";
-    o->longDesc		= "Spring Konstant";
+    o->shortDesc	= N_("Spring K");
+    o->longDesc		= N_("Spring Konstant");
     o->type		= CompOptionTypeFloat;
     o->value.f		= WOBBLY_SPRING_K_DEFAULT;
     o->rest.f.min	= WOBBLY_SPRING_K_MIN;
@@ -404,8 +404,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_GRID_RESOLUTION];
     o->name	  = "grid_resolution";
-    o->shortDesc  = "Grid Resolution";
-    o->longDesc	  = "Vertex Grid Resolution";
+    o->shortDesc  = N_("Grid Resolution");
+    o->longDesc	  = N_("Vertex Grid Resolution");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = WOBBLY_GRID_RESOLUTION_DEFAULT;
     o->rest.i.min = WOBBLY_GRID_RESOLUTION_MIN;
@@ -413,8 +413,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MIN_GRID_SIZE];
     o->name	  = "min_grid_size";
-    o->shortDesc  = "Minimum Grid Size";
-    o->longDesc	  = "Minimum Vertex Grid Size";
+    o->shortDesc  = N_("Minimum Grid Size");
+    o->longDesc	  = N_("Minimum Vertex Grid Size");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = WOBBLY_MIN_GRID_SIZE_DEFAULT;
     o->rest.i.min = WOBBLY_MIN_GRID_SIZE_MIN;
@@ -422,8 +422,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAP_EFFECT];
     o->name	      = "map_effect";
-    o->shortDesc      = "Map Effect";
-    o->longDesc	      = "Map Window Effect";
+    o->shortDesc      = N_("Map Effect");
+    o->longDesc	      = N_("Map Window Effect");
     o->type	      = CompOptionTypeString;
     o->value.s	      = strdup (WOBBLY_MAP_DEFAULT);
     o->rest.s.string  = effectName;
@@ -431,8 +431,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_EFFECT];
     o->name	      = "focus_effect";
-    o->shortDesc      = "Focus Effect";
-    o->longDesc	      = "Focus Window Effect";
+    o->shortDesc      = N_("Focus Effect");
+    o->longDesc	      = N_("Focus Window Effect");
     o->type	      = CompOptionTypeString;
     o->value.s	      = strdup (WOBBLY_FOCUS_DEFAULT);
     o->rest.s.string  = effectName;
@@ -440,8 +440,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAP_WINDOW_TYPE];
     o->name	         = "map_window_types";
-    o->shortDesc         = "Map Window Types";
-    o->longDesc	         = "Window types that should wobble when mapped";
+    o->shortDesc         = N_("Map Window Types");
+    o->longDesc	         = N_("Window types that should wobble when mapped");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_MAP_WIN_TYPE;
@@ -455,8 +455,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_TYPE];
     o->name	         = "focus_window_types";
-    o->shortDesc         = "Focus Window Types";
-    o->longDesc	         = "Window types that should wobble when focused";
+    o->shortDesc         = N_("Focus Window Types");
+    o->longDesc	         = N_("Window types that should wobble when focused");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_FOCUS_WIN_TYPE;
@@ -468,8 +468,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE];
     o->name	         = "move_window_types";
-    o->shortDesc         = "Move Window Types";
-    o->longDesc	         = "Window types that should wobble when moved";
+    o->shortDesc         = N_("Move Window Types");
+    o->longDesc	         = N_("Window types that should wobble when moved");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_MOVE_WIN_TYPE;
@@ -483,8 +483,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE];
     o->name	         = "grab_window_types";
-    o->shortDesc         = "Grab Window Types";
-    o->longDesc	         = "Window types that should wobble when grabbed";
+    o->shortDesc         = N_("Grab Window Types");
+    o->longDesc	         = N_("Window types that should wobble when grabbed");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_GRAB_WIN_TYPE;
@@ -496,8 +496,8 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_SNAP];
     o->name			  = "snap";
-    o->shortDesc		  = "Snap windows";
-    o->longDesc			  = "Toggle window snapping";
+    o->shortDesc		  = N_("Snap windows");
+    o->longDesc			  = N_("Toggle window snapping");
     o->type			  = CompOptionTypeBinding;
     o->value.bind.type		  = CompBindingTypeKey;
     o->value.bind.u.key.modifiers = WOBBLY_SNAP_MODIFIERS_DEFAULT;
@@ -505,15 +505,15 @@ wobblyScreenInitOptions (WobblyScreen *ws,
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT];
     o->name	  = "maximize_effect";
-    o->shortDesc  = "Maximize Effect";
-    o->longDesc	  = "Wobble effect when maximizing and unmaximizing windows";
+    o->shortDesc  = N_("Maximize Effect");
+    o->longDesc	  = N_("Wobble effect when maximizing and unmaximizing windows");
     o->type	  = CompOptionTypeBool;
     o->value.b    = WOBBLY_MAXIMIZE_EFFECT_DEFAULT;
 
     o = &ws->opt[WOBBLY_SCREEN_OPTION_VISUAL_BELL];
     o->name	  = "visual_bell";
-    o->shortDesc  = "Visual Bell";
-    o->longDesc	  = "Wobble effect on system beep";
+    o->shortDesc  = N_("Visual Bell");
+    o->longDesc	  = N_("Wobble effect on system beep");
     o->type	  = CompOptionTypeBool;
     o->value.b    = WOBBLY_VISUAL_BELL_DEFAULT;
 }
@@ -2974,8 +2974,8 @@ CompPluginDep wobblyDeps[] = {
 
 CompPluginVTable wobblyVTable = {
     "wobbly",
-    "Wobbly Windows",
-    "Use spring model for wobbly window effect",
+    N_("Wobbly Windows"),
+    N_("Use spring model for wobbly window effect"),
     wobblyInit,
     wobblyFini,
     wobblyInitDisplay,

@@ -1572,8 +1572,8 @@ waterDisplayInitOptions (WaterDisplay *wd,
 
     o = &wd->opt[WATER_DISPLAY_OPTION_INITIATE];
     o->name			     = "initiate";
-    o->shortDesc		     = "Initiate";
-    o->longDesc			     = "Enable pointer water effects";
+    o->shortDesc		     = N_("Initiate");
+    o->longDesc			     = N_("Enable pointer water effects");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = waterInitiate;
     o->value.action.terminate	     = waterTerminate;
@@ -1586,8 +1586,8 @@ waterDisplayInitOptions (WaterDisplay *wd,
 
     o = &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_RAIN];
     o->name			     = "toggle_rain";
-    o->shortDesc		     = "Toggle rain";
-    o->longDesc			     = "Toggle rain effect";
+    o->shortDesc		     = N_("Toggle rain");
+    o->longDesc			     = N_("Toggle rain effect");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = waterToggleRain;
     o->value.action.terminate	     = 0;
@@ -1602,8 +1602,8 @@ waterDisplayInitOptions (WaterDisplay *wd,
 
     o = &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_WIPER];
     o->name			     = "toggle_wiper";
-    o->shortDesc		     = "Toggle wiper";
-    o->longDesc			     = "Toggle wiper effect";
+    o->shortDesc		     = N_("Toggle wiper");
+    o->longDesc			     = N_("Toggle wiper effect");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = waterToggleWiper;
     o->value.action.terminate	     = 0;
@@ -1618,8 +1618,8 @@ waterDisplayInitOptions (WaterDisplay *wd,
 
     o = &wd->opt[WATER_DISPLAY_OPTION_OFFSET_SCALE];
     o->name		= "offset_scale";
-    o->shortDesc	= "Offset Scale";
-    o->longDesc		= "Water offset scale";
+    o->shortDesc	= N_("Offset Scale");
+    o->longDesc		= N_("Water offset scale");
     o->type		= CompOptionTypeFloat;
     o->value.f		= WATER_OFFSET_SCALE_DEFAULT;
     o->rest.f.min	= WATER_OFFSET_SCALE_MIN;
@@ -1628,8 +1628,8 @@ waterDisplayInitOptions (WaterDisplay *wd,
 
     o = &wd->opt[WATER_DISPLAY_OPTION_RAIN_DELAY];
     o->name	  = "rain_delay";
-    o->shortDesc  = "Rain Delay";
-    o->longDesc	  = "Delay (in ms) between each rain-drop";
+    o->shortDesc  = N_("Rain Delay");
+    o->longDesc	  = N_("Delay (in ms) between each rain-drop");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = WATER_RAIN_DELAY_DEFAULT;
     o->rest.i.min = WATER_RAIN_DELAY_MIN;
@@ -1637,8 +1637,8 @@ waterDisplayInitOptions (WaterDisplay *wd,
 
     o = &wd->opt[WATER_DISPLAY_OPTION_TITLE_WAVE];
     o->name		      = "title_wave";
-    o->shortDesc	      = "Title wave";
-    o->longDesc		      = "Wave effect from window title";
+    o->shortDesc	      = N_("Title wave");
+    o->longDesc		      = N_("Wave effect from window title");
     o->type		      = CompOptionTypeAction;
     o->value.action.initiate  = waterTitleWave;
     o->value.action.terminate = 0;
@@ -1779,8 +1779,8 @@ waterFini (CompPlugin *p)
 
 static CompPluginVTable waterVTable = {
     "water",
-    "Water Effect",
-    "Adds water effects to different desktop actions",
+    N_("Water Effect"),
+    N_("Adds water effects to different desktop actions"),
     waterInit,
     waterFini,
     waterInitDisplay,

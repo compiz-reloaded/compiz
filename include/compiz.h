@@ -57,6 +57,10 @@
 #  define BITMAP_BIT_ORDER LSBFirst
 #endif
 
+/* For now, we never actually translate strings inside compiz */
+#define  _(x) x
+#define N_(x) x
+
 typedef struct _CompPlugin  CompPlugin;
 typedef struct _CompDisplay CompDisplay;
 typedef struct _CompScreen  CompScreen;

@@ -23,6 +23,8 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#define _GNU_SOURCE /* for asprintf */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -280,15 +282,15 @@ rotateScreenInitOptions (RotateScreen *rs)
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_POINTER_INVERT_Y];
     o->name      = "invert_y";
-    o->shortDesc = "Pointer Invert Y";
-    o->longDesc  = "Invert Y axis for pointer movement";
+    o->shortDesc = N_("Pointer Invert Y");
+    o->longDesc  = N_("Invert Y axis for pointer movement");
     o->type      = CompOptionTypeBool;
     o->value.b   = ROTATE_POINTER_INVERT_Y_DEFAULT;
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY];
     o->name		= "sensitivity";
-    o->shortDesc	= "Pointer Sensitivity";
-    o->longDesc		= "Sensitivity of pointer movement";
+    o->shortDesc	= N_("Pointer Sensitivity");
+    o->longDesc		= N_("Sensitivity of pointer movement");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ROTATE_POINTER_SENSITIVITY_DEFAULT;
     o->rest.f.min	= ROTATE_POINTER_SENSITIVITY_MIN;
@@ -297,8 +299,8 @@ rotateScreenInitOptions (RotateScreen *rs)
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_ACCELERATION];
     o->name		= "acceleration";
-    o->shortDesc	= "Acceleration";
-    o->longDesc		= "Rotation Acceleration";
+    o->shortDesc	= N_("Acceleration");
+    o->longDesc		= N_("Rotation Acceleration");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ROTATE_ACCELERATION_DEFAULT;
     o->rest.f.min	= ROTATE_ACCELERATION_MIN;
@@ -307,15 +309,15 @@ rotateScreenInitOptions (RotateScreen *rs)
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_SNAP_TOP];
     o->name      = "snap_top";
-    o->shortDesc = "Snap To Top Face";
-    o->longDesc  = "Snap Cube Rotation to Top Face";
+    o->shortDesc = N_("Snap To Top Face");
+    o->longDesc  = N_("Snap Cube Rotation to Top Face");
     o->type      = CompOptionTypeBool;
     o->value.b   = ROTATE_SNAP_TOP_DEFAULT;
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_SPEED];
     o->name		= "speed";
-    o->shortDesc	= "Speed";
-    o->longDesc		= "Rotation Speed";
+    o->shortDesc	= N_("Speed");
+    o->longDesc		= N_("Rotation Speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ROTATE_SPEED_DEFAULT;
     o->rest.f.min	= ROTATE_SPEED_MIN;
@@ -324,8 +326,8 @@ rotateScreenInitOptions (RotateScreen *rs)
 
     o = &rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
-    o->shortDesc	= "Timestep";
-    o->longDesc		= "Rotation Timestep";
+    o->shortDesc	= N_("Timestep");
+    o->longDesc		= N_("Rotation Timestep");
     o->type		= CompOptionTypeFloat;
     o->value.f		= ROTATE_TIMESTEP_DEFAULT;
     o->rest.f.min	= ROTATE_TIMESTEP_MIN;
@@ -1694,11 +1696,12 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 			  Display       *display)
 {
     CompOption *o;
+    char       *str;
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_INITIATE];
     o->name			     = "initiate";
-    o->shortDesc		     = "Initiate";
-    o->longDesc			     = "Start Rotation";
+    o->shortDesc		     = N_("Initiate");
+    o->longDesc			     = N_("Start Rotation");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = rotateInitiate;
     o->value.action.terminate	     = rotateTerminate;
@@ -1712,8 +1715,8 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_LEFT];
     o->name			  = "rotate_left";
-    o->shortDesc		  = "Rotate Left";
-    o->longDesc			  = "Rotate left";
+    o->shortDesc		  = N_("Rotate Left");
+    o->longDesc			  = N_("Rotate left");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateLeft;
     o->value.action.terminate	  = 0;
@@ -1731,8 +1734,8 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_RIGHT];
     o->name			  = "rotate_right";
-    o->shortDesc		  = "Rotate Right";
-    o->longDesc			  = "Rotate right";
+    o->shortDesc		  = N_("Rotate Right");
+    o->longDesc			  = N_("Rotate right");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateRight;
     o->value.action.terminate	  = 0;
@@ -1750,8 +1753,9 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_LEFT_WINDOW];
     o->name			  = "rotate_left_window";
-    o->shortDesc		  = "Rotate Left with Window";
-    o->longDesc			  = "Rotate left and bring active window along";
+    o->shortDesc		  = N_("Rotate Left with Window");
+    o->longDesc			  = N_("Rotate left and bring active window "
+				       "along");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateLeftWithWindow;
     o->value.action.terminate	  = 0;
@@ -1769,9 +1773,9 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_RIGHT_WINDOW];
     o->name			  = "rotate_right_window";
-    o->shortDesc		  = "Rotate Right with Window";
-    o->longDesc			  = "Rotate right and bring active window "
-	"along";
+    o->shortDesc		  = N_("Rotate Right with Window");
+    o->longDesc			  = N_("Rotate right and bring active window "
+				       "along");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateRightWithWindow;
     o->value.action.terminate	  = 0;
@@ -1787,11 +1791,19 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 	XKeysymToKeycode (display,
 			  XStringToKeysym (ROTATE_RIGHT_WINDOW_KEY_DEFAULT));
 
+#define ROTATE_TO_SHORT        N_("Rotate To Face %d")
+#define ROTATE_TO_LONG         N_("Rotate to face %d")
+#define ROTATE_TO_WINDOW_SHORT N_("Rotate To Face %d with Window")
+#define ROTATE_TO_WINDOW_LONG  N_("Rotate to face %d and bring active " \
+				  "window along")
+
 #define ROTATE_TO_OPTION(n)						 \
     o = &rd->opt[ROTATE_DISPLAY_OPTION_TO_ ## n];			 \
     o->name			  = "rotate_to_" #n;			 \
-    o->shortDesc		  = "Rotate To Face " #n;		 \
-    o->longDesc			  = "Rotate to face " #n;		 \
+    asprintf (&str, ROTATE_TO_SHORT, n);				 \
+    o->shortDesc		  = str;				 \
+    asprintf (&str, ROTATE_TO_LONG, n);					 \
+    o->longDesc			  = str;				 \
     o->type			  = CompOptionTypeAction;		 \
     o->value.action.initiate	  = rotateTo;				 \
     o->value.action.terminate	  = 0;					 \
@@ -1803,9 +1815,11 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 									 \
     o = &rd->opt[ROTATE_DISPLAY_OPTION_TO_ ## n ## _WINDOW];		 \
     o->name			  = "rotate_to_" #n "_window";		 \
-    o->shortDesc		  = "Rotate To Face " #n " with Window"; \
-    o->longDesc			  = "Rotate to face " #n " and bring "	 \
-	"active window along";						 \
+    asprintf (&str, ROTATE_TO_WINDOW_SHORT, n);				 \
+    o->shortDesc		  = str;				 \
+    asprintf (&str, ROTATE_TO_WINDOW_LONG, n);				 \
+    o->longDesc			  = str;				 \
+    o->type			  = CompOptionTypeAction;		 \
     o->value.action.initiate	  = rotateToWithWindow;			 \
     o->value.action.terminate	  = 0;					 \
     o->value.action.bell	  = FALSE;				 \
@@ -1829,8 +1843,8 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_TO];
     o->name			  = "rotate_to";
-    o->shortDesc		  = "Rotate To";
-    o->longDesc			  = "Rotate to viewport";
+    o->shortDesc		  = N_("Rotate To");
+    o->longDesc			  = N_("Rotate to viewport");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateTo;
     o->value.action.terminate	  = 0;
@@ -1841,8 +1855,8 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_WINDOW];
     o->name			  = "rotate_window";
-    o->shortDesc		  = "Rotate Window";
-    o->longDesc			  = "Rotate with window";
+    o->shortDesc		  = N_("Rotate Window");
+    o->longDesc			  = N_("Rotate with window");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateWithWindow;
     o->value.action.terminate	  = 0;
@@ -1853,8 +1867,9 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_FLIP_LEFT];
     o->name			  = "rotate_flip_left";
-    o->shortDesc		  = "Rotate Flip Left";
-    o->longDesc			  = "Flip to left viewport and warp pointer";
+    o->shortDesc		  = N_("Rotate Flip Left");
+    o->longDesc			  = N_("Flip to left viewport and warp "
+				       "pointer");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateEdgeFlipLeft;
     o->value.action.terminate	  = rotateFlipTerminate;
@@ -1868,8 +1883,9 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_FLIP_RIGHT];
     o->name			  = "rotate_flip_right";
-    o->shortDesc		  = "Rotate Flip Right";
-    o->longDesc			  = "Flip to right viewport and warp pointer";
+    o->shortDesc		  = N_("Rotate Flip Right");
+    o->longDesc			  = N_("Flip to right viewport and warp "
+				       "pointer");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = rotateEdgeFlipRight;
     o->value.action.terminate	  = rotateFlipTerminate;
@@ -1883,29 +1899,32 @@ rotateDisplayInitOptions (RotateDisplay *rd,
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_EDGEFLIP_POINTER];
     o->name      = "edge_flip_pointer";
-    o->shortDesc = "Edge Flip Pointer";
-    o->longDesc  = "Flip to next viewport when moving pointer to screen edge";
+    o->shortDesc = N_("Edge Flip Pointer");
+    o->longDesc  = N_("Flip to next viewport when moving pointer to screen "
+		      "edge");
     o->type      = CompOptionTypeBool;
     o->value.b   = ROTATE_EDGEFLIP_POINTER_DEFAULT;
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_EDGEFLIP_WINDOW];
     o->name      = "edge_flip_move";
-    o->shortDesc = "Edge Flip Move";
-    o->longDesc  = "Flip to next viewport when moving window to screen edge";
+    o->shortDesc = N_("Edge Flip Move");
+    o->longDesc  = N_("Flip to next viewport when moving window to screen "
+		      "edge");
     o->type      = CompOptionTypeBool;
     o->value.b   = ROTATE_EDGEFLIP_WINDOW_DEFAULT;
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_EDGEFLIP_DND];
     o->name      = "edge_flip_dnd";
-    o->shortDesc = "Edge Flip DnD";
-    o->longDesc  = "Flip to next viewport when dragging object to screen edge";
+    o->shortDesc = N_("Edge Flip DnD");
+    o->longDesc  = N_("Flip to next viewport when dragging object to screen "
+		      "edge");
     o->type      = CompOptionTypeBool;
     o->value.b   = ROTATE_EDGEFLIP_DND_DEFAULT;
 
     o = &rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME];
     o->name	  = "flip_time";
-    o->shortDesc  = "Flip Time";
-    o->longDesc	  = "Timeout before flipping viewport";
+    o->shortDesc  = N_("Flip Time");
+    o->longDesc	  = N_("Timeout before flipping viewport");
     o->type	  = CompOptionTypeInt;
     o->value.i	  = ROTATE_FLIPTIME_DEFAULT;
     o->rest.i.min = ROTATE_FLIPTIME_MIN;
@@ -2066,8 +2085,8 @@ CompPluginDep rotateDeps[] = {
 
 CompPluginVTable rotateVTable = {
     "rotate",
-    "Rotate Cube",
-    "Rotate desktop cube",
+    N_("Rotate Cube"),
+    N_("Rotate desktop cube"),
     rotateInit,
     rotateFini,
     rotateInitDisplay,

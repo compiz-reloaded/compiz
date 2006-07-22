@@ -7,1597 +7,1227 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-13 10:25+0000\n"
-"PO-Revision-Date: 2006-06-22 11:46\n"
+"POT-Creation-Date: 2006-07-20 17:49-0400\n"
+"PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plugins/compiz.schemas.in.in.h:1
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
+#: plugins/cube.c:848
+msgid "Cube Color"
+msgstr "Colore cubo"
+
+#: plugins/cube.c:849
+msgid "Color of top and bottom sides of the cube"
+msgstr "Colore dei lati superiore e inferiore del cubo"
+
+#: plugins/cube.c:858
+msgid "Inside Cube"
+msgstr "Nel cubo"
+
+#: plugins/cube.c:859
+msgid "Inside cube"
+msgstr "Nel cubo"
+
+#: plugins/cube.c:865
+msgid "Scale image"
+msgstr "Ridimensiona immagine"
+
+#: plugins/cube.c:866
+msgid "Scale images to cover top face of cube"
+msgstr "Ridimensiona immagini per coprire faccia superiore del cubo"
+
+#: plugins/cube.c:872
+msgid "Image files"
+msgstr "File immagine"
+
+#: plugins/cube.c:873
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command0"
+"Elenco dei file PNG e SVG da sottoporre a rendering sulla faccia superiore "
+"del cubo"
 
-#: ../plugins/compiz.schemas.in.in.h:2
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command1"
+#: plugins/cube.c:886
+msgid "Next Slide"
+msgstr "Diapositiva successiva"
 
-#: ../plugins/compiz.schemas.in.in.h:3
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command10"
-
-#: ../plugins/compiz.schemas.in.in.h:4
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command11"
-
-#: ../plugins/compiz.schemas.in.in.h:5
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command2"
-
-#: ../plugins/compiz.schemas.in.in.h:6
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command3"
-
-#: ../plugins/compiz.schemas.in.in.h:7
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command4"
-
-#: ../plugins/compiz.schemas.in.in.h:8
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command5"
-
-#: ../plugins/compiz.schemas.in.in.h:9
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command6"
-
-#: ../plugins/compiz.schemas.in.in.h:10
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command7"
-
-#: ../plugins/compiz.schemas.in.in.h:11
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command8"
-
-#: ../plugins/compiz.schemas.in.in.h:12
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command9"
-
-#: ../plugins/compiz.schemas.in.in.h:13
-msgid "Acceleration"
-msgstr "Accelerazione"
-
-#: ../plugins/compiz.schemas.in.in.h:14
-msgid "Active Plugins"
-msgstr "Plug-in attivi"
-
-#: ../plugins/compiz.schemas.in.in.h:15
-msgid "Adds water effects to different desktop actions"
-msgstr "Aggiunge effetti acqua a diverse azioni desktop"
-
-#: ../plugins/compiz.schemas.in.in.h:16
+#: plugins/cube.c:887
 msgid "Advance to next slide"
 msgstr "Avanza a diapositiva successiva"
 
-#: ../plugins/compiz.schemas.in.in.h:17
+#: plugins/cube.c:896
+msgid "Previous Slide"
+msgstr "Diapositiva precedente"
+
+#: plugins/cube.c:897
+msgid "Go back to previous slide"
+msgstr "Torna a diapositiva precedente"
+
+#: plugins/cube.c:906
+msgid "Skydome"
+msgstr "Skydome"
+
+#: plugins/cube.c:907
+msgid "Render skydome"
+msgstr "Rendering skydome"
+
+#: plugins/cube.c:913
+msgid "Skydome Image"
+msgstr "Immagine skydome"
+
+#: plugins/cube.c:914
+msgid "Image to use as texture for the skydome"
+msgstr "Immagine da utilizzare come texture per lo skydome"
+
+#: plugins/cube.c:922
+msgid "Animate Skydome"
+msgstr "Anima skydome"
+
+#: plugins/cube.c:923
+msgid "Animate skydome when rotating cube"
+msgstr "Anima skydome alla rotazione del cubo"
+
+#: plugins/cube.c:929
+msgid "Unfold"
+msgstr "Apri"
+
+#: plugins/cube.c:930
+msgid "Unfold cube"
+msgstr "Apri cubo"
+
+#: plugins/cube.c:940 plugins/rotate.c:373
+msgid "Acceleration"
+msgstr "Accelerazione"
+
+#: plugins/cube.c:941
+msgid "Fold Acceleration"
+msgstr "Accelerazione chiusura"
+
+#: plugins/cube.c:950 plugins/minimize.c:203 plugins/rotate.c:483
+#: plugins/scale.c:326 plugins/switcher.c:419 plugins/zoom.c:261
+msgid "Speed"
+msgstr "Velocità"
+
+#: plugins/cube.c:951
+msgid "Fold Speed"
+msgstr "Velocità chiusura"
+
+#: plugins/cube.c:960 plugins/minimize.c:213 plugins/rotate.c:493
+#: plugins/scale.c:336 plugins/switcher.c:429 plugins/zoom.c:271
+msgid "Timestep"
+msgstr "Intervallo"
+
+#: plugins/cube.c:961
+msgid "Fold Timestep"
+msgstr "Intervallo chiusura"
+
+#: plugins/cube.c:970 plugins/switcher.c:454
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: plugins/cube.c:971 plugins/switcher.c:455
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"Genera mipmap quando possibile per migliorare la qualità di ridimensionamento"
+
+#: plugins/cube.c:1642
+msgid "Desktop Cube"
+msgstr "Cubo desktop"
+
+#: plugins/cube.c:1643
+msgid "Place windows on cube"
+msgstr "Posiziona finestre sul cubo"
+
+#: plugins/decoration.c:234
+msgid "Shadow Radius"
+msgstr "Raggio ombreggiatura"
+
+#: plugins/decoration.c:235
+msgid "Drop shadow radius"
+msgstr "Raggio ombreggiatura interna"
+
+#: plugins/decoration.c:244
+msgid "Shadow Opacity"
+msgstr "Opacità finestra"
+
+#: plugins/decoration.c:245
+msgid "Drop shadow opacity"
+msgstr "Opacità ombreggiatura interna"
+
+#: plugins/decoration.c:254
+msgid "Shadow Offset X"
+msgstr "Offset ombreggiatura X"
+
+#: plugins/decoration.c:255
+msgid "Drop shadow X offset"
+msgstr "Offset X ombreggiatura interna"
+
+#: plugins/decoration.c:263
+msgid "Shadow Offset Y"
+msgstr "Offset ombreggiatura Y"
+
+#: plugins/decoration.c:264
+msgid "Drop shadow Y offset"
+msgstr "Offset Y ombreggiatura interna"
+
+#: plugins/decoration.c:1353
+msgid "Window Decoration"
+msgstr "Decorazione finestra"
+
+#: plugins/decoration.c:1354
+msgid "Window decorations"
+msgstr "Decorazioni finestre"
+
+#: plugins/fade.c:37 src/main.c:55
+msgid "Dock"
+msgstr "Agganciata"
+
+#: plugins/fade.c:38 plugins/minimize.c:49 plugins/scale.c:72
+#: plugins/switcher.c:81 plugins/wobbly.c:158 src/main.c:56
+msgid "Toolbar"
+msgstr "Barra degli strumenti"
+
+#: plugins/fade.c:39 plugins/wobbly.c:159 src/main.c:57
+msgid "Menu"
+msgstr "Menu"
+
+#: plugins/fade.c:40 plugins/minimize.c:50 plugins/scale.c:73
+#: plugins/switcher.c:82 plugins/wobbly.c:160 src/main.c:58
+msgid "Utility"
+msgstr "Utlity"
+
+#: plugins/fade.c:41 plugins/wobbly.c:151 src/main.c:59
+msgid "Splash"
+msgstr "Schermata iniziale"
+
+#: plugins/fade.c:42 plugins/minimize.c:52 plugins/scale.c:77
+#: plugins/switcher.c:86 plugins/wobbly.c:163 src/main.c:62
+msgid "Normal"
+msgstr ""
+
+#: plugins/fade.c:43 plugins/minimize.c:51 plugins/scale.c:74
+#: plugins/switcher.c:83 plugins/wobbly.c:161 src/main.c:60
+msgid "Dialog"
+msgstr "Finestra di dialogo"
+
+#: plugins/fade.c:44 plugins/scale.c:75 plugins/switcher.c:84
+#: plugins/wobbly.c:162 src/main.c:61
+msgid "ModalDialog"
+msgstr "Modale"
+
+#: plugins/fade.c:45 plugins/wobbly.c:152 src/main.c:64
+msgid "Unknown"
+msgstr "Sconosciuta"
+
+#: plugins/fade.c:177
+msgid "Fade Speed"
+msgstr "Velocità dissolvenza"
+
+#: plugins/fade.c:178
+msgid "Window fade speed"
+msgstr "Velocità dissolvenza finestre"
+
+#: plugins/fade.c:187 plugins/minimize.c:223 plugins/scale.c:346
+#: plugins/switcher.c:439
+msgid "Window Types"
+msgstr "Tipi di finestre"
+
+#: plugins/fade.c:188
+msgid "Window types that should be fading"
+msgstr "Tipi di finestre a cui applicare la dissolvenza"
+
+#: plugins/fade.c:202 plugins/wobbly.c:515
+msgid "Visual Bell"
+msgstr "Segnale acustico visivo"
+
+#: plugins/fade.c:203
+msgid "Fade effect on system beep"
+msgstr "Effetto dissolvenza al beep del sistema"
+
+#: plugins/fade.c:209
+msgid "Fullscreen Visual Bell"
+msgstr "Segnale visivo schermo intero"
+
+#: plugins/fade.c:210
+msgid "Fullscreen fade effect on system beep"
+msgstr "Effetto dissolvenza schermo intero al beep del sistema"
+
+#: plugins/fade.c:811
+msgid "Fading Windows"
+msgstr "Finestre in dissolvenza"
+
+#: plugins/fade.c:812
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Applica dissolvenza in entrata alle finestre quando associate e in uscita "
+"quando disassociate"
+
+#. Decimal point character
+#: plugins/gconf-dump.c:80
+msgid "."
+msgstr "."
+
+#: plugins/gconf-dump.c:605
+msgid "Plugins that this must load before"
+msgstr "Plug-in da caricare per primi"
+
+#: plugins/gconf-dump.c:606 plugins/gconf-dump.c:616
+msgid "Do not modify"
+msgstr "Non modificare"
+
+#: plugins/gconf-dump.c:615
+msgid "Plugins that this requires"
+msgstr "Plug-in necessari"
+
+#: plugins/minimize.c:204
+msgid "Minimize speed"
+msgstr "Velocità di riduzione "
+
+#: plugins/minimize.c:214
+msgid "Minimize timestep"
+msgstr "Intervallo di riduzione"
+
+#: plugins/minimize.c:224
+msgid "Window types that should be transformed when minimized"
+msgstr "Tipi di finestre da trasformare quando ridotte a icona"
+
+#: plugins/minimize.c:239
+msgid "Shade Resistance"
+msgstr "Intensità ombreggiatura"
+
+#: plugins/minimize.c:240
+msgid "Shade resistance"
+msgstr "Intensità ombreggiatura"
+
+#: plugins/minimize.c:1044
+msgid "Minimize Effect"
+msgstr "Riduci effetto"
+
+#: plugins/minimize.c:1045
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Trasforma finestre quando ridotte a icona e ripristinate"
+
+#: plugins/move.c:521
+msgid "Initiate Window Move"
+msgstr "Avvia Spostamento finestre"
+
+#: plugins/move.c:522
+msgid "Start moving window"
+msgstr "Avvia finestra mobile"
+
+#: plugins/move.c:540 plugins/scale.c:368 plugins/switcher.c:479
+msgid "Opacity"
+msgstr "Opacità"
+
+#: plugins/move.c:541
+msgid "Opacity level of moving windows"
+msgstr "Livello opacità finestre mobili"
+
+#: plugins/move.c:549
+msgid "Constrain Y"
+msgstr "Mantieni Y"
+
+#: plugins/move.c:550
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Mantieni coordinata Y nell'area dello spazio di lavoro"
+
+#: plugins/move.c:556
+msgid "Snapoff maximized windows"
+msgstr "Dividi finestre ingrandite"
+
+#: plugins/move.c:557
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"Dividi e riduci automaticamente finestre ingrandite durante il trascinamento"
+
+#: plugins/move.c:716
+msgid "Move Window"
+msgstr "Finestra mobile"
+
+#: plugins/move.c:717
+msgid "Move window"
+msgstr "Finestra mobile"
+
+#: plugins/place.c:104
+msgid "Workarounds"
+msgstr "Alternative"
+
+#: plugins/place.c:105
+msgid "Window placement workarounds"
+msgstr "Alternative posizionamento finestre"
+
+#: plugins/place.c:1102
+msgid "Place Windows"
+msgstr "Posiziona finestre"
+
+#: plugins/place.c:1103
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Posiziona finestre in maniera appropriata quando associate"
+
+#: plugins/resize.c:647
+msgid "Initiate Window Resize"
+msgstr "Avvia Ridimensionamento finestre"
+
+#: plugins/resize.c:648
+msgid "Start resizing window"
+msgstr "Avvia il ridimensionamento della finestra"
+
+#: plugins/resize.c:778
+msgid "Resize Window"
+msgstr "Ridimensiona finestra"
+
+#: plugins/resize.c:779
+msgid "Resize window"
+msgstr "Ridimensiona finestra"
+
+#: plugins/rotate.c:356 plugins/zoom.c:217
+msgid "Pointer Invert Y"
+msgstr "Inversione puntatore Y"
+
+#: plugins/rotate.c:357 plugins/zoom.c:218
+msgid "Invert Y axis for pointer movement"
+msgstr "Inverti asse Y per spostamento puntatore"
+
+#: plugins/rotate.c:363 plugins/zoom.c:224
+msgid "Pointer Sensitivity"
+msgstr "Sensibilità puntatore"
+
+#: plugins/rotate.c:364 plugins/zoom.c:225
+msgid "Sensitivity of pointer movement"
+msgstr "Sensibilità spostamento puntatore"
+
+#: plugins/rotate.c:374
+msgid "Rotation Acceleration"
+msgstr "Accelerazione rotazione"
+
+#: plugins/rotate.c:383 plugins/water.c:1575 plugins/zoom.c:234
+msgid "Initiate"
+msgstr "Avvia"
+
+#: plugins/rotate.c:384
+msgid "Start Rotation"
+msgstr "Avvia rotazione"
+
+#: plugins/rotate.c:392
+msgid "Rotate Left"
+msgstr "Ruota sinistra"
+
+#: plugins/rotate.c:393
+msgid "Rotate left"
+msgstr "Ruota _sinistra"
+
+#: plugins/rotate.c:403
+msgid "Rotate Right"
+msgstr "Ruota _destra"
+
+#: plugins/rotate.c:404
+msgid "Rotate right"
+msgstr "Ruota _destra"
+
+#: plugins/rotate.c:414
+msgid "Rotate Left with Window"
+msgstr "Ruota a sinistra con finestra"
+
+#: plugins/rotate.c:415
+msgid "Rotate left and bring active window along"
+msgstr "Ruota a sinistra insieme a finestra attiva"
+
+#: plugins/rotate.c:426
+msgid "Rotate Right with Window"
+msgstr "Ruota a destra con finestra"
+
+#: plugins/rotate.c:427
+msgid "Rotate right and bring active window along"
+msgstr "Ruota a destra insieme a finestra attiva"
+
+#: plugins/rotate.c:436
+#, c-format
+msgid "Rotate To Face %d"
+msgstr "Ruota su faccia %d"
+
+#: plugins/rotate.c:437
+#, c-format
+msgid "Rotate to face %d"
+msgstr "Ruota su faccia %d"
+
+#: plugins/rotate.c:438
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "Ruota su faccia %d con finestra"
+
+#: plugins/rotate.c:439
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "Ruota su faccia %d insieme a finestra attiva"
+
+#: plugins/rotate.c:476
+msgid "Snap To Top Face"
+msgstr "Aggancia a faccia superiore"
+
+#: plugins/rotate.c:477
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Aggancia rotazione cubo a faccia superiore"
+
+#: plugins/rotate.c:484
+msgid "Rotation Speed"
+msgstr "Velocità di rotazione"
+
+#: plugins/rotate.c:494
+msgid "Rotation Timestep"
+msgstr "Intervallo rotazione"
+
+#: plugins/rotate.c:503
+msgid "Edge Flip Pointer"
+msgstr "Puntatore riflessione bordi"
+
+#: plugins/rotate.c:504
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Rifletti su finestra successiva durante lo spostamento del puntatore sul "
+"bordo della schermata"
+
+#: plugins/rotate.c:510
+msgid "Edge Flip Move"
+msgstr "Spostamento riflessione bordi"
+
+#: plugins/rotate.c:511
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Rifletti su finestra successiva durante lo spostamento della finestra sul "
+"bordo della schermata"
+
+#: plugins/rotate.c:517
+msgid "Edge Flip DnD"
+msgstr "DnD riflessione bordi"
+
+#: plugins/rotate.c:518
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Rifletti su finestra successiva durante il trascinamento dell'oggetto sul "
+"bordo della schermata"
+
+#: plugins/rotate.c:524
+msgid "Flip Time"
+msgstr "Tempo riflessione"
+
+#: plugins/rotate.c:525
+msgid "Timeout before flipping viewport"
+msgstr "Timeout prima di riflessione finestra"
+
+#: plugins/rotate.c:1581
+msgid "Rotate Cube"
+msgstr "Ruota cubo"
+
+#: plugins/rotate.c:1582
+msgid "Rotate desktop cube"
+msgstr "Ruota cubo desktop"
+
+#: plugins/scale.c:76 plugins/switcher.c:85 src/main.c:63
+msgid "Fullscreen"
+msgstr "Schermo intero"
+
+#: plugins/scale.c:88 plugins/wobbly.c:136
+msgid "None"
+msgstr "Nessuna"
+
+#: plugins/scale.c:89
+msgid "Emblem"
+msgstr "Simbolo"
+
+#: plugins/scale.c:90
+msgid "Big"
+msgstr "Grande"
+
+#: plugins/scale.c:310
+msgid "Spacing"
+msgstr "Spaziatura"
+
+#: plugins/scale.c:311
+msgid "Space between windows"
+msgstr "Spazio tra le finestre"
+
+#: plugins/scale.c:319
+msgid "Sloppy Focus"
+msgstr "Attivazione casuale"
+
+#: plugins/scale.c:320
+msgid "Focus window when mouse moves over them"
+msgstr "Attiva finestra quando il mouse si sposta su di esse"
+
+#: plugins/scale.c:327
+msgid "Scale speed"
+msgstr "Velocità scala"
+
+#: plugins/scale.c:337
+msgid "Scale timestep"
+msgstr "Intervallo ridimensionamento"
+
+#: plugins/scale.c:347
+msgid "Window types that should scaled in scale mode"
+msgstr "Tipi di finestre da ridimensionare in modalità scala"
+
+#: plugins/scale.c:361
+msgid "Darken Background"
+msgstr "Scurisci sfondo"
+
+#: plugins/scale.c:362
+msgid "Darken background when scaling windows"
+msgstr "Scurisci sfondo durante ridimensionamento finestre"
+
+#: plugins/scale.c:369 plugins/switcher.c:480
+msgid "Amount of opacity in percent"
+msgstr "Quantità di opacità in percentuale"
+
+#: plugins/scale.c:377
+msgid "Overlay Icon"
+msgstr "Icona di sovrapposizione"
+
+#: plugins/scale.c:378
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Sovrappone un'icona sulle finestre dopo averle ridimensionate"
+
+#: plugins/scale.c:1367
+msgid "Initiate Window Picker"
+msgstr "Avvia Selettore finestre"
+
+#: plugins/scale.c:1368
+msgid "Layout and start transforming windows"
+msgstr "Disponi e avvia trasformazione finestre"
+
+#: plugins/scale.c:1559
+msgid "Scale"
+msgstr "Scala"
+
+#: plugins/scale.c:1560
+msgid "Scale windows"
+msgstr "Ridimensiona finestre"
+
+#: plugins/switcher.c:378
+msgid "Initiate Window Switcher"
+msgstr "Avvia Commutatore finestre"
+
+#: plugins/switcher.c:379
+msgid "Show switcher"
+msgstr "Mostra commutatore"
+
+#: plugins/switcher.c:391
+msgid "Initiate All Windows"
+msgstr "Avvia tutte le finestre"
+
+#: plugins/switcher.c:392
+msgid "Modifier to show switcher for all windows"
+msgstr ""
+"Tasto di modifica per la visualizzazione del commutatore per tutte le "
+"finestre"
+
+#: plugins/switcher.c:405
+msgid "Prev Window"
+msgstr "Finestra prec"
+
+#: plugins/switcher.c:406
+msgid "Modifier key to select previous window"
+msgstr "Tasto di modifica per la selezione della finestra precedente"
+
+#: plugins/switcher.c:420
+msgid "Switcher speed"
+msgstr "Velocità commutatore"
+
+#: plugins/switcher.c:430
+msgid "Switcher timestep"
+msgstr "Intervallo di commutazione "
+
+#: plugins/switcher.c:440
+msgid "Window types that should shown in switcher"
+msgstr "Tipi di finestre da visualizzare nel commutatore"
+
+#: plugins/switcher.c:461
+msgid "Saturation"
+msgstr "Saturazione"
+
+#: plugins/switcher.c:462
+msgid "Amount of saturation in percent"
+msgstr "Quantità di saturazione in percentuale"
+
+#: plugins/switcher.c:470
+msgid "Brightness"
+msgstr "Luminosità"
+
+#: plugins/switcher.c:471
+msgid "Amount of brightness in percent"
+msgstr "Quantità di luminosità in percentuale"
+
+#: plugins/switcher.c:488
+msgid "Bring To Front"
+msgstr "Porta in primo piano"
+
+#: plugins/switcher.c:489
+msgid "Bring selected window to front"
+msgstr "Porta finestra selezionata in primo piano"
+
+#: plugins/switcher.c:495
+msgid "Zoom"
+msgstr "Zoom"
+
+#: plugins/switcher.c:496
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"È necessario ridurre lo spazio desktop durante il passaggio tra finestre"
+
+#: plugins/switcher.c:506
+msgid "Icon"
+msgstr "Icona"
+
+#: plugins/switcher.c:507
+msgid "Show icon next to thumbnail"
+msgstr "Mostra icona accanto a miniatura"
+
+#: plugins/switcher.c:513
+msgid "Minimized"
+msgstr "Ridotto a icona"
+
+#: plugins/switcher.c:514
+msgid "Show minimized windows"
+msgstr "Mostra finestre ridotte a icona"
+
+#: plugins/switcher.c:1908 plugins/switcher.c:1909
+msgid "Application Switcher"
+msgstr "Commutatore applicazioni"
+
+#: plugins/water.c:1576
+msgid "Enable pointer water effects"
+msgstr "Abilita effetti acqua puntatore"
+
+#: plugins/water.c:1589
+msgid "Toggle rain"
+msgstr "Alterna piogge"
+
+#: plugins/water.c:1590
+msgid "Toggle rain effect"
+msgstr "Alterna effetto pioggia"
+
+#: plugins/water.c:1605
+msgid "Toggle wiper"
+msgstr ""
+
+#: plugins/water.c:1606
+msgid "Toggle wiper effect"
+msgstr ""
+
+#: plugins/water.c:1621
+msgid "Offset Scale"
+msgstr "Scala offset"
+
+#: plugins/water.c:1622
+msgid "Water offset scale"
+msgstr "Scala offset acqua"
+
+#: plugins/water.c:1631
+msgid "Rain Delay"
+msgstr "Ritardo pioggia"
+
+#: plugins/water.c:1632
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Ritardo (in ms) tra ogni precipitazione"
+
+#: plugins/water.c:1640
+msgid "Title wave"
+msgstr ""
+
+#: plugins/water.c:1641
+msgid "Wave effect from window title"
+msgstr ""
+
+#: plugins/water.c:1782
+msgid "Water Effect"
+msgstr "Effetto acqua"
+
+#: plugins/water.c:1783
+msgid "Adds water effects to different desktop actions"
+msgstr "Aggiunge effetti acqua a diverse azioni desktop"
+
+#: plugins/wobbly.c:137
+msgid "Shiver"
+msgstr "Tremolio"
+
+#: plugins/wobbly.c:387
+msgid "Friction"
+msgstr "Attrito"
+
+#: plugins/wobbly.c:388
+msgid "Spring Friction"
+msgstr "Attrito scatto"
+
+#: plugins/wobbly.c:397
+msgid "Spring K"
+msgstr "Attrito K"
+
+#: plugins/wobbly.c:398
+msgid "Spring Konstant"
+msgstr "Attrito Konstant"
+
+#: plugins/wobbly.c:407
+msgid "Grid Resolution"
+msgstr "Risoluzione griglia"
+
+#: plugins/wobbly.c:408
+msgid "Vertex Grid Resolution"
+msgstr "Risoluzione griglia Vertex"
+
+#: plugins/wobbly.c:416
+msgid "Minimum Grid Size"
+msgstr "Dimensioni minime griglia"
+
+#: plugins/wobbly.c:417
+msgid "Minimum Vertex Grid Size"
+msgstr "Dimensioni minime griglia Vertex"
+
+#: plugins/wobbly.c:425
+msgid "Map Effect"
+msgstr "Associa effetto"
+
+#: plugins/wobbly.c:426
+msgid "Map Window Effect"
+msgstr "Associa effetto finestra"
+
+#: plugins/wobbly.c:434
+msgid "Focus Effect"
+msgstr "Effetto attivo"
+
+#: plugins/wobbly.c:435
+msgid "Focus Window Effect"
+msgstr "Effetto finestra attivo"
+
+#: plugins/wobbly.c:443
+msgid "Map Window Types"
+msgstr "Associa tipi di finestre"
+
+#: plugins/wobbly.c:444
+msgid "Window types that should wobble when mapped"
+msgstr "Tipi di finestre a cui applicare il tremolio quando mappate"
+
+#: plugins/wobbly.c:458
+msgid "Focus Window Types"
+msgstr "Tipi di finestre attive"
+
+#: plugins/wobbly.c:459
+msgid "Window types that should wobble when focused"
+msgstr "Tipi di finestre a cui applicare il tremolio quando attivate"
+
+#: plugins/wobbly.c:471
+msgid "Move Window Types"
+msgstr "Tipi di finestre mobili"
+
+#: plugins/wobbly.c:472
+msgid "Window types that should wobble when moved"
+msgstr "Tipi di finestre a cui applicare il tremolio quando spostate"
+
+#: plugins/wobbly.c:486
+msgid "Grab Window Types"
+msgstr "Cattura tipi di finestre"
+
+#: plugins/wobbly.c:487
+msgid "Window types that should wobble when grabbed"
+msgstr "Tipi di finestre a cui applicare il tremolio quando afferrate"
+
+#: plugins/wobbly.c:499
+msgid "Snap windows"
+msgstr "Aggancia finestre"
+
+#: plugins/wobbly.c:500
+msgid "Toggle window snapping"
+msgstr "Alterna aggancio finestre"
+
+#: plugins/wobbly.c:508
+msgid "Maximize Effect"
+msgstr "Ripristina effetto"
+
+#: plugins/wobbly.c:509
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr ""
+"Effetto tremolio quando si applica o si annulla il ripristino alle finestre"
+
+#: plugins/wobbly.c:516
+msgid "Wobble effect on system beep"
+msgstr "Effetto tremolio al beep del sistema"
+
+#: plugins/wobbly.c:2977
+msgid "Wobbly Windows"
+msgstr "Finestre tremolanti"
+
+#: plugins/wobbly.c:2978
+msgid "Use spring model for wobbly window effect"
+msgstr "Usa modello sorgente per effetto tremolio finestre"
+
+#: plugins/zoom.c:235 plugins/zoom.c:243 plugins/zoom.c:244
+msgid "Zoom In"
+msgstr "Aumenta ingrandimento"
+
+#: plugins/zoom.c:252 plugins/zoom.c:253
+msgid "Zoom Out"
+msgstr "Riduci ingrandimento"
+
+#: plugins/zoom.c:262
+msgid "Zoom Speed"
+msgstr "Velocità zoom"
+
+#: plugins/zoom.c:272
+msgid "Zoom Timestep"
+msgstr "Intervallo zoom"
+
+#: plugins/zoom.c:281
+msgid "Filter Linear"
+msgstr "Filtro lineare"
+
+#: plugins/zoom.c:282
+msgid "USe linear filter when zoomed in"
+msgstr "Usa filtro lineare all'ingrandimento"
+
+#: plugins/zoom.c:802
+msgid "Zoom Desktop"
+msgstr "Zoom desktop"
+
+#: plugins/zoom.c:803
+msgid "Zoom and pan desktop cube"
+msgstr "Applica zoom a panoramica a cubo desktop"
+
+#: src/display.c:152
+msgid "Fast"
+msgstr "Veloce"
+
+#: src/display.c:152
+msgid "Good"
+msgstr "Buono"
+
+#: src/display.c:152
+msgid "Best"
+msgstr "Ottimo"
+
+#: src/display.c:208
+msgid "Active Plugins"
+msgstr "Plug-in attivi"
+
+#: src/display.c:209
+msgid "List of currently active plugins"
+msgstr "Elenco di plug-in correntemente attivi"
+
+#: src/display.c:223
+msgid "Texture Filter"
+msgstr "Filtro texture"
+
+#: src/display.c:224
+msgid "Texture filtering"
+msgstr "Filtro texture"
+
+#: src/display.c:232
+msgid "Click To Focus"
+msgstr "Fare clic per attivare"
+
+#: src/display.c:233
+msgid "Click on window moves input focus to it"
+msgstr "Fare clic sulla finestra per attivarla"
+
+#: src/display.c:239
+msgid "Auto-Raise"
+msgstr "Aumento automatico"
+
+#: src/display.c:240
+msgid "Raise selected windows after interval"
+msgstr "Aumenta finestre selezionate dopo l'intervallo"
+
+#: src/display.c:246
+msgid "Auto-Raise Delay"
+msgstr "Ritardo aumento automatico"
+
+#: src/display.c:247
+msgid "Interval before raising selected windows"
+msgstr "Intervallo prima dell'aumento delle finestre selezionate "
+
+#: src/display.c:255
+msgid "Close Window"
+msgstr "Chiudi finestra"
+
+#: src/display.c:256
+msgid "Close active window"
+msgstr "Chiudi finestra attiva"
+
+#: src/display.c:266
+msgid "Show Main Menu"
+msgstr "Mostra menu principale"
+
+#: src/display.c:267
+msgid "Show the main menu"
+msgstr "Mostra menu principale"
+
+#: src/display.c:277
+msgid "Run Dialog"
+msgstr "Finestra di dialogo Esegui"
+
+#: src/display.c:278
+msgid "Show Run Application dialog"
+msgstr "Mostra finestra di dialogo Esegui applicazione"
+
+#: src/display.c:288
+msgid "Unmaximize Window"
+msgstr "Annulla ripristino finestra"
+
+#: src/display.c:289
+msgid "Unmaximize active window"
+msgstr "Annulla ripristino finestra attiva"
+
+#: src/display.c:299
+msgid "Minimize Window"
+msgstr "Riduci finestra a icona"
+
+#: src/display.c:300
+msgid "Minimize active window"
+msgstr "Riduci a icona finestra attiva"
+
+#: src/display.c:310
+msgid "Maximize Window"
+msgstr "Ripristina finestra"
+
+#: src/display.c:311
+msgid "Maximize active window"
+msgstr "Ripristina finestra attiva"
+
+#: src/display.c:321
+msgid "Maximize Window Horizontally"
+msgstr "Ingrandisci finestra in orizzontale"
+
+#: src/display.c:322
+msgid "Maximize active window horizontally"
+msgstr "Ingrandisci finestra attiva in orizzontale"
+
+#: src/display.c:330
+msgid "Maximize Window Vertically"
+msgstr "Ingrandisci finestra in verticale"
+
+#: src/display.c:331
+msgid "Maximize active window vertically"
+msgstr "Ingrandisci finestra attiva in verticale"
+
+#: src/display.c:339 src/display.c:340
+msgid "Hide all windows and focus desktop"
+msgstr "Nascondi tutte le finestre e attiva desktop"
+
+#: src/display.c:348
+#, c-format
+msgid "Command line %d"
+msgstr "Riga di comando %d"
+
+#: src/display.c:349
+#, c-format
+msgid "Command line to be executed in shell when run_command%d is invoked"
+msgstr ""
+"Riga di comando da eseguire nella shell quando viene invocato run_command%d"
+
+#: src/display.c:351
+#, c-format
+msgid "Run command %d"
+msgstr "Esegui comando %d"
+
+#: src/display.c:352
+#, c-format
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command%d"
+msgstr ""
+"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
+"identificato da command%d"
+
+#: src/display.c:390
+msgid "Slow Animations"
+msgstr "Animazioni lente"
+
+#: src/display.c:391
+msgid "Toggle use of slow animations"
+msgstr "Alterna uso di animazioni lente"
+
+#: src/display.c:401
+msgid "Lower Window"
+msgstr "Abbassa finestra"
+
+#: src/display.c:402
+msgid "Lower window beneath other windows"
+msgstr "Abbassa finestra sotto alle altre finestre"
+
+#: src/display.c:410
+msgid "Increase Opacity"
+msgstr "Aumenta opacità"
+
+#: src/display.c:411
+msgid "Increase window opacity"
+msgstr "Aumenta opacità finestra"
+
+#: src/display.c:419
+msgid "Decrease Opacity"
+msgstr "Riduci opacità"
+
+#: src/display.c:420
+msgid "Decrease window opacity"
+msgstr "Riduci opacità finestra"
+
+#: src/display.c:428 src/display.c:429
+msgid "Take a screenshot"
+msgstr "Crea istantanea"
+
+#: src/display.c:439 src/display.c:440
+msgid "Screenshot command line"
+msgstr "Riga di comando istantanea"
+
+#: src/display.c:448 src/display.c:449
+msgid "Take a screenshot of a window"
+msgstr "Crea istantanea di una finestra"
+
+#: src/display.c:460 src/display.c:461
+msgid "Window screenshot command line"
+msgstr "Riga di comando istantanea finestre"
+
+#: src/display.c:469
+msgid "Window Menu"
+msgstr "Menu finestra "
+
+#: src/display.c:470
+msgid "Open window menu"
+msgstr "Apri menu finestra"
+
+#: src/display.c:478
+msgid "Raise On Click"
+msgstr "Aumenta al clic"
+
+#: src/display.c:479
+msgid "Raise windows when clicked"
+msgstr "Aumenta le finestre al clic"
+
+#: src/display.c:485
+msgid "Audible Bell"
+msgstr "Segnale acustico udibile"
+
+#: src/display.c:486
+msgid "Audible system beep"
+msgstr "Beep di sistema udibile"
+
+#: src/display.c:492
+msgid "Toggle Window Maximized"
+msgstr "Alterna finestra ingrandita"
+
+#: src/display.c:493
+msgid "Toggle active window maximized"
+msgstr "Alterna finestra attiva ingrandita"
+
+#: src/display.c:501
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Alterna finestra ingrandita in orizzontale"
+
+#: src/display.c:503
+msgid "Toggle active window maximized horizontally"
+msgstr "Alterna finestra attiva ingrandita in orizzontale"
+
+#: src/display.c:511
+msgid "Toggle Window Maximized Vertically"
+msgstr "Alterna finestra ingrandita in verticale"
+
+#: src/display.c:513
+msgid "Toggle active window maximized vertically"
+msgstr "Alterna finestra attiva ingrandita in verticale"
+
+#: src/display.c:521
+msgid "Hide Skip Taskbar Windows"
+msgstr "Nascondi finestre della barra delle applicazioni di tralasciamento"
+
+#: src/display.c:522
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Nascondi finestre non nella barra delle applicazioni durante l'attivazione "
+"della modalità di visualizzazione desktop"
+
+#: src/display.c:529
+msgid "Toggle Window Shaded"
+msgstr "Alterna finestra ombreggiata"
+
+#: src/display.c:530
+msgid "Toggle active window shaded"
+msgstr "Alterna finestra attiva ombreggiata"
+
+#: src/main.c:54
+msgid "Desktop"
+msgstr ""
+
+#: src/screen.c:245
+msgid "Detect Refresh Rate"
+msgstr "Rileva frequenza di aggiornamento"
+
+#: src/screen.c:246
+msgid "Automatic detection of refresh rate"
+msgstr "Rilevamento automatico della frequenza di aggiornamento"
+
+#: src/screen.c:252
+msgid "Lighting"
+msgstr "Illuminazione"
+
+#: src/screen.c:253
+msgid "Use diffuse light when screen is transformed"
+msgstr "Usa luce diffusa alla trasformazione della schermata"
+
+#: src/screen.c:259
+msgid "Refresh Rate"
+msgstr "Frequenza di aggiornamento"
+
+#: src/screen.c:260
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Frequenza di aggiornamento della schermata (volte/secondi)"
+
+#: src/screen.c:268
+msgid "Virtual Size"
+msgstr "Dimensioni virtuali"
+
+#: src/screen.c:269
+msgid "Screen size multiplier for virtual size"
+msgstr "Moltiplicatore dimensioni finestra per dimensioni virtuali"
+
+#: src/screen.c:277
+msgid "Opacity Step"
+msgstr "Passo opacità"
+
+#: src/screen.c:278
+msgid "Opacity change step"
+msgstr "Passo modifica opacità "
+
+#: src/screen.c:286
+msgid "Unredirect Fullscreen Windows"
+msgstr "Annulla reindirizzamento finestre a schermo intero"
+
+#: src/screen.c:287
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Consenti disegno finestre a schermo intero per non essere reindirizzati a "
 "pixmap fuori schermo"
 
-#: ../plugins/compiz.schemas.in.in.h:18
-msgid "Amount of brightness in percent (0-100)"
-msgstr "Quantità di luminosità in percentuale (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:19
-msgid "Amount of opacity in percent (0-100)"
-msgstr "Quantità di opacità in percentuale (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:20
-msgid "Amount of saturation in percent (0-100)"
-msgstr "Quantità di saturazione in percentuale (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:21
-msgid "Animate Skydome"
-msgstr "Anima skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:22
-msgid "Animate skydome when rotating cube"
-msgstr "Anima skydome alla rotazione del cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:23
-msgid "Application Switcher"
-msgstr "Commutatore applicazioni"
-
-#: ../plugins/compiz.schemas.in.in.h:24
-msgid "Audible Bell"
-msgstr "Segnale acustico udibile"
-
-#: ../plugins/compiz.schemas.in.in.h:25
-msgid "Audible system beep"
-msgstr "Beep di sistema udibile"
-
-#: ../plugins/compiz.schemas.in.in.h:26
-msgid "Auto-Raise"
-msgstr "Aumento automatico"
-
-#: ../plugins/compiz.schemas.in.in.h:27
-msgid "Auto-Raise Delay"
-msgstr "Ritardo aumento automatico"
-
-#: ../plugins/compiz.schemas.in.in.h:28
-msgid "Automatic detection of refresh rate"
-msgstr "Rilevamento automatico della frequenza di aggiornamento"
-
-#: ../plugins/compiz.schemas.in.in.h:29
-msgid "Brightness"
-msgstr "Luminosità"
-
-#: ../plugins/compiz.schemas.in.in.h:30
-msgid "Bring To Front"
-msgstr "Porta in primo piano"
-
-#: ../plugins/compiz.schemas.in.in.h:31
-msgid "Bring selected window to front"
-msgstr "Porta finestra selezionata in primo piano"
-
-#: ../plugins/compiz.schemas.in.in.h:32
-msgid "Click To Focus"
-msgstr "Fare clic per attivare"
-
-#: ../plugins/compiz.schemas.in.in.h:33
-msgid "Click on window moves input focus to it"
-msgstr "Fare clic sulla finestra per attivarla"
-
-#: ../plugins/compiz.schemas.in.in.h:34
-msgid "Close Window"
-msgstr "Chiudi finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:35
-msgid "Close active window"
-msgstr "Chiudi finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:36
-msgid "Color of top and bottom sides of the cube"
-msgstr "Colore dei lati superiore e inferiore del cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:37
-msgid "Command line 0"
-msgstr "Riga di comando 0"
-
-#: ../plugins/compiz.schemas.in.in.h:38
-msgid "Command line 1"
-msgstr "Riga di comando 1"
-
-#: ../plugins/compiz.schemas.in.in.h:39
-msgid "Command line 10"
-msgstr "Riga di comando 10"
-
-#: ../plugins/compiz.schemas.in.in.h:40
-msgid "Command line 11"
-msgstr "Riga di comando 11"
-
-#: ../plugins/compiz.schemas.in.in.h:41
-msgid "Command line 2"
-msgstr "Riga di comando 2"
-
-#: ../plugins/compiz.schemas.in.in.h:42
-msgid "Command line 3"
-msgstr "Riga di comando 3"
-
-#: ../plugins/compiz.schemas.in.in.h:43
-msgid "Command line 4"
-msgstr "Riga di comando 4"
-
-#: ../plugins/compiz.schemas.in.in.h:44
-msgid "Command line 5"
-msgstr "Riga di comando 5"
-
-#: ../plugins/compiz.schemas.in.in.h:45
-msgid "Command line 6"
-msgstr "Riga di comando 6"
-
-#: ../plugins/compiz.schemas.in.in.h:46
-msgid "Command line 7"
-msgstr "Riga di comando 7"
-
-#: ../plugins/compiz.schemas.in.in.h:47
-msgid "Command line 8"
-msgstr "Riga di comando 8"
-
-#: ../plugins/compiz.schemas.in.in.h:48
-msgid "Command line 9"
-msgstr "Riga di comando 9"
-
-#: ../plugins/compiz.schemas.in.in.h:49
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command0"
-
-#: ../plugins/compiz.schemas.in.in.h:50
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command1"
-
-#: ../plugins/compiz.schemas.in.in.h:51
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command10"
-
-#: ../plugins/compiz.schemas.in.in.h:52
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_comman11"
-
-#: ../plugins/compiz.schemas.in.in.h:53
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command2"
-
-#: ../plugins/compiz.schemas.in.in.h:54
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command3"
-
-#: ../plugins/compiz.schemas.in.in.h:55
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command4"
-
-#: ../plugins/compiz.schemas.in.in.h:56
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command5"
-
-#: ../plugins/compiz.schemas.in.in.h:57
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command6"
-
-#: ../plugins/compiz.schemas.in.in.h:58
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command7"
-
-#: ../plugins/compiz.schemas.in.in.h:59
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command8"
-
-#: ../plugins/compiz.schemas.in.in.h:60
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-"Riga di comando da eseguire nella shell quando viene invocato run_command9"
-
-#: ../plugins/compiz.schemas.in.in.h:61
-msgid "Constrain Y"
-msgstr "Mantieni Y"
-
-#: ../plugins/compiz.schemas.in.in.h:62
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Mantieni coordinata Y nell'area dello spazio di lavoro"
-
-#: ../plugins/compiz.schemas.in.in.h:63
-msgid "Corners"
-msgstr "Angoli"
-
-#: ../plugins/compiz.schemas.in.in.h:64
-msgid "Cube Color"
-msgstr "Colore cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:65
-msgid "Darken Background"
-msgstr "Scurisci sfondo"
-
-#: ../plugins/compiz.schemas.in.in.h:66
-msgid "Darken background when scaling windows"
-msgstr "Scurisci sfondo durante ridimensionamento finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:67
-msgid "Decrease Opacity"
-msgstr "Riduci opacità"
-
-#: ../plugins/compiz.schemas.in.in.h:68
-msgid "Decrease window opacity"
-msgstr "Riduci opacità finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:69
+#: src/screen.c:294
 msgid "Default Icon"
 msgstr "Icona di default"
 
-#: ../plugins/compiz.schemas.in.in.h:70
+#: src/screen.c:295
 msgid "Default window icon image"
 msgstr "Immagine icona finestra di default"
 
-#: ../plugins/compiz.schemas.in.in.h:71
-msgid "Delay (in ms) between each rain-drop (0-3600000)"
-msgstr "Ritardo (in ms) tra ogni precipitazione (0-3600000)"
+#~ msgid "TopLeft"
+#~ msgstr "In alto a sinistra"
 
-#: ../plugins/compiz.schemas.in.in.h:72
-msgid "Desktop Cube"
-msgstr "Cubo desktop"
+#~ msgid "TopRight"
+#~ msgstr "In alto a destra"
 
-#: ../plugins/compiz.schemas.in.in.h:73
-msgid "Detect Refresh Rate"
-msgstr "Rileva frequenza di aggiornamento"
+#~ msgid "BottomLeft"
+#~ msgstr "In basso a sinistra"
 
-#: ../plugins/compiz.schemas.in.in.h:74
-msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-msgstr ""
-"È necessario ridurre lo spazio desktop durante il passaggio tra finestre "
-"(0.0-5.0)"
+#~ msgid "BottomRight"
+#~ msgstr "In basso a destra"
 
-#: ../plugins/compiz.schemas.in.in.h:75
-msgid "Do not modify"
-msgstr "Non modificare"
+#~ msgid "Corners"
+#~ msgstr "Angoli"
 
-#: ../plugins/compiz.schemas.in.in.h:76
-msgid "Drop shadow X offset (-16-16)"
-msgstr "Offset X ombreggiatura interna (-16-16)"
-
-#: ../plugins/compiz.schemas.in.in.h:77
-msgid "Drop shadow Y offset (-16-16)"
-msgstr "Offset Y ombreggiatura interna (-16-16)"
-
-#: ../plugins/compiz.schemas.in.in.h:78
-msgid "Drop shadow opacity (0.01-6.00)"
-msgstr "Opacità ombreggiatura interna (0.01-6.00)"
-
-#: ../plugins/compiz.schemas.in.in.h:79
-msgid "Drop shadow radius (0.0-48.0)"
-msgstr "Raggio ombreggiatura interna (0.0-48.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:80
-msgid "Edge Flip DnD"
-msgstr "DnD riflessione bordi"
-
-#: ../plugins/compiz.schemas.in.in.h:81
-msgid "Edge Flip Move"
-msgstr "Spostamento riflessione bordi"
-
-#: ../plugins/compiz.schemas.in.in.h:82
-msgid "Edge Flip Pointer"
-msgstr "Puntatore riflessione bordi"
-
-#: ../plugins/compiz.schemas.in.in.h:83
-msgid "Enable pointer water effects"
-msgstr "Abilita effetti acqua puntatore"
-
-#: ../plugins/compiz.schemas.in.in.h:84
-msgid "Fade Speed"
-msgstr "Velocità dissolvenza"
-
-#: ../plugins/compiz.schemas.in.in.h:85
-msgid "Fade effect on system beep"
-msgstr "Effetto dissolvenza al beep del sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:86
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr ""
-"Applica dissolvenza in entrata alle finestre quando associate e in uscita "
-"quando disassociate"
-
-#: ../plugins/compiz.schemas.in.in.h:87
-msgid "Fading Windows"
-msgstr "Finestre in dissolvenza"
-
-#: ../plugins/compiz.schemas.in.in.h:88
-msgid "Filter Linear"
-msgstr "Filtro lineare"
-
-#: ../plugins/compiz.schemas.in.in.h:89
-msgid "Flip Time"
-msgstr "Tempo riflessione"
-
-#: ../plugins/compiz.schemas.in.in.h:90
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
-"Rifletti su finestra successiva durante il trascinamento dell'oggetto sul "
-"bordo della schermata"
-
-#: ../plugins/compiz.schemas.in.in.h:91
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-"Rifletti su finestra successiva durante lo spostamento del puntatore sul "
-"bordo della schermata"
-
-#: ../plugins/compiz.schemas.in.in.h:92
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
-"Rifletti su finestra successiva durante lo spostamento della finestra sul "
-"bordo della schermata"
-
-#: ../plugins/compiz.schemas.in.in.h:93
-msgid "Focus Effect"
-msgstr "Effetto attivo"
-
-#: ../plugins/compiz.schemas.in.in.h:94
-msgid "Focus Window Effect (None, Shiver)"
-msgstr "Effetto finestra attivo (Nessuno, Tremolio)"
-
-#: ../plugins/compiz.schemas.in.in.h:95
-msgid "Focus Window Types"
-msgstr "Tipi di finestre attive"
-
-#: ../plugins/compiz.schemas.in.in.h:96
-msgid "Focus window when mouse moves over them"
-msgstr "Attiva finestra quando il mouse si sposta su di esse"
-
-#: ../plugins/compiz.schemas.in.in.h:97
-msgid "Fold Acceleration (1.0-20.0)"
-msgstr "Accelerazione chiusura (1.0-20.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:98
-msgid "Fold Speed (0.1-50.0)"
-msgstr "Velocità chiusura (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:99
-msgid "Fold Timestep (0.1-50.0)"
-msgstr "Intervallo chiusura (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:100
-msgid "Friction"
-msgstr "Attrito"
-
-#: ../plugins/compiz.schemas.in.in.h:101
-msgid "Fullscreen Visual Bell"
-msgstr "Segnale visivo schermo intero"
-
-#: ../plugins/compiz.schemas.in.in.h:102
-msgid "Fullscreen fade effect on system beep"
-msgstr "Effetto dissolvenza schermo intero al beep del sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:103
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
-"Genera mipmap quando possibile per migliorare la qualità di ridimensionamento"
-
-#: ../plugins/compiz.schemas.in.in.h:104
-msgid "Go back to previous slide"
-msgstr "Torna a diapositiva precedente"
-
-#: ../plugins/compiz.schemas.in.in.h:105
-msgid "Grab Window Types"
-msgstr "Cattura tipi di finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:106
-msgid "Grid Resolution"
-msgstr "Risoluzione griglia"
-
-#: ../plugins/compiz.schemas.in.in.h:107
-msgid "Hide Skip Taskbar Windows"
-msgstr "Nascondi finestre della barra delle applicazioni di tralasciamento"
-
-#: ../plugins/compiz.schemas.in.in.h:108
-msgid "Hide all windows and focus desktop"
-msgstr "Nascondi tutte le finestre e attiva desktop"
-
-#: ../plugins/compiz.schemas.in.in.h:109
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"Nascondi finestre non nella barra delle applicazioni durante l'attivazione "
-"della modalità di visualizzazione desktop"
-
-#: ../plugins/compiz.schemas.in.in.h:110
-msgid ""
-"Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Angoli che devono avviare la modalità scala (In alto a sinistra, In alto a "
-"destra, In basso a sinistra, In basso a destra)"
-
-#: ../plugins/compiz.schemas.in.in.h:111
-msgid "Icon"
-msgstr "Icona"
-
-#: ../plugins/compiz.schemas.in.in.h:112
-msgid "Image files"
-msgstr "File immagine"
-
-#: ../plugins/compiz.schemas.in.in.h:113
-msgid "Image to use as texture for the skydome"
-msgstr "Immagine da utilizzare come texture per lo skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:114
-msgid "Increase Opacity"
-msgstr "Aumenta opacità"
-
-#: ../plugins/compiz.schemas.in.in.h:115
-msgid "Increase window opacity"
-msgstr "Aumenta opacità finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:116
-msgid "Initiate"
-msgstr "Avvia"
-
-#: ../plugins/compiz.schemas.in.in.h:117
-msgid "Initiate All Windows"
-msgstr "Avvia tutte le finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:118
-msgid "Initiate Keyboard Window Move"
-msgstr "Avvia spostamento finestra tastiera"
-
-#: ../plugins/compiz.schemas.in.in.h:119
-msgid "Initiate Keyboard Window Resize"
-msgstr "Avvia ridimensionamento finestra tastiera"
-
-#: ../plugins/compiz.schemas.in.in.h:120
-msgid "Initiate Window Move"
-msgstr "Avvia Spostamento finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:121
-msgid "Initiate Window Picker"
-msgstr "Avvia Selettore finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:122
-msgid "Initiate Window Resize"
-msgstr "Avvia Ridimensionamento finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:123
-msgid "Initiate Window Switcher"
-msgstr "Avvia Commutatore finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:124
-msgid "Inside Cube"
-msgstr "Nel cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:125
-msgid "Inside cube"
-msgstr "Nel cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:126
-msgid "Interval before raising selected windows (0-10000)"
-msgstr "Intervallo prima dell'aumento delle finestre selezionate  (0-10000)"
-
-#: ../plugins/compiz.schemas.in.in.h:127
-msgid "Invert Y axis for pointer movement"
-msgstr "Inverti asse Y per spostamento puntatore"
-
-#: ../plugins/compiz.schemas.in.in.h:128
-msgid "Layout and start transforming windows"
-msgstr "Disponi e avvia trasformazione finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:129
-msgid "Lighting"
-msgstr "Illuminazione"
-
-#: ../plugins/compiz.schemas.in.in.h:130
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr ""
-"Elenco dei file PNG e SVG da sottoporre a rendering sulla faccia superiore "
-"del cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:131
-msgid "List of currently active plugins"
-msgstr "Elenco di plug-in correntemente attivi"
-
-#: ../plugins/compiz.schemas.in.in.h:132
-msgid "Lower Window"
-msgstr "Abbassa finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:133
-msgid "Lower window beneath other windows"
-msgstr "Abbassa finestra sotto alle altre finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:134
-msgid "Map Effect"
-msgstr "Associa effetto"
-
-#: ../plugins/compiz.schemas.in.in.h:135
-msgid "Map Window Effect (None, Shiver)"
-msgstr "Associa effetto finestra (Nessuno, Tremolio)"
-
-#: ../plugins/compiz.schemas.in.in.h:136
-msgid "Map Window Types"
-msgstr "Associa tipi di finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:137
-msgid "Maximize Effect"
-msgstr "Ripristina effetto"
-
-#: ../plugins/compiz.schemas.in.in.h:138
-msgid "Maximize Window"
-msgstr "Ripristina finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:139
-msgid "Maximize Window Horizontally"
-msgstr "Ingrandisci finestra in orizzontale"
-
-#: ../plugins/compiz.schemas.in.in.h:140
-msgid "Maximize Window Vertically"
-msgstr "Ingrandisci finestra in verticale"
-
-#: ../plugins/compiz.schemas.in.in.h:141
-msgid "Maximize active window"
-msgstr "Ripristina finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:142
-msgid "Maximize active window horizontally"
-msgstr "Ingrandisci finestra attiva in orizzontale"
-
-#: ../plugins/compiz.schemas.in.in.h:143
-msgid "Maximize active window vertically"
-msgstr "Ingrandisci finestra attiva in verticale"
-
-#: ../plugins/compiz.schemas.in.in.h:144
-msgid "Minimize Effect"
-msgstr "Riduci effetto"
-
-#: ../plugins/compiz.schemas.in.in.h:145
-msgid "Minimize Window"
-msgstr "Riduci finestra a icona"
-
-#: ../plugins/compiz.schemas.in.in.h:146
-msgid "Minimize active window"
-msgstr "Riduci a icona finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:147
-msgid "Minimize speed (0.1-50.0)"
-msgstr "Velocità di riduzione  (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:148
-msgid "Minimize timestep (0.1-50.0)"
-msgstr "Intervallo di riduzione (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:149
-msgid "Minimized"
-msgstr "Ridotto a icona"
-
-#: ../plugins/compiz.schemas.in.in.h:150
-msgid "Minimum Grid Size"
-msgstr "Dimensioni minime griglia"
-
-#: ../plugins/compiz.schemas.in.in.h:151
-msgid "Minimum Vertex Grid Size (4-128)"
-msgstr "Dimensioni minime griglia Vertex (4-128)"
-
-#: ../plugins/compiz.schemas.in.in.h:152
-msgid "Mipmap"
-msgstr "Mipmap"
-
-#: ../plugins/compiz.schemas.in.in.h:153
-msgid "Modifier key to select previous window"
-msgstr "Tasto di modifica per la selezione della finestra precedente"
-
-#: ../plugins/compiz.schemas.in.in.h:154
-msgid "Modifier to show switcher for all windows"
-msgstr ""
-"Tasto di modifica per la visualizzazione del commutatore per tutte le "
-"finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:155
-msgid "Move Window"
-msgstr "Finestra mobile"
-
-#: ../plugins/compiz.schemas.in.in.h:156
-msgid "Move Window Types"
-msgstr "Tipi di finestre mobili"
-
-#: ../plugins/compiz.schemas.in.in.h:157
-msgid "Move window"
-msgstr "Finestra mobile"
-
-#: ../plugins/compiz.schemas.in.in.h:158
-msgid "Next Slide"
-msgstr "Diapositiva successiva"
-
-#: ../plugins/compiz.schemas.in.in.h:159
-msgid "Offset Scale"
-msgstr "Scala offset"
-
-#: ../plugins/compiz.schemas.in.in.h:160
-msgid "Opacity"
-msgstr "Opacità"
-
-#: ../plugins/compiz.schemas.in.in.h:161
-msgid "Opacity Step"
-msgstr "Passo opacità"
-
-#: ../plugins/compiz.schemas.in.in.h:162
-msgid "Opacity change step (1-50)"
-msgstr "Passo modifica opacità  (1-50)"
-
-#: ../plugins/compiz.schemas.in.in.h:163
-msgid "Opacity level of moving windows (1-100)"
-msgstr "Livello opacità finestre mobili (1-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:164
-msgid "Open window menu"
-msgstr "Apri menu finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:165
-msgid "Overlay Icon"
-msgstr "Icona di sovrapposizione"
-
-#: ../plugins/compiz.schemas.in.in.h:166
-msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
-msgstr ""
-"Sovrappone un'icona sulle finestre dopo averle ridimensionate (Nessuna, "
-"Simbolo, Grande)"
-
-#: ../plugins/compiz.schemas.in.in.h:167
-msgid "Place Windows"
-msgstr "Posiziona finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:168
-msgid "Place windows at appropriate positions when mapped"
-msgstr "Posiziona finestre in maniera appropriata quando associate"
-
-#: ../plugins/compiz.schemas.in.in.h:169
-msgid "Place windows on cube"
-msgstr "Posiziona finestre sul cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:170
-msgid "Plugins that this must load before"
-msgstr "Plug-in da caricare per primi"
-
-#: ../plugins/compiz.schemas.in.in.h:171
-msgid "Plugins that this requires"
-msgstr "Plug-in necessari"
-
-#: ../plugins/compiz.schemas.in.in.h:172
-msgid "Pointer Invert Y"
-msgstr "Inversione puntatore Y"
-
-#: ../plugins/compiz.schemas.in.in.h:173
-msgid "Pointer Sensitivity"
-msgstr "Sensibilità puntatore"
-
-#: ../plugins/compiz.schemas.in.in.h:174
-msgid "Prev Window"
-msgstr "Finestra prec"
-
-#: ../plugins/compiz.schemas.in.in.h:175
-msgid "Previous Slide"
-msgstr "Diapositiva precedente"
-
-#: ../plugins/compiz.schemas.in.in.h:176
-msgid "Rain Delay"
-msgstr "Ritardo pioggia"
-
-#: ../plugins/compiz.schemas.in.in.h:177
-msgid "Raise On Click"
-msgstr "Aumenta al clic"
-
-#: ../plugins/compiz.schemas.in.in.h:178
-msgid "Raise selected windows after interval"
-msgstr "Aumenta finestre selezionate dopo l'intervallo"
-
-#: ../plugins/compiz.schemas.in.in.h:179
-msgid "Raise windows when clicked"
-msgstr "Aumenta le finestre al clic"
-
-#: ../plugins/compiz.schemas.in.in.h:180
-msgid "Refresh Rate"
-msgstr "Frequenza di aggiornamento"
-
-#: ../plugins/compiz.schemas.in.in.h:181
-msgid "Render skydome"
-msgstr "Rendering skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:182
-msgid "Resize Window"
-msgstr "Ridimensiona finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:183
-msgid "Resize window"
-msgstr "Ridimensiona finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:184
-msgid "Return from scale view"
-msgstr "Ritorna dalla visualizzazione in scala"
-
-#: ../plugins/compiz.schemas.in.in.h:185
-msgid "Rotate Cube"
-msgstr "Ruota cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:186
-msgid "Rotate Left"
-msgstr "Ruota sinistra"
-
-#: ../plugins/compiz.schemas.in.in.h:187
-msgid "Rotate Left with Window"
-msgstr "Ruota a sinistra con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:188
-msgid "Rotate Right"
-msgstr "Ruota _destra"
-
-#: ../plugins/compiz.schemas.in.in.h:189
-msgid "Rotate Right with Window"
-msgstr "Ruota a destra con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:190
-msgid "Rotate To Face 1"
-msgstr "Ruota su faccia 1"
-
-#: ../plugins/compiz.schemas.in.in.h:191
-msgid "Rotate To Face 1 with Window"
-msgstr "Ruota su faccia 1 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:192
-msgid "Rotate To Face 10"
-msgstr "Ruota su faccia 10"
-
-#: ../plugins/compiz.schemas.in.in.h:193
-msgid "Rotate To Face 10 with Window"
-msgstr "Ruota su faccia 10 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:194
-msgid "Rotate To Face 11"
-msgstr "Ruota su faccia 11"
-
-#: ../plugins/compiz.schemas.in.in.h:195
-msgid "Rotate To Face 11 with Window"
-msgstr "Ruota su faccia 11 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:196
-msgid "Rotate To Face 12"
-msgstr "Ruota su faccia 12"
-
-#: ../plugins/compiz.schemas.in.in.h:197
-msgid "Rotate To Face 12 with Window"
-msgstr "Ruota su faccia 12 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:198
-msgid "Rotate To Face 2"
-msgstr "Ruota su faccia 2"
-
-#: ../plugins/compiz.schemas.in.in.h:199
-msgid "Rotate To Face 2 with Window"
-msgstr "Ruota su faccia 2 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:200
-msgid "Rotate To Face 3"
-msgstr "Ruota su faccia 3"
-
-#: ../plugins/compiz.schemas.in.in.h:201
-msgid "Rotate To Face 3 with Window"
-msgstr "Ruota su faccia 3 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:202
-msgid "Rotate To Face 4"
-msgstr "Ruota su faccia 4"
-
-#: ../plugins/compiz.schemas.in.in.h:203
-msgid "Rotate To Face 4 with Window"
-msgstr "Ruota su faccia 4 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:204
-msgid "Rotate To Face 5"
-msgstr "Ruota su faccia 5"
-
-#: ../plugins/compiz.schemas.in.in.h:205
-msgid "Rotate To Face 5 with Window"
-msgstr "Ruota su faccia 5 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:206
-msgid "Rotate To Face 6"
-msgstr "Ruota su faccia 6"
-
-#: ../plugins/compiz.schemas.in.in.h:207
-msgid "Rotate To Face 6 with Window"
-msgstr "Ruota su faccia 6 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:208
-msgid "Rotate To Face 7"
-msgstr "Ruota su faccia 7"
-
-#: ../plugins/compiz.schemas.in.in.h:209
-msgid "Rotate To Face 7 with Window"
-msgstr "Ruota su faccia 7 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:210
-msgid "Rotate To Face 8"
-msgstr "Ruota su faccia 8"
-
-#: ../plugins/compiz.schemas.in.in.h:211
-msgid "Rotate To Face 8 with Window"
-msgstr "Ruota su faccia 8 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:212
-msgid "Rotate To Face 9"
-msgstr "Ruota su faccia 9"
-
-#: ../plugins/compiz.schemas.in.in.h:213
-msgid "Rotate To Face 9 with Window"
-msgstr "Ruota su faccia 9 con finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:214
-msgid "Rotate desktop cube"
-msgstr "Ruota cubo desktop"
-
-#: ../plugins/compiz.schemas.in.in.h:215
-msgid "Rotate left"
-msgstr "Ruota _sinistra"
-
-#: ../plugins/compiz.schemas.in.in.h:216
-msgid "Rotate left and bring active window along"
-msgstr "Ruota a sinistra insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:217
-msgid "Rotate right"
-msgstr "Ruota _destra"
-
-#: ../plugins/compiz.schemas.in.in.h:218
-msgid "Rotate right and bring active window along"
-msgstr "Ruota a destra insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:219
-msgid "Rotate to face 1"
-msgstr "Ruota su faccia 1"
-
-#: ../plugins/compiz.schemas.in.in.h:220
-msgid "Rotate to face 1 and bring active window along"
-msgstr "Ruota su faccia 1 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:221
-msgid "Rotate to face 10"
-msgstr "Ruota su faccia 10"
-
-#: ../plugins/compiz.schemas.in.in.h:222
-msgid "Rotate to face 10 and bring active window along"
-msgstr "Ruota su faccia 10 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:223
-msgid "Rotate to face 11"
-msgstr "Ruota su faccia 11"
-
-#: ../plugins/compiz.schemas.in.in.h:224
-msgid "Rotate to face 11 and bring active window along"
-msgstr "Ruota su faccia 11 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:225
-msgid "Rotate to face 12"
-msgstr "Ruota su faccia 12"
-
-#: ../plugins/compiz.schemas.in.in.h:226
-msgid "Rotate to face 12 and bring active window along"
-msgstr "Ruota su faccia 12 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:227
-msgid "Rotate to face 2"
-msgstr "Ruota su faccia 2"
-
-#: ../plugins/compiz.schemas.in.in.h:228
-msgid "Rotate to face 2 and bring active window along"
-msgstr "Ruota su faccia 2 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:229
-msgid "Rotate to face 3"
-msgstr "Ruota su faccia 3"
-
-#: ../plugins/compiz.schemas.in.in.h:230
-msgid "Rotate to face 3 and bring active window along"
-msgstr "Ruota su faccia 3 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:231
-msgid "Rotate to face 4"
-msgstr "Ruota su faccia 4"
-
-#: ../plugins/compiz.schemas.in.in.h:232
-msgid "Rotate to face 4 and bring active window along"
-msgstr "Ruota su faccia 4 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:233
-msgid "Rotate to face 5"
-msgstr "Ruota su faccia 5"
-
-#: ../plugins/compiz.schemas.in.in.h:234
-msgid "Rotate to face 5 and bring active window along"
-msgstr "Ruota su faccia 5 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:235
-msgid "Rotate to face 6"
-msgstr "Ruota su faccia 6"
-
-#: ../plugins/compiz.schemas.in.in.h:236
-msgid "Rotate to face 6 and bring active window along"
-msgstr "Ruota su faccia 6 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:237
-msgid "Rotate to face 7"
-msgstr "Ruota su faccia 7"
-
-#: ../plugins/compiz.schemas.in.in.h:238
-msgid "Rotate to face 7 and bring active window along"
-msgstr "Ruota su faccia 7 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:239
-msgid "Rotate to face 8"
-msgstr "Ruota su faccia 8"
-
-#: ../plugins/compiz.schemas.in.in.h:240
-msgid "Rotate to face 8 and bring active window along"
-msgstr "Ruota su faccia 8 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:241
-msgid "Rotate to face 9"
-msgstr "Ruota su faccia 9"
-
-#: ../plugins/compiz.schemas.in.in.h:242
-msgid "Rotate to face 9 and bring active window along"
-msgstr "Ruota su faccia 9 insieme a finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:243
-msgid "Rotation Acceleration (1.0-20.0)"
-msgstr "Accelerazione rotazione (1.0-20.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:244
-msgid "Rotation Speed (0.1-50.0)"
-msgstr "Velocità di rotazione (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:245
-msgid "Rotation Timestep (0.1-50.0)"
-msgstr "Intervallo rotazione (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:246
-msgid "Run Dialog"
-msgstr "Finestra di dialogo Esegui"
-
-#: ../plugins/compiz.schemas.in.in.h:247
-msgid "Run command 0"
-msgstr "Esegui comando 0"
-
-#: ../plugins/compiz.schemas.in.in.h:248
-msgid "Run command 1"
-msgstr "Esegui comando 1"
-
-#: ../plugins/compiz.schemas.in.in.h:249
-msgid "Run command 10"
-msgstr "Esegui comando 10"
-
-#: ../plugins/compiz.schemas.in.in.h:250
-msgid "Run command 11"
-msgstr "Esegui comando 11"
-
-#: ../plugins/compiz.schemas.in.in.h:251
-msgid "Run command 2"
-msgstr "Esegui comando 12"
-
-#: ../plugins/compiz.schemas.in.in.h:252
-msgid "Run command 3"
-msgstr "Esegui comando 3"
-
-#: ../plugins/compiz.schemas.in.in.h:253
-msgid "Run command 4"
-msgstr "Esegui comando 4"
-
-#: ../plugins/compiz.schemas.in.in.h:254
-msgid "Run command 5"
-msgstr "Esegui comando 5"
-
-#: ../plugins/compiz.schemas.in.in.h:255
-msgid "Run command 6"
-msgstr "Esegui comando 6"
-
-#: ../plugins/compiz.schemas.in.in.h:256
-msgid "Run command 7"
-msgstr "Esegui comando 7"
-
-#: ../plugins/compiz.schemas.in.in.h:257
-msgid "Run command 8"
-msgstr "Esegui comando 8"
-
-#: ../plugins/compiz.schemas.in.in.h:258
-msgid "Run command 9"
-msgstr "Esegui comando 9"
-
-#: ../plugins/compiz.schemas.in.in.h:259
-msgid "Saturation"
-msgstr "Saturazione"
-
-#: ../plugins/compiz.schemas.in.in.h:260
-msgid "Scale"
-msgstr "Scala"
-
-#: ../plugins/compiz.schemas.in.in.h:261
-msgid "Scale image"
-msgstr "Ridimensiona immagine"
-
-#: ../plugins/compiz.schemas.in.in.h:262
-msgid "Scale images to cover top face of cube"
-msgstr "Ridimensiona immagini per coprire faccia superiore del cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:263
-msgid "Scale speed (0.1-50.0)"
-msgstr "Velocità scala (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:264
-msgid "Scale timestep (0.1-50.0)"
-msgstr "Intervallo ridimensionamento (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:265
-msgid "Scale windows"
-msgstr "Ridimensiona finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:266
-msgid "Screen size multiplier for virtual size (4-32)"
-msgstr "Moltiplicatore dimensioni finestra per dimensioni virtuali (4-32)"
-
-#: ../plugins/compiz.schemas.in.in.h:267
-msgid "Screenshot command line"
-msgstr "Riga di comando istantanea"
-
-#: ../plugins/compiz.schemas.in.in.h:268
-msgid "Sensitivity of pointer movement (0.01-100.00)"
-msgstr "Sensibilità spostamento puntatore (0.01-100.00)"
-
-#: ../plugins/compiz.schemas.in.in.h:269
-msgid "Shade Resistance"
-msgstr "Intensità ombreggiatura"
-
-#: ../plugins/compiz.schemas.in.in.h:270
-msgid "Shade resistance (0-100)"
-msgstr "Intensità ombreggiatura (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:271
-msgid "Shadow Offset X"
-msgstr "Offset ombreggiatura X"
-
-#: ../plugins/compiz.schemas.in.in.h:272
-msgid "Shadow Offset Y"
-msgstr "Offset ombreggiatura Y"
-
-#: ../plugins/compiz.schemas.in.in.h:273
-msgid "Shadow Opacity"
-msgstr "Opacità finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:274
-msgid "Shadow Radius"
-msgstr "Raggio ombreggiatura"
-
-#: ../plugins/compiz.schemas.in.in.h:275
-msgid "Show Main Menu"
-msgstr "Mostra menu principale"
-
-#: ../plugins/compiz.schemas.in.in.h:276
-msgid "Show Run Application dialog"
-msgstr "Mostra finestra di dialogo Esegui applicazione"
-
-#: ../plugins/compiz.schemas.in.in.h:277
-msgid "Show icon next to thumbnail"
-msgstr "Mostra icona accanto a miniatura"
-
-#: ../plugins/compiz.schemas.in.in.h:278
-msgid "Show minimized windows"
-msgstr "Mostra finestre ridotte a icona"
-
-#: ../plugins/compiz.schemas.in.in.h:279
-msgid "Show switcher"
-msgstr "Mostra commutatore"
-
-#: ../plugins/compiz.schemas.in.in.h:280
-msgid "Show the main menu"
-msgstr "Mostra menu principale"
-
-#: ../plugins/compiz.schemas.in.in.h:281
-msgid "Skydome"
-msgstr "Skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:282
-msgid "Skydome Image"
-msgstr "Immagine skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:283
-msgid "Sloppy Focus"
-msgstr "Attivazione casuale"
-
-#: ../plugins/compiz.schemas.in.in.h:284
-msgid "Slow Animations"
-msgstr "Animazioni lente"
-
-#: ../plugins/compiz.schemas.in.in.h:285
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Aggancia rotazione cubo a faccia superiore"
-
-#: ../plugins/compiz.schemas.in.in.h:286
-msgid "Snap To Top Face"
-msgstr "Aggancia a faccia superiore"
-
-#: ../plugins/compiz.schemas.in.in.h:287
-msgid "Snap windows"
-msgstr "Aggancia finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:288
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
-"Dividi e riduci automaticamente finestre ingrandite durante il trascinamento"
-
-#: ../plugins/compiz.schemas.in.in.h:289
-msgid "Snapoff maximized windows"
-msgstr "Dividi finestre ingrandite"
-
-#: ../plugins/compiz.schemas.in.in.h:290
-msgid "Space between windows (0-250)"
-msgstr "Spazio tra le finestre (0-250)"
-
-#: ../plugins/compiz.schemas.in.in.h:291
-msgid "Spacing"
-msgstr "Spaziatura"
-
-#: ../plugins/compiz.schemas.in.in.h:292
-msgid "Speed"
-msgstr "Velocità"
-
-#: ../plugins/compiz.schemas.in.in.h:293
-msgid "Spring Friction (0.1-10.0)"
-msgstr "Attrito scatto (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:294
-msgid "Spring K"
-msgstr "Attrito K"
-
-#: ../plugins/compiz.schemas.in.in.h:295
-msgid "Spring Konstant (0.1-10.0)"
-msgstr "Attrito Konstant (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:296
-msgid "Start Rotation"
-msgstr "Avvia rotazione"
-
-#: ../plugins/compiz.schemas.in.in.h:297
-msgid "Start moving window"
-msgstr "Avvia finestra mobile"
-
-#: ../plugins/compiz.schemas.in.in.h:298
-msgid "Start moving window using keyboard"
-msgstr "Avvia lo spostamento della finestra utilizzando la tastiera"
-
-#: ../plugins/compiz.schemas.in.in.h:299
-msgid "Start resizing window"
-msgstr "Avvia il ridimensionamento della finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:300
-msgid "Start resizing window using keyboard"
-msgstr "Avvia il ridimensionamento della finestra utilizzando la tastiera"
-
-#: ../plugins/compiz.schemas.in.in.h:301
-msgid "Switcher speed (0.1-50.0)"
-msgstr "Velocità commutatore (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:302
-msgid "Switcher timestep (0.1-50.0)"
-msgstr "Intervallo di commutazione  (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:303
-msgid "Take a screenshot"
-msgstr "Crea istantanea"
-
-#: ../plugins/compiz.schemas.in.in.h:304
-msgid "Take a screenshot of a window"
-msgstr "Crea istantanea di una finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:305
-msgid "Terminate"
-msgstr "Termina"
-
-#: ../plugins/compiz.schemas.in.in.h:306
-msgid "Texture Filter"
-msgstr "Filtro texture"
-
-#: ../plugins/compiz.schemas.in.in.h:307
-msgid "Texture filtering (Fast, Good, Best)"
-msgstr "Filtro texture (Veloce, Buono, Ottimo)"
-
-#: ../plugins/compiz.schemas.in.in.h:308
-msgid "The rate at which the screen is redrawn (times/second) (1-200)"
-msgstr "Frequenza di aggiornamento della schermata (volte/secondi) (1-200)"
-
-#: ../plugins/compiz.schemas.in.in.h:309
-msgid "Timeout before flipping viewport (0-1000)"
-msgstr "Timeout prima di riflessione finestra (0-1000)"
-
-#: ../plugins/compiz.schemas.in.in.h:310
-msgid "Timestep"
-msgstr "Intervallo"
-
-#: ../plugins/compiz.schemas.in.in.h:311
-msgid "Toggle Window Maximized"
-msgstr "Alterna finestra ingrandita"
-
-#: ../plugins/compiz.schemas.in.in.h:312
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Alterna finestra ingrandita in orizzontale"
-
-#: ../plugins/compiz.schemas.in.in.h:313
-msgid "Toggle Window Maximized Vertically"
-msgstr "Alterna finestra ingrandita in verticale"
-
-#: ../plugins/compiz.schemas.in.in.h:314
-msgid "Toggle Window Shaded"
-msgstr "Alterna finestra ombreggiata"
-
-#: ../plugins/compiz.schemas.in.in.h:315
-msgid "Toggle active window maximized"
-msgstr "Alterna finestra attiva ingrandita"
-
-#: ../plugins/compiz.schemas.in.in.h:316
-msgid "Toggle active window maximized horizontally"
-msgstr "Alterna finestra attiva ingrandita in orizzontale"
-
-#: ../plugins/compiz.schemas.in.in.h:317
-msgid "Toggle active window maximized vertically"
-msgstr "Alterna finestra attiva ingrandita in verticale"
-
-#: ../plugins/compiz.schemas.in.in.h:318
-msgid "Toggle active window shaded"
-msgstr "Alterna finestra attiva ombreggiata"
-
-#: ../plugins/compiz.schemas.in.in.h:319
-msgid "Toggle rain"
-msgstr "Alterna piogge"
-
-#: ../plugins/compiz.schemas.in.in.h:320
-msgid "Toggle rain effect"
-msgstr "Alterna effetto pioggia"
-
-#: ../plugins/compiz.schemas.in.in.h:321
-msgid "Toggle use of slow animations"
-msgstr "Alterna uso di animazioni lente"
-
-#: ../plugins/compiz.schemas.in.in.h:322
-msgid "Toggle window snapping"
-msgstr "Alterna aggancio finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:323
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "Trasforma finestre quando ridotte a icona e ripristinate"
-
-#: ../plugins/compiz.schemas.in.in.h:324
-msgid "USe linear filter when zoomed in"
-msgstr "Usa filtro lineare all'ingrandimento"
-
-#: ../plugins/compiz.schemas.in.in.h:325
-msgid "Unfold"
-msgstr "Apri"
-
-#: ../plugins/compiz.schemas.in.in.h:326
-msgid "Unfold cube"
-msgstr "Apri cubo"
-
-#: ../plugins/compiz.schemas.in.in.h:327
-msgid "Unmaximize Window"
-msgstr "Annulla ripristino finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:328
-msgid "Unmaximize active window"
-msgstr "Annulla ripristino finestra attiva"
-
-#: ../plugins/compiz.schemas.in.in.h:329
-msgid "Unredirect Fullscreen Windows"
-msgstr "Annulla reindirizzamento finestre a schermo intero"
-
-#: ../plugins/compiz.schemas.in.in.h:330
-msgid "Use diffuse light when screen is transformed"
-msgstr "Usa luce diffusa alla trasformazione della schermata"
-
-#: ../plugins/compiz.schemas.in.in.h:331
-msgid "Use spring model for wobbly window effect"
-msgstr "Usa modello sorgente per effetto tremolio finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:332
-msgid "Vertex Grid Resolution (1-64)"
-msgstr "Risoluzione griglia Vertex (1-64)"
-
-#: ../plugins/compiz.schemas.in.in.h:333
-msgid "Virtual Size"
-msgstr "Dimensioni virtuali"
-
-#: ../plugins/compiz.schemas.in.in.h:334
-msgid "Visual Bell"
-msgstr "Segnale acustico visivo"
-
-#: ../plugins/compiz.schemas.in.in.h:335
-msgid "Water Effect"
-msgstr "Effetto acqua"
-
-#: ../plugins/compiz.schemas.in.in.h:336
-msgid "Water effect on system beep"
-msgstr "Effetto acqua al beep del sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:337
-msgid "Water offset scale (0.0-10.0)"
-msgstr "Scala offset acqua (0.0-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:338
-msgid "Window Decoration"
-msgstr "Decorazione finestra"
-
-#: ../plugins/compiz.schemas.in.in.h:339
-msgid "Window Menu"
-msgstr "Menu finestra "
-
-#: ../plugins/compiz.schemas.in.in.h:340
-msgid "Window Types"
-msgstr "Tipi di finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:341
-msgid "Window decorations"
-msgstr "Decorazioni finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:342
-msgid "Window fade speed (0.1-10.0)"
-msgstr "Velocità dissolvenza finestre (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:343
-msgid "Window placement workarounds"
-msgstr "Alternative posizionamento finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:344
-msgid "Window screenshot command line"
-msgstr "Riga di comando istantanea finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:345
-msgid ""
-"Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, "
-"Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre a cui applicare la dissolvenza (Desktop, Agganciata, Barra "
-"degli strumenti, Menu, Utlity, Schermata iniziale, Finestra di dialogo, "
-"Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:346
-msgid ""
-"Window types that should be transformed when minimized (Desktop, Dock, "
-"Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, "
-"Unknown)"
-msgstr ""
-"Tipi di finestre da trasformare quando ridotte a icona (Desktop, Agganciata, "
-"Barra degli strumenti, Menu, Utlity, Schermata iniziale, Finestra di "
-"dialogo, Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:347
-msgid ""
-"Window types that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre da ridimensionare in modalità scala (Desktop, Agganciata, "
-"Barra degli strumenti, Menu, Utlity, Schermata iniziale, Finestra di "
-"dialogo, Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:348
-msgid ""
-"Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre da visualizzare nel commutatore (Desktop, Agganciata, Barra "
-"degli strumenti, Menu, Utlity, Schermata iniziale, Finestra di dialogo, "
-"Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:349
-msgid ""
-"Window types that should wobble when focused (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre a cui applicare il tremolio quando attivate (Desktop, "
-"Agganciata, Barra degli strumenti, Menu, Utlity, Schermata iniziale, "
-"Finestra di dialogo, Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:350
-msgid ""
-"Window types that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre a cui applicare il tremolio quando afferrate (Desktop, "
-"Agganciata, Barra degli strumenti, Menu, Utlity, Schermata iniziale, "
-"Finestra di dialogo, Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:351
-msgid ""
-"Window types that should wobble when mapped (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre a cui applicare il tremolio quando mappate (Desktop, "
-"Agganciata, Barra degli strumenti, Menu, Utlity, Schermata iniziale, "
-"Finestra di dialogo, Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:352
-msgid ""
-"Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, "
-"Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr ""
-"Tipi di finestre a cui applicare il tremolio quando spostate (Desktop, "
-"Agganciata, Barra degli strumenti, Menu, Utlity, Schermata iniziale, "
-"Finestra di dialogo, Modale, Schermo intero, Sconosciuta)"
-
-#: ../plugins/compiz.schemas.in.in.h:353
-msgid "Wobble effect on system beep"
-msgstr "Effetto tremolio al beep del sistema"
-
-#: ../plugins/compiz.schemas.in.in.h:354
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
-"Effetto tremolio quando si applica o si annulla il ripristino alle finestre"
-
-#: ../plugins/compiz.schemas.in.in.h:355
-msgid "Wobbly Windows"
-msgstr "Finestre tremolanti"
-
-#: ../plugins/compiz.schemas.in.in.h:356
-msgid "Workarounds"
-msgstr "Alternative"
-
-#: ../plugins/compiz.schemas.in.in.h:357
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../plugins/compiz.schemas.in.in.h:358
-msgid "Zoom Desktop"
-msgstr "Zoom desktop"
-
-#: ../plugins/compiz.schemas.in.in.h:359
-msgid "Zoom In"
-msgstr "Aumenta ingrandimento"
-
-#: ../plugins/compiz.schemas.in.in.h:360
-msgid "Zoom Out"
-msgstr "Riduci ingrandimento"
-
-#: ../plugins/compiz.schemas.in.in.h:361
-msgid "Zoom Speed (0.1-50.0)"
-msgstr "Velocità zoom (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:362
-msgid "Zoom Timestep (0.1-50.0)"
-msgstr "Intervallo zoom (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:363
-msgid "Zoom and pan desktop cube"
-msgstr "Applica zoom a panoramica a cubo desktop"
-
-#~ msgid "Focus next window"
-#~ msgstr "Attiva finestra successiva"
-
-#~ msgid "Next Window"
-#~ msgstr "Finestra successiva"
+#~ msgid "Hot corners that should initiate scale mode"
+#~ msgstr "Angoli che devono avviare la modalità scala"

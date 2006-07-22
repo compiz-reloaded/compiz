@@ -65,19 +65,17 @@ libgconf_dump_la_SOURCES =   \
 libgconf_dump_module = libgconf-dump.la
 endif
 
-@INTLTOOL_SCHEMAS_RULE@
-
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
-schema_in_in_files = compiz.schemas.in.in
-schema_DATA = $(schema_in_in_files:.schemas.in.in=.schemas)
+schema_in_files = compiz.schemas.in
+schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
 schema_modules = $(patsubst gconf%,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))
 
-compiz.schemas.in.in:
+compiz.schemas.in:
 	COMPIZ_SCHEMA_PLUGINS="$(schema_modules)" COMPIZ_SCHEMA_GENERAL=1 \
 	compiz --replace $(schema_modules) gconf-dump &&		  \
-	sed -e 's/\[@SCALE_CORNER@\]/[\@SCALE_CORNER\@]/'		  \
-	  < compiz.schemas.dump > compiz.schemas.in.in;			  \
+	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@]/'			  \
+	  < compiz.schemas.dump > compiz.schemas.in;			  \
 	rm -f compiz.schemas.dump
 
 if GCONF_SCHEMAS_INSTALL
@@ -95,11 +93,13 @@ libplace_la_SOURCES = place.c
 libplace_module = libplace.la
 endif
 
-INCLUDES =			\
-	@COMPIZ_CFLAGS@		\
-	@LIBSVG_CAIRO_CFLAGS@	\
-	@GCONF_CFLAGS@		\
-	@PLACE_CFLAGS@		\
+INCLUDES =					\
+	@COMPIZ_CFLAGS@				\
+	@LIBSVG_CAIRO_CFLAGS@			\
+	@GCONF_CFLAGS@				\
+	@PLACE_CFLAGS@				\
+	-DALL_LINGUAS="\"@ALL_LINGUAS@\""	\
+	-DLOCALEDIR="\"@datadir@/locale\""	\
 	-I$(top_srcdir)/include
 
 moduledir = $(plugindir)
@@ -123,4 +123,4 @@ module_LTLIBRARIES =		\
 	libwater.la		\
 	$(libgconf_dump_module)
 
-EXTRA_DIST = $(schema_in_in_files)
+EXTRA_DIST = $(schema_in_files)

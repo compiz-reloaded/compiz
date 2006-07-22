@@ -834,8 +834,8 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_COLOR];
     o->name	  = "color";
-    o->shortDesc  = "Cube Color";
-    o->longDesc	  = "Color of top and bottom sides of the cube";
+    o->shortDesc  = N_("Cube Color");
+    o->longDesc	  = N_("Color of top and bottom sides of the cube");
     o->type	  = CompOptionTypeColor;
     o->value.c[0] = CUBE_COLOR_RED_DEFAULT;
     o->value.c[1] = CUBE_COLOR_GREEN_DEFAULT;
@@ -844,23 +844,23 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_IN];
     o->name	  = "in";
-    o->shortDesc  = "Inside Cube";
-    o->longDesc	  = "Inside cube";
+    o->shortDesc  = N_("Inside Cube");
+    o->longDesc	  = N_("Inside cube");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_IN_DEFAULT;
 
     o = &cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE];
     o->name	  = "scale_image";
-    o->shortDesc  = "Scale image";
-    o->longDesc	  = "Scale images to cover top face of cube";
+    o->shortDesc  = N_("Scale image");
+    o->longDesc	  = N_("Scale images to cover top face of cube");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_SCALE_IMAGE_DEFAULT;
 
     o = &cs->opt[CUBE_SCREEN_OPTION_IMAGES];
     o->name	         = "images";
-    o->shortDesc         = "Image files";
-    o->longDesc	         = "List of PNG and SVG files that should be rendered "
-	"on top face of cube";
+    o->shortDesc         = N_("Image files");
+    o->longDesc	         = N_("List of PNG and SVG files that should be rendered "
+	"on top face of cube");
     o->type	         = CompOptionTypeList;
     o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = N_CUBE_IMAGES;
@@ -872,15 +872,15 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME];
     o->name	  = "skydome";
-    o->shortDesc  = "Skydome";
-    o->longDesc	  = "Render skydome";
+    o->shortDesc  = N_("Skydome");
+    o->longDesc	  = N_("Render skydome");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_SKYDOME_DEFAULT;
 
     o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG];
     o->name	      = "skydome_image";
-    o->shortDesc      = "Skydome Image";
-    o->longDesc	      = "Image to use as texture for the skydome";
+    o->shortDesc      = N_("Skydome Image");
+    o->longDesc	      = N_("Image to use as texture for the skydome");
     o->type	      = CompOptionTypeString;
     o->value.s	      = strdup ("");
     o->rest.s.string  = 0;
@@ -888,15 +888,15 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM];
     o->name	  = "skydome_animated";
-    o->shortDesc  = "Animate Skydome";
-    o->longDesc	  = "Animate skydome when rotating cube";
+    o->shortDesc  = N_("Animate Skydome");
+    o->longDesc	  = N_("Animate skydome when rotating cube");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_SKYDOME_ANIMATE_DEFAULT;
 
     o = &cs->opt[CUBE_SCREEN_OPTION_ACCELERATION];
     o->name		= "acceleration";
-    o->shortDesc	= "Acceleration";
-    o->longDesc		= "Fold Acceleration";
+    o->shortDesc	= N_("Acceleration");
+    o->longDesc		= N_("Fold Acceleration");
     o->type		= CompOptionTypeFloat;
     o->value.f		= CUBE_ACCELERATION_DEFAULT;
     o->rest.f.min	= CUBE_ACCELERATION_MIN;
@@ -905,8 +905,8 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_SPEED];
     o->name		= "speed";
-    o->shortDesc	= "Speed";
-    o->longDesc		= "Fold Speed";
+    o->shortDesc	= N_("Speed");
+    o->longDesc		= N_("Fold Speed");
     o->type		= CompOptionTypeFloat;
     o->value.f		= CUBE_SPEED_DEFAULT;
     o->rest.f.min	= CUBE_SPEED_MIN;
@@ -915,8 +915,8 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_TIMESTEP];
     o->name		= "timestep";
-    o->shortDesc	= "Timestep";
-    o->longDesc		= "Fold Timestep";
+    o->shortDesc	= N_("Timestep");
+    o->longDesc		= N_("Fold Timestep");
     o->type		= CompOptionTypeFloat;
     o->value.f		= CUBE_TIMESTEP_DEFAULT;
     o->rest.f.min	= CUBE_TIMESTEP_MIN;
@@ -925,8 +925,8 @@ cubeScreenInitOptions (CubeScreen *cs,
 
     o = &cs->opt[CUBE_SCREEN_OPTION_MIPMAP];
     o->name	  = "mipmap";
-    o->shortDesc  = "Mipmap";
-    o->longDesc	  = "Generate mipmaps when possible for higher quality scaling";
+    o->shortDesc  = N_("Mipmap");
+    o->longDesc	  = N_("Generate mipmaps when possible for higher quality scaling");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_MIPMAP_DEFAULT;
 }
@@ -1509,8 +1509,8 @@ cubeDisplayInitOptions (CubeDisplay *cd,
 
     o = &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD];
     o->name			  = "unfold";
-    o->shortDesc		  = "Unfold";
-    o->longDesc			  = "Unfold cube";
+    o->shortDesc		  = N_("Unfold");
+    o->longDesc			  = N_("Unfold cube");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = cubeUnfold;
     o->value.action.terminate	  = cubeFold;
@@ -1527,8 +1527,8 @@ cubeDisplayInitOptions (CubeDisplay *cd,
 
     o = &cd->opt[CUBE_DISPLAY_OPTION_NEXT];
     o->name			  = "next_slide";
-    o->shortDesc		  = "Next Slide";
-    o->longDesc			  = "Advance to next slide";
+    o->shortDesc		  = N_("Next Slide");
+    o->longDesc			  = N_("Advance to next slide");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = cubeNextImage;
     o->value.action.terminate	  = 0;
@@ -1545,8 +1545,8 @@ cubeDisplayInitOptions (CubeDisplay *cd,
 
     o = &cd->opt[CUBE_DISPLAY_OPTION_PREV];
     o->name			  = "prev_slide";
-    o->shortDesc		  = "Previous Slide";
-    o->longDesc			  = "Go back to previous slide";
+    o->shortDesc		  = N_("Previous Slide");
+    o->longDesc			  = N_("Go back to previous slide");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = cubePrevImage;
     o->value.action.terminate	  = 0;
@@ -1722,8 +1722,8 @@ CompPluginDep cubeDeps[] = {
 
 CompPluginVTable cubeVTable = {
     "cube",
-    "Desktop Cube",
-    "Place windows on cube",
+    N_("Desktop Cube"),
+    N_("Place windows on cube"),
     cubeInit,
     cubeFini,
     cubeInitDisplay,
