@@ -271,13 +271,15 @@ typedef enum {
 } CompBindingType;
 
 typedef enum {
-    CompActionStateInitKey    = 1 << 0,
-    CompActionStateTermKey    = 1 << 1,
-    CompActionStateInitButton = 1 << 2,
-    CompActionStateTermButton = 1 << 3,
-    CompActionStateInitBell   = 1 << 4,
-    CompActionStateInitEdge   = 1 << 5,
-    CompActionStateTermEdge   = 1 << 6
+    CompActionStateInitKey     = 1 << 0,
+    CompActionStateTermKey     = 1 << 1,
+    CompActionStateInitButton  = 1 << 2,
+    CompActionStateTermButton  = 1 << 3,
+    CompActionStateInitBell    = 1 << 4,
+    CompActionStateInitEdge    = 1 << 5,
+    CompActionStateTermEdge    = 1 << 6,
+    CompActionStateInitEdgeDnd = 1 << 7,
+    CompActionStateTermEdgeDnd = 1 << 8
 } CompActionState;
 
 typedef struct _CompKeyBinding {
