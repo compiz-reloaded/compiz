@@ -35,12 +35,18 @@
 
 #include <compiz.h>
 
-#define SWITCH_INITIATE_KEY_DEFAULT       "Tab"
-#define SWITCH_INITIATE_MODIFIERS_DEFAULT CompAltMask
+#define SWITCH_NEXT_KEY_DEFAULT       "Tab"
+#define SWITCH_NEXT_MODIFIERS_DEFAULT CompAltMask
 
-#define SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT ControlMask
+#define SWITCH_PREV_KEY_DEFAULT       "Tab"
+#define SWITCH_PREV_MODIFIERS_DEFAULT (CompAltMask | ShiftMask)
 
-#define SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT ShiftMask
+#define SWITCH_NEXT_ALL_KEY_DEFAULT       "Tab"
+#define SWITCH_NEXT_ALL_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
+
+#define SWITCH_PREV_ALL_KEY_DEFAULT       "Tab"
+#define SWITCH_PREV_ALL_MODIFIERS_DEFAULT \
+    (CompAltMask | ControlMask | ShiftMask)
 
 #define SWITCH_SPEED_DEFAULT   1.5f
 #define SWITCH_SPEED_MIN       0.1f
@@ -89,28 +95,33 @@ static char *winType[] = {
 
 static int displayPrivateIndex;
 
+#define SWITCH_DISPLAY_OPTION_NEXT	     0
+#define SWITCH_DISPLAY_OPTION_PREV	     1
+#define SWITCH_DISPLAY_OPTION_NEXT_ALL	     2
+#define SWITCH_DISPLAY_OPTION_PREV_ALL	     3
+#define SWITCH_DISPLAY_OPTION_NUM	     4
+
 typedef struct _SwitchDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
+    CompOption opt[SWITCH_DISPLAY_OPTION_NUM];
+
     Atom selectWinAtom;
 } SwitchDisplay;
 
-#define SWITCH_SCREEN_OPTION_INITIATE	  0
-#define SWITCH_SCREEN_OPTION_INITIATE_ALL 1
-#define SWITCH_SCREEN_OPTION_PREV_WINDOW  2
-#define SWITCH_SCREEN_OPTION_SPEED	  3
-#define SWITCH_SCREEN_OPTION_TIMESTEP	  4
-#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  5
-#define SWITCH_SCREEN_OPTION_MIPMAP	  6
-#define SWITCH_SCREEN_OPTION_SATURATION	  7
-#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  8
-#define SWITCH_SCREEN_OPTION_OPACITY	  9
-#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 10
-#define SWITCH_SCREEN_OPTION_ZOOM	  11
-#define SWITCH_SCREEN_OPTION_ICON	  12
-#define SWITCH_SCREEN_OPTION_MINIMIZED	  13
-#define SWITCH_SCREEN_OPTION_NUM	  14
+#define SWITCH_SCREEN_OPTION_SPEED	  0
+#define SWITCH_SCREEN_OPTION_TIMESTEP	  1
+#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  2
+#define SWITCH_SCREEN_OPTION_MIPMAP	  3
+#define SWITCH_SCREEN_OPTION_SATURATION	  4
+#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  5
+#define SWITCH_SCREEN_OPTION_OPACITY	  6
+#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 7
+#define SWITCH_SCREEN_OPTION_ZOOM	  8
+#define SWITCH_SCREEN_OPTION_ICON	  9
+#define SWITCH_SCREEN_OPTION_MINIMIZED	  10
+#define SWITCH_SCREEN_OPTION_NUM	  11
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -120,7 +131,6 @@ typedef struct _SwitchScreen {
     DamageWindowRectProc   damageWindowRect;
 
     CompOption opt[SWITCH_SCREEN_OPTION_NUM];
-    CompOption init_all_bind, prev_bind, prev_all_bind;
 
     Window popupWindow;
 
@@ -240,7 +250,6 @@ switchSetScreenOption (CompScreen      *screen,
 {
     CompOption  *o;
     int	        index;
-    CompBinding binding;
 
     SWITCH_SCREEN (screen);
 
@@ -249,45 +258,6 @@ switchSetScreenOption (CompScreen      *screen,
 	return FALSE;
 
     switch (index) {
-    case SWITCH_SCREEN_OPTION_INITIATE:
-	if (value->bind.type != CompBindingTypeKey)
-	    return FALSE;
-	if (!addScreenBinding (screen, &value->bind))
-	    return FALSE;
-	removeScreenBinding (screen, &o->value.bind);
-
-	/* fall through */
-    case SWITCH_SCREEN_OPTION_INITIATE_ALL:
-    case SWITCH_SCREEN_OPTION_PREV_WINDOW:
-	if (value->bind.type != CompBindingTypeKey)
-	    return FALSE;
-	if (!compSetBindingOption (o, value))
-	    return FALSE;
-
-	binding = ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind;
-	binding.u.key.modifiers |=
-	    ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL].value.bind.u.key.modifiers;
-	if (addScreenBinding (screen, &binding)) {
-	    removeScreenBinding (screen, &ss->init_all_bind.value.bind);
-	    ss->init_all_bind.value.bind = binding;
-	}
-
-	binding.u.key.modifiers |=
-	    ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW].value.bind.u.key.modifiers;
-	if (addScreenBinding (screen, &binding)) {
-	    removeScreenBinding (screen, &ss->prev_all_bind.value.bind);
-	    ss->prev_all_bind.value.bind = binding;
-	}
-
-	binding = ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind;
-	binding.u.key.modifiers |=
-	    ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW].value.bind.u.key.modifiers;
-	if (addScreenBinding (screen, &binding)) {
-	    removeScreenBinding (screen, &ss->prev_bind.value.bind);
-	    ss->prev_bind.value.bind = binding;
-	}
-
-	return TRUE;
     case SWITCH_SCREEN_OPTION_SPEED:
 	if (compSetFloatOption (o, value))
 	{
@@ -367,52 +337,10 @@ switchSetScreenOption (CompScreen      *screen,
 }
 
 static void
-switchScreenInitOptions (SwitchScreen *ss,
-			 Display      *display)
+switchScreenInitOptions (SwitchScreen *ss)
 {
     CompOption *o;
     int	       i;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE];
-    o->name			  = "initiate";
-    o->shortDesc		  = N_("Initiate Window Switcher");
-    o->longDesc			  = N_("Show switcher");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SWITCH_INITIATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_INITIATE_KEY_DEFAULT));
-
-    ss->init_all_bind = ss->prev_bind = ss->prev_all_bind = *o;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_INITIATE_ALL];
-    o->name			  = "initiate_all";
-    o->shortDesc		  = N_("Initiate All Windows");
-    o->longDesc			  = N_("Modifier to show switcher for all windows");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SWITCH_INITIATE_ALL_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   = 0;
-
-    ss->init_all_bind.value.bind.u.key.modifiers |=
-	o->value.bind.u.key.modifiers;
-    ss->prev_all_bind.value.bind.u.key.modifiers |=
-	o->value.bind.u.key.modifiers;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_PREV_WINDOW];
-    o->name			  = "prev_window";
-    o->shortDesc		  = N_("Prev Window");
-    o->longDesc			  = N_("Modifier key to select previous window");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SWITCH_PREV_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   = 0;
-
-    ss->prev_bind.value.bind.u.key.modifiers |=
-	o->value.bind.u.key.modifiers;
-    ss->prev_all_bind.value.bind.u.key.modifiers |=
-	o->value.bind.u.key.modifiers;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -452,7 +380,8 @@ switchScreenInitOptions (SwitchScreen *ss,
     o = &ss->opt[SWITCH_SCREEN_OPTION_MIPMAP];
     o->name	  = "mipmap";
     o->shortDesc  = N_("Mipmap");
-    o->longDesc	  = N_("Generate mipmaps when possible for higher quality scaling");
+    o->longDesc	  = N_("Generate mipmaps when possible for higher quality "
+		       "scaling");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_MIPMAP_DEFAULT;
 
@@ -904,56 +833,211 @@ switchInitiate (CompScreen *s,
     }
 }
 
-static void
-switchTerminate (CompScreen *s,
-		 Bool	    select)
+static Bool
+switchTerminate (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int	         nOption)
 {
-    SWITCH_SCREEN (s);
+    CompScreen *s;
+    Window     xid;
 
-    if (ss->grabIndex)
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    for (s = d->screens; s; s = s->next)
     {
-	CompWindow *w;
+	SWITCH_SCREEN (s);
 
-	if (ss->popupWindow)
+	if (xid && s->root != xid)
+	    continue;
+
+	if (ss->grabIndex)
 	{
-	    w = findWindowAtScreen (s, ss->popupWindow);
-	    if (w && w->managed && w->mapNum)
+	    CompWindow *w;
+
+	    if (ss->popupWindow)
 	    {
-		w->hidden = TRUE;
-		hideWindow (w);
+		w = findWindowAtScreen (s, ss->popupWindow);
+		if (w && w->managed && w->mapNum)
+		{
+		    w->hidden = TRUE;
+		    hideWindow (w);
+		}
+		else
+		{
+		    XUnmapWindow (s->display->display, ss->popupWindow);
+		}
+	    }
+
+	    ss->switching = FALSE;
+
+	    if (state && ss->selectedWindow)
+	    {
+		w = findWindowAtScreen (s, ss->selectedWindow);
+		if (w)
+		    sendWindowActivationRequest (w->screen, w->id);
+	    }
+
+	    removeScreenGrab (s, ss->grabIndex, 0);
+	    ss->grabIndex = 0;
+
+	    if (!ss->zooming)
+	    {
+		ss->selectedWindow = None;
+		ss->zoomedWindow   = None;
 	    }
 	    else
 	    {
-		XUnmapWindow (s->display->display, ss->popupWindow);
+		ss->moreAdjust = 1;
 	    }
+
+	    ss->lastActiveNum = 0;
+
+	    damageScreen (s);
 	}
-
-	ss->switching = FALSE;
-
-	if (select && ss->selectedWindow)
-	{
-	    w = findWindowAtScreen (s, ss->selectedWindow);
-	    if (w)
-		sendWindowActivationRequest (w->screen, w->id);
-	}
-
-	removeScreenGrab (s, ss->grabIndex, 0);
-	ss->grabIndex = 0;
-
-	if (!ss->zooming)
-	{
-	    ss->selectedWindow = None;
-	    ss->zoomedWindow   = None;
-	}
-	else
-	{
-	    ss->moreAdjust = 1;
-	}
-
-	ss->lastActiveNum = 0;
-
-	damageScreen (s);
     }
+
+    if (action)
+	action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
+
+    return FALSE;
+}
+
+static Bool
+switchNext (CompDisplay     *d,
+	    CompAction      *action,
+	    CompActionState state,
+	    CompOption      *option,
+	    int	            nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SWITCH_SCREEN (s);
+
+	if (!ss->switching)
+	{
+	    switchInitiate (s, FALSE);
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+	}
+
+	switchToWindow (s, TRUE);
+    }
+
+    return FALSE;
+}
+
+static Bool
+switchPrev (CompDisplay     *d,
+	    CompAction      *action,
+	    CompActionState state,
+	    CompOption      *option,
+	    int	            nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SWITCH_SCREEN (s);
+
+	if (!ss->switching)
+	{
+	    switchInitiate (s, FALSE);
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+	}
+
+	switchToWindow (s, FALSE);
+    }
+
+    return FALSE;
+}
+
+static Bool
+switchNextAll (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SWITCH_SCREEN (s);
+
+	if (!ss->switching)
+	{
+	    switchInitiate (s, TRUE);
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+	}
+
+	switchToWindow (s, TRUE);
+    }
+
+    return FALSE;
+}
+
+static Bool
+switchPrevAll (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SWITCH_SCREEN (s);
+
+	if (!ss->switching)
+	{
+	    switchInitiate (s, TRUE);
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+	}
+
+	switchToWindow (s, FALSE);
+    }
+
+    return FALSE;
 }
 
 static void
@@ -1021,7 +1105,13 @@ switchWindowRemove (CompDisplay *d,
 
 	if (ss->nWindows == 0)
 	{
-	    switchTerminate (w->screen, FALSE);
+	    CompOption o;
+
+	    o.type    = CompOptionTypeInt;
+	    o.name    = "root";
+	    o.value.i = w->screen->root;
+
+	    switchTerminate (d, NULL, 0, &o, 1);
 	    return;
 	}
 
@@ -1070,46 +1160,7 @@ static void
 switchHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
-    CompScreen *s;
-
     SWITCH_DISPLAY (d);
-
-    switch (event->type) {
-    case KeyPress:
-    case KeyRelease:
-	s = findScreenAtDisplay (d, event->xkey.root);
-	if (s)
-	{
-	    SWITCH_SCREEN (s);
-
-	    if (!ss->switching)
-	    {
-		if (eventMatches (d, event, &ss->init_all_bind) ||
-		    eventMatches (d, event, &ss->prev_all_bind))
-		    switchInitiate (s, TRUE);
-		else if (eventMatches (d, event,
-				       &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]) ||
-			 eventMatches (d, event, &ss->prev_bind))
-		    switchInitiate (s, FALSE);
-	    }
-
-	    if (eventMatches (d, event,
-			      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]) ||
-		eventMatches (d, event, &ss->init_all_bind))
-		switchToWindow (s, TRUE);
-	    else if (eventMatches (d, event, &ss->prev_bind) ||
-		     eventMatches (d, event, &ss->prev_all_bind))
-		switchToWindow (s, FALSE);
-	    else if (event->type	 == KeyPress &&
-		     event->xkey.keycode == s->escapeKeyCode)
-		switchTerminate (s, FALSE);
-	    else if (eventTerminates (d, event,
-				      &ss->opt[SWITCH_SCREEN_OPTION_INITIATE]))
-		switchTerminate (s, TRUE);
-	}
-    default:
-	break;
-    }
 
     UNWRAP (sd, d, handleEvent);
     (*d->handleEvent) (d, event);
@@ -1760,6 +1811,125 @@ switchDamageWindowRect (CompWindow *w,
     return status;
 }
 
+static CompOption *
+switchGetDisplayOptions (CompDisplay *display,
+		       int	   *count)
+{
+    SWITCH_DISPLAY (display);
+
+    *count = NUM_OPTIONS (sd);
+    return sd->opt;
+}
+
+static Bool
+switchSetDisplayOption (CompDisplay     *display,
+			char	        *name,
+			CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    SWITCH_DISPLAY (display);
+
+    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case SWITCH_DISPLAY_OPTION_NEXT:
+    case SWITCH_DISPLAY_OPTION_NEXT_ALL:
+    case SWITCH_DISPLAY_OPTION_PREV:
+    case SWITCH_DISPLAY_OPTION_PREV_ALL:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+switchDisplayInitOptions (SwitchDisplay *sd,
+			  Display       *display)
+{
+    CompOption *o;
+
+    o = &sd->opt[SWITCH_DISPLAY_OPTION_NEXT];
+    o->name			  = "next";
+    o->shortDesc		  = N_("Next window");
+    o->longDesc			  = N_("Popup switcher if not visible and "
+				       "select next window");
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = switchNext;
+    o->value.action.terminate	  = switchTerminate;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = SWITCH_NEXT_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (SWITCH_NEXT_KEY_DEFAULT));
+
+    o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV];
+    o->name			  = "prev";
+    o->shortDesc		  = N_("Prev window");
+    o->longDesc			  = N_("Popup switcher if not visible and "
+				       "select previous window");
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = switchPrev;
+    o->value.action.terminate	  = switchTerminate;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = SWITCH_PREV_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (SWITCH_PREV_KEY_DEFAULT));
+
+    o = &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL];
+    o->name			  = "next_all";
+    o->shortDesc		  = N_("Next window");
+    o->longDesc			  = N_("Popup switcher if not visible and "
+				       "select next window out of all "
+				       "windows");
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = switchNextAll;
+    o->value.action.terminate	  = switchTerminate;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = SWITCH_NEXT_ALL_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (SWITCH_NEXT_ALL_KEY_DEFAULT));
+
+    o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL];
+    o->name			  = "prev";
+    o->shortDesc		  = N_("Prev window");
+    o->longDesc			  = N_("Popup switcher if not visible and "
+				       "select previous window out of all "
+				       "windows");
+    o->type			  = CompOptionTypeAction;
+    o->value.action.initiate	  = switchPrevAll;
+    o->value.action.terminate	  = switchTerminate;
+    o->value.action.bell	  = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = SWITCH_PREV_ALL_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
+	XKeysymToKeycode (display,
+			  XStringToKeysym (SWITCH_PREV_ALL_KEY_DEFAULT));
+}
+
 static Bool
 switchInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
@@ -1778,6 +1948,8 @@ switchInitDisplay (CompPlugin  *p,
     }
 
     sd->selectWinAtom = XInternAtom (d->display, SELECT_WIN_PROP, 0);
+
+    switchDisplayInitOptions (sd, d->display);
 
     WRAP (sd, d, handleEvent, switchHandleEvent);
 
@@ -1850,12 +2022,12 @@ switchInitScreen (CompPlugin *p,
     ss->bringToFront = SWITCH_BRINGTOFRONT_DEFAULT;
     ss->allWindows   = FALSE;
 
-    switchScreenInitOptions (ss, s->display->display);
+    switchScreenInitOptions (ss);
 
-    addScreenBinding (s, &ss->opt[SWITCH_SCREEN_OPTION_INITIATE].value.bind);
-    addScreenBinding (s, &ss->init_all_bind.value.bind);
-    addScreenBinding (s, &ss->prev_bind.value.bind);
-    addScreenBinding (s, &ss->prev_all_bind.value.bind);
+    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT].value.action);
+    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
+    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
+    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL].value.action);
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
@@ -1915,8 +2087,8 @@ CompPluginVTable switchVTable = {
     switchFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
+    switchGetDisplayOptions,
+    switchSetDisplayOption,
     switchGetScreenOptions,
     switchSetScreenOption,
     NULL,
