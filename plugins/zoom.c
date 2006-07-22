@@ -63,20 +63,24 @@
 
 static int displayPrivateIndex;
 
+#define ZOOM_DISPLAY_OPTION_INITIATE 0
+#define ZOOM_DISPLAY_OPTION_IN	     1
+#define ZOOM_DISPLAY_OPTION_OUT	     2
+#define ZOOM_DISPLAY_OPTION_NUM	     3
+
 typedef struct _ZoomDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
+
+    CompOption opt[ZOOM_DISPLAY_OPTION_NUM];
 } ZoomDisplay;
 
 #define ZOOM_SCREEN_OPTION_POINTER_INVERT_Y    0
 #define ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY 1
-#define ZOOM_SCREEN_OPTION_INITIATE	       2
-#define ZOOM_SCREEN_OPTION_IN		       3
-#define ZOOM_SCREEN_OPTION_OUT		       4
-#define ZOOM_SCREEN_OPTION_SPEED	       5
-#define ZOOM_SCREEN_OPTION_TIMESTEP	       6
-#define ZOOM_SCREEN_OPTION_FILTER_LINEAR       7
-#define ZOOM_SCREEN_OPTION_NUM		       8
+#define ZOOM_SCREEN_OPTION_SPEED	       2
+#define ZOOM_SCREEN_OPTION_TIMESTEP	       3
+#define ZOOM_SCREEN_OPTION_FILTER_LINEAR       4
+#define ZOOM_SCREEN_OPTION_NUM		       5
 
 typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -168,20 +172,6 @@ zoomSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case ZOOM_SCREEN_OPTION_INITIATE:
-    case ZOOM_SCREEN_OPTION_IN:
-	if (addScreenBinding (screen, &value->bind))
-	{
-	    removeScreenBinding (screen, &o->value.bind);
-
-	    if (compSetBindingOption (o, value))
-		return TRUE;
-	}
-	break;
-    case ZOOM_SCREEN_OPTION_OUT:
-	if (compSetBindingOption (o, value))
-	    return TRUE;
-	break;
     case ZOOM_SCREEN_OPTION_SPEED:
 	if (compSetFloatOption (o, value))
 	{
@@ -207,8 +197,7 @@ zoomSetScreenOption (CompScreen      *screen,
 }
 
 static void
-zoomScreenInitOptions (ZoomScreen *zs,
-		       Display    *display)
+zoomScreenInitOptions (ZoomScreen *zs)
 {
     CompOption *o;
 
@@ -228,33 +217,6 @@ zoomScreenInitOptions (ZoomScreen *zs,
     o->rest.f.min	= ZOOM_POINTER_SENSITIVITY_MIN;
     o->rest.f.max	= ZOOM_POINTER_SENSITIVITY_MAX;
     o->rest.f.precision = ZOOM_POINTER_SENSITIVITY_PRECISION;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = N_("Initiate");
-    o->longDesc			     = N_("Zoom In");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = ZOOM_INITIATE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = ZOOM_INITIATE_BUTTON_DEFAULT;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_IN];
-    o->name			     = "zoom_in";
-    o->shortDesc		     = N_("Zoom In");
-    o->longDesc			     = N_("Zoom In");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = ZOOM_IN_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = ZOOM_IN_BUTTON_DEFAULT;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_OUT];
-    o->name			     = "zoom_out";
-    o->shortDesc		     = N_("Zoom Out");
-    o->longDesc			     = N_("Zoom Out");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = ZOOM_OUT_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = ZOOM_OUT_BUTTON_DEFAULT;
 
     o = &zs->opt[ZOOM_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -463,76 +425,146 @@ zoomPaintScreen (CompScreen		 *s,
     return status;
 }
 
-static void
-zoomIn (CompScreen *s,
-	int	   x,
-	int	   y)
+static Bool
+zoomIn (CompDisplay     *d,
+	CompAction      *action,
+	CompActionState state,
+	CompOption      *option,
+	int		nOption)
 {
-    ZOOM_SCREEN (s);
+    CompScreen *s;
+    Window     xid;
 
-    if (otherScreenGrabExist (s, "zoom", "scale", 0))
-	return;
+    xid = getIntOptionNamed (option, nOption, "root", 0);
 
-    if (!zs->grabIndex)
+    s = findScreenAtDisplay (d, xid);
+    if (s)
     {
-	zs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "zoom");
+	ZOOM_SCREEN (s);
 
-	zs->savedPointer.x = pointerX;
-	zs->savedPointer.y = pointerY;
-    }
+	if (otherScreenGrabExist (s, "zoom", "scale", 0))
+	    return FALSE;
 
-    if (zs->grabIndex)
-    {
-	zs->grabbed = TRUE;
-
-	if (zs->newZoom / 2.0f * DEFAULT_Z_CAMERA >= 0.1f)
+	if (!zs->grabIndex)
 	{
-	    zs->newZoom /= 2.0f;
+	    zs->grabIndex = pushScreenGrab (s, s->invisibleCursor, "zoom");
 
-	    damageScreen (s);
+	    zs->savedPointer.x = pointerX;
+	    zs->savedPointer.y = pointerY;
+	}
 
-	    if (zs->currentZoom == 1.0f)
+	if (zs->grabIndex)
+	{
+	    int x, y;
+
+	    x = getIntOptionNamed (option, nOption, "x", 0);
+	    y = getIntOptionNamed (option, nOption, "y", 0);
+
+	    zs->grabbed = TRUE;
+
+	    if (zs->newZoom / 2.0f * DEFAULT_Z_CAMERA >= 0.1f)
 	    {
-		zs->xTranslate = (x - s->width / 2) / (s->width * 2.0f);
-		zs->yTranslate = (y - s->height / 2) / (s->height * 2.0f);
+		zs->newZoom /= 2.0f;
 
-		zs->xTranslate /= zs->newZoom;
-		zs->yTranslate /= zs->newZoom;
+		damageScreen (s);
+
+		if (zs->currentZoom == 1.0f)
+		{
+		    zs->xTranslate = (x - s->width  / 2) / (s->width  * 2.0f);
+		    zs->yTranslate = (y - s->height / 2) / (s->height * 2.0f);
+
+		    zs->xTranslate /= zs->newZoom;
+		    zs->yTranslate /= zs->newZoom;
+		}
 	    }
 	}
     }
+
+    return FALSE;
 }
 
-static void
-zoomOut (CompScreen *s)
+static Bool
+zoomInitiate (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
 {
-    ZOOM_SCREEN (s);
+    zoomIn (d, action, state, option, nOption);
 
-    if (zs->grabIndex)
+    if (state & CompActionStateInitKey)
+	action->state |= CompActionStateTermKey;
+
+    if (state & CompActionStateInitButton)
+	action->state |= CompActionStateTermButton;
+
+    return FALSE;
+}
+
+static Bool
+zoomOut (CompDisplay     *d,
+	 CompAction      *action,
+	 CompActionState state,
+	 CompOption      *option,
+	 int	         nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
     {
-	zs->newZoom *= 2.0f;
-	if (zs->newZoom > DEFAULT_Z_CAMERA - (DEFAULT_Z_CAMERA / 10.0f))
+	ZOOM_SCREEN (s);
+
+	if (zs->grabIndex)
 	{
-	    zs->grabbed = FALSE;
-	    zs->newZoom = 1.0f;
-	}
+	    zs->newZoom *= 2.0f;
+	    if (zs->newZoom > DEFAULT_Z_CAMERA - (DEFAULT_Z_CAMERA / 10.0f))
+	    {
+		zs->grabbed = FALSE;
+		zs->newZoom = 1.0f;
+	    }
 
-	damageScreen (s);
+	    damageScreen (s);
+	}
     }
+
+    return FALSE;
 }
 
-static void
-zoomTerminate (CompScreen *s)
+static Bool
+zoomTerminate (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
 {
-    ZOOM_SCREEN (s);
+    CompScreen *s;
+    Window     xid;
 
-    if (zs->grabIndex)
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    for (s = d->screens; s; s = s->next)
     {
-	zs->newZoom = 1.0f;
-	zs->grabbed = FALSE;
+	ZOOM_SCREEN (s);
 
-	damageScreen (s);
+	if (xid && s->root != xid)
+	    continue;
+
+	if (zs->grabIndex)
+	{
+	    zs->newZoom = 1.0f;
+	    zs->grabbed = FALSE;
+
+	    damageScreen (s);
+	}
     }
+
+    action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
+
+    return FALSE;
 }
 
 static void
@@ -544,50 +576,6 @@ zoomHandleEvent (CompDisplay *d,
     ZOOM_DISPLAY (d);
 
     switch (event->type) {
-    case KeyPress:
-    case KeyRelease:
-	s = findScreenAtDisplay (d, event->xkey.root);
-	if (s)
-	{
-	    ZOOM_SCREEN (s);
-
-	    if (eventMatches (d, event
-			      , &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]) ||
-		eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_IN]))
-		zoomIn (s,
-			event->xkey.x_root,
-			event->xkey.y_root);
-
-	    if (eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_OUT]))
-		zoomOut (s);
-
-	    if (eventTerminates (d, event,
-				 &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]))
-		zoomTerminate (s);
-	}
-	break;
-    case ButtonPress:
-    case ButtonRelease:
-	s = findScreenAtDisplay (d, event->xbutton.root);
-	if (s)
-	{
-	    ZOOM_SCREEN (s);
-
-	    if (eventMatches (d, event,
-			      &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]) ||
-		eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_IN]))
-		zoomIn (s,
-			event->xbutton.x_root,
-			event->xbutton.y_root);
-
-	    if (eventMatches (d, event, &zs->opt[ZOOM_SCREEN_OPTION_OUT]))
-		zoomOut (s);
-
-	    if (eventTerminates (d, event,
-				 &zs->opt[ZOOM_SCREEN_OPTION_INITIATE]))
-		zoomTerminate (s);
-	}
-	break;
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
@@ -670,6 +658,98 @@ zoomSetScreenOptionForPlugin (CompScreen      *s,
     return status;
 }
 
+static CompOption *
+zoomGetDisplayOptions (CompDisplay *display,
+		       int	   *count)
+{
+    ZOOM_DISPLAY (display);
+
+    *count = NUM_OPTIONS (zd);
+    return zd->opt;
+}
+
+static Bool
+zoomSetDisplayOption (CompDisplay     *display,
+		      char	      *name,
+		      CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    ZOOM_DISPLAY (display);
+
+    o = compFindOption (zd->opt, NUM_OPTIONS (zd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case ZOOM_DISPLAY_OPTION_INITIATE:
+    case ZOOM_DISPLAY_OPTION_IN:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+	break;
+    case ZOOM_DISPLAY_OPTION_OUT:
+	if (compSetActionOption (o, value))
+	    return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+zoomDisplayInitOptions (ZoomDisplay *zd,
+			Display     *display)
+{
+    CompOption *o;
+
+    o = &zd->opt[ZOOM_DISPLAY_OPTION_INITIATE];
+    o->name			     = "initiate";
+    o->shortDesc		     = N_("Initiate");
+    o->longDesc			     = N_("Zoom In");
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = zoomInitiate;
+    o->value.action.terminate	     = zoomTerminate;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = ZOOM_INITIATE_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = ZOOM_INITIATE_BUTTON_DEFAULT;
+
+    o = &zd->opt[ZOOM_DISPLAY_OPTION_IN];
+    o->name			     = "zoom_in";
+    o->shortDesc		     = N_("Zoom In");
+    o->longDesc			     = N_("Zoom In");
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = zoomIn;
+    o->value.action.terminate	     = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = ZOOM_IN_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = ZOOM_IN_BUTTON_DEFAULT;
+
+    o = &zd->opt[ZOOM_DISPLAY_OPTION_OUT];
+    o->name			     = "zoom_out";
+    o->shortDesc		     = N_("Zoom Out");
+    o->longDesc			     = N_("Zoom Out");
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = zoomOut;
+    o->value.action.terminate	     = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = ZOOM_OUT_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = ZOOM_OUT_BUTTON_DEFAULT;
+}
+
 static Bool
 zoomInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -686,6 +766,8 @@ zoomInitDisplay (CompPlugin  *p,
 	free (zd);
 	return FALSE;
     }
+
+    zoomDisplayInitOptions (zd, d->display);
 
     WRAP (zd, d, handleEvent, zoomHandleEvent);
 
@@ -745,10 +827,10 @@ zoomInitScreen (CompPlugin *p,
     zs->speed    = ZOOM_SPEED_DEFAULT;
     zs->timestep = ZOOM_TIMESTEP_DEFAULT;
 
-    zoomScreenInitOptions (zs, s->display->display);
+    zoomScreenInitOptions (zs);
 
-    addScreenBinding (s, &zs->opt[ZOOM_SCREEN_OPTION_INITIATE].value.bind);
-    addScreenBinding (s, &zs->opt[ZOOM_SCREEN_OPTION_IN].value.bind);
+    addScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_INITIATE].value.action);
+    addScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_IN].value.action);
 
     WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
     WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);
@@ -809,8 +891,8 @@ CompPluginVTable zoomVTable = {
     zoomFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
+    zoomGetDisplayOptions,
+    zoomSetDisplayOption,
     zoomGetScreenOptions,
     zoomSetScreenOption,
     zoomDeps,
