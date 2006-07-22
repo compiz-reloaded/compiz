@@ -125,8 +125,6 @@ typedef struct _Model {
 #define WOBBLY_MIN_GRID_SIZE_MIN      4
 #define WOBBLY_MIN_GRID_SIZE_MAX      128
 
-#define WOBBLY_VISUAL_BELL_DEFAULT FALSE
-
 typedef enum {
     WobblyEffectNone = 0,
     WobblyEffectShiver
@@ -171,8 +169,9 @@ static char *moveWinType[] = {
 
 static int displayPrivateIndex;
 
-#define WOBBLY_DISPLAY_OPTION_SNAP 0
-#define WOBBLY_DISPLAY_OPTION_NUM  1
+#define WOBBLY_DISPLAY_OPTION_SNAP   0
+#define WOBBLY_DISPLAY_OPTION_SHIVER 1
+#define WOBBLY_DISPLAY_OPTION_NUM    2
 
 typedef struct _WobblyDisplay {
     int		    screenPrivateIndex;
@@ -194,8 +193,7 @@ typedef struct _WobblyDisplay {
 #define WOBBLY_SCREEN_OPTION_GRAB_WINDOW_TYPE  8
 #define WOBBLY_SCREEN_OPTION_MOVE_WINDOW_TYPE  9
 #define WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT   10
-#define WOBBLY_SCREEN_OPTION_VISUAL_BELL       11
-#define WOBBLY_SCREEN_OPTION_NUM	       12
+#define WOBBLY_SCREEN_OPTION_NUM	       11
 
 typedef struct _WobblyScreen {
     int	windowPrivateIndex;
@@ -361,7 +359,6 @@ wobblySetScreenOption (CompScreen      *screen,
 	}
 	break;
     case WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT:
-    case WOBBLY_SCREEN_OPTION_VISUAL_BELL:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
     default:
@@ -493,16 +490,10 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o = &ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT];
     o->name	  = "maximize_effect";
     o->shortDesc  = N_("Maximize Effect");
-    o->longDesc	  = N_("Wobble effect when maximizing and unmaximizing windows");
+    o->longDesc	  = N_("Wobble effect when maximizing and unmaximizing "
+		       "windows");
     o->type	  = CompOptionTypeBool;
     o->value.b    = WOBBLY_MAXIMIZE_EFFECT_DEFAULT;
-
-    o = &ws->opt[WOBBLY_SCREEN_OPTION_VISUAL_BELL];
-    o->name	  = "visual_bell";
-    o->shortDesc  = N_("Visual Bell");
-    o->longDesc	  = N_("Wobble effect on system beep");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = WOBBLY_VISUAL_BELL_DEFAULT;
 }
 
 static void
@@ -2262,6 +2253,40 @@ wobblyDisableSnapping (CompDisplay     *d,
     return FALSE;
 }
 
+static Bool
+wobblyShiver (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findWindowAtDisplay (d, xid);
+    if (w && isWobblyWin (w) && wobblyEnsureModel (w))
+    {
+	WOBBLY_SCREEN (w->screen);
+	WOBBLY_WINDOW (w);
+
+	modelSetMiddleAnchor (ww->model,
+			      WIN_X (w), WIN_Y (w),
+			      WIN_W (w), WIN_H (w));
+	modelAdjustObjectsForShiver (ww->model,
+				     WIN_X (w), WIN_Y (w),
+				     WIN_W (w), WIN_H (w));
+
+	ww->wobbly |= WobblyInitial;
+	ws->wobblyWindows |= ww->wobbly;
+
+	damagePendingOnScreen (w->screen);
+    }
+
+    return FALSE;
+}
+
 static void
 wobblyHandleEvent (CompDisplay *d,
 		   XEvent      *event)
@@ -2313,39 +2338,6 @@ wobblyHandleEvent (CompDisplay *d,
 		    wobblyEnableSnapping (d, NULL, 0, NULL, 0);
 		else
 		    wobblyDisableSnapping (d, NULL, 0, NULL, 0);
-	    }
-	    else if (xkbEvent->xkb_type == XkbBellNotify)
-	    {
-		XkbBellNotifyEvent *xkbBellEvent = (XkbBellNotifyEvent *)
-		    xkbEvent;
-
-		w = findWindowAtDisplay (d, xkbBellEvent->window);
-		if (!w)
-		    w = findWindowAtDisplay (d, d->activeWindow);
-
-		if (w)
-		{
-		    WOBBLY_SCREEN (w->screen);
-
-		    if (ws->opt[WOBBLY_SCREEN_OPTION_VISUAL_BELL].value.b &&
-			isWobblyWin (w)					  &&
-			wobblyEnsureModel (w))
-		    {
-			WOBBLY_WINDOW (w);
-
-			modelSetMiddleAnchor (ww->model,
-					      WIN_X (w), WIN_Y (w),
-					      WIN_W (w), WIN_H (w));
-			modelAdjustObjectsForShiver (ww->model,
-						     WIN_X (w), WIN_Y (w),
-						     WIN_W (w), WIN_H (w));
-
-			ww->wobbly |= WobblyInitial;
-			ws->wobblyWindows |= ww->wobbly;
-
-			damagePendingOnScreen (w->screen);
-		    }
-		}
 	    }
 	}
 	break;
@@ -2851,6 +2843,11 @@ wobblySetDisplayOption (CompDisplay     *display,
 
 	if (compSetActionOption (o, value))
 	    return TRUE;
+	break;
+    case WOBBLY_DISPLAY_OPTION_SHIVER:
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
+	break;
     default:
 	break;
     }
@@ -2876,6 +2873,20 @@ wobblyDisplayInitOptions (WobblyDisplay *wd)
     o->value.action.type	  = CompBindingTypeKey;
     o->value.action.key.modifiers = WOBBLY_SNAP_MODIFIERS_DEFAULT;
     o->value.action.key.keycode   = 0;
+
+    o = &wd->opt[WOBBLY_DISPLAY_OPTION_SHIVER];
+    o->name		      = "shiver";
+    o->shortDesc	      = N_("Shiver");
+    o->longDesc		      = N_("Make window shiver");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = wobblyShiver;
+    o->value.action.terminate = 0;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.state     = CompActionStateInitBell;
+    o->value.action.state    |= CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
+    o->value.action.type      = 0;
 }
 
 static Bool
