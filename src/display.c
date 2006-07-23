@@ -136,6 +136,7 @@ int pointerY     = 0;
 #define RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT CompAltMask
 
 #define WINDOW_MENU_BUTTON_DEFAULT    Button3
+#define WINDOW_MENU_KEY_DEFAULT       "space"
 #define WINDOW_MENU_MODIFIERS_DEFAULT CompAltMask
 
 #define RAISE_ON_CLICK_DEFAULT TRUE
@@ -192,6 +193,495 @@ void
 freeDisplayPrivateIndex (int index)
 {
     freePrivateIndex (displayPrivateLen, displayPrivateIndices, index);
+}
+
+static Bool
+closeWin (CompDisplay     *d,
+	  CompAction      *action,
+	  CompActionState state,
+	  CompOption      *option,
+	  int		  nOption)
+{
+    CompWindow   *w;
+    Window       xid;
+    unsigned int time;
+
+    xid  = getIntOptionNamed (option, nOption, "window", 0);
+    time = getIntOptionNamed (option, nOption, "time", CurrentTime);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	closeWindow (w, time);
+
+    return TRUE;
+}
+
+static Bool
+mainMenu (CompDisplay     *d,
+	  CompAction      *action,
+	  CompActionState state,
+	  CompOption      *option,
+	  int		  nOption)
+{
+    CompScreen   *s;
+    Window       xid;
+    unsigned int time;
+
+    xid  = getIntOptionNamed (option, nOption, "root", 0);
+    time = getIntOptionNamed (option, nOption, "time", CurrentTime);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s && !s->maxGrab)
+	toolkitAction (s, s->display->toolkitActionMainMenuAtom, time, s->root,
+		       0, 0, 0);
+
+    return TRUE;
+}
+
+static Bool
+runDialog (CompDisplay     *d,
+	   CompAction      *action,
+	   CompActionState state,
+	   CompOption      *option,
+	   int		   nOption)
+{
+    CompScreen   *s;
+    Window       xid;
+    unsigned int time;
+
+    xid  = getIntOptionNamed (option, nOption, "root", 0);
+    time = getIntOptionNamed (option, nOption, "time", CurrentTime);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s && !s->maxGrab)
+	toolkitAction (s, s->display->toolkitActionRunDialogAtom, time, s->root,
+		       0, 0, 0);
+
+    return TRUE;
+}
+
+static Bool
+unmaximize (CompDisplay     *d,
+	    CompAction      *action,
+	    CompActionState state,
+	    CompOption      *option,
+	    int		    nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	maximizeWindow (w, 0);
+
+    return TRUE;
+}
+
+static Bool
+minimize (CompDisplay     *d,
+	  CompAction      *action,
+	  CompActionState state,
+	  CompOption      *option,
+	  int		  nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	minimizeWindow (w);
+
+    return TRUE;
+}
+
+static Bool
+maximize (CompDisplay     *d,
+	  CompAction      *action,
+	  CompActionState state,
+	  CompOption      *option,
+	  int		  nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	maximizeWindow (w, MAXIMIZE_STATE);
+
+    return TRUE;
+}
+
+static Bool
+maximizeHorizontally (CompDisplay     *d,
+		      CompAction      *action,
+		      CompActionState state,
+		      CompOption      *option,
+		      int	      nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	maximizeWindow (w, w->state | CompWindowStateMaximizedHorzMask);
+
+    return TRUE;
+}
+
+static Bool
+maximizeVertically (CompDisplay     *d,
+		    CompAction      *action,
+		    CompActionState state,
+		    CompOption      *option,
+		    int		    nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	maximizeWindow (w, w->state | CompWindowStateMaximizedVertMask);
+
+    return TRUE;
+}
+
+static Bool
+showDesktop (CompDisplay     *d,
+	     CompAction      *action,
+	     CompActionState state,
+	     CompOption      *option,
+	     int	     nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	if (s->showingDesktopMask == 0)
+	    enterShowDesktopMode (s);
+	else
+	    leaveShowDesktopMode (s, NULL);
+    }
+
+    return TRUE;
+}
+
+static Bool
+toggleSlowAnimations (CompDisplay     *d,
+		      CompAction      *action,
+		      CompActionState state,
+		      CompOption      *option,
+		      int	      nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+	s->slowAnimations = !s->slowAnimations;
+
+    return TRUE;
+}
+
+static Bool
+lower (CompDisplay     *d,
+       CompAction      *action,
+       CompActionState state,
+       CompOption      *option,
+       int	       nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	lowerWindow (w);
+
+    return TRUE;
+}
+
+static void
+changeWindowOpacity (CompWindow *w,
+		     int	direction)
+{
+    int step, opacity;
+
+    if (w->attrib.override_redirect)
+	return;
+
+    if (w->type & CompWindowTypeDesktopMask)
+	return;
+
+    step = (OPAQUE * w->screen->opacityStep) / 100;
+
+    opacity = w->paint.opacity + step * direction;
+    if (opacity > OPAQUE)
+    {
+	opacity = OPAQUE;
+    }
+    else if (opacity < step)
+    {
+	opacity = step;
+    }
+
+    if (w->paint.opacity != opacity)
+    {
+	w->paint.opacity = opacity;
+
+	setWindowProp32 (w->screen->display, w->id,
+			 w->screen->display->winOpacityAtom,
+			 w->paint.opacity);
+	addWindowDamage (w);
+    }
+}
+
+static Bool
+increaseOpacity (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int	         nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	changeWindowOpacity (w, 1);
+
+    return TRUE;
+}
+
+static Bool
+decreaseOpacity (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int	         nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	changeWindowOpacity (w, -1);
+
+    return TRUE;
+}
+
+static Bool
+runCommandDispatch (CompDisplay     *d,
+		    CompAction      *action,
+		    CompActionState state,
+		    CompOption      *option,
+		    int		    nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	int index = -1;
+	int i = COMP_DISPLAY_OPTION_RUN_COMMAND0;
+
+	while (i <= COMP_DISPLAY_OPTION_RUN_COMMAND11)
+	{
+	    if (action == &d->opt[i].value.action)
+	    {
+		index = i - COMP_DISPLAY_OPTION_RUN_COMMAND0 +
+		    COMP_DISPLAY_OPTION_COMMAND0;
+		break;
+	    }
+
+	    i++;
+	}
+
+	if (index > 0)
+	    runCommand (s, d->opt[index].value.s);
+    }
+
+    return TRUE;
+}
+
+static Bool
+runCommandScreenshot (CompDisplay     *d,
+		      CompAction      *action,
+		      CompActionState state,
+		      CompOption      *option,
+		      int	      nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+	runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
+
+    return TRUE;
+}
+
+static Bool
+runCommandWindowScreenshot (CompDisplay     *d,
+			    CompAction      *action,
+			    CompActionState state,
+			    CompOption      *option,
+			    int	            nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+	runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
+
+    return TRUE;
+}
+
+static Bool
+windowMenu (CompDisplay     *d,
+	    CompAction      *action,
+	    CompActionState state,
+	    CompOption      *option,
+	    int		    nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+    {
+	int  x, y, button;
+	Time time;
+
+	time   = getIntOptionNamed (option, nOption, "time", CurrentTime);
+	button = getIntOptionNamed (option, nOption, "button", 0);
+	x      = getIntOptionNamed (option, nOption, "x", w->attrib.x);
+	y      = getIntOptionNamed (option, nOption, "y", w->attrib.y);
+
+	toolkitAction (w->screen,
+		       w->screen->display->toolkitActionWindowMenuAtom,
+		       time,
+		       w->id,
+		       button,
+		       x,
+		       y);
+    }
+
+    return TRUE;
+}
+
+static Bool
+toggleMaximized (CompDisplay     *d,
+		 CompAction      *action,
+		 CompActionState state,
+		 CompOption      *option,
+		 int		 nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+    {
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+	    maximizeWindow (w, 0);
+	else
+	    maximizeWindow (w, MAXIMIZE_STATE);
+    }
+
+    return TRUE;
+}
+
+static Bool
+toggleMaximizedHorizontally (CompDisplay     *d,
+			     CompAction      *action,
+			     CompActionState state,
+			     CompOption      *option,
+			     int	     nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	maximizeWindow (w, w->state ^ CompWindowStateMaximizedHorzMask);
+
+    return TRUE;
+}
+
+static Bool
+toggleMaximizedVertically (CompDisplay     *d,
+			   CompAction      *action,
+			   CompActionState state,
+			   CompOption      *option,
+			   int		   nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	maximizeWindow (w, w->state ^ CompWindowStateMaximizedVertMask);
+
+    return TRUE;
+}
+
+static Bool
+shade (CompDisplay     *d,
+       CompAction      *action,
+       CompActionState state,
+       CompOption      *option,
+       int	       nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w && (w->actions & CompWindowActionShadeMask))
+    {
+	w->state ^= CompWindowStateShadedMask;
+	updateWindowAttributes (w, FALSE);
+    }
+
+    return TRUE;
 }
 
 static void
@@ -254,10 +744,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "close_window";
     o->shortDesc		  = N_("Close Window");
     o->longDesc			  = N_("Close active window");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = CLOSE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = closeWin;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = CLOSE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (CLOSE_WINDOW_KEY_DEFAULT));
 
@@ -266,9 +762,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->shortDesc		  = N_("Show Main Menu");
     o->longDesc			  = N_("Show the main menu");
     o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = MAIN_MENU_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = mainMenu;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = MAIN_MENU_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (MAIN_MENU_KEY_DEFAULT));
 
@@ -276,10 +779,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "run";
     o->shortDesc		  = N_("Run Dialog");
     o->longDesc			  = N_("Show Run Application dialog");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = RUN_DIALOG_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = runDialog;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = RUN_DIALOG_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (RUN_DIALOG_KEY_DEFAULT));
 
@@ -287,10 +796,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "unmaximize_window";
     o->shortDesc		  = N_("Unmaximize Window");
     o->longDesc			  = N_("Unmaximize active window");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = unmaximize;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (UNMAXIMIZE_WINDOW_KEY_DEFAULT));
 
@@ -298,10 +813,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "minimize_window";
     o->shortDesc		  = N_("Minimize Window");
     o->longDesc			  = N_("Minimize active window");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = MINIMIZE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = minimize;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = MINIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (MINIMIZE_WINDOW_KEY_DEFAULT));
 
@@ -309,10 +830,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "maximize_window";
     o->shortDesc		  = N_("Maximize Window");
     o->longDesc			  = N_("Maximize active window");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = MAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = maximize;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = MAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (MAXIMIZE_WINDOW_KEY_DEFAULT));
 
@@ -320,28 +847,42 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "maximize_window_horizontally";
     o->shortDesc		  = N_("Maximize Window Horizontally");
     o->longDesc			  = N_("Maximize active window horizontally");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeNone;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = maximizeHorizontally;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT];
     o->name			  = "maximize_window_vertically";
     o->shortDesc		  = N_("Maximize Window Vertically");
     o->longDesc			  = N_("Maximize active window vertically");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeNone;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = maximizeVertically;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
     o->name			  = "show_desktop";
     o->shortDesc		  = N_("Hide all windows and focus desktop");
     o->longDesc			  = N_("Hide all windows and focus desktop");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SHOW_DESKTOP_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = showDesktop;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = SHOW_DESKTOP_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (SHOW_DESKTOP_KEY_DEFAULT));
 
@@ -369,8 +910,14 @@ compDisplayInitOptions (CompDisplay *display,
     o->shortDesc		  = str;				    \
     asprintf (&str, RUN_OPTION_LONG, num);				    \
     o->longDesc			  = str;				    \
-    o->type			  = CompOptionTypeBinding;		    \
-    o->value.bind.type		  = CompBindingTypeNone;
+    o->type		          = CompOptionTypeAction;		    \
+    o->value.action.initiate      = runCommandDispatch;			    \
+    o->value.action.terminate     = 0;					    \
+    o->value.action.bell          = FALSE;				    \
+    o->value.action.edgeMask	  = 0;					    \
+    o->value.action.state	  = CompActionStateInitKey;		    \
+    o->value.action.state	 |= CompActionStateInitButton;		    \
+    o->value.action.type	  = CompBindingTypeNone
 
     COMMAND_OPTION (0, "command0", "run_command0");
     COMMAND_OPTION (1, "command1", "run_command1");
@@ -389,10 +936,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "slow_animations";
     o->shortDesc		  = N_("Slow Animations");
     o->longDesc			  = N_("Toggle use of slow animations");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = SLOW_ANIMATIONS_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = toggleSlowAnimations;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = SLOW_ANIMATIONS_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (SLOW_ANIMATIONS_KEY_DEFAULT));
 
@@ -400,37 +953,61 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			     = "lower_window";
     o->shortDesc		     = N_("Lower Window");
     o->longDesc			     = N_("Lower window beneath other windows");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = LOWER_WINDOW_BUTTON_DEFAULT;
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = lower;
+    o->value.action.terminate        = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = LOWER_WINDOW_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE];
     o->name			     = "opacity_increase";
     o->shortDesc		     = N_("Increase Opacity");
     o->longDesc			     = N_("Increase window opacity");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = OPACITY_INCREASE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = OPACITY_INCREASE_BUTTON_DEFAULT;
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = increaseOpacity;
+    o->value.action.terminate        = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = OPACITY_INCREASE_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = OPACITY_INCREASE_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE];
     o->name			     = "opacity_decrease";
     o->shortDesc		     = N_("Decrease Opacity");
     o->longDesc			     = N_("Decrease window opacity");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = OPACITY_DECREASE_BUTTON_DEFAULT;
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = decreaseOpacity;
+    o->value.action.terminate        = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = OPACITY_DECREASE_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT];
     o->name			  = "run_command_screenshot";
     o->shortDesc		  = N_("Take a screenshot");
     o->longDesc			  = N_("Take a screenshot");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = RUN_SCREENSHOT_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = runCommandScreenshot;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = RUN_SCREENSHOT_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (RUN_SCREENSHOT_KEY_DEFAULT));
 
@@ -447,11 +1024,17 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "run_command_window_screenshot";
     o->shortDesc		  = N_("Take a screenshot of a window");
     o->longDesc			  = N_("Take a screenshot of a window");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = runCommandWindowScreenshot;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers =
 	RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (RUN_WINDOW_SCREENSHOT_KEY_DEFAULT));
 
@@ -468,10 +1051,21 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			     = "window_menu";
     o->shortDesc		     = N_("Window Menu");
     o->longDesc			     = N_("Open window menu");
-    o->type			     = CompOptionTypeBinding;
-    o->value.bind.type		     = CompBindingTypeButton;
-    o->value.bind.u.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
-    o->value.bind.u.button.button    = WINDOW_MENU_BUTTON_DEFAULT;
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = windowMenu;
+    o->value.action.terminate        = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = WINDOW_MENU_BUTTON_DEFAULT;
+    o->value.action.type	    |= CompBindingTypeKey;
+    o->value.action.key.modifiers    = WINDOW_MENU_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode      =
+	XKeysymToKeycode (display->display,
+			  XStringToKeysym (WINDOW_MENU_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK];
     o->name	      = "raise_on_click";
@@ -491,30 +1085,42 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "toggle_window_maximized";
     o->shortDesc		  = N_("Toggle Window Maximized");
     o->longDesc			  = N_("Toggle active window maximized");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeNone;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = toggleMaximized;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ];
     o->name			  = "toggle_window_maximized_horizontally";
     o->shortDesc		  = N_("Toggle Window Maximized Horizontally");
     o->longDesc			  =
 	N_("Toggle active window maximized horizontally");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeNone;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = toggleMaximizedHorizontally;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT];
     o->name			  = "toggle_window_maximized_vertically";
     o->shortDesc		  = N_("Toggle Window Maximized Vertically");
     o->longDesc			  =
 	N_("Toggle active window maximized vertically");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeNone;
-    o->value.bind.u.key.modifiers = 0;
-    o->value.bind.u.key.keycode   = 0;
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = toggleMaximizedVertically;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
     o->name	 = "hide_skip_taskbar_windows";
@@ -528,10 +1134,16 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "toggle_window_shaded";
     o->shortDesc		  = N_("Toggle Window Shaded");
     o->longDesc			  = N_("Toggle active window shaded");
-    o->type			  = CompOptionTypeBinding;
-    o->value.bind.type		  = CompBindingTypeKey;
-    o->value.bind.u.key.modifiers = TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT;
-    o->value.bind.u.key.keycode   =
+    o->type		          = CompOptionTypeAction;
+    o->value.action.initiate      = shade;
+    o->value.action.terminate     = 0;
+    o->value.action.bell          = FALSE;
+    o->value.action.edgeMask	  = 0;
+    o->value.action.state	  = CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
+    o->value.action.type	  = CompBindingTypeKey;
+    o->value.action.key.modifiers = TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT;
+    o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (TOGGLE_WINDOW_SHADING_KEY_DEFAULT));
 }
@@ -542,27 +1154,6 @@ compGetDisplayOptions (CompDisplay *display,
 {
     *count = NUM_OPTIONS (display);
     return display->opt;
-}
-
-static Bool
-addDisplayBinding (CompDisplay *display, CompBinding *binding)
-{
-    CompScreen *s;
-
-    for (s = display->screens; s; s = s->next)
-	if (!addScreenBinding (s, binding))
-	    return FALSE;
-
-    return TRUE;
-}
-
-static void
-removeDisplayBinding (CompDisplay *display, CompBinding *binding)
-{
-    CompScreen *s;
-
-    for (s = display->screens; s; s = s->next)
-	removeScreenBinding (s, binding);
 }
 
 static void
@@ -672,13 +1263,8 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ:
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT:
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED:
-	if (addDisplayBinding (display, &value->bind))
-	{
-	    removeDisplayBinding (display, &o->value.bind);
-
-	    if (compSetBindingOption (o, value))
-		return TRUE;
-	}
+	if (setDisplayAction (display, o, value))
+	    return TRUE;
 	break;
     case COMP_DISPLAY_OPTION_AUDIBLE_BELL:
 	if (compSetBoolOption (o, value))
@@ -1684,52 +2270,52 @@ pingTimeout (void *closure)
 }
 
 static void
-addScreenBindings (CompDisplay *d, CompScreen *s)
+addScreenActions (CompDisplay *d, CompScreen *s)
 {
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_MAIN_MENU].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND0].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND1].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND2].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND3].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND4].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND5].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND6].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND7].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND8].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND9].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND10].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND11].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.bind);
-    addScreenBinding (s, &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT].value.bind);
-    addScreenBinding (s,
-		      &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED].value.bind);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_MAIN_MENU].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND0].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND1].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND2].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND3].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND4].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND5].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND6].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND7].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND8].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND9].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND10].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND11].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT].value.action);
+    addScreenAction (s,
+		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED].value.action);
 }
 
 void
@@ -1745,7 +2331,7 @@ addScreenToDisplay (CompDisplay *display,
     else
 	display->screens = s;
 
-    addScreenBindings (display, s);
+    addScreenActions (display, s);
 }
 
 Bool
@@ -2339,6 +2925,30 @@ findWindowAtDisplay (CompDisplay *d,
 	for (s = d->screens; s; s = s->next)
 	{
 	    w = findWindowAtScreen (s, id);
+	    if (w)
+		return w;
+	}
+    }
+
+    return 0;
+}
+
+CompWindow *
+findTopLevelWindowAtDisplay (CompDisplay *d,
+			     Window      id)
+{
+    if (lastFoundWindow && lastFoundWindow->id == id)
+    {
+	return lastFoundWindow;
+    }
+    else
+    {
+	CompScreen *s;
+	CompWindow *w;
+
+	for (s = d->screens; s; s = s->next)
+	{
+	    w = findTopLevelWindowAtScreen (s, id);
 	    if (w)
 		return w;
 	}

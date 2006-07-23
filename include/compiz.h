@@ -461,28 +461,28 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_MAIN_MENU                     6
 #define COMP_DISPLAY_OPTION_RUN_DIALOG                    7
 #define COMP_DISPLAY_OPTION_COMMAND0                      8
-#define COMP_DISPLAY_OPTION_RUN_COMMAND0                  9
-#define COMP_DISPLAY_OPTION_COMMAND1                      10
-#define COMP_DISPLAY_OPTION_RUN_COMMAND1                  11
-#define COMP_DISPLAY_OPTION_COMMAND2                      12
-#define COMP_DISPLAY_OPTION_RUN_COMMAND2                  13
-#define COMP_DISPLAY_OPTION_COMMAND3                      14
-#define COMP_DISPLAY_OPTION_RUN_COMMAND3                  15
-#define COMP_DISPLAY_OPTION_COMMAND4                      16
-#define COMP_DISPLAY_OPTION_RUN_COMMAND4                  17
-#define COMP_DISPLAY_OPTION_COMMAND5                      18
-#define COMP_DISPLAY_OPTION_RUN_COMMAND5                  19
-#define COMP_DISPLAY_OPTION_COMMAND6                      20
-#define COMP_DISPLAY_OPTION_RUN_COMMAND6                  21
-#define COMP_DISPLAY_OPTION_COMMAND7                      22
-#define COMP_DISPLAY_OPTION_RUN_COMMAND7                  23
-#define COMP_DISPLAY_OPTION_COMMAND8                      24
-#define COMP_DISPLAY_OPTION_RUN_COMMAND8                  25
-#define COMP_DISPLAY_OPTION_COMMAND9                      26
-#define COMP_DISPLAY_OPTION_RUN_COMMAND9                  27
-#define COMP_DISPLAY_OPTION_COMMAND10                     28
-#define COMP_DISPLAY_OPTION_RUN_COMMAND10                 29
-#define COMP_DISPLAY_OPTION_COMMAND11                     30
+#define COMP_DISPLAY_OPTION_COMMAND1                      9
+#define COMP_DISPLAY_OPTION_COMMAND2                      10
+#define COMP_DISPLAY_OPTION_COMMAND3                      11
+#define COMP_DISPLAY_OPTION_COMMAND4                      12
+#define COMP_DISPLAY_OPTION_COMMAND5                      13
+#define COMP_DISPLAY_OPTION_COMMAND6                      14
+#define COMP_DISPLAY_OPTION_COMMAND7                      15
+#define COMP_DISPLAY_OPTION_COMMAND8                      16
+#define COMP_DISPLAY_OPTION_COMMAND9                      17
+#define COMP_DISPLAY_OPTION_COMMAND10                     18
+#define COMP_DISPLAY_OPTION_COMMAND11                     19
+#define COMP_DISPLAY_OPTION_RUN_COMMAND0                  20
+#define COMP_DISPLAY_OPTION_RUN_COMMAND1                  21
+#define COMP_DISPLAY_OPTION_RUN_COMMAND2                  22
+#define COMP_DISPLAY_OPTION_RUN_COMMAND3                  23
+#define COMP_DISPLAY_OPTION_RUN_COMMAND4                  24
+#define COMP_DISPLAY_OPTION_RUN_COMMAND5                  25
+#define COMP_DISPLAY_OPTION_RUN_COMMAND6                  26
+#define COMP_DISPLAY_OPTION_RUN_COMMAND7                  27
+#define COMP_DISPLAY_OPTION_RUN_COMMAND8                  28
+#define COMP_DISPLAY_OPTION_RUN_COMMAND9                  29
+#define COMP_DISPLAY_OPTION_RUN_COMMAND10                 30
 #define COMP_DISPLAY_OPTION_RUN_COMMAND11                 31
 #define COMP_DISPLAY_OPTION_SLOW_ANIMATIONS               32
 #define COMP_DISPLAY_OPTION_LOWER_WINDOW                  33
@@ -756,6 +756,10 @@ findScreenAtDisplay (CompDisplay *d,
 CompWindow *
 findWindowAtDisplay (CompDisplay *display,
 		     Window      id);
+
+CompWindow *
+findTopLevelWindowAtDisplay (CompDisplay *d,
+			     Window      id);
 
 unsigned int
 virtualToRealModMask (CompDisplay  *d,
