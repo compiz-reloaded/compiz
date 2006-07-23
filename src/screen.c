@@ -2099,30 +2099,6 @@ removePassiveButtonGrab (CompScreen        *s,
 }
 
 Bool
-addScreenBinding (CompScreen  *s,
-		  CompBinding *binding)
-{
-    if (binding->type == CompBindingTypeNone)
-	return TRUE;
-    else if (binding->type == CompBindingTypeKey)
-	return addPassiveKeyGrab (s, &binding->u.key);
-    else if (binding->type == CompBindingTypeButton)
-	return addPassiveButtonGrab (s, &binding->u.button);
-
-    return FALSE;
-}
-
-void
-removeScreenBinding (CompScreen  *s,
-		     CompBinding *binding)
-{
-    if (binding->type == CompBindingTypeKey)
-	removePassiveKeyGrab (s, &binding->u.key);
-    else if (binding->type == CompBindingTypeButton)
-	removePassiveButtonGrab (s, &binding->u.button);
-}
-
-Bool
 addScreenAction (CompScreen *s,
 		 CompAction *action)
 {

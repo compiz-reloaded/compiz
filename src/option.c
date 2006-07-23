@@ -155,33 +155,6 @@ compSetColorOption (CompOption	    *option,
 }
 
 Bool
-compSetBindingOption (CompOption      *option,
-		      CompOptionValue *value)
-{
-    CompBinding *binding;
-
-    binding = &option->value.bind;
-    if (value->bind.type == CompBindingTypeButton)
-    {
-	if (binding->type               == CompBindingTypeButton &&
-	    binding->u.button.button    == value->bind.u.button.button &&
-	    binding->u.button.modifiers == value->bind.u.button.modifiers)
-	    return FALSE;
-    }
-    else
-    {
-	if (binding->type            == CompBindingTypeKey &&
-	    binding->u.key.keycode   == value->bind.u.key.keycode &&
-	    binding->u.key.modifiers == value->bind.u.key.modifiers)
-	    return FALSE;
-    }
-
-    *binding = value->bind;
-
-    return TRUE;
-}
-
-Bool
 compSetActionOption (CompOption      *option,
 		     CompOptionValue *value)
 {
@@ -285,9 +258,6 @@ compSetOptionList (CompOption      *option,
 	    break;
 	case CompOptionTypeColor:
 	    status |= compSetColorOption (&o, &value->list.value[i]);
-	    break;
-	case CompOptionTypeBinding:
-	    status |= compSetBindingOption (&o, &value->list.value[i]);
 	default:
 	    break;
 	}

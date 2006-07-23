@@ -110,8 +110,6 @@ static char *
 gconfTypeToString (CompOptionType type)
 {
     switch (type) {
-    case CompOptionTypeBinding:
-	return "string";
     case CompOptionTypeBool:
 	return "bool";
     case CompOptionTypeColor:
@@ -153,17 +151,6 @@ gconfValueToString (CompDisplay	    *d,
 	return g_strdup_printf ("%f", value->f);
     case CompOptionTypeString:
 	escaped = g_markup_escape_text (value->s, -1);
-	return escaped;
-    case CompOptionTypeBinding:
-	if (value->bind.type == CompBindingTypeKey)
-	    tmp = gconfKeyBindingToString (d, &value->bind.u.key);
-	else if (value->bind.type == CompBindingTypeButton)
-	    tmp = gconfButtonBindingToString (d, &value->bind.u.button);
-	else
-	    tmp = g_strdup ("Disabled");
-
-	escaped = g_markup_escape_text (tmp, -1);
-	g_free (tmp);
 	return escaped;
     case CompOptionTypeList: {
 	char *tmp2, *tmp3;

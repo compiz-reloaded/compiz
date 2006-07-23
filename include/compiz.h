@@ -263,7 +263,6 @@ typedef enum {
     CompOptionTypeFloat,
     CompOptionTypeString,
     CompOptionTypeColor,
-    CompOptionTypeBinding,
     CompOptionTypeAction,
     CompOptionTypeList
 } CompOptionType;
@@ -295,14 +294,6 @@ typedef struct _CompButtonBinding {
     int		 button;
     unsigned int modifiers;
 } CompButtonBinding;
-
-typedef struct {
-    CompBindingType type;
-    union {
-	CompKeyBinding    key;
-	CompButtonBinding button;
-    } u;
-} CompBinding;
 
 typedef union _CompOptionValue CompOptionValue;
 
@@ -342,7 +333,6 @@ union _CompOptionValue {
     float	   f;
     char	   *s;
     unsigned short c[4];
-    CompBinding    bind;
     CompAction     action;
     CompListValue  list;
 };
@@ -406,10 +396,6 @@ compSetStringOption (CompOption	     *option,
 Bool
 compSetColorOption (CompOption	    *option,
 		    CompOptionValue *value);
-
-Bool
-compSetBindingOption (CompOption      *option,
-		      CompOptionValue *value);
 
 Bool
 compSetActionOption (CompOption      *option,
@@ -1496,14 +1482,6 @@ removeScreenGrab (CompScreen *s,
 
 Bool
 otherScreenGrabExist (CompScreen *s, ...);
-
-Bool
-addScreenBinding (CompScreen  *s,
-		  CompBinding *binding);
-
-void
-removeScreenBinding (CompScreen  *s,
-		     CompBinding *binding);
 
 Bool
 addScreenAction (CompScreen *s,

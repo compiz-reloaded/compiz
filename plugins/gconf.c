@@ -88,8 +88,6 @@ gconfTypeFromCompType (CompOptionType type)
 	return GCONF_VALUE_STRING;
     case CompOptionTypeColor:
 	return GCONF_VALUE_STRING;
-    case CompOptionTypeBinding:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeAction:
 	return GCONF_VALUE_STRING;
     case CompOptionTypeList:
@@ -132,19 +130,6 @@ gconfSetValue (CompDisplay     *d,
 	gconf_value_set_string (gvalue, color);
 
 	g_free (color);
-    } break;
-    case CompOptionTypeBinding: {
-	char *binding;
-
-	if (value->bind.type == CompBindingTypeKey)
-	    binding = gconfKeyBindingToString (d, &value->bind.u.key);
-	else if (value->bind.type == CompBindingTypeButton)
-	    binding = gconfButtonBindingToString (d, &value->bind.u.button);
-	else
-	    binding = g_strdup ("Disabled");
-
-	gconf_value_set_string (gvalue, binding);
-	g_free (binding);
     } break;
     default:
 	break;
@@ -207,7 +192,6 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeFloat:
     case CompOptionTypeString:
     case CompOptionTypeColor:
-    case CompOptionTypeBinding:
 	existingValue = gconf_client_get (gd->client, key, NULL);
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
 	gconfSetValue (d, &o->value, o->type, gvalue);
@@ -377,29 +361,6 @@ gconfGetValue (CompDisplay     *d,
 	    value->c[3] = c[3] << 8 | c[3];
 
 	    return TRUE;
-	}
-    }
-    else if (type         == CompOptionTypeBinding &&
-	     gvalue->type == GCONF_VALUE_STRING)
-    {
-	const char *binding;
-
-	binding = gconf_value_get_string (gvalue);
-	if (strcasecmp (binding, "disabled") == 0 || !*binding)
-	{
-	    value->bind.type = 0;
-	    return TRUE;
-	}
-	else if (strstr (binding, "Button"))
-	{
-	    value->bind.type = CompBindingTypeButton;
-	    return gconfStringToButtonBinding (d, binding,
-					       &value->bind.u.button);
-	}
-	else
-	{
-	    value->bind.type = CompBindingTypeKey;
-	    return gconfStringToKeyBinding (d, binding, &value->bind.u.key);
 	}
     }
 

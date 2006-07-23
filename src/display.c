@@ -761,7 +761,6 @@ compDisplayInitOptions (CompDisplay *display,
     o->name			  = "main_menu";
     o->shortDesc		  = N_("Show Main Menu");
     o->longDesc			  = N_("Show the main menu");
-    o->type			  = CompOptionTypeBinding;
     o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = mainMenu;
     o->value.action.terminate     = 0;
