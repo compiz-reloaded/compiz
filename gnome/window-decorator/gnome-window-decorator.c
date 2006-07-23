@@ -3629,6 +3629,20 @@ action_menu_unmap (GObject *object)
 }
 
 static void
+position_action_menu (GtkMenu  *menu,
+		      gint     *x,
+		      gint     *y,
+		      gboolean *push_in,
+		      gpointer user_data)
+{
+    WnckWindow *win = (WnckWindow *) user_data;
+
+    wnck_window_get_geometry (win, x, y, NULL, NULL);
+
+    *push_in = TRUE;
+}
+
+static void
 action_menu_map (WnckWindow *win,
 		 long	    button,
 		 Time	    time)
@@ -3677,11 +3691,19 @@ action_menu_map (WnckWindow *win,
 			     0, 0);
 
     gtk_widget_show (action_menu);
-    gtk_menu_popup (GTK_MENU (action_menu),
-		    NULL, NULL,
-		    NULL, NULL,
-		    button,
-		    time);
+
+    if (button)
+	gtk_menu_popup (GTK_MENU (action_menu),
+			NULL, NULL,
+			NULL, NULL,
+			button,
+			time);
+    else
+	gtk_menu_popup (GTK_MENU (action_menu),
+			NULL, NULL,
+			position_action_menu, (gpointer) win,
+			button,
+			time);
 
     action_menu_mapped = TRUE;
 }
