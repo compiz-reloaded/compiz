@@ -1300,7 +1300,7 @@ rotateTo (CompDisplay     *d,
 
 	ROTATE_DISPLAY (s->display);
 
-	while (i < ROTATE_DISPLAY_OPTION_TO_12)
+	while (i <= ROTATE_DISPLAY_OPTION_TO_12)
 	{
 	    if (action == &rd->opt[i].value.action)
 	    {
