@@ -673,6 +673,9 @@ rotateTerminate (CompDisplay     *d,
 
 	if (rs->grabIndex)
 	{
+	    if (!xid)
+		rs->snapTop = FALSE;
+
 	    rs->grabbed = FALSE;
 	    damageScreen (s);
 	}
