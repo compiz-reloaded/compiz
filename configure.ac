@@ -148,6 +148,19 @@ if test "$use_place" = yes; then
   AC_DEFINE(USE_PLACE, 1, [Build placement plugin])
 fi
 
+AC_ARG_ENABLE(dbus,
+  [  --disable-dbus          Disable dbus plugin],
+  [use_dbus=$enableval], [use_dbus=yes])
+
+if test "x$use_dbus" = "xyes"; then
+  PKG_CHECK_MODULES(DBUS, dbus-1, [use_dbus=yes], [use_dbus=no])
+fi
+
+AM_CONDITIONAL(DBUS_PLUGIN, test "x$use_dbus" = "xyes")
+if test "$use_dbus" = yes; then
+  AC_DEFINE(USE_DBUS, 1, [Build dbus plugin])
+fi
+
 AC_ARG_ENABLE(libsvg-cairo,
   [  --enable-libsvg-cairo   Enable svg support],
   [use_libsvg_cairo=$enableval], [use_libsvg_cairo=no])
@@ -251,9 +264,10 @@ echo ""
 echo "the following optional plugins will be compiled:"
 echo "  gconf: $use_gconf"
 echo "  place: $use_place"
-echo "  svg:   $use_libsvg_cairo"
+echo "  dbus:  $use_dbus"
 echo ""
 echo "and the following optional features will be compiled:"
+echo "  svg:   $use_libsvg_cairo"
 echo "  gnome: $use_gnome"
 echo "  kde:   $use_kde"
 echo ""

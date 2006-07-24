@@ -93,11 +93,19 @@ libplace_la_SOURCES = place.c
 libplace_module = libplace.la
 endif
 
+if DBUS_PLUGIN
+libdbus_la_LDFLAGS = -module -avoid-version -no-undefined
+libdbus_la_LIBADD = @COMPIZ_LIBS@ @DBUS_LIBS@
+libdbus_la_SOURCES = dbus.c
+libdbus_module = libdbus.la
+endif
+
 INCLUDES =					\
 	@COMPIZ_CFLAGS@				\
 	@LIBSVG_CAIRO_CFLAGS@			\
 	@GCONF_CFLAGS@				\
 	@PLACE_CFLAGS@				\
+	@DBUS_CFLAGS@				\
 	-DALL_LINGUAS="\"@ALL_LINGUAS@\""	\
 	-DLOCALEDIR="\"@datadir@/locale\""	\
 	-I$(top_srcdir)/include
@@ -119,6 +127,7 @@ module_LTLIBRARIES =		\
 	libmove.la		\
 	libresize.la		\
 	$(libplace_module)	\
+	$(libdbus_module)	\
 	libswitcher.la		\
 	libwater.la		\
 	$(libgconf_dump_module)
