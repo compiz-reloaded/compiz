@@ -1438,7 +1438,7 @@ waterTitleWave (CompDisplay     *d,
     CompWindow *w;
     int	       xid;
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
+    xid = getIntOptionNamed (option, nOption, "window", d->activeWindow);
 
     w = findWindowAtDisplay (d, xid);
     if (w)
