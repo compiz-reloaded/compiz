@@ -1357,7 +1357,7 @@ rotateToWithWindow (CompDisplay     *d,
 
 	ROTATE_DISPLAY (s->display);
 
-	while (i < ROTATE_DISPLAY_OPTION_TO_12_WINDOW)
+	while (i <= ROTATE_DISPLAY_OPTION_TO_12_WINDOW)
 	{
 	    if (action == &rd->opt[i].value.action)
 	    {
@@ -1391,7 +1391,7 @@ rotateToWithWindow (CompDisplay     *d,
 	o[4].name    = "window";
 	o[4].value.i = getIntOptionNamed (option, nOption, "window", 0);
 
-	rotate (d, NULL, 0, o, 5);
+	rotateWithWindow (d, NULL, 0, o, 5);
     }
 
     return FALSE;
@@ -1884,7 +1884,7 @@ rotateDisplayInitOptions (RotateDisplay *rd,
     o->shortDesc		  = N_("Rotate Window");
     o->longDesc			  = N_("Rotate with window");
     o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = rotateWithWindow;
+    o->value.action.initiate	  = rotateToWithWindow;
     o->value.action.terminate	  = 0;
     o->value.action.bell	  = FALSE;
     o->value.action.edgeMask	  = 0;
