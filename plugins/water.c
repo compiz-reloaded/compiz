@@ -86,7 +86,8 @@ static int waterLastPointerY = 0;
 #define WATER_DISPLAY_OPTION_RAIN_DELAY	  4
 #define WATER_DISPLAY_OPTION_TITLE_WAVE   5
 #define WATER_DISPLAY_OPTION_POINT        6
-#define WATER_DISPLAY_OPTION_NUM          7
+#define WATER_DISPLAY_OPTION_LINE         7
+#define WATER_DISPLAY_OPTION_NUM          8
 
 typedef struct _WaterDisplay {
     int		    screenPrivateIndex;
@@ -1491,6 +1492,42 @@ waterPoint (CompDisplay     *d,
     return FALSE;
 }
 
+static Bool
+waterLine (CompDisplay     *d,
+	   CompAction      *action,
+	   CompActionState state,
+	   CompOption      *option,
+	   int	           nOption)
+{
+    CompScreen *s;
+    int	       xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	XPoint p[2];
+	float  amp;
+
+	p[0].x = getIntOptionNamed (option, nOption, "x0", s->width / 4);
+	p[0].y = getIntOptionNamed (option, nOption, "y0", s->height / 2);
+
+	p[1].x = getIntOptionNamed (option, nOption, "x1",
+				    s->width - s->width / 4);
+	p[1].y = getIntOptionNamed (option, nOption, "y1", s->height / 2);
+
+
+	amp = getFloatOptionNamed (option, nOption, "amplitude", 0.25f);
+
+	waterVertices (s, GL_LINES, p, 2, amp);
+
+	damageScreen (s);
+    }
+
+    return FALSE;
+}
+
 static void
 waterHandleEvent (CompDisplay *d,
 		  XEvent      *event)
@@ -1563,6 +1600,7 @@ waterSetDisplayOption (CompDisplay     *display,
     case WATER_DISPLAY_OPTION_TOGGLE_WIPER:
     case WATER_DISPLAY_OPTION_TITLE_WAVE:
     case WATER_DISPLAY_OPTION_POINT:
+    case WATER_DISPLAY_OPTION_LINE:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
 	break;
@@ -1691,6 +1729,18 @@ waterDisplayInitOptions (WaterDisplay *wd,
     o->value.action.edgeMask  = 0;
     o->value.action.type      = CompBindingTypeNone;
     o->value.action.state     = 0;
+
+    o = &wd->opt[WATER_DISPLAY_OPTION_LINE];
+    o->name		      = "line";
+    o->shortDesc	      = N_("Line");
+    o->longDesc		      = N_("Add line");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = waterLine;
+    o->value.action.terminate = 0;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.type      = CompBindingTypeNone;
+    o->value.action.state     = 0;
 }
 
 static Bool
@@ -1755,6 +1805,7 @@ waterInitScreen (CompPlugin *p,
 		     &wd->opt[WATER_DISPLAY_OPTION_TOGGLE_WIPER].value.action);
     addScreenAction (s, &wd->opt[WATER_DISPLAY_OPTION_TITLE_WAVE].value.action);
     addScreenAction (s, &wd->opt[WATER_DISPLAY_OPTION_POINT].value.action);
+    addScreenAction (s, &wd->opt[WATER_DISPLAY_OPTION_LINE].value.action);
 
     WRAP (ws, s, preparePaintScreen, waterPreparePaintScreen);
     WRAP (ws, s, donePaintScreen, waterDonePaintScreen);
