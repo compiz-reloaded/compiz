@@ -34,6 +34,88 @@
 
 CompPlugin *plugins = 0;
 
+static Bool
+dlloaderLoadPlugin (CompPlugin *p,
+		    char       *path,
+		    char       *name)
+{
+    char *file;
+    void *dlhand;
+
+    file = malloc ((path ? strlen (path) : 0) + strlen (name) + 8);
+    if (!file)
+	return FALSE;
+
+    if (path)
+	sprintf (file, "%s/lib%s.so", path, name);
+    else
+	sprintf (file, "lib%s.so", name);
+
+    dlhand = dlopen (file, RTLD_LAZY);
+    if (dlhand)
+    {
+	PluginGetInfoProc getInfo;
+	char		  *error;
+
+	dlerror ();
+
+	getInfo = (PluginGetInfoProc) dlsym (dlhand, "getCompPluginInfo");
+
+	error = dlerror ();
+	if (error)
+	{
+	    fprintf (stderr, "%s: dlsym: %s\n", programName, error);
+
+	    getInfo = 0;
+	}
+
+	if (getInfo)
+	{
+	    p->vTable = (*getInfo) ();
+	    if (!p->vTable)
+	    {
+		fprintf (stderr, "%s: Couldn't get vtable from '%s' plugin\n",
+			 programName, file);
+
+		dlclose (dlhand);
+		free (file);
+
+		return FALSE;
+	    }
+	}
+	else
+	{
+	    fprintf (stderr, "%s: Failed to lookup getCompPluginInfo in '%s' "
+		     "plugin\n", programName, file);
+
+	    dlclose (dlhand);
+	    free (file);
+
+	    return FALSE;
+	}
+    }
+    else
+    {
+	free (file);
+
+	return FALSE;
+    }
+
+    p->devPrivate.ptr = dlhand;
+    p->devType	      = "dlloader";
+
+    return TRUE;
+}
+
+static void
+dlloaderUnloadPlugin (CompPlugin *p)
+{
+    dlclose (p->devPrivate.ptr);
+}
+
+LoadPluginProc   loaderLoadPlugin   = dlloaderLoadPlugin;
+UnloadPluginProc loaderUnloadPlugin = dlloaderUnloadPlugin;
+
 Bool
 initPluginForDisplay (CompPlugin  *p,
 		      CompDisplay *d)
@@ -237,115 +319,55 @@ findActivePlugin (char *name)
     return 0;
 }
 
+void
+unloadPlugin (CompPlugin *p)
+{
+    (*loaderUnloadPlugin) (p);
+    free (p);
+}
+
 CompPlugin *
 loadPlugin (char *name)
 {
     CompPlugin *p;
-    char       *file, *home, *plugindir;
+    char       *home, *plugindir;
+    Bool       status;
 
     p = malloc (sizeof (CompPlugin));
     if (!p)
 	return 0;
 
-    file = malloc (strlen (name) + 7);
-    if (!file)
-    {
-	free (p);
-	return 0;
-    }
-
-    sprintf (file, "lib%s.so", name);
-
-    p->next    = 0;
-    p->dlhand  = 0;
-    p->vTable  = 0;
+    p->next	       = 0;
+    p->devPrivate.uval = 0;
+    p->devType	       = NULL;
+    p->vTable	       = 0;
 
     home = getenv ("HOME");
     if (home)
     {
-	plugindir = malloc (strlen (home) +
-			    strlen (HOME_PLUGINDIR) +
-			    strlen (file) + 3);
+	plugindir = malloc (strlen (home) + strlen (HOME_PLUGINDIR) + 3);
 	if (plugindir)
 	{
-	    sprintf (plugindir, "%s/%s/%s", home, HOME_PLUGINDIR, file);
-	    p->dlhand = dlopen (plugindir, RTLD_LAZY);
+	    sprintf (plugindir, "%s/%s", home, HOME_PLUGINDIR);
+	    status = (*loaderLoadPlugin) (p, plugindir, name);
 	    free (plugindir);
+
+	    if (status)
+		return p;
 	}
     }
 
-    if (!p->dlhand)
-    {
-	plugindir = malloc (strlen (PLUGINDIR) + strlen (file) + 2);
-	if (plugindir)
-	{
-	    sprintf (plugindir, "%s/%s", PLUGINDIR, file);
-	    p->dlhand = dlopen (plugindir, RTLD_LAZY);
-	    free (plugindir);
-	}
+    status = (*loaderLoadPlugin) (p, PLUGINDIR, name);
+    if (status)
+	return p;
 
-	if (!p->dlhand)
-	    p->dlhand = dlopen (file, RTLD_LAZY);
-    }
+    status = (*loaderLoadPlugin) (p, NULL, name);
+    if (status)
+	return p;
 
-    if (p->dlhand)
-    {
-	PluginGetInfoProc getInfo;
-	char		  *error;
+    fprintf (stderr, "%s: Couldn't load plugin '%s'\n", programName, name);
 
-	dlerror ();
-
-	getInfo = (PluginGetInfoProc) dlsym (p->dlhand, "getCompPluginInfo");
-
-	error = dlerror ();
-	if (error)
-	{
-	    fprintf (stderr, "%s: dlsym: %s\n", programName, error);
-
-	    getInfo = 0;
-	}
-
-	if (getInfo)
-	{
-	    p->vTable = (*getInfo) ();
-	    if (!p->vTable)
-	    {
-		fprintf (stderr, "%s: Couldn't get vtable from '%s' plugin\n",
-			 programName, file);
-
-		dlclose (p->dlhand);
-		free (p);
-		p = 0;
-	    }
-	}
-	else
-	{
-	    fprintf (stderr, "%s: Failed to lookup getCompPluginInfo in '%s' "
-		     "plugin\n", programName, file);
-
-	    dlclose (p->dlhand);
-	    free (p);
-	    p = 0;
-	}
-    }
-    else
-    {
-	fprintf (stderr, "%s: Couldn't load plugin '%s'\n", programName,
-		 file);
-	free (p);
-	p = 0;
-    }
-
-    free (file);
-
-    return p;
-}
-
-void
-unloadPlugin (CompPlugin *p)
-{
-    dlclose (p->dlhand);
-    free (p);
+    return 0;
 }
 
 static Bool

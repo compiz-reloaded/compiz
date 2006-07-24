@@ -2044,9 +2044,19 @@ typedef struct _CompPluginVTable {
 
 typedef CompPluginVTable *(*PluginGetInfoProc) (void);
 
+typedef Bool (*LoadPluginProc) (CompPlugin *p,
+				char	   *path,
+				char	   *name);
+
+typedef void (*UnloadPluginProc) (CompPlugin *p);
+
+extern LoadPluginProc   loaderLoadPlugin;
+extern UnloadPluginProc loaderUnloadPlugin;
+
 struct _CompPlugin {
     CompPlugin       *next;
-    void	     *dlhand;
+    CompPrivate	     devPrivate;
+    char	     *devType;
     CompPluginVTable *vTable;
 };
 
