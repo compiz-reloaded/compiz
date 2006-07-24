@@ -389,6 +389,8 @@ dbusFiniDisplay (CompPlugin  *p,
 {
     DBUS_DISPLAY (d);
 
+    compRemoveWatchFd (dd->watchFdHandle);
+
     dbus_bus_release_name (dd->connection, COMPIZ_DBUS_SERVICE_NAME, NULL);
     dbus_connection_close (dd->connection);
 
