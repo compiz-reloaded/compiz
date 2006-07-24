@@ -50,7 +50,7 @@ typedef struct _DbusDisplay {
 
 /*
  * Activate can be used to trigger any existing action. Arguments
- * should be a pair of { string, bool|int32|string }.
+ * should be a pair of { string, bool|int32|double|string }.
  *
  * Example (rotate to face 1):
  *
@@ -156,6 +156,8 @@ dbusHandleActivateMessage (DBusConnection *connection,
 
 		    while (!hasValue)
 		    {
+			double tmp;
+
 			switch (dbus_message_iter_get_arg_type (&iter)) {
 			case DBUS_TYPE_BOOLEAN:
 			    hasValue = TRUE;
@@ -168,6 +170,14 @@ dbusHandleActivateMessage (DBusConnection *connection,
 			    type     = CompOptionTypeInt;
 
 			    dbus_message_iter_get_basic (&iter, &value.i);
+			    break;
+			case DBUS_TYPE_DOUBLE:
+			    hasValue = TRUE;
+			    type     = CompOptionTypeFloat;
+
+			    dbus_message_iter_get_basic (&iter, &tmp);
+
+			    value.f = tmp;
 			    break;
 			case DBUS_TYPE_STRING:
 			    hasValue = TRUE;
