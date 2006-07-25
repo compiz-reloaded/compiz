@@ -11694,58 +11694,58 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[Dock,Toolbar,Menu,Utility,Splash,Normal,Dialog,ModalDialog,Unknown]</default>
+            <default>[Dock,Toolbar,Menu,Utility,Splash,Normal,Dialog,ModalDialog,DropdownMenu,PopupMenu,Tooltip,Notification,Combo,Dnd,Unknown]</default>
             <locale name="C">
                 <short>Window Types</short>
-                <long>Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken</short>
-                <long>Typy oken, které mají blednout (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které mají blednout (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen</short>
-                <long>Fenstertypen, die ein-/ausgeblendet werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die ein-/ausgeblendet werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Tipos de ventana</short>
-                <long>Tipos de ventanas que se deben desvanecer (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que se deben desvanecer (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Ikkunatyypit</short>
-                <long>Häivytettävät ikkunatyypit (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Häivytettävät ikkunatyypit (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Types de fenêtres</short>
-                <long>Types de fenêtres devant utiliser le fondu (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres devant utiliser le fondu (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablaktípusok</short>
-                <long>Ablaktípusok, amelyek elhalványulhatnak (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek elhalványulhatnak (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Tipi di finestre</short>
-                <long>Tipi di finestre a cui applicare la dissolvenza (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre a cui applicare la dissolvenza (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプ</short>
-                <long>フェードするウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>フェードするウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje okien</short>
-                <long>Rodzaje okien, które powinny płynnie pojawiać się/zanikać (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny płynnie pojawiać się/zanikać (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Janelas</short>
-                <long>Tipos de janelas que deveriam esmaecer-se (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam esmaecer-se (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>窗口类型</short>
-                <long>应减弱的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>应减弱的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>視窗類型</short>
-                <long>應該要淡出的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要淡出的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -12182,55 +12182,55 @@
             <default>[Toolbar,Utility,Dialog,Normal]</default>
             <locale name="C">
                 <short>Window Types</short>
-                <long>Window types that should be transformed when minimized (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should be transformed when minimized (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken</short>
-                <long>Typy oken, které mají být transformovány při minimalizaci (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které mají být transformovány při minimalizaci (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen</short>
-                <long>Fenstertypen, die beim Minimieren umgeformt werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die beim Minimieren umgeformt werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Tipos de ventana</short>
-                <long>Tipos de ventanas que se deben transformar al minimizarse (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que se deben transformar al minimizarse (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Ikkunatyypit</short>
-                <long>Pienennettäessä animoitavat ikkunatyypit (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Pienennettäessä animoitavat ikkunatyypit (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Types de fenêtres</short>
-                <long>Types de fenêtres à transformer lorsqu'elles sont réduites (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à transformer lorsqu'elles sont réduites (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablaktípusok</short>
-                <long>Ablaktípusok, amelyek transzformálhatók, amikor ikonizáltak (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek transzformálhatók, amikor ikonizáltak (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Tipi di finestre</short>
-                <long>Tipi di finestre da trasformare quando ridotte a icona (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre da trasformare quando ridotte a icona (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプ</short>
-                <long>最小化時に変換するウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>最小化時に変換するウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje okien</short>
-                <long>Rodzaje okien, które powinny być przekształcane podczas minimalizacji (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny być przekształcane podczas minimalizacji (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Janelas</short>
-                <long>Tipos de janelas que deveriam transformar-se quando minimizados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam transformar-se quando minimizados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>窗口类型</short>
-                <long>最小化时应转换的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>最小化时应转换的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>視窗類型</short>
-                <long>應該要在最小化時轉換的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要在最小化時轉換的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -19515,55 +19515,55 @@
             <default>[Toolbar,Utility,Dialog,ModalDialog,Fullscreen,Normal]</default>
             <locale name="C">
                 <short>Window Types</short>
-                <long>Window types that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken</short>
-                <long>Typy oken, které mají být škálovány v režimu škálování (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které mají být škálovány v režimu škálování (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen</short>
-                <long>Fenstertypen, die im Skaliermodus skaliert werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die im Skaliermodus skaliert werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Tipos de ventana</short>
-                <long>Tipos de ventanas que deben cambiar de tamaño en el modo de escala (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que deben cambiar de tamaño en el modo de escala (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Ikkunatyypit</short>
-                <long>Skaalautuvat ikkunatyypit (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Skaalautuvat ikkunatyypit (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Types de fenêtres</short>
-                <long>Types de fenêtres à mettre à l'échelle en mode échelle (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à mettre à l'échelle en mode échelle (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablaktípusok</short>
-                <long>Ablaktípusok, amelyek skálázás módban méretezendők (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek skálázás módban méretezendők (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Tipi di finestre</short>
-                <long>Tipi di finestre da ridimensionare in modalità scala (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre da ridimensionare in modalità scala (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプ</short>
-                <long>スケールモードでスケールするウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>スケールモードでスケールするウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje okien</short>
-                <long>Rodzaje okien, które powinny być skalowane w trybie skalowania (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny być skalowane w trybie skalowania (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Janelas</short>
-                <long>Tipos de janelas que deveriam ser dimensionados no modo de escala (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam ser dimensionados no modo de escala (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>窗口类型</short>
-                <long>应在比例模式中调整大小的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>应在比例模式中调整大小的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>視窗類型</short>
-                <long>應該要在調整比例模式中調整比例的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要在調整比例模式中調整比例的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -20252,55 +20252,55 @@
             <default>[Toolbar,Utility,Dialog,ModalDialog,Fullscreen,Normal]</default>
             <locale name="C">
                 <short>Window Types</short>
-                <long>Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken</short>
-                <long>Typy oken, které mají být zobrazeny v přepínači (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které mají být zobrazeny v přepínači (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen</short>
-                <long>Fenstertypen, die im Switcher angezeigt werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die im Switcher angezeigt werden sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Tipos de ventana</short>
-                <long>Tipos de ventanas que se deben mostrar en el conmutador (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que se deben mostrar en el conmutador (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Ikkunatyypit</short>
-                <long>Ikkunavaihtajassa näkyvät ikkunatyypit(työpöytä = Desktop, paneeli = Dock, työkalupalkki = Toolbar, valikko = Menu, työkalu = Utility, käynnistysikkuna = Splash, valintaikkuna = Dialog, pakotettu valintaikkuna = ModalDialog, tavallinen ikkuna = Normal, kokoruutuikkuna = Fullscreen, tuntematon = Unknown) (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Ikkunavaihtajassa näkyvät ikkunatyypit(työpöytä = Desktop, paneeli = Dock, työkalupalkki = Toolbar, valikko = Menu, työkalu = Utility, käynnistysikkuna = Splash, valintaikkuna = Dialog, pakotettu valintaikkuna = ModalDialog, tavallinen ikkuna = Normal, kokoruutuikkuna = Fullscreen, tuntematon = Unknown) (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Types de fenêtres</short>
-                <long>Types de fenêtres à afficher dans le commutateur (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à afficher dans le commutateur (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablaktípusok</short>
-                <long>Ablaktípusok, amelyek megjelenítendők az ablakválasztóban (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek megjelenítendők az ablakválasztóban (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Tipi di finestre</short>
-                <long>Tipi di finestre da visualizzare nel commutatore (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre da visualizzare nel commutatore (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプ</short>
-                <long>スイッチャで表示するウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>スイッチャで表示するウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje okien</short>
-                <long>Rodzaje okien, które powinny być widoczne w przełączniku (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny być widoczne w przełączniku (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Janelas</short>
-                <long>Tipos de janelas que deveriam ser mostrados no alternador (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam ser mostrados no alternador (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>窗口类型</short>
-                <long>应显示在转换器中的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>应显示在转换器中的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>視窗類型</short>
-                <long>應該要顯示在切換器中的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要顯示在切換器中的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -22714,58 +22714,58 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[Splash,Unknown]</default>
+            <default>[Splash,DropdownMenu,PopupMenu,Tooltip,Notification,Combo,Dnd,Unknown]</default>
             <locale name="C">
                 <short>Map Window Types</short>
-                <long>Window types that should wobble when mapped (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should wobble when mapped (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken pro mapování</short>
-                <long>Typy oken, které se při mapování mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které se při mapování mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen zuordnen</short>
-                <long>Fenstertypen, die beim Anzeigen wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die beim Anzeigen wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Asignar tipos de ventanas</short>
-                <long>Tipos de ventanas que deben temblar cuando se asignen (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que deben temblar cuando se asignen (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Ilmestyessään huojuvat ikkunatyypit</short>
-                <long>Ikkunatyypit, jotka huojuvat ilmestyessään (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Ikkunatyypit, jotka huojuvat ilmestyessään (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Mapper les types de fenêtres</short>
-                <long>Types de fenêtres à déformer lorsqu'elles sont mappées (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à déformer lorsqu'elles sont mappées (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablaktérkép-típusok</short>
-                <long>Ablaktípusok, amelyek imbolyoghatnak, amikor térképezettek (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek imbolyoghatnak, amikor térképezettek (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Associa tipi di finestre</short>
-                <long>Tipi di finestre a cui applicare il tremolio quando mappate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre a cui applicare il tremolio quando mappate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプのマップ</short>
-                <long>マップ時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>マップ時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje mapowanych okien</short>
-                <long>Rodzaje okien, które powinny drgać przy mapowaniu (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny drgać przy mapowaniu (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Mapa de Janelas</short>
-                <long>Tipos de janelas que deveriam ficar instáveis quando mapeados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam ficar instáveis quando mapeados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>图窗口类型</short>
-                <long>映射时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>映射时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>映射視窗類型</short>
-                <long>應該要在映射時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要在映射時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -22778,55 +22778,55 @@
             <default>[]</default>
             <locale name="C">
                 <short>Focus Window Types</short>
-                <long>Window types that should wobble when focused (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should wobble when focused (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy okna pro efekt při zaměření</short>
-                <long>Typy oken, které se při zaměření mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které se při zaměření mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen fokussieren</short>
-                <long>Fenstertypen, die beim Erhalt des Fokus wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die beim Erhalt des Fokus wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Enfocar ventanas de tipo</short>
-                <long>Tipos de ventanas que deben temblar cuando se enfoquen (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que deben temblar cuando se enfoquen (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Kohdistettaessa huojuvat ikkunat</short>
-                <long>Ikkunatyypit, jotka huojuvat kohdistettaessa(työpöytä = Desktop, paneeli = Dock, työkalupalkki = Toolbar, valikko = Menu, työkalu = Utility, käynnistysikkuna = Splash, valintaikkuna = Dialog, pakotettu valintaikkuna = ModalDialog, tavallinen ikkuna = Normal, kokoruutuikkuna = Fullscreen, tuntematon = Unknown) (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Ikkunatyypit, jotka huojuvat kohdistettaessa(työpöytä = Desktop, paneeli = Dock, työkalupalkki = Toolbar, valikko = Menu, työkalu = Utility, käynnistysikkuna = Splash, valintaikkuna = Dialog, pakotettu valintaikkuna = ModalDialog, tavallinen ikkuna = Normal, kokoruutuikkuna = Fullscreen, tuntematon = Unknown) (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Focus des types de fenêtres</short>
-                <long>Types de fenêtres à déformer lorsque le focus est sur elles (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à déformer lorsque le focus est sur elles (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablakfókusz-típusok</short>
-                <long>Ablaktípusok, amelyek imbolyoghatnak fókuszáláskor (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek imbolyoghatnak fókuszáláskor (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Tipi di finestre attive</short>
-                <long>Tipi di finestre a cui applicare il tremolio quando attivate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre a cui applicare il tremolio quando attivate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプをフォーカス</short>
-                <long>フォーカス時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>フォーカス時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje wybieranych okien</short>
-                <long>Rodzaje okien, które powinny drgać po wybraniu (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny drgać po wybraniu (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Destaque de Janelas</short>
-                <long>Tipos de janelas que deveriam ficar instáveis quando destacados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam ficar instáveis quando destacados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>聚焦窗口类型</short>
-                <long>聚焦时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>聚焦时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>定焦視窗類型</short>
-                <long>應該要在定焦時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要在定焦時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -22839,55 +22839,55 @@
             <default>[]</default>
             <locale name="C">
                 <short>Grab Window Types</short>
-                <long>Window types that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken pro efekt při uchopení</short>
-                <long>Typy oken, které se při uchopení mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které se při uchopení mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen aufnehmen</short>
-                <long>Fenstertypen, die bei Aufnahme wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die bei Aufnahme wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Obtener tipos de ventanas</short>
-                <long>Tipos de ventanas que deben temblar cuando se recuperen (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que deben temblar cuando se recuperen (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Tartuttaessa huojuvat ikkunatyypit</short>
-                <long>Ikkunatyypit, jotka huojuvat tartuttaessa (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Ikkunatyypit, jotka huojuvat tartuttaessa (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Saisir les types de fenêtres</short>
-                <long>Types de fenêtres à déformer lorsqu'elles sont saisies (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à déformer lorsqu'elles sont saisies (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablaktípusok érzékelése</short>
-                <long>Ablaktípusok, amelyek imbolyoghatnak megfogáskor (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek imbolyoghatnak megfogáskor (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Cattura tipi di finestre</short>
-                <long>Tipi di finestre a cui applicare il tremolio quando afferrate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre a cui applicare il tremolio quando afferrate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプを取得</short>
-                <long>取得時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>取得時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje chwytanych okien</short>
-                <long>Rodzaje okien, które powinny drgać przy chwytaniu  (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje okien, które powinny drgać przy chwytaniu  (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Capturar Tipos de Janelas</short>
-                <long>Tipos de janelas que deveriam ficar instáveis quando capturados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam ficar instáveis quando capturados (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>捕捉窗口类型</short>
-                <long>捕获时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>捕获时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>抓取視窗類型</short>
-                <long>應該要在抓取時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要在抓取時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
@@ -22900,55 +22900,55 @@
             <default>[Toolbar,Menu,Utility,Dialog,ModalDialog,Normal]</default>
             <locale name="C">
                 <short>Move Window Types</short>
-                <long>Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="cs">
                 <short>Typy oken pro efekt při přesunu</short>
-                <long>Typy oken, které se při přesouvání mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Typy oken, které se při přesouvání mají rozhoupat (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="de">
                 <short>Fenstertypen verschieben</short>
-                <long>Fenstertypen, die beim Verschieben wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, ModalDialog, Normal, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
+                <long>Fenstertypen, die beim Verschieben wackeln sollen (Desktop, Dock, Toolbar [Symbolleiste], Menu [Menü], Utility [Dienstprogramm], Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Vollbild], Unknown [Unbekannt])</long>
             </locale>
             <locale name="es">
                 <short>Mover ventanas de tipo</short>
-                <long>Tipos de ventanas que deben temblar cuando se muevan (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], ModalDialog [Diálogo de modos], Normal, Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
+                <long>Tipos de ventanas que deben temblar cuando se muevan (Desktop [Escritorio], Dock, Toolbar [Barra de herramientas], Menu [Menús], Utility [Utilidades], Splash [Inicial], Dialog [Diálogos], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Diálogo de modos], Fullscreen [Pantalla completa], Unknown [Desconocidas])</long>
             </locale>
             <locale name="fi">
                 <short>Siirrettäessä huojuvat ikkunatyypit</short>
-                <long>Ikkunatyypit, jotka huojuvat liikuteltaessa (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], ModalDialog [pakotettu valintaikkuna], Normal [ikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
+                <long>Ikkunatyypit, jotka huojuvat liikuteltaessa (Desktop [työpöytä], Dock [paneeli], Toolbar [työkalupalkki], Menu [valikko], Utility [työkalu], Splash [käynnistysikkuna], Dialog [valintaikkuna], Normal [ikkuna], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [pakotettu valintaikkuna], Fullscreen [kokoruutuikkuna], Unknown [tuntematon])</long>
             </locale>
             <locale name="fr">
                 <short>Déplacer les types de fenêtres</short>
-                <long>Types de fenêtres à déformer lorsqu'elles sont déplacées (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], ModalDialog [boîte de dialogue modale], Normal [normal], Fullscreen [plein écran], Unknown [inconnu])</long>
+                <long>Types de fenêtres à déformer lorsqu'elles sont déplacées (Desktop [bureau], Dock [accueil], Toolbar [barre d'outils], Menu [menu], Utility [utilitaire], Splash [démarrage], Dialog [boîte de dialogue], Normal [normal], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [boîte de dialogue modale], Fullscreen [plein écran], Unknown [inconnu])</long>
             </locale>
             <locale name="hu">
                 <short>Ablakmozgatás típusai</short>
-                <long>Ablaktípusok, amelyek imbolyoghatnak mozgatáskor (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, ModalDialog, Normal [Normál], Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
+                <long>Ablaktípusok, amelyek imbolyoghatnak mozgatáskor (Desktop [Munkaasztal], Dock [Dokk], Toolbar [Eszköztár], Menu [Menü], Utility [Segédprogram], Splash [Párbeszéd], Dialog, Normal [Normál], DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen [Teljes képernyős], Unknown [Ismeretlen])</long>
             </locale>
             <locale name="it">
                 <short>Tipi di finestre mobili</short>
-                <long>Tipi di finestre a cui applicare il tremolio quando spostate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], ModalDialog [Modale], Normal, Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
+                <long>Tipi di finestre a cui applicare il tremolio quando spostate (Desktop, Dock [Agganciata], Toolbar [Barra degli strumenti], Menu, Utility [Utlity], Splash [Schermata iniziale], Dialog [Finestra di dialogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Modale], Fullscreen [Schermo intero], Unknown [Sconosciuta])</long>
             </locale>
             <locale name="ja">
                 <short>ウィンドウタイプを移動</short>
-                <long>移動時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>移動時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pl">
                 <short>Rodzaje przenoszonych okien</short>
-                <long>Rodzaje ikon, które mają drgać podczas przesuwania (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>Rodzaje ikon, które mają drgać podczas przesuwania (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Tipos de Movimentação de Janelas</short>
-                <long>Tipos de janelas que deveriam ficar instáveis quando movidos (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], ModalDialog [Caixa de Diálogo Modal], Normal, Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
+                <long>Tipos de janelas que deveriam ficar instáveis quando movidos (Desktop [Área de Trabalho], Dock [Âncora], Toolbar [Barra de Ferramentas], Menu, Utility [Utilitário], Splash [Tela de Apresentação], Dialog [Caixa de Diálogo], Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog [Caixa de Diálogo Modal], Fullscreen [Tela Inteira], Unknown [Desconhecido])</long>
             </locale>
             <locale name="zh_CN">
                 <short>移动窗口类型</short>
-                <long>移动时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>移动时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模式对话框、常规、全屏和未知） (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
             <locale name="zh_TW">
                 <short>移動視窗類型</short>
-                <long>應該要在移動時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)</long>
+                <long>應該要在移動時搖擺的視窗類型 (桌面、停駐、工具列、功能表、公用程式、開頭顯示、對話方塊、強制回應對話方塊、一般、全螢幕、未知的) (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, Normal, DropdownMenu, PopupMenu, Tooltip, Notification, Combo, Dnd, ModalDialog, Fullscreen, Unknown)</long>
             </locale>
         </schema>
 
