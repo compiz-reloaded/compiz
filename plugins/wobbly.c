@@ -147,6 +147,12 @@ static WobblyEffect effectType[] = {
 
 static char *mapWinType[] = {
     N_("Splash"),
+    N_("DropdownMenu"),
+    N_("PopupMenu"),
+    N_("Tooltip"),
+    N_("Notification"),
+    N_("Combo"),
+    N_("Dnd"),
     N_("Unknown")
 };
 #define N_MAP_WIN_TYPE (sizeof (mapWinType) / sizeof (mapWinType[0]))
