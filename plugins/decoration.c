@@ -813,19 +813,14 @@ decorWindowUpdate (CompWindow *w,
 		    break;
 		}
 		/* fall-through */
-	    case CompWindowTypeSplashMask:
-	    case CompWindowTypeToolbarMask:
-	    case CompWindowTypeMenuMask:
-	    case CompWindowTypeUnknownMask:
-	    case CompWindowTypeDockMask:
+	    default:
 		if (w->region->numRects == 1 && !w->alpha)
 		    decor = ds->decor[DECOR_BARE];
 
 		/* no decoration on windows with below state */
 		if (w->state & CompWindowStateBelowMask)
 		    decor = NULL;
-		break;
-	    default:
+
 		break;
 	    }
 	}
