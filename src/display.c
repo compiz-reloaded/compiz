@@ -2426,6 +2426,19 @@ addDisplay (char *name,
     d->winTypeDialogAtom  = XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_DIALOG", 0);
     d->winTypeNormalAtom  = XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_NORMAL", 0);
 
+    d->winTypeDropDownMenuAtom =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_DROP_DOWN_MENU", 0);
+    d->winTypePopupMenuAtom    =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_POPUP_MENU", 0);
+    d->winTypeTooltipAtom      =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_TOOLTIP", 0);
+    d->winTypeNotificationAtom =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_NOTIFICATION", 0);
+    d->winTypeComboAtom        =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_COMBO", 0);
+    d->winTypeDndAtom          =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_DND", 0);
+
     d->winOpacityAtom	 = XInternAtom (dpy, "_NET_WM_WINDOW_OPACITY", 0);
     d->winBrightnessAtom = XInternAtom (dpy, "_NET_WM_WINDOW_BRIGHTNESS", 0);
     d->winSaturationAtom = XInternAtom (dpy, "_NET_WM_WINDOW_SATURATION", 0);

@@ -592,12 +592,6 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionResizeMask |
 	    CompWindowActionStickMask  |
 	    CompWindowActionCloseMask;
-	break;
-    case CompWindowTypeMenuMask:
-    case CompWindowTypeSplashMask:
-    case CompWindowTypeDesktopMask:
-    case CompWindowTypeDockMask:
-    case CompWindowTypeUnknownMask:
     default:
 	break;
     }
@@ -693,6 +687,18 @@ getWindowType (CompDisplay *display,
 	    return CompWindowTypeSplashMask;
 	else if (a == display->winTypeDialogAtom)
 	    return CompWindowTypeDialogMask;
+	else if (a == display->winTypeDropDownMenuAtom)
+	    return CompWindowTypeDropDownMenuMask;
+	else if (a == display->winTypePopupMenuAtom)
+	    return CompWindowTypePopupMenuMask;
+	else if (a == display->winTypeTooltipAtom)
+	    return CompWindowTypeTooltipMask;
+	else if (a == display->winTypeNotificationAtom)
+	    return CompWindowTypeNotificationMask;
+	else if (a == display->winTypeComboAtom)
+	    return CompWindowTypeComboMask;
+	else if (a == display->winTypeDndAtom)
+	    return CompWindowTypeDndMask;
     }
 
     return CompWindowTypeUnknownMask;

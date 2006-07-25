@@ -94,17 +94,23 @@ typedef struct _CompIcon    CompIcon;
 #define CompWindowProtocolPingMask	  (1 << 2)
 #define CompWindowProtocolSyncRequestMask (1 << 3)
 
-#define CompWindowTypeDesktopMask     (1 << 0)
-#define CompWindowTypeDockMask        (1 << 1)
-#define CompWindowTypeToolbarMask     (1 << 2)
-#define CompWindowTypeMenuMask        (1 << 3)
-#define CompWindowTypeUtilMask        (1 << 4)
-#define CompWindowTypeSplashMask      (1 << 5)
-#define CompWindowTypeDialogMask      (1 << 6)
-#define CompWindowTypeModalDialogMask (1 << 7)
-#define CompWindowTypeNormalMask      (1 << 8)
-#define CompWindowTypeFullscreenMask  (1 << 9)
-#define CompWindowTypeUnknownMask     (1 << 10)
+#define CompWindowTypeDesktopMask      (1 << 0)
+#define CompWindowTypeDockMask         (1 << 1)
+#define CompWindowTypeToolbarMask      (1 << 2)
+#define CompWindowTypeMenuMask         (1 << 3)
+#define CompWindowTypeUtilMask         (1 << 4)
+#define CompWindowTypeSplashMask       (1 << 5)
+#define CompWindowTypeDialogMask       (1 << 6)
+#define CompWindowTypeNormalMask       (1 << 7)
+#define CompWindowTypeDropDownMenuMask (1 << 8)
+#define CompWindowTypePopupMenuMask    (1 << 9)
+#define CompWindowTypeTooltipMask      (1 << 10)
+#define CompWindowTypeNotificationMask (1 << 11)
+#define CompWindowTypeComboMask	       (1 << 12)
+#define CompWindowTypeDndMask	       (1 << 13)
+#define CompWindowTypeModalDialogMask  (1 << 14)
+#define CompWindowTypeFullscreenMask   (1 << 15)
+#define CompWindowTypeUnknownMask      (1 << 16)
 
 #define CompWindowStateModalMask	    (1 <<  0)
 #define CompWindowStateStickyMask	    (1 <<  1)
@@ -554,6 +560,12 @@ struct _CompDisplay {
     Atom winTypeSplashAtom;
     Atom winTypeDialogAtom;
     Atom winTypeNormalAtom;
+    Atom winTypeDropDownMenuAtom;
+    Atom winTypePopupMenuAtom;
+    Atom winTypeTooltipAtom;
+    Atom winTypeNotificationAtom;
+    Atom winTypeComboAtom;
+    Atom winTypeDndAtom;
 
     Atom winOpacityAtom;
     Atom winBrightnessAtom;
