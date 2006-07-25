@@ -1685,6 +1685,8 @@ addWindow (CompScreen *screen,
 
     w->invisible = TRUE;
 
+    w->wmType = getWindowType (w->screen->display, w->id);
+
     if (!w->attrib.override_redirect)
     {
 	updateNormalHints (w);
@@ -1701,8 +1703,6 @@ addWindow (CompScreen *screen,
 	w->clientLeader = getClientLeader (w);
 	if (!w->clientLeader)
 	    w->startupId = getStartupId (w);
-
-	w->wmType = getWindowType (w->screen->display, w->id);
 
 	recalcWindowType (w);
 
@@ -1738,6 +1738,10 @@ addWindow (CompScreen *screen,
 	    if (w->alive)
 		w->paint.saturation = w->saturation;
 	}
+    }
+    else
+    {
+	recalcWindowType (w);
     }
 
     if (w->attrib.map_state == IsViewable)
