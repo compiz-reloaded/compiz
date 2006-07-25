@@ -42,6 +42,12 @@ static char *winType[] = {
     N_("Normal"),
     N_("Dialog"),
     N_("ModalDialog"),
+    N_("DropdownMenu"),
+    N_("PopupMenu"),
+    N_("Tooltip"),
+    N_("Notification"),
+    N_("Combo"),
+    N_("Dnd"),
     N_("Unknown")
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
