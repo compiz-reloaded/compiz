@@ -2426,8 +2426,8 @@ addDisplay (char *name,
     d->winTypeDialogAtom  = XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_DIALOG", 0);
     d->winTypeNormalAtom  = XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_NORMAL", 0);
 
-    d->winTypeDropDownMenuAtom =
-	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_DROP_DOWN_MENU", 0);
+    d->winTypeDropdownMenuAtom =
+	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_DROPDOWN_MENU", 0);
     d->winTypePopupMenuAtom    =
 	XInternAtom (dpy, "_NET_WM_WINDOW_TYPE_POPUP_MENU", 0);
     d->winTypeTooltipAtom      =

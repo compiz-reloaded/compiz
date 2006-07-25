@@ -293,7 +293,7 @@ compWindowTypeMaskFromStringList (CompOptionValue *value)
 	else if (strcasecmp (value->list.value[i].s, "normal") == 0)
 	    mask |= CompWindowTypeNormalMask;
 	else if (strcasecmp (value->list.value[i].s, "dropdownmenu") == 0)
-	    mask |= CompWindowTypeDropDownMenuMask;
+	    mask |= CompWindowTypeDropdownMenuMask;
 	else if (strcasecmp (value->list.value[i].s, "popupmenu") == 0)
 	    mask |= CompWindowTypePopupMenuMask;
 	else if (strcasecmp (value->list.value[i].s, "tooltip") == 0)

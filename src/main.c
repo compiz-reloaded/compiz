@@ -59,7 +59,7 @@ char *windowTypeString[] = {
     N_("Splash"),
     N_("Dialog"),
     N_("Normal"),
-    N_("DropDownMenu"),
+    N_("DropdownMenu"),
     N_("PopupMenu"),
     N_("Tooltip"),
     N_("Notification"),

@@ -687,8 +687,8 @@ getWindowType (CompDisplay *display,
 	    return CompWindowTypeSplashMask;
 	else if (a == display->winTypeDialogAtom)
 	    return CompWindowTypeDialogMask;
-	else if (a == display->winTypeDropDownMenuAtom)
-	    return CompWindowTypeDropDownMenuMask;
+	else if (a == display->winTypeDropdownMenuAtom)
+	    return CompWindowTypeDropdownMenuMask;
 	else if (a == display->winTypePopupMenuAtom)
 	    return CompWindowTypePopupMenuMask;
 	else if (a == display->winTypeTooltipAtom)

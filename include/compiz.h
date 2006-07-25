@@ -102,7 +102,7 @@ typedef struct _CompIcon    CompIcon;
 #define CompWindowTypeSplashMask       (1 << 5)
 #define CompWindowTypeDialogMask       (1 << 6)
 #define CompWindowTypeNormalMask       (1 << 7)
-#define CompWindowTypeDropDownMenuMask (1 << 8)
+#define CompWindowTypeDropdownMenuMask (1 << 8)
 #define CompWindowTypePopupMenuMask    (1 << 9)
 #define CompWindowTypeTooltipMask      (1 << 10)
 #define CompWindowTypeNotificationMask (1 << 11)
@@ -560,7 +560,7 @@ struct _CompDisplay {
     Atom winTypeSplashAtom;
     Atom winTypeDialogAtom;
     Atom winTypeNormalAtom;
-    Atom winTypeDropDownMenuAtom;
+    Atom winTypeDropdownMenuAtom;
     Atom winTypePopupMenuAtom;
     Atom winTypeTooltipAtom;
     Atom winTypeNotificationAtom;
