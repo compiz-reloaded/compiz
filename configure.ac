@@ -161,19 +161,17 @@ if test "$use_dbus" = yes; then
   AC_DEFINE(USE_DBUS, 1, [Build dbus plugin])
 fi
 
-AC_ARG_ENABLE(libsvg-cairo,
-  [  --enable-libsvg-cairo   Enable svg support],
-  [use_libsvg_cairo=$enableval], [use_libsvg_cairo=no])
+AC_ARG_ENABLE(librsvg,
+  [  --enable-librsvg        Enable svg support],
+  [use_librsvg=$enableval], [use_librsvg=no])
 
-if test "x$use_libsvg_cairo" = "xyes"; then
-  PKG_CHECK_MODULES(LIBSVG_CAIRO, libsvg-cairo,
-		    [use_libsvg_cairo=yes],
-		    [use_libsvg_cairo=no])
+if test "x$use_librsvg" = "xyes"; then
+  PKG_CHECK_MODULES(LIBRSVG, [cairo >= 1.0 librsvg-2.0 >= 2.14.0], [use_librsvg=yes], [use_librsvg=no])
 fi
 
-AM_CONDITIONAL(USE_LIBSVG_CAIRO, [test x$use_libsvg_cairo = xyes])
-if test "$use_libsvg_cairo" = yes; then
-  AC_DEFINE(USE_LIBSVG_CAIRO, 1, [libsvg-cairo for SVG support])
+AM_CONDITIONAL(USE_LIBRSVG, test "x$use_librsvg" = "xyes")
+if test "$use_librsvg" = yes; then
+  AC_DEFINE(USE_LIBRSVG, 1, [librsvg for SVG support])
 fi
 
 AC_ARG_WITH(scale-corner,
@@ -267,7 +265,7 @@ echo "  place: $use_place"
 echo "  dbus:  $use_dbus"
 echo ""
 echo "and the following optional features will be compiled:"
-echo "  svg:   $use_libsvg_cairo"
+echo "  svg:   $use_librsvg"
 echo "  gnome: $use_gnome"
 echo "  kde:   $use_kde"
 echo ""

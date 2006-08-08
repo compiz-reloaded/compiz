@@ -34,9 +34,11 @@
 #include <math.h>
 #include <sys/time.h>
 
-#ifdef USE_LIBSVG_CAIRO
-#include <cairo-xlib.h>
-#include <svg-cairo.h>
+#ifdef USE_LIBRSVG
+#include <cairo/cairo.h>
+#include <cairo/cairo-xlib.h>
+#include <librsvg/rsvg.h>
+#include <librsvg/rsvg-cairo.h>
 #endif
 
 #include <X11/Xatom.h>
@@ -153,9 +155,8 @@ typedef struct _CubeScreen {
     int		    imgCurFile;
     CompOptionValue *imgFiles;
 
-#ifdef USE_LIBSVG_CAIRO
+#ifdef USE_LIBRSVG
     cairo_t	    *cr;
-    svg_cairo_t	    *svgc;
 #endif
 
 } CubeScreen;
@@ -183,9 +184,8 @@ cubeInitSvg (CompScreen *s)
     cs->pixmap = None;
     cs->pw = cs->ph = 0;
 
-#ifdef USE_LIBSVG_CAIRO
-    cs->cr = 0;
-    cs->svgc = 0;
+#ifdef USE_LIBRSVG
+    cs->cr = NULL;
 #endif
 
 }
@@ -196,10 +196,7 @@ cubeFiniSvg (CompScreen *s)
 {
     CUBE_SCREEN (s);
 
-#ifdef USE_LIBSVG_CAIRO
-    if (cs->svgc)
-	svg_cairo_destroy (cs->svgc);
-
+#ifdef USE_LIBRSVG
     if (cs->cr)
 	cairo_destroy (cs->cr);
 #endif
@@ -216,27 +213,29 @@ readSvgToTexture (CompScreen   *s,
 		  unsigned int *returnHeight)
 {
 
-#ifdef USE_LIBSVG_CAIRO
-    unsigned int  width, height, pw, ph;
-    char	 *name;
+#ifdef USE_LIBRSVG
+    unsigned int      width, height, pw, ph;
+    char	      *name;
+    GError	      *error = NULL;
+    RsvgHandle	      *svgHandle;
+    RsvgDimensionData svgDimension;
 
     CUBE_SCREEN (s);
-
-    if (cs->svgc)
-	svg_cairo_destroy (cs->svgc);
-
-    if (svg_cairo_create (&cs->svgc))
-	return FALSE;
 
     if (!openImageFile (svgFileName, &name, NULL))
 	return FALSE;
 
-    if (svg_cairo_parse (cs->svgc, name) != SVG_CAIRO_STATUS_SUCCESS)
-	return FALSE;
+    svgHandle = rsvg_handle_new_from_file (name, &error);
 
     free (name);
 
-    svg_cairo_get_size (cs->svgc, &width, &height);
+    if (!svgHandle)
+	return FALSE;
+
+    rsvg_handle_get_dimensions (svgHandle, &svgDimension);
+
+    width  = svgDimension.width;
+    height = svgDimension.height;
 
     if (cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE].value.b)
     {
@@ -249,13 +248,17 @@ readSvgToTexture (CompScreen   *s,
 	ph = height;
     }
 
-    svg_cairo_set_viewport_dimension (cs->svgc, pw, ph);
-
     if (!cs->pixmap || cs->pw != pw || cs->ph != ph)
     {
 	cairo_surface_t *surface;
 	Visual		*visual;
 	int		depth;
+
+	if (cs->cr)
+	{
+	    cairo_destroy (cs->cr);
+	    cs->cr = NULL;
+	}
 
 	if (cs->pixmap)
 	    XFreePixmap (s->display->display, cs->pixmap);
@@ -295,7 +298,10 @@ readSvgToTexture (CompScreen   *s,
 
     cairo_scale (cs->cr, (double) cs->pw / width, (double) cs->ph / height);
 
-    svg_cairo_render (cs->svgc, cs->cr);
+    rsvg_handle_render_cairo (svgHandle, cs->cr);
+
+    rsvg_handle_free (svgHandle);
+
     cairo_restore (cs->cr);
 
     *returnWidth  = cs->pw;
@@ -1590,6 +1596,11 @@ static void
 cubeFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
+
+#ifdef USE_LIBRSVG
+    rsvg_term ();
+#endif
+
     CUBE_DISPLAY (d);
 
     freeScreenPrivateIndex (d, cd->screenPrivateIndex);
@@ -1701,6 +1712,11 @@ cubeFiniScreen (CompPlugin *p,
 static Bool
 cubeInit (CompPlugin *p)
 {
+
+#ifdef USE_LIBRSVG
+    rsvg_init ();
+#endif
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
 	return FALSE;

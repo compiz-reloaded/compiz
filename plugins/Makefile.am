@@ -3,7 +3,7 @@ libfade_la_LIBADD = @COMPIZ_LIBS@
 libfade_la_SOURCES = fade.c
 
 libcube_la_LDFLAGS = -module -avoid-version -no-undefined
-libcube_la_LIBADD = @COMPIZ_LIBS@ @LIBSVG_CAIRO_LIBS@
+libcube_la_LIBADD = @COMPIZ_LIBS@ @LIBRSVG_LIBS@
 libcube_la_SOURCES = cube.c
 
 librotate_la_LDFLAGS = -module -avoid-version -no-undefined
@@ -106,7 +106,7 @@ endif
 
 INCLUDES =					\
 	@COMPIZ_CFLAGS@				\
-	@LIBSVG_CAIRO_CFLAGS@			\
+	@LIBRSVG_CFLAGS@			\
 	@GCONF_CFLAGS@				\
 	@PLACE_CFLAGS@				\
 	@DBUS_CFLAGS@				\
