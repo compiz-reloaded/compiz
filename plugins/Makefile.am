@@ -46,6 +46,10 @@ libwater_la_LDFLAGS = -module -avoid-version -no-undefined
 libwater_la_LIBADD = @COMPIZ_LIBS@
 libwater_la_SOURCES = water.c
 
+libscreenshot_la_LDFLAGS = -module -avoid-version -no-undefined
+libscreenshot_la_LIBADD = @COMPIZ_LIBS@
+libscreenshot_la_SOURCES = screenshot.c
+
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
@@ -130,6 +134,7 @@ module_LTLIBRARIES =		\
 	$(libdbus_module)	\
 	libswitcher.la		\
 	libwater.la		\
+	libscreenshot.la	\
 	$(libgconf_dump_module)
 
 EXTRA_DIST = $(schema_in_files)
