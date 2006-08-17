@@ -2630,6 +2630,7 @@ addDisplay (char *name,
     compDisplays = d;
 
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));
+    d->returnKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Return"));
 
     for (i = 0; i < ScreenCount (dpy); i++)
     {

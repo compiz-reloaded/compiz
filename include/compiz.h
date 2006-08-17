@@ -288,15 +288,17 @@ typedef enum {
 } CompBindingType;
 
 typedef enum {
-    CompActionStateInitKey     = 1 << 0,
-    CompActionStateTermKey     = 1 << 1,
-    CompActionStateInitButton  = 1 << 2,
-    CompActionStateTermButton  = 1 << 3,
-    CompActionStateInitBell    = 1 << 4,
-    CompActionStateInitEdge    = 1 << 5,
-    CompActionStateTermEdge    = 1 << 6,
-    CompActionStateInitEdgeDnd = 1 << 7,
-    CompActionStateTermEdgeDnd = 1 << 8
+    CompActionStateInitKey     = 1 <<  0,
+    CompActionStateTermKey     = 1 <<  1,
+    CompActionStateInitButton  = 1 <<  2,
+    CompActionStateTermButton  = 1 <<  3,
+    CompActionStateInitBell    = 1 <<  4,
+    CompActionStateInitEdge    = 1 <<  5,
+    CompActionStateTermEdge    = 1 <<  6,
+    CompActionStateInitEdgeDnd = 1 <<  7,
+    CompActionStateTermEdgeDnd = 1 <<  8,
+    CompActionStateCommit      = 1 <<  9,
+    CompActionStateCancel      = 1 << 10
 } CompActionState;
 
 typedef struct _CompKeyBinding {
@@ -686,6 +688,7 @@ struct _CompDisplay {
     unsigned int    ignoredModMask;
 
     KeyCode escapeKeyCode;
+    KeyCode returnKeyCode;
 
     CompOption opt[COMP_DISPLAY_OPTION_NUM];
 
@@ -1310,7 +1313,6 @@ struct _CompScreen {
     CompTexture       backgroundTexture;
     unsigned int      pendingDestroys;
     int		      desktopWindowCount;
-    KeyCode	      escapeKeyCode;
     unsigned int      mapNum;
     unsigned int      activeNum;
 
@@ -1494,6 +1496,11 @@ int
 pushScreenGrab (CompScreen *s,
 		Cursor     cursor,
 		const char *name);
+
+void
+updateScreenGrab (CompScreen *s,
+		  int        index,
+		  Cursor     cursor);
 
 void
 removeScreenGrab (CompScreen *s,

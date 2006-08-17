@@ -979,9 +979,6 @@ addScreen (CompDisplay *display,
     s->wmSnAtom		   = wmSnAtom;
     s->wmSnTimestamp	   = wmSnTimestamp;
 
-    s->escapeKeyCode = XKeysymToKeycode (display->display,
-					 XStringToKeysym ("Escape"));
-
     s->damageMask  = COMP_SCREEN_DAMAGE_ALL_MASK;
     s->next	   = 0;
     s->exposeRects = 0;
@@ -1800,6 +1797,24 @@ pushScreenGrab (CompScreen *s,
     s->maxGrab++;
 
     return s->maxGrab;
+}
+
+void
+updateScreenGrab (CompScreen *s,
+		  int        index,
+		  Cursor     cursor)
+{
+  index--;
+
+#ifdef DEBUG
+    if (index < 0 || index >= s->maxGrab)
+	abort ();
+#endif
+
+  XChangeActivePointerGrab (s->display->display, POINTER_GRAB_MASK,
+			    cursor, CurrentTime);
+
+  s->grabs[index].cursor = cursor;
 }
 
 void

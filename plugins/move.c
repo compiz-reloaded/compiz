@@ -210,6 +210,12 @@ moveTerminate (CompDisplay     *d,
 
 	(md->w->screen->windowUngrabNotify) (md->w);
 
+	if (state & CompActionStateCancel)
+	    moveWindow (md->w,
+			md->w->serverX - md->w->attrib.x,
+			md->w->serverY - md->w->attrib.y,
+			TRUE, FALSE);
+
 	syncWindowPosition (md->w);
 
 	if (ms->grabIndex)

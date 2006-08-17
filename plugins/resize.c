@@ -43,14 +43,16 @@
 #define RESIZE_INITIATE_KEY_MODIFIERS_DEFAULT CompAltMask
 
 struct _ResizeKeys {
-    char *name;
-    int  dx;
-    int  dy;
+    char	 *name;
+    int		 dx;
+    int		 dy;
+    unsigned int warpMask;
+    unsigned int resizeMask;
 } rKeys[] = {
-    { "Left",  -1,  0 },
-    { "Right",  1,  0 },
-    { "Up",     0, -1 },
-    { "Down",   0,  1 }
+    { "Left",  -1,  0, ResizeLeftMask | ResizeRightMask, ResizeLeftMask },
+    { "Right",  1,  0, ResizeLeftMask | ResizeRightMask, ResizeRightMask },
+    { "Up",     0, -1, ResizeUpMask | ResizeDownMask,    ResizeUpMask },
+    { "Down",   0,  1, ResizeUpMask | ResizeDownMask,    ResizeDownMask }
 };
 
 #define NUM_KEYS (sizeof (rKeys) / sizeof (rKeys[0]))
@@ -69,12 +71,13 @@ typedef struct _ResizeDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
-    CompWindow	 *w;
-    int		 releaseButton;
-    unsigned int mask;
-    int		 width;
-    int		 height;
-    KeyCode      key[NUM_KEYS];
+    CompWindow	      *w;
+    XWindowAttributes savedAttrib;
+    int		      releaseButton;
+    unsigned int      mask;
+    int		      width;
+    int		      height;
+    KeyCode	      key[NUM_KEYS];
 } ResizeDisplay;
 
 typedef struct _ResizeScreen {
@@ -88,6 +91,8 @@ typedef struct _ResizeScreen {
     Cursor downCursor;
     Cursor downLeftCursor;
     Cursor downRightCursor;
+    Cursor middleCursor;
+    Cursor cursor[NUM_KEYS];
 } ResizeScreen;
 
 #define GET_RESIZE_DISPLAY(d)				       \
@@ -139,10 +144,16 @@ resizeInitiate (CompDisplay     *d,
 
 	mask = getIntOptionNamed (option, nOption, "direction", 0);
 
-	/* Initiate the resize in the direction suggested by the quarter
-	 * of the window the mouse is in, eg drag in top left will resize
-	 * up and to the left. */
-	if (!mask)
+	/* Initiate the resize in the direction suggested by the
+	 * quarter of the window the mouse is in, eg drag in top left
+	 * will resize up and to the left.  Keyboard resize starts out
+	 * with the cursor in the middle of the window and then starts
+	 * resizing the edge corresponding to the next key press. */
+	if (state & CompActionStateInitKey)
+	{
+	    mask = 0;
+	}
+	else if (!mask)
 	{
 	    mask |= ((x - w->attrib.x) < (w->width / 2)) ?
 		ResizeLeftMask : ResizeRightMask;
@@ -171,10 +182,11 @@ resizeInitiate (CompDisplay     *d,
 	if (w->shaded)
 	    mask &= ~(ResizeUpMask | ResizeDownMask);
 
-	rd->w	   = w;
-	rd->mask   = mask;
-	rd->width  = w->attrib.width;
-	rd->height = w->attrib.height;
+	rd->w	        = w;
+	rd->mask        = mask;
+	rd->width       = w->attrib.width;
+	rd->height      = w->attrib.height;
+	rd->savedAttrib = w->attrib;
 
 	lastPointerX = x;
 	lastPointerY = y;
@@ -183,7 +195,11 @@ resizeInitiate (CompDisplay     *d,
 	{
 	    Cursor cursor;
 
-	    if (mask & ResizeLeftMask)
+	    if (state & CompActionStateInitKey)
+	    {
+		cursor = rs->middleCursor;
+	    }
+	    else if (mask & ResizeLeftMask)
 	    {
 		if (mask & ResizeDownMask)
 		    cursor = rs->downLeftCursor;
@@ -251,13 +267,31 @@ resizeTerminate (CompDisplay	 *d,
 
 	(rd->w->screen->windowUngrabNotify) (rd->w);
 
+	if (state & CompActionStateCancel)
+	{
+	    XWindowChanges xwc;
+
+	    sendSyncRequest (rd->w);
+
+	    xwc.x      = rd->savedAttrib.x;
+	    xwc.y      = rd->savedAttrib.y;
+	    xwc.width  = rd->savedAttrib.width;
+	    xwc.height = rd->savedAttrib.height;
+
+	    XConfigureWindow (d->display, rd->w->id,
+			      CWX | CWY | CWWidth | CWHeight,
+			      &xwc);
+	}
+	else
+	{
+	    syncWindowPosition (rd->w);
+	}
+
 	if (rs->grabIndex)
 	{
 	    removeScreenGrab (rd->w->screen, rs->grabIndex, NULL);
 	    rs->grabIndex = 0;
 	}
-
-	syncWindowPosition (rd->w);
 
 	rd->w		  = 0;
 	rd->releaseButton = 0;
@@ -363,6 +397,63 @@ resizeConstrainMinMax (CompWindow *w,
     *newHeight = height;
 }
 
+
+static void
+resizeHandleKeyEvent (CompScreen *s,
+		      KeyCode	 keycode)
+{
+    RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
+
+    if (rs->grabIndex && rd->w)
+    {
+	CompWindow *w;
+	int i, widthInc, heightInc;
+
+	w = rd->w;
+
+	widthInc  = w->sizeHints.width_inc;
+	heightInc = w->sizeHints.height_inc;
+
+	if (widthInc < MIN_KEY_WIDTH_INC)
+	    widthInc = MIN_KEY_WIDTH_INC;
+
+	if (heightInc < MIN_KEY_HEIGHT_INC)
+	    heightInc = MIN_KEY_HEIGHT_INC;
+
+	for (i = 0; i < NUM_KEYS; i++)
+	{
+	    if (keycode != rd->key[i])
+	      continue;
+
+	    if (rd->mask & rKeys[i].warpMask)
+	    {
+		XWarpPointer (s->display->display, None, None, 0, 0, 0, 0,
+			      rKeys[i].dx * widthInc,
+			      rKeys[i].dy * heightInc);
+	    }
+	    else
+	    {
+		int x, y, left, top, width, height;
+
+		left   = w->attrib.x - w->input.left;
+		top    = w->attrib.y - w->input.top;
+		width  = w->input.left + w->attrib.width  + w->input.right;
+		height = w->input.top  + w->attrib.height + w->input.bottom;
+
+		x = left + width  * (rKeys[i].dx + 1) / 2;
+		y = top  + height * (rKeys[i].dy + 1) / 2;
+
+		warpPointer (s->display, x - pointerX, y - pointerY);
+		rd->mask = rKeys[i].resizeMask;
+		updateScreenGrab (s, rs->grabIndex, rs->cursor[i]);
+	    }
+			    
+	    break;
+	}
+    }
+}
+
 static void
 resizeHandleMotionEvent (CompScreen *s,
 			 int	    xRoot,
@@ -416,37 +507,11 @@ resizeHandleEvent (CompDisplay *d,
 
     switch (event->type) {
     case KeyPress:
-    case KeyRelease:
 	s = findScreenAtDisplay (d, event->xkey.root);
 	if (s)
-	{
-	    RESIZE_SCREEN (s);
-
-	    if (rs->grabIndex && rd->w && event->type == KeyPress)
-	    {
-		int i, widthInc, heightInc;
-
-		widthInc  = rd->w->sizeHints.width_inc;
-		heightInc = rd->w->sizeHints.height_inc;
-
-		if (widthInc < MIN_KEY_WIDTH_INC)
-		    widthInc = MIN_KEY_WIDTH_INC;
-
-		if (heightInc < MIN_KEY_HEIGHT_INC)
-		    heightInc = MIN_KEY_HEIGHT_INC;
-
-		for (i = 0; i < NUM_KEYS; i++)
-		{
-		    if (event->xkey.keycode == rd->key[i])
-		    {
-			XWarpPointer (d->display, None, None, 0, 0, 0, 0,
-				      rKeys[i].dx * widthInc,
-				      rKeys[i].dy * heightInc);
-			break;
-		    }
-		}
-	    }
-	}
+	    resizeHandleKeyEvent (s, event->xkey.keycode);
+	break;
+    case KeyRelease:
 	break;
     case ButtonRelease: {
 	CompAction *action =
@@ -739,6 +804,12 @@ resizeInitScreen (CompPlugin *p,
 					     XC_bottom_left_corner);
     rs->downRightCursor = XCreateFontCursor (s->display->display,
 					     XC_bottom_right_corner);
+    rs->middleCursor    = XCreateFontCursor (s->display->display, XC_fleur);
+
+    rs->cursor[0] = rs->leftCursor;
+    rs->cursor[1] = rs->rightCursor;
+    rs->cursor[2] = rs->upCursor;
+    rs->cursor[3] = rs->downCursor;
 
     addScreenAction (s, &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action);
 
