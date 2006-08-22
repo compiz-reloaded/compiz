@@ -2820,7 +2820,7 @@ addDisplay (char *name,
 
     if (!d->screens)
     {
-	fprintf (stderr, "%s: No managable screens found on display %s\n",
+	fprintf (stderr, "%s: No manageable screens found on display %s\n",
 		 programName, XDisplayName (name));
 	return FALSE;
     }
