@@ -307,3 +307,107 @@ readPngBuffer (const unsigned char *buffer,
 
     return status;
 }
+
+static Bool
+writePng (unsigned char *buffer,
+	  png_rw_ptr	writeFunc,
+	  void		*closure,
+	  int		width,
+	  int		height,
+	  int		stride)
+{
+    png_struct	 *png;
+    png_info	 *info;
+    png_byte	 **rows;
+    png_color_16 white;
+    int		 i;
+
+    rows = malloc (height * sizeof (png_byte *));
+    if (!rows)
+	return FALSE;
+
+    for (i = 0; i < height; i++)
+	rows[height - i - 1] = buffer + i * stride;
+
+    png = png_create_write_struct (PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    if (!png)
+    {
+	free (rows);
+
+	return FALSE;
+    }
+
+    info = png_create_info_struct (png);
+    if (!info)
+    {
+	png_destroy_read_struct (&png, NULL, NULL);
+	free (rows);
+
+	return FALSE;
+    }
+
+    if (setjmp (png_jmpbuf (png)))
+    {
+	png_destroy_read_struct (&png, NULL, NULL);
+	free (rows);
+
+	return FALSE;
+    }
+
+    png_set_write_fn (png, closure, writeFunc, NULL);
+
+    png_set_IHDR (png, info,
+		  width, height, 8,
+		  PNG_COLOR_TYPE_RGB_ALPHA,
+		  PNG_INTERLACE_NONE,
+		  PNG_COMPRESSION_TYPE_DEFAULT,
+		  PNG_FILTER_TYPE_DEFAULT);
+
+    white.red   = 0xff;
+    white.blue  = 0xff;
+    white.green = 0xff;
+
+    png_set_bKGD (png, info, &white);
+
+    png_write_info (png, info);
+    png_write_image (png, rows);
+    png_write_end (png, info);
+
+    png_destroy_write_struct (&png, &info);
+    free (rows);
+
+    return TRUE;
+}
+
+static void
+stdioWriteFunc (png_structp png,
+		png_bytep   data,
+		png_size_t  size)
+{
+    FILE *fp;
+
+    fp = png_get_io_ptr (png);
+    if (fwrite (data, 1, size, fp) != size)
+	png_error (png, "Write Error");
+}
+
+Bool
+writePngToFile (unsigned char *buffer,
+		char	      *filename,
+		int	      width,
+		int	      height,
+		int	      stride)
+{
+    FILE *file;
+    Bool status;
+
+    file = fopen (filename, "wb");
+    if (!file)
+	return FALSE;
+
+    status = writePng (buffer, stdioWriteFunc, file, width, height, stride);
+
+    fclose (file);
+
+    return status;
+}

@@ -261,6 +261,14 @@ readPngBuffer (const unsigned char *buffer,
 	       unsigned int	   *width,
 	       unsigned int	   *height);
 
+Bool
+writePngToFile (unsigned char *buffer,
+		char	      *filename,
+		int	      width,
+		int	      height,
+		int	      stride);
+
+
 /* option.c */
 
 typedef enum {
