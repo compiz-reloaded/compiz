@@ -2668,6 +2668,9 @@ addDisplay (char *name,
 			  StructureNotifyMask);
 	}
 
+	sprintf (buf, "_NET_WM_CM_S%d", i);
+	cmSnAtom = XInternAtom (dpy, buf, 0);
+
 	currentCmSnOwner = XGetSelectionOwner (dpy, cmSnAtom);
 
 	if (currentCmSnOwner != None)
@@ -2760,9 +2763,6 @@ addDisplay (char *name,
 
 	    continue;
 	}
-
-	sprintf (buf, "_NET_WM_CM_S%d", i);
-	cmSnAtom = XInternAtom (dpy, buf, 0);
 
 	XSetSelectionOwner (dpy, cmSnAtom, newCmSnOwner, wmSnTimestamp);
 
