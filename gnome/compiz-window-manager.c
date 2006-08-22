@@ -341,21 +341,6 @@ compiz_get_double_click_actions (GnomeWindowManager             *wm,
 	{ DOUBLE_CLICK_SHADE,    "Shade"    },
 	{ DOUBLE_CLICK_MAXIMIZE, "Maximize" }
     };
-    static gboolean initialized = FALSE;
-
-    if (!initialized)
-    {
-	int i = 0;
-
-	initialized = TRUE;
-	while (i < (int) G_N_ELEMENTS (actions))
-	{
-	    g_assert (actions[i].number == i);
-	    actions[i].human_readable_name = actions[i].human_readable_name;
-
-	    ++i;
-	}
-    }
 
     *actions_p   = actions;
     *n_actions_p = (int) G_N_ELEMENTS (actions);
