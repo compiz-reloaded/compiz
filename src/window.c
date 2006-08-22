@@ -1685,7 +1685,8 @@ addWindow (CompScreen *screen,
 
     w->invisible = TRUE;
 
-    w->wmType = getWindowType (w->screen->display, w->id);
+    w->wmType    = getWindowType (w->screen->display, w->id);
+    w->protocols = getProtocols (w->screen->display, w->id);
 
     if (!w->attrib.override_redirect)
     {
@@ -1707,8 +1708,6 @@ addWindow (CompScreen *screen,
 	recalcWindowType (w);
 
 	getMwmHints (w->screen->display, w->id, &w->mwmFunc, &w->mwmDecor);
-
-	w->protocols = getProtocols (w->screen->display, w->id);
 
 	recalcWindowActions (w);
 
@@ -1882,10 +1881,12 @@ sendConfigureNotify (CompWindow *w)
 void
 mapWindow (CompWindow *w)
 {
-    if (w->attrib.class == InputOnly)
+    if (w->attrib.map_state == IsViewable)
 	return;
 
-    if (w->attrib.map_state == IsViewable)
+    w->mapNum = w->screen->mapNum++;
+
+    if (w->attrib.class == InputOnly)
 	return;
 
     w->unmapRefCnt = 1;
@@ -1901,8 +1902,6 @@ mapWindow (CompWindow *w)
 
     w->lastPong = w->screen->display->lastPing;
 
-    w->mapNum = w->screen->mapNum++;
-
     updateWindowRegion (w);
     updateWindowSize (w);
 
@@ -1917,14 +1916,14 @@ mapWindow (CompWindow *w)
     if (w->type & CompWindowTypeDesktopMask)
 	w->screen->desktopWindowCount++;
 
+    if (w->protocols & CompWindowProtocolSyncRequestMask)
+    {
+	sendSyncRequest (w);
+	sendConfigureNotify (w);
+    }
+
     if (!w->attrib.override_redirect)
     {
-	if (w->protocols & CompWindowProtocolSyncRequestMask)
-	{
-	    sendSyncRequest (w);
-	    sendConfigureNotify (w);
-	}
-
 	/* been shaded */
 	if (!w->height)
 	    resizeWindow (w,
