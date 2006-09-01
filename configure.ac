@@ -200,7 +200,7 @@ if test "x$use_gnome" = "xyes"; then
 		    [use_gnome=yes], [use_gnome=no])
   if test "x$use_gnome" = "xyes"; then
     save_CFLAGS="$CFLAGS"
-    save_LIBSS="$LIBS"
+    save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $GNOME_WINDOW_DECORATOR_CFLAGS"
     LIBS="$LIBS $GNOME_WINDOW_DECORATOR_LIBS"
     AC_CHECK_FUNCS(wnck_window_has_name)
