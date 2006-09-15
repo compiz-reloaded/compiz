@@ -3056,6 +3056,8 @@ moveResizeWindow (CompWindow     *w,
 		  unsigned int   xwcm,
 		  int            gravity)
 {
+    Bool placed = xwcm & (CWX | CWY);
+
     xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
 
     if (gravity == 0)
@@ -3187,6 +3189,9 @@ moveResizeWindow (CompWindow     *w,
 	sendSyncRequest (w);
 
     XConfigureWindow (w->screen->display->display, w->id, xwcm, xwc);
+
+    if (placed)
+	w->placed = TRUE;
 }
 
 void
