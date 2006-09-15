@@ -1549,7 +1549,8 @@ getTimeToNextRedraw (CompScreen     *s,
     if (diff < 0)
 	diff = 0;
 
-    if (idle)
+    if (idle ||
+	(s->getVideoSync && s->opt[COMP_SCREEN_OPTION_SYNC_TO_VBLANK].value.b))
     {
 	if (s->timeMult > 1)
 	{
@@ -1799,6 +1800,23 @@ handleTimeouts (struct timeval *tv)
     lastTimeout = *tv;
 }
 
+static void
+waitForVideoSync (CompScreen *s)
+{
+    unsigned int sync;
+
+    if (!s->opt[COMP_SCREEN_OPTION_SYNC_TO_VBLANK].value.b)
+	return;
+
+    if (s->getVideoSync)
+    {
+	glFlush ();
+
+	(*s->getVideoSync) (&sync);
+	(*s->waitVideoSync) (2, (sync + 1) % 2, &sync);
+    }
+}
+
 void
 eventLoop (void)
 {
@@ -1998,6 +2016,8 @@ eventLoop (void)
 					   PAINT_SCREEN_REGION_MASK |
 					   PAINT_SCREEN_FULL_MASK);
 
+			waitForVideoSync (s);
+
 			glXSwapBuffers (s->display->display, s->root);
 		    }
 		    else if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
@@ -2014,6 +2034,8 @@ eventLoop (void)
 
 			    pBox = tmpRegion->rects;
 			    nBox = tmpRegion->numRects;
+
+			    waitForVideoSync (s);
 
 			    if (s->copySubBuffer)
 			    {
@@ -2070,6 +2092,8 @@ eventLoop (void)
 					       &defaultScreenPaintAttrib,
 					       &s->region,
 					       PAINT_SCREEN_FULL_MASK);
+
+			    waitForVideoSync (s);
 
 			    glXSwapBuffers (s->display->display, s->root);
 			}

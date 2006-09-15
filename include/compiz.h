@@ -1063,7 +1063,8 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_OPACITY_STEP        4
 #define COMP_SCREEN_OPTION_UNREDIRECT_FS       5
 #define COMP_SCREEN_OPTION_DEFAULT_ICON        6
-#define COMP_SCREEN_OPTION_NUM		       7
+#define COMP_SCREEN_OPTION_SYNC_TO_VBLANK      7
+#define COMP_SCREEN_OPTION_NUM		       8
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -1107,6 +1108,11 @@ typedef void (*GLXCopySubBufferProc) (Display     *display,
 				      int	  y,
 				      int	  width,
 				      int	  height);
+
+typedef int (*GLXGetVideoSyncProc)  (unsigned int *count);
+typedef int (*GLXWaitVideoSyncProc) (int	  divisor,
+				     int	  remainder,
+				     unsigned int *count);
 
 #ifndef GLX_VERSION_1_3
 typedef struct __GLXFBConfigRec *GLXFBConfig;
@@ -1380,6 +1386,8 @@ struct _CompScreen {
     GLXReleaseTexImageProc   releaseTexImage;
     GLXQueryDrawableProc     queryDrawable;
     GLXCopySubBufferProc     copySubBuffer;
+    GLXGetVideoSyncProc      getVideoSync;
+    GLXWaitVideoSyncProc     waitVideoSync;
     GLXGetFBConfigsProc      getFBConfigs;
     GLXGetFBConfigAttribProc getFBConfigAttrib;
     GLXCreatePixmapProc      createPixmap;

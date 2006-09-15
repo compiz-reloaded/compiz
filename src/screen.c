@@ -60,6 +60,8 @@
 
 #define DEFAULT_ICON_DEFAULT "icon.png"
 
+#define SYNC_TO_VBLANK_DEFAULT TRUE
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -179,6 +181,7 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
     case COMP_SCREEN_OPTION_LIGHTING:
     case COMP_SCREEN_OPTION_UNREDIRECT_FS:
+    case COMP_SCREEN_OPTION_SYNC_TO_VBLANK:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -297,6 +300,14 @@ compScreenInitOptions (CompScreen *screen)
     o->value.s	      = strdup (DEFAULT_ICON_DEFAULT);
     o->rest.s.string  = 0;
     o->rest.s.nString = 0;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_SYNC_TO_VBLANK];
+    o->name       = "sync_to_vblank";
+    o->shortDesc  = N_("Sync To VBlank");
+    o->longDesc   = N_("Only perform screen updates during vertical "
+		       "blanking period");
+    o->type       = CompOptionTypeBool;
+    o->value.b    = SYNC_TO_VBLANK_DEFAULT;
 }
 
 static void
@@ -1169,6 +1180,17 @@ addScreen (CompDisplay *display,
     if (strstr (glxExtensions, "GLX_MESA_copy_sub_buffer"))
 	s->copySubBuffer = (GLXCopySubBufferProc)
 	    getProcAddress (s, "glXCopySubBufferMESA");
+
+    s->getVideoSync = NULL;
+    s->waitVideoSync = NULL;
+    if (strstr (glxExtensions, "GLX_SGI_video_sync"))
+    {
+	s->getVideoSync = (GLXGetVideoSyncProc)
+	    getProcAddress (s, "glXGetVideoSyncSGI");
+
+	s->waitVideoSync = (GLXWaitVideoSyncProc)
+	    getProcAddress (s, "glXWaitVideoSyncSGI");
+    }
 
     glXMakeCurrent (dpy, s->root, s->ctx);
     currentRoot = s->root;
