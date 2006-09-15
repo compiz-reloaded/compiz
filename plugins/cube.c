@@ -53,7 +53,7 @@
 #define CUBE_IN_DEFAULT FALSE
 
 static char *cubeImages[] = {
-    "novell.png"
+    "freedesktop.png"
 };
 #define N_CUBE_IMAGES (sizeof (cubeImages) / sizeof (cubeImages[0]))
 
