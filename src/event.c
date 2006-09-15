@@ -318,12 +318,11 @@ triggerKeyPressBindings (CompDisplay *d,
 			 CompOption  *argument,
 			 int	     nArgument)
 {
-    CompActionState state = CompActionStateInitKey;
+    CompActionState state = 0;
     CompAction	    *action;
     unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
     unsigned int    bindMods;
 
-    state = 0;
     if (event->xkey.keycode == d->escapeKeyCode)
 	state = CompActionStateCancel;
     else if (event->xkey.keycode == d->returnKeyCode)
@@ -331,19 +330,23 @@ triggerKeyPressBindings (CompDisplay *d,
 
     if (state)
     {
-	while (nOption--)
+	CompOption *o = option;
+	int	   n = nOption;
+
+	while (n--)
 	{
-	    if (option->type == CompOptionTypeAction)
+	    if (o->type == CompOptionTypeAction)
 	    {
-		if (option->value.action.terminate)
-		    (*option->value.action.terminate) (d, &option->value.action,
-						       state, NULL, 0);
+		if (o->value.action.terminate)
+		    (*o->value.action.terminate) (d, &o->value.action,
+						  state, NULL, 0);
 	    }
 
-	    option++;
+	    o++;
 	}
 
-	return FALSE;
+	if (state == CompActionStateCancel)
+	    return FALSE;
     }
 
     state = CompActionStateInitKey;
