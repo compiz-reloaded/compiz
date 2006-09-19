@@ -503,7 +503,7 @@ rotatePreparePaintScreen (CompScreen *s,
 			w = findWindowAtScreen (s, rs->moveWindow);
 			if (w)
 			{
-			    moveWindow (w, w->attrib.x - rs->moveWindowX, 0,
+			    moveWindow (w, rs->moveWindowX - w->attrib.x, 0,
 					TRUE, TRUE);
 			    syncWindowPosition (w);
 			}
