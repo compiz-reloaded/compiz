@@ -844,10 +844,18 @@ resizeFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+resizeGetVersion (CompPlugin *plugin,
+		  int	     version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable resizeVTable = {
     "resize",
     N_("Resize Window"),
     N_("Resize window"),
+    resizeGetVersion,
     resizeInit,
     resizeFini,
     resizeInitDisplay,

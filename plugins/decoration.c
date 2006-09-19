@@ -1336,6 +1336,13 @@ decorFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+decorGetVersion (CompPlugin *plugin,
+		 int	    version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep decorDeps[] = {
     { CompPluginRuleBefore, "wobbly" },
     { CompPluginRuleBefore, "fade" },
@@ -1347,6 +1354,7 @@ static CompPluginVTable decorVTable = {
     "decoration",
     N_("Window Decoration"),
     N_("Window decorations"),
+    decorGetVersion,
     decorInit,
     decorFini,
     decorInitDisplay,

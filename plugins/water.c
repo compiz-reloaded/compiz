@@ -1874,10 +1874,18 @@ waterFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+waterGetVersion (CompPlugin *plugin,
+		 int	    version)
+{
+    return ABIVERSION;
+}
+
 static CompPluginVTable waterVTable = {
     "water",
     N_("Water Effect"),
     N_("Adds water effects to different desktop actions"),
+    waterGetVersion,
     waterInit,
     waterFini,
     waterInitDisplay,

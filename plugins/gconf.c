@@ -1032,6 +1032,13 @@ gconfFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+gconfGetVersion (CompPlugin *plugin,
+		 int	    version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep gconfDeps[] = {
     { CompPluginRuleBefore, "decoration" },
     { CompPluginRuleBefore, "wobbly" },
@@ -1044,6 +1051,7 @@ CompPluginVTable gconfVTable = {
     "gconf",
     "GConf",
     "GConf Control Backend",
+    gconfGetVersion,
     gconfInit,
     gconfFini,
     gconfInitDisplay,

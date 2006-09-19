@@ -1097,10 +1097,18 @@ placeFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+placeGetVersion (CompPlugin *plugin,
+		 int	    version)
+{
+    return ABIVERSION;
+}
+
 static CompPluginVTable placeVTable = {
     "place",
     N_("Place Windows"),
     N_("Place windows at appropriate positions when mapped"),
+    placeGetVersion,
     placeInit,
     placeFini,
     placeInitDisplay,

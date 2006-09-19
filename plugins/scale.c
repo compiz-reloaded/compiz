@@ -1554,10 +1554,18 @@ scaleFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+scaleGetVersion (CompPlugin *plugin,
+		 int	    version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable scaleVTable = {
     "scale",
     N_("Scale"),
     N_("Scale windows"),
+    scaleGetVersion,
     scaleInit,
     scaleFini,
     scaleInitDisplay,

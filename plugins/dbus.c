@@ -414,10 +414,18 @@ dbusFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+dbusGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable dbusVTable = {
     "dbus",
     "Dbus",
     "Dbus Control Backend",
+    dbusGetVersion,
     dbusInit,
     dbusFini,
     dbusInitDisplay,

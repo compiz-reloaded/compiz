@@ -819,10 +819,18 @@ gconfDumpFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+gconfDumpGetVersion (CompPlugin *plugin,
+		     int	version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable gconfDumpVTable = {
     "gconf-dump",
     "GConf dump",
     "GConf dump - dumps gconf schemas",
+    gconfDumpGetVersion,
     gconfDumpInit,
     gconfDumpFini,
     gconfDumpInitDisplay,

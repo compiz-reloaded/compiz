@@ -2105,6 +2105,13 @@ rotateFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+rotateGetVersion (CompPlugin *plugin,
+		  int	     version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep rotateDeps[] = {
     { CompPluginRuleAfter, "cube" }
 };
@@ -2113,6 +2120,7 @@ CompPluginVTable rotateVTable = {
     "rotate",
     N_("Rotate Cube"),
     N_("Rotate desktop cube"),
+    rotateGetVersion,
     rotateInit,
     rotateFini,
     rotateInitDisplay,

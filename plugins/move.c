@@ -717,10 +717,18 @@ moveFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+moveGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable moveVTable = {
     "move",
     N_("Move Window"),
     N_("Move window"),
+    moveGetVersion,
     moveInit,
     moveFini,
     moveInitDisplay,

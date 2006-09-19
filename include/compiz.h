@@ -26,6 +26,8 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
+#define ABIVERSION 20060919
+
 #include <stdio.h>
 #include <sys/time.h>
 
@@ -2038,6 +2040,9 @@ freeWindowIcons (CompWindow *w);
 
 /* plugin.c */
 
+typedef int (*GetVersionProc) (CompPlugin *plugin,
+			       int	  version);
+
 typedef Bool (*InitPluginProc) (CompPlugin *plugin);
 typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
@@ -2055,6 +2060,8 @@ typedef struct _CompPluginVTable {
     char *name;
     char *shortDesc;
     char *longDesc;
+
+    GetVersionProc getVersion;
 
     InitPluginProc init;
     FiniPluginProc fini;

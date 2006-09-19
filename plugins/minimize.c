@@ -1034,6 +1034,13 @@ minFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+minGetVersion (CompPlugin *plugin,
+	       int	  version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep minDeps[] = {
     { CompPluginRuleBefore, "cube" },
     { CompPluginRuleBefore, "scale" }
@@ -1043,6 +1050,7 @@ static CompPluginVTable minVTable = {
     "minimize",
     N_("Minimize Effect"),
     N_("Transform windows when they are minimized and unminimized"),
+    minGetVersion,
     minInit,
     minFini,
     minInitDisplay,

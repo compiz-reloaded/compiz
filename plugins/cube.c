@@ -1736,10 +1736,18 @@ CompPluginDep cubeDeps[] = {
     { CompPluginRuleBefore, "switcher" }
 };
 
+static int
+cubeGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable cubeVTable = {
     "cube",
     N_("Desktop Cube"),
     N_("Place windows on cube"),
+    cubeGetVersion,
     cubeInit,
     cubeFini,
     cubeInitDisplay,

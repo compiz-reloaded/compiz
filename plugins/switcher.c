@@ -2075,10 +2075,18 @@ switchFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+switchGetVersion (CompPlugin *plugin,
+		  int	     version)
+{
+    return ABIVERSION;
+}
+
 CompPluginVTable switchVTable = {
     "switcher",
     N_("Application Switcher"),
     N_("Application Switcher"),
+    switchGetVersion,
     switchInit,
     switchFini,
     switchInitDisplay,

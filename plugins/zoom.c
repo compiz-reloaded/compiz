@@ -875,6 +875,13 @@ zoomFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+zoomGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep zoomDeps[] = {
     { CompPluginRuleAfter, "cube" }
 };
@@ -883,6 +890,7 @@ CompPluginVTable zoomVTable = {
     "zoom",
     N_("Zoom Desktop"),
     N_("Zoom and pan desktop cube"),
+    zoomGetVersion,
     zoomInit,
     zoomFini,
     zoomInitDisplay,

@@ -502,10 +502,18 @@ shotFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+shotGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
 static CompPluginVTable shotVTable = {
     "screenshot",
     N_("Screenshot"),
     N_("Screenshot plugin"),
+    shotGetVersion,
     shotInit,
     shotFini,
     shotInitDisplay,

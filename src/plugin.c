@@ -214,6 +214,16 @@ static Bool
 initPlugin (CompPlugin *p)
 {
     CompDisplay *d = compDisplays;
+    int		version;
+
+    version = (*p->vTable->getVersion) (p, ABIVERSION);
+    if (version != ABIVERSION)
+    {
+	fprintf (stderr, "%s: can't load plugin '%s' because it is built for "
+		 "ABI version %d and actual version is %d\n",
+		 programName, p->vTable->name, version, ABIVERSION);
+	return FALSE;
+    }
 
     if (!(*p->vTable->init) (p))
     {

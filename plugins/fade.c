@@ -807,6 +807,13 @@ fadeFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+fadeGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep fadeDeps[] = {
     { CompPluginRuleBefore, "cube" },
     { CompPluginRuleBefore, "scale" }
@@ -816,6 +823,7 @@ static CompPluginVTable fadeVTable = {
     "fade",
     N_("Fading Windows"),
     N_("Fade in windows when mapped and fade out windows when unmapped"),
+    fadeGetVersion,
     fadeInit,
     fadeFini,
     fadeInitDisplay,

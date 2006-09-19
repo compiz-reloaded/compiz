@@ -3070,6 +3070,13 @@ wobblyFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
+static int
+wobblyGetVersion (CompPlugin *plugin,
+		  int	     version)
+{
+    return ABIVERSION;
+}
+
 CompPluginDep wobblyDeps[] = {
     { CompPluginRuleBefore, "fade" },
     { CompPluginRuleBefore, "cube" },
@@ -3080,6 +3087,7 @@ CompPluginVTable wobblyVTable = {
     "wobbly",
     N_("Wobbly Windows"),
     N_("Use spring model for wobbly window effect"),
+    wobblyGetVersion,
     wobblyInit,
     wobblyFini,
     wobblyInitDisplay,
