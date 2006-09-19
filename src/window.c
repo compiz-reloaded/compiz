@@ -2294,17 +2294,12 @@ moveWindow (CompWindow *w,
 void
 syncWindowPosition (CompWindow *w)
 {
-    if (w->attrib.x != w->serverX || w->attrib.y != w->serverY)
-    {
-	XMoveWindow (w->screen->display->display, w->id,
-		     w->attrib.x,
-		     w->attrib.y);
+    XMoveWindow (w->screen->display->display, w->id, w->attrib.x, w->attrib.y);
 
-	if (w->frame)
-	    XMoveWindow (w->screen->display->display, w->frame,
-			 w->attrib.x - w->input.left,
-			 w->attrib.y - w->input.top);
-    }
+    if (w->frame)
+	XMoveWindow (w->screen->display->display, w->frame,
+		     w->attrib.x - w->input.left,
+		     w->attrib.y - w->input.top);
 }
 
 void
