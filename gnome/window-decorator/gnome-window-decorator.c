@@ -105,6 +105,8 @@
 
 #define ICON_SPACE 20
 
+#define DOUBLE_CLICK_DISTANCE 8.0
+
 typedef struct _extents {
     gint left;
     gint right;
@@ -3726,6 +3728,19 @@ action_menu_map (WnckWindow *win,
     action_menu_mapped = TRUE;
 }
 
+static double
+square (double x)
+{
+    return x * x;
+}
+
+static double
+dist (double x1, double y1,
+      double x2, double y2)
+{
+    return sqrt (square (x1 - x2) + square (y1 - y2));
+}
+
 static void
 title_event (WnckWindow *win,
 	     XEvent     *xevent)
@@ -3733,15 +3748,19 @@ title_event (WnckWindow *win,
     static int	  last_button_num = 0;
     static Window last_button_xwindow = None;
     static Time	  last_button_time = 0;
+    static int	  last_button_x = 0;
+    static int	  last_button_y = 0;
 
     if (xevent->type != ButtonPress)
 	return;
 
     if (xevent->xbutton.button == 1)
     {
-	if (xevent->xbutton.button == last_button_num     &&
-	    xevent->xbutton.window == last_button_xwindow &&
-	    xevent->xbutton.time < last_button_time + double_click_timeout)
+	if (xevent->xbutton.button == last_button_num			  &&
+	    xevent->xbutton.window == last_button_xwindow		  &&
+	    xevent->xbutton.time < last_button_time + double_click_timeout &&
+	    dist (xevent->xbutton.x, xevent->xbutton.y,
+		  last_button_x, last_button_y) < DOUBLE_CLICK_DISTANCE)
 	{
 	    switch (double_click_action) {
 	    case DOUBLE_CLICK_SHADE:
@@ -3762,12 +3781,16 @@ title_event (WnckWindow *win,
 	    last_button_num	= 0;
 	    last_button_xwindow = None;
 	    last_button_time	= 0;
+	    last_button_x	= 0;
+	    last_button_y	= 0;
 	}
 	else
 	{
 	    last_button_num	= xevent->xbutton.button;
 	    last_button_xwindow = xevent->xbutton.window;
 	    last_button_time	= xevent->xbutton.time;
+	    last_button_x	= xevent->xbutton.x;
+	    last_button_y	= xevent->xbutton.y;
 
 	    restack_window (win, Above);
 
