@@ -3504,13 +3504,17 @@ close_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	d->button_states[0] |= PRESSED_EVENT_WINDOW;
+	if (xevent->xbutton.button == 1)
+	    d->button_states[0] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (d->button_states[0] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
-	    wnck_window_close (win, xevent->xbutton.time);
+	if (xevent->xbutton.button == 1)
+	{
+	    if (d->button_states[0] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+		wnck_window_close (win, xevent->xbutton.time);
 
-	d->button_states[0] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[0] &= ~PRESSED_EVENT_WINDOW;
+	}
 	break;
     case EnterNotify:
 	d->button_states[0] |= IN_EVENT_WINDOW;
@@ -3538,18 +3542,22 @@ max_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	d->button_states[1] |= PRESSED_EVENT_WINDOW;
+	if (xevent->xbutton.button == 1)
+	    d->button_states[1] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (d->button_states[1] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	if (xevent->xbutton.button == 1)
 	{
-	    if (wnck_window_is_maximized (win))
-		wnck_window_unmaximize (win);
-	    else
-		wnck_window_maximize (win);
-	}
+	    if (d->button_states[1] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	    {
+		if (wnck_window_is_maximized (win))
+		    wnck_window_unmaximize (win);
+		else
+		    wnck_window_maximize (win);
+	    }
 
-	d->button_states[1] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[1] &= ~PRESSED_EVENT_WINDOW;
+	}
 	break;
     case EnterNotify:
 	d->button_states[1] |= IN_EVENT_WINDOW;
@@ -3574,13 +3582,17 @@ min_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	d->button_states[2] |= PRESSED_EVENT_WINDOW;
+	if (xevent->xbutton.button == 1)
+	    d->button_states[2] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (d->button_states[2] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
-	    wnck_window_minimize (win);
+	if (xevent->xbutton.button == 1)
+	{
+	    if (d->button_states[2] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+		wnck_window_minimize (win);
 
-	d->button_states[2] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[2] &= ~PRESSED_EVENT_WINDOW;
+	}
 	break;
     case EnterNotify:
 	d->button_states[2] |= IN_EVENT_WINDOW;
