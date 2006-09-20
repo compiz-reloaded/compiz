@@ -510,6 +510,12 @@ compareWindows (const void *elem1,
     CompWindow *w1 = *((CompWindow **) elem1);
     CompWindow *w2 = *((CompWindow **) elem2);
 
+    if (w1->mapNum && !w2->mapNum)
+	return -1;
+
+    if (w2->mapNum && !w1->mapNum)
+	return 1;
+    
     return w2->activeNum - w1->activeNum;
 }
 
