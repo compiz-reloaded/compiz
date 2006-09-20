@@ -1350,6 +1350,20 @@ addScreen (CompDisplay *display,
 
 	for (j = 0; j < nElements; j++)
 	{
+	    XVisualInfo *vi;
+	    int		visualDepth;
+
+	    vi = glXGetVisualFromFBConfig (dpy, fbConfigs[j]);
+	    if (vi == NULL)
+		continue;
+
+	    visualDepth = vi->depth;
+
+	    XFree (vi);
+
+	    if (visualDepth != i)
+		continue;
+
 	    (*s->getFBConfigAttrib) (dpy,
 				     fbConfigs[j],
 				     GLX_ALPHA_SIZE,
