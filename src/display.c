@@ -2018,7 +2018,7 @@ eventLoop (void)
 
 			waitForVideoSync (s);
 
-			glXSwapBuffers (s->display->display, s->root);
+			glXSwapBuffers (s->display->display, s->output);
 		    }
 		    else if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
 		    {
@@ -2044,7 +2044,7 @@ eventLoop (void)
 				    y = s->height - pBox->y2;
 
 				    (*s->copySubBuffer) (s->display->display,
-							 s->root,
+							 s->output,
 							 pBox->x1, y,
 							 pBox->x2 - pBox->x1,
 							 pBox->y2 - pBox->y1);
@@ -2095,7 +2095,7 @@ eventLoop (void)
 
 			    waitForVideoSync (s);
 
-			    glXSwapBuffers (s->display->display, s->root);
+			    glXSwapBuffers (s->display->display, s->output);
 			}
 		    }
 

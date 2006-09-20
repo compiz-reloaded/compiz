@@ -80,6 +80,7 @@ CompWindow *lastDamagedWindow = 0;
 Bool replaceCurrentWm = FALSE;
 Bool indirectRendering = FALSE;
 Bool strictBinding = FALSE;
+Bool useCow = FALSE;
 
 static void
 usage (void)
@@ -96,7 +97,7 @@ usage (void)
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
 	    "[--version]\n       "
-	    "[--help] "
+	    "[--use-cow] [--help] "
 	    "[PLUGIN]...\n",
 	    programName);
 }
@@ -185,6 +186,10 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--strict-binding"))
 	{
 	    strictBinding = TRUE;
+	}
+	else if (!strcmp (argv[i], "--use-cow"))
+	{
+	    useCow = TRUE;
 	}
 	else if (!strcmp (argv[i], "--replace"))
 	{
