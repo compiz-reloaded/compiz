@@ -211,8 +211,6 @@ compiz_get_settings (GnomeWindowManager *wm,
 
     if (to_get & GNOME_WM_SETTING_AUTORAISE)
     {
-	settings->autoraise = FALSE;
-
 	settings->autoraise = gconf_client_get_bool (cwm->p->gconf,
 						     COMPIZ_AUTORAISE_KEY,
 						     NULL);
