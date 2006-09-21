@@ -66,9 +66,9 @@ static GnomeWindowManagerClass *parent_class;
 
 struct _CompizWindowManagerPrivate {
     GConfClient *gconf;
-    gchar	*mouse_modifier;
     gchar	*font;
     gchar	*theme;
+    gchar	*mouse_modifier;
 };
 
 static void
@@ -310,26 +310,80 @@ compiz_get_settings (GnomeWindowManager *wm,
 static int
 compiz_get_settings_mask (GnomeWindowManager *wm)
 {
-    return
-	GNOME_WM_SETTING_FONT                |
-	GNOME_WM_SETTING_MOUSE_FOCUS         |
-	GNOME_WM_SETTING_AUTORAISE           |
-	GNOME_WM_SETTING_AUTORAISE_DELAY     |
-	GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER |
-	GNOME_WM_SETTING_THEME               |
-	GNOME_WM_SETTING_DOUBLE_CLICK_ACTION;
+    return GNOME_WM_SETTING_MASK;
+}
+
+static GList *
+add_themes_from_dir (GList	*current_list,
+		     const char *path)
+{
+    DIR		  *theme_dir;
+    struct dirent *entry;
+    char	  *theme_file_path;
+    GList	  *node;
+    gboolean	  found = FALSE;
+
+    if (!(g_file_test (path, G_FILE_TEST_EXISTS) &&
+	  g_file_test (path, G_FILE_TEST_IS_DIR)))
+    {
+	return current_list;
+    }
+
+    theme_dir = opendir (path);
+
+    /* If this is NULL, then we couldn't open ~/.themes.  The test above
+     * only checks existence, not wether we can really read it.*/
+    if (theme_dir == NULL)
+	return current_list;
+
+    for (entry = readdir (theme_dir); entry; entry = readdir (theme_dir))
+    {
+	theme_file_path =
+	    g_build_filename (path, entry->d_name,
+			      "metacity-1/metacity-theme-1.xml", NULL);
+
+	if (g_file_test (theme_file_path, G_FILE_TEST_EXISTS))
+	{
+
+	    for (node = current_list; node && !found; node = node->next)
+		found = strcmp (node->data, entry->d_name) == 0;
+
+	    if (!found)
+		current_list = g_list_prepend (current_list,
+					       g_strdup (entry->d_name));
+	}
+
+	found = FALSE;
+
+	g_free (theme_file_path);
+    }
+
+    closedir (theme_dir);
+
+    return current_list;
 }
 
 static GList *
 compiz_get_theme_list (GnomeWindowManager *wm)
 {
-    return NULL;
+    GList *themes = NULL;
+    char  *home_dir_themes;
+
+    home_dir_themes = g_build_filename (g_get_home_dir (), ".themes", NULL);
+
+    themes = add_themes_from_dir (themes, METACITY_THEME_DIR);
+    themes = add_themes_from_dir (themes, "/usr/share/themes");
+    themes = add_themes_from_dir (themes, home_dir_themes);
+
+    g_free (home_dir_themes);
+
+    return themes;
 }
 
 static char *
 compiz_get_user_theme_folder (GnomeWindowManager *wm)
 {
-    return NULL;
+    return g_build_filename (g_get_home_dir (), ".themes", NULL);
 }
 
 static void
@@ -416,8 +470,8 @@ compiz_window_manager_class_init (CompizWindowManagerClass *class)
     wm_class->change_settings	       = compiz_change_settings;
     wm_class->get_settings	       = compiz_get_settings;
     wm_class->get_settings_mask	       = compiz_get_settings_mask;
-    wm_class->get_theme_list	       = compiz_get_theme_list;
     wm_class->get_user_theme_folder    = compiz_get_user_theme_folder;
+    wm_class->get_theme_list	       = compiz_get_theme_list;
     wm_class->get_double_click_actions = compiz_get_double_click_actions;
 
     parent_class = g_type_class_peek_parent (class);
