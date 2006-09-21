@@ -25,6 +25,7 @@
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 #include <X11/extensions/Xrender.h>
+#include <X11/Xregion.h>
 
 #ifndef GTK_DISABLE_DEPRECATED
 #define GTK_DISABLE_DEPRECATED
@@ -58,6 +59,10 @@
 #include <sys/types.h>
 #include <signal.h>
 
+#ifdef USE_METACITY
+#include <metacity/theme.h>
+#endif
+
 #define METACITY_GCONF_DIR "/apps/metacity/general"
 
 #define COMPIZ_USE_SYSTEM_FONT_KEY		    \
@@ -69,19 +74,19 @@
 #define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY	       \
     METACITY_GCONF_DIR "/action_double_click_titlebar"
 
-#define GCONF_DIR "/apps/compiz/plugins/decoration/allscreens/options"
+#define COMPIZ_GCONF_DIR1 "/apps/compiz/plugins/decoration/allscreens/options"
 
 #define COMPIZ_SHADOW_RADIUS_KEY \
-    GCONF_DIR "/shadow_radius"
+    COMPIZ_GCONF_DIR1 "/shadow_radius"
 
 #define COMPIZ_SHADOW_OPACITY_KEY \
-    GCONF_DIR "/shadow_opacity"
+    COMPIZ_GCONF_DIR1 "/shadow_opacity"
 
 #define COMPIZ_SHADOW_OFFSET_X_KEY \
-    GCONF_DIR "/shadow_offset_x"
+    COMPIZ_GCONF_DIR1 "/shadow_offset_x"
 
 #define COMPIZ_SHADOW_OFFSET_Y_KEY \
-    GCONF_DIR "/shadow_offset_y"
+    COMPIZ_GCONF_DIR1 "/shadow_offset_y"
 
 #define META_AUDIBLE_BELL_KEY	       \
     METACITY_GCONF_DIR "/audible_bell"
@@ -92,14 +97,26 @@
 #define META_VISUAL_BELL_TYPE_KEY	   \
     METACITY_GCONF_DIR "/visual_bell_type"
 
-#define COMPIZ_AUDIBLE_BELL_KEY				   \
-    "/apps/compiz/general/allscreens/options/audible_bell"
+#define META_THEME_KEY		\
+    METACITY_GCONF_DIR "/theme"
 
-#define COMPIZ_VISUAL_BELL_KEY				    \
-    "/apps/compiz/plugins/fade/screen0/options/visual_bell"
+#define COMPIZ_GCONF_DIR2 "/apps/compiz/general/allscreens/options"
 
-#define COMPIZ_FULLSCREEN_VISUAL_BELL_KEY			       \
-    "/apps/compiz/plugins/fade/screen0/options/fullscreen_visual_bell"
+#define COMPIZ_AUDIBLE_BELL_KEY	      \
+    COMPIZ_GCONF_DIR2 "/audible_bell"
+
+#define COMPIZ_GCONF_DIR3 "/apps/compiz/plugins/fade/screen0/options"
+
+#define COMPIZ_VISUAL_BELL_KEY	     \
+    COMPIZ_GCONF_DIR3 "/visual_bell"
+
+#define COMPIZ_FULLSCREEN_VISUAL_BELL_KEY	\
+    COMPIZ_GCONF_DIR3 "/fullscreen_visual_bell"
+
+#define GCONF_DIR "/apps/gwd"
+
+#define USE_META_THEME_KEY	    \
+    GCONF_DIR "/use_metacity_theme"
 
 #define STROKE_ALPHA 0.6
 
@@ -329,12 +346,22 @@ typedef struct _decor {
     gchar	      *name;
     cairo_pattern_t   *icon;
     GdkPixmap	      *icon_pixmap;
+    GdkPixbuf	      *icon_pixbuf;
     WnckWindowState   state;
     WnckWindowActions actions;
     XID		      prop_xid;
     GtkWidget	      *force_quit_dialog;
     void	      (*draw) (struct _decor *d);
 } decor_t;
+
+void     (*theme_draw_window_decoration) (decor_t *d);
+gboolean (*theme_calc_decoration_size)   (decor_t *d,
+					  int     client_width,
+					  int     client_height,
+					  int     text_width,
+					  int     *width,
+					  int     *height);
+gint     (*theme_calc_titlebar_height)   (gint    text_height);
 
 typedef void (*event_callback) (WnckWindow *win, XEvent *event);
 
@@ -1766,6 +1793,322 @@ draw_window_decoration (decor_t *d)
     }
 }
 
+#ifdef USE_METACITY
+static Region
+meta_get_window_region (const MetaFrameGeometry *fgeom,
+			int		        width,
+			int			height)
+{
+    Region     corners_xregion, window_xregion;
+    XRectangle xrect;
+
+    corners_xregion = XCreateRegion ();
+
+    if (fgeom->top_left_corner_rounded)
+    {
+	xrect.x = 0;
+	xrect.y = 0;
+	xrect.width = 5;
+	xrect.height = 1;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = 1;
+	xrect.width = 3;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = 2;
+	xrect.width = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = 3;
+	xrect.width = 1;
+	xrect.height = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+    }
+
+    if (fgeom->top_right_corner_rounded)
+    {
+	xrect.x = width - 5;
+	xrect.y = 0;
+	xrect.width = 5;
+	xrect.height = 1;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = 1;
+	xrect.x = width - 3;
+	xrect.width = 3;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = 2;
+	xrect.x = width - 2;
+	xrect.width = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = 3;
+	xrect.x = width - 1;
+	xrect.width = 1;
+	xrect.height = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+    }
+
+    if (fgeom->bottom_left_corner_rounded)
+    {
+	xrect.x = 0;
+	xrect.y = height - 1;
+	xrect.width = 5;
+	xrect.height = 1;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = height - 2;
+	xrect.width = 3;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = height - 3;
+	xrect.width = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = height - 5;
+	xrect.width = 1;
+	xrect.height = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+    }
+
+    if (fgeom->bottom_right_corner_rounded)
+    {
+	xrect.x = width - 5;
+	xrect.y = height - 1;
+	xrect.width = 5;
+	xrect.height = 1;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = height - 2;
+	xrect.x = width - 3;
+	xrect.width = 3;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = height - 3;
+	xrect.x = width - 2;
+	xrect.width = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+
+	xrect.y = height - 5;
+	xrect.x = width - 1;
+	xrect.width = 1;
+	xrect.height = 2;
+
+	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+    }
+
+    window_xregion = XCreateRegion ();
+
+    xrect.x = 0;
+    xrect.y = 0;
+    xrect.width = width;
+    xrect.height = height;
+
+    XUnionRectWithRegion (&xrect, window_xregion, window_xregion);
+
+    XSubtractRegion (window_xregion, corners_xregion, window_xregion);
+
+    XDestroyRegion (corners_xregion);
+
+    return window_xregion;
+}
+
+static MetaButtonState
+meta_button_state (int state)
+{
+    if (state & IN_EVENT_WINDOW)
+    {
+	if (state & PRESSED_EVENT_WINDOW)
+	    return META_BUTTON_STATE_PRESSED;
+
+	return META_BUTTON_STATE_PRELIGHT;
+    }
+
+    return META_BUTTON_STATE_NORMAL;
+}
+static MetaButtonState
+meta_button_state_for_button_type (decor_t	  *d,
+				   MetaButtonType type)
+{
+    switch (type) {
+    case META_BUTTON_TYPE_RIGHT_LEFT_BACKGROUND:
+    case META_BUTTON_TYPE_MINIMIZE:
+	return meta_button_state (d->button_states[2]);
+    case META_BUTTON_TYPE_RIGHT_MIDDLE_BACKGROUND:
+    case META_BUTTON_TYPE_MAXIMIZE:
+	return meta_button_state (d->button_states[1]);
+    case META_BUTTON_TYPE_RIGHT_RIGHT_BACKGROUND:
+    case META_BUTTON_TYPE_CLOSE:
+	return meta_button_state (d->button_states[0]);
+    case META_BUTTON_TYPE_LEFT_LEFT_BACKGROUND:
+    case META_BUTTON_TYPE_LEFT_MIDDLE_BACKGROUND:
+    case META_BUTTON_TYPE_LEFT_RIGHT_BACKGROUND:
+    case META_BUTTON_TYPE_MENU:
+    default:
+	break;
+    }
+
+    return META_BUTTON_STATE_NORMAL;
+}
+
+static void
+meta_draw_window_decoration (decor_t *d)
+{
+    MetaButtonState   button_states[META_BUTTON_TYPE_LAST];
+    MetaButtonLayout  button_layout;
+    MetaFrameGeometry fgeom;
+    MetaTheme	      *theme;
+    GtkStyle	      *style;
+    MetaFrameFlags    flags = 0;
+    cairo_t	      *cr;
+    gint	      i, left_width, right_width, top_height, bottom_height;
+    GdkRectangle      clip, rect;
+    GdkDrawable       *drawable;
+    Region	      region;
+
+    if (!d->pixmap)
+	return;
+
+    style = gtk_widget_get_style (style_window);
+
+    if (d->buffer_pixmap)
+	cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
+    else
+	cr = gdk_cairo_create (GDK_DRAWABLE (d->pixmap));
+
+    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+    draw_shadow_background (d, cr);
+
+    theme = meta_theme_get_current ();
+
+    button_layout.left_buttons[0] = META_BUTTON_FUNCTION_MENU;
+    button_layout.left_buttons[1] = META_BUTTON_FUNCTION_LAST;
+    button_layout.left_buttons[2] = META_BUTTON_FUNCTION_LAST;
+    button_layout.left_buttons[3] = META_BUTTON_FUNCTION_LAST;
+
+    button_layout.right_buttons[0] = META_BUTTON_FUNCTION_MINIMIZE;
+    button_layout.right_buttons[1] = META_BUTTON_FUNCTION_MAXIMIZE;
+    button_layout.right_buttons[2] = META_BUTTON_FUNCTION_CLOSE;
+    button_layout.right_buttons[3] = META_BUTTON_FUNCTION_LAST;
+
+    if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
+	flags |= META_FRAME_ALLOWS_DELETE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
+	flags |= META_FRAME_ALLOWS_MINIMIZE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
+	flags |= META_FRAME_ALLOWS_MAXIMIZE;
+
+    flags |= META_FRAME_ALLOWS_MENU;
+    flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
+    flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
+    flags |= META_FRAME_ALLOWS_MOVE;
+
+    if (d->active)
+	flags |= META_FRAME_HAS_FOCUS;
+
+    for (i = 0; i < META_BUTTON_TYPE_LAST; i++)
+	button_states[i] = meta_button_state_for_button_type (d, i);
+
+    meta_theme_get_frame_borders (theme,
+				  META_FRAME_TYPE_NORMAL,
+				  text_height,
+				  flags,
+				  &top_height,
+				  &bottom_height,
+				  &left_width,
+				  &right_width);
+
+    clip.x	= left_space - left_width;
+    clip.y	= top_space + titlebar_height - top_height;
+    clip.width  = d->width - right_space + right_width - clip.x;
+    clip.height = d->height - bottom_space + bottom_height - clip.y;
+
+    drawable = d->buffer_pixmap ? d->buffer_pixmap : d->pixmap;
+
+    meta_theme_calc_geometry (theme,
+			      META_FRAME_TYPE_NORMAL,
+			      text_height,
+			      flags,
+			      clip.width - left_width - right_width,
+			      clip.height - top_height - bottom_height,
+			      &button_layout,
+			      &fgeom);
+
+    region = meta_get_window_region (&fgeom, clip.width, clip.height);
+
+    gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
+
+    for (i = 0; i < region->numRects; i++)
+    {
+	rect.x	    = clip.x + region->rects[i].x1;
+	rect.y	    = clip.y + region->rects[i].y1;
+	rect.width  = region->rects[i].x2 - region->rects[i].x1;
+	rect.height = region->rects[i].y2 - region->rects[i].y1;
+
+	cairo_rectangle (cr, rect.x, rect.y, rect.width, rect.height);
+	cairo_fill (cr);
+
+	meta_theme_draw_frame (theme,
+			       style_window,
+			       drawable,
+			       &rect,
+			       clip.x,
+			       clip.y,
+			       META_FRAME_TYPE_NORMAL,
+			       flags,
+			       clip.width - left_width - right_width,
+			       clip.height - top_height - bottom_height,
+			       d->layout,
+			       text_height,
+			       &button_layout,
+			       button_states,
+			       d->icon_pixbuf,
+			       NULL);
+    }
+
+    cairo_destroy (cr);
+
+    XDestroyRegion (region);
+
+    if (d->buffer_pixmap)
+	gdk_draw_drawable  (d->pixmap,
+			    d->gc,
+			    d->buffer_pixmap,
+			    0,
+			    0,
+			    0,
+			    0,
+			    d->width,
+			    d->height);
+
+    if (d->prop_xid)
+    {
+	decor_update_window_property (d);
+	d->prop_xid = 0;
+    }
+}
+#endif
+
 #define SWITCHER_ALPHA 0xa0a0
 
 static void
@@ -2210,11 +2553,13 @@ update_default_decorations (GdkScreen *screen)
     d.buffer_pixmap = NULL;
     d.layout	    = NULL;
     d.icon	    = NULL;
+    d.icon_pixmap   = NULL;
+    d.icon_pixbuf   = NULL;
     d.state	    = 0;
     d.actions	    = 0;
     d.prop_xid	    = 0;
     d.button_width  = 0;
-    d.draw	    = draw_window_decoration;
+    d.draw	    = theme_draw_window_decoration;
 
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
@@ -2559,8 +2904,7 @@ update_window_decoration_name (WnckWindow *win)
 static void
 update_window_decoration_icon (WnckWindow *win)
 {
-    decor_t   *d = g_object_get_data (G_OBJECT (win), "decor");
-    GdkPixbuf *icon;
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
 
     if (d->icon)
     {
@@ -2574,12 +2918,17 @@ update_window_decoration_icon (WnckWindow *win)
 	d->icon_pixmap = NULL;
     }
 
-    icon = wnck_window_get_mini_icon (win);
-    if (icon)
+    if (d->icon_pixbuf)
+	gdk_pixbuf_unref (d->icon_pixbuf);
+
+    d->icon_pixbuf = wnck_window_get_mini_icon (win);
+    if (d->icon_pixbuf)
     {
 	cairo_t	*cr;
 
-	d->icon_pixmap = pixmap_new_from_pixbuf (icon);
+	gdk_pixbuf_ref (d->icon_pixbuf);
+
+	d->icon_pixmap = pixmap_new_from_pixbuf (d->icon_pixbuf);
 	cr = gdk_cairo_create (GDK_DRAWABLE (d->icon_pixmap));
 	d->icon = cairo_pattern_create_for_surface (cairo_get_target (cr));
 	cairo_destroy (cr);
@@ -2637,28 +2986,61 @@ update_window_button_size (WnckWindow *win)
 }
 
 static gboolean
+calc_decoration_size (decor_t *d,
+		      gint    w,
+		      gint    h,
+		      gint    name_width,
+		      gint    *width,
+		      gint    *height)
+{
+    if (w < ICON_SPACE + d->button_width)
+	return FALSE;
+
+    *width = name_width + d->button_width + ICON_SPACE;
+    if (w < *width)
+	*width = MAX (ICON_SPACE + d->button_width, w);
+
+    *width  = MAX (*width, left_corner_space + right_corner_space);
+    *width += left_space + 1 + right_space;
+
+    *height  = titlebar_height + normal_top_corner_space + bottom_corner_space;
+    *height += top_space + 2 + bottom_space;
+
+    return (*width != d->width || *height != d->height);
+}
+
+#ifdef USE_METACITY
+static gboolean
+meta_calc_decoration_size (decor_t *d,
+			   gint    w,
+			   gint    h,
+			   gint    name_width,
+			   gint    *width,
+			   gint    *height)
+{
+    *width  = MAX (w, left_corner_space + right_corner_space);
+    *width += left_space + 1 + right_space;
+
+    *height  = titlebar_height + normal_top_corner_space + bottom_corner_space;
+    *height += top_space + 2 + bottom_space;
+
+    return (*width != d->width || *height != d->height);
+}
+#endif
+
+static gboolean
 update_window_decoration_size (WnckWindow *win)
 {
     decor_t   *d = g_object_get_data (G_OBJECT (win), "decor");
     GdkPixmap *pixmap, *buffer_pixmap = NULL;
     gint      width, height;
-    gint      w;
+    gint      w, h, name_width;
 
-    wnck_window_get_geometry (win, NULL, NULL, &w, NULL);
-    if (w < ICON_SPACE + d->button_width)
-	return FALSE;
+    wnck_window_get_geometry (win, NULL, NULL, &w, &h);
 
-    width = max_window_name_width (win) + d->button_width + ICON_SPACE;
-    if (w < width)
-	width = MAX (ICON_SPACE + d->button_width, w);
+    name_width = max_window_name_width (win);
 
-    width  = MAX (width, left_corner_space + right_corner_space);
-    width += left_space + 1 + right_space;
-
-    height  = titlebar_height + normal_top_corner_space + bottom_corner_space;
-    height += top_space + 2 + bottom_space;
-
-    if (width == d->width && height == d->height)
+    if (!(*theme_calc_decoration_size) (d, w, h, name_width, &width, &height))
     {
 	update_window_decoration_name (win);
 	return FALSE;
@@ -2986,6 +3368,12 @@ remove_frame_window (WnckWindow *win)
 	d->icon_pixmap = NULL;
     }
 
+    if (d->icon_pixbuf)
+    {
+	gdk_pixbuf_unref (d->icon_pixbuf);
+	d->icon_pixbuf = NULL;
+    }
+
     if (d->force_quit_dialog)
     {
 	GtkWidget *dialog = d->force_quit_dialog;
@@ -3141,6 +3529,7 @@ window_opened (WnckScreen *screen,
 
     d->icon	   = NULL;
     d->icon_pixmap = NULL;
+    d->icon_pixbuf = NULL;
 
     d->button_width = 0;
 
@@ -3161,7 +3550,7 @@ window_opened (WnckScreen *screen,
 
     d->force_quit_dialog = NULL;
 
-    d->draw = draw_window_decoration;
+    d->draw = theme_draw_window_decoration;
 
     g_object_set_data (G_OBJECT (win), "decor", d);
 
@@ -4632,6 +5021,7 @@ update_style (GtkWidget *widget)
     decor_color_t spot_color;
 
     style = gtk_widget_get_style (widget);
+    gtk_style_attach (style, widget->window);
 
     spot_color.r = style->bg[GTK_STATE_SELECTED].red   / 65535.0;
     spot_color.g = style->bg[GTK_STATE_SELECTED].green / 65535.0;
@@ -4827,11 +5217,13 @@ update_shadow (void)
     d.buffer_pixmap = NULL;
     d.layout	    = NULL;
     d.icon	    = NULL;
+    d.icon_pixmap   = NULL;
+    d.icon_pixbuf   = NULL;
     d.state	    = 0;
     d.actions	    = 0;
     d.prop_xid	    = 0;
     d.button_width  = 0;
-    d.draw	    = draw_window_decoration;
+    d.draw	    = theme_draw_window_decoration;
     d.active	    = TRUE;
 
     d.width  = left_space + left_corner_space + 1 + right_corner_space +
@@ -5147,6 +5539,33 @@ double_click_titlebar_changed (GConfClient *client)
     }
 }
 
+static gint
+calc_titlebar_height (gint text_height)
+{
+    return (text_height < 17) ? 17 : text_height;
+}
+
+#ifdef USE_METACITY
+static gint
+meta_calc_titlebar_height (gint text_height)
+{
+    MetaTheme *theme;
+    gint      top_height, bottom_height, left_width, right_width;
+
+    theme = meta_theme_get_current ();
+
+    meta_theme_get_frame_borders (theme,
+				  META_FRAME_TYPE_NORMAL,
+				  text_height, 0,
+				  &top_height,
+				  &bottom_height,
+				  &left_width,
+				  &right_width);
+
+    return top_height - _win_extents.top;
+}
+#endif
+
 static void
 update_titlebar_font (void)
 {
@@ -5171,9 +5590,7 @@ update_titlebar_font (void)
     text_height = PANGO_PIXELS (pango_font_metrics_get_ascent (metrics) +
 				pango_font_metrics_get_descent (metrics));
 
-    titlebar_height = text_height;
-    if (titlebar_height < 17)
-	titlebar_height = 17;
+    titlebar_height = (*theme_calc_titlebar_height) (text_height);
 
     pango_font_metrics_unref (metrics);
 }
@@ -5269,6 +5686,61 @@ bell_settings_changed (GConfClient *client)
 			   NULL);
 }
 
+static gboolean
+theme_changed (GConfClient *client)
+{
+
+#ifdef USE_METACITY
+    gboolean use_meta_theme;
+
+    use_meta_theme = gconf_client_get_bool (client,
+					    USE_META_THEME_KEY,
+					    NULL);
+
+    if (use_meta_theme)
+    {
+	gchar *theme;
+
+	theme = gconf_client_get_string (client,
+					 META_THEME_KEY,
+					 NULL);
+
+	if (theme)
+	{
+	    meta_theme_set_current (theme, TRUE);
+
+	    g_free (theme);
+	}
+	else
+	{
+	    use_meta_theme = FALSE;
+	}
+    }
+
+    if (use_meta_theme)
+    {
+	theme_draw_window_decoration = meta_draw_window_decoration;
+	theme_calc_decoration_size   = meta_calc_decoration_size;
+	theme_calc_titlebar_height   = meta_calc_titlebar_height;
+    }
+    else
+    {
+	theme_draw_window_decoration = draw_window_decoration;
+	theme_calc_decoration_size   = calc_decoration_size;
+	theme_calc_titlebar_height   = calc_titlebar_height;
+    }
+
+    return TRUE;
+#else
+    theme_draw_window_decoration = draw_window_decoration;
+    theme_calc_decoration_size   = calc_decoration_size;
+    theme_calc_titlebar_height   = calc_titlebar_height;
+
+    return FALSE;
+#endif
+
+}
+
 static void
 value_changed (GConfClient *client,
 	       const gchar *key,
@@ -5310,6 +5782,12 @@ value_changed (GConfClient *client,
     {
 	bell_settings_changed (client);
     }
+    else if (strcmp (key, USE_META_THEME_KEY) == 0 ||
+	     strcmp (key, META_THEME_KEY) == 0)
+    {
+	if (theme_changed (client))
+	    changed = TRUE;
+    }
 
     if (changed)
     {
@@ -5338,6 +5816,12 @@ value_changed (GConfClient *client,
 	    {
 		d->width = d->height = 0;
 
+#ifdef USE_METACITY
+		if (d->draw == draw_window_decoration ||
+		    d->draw == meta_draw_window_decoration)
+		    d->draw = theme_draw_window_decoration;
+#endif
+
 		update_window_decoration_size (WNCK_WINDOW (windows->data));
 		update_event_windows (WNCK_WINDOW (windows->data));
 	    }
@@ -5351,8 +5835,15 @@ init_settings (WnckScreen *screen)
 {
     GtkSettings	*settings;
     GConfClient	*gconf;
+    GdkScreen   *gdkscreen;
+    GdkColormap *colormap;
 
     gconf = gconf_client_get_default ();
+
+    gconf_client_add_dir (gconf,
+			  GCONF_DIR,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
 
     gconf_client_add_dir (gconf,
 			  METACITY_GCONF_DIR,
@@ -5360,10 +5851,19 @@ init_settings (WnckScreen *screen)
 			  NULL);
 
     gconf_client_add_dir (gconf,
-			  GCONF_DIR,
+			  COMPIZ_GCONF_DIR1,
 			  GCONF_CLIENT_PRELOAD_ONELEVEL,
 			  NULL);
 
+    gconf_client_add_dir (gconf,
+			  COMPIZ_GCONF_DIR2,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
+
+    gconf_client_add_dir (gconf,
+			  COMPIZ_GCONF_DIR3,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
 
     g_signal_connect (G_OBJECT (gconf),
 		      "value_changed",
@@ -5371,7 +5871,13 @@ init_settings (WnckScreen *screen)
 		      screen);
 
     style_window = gtk_window_new (GTK_WINDOW_POPUP);
-    gtk_widget_ensure_style (style_window);
+
+    gdkscreen = gdk_display_get_default_screen (gdk_display_get_default ());
+    colormap = gdk_screen_get_rgba_colormap (gdkscreen);
+    if (colormap)
+	gtk_widget_set_colormap (style_window, colormap);
+
+    gtk_widget_realize (style_window);
 
     g_signal_connect_object (style_window, "style-set",
 			     G_CALLBACK (style_changed),
@@ -5388,6 +5894,7 @@ init_settings (WnckScreen *screen)
 					     COMPIZ_USE_SYSTEM_FONT_KEY,
 					     NULL);
 
+    theme_changed (gconf);
     update_style (style_window);
     titlebar_font_changed (gconf);
     update_titlebar_font ();

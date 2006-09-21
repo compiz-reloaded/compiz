@@ -191,6 +191,10 @@ AC_ARG_ENABLE(gnome,
   [  --disable-gnome         Disable gnome window decorator and settings module],
   [use_gnome=$enableval], [use_gnome=yes])
 
+AC_ARG_ENABLE(metacity,
+  [  --disable-metacity      Disable metacity theme support],
+  [use_metacity=$enableval], [use_metacity=yes])
+
 if test "x$use_gnome" = "xyes"; then
   PKG_CHECK_MODULES(GNOME_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
@@ -215,6 +219,11 @@ if test "x$use_gnome" = "xyes"; then
   fi
   windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
   windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`
+
+  if test "x$use_metacity" = "xyes"; then
+    PKG_CHECK_MODULES(METACITY, metacity,
+		      [use_metacity=yes], [use_metacity=no])
+  fi
 fi
 
 AC_SUBST(windowsettingsdatadir)
@@ -223,6 +232,11 @@ AC_SUBST(windowsettingslibdir)
 AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
 if test "$use_gnome" = yes; then
   AC_DEFINE(USE_GNOME, 1, [Build gnome window decorator and settings module])
+fi
+
+AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")
+if test "$use_metacity" = yes; then
+  AC_DEFINE(USE_METACITY, 1, [Build metacity theme support])
 fi
 
 AC_ARG_ENABLE(kde,
@@ -266,7 +280,8 @@ echo "  place: $use_place"
 echo "  dbus:  $use_dbus"
 echo ""
 echo "and the following optional features will be compiled:"
-echo "  svg:   $use_librsvg"
-echo "  gnome: $use_gnome"
-echo "  kde:   $use_kde"
+echo "  svg:      $use_librsvg"
+echo "  gnome:    $use_gnome"
+echo "  metacity: $use_metacity"
+echo "  kde:      $use_kde"
 echo ""
