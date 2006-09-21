@@ -14,7 +14,8 @@ desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 desktopfiles_DATA     = $(desktopfiles_files)
 endif
 
-INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@
+INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
+	-DMETACITY_THEME_DIR=\""$(windowsettingsdatadir)/themes"\"
 
 moduledir = $(windowsettingslibdir)/window-manager-settings
 
