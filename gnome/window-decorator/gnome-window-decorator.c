@@ -60,7 +60,7 @@
 #include <signal.h>
 
 #ifdef USE_METACITY
-#include <metacity/theme.h>
+#include <metacity-private/theme.h>
 #endif
 
 #define METACITY_GCONF_DIR "/apps/metacity/general"

@@ -221,7 +221,7 @@ if test "x$use_gnome" = "xyes"; then
   windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`
 
   if test "x$use_metacity" = "xyes"; then
-    PKG_CHECK_MODULES(METACITY, metacity,
+    PKG_CHECK_MODULES(METACITY, libmetacity-private,
 		      [use_metacity=yes], [use_metacity=no])
   fi
 fi
