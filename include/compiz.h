@@ -34,6 +34,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/Xdamage.h>
+#include <X11/extensions/Xcomposite.h>
 #include <X11/extensions/sync.h>
 #include <X11/Xregion.h>
 #include <X11/XKBlib.h>
@@ -43,6 +44,10 @@
 
 #include <GL/gl.h>
 #include <GL/glx.h>
+
+#if COMPOSITE_MAJOR > 0 || COMPOSITE_MINOR > 2
+#define USE_COW
+#endif
 
 /*
  * WORDS_BIGENDIAN should be defined before including this file for

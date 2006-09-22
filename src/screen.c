@@ -40,7 +40,6 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 #include <X11/extensions/Xrandr.h>
-#include <X11/extensions/Xcomposite.h>
 #include <X11/extensions/shape.h>
 #include <X11/cursorfont.h>
 
@@ -891,6 +890,7 @@ setDesktopHints (CompScreen *s)
 		     (unsigned char *) data, 1);
 }
 
+#ifdef USE_COW
 static void
 makeOutputWindow (CompScreen *s)
 {
@@ -909,6 +909,7 @@ makeOutputWindow (CompScreen *s)
 
     XFixesDestroyRegion (dpy, region);
 }
+#endif
 
 Bool
 addScreen (CompDisplay *display,
@@ -1077,9 +1078,12 @@ addScreen (CompDisplay *display,
 
     s->grabWindow = None;
 
+#ifdef USE_COW
     if (useCow)
 	makeOutputWindow (s);
     else
+#endif
+
 	s->overlay = s->output = s->root;
 
     templ.visualid = XVisualIDFromVisual (s->attrib.visual);
