@@ -196,6 +196,7 @@ extern CompWindow *lastDamagedWindow;
 extern Bool       replaceCurrentWm;
 extern Bool       indirectRendering;
 extern Bool       strictBinding;
+extern Bool       useCow;
 
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
@@ -1302,6 +1303,8 @@ struct _CompScreen {
     Region	      damage;
     unsigned long     damageMask;
     Window	      root;
+    Window	      overlay;
+    Window	      output;
     XWindowAttributes attrib;
     Window	      grabWindow;
     CompFBConfig      glxPixmapFBConfigs[MAX_DEPTH + 1];

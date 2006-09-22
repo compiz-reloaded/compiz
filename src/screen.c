@@ -40,6 +40,8 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 #include <X11/extensions/Xrandr.h>
+#include <X11/extensions/Xcomposite.h>
+#include <X11/extensions/shape.h>
 #include <X11/cursorfont.h>
 
 #include <compiz.h>
@@ -889,6 +891,25 @@ setDesktopHints (CompScreen *s)
 		     (unsigned char *) data, 1);
 }
 
+static void
+makeOutputWindow (CompScreen *s)
+{
+    Display       *dpy = s->display->display;
+    XserverRegion region;
+
+    s->overlay   = XCompositeGetOverlayWindow (dpy, s->root);
+    s->output    = s->overlay;
+
+    region = XFixesCreateRegion (dpy, NULL, 0);
+
+    XFixesSetWindowShapeRegion (dpy,
+				s->output,
+				ShapeInput,
+				0, 0, region);
+
+    XFixesDestroyRegion (dpy, region);
+}
+
 Bool
 addScreen (CompDisplay *display,
 	   int	       screenNum,
@@ -1056,6 +1077,11 @@ addScreen (CompDisplay *display,
 
     s->grabWindow = None;
 
+    if (useCow)
+	makeOutputWindow (s);
+    else
+	s->overlay = s->output = s->root;
+
     templ.visualid = XVisualIDFromVisual (s->attrib.visual);
 
     visinfo = XGetVisualInfo (dpy, VisualIDMask, &templ, &nvisinfo);
@@ -1192,7 +1218,7 @@ addScreen (CompDisplay *display,
 	    getProcAddress (s, "glXWaitVideoSyncSGI");
     }
 
-    glXMakeCurrent (dpy, s->root, s->ctx);
+    glXMakeCurrent (dpy, s->output, s->ctx);
     currentRoot = s->root;
 
     glExtensions = (const char *) glGetString (GL_EXTENSIONS);
@@ -1324,6 +1350,20 @@ addScreen (CompDisplay *display,
 
 	for (j = 0; j < nElements; j++)
 	{
+	    XVisualInfo *vi;
+	    int		visualDepth;
+
+	    vi = glXGetVisualFromFBConfig (dpy, fbConfigs[j]);
+	    if (vi == NULL)
+		continue;
+
+	    visualDepth = vi->depth;
+
+	    XFree (vi);
+
+	    if (visualDepth != i)
+		continue;
+
 	    (*s->getFBConfigAttrib) (dpy,
 				     fbConfigs[j],
 				     GLX_ALPHA_SIZE,
@@ -2852,7 +2892,7 @@ makeScreenCurrent (CompScreen *s)
 {
     if (currentRoot != s->root)
     {
-	glXMakeCurrent (s->display->display, s->root, s->ctx);
+	glXMakeCurrent (s->display->display, s->output, s->ctx);
 	currentRoot = s->root;
 
 	s->pendingCommands = TRUE;

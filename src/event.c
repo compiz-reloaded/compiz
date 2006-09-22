@@ -1148,7 +1148,12 @@ handleEvent (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xcreatewindow.parent);
 	if (s)
 	{
-	    addWindow (s, event->xcreatewindow.window, getTopWindow (s));
+	    /* The first time some client asks for the composite
+	     * overlay window, the X server creates it, which causes
+	     * an errorneous CreateNotify event.  We catch it and
+	     * ignore it. */
+	    if (s->overlay != event->xcreatewindow.window)
+		addWindow (s, event->xcreatewindow.window, getTopWindow (s));
 	}
 	break;
     case DestroyNotify:

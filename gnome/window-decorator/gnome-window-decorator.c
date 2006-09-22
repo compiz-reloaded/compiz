@@ -122,6 +122,8 @@
 
 #define ICON_SPACE 20
 
+#define DOUBLE_CLICK_DISTANCE 8.0
+
 typedef struct _extents {
     gint left;
     gint right;
@@ -300,25 +302,25 @@ static struct _cursor {
 
 static struct _pos {
     int x, y, w, h;
-    int xw, yh, ww, hh;
+    int xw, yh, ww, hh, yth, hth;
 } pos[3][3] = {
     {
-	{  0,  0, 10, 21,   0, 0, 0, 0 },
-	{ 10,  0, -8,  6,   0, 0, 1, 0 },
-	{  2,  0, 10, 21,   1, 0, 0, 0 }
+	{  0,  0, 10, 21,   0, 0, 0, 0, 0, 1 },
+	{ 10,  0, -8,  6,   0, 0, 1, 0, 0, 1 },
+	{  2,  0, 10, 21,   1, 0, 0, 0, 0, 1 }
     }, {
-	{  0, 10,  6, 11,   0, 0, 0, 1 },
-	{  6,  6,  0, 15,   0, 0, 1, 0 },
-	{  6, 10,  6, 11,   1, 0, 0, 1 }
+	{  0, 10,  6, 11,   0, 0, 0, 1, 1, 0 },
+	{  6,  6,  0, 15,   0, 0, 1, 0, 0, 1 },
+	{  6, 10,  6, 11,   1, 0, 0, 1, 1, 0 }
     }, {
-	{  0, 17, 10, 10,   0, 1, 0, 0 },
-	{ 10, 21, -8,  6,   0, 1, 1, 0 },
-	{  2, 17, 10, 10,   1, 1, 0, 0 }
+	{  0, 17, 10, 10,   0, 1, 0, 0, 1, 0 },
+	{ 10, 21, -8,  6,   0, 1, 1, 0, 1, 0 },
+	{  2, 17, 10, 10,   1, 1, 0, 0, 1, 0 }
     }
 }, bpos[3] = {
-    { 0, 6, 16, 16,   1, 0, 0, 0 },
-    { 0, 6, 16, 16,   1, 0, 0, 0 },
-    { 0, 6, 16, 16,   1, 0, 0, 0 }
+    { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
+    { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
+    { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 }
 };
 
 typedef struct _decor_color {
@@ -2762,9 +2764,9 @@ update_event_windows (WnckWindow *win)
 	    if (d->actions & event_window_actions[i][j] && i >= k && i <= l)
 	    {
 		x = pos[i][j].x + pos[i][j].xw * width;
-		y = pos[i][j].y + pos[i][j].yh * height;
+		y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth * (titlebar_height - 17);
 		w = pos[i][j].w + pos[i][j].ww * width;
-		h = pos[i][j].h + pos[i][j].hh * height;
+		h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth * (titlebar_height - 17);
 
 		XMapWindow (xdisplay, d->event_windows[i][j]);
 		XMoveResizeWindow (xdisplay, d->event_windows[i][j],
@@ -2788,9 +2790,9 @@ update_event_windows (WnckWindow *win)
 	if (d->actions & button_actions[i])
 	{
 	    x = bpos[i].x + bpos[i].xw * width;
-	    y = bpos[i].y + bpos[i].yh * height;
+	    y = bpos[i].y + bpos[i].yh * height + bpos[i].yth * (titlebar_height - 17);
 	    w = bpos[i].w + bpos[i].ww * width;
-	    h = bpos[i].h + bpos[i].hh * height;
+	    h = bpos[i].h + bpos[i].hh * height + bpos[i].hth + (titlebar_height - 17);
 
 	    x -= button_x;
 	    button_x += 16;
@@ -3893,13 +3895,17 @@ close_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	d->button_states[0] |= PRESSED_EVENT_WINDOW;
+	if (xevent->xbutton.button == 1)
+	    d->button_states[0] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (d->button_states[0] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
-	    wnck_window_close (win, xevent->xbutton.time);
+	if (xevent->xbutton.button == 1)
+	{
+	    if (d->button_states[0] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+		wnck_window_close (win, xevent->xbutton.time);
 
-	d->button_states[0] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[0] &= ~PRESSED_EVENT_WINDOW;
+	}
 	break;
     case EnterNotify:
 	d->button_states[0] |= IN_EVENT_WINDOW;
@@ -3927,18 +3933,22 @@ max_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	d->button_states[1] |= PRESSED_EVENT_WINDOW;
+	if (xevent->xbutton.button == 1)
+	    d->button_states[1] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (d->button_states[1] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	if (xevent->xbutton.button == 1)
 	{
-	    if (wnck_window_is_maximized (win))
-		wnck_window_unmaximize (win);
-	    else
-		wnck_window_maximize (win);
-	}
+	    if (d->button_states[1] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	    {
+		if (wnck_window_is_maximized (win))
+		    wnck_window_unmaximize (win);
+		else
+		    wnck_window_maximize (win);
+	    }
 
-	d->button_states[1] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[1] &= ~PRESSED_EVENT_WINDOW;
+	}
 	break;
     case EnterNotify:
 	d->button_states[1] |= IN_EVENT_WINDOW;
@@ -3963,13 +3973,17 @@ min_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	d->button_states[2] |= PRESSED_EVENT_WINDOW;
+	if (xevent->xbutton.button == 1)
+	    d->button_states[2] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (d->button_states[2] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
-	    wnck_window_minimize (win);
+	if (xevent->xbutton.button == 1)
+	{
+	    if (d->button_states[2] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+		wnck_window_minimize (win);
 
-	d->button_states[2] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[2] &= ~PRESSED_EVENT_WINDOW;
+	}
 	break;
     case EnterNotify:
 	d->button_states[2] |= IN_EVENT_WINDOW;
@@ -4103,6 +4117,19 @@ action_menu_map (WnckWindow *win,
     action_menu_mapped = TRUE;
 }
 
+static double
+square (double x)
+{
+    return x * x;
+}
+
+static double
+dist (double x1, double y1,
+      double x2, double y2)
+{
+    return sqrt (square (x1 - x2) + square (y1 - y2));
+}
+
 static void
 title_event (WnckWindow *win,
 	     XEvent     *xevent)
@@ -4110,15 +4137,19 @@ title_event (WnckWindow *win,
     static int	  last_button_num = 0;
     static Window last_button_xwindow = None;
     static Time	  last_button_time = 0;
+    static int	  last_button_x = 0;
+    static int	  last_button_y = 0;
 
     if (xevent->type != ButtonPress)
 	return;
 
     if (xevent->xbutton.button == 1)
     {
-	if (xevent->xbutton.button == last_button_num     &&
-	    xevent->xbutton.window == last_button_xwindow &&
-	    xevent->xbutton.time < last_button_time + double_click_timeout)
+	if (xevent->xbutton.button == last_button_num			  &&
+	    xevent->xbutton.window == last_button_xwindow		  &&
+	    xevent->xbutton.time < last_button_time + double_click_timeout &&
+	    dist (xevent->xbutton.x, xevent->xbutton.y,
+		  last_button_x, last_button_y) < DOUBLE_CLICK_DISTANCE)
 	{
 	    switch (double_click_action) {
 	    case DOUBLE_CLICK_SHADE:
@@ -4139,12 +4170,16 @@ title_event (WnckWindow *win,
 	    last_button_num	= 0;
 	    last_button_xwindow = None;
 	    last_button_time	= 0;
+	    last_button_x	= 0;
+	    last_button_y	= 0;
 	}
 	else
 	{
 	    last_button_num	= xevent->xbutton.button;
 	    last_button_xwindow = xevent->xbutton.window;
 	    last_button_time	= xevent->xbutton.time;
+	    last_button_x	= xevent->xbutton.x;
+	    last_button_y	= xevent->xbutton.y;
 
 	    restack_window (win, Above);
 
