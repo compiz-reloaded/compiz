@@ -1,4 +1,4 @@
-SUBDIRS = include src plugins images gnome kde po
+SUBDIRS = include src plugins images gtk kde po
 
 EXTRA_DIST =			   \
 	COPYING			   \
