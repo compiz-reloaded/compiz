@@ -196,7 +196,7 @@ AC_ARG_ENABLE(metacity,
   [use_metacity=$enableval], [use_metacity=yes])
 
 if test "x$use_gnome" = "xyes"; then
-  PKG_CHECK_MODULES(GNOME_WINDOW_DECORATOR,
+  PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
 		    gtk+-2.0 >= 2.8.0 \
 		    gconf-2.0	      \
@@ -206,8 +206,8 @@ if test "x$use_gnome" = "xyes"; then
   if test "x$use_gnome" = "xyes"; then
     save_CFLAGS="$CFLAGS"
     save_LIBS="$LIBS"
-    CFLAGS="$CFLAGS $GNOME_WINDOW_DECORATOR_CFLAGS"
-    LIBS="$LIBS $GNOME_WINDOW_DECORATOR_LIBS"
+    CFLAGS="$CFLAGS $GTK_WINDOW_DECORATOR_CFLAGS"
+    LIBS="$LIBS $GTK_WINDOW_DECORATOR_LIBS"
     AC_CHECK_FUNCS(wnck_window_has_name)
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS"
