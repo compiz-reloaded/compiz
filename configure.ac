@@ -85,6 +85,7 @@ COMPIZ_REQUIRES="libpng	    \
 		 xfixes	    \
 		 xdamage    \
 		 xrandr	    \
+		 xinerama   \
 		 ice	    \
 		 sm	    \
 		 libstartup-notification-1.0 >= 0.7"

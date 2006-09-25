@@ -2651,6 +2651,19 @@ addDisplay (char *name,
 	d->xkbEvent = d->xkbError = -1;
     }
 
+    d->xineramaExtension = XineramaQueryExtension (dpy,
+						   &d->xineramaEvent,
+						   &d->xineramaError);
+    if (d->xineramaExtension)
+    {
+	d->screenInfo = XineramaQueryScreens (dpy, &d->nScreenInfo);
+    }
+    else
+    {
+	d->screenInfo  = NULL;
+	d->nScreenInfo = 0;
+    }
+
     compDisplays = d;
 
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));

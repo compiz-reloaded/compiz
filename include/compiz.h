@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20060919
+#define ABIVERSION 20060920
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -35,6 +35,7 @@
 #include <X11/Xutil.h>
 #include <X11/extensions/Xdamage.h>
 #include <X11/extensions/Xcomposite.h>
+#include <X11/extensions/Xinerama.h>
 #include <X11/extensions/sync.h>
 #include <X11/Xregion.h>
 #include <X11/XKBlib.h>
@@ -559,6 +560,12 @@ struct _CompDisplay {
 
     Bool xkbExtension;
     int  xkbEvent, xkbError;
+
+    Bool xineramaExtension;
+    int  xineramaEvent, xineramaError;
+
+    XineramaScreenInfo *screenInfo;
+    int		       nScreenInfo;
 
     SnDisplay *snDisplay;
 
