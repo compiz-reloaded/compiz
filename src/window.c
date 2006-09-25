@@ -4047,10 +4047,10 @@ outputDeviceForWindow (CompWindow *w)
     int output = w->screen->currentOutputDev;
     int x1, y1, x2, y2;
 
-    x1 = w->screen->outputDev[output].x;
-    y1 = w->screen->outputDev[output].y;
-    x2 = x1 + w->screen->outputDev[output].width;
-    y2 = y1 + w->screen->outputDev[output].height;
+    x1 = w->screen->outputDev[output].region.extents.x1;
+    y1 = w->screen->outputDev[output].region.extents.y1;
+    x2 = w->screen->outputDev[output].region.extents.x2;
+    y2 = w->screen->outputDev[output].region.extents.y2;
 
     if (x1 > w->attrib.x + w->width  ||
 	y1 > w->attrib.y + w->height ||

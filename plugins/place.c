@@ -192,10 +192,10 @@ get_workarea_of_current_output_device (CompScreen *s,
     x2 = x1 + s->workArea.width;
     y2 = y1 + s->workArea.height;
 
-    oX1 = s->outputDev[s->currentOutputDev].x;
-    oY1 = s->outputDev[s->currentOutputDev].y;
-    oX2 = oX1 + s->outputDev[s->currentOutputDev].width;
-    oY2 = oY1 + s->outputDev[s->currentOutputDev].height;
+    oX1 = s->outputDev[s->currentOutputDev].region.extents.x1;
+    oY1 = s->outputDev[s->currentOutputDev].region.extents.y1;
+    oX2 = s->outputDev[s->currentOutputDev].region.extents.x2;
+    oY2 = s->outputDev[s->currentOutputDev].region.extents.y2;
 
     if (x1 < oX1)
 	x1 = oX1;

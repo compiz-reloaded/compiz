@@ -527,10 +527,15 @@ updateOutputDevices (CompScreen *s)
 	    if (output->name)
 		snprintf (output->name, 10, "Output %d", i);
 
-	    output[i].x      = screenInfo[i].x_org;
-	    output[i].y      = screenInfo[i].y_org;
-	    output[i].width  = screenInfo[i].width;
-	    output[i].height = screenInfo[i].height;
+	    output[i].region.rects    = &output[i].region.extents;
+	    output[i].region.numRects = 1;
+
+	    output[i].region.extents.x1 = screenInfo[i].x_org;
+	    output[i].region.extents.y1 = screenInfo[i].y_org;
+	    output[i].region.extents.x2 = screenInfo[i].x_org +
+		screenInfo[i].width;
+	    output[i].region.extents.y2 = screenInfo[i].y_org +
+		screenInfo[i].height;
 	}
 
 	nOutput = nScreenInfo;
@@ -542,10 +547,14 @@ updateOutputDevices (CompScreen *s)
 	    return;
 
 	output->name   = strdup ("Output 0");
-	output->x      = 0;
-	output->y      = 0;
-	output->width  = s->attrib.width;
-	output->height = s->attrib.height;
+
+	output->region.rects    = &output->region.extents;
+	output->region.numRects = 1;
+
+	output->region.extents.x1 = 0;
+	output->region.extents.y1 = 0;
+	output->region.extents.x2 = s->attrib.width;
+	output->region.extents.y2 = s->attrib.height;
 
 	nOutput = 1;
     }
@@ -2999,10 +3008,10 @@ outputDeviceForPoint (CompScreen *s,
 
     for (i = 0; i < s->nOutputDev; i++)
     {
-	x1 = s->outputDev[i].x;
-	y1 = s->outputDev[i].y;
-	x2 = x1 + s->outputDev[i].width;
-	y2 = y1 + s->outputDev[i].height;
+	x1 = s->outputDev[i].region.extents.x1;
+	y1 = s->outputDev[i].region.extents.y1;
+	x2 = s->outputDev[i].region.extents.x2;
+	y2 = s->outputDev[i].region.extents.y2;
 
 	if (x1 < x && x2 >= x && y1 < y && y2 >= y)
 	    return i;
