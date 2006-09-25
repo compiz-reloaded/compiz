@@ -1646,6 +1646,11 @@ makeScreenCurrent (CompScreen *s);
 void
 finishScreenDrawing (CompScreen *s);
 
+int
+outputDeviceForPoint (CompScreen *s,
+		      int	 x,
+		      int	 y);
+
 
 /* window.c */
 
@@ -2067,6 +2072,9 @@ getWindowIcon (CompWindow *w,
 
 void
 freeWindowIcons (CompWindow *w);
+
+int
+outputDeviceForWindow (CompWindow *w);
 
 
 /* plugin.c */

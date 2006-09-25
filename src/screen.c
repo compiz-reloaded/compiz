@@ -2989,3 +2989,24 @@ finishScreenDrawing (CompScreen *s)
 	s->pendingCommands = FALSE;
     }
 }
+
+int
+outputDeviceForPoint (CompScreen *s,
+		      int	 x,
+		      int	 y)
+{
+    int i, x1, y1, x2, y2;
+
+    for (i = 0; i < s->nOutputDev; i++)
+    {
+	x1 = s->outputDev[i].x;
+	y1 = s->outputDev[i].y;
+	x2 = x1 + s->outputDev[i].width;
+	y2 = y1 + s->outputDev[i].height;
+
+	if (x1 < x && x2 >= x && y1 < y && y2 >= y)
+	    return i;
+    }
+
+    return s->currentOutputDev;
+}

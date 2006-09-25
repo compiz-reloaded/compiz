@@ -1066,6 +1066,22 @@ handleEvent (CompDisplay *d,
     CompScreen *s;
     CompWindow *w;
 
+    switch (event->type) {
+    case ButtonPress:
+	s = findScreenAtDisplay (d, event->xbutton.root);
+	if (s)
+	    setCurrentOutput (s, outputDeviceForPoint (s,
+						       event->xbutton.x_root,
+						       event->xbutton.y_root));
+	break;
+    case KeyPress:
+	w = findWindowAtDisplay (d, d->activeWindow);
+	if (w)
+	    setCurrentOutput (w->screen, outputDeviceForWindow (w));
+    default:
+	break;
+    }
+
     if (handleActionEvent (d, event))
     {
 	if (!d->screens->maxGrab)

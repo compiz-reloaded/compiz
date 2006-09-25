@@ -4040,3 +4040,27 @@ freeWindowIcons (CompWindow *w)
 
     w->nIcon = 0;
 }
+
+int
+outputDeviceForWindow (CompWindow *w)
+{
+    int output = w->screen->currentOutputDev;
+    int x1, y1, x2, y2;
+
+    x1 = w->screen->outputDev[output].x;
+    y1 = w->screen->outputDev[output].y;
+    x2 = x1 + w->screen->outputDev[output].width;
+    y2 = y1 + w->screen->outputDev[output].height;
+
+    if (x1 > w->attrib.x + w->width  ||
+	y1 > w->attrib.y + w->height ||
+	x2 < w->attrib.x	     ||
+	y2 < w->attrib.y)
+    {
+	output = outputDeviceForPoint (w->screen,
+				       w->attrib.x + w->width  / 2,
+				       w->attrib.y + w->height / 2);
+    }
+
+    return output;
+}
