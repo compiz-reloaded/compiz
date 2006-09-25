@@ -179,6 +179,39 @@ northwestcmp (gconstpointer a,
 	return 0;
 }
 
+
+static void
+get_workarea_of_current_output_device (CompScreen *s,
+				       XRectangle *area)
+{
+    int x1, y1, x2, y2;
+    int oX1, oY1, oX2, oY2;
+
+    x1 = s->workArea.x;
+    y1 = s->workArea.y;
+    x2 = x1 + s->workArea.width;
+    y2 = y1 + s->workArea.height;
+
+    oX1 = s->outputDev[s->currentOutputDev].x;
+    oY1 = s->outputDev[s->currentOutputDev].y;
+    oX2 = oX1 + s->outputDev[s->currentOutputDev].width;
+    oY2 = oY1 + s->outputDev[s->currentOutputDev].height;
+
+    if (x1 < oX1)
+	x1 = oX1;
+    if (y1 < oY1)
+	y1 = oY1;
+    if (x2 > oX2)
+	x2 = oX2;
+    if (y2 > oY2)
+	y2 = oY2;
+
+    area->x      = x1;
+    area->y      = y1;
+    area->width  = x2 - x1;
+    area->height = y2 - y1;
+}
+
 static void
 find_next_cascade (CompWindow *window,
 		   GList      *windows,
@@ -217,7 +250,7 @@ find_next_cascade (CompWindow *window,
      * of NW corner of window frame.
      */
 
-    work_area = window->screen->workArea;
+    get_workarea_of_current_output_device (window->screen, &work_area);
 
     cascade_x = MAX (0, work_area.x);
     cascade_y = MAX (0, work_area.y);
@@ -325,7 +358,7 @@ find_most_freespace (CompWindow *window,
     frame_size_left = window->input.left;
     frame_size_top  = window->input.top;
 
-    work_area = window->screen->workArea;
+    get_workarea_of_current_output_device (window->screen, &work_area);
 
     getOuterRectOfWindow (focus_window, &avoid);
     getOuterRectOfWindow (window, &outer);
@@ -592,7 +625,8 @@ find_first_fit (CompWindow *window,
 
     getOuterRectOfWindow (window, &rect);
 
-    work_area = window->screen->workArea;
+    get_workarea_of_current_output_device (window->screen, &work_area);
+
     work_area.x += (window->initialViewport - window->screen->x) *
 	window->screen->width;
 
@@ -683,7 +717,8 @@ placeWindow (CompWindow *window,
 
     PLACE_SCREEN (window->screen);
 
-    work_area = window->screen->workArea;
+    get_workarea_of_current_output_device (window->screen, &work_area);
+
     work_area.x += x0;
 
     windows = NULL;
@@ -816,7 +851,9 @@ placeWindow (CompWindow *window,
 	    if (parent->attrib.x < parent->screen->width &&
 		parent->attrib.x + parent->screen->width > 0)
 	    {
-		XRectangle area = parent->screen->workArea;
+		XRectangle area;
+
+		get_workarea_of_current_output_device (window->screen, &area);
 
 		if (x + window->width > area.x + area.width)
 		    x = area.x + area.width - window->width;
