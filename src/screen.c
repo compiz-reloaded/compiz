@@ -507,13 +507,77 @@ perspective (GLfloat fovy,
 }
 
 static void
+updateOutputDevices (CompScreen *s)
+{
+    CompOutput *output;
+    int	       nOutput, i;
+
+    if (s->display->screenInfo)
+    {
+	XineramaScreenInfo *screenInfo = s->display->screenInfo;
+	int		   nScreenInfo = s->display->nScreenInfo;
+
+	output = malloc (sizeof (CompOutput) * nScreenInfo);
+	if (!output)
+	    return;
+
+	for (i = 0; i < nScreenInfo; i++)
+	{
+	    output->name = malloc (sizeof (char) * 10);
+	    if (output->name)
+		snprintf (output->name, 10, "Output %d", i);
+
+	    output[i].x      = screenInfo[i].x_org;
+	    output[i].y      = screenInfo[i].y_org;
+	    output[i].width  = screenInfo[i].width;
+	    output[i].height = screenInfo[i].height;
+	}
+
+	nOutput = nScreenInfo;
+    }
+    else
+    {
+	output = malloc (sizeof (CompOutput));
+	if (!output)
+	    return;
+
+	output->name   = strdup ("Output 0");
+	output->x      = 0;
+	output->y      = 0;
+	output->width  = s->attrib.width;
+	output->height = s->attrib.height;
+
+	nOutput = 1;
+    }
+
+    if (s->outputDev)
+    {
+	for (i = 0; i < s->nOutputDev; i++)
+	    if (s->outputDev->name)
+		free (s->outputDev->name);
+
+	free (s->outputDev);
+    }
+
+    s->outputDev  = output;
+    s->nOutputDev = nOutput;
+}
+
+void
+setCurrentOutput (CompScreen *s,
+		  int	     outputNum)
+{
+    if (outputNum >= s->nOutputDev)
+	outputNum = 0;
+
+    s->currentOutputDev = outputNum;
+}
+
+static void
 reshape (CompScreen *s,
 	 int	    w,
 	 int	    h)
 {
-    s->width  = w;
-    s->height = h;
-
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     glMatrixMode (GL_MODELVIEW);
@@ -537,6 +601,13 @@ reshape (CompScreen *s,
     s->region.extents.x2 = w;
     s->region.extents.y2 = h;
     s->region.size = 1;
+
+    s->width  = w;
+    s->height = h;
+
+    updateOutputDevices (s);
+
+    setCurrentOutput (s, s->currentOutputDev);
 
     updateScreenEdges (s);
     updateWorkareaForScreen (s);
@@ -1020,6 +1091,10 @@ addScreen (CompDisplay *display,
 
     s->rasterX = 0;
     s->rasterY = 0;
+
+    s->outputDev	= NULL;
+    s->nOutputDev	= 0;
+    s->currentOutputDev = 0;
 
     s->windows = 0;
     s->reverseWindows = 0;

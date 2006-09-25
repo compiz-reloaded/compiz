@@ -1996,9 +1996,9 @@ eventLoop (void)
 		    {
 			XIntersectRegion (s->damage, &s->region, tmpRegion);
 
-			if (tmpRegion->numRects  == 1	 &&
-			    tmpRegion->rects->x1 == 0	 &&
-			    tmpRegion->rects->y1 == 0	 &&
+			if (tmpRegion->numRects  == 1	     &&
+			    tmpRegion->rects->x1 == 0	     &&
+			    tmpRegion->rects->y1 == 0	     &&
 			    tmpRegion->rects->x2 == s->width &&
 			    tmpRegion->rects->y2 == s->height)
 			    damageScreen (s);

@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20060920
+#define ABIVERSION 20060921
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1296,6 +1296,14 @@ struct _CompIcon {
     int		height;
 };
 
+typedef struct _CompOutput {
+    char *name;
+    int	 x;
+    int	 y;
+    int  width;
+    int  height;
+} CompOutput;
+
 struct _CompScreen {
     CompScreen  *next;
     CompDisplay *display;
@@ -1338,6 +1346,10 @@ struct _CompScreen {
     int		      desktopWindowCount;
     unsigned int      mapNum;
     unsigned int      activeNum;
+
+    CompOutput *outputDev;
+    int	       nOutputDev;
+    int	       currentOutputDev;
 
     int overlayWindowCount;
 
@@ -1470,6 +1482,10 @@ compGetScreenOptions (CompScreen *screen,
 void
 configureScreen (CompScreen	 *s,
 		 XConfigureEvent *ce);
+
+void
+setCurrentOutput (CompScreen *s,
+		  int	     outputNum);
 
 void
 updateScreenBackground (CompScreen  *screen,
