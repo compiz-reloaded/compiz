@@ -1,4 +1,4 @@
-if USE_GNOME
+if USE_GTK
 
 if USE_METACITY
 metacitylibs = @METACITY_LIBS@

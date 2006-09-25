@@ -187,23 +187,27 @@ if test -n "$SCALE_CORNER"; then
 fi
 AC_SUBST(SCALE_CORNER)
 
-AC_ARG_ENABLE(gnome,
-  [  --disable-gnome         Disable gnome window decorator and settings module],
-  [use_gnome=$enableval], [use_gnome=yes])
+AC_ARG_ENABLE(gtk,
+  [  --disable-gtk           Disable gtk window decorator],
+  [use_gtk=$enableval], [use_gtk=yes])
 
 AC_ARG_ENABLE(metacity,
   [  --disable-metacity      Disable metacity theme support],
   [use_metacity=$enableval], [use_metacity=yes])
 
-if test "x$use_gnome" = "xyes"; then
+AC_ARG_ENABLE(gnome,
+  [  --disable-gnome         Disable gnome settings module],
+  [use_gnome=$enableval], [use_gnome=yes])
+
+if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
 		    gtk+-2.0 >= 2.8.0 \
 		    gconf-2.0	      \
 		    libwnck-1.0	      \
 		    pangocairo,
-		    [use_gnome=yes], [use_gnome=no])
-  if test "x$use_gnome" = "xyes"; then
+		    [use_gtk=yes], [use_gtk=no])
+  if test "x$use_gtk" = "xyes"; then
     save_CFLAGS="$CFLAGS"
     save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $GTK_WINDOW_DECORATOR_CFLAGS"
@@ -211,32 +215,39 @@ if test "x$use_gnome" = "xyes"; then
     AC_CHECK_FUNCS(wnck_window_has_name)
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS"
-  fi
-  if test "x$use_gnome" = "xyes"; then
-    PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,
-		      gnome-window-settings-2.0 gnome-desktop-2.0,
-		      [use_gnome=yes], [use_gnome=no])
-  fi
-  windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
-  windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`
 
-  if test "x$use_metacity" = "xyes"; then
-    PKG_CHECK_MODULES(METACITY, libmetacity-private,
-		      [use_metacity=yes], [use_metacity=no])
+    if test "x$use_metacity" = "xyes"; then
+      PKG_CHECK_MODULES(METACITY, libmetacity-private,
+			[use_metacity=yes], [use_metacity=no])
+    fi
+
+    if test "x$use_gnome" = "xyes"; then
+      PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,
+			gnome-window-settings-2.0 gnome-desktop-2.0,
+			[use_gnome=yes], [use_gnome=no])
+    fi
+
+    windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
+    windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`
   fi
 fi
 
 AC_SUBST(windowsettingsdatadir)
 AC_SUBST(windowsettingslibdir)
 
-AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
-if test "$use_gnome" = yes; then
-  AC_DEFINE(USE_GNOME, 1, [Build gnome window decorator and settings module])
+AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
+if test "$use_gtk" = yes; then
+  AC_DEFINE(USE_GTK, 1, [Build gtk window decorator])
 fi
 
 AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")
 if test "$use_metacity" = yes; then
   AC_DEFINE(USE_METACITY, 1, [Build metacity theme support])
+fi
+
+AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
+if test "$use_gnome" = yes; then
+  AC_DEFINE(USE_GNOME, 1, [Build gnome settings module])
 fi
 
 AC_ARG_ENABLE(kde,
@@ -282,7 +293,8 @@ echo "  dbus:  $use_dbus"
 echo ""
 echo "and the following optional features will be compiled:"
 echo "  svg:      $use_librsvg"
-echo "  gnome:    $use_gnome"
+echo "  gtk:      $use_gtk"
 echo "  metacity: $use_metacity"
+echo "  gnome:    $use_gnome"
 echo "  kde:      $use_kde"
 echo ""
