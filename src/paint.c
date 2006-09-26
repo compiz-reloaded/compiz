@@ -62,6 +62,7 @@ translateRotateScreen (const ScreenPaintAttrib *sa)
 void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
+			int			output,
 			unsigned int		mask)
 {
     CompWindow *w;
@@ -143,6 +144,7 @@ Bool
 paintScreen (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
 	     Region		     region,
+	     int		     output,
 	     unsigned int	     mask)
 {
     static Region tmpRegion = NULL;
@@ -154,7 +156,8 @@ paintScreen (CompScreen		     *screen,
 	{
 	    if (mask & PAINT_SCREEN_FULL_MASK)
 	    {
-		(*screen->paintTransformedScreen) (screen, sAttrib, mask);
+		(*screen->paintTransformedScreen) (screen, sAttrib, output,
+						   mask);
 
 		return TRUE;
 	    }
@@ -166,7 +169,7 @@ paintScreen (CompScreen		     *screen,
     }
     else if (mask & PAINT_SCREEN_FULL_MASK)
     {
-	(*screen->paintTransformedScreen) (screen, sAttrib, mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, output, mask);
 
 	return TRUE;
     }

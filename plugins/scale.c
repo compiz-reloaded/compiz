@@ -852,6 +852,7 @@ static Bool
 scalePaintScreen (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
 		  Region		  region,
+		  int			  output,
 		  unsigned int		  mask)
 {
     Bool status;
@@ -862,7 +863,7 @@ scalePaintScreen (CompScreen		  *s,
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
     UNWRAP (ss, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, mask);
+    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
     WRAP (ss, s, paintScreen, scalePaintScreen);
 
     return status;

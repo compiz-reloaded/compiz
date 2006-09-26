@@ -558,6 +558,7 @@ static Bool
 rotatePaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   Region		   region,
+		   int			   output,
 		   unsigned int		   mask)
 {
     Bool status;
@@ -575,13 +576,13 @@ rotatePaintScreen (CompScreen		   *s,
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
 
 	UNWRAP (rs, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, region, mask);
+	status = (*s->paintScreen) (s, &sa, region, output, mask);
 	WRAP (rs, s, paintScreen, rotatePaintScreen);
     }
     else
     {
 	UNWRAP (rs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, region, mask);
+	status = (*s->paintScreen) (s, sAttrib, region, output, mask);
 	WRAP (rs, s, paintScreen, rotatePaintScreen);
     }
 

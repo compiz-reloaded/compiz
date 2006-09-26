@@ -598,6 +598,7 @@ static Bool
 minPaintScreen (CompScreen		*s,
 		const ScreenPaintAttrib *sAttrib,
 		Region		        region,
+		int			output,
 		unsigned int		mask)
 {
     Bool status;
@@ -608,7 +609,7 @@ minPaintScreen (CompScreen		*s,
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
     UNWRAP (ms, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, mask);
+    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
     WRAP (ms, s, paintScreen, minPaintScreen);
 
     return status;

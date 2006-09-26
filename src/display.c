@@ -2030,7 +2030,7 @@ eventLoop (void)
 			{
 			    (*s->paintScreen) (s,
 					       &defaultScreenPaintAttrib,
-					       &s->outputDev[i].region,
+					       &s->outputDev[i].region, i,
 					       PAINT_SCREEN_REGION_MASK |
 					       PAINT_SCREEN_FULL_MASK);
 
@@ -2048,7 +2048,7 @@ eventLoop (void)
 
 			    if ((*s->paintScreen) (s,
 						   &defaultScreenPaintAttrib,
-						   outputRegion,
+						   outputRegion, i,
 						   PAINT_SCREEN_REGION_MASK))
 			    {
 				BoxPtr pBox;
@@ -2114,7 +2114,7 @@ eventLoop (void)
 			    {
 				(*s->paintScreen) (s,
 						   &defaultScreenPaintAttrib,
-						   &s->outputDev[i].region,
+						   &s->outputDev[i].region, i,
 						   PAINT_SCREEN_FULL_MASK);
 
 				if (i + 1 == s->nOutputDev)

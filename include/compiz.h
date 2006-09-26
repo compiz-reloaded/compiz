@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20060921
+#define ABIVERSION 20060926
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -895,10 +895,12 @@ typedef void (*DonePaintScreenProc) (CompScreen *screen);
 typedef Bool (*PaintScreenProc) (CompScreen		 *screen,
 				 const ScreenPaintAttrib *sAttrib,
 				 Region			 region,
+				 int		         output,
 				 unsigned int		 mask);
 
 typedef void (*PaintTransformedScreenProc) (CompScreen		    *screen,
 					    const ScreenPaintAttrib *sAttrib,
+					    int			    output,
 					    unsigned int	    mask);
 
 
@@ -946,12 +948,14 @@ translateRotateScreen (const ScreenPaintAttrib *sa);
 void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
+			int			output,
 			unsigned int	        mask);
 
 Bool
 paintScreen (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
 	     Region		     region,
+	     int		     output,
 	     unsigned int	     mask);
 
 Bool

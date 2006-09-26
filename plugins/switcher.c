@@ -1339,6 +1339,7 @@ static Bool
 switchPaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   Region		   region,
+		   int			   output,
 		   unsigned int		   mask)
 {
     Bool status;
@@ -1388,7 +1389,7 @@ switchPaintScreen (CompScreen		   *s,
 	}
 
 	UNWRAP (ss, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, region, mask);
+	status = (*s->paintScreen) (s, &sa, region, output, mask);
 	WRAP (ss, s, paintScreen, switchPaintScreen);
 
 	if (zoomed)
@@ -1420,7 +1421,7 @@ switchPaintScreen (CompScreen		   *s,
     else
     {
 	UNWRAP (ss, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, region, mask);
+	status = (*s->paintScreen) (s, sAttrib, region, output, mask);
 	WRAP (ss, s, paintScreen, switchPaintScreen);
     }
 

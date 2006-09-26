@@ -1009,6 +1009,7 @@ static Bool
 cubePaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 Region			 region,
+		 int			 output,
 		 unsigned int		 mask)
 {
     Bool status;
@@ -1022,7 +1023,7 @@ cubePaintScreen (CompScreen		 *s,
     }
 
     UNWRAP (cs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, mask);
+    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
     WRAP (cs, s, paintScreen, cubePaintScreen);
 
     return status;
@@ -1044,6 +1045,7 @@ cubeDonePaintScreen (CompScreen *s)
 static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
+			    int			    output,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
@@ -1211,7 +1213,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    for (i = 0; i < s->size; i++)
 	    {
 		moveScreenViewport (s, xMove, FALSE);
-		(*s->paintTransformedScreen) (s, &sa, mask);
+		(*s->paintTransformedScreen) (s, &sa, output, mask);
 		moveScreenViewport (s, -xMove, FALSE);
 
 		sa.yRotate -= 360.0f / size;
@@ -1227,7 +1229,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 		xMove = cs->xrotations;
 
 		moveScreenViewport (s, xMove, FALSE);
-		(*s->paintTransformedScreen) (s, &sa, mask);
+		(*s->paintTransformedScreen) (s, &sa, output, mask);
 		moveScreenViewport (s, -xMove, FALSE);
 
 		xMove++;
@@ -1237,7 +1239,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    sa.yRotate -= 360.0f / size;
 
-	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    (*s->paintTransformedScreen) (s, &sa, output, mask);
 	    moveScreenViewport (s, -xMove, FALSE);
 	}
     }
@@ -1275,7 +1277,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    for (i = 0; i < s->size; i++)
 	    {
 		moveScreenViewport (s, xMove, FALSE);
-		(*s->paintTransformedScreen) (s, &sa, mask);
+		(*s->paintTransformedScreen) (s, &sa, output, mask);
 		moveScreenViewport (s, -xMove, FALSE);
 
 		sa.yRotate += 360.0f / size;
@@ -1287,21 +1289,21 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	else
 	{
 	    moveScreenViewport (s, xMove, FALSE);
-	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    (*s->paintTransformedScreen) (s, &sa, output, mask);
 	    moveScreenViewport (s, -xMove, FALSE);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = -cs->xrotations;
 
 	    moveScreenViewport (s, xMove, FALSE);
-	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    (*s->paintTransformedScreen) (s, &sa, output, mask);
 	    moveScreenViewport (s, -xMove, FALSE);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = 1 - cs->xrotations;
 
 	    moveScreenViewport (s, xMove, FALSE);
-	    (*s->paintTransformedScreen) (s, &sa, mask);
+	    (*s->paintTransformedScreen) (s, &sa, output, mask);
 	    moveScreenViewport (s, -xMove, FALSE);
 	}
     }

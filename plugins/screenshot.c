@@ -169,6 +169,7 @@ static Bool
 shotPaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 Region			 region,
+		 int			 output,
 		 unsigned int		 mask)
 {
     Bool status;
@@ -176,7 +177,7 @@ shotPaintScreen (CompScreen		 *s,
     SHOT_SCREEN (s);
 
     UNWRAP (ss, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, mask);
+    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
     WRAP (ss, s, paintScreen, shotPaintScreen);
 
     if (status && ss->grab)

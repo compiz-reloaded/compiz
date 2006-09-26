@@ -2802,6 +2802,7 @@ static Bool
 wobblyPaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   Region		   region,
+		   int			   output,
 		   unsigned int		   mask)
 {
     Bool status;
@@ -2812,7 +2813,7 @@ wobblyPaintScreen (CompScreen		   *s,
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
     UNWRAP (ws, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, mask);
+    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
     WRAP (ws, s, paintScreen, wobblyPaintScreen);
 
     return status;
