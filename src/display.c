@@ -1808,6 +1808,11 @@ waitForVideoSync (CompScreen *s)
     if (!s->opt[COMP_SCREEN_OPTION_SYNC_TO_VBLANK].value.b)
 	return;
 
+    /* we currently can't handle sync to vblank when we have more than one
+       output device */
+    if (s->nOutputDev > 1)
+	return;
+
     if (s->getVideoSync)
     {
 	glFlush ();
@@ -1821,19 +1826,21 @@ void
 eventLoop (void)
 {
     XEvent	   event;
-    int		   timeDiff;
+    int		   timeDiff, i;
     struct timeval tv;
-    Region	   tmpRegion;
+    Region	   tmpRegion, outputRegion;
     CompDisplay    *display = compDisplays;
     CompScreen	   *s;
     int		   time, timeToNextRedraw = 0;
     CompWindow	   *w;
-    unsigned int   damageMask;
+    unsigned int   damageMask, mask;
 
     tmpRegion = XCreateRegion ();
-    if (!tmpRegion)
+    outputRegion = XCreateRegion ();
+    if (!tmpRegion || !outputRegion)
     {
-	fprintf (stderr, "%s: Couldn't create region\n", programName);
+	fprintf (stderr, "%s: Couldn't create temporary regions\n",
+		 programName);
 	return;
     }
 
@@ -2006,96 +2013,117 @@ eventLoop (void)
 
 		    EMPTY_REGION (s->damage);
 
-		    if (s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
+		    mask = s->damageMask;
+		    s->damageMask = 0;
+
+		    for (i = 0; i < s->nOutputDev; i++)
 		    {
-			s->damageMask = 0;
+			if (s->nOutputDev > 1)
+			    glScissor (s->outputDev[i].region.extents.x1,
+				       s->outputDev[i].region.extents.y1,
+				       s->outputDev[i].region.extents.x2 -
+				       s->outputDev[i].region.extents.x1,
+				       s->outputDev[i].region.extents.y2 -
+				       s->outputDev[i].region.extents.y1);
 
-			(*s->paintScreen) (s,
-					   &defaultScreenPaintAttrib,
-					   &s->region,
-					   PAINT_SCREEN_REGION_MASK |
-					   PAINT_SCREEN_FULL_MASK);
-
-			waitForVideoSync (s);
-
-			glXSwapBuffers (s->display->display, s->output);
-		    }
-		    else if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
-		    {
-			s->damageMask = 0;
-
-			if ((*s->paintScreen) (s,
-					       &defaultScreenPaintAttrib,
-					       tmpRegion,
-					       PAINT_SCREEN_REGION_MASK))
+			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
 			{
-			    BoxPtr pBox;
-			    int    nBox, y;
+			    (*s->paintScreen) (s,
+					       &defaultScreenPaintAttrib,
+					       &s->outputDev[i].region,
+					       PAINT_SCREEN_REGION_MASK |
+					       PAINT_SCREEN_FULL_MASK);
 
-			    pBox = tmpRegion->rects;
-			    nBox = tmpRegion->numRects;
-
-			    waitForVideoSync (s);
-
-			    if (s->copySubBuffer)
+			    if (i + 1 == s->nOutputDev)
 			    {
-				while (nBox--)
+				waitForVideoSync (s);
+				glXSwapBuffers (s->display->display, s->output);
+			    }
+			}
+			else if (mask & COMP_SCREEN_DAMAGE_REGION_MASK)
+			{
+			    XIntersectRegion (tmpRegion,
+					      &s->outputDev[i].region,
+					      outputRegion);
+
+			    if ((*s->paintScreen) (s,
+						   &defaultScreenPaintAttrib,
+						   outputRegion,
+						   PAINT_SCREEN_REGION_MASK))
+			    {
+				BoxPtr pBox;
+				int    nBox, y;
+
+				pBox = outputRegion->rects;
+				nBox = outputRegion->numRects;
+
+				waitForVideoSync (s);
+
+				if (s->copySubBuffer)
 				{
-				    y = s->height - pBox->y2;
+				    while (nBox--)
+				    {
+					y = s->height - pBox->y2;
 
-				    (*s->copySubBuffer) (s->display->display,
-							 s->output,
-							 pBox->x1, y,
-							 pBox->x2 - pBox->x1,
-							 pBox->y2 - pBox->y1);
+					(*s->copySubBuffer) (display->display,
+							     s->output,
+							     pBox->x1, y,
+							     pBox->x2 -
+							     pBox->x1,
+							     pBox->y2 -
+							     pBox->y1);
 
-				    pBox++;
+					pBox++;
+				    }
+				}
+				else
+				{
+				    glEnable (GL_SCISSOR_TEST);
+				    glDrawBuffer (GL_FRONT);
+
+				    while (nBox--)
+				    {
+					y = s->height - pBox->y2;
+
+					glBitmap (0, 0, 0, 0,
+						  pBox->x1 - s->rasterX,
+						  y - s->rasterY,
+						  NULL);
+
+					s->rasterX = pBox->x1;
+					s->rasterY = y;
+
+					glScissor (pBox->x1, y,
+						   pBox->x2 - pBox->x1,
+						   pBox->y2 - pBox->y1);
+
+					glCopyPixels (pBox->x1, y,
+						      pBox->x2 - pBox->x1,
+						      pBox->y2 - pBox->y1,
+						      GL_COLOR);
+
+					pBox++;
+				    }
+
+				    glDrawBuffer (GL_BACK);
+				    glDisable (GL_SCISSOR_TEST);
+				    glFlush ();
 				}
 			    }
 			    else
 			    {
-				glEnable (GL_SCISSOR_TEST);
-				glDrawBuffer (GL_FRONT);
+				(*s->paintScreen) (s,
+						   &defaultScreenPaintAttrib,
+						   &s->outputDev[i].region,
+						   PAINT_SCREEN_FULL_MASK);
 
-				while (nBox--)
+				if (i + 1 == s->nOutputDev)
 				{
-				    y = s->height - pBox->y2;
-
-				    glBitmap (0, 0, 0, 0,
-					      pBox->x1 - s->rasterX,
-					      y - s->rasterY,
-					      NULL);
-
-				    s->rasterX = pBox->x1;
-				    s->rasterY = y;
-
-				    glScissor (pBox->x1, y,
-					       pBox->x2 - pBox->x1,
-					       pBox->y2 - pBox->y1);
-
-				    glCopyPixels (pBox->x1, y,
-						  pBox->x2 - pBox->x1,
-						  pBox->y2 - pBox->y1,
-						  GL_COLOR);
-
-				    pBox++;
+				    waitForVideoSync (s);
+				    glXSwapBuffers (display->display,
+						    s->output);
 				}
-
-				glDrawBuffer (GL_BACK);
-				glDisable (GL_SCISSOR_TEST);
-				glFlush ();
 			    }
-			}
-			else
-			{
-			    (*s->paintScreen) (s,
-					       &defaultScreenPaintAttrib,
-					       &s->region,
-					       PAINT_SCREEN_FULL_MASK);
-
-			    waitForVideoSync (s);
-
-			    glXSwapBuffers (s->display->display, s->output);
 			}
 		    }
 
