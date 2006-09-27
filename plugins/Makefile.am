@@ -50,6 +50,10 @@ libscreenshot_la_LDFLAGS = -module -avoid-version -no-undefined
 libscreenshot_la_LIBADD = @COMPIZ_LIBS@
 libscreenshot_la_SOURCES = screenshot.c
 
+libplane_la_LDFLAGS = -module -avoid-version -no-undefined
+libplane_la_LIBADD = @COMPIZ_LIBS@
+libplane_la_SOURCES = plane.c
+
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
@@ -135,6 +139,7 @@ module_LTLIBRARIES =		\
 	libswitcher.la		\
 	libwater.la		\
 	libscreenshot.la	\
+	libplane.la		\
 	$(libgconf_dump_module)
 
 EXTRA_DIST = $(schema_in_files)
