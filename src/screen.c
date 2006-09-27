@@ -47,9 +47,13 @@
 
 #define DETECT_REFRESH_RATE_DEFAULT TRUE
 
-#define SCREEN_SIZE_DEFAULT 4
-#define SCREEN_SIZE_MIN	    4
-#define SCREEN_SIZE_MAX	    32
+#define SCREEN_HSIZE_DEFAULT 4
+#define SCREEN_HSIZE_MIN     1
+#define SCREEN_HSIZE_MAX     32
+
+#define SCREEN_VSIZE_DEFAULT 1
+#define SCREEN_VSIZE_MIN     1
+#define SCREEN_VSIZE_MAX     32
 
 #define LIGHTING_DEFAULT TRUE
 
@@ -105,19 +109,21 @@ freeScreenPrivateIndex (CompDisplay *display,
 
 static void
 setVirtualScreenSize (CompScreen *screen,
-		      int	 size)
+		      int	 hsize,
+		      int	 vsize)
 {
     unsigned long data[2];
 
-    data[0] = screen->width * size;
-    data[1] = screen->height;
+    data[0] = screen->width * hsize;
+    data[1] = screen->height * vsize;
 
     XChangeProperty (screen->display->display, screen->root,
 		     screen->display->desktopGeometryAtom,
 		     XA_CARDINAL, 32, PropModeReplace,
 		     (unsigned char *) data, 2);
 
-    screen->size = size;
+    screen->hsize = hsize;
+    screen->vsize = vsize;
 }
 
 static Bool
@@ -197,13 +203,27 @@ setScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case COMP_SCREEN_OPTION_SIZE:
+    case COMP_SCREEN_OPTION_HSIZE:
 	if (compSetIntOption (o, value))
 	{
+	    CompOption *vsize = compFindOption (screen->opt, NUM_OPTIONS (screen), "vsize", NULL);
+	    
 	    if (o->value.i * screen->width > MAXSHORT)
 		return FALSE;
 
-	    setVirtualScreenSize (screen, o->value.i);
+	    setVirtualScreenSize (screen, o->value.i, vsize->value.i);
+	    return TRUE;
+	}
+	break;
+    case COMP_SCREEN_OPTION_VSIZE:
+	if (compSetIntOption (o, value))
+	{
+	    CompOption *hsize = compFindOption (screen->opt, NUM_OPTIONS (screen), "hsize", NULL);
+
+	    if (o->value.i * screen->height > MAXSHORT)
+		return FALSE;
+
+	    setVirtualScreenSize (screen, hsize->value.i, o->value.i);
 	    return TRUE;
 	}
 	break;
@@ -267,14 +287,23 @@ compScreenInitOptions (CompScreen *screen)
     o->rest.i.min = 1;
     o->rest.i.max = 200;
 
-    o = &screen->opt[COMP_SCREEN_OPTION_SIZE];
-    o->name	  = "size";
-    o->shortDesc  = N_("Virtual Size");
-    o->longDesc	  = N_("Screen size multiplier for virtual size");
+    o = &screen->opt[COMP_SCREEN_OPTION_HSIZE];
+    o->name	  = "hsize";
+    o->shortDesc  = N_("Horizontal Virtual Size");
+    o->longDesc	  = N_("Screen size multiplier for horizontal virtual size");
     o->type	  = CompOptionTypeInt;
-    o->value.i    = SCREEN_SIZE_DEFAULT;
-    o->rest.i.min = SCREEN_SIZE_MIN;
-    o->rest.i.max = SCREEN_SIZE_MAX;
+    o->value.i    = SCREEN_HSIZE_DEFAULT;
+    o->rest.i.min = SCREEN_HSIZE_MIN;
+    o->rest.i.max = SCREEN_HSIZE_MAX;
+
+    o = &(screen->opt[COMP_SCREEN_OPTION_VSIZE]);
+    o->name	      = "vsize";
+    o->shortDesc      = N_("Vertical Virtual Size");
+    o->longDesc	      = N_("Screen size multiplier for vertical virtual size");
+    o->type	      = CompOptionTypeInt;
+    o->value.i	      = SCREEN_VSIZE_DEFAULT;
+    o->rest.i.min     = SCREEN_VSIZE_MIN;
+    o->rest.i.max     = SCREEN_VSIZE_MAX;
 
     o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_STEP];
     o->name		= "opacity_step";
@@ -362,7 +391,8 @@ addSequence (CompScreen        *screen,
 
     s->next     = screen->startupSequences;
     s->sequence = sequence;
-    s->viewport = screen->x;
+    s->viewportX = screen->x;
+    s->viewportY = screen->y;
 
     screen->startupSequences = s;
 
@@ -916,22 +946,25 @@ setDesktopHints (CompScreen *s)
 	{
 	    memcpy (data, propData, sizeof (unsigned long));
 
-	    if (data[0] / s->width < s->size - 1)
+	    if (data[0] / s->width < s->hsize - 1)
 		s->x = data[0] / s->width;
+
+	    if (data[1] / s->height < s->vsize - 1)
+		s->y = data[1] / s->height;
 	}
 
 	XFree (propData);
     }
 
     data[0] = s->x * s->width;
-    data[1] = 0;
+    data[1] = s->y * s->height;
 
     XChangeProperty (d->display, s->root, d->desktopViewportAtom,
 		     XA_CARDINAL, 32, PropModeReplace,
 		     (unsigned char *) data, 2);
 
-    data[0] = s->width * s->size;
-    data[1] = s->height;
+    data[0] = s->width * s->hsize;
+    data[1] = s->height * s->vsize;
 
     XChangeProperty (d->display, s->root, d->desktopGeometryAtom,
 		     XA_CARDINAL, 32, PropModeReplace,
@@ -955,7 +988,7 @@ setDesktopHints (CompScreen *s)
 				 d->showingDesktopAtom, 0L, 1L, FALSE,
 				 XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
-
+    
     if (result == Success && n && propData)
     {
 	memcpy (data, propData, sizeof (unsigned long));
@@ -1048,8 +1081,10 @@ addScreen (CompDisplay *display,
     if (!s->damage)
 	return FALSE;
 
-    s->x    = 0;
-    s->size = 4;
+    s->x     = 0;
+    s->y     = 0;
+    s->hsize = SCREEN_HSIZE_DEFAULT;
+    s->vsize = SCREEN_VSIZE_DEFAULT;
 
     for (i = 0; i < SCREEN_EDGE_NUM; i++)
     {
@@ -2606,32 +2641,50 @@ runCommand (CompScreen *s,
 void
 moveScreenViewport (CompScreen *s,
 		    int	       tx,
+		    int	       ty,
 		    Bool       sync)
 {
+    CompWindow *w;
+    int         m, wx, wy, vWidth, vHeight;
+
     tx = s->x - tx;
-    tx = MOD (tx, s->size);
+    tx = MOD (tx, s->hsize);
     tx -= s->x;
 
-    if (tx)
+    ty = s->y - ty;
+    ty = MOD (ty, s->vsize);
+    ty -= s->y;
+
+    if (!tx && !ty)
+	return;
+
+    s->x += tx;
+    s->y += ty;
+
+    tx *= -s->width;
+    ty *= -s->height;
+
+    vWidth = s->width * s->hsize;
+    vHeight = s->height * s->vsize;
+
+    for (w = s->windows; w; w = w->next)
     {
-	CompWindow *w;
-	int	   m, wx, vWidth = s->width * s->size;
+	if (w->attrib.override_redirect)
+	    continue;
 
-	s->x += tx;
+	if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
+	    continue;
 
-	tx *= -s->width;
+	if (w->state & CompWindowStateStickyMask)
+	    continue;
 
-	for (w = s->windows; w; w = w->next)
+	/* x */
+	if (s->hsize == 1)
 	{
-	    if (w->attrib.override_redirect)
-		continue;
-
-	    if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
-		continue;
-
-	    if (w->state & CompWindowStateStickyMask)
-		continue;
-
+	    wx = tx;
+	}
+	else
+	{
 	    m = w->attrib.x + tx;
 	    if (m - w->output.left < s->width - vWidth)
 		wx = tx + vWidth;
@@ -2639,28 +2692,48 @@ moveScreenViewport (CompScreen *s,
 		wx = tx - vWidth;
 	    else
 		wx = tx;
-
-	    if (w->saveMask & CWX)
-		w->saveWc.x += wx;
-
-	    moveWindow (w, wx, 0, sync, TRUE);
-
-	    if (sync)
-		syncWindowPosition (w);
 	}
+
+	if (w->saveMask & CWX)
+	    w->saveWc.x += wx;
+
+	/* y */
+	if (s->vsize == 1)
+	{
+	    wy = ty;
+	}
+	else
+	{
+	    m = w->attrib.y + ty;
+	    if (m - w->output.top < s->height - vHeight)
+		wy = ty + vHeight;
+	    else if (m + w->height + w->output.bottom > vHeight)
+		wy = ty - vHeight;
+	    else
+		wy = ty;
+	}
+
+	if (w->saveMask & CWY)
+	    w->saveWc.y += wy;
+
+	/* move */
+	moveWindow (w, wx, wy, sync, TRUE);
 
 	if (sync)
-	{
-	    unsigned long data[2];
+	    syncWindowPosition (w);
+    }
 
-	    data[0] = s->x * s->width;
-	    data[1] = 0;
+    if (sync)
+    {
+	unsigned long data[2];
 
-	    XChangeProperty (s->display->display, s->root,
-			     s->display->desktopViewportAtom,
-			     XA_CARDINAL, 32, PropModeReplace,
-			     (unsigned char *) data, 2);
-	}
+	data[0] = s->x * s->width;
+	data[1] = s->y * s->height;
+
+	XChangeProperty (s->display->display, s->root,
+			 s->display->desktopViewportAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) data, 2);
     }
 }
 
@@ -2669,7 +2742,7 @@ moveWindowToViewportPosition (CompWindow *w,
 			      int	 x,
 			      Bool       sync)
 {
-    int	tx, vWidth = w->screen->width * w->screen->size;
+    int	tx, vWidth = w->screen->width * w->screen->hsize;
 
     x += w->screen->x * w->screen->width;
     x = MOD (x, vWidth);
@@ -2797,7 +2870,10 @@ applyStartupProperties (CompScreen *screen,
     }
 
     if (s)
-	window->initialViewport = s->viewport;
+    {
+	window->initialViewportX = s->viewportX;
+	window->initialViewportY = s->viewportY;
+    }
 }
 
 void

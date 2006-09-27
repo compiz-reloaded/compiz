@@ -1501,7 +1501,8 @@ addWindow (CompScreen *screen,
     w->shaded		 = FALSE;
     w->hidden		 = FALSE;
 
-    w->initialViewport = screen->x;
+    w->initialViewportX = screen->x;
+    w->initialViewportY = screen->y;
 
     w->pendingUnmaps = 0;
 
@@ -2898,9 +2899,13 @@ addWindowSizeChanges (CompWindow     *w,
 		      int	     oldBorderWidth)
 {
     int mask = 0;
-    int x;
+    int x, y;
+    int vx, vy;
 
-    x = (defaultViewportForWindow (w) - w->screen->x) * w->screen->width;
+    defaultViewportForWindow (w, &vx, &vy);
+
+    x = (vx - w->screen->x) * w->screen->width;
+    y = (vy - w->screen->y) * w->screen->height;
 
     if (w->type & CompWindowTypeFullscreenMask)
     {
@@ -2964,7 +2969,7 @@ addWindowSizeChanges (CompWindow     *w,
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
 	    xwc->x = x;
-	    xwc->y = 0;
+	    xwc->y = y;
 
 	    mask |= CWX | CWY;
 	}
@@ -2988,16 +2993,16 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
-		if (oldY < w->screen->workArea.y + w->input.top)
+		if (oldY < y + w->screen->workArea.y + w->input.top)
 		{
-		    xwc->y = w->screen->workArea.y + w->input.top;
+		    xwc->y = y + w->screen->workArea.y + w->input.top;
 		    mask |= CWY;
 		}
 		else
 		{
 		    height = xwc->height + oldBorderWidth * 2;
 
-		    max = w->screen->workArea.y + w->screen->workArea.height;
+		    max = y + w->screen->workArea.y + w->screen->workArea.height;
 		    if (oldY + oldHeight + w->input.bottom > max)
 		    {
 			xwc->y = max - height - w->input.bottom;
@@ -3393,9 +3398,9 @@ ensureWindowVisibility (CompWindow *w)
 	return;
 
     x1 = w->screen->workArea.x - w->screen->width * w->screen->x;
-    y1 = w->screen->workArea.y;
-    x2 = x1 + w->screen->workArea.width + w->screen->size * w->screen->width;
-    y2 = y1 + w->screen->workArea.height;
+    y1 = w->screen->workArea.y - w->screen->height * w->screen->y;
+    x2 = x1 + w->screen->workArea.width + w->screen->hsize * w->screen->width;
+    y2 = y1 + w->screen->workArea.height + w->screen->vsize * w->screen->height;
 
     if (w->attrib.x - w->input.left >= x2)
 	dx = (x2 - 25) - w->attrib.x;
@@ -3833,7 +3838,10 @@ focusWindowOnMap (CompWindow *w)
 		   CompWindowTypeDockMask))
 	return FALSE;
 
-    if (w->initialViewport != w->screen->x)
+    if (w->initialViewportX != w->screen->x)
+	return FALSE;
+
+    if (w->initialViewportY != w->screen->y)
 	return FALSE;
 
     if (!w->inputHint &&
@@ -3880,20 +3888,44 @@ redirectWindow (CompWindow *w)
    currently computed as the viewport where the center of the window is
    located, except for when the window is visible in the current viewport as
    the current viewport is then always returned. */
-int
-defaultViewportForWindow (CompWindow *w)
+void
+defaultViewportForWindow (CompWindow *w,
+			  int	     *vx,
+			  int	     *vy)
 {
     CompScreen *s = w->screen;
     int	       x;
+    int	       y;
 
-    if (w->attrib.x < s->width && w->attrib.x + w->width > 0)
-	return s->x;
+    if ((w->attrib.x < s->width && w->attrib.x + w->width > 0)	&&
+	(w->attrib.y < s->height && w->attrib.y + w->height > 0))
+    {
+	if (vx)
+	    *vx = s->x;
 
-    x = w->attrib.x + (w->width >> 1);
-    if (x < 0)
-	return s->x + ((x / s->width) - 1) % s->size;
-    else
-	return s->x + (x / s->width) % s->size;
+	if (vy)
+	    *vy = s->y;
+
+	return;
+    }
+
+    if (vx)
+    {
+	x = w->attrib.x + (w->width >> 1);
+	if (x < 0)
+	    *vx = s->x + ((x / s->width) - 1) % s->hsize;
+	else
+	    *vx = s->x + (x / s->width) % s->hsize;
+    }
+
+    if (vy)
+    {
+	y = w->attrib.y + (w->height >> 1);
+	if (y < 0)
+	    *vy = s->y + ((y / s->height) - 1) % s->vsize;
+	else
+	    *vy = s->y + (y / s->height) % s->vsize;
+    }
 }
 
 

@@ -1782,7 +1782,8 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
-		w->initialViewport = w->screen->x;
+		w->initialViewportX = w->screen->x;
+		w->initialViewportY = w->screen->y;
 
 		applyStartupProperties (w->screen, w);
 

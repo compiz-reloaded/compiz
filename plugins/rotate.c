@@ -419,15 +419,15 @@ rotatePreparePaintScreen (CompScreen *s,
 	    rs->xrot += rs->xVelocity * chunk;
 	    rs->yrot += rs->yVelocity * chunk;
 
-	    if (rs->xrot > 360.0f / s->size)
+	    if (rs->xrot > 360.0f / s->hsize)
 	    {
-		rs->baseXrot += 360.0f / s->size;
-		rs->xrot -= 360.0f / s->size;
+		rs->baseXrot += 360.0f / s->hsize;
+		rs->xrot -= 360.0f / s->hsize;
 	    }
 	    else if (rs->xrot < 0.0f)
 	    {
-		rs->baseXrot -= 360.0f / s->size;
-		rs->xrot += 360.0f / s->size;
+		rs->baseXrot -= 360.0f / s->hsize;
+		rs->xrot += 360.0f / s->hsize;
 	    }
 
 	    if (rs->invert == -1)
@@ -467,7 +467,7 @@ rotatePreparePaintScreen (CompScreen *s,
 		if (fabs (rs->yVelocity) < 0.01f)
 		    rs->yVelocity = 0.0f;
 	    }
-	    else if (adjustVelocity (rs, s->size))
+	    else if (adjustVelocity (rs, s->hsize))
 	    {
 		rs->xVelocity = 0.0f;
 		rs->yVelocity = 0.0f;
@@ -479,11 +479,11 @@ rotatePreparePaintScreen (CompScreen *s,
 
 		    xrot = rs->baseXrot + rs->xrot;
 		    if (xrot < 0.0f)
-			tx = (s->size * xrot / 360.0f) - 0.5f;
+			tx = (s->hsize * xrot / 360.0f) - 0.5f;
 		    else
-			tx = (s->size * xrot / 360.0f) + 0.5f;
+			tx = (s->hsize * xrot / 360.0f) + 0.5f;
 
-		    moveScreenViewport (s, tx, TRUE);
+		    moveScreenViewport (s, tx, 0, TRUE);
 
 		    rs->xrot = 0.0f;
 		    rs->yrot = 0.0f;
@@ -524,7 +524,7 @@ rotatePreparePaintScreen (CompScreen *s,
 	    w = findWindowAtScreen (s, rs->moveWindow);
 	    if (w)
 	    {
-		float xrot = (s->size * (rs->baseXrot + rs->xrot)) / 360.0f;
+		float xrot = (s->hsize * (rs->baseXrot + rs->xrot)) / 360.0f;
 
 		moveWindowToViewportPosition (w,
 					      rs->moveWindowX - xrot * s->width,
@@ -738,7 +738,7 @@ rotate (CompDisplay     *d,
 	}
 
 	rs->moving  = TRUE;
-	rs->moveTo += (360.0f / s->size) * direction;
+	rs->moveTo += (360.0f / s->hsize) * direction;
 	rs->grabbed = FALSE;
 
 	damageScreen (s);
@@ -815,7 +815,7 @@ rotateWithWindow (CompDisplay     *d,
 	if (rs->grabIndex)
 	{
 	    rs->moving  = TRUE;
-	    rs->moveTo += (360.0f / s->size) * direction;
+	    rs->moveTo += (360.0f / s->hsize) * direction;
 	    rs->grabbed = FALSE;
 
 	    damageScreen (s);
@@ -1131,7 +1131,7 @@ rotateEdgeFlip (CompScreen      *s,
 		    compAddTimeout (rd->flipTime, rotateFlipLeft, s);
 
 	    rs->moving  = TRUE;
-	    rs->moveTo -= 360.0f / s->size;
+	    rs->moveTo -= 360.0f / s->hsize;
 	    rs->slow    = TRUE;
 
 	    if (state & CompActionStateInitEdge)
@@ -1171,7 +1171,7 @@ rotateEdgeFlip (CompScreen      *s,
 		    compAddTimeout (rd->flipTime, rotateFlipRight, s);
 
 	    rs->moving  = TRUE;
-	    rs->moveTo += 360.0f / s->size;
+	    rs->moveTo += 360.0f / s->hsize;
 	    rs->slow    = TRUE;
 
 	    if (state & CompActionStateInitEdge)
@@ -1271,11 +1271,11 @@ rotateRotationTo (CompScreen *s,
 
     ROTATE_SCREEN (s);
 
-    delta = face - s->x - (rs->moveTo / (360.0f / s->size));
-    if (delta > s->size / 2)
-	delta -= s->size;
-    else if (delta < -(s->size / 2))
-	delta += s->size;
+    delta = face - s->x - (rs->moveTo / (360.0f / s->hsize));
+    if (delta > s->hsize / 2)
+	delta -= s->hsize;
+    else if (delta < -(s->hsize / 2))
+	delta += s->hsize;
 
     return delta;
 }
@@ -1474,7 +1474,8 @@ rotateHandleEvent (CompDisplay *d,
 		rs->moving = FALSE;
 		rs->moveTo = 0.0f;
 
-		dx = defaultViewportForWindow (w) - s->x;
+		defaultViewportForWindow (w, &dx, NULL);
+		dx -= s->x;
 		if (dx)
 		{
 		    Window	 win;
@@ -1485,10 +1486,10 @@ rotateHandleEvent (CompDisplay *d,
 		    XQueryPointer (d->display, s->root,
 				   &win, &win, &x, &y, &i, &i, &ui);
 
-		    if (dx > (s->size + 1) / 2)
-			dx -= s->size;
-		    else if (dx < -(s->size + 1) / 2)
-			dx += s->size;
+		    if (dx > (s->hsize + 1) / 2)
+			dx -= s->hsize;
+		    else if (dx < -(s->hsize + 1) / 2)
+			dx += s->hsize;
 
 		    o[0].type    = CompOptionTypeInt;
 		    o[0].name    = "x";
@@ -1531,10 +1532,10 @@ rotateHandleEvent (CompDisplay *d,
 		    XQueryPointer (d->display, s->root,
 				   &win, &win, &x, &y, &i, &i, &ui);
 
-		    if (dx > (s->size + 1) / 2)
-			dx -= s->size;
-		    else if (dx < -(s->size + 1) / 2)
-			dx += s->size;
+		    if (dx > (s->hsize + 1) / 2)
+			dx -= s->hsize;
+		    else if (dx < -(s->hsize + 1) / 2)
+			dx += s->hsize;
 
 		    o[0].type    = CompOptionTypeInt;
 		    o[0].name    = "x";

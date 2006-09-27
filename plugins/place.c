@@ -627,8 +627,10 @@ find_first_fit (CompWindow *window,
 
     get_workarea_of_current_output_device (window->screen, &work_area);
 
-    work_area.x += (window->initialViewport - window->screen->x) *
+    work_area.x += (window->initialViewportX - window->screen->x) *
 	window->screen->width;
+    work_area.y += (window->initialViewportY - window->screen->y) *
+	window->screen->height;
 
     center_tile_rect_in_area (&rect, &work_area);
 
@@ -712,14 +714,17 @@ placeWindow (CompWindow *window,
     CompWindow *wi;
     GList      *windows;
     XRectangle work_area;
-    int	       x0 = (window->initialViewport - window->screen->x) *
+    int	       x0 = (window->initialViewportX - window->screen->x) *
 	window->screen->width;
+    int	       y0 = (window->initialViewportY - window->screen->y) *
+	window->screen->height;
 
     PLACE_SCREEN (window->screen);
 
     get_workarea_of_current_output_device (window->screen, &work_area);
 
     work_area.x += x0;
+    work_area.y += y0;
 
     windows = NULL;
 
@@ -753,7 +758,7 @@ placeWindow (CompWindow *window,
     if (window->type & CompWindowTypeFullscreenMask)
     {
 	x = x0;
-	y = 0;
+	y = y0;
 	goto done_no_constraints;
     }
 
@@ -915,7 +920,7 @@ placeWindow (CompWindow *window,
 
     /* "Origin" placement algorithm */
     x = x0;
-    y = 0;
+    y = y0;
 
     if (find_first_fit (window, windows, x, y, &x, &y))
 	goto done_check_denied_focus;

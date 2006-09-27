@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20060926
+#define ABIVERSION 20060927
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1078,12 +1078,13 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_DETECT_REFRESH_RATE 0
 #define COMP_SCREEN_OPTION_LIGHTING	       1
 #define COMP_SCREEN_OPTION_REFRESH_RATE	       2
-#define COMP_SCREEN_OPTION_SIZE		       3
-#define COMP_SCREEN_OPTION_OPACITY_STEP        4
-#define COMP_SCREEN_OPTION_UNREDIRECT_FS       5
-#define COMP_SCREEN_OPTION_DEFAULT_ICON        6
-#define COMP_SCREEN_OPTION_SYNC_TO_VBLANK      7
-#define COMP_SCREEN_OPTION_NUM		       8
+#define COMP_SCREEN_OPTION_HSIZE	       3
+#define COMP_SCREEN_OPTION_VSIZE	       4
+#define COMP_SCREEN_OPTION_OPACITY_STEP        5
+#define COMP_SCREEN_OPTION_UNREDIRECT_FS       6
+#define COMP_SCREEN_OPTION_DEFAULT_ICON        7
+#define COMP_SCREEN_OPTION_SYNC_TO_VBLANK      8
+#define COMP_SCREEN_OPTION_NUM		       9
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -1265,7 +1266,8 @@ typedef struct _CompGroup {
 typedef struct _CompStartupSequence {
     struct _CompStartupSequence *next;
     SnStartupSequence		*sequence;
-    unsigned int		viewport;
+    unsigned int		viewportX;
+    unsigned int		viewportY;
 } CompStartupSequence;
 
 typedef struct _CompFBConfig {
@@ -1319,7 +1321,9 @@ struct _CompScreen {
     int		      width;
     int		      height;
     int		      x;
-    int		      size;
+    int		      y;
+    int		      hsize;		/* Number of horizontal viewports */
+    int		      vsize;		/* Number of vertical viewports */
     REGION	      region;
     Region	      damage;
     unsigned long     damageMask;
@@ -1589,6 +1593,7 @@ runCommand (CompScreen *s,
 void
 moveScreenViewport (CompScreen *s,
 		    int	       tx,
+		    int	       ty,
 		    Bool       sync);
 
 void
@@ -1723,7 +1728,8 @@ struct _CompWindow {
     int		      destroyRefCnt;
     int		      unmapRefCnt;
 
-    unsigned int initialViewport;
+    unsigned int initialViewportX;
+    unsigned int initialViewportY;
 
     Bool placed;
     Bool minimized;
@@ -2063,8 +2069,10 @@ unredirectWindow (CompWindow *w);
 void
 redirectWindow (CompWindow *w);
 
-int
-defaultViewportForWindow (CompWindow *w);
+void
+defaultViewportForWindow (CompWindow *w,
+			  int	     *vx,
+			  int        *vy);
 
 CompIcon *
 getWindowIcon (CompWindow *w,
