@@ -119,9 +119,9 @@ if test "x$use_gconf" = "xyes"; then
   if test x"$GCONFTOOL" = xno; then
     AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
   fi
-
-  AM_GCONF_SOURCE_2
 fi
+
+AM_GCONF_SOURCE_2
 
 AM_CONDITIONAL(GCONF_PLUGIN, test "x$use_gconf" = "xyes")
 if test "$use_gconf" = yes; then
