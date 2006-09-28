@@ -230,6 +230,9 @@ if test "x$use_gtk" = "xyes"; then
 
     windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
     windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`
+  else
+    use_metacity="no"
+    use_gnome="no"
   fi
 fi
 
