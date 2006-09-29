@@ -364,6 +364,14 @@ gboolean (*theme_calc_decoration_size)   (decor_t *d,
 					  int     *width,
 					  int     *height);
 gint     (*theme_calc_titlebar_height)   (gint    text_height);
+void     (*theme_get_button_position)    (decor_t *d,
+					  gint    i,
+					  gint	  width,
+					  gint	  height,
+					  gint    *x,
+					  gint    *y,
+					  gint    *w,
+					  gint    *h);
 
 typedef void (*event_callback) (WnckWindow *win, XEvent *event);
 
@@ -2003,16 +2011,82 @@ meta_button_state_for_button_type (decor_t	  *d,
 }
 
 static void
+meta_get_decoration_geometry (decor_t		*d,
+			      MetaTheme	        *theme,
+			      MetaFrameFlags    *flags,
+			      MetaFrameGeometry *fgeom,
+			      MetaButtonLayout  *button_layout,
+			      GdkRectangle      *clip)
+{
+    gint left_width, right_width, top_height, bottom_height;
+
+    button_layout->left_buttons[0] = META_BUTTON_FUNCTION_MENU;
+    button_layout->left_buttons[1] = META_BUTTON_FUNCTION_LAST;
+    button_layout->left_buttons[2] = META_BUTTON_FUNCTION_LAST;
+    button_layout->left_buttons[3] = META_BUTTON_FUNCTION_LAST;
+
+    button_layout->right_buttons[0] = META_BUTTON_FUNCTION_MINIMIZE;
+    button_layout->right_buttons[1] = META_BUTTON_FUNCTION_MAXIMIZE;
+    button_layout->right_buttons[2] = META_BUTTON_FUNCTION_CLOSE;
+    button_layout->right_buttons[3] = META_BUTTON_FUNCTION_LAST;
+
+    *flags = 0;
+
+    if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
+	*flags |= META_FRAME_ALLOWS_DELETE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
+	*flags |= META_FRAME_ALLOWS_MINIMIZE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
+	*flags |= META_FRAME_ALLOWS_MAXIMIZE;
+
+    *flags |= META_FRAME_ALLOWS_MENU;
+    *flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
+    *flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
+    *flags |= META_FRAME_ALLOWS_MOVE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
+	*flags |= META_FRAME_ALLOWS_MAXIMIZE;
+
+    if (d->active)
+	*flags |= META_FRAME_HAS_FOCUS;
+
+    meta_theme_get_frame_borders (theme,
+				  META_FRAME_TYPE_NORMAL,
+				  text_height,
+				  *flags,
+				  &top_height,
+				  &bottom_height,
+				  &left_width,
+				  &right_width);
+
+    clip->x	= left_space - left_width;
+    clip->y	= top_space + titlebar_height - top_height;
+    clip->width  = d->width - right_space + right_width - clip->x;
+    clip->height = d->height - bottom_space + bottom_height - clip->y;
+
+    meta_theme_calc_geometry (theme,
+			      META_FRAME_TYPE_NORMAL,
+			      text_height,
+			      *flags,
+			      clip->width - left_width - right_width,
+			      clip->height - top_height - bottom_height,
+			      button_layout,
+			      fgeom);
+}
+
+static void
 meta_draw_window_decoration (decor_t *d)
 {
     MetaButtonState   button_states[META_BUTTON_TYPE_LAST];
     MetaButtonLayout  button_layout;
     MetaFrameGeometry fgeom;
+    MetaFrameFlags    flags;
     MetaTheme	      *theme;
     GtkStyle	      *style;
-    MetaFrameFlags    flags = 0;
     cairo_t	      *cr;
-    gint	      i, left_width, right_width, top_height, bottom_height;
+    gint	      i;
     GdkRectangle      clip, rect;
     GdkDrawable       *drawable;
     Region	      region;
@@ -2033,60 +2107,13 @@ meta_draw_window_decoration (decor_t *d)
 
     theme = meta_theme_get_current ();
 
-    button_layout.left_buttons[0] = META_BUTTON_FUNCTION_MENU;
-    button_layout.left_buttons[1] = META_BUTTON_FUNCTION_LAST;
-    button_layout.left_buttons[2] = META_BUTTON_FUNCTION_LAST;
-    button_layout.left_buttons[3] = META_BUTTON_FUNCTION_LAST;
-
-    button_layout.right_buttons[0] = META_BUTTON_FUNCTION_MINIMIZE;
-    button_layout.right_buttons[1] = META_BUTTON_FUNCTION_MAXIMIZE;
-    button_layout.right_buttons[2] = META_BUTTON_FUNCTION_CLOSE;
-    button_layout.right_buttons[3] = META_BUTTON_FUNCTION_LAST;
-
-    if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
-	flags |= META_FRAME_ALLOWS_DELETE;
-
-    if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
-	flags |= META_FRAME_ALLOWS_MINIMIZE;
-
-    if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
-	flags |= META_FRAME_ALLOWS_MAXIMIZE;
-
-    flags |= META_FRAME_ALLOWS_MENU;
-    flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
-    flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
-    flags |= META_FRAME_ALLOWS_MOVE;
-
-    if (d->active)
-	flags |= META_FRAME_HAS_FOCUS;
+    meta_get_decoration_geometry (d, theme, &flags, &fgeom, &button_layout,
+				  &clip);
 
     for (i = 0; i < META_BUTTON_TYPE_LAST; i++)
 	button_states[i] = meta_button_state_for_button_type (d, i);
 
-    meta_theme_get_frame_borders (theme,
-				  META_FRAME_TYPE_NORMAL,
-				  text_height,
-				  flags,
-				  &top_height,
-				  &bottom_height,
-				  &left_width,
-				  &right_width);
-
-    clip.x	= left_space - left_width;
-    clip.y	= top_space + titlebar_height - top_height;
-    clip.width  = d->width - right_space + right_width - clip.x;
-    clip.height = d->height - bottom_space + bottom_height - clip.y;
-
     drawable = d->buffer_pixmap ? d->buffer_pixmap : d->pixmap;
-
-    meta_theme_calc_geometry (theme,
-			      META_FRAME_TYPE_NORMAL,
-			      text_height,
-			      flags,
-			      clip.width - left_width - right_width,
-			      clip.height - top_height - bottom_height,
-			      &button_layout,
-			      &fgeom);
 
     region = meta_get_window_region (&fgeom, clip.width, clip.height);
 
@@ -2110,8 +2137,10 @@ meta_draw_window_decoration (decor_t *d)
 			       clip.y,
 			       META_FRAME_TYPE_NORMAL,
 			       flags,
-			       clip.width - left_width - right_width,
-			       clip.height - top_height - bottom_height,
+			       clip.width - fgeom.left_width -
+			       fgeom.right_width,
+			       clip.height - fgeom.top_height -
+			       fgeom.bottom_height,
 			       d->layout,
 			       text_height,
 			       &button_layout,
@@ -2748,13 +2777,73 @@ get_mwm_prop (Window xwindow)
 }
 
 static void
+get_button_position (decor_t *d,
+		     gint    i,
+		     gint    width,
+		     gint    height,
+		     gint    *x,
+		     gint    *y,
+		     gint    *w,
+		     gint    *h)
+{
+    *x = bpos[i].x + bpos[i].xw * width;
+    *y = bpos[i].y + bpos[i].yh * height + bpos[i].yth * (titlebar_height - 17);
+    *w = bpos[i].w + bpos[i].ww * width;
+    *h = bpos[i].h + bpos[i].hh * height + bpos[i].hth + (titlebar_height - 17);
+
+    *x -= 10 + 16 * i;
+}
+
+#ifdef USE_METACITY
+static void
+meta_get_button_position (decor_t *d,
+			  gint    i,
+			  gint	  width,
+			  gint	  height,
+			  gint    *x,
+			  gint    *y,
+			  gint    *w,
+			  gint    *h)
+{
+    MetaButtonLayout  button_layout;
+    MetaFrameGeometry fgeom;
+    MetaFrameFlags    flags;
+    MetaTheme	      *theme;
+    GdkRectangle      clip;
+    MetaButtonSpace   *space;
+
+    theme = meta_theme_get_current ();
+
+    meta_get_decoration_geometry (d, theme, &flags, &fgeom, &button_layout,
+				  &clip);
+
+    switch (i) {
+    case 2:
+	space = &fgeom.min_rect;
+	break;
+    case 1:
+	space = &fgeom.max_rect;
+	break;
+    case 0:
+    default:
+	space = &fgeom.close_rect;
+	break;
+    }
+
+    *x = space->clickable.x;
+    *y = space->clickable.y;
+    *w = space->clickable.width;
+    *h = space->clickable.height;
+}
+#endif
+
+static void
 update_event_windows (WnckWindow *win)
 {
     Display *xdisplay;
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     gint    x0, y0, width, height, x, y, w, h;
     gint    i, j, k, l;
-    gint    button_x = 10;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
@@ -2821,13 +2910,7 @@ update_event_windows (WnckWindow *win)
 
 	if (d->actions & button_actions[i])
 	{
-	    x = bpos[i].x + bpos[i].xw * width;
-	    y = bpos[i].y + bpos[i].yh * height + bpos[i].yth * (titlebar_height - 17);
-	    w = bpos[i].w + bpos[i].ww * width;
-	    h = bpos[i].h + bpos[i].hh * height + bpos[i].hth + (titlebar_height - 17);
-
-	    x -= button_x;
-	    button_x += 16;
+	    (*theme_get_button_position) (d, i, width, height, &x, &y, &w, &h);
 
 	    XMapWindow (xdisplay, d->button_windows[i]);
 	    XMoveResizeWindow (xdisplay, d->button_windows[i], x, y, w, h);
@@ -5789,12 +5872,14 @@ theme_changed (GConfClient *client)
 	theme_draw_window_decoration = meta_draw_window_decoration;
 	theme_calc_decoration_size   = meta_calc_decoration_size;
 	theme_calc_titlebar_height   = meta_calc_titlebar_height;
+	theme_get_button_position    = meta_get_button_position;
     }
     else
     {
 	theme_draw_window_decoration = draw_window_decoration;
 	theme_calc_decoration_size   = calc_decoration_size;
 	theme_calc_titlebar_height   = calc_titlebar_height;
+	theme_get_button_position    = get_button_position;
     }
 
     return TRUE;
@@ -5802,6 +5887,7 @@ theme_changed (GConfClient *client)
     theme_draw_window_decoration = draw_window_decoration;
     theme_calc_decoration_size   = calc_decoration_size;
     theme_calc_titlebar_height   = calc_titlebar_height;
+    theme_get_button_position    = get_button_position;
 
     return FALSE;
 #endif
