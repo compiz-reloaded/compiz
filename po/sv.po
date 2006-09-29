@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-13 10:25+0000\n"
+"POT-Creation-Date: 2006-09-29 14:36-0400\n"
 "PO-Revision-Date: 2006-09-19 18:09+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -15,1460 +15,1793 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plugins/compiz.schemas.in.in.h:1
-msgid "A keybinding that when invoked, will run the shell command identified by command0"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando0"
-
-#: ../plugins/compiz.schemas.in.in.h:2
-msgid "A keybinding that when invoked, will run the shell command identified by command1"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando1"
-
-#: ../plugins/compiz.schemas.in.in.h:3
-msgid "A keybinding that when invoked, will run the shell command identified by command10"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando10"
-
-#: ../plugins/compiz.schemas.in.in.h:4
-msgid "A keybinding that when invoked, will run the shell command identified by command11"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando11"
-
-#: ../plugins/compiz.schemas.in.in.h:5
-msgid "A keybinding that when invoked, will run the shell command identified by command2"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando2"
-
-#: ../plugins/compiz.schemas.in.in.h:6
-msgid "A keybinding that when invoked, will run the shell command identified by command3"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando3"
-
-#: ../plugins/compiz.schemas.in.in.h:7
-msgid "A keybinding that when invoked, will run the shell command identified by command4"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando4"
-
-#: ../plugins/compiz.schemas.in.in.h:8
-msgid "A keybinding that when invoked, will run the shell command identified by command5"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando5"
-
-#: ../plugins/compiz.schemas.in.in.h:9
-msgid "A keybinding that when invoked, will run the shell command identified by command6"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando6"
-
-#: ../plugins/compiz.schemas.in.in.h:10
-msgid "A keybinding that when invoked, will run the shell command identified by command7"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando7"
-
-#: ../plugins/compiz.schemas.in.in.h:11
-msgid "A keybinding that when invoked, will run the shell command identified by command8"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando8"
-
-#: ../plugins/compiz.schemas.in.in.h:12
-msgid "A keybinding that when invoked, will run the shell command identified by command9"
-msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando9"
-
-#: ../plugins/compiz.schemas.in.in.h:13
-msgid "Acceleration"
-msgstr "Accelerering"
-
-#: ../plugins/compiz.schemas.in.in.h:14
-msgid "Active Plugins"
-msgstr "Aktiva insticksmoduler"
-
-#: ../plugins/compiz.schemas.in.in.h:15
-msgid "Adds water effects to different desktop actions"
-msgstr "Lägger till vatteneffekter till olika skrivbordsåtgärder"
-
-#: ../plugins/compiz.schemas.in.in.h:16
-msgid "Advance to next slide"
-msgstr "Fortsätt till nästa bild"
-
-#: ../plugins/compiz.schemas.in.in.h:17
-msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr "Tillåt att inte utritning av helskärmsfönster omdirigeras till bilder utanför skärmen"
-
-#: ../plugins/compiz.schemas.in.in.h:18
-msgid "Amount of brightness in percent (0-100)"
-msgstr "Ljusstyrka i procent (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:19
-msgid "Amount of opacity in percent (0-100)"
-msgstr "Opak i procent (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:20
-msgid "Amount of saturation in percent (0-100)"
-msgstr "Färgmättnad i procent (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:21
-msgid "Animate Skydome"
-msgstr "Animera Skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:22
-msgid "Animate skydome when rotating cube"
-msgstr "Animera skydome när kub roterar"
-
-#: ../plugins/compiz.schemas.in.in.h:23
-msgid "Application Switcher"
-msgstr "Programväxlare"
-
-#: ../plugins/compiz.schemas.in.in.h:24
-msgid "Audible Bell"
-msgstr "Ljudklocka"
-
-#: ../plugins/compiz.schemas.in.in.h:25
-msgid "Audible system beep"
-msgstr "Systemljudklocka"
-
-#: ../plugins/compiz.schemas.in.in.h:26
-msgid "Auto-Raise"
-msgstr "Automatisk höjning"
-
-#: ../plugins/compiz.schemas.in.in.h:27
-msgid "Auto-Raise Delay"
-msgstr "Fördröjning för automatisk höjning"
-
-#: ../plugins/compiz.schemas.in.in.h:28
-msgid "Automatic detection of refresh rate"
-msgstr "Automatisk identifiering av uppdateringsfrekvens"
-
-#: ../plugins/compiz.schemas.in.in.h:29
-msgid "Brightness"
-msgstr "Ljusstyrka"
-
-#: ../plugins/compiz.schemas.in.in.h:30
-msgid "Bring To Front"
-msgstr "Lägg överst"
-
-#: ../plugins/compiz.schemas.in.in.h:31
-msgid "Bring selected window to front"
-msgstr "Lägg markerat fönster överst"
-
-#: ../plugins/compiz.schemas.in.in.h:32
-msgid "Click To Focus"
-msgstr "Klicka för fokus"
-
-#: ../plugins/compiz.schemas.in.in.h:33
-msgid "Click on window moves input focus to it"
-msgstr "Klicka på fönstret flyttar inmatningsfokus till det"
-
-#: ../plugins/compiz.schemas.in.in.h:34
-msgid "Close Window"
-msgstr "Stäng fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:35
-msgid "Close active window"
-msgstr "Stäng aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:36
-msgid "Color of top and bottom sides of the cube"
-msgstr "Färg på över- och undersidorna av kuben"
-
-#: ../plugins/compiz.schemas.in.in.h:37
-msgid "Command line 0"
-msgstr "Kommandorad 0"
-
-#: ../plugins/compiz.schemas.in.in.h:38
-msgid "Command line 1"
-msgstr "Kommandorad 1"
-
-#: ../plugins/compiz.schemas.in.in.h:39
-msgid "Command line 10"
-msgstr "Kommandorad 10"
-
-#: ../plugins/compiz.schemas.in.in.h:40
-msgid "Command line 11"
-msgstr "Kommandorad 11"
-
-#: ../plugins/compiz.schemas.in.in.h:41
-msgid "Command line 2"
-msgstr "Kommandorad 2"
-
-#: ../plugins/compiz.schemas.in.in.h:42
-msgid "Command line 3"
-msgstr "Kommandorad 3"
-
-#: ../plugins/compiz.schemas.in.in.h:43
-msgid "Command line 4"
-msgstr "Kommandorad 4"
-
-#: ../plugins/compiz.schemas.in.in.h:44
-msgid "Command line 5"
-msgstr "Kommandorad 5"
-
-#: ../plugins/compiz.schemas.in.in.h:45
-msgid "Command line 6"
-msgstr "Kommandorad 6"
-
-#: ../plugins/compiz.schemas.in.in.h:46
-msgid "Command line 7"
-msgstr "Kommandorad 7"
-
-#: ../plugins/compiz.schemas.in.in.h:47
-msgid "Command line 8"
-msgstr "Kommandorad 8"
-
-#: ../plugins/compiz.schemas.in.in.h:48
-msgid "Command line 9"
-msgstr "Kommandorad 9"
-
-#: ../plugins/compiz.schemas.in.in.h:49
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command0 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:50
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command1 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:51
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command10 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:52
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command11 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:53
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command2 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:54
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command3 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:55
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command4 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:56
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command5 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:57
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command6 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:58
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command7 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:59
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command8 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:60
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "Kommandorad som ska köras i ett skal när run_command9 anropas"
-
-#: ../plugins/compiz.schemas.in.in.h:61
-msgid "Constrain Y"
-msgstr "Begränsa Y"
-
-#: ../plugins/compiz.schemas.in.in.h:62
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Begränsa Y-koordinat till arbetsyta"
-
-#: ../plugins/compiz.schemas.in.in.h:63
-msgid "Corners"
-msgstr "Hörn"
-
-#: ../plugins/compiz.schemas.in.in.h:64
+#: plugins/cube.c:843
 msgid "Cube Color"
 msgstr "Kubfärg"
 
-#: ../plugins/compiz.schemas.in.in.h:65
-msgid "Darken Background"
-msgstr "Mörka bakgrunden"
+#: plugins/cube.c:844
+msgid "Color of top and bottom sides of the cube"
+msgstr "Färg på över- och undersidorna av kuben"
 
-#: ../plugins/compiz.schemas.in.in.h:66
-msgid "Darken background when scaling windows"
-msgstr "Mörka bakgrunden vid fönsterskalning"
-
-#: ../plugins/compiz.schemas.in.in.h:67
-msgid "Decrease Opacity"
-msgstr "Minska opakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:68
-msgid "Decrease window opacity"
-msgstr "Minska fönstret opakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:69
-msgid "Default Icon"
-msgstr "Standardikon"
-
-#: ../plugins/compiz.schemas.in.in.h:70
-msgid "Default window icon image"
-msgstr "Standardikonbild för fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:71
-msgid "Delay (in ms) between each rain-drop (0-3600000)"
-msgstr "Fördröjning (i ms) mellan varje regndroppe (0-3600000)"
-
-#: ../plugins/compiz.schemas.in.in.h:72
-msgid "Desktop Cube"
-msgstr "Skrivbordskub"
-
-#: ../plugins/compiz.schemas.in.in.h:73
-msgid "Detect Refresh Rate"
-msgstr "Detektera uppdateringsfrekvens"
-
-#: ../plugins/compiz.schemas.in.in.h:74
-msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-msgstr "Avstånd som skrivbordet ska zoomas ut till vid växling av fönster (0.0-5.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:75
-msgid "Do not modify"
-msgstr "Ändra inte"
-
-#: ../plugins/compiz.schemas.in.in.h:76
-msgid "Drop shadow X offset (-16-16)"
-msgstr "Skuggkastning X-position (-16-16)"
-
-#: ../plugins/compiz.schemas.in.in.h:77
-msgid "Drop shadow Y offset (-16-16)"
-msgstr "Skuggkastning Y-position (-16-16)"
-
-#: ../plugins/compiz.schemas.in.in.h:78
-msgid "Drop shadow opacity (0.01-6.00)"
-msgstr "Opakhet för skuggkastning (0.01-6.00)"
-
-#: ../plugins/compiz.schemas.in.in.h:79
-msgid "Drop shadow radius (0.0-48.0)"
-msgstr "Radie för skuggkastning (0.0-48.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:80
-msgid "Edge Flip DnD"
-msgstr "Kantvänd DnD"
-
-#: ../plugins/compiz.schemas.in.in.h:81
-msgid "Edge Flip Move"
-msgstr "Kantvänd flyttning"
-
-#: ../plugins/compiz.schemas.in.in.h:82
-msgid "Edge Flip Pointer"
-msgstr "Kantvänd pekare"
-
-#: ../plugins/compiz.schemas.in.in.h:83
-msgid "Enable pointer water effects"
-msgstr "Aktivera vatteneffekt för muspekare"
-
-#: ../plugins/compiz.schemas.in.in.h:84
-msgid "Fade Speed"
-msgstr "Toningshastighet"
-
-#: ../plugins/compiz.schemas.in.in.h:85
-msgid "Fade effect on system beep"
-msgstr "Toningseffekt vid systemsignal"
-
-#: ../plugins/compiz.schemas.in.in.h:86
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "Tona in fönster när de kopplas och tona ut fönster när de kopplas loss"
-
-#: ../plugins/compiz.schemas.in.in.h:87
-msgid "Fading Windows"
-msgstr "Tonande fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:88
-msgid "Filter Linear"
-msgstr "Filtrera linjärt"
-
-#: ../plugins/compiz.schemas.in.in.h:89
-msgid "Flip Time"
-msgstr "Vändtid"
-
-#: ../plugins/compiz.schemas.in.in.h:90
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr "Vänd till nästa skrivbordsvy när objekt dras till skärmens kant"
-
-#: ../plugins/compiz.schemas.in.in.h:91
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
-
-#: ../plugins/compiz.schemas.in.in.h:92
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr "Vänd till nästa skrivbordsvy när fönster flyttas till skärmens kant"
-
-#: ../plugins/compiz.schemas.in.in.h:93
-msgid "Focus Effect"
-msgstr "Fokuseffekt"
-
-#: ../plugins/compiz.schemas.in.in.h:94
-msgid "Focus Window Effect (None, Shiver)"
-msgstr "Fokusfönstereffekt (Ingen, Skakning)"
-
-#: ../plugins/compiz.schemas.in.in.h:95
-msgid "Focus Window Types"
-msgstr "Fokusera fönstertyper"
-
-#: ../plugins/compiz.schemas.in.in.h:96
-msgid "Focus window when mouse moves over them"
-msgstr "Fokusera fönster när musen flyttar sig ovanför"
-
-#: ../plugins/compiz.schemas.in.in.h:97
-msgid "Fold Acceleration (1.0-20.0)"
-msgstr "Vikningsacceleration (1.0-20.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:98
-msgid "Fold Speed (0.1-50.0)"
-msgstr "Vikningshastighet (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:99
-msgid "Fold Timestep (0.1-50.0)"
-msgstr "Tidsintervall för vikning (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:100
-msgid "Friction"
-msgstr "Friktion"
-
-#: ../plugins/compiz.schemas.in.in.h:101
-msgid "Fullscreen Visual Bell"
-msgstr "Visuell helskärmssignal"
-
-#: ../plugins/compiz.schemas.in.in.h:102
-msgid "Fullscreen fade effect on system beep"
-msgstr "Helskärmstoningseffekt vid systemsignal"
-
-#: ../plugins/compiz.schemas.in.in.h:103
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "Generera mipmappar när det är möjligt för skalning av högre kvalitet"
-
-#: ../plugins/compiz.schemas.in.in.h:104
-msgid "Go back to previous slide"
-msgstr "Gå tillbaka till föregående diabild"
-
-#: ../plugins/compiz.schemas.in.in.h:105
-msgid "Grab Window Types"
-msgstr "Fånga fönstertyper"
-
-#: ../plugins/compiz.schemas.in.in.h:106
-msgid "Grid Resolution"
-msgstr "Rutnätsupplösning"
-
-#: ../plugins/compiz.schemas.in.in.h:107
-msgid "Hide Skip Taskbar Windows"
-msgstr "Dölj fönster inte i verktygsrad"
-
-#: ../plugins/compiz.schemas.in.in.h:108
-msgid "Hide all windows and focus desktop"
-msgstr "Dölj alla fönster och fokusera på skrivbord"
-
-#: ../plugins/compiz.schemas.in.in.h:109
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "Dölj fönster som inte är i verktygsraden vid visa skrivbordsläget"
-
-#: ../plugins/compiz.schemas.in.in.h:110
-msgid "Hot corners that should initiate scale mode (TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr "Varma hörn som ska initiera skalningsläge (Övrevänster, Övrehöger, Nedrevänster, Nedrehöger)"
-
-#: ../plugins/compiz.schemas.in.in.h:111
-msgid "Icon"
-msgstr "Ikon"
-
-#: ../plugins/compiz.schemas.in.in.h:112
-msgid "Image files"
-msgstr "Bildfiler"
-
-#: ../plugins/compiz.schemas.in.in.h:113
-msgid "Image to use as texture for the skydome"
-msgstr "Bild att använda som textur för skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:114
-msgid "Increase Opacity"
-msgstr "Öka opakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:115
-msgid "Increase window opacity"
-msgstr "Öka fönsteropakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:116
-msgid "Initiate"
-msgstr "Initiera"
-
-#: ../plugins/compiz.schemas.in.in.h:117
-msgid "Initiate All Windows"
-msgstr "Initiera alla fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:118
-msgid "Initiate Keyboard Window Move"
-msgstr "Initiera fönsterflytt med tangentbord"
-
-#: ../plugins/compiz.schemas.in.in.h:119
-msgid "Initiate Keyboard Window Resize"
-msgstr "Initiera fönsterskalning med tangentbord"
-
-#: ../plugins/compiz.schemas.in.in.h:120
-msgid "Initiate Window Move"
-msgstr "Initiera fönsterflyttning"
-
-#: ../plugins/compiz.schemas.in.in.h:121
-msgid "Initiate Window Picker"
-msgstr "Initiera fönsterväljare"
-
-#: ../plugins/compiz.schemas.in.in.h:122
-msgid "Initiate Window Resize"
-msgstr "Initiera fönsterskalning"
-
-#: ../plugins/compiz.schemas.in.in.h:123
-msgid "Initiate Window Switcher"
-msgstr "Initiera fönsterväxlare"
-
-#: ../plugins/compiz.schemas.in.in.h:124
+#: plugins/cube.c:853
 msgid "Inside Cube"
 msgstr "I kuben"
 
-#: ../plugins/compiz.schemas.in.in.h:125
+#: plugins/cube.c:854
 msgid "Inside cube"
 msgstr "I kuben"
 
-#: ../plugins/compiz.schemas.in.in.h:126
-msgid "Interval before raising selected windows (0-10000)"
-msgstr "Intervall innan markerade fönster höjs (0-10000)"
-
-#: ../plugins/compiz.schemas.in.in.h:127
-msgid "Invert Y axis for pointer movement"
-msgstr "Invertera Y-axeln för pekarens rörelser"
-
-#: ../plugins/compiz.schemas.in.in.h:128
-msgid "Layout and start transforming windows"
-msgstr "Lägg ut och påbörja fönstertransformering"
-
-#: ../plugins/compiz.schemas.in.in.h:129
-msgid "Lighting"
-msgstr "Ljussättning"
-
-#: ../plugins/compiz.schemas.in.in.h:130
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "Lista över PNG- och SVG-filer som ska ritas ut på översta ytan av kuben"
-
-#: ../plugins/compiz.schemas.in.in.h:131
-msgid "List of currently active plugins"
-msgstr "Lista över för närvarande aktiva insticksmoduler"
-
-#: ../plugins/compiz.schemas.in.in.h:132
-msgid "Lower Window"
-msgstr "Sänk fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:133
-msgid "Lower window beneath other windows"
-msgstr "Sänk fönstret under andra fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:134
-msgid "Map Effect"
-msgstr "Kopplingseffekt"
-
-#: ../plugins/compiz.schemas.in.in.h:135
-msgid "Map Window Effect (None, Shiver)"
-msgstr "Fönsterkopplingseffekt (Ingen, Skaka)"
-
-#: ../plugins/compiz.schemas.in.in.h:136
-msgid "Map Window Types"
-msgstr "Koppla fönstertyper"
-
-#: ../plugins/compiz.schemas.in.in.h:137
-msgid "Maximize Effect"
-msgstr "Maximeringseffekt"
-
-#: ../plugins/compiz.schemas.in.in.h:138
-msgid "Maximize Window"
-msgstr "Maximera fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:139
-msgid "Maximize Window Horizontally"
-msgstr "Maximera fönster horisontellt"
-
-#: ../plugins/compiz.schemas.in.in.h:140
-msgid "Maximize Window Vertically"
-msgstr "Maximera fönster vertikalt"
-
-#: ../plugins/compiz.schemas.in.in.h:141
-msgid "Maximize active window"
-msgstr "Maximera aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:142
-msgid "Maximize active window horizontally"
-msgstr "Maximera aktivt fönster horisontellt"
-
-#: ../plugins/compiz.schemas.in.in.h:143
-msgid "Maximize active window vertically"
-msgstr "Maximera aktivt fönster vertikalt"
-
-#: ../plugins/compiz.schemas.in.in.h:144
-msgid "Minimize Effect"
-msgstr "Minimeringseffekt"
-
-#: ../plugins/compiz.schemas.in.in.h:145
-msgid "Minimize Window"
-msgstr "Minimera fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:146
-msgid "Minimize active window"
-msgstr "Minimera aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:147
-msgid "Minimize speed (0.1-50.0)"
-msgstr "Minimeringshastighet (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:148
-msgid "Minimize timestep (0.1-50.0)"
-msgstr "Tidsintervall för minimering (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:149
-msgid "Minimized"
-msgstr "Minimerat"
-
-#: ../plugins/compiz.schemas.in.in.h:150
-msgid "Minimum Grid Size"
-msgstr "Maximal rutnätsstorlek"
-
-#: ../plugins/compiz.schemas.in.in.h:151
-msgid "Minimum Vertex Grid Size (4-128)"
-msgstr "Minimal vertexrutnätsstorlek (4-128)"
-
-#: ../plugins/compiz.schemas.in.in.h:152
-msgid "Mipmap"
-msgstr "Mipmap"
-
-#: ../plugins/compiz.schemas.in.in.h:153
-msgid "Modifier key to select previous window"
-msgstr "Snabbtangent för att välja föregående fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:154
-msgid "Modifier to show switcher for all windows"
-msgstr "Snabbtangent för att visa växlare för alla fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:155
-msgid "Move Window"
-msgstr "Flytta fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:156
-msgid "Move Window Types"
-msgstr "Flytta fönstertyper"
-
-#: ../plugins/compiz.schemas.in.in.h:157
-msgid "Move window"
-msgstr "Flytta fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:158
-msgid "Next Slide"
-msgstr "Nästa diabild"
-
-#: ../plugins/compiz.schemas.in.in.h:159
-msgid "Offset Scale"
-msgstr "Positionsskala"
-
-#: ../plugins/compiz.schemas.in.in.h:160
-msgid "Opacity"
-msgstr "Opakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:161
-msgid "Opacity Step"
-msgstr "Intervall för opakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:162
-msgid "Opacity change step (1-50)"
-msgstr "Ändringsintervall för opakhet (1-50)"
-
-#: ../plugins/compiz.schemas.in.in.h:163
-msgid "Opacity level of moving windows (1-100)"
-msgstr "Opaknivå för flyttande fönster (1-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:164
-msgid "Open window menu"
-msgstr "Öppna fönstermeny"
-
-#: ../plugins/compiz.schemas.in.in.h:165
-msgid "Overlay Icon"
-msgstr "Lägg ikoner över"
-
-#: ../plugins/compiz.schemas.in.in.h:166
-msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
-msgstr "Lägg en ikon över fönster när de är skalade (Ingen, Emblem, Stor)"
-
-#: ../plugins/compiz.schemas.in.in.h:167
-msgid "Place Windows"
-msgstr "Placera fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:168
-msgid "Place windows at appropriate positions when mapped"
-msgstr "Placera fönster på lämpliga positioner när de kopplas"
-
-#: ../plugins/compiz.schemas.in.in.h:169
-msgid "Place windows on cube"
-msgstr "Placera fönster på kuben"
-
-#: ../plugins/compiz.schemas.in.in.h:170
-msgid "Plugins that this must load before"
-msgstr "Insticksmoduler som måste läsas in före"
-
-#: ../plugins/compiz.schemas.in.in.h:171
-msgid "Plugins that this requires"
-msgstr "Insticksmoduler som den här kräver"
-
-#: ../plugins/compiz.schemas.in.in.h:172
-msgid "Pointer Invert Y"
-msgstr "Invertera pekarens Y-axel"
-
-#: ../plugins/compiz.schemas.in.in.h:173
-msgid "Pointer Sensitivity"
-msgstr "Muspekarkänslighet"
-
-#: ../plugins/compiz.schemas.in.in.h:174
-msgid "Prev Window"
-msgstr "Föregående fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:175
-msgid "Previous Slide"
-msgstr "Föregående diabild"
-
-#: ../plugins/compiz.schemas.in.in.h:176
-msgid "Rain Delay"
-msgstr "Regnfördröjning"
-
-#: ../plugins/compiz.schemas.in.in.h:177
-msgid "Raise On Click"
-msgstr "Höj vid klick"
-
-#: ../plugins/compiz.schemas.in.in.h:178
-msgid "Raise selected windows after interval"
-msgstr "Höj markerade fönster efter intervall"
-
-#: ../plugins/compiz.schemas.in.in.h:179
-msgid "Raise windows when clicked"
-msgstr "Höj fönster när de klickas på"
-
-#: ../plugins/compiz.schemas.in.in.h:180
-msgid "Refresh Rate"
-msgstr "Uppdateringsfrekvens"
-
-#: ../plugins/compiz.schemas.in.in.h:181
-msgid "Render skydome"
-msgstr "Rita ut skydome"
-
-#: ../plugins/compiz.schemas.in.in.h:182
-msgid "Resize Window"
-msgstr "Skala fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:183
-msgid "Resize window"
-msgstr "Skala fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:184
-msgid "Return from scale view"
-msgstr "Återvänd från skalvy"
-
-#: ../plugins/compiz.schemas.in.in.h:185
-msgid "Rotate Cube"
-msgstr "Rotera kub"
-
-#: ../plugins/compiz.schemas.in.in.h:186
-msgid "Rotate Left"
-msgstr "Rotera åt vänster"
-
-#: ../plugins/compiz.schemas.in.in.h:187
-msgid "Rotate Left with Window"
-msgstr "Rotera åt vänster med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:188
-msgid "Rotate Right"
-msgstr "Rotera åt höger"
-
-#: ../plugins/compiz.schemas.in.in.h:189
-msgid "Rotate Right with Window"
-msgstr "Rotera åt höger med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:190
-msgid "Rotate To Face 1"
-msgstr "Rotera till yta 1"
-
-#: ../plugins/compiz.schemas.in.in.h:191
-msgid "Rotate To Face 1 with Window"
-msgstr "Rotera till yta 1 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:192
-msgid "Rotate To Face 10"
-msgstr "Rotera till yta 10"
-
-#: ../plugins/compiz.schemas.in.in.h:193
-msgid "Rotate To Face 10 with Window"
-msgstr "Rotera till yta 10 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:194
-msgid "Rotate To Face 11"
-msgstr "Rotera till yta 11"
-
-#: ../plugins/compiz.schemas.in.in.h:195
-msgid "Rotate To Face 11 with Window"
-msgstr "Rotera till yta 11 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:196
-msgid "Rotate To Face 12"
-msgstr "Rotera till yta 12"
-
-#: ../plugins/compiz.schemas.in.in.h:197
-msgid "Rotate To Face 12 with Window"
-msgstr "Rotera till yta 12 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:198
-msgid "Rotate To Face 2"
-msgstr "Rotera till yta 2"
-
-#: ../plugins/compiz.schemas.in.in.h:199
-msgid "Rotate To Face 2 with Window"
-msgstr "Rotera till yta 2 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:200
-msgid "Rotate To Face 3"
-msgstr "Rotera till yta 3"
-
-#: ../plugins/compiz.schemas.in.in.h:201
-msgid "Rotate To Face 3 with Window"
-msgstr "Rotera till yta 3 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:202
-msgid "Rotate To Face 4"
-msgstr "Rotera till yta 4"
-
-#: ../plugins/compiz.schemas.in.in.h:203
-msgid "Rotate To Face 4 with Window"
-msgstr "Rotera till yta 4 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:204
-msgid "Rotate To Face 5"
-msgstr "Rotera till yta 5"
-
-#: ../plugins/compiz.schemas.in.in.h:205
-msgid "Rotate To Face 5 with Window"
-msgstr "Rotera till yta 5 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:206
-msgid "Rotate To Face 6"
-msgstr "Rotera till yta 6"
-
-#: ../plugins/compiz.schemas.in.in.h:207
-msgid "Rotate To Face 6 with Window"
-msgstr "Rotera till yta 6 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:208
-msgid "Rotate To Face 7"
-msgstr "Rotera till yta 7"
-
-#: ../plugins/compiz.schemas.in.in.h:209
-msgid "Rotate To Face 7 with Window"
-msgstr "Rotera till yta 7 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:210
-msgid "Rotate To Face 8"
-msgstr "Rotera till yta 8"
-
-#: ../plugins/compiz.schemas.in.in.h:211
-msgid "Rotate To Face 8 with Window"
-msgstr "Rotera till yta 8 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:212
-msgid "Rotate To Face 9"
-msgstr "Rotera till yta 9"
-
-#: ../plugins/compiz.schemas.in.in.h:213
-msgid "Rotate To Face 9 with Window"
-msgstr "Rotera till yta 9 med fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:214
-msgid "Rotate desktop cube"
-msgstr "Rotera skrivbordskub"
-
-#: ../plugins/compiz.schemas.in.in.h:215
-msgid "Rotate left"
-msgstr "Rotera åt vänster"
-
-#: ../plugins/compiz.schemas.in.in.h:216
-msgid "Rotate left and bring active window along"
-msgstr "Rotera åt vänster och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:217
-msgid "Rotate right"
-msgstr "Rotera åt höger"
-
-#: ../plugins/compiz.schemas.in.in.h:218
-msgid "Rotate right and bring active window along"
-msgstr "Rotera åt höger och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:219
-msgid "Rotate to face 1"
-msgstr "Rotera till yta 1"
-
-#: ../plugins/compiz.schemas.in.in.h:220
-msgid "Rotate to face 1 and bring active window along"
-msgstr "Rotera till yta 1 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:221
-msgid "Rotate to face 10"
-msgstr "Rotera till yta 10"
-
-#: ../plugins/compiz.schemas.in.in.h:222
-msgid "Rotate to face 10 and bring active window along"
-msgstr "Rotera till yta 10 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:223
-msgid "Rotate to face 11"
-msgstr "Rotera till yta 11"
-
-#: ../plugins/compiz.schemas.in.in.h:224
-msgid "Rotate to face 11 and bring active window along"
-msgstr "Rotera till yta 11 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:225
-msgid "Rotate to face 12"
-msgstr "Rotera till yta 12"
-
-#: ../plugins/compiz.schemas.in.in.h:226
-msgid "Rotate to face 12 and bring active window along"
-msgstr "Rotera till yta 12 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:227
-msgid "Rotate to face 2"
-msgstr "Rotera till yta 2"
-
-#: ../plugins/compiz.schemas.in.in.h:228
-msgid "Rotate to face 2 and bring active window along"
-msgstr "Rotera till yta 2 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:229
-msgid "Rotate to face 3"
-msgstr "Rotera till yta 3"
-
-#: ../plugins/compiz.schemas.in.in.h:230
-msgid "Rotate to face 3 and bring active window along"
-msgstr "Rotera till yta 3 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:231
-msgid "Rotate to face 4"
-msgstr "Rotera till yta 4"
-
-#: ../plugins/compiz.schemas.in.in.h:232
-msgid "Rotate to face 4 and bring active window along"
-msgstr "Rotera till yta 4 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:233
-msgid "Rotate to face 5"
-msgstr "Rotera till yta 5"
-
-#: ../plugins/compiz.schemas.in.in.h:234
-msgid "Rotate to face 5 and bring active window along"
-msgstr "Rotera till yta 5 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:235
-msgid "Rotate to face 6"
-msgstr "Rotera till yta 6"
-
-#: ../plugins/compiz.schemas.in.in.h:236
-msgid "Rotate to face 6 and bring active window along"
-msgstr "Rotera till yta 6 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:237
-msgid "Rotate to face 7"
-msgstr "Rotera till yta 7"
-
-#: ../plugins/compiz.schemas.in.in.h:238
-msgid "Rotate to face 7 and bring active window along"
-msgstr "Rotera till yta 7 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:239
-msgid "Rotate to face 8"
-msgstr "Rotera till yta 8"
-
-#: ../plugins/compiz.schemas.in.in.h:240
-msgid "Rotate to face 8 and bring active window along"
-msgstr "Rotera till yta 8 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:241
-msgid "Rotate to face 9"
-msgstr "Rotera till yta 9"
-
-#: ../plugins/compiz.schemas.in.in.h:242
-msgid "Rotate to face 9 and bring active window along"
-msgstr "Rotera till yta 9 och ta med aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:243
-msgid "Rotation Acceleration (1.0-20.0)"
-msgstr "Roteringsacceleration (1.0-20.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:244
-msgid "Rotation Speed (0.1-50.0)"
-msgstr "Roteringshastighet (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:245
-msgid "Rotation Timestep (0.1-50.0)"
-msgstr "Tidsintervall för rotering (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:246
-msgid "Run Dialog"
-msgstr "Kördialog"
-
-#: ../plugins/compiz.schemas.in.in.h:247
-msgid "Run command 0"
-msgstr "Kör kommando 0"
-
-#: ../plugins/compiz.schemas.in.in.h:248
-msgid "Run command 1"
-msgstr "Kör kommando 1"
-
-#: ../plugins/compiz.schemas.in.in.h:249
-msgid "Run command 10"
-msgstr "Kör kommando 10"
-
-#: ../plugins/compiz.schemas.in.in.h:250
-msgid "Run command 11"
-msgstr "Kör kommando 11"
-
-#: ../plugins/compiz.schemas.in.in.h:251
-msgid "Run command 2"
-msgstr "Kör kommando 2"
-
-#: ../plugins/compiz.schemas.in.in.h:252
-msgid "Run command 3"
-msgstr "Kör kommando 3"
-
-#: ../plugins/compiz.schemas.in.in.h:253
-msgid "Run command 4"
-msgstr "Kör kommando 4"
-
-#: ../plugins/compiz.schemas.in.in.h:254
-msgid "Run command 5"
-msgstr "Kör kommando 5"
-
-#: ../plugins/compiz.schemas.in.in.h:255
-msgid "Run command 6"
-msgstr "Kör kommando 6"
-
-#: ../plugins/compiz.schemas.in.in.h:256
-msgid "Run command 7"
-msgstr "Kör kommando 7"
-
-#: ../plugins/compiz.schemas.in.in.h:257
-msgid "Run command 8"
-msgstr "Kör kommando 8"
-
-#: ../plugins/compiz.schemas.in.in.h:258
-msgid "Run command 9"
-msgstr "Kör kommando 9"
-
-#: ../plugins/compiz.schemas.in.in.h:259
-msgid "Saturation"
-msgstr "Färgmättnad"
-
-#: ../plugins/compiz.schemas.in.in.h:260
-msgid "Scale"
-msgstr "Skala"
-
-#: ../plugins/compiz.schemas.in.in.h:261
+#: plugins/cube.c:860
 msgid "Scale image"
 msgstr "Skala bild"
 
-#: ../plugins/compiz.schemas.in.in.h:262
+#: plugins/cube.c:861
 msgid "Scale images to cover top face of cube"
 msgstr "Skala bilder för att täcka övre ytan på kuben"
 
-#: ../plugins/compiz.schemas.in.in.h:263
-msgid "Scale speed (0.1-50.0)"
-msgstr "Skalningshastighet (0.1-50.0)"
+#: plugins/cube.c:867
+msgid "Image files"
+msgstr "Bildfiler"
 
-#: ../plugins/compiz.schemas.in.in.h:264
-msgid "Scale timestep (0.1-50.0)"
-msgstr "Tidsintervall för skalning (0.1-50.0)"
+#: plugins/cube.c:868
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"Lista över PNG- och SVG-filer som ska ritas ut på översta ytan av kuben"
 
-#: ../plugins/compiz.schemas.in.in.h:265
-msgid "Scale windows"
-msgstr "Skala fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:266
-msgid "Screen size multiplier for virtual size (4-32)"
-msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
-
-#: ../plugins/compiz.schemas.in.in.h:267
-msgid "Screenshot command line"
-msgstr "Kommandorad för skärmbild"
-
-#: ../plugins/compiz.schemas.in.in.h:268
-msgid "Sensitivity of pointer movement (0.01-100.00)"
-msgstr "Känslighet för flyttning av muspekare (0.01-100.00)"
-
-#: ../plugins/compiz.schemas.in.in.h:269
-msgid "Shade Resistance"
-msgstr "Skuggmotstånd"
-
-#: ../plugins/compiz.schemas.in.in.h:270
-msgid "Shade resistance (0-100)"
-msgstr "Skuggmotstånd (0-100)"
-
-#: ../plugins/compiz.schemas.in.in.h:271
-msgid "Shadow Offset X"
-msgstr "Skuggposition X"
-
-#: ../plugins/compiz.schemas.in.in.h:272
-msgid "Shadow Offset Y"
-msgstr "Skuggposition Y"
-
-#: ../plugins/compiz.schemas.in.in.h:273
-msgid "Shadow Opacity"
-msgstr "Skuggopakhet"
-
-#: ../plugins/compiz.schemas.in.in.h:274
-msgid "Shadow Radius"
-msgstr "Skuggradie"
-
-#: ../plugins/compiz.schemas.in.in.h:275
-msgid "Show Main Menu"
-msgstr "Visa huvudmeny"
-
-#: ../plugins/compiz.schemas.in.in.h:276
-msgid "Show Run Application dialog"
-msgstr "Visa dialogen Kör program"
-
-#: ../plugins/compiz.schemas.in.in.h:277
-msgid "Show icon next to thumbnail"
-msgstr "Visa ikon bredvid miniatyrbild"
-
-#: ../plugins/compiz.schemas.in.in.h:278
-msgid "Show minimized windows"
-msgstr "Visa minimerade fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:279
-msgid "Show switcher"
-msgstr "Visa växlare"
-
-#: ../plugins/compiz.schemas.in.in.h:280
-msgid "Show the main menu"
-msgstr "Visa huvudmenyn"
-
-#: ../plugins/compiz.schemas.in.in.h:281
+#: plugins/cube.c:881
 msgid "Skydome"
 msgstr "Skydome"
 
-#: ../plugins/compiz.schemas.in.in.h:282
+#: plugins/cube.c:882
+msgid "Render skydome"
+msgstr "Rita ut skydome"
+
+#: plugins/cube.c:888
 msgid "Skydome Image"
 msgstr "Skydome-bild"
 
-#: ../plugins/compiz.schemas.in.in.h:283
-msgid "Sloppy Focus"
-msgstr "Slapphänt fokusering"
+#: plugins/cube.c:889
+msgid "Image to use as texture for the skydome"
+msgstr "Bild att använda som textur för skydome"
 
-#: ../plugins/compiz.schemas.in.in.h:284
-msgid "Slow Animations"
-msgstr "Långsamma animeringar"
+#: plugins/cube.c:897
+msgid "Animate Skydome"
+msgstr "Animera Skydome"
 
-#: ../plugins/compiz.schemas.in.in.h:285
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Fäst kubroteringen mot översta ytan"
+#: plugins/cube.c:898
+msgid "Animate skydome when rotating cube"
+msgstr "Animera skydome när kub roterar"
 
-#: ../plugins/compiz.schemas.in.in.h:286
-msgid "Snap To Top Face"
-msgstr "Fäst mot översta ytan"
+#: plugins/cube.c:904 plugins/rotate.c:302
+msgid "Acceleration"
+msgstr "Accelerering"
 
-#: ../plugins/compiz.schemas.in.in.h:287
-msgid "Snap windows"
-msgstr "Fäst fönster"
+#: plugins/cube.c:905
+#, fuzzy
+msgid "Fold Acceleration"
+msgstr "Accelerering"
 
-#: ../plugins/compiz.schemas.in.in.h:288
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "Koppla loss och automatiskt avmaximera maximerade fönster när de dras"
-
-#: ../plugins/compiz.schemas.in.in.h:289
-msgid "Snapoff maximized windows"
-msgstr "Koppla loss maximerade fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:290
-msgid "Space between windows (0-250)"
-msgstr "Mellanrum mellan fönster (0-250)"
-
-#: ../plugins/compiz.schemas.in.in.h:291
-msgid "Spacing"
-msgstr "Mellanrum"
-
-#: ../plugins/compiz.schemas.in.in.h:292
+#: plugins/cube.c:914 plugins/minimize.c:203 plugins/rotate.c:319
+#: plugins/scale.c:326 plugins/switcher.c:347 plugins/zoom.c:223
 msgid "Speed"
 msgstr "Hastighet"
 
-#: ../plugins/compiz.schemas.in.in.h:293
-msgid "Spring Friction (0.1-10.0)"
-msgstr "Fjäderfriktion (0.1-10.0)"
+#: plugins/cube.c:915
+#, fuzzy
+msgid "Fold Speed"
+msgstr "Toningshastighet"
 
-#: ../plugins/compiz.schemas.in.in.h:294
-msgid "Spring K"
-msgstr "Fjäder K"
-
-#: ../plugins/compiz.schemas.in.in.h:295
-msgid "Spring Konstant (0.1-10.0)"
-msgstr "Fjäderkonstant (0.1-10.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:296
-msgid "Start Rotation"
-msgstr "Starta rotering"
-
-#: ../plugins/compiz.schemas.in.in.h:297
-msgid "Start moving window"
-msgstr "Börja flytta fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:298
-msgid "Start moving window using keyboard"
-msgstr "Börja flytta fönstret med tangentbordet"
-
-#: ../plugins/compiz.schemas.in.in.h:299
-msgid "Start resizing window"
-msgstr "Börja skala fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:300
-msgid "Start resizing window using keyboard"
-msgstr "Börja skala fönstret med tangentbordet"
-
-#: ../plugins/compiz.schemas.in.in.h:301
-msgid "Switcher speed (0.1-50.0)"
-msgstr "Växlingshastighet (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:302
-msgid "Switcher timestep (0.1-50.0)"
-msgstr "Tidsintervall för växlare (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:303
-msgid "Take a screenshot"
-msgstr "Ta en skärmbild"
-
-#: ../plugins/compiz.schemas.in.in.h:304
-msgid "Take a screenshot of a window"
-msgstr "Ta en skärmbild av ett fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:305
-msgid "Terminate"
-msgstr "Avsluta"
-
-#: ../plugins/compiz.schemas.in.in.h:306
-msgid "Texture Filter"
-msgstr "Texturfilter"
-
-#: ../plugins/compiz.schemas.in.in.h:307
-msgid "Texture filtering (Fast, Good, Best)"
-msgstr "Texturfilter (Snabb, Bra, Bäst)"
-
-#: ../plugins/compiz.schemas.in.in.h:308
-msgid "The rate at which the screen is redrawn (times/second) (1-200)"
-msgstr "Frekvensen för uppritning av skärmen (gånger/sekund) (1-200)"
-
-#: ../plugins/compiz.schemas.in.in.h:309
-msgid "Timeout before flipping viewport (0-1000)"
-msgstr "Tidsgräns innan vändning av skrivbordsvy (0-1000)"
-
-#: ../plugins/compiz.schemas.in.in.h:310
+#: plugins/cube.c:924 plugins/minimize.c:213 plugins/rotate.c:329
+#: plugins/scale.c:336 plugins/switcher.c:357 plugins/zoom.c:233
 msgid "Timestep"
 msgstr "Tidsintervall"
 
-#: ../plugins/compiz.schemas.in.in.h:311
-msgid "Toggle Window Maximized"
-msgstr "Växla fönstermaximering"
+#: plugins/cube.c:925
+#, fuzzy
+msgid "Fold Timestep"
+msgstr "Tidsintervall"
 
-#: ../plugins/compiz.schemas.in.in.h:312
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Växla fönstermaximering horisontellt"
+#: plugins/cube.c:934 plugins/switcher.c:382
+msgid "Mipmap"
+msgstr "Mipmap"
 
-#: ../plugins/compiz.schemas.in.in.h:313
-msgid "Toggle Window Maximized Vertically"
-msgstr "Växla fönstermaximering vertikalt"
+#: plugins/cube.c:935 plugins/switcher.c:383
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "Generera mipmappar när det är möjligt för skalning av högre kvalitet"
 
-#: ../plugins/compiz.schemas.in.in.h:314
-msgid "Toggle Window Shaded"
-msgstr "Växla fönsterskuggning"
-
-#: ../plugins/compiz.schemas.in.in.h:315
-msgid "Toggle active window maximized"
-msgstr "Växla maximering av aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:316
-msgid "Toggle active window maximized horizontally"
-msgstr "Växla horisontell maximering av aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:317
-msgid "Toggle active window maximized vertically"
-msgstr "Växla vertikal maximering av aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:318
-msgid "Toggle active window shaded"
-msgstr "Växla skuggning av aktivt fönster"
-
-#: ../plugins/compiz.schemas.in.in.h:319
-msgid "Toggle rain"
-msgstr "Växla regn"
-
-#: ../plugins/compiz.schemas.in.in.h:320
-msgid "Toggle rain effect"
-msgstr "Växla regneffekt"
-
-#: ../plugins/compiz.schemas.in.in.h:321
-msgid "Toggle use of slow animations"
-msgstr "Växla användning av långsamma animeringar"
-
-#: ../plugins/compiz.schemas.in.in.h:322
-msgid "Toggle window snapping"
-msgstr "Växla fönsterfästning"
-
-#: ../plugins/compiz.schemas.in.in.h:323
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "Transformera fönster när de minimeras och avminimeras"
-
-#: ../plugins/compiz.schemas.in.in.h:324
-msgid "USe linear filter when zoomed in"
-msgstr "Använd linjärt filter när inzoomad"
-
-#: ../plugins/compiz.schemas.in.in.h:325
+#: plugins/cube.c:1520
 msgid "Unfold"
 msgstr "Vik ut"
 
-#: ../plugins/compiz.schemas.in.in.h:326
+#: plugins/cube.c:1521
 msgid "Unfold cube"
 msgstr "Vik ut kub"
 
-#: ../plugins/compiz.schemas.in.in.h:327
-msgid "Unmaximize Window"
-msgstr "Avmaximera fönster"
+#: plugins/cube.c:1538
+msgid "Next Slide"
+msgstr "Nästa diabild"
 
-#: ../plugins/compiz.schemas.in.in.h:328
-msgid "Unmaximize active window"
-msgstr "Avmaximera aktivt fönster"
+#: plugins/cube.c:1539
+msgid "Advance to next slide"
+msgstr "Fortsätt till nästa bild"
 
-#: ../plugins/compiz.schemas.in.in.h:329
-msgid "Unredirect Fullscreen Windows"
-msgstr "Omdirigera tillbaka helskärmsfönster"
+#: plugins/cube.c:1556
+msgid "Previous Slide"
+msgstr "Föregående diabild"
 
-#: ../plugins/compiz.schemas.in.in.h:330
-msgid "Use diffuse light when screen is transformed"
-msgstr "Använd diffus belysning när skärmen transformeras"
+#: plugins/cube.c:1557
+msgid "Go back to previous slide"
+msgstr "Gå tillbaka till föregående diabild"
 
-#: ../plugins/compiz.schemas.in.in.h:331
-msgid "Use spring model for wobbly window effect"
-msgstr "Använd fjädereffekt för fönstergeléeffekt"
+#: plugins/cube.c:1750
+msgid "Desktop Cube"
+msgstr "Skrivbordskub"
 
-#: ../plugins/compiz.schemas.in.in.h:332
-msgid "Vertex Grid Resolution (1-64)"
-msgstr "Upplösning för vertexrutnät (1-64)"
+#: plugins/cube.c:1751
+msgid "Place windows on cube"
+msgstr "Placera fönster på kuben"
 
-#: ../plugins/compiz.schemas.in.in.h:333
-msgid "Virtual Size"
-msgstr "Virtuell storlek"
+#: plugins/decoration.c:234
+msgid "Shadow Radius"
+msgstr "Skuggradie"
 
-#: ../plugins/compiz.schemas.in.in.h:334
-msgid "Visual Bell"
-msgstr "Visuell signal"
+#: plugins/decoration.c:235
+#, fuzzy
+msgid "Drop shadow radius"
+msgstr "Radie för skuggkastning (0.0-48.0)"
 
-#: ../plugins/compiz.schemas.in.in.h:335
-msgid "Water Effect"
-msgstr "Vatteneffekt"
+#: plugins/decoration.c:244
+msgid "Shadow Opacity"
+msgstr "Skuggopakhet"
 
-#: ../plugins/compiz.schemas.in.in.h:336
-msgid "Water effect on system beep"
-msgstr "Vatteneffekt vid systemsignal"
+#: plugins/decoration.c:245
+#, fuzzy
+msgid "Drop shadow opacity"
+msgstr "Opakhet för skuggkastning (0.01-6.00)"
 
-#: ../plugins/compiz.schemas.in.in.h:337
-msgid "Water offset scale (0.0-10.0)"
-msgstr "Vattenpositionsskala (0.0-10.0)"
+#: plugins/decoration.c:254
+msgid "Shadow Offset X"
+msgstr "Skuggposition X"
 
-#: ../plugins/compiz.schemas.in.in.h:338
+#: plugins/decoration.c:255
+#, fuzzy
+msgid "Drop shadow X offset"
+msgstr "Skuggkastning X-position (-16-16)"
+
+#: plugins/decoration.c:263
+msgid "Shadow Offset Y"
+msgstr "Skuggposition Y"
+
+#: plugins/decoration.c:264
+#, fuzzy
+msgid "Drop shadow Y offset"
+msgstr "Skuggkastning Y-position (-16-16)"
+
+#: plugins/decoration.c:1355
 msgid "Window Decoration"
 msgstr "Fönsterdekoration"
 
-#: ../plugins/compiz.schemas.in.in.h:339
-msgid "Window Menu"
-msgstr "Fönstermeny"
-
-#: ../plugins/compiz.schemas.in.in.h:340
-msgid "Window Types"
-msgstr "Fönstertyper"
-
-#: ../plugins/compiz.schemas.in.in.h:341
+#: plugins/decoration.c:1356
 msgid "Window decorations"
 msgstr "Fönsterdekorationer"
 
-#: ../plugins/compiz.schemas.in.in.h:342
-msgid "Window fade speed (0.1-10.0)"
+#: plugins/fade.c:37 src/main.c:55
+msgid "Dock"
+msgstr ""
+
+#: plugins/fade.c:38 plugins/minimize.c:49 plugins/scale.c:72
+#: plugins/switcher.c:87 plugins/wobbly.c:162 src/main.c:56
+msgid "Toolbar"
+msgstr ""
+
+#: plugins/fade.c:39 plugins/wobbly.c:163 src/main.c:57
+msgid "Menu"
+msgstr ""
+
+#: plugins/fade.c:40 plugins/minimize.c:50 plugins/scale.c:73
+#: plugins/switcher.c:88 plugins/wobbly.c:164 src/main.c:58
+msgid "Utility"
+msgstr ""
+
+#: plugins/fade.c:41 plugins/wobbly.c:149 src/main.c:59
+msgid "Splash"
+msgstr ""
+
+#: plugins/fade.c:42 plugins/minimize.c:52 plugins/scale.c:77
+#: plugins/switcher.c:92 plugins/wobbly.c:167 src/main.c:61
+msgid "Normal"
+msgstr ""
+
+#: plugins/fade.c:43 plugins/minimize.c:51 plugins/scale.c:74
+#: plugins/switcher.c:89 plugins/wobbly.c:165 src/main.c:60
+#, fuzzy
+msgid "Dialog"
+msgstr "Kördialog"
+
+#: plugins/fade.c:44 plugins/scale.c:75 plugins/switcher.c:90
+#: plugins/wobbly.c:166 src/main.c:68
+msgid "ModalDialog"
+msgstr ""
+
+#: plugins/fade.c:45 plugins/wobbly.c:150 src/main.c:62
+#, fuzzy
+msgid "DropdownMenu"
+msgstr "Fönstermeny"
+
+#: plugins/fade.c:46 plugins/wobbly.c:151 src/main.c:63
+msgid "PopupMenu"
+msgstr ""
+
+#: plugins/fade.c:47 plugins/wobbly.c:152 src/main.c:64
+msgid "Tooltip"
+msgstr ""
+
+#: plugins/fade.c:48 plugins/wobbly.c:153 src/main.c:65
+#, fuzzy
+msgid "Notification"
+msgstr "Friktion"
+
+#: plugins/fade.c:49 plugins/wobbly.c:154 src/main.c:66
+msgid "Combo"
+msgstr ""
+
+#: plugins/fade.c:50 plugins/wobbly.c:155 src/main.c:67
+msgid "Dnd"
+msgstr ""
+
+#: plugins/fade.c:51 plugins/wobbly.c:156 src/main.c:70
+msgid "Unknown"
+msgstr ""
+
+#: plugins/fade.c:183
+msgid "Fade Speed"
+msgstr "Toningshastighet"
+
+#: plugins/fade.c:184
+#, fuzzy
+msgid "Window fade speed"
 msgstr "Fönstertoningshastighet (0.1-10.0)"
 
-#: ../plugins/compiz.schemas.in.in.h:343
-msgid "Window placement workarounds"
-msgstr "Problemlösning för fönsterplacering"
+#: plugins/fade.c:193 plugins/minimize.c:223 plugins/scale.c:346
+#: plugins/switcher.c:367
+msgid "Window Types"
+msgstr "Fönstertyper"
 
-#: ../plugins/compiz.schemas.in.in.h:344
-msgid "Window screenshot command line"
-msgstr "Kommandorad för fönsterskärmbild"
+#: plugins/fade.c:194
+msgid "Window types that should be fading"
+msgstr ""
 
-#: ../plugins/compiz.schemas.in.in.h:345
-msgid "Window types that should be fading (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska tonas ner (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/fade.c:208
+msgid "Visual Bell"
+msgstr "Visuell signal"
 
-#: ../plugins/compiz.schemas.in.in.h:346
-msgid "Window types that should be transformed when minimized (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska transformeras när de minimeras (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/fade.c:209
+msgid "Fade effect on system beep"
+msgstr "Toningseffekt vid systemsignal"
 
-#: ../plugins/compiz.schemas.in.in.h:347
-msgid "Window types that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska skalas i skalningsläget (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/fade.c:215
+msgid "Fullscreen Visual Bell"
+msgstr "Visuell helskärmssignal"
 
-#: ../plugins/compiz.schemas.in.in.h:348
-msgid "Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska visas i växlare (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/fade.c:216
+msgid "Fullscreen fade effect on system beep"
+msgstr "Helskärmstoningseffekt vid systemsignal"
 
-#: ../plugins/compiz.schemas.in.in.h:349
-msgid "Window types that should wobble when focused (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska få geléeffekt när de får fokus (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/fade.c:824
+msgid "Fading Windows"
+msgstr "Tonande fönster"
 
-#: ../plugins/compiz.schemas.in.in.h:350
-msgid "Window types that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska få geléeffekt när de fångas (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/fade.c:825
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr "Tona in fönster när de kopplas och tona ut fönster när de kopplas loss"
 
-#: ../plugins/compiz.schemas.in.in.h:351
-msgid "Window types that should wobble when mapped (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska få geléeffekt när de kopplas (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#. Decimal point character
+#: plugins/gconf-dump.c:80
+msgid "."
+msgstr ""
 
-#: ../plugins/compiz.schemas.in.in.h:352
-msgid "Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-msgstr "Fönstertyper som ska få geléeffekt när de flyttas (Skrivbord, Docka, Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+#: plugins/gconf-dump.c:592
+msgid "Plugins that this must load before"
+msgstr "Insticksmoduler som måste läsas in före"
 
-#: ../plugins/compiz.schemas.in.in.h:353
-msgid "Wobble effect on system beep"
-msgstr "Geléeffekt vid systemsignal"
+#: plugins/gconf-dump.c:593 plugins/gconf-dump.c:603
+msgid "Do not modify"
+msgstr "Ändra inte"
 
-#: ../plugins/compiz.schemas.in.in.h:354
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Geléeffekt vid maximering och avmaximering av fönster"
+#: plugins/gconf-dump.c:602
+msgid "Plugins that this requires"
+msgstr "Insticksmoduler som den här kräver"
 
-#: ../plugins/compiz.schemas.in.in.h:355
-msgid "Wobbly Windows"
-msgstr "Geléaktiga fönster"
+#: plugins/minimize.c:204
+#, fuzzy
+msgid "Minimize speed"
+msgstr "Minimerat"
 
-#: ../plugins/compiz.schemas.in.in.h:356
+#: plugins/minimize.c:214
+#, fuzzy
+msgid "Minimize timestep"
+msgstr "Tidsintervall för minimering (0.1-50.0)"
+
+#: plugins/minimize.c:224
+msgid "Window types that should be transformed when minimized"
+msgstr ""
+
+#: plugins/minimize.c:239
+msgid "Shade Resistance"
+msgstr "Skuggmotstånd"
+
+#: plugins/minimize.c:240
+#, fuzzy
+msgid "Shade resistance"
+msgstr "Skuggmotstånd"
+
+#: plugins/minimize.c:1052
+msgid "Minimize Effect"
+msgstr "Minimeringseffekt"
+
+#: plugins/minimize.c:1053
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Transformera fönster när de minimeras och avminimeras"
+
+#: plugins/move.c:527
+msgid "Initiate Window Move"
+msgstr "Initiera fönsterflyttning"
+
+#: plugins/move.c:528
+msgid "Start moving window"
+msgstr "Börja flytta fönster"
+
+#: plugins/move.c:546 plugins/scale.c:368 plugins/switcher.c:408
+msgid "Opacity"
+msgstr "Opakhet"
+
+#: plugins/move.c:547
+#, fuzzy
+msgid "Opacity level of moving windows"
+msgstr "Opaknivå för flyttande fönster (1-100)"
+
+#: plugins/move.c:555
+msgid "Constrain Y"
+msgstr "Begränsa Y"
+
+#: plugins/move.c:556
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Begränsa Y-koordinat till arbetsyta"
+
+#: plugins/move.c:562
+msgid "Snapoff maximized windows"
+msgstr "Koppla loss maximerade fönster"
+
+#: plugins/move.c:563
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr "Koppla loss och automatiskt avmaximera maximerade fönster när de dras"
+
+#: plugins/move.c:729
+msgid "Move Window"
+msgstr "Flytta fönster"
+
+#: plugins/move.c:730
+msgid "Move window"
+msgstr "Flytta fönster"
+
+#: plugins/place.c:104
 msgid "Workarounds"
 msgstr "Problemlösningar"
 
-#: ../plugins/compiz.schemas.in.in.h:357
+#: plugins/place.c:105
+msgid "Window placement workarounds"
+msgstr "Problemlösning för fönsterplacering"
+
+#: plugins/place.c:1151
+msgid "Place Windows"
+msgstr "Placera fönster"
+
+#: plugins/place.c:1152
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Placera fönster på lämpliga positioner när de kopplas"
+
+#: plugins/resize.c:712
+msgid "Initiate Window Resize"
+msgstr "Initiera fönsterskalning"
+
+#: plugins/resize.c:713
+msgid "Start resizing window"
+msgstr "Börja skala fönster"
+
+#: plugins/resize.c:856
+msgid "Resize Window"
+msgstr "Skala fönster"
+
+#: plugins/resize.c:857
+msgid "Resize window"
+msgstr "Skala fönster"
+
+#: plugins/rotate.c:285 plugins/zoom.c:206
+msgid "Pointer Invert Y"
+msgstr "Invertera pekarens Y-axel"
+
+#: plugins/rotate.c:286 plugins/zoom.c:207
+msgid "Invert Y axis for pointer movement"
+msgstr "Invertera Y-axeln för pekarens rörelser"
+
+#: plugins/rotate.c:292 plugins/zoom.c:213
+msgid "Pointer Sensitivity"
+msgstr "Muspekarkänslighet"
+
+#: plugins/rotate.c:293 plugins/zoom.c:214
+#, fuzzy
+msgid "Sensitivity of pointer movement"
+msgstr "Känslighet för flyttning av muspekare (0.01-100.00)"
+
+#: plugins/rotate.c:303
+#, fuzzy
+msgid "Rotation Acceleration"
+msgstr "Roteringsacceleration (1.0-20.0)"
+
+#: plugins/rotate.c:312
+msgid "Snap To Top Face"
+msgstr "Fäst mot översta ytan"
+
+#: plugins/rotate.c:313
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Fäst kubroteringen mot översta ytan"
+
+#: plugins/rotate.c:320
+#, fuzzy
+msgid "Rotation Speed"
+msgstr "Roteringshastighet (0.1-50.0)"
+
+#: plugins/rotate.c:330
+#, fuzzy
+msgid "Rotation Timestep"
+msgstr "Tidsintervall för rotering (0.1-50.0)"
+
+#: plugins/rotate.c:1731 plugins/water.c:1646 plugins/zoom.c:710
+msgid "Initiate"
+msgstr "Initiera"
+
+#: plugins/rotate.c:1732
+msgid "Start Rotation"
+msgstr "Starta rotering"
+
+#: plugins/rotate.c:1746
+msgid "Rotate Left"
+msgstr "Rotera åt vänster"
+
+#: plugins/rotate.c:1747
+msgid "Rotate left"
+msgstr "Rotera åt vänster"
+
+#: plugins/rotate.c:1765
+msgid "Rotate Right"
+msgstr "Rotera åt höger"
+
+#: plugins/rotate.c:1766
+msgid "Rotate right"
+msgstr "Rotera åt höger"
+
+#: plugins/rotate.c:1784
+msgid "Rotate Left with Window"
+msgstr "Rotera åt vänster med fönster"
+
+#: plugins/rotate.c:1785
+msgid "Rotate left and bring active window along"
+msgstr "Rotera åt vänster och ta med aktivt fönster"
+
+#: plugins/rotate.c:1804
+msgid "Rotate Right with Window"
+msgstr "Rotera åt höger med fönster"
+
+#: plugins/rotate.c:1805
+msgid "Rotate right and bring active window along"
+msgstr "Rotera åt höger och ta med aktivt fönster"
+
+#: plugins/rotate.c:1822
+#, fuzzy, c-format
+msgid "Rotate To Face %d"
+msgstr "Rotera till yta 1"
+
+#: plugins/rotate.c:1823
+#, fuzzy, c-format
+msgid "Rotate to face %d"
+msgstr "Rotera till yta 1"
+
+#: plugins/rotate.c:1824
+#, fuzzy, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "Rotera till yta 1 med fönster"
+
+#: plugins/rotate.c:1825
+#, fuzzy, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "Rotera till yta 1 och ta med aktivt fönster"
+
+#: plugins/rotate.c:1874
+#, fuzzy
+msgid "Rotate To"
+msgstr "Rotera till yta 1"
+
+#: plugins/rotate.c:1875
+#, fuzzy
+msgid "Rotate to viewport"
+msgstr "Rotera till yta 1"
+
+#: plugins/rotate.c:1886
+#, fuzzy
+msgid "Rotate Window"
+msgstr "Flytta fönster"
+
+#: plugins/rotate.c:1887
+#, fuzzy
+msgid "Rotate with window"
+msgstr "Rotera åt vänster med fönster"
+
+#: plugins/rotate.c:1898
+#, fuzzy
+msgid "Rotate Flip Left"
+msgstr "Rotera åt vänster"
+
+#: plugins/rotate.c:1899
+#, fuzzy
+msgid "Flip to left viewport and warp pointer"
+msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
+
+#: plugins/rotate.c:1914
+#, fuzzy
+msgid "Rotate Flip Right"
+msgstr "Rotera åt höger"
+
+#: plugins/rotate.c:1915
+#, fuzzy
+msgid "Flip to right viewport and warp pointer"
+msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
+
+#: plugins/rotate.c:1930
+msgid "Edge Flip Pointer"
+msgstr "Kantvänd pekare"
+
+#: plugins/rotate.c:1931
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
+
+#: plugins/rotate.c:1938
+msgid "Edge Flip Move"
+msgstr "Kantvänd flyttning"
+
+#: plugins/rotate.c:1939
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr "Vänd till nästa skrivbordsvy när fönster flyttas till skärmens kant"
+
+#: plugins/rotate.c:1946
+msgid "Edge Flip DnD"
+msgstr "Kantvänd DnD"
+
+#: plugins/rotate.c:1947
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr "Vänd till nästa skrivbordsvy när objekt dras till skärmens kant"
+
+#: plugins/rotate.c:1954
+msgid "Flip Time"
+msgstr "Vändtid"
+
+#: plugins/rotate.c:1955
+#, fuzzy
+msgid "Timeout before flipping viewport"
+msgstr "Tidsgräns innan vändning av skrivbordsvy (0-1000)"
+
+#: plugins/rotate.c:2123
+msgid "Rotate Cube"
+msgstr "Rotera kub"
+
+#: plugins/rotate.c:2124
+msgid "Rotate desktop cube"
+msgstr "Rotera skrivbordskub"
+
+#: plugins/scale.c:76 plugins/switcher.c:91 src/main.c:69
+#, fuzzy
+msgid "Fullscreen"
+msgstr "Visuell helskärmssignal"
+
+#: plugins/scale.c:88 plugins/wobbly.c:134
+msgid "None"
+msgstr ""
+
+#: plugins/scale.c:89
+msgid "Emblem"
+msgstr ""
+
+#: plugins/scale.c:90
+msgid "Big"
+msgstr ""
+
+#: plugins/scale.c:310
+msgid "Spacing"
+msgstr "Mellanrum"
+
+#: plugins/scale.c:311
+#, fuzzy
+msgid "Space between windows"
+msgstr "Mellanrum mellan fönster (0-250)"
+
+#: plugins/scale.c:319
+msgid "Sloppy Focus"
+msgstr "Slapphänt fokusering"
+
+#: plugins/scale.c:320
+msgid "Focus window when mouse moves over them"
+msgstr "Fokusera fönster när musen flyttar sig ovanför"
+
+#: plugins/scale.c:327
+#, fuzzy
+msgid "Scale speed"
+msgstr "Toningshastighet"
+
+#: plugins/scale.c:337
+#, fuzzy
+msgid "Scale timestep"
+msgstr "Skala bild"
+
+#: plugins/scale.c:347
+msgid "Window types that should scaled in scale mode"
+msgstr ""
+
+#: plugins/scale.c:361
+msgid "Darken Background"
+msgstr "Mörka bakgrunden"
+
+#: plugins/scale.c:362
+msgid "Darken background when scaling windows"
+msgstr "Mörka bakgrunden vid fönsterskalning"
+
+#: plugins/scale.c:369 plugins/switcher.c:409
+#, fuzzy
+msgid "Amount of opacity in percent"
+msgstr "Opak i procent (0-100)"
+
+#: plugins/scale.c:377
+msgid "Overlay Icon"
+msgstr "Lägg ikoner över"
+
+#: plugins/scale.c:378
+#, fuzzy
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Lägg en ikon över fönster när de är skalade (Ingen, Emblem, Stor)"
+
+#: plugins/scale.c:1368
+msgid "Initiate Window Picker"
+msgstr "Initiera fönsterväljare"
+
+#: plugins/scale.c:1369
+msgid "Layout and start transforming windows"
+msgstr "Lägg ut och påbörja fönstertransformering"
+
+#: plugins/scale.c:1567
+msgid "Scale"
+msgstr "Skala"
+
+#: plugins/scale.c:1568
+msgid "Scale windows"
+msgstr "Skala fönster"
+
+#: plugins/switcher.c:348
+#, fuzzy
+msgid "Switcher speed"
+msgstr "Växlingshastighet (0.1-50.0)"
+
+#: plugins/switcher.c:358
+#, fuzzy
+msgid "Switcher timestep"
+msgstr "Tidsintervall för växlare (0.1-50.0)"
+
+#: plugins/switcher.c:368
+msgid "Window types that should shown in switcher"
+msgstr ""
+
+#: plugins/switcher.c:390
+msgid "Saturation"
+msgstr "Färgmättnad"
+
+#: plugins/switcher.c:391
+#, fuzzy
+msgid "Amount of saturation in percent"
+msgstr "Färgmättnad i procent (0-100)"
+
+#: plugins/switcher.c:399
+msgid "Brightness"
+msgstr "Ljusstyrka"
+
+#: plugins/switcher.c:400
+#, fuzzy
+msgid "Amount of brightness in percent"
+msgstr "Ljusstyrka i procent (0-100)"
+
+#: plugins/switcher.c:417
+msgid "Bring To Front"
+msgstr "Lägg överst"
+
+#: plugins/switcher.c:418
+msgid "Bring selected window to front"
+msgstr "Lägg markerat fönster överst"
+
+#: plugins/switcher.c:424
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../plugins/compiz.schemas.in.in.h:358
-msgid "Zoom Desktop"
-msgstr "Zooma skrivbord"
+#: plugins/switcher.c:425
+#, fuzzy
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"Avstånd som skrivbordet ska zoomas ut till vid växling av fönster (0.0-5.0)"
 
-#: ../plugins/compiz.schemas.in.in.h:359
+#: plugins/switcher.c:435
+msgid "Icon"
+msgstr "Ikon"
+
+#: plugins/switcher.c:436
+msgid "Show icon next to thumbnail"
+msgstr "Visa ikon bredvid miniatyrbild"
+
+#: plugins/switcher.c:442
+msgid "Minimized"
+msgstr "Minimerat"
+
+#: plugins/switcher.c:443
+msgid "Show minimized windows"
+msgstr "Visa minimerade fönster"
+
+#: plugins/switcher.c:1867 plugins/switcher.c:1903
+#, fuzzy
+msgid "Next window"
+msgstr "Nächstes Fenster"
+
+#: plugins/switcher.c:1868
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+
+#: plugins/switcher.c:1885 plugins/switcher.c:1922
+#, fuzzy
+msgid "Prev window"
+msgstr "Föregående fönster"
+
+#: plugins/switcher.c:1886
+#, fuzzy
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Snabbtangent för att välja föregående fönster"
+
+#: plugins/switcher.c:1904
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+
+#: plugins/switcher.c:1923
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+
+#: plugins/switcher.c:2094 plugins/switcher.c:2095
+msgid "Application Switcher"
+msgstr "Programväxlare"
+
+#: plugins/water.c:1647
+msgid "Enable pointer water effects"
+msgstr "Aktivera vatteneffekt för muspekare"
+
+#: plugins/water.c:1660
+msgid "Toggle rain"
+msgstr "Växla regn"
+
+#: plugins/water.c:1661
+msgid "Toggle rain effect"
+msgstr "Växla regneffekt"
+
+#: plugins/water.c:1676
+#, fuzzy
+msgid "Toggle wiper"
+msgstr "Växla regn"
+
+#: plugins/water.c:1677
+#, fuzzy
+msgid "Toggle wiper effect"
+msgstr "Växla regneffekt"
+
+#: plugins/water.c:1692
+msgid "Offset Scale"
+msgstr "Positionsskala"
+
+#: plugins/water.c:1693
+#, fuzzy
+msgid "Water offset scale"
+msgstr "Vattenpositionsskala (0.0-10.0)"
+
+#: plugins/water.c:1702
+msgid "Rain Delay"
+msgstr "Regnfördröjning"
+
+#: plugins/water.c:1703
+#, fuzzy
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Fördröjning (i ms) mellan varje regndroppe (0-3600000)"
+
+#: plugins/water.c:1711
+msgid "Title wave"
+msgstr ""
+
+#: plugins/water.c:1712
+msgid "Wave effect from window title"
+msgstr ""
+
+#: plugins/water.c:1723
+msgid "Point"
+msgstr ""
+
+#: plugins/water.c:1724
+msgid "Add point"
+msgstr ""
+
+#: plugins/water.c:1735
+msgid "Line"
+msgstr ""
+
+#: plugins/water.c:1736
+msgid "Add line"
+msgstr ""
+
+#: plugins/water.c:1886
+msgid "Water Effect"
+msgstr "Vatteneffekt"
+
+#: plugins/water.c:1887
+msgid "Adds water effects to different desktop actions"
+msgstr "Lägger till vatteneffekter till olika skrivbordsåtgärder"
+
+#: plugins/wobbly.c:135 plugins/wobbly.c:2886
+msgid "Shiver"
+msgstr ""
+
+#: plugins/wobbly.c:386
+msgid "Friction"
+msgstr "Friktion"
+
+#: plugins/wobbly.c:387
+#, fuzzy
+msgid "Spring Friction"
+msgstr "Fjäderfriktion (0.1-10.0)"
+
+#: plugins/wobbly.c:396
+msgid "Spring K"
+msgstr "Fjäder K"
+
+#: plugins/wobbly.c:397
+#, fuzzy
+msgid "Spring Konstant"
+msgstr "Fjäderkonstant (0.1-10.0)"
+
+#: plugins/wobbly.c:406
+msgid "Grid Resolution"
+msgstr "Rutnätsupplösning"
+
+#: plugins/wobbly.c:407
+#, fuzzy
+msgid "Vertex Grid Resolution"
+msgstr "Upplösning för vertexrutnät (1-64)"
+
+#: plugins/wobbly.c:415
+msgid "Minimum Grid Size"
+msgstr "Maximal rutnätsstorlek"
+
+#: plugins/wobbly.c:416
+#, fuzzy
+msgid "Minimum Vertex Grid Size"
+msgstr "Minimal vertexrutnätsstorlek (4-128)"
+
+#: plugins/wobbly.c:424
+msgid "Map Effect"
+msgstr "Kopplingseffekt"
+
+#: plugins/wobbly.c:425
+#, fuzzy
+msgid "Map Window Effect"
+msgstr "Kopplingseffekt"
+
+#: plugins/wobbly.c:433
+msgid "Focus Effect"
+msgstr "Fokuseffekt"
+
+#: plugins/wobbly.c:434
+#, fuzzy
+msgid "Focus Window Effect"
+msgstr "Fokuseffekt"
+
+#: plugins/wobbly.c:442
+msgid "Map Window Types"
+msgstr "Koppla fönstertyper"
+
+#: plugins/wobbly.c:443
+msgid "Window types that should wobble when mapped"
+msgstr ""
+
+#: plugins/wobbly.c:457
+msgid "Focus Window Types"
+msgstr "Fokusera fönstertyper"
+
+#: plugins/wobbly.c:458
+msgid "Window types that should wobble when focused"
+msgstr ""
+
+#: plugins/wobbly.c:470
+msgid "Move Window Types"
+msgstr "Flytta fönstertyper"
+
+#: plugins/wobbly.c:471
+msgid "Window types that should wobble when moved"
+msgstr ""
+
+#: plugins/wobbly.c:485
+msgid "Grab Window Types"
+msgstr "Fånga fönstertyper"
+
+#: plugins/wobbly.c:486
+msgid "Window types that should wobble when grabbed"
+msgstr ""
+
+#: plugins/wobbly.c:498
+msgid "Maximize Effect"
+msgstr "Maximeringseffekt"
+
+#: plugins/wobbly.c:499
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Geléeffekt vid maximering och avmaximering av fönster"
+
+#: plugins/wobbly.c:2872
+msgid "Snap windows"
+msgstr "Fäst fönster"
+
+#: plugins/wobbly.c:2873
+msgid "Toggle window snapping"
+msgstr "Växla fönsterfästning"
+
+#: plugins/wobbly.c:2887
+#, fuzzy
+msgid "Make window shiver"
+msgstr "Skala fönster"
+
+#: plugins/wobbly.c:3089
+msgid "Wobbly Windows"
+msgstr "Geléaktiga fönster"
+
+#: plugins/wobbly.c:3090
+msgid "Use spring model for wobbly window effect"
+msgstr "Använd fjädereffekt för fönstergeléeffekt"
+
+#: plugins/zoom.c:224
+#, fuzzy
+msgid "Zoom Speed"
+msgstr "Hastighet"
+
+#: plugins/zoom.c:234
+#, fuzzy
+msgid "Zoom Timestep"
+msgstr "Tidsintervall"
+
+#: plugins/zoom.c:243
+msgid "Filter Linear"
+msgstr "Filtrera linjärt"
+
+#: plugins/zoom.c:244
+msgid "USe linear filter when zoomed in"
+msgstr "Använd linjärt filter när inzoomad"
+
+#: plugins/zoom.c:711 plugins/zoom.c:725 plugins/zoom.c:726
 msgid "Zoom In"
 msgstr "Zooma in"
 
-#: ../plugins/compiz.schemas.in.in.h:360
+#: plugins/zoom.c:740 plugins/zoom.c:741
 msgid "Zoom Out"
 msgstr "Zooma ut"
 
-#: ../plugins/compiz.schemas.in.in.h:361
-msgid "Zoom Speed (0.1-50.0)"
-msgstr "Zoomhastighet (0.1-50.0)"
+#: plugins/zoom.c:892
+msgid "Zoom Desktop"
+msgstr "Zooma skrivbord"
 
-#: ../plugins/compiz.schemas.in.in.h:362
-msgid "Zoom Timestep (0.1-50.0)"
-msgstr "Tidsintervall för zoom (0.1-50.0)"
-
-#: ../plugins/compiz.schemas.in.in.h:363
+#: plugins/zoom.c:893
 msgid "Zoom and pan desktop cube"
 msgstr "Zooma och panorera skrivbordskub"
 
+#: src/display.c:153
+msgid "Fast"
+msgstr ""
+
+#: src/display.c:153
+msgid "Good"
+msgstr ""
+
+#: src/display.c:153
+msgid "Best"
+msgstr ""
+
+#: src/display.c:698
+msgid "Active Plugins"
+msgstr "Aktiva insticksmoduler"
+
+#: src/display.c:699
+msgid "List of currently active plugins"
+msgstr "Lista över för närvarande aktiva insticksmoduler"
+
+#: src/display.c:713
+msgid "Texture Filter"
+msgstr "Texturfilter"
+
+#: src/display.c:714
+#, fuzzy
+msgid "Texture filtering"
+msgstr "Texturfilter"
+
+#: src/display.c:722
+msgid "Click To Focus"
+msgstr "Klicka för fokus"
+
+#: src/display.c:723
+msgid "Click on window moves input focus to it"
+msgstr "Klicka på fönstret flyttar inmatningsfokus till det"
+
+#: src/display.c:729
+msgid "Auto-Raise"
+msgstr "Automatisk höjning"
+
+#: src/display.c:730
+msgid "Raise selected windows after interval"
+msgstr "Höj markerade fönster efter intervall"
+
+#: src/display.c:736
+msgid "Auto-Raise Delay"
+msgstr "Fördröjning för automatisk höjning"
+
+#: src/display.c:737
+#, fuzzy
+msgid "Interval before raising selected windows"
+msgstr "Intervall innan markerade fönster höjs (0-10000)"
+
+#: src/display.c:745
+msgid "Close Window"
+msgstr "Stäng fönster"
+
+#: src/display.c:746
+msgid "Close active window"
+msgstr "Stäng aktivt fönster"
+
+#: src/display.c:762
+msgid "Show Main Menu"
+msgstr "Visa huvudmeny"
+
+#: src/display.c:763
+msgid "Show the main menu"
+msgstr "Visa huvudmenyn"
+
+#: src/display.c:779
+msgid "Run Dialog"
+msgstr "Kördialog"
+
+#: src/display.c:780
+msgid "Show Run Application dialog"
+msgstr "Visa dialogen Kör program"
+
+#: src/display.c:796
+msgid "Unmaximize Window"
+msgstr "Avmaximera fönster"
+
+#: src/display.c:797
+msgid "Unmaximize active window"
+msgstr "Avmaximera aktivt fönster"
+
+#: src/display.c:813
+msgid "Minimize Window"
+msgstr "Minimera fönster"
+
+#: src/display.c:814
+msgid "Minimize active window"
+msgstr "Minimera aktivt fönster"
+
+#: src/display.c:830
+msgid "Maximize Window"
+msgstr "Maximera fönster"
+
+#: src/display.c:831
+msgid "Maximize active window"
+msgstr "Maximera aktivt fönster"
+
+#: src/display.c:847
+msgid "Maximize Window Horizontally"
+msgstr "Maximera fönster horisontellt"
+
+#: src/display.c:848
+msgid "Maximize active window horizontally"
+msgstr "Maximera aktivt fönster horisontellt"
+
+#: src/display.c:860
+msgid "Maximize Window Vertically"
+msgstr "Maximera fönster vertikalt"
+
+#: src/display.c:861
+msgid "Maximize active window vertically"
+msgstr "Maximera aktivt fönster vertikalt"
+
+#: src/display.c:873 src/display.c:874
+msgid "Hide all windows and focus desktop"
+msgstr "Dölj alla fönster och fokusera på skrivbord"
+
+#: src/display.c:888
+#, fuzzy, c-format
+msgid "Command line %d"
+msgstr "Kommandorad 0"
+
+#: src/display.c:889
+#, fuzzy, c-format
+msgid "Command line to be executed in shell when run_command%d is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command0 anropas"
+
+#: src/display.c:891
+#, fuzzy, c-format
+msgid "Run command %d"
+msgstr "Kör kommando 0"
+
+#: src/display.c:892
+#, fuzzy, c-format
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command%d"
+msgstr ""
+"En tangentgenväg som när anropas kommer att köra skalkommandot identifierat "
+"som kommando0"
+
+#: src/display.c:936
+msgid "Slow Animations"
+msgstr "Långsamma animeringar"
+
+#: src/display.c:937
+msgid "Toggle use of slow animations"
+msgstr "Växla användning av långsamma animeringar"
+
+#: src/display.c:953
+msgid "Lower Window"
+msgstr "Sänk fönster"
+
+#: src/display.c:954
+msgid "Lower window beneath other windows"
+msgstr "Sänk fönstret under andra fönster"
+
+#: src/display.c:968
+msgid "Increase Opacity"
+msgstr "Öka opakhet"
+
+#: src/display.c:969
+msgid "Increase window opacity"
+msgstr "Öka fönsteropakhet"
+
+#: src/display.c:983
+msgid "Decrease Opacity"
+msgstr "Minska opakhet"
+
+#: src/display.c:984
+msgid "Decrease window opacity"
+msgstr "Minska fönstret opakhet"
+
+#: src/display.c:998 src/display.c:999
+msgid "Take a screenshot"
+msgstr "Ta en skärmbild"
+
+#: src/display.c:1015 src/display.c:1016
+msgid "Screenshot command line"
+msgstr "Kommandorad för skärmbild"
+
+#: src/display.c:1024 src/display.c:1025
+msgid "Take a screenshot of a window"
+msgstr "Ta en skärmbild av ett fönster"
+
+#: src/display.c:1042 src/display.c:1043
+msgid "Window screenshot command line"
+msgstr "Kommandorad för fönsterskärmbild"
+
+#: src/display.c:1051
+msgid "Window Menu"
+msgstr "Fönstermeny"
+
+#: src/display.c:1052
+msgid "Open window menu"
+msgstr "Öppna fönstermeny"
+
+#: src/display.c:1071
+msgid "Raise On Click"
+msgstr "Höj vid klick"
+
+#: src/display.c:1072
+msgid "Raise windows when clicked"
+msgstr "Höj fönster när de klickas på"
+
+#: src/display.c:1078
+msgid "Audible Bell"
+msgstr "Ljudklocka"
+
+#: src/display.c:1079
+msgid "Audible system beep"
+msgstr "Systemljudklocka"
+
+#: src/display.c:1085
+msgid "Toggle Window Maximized"
+msgstr "Växla fönstermaximering"
+
+#: src/display.c:1086
+msgid "Toggle active window maximized"
+msgstr "Växla maximering av aktivt fönster"
+
+#: src/display.c:1098
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Växla fönstermaximering horisontellt"
+
+#: src/display.c:1100
+msgid "Toggle active window maximized horizontally"
+msgstr "Växla horisontell maximering av aktivt fönster"
+
+#: src/display.c:1112
+msgid "Toggle Window Maximized Vertically"
+msgstr "Växla fönstermaximering vertikalt"
+
+#: src/display.c:1114
+msgid "Toggle active window maximized vertically"
+msgstr "Växla vertikal maximering av aktivt fönster"
+
+#: src/display.c:1126
+msgid "Hide Skip Taskbar Windows"
+msgstr "Dölj fönster inte i verktygsrad"
+
+#: src/display.c:1127
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr "Dölj fönster som inte är i verktygsraden vid visa skrivbordsläget"
+
+#: src/display.c:1134
+msgid "Toggle Window Shaded"
+msgstr "Växla fönsterskuggning"
+
+#: src/display.c:1135
+msgid "Toggle active window shaded"
+msgstr "Växla skuggning av aktivt fönster"
+
+#: src/main.c:54
+#, fuzzy
+msgid "Desktop"
+msgstr "Skrivbordskub"
+
+#: src/screen.c:269
+msgid "Detect Refresh Rate"
+msgstr "Detektera uppdateringsfrekvens"
+
+#: src/screen.c:270
+msgid "Automatic detection of refresh rate"
+msgstr "Automatisk identifiering av uppdateringsfrekvens"
+
+#: src/screen.c:276
+msgid "Lighting"
+msgstr "Ljussättning"
+
+#: src/screen.c:277
+msgid "Use diffuse light when screen is transformed"
+msgstr "Använd diffus belysning när skärmen transformeras"
+
+#: src/screen.c:283
+msgid "Refresh Rate"
+msgstr "Uppdateringsfrekvens"
+
+#: src/screen.c:284
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Frekvensen för uppritning av skärmen (gånger/sekund) (1-200)"
+
+#: src/screen.c:292
+#, fuzzy
+msgid "Horizontal Virtual Size"
+msgstr "Virtuell storlek"
+
+#: src/screen.c:293
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
+
+#: src/screen.c:301
+#, fuzzy
+msgid "Vertical Virtual Size"
+msgstr "Virtuell storlek"
+
+#: src/screen.c:302
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
+
+#: src/screen.c:310
+msgid "Opacity Step"
+msgstr "Intervall för opakhet"
+
+#: src/screen.c:311
+#, fuzzy
+msgid "Opacity change step"
+msgstr "Ändringsintervall för opakhet (1-50)"
+
+#: src/screen.c:319
+msgid "Unredirect Fullscreen Windows"
+msgstr "Omdirigera tillbaka helskärmsfönster"
+
+#: src/screen.c:320
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Tillåt att inte utritning av helskärmsfönster omdirigeras till bilder "
+"utanför skärmen"
+
+#: src/screen.c:327
+msgid "Default Icon"
+msgstr "Standardikon"
+
+#: src/screen.c:328
+msgid "Default window icon image"
+msgstr "Standardikonbild för fönster"
+
+#: src/screen.c:336
+msgid "Sync To VBlank"
+msgstr ""
+
+#: src/screen.c:337
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command1"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando1"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command10"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando10"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command11"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando11"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command2"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando2"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command3"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando3"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command4"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando4"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command5"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando5"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command6"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando6"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command7"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando7"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command8"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando8"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command9"
+#~ msgstr ""
+#~ "En tangentgenväg som när anropas kommer att köra skalkommandot "
+#~ "identifierat som kommando9"
+
+#~ msgid "Command line 1"
+#~ msgstr "Kommandorad 1"
+
+#~ msgid "Command line 10"
+#~ msgstr "Kommandorad 10"
+
+#~ msgid "Command line 11"
+#~ msgstr "Kommandorad 11"
+
+#~ msgid "Command line 2"
+#~ msgstr "Kommandorad 2"
+
+#~ msgid "Command line 3"
+#~ msgstr "Kommandorad 3"
+
+#~ msgid "Command line 4"
+#~ msgstr "Kommandorad 4"
+
+#~ msgid "Command line 5"
+#~ msgstr "Kommandorad 5"
+
+#~ msgid "Command line 6"
+#~ msgstr "Kommandorad 6"
+
+#~ msgid "Command line 7"
+#~ msgstr "Kommandorad 7"
+
+#~ msgid "Command line 8"
+#~ msgstr "Kommandorad 8"
+
+#~ msgid "Command line 9"
+#~ msgstr "Kommandorad 9"
+
+#~ msgid "Command line to be executed in shell when run_command1 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command1 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command10 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command10 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command11 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command11 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command2 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command2 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command3 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command3 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command4 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command4 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command5 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command5 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command6 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command6 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command7 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command7 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command8 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command8 anropas"
+
+#~ msgid "Command line to be executed in shell when run_command9 is invoked"
+#~ msgstr "Kommandorad som ska köras i ett skal när run_command9 anropas"
+
+#~ msgid "Corners"
+#~ msgstr "Hörn"
+
+#~ msgid "Focus Window Effect (None, Shiver)"
+#~ msgstr "Fokusfönstereffekt (Ingen, Skakning)"
+
+#~ msgid "Fold Acceleration (1.0-20.0)"
+#~ msgstr "Vikningsacceleration (1.0-20.0)"
+
+#~ msgid "Fold Speed (0.1-50.0)"
+#~ msgstr "Vikningshastighet (0.1-50.0)"
+
+#~ msgid "Fold Timestep (0.1-50.0)"
+#~ msgstr "Tidsintervall för vikning (0.1-50.0)"
+
+#~ msgid ""
+#~ "Hot corners that should initiate scale mode (TopLeft, TopRight, "
+#~ "BottomLeft, BottomRight)"
+#~ msgstr ""
+#~ "Varma hörn som ska initiera skalningsläge (Övrevänster, Övrehöger, "
+#~ "Nedrevänster, Nedrehöger)"
+
+#~ msgid "Initiate All Windows"
+#~ msgstr "Initiera alla fönster"
+
+#~ msgid "Initiate Keyboard Window Move"
+#~ msgstr "Initiera fönsterflytt med tangentbord"
+
+#~ msgid "Initiate Keyboard Window Resize"
+#~ msgstr "Initiera fönsterskalning med tangentbord"
+
+#~ msgid "Initiate Window Switcher"
+#~ msgstr "Initiera fönsterväxlare"
+
+#~ msgid "Map Window Effect (None, Shiver)"
+#~ msgstr "Fönsterkopplingseffekt (Ingen, Skaka)"
+
+#~ msgid "Minimize speed (0.1-50.0)"
+#~ msgstr "Minimeringshastighet (0.1-50.0)"
+
+#~ msgid "Modifier to show switcher for all windows"
+#~ msgstr "Snabbtangent för att visa växlare för alla fönster"
+
+#~ msgid "Return from scale view"
+#~ msgstr "Återvänd från skalvy"
+
+#~ msgid "Rotate To Face 10"
+#~ msgstr "Rotera till yta 10"
+
+#~ msgid "Rotate To Face 10 with Window"
+#~ msgstr "Rotera till yta 10 med fönster"
+
+#~ msgid "Rotate To Face 11"
+#~ msgstr "Rotera till yta 11"
+
+#~ msgid "Rotate To Face 11 with Window"
+#~ msgstr "Rotera till yta 11 med fönster"
+
+#~ msgid "Rotate To Face 12"
+#~ msgstr "Rotera till yta 12"
+
+#~ msgid "Rotate To Face 12 with Window"
+#~ msgstr "Rotera till yta 12 med fönster"
+
+#~ msgid "Rotate To Face 2"
+#~ msgstr "Rotera till yta 2"
+
+#~ msgid "Rotate To Face 2 with Window"
+#~ msgstr "Rotera till yta 2 med fönster"
+
+#~ msgid "Rotate To Face 3"
+#~ msgstr "Rotera till yta 3"
+
+#~ msgid "Rotate To Face 3 with Window"
+#~ msgstr "Rotera till yta 3 med fönster"
+
+#~ msgid "Rotate To Face 4"
+#~ msgstr "Rotera till yta 4"
+
+#~ msgid "Rotate To Face 4 with Window"
+#~ msgstr "Rotera till yta 4 med fönster"
+
+#~ msgid "Rotate To Face 5"
+#~ msgstr "Rotera till yta 5"
+
+#~ msgid "Rotate To Face 5 with Window"
+#~ msgstr "Rotera till yta 5 med fönster"
+
+#~ msgid "Rotate To Face 6"
+#~ msgstr "Rotera till yta 6"
+
+#~ msgid "Rotate To Face 6 with Window"
+#~ msgstr "Rotera till yta 6 med fönster"
+
+#~ msgid "Rotate To Face 7"
+#~ msgstr "Rotera till yta 7"
+
+#~ msgid "Rotate To Face 7 with Window"
+#~ msgstr "Rotera till yta 7 med fönster"
+
+#~ msgid "Rotate To Face 8"
+#~ msgstr "Rotera till yta 8"
+
+#~ msgid "Rotate To Face 8 with Window"
+#~ msgstr "Rotera till yta 8 med fönster"
+
+#~ msgid "Rotate To Face 9"
+#~ msgstr "Rotera till yta 9"
+
+#~ msgid "Rotate To Face 9 with Window"
+#~ msgstr "Rotera till yta 9 med fönster"
+
+#~ msgid "Rotate to face 10"
+#~ msgstr "Rotera till yta 10"
+
+#~ msgid "Rotate to face 10 and bring active window along"
+#~ msgstr "Rotera till yta 10 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 11"
+#~ msgstr "Rotera till yta 11"
+
+#~ msgid "Rotate to face 11 and bring active window along"
+#~ msgstr "Rotera till yta 11 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 12"
+#~ msgstr "Rotera till yta 12"
+
+#~ msgid "Rotate to face 12 and bring active window along"
+#~ msgstr "Rotera till yta 12 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 2"
+#~ msgstr "Rotera till yta 2"
+
+#~ msgid "Rotate to face 2 and bring active window along"
+#~ msgstr "Rotera till yta 2 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 3"
+#~ msgstr "Rotera till yta 3"
+
+#~ msgid "Rotate to face 3 and bring active window along"
+#~ msgstr "Rotera till yta 3 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 4"
+#~ msgstr "Rotera till yta 4"
+
+#~ msgid "Rotate to face 4 and bring active window along"
+#~ msgstr "Rotera till yta 4 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 5"
+#~ msgstr "Rotera till yta 5"
+
+#~ msgid "Rotate to face 5 and bring active window along"
+#~ msgstr "Rotera till yta 5 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 6"
+#~ msgstr "Rotera till yta 6"
+
+#~ msgid "Rotate to face 6 and bring active window along"
+#~ msgstr "Rotera till yta 6 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 7"
+#~ msgstr "Rotera till yta 7"
+
+#~ msgid "Rotate to face 7 and bring active window along"
+#~ msgstr "Rotera till yta 7 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 8"
+#~ msgstr "Rotera till yta 8"
+
+#~ msgid "Rotate to face 8 and bring active window along"
+#~ msgstr "Rotera till yta 8 och ta med aktivt fönster"
+
+#~ msgid "Rotate to face 9"
+#~ msgstr "Rotera till yta 9"
+
+#~ msgid "Rotate to face 9 and bring active window along"
+#~ msgstr "Rotera till yta 9 och ta med aktivt fönster"
+
+#~ msgid "Run command 1"
+#~ msgstr "Kör kommando 1"
+
+#~ msgid "Run command 10"
+#~ msgstr "Kör kommando 10"
+
+#~ msgid "Run command 11"
+#~ msgstr "Kör kommando 11"
+
+#~ msgid "Run command 2"
+#~ msgstr "Kör kommando 2"
+
+#~ msgid "Run command 3"
+#~ msgstr "Kör kommando 3"
+
+#~ msgid "Run command 4"
+#~ msgstr "Kör kommando 4"
+
+#~ msgid "Run command 5"
+#~ msgstr "Kör kommando 5"
+
+#~ msgid "Run command 6"
+#~ msgstr "Kör kommando 6"
+
+#~ msgid "Run command 7"
+#~ msgstr "Kör kommando 7"
+
+#~ msgid "Run command 8"
+#~ msgstr "Kör kommando 8"
+
+#~ msgid "Run command 9"
+#~ msgstr "Kör kommando 9"
+
+#~ msgid "Scale speed (0.1-50.0)"
+#~ msgstr "Skalningshastighet (0.1-50.0)"
+
+#~ msgid "Scale timestep (0.1-50.0)"
+#~ msgstr "Tidsintervall för skalning (0.1-50.0)"
+
+#~ msgid "Shade resistance (0-100)"
+#~ msgstr "Skuggmotstånd (0-100)"
+
+#~ msgid "Show switcher"
+#~ msgstr "Visa växlare"
+
+#~ msgid "Start moving window using keyboard"
+#~ msgstr "Börja flytta fönstret med tangentbordet"
+
+#~ msgid "Start resizing window using keyboard"
+#~ msgstr "Börja skala fönstret med tangentbordet"
+
+#~ msgid "Terminate"
+#~ msgstr "Avsluta"
+
+#~ msgid "Texture filtering (Fast, Good, Best)"
+#~ msgstr "Texturfilter (Snabb, Bra, Bäst)"
+
+#~ msgid "Water effect on system beep"
+#~ msgstr "Vatteneffekt vid systemsignal"
+
+#~ msgid ""
+#~ "Window types that should be fading (Desktop, Dock, Toolbar, Menu, "
+#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska tonas ner (Skrivbord, Docka, Verktygsrad, Meny, "
+#~ "Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should be transformed when minimized (Desktop, Dock, "
+#~ "Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, "
+#~ "Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska transformeras när de minimeras (Skrivbord, Docka, "
+#~ "Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, "
+#~ "Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should scaled in scale mode (Desktop, Dock, Toolbar, "
+#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska skalas i skalningsläget (Skrivbord, Docka, "
+#~ "Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, "
+#~ "Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, "
+#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska visas i växlare (Skrivbord, Docka, Verktygsrad, "
+#~ "Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should wobble when focused (Desktop, Dock, Toolbar, "
+#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska få geléeffekt när de får fokus (Skrivbord, Docka, "
+#~ "Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, "
+#~ "Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should wobble when grabbed (Desktop, Dock, Toolbar, "
+#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska få geléeffekt när de fångas (Skrivbord, Docka, "
+#~ "Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, "
+#~ "Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should wobble when mapped (Desktop, Dock, Toolbar, "
+#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska få geléeffekt när de kopplas (Skrivbord, Docka, "
+#~ "Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, "
+#~ "Helskärm, Okänd)"
+
+#~ msgid ""
+#~ "Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, "
+#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ msgstr ""
+#~ "Fönstertyper som ska få geléeffekt när de flyttas (Skrivbord, Docka, "
+#~ "Verktygsrad, Meny, Verktyg, Splash, Dialog, ModalDialog, Normal, "
+#~ "Helskärm, Okänd)"
+
+#~ msgid "Wobble effect on system beep"
+#~ msgstr "Geléeffekt vid systemsignal"
+
+#~ msgid "Zoom Speed (0.1-50.0)"
+#~ msgstr "Zoomhastighet (0.1-50.0)"
+
+#~ msgid "Zoom Timestep (0.1-50.0)"
+#~ msgstr "Tidsintervall för zoom (0.1-50.0)"
+
 #~ msgid "Focus next window"
 #~ msgstr "Nächstes Fenster fokussieren"
-#~ msgid "Next Window"
-#~ msgstr "Nächstes Fenster"
-

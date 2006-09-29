@@ -255,8 +255,8 @@ if test "$use_gnome" = yes; then
 fi
 
 AC_ARG_ENABLE(kde,
-  [  --disable-kde           Disable kde window decorator],
-  [use_kde=$enableval], [use_kde=yes])
+  [  --enable-kde           Enable kde window decorator],
+  [use_kde=$enableval], [use_kde=no])
 
 if test "x$use_kde" = "xyes"; then
   PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
