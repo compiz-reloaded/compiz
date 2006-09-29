@@ -1796,6 +1796,38 @@ draw_window_decoration (decor_t *d)
 }
 
 #ifdef USE_METACITY
+static void
+decor_update_meta_window_property (decor_t	     *d,
+				   MetaFrameGeometry *fgeom)
+{
+    long    data[256];
+    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    extents extents;
+    gint    nQuad;
+    quad    quads[N_QUADS_MAX];
+
+    nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
+
+    extents.top    = fgeom->top_height;
+    extents.bottom = fgeom->bottom_height;
+    extents.left   = fgeom->left_width;
+    extents.right  = fgeom->right_width;
+
+    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			    &extents,
+			    ICON_SPACE + d->button_width,
+			    0,
+			    quads, nQuad);
+
+    gdk_error_trap_push ();
+    XChangeProperty (xdisplay, d->prop_xid,
+		     win_decor_atom,
+		     XA_INTEGER,
+		     32, PropModeReplace, (guchar *) data, 7 + 9 * nQuad);
+		     XSync (xdisplay, FALSE);
+    gdk_error_trap_pop ();
+}
+
 static Region
 meta_get_window_region (const MetaFrameGeometry *fgeom,
 			int		        width,
@@ -2105,7 +2137,7 @@ meta_draw_window_decoration (decor_t *d)
 
     if (d->prop_xid)
     {
-	decor_update_window_property (d);
+	decor_update_meta_window_property (d, &fgeom);
 	d->prop_xid = 0;
     }
 }
