@@ -218,7 +218,7 @@ if test "x$use_gtk" = "xyes"; then
     LIBS="$save_LIBS"
 
     if test "x$use_metacity" = "xyes"; then
-      PKG_CHECK_MODULES(METACITY, libmetacity-private,
+      PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.15.21,
 			[use_metacity=yes], [use_metacity=no])
     fi
 
