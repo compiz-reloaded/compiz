@@ -12,13 +12,6 @@ desktopfilesdir	      = $(windowsettingsdatadir)/gnome/wm-properties
 desktopfiles_in_files = compiz.desktop.in
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 noinst_DATA           = $(desktopfiles_files)
-endif
-
-INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
-	-DMETACITY_THEME_DIR=\""$(windowsettingsdatadir)/themes"\"
-
-noinst_LTLIBRARIES = \
-	$(libcompiz_module)
 
 install-exec-local:
 	if test -w $(moduledir); then ( \
@@ -30,3 +23,11 @@ install-exec-local:
 		$(INSTALL) -m 644 $(desktopfiles_files) $(desktopfilesdir) \
 		); \
 	fi
+
+endif
+
+INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
+	-DMETACITY_THEME_DIR=\""$(windowsettingsdatadir)/themes"\"
+
+noinst_LTLIBRARIES = \
+	$(libcompiz_module)
