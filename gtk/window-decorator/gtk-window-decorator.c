@@ -2606,6 +2606,8 @@ update_default_decorations (GdkScreen *screen)
     if (minimal)
 	return;
 
+    memset (&d, 0, sizeof (d));
+
     d.width  = left_space + left_corner_space + 1 + right_corner_space +
 	right_space;
     d.height = top_space + titlebar_height + normal_top_corner_space + 2 +
@@ -2613,16 +2615,7 @@ update_default_decorations (GdkScreen *screen)
 
     extents.top += titlebar_height;
 
-    d.buffer_pixmap = NULL;
-    d.layout	    = NULL;
-    d.icon	    = NULL;
-    d.icon_pixmap   = NULL;
-    d.icon_pixbuf   = NULL;
-    d.state	    = 0;
-    d.actions	    = 0;
-    d.prop_xid	    = 0;
-    d.button_width  = 0;
-    d.draw	    = theme_draw_window_decoration;
+    d.draw = theme_draw_window_decoration;
 
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
@@ -5364,17 +5357,10 @@ update_shadow (void)
     switcher_bottom_corner_space =
 	MAX (0, bottom_corner_space - SWITCHER_SPACE);
 
-    d.buffer_pixmap = NULL;
-    d.layout	    = NULL;
-    d.icon	    = NULL;
-    d.icon_pixmap   = NULL;
-    d.icon_pixbuf   = NULL;
-    d.state	    = 0;
-    d.actions	    = 0;
-    d.prop_xid	    = 0;
-    d.button_width  = 0;
-    d.draw	    = theme_draw_window_decoration;
-    d.active	    = TRUE;
+    memset (&d, 0, sizeof (d));
+
+    d.draw   = theme_draw_window_decoration;
+    d.active = TRUE;
 
     d.width  = left_space + left_corner_space + 1 + right_corner_space +
 	right_space;
