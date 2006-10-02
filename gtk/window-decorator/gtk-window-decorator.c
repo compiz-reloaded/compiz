@@ -5672,6 +5672,8 @@ double_click_titlebar_changed (GConfClient *client)
 	    double_click_action = DOUBLE_CLICK_SHADE;
 	else if (strcmp (action, "toggle_maximize") == 0)
 	    double_click_action = DOUBLE_CLICK_MAXIMIZE;
+
+	g_free (action);
     }
 }
 
