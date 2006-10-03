@@ -171,13 +171,16 @@ static char *moveWinType[] = {
 
 #define WOBBLY_SNAP_MODIFIERS_DEFAULT ShiftMask
 
+#define WOBBLY_SNAP_INVERTED_DEFAULT FALSE
+
 #define WOBBLY_MAXIMIZE_EFFECT_DEFAULT TRUE
 
 static int displayPrivateIndex;
 
-#define WOBBLY_DISPLAY_OPTION_SNAP   0
-#define WOBBLY_DISPLAY_OPTION_SHIVER 1
-#define WOBBLY_DISPLAY_OPTION_NUM    2
+#define WOBBLY_DISPLAY_OPTION_SNAP          0
+#define WOBBLY_DISPLAY_OPTION_SNAP_INVERTED 1
+#define WOBBLY_DISPLAY_OPTION_SHIVER        2
+#define WOBBLY_DISPLAY_OPTION_NUM           3
 
 typedef struct _WobblyDisplay {
     int		    screenPrivateIndex;
@@ -2333,17 +2336,29 @@ wobblyHandleEvent (CompDisplay *d,
 	    {
 		XkbStateNotifyEvent *stateEvent = (XkbStateNotifyEvent *) event;
 		CompAction	    *action;
+		Bool		    inverted;
 		unsigned int	    mods = 0xffffffff;
 
-		action = &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP].value.action;
+		action   = &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP].value.action;
+		inverted = wd->opt[WOBBLY_DISPLAY_OPTION_SNAP_INVERTED].value.b;
 
 		if (action->type & CompBindingTypeKey)
 		    mods = action->key.modifiers;
 
 		if ((stateEvent->mods & mods) == mods)
-		    wobblyEnableSnapping (d, NULL, 0, NULL, 0);
+		{
+		    if (inverted)
+			wobblyDisableSnapping (d, NULL, 0, NULL, 0);
+		    else
+			wobblyEnableSnapping (d, NULL, 0, NULL, 0);
+		}
 		else
-		    wobblyDisableSnapping (d, NULL, 0, NULL, 0);
+		{
+		    if (inverted)
+			wobblyEnableSnapping (d, NULL, 0, NULL, 0);
+		    else
+			wobblyDisableSnapping (d, NULL, 0, NULL, 0);
+		}
 	    }
 	}
 	break;
@@ -2851,10 +2866,13 @@ wobblySetDisplayOption (CompDisplay     *display,
 	if (compSetActionOption (o, value))
 	    return TRUE;
 	break;
+    case WOBBLY_DISPLAY_OPTION_SNAP_INVERTED:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
+	break;
     case WOBBLY_DISPLAY_OPTION_SHIVER:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
-	break;
     default:
 	break;
     }
@@ -2880,6 +2898,13 @@ wobblyDisplayInitOptions (WobblyDisplay *wd)
     o->value.action.type	  = CompBindingTypeKey;
     o->value.action.key.modifiers = WOBBLY_SNAP_MODIFIERS_DEFAULT;
     o->value.action.key.keycode   = 0;
+
+    o = &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP_INVERTED];
+    o->name	 = "snap_inverted";
+    o->shortDesc = N_("Snap Inverted");
+    o->longDesc	 = N_("Inverted window snapping");
+    o->type	 = CompOptionTypeBool;
+    o->value.b	 = WOBBLY_SNAP_INVERTED_DEFAULT;
 
     o = &wd->opt[WOBBLY_DISPLAY_OPTION_SHIVER];
     o->name		      = "shiver";

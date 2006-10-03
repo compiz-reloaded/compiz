@@ -24846,6 +24846,18 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/wobbly/allscreens/options/snap_inverted</key>
+            <applyto>/apps/compiz/plugins/wobbly/allscreens/options/snap_inverted</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Snap Inverted</short>
+                <long>Inverted window snapping</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/wobbly/screen0/options/friction</key>
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/friction</applyto>
             <owner>compiz</owner>
