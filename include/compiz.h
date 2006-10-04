@@ -457,6 +457,27 @@ getStringOptionNamed (CompOption *option,
 		      char	 *name,
 		      char	 *defaultValue);
 
+char *
+keyBindingToString (CompDisplay    *d,
+		    CompKeyBinding *key);
+
+char *
+buttonBindingToString (CompDisplay       *d,
+		       CompButtonBinding *button);
+
+int
+stringToKeyBinding (CompDisplay    *d,
+		    const char     *binding,
+		    CompKeyBinding *key);
+
+int
+stringToButtonBinding (CompDisplay	 *d,
+		       const char	 *binding,
+		       CompButtonBinding *button);
+
+char *
+edgeToString (unsigned int edge);
+
 
 /* display.c */
 
