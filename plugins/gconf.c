@@ -35,7 +35,7 @@
 #include <glib/gprintf.h>
 #include <gconf/gconf-client.h>
 
-#include <gconf-compiz-utils.h>
+#define APP_NAME "/apps/compiz"
 
 /* From gconf-internal.h. Bleah. */
 int gconf_value_compare (const GConfValue *value_a,
@@ -73,6 +73,20 @@ typedef struct _GConfScreen {
 
 #define GCONF_SCREEN(s)						           \
     GConfScreen *gs = GET_GCONF_SCREEN (s, GET_GCONF_DISPLAY (s->display))
+
+static int
+strcmpskipifequal (char **ptr,
+		   char *s)
+{
+    int ret, len;
+
+    len = strlen (s);
+    ret = strncmp (*ptr, s, len);
+    if (ret == 0)
+	*ptr = (*ptr) + len;
+
+    return ret;
+}
 
 static GConfValueType
 gconfTypeFromCompType (CompOptionType type)
@@ -148,12 +162,12 @@ gconfSetActionValue (CompDisplay     *d,
     if (bindingType == CompBindingTypeKey)
     {
 	if (value->action.type & CompBindingTypeKey)
-	    binding = gconfKeyBindingToString (d, &value->action.key);
+	    binding = keyBindingToString (d, &value->action.key);
     }
     else
     {
 	if (value->action.type & CompBindingTypeButton)
-	    binding = gconfButtonBindingToString (d, &value->action.button);
+	    binding = buttonBindingToString (d, &value->action.button);
     }
 
     if (!binding)
@@ -254,7 +268,7 @@ gconfSetOption (CompDisplay *d,
 	    if (o->value.action.edgeMask & (1 << i))
 	    {
 		gv = gconf_value_new (GCONF_VALUE_STRING);
-		gconf_value_set_string (gv, gconfEdgeToString (i));
+		gconf_value_set_string (gv, edgeToString (i));
 		list = g_slist_append (list, gv);
 	    }
 	}
@@ -547,8 +561,8 @@ gconfGetOptionValue (CompDisplay *d,
 		    else
 		    {
 			value.action.type |= CompBindingTypeKey;
-			status = gconfStringToKeyBinding (d, binding,
-							  &value.action.key);
+			status = stringToKeyBinding (d, binding,
+						     &value.action.key);
 		    }
 		}
 		else
@@ -561,8 +575,7 @@ gconfGetOptionValue (CompDisplay *d,
 		    else
 		    {
 			value.action.type |= CompBindingTypeButton;
-			status =
-			    gconfStringToButtonBinding (d, binding,
+			status = stringToButtonBinding (d, binding,
 							&value.action.button);
 		    }
 		}
@@ -598,7 +611,7 @@ gconfGetOptionValue (CompDisplay *d,
 
 			for (i = 0; i < SCREEN_EDGE_NUM; i++)
 			{
-			    if (strcasecmp (edge, gconfEdgeToString (i)) == 0)
+			    if (strcasecmp (edge, edgeToString (i)) == 0)
 				value.action.edgeMask |= 1 << i;
 			}
 
