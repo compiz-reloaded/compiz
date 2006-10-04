@@ -613,3 +613,33 @@ edgeToString (unsigned int edge)
 {
     return edgeName[edge];
 }
+
+Bool
+stringToColor (const char     *color,
+	       unsigned short *rgba)
+{
+    int c[4];
+
+    if (sscanf (color, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 4)
+    {
+	rgba[0] = c[0] << 8 | c[0];
+	rgba[1] = c[1] << 8 | c[1];
+	rgba[2] = c[2] << 8 | c[2];
+	rgba[3] = c[3] << 8 | c[3];
+
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+char *
+colorToString (unsigned short *rgba)
+{
+    char tmp[256];
+
+    snprintf (tmp, 256, "#%.2x%.2x%.2x%.2x",
+	      rgba[0] / 256, rgba[1] / 256, rgba[2] / 256, rgba[3] / 256);
+
+    return strdup (tmp);
+}

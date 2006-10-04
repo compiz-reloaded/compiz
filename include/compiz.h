@@ -478,6 +478,13 @@ stringToButtonBinding (CompDisplay	 *d,
 char *
 edgeToString (unsigned int edge);
 
+Bool
+stringToColor (const char     *color,
+	       unsigned short *rgba);
+
+char *
+colorToString (unsigned short *rgba);
+
 
 /* display.c */
 
