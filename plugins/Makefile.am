@@ -57,19 +57,13 @@ libplane_la_SOURCES = plane.c
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
-libgconf_la_SOURCES =	     \
-	gconf.c		     \
-	gconf-compiz-utils.c \
-	gconf-compiz-utils.h
+libgconf_la_SOURCES = gconf.c
 libgconf_module = libgconf.la
 
 if GCONF_DUMP_PLUGIN
 libgconf_dump_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_dump_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
-libgconf_dump_la_SOURCES =   \
-	gconf-dump.c	     \
-	gconf-compiz-utils.c \
-	gconf-compiz-utils.h
+libgconf_dump_la_SOURCES = gconf-dump.c
 libgconf_dump_module = libgconf-dump.la
 endif
 
