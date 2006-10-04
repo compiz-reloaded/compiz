@@ -141,11 +141,7 @@ gconfValueToString (CompDisplay	    *d,
     case CompOptionTypeBool:
 	return g_strdup (value->b ? "true" : "false");
     case CompOptionTypeColor:
-	return g_strdup_printf ("#%.2x%.2x%.2x%.2x",
-				value->c[0] / 256,
-				value->c[1] / 256,
-				value->c[2] / 256,
-				value->c[3] / 256);
+	return colorToString (value->c);
     case CompOptionTypeInt:
 	return g_strdup_printf ("%d", value->i);
     case CompOptionTypeFloat:
