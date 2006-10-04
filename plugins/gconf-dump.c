@@ -60,7 +60,8 @@
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include <gconf-compiz-utils.h>
+
+#define APP_NAME "/apps/compiz"
 
 static FILE *schemaFile;
 
@@ -194,7 +195,7 @@ gconfActionValueToString (CompDisplay	  *d,
     {
 	if (value->action.type & CompBindingTypeKey)
 	{
-	    tmp = gconfKeyBindingToString (d, &value->action.key);
+	    tmp = keyBindingToString (d, &value->action.key);
 	    escaped = g_markup_escape_text (tmp, -1);
 	    g_free (tmp);
 	}
@@ -205,7 +206,7 @@ gconfActionValueToString (CompDisplay	  *d,
     {
 	if (value->action.type & CompBindingTypeButton)
 	{
-	    tmp = gconfButtonBindingToString (d, &value->action.button);
+	    tmp = buttonBindingToString (d, &value->action.button);
 	    escaped = g_markup_escape_text (tmp, -1);
 	    g_free (tmp);
 	}
@@ -268,7 +269,7 @@ getLongDesc (CompOption *o, const char *option_name)
 	g_string_append (str, " (");
 	for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	{
-	    edge = gconfEdgeToString (i);
+	    edge = edgeToString (i);
 
 	    if (i > 0)
 		g_string_append (str, ", ");
@@ -420,7 +421,7 @@ gconfDumpToSchema (CompDisplay *d,
 		{
 		    tmp2 = g_strdup_printf ("%s%s%s", tmp1,
 					    (tmp2) ? "," : "",
-					    gconfEdgeToString (i));
+					    edgeToString (i));
 		    g_free (tmp1);
 
 		    tmp1 = tmp2;
