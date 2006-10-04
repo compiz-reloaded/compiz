@@ -101,6 +101,8 @@ dlloaderLoadPlugin (CompPlugin *p,
 	return FALSE;
     }
 
+    free (file);
+
     p->devPrivate.ptr = dlhand;
     p->devType	      = "dlloader";
 
