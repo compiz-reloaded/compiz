@@ -34,6 +34,15 @@
 
 #define COMPIZ_DBUS_SERVICE_NAME	 "org.freedesktop.compiz"
 #define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME "activate"
+#define COMPIZ_DBUS_SET_MEMBER_NAME      "set"
+#define COMPIZ_DBUS_GET_MEMBER_NAME      "get"
+
+typedef enum {
+    DbusActionIndexKeyBinding    = 0,
+    DbusActionIndexButtonBinding = 1,
+    DbusActionIndexEdge          = 2,
+    DbusActionIndexBell          = 3
+} DbusActionIndex;
 
 static int displayPrivateIndex;
 
@@ -48,27 +57,14 @@ typedef struct _DbusDisplay {
 #define DBUS_DISPLAY(d)			   \
     DbusDisplay *dd = GET_DBUS_DISPLAY (d)
 
-/*
- * Activate can be used to trigger any existing action. Arguments
- * should be a pair of { string, bool|int32|double|string }.
- *
- * Example (rotate to face 1):
- *
- * dbus-send --type=method_call --dest=org.freedesktop.compiz \
- * /org/freedesktop/compiz/rotate/allscreens/rotate_to	      \
- * org.freedesktop.compiz.activate			      \
- * string:'root' int32:0x52 string:'face' int32:1
- */
 
-static Bool
-dbusHandleActivateMessage (DBusConnection *connection,
-			   DBusMessage    *message,
-			   CompDisplay	  *d,
-			   char	          **path)
+static CompOption *
+dbusGetOptionsFromPath (CompDisplay *d,
+			char	    **path,
+			CompScreen  **return_screen,
+			int	    *nOption)
 {
     CompScreen *s = NULL;
-    CompOption *option = NULL;
-    int	       nOption = 0;
 
     if (strcmp (path[1], "allscreens"))
     {
@@ -82,15 +78,18 @@ dbusHandleActivateMessage (DBusConnection *connection,
 		break;
 
 	if (!s)
-	    return FALSE;
+	    return NULL;
     }
+
+    if (return_screen)
+	*return_screen = s;
 
     if (strcmp (path[0], "core") == 0)
     {
 	if (s)
-	    option = compGetScreenOptions (s, &nOption);
+	    return compGetScreenOptions (s, nOption);
 	else
-	    option = compGetDisplayOptions (d, &nOption);
+	    return compGetDisplayOptions (d, nOption);
     }
     else
     {
@@ -101,19 +100,46 @@ dbusHandleActivateMessage (DBusConnection *connection,
 		break;
 
 	if (!p)
-	    return FALSE;
+	    return NULL;
 
 	if (s)
 	{
 	    if (p->vTable->getScreenOptions)
-		option = (*p->vTable->getScreenOptions) (s, &nOption);
+		return (*p->vTable->getScreenOptions) (s, nOption);
 	}
 	else
 	{
 	    if (p->vTable->getDisplayOptions)
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		return (*p->vTable->getDisplayOptions) (d, nOption);
 	}
     }
+
+    return NULL;
+}
+
+/*
+ * Activate can be used to trigger any existing action. Arguments
+ * should be a pair of { string, bool|int32|double|string }.
+ *
+ * Example (rotate to face 1):
+ *
+ * dbus-send --type=method_call --dest=org.freedesktop.compiz \
+ * /org/freedesktop/compiz/rotate/allscreens/rotate_to	      \
+ * org.freedesktop.compiz.activate			      \
+ * string:'root' int32:0x52 string:'face' int32:1
+ */
+static Bool
+dbusHandleActivateMessage (DBusConnection *connection,
+			   DBusMessage    *message,
+			   CompDisplay	  *d,
+			   char	          **path)
+{
+    CompOption *option;
+    int	       nOption;
+
+    option = dbusGetOptionsFromPath (d, path, NULL, &nOption);
+    if (!option)
+	return FALSE;
 
     while (nOption--)
     {
@@ -229,13 +255,404 @@ dbusHandleActivateMessage (DBusConnection *connection,
     return FALSE;
 }
 
+static Bool
+dbusTryGetValueWithType (DBusMessageIter *iter,
+			 int		 type,
+			 void		 *value)
+{
+    if (dbus_message_iter_get_arg_type (iter) == type)
+    {
+	dbus_message_iter_get_basic (iter, value);
+
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+static Bool
+dbusGetOptionValue (DBusMessageIter *iter,
+		    CompOptionType  type,
+		    CompOptionValue *value)
+{
+    double d;
+    char   *s;
+
+    switch (type) {
+    case CompOptionTypeBool:
+	return dbusTryGetValueWithType (iter,
+					DBUS_TYPE_BOOLEAN,
+					&value->b);
+	break;
+    case CompOptionTypeInt:
+	return dbusTryGetValueWithType (iter,
+					DBUS_TYPE_INT32,
+					&value->i);
+	break;
+    case CompOptionTypeFloat:
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_DOUBLE,
+				     &d))
+	{
+	    value->f = d;
+	    return TRUE;
+	}
+	break;
+    case CompOptionTypeString:
+	return dbusTryGetValueWithType (iter,
+					DBUS_TYPE_STRING,
+					&value->s);
+	break;
+    case CompOptionTypeColor:
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_STRING,
+				     &s))
+	{
+	    if (stringToColor (s, value->c))
+		return TRUE;
+	}
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+/*
+ * 'Set' can be used to change any existing option. Argument
+ * should be the new value for the option.
+ *
+ * Example (will set command0 option to firefox):
+ *
+ * dbus-send --type=method_call --dest=org.freedesktop.compiz \
+ * /org/freedesktop/compiz/core/allscreens/command0	      \
+ * org.freedesktop.compiz.set				      \
+ * string:'firefox'
+ *
+ * List and action options can be changed using more than one
+ * argument.
+ *
+ * Example (will set active_plugins option to
+ * [dbus,decoration,place]):
+ *
+ * dbus-send --type=method_call --dest=org.freedesktop.compiz \
+ * /org/freedesktop/compiz/core/allscreens/active_plugins     \
+ * org.freedesktop.compiz.set				      \
+ * string:'dbus' string:'decoration' string:'place'
+ *
+ * Example (will set run_command0 option to trigger on key
+ * binding <Control><Alt>Return and not trigger on any button
+ * bindings, screen edges or bell notifications):
+ *
+ * dbus-send --type=method_call --dest=org.freedesktop.compiz \
+ * /org/freedesktop/compiz/core/allscreens/run_command0	      \
+ * org.freedesktop.compiz.set				      \
+ * string:'<Control><Alt>Return'			      \
+ * string:'Disabled'					      \
+ * string:''						      \
+ * boolean:'false'
+ */
+static Bool
+dbusHandleSetOptionMessage (DBusConnection *connection,
+			    DBusMessage    *message,
+			    CompDisplay	   *d,
+			    char	   **path)
+{
+    CompScreen *s;
+    CompOption *option;
+    int	       nOption;
+
+    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+    if (!option)
+	return FALSE;
+
+    while (nOption--)
+    {
+	if (strcmp (option->name, path[2]) == 0)
+	{
+	    DBusMessageIter iter;
+
+	    if (dbus_message_iter_init (message, &iter))
+	    {
+		CompOptionValue value, tmpValue;
+		DbusActionIndex	actionIndex = DbusActionIndexKeyBinding;
+		Bool		status = FALSE;
+
+		memset (&value, 0, sizeof (value));
+
+		do
+		{
+		    if (option->type == CompOptionTypeList)
+		    {
+			if (dbusGetOptionValue (&iter, option->type, &tmpValue))
+			{
+			    CompOptionValue *v;
+
+			    v = realloc (value.list.value,
+					 sizeof (CompOptionValue) *
+					 (value.list.nValue + 1));
+			    if (v)
+			    {
+				v[value.list.nValue++] = tmpValue;
+				value.list.value = v;
+				status |= TRUE;
+			    }
+			}
+		    }
+		    else if (option->type == CompOptionTypeAction)
+		    {
+			CompAction *a = &value.action;
+			char	   *str;
+
+			status = TRUE;
+
+			switch (actionIndex) {
+			case DbusActionIndexKeyBinding:
+			    if (dbusTryGetValueWithType (&iter,
+							 DBUS_TYPE_STRING,
+							 &str))
+			    {
+				if (stringToKeyBinding (d, str, &a->key))
+				    a->type |= CompBindingTypeKey;
+			    }
+			    break;
+			case DbusActionIndexButtonBinding:
+			    if (dbusTryGetValueWithType (&iter,
+							 DBUS_TYPE_STRING,
+							 &str))
+			    {
+				if (stringToButtonBinding (d, str, &a->button))
+				    a->type |= CompBindingTypeButton;
+			    }
+			    break;
+			case DbusActionIndexEdge:
+			    if (dbusTryGetValueWithType (&iter,
+							 DBUS_TYPE_STRING,
+							 &str))
+			    {
+				status |= TRUE;
+
+				while (strlen (str))
+				{
+				    char *edge;
+				    int  len, i = SCREEN_EDGE_NUM;
+
+				    for (;;)
+				    {
+					edge = edgeToString (--i);
+					len  = strlen (edge);
+
+					if (strncasecmp (str, edge, len) == 0)
+					{
+					    a->edgeMask |= 1 << i;
+
+					    str += len;
+					    break;
+					}
+
+					if (!i)
+					{
+					    str++;
+					    break;
+					}
+				    }
+				}
+			    }
+			    break;
+			case DbusActionIndexBell:
+			    dbusTryGetValueWithType (&iter,
+						     DBUS_TYPE_BOOLEAN,
+						     &a->bell);
+			default:
+			    break;
+			}
+
+			actionIndex++;
+		    }
+		    else if (dbusGetOptionValue (&iter, option->type, &value))
+		    {
+			status |= TRUE;
+		    }
+		} while (dbus_message_iter_next (&iter));
+
+		if (status)
+		{
+		    if (s)
+		    {
+			if (strcmp (path[0], "core"))
+			    status =
+				(*s->setScreenOptionForPlugin) (s,
+								path[0],
+								option->name,
+								&value);
+			else
+			    status = (*s->setScreenOption) (s, option->name,
+							    &value);
+		    }
+		    else
+		    {
+			if (strcmp (path[0], "core"))
+			    status =
+				(*d->setDisplayOptionForPlugin) (d,
+								 path[0],
+								 option->name,
+								 &value);
+			else
+			    status = (*d->setDisplayOption) (d, option->name,
+							     &value);
+		    }
+
+		    return status;
+		}
+		else
+		{
+		    return FALSE;
+		}
+	    }
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
+static void
+dbusAppendOptionValue (DBusMessage     *message,
+		       CompOptionType  type,
+		       CompOptionValue *value)
+{
+    double d;
+    char   *s;
+
+    switch (type) {
+    case CompOptionTypeBool:
+	dbus_message_append_args (message,
+				  DBUS_TYPE_BOOLEAN, &value->b,
+				  DBUS_TYPE_INVALID);
+	break;
+    case CompOptionTypeInt:
+	dbus_message_append_args (message,
+				  DBUS_TYPE_INT32, &value->i,
+				  DBUS_TYPE_INVALID);
+	break;
+    case CompOptionTypeFloat:
+	d = value->f;
+
+	dbus_message_append_args (message,
+				  DBUS_TYPE_DOUBLE, &d,
+				  DBUS_TYPE_INVALID);
+	break;
+    case CompOptionTypeString:
+	dbus_message_append_args (message,
+				  DBUS_TYPE_STRING, &value->s,
+				  DBUS_TYPE_INVALID);
+	break;
+    case CompOptionTypeColor:
+	s = colorToString (value->c);
+	if (s)
+	{
+	    dbus_message_append_args (message,
+				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_INVALID);
+	    free (s);
+	}
+    default:
+	break;
+    }
+}
+
+/*
+ * 'Get' can be used to retrieve the value of any existing option.
+ *
+ * Example (will retrieve the current value of command0 option):
+ *
+ * dbus-send --print-reply --type=method_call	    \
+ * --dest=org.freedesktop.compiz		    \
+ * /org/freedesktop/compiz/core/allscreens/command0 \
+ * org.freedesktop.compiz.get
+ */
+static Bool
+dbusHandleGetOptionMessage (DBusConnection *connection,
+			    DBusMessage    *message,
+			    CompDisplay	   *d,
+			    char	   **path)
+{
+    CompScreen *s;
+    CompOption *option;
+    int	       nOption;
+
+    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+    if (!option)
+	return FALSE;
+
+    while (nOption--)
+    {
+	if (strcmp (option->name, path[2]) == 0)
+	{
+	    DBusMessage *reply;
+	    int		i;
+
+	    reply = dbus_message_new_method_return (message);
+
+	    if (option->type == CompOptionTypeList)
+	    {
+		for (i = 0; i < option->value.list.nValue; i++)
+		    dbusAppendOptionValue (reply, option->value.list.type,
+					   &option->value.list.value[i]);
+	    }
+	    else if (option->type == CompOptionTypeAction)
+	    {
+		CompAction *a = &option->value.action;
+		char	   *key = "Disabled";
+		char	   *button = "Disabled";
+		char	   edge[256];
+
+		if (a->type & CompBindingTypeKey)
+		    key = keyBindingToString (d, &a->key);
+
+		if (a->type & CompBindingTypeButton)
+		    button = buttonBindingToString (d, &a->button);
+
+		*edge = '\0';
+
+		for (i = 0; i < SCREEN_EDGE_NUM; i++)
+		    if (a->edgeMask & (1 << i))
+			strcpy (edge + strlen (edge), edgeToString (i));
+
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &key,
+					  DBUS_TYPE_STRING, &button,
+					  DBUS_TYPE_STRING, &edge,
+					  DBUS_TYPE_BOOLEAN, &a->bell,
+					  DBUS_TYPE_INVALID);
+	    }
+	    else
+	    {
+		dbusAppendOptionValue (reply, option->type, &option->value);
+	    }
+
+	    dbus_connection_send (connection, reply, NULL);
+	    dbus_connection_flush (connection);
+
+	    dbus_message_unref (reply);
+
+	    return TRUE;
+	}
+
+	option++;
+    }
+
+    return FALSE;
+}
+
 static DBusHandlerResult
 dbusHandleMessage (DBusConnection *connection,
 		   DBusMessage    *message,
 		   void           *userData)
 {
     CompDisplay *d = (CompDisplay *) userData;
-    Bool	status;
+    Bool	status = FALSE;
     char	**path;
     const char  *service, *interface, *member;
 
@@ -252,9 +669,6 @@ dbusHandleMessage (DBusConnection *connection,
     if (!dbus_message_has_destination (message, COMPIZ_DBUS_SERVICE_NAME))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
-    if (!dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-
     if (!dbus_message_get_path_decomposed (message, &path))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
@@ -266,7 +680,18 @@ dbusHandleMessage (DBusConnection *connection,
 	strcmp (path[2], "compiz"))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
-    status = dbusHandleActivateMessage (connection, message, d, &path[3]);
+    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
+    {
+	status = dbusHandleActivateMessage (connection, message, d, &path[3]);
+    }
+    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME))
+    {
+	status = dbusHandleSetOptionMessage (connection, message, d, &path[3]);
+    }
+    else if (dbus_message_has_member (message, COMPIZ_DBUS_GET_MEMBER_NAME))
+    {
+	status = dbusHandleGetOptionMessage (connection, message, d, &path[3]);
+    }
 
     dbus_free_string_array (path);
 
