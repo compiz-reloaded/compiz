@@ -531,7 +531,7 @@ stringToModifiers (CompDisplay *d,
     return mods;
 }
 
-int
+Bool
 stringToKeyBinding (CompDisplay    *d,
 		    const char     *binding,
 		    CompKeyBinding *key)
@@ -575,7 +575,7 @@ stringToKeyBinding (CompDisplay    *d,
     return FALSE;
 }
 
-int
+Bool
 stringToButtonBinding (CompDisplay	 *d,
 		       const char	 *binding,
 		       CompButtonBinding *button)

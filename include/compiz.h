@@ -465,12 +465,12 @@ char *
 buttonBindingToString (CompDisplay       *d,
 		       CompButtonBinding *button);
 
-int
+Bool
 stringToKeyBinding (CompDisplay    *d,
 		    const char     *binding,
 		    CompKeyBinding *key);
 
-int
+Bool
 stringToButtonBinding (CompDisplay	 *d,
 		       const char	 *binding,
 		       CompButtonBinding *button);
