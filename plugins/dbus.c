@@ -756,7 +756,7 @@ dbusInitDisplay (CompPlugin  *p,
 	fprintf (stderr, "%s: dbus_bus_request_name error: %s\n",
 		 programName, error.message);
 
-	dbus_connection_close (dd->connection);
+	dbus_connection_unref (dd->connection);
 	dbus_error_free (&error);
 
 	return FALSE;
@@ -769,7 +769,7 @@ dbusInitDisplay (CompPlugin  *p,
 	fprintf (stderr, "%s: dbus_bus_request_name reply is not "
 		 "primary owner\n", programName);
 
-	dbus_connection_close (dd->connection);
+	dbus_connection_unref (dd->connection);
 
 	return FALSE;
     }
@@ -782,7 +782,7 @@ dbusInitDisplay (CompPlugin  *p,
 	fprintf (stderr, "%s: dbus_connection_add_filter failed\n",
 		 programName);
 
-	dbus_connection_close (dd->connection);
+	dbus_connection_unref (dd->connection);
 
 	return FALSE;
     }
@@ -793,7 +793,7 @@ dbusInitDisplay (CompPlugin  *p,
 	fprintf (stderr, "%s: dbus_connection_get_unix_fd failed\n",
 		 programName);
 
-	dbus_connection_close (dd->connection);
+	dbus_connection_unref (dd->connection);
 
 	return FALSE;
     }
@@ -817,7 +817,7 @@ dbusFiniDisplay (CompPlugin  *p,
     compRemoveWatchFd (dd->watchFdHandle);
 
     dbus_bus_release_name (dd->connection, COMPIZ_DBUS_SERVICE_NAME, NULL);
-    dbus_connection_close (dd->connection);
+    dbus_connection_unref (dd->connection);
 
     free (dd);
 }
