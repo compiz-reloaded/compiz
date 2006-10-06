@@ -1465,7 +1465,6 @@ handleEvent (CompDisplay *d,
 		getMwmHints (d, w->id, &w->mwmFunc, &w->mwmDecor);
 
 		recalcWindowActions (w);
-		updateWindowAttributes (w, FALSE);
 	    }
 	}
 	else if (event->xproperty.atom == d->wmProtocolsAtom)
