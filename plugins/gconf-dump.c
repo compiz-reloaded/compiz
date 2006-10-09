@@ -576,7 +576,7 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 
 	for (i = 0; i < p->vTable->nDeps; i++)
 	{
-	    value.s = p->vTable->deps[i].plugin;
+	    value.s = p->vTable->deps[i].name;
 	    if (p->vTable->deps[i].rule == CompPluginRuleBefore)
 		g_array_append_val (before, value);
 	    else
@@ -840,8 +840,10 @@ CompPluginVTable gconfDumpVTable = {
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
-    0,
-    0
+    0, /* Deps */
+    0, /* nDeps */
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

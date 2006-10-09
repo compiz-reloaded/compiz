@@ -2106,8 +2106,10 @@ CompPluginVTable switchVTable = {
     switchSetDisplayOption,
     switchGetScreenOptions,
     switchSetScreenOption,
-    NULL,
-    0
+    0, /* Deps */
+    0, /* nDeps */
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

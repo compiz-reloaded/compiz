@@ -3127,7 +3127,9 @@ CompPluginVTable wobblyVTable = {
     wobblyGetScreenOptions,
     wobblySetScreenOption,
     wobblyDeps,
-    sizeof (wobblyDeps) / sizeof (wobblyDeps[0])
+    sizeof (wobblyDeps) / sizeof (wobblyDeps[0]),
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

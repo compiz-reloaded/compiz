@@ -869,8 +869,10 @@ CompPluginVTable dbusVTable = {
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
-    NULL,
-    0
+    0, /* Deps */
+    0, /* nDeps */
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

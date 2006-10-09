@@ -2136,7 +2136,9 @@ CompPluginVTable rotateVTable = {
     rotateGetScreenOptions,
     rotateSetScreenOption,
     rotateDeps,
-    sizeof (rotateDeps) / sizeof (rotateDeps[0])
+    sizeof (rotateDeps) / sizeof (rotateDeps[0]),
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

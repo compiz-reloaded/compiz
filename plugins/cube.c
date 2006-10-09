@@ -1733,17 +1733,21 @@ cubeFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
-CompPluginDep cubeDeps[] = {
-    { CompPluginRuleBefore, "scale" },
-    { CompPluginRuleBefore, "switcher" }
-};
-
 static int
 cubeGetVersion (CompPlugin *plugin,
 		int	   version)
 {
     return ABIVERSION;
 }
+
+CompPluginDep cubeDeps[] = {
+    { CompPluginRuleBefore, "scale" },
+    { CompPluginRuleBefore, "switcher" }
+};
+
+CompPluginFeature cubeFeatures[] = {
+    { "largedesktop" }
+};
 
 CompPluginVTable cubeVTable = {
     "cube",
@@ -1763,7 +1767,9 @@ CompPluginVTable cubeVTable = {
     cubeGetScreenOptions,
     cubeSetScreenOption,
     cubeDeps,
-    sizeof (cubeDeps) / sizeof (cubeDeps[0])
+    sizeof (cubeDeps) / sizeof (cubeDeps[0]),
+    cubeFeatures,
+    sizeof (cubeFeatures) / sizeof (cubeFeatures[0])
 };
 
 CompPluginVTable *

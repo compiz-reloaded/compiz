@@ -837,7 +837,9 @@ static CompPluginVTable fadeVTable = {
     fadeGetScreenOptions,
     fadeSetScreenOption,
     fadeDeps,
-    sizeof (fadeDeps) / sizeof (fadeDeps[0])
+    sizeof (fadeDeps) / sizeof (fadeDeps[0]),
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

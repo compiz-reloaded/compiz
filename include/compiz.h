@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20060927
+#define ABIVERSION 20061009
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2124,13 +2124,18 @@ typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
 typedef enum {
     CompPluginRuleBefore,
-    CompPluginRuleAfter
+    CompPluginRuleAfter,
+    CompPluginRuleRequire
 } CompPluginRule;
 
 typedef struct _CompPluginDep {
     CompPluginRule rule;
-    char	   *plugin;
+    char	   *name;
 } CompPluginDep;
+
+typedef struct _CompPluginFeature {
+    char *name;
+} CompPluginFeature;
 
 typedef struct _CompPluginVTable {
     char *name;
@@ -2158,6 +2163,9 @@ typedef struct _CompPluginVTable {
 
     CompPluginDep *deps;
     int		  nDeps;
+
+    CompPluginFeature *features;
+    int		      nFeatures;
 } CompPluginVTable;
 
 typedef CompPluginVTable *(*PluginGetInfoProc) (void);
@@ -2211,6 +2219,9 @@ windowFiniPlugins (CompWindow *w);
 
 CompPlugin *
 findActivePlugin (char *name);
+
+CompPluginFeature *
+findActiveFeature (char *name);
 
 CompPlugin *
 loadPlugin (char *plugin);

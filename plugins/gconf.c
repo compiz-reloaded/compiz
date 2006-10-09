@@ -1065,7 +1065,9 @@ CompPluginVTable gconfVTable = {
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
     gconfDeps,
-    sizeof (gconfDeps) / sizeof (gconfDeps[0])
+    sizeof (gconfDeps) / sizeof (gconfDeps[0]),
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

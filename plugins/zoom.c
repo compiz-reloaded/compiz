@@ -884,7 +884,7 @@ zoomGetVersion (CompPlugin *plugin,
 }
 
 CompPluginDep zoomDeps[] = {
-    { CompPluginRuleAfter, "cube" }
+    { CompPluginRuleRequire, "largedesktop" }
 };
 
 CompPluginVTable zoomVTable = {
@@ -905,7 +905,9 @@ CompPluginVTable zoomVTable = {
     zoomGetScreenOptions,
     zoomSetScreenOption,
     zoomDeps,
-    sizeof (zoomDeps) / sizeof (zoomDeps[0])
+    sizeof (zoomDeps) / sizeof (zoomDeps[0]),
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

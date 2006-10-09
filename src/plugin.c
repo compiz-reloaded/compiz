@@ -331,6 +331,41 @@ findActivePlugin (char *name)
     return 0;
 }
 
+static CompPlugin *
+findActivePluginWithFeature (char	       *name,
+			     CompPluginFeature **feature)
+{
+    CompPlugin *p;
+    int	       i;
+
+    for (p = plugins; p; p = p->next)
+    {
+	for (i = 0; i < p->vTable->nFeatures; i++)
+	{
+	    if (strcmp (p->vTable->features[i].name, name) == 0)
+	    {
+		if (feature)
+		    *feature = &p->vTable->features[i];
+
+		return p;
+	    }
+	}
+    }
+
+    return 0;
+}
+
+CompPluginFeature *
+findActiveFeature (char *name)
+{
+    CompPluginFeature *feature;
+
+    if (findActivePluginWithFeature (name, &feature))
+	return feature;
+
+    return 0;
+}
+
 void
 unloadPlugin (CompPlugin *p)
 {
@@ -392,19 +427,29 @@ checkPluginDeps (CompPlugin *p)
     {
 	switch (deps->rule) {
 	case CompPluginRuleBefore:
-	    if (findActivePlugin (deps->plugin))
+	    if (findActivePlugin (deps->name))
 	    {
 		fprintf (stderr, "%s: '%s' plugin must be loaded before '%s' "
-			 "plugin\n", programName, p->vTable->name, deps->plugin);
+			 "plugin\n", programName, p->vTable->name, deps->name);
 
 		return FALSE;
 	    }
 	    break;
 	case CompPluginRuleAfter:
-	    if (!findActivePlugin (deps->plugin))
+	    if (!findActivePlugin (deps->name))
 	    {
 		fprintf (stderr, "%s: '%s' plugin must be loaded after '%s' "
-			 "plugin\n", programName, p->vTable->name, deps->plugin);
+			 "plugin\n", programName, p->vTable->name, deps->name);
+
+		return FALSE;
+	    }
+	    break;
+	case CompPluginRuleRequire:
+	    if (!findActiveFeature (deps->name))
+	    {
+		fprintf (stderr, "%s: '%s' plugin needs feature '%s' which "
+			 "is currently not provided by any plugin\n",
+			 programName, p->vTable->name, deps->name);
 
 		return FALSE;
 	    }
@@ -420,12 +465,29 @@ checkPluginDeps (CompPlugin *p)
 Bool
 pushPlugin (CompPlugin *p)
 {
+    CompPlugin *plugin;
+    int	       i;
+
     if (findActivePlugin (p->vTable->name))
     {
 	fprintf (stderr, "%s: Plugin '%s' already active\n", programName,
 		 p->vTable->name);
 
 	return FALSE;
+    }
+
+    for (i = 0; i < p->vTable->nFeatures; i++)
+    {
+	plugin = findActivePluginWithFeature (p->vTable->features[i].name, 0);
+	if (plugin)
+	{
+	    fprintf (stderr, "%s: Plugin '%s' can't be activated because "
+		     "plugin '%s' is already providing feature '%s'\n",
+		     programName, p->vTable->name, plugin->vTable->name,
+		     p->vTable->features[i].name);
+
+	    return FALSE;
+	}
     }
 
     if (!checkPluginDeps (p))

@@ -1065,7 +1065,9 @@ static CompPluginVTable minVTable = {
     minGetScreenOptions,
     minSetScreenOption,
     minDeps,
-    sizeof (minDeps) / sizeof (minDeps[0])
+    sizeof (minDeps) / sizeof (minDeps[0]),
+    0, /* Features */
+    0  /* nFeatures */
 };
 
 CompPluginVTable *

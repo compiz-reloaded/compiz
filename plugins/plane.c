@@ -861,20 +861,21 @@ planeFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
-CompPluginDep planeDeps[] = {
-#if 0
-    /* We need a new CompPluginRuleConflicts */
-    { CompPluginRuleConflicts, "rotate" },
-    { CompPluginRuleConflicts, "cube" },
-#endif
-};
-
 static int
 planeGetVersion (CompPlugin *plugin,
 		 int	    version)
 {
     return ABIVERSION;
 }
+
+CompPluginDep planeDeps[] = {
+    { CompPluginRuleBefore, "scale" },
+    { CompPluginRuleBefore, "switcher" }
+};
+
+CompPluginFeature planeFeatures[] = {
+    { "largedesktop" }
+};
 
 CompPluginVTable planeVTable = {
     "plane",
@@ -894,7 +895,9 @@ CompPluginVTable planeVTable = {
     NULL, /* planeGetScreenOptions, */
     NULL, /* planeSetScreenOption, */
     planeDeps,
-    sizeof (planeDeps) / sizeof (planeDeps[0])
+    sizeof (planeDeps) / sizeof (planeDeps[0]),
+    planeFeatures,
+    sizeof (planeFeatures) / sizeof (planeFeatures[0])
 };
 
 CompPluginVTable *

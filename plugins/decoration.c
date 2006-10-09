@@ -1350,6 +1350,10 @@ CompPluginDep decorDeps[] = {
     { CompPluginRuleBefore, "scale" }
 };
 
+CompPluginFeature decorFeatures[] = {
+    { "decorations" }
+};
+
 static CompPluginVTable decorVTable = {
     "decoration",
     N_("Window Decoration"),
@@ -1368,7 +1372,9 @@ static CompPluginVTable decorVTable = {
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
     decorDeps,
-    sizeof (decorDeps) / sizeof (decorDeps[0])
+    sizeof (decorDeps) / sizeof (decorDeps[0]),
+    decorFeatures,
+    sizeof (decorFeatures) / sizeof (decorFeatures[0])
 };
 
 CompPluginVTable *
