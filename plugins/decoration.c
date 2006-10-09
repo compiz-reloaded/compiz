@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <unistd.h>
 
 #include <X11/Xatom.h>
 #include <X11/extensions/shape.h>
@@ -127,7 +128,8 @@ typedef struct _WindowDecoration {
 #define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
 #define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X 2
 #define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y 3
-#define DECOR_DISPLAY_OPTION_NUM             4
+#define DECOR_DISPLAY_OPTION_COMMAND         4
+#define DECOR_DISPLAY_OPTION_NUM             5
 
 static int displayPrivateIndex;
 
@@ -217,6 +219,29 @@ decorSetDisplayOption (CompDisplay     *display,
     case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y:
 	if (compSetIntOption (o, value))
 	    return TRUE;
+	break;
+    case DECOR_DISPLAY_OPTION_COMMAND:
+	if (compSetStringOption (o, value))
+	{
+	    if (display->screens && *o->value.s != '\0')
+	    {
+		DECOR_SCREEN (display->screens);
+
+		/* run decorator command if no decorator is present on
+		   first screen */
+		if (!ds->dmWin)
+		{
+		    if (fork () == 0)
+		    {
+			putenv (display->displayString);
+			execl ("/bin/sh", "/bin/sh", "-c", o->value.s, NULL);
+			exit (0);
+		    }
+		}
+	    }
+
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -266,6 +291,16 @@ decorDisplayInitOptions (DecorDisplay *dd)
     o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
     o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
     o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_COMMAND];
+    o->name		= "command";
+    o->shortDesc	= N_("Command");
+    o->longDesc		= N_("Decorator command line that is executed if no "
+			     "decorator is already running");
+    o->type		= CompOptionTypeString;
+    o->value.s		= strdup ("");
+    o->rest.s.string	= NULL;
+    o->rest.s.nString	= 0;
 }
 
 static Bool
