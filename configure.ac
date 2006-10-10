@@ -188,6 +188,16 @@ if test -n "$SCALE_CORNER"; then
 fi
 AC_SUBST(SCALE_CORNER)
 
+AC_ARG_WITH(default-plugins,
+  [  --with-default-plugins  Set default plugins],
+  [DEFAULT_PLUGINS="$withval"],
+  [DEFAULT_PLUGINS="decoration fade minimize move resize switcher"])
+
+if test -n "$DEFAULT_PLUGINS"; then
+  AC_DEFINE_UNQUOTED(DEFAULT_PLUGINS, "$DEFAULT_PLUGINS", [Default plugins])
+fi
+AC_SUBST(DEFAULT_PLUGINS)
+
 AC_ARG_ENABLE(gtk,
   [  --disable-gtk           Disable gtk window decorator],
   [use_gtk=$enableval], [use_gtk=yes])

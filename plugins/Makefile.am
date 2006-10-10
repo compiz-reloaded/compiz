@@ -71,13 +71,20 @@ schemadir = $(GCONF_SCHEMA_FILE_DIR)
 schema_in_files = compiz.schemas.in
 schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
-schema_modules = $(patsubst gconf%,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))
+schema_modules = $(patsubst gconf%,,$(subst rotate,,$(subst zoom,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))))
 
 compiz.schemas.in:
-	COMPIZ_SCHEMA_PLUGINS="$(schema_modules)" COMPIZ_SCHEMA_GENERAL=1 \
-	compiz --replace $(schema_modules) gconf-dump &&		  \
-	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@]/'			  \
-	  < compiz.schemas.dump > compiz.schemas.in;			  \
+	rm -f compiz.schemas.dump;
+	echo -e "<gconfschemafile>\n    <schemalist>" >> compiz.schemas.dump;
+	COMPIZ_SCHEMA_GENERAL=1 compiz --replace gconf-dump;
+	for module in $(schema_modules) ; do \
+		COMPIZ_SCHEMA_PLUGINS="$$module" \
+		compiz --replace "$$module" gconf-dump; \
+	done;
+	COMPIZ_SCHEMA_PLUGINS="rotate" compiz --replace cube rotate gconf-dump;
+	COMPIZ_SCHEMA_PLUGINS="zoom" compiz --replace cube zoom gconf-dump;
+	echo -e "    </schemalist>\n</gconfschemafile>" >> compiz.schemas.dump;
+	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@\]/' -e 's/\[gconf\]/\[gconf \@DEFAULT_PLUGINS\@\]/' < compiz.schemas.dump > compiz.schemas.in;
 	rm -f compiz.schemas.dump
 
 if GCONF_SCHEMAS_INSTALL
@@ -114,8 +121,6 @@ INCLUDES =					\
 
 moduledir = $(plugindir)
 
-# NOTE: the order here determines the default active_plugins order in
-# compiz.schemas
 module_LTLIBRARIES =		\
 	$(libgconf_module)	\
 	libdecoration.la	\
