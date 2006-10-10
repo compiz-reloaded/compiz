@@ -32,10 +32,11 @@
 
 #include <compiz.h>
 
-#define COMPIZ_DBUS_SERVICE_NAME	 "org.freedesktop.compiz"
-#define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME "activate"
-#define COMPIZ_DBUS_SET_MEMBER_NAME      "set"
-#define COMPIZ_DBUS_GET_MEMBER_NAME      "get"
+#define COMPIZ_DBUS_SERVICE_NAME	   "org.freedesktop.compiz"
+#define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME   "activate"
+#define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME "deactivate"
+#define COMPIZ_DBUS_SET_MEMBER_NAME        "set"
+#define COMPIZ_DBUS_GET_MEMBER_NAME        "get"
 
 typedef enum {
     DbusActionIndexKeyBinding    = 0,
@@ -126,13 +127,34 @@ dbusGetOptionsFromPath (CompDisplay *d,
  * dbus-send --type=method_call --dest=org.freedesktop.compiz \
  * /org/freedesktop/compiz/rotate/allscreens/rotate_to	      \
  * org.freedesktop.compiz.activate			      \
- * string:'root' int32:0x52 string:'face' int32:1
+ * string:'root'					      \
+ * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`     \
+ * string:'face' int32:1
+ *
+ *
+ * You can also call the terminate function
+ *
+ * Example unfold and refold cube:
+ * dbus-send --type=method_call --dest=org.freedesktop.compiz \
+ * /org/freedesktop/compiz/cube/allscreens/unfold	      \
+ * org.freedesktop.compiz.activate			      \
+ * string:'root'					      \
+ * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`     \
+ * string:'face' int32:1
+ *
+ * dbus-send --type=method_call --dest=org.freedesktop.compiz \
+ * /org/freedesktop/compiz/cube/allscreens/unfold	      \
+ * org.freedesktop.compiz.deactivate			      \
+ * string:'root'					      \
+ * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`     \
+ * string:'face' int32:1
  */
 static Bool
-dbusHandleActivateMessage (DBusConnection *connection,
-			   DBusMessage    *message,
-			   CompDisplay	  *d,
-			   char	          **path)
+dbusHandleActionMessage (DBusConnection *connection,
+			 DBusMessage    *message,
+			 CompDisplay	*d,
+			 char	        **path,
+			 Bool           activate)
 {
     CompOption *option;
     int	       nOption;
@@ -152,8 +174,16 @@ dbusHandleActivateMessage (DBusConnection *connection,
 	    if (option->type != CompOptionTypeAction)
 		return FALSE;
 
-	    if (!option->value.action.initiate)
-		return FALSE;
+	    if (activate)
+	    {
+		if (!option->value.action.initiate)
+		    return FALSE;
+	    }
+	    else
+	    {
+		if (!option->value.action.terminate)
+		    return FALSE;
+	    }
 
 	    if (dbus_message_iter_init (message, &iter))
 	    {
@@ -238,10 +268,20 @@ dbusHandleActivateMessage (DBusConnection *connection,
 		} while (dbus_message_iter_has_next (&iter));
 	    }
 
-	    (*option->value.action.initiate) (d,
-					      &option->value.action,
-					      0,
-					      argument, nArgument);
+	    if (activate)
+	    {
+		(*option->value.action.initiate) (d,
+						  &option->value.action,
+						  0,
+						  argument, nArgument);
+	    }
+	    else
+	    {
+		(*option->value.action.terminate) (d,
+						   &option->value.action,
+						   0,
+						   argument, nArgument);
+	    }
 
 	    if (argument)
 		free (argument);
@@ -682,7 +722,14 @@ dbusHandleMessage (DBusConnection *connection,
 
     if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
     {
-	status = dbusHandleActivateMessage (connection, message, d, &path[3]);
+	status = dbusHandleActionMessage (connection, message, d, &path[3],
+					  TRUE);
+    }
+    else if (dbus_message_has_member (message,
+				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
+    {
+	status = dbusHandleActionMessage (connection, message, d, &path[3],
+					  FALSE);
     }
     else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME))
     {
