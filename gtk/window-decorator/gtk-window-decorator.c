@@ -118,6 +118,19 @@
 #define USE_META_THEME_KEY	    \
     GCONF_DIR "/use_metacity_theme"
 
+#define META_THEME_OPACITY_KEY	        \
+    GCONF_DIR "/metacity_theme_opacity"
+
+#define META_THEME_SHADE_OPACITY_KEY	      \
+    GCONF_DIR "/metacity_theme_shade_opacity"
+
+#define META_THEME_ACTIVE_OPACITY_KEY	       \
+    GCONF_DIR "/metacity_theme_active_opacity"
+
+#define META_THEME_ACTIVE_SHADE_OPACITY_KEY          \
+    GCONF_DIR "/metacity_theme_active_shade_opacity"
+
+
 #define STROKE_ALPHA 0.6
 
 #define ICON_SPACE 20
@@ -165,6 +178,11 @@ typedef struct _extents {
 #define SHADOW_OPACITY  0.5
 #define SHADOW_OFFSET_X 1
 #define SHADOW_OFFSET_Y 1
+
+#define META_OPACITY              0.75
+#define META_SHADE_OPACITY        TRUE
+#define META_ACTIVE_OPACITY       1.0
+#define META_ACTIVE_SHADE_OPACITY TRUE
 
 #define N_QUADS_MAX 24
 
@@ -250,6 +268,13 @@ static gdouble shadow_radius   = SHADOW_RADIUS;
 static gdouble shadow_opacity  = SHADOW_OPACITY;
 static gint    shadow_offset_x = SHADOW_OFFSET_X;
 static gint    shadow_offset_y = SHADOW_OFFSET_Y;
+
+#ifdef USE_METACITY
+static double   meta_opacity              = META_OPACITY;
+static gboolean meta_shade_opacity        = META_SHADE_OPACITY;
+static double   meta_active_opacity       = META_ACTIVE_OPACITY;
+static gboolean meta_active_shade_opacity = META_ACTIVE_SHADE_OPACITY;
+#endif
 
 static GdkPixmap *shadow_pixmap = NULL;
 static GdkPixmap *large_shadow_pixmap = NULL;
@@ -1034,6 +1059,35 @@ gdk_cairo_set_source_color_alpha (cairo_t  *cr,
 			   color->green / 65535.0,
 			   color->blue  / 65535.0,
 			   alpha);
+}
+
+static GdkPixmap *
+create_pixmap (int w,
+	       int h)
+{
+    GdkPixmap	*pixmap;
+    GdkVisual	*visual;
+    GdkColormap *colormap;
+
+    visual = gdk_visual_get_best_with_depth (32);
+    if (!visual)
+	return NULL;
+
+    pixmap = gdk_pixmap_new (NULL, w, h, 32);
+    if (!pixmap)
+	return NULL;
+
+    colormap = gdk_colormap_new (visual, FALSE);
+    if (!colormap)
+    {
+	gdk_pixmap_unref (pixmap);
+	return NULL;
+    }
+
+    gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), colormap);
+    gdk_colormap_unref (colormap);
+
+    return pixmap;
 }
 
 #define CORNER_TOPLEFT     (1 << 0)
@@ -2090,16 +2144,16 @@ meta_draw_window_decoration (decor_t *d)
     GdkRectangle      clip, rect;
     GdkDrawable       *drawable;
     Region	      region;
+    double	      alpha = (d->active) ? meta_active_opacity : meta_opacity;
 
     if (!d->pixmap)
 	return;
 
     style = gtk_widget_get_style (style_window);
 
-    if (d->buffer_pixmap)
-	cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
-    else
-	cr = gdk_cairo_create (GDK_DRAWABLE (d->pixmap));
+    drawable = d->buffer_pixmap ? d->buffer_pixmap : d->pixmap;
+
+    cr = gdk_cairo_create (GDK_DRAWABLE (drawable));
 
     cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
@@ -2113,28 +2167,32 @@ meta_draw_window_decoration (decor_t *d)
     for (i = 0; i < META_BUTTON_TYPE_LAST; i++)
 	button_states[i] = meta_button_state_for_button_type (d, i);
 
-    drawable = d->buffer_pixmap ? d->buffer_pixmap : d->pixmap;
-
     region = meta_get_window_region (&fgeom, clip.width, clip.height);
 
-    gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
-
-    for (i = 0; i < region->numRects; i++)
+    if (alpha != 1.0)
     {
-	rect.x	    = clip.x + region->rects[i].x1;
-	rect.y	    = clip.y + region->rects[i].y1;
-	rect.width  = region->rects[i].x2 - region->rects[i].x1;
-	rect.height = region->rects[i].y2 - region->rects[i].y1;
+	GdkPixmap *pixmap;
+	cairo_t	  *pcr;
+	gboolean  shade_alpha = (d->active) ? meta_active_shade_opacity :
+	    meta_shade_opacity;
 
-	cairo_rectangle (cr, rect.x, rect.y, rect.width, rect.height);
-	cairo_fill (cr);
+	pixmap = create_pixmap (clip.width, clip.height);
+
+	pcr = gdk_cairo_create (GDK_DRAWABLE (pixmap));
+
+	gdk_cairo_set_source_color (pcr, &style->bg[GTK_STATE_NORMAL]);
+	cairo_paint (pcr);
+
+	rect.x	    = 0;
+	rect.y      = 0;
+	rect.width  = clip.width;
+	rect.height = clip.height;
 
 	meta_theme_draw_frame (theme,
 			       style_window,
-			       drawable,
+			       pixmap,
 			       &rect,
-			       clip.x,
-			       clip.y,
+			       0, 0,
 			       META_FRAME_TYPE_NORMAL,
 			       flags,
 			       clip.width - fgeom.left_width -
@@ -2147,6 +2205,163 @@ meta_draw_window_decoration (decor_t *d)
 			       button_states,
 			       d->icon_pixbuf,
 			       NULL);
+
+	cairo_save (cr);
+
+	for (i = 0; i < region->numRects; i++)
+	    cairo_rectangle (cr,
+			     clip.x + region->rects[i].x1,
+			     clip.y + region->rects[i].y1,
+			     region->rects[i].x2 - region->rects[i].x1,
+			     region->rects[i].y2 - region->rects[i].y1);
+
+	cairo_clip (cr);
+
+	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, alpha);
+	cairo_paint (cr);
+
+	if (shade_alpha)
+	{
+	    static decor_color_t color = { 0.0, 0.0, 0.0 };
+	    int			 corners = 0;
+
+	    if (fgeom.top_left_corner_rounded)
+		corners |= CORNER_TOPLEFT;
+
+	    if (fgeom.top_right_corner_rounded)
+		corners |= CORNER_TOPRIGHT;
+
+	    if (fgeom.bottom_left_corner_rounded)
+		corners |= CORNER_BOTTOMLEFT;
+
+	    if (fgeom.bottom_right_corner_rounded)
+		corners |= CORNER_BOTTOMRIGHT;
+
+	    if (d->state & (WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY |
+			    WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY))
+		corners = 0;
+
+	    fill_rounded_rectangle (cr,
+				    clip.x,
+				    clip.y,
+				    fgeom.left_width,
+				    fgeom.top_height,
+				    5.0, CORNER_TOPLEFT & corners,
+				    &color, 1.0,
+				    &color, alpha,
+				    SHADE_TOP | SHADE_LEFT);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x + fgeom.left_width,
+				    clip.y,
+				    clip.width - fgeom.left_width -
+				    fgeom.right_width,
+				    fgeom.top_height,
+				    5.0, 0,
+				    &color, 1.0, &color, alpha,
+				    SHADE_TOP);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x + clip.width - fgeom.right_width,
+				    clip.y,
+				    fgeom.right_width,
+				    fgeom.top_height,
+				    5.0, CORNER_TOPRIGHT & corners,
+				    &color, 1.0, &color, alpha,
+				    SHADE_TOP | SHADE_RIGHT);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x,
+				    clip.y + fgeom.top_height,
+				    fgeom.left_width,
+				    clip.height - fgeom.top_height -
+				    fgeom.bottom_height,
+				    5.0, 0,
+				    &color, 1.0, &color, alpha,
+				    SHADE_LEFT);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x + clip.width - fgeom.right_width,
+				    clip.y + fgeom.top_height,
+				    fgeom.right_width,
+				    clip.height - fgeom.top_height -
+				    fgeom.bottom_height,
+				    5.0, 0,
+				    &color, 1.0, &color, alpha,
+				    SHADE_RIGHT);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x,
+				    clip.y + clip.height - fgeom.bottom_height,
+				    fgeom.left_width,
+				    fgeom.bottom_height,
+				    5.0, CORNER_BOTTOMLEFT & corners,
+				    &color, 1.0, &color, alpha,
+				    SHADE_BOTTOM | SHADE_LEFT);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x + fgeom.left_width,
+				    clip.y + clip.height - fgeom.bottom_height,
+				    clip.width - fgeom.left_width -
+				    fgeom.right_width,
+				    fgeom.bottom_height,
+				    5.0, 0,
+				    &color, 1.0, &color, alpha,
+				    SHADE_BOTTOM);
+
+	    fill_rounded_rectangle (cr,
+				    clip.x + clip.width - fgeom.right_width,
+				    clip.y + clip.height - fgeom.bottom_height,
+				    fgeom.right_width,
+				    fgeom.bottom_height,
+				    5.0, CORNER_BOTTOMRIGHT & corners,
+				    &color, 1.0, &color, alpha,
+				    SHADE_BOTTOM | SHADE_RIGHT);
+	}
+
+	cairo_set_operator (cr, CAIRO_OPERATOR_IN);
+	cairo_set_source_surface (cr, cairo_get_target (pcr), clip.x, clip.y);
+	cairo_paint (cr);
+
+	cairo_restore (cr);
+
+	cairo_destroy (pcr);
+	gdk_pixmap_unref (pixmap);
+    }
+    else
+    {
+	gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
+
+	for (i = 0; i < region->numRects; i++)
+	{
+	    rect.x	= clip.x + region->rects[i].x1;
+	    rect.y	= clip.y + region->rects[i].y1;
+	    rect.width  = region->rects[i].x2 - region->rects[i].x1;
+	    rect.height = region->rects[i].y2 - region->rects[i].y1;
+
+	    cairo_rectangle (cr, rect.x, rect.y, rect.width, rect.height);
+	    cairo_fill (cr);
+
+	    meta_theme_draw_frame (theme,
+				   style_window,
+				   drawable,
+				   &rect,
+				   clip.x,
+				   clip.y,
+				   META_FRAME_TYPE_NORMAL,
+				   flags,
+				   clip.width - fgeom.left_width -
+				   fgeom.right_width,
+				   clip.height - fgeom.top_height -
+				   fgeom.bottom_height,
+				   d->layout,
+				   text_height,
+				   &button_layout,
+				   button_states,
+				   d->icon_pixbuf,
+				   NULL);
+	}
     }
 
     cairo_destroy (cr);
@@ -2488,35 +2703,6 @@ queue_decor_draw (decor_t *d)
 
     if (!draw_idle_id)
 	draw_idle_id = g_idle_add (draw_decor_list, NULL);
-}
-
-static GdkPixmap *
-create_pixmap (int w,
-	       int h)
-{
-    GdkPixmap	*pixmap;
-    GdkVisual	*visual;
-    GdkColormap *colormap;
-
-    visual = gdk_visual_get_best_with_depth (32);
-    if (!visual)
-	return NULL;
-
-    pixmap = gdk_pixmap_new (NULL, w, h, 32);
-    if (!pixmap)
-	return NULL;
-
-    colormap = gdk_colormap_new (visual, FALSE);
-    if (!colormap)
-    {
-	gdk_pixmap_unref (pixmap);
-	return NULL;
-    }
-
-    gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), colormap);
-    gdk_colormap_unref (colormap);
-
-    return pixmap;
 }
 
 static GdkPixmap *
@@ -5882,6 +6068,68 @@ theme_changed (GConfClient *client)
 
 }
 
+static gboolean
+theme_opacity_changed (GConfClient *client)
+{
+
+#ifdef USE_METACITY
+    gboolean shade_opacity, changed = FALSE;
+    gdouble  opacity;
+
+    opacity = gconf_client_get_float (client,
+				    META_THEME_OPACITY_KEY,
+				    NULL);
+
+    if (opacity != meta_opacity)
+    {
+	meta_opacity = opacity;
+	changed = TRUE;
+    }
+
+    if (opacity < 1.0)
+    {
+	shade_opacity = gconf_client_get_bool (client,
+					     META_THEME_SHADE_OPACITY_KEY,
+					     NULL);
+
+	if (shade_opacity != meta_shade_opacity)
+	{
+	    meta_shade_opacity = shade_opacity;
+	    changed = TRUE;
+	}
+    }
+
+    opacity = gconf_client_get_float (client,
+				    META_THEME_ACTIVE_OPACITY_KEY,
+				    NULL);
+
+    if (opacity != meta_active_opacity)
+    {
+	meta_active_opacity = opacity;
+	changed = TRUE;
+    }
+
+    if (opacity < 1.0)
+    {
+	shade_opacity =
+	    gconf_client_get_bool (client,
+				   META_THEME_ACTIVE_SHADE_OPACITY_KEY,
+				   NULL);
+
+	if (shade_opacity != meta_active_shade_opacity)
+	{
+	    meta_active_shade_opacity = shade_opacity;
+	    changed = TRUE;
+	}
+    }
+
+    return changed;
+#else
+    return FALSE;
+#endif
+
+}
+
 static void
 value_changed (GConfClient *client,
 	       const gchar *key,
@@ -5927,6 +6175,14 @@ value_changed (GConfClient *client,
 	     strcmp (key, META_THEME_KEY) == 0)
     {
 	if (theme_changed (client))
+	    changed = TRUE;
+    }
+    else if (strcmp (key, META_THEME_OPACITY_KEY)	       == 0 ||
+	     strcmp (key, META_THEME_SHADE_OPACITY_KEY)	       == 0 ||
+	     strcmp (key, META_THEME_ACTIVE_OPACITY_KEY)       == 0 ||
+	     strcmp (key, META_THEME_ACTIVE_SHADE_OPACITY_KEY) == 0)
+    {
+	if (theme_opacity_changed (client))
 	    changed = TRUE;
     }
 
@@ -6036,6 +6292,7 @@ init_settings (WnckScreen *screen)
 					     NULL);
 
     theme_changed (gconf);
+    theme_opacity_changed (gconf);
     update_style (style_window);
     titlebar_font_changed (gconf);
     update_titlebar_font ();
