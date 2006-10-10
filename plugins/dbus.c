@@ -871,7 +871,7 @@ dbusFiniDisplay (CompPlugin  *p,
 
       dbus_connection_unref (dd->connection);
     */
-    
+
     free (dd);
 }
 
