@@ -975,7 +975,7 @@ compDisplayInitOptions (CompDisplay *display,
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_WINDOW];
     o->name			     = "raise_window";
     o->shortDesc		     = N_("Raise Window");
-    o->longDesc			     = N_("Rasie window above other windows");
+    o->longDesc			     = N_("Raise window above other windows");
     o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = raise;
     o->value.action.terminate        = 0;
