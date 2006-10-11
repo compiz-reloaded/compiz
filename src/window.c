@@ -3185,7 +3185,16 @@ moveResizeWindow (CompWindow     *w,
 	    xwcm &= ~CWBorderWidth;
     }
 
-    xwcm &= ~(CWWidth | CWHeight);
+    /* when horizontally maximized only allow width changes added by
+       addWindowSizeChanges */
+    if (w->state & CompWindowStateMaximizedHorzMask)
+	xwcm &= ~CWWidth;
+
+    /* when vertically maximized only allow height changes added by
+       addWindowSizeChanges */
+    if (w->state & CompWindowStateMaximizedVertMask)
+	xwcm &= ~CWHeight;
+
     xwcm |= addWindowSizeChanges (w, xwc,
 				  xwc->x, xwc->y,
 				  xwc->width, xwc->height,
