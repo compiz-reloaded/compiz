@@ -4964,6 +4964,55 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/raise_window_key</key>
+            <applyto>/apps/compiz/general/allscreens/options/raise_window_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Raise Window</short>
+                <long>Rasie window above other windows</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/raise_window_button</key>
+            <applyto>/apps/compiz/general/allscreens/options/raise_window_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;Button6</default>
+            <locale name="C">
+                <short>Raise Window</short>
+                <long>Rasie window above other windows</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/raise_window_bell</key>
+            <applyto>/apps/compiz/general/allscreens/options/raise_window_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Raise Window</short>
+                <long>Rasie window above other windows</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/raise_window_edge</key>
+            <applyto>/apps/compiz/general/allscreens/options/raise_window_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Raise Window</short>
+                <long>Rasie window above other windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/allscreens/options/lower_window_key</key>
             <applyto>/apps/compiz/general/allscreens/options/lower_window_key</applyto>
             <owner>compiz</owner>
@@ -9248,6 +9297,18 @@
             <locale name="zh_TW">
                 <short>將視窗切換到遮蔽</short>
                 <long>將使用中視窗切換到遮蔽 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/ignore_hints_when_maximized</key>
+            <applyto>/apps/compiz/general/allscreens/options/ignore_hints_when_maximized</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Ignore Hints When Maximized</short>
+                <long>Ignore size increment and aspect hints when window is maximized</long>
             </locale>
         </schema>
 
