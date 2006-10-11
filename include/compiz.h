@@ -546,7 +546,8 @@ typedef int CompWatchFdHandle;
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT  52
 #define COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS     53
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED          54
-#define COMP_DISPLAY_OPTION_NUM                           55
+#define COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED   55
+#define COMP_DISPLAY_OPTION_NUM                           56
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);

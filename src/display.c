@@ -151,6 +151,8 @@ int pointerY     = 0;
 #define TOGGLE_WINDOW_SHADING_KEY_DEFAULT       "s"
 #define TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
 
+#define IGNORE_HINTS_WHEN_MAXIMIZED_DEFAULT TRUE
+
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 static char *textureFilter[] = { N_("Fast"), N_("Good"), N_("Best") };
@@ -1182,6 +1184,14 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (TOGGLE_WINDOW_SHADING_KEY_DEFAULT));
+
+    o = &display->opt[COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED];
+    o->name	 = "ignore_hints_when_maximized";
+    o->shortDesc = N_("Ignore Hints When Maximized");
+    o->longDesc	 = N_("Ignore size increment and aspect hints when window is "
+	"maximized");
+    o->type	 = CompOptionTypeBool;
+    o->value.b	 = IGNORE_HINTS_WHEN_MAXIMIZED_DEFAULT;
 }
 
 CompOption *
@@ -1243,6 +1253,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_AUTORAISE:
     case COMP_DISPLAY_OPTION_RAISE_ON_CLICK:
     case COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS:
+    case COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;

@@ -3509,6 +3509,7 @@ constrainNewWindowSize (CompWindow *w,
 			int        *newWidth,
 			int        *newHeight)
 {
+    CompDisplay      *d = w->screen->display;
     const XSizeHints *hints = &w->sizeHints;
     int		     min_width = 0;
     int		     min_height = 0;
@@ -3518,6 +3519,13 @@ constrainNewWindowSize (CompWindow *w,
     int		     yinc = 1;
     int		     max_width = MAXSHORT;
     int		     max_height = MAXSHORT;
+    long	     flags = hints->flags;
+
+    if (d->opt[COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED].value.b)
+    {
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+	    flags &= ~(PResizeInc | PAspect);
+    }
 
     /* Ater gdk_window_constrain_size(), which is partially borrowed from fvwm.
      *
@@ -3532,21 +3540,21 @@ constrainNewWindowSize (CompWindow *w,
 #define FLOOR64(value, base) (((uint64_t) ((value) / (base))) * (base))
 #define CLAMP(v, min, max) ((v) <= (min) ? (min) : (v) >= (max) ? (max) : (v))
 
-    if ((hints->flags & PBaseSize) && (hints->flags & PMinSize))
+    if ((flags & PBaseSize) && (flags & PMinSize))
     {
 	base_width = hints->base_width;
 	base_height = hints->base_height;
 	min_width = hints->min_width;
 	min_height = hints->min_height;
     }
-    else if (hints->flags & PBaseSize)
+    else if (flags & PBaseSize)
     {
 	base_width = hints->base_width;
 	base_height = hints->base_height;
 	min_width = hints->base_width;
 	min_height = hints->base_height;
     }
-    else if (hints->flags & PMinSize)
+    else if (flags & PMinSize)
     {
 	base_width = hints->min_width;
 	base_height = hints->min_height;
@@ -3554,13 +3562,13 @@ constrainNewWindowSize (CompWindow *w,
 	min_height = hints->min_height;
     }
 
-    if (hints->flags & PMaxSize)
+    if (flags & PMaxSize)
     {
 	max_width = hints->max_width;
 	max_height = hints->max_height;
     }
 
-    if (hints->flags & PResizeInc)
+    if (flags & PResizeInc)
     {
 	xinc = MAX (xinc, hints->width_inc);
 	yinc = MAX (yinc, hints->height_inc);
@@ -3580,8 +3588,7 @@ constrainNewWindowSize (CompWindow *w,
      * ------------  <= -------- <=  -----------
      * min_aspect.y       height     max_aspect.y
      */
-    if (hints->flags & PAspect &&
-	hints->min_aspect.y > 0 && hints->max_aspect.x > 0)
+    if ((flags & PAspect) && hints->min_aspect.y > 0 && hints->max_aspect.x > 0)
     {
 	/* Use 64 bit arithmetic to prevent overflow */
 
