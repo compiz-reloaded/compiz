@@ -115,6 +115,9 @@ int pointerY     = 0;
 #define MAXIMIZE_WINDOW_KEY_DEFAULT       "F10"
 #define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
+#define RAISE_WINDOW_BUTTON_DEFAULT    6
+#define RAISE_WINDOW_MODIFIERS_DEFAULT ControlMask
+
 #define LOWER_WINDOW_BUTTON_DEFAULT    6
 #define LOWER_WINDOW_MODIFIERS_DEFAULT CompAltMask
 
@@ -394,6 +397,25 @@ toggleSlowAnimations (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
 	s->slowAnimations = !s->slowAnimations;
+
+    return TRUE;
+}
+
+static Bool
+raise (CompDisplay     *d,
+       CompAction      *action,
+       CompActionState state,
+       CompOption      *option,
+       int	       nOption)
+{
+    CompWindow *w;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
+    if (w)
+	raiseWindow (w);
 
     return TRUE;
 }
@@ -948,6 +970,21 @@ compDisplayInitOptions (CompDisplay *display,
 	XKeysymToKeycode (display->display,
 			  XStringToKeysym (SLOW_ANIMATIONS_KEY_DEFAULT));
 
+    o = &display->opt[COMP_DISPLAY_OPTION_RAISE_WINDOW];
+    o->name			     = "raise_window";
+    o->shortDesc		     = N_("Raise Window");
+    o->longDesc			     = N_("Rasie window above other windows");
+    o->type			     = CompOptionTypeAction;
+    o->value.action.initiate	     = raise;
+    o->value.action.terminate        = 0;
+    o->value.action.bell	     = FALSE;
+    o->value.action.edgeMask	     = 0;
+    o->value.action.state	     = CompActionStateInitKey;
+    o->value.action.state	    |= CompActionStateInitButton;
+    o->value.action.type	     = CompBindingTypeButton;
+    o->value.action.button.modifiers = RAISE_WINDOW_MODIFIERS_DEFAULT;
+    o->value.action.button.button    = RAISE_WINDOW_BUTTON_DEFAULT;
+
     o = &display->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW];
     o->name			     = "lower_window";
     o->shortDesc		     = N_("Lower Window");
@@ -1252,6 +1289,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_RUN_COMMAND10:
     case COMP_DISPLAY_OPTION_RUN_COMMAND11:
     case COMP_DISPLAY_OPTION_SLOW_ANIMATIONS:
+    case COMP_DISPLAY_OPTION_RAISE_WINDOW:
     case COMP_DISPLAY_OPTION_LOWER_WINDOW:
     case COMP_DISPLAY_OPTION_OPACITY_INCREASE:
     case COMP_DISPLAY_OPTION_OPACITY_DECREASE:
@@ -2351,6 +2389,7 @@ addScreenActions (CompDisplay *d, CompScreen *s)
     addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND11].value.action);
     addScreenAction (s,
 		     &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RAISE_WINDOW].value.action);
     addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW].value.action);
     addScreenAction (s,
 		     &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE].value.action);
