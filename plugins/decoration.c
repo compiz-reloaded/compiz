@@ -463,8 +463,13 @@ decorReleaseTexture (CompScreen   *screen,
   data[4] = input top
   data[5] = input bottom
 
-  data[6] = min width
-  data[7] = min height
+  data[6] = input left when maximized
+  data[7] = input right when maximized
+  data[8] = input top when maximized
+  data[9] = input bottom when maximized
+
+  data[10] = min width
+  data[11] = min height
 
   flags
 
@@ -472,15 +477,15 @@ decorReleaseTexture (CompScreen   *screen,
   9rd and 10th bit alignment, 11rd and 12th bit clamp,
   13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[7 + n * 9 + 1] = flags
-  data[7 + n * 9 + 2] = p1 x
-  data[7 + n * 9 + 3] = p1 y
-  data[7 + n * 9 + 4] = p2 x
-  data[7 + n * 9 + 5] = p2 y
-  data[7 + n * 9 + 6] = widthMax
-  data[7 + n * 9 + 7] = heightMax
-  data[7 + n * 9 + 8] = x0
-  data[7 + n * 9 + 9] = y0
+  data[11 + n * 9 + 1] = flags
+  data[11 + n * 9 + 2] = p1 x
+  data[11 + n * 9 + 3] = p1 y
+  data[11 + n * 9 + 4] = p2 x
+  data[11 + n * 9 + 5] = p2 y
+  data[11 + n * 9 + 6] = widthMax
+  data[11 + n * 9 + 7] = heightMax
+  data[11 + n * 9 + 8] = x0
+  data[11 + n * 9 + 9] = y0
  */
 static Decoration *
 decorCreateDecoration (CompScreen *screen,
@@ -507,7 +512,7 @@ decorCreateDecoration (CompScreen *screen,
     if (result != Success || !n || !data)
 	return NULL;
 
-    if (n < 8 + 9)
+    if (n < 12 + 9)
     {
 	XFree (data);
 	return NULL;
@@ -549,10 +554,12 @@ decorCreateDecoration (CompScreen *screen,
     decoration->input.top    = *prop++;
     decoration->input.bottom = *prop++;
 
+    prop += 4;
+
     decoration->minWidth  = *prop++;
     decoration->minHeight = *prop++;
 
-    nQuad = (n - 7) / 9;
+    nQuad = (n - 12) / 9;
 
     quad = malloc (sizeof (Quad) * nQuad);
     if (!quad)
