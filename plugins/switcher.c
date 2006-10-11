@@ -1918,7 +1918,7 @@ switchDisplayInitOptions (SwitchDisplay *sd,
 			  XStringToKeysym (SWITCH_NEXT_ALL_KEY_DEFAULT));
 
     o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL];
-    o->name			  = "prev";
+    o->name			  = "prev_all";
     o->shortDesc		  = N_("Prev window");
     o->longDesc			  = N_("Popup switcher if not visible and "
 				       "select previous window out of all "
