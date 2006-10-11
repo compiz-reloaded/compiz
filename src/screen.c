@@ -1185,6 +1185,8 @@ addScreen (CompDisplay *display,
     s->windowGrabNotify   = windowGrabNotify;
     s->windowUngrabNotify = windowUngrabNotify;
 
+    s->windowStateChangeNotify = windowStateChangeNotify;
+
     s->getProcAddress = 0;
 
     if (!XGetWindowAttributes (dpy, s->root, &s->attrib))

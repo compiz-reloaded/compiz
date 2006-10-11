@@ -2370,6 +2370,11 @@ windowUngrabNotify (CompWindow *w)
 {
 }
 
+void
+windowStateChangeNotify (CompWindow *w)
+{
+}
+
 static Bool
 isGroupTransient (CompWindow *w,
 		  Window     clientLeader)
@@ -3671,6 +3676,8 @@ hideWindow (CompWindow *w)
 
     XUnmapWindow (w->screen->display->display, w->id);
 
+    (*w->screen->windowStateChangeNotify) (w);
+
     setWindowState (w->screen->display, w->state, w->id);
 }
 
@@ -3709,6 +3716,8 @@ showWindow (CompWindow *w)
     w->state &= ~CompWindowStateHiddenMask;
 
     XMapWindow (w->screen->display->display, w->id);
+
+    (*w->screen->windowStateChangeNotify) (w);
 
     setWindowState (w->screen->display, w->state, w->id);
 }
@@ -3783,6 +3792,8 @@ maximizeWindow (CompWindow *w,
 
     recalcWindowType (w);
     recalcWindowActions (w);
+
+    (*w->screen->windowStateChangeNotify) (w);
 
     updateWindowAttributes (w, FALSE);
 

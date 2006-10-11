@@ -1212,6 +1212,8 @@ handleEvent (CompDisplay *d,
 		    w->minimized = FALSE;
 		    w->state &= ~CompWindowStateHiddenMask;
 
+		    (*w->screen->windowStateChangeNotify) (w);
+
 		    setWindowState (d, w->state, w->id);
 		    updateClientListForScreen (w->screen);
 		}
@@ -1614,6 +1616,8 @@ handleEvent (CompDisplay *d,
 
 		    recalcWindowType (w);
 		    recalcWindowActions (w);
+
+		    (*w->screen->windowStateChangeNotify) (w);
 
 		    updateWindowAttributes (w, FALSE);
 

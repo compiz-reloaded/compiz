@@ -1264,6 +1264,8 @@ typedef void (*WindowGrabNotifyProc) (CompWindow   *window,
 
 typedef void (*WindowUngrabNotifyProc) (CompWindow *window);
 
+typedef void (*WindowStateChangeNotifyProc) (CompWindow *window);
+
 #define COMP_SCREEN_DAMAGE_PENDING_MASK (1 << 0)
 #define COMP_SCREEN_DAMAGE_REGION_MASK  (1 << 1)
 #define COMP_SCREEN_DAMAGE_ALL_MASK     (1 << 2)
@@ -1498,6 +1500,8 @@ struct _CompScreen {
     WindowMoveNotifyProc   windowMoveNotify;
     WindowGrabNotifyProc   windowGrabNotify;
     WindowUngrabNotifyProc windowUngrabNotify;
+
+    WindowStateChangeNotifyProc windowStateChangeNotify;
 
     CompPrivate *privates;
 };
@@ -2022,6 +2026,9 @@ windowGrabNotify (CompWindow   *w,
 
 void
 windowUngrabNotify (CompWindow *w);
+
+void
+windowStateChangeNotify (CompWindow *w);
 
 void
 moveInputFocusToWindow (CompWindow *w);
