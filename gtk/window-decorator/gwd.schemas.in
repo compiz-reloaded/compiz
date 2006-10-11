@@ -1,0 +1,59 @@
+<gconfschemafile>
+    <schemalist>
+        <schema>
+            <key>/schemas/apps/gwd/use_metacity_theme</key>
+            <applyto>/apps/gwd/use_metacity_theme</applyto>
+            <owner>gwd</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Use metacity theme</short>
+                <long>Use metacity theme when drawing window decorations</long>
+            </locale>
+        </schema>
+        <schema>
+            <key>/schemas/apps/gwd/metacity_theme_opacity</key>
+            <applyto>/apps/gwd/metacity_theme_opacity</applyto>
+            <owner>gwd</owner>
+            <type>float</type>
+            <default>0.75</default>
+            <locale name="C">
+                <short>Metacity theme opacity</short>
+                <long>Opacity to use for metacity theme decorations</long>
+            </locale>
+        </schema>
+        <schema>
+            <key>/schemas/apps/gwd/metacity_theme_shade_opacity</key>
+            <applyto>/apps/gwd/metacity_theme_shade_opacity</applyto>
+            <owner>gwd</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Metacity theme opacity shade</short>
+                <long>Shade windows with metacity theme decorations from opaque to translucent</long>
+            </locale>
+        </schema>
+        <schema>
+            <key>/schemas/apps/gwd/metacity_theme_active_opacity</key>
+            <applyto>/apps/gwd/metacity_theme_active_opacity</applyto>
+            <owner>gwd</owner>
+            <type>float</type>
+            <default>1.0</default>
+            <locale name="C">
+                <short>Metacity theme active window opacity</short>
+                <long>Opacity to use for active windows with metacity theme decorations</long>
+            </locale>
+        </schema>
+        <schema>
+            <key>/schemas/apps/gwd/metacity_theme_active_shade_opacity</key>
+            <applyto>/apps/gwd/metacity_theme_active_shade_opacity</applyto>
+            <owner>gwd</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Metacity theme active window opacity shade</short>
+                <long>Shade active windows with metacity theme decorations from opaque to translucent</long>
+            </locale>
+        </schema>
+    </schemalist>  
+</gconfschemafile>

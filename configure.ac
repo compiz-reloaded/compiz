@@ -292,6 +292,7 @@ plugins/compiz.schemas
 images/Makefile
 gtk/Makefile
 gtk/window-decorator/Makefile
+gtk/window-decorator/gwd.schemas
 gtk/gnome/Makefile
 gtk/gnome/compiz.desktop
 kde/Makefile
