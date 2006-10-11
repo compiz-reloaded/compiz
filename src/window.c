@@ -570,8 +570,6 @@ recalcWindowActions (CompWindow *w)
     switch (w->type) {
     case CompWindowTypeFullscreenMask:
     case CompWindowTypeNormalMask:
-    case CompWindowTypeUtilMask:
-    case CompWindowTypeToolbarMask:
 	actions =
 	    CompWindowActionMaximizeHorzMask |
 	    CompWindowActionMaximizeVertMask |
@@ -580,6 +578,17 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionResizeMask       |
 	    CompWindowActionStickMask        |
 	    CompWindowActionMinimizeMask     |
+	    CompWindowActionCloseMask;
+
+	if (w->input.top)
+	    actions |= CompWindowActionShadeMask;
+	break;
+    case CompWindowTypeUtilMask:
+    case CompWindowTypeToolbarMask:
+	actions =
+	    CompWindowActionMoveMask   |
+	    CompWindowActionResizeMask |
+	    CompWindowActionStickMask  |
 	    CompWindowActionCloseMask;
 
 	if (w->input.top)
