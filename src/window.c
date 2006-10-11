@@ -3185,6 +3185,7 @@ moveResizeWindow (CompWindow     *w,
 	    xwcm &= ~CWBorderWidth;
     }
 
+    xwcm &= ~(CWWidth | CWHeight);
     xwcm |= addWindowSizeChanges (w, xwc,
 				  xwc->x, xwc->y,
 				  xwc->width, xwc->height,
