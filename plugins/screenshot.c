@@ -23,7 +23,6 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
-#define _GNU_SOURCE
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
@@ -165,6 +164,21 @@ shotFilter (const struct dirent *d)
     return 0;
 }
 
+static int
+shotSort (const void *_a,
+	  const void *_b)
+{
+    struct dirent **a = (struct dirent **) _a;
+    struct dirent **b = (struct dirent **) _b;
+    int		  al = strlen ((*a)->d_name);
+    int		  bl = strlen ((*b)->d_name);
+
+    if (al == bl)
+	return strcoll ((*a)->d_name, (*b)->d_name);
+    else
+	return al - bl;
+}
+
 static Bool
 shotPaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
@@ -233,7 +247,7 @@ shotPaintScreen (CompScreen		 *s,
 				  GL_RGBA, GL_UNSIGNED_BYTE,
 				  (GLvoid *) buffer);
 
-		    n = scandir (dir, &namelist, shotFilter, versionsort);
+		    n = scandir (dir, &namelist, shotFilter, shotSort);
 		    if (n >= 0)
 		    {
 			char *name;
