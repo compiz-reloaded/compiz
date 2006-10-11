@@ -472,6 +472,7 @@ static void
 decoration_to_property (long	*data,
 			Pixmap	pixmap,
 			extents	*input,
+			extents	*max_input,
 			int	min_width,
 			int	min_height,
 			quad	*quad,
@@ -486,10 +487,10 @@ decoration_to_property (long	*data,
     *data++ = input->top;
     *data++ = input->bottom;
 
-    *data++ = input->left;
-    *data++ = input->right;
-    *data++ = input->top;
-    *data++ = input->bottom;
+    *data++ = max_input->left;
+    *data++ = max_input->right;
+    *data++ = max_input->top;
+    *data++ = max_input->bottom;
 
     *data++ = min_width;
     *data++ = min_height;
@@ -878,7 +879,7 @@ decor_update_window_property (decor_t *d)
     extents.top += titlebar_height;
 
     decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents,
+			    &extents, &extents,
 			    ICON_SPACE + d->button_width,
 			    0,
 			    quads, nQuad);
@@ -985,7 +986,7 @@ decor_update_switcher_property (decor_t *d)
     nQuad = set_switcher_quads (quads, d->width, d->height);
 
     decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, 0, 0, quads, nQuad);
+			    &extents, &extents, 0, 0, quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -1878,24 +1879,49 @@ draw_window_decoration (decor_t *d)
 
 #ifdef USE_METACITY
 static void
-decor_update_meta_window_property (decor_t	     *d,
-				   MetaFrameGeometry *fgeom)
+decor_update_meta_window_property (decor_t	  *d,
+				   MetaTheme	  *theme,
+				   MetaFrameFlags flags)
 {
     long    data[256];
     Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    extents extents;
+    extents extents, max_extents;
     gint    nQuad;
     quad    quads[N_QUADS_MAX];
+    gint    left_width, right_width, top_height, bottom_height;
 
     nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
 
-    extents.top    = fgeom->top_height;
-    extents.bottom = fgeom->bottom_height;
-    extents.left   = fgeom->left_width;
-    extents.right  = fgeom->right_width;
+    meta_theme_get_frame_borders (theme,
+				  META_FRAME_TYPE_NORMAL,
+				  text_height,
+				  flags & ~META_FRAME_MAXIMIZED,
+				  &top_height,
+				  &bottom_height,
+				  &left_width,
+				  &right_width);
+
+    extents.top    = top_height;
+    extents.bottom = bottom_height;
+    extents.left   = left_width;
+    extents.right  = right_width;
+
+    meta_theme_get_frame_borders (theme,
+				  META_FRAME_TYPE_NORMAL,
+				  text_height,
+				  flags | META_FRAME_MAXIMIZED,
+				  &top_height,
+				  &bottom_height,
+				  &left_width,
+				  &right_width);
+
+    max_extents.top    = top_height;
+    max_extents.bottom = bottom_height;
+    max_extents.left   = left_width;
+    max_extents.right  = right_width;
 
     decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents,
+			    &extents, &max_extents,
 			    ICON_SPACE + d->button_width,
 			    0,
 			    quads, nQuad);
@@ -2125,6 +2151,12 @@ meta_get_decoration_geometry (decor_t		*d,
 
     if (d->active)
 	*flags |= META_FRAME_HAS_FOCUS;
+
+#define META_MAXIMIZED (WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY | \
+			WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY)
+
+    if ((d->state & META_MAXIMIZED) == META_MAXIMIZED)
+	*flags |= META_FRAME_MAXIMIZED;
 
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
@@ -2401,7 +2433,7 @@ meta_draw_window_decoration (decor_t *d)
 
     if (d->prop_xid)
     {
-	decor_update_meta_window_property (d, &fgeom);
+	decor_update_meta_window_property (d, theme, flags);
 	d->prop_xid = 0;
     }
 }
@@ -2776,7 +2808,8 @@ update_default_decorations (GdkScreen *screen)
 	nQuad = set_shadow_quads (quads, width, height);
 
 	decoration_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
-				&_shadow_extents, 0, 0, quads, nQuad);
+				&_shadow_extents, &_shadow_extents,
+				0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 bareAtom,
@@ -2837,7 +2870,7 @@ update_default_decorations (GdkScreen *screen)
 	(*d.draw) (&d);
 
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&extents, 0, 0, quads, nQuad);
+				&extents, &extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 normalAtom,
@@ -2858,7 +2891,7 @@ update_default_decorations (GdkScreen *screen)
 	(*d.draw) (&d);
 
 	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&extents, 0, 0, quads, nQuad);
+				&extents, &extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 activeAtom,
