@@ -23,6 +23,10 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#ifdef HAVE_CONFIG_H
+#  include "../config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -450,15 +454,17 @@ decorReleaseTexture (CompScreen   *screen,
   decoration property
   -------------------
 
-  data[0] = pixmap
+  data[0] = version
 
-  data[1] = input left
-  data[2] = input right
-  data[3] = input top
-  data[4] = input bottom
+  data[1] = pixmap
 
-  data[5] = min width
-  data[6] = min height
+  data[2] = input left
+  data[3] = input right
+  data[4] = input top
+  data[5] = input bottom
+
+  data[6] = min width
+  data[7] = min height
 
   flags
 
@@ -466,15 +472,15 @@ decorReleaseTexture (CompScreen   *screen,
   9rd and 10th bit alignment, 11rd and 12th bit clamp,
   13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[6 + n * 9 + 1] = flags
-  data[6 + n * 9 + 2] = p1 x
-  data[6 + n * 9 + 3] = p1 y
-  data[6 + n * 9 + 4] = p2 x
-  data[6 + n * 9 + 5] = p2 y
-  data[6 + n * 9 + 6] = widthMax
-  data[6 + n * 9 + 7] = heightMax
-  data[6 + n * 9 + 8] = x0
-  data[6 + n * 9 + 9] = y0
+  data[7 + n * 9 + 1] = flags
+  data[7 + n * 9 + 2] = p1 x
+  data[7 + n * 9 + 3] = p1 y
+  data[7 + n * 9 + 4] = p2 x
+  data[7 + n * 9 + 5] = p2 y
+  data[7 + n * 9 + 6] = widthMax
+  data[7 + n * 9 + 7] = heightMax
+  data[7 + n * 9 + 8] = x0
+  data[7 + n * 9 + 9] = y0
  */
 static Decoration *
 decorCreateDecoration (CompScreen *screen,
@@ -501,11 +507,25 @@ decorCreateDecoration (CompScreen *screen,
     if (result != Success || !n || !data)
 	return NULL;
 
-    if (n < 5 + 9)
+    if (n < 8 + 9)
     {
 	XFree (data);
 	return NULL;
     }
+
+    prop = (long *) data;
+
+    if (*prop != DECOR_INTERFACE_VERSION)
+    {
+	fprintf (stderr, "%s: decoration: property ignored because "
+		 "version is %d and decoration plugin version is %d\n",
+		 programName, (int) *prop, DECOR_INTERFACE_VERSION);
+
+	XFree (data);
+	return NULL;
+    }
+
+    prop++;
 
     decoration = malloc (sizeof (Decoration));
     if (!decoration)
@@ -513,8 +533,6 @@ decorCreateDecoration (CompScreen *screen,
 	XFree (data);
 	return NULL;
     }
-
-    prop = (long *) data;
 
     memcpy (&pixmap, prop++, sizeof (Pixmap));
 

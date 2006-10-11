@@ -8,6 +8,9 @@ AM_INIT_AUTOMAKE([dist-bzip2])
 AC_CONFIG_HEADER([config.h])
 AM_MAINTAINER_MODE
 
+/* decorator interface version */
+AC_DEFINE(DECOR_INTERFACE_VERSION, 20061010, [Decorator interface version])
+
 AC_ISC_POSIX
 AC_PROG_CC
 AC_PROG_CPP
