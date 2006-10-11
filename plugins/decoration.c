@@ -97,6 +97,7 @@ typedef struct _Decoration {
     DecorTexture      *texture;
     CompWindowExtents output;
     CompWindowExtents input;
+    CompWindowExtents maxInput;
     int		      minWidth;
     int		      minHeight;
     Quad	      *quad;
@@ -160,6 +161,8 @@ typedef struct _DecorScreen {
 
     WindowMoveNotifyProc   windowMoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
+
+    WindowStateChangeNotifyProc windowStateChangeNotify;
 } DecorScreen;
 
 typedef struct _DecorWindow {
@@ -554,7 +557,10 @@ decorCreateDecoration (CompScreen *screen,
     decoration->input.top    = *prop++;
     decoration->input.bottom = *prop++;
 
-    prop += 4;
+    decoration->maxInput.left   = *prop++;
+    decoration->maxInput.right  = *prop++;
+    decoration->maxInput.top    = *prop++;
+    decoration->maxInput.bottom = *prop++;
 
     decoration->minWidth  = *prop++;
     decoration->minHeight = *prop++;
@@ -836,7 +842,6 @@ decorWindowUpdate (CompWindow *w,
 {
     WindowDecoration *wd;
     Decoration	     *old, *decor = NULL;
-    int		     dx, dy;
 
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
@@ -906,25 +911,14 @@ decorWindowUpdate (CompWindow *w,
 
     if (decor)
     {
-	dx = decor->input.left;
-	dy = decor->input.top;
-    }
-    else
-	dx = dy = 0;
-
-    dx -= w->input.left;
-    dy -= w->input.top;
-
-    /* if (dx == 0 && dy == 0) */
-	move = FALSE;
-
-    if (decor)
-    {
 	dw->wd = createWindowDecoration (decor);
 	if (!dw->wd)
 	    return FALSE;
 
-	setWindowFrameExtents (w, &decor->input, &decor->output);
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+	    setWindowFrameExtents (w, &decor->maxInput, &decor->output);
+	else
+	    setWindowFrameExtents (w, &decor->input, &decor->output);
 
 	if (!move)
 	    damageWindowOutputExtents (w);
@@ -935,9 +929,6 @@ decorWindowUpdate (CompWindow *w,
     {
 	dw->wd = NULL;
     }
-
-    if (move)
-	moveWindow (w, dx, dy, TRUE, TRUE);
 
     return TRUE;
 }
@@ -1232,6 +1223,27 @@ decorWindowResizeNotify (CompWindow *w)
     WRAP (ds, w->screen, windowResizeNotify, decorWindowResizeNotify);
 }
 
+static void
+decorWindowStateChangeNotify (CompWindow *w)
+{
+    DECOR_SCREEN (w->screen);
+    DECOR_WINDOW (w);
+
+    if (dw->wd && dw->wd->decor)
+    {
+	Decoration *decor = dw->wd->decor;
+
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+	    setWindowFrameExtents (w, &decor->maxInput, &decor->output);
+	else
+	    setWindowFrameExtents (w, &decor->input, &decor->output);
+    }
+
+    UNWRAP (ds, w->screen, windowStateChangeNotify);
+    (*w->screen->windowStateChangeNotify) (w);
+    WRAP (ds, w->screen, windowStateChangeNotify, decorWindowStateChangeNotify);
+}
+
 static Bool
 decorInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
@@ -1310,6 +1322,7 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
+    WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
 
     s->privates[dd->screenPrivateIndex].ptr = ds;
 
@@ -1334,6 +1347,7 @@ decorFiniScreen (CompPlugin *p,
     UNWRAP (ds, s, damageWindowRect);
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
+    UNWRAP (ds, s, windowStateChangeNotify);
 
     free (ds);
 }
