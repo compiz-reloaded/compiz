@@ -4971,7 +4971,7 @@
             <default>Disabled</default>
             <locale name="C">
                 <short>Raise Window</short>
-                <long>Rasie window above other windows</long>
+                <long>Raise window above other windows</long>
             </locale>
         </schema>
 
@@ -4983,7 +4983,7 @@
             <default>&lt;Control&gt;Button6</default>
             <locale name="C">
                 <short>Raise Window</short>
-                <long>Rasie window above other windows</long>
+                <long>Raise window above other windows</long>
             </locale>
         </schema>
 
@@ -4995,7 +4995,7 @@
             <default>false</default>
             <locale name="C">
                 <short>Raise Window</short>
-                <long>Rasie window above other windows</long>
+                <long>Raise window above other windows</long>
             </locale>
         </schema>
 
@@ -5008,7 +5008,7 @@
             <default>[]</default>
             <locale name="C">
                 <short>Raise Window</short>
-                <long>Rasie window above other windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+                <long>Raise window above other windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
             </locale>
         </schema>
 
@@ -16908,8 +16908,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_key</key>
-            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_key</applyto>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_all_key</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_all_key</applyto>
             <owner>compiz</owner>
             <type>string</type>
             <default>&lt;Shift&gt;&lt;Control&gt;&lt;Alt&gt;Tab</default>
@@ -16920,8 +16920,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_button</key>
-            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_button</applyto>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_all_button</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_all_button</applyto>
             <owner>compiz</owner>
             <type>string</type>
             <default>Disabled</default>
@@ -16932,8 +16932,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_bell</key>
-            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_bell</applyto>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_all_bell</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_all_bell</applyto>
             <owner>compiz</owner>
             <type>bool</type>
             <default>false</default>
@@ -16944,8 +16944,8 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_edge</key>
-            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_edge</applyto>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_all_edge</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_all_edge</applyto>
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
