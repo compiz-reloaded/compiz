@@ -1537,11 +1537,13 @@ addWindow (CompScreen *screen,
     w->sizeDamage  = 0;
     w->nDamage	   = 0;
 
-    w->vertices   = 0;
-    w->vertexSize = 0;
-    w->indices    = 0;
-    w->indexSize  = 0;
-    w->vCount     = 0;
+    w->vertices     = 0;
+    w->vertexSize   = 0;
+    w->indices      = 0;
+    w->indexSize    = 0;
+    w->vCount	    = 0;
+    w->indexCount   = 0;
+    w->texCoordSize = 2;
 
     w->struts = 0;
 

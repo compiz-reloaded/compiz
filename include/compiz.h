@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20061011
+#define ABIVERSION 20061013
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1827,6 +1827,8 @@ struct _CompWindow {
     int      indexSize;
     int      vCount;
     int      texUnits;
+    int      texCoordSize;
+    int      indexCount;
 
     CompPrivate *privates;
 };
