@@ -293,6 +293,9 @@ getLongDesc (CompOption *o, const char *option_name)
 	int digits = -(logf (o->rest.f.precision) / logf (10));
 	int invprec = 1.0 / o->rest.f.precision;
 
+	if (!invprec)
+	    invprec = 1;
+
 	/* Because we're sort of cheating on the locales, %.*f won't
 	 * work here. We need to localize the format ourselves.
 	 */
