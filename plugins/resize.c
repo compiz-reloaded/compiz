@@ -313,13 +313,13 @@ resizeUpdateWindowSize (CompDisplay *d)
 	return;
 
     if (rd->w->state & CompWindowStateMaximizedVertMask)
-	rd->height = rd->w->attrib.height;
+	rd->height = rd->w->serverHeight;
 
     if (rd->w->state & CompWindowStateMaximizedHorzMask)
-	rd->width = rd->w->attrib.width;
+	rd->width = rd->w->serverWidth;
 
-    if (rd->width  == rd->w->attrib.width &&
-	rd->height == rd->w->attrib.height)
+    if (rd->width  == rd->w->serverWidth &&
+	rd->height == rd->w->serverHeight)
 	return;
 
     if (rd->w->syncWait)
@@ -333,18 +333,18 @@ resizeUpdateWindowSize (CompDisplay *d)
 
 	xwc.x = rd->w->attrib.x;
 	if (rd->mask & ResizeLeftMask)
-	    xwc.x -= width - rd->w->attrib.width;
+	    xwc.x -= width - rd->w->serverWidth;
 
 	xwc.y = rd->w->attrib.y;
 	if (rd->mask & ResizeUpMask)
-	    xwc.y -= height - rd->w->attrib.height;
+	    xwc.y -= height - rd->w->serverHeight;
 
 	xwc.width  = width;
 	xwc.height = height;
 
 	sendSyncRequest (rd->w);
 
-	XConfigureWindow (d->display, rd->w->id,
+	configureXWindow (rd->w,
 			  CWX | CWY | CWWidth | CWHeight,
 			  &xwc);
     }
@@ -448,7 +448,6 @@ resizeHandleKeyEvent (CompScreen *s,
 		rd->mask = rKeys[i].resizeMask;
 		updateScreenGrab (s, rs->grabIndex, rs->cursor[i]);
 	    }
-			    
 	    break;
 	}
     }
