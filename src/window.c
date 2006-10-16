@@ -2718,13 +2718,13 @@ saveWindowGeometry (CompWindow *w,
 	w->saveWc.y = w->attrib.y;
 
     if (m & CWWidth)
-	w->saveWc.width = w->attrib.width;
+	w->saveWc.width = w->serverWidth;
 
     if (m & CWHeight)
-	w->saveWc.height = w->attrib.height;
+	w->saveWc.height = w->serverHeight;
 
     if (m & CWBorderWidth)
-	w->saveWc.border_width = w->attrib.border_width;
+	w->saveWc.border_width = w->serverBorderWidth;
 
     w->saveMask |= m;
 }
@@ -2750,7 +2750,7 @@ restoreWindowGeometry (CompWindow     *w,
 	   the same as the current width then make it a little be smaller so
 	   the user can see that it changed and it also makes sure that
 	   windowResizeNotify is called and plugins are notified. */
-	if (xwc->width == w->attrib.width)
+	if (xwc->width == w->serverWidth)
 	{
 	    xwc->width -= 10;
 	    if (m & CWX)
@@ -2764,7 +2764,7 @@ restoreWindowGeometry (CompWindow     *w,
 
 	/* As above, if the saved height is the same as the current height
 	   then make it a little be smaller. */
-	if (xwc->height == w->attrib.height)
+	if (xwc->height == w->serverHeight)
 	{
 	    xwc->height -= 10;
 	    if (m & CWY)
@@ -2948,16 +2948,16 @@ addWindowSizeChanges (CompWindow     *w,
 	}
 
 	/* constrain window width if greater than maximum width */
-	if (!(mask & CWWidth) && w->attrib.width > w->sizeHints.max_width)
+	if (!(mask & CWWidth) && w->serverWidth > w->sizeHints.max_width)
 	{
-	    xwc->width = w->attrib.width;
+	    xwc->width = w->sizeHints.max_width;
 	    mask |= CWWidth;
 	}
 
 	/* constrain window height if greater than maximum height */
-	if (!(mask & CWHeight) && w->attrib.height > w->sizeHints.max_height)
+	if (!(mask & CWHeight) && w->serverHeight > w->sizeHints.max_height)
 	{
-	    xwc->height = w->attrib.height;
+	    xwc->height = w->sizeHints.max_height;
 	    mask |= CWHeight;
 	}
     }
