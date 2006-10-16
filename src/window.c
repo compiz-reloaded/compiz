@@ -3076,9 +3076,9 @@ moveResizeWindow (CompWindow     *w,
     if (!(xwcm & CWY))
 	xwc->y = w->attrib.y;
     if (!(xwcm & CWWidth))
-	xwc->width = w->attrib.width;
+	xwc->width = w->serverWidth;
     if (!(xwcm & CWHeight))
-	xwc->height = w->attrib.height;
+	xwc->height = w->serverHeight;
 
     if (xwcm & (CWWidth | CWHeight))
     {
@@ -3104,7 +3104,7 @@ moveResizeWindow (CompWindow     *w,
 	case CenterGravity:
 	case SouthGravity:
 	    if (!(xwcm & CWX))
-		xwc->x += (w->attrib.width - xwc->width) / 2;
+		xwc->x += (w->serverWidth - xwc->width) / 2;
 	    break;
 
 	case NorthEastGravity:
@@ -3113,7 +3113,7 @@ moveResizeWindow (CompWindow     *w,
 	    if (xwcm & CWX)
 		xwc->x -= w->input.right;
 	    else
-		xwc->x += w->attrib.width - xwc->width;
+		xwc->x += w->serverWidth - xwc->width;
 	    break;
 
 	case StaticGravity:
@@ -3131,7 +3131,7 @@ moveResizeWindow (CompWindow     *w,
 	case CenterGravity:
 	case EastGravity:
 	    if (!(xwcm & CWY))
-		xwc->y += (w->attrib.height - xwc->height) / 2;
+		xwc->y += (w->serverHeight - xwc->height) / 2;
 	    break;
 
 	case SouthWestGravity:
@@ -3140,7 +3140,7 @@ moveResizeWindow (CompWindow     *w,
 	    if (xwcm & CWY)
 		xwc->y -= w->input.bottom;
 	    else
-		xwc->y += w->attrib.height - xwc->height;
+		xwc->y += w->serverHeight - xwc->height;
 	    break;
 
 	case StaticGravity:
@@ -3184,7 +3184,7 @@ moveResizeWindow (CompWindow     *w,
 
     if (xwcm & CWBorderWidth)
     {
-	if (xwc->border_width == w->attrib.border_width)
+	if (xwc->border_width == w->serverBorderWidth)
 	    xwcm &= ~CWBorderWidth;
     }
 
