@@ -2196,9 +2196,9 @@ sendSyncRequest (CompWindow *w)
     w->syncWait	       = TRUE;
     w->syncX	       = w->serverX;
     w->syncY	       = w->serverY;
-    w->syncWidth       = w->attrib.width;
-    w->syncHeight      = w->attrib.height;
-    w->syncBorderWidth = w->attrib.border_width;
+    w->syncWidth       = w->serverWidth;
+    w->syncHeight      = w->serverHeight;
+    w->syncBorderWidth = w->serverBorderWidth;
 
     if (!w->syncWaitHandle)
 	w->syncWaitHandle = compAddTimeout (1000, syncWaitTimeout, w);
