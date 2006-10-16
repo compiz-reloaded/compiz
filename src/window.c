@@ -3363,8 +3363,8 @@ updateWindowAttributes (CompWindow *w,
     mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
     mask |= addWindowSizeChanges (w, &xwc,
 				  w->attrib.x, w->attrib.y,
-				  w->attrib.width, w->attrib.height,
-				  w->attrib.border_width);
+				  w->serverWidth, w->serverHeight,
+				  w->serverBorderWidth);
 
     if (!mask)
 	return;
