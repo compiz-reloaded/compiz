@@ -3635,7 +3635,7 @@ constrainNewWindowSize (CompWindow *w,
 #undef FLOOR64
 #undef FLOOR
 
-    if (width != w->attrib.width || height != w->attrib.height)
+    if (width != w->serverWidth || height != w->serverHeight)
     {
 	*newWidth  = width;
 	*newHeight = height;
