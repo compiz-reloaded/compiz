@@ -110,12 +110,12 @@ recalcNormalHints (CompWindow *window)
     int maxSize;
 
     maxSize = window->screen->maxTextureSize;
-    maxSize -= window->attrib.border_width * 2;
+    maxSize -= window->serverBorderWidth * 2;
 
     window->sizeHints.x      = window->attrib.x;
     window->sizeHints.y      = window->attrib.y;
-    window->sizeHints.width  = window->attrib.width;
-    window->sizeHints.height = window->attrib.height;
+    window->sizeHints.width  = window->serverWidth;
+    window->sizeHints.height = window->serverHeight;
 
     if (window->sizeHints.flags & PMinSize)
     {
