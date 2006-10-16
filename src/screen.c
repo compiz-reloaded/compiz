@@ -1366,7 +1366,7 @@ addScreen (CompDisplay *display,
 	    GLint maxTextureSize;
 
 	    glGetIntegerv (GL_MAX_RECTANGLE_TEXTURE_SIZE_NV, &maxTextureSize);
-	    if (maxTextureSize < s->maxTextureSize)
+	    if (maxTextureSize > s->maxTextureSize)
 		s->maxTextureSize = maxTextureSize;
 	}
     }
