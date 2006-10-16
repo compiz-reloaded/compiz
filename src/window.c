@@ -2228,6 +2228,13 @@ configureWindow (CompWindow	 *w,
     }
     else
     {
+	if (ce->override_redirect)
+	{
+	    w->serverWidth       = ce->width;
+	    w->serverHeight      = ce->height;
+	    w->serverBorderWidth = ce->border_width;
+	}
+
 	resizeWindow (w, ce->x, ce->y, ce->width, ce->height,
 		      ce->border_width);
     }
