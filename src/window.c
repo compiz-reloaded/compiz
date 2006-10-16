@@ -3210,8 +3210,8 @@ updateWindowSize (CompWindow *w)
 
     mask = addWindowSizeChanges (w, &xwc,
 				 w->attrib.x, w->attrib.y,
-				 w->attrib.width, w->attrib.height,
-				 w->attrib.border_width);
+				 w->serverWidth, w->serverHeight,
+				 w->serverBorderWidth);
     if (mask)
     {
 	if (w->mapNum && (mask & (CWWidth | CWHeight)))
