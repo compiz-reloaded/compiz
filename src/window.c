@@ -1837,58 +1837,32 @@ destroyWindow (CompWindow *w)
     }
 }
 
-static Bool
-configurePredicate (Display  *display,
-		    XEvent   *event,
-		    XPointer arg)
-{
-    if (event->type == ConfigureNotify)
-    {
-	XConfigureEvent *xev = (XConfigureEvent *) arg;
-
-	if (event->xconfigure.window == xev->window)
-	{
-	    xev->x      = event->xconfigure.x;
-	    xev->y      = event->xconfigure.y;
-	    xev->width  = event->xconfigure.width;
-	    xev->height = event->xconfigure.height;
-
-	    xev->border_width = event->xconfigure.border_width;
-
-	    xev->above	           = event->xconfigure.above;
-	    xev->override_redirect = event->xconfigure.override_redirect;
-	}
-    }
-
-    return FALSE;
-}
-
 void
 sendConfigureNotify (CompWindow *w)
 {
     XConfigureEvent xev;
-    XEvent	    event;
 
     xev.type	     = ConfigureNotify;
     xev.event	     = w->id;
     xev.window	     = w->id;
     xev.x	     = w->attrib.x;
     xev.y	     = w->attrib.y;
-    xev.width	     = w->attrib.width;
-    xev.height	     = w->attrib.height;
-    xev.border_width = w->attrib.border_width;
+
+    if (w->attrib.override_redirect)
+    {
+	xev.width	 = w->attrib.width;
+	xev.height	 = w->attrib.height;
+	xev.border_width = w->attrib.border_width;
+    }
+    else
+    {
+	xev.width	 = w->serverWidth;
+	xev.height	 = w->serverHeight;
+	xev.border_width = w->serverBorderWidth;
+    }
 
     xev.above	          = (w->prev) ? w->prev->id : None;
     xev.override_redirect = w->attrib.override_redirect;
-
-    /* If we have pending ConfigureNotifies from any previous
-       ConfigureRequests we like those changes to be in this synthetic
-       ConfigureNotify */
-    XSync (w->screen->display->display, FALSE);
-
-    while (XCheckIfEvent (w->screen->display->display, &event,
-			  configurePredicate,
-			  (XPointer) &xev));
 
     XSendEvent (w->screen->display->display, w->id, FALSE,
 		StructureNotifyMask, (XEvent *) &xev);
