@@ -1847,19 +1847,9 @@ sendConfigureNotify (CompWindow *w)
     xev.window	     = w->id;
     xev.x	     = w->attrib.x;
     xev.y	     = w->attrib.y;
-
-    if (w->attrib.override_redirect)
-    {
-	xev.width	 = w->attrib.width;
-	xev.height	 = w->attrib.height;
-	xev.border_width = w->attrib.border_width;
-    }
-    else
-    {
-	xev.width	 = w->serverWidth;
-	xev.height	 = w->serverHeight;
-	xev.border_width = w->serverBorderWidth;
-    }
+    xev.width	     = w->serverWidth;
+    xev.height	     = w->serverHeight;
+    xev.border_width = w->serverBorderWidth;
 
     xev.above	          = (w->prev) ? w->prev->id : None;
     xev.override_redirect = w->attrib.override_redirect;
