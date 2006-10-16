@@ -1833,8 +1833,11 @@ handleEvent (CompDisplay *d,
 	    xwc.height	     = event->xconfigurerequest.height;
 	    xwc.border_width = event->xconfigurerequest.border_width;
 
-	    XConfigureWindow (d->display, event->xconfigurerequest.window,
-			      xwcm, &xwc);
+	    if (w)
+		configureXWindow (w, xwcm, &xwc);
+	    else
+		XConfigureWindow (d->display, event->xconfigurerequest.window,
+				  xwcm, &xwc);
 	}
 	break;
     case CirculateRequest:

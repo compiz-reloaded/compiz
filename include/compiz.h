@@ -1734,6 +1734,9 @@ struct _CompWindow {
     XWindowAttributes attrib;
     int		      serverX;
     int		      serverY;
+    int		      serverWidth;
+    int		      serverHeight;
+    int		      serverBorderWidth;
     Window	      transientFor;
     Window	      clientLeader;
     XSizeHints	      sizeHints;
@@ -1959,6 +1962,11 @@ moveWindow (CompWindow *w,
 	    int        dy,
 	    Bool       damage,
 	    Bool       immediate);
+
+void
+configureXWindow (CompWindow	 *w,
+		  unsigned int	 valueMask,
+		  XWindowChanges *xwc);
 
 void
 moveResizeWindow (CompWindow     *w,

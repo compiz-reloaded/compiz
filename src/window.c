@@ -1615,6 +1615,10 @@ addWindow (CompScreen *screen,
     if (!XGetWindowAttributes (screen->display->display, id, &w->attrib))
 	setDefaultWindowAttributes (&w->attrib);
 
+    w->serverWidth	 = w->attrib.width;
+    w->serverHeight	 = w->attrib.height;
+    w->serverBorderWidth = w->attrib.border_width;
+
     w->width  = w->attrib.width  + w->attrib.border_width * 2;
     w->height = w->attrib.height + w->attrib.border_width * 2;
 
@@ -2805,12 +2809,20 @@ restoreWindowGeometry (CompWindow     *w,
     return m;
 }
 
-static void
-configureXWindow (Display	 *dpy,
-		  CompWindow	 *w,
+void
+configureXWindow (CompWindow	 *w,
 		  unsigned int	 valueMask,
 		  XWindowChanges *xwc)
 {
+    if (valueMask & CWWidth)
+	w->serverWidth = xwc->width;
+
+    if (valueMask & CWHeight)
+	w->serverHeight	= xwc->height;
+
+    if (valueMask & CWBorderWidth)
+	w->serverBorderWidth = xwc->border_width;
+
     XConfigureWindow (w->screen->display->display, w->id,
 		      valueMask, xwc);
 
@@ -2844,8 +2856,7 @@ stackTransients (CompWindow	*w,
 		return FALSE;
 
 	    if (t->mapNum)
-		configureXWindow (w->screen->display->display, t,
-				  CWSibling | CWStackMode, xwc);
+		configureXWindow (t, CWSibling | CWStackMode, xwc);
 	}
     }
 
@@ -2870,7 +2881,7 @@ stackAncestors (CompWindow     *w,
 		return;
 
 	    if (ancestor->mapNum)
-		configureXWindow (w->screen->display->display, ancestor,
+		configureXWindow (ancestor,
 				  CWSibling | CWStackMode,
 				  xwc);
 
@@ -2897,7 +2908,7 @@ stackAncestors (CompWindow     *w,
 		    continue;
 
 		if (a->mapNum)
-		    configureXWindow (w->screen->display->display, a,
+		    configureXWindow (a,
 				      CWSibling | CWStackMode,
 				      xwc);
 	    }
@@ -3214,7 +3225,7 @@ moveResizeWindow (CompWindow     *w,
     if (w->mapNum && (xwcm & (CWWidth | CWHeight)))
 	sendSyncRequest (w);
 
-    XConfigureWindow (w->screen->display->display, w->id, xwcm, xwc);
+    configureXWindow (w, xwcm, xwc);
 
     if (placed)
 	w->placed = TRUE;
@@ -3235,7 +3246,7 @@ updateWindowSize (CompWindow *w)
 	if (w->mapNum && (mask & (CWWidth | CWHeight)))
 	    sendSyncRequest (w);
 
-	configureXWindow (w->screen->display->display, w, mask, &xwc);
+	configureXWindow (w, mask, &xwc);
     }
 }
 
@@ -3292,8 +3303,7 @@ addWindowStackChanges (CompWindow     *w,
 
 	    for (; dw; dw = dw->prev)
 		if (dw->type & CompWindowTypeDockMask)
-		    configureXWindow (w->screen->display->display, dw,
-				      mask, xwc);
+		    configureXWindow (dw, mask, xwc);
 	}
     }
 
@@ -3308,7 +3318,7 @@ raiseWindow (CompWindow *w)
 
     mask = addWindowStackChanges (w, &xwc, findSiblingBelow (w, FALSE));
     if (mask)
-	configureXWindow (w->screen->display->display, w, mask, &xwc);
+	configureXWindow (w, mask, &xwc);
 }
 
 void
@@ -3319,7 +3329,7 @@ lowerWindow (CompWindow *w)
 
     mask = addWindowStackChanges (w, &xwc, findLowestSiblingBelow (w));
     if (mask)
-	configureXWindow (w->screen->display->display, w, mask, &xwc);
+	configureXWindow (w, mask, &xwc);
 }
 
 void
@@ -3337,7 +3347,7 @@ restackWindowAbove (CompWindow *w,
 
 	mask = addWindowStackChanges (w, &xwc, sibling);
 	if (mask)
-	    configureXWindow (w->screen->display->display, w, mask, &xwc);
+	    configureXWindow (w, mask, &xwc);
     }
 }
 
@@ -3356,7 +3366,7 @@ restackWindowBelow (CompWindow *w,
 
 	mask = addWindowStackChanges (w, &xwc, sibling);
 	if (mask)
-	    configureXWindow (w->screen->display->display, w, mask, &xwc);
+	    configureXWindow (w, mask, &xwc);
     }
 }
 
@@ -3396,7 +3406,7 @@ updateWindowAttributes (CompWindow *w,
 	/* transient children above */
 	if (stackTransients (w, NULL, &xwc))
 	{
-	    configureXWindow (w->screen->display->display, w, mask, &xwc);
+	    configureXWindow (w, mask, &xwc);
 
 	    /* ancestors, sibilings and sibiling transients below */
 	    stackAncestors (w, &xwc);
@@ -3404,7 +3414,7 @@ updateWindowAttributes (CompWindow *w,
     }
     else
     {
-	configureXWindow (w->screen->display->display, w, mask, &xwc);
+	configureXWindow (w, mask, &xwc);
     }
 }
 
