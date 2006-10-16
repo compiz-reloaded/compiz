@@ -279,7 +279,7 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if (yRoot - ms->snapOffY >= SNAP_OFF)
 		    {
-			int width = w->attrib.width;
+			int width = w->serverWidth;
 
 			w->saveMask |= CWX | CWY;
 
@@ -323,8 +323,8 @@ moveHandleMotionEvent (CompScreen *s,
 	    {
 		min = s->workArea.y + w->input.top;
 		max = s->workArea.y + s->workArea.height -
-		    w->input.bottom - w->attrib.height -
-		    w->attrib.border_width * 2;
+		    w->input.bottom - w->serverHeight -
+		    w->serverBorderWidth * 2;
 
 		if (w->attrib.y + dy < min)
 		    dy = min - w->attrib.y;
@@ -337,10 +337,13 @@ moveHandleMotionEvent (CompScreen *s,
 		if (w->attrib.x > s->width || w->attrib.x + w->width < 0)
 		    return;
 
+		if (w->attrib.x + w->serverWidth + w->serverBorderWidth < 0)
+		    return;
+
 		min = s->workArea.x + w->input.left;
 		max = s->workArea.x + s->workArea.width -
-		    w->input.right - w->attrib.width -
-		    w->attrib.border_width * 2;
+		    w->input.right - w->serverWidth -
+		    w->serverBorderWidth * 2;
 
 		if (w->attrib.x + dx < min)
 		    dx = min - w->attrib.x;
