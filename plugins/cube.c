@@ -69,6 +69,14 @@ static char *cubeImages[] = {
 
 #define CUBE_SKYDOME_ANIMATE_DEFAULT FALSE
 
+#define CUBE_SKYDOME_GRAD_START_RED_DEFAULT   0x0d0d
+#define CUBE_SKYDOME_GRAD_START_GREEN_DEFAULT 0xb1b1
+#define CUBE_SKYDOME_GRAD_START_BLUE_DEFAULT  0xfdfd
+
+#define CUBE_SKYDOME_GRAD_END_RED_DEFAULT   0xfefe
+#define CUBE_SKYDOME_GRAD_END_GREEN_DEFAULT 0xffff
+#define CUBE_SKYDOME_GRAD_END_BLUE_DEFAULT  0xc7c7
+
 #define CUBE_UNFOLD_KEY_DEFAULT       "Down"
 #define CUBE_UNFOLD_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
 
@@ -102,18 +110,20 @@ typedef struct _CubeDisplay {
     CompOption opt[CUBE_DISPLAY_OPTION_NUM];
 } CubeDisplay;
 
-#define CUBE_SCREEN_OPTION_COLOR        0
-#define CUBE_SCREEN_OPTION_IN           1
-#define CUBE_SCREEN_OPTION_SCALE_IMAGE  2
-#define CUBE_SCREEN_OPTION_IMAGES       3
-#define CUBE_SCREEN_OPTION_SKYDOME      4
-#define CUBE_SCREEN_OPTION_SKYDOME_IMG  5
-#define CUBE_SCREEN_OPTION_SKYDOME_ANIM 6
-#define CUBE_SCREEN_OPTION_ACCELERATION 7
-#define CUBE_SCREEN_OPTION_SPEED	8
-#define CUBE_SCREEN_OPTION_TIMESTEP	9
-#define CUBE_SCREEN_OPTION_MIPMAP	10
-#define CUBE_SCREEN_OPTION_NUM          11
+#define CUBE_SCREEN_OPTION_COLOR	      0
+#define CUBE_SCREEN_OPTION_IN		      1
+#define CUBE_SCREEN_OPTION_SCALE_IMAGE	      2
+#define CUBE_SCREEN_OPTION_IMAGES	      3
+#define CUBE_SCREEN_OPTION_SKYDOME	      4
+#define CUBE_SCREEN_OPTION_SKYDOME_IMG	      5
+#define CUBE_SCREEN_OPTION_SKYDOME_ANIM	      6
+#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_START 7
+#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_END   8
+#define CUBE_SCREEN_OPTION_ACCELERATION	      9
+#define CUBE_SCREEN_OPTION_SPEED	      10
+#define CUBE_SCREEN_OPTION_TIMESTEP	      11
+#define CUBE_SCREEN_OPTION_MIPMAP	      12
+#define CUBE_SCREEN_OPTION_NUM                13
 
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
@@ -486,14 +496,18 @@ cubeUpdateSkyDomeTexture (CompScreen *screen)
 			     NULL))
     {
 	GLfloat aaafTextureData[128][128][3];
-
-	GLfloat fRStart = 13.0f / 255.0f;
-	GLfloat fGStart = 177.0f / 255.0f;
-	GLfloat fBStart = 253.0f / 255.0f;
-	GLfloat fREnd = 254.0f / 255.0f;
-	GLfloat fGEnd = 255.0f / 255.0f;
-	GLfloat fBEnd = 199.0f / 255.0f;
-
+	GLfloat fRStart = (GLfloat)
+	    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_START].value.c[0] / 0xffff;
+	GLfloat fGStart = (GLfloat)
+	    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_START].value.c[1] / 0xffff;
+	GLfloat fBStart = (GLfloat)
+	    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_START].value.c[2] / 0xffff;
+	GLfloat fREnd = (GLfloat)
+	    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_END].value.c[0] / 0xffff;
+	GLfloat fGEnd = (GLfloat)
+	    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_END].value.c[1] / 0xffff;
+	GLfloat fBEnd = (GLfloat)
+	    cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_END].value.c[2] / 0xffff;
 	GLfloat fRStep = (fREnd - fRStart) / 128.0f;
 	GLfloat fGStep = (fGEnd - fGStart) / 128.0f;
 	GLfloat fBStep = (fBStart - fBEnd) / 128.0f;
@@ -800,6 +814,24 @@ cubeSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case CUBE_SCREEN_OPTION_SKYDOME_GRAD_START:
+	if (compSetColorOption (o, value))
+	{
+	    cubeUpdateSkyDomeTexture (screen);
+	    cubeUpdateSkyDomeList (screen, 1.0f);
+	    damageScreen (screen);
+	    return TRUE;
+	}
+	break;
+    case CUBE_SCREEN_OPTION_SKYDOME_GRAD_END:
+	if (compSetColorOption (o, value))
+	{
+	    cubeUpdateSkyDomeTexture (screen);
+	    cubeUpdateSkyDomeList (screen, 1.0f);
+	    damageScreen (screen);
+	    return TRUE;
+	}
+	break;
     case CUBE_SCREEN_OPTION_ACCELERATION:
 	if (compSetFloatOption (o, value))
 	{
@@ -898,6 +930,28 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->longDesc	  = N_("Animate skydome when rotating cube");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_SKYDOME_ANIMATE_DEFAULT;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_START];
+    o->name	  = "skydome_gradient_start_color";
+    o->shortDesc  = N_("Skydome Gradient Start Color");
+    o->longDesc	  = N_("Color to use for the top color-stop of the "
+		       "skydome-fallback gradient");
+    o->type	  = CompOptionTypeColor;
+    o->value.c[0] = CUBE_SKYDOME_GRAD_START_RED_DEFAULT;
+    o->value.c[1] = CUBE_SKYDOME_GRAD_START_GREEN_DEFAULT;
+    o->value.c[2] = CUBE_SKYDOME_GRAD_START_BLUE_DEFAULT;
+    o->value.c[3] = 0xffff;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_END];
+    o->name	  = "skydome_gradient_end_color";
+    o->shortDesc  = N_("Skydome Gradient End Color");
+    o->longDesc	  = N_("Color to use for the bottom color-stop of the "
+		       "skydome-fallback gradient");
+    o->type	  = CompOptionTypeColor;
+    o->value.c[0] = CUBE_SKYDOME_GRAD_END_RED_DEFAULT;
+    o->value.c[1] = CUBE_SKYDOME_GRAD_END_GREEN_DEFAULT;
+    o->value.c[2] = CUBE_SKYDOME_GRAD_END_BLUE_DEFAULT;
+    o->value.c[3] = 0xffff;
 
     o = &cs->opt[CUBE_SCREEN_OPTION_ACCELERATION];
     o->name		= "acceleration";
