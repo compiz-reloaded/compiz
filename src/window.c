@@ -1009,7 +1009,7 @@ setWindowFrameExtents (CompWindow	 *w,
 static void
 setWindowMatrix (CompWindow *w)
 {
-    w->matrix = w->texture.matrix;
+    w->matrix = w->texture->matrix;
     w->matrix.x0 -= (w->attrib.x * w->matrix.xx);
     w->matrix.y0 -= (w->attrib.y * w->matrix.yy);
 }
@@ -1030,7 +1030,7 @@ bindWindow (CompWindow *w)
 	if (attr.map_state != IsViewable)
 	{
 	    XUngrabServer (w->screen->display->display);
-	    finiTexture (w->screen, &w->texture);
+	    finiTexture (w->screen, w->texture);
 	    w->mapNum = 0;
 	    return;
 	}
@@ -1041,7 +1041,7 @@ bindWindow (CompWindow *w)
 	XUngrabServer (w->screen->display->display);
     }
 
-    if (!bindPixmapToTexture (w->screen, &w->texture, w->pixmap,
+    if (!bindPixmapToTexture (w->screen, w->texture, w->pixmap,
 			      w->width, w->height,
 			      w->attrib.depth))
     {
@@ -1057,7 +1057,7 @@ releaseWindow (CompWindow *w)
 {
     if (w->pixmap)
     {
-	releasePixmapFromTexture (w->screen, &w->texture);
+	releasePixmapFromTexture (w->screen, w->texture);
 	XFreePixmap (w->screen->display->display, w->pixmap);
 
 	w->pixmap = None;
@@ -1075,8 +1075,7 @@ freeWindow (CompWindow *w)
     if (w->syncWaitHandle)
 	compRemoveTimeout (w->syncWaitHandle);
 
-    if (w->texture.name)
-	finiTexture (w->screen, &w->texture);
+    destroyTexture (w->screen, w->texture);
 
     if (w->frame)
 	XDestroyWindow (w->screen->display->display, w->frame);
@@ -1519,7 +1518,12 @@ addWindow (CompScreen *screen,
     w->resName   = NULL;
     w->resClass  = NULL;
 
-    initTexture (screen, &w->texture);
+    w->texture = createTexture (screen);
+    if (!w->texture)
+    {
+	free (w);
+	return;
+    }
 
     w->screen     = screen;
     w->pixmap     = None;
@@ -1587,6 +1591,7 @@ addWindow (CompScreen *screen,
 	w->privates = malloc (screen->windowPrivateLen * sizeof (CompPrivate));
 	if (!w->privates)
 	{
+	    destroyTexture (screen, w->texture);
 	    free (w);
 	    return;
 	}
@@ -1682,8 +1687,6 @@ addWindow (CompScreen *screen,
 	rect.extents.y2 = w->attrib.y + w->height;
 
 	XUnionRegion (&rect, w->region, w->region);
-
-	initTexture (screen, &w->texture);
 
 	w->damage = XDamageCreate (screen->display->display, id,
 				   XDamageReportRawRectangles);

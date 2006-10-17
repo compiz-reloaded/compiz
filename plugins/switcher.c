@@ -1498,7 +1498,7 @@ switchPaintThumb (CompWindow		  *w,
 
     if (w->mapNum)
     {
-	if (!w->texture.pixmap)
+	if (!w->texture->pixmap)
 	    bindWindow (w);
     }
 
@@ -1535,7 +1535,7 @@ switchPaintThumb (CompWindow		  *w,
 
 	switchMoveWindow (w, dx, dy);
 
-	matrix = w->texture.matrix;
+	matrix = w->texture->matrix;
 	matrix.x0 -= (w->attrib.x * w->matrix.xx);
 	matrix.y0 -= (w->attrib.y * w->matrix.yy);
 
@@ -1550,7 +1550,7 @@ switchPaintThumb (CompWindow		  *w,
 	w->vCount = 0;
 	addWindowGeometry (w, &matrix, 1, w->region, &reg);
 	if (w->vCount)
-	    (*w->screen->drawWindowTexture) (w, &w->texture, &sAttrib, mask);
+	    (*w->screen->drawWindowTexture) (w, w->texture, &sAttrib, mask);
 
 	switchMoveWindow (w, -dx, -dy);
 

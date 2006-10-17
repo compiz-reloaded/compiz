@@ -1749,7 +1749,7 @@ struct _CompWindow {
     Window	      clientLeader;
     XSizeHints	      sizeHints;
     Pixmap	      pixmap;
-    CompTexture       texture;
+    CompTexture       *texture;
     CompMatrix        matrix;
     Damage	      damage;
     Bool	      inputHint;

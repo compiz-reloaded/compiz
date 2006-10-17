@@ -1941,7 +1941,7 @@ handleEvent (CompDisplay *d,
 
 	    if (w)
 	    {
-		w->texture.oldMipmaps = TRUE;
+		w->texture->oldMipmaps = TRUE;
 
 		if (w->syncWait)
 		{

@@ -454,7 +454,7 @@ fadeHandleEvent (CompDisplay *d,
 	{
 	    FADE_SCREEN (w->screen);
 
-	    if (w->texture.pixmap && (fs->wMask & w->type))
+	    if (w->texture->pixmap && (fs->wMask & w->type))
 	    {
 		FADE_WINDOW (w);
 
@@ -481,7 +481,7 @@ fadeHandleEvent (CompDisplay *d,
 
 	    fw->shaded = w->shaded;
 
-	    if (!fw->shaded && w->texture.pixmap && (fs->wMask & w->type))
+	    if (!fw->shaded && w->texture->pixmap && (fs->wMask & w->type))
 	    {
 		w->paint.opacity = 0;
 

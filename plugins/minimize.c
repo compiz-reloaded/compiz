@@ -268,7 +268,7 @@ minSetShade (CompWindow *w,
     XIntersectRegion (mw->region, &rect, w->region);
     XOffsetRegion (w->region, w->attrib.x, w->attrib.y - (h - shade));
 
-    w->matrix = w->texture.matrix;
+    w->matrix = w->texture->matrix;
     w->matrix.x0 -= (w->attrib.x * w->matrix.xx);
     w->matrix.y0 -= ((w->attrib.y - (h - shade)) * w->matrix.yy);
 
@@ -828,7 +828,7 @@ minDamageWindowRect (CompWindow *w,
 		XOffsetRegion (mw->region, -w->attrib.x, -w->attrib.y);
 
 		/* bind pixmap here so we have something to unshade with */
-		if (!w->texture.pixmap)
+		if (!w->texture->pixmap)
 		    bindWindow (w);
 
 		ms->moreAdjust = TRUE;

@@ -823,7 +823,7 @@ paintWindow (CompWindow		     *w,
 	    mask |= PAINT_WINDOW_SOLID_MASK;
     }
 
-    if (!w->texture.pixmap)
+    if (!w->texture->pixmap)
     {
 	bindWindow (w);
 	if (!w->mapNum)
@@ -835,7 +835,7 @@ paintWindow (CompWindow		     *w,
     if (w->vCount)
     {
 	w->lastPaint = *attrib;
-	(*w->screen->drawWindowTexture) (w, &w->texture, attrib, mask);
+	(*w->screen->drawWindowTexture) (w, w->texture, attrib, mask);
     }
 
     return TRUE;
