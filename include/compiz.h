@@ -1043,6 +1043,7 @@ struct _CompTexture {
     CompMatrix matrix;
     Bool       oldMipmaps;
     Bool       mipmap;
+    int        refCount;
 };
 
 void

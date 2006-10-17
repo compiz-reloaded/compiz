@@ -43,6 +43,7 @@ void
 initTexture (CompScreen  *screen,
 	     CompTexture *texture)
 {
+    texture->refCount	= 1;
     texture->name	= 0;
     texture->target	= GL_TEXTURE_2D;
     texture->pixmap	= None;
@@ -82,6 +83,10 @@ void
 destroyTexture (CompScreen  *screen,
 		CompTexture *texture)
 {
+    texture->refCount--;
+    if (texture->refCount)
+	return;
+
     finiTexture (screen, texture);
 
     free (texture);
