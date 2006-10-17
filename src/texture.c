@@ -64,6 +64,29 @@ finiTexture (CompScreen  *screen,
     }
 }
 
+CompTexture *
+createTexture (CompScreen *screen)
+{
+    CompTexture *texture;
+
+    texture = (CompTexture *) malloc (sizeof (CompTexture));
+    if (!texture)
+	return NULL;
+
+    initTexture (screen, texture);
+
+    return texture;
+}
+
+void
+destroyTexture (CompScreen  *screen,
+		CompTexture *texture)
+{
+    finiTexture (screen, texture);
+
+    free (texture);
+}
+
 static Bool
 imageToTexture (CompScreen   *screen,
 		CompTexture  *texture,

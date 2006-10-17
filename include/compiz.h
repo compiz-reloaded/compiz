@@ -1053,6 +1053,13 @@ void
 finiTexture (CompScreen  *screen,
 	     CompTexture *texture);
 
+CompTexture *
+createTexture (CompScreen *screen);
+
+void
+destroyTexture (CompScreen  *screen,
+		CompTexture *texture);
+
 Bool
 readImageToTexture (CompScreen   *screen,
 		    CompTexture  *texture,
