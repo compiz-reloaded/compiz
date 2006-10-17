@@ -1846,12 +1846,20 @@ handleEvent (CompDisplay *d,
 	if (event->xfocus.mode != NotifyGrab)
 	{
 	    w = findWindowAtDisplay (d, event->xfocus.window);
-	    if (w && w->managed && w->id != d->activeWindow)
+	    if (w && w->managed)
 	    {
-		XChangeProperty (d->display, w->screen->root,
-				 d->winActiveAtom,
-				 XA_WINDOW, 32, PropModeReplace,
-				 (unsigned char *) &w->id, 1);
+		unsigned int state = w->state;
+
+		if (w->id != d->activeWindow)
+		    XChangeProperty (d->display, w->screen->root,
+				     d->winActiveAtom,
+				     XA_WINDOW, 32, PropModeReplace,
+				     (unsigned char *) &w->id, 1);
+
+		w->state &= ~CompWindowStateDemandsAttentionMask;
+
+		if (w->state != state)
+		    setWindowState (d, w->state, w->id);
 	    }
 	}
 	break;
