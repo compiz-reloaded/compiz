@@ -1057,7 +1057,16 @@ releaseWindow (CompWindow *w)
 {
     if (w->pixmap)
     {
-	releasePixmapFromTexture (w->screen, w->texture);
+	CompTexture *texture;
+
+	texture = createTexture (w->screen);
+	if (texture)
+	{
+	    destroyTexture (w->screen, w->texture);
+
+	    w->texture = texture;
+	}
+
 	XFreePixmap (w->screen->display->display, w->pixmap);
 
 	w->pixmap = None;
