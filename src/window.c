@@ -2471,7 +2471,28 @@ moveInputFocusToWindow (CompWindow *w)
     }
     else
     {
-	XSetInputFocus (d->display, w->id, RevertToPointerRoot, CurrentTime);
+	if (w->inputHint)
+	{
+	    XSetInputFocus (d->display, w->id, RevertToPointerRoot,
+			    CurrentTime);
+	}
+	else if (w->protocols & CompWindowProtocolTakeFocusMask)
+	{
+	    XEvent ev;
+
+	    ev.type		    = ClientMessage;
+	    ev.xclient.window	    = w->id;
+	    ev.xclient.message_type = d->wmProtocolsAtom;
+	    ev.xclient.format	    = 32;
+	    ev.xclient.data.l[0]    = d->wmTakeFocusAtom;
+	    ev.xclient.data.l[1]    =
+		getCurrentTimeFromDisplay (d);
+	    ev.xclient.data.l[2]    = 0;
+	    ev.xclient.data.l[3]    = 0;
+	    ev.xclient.data.l[4]    = 0;
+
+	    XSendEvent (d->display, w->id, FALSE, NoEventMask, &ev);
+	}
     }
 }
 

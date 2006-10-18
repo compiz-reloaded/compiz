@@ -2967,6 +2967,21 @@ addDisplay (char *name,
     return TRUE;
 }
 
+Time
+getCurrentTimeFromDisplay (CompDisplay *d)
+{
+    XEvent event;
+
+    XChangeProperty (d->display, d->screens->grabWindow,
+		     XA_PRIMARY, XA_STRING, 8,
+		     PropModeAppend, NULL, 0);
+    XWindowEvent (d->display, d->screens->grabWindow,
+		  PropertyChangeMask,
+		  &event);
+
+    return event.xproperty.time;
+}
+
 void
 focusDefaultWindow (CompDisplay *d)
 {
