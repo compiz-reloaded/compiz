@@ -1858,7 +1858,7 @@ sendConfigureNotify (CompWindow *w)
     xev.event	     = w->id;
     xev.window	     = w->id;
 
-    /* noramlly we should never send configure notify events to override
+    /* normally we should never send configure notify events to override
        redirect windows but if they support the _NET_WM_SYNC_REQUEST
        protocol we need to do this when the window is mapped. however the
        only way we can make sure that the attributes we send are correct
