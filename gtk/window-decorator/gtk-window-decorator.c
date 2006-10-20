@@ -6087,6 +6087,8 @@ theme_changed (GConfClient *client)
 	if (theme)
 	{
 	    meta_theme_set_current (theme, TRUE);
+	    if (!meta_theme_get_current ())
+		use_meta_theme = FALSE;
 
 	    g_free (theme);
 	}
