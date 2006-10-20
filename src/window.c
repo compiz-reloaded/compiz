@@ -1857,17 +1857,49 @@ sendConfigureNotify (CompWindow *w)
     xev.type	     = ConfigureNotify;
     xev.event	     = w->id;
     xev.window	     = w->id;
-    xev.x	     = w->attrib.x;
-    xev.y	     = w->attrib.y;
-    xev.width	     = w->serverWidth;
-    xev.height	     = w->serverHeight;
-    xev.border_width = w->serverBorderWidth;
 
-    xev.above	          = (w->prev) ? w->prev->id : None;
-    xev.override_redirect = w->attrib.override_redirect;
+    /* noramlly we should never send configure notify events to override
+       redirect windows but if they support the _NET_WM_SYNC_REQUEST
+       protocol we need to do this when the window is mapped. however the
+       only way we can make sure that the attributes we send are correct
+       and is to grab the server. */
+    if (w->attrib.override_redirect)
+    {
+	XWindowAttributes attrib;
 
-    XSendEvent (w->screen->display->display, w->id, FALSE,
-		StructureNotifyMask, (XEvent *) &xev);
+	XGrabServer (w->screen->display->display);
+
+	if (XGetWindowAttributes (w->screen->display->display, w->id, &attrib))
+	{
+	    xev.x	     = attrib.x;
+	    xev.y	     = attrib.y;
+	    xev.width	     = attrib.width;
+	    xev.height	     = attrib.height;
+	    xev.border_width = attrib.border_width;
+
+	    xev.above	      = (w->prev) ? w->prev->id : None;
+	    xev.override_redirect = TRUE;
+
+	    XSendEvent (w->screen->display->display, w->id, FALSE,
+			StructureNotifyMask, (XEvent *) &xev);
+	}
+
+	XUngrabServer (w->screen->display->display);
+    }
+    else
+    {
+	xev.x	     = w->attrib.x;
+	xev.y	     = w->attrib.y;
+	xev.width	     = w->serverWidth;
+	xev.height	     = w->serverHeight;
+	xev.border_width = w->serverBorderWidth;
+
+	xev.above	          = (w->prev) ? w->prev->id : None;
+	xev.override_redirect = w->attrib.override_redirect;
+
+	XSendEvent (w->screen->display->display, w->id, FALSE,
+		    StructureNotifyMask, (XEvent *) &xev);
+    }
 }
 
 void
