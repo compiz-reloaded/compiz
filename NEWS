@@ -1,3 +1,31 @@
+Release 0.3.2 (2006-10-20 David Reveman <davidr@novell.com>)
+============================================================
+Development release.
+
+snap_inverted option has been added to wobbly plugin.
+
+Configuration support has been added to dbus plugin.
+
+Add 'command' option has been added to decoration plugin,
+which can be used to automatically launch a decorator
+when one isn't already running.
+
+Opacity support for metacity themes.
+
+A raise_window option has been added.
+
+Decorations on maximized windows are now rendered
+correctly when using metacity themes.
+
+An ignore_hints_when_maximized option, which makes compiz
+ignore size increment and aspect hints for maximized
+windows has been added and made default.
+
+Better default option values for rotate plugin.
+
+and much more...
+
+
 Release 0.2.0 (2006-10-02 David Reveman <davidr@novell.com>)
 ============================================================
 First official release of compiz.
