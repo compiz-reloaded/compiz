@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-29 14:36-0400\n"
+"POT-Creation-Date: 2006-10-20 14:40-0400\n"
 "PO-Revision-Date: 2006-07-20 10:20-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -15,165 +15,191 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/cube.c:843
+#: plugins/cube.c:875
 msgid "Cube Color"
 msgstr "立方体颜色"
 
-#: plugins/cube.c:844
+#: plugins/cube.c:876
 msgid "Color of top and bottom sides of the cube"
 msgstr "立方体顶边和底边的颜色"
 
-#: plugins/cube.c:853
+#: plugins/cube.c:885
 msgid "Inside Cube"
 msgstr "立方体内"
 
-#: plugins/cube.c:854
+#: plugins/cube.c:886
 msgid "Inside cube"
 msgstr "立方体内"
 
-#: plugins/cube.c:860
+#: plugins/cube.c:892
 msgid "Scale image"
 msgstr "调整图像大小"
 
-#: plugins/cube.c:861
+#: plugins/cube.c:893
 msgid "Scale images to cover top face of cube"
 msgstr "调整图像大小以覆盖立方体的顶面"
 
-#: plugins/cube.c:867
+#: plugins/cube.c:899
 msgid "Image files"
 msgstr "图像文件"
 
-#: plugins/cube.c:868
+#: plugins/cube.c:900
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "应在立方体顶面显示的 PNG 和 SVG 文件列表"
 
-#: plugins/cube.c:881
+#: plugins/cube.c:913
 msgid "Skydome"
 msgstr "背景"
 
-#: plugins/cube.c:882
+#: plugins/cube.c:914
 msgid "Render skydome"
 msgstr "呈现背景"
 
-#: plugins/cube.c:888
+#: plugins/cube.c:920
 msgid "Skydome Image"
 msgstr "背景图像"
 
-#: plugins/cube.c:889
+#: plugins/cube.c:921
 msgid "Image to use as texture for the skydome"
 msgstr "要用作背景纹理的图像"
 
-#: plugins/cube.c:897
+#: plugins/cube.c:929
 msgid "Animate Skydome"
 msgstr "动画背景"
 
-#: plugins/cube.c:898
+#: plugins/cube.c:930
 msgid "Animate skydome when rotating cube"
 msgstr "旋转立方体时的动画背景"
 
-#: plugins/cube.c:904 plugins/rotate.c:302
+#: plugins/cube.c:936
+msgid "Skydome Gradient Start Color"
+msgstr ""
+
+#: plugins/cube.c:937
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: plugins/cube.c:947
+msgid "Skydome Gradient End Color"
+msgstr ""
+
+#: plugins/cube.c:948
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: plugins/cube.c:958 plugins/rotate.c:302
 msgid "Acceleration"
 msgstr "加速"
 
-#: plugins/cube.c:905
+#: plugins/cube.c:959
 msgid "Fold Acceleration"
 msgstr "折叠加速"
 
-#: plugins/cube.c:914 plugins/minimize.c:203 plugins/rotate.c:319
+#: plugins/cube.c:968 plugins/minimize.c:203 plugins/rotate.c:319
 #: plugins/scale.c:326 plugins/switcher.c:347 plugins/zoom.c:223
 msgid "Speed"
 msgstr "速度"
 
-#: plugins/cube.c:915
+#: plugins/cube.c:969
 msgid "Fold Speed"
 msgstr "折叠速度"
 
-#: plugins/cube.c:924 plugins/minimize.c:213 plugins/rotate.c:329
+#: plugins/cube.c:978 plugins/minimize.c:213 plugins/rotate.c:329
 #: plugins/scale.c:336 plugins/switcher.c:357 plugins/zoom.c:233
 msgid "Timestep"
 msgstr "时间区间"
 
-#: plugins/cube.c:925
+#: plugins/cube.c:979
 msgid "Fold Timestep"
 msgstr "折叠时间段落"
 
-#: plugins/cube.c:934 plugins/switcher.c:382
+#: plugins/cube.c:988 plugins/switcher.c:382
 msgid "Mipmap"
 msgstr "Mipmap"
 
-#: plugins/cube.c:935 plugins/switcher.c:383
+#: plugins/cube.c:989 plugins/switcher.c:383
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "生成可能用于更高质量缩放比例的 mipmap"
 
-#: plugins/cube.c:1520
+#: plugins/cube.c:1574
 msgid "Unfold"
 msgstr "展开"
 
-#: plugins/cube.c:1521
+#: plugins/cube.c:1575
 msgid "Unfold cube"
 msgstr "展开立方体"
 
-#: plugins/cube.c:1538
+#: plugins/cube.c:1592
 msgid "Next Slide"
 msgstr "下一个滑块"
 
-#: plugins/cube.c:1539
+#: plugins/cube.c:1593
 msgid "Advance to next slide"
 msgstr "前进到下一个滑块"
 
-#: plugins/cube.c:1556
+#: plugins/cube.c:1610
 msgid "Previous Slide"
 msgstr "上一个滑块"
 
-#: plugins/cube.c:1557
+#: plugins/cube.c:1611
 msgid "Go back to previous slide"
 msgstr "返回上一个滑块"
 
-#: plugins/cube.c:1750
+#: plugins/cube.c:1808
 msgid "Desktop Cube"
 msgstr "桌面立方体"
 
-#: plugins/cube.c:1751
+#: plugins/cube.c:1809
 msgid "Place windows on cube"
 msgstr "将窗口放置在立方体上"
 
-#: plugins/decoration.c:234
+#: plugins/decoration.c:266
 msgid "Shadow Radius"
 msgstr "阴影半径"
 
-#: plugins/decoration.c:235
+#: plugins/decoration.c:267
 msgid "Drop shadow radius"
 msgstr "减少阴影半径"
 
-#: plugins/decoration.c:244
+#: plugins/decoration.c:276
 msgid "Shadow Opacity"
 msgstr "阴影不透明度"
 
-#: plugins/decoration.c:245
+#: plugins/decoration.c:277
 msgid "Drop shadow opacity"
 msgstr "减少阴影不透明度"
 
-#: plugins/decoration.c:254
+#: plugins/decoration.c:286
 msgid "Shadow Offset X"
 msgstr "阴影偏移 X"
 
-#: plugins/decoration.c:255
+#: plugins/decoration.c:287
 msgid "Drop shadow X offset"
 msgstr "减少阴影 X 偏移"
 
-#: plugins/decoration.c:263
+#: plugins/decoration.c:295
 msgid "Shadow Offset Y"
 msgstr "阴影偏移 Y"
 
-#: plugins/decoration.c:264
+#: plugins/decoration.c:296
 msgid "Drop shadow Y offset"
 msgstr "减少阴影 Y 偏移"
 
-#: plugins/decoration.c:1355
+#: plugins/decoration.c:304
+#, fuzzy
+msgid "Command"
+msgstr "命令行 %d"
+
+#: plugins/decoration.c:305
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+
+#: plugins/decoration.c:1433
 msgid "Window Decoration"
 msgstr "窗口装饰"
 
-#: plugins/decoration.c:1356
+#: plugins/decoration.c:1434
 msgid "Window decorations"
 msgstr "窗口装饰"
 
@@ -288,7 +314,7 @@ msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "映射时渐现窗口和不映射时渐弱窗口"
 
 #. Decimal point character
-#: plugins/gconf-dump.c:80
+#: plugins/gconf-dump.c:81
 msgid "."
 msgstr "."
 
@@ -334,43 +360,43 @@ msgstr "最小化效果"
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "最小化和取消最小化窗口时进行转换"
 
-#: plugins/move.c:527
+#: plugins/move.c:530
 msgid "Initiate Window Move"
 msgstr "启动窗口移动"
 
-#: plugins/move.c:528
+#: plugins/move.c:531
 msgid "Start moving window"
 msgstr "开始移动窗口"
 
-#: plugins/move.c:546 plugins/scale.c:368 plugins/switcher.c:408
+#: plugins/move.c:549 plugins/scale.c:368 plugins/switcher.c:408
 msgid "Opacity"
 msgstr "不透明度"
 
-#: plugins/move.c:547
+#: plugins/move.c:550
 msgid "Opacity level of moving windows"
 msgstr "移动窗口的不透明度"
 
-#: plugins/move.c:555
+#: plugins/move.c:558
 msgid "Constrain Y"
 msgstr "约束 Y"
 
-#: plugins/move.c:556
+#: plugins/move.c:559
 msgid "Constrain Y coordinate to workspace area"
 msgstr "约束工作空间区域的 Y 坐标"
 
-#: plugins/move.c:562
+#: plugins/move.c:565
 msgid "Snapoff maximized windows"
 msgstr "删除最大化窗口快照"
 
-#: plugins/move.c:563
+#: plugins/move.c:566
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "拖动时删除快照并自动取消窗口的最大化"
 
-#: plugins/move.c:729
+#: plugins/move.c:732
 msgid "Move Window"
 msgstr "移动窗口"
 
-#: plugins/move.c:730
+#: plugins/move.c:733
 msgid "Move window"
 msgstr "移动窗口"
 
@@ -382,27 +408,27 @@ msgstr "工作区"
 msgid "Window placement workarounds"
 msgstr "窗口放置工作区"
 
-#: plugins/place.c:1151
+#: plugins/place.c:1167
 msgid "Place Windows"
 msgstr "放置窗口"
 
-#: plugins/place.c:1152
+#: plugins/place.c:1168
 msgid "Place windows at appropriate positions when mapped"
 msgstr "映射时将窗口放置在适当位置"
 
-#: plugins/resize.c:712
+#: plugins/resize.c:711
 msgid "Initiate Window Resize"
 msgstr "启动窗口大小调整"
 
-#: plugins/resize.c:713
+#: plugins/resize.c:712
 msgid "Start resizing window"
 msgstr "开始调整窗口大小"
 
-#: plugins/resize.c:856
+#: plugins/resize.c:855
 msgid "Resize Window"
 msgstr "调整窗口大小"
 
-#: plugins/resize.c:857
+#: plugins/resize.c:856
 msgid "Resize window"
 msgstr "调整窗口大小"
 
@@ -826,124 +852,133 @@ msgstr "水纹效果"
 msgid "Adds water effects to different desktop actions"
 msgstr "将水纹效果添加到不同的桌面操作"
 
-#: plugins/wobbly.c:135 plugins/wobbly.c:2886
+#: plugins/wobbly.c:135 plugins/wobbly.c:2911
 msgid "Shiver"
 msgstr ""
 
-#: plugins/wobbly.c:386
+#: plugins/wobbly.c:389
 msgid "Friction"
 msgstr "摩擦"
 
-#: plugins/wobbly.c:387
+#: plugins/wobbly.c:390
 msgid "Spring Friction"
 msgstr "弹性摩擦"
 
-#: plugins/wobbly.c:396
+#: plugins/wobbly.c:399
 msgid "Spring K"
 msgstr "弹性 K"
 
-#: plugins/wobbly.c:397
+#: plugins/wobbly.c:400
 msgid "Spring Konstant"
 msgstr "弹性常数"
 
-#: plugins/wobbly.c:406
+#: plugins/wobbly.c:409
 msgid "Grid Resolution"
 msgstr "栅格分辨率"
 
-#: plugins/wobbly.c:407
+#: plugins/wobbly.c:410
 msgid "Vertex Grid Resolution"
 msgstr "顶栅格分辨率"
 
-#: plugins/wobbly.c:415
+#: plugins/wobbly.c:418
 msgid "Minimum Grid Size"
 msgstr "最小化栅格大小"
 
-#: plugins/wobbly.c:416
+#: plugins/wobbly.c:419
 msgid "Minimum Vertex Grid Size"
 msgstr "最小化顶栅格大小"
 
-#: plugins/wobbly.c:424
+#: plugins/wobbly.c:427
 msgid "Map Effect"
 msgstr "图效果"
 
-#: plugins/wobbly.c:425
+#: plugins/wobbly.c:428
 msgid "Map Window Effect"
 msgstr "图窗口效果（无，碎裂）"
 
-#: plugins/wobbly.c:433
+#: plugins/wobbly.c:436
 msgid "Focus Effect"
 msgstr "聚焦效果"
 
-#: plugins/wobbly.c:434
+#: plugins/wobbly.c:437
 msgid "Focus Window Effect"
 msgstr "聚焦窗口效果（无，碎裂）"
 
-#: plugins/wobbly.c:442
+#: plugins/wobbly.c:445
 msgid "Map Window Types"
 msgstr "图窗口类型"
 
-#: plugins/wobbly.c:443
+#: plugins/wobbly.c:446
 msgid "Window types that should wobble when mapped"
 msgstr ""
 "映射时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模"
 "式对话框、常规、全屏和未知）"
 
-#: plugins/wobbly.c:457
+#: plugins/wobbly.c:460
 msgid "Focus Window Types"
 msgstr "聚焦窗口类型"
 
-#: plugins/wobbly.c:458
+#: plugins/wobbly.c:461
 msgid "Window types that should wobble when focused"
 msgstr ""
 "聚焦时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模"
 "式对话框、常规、全屏和未知）"
 
-#: plugins/wobbly.c:470
+#: plugins/wobbly.c:473
 msgid "Move Window Types"
 msgstr "移动窗口类型"
 
-#: plugins/wobbly.c:471
+#: plugins/wobbly.c:474
 msgid "Window types that should wobble when moved"
 msgstr ""
 "移动时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模"
 "式对话框、常规、全屏和未知）"
 
-#: plugins/wobbly.c:485
+#: plugins/wobbly.c:488
 msgid "Grab Window Types"
 msgstr "捕捉窗口类型"
 
-#: plugins/wobbly.c:486
+#: plugins/wobbly.c:489
 msgid "Window types that should wobble when grabbed"
 msgstr ""
 "捕获时应颤动的窗口类型（桌面、靠接、工具栏、菜单、实用程序、启动、对话框、模"
 "式对话框、常规、全屏和未知）"
 
-#: plugins/wobbly.c:498
+#: plugins/wobbly.c:501
 msgid "Maximize Effect"
 msgstr "最大化效果"
 
-#: plugins/wobbly.c:499
+#: plugins/wobbly.c:502
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "最大化和取消最大化窗口时的颤动效果"
 
-#: plugins/wobbly.c:2872
+#: plugins/wobbly.c:2890
 msgid "Snap windows"
 msgstr "窗口快照"
 
-#: plugins/wobbly.c:2873
+#: plugins/wobbly.c:2891
 msgid "Toggle window snapping"
 msgstr "转换窗口快照"
 
-#: plugins/wobbly.c:2887
+#: plugins/wobbly.c:2904
+msgid "Snap Inverted"
+msgstr ""
+
+#: plugins/wobbly.c:2905
+#, fuzzy
+msgid "Inverted window snapping"
+msgstr "转换窗口快照"
+
+#: plugins/wobbly.c:2912
 #, fuzzy
 msgid "Make window shiver"
 msgstr "调整窗口大小"
 
-#: plugins/wobbly.c:3089
+#: plugins/wobbly.c:3114
 msgid "Wobbly Windows"
 msgstr "颤动的窗口"
 
-#: plugins/wobbly.c:3090
+#: plugins/wobbly.c:3115
 msgid "Use spring model for wobbly window effect"
 msgstr "对颤动窗口效果使用弹性模型"
 
@@ -979,259 +1014,278 @@ msgstr "缩放桌面"
 msgid "Zoom and pan desktop cube"
 msgstr "缩放和桌面立方体"
 
-#: src/display.c:153
+#: src/display.c:158
 msgid "Fast"
 msgstr ""
 
-#: src/display.c:153
+#: src/display.c:158
 msgid "Good"
 msgstr ""
 
-#: src/display.c:153
+#: src/display.c:158
 msgid "Best"
 msgstr ""
 
-#: src/display.c:698
+#: src/display.c:722
 msgid "Active Plugins"
 msgstr "活动插件"
 
-#: src/display.c:699
+#: src/display.c:723
 msgid "List of currently active plugins"
 msgstr "当前活动的插件列表"
 
-#: src/display.c:713
+#: src/display.c:737
 msgid "Texture Filter"
 msgstr "纹理过滤器"
 
-#: src/display.c:714
+#: src/display.c:738
 msgid "Texture filtering"
 msgstr "纹理过滤（快速、好、最佳）"
 
-#: src/display.c:722
+#: src/display.c:746
 msgid "Click To Focus"
 msgstr "单击设置焦点"
 
-#: src/display.c:723
+#: src/display.c:747
 msgid "Click on window moves input focus to it"
 msgstr "单击窗口将输入焦点移至它"
 
-#: src/display.c:729
+#: src/display.c:753
 msgid "Auto-Raise"
 msgstr "自动升起"
 
-#: src/display.c:730
+#: src/display.c:754
 msgid "Raise selected windows after interval"
 msgstr "在以下间隔后上升选中窗口"
 
-#: src/display.c:736
+#: src/display.c:760
 msgid "Auto-Raise Delay"
 msgstr "自动升起延迟"
 
-#: src/display.c:737
+#: src/display.c:761
 msgid "Interval before raising selected windows"
 msgstr "上升选中窗口前的间隔"
 
-#: src/display.c:745
+#: src/display.c:769
 msgid "Close Window"
 msgstr "关闭窗口"
 
-#: src/display.c:746
+#: src/display.c:770
 msgid "Close active window"
 msgstr "关闭活动窗口"
 
-#: src/display.c:762
+#: src/display.c:786
 msgid "Show Main Menu"
 msgstr "显示主菜单"
 
-#: src/display.c:763
+#: src/display.c:787
 msgid "Show the main menu"
 msgstr "显示主菜单"
 
-#: src/display.c:779
+#: src/display.c:803
 msgid "Run Dialog"
 msgstr "运行对话框"
 
-#: src/display.c:780
+#: src/display.c:804
 msgid "Show Run Application dialog"
 msgstr "显示运行应用程序对话框"
 
-#: src/display.c:796
+#: src/display.c:820
 msgid "Unmaximize Window"
 msgstr "取消窗口最大化"
 
-#: src/display.c:797
+#: src/display.c:821
 msgid "Unmaximize active window"
 msgstr "取消最大化活动窗口"
 
-#: src/display.c:813
+#: src/display.c:837
 msgid "Minimize Window"
 msgstr "最小化窗口"
 
-#: src/display.c:814
+#: src/display.c:838
 msgid "Minimize active window"
 msgstr "最小化活动窗口"
 
-#: src/display.c:830
+#: src/display.c:854
 msgid "Maximize Window"
 msgstr "最大化窗口"
 
-#: src/display.c:831
+#: src/display.c:855
 msgid "Maximize active window"
 msgstr "最大化活动窗口"
 
-#: src/display.c:847
+#: src/display.c:871
 msgid "Maximize Window Horizontally"
 msgstr "水平方向最大化窗口"
 
-#: src/display.c:848
+#: src/display.c:872
 msgid "Maximize active window horizontally"
 msgstr "水平方向最大化活动窗口"
 
-#: src/display.c:860
+#: src/display.c:884
 msgid "Maximize Window Vertically"
 msgstr "垂直方向最大化窗口"
 
-#: src/display.c:861
+#: src/display.c:885
 msgid "Maximize active window vertically"
 msgstr "垂直方向最大化活动窗口"
 
-#: src/display.c:873 src/display.c:874
+#: src/display.c:897 src/display.c:898
 msgid "Hide all windows and focus desktop"
 msgstr "隐藏所有窗口和焦点桌面"
 
-#: src/display.c:888
+#: src/display.c:912
 #, c-format
 msgid "Command line %d"
 msgstr "命令行 %d"
 
-#: src/display.c:889
+#: src/display.c:913
 #, c-format
 msgid "Command line to be executed in shell when run_command%d is invoked"
 msgstr "调用 run_command%d 时，shell 中要执行的命令行"
 
-#: src/display.c:891
+#: src/display.c:915
 #, c-format
 msgid "Run command %d"
 msgstr "运行命令 %d"
 
-#: src/display.c:892
+#: src/display.c:916
 #, c-format
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command%d"
 msgstr "键绑定在调用时，将运行 command%d 确定的 shell 命令"
 
-#: src/display.c:936
+#: src/display.c:960
 msgid "Slow Animations"
 msgstr "慢速动画"
 
-#: src/display.c:937
+#: src/display.c:961
 msgid "Toggle use of slow animations"
 msgstr "转换慢速动画的使用"
 
-#: src/display.c:953
+#: src/display.c:977
+#, fuzzy
+msgid "Raise Window"
+msgstr "调整窗口大小"
+
+#: src/display.c:978
+#, fuzzy
+msgid "Raise window above other windows"
+msgstr "将窗口降到其它窗口以下"
+
+#: src/display.c:992
 msgid "Lower Window"
 msgstr "降低窗口"
 
-#: src/display.c:954
+#: src/display.c:993
 msgid "Lower window beneath other windows"
 msgstr "将窗口降到其它窗口以下"
 
-#: src/display.c:968
+#: src/display.c:1007
 msgid "Increase Opacity"
 msgstr "增加不透明度"
 
-#: src/display.c:969
+#: src/display.c:1008
 msgid "Increase window opacity"
 msgstr "增加窗口不透明度"
 
-#: src/display.c:983
+#: src/display.c:1022
 msgid "Decrease Opacity"
 msgstr "降低不透明度"
 
-#: src/display.c:984
+#: src/display.c:1023
 msgid "Decrease window opacity"
 msgstr "降低窗口不透明度"
 
-#: src/display.c:998 src/display.c:999
+#: src/display.c:1037 src/display.c:1038
 msgid "Take a screenshot"
 msgstr "拍摄屏幕快照"
 
-#: src/display.c:1015 src/display.c:1016
+#: src/display.c:1054 src/display.c:1055
 msgid "Screenshot command line"
 msgstr "屏幕快照命令行"
 
-#: src/display.c:1024 src/display.c:1025
+#: src/display.c:1063 src/display.c:1064
 msgid "Take a screenshot of a window"
 msgstr "拍摄窗口的屏幕快照"
 
-#: src/display.c:1042 src/display.c:1043
+#: src/display.c:1081 src/display.c:1082
 msgid "Window screenshot command line"
 msgstr "窗口屏幕快照命令行"
 
-#: src/display.c:1051
+#: src/display.c:1090
 msgid "Window Menu"
 msgstr "窗口菜单"
 
-#: src/display.c:1052
+#: src/display.c:1091
 msgid "Open window menu"
 msgstr "打开窗口菜单"
 
-#: src/display.c:1071
+#: src/display.c:1110
 msgid "Raise On Click"
 msgstr "单击时上升"
 
-#: src/display.c:1072
+#: src/display.c:1111
 msgid "Raise windows when clicked"
 msgstr "单击时上升窗口"
 
-#: src/display.c:1078
+#: src/display.c:1117
 msgid "Audible Bell"
 msgstr "可听见的铃声"
 
-#: src/display.c:1079
+#: src/display.c:1118
 msgid "Audible system beep"
 msgstr "可听见的系统嘟嘟声"
 
-#: src/display.c:1085
+#: src/display.c:1124
 msgid "Toggle Window Maximized"
 msgstr "切换最大化的窗口"
 
-#: src/display.c:1086
+#: src/display.c:1125
 msgid "Toggle active window maximized"
 msgstr "将活动窗口切换到最大化"
 
-#: src/display.c:1098
+#: src/display.c:1137
 msgid "Toggle Window Maximized Horizontally"
 msgstr "将窗口水平方向切换到最大化"
 
-#: src/display.c:1100
+#: src/display.c:1139
 msgid "Toggle active window maximized horizontally"
 msgstr "将活动窗口水平方向切换到最大化"
 
-#: src/display.c:1112
+#: src/display.c:1151
 msgid "Toggle Window Maximized Vertically"
 msgstr "将窗口垂直方向切换到最大化"
 
-#: src/display.c:1114
+#: src/display.c:1153
 msgid "Toggle active window maximized vertically"
 msgstr "将活动窗口垂直方向切换到最大化"
 
-#: src/display.c:1126
+#: src/display.c:1165
 msgid "Hide Skip Taskbar Windows"
 msgstr "隐藏跳过任务栏窗口"
 
-#: src/display.c:1127
+#: src/display.c:1166
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "隐藏进入显示桌面方式时不在任务栏中的窗口"
 
-#: src/display.c:1134
+#: src/display.c:1173
 msgid "Toggle Window Shaded"
 msgstr "将窗口切换到遮蔽"
 
-#: src/display.c:1135
+#: src/display.c:1174
 msgid "Toggle active window shaded"
 msgstr "将活动窗口切换到遮蔽"
+
+#: src/display.c:1190
+#, fuzzy
+msgid "Ignore Hints When Maximized"
+msgstr "切换最大化的窗口"
+
+#: src/display.c:1191
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
 
 #: src/main.c:54
 msgid "Desktop"

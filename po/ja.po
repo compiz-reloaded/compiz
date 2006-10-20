@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-29 14:36-0400\n"
+"POT-Creation-Date: 2006-10-20 14:40-0400\n"
 "PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -15,165 +15,191 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/cube.c:843
+#: plugins/cube.c:875
 msgid "Cube Color"
 msgstr "キューブの色"
 
-#: plugins/cube.c:844
+#: plugins/cube.c:876
 msgid "Color of top and bottom sides of the cube"
 msgstr "キューブの上部および下部の面のカラー"
 
-#: plugins/cube.c:853
+#: plugins/cube.c:885
 msgid "Inside Cube"
 msgstr "キューブ内部"
 
-#: plugins/cube.c:854
+#: plugins/cube.c:886
 msgid "Inside cube"
 msgstr "キューブ内部"
 
-#: plugins/cube.c:860
+#: plugins/cube.c:892
 msgid "Scale image"
 msgstr "スケールイメージ"
 
-#: plugins/cube.c:861
+#: plugins/cube.c:893
 msgid "Scale images to cover top face of cube"
 msgstr "キューブの上面を覆うスケールイメージ"
 
-#: plugins/cube.c:867
+#: plugins/cube.c:899
 msgid "Image files"
 msgstr "イメージファイル"
 
-#: plugins/cube.c:868
+#: plugins/cube.c:900
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "キューブの上面にレンダリングするPNGおよびSVGファイルのリスト"
 
-#: plugins/cube.c:881
+#: plugins/cube.c:913
 msgid "Skydome"
 msgstr "スカイドーム"
 
-#: plugins/cube.c:882
+#: plugins/cube.c:914
 msgid "Render skydome"
 msgstr "スカイドームのレンダリング"
 
-#: plugins/cube.c:888
+#: plugins/cube.c:920
 msgid "Skydome Image"
 msgstr "スカイドームイメージ"
 
-#: plugins/cube.c:889
+#: plugins/cube.c:921
 msgid "Image to use as texture for the skydome"
 msgstr "スカイドームのテクスチャとして使用するイメージ"
 
-#: plugins/cube.c:897
+#: plugins/cube.c:929
 msgid "Animate Skydome"
 msgstr "スカイドームをアニメーション化する"
 
-#: plugins/cube.c:898
+#: plugins/cube.c:930
 msgid "Animate skydome when rotating cube"
 msgstr "キューブの回転時にスカイドームをアニメーション化する"
 
-#: plugins/cube.c:904 plugins/rotate.c:302
+#: plugins/cube.c:936
+msgid "Skydome Gradient Start Color"
+msgstr ""
+
+#: plugins/cube.c:937
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: plugins/cube.c:947
+msgid "Skydome Gradient End Color"
+msgstr ""
+
+#: plugins/cube.c:948
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: plugins/cube.c:958 plugins/rotate.c:302
 msgid "Acceleration"
 msgstr "アクセラレーション"
 
-#: plugins/cube.c:905
+#: plugins/cube.c:959
 msgid "Fold Acceleration"
 msgstr "アクセラレーションをフォールド(1.0-20.0)"
 
-#: plugins/cube.c:914 plugins/minimize.c:203 plugins/rotate.c:319
+#: plugins/cube.c:968 plugins/minimize.c:203 plugins/rotate.c:319
 #: plugins/scale.c:326 plugins/switcher.c:347 plugins/zoom.c:223
 msgid "Speed"
 msgstr "速度"
 
-#: plugins/cube.c:915
+#: plugins/cube.c:969
 msgid "Fold Speed"
 msgstr "速度をフォールド(0.1-50.0)"
 
-#: plugins/cube.c:924 plugins/minimize.c:213 plugins/rotate.c:329
+#: plugins/cube.c:978 plugins/minimize.c:213 plugins/rotate.c:329
 #: plugins/scale.c:336 plugins/switcher.c:357 plugins/zoom.c:233
 msgid "Timestep"
 msgstr "タイムステップ"
 
-#: plugins/cube.c:925
+#: plugins/cube.c:979
 msgid "Fold Timestep"
 msgstr "タイムステップをフォールド(0.1-50.0)"
 
-#: plugins/cube.c:934 plugins/switcher.c:382
+#: plugins/cube.c:988 plugins/switcher.c:382
 msgid "Mipmap"
 msgstr "ミップマップ"
 
-#: plugins/cube.c:935 plugins/switcher.c:383
+#: plugins/cube.c:989 plugins/switcher.c:383
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "高品質スケーリングが可能な場合ミップマップを生成"
 
-#: plugins/cube.c:1520
+#: plugins/cube.c:1574
 msgid "Unfold"
 msgstr "開く"
 
-#: plugins/cube.c:1521
+#: plugins/cube.c:1575
 msgid "Unfold cube"
 msgstr "キューブを開く"
 
-#: plugins/cube.c:1538
+#: plugins/cube.c:1592
 msgid "Next Slide"
 msgstr "次のスライド"
 
-#: plugins/cube.c:1539
+#: plugins/cube.c:1593
 msgid "Advance to next slide"
 msgstr "次のスライドに進む"
 
-#: plugins/cube.c:1556
+#: plugins/cube.c:1610
 msgid "Previous Slide"
 msgstr "前のスライド"
 
-#: plugins/cube.c:1557
+#: plugins/cube.c:1611
 msgid "Go back to previous slide"
 msgstr "前のスライドに戻る"
 
-#: plugins/cube.c:1750
+#: plugins/cube.c:1808
 msgid "Desktop Cube"
 msgstr "デスクトップキューブ"
 
-#: plugins/cube.c:1751
+#: plugins/cube.c:1809
 msgid "Place windows on cube"
 msgstr "ウィンドウをキューブに配置する"
 
-#: plugins/decoration.c:234
+#: plugins/decoration.c:266
 msgid "Shadow Radius"
 msgstr "シャドウ半径"
 
-#: plugins/decoration.c:235
+#: plugins/decoration.c:267
 msgid "Drop shadow radius"
 msgstr "シャドウの半径を下げる(0.0-48.0)"
 
-#: plugins/decoration.c:244
+#: plugins/decoration.c:276
 msgid "Shadow Opacity"
 msgstr "シャドウ不透明度"
 
-#: plugins/decoration.c:245
+#: plugins/decoration.c:277
 msgid "Drop shadow opacity"
 msgstr "シャドウの不透明度を下げる(0.01-6.00)"
 
-#: plugins/decoration.c:254
+#: plugins/decoration.c:286
 msgid "Shadow Offset X"
 msgstr "シャドウオフセットX"
 
-#: plugins/decoration.c:255
+#: plugins/decoration.c:287
 msgid "Drop shadow X offset"
 msgstr "シャドウのXオフセットを下げる(-16-16)"
 
-#: plugins/decoration.c:263
+#: plugins/decoration.c:295
 msgid "Shadow Offset Y"
 msgstr "シャドウオフセットY"
 
-#: plugins/decoration.c:264
+#: plugins/decoration.c:296
 msgid "Drop shadow Y offset"
 msgstr "シャドウのYオフセットを下げる(-16-16)"
 
-#: plugins/decoration.c:1355
+#: plugins/decoration.c:304
+#, fuzzy
+msgid "Command"
+msgstr "コマンドライン%d"
+
+#: plugins/decoration.c:305
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+
+#: plugins/decoration.c:1433
 msgid "Window Decoration"
 msgstr "ウィンドウ装飾"
 
-#: plugins/decoration.c:1356
+#: plugins/decoration.c:1434
 msgid "Window decorations"
 msgstr "ウィンドウ装飾"
 
@@ -290,7 +316,7 @@ msgstr ""
 "トする"
 
 #. Decimal point character
-#: plugins/gconf-dump.c:80
+#: plugins/gconf-dump.c:81
 msgid "."
 msgstr "."
 
@@ -337,43 +363,43 @@ msgstr "効果を最小限にする"
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "ウィンドウが最小化および最小化解除時に変換"
 
-#: plugins/move.c:527
+#: plugins/move.c:530
 msgid "Initiate Window Move"
 msgstr "ウィンドウの移動を開始"
 
-#: plugins/move.c:528
+#: plugins/move.c:531
 msgid "Start moving window"
 msgstr "ウィンドウの移動を開始"
 
-#: plugins/move.c:546 plugins/scale.c:368 plugins/switcher.c:408
+#: plugins/move.c:549 plugins/scale.c:368 plugins/switcher.c:408
 msgid "Opacity"
 msgstr "不透明度"
 
-#: plugins/move.c:547
+#: plugins/move.c:550
 msgid "Opacity level of moving windows"
 msgstr "移動するウィンドウの不透明度レベル(1-100)"
 
-#: plugins/move.c:555
+#: plugins/move.c:558
 msgid "Constrain Y"
 msgstr "Ｙをコンストレイン"
 
-#: plugins/move.c:556
+#: plugins/move.c:559
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Y座標をワークスペースエリアにコンストレイン"
 
-#: plugins/move.c:562
+#: plugins/move.c:565
 msgid "Snapoff maximized windows"
 msgstr "最大化したウィンドウのスナップ解除"
 
-#: plugins/move.c:563
+#: plugins/move.c:566
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "ドラッグ時に、最大化したウィンドウをスナップ解除して最大化を自動解除"
 
-#: plugins/move.c:729
+#: plugins/move.c:732
 msgid "Move Window"
 msgstr "ウィンドウを移動"
 
-#: plugins/move.c:730
+#: plugins/move.c:733
 msgid "Move window"
 msgstr "ウィンドウを移動"
 
@@ -385,27 +411,27 @@ msgstr "回避方法"
 msgid "Window placement workarounds"
 msgstr "ウィンドウ配置の回避策"
 
-#: plugins/place.c:1151
+#: plugins/place.c:1167
 msgid "Place Windows"
 msgstr "ウィンドウを配置する"
 
-#: plugins/place.c:1152
+#: plugins/place.c:1168
 msgid "Place windows at appropriate positions when mapped"
 msgstr "マップ時にウィンドウを適切な位置に配置する"
 
-#: plugins/resize.c:712
+#: plugins/resize.c:711
 msgid "Initiate Window Resize"
 msgstr "ウィンドウのサイズ変更を開始"
 
-#: plugins/resize.c:713
+#: plugins/resize.c:712
 msgid "Start resizing window"
 msgstr "ウィンドウのサイズ変更を開始"
 
-#: plugins/resize.c:856
+#: plugins/resize.c:855
 msgid "Resize Window"
 msgstr "ウィンドウのサイズ変更"
 
-#: plugins/resize.c:857
+#: plugins/resize.c:856
 msgid "Resize window"
 msgstr "ウィンドウのサイズ変更"
 
@@ -835,128 +861,137 @@ msgstr "水効果"
 msgid "Adds water effects to different desktop actions"
 msgstr "異なるデスクトップアクションに水効果を追加する"
 
-#: plugins/wobbly.c:135 plugins/wobbly.c:2886
+#: plugins/wobbly.c:135 plugins/wobbly.c:2911
 msgid "Shiver"
 msgstr ""
 
-#: plugins/wobbly.c:386
+#: plugins/wobbly.c:389
 msgid "Friction"
 msgstr "摩擦"
 
-#: plugins/wobbly.c:387
+#: plugins/wobbly.c:390
 msgid "Spring Friction"
 msgstr "バネの摩擦(0.1-10.0)"
 
-#: plugins/wobbly.c:396
+#: plugins/wobbly.c:399
 msgid "Spring K"
 msgstr "バネ定数"
 
-#: plugins/wobbly.c:397
+#: plugins/wobbly.c:400
 msgid "Spring Konstant"
 msgstr "バネ定数(0.1-10.0)"
 
-#: plugins/wobbly.c:406
+#: plugins/wobbly.c:409
 msgid "Grid Resolution"
 msgstr "グリッド解像度"
 
-#: plugins/wobbly.c:407
+#: plugins/wobbly.c:410
 msgid "Vertex Grid Resolution"
 msgstr "バーテックスグリッド解像度(1-64)"
 
-#: plugins/wobbly.c:415
+#: plugins/wobbly.c:418
 msgid "Minimum Grid Size"
 msgstr "最小グリッドサイズ"
 
-#: plugins/wobbly.c:416
+#: plugins/wobbly.c:419
 msgid "Minimum Vertex Grid Size"
 msgstr "最小バーテックスグリッドサイズ(4-128)"
 
-#: plugins/wobbly.c:424
+#: plugins/wobbly.c:427
 msgid "Map Effect"
 msgstr "効果のマップ"
 
-#: plugins/wobbly.c:425
+#: plugins/wobbly.c:428
 msgid "Map Window Effect"
 msgstr "ウィンドウ効果のマップ(なし、震動)"
 
-#: plugins/wobbly.c:433
+#: plugins/wobbly.c:436
 msgid "Focus Effect"
 msgstr "効果をフォーカス"
 
-#: plugins/wobbly.c:434
+#: plugins/wobbly.c:437
 msgid "Focus Window Effect"
 msgstr "ウィンドウ効果をフォーカス(なし、震動)"
 
-#: plugins/wobbly.c:442
+#: plugins/wobbly.c:445
 msgid "Map Window Types"
 msgstr "ウィンドウタイプのマップ"
 
-#: plugins/wobbly.c:443
+#: plugins/wobbly.c:446
 msgid "Window types that should wobble when mapped"
 msgstr ""
 "マップ時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、"
 "ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不"
 "明)"
 
-#: plugins/wobbly.c:457
+#: plugins/wobbly.c:460
 msgid "Focus Window Types"
 msgstr "ウィンドウタイプをフォーカス"
 
-#: plugins/wobbly.c:458
+#: plugins/wobbly.c:461
 msgid "Window types that should wobble when focused"
 msgstr ""
 "フォーカス時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
 "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全"
 "画面、不明)"
 
-#: plugins/wobbly.c:470
+#: plugins/wobbly.c:473
 msgid "Move Window Types"
 msgstr "ウィンドウタイプを移動"
 
-#: plugins/wobbly.c:471
+#: plugins/wobbly.c:474
 msgid "Window types that should wobble when moved"
 msgstr ""
 "移動時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、"
 "ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不"
 "明)"
 
-#: plugins/wobbly.c:485
+#: plugins/wobbly.c:488
 msgid "Grab Window Types"
 msgstr "ウィンドウタイプを取得"
 
-#: plugins/wobbly.c:486
+#: plugins/wobbly.c:489
 msgid "Window types that should wobble when grabbed"
 msgstr ""
 "取得時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、"
 "ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不"
 "明)"
 
-#: plugins/wobbly.c:498
+#: plugins/wobbly.c:501
 msgid "Maximize Effect"
 msgstr "効果を最大限にする"
 
-#: plugins/wobbly.c:499
+#: plugins/wobbly.c:502
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "ウィンドウの最大化および最大化解除時の揺れる効果"
 
-#: plugins/wobbly.c:2872
+#: plugins/wobbly.c:2890
 msgid "Snap windows"
 msgstr "ウィンドウをスナップ"
 
-#: plugins/wobbly.c:2873
+#: plugins/wobbly.c:2891
 msgid "Toggle window snapping"
 msgstr "ウィンドウスナップの切り替え"
 
-#: plugins/wobbly.c:2887
+#: plugins/wobbly.c:2904
+msgid "Snap Inverted"
+msgstr ""
+
+#: plugins/wobbly.c:2905
+#, fuzzy
+msgid "Inverted window snapping"
+msgstr "ウィンドウスナップの切り替え"
+
+#: plugins/wobbly.c:2912
 #, fuzzy
 msgid "Make window shiver"
 msgstr "スケールウィンドウ"
 
-#: plugins/wobbly.c:3089
+#: plugins/wobbly.c:3114
 msgid "Wobbly Windows"
 msgstr "揺れるウィンドウ"
 
-#: plugins/wobbly.c:3090
+#: plugins/wobbly.c:3115
 msgid "Use spring model for wobbly window effect"
 msgstr "揺れるウィンドウ効果用にバネモデルを使用"
 
@@ -992,142 +1027,142 @@ msgstr "デスクトップのズーム"
 msgid "Zoom and pan desktop cube"
 msgstr "デスクトップキューブのズームとパン"
 
-#: src/display.c:153
+#: src/display.c:158
 msgid "Fast"
 msgstr ""
 
-#: src/display.c:153
+#: src/display.c:158
 msgid "Good"
 msgstr ""
 
-#: src/display.c:153
+#: src/display.c:158
 msgid "Best"
 msgstr ""
 
-#: src/display.c:698
+#: src/display.c:722
 msgid "Active Plugins"
 msgstr "アクティブプラグイン"
 
-#: src/display.c:699
+#: src/display.c:723
 msgid "List of currently active plugins"
 msgstr "現在アクティブなプラグインのリスト"
 
-#: src/display.c:713
+#: src/display.c:737
 msgid "Texture Filter"
 msgstr "テクスチャフィルタ"
 
-#: src/display.c:714
+#: src/display.c:738
 msgid "Texture filtering"
 msgstr "テクスチャフィルタ(高速、良、最高)"
 
-#: src/display.c:722
+#: src/display.c:746
 msgid "Click To Focus"
 msgstr "クリックしてフォーカス"
 
-#: src/display.c:723
+#: src/display.c:747
 msgid "Click on window moves input focus to it"
 msgstr "ウィンドウをクリックすると、入力フォーカスがそのウィンドウに移動します"
 
-#: src/display.c:729
+#: src/display.c:753
 msgid "Auto-Raise"
 msgstr "自動調整"
 
-#: src/display.c:730
+#: src/display.c:754
 msgid "Raise selected windows after interval"
 msgstr "時間間隔後に選択したウィンドウを上げる"
 
-#: src/display.c:736
+#: src/display.c:760
 msgid "Auto-Raise Delay"
 msgstr "自動調整の待ち時間"
 
-#: src/display.c:737
+#: src/display.c:761
 msgid "Interval before raising selected windows"
 msgstr "選択したウィンドウを上にする前の間隔(0-10000)"
 
-#: src/display.c:745
+#: src/display.c:769
 msgid "Close Window"
 msgstr "ウィンドウを閉じる"
 
-#: src/display.c:746
+#: src/display.c:770
 msgid "Close active window"
 msgstr "アクティブなウィンドウを閉じる"
 
-#: src/display.c:762
+#: src/display.c:786
 msgid "Show Main Menu"
 msgstr "メインメニューの表示"
 
-#: src/display.c:763
+#: src/display.c:787
 msgid "Show the main menu"
 msgstr "メインメニューの表示"
 
-#: src/display.c:779
+#: src/display.c:803
 msgid "Run Dialog"
 msgstr "ランダイアログ"
 
-#: src/display.c:780
+#: src/display.c:804
 msgid "Show Run Application dialog"
 msgstr "ランアプリケーションダイアログの表示"
 
-#: src/display.c:796
+#: src/display.c:820
 msgid "Unmaximize Window"
 msgstr "ウィンドウの最大化解除"
 
-#: src/display.c:797
+#: src/display.c:821
 msgid "Unmaximize active window"
 msgstr "アクティブウィンドウの最大化解除"
 
-#: src/display.c:813
+#: src/display.c:837
 msgid "Minimize Window"
 msgstr "ウィンドウを最小化する"
 
-#: src/display.c:814
+#: src/display.c:838
 msgid "Minimize active window"
 msgstr "アクティブなウィンドウを最小化する"
 
-#: src/display.c:830
+#: src/display.c:854
 msgid "Maximize Window"
 msgstr "ウィンドウを最大化する"
 
-#: src/display.c:831
+#: src/display.c:855
 msgid "Maximize active window"
 msgstr "アクティブなウィンドウを最大化する"
 
-#: src/display.c:847
+#: src/display.c:871
 msgid "Maximize Window Horizontally"
 msgstr "水平方向にウィンドウを最大化する"
 
-#: src/display.c:848
+#: src/display.c:872
 msgid "Maximize active window horizontally"
 msgstr "アクティブなウィンドウを水平方向に最大化する"
 
-#: src/display.c:860
+#: src/display.c:884
 msgid "Maximize Window Vertically"
 msgstr "垂直方向にウィンドウを最大化する"
 
-#: src/display.c:861
+#: src/display.c:885
 msgid "Maximize active window vertically"
 msgstr "アクティブなウィンドウを垂直方向に最大化する"
 
-#: src/display.c:873 src/display.c:874
+#: src/display.c:897 src/display.c:898
 msgid "Hide all windows and focus desktop"
 msgstr "すべてのウィンドウを非表示にし、デスクトップをフォーカス"
 
-#: src/display.c:888
+#: src/display.c:912
 #, c-format
 msgid "Command line %d"
 msgstr "コマンドライン%d"
 
-#: src/display.c:889
+#: src/display.c:913
 #, c-format
 msgid "Command line to be executed in shell when run_command%d is invoked"
 msgstr "run_command%dの呼び出し時にシェルで実行されるコマンドライン"
 
-#: src/display.c:891
+#: src/display.c:915
 #, c-format
 msgid "Run command %d"
 msgstr "ランコマンド%d"
 
-#: src/display.c:892
+#: src/display.c:916
 #, c-format
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -1135,117 +1170,136 @@ msgid ""
 msgstr ""
 "呼び出し時にcommand%dにより識別されたシェルコマンドを実行するキーバインド"
 
-#: src/display.c:936
+#: src/display.c:960
 msgid "Slow Animations"
 msgstr "アニメーションのスロー再生"
 
-#: src/display.c:937
+#: src/display.c:961
 msgid "Toggle use of slow animations"
 msgstr "スロー再生アニメーション使用の切り替え"
 
-#: src/display.c:953
+#: src/display.c:977
+#, fuzzy
+msgid "Raise Window"
+msgstr "ウィンドウのサイズ変更"
+
+#: src/display.c:978
+#, fuzzy
+msgid "Raise window above other windows"
+msgstr "他のウィンドウの下にウィンドウを下げる"
+
+#: src/display.c:992
 msgid "Lower Window"
 msgstr "ウィンドウを下げる"
 
-#: src/display.c:954
+#: src/display.c:993
 msgid "Lower window beneath other windows"
 msgstr "他のウィンドウの下にウィンドウを下げる"
 
-#: src/display.c:968
+#: src/display.c:1007
 msgid "Increase Opacity"
 msgstr "不透明度を高める"
 
-#: src/display.c:969
+#: src/display.c:1008
 msgid "Increase window opacity"
 msgstr "ウィンドウの不透明度を高める"
 
-#: src/display.c:983
+#: src/display.c:1022
 msgid "Decrease Opacity"
 msgstr "不透明度を下げる"
 
-#: src/display.c:984
+#: src/display.c:1023
 msgid "Decrease window opacity"
 msgstr "ウィンドウの不透明度を下げる"
 
-#: src/display.c:998 src/display.c:999
+#: src/display.c:1037 src/display.c:1038
 msgid "Take a screenshot"
 msgstr "スクリーンショットを撮る"
 
-#: src/display.c:1015 src/display.c:1016
+#: src/display.c:1054 src/display.c:1055
 msgid "Screenshot command line"
 msgstr "スクリーンショットコマンドライン"
 
-#: src/display.c:1024 src/display.c:1025
+#: src/display.c:1063 src/display.c:1064
 msgid "Take a screenshot of a window"
 msgstr "ウィンドウのスクリーンショットを撮る"
 
-#: src/display.c:1042 src/display.c:1043
+#: src/display.c:1081 src/display.c:1082
 msgid "Window screenshot command line"
 msgstr "ウィンドウスクリーンショットのコマンドライン"
 
-#: src/display.c:1051
+#: src/display.c:1090
 msgid "Window Menu"
 msgstr "ウィンドウメニュー"
 
-#: src/display.c:1052
+#: src/display.c:1091
 msgid "Open window menu"
 msgstr "ウィンドウメニューを開く"
 
-#: src/display.c:1071
+#: src/display.c:1110
 msgid "Raise On Click"
 msgstr "クリックして上げる"
 
-#: src/display.c:1072
+#: src/display.c:1111
 msgid "Raise windows when clicked"
 msgstr "クリック時にウィンドウを上げる"
 
-#: src/display.c:1078
+#: src/display.c:1117
 msgid "Audible Bell"
 msgstr "可聴ベル"
 
-#: src/display.c:1079
+#: src/display.c:1118
 msgid "Audible system beep"
 msgstr "可聴システムビープ音"
 
-#: src/display.c:1085
+#: src/display.c:1124
 msgid "Toggle Window Maximized"
 msgstr "最大化されたウィンドウを切り替え"
 
-#: src/display.c:1086
+#: src/display.c:1125
 msgid "Toggle active window maximized"
 msgstr "最大化されたアクティブウィンドウを切り替え"
 
-#: src/display.c:1098
+#: src/display.c:1137
 msgid "Toggle Window Maximized Horizontally"
 msgstr "水平方向に最大化されたウィンドウを切り替え"
 
-#: src/display.c:1100
+#: src/display.c:1139
 msgid "Toggle active window maximized horizontally"
 msgstr "水平方向に最大化されたアクティブウィンドウを切り替え"
 
-#: src/display.c:1112
+#: src/display.c:1151
 msgid "Toggle Window Maximized Vertically"
 msgstr "垂直方向に最大化されたウィンドウを切り替え"
 
-#: src/display.c:1114
+#: src/display.c:1153
 msgid "Toggle active window maximized vertically"
 msgstr "垂直方向に最大化されたアクティブウィンドウを切り替え"
 
-#: src/display.c:1126
+#: src/display.c:1165
 msgid "Hide Skip Taskbar Windows"
 msgstr "スキップタスクバーウィンドウを非表示にする"
 
-#: src/display.c:1127
+#: src/display.c:1166
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "デスクトップ表示モード移行時にタスクバーにないウィンドウを非表示にする"
 
-#: src/display.c:1134
+#: src/display.c:1173
 msgid "Toggle Window Shaded"
 msgstr "シェードされたウィンドウを切り替え"
 
-#: src/display.c:1135
+#: src/display.c:1174
 msgid "Toggle active window shaded"
 msgstr "シェードされたアクティブウィンドウを切り替え"
+
+#: src/display.c:1190
+#, fuzzy
+msgid "Ignore Hints When Maximized"
+msgstr "最大化されたウィンドウを切り替え"
+
+#: src/display.c:1191
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
 
 #: src/main.c:54
 msgid "Desktop"
