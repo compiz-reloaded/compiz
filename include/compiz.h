@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20061021
+#define ABIVERSION 20061022
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -570,6 +570,12 @@ typedef void (*FiniPluginForDisplayProc) (CompPlugin  *plugin,
 typedef void (*HandleEventProc) (CompDisplay *display,
 				 XEvent	     *event);
 
+typedef void (*HandleCompizEventProc) (CompDisplay *display,
+				       char        *pluginName,
+				       char        *eventName,
+				       CompOption  *option,
+				       int         nOption);
+
 typedef Bool (*CallBackProc) (void *closure);
 
 typedef void (*ForEachWindowProc) (CompWindow *window,
@@ -751,7 +757,8 @@ struct _CompDisplay {
     InitPluginForDisplayProc initPluginForDisplay;
     FiniPluginForDisplayProc finiPluginForDisplay;
 
-    HandleEventProc handleEvent;
+    HandleEventProc       handleEvent;
+    HandleCompizEventProc handleCompizEvent;
 
     CompPrivate *privates;
 };
@@ -858,6 +865,13 @@ setDisplayAction (CompDisplay     *display,
 void
 handleEvent (CompDisplay *display,
 	     XEvent      *event);
+
+void
+handleCompizEvent (CompDisplay *display,
+		   char        *pluginName,
+		   char        *eventName,
+		   CompOption  *option,
+		   int         nOption);
 
 void
 handleSyncAlarm (CompWindow *w);

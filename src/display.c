@@ -2506,7 +2506,8 @@ addDisplay (char *name,
     d->initPluginForDisplay = initPluginForDisplay;
     d->finiPluginForDisplay = finiPluginForDisplay;
 
-    d->handleEvent = handleEvent;
+    d->handleEvent	 = handleEvent;
+    d->handleCompizEvent = handleCompizEvent;
 
     d->supportedAtom	     = XInternAtom (dpy, "_NET_SUPPORTED", 0);
     d->supportingWmCheckAtom = XInternAtom (dpy, "_NET_SUPPORTING_WM_CHECK", 0);
