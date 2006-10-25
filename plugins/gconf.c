@@ -209,7 +209,7 @@ gconfSetOption (CompDisplay *d,
 	gconf_value_free (gvalue);
 	break;
     case CompOptionTypeAction: {
-	gchar	   *key1, *key2, *key3, *key4;
+	gchar	   *key1, *key2, *key3, *key4, *key5;
 	GSList     *node, *list = NULL;
 	GConfValue *gv;
 	int	   i;
@@ -218,6 +218,7 @@ gconfSetOption (CompDisplay *d,
 	key2 = g_strdup_printf ("%s_%s", key, "button");
 	key3 = g_strdup_printf ("%s_%s", key, "bell");
 	key4 = g_strdup_printf ("%s_%s", key, "edge");
+	key5 = g_strdup_printf ("%s_%s", key, "edgebutton");
 
 	gvalue = gconf_value_new (GCONF_VALUE_STRING);
 
@@ -276,13 +277,29 @@ gconfSetOption (CompDisplay *d,
 	for (node = list; node; node = node->next)
 	    gconf_value_free ((GConfValue *) node->data);
 
+	if (existingValue)
+	    gconf_value_free (existingValue);
+
 	g_slist_free (list);
+	gconf_value_free (gvalue);
+
+	gvalue = gconf_value_new (GCONF_VALUE_INT);
+	if (o->value.action.type & CompBindingTypeEdgeButton)
+	    gconf_value_set_int (gvalue, o->value.action.edgeButton);
+	else
+	    gconf_value_set_int (gvalue, 0);
+
+	existingValue = gconf_client_get (gd->client, key5, NULL);
+	if (!existingValue || gconf_value_compare (existingValue, gvalue))
+	    gconf_client_set (gd->client, key5, gvalue, NULL);
+
 	gconf_value_free (gvalue);
 
 	g_free (key1);
 	g_free (key2);
 	g_free (key3);
 	g_free (key4);
+	g_free (key5);
     } break;
     case CompOptionTypeList: {
 	GConfValueType type;
@@ -459,7 +476,7 @@ gconfGetOptionValue (CompDisplay *d,
     o = compFindOption (option, nOption, optionName, 0);
     if (!o)
     {
-	static int tail[] = { 4, 5, 7 };
+	static int tail[] = { 4, 5, 7, 11 };
 	int	   i = 0;
 
 	while (i < sizeof (tail) / sizeof (tail[0]) && strlen (ptr) > tail[i])
@@ -606,6 +623,17 @@ gconfGetOptionValue (CompDisplay *d,
 		    }
 		}
 	    }
+	    else if (o->type      == CompOptionTypeAction &&
+		     gvalue->type == GCONF_VALUE_INT)
+	    {
+		value = o->value;
+		value.action.edgeButton = gconf_value_get_int (gvalue);
+		if (value.action.edgeButton)
+		    value.action.type |= CompBindingTypeEdgeButton;
+		else
+		    value.action.type &= ~CompBindingTypeEdgeButton;
+		status = TRUE;
+	    }
 	    else
 	    {
 		status = gconfGetValue (d, &value, o->type, gvalue);
@@ -677,7 +705,8 @@ gconfInitOption (CompDisplay *d,
 
     if (o->type == CompOptionTypeAction)
     {
-	static gchar *tail[] = { "key", "button", "bell", "edge" };
+	static gchar *tail[] = { "key", "button", "bell", "edge",
+				 "edgebutton" };
 	gchar	     *key1;
 	int	     i;
 

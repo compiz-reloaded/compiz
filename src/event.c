@@ -259,6 +259,26 @@ triggerButtonPressBindings (CompDisplay *d,
     CompAction	    *action;
     unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
     unsigned int    bindMods;
+    unsigned int    edge = 0;
+
+    if (event->xbutton.window == edgeWindow)
+    {
+	CompScreen   *s;
+	unsigned int i;
+
+	s = findScreenAtDisplay (d, event->xbutton.root);
+	if (!s)
+	    return FALSE;
+
+	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	{
+	    if (edgeWindow == s->screenEdge[i].id)
+	    {
+		edge = 1 << i;
+		break;
+	    }
+	}
+    }
 
     while (nOption--)
     {
@@ -272,6 +292,22 @@ triggerButtonPressBindings (CompDisplay *d,
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
+	    }
+	}
+
+	if (edge)
+	{
+	    if (isInitiateBinding (option, CompBindingTypeEdgeButton, state,
+				   &action))
+	    {
+		if (action->edgeMask & edge)
+		{
+		    if (action->edgeButton == event->xbutton.button)
+			if ((*action->initiate) (d, action,
+						 CompActionStateInitEdge,
+						 argument, nArgument))
+			    return TRUE;
+		}
 	    }
 	}
 
@@ -551,6 +587,9 @@ isEdgeEnterAction (CompOption      *option,
 		   CompAction      **action)
 {
     if (!isEdgeAction (option, state, edge))
+	return FALSE;
+
+    if (option->value.action.type & CompBindingTypeEdgeButton)
 	return FALSE;
 
     if (!option->value.action.initiate)

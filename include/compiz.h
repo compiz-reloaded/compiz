@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20061020
+#define ABIVERSION 20061021
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -291,9 +291,10 @@ typedef enum {
 } CompOptionType;
 
 typedef enum {
-    CompBindingTypeNone   = 0,
-    CompBindingTypeKey    = 1 << 0,
-    CompBindingTypeButton = 1 << 1
+    CompBindingTypeNone       = 0,
+    CompBindingTypeKey        = 1 << 0,
+    CompBindingTypeButton     = 1 << 1,
+    CompBindingTypeEdgeButton = 1 << 2
 } CompBindingType;
 
 typedef enum {
@@ -344,6 +345,7 @@ struct _CompAction {
     Bool bell;
 
     unsigned int edgeMask;
+    int		 edgeButton;
 };
 
 typedef struct {

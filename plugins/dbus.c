@@ -41,8 +41,9 @@
 typedef enum {
     DbusActionIndexKeyBinding    = 0,
     DbusActionIndexButtonBinding = 1,
-    DbusActionIndexEdge          = 2,
-    DbusActionIndexBell          = 3
+    DbusActionIndexBell          = 2,
+    DbusActionIndexEdge          = 3,
+    DbusActionIndexEdgeButton    = 4
 } DbusActionIndex;
 
 static int displayPrivateIndex;
@@ -389,8 +390,9 @@ dbusGetOptionValue (DBusMessageIter *iter,
  * org.freedesktop.compiz.set				      \
  * string:'<Control><Alt>Return'			      \
  * string:'Disabled'					      \
+ * boolean:'false'					      \
  * string:''						      \
- * boolean:'false'
+ * int:'0'
  */
 static Bool
 dbusHandleSetOptionMessage (DBusConnection *connection,
@@ -465,6 +467,11 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 				    a->type |= CompBindingTypeButton;
 			    }
 			    break;
+			case DbusActionIndexBell:
+			    dbusTryGetValueWithType (&iter,
+						     DBUS_TYPE_BOOLEAN,
+						     &a->bell);
+			    break;
 			case DbusActionIndexEdge:
 			    if (dbusTryGetValueWithType (&iter,
 							 DBUS_TYPE_STRING,
@@ -499,10 +506,14 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 				}
 			    }
 			    break;
-			case DbusActionIndexBell:
-			    dbusTryGetValueWithType (&iter,
-						     DBUS_TYPE_BOOLEAN,
-						     &a->bell);
+			case DbusActionIndexEdgeButton:
+			    if (dbusTryGetValueWithType (&iter,
+							 DBUS_TYPE_INT32,
+							 &a->edgeButton))
+			    {
+				if (a->edgeButton)
+				    a->type |= CompBindingTypeEdgeButton;
+			    }
 			default:
 			    break;
 			}
@@ -647,6 +658,7 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
 		char	   *key = "Disabled";
 		char	   *button = "Disabled";
 		char	   edge[256];
+		int	   edgeButton = 0;
 
 		if (a->type & CompBindingTypeKey)
 		    key = keyBindingToString (d, &a->key);
@@ -660,11 +672,15 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
 		    if (a->edgeMask & (1 << i))
 			strcpy (edge + strlen (edge), edgeToString (i));
 
+		if (a->type & CompBindingTypeEdgeButton)
+		    edgeButton = a->edgeButton;
+
 		dbus_message_append_args (reply,
 					  DBUS_TYPE_STRING, &key,
 					  DBUS_TYPE_STRING, &button,
-					  DBUS_TYPE_STRING, &edge,
 					  DBUS_TYPE_BOOLEAN, &a->bell,
+					  DBUS_TYPE_STRING, &edge,
+					  DBUS_TYPE_INT32, &edgeButton,
 					  DBUS_TYPE_INVALID);
 	    }
 	    else

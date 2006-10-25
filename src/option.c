@@ -214,6 +214,12 @@ compSetActionOption (CompOption      *option,
 		equal = FALSE;
 	}
 
+	if (value->action.type & CompBindingTypeEdgeButton)
+	{
+	    if (action->edgeButton != value->action.edgeButton)
+		equal = FALSE;
+	}
+
 	if (equal)
 	    return FALSE;
     }

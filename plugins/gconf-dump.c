@@ -87,6 +87,7 @@ static gchar *actionSufix[] = {
     "button",
     "bell",
     "edge",
+    "edgebutton",
     NULL
 };
 
@@ -392,6 +393,16 @@ gconfDumpToSchema (CompDisplay *d,
 	{
 	    gconfPrintf (3, "<type>string</type>\n");
 	    value = gconfActionValueToString (d, CompBindingTypeKey, &o->value);
+	}
+	else if (strcmp (name + len - 10, "edgebutton") == 0)
+	{
+	    gint button;
+
+	    button = (o->value.action.type & CompBindingTypeEdgeButton) ?
+		o->value.action.edgeButton : 0;
+
+	    gconfPrintf (3, "<type>int</type>\n");
+	    value = g_strdup_printf ("%d", button);
 	}
 	else if (strcmp (name + len - 6, "button") == 0)
 	{
