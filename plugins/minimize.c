@@ -671,7 +671,7 @@ minHandleEvent (CompDisplay *d,
 	{
 	    MIN_SCREEN (w->screen);
 
-	    if (w->pendingUnmaps) /* Normal -> Iconic */
+	    if (w->pendingUnmaps && onCurrentDesktop (w)) /* Normal -> Iconic */
 	    {
 		MIN_WINDOW (w);
 
@@ -985,17 +985,26 @@ minInitWindow (CompPlugin *p,
 
     mw->unmapCnt = 0;
 
-    if (w->shaded)
+    if (w->state & CompWindowStateHiddenMask)
     {
-	mw->state = mw->newState = NormalState;
-	mw->shade = 0;
-	mw->region = XCreateRegion ();
+	if (w->shaded)
+	{
+	    mw->state = mw->newState = NormalState;
+	    mw->shade = 0;
+	    mw->region = XCreateRegion ();
+	}
+	else
+	{
+	    mw->state = mw->newState = minGetWindowState (w);
+	    mw->shade = MAXSHORT;
+	    mw->region = NULL;
+	}
     }
     else
     {
-	mw->state = mw->newState = minGetWindowState (w);
-	mw->shade = MAXSHORT;
-	mw->region = NULL;
+	    mw->state = mw->newState = NormalState;
+	    mw->shade = MAXSHORT;
+	    mw->region = NULL;
     }
 
     w->privates[ms->windowPrivateIndex].ptr = mw;

@@ -399,6 +399,9 @@ isScaleWin (CompWindow *w)
     if (w->state & CompWindowStateShadedMask)
 	return FALSE;
 
+    if (!w->mapNum || w->attrib.map_state != IsViewable)
+	return FALSE;
+
     return TRUE;
 }
 

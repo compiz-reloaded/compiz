@@ -556,6 +556,8 @@ setWindowActions (CompDisplay  *display,
 	data[i++] = display->winActionCloseAtom;
     if (actions & CompWindowActionShadeMask)
 	data[i++] = display->winActionShadeAtom;
+    if (actions & CompWindowActionChangeDesktopMask)
+	data[i++] = display->winActionChangeDesktopAtom;
 
     XChangeProperty (display->display, id, display->wmAllowedActionsAtom,
 		     XA_ATOM, 32, PropModeReplace,
@@ -578,7 +580,8 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionResizeMask       |
 	    CompWindowActionStickMask        |
 	    CompWindowActionMinimizeMask     |
-	    CompWindowActionCloseMask;
+	    CompWindowActionCloseMask	     |
+	    CompWindowActionChangeDesktopMask;
 
 	if (w->input.top)
 	    actions |= CompWindowActionShadeMask;
@@ -589,7 +592,8 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionMoveMask   |
 	    CompWindowActionResizeMask |
 	    CompWindowActionStickMask  |
-	    CompWindowActionCloseMask;
+	    CompWindowActionCloseMask  |
+	    CompWindowActionChangeDesktopMask;
 
 	if (w->input.top)
 	    actions |= CompWindowActionShadeMask;
@@ -600,7 +604,8 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionMoveMask   |
 	    CompWindowActionResizeMask |
 	    CompWindowActionStickMask  |
-	    CompWindowActionCloseMask;
+	    CompWindowActionCloseMask  |
+	    CompWindowActionChangeDesktopMask;
     default:
 	break;
     }
@@ -817,6 +822,48 @@ getProtocols (CompDisplay *display,
     return protocols;
 }
 
+unsigned int
+getWindowProp (CompDisplay  *display,
+	       Window	    id,
+	       Atom	    property,
+	       unsigned int defaultValue)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *data;
+
+    result = XGetWindowProperty (display->display, id, property,
+				 0L, 1L, FALSE, XA_CARDINAL, &actual, &format,
+				 &n, &left, &data);
+
+    if (result == Success && n && data)
+    {
+	unsigned long value;
+
+	memcpy (&value, data, sizeof (unsigned long));
+
+	XFree (data);
+
+	return (unsigned int) value;
+    }
+
+    return defaultValue;
+}
+
+void
+setWindowProp (CompDisplay  *display,
+	       Window       id,
+	       Atom	    property,
+	       unsigned int value)
+{
+    unsigned long data = value;
+
+    XChangeProperty (display->display, id, property,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) &data, 1);
+}
+
 unsigned short
 getWindowProp32 (CompDisplay	*display,
 		 Window		id,
@@ -860,7 +907,6 @@ setWindowProp32 (CompDisplay    *display,
 		     XA_CARDINAL, 32, PropModeReplace,
 		     (unsigned char *) &value32, 1);
 }
-
 
 static void
 updateFrameWindow (CompWindow *w)
@@ -1518,6 +1564,8 @@ addWindow (CompScreen *screen,
     w->shaded		 = FALSE;
     w->hidden		 = FALSE;
 
+    w->desktop = 0xffffffff;
+
     w->initialViewportX = screen->x;
     w->initialViewportY = screen->y;
 
@@ -1720,13 +1768,7 @@ addWindow (CompScreen *screen,
     {
 	updateNormalHints (w);
 	updateWindowStruts (w);
-
 	updateWmHints (w);
-
-	setWindowProp32 (w->screen->display, w->id,
-			 w->screen->display->winDesktopAtom,
-			 0);
-
 	updateTransientHint (w);
 
 	w->clientLeader = getClientLeader (w);
@@ -1739,16 +1781,27 @@ addWindow (CompScreen *screen,
 
 	recalcWindowActions (w);
 
-	if (!(w->type & CompWindowTypeDesktopMask))
-	    w->opacity =
-		getWindowProp32 (w->screen->display, w->id,
-				 w->screen->display->winOpacityAtom,
-				 OPAQUE);
+	if (!(w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask)))
+	{
+	    unsigned int desktop;
+
+	    desktop = getWindowProp (w->screen->display, w->id,
+				     w->screen->display->winDesktopAtom,
+				     w->screen->currentDesktop);
+	    if (desktop >= 0 && desktop < w->screen->nDesktop)
+		w->desktop = desktop;
+
+	    if (!(w->type & CompWindowTypeDesktopMask))
+		w->opacity =
+		    getWindowProp32 (w->screen->display, w->id,
+				     w->screen->display->winOpacityAtom,
+				     OPAQUE);
+	}
 
 	w->brightness =
-		getWindowProp32 (w->screen->display, w->id,
-				 w->screen->display->winBrightnessAtom,
-				 BRIGHT);
+	    getWindowProp32 (w->screen->display, w->id,
+			     w->screen->display->winBrightnessAtom,
+			     BRIGHT);
 
 	if (w->alive)
 	{
@@ -1778,6 +1831,9 @@ addWindow (CompScreen *screen,
 	if (!w->attrib.override_redirect)
 	    w->managed = TRUE;
 
+	if (w->desktop != 0xffffffff)
+	    w->desktop = w->screen->currentDesktop;
+
 	mapWindow (w);
 
 	updateWindowAttributes (w, FALSE);
@@ -1788,10 +1844,13 @@ addWindow (CompScreen *screen,
 	{
 	    w->managed = TRUE;
 
-	    if (w->state & CompWindowStateShadedMask)
-		w->shaded = TRUE;
-	    else
-		w->minimized = TRUE;
+	    if (w->state & CompWindowStateHiddenMask)
+	    {
+		if (w->state & CompWindowStateShadedMask)
+		    w->shaded = TRUE;
+		else
+		    w->minimized = TRUE;
+	    }
 	}
     }
 
@@ -1816,13 +1875,9 @@ removeWindow (CompWindow *w)
 
 	if (w->struts)
 	    updateWorkareaForScreen (w->screen);
+    }
 
-	updateClientListForScreen (w->screen);
-    }
-    else if (w->state & CompWindowStateHiddenMask)
-    {
-	updateClientListForScreen (w->screen);
-    }
+    updateClientListForScreen (w->screen);
 
     if (!w->redirected)
 	w->screen->overlayWindowCount--;
@@ -2361,7 +2416,10 @@ focusWindow (CompWindow *w)
     if (w->attrib.override_redirect)
 	return FALSE;
 
-    if (!w->shaded && (!w->mapNum || w->attrib.map_state != IsViewable))
+    if (!onCurrentDesktop (w))
+	return FALSE;
+
+    if (!w->shaded && (w->state & CompWindowStateHiddenMask))
 	return FALSE;
 
     if (w->attrib.x + w->width  <= 0	||
@@ -3496,6 +3554,8 @@ activateWindow (CompWindow *w)
 {
     if (w->state & CompWindowStateHiddenMask)
     {
+	setCurrentDesktop (w->screen, w->desktop);
+
 	if (w->minimized)
 	    unminimizeWindow (w);
 
@@ -3507,6 +3567,9 @@ activateWindow (CompWindow *w)
     }
 
     if (w->state & CompWindowStateHiddenMask)
+	return;
+
+    if (!onCurrentDesktop (w))
 	return;
 
     ensureWindowVisibility (w);
@@ -3714,7 +3777,9 @@ constrainNewWindowSize (CompWindow *w,
 void
 hideWindow (CompWindow *w)
 {
-    if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
+    Bool onDesktop = onCurrentDesktop (w);
+
+    if (!w->minimized && !w->inShowDesktopMode && !w->hidden && onDesktop)
     {
 	if (w->state & CompWindowStateShadedMask)
 	{
@@ -3738,10 +3803,8 @@ hideWindow (CompWindow *w)
     if (w->attrib.map_state != IsViewable)
 	return;
 
-    if (w->state & CompWindowStateHiddenMask)
-	return;
-
-    w->state |= CompWindowStateHiddenMask;
+    if (w->minimized || w->inShowDesktopMode || w->hidden || w->shaded)
+	w->state |= CompWindowStateHiddenMask;
 
     w->pendingUnmaps++;
 
@@ -3758,11 +3821,25 @@ hideWindow (CompWindow *w)
 void
 showWindow (CompWindow *w)
 {
-    if (!(w->state & CompWindowStateHiddenMask))
-	return;
+    Bool onDesktop = onCurrentDesktop (w);
 
-    if (w->minimized || w->inShowDesktopMode || w->hidden)
+    if (w->minimized || w->inShowDesktopMode || w->hidden || !onDesktop)
+    {
+	/* no longer hidden but not on current desktop */
+	if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
+	{
+	    if (w->state & CompWindowStateHiddenMask)
+	    {
+		w->state &= ~CompWindowStateHiddenMask;
+
+		(*w->screen->windowStateChangeNotify) (w);
+
+		setWindowState (w->screen->display, w->state, w->id);
+	    }
+	}
+
 	return;
+    }
 
     /* transition from minimized to shaded */
     if (w->state & CompWindowStateShadedMask)
@@ -4180,4 +4257,41 @@ outputDeviceForWindow (CompWindow *w)
     }
 
     return output;
+}
+
+Bool
+onCurrentDesktop (CompWindow *w)
+{
+    if (w->desktop == 0xffffffff || w->desktop == w->screen->currentDesktop)
+	return TRUE;
+
+    return FALSE;
+}
+
+void
+setDesktopForWindow (CompWindow   *w,
+		     unsigned int desktop)
+{
+    if (desktop != 0xffffffff)
+    {
+	if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
+	    return;
+
+	if (desktop < 0 || desktop >= w->screen->nDesktop)
+	    return;
+    }
+
+    if (desktop == w->desktop)
+	return;
+
+    w->desktop = desktop;
+
+    if (desktop == 0xffffffff || desktop == w->screen->currentDesktop)
+	showWindow (w);
+    else
+	hideWindow (w);
+
+    setWindowProp (w->screen->display, w->id,
+		   w->screen->display->winDesktopAtom,
+		   w->desktop);
 }

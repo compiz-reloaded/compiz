@@ -67,6 +67,10 @@
 
 #define SYNC_TO_VBLANK_DEFAULT TRUE
 
+#define SCREEN_NUMBER_OF_DESKTOPS_DEFAULT 1
+#define SCREEN_NUMBER_OF_DESKTOPS_MIN     1
+#define SCREEN_NUMBER_OF_DESKTOPS_MAX     MAXSHORT
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -107,23 +111,106 @@ freeScreenPrivateIndex (CompDisplay *display,
 		      index);
 }
 
+static Bool
+desktopHintEqual (CompScreen	*s,
+		  unsigned long *data,
+		  int		size,
+		  int		offset,
+		  int		hintSize)
+{
+    if (size != s->desktopHintSize)
+	return FALSE;
+
+    if (memcmp (data + offset,
+		s->desktopHintData + offset,
+		hintSize * sizeof (unsigned long)) == 0)
+	return TRUE;
+
+    return FALSE;
+}
+
+static void
+setDesktopHints (CompScreen *s)
+{
+    CompDisplay   *d = s->display;
+    unsigned long *data;
+    int		  size, offset, hintSize, i;
+
+    size = s->nDesktop * 2 + s->nDesktop * 2 + s->nDesktop * 4 + 1;
+
+    data = malloc (sizeof (unsigned long) * size);
+    if (!data)
+	return;
+
+    offset   = 0;
+    hintSize = s->nDesktop * 2;
+
+    for (i = 0; i < s->nDesktop; i++)
+    {
+	data[offset + i * 2 + 0] = s->x * s->width;
+	data[offset + i * 2 + 1] = s->y * s->height;
+    }
+
+    if (!desktopHintEqual (s, data, size, offset, hintSize))
+	XChangeProperty (d->display, s->root, d->desktopViewportAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) &data[offset], hintSize);
+
+    offset += hintSize;
+
+    for (i = 0; i < s->nDesktop; i++)
+    {
+	data[offset + i * 2 + 0] = s->width  * s->hsize;
+	data[offset + i * 2 + 1] = s->height * s->vsize;
+    }
+
+    if (!desktopHintEqual (s, data, size, offset, hintSize))
+	XChangeProperty (d->display, s->root, d->desktopGeometryAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) &data[offset], hintSize);
+
+    offset += hintSize;
+    hintSize = s->nDesktop * 4;
+
+    for (i = 0; i < s->nDesktop; i++)
+    {
+	data[offset + i * 4 + 0] = s->workArea.x;
+	data[offset + i * 4 + 1] = s->workArea.y;
+	data[offset + i * 4 + 2] = s->workArea.width;
+	data[offset + i * 4 + 3] = s->workArea.height;
+    }
+
+    if (!desktopHintEqual (s, data, size, offset, hintSize))
+	XChangeProperty (d->display, s->root, d->workareaAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) &data[offset], hintSize);
+
+    offset += hintSize;
+
+    data[offset] = s->nDesktop;
+    hintSize = 1;
+
+    if (!desktopHintEqual (s, data, size, offset, hintSize))
+	XChangeProperty (d->display, s->root, d->numberOfDesktopsAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) &data[offset], hintSize);
+
+    if (s->desktopHintData)
+	free (s->desktopHintData);
+
+    s->desktopHintData = data;
+    s->desktopHintSize = size;
+}
+
 static void
 setVirtualScreenSize (CompScreen *screen,
 		      int	 hsize,
 		      int	 vsize)
 {
-    unsigned long data[2];
-
-    data[0] = screen->width * hsize;
-    data[1] = screen->height * vsize;
-
-    XChangeProperty (screen->display->display, screen->root,
-		     screen->display->desktopGeometryAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) data, 2);
-
     screen->hsize = hsize;
     screen->vsize = vsize;
+
+    setDesktopHints (screen);
 }
 
 static Bool
@@ -224,6 +311,13 @@ setScreenOption (CompScreen      *screen,
 		return FALSE;
 
 	    setVirtualScreenSize (screen, hsize->value.i, o->value.i);
+	    return TRUE;
+	}
+	break;
+    case COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS:
+	if (compSetIntOption (o, value))
+	{
+	    setNumberOfDesktops (screen, o->value.i);
 	    return TRUE;
 	}
 	break;
@@ -338,6 +432,15 @@ compScreenInitOptions (CompScreen *screen)
 		       "blanking period");
     o->type       = CompOptionTypeBool;
     o->value.b    = SYNC_TO_VBLANK_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS];
+    o->name	      = "number_of_desktops";
+    o->shortDesc      = N_("Number of Desktops");
+    o->longDesc	      = N_("Number of virtual desktops");
+    o->type	      = CompOptionTypeInt;
+    o->value.i	      = SCREEN_NUMBER_OF_DESKTOPS_DEFAULT;
+    o->rest.i.min     = SCREEN_NUMBER_OF_DESKTOPS_MIN;
+    o->rest.i.max     = SCREEN_NUMBER_OF_DESKTOPS_MAX;
 }
 
 static void
@@ -903,6 +1006,7 @@ setSupported (CompScreen *s)
     data[i++] = d->winActionFullscreenAtom;
     data[i++] = d->winActionCloseAtom;
     data[i++] = d->winActionShadeAtom;
+    data[i++] = d->winActionChangeDesktopAtom;
 
     data[i++] = d->winTypeAtom;
     data[i++] = d->winTypeDesktopAtom;
@@ -926,7 +1030,7 @@ setSupported (CompScreen *s)
 }
 
 static void
-setDesktopHints (CompScreen *s)
+getDesktopHints (CompScreen *s)
 {
     CompDisplay   *d = s->display;
     unsigned long data[2];
@@ -936,15 +1040,29 @@ setDesktopHints (CompScreen *s)
     unsigned char *propData;
 
     result = XGetWindowProperty (s->display->display, s->root,
-				 d->desktopViewportAtom, 0L, 2L, FALSE,
+				 d->numberOfDesktopsAtom, 0L, 1L, FALSE,
 				 XA_CARDINAL, &actual, &format,
+				 &n, &left, &propData);
+
+    if (result == Success && n && propData)
+    {
+	memcpy (data, propData, sizeof (unsigned long));
+	XFree (propData);
+
+	if (data[0] > 0 && data[0] < 0xffffffff)
+	    s->nDesktop = data[0];
+    }
+
+    result = XGetWindowProperty (s->display->display, s->root,
+				 d->desktopViewportAtom, 0L, 2L,
+				 FALSE, XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
 
     if (result == Success && n && propData)
     {
 	if (n == 2)
 	{
-	    memcpy (data, propData, sizeof (unsigned long));
+	    memcpy (data, propData, sizeof (unsigned long) * 2);
 
 	    if (data[0] / s->width < s->hsize - 1)
 		s->x = data[0] / s->width;
@@ -956,39 +1074,25 @@ setDesktopHints (CompScreen *s)
 	XFree (propData);
     }
 
-    data[0] = s->x * s->width;
-    data[1] = s->y * s->height;
+    result = XGetWindowProperty (s->display->display, s->root,
+				 d->currentDesktopAtom, 0L, 1L, FALSE,
+				 XA_CARDINAL, &actual, &format,
+				 &n, &left, &propData);
 
-    XChangeProperty (d->display, s->root, d->desktopViewportAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) data, 2);
+    if (result == Success && n && propData)
+    {
+	memcpy (data, propData, sizeof (unsigned long));
+	XFree (propData);
 
-    data[0] = s->width * s->hsize;
-    data[1] = s->height * s->vsize;
-
-    XChangeProperty (d->display, s->root, d->desktopGeometryAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) data, 2);
-
-    data[0] = 1;
-
-    XChangeProperty (d->display, s->root, d->numberOfDesktopsAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) data, 1);
-
-    data[0] = 0;
-
-    XChangeProperty (d->display, s->root, d->currentDesktopAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) data, 1);
-
-    data[0] = 0;
+	if (data[0] >= 0 && data[0] < s->nDesktop)
+	    s->currentDesktop = data[0];
+    }
 
     result = XGetWindowProperty (s->display->display, s->root,
 				 d->showingDesktopAtom, 0L, 1L, FALSE,
 				 XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
-    
+
     if (result == Success && n && propData)
     {
 	memcpy (data, propData, sizeof (unsigned long));
@@ -997,6 +1101,14 @@ setDesktopHints (CompScreen *s)
 	if (data[0])
 	    enterShowDesktopMode (s);
     }
+
+    data[0] = s->currentDesktop;
+
+    XChangeProperty (d->display, s->root, d->currentDesktopAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) data, 1);
+
+    data[0] = s->showingDesktopMask ? TRUE : FALSE;
 
     XChangeProperty (d->display, s->root, d->showingDesktopAtom,
 		     XA_CARDINAL, 32, PropModeReplace,
@@ -1086,6 +1198,9 @@ addScreen (CompDisplay *display,
     s->hsize = SCREEN_HSIZE_DEFAULT;
     s->vsize = SCREEN_VSIZE_DEFAULT;
 
+    s->nDesktop	      = 1;
+    s->currentDesktop = 0;
+
     for (i = 0; i < SCREEN_EDGE_NUM; i++)
     {
 	s->screenEdge[i].id    = None;
@@ -1158,6 +1273,9 @@ addScreen (CompDisplay *display,
     s->showingDesktopMask = 0;
 
     s->overlayWindowCount = 0;
+
+    s->desktopHintData = NULL;
+    s->desktopHintSize = 0;
 
     gettimeofday (&s->lastRedraw, 0);
 
@@ -1651,6 +1769,8 @@ addScreen (CompDisplay *display,
     s->slowAnimations = FALSE;
 
     addScreenToDisplay (display, s);
+
+    getDesktopHints (s);    
 
     screenInitPlugins (s);
 
@@ -2413,18 +2533,9 @@ updateWorkareaForScreen (CompScreen *s)
 
     if (memcmp (&workArea, &s->workArea, sizeof (XRectangle)))
     {
-	unsigned long data[4];
-
-	data[0] = workArea.x;
-	data[1] = workArea.y;
-	data[2] = workArea.width;
-	data[3] = workArea.height;
-
-	XChangeProperty (s->display->display, s->root,
-			 s->display->workareaAtom, XA_CARDINAL, 32,
-			 PropModeReplace, (unsigned char *) data, 4);
-
 	s->workArea = workArea;
+
+	setDesktopHints (s);
     }
 }
 
@@ -2726,17 +2837,7 @@ moveScreenViewport (CompScreen *s,
     }
 
     if (sync)
-    {
-	unsigned long data[2];
-
-	data[0] = s->x * s->width;
-	data[1] = s->y * s->height;
-
-	XChangeProperty (s->display->display, s->root,
-			 s->display->desktopViewportAtom,
-			 XA_CARDINAL, 32, PropModeReplace,
-			 (unsigned char *) data, 2);
-    }
+	setDesktopHints (s);
 }
 
 void
@@ -2875,6 +2976,8 @@ applyStartupProperties (CompScreen *screen,
     {
 	window->initialViewportX = s->viewportX;
 	window->initialViewportY = s->viewportY;
+
+	window->desktop = sn_startup_sequence_get_workspace (s->sequence);
     }
 }
 
@@ -3096,4 +3199,67 @@ outputDeviceForPoint (CompScreen *s,
     }
 
     return s->currentOutputDev;
+}
+
+void
+setNumberOfDesktops (CompScreen   *s,
+		     unsigned int nDesktop)
+{
+    CompWindow *w;
+
+    if (nDesktop < 1 || nDesktop >= 0xffffffff)
+	return;
+
+    if (nDesktop == s->nDesktop)
+	return;
+
+    if (s->currentDesktop >= nDesktop)
+	s->currentDesktop = nDesktop - 1;
+
+    for (w = s->windows; w; w = w->next)
+    {
+	if (w->desktop == 0xffffffff)
+	    continue;
+
+	if (w->desktop >= nDesktop)
+	    setDesktopForWindow (w, nDesktop - 1);
+    }
+
+    s->nDesktop = nDesktop;
+
+    setDesktopHints (s);
+}
+
+void
+setCurrentDesktop (CompScreen   *s,
+		   unsigned int desktop)
+{
+    unsigned long data;
+    CompWindow    *w;
+
+    if (desktop < 0 || desktop >= s->nDesktop)
+	return;
+
+    if (desktop == s->currentDesktop)
+	return;
+
+    s->currentDesktop = desktop;
+
+    for (w = s->windows; w; w = w->next)
+    {
+	if (w->desktop == 0xffffffff)
+	    continue;
+
+	if (w->desktop == desktop)
+	    showWindow (w);
+	else
+	    hideWindow (w);
+    }
+
+    data = desktop;
+
+    XChangeProperty (s->display->display, s->root,
+		     s->display->currentDesktopAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) &data, 1);
 }

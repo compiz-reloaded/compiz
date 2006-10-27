@@ -137,15 +137,16 @@ typedef struct _CompIcon    CompIcon;
 #define MAXIMIZE_STATE (CompWindowStateMaximizedHorzMask | \
 			CompWindowStateMaximizedVertMask)
 
-#define CompWindowActionMoveMask	 (1 << 0)
-#define CompWindowActionResizeMask	 (1 << 1)
-#define CompWindowActionStickMask	 (1 << 2)
-#define CompWindowActionMinimizeMask     (1 << 3)
-#define CompWindowActionMaximizeHorzMask (1 << 4)
-#define CompWindowActionMaximizeVertMask (1 << 5)
-#define CompWindowActionFullscreenMask	 (1 << 6)
-#define CompWindowActionCloseMask	 (1 << 7)
-#define CompWindowActionShadeMask	 (1 << 8)
+#define CompWindowActionMoveMask	  (1 << 0)
+#define CompWindowActionResizeMask	  (1 << 1)
+#define CompWindowActionStickMask	  (1 << 2)
+#define CompWindowActionMinimizeMask      (1 << 3)
+#define CompWindowActionMaximizeHorzMask  (1 << 4)
+#define CompWindowActionMaximizeVertMask  (1 << 5)
+#define CompWindowActionFullscreenMask	  (1 << 6)
+#define CompWindowActionCloseMask	  (1 << 7)
+#define CompWindowActionShadeMask	  (1 << 8)
+#define CompWindowActionChangeDesktopMask (1 << 9)
 
 #define MwmFuncAll      (1L << 0)
 #define MwmFuncResize   (1L << 1)
@@ -667,6 +668,7 @@ struct _CompDisplay {
     Atom winActionFullscreenAtom;
     Atom winActionCloseAtom;
     Atom winActionShadeAtom;
+    Atom winActionChangeDesktopAtom;
 
     Atom wmAllowedActionsAtom;
 
@@ -1141,7 +1143,8 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_UNREDIRECT_FS       6
 #define COMP_SCREEN_OPTION_DEFAULT_ICON        7
 #define COMP_SCREEN_OPTION_SYNC_TO_VBLANK      8
-#define COMP_SCREEN_OPTION_NUM		       9
+#define COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS  9
+#define COMP_SCREEN_OPTION_NUM		       10
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -1383,6 +1386,8 @@ struct _CompScreen {
     int		      y;
     int		      hsize;		/* Number of horizontal viewports */
     int		      vsize;		/* Number of vertical viewports */
+    unsigned int      nDesktop;
+    unsigned int      currentDesktop;
     REGION	      region;
     Region	      damage;
     unsigned long     damageMask;
@@ -1473,6 +1478,9 @@ struct _CompScreen {
     XRectangle workArea;
 
     unsigned int showingDesktopMask;
+
+    unsigned long *desktopHintData;
+    int           desktopHintSize;
 
     GLXGetProcAddressProc    getProcAddress;
     GLXBindTexImageProc      bindTexImage;
@@ -1718,6 +1726,14 @@ outputDeviceForPoint (CompScreen *s,
 		      int	 x,
 		      int	 y);
 
+void
+setNumberOfDesktops (CompScreen   *s,
+		     unsigned int nDesktop);
+
+void
+setCurrentDesktop (CompScreen   *s,
+		   unsigned int desktop);
+
 
 /* window.c */
 
@@ -1800,6 +1816,8 @@ struct _CompWindow {
     Bool inShowDesktopMode;
     Bool shaded;
     Bool hidden;
+
+    unsigned int desktop;
 
     int pendingUnmaps;
 
@@ -1906,6 +1924,18 @@ getMwmHints (CompDisplay  *display,
 unsigned int
 getProtocols (CompDisplay *display,
 	      Window      id);
+
+unsigned int
+getWindowProp (CompDisplay  *display,
+	       Window	    id,
+	       Atom	    property,
+	       unsigned int defaultValue);
+
+void
+setWindowProp (CompDisplay  *display,
+	       Window       id,
+	       Atom	    property,
+	       unsigned int value);
 
 unsigned short
 getWindowProp32 (CompDisplay	*display,
@@ -2158,6 +2188,13 @@ freeWindowIcons (CompWindow *w);
 
 int
 outputDeviceForWindow (CompWindow *w);
+
+Bool
+onCurrentDesktop (CompWindow *w);
+
+void
+setDesktopForWindow (CompWindow   *w,
+		     unsigned int desktop);
 
 
 /* plugin.c */

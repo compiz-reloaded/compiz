@@ -1540,13 +1540,6 @@ handleEvent (CompDisplay *d,
 		w->startupId = getStartupId (w);
 	    }
 	}
-	else if (event->xproperty.atom == d->winDesktopAtom)
-	{
-	    if (getWindowProp32 (d, event->xproperty.window,
-				 d->winDesktopAtom, 1) != 0)
-		setWindowProp32 (d, event->xproperty.window,
-				 d->winDesktopAtom, 0);
-	}
 	else if (event->xproperty.atom == XA_WM_CLASS)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
@@ -1816,6 +1809,30 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 	}
+	else if (event->xclient.message_type == d->numberOfDesktopsAtom)
+	{
+	    s = findScreenAtDisplay (d, event->xclient.window);
+	    if (s)
+	    {
+		CompOptionValue value;
+
+		value.i = event->xclient.data.l[0];
+
+		(*s->setScreenOption) (s, "number_of_desktops", &value);
+	    }
+	}
+	else if (event->xclient.message_type == d->currentDesktopAtom)
+	{
+	    s = findScreenAtDisplay (d, event->xclient.window);
+	    if (s)
+		setCurrentDesktop (s, event->xclient.data.l[0]);
+	}
+	else if (event->xclient.message_type == d->winDesktopAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xclient.window);
+	    if (w)
+		setDesktopForWindow (w, event->xclient.data.l[0]);
+	}
 	break;
     case MappingNotify:
 	updateModifierMappings (d);
@@ -1845,6 +1862,8 @@ handleEvent (CompDisplay *d,
 		if (focusWindowOnMap (w))
 		    moveInputFocusToWindow (w);
 	    }
+
+	    setWindowProp (d, w->id, d->winDesktopAtom, w->desktop);
 	}
 	else
 	{

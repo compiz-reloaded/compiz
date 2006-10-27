@@ -2585,20 +2585,25 @@ addDisplay (char *name,
     d->winStateDisplayModalAtom	    =
 	XInternAtom (dpy, "_NET_WM_STATE_DISPLAY_MODAL", 0);
 
-    d->winActionMoveAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_MOVE", 0);
-    d->winActionResizeAtom	 =
+    d->winActionMoveAtom	  = XInternAtom (dpy, "_NET_WM_ACTION_MOVE", 0);
+    d->winActionResizeAtom	  =
 	XInternAtom (dpy, "_NET_WM_ACTION_RESIZE", 0);
-    d->winActionStickAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_STICK", 0);
-    d->winActionMinimizeAtom	 =
+    d->winActionStickAtom	  =
+	XInternAtom (dpy, "_NET_WM_ACTION_STICK", 0);
+    d->winActionMinimizeAtom	  =
 	XInternAtom (dpy, "_NET_WM_ACTION_MINIMIZE", 0);
-    d->winActionMaximizeHorzAtom =
+    d->winActionMaximizeHorzAtom  =
 	XInternAtom (dpy, "_NET_WM_ACTION_MAXIMIZE_HORZ", 0);
-    d->winActionMaximizeVertAtom =
+    d->winActionMaximizeVertAtom  =
 	XInternAtom (dpy, "_NET_WM_ACTION_MAXIMIZE_VERT", 0);
-    d->winActionFullscreenAtom	 =
+    d->winActionFullscreenAtom	  =
 	XInternAtom (dpy, "_NET_WM_ACTION_FULLSCREEN", 0);
-    d->winActionCloseAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_CLOSE", 0);
-    d->winActionShadeAtom	 = XInternAtom (dpy, "_NET_WM_ACTION_SHADE", 0);
+    d->winActionCloseAtom	  =
+	XInternAtom (dpy, "_NET_WM_ACTION_CLOSE", 0);
+    d->winActionShadeAtom	  =
+	XInternAtom (dpy, "_NET_WM_ACTION_SHADE", 0);
+    d->winActionChangeDesktopAtom =
+	XInternAtom (dpy, "_NET_WM_ACTION_CHANGE_DESKTOP", 0);
 
     d->wmAllowedActionsAtom = XInternAtom (dpy, "_NET_WM_ALLOWED_ACTIONS", 0);
 

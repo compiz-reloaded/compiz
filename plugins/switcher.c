@@ -798,6 +798,10 @@ switchInitiate (CompScreen *s,
 			 XInternAtom (dpy, "_NET_WM_STATE", 0),
 			 XA_ATOM, 32, PropModeReplace,
 			 (unsigned char *) state, nState);
+
+	setWindowProp (s->display, ss->popupWindow,
+		       s->display->winDesktopAtom,
+		       0xffffffff);
     }
 
     if (!ss->grabIndex)
