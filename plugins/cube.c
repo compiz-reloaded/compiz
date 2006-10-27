@@ -1108,6 +1108,14 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
     CUBE_SCREEN (s);
 
+    if (size < 4)
+    {
+	UNWRAP (cs, s, paintTransformedScreen);
+	(*s->paintTransformedScreen) (s, sAttrib, output, mask);
+	WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
+	return;
+    }
+
     if (cs->sky.name)
     {
 	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
@@ -1396,6 +1404,9 @@ cubeUnfold (CompDisplay     *d,
     {
 	CUBE_SCREEN (s);
 
+	if (s->hsize < 4)
+	    return FALSE;
+
 	if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
 	    return FALSE;
 
@@ -1516,7 +1527,7 @@ cubeSetGlobalScreenOption (CompScreen      *s,
     status = (*s->setScreenOption) (s, name, value);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
 
-    if (status && strcmp (name, "size") == 0)
+    if (status && strcmp (name, "hsize") == 0)
 	cubeUpdateGeometry (s, s->hsize, cs->invert);
 
     return status;
