@@ -8,7 +8,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[gconf @DEFAULT_PLUGINS@]</default>
+            <default>[gconf,@DEFAULT_PLUGINS@]</default>
             <locale name="C">
                 <short>Active Plugins</short>
                 <long>List of currently active plugins</long>

@@ -84,7 +84,7 @@ compiz.schemas.in:
 	COMPIZ_SCHEMA_PLUGINS="rotate" compiz --replace cube rotate gconf-dump;
 	COMPIZ_SCHEMA_PLUGINS="zoom" compiz --replace cube zoom gconf-dump;
 	echo -e "    </schemalist>\n</gconfschemafile>" >> compiz.schemas.dump;
-	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@\]/' -e 's/\[gconf\]/\[gconf \@DEFAULT_PLUGINS\@\]/' < compiz.schemas.dump > compiz.schemas.in;
+	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@\]/' -e 's/\[gconf\]/\[gconf,\@DEFAULT_PLUGINS\@\]/' < compiz.schemas.dump > compiz.schemas.in;
 	rm -f compiz.schemas.dump
 
 if GCONF_SCHEMAS_INSTALL
