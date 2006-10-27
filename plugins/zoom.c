@@ -400,7 +400,7 @@ zoomPaintScreen (CompScreen		 *s,
 	    sa.xRotate -= 0.000001f;
 
 	mask &= ~PAINT_SCREEN_REGION_MASK;
-	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
+	mask |= PAINT_SCREEN_TRANSFORMED_MASK | PAINT_SCREEN_CLEAR_MASK;
 
 	saveFilter = s->filter[SCREEN_TRANS_FILTER];
 
@@ -814,7 +814,7 @@ zoomInitScreen (CompPlugin *p,
     zs->xTranslate = 0.0f;
     zs->yTranslate = 0.0f;
 
-    zs->maxTranslate = 0.0f;
+    zs->maxTranslate = 0.85f;
 
     zs->savedPointer.x = 0;
     zs->savedPointer.y = 0;
@@ -883,10 +883,6 @@ zoomGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
-CompPluginDep zoomDeps[] = {
-    { CompPluginRuleRequire, "largedesktop" }
-};
-
 CompPluginVTable zoomVTable = {
     "zoom",
     N_("Zoom Desktop"),
@@ -904,8 +900,8 @@ CompPluginVTable zoomVTable = {
     zoomSetDisplayOption,
     zoomGetScreenOptions,
     zoomSetScreenOption,
-    zoomDeps,
-    sizeof (zoomDeps) / sizeof (zoomDeps[0]),
+    0, /* Deps */
+    0, /* nDeps */
     0, /* Features */
     0  /* nFeatures */
 };
