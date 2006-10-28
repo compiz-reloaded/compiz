@@ -1713,7 +1713,11 @@ handleEvent (CompDisplay *d,
 
 		value.i = event->xclient.data.l[0] / s->width;
 
-		(*s->setScreenOption) (s, "size", &value);
+		(*s->setScreenOption) (s, "hsize", &value);
+
+		value.i = event->xclient.data.l[1] / s->height;
+
+		(*s->setScreenOption) (s, "vsize", &value);
 	    }
 	}
 	else if (event->xclient.message_type == d->moveResizeWindowAtom)
