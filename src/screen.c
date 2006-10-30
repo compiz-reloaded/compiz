@@ -669,6 +669,9 @@ updateOutputDevices (CompScreen *s)
 		screenInfo[i].width;
 	    output[i].region.extents.y2 = screenInfo[i].y_org +
 		screenInfo[i].height;
+
+	    output[i].width  = screenInfo[i].width;
+	    output[i].height = screenInfo[i].height;
 	}
 
 	nOutput = nScreenInfo;
@@ -688,6 +691,9 @@ updateOutputDevices (CompScreen *s)
 	output->region.extents.y1 = 0;
 	output->region.extents.x2 = s->attrib.width;
 	output->region.extents.y2 = s->attrib.height;
+
+	output->width  = s->attrib.width;
+	output->height = s->attrib.height;
 
 	nOutput = 1;
     }
