@@ -656,9 +656,9 @@ updateOutputDevices (CompScreen *s)
 
 	for (i = 0; i < nScreenInfo; i++)
 	{
-	    output->name = malloc (sizeof (char) * 10);
-	    if (output->name)
-		snprintf (output->name, 10, "Output %d", i);
+	    output[i].name = malloc (sizeof (char) * 10);
+	    if (output[i].name)
+		snprintf (output[i].name, 10, "Output %d", i);
 
 	    output[i].region.rects    = &output[i].region.extents;
 	    output[i].region.numRects = 1;
