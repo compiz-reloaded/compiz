@@ -64,17 +64,13 @@ prepareXCoords (CompScreen *screen,
 		int	   output,
 		float      z)
 {
-    float w, h;
-
-    w = screen->outputDev[output].region.extents.x2 -
-	screen->outputDev[output].region.extents.x1;
-
-    h = screen->outputDev[output].region.extents.y2 -
-	screen->outputDev[output].region.extents.y1;
-
     glTranslatef (-0.5f, -0.5f, z);
-    glScalef (1.0f / w, -1.0f / h, 1.0f);
-    glTranslatef (-screen->outputDev[output].region.extents.x1, -h, 0.0f);
+    glScalef (1.0f  / screen->outputDev[output].width,
+	      -1.0f / screen->outputDev[output].height,
+	      1.0f);
+    glTranslatef (-screen->outputDev[output].region.extents.x1,
+		  -screen->outputDev[output].height,
+		  0.0f);
 }
 
 void
