@@ -60,6 +60,24 @@ translateRotateScreen (const ScreenPaintAttrib *sa)
 }
 
 void
+prepareXCoords (CompScreen *screen,
+		int	   output,
+		float      z)
+{
+    float w, h;
+
+    w = screen->outputDev[output].region.extents.x2 -
+	screen->outputDev[output].region.extents.x1;
+
+    h = screen->outputDev[output].region.extents.y2 -
+	screen->outputDev[output].region.extents.y1;
+
+    glTranslatef (-0.5f, -0.5f, z);
+    glScalef (1.0f / w, -1.0f / h, 1.0f);
+    glTranslatef (-screen->outputDev[output].region.extents.x1, -h, 0.0f);
+}
+
+void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			int			output,
@@ -69,7 +87,7 @@ paintTransformedScreen (CompScreen		*screen,
     int	       windowMask;
     int	       backgroundMask;
 
-    if (mask & PAINT_SCREEN_CLEAR_MASK)
+    if ((mask & PAINT_SCREEN_CLEAR_MASK) && !output)
 	glClear (GL_COLOR_BUFFER_BIT);
 
     screenLighting (screen, TRUE);
@@ -78,9 +96,7 @@ paintTransformedScreen (CompScreen		*screen,
 
     translateRotateScreen (sAttrib);
 
-    glTranslatef (-0.5f, -0.5f, -sAttrib->zTranslate);
-    glScalef (1.0f / screen->width, -1.0f / screen->height, 1.0f);
-    glTranslatef (0.0f, -screen->height, 0.0f);
+    prepareXCoords (screen, output, -sAttrib->zTranslate);
 
     if (mask & PAINT_SCREEN_TRANSFORMED_MASK)
     {
@@ -91,7 +107,8 @@ paintTransformedScreen (CompScreen		*screen,
 	{
 	    backgroundMask |= PAINT_BACKGROUND_WITH_STENCIL_MASK;
 
-	    (*screen->paintBackground) (screen, &screen->region,
+	    (*screen->paintBackground) (screen,
+					&screen->outputDev[output].region,
 					backgroundMask);
 
 	    glEnable (GL_STENCIL_TEST);
@@ -107,7 +124,8 @@ paintTransformedScreen (CompScreen		*screen,
 			continue;
 		}
 
-		(*screen->paintWindow) (w, &w->paint, &screen->region,
+		(*screen->paintWindow) (w, &w->paint,
+					&screen->outputDev[output].region,
 					windowMask);
 	    }
 
@@ -121,7 +139,8 @@ paintTransformedScreen (CompScreen		*screen,
     else
 	windowMask = backgroundMask = 0;
 
-    (*screen->paintBackground) (screen, &screen->region, backgroundMask);
+    (*screen->paintBackground) (screen, &screen->outputDev[output].region,
+				backgroundMask);
 
     for (w = screen->windows; w; w = w->next)
     {
@@ -134,7 +153,8 @@ paintTransformedScreen (CompScreen		*screen,
 		continue;
 	}
 
-	(*screen->paintWindow) (w, &w->paint, &screen->region, windowMask);
+	(*screen->paintWindow) (w, &w->paint, &screen->outputDev[output].region,
+				windowMask);
     }
 
     glPopMatrix ();
@@ -180,9 +200,7 @@ paintScreen (CompScreen		     *screen,
 
     glPushMatrix ();
 
-    glTranslatef (-0.5f, -0.5f, -DEFAULT_Z_CAMERA);
-    glScalef (1.0f / screen->width, -1.0f / screen->height, 1.0f);
-    glTranslatef (0.0f, -screen->height, 0.0f);
+    prepareXCoords (screen, output, -DEFAULT_Z_CAMERA);
 
     if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
     {

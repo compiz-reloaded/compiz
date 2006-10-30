@@ -1407,9 +1407,8 @@ switchPaintScreen (CompScreen		   *s,
 	    switcher->destroyed = saveDestroyed;
 
 	    glPushMatrix ();
-	    glTranslatef (-0.5f, -0.5f, -DEFAULT_Z_CAMERA);
-	    glScalef (1.0f / s->width, -1.0f / s->height, 1.0f);
-	    glTranslatef (0.0f, -s->height, 0.0f);
+
+	    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
 
 	    if (!switcher->destroyed			 &&
 		switcher->attrib.map_state == IsViewable &&

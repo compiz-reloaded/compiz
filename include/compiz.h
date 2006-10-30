@@ -997,6 +997,11 @@ void
 translateRotateScreen (const ScreenPaintAttrib *sa);
 
 void
+prepareXCoords (CompScreen *screen,
+		int	   output,
+		float      z);
+
+void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			int			output,

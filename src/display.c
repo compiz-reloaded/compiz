@@ -2068,12 +2068,12 @@ eventLoop (void)
 		    for (i = 0; i < s->nOutputDev; i++)
 		    {
 			if (s->nOutputDev > 1)
-			    glScissor (s->outputDev[i].region.extents.x1,
-				       s->outputDev[i].region.extents.y1,
-				       s->outputDev[i].region.extents.x2 -
-				       s->outputDev[i].region.extents.x1,
-				       s->outputDev[i].region.extents.y2 -
-				       s->outputDev[i].region.extents.y1);
+			    glViewport (s->outputDev[i].region.extents.x1,
+					s->outputDev[i].region.extents.y1,
+					s->outputDev[i].region.extents.x2 -
+					s->outputDev[i].region.extents.x1,
+					s->outputDev[i].region.extents.y2 -
+					s->outputDev[i].region.extents.y1);
 
 			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
 			{
