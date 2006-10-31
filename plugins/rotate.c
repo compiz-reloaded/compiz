@@ -606,7 +606,7 @@ rotateInitiate (CompDisplay     *d,
     {
 	ROTATE_SCREEN (s);
 
-	if (s->hsize < 4)
+	if (s->hsize < 2)
 	    return FALSE;
 
 	if (rs->rotateHandle && rs->grabWindow)
@@ -709,7 +709,7 @@ rotate (CompDisplay     *d,
 
 	ROTATE_SCREEN (s);
 
-	if (s->hsize < 4)
+	if (s->hsize < 2)
 	    return FALSE;
 
 	if (otherScreenGrabExist (s, "rotate", "move", "switcher", "cube", 0))
@@ -772,7 +772,7 @@ rotateWithWindow (CompDisplay     *d,
 
 	ROTATE_SCREEN (s);
 
-	if (s->hsize < 4)
+	if (s->hsize < 2)
 	    return FALSE;
 
 	direction = getIntOptionNamed (option, nOption, "direction", 0);
@@ -1065,7 +1065,7 @@ rotateEdgeFlip (CompScreen      *s,
 
     ROTATE_DISPLAY (s->display);
 
-    if (s->hsize < 4)
+    if (s->hsize < 2)
 	return;
 
     if (otherScreenGrabExist (s, "rotate", "move", 0))
