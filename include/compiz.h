@@ -1734,6 +1734,13 @@ outputDeviceForPoint (CompScreen *s,
 		      int	 y);
 
 void
+getCurrentOutputExtents (CompScreen *s,
+			 int	    *x1,
+			 int	    *y1,
+			 int	    *x2,
+			 int	    *y2);
+
+void
 setNumberOfDesktops (CompScreen   *s,
 		     unsigned int nDesktop);
 

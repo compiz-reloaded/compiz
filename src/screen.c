@@ -3208,6 +3208,26 @@ outputDeviceForPoint (CompScreen *s,
 }
 
 void
+getCurrentOutputExtents (CompScreen *s,
+			 int	    *x1,
+			 int	    *y1,
+			 int	    *x2,
+			 int	    *y2)
+{
+    if (x1)
+	*x1 = s->outputDev[s->currentOutputDev].region.extents.x1;
+
+    if (y1)
+	*y1 = s->outputDev[s->currentOutputDev].region.extents.y1;
+
+    if (x2)
+	*x2 = s->outputDev[s->currentOutputDev].region.extents.x2;
+
+    if (y2)
+	*y2 = s->outputDev[s->currentOutputDev].region.extents.y2;
+}
+
+void
 setNumberOfDesktops (CompScreen   *s,
 		     unsigned int nDesktop)
 {
