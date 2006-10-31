@@ -487,14 +487,28 @@ isSwitchWin (CompWindow *w)
     {
 	if (!w->mapNum || w->attrib.map_state != IsViewable)
 	{
-	    if (w->serverX + w->width  <= 0    ||
-		w->serverY + w->height <= 0    ||
-		w->serverX >= w->screen->width ||
-		w->serverY >= w->screen->height)
+	    int x1, y1, x2, y2;
+
+	    getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
+
+	    if (w->serverX + w->width  <= x1 ||
+		w->serverY + w->height <= y1 ||
+		w->serverX >= x2	     ||
+		w->serverY >= y2)
 		return FALSE;
 	}
 	else
 	{
+	    int x1, y1, x2, y2;
+
+	    getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
+
+	    if (w->attrib.x + w->width  <= x1 ||
+		w->attrib.y + w->height <= y1 ||
+		w->attrib.x >= x2	      ||
+		w->attrib.y >= y2)
+		return FALSE;
+
 	    if (!(*w->screen->focusWindow) (w))
 		return FALSE;
 	}
@@ -542,6 +556,8 @@ static void
 switchUpdateWindowList (CompScreen *s,
 			int	   count)
 {
+    int x, y;
+
     SWITCH_SCREEN (s);
 
     if (count > 1)
@@ -556,10 +572,15 @@ switchUpdateWindowList (CompScreen *s,
 
     ss->selectedWindow = ss->windows[0]->id;
 
+    x = s->outputDev[s->currentOutputDev].region.extents.x1 +
+	s->outputDev[s->currentOutputDev].width / 2;
+    y = s->outputDev[s->currentOutputDev].region.extents.y1 +
+	s->outputDev[s->currentOutputDev].height / 2;
+
     if (ss->popupWindow)
 	XMoveResizeWindow (s->display->display, ss->popupWindow,
-			   s->width  / 2 - WINDOW_WIDTH (count) / 2,
-			   s->height / 2 - WINDOW_HEIGHT / 2,
+			   x - WINDOW_WIDTH (count) / 2,
+			   y - WINDOW_HEIGHT / 2,
 			   WINDOW_WIDTH (count),
 			   WINDOW_HEIGHT);
 }
