@@ -165,6 +165,10 @@ typedef struct _CubeScreen {
     int		    imgCurFile;
     CompOptionValue *imgFiles;
 
+    int nOutput;
+    int output[64];
+    int outputMask[64];
+
 #ifdef USE_LIBRSVG
     cairo_t	    *cr;
 #endif
@@ -249,8 +253,8 @@ readSvgToTexture (CompScreen   *s,
 
     if (cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE].value.b)
     {
-	pw = s->width;
-	ph = s->height;
+	pw = s->outputDev[0].width;
+	ph = s->outputDev[0].height;
     }
     else
     {
@@ -332,7 +336,9 @@ cubeLoadImg (CompScreen *s,
 
     CUBE_SCREEN (s);
 
-    if (!cs->imgNFile || cs->pw != s->width || cs->ph != s->height)
+    if (!cs->imgNFile			||
+	cs->pw != s->outputDev[0].width ||
+	cs->ph != s->outputDev[0].height)
     {
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
@@ -389,10 +395,10 @@ cubeLoadImg (CompScreen *s,
     }
     else
     {
-	float x1 = width  / 2.0f - s->width  / 2.0f;
-	float y1 = height / 2.0f - s->height / 2.0f;
-	float x2 = width  / 2.0f + s->width  / 2.0f;
-	float y2 = height / 2.0f + s->height / 2.0f;
+	float x1 = width  / 2.0f - s->outputDev[0].width  / 2.0f;
+	float y1 = height / 2.0f - s->outputDev[0].height / 2.0f;
+	float x2 = width  / 2.0f + s->outputDev[0].width  / 2.0f;
+	float y2 = height / 2.0f + s->outputDev[0].height / 2.0f;
 
 	cs->tc[2] = COMP_TEX_COORD_X (&cs->texture.matrix, x2);
 	cs->tc[3] = COMP_TEX_COORD_Y (&cs->texture.matrix, y1);
@@ -421,6 +427,8 @@ cubeUpdateGeometry (CompScreen *s,
     int     i, n;
 
     CUBE_SCREEN (s);
+
+    sides *= cs->nOutput;
 
     distance = 0.5f / tanf (M_PI / sides);
     radius   = 0.5f / sinf (M_PI / sides);
@@ -465,6 +473,76 @@ cubeUpdateGeometry (CompScreen *s,
     cs->distance = distance;
 
     return TRUE;
+}
+
+static void
+cubeUpdateOutputs (CompScreen *s)
+{
+    BoxPtr pBox0, pBox1;
+    int    i, j, k, x;
+
+    CUBE_SCREEN (s);
+
+    for (i = 0; i < s->nOutputDev; i++)
+    {
+	cs->outputMask[i] = -2;
+
+	/* only use outputs with dimensions matching to first output */
+	if (s->outputDev[i].width  == s->outputDev[0].width &&
+	    s->outputDev[i].height == s->outputDev[0].height)
+	{
+	    pBox0 = &s->outputDev[0].region.extents;
+	    pBox1 = &s->outputDev[i].region.extents;
+
+	    /* ignore top and bottom line doesn't match first output */
+	    if (pBox0->y1 != pBox1->y1 || pBox0->y2 != pBox1->y2)
+		continue;
+
+	    cs->outputMask[i] = -1;
+
+	    for (j = 0; j < s->nOutputDev; j++)
+	    {
+		pBox0 = &s->outputDev[j].region.extents;
+
+		/* ignore if it intersects other output region */
+		if (i != j && pBox0->x2 > pBox1->x1 && pBox0->x1 < pBox1->x2)
+		{
+		    cs->outputMask[i] = -2;
+		    break;
+		}
+	    }
+	}
+    }
+
+    /* add output indices from left to right */
+    j = 0;
+    for (;;)
+    {
+	x = MAXSHORT;
+	k = -1;
+
+	for (i = 0; i < s->nOutputDev; i++)
+	{
+	    if (cs->outputMask[i] != -1)
+		continue;
+
+	    if (s->outputDev[i].region.extents.x1 < x)
+	    {
+		x = s->outputDev[i].region.extents.x1;
+		k = i;
+	    }
+	}
+
+	if (k < 0)
+	    break;
+
+	cs->outputMask[k] = j;
+	cs->output[j]     = k;
+
+	j++;
+    }
+
+    cs->nOutput = j;
 }
 
 static CompOption *
@@ -1097,18 +1175,57 @@ cubeDonePaintScreen (CompScreen *s)
 }
 
 static void
+cubeMoveViewportAndPaint (CompScreen		  *s,
+			  const ScreenPaintAttrib *sAttrib,
+			  int			  output,
+			  unsigned int		  mask,
+			  int			  dx)
+{
+    int cubeOutput, dView;
+
+    CUBE_SCREEN (s);
+
+    /* translate to cube output */
+    cubeOutput = cs->outputMask[output];
+
+    /* convert from window movement to viewport movement */
+    dView = -dx;
+
+    cubeOutput += dView;
+
+    dView      = cubeOutput / cs->nOutput;
+    cubeOutput = cubeOutput % cs->nOutput;
+
+    if (cubeOutput < 0)
+    {
+	cubeOutput += cs->nOutput;
+	dView--;
+    }
+
+    /* translate back to compiz output */
+    output = cs->output[cubeOutput];
+
+    moveScreenViewport (s, -dView, 0, FALSE);
+    (*s->paintTransformedScreen) (s, sAttrib, output, mask);
+    moveScreenViewport (s, dView, 0, FALSE);
+}
+
+static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    int			    output,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
-    int		      xMove = 0;
-    float	      size = s->hsize;
+    int		      hsize, xMove = 0;
+    float	      size;
 
     CUBE_SCREEN (s);
 
-    if (size < 4)
+    hsize = s->hsize * cs->nOutput;
+    size  = hsize;
+
+    if (cs->outputMask[output] < 0)
     {
 	UNWRAP (cs, s, paintTransformedScreen);
 	(*s->paintTransformedScreen) (s, sAttrib, output, mask);
@@ -1170,18 +1287,18 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	sa.xRotate = sAttrib->xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
-	    cs->xrotations = (int) (s->hsize * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / s->hsize;
+	    cs->xrotations = (int) (hsize * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / hsize;
 	}
 	else
 	{
-	    cs->xrotations = (int) (s->hsize * sa.xRotate) / 360;
+	    cs->xrotations = (int) (hsize * sa.xRotate) / 360;
 	    sa.xRotate = sa.xRotate -
-		(360.0f * cs->xrotations) / s->hsize + 360.0f / s->hsize;
+		(360.0f * cs->xrotations) / hsize + 360.0f / hsize;
 	    cs->xrotations--;
 	}
 
-	sa.xRotate = sa.xRotate / size * s->hsize;
+	sa.xRotate = sa.xRotate / size * hsize;
     }
     else
     {
@@ -1208,7 +1325,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
     }
 
-    if (cs->grabIndex == 0 &&
+    if (cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
 	screenLighting (s, TRUE);
@@ -1230,7 +1347,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	glNormal3f (0.0f, -1.0f, 0.0f);
 
-	if (cs->invert == 1 && s->hsize == 4 && cs->texture.name)
+	if (cs->invert == 1 && hsize == 4 && cs->texture.name)
 	{
 	    enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
 	    glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
@@ -1260,23 +1377,21 @@ cubePaintTransformedScreen (CompScreen		    *s,
     /* outside cube */
     if (cs->invert == 1)
     {
-	if (cs->grabIndex || s->hsize > 4)
+	if (cs->grabIndex || hsize > 4)
 	{
 	    GLenum filter;
 	    int    i;
 
-	    xMove = cs->xrotations - ((s->hsize >> 1) - 1);
-	    sa.yRotate += (360.0f / size) * ((s->hsize >> 1) - 1);
+	    xMove = cs->xrotations - ((hsize >> 1) - 1);
+	    sa.yRotate += (360.0f / size) * ((hsize >> 1) - 1);
 
 	    filter = s->display->textureFilter;
 	    if (cs->grabIndex && cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
 		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
 
-	    for (i = 0; i < s->hsize; i++)
+	    for (i = 0; i < hsize; i++)
 	    {
-		moveScreenViewport (s, xMove, 0, FALSE);
-		(*s->paintTransformedScreen) (s, &sa, output, mask);
-		moveScreenViewport (s, -xMove, 0, FALSE);
+		cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 
 		sa.yRotate -= 360.0f / size;
 		xMove++;
@@ -1290,19 +1405,14 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    {
 		xMove = cs->xrotations;
 
-		moveScreenViewport (s, xMove, 0, FALSE);
-		(*s->paintTransformedScreen) (s, &sa, output, mask);
-		moveScreenViewport (s, -xMove, 0, FALSE);
+		cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 
 		xMove++;
-
-		moveScreenViewport (s, xMove, 0, FALSE);
 	    }
 
 	    sa.yRotate -= 360.0f / size;
 
-	    (*s->paintTransformedScreen) (s, &sa, output, mask);
-	    moveScreenViewport (s, -xMove, 0, FALSE);
+	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 	}
     }
     else
@@ -1327,20 +1437,18 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    if (sa.xRotate > 180.0f / size)
 	    {
-		xMove -= ((s->hsize >> 1) - 2);
-		sa.yRotate -= (360.0f / size) * ((s->hsize >> 1) - 2);
+		xMove -= ((hsize >> 1) - 2);
+		sa.yRotate -= (360.0f / size) * ((hsize >> 1) - 2);
 	    }
 	    else
 	    {
-		xMove -= ((s->hsize >> 1) - 1);
-		sa.yRotate -= (360.0f / size) * ((s->hsize >> 1) - 1);
+		xMove -= ((hsize >> 1) - 1);
+		sa.yRotate -= (360.0f / size) * ((hsize >> 1) - 1);
 	    }
 
-	    for (i = 0; i < s->hsize; i++)
+	    for (i = 0; i < hsize; i++)
 	    {
-		moveScreenViewport (s, xMove, 0, FALSE);
-		(*s->paintTransformedScreen) (s, &sa, output, mask);
-		moveScreenViewport (s, -xMove, 0, FALSE);
+		cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 
 		sa.yRotate += 360.0f / size;
 		xMove++;
@@ -1350,23 +1458,17 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
 	else
 	{
-	    moveScreenViewport (s, xMove, 0, FALSE);
-	    (*s->paintTransformedScreen) (s, &sa, output, mask);
-	    moveScreenViewport (s, -xMove, 0, FALSE);
+	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = -cs->xrotations;
 
-	    moveScreenViewport (s, xMove, 0, FALSE);
-	    (*s->paintTransformedScreen) (s, &sa, output, mask);
-	    moveScreenViewport (s, -xMove, 0, FALSE);
+	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = 1 - cs->xrotations;
 
-	    moveScreenViewport (s, xMove, 0, FALSE);
-	    (*s->paintTransformedScreen) (s, &sa, output, mask);
-	    moveScreenViewport (s, -xMove, 0, FALSE);
+	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
 	}
     }
 
@@ -1404,7 +1506,7 @@ cubeUnfold (CompDisplay     *d,
     {
 	CUBE_SCREEN (s);
 
-	if (s->hsize < 4)
+	if (s->hsize * cs->nOutput < 4)
 	    return FALSE;
 
 	if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
@@ -1739,6 +1841,8 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
+
+    cubeUpdateOutputs (s);
 
     if (!cubeUpdateGeometry (s, s->hsize, cs->invert))
 	return FALSE;
