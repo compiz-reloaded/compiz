@@ -385,7 +385,17 @@ scaleScreenInitOptions (ScaleScreen *ss)
 static Bool
 isScaleWin (CompWindow *w)
 {
+    int x1, y1, x2, y2;
+
     SCALE_SCREEN (w->screen);
+
+    getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
+
+    if (w->attrib.x + w->width  <= x1 ||
+	w->attrib.y + w->height <= y1 ||
+	w->attrib.x >= x2	      ||
+	w->attrib.y >= y2)
+	return FALSE;
 
     if (!(*w->screen->focusWindow) (w))
 	return FALSE;
@@ -573,6 +583,7 @@ static void
 layoutSlots (CompScreen *s)
 {
     int i, j, x, y, width, height, lines, n;
+    int x1, y1, x2, y2;
 
     SCALE_SCREEN (s);
 
@@ -580,16 +591,27 @@ layoutSlots (CompScreen *s)
 
     lines = sqrt (ss->nWindows + 1);
 
-    y      = s->workArea.y + ss->spacing;
-    height = (s->workArea.height - (lines + 1) * ss->spacing) / lines;
+    getCurrentOutputExtents (s, &x1, &y1, &x2, &y2);
+
+    if (s->workArea.x > x1)
+	x1 = s->workArea.x;
+    if (s->workArea.x + s->workArea.width < x2)
+	x2 = s->workArea.x + s->workArea.width;
+    if (s->workArea.y > y1)
+	y1 = s->workArea.y;
+    if (s->workArea.y + s->workArea.height < y2)
+	y2 = s->workArea.y + s->workArea.height;
+
+    y      = y1 + ss->spacing;
+    height = ((y2 - y1) - (lines + 1) * ss->spacing) / lines;
 
     for (i = 0; i < lines; i++)
     {
 	n = MIN (ss->nWindows - ss->nSlots,
 		 ceilf ((float) ss->nWindows / lines));
 
-	x     = s->workArea.x + ss->spacing;
-	width = (s->workArea.width - (n + 1) * ss->spacing) / n;
+	x     = x1 + ss->spacing;
+	width = ((x2 - x1) - (n + 1) * ss->spacing) / n;
 
 	for (j = 0; j < n; j++)
 	{
