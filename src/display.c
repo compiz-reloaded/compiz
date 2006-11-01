@@ -2069,7 +2069,8 @@ eventLoop (void)
 		    {
 			if (s->nOutputDev > 1)
 			    glViewport (s->outputDev[i].region.extents.x1,
-					s->outputDev[i].region.extents.y1,
+					s->height -
+					s->outputDev[i].region.extents.y2,
 					s->outputDev[i].width,
 					s->outputDev[i].height);
 
