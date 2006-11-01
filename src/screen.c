@@ -293,8 +293,11 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_HSIZE:
 	if (compSetIntOption (o, value))
 	{
-	    CompOption *vsize = compFindOption (screen->opt, NUM_OPTIONS (screen), "vsize", NULL);
-	    
+	    CompOption *vsize;
+
+	    vsize = compFindOption (screen->opt, NUM_OPTIONS (screen),
+				    "vsize", NULL);
+
 	    if (o->value.i * screen->width > MAXSHORT)
 		return FALSE;
 
@@ -305,7 +308,10 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_VSIZE:
 	if (compSetIntOption (o, value))
 	{
-	    CompOption *hsize = compFindOption (screen->opt, NUM_OPTIONS (screen), "hsize", NULL);
+	    CompOption *hsize;
+
+	    hsize = compFindOption (screen->opt, NUM_OPTIONS (screen),
+				    "hsize", NULL);
 
 	    if (o->value.i * screen->height > MAXSHORT)
 		return FALSE;
@@ -375,7 +381,8 @@ compScreenInitOptions (CompScreen *screen)
     o = &screen->opt[COMP_SCREEN_OPTION_REFRESH_RATE];
     o->name       = "refresh_rate";
     o->shortDesc  = N_("Refresh Rate");
-    o->longDesc   = N_("The rate at which the screen is redrawn (times/second)");
+    o->longDesc   = N_("The rate at which the screen is redrawn "
+		       "(times/second)");
     o->type       = CompOptionTypeInt;
     o->value.i    = defaultRefreshRate;
     o->rest.i.min = 1;
@@ -411,8 +418,8 @@ compScreenInitOptions (CompScreen *screen)
     o = &screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS];
     o->name       = "unredirect_fullscreen_windows";
     o->shortDesc  = N_("Unredirect Fullscreen Windows");
-    o->longDesc   = N_("Allow drawing of fullscreen windows to not be redirected "
-	"to offscreen pixmaps");
+    o->longDesc   = N_("Allow drawing of fullscreen windows to not be "
+		       "redirected to offscreen pixmaps");
     o->type       = CompOptionTypeBool;
     o->value.b    = UNREDIRECT_FS_DEFAULT;
 
@@ -1776,7 +1783,7 @@ addScreen (CompDisplay *display,
 
     addScreenToDisplay (display, s);
 
-    getDesktopHints (s);    
+    getDesktopHints (s);
 
     screenInitPlugins (s);
 
