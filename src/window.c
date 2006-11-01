@@ -1909,9 +1909,9 @@ sendConfigureNotify (CompWindow *w)
 {
     XConfigureEvent xev;
 
-    xev.type	     = ConfigureNotify;
-    xev.event	     = w->id;
-    xev.window	     = w->id;
+    xev.type   = ConfigureNotify;
+    xev.event  = w->id;
+    xev.window = w->id;
 
     /* normally we should never send configure notify events to override
        redirect windows but if they support the _NET_WM_SYNC_REQUEST
@@ -1932,7 +1932,7 @@ sendConfigureNotify (CompWindow *w)
 	    xev.height	     = attrib.height;
 	    xev.border_width = attrib.border_width;
 
-	    xev.above	      = (w->prev) ? w->prev->id : None;
+	    xev.above		  = (w->prev) ? w->prev->id : None;
 	    xev.override_redirect = TRUE;
 
 	    XSendEvent (w->screen->display->display, w->id, FALSE,
@@ -1943,13 +1943,13 @@ sendConfigureNotify (CompWindow *w)
     }
     else
     {
-	xev.x	     = w->attrib.x;
-	xev.y	     = w->attrib.y;
-	xev.width	     = w->serverWidth;
-	xev.height	     = w->serverHeight;
+	xev.x		 = w->attrib.x;
+	xev.y		 = w->attrib.y;
+	xev.width	 = w->serverWidth;
+	xev.height	 = w->serverHeight;
 	xev.border_width = w->serverBorderWidth;
 
-	xev.above	          = (w->prev) ? w->prev->id : None;
+	xev.above	      = (w->prev) ? w->prev->id : None;
 	xev.override_redirect = w->attrib.override_redirect;
 
 	XSendEvent (w->screen->display->display, w->id, FALSE,
