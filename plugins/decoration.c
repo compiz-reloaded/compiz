@@ -125,16 +125,21 @@ typedef struct _WindowDecoration {
 #define DECOR_SHADOW_OPACITY_MAX       6.0f
 #define DECOR_SHADOW_OPACITY_PRECISION 0.01f
 
+#define DECOR_SHADOW_COLOR_RED_DEFAULT   0x0000
+#define DECOR_SHADOW_COLOR_GREEN_DEFAULT 0x0000
+#define DECOR_SHADOW_COLOR_BLUE_DEFAULT  0x0000
+
 #define DECOR_SHADOW_OFFSET_DEFAULT   1
 #define DECOR_SHADOW_OFFSET_MIN     -16
 #define DECOR_SHADOW_OFFSET_MAX      16
 
 #define DECOR_DISPLAY_OPTION_SHADOW_RADIUS   0
 #define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
-#define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X 2
-#define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y 3
-#define DECOR_DISPLAY_OPTION_COMMAND         4
-#define DECOR_DISPLAY_OPTION_NUM             5
+#define DECOR_DISPLAY_OPTION_SHADOW_COLOR    2
+#define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X 3
+#define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y 4
+#define DECOR_DISPLAY_OPTION_COMMAND         5
+#define DECOR_DISPLAY_OPTION_NUM             6
 
 static int displayPrivateIndex;
 
@@ -222,6 +227,10 @@ decorSetDisplayOption (CompDisplay     *display,
 	if (compSetFloatOption (o, value))
 	    return TRUE;
 	break;
+    case DECOR_DISPLAY_OPTION_SHADOW_COLOR:
+	if (compSetColorOption (o, value))
+	    return TRUE;
+	break;
     case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X:
     case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y:
 	if (compSetIntOption (o, value))
@@ -280,6 +289,16 @@ decorDisplayInitOptions (DecorDisplay *dd)
     o->rest.f.min	= DECOR_SHADOW_OPACITY_MIN;
     o->rest.f.max	= DECOR_SHADOW_OPACITY_MAX;
     o->rest.f.precision = DECOR_SHADOW_OPACITY_PRECISION;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_COLOR];
+    o->name		= "shadow_color";
+    o->shortDesc	= "Shadow Color";
+    o->longDesc		= "Drop shadow color";
+    o->type		= CompOptionTypeColor;
+    o->value.c[0]	= DECOR_SHADOW_COLOR_RED_DEFAULT;
+    o->value.c[1]	= DECOR_SHADOW_COLOR_GREEN_DEFAULT;
+    o->value.c[2]	= DECOR_SHADOW_COLOR_BLUE_DEFAULT;
+    o->value.c[3]	= 0xffff;
 
     o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X];
     o->name		= "shadow_offset_x";

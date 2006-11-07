@@ -82,6 +82,9 @@
 #define COMPIZ_SHADOW_OPACITY_KEY \
     COMPIZ_GCONF_DIR1 "/shadow_opacity"
 
+#define COMPIZ_SHADOW_COLOR_KEY \
+    COMPIZ_GCONF_DIR1 "/shadow_color"
+
 #define COMPIZ_SHADOW_OFFSET_X_KEY \
     COMPIZ_GCONF_DIR1 "/shadow_offset_x"
 
@@ -174,10 +177,13 @@ typedef struct _extents {
 #define WM_MOVERESIZE_SIZE_KEYBOARD     9
 #define WM_MOVERESIZE_MOVE_KEYBOARD    10
 
-#define SHADOW_RADIUS   8.0
-#define SHADOW_OPACITY  0.5
-#define SHADOW_OFFSET_X 1
-#define SHADOW_OFFSET_Y 1
+#define SHADOW_RADIUS      8.0
+#define SHADOW_OPACITY     0.5
+#define SHADOW_OFFSET_X    1
+#define SHADOW_OFFSET_Y    1
+#define SHADOW_COLOR_RED   0x0000
+#define SHADOW_COLOR_GREEN 0x0000
+#define SHADOW_COLOR_BLUE  0x0000
 
 #define META_OPACITY              0.75
 #define META_SHADE_OPACITY        TRUE
@@ -266,6 +272,11 @@ static gint shadow_bottom_corner_space = 0;
 
 static gdouble shadow_radius   = SHADOW_RADIUS;
 static gdouble shadow_opacity  = SHADOW_OPACITY;
+static gint    shadow_color[3] = {
+    SHADOW_COLOR_RED,
+    SHADOW_COLOR_GREEN,
+    SHADOW_COLOR_BLUE
+};
 static gint    shadow_offset_x = SHADOW_OFFSET_X;
 static gint    shadow_offset_y = SHADOW_OFFSET_Y;
 
@@ -5548,9 +5559,14 @@ update_shadow (void)
     cairo_t		*cr;
     decor_t		d;
     double		save_decoration_alpha;
-    static XRenderColor color = { 0x0000, 0x0000, 0x0000, 0xffff };
     static XRenderColor clear = { 0x0000, 0x0000, 0x0000, 0x0000 };
     static XRenderColor white = { 0xffff, 0xffff, 0xffff, 0xffff };
+    XRenderColor	color;
+
+    color.red   = shadow_color[0];
+    color.green = shadow_color[1];
+    color.blue  = shadow_color[2];
+    color.alpha = 0xffff;
 
     /* compute a gaussian convolution kernel */
     params = create_gaussian_kernel (shadow_radius,
@@ -5979,6 +5995,7 @@ shadow_settings_changed (GConfClient *client)
 {
     double   radius, opacity;
     int      offset;
+    gchar    *color;
     gboolean changed = FALSE;
 
     radius = gconf_client_get_float (client,
@@ -5998,6 +6015,22 @@ shadow_settings_changed (GConfClient *client)
     if (shadow_opacity != opacity)
     {
 	shadow_opacity = opacity;
+	changed = TRUE;
+    }
+
+    color = gconf_client_get_string (client,
+				     COMPIZ_SHADOW_COLOR_KEY,
+				     NULL);
+    if (color);
+    {
+	GdkColor c;
+
+	gdk_color_parse (color, &c);
+	g_free (color);
+
+	shadow_color[0] = c.red;
+	shadow_color[1] = c.green;
+	shadow_color[2] = c.blue;
 	changed = TRUE;
     }
 
@@ -6217,7 +6250,8 @@ value_changed (GConfClient *client,
     else if (strcmp (key, COMPIZ_SHADOW_RADIUS_KEY)   == 0 ||
 	     strcmp (key, COMPIZ_SHADOW_OPACITY_KEY)  == 0 ||
 	     strcmp (key, COMPIZ_SHADOW_OFFSET_X_KEY) == 0 ||
-	     strcmp (key, COMPIZ_SHADOW_OFFSET_Y_KEY) == 0)
+	     strcmp (key, COMPIZ_SHADOW_OFFSET_Y_KEY) == 0 ||
+	     strcmp (key, COMPIZ_SHADOW_COLOR_KEY) == 0)
     {
 	if (shadow_settings_changed (client))
 	    changed = TRUE;
