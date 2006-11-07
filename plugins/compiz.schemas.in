@@ -12049,6 +12049,18 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/shadow_color</key>
+            <applyto>/apps/compiz/plugins/decoration/allscreens/options/shadow_color</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>#000000ff</default>
+            <locale name="C">
+                <short>Shadow Color</short>
+                <long>Drop shadow color</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/shadow_offset_x</key>
             <applyto>/apps/compiz/plugins/decoration/allscreens/options/shadow_offset_x</applyto>
             <owner>compiz</owner>
