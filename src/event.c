@@ -1122,6 +1122,13 @@ handleEvent (CompDisplay *d,
 						       event->xbutton.x_root,
 						       event->xbutton.y_root));
 	break;
+    case MotionNotify:
+	s = findScreenAtDisplay (d, event->xmotion.root);
+	if (s)
+	    setCurrentOutput (s, outputDeviceForPoint (s,
+						       event->xmotion.x_root,
+						       event->xmotion.y_root));
+	break;
     case KeyPress:
 	w = findWindowAtDisplay (d, d->activeWindow);
 	if (w)
