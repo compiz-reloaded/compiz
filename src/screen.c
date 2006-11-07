@@ -689,7 +689,7 @@ updateOutputDevices (CompScreen *s)
 	if (!output)
 	    return;
 
-	output->name   = strdup ("Output 0");
+	output->name = strdup ("Output 0");
 
 	output->region.rects    = &output->region.extents;
 	output->region.numRects = 1;
