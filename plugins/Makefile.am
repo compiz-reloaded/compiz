@@ -54,6 +54,10 @@ libplane_la_LDFLAGS = -module -avoid-version -no-undefined
 libplane_la_LIBADD = @COMPIZ_LIBS@
 libplane_la_SOURCES = plane.c
 
+libclone_la_LDFLAGS = -module -avoid-version -no-undefined
+libclone_la_LIBADD = @COMPIZ_LIBS@
+libclone_la_SOURCES = clone.c
+
 if ANNOTATE_PLUGIN
 libannotate_la_LDFLAGS = -module -avoid-version -no-undefined
 libannotate_la_LIBADD = @COMPIZ_LIBS@ @ANNOTATE_LIBS@
@@ -147,6 +151,7 @@ module_LTLIBRARIES =		\
 	libwater.la		\
 	libscreenshot.la	\
 	libplane.la		\
+	libclone.la		\
 	$(libannotate_module)	\
 	$(libgconf_dump_module)
 
