@@ -1741,6 +1741,11 @@ getCurrentOutputExtents (CompScreen *s,
 			 int	    *y2);
 
 void
+getWorkareaForOutput (CompScreen *s,
+		      int	 output,
+		      XRectangle *area);
+
+void
 setNumberOfDesktops (CompScreen   *s,
 		     unsigned int nDesktop);
 

@@ -3296,3 +3296,36 @@ setCurrentDesktop (CompScreen   *s,
 		     XA_CARDINAL, 32, PropModeReplace,
 		     (unsigned char *) &data, 1);
 }
+
+void
+getWorkareaForOutput (CompScreen *s,
+		      int	 output,
+		      XRectangle *area)
+{
+    int x1, y1, x2, y2;
+    int oX1, oY1, oX2, oY2;
+
+    x1 = s->workArea.x;
+    y1 = s->workArea.y;
+    x2 = x1 + s->workArea.width;
+    y2 = y1 + s->workArea.height;
+
+    oX1 = s->outputDev[output].region.extents.x1;
+    oY1 = s->outputDev[output].region.extents.y1;
+    oX2 = s->outputDev[output].region.extents.x2;
+    oY2 = s->outputDev[output].region.extents.y2;
+
+    if (x1 < oX1)
+	x1 = oX1;
+    if (y1 < oY1)
+	y1 = oY1;
+    if (x2 > oX2)
+	x2 = oX2;
+    if (y2 > oY2)
+	y2 = oY2;
+
+    area->x      = x1;
+    area->y      = y1;
+    area->width  = x2 - x1;
+    area->height = y2 - y1;
+}

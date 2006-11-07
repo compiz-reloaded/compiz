@@ -3025,21 +3025,26 @@ addWindowSizeChanges (CompWindow     *w,
 		      int	     oldHeight,
 		      int	     oldBorderWidth)
 {
-    int mask = 0;
-    int x, y;
-    int vx, vy;
+    XRectangle workArea;
+    int	       mask = 0;
+    int	       x, y;
+    int	       vx, vy;
+    int	       output;
 
     defaultViewportForWindow (w, &vx, &vy);
 
     x = (vx - w->screen->x) * w->screen->width;
     y = (vy - w->screen->y) * w->screen->height;
 
+    output = outputDeviceForWindow (w);
+    getWorkareaForOutput (w->screen, output, &workArea);
+
     if (w->type & CompWindowTypeFullscreenMask)
     {
 	saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
 
-	xwc->width	  = w->screen->width;
-	xwc->height	  = w->screen->height;
+	xwc->width	  = w->screen->outputDev[output].width;
+	xwc->height	  = w->screen->outputDev[output].height;
 	xwc->border_width = 0;
 
 	mask |= CWWidth | CWHeight | CWBorderWidth;
@@ -3052,7 +3057,7 @@ addWindowSizeChanges (CompWindow     *w,
 	{
 	    saveWindowGeometry (w, CWY | CWHeight);
 
-	    xwc->height = w->screen->workArea.height - w->input.top -
+	    xwc->height = workArea.height - w->input.top -
 		w->input.bottom - oldBorderWidth * 2;
 
 	    mask |= CWHeight;
@@ -3066,7 +3071,7 @@ addWindowSizeChanges (CompWindow     *w,
 	{
 	    saveWindowGeometry (w, CWX | CWWidth);
 
-	    xwc->width = w->screen->workArea.width - w->input.left -
+	    xwc->width = workArea.width - w->input.left -
 		w->input.right - oldBorderWidth * 2;
 
 	    mask |= CWWidth;
@@ -3120,16 +3125,16 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
-		if (oldY < y + w->screen->workArea.y + w->input.top)
+		if (oldY < y + workArea.y + w->input.top)
 		{
-		    xwc->y = y + w->screen->workArea.y + w->input.top;
+		    xwc->y = y + workArea.y + w->input.top;
 		    mask |= CWY;
 		}
 		else
 		{
 		    height = xwc->height + oldBorderWidth * 2;
 
-		    max = y + w->screen->workArea.y + w->screen->workArea.height;
+		    max = y + workArea.y + workArea.height;
 		    if (oldY + oldHeight + w->input.bottom > max)
 		    {
 			xwc->y = max - height - w->input.bottom;
@@ -3137,9 +3142,9 @@ addWindowSizeChanges (CompWindow     *w,
 		    }
 		    else if (oldY + height + w->input.bottom > max)
 		    {
-			xwc->y = w->screen->workArea.y +
-			    (w->screen->workArea.height - w->input.top -
-			     height - w->input.bottom) / 2 + w->input.top;
+			xwc->y = workArea.y +
+			    (workArea.height - w->input.top - height -
+			     w->input.bottom) / 2 + w->input.top;
 			mask |= CWY;
 		    }
 		}
@@ -3147,16 +3152,16 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
-		if (oldX < x + w->screen->workArea.x + w->input.left)
+		if (oldX < x + workArea.x + w->input.left)
 		{
-		    xwc->x = x + w->screen->workArea.x + w->input.left;
+		    xwc->x = x + workArea.x + w->input.left;
 		    mask |= CWX;
 		}
 		else
 		{
 		    width = xwc->width + oldBorderWidth * 2;
 
-		    max = x + w->screen->workArea.x + w->screen->workArea.width;
+		    max = x + workArea.x + workArea.width;
 		    if (oldX + oldWidth + w->input.right > max)
 		    {
 			xwc->x = max - width - w->input.right;
@@ -3164,9 +3169,9 @@ addWindowSizeChanges (CompWindow     *w,
 		    }
 		    else if (oldX + width + w->input.right > max)
 		    {
-			xwc->x = w->screen->workArea.x +
-			    (w->screen->workArea.width - w->input.left -
-			     width - w->input.right) / 2 + w->input.left;
+			xwc->x = workArea.x +
+			    (workArea.width - w->input.left - width -
+			     w->input.right) / 2 + w->input.left;
 			mask |= CWX;
 		    }
 		}
