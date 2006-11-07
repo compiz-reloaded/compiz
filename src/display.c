@@ -2065,6 +2065,8 @@ eventLoop (void)
 		    mask = s->damageMask;
 		    s->damageMask = 0;
 
+		    s->cleared = FALSE;
+
 		    for (i = 0; i < s->nOutputDev; i++)
 		    {
 			if (s->nOutputDev > 1)
@@ -3330,3 +3332,4 @@ setDisplayAction (CompDisplay     *display,
 
     return FALSE;
 }
+

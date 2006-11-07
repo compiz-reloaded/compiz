@@ -951,8 +951,13 @@ typedef Bool (*PaintScreenProc) (CompScreen		 *screen,
 
 typedef void (*PaintTransformedScreenProc) (CompScreen		    *screen,
 					    const ScreenPaintAttrib *sAttrib,
+					    Region		    region,
 					    int			    output,
 					    unsigned int	    mask);
+
+typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
+					  const ScreenPaintAttrib *sAttrib,
+					  int			  output);
 
 
 #define PAINT_WINDOW_SOLID_MASK			(1 << 0)
@@ -1004,8 +1009,14 @@ prepareXCoords (CompScreen *screen,
 void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
+			Region			region,
 			int			output,
 			unsigned int	        mask);
+
+void
+applyScreenTransform (CompScreen	      *screen,
+		      const ScreenPaintAttrib *sAttrib,
+		      int		      output);
 
 Bool
 paintScreen (CompScreen		     *screen,
@@ -1477,6 +1488,8 @@ struct _CompScreen {
 
     GLint stencilRef;
 
+    Bool cleared;
+
     Bool lighting;
     Bool slowAnimations;
 
@@ -1526,18 +1539,19 @@ struct _CompScreen {
     InitPluginForScreenProc initPluginForScreen;
     FiniPluginForScreenProc finiPluginForScreen;
 
-    PreparePaintScreenProc       preparePaintScreen;
-    DonePaintScreenProc	         donePaintScreen;
-    PaintScreenProc	         paintScreen;
-    PaintTransformedScreenProc   paintTransformedScreen;
-    PaintBackgroundProc          paintBackground;
-    PaintWindowProc	         paintWindow;
-    AddWindowGeometryProc        addWindowGeometry;
-    DrawWindowGeometryProc       drawWindowGeometry;
-    DrawWindowTextureProc	 drawWindowTexture;
-    DamageWindowRectProc         damageWindowRect;
-    FocusWindowProc		 focusWindow;
-    SetWindowScaleProc		 setWindowScale;
+    PreparePaintScreenProc     preparePaintScreen;
+    DonePaintScreenProc	       donePaintScreen;
+    PaintScreenProc	       paintScreen;
+    PaintTransformedScreenProc paintTransformedScreen;
+    ApplyScreenTransformProc   applyScreenTransform;
+    PaintBackgroundProc        paintBackground;
+    PaintWindowProc	       paintWindow;
+    AddWindowGeometryProc      addWindowGeometry;
+    DrawWindowGeometryProc     drawWindowGeometry;
+    DrawWindowTextureProc      drawWindowTexture;
+    DamageWindowRectProc       damageWindowRect;
+    FocusWindowProc	       focusWindow;
+    SetWindowScaleProc	       setWindowScale;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
