@@ -116,6 +116,8 @@ typedef struct _ZoomScreen {
     Bool   grabbed;
 
     float maxTranslate;
+
+    int zoomOutput;
 } ZoomScreen;
 
 #define GET_ZOOM_DISPLAY(d)				      \
@@ -385,6 +387,12 @@ zoomPaintScreen (CompScreen		 *s,
 
     if (zs->grabIndex)
     {
+	mask &= ~PAINT_SCREEN_REGION_MASK;
+	mask |= PAINT_SCREEN_CLEAR_MASK;
+    }
+
+    if (zs->grabIndex && zs->zoomOutput == output)
+    {
 	ScreenPaintAttrib sa = *sAttrib;
 	int		  saveFilter;
 
@@ -399,8 +407,7 @@ zoomPaintScreen (CompScreen		 *s,
 	else
 	    sa.xRotate -= 0.000001f;
 
-	mask &= ~PAINT_SCREEN_REGION_MASK;
-	mask |= PAINT_SCREEN_TRANSFORMED_MASK | PAINT_SCREEN_CLEAR_MASK;
+	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
 
 	saveFilter = s->filter[SCREEN_TRANS_FILTER];
 
@@ -452,6 +459,8 @@ zoomIn (CompDisplay     *d,
 
 	    zs->savedPointer.x = pointerX;
 	    zs->savedPointer.y = pointerY;
+
+	    zs->zoomOutput = outputDeviceForPoint (s, pointerX, pointerY);
 	}
 
 	if (zs->grabIndex)
@@ -701,7 +710,7 @@ zoomSetDisplayOption (CompDisplay     *display,
 
 static void
 zoomDisplayInitOptions (ZoomDisplay *zd,
-			Display     *display)
+			Display	    *display)
 {
     CompOption *o;
 
@@ -820,6 +829,8 @@ zoomInitScreen (CompPlugin *p,
     zs->savedPointer.y = 0;
 
     zs->grabbed = FALSE;
+
+    zs->zoomOutput = 0;
 
     zs->pointerInvertY     = ZOOM_POINTER_INVERT_Y_DEFAULT;
     zs->pointerSensitivity = ZOOM_POINTER_SENSITIVITY_DEFAULT *
