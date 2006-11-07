@@ -291,11 +291,9 @@ shotPaintScreen (CompScreen		 *s,
     return status;
 }
 
-
 static void
 shotHandleMotionEvent (CompScreen *s,
 		       int	  xRoot,
-
 		       int	  yRoot)
 {
     SHOT_SCREEN (s);
