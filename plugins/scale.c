@@ -106,8 +106,9 @@ typedef struct _ScaleSlot {
     float scale;
 } ScaleSlot;
 
-#define SCALE_DISPLAY_OPTION_INITIATE 0
-#define SCALE_DISPLAY_OPTION_NUM      1
+#define SCALE_DISPLAY_OPTION_INITIATE     0
+#define SCALE_DISPLAY_OPTION_INITIATE_ALL 1
+#define SCALE_DISPLAY_OPTION_NUM          2
 
 typedef struct _ScaleDisplay {
     int		    screenPrivateIndex;
@@ -116,6 +117,7 @@ typedef struct _ScaleDisplay {
     CompOption opt[SCALE_DISPLAY_OPTION_NUM];
 
     unsigned int lastActiveNum;
+    Window       lastActiveWindow;
     KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
 } ScaleDisplay;
 
@@ -167,6 +169,8 @@ typedef struct _ScaleScreen {
     GLushort opacity;
 
     IconOverlay iconOverlay;
+
+    Bool allWindows;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -385,20 +389,23 @@ scaleScreenInitOptions (ScaleScreen *ss)
 static Bool
 isScaleWin (CompWindow *w)
 {
-    int x1, y1, x2, y2;
-
     SCALE_SCREEN (w->screen);
 
-    getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
+    if (!ss->allWindows)
+    {
+	int x1, y1, x2, y2;
 
-    if (w->attrib.x + w->width  <= x1 ||
-	w->attrib.y + w->height <= y1 ||
-	w->attrib.x >= x2	      ||
-	w->attrib.y >= y2)
-	return FALSE;
+	getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
 
-    if (!(*w->screen->focusWindow) (w))
-	return FALSE;
+	if (w->attrib.x + w->width  <= x1 ||
+	    w->attrib.y + w->height <= y1 ||
+	    w->attrib.x >= x2	          ||
+	    w->attrib.y >= y2)
+	    return FALSE;
+
+	if (!(*w->screen->focusWindow) (w))
+	    return FALSE;
+    }
 
     if (!(ss->wMask & w->type))
 	return FALSE;
@@ -1051,9 +1058,51 @@ scaleTerminate (CompDisplay     *d,
 		damageScreen (s);
 	    }
 
-	    sd->lastActiveNum = None;
+	    sd->lastActiveNum = 0;
 	}
     }
+
+    return FALSE;
+}
+
+static Bool
+scaleInitiateCommon (CompScreen      *s,
+		     CompAction      *action,
+		     CompActionState state,
+		     CompOption      *option,
+		     int	     nOption)
+{
+    SCALE_DISPLAY (s->display);
+    SCALE_SCREEN (s);
+
+    if (!layoutThumbs (s))
+	return FALSE;
+
+    if (!ss->grabIndex)
+    {
+	if (otherScreenGrabExist (s, "scale", 0))
+	    return FALSE;
+
+	ss->grabIndex = pushScreenGrab (s, ss->cursor, "scale");
+    }
+
+    if (ss->grabIndex)
+    {
+	if (!sd->lastActiveNum)
+	    sd->lastActiveNum = s->activeNum - 1;
+
+	sd->lastActiveWindow = s->display->activeWindow;
+
+	ss->state = SCALE_STATE_OUT;
+
+	damageScreen (s);
+    }
+
+    if (state & CompActionStateInitButton)
+	action->state |= CompActionStateTermButton;
+
+    if (state & CompActionStateInitKey)
+	action->state |= CompActionStateTermKey;
 
     return FALSE;
 }
@@ -1073,38 +1122,39 @@ scaleInitiate (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	SCALE_DISPLAY (s->display);
 	SCALE_SCREEN (s);
 
-	if (ss->state != SCALE_STATE_WAIT &&
-	    ss->state != SCALE_STATE_OUT)
+	if (ss->state != SCALE_STATE_WAIT && ss->state != SCALE_STATE_OUT)
 	{
-	    if (!layoutThumbs (s))
-		return FALSE;
+	    ss->allWindows = FALSE;
+	    return scaleInitiateCommon (s, action, state, option, nOption);
+	}
+    }
 
-	    if (!ss->grabIndex)
-	    {
-		if (otherScreenGrabExist (s, "scale", 0))
-		    return FALSE;
+    return FALSE;
+}
 
-		ss->grabIndex = pushScreenGrab (s, ss->cursor, "scale");
-	    }
+static Bool
+scaleInitiateAll (CompDisplay     *d,
+		  CompAction      *action,
+		  CompActionState state,
+		  CompOption      *option,
+		  int		  nOption)
+{
+    CompScreen *s;
+    Window     xid;
 
-	    if (ss->grabIndex)
-	    {
-		if (!sd->lastActiveNum)
-		    sd->lastActiveNum = s->activeNum - 1;
+    xid = getIntOptionNamed (option, nOption, "root", 0);
 
-		ss->state = SCALE_STATE_OUT;
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SCALE_SCREEN (s);
 
-		damageScreen (s);
-	    }
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
+	if (ss->state != SCALE_STATE_WAIT && ss->state != SCALE_STATE_OUT)
+	{
+	    ss->allWindows = TRUE;
+	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
     }
 
@@ -1181,7 +1231,8 @@ scaleMoveFocusWindow (CompScreen *s,
 	{
 	    SCALE_DISPLAY (s->display);
 
-	    sd->lastActiveNum = focus->activeNum;
+	    sd->lastActiveNum    = focus->activeNum;
+	    sd->lastActiveWindow = focus->id;
 
 	    activateWindow (focus);
 	}
@@ -1373,6 +1424,7 @@ scaleSetDisplayOption (CompDisplay     *display,
 
     switch (index) {
     case SCALE_DISPLAY_OPTION_INITIATE:
+    case SCALE_DISPLAY_OPTION_INITIATE_ALL:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
     default:
@@ -1404,6 +1456,19 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (SCALE_INITIATE_KEY_DEFAULT));
+
+    o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL];
+    o->name		      = "initiate_all";
+    o->shortDesc	      = N_("Initiate Window Picker For All Windows");
+    o->longDesc		      = N_("Layout and start transforming all windows");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = scaleInitiateAll;
+    o->value.action.terminate = scaleTerminate;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.state     = CompActionStateInitEdge;
+    o->value.action.type      = 0;
+    o->value.action.state    |= CompActionStateInitKey;
 }
 
 static Bool
@@ -1494,6 +1559,8 @@ scaleInitScreen (CompPlugin *p,
     scaleScreenInitOptions (ss);
 
     addScreenAction (s, &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
+    addScreenAction (s,
+		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
