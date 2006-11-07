@@ -6021,7 +6021,7 @@ shadow_settings_changed (GConfClient *client)
     color = gconf_client_get_string (client,
 				     COMPIZ_SHADOW_COLOR_KEY,
 				     NULL);
-    if (color);
+    if (color)
     {
 	int c[4];
 
