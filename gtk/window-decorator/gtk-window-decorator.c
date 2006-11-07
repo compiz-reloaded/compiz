@@ -6023,15 +6023,17 @@ shadow_settings_changed (GConfClient *client)
 				     NULL);
     if (color);
     {
-	GdkColor c;
+	int c[4];
 
-	gdk_color_parse (color, &c);
+	if (sscanf (color, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 4)
+	{
+	    shadow_color[0] = c[0] << 8 | c[0];
+	    shadow_color[1] = c[1] << 8 | c[1];
+	    shadow_color[2] = c[2] << 8 | c[2];
+	    changed = TRUE;
+	}
+
 	g_free (color);
-
-	shadow_color[0] = c.red;
-	shadow_color[1] = c.green;
-	shadow_color[2] = c.blue;
-	changed = TRUE;
     }
 
     offset = gconf_client_get_int (client,
