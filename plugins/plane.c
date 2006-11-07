@@ -214,6 +214,7 @@ planePreparePaintScreen (CompScreen *s,
 static void
 planePaintTransformedScreen (CompScreen		     *screen,
 			     const ScreenPaintAttrib *sAttrib,
+			     Region		     region,
 			     int                     output,
 			     unsigned int	     mask)
 {
@@ -271,7 +272,8 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	glPushMatrix ();
 
 	glTranslatef (dx, -dy, 0.0);
-	(*screen->paintTransformedScreen) (screen, sAttrib, output, mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
+					   mask);
 	if (dx > 0)
 	{
 	    glTranslatef (-1.0, 0.0, 0.0);
@@ -282,7 +284,8 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    glTranslatef (1.0, 0.0, 0.0);
 	    moveScreenViewport (screen, -1, 0, FALSE);
 	}
-	(*screen->paintTransformedScreen) (screen, sAttrib, output, mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
+					   mask);
 	if (dy > 0)
 	{
 	    glTranslatef (0.0, 1.0, 0.0);
@@ -293,7 +296,8 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    glTranslatef (0.0, -1.0, 0.0);
 	    moveScreenViewport (screen, 0, -1, FALSE);
 	}
-	(*screen->paintTransformedScreen) (screen, sAttrib, output, mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
+					   mask);
 	if (dx > 0)
 	{
 	    glTranslatef (1.0, 0.0, 0.0);
@@ -304,7 +308,8 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    glTranslatef (-1.0, 0.0, 0.0);
 	    moveScreenViewport (screen, 1, 0, FALSE);
 	}
-	(*screen->paintTransformedScreen) (screen, sAttrib, output, mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
+					   mask);
 	if (dy > 0)
 	{
 	    glTranslatef (0.0, -1.0, 0.0);
@@ -322,7 +327,8 @@ planePaintTransformedScreen (CompScreen		     *screen,
     }
     else
     {
-	(*screen->paintTransformedScreen) (screen, sAttrib, output, mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
+					   mask);
     }
 
     WRAP (ps, screen, paintTransformedScreen, planePaintTransformedScreen);
