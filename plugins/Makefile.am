@@ -54,6 +54,13 @@ libplane_la_LDFLAGS = -module -avoid-version -no-undefined
 libplane_la_LIBADD = @COMPIZ_LIBS@
 libplane_la_SOURCES = plane.c
 
+if ANNOTATE_PLUGIN
+libannotate_la_LDFLAGS = -module -avoid-version -no-undefined
+libannotate_la_LIBADD = @COMPIZ_LIBS@ @ANNOTATE_LIBS@
+libannotate_la_SOURCES = annotate.c
+libannotate_module = libannotate.la
+endif
+
 if GCONF_PLUGIN
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
@@ -112,6 +119,7 @@ endif
 INCLUDES =					\
 	@COMPIZ_CFLAGS@				\
 	@LIBRSVG_CFLAGS@			\
+	@ANNOTATE_CFLAGS@			\
 	@GCONF_CFLAGS@				\
 	@PLACE_CFLAGS@				\
 	@DBUS_CFLAGS@				\
@@ -139,6 +147,7 @@ module_LTLIBRARIES =		\
 	libwater.la		\
 	libscreenshot.la	\
 	libplane.la		\
+	$(libannotate_module)	\
 	$(libgconf_dump_module)
 
 EXTRA_DIST = $(schema_in_files)

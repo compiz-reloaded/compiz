@@ -166,6 +166,19 @@ if test "$use_dbus" = yes; then
   AC_DEFINE(USE_DBUS, 1, [Build dbus plugin])
 fi
 
+AC_ARG_ENABLE(annotate,
+  [  --disable-annotate      Disable annotate plugin],
+  [use_annotate=$enableval], [use_annotate=yes])
+
+if test "x$use_annotate" = "xyes"; then
+  PKG_CHECK_MODULES(ANNOTATE, cairo-xlib-xrender, [use_annotate=yes], [use_annotate=no])
+fi
+
+AM_CONDITIONAL(ANNOTATE_PLUGIN, test "x$use_annotate" = "xyes")
+if test "$use_annotate" = yes; then
+  AC_DEFINE(USE_ANNOTATE, 1, [Build annotate plugin])
+fi
+
 AC_ARG_ENABLE(librsvg,
   [  --enable-librsvg        Enable svg support],
   [use_librsvg=$enableval], [use_librsvg=no])
@@ -305,9 +318,10 @@ po/Makefile.in
 
 echo ""
 echo "the following optional plugins will be compiled:"
-echo "  gconf: $use_gconf"
-echo "  place: $use_place"
-echo "  dbus:  $use_dbus"
+echo "  gconf:    $use_gconf"
+echo "  place:    $use_place"
+echo "  dbus:     $use_dbus"
+echo "  annotate: $use_annotate"
 echo ""
 echo "and the following optional features will be compiled:"
 echo "  svg:      $use_librsvg"
