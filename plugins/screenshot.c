@@ -206,9 +206,9 @@ shotPaintScreen (CompScreen		 *s,
 	if (ss->grabIndex)
 	{
 	    glPushMatrix ();
-	    glTranslatef (-0.5f, -0.5f, -DEFAULT_Z_CAMERA);
-	    glScalef (1.0f / s->width, -1.0f / s->height, 1.0f);
-	    glTranslatef (0.0f, -s->height, 0.0f);
+
+	    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
+
 	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 	    glEnable (GL_BLEND);
 	    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
@@ -225,7 +225,7 @@ shotPaintScreen (CompScreen		 *s,
 	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 	    glPopMatrix ();
 	}
-	else
+	else if (output == (s->nOutputDev - 1))
 	{
 	    int w = x2 - x1;
 	    int h = y2 - y1;
