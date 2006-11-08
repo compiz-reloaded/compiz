@@ -398,16 +398,6 @@ isScaleWin (CompWindow *w)
 
     if (!ss->allWindows)
     {
-	int x1, y1, x2, y2;
-
-	getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
-
-	if (w->attrib.x + w->width  <= x1 ||
-	    w->attrib.y + w->height <= y1 ||
-	    w->attrib.x >= x2	          ||
-	    w->attrib.y >= y2)
-	    return FALSE;
-
 	if (!(*w->screen->focusWindow) (w))
 	    return FALSE;
     }
