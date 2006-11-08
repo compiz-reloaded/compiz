@@ -480,8 +480,14 @@ zoomIn (CompDisplay     *d,
 
 		if (zs->currentZoom == 1.0f)
 		{
-		    zs->xTranslate = (x - s->width  / 2) / (s->width  * 2.0f);
-		    zs->yTranslate = (y - s->height / 2) / (s->height * 2.0f);
+		    CompOutput *o = &s->outputDev[zs->zoomOutput];
+
+		    zs->xTranslate =
+			((x - o->region.extents.x1) - o->width  / 2) /
+			(s->width  * 2.0f);
+		    zs->yTranslate =
+			((y - o->region.extents.y1) - o->height / 2) /
+			(s->height * 2.0f);
 
 		    zs->xTranslate /= zs->newZoom;
 		    zs->yTranslate /= zs->newZoom;
