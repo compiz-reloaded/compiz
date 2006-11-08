@@ -487,28 +487,14 @@ isSwitchWin (CompWindow *w)
     {
 	if (!w->mapNum || w->attrib.map_state != IsViewable)
 	{
-	    int x1, y1, x2, y2;
-
-	    getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
-
-	    if (w->serverX + w->width  <= x1 ||
-		w->serverY + w->height <= y1 ||
-		w->serverX >= x2	     ||
-		w->serverY >= y2)
+	    if (w->serverX + w->width  <= 0    ||
+		w->serverY + w->height <= 0    ||
+		w->serverX >= w->screen->width ||
+		w->serverY >= w->screen->height)
 		return FALSE;
 	}
 	else
 	{
-	    int x1, y1, x2, y2;
-
-	    getCurrentOutputExtents (w->screen, &x1, &y1, &x2, &y2);
-
-	    if (w->attrib.x + w->width  <= x1 ||
-		w->attrib.y + w->height <= y1 ||
-		w->attrib.x >= x2	      ||
-		w->attrib.y >= y2)
-		return FALSE;
-
 	    if (!(*w->screen->focusWindow) (w))
 		return FALSE;
 	}
