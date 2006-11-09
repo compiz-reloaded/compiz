@@ -384,6 +384,8 @@ updateOutputDevices (CompScreen	*s)
     damageScreen (s);
 
     s->clearBuffers = TRUE;
+
+    (*s->outputChangeNotify) (s);
 }
 
 CompOption *
@@ -1451,6 +1453,8 @@ addScreen (CompDisplay *display,
     s->windowUngrabNotify = windowUngrabNotify;
 
     s->windowStateChangeNotify = windowStateChangeNotify;
+
+    s->outputChangeNotify = outputChangeNotify;
 
     s->getProcAddress = 0;
 
@@ -3472,4 +3476,9 @@ setDefaultViewport (CompScreen *s)
 		s->height - s->outputDev->region.extents.y2,
 		s->outputDev->width,
 		s->outputDev->height);
+}
+
+void
+outputChangeNotify (CompScreen *s)
+{
 }

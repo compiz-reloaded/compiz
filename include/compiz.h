@@ -1315,6 +1315,8 @@ typedef void (*WindowUngrabNotifyProc) (CompWindow *window);
 
 typedef void (*WindowStateChangeNotifyProc) (CompWindow *window);
 
+typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
+
 #define COMP_SCREEN_DAMAGE_PENDING_MASK (1 << 0)
 #define COMP_SCREEN_DAMAGE_REGION_MASK  (1 << 1)
 #define COMP_SCREEN_DAMAGE_ALL_MASK     (1 << 2)
@@ -1563,6 +1565,8 @@ struct _CompScreen {
 
     WindowStateChangeNotifyProc windowStateChangeNotify;
 
+    OutputChangeNotifyProc outputChangeNotify;
+
     CompPrivate *privates;
 };
 
@@ -1772,6 +1776,9 @@ setCurrentDesktop (CompScreen   *s,
 
 void
 setDefaultViewport (CompScreen *s);
+
+void
+outputChangeNotify (CompScreen *s);
 
 
 /* window.c */
