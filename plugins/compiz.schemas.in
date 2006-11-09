@@ -11724,6 +11724,30 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/detect_outputs</key>
+            <applyto>/apps/compiz/general/screen0/options/detect_outputs</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Detect Outputs</short>
+                <long>Automatic detection of output devices</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/outputs</key>
+            <applyto>/apps/compiz/general/screen0/options/outputs</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>1280x800+0+0</default>
+            <locale name="C">
+                <short>Outputs</short>
+                <long>String describing output devices</long>
+            </locale>
+        </schema>
+
         <!-- decoration options -->
 
         <schema>
