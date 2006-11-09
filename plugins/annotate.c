@@ -181,7 +181,7 @@ annoInitiate (CompDisplay     *d,
 	if (cr)
 	{
 	    unsigned short *color;
-	    
+
 	    ANNO_DISPLAY (s->display);
 
 	    color = ad->opt[ANNO_DISPLAY_OPTION_COLOR].value.c;
