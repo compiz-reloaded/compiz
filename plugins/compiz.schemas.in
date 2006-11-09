@@ -24161,6 +24161,18 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/color</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/color</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>#ff0000ff</default>
+            <locale name="C">
+                <short>Annotate Color</short>
+                <long>Line color for annotations</long>
+            </locale>
+        </schema>
+
         <!-- rotate options -->
 
         <schema>
