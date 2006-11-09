@@ -160,27 +160,26 @@ cloneFinish (CompScreen *s)
 	    clone->dst = cs->dst;
 	}
     }
-    else if (cs->grabbedOutput != cs->dst)
+
+    if (cs->grabbedOutput != cs->dst)
     {
 	/* remove clone */
 	for (i = 0; i < cs->nClone; i++)
 	{
-	    if (cs->clone[i].dst == cs->grabbedOutput &&
-		cs->clone[i].src == cs->dst)
+	    if (cs->clone[i].dst == cs->grabbedOutput)
 	    {
 		clone = malloc (sizeof (CloneClone) * (cs->nClone - 1));
 		if (clone)
 		{
-		    int j;
+		    int j, k = 0;
 
 		    for (j = 0; j < cs->nClone; j++)
 			if (j != i)
-			    memcpy (&clone[j], &cs->clone[i++],
+			    memcpy (&clone[k++], &cs->clone[j],
 				    sizeof (CloneClone));
 
 		    XDestroyRegion (cs->clone[i].region);
-		    XDestroyWindow (s->display->display,
-				    cs->clone[i].input);
+		    XDestroyWindow (s->display->display, cs->clone[i].input);
 
 		    free (cs->clone);
 
