@@ -58,6 +58,7 @@ typedef struct _CloneScreen {
     DonePaintScreenProc	   donePaintScreen;
     PaintScreenProc	   paintScreen;
     PaintWindowProc	   paintWindow;
+    OutputChangeNotifyProc outputChangeNotify;
 
     int  grabIndex;
     Bool grab;
@@ -88,6 +89,33 @@ typedef struct _CloneScreen {
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
+static void
+cloneRemove (CompScreen *s,
+	     int	i)
+{
+    CloneClone *clone;
+
+    CLONE_SCREEN (s);
+
+    clone = malloc (sizeof (CloneClone) * (cs->nClone - 1));
+    if (clone)
+    {
+	int j, k = 0;
+
+	for (j = 0; j < cs->nClone; j++)
+	    if (j != i)
+		memcpy (&clone[k++], &cs->clone[j],
+			sizeof (CloneClone));
+
+	XDestroyRegion (cs->clone[i].region);
+	XDestroyWindow (s->display->display, cs->clone[i].input);
+
+	free (cs->clone);
+
+	cs->clone = clone;
+	cs->nClone--;
+    }
+}
 
 static void
 cloneFinish (CompScreen *s)
@@ -168,24 +196,7 @@ cloneFinish (CompScreen *s)
 	{
 	    if (cs->clone[i].dst == cs->grabbedOutput)
 	    {
-		clone = malloc (sizeof (CloneClone) * (cs->nClone - 1));
-		if (clone)
-		{
-		    int j, k = 0;
-
-		    for (j = 0; j < cs->nClone; j++)
-			if (j != i)
-			    memcpy (&clone[k++], &cs->clone[j],
-				    sizeof (CloneClone));
-
-		    XDestroyRegion (cs->clone[i].region);
-		    XDestroyWindow (s->display->display, cs->clone[i].input);
-
-		    free (cs->clone);
-
-		    cs->clone = clone;
-		    cs->nClone--;
-		}
+		cloneRemove (s, i);
 		break;
 	    }
 	}
@@ -637,6 +648,30 @@ cloneHandleEvent (CompDisplay *d,
     }
 }
 
+static void
+cloneOutputChangeNotify (CompScreen *s)
+{
+    int i;
+
+    CLONE_SCREEN (s);
+
+    /* remove clones with destination or source that doesn't exist */
+    for (i = 0; i < cs->nClone; i++)
+    {
+	if (cs->clone[i].dst >= s->nOutputDev ||
+	    cs->clone[i].src >= s->nOutputDev)
+	{
+	    cloneRemove (s, i);
+	    i = 0;
+	    continue;
+	}
+    }
+
+    UNWRAP (cs, s, outputChangeNotify);
+    (*s->outputChangeNotify) (s);
+    WRAP (cs, s, outputChangeNotify, cloneOutputChangeNotify);
+}
+
 static CompOption *
 cloneGetDisplayOptions (CompDisplay *display,
 			int	    *count)
@@ -761,6 +796,7 @@ cloneInitScreen (CompPlugin *p,
     WRAP (cs, s, donePaintScreen, cloneDonePaintScreen);
     WRAP (cs, s, paintScreen, clonePaintScreen);
     WRAP (cs, s, paintWindow, clonePaintWindow);
+    WRAP (cs, s, outputChangeNotify, cloneOutputChangeNotify);
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
@@ -777,6 +813,7 @@ cloneFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, donePaintScreen);
     UNWRAP (cs, s, paintScreen);
     UNWRAP (cs, s, paintWindow);
+    UNWRAP (cs, s, outputChangeNotify);
 
     free (cs);
 }
