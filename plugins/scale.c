@@ -1450,9 +1450,9 @@ scaleDamageWindowRect (CompWindow *w,
 
     if (initial)
     {
-	if (isScaleWin (w))
+	if (ss->grabIndex && isScaleWin (w))
 	{
-	    if (ss->grabIndex && layoutThumbs (w->screen))
+	    if (layoutThumbs (w->screen))
 	    {
 		ss->state = SCALE_STATE_OUT;
 		damageScreen (w->screen);
