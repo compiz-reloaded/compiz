@@ -471,7 +471,8 @@ fboEpilogue (CompScreen *s)
 
     s->rasterX = s->rasterY = 0;
 
-    glViewport (0, 0, s->width, s->height);
+    setDefaultViewport (s);
+
     glMatrixMode (GL_PROJECTION);
     glPopMatrix ();
     glMatrixMode (GL_MODELVIEW);
