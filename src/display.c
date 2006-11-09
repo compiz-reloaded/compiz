@@ -2065,6 +2065,12 @@ eventLoop (void)
 		    mask = s->damageMask;
 		    s->damageMask = 0;
 
+		    if (s->clearBuffers)
+		    {
+			glClear (GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+			s->clearBuffers = FALSE;
+		    }
+
 		    s->cleared = FALSE;
 
 		    for (i = 0; i < s->nOutputDev; i++)

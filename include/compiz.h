@@ -1160,7 +1160,9 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_DEFAULT_ICON        7
 #define COMP_SCREEN_OPTION_SYNC_TO_VBLANK      8
 #define COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS  9
-#define COMP_SCREEN_OPTION_NUM		       10
+#define COMP_SCREEN_OPTION_DETECT_OUTPUTS      10
+#define COMP_SCREEN_OPTION_OUTPUTS	       11
+#define COMP_SCREEN_OPTION_NUM		       12
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -1489,6 +1491,7 @@ struct _CompScreen {
     GLint stencilRef;
 
     Bool cleared;
+    Bool clearBuffers;
 
     Bool lighting;
     Bool slowAnimations;
@@ -1766,6 +1769,9 @@ setNumberOfDesktops (CompScreen   *s,
 void
 setCurrentDesktop (CompScreen   *s,
 		   unsigned int desktop);
+
+void
+setDefaultViewport (CompScreen *s);
 
 
 /* window.c */

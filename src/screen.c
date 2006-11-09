@@ -71,6 +71,10 @@
 #define SCREEN_NUMBER_OF_DESKTOPS_MIN     1
 #define SCREEN_NUMBER_OF_DESKTOPS_MAX     MAXSHORT
 
+#define DETECT_OUTPUTS_DEFAULT TRUE
+
+#define OUTPUTS_DEFAULT "640x480+0+0"
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -251,6 +255,107 @@ updateDefaultIcon (CompScreen *screen)
     return TRUE;
 }
 
+static char *
+parseFindNext (char *cur,
+	       char *delim,
+	       char *save,
+	       char *last)
+{
+    while (*cur && !strchr (delim, *cur))
+	*save++ = *cur++;
+
+    *save = 0;
+    *last = *cur;
+
+    if (*cur)
+	cur++;
+
+    return cur;
+}
+
+static void
+updateOutputDevices (CompScreen	*s)
+{
+    CompOutput	 *o, *output = NULL;
+    int		 nOutput = 0;
+    char	 delim;
+    char	 save[1024];
+    char	 *arg = s->opt[COMP_SCREEN_OPTION_OUTPUTS].value.s;
+    int		 x, y, i;
+    unsigned int width, height;
+
+    for (;;)
+    {
+	x      = 0;
+	y      = 0;
+	width  = s->width;
+	height = s->height;
+
+	arg = parseFindNext (arg, ",", save, &delim);
+	if (save[0])
+	{
+	    int	bits;
+
+	    bits = XParseGeometry (save, &x, &y, &width, &height);
+
+	    if (bits & XNegative)
+		x = s->width + x - width;
+
+	    if (bits & YNegative)
+		y = s->height + y - height;
+	}
+	else if (nOutput)
+	{
+	    break;
+	}
+
+	o = realloc (output, sizeof (CompOutput) * (nOutput + 1));
+	if (!o)
+	    break;
+
+	o[nOutput].name = malloc (sizeof (char) * 10);
+	if (o[nOutput].name)
+	    snprintf (o[nOutput].name, 10, "Output %d", nOutput);
+
+	o[nOutput].region.numRects = 1;
+
+	o[nOutput].region.extents.x1 = x;
+	o[nOutput].region.extents.y1 = y;
+	o[nOutput].region.extents.x2 = x + width;
+	o[nOutput].region.extents.y2 = y + height;
+
+	o[nOutput].width  = width;
+	o[nOutput].height = height;
+
+	output = o;
+	nOutput++;
+
+	if (delim != ',')
+	    break;
+    }
+
+    /* update rect pointers in all regions */
+    for (i = 0; i < nOutput; i++)
+	output[i].region.rects = &output[i].region.extents;
+
+    if (s->outputDev)
+    {
+	for (i = 0; i < s->nOutputDev; i++)
+	    if (s->outputDev[i].name)
+		free (s->outputDev[i].name);
+
+	free (s->outputDev);
+    }
+
+    s->outputDev  = output;
+    s->nOutputDev = nOutput;
+
+    setDefaultViewport (s);
+    damageScreen (s);
+
+    s->clearBuffers = TRUE;
+}
+
 CompOption *
 compGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -276,6 +381,7 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_LIGHTING:
     case COMP_SCREEN_OPTION_UNREDIRECT_FS:
     case COMP_SCREEN_OPTION_SYNC_TO_VBLANK:
+    case COMP_SCREEN_OPTION_DETECT_OUTPUTS:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -337,6 +443,16 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_DEFAULT_ICON:
 	if (compSetStringOption (o, value))
 	    return updateDefaultIcon (screen);
+	break;
+    case COMP_SCREEN_OPTION_OUTPUTS:
+	if (screen->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
+	    return FALSE;
+
+	if (compSetStringOption (o, value))
+	{
+	    updateOutputDevices (screen);
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -448,6 +564,22 @@ compScreenInitOptions (CompScreen *screen)
     o->value.i	      = SCREEN_NUMBER_OF_DESKTOPS_DEFAULT;
     o->rest.i.min     = SCREEN_NUMBER_OF_DESKTOPS_MIN;
     o->rest.i.max     = SCREEN_NUMBER_OF_DESKTOPS_MAX;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS];
+    o->name       = "detect_outputs";
+    o->shortDesc  = N_("Detect Outputs");
+    o->longDesc   = N_("Automatic detection of output devices");
+    o->type       = CompOptionTypeBool;
+    o->value.b    = DETECT_OUTPUTS_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_OUTPUTS];
+    o->name	      = "outputs";
+    o->shortDesc      = N_("Outputs");
+    o->longDesc	      = N_("String describing output devices");
+    o->type	      = CompOptionTypeString;
+    o->value.s	      = strdup (OUTPUTS_DEFAULT);
+    o->rest.s.string  = 0;
+    o->rest.s.nString = 0;
 }
 
 static void
@@ -647,75 +779,45 @@ perspective (GLfloat fovy,
 }
 
 static void
-updateOutputDevices (CompScreen *s)
+detectOutputDevices (CompScreen *s)
 {
-    CompOutput *output;
-    int	       nOutput, i;
-
-    if (s->display->screenInfo)
+    if (s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
     {
-	XineramaScreenInfo *screenInfo = s->display->screenInfo;
-	int		   nScreenInfo = s->display->nScreenInfo;
+	char		*name;
+	CompOptionValue	value;
+	char		outputs[1024];
+	int		size = sizeof (outputs);
 
-	output = malloc (sizeof (CompOutput) * nScreenInfo);
-	if (!output)
-	    return;
-
-	for (i = 0; i < nScreenInfo; i++)
+	if (s->display->nScreenInfo)
 	{
-	    output[i].name = malloc (sizeof (char) * 10);
-	    if (output[i].name)
-		snprintf (output[i].name, 10, "Output %d", i);
+	    char *o = outputs;
+	    int  i, n;
 
-	    output[i].region.rects    = &output[i].region.extents;
-	    output[i].region.numRects = 1;
+	    for (i = 0; i < s->display->nScreenInfo; i++)
+	    {
+		n = snprintf (o, size, "%s%dx%d+%d+%d", i ? "," : "",
+			      s->display->screenInfo[i].width,
+			      s->display->screenInfo[i].height,
+			      s->display->screenInfo[i].x_org,
+			      s->display->screenInfo[i].y_org);
 
-	    output[i].region.extents.x1 = screenInfo[i].x_org;
-	    output[i].region.extents.y1 = screenInfo[i].y_org;
-	    output[i].region.extents.x2 = screenInfo[i].x_org +
-		screenInfo[i].width;
-	    output[i].region.extents.y2 = screenInfo[i].y_org +
-		screenInfo[i].height;
-
-	    output[i].width  = screenInfo[i].width;
-	    output[i].height = screenInfo[i].height;
+		o    += n;
+		size -= n;
+	    }
+	}
+	else
+	{
+	    snprintf (outputs, size, "%dx%d+%d+%d", s->width, s->height, 0, 0);
 	}
 
-	nOutput = nScreenInfo;
+	value.s = outputs;
+
+	name = s->opt[COMP_SCREEN_OPTION_OUTPUTS].name;
+
+	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = FALSE;
+	(*s->setScreenOption) (s, name, &value);
+	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = TRUE;
     }
-    else
-    {
-	output = malloc (sizeof (CompOutput));
-	if (!output)
-	    return;
-
-	output->name = strdup ("Output 0");
-
-	output->region.rects    = &output->region.extents;
-	output->region.numRects = 1;
-
-	output->region.extents.x1 = 0;
-	output->region.extents.y1 = 0;
-	output->region.extents.x2 = s->attrib.width;
-	output->region.extents.y2 = s->attrib.height;
-
-	output->width  = s->attrib.width;
-	output->height = s->attrib.height;
-
-	nOutput = 1;
-    }
-
-    if (s->outputDev)
-    {
-	for (i = 0; i < s->nOutputDev; i++)
-	    if (s->outputDev->name)
-		free (s->outputDev->name);
-
-	free (s->outputDev);
-    }
-
-    s->outputDev  = output;
-    s->nOutputDev = nOutput;
 }
 
 void
@@ -743,7 +845,6 @@ reshape (CompScreen *s,
 
     s->rasterX = s->rasterY = 0;
 
-    glViewport (0, 0, w, h);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     perspective (60.0f, 1.0f, 0.1f, 100.0f);
@@ -1290,6 +1391,8 @@ addScreen (CompDisplay *display,
     s->desktopHintData = NULL;
     s->desktopHintSize = 0;
 
+    s->clearBuffers = TRUE;
+
     gettimeofday (&s->lastRedraw, 0);
 
     s->setScreenOption	        = setScreenOption;
@@ -1789,6 +1892,7 @@ addScreen (CompDisplay *display,
     screenInitPlugins (s);
 
     detectRefreshRateOfScreen (s);
+    detectOutputDevices (s);
 
     XQueryTree (dpy, s->root,
 		&rootReturn, &parentReturn,
@@ -3329,4 +3433,13 @@ getWorkareaForOutput (CompScreen *s,
     area->y      = y1;
     area->width  = x2 - x1;
     area->height = y2 - y1;
+}
+
+void
+setDefaultViewport (CompScreen *s)
+{
+    glViewport (s->outputDev->region.extents.x1,
+		s->height - s->outputDev->region.extents.y2,
+		s->outputDev->width,
+		s->outputDev->height);
 }
