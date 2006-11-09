@@ -346,7 +346,7 @@ cubeLoadImg (CompScreen *s,
 
     CUBE_SCREEN (s);
 
-    if (cs->nOutput != s->nOutputDev)
+    if (!cs->fullscreenOutput)
     {
 	pw = s->width;
 	ph = s->height;
@@ -510,10 +510,6 @@ cubeUpdateOutputs (CompScreen *s)
     {
 	cs->outputMask[i] = -1;
 
-	if (s->outputDev[i].width  != s->width ||
-	    s->outputDev[i].height != s->height)
-	    cs->fullscreenOutput = FALSE;
-
 	/* dimensions must match first output */
 	if (s->outputDev[i].width  != s->outputDev[0].width &&
 	    s->outputDev[i].height != s->outputDev[0].height)
@@ -543,6 +539,7 @@ cubeUpdateOutputs (CompScreen *s)
 
     if (k != s->nOutputDev)
     {
+	cs->fullscreenOutput = FALSE;
 	cs->nOutput = 1;
 	return;
     }
@@ -576,6 +573,13 @@ cubeUpdateOutputs (CompScreen *s)
     }
 
     cs->nOutput = j;
+
+    if (cs->nOutput == 1)
+    {
+	if (s->outputDev[0].width  != s->width ||
+	    s->outputDev[0].height != s->height)
+	    cs->fullscreenOutput = FALSE;
+    }
 }
 
 static CompOption *
