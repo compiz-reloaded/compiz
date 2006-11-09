@@ -2507,7 +2507,7 @@ updateWorkareaForScreen (CompScreen *s)
 
     for (w = s->windows; w; w = w->next)
     {
-	if (w->attrib.map_state == IsUnmapped)
+	if (!w->mapNum)
 	    continue;
 
 	if (w->struts)

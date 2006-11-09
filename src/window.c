@@ -1965,6 +1965,9 @@ mapWindow (CompWindow *w)
 
     w->mapNum = w->screen->mapNum++;
 
+    if (w->struts)
+	updateWorkareaForScreen (w->screen);
+
     if (w->attrib.class == InputOnly)
 	return;
 
@@ -1986,9 +1989,6 @@ mapWindow (CompWindow *w)
 
     if (w->frame)
 	XMapWindow (w->screen->display->display, w->frame);
-
-    if (w->struts)
-	updateWorkareaForScreen (w->screen);
 
     updateClientListForScreen (w->screen);
 
@@ -2033,6 +2033,9 @@ unmapWindow (CompWindow *w)
     if (w->unmapRefCnt > 0)
 	return;
 
+    if (w->struts)
+	updateWorkareaForScreen (w->screen);
+
     if (w->attrib.map_state != IsViewable)
 	return;
 
@@ -2052,9 +2055,6 @@ unmapWindow (CompWindow *w)
 		      w->attrib.x, w->attrib.y,
 		      w->attrib.width, ++w->attrib.height - 1,
 		      w->attrib.border_width);
-
-    if (w->struts)
-	updateWorkareaForScreen (w->screen);
 
     updateClientListForScreen (w->screen);
 }
