@@ -133,6 +133,7 @@ typedef struct _CubeScreen {
     ApplyScreenTransformProc   applyScreenTransform;
     PaintBackgroundProc	       paintBackground;
     SetScreenOptionProc	       setScreenOption;
+    OutputChangeNotifyProc     outputChangeNotify;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
@@ -1710,6 +1711,19 @@ cubePrevImage (CompDisplay     *d,
     return FALSE;
 }
 
+static void
+cubeOutputChangeNotify (CompScreen *s)
+{
+    CUBE_SCREEN (s);
+
+    cubeUpdateOutputs (s);
+    cubeUpdateGeometry (s, s->hsize, cs->invert);
+
+    UNWRAP (cs, s, outputChangeNotify);
+    (*s->outputChangeNotify) (s);
+    WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
+}
+
 static Bool
 cubeSetGlobalScreenOption (CompScreen      *s,
 			   char		   *name,
@@ -1938,6 +1952,7 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
+    WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
 
     cubeUpdateOutputs (s);
 
@@ -1969,6 +1984,7 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, applyScreenTransform);
     UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, setScreenOption);
+    UNWRAP (cs, s, outputChangeNotify);
 
     finiTexture (s, &cs->texture);
     finiTexture (s, &cs->sky);
