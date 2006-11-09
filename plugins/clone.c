@@ -517,6 +517,67 @@ cloneTerminate (CompDisplay     *d,
 }
 
 static void
+cloneSetStrutsForCloneWindow (CompScreen *s,
+			      CloneClone *clone)
+{
+    CompOutput *output = &s->outputDev[clone->dst];
+    XRectangle *rect = NULL;
+    CompStruts *struts;
+    CompWindow *w;
+
+    w = findWindowAtScreen (s, clone->input);
+    if (!w)
+	return;
+
+    struts = malloc (sizeof (CompStruts));
+    if (!struts)
+	return;
+
+    if (w->struts)
+	free (w->struts);
+
+    struts->left.x	= 0;
+    struts->left.y	= 0;
+    struts->left.width  = 0;
+    struts->left.height = s->height;
+
+    struts->right.x      = s->width;
+    struts->right.y      = 0;
+    struts->right.width  = 0;
+    struts->right.height = s->height;
+
+    struts->top.x      = 0;
+    struts->top.y      = 0;
+    struts->top.width  = s->width;
+    struts->top.height = 0;
+
+    struts->bottom.x      = 0;
+    struts->bottom.y      = s->height;
+    struts->bottom.width  = s->width;
+    struts->bottom.height = 0;
+
+    /* create struts relative to a screen edge that this output is next to */
+    if (output->region.extents.x1 == 0)
+	rect = &struts->left;
+    else if (output->region.extents.x2 == s->width)
+	rect = &struts->right;
+    else if (output->region.extents.y1 == 0)
+	rect = &struts->top;
+    else if (output->region.extents.y2 == s->height)
+	rect = &struts->bottom;
+
+    if (rect)
+    {
+	rect->x	     = output->region.extents.x1;
+	rect->y	     = output->region.extents.y1;
+	rect->width  = output->width;
+	rect->height = output->height;
+    }
+
+    w->struts = struts;
+}
+
+static void
 cloneHandleMotionEvent (CompScreen *s,
 			int	  xRoot,
 			int	  yRoot)
@@ -558,6 +619,23 @@ cloneHandleEvent (CompDisplay *d,
     UNWRAP (cd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (cd, d, handleEvent, cloneHandleEvent);
+
+    switch (event->type) {
+    case CreateNotify:
+	s = findScreenAtDisplay (d, event->xcreatewindow.parent);
+	if (s)
+	{
+	    int	i;
+
+	    CLONE_SCREEN (s);
+
+	    for (i = 0; i < cs->nClone; i++)
+		if (event->xcreatewindow.window == cs->clone[i].input)
+		    cloneSetStrutsForCloneWindow (s, &cs->clone[i]);
+	}
+    default:
+	break;
+    }
 }
 
 static CompOption *
