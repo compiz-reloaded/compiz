@@ -281,8 +281,9 @@ updateOutputDevices (CompScreen	*s)
     char	 delim;
     char	 save[1024];
     char	 *arg = s->opt[COMP_SCREEN_OPTION_OUTPUTS].value.s;
-    int		 x, y, i;
+    int		 x, y, i, bits;
     unsigned int width, height;
+    int		 x1, y1, x2, y2;
 
     for (;;)
     {
@@ -292,51 +293,80 @@ updateOutputDevices (CompScreen	*s)
 	height = s->height;
 
 	arg = parseFindNext (arg, ",", save, &delim);
-	if (save[0])
-	{
-	    int	bits;
-
-	    bits = XParseGeometry (save, &x, &y, &width, &height);
-
-	    if (bits & XNegative)
-		x = s->width + x - width;
-
-	    if (bits & YNegative)
-		y = s->height + y - height;
-	}
-	else if (nOutput)
-	{
-	    break;
-	}
-
-	o = realloc (output, sizeof (CompOutput) * (nOutput + 1));
-	if (!o)
+	if (!save[0])
 	    break;
 
-	o[nOutput].name = malloc (sizeof (char) * 10);
-	if (o[nOutput].name)
-	    snprintf (o[nOutput].name, 10, "Output %d", nOutput);
+	bits = XParseGeometry (save, &x, &y, &width, &height);
 
-	o[nOutput].region.numRects = 1;
+	if (bits & XNegative)
+	    x = s->width + x - width;
 
-	o[nOutput].region.extents.x1 = x;
-	o[nOutput].region.extents.y1 = y;
-	o[nOutput].region.extents.x2 = x + width;
-	o[nOutput].region.extents.y2 = y + height;
+	if (bits & YNegative)
+	    y = s->height + y - height;
 
-	o[nOutput].width  = width;
-	o[nOutput].height = height;
+	x1 = x;
+	y1 = y;
+	x2 = x + width;
+	y2 = y + height;
 
-	output = o;
-	nOutput++;
+	if (x1 < 0)
+	    x1 = 0;
+	if (y1 < 0)
+	    y1 = 0;
+	if (x2 > s->width)
+	    x2 = s->width;
+	if (y2 > s->height)
+	    y2 = s->height;
+
+	if (x1 < x2 && y1 < y2)
+	{
+	    o = realloc (output, sizeof (CompOutput) * (nOutput + 1));
+	    if (o)
+	    {
+		o[nOutput].region.extents.x1 = x1;
+		o[nOutput].region.extents.y1 = y1;
+		o[nOutput].region.extents.x2 = x2;
+		o[nOutput].region.extents.y2 = y2;
+
+		output = o;
+		nOutput++;
+	    }
+	}
 
 	if (delim != ',')
 	    break;
     }
 
-    /* update rect pointers in all regions */
+    /* make sure we have at least one output */
+    if (!nOutput)
+    {
+	output = malloc (sizeof (CompOutput));
+	if (!output)
+	    return;
+
+	output->region.extents.x1 = 0;
+	output->region.extents.y1 = 0;
+	output->region.extents.x2 = s->width;
+	output->region.extents.y2 = s->height;
+
+	nOutput = 1;
+    }
+
+    /* set name, width, height and update rect pointers in all regions */
     for (i = 0; i < nOutput; i++)
+    {
+	output[i].name = malloc (sizeof (char) * 10);
+	if (output[i].name)
+	    snprintf (output[i].name, 10, "Output %d", nOutput);
+
 	output[i].region.rects = &output[i].region.extents;
+	output[i].region.numRects = 1;
+
+	output[i].width  = output[i].region.extents.x2 -
+	    output[i].region.extents.x1;
+	output[i].height = output[i].region.extents.y2 -
+	    output[i].region.extents.y1;
+    }
 
     if (s->outputDev)
     {
