@@ -1723,6 +1723,9 @@ cubeOutputChangeNotify (CompScreen *s)
     cubeUpdateOutputs (s);
     cubeUpdateGeometry (s, s->hsize, cs->invert);
 
+    if (cs->imgNFile)
+	cubeLoadImg (s, cs->imgCurFile);
+
     UNWRAP (cs, s, outputChangeNotify);
     (*s->outputChangeNotify) (s);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
