@@ -3201,8 +3201,10 @@ leaveShowDesktopMode (CompScreen *s,
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    w->inShowDesktopMode = FALSE;
+	    if (!w->inShowDesktopMode)
+		continue;
 
+	    w->inShowDesktopMode = FALSE;
 	    showWindow (w);
 	}
     }

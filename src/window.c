@@ -2422,6 +2422,9 @@ focusWindow (CompWindow *w)
     if (w->attrib.override_redirect)
 	return FALSE;
 
+    if (!w->managed)
+	return FALSE;
+
     if (!onCurrentDesktop (w))
 	return FALSE;
 
