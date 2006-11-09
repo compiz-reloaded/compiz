@@ -170,6 +170,8 @@ typedef struct _CubeScreen {
     int output[64];
     int outputMask[64];
 
+    Bool fullscreenOutput;
+
     float outputXScale;
     float outputYScale;
     float outputXOffset;
@@ -501,9 +503,15 @@ cubeUpdateOutputs (CompScreen *s)
 
     k = 0;
 
+    cs->fullscreenOutput = TRUE;
+
     for (i = 0; i < s->nOutputDev; i++)
     {
 	cs->outputMask[i] = -1;
+
+	if (s->outputDev[i].width  != s->width &&
+	    s->outputDev[i].height != s->height)
+	    cs->fullscreenOutput = FALSE;
 
 	/* dimensions must match first output */
 	if (s->outputDev[i].width  != s->outputDev[0].width &&
@@ -1261,7 +1269,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     hsize = s->hsize * cs->nOutput;
     size  = hsize;
 
-    if (cs->nOutput != s->nOutputDev)
+    if (!cs->fullscreenOutput)
     {
 	cs->outputXScale = (float) s->width / s->outputDev[output].width;
 	cs->outputYScale = (float) s->height / s->outputDev[output].height;
@@ -1913,6 +1921,8 @@ cubeInitScreen (CompPlugin *p,
     cs->unfold   = 0.0f;
 
     cs->unfoldVelocity = 0.0f;
+
+    cs->fullscreenOutput = TRUE;
 
     cubeScreenInitOptions (cs, s->display->display);
 
