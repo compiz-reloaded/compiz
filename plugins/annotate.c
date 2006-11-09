@@ -37,6 +37,10 @@
 #define ANNO_CLEAR_KEY_DEFAULT	         "k"
 #define ANNO_CLEAR_KEY_MODIFIERS_DEFAULT (CompSuperMask | CompAltMask)
 
+#define ANNO_COLOR_RED_DEFAULT   0xffff
+#define ANNO_COLOR_GREEN_DEFAULT 0x0000
+#define ANNO_COLOR_BLUE_DEFAULT  0x0000
+
 static int displayPrivateIndex;
 
 static int annoLastPointerX = 0;
@@ -45,7 +49,8 @@ static int annoLastPointerY = 0;
 #define ANNO_DISPLAY_OPTION_INITIATE 0
 #define ANNO_DISPLAY_OPTION_ERASE    1
 #define ANNO_DISPLAY_OPTION_CLEAR    2
-#define ANNO_DISPLAY_OPTION_NUM	     3
+#define ANNO_DISPLAY_OPTION_COLOR    3
+#define ANNO_DISPLAY_OPTION_NUM	     4
 
 typedef struct _AnnoDisplay {
     int		    screenPrivateIndex;
@@ -175,8 +180,17 @@ annoInitiate (CompDisplay     *d,
 	cr = annoCairoContext (s);
 	if (cr)
 	{
+	    unsigned short *color;
+	    
+	    ANNO_DISPLAY (s->display);
+
+	    color = ad->opt[ANNO_DISPLAY_OPTION_COLOR].value.c;
+
 	    cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
-	    cairo_set_source_rgba (cr, 1.0, 0.0, 0.0, 1.0);
+	    cairo_set_source_rgb (cr,
+				  (double) color[0] / 0xffff,
+				  (double) color[1] / 0xffff,
+				  (double) color[2] / 0xffff);
 	    cairo_set_line_width (cr, 4.0);
 	    cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
 	}
@@ -482,6 +496,16 @@ annoDisplayInitOptions (AnnoDisplay *ad,
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (ANNO_CLEAR_KEY_DEFAULT));
+
+    o             = &ad->opt[ANNO_DISPLAY_OPTION_COLOR];
+    o->name       = "color";
+    o->shortDesc  = N_("Annotate Color");
+    o->longDesc   = N_("Line color for annotations");
+    o->type       = CompOptionTypeColor;
+    o->value.c[0] = ANNO_COLOR_RED_DEFAULT;
+    o->value.c[1] = ANNO_COLOR_GREEN_DEFAULT;
+    o->value.c[2] = ANNO_COLOR_BLUE_DEFAULT;
+    o->value.c[3] = 0xffff;
 }
 
 static CompOption *
@@ -513,6 +537,10 @@ annoSetDisplayOption (CompDisplay    *display,
     case ANNO_DISPLAY_OPTION_ERASE:
     case ANNO_DISPLAY_OPTION_CLEAR:
 	if (setDisplayAction (display, o, value))
+	    return TRUE;
+	break;
+    case ANNO_DISPLAY_OPTION_COLOR:
+	if (compSetColorOption (o, value))
 	    return TRUE;
     default:
 	break;
