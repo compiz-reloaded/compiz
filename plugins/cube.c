@@ -510,7 +510,7 @@ cubeUpdateOutputs (CompScreen *s)
     {
 	cs->outputMask[i] = -1;
 
-	if (s->outputDev[i].width  != s->width &&
+	if (s->outputDev[i].width  != s->width ||
 	    s->outputDev[i].height != s->height)
 	    cs->fullscreenOutput = FALSE;
 
