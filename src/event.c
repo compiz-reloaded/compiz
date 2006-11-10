@@ -1392,7 +1392,7 @@ handleEvent (CompDisplay *d,
 	else if (event->xproperty.atom == d->winStateAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
-	    if (w)
+	    if (w && !w->managed)
 	    {
 		unsigned int state;
 
