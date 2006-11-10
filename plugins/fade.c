@@ -73,7 +73,6 @@ typedef struct _FadeDisplay {
 typedef struct _FadeScreen {
     int			   windowPrivateIndex;
     int			   fadeTime;
-    int			   steps;
 
     CompOption opt[FADE_SCREEN_OPTION_NUM];
 
@@ -97,6 +96,8 @@ typedef struct _FadeWindow {
     int unmapCnt;
 
     Bool shaded;
+
+    int steps;
 } FadeWindow;
 
 #define GET_FADE_DISPLAY(d)				     \
@@ -222,11 +223,17 @@ static void
 fadePreparePaintScreen (CompScreen *s,
 			int	   msSinceLastPaint)
 {
+    CompWindow *w;
+    int	       steps;
+
     FADE_SCREEN (s);
 
-    fs->steps = (msSinceLastPaint * OPAQUE) / fs->fadeTime;
-    if (fs->steps < 12)
-	fs->steps = 12;
+    steps = (msSinceLastPaint * OPAQUE) / fs->fadeTime;
+    if (steps < 12)
+	steps = 12;
+
+    for (w = s->windows; w; w = w->next)
+	GET_FADE_WINDOW (w, fs)->steps = steps;
 
     UNWRAP (fs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
@@ -277,16 +284,16 @@ fadePaintWindow (CompWindow		 *w,
 	opacity = fw->opacity;
 	if (attrib->opacity > fw->opacity)
 	{
-	    opacity = fw->opacity + fs->steps;
+	    opacity = fw->opacity + fw->steps;
 	    if (opacity > attrib->opacity)
 		opacity = attrib->opacity;
 	}
 	else if (attrib->opacity < fw->opacity)
 	{
 	    if (w->type & CompWindowTypeUnknownMask)
-		opacity = fw->opacity - (fs->steps >> 1);
+		opacity = fw->opacity - (fw->steps >> 1);
 	    else
-		opacity = fw->opacity - fs->steps;
+		opacity = fw->opacity - fw->steps;
 
 	    if (opacity < attrib->opacity)
 		opacity = attrib->opacity;
@@ -295,13 +302,13 @@ fadePaintWindow (CompWindow		 *w,
 	brightness = fw->brightness;
 	if (attrib->brightness > fw->brightness)
 	{
-	    brightness = fw->brightness + (fs->steps / 12);
+	    brightness = fw->brightness + (fw->steps / 12);
 	    if (brightness > attrib->brightness)
 		brightness = attrib->brightness;
 	}
 	else if (attrib->brightness < fw->brightness)
 	{
-	    brightness = fw->brightness - (fs->steps / 12);
+	    brightness = fw->brightness - (fw->steps / 12);
 	    if (brightness < attrib->brightness)
 		brightness = attrib->brightness;
 	}
@@ -309,13 +316,13 @@ fadePaintWindow (CompWindow		 *w,
 	saturation = fw->saturation;
 	if (attrib->saturation > fw->saturation)
 	{
-	    saturation = fw->saturation + (fs->steps / 6);
+	    saturation = fw->saturation + (fw->steps / 6);
 	    if (saturation > attrib->saturation)
 		saturation = attrib->saturation;
 	}
 	else if (attrib->saturation < fw->saturation)
 	{
-	    saturation = fw->saturation - (fs->steps / 6);
+	    saturation = fw->saturation - (fw->steps / 6);
 	    if (saturation < attrib->saturation)
 		saturation = attrib->saturation;
 	}
@@ -337,6 +344,7 @@ fadePaintWindow (CompWindow		 *w,
 		fw->opacity    = opacity;
 		fw->brightness = brightness;
 		fw->saturation = saturation;
+		fw->steps      = 0;
 
 		if (opacity    != attrib->opacity    ||
 		    brightness != attrib->brightness ||
@@ -712,7 +720,6 @@ fadeInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
-    fs->steps    = 0;
     fs->fadeTime = 1000.0f / FADE_SPEED_DEFAULT;
 
     fadeScreenInitOptions (fs);
