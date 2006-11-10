@@ -511,7 +511,7 @@ cubeUpdateOutputs (CompScreen *s)
 	cs->outputMask[i] = -1;
 
 	/* dimensions must match first output */
-	if (s->outputDev[i].width  != s->outputDev[0].width &&
+	if (s->outputDev[i].width  != s->outputDev[0].width ||
 	    s->outputDev[i].height != s->outputDev[0].height)
 	    continue;
 
