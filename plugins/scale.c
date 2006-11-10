@@ -960,7 +960,7 @@ scalePreparePaintScreen (CompScreen *s,
 
 		    (*s->setWindowScale) (w, sw->scale, sw->scale);
 
-		    if (!sw->adjust)
+		    if (!sw->adjust && ss->state == SCALE_STATE_IN)
 			syncWindowPosition (w);
 		}
 	    }
