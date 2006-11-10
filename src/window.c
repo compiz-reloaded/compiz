@@ -748,8 +748,6 @@ recalcWindowType (CompWindow *w)
     {
 	w->type = type;
 	recalcWindowActions (w);
-	if (w->type & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
-	    setDesktopForWindow (w, 0xffffffff);
     }
 }
 
@@ -1833,6 +1831,10 @@ addWindow (CompScreen *screen,
 	if (!w->attrib.override_redirect)
 	{
 	    w->managed = TRUE;
+
+	    if (w->wmType & (CompWindowTypeDockMask |
+			     CompWindowTypeDesktopMask))
+		setDesktopForWindow (w, 0xffffffff);
 
 	    if (w->desktop != 0xffffffff)
 		w->desktop = w->screen->currentDesktop;

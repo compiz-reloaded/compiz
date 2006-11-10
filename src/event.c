@@ -1381,6 +1381,10 @@ handleEvent (CompDisplay *d,
 		    if (w->type & CompWindowTypeDesktopMask)
 			w->paint.opacity = OPAQUE;
 
+		    if (type & (CompWindowTypeDockMask |
+				CompWindowTypeDesktopMask))
+			setDesktopForWindow (w, 0xffffffff);
+
 		    updateClientListForScreen (w->screen);
 		}
 	    }
