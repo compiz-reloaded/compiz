@@ -610,6 +610,13 @@ recalcWindowActions (CompWindow *w)
 	break;
     }
 
+    switch (w->wmType) {
+    case CompWindowTypeNormalMask:
+	actions |= CompWindowActionFullscreenMask;
+    default:
+	break;
+    }
+
     if (w->sizeHints.min_width  == w->sizeHints.max_width &&
 	w->sizeHints.min_height == w->sizeHints.max_height)
 	actions &= ~(CompWindowActionResizeMask	      |
