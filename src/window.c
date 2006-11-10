@@ -748,6 +748,8 @@ recalcWindowType (CompWindow *w)
     {
 	w->type = type;
 	recalcWindowActions (w);
+	if (w->type & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
+	    setDesktopForWindow (w, 0xffffffff);
     }
 }
 
@@ -1829,10 +1831,16 @@ addWindow (CompScreen *screen,
 	w->attrib.map_state = IsUnmapped;
 
 	if (!w->attrib.override_redirect)
+	{
 	    w->managed = TRUE;
 
-	if (w->desktop != 0xffffffff)
-	    w->desktop = w->screen->currentDesktop;
+	    if (w->desktop != 0xffffffff)
+		w->desktop = w->screen->currentDesktop;
+
+	    setWindowProp (w->screen->display, w->id,
+			   w->screen->display->winDesktopAtom,
+			   w->desktop);
+	}
 
 	mapWindow (w);
 
@@ -3793,6 +3801,9 @@ hideWindow (CompWindow *w)
 {
     Bool onDesktop = onCurrentDesktop (w);
 
+    if (!w->managed)
+	return;
+
     if (!w->minimized && !w->inShowDesktopMode && !w->hidden && onDesktop)
     {
 	if (w->state & CompWindowStateShadedMask)
@@ -3836,6 +3847,9 @@ void
 showWindow (CompWindow *w)
 {
     Bool onDesktop = onCurrentDesktop (w);
+
+    if (!w->managed)
+	return;
 
     if (w->minimized || w->inShowDesktopMode || w->hidden || !onDesktop)
     {
