@@ -405,6 +405,9 @@ isScaleWin (CompWindow *w)
     if (!(ss->wMask & w->type))
 	return FALSE;
 
+    if (w->wmType & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
+	return FALSE;
+
     if (w->state & CompWindowStateSkipPagerMask)
 	return FALSE;
 
