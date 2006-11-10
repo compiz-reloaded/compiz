@@ -402,6 +402,9 @@ isScaleWin (CompWindow *w)
 	    return FALSE;
     }
 
+    if (w->attrib.override_redirect)
+	return FALSE;
+
     if (!(ss->wMask & w->type))
 	return FALSE;
 
