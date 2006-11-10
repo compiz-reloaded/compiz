@@ -3120,8 +3120,8 @@ addWindowSizeChanges (CompWindow     *w,
     {
 	if (w->type & CompWindowTypeFullscreenMask)
 	{
-	    xwc->x = x;
-	    xwc->y = y;
+	    xwc->x = x + w->screen->outputDev[output].region.extents.x1;
+	    xwc->y = y + w->screen->outputDev[output].region.extents.y1;
 
 	    mask |= CWX | CWY;
 	}
