@@ -1397,6 +1397,7 @@ handleEvent (CompDisplay *d,
 		unsigned int state;
 
 		state = getWindowState (d, w->id);
+		state = constrainWindowState (state, w->actions);
 
 		if (state != w->state)
 		{
