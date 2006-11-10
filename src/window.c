@@ -3306,6 +3306,9 @@ moveResizeWindow (CompWindow     *w,
 	    min = w->screen->workArea.y + w->input.top;
 	    max = w->screen->workArea.y + w->screen->workArea.height;
 
+	    min -= w->screen->y * w->screen->height;
+	    max += (w->screen->vsize - w->screen->y - 1) * w->screen->height;
+
 	    if (xwc->y < min)
 		xwc->y = min;
 	    else if (xwc->y > max)
@@ -3318,6 +3321,9 @@ moveResizeWindow (CompWindow     *w,
 
 	    min = w->screen->workArea.x + w->input.left;
 	    max = w->screen->workArea.x + w->screen->workArea.width;
+
+	    min -= w->screen->x * w->screen->width;
+	    max += (w->screen->hsize - w->screen->x - 1) * w->screen->width;
 
 	    if (xwc->x < min)
 		xwc->x = min;
