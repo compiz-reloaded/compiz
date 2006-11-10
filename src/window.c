@@ -3362,6 +3362,9 @@ updateWindowSize (CompWindow *w)
     XWindowChanges xwc;
     int		   mask;
 
+    if (w->attrib.override_redirect || !w->managed)
+	return;
+
     mask = addWindowSizeChanges (w, &xwc,
 				 w->attrib.x, w->attrib.y,
 				 w->serverWidth, w->serverHeight,
