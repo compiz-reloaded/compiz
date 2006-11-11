@@ -396,6 +396,48 @@ updateOutputDevices (CompScreen	*s)
     (*s->outputChangeNotify) (s);
 }
 
+static void
+detectOutputDevices (CompScreen *s)
+{
+    if (s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
+    {
+	char		*name;
+	CompOptionValue	value;
+	char		outputs[1024];
+	int		size = sizeof (outputs);
+
+	if (s->display->nScreenInfo)
+	{
+	    char *o = outputs;
+	    int  i, n;
+
+	    for (i = 0; i < s->display->nScreenInfo; i++)
+	    {
+		n = snprintf (o, size, "%s%dx%d+%d+%d", i ? "," : "",
+			      s->display->screenInfo[i].width,
+			      s->display->screenInfo[i].height,
+			      s->display->screenInfo[i].x_org,
+			      s->display->screenInfo[i].y_org);
+
+		o    += n;
+		size -= n;
+	    }
+	}
+	else
+	{
+	    snprintf (outputs, size, "%dx%d+%d+%d", s->width, s->height, 0, 0);
+	}
+
+	value.s = outputs;
+
+	name = s->opt[COMP_SCREEN_OPTION_OUTPUTS].name;
+
+	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = FALSE;
+	(*s->setScreenOption) (s, name, &value);
+	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = TRUE;
+    }
+}
+
 CompOption *
 compGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -417,13 +459,29 @@ setScreenOption (CompScreen      *screen,
 	return FALSE;
 
     switch (index) {
-    case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
     case COMP_SCREEN_OPTION_LIGHTING:
     case COMP_SCREEN_OPTION_UNREDIRECT_FS:
     case COMP_SCREEN_OPTION_SYNC_TO_VBLANK:
-    case COMP_SCREEN_OPTION_DETECT_OUTPUTS:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
+	break;
+    case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
+	if (compSetBoolOption (o, value))
+	{
+	    if (value->b)
+		detectRefreshRateOfScreen (screen);
+
+	    return TRUE;
+	}
+	break;
+    case COMP_SCREEN_OPTION_DETECT_OUTPUTS:
+	if (compSetBoolOption (o, value))
+	{
+	    if (value->b)
+		detectOutputDevices (screen);
+
+	    return TRUE;
+	}
 	break;
     case COMP_SCREEN_OPTION_REFRESH_RATE:
 	if (screen->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b)
@@ -816,48 +874,6 @@ perspective (GLfloat fovy,
    xmax = ymax * aspect;
 
    frustum (xmin, xmax, ymin, ymax, zNear, zFar);
-}
-
-static void
-detectOutputDevices (CompScreen *s)
-{
-    if (s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
-    {
-	char		*name;
-	CompOptionValue	value;
-	char		outputs[1024];
-	int		size = sizeof (outputs);
-
-	if (s->display->nScreenInfo)
-	{
-	    char *o = outputs;
-	    int  i, n;
-
-	    for (i = 0; i < s->display->nScreenInfo; i++)
-	    {
-		n = snprintf (o, size, "%s%dx%d+%d+%d", i ? "," : "",
-			      s->display->screenInfo[i].width,
-			      s->display->screenInfo[i].height,
-			      s->display->screenInfo[i].x_org,
-			      s->display->screenInfo[i].y_org);
-
-		o    += n;
-		size -= n;
-	    }
-	}
-	else
-	{
-	    snprintf (outputs, size, "%dx%d+%d+%d", s->width, s->height, 0, 0);
-	}
-
-	value.s = outputs;
-
-	name = s->opt[COMP_SCREEN_OPTION_OUTPUTS].name;
-
-	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = FALSE;
-	(*s->setScreenOption) (s, name, &value);
-	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = TRUE;
-    }
 }
 
 void
