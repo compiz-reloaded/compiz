@@ -1385,10 +1385,11 @@ struct _CompIcon {
 };
 
 typedef struct _CompOutput {
-    char   *name;
-    REGION region;
-    int    width;
-    int    height;
+    char       *name;
+    REGION     region;
+    int        width;
+    int        height;
+    XRectangle workArea;
 } CompOutput;
 
 struct _CompScreen {

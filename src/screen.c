@@ -366,6 +366,12 @@ updateOutputDevices (CompScreen	*s)
 	    output[i].region.extents.x1;
 	output[i].height = output[i].region.extents.y2 -
 	    output[i].region.extents.y1;
+
+	output[i].workArea.x      = output[i].region.extents.x1;
+	output[i].workArea.y      = output[i].region.extents.x1;
+	output[i].workArea.width  = output[i].width;
+	output[i].workArea.height = output[i].height;
+
     }
 
     if (s->outputDev)
@@ -379,6 +385,8 @@ updateOutputDevices (CompScreen	*s)
 
     s->outputDev  = output;
     s->nOutputDev = nOutput;
+
+    updateWorkareaForScreen (s);
 
     setDefaultViewport (s);
     damageScreen (s);
@@ -898,7 +906,6 @@ reshape (CompScreen *s,
     setCurrentOutput (s, s->currentOutputDev);
 
     updateScreenEdges (s);
-    updateWorkareaForScreen (s);
 }
 
 void
@@ -2631,17 +2638,19 @@ updatePassiveGrabs (CompScreen *s)
     updatePassiveKeyGrabs (s);
 }
 
-void
-updateWorkareaForScreen (CompScreen *s)
+static void
+computeWorkareaForBox (CompScreen *s,
+		       BoxPtr     pBox,
+		       XRectangle *area)
 {
     CompWindow *w;
-    int	       leftStrut, rightStrut, topStrut, bottomStrut;
-    XRectangle workArea;
+    int	       x1, y1, x2, y2;
+    int	       strutX1, strutY1, strutX2, strutY2;
 
-    leftStrut   = 0;
-    rightStrut  = 0;
-    topStrut    = 0;
-    bottomStrut = 0;
+    strutX1 = pBox->x1;
+    strutY1 = pBox->y1;
+    strutX2 = pBox->x2;
+    strutY2 = pBox->y2;
 
     for (w = s->windows; w; w = w->next)
     {
@@ -2650,38 +2659,76 @@ updateWorkareaForScreen (CompScreen *s)
 
 	if (w->struts)
 	{
-	    if (w->struts->left.width > leftStrut)
-		leftStrut = w->struts->left.width;
+	    x1 = w->struts->left.x;
+	    y1 = w->struts->left.y;
+	    x2 = x1 + w->struts->left.width;
+	    y2 = y1 + w->struts->left.height;
 
-	    if (w->struts->right.width > rightStrut)
-		rightStrut = w->struts->right.width;
+	    if (y1 < pBox->y2 && y2 > pBox->y1)
+	    {
+		if (x2 > strutX1)
+		    strutX1 = x2;
+	    }
 
-	    if (w->struts->top.height > topStrut)
-		topStrut = w->struts->top.height;
+	    x1 = w->struts->right.x;
+	    y1 = w->struts->right.y;
+	    x2 = x1 + w->struts->right.width;
+	    y2 = y1 + w->struts->right.height;
 
-	    if (w->struts->bottom.height > bottomStrut)
-		bottomStrut = w->struts->bottom.height;
+	    if (y1 < pBox->y2 && y2 > pBox->y1)
+	    {
+		if (x1 < strutX2)
+		    strutX2 = x1;
+	    }
+
+	    x1 = w->struts->top.x;
+	    y1 = w->struts->top.y;
+	    x2 = x1 + w->struts->top.width;
+	    y2 = y1 + w->struts->top.height;
+
+	    if (x1 < pBox->x2 && x2 > pBox->x1)
+	    {
+		if (y2 > strutY1)
+		    strutY1 = y2;
+	    }
+
+	    x1 = w->struts->bottom.x;
+	    y1 = w->struts->bottom.y;
+	    x2 = x1 + w->struts->bottom.width;
+	    y2 = y1 + w->struts->bottom.height;
+
+	    if (x1 < pBox->x2 && x2 > pBox->x1)
+	    {
+		if (y1 > strutY2)
+		    strutY2 = y1;
+	    }
 	}
     }
 
-#define MIN_SANE_AREA 100
+    area->x      = strutX1;
+    area->y      = strutY1;
+    area->width  = strutX2 - strutX1;
+    area->height = strutY2 - strutY1;
+}
 
-    if ((leftStrut + rightStrut) > (s->width - MIN_SANE_AREA))
-    {
-	leftStrut  = (s->width - MIN_SANE_AREA) / 2;
-	rightStrut = leftStrut;
-    }
+void
+updateWorkareaForScreen (CompScreen *s)
+{
+    XRectangle workArea;
+    BoxRec     box;
+    int        i;
 
-    if ((topStrut + bottomStrut) > (s->height - MIN_SANE_AREA))
-    {
-	topStrut    = (s->height - MIN_SANE_AREA) / 2;
-	bottomStrut = topStrut;
-    }
+    for (i = 0; i < s->nOutputDev; i++)
+	computeWorkareaForBox (s,
+			       &s->outputDev[i].region.extents,
+			       &s->outputDev[i].workArea);
 
-    workArea.x      = leftStrut;
-    workArea.y      = topStrut;
-    workArea.width  = s->width  - leftStrut - rightStrut;
-    workArea.height = s->height - topStrut  - bottomStrut;
+    box.x1 = 0;
+    box.y1 = 0;
+    box.x2 = s->width;
+    box.y2 = s->height;
+
+    computeWorkareaForBox (s, &box, &workArea);
 
     if (memcmp (&workArea, &s->workArea, sizeof (XRectangle)))
     {
@@ -3443,32 +3490,7 @@ getWorkareaForOutput (CompScreen *s,
 		      int	 output,
 		      XRectangle *area)
 {
-    int x1, y1, x2, y2;
-    int oX1, oY1, oX2, oY2;
-
-    x1 = s->workArea.x;
-    y1 = s->workArea.y;
-    x2 = x1 + s->workArea.width;
-    y2 = y1 + s->workArea.height;
-
-    oX1 = s->outputDev[output].region.extents.x1;
-    oY1 = s->outputDev[output].region.extents.y1;
-    oX2 = s->outputDev[output].region.extents.x2;
-    oY2 = s->outputDev[output].region.extents.y2;
-
-    if (x1 < oX1)
-	x1 = oX1;
-    if (y1 < oY1)
-	y1 = oY1;
-    if (x2 > oX2)
-	x2 = oX2;
-    if (y2 > oY2)
-	y2 = oY2;
-
-    area->x      = x1;
-    area->y      = y1;
-    area->width  = x2 - x1;
-    area->height = y2 - y1;
+    *area = s->outputDev[output].workArea;
 }
 
 void
