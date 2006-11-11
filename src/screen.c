@@ -386,6 +386,8 @@ updateOutputDevices (CompScreen	*s)
     s->outputDev  = output;
     s->nOutputDev = nOutput;
 
+    setCurrentOutput (s, s->currentOutputDev);
+
     updateWorkareaForScreen (s);
 
     setDefaultViewport (s);
