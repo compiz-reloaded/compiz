@@ -917,10 +917,6 @@ reshape (CompScreen *s,
     s->width  = w;
     s->height = h;
 
-    updateOutputDevices (s);
-
-    setCurrentOutput (s, s->currentOutputDev);
-
     updateScreenEdges (s);
 }
 
@@ -935,6 +931,9 @@ configureScreen (CompScreen	 *s,
 	s->attrib.height = ce->height;
 
 	reshape (s, ce->width, ce->height);
+
+	updateOutputDevices (s);
+	setCurrentOutput (s, s->currentOutputDev);
 
 	damageScreen (s);
     }
