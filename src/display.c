@@ -2071,8 +2071,6 @@ eventLoop (void)
 			s->clearBuffers = FALSE;
 		    }
 
-		    s->cleared = FALSE;
-
 		    for (i = 0; i < s->nOutputDev; i++)
 		    {
 			if (s->nOutputDev > 1)

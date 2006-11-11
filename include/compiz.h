@@ -1494,7 +1494,6 @@ struct _CompScreen {
 
     GLint stencilRef;
 
-    Bool cleared;
     Bool clearBuffers;
 
     Bool lighting;
