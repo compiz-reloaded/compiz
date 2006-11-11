@@ -933,7 +933,6 @@ configureScreen (CompScreen	 *s,
 	reshape (s, ce->width, ce->height);
 
 	updateOutputDevices (s);
-	setCurrentOutput (s, s->currentOutputDev);
 
 	damageScreen (s);
     }
@@ -1927,6 +1926,9 @@ addScreen (CompDisplay *display,
 
     reshape (s, s->attrib.width, s->attrib.height);
 
+    detectRefreshRateOfScreen (s);
+    detectOutputDevices (s);
+
     glLightModelfv (GL_LIGHT_MODEL_AMBIENT, globalAmbient);
 
     glEnable (GL_LIGHT0);
@@ -1946,9 +1948,6 @@ addScreen (CompDisplay *display,
     getDesktopHints (s);
 
     screenInitPlugins (s);
-
-    detectRefreshRateOfScreen (s);
-    detectOutputDevices (s);
 
     XQueryTree (dpy, s->root,
 		&rootReturn, &parentReturn,
