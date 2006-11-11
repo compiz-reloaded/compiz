@@ -255,48 +255,27 @@ updateDefaultIcon (CompScreen *screen)
     return TRUE;
 }
 
-static char *
-parseFindNext (char *cur,
-	       char *delim,
-	       char *save,
-	       char *last)
-{
-    while (*cur && !strchr (delim, *cur))
-	*save++ = *cur++;
-
-    *save = 0;
-    *last = *cur;
-
-    if (*cur)
-	cur++;
-
-    return cur;
-}
-
 static void
 updateOutputDevices (CompScreen	*s)
 {
-    CompOutput	 *o, *output = NULL;
-    int		 nOutput = 0;
-    char	 delim;
-    char	 save[1024];
-    char	 *arg = s->opt[COMP_SCREEN_OPTION_OUTPUTS].value.s;
-    int		 x, y, i, bits;
-    unsigned int width, height;
-    int		 x1, y1, x2, y2;
+    CompOutput	  *o, *output = NULL;
+    CompListValue *list = &s->opt[COMP_SCREEN_OPTION_OUTPUTS].value.list;
+    int		  nOutput = 0;
+    int		  x, y, i, bits;
+    unsigned int  width, height;
+    int		  x1, y1, x2, y2;
 
-    for (;;)
+    for (i = 0; i < list->nValue; i++)
     {
+	if (!list->value[i].s)
+	    continue;
+
 	x      = 0;
 	y      = 0;
 	width  = s->width;
 	height = s->height;
 
-	arg = parseFindNext (arg, ",", save, &delim);
-	if (!save[0])
-	    break;
-
-	bits = XParseGeometry (save, &x, &y, &width, &height);
+	bits = XParseGeometry (list->value[i].s, &x, &y, &width, &height);
 
 	if (bits & XNegative)
 	    x = s->width + x - width;
@@ -332,9 +311,6 @@ updateOutputDevices (CompScreen	*s)
 		nOutput++;
 	    }
 	}
-
-	if (delim != ',')
-	    break;
     }
 
     /* make sure we have at least one output */
@@ -405,38 +381,52 @@ detectOutputDevices (CompScreen *s)
     {
 	char		*name;
 	CompOptionValue	value;
-	char		outputs[1024];
-	int		size = sizeof (outputs);
+	char		output[1024];
+	int		i, size = sizeof (output);
 
 	if (s->display->nScreenInfo)
 	{
-	    char *o = outputs;
-	    int  i, n;
+	    int n = s->display->nScreenInfo;
 
-	    for (i = 0; i < s->display->nScreenInfo; i++)
+	    value.list.nValue = n;
+	    value.list.value  = malloc (sizeof (CompOptionValue) * n);
+	    if (!value.list.value)
+		return;
+
+	    for (i = 0; i < n; i++)
 	    {
-		n = snprintf (o, size, "%s%dx%d+%d+%d", i ? "," : "",
-			      s->display->screenInfo[i].width,
-			      s->display->screenInfo[i].height,
-			      s->display->screenInfo[i].x_org,
-			      s->display->screenInfo[i].y_org);
+		snprintf (output, size, "%dx%d+%d+%d",
+			  s->display->screenInfo[i].width,
+			  s->display->screenInfo[i].height,
+			  s->display->screenInfo[i].x_org,
+			  s->display->screenInfo[i].y_org);
 
-		o    += n;
-		size -= n;
+		value.list.value[i].s = strdup (output);
 	    }
 	}
 	else
 	{
-	    snprintf (outputs, size, "%dx%d+%d+%d", s->width, s->height, 0, 0);
-	}
+	    value.list.nValue = 1;
+	    value.list.value  = malloc (sizeof (CompOptionValue));
+	    if (!value.list.value)
+		return;
 
-	value.s = outputs;
+	    snprintf (output, size, "%dx%d+%d+%d", s->width, s->height, 0, 0);
+
+	    value.list.value->s = strdup (output);
+	}
 
 	name = s->opt[COMP_SCREEN_OPTION_OUTPUTS].name;
 
 	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = FALSE;
 	(*s->setScreenOption) (s, name, &value);
 	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = TRUE;
+
+	for (i = 0; i < value.list.nValue; i++)
+	    if (value.list.value[i].s)
+		free (value.list.value[i].s);
+
+	free (value.list.value);
     }
 }
 
@@ -548,7 +538,7 @@ setScreenOption (CompScreen      *screen,
 	if (screen->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
 	    return FALSE;
 
-	if (compSetStringOption (o, value))
+	if (compSetOptionList (o, value))
 	{
 	    updateOutputDevices (screen);
 	    return TRUE;
@@ -673,13 +663,16 @@ compScreenInitOptions (CompScreen *screen)
     o->value.b    = DETECT_OUTPUTS_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_OUTPUTS];
-    o->name	      = "outputs";
-    o->shortDesc      = N_("Outputs");
-    o->longDesc	      = N_("String describing output devices");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (OUTPUTS_DEFAULT);
-    o->rest.s.string  = 0;
-    o->rest.s.nString = 0;
+    o->name	           = "outputs";
+    o->shortDesc           = N_("Outputs");
+    o->longDesc	           = N_("List of strings describing output devices");
+    o->type	           = CompOptionTypeList;
+    o->value.list.type     = CompOptionTypeString;
+    o->value.list.nValue   = 1;
+    o->value.list.value    = malloc (sizeof (CompOptionValue));
+    o->value.list.value->s = strdup (OUTPUTS_DEFAULT);
+    o->rest.s.string       = NULL;
+    o->rest.s.nString      = 0;
 }
 
 static void
