@@ -1302,13 +1302,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     if (cs->sky.name)
     {
 	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
-	{
-	    if (!s->cleared)
-	    {
-		glClear (GL_STENCIL_BUFFER_BIT);
-		s->cleared = TRUE;
-	    }
-	}
+	    clearScreenOutput (s, output, GL_STENCIL_BUFFER_BIT);
 
 	screenLighting (s, FALSE);
 
@@ -1327,14 +1321,13 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	glCallList (cs->skyListId);
 	glPopMatrix ();
     }
-    else if (!s->cleared)
+    else
     {
 	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
-	    glClear (GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	    clearScreenOutput (s, output,
+			       GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	else
-	    glClear (GL_COLOR_BUFFER_BIT);
-
-	s->cleared = TRUE;
+	    clearScreenOutput (s, output, GL_COLOR_BUFFER_BIT);
     }
 
     mask &= ~PAINT_SCREEN_CLEAR_MASK;

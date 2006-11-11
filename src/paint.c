@@ -87,13 +87,7 @@ paintTransformedScreen (CompScreen		*screen,
     int	       backgroundMask;
 
     if (mask & PAINT_SCREEN_CLEAR_MASK)
-    {
-	if (!screen->cleared)
-	{
-	    glClear (GL_COLOR_BUFFER_BIT);
-	    screen->cleared = TRUE;
-	}
-    }
+	clearScreenOutput (screen, output, GL_COLOR_BUFFER_BIT);
 
     screenLighting (screen, TRUE);
 
