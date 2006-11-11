@@ -87,13 +87,13 @@ schema_modules = $(patsubst gconf%,,$(subst rotate,,$(subst zoom,,$(subst lib,,$
 compiz.schemas.in:
 	rm -f compiz.schemas.dump;
 	echo -e "<gconfschemafile>\n    <schemalist>" >> compiz.schemas.dump;
-	COMPIZ_SCHEMA_GENERAL=1 compiz --replace gconf-dump;
+	COMPIZ_SCHEMA_GENERAL=1 compiz --replace --no-detection gconf-dump;
 	for module in $(schema_modules) ; do \
 		COMPIZ_SCHEMA_PLUGINS="$$module" \
 		compiz --replace "$$module" gconf-dump; \
 	done;
-	COMPIZ_SCHEMA_PLUGINS="rotate" compiz --replace cube rotate gconf-dump;
-	COMPIZ_SCHEMA_PLUGINS="zoom" compiz --replace cube zoom gconf-dump;
+	COMPIZ_SCHEMA_PLUGINS="rotate" compiz --replace --no-detection cube rotate gconf-dump;
+	COMPIZ_SCHEMA_PLUGINS="zoom" compiz --replace --no-detection cube zoom gconf-dump;
 	echo -e "    </schemalist>\n</gconfschemafile>" >> compiz.schemas.dump;
 	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@\]/' -e 's/\[gconf\]/\[gconf,\@DEFAULT_PLUGINS\@\]/' < compiz.schemas.dump > compiz.schemas.in;
 	rm -f compiz.schemas.dump
