@@ -11425,7 +11425,7 @@
             <applyto>/apps/compiz/general/screen0/options/refresh_rate</applyto>
             <owner>compiz</owner>
             <type>int</type>
-            <default>60</default>
+            <default>50</default>
             <locale name="C">
                 <short>Refresh Rate</short>
                 <long>The rate at which the screen is redrawn (times/second) (1-200)</long>
@@ -11740,11 +11740,12 @@
             <key>/schemas/apps/compiz/general/screen0/options/outputs</key>
             <applyto>/apps/compiz/general/screen0/options/outputs</applyto>
             <owner>compiz</owner>
-            <type>string</type>
-            <default>1280x800+0+0</default>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[640x480+0+0]</default>
             <locale name="C">
                 <short>Outputs</short>
-                <long>String describing output devices</long>
+                <long>List of strings describing output devices</long>
             </locale>
         </schema>
 
