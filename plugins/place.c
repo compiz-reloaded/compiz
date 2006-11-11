@@ -924,6 +924,9 @@ placeWindow (CompWindow *window,
 	    wi->attrib.y + get_window_height (wi) <= work_area.y)
 	    continue;
 
+	if (wi->attrib.override_redirect)
+	    continue;
+
 	if (wi->state & (CompWindowTypeDesktopMask    |
 			 CompWindowTypeDockMask       |
 			 CompWindowTypeFullscreenMask |
