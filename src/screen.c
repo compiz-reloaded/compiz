@@ -264,6 +264,7 @@ updateOutputDevices (CompScreen	*s)
     int		  x, y, i, bits;
     unsigned int  width, height;
     int		  x1, y1, x2, y2;
+    Region	  region;
 
     for (i = 0; i < list->nValue; i++)
     {
@@ -369,7 +370,46 @@ updateOutputDevices (CompScreen	*s)
     setDefaultViewport (s);
     damageScreen (s);
 
-    s->clearBuffers = TRUE;
+    region = XCreateRegion ();
+    if (region)
+    {
+	REGION r;
+
+	r.rects = &r.extents;
+	r.numRects = 1;
+
+	if (s->display->nScreenInfo)
+	{
+	    for (i = 0; i < s->display->nScreenInfo; i++)
+	    {
+		r.extents.x1 = s->display->screenInfo[i].x_org;
+		r.extents.y1 = s->display->screenInfo[i].y_org;
+		r.extents.x2 = r.extents.x1 + s->display->screenInfo[i].width;
+		r.extents.y2 = r.extents.y1 + s->display->screenInfo[i].height;
+
+		XUnionRegion (region, &r, region);
+	    }
+	}
+	else
+	{
+	    r.extents.x1 = 0;
+	    r.extents.y1 = 0;
+	    r.extents.x2 = s->width;
+	    r.extents.y2 = s->height;
+
+	    XUnionRegion (region, &r, region);
+	}
+
+	/* remove all output regions from visible screen region */
+	for (i = 0; i < s->nOutputDev; i++)
+	    XSubtractRegion (region, &s->outputDev[i].region, region);
+
+	/* we should clear color buffers before swapping if we have visible
+	   regions without output */
+	s->clearBuffers = REGION_NOT_EMPTY (region);
+
+	XDestroyRegion (region);
+    }
 
     (*s->outputChangeNotify) (s);
 }

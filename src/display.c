@@ -2067,8 +2067,8 @@ eventLoop (void)
 
 		    if (s->clearBuffers)
 		    {
-			glClear (GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-			s->clearBuffers = FALSE;
+			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
+			    glClear (GL_COLOR_BUFFER_BIT);
 		    }
 
 		    for (i = 0; i < s->nOutputDev; i++)
