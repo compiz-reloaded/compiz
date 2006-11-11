@@ -3524,3 +3524,32 @@ void
 outputChangeNotify (CompScreen *s)
 {
 }
+
+void
+clearScreenOutput (CompScreen	*s,
+		   int		output,
+		   unsigned int mask)
+{
+    BoxPtr pBox = &s->outputDev[output].region.extents;
+
+    if (pBox->x1 != 0	     ||
+	pBox->y1 != 0	     ||
+	pBox->x2 != s->width ||
+	pBox->y2 != s->height)
+    {
+	glPushAttrib (GL_SCISSOR_BIT);
+
+	glEnable (GL_SCISSOR_TEST);
+	glScissor (pBox->x1,
+		   s->height - pBox->y2,
+		   pBox->x2 - pBox->x1,
+		   pBox->y2 - pBox->y1);
+	glClear (mask);
+
+	glPopAttrib ();
+    }
+    else
+    {
+	glClear (mask);
+    }
+}

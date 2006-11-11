@@ -1782,6 +1782,11 @@ setDefaultViewport (CompScreen *s);
 void
 outputChangeNotify (CompScreen *s);
 
+void
+clearScreenOutput (CompScreen   *s,
+		   int	        output,
+		   unsigned int mask);
+
 
 /* window.c */
 
