@@ -214,6 +214,7 @@ typedef struct _WobblyScreen {
     DamageWindowRectProc   damageWindowRect;
     AddWindowGeometryProc  addWindowGeometry;
     DrawWindowGeometryProc drawWindowGeometry;
+    DrawWindowTextureProc  drawWindowTexture;
     SetWindowScaleProc     setWindowScale;
 
     WindowResizeNotifyProc windowResizeNotify;
@@ -2156,6 +2157,35 @@ wobblyDrawWindowGeometry (CompWindow *w)
     }
 }
 
+static void
+wobblyDrawWindowTexture (CompWindow		 *w,
+			 CompTexture		 *texture,
+			 const WindowPaintAttrib *attrib,
+			 unsigned int		 mask)
+{
+    WOBBLY_SCREEN (w->screen);
+    WOBBLY_WINDOW (w);
+
+    if (ww->wobbly)
+    {
+	WindowPaintAttrib wAttrib = *attrib;
+
+	/* remove scale that is applied at the add geometry stage */
+	wAttrib.xScale = attrib->xScale / ww->model->scale.x;
+	wAttrib.yScale = attrib->yScale / ww->model->scale.y;
+
+	UNWRAP (ws, w->screen, drawWindowTexture);
+	(*w->screen->drawWindowTexture) (w, texture, &wAttrib, mask);
+	WRAP (ws, w->screen, drawWindowTexture, wobblyDrawWindowTexture);
+    }
+    else
+    {
+	UNWRAP (ws, w->screen, drawWindowTexture);
+	(*w->screen->drawWindowTexture) (w, texture, attrib, mask);
+	WRAP (ws, w->screen, drawWindowTexture, wobblyDrawWindowTexture);
+    }
+}
+
 static Bool
 wobblyPaintWindow (CompWindow		   *w,
 		   const WindowPaintAttrib *attrib,
@@ -2169,26 +2199,15 @@ wobblyPaintWindow (CompWindow		   *w,
 
     if (ww->wobbly)
     {
-	WindowPaintAttrib wAttrib = *attrib;
-
 	if (mask & PAINT_WINDOW_SOLID_MASK)
 	    return FALSE;
 
 	mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-
-	wAttrib.xScale = 1.0f;
-	wAttrib.yScale = 1.0f;
-
-	UNWRAP (ws, w->screen, paintWindow);
-	status = (*w->screen->paintWindow) (w, &wAttrib, region, mask);
-	WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
     }
-    else
-    {
-	UNWRAP (ws, w->screen, paintWindow);
-	status = (*w->screen->paintWindow) (w, attrib, region, mask);
-	WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
-    }
+
+    UNWRAP (ws, w->screen, paintWindow);
+    status = (*w->screen->paintWindow) (w, attrib, region, mask);
+    WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
 
     return status;
 }
@@ -2998,6 +3017,7 @@ wobblyInitScreen (CompPlugin *p,
     WRAP (ws, s, damageWindowRect, wobblyDamageWindowRect);
     WRAP (ws, s, addWindowGeometry, wobblyAddWindowGeometry);
     WRAP (ws, s, drawWindowGeometry, wobblyDrawWindowGeometry);
+    WRAP (ws, s, drawWindowTexture, wobblyDrawWindowTexture);
     WRAP (ws, s, setWindowScale, wobblySetWindowScale);
     WRAP (ws, s, windowResizeNotify, wobblyWindowResizeNotify);
     WRAP (ws, s, windowMoveNotify, wobblyWindowMoveNotify);
@@ -3027,6 +3047,7 @@ wobblyFiniScreen (CompPlugin *p,
     UNWRAP (ws, s, damageWindowRect);
     UNWRAP (ws, s, addWindowGeometry);
     UNWRAP (ws, s, drawWindowGeometry);
+    UNWRAP (ws, s, drawWindowTexture);
     UNWRAP (ws, s, setWindowScale);
     UNWRAP (ws, s, windowResizeNotify);
     UNWRAP (ws, s, windowMoveNotify);
