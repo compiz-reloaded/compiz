@@ -80,6 +80,7 @@ CompWindow *lastDamagedWindow = 0;
 Bool replaceCurrentWm = FALSE;
 Bool indirectRendering = FALSE;
 Bool strictBinding = FALSE;
+Bool noDetection = FALSE;
 
 #ifdef USE_COW
 Bool useCow = FALSE;
@@ -98,6 +99,7 @@ usage (void)
 	    "[--replace]\n       "
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
+	    "[--no-detection] "
 	    "[--version]\n       "
 
 #ifdef USE_COW
@@ -214,6 +216,10 @@ main (int argc, char **argv)
 	{
 	    if (i + 1 < argc)
 		clientId = argv[++i];
+	}
+	else if (!strcmp (argv[i], "--no-detection"))
+	{
+	    noDetection = TRUE;
 	}
 	else if (!strcmp (argv[i], "--bg-image"))
 	{

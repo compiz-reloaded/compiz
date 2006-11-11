@@ -377,7 +377,7 @@ updateOutputDevices (CompScreen	*s)
 static void
 detectOutputDevices (CompScreen *s)
 {
-    if (s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
+    if (!noDetection && s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
     {
 	char		*name;
 	CompOptionValue	value;
@@ -427,6 +427,10 @@ detectOutputDevices (CompScreen *s)
 		free (value.list.value[i].s);
 
 	free (value.list.value);
+    }
+    else
+    {
+	updateOutputDevices (s);
     }
 }
 
@@ -1048,7 +1052,7 @@ updateScreenBackground (CompScreen  *screen,
 void
 detectRefreshRateOfScreen (CompScreen *s)
 {
-    if (s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b)
+    if (!noDetection && s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b)
     {
 	XRRScreenConfiguration *config;
 	char		       *name;
@@ -1064,6 +1068,11 @@ detectRefreshRateOfScreen (CompScreen *s)
 	s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b = FALSE;
 	(*s->setScreenOption) (s, name, &value);
 	s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b = TRUE;
+    }
+    else
+    {
+	s->redrawTime = 1000 / s->opt[COMP_SCREEN_OPTION_REFRESH_RATE].value.i;
+	s->optimalRedrawTime = s->redrawTime;
     }
 }
 
