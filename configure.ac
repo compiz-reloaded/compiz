@@ -244,8 +244,12 @@ if test "x$use_gtk" = "xyes"; then
     LIBS="$save_LIBS"
 
     if test "x$use_metacity" = "xyes"; then
-      PKG_CHECK_MODULES(METACITY, libmetacity-private >= 2.15.21,
+      PKG_CHECK_MODULES(METACITY, libmetacity-private,
 			[use_metacity=yes], [use_metacity=no])
+      PKG_CHECK_EXISTS(libmetacity-private >= 2.15.21,
+		       [have_metacity_2_15_21=yes], [have_metacity_2_15_21=no])
+      PKG_CHECK_EXISTS(libmetacity-private >= 2.17.0,
+		       [have_metacity_2_17_0=yes], [have_metacity_2_17_0=no])
     fi
 
     if test "x$use_gnome" = "xyes"; then
@@ -273,6 +277,14 @@ fi
 AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")
 if test "$use_metacity" = yes; then
   AC_DEFINE(USE_METACITY, 1, [Build metacity theme support])
+  if test "$have_metacity_2_15_21" = yes; then
+    AC_DEFINE(HAVE_METACITY_2_15_21, 1,
+	      [Define to 1 if metacity version >= 2.15.21])
+  fi
+  if test "$have_metacity_2_17_0" = yes; then
+    AC_DEFINE(HAVE_METACITY_2_17_0, 1,
+	      [Define to 1 if metacity version >= 2.17.0])
+  fi
 fi
 
 AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")

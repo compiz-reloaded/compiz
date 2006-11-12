@@ -1947,6 +1947,37 @@ decor_update_meta_window_property (decor_t	  *d,
     gdk_error_trap_pop ();
 }
 
+static void
+meta_get_corner_radius (const MetaFrameGeometry *fgeom,
+			int		        *top_left_radius,
+			int			*top_right_radius,
+			int		        *bottom_left_radius,
+			int			*bottom_right_radius)
+{
+
+#ifdef HAVE_METACITY_2_17_0
+    *top_left_radius     = fgeom->top_left_corner_rounded_radius;
+    *top_right_radius    = fgeom->top_right_corner_rounded_radius;
+    *bottom_left_radius  = fgeom->bottom_left_corner_rounded_radius;
+    *bottom_right_radius = fgeom->bottom_right_corner_rounded_radius;
+#else
+    *top_left_radius     = fgeom->top_left_corner_rounded ? 5 : 0;
+    *top_right_radius    = fgeom->top_right_corner_rounded ? 5 : 0;
+    *bottom_left_radius  = fgeom->bottom_left_corner_rounded ? 5 : 0;
+    *bottom_right_radius = fgeom->bottom_right_corner_rounded ? 5 : 0;
+#endif
+
+}
+
+static int
+radius_to_width (int radius,
+		 int i)
+{
+    int r2 = radius * radius - (radius - i) * (radius - i);
+
+    return 1 + (radius - floor (sqrt (r2) + 0.5));
+}
+
 static Region
 meta_get_window_region (const MetaFrameGeometry *fgeom,
 			int		        width,
@@ -1954,117 +1985,78 @@ meta_get_window_region (const MetaFrameGeometry *fgeom,
 {
     Region     corners_xregion, window_xregion;
     XRectangle xrect;
+    int	       top_left_radius;
+    int	       top_right_radius;
+    int	       bottom_left_radius;
+    int	       bottom_right_radius;
+    int	       w, i;
 
     corners_xregion = XCreateRegion ();
 
-    if (fgeom->top_left_corner_rounded)
+    meta_get_corner_radius (fgeom,
+			    &top_left_radius,
+			    &top_right_radius,
+			    &bottom_left_radius,
+			    &bottom_right_radius);
+
+    if (top_left_radius)
     {
-	xrect.x = 0;
-	xrect.y = 0;
-	xrect.width = 5;
-	xrect.height = 1;
+	for (i = 0; i < top_left_radius; i++)
+	{
+	    w = radius_to_width (top_left_radius, i);
 
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    xrect.x	 = 0;
+	    xrect.y	 = i;
+	    xrect.width  = w;
+	    xrect.height = 1;
 
-	xrect.y = 1;
-	xrect.width = 3;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = 2;
-	xrect.width = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = 3;
-	xrect.width = 1;
-	xrect.height = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	}
     }
 
-    if (fgeom->top_right_corner_rounded)
+    if (top_right_radius)
     {
-	xrect.x = width - 5;
-	xrect.y = 0;
-	xrect.width = 5;
-	xrect.height = 1;
+	for (i = 0; i < top_right_radius; i++)
+	{
+	    w = radius_to_width (top_right_radius, i);
 
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    xrect.x	 = width - w;
+	    xrect.y	 = i;
+	    xrect.width  = w;
+	    xrect.height = 1;
 
-	xrect.y = 1;
-	xrect.x = width - 3;
-	xrect.width = 3;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = 2;
-	xrect.x = width - 2;
-	xrect.width = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = 3;
-	xrect.x = width - 1;
-	xrect.width = 1;
-	xrect.height = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	}
     }
 
-    if (fgeom->bottom_left_corner_rounded)
+    if (bottom_left_radius)
     {
-	xrect.x = 0;
-	xrect.y = height - 1;
-	xrect.width = 5;
-	xrect.height = 1;
+	for (i = 0; i < bottom_left_radius; i++)
+	{
+	    w = radius_to_width (bottom_left_radius, i);
 
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    xrect.x	 = 0;
+	    xrect.y	 = height - i;
+	    xrect.width  = w;
+	    xrect.height = 1;
 
-	xrect.y = height - 2;
-	xrect.width = 3;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = height - 3;
-	xrect.width = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = height - 5;
-	xrect.width = 1;
-	xrect.height = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	}
     }
 
-    if (fgeom->bottom_right_corner_rounded)
+    if (bottom_right_radius)
     {
-	xrect.x = width - 5;
-	xrect.y = height - 1;
-	xrect.width = 5;
-	xrect.height = 1;
+	for (i = 0; i < bottom_right_radius; i++)
+	{
+	    w = radius_to_width (bottom_right_radius, i);
 
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    xrect.x	 = width - w;
+	    xrect.y	 = height - i;
+	    xrect.width  = w;
+	    xrect.height = 1;
 
-	xrect.y = height - 2;
-	xrect.x = width - 3;
-	xrect.width = 3;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = height - 3;
-	xrect.x = width - 2;
-	xrect.width = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
-
-	xrect.y = height - 5;
-	xrect.x = width - 1;
-	xrect.width = 1;
-	xrect.height = 2;
-
-	XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	    XUnionRectWithRegion (&xrect, corners_xregion, corners_xregion);
+	}
     }
 
     window_xregion = XCreateRegion ();
@@ -2130,16 +2122,19 @@ meta_get_decoration_geometry (decor_t		*d,
 			      GdkRectangle      *clip)
 {
     gint left_width, right_width, top_height, bottom_height;
+    gint i;
 
     button_layout->left_buttons[0] = META_BUTTON_FUNCTION_MENU;
-    button_layout->left_buttons[1] = META_BUTTON_FUNCTION_LAST;
-    button_layout->left_buttons[2] = META_BUTTON_FUNCTION_LAST;
-    button_layout->left_buttons[3] = META_BUTTON_FUNCTION_LAST;
+
+    for (i = 1; i < MAX_BUTTONS_PER_CORNER; i++)
+	button_layout->left_buttons[i] = META_BUTTON_FUNCTION_LAST;
 
     button_layout->right_buttons[0] = META_BUTTON_FUNCTION_MINIMIZE;
     button_layout->right_buttons[1] = META_BUTTON_FUNCTION_MAXIMIZE;
     button_layout->right_buttons[2] = META_BUTTON_FUNCTION_CLOSE;
-    button_layout->right_buttons[3] = META_BUTTON_FUNCTION_LAST;
+
+    for (i = 3; i < MAX_BUTTONS_PER_CORNER; i++)
+	button_layout->right_buttons[i] = META_BUTTON_FUNCTION_LAST;
 
     *flags = 0;
 
@@ -2208,6 +2203,9 @@ meta_draw_window_decoration (decor_t *d)
     GdkDrawable       *drawable;
     Region	      region;
     double	      alpha = (d->active) ? meta_active_opacity : meta_opacity;
+    MetaFrameStyle    *frame_style;
+    GdkColor	      bg_color;
+    double	      bg_alpha;
 
     if (!d->pixmap)
 	return;
@@ -2230,6 +2228,24 @@ meta_draw_window_decoration (decor_t *d)
     for (i = 0; i < META_BUTTON_TYPE_LAST; i++)
 	button_states[i] = meta_button_state_for_button_type (d, i);
 
+    frame_style = meta_theme_get_frame_style (theme,
+					      META_FRAME_TYPE_NORMAL,
+					      flags);
+
+    bg_color = style->bg[GTK_STATE_NORMAL];
+    bg_alpha = 1.0;
+
+#ifdef HAVE_METACITY_2_17_0
+    if (frame_style->window_background_color)
+    {
+	meta_color_spec_render (frame_style->window_background_color,
+				GTK_WIDGET (style_window),
+				&bg_color);
+
+	bg_alpha = frame_style->window_background_alpha / 255.0;
+    }
+#endif
+
     region = meta_get_window_region (&fgeom, clip.width, clip.height);
 
     if (alpha != 1.0)
@@ -2243,7 +2259,8 @@ meta_draw_window_decoration (decor_t *d)
 
 	pcr = gdk_cairo_create (GDK_DRAWABLE (pixmap));
 
-	gdk_cairo_set_source_color (pcr, &style->bg[GTK_STATE_NORMAL]);
+	gdk_cairo_set_source_color_alpha (pcr, &bg_color, bg_alpha);
+	cairo_set_operator (pcr, CAIRO_OPERATOR_SOURCE);
 	cairo_paint (pcr);
 
 	rect.x	    = 0;
@@ -2288,17 +2305,27 @@ meta_draw_window_decoration (decor_t *d)
 	{
 	    static decor_color_t color = { 0.0, 0.0, 0.0 };
 	    int			 corners = 0;
+	    int			 top_left_radius;
+	    int			 top_right_radius;
+	    int			 bottom_left_radius;
+	    int			 bottom_right_radius;
 
-	    if (fgeom.top_left_corner_rounded)
+	    meta_get_corner_radius (&fgeom,
+				    &top_left_radius,
+				    &top_right_radius,
+				    &bottom_left_radius,
+				    &bottom_right_radius);
+
+	    if (top_left_radius)
 		corners |= CORNER_TOPLEFT;
 
-	    if (fgeom.top_right_corner_rounded)
+	    if (top_right_radius)
 		corners |= CORNER_TOPRIGHT;
 
-	    if (fgeom.bottom_left_corner_rounded)
+	    if (bottom_left_radius)
 		corners |= CORNER_BOTTOMLEFT;
 
-	    if (fgeom.bottom_right_corner_rounded)
+	    if (bottom_right_radius)
 		corners |= CORNER_BOTTOMRIGHT;
 
 	    if (d->state & (WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY |
@@ -2310,7 +2337,8 @@ meta_draw_window_decoration (decor_t *d)
 				    clip.y,
 				    fgeom.left_width,
 				    fgeom.top_height,
-				    5.0, CORNER_TOPLEFT & corners,
+				    top_left_radius,
+				    CORNER_TOPLEFT & corners,
 				    &color, 1.0,
 				    &color, alpha,
 				    SHADE_TOP | SHADE_LEFT);
@@ -2330,7 +2358,8 @@ meta_draw_window_decoration (decor_t *d)
 				    clip.y,
 				    fgeom.right_width,
 				    fgeom.top_height,
-				    5.0, CORNER_TOPRIGHT & corners,
+				    top_right_radius,
+				    CORNER_TOPRIGHT & corners,
 				    &color, 1.0, &color, alpha,
 				    SHADE_TOP | SHADE_RIGHT);
 
@@ -2359,7 +2388,8 @@ meta_draw_window_decoration (decor_t *d)
 				    clip.y + clip.height - fgeom.bottom_height,
 				    fgeom.left_width,
 				    fgeom.bottom_height,
-				    5.0, CORNER_BOTTOMLEFT & corners,
+				    bottom_left_radius,
+				    CORNER_BOTTOMLEFT & corners,
 				    &color, 1.0, &color, alpha,
 				    SHADE_BOTTOM | SHADE_LEFT);
 
@@ -2378,7 +2408,8 @@ meta_draw_window_decoration (decor_t *d)
 				    clip.y + clip.height - fgeom.bottom_height,
 				    fgeom.right_width,
 				    fgeom.bottom_height,
-				    5.0, CORNER_BOTTOMRIGHT & corners,
+				    bottom_right_radius,
+				    CORNER_BOTTOMRIGHT & corners,
 				    &color, 1.0, &color, alpha,
 				    SHADE_BOTTOM | SHADE_RIGHT);
 	}
@@ -2394,7 +2425,7 @@ meta_draw_window_decoration (decor_t *d)
     }
     else
     {
-	gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
+	gdk_cairo_set_source_color_alpha (cr, &bg_color, bg_alpha);
 
 	for (i = 0; i < region->numRects; i++)
 	{
@@ -3055,7 +3086,12 @@ meta_get_button_position (decor_t *d,
     MetaFrameFlags    flags;
     MetaTheme	      *theme;
     GdkRectangle      clip;
+
+#ifdef HAVE_METACITY_2_15_21
     MetaButtonSpace   *space;
+#else
+    GdkRectangle      *space;
+#endif
 
     theme = meta_theme_get_current ();
 
@@ -3075,10 +3111,18 @@ meta_get_button_position (decor_t *d,
 	break;
     }
 
+#ifdef HAVE_METACITY_2_15_21
     *x = space->clickable.x;
     *y = space->clickable.y;
     *w = space->clickable.width;
     *h = space->clickable.height;
+#else
+    *x = space->x;
+    *y = space->y;
+    *w = space->width;
+    *h = space->height;
+#endif
+
 }
 #endif
 
