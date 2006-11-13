@@ -2757,7 +2757,7 @@ computeWorkareaForBox (CompScreen *s,
 
 	    if (x1 < pBox->x2 && x2 > pBox->x1)
 	    {
-		if (y1 > strutY2)
+		if (y1 < strutY2)
 		    strutY2 = y1;
 	    }
 	}
