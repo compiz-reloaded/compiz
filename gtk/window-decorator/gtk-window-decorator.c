@@ -392,22 +392,31 @@ typedef struct _decor {
     void	      (*draw) (struct _decor *d);
 } decor_t;
 
-void     (*theme_draw_window_decoration) (decor_t *d);
-gboolean (*theme_calc_decoration_size)   (decor_t *d,
-					  int     client_width,
-					  int     client_height,
-					  int     text_width,
-					  int     *width,
-					  int     *height);
-gint     (*theme_calc_titlebar_height)   (gint    text_height);
-void     (*theme_get_button_position)    (decor_t *d,
-					  gint    i,
-					  gint	  width,
-					  gint	  height,
-					  gint    *x,
-					  gint    *y,
-					  gint    *w,
-					  gint    *h);
+void     (*theme_draw_window_decoration)    (decor_t *d);
+gboolean (*theme_calc_decoration_size)      (decor_t *d,
+					     int     client_width,
+					     int     client_height,
+					     int     text_width,
+					     int     *width,
+					     int     *height);
+gint     (*theme_calc_titlebar_height)      (gint    text_height);
+void     (*theme_get_event_window_position) (decor_t *d,
+					     gint    i,
+					     gint    j,
+					     gint    width,
+					     gint    height,
+					     gint    *x,
+					     gint    *y,
+					     gint    *w,
+					     gint    *h);
+void     (*theme_get_button_position)       (decor_t *d,
+					     gint    i,
+					     gint    width,
+					     gint    height,
+					     gint    *x,
+					     gint    *y,
+					     gint    *w,
+					     gint    *h);
 
 typedef void (*event_callback) (WnckWindow *win, XEvent *event);
 
@@ -3053,6 +3062,25 @@ get_mwm_prop (Window xwindow)
 }
 
 static void
+get_event_window_position (decor_t *d,
+			   gint    i,
+			   gint    j,
+			   gint    width,
+			   gint    height,
+			   gint    *x,
+			   gint    *y,
+			   gint    *w,
+			   gint    *h)
+{
+    *x = pos[i][j].x + pos[i][j].xw * width;
+    *y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth *
+	(titlebar_height - 17);
+    *w = pos[i][j].w + pos[i][j].ww * width;
+    *h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth *
+	(titlebar_height - 17);
+}
+
+static void
 get_button_position (decor_t *d,
 		     gint    i,
 		     gint    width,
@@ -3071,6 +3099,106 @@ get_button_position (decor_t *d,
 }
 
 #ifdef USE_METACITY
+
+#define TOP_RESIZE_HEIGHT 2
+static void
+meta_get_event_window_position (decor_t *d,
+				gint    i,
+				gint    j,
+				gint	width,
+				gint	height,
+				gint    *x,
+				gint    *y,
+				gint    *w,
+				gint    *h)
+{
+    MetaButtonLayout  button_layout;
+    MetaFrameGeometry fgeom;
+    MetaFrameFlags    flags;
+    MetaTheme	      *theme;
+    GdkRectangle      clip;
+
+    theme = meta_theme_get_current ();
+
+    meta_get_decoration_geometry (d, theme, &flags, &fgeom, &button_layout,
+				  &clip);
+
+    width  += fgeom.right_width + fgeom.left_width;
+    height += fgeom.top_height  + fgeom.bottom_height;
+
+    switch (i) {
+    case 2: /* bottom */
+	switch (j) {
+	case 2: /* bottom right */
+	    *x = width - fgeom.right_width;
+	    *y = height - fgeom.bottom_height;
+	    *w = fgeom.right_width;
+	    *h = fgeom.bottom_height;
+	    break;
+	case 1: /* bottom */
+	    *x = fgeom.left_width;
+	    *y = height - fgeom.bottom_height;
+	    *w = width - fgeom.left_width - fgeom.right_width;
+	    *h = fgeom.bottom_height;
+	    break;
+	case 0: /* bottom left */
+	default:
+	    *x = 0;
+	    *y = height - fgeom.bottom_height;
+	    *w = fgeom.left_width;
+	    *h = fgeom.bottom_height;
+	    break;
+	}
+	break;
+    case 1: /* middle */
+	switch (j) {
+	case 2: /* right */
+	    *x = width - fgeom.right_width;
+	    *y = fgeom.top_height;
+	    *w = fgeom.right_width;
+	    *h = height - fgeom.top_height - fgeom.bottom_height;
+	    break;
+	case 1: /* middle */
+	    *x = fgeom.left_width;
+	    *y = fgeom.title_rect.y + TOP_RESIZE_HEIGHT;
+	    *w = width - fgeom.left_width - fgeom.right_width;
+	    *h = height - fgeom.top_titlebar_edge - fgeom.bottom_height;
+	    break;
+	case 0: /* left */
+	default:
+	    *x = 0;
+	    *y = fgeom.top_height;
+	    *w = fgeom.left_width;
+	    *h = height - fgeom.top_height - fgeom.bottom_height;
+	    break;
+	}
+	break;
+    case 0: /* top */
+    default:
+	switch (j) {
+	case 2: /* top right */
+	    *x = width - fgeom.right_width;
+	    *y = 0;
+	    *w = fgeom.right_width;
+	    *h = fgeom.top_height;
+	    break;
+	case 1: /* top */
+	    *x = fgeom.left_width;
+	    *y = 0;
+	    *w = width - fgeom.left_width - fgeom.right_width;
+	    *h = fgeom.title_rect.y + TOP_RESIZE_HEIGHT;
+	    break;
+	case 0: /* top left */
+	default:
+	    *x = 0;
+	    *y = 0;
+	    *w = fgeom.left_width;
+	    *h = fgeom.top_height;
+	    break;
+	}
+    }
+}
+
 static void
 meta_get_button_position (decor_t *d,
 			  gint    i,
@@ -3124,6 +3252,7 @@ meta_get_button_position (decor_t *d,
 #endif
 
 }
+
 #endif
 
 static void
@@ -3173,12 +3302,8 @@ update_event_windows (WnckWindow *win)
 	{
 	    if (d->actions & event_window_actions[i][j] && i >= k && i <= l)
 	    {
-		x = pos[i][j].x + pos[i][j].xw * width;
-		y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth *
-		    (titlebar_height - 17);
-		w = pos[i][j].w + pos[i][j].ww * width;
-		h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth *
-		    (titlebar_height - 17);
+		(*theme_get_event_window_position) (d, i, j, width, height,
+						    &x, &y, &w, &h);
 
 		XMapWindow (xdisplay, d->event_windows[i][j]);
 		XMoveResizeWindow (xdisplay, d->event_windows[i][j],
@@ -6181,25 +6306,28 @@ theme_changed (GConfClient *client)
 
     if (use_meta_theme)
     {
-	theme_draw_window_decoration = meta_draw_window_decoration;
-	theme_calc_decoration_size   = meta_calc_decoration_size;
-	theme_calc_titlebar_height   = meta_calc_titlebar_height;
-	theme_get_button_position    = meta_get_button_position;
+	theme_draw_window_decoration	= meta_draw_window_decoration;
+	theme_calc_decoration_size	= meta_calc_decoration_size;
+	theme_calc_titlebar_height	= meta_calc_titlebar_height;
+	theme_get_event_window_position = meta_get_event_window_position;
+	theme_get_button_position	= meta_get_button_position;
     }
     else
     {
-	theme_draw_window_decoration = draw_window_decoration;
-	theme_calc_decoration_size   = calc_decoration_size;
-	theme_calc_titlebar_height   = calc_titlebar_height;
-	theme_get_button_position    = get_button_position;
+	theme_draw_window_decoration	= draw_window_decoration;
+	theme_calc_decoration_size	= calc_decoration_size;
+	theme_calc_titlebar_height	= calc_titlebar_height;
+	theme_get_event_window_position = get_event_window_position;
+	theme_get_button_position	= get_button_position;
     }
 
     return TRUE;
 #else
-    theme_draw_window_decoration = draw_window_decoration;
-    theme_calc_decoration_size   = calc_decoration_size;
-    theme_calc_titlebar_height   = calc_titlebar_height;
-    theme_get_button_position    = get_button_position;
+    theme_draw_window_decoration    = draw_window_decoration;
+    theme_calc_decoration_size	    = calc_decoration_size;
+    theme_calc_titlebar_height	    = calc_titlebar_height;
+    theme_get_event_window_position = get_event_window_position;
+    theme_get_button_position	    = get_button_position;
 
     return FALSE;
 #endif
