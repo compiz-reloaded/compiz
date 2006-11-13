@@ -129,6 +129,7 @@ moveInitiate (CompDisplay     *d,
     w = findWindowAtDisplay (d, xid);
     if (w)
     {
+	XRectangle   workArea;
 	unsigned int mods;
 	int          x, y;
 
@@ -166,8 +167,12 @@ moveInitiate (CompDisplay     *d,
 
 	ms->origState = w->state;
 
-	ms->snapBackY = w->serverY;
-	ms->snapOffY  = y;
+	getWorkareaForOutput (w->screen,
+			      outputDeviceForWindow (w),
+			      &workArea);
+
+	ms->snapBackY = w->serverY - workArea.y;
+	ms->snapOffY  = y - workArea.y;
 
 	if (!ms->grabIndex)
 	    ms->grabIndex = pushScreenGrab (w->screen, ms->moveCursor, "move");
@@ -257,15 +262,20 @@ moveHandleMotionEvent (CompScreen *s,
 	}
 	else
 	{
-	    int	min, max;
+	    XRectangle workArea;
+	    int	       min, max;
 
 	    dx = md->x;
 	    dy = md->y;
 
+	    getWorkareaForOutput (s,
+				  outputDeviceForWindow (w),
+				  &workArea);
+
 	    if (md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b)
 	    {
-		min = s->workArea.y + w->input.top;
-		max = s->workArea.y + s->workArea.height;
+		min = workArea.y + w->input.top;
+		max = workArea.y + workArea.height;
 
 		if (w->attrib.y + dy < min)
 		    dy = min - w->attrib.y;
@@ -277,7 +287,7 @@ moveHandleMotionEvent (CompScreen *s,
 	    {
 		if (w->state & CompWindowStateMaximizedVertMask)
 		{
-		    if (yRoot - ms->snapOffY >= SNAP_OFF)
+		    if ((yRoot - workArea.y) - ms->snapOffY >= SNAP_OFF)
 		    {
 			int width = w->serverWidth;
 
@@ -300,7 +310,7 @@ moveHandleMotionEvent (CompScreen *s,
 		}
 		else if (ms->origState & CompWindowStateMaximizedVertMask)
 		{
-		    if (yRoot - ms->snapBackY < SNAP_BACK)
+		    if ((yRoot - workArea.y) - ms->snapBackY < SNAP_BACK)
 		    {
 			if (!otherScreenGrabExist (s, "move", 0))
 			{
@@ -308,7 +318,7 @@ moveHandleMotionEvent (CompScreen *s,
 
 			    maximizeWindow (w, ms->origState);
 
-			    wy  = s->workArea.y + (w->input.top >> 1);
+			    wy  = workArea.y + (w->input.top >> 1);
 			    wy += w->sizeHints.height_inc >> 1;
 
 			    warpPointer (s->display, 0, wy - pointerY);
@@ -321,8 +331,8 @@ moveHandleMotionEvent (CompScreen *s,
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
-		min = s->workArea.y + w->input.top;
-		max = s->workArea.y + s->workArea.height -
+		min = workArea.y + w->input.top;
+		max = workArea.y + workArea.height -
 		    w->input.bottom - w->serverHeight -
 		    w->serverBorderWidth * 2;
 
@@ -340,8 +350,8 @@ moveHandleMotionEvent (CompScreen *s,
 		if (w->attrib.x + w->serverWidth + w->serverBorderWidth < 0)
 		    return;
 
-		min = s->workArea.x + w->input.left;
-		max = s->workArea.x + s->workArea.width -
+		min = workArea.x + w->input.left;
+		max = workArea.x + workArea.width -
 		    w->input.right - w->serverWidth -
 		    w->serverBorderWidth * 2;
 
