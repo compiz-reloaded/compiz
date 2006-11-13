@@ -3039,7 +3039,7 @@ moveScreenViewport (CompScreen *s,
 
     for (w = s->windows; w; w = w->next)
     {
-	if (w->attrib.override_redirect)
+	if (!w->managed)
 	    continue;
 
 	if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
@@ -3113,7 +3113,7 @@ moveWindowToViewportPosition (CompWindow *w,
     {
 	int m, wx;
 
-	if (w->attrib.override_redirect)
+	if (!w->managed)
 	    return;
 
 	if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
