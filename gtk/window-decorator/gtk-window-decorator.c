@@ -3174,9 +3174,11 @@ update_event_windows (WnckWindow *win)
 	    if (d->actions & event_window_actions[i][j] && i >= k && i <= l)
 	    {
 		x = pos[i][j].x + pos[i][j].xw * width;
-		y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth * (titlebar_height - 17);
+		y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth *
+		    (titlebar_height - 17);
 		w = pos[i][j].w + pos[i][j].ww * width;
-		h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth * (titlebar_height - 17);
+		h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth *
+		    (titlebar_height - 17);
 
 		XMapWindow (xdisplay, d->event_windows[i][j]);
 		XMoveResizeWindow (xdisplay, d->event_windows[i][j],
