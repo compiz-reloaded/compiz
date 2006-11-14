@@ -228,7 +228,7 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	double dx, dy, tx, ty;
 	int vx, vy;
 
-	clearScreenOutput (screen, output, GL_COLOR_BUFFER_BIT);
+	clearTargetOutput (screen->display, GL_COLOR_BUFFER_BIT);
 
 	computeTranslation (ps, &dx, &dy);
 
