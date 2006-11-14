@@ -3446,7 +3446,8 @@ outputDeviceForPoint (CompScreen *s,
 {
     int i, x1, y1, x2, y2;
 
-    for (i = 0; i < s->nOutputDev; i++)
+    i = s->nOutputDev;
+    while (i--)
     {
 	x1 = s->outputDev[i].region.extents.x1;
 	y1 = s->outputDev[i].region.extents.y1;
