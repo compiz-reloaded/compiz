@@ -889,6 +889,10 @@ eventTerminates (CompDisplay *display,
 		 XEvent      *event,
 		 CompOption  *option);
 
+void
+clearTargetOutput (CompDisplay	*display,
+		   unsigned int mask);
+
 /* paint.c */
 
 #define MULTIPLY_USHORT(us1, us2)		 \
