@@ -2080,7 +2080,7 @@ eventLoop (void)
 		    {
 			targetScreen = s;
 			targetOutput = i;
-			
+
 			if (s->nOutputDev > 1)
 			    glViewport (s->outputDev[i].region.extents.x1,
 					s->height -
