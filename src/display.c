@@ -2095,12 +2095,6 @@ eventLoop (void)
 					       &s->outputDev[i].region, i,
 					       PAINT_SCREEN_REGION_MASK |
 					       PAINT_SCREEN_FULL_MASK);
-
-			    if (i + 1 == s->nOutputDev)
-			    {
-				waitForVideoSync (s);
-				glXSwapBuffers (s->display->display, s->output);
-			    }
 			}
 			else if (mask & COMP_SCREEN_DAMAGE_REGION_MASK)
 			{
@@ -2108,89 +2102,92 @@ eventLoop (void)
 					      &s->outputDev[i].region,
 					      outputRegion);
 
-			    if ((*s->paintScreen) (s,
-						   &defaultScreenPaintAttrib,
-						   outputRegion, i,
-						   PAINT_SCREEN_REGION_MASK))
-			    {
-				BoxPtr pBox;
-				int    nBox, y;
-
-				pBox = outputRegion->rects;
-				nBox = outputRegion->numRects;
-
-				waitForVideoSync (s);
-
-				if (s->copySubBuffer)
-				{
-				    while (nBox--)
-				    {
-					y = s->height - pBox->y2;
-
-					(*s->copySubBuffer) (display->display,
-							     s->output,
-							     pBox->x1, y,
-							     pBox->x2 -
-							     pBox->x1,
-							     pBox->y2 -
-							     pBox->y1);
-
-					pBox++;
-				    }
-				}
-				else
-				{
-				    glEnable (GL_SCISSOR_TEST);
-				    glDrawBuffer (GL_FRONT);
-
-				    while (nBox--)
-				    {
-					y = s->height - pBox->y2;
-
-					glBitmap (0, 0, 0, 0,
-						  pBox->x1 - s->rasterX,
-						  y - s->rasterY,
-						  NULL);
-
-					s->rasterX = pBox->x1;
-					s->rasterY = y;
-
-					glScissor (pBox->x1, y,
-						   pBox->x2 - pBox->x1,
-						   pBox->y2 - pBox->y1);
-
-					glCopyPixels (pBox->x1, y,
-						      pBox->x2 - pBox->x1,
-						      pBox->y2 - pBox->y1,
-						      GL_COLOR);
-
-					pBox++;
-				    }
-
-				    glDrawBuffer (GL_BACK);
-				    glDisable (GL_SCISSOR_TEST);
-				    glFlush ();
-				}
-			    }
-			    else
+			    if (!(*s->paintScreen) (s,
+						    &defaultScreenPaintAttrib,
+						    outputRegion, i,
+						    PAINT_SCREEN_REGION_MASK))
 			    {
 				(*s->paintScreen) (s,
 						   &defaultScreenPaintAttrib,
 						   &s->outputDev[i].region, i,
 						   PAINT_SCREEN_FULL_MASK);
 
-				if (i + 1 == s->nOutputDev)
-				{
-				    waitForVideoSync (s);
-				    glXSwapBuffers (display->display,
-						    s->output);
-				}
+				XUnionRegion (tmpRegion,
+					      &s->outputDev[i].region,
+					      tmpRegion);
+
 			    }
 			}
 		    }
 
 		    targetScreen = NULL;
 		    targetOutput = 0;
+
+		    waitForVideoSync (s);
+
+		    if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
+		    {
+			glXSwapBuffers (display->display, s->output);
+		    }
+		    else
+		    {
+			BoxPtr pBox;
+			int    nBox, y;
+
+			pBox = tmpRegion->rects;
+			nBox = tmpRegion->numRects;
+
+			if (s->copySubBuffer)
+			{
+			    while (nBox--)
+			    {
+				y = s->height - pBox->y2;
+
+				(*s->copySubBuffer) (display->display,
+						     s->output,
+						     pBox->x1, y,
+						     pBox->x2 -
+						     pBox->x1,
+						     pBox->y2 -
+						     pBox->y1);
+
+				pBox++;
+			    }
+			}
+			else
+			{
+			    glEnable (GL_SCISSOR_TEST);
+			    glDrawBuffer (GL_FRONT);
+
+			    while (nBox--)
+			    {
+				y = s->height - pBox->y2;
+
+				glBitmap (0, 0, 0, 0,
+					  pBox->x1 - s->rasterX,
+					  y - s->rasterY,
+					  NULL);
+
+				s->rasterX = pBox->x1;
+				s->rasterY = y;
+
+				glScissor (pBox->x1, y,
+					   pBox->x2 - pBox->x1,
+					   pBox->y2 - pBox->y1);
+
+				glCopyPixels (pBox->x1, y,
+					      pBox->x2 - pBox->x1,
+					      pBox->y2 - pBox->y1,
+					      GL_COLOR);
+
+				pBox++;
+			    }
+
+			    glDrawBuffer (GL_BACK);
+			    glDisable (GL_SCISSOR_TEST);
+			    glFlush ();
+			}
+		    }
 
 		    s->lastRedraw = tv;
 
