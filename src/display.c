@@ -77,6 +77,9 @@ static CompWatchFdHandle lastWatchFdHandle = 1;
 static struct pollfd     *watchPollFds = 0;
 static int               nWatchFds = 0;
 
+static CompScreen *targetScreen = NULL;
+static int        targetOutput = 0;
+
 static Bool inHandleEvent = FALSE;
 
 static Bool shutDown = FALSE;
@@ -2005,6 +2008,8 @@ eventLoop (void)
 		    if (!s->damageMask || s->timeLeft > timeToNextRedraw)
 			continue;
 
+		    targetScreen = s;
+
 		    timeDiff = TIMEVALDIFF (&tv, &s->lastRedraw);
 
 		    /* handle clock rollback */
@@ -2073,6 +2078,9 @@ eventLoop (void)
 
 		    for (i = 0; i < s->nOutputDev; i++)
 		    {
+			targetScreen = s;
+			targetOutput = i;
+			
 			if (s->nOutputDev > 1)
 			    glViewport (s->outputDev[i].region.extents.x1,
 					s->height -
@@ -2180,6 +2188,9 @@ eventLoop (void)
 			    }
 			}
 		    }
+
+		    targetScreen = NULL;
+		    targetOutput = 0;
 
 		    s->lastRedraw = tv;
 
@@ -3337,3 +3348,12 @@ setDisplayAction (CompDisplay     *display,
     return FALSE;
 }
 
+void
+clearTargetOutput (CompDisplay	*display,
+		   unsigned int mask)
+{
+    if (targetScreen)
+	clearScreenOutput (targetScreen,
+			   targetOutput,
+			   mask);
+}
