@@ -249,11 +249,11 @@ clonePreparePaintScreen (CompScreen *s,
 	{
 	    if (src->width != dst->width || src->height != dst->height)
 	    {
+		XSubtractRegion (&dst->region, &emptyRegion,
+				 cs->clone[i].region);
+		XUnionRegion (s->damage, cs->clone[i].region, s->damage);
 		XSubtractRegion (&src->region, &emptyRegion,
 				 cs->clone[i].region);
-		XOffsetRegion (cs->clone[i].region, dx, dy);
-		XUnionRegion (s->damage, cs->clone[i].region, s->damage);
-		XOffsetRegion (cs->clone[i].region, -dx, -dy);
 	    }
 	    else
 	    {
