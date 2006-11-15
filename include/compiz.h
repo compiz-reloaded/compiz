@@ -461,6 +461,12 @@ getStringOptionNamed (CompOption *option,
 		      char	 *name,
 		      char	 *defaultValue);
 
+unsigned short *
+getColorOptionNamed (CompOption	    *option,
+		     int	    nOption,
+		     char	    *name,
+		     unsigned short *defaultValue);
+
 char *
 keyBindingToString (CompDisplay    *d,
 		    CompKeyBinding *key);

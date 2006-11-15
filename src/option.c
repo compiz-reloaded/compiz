@@ -427,6 +427,24 @@ getStringOptionNamed (CompOption *option,
     return defaultValue;
 }
 
+unsigned short *
+getColorOptionNamed (CompOption	    *option,
+		     int	    nOption,
+		     char	    *name,
+		     unsigned short *defaultValue)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeColor)
+	    if (strcmp (option->name, name) == 0)
+		return option->value.c;
+
+	option++;
+    }
+
+    return defaultValue;
+}
+
 static char *
 stringAppend (char *s,
 	      char *a)
