@@ -24,6 +24,8 @@
  */
 
 #include <stdlib.h>
+#include <math.h>
+#include <string.h>
 #include <cairo-xlib-xrender.h>
 
 #include <compiz.h>
@@ -37,20 +39,38 @@
 #define ANNO_CLEAR_KEY_DEFAULT	         "k"
 #define ANNO_CLEAR_KEY_MODIFIERS_DEFAULT (CompSuperMask | CompAltMask)
 
-#define ANNO_COLOR_RED_DEFAULT   0xffff
-#define ANNO_COLOR_GREEN_DEFAULT 0x0000
-#define ANNO_COLOR_BLUE_DEFAULT  0x0000
+#define ANNO_FILL_COLOR_RED_DEFAULT   0xffff
+#define ANNO_FILL_COLOR_GREEN_DEFAULT 0x0000
+#define ANNO_FILL_COLOR_BLUE_DEFAULT  0x0000
+
+#define ANNO_STROKE_COLOR_RED_DEFAULT   0x0000
+#define ANNO_STROKE_COLOR_GREEN_DEFAULT 0xffff
+#define ANNO_STROKE_COLOR_BLUE_DEFAULT  0x0000
+
+#define ANNO_LINE_WIDTH_MIN        0.1f
+#define ANNO_LINE_WIDTH_MAX        100.0f
+#define ANNO_LINE_WIDTH_DEFAULT    3.0f
+#define ANNO_LINE_WIDTH_PRECISION  0.1f
+
+#define ANNO_STROKE_WIDTH_MIN        0.1f
+#define ANNO_STROKE_WIDTH_MAX        20.0f
+#define ANNO_STROKE_WIDTH_DEFAULT    1.0f
+#define ANNO_STROKE_WIDTH_PRECISION  0.1f
 
 static int displayPrivateIndex;
 
 static int annoLastPointerX = 0;
 static int annoLastPointerY = 0;
 
-#define ANNO_DISPLAY_OPTION_INITIATE 0
-#define ANNO_DISPLAY_OPTION_ERASE    1
-#define ANNO_DISPLAY_OPTION_CLEAR    2
-#define ANNO_DISPLAY_OPTION_COLOR    3
-#define ANNO_DISPLAY_OPTION_NUM	     4
+#define ANNO_DISPLAY_OPTION_INITIATE     0
+#define ANNO_DISPLAY_OPTION_DRAW	 1
+#define ANNO_DISPLAY_OPTION_ERASE        2
+#define ANNO_DISPLAY_OPTION_CLEAR        3
+#define ANNO_DISPLAY_OPTION_FILL_COLOR   4
+#define ANNO_DISPLAY_OPTION_STROKE_COLOR 5
+#define ANNO_DISPLAY_OPTION_LINE_WIDTH   6
+#define ANNO_DISPLAY_OPTION_STROKE_WIDTH 7
+#define ANNO_DISPLAY_OPTION_NUM	         8
 
 typedef struct _AnnoDisplay {
     int		    screenPrivateIndex;
@@ -68,6 +88,8 @@ typedef struct _AnnoScreen {
     cairo_surface_t *surface;
     cairo_t	    *cairo;
     Bool            content;
+
+    Bool eraseMode;
 } AnnoScreen;
 
 #define GET_ANNO_DISPLAY(d)				     \
@@ -84,6 +106,8 @@ typedef struct _AnnoScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+
+#define NUM_TOOLS (sizeof (tools) / sizeof (tools[0]))
 
 static void
 annoCairoClear (CompScreen *s,
@@ -143,6 +167,304 @@ annoCairoContext (CompScreen *s)
     return as->cairo;
 }
 
+static void
+annoSetSourceColor (cairo_t	   *cr,
+		    unsigned short *color)
+{
+    cairo_set_source_rgba (cr,
+			   (double) color[0] / 0xffff,
+			   (double) color[1] / 0xffff,
+			   (double) color[2] / 0xffff,
+			   (double) color[3] / 0xffff);
+}
+
+static void
+annoDrawCircle (CompScreen     *s,
+		double	       xc,
+		double	       yc,
+		double	       radius,
+		unsigned short *fillColor,
+		unsigned short *strokeColor,
+		double	       strokeWidth)
+{
+    REGION  reg;
+    cairo_t *cr;
+
+    ANNO_SCREEN (s);
+
+    cr = annoCairoContext (s);
+    if (cr)
+    {
+	double  ex1, ey1, ex2, ey2;
+
+	annoSetSourceColor (cr, fillColor);
+	cairo_arc (cr, xc, yc, radius, 0, 2 * M_PI);
+	cairo_fill_preserve (cr);
+	cairo_set_line_width (cr, strokeWidth);
+	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
+	annoSetSourceColor (cr, strokeColor);
+	cairo_stroke (cr);
+
+	reg.rects    = &reg.extents;
+	reg.numRects = 1;
+
+	reg.extents.x1 = ex1;
+	reg.extents.y1 = ey1;
+	reg.extents.x2 = ex2;
+	reg.extents.y2 = ey2;
+
+	as->content = TRUE;
+	damageScreenRegion (s, &reg);
+    }
+}
+
+static void
+annoDrawRectangle (CompScreen	  *s,
+		   double	  x,
+		   double	  y,
+		   double	  w,
+		   double	  h,
+		   unsigned short *fillColor,
+		   unsigned short *strokeColor,
+		   double	  strokeWidth)
+{
+    REGION reg;
+    cairo_t *cr;
+
+    ANNO_SCREEN (s);
+
+    cr = annoCairoContext (s);
+    if (cr)
+    {
+	double  ex1, ey1, ex2, ey2;
+
+	annoSetSourceColor (cr, fillColor);
+	cairo_rectangle (cr, x, y, w, h);
+	cairo_fill_preserve (cr);
+	cairo_set_line_width (cr, strokeWidth);
+	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
+	annoSetSourceColor (cr, strokeColor);
+	cairo_stroke (cr);
+
+	reg.rects    = &reg.extents;
+	reg.numRects = 1;
+
+	reg.extents.x1 = ex1;
+	reg.extents.y1 = ey1;
+	reg.extents.x2 = ex2 + 2.0;
+	reg.extents.y2 = ey2 + 2.0;
+
+	as->content = TRUE;
+	damageScreenRegion (s, &reg);
+    }
+}
+
+static void
+annoDrawLine (CompScreen     *s,
+	      double	     x1,
+	      double	     y1,
+	      double	     x2,
+	      double	     y2,
+	      double	     width,
+	      unsigned short *color)
+{
+    REGION reg;
+    cairo_t *cr;
+
+    ANNO_SCREEN (s);
+
+    cr = annoCairoContext (s);
+    if (cr)
+    {
+	double ex1, ey1, ex2, ey2;
+
+	cairo_set_line_width (cr, width);
+	cairo_move_to (cr, x1, y1);
+	cairo_line_to (cr, x2, y2);
+	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
+	annoSetSourceColor (cr, color);
+	cairo_stroke (cr);
+
+	reg.rects    = &reg.extents;
+	reg.numRects = 1;
+
+	reg.extents.x1 = ex1;
+	reg.extents.y1 = ey1;
+	reg.extents.x2 = ex2;
+	reg.extents.y2 = ey2;
+
+	as->content = TRUE;
+	damageScreenRegion (s, &reg);
+    }
+}
+
+static void
+annoDrawText (CompScreen     *s,
+	      double	     x,
+	      double	     y,
+	      char	     *text,
+	      char	     *fontFamily,
+	      double	     fontSize,
+	      int	     fontSlant,
+	      int	     fontWeight,
+	      unsigned short *fillColor,
+	      unsigned short *strokeColor,
+	      double	     strokeWidth)
+{
+    REGION  reg;
+    cairo_t *cr;
+
+    ANNO_SCREEN (s);
+
+    cr = annoCairoContext (s);
+    if (cr)
+    {
+	cairo_text_extents_t extents;
+
+	cairo_set_line_width (cr, strokeWidth);
+	annoSetSourceColor (cr, fillColor);
+	cairo_select_font_face (cr, fontFamily, fontSlant, fontWeight);
+	cairo_set_font_size (cr, fontSize);
+	cairo_text_extents (cr, text, &extents);
+	cairo_save (cr);
+	cairo_move_to (cr, x, y);
+	cairo_text_path (cr, text);
+	cairo_fill_preserve (cr);
+	annoSetSourceColor (cr, strokeColor);
+	cairo_stroke (cr);
+	cairo_restore (cr);
+
+	reg.rects    = &reg.extents;
+	reg.numRects = 1;
+
+	reg.extents.x1 = x;
+	reg.extents.y1 = y + extents.y_bearing - 2.0;
+	reg.extents.x2 = x + extents.width + 20.0;
+	reg.extents.y2 = y + extents.height;
+
+	as->content = TRUE;
+	damageScreenRegion (s, &reg);
+    }
+}
+
+static Bool
+annoDraw (CompDisplay     *d,
+	  CompAction      *action,
+	  CompActionState state,
+	  CompOption      *option,
+	  int		  nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid  = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	cairo_t *cr;
+
+	cr = annoCairoContext (s);
+	if (cr)
+	{
+	    char	   *tool;
+	    unsigned short *fillColor, *strokeColor;
+	    double	   lineWidth, strokeWidth;
+
+	    ANNO_DISPLAY (d);
+
+	    tool = getStringOptionNamed (option, nOption, "tool", "line");
+
+	    cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+	    cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
+
+	    fillColor = ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c;
+	    fillColor = getColorOptionNamed (option, nOption, "fill_color",
+					     fillColor);
+
+	    strokeColor = ad->opt[ANNO_DISPLAY_OPTION_STROKE_COLOR].value.c;
+	    strokeColor = getColorOptionNamed (option, nOption,
+					       "stroke_color", strokeColor);
+
+	    strokeWidth = ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f;
+	    strokeWidth = getFloatOptionNamed (option, nOption, "stroke_width",
+					       strokeWidth);
+
+	    lineWidth = ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH].value.f;
+	    lineWidth = getFloatOptionNamed (option, nOption, "line_width",
+					     lineWidth);
+
+	    if (strcasecmp (tool, "rectangle") == 0)
+	    {
+		double x, y, w, h;
+
+		x = getFloatOptionNamed (option, nOption, "x", 0);
+		y = getFloatOptionNamed (option, nOption, "y", 0);
+		w = getFloatOptionNamed (option, nOption, "w", 100);
+		h = getFloatOptionNamed (option, nOption, "h", 100);
+
+		annoDrawRectangle (s, x, y, w, h, fillColor, strokeColor,
+				   strokeWidth);
+	    }
+	    else if (strcasecmp (tool, "circle") == 0)
+	    {
+		double xc, yc, r;
+
+		xc = getFloatOptionNamed (option, nOption, "xc", 0);
+		yc = getFloatOptionNamed (option, nOption, "yc", 0);
+		r  = getFloatOptionNamed (option, nOption, "radius", 100);
+
+		annoDrawCircle (s, xc, yc, r, fillColor, strokeColor,
+				strokeWidth);
+	    }
+	    else if (strcasecmp (tool, "line") == 0)
+	    {
+		double x1, y1, x2, y2;
+
+		x1 = getFloatOptionNamed (option, nOption, "x1", 0);
+		y1 = getFloatOptionNamed (option, nOption, "y1", 0);
+		x2 = getFloatOptionNamed (option, nOption, "x2", 100);
+		y2 = getFloatOptionNamed (option, nOption, "y2", 100);
+
+		annoDrawLine (s, x1, y1, x2, y2, lineWidth, fillColor);
+	    }
+	    else if (strcasecmp (tool, "text") == 0)
+	    {
+		double	     x, y, size;
+		char	     *text, *family;
+		unsigned int slant, weight;
+		char	     *str;
+
+		str = getStringOptionNamed (option, nOption, "slant", "");
+		if (strcasecmp (str, "oblique") == 0)
+		    slant = CAIRO_FONT_SLANT_OBLIQUE;
+		else if (strcasecmp (str, "italic") == 0)
+		    slant = CAIRO_FONT_SLANT_ITALIC;
+		else
+		    slant = CAIRO_FONT_SLANT_NORMAL;
+
+		str = getStringOptionNamed (option, nOption, "weight", "");
+		if (strcasecmp (str, "bold") == 0)
+		    weight = CAIRO_FONT_WEIGHT_BOLD;
+		else
+		    weight = CAIRO_FONT_WEIGHT_NORMAL;
+
+		x      = getFloatOptionNamed (option, nOption, "x", 0);
+		y      = getFloatOptionNamed (option, nOption, "y", 0);
+		text   = getStringOptionNamed (option, nOption, "text", "");
+		family = getStringOptionNamed (option, nOption, "family",
+					       "Sans");
+		size   = getFloatOptionNamed (option, nOption, "size", 36.0);
+
+		annoDrawText (s, x, y, text, family, size, slant, weight,
+			      fillColor, strokeColor, strokeWidth);
+	    }
+	}
+    }
+
+    return FALSE;
+}
+
 static Bool
 annoInitiate (CompDisplay     *d,
 	      CompAction      *action,
@@ -158,8 +480,6 @@ annoInitiate (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	cairo_t *cr;
-
 	ANNO_SCREEN (s);
 
 	if (otherScreenGrabExist (s, 0))
@@ -177,23 +497,7 @@ annoInitiate (CompDisplay     *d,
 	annoLastPointerX = pointerX;
 	annoLastPointerY = pointerY;
 
-	cr = annoCairoContext (s);
-	if (cr)
-	{
-	    unsigned short *color;
-
-	    ANNO_DISPLAY (s->display);
-
-	    color = ad->opt[ANNO_DISPLAY_OPTION_COLOR].value.c;
-
-	    cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
-	    cairo_set_source_rgb (cr,
-				  (double) color[0] / 0xffff,
-				  (double) color[1] / 0xffff,
-				  (double) color[2] / 0xffff);
-	    cairo_set_line_width (cr, 4.0);
-	    cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
-	}
+	as->eraseMode = FALSE;
     }
 
     return FALSE;
@@ -245,8 +549,6 @@ annoEraseInitiate (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	cairo_t *cr;
-
 	ANNO_SCREEN (s);
 
 	if (otherScreenGrabExist (s, 0))
@@ -264,14 +566,7 @@ annoEraseInitiate (CompDisplay     *d,
 	annoLastPointerX = pointerX;
 	annoLastPointerY = pointerY;
 
-	cr = annoCairoContext (s);
-	if (cr)
-	{
-	    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-	    cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, 0.0);
-	    cairo_set_line_width (cr, 20.0);
-	    cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
-	}
+	as->eraseMode = TRUE;
     }
 
     return FALSE;
@@ -385,33 +680,28 @@ annoHandleMotionEvent (CompScreen *s,
 
     if (as->grabIndex)
     {
-	cairo_t *cr;
-	double  x1, y1, x2, y2;
-	REGION  reg;
+	if (as->eraseMode)
+	{
+	    static unsigned short color[] = { 0, 0, 0, 0 };
 
-	cr = annoCairoContext (s);
-	if (!cr)
-	    return;
+	    annoDrawLine (s,
+			  annoLastPointerX, annoLastPointerY,
+			  xRoot, yRoot,
+			  20.0, color);
+	}
+	else
+	{
+	    ANNO_DISPLAY(s->display);
 
-	cairo_move_to (cr, annoLastPointerX, annoLastPointerY);
-	cairo_line_to (cr, xRoot, yRoot);
-	cairo_stroke_extents (cr, &x1, &y1, &x2, &y2);
-	cairo_stroke (cr);
-
-	as->content = TRUE;
+	    annoDrawLine (s,
+			  annoLastPointerX, annoLastPointerY,
+			  xRoot, yRoot,
+			  ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH].value.f,
+			  ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c);
+	}
 
 	annoLastPointerX = xRoot;
 	annoLastPointerY = yRoot;
-
-	reg.rects    = &reg.extents;
-	reg.numRects = 1;
-
-	reg.extents.x1 = x1;
-	reg.extents.y1 = y1;
-	reg.extents.x2 = (x2 + 0.5);
-	reg.extents.y2 = (y2 + 0.5);
-
-	damageScreenRegion (s, &reg);
     }
 }
 
@@ -464,6 +754,18 @@ annoDisplayInitOptions (AnnoDisplay *ad,
     o->value.action.button.modifiers = ANNO_INITIATE_BUTTON_MODIFIERS_DEFAULT;
     o->value.action.button.button    = ANNO_INITIATE_BUTTON_DEFAULT;
 
+    o = &ad->opt[ANNO_DISPLAY_OPTION_DRAW];
+    o->name		      = "draw";
+    o->shortDesc	      = N_("Draw");
+    o->longDesc		      = N_("Draw using tool");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = annoDraw;
+    o->value.action.terminate = 0;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.type      = 0;
+    o->value.action.state     = 0;
+
     o = &ad->opt[ANNO_DISPLAY_OPTION_ERASE];
     o->name			     = "erase";
     o->shortDesc		     = N_("Initiate erase");
@@ -497,15 +799,45 @@ annoDisplayInitOptions (AnnoDisplay *ad,
 	XKeysymToKeycode (display,
 			  XStringToKeysym (ANNO_CLEAR_KEY_DEFAULT));
 
-    o             = &ad->opt[ANNO_DISPLAY_OPTION_COLOR];
-    o->name       = "color";
-    o->shortDesc  = N_("Annotate Color");
-    o->longDesc   = N_("Line color for annotations");
+    o = &ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR];
+    o->name       = "fill_color";
+    o->shortDesc  = N_("Annotate Fill Color");
+    o->longDesc   = N_("Fill color for annotations");
     o->type       = CompOptionTypeColor;
-    o->value.c[0] = ANNO_COLOR_RED_DEFAULT;
-    o->value.c[1] = ANNO_COLOR_GREEN_DEFAULT;
-    o->value.c[2] = ANNO_COLOR_BLUE_DEFAULT;
+    o->value.c[0] = ANNO_FILL_COLOR_RED_DEFAULT;
+    o->value.c[1] = ANNO_FILL_COLOR_GREEN_DEFAULT;
+    o->value.c[2] = ANNO_FILL_COLOR_BLUE_DEFAULT;
     o->value.c[3] = 0xffff;
+
+    o = &ad->opt[ANNO_DISPLAY_OPTION_STROKE_COLOR];
+    o->name       = "stroke_color";
+    o->shortDesc  = N_("Annotate Stroke Color");
+    o->longDesc   = N_("Stroke color for annotations");
+    o->type       = CompOptionTypeColor;
+    o->value.c[0] = ANNO_STROKE_COLOR_RED_DEFAULT;
+    o->value.c[1] = ANNO_STROKE_COLOR_GREEN_DEFAULT;
+    o->value.c[2] = ANNO_STROKE_COLOR_BLUE_DEFAULT;
+    o->value.c[3] = 0xffff;
+
+    o = &ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH];
+    o->name             = "line_width";
+    o->shortDesc        = N_("Line width");
+    o->longDesc         = N_("Line width for annotations");
+    o->type             = CompOptionTypeFloat;
+    o->value.f          = ANNO_LINE_WIDTH_DEFAULT;
+    o->rest.f.min       = ANNO_LINE_WIDTH_MIN;
+    o->rest.f.max       = ANNO_LINE_WIDTH_MAX;
+    o->rest.f.precision = ANNO_LINE_WIDTH_PRECISION;
+
+    o = &ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH];
+    o->name             = "stroke_width";
+    o->shortDesc        = N_("Stroke width");
+    o->longDesc         = N_("Stroke width for annotations");
+    o->type             = CompOptionTypeFloat;
+    o->value.f          = ANNO_STROKE_WIDTH_DEFAULT;
+    o->rest.f.min       = ANNO_STROKE_WIDTH_MIN;
+    o->rest.f.max       = ANNO_STROKE_WIDTH_MAX;
+    o->rest.f.precision = ANNO_STROKE_WIDTH_PRECISION;
 }
 
 static CompOption *
@@ -539,8 +871,14 @@ annoSetDisplayOption (CompDisplay    *display,
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
 	break;
-    case ANNO_DISPLAY_OPTION_COLOR:
+    case ANNO_DISPLAY_OPTION_FILL_COLOR:
+    case ANNO_DISPLAY_OPTION_STROKE_COLOR:
 	if (compSetColorOption (o, value))
+	    return TRUE;
+	break;
+    case ANNO_DISPLAY_OPTION_LINE_WIDTH:
+    case ANNO_DISPLAY_OPTION_STROKE_WIDTH:
+	if (compSetFloatOption (o, value))
 	    return TRUE;
     default:
 	break;
