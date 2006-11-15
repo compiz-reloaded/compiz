@@ -24041,6 +24041,67 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/draw_key</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/draw_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Draw</short>
+                <long>Draw using tool</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/draw_button</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/draw_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Draw</short>
+                <long>Draw using tool</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/draw_bell</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/draw_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Draw</short>
+                <long>Draw using tool</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/draw_edge</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/draw_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Draw</short>
+                <long>Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/draw_edgebutton</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/draw_edgebutton</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Draw</short>
+                <long>Draw using tool</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/erase_key</key>
             <applyto>/apps/compiz/plugins/annotate/allscreens/options/erase_key</applyto>
             <owner>compiz</owner>
@@ -24163,14 +24224,82 @@
         </schema>
 
         <schema>
-            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/color</key>
-            <applyto>/apps/compiz/plugins/annotate/allscreens/options/color</applyto>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/fill_color</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/fill_color</applyto>
             <owner>compiz</owner>
             <type>string</type>
             <default>#ff0000ff</default>
             <locale name="C">
-                <short>Annotate Color</short>
-                <long>Line color for annotations</long>
+                <short>Annotate Fill Color</short>
+                <long>Fill color for annotations</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/stroke_color</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/stroke_color</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>#00ff00ff</default>
+            <locale name="C">
+                <short>Annotate Stroke Color</short>
+                <long>Stroke color for annotations</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/line_width</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/line_width</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>3.000000</default>
+            <locale name="C">
+                <short>Line width</short>
+                <long>Line width for annotations (0.0-100.0)</long>
+            </locale>
+            <locale name="de">
+                <short>Line width</short>
+                <long>Line width for annotations (0,0-100,0)</long>
+            </locale>
+            <locale name="es">
+                <short>Line width</short>
+                <long>Line width for annotations (0,0-100,0)</long>
+            </locale>
+            <locale name="fr">
+                <short>Line width</short>
+                <long>Line width for annotations (0,0-100,0)</long>
+            </locale>
+            <locale name="hu">
+                <short>Line width</short>
+                <long>Line width for annotations (0,0-100,0)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/annotate/allscreens/options/stroke_width</key>
+            <applyto>/apps/compiz/plugins/annotate/allscreens/options/stroke_width</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>1.000000</default>
+            <locale name="C">
+                <short>Stroke width</short>
+                <long>Stroke width for annotations (0.0-20.0)</long>
+            </locale>
+            <locale name="de">
+                <short>Stroke width</short>
+                <long>Stroke width for annotations (0,0-20,0)</long>
+            </locale>
+            <locale name="es">
+                <short>Stroke width</short>
+                <long>Stroke width for annotations (0,0-20,0)</long>
+            </locale>
+            <locale name="fr">
+                <short>Stroke width</short>
+                <long>Stroke width for annotations (0,0-20,0)</long>
+            </locale>
+            <locale name="hu">
+                <short>Stroke width</short>
+                <long>Stroke width for annotations (0,0-20,0)</long>
             </locale>
         </schema>
 
@@ -32135,6 +32264,34 @@
             <locale name="zh_TW">
                 <short>時間間隔</short>
                 <long>縮放時間間隔 (0.0-50.0)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/zoom/screen0/options/zoom_factor</key>
+            <applyto>/apps/compiz/plugins/zoom/screen0/options/zoom_factor</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>2.000000</default>
+            <locale name="C">
+                <short>Zoom factor</short>
+                <long>Zoom factor (1.00-3.00)</long>
+            </locale>
+            <locale name="de">
+                <short>Zoom factor</short>
+                <long>Zoom factor (1,00-3,00)</long>
+            </locale>
+            <locale name="es">
+                <short>Zoom factor</short>
+                <long>Zoom factor (1,00-3,00)</long>
+            </locale>
+            <locale name="fr">
+                <short>Zoom factor</short>
+                <long>Zoom factor (1,00-3,00)</long>
+            </locale>
+            <locale name="hu">
+                <short>Zoom factor</short>
+                <long>Zoom factor (1,00-3,00)</long>
             </locale>
         </schema>
 
