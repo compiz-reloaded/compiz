@@ -1970,7 +1970,7 @@ wobblyAddWindowGeometry (CompWindow *w,
 
 	for (it = 0; it < nMatrix; it++)
 	{
-	    if (matrix[it].xy != 0.0f && matrix[it].yx != 0.0f)
+	    if (matrix[it].xy != 0.0f || matrix[it].yx != 0.0f)
 	    {
 		rect = FALSE;
 		break;
