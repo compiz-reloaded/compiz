@@ -735,10 +735,11 @@ setDecorationMatrices (CompWindow *w)
 	wd->quad[i].matrix.x0 += x0 * wd->quad[i].matrix.xx;
 	wd->quad[i].matrix.y0 += y0 * wd->quad[i].matrix.yy;
 
+	wd->quad[i].matrix.xy = wd->decor->quad[i].m.xy * wd->quad[i].matrix.xx;
+	wd->quad[i].matrix.yx = wd->decor->quad[i].m.yx * wd->quad[i].matrix.yy;
+
 	wd->quad[i].matrix.xx *= wd->decor->quad[i].m.xx;
 	wd->quad[i].matrix.yy *= wd->decor->quad[i].m.yy;
-	wd->quad[i].matrix.xy *= wd->decor->quad[i].m.xy;
-	wd->quad[i].matrix.yx *= wd->decor->quad[i].m.yx;
 
 	wd->quad[i].matrix.x0 -=
 	    wd->quad[i].box.x1 * wd->quad[i].matrix.xx +
