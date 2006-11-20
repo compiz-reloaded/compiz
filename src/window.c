@@ -3589,18 +3589,38 @@ ensureWindowVisibility (CompWindow *w)
     }
 }
 
+static void
+revealWindow (CompWindow *w)
+{
+    if (w->minimized)
+	unminimizeWindow (w);
+
+    leaveShowDesktopMode (w->screen, w);
+}
+
+static void
+revealAncestors (CompWindow *w,
+		 void       *closure)
+{
+    CompWindow *transient = closure;
+
+    if (isAncestorTo (transient, w))
+    {
+	forEachWindowOnScreen (w->screen, revealAncestors, (void *) w);
+	revealWindow (w);
+    }
+}
+
 void
 activateWindow (CompWindow *w)
 {
+    setCurrentDesktop (w->screen, w->desktop);
+
+    forEachWindowOnScreen (w->screen, revealAncestors, (void *) w);
+    revealWindow (w);
+
     if (w->state & CompWindowStateHiddenMask)
     {
-	setCurrentDesktop (w->screen, w->desktop);
-
-	if (w->minimized)
-	    unminimizeWindow (w);
-
-	leaveShowDesktopMode (w->screen, w);
-
 	w->state &= ~CompWindowStateShadedMask;
 	if (w->shaded)
 	    showWindow (w);
