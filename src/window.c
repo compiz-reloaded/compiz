@@ -1577,6 +1577,7 @@ addWindow (CompScreen *screen,
     w->initialViewportY = screen->y;
 
     w->pendingUnmaps = 0;
+    w->pendingMaps   = 0;
 
     w->startupId = NULL;
     w->resName   = NULL;
@@ -1851,6 +1852,8 @@ addWindow (CompScreen *screen,
 			   w->desktop);
 	}
 
+	w->pendingMaps++;
+
 	mapWindow (w);
 
 	updateWindowAttributes (w, FALSE);
@@ -1979,6 +1982,8 @@ mapWindow (CompWindow *w)
 {
     if (w->attrib.map_state == IsViewable)
 	return;
+
+    w->pendingMaps--;
 
     w->mapNum = w->screen->mapNum++;
 
@@ -2650,7 +2655,7 @@ avoidStackingRelativeTo (CompWindow *w)
     if (w->attrib.override_redirect)
 	return TRUE;
 
-    if (!w->shaded)
+    if (!w->shaded && !w->pendingMaps)
     {
 	if (w->attrib.map_state != IsViewable || w->mapNum == 0)
 	    return TRUE;
@@ -2975,7 +2980,7 @@ stackTransients (CompWindow	*w,
 	    if (xwc->sibling == t->id)
 		return FALSE;
 
-	    if (t->mapNum)
+	    if (t->mapNum || t->pendingMaps)
 		configureXWindow (t, CWSibling | CWStackMode, xwc);
 	}
     }
@@ -3000,7 +3005,7 @@ stackAncestors (CompWindow     *w,
 	    if (ancestor->type & CompWindowTypeDesktopMask)
 		return;
 
-	    if (ancestor->mapNum)
+	    if (ancestor->mapNum || ancestor->pendingMaps)
 		configureXWindow (ancestor,
 				  CWSibling | CWStackMode,
 				  xwc);
@@ -3027,7 +3032,7 @@ stackAncestors (CompWindow     *w,
 		if (a->type & CompWindowTypeDesktopMask)
 		    continue;
 
-		if (a->mapNum)
+		if (a->mapNum || a->pendingMaps)
 		    configureXWindow (a,
 				      CWSibling | CWStackMode,
 				      xwc);
@@ -3931,6 +3936,8 @@ showWindow (CompWindow *w)
     }
 
     w->state &= ~CompWindowStateHiddenMask;
+
+    w->pendingMaps++;
 
     XMapWindow (w->screen->display->display, w->id);
 

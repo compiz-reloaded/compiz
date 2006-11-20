@@ -1871,6 +1871,8 @@ handleEvent (CompDisplay *d,
 
 		applyStartupProperties (w->screen, w);
 
+		w->pendingMaps++;
+
 		XMapWindow (d->display, event->xmaprequest.window);
 
 		updateWindowAttributes (w, FALSE);

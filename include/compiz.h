@@ -1882,6 +1882,7 @@ struct _CompWindow {
     unsigned int desktop;
 
     int pendingUnmaps;
+    int pendingMaps;
 
     char *startupId;
     char *resName;
