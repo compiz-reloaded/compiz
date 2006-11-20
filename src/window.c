@@ -2614,6 +2614,20 @@ moveInputFocusToWindow (CompWindow *w)
 
 	    XSendEvent (d->display, w->id, FALSE, NoEventMask, &ev);
 	}
+	else if (!modalTransient)
+	{
+	    CompWindow *ancestor;
+
+	    /* move input to closest ancestor */
+	    for (ancestor = s->windows; ancestor; ancestor = ancestor->next)
+	    {
+		if (isAncestorTo (w, ancestor))
+		{
+		    moveInputFocusToWindow (ancestor);
+		    break;
+		}
+	    }
+	}
     }
 }
 
