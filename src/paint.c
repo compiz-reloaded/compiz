@@ -34,7 +34,7 @@ ScreenPaintAttrib defaultScreenPaintAttrib = {
 };
 
 WindowPaintAttrib defaultWindowPaintAttrib = {
-    OPAQUE, 1.0f, 1.0f
+    OPAQUE, BRIGHT, COLOR, 1.0f, 1.0f, 0.0f, 0.0f
 };
 
 void
@@ -584,7 +584,9 @@ drawWindowTexture (CompWindow		   *w,
     {
 	glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
 	glScalef (attrib->xScale, attrib->yScale, 0.0f);
-	glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
+	glTranslatef (attrib->xTranslate / attrib->xScale - w->attrib.x,
+		      attrib->yTranslate / attrib->yScale - w->attrib.y,
+		      0.0f);
 
 	filter = w->screen->filter[WINDOW_TRANS_FILTER];
     }

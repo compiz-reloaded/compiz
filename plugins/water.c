@@ -1052,7 +1052,9 @@ waterDrawWindowTexture (CompWindow		*w,
 	{
 	    glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
 	    glScalef (attrib->xScale, attrib->yScale, 0.0f);
-	    glTranslatef (-w->attrib.x, -w->attrib.y, 0.0f);
+	    glTranslatef (attrib->xTranslate / attrib->xScale - w->attrib.x,
+			  attrib->yTranslate / attrib->yScale - w->attrib.y,
+			  0.0f);
 	}
 
 	glEnable (GL_FRAGMENT_PROGRAM_ARB);

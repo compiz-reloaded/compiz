@@ -923,6 +923,8 @@ typedef struct _WindowPaintAttrib {
     GLushort saturation;
     GLfloat  xScale;
     GLfloat  yScale;
+    GLfloat  xTranslate;
+    GLfloat  yTranslate;
 } WindowPaintAttrib;
 
 extern ScreenPaintAttrib defaultScreenPaintAttrib;
