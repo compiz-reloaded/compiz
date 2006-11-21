@@ -1505,6 +1505,7 @@ addScreen (CompDisplay *display,
     s->applyScreenTransform   = applyScreenTransform;
     s->paintBackground        = paintBackground;
     s->paintWindow            = paintWindow;
+    s->drawWindow             = drawWindow;
     s->addWindowGeometry      = addWindowGeometry;
     s->drawWindowTexture      = drawWindowTexture;
     s->drawWindowGeometry     = drawWindowGeometry;

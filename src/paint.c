@@ -800,10 +800,10 @@ drawWindowTexture (CompWindow		   *w,
 }
 
 Bool
-paintWindow (CompWindow		     *w,
-	     const WindowPaintAttrib *attrib,
-	     Region		     region,
-	     unsigned int	     mask)
+drawWindow (CompWindow		    *w,
+	    const WindowPaintAttrib *attrib,
+	    Region		    region,
+	    unsigned int	    mask)
 {
     if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
 	region = &infiniteRegion;
@@ -854,6 +854,15 @@ paintWindow (CompWindow		     *w,
     }
 
     return TRUE;
+}
+
+Bool
+paintWindow (CompWindow		     *w,
+	     const WindowPaintAttrib *attrib,
+	     Region		     region,
+	     unsigned int	     mask)
+{
+    return (*w->screen->drawWindow) (w, attrib, region, mask);
 }
 
 void

@@ -981,6 +981,11 @@ typedef Bool (*PaintWindowProc) (CompWindow		 *window,
 				 Region			 region,
 				 unsigned int		 mask);
 
+typedef Bool (*DrawWindowProc) (CompWindow		*window,
+				const WindowPaintAttrib *attrib,
+				Region			region,
+				unsigned int		mask);
+
 typedef void (*AddWindowGeometryProc) (CompWindow *window,
 				       CompMatrix *matrix,
 				       int	  nMatrix,
@@ -1059,6 +1064,12 @@ drawWindowTexture (CompWindow		   *w,
 		   CompTexture		   *texture,
 		   const WindowPaintAttrib *attrib,
 		   unsigned int		   mask);
+
+Bool
+drawWindow (CompWindow		    *w,
+	    const WindowPaintAttrib *attrib,
+	    Region		    region,
+	    unsigned int	    mask);
 
 Bool
 paintWindow (CompWindow		     *w,
@@ -1562,6 +1573,7 @@ struct _CompScreen {
     ApplyScreenTransformProc   applyScreenTransform;
     PaintBackgroundProc        paintBackground;
     PaintWindowProc	       paintWindow;
+    DrawWindowProc	       drawWindow;
     AddWindowGeometryProc      addWindowGeometry;
     DrawWindowGeometryProc     drawWindowGeometry;
     DrawWindowTextureProc      drawWindowTexture;
