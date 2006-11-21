@@ -1634,6 +1634,8 @@ addWindow (CompScreen *screen,
     w->paint.saturation = w->saturation = COLOR;
     w->paint.xScale	= 1.0f;
     w->paint.yScale	= 1.0f;
+    w->paint.xTranslate	= 0.0f;
+    w->paint.yTranslate	= 0.0f;
 
     w->lastPaint = w->paint;
 
