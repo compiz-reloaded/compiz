@@ -1,3 +1,47 @@
+Release 0.3.4 (2006-11-21 David Reveman <davidr@novell.com>)
+============================================================
+Development release.
+
+Edge button, which can be used to require a button press
+for edge actions to be triggered.
+
+Basic compiz event support.
+
+Zoom plugin now works without "largedesktop" feature.
+
+Cube plugin now handles desktop width less than 4 times
+the screen better.
+
+Support for multiple desktops (workspaces).
+
+Handling of _NET_DESKTOP_GEOMETRY client messages has
+been fixed.
+
+Much better multi-head support.
+
+Annotate plugin has been added.
+
+Clone plugin which can be used to clone outputs in a
+convenient way has been added. Currently more of a
+prototype as we need randr++ and input transformation
+in the server to do this properly.
+
+Shadow color option has been added.
+
+initiate_all option has been added to scale plugin.
+
+Zoom factor option has been added to zoom plugin.
+
+Support for new metacity theme version and support for
+metacity versions < 2.15.21.
+
+Event window placement when using some metacity
+themes has been fixed.
+
+Fix a number of issues related to minimizing windows
+with transients.
+
+
 Release 0.3.2 (2006-10-20 David Reveman <davidr@novell.com>)
 ============================================================
 Development release.
