@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-20 14:40-0400\n"
+"POT-Creation-Date: 2006-11-21 10:53-0500\n"
 "PO-Revision-Date: 2006-07-20 10:19-0400\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -21,191 +21,191 @@ msgstr ""
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: plugins/cube.c:875
+#: plugins/cube.c:990
 msgid "Cube Color"
 msgstr "Barva kostky"
 
-#: plugins/cube.c:876
+#: plugins/cube.c:991
 msgid "Color of top and bottom sides of the cube"
 msgstr "Barva vrchní a spodní strany kostky"
 
-#: plugins/cube.c:885
+#: plugins/cube.c:1000
 msgid "Inside Cube"
 msgstr "Uvnitř kostky"
 
-#: plugins/cube.c:886
+#: plugins/cube.c:1001
 msgid "Inside cube"
 msgstr "V kostce"
 
-#: plugins/cube.c:892
+#: plugins/cube.c:1007
 msgid "Scale image"
 msgstr "Škálovat obrázek"
 
-#: plugins/cube.c:893
+#: plugins/cube.c:1008
 msgid "Scale images to cover top face of cube"
 msgstr "Změnit velikost obrázků podle vrchu kostky"
 
-#: plugins/cube.c:899
+#: plugins/cube.c:1014
 msgid "Image files"
 msgstr "Obrázkové soubory"
 
-#: plugins/cube.c:900
+#: plugins/cube.c:1015
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "Seznam PNG a SVG souborů, které mají být vykresleny na vrchu kostky"
 
-#: plugins/cube.c:913
+#: plugins/cube.c:1028
 msgid "Skydome"
 msgstr "Nebeská báň"
 
-#: plugins/cube.c:914
+#: plugins/cube.c:1029
 msgid "Render skydome"
 msgstr "Vykreslit nebeskou báň"
 
-#: plugins/cube.c:920
+#: plugins/cube.c:1035
 msgid "Skydome Image"
 msgstr "Obrázek nebeské báně"
 
-#: plugins/cube.c:921
+#: plugins/cube.c:1036
 msgid "Image to use as texture for the skydome"
 msgstr "Obrázek pro texturu nebeské báně"
 
-#: plugins/cube.c:929
+#: plugins/cube.c:1044
 msgid "Animate Skydome"
 msgstr "Animovat nebeskou báň"
 
-#: plugins/cube.c:930
+#: plugins/cube.c:1045
 msgid "Animate skydome when rotating cube"
 msgstr "Animovat nebeskou báň při rotaci kostky"
 
-#: plugins/cube.c:936
+#: plugins/cube.c:1051
 msgid "Skydome Gradient Start Color"
 msgstr ""
 
-#: plugins/cube.c:937
+#: plugins/cube.c:1052
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 
-#: plugins/cube.c:947
+#: plugins/cube.c:1062
 msgid "Skydome Gradient End Color"
 msgstr ""
 
-#: plugins/cube.c:948
+#: plugins/cube.c:1063
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
 
-#: plugins/cube.c:958 plugins/rotate.c:302
+#: plugins/cube.c:1073 plugins/rotate.c:302
 msgid "Acceleration"
 msgstr "Akcelerace"
 
-#: plugins/cube.c:959
+#: plugins/cube.c:1074
 msgid "Fold Acceleration"
 msgstr "Zrychlení sbalení"
 
-#: plugins/cube.c:968 plugins/minimize.c:203 plugins/rotate.c:319
-#: plugins/scale.c:326 plugins/switcher.c:347 plugins/zoom.c:223
+#: plugins/cube.c:1083 plugins/minimize.c:203 plugins/rotate.c:319
+#: plugins/scale.c:335 plugins/switcher.c:347 plugins/zoom.c:239
 msgid "Speed"
 msgstr "Rychlost"
 
-#: plugins/cube.c:969
+#: plugins/cube.c:1084
 msgid "Fold Speed"
 msgstr "Rychlost sbalení"
 
-#: plugins/cube.c:978 plugins/minimize.c:213 plugins/rotate.c:329
-#: plugins/scale.c:336 plugins/switcher.c:357 plugins/zoom.c:233
+#: plugins/cube.c:1093 plugins/minimize.c:213 plugins/rotate.c:329
+#: plugins/scale.c:345 plugins/switcher.c:357 plugins/zoom.c:249
 msgid "Timestep"
 msgstr "Časový krok"
 
-#: plugins/cube.c:979
+#: plugins/cube.c:1094
 msgid "Fold Timestep"
 msgstr "Časový krok sbalení"
 
-#: plugins/cube.c:988 plugins/switcher.c:382
+#: plugins/cube.c:1103 plugins/switcher.c:382
 msgid "Mipmap"
 msgstr "Mipmap"
 
-#: plugins/cube.c:989 plugins/switcher.c:383
+#: plugins/cube.c:1104 plugins/switcher.c:383
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Jeli to možné, vytvářet pro kvalitní škálování mipmapy"
 
-#: plugins/cube.c:1574
+#: plugins/cube.c:1795
 msgid "Unfold"
 msgstr "Rozbalit"
 
-#: plugins/cube.c:1575
+#: plugins/cube.c:1796
 msgid "Unfold cube"
 msgstr "Rozbalit kostku"
 
-#: plugins/cube.c:1592
+#: plugins/cube.c:1813
 msgid "Next Slide"
 msgstr "Další snímek"
 
-#: plugins/cube.c:1593
+#: plugins/cube.c:1814
 msgid "Advance to next slide"
 msgstr "Postoupit k dalšímu snímku"
 
-#: plugins/cube.c:1610
+#: plugins/cube.c:1831
 msgid "Previous Slide"
 msgstr "Předchozí snímek"
 
-#: plugins/cube.c:1611
+#: plugins/cube.c:1832
 msgid "Go back to previous slide"
 msgstr "Jít zpět na předchozí snímek"
 
-#: plugins/cube.c:1808
+#: plugins/cube.c:2037
 msgid "Desktop Cube"
 msgstr "Kostka plochy"
 
-#: plugins/cube.c:1809
+#: plugins/cube.c:2038
 msgid "Place windows on cube"
 msgstr "Rozmístit okna na kostku"
 
-#: plugins/decoration.c:266
+#: plugins/decoration.c:275
 msgid "Shadow Radius"
 msgstr "Poloměr stínu"
 
-#: plugins/decoration.c:267
+#: plugins/decoration.c:276
 msgid "Drop shadow radius"
 msgstr "Poloměr stínu"
 
-#: plugins/decoration.c:276
+#: plugins/decoration.c:285
 msgid "Shadow Opacity"
 msgstr "Krytí stínu"
 
-#: plugins/decoration.c:277
+#: plugins/decoration.c:286
 msgid "Drop shadow opacity"
 msgstr "Krytí stínu"
 
-#: plugins/decoration.c:286
+#: plugins/decoration.c:305
 msgid "Shadow Offset X"
 msgstr "Posun stínu X"
 
-#: plugins/decoration.c:287
+#: plugins/decoration.c:306
 msgid "Drop shadow X offset"
 msgstr "Posun stínu X"
 
-#: plugins/decoration.c:295
+#: plugins/decoration.c:314
 msgid "Shadow Offset Y"
 msgstr "Posun stínu Y"
 
-#: plugins/decoration.c:296
+#: plugins/decoration.c:315
 msgid "Drop shadow Y offset"
 msgstr "Posun stínu Y"
 
-#: plugins/decoration.c:304
+#: plugins/decoration.c:323
 #, fuzzy
 msgid "Command"
 msgstr "Příkazová řádka %d"
 
-#: plugins/decoration.c:305
+#: plugins/decoration.c:324
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 
-#: plugins/decoration.c:1433
+#: plugins/decoration.c:1453
 msgid "Window Decoration"
 msgstr "Dekorace oken"
 
-#: plugins/decoration.c:1434
+#: plugins/decoration.c:1454
 msgid "Window decorations"
 msgstr "Dekorace oken"
 
@@ -276,44 +276,44 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: plugins/fade.c:183
+#: plugins/fade.c:184
 msgid "Fade Speed"
 msgstr "Rychlost blednutí"
 
-#: plugins/fade.c:184
+#: plugins/fade.c:185
 msgid "Window fade speed"
 msgstr "Rychlost blednutí oken"
 
-#: plugins/fade.c:193 plugins/minimize.c:223 plugins/scale.c:346
+#: plugins/fade.c:194 plugins/minimize.c:223 plugins/scale.c:355
 #: plugins/switcher.c:367
 msgid "Window Types"
 msgstr "Typy oken"
 
-#: plugins/fade.c:194
+#: plugins/fade.c:195
 msgid "Window types that should be fading"
 msgstr "Typy oken, které mají blednout"
 
-#: plugins/fade.c:208
+#: plugins/fade.c:209
 msgid "Visual Bell"
 msgstr "Vizuální zvonek"
 
-#: plugins/fade.c:209
+#: plugins/fade.c:210
 msgid "Fade effect on system beep"
 msgstr "Efekt blednutí při systémovém pípnutí"
 
-#: plugins/fade.c:215
+#: plugins/fade.c:216
 msgid "Fullscreen Visual Bell"
 msgstr "Celoobrazovkový vizuální zvonek"
 
-#: plugins/fade.c:216
+#: plugins/fade.c:217
 msgid "Fullscreen fade effect on system beep"
 msgstr "Celoobrazovkový efekt slábnutí při systémovém pípnutí"
 
-#: plugins/fade.c:824
+#: plugins/fade.c:831
 msgid "Fading Windows"
 msgstr "Slábnutí oken"
 
-#: plugins/fade.c:825
+#: plugins/fade.c:832
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "Blednutí mapovaných oken a materializace oken nemapovaných"
 
@@ -322,15 +322,15 @@ msgstr "Blednutí mapovaných oken a materializace oken nemapovaných"
 msgid "."
 msgstr "."
 
-#: plugins/gconf-dump.c:592
+#: plugins/gconf-dump.c:603
 msgid "Plugins that this must load before"
 msgstr "Moduly, které musí být tímto předem načteny"
 
-#: plugins/gconf-dump.c:593 plugins/gconf-dump.c:603
+#: plugins/gconf-dump.c:604 plugins/gconf-dump.c:614
 msgid "Do not modify"
 msgstr "Neměnit"
 
-#: plugins/gconf-dump.c:602
+#: plugins/gconf-dump.c:613
 msgid "Plugins that this requires"
 msgstr "Moduly, které jsou tímto vyžadovány"
 
@@ -354,51 +354,51 @@ msgstr "Stálost stínu"
 msgid "Shade resistance"
 msgstr "Stálost stínu"
 
-#: plugins/minimize.c:1052
+#: plugins/minimize.c:1061
 msgid "Minimize Effect"
 msgstr "Efekt minimalizace"
 
-#: plugins/minimize.c:1053
+#: plugins/minimize.c:1062
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Transformovat okna při jejich minimalizaci a zrušení minimalizace"
 
-#: plugins/move.c:530
+#: plugins/move.c:540
 msgid "Initiate Window Move"
 msgstr "Iniciovat přesun okna"
 
-#: plugins/move.c:531
+#: plugins/move.c:541
 msgid "Start moving window"
 msgstr "Zahájit pohyb okna"
 
-#: plugins/move.c:549 plugins/scale.c:368 plugins/switcher.c:408
+#: plugins/move.c:559 plugins/scale.c:377 plugins/switcher.c:408
 msgid "Opacity"
 msgstr "Krytí"
 
-#: plugins/move.c:550
+#: plugins/move.c:560
 msgid "Opacity level of moving windows"
 msgstr "Úroveň krytí pohybujících se oken"
 
-#: plugins/move.c:558
+#: plugins/move.c:568
 msgid "Constrain Y"
 msgstr "Omezení Y"
 
-#: plugins/move.c:559
+#: plugins/move.c:569
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Omezení Y souřadnice na pracovní prostor"
 
-#: plugins/move.c:565
+#: plugins/move.c:575
 msgid "Snapoff maximized windows"
 msgstr "Odtrhávat maximalizovaná okna"
 
-#: plugins/move.c:566
+#: plugins/move.c:576
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Snapoff and auto unmaximized maximized windows when dragging"
 
-#: plugins/move.c:732
+#: plugins/move.c:742
 msgid "Move Window"
 msgstr "Přesunout okno"
 
-#: plugins/move.c:733
+#: plugins/move.c:743
 msgid "Move window"
 msgstr "Přesunout okno"
 
@@ -410,11 +410,11 @@ msgstr "Řešení problémů"
 msgid "Window placement workarounds"
 msgstr "Nouzová řešení umístění oken"
 
-#: plugins/place.c:1167
+#: plugins/place.c:1145
 msgid "Place Windows"
 msgstr "Rozmístit okna"
 
-#: plugins/place.c:1168
+#: plugins/place.c:1146
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Umístit mapovaná okna na odpovídající pozice"
 
@@ -434,19 +434,19 @@ msgstr "Změnit velikost okna"
 msgid "Resize window"
 msgstr "Změnit velikost okna"
 
-#: plugins/rotate.c:285 plugins/zoom.c:206
+#: plugins/rotate.c:285 plugins/zoom.c:222
 msgid "Pointer Invert Y"
 msgstr "Pointer Invert Y"
 
-#: plugins/rotate.c:286 plugins/zoom.c:207
+#: plugins/rotate.c:286 plugins/zoom.c:223
 msgid "Invert Y axis for pointer movement"
 msgstr "Invertovat osu Y pro pohyb ukazatele"
 
-#: plugins/rotate.c:292 plugins/zoom.c:213
+#: plugins/rotate.c:292 plugins/zoom.c:229
 msgid "Pointer Sensitivity"
 msgstr "Citlivost ukazatele"
 
-#: plugins/rotate.c:293 plugins/zoom.c:214
+#: plugins/rotate.c:293 plugins/zoom.c:230
 msgid "Sensitivity of pointer movement"
 msgstr "Citlivost pohybu ukazatele"
 
@@ -470,146 +470,146 @@ msgstr "Rychlost otáčení"
 msgid "Rotation Timestep"
 msgstr "Časový krok otáčení"
 
-#: plugins/rotate.c:1731 plugins/water.c:1646 plugins/zoom.c:710
+#: plugins/rotate.c:1743 plugins/water.c:1647 plugins/zoom.c:750
 msgid "Initiate"
 msgstr "Iniciovat"
 
-#: plugins/rotate.c:1732
+#: plugins/rotate.c:1744
 msgid "Start Rotation"
 msgstr "Zahájit otáčení"
 
-#: plugins/rotate.c:1746
+#: plugins/rotate.c:1758
 msgid "Rotate Left"
 msgstr "Otočit vlevo"
 
-#: plugins/rotate.c:1747
+#: plugins/rotate.c:1759
 msgid "Rotate left"
 msgstr "Otočit vlevo"
 
-#: plugins/rotate.c:1765
+#: plugins/rotate.c:1777
 msgid "Rotate Right"
 msgstr "Otočit vpravo"
 
-#: plugins/rotate.c:1766
+#: plugins/rotate.c:1778
 msgid "Rotate right"
 msgstr "Otočit vpravo"
 
-#: plugins/rotate.c:1784
+#: plugins/rotate.c:1796
 msgid "Rotate Left with Window"
 msgstr "Otočit vlevo s oknem"
 
-#: plugins/rotate.c:1785
+#: plugins/rotate.c:1797
 msgid "Rotate left and bring active window along"
 msgstr "Otočit vlevo a vzít aktivní okno s sebou"
 
-#: plugins/rotate.c:1804
+#: plugins/rotate.c:1816
 msgid "Rotate Right with Window"
 msgstr "Otočit vpravo s oknem"
 
-#: plugins/rotate.c:1805
+#: plugins/rotate.c:1817
 msgid "Rotate right and bring active window along"
 msgstr "Otočit vpravo a vzít aktivní okno s sebou"
 
-#: plugins/rotate.c:1822
+#: plugins/rotate.c:1834
 #, c-format
 msgid "Rotate To Face %d"
 msgstr "Otočit na stranu %d"
 
-#: plugins/rotate.c:1823
+#: plugins/rotate.c:1835
 #, c-format
 msgid "Rotate to face %d"
 msgstr "Otočit na stranu %d"
 
-#: plugins/rotate.c:1824
+#: plugins/rotate.c:1836
 #, c-format
 msgid "Rotate To Face %d with Window"
 msgstr "Otočit na stranu %d s oknem"
 
-#: plugins/rotate.c:1825
+#: plugins/rotate.c:1837
 #, c-format
 msgid "Rotate to face %d and bring active window along"
 msgstr "Otočit na stranu %d a vzít aktivní okno s sebou"
 
-#: plugins/rotate.c:1874
+#: plugins/rotate.c:1886
 #, fuzzy
 msgid "Rotate To"
 msgstr "Otočit vlevo"
 
-#: plugins/rotate.c:1875
+#: plugins/rotate.c:1887
 #, fuzzy
 msgid "Rotate to viewport"
 msgstr "Otočit na stranu %d"
 
-#: plugins/rotate.c:1886
+#: plugins/rotate.c:1898
 #, fuzzy
 msgid "Rotate Window"
 msgstr "Přesunout okno"
 
-#: plugins/rotate.c:1887
+#: plugins/rotate.c:1899
 #, fuzzy
 msgid "Rotate with window"
 msgstr "Otočit vlevo s oknem"
 
-#: plugins/rotate.c:1898
+#: plugins/rotate.c:1910
 #, fuzzy
 msgid "Rotate Flip Left"
 msgstr "Otočit vlevo"
 
-#: plugins/rotate.c:1899
+#: plugins/rotate.c:1911
 #, fuzzy
 msgid "Flip to left viewport and warp pointer"
 msgstr ""
 "Překlopit na další viewport při umístění ukazatele na hranici obrazovky"
 
-#: plugins/rotate.c:1914
+#: plugins/rotate.c:1926
 #, fuzzy
 msgid "Rotate Flip Right"
 msgstr "Otočit vpravo"
 
-#: plugins/rotate.c:1915
+#: plugins/rotate.c:1927
 #, fuzzy
 msgid "Flip to right viewport and warp pointer"
 msgstr ""
 "Překlopit na další viewport při umístění ukazatele na hranici obrazovky"
 
-#: plugins/rotate.c:1930
+#: plugins/rotate.c:1942
 msgid "Edge Flip Pointer"
 msgstr "Překlápění hran ukazatelem"
 
-#: plugins/rotate.c:1931
+#: plugins/rotate.c:1943
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
 "Překlopit na další viewport při umístění ukazatele na hranici obrazovky"
 
-#: plugins/rotate.c:1938
+#: plugins/rotate.c:1950
 msgid "Edge Flip Move"
 msgstr "Překlápění hran při přesunu"
 
-#: plugins/rotate.c:1939
+#: plugins/rotate.c:1951
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr "Překlopit na další viewport při přesunu okna na hranici obrazovky"
 
-#: plugins/rotate.c:1946
+#: plugins/rotate.c:1958
 msgid "Edge Flip DnD"
 msgstr "Překlápění hran DnD"
 
-#: plugins/rotate.c:1947
+#: plugins/rotate.c:1959
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr "Překlopit na další viewport při přetažení objektu na hranici obrazovky"
 
-#: plugins/rotate.c:1954
+#: plugins/rotate.c:1966
 msgid "Flip Time"
 msgstr "Doba překlopení"
 
-#: plugins/rotate.c:1955
+#: plugins/rotate.c:1967
 msgid "Timeout before flipping viewport"
 msgstr "Prodleva před překlopením viewportu"
 
-#: plugins/rotate.c:2123
+#: plugins/rotate.c:2135
 msgid "Rotate Cube"
 msgstr "Otočit kostkou"
 
-#: plugins/rotate.c:2124
+#: plugins/rotate.c:2136
 msgid "Rotate desktop cube"
 msgstr "Otočit kostkou ploch"
 
@@ -629,67 +629,77 @@ msgstr ""
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:310
+#: plugins/scale.c:319
 msgid "Spacing"
 msgstr "Mezery"
 
-#: plugins/scale.c:311
+#: plugins/scale.c:320
 msgid "Space between windows"
 msgstr "Mezera mezi okny"
 
-#: plugins/scale.c:319
+#: plugins/scale.c:328
 msgid "Sloppy Focus"
 msgstr "Sloppy Focus"
 
-#: plugins/scale.c:320
+#: plugins/scale.c:329
 msgid "Focus window when mouse moves over them"
 msgstr "Změřit okno, když se nad něj přesune myš"
 
-#: plugins/scale.c:327
+#: plugins/scale.c:336
 msgid "Scale speed"
 msgstr "Rychlost škálování"
 
-#: plugins/scale.c:337
+#: plugins/scale.c:346
 msgid "Scale timestep"
 msgstr "Časový krok škálování"
 
-#: plugins/scale.c:347
+#: plugins/scale.c:356
 msgid "Window types that should scaled in scale mode"
 msgstr "Typy oken, které mají být škálovány v režimu škálování"
 
-#: plugins/scale.c:361
+#: plugins/scale.c:370
 msgid "Darken Background"
 msgstr "Ztmavit pozadí"
 
-#: plugins/scale.c:362
+#: plugins/scale.c:371
 msgid "Darken background when scaling windows"
 msgstr "Ztmavit pozadí při škálování oken"
 
-#: plugins/scale.c:369 plugins/switcher.c:409
+#: plugins/scale.c:378 plugins/switcher.c:409
 msgid "Amount of opacity in percent"
 msgstr "Krytí v procentech"
 
-#: plugins/scale.c:377
+#: plugins/scale.c:386
 msgid "Overlay Icon"
 msgstr "Překrýt ikonou"
 
-#: plugins/scale.c:378
+#: plugins/scale.c:387
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Překrýt okna ikonou po změně jejich velikosti"
 
-#: plugins/scale.c:1368
+#: plugins/scale.c:1521
 msgid "Initiate Window Picker"
 msgstr "Spustit výběr oken"
 
-#: plugins/scale.c:1369
+#: plugins/scale.c:1522
 msgid "Layout and start transforming windows"
 msgstr "Rozvržení a počátek transformace oken"
 
-#: plugins/scale.c:1567
+#: plugins/scale.c:1538
+#, fuzzy
+msgid "Initiate Window Picker For All Windows"
+msgstr "Spustit výběr oken"
+
+#: plugins/scale.c:1539
+#, fuzzy
+msgid "Layout and start transforming all windows"
+msgstr "Rozvržení a počátek transformace oken"
+
+#: plugins/scale.c:1741
 msgid "Scale"
 msgstr "Měřítko"
 
-#: plugins/scale.c:1568
+#: plugins/scale.c:1742
 msgid "Scale windows"
 msgstr "Škálovat okna"
 
@@ -753,531 +763,536 @@ msgstr "Minimalizované"
 msgid "Show minimized windows"
 msgstr "Zobrazit minimalizovaná okna"
 
-#: plugins/switcher.c:1867 plugins/switcher.c:1903
+#: plugins/switcher.c:1880 plugins/switcher.c:1916
 #, fuzzy
 msgid "Next window"
 msgstr "Přesunout okno"
 
-#: plugins/switcher.c:1868
+#: plugins/switcher.c:1881
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 
-#: plugins/switcher.c:1885 plugins/switcher.c:1922
+#: plugins/switcher.c:1898 plugins/switcher.c:1935
 #, fuzzy
 msgid "Prev window"
 msgstr "Předchozí okno"
 
-#: plugins/switcher.c:1886
+#: plugins/switcher.c:1899
 #, fuzzy
 msgid "Popup switcher if not visible and select previous window"
 msgstr "Modifikační klávesa pro výběr předchozího okna"
 
-#: plugins/switcher.c:1904
+#: plugins/switcher.c:1917
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 
-#: plugins/switcher.c:1923
+#: plugins/switcher.c:1936
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 
-#: plugins/switcher.c:2094 plugins/switcher.c:2095
+#: plugins/switcher.c:2107 plugins/switcher.c:2108
 msgid "Application Switcher"
 msgstr "Přepínač aplikací"
 
-#: plugins/water.c:1647
+#: plugins/water.c:1648
 msgid "Enable pointer water effects"
 msgstr "Povolit vodní efekty ukazatele"
 
-#: plugins/water.c:1660
+#: plugins/water.c:1661
 msgid "Toggle rain"
 msgstr "Přepnout déšť"
 
-#: plugins/water.c:1661
+#: plugins/water.c:1662
 msgid "Toggle rain effect"
 msgstr "Přepnout efekt deště"
 
-#: plugins/water.c:1676
+#: plugins/water.c:1677
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1677
+#: plugins/water.c:1678
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1692
+#: plugins/water.c:1693
 msgid "Offset Scale"
 msgstr "Offset Scale"
 
-#: plugins/water.c:1693
+#: plugins/water.c:1694
 msgid "Water offset scale"
 msgstr "Water offset scale"
 
-#: plugins/water.c:1702
+#: plugins/water.c:1703
 msgid "Rain Delay"
 msgstr "Zpoždění deště"
 
-#: plugins/water.c:1703
+#: plugins/water.c:1704
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Zpoždění (v ms) mezi kapkami"
 
-#: plugins/water.c:1711
+#: plugins/water.c:1712
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1712
+#: plugins/water.c:1713
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1723
+#: plugins/water.c:1724
 msgid "Point"
 msgstr ""
 
-#: plugins/water.c:1724
+#: plugins/water.c:1725
 msgid "Add point"
 msgstr ""
 
-#: plugins/water.c:1735
+#: plugins/water.c:1736
 msgid "Line"
 msgstr ""
 
-#: plugins/water.c:1736
+#: plugins/water.c:1737
 msgid "Add line"
 msgstr ""
 
-#: plugins/water.c:1886
+#: plugins/water.c:1887
 msgid "Water Effect"
 msgstr "Vodní efekt"
 
-#: plugins/water.c:1887
+#: plugins/water.c:1888
 msgid "Adds water effects to different desktop actions"
 msgstr "Do různých akcí plochy přidává efekt vody"
 
-#: plugins/wobbly.c:135 plugins/wobbly.c:2911
+#: plugins/wobbly.c:135 plugins/wobbly.c:2930
 msgid "Shiver"
 msgstr ""
 
-#: plugins/wobbly.c:389
+#: plugins/wobbly.c:390
 msgid "Friction"
 msgstr "Tření"
 
-#: plugins/wobbly.c:390
+#: plugins/wobbly.c:391
 msgid "Spring Friction"
 msgstr "Tření pružiny"
 
-#: plugins/wobbly.c:399
+#: plugins/wobbly.c:400
 msgid "Spring K"
 msgstr "Pružina K"
 
-#: plugins/wobbly.c:400
+#: plugins/wobbly.c:401
 msgid "Spring Konstant"
 msgstr "Konstanta pružiny"
 
-#: plugins/wobbly.c:409
+#: plugins/wobbly.c:410
 msgid "Grid Resolution"
 msgstr "Rozlišení mřížky"
 
-#: plugins/wobbly.c:410
+#: plugins/wobbly.c:411
 msgid "Vertex Grid Resolution"
 msgstr "Rozlišení vertexové mřížky"
 
-#: plugins/wobbly.c:418
+#: plugins/wobbly.c:419
 msgid "Minimum Grid Size"
 msgstr "Minimální velikost mřížky"
 
-#: plugins/wobbly.c:419
+#: plugins/wobbly.c:420
 msgid "Minimum Vertex Grid Size"
 msgstr "Minimální velikost vertex mřížky"
 
-#: plugins/wobbly.c:427
+#: plugins/wobbly.c:428
 msgid "Map Effect"
 msgstr "Efekt mapování"
 
-#: plugins/wobbly.c:428
+#: plugins/wobbly.c:429
 msgid "Map Window Effect"
 msgstr "Efekt mapování okna"
 
-#: plugins/wobbly.c:436
+#: plugins/wobbly.c:437
 msgid "Focus Effect"
 msgstr "Efekt zaměření"
 
-#: plugins/wobbly.c:437
+#: plugins/wobbly.c:438
 msgid "Focus Window Effect"
 msgstr "Efekt při zaměření okna"
 
-#: plugins/wobbly.c:445
+#: plugins/wobbly.c:446
 msgid "Map Window Types"
 msgstr "Typy oken pro mapování"
 
-#: plugins/wobbly.c:446
+#: plugins/wobbly.c:447
 msgid "Window types that should wobble when mapped"
 msgstr "Typy oken, které se při mapování mají rozhoupat"
 
-#: plugins/wobbly.c:460
+#: plugins/wobbly.c:461
 msgid "Focus Window Types"
 msgstr "Typy okna pro efekt při zaměření"
 
-#: plugins/wobbly.c:461
+#: plugins/wobbly.c:462
 msgid "Window types that should wobble when focused"
 msgstr "Typy oken, které se při zaměření mají rozhoupat"
 
-#: plugins/wobbly.c:473
+#: plugins/wobbly.c:474
 msgid "Move Window Types"
 msgstr "Typy oken pro efekt při přesunu"
 
-#: plugins/wobbly.c:474
+#: plugins/wobbly.c:475
 msgid "Window types that should wobble when moved"
 msgstr "Typy oken, které se při přesouvání mají rozhoupat"
 
-#: plugins/wobbly.c:488
+#: plugins/wobbly.c:489
 msgid "Grab Window Types"
 msgstr "Typy oken pro efekt při uchopení"
 
-#: plugins/wobbly.c:489
+#: plugins/wobbly.c:490
 msgid "Window types that should wobble when grabbed"
 msgstr "Typy oken, které se při uchopení mají rozhoupat"
 
-#: plugins/wobbly.c:501
+#: plugins/wobbly.c:502
 msgid "Maximize Effect"
 msgstr "Efekt maximalizace"
 
-#: plugins/wobbly.c:502
+#: plugins/wobbly.c:503
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "Vlnivý efekt"
 
-#: plugins/wobbly.c:2890
+#: plugins/wobbly.c:2909
 msgid "Snap windows"
 msgstr "Přichytávat okna"
 
-#: plugins/wobbly.c:2891
+#: plugins/wobbly.c:2910
 msgid "Toggle window snapping"
 msgstr "Přepnout přichytávání oken"
 
-#: plugins/wobbly.c:2904
+#: plugins/wobbly.c:2923
 msgid "Snap Inverted"
 msgstr ""
 
-#: plugins/wobbly.c:2905
+#: plugins/wobbly.c:2924
 #, fuzzy
 msgid "Inverted window snapping"
 msgstr "Přepnout přichytávání oken"
 
-#: plugins/wobbly.c:2912
+#: plugins/wobbly.c:2931
 #, fuzzy
 msgid "Make window shiver"
 msgstr "Škálovat okna"
 
-#: plugins/wobbly.c:3114
+#: plugins/wobbly.c:3135
 msgid "Wobbly Windows"
 msgstr "Vlnící se okna"
 
-#: plugins/wobbly.c:3115
+#: plugins/wobbly.c:3136
 msgid "Use spring model for wobbly window effect"
 msgstr "Pro efekt rozhoupání okna použít pružinový model"
 
-#: plugins/zoom.c:224
+#: plugins/zoom.c:240
 msgid "Zoom Speed"
 msgstr "Rychlost přiblížení"
 
-#: plugins/zoom.c:234
+#: plugins/zoom.c:250
 msgid "Zoom Timestep"
 msgstr "Časový krok přiblížení"
 
-#: plugins/zoom.c:243
+#: plugins/zoom.c:259 plugins/zoom.c:260
+#, fuzzy
+msgid "Zoom factor"
+msgstr "Oddálit"
+
+#: plugins/zoom.c:269
 msgid "Filter Linear"
 msgstr "Lineární filtr"
 
-#: plugins/zoom.c:244
+#: plugins/zoom.c:270
 msgid "USe linear filter when zoomed in"
 msgstr "Při přiblížení používat lineární filtr"
 
-#: plugins/zoom.c:711 plugins/zoom.c:725 plugins/zoom.c:726
+#: plugins/zoom.c:751 plugins/zoom.c:765 plugins/zoom.c:766
 msgid "Zoom In"
 msgstr "Přiblížit"
 
-#: plugins/zoom.c:740 plugins/zoom.c:741
+#: plugins/zoom.c:780 plugins/zoom.c:781
 msgid "Zoom Out"
 msgstr "Oddálit"
 
-#: plugins/zoom.c:892
+#: plugins/zoom.c:932
 msgid "Zoom Desktop"
 msgstr "Přiblížit plochu"
 
-#: plugins/zoom.c:893
+#: plugins/zoom.c:933
 msgid "Zoom and pan desktop cube"
 msgstr "Přiblížit a posunout kostku ploch"
 
-#: src/display.c:158
+#: src/display.c:161
 msgid "Fast"
 msgstr "Rychlé"
 
-#: src/display.c:158
+#: src/display.c:161
 msgid "Good"
 msgstr "Dobré"
 
-#: src/display.c:158
+#: src/display.c:161
 msgid "Best"
 msgstr "Nejlepší"
 
-#: src/display.c:722
+#: src/display.c:725
 msgid "Active Plugins"
 msgstr "Aktivní moduly"
 
-#: src/display.c:723
+#: src/display.c:726
 msgid "List of currently active plugins"
 msgstr "Seznam právě aktivních modulů"
 
-#: src/display.c:737
+#: src/display.c:740
 msgid "Texture Filter"
 msgstr "Filtr textur"
 
-#: src/display.c:738
+#: src/display.c:741
 msgid "Texture filtering"
 msgstr "Filtrování textur"
 
-#: src/display.c:746
+#: src/display.c:749
 msgid "Click To Focus"
 msgstr "Kliknutí k zaměření"
 
-#: src/display.c:747
+#: src/display.c:750
 msgid "Click on window moves input focus to it"
 msgstr "Kliknutím na okno přesunout zaměření na okno"
 
-#: src/display.c:753
+#: src/display.c:756
 msgid "Auto-Raise"
 msgstr "Automaticky do popředí"
 
-#: src/display.c:754
+#: src/display.c:757
 msgid "Raise selected windows after interval"
 msgstr "Dát vybraná okna do popředí po uplynutí intervalu"
 
-#: src/display.c:760
+#: src/display.c:763
 msgid "Auto-Raise Delay"
 msgstr "Prodleva automatického přesunu do popředí"
 
-#: src/display.c:761
+#: src/display.c:764
 msgid "Interval before raising selected windows"
 msgstr "Interval před přesunutím vybraných oken do popředí"
 
-#: src/display.c:769
+#: src/display.c:772
 msgid "Close Window"
 msgstr "Zavřít okno"
 
-#: src/display.c:770
+#: src/display.c:773
 msgid "Close active window"
 msgstr "Zavřít aktivní okno"
 
-#: src/display.c:786
+#: src/display.c:789
 msgid "Show Main Menu"
 msgstr "Zobrazit hlavní nabídku"
 
-#: src/display.c:787
+#: src/display.c:790
 msgid "Show the main menu"
 msgstr "Zobrazit hlavní nabídku"
 
-#: src/display.c:803
+#: src/display.c:806
 msgid "Run Dialog"
 msgstr "Spustit dialog"
 
-#: src/display.c:804
+#: src/display.c:807
 msgid "Show Run Application dialog"
 msgstr "Zobrazit dialog spouštění aplikace"
 
-#: src/display.c:820
+#: src/display.c:823
 msgid "Unmaximize Window"
 msgstr "Zrušit maximalizaci okna"
 
-#: src/display.c:821
+#: src/display.c:824
 msgid "Unmaximize active window"
 msgstr "Zrušit maximalizaci aktivního okna"
 
-#: src/display.c:837
+#: src/display.c:840
 msgid "Minimize Window"
 msgstr "Minimalizovat okno"
 
-#: src/display.c:838
+#: src/display.c:841
 msgid "Minimize active window"
 msgstr "Minimalizovat aktivní okno"
 
-#: src/display.c:854
+#: src/display.c:857
 msgid "Maximize Window"
 msgstr "Maximalizovat okno"
 
-#: src/display.c:855
+#: src/display.c:858
 msgid "Maximize active window"
 msgstr "Maximalizovat aktivní okno"
 
-#: src/display.c:871
+#: src/display.c:874
 msgid "Maximize Window Horizontally"
 msgstr "Maximalizovat okno horizontálně"
 
-#: src/display.c:872
+#: src/display.c:875
 msgid "Maximize active window horizontally"
 msgstr "Maximalizovat aktivní okno horizontálně"
 
-#: src/display.c:884
+#: src/display.c:887
 msgid "Maximize Window Vertically"
 msgstr "Maximalizovat okno vertikálně"
 
-#: src/display.c:885
+#: src/display.c:888
 msgid "Maximize active window vertically"
 msgstr "Maximalizovat aktivní okno vertikálně"
 
-#: src/display.c:897 src/display.c:898
+#: src/display.c:900 src/display.c:901
 msgid "Hide all windows and focus desktop"
 msgstr "Skrýt všechna okna a zaměřit na plochu"
 
-#: src/display.c:912
+#: src/display.c:915
 #, c-format
 msgid "Command line %d"
 msgstr "Příkazová řádka %d"
 
-#: src/display.c:913
+#: src/display.c:916
 #, c-format
 msgid "Command line to be executed in shell when run_command%d is invoked"
 msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command%d"
 
-#: src/display.c:915
+#: src/display.c:918
 #, c-format
 msgid "Run command %d"
 msgstr "Spustit příkaz %d"
 
-#: src/display.c:916
+#: src/display.c:919
 #, c-format
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command%d"
 msgstr "Klávesové zkratky, které spustí příkaz určený command%d"
 
-#: src/display.c:960
+#: src/display.c:963
 msgid "Slow Animations"
 msgstr "Pomalé animace"
 
-#: src/display.c:961
+#: src/display.c:964
 msgid "Toggle use of slow animations"
 msgstr "Přepnout použití pomalých animací"
 
-#: src/display.c:977
+#: src/display.c:980
 #, fuzzy
 msgid "Raise Window"
 msgstr "Změnit velikost okna"
 
-#: src/display.c:978
+#: src/display.c:981
 #, fuzzy
 msgid "Raise window above other windows"
 msgstr "Přesunout okno do pozadí"
 
-#: src/display.c:992
+#: src/display.c:995
 msgid "Lower Window"
 msgstr "Dát okno do pozadí"
 
-#: src/display.c:993
+#: src/display.c:996
 msgid "Lower window beneath other windows"
 msgstr "Přesunout okno do pozadí"
 
-#: src/display.c:1007
+#: src/display.c:1010
 msgid "Increase Opacity"
 msgstr "Zvýšit krytí"
 
-#: src/display.c:1008
+#: src/display.c:1011
 msgid "Increase window opacity"
 msgstr "Zvýšit krytí okna"
 
-#: src/display.c:1022
+#: src/display.c:1025
 msgid "Decrease Opacity"
 msgstr "Snížit krytí"
 
-#: src/display.c:1023
+#: src/display.c:1026
 msgid "Decrease window opacity"
 msgstr "Snížit krytí oken"
 
-#: src/display.c:1037 src/display.c:1038
+#: src/display.c:1040 src/display.c:1041
 msgid "Take a screenshot"
 msgstr "Pořídit snímek obrazovky"
 
-#: src/display.c:1054 src/display.c:1055
+#: src/display.c:1057 src/display.c:1058
 msgid "Screenshot command line"
 msgstr "Screenshot command line"
 
-#: src/display.c:1063 src/display.c:1064
+#: src/display.c:1066 src/display.c:1067
 msgid "Take a screenshot of a window"
 msgstr "Pořídit snímek okna"
 
-#: src/display.c:1081 src/display.c:1082
+#: src/display.c:1084 src/display.c:1085
 msgid "Window screenshot command line"
 msgstr "Window screenshot command line"
 
-#: src/display.c:1090
+#: src/display.c:1093
 msgid "Window Menu"
 msgstr "Nabídka okna"
 
-#: src/display.c:1091
+#: src/display.c:1094
 msgid "Open window menu"
 msgstr "Otevřít nabídku okna"
 
-#: src/display.c:1110
+#: src/display.c:1113
 msgid "Raise On Click"
 msgstr "Dát do popředí při kliknutí"
 
-#: src/display.c:1111
+#: src/display.c:1114
 msgid "Raise windows when clicked"
 msgstr "Dát okna do popředí při kliknutí"
 
-#: src/display.c:1117
+#: src/display.c:1120
 msgid "Audible Bell"
 msgstr "Akustický zvonek"
 
-#: src/display.c:1118
+#: src/display.c:1121
 msgid "Audible system beep"
 msgstr "Slyšitelné systémové pípnutí"
 
-#: src/display.c:1124
+#: src/display.c:1127
 msgid "Toggle Window Maximized"
 msgstr "Přepnout maximalizaci okna"
 
-#: src/display.c:1125
+#: src/display.c:1128
 msgid "Toggle active window maximized"
 msgstr "Přepnout maximalizaci aktivního okna"
 
-#: src/display.c:1137
+#: src/display.c:1140
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Přepnout okno maximalizované horizontálně"
 
-#: src/display.c:1139
+#: src/display.c:1142
 msgid "Toggle active window maximized horizontally"
 msgstr "Přepnout horizontální maximalizaci aktivního okna"
 
-#: src/display.c:1151
+#: src/display.c:1154
 msgid "Toggle Window Maximized Vertically"
 msgstr "Přepnout okno maximalizované vertikálně"
 
-#: src/display.c:1153
+#: src/display.c:1156
 msgid "Toggle active window maximized vertically"
 msgstr "Přepnout vertikální maximalizaci aktivního okna"
 
-#: src/display.c:1165
+#: src/display.c:1168
 msgid "Hide Skip Taskbar Windows"
 msgstr "Skrýt okna nepřítomná v liště úloh"
 
-#: src/display.c:1166
+#: src/display.c:1169
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Skrýt okna nepřítomná v liště úloh při vstupu do režimu zobrazení plochy"
 
-#: src/display.c:1173
+#: src/display.c:1176
 msgid "Toggle Window Shaded"
 msgstr "Přepnout stínování okna"
 
-#: src/display.c:1174
+#: src/display.c:1177
 msgid "Toggle active window shaded"
 msgstr "Přepnout stínování aktivního okna"
 
-#: src/display.c:1190
+#: src/display.c:1193
 #, fuzzy
 msgid "Ignore Hints When Maximized"
 msgstr "Přepnout maximalizaci okna"
 
-#: src/display.c:1191
+#: src/display.c:1194
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 
@@ -1285,83 +1300,109 @@ msgstr ""
 msgid "Desktop"
 msgstr ""
 
-#: src/screen.c:269
+#: src/screen.c:619
 msgid "Detect Refresh Rate"
 msgstr "Zjistit obnovovací frekvenci"
 
-#: src/screen.c:270
+#: src/screen.c:620
 msgid "Automatic detection of refresh rate"
 msgstr "Automatická detekce obnovovací frekvence"
 
-#: src/screen.c:276
+#: src/screen.c:626
 msgid "Lighting"
 msgstr "Světlo"
 
-#: src/screen.c:277
+#: src/screen.c:627
 msgid "Use diffuse light when screen is transformed"
 msgstr "Použít rozptýlené světlo při transformaci okna"
 
-#: src/screen.c:283
+#: src/screen.c:633
 msgid "Refresh Rate"
 msgstr "Obnovovací frekvence"
 
-#: src/screen.c:284
+#: src/screen.c:634
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Frekvence překreslování obrazovky v Hz"
 
-#: src/screen.c:292
+#: src/screen.c:643
 #, fuzzy
 msgid "Horizontal Virtual Size"
 msgstr "Virtuální velikost"
 
-#: src/screen.c:293
+#: src/screen.c:644
 #, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Násobič velikosti obrazovky pro virtuální velikost"
 
-#: src/screen.c:301
+#: src/screen.c:652
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "Virtuální velikost"
 
-#: src/screen.c:302
+#: src/screen.c:653
 #, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Násobič velikosti obrazovky pro virtuální velikost"
 
-#: src/screen.c:310
+#: src/screen.c:661
 msgid "Opacity Step"
 msgstr "Krok krytí"
 
-#: src/screen.c:311
+#: src/screen.c:662
 msgid "Opacity change step"
 msgstr "Krok změny krytí"
 
-#: src/screen.c:319
+#: src/screen.c:670
 msgid "Unredirect Fullscreen Windows"
 msgstr "Unredirect Fullscreen Windows"
 
-#: src/screen.c:320
+#: src/screen.c:671
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Povolit vykreslování celoobrazovkových oken bez přesměrování do "
 "mimoobrazovkových pixmap"
 
-#: src/screen.c:327
+#: src/screen.c:678
 msgid "Default Icon"
 msgstr "Výchozí ikona"
 
-#: src/screen.c:328
+#: src/screen.c:679
 msgid "Default window icon image"
 msgstr "Výchozí ikona okna"
 
-#: src/screen.c:336
+#: src/screen.c:687
 msgid "Sync To VBlank"
 msgstr ""
 
-#: src/screen.c:337
+#: src/screen.c:688
 msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+
+#: src/screen.c:695
+#, fuzzy
+msgid "Number of Desktops"
+msgstr "Přiblížit plochu"
+
+#: src/screen.c:696
+msgid "Number of virtual desktops"
+msgstr ""
+
+#: src/screen.c:704
+msgid "Detect Outputs"
+msgstr ""
+
+#: src/screen.c:705
+#, fuzzy
+msgid "Automatic detection of output devices"
+msgstr "Automatická detekce obnovovací frekvence"
+
+#: src/screen.c:711
+msgid "Outputs"
+msgstr ""
+
+#: src/screen.c:712
+msgid "List of strings describing output devices"
 msgstr ""
 
 #~ msgid "Initiate Window Switcher"

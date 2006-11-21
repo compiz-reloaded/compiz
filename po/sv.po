@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-20 14:40-0400\n"
+"POT-Creation-Date: 2006-11-21 10:53-0500\n"
 "PO-Revision-Date: 2006-09-19 18:09+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -15,199 +15,199 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/cube.c:875
+#: plugins/cube.c:990
 msgid "Cube Color"
 msgstr "Kubfärg"
 
-#: plugins/cube.c:876
+#: plugins/cube.c:991
 msgid "Color of top and bottom sides of the cube"
 msgstr "Färg på över- och undersidorna av kuben"
 
-#: plugins/cube.c:885
+#: plugins/cube.c:1000
 msgid "Inside Cube"
 msgstr "I kuben"
 
-#: plugins/cube.c:886
+#: plugins/cube.c:1001
 msgid "Inside cube"
 msgstr "I kuben"
 
-#: plugins/cube.c:892
+#: plugins/cube.c:1007
 msgid "Scale image"
 msgstr "Skala bild"
 
-#: plugins/cube.c:893
+#: plugins/cube.c:1008
 msgid "Scale images to cover top face of cube"
 msgstr "Skala bilder för att täcka övre ytan på kuben"
 
-#: plugins/cube.c:899
+#: plugins/cube.c:1014
 msgid "Image files"
 msgstr "Bildfiler"
 
-#: plugins/cube.c:900
+#: plugins/cube.c:1015
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Lista över PNG- och SVG-filer som ska ritas ut på översta ytan av kuben"
 
-#: plugins/cube.c:913
+#: plugins/cube.c:1028
 msgid "Skydome"
 msgstr "Skydome"
 
-#: plugins/cube.c:914
+#: plugins/cube.c:1029
 msgid "Render skydome"
 msgstr "Rita ut skydome"
 
-#: plugins/cube.c:920
+#: plugins/cube.c:1035
 msgid "Skydome Image"
 msgstr "Skydome-bild"
 
-#: plugins/cube.c:921
+#: plugins/cube.c:1036
 msgid "Image to use as texture for the skydome"
 msgstr "Bild att använda som textur för skydome"
 
-#: plugins/cube.c:929
+#: plugins/cube.c:1044
 msgid "Animate Skydome"
 msgstr "Animera Skydome"
 
-#: plugins/cube.c:930
+#: plugins/cube.c:1045
 msgid "Animate skydome when rotating cube"
 msgstr "Animera skydome när kub roterar"
 
-#: plugins/cube.c:936
+#: plugins/cube.c:1051
 msgid "Skydome Gradient Start Color"
 msgstr ""
 
-#: plugins/cube.c:937
+#: plugins/cube.c:1052
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 
-#: plugins/cube.c:947
+#: plugins/cube.c:1062
 msgid "Skydome Gradient End Color"
 msgstr ""
 
-#: plugins/cube.c:948
+#: plugins/cube.c:1063
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
 
-#: plugins/cube.c:958 plugins/rotate.c:302
+#: plugins/cube.c:1073 plugins/rotate.c:302
 msgid "Acceleration"
 msgstr "Accelerering"
 
-#: plugins/cube.c:959
+#: plugins/cube.c:1074
 #, fuzzy
 msgid "Fold Acceleration"
 msgstr "Accelerering"
 
-#: plugins/cube.c:968 plugins/minimize.c:203 plugins/rotate.c:319
-#: plugins/scale.c:326 plugins/switcher.c:347 plugins/zoom.c:223
+#: plugins/cube.c:1083 plugins/minimize.c:203 plugins/rotate.c:319
+#: plugins/scale.c:335 plugins/switcher.c:347 plugins/zoom.c:239
 msgid "Speed"
 msgstr "Hastighet"
 
-#: plugins/cube.c:969
+#: plugins/cube.c:1084
 #, fuzzy
 msgid "Fold Speed"
 msgstr "Toningshastighet"
 
-#: plugins/cube.c:978 plugins/minimize.c:213 plugins/rotate.c:329
-#: plugins/scale.c:336 plugins/switcher.c:357 plugins/zoom.c:233
+#: plugins/cube.c:1093 plugins/minimize.c:213 plugins/rotate.c:329
+#: plugins/scale.c:345 plugins/switcher.c:357 plugins/zoom.c:249
 msgid "Timestep"
 msgstr "Tidsintervall"
 
-#: plugins/cube.c:979
+#: plugins/cube.c:1094
 #, fuzzy
 msgid "Fold Timestep"
 msgstr "Tidsintervall"
 
-#: plugins/cube.c:988 plugins/switcher.c:382
+#: plugins/cube.c:1103 plugins/switcher.c:382
 msgid "Mipmap"
 msgstr "Mipmap"
 
-#: plugins/cube.c:989 plugins/switcher.c:383
+#: plugins/cube.c:1104 plugins/switcher.c:383
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Generera mipmappar när det är möjligt för skalning av högre kvalitet"
 
-#: plugins/cube.c:1574
+#: plugins/cube.c:1795
 msgid "Unfold"
 msgstr "Vik ut"
 
-#: plugins/cube.c:1575
+#: plugins/cube.c:1796
 msgid "Unfold cube"
 msgstr "Vik ut kub"
 
-#: plugins/cube.c:1592
+#: plugins/cube.c:1813
 msgid "Next Slide"
 msgstr "Nästa diabild"
 
-#: plugins/cube.c:1593
+#: plugins/cube.c:1814
 msgid "Advance to next slide"
 msgstr "Fortsätt till nästa bild"
 
-#: plugins/cube.c:1610
+#: plugins/cube.c:1831
 msgid "Previous Slide"
 msgstr "Föregående diabild"
 
-#: plugins/cube.c:1611
+#: plugins/cube.c:1832
 msgid "Go back to previous slide"
 msgstr "Gå tillbaka till föregående diabild"
 
-#: plugins/cube.c:1808
+#: plugins/cube.c:2037
 msgid "Desktop Cube"
 msgstr "Skrivbordskub"
 
-#: plugins/cube.c:1809
+#: plugins/cube.c:2038
 msgid "Place windows on cube"
 msgstr "Placera fönster på kuben"
 
-#: plugins/decoration.c:266
+#: plugins/decoration.c:275
 msgid "Shadow Radius"
 msgstr "Skuggradie"
 
-#: plugins/decoration.c:267
+#: plugins/decoration.c:276
 #, fuzzy
 msgid "Drop shadow radius"
 msgstr "Radie för skuggkastning (0.0-48.0)"
 
-#: plugins/decoration.c:276
+#: plugins/decoration.c:285
 msgid "Shadow Opacity"
 msgstr "Skuggopakhet"
 
-#: plugins/decoration.c:277
+#: plugins/decoration.c:286
 #, fuzzy
 msgid "Drop shadow opacity"
 msgstr "Opakhet för skuggkastning (0.01-6.00)"
 
-#: plugins/decoration.c:286
+#: plugins/decoration.c:305
 msgid "Shadow Offset X"
 msgstr "Skuggposition X"
 
-#: plugins/decoration.c:287
+#: plugins/decoration.c:306
 #, fuzzy
 msgid "Drop shadow X offset"
 msgstr "Skuggkastning X-position (-16-16)"
 
-#: plugins/decoration.c:295
+#: plugins/decoration.c:314
 msgid "Shadow Offset Y"
 msgstr "Skuggposition Y"
 
-#: plugins/decoration.c:296
+#: plugins/decoration.c:315
 #, fuzzy
 msgid "Drop shadow Y offset"
 msgstr "Skuggkastning Y-position (-16-16)"
 
-#: plugins/decoration.c:304
+#: plugins/decoration.c:323
 #, fuzzy
 msgid "Command"
 msgstr "Kommandorad 1"
 
-#: plugins/decoration.c:305
+#: plugins/decoration.c:324
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 
-#: plugins/decoration.c:1433
+#: plugins/decoration.c:1453
 msgid "Window Decoration"
 msgstr "Fönsterdekoration"
 
-#: plugins/decoration.c:1434
+#: plugins/decoration.c:1454
 msgid "Window decorations"
 msgstr "Fönsterdekorationer"
 
@@ -279,45 +279,45 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: plugins/fade.c:183
+#: plugins/fade.c:184
 msgid "Fade Speed"
 msgstr "Toningshastighet"
 
-#: plugins/fade.c:184
+#: plugins/fade.c:185
 #, fuzzy
 msgid "Window fade speed"
 msgstr "Fönstertoningshastighet (0.1-10.0)"
 
-#: plugins/fade.c:193 plugins/minimize.c:223 plugins/scale.c:346
+#: plugins/fade.c:194 plugins/minimize.c:223 plugins/scale.c:355
 #: plugins/switcher.c:367
 msgid "Window Types"
 msgstr "Fönstertyper"
 
-#: plugins/fade.c:194
+#: plugins/fade.c:195
 msgid "Window types that should be fading"
 msgstr ""
 
-#: plugins/fade.c:208
+#: plugins/fade.c:209
 msgid "Visual Bell"
 msgstr "Visuell signal"
 
-#: plugins/fade.c:209
+#: plugins/fade.c:210
 msgid "Fade effect on system beep"
 msgstr "Toningseffekt vid systemsignal"
 
-#: plugins/fade.c:215
+#: plugins/fade.c:216
 msgid "Fullscreen Visual Bell"
 msgstr "Visuell helskärmssignal"
 
-#: plugins/fade.c:216
+#: plugins/fade.c:217
 msgid "Fullscreen fade effect on system beep"
 msgstr "Helskärmstoningseffekt vid systemsignal"
 
-#: plugins/fade.c:824
+#: plugins/fade.c:831
 msgid "Fading Windows"
 msgstr "Tonande fönster"
 
-#: plugins/fade.c:825
+#: plugins/fade.c:832
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "Tona in fönster när de kopplas och tona ut fönster när de kopplas loss"
 
@@ -326,15 +326,15 @@ msgstr "Tona in fönster när de kopplas och tona ut fönster när de kopplas lo
 msgid "."
 msgstr ""
 
-#: plugins/gconf-dump.c:592
+#: plugins/gconf-dump.c:603
 msgid "Plugins that this must load before"
 msgstr "Insticksmoduler som måste läsas in före"
 
-#: plugins/gconf-dump.c:593 plugins/gconf-dump.c:603
+#: plugins/gconf-dump.c:604 plugins/gconf-dump.c:614
 msgid "Do not modify"
 msgstr "Ändra inte"
 
-#: plugins/gconf-dump.c:602
+#: plugins/gconf-dump.c:613
 msgid "Plugins that this requires"
 msgstr "Insticksmoduler som den här kräver"
 
@@ -361,52 +361,52 @@ msgstr "Skuggmotstånd"
 msgid "Shade resistance"
 msgstr "Skuggmotstånd"
 
-#: plugins/minimize.c:1052
+#: plugins/minimize.c:1061
 msgid "Minimize Effect"
 msgstr "Minimeringseffekt"
 
-#: plugins/minimize.c:1053
+#: plugins/minimize.c:1062
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Transformera fönster när de minimeras och avminimeras"
 
-#: plugins/move.c:530
+#: plugins/move.c:540
 msgid "Initiate Window Move"
 msgstr "Initiera fönsterflyttning"
 
-#: plugins/move.c:531
+#: plugins/move.c:541
 msgid "Start moving window"
 msgstr "Börja flytta fönster"
 
-#: plugins/move.c:549 plugins/scale.c:368 plugins/switcher.c:408
+#: plugins/move.c:559 plugins/scale.c:377 plugins/switcher.c:408
 msgid "Opacity"
 msgstr "Opakhet"
 
-#: plugins/move.c:550
+#: plugins/move.c:560
 #, fuzzy
 msgid "Opacity level of moving windows"
 msgstr "Opaknivå för flyttande fönster (1-100)"
 
-#: plugins/move.c:558
+#: plugins/move.c:568
 msgid "Constrain Y"
 msgstr "Begränsa Y"
 
-#: plugins/move.c:559
+#: plugins/move.c:569
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Begränsa Y-koordinat till arbetsyta"
 
-#: plugins/move.c:565
+#: plugins/move.c:575
 msgid "Snapoff maximized windows"
 msgstr "Koppla loss maximerade fönster"
 
-#: plugins/move.c:566
+#: plugins/move.c:576
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Koppla loss och automatiskt avmaximera maximerade fönster när de dras"
 
-#: plugins/move.c:732
+#: plugins/move.c:742
 msgid "Move Window"
 msgstr "Flytta fönster"
 
-#: plugins/move.c:733
+#: plugins/move.c:743
 msgid "Move window"
 msgstr "Flytta fönster"
 
@@ -418,11 +418,11 @@ msgstr "Problemlösningar"
 msgid "Window placement workarounds"
 msgstr "Problemlösning för fönsterplacering"
 
-#: plugins/place.c:1167
+#: plugins/place.c:1145
 msgid "Place Windows"
 msgstr "Placera fönster"
 
-#: plugins/place.c:1168
+#: plugins/place.c:1146
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Placera fönster på lämpliga positioner när de kopplas"
 
@@ -442,19 +442,19 @@ msgstr "Skala fönster"
 msgid "Resize window"
 msgstr "Skala fönster"
 
-#: plugins/rotate.c:285 plugins/zoom.c:206
+#: plugins/rotate.c:285 plugins/zoom.c:222
 msgid "Pointer Invert Y"
 msgstr "Invertera pekarens Y-axel"
 
-#: plugins/rotate.c:286 plugins/zoom.c:207
+#: plugins/rotate.c:286 plugins/zoom.c:223
 msgid "Invert Y axis for pointer movement"
 msgstr "Invertera Y-axeln för pekarens rörelser"
 
-#: plugins/rotate.c:292 plugins/zoom.c:213
+#: plugins/rotate.c:292 plugins/zoom.c:229
 msgid "Pointer Sensitivity"
 msgstr "Muspekarkänslighet"
 
-#: plugins/rotate.c:293 plugins/zoom.c:214
+#: plugins/rotate.c:293 plugins/zoom.c:230
 #, fuzzy
 msgid "Sensitivity of pointer movement"
 msgstr "Känslighet för flyttning av muspekare (0.01-100.00)"
@@ -482,144 +482,144 @@ msgstr "Roteringshastighet (0.1-50.0)"
 msgid "Rotation Timestep"
 msgstr "Tidsintervall för rotering (0.1-50.0)"
 
-#: plugins/rotate.c:1731 plugins/water.c:1646 plugins/zoom.c:710
+#: plugins/rotate.c:1743 plugins/water.c:1647 plugins/zoom.c:750
 msgid "Initiate"
 msgstr "Initiera"
 
-#: plugins/rotate.c:1732
+#: plugins/rotate.c:1744
 msgid "Start Rotation"
 msgstr "Starta rotering"
 
-#: plugins/rotate.c:1746
+#: plugins/rotate.c:1758
 msgid "Rotate Left"
 msgstr "Rotera åt vänster"
 
-#: plugins/rotate.c:1747
+#: plugins/rotate.c:1759
 msgid "Rotate left"
 msgstr "Rotera åt vänster"
 
-#: plugins/rotate.c:1765
+#: plugins/rotate.c:1777
 msgid "Rotate Right"
 msgstr "Rotera åt höger"
 
-#: plugins/rotate.c:1766
+#: plugins/rotate.c:1778
 msgid "Rotate right"
 msgstr "Rotera åt höger"
 
-#: plugins/rotate.c:1784
+#: plugins/rotate.c:1796
 msgid "Rotate Left with Window"
 msgstr "Rotera åt vänster med fönster"
 
-#: plugins/rotate.c:1785
+#: plugins/rotate.c:1797
 msgid "Rotate left and bring active window along"
 msgstr "Rotera åt vänster och ta med aktivt fönster"
 
-#: plugins/rotate.c:1804
+#: plugins/rotate.c:1816
 msgid "Rotate Right with Window"
 msgstr "Rotera åt höger med fönster"
 
-#: plugins/rotate.c:1805
+#: plugins/rotate.c:1817
 msgid "Rotate right and bring active window along"
 msgstr "Rotera åt höger och ta med aktivt fönster"
 
-#: plugins/rotate.c:1822
+#: plugins/rotate.c:1834
 #, fuzzy, c-format
 msgid "Rotate To Face %d"
 msgstr "Rotera till yta 1"
 
-#: plugins/rotate.c:1823
+#: plugins/rotate.c:1835
 #, fuzzy, c-format
 msgid "Rotate to face %d"
 msgstr "Rotera till yta 1"
 
-#: plugins/rotate.c:1824
+#: plugins/rotate.c:1836
 #, fuzzy, c-format
 msgid "Rotate To Face %d with Window"
 msgstr "Rotera till yta 1 med fönster"
 
-#: plugins/rotate.c:1825
+#: plugins/rotate.c:1837
 #, fuzzy, c-format
 msgid "Rotate to face %d and bring active window along"
 msgstr "Rotera till yta 1 och ta med aktivt fönster"
 
-#: plugins/rotate.c:1874
+#: plugins/rotate.c:1886
 #, fuzzy
 msgid "Rotate To"
 msgstr "Rotera till yta 1"
 
-#: plugins/rotate.c:1875
+#: plugins/rotate.c:1887
 #, fuzzy
 msgid "Rotate to viewport"
 msgstr "Rotera till yta 1"
 
-#: plugins/rotate.c:1886
+#: plugins/rotate.c:1898
 #, fuzzy
 msgid "Rotate Window"
 msgstr "Flytta fönster"
 
-#: plugins/rotate.c:1887
+#: plugins/rotate.c:1899
 #, fuzzy
 msgid "Rotate with window"
 msgstr "Rotera åt vänster med fönster"
 
-#: plugins/rotate.c:1898
+#: plugins/rotate.c:1910
 #, fuzzy
 msgid "Rotate Flip Left"
 msgstr "Rotera åt vänster"
 
-#: plugins/rotate.c:1899
+#: plugins/rotate.c:1911
 #, fuzzy
 msgid "Flip to left viewport and warp pointer"
 msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
 
-#: plugins/rotate.c:1914
+#: plugins/rotate.c:1926
 #, fuzzy
 msgid "Rotate Flip Right"
 msgstr "Rotera åt höger"
 
-#: plugins/rotate.c:1915
+#: plugins/rotate.c:1927
 #, fuzzy
 msgid "Flip to right viewport and warp pointer"
 msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
 
-#: plugins/rotate.c:1930
+#: plugins/rotate.c:1942
 msgid "Edge Flip Pointer"
 msgstr "Kantvänd pekare"
 
-#: plugins/rotate.c:1931
+#: plugins/rotate.c:1943
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
 
-#: plugins/rotate.c:1938
+#: plugins/rotate.c:1950
 msgid "Edge Flip Move"
 msgstr "Kantvänd flyttning"
 
-#: plugins/rotate.c:1939
+#: plugins/rotate.c:1951
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr "Vänd till nästa skrivbordsvy när fönster flyttas till skärmens kant"
 
-#: plugins/rotate.c:1946
+#: plugins/rotate.c:1958
 msgid "Edge Flip DnD"
 msgstr "Kantvänd DnD"
 
-#: plugins/rotate.c:1947
+#: plugins/rotate.c:1959
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr "Vänd till nästa skrivbordsvy när objekt dras till skärmens kant"
 
-#: plugins/rotate.c:1954
+#: plugins/rotate.c:1966
 msgid "Flip Time"
 msgstr "Vändtid"
 
-#: plugins/rotate.c:1955
+#: plugins/rotate.c:1967
 #, fuzzy
 msgid "Timeout before flipping viewport"
 msgstr "Tidsgräns innan vändning av skrivbordsvy (0-1000)"
 
-#: plugins/rotate.c:2123
+#: plugins/rotate.c:2135
 msgid "Rotate Cube"
 msgstr "Rotera kub"
 
-#: plugins/rotate.c:2124
+#: plugins/rotate.c:2136
 msgid "Rotate desktop cube"
 msgstr "Rotera skrivbordskub"
 
@@ -640,72 +640,82 @@ msgstr ""
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:310
+#: plugins/scale.c:319
 msgid "Spacing"
 msgstr "Mellanrum"
 
-#: plugins/scale.c:311
+#: plugins/scale.c:320
 #, fuzzy
 msgid "Space between windows"
 msgstr "Mellanrum mellan fönster (0-250)"
 
-#: plugins/scale.c:319
+#: plugins/scale.c:328
 msgid "Sloppy Focus"
 msgstr "Slapphänt fokusering"
 
-#: plugins/scale.c:320
+#: plugins/scale.c:329
 msgid "Focus window when mouse moves over them"
 msgstr "Fokusera fönster när musen flyttar sig ovanför"
 
-#: plugins/scale.c:327
+#: plugins/scale.c:336
 #, fuzzy
 msgid "Scale speed"
 msgstr "Toningshastighet"
 
-#: plugins/scale.c:337
+#: plugins/scale.c:346
 #, fuzzy
 msgid "Scale timestep"
 msgstr "Skala bild"
 
-#: plugins/scale.c:347
+#: plugins/scale.c:356
 msgid "Window types that should scaled in scale mode"
 msgstr ""
 
-#: plugins/scale.c:361
+#: plugins/scale.c:370
 msgid "Darken Background"
 msgstr "Mörka bakgrunden"
 
-#: plugins/scale.c:362
+#: plugins/scale.c:371
 msgid "Darken background when scaling windows"
 msgstr "Mörka bakgrunden vid fönsterskalning"
 
-#: plugins/scale.c:369 plugins/switcher.c:409
+#: plugins/scale.c:378 plugins/switcher.c:409
 #, fuzzy
 msgid "Amount of opacity in percent"
 msgstr "Opak i procent (0-100)"
 
-#: plugins/scale.c:377
+#: plugins/scale.c:386
 msgid "Overlay Icon"
 msgstr "Lägg ikoner över"
 
-#: plugins/scale.c:378
+#: plugins/scale.c:387
 #, fuzzy
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Lägg en ikon över fönster när de är skalade (Ingen, Emblem, Stor)"
 
-#: plugins/scale.c:1368
+#: plugins/scale.c:1521
 msgid "Initiate Window Picker"
 msgstr "Initiera fönsterväljare"
 
-#: plugins/scale.c:1369
+#: plugins/scale.c:1522
 msgid "Layout and start transforming windows"
 msgstr "Lägg ut och påbörja fönstertransformering"
 
-#: plugins/scale.c:1567
+#: plugins/scale.c:1538
+#, fuzzy
+msgid "Initiate Window Picker For All Windows"
+msgstr "Initiera fönsterväljare"
+
+#: plugins/scale.c:1539
+#, fuzzy
+msgid "Layout and start transforming all windows"
+msgstr "Lägg ut och påbörja fönstertransformering"
+
+#: plugins/scale.c:1741
 msgid "Scale"
 msgstr "Skala"
 
-#: plugins/scale.c:1568
+#: plugins/scale.c:1742
 msgid "Scale windows"
 msgstr "Skala fönster"
 
@@ -775,410 +785,415 @@ msgstr "Minimerat"
 msgid "Show minimized windows"
 msgstr "Visa minimerade fönster"
 
-#: plugins/switcher.c:1867 plugins/switcher.c:1903
+#: plugins/switcher.c:1880 plugins/switcher.c:1916
 #, fuzzy
 msgid "Next window"
 msgstr "Nächstes Fenster"
 
-#: plugins/switcher.c:1868
+#: plugins/switcher.c:1881
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 
-#: plugins/switcher.c:1885 plugins/switcher.c:1922
+#: plugins/switcher.c:1898 plugins/switcher.c:1935
 #, fuzzy
 msgid "Prev window"
 msgstr "Föregående fönster"
 
-#: plugins/switcher.c:1886
+#: plugins/switcher.c:1899
 #, fuzzy
 msgid "Popup switcher if not visible and select previous window"
 msgstr "Snabbtangent för att välja föregående fönster"
 
-#: plugins/switcher.c:1904
+#: plugins/switcher.c:1917
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 
-#: plugins/switcher.c:1923
+#: plugins/switcher.c:1936
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 
-#: plugins/switcher.c:2094 plugins/switcher.c:2095
+#: plugins/switcher.c:2107 plugins/switcher.c:2108
 msgid "Application Switcher"
 msgstr "Programväxlare"
 
-#: plugins/water.c:1647
+#: plugins/water.c:1648
 msgid "Enable pointer water effects"
 msgstr "Aktivera vatteneffekt för muspekare"
 
-#: plugins/water.c:1660
+#: plugins/water.c:1661
 msgid "Toggle rain"
 msgstr "Växla regn"
 
-#: plugins/water.c:1661
+#: plugins/water.c:1662
 msgid "Toggle rain effect"
 msgstr "Växla regneffekt"
 
-#: plugins/water.c:1676
+#: plugins/water.c:1677
 #, fuzzy
 msgid "Toggle wiper"
 msgstr "Växla regn"
 
-#: plugins/water.c:1677
+#: plugins/water.c:1678
 #, fuzzy
 msgid "Toggle wiper effect"
 msgstr "Växla regneffekt"
 
-#: plugins/water.c:1692
+#: plugins/water.c:1693
 msgid "Offset Scale"
 msgstr "Positionsskala"
 
-#: plugins/water.c:1693
+#: plugins/water.c:1694
 #, fuzzy
 msgid "Water offset scale"
 msgstr "Vattenpositionsskala (0.0-10.0)"
 
-#: plugins/water.c:1702
+#: plugins/water.c:1703
 msgid "Rain Delay"
 msgstr "Regnfördröjning"
 
-#: plugins/water.c:1703
+#: plugins/water.c:1704
 #, fuzzy
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Fördröjning (i ms) mellan varje regndroppe (0-3600000)"
 
-#: plugins/water.c:1711
+#: plugins/water.c:1712
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1712
+#: plugins/water.c:1713
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1723
+#: plugins/water.c:1724
 msgid "Point"
 msgstr ""
 
-#: plugins/water.c:1724
+#: plugins/water.c:1725
 msgid "Add point"
 msgstr ""
 
-#: plugins/water.c:1735
+#: plugins/water.c:1736
 msgid "Line"
 msgstr ""
 
-#: plugins/water.c:1736
+#: plugins/water.c:1737
 msgid "Add line"
 msgstr ""
 
-#: plugins/water.c:1886
+#: plugins/water.c:1887
 msgid "Water Effect"
 msgstr "Vatteneffekt"
 
-#: plugins/water.c:1887
+#: plugins/water.c:1888
 msgid "Adds water effects to different desktop actions"
 msgstr "Lägger till vatteneffekter till olika skrivbordsåtgärder"
 
-#: plugins/wobbly.c:135 plugins/wobbly.c:2911
+#: plugins/wobbly.c:135 plugins/wobbly.c:2930
 msgid "Shiver"
 msgstr ""
 
-#: plugins/wobbly.c:389
+#: plugins/wobbly.c:390
 msgid "Friction"
 msgstr "Friktion"
 
-#: plugins/wobbly.c:390
+#: plugins/wobbly.c:391
 #, fuzzy
 msgid "Spring Friction"
 msgstr "Fjäderfriktion (0.1-10.0)"
 
-#: plugins/wobbly.c:399
+#: plugins/wobbly.c:400
 msgid "Spring K"
 msgstr "Fjäder K"
 
-#: plugins/wobbly.c:400
+#: plugins/wobbly.c:401
 #, fuzzy
 msgid "Spring Konstant"
 msgstr "Fjäderkonstant (0.1-10.0)"
 
-#: plugins/wobbly.c:409
+#: plugins/wobbly.c:410
 msgid "Grid Resolution"
 msgstr "Rutnätsupplösning"
 
-#: plugins/wobbly.c:410
+#: plugins/wobbly.c:411
 #, fuzzy
 msgid "Vertex Grid Resolution"
 msgstr "Upplösning för vertexrutnät (1-64)"
 
-#: plugins/wobbly.c:418
+#: plugins/wobbly.c:419
 msgid "Minimum Grid Size"
 msgstr "Maximal rutnätsstorlek"
 
-#: plugins/wobbly.c:419
+#: plugins/wobbly.c:420
 #, fuzzy
 msgid "Minimum Vertex Grid Size"
 msgstr "Minimal vertexrutnätsstorlek (4-128)"
 
-#: plugins/wobbly.c:427
+#: plugins/wobbly.c:428
 msgid "Map Effect"
 msgstr "Kopplingseffekt"
 
-#: plugins/wobbly.c:428
+#: plugins/wobbly.c:429
 #, fuzzy
 msgid "Map Window Effect"
 msgstr "Kopplingseffekt"
 
-#: plugins/wobbly.c:436
+#: plugins/wobbly.c:437
 msgid "Focus Effect"
 msgstr "Fokuseffekt"
 
-#: plugins/wobbly.c:437
+#: plugins/wobbly.c:438
 #, fuzzy
 msgid "Focus Window Effect"
 msgstr "Fokuseffekt"
 
-#: plugins/wobbly.c:445
+#: plugins/wobbly.c:446
 msgid "Map Window Types"
 msgstr "Koppla fönstertyper"
 
-#: plugins/wobbly.c:446
+#: plugins/wobbly.c:447
 msgid "Window types that should wobble when mapped"
 msgstr ""
 
-#: plugins/wobbly.c:460
+#: plugins/wobbly.c:461
 msgid "Focus Window Types"
 msgstr "Fokusera fönstertyper"
 
-#: plugins/wobbly.c:461
+#: plugins/wobbly.c:462
 msgid "Window types that should wobble when focused"
 msgstr ""
 
-#: plugins/wobbly.c:473
+#: plugins/wobbly.c:474
 msgid "Move Window Types"
 msgstr "Flytta fönstertyper"
 
-#: plugins/wobbly.c:474
+#: plugins/wobbly.c:475
 msgid "Window types that should wobble when moved"
 msgstr ""
 
-#: plugins/wobbly.c:488
+#: plugins/wobbly.c:489
 msgid "Grab Window Types"
 msgstr "Fånga fönstertyper"
 
-#: plugins/wobbly.c:489
+#: plugins/wobbly.c:490
 msgid "Window types that should wobble when grabbed"
 msgstr ""
 
-#: plugins/wobbly.c:501
+#: plugins/wobbly.c:502
 msgid "Maximize Effect"
 msgstr "Maximeringseffekt"
 
-#: plugins/wobbly.c:502
+#: plugins/wobbly.c:503
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "Geléeffekt vid maximering och avmaximering av fönster"
 
-#: plugins/wobbly.c:2890
+#: plugins/wobbly.c:2909
 msgid "Snap windows"
 msgstr "Fäst fönster"
 
-#: plugins/wobbly.c:2891
+#: plugins/wobbly.c:2910
 msgid "Toggle window snapping"
 msgstr "Växla fönsterfästning"
 
-#: plugins/wobbly.c:2904
+#: plugins/wobbly.c:2923
 msgid "Snap Inverted"
 msgstr ""
 
-#: plugins/wobbly.c:2905
+#: plugins/wobbly.c:2924
 #, fuzzy
 msgid "Inverted window snapping"
 msgstr "Växla fönsterfästning"
 
-#: plugins/wobbly.c:2912
+#: plugins/wobbly.c:2931
 #, fuzzy
 msgid "Make window shiver"
 msgstr "Skala fönster"
 
-#: plugins/wobbly.c:3114
+#: plugins/wobbly.c:3135
 msgid "Wobbly Windows"
 msgstr "Geléaktiga fönster"
 
-#: plugins/wobbly.c:3115
+#: plugins/wobbly.c:3136
 msgid "Use spring model for wobbly window effect"
 msgstr "Använd fjädereffekt för fönstergeléeffekt"
 
-#: plugins/zoom.c:224
+#: plugins/zoom.c:240
 #, fuzzy
 msgid "Zoom Speed"
 msgstr "Hastighet"
 
-#: plugins/zoom.c:234
+#: plugins/zoom.c:250
 #, fuzzy
 msgid "Zoom Timestep"
 msgstr "Tidsintervall"
 
-#: plugins/zoom.c:243
+#: plugins/zoom.c:259 plugins/zoom.c:260
+#, fuzzy
+msgid "Zoom factor"
+msgstr "Zooma ut"
+
+#: plugins/zoom.c:269
 msgid "Filter Linear"
 msgstr "Filtrera linjärt"
 
-#: plugins/zoom.c:244
+#: plugins/zoom.c:270
 msgid "USe linear filter when zoomed in"
 msgstr "Använd linjärt filter när inzoomad"
 
-#: plugins/zoom.c:711 plugins/zoom.c:725 plugins/zoom.c:726
+#: plugins/zoom.c:751 plugins/zoom.c:765 plugins/zoom.c:766
 msgid "Zoom In"
 msgstr "Zooma in"
 
-#: plugins/zoom.c:740 plugins/zoom.c:741
+#: plugins/zoom.c:780 plugins/zoom.c:781
 msgid "Zoom Out"
 msgstr "Zooma ut"
 
-#: plugins/zoom.c:892
+#: plugins/zoom.c:932
 msgid "Zoom Desktop"
 msgstr "Zooma skrivbord"
 
-#: plugins/zoom.c:893
+#: plugins/zoom.c:933
 msgid "Zoom and pan desktop cube"
 msgstr "Zooma och panorera skrivbordskub"
 
-#: src/display.c:158
+#: src/display.c:161
 msgid "Fast"
 msgstr ""
 
-#: src/display.c:158
+#: src/display.c:161
 msgid "Good"
 msgstr ""
 
-#: src/display.c:158
+#: src/display.c:161
 msgid "Best"
 msgstr ""
 
-#: src/display.c:722
+#: src/display.c:725
 msgid "Active Plugins"
 msgstr "Aktiva insticksmoduler"
 
-#: src/display.c:723
+#: src/display.c:726
 msgid "List of currently active plugins"
 msgstr "Lista över för närvarande aktiva insticksmoduler"
 
-#: src/display.c:737
+#: src/display.c:740
 msgid "Texture Filter"
 msgstr "Texturfilter"
 
-#: src/display.c:738
+#: src/display.c:741
 #, fuzzy
 msgid "Texture filtering"
 msgstr "Texturfilter"
 
-#: src/display.c:746
+#: src/display.c:749
 msgid "Click To Focus"
 msgstr "Klicka för fokus"
 
-#: src/display.c:747
+#: src/display.c:750
 msgid "Click on window moves input focus to it"
 msgstr "Klicka på fönstret flyttar inmatningsfokus till det"
 
-#: src/display.c:753
+#: src/display.c:756
 msgid "Auto-Raise"
 msgstr "Automatisk höjning"
 
-#: src/display.c:754
+#: src/display.c:757
 msgid "Raise selected windows after interval"
 msgstr "Höj markerade fönster efter intervall"
 
-#: src/display.c:760
+#: src/display.c:763
 msgid "Auto-Raise Delay"
 msgstr "Fördröjning för automatisk höjning"
 
-#: src/display.c:761
+#: src/display.c:764
 #, fuzzy
 msgid "Interval before raising selected windows"
 msgstr "Intervall innan markerade fönster höjs (0-10000)"
 
-#: src/display.c:769
+#: src/display.c:772
 msgid "Close Window"
 msgstr "Stäng fönster"
 
-#: src/display.c:770
+#: src/display.c:773
 msgid "Close active window"
 msgstr "Stäng aktivt fönster"
 
-#: src/display.c:786
+#: src/display.c:789
 msgid "Show Main Menu"
 msgstr "Visa huvudmeny"
 
-#: src/display.c:787
+#: src/display.c:790
 msgid "Show the main menu"
 msgstr "Visa huvudmenyn"
 
-#: src/display.c:803
+#: src/display.c:806
 msgid "Run Dialog"
 msgstr "Kördialog"
 
-#: src/display.c:804
+#: src/display.c:807
 msgid "Show Run Application dialog"
 msgstr "Visa dialogen Kör program"
 
-#: src/display.c:820
+#: src/display.c:823
 msgid "Unmaximize Window"
 msgstr "Avmaximera fönster"
 
-#: src/display.c:821
+#: src/display.c:824
 msgid "Unmaximize active window"
 msgstr "Avmaximera aktivt fönster"
 
-#: src/display.c:837
+#: src/display.c:840
 msgid "Minimize Window"
 msgstr "Minimera fönster"
 
-#: src/display.c:838
+#: src/display.c:841
 msgid "Minimize active window"
 msgstr "Minimera aktivt fönster"
 
-#: src/display.c:854
+#: src/display.c:857
 msgid "Maximize Window"
 msgstr "Maximera fönster"
 
-#: src/display.c:855
+#: src/display.c:858
 msgid "Maximize active window"
 msgstr "Maximera aktivt fönster"
 
-#: src/display.c:871
+#: src/display.c:874
 msgid "Maximize Window Horizontally"
 msgstr "Maximera fönster horisontellt"
 
-#: src/display.c:872
+#: src/display.c:875
 msgid "Maximize active window horizontally"
 msgstr "Maximera aktivt fönster horisontellt"
 
-#: src/display.c:884
+#: src/display.c:887
 msgid "Maximize Window Vertically"
 msgstr "Maximera fönster vertikalt"
 
-#: src/display.c:885
+#: src/display.c:888
 msgid "Maximize active window vertically"
 msgstr "Maximera aktivt fönster vertikalt"
 
-#: src/display.c:897 src/display.c:898
+#: src/display.c:900 src/display.c:901
 msgid "Hide all windows and focus desktop"
 msgstr "Dölj alla fönster och fokusera på skrivbord"
 
-#: src/display.c:912
+#: src/display.c:915
 #, fuzzy, c-format
 msgid "Command line %d"
 msgstr "Kommandorad 0"
 
-#: src/display.c:913
+#: src/display.c:916
 #, fuzzy, c-format
 msgid "Command line to be executed in shell when run_command%d is invoked"
 msgstr "Kommandorad som ska köras i ett skal när run_command0 anropas"
 
-#: src/display.c:915
+#: src/display.c:918
 #, fuzzy, c-format
 msgid "Run command %d"
 msgstr "Kör kommando 0"
 
-#: src/display.c:916
+#: src/display.c:919
 #, fuzzy, c-format
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -1187,134 +1202,134 @@ msgstr ""
 "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat "
 "som kommando0"
 
-#: src/display.c:960
+#: src/display.c:963
 msgid "Slow Animations"
 msgstr "Långsamma animeringar"
 
-#: src/display.c:961
+#: src/display.c:964
 msgid "Toggle use of slow animations"
 msgstr "Växla användning av långsamma animeringar"
 
-#: src/display.c:977
+#: src/display.c:980
 #, fuzzy
 msgid "Raise Window"
 msgstr "Skala fönster"
 
-#: src/display.c:978
+#: src/display.c:981
 #, fuzzy
 msgid "Raise window above other windows"
 msgstr "Sänk fönstret under andra fönster"
 
-#: src/display.c:992
+#: src/display.c:995
 msgid "Lower Window"
 msgstr "Sänk fönster"
 
-#: src/display.c:993
+#: src/display.c:996
 msgid "Lower window beneath other windows"
 msgstr "Sänk fönstret under andra fönster"
 
-#: src/display.c:1007
+#: src/display.c:1010
 msgid "Increase Opacity"
 msgstr "Öka opakhet"
 
-#: src/display.c:1008
+#: src/display.c:1011
 msgid "Increase window opacity"
 msgstr "Öka fönsteropakhet"
 
-#: src/display.c:1022
+#: src/display.c:1025
 msgid "Decrease Opacity"
 msgstr "Minska opakhet"
 
-#: src/display.c:1023
+#: src/display.c:1026
 msgid "Decrease window opacity"
 msgstr "Minska fönstret opakhet"
 
-#: src/display.c:1037 src/display.c:1038
+#: src/display.c:1040 src/display.c:1041
 msgid "Take a screenshot"
 msgstr "Ta en skärmbild"
 
-#: src/display.c:1054 src/display.c:1055
+#: src/display.c:1057 src/display.c:1058
 msgid "Screenshot command line"
 msgstr "Kommandorad för skärmbild"
 
-#: src/display.c:1063 src/display.c:1064
+#: src/display.c:1066 src/display.c:1067
 msgid "Take a screenshot of a window"
 msgstr "Ta en skärmbild av ett fönster"
 
-#: src/display.c:1081 src/display.c:1082
+#: src/display.c:1084 src/display.c:1085
 msgid "Window screenshot command line"
 msgstr "Kommandorad för fönsterskärmbild"
 
-#: src/display.c:1090
+#: src/display.c:1093
 msgid "Window Menu"
 msgstr "Fönstermeny"
 
-#: src/display.c:1091
+#: src/display.c:1094
 msgid "Open window menu"
 msgstr "Öppna fönstermeny"
 
-#: src/display.c:1110
+#: src/display.c:1113
 msgid "Raise On Click"
 msgstr "Höj vid klick"
 
-#: src/display.c:1111
+#: src/display.c:1114
 msgid "Raise windows when clicked"
 msgstr "Höj fönster när de klickas på"
 
-#: src/display.c:1117
+#: src/display.c:1120
 msgid "Audible Bell"
 msgstr "Ljudklocka"
 
-#: src/display.c:1118
+#: src/display.c:1121
 msgid "Audible system beep"
 msgstr "Systemljudklocka"
 
-#: src/display.c:1124
+#: src/display.c:1127
 msgid "Toggle Window Maximized"
 msgstr "Växla fönstermaximering"
 
-#: src/display.c:1125
+#: src/display.c:1128
 msgid "Toggle active window maximized"
 msgstr "Växla maximering av aktivt fönster"
 
-#: src/display.c:1137
+#: src/display.c:1140
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Växla fönstermaximering horisontellt"
 
-#: src/display.c:1139
+#: src/display.c:1142
 msgid "Toggle active window maximized horizontally"
 msgstr "Växla horisontell maximering av aktivt fönster"
 
-#: src/display.c:1151
+#: src/display.c:1154
 msgid "Toggle Window Maximized Vertically"
 msgstr "Växla fönstermaximering vertikalt"
 
-#: src/display.c:1153
+#: src/display.c:1156
 msgid "Toggle active window maximized vertically"
 msgstr "Växla vertikal maximering av aktivt fönster"
 
-#: src/display.c:1165
+#: src/display.c:1168
 msgid "Hide Skip Taskbar Windows"
 msgstr "Dölj fönster inte i verktygsrad"
 
-#: src/display.c:1166
+#: src/display.c:1169
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "Dölj fönster som inte är i verktygsraden vid visa skrivbordsläget"
 
-#: src/display.c:1173
+#: src/display.c:1176
 msgid "Toggle Window Shaded"
 msgstr "Växla fönsterskuggning"
 
-#: src/display.c:1174
+#: src/display.c:1177
 msgid "Toggle active window shaded"
 msgstr "Växla skuggning av aktivt fönster"
 
-#: src/display.c:1190
+#: src/display.c:1193
 #, fuzzy
 msgid "Ignore Hints When Maximized"
 msgstr "Växla fönstermaximering"
 
-#: src/display.c:1191
+#: src/display.c:1194
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 
@@ -1323,85 +1338,111 @@ msgstr ""
 msgid "Desktop"
 msgstr "Skrivbordskub"
 
-#: src/screen.c:269
+#: src/screen.c:619
 msgid "Detect Refresh Rate"
 msgstr "Detektera uppdateringsfrekvens"
 
-#: src/screen.c:270
+#: src/screen.c:620
 msgid "Automatic detection of refresh rate"
 msgstr "Automatisk identifiering av uppdateringsfrekvens"
 
-#: src/screen.c:276
+#: src/screen.c:626
 msgid "Lighting"
 msgstr "Ljussättning"
 
-#: src/screen.c:277
+#: src/screen.c:627
 msgid "Use diffuse light when screen is transformed"
 msgstr "Använd diffus belysning när skärmen transformeras"
 
-#: src/screen.c:283
+#: src/screen.c:633
 msgid "Refresh Rate"
 msgstr "Uppdateringsfrekvens"
 
-#: src/screen.c:284
+#: src/screen.c:634
 #, fuzzy
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Frekvensen för uppritning av skärmen (gånger/sekund) (1-200)"
 
-#: src/screen.c:292
+#: src/screen.c:643
 #, fuzzy
 msgid "Horizontal Virtual Size"
 msgstr "Virtuell storlek"
 
-#: src/screen.c:293
+#: src/screen.c:644
 #, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
 
-#: src/screen.c:301
+#: src/screen.c:652
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "Virtuell storlek"
 
-#: src/screen.c:302
+#: src/screen.c:653
 #, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
 
-#: src/screen.c:310
+#: src/screen.c:661
 msgid "Opacity Step"
 msgstr "Intervall för opakhet"
 
-#: src/screen.c:311
+#: src/screen.c:662
 #, fuzzy
 msgid "Opacity change step"
 msgstr "Ändringsintervall för opakhet (1-50)"
 
-#: src/screen.c:319
+#: src/screen.c:670
 msgid "Unredirect Fullscreen Windows"
 msgstr "Omdirigera tillbaka helskärmsfönster"
 
-#: src/screen.c:320
+#: src/screen.c:671
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Tillåt att inte utritning av helskärmsfönster omdirigeras till bilder "
 "utanför skärmen"
 
-#: src/screen.c:327
+#: src/screen.c:678
 msgid "Default Icon"
 msgstr "Standardikon"
 
-#: src/screen.c:328
+#: src/screen.c:679
 msgid "Default window icon image"
 msgstr "Standardikonbild för fönster"
 
-#: src/screen.c:336
+#: src/screen.c:687
 msgid "Sync To VBlank"
 msgstr ""
 
-#: src/screen.c:337
+#: src/screen.c:688
 msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+
+#: src/screen.c:695
+#, fuzzy
+msgid "Number of Desktops"
+msgstr "Zooma skrivbord"
+
+#: src/screen.c:696
+msgid "Number of virtual desktops"
+msgstr ""
+
+#: src/screen.c:704
+msgid "Detect Outputs"
+msgstr ""
+
+#: src/screen.c:705
+#, fuzzy
+msgid "Automatic detection of output devices"
+msgstr "Automatisk identifiering av uppdateringsfrekvens"
+
+#: src/screen.c:711
+msgid "Outputs"
+msgstr ""
+
+#: src/screen.c:712
+msgid "List of strings describing output devices"
 msgstr ""
 
 #~ msgid ""
