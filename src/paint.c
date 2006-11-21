@@ -862,6 +862,14 @@ paintWindow (CompWindow		     *w,
 	     Region		     region,
 	     unsigned int	     mask)
 {
+    if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
+    {
+	if (mask & PAINT_WINDOW_SOLID_MASK)
+	    return FALSE;
+
+	return TRUE;
+    }
+
     return (*w->screen->drawWindow) (w, attrib, region, mask);
 }
 

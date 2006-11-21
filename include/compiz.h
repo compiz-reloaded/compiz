@@ -975,6 +975,7 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 #define PAINT_WINDOW_TRANSLUCENT_MASK		(1 << 1)
 #define PAINT_WINDOW_TRANSFORMED_MASK           (1 << 2)
 #define PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK (1 << 3)
+#define PAINT_WINDOW_NO_CORE_INSTANCE_MASK	(1 << 4)
 
 typedef Bool (*PaintWindowProc) (CompWindow		 *window,
 				 const WindowPaintAttrib *attrib,
