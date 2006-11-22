@@ -1107,6 +1107,8 @@ scaleTerminate (CompDisplay     *d,
 		    {
 			int x, y;
 
+			activateWindow (w);
+
 			defaultViewportForWindow (w, &x, &y);
 
 			if (x != s->x || y != s->y)
@@ -1240,7 +1242,7 @@ scaleSelectWindowAt (CompScreen *s,
 	sd->lastActiveNum    = w->activeNum;
 	sd->lastActiveWindow = w->id;
 
-	activateWindow (w);
+	moveInputFocusToWindow (w);
 
 	return TRUE;
     }
@@ -1302,7 +1304,7 @@ scaleMoveFocusWindow (CompScreen *s,
 	    sd->lastActiveNum    = focus->activeNum;
 	    sd->lastActiveWindow = focus->id;
 
-	    activateWindow (focus);
+	    moveInputFocusToWindow (focus);
 	}
     }
 }
