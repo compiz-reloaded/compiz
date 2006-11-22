@@ -1185,29 +1185,50 @@ freeWindow (CompWindow *w)
 }
 
 void
+damageTransformedWindowRegion (CompWindow *w,
+			       float	  xScale,
+			       float	  yScale,
+			       float	  xTranslate,
+			       float	  yTranslate,
+			       Region     region)
+{
+    REGION reg;
+    int    x1, y1, x2, y2;
+
+    reg.rects    = &reg.extents;
+    reg.numRects = 1;
+
+    x1 = region->extents.x1 - w->attrib.x;
+    y1 = region->extents.y1 - w->attrib.y;
+    x2 = region->extents.x2 - w->attrib.x;
+    y2 = region->extents.y2 - w->attrib.y;
+
+    reg.extents.x1 = (x1 * xScale) + w->attrib.x;
+    reg.extents.y1 = (y1 * yScale) + w->attrib.y;
+    reg.extents.x2 = (x2 * xScale + 0.5f) + w->attrib.x;
+    reg.extents.y2 = (y2 * yScale + 0.5f) + w->attrib.y;
+
+    reg.extents.x1 += xTranslate;
+    reg.extents.y1 += yTranslate;
+    reg.extents.x2 += (xTranslate + 0.5f);
+    reg.extents.y2 += (yTranslate + 0.5f);
+
+    if (reg.extents.x2 > reg.extents.x1 && reg.extents.y2 > reg.extents.y1)
+	damageScreenRegion (w->screen, &reg);
+}
+
+void
 damageWindowRegion (CompWindow *w,
 		    Region     region)
 {
     if (w->scaled)
     {
-	REGION reg;
-	int    x1, y1, x2, y2;
-
-	reg.rects    = &reg.extents;
-	reg.numRects = 1;
-
-	x1 = region->extents.x1 - w->attrib.x;
-	y1 = region->extents.y1 - w->attrib.y;
-	x2 = region->extents.x2 - w->attrib.x;
-	y2 = region->extents.y2 - w->attrib.y;
-
-	reg.extents.x1 = (x1 * w->paint.xScale) + w->attrib.x;
-	reg.extents.y1 = (y1 * w->paint.yScale) + w->attrib.y;
-	reg.extents.x2 = (x2 * w->paint.xScale + 0.5f) + w->attrib.x;
-	reg.extents.y2 = (y2 * w->paint.yScale + 0.5f) + w->attrib.y;
-
-	if (reg.extents.x2 > reg.extents.x1 && reg.extents.y2 > reg.extents.y1)
-	    damageScreenRegion (w->screen, &reg);
+	damageTransformedWindowRegion (w,
+				       w->paint.xScale,
+				       w->paint.yScale,
+				       0.0f,
+				       0.0f,
+				       region);
     }
     else
     {
