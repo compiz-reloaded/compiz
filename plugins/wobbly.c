@@ -1800,16 +1800,13 @@ wobblyPreparePaintScreen (CompScreen *s,
 
     if (ws->wobblyWindows & (WobblyInitial | WobblyVelocity))
     {
-	REGION region;
+	BoxRec box;
 	Point  topLeft, bottomRight;
 	float  friction, springK;
 	Model  *model;
 
 	friction = ws->opt[WOBBLY_SCREEN_OPTION_FRICTION].value.f;
 	springK  = ws->opt[WOBBLY_SCREEN_OPTION_SPRING_K].value.f;
-
-	region.rects = &region.extents;
-	region.numRects = region.size = 1;
 
 	ws->wobblyWindows = 0;
 	for (w = s->windows; w; w = w->next)
@@ -1875,12 +1872,17 @@ wobblyPreparePaintScreen (CompScreen *s,
 			else
 			    addWindowDamage (w);
 
-			region.extents.x1 = topLeft.x;
-			region.extents.y1 = topLeft.y;
-			region.extents.x2 = bottomRight.x + 0.5f;
-			region.extents.y2 = bottomRight.y + 0.5f;
+			box.x1 = topLeft.x;
+			box.y1 = topLeft.y;
+			box.x2 = bottomRight.x + 0.5f;
+			box.y2 = bottomRight.y + 0.5f;
 
-			damageScreenRegion (s, &region);
+			box.x1 -= w->attrib.x + w->attrib.border_width;
+			box.y1 -= w->attrib.y + w->attrib.border_width;
+			box.x2 -= w->attrib.x + w->attrib.border_width;
+			box.y2 -= w->attrib.y + w->attrib.border_width;
+
+			addWindowDamageRect (w, &box);
 		    }
 		}
 
