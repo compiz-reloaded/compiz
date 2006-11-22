@@ -2145,18 +2145,6 @@ damageWindowRect (CompWindow *w,
 		  BoxPtr     rect);
 
 void
-damageWindowRegion (CompWindow *w,
-		    Region     region);
-
-void
-damageTransformedWindowRegion (CompWindow *w,
-			       float	  xScale,
-			       float	  yScale,
-			       float	  xTranslate,
-			       float	  yTranslate,
-			       Region     region);
-
-void
 damageTransformedWindowRect (CompWindow *w,
 			     float	xScale,
 			     float	yScale,

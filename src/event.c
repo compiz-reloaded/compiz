@@ -70,7 +70,7 @@ handleWindowDamageRect (CompWindow *w,
 	region.rects = &region.extents;
 	region.numRects = region.size = 1;
 
-	damageWindowRegion (w, &region);
+	damageScreenRegion (w->screen, &region);
 
 	if (initial)
 	    damageWindowOutputExtents (w);

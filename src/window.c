@@ -1185,39 +1185,6 @@ freeWindow (CompWindow *w)
 }
 
 void
-damageTransformedWindowRegion (CompWindow *w,
-			       float	  xScale,
-			       float	  yScale,
-			       float	  xTranslate,
-			       float	  yTranslate,
-			       Region     region)
-{
-    REGION reg;
-    int    x1, y1, x2, y2;
-
-    reg.rects    = &reg.extents;
-    reg.numRects = 1;
-
-    x1 = region->extents.x1 - w->attrib.x;
-    y1 = region->extents.y1 - w->attrib.y;
-    x2 = region->extents.x2 - w->attrib.x;
-    y2 = region->extents.y2 - w->attrib.y;
-
-    reg.extents.x1 = (x1 * xScale) + w->attrib.x;
-    reg.extents.y1 = (y1 * yScale) + w->attrib.y;
-    reg.extents.x2 = (x2 * xScale + 0.5f) + w->attrib.x;
-    reg.extents.y2 = (y2 * yScale + 0.5f) + w->attrib.y;
-
-    reg.extents.x1 += xTranslate;
-    reg.extents.y1 += yTranslate;
-    reg.extents.x2 += (xTranslate + 0.5f);
-    reg.extents.y2 += (yTranslate + 0.5f);
-
-    if (reg.extents.x2 > reg.extents.x1 && reg.extents.y2 > reg.extents.y1)
-	damageScreenRegion (w->screen, &reg);
-}
-
-void
 damageTransformedWindowRect (CompWindow *w,
 			     float	xScale,
 			     float	yScale,
@@ -1230,26 +1197,25 @@ damageTransformedWindowRect (CompWindow *w,
     reg.rects    = &reg.extents;
     reg.numRects = 1;
 
-    reg.extents = *rect;
+    reg.extents.x1 = (rect->x1 * xScale);
+    reg.extents.y1 = (rect->y1 * yScale);
+    reg.extents.x2 = (rect->x2 * xScale + 0.5f);
+    reg.extents.y2 = (rect->y2 * yScale + 0.5f);
 
-    reg.extents.x1 += w->attrib.x + w->attrib.border_width;
-    reg.extents.y1 += w->attrib.y + w->attrib.border_width;
-    reg.extents.x2 += w->attrib.x + w->attrib.border_width;
-    reg.extents.y2 += w->attrib.y + w->attrib.border_width;
+    reg.extents.x1 += xTranslate;
+    reg.extents.y1 += yTranslate;
+    reg.extents.x2 += (xTranslate + 0.5f);
+    reg.extents.y2 += (yTranslate + 0.5f);
 
-    damageTransformedWindowRegion (w,
-				   xScale,
-				   yScale,
-				   xTranslate,
-				   yTranslate,
-				   &reg);
-}
+    if (reg.extents.x2 > reg.extents.x1 && reg.extents.y2 > reg.extents.y1)
+    {
+	reg.extents.x1 += w->attrib.x + w->attrib.border_width;
+	reg.extents.y1 += w->attrib.y + w->attrib.border_width;
+	reg.extents.x2 += w->attrib.x + w->attrib.border_width;
+	reg.extents.y2 += w->attrib.y + w->attrib.border_width;
 
-void
-damageWindowRegion (CompWindow *w,
-		    Region     region)
-{
-    damageScreenRegion (w->screen, region);
+	damageScreenRegion (w->screen, &reg);
+    }
 }
 
 void
@@ -1272,14 +1238,14 @@ damageWindowOutputExtents (CompWindow *w)
 	reg.extents.y2 = w->attrib.y;
 
 	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageWindowRegion (w, &reg);
+	    damageScreenRegion (w->screen, &reg);
 
 	/* bottom */
 	reg.extents.y1 = w->attrib.y + w->height;
 	reg.extents.y2 = reg.extents.y1 + w->output.bottom;
 
 	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageWindowRegion (w, &reg);
+	    damageScreenRegion (w->screen, &reg);
 
 	/* left */
 	reg.extents.x1 = w->attrib.x - w->output.left;
@@ -1288,14 +1254,14 @@ damageWindowOutputExtents (CompWindow *w)
 	reg.extents.y2 = w->attrib.y + w->height;
 
 	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageWindowRegion (w, &reg);
+	    damageScreenRegion (w->screen, &reg);
 
 	/* right */
 	reg.extents.x1 = w->attrib.x + w->width;
 	reg.extents.x2 = reg.extents.x1 + w->output.right;
 
 	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageWindowRegion (w, &reg);
+	    damageScreenRegion (w->screen, &reg);
     }
 }
 
@@ -1328,7 +1294,7 @@ addWindowDamageRect (CompWindow *w,
 	region.rects = &region.extents;
 	region.numRects = region.size = 1;
 
-	damageWindowRegion (w, &region);
+	damageScreenRegion (w->screen, &region);
     }
 }
 
