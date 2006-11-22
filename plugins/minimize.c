@@ -622,18 +622,20 @@ minPaintWindow (CompWindow		*w,
 
     if (mw->adjust)
     {
-	WindowPaintAttrib mAttrib = *attrib;
+	WindowPaintAttrib mAttrib;
+
+	UNWRAP (ms, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, region,
+				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);
+	WRAP (ms, s, paintWindow, minPaintWindow);
+
+	mAttrib = w->lastPaint;
 
 	mAttrib.xScale = mw->xScale;
 	mAttrib.yScale = mw->yScale;
 
 	mAttrib.xTranslate = mw->tx;
 	mAttrib.yTranslate = mw->ty;
-
-	UNWRAP (ms, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region,
-				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);
-	WRAP (ms, s, paintWindow, minPaintWindow);
 
 	(*s->drawWindow) (w, &mAttrib, region,
 			  mask | PAINT_WINDOW_TRANSFORMED_MASK);
