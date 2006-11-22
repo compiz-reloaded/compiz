@@ -1218,6 +1218,34 @@ damageTransformedWindowRegion (CompWindow *w,
 }
 
 void
+damageTransformedWindowRect (CompWindow *w,
+			     float	xScale,
+			     float	yScale,
+			     float	xTranslate,
+			     float	yTranslate,
+			     BoxPtr     rect)
+{
+    REGION reg;
+
+    reg.rects    = &reg.extents;
+    reg.numRects = 1;
+
+    reg.extents = *rect;
+
+    reg.extents.x1 += w->attrib.x + w->attrib.border_width;
+    reg.extents.y1 += w->attrib.y + w->attrib.border_width;
+    reg.extents.x2 += w->attrib.x + w->attrib.border_width;
+    reg.extents.y2 += w->attrib.y + w->attrib.border_width;
+
+    damageTransformedWindowRegion (w,
+				   xScale,
+				   yScale,
+				   xTranslate,
+				   yTranslate,
+				   &reg);
+}
+
+void
 damageWindowRegion (CompWindow *w,
 		    Region     region)
 {
