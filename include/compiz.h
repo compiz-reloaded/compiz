@@ -2132,6 +2132,10 @@ circulateWindow (CompWindow	 *w,
 		 XCirculateEvent *ce);
 
 void
+addWindowDamageRect (CompWindow *w,
+		     BoxPtr     rect);
+
+void
 addWindowDamage (CompWindow *w);
 
 void

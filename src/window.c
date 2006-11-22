@@ -1320,6 +1320,31 @@ damageWindowRect (CompWindow *w,
 }
 
 void
+addWindowDamageRect (CompWindow *w,
+		     BoxPtr     rect)
+{
+    REGION region;
+
+    if (w->screen->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
+	return;
+
+    region.extents = *rect;
+
+    if (!(*w->screen->damageWindowRect) (w, FALSE, &region.extents))
+    {
+	region.extents.x1 += w->attrib.x + w->attrib.border_width;
+	region.extents.y1 += w->attrib.y + w->attrib.border_width;
+	region.extents.x2 += w->attrib.x + w->attrib.border_width;
+	region.extents.y2 += w->attrib.y + w->attrib.border_width;
+
+	region.rects = &region.extents;
+	region.numRects = region.size = 1;
+
+	damageWindowRegion (w, &region);
+    }
+}
+
+void
 addWindowDamage (CompWindow *w)
 {
     if (w->screen->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
@@ -1327,25 +1352,14 @@ addWindowDamage (CompWindow *w)
 
     if (w->shaded || (w->attrib.map_state == IsViewable && w->damaged))
     {
-	REGION region;
+	BoxRec box;
 
-	region.extents.x1 = -w->output.left - w->attrib.border_width;
-	region.extents.y1 = -w->output.top - w->attrib.border_width;
-	region.extents.x2 = w->width + w->output.right;
-	region.extents.y2 = w->height + w->output.bottom;
+	box.x1 = -w->output.left - w->attrib.border_width;
+	box.y1 = -w->output.top - w->attrib.border_width;
+	box.x2 = w->width + w->output.right;
+	box.y2 = w->height + w->output.bottom;
 
-	if (!(*w->screen->damageWindowRect) (w, FALSE, &region.extents))
-	{
-	    region.extents.x1 += w->attrib.x + w->attrib.border_width;
-	    region.extents.y1 += w->attrib.y + w->attrib.border_width;
-	    region.extents.x2 += w->attrib.x + w->attrib.border_width;
-	    region.extents.y2 += w->attrib.y + w->attrib.border_width;
-
-	    region.rects = &region.extents;
-	    region.numRects = region.size = 1;
-
-	    damageWindowRegion (w, &region);
-	}
+	addWindowDamageRect (w, &box);
     }
 }
 
