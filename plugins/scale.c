@@ -184,6 +184,8 @@ typedef struct _ScaleWindow {
     GLfloat tx, ty;
     float   delta;
     Bool    adjust;
+
+    unsigned short lastThumbOpacity;
 } ScaleWindow;
 
 
@@ -546,6 +548,19 @@ scalePaintWindow (CompWindow		  *w,
 			ds = sw->delta;
 
 		    sAttrib.opacity = (ds * sAttrib.opacity) / sw->delta;
+
+		    if (sw->slot)
+		    {
+			if (sAttrib.opacity < sw->lastThumbOpacity)
+			    sAttrib.opacity = sw->lastThumbOpacity;
+		    }
+		    else
+		    {
+			if (sAttrib.opacity > sw->lastThumbOpacity)
+			    sAttrib.opacity = 0;
+		    }
+
+		    sw->lastThumbOpacity = sAttrib.opacity;
 		}
 
 		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
@@ -742,6 +757,8 @@ fillInWindows (CompScreen *s)
 	    sw->slot->y2 = cy + sy / 2;
 
 	    sw->slot->filled = TRUE;
+
+	    sw->lastThumbOpacity = 0;
 
 	    sw->adjust = TRUE;
 	}
@@ -1676,6 +1693,7 @@ scaleInitWindow (CompPlugin *p,
     sw->xVelocity = sw->yVelocity = 0.0f;
     sw->scaleVelocity = 1.0f;
     sw->delta = 1.0f;
+    sw->lastThumbOpacity = 0;
 
     w->privates[ss->windowPrivateIndex].ptr = sw;
 
