@@ -185,7 +185,7 @@ typedef struct _ScaleWindow {
     float   delta;
     Bool    adjust;
 
-    unsigned short lastThumbOpacity;
+    float lastThumbOpacity;
 } ScaleWindow;
 
 
@@ -464,12 +464,14 @@ scalePaintWindow (CompWindow		  *w,
 
 	if (scaled)
 	{
-	    sAttrib.xScale     = sw->scale;
-	    sAttrib.yScale     = sw->scale;
-	    sAttrib.xTranslate = sw->tx;
-	    sAttrib.yTranslate = sw->ty;
+	    WindowPaintAttrib sa = w->lastPaint;
 
-	    (*s->drawWindow) (w, &sAttrib, region,
+	    sa.xScale     = sw->scale;
+	    sa.yScale     = sw->scale;
+	    sa.xTranslate = sw->tx;
+	    sa.yTranslate = sw->ty;
+
+	    (*s->drawWindow) (w, &sa, region,
 			      mask | PAINT_WINDOW_TRANSFORMED_MASK);
 	}
 
@@ -539,6 +541,8 @@ scalePaintWindow (CompWindow		  *w,
 
 		if (sw->delta)
 		{
+		    float o;
+
 		    ds =
 			fabs (sw->tx) +
 			fabs (sw->ty) +
@@ -547,20 +551,22 @@ scalePaintWindow (CompWindow		  *w,
 		    if (ds > sw->delta)
 			ds = sw->delta;
 
-		    sAttrib.opacity = (ds * sAttrib.opacity) / sw->delta;
+		    o = ds / sw->delta;
 
 		    if (sw->slot)
 		    {
-			if (sAttrib.opacity < sw->lastThumbOpacity)
-			    sAttrib.opacity = sw->lastThumbOpacity;
+			if (o < sw->lastThumbOpacity)
+			    o = sw->lastThumbOpacity;
 		    }
 		    else
 		    {
-			if (sAttrib.opacity > sw->lastThumbOpacity)
-			    sAttrib.opacity = 0;
+			if (o > sw->lastThumbOpacity)
+			    o = 0.0f;
 		    }
 
-		    sw->lastThumbOpacity = sAttrib.opacity;
+		    sw->lastThumbOpacity = o;
+
+		    sAttrib.opacity = sAttrib.opacity * o;
 		}
 
 		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
@@ -758,7 +764,7 @@ fillInWindows (CompScreen *s)
 
 	    sw->slot->filled = TRUE;
 
-	    sw->lastThumbOpacity = 0;
+	    sw->lastThumbOpacity = 0.0f;
 
 	    sw->adjust = TRUE;
 	}
@@ -1693,7 +1699,7 @@ scaleInitWindow (CompPlugin *p,
     sw->xVelocity = sw->yVelocity = 0.0f;
     sw->scaleVelocity = 1.0f;
     sw->delta = 1.0f;
-    sw->lastThumbOpacity = 0;
+    sw->lastThumbOpacity = 0.0f;
 
     w->privates[ss->windowPrivateIndex].ptr = sw;
 
