@@ -518,7 +518,7 @@ compareWindows (const void *elem1,
 
     if (w2->mapNum && !w1->mapNum)
 	return 1;
-    
+
     return w2->activeNum - w1->activeNum;
 }
 
