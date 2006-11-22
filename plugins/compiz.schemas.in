@@ -17028,6 +17028,67 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_group_key</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_group_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Window Group</short>
+                <long>Layout and start transforming window group</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_group_button</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_group_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Window Group</short>
+                <long>Layout and start transforming window group</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_group_bell</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_group_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Window Group</short>
+                <long>Layout and start transforming window group</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_group_edge</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_group_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Window Group</short>
+                <long>Layout and start transforming window group (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_group_edgebutton</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_group_edgebutton</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Window Group</short>
+                <long>Layout and start transforming window group</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/scale/screen0/options/spacing</key>
             <applyto>/apps/compiz/plugins/scale/screen0/options/spacing</applyto>
             <owner>compiz</owner>
