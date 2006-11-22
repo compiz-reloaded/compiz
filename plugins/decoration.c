@@ -161,7 +161,7 @@ typedef struct _DecorScreen {
 
     Decoration *decor[DECOR_NUM];
 
-    PaintWindowProc	 paintWindow;
+    DrawWindowProc	 drawWindow;
     DamageWindowRectProc damageWindowRect;
 
     WindowMoveNotifyProc   windowMoveNotify;
@@ -330,10 +330,10 @@ decorDisplayInitOptions (DecorDisplay *dd)
 }
 
 static Bool
-decorPaintWindow (CompWindow		  *w,
-		  const WindowPaintAttrib *attrib,
-		  Region		  region,
-		  unsigned int		  mask)
+decorDrawWindow (CompWindow		 *w,
+		 const WindowPaintAttrib *attrib,
+		 Region			 region,
+		 unsigned int		 mask)
 {
     Bool status;
 
@@ -379,9 +379,9 @@ decorPaintWindow (CompWindow		  *w,
 	}
     }
 
-    UNWRAP (ds, w->screen, paintWindow);
-    status = (*w->screen->paintWindow) (w, attrib, region, mask);
-    WRAP (ds, w->screen, paintWindow, decorPaintWindow);
+    UNWRAP (ds, w->screen, drawWindow);
+    status = (*w->screen->drawWindow) (w, attrib, region, mask);
+    WRAP (ds, w->screen, drawWindow, decorDrawWindow);
 
     return status;
 }
@@ -1338,7 +1338,7 @@ decorInitScreen (CompPlugin *p,
 
     ds->dmWin = None;
 
-    WRAP (ds, s, paintWindow, decorPaintWindow);
+    WRAP (ds, s, drawWindow, decorDrawWindow);
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
@@ -1363,7 +1363,7 @@ decorFiniScreen (CompPlugin *p,
 	if (ds->decor[i])
 	    decorReleaseDecoration (s, ds->decor[i]);
 
-    UNWRAP (ds, s, paintWindow);
+    UNWRAP (ds, s, drawWindow);
     UNWRAP (ds, s, damageWindowRect);
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
