@@ -131,6 +131,11 @@ typedef struct _ScaleDisplay {
 #define SCALE_SCREEN_OPTION_ICON         7
 #define SCALE_SCREEN_OPTION_NUM          8
 
+typedef enum {
+    ScaleTypeNormal = 0,
+    ScaleTypeAll
+} ScaleType;
+
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
 
@@ -170,7 +175,7 @@ typedef struct _ScaleScreen {
 
     IconOverlay iconOverlay;
 
-    Bool allWindows;
+    ScaleType type;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -393,7 +398,7 @@ isScaleWin (CompWindow *w)
 {
     SCALE_SCREEN (w->screen);
 
-    if (!ss->allWindows)
+    if (!ss->type)
     {
 	if (!(*w->screen->focusWindow) (w))
 	    return FALSE;
@@ -1191,7 +1196,7 @@ scaleInitiate (CompDisplay     *d,
 
 	if (ss->state != SCALE_STATE_WAIT && ss->state != SCALE_STATE_OUT)
 	{
-	    ss->allWindows = FALSE;
+	    ss->type = ScaleTypeNormal;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
     }
@@ -1218,7 +1223,7 @@ scaleInitiateAll (CompDisplay     *d,
 
 	if (ss->state != SCALE_STATE_WAIT && ss->state != SCALE_STATE_OUT)
 	{
-	    ss->allWindows = TRUE;
+	    ss->type = ScaleTypeAll;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
     }
