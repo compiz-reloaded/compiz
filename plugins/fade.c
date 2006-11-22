@@ -78,7 +78,6 @@ typedef struct _FadeScreen {
 
     PreparePaintScreenProc preparePaintScreen;
     PaintWindowProc	   paintWindow;
-    DrawWindowProc	   drawWindow;
     DamageWindowRectProc   damageWindowRect;
     FocusWindowProc	   focusWindow;
     WindowResizeNotifyProc windowResizeNotify;
@@ -278,104 +277,95 @@ fadePaintWindow (CompWindow		 *w,
 	fw->brightness != attrib->brightness ||
 	fw->saturation != attrib->saturation)
     {
-	GLint opacity;
-	GLint brightness;
-	GLint saturation;
+	WindowPaintAttrib fAttrib = *attrib;
 
-	opacity = fw->opacity;
-	if (attrib->opacity > fw->opacity)
+	if (fw->steps)
 	{
-	    opacity = fw->opacity + fw->steps;
-	    if (opacity > attrib->opacity)
-		opacity = attrib->opacity;
-	}
-	else if (attrib->opacity < fw->opacity)
-	{
-	    if (w->type & CompWindowTypeUnknownMask)
-		opacity = fw->opacity - (fw->steps >> 1);
+	    GLint opacity;
+	    GLint brightness;
+	    GLint saturation;
+
+	    opacity = fw->opacity;
+	    if (attrib->opacity > fw->opacity)
+	    {
+		opacity = fw->opacity + fw->steps;
+		if (opacity > attrib->opacity)
+		    opacity = attrib->opacity;
+	    }
+	    else if (attrib->opacity < fw->opacity)
+	    {
+		if (w->type & CompWindowTypeUnknownMask)
+		    opacity = fw->opacity - (fw->steps >> 1);
+		else
+		    opacity = fw->opacity - fw->steps;
+
+		if (opacity < attrib->opacity)
+		    opacity = attrib->opacity;
+	    }
+
+	    brightness = fw->brightness;
+	    if (attrib->brightness > fw->brightness)
+	    {
+		brightness = fw->brightness + (fw->steps / 12);
+		if (brightness > attrib->brightness)
+		    brightness = attrib->brightness;
+	    }
+	    else if (attrib->brightness < fw->brightness)
+	    {
+		brightness = fw->brightness - (fw->steps / 12);
+		if (brightness < attrib->brightness)
+		    brightness = attrib->brightness;
+	    }
+
+	    saturation = fw->saturation;
+	    if (attrib->saturation > fw->saturation)
+	    {
+		saturation = fw->saturation + (fw->steps / 6);
+		if (saturation > attrib->saturation)
+		    saturation = attrib->saturation;
+	    }
+	    else if (attrib->saturation < fw->saturation)
+	    {
+		saturation = fw->saturation - (fw->steps / 6);
+		if (saturation < attrib->saturation)
+		    saturation = attrib->saturation;
+	    }
+
+	    fw->steps = 0;
+
+	    if (opacity > 0)
+	    {
+		fw->opacity    = opacity;
+		fw->brightness = brightness;
+		fw->saturation = saturation;
+
+		if (opacity    != attrib->opacity    ||
+		    brightness != attrib->brightness ||
+		    saturation != attrib->saturation)
+		    addWindowDamage (w);
+	    }
 	    else
-		opacity = fw->opacity - fw->steps;
+	    {
+		fw->opacity = 0;
 
-	    if (opacity < attrib->opacity)
-		opacity = attrib->opacity;
+		fadeWindowStop (w);
+	    }
 	}
 
-	brightness = fw->brightness;
-	if (attrib->brightness > fw->brightness)
-	{
-	    brightness = fw->brightness + (fw->steps / 12);
-	    if (brightness > attrib->brightness)
-		brightness = attrib->brightness;
-	}
-	else if (attrib->brightness < fw->brightness)
-	{
-	    brightness = fw->brightness - (fw->steps / 12);
-	    if (brightness < attrib->brightness)
-		brightness = attrib->brightness;
-	}
+	fAttrib.opacity	   = fw->opacity;
+	fAttrib.brightness = fw->brightness;
+	fAttrib.saturation = fw->saturation;
 
-	saturation = fw->saturation;
-	if (attrib->saturation > fw->saturation)
-	{
-	    saturation = fw->saturation + (fw->steps / 6);
-	    if (saturation > attrib->saturation)
-		saturation = attrib->saturation;
-	}
-	else if (attrib->saturation < fw->saturation)
-	{
-	    saturation = fw->saturation - (fw->steps / 6);
-	    if (saturation < attrib->saturation)
-		saturation = attrib->saturation;
-	}
-
-	fw->steps = 0;
-
-	if (opacity > 0)
-	{
-	    fw->opacity    = opacity;
-	    fw->brightness = brightness;
-	    fw->saturation = saturation;
-
-	    if (opacity    != attrib->opacity    ||
-		brightness != attrib->brightness ||
-		saturation != attrib->saturation)
-		addWindowDamage (w);
-	}
-	else
-	{
-	    fw->opacity = 0;
-
-	    fadeWindowStop (w);
-	}
+	UNWRAP (fs, s, paintWindow);
+	status = (*s->paintWindow) (w, &fAttrib, region, mask);
+	WRAP (fs, s, paintWindow, fadePaintWindow);
     }
-
-    UNWRAP (fs, s, paintWindow);
-    status = (*s->paintWindow) (w, attrib, region, mask);
-    WRAP (fs, s, paintWindow, fadePaintWindow);
-
-    return status;
-}
-
-static Bool
-fadeDrawWindow (CompWindow		*w,
-		const WindowPaintAttrib *attrib,
-		Region			region,
-		unsigned int		mask)
-{
-    WindowPaintAttrib fAttrib = *attrib;
-    CompScreen	      *s = w->screen;
-    Bool	      status;
-
-    FADE_SCREEN (s);
-    FADE_WINDOW (w);
-
-    fAttrib.opacity    = fw->opacity;
-    fAttrib.brightness = fw->brightness;
-    fAttrib.saturation = fw->saturation;
-
-    UNWRAP (fs, s, drawWindow);
-    status = (*s->drawWindow) (w, &fAttrib, region, mask);
-    WRAP (fs, s, drawWindow, fadeDrawWindow);
+    else
+    {
+	UNWRAP (fs, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, region, mask);
+	WRAP (fs, s, paintWindow, fadePaintWindow);
+    }
 
     return status;
 }
@@ -735,7 +725,6 @@ fadeInitScreen (CompPlugin *p,
 
     WRAP (fs, s, preparePaintScreen, fadePreparePaintScreen);
     WRAP (fs, s, paintWindow, fadePaintWindow);
-    WRAP (fs, s, drawWindow, fadeDrawWindow);
     WRAP (fs, s, damageWindowRect, fadeDamageWindowRect);
     WRAP (fs, s, focusWindow, fadeFocusWindow);
     WRAP (fs, s, windowResizeNotify, fadeWindowResizeNotify);
@@ -755,7 +744,6 @@ fadeFiniScreen (CompPlugin *p,
 
     UNWRAP (fs, s, preparePaintScreen);
     UNWRAP (fs, s, paintWindow);
-    UNWRAP (fs, s, drawWindow);
     UNWRAP (fs, s, damageWindowRect);
     UNWRAP (fs, s, focusWindow);
     UNWRAP (fs, s, windowResizeNotify);
