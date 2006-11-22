@@ -139,7 +139,6 @@ typedef struct _ScaleScreen {
     PaintScreenProc        paintScreen;
     PaintWindowProc        paintWindow;
     DamageWindowRectProc   damageWindowRect;
-    WindowMoveNotifyProc   windowMoveNotify;
 
     CompOption opt[SCALE_SCREEN_OPTION_NUM];
 
@@ -172,7 +171,6 @@ typedef struct _ScaleScreen {
     IconOverlay iconOverlay;
 
     Bool allWindows;
-    Bool scaleMove;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -186,9 +184,6 @@ typedef struct _ScaleWindow {
     GLfloat tx, ty;
     float   delta;
     Bool    adjust;
-
-    int restoreX;
-    int restoreY;
 } ScaleWindow;
 
 
@@ -437,13 +432,12 @@ scalePaintWindow (CompWindow		  *w,
     if (ss->state != SCALE_STATE_NONE)
     {
 	WindowPaintAttrib sAttrib = *attrib;
+	Bool		  scaled = FALSE;
 
 	SCALE_WINDOW (w);
 
 	if (sw->adjust || sw->slot)
 	{
-	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-
 	    if (w->id	    != s->display->activeWindow &&
 		ss->opacity != OPAQUE			&&
 		ss->state   != SCALE_STATE_IN)
@@ -451,6 +445,10 @@ scalePaintWindow (CompWindow		  *w,
 		/* modify opacity of windows that are not active */
 		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
 	    }
+
+	    scaled = TRUE;
+
+	    mask |= PAINT_WINDOW_NO_CORE_INSTANCE_MASK;
 	}
 	else if (ss->darkenBack && ss->state != SCALE_STATE_IN)
 	{
@@ -462,7 +460,18 @@ scalePaintWindow (CompWindow		  *w,
 	status = (*s->paintWindow) (w, &sAttrib, region, mask);
 	WRAP (ss, s, paintWindow, scalePaintWindow);
 
-	if ((ss->iconOverlay != ScaleIconNone) && (sw->adjust || sw->slot))
+	if (scaled)
+	{
+	    sAttrib.xScale     = sw->scale;
+	    sAttrib.yScale     = sw->scale;
+	    sAttrib.xTranslate = sw->tx;
+	    sAttrib.yTranslate = sw->ty;
+
+	    (*s->drawWindow) (w, &sAttrib, region,
+			      mask | PAINT_WINDOW_TRANSFORMED_MASK);
+	}
+
+	if ((ss->iconOverlay != ScaleIconNone) && scaled)
 	{
 	    CompIcon *icon;
 
@@ -515,11 +524,14 @@ scalePaintWindow (CompWindow		  *w,
 		    break;
 		}
 
+		wx += sw->tx;
+		wy += sw->ty;
+
 		if (sw->slot)
 		{
 		    sw->delta =
-			fabs (sw->slot->x1 - sw->restoreX) +
-			fabs (sw->slot->y1 - sw->restoreY) +
+			fabs (sw->slot->x1 - w->attrib.x) +
+			fabs (sw->slot->y1 - w->attrib.y) +
 			fabs (1.0f - sw->slot->scale) * 500.0f;
 		}
 
@@ -731,12 +743,7 @@ fillInWindows (CompScreen *s)
 
 	    sw->slot->filled = TRUE;
 
-	    if (!sw->adjust)
-	    {
-		sw->restoreX = w->serverX;
-		sw->restoreY = w->serverY;
-		sw->adjust   = TRUE;
-	    }
+	    sw->adjust = TRUE;
 	}
     }
 
@@ -823,12 +830,12 @@ adjustScaleVelocity (CompWindow *w)
     }
     else
     {
-	x1 = sw->restoreX;
-	y1 = sw->restoreY;
+	x1 = w->attrib.x;
+	y1 = w->attrib.y;
 	scale = 1.0f;
     }
 
-    dx = x1 - (sw->restoreX + sw->tx);
+    dx = x1 - (w->attrib.x + sw->tx);
 
     adjust = dx * 0.15f;
     amount = fabs (dx) * 1.5f;
@@ -839,7 +846,7 @@ adjustScaleVelocity (CompWindow *w)
 
     sw->xVelocity = (amount * sw->xVelocity + adjust) / (amount + 1.0f);
 
-    dy = y1 - (sw->restoreY + sw->ty);
+    dy = y1 - (w->attrib.y + sw->ty);
 
     adjust = dy * 0.15f;
     amount = fabs (dy) * 1.5f;
@@ -867,8 +874,8 @@ adjustScaleVelocity (CompWindow *w)
 	fabs (ds) < 0.001f && fabs (sw->scaleVelocity) < 0.002f)
     {
 	sw->xVelocity = sw->yVelocity = sw->scaleVelocity = 0.0f;
-	sw->tx = x1 - sw->restoreX;
-	sw->ty = y1 - sw->restoreY;
+	sw->tx = x1 - w->attrib.x;
+	sw->ty = y1 - w->attrib.y;
 	sw->scale = scale;
 
 	return 0;
@@ -899,27 +906,6 @@ scalePaintScreen (CompScreen		  *s,
 }
 
 static void
-scaleWindowMoveNotify (CompWindow *w,
-		       int	  dx,
-		       int	  dy,
-		       Bool	  immediate)
-{
-    SCALE_SCREEN (w->screen);
-
-    if (!ss->scaleMove && ss->state != SCALE_STATE_NONE)
-    {
-	SCALE_WINDOW (w);
-
-	sw->restoreX += dx;
-	sw->restoreY += dy;
-    }
-
-    UNWRAP (ss, w->screen, windowMoveNotify);
-    (*w->screen->windowMoveNotify) (w, dx, dy, immediate);
-    WRAP (ss, w->screen, windowMoveNotify, scaleWindowMoveNotify);
-}
-
-static void
 scalePreparePaintScreen (CompScreen *s,
 			 int	     msSinceLastPaint)
 {
@@ -928,7 +914,7 @@ scalePreparePaintScreen (CompScreen *s,
     if (ss->state != SCALE_STATE_NONE && ss->state != SCALE_STATE_WAIT)
     {
 	CompWindow *w;
-	int        steps, dx, dy;
+	int        steps;
 	float      amount, chunk;
 
 	amount = msSinceLastPaint * 0.05f * ss->speed;
@@ -953,18 +939,6 @@ scalePreparePaintScreen (CompScreen *s,
 		    sw->tx += sw->xVelocity * chunk;
 		    sw->ty += sw->yVelocity * chunk;
 		    sw->scale += sw->scaleVelocity * chunk;
-
-		    dx = (sw->restoreX + sw->tx) - w->attrib.x;
-		    dy = (sw->restoreY + sw->ty) - w->attrib.y;
-
-		    ss->scaleMove = TRUE;
-		    moveWindow (w, dx, dy, FALSE, FALSE);
-		    ss->scaleMove = FALSE;
-
-		    (*s->setWindowScale) (w, sw->scale, sw->scale);
-
-		    if (!sw->adjust && ss->state == SCALE_STATE_IN)
-			syncWindowPosition (w);
 		}
 	    }
 
@@ -1021,6 +995,11 @@ scaleCheckForWindowAt (CompScreen *s,
 	    y1 = w->attrib.y - w->input.top  * sw->scale;
 	    x2 = w->attrib.x + (w->width  + w->input.right)  * sw->scale;
 	    y2 = w->attrib.y + (w->height + w->input.bottom) * sw->scale;
+
+	    x1 += sw->tx;
+	    y1 += sw->ty;
+	    x2 += sw->tx;
+	    y2 += sw->ty;
 
 	    if (x1 <= x && y1 <= y && x2 > x && y2 > y)
 		return w;
@@ -1103,19 +1082,9 @@ scaleTerminate (CompDisplay     *d,
 		    w = findWindowAtScreen (s, sd->lastActiveWindow);
 		    if (w)
 		    {
-			int saveX = w->attrib.x;
-			int saveY = w->attrib.y;
 			int x, y;
 
-			SCALE_WINDOW (w);
-
-			w->attrib.x = sw->restoreX;
-			w->attrib.y = sw->restoreY;
-
 			defaultViewportForWindow (w, &x, &y);
-
-			w->attrib.x = saveX;
-			w->attrib.y = saveY;
 
 			if (x != s->x || y != s->y)
 			    sendViewportMoveRequest (s,
@@ -1450,7 +1419,7 @@ scaleDamageWindowRect (CompWindow *w,
 		       Bool	  initial,
 		       BoxPtr     rect)
 {
-    Bool status;
+    Bool status = FALSE;
 
     SCALE_SCREEN (w->screen);
 
@@ -1465,9 +1434,25 @@ scaleDamageWindowRect (CompWindow *w,
 	    }
 	}
     }
+    else if (ss->state == SCALE_STATE_WAIT)
+    {
+	SCALE_WINDOW (w);
+
+	if (sw->slot)
+	{
+	    damageTransformedWindowRect (w,
+					 sw->scale,
+					 sw->scale,
+					 sw->tx,
+					 sw->ty,
+					 rect);
+
+	    status = TRUE;
+	}
+    }
 
     UNWRAP (ss, w->screen, damageWindowRect);
-    status = (*w->screen->damageWindowRect) (w, initial, rect);
+    status |= (*w->screen->damageWindowRect) (w, initial, rect);
     WRAP (ss, w->screen, damageWindowRect, scaleDamageWindowRect);
 
     return status;
@@ -1632,8 +1617,6 @@ scaleInitScreen (CompPlugin *p,
 
     ss->iconOverlay = ScaleIconEmblem;
 
-    ss->scaleMove = FALSE;
-
     scaleScreenInitOptions (ss);
 
     addScreenAction (s, &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
@@ -1645,7 +1628,6 @@ scaleInitScreen (CompPlugin *p,
     WRAP (ss, s, paintScreen, scalePaintScreen);
     WRAP (ss, s, paintWindow, scalePaintWindow);
     WRAP (ss, s, damageWindowRect, scaleDamageWindowRect);
-    WRAP (ss, s, windowMoveNotify, scaleWindowMoveNotify);
 
     ss->cursor = XCreateFontCursor (s->display->display, XC_left_ptr);
 
@@ -1665,7 +1647,6 @@ scaleFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, paintScreen);
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, damageWindowRect);
-    UNWRAP (ss, s, windowMoveNotify);
 
     if (ss->slotsSize)
 	free (ss->slots);
@@ -1695,8 +1676,6 @@ scaleInitWindow (CompPlugin *p,
     sw->xVelocity = sw->yVelocity = 0.0f;
     sw->scaleVelocity = 1.0f;
     sw->delta = 1.0f;
-    sw->restoreX = 0;
-    sw->restoreY = 0;
 
     w->privates[ss->windowPrivateIndex].ptr = sw;
 
