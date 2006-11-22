@@ -98,9 +98,6 @@ typedef struct _Model {
     int		 numSprings;
     Object	 *anchorObject;
     float	 steps;
-    Vector	 scale;
-    Point	 scaleOrigin;
-    Bool	 transformed;
     Point	 topLeft;
     Point	 bottomRight;
     unsigned int edgeMask;
@@ -214,8 +211,6 @@ typedef struct _WobblyScreen {
     DamageWindowRectProc   damageWindowRect;
     AddWindowGeometryProc  addWindowGeometry;
     DrawWindowGeometryProc drawWindowGeometry;
-    DrawWindowTextureProc  drawWindowTexture;
-    SetWindowScaleProc     setWindowScale;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
@@ -929,10 +924,7 @@ modelSetMiddleAnchor (Model *model,
 		      int   width,
 		      int   height)
 {
-    float gx, gy, x0, y0;
-
-    x0 = model->scaleOrigin.x;
-    y0 = model->scaleOrigin.y;
+    float gx, gy;
 
     gx = ((GRID_WIDTH  - 1) / 2 * width)  / (float) (GRID_WIDTH  - 1);
     gy = ((GRID_HEIGHT - 1) / 2 * height) / (float) (GRID_HEIGHT - 1);
@@ -943,8 +935,8 @@ modelSetMiddleAnchor (Model *model,
     model->anchorObject = &model->objects[GRID_WIDTH *
 					  ((GRID_HEIGHT - 1) / 2) +
 					  (GRID_WIDTH - 1) / 2];
-    model->anchorObject->position.x = x + (gx - x0) * model->scale.x + x0;
-    model->anchorObject->position.y = y + (gy - y0) * model->scale.y + y0;
+    model->anchorObject->position.x = x + gx;
+    model->anchorObject->position.y = y + gy;
 
     model->anchorObject->immobile = TRUE;
 }
@@ -957,29 +949,25 @@ modelAddEdgeAnchors (Model *model,
 		     int   height)
 {
     Object *o;
-    float  x0, y0;
-
-    x0 = model->scaleOrigin.x;
-    y0 = model->scaleOrigin.y;
 
     o = &model->objects[0];
-    o->position.x = x + (0      - x0) * model->scale.x + x0;
-    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    o->position.x = x;
+    o->position.y = y;
     o->immobile = TRUE;
 
     o = &model->objects[GRID_WIDTH - 1];
-    o->position.x = x + (width  - x0) * model->scale.x + x0;
-    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    o->position.x = x + width;
+    o->position.y = y;
     o->immobile = TRUE;
 
     o = &model->objects[GRID_WIDTH * (GRID_HEIGHT - 1)];
-    o->position.x = x + (0      - x0) * model->scale.x + x0;
-    o->position.y = y + (height - y0) * model->scale.y + y0;
+    o->position.x = x;
+    o->position.y = y + height;
     o->immobile = TRUE;
 
     o = &model->objects[model->numObjects - 1];
-    o->position.x = x + (width  - x0) * model->scale.x + x0;
-    o->position.y = y + (height - y0) * model->scale.y + y0;
+    o->position.x = x + width;
+    o->position.y = y + height;
     o->immobile = TRUE;
 
     if (!model->anchorObject)
@@ -994,32 +982,28 @@ modelRemoveEdgeAnchors (Model *model,
 			int   height)
 {
     Object *o;
-    float  x0, y0;
-
-    x0 = model->scaleOrigin.x;
-    y0 = model->scaleOrigin.y;
 
     o = &model->objects[0];
-    o->position.x = x + (0      - x0) * model->scale.x + x0;
-    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    o->position.x = x;
+    o->position.y = y;
     if (o != model->anchorObject)
 	o->immobile = FALSE;
 
     o = &model->objects[GRID_WIDTH - 1];
-    o->position.x = x + (width  - x0) * model->scale.x + x0;
-    o->position.y = y + (0      - y0) * model->scale.y + y0;
+    o->position.x = x + width;
+    o->position.y = y;
     if (o != model->anchorObject)
 	o->immobile = FALSE;
 
     o = &model->objects[GRID_WIDTH * (GRID_HEIGHT - 1)];
-    o->position.x = x + (0      - x0) * model->scale.x + x0;
-    o->position.y = y + (height - y0) * model->scale.y + y0;
+    o->position.x = x;
+    o->position.y = y + height;
     if (o != model->anchorObject)
 	o->immobile = FALSE;
 
     o = &model->objects[model->numObjects - 1];
-    o->position.x = x + (width  - x0) * model->scale.x + x0;
-    o->position.y = y + (height - y0) * model->scale.y + y0;
+    o->position.x = x + width;
+    o->position.y = y + height;
     if (o != model->anchorObject)
 	o->immobile = FALSE;
 }
@@ -1033,11 +1017,7 @@ modelAdjustObjectPosition (Model  *model,
 			   int    height)
 {
     Object *o;
-    float  x0, y0;
     int	   gridX, gridY, i = 0;
-
-    x0 = model->scaleOrigin.x;
-    y0 = model->scaleOrigin.y;
 
     for (gridY = 0; gridY < GRID_HEIGHT; gridY++)
     {
@@ -1046,12 +1026,8 @@ modelAdjustObjectPosition (Model  *model,
 	    o = &model->objects[i];
 	    if (o == object)
 	    {
-		o->position.x = x +
-		    (((gridX * width) / (GRID_WIDTH - 1)) - x0) *
-		    model->scale.x + x0;
-		o->position.y = y +
-		    (((gridY * height) / (GRID_HEIGHT - 1)) - y0) *
-		    model->scale.y + y0;
+		o->position.x = x + (gridX * width) / (GRID_WIDTH - 1);
+		o->position.y = y + (gridY * height) / (GRID_HEIGHT - 1);
 
 		return;
 	    }
@@ -1069,10 +1045,7 @@ modelInitObjects (Model *model,
 		  int	height)
 {
     int	  gridX, gridY, i = 0;
-    float gw, gh, x0, y0;
-
-    x0 = model->scaleOrigin.x;
-    y0 = model->scaleOrigin.y;
+    float gw, gh;
 
     gw = GRID_WIDTH  - 1;
     gh = GRID_HEIGHT - 1;
@@ -1082,10 +1055,8 @@ modelInitObjects (Model *model,
 	for (gridX = 0; gridX < GRID_WIDTH; gridX++)
 	{
 	    objectInit (&model->objects[i],
-			x + (((gridX * width)  / gw) - x0) *
-			model->scale.x + x0,
-			y + (((gridY * height) / gh) - y0) *
-			model->scale.y + y0,
+			x + (gridX * width) / gw,
+			y + (gridY * height) / gh,
 			0, 0);
 	    i++;
 	}
@@ -1225,11 +1196,11 @@ modelAdjustObjectsForShiver (Model *model,
 {
     int   gridX, gridY, i = 0;
     float vX, vY;
-    float scale;
     float w, h;
+    float scale;
 
-    w = (float) width  * model->scale.x;
-    h = (float) height * model->scale.y;
+    w = width;
+    h = height;
 
     for (gridY = 0; gridY < GRID_HEIGHT; gridY++)
     {
@@ -1266,8 +1237,8 @@ modelInitSprings (Model *model,
 
     model->numSprings = 0;
 
-    hpad = ((float) width  * model->scale.x) / (GRID_WIDTH  - 1);
-    vpad = ((float) height * model->scale.y) / (GRID_HEIGHT - 1);
+    hpad = ((float) width) / (GRID_WIDTH  - 1);
+    vpad = ((float) height) / (GRID_HEIGHT - 1);
 
     for (gridY = 0; gridY < GRID_HEIGHT; gridY++)
     {
@@ -1326,14 +1297,6 @@ createModel (int	  x,
     model->numSprings = 0;
 
     model->steps = 0;
-
-    model->scale.x = 1.0f;
-    model->scale.y = 1.0f;
-
-    model->scaleOrigin.x = 0.0f;
-    model->scaleOrigin.y = 0.0f;
-
-    model->transformed = FALSE;
 
     memset (model->snapCnt, 0, sizeof (model->snapCnt));
 
@@ -1880,7 +1843,7 @@ wobblyPreparePaintScreen (CompScreen *s,
 			    ww->wobbly |= WobblyInitial;
 			}
 		    }
-		    else if (!ww->model->transformed)
+		    else
 		    {
 			ww->model = 0;
 
@@ -2154,35 +2117,6 @@ wobblyDrawWindowGeometry (CompWindow *w)
 	UNWRAP (ws, w->screen, drawWindowGeometry);
 	(*w->screen->drawWindowGeometry) (w);
 	WRAP (ws, w->screen, drawWindowGeometry, wobblyDrawWindowGeometry);
-    }
-}
-
-static void
-wobblyDrawWindowTexture (CompWindow		 *w,
-			 CompTexture		 *texture,
-			 const WindowPaintAttrib *attrib,
-			 unsigned int		 mask)
-{
-    WOBBLY_SCREEN (w->screen);
-    WOBBLY_WINDOW (w);
-
-    if (ww->wobbly)
-    {
-	WindowPaintAttrib wAttrib = *attrib;
-
-	/* remove scale that is applied at the add geometry stage */
-	wAttrib.xScale = attrib->xScale / ww->model->scale.x;
-	wAttrib.yScale = attrib->yScale / ww->model->scale.y;
-
-	UNWRAP (ws, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, &wAttrib, mask);
-	WRAP (ws, w->screen, drawWindowTexture, wobblyDrawWindowTexture);
-    }
-    else
-    {
-	UNWRAP (ws, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, attrib, mask);
-	WRAP (ws, w->screen, drawWindowTexture, wobblyDrawWindowTexture);
     }
 }
 
@@ -2536,45 +2470,6 @@ wobblyDamageWindowRect (CompWindow *w,
     }
 
     return status;
-}
-
-static void
-wobblySetWindowScale (CompWindow *w,
-		      float      xScale,
-		      float      yScale)
-{
-    WOBBLY_WINDOW (w);
-    WOBBLY_SCREEN (w->screen);
-
-    UNWRAP (ws, w->screen, setWindowScale);
-    (*w->screen->setWindowScale) (w, xScale, yScale);
-    WRAP (ws, w->screen, setWindowScale, wobblySetWindowScale);
-
-    if (wobblyEnsureModel (w))
-    {
-	if (ww->model->scale.x != xScale ||
-	    ww->model->scale.y != yScale)
-	{
-	    ww->model->scale.x = xScale;
-	    ww->model->scale.y = yScale;
-
-	    ww->model->scaleOrigin.x = w->output.left;
-	    ww->model->scaleOrigin.y = w->output.top;
-
-	    modelInitObjects (ww->model,
-			      WIN_X (w), WIN_Y (w),
-			      WIN_W (w), WIN_H (w));
-
-	    modelInitSprings (ww->model,
-			      WIN_X (w), WIN_Y (w),
-			      WIN_W (w), WIN_H (w));
-	}
-
-	if (ww->model->scale.x != 1.0f || ww->model->scale.y != 1.0f)
-	    ww->model->transformed = 1;
-	else
-	    ww->model->transformed = 0;
-    }
 }
 
 static void
@@ -3017,8 +2912,6 @@ wobblyInitScreen (CompPlugin *p,
     WRAP (ws, s, damageWindowRect, wobblyDamageWindowRect);
     WRAP (ws, s, addWindowGeometry, wobblyAddWindowGeometry);
     WRAP (ws, s, drawWindowGeometry, wobblyDrawWindowGeometry);
-    WRAP (ws, s, drawWindowTexture, wobblyDrawWindowTexture);
-    WRAP (ws, s, setWindowScale, wobblySetWindowScale);
     WRAP (ws, s, windowResizeNotify, wobblyWindowResizeNotify);
     WRAP (ws, s, windowMoveNotify, wobblyWindowMoveNotify);
     WRAP (ws, s, windowGrabNotify, wobblyWindowGrabNotify);
@@ -3047,8 +2940,6 @@ wobblyFiniScreen (CompPlugin *p,
     UNWRAP (ws, s, damageWindowRect);
     UNWRAP (ws, s, addWindowGeometry);
     UNWRAP (ws, s, drawWindowGeometry);
-    UNWRAP (ws, s, drawWindowTexture);
-    UNWRAP (ws, s, setWindowScale);
     UNWRAP (ws, s, windowResizeNotify);
     UNWRAP (ws, s, windowMoveNotify);
     UNWRAP (ws, s, windowGrabNotify);

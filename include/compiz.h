@@ -1582,7 +1582,6 @@ struct _CompScreen {
     DrawWindowTextureProc      drawWindowTexture;
     DamageWindowRectProc       damageWindowRect;
     FocusWindowProc	       focusWindow;
-    SetWindowScaleProc	       setWindowScale;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
@@ -1914,7 +1913,6 @@ struct _CompWindow {
 
     WindowPaintAttrib paint;
     WindowPaintAttrib lastPaint;
-    Bool	      scaled;
 
     CompWindowExtents input;
     CompWindowExtents output;
@@ -2165,11 +2163,6 @@ damageTransformedWindowRect (CompWindow *w,
 			     float	xTranslate,
 			     float	yTranslate,
 			     BoxPtr     rect);
-
-void
-setWindowScale (CompWindow *w,
-		float      xScale,
-		float      yScale);
 
 Bool
 focusWindow (CompWindow *w);

@@ -1249,19 +1249,7 @@ void
 damageWindowRegion (CompWindow *w,
 		    Region     region)
 {
-    if (w->scaled)
-    {
-	damageTransformedWindowRegion (w,
-				       w->paint.xScale,
-				       w->paint.yScale,
-				       0.0f,
-				       0.0f,
-				       region);
-    }
-    else
-    {
-	damageScreenRegion (w->screen, region);
-    }
+    damageScreenRegion (w->screen, region);
 }
 
 void
@@ -1703,8 +1691,6 @@ addWindow (CompScreen *screen,
     w->lastPaint = w->paint;
 
     w->alive = TRUE;
-
-    w->scaled = FALSE;
 
     w->mwmDecor = MwmDecorAll;
     w->mwmFunc  = MwmFuncAll;
@@ -2479,28 +2465,6 @@ syncWindowPosition (CompWindow *w)
 	XMoveWindow (w->screen->display->display, w->frame,
 		     w->attrib.x - w->input.left,
 		     w->attrib.y - w->input.top);
-}
-
-void
-setWindowScale (CompWindow *w,
-		float      xScale,
-		float      yScale)
-{
-    if (xScale > 0.999f && xScale < 1.001f &&
-	yScale > 0.999f && yScale < 1.001f)
-    {
-	w->paint.xScale = 1.0f;
-	w->paint.yScale = 1.0f;
-
-	w->scaled = FALSE;
-    }
-    else
-    {
-	w->paint.xScale = xScale;
-	w->paint.yScale = yScale;
-
-	w->scaled = TRUE;
-    }
 }
 
 Bool

@@ -1511,7 +1511,6 @@ addScreen (CompDisplay *display,
     s->drawWindowGeometry     = drawWindowGeometry;
     s->damageWindowRect       = damageWindowRect;
     s->focusWindow	      = focusWindow;
-    s->setWindowScale	      = setWindowScale;
 
     s->windowResizeNotify = windowResizeNotify;
     s->windowMoveNotify	  = windowMoveNotify;
