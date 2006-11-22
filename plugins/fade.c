@@ -78,6 +78,7 @@ typedef struct _FadeScreen {
 
     PreparePaintScreenProc preparePaintScreen;
     PaintWindowProc	   paintWindow;
+    DrawWindowProc	   drawWindow;
     DamageWindowRectProc   damageWindowRect;
     FocusWindowProc	   focusWindow;
     WindowResizeNotifyProc windowResizeNotify;
@@ -327,46 +328,54 @@ fadePaintWindow (CompWindow		 *w,
 		saturation = attrib->saturation;
 	}
 
+	fw->steps = 0;
+
 	if (opacity > 0)
 	{
-	    WindowPaintAttrib fAttrib = *attrib;
+	    fw->opacity    = opacity;
+	    fw->brightness = brightness;
+	    fw->saturation = saturation;
 
-	    fAttrib.opacity    = opacity;
-	    fAttrib.brightness = brightness;
-	    fAttrib.saturation = saturation;
-
-	    UNWRAP (fs, s, paintWindow);
-	    status = (*s->paintWindow) (w, &fAttrib, region, mask);
-	    WRAP (fs, s, paintWindow, fadePaintWindow);
-
-	    if (status)
-	    {
-		fw->opacity    = opacity;
-		fw->brightness = brightness;
-		fw->saturation = saturation;
-		fw->steps      = 0;
-
-		if (opacity    != attrib->opacity    ||
-		    brightness != attrib->brightness ||
-		    saturation != attrib->saturation)
-		    addWindowDamage (w);
-	    }
+	    if (opacity    != attrib->opacity    ||
+		brightness != attrib->brightness ||
+		saturation != attrib->saturation)
+		addWindowDamage (w);
 	}
 	else
 	{
 	    fw->opacity = 0;
 
 	    fadeWindowStop (w);
-
-	    return (mask & PAINT_WINDOW_SOLID_MASK) ? FALSE : TRUE;
 	}
     }
-    else
-    {
-	UNWRAP (fs, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region, mask);
-	WRAP (fs, s, paintWindow, fadePaintWindow);
-    }
+
+    UNWRAP (fs, s, paintWindow);
+    status = (*s->paintWindow) (w, attrib, region, mask);
+    WRAP (fs, s, paintWindow, fadePaintWindow);
+
+    return status;
+}
+
+static Bool
+fadeDrawWindow (CompWindow		*w,
+		const WindowPaintAttrib *attrib,
+		Region			region,
+		unsigned int		mask)
+{
+    WindowPaintAttrib fAttrib = *attrib;
+    CompScreen	      *s = w->screen;
+    Bool	      status;
+
+    FADE_SCREEN (s);
+    FADE_WINDOW (w);
+
+    fAttrib.opacity    = fw->opacity;
+    fAttrib.brightness = fw->brightness;
+    fAttrib.saturation = fw->saturation;
+
+    UNWRAP (fs, s, drawWindow);
+    status = (*s->drawWindow) (w, &fAttrib, region, mask);
+    WRAP (fs, s, drawWindow, fadeDrawWindow);
 
     return status;
 }
@@ -726,6 +735,7 @@ fadeInitScreen (CompPlugin *p,
 
     WRAP (fs, s, preparePaintScreen, fadePreparePaintScreen);
     WRAP (fs, s, paintWindow, fadePaintWindow);
+    WRAP (fs, s, drawWindow, fadeDrawWindow);
     WRAP (fs, s, damageWindowRect, fadeDamageWindowRect);
     WRAP (fs, s, focusWindow, fadeFocusWindow);
     WRAP (fs, s, windowResizeNotify, fadeWindowResizeNotify);
@@ -745,6 +755,7 @@ fadeFiniScreen (CompPlugin *p,
 
     UNWRAP (fs, s, preparePaintScreen);
     UNWRAP (fs, s, paintWindow);
+    UNWRAP (fs, s, drawWindow);
     UNWRAP (fs, s, damageWindowRect);
     UNWRAP (fs, s, focusWindow);
     UNWRAP (fs, s, windowResizeNotify);
