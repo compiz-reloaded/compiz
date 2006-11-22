@@ -1468,17 +1468,6 @@ switchDonePaintScreen (CompScreen *s)
 }
 
 static void
-switchMoveWindow (CompWindow *w,
-		  int        dx,
-		  int        dy)
-{
-    w->attrib.x += dx;
-    w->attrib.y += dy;
-
-    XOffsetRegion (w->region, dx, dy);
-}
-
-static void
 switchPaintThumb (CompWindow		  *w,
 		  const WindowPaintAttrib *attrib,
 		  unsigned int		  mask,
@@ -1489,11 +1478,8 @@ switchPaintThumb (CompWindow		  *w,
 {
     DrawWindowGeometryProc oldDrawWindowGeometry;
     WindowPaintAttrib	   sAttrib = *attrib;
-    int			   dx, dy;
     int			   wx, wy;
     float		   width, height;
-    REGION		   reg;
-    CompMatrix		   matrix;
     CompIcon		   *icon = NULL;
 
     /* Wrap drawWindowGeometry to make sure the general
@@ -1503,12 +1489,6 @@ switchPaintThumb (CompWindow		  *w,
 
     mask |= PAINT_WINDOW_TRANSFORMED_MASK;
 
-    reg.rects    = &reg.extents;
-    reg.numRects = 1;
-
-    reg.extents.y1 = MINSHORT;
-    reg.extents.y2 = MAXSHORT;
-
     if (w->mapNum)
     {
 	if (!w->texture->pixmap)
@@ -1517,18 +1497,23 @@ switchPaintThumb (CompWindow		  *w,
 
     if (w->mapNum)
     {
+	int ww, wh;
+
 	SWITCH_SCREEN (w->screen);
 
 	width  = WIDTH  - (SPACE << 1);
 	height = HEIGHT - (SPACE << 1);
 
-	if (w->width > width)
-	    sAttrib.xScale = width / w->width;
+	ww = w->width  + w->input.left + w->input.right;
+	wh = w->height + w->input.top  + w->input.bottom;
+
+	if (ww > width)
+	    sAttrib.xScale = width / ww;
 	else
 	    sAttrib.xScale = 1.0f;
 
-	if (w->height > height)
-	    sAttrib.yScale = height / w->height;
+	if (wh > height)
+	    sAttrib.yScale = height / wh;
 	else
 	    sAttrib.yScale = 1.0f;
 
@@ -1537,35 +1522,16 @@ switchPaintThumb (CompWindow		  *w,
 	else
 	    sAttrib.xScale = sAttrib.yScale;
 
-	width  = w->width  * sAttrib.xScale;
-	height = w->height * sAttrib.yScale;
+	width  = ww * sAttrib.xScale;
+	height = wh * sAttrib.yScale;
 
 	wx = x + SPACE + ((WIDTH  - (SPACE << 1)) - width)  / 2;
 	wy = y + SPACE + ((HEIGHT - (SPACE << 1)) - height) / 2;
 
-	dx = wx - w->attrib.x;
-	dy = wy - w->attrib.y;
+	sAttrib.xTranslate = wx - w->attrib.x + w->input.left * sAttrib.xScale;
+	sAttrib.yTranslate = wy - w->attrib.y + w->input.top  * sAttrib.yScale;
 
-	switchMoveWindow (w, dx, dy);
-
-	matrix = w->texture->matrix;
-	matrix.x0 -= (w->attrib.x * w->matrix.xx);
-	matrix.y0 -= (w->attrib.y * w->matrix.yy);
-
-	if (w->alpha || sAttrib.opacity != OPAQUE)
-	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
-	else if (sAttrib.opacity == OPAQUE)
-	    mask &= ~PAINT_WINDOW_TRANSLUCENT_MASK;
-
-	reg.extents.x1 = wx + (x1 - wx) / sAttrib.xScale;
-	reg.extents.x2 = wx + (x2 - wx) / sAttrib.xScale;
-
-	w->vCount = 0;
-	addWindowGeometry (w, &matrix, 1, w->region, &reg);
-	if (w->vCount)
-	    (*w->screen->drawWindowTexture) (w, w->texture, &sAttrib, mask);
-
-	switchMoveWindow (w, -dx, -dy);
+	(w->screen->drawWindow) (w, &sAttrib, &infiniteRegion, mask);
 
 	if (ss->opt[SWITCH_SCREEN_OPTION_ICON].value.b)
 	{
@@ -1624,34 +1590,24 @@ switchPaintThumb (CompWindow		  *w,
 
 	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
-	dx = wx - w->attrib.x;
-	dy = wy - w->attrib.y;
-
-	switchMoveWindow (w, dx, dy);
-
 	iconReg.rects    = &iconReg.extents;
 	iconReg.numRects = 1;
 
-	iconReg.extents.x1 = w->attrib.x;
-	iconReg.extents.y1 = w->attrib.y;
-	iconReg.extents.x2 = w->attrib.x + icon->width;
-	iconReg.extents.y2 = w->attrib.y + icon->height;
+	iconReg.extents.x1 = 0;
+	iconReg.extents.y1 = 0;
+	iconReg.extents.x2 = icon->width;
+	iconReg.extents.y2 = icon->height;
 
-	matrix = icon->texture.matrix;
-	matrix.x0 -= (wx * icon->texture.matrix.xx);
-	matrix.y0 -= (wy * icon->texture.matrix.yy);
-
-	reg.extents.x1 = wx + (x1 - wx) / sAttrib.xScale;
-	reg.extents.x2 = wx + (x2 - wx) / sAttrib.xScale;
+	sAttrib.xTranslate = wx;
+	sAttrib.yTranslate = wy;
 
 	w->vCount = 0;
-	addWindowGeometry (w, &matrix, 1, &iconReg, &reg);
+	addWindowGeometry (w, &icon->texture.matrix, 1, &iconReg,
+			   &infiniteRegion);
 	if (w->vCount)
 	    (*w->screen->drawWindowTexture) (w,
 					     &icon->texture, &sAttrib,
 					     mask);
-
-	switchMoveWindow (w, -dx, -dy);
     }
 
     w->screen->drawWindowGeometry = oldDrawWindowGeometry;
@@ -1694,6 +1650,11 @@ switchPaintWindow (CompWindow		   *w,
 	if (ss->opt[SWITCH_SCREEN_OPTION_MIPMAP].value.b)
 	    s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
 
+	glPushAttrib (GL_SCISSOR_BIT);
+
+	glEnable (GL_SCISSOR_TEST);
+	glScissor (x1, 0, x2 - x1, w->screen->height);
+
 	for (i = 0; i < ss->nWindows; i++)
 	{
 	    if (x + WIDTH > x1)
@@ -1713,6 +1674,8 @@ switchPaintWindow (CompWindow		   *w,
 
 	    x += WIDTH;
 	}
+
+	glPopAttrib ();
 
 	s->display->textureFilter = filter;
 
