@@ -843,7 +843,7 @@ handleActionEvent (CompDisplay *d,
 
 		edgeWindow = None;
 
-		o[0].value.i = event->xcrossing.window;
+		o[0].value.i = d->activeWindow;
 		o[1].value.i = event->xcrossing.state;
 		o[2].value.i = event->xcrossing.x_root;
 		o[3].value.i = event->xcrossing.y_root;
@@ -887,7 +887,7 @@ handleActionEvent (CompDisplay *d,
 
 		edgeWindow = event->xcrossing.window;
 
-		o[0].value.i = event->xcrossing.window;
+		o[0].value.i = d->activeWindow;
 		o[1].value.i = event->xcrossing.state;
 		o[2].value.i = event->xcrossing.x_root;
 		o[3].value.i = event->xcrossing.y_root;
@@ -951,7 +951,7 @@ handleActionEvent (CompDisplay *d,
 	    {
 		state = CompActionStateTermEdgeDnd;
 
-		o[0].value.i = event->xclient.window;
+		o[0].value.i = d->activeWindow;
 		o[1].value.i = 0; /* fixme */
 		o[2].value.i = 0; /* fixme */
 		o[3].value.i = 0; /* fixme */
@@ -1006,7 +1006,7 @@ handleActionEvent (CompDisplay *d,
 	    {
 		state = CompActionStateInitEdgeDnd;
 
-		o[0].value.i = xdndWindow;
+		o[0].value.i = d->activeWindow;
 		o[1].value.i = 0; /* fixme */
 		o[2].value.i = event->xclient.data.l[2] >> 16;
 		o[3].value.i = event->xclient.data.l[2] & 0xffff;
