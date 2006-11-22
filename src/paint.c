@@ -850,10 +850,7 @@ drawWindow (CompWindow		    *w,
     w->vCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);
     if (w->vCount)
-    {
-	w->lastPaint = *attrib;
 	(*w->screen->drawWindowTexture) (w, w->texture, attrib, mask);
-    }
 
     return TRUE;
 }
@@ -864,6 +861,8 @@ paintWindow (CompWindow		     *w,
 	     Region		     region,
 	     unsigned int	     mask)
 {
+    w->lastPaint = *attrib;
+
     if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
     {
 	if (mask & PAINT_WINDOW_SOLID_MASK)
