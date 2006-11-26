@@ -142,31 +142,6 @@
 
 #define DOUBLE_CLICK_DISTANCE 8.0
 
-typedef struct _extents {
-    gint left;
-    gint right;
-    gint top;
-    gint bottom;
-} extents;
-
-#define GRAVITY_WEST  (1 << 0)
-#define GRAVITY_EAST  (1 << 1)
-#define GRAVITY_NORTH (1 << 2)
-#define GRAVITY_SOUTH (1 << 3)
-
-#define ALIGN_LEFT   (0)
-#define ALIGN_RIGHT  (1 << 0)
-#define ALIGN_TOP    (0)
-#define ALIGN_BOTTOM (1 << 1)
-
-#define CLAMP_HORZ (1 << 0)
-#define CLAMP_VERT (1 << 1)
-
-#define XX_MASK (1 << 12)
-#define XY_MASK (1 << 13)
-#define YX_MASK (1 << 14)
-#define YY_MASK (1 << 15)
-
 #define WM_MOVERESIZE_SIZE_TOPLEFT      0
 #define WM_MOVERESIZE_SIZE_TOP          1
 #define WM_MOVERESIZE_SIZE_TOPRIGHT     2
@@ -193,22 +168,6 @@ typedef struct _extents {
 #define META_ACTIVE_SHADE_OPACITY TRUE
 
 #define N_QUADS_MAX 24
-
-typedef struct _point {
-    gint x;
-    gint y;
-    gint gravity;
-} point;
-
-typedef struct _quad {
-    point	   p1;
-    point	   p2;
-    gint	   max_width;
-    gint	   max_height;
-    gint	   align;
-    gint	   clamp;
-    cairo_matrix_t m;
-} quad;
 
 #define MWM_HINTS_DECORATIONS (1L << 1)
 
@@ -239,9 +198,9 @@ static gboolean minimal = FALSE;
 
 static double decoration_alpha = 0.5;
 
-static extents _shadow_extents   = { 0, 0, 0, 0 };
-static extents _win_extents      = { 6, 6, 4, 6 };
-static extents _switcher_extents = { 0, 0, 0, 0 };
+static decor_extents_t _shadow_extents   = { 0, 0, 0, 0 };
+static decor_extents_t _win_extents      = { 6, 6, 4, 6 };
+static decor_extents_t _switcher_extents = { 0, 0, 0, 0 };
 
 #define SWITCHER_SPACE     40
 #define SWITCHER_TOP_EXTRA 4
@@ -493,11 +452,11 @@ static gint      switcher_height;
 static void
 decoration_to_property (long	*data,
 			Pixmap	pixmap,
-			extents	*input,
-			extents	*max_input,
+			decor_extents_t	*input,
+			decor_extents_t	*max_input,
 			int	min_width,
 			int	min_height,
-			quad	*quad,
+			decor_quad_t	*quad,
 			int	nQuad)
 {
     *data++ = DECOR_INTERFACE_VERSION;
@@ -543,7 +502,7 @@ decoration_to_property (long	*data,
 }
 
 static gint
-set_horz_quad_line (quad   *q,
+set_horz_quad_line (decor_quad_t *q,
 		    int    left,
 		    int    left_corner,
 		    int    right,
@@ -620,7 +579,7 @@ set_horz_quad_line (quad   *q,
 }
 
 static gint
-set_vert_quad_row (quad   *q,
+set_vert_quad_row (decor_quad_t   *q,
 		   int    top,
 		   int    top_corner,
 		   int    bottom,
@@ -697,7 +656,7 @@ set_vert_quad_row (quad   *q,
 }
 
 static int
-set_common_window_quads (quad *q,
+set_common_window_quads (decor_quad_t *q,
 			 int  width,
 			 int  height)
 {
@@ -754,7 +713,7 @@ set_common_window_quads (quad *q,
 }
 
 static int
-set_window_quads (quad *q,
+set_window_quads (decor_quad_t *q,
 		  int  width,
 		  int  height,
 		  int  button_width)
@@ -859,7 +818,7 @@ set_window_quads (quad *q,
 }
 
 static int
-set_no_title_window_quads (quad *q,
+set_no_title_window_quads (decor_quad_t *q,
 			   int  width,
 			   int  height)
 {
@@ -892,9 +851,9 @@ decor_update_window_property (decor_t *d)
 {
     long    data[256];
     Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    extents extents = _win_extents;
+    decor_extents_t extents = _win_extents;
     gint    nQuad;
-    quad    quads[N_QUADS_MAX];
+    decor_quad_t    quads[N_QUADS_MAX];
 
     nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
 
@@ -917,7 +876,7 @@ decor_update_window_property (decor_t *d)
 }
 
 static int
-set_switcher_quads (quad *q,
+set_switcher_quads (decor_quad_t *q,
 		    int  width,
 		    int  height)
 {
@@ -1002,8 +961,8 @@ decor_update_switcher_property (decor_t *d)
     long    data[256];
     Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     gint    nQuad;
-    quad    quads[N_QUADS_MAX];
-    extents extents = _switcher_extents;
+    decor_quad_t    quads[N_QUADS_MAX];
+    decor_extents_t extents = _switcher_extents;
 
     nQuad = set_switcher_quads (quads, d->width, d->height);
 
@@ -1021,7 +980,7 @@ decor_update_switcher_property (decor_t *d)
 }
 
 static int
-set_shadow_quads (quad *q,
+set_shadow_quads (decor_quad_t *q,
 		  gint width,
 		  gint height)
 {
@@ -1907,9 +1866,9 @@ decor_update_meta_window_property (decor_t	  *d,
 {
     long    data[256];
     Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    extents extents, max_extents;
+    decor_extents_t extents, max_extents;
     gint    nQuad;
-    quad    quads[N_QUADS_MAX];
+    decor_quad_t    quads[N_QUADS_MAX];
     gint    left_width, right_width, top_height, bottom_height;
 
     nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
@@ -2843,8 +2802,8 @@ update_default_decorations (GdkScreen *screen)
     Atom       bareAtom, normalAtom, activeAtom;
     decor_t    d;
     gint       nQuad;
-    quad       quads[N_QUADS_MAX];
-    extents    extents = _win_extents;
+    decor_quad_t       quads[N_QUADS_MAX];
+    decor_extents_t    extents = _win_extents;
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
