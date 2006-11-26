@@ -96,6 +96,11 @@ COMPIZ_REQUIRES="libpng	    \
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
 AC_SUBST(COMPIZ_REQUIRES)
 
+DECORATION_REQUIRES="x11"
+
+PKG_CHECK_MODULES(DECORATION, $DECORATION_REQUIRES)
+AC_SUBST(DECORATION_REQUIRES)
+
 AC_MSG_CHECKING(for GL_CFLAGS)
 AC_ARG_WITH(gl-cflags, [  --with-gl-cflags=CFLAGS ],
 		       [GL_CFLAGS="$withval"],
@@ -314,6 +319,8 @@ AC_OUTPUT([
 compiz.pc
 Makefile
 src/Makefile
+libdecoration/Makefile
+libdecoration/libdecoration.pc
 include/Makefile
 plugins/Makefile
 plugins/compiz.schemas

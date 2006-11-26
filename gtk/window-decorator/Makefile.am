@@ -4,10 +4,12 @@ if USE_METACITY
 metacitylibs = @METACITY_LIBS@
 endif
 
-gtk_window_decorator_LDADD   =      \
+gtk_window_decorator_DEPENDENCIES = \
+	$(top_builddir)/libdecoration/libdecoration.la
+gtk_window_decorator_LDADD	  = \
 	@GTK_WINDOW_DECORATOR_LIBS@ \
 	$(metacitylibs)
-gtk_window_decorator_SOURCES = \
+gtk_window_decorator_SOURCES	  = \
 	gtk-window-decorator.c
 gtk_window_decorator_program = gtk-window-decorator
 endif
@@ -21,6 +23,6 @@ install-data-local:
 		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
         fi
 
-INCLUDES = @GTK_WINDOW_DECORATOR_CFLAGS@ @METACITY_CFLAGS@
+INCLUDES = -I$(top_srcdir)/include @GTK_WINDOW_DECORATOR_CFLAGS@ @METACITY_CFLAGS@
 
 bin_PROGRAMS = $(gtk_window_decorator_program)

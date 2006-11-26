@@ -1,2 +1,4 @@
 compizincludedir = $(includedir)/compiz
-compizinclude_HEADERS = compiz.h
+compizinclude_HEADERS = \
+	compiz.h	\
+	decoration.h
