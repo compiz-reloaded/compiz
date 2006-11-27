@@ -412,209 +412,31 @@ static gint      switcher_height;
 #define BASE_PROP_SIZE 12
 #define QUAD_PROP_SIZE 9
 
-static int
-set_common_window_quads (decor_quad_t *q,
-			 int  width,
-			 int  height)
-{
-    gint n, nQuad = 0;
-
-    /* left quads */
-    n = decor_set_vert_quad_row (q,
-				 0,
-				 normal_top_corner_space,
-				 0,
-				 bottom_corner_space,
-				 -left_space,
-				 0,
-				 GRAVITY_WEST,
-				 height - top_space - titlebar_height -
-				 bottom_space,
-				 0.0,
-				 top_space + titlebar_height + 1.0);
-
-    q += n; nQuad += n;
-
-    /* right quads */
-    n = decor_set_vert_quad_row (q,
-				 0,
-				 normal_top_corner_space,
-				 0,
-				 bottom_corner_space,
-				 0,
-				 right_space,
-				 GRAVITY_EAST,
-				 height - top_space - titlebar_height -
-				 bottom_space,
-				 width - right_space,
-				 top_space + titlebar_height + 1.0);
-
-    q += n; nQuad += n;
-
-    /* bottom quads */
-    n = decor_set_horz_quad_line (q,
-				  left_space,
-				  left_corner_space,
-				  right_space,
-				  right_corner_space,
-				  0,
-				  bottom_space,
-				  GRAVITY_SOUTH,
-				  width,
-				  0.0,
-				  top_space + titlebar_height +
-				  normal_top_corner_space +
-				  bottom_corner_space + 2.0);
-
-    nQuad += n;
-
-    return nQuad;
-}
-
-static int
-set_window_quads (decor_quad_t *q,
-		  int  width,
-		  int  height,
-		  int  button_width)
-{
-    gint    n, nQuad = 0;
-    int     top_left, top_right, y;
-    double  y0;
-
-    top_right = button_width;
-    top_left  = width - left_space - right_space - top_right - 1;
-
-    /* special case which can happen with large shadows */
-    if (right_corner_space > top_right || left_corner_space > top_left)
-    {
-	y  = -titlebar_height;
-	y0 = top_space;
-
-	/* top quads */
-	n = decor_set_horz_quad_line (q,
-				      left_space,
-				      left_corner_space,
-				      right_space,
-				      right_corner_space,
-				      -top_space - titlebar_height,
-				      y,
-				      GRAVITY_NORTH,
-				      width,
-				      0.0,
-				      0.0);
-
-	q += n; nQuad += n;
-    }
-    else
-    {
-	y  = -top_space - titlebar_height;
-	y0 = 0.0;
-    }
-
-    /* 3 top/titlebar quads */
-    q->p1.x	  = -left_space;
-    q->p1.y	  = y;
-    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = -top_right;
-    q->p2.y	  = 0;
-    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
-    q->max_width  = left_space + top_left;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_LEFT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = 0.0;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = top_left;
-    q->p1.y	  = y;
-    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = -top_right;
-    q->p2.y	  = 0;
-    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
-    q->max_width  = SHRT_MAX;
-    q->max_height = SHRT_MAX;
-    q->align	  = 0;
-    q->clamp	  = 0;
-    q->m.xx	  = 0.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = left_space + top_left;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = 0;
-    q->p1.y	  = y;
-    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = right_space;
-    q->p2.y	  = 0;
-    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
-    q->max_width  = right_space + top_right;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_RIGHT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = width;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    n = set_common_window_quads (q, width, height);
-
-    nQuad += n;
-
-    return nQuad;
-}
-
-static int
-set_no_title_window_quads (decor_quad_t *q,
-			   int  width,
-			   int  height)
-{
-    gint n, nQuad = 0;
-
-    /* top quads */
-    n = decor_set_horz_quad_line (q,
-				  left_space,
-				  left_corner_space,
-				  right_space,
-				  right_corner_space,
-				  -top_space - titlebar_height,
-				  0,
-				  GRAVITY_NORTH,
-				  width,
-				  0.0,
-				  0.0);
-
-    q += n; nQuad += n;
-
-    n = set_common_window_quads (q, width, height);
-
-    nQuad += n;
-
-    return nQuad;
-}
-
 static void
 decor_update_window_property (decor_t *d)
 {
-    long    data[256];
-    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    long	    data[256];
+    Display	    *xdisplay =
+	GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     decor_extents_t extents = _win_extents;
-    gint    nQuad;
+    gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
+    decor_context_t c;
 
-    nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
+    c.left_space   = left_space;
+    c.right_space  = right_space;
+    c.top_space    = top_space;
+    c.bottom_space = bottom_space;
+
+    c.left_corner_space   = left_corner_space;
+    c.right_corner_space  = right_corner_space;
+    c.top_corner_space    = normal_top_corner_space;
+    c.bottom_corner_space = bottom_corner_space;
+
+    c.titlebar_height = titlebar_height;
+
+    nQuad = decor_set_window_quads (&c, quads,
+				    d->width, d->height, d->button_width);
 
     extents.top += titlebar_height;
 
@@ -738,79 +560,6 @@ decor_update_switcher_property (decor_t *d)
 		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
     XSync (xdisplay, FALSE);
     gdk_error_trap_pop ();
-}
-
-static int
-set_shadow_quads (decor_quad_t *q,
-		  gint width,
-		  gint height)
-{
-    gint n, nQuad = 0;
-
-    /* top quads */
-    n = decor_set_horz_quad_line (q,
-				  shadow_left_space,
-				  shadow_left_corner_space,
-				  shadow_right_space,
-				  shadow_right_corner_space,
-				  -shadow_top_space,
-				  0,
-				  GRAVITY_NORTH,
-				  width,
-				  0.0,
-				  0.0);
-
-    q += n; nQuad += n;
-
-    /* left quads */
-    n = decor_set_vert_quad_row (q,
-				 0,
-				 shadow_top_corner_space,
-				 0,
-				 shadow_bottom_corner_space,
-				 -shadow_left_space,
-				 0,
-				 GRAVITY_WEST,
-				 height - shadow_top_space -
-				 shadow_bottom_space,
-				 0.0,
-				 shadow_top_space);
-
-    q += n; nQuad += n;
-
-    /* right quads */
-    n = decor_set_vert_quad_row (q,
-				 0,
-				 shadow_top_corner_space,
-				 0,
-				 shadow_bottom_corner_space,
-				 0,
-				 shadow_right_space,
-				 GRAVITY_EAST,
-				 height - shadow_top_space -
-				 shadow_bottom_space,
-				 width - shadow_right_space,
-				 shadow_top_space);
-
-    q += n; nQuad += n;
-
-    /* bottom quads */
-    n = decor_set_horz_quad_line (q,
-				  shadow_left_space,
-				  shadow_left_corner_space,
-				  shadow_right_space,
-				  shadow_right_corner_space,
-				  0,
-				  shadow_bottom_space,
-				  GRAVITY_SOUTH,
-				  width,
-				  0.0,
-				  shadow_top_space + shadow_top_corner_space +
-				  shadow_bottom_corner_space + 1.0);
-
-    nQuad += n;
-
-    return nQuad;
 }
 
 static void
@@ -1627,14 +1376,29 @@ decor_update_meta_window_property (decor_t	  *d,
 				   MetaTheme	  *theme,
 				   MetaFrameFlags flags)
 {
-    long    data[256];
-    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    long	    data[256];
+    Display	    *xdisplay =
+	GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     decor_extents_t extents, max_extents;
-    gint    nQuad;
+    gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
-    gint    left_width, right_width, top_height, bottom_height;
+    gint	    left_width, right_width, top_height, bottom_height;
+    decor_context_t c;
 
-    nQuad = set_window_quads (quads, d->width, d->height, d->button_width);
+    c.left_space   = left_space;
+    c.right_space  = right_space;
+    c.top_space    = top_space;
+    c.bottom_space = bottom_space;
+
+    c.left_corner_space   = left_corner_space;
+    c.right_corner_space  = right_corner_space;
+    c.top_corner_space    = normal_top_corner_space;
+    c.bottom_corner_space = bottom_corner_space;
+
+    c.titlebar_height = titlebar_height;
+
+    nQuad = decor_set_window_quads (&c, quads,
+				    d->width, d->height, d->button_width);
 
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
@@ -2558,15 +2322,18 @@ pixmap_new_from_pixbuf (GdkPixbuf *pixbuf)
 static void
 update_default_decorations (GdkScreen *screen)
 {
-    long       data[256];
-    Window     xroot;
-    GdkDisplay *gdkdisplay = gdk_display_get_default ();
-    Display    *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
-    Atom       bareAtom, normalAtom, activeAtom;
-    decor_t    d;
-    gint       nQuad;
-    decor_quad_t       quads[N_QUADS_MAX];
-    decor_extents_t    extents = _win_extents;
+    long	    data[256];
+    Window	    xroot;
+    GdkDisplay	    *gdkdisplay = gdk_display_get_default ();
+    Display	    *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
+    Atom	    bareAtom, normalAtom, activeAtom;
+    decor_t	    d;
+    gint	    nQuad;
+    decor_quad_t    quads[N_QUADS_MAX];
+    decor_extents_t extents = _win_extents;
+    decor_context_t c;
+
+    c.titlebar_height = titlebar_height;
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
@@ -2580,7 +2347,17 @@ update_default_decorations (GdkScreen *screen)
 
 	gdk_drawable_get_size (shadow_pixmap, &width, &height);
 
-	nQuad = set_shadow_quads (quads, width, height);
+	c.left_space   = shadow_left_space;
+	c.right_space  = shadow_right_space;
+	c.top_space    = shadow_top_space;
+	c.bottom_space = shadow_bottom_space;
+
+	c.left_corner_space   = shadow_left_corner_space;
+	c.right_corner_space  = shadow_right_corner_space;
+	c.top_corner_space    = shadow_top_corner_space;
+	c.bottom_corner_space = shadow_bottom_corner_space;
+
+	nQuad = decor_set_shadow_quads (&c, quads, width, height);
 
 	decor_quads_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
 				 &_shadow_extents, &_shadow_extents,
@@ -2634,7 +2411,17 @@ update_default_decorations (GdkScreen *screen)
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
 
-    nQuad = set_no_title_window_quads (quads, d.width, d.height);
+    c.left_space   = left_space;
+    c.right_space  = right_space;
+    c.top_space    = top_space;
+    c.bottom_space = bottom_space;
+
+    c.left_corner_space   = left_corner_space;
+    c.right_corner_space  = right_corner_space;
+    c.top_corner_space    = normal_top_corner_space;
+    c.bottom_corner_space = bottom_corner_space;
+
+    nQuad = decor_set_no_title_window_quads (&c, quads, d.width, d.height);
 
     decor_normal_pixmap = create_pixmap (d.width, d.height);
     if (decor_normal_pixmap)
