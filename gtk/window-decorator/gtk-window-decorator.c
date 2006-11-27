@@ -412,95 +412,6 @@ static gint      switcher_height;
 #define BASE_PROP_SIZE 12
 #define QUAD_PROP_SIZE 9
 
-/*
-  decoration property
-  -------------------
-
-  data[0] = version
-
-  data[1] = pixmap
-
-  data[2] = input left
-  data[3] = input right
-  data[4] = input top
-  data[5] = input bottom
-
-  data[6] = input left when maximized
-  data[7] = input right when maximized
-  data[8] = input top when maximized
-  data[9] = input bottom when maximized
-
-  data[10] = min width
-  data[11] = min height
-
-  flags
-
-  1st to 4nd bit p1 gravity, 5rd to 8th bit p2 gravity,
-  9rd and 10th bit alignment, 11rd and 12th bit clamp,
-  13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
-
-  data[11 + n * 9 + 1] = flags
-  data[11 + n * 9 + 2] = p1 x
-  data[11 + n * 9 + 3] = p1 y
-  data[11 + n * 9 + 4] = p2 x
-  data[11 + n * 9 + 5] = p2 y
-  data[11 + n * 9 + 6] = widthMax
-  data[11 + n * 9 + 7] = heightMax
-  data[11 + n * 9 + 8] = x0
-  data[11 + n * 9 + 9] = y0
- */
-static void
-decoration_to_property (long	*data,
-			Pixmap	pixmap,
-			decor_extents_t	*input,
-			decor_extents_t	*max_input,
-			int	min_width,
-			int	min_height,
-			decor_quad_t	*quad,
-			int	nQuad)
-{
-    *data++ = DECOR_INTERFACE_VERSION;
-
-    memcpy (data++, &pixmap, sizeof (Pixmap));
-
-    *data++ = input->left;
-    *data++ = input->right;
-    *data++ = input->top;
-    *data++ = input->bottom;
-
-    *data++ = max_input->left;
-    *data++ = max_input->right;
-    *data++ = max_input->top;
-    *data++ = max_input->bottom;
-
-    *data++ = min_width;
-    *data++ = min_height;
-
-    while (nQuad--)
-    {
-	*data++ =
-	    (quad->p1.gravity << 0)    |
-	    (quad->p2.gravity << 4)    |
-	    (quad->align      << 8)    |
-	    (quad->clamp      << 10)   |
-	    (quad->m.xx ? XX_MASK : 0) |
-	    (quad->m.xy ? XY_MASK : 0) |
-	    (quad->m.yx ? YX_MASK : 0) |
-	    (quad->m.yy ? YY_MASK : 0);
-
-	*data++ = quad->p1.x;
-	*data++ = quad->p1.y;
-	*data++ = quad->p2.x;
-	*data++ = quad->p2.y;
-	*data++ = quad->max_width;
-	*data++ = quad->max_height;
-	*data++ = quad->m.x0;
-	*data++ = quad->m.y0;
-
-	quad++;
-    }
-}
-
 static gint
 set_horz_quad_line (decor_quad_t *q,
 		    int    left,
@@ -859,11 +770,11 @@ decor_update_window_property (decor_t *d)
 
     extents.top += titlebar_height;
 
-    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, &extents,
-			    ICON_SPACE + d->button_width,
-			    0,
-			    quads, nQuad);
+    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			     &extents, &extents,
+			     ICON_SPACE + d->button_width,
+			     0,
+			     quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -966,8 +877,8 @@ decor_update_switcher_property (decor_t *d)
 
     nQuad = set_switcher_quads (quads, d->width, d->height);
 
-    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, &extents, 0, 0, quads, nQuad);
+    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			     &extents, &extents, 0, 0, quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -1901,11 +1812,11 @@ decor_update_meta_window_property (decor_t	  *d,
     max_extents.left   = left_width;
     max_extents.right  = right_width;
 
-    decoration_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			    &extents, &max_extents,
-			    ICON_SPACE + d->button_width,
-			    0,
-			    quads, nQuad);
+    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			     &extents, &max_extents,
+			     ICON_SPACE + d->button_width,
+			     0,
+			     quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -2819,9 +2730,9 @@ update_default_decorations (GdkScreen *screen)
 
 	nQuad = set_shadow_quads (quads, width, height);
 
-	decoration_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
-				&_shadow_extents, &_shadow_extents,
-				0, 0, quads, nQuad);
+	decor_quads_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
+				 &_shadow_extents, &_shadow_extents,
+				 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 bareAtom,
@@ -2881,8 +2792,8 @@ update_default_decorations (GdkScreen *screen)
 
 	(*d.draw) (&d);
 
-	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&extents, &extents, 0, 0, quads, nQuad);
+	decor_quads_to_property (data, GDK_PIXMAP_XID (d.pixmap),
+				 &extents, &extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 normalAtom,
@@ -2902,8 +2813,8 @@ update_default_decorations (GdkScreen *screen)
 
 	(*d.draw) (&d);
 
-	decoration_to_property (data, GDK_PIXMAP_XID (d.pixmap),
-				&extents, &extents, 0, 0, quads, nQuad);
+	decor_quads_to_property (data, GDK_PIXMAP_XID (d.pixmap),
+				 &extents, &extents, 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 activeAtom,
