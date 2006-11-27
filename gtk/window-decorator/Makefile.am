@@ -6,8 +6,9 @@ endif
 
 gtk_window_decorator_DEPENDENCIES = \
 	$(top_builddir)/libdecoration/libdecoration.la
-gtk_window_decorator_LDADD	  = \
-	@GTK_WINDOW_DECORATOR_LIBS@ \
+gtk_window_decorator_LDADD	  =		       \
+	$(top_builddir)/libdecoration/libdecoration.la \
+	@GTK_WINDOW_DECORATOR_LIBS@		       \
 	$(metacitylibs)
 gtk_window_decorator_SOURCES	  = \
 	gtk-window-decorator.c
