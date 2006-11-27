@@ -412,160 +412,6 @@ static gint      switcher_height;
 #define BASE_PROP_SIZE 12
 #define QUAD_PROP_SIZE 9
 
-static gint
-set_horz_quad_line (decor_quad_t *q,
-		    int    left,
-		    int    left_corner,
-		    int    right,
-		    int    right_corner,
-		    int    top,
-		    int	   bottom,
-		    int    gravity,
-		    int	   width,
-		    double x0,
-		    double y0)
-{
-    gint dx, nQuad = 0;
-
-    dx = (left_corner - right_corner) >> 1;
-
-    q->p1.x	  = -left;
-    q->p1.y	  = top;
-    q->p1.gravity = gravity | GRAVITY_WEST;
-    q->p2.x	  = dx;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity;
-    q->max_width  = left + left_corner;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_LEFT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = left_corner;
-    q->p1.y	  = top;
-    q->p1.gravity = gravity | GRAVITY_WEST;
-    q->p2.x	  = -right_corner;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity | GRAVITY_EAST;
-    q->max_width  = SHRT_MAX;
-    q->max_height = SHRT_MAX;
-    q->align	  = 0;
-    q->clamp	  = 0;
-    q->m.xx	  = 0.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0 + left + left_corner;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = dx;
-    q->p1.y	  = top;
-    q->p1.gravity = gravity;
-    q->p2.x	  = right;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity | GRAVITY_EAST;
-    q->max_width  = right_corner + right;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_RIGHT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0 + width;
-    q->m.y0	  = y0;
-
-    nQuad++;
-
-    return nQuad;
-}
-
-static gint
-set_vert_quad_row (decor_quad_t   *q,
-		   int    top,
-		   int    top_corner,
-		   int    bottom,
-		   int    bottom_corner,
-		   int    left,
-		   int	  right,
-		   int    gravity,
-		   int	  height,
-		   double x0,
-		   double y0)
-{
-    gint dy, nQuad = 0;
-
-    dy = (top_corner - bottom_corner) >> 1;
-
-    q->p1.x	  = left;
-    q->p1.y	  = -top;
-    q->p1.gravity = gravity | GRAVITY_NORTH;
-    q->p2.x	  = right;
-    q->p2.y	  = dy;
-    q->p2.gravity = gravity;
-    q->max_width  = SHRT_MAX;
-    q->max_height = top + top_corner;
-    q->align	  = ALIGN_TOP;
-    q->clamp	  = CLAMP_VERT;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = left;
-    q->p1.y	  = top_corner;
-    q->p1.gravity = gravity | GRAVITY_NORTH;
-    q->p2.x	  = right;
-    q->p2.y	  = -bottom_corner;
-    q->p2.gravity = gravity | GRAVITY_SOUTH;
-    q->max_width  = SHRT_MAX;
-    q->max_height = SHRT_MAX;
-    q->align	  = 0;
-    q->clamp	  = CLAMP_VERT;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 0.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0 + top + top_corner;
-
-    q++; nQuad++;
-
-    q->p1.x	  = left;
-    q->p1.y	  = dy;
-    q->p1.gravity = gravity;
-    q->p2.x	  = right;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity | GRAVITY_SOUTH;
-    q->max_width  = SHRT_MAX;
-    q->max_height = bottom_corner + bottom;
-    q->align	  = ALIGN_BOTTOM;
-    q->clamp	  = CLAMP_VERT;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0 + height;
-
-    nQuad++;
-
-    return nQuad;
-}
-
 static int
 set_common_window_quads (decor_quad_t *q,
 			 int  width,
@@ -574,49 +420,51 @@ set_common_window_quads (decor_quad_t *q,
     gint n, nQuad = 0;
 
     /* left quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   normal_top_corner_space,
-			   0,
-			   bottom_corner_space,
-			   -left_space,
-			   0,
-			   GRAVITY_WEST,
-			   height - top_space - titlebar_height - bottom_space,
-			   0.0,
-			   top_space + titlebar_height + 1.0);
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 normal_top_corner_space,
+				 0,
+				 bottom_corner_space,
+				 -left_space,
+				 0,
+				 GRAVITY_WEST,
+				 height - top_space - titlebar_height -
+				 bottom_space,
+				 0.0,
+				 top_space + titlebar_height + 1.0);
 
     q += n; nQuad += n;
 
     /* right quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   normal_top_corner_space,
-			   0,
-			   bottom_corner_space,
-			   0,
-			   right_space,
-			   GRAVITY_EAST,
-			   height - top_space - titlebar_height - bottom_space,
-			   width - right_space,
-			   top_space + titlebar_height + 1.0);
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 normal_top_corner_space,
+				 0,
+				 bottom_corner_space,
+				 0,
+				 right_space,
+				 GRAVITY_EAST,
+				 height - top_space - titlebar_height -
+				 bottom_space,
+				 width - right_space,
+				 top_space + titlebar_height + 1.0);
 
     q += n; nQuad += n;
 
     /* bottom quads */
-    n = set_horz_quad_line (q,
-			    left_space,
-			    left_corner_space,
-			    right_space,
-			    right_corner_space,
-			    0,
-			    bottom_space,
-			    GRAVITY_SOUTH,
-			    width,
-			    0.0,
-			    top_space + titlebar_height +
-			    normal_top_corner_space +
-			    bottom_corner_space + 2.0);
+    n = decor_set_horz_quad_line (q,
+				  left_space,
+				  left_corner_space,
+				  right_space,
+				  right_corner_space,
+				  0,
+				  bottom_space,
+				  GRAVITY_SOUTH,
+				  width,
+				  0.0,
+				  top_space + titlebar_height +
+				  normal_top_corner_space +
+				  bottom_corner_space + 2.0);
 
     nQuad += n;
 
@@ -643,17 +491,17 @@ set_window_quads (decor_quad_t *q,
 	y0 = top_space;
 
 	/* top quads */
-	n = set_horz_quad_line (q,
-				left_space,
-				left_corner_space,
-				right_space,
-				right_corner_space,
-				-top_space - titlebar_height,
-				y,
-				GRAVITY_NORTH,
-				width,
-				0.0,
-				0.0);
+	n = decor_set_horz_quad_line (q,
+				      left_space,
+				      left_corner_space,
+				      right_space,
+				      right_corner_space,
+				      -top_space - titlebar_height,
+				      y,
+				      GRAVITY_NORTH,
+				      width,
+				      0.0,
+				      0.0);
 
 	q += n; nQuad += n;
     }
@@ -736,17 +584,17 @@ set_no_title_window_quads (decor_quad_t *q,
     gint n, nQuad = 0;
 
     /* top quads */
-    n = set_horz_quad_line (q,
-			    left_space,
-			    left_corner_space,
-			    right_space,
-			    right_corner_space,
-			    -top_space - titlebar_height,
-			    0,
-			    GRAVITY_NORTH,
-			    width,
-			    0.0,
-			    0.0);
+    n = decor_set_horz_quad_line (q,
+				  left_space,
+				  left_corner_space,
+				  right_space,
+				  right_corner_space,
+				  -top_space - titlebar_height,
+				  0,
+				  GRAVITY_NORTH,
+				  width,
+				  0.0,
+				  0.0);
 
     q += n; nQuad += n;
 
@@ -814,32 +662,34 @@ set_switcher_quads (decor_quad_t *q,
     q++; nQuad++;
 
     /* left quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   switcher_top_corner_space,
-			   0,
-			   bottom_corner_space,
-			   -left_space,
-			   0,
-			   GRAVITY_WEST,
-			   height - top_space - titlebar_height - bottom_space,
-			   0.0,
-			   top_space + SWITCHER_TOP_EXTRA);
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 switcher_top_corner_space,
+				 0,
+				 bottom_corner_space,
+				 -left_space,
+				 0,
+				 GRAVITY_WEST,
+				 height - top_space - titlebar_height -
+				 bottom_space,
+				 0.0,
+				 top_space + SWITCHER_TOP_EXTRA);
 
     q += n; nQuad += n;
 
     /* right quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   switcher_top_corner_space,
-			   0,
-			   switcher_bottom_corner_space,
-			   0,
-			   right_space,
-			   GRAVITY_EAST,
-			   height - top_space - titlebar_height - bottom_space,
-			   width - right_space,
-			   top_space + SWITCHER_TOP_EXTRA);
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 switcher_top_corner_space,
+				 0,
+				 switcher_bottom_corner_space,
+				 0,
+				 right_space,
+				 GRAVITY_EAST,
+				 height - top_space - titlebar_height -
+				 bottom_space,
+				 width - right_space,
+				 top_space + SWITCHER_TOP_EXTRA);
 
     q += n; nQuad += n;
 
@@ -898,63 +748,65 @@ set_shadow_quads (decor_quad_t *q,
     gint n, nQuad = 0;
 
     /* top quads */
-    n = set_horz_quad_line (q,
-			    shadow_left_space,
-			    shadow_left_corner_space,
-			    shadow_right_space,
-			    shadow_right_corner_space,
-			    -shadow_top_space,
-			    0,
-			    GRAVITY_NORTH,
-			    width,
-			    0.0,
-			    0.0);
+    n = decor_set_horz_quad_line (q,
+				  shadow_left_space,
+				  shadow_left_corner_space,
+				  shadow_right_space,
+				  shadow_right_corner_space,
+				  -shadow_top_space,
+				  0,
+				  GRAVITY_NORTH,
+				  width,
+				  0.0,
+				  0.0);
 
     q += n; nQuad += n;
 
     /* left quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   shadow_top_corner_space,
-			   0,
-			   shadow_bottom_corner_space,
-			   -shadow_left_space,
-			   0,
-			   GRAVITY_WEST,
-			   height - shadow_top_space - shadow_bottom_space,
-			   0.0,
-			   shadow_top_space);
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 shadow_top_corner_space,
+				 0,
+				 shadow_bottom_corner_space,
+				 -shadow_left_space,
+				 0,
+				 GRAVITY_WEST,
+				 height - shadow_top_space -
+				 shadow_bottom_space,
+				 0.0,
+				 shadow_top_space);
 
     q += n; nQuad += n;
 
     /* right quads */
-    n = set_vert_quad_row (q,
-			   0,
-			   shadow_top_corner_space,
-			   0,
-			   shadow_bottom_corner_space,
-			   0,
-			   shadow_right_space,
-			   GRAVITY_EAST,
-			   height - shadow_top_space - shadow_bottom_space,
-			   width - shadow_right_space,
-			   shadow_top_space);
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 shadow_top_corner_space,
+				 0,
+				 shadow_bottom_corner_space,
+				 0,
+				 shadow_right_space,
+				 GRAVITY_EAST,
+				 height - shadow_top_space -
+				 shadow_bottom_space,
+				 width - shadow_right_space,
+				 shadow_top_space);
 
     q += n; nQuad += n;
 
     /* bottom quads */
-    n = set_horz_quad_line (q,
-			    shadow_left_space,
-			    shadow_left_corner_space,
-			    shadow_right_space,
-			    shadow_right_corner_space,
-			    0,
-			    shadow_bottom_space,
-			    GRAVITY_SOUTH,
-			    width,
-			    0.0,
-			    shadow_top_space + shadow_top_corner_space +
-			    shadow_bottom_corner_space + 1.0);
+    n = decor_set_horz_quad_line (q,
+				  shadow_left_space,
+				  shadow_left_corner_space,
+				  shadow_right_space,
+				  shadow_right_corner_space,
+				  0,
+				  shadow_bottom_space,
+				  GRAVITY_SOUTH,
+				  width,
+				  0.0,
+				  shadow_top_space + shadow_top_corner_space +
+				  shadow_bottom_corner_space + 1.0);
 
     nQuad += n;
 
