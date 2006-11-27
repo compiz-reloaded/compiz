@@ -458,8 +458,8 @@ decor_update_window_property (decor_t *d)
 
 static int
 set_switcher_quads (decor_quad_t *q,
-		    int  width,
-		    int  height)
+		    int		 width,
+		    int		 height)
 {
     gint n, nQuad = 0;
 
