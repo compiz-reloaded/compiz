@@ -1586,24 +1586,28 @@ switchPaintThumb (CompWindow		  *w,
 
     if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
     {
-	REGION iconReg;
+	REGION     iconReg;
+	CompMatrix matrix;
 
 	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
 	iconReg.rects    = &iconReg.extents;
 	iconReg.numRects = 1;
 
-	iconReg.extents.x1 = 0;
-	iconReg.extents.y1 = 0;
-	iconReg.extents.x2 = icon->width;
-	iconReg.extents.y2 = icon->height;
+	iconReg.extents.x1 = w->attrib.x;
+	iconReg.extents.y1 = w->attrib.y;
+	iconReg.extents.x2 = w->attrib.x + icon->width;
+	iconReg.extents.y2 = w->attrib.y + icon->height;
 
-	sAttrib.xTranslate = wx;
-	sAttrib.yTranslate = wy;
+	matrix = icon->texture.matrix;
+	matrix.x0 -= (w->attrib.x * icon->texture.matrix.xx);
+	matrix.y0 -= (w->attrib.y * icon->texture.matrix.yy);
+
+	sAttrib.xTranslate = wx - w->attrib.x;
+	sAttrib.yTranslate = wy - w->attrib.y;
 
 	w->vCount = 0;
-	addWindowGeometry (w, &icon->texture.matrix, 1, &iconReg,
-			   &infiniteRegion);
+	addWindowGeometry (w, &matrix, 1, &iconReg, &infiniteRegion);
 	if (w->vCount)
 	    (*w->screen->drawWindowTexture) (w,
 					     &icon->texture, &sAttrib,
