@@ -79,9 +79,7 @@ typedef struct _decor_extents {
     int bottom;
 } decor_extents_t;
 
-typedef struct _decor_context decor_context_t;
-
-struct _decor_context {
+typedef struct _decor_context {
     int left_space;
     int right_space;
     int top_space;
@@ -93,7 +91,7 @@ struct _decor_context {
     int bottom_corner_space;
 
     int titlebar_height;
-};
+} decor_context_t;
 
 typedef struct _decor_shadow_options {
     double	   shadow_radius;
@@ -103,7 +101,12 @@ typedef struct _decor_shadow_options {
     int		   shadow_offset_y;
 } decor_shadow_options_t;
 
-typedef struct _decor_shadow decor_shadow_t;
+typedef struct _decor_shadow {
+    Pixmap  pixmap;
+    Picture picture;
+    int	    width;
+    int	    height;
+} decor_shadow_t;
 
 typedef void (*decor_draw_func_t) (Display *xdisplay,
 				   Pixmap  pixmap,

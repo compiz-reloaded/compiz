@@ -28,12 +28,6 @@
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-struct _decor_shadow {
-    Picture picture;
-    int	    width;
-    int	    height;
-};
-
 /*
   decoration property
   -------------------
@@ -714,6 +708,7 @@ decor_create_shadow (Display		    *xdisplay,
     if (!shadow)
 	return NULL;
 
+    shadow->pixmap  = 0;
     shadow->picture = 0;
     shadow->width   = 0;
     shadow->height  = 0;
@@ -865,8 +860,8 @@ decor_create_shadow (Display		    *xdisplay,
     XRenderFreePicture (xdisplay, src);
 
     XFreePixmap (xdisplay, pixmap);
-    XFreePixmap (xdisplay, d_pixmap);
 
+    shadow->pixmap  = d_pixmap;
     shadow->picture = dst;
     shadow->width   = d_width;
     shadow->height  = d_height;
@@ -882,6 +877,9 @@ decor_destroy_shadow (Display	     *xdisplay,
 {
     if (shadow->picture)
 	XRenderFreePicture (xdisplay, shadow->picture);
+
+    if (shadow->pixmap)
+	XFreePixmap (xdisplay, shadow->pixmap);
 
     free (shadow);
 }
