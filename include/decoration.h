@@ -30,6 +30,7 @@
 #include <limits.h>
 
 #include <X11/Xlib.h>
+#include <X11/extensions/Xrender.h>
 
 #define GRAVITY_WEST  (1 << 0)
 #define GRAVITY_EAST  (1 << 1)
@@ -94,6 +95,23 @@ struct _decor_context {
     int titlebar_height;
 };
 
+typedef struct _decor_shadow_options {
+    double	   shadow_radius;
+    double	   shadow_opacity;
+    unsigned short shadow_color[3];
+    int		   shadow_offset_x;
+    int		   shadow_offset_y;
+} decor_shadow_options_t;
+
+typedef struct _decor_shadow decor_shadow_t;
+
+typedef void (*decor_draw_func_t) (Display *xdisplay,
+				   Pixmap  pixmap,
+				   Picture picture,
+				   int     width,
+				   int     height,
+				   void    *closure);
+
 void
 decor_quads_to_property (long		 *data,
 			 Pixmap		 pixmap,
@@ -154,5 +172,24 @@ decor_set_shadow_quads (decor_context_t *c,
 			decor_quad_t    *q,
 			int	        width,
 			int	        height);
+
+decor_shadow_t *
+decor_create_shadow (Display		    *xdisplay,
+		     Screen		    *screen,
+		     int		    width,
+		     int		    height,
+		     int		    left,
+		     int		    right,
+		     int		    top,
+		     int		    bottom,
+		     decor_shadow_options_t *opt,
+		     decor_context_t	    *context,
+		     decor_draw_func_t      *draw,
+		     void		    *closure);
+
+void
+decor_destroy_shadow (Display	     *xdisplay,
+		      decor_shadow_t *shadow);
+
 
 #endif

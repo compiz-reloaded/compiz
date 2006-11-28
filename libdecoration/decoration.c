@@ -21,7 +21,18 @@
 #include <config.h>
 #endif
 
+#include <stdlib.h>
+#include <math.h>
+
 #include <decoration.h>
+
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+struct _decor_shadow {
+    Picture picture;
+    int	    width;
+    int	    height;
+};
 
 /*
   decoration property
@@ -532,4 +543,345 @@ decor_set_shadow_quads (decor_context_t *c,
     nQuad += n;
 
     return nQuad;
+}
+
+#if INT_MAX != LONG_MAX
+
+static int errors;
+
+static int
+error_handler (Display *xdisplay,
+	       XErrorEvent *event)
+{
+    errors++;
+    return 0;
+}
+
+/* XRenderSetPictureFilter used to be broken on LP64. This
+ * works with either the broken or fixed version.
+ */
+static void
+XRenderSetPictureFilter_wrapper (Display *dpy,
+				 Picture picture,
+				 char    *filter,
+				 XFixed  *params,
+				 int     nparams)
+{
+    int (*old) (Display *, XErrorEvent *);
+
+    errors = 0;
+
+    old = XSetErrorHandler (error_handler);
+
+    XRenderSetPictureFilter (dpy, picture, filter, params, nparams);
+    XSync (dpy, False);
+
+    XSetErrorHandler (old);
+
+    if (errors)
+    {
+	long *long_params = malloc (sizeof (long) * nparams);
+	int  i;
+
+	for (i = 0; i < nparams; i++)
+	    long_params[i] = params[i];
+
+	XRenderSetPictureFilter (dpy, picture, filter,
+				 (XFixed *) long_params, nparams);
+	free (long_params);
+    }
+}
+
+#define XRenderSetPictureFilter XRenderSetPictureFilter_wrapper
+#endif
+
+static void
+set_picture_transform (Display *xdisplay,
+		       Picture p,
+		       int     dx,
+		       int     dy)
+{
+    XTransform transform = {
+	{
+	    { 1 << 16, 0,       -dx << 16 },
+	    { 0,       1 << 16, -dy << 16 },
+	    { 0,       0,         1 << 16 },
+	}
+    };
+
+    XRenderSetPictureTransform (xdisplay, p, &transform);
+}
+
+static XFixed *
+create_gaussian_kernel (double radius,
+			double sigma,
+			double alpha,
+			double opacity,
+			int    *r_size)
+{
+    XFixed *params;
+    double *amp, scale, x_scale, fx, sum;
+    int    size, half_size, x, i, n;
+
+    scale = 1.0f / (2.0f * M_PI * sigma * sigma);
+    half_size = alpha + 0.5f;
+
+    if (half_size == 0)
+	half_size = 1;
+
+    size = half_size * 2 + 1;
+    x_scale = 2.0f * radius / size;
+
+    if (size < 3)
+	return NULL;
+
+    n = size;
+
+    amp = malloc (sizeof (double) * n);
+    if (!amp)
+	return NULL;
+
+    n += 2;
+
+    params = malloc (sizeof (XFixed) * n);
+    if (!params)
+	return NULL;
+
+    i   = 0;
+    sum = 0.0f;
+
+    for (x = 0; x < size; x++)
+    {
+	fx = x_scale * (x - half_size);
+
+	amp[i] = scale * exp ((-1.0f * (fx * fx)) / (2.0f * sigma * sigma));
+
+	sum += amp[i];
+
+	i++;
+    }
+
+    /* normalize */
+    if (sum != 0.0)
+	sum = 1.0 / sum;
+
+    params[0] = params[1] = 0;
+
+    for (i = 2; i < n; i++)
+	params[i] = XDoubleToFixed (amp[i - 2] * sum * opacity * 1.2);
+
+    free (amp);
+
+    *r_size = size;
+
+    return params;
+}
+
+#define SIGMA(r) ((r) / 2.0)
+#define ALPHA(r) (r)
+
+decor_shadow_t *
+decor_create_shadow (Display		    *xdisplay,
+		     Screen		    *screen,
+		     int		    width,
+		     int		    height,
+		     int		    left,
+		     int		    right,
+		     int		    top,
+		     int		    bottom,
+		     decor_shadow_options_t *opt,
+		     decor_context_t	    *c,
+		     decor_draw_func_t	    *draw,
+		     void		    *closure)
+{
+    XRenderPictFormat   *format;
+    Pixmap		pixmap;
+    Picture		src, dst, tmp;
+    XFixed		*params;
+    XFilters		*filters;
+    char		*filter = NULL;
+    int			size, n_params = 0;
+    XRenderColor	color;
+    int			shadow_offset_x;
+    int			shadow_offset_y;
+    Pixmap		d_pixmap;
+    int			d_width;
+    int			d_height;
+    Window		xroot = screen->root;
+    decor_shadow_t	*shadow;
+
+    shadow = malloc (sizeof (decor_shadow_t));
+    if (!shadow)
+	return NULL;
+
+    shadow->picture = 0;
+    shadow->width   = 0;
+    shadow->height  = 0;
+
+    color.red   = opt->shadow_color[0];
+    color.green = opt->shadow_color[1];
+    color.blue  = opt->shadow_color[2];
+    color.alpha = 0xffff;
+
+    shadow_offset_x = opt->shadow_offset_x;
+    shadow_offset_y = opt->shadow_offset_y;
+
+    /* compute a gaussian convolution kernel */
+    params = create_gaussian_kernel (opt->shadow_radius,
+				     SIGMA (opt->shadow_radius),
+				     ALPHA (opt->shadow_radius),
+				     opt->shadow_opacity,
+				     &size);
+    if (!params)
+	shadow_offset_x = shadow_offset_y = size = 0;
+
+    if (opt->shadow_radius <= 0.0 &&
+	shadow_offset_x == 0	  &&
+	shadow_offset_y == 0)
+	size = 0;
+
+    n_params = size + 2;
+    size     = size / 2;
+
+    c->left_space   = left   + size - shadow_offset_x;
+    c->right_space  = right  + size + shadow_offset_x;
+    c->top_space    = top    + size - shadow_offset_y;
+    c->bottom_space = bottom + size + shadow_offset_y;
+
+    c->left_space   = MAX (left,   c->left_space);
+    c->right_space  = MAX (right,  c->right_space);
+    c->top_space    = MAX (top,    c->top_space);
+    c->bottom_space = MAX (bottom, c->bottom_space);
+
+    c->left_corner_space   = MAX (0, size + shadow_offset_x);
+    c->right_corner_space  = MAX (0, size - shadow_offset_x);
+    c->top_corner_space    = MAX (0, size + shadow_offset_y);
+    c->bottom_corner_space = MAX (0, size - shadow_offset_y);
+
+    d_width  = c->left_space + c->left_corner_space + width +
+	c->right_corner_space + c->right_space;
+    d_height = c->top_space + c->top_corner_space + height +
+	c->bottom_corner_space + c->bottom_space;
+
+    /* all pixmaps are ARGB32 */
+    format = XRenderFindStandardFormat (xdisplay, PictStandardARGB32);
+
+    /* shadow color */
+    src = XRenderCreateSolidFill (xdisplay, &color);
+
+    /* no shadow */
+    if (size <= 0)
+    {
+	if (params)
+	    free (params);
+
+	return shadow;
+    }
+
+    pixmap = XCreatePixmap (xdisplay, xroot, d_width, d_height, 32);
+    if (!pixmap)
+    {
+	free (params);
+	return shadow;
+    }
+
+    /* query server for convolution filter */
+    filters = XRenderQueryFilters (xdisplay, pixmap);
+    if (filters)
+    {
+	int i;
+
+	for (i = 0; i < filters->nfilter; i++)
+	{
+	    if (strcmp (filters->filter[i], FilterConvolution) == 0)
+	    {
+		filter = (char *) FilterConvolution;
+		break;
+	    }
+	}
+
+	XFree (filters);
+    }
+
+    if (!filter)
+    {
+	XFreePixmap (xdisplay, pixmap);
+	free (params);
+
+	return shadow;
+    }
+
+
+    /* create pixmap for temporary decorations */
+
+    d_pixmap = XCreatePixmap (xdisplay, xroot, d_width, d_height, 32);
+    if (!d_pixmap)
+    {
+	free (params);
+	XFreePixmap (xdisplay, pixmap);
+
+	return shadow;
+    }
+
+    dst = XRenderCreatePicture (xdisplay, d_pixmap, format, 0, NULL);
+    tmp = XRenderCreatePicture (xdisplay, pixmap, format, 0, NULL);
+
+    /* draw decoration */
+    (*draw) (xdisplay, d_pixmap, dst, d_width, d_height, closure);
+
+    /* first pass */
+    params[0] = (n_params - 2) << 16;
+    params[1] = 1 << 16;
+
+    set_picture_transform (xdisplay, dst, shadow_offset_x, 0);
+    XRenderSetPictureFilter (xdisplay, dst, filter, params, n_params);
+    XRenderComposite (xdisplay,
+		      PictOpSrc,
+		      src,
+		      dst,
+		      tmp,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      d_width, d_height);
+
+    /* second pass */
+    params[0] = 1 << 16;
+    params[1] = (n_params - 2) << 16;
+
+    set_picture_transform (xdisplay, tmp, 0, shadow_offset_y);
+    XRenderSetPictureFilter (xdisplay, tmp, filter, params, n_params);
+    XRenderComposite (xdisplay,
+		      PictOpSrc,
+		      src,
+		      tmp,
+		      dst,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      d_width, d_height);
+
+    XRenderFreePicture (xdisplay, tmp);
+    XRenderFreePicture (xdisplay, src);
+
+    XFreePixmap (xdisplay, pixmap);
+    XFreePixmap (xdisplay, d_pixmap);
+
+    shadow->picture = dst;
+    shadow->width   = d_width;
+    shadow->height  = d_height;
+
+    free (params);
+
+    return shadow;
+}
+
+void
+decor_destroy_shadow (Display	     *xdisplay,
+		      decor_shadow_t *shadow)
+{
+    if (shadow->picture)
+	XRenderFreePicture (xdisplay, shadow->picture);
+
+    free (shadow);
 }
