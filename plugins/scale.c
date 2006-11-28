@@ -99,6 +99,10 @@ static IconOverlay iconOverlay[] = {
 #define N_ICON_TYPE (sizeof (iconOverlayString) / sizeof (iconOverlayString[0]))
 #define SCALE_ICON_DEFAULT (iconOverlayString[1])
 
+#define SCALE_HOVER_TIME_DEFAULT 750
+#define SCALE_HOVER_TIME_MIN     50
+#define SCALE_HOVER_TIME_MAX     10000
+
 static int displayPrivateIndex;
 
 typedef struct _ScaleSlot {
@@ -131,7 +135,8 @@ typedef struct _ScaleDisplay {
 #define SCALE_SCREEN_OPTION_DARKEN_BACK  5
 #define SCALE_SCREEN_OPTION_OPACITY      6
 #define SCALE_SCREEN_OPTION_ICON         7
-#define SCALE_SCREEN_OPTION_NUM          8
+#define SCALE_SCREEN_OPTION_HOVER_TIME   8
+#define SCALE_SCREEN_OPTION_NUM          9
 
 typedef enum {
     ScaleTypeNormal = 0,
@@ -313,6 +318,9 @@ scaleSetScreenOption (CompScreen      *screen,
 	    }
 	}
 	break;
+    case SCALE_SCREEN_OPTION_HOVER_TIME:
+	if (compSetIntOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -401,6 +409,16 @@ scaleScreenInitOptions (ScaleScreen *ss)
     o->value.s	      = strdup (SCALE_ICON_DEFAULT);
     o->rest.s.string  = iconOverlayString;
     o->rest.s.nString = N_ICON_TYPE;
+
+    o = &ss->opt[SCALE_SCREEN_OPTION_HOVER_TIME];
+    o->name	  = "hover_time";
+    o->shortDesc  = N_("Hover Time");
+    o->longDesc	  = N_("Time (in ms) before scale mode is terminated when "
+		       "hovering over a window");
+    o->type	  = CompOptionTypeInt;
+    o->value.i    = SCALE_HOVER_TIME_DEFAULT;
+    o->rest.i.min = SCALE_HOVER_TIME_MIN;
+    o->rest.i.max = SCALE_HOVER_TIME_MAX;
 }
 
 static Bool
@@ -1619,6 +1637,10 @@ scaleHandleEvent (CompDisplay *d,
 		    w = scaleCheckForWindowAt (s, x, y);
 		    if (w && isScaleWin (w))
 		    {
+			int time;
+
+			time = ss->opt[SCALE_SCREEN_OPTION_HOVER_TIME].value.i;
+
 			if (ss->hoverHandle)
 			{
 			    if (w->activeNum != sd->lastActiveNum)
@@ -1630,7 +1652,7 @@ scaleHandleEvent (CompDisplay *d,
 
 			if (!ss->hoverHandle)
 			    ss->hoverHandle =
-				compAddTimeout (750,
+				compAddTimeout (time,
 						scaleHoverTimeout,
 						s);
 
