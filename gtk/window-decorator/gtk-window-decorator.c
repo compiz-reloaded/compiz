@@ -205,31 +205,20 @@ static decor_extents_t _switcher_extents = { 0, 0, 0, 0 };
 #define SWITCHER_SPACE     40
 #define SWITCHER_TOP_EXTRA 4
 
-static gint left_space   = 6;
-static gint right_space  = 6;
-static gint top_space    = 4;
-static gint bottom_space = 6;
-
-static gint left_corner_space   = 0;
-static gint right_corner_space  = 0;
-static gint top_corner_space    = 0;
-static gint bottom_corner_space = 0;
-
-static gint titlebar_height = 17;
-
-static gint normal_top_corner_space      = 0;
 static gint switcher_top_corner_space    = 0;
 static gint switcher_bottom_corner_space = 0;
 
-static gint shadow_left_space   = 0;
-static gint shadow_right_space  = 0;
-static gint shadow_top_space    = 0;
-static gint shadow_bottom_space = 0;
+static decor_context_t window_context = {
+    6, 6, 4, 6,
+    0, 0, 0, 0,
+    17
+};
 
-static gint shadow_left_corner_space   = 0;
-static gint shadow_right_corner_space  = 0;
-static gint shadow_top_corner_space    = 0;
-static gint shadow_bottom_corner_space = 0;
+static decor_context_t shadow_context = {
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0
+};
 
 static gdouble shadow_radius   = SHADOW_RADIUS;
 static gdouble shadow_opacity  = SHADOW_OPACITY;
@@ -421,24 +410,11 @@ decor_update_window_property (decor_t *d)
     decor_extents_t extents = _win_extents;
     gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
-    decor_context_t c;
 
-    c.left_space   = left_space;
-    c.right_space  = right_space;
-    c.top_space    = top_space;
-    c.bottom_space = bottom_space;
-
-    c.left_corner_space   = left_corner_space;
-    c.right_corner_space  = right_corner_space;
-    c.top_corner_space    = normal_top_corner_space;
-    c.bottom_corner_space = bottom_corner_space;
-
-    c.titlebar_height = titlebar_height;
-
-    nQuad = decor_set_window_quads (&c, quads,
+    nQuad = decor_set_window_quads (&window_context, quads,
 				    d->width, d->height, d->button_width);
 
-    extents.top += titlebar_height;
+    extents.top += window_context.titlebar_height;
 
     decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
 			     &extents, &extents,
@@ -464,10 +440,10 @@ set_switcher_quads (decor_quad_t *q,
     gint n, nQuad = 0;
 
     /* 1 top quads */
-    q->p1.x	  = -left_space;
-    q->p1.y	  = -top_space - SWITCHER_TOP_EXTRA;
+    q->p1.x	  = -window_context.left_space;
+    q->p1.y	  = -window_context.top_space - SWITCHER_TOP_EXTRA;
     q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = right_space;
+    q->p2.x	  = window_context.right_space;
     q->p2.y	  = 0;
     q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
     q->max_width  = SHRT_MAX;
@@ -488,14 +464,15 @@ set_switcher_quads (decor_quad_t *q,
 				 0,
 				 switcher_top_corner_space,
 				 0,
-				 bottom_corner_space,
-				 -left_space,
+				 window_context.bottom_corner_space,
+				 -window_context.left_space,
 				 0,
 				 GRAVITY_WEST,
-				 height - top_space - titlebar_height -
-				 bottom_space,
+				 height - window_context.top_space -
+				 window_context.titlebar_height -
+				 window_context.bottom_space,
 				 0.0,
-				 top_space + SWITCHER_TOP_EXTRA);
+				 window_context.top_space + SWITCHER_TOP_EXTRA);
 
     q += n; nQuad += n;
 
@@ -506,21 +483,22 @@ set_switcher_quads (decor_quad_t *q,
 				 0,
 				 switcher_bottom_corner_space,
 				 0,
-				 right_space,
+				 window_context.right_space,
 				 GRAVITY_EAST,
-				 height - top_space - titlebar_height -
-				 bottom_space,
-				 width - right_space,
-				 top_space + SWITCHER_TOP_EXTRA);
+				 height - window_context.top_space -
+				 window_context.titlebar_height -
+				 window_context.bottom_space,
+				 width - window_context.right_space,
+				 window_context.top_space + SWITCHER_TOP_EXTRA);
 
     q += n; nQuad += n;
 
     /* 1 bottom quad */
-    q->p1.x	  = -left_space;
+    q->p1.x	  = -window_context.left_space;
     q->p1.y	  = 0;
     q->p1.gravity = GRAVITY_SOUTH | GRAVITY_WEST;
-    q->p2.x	  = right_space;
-    q->p2.y	  = bottom_space + SWITCHER_SPACE;
+    q->p2.x	  = window_context.right_space;
+    q->p2.y	  = window_context.bottom_space + SWITCHER_SPACE;
     q->p2.gravity = GRAVITY_SOUTH | GRAVITY_EAST;
     q->max_width  = SHRT_MAX;
     q->max_height = SHRT_MAX;
@@ -531,7 +509,7 @@ set_switcher_quads (decor_quad_t *q,
     q->m.yx	  = 0.0;
     q->m.yy	  = 1.0;
     q->m.x0	  = 0.0;
-    q->m.y0	  = height - bottom_space - SWITCHER_SPACE;
+    q->m.y0	  = height - window_context.bottom_space - SWITCHER_SPACE;
 
     nQuad++;
 
@@ -737,10 +715,10 @@ draw_shadow_background (decor_t *d,
 
     gdk_drawable_get_size (large_shadow_pixmap, &width, &height);
 
-    left   = left_space   + left_corner_space;
-    right  = right_space  + right_corner_space;
-    top    = top_space    + top_corner_space;
-    bottom = bottom_space + bottom_corner_space;
+    left   = window_context.left_space   + window_context.left_corner_space;
+    right  = window_context.right_space  + window_context.right_corner_space;
+    top    = window_context.top_space    + window_context.top_corner_space;
+    bottom = window_context.bottom_space + window_context.bottom_corner_space;
 
     if (d->width - left - right < 0)
     {
@@ -1008,14 +986,15 @@ draw_window_decoration (decor_t *d)
 
     cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-    top = _win_extents.top + titlebar_height;
+    top = _win_extents.top + window_context.titlebar_height;
 
-    x1 = left_space - _win_extents.left;
-    y1 = top_space - _win_extents.top;
-    x2 = d->width - right_space + _win_extents.right;
-    y2 = d->height - bottom_space + _win_extents.bottom;
+    x1 = window_context.left_space - _win_extents.left;
+    y1 = window_context.top_space - _win_extents.top;
+    x2 = d->width - window_context.right_space + _win_extents.right;
+    y2 = d->height - window_context.bottom_space + _win_extents.bottom;
 
-    h = d->height - top_space - titlebar_height - bottom_space;
+    h = d->height - window_context.top_space - window_context.titlebar_height -
+	window_context.bottom_space;
 
     cairo_set_line_width (cr, 1.0);
 
@@ -1136,9 +1115,10 @@ draw_window_decoration (decor_t *d)
 			    SHADE_BOTTOM | SHADE_RIGHT);
 
     cairo_rectangle (cr,
-		     left_space,
-		     titlebar_height + top_space,
-		     d->width - left_space - right_space,
+		     window_context.left_space,
+		     window_context.titlebar_height + window_context.top_space,
+		     d->width - window_context.left_space -
+		     window_context.right_space,
 		     h);
     gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
     cairo_fill (cr);
@@ -1209,12 +1189,12 @@ draw_window_decoration (decor_t *d)
 
     cairo_set_line_width (cr, 2.0);
 
-    button_x = d->width - right_space - 13;
+    button_x = d->width - window_context.right_space - 13;
 
     if (d->actions & WNCK_WINDOW_ACTION_CLOSE)
     {
 	button_state_offsets (button_x,
-			      y1 - 3.0 + titlebar_height / 2,
+			      y1 - 3.0 + window_context.titlebar_height / 2,
 			      d->button_states[0], &x, &y);
 
 	button_x -= 17;
@@ -1239,7 +1219,7 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
     {
 	button_state_offsets (button_x,
-			      y1 - 3.0 + titlebar_height / 2,
+			      y1 - 3.0 + window_context.titlebar_height / 2,
 			      d->button_states[1], &x, &y);
 
 	button_x -= 17;
@@ -1281,7 +1261,7 @@ draw_window_decoration (decor_t *d)
     if (d->actions & WNCK_WINDOW_ACTION_MINIMIZE)
     {
 	button_state_offsets (button_x,
-			      y1 - 3.0 + titlebar_height / 2,
+			      y1 - 3.0 + window_context.titlebar_height / 2,
 			      d->button_states[2], &x, &y);
 
 	button_x -= 17;
@@ -1311,8 +1291,10 @@ draw_window_decoration (decor_t *d)
 	if (d->active)
 	{
 	    cairo_move_to (cr,
-			   left_space + 21.0,
-			   y1 + 2.0 + (titlebar_height - text_height) / 2.0);
+			   window_context.left_space + 21.0,
+			   y1 + 2.0 +
+			   (window_context.titlebar_height - text_height) /
+			   2.0);
 
 	    gdk_cairo_set_source_color_alpha (cr,
 					      &style->fg[GTK_STATE_NORMAL],
@@ -1331,15 +1313,17 @@ draw_window_decoration (decor_t *d)
 	}
 
 	cairo_move_to (cr,
-		       left_space + 21.0,
-		       y1 + 2.0 + (titlebar_height - text_height) / 2.0);
+		       window_context.left_space + 21.0,
+		       y1 + 2.0 +
+		       (window_context.titlebar_height - text_height) / 2.0);
 
 	pango_cairo_show_layout (cr, d->layout);
     }
 
     if (d->icon)
     {
-	cairo_translate (cr, left_space + 1, y1 - 5.0 + titlebar_height / 2);
+	cairo_translate (cr, window_context.left_space + 1,
+			 y1 - 5.0 + window_context.titlebar_height / 2);
 	cairo_set_source (cr, d->icon);
 	cairo_rectangle (cr, 0.0, 0.0, 16.0, 16.0);
 	cairo_clip (cr);
@@ -1383,21 +1367,8 @@ decor_update_meta_window_property (decor_t	  *d,
     gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
     gint	    left_width, right_width, top_height, bottom_height;
-    decor_context_t c;
 
-    c.left_space   = left_space;
-    c.right_space  = right_space;
-    c.top_space    = top_space;
-    c.bottom_space = bottom_space;
-
-    c.left_corner_space   = left_corner_space;
-    c.right_corner_space  = right_corner_space;
-    c.top_corner_space    = normal_top_corner_space;
-    c.bottom_corner_space = bottom_corner_space;
-
-    c.titlebar_height = titlebar_height;
-
-    nQuad = decor_set_window_quads (&c, quads,
+    nQuad = decor_set_window_quads (&window_context, quads,
 				    d->width, d->height, d->button_width);
 
     meta_theme_get_frame_borders (theme,
@@ -1670,10 +1641,13 @@ meta_get_decoration_geometry (decor_t		*d,
 				  &left_width,
 				  &right_width);
 
-    clip->x	= left_space - left_width;
-    clip->y	= top_space + titlebar_height - top_height;
-    clip->width  = d->width - right_space + right_width - clip->x;
-    clip->height = d->height - bottom_space + bottom_height - clip->y;
+    clip->x	= window_context.left_space - left_width;
+    clip->y	= window_context.top_space + window_context.titlebar_height -
+	top_height;
+    clip->width  = d->width - window_context.right_space + right_width -
+	clip->x;
+    clip->height = d->height - window_context.bottom_space + bottom_height -
+	clip->y;
 
     meta_theme_calc_geometry (theme,
 			      META_FRAME_TYPE_NORMAL,
@@ -2008,10 +1982,10 @@ draw_switcher_background (decor_t *d)
 
     top = _win_extents.bottom;
 
-    x1 = left_space - _win_extents.left;
-    y1 = top_space - _win_extents.top;
-    x2 = d->width - right_space + _win_extents.right;
-    y2 = d->height - bottom_space + _win_extents.bottom;
+    x1 = window_context.left_space - _win_extents.left;
+    y1 = window_context.top_space - _win_extents.top;
+    x2 = d->width - window_context.right_space + _win_extents.right;
+    y2 = d->height - window_context.bottom_space + _win_extents.bottom;
 
     h = y2 - y1 - _win_extents.bottom - _win_extents.bottom;
 
@@ -2205,9 +2179,9 @@ draw_switcher_foreground (decor_t *d)
 
     top = _win_extents.bottom;
 
-    x1 = left_space - _win_extents.left;
-    y1 = top_space - _win_extents.top;
-    x2 = d->width - right_space + _win_extents.right;
+    x1 = window_context.left_space - _win_extents.left;
+    y1 = window_context.top_space - _win_extents.top;
+    x2 = d->width - window_context.right_space + _win_extents.right;
 
     cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
 
@@ -2331,9 +2305,6 @@ update_default_decorations (GdkScreen *screen)
     gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
     decor_extents_t extents = _win_extents;
-    decor_context_t c;
-
-    c.titlebar_height = titlebar_height;
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
@@ -2347,17 +2318,7 @@ update_default_decorations (GdkScreen *screen)
 
 	gdk_drawable_get_size (shadow_pixmap, &width, &height);
 
-	c.left_space   = shadow_left_space;
-	c.right_space  = shadow_right_space;
-	c.top_space    = shadow_top_space;
-	c.bottom_space = shadow_bottom_space;
-
-	c.left_corner_space   = shadow_left_corner_space;
-	c.right_corner_space  = shadow_right_corner_space;
-	c.top_corner_space    = shadow_top_corner_space;
-	c.bottom_corner_space = shadow_bottom_corner_space;
-
-	nQuad = decor_set_shadow_quads (&c, quads, width, height);
+	nQuad = decor_set_shadow_quads (&shadow_context, quads, width, height);
 
 	decor_quads_to_property (data, GDK_PIXMAP_XID (shadow_pixmap),
 				 &_shadow_extents, &_shadow_extents,
@@ -2399,29 +2360,21 @@ update_default_decorations (GdkScreen *screen)
 
     memset (&d, 0, sizeof (d));
 
-    d.width  = left_space + left_corner_space + 1 + right_corner_space +
-	right_space;
-    d.height = top_space + titlebar_height + normal_top_corner_space + 2 +
-	bottom_corner_space + bottom_space;
+    d.width  = window_context.left_space + window_context.left_corner_space +
+	1 + window_context.right_corner_space + window_context.right_space;
+    d.height = window_context.top_space + window_context.titlebar_height +
+	window_context.top_corner_space + 2 +
+	window_context.bottom_corner_space + window_context.bottom_space;
 
-    extents.top += titlebar_height;
+    extents.top += window_context.titlebar_height;
 
     d.draw = theme_draw_window_decoration;
 
     if (decor_normal_pixmap)
 	gdk_pixmap_unref (decor_normal_pixmap);
 
-    c.left_space   = left_space;
-    c.right_space  = right_space;
-    c.top_space    = top_space;
-    c.bottom_space = bottom_space;
-
-    c.left_corner_space   = left_corner_space;
-    c.right_corner_space  = right_corner_space;
-    c.top_corner_space    = normal_top_corner_space;
-    c.bottom_corner_space = bottom_corner_space;
-
-    nQuad = decor_set_no_title_window_quads (&c, quads, d.width, d.height);
+    nQuad = decor_set_no_title_window_quads (&window_context,
+					     quads, d.width, d.height);
 
     decor_normal_pixmap = create_pixmap (d.width, d.height);
     if (decor_normal_pixmap)
@@ -2585,10 +2538,10 @@ get_event_window_position (decor_t *d,
 {
     *x = pos[i][j].x + pos[i][j].xw * width;
     *y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth *
-	(titlebar_height - 17);
+	(window_context.titlebar_height - 17);
     *w = pos[i][j].w + pos[i][j].ww * width;
     *h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth *
-	(titlebar_height - 17);
+	(window_context.titlebar_height - 17);
 }
 
 static void
@@ -2602,9 +2555,11 @@ get_button_position (decor_t *d,
 		     gint    *h)
 {
     *x = bpos[i].x + bpos[i].xw * width;
-    *y = bpos[i].y + bpos[i].yh * height + bpos[i].yth * (titlebar_height - 17);
+    *y = bpos[i].y + bpos[i].yh * height + bpos[i].yth *
+	(window_context.titlebar_height - 17);
     *w = bpos[i].w + bpos[i].ww * width;
-    *h = bpos[i].h + bpos[i].hh * height + bpos[i].hth + (titlebar_height - 17);
+    *h = bpos[i].h + bpos[i].hh * height + bpos[i].hth +
+	(window_context.titlebar_height - 17);
 
     *x -= 10 + 16 * i;
 }
@@ -2908,7 +2863,8 @@ update_window_decoration_name (WnckWindow *win)
     {
 	gint w, n_line;
 
-	w  = d->width - left_space - right_space - ICON_SPACE - 4;
+	w  = d->width - window_context.left_space - window_context.right_space -
+	    ICON_SPACE - 4;
 	w -= d->button_width;
 	if (w < 1)
 	    w = 1;
@@ -3044,11 +3000,13 @@ calc_decoration_size (decor_t *d,
     if (w < *width)
 	*width = MAX (ICON_SPACE + d->button_width, w);
 
-    *width  = MAX (*width, left_corner_space + right_corner_space);
-    *width += left_space + 1 + right_space;
+    *width  = MAX (*width, window_context.left_corner_space +
+		   window_context.right_corner_space);
+    *width += window_context.left_space + 1 + window_context.right_space;
 
-    *height  = titlebar_height + normal_top_corner_space + bottom_corner_space;
-    *height += top_space + 2 + bottom_space;
+    *height  = window_context.titlebar_height +
+	window_context.top_corner_space + window_context.bottom_corner_space;
+    *height += window_context.top_space + 2 + window_context.bottom_space;
 
     return (*width != d->width || *height != d->height);
 }
@@ -3062,11 +3020,13 @@ meta_calc_decoration_size (decor_t *d,
 			   gint    *width,
 			   gint    *height)
 {
-    *width  = MAX (w, left_corner_space + right_corner_space);
-    *width += left_space + 1 + right_space;
+    *width  = MAX (w, window_context.left_corner_space +
+		   window_context.right_corner_space);
+    *width += window_context.left_space + 1 + window_context.right_space;
 
-    *height  = titlebar_height + normal_top_corner_space + bottom_corner_space;
-    *height += top_space + 2 + bottom_space;
+    *height  = window_context.titlebar_height +
+	window_context.top_corner_space + window_context.bottom_corner_space;
+    *height += window_context.top_space + 2 + window_context.bottom_space;
 
     return (*width != d->width || *height != d->height);
 }
@@ -3217,9 +3177,10 @@ update_switcher_window (WnckWindow *win,
 
     wnck_window_get_geometry (win, NULL, NULL, &width, NULL);
 
-    width  += left_space + right_space;
-    height  = top_space + SWITCHER_TOP_EXTRA + switcher_top_corner_space +
-	SWITCHER_SPACE + switcher_bottom_corner_space + bottom_space;
+    width  += window_context.left_space + window_context.right_space;
+    height  = window_context.top_space + SWITCHER_TOP_EXTRA +
+	switcher_top_corner_space + SWITCHER_SPACE +
+	switcher_bottom_corner_space + window_context.bottom_space;
 
     d->decorated = FALSE;
     d->draw	 = draw_switcher_decoration;
@@ -3271,7 +3232,8 @@ update_switcher_window (WnckWindow *win,
 	    {
 		int tw;
 
-		tw = width - left_space - right_space - 64;
+		tw = width - window_context.left_space -
+		    window_context.right_space - 64;
 		pango_layout_set_width (d->layout, tw * PANGO_SCALE);
 		pango_layout_set_text (d->layout, name, name_length);
 
@@ -5265,46 +5227,57 @@ update_shadow (void)
     n_params = size + 2;
     size     = size / 2;
 
-    left_space   = _win_extents.left   + size - shadow_offset_x;
-    right_space  = _win_extents.right  + size + shadow_offset_x;
-    top_space    = _win_extents.top    + size - shadow_offset_y;
-    bottom_space = _win_extents.bottom + size + shadow_offset_y;
+    window_context.left_space   = _win_extents.left   + size - shadow_offset_x;
+    window_context.right_space  = _win_extents.right  + size + shadow_offset_x;
+    window_context.top_space    = _win_extents.top    + size - shadow_offset_y;
+    window_context.bottom_space = _win_extents.bottom + size + shadow_offset_y;
 
-    left_space   = MAX (_win_extents.left,   left_space);
-    right_space  = MAX (_win_extents.right,  right_space);
-    top_space    = MAX (_win_extents.top,    top_space);
-    bottom_space = MAX (_win_extents.bottom, bottom_space);
+    window_context.left_space   =
+	MAX (_win_extents.left,   window_context.left_space);
+    window_context.right_space  =
+	MAX (_win_extents.right,  window_context.right_space);
+    window_context.top_space    =
+	MAX (_win_extents.top,    window_context.top_space);
+    window_context.bottom_space =
+	MAX (_win_extents.bottom, window_context.bottom_space);
 
-    shadow_left_space   = MAX (0, size - shadow_offset_x);
-    shadow_right_space  = MAX (0, size + shadow_offset_x);
-    shadow_top_space    = MAX (0, size - shadow_offset_y);
-    shadow_bottom_space = MAX (0, size + shadow_offset_y);
+    shadow_context.left_space   = MAX (0, size - shadow_offset_x);
+    shadow_context.right_space  = MAX (0, size + shadow_offset_x);
+    shadow_context.top_space    = MAX (0, size - shadow_offset_y);
+    shadow_context.bottom_space = MAX (0, size + shadow_offset_y);
 
-    shadow_left_corner_space   = MAX (0, size + shadow_offset_x);
-    shadow_right_corner_space  = MAX (0, size - shadow_offset_x);
-    shadow_top_corner_space    = MAX (0, size + shadow_offset_y);
-    shadow_bottom_corner_space = MAX (0, size - shadow_offset_y);
+    shadow_context.left_corner_space   = MAX (0, size + shadow_offset_x);
+    shadow_context.right_corner_space  = MAX (0, size - shadow_offset_x);
+    shadow_context.top_corner_space    = MAX (0, size + shadow_offset_y);
+    shadow_context.bottom_corner_space = MAX (0, size - shadow_offset_y);
 
-    left_corner_space   = MAX (0, shadow_left_corner_space - CORNER_REDUCTION);
-    right_corner_space  = MAX (0, shadow_right_corner_space - CORNER_REDUCTION);
-    top_corner_space    = MAX (0, shadow_top_corner_space - CORNER_REDUCTION);
-    bottom_corner_space =
-	MAX (0, shadow_bottom_corner_space - CORNER_REDUCTION);
+    window_context.left_corner_space   =
+	MAX (0, shadow_context.left_corner_space - CORNER_REDUCTION);
+    window_context.right_corner_space  =
+	MAX (0, shadow_context.right_corner_space - CORNER_REDUCTION);
+    window_context.top_corner_space    =
+	MAX (0, shadow_context.top_corner_space - CORNER_REDUCTION);
+    window_context.bottom_corner_space =
+	MAX (0, shadow_context.bottom_corner_space - CORNER_REDUCTION);
 
-    normal_top_corner_space = MAX (0, top_corner_space - titlebar_height);
-    switcher_top_corner_space = MAX (0, top_corner_space - SWITCHER_TOP_EXTRA);
+    switcher_top_corner_space =
+	MAX (0, window_context.top_corner_space - SWITCHER_TOP_EXTRA);
     switcher_bottom_corner_space =
-	MAX (0, bottom_corner_space - SWITCHER_SPACE);
+	MAX (0, window_context.bottom_corner_space - SWITCHER_SPACE);
+    window_context.top_corner_space =
+	MAX (0, window_context.top_corner_space -
+	     window_context.titlebar_height);
 
     memset (&d, 0, sizeof (d));
 
     d.draw   = theme_draw_window_decoration;
     d.active = TRUE;
 
-    d.width  = left_space + left_corner_space + 1 + right_corner_space +
-	right_space;
-    d.height = top_space + titlebar_height + normal_top_corner_space + 2 +
-	bottom_corner_space + bottom_space;
+    d.width  = window_context.left_space + window_context.left_corner_space +
+	1 + window_context.right_corner_space + window_context.right_space;
+    d.height = window_context.top_space + window_context.titlebar_height +
+	window_context.top_corner_space + 2 +
+	window_context.bottom_corner_space + window_context.bottom_space;
 
     /* all pixmaps are ARGB32 */
     format = XRenderFindStandardFormat (xdisplay, PictStandardARGB32);
@@ -5446,10 +5419,10 @@ update_shadow (void)
 
     /* WINDOWS WITHOUT DECORATIONS */
 
-    d.width  = shadow_left_space + shadow_left_corner_space + 1 +
-	shadow_right_space + shadow_right_corner_space;
-    d.height = shadow_top_space + shadow_top_corner_space + 1 +
-	shadow_bottom_space + shadow_bottom_corner_space;
+    d.width  = shadow_context.left_space + shadow_context.left_corner_space +
+	1 + shadow_context.right_space + shadow_context.right_corner_space;
+    d.height = shadow_context.top_space + shadow_context.top_corner_space + 1 +
+	shadow_context.bottom_space + shadow_context.bottom_corner_space;
 
     pixmap = create_pixmap (d.width, d.height);
     if (!pixmap)
@@ -5476,10 +5449,12 @@ update_shadow (void)
 			  d.width,
 			  d.height);
     XRenderFillRectangle (xdisplay, PictOpSrc, dst, &white,
-			  shadow_left_space,
-			  shadow_top_space,
-			  d.width - shadow_left_space - shadow_right_space,
-			  d.height - shadow_top_space - shadow_bottom_space);
+			  shadow_context.left_space,
+			  shadow_context.top_space,
+			  d.width - shadow_context.left_space -
+			  shadow_context.right_space,
+			  d.height - shadow_context.top_space -
+			  shadow_context.bottom_space);
 
     tmp = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (pixmap),
 				format, 0, NULL);
@@ -5667,7 +5642,8 @@ update_titlebar_font (void)
     text_height = PANGO_PIXELS (pango_font_metrics_get_ascent (metrics) +
 				pango_font_metrics_get_descent (metrics));
 
-    titlebar_height = (*theme_calc_titlebar_height) (text_height);
+    window_context.titlebar_height =
+	(*theme_calc_titlebar_height) (text_height);
 
     pango_font_metrics_unref (metrics);
 }
