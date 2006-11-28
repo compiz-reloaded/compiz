@@ -17597,6 +17597,18 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/screen0/options/hover_time</key>
+            <applyto>/apps/compiz/plugins/scale/screen0/options/hover_time</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>750</default>
+            <locale name="C">
+                <short>Hover Time</short>
+                <long>Time (in ms) before scale mode is terminated when hovering over a window (50-10000)</long>
+            </locale>
+        </schema>
+
         <!-- move options -->
 
         <schema>
