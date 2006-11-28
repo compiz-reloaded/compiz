@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20061122
+#define ABIVERSION 20061127
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -725,6 +725,8 @@ struct _CompDisplay {
     Atom xdndEnterAtom;
     Atom xdndLeaveAtom;
     Atom xdndPositionAtom;
+    Atom xdndStatusAtom;
+    Atom xdndDropAtom;
 
     Atom managerAtom;
     Atom targetsAtom;

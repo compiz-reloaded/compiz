@@ -2674,6 +2674,8 @@ addDisplay (char *name,
     d->xdndEnterAtom    = XInternAtom (dpy, "XdndEnter", 0);
     d->xdndLeaveAtom    = XInternAtom (dpy, "XdndLeave", 0);
     d->xdndPositionAtom = XInternAtom (dpy, "XdndPosition", 0);
+    d->xdndStatusAtom   = XInternAtom (dpy, "XdndStatus", 0);
+    d->xdndDropAtom     = XInternAtom (dpy, "XdndDrop", 0);
 
     d->managerAtom   = XInternAtom (dpy, "MANAGER", 0);
     d->targetsAtom   = XInternAtom (dpy, "TARGETS", 0);
