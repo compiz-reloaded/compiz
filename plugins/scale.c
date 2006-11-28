@@ -29,6 +29,7 @@
 #include <math.h>
 #include <sys/time.h>
 
+#include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 
 #include <compiz.h>
@@ -156,7 +157,12 @@ typedef struct _ScaleScreen {
 
     unsigned int wMask;
 
-    int grabIndex;
+    Bool grab;
+    int  grabIndex;
+
+    Window dndTarget;
+
+    CompTimeoutHandle hoverHandle;
 
     int state;
     int moreAdjust;
@@ -1091,6 +1097,30 @@ sendViewportMoveRequest (CompScreen *s,
 		&xev);
 }
 
+static void
+sendDndStatusMessage (CompScreen *s,
+		      Window	 source)
+{
+    XEvent xev;
+
+    SCALE_SCREEN (s);
+
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = s->display->display;
+    xev.xclient.format  = 32;
+
+    xev.xclient.message_type = s->display->xdndStatusAtom;
+    xev.xclient.window	     = source;
+
+    xev.xclient.data.l[0] = ss->dndTarget;
+    xev.xclient.data.l[1] = 2;
+    xev.xclient.data.l[2] = 0;
+    xev.xclient.data.l[3] = 0;
+    xev.xclient.data.l[4] = None;
+
+    XSendEvent (s->display->display, source, FALSE, 0, &xev);
+}
+
 static Bool
 scaleTerminate (CompDisplay     *d,
 		CompAction      *action,
@@ -1112,10 +1142,18 @@ scaleTerminate (CompDisplay     *d,
 	if (xid && s->root != xid)
 	    continue;
 
-	if (ss->grabIndex)
+	if (ss->grab)
 	{
-	    removeScreenGrab (s, ss->grabIndex, 0);
-	    ss->grabIndex = 0;
+	    if (ss->grabIndex)
+	    {
+		removeScreenGrab (s, ss->grabIndex, 0);
+		ss->grabIndex = 0;
+	    }
+
+	    if (ss->dndTarget)
+		XUnmapWindow (d->display, ss->dndTarget);
+
+	    ss->grab = FALSE;
 
 	    if (ss->state != SCALE_STATE_NONE)
 	    {
@@ -1163,6 +1201,39 @@ scaleTerminate (CompDisplay     *d,
 }
 
 static Bool
+scaleEnsureDndRedirectWindow (CompScreen *s)
+{
+    SCALE_SCREEN (s);
+
+    if (!ss->dndTarget)
+    {
+	XSetWindowAttributes attr;
+	long		     xdndVersion = 3;
+
+	attr.override_redirect = TRUE;
+
+	ss->dndTarget = XCreateWindow (s->display->display,
+				       s->root,
+				       0, 0, 1, 1, 0,
+				       CopyFromParent,
+				       InputOnly,
+				       CopyFromParent,
+				       CWOverrideRedirect, &attr);
+
+	XChangeProperty (s->display->display, ss->dndTarget,
+			 s->display->xdndAwareAtom,
+			 XA_ATOM, 32, PropModeReplace,
+			 (unsigned char *) &xdndVersion, 1);
+    }
+
+    XMoveResizeWindow (s->display->display, ss->dndTarget,
+		       0, 0, s->width, s->height);
+    XMapRaised (s->display->display, ss->dndTarget);
+
+    return TRUE;
+}
+
+static Bool
 scaleInitiateCommon (CompScreen      *s,
 		     CompAction      *action,
 		     CompActionState state,
@@ -1175,15 +1246,22 @@ scaleInitiateCommon (CompScreen      *s,
     if (!layoutThumbs (s))
 	return FALSE;
 
-    if (!ss->grabIndex)
-    {
-	if (otherScreenGrabExist (s, "scale", 0))
-	    return FALSE;
+    if (otherScreenGrabExist (s, "scale", 0))
+	return FALSE;
 
+    if (state & CompActionStateInitEdgeDnd)
+    {
+	if (scaleEnsureDndRedirectWindow (s))
+	    ss->grab = TRUE;
+    }
+    else if (!ss->grabIndex)
+    {
 	ss->grabIndex = pushScreenGrab (s, ss->cursor, "scale");
+	if (ss->grabIndex)
+	    ss->grab = TRUE;
     }
 
-    if (ss->grabIndex)
+    if (ss->grab)
     {
 	if (!sd->lastActiveNum)
 	    sd->lastActiveNum = s->activeNum - 1;
@@ -1408,6 +1486,32 @@ scaleWindowRemove (CompDisplay *d,
     }
 }
 
+static Bool
+scaleHoverTimeout (void *closure)
+{
+    CompScreen *s = closure;
+
+    SCALE_SCREEN (s);
+    SCALE_DISPLAY (s->display);
+
+    if (ss->grab && ss->state != SCALE_STATE_IN)
+    {
+	CompOption o;
+	CompAction *action =
+	    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
+
+	o.type    = CompOptionTypeInt;
+	o.name    = "root";
+	o.value.i = s->root;
+
+	scaleTerminate (s->display, action, 0, &o, 1);
+    }
+
+    ss->hoverHandle = 0;
+
+    return FALSE;
+}
+
 static void
 scaleHandleEvent (CompDisplay *d,
 		  XEvent      *event)
@@ -1488,6 +1592,87 @@ scaleHandleEvent (CompDisplay *d,
 				     event->xmotion.x_root,
 				     event->xmotion.y_root);
 	}
+	break;
+    case ClientMessage:
+	if (event->xclient.message_type == d->xdndPositionAtom)
+	{
+	    CompWindow *w;
+
+	    w = findWindowAtDisplay (d, event->xclient.window);
+	    if (w)
+	    {
+		SCALE_SCREEN (w->screen);
+
+		s = w->screen;
+
+		if (w->id == ss->dndTarget)
+		    sendDndStatusMessage (w->screen, event->xclient.data.l[0]);
+
+		if (ss->grab			&&
+		    ss->state != SCALE_STATE_IN &&
+		    w->id == ss->dndTarget	&&
+		    ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b)
+		{
+		    int x = event->xclient.data.l[2] >> 16;
+		    int y = event->xclient.data.l[2] & 0xffff;
+
+		    w = scaleCheckForWindowAt (s, x, y);
+		    if (w && isScaleWin (w))
+		    {
+			if (ss->hoverHandle)
+			{
+			    if (w->activeNum != sd->lastActiveNum)
+			    {
+				compRemoveTimeout (ss->hoverHandle);
+				ss->hoverHandle = 0;
+			    }
+			}
+
+			if (!ss->hoverHandle)
+			    ss->hoverHandle =
+				compAddTimeout (750,
+						scaleHoverTimeout,
+						s);
+
+			scaleSelectWindowAt (s, x, y);
+		    }
+		    else
+		    {
+			if (ss->hoverHandle)
+			    compRemoveTimeout (ss->hoverHandle);
+
+			ss->hoverHandle = 0;
+		    }
+		}
+	    }
+	}
+	else if (event->xclient.message_type == d->xdndDropAtom ||
+		 event->xclient.message_type == d->xdndLeaveAtom)
+	{
+	    CompWindow *w;
+
+	    w = findWindowAtDisplay (d, event->xclient.window);
+	    if (w)
+	    {
+		CompAction *action =
+		    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
+
+		SCALE_SCREEN (w->screen);
+
+		if (ss->grab			&&
+		    ss->state != SCALE_STATE_IN &&
+		    w->id == ss->dndTarget)
+		{
+		    CompOption o;
+
+		    o.type    = CompOptionTypeInt;
+		    o.name    = "root";
+		    o.value.i = w->screen->root;
+
+		    scaleTerminate (d, action, 0, &o, 1);
+		}
+	    }
+	}
     default:
 	break;
     }
@@ -1518,7 +1703,7 @@ scaleDamageWindowRect (CompWindow *w,
 
     if (initial)
     {
-	if (ss->grabIndex && isScaleWin (w))
+	if (ss->grab && isScaleWin (w))
 	{
 	    if (layoutThumbs (w->screen))
 	    {
@@ -1605,6 +1790,7 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.bell	  = FALSE;
     o->value.action.edgeMask	  = (1 << SCREEN_EDGE_TOPRIGHT);
     o->value.action.state	  = CompActionStateInitEdge;
+    o->value.action.state	 |= CompActionStateInitEdgeDnd;
     o->value.action.type	  = CompBindingTypeKey;
     o->value.action.state	 |= CompActionStateInitKey;
     o->value.action.key.modifiers = SCALE_INITIATE_MODIFIERS_DEFAULT;
@@ -1622,6 +1808,7 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.bell      = FALSE;
     o->value.action.edgeMask  = 0;
     o->value.action.state     = CompActionStateInitEdge;
+    o->value.action.state    |= CompActionStateInitEdgeDnd;
     o->value.action.type      = 0;
     o->value.action.state    |= CompActionStateInitKey;
 
@@ -1636,6 +1823,7 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.bell      = FALSE;
     o->value.action.edgeMask  = 0;
     o->value.action.state     = CompActionStateInitEdge;
+    o->value.action.state    |= CompActionStateInitEdgeDnd;
     o->value.action.type      = 0;
     o->value.action.state    |= CompActionStateInitKey;
 }
@@ -1705,7 +1893,12 @@ scaleInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
+    ss->grab      = FALSE;
     ss->grabIndex = 0;
+
+    ss->hoverHandle = 0;
+
+    ss->dndTarget = None;
 
     ss->state = SCALE_STATE_NONE;
 
