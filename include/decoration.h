@@ -80,6 +80,8 @@ typedef struct _decor_extents {
 } decor_extents_t;
 
 typedef struct _decor_context {
+    decor_extents_t extents;
+
     int left_space;
     int right_space;
     int top_space;
@@ -89,8 +91,6 @@ typedef struct _decor_context {
     int right_corner_space;
     int top_corner_space;
     int bottom_corner_space;
-
-    int titlebar_height;
 } decor_context_t;
 
 typedef struct _decor_shadow_options {
@@ -108,12 +108,13 @@ typedef struct _decor_shadow {
     int	    height;
 } decor_shadow_t;
 
-typedef void (*decor_draw_func_t) (Display *xdisplay,
-				   Pixmap  pixmap,
-				   Picture picture,
-				   int     width,
-				   int     height,
-				   void    *closure);
+typedef void (*decor_draw_func_t) (Display	   *xdisplay,
+				   Pixmap	   pixmap,
+				   Picture	   picture,
+				   int		   width,
+				   int		   height,
+				   decor_context_t *context,
+				   void		   *closure);
 
 void
 decor_quads_to_property (long		 *data,
@@ -187,7 +188,7 @@ decor_create_shadow (Display		    *xdisplay,
 		     int		    bottom,
 		     decor_shadow_options_t *opt,
 		     decor_context_t	    *context,
-		     decor_draw_func_t      *draw,
+		     decor_draw_func_t      draw,
 		     void		    *closure);
 
 void

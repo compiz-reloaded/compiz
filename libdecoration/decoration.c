@@ -288,10 +288,9 @@ decor_set_common_window_quads (decor_context_t *c,
 				 -c->left_space,
 				 0,
 				 GRAVITY_WEST,
-				 height - c->top_space - c->titlebar_height -
-				 c->bottom_space,
+				 height - c->top_space - c->bottom_space,
 				 0.0,
-				 c->top_space + c->titlebar_height + 1.0);
+				 c->top_space + 1.0);
 
     q += n; nQuad += n;
 
@@ -304,10 +303,9 @@ decor_set_common_window_quads (decor_context_t *c,
 				 0,
 				 c->right_space,
 				 GRAVITY_EAST,
-				 height - c->top_space - c->titlebar_height -
-				 c->bottom_space,
+				 height - c->top_space - c->bottom_space,
 				 width - c->right_space,
-				 c->top_space + c->titlebar_height + 1.0);
+				 c->top_space + 1.0);
 
     q += n; nQuad += n;
 
@@ -322,9 +320,7 @@ decor_set_common_window_quads (decor_context_t *c,
 				  GRAVITY_SOUTH,
 				  width,
 				  0.0,
-				  c->top_space + c->titlebar_height +
-				  c->top_corner_space +
-				  c->bottom_corner_space + 2.0);
+				  height - c->bottom_space);
 
     nQuad += n;
 
@@ -348,7 +344,7 @@ decor_set_window_quads (decor_context_t *c,
     /* special case which can happen with large shadows */
     if (c->right_corner_space > top_right || c->left_corner_space > top_left)
     {
-	y  = -c->titlebar_height;
+	y  = 0; /* -c->titlebar_height */
 	y0 = c->top_space;
 
 	/* top quads */
@@ -357,7 +353,7 @@ decor_set_window_quads (decor_context_t *c,
 				      c->left_corner_space,
 				      c->right_space,
 				      c->right_corner_space,
-				      -c->top_space - c->titlebar_height,
+				      -c->top_space /* - c->titlebar_height */,
 				      y,
 				      GRAVITY_NORTH,
 				      width,
@@ -368,7 +364,7 @@ decor_set_window_quads (decor_context_t *c,
     }
     else
     {
-	y  = -c->top_space - c->titlebar_height;
+	y  = -c->top_space;
 	y0 = 0.0;
     }
 
@@ -451,7 +447,7 @@ decor_set_no_title_window_quads (decor_context_t *c,
 				  c->left_corner_space,
 				  c->right_space,
 				  c->right_corner_space,
-				  -c->top_space - c->titlebar_height,
+				  -c->top_space,
 				  0,
 				  GRAVITY_NORTH,
 				  width,
@@ -610,7 +606,6 @@ static XFixed *
 create_gaussian_kernel (double radius,
 			double sigma,
 			double alpha,
-			double opacity,
 			int    *r_size)
 {
     XFixed *params;
@@ -662,7 +657,7 @@ create_gaussian_kernel (double radius,
     params[0] = params[1] = 0;
 
     for (i = 2; i < n; i++)
-	params[i] = XDoubleToFixed (amp[i - 2] * sum * opacity * 1.2);
+	params[i] = XDoubleToFixed (amp[i - 2] * sum);
 
     free (amp);
 
@@ -685,13 +680,13 @@ decor_create_shadow (Display		    *xdisplay,
 		     int		    bottom,
 		     decor_shadow_options_t *opt,
 		     decor_context_t	    *c,
-		     decor_draw_func_t	    *draw,
+		     decor_draw_func_t	    draw,
 		     void		    *closure)
 {
     XRenderPictFormat   *format;
     Pixmap		pixmap;
     Picture		src, dst, tmp;
-    XFixed		*params;
+    XFixed		opacity, *params;
     XFilters		*filters;
     char		*filter = NULL;
     int			size, n_params = 0;
@@ -725,7 +720,6 @@ decor_create_shadow (Display		    *xdisplay,
     params = create_gaussian_kernel (opt->shadow_radius,
 				     SIGMA (opt->shadow_radius),
 				     ALPHA (opt->shadow_radius),
-				     opt->shadow_opacity,
 				     &size);
     if (!params)
 	shadow_offset_x = shadow_offset_y = size = 0;
@@ -737,6 +731,11 @@ decor_create_shadow (Display		    *xdisplay,
 
     n_params = size + 2;
     size     = size / 2;
+
+    c->extents.left   = left;
+    c->extents.right  = right;
+    c->extents.top    = top;
+    c->extents.bottom = bottom;
 
     c->left_space   = left   + size - shadow_offset_x;
     c->right_space  = right  + size + shadow_offset_x;
@@ -753,16 +752,17 @@ decor_create_shadow (Display		    *xdisplay,
     c->top_corner_space    = MAX (0, size + shadow_offset_y);
     c->bottom_corner_space = MAX (0, size - shadow_offset_y);
 
-    d_width  = c->left_space + c->left_corner_space + width +
-	c->right_corner_space + c->right_space;
-    d_height = c->top_space + c->top_corner_space + height +
-	c->bottom_corner_space + c->bottom_space;
+    width  = MAX (width, c->left_corner_space + c->right_corner_space);
+    height = MAX (height, c->top_corner_space + c->bottom_corner_space);
+
+    width  = MAX (1, width);
+    height = MAX (1, height);
+
+    d_width  = c->left_space + width + c->right_space;
+    d_height = c->top_space + height + c->bottom_space;
 
     /* all pixmaps are ARGB32 */
     format = XRenderFindStandardFormat (xdisplay, PictStandardARGB32);
-
-    /* shadow color */
-    src = XRenderCreateSolidFill (xdisplay, &color);
 
     /* no shadow */
     if (size <= 0)
@@ -806,23 +806,24 @@ decor_create_shadow (Display		    *xdisplay,
 	return shadow;
     }
 
-
     /* create pixmap for temporary decorations */
-
     d_pixmap = XCreatePixmap (xdisplay, xroot, d_width, d_height, 32);
     if (!d_pixmap)
     {
-	free (params);
 	XFreePixmap (xdisplay, pixmap);
+	free (params);
 
 	return shadow;
     }
+
+    /* shadow color */
+    src = XRenderCreateSolidFill (xdisplay, &color);
 
     dst = XRenderCreatePicture (xdisplay, d_pixmap, format, 0, NULL);
     tmp = XRenderCreatePicture (xdisplay, pixmap, format, 0, NULL);
 
     /* draw decoration */
-    (*draw) (xdisplay, d_pixmap, dst, d_width, d_height, closure);
+    (*draw) (xdisplay, d_pixmap, dst, d_width, d_height, c, closure);
 
     /* first pass */
     params[0] = (n_params - 2) << 16;
@@ -856,17 +857,48 @@ decor_create_shadow (Display		    *xdisplay,
 		      0, 0,
 		      d_width, d_height);
 
-    XRenderFreePicture (xdisplay, tmp);
+    opacity = XDoubleToFixed (opt->shadow_opacity);
+    if (opacity != (1 << 16))
+    {
+	XFixed p[3];
+
+	p[0] = 1 << 16;
+	p[1] = 1 << 16;
+	p[2] = opacity;
+
+	/* apply opacity */
+	set_picture_transform (xdisplay, dst, 0, 0);
+	XRenderSetPictureFilter (xdisplay, dst, filter, p, 3);
+	XRenderComposite (xdisplay,
+			  PictOpSrc,
+			  dst,
+			  None,
+			  tmp,
+			  0, 0,
+			  0, 0,
+			  0, 0,
+			  d_width, d_height);
+
+	XRenderFreePicture (xdisplay, dst);
+	XFreePixmap (xdisplay, d_pixmap);
+
+	shadow->pixmap  = pixmap;
+	shadow->picture = tmp;
+    }
+    else
+    {
+	XRenderFreePicture (xdisplay, tmp);
+	XFreePixmap (xdisplay, pixmap);
+
+	shadow->pixmap  = d_pixmap;
+	shadow->picture = dst;
+    }
+
     XRenderFreePicture (xdisplay, src);
-
-    XFreePixmap (xdisplay, pixmap);
-
-    shadow->pixmap  = d_pixmap;
-    shadow->picture = dst;
-    shadow->width   = d_width;
-    shadow->height  = d_height;
-
     free (params);
+
+    shadow->width  = d_width;
+    shadow->height = d_height;
 
     return shadow;
 }
