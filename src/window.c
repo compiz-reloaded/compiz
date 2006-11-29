@@ -1226,42 +1226,39 @@ damageWindowOutputExtents (CompWindow *w)
 
     if (w->shaded || (w->attrib.map_state == IsViewable && w->damaged))
     {
-	REGION reg;
-
-	reg.rects = &reg.extents;
-	reg.numRects = reg.size = 1;
+	BoxRec box;
 
 	/* top */
-	reg.extents.x1 = w->attrib.x - w->output.left;
-	reg.extents.y1 = w->attrib.y - w->output.top;
-	reg.extents.x2 = w->attrib.x + w->width + w->output.right;
-	reg.extents.y2 = w->attrib.y;
+	box.x1 = -w->output.left;
+	box.y1 = -w->output.top;
+	box.x2 = w->width + w->output.right;
+	box.y2 = 0;
 
-	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageScreenRegion (w->screen, &reg);
+	if (box.x1 < box.x2 && box.y1 < box.y2)
+	    addWindowDamageRect (w, &box);
 
 	/* bottom */
-	reg.extents.y1 = w->attrib.y + w->height;
-	reg.extents.y2 = reg.extents.y1 + w->output.bottom;
+	box.y1 = w->height;
+	box.y2 = box.y1 + w->output.bottom;
 
-	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageScreenRegion (w->screen, &reg);
+	if (box.x1 < box.x2 && box.y1 < box.y2)
+	    addWindowDamageRect (w, &box);
 
 	/* left */
-	reg.extents.x1 = w->attrib.x - w->output.left;
-	reg.extents.y1 = w->attrib.y;
-	reg.extents.x2 = w->attrib.x;
-	reg.extents.y2 = w->attrib.y + w->height;
+	box.x1 = -w->output.left;
+	box.y1 = 0;
+	box.x2 = 0;
+	box.y2 = w->height;
 
-	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageScreenRegion (w->screen, &reg);
+	if (box.x1 < box.x2 && box.y1 < box.y2)
+	    addWindowDamageRect (w, &box);
 
 	/* right */
-	reg.extents.x1 = w->attrib.x + w->width;
-	reg.extents.x2 = reg.extents.x1 + w->output.right;
+	box.x1 = w->width;
+	box.x2 = box.x1 + w->output.right;
 
-	if (reg.extents.x1 < reg.extents.x2 && reg.extents.y1 < reg.extents.y2)
-	    damageScreenRegion (w->screen, &reg);
+	if (box.x1 < box.x2 && box.y1 < box.y2)
+	    addWindowDamageRect (w, &box);
     }
 }
 
