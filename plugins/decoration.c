@@ -923,11 +923,10 @@ decorWindowUpdate (CompWindow *w,
     if (decor == old)
 	return FALSE;
 
+    damageWindowOutputExtents (w);
+
     if (old)
-    {
-	damageWindowOutputExtents (w);
 	destroyWindowDecoration (w->screen, wd);
-    }
 
     if (decor)
     {
@@ -940,9 +939,7 @@ decorWindowUpdate (CompWindow *w,
 	else
 	    setWindowFrameExtents (w, &decor->input, &decor->output);
 
-	if (!move)
-	    damageWindowOutputExtents (w);
-
+	damageWindowOutputExtents (w);
 	updateWindowDecorationScale (w);
     }
     else
