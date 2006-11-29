@@ -71,13 +71,13 @@ handleWindowDamageRect (CompWindow *w,
 	region.numRects = region.size = 1;
 
 	damageScreenRegion (w->screen, &region);
-
-	if (initial)
-	    damageWindowOutputExtents (w);
     }
 
     if (!w->attrib.override_redirect)
 	w->placed = TRUE;
+
+    if (initial)
+	damageWindowOutputExtents (w);
 }
 
 void
