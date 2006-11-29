@@ -602,6 +602,57 @@ set_picture_transform (Display *xdisplay,
     XRenderSetPictureTransform (xdisplay, p, &transform);
 }
 
+static void
+set_picture_clip (Display *xdisplay,
+		  Picture p,
+		  int     width,
+		  int	  height,
+		  int     clipX1,
+		  int     clipY1,
+		  int     clipX2,
+		  int     clipY2)
+{
+    XRectangle clip[4];
+
+    clip[0].x      = 0;
+    clip[0].y      = 0;
+    clip[0].width  = width;
+    clip[0].height = clipY1;
+
+    clip[1].x      = 0;
+    clip[1].y      = clipY2;
+    clip[1].width  = width;
+    clip[1].height = height - clipY2;
+
+    clip[2].x      = 0;
+    clip[2].y      = clipY1;
+    clip[2].width  = clipX1;
+    clip[2].height = clipY2 - clipY1;
+
+    clip[3].x      = clipX2;
+    clip[3].y      = clipY1;
+    clip[3].width  = width - clipX2;
+    clip[3].height = clipY2 - clipY1;
+
+    XRenderSetPictureClipRectangles (xdisplay, p, 0, 0, clip, 4);
+}
+
+static void
+set_no_picture_clip (Display *xdisplay,
+		     Picture p,
+		     int     width,
+		     int     height)
+{
+    XRectangle clip;
+
+    clip.x      = 0;
+    clip.y      = 0;
+    clip.width  = width;
+    clip.height = height;
+
+    XRenderSetPictureClipRectangles (xdisplay, p, 0, 0, &clip, 1);
+}
+
 static XFixed *
 create_gaussian_kernel (double radius,
 			double sigma,
@@ -683,6 +734,7 @@ decor_create_shadow (Display		    *xdisplay,
 		     decor_draw_func_t	    draw,
 		     void		    *closure)
 {
+    static XRenderColor white = { 0xffff, 0xffff, 0xffff, 0xffff };
     XRenderPictFormat   *format;
     Pixmap		pixmap;
     Picture		src, dst, tmp;
@@ -698,6 +750,7 @@ decor_create_shadow (Display		    *xdisplay,
     int			d_height;
     Window		xroot = screen->root;
     decor_shadow_t	*shadow;
+    int			clipX1, clipY1, clipX2, clipY2;
 
     shadow = malloc (sizeof (decor_shadow_t));
     if (!shadow)
@@ -707,11 +760,6 @@ decor_create_shadow (Display		    *xdisplay,
     shadow->picture = 0;
     shadow->width   = 0;
     shadow->height  = 0;
-
-    color.red   = opt->shadow_color[0];
-    color.green = opt->shadow_color[1];
-    color.blue  = opt->shadow_color[2];
-    color.alpha = 0xffff;
 
     shadow_offset_x = opt->shadow_offset_x;
     shadow_offset_y = opt->shadow_offset_y;
@@ -816,9 +864,7 @@ decor_create_shadow (Display		    *xdisplay,
 	return shadow;
     }
 
-    /* shadow color */
-    src = XRenderCreateSolidFill (xdisplay, &color);
-
+    src = XRenderCreateSolidFill (xdisplay, &white);
     dst = XRenderCreatePicture (xdisplay, d_pixmap, format, 0, NULL);
     tmp = XRenderCreatePicture (xdisplay, pixmap, format, 0, NULL);
 
@@ -828,6 +874,15 @@ decor_create_shadow (Display		    *xdisplay,
     /* first pass */
     params[0] = (n_params - 2) << 16;
     params[1] = 1 << 16;
+
+    clipX1 = c->left_space + size;
+    clipY1 = c->top_space  + size;
+    clipX2 = d_width - c->right_space - size;
+    clipY2 = d_height - c->bottom_space - size;
+
+    if (clipX1 < clipX2 && clipY1 < clipY2)
+	set_picture_clip (xdisplay, tmp, d_width, d_height,
+			  clipX1, clipY1, clipX2, clipY2);
 
     set_picture_transform (xdisplay, dst, shadow_offset_x, 0);
     XRenderSetPictureFilter (xdisplay, dst, filter, params, n_params);
@@ -841,9 +896,44 @@ decor_create_shadow (Display		    *xdisplay,
 		      0, 0,
 		      d_width, d_height);
 
+    set_no_picture_clip (xdisplay, tmp, d_width, d_height);
+
+    XRenderFreePicture (xdisplay, src);
+
     /* second pass */
     params[0] = 1 << 16;
     params[1] = (n_params - 2) << 16;
+
+    opacity = XDoubleToFixed (opt->shadow_opacity);
+    if (opacity < (1 << 16))
+    {
+	/* apply opacity as shadow color if less than 1.0 */
+	color.red   = (opt->shadow_color[0] * opacity) >> 16;
+	color.green = (opt->shadow_color[1] * opacity) >> 16;
+	color.blue  = (opt->shadow_color[2] * opacity) >> 16;
+	color.alpha = opacity;
+
+	opacity = 1 << 16;
+    }
+    else
+    {
+	/* shadow color */
+	color.red   = opt->shadow_color[0];
+	color.green = opt->shadow_color[1];
+	color.blue  = opt->shadow_color[2];
+	color.alpha = 0xffff;
+    }
+
+    src = XRenderCreateSolidFill (xdisplay, &color);
+
+    clipX1 = c->left_space;
+    clipY1 = c->top_space;
+    clipX2 = d_width - c->right_space;
+    clipY2 = d_height - c->bottom_space;
+
+    if (clipX1 < clipX2 && clipY1 < clipY2)
+	set_picture_clip (xdisplay, dst, d_width, d_height,
+			  clipX1, clipY1, clipX2, clipY2);
 
     set_picture_transform (xdisplay, tmp, 0, shadow_offset_y);
     XRenderSetPictureFilter (xdisplay, tmp, filter, params, n_params);
@@ -857,7 +947,10 @@ decor_create_shadow (Display		    *xdisplay,
 		      0, 0,
 		      d_width, d_height);
 
-    opacity = XDoubleToFixed (opt->shadow_opacity);
+    set_no_picture_clip (xdisplay, dst, d_width, d_height);
+
+    XRenderFreePicture (xdisplay, src);
+
     if (opacity != (1 << 16))
     {
 	XFixed p[3];
@@ -865,6 +958,10 @@ decor_create_shadow (Display		    *xdisplay,
 	p[0] = 1 << 16;
 	p[1] = 1 << 16;
 	p[2] = opacity;
+
+	if (clipX1 < clipX2 && clipY1 < clipY2)
+	    set_picture_clip (xdisplay, tmp, d_width, d_height,
+			      clipX1, clipY1, clipX2, clipY2);
 
 	/* apply opacity */
 	set_picture_transform (xdisplay, dst, 0, 0);
@@ -879,6 +976,9 @@ decor_create_shadow (Display		    *xdisplay,
 			  0, 0,
 			  d_width, d_height);
 
+	set_no_picture_clip (xdisplay, tmp, d_width, d_height);
+	set_picture_transform (xdisplay, tmp, 0, 0);
+
 	XRenderFreePicture (xdisplay, dst);
 	XFreePixmap (xdisplay, d_pixmap);
 
@@ -887,6 +987,8 @@ decor_create_shadow (Display		    *xdisplay,
     }
     else
     {
+	set_picture_transform (xdisplay, dst, 0, 0);
+
 	XRenderFreePicture (xdisplay, tmp);
 	XFreePixmap (xdisplay, pixmap);
 
@@ -894,7 +996,6 @@ decor_create_shadow (Display		    *xdisplay,
 	shadow->picture = dst;
     }
 
-    XRenderFreePicture (xdisplay, src);
     free (params);
 
     shadow->width  = d_width;
