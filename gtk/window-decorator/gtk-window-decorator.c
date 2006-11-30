@@ -1547,9 +1547,11 @@ meta_draw_window_decoration (decor_t *d)
 
     region = meta_get_window_region (&fgeom, clip.width, clip.height);
 
-    if (alpha != 1.0)
+    if (d->picture && alpha != 1.0)
     {
+	Display	  *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	GdkPixmap *pixmap;
+	Picture   src;
 	cairo_t	  *pcr;
 	gboolean  shade_alpha = (d->active) ? meta_active_shade_opacity :
 	    meta_shade_opacity;
@@ -1585,141 +1587,30 @@ meta_draw_window_decoration (decor_t *d)
 			       d->icon_pixbuf,
 			       NULL);
 
-	cairo_save (cr);
-
-	for (i = 0; i < region->numRects; i++)
-	    cairo_rectangle (cr,
-			     clip.x + region->rects[i].x1,
-			     clip.y + region->rects[i].y1,
-			     region->rects[i].x2 - region->rects[i].x1,
-			     region->rects[i].y2 - region->rects[i].y1);
-
-	cairo_clip (cr);
-
-	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, alpha);
-	cairo_paint (cr);
-
-	if (shade_alpha)
-	{
-	    static decor_color_t color = { 0.0, 0.0, 0.0 };
-	    int			 corners = 0;
-	    int			 top_left_radius;
-	    int			 top_right_radius;
-	    int			 bottom_left_radius;
-	    int			 bottom_right_radius;
-
-	    meta_get_corner_radius (&fgeom,
-				    &top_left_radius,
-				    &top_right_radius,
-				    &bottom_left_radius,
-				    &bottom_right_radius);
-
-	    if (top_left_radius)
-		corners |= CORNER_TOPLEFT;
-
-	    if (top_right_radius)
-		corners |= CORNER_TOPRIGHT;
-
-	    if (bottom_left_radius)
-		corners |= CORNER_BOTTOMLEFT;
-
-	    if (bottom_right_radius)
-		corners |= CORNER_BOTTOMRIGHT;
-
-	    if (d->state & (WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY |
-			    WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY))
-		corners = 0;
-
-	    fill_rounded_rectangle (cr,
-				    clip.x,
-				    clip.y,
-				    fgeom.left_width,
-				    fgeom.top_height,
-				    top_left_radius,
-				    CORNER_TOPLEFT & corners,
-				    &color, 1.0,
-				    &color, alpha,
-				    SHADE_TOP | SHADE_LEFT);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x + fgeom.left_width,
-				    clip.y,
-				    clip.width - fgeom.left_width -
-				    fgeom.right_width,
-				    fgeom.top_height,
-				    5.0, 0,
-				    &color, 1.0, &color, alpha,
-				    SHADE_TOP);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x + clip.width - fgeom.right_width,
-				    clip.y,
-				    fgeom.right_width,
-				    fgeom.top_height,
-				    top_right_radius,
-				    CORNER_TOPRIGHT & corners,
-				    &color, 1.0, &color, alpha,
-				    SHADE_TOP | SHADE_RIGHT);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x,
-				    clip.y + fgeom.top_height,
-				    fgeom.left_width,
-				    clip.height - fgeom.top_height -
-				    fgeom.bottom_height,
-				    5.0, 0,
-				    &color, 1.0, &color, alpha,
-				    SHADE_LEFT);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x + clip.width - fgeom.right_width,
-				    clip.y + fgeom.top_height,
-				    fgeom.right_width,
-				    clip.height - fgeom.top_height -
-				    fgeom.bottom_height,
-				    5.0, 0,
-				    &color, 1.0, &color, alpha,
-				    SHADE_RIGHT);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x,
-				    clip.y + clip.height - fgeom.bottom_height,
-				    fgeom.left_width,
-				    fgeom.bottom_height,
-				    bottom_left_radius,
-				    CORNER_BOTTOMLEFT & corners,
-				    &color, 1.0, &color, alpha,
-				    SHADE_BOTTOM | SHADE_LEFT);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x + fgeom.left_width,
-				    clip.y + clip.height - fgeom.bottom_height,
-				    clip.width - fgeom.left_width -
-				    fgeom.right_width,
-				    fgeom.bottom_height,
-				    5.0, 0,
-				    &color, 1.0, &color, alpha,
-				    SHADE_BOTTOM);
-
-	    fill_rounded_rectangle (cr,
-				    clip.x + clip.width - fgeom.right_width,
-				    clip.y + clip.height - fgeom.bottom_height,
-				    fgeom.right_width,
-				    fgeom.bottom_height,
-				    bottom_right_radius,
-				    CORNER_BOTTOMRIGHT & corners,
-				    &color, 1.0, &color, alpha,
-				    SHADE_BOTTOM | SHADE_RIGHT);
-	}
-
-	cairo_set_operator (cr, CAIRO_OPERATOR_IN);
-	cairo_set_source_surface (cr, cairo_get_target (pcr), clip.x, clip.y);
-	cairo_paint (cr);
-
-	cairo_restore (cr);
-
 	cairo_destroy (pcr);
+
+	src = XRenderCreatePicture (xdisplay,
+				    GDK_PIXMAP_XID (pixmap),
+				    xformat, 0, NULL);
+
+	XOffsetRegion (region, clip.x, clip.y);
+
+	decor_blend_transform_picture (xdisplay,
+				       &window_context,
+				       src,
+				       clip.x,
+				       clip.y,
+				       d->picture,
+				       d->width,
+				       d->height,
+				       region,
+				       alpha * 0xffff,
+				       shade_alpha);
+
+	XOffsetRegion (region, -clip.x, -clip.y);
+
+	XRenderFreePicture (xdisplay, src);
+
 	gdk_pixmap_unref (pixmap);
     }
     else

@@ -212,4 +212,17 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 					int	        width,
 					int	        height);
 
+void
+decor_blend_transform_picture (Display	       *xdisplay,
+			       decor_context_t *context,
+			       Picture	       src,
+			       int	       xSrc,
+			       int	       ySrc,
+			       Picture	       dst,
+			       int	       width,
+			       int	       height,
+			       Region	       region,
+			       unsigned short  alpha,
+			       int	       shade_alpha);
+
 #endif

@@ -615,16 +615,14 @@ set_picture_clip (Display *xdisplay,
 
 static void
 set_no_picture_clip (Display *xdisplay,
-		     Picture p,
-		     int     width,
-		     int     height)
+		     Picture p)
 {
     XRectangle clip;
 
     clip.x      = 0;
     clip.y      = 0;
-    clip.width  = width;
-    clip.height = height;
+    clip.width  = SHRT_MAX;
+    clip.height = SHRT_MAX;
 
     XRenderSetPictureClipRectangles (xdisplay, p, 0, 0, &clip, 1);
 }
@@ -876,7 +874,7 @@ decor_create_shadow (Display		    *xdisplay,
 		      0, 0,
 		      d_width, d_height);
 
-    set_no_picture_clip (xdisplay, tmp, d_width, d_height);
+    set_no_picture_clip (xdisplay, tmp);
 
     XRenderFreePicture (xdisplay, src);
 
@@ -927,7 +925,7 @@ decor_create_shadow (Display		    *xdisplay,
 		      0, 0,
 		      d_width, d_height);
 
-    set_no_picture_clip (xdisplay, dst, d_width, d_height);
+    set_no_picture_clip (xdisplay, dst);
 
     XRenderFreePicture (xdisplay, src);
 
@@ -1135,4 +1133,245 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 	if (sh != h)
 	    XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
     }
+}
+
+void
+decor_blend_transform_picture (Display	       *xdisplay,
+			       decor_context_t *context,
+			       Picture	       src,
+			       int	       xSrc,
+			       int	       ySrc,
+			       Picture	       dst,
+			       int	       width,
+			       int	       height,
+			       Region	       region,
+			       unsigned short  alpha,
+			       int	       shade_alpha)
+{
+    XRenderColor color[3] = {
+	{ 0xffff, 0xffff, 0xffff, 0xffff },
+	{  alpha,  alpha,  alpha,  alpha }
+    };
+
+    XRenderSetPictureClipRegion (xdisplay, dst, region);
+
+    if (shade_alpha)
+    {
+	static XFixed	stop[2] = { 0, 1 << 16 };
+	XTransform      transform = {
+	    {
+		{ 1 << 16,       0,       0 },
+		{       0, 1 << 16,       0 },
+		{        0,      0, 1 << 16 }
+	    }
+	};
+	Picture         grad;
+	XLinearGradient linear;
+	XRadialGradient radial;
+
+	radial.inner.x	    = 0;
+	radial.inner.y	    = 0;
+	radial.inner.radius = 0;
+	radial.outer.x	    = 0;
+	radial.outer.y	    = 0;
+
+	/* top left */
+	radial.outer.radius = context->extents.left << 16;
+
+	grad = XRenderCreateRadialGradient (xdisplay,
+					    &radial,
+					    stop,
+					    color,
+					    2);
+
+	transform.matrix[1][1] = (context->extents.left << 16) /
+	    context->extents.top;
+	transform.matrix[0][2] = -context->extents.left << 16;
+	transform.matrix[1][2] = -context->extents.left << 16;
+
+	XRenderSetPictureTransform (xdisplay, grad, &transform);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  context->left_space - context->extents.left,
+			  context->top_space - context->extents.top,
+			  context->extents.left, context->extents.top);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* top */
+	linear.p1.x = 0;
+	linear.p1.y = context->extents.top << 16;
+	linear.p2.x = 0;
+	linear.p2.y = 0;
+
+	grad = XRenderCreateLinearGradient (xdisplay,
+					    &linear,
+					    stop,
+					    color,
+					    2);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  context->left_space,
+			  context->top_space - context->extents.top,
+			  width - context->left_space - context->right_space,
+			  context->extents.top);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* top right */
+	radial.outer.radius = context->extents.right << 16;
+
+	grad = XRenderCreateRadialGradient (xdisplay,
+					    &radial,
+					    stop,
+					    color,
+					    2);
+
+	transform.matrix[1][1] = (context->extents.right << 16) /
+	    context->extents.top;
+	transform.matrix[0][2] = 0;
+	transform.matrix[1][2] = -context->extents.right << 16;
+
+	XRenderSetPictureTransform (xdisplay, grad, &transform);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  width - context->right_space,
+			  context->top_space - context->extents.top,
+			  context->extents.right, context->extents.top);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* left */
+	linear.p1.x = context->extents.left << 16;
+	linear.p1.y = 0;
+	linear.p2.x = 0;
+	linear.p2.y = 0;
+
+	grad = XRenderCreateLinearGradient (xdisplay,
+					    &linear,
+					    stop,
+					    color,
+					    2);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  context->left_space - context->extents.left,
+			  context->top_space,
+			  context->extents.left,
+			  height - context->top_space - context->bottom_space);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* right */
+	linear.p1.x = 0;
+	linear.p1.y = 0;
+	linear.p2.x = context->extents.right << 16;
+	linear.p2.y = 0;
+
+	grad = XRenderCreateLinearGradient (xdisplay,
+					    &linear,
+					    stop,
+					    color,
+					    2);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  width - context->right_space, context->top_space,
+			  context->extents.right,
+			  height - context->top_space - context->bottom_space);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* bottom left */
+	radial.outer.radius = context->extents.left << 16;
+
+	grad = XRenderCreateRadialGradient (xdisplay,
+					    &radial,
+					    stop,
+					    color,
+					    2);
+
+	transform.matrix[1][1] = (context->extents.left << 16) /
+	    context->extents.bottom;
+	transform.matrix[0][2] = -context->extents.left << 16;
+	transform.matrix[1][2] = 0;
+
+	XRenderSetPictureTransform (xdisplay, grad, &transform);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  context->left_space - context->extents.left,
+			  height - context->bottom_space,
+			  context->extents.left, context->extents.bottom);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* bottom */
+	linear.p1.x = 0;
+	linear.p1.y = 0;
+	linear.p2.x = 0;
+	linear.p2.y = context->extents.bottom << 16;
+
+	grad = XRenderCreateLinearGradient (xdisplay,
+					    &linear,
+					    stop,
+					    color,
+					    2);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  context->left_space, height - context->bottom_space,
+			  width - context->left_space - context->right_space,
+			  context->extents.bottom);
+
+	XRenderFreePicture (xdisplay, grad);
+
+	/* bottom right */
+	radial.outer.radius = context->extents.right << 16;
+
+	grad = XRenderCreateRadialGradient (xdisplay,
+					    &radial,
+					    stop,
+					    color,
+					    2);
+
+	transform.matrix[1][1] = (context->extents.right << 16) /
+	    context->extents.bottom;
+	transform.matrix[0][2] = 0;
+	transform.matrix[1][2] = 0;
+
+	XRenderSetPictureTransform (xdisplay, grad, &transform);
+
+	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			  0, 0,
+			  0, 0,
+			  width - context->right_space,
+			  height - context->bottom_space,
+			  context->extents.right, context->extents.bottom);
+
+	XRenderFreePicture (xdisplay, grad);
+    }
+    else
+    {
+	XRenderFillRectangle (xdisplay, PictOpSrc, dst, &color[1],
+			      0, 0, width, height);
+    }
+
+    XRenderComposite (xdisplay, PictOpIn, src, None, dst,
+		      -xSrc, -ySrc,
+		      0, 0,
+		      0, 0,
+		      width, height);
+
+    set_no_picture_clip (xdisplay, dst);
 }
