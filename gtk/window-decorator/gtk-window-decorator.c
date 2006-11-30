@@ -45,7 +45,6 @@
 
 #include <cairo.h>
 #include <cairo-xlib.h>
-#include <cairo-xlib-xrender.h>
 
 #if CAIRO_VERSION < CAIRO_VERSION_ENCODE(1, 1, 0)
 #define CAIRO_EXTEND_PAD CAIRO_EXTEND_NONE
