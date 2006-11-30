@@ -127,19 +127,6 @@ decor_quads_to_property (long		 *data,
 			 int		 nQuad);
 
 int
-decor_set_horz_quad_line (decor_quad_t *q,
-			  int	       left,
-			  int	       left_corner,
-			  int	       right,
-			  int	       right_corner,
-			  int	       top,
-			  int	       bottom,
-			  int	       gravity,
-			  int	       width,
-			  double       x0,
-			  double       y0);
-
-int
 decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      top,
 			 int	      top_corner,
@@ -149,33 +136,51 @@ decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      right,
 			 int	      gravity,
 			 int	      height,
+			 int	      splitY,
+			 int	      splitGravity,
 			 double	      x0,
 			 double	      y0);
 
 int
-decor_set_common_window_quads (decor_context_t *c,
-			       decor_quad_t    *q,
-			       int	       width,
-			       int	       height);
+decor_set_horz_quad_line (decor_quad_t *q,
+			  int	       left,
+			  int	       left_corner,
+			  int	       right,
+			  int	       right_corner,
+			  int	       top,
+			  int	       bottom,
+			  int	       gravity,
+			  int	       width,
+			  int	       splitX,
+			  int	       splitGravity,
+			  double       x0,
+			  double       y0);
 
 int
-decor_set_window_quads (decor_context_t *c,
-			decor_quad_t    *q,
-			int	        width,
-			int	        height,
-			int	        button_width);
+decor_set_lSrS_window_quads (decor_context_t *c,
+			     decor_quad_t    *q,
+			     int	     width,
+			     int	     height);
 
 int
-decor_set_no_title_window_quads (decor_context_t *c,
+decor_set_lSrStSbS_window_quads (decor_context_t *c,
 				 decor_quad_t    *q,
 				 int	         width,
 				 int	         height);
 
 int
-decor_set_shadow_quads (decor_context_t *c,
-			decor_quad_t    *q,
-			int	        width,
-			int	        height);
+decor_set_lSrStSbN_window_quads (decor_context_t *c,
+				 decor_quad_t    *q,
+				 int		 width,
+				 int		 height,
+				 int		 bottom_stretch_offset);
+
+int
+decor_set_lSrStXbS_window_quads (decor_context_t *c,
+				 decor_quad_t    *q,
+				 int		 width,
+				 int		 height,
+				 int		 top_stretch_offset);
 
 decor_shadow_t *
 decor_create_shadow (Display		    *xdisplay,
@@ -186,6 +191,10 @@ decor_create_shadow (Display		    *xdisplay,
 		     int		    right,
 		     int		    top,
 		     int		    bottom,
+		     int		    solid_left,
+		     int		    solid_right,
+		     int		    solid_top,
+		     int		    solid_bottom,
 		     decor_shadow_options_t *opt,
 		     decor_context_t	    *context,
 		     decor_draw_func_t      draw,
@@ -195,5 +204,12 @@ void
 decor_destroy_shadow (Display	     *xdisplay,
 		      decor_shadow_t *shadow);
 
+void
+decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
+					decor_shadow_t  *shadow,
+					decor_context_t *context,
+					Picture	        picture,
+					int	        width,
+					int	        height);
 
 #endif

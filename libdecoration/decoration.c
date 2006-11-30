@@ -118,83 +118,6 @@ decor_quads_to_property (long		 *data,
 }
 
 int
-decor_set_horz_quad_line (decor_quad_t *q,
-			  int	       left,
-			  int	       left_corner,
-			  int	       right,
-			  int	       right_corner,
-			  int	       top,
-			  int	       bottom,
-			  int	       gravity,
-			  int	       width,
-			  double       x0,
-			  double       y0)
-{
-    int dx, nQuad = 0;
-
-    dx = (left_corner - right_corner) >> 1;
-
-    q->p1.x	  = -left;
-    q->p1.y	  = top;
-    q->p1.gravity = gravity | GRAVITY_WEST;
-    q->p2.x	  = dx;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity;
-    q->max_width  = left + left_corner;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_LEFT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = left_corner;
-    q->p1.y	  = top;
-    q->p1.gravity = gravity | GRAVITY_WEST;
-    q->p2.x	  = -right_corner;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity | GRAVITY_EAST;
-    q->max_width  = SHRT_MAX;
-    q->max_height = SHRT_MAX;
-    q->align	  = 0;
-    q->clamp	  = 0;
-    q->m.xx	  = 0.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0 + left + left_corner;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = dx;
-    q->p1.y	  = top;
-    q->p1.gravity = gravity;
-    q->p2.x	  = right;
-    q->p2.y	  = bottom;
-    q->p2.gravity = gravity | GRAVITY_EAST;
-    q->max_width  = right_corner + right;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_RIGHT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0 + width;
-    q->m.y0	  = y0;
-
-    nQuad++;
-
-    return nQuad;
-}
-
-int
 decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      top,
 			 int	      top_corner,
@@ -204,19 +127,19 @@ decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      right,
 			 int	      gravity,
 			 int	      height,
+			 int	      splitY,
+			 int	      splitGravity,
 			 double	      x0,
 			 double	      y0)
 {
-    int dy, nQuad = 0;
-
-    dy = (top_corner - bottom_corner) >> 1;
+    int nQuad = 0;
 
     q->p1.x	  = left;
     q->p1.y	  = -top;
     q->p1.gravity = gravity | GRAVITY_NORTH;
     q->p2.x	  = right;
-    q->p2.y	  = dy;
-    q->p2.gravity = gravity;
+    q->p2.y	  = splitY;
+    q->p2.gravity = gravity | splitGravity;
     q->max_width  = SHRT_MAX;
     q->max_height = top + top_corner;
     q->align	  = ALIGN_TOP;
@@ -250,8 +173,8 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q++; nQuad++;
 
     q->p1.x	  = left;
-    q->p1.y	  = dy;
-    q->p1.gravity = gravity;
+    q->p1.y	  = splitY;
+    q->p1.gravity = gravity | splitGravity;
     q->p2.x	  = right;
     q->p2.y	  = bottom;
     q->p2.gravity = gravity | GRAVITY_SOUTH;
@@ -272,12 +195,91 @@ decor_set_vert_quad_row (decor_quad_t *q,
 }
 
 int
-decor_set_common_window_quads (decor_context_t *c,
-			       decor_quad_t    *q,
-			       int	       width,
-			       int	       height)
+decor_set_horz_quad_line (decor_quad_t *q,
+			  int	       left,
+			  int	       left_corner,
+			  int	       right,
+			  int	       right_corner,
+			  int	       top,
+			  int	       bottom,
+			  int	       gravity,
+			  int	       width,
+			  int	       splitX,
+			  int	       splitGravity,
+			  double       x0,
+			  double       y0)
 {
-    int n, nQuad = 0;
+    int nQuad = 0;
+
+    q->p1.x	  = -left;
+    q->p1.y	  = top;
+    q->p1.gravity = gravity | GRAVITY_WEST;
+    q->p2.x	  = splitX;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity | splitGravity;
+    q->max_width  = left + left_corner;
+    q->max_height = SHRT_MAX;
+    q->align	  = ALIGN_LEFT;
+    q->clamp	  = 0;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    q->p1.x	  = left_corner;
+    q->p1.y	  = top;
+    q->p1.gravity = gravity | GRAVITY_WEST;
+    q->p2.x	  = -right_corner;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity | GRAVITY_EAST;
+    q->max_width  = SHRT_MAX;
+    q->max_height = SHRT_MAX;
+    q->align	  = 0;
+    q->clamp	  = 0;
+    q->m.xx	  = 0.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0 + left + left_corner;
+    q->m.y0	  = y0;
+
+    q++; nQuad++;
+
+    q->p1.x	  = splitX;
+    q->p1.y	  = top;
+    q->p1.gravity = gravity | splitGravity;
+    q->p2.x	  = right;
+    q->p2.y	  = bottom;
+    q->p2.gravity = gravity | GRAVITY_EAST;
+    q->max_width  = right_corner + right;
+    q->max_height = SHRT_MAX;
+    q->align	  = ALIGN_RIGHT;
+    q->clamp	  = 0;
+    q->m.xx	  = 1.0;
+    q->m.xy	  = 0.0;
+    q->m.yx	  = 0.0;
+    q->m.yy	  = 1.0;
+    q->m.x0	  = x0 + width;
+    q->m.y0	  = y0;
+
+    nQuad++;
+
+    return nQuad;
+}
+
+int
+decor_set_lSrS_window_quads (decor_context_t *c,
+			     decor_quad_t    *q,
+			     int	     width,
+			     int	     height)
+{
+    int splitY, n, nQuad = 0;
+
+    splitY = (c->top_corner_space - c->bottom_corner_space) / 2;
 
     /* left quads */
     n = decor_set_vert_quad_row (q,
@@ -289,6 +291,8 @@ decor_set_common_window_quads (decor_context_t *c,
 				 0,
 				 GRAVITY_WEST,
 				 height - c->top_space - c->bottom_space,
+				 splitY,
+				 0,
 				 0.0,
 				 c->top_space + 1.0);
 
@@ -304,8 +308,44 @@ decor_set_common_window_quads (decor_context_t *c,
 				 c->right_space,
 				 GRAVITY_EAST,
 				 height - c->top_space - c->bottom_space,
+				 splitY,
+				 0,
 				 width - c->right_space,
 				 c->top_space + 1.0);
+
+    nQuad += n;
+
+    return nQuad;
+}
+
+int
+decor_set_lSrStSbS_window_quads (decor_context_t *c,
+				 decor_quad_t    *q,
+				 int	         width,
+				 int	         height)
+{
+    int splitX, n, nQuad = 0;
+
+    splitX = (c->left_corner_space - c->right_corner_space) / 2;
+
+    /* top quads */
+    n = decor_set_horz_quad_line (q,
+				  c->left_space,
+				  c->left_corner_space,
+				  c->right_space,
+				  c->right_corner_space,
+				  -c->top_space,
+				  0,
+				  GRAVITY_NORTH,
+				  width,
+				  splitX,
+				  0,
+				  0.0,
+				  0.0);
+
+    q += n; nQuad += n;
+
+    n = decor_set_lSrS_window_quads (c, q, width, height);
 
     q += n; nQuad += n;
 
@@ -319,6 +359,8 @@ decor_set_common_window_quads (decor_context_t *c,
 				  c->bottom_space,
 				  GRAVITY_SOUTH,
 				  width,
+				  splitX,
+				  0,
 				  0.0,
 				  height - c->bottom_space);
 
@@ -328,24 +370,26 @@ decor_set_common_window_quads (decor_context_t *c,
 }
 
 int
-decor_set_window_quads (decor_context_t *c,
-			decor_quad_t    *q,
-			int	        width,
-			int	        height,
-			int	        button_width)
+decor_set_lSrStXbS_window_quads (decor_context_t *c,
+				 decor_quad_t    *q,
+				 int		 width,
+				 int		 height,
+				 int		 top_stretch_offset)
 {
-    int     n, nQuad = 0;
-    int     top_left, top_right, y;
-    double  y0;
+    int    splitX, n, nQuad = 0;
+    int    top_left, top_right, y;
+    double y0;
 
-    top_right = button_width;
-    top_left  = width - c->left_space - c->right_space - top_right - 1;
+    splitX = (c->left_corner_space - c->right_corner_space) / 2;
 
-    /* special case which can happen with large shadows */
-    if (c->right_corner_space > top_right || c->left_corner_space > top_left)
+    top_left  = top_stretch_offset;
+    top_right = width - c->left_space - c->right_space - top_left - 1;
+
+    /* if we need a separate line for the shadow */
+    if (c->left_corner_space > top_left || c->right_corner_space > top_right)
     {
-	y  = 0; /* -c->titlebar_height */
-	y0 = c->top_space;
+	y  = -c->extents.top;
+	y0 = c->top_space - c->extents.top;
 
 	/* top quads */
 	n = decor_set_horz_quad_line (q,
@@ -353,10 +397,12 @@ decor_set_window_quads (decor_context_t *c,
 				      c->left_corner_space,
 				      c->right_space,
 				      c->right_corner_space,
-				      -c->top_space /* - c->titlebar_height */,
+				      -c->top_space,
 				      y,
 				      GRAVITY_NORTH,
 				      width,
+				      splitX,
+				      0,
 				      0.0,
 				      0.0);
 
@@ -368,151 +414,24 @@ decor_set_window_quads (decor_context_t *c,
 	y0 = 0.0;
     }
 
-    /* 3 top/titlebar quads */
-    q->p1.x	  = -c->left_space;
-    q->p1.y	  = y;
-    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = -top_right;
-    q->p2.y	  = 0;
-    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
-    q->max_width  = c->left_space + top_left;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_LEFT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = 0.0;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = top_left;
-    q->p1.y	  = y;
-    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = -top_right;
-    q->p2.y	  = 0;
-    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
-    q->max_width  = SHRT_MAX;
-    q->max_height = SHRT_MAX;
-    q->align	  = 0;
-    q->clamp	  = 0;
-    q->m.xx	  = 0.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = c->left_space + top_left;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    q->p1.x	  = 0;
-    q->p1.y	  = y;
-    q->p1.gravity = GRAVITY_NORTH | GRAVITY_WEST;
-    q->p2.x	  = c->right_space;
-    q->p2.y	  = 0;
-    q->p2.gravity = GRAVITY_NORTH | GRAVITY_EAST;
-    q->max_width  = c->right_space + top_right;
-    q->max_height = SHRT_MAX;
-    q->align	  = ALIGN_RIGHT;
-    q->clamp	  = 0;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = width;
-    q->m.y0	  = y0;
-
-    q++; nQuad++;
-
-    n = decor_set_common_window_quads (c, q, width, height);
-
-    nQuad += n;
-
-    return nQuad;
-}
-
-int
-decor_set_no_title_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int	         width,
-				 int	         height)
-{
-    int n, nQuad = 0;
-
     /* top quads */
     n = decor_set_horz_quad_line (q,
 				  c->left_space,
-				  c->left_corner_space,
+				  top_left,
 				  c->right_space,
-				  c->right_corner_space,
-				  -c->top_space,
+				  top_right,
+				  y,
 				  0,
 				  GRAVITY_NORTH,
 				  width,
+				  top_left,
+				  GRAVITY_WEST,
 				  0.0,
-				  0.0);
+				  y0);
 
     q += n; nQuad += n;
 
-    n = decor_set_common_window_quads (c, q, width, height);
-
-    nQuad += n;
-
-    return nQuad;
-}
-
-int
-decor_set_shadow_quads (decor_context_t *c,
-			decor_quad_t    *q,
-			int	        width,
-			int	        height)
-{
-    int n, nQuad = 0;
-
-    /* top quads */
-    n = decor_set_horz_quad_line (q,
-				  c->left_space,
-				  c->left_corner_space,
-				  c->right_space,
-				  c->right_corner_space,
-				  -c->top_space,
-				  0,
-				  GRAVITY_NORTH,
-				  width,
-				  0.0,
-				  0.0);
-
-    q += n; nQuad += n;
-
-    /* left quads */
-    n = decor_set_vert_quad_row (q,
-				 0,
-				 c->top_corner_space,
-				 0,
-				 c->bottom_corner_space,
-				 -c->left_space,
-				 0,
-				 GRAVITY_WEST,
-				 height - c->top_space - c->bottom_space,
-				 0.0,
-				 c->top_space);
-
-    q += n; nQuad += n;
-
-    /* right quads */
-    n = decor_set_vert_quad_row (q,
-				 0,
-				 c->top_corner_space,
-				 0,
-				 c->bottom_corner_space,
-				 0,
-				 c->right_space,
-				 GRAVITY_EAST,
-				 height - c->top_space - c->bottom_space,
-				 width - c->right_space,
-				 c->top_space);
+    n = decor_set_lSrS_window_quads (c, q, width, height);
 
     q += n; nQuad += n;
 
@@ -526,9 +445,66 @@ decor_set_shadow_quads (decor_context_t *c,
 				  c->bottom_space,
 				  GRAVITY_SOUTH,
 				  width,
+				  splitX,
+				  0,
 				  0.0,
-				  c->top_space + c->top_corner_space +
-				  c->bottom_corner_space + 1.0);
+				  height - c->bottom_space);
+
+    nQuad += n;
+
+    return nQuad;
+}
+
+int
+decor_set_lSrStSbN_window_quads (decor_context_t *c,
+				 decor_quad_t    *q,
+				 int		 width,
+				 int		 height,
+				 int		 bottom_stretch_offset)
+{
+    int splitX, n, nQuad = 0;
+    int bottom_left, bottom_right;
+
+    splitX = (c->left_corner_space - c->right_corner_space) / 2;
+
+    bottom_left  = bottom_stretch_offset;
+    bottom_right = width - c->left_space - c->right_space - bottom_left - 1;
+
+    /* top quads */
+    n = decor_set_horz_quad_line (q,
+				  c->left_space,
+				  c->left_corner_space,
+				  c->right_space,
+				  c->right_corner_space,
+				  -c->top_space,
+				  0,
+				  GRAVITY_NORTH,
+				  width,
+				  splitX,
+				  0,
+				  0.0,
+				  0.0);
+
+    q += n; nQuad += n;
+
+    n = decor_set_lSrS_window_quads (c, q, width, height);
+
+    q += n; nQuad += n;
+
+    /* bottom quads */
+    n = decor_set_horz_quad_line (q,
+				  c->left_space,
+				  bottom_left,
+				  c->right_space,
+				  bottom_right,
+				  0,
+				  c->bottom_space,
+				  GRAVITY_SOUTH,
+				  width,
+				  bottom_left,
+				  GRAVITY_WEST,
+				  0.0,
+				  height - c->bottom_space);
 
     nQuad += n;
 
@@ -729,6 +705,10 @@ decor_create_shadow (Display		    *xdisplay,
 		     int		    right,
 		     int		    top,
 		     int		    bottom,
+		     int		    solid_left,
+		     int		    solid_right,
+		     int		    solid_top,
+		     int		    solid_bottom,
 		     decor_shadow_options_t *opt,
 		     decor_context_t	    *c,
 		     decor_draw_func_t	    draw,
@@ -795,10 +775,10 @@ decor_create_shadow (Display		    *xdisplay,
     c->top_space    = MAX (top,    c->top_space);
     c->bottom_space = MAX (bottom, c->bottom_space);
 
-    c->left_corner_space   = MAX (0, size + shadow_offset_x);
-    c->right_corner_space  = MAX (0, size - shadow_offset_x);
-    c->top_corner_space    = MAX (0, size + shadow_offset_y);
-    c->bottom_corner_space = MAX (0, size - shadow_offset_y);
+    c->left_corner_space   = MAX (0, size - solid_left   + shadow_offset_x);
+    c->right_corner_space  = MAX (0, size - solid_right  - shadow_offset_x);
+    c->top_corner_space    = MAX (0, size - solid_top    + shadow_offset_y);
+    c->bottom_corner_space = MAX (0, size - solid_bottom - shadow_offset_y);
 
     width  = MAX (width, c->left_corner_space + c->right_corner_space);
     height = MAX (height, c->top_corner_space + c->bottom_corner_space);
@@ -976,30 +956,25 @@ decor_create_shadow (Display		    *xdisplay,
 			  0, 0,
 			  d_width, d_height);
 
-	set_no_picture_clip (xdisplay, tmp, d_width, d_height);
-	set_picture_transform (xdisplay, tmp, 0, 0);
-
-	XRenderFreePicture (xdisplay, dst);
 	XFreePixmap (xdisplay, d_pixmap);
-
-	shadow->pixmap  = pixmap;
-	shadow->picture = tmp;
+	shadow->pixmap = pixmap;
     }
     else
     {
-	set_picture_transform (xdisplay, dst, 0, 0);
-
-	XRenderFreePicture (xdisplay, tmp);
 	XFreePixmap (xdisplay, pixmap);
-
-	shadow->pixmap  = d_pixmap;
-	shadow->picture = dst;
+	shadow->pixmap = d_pixmap;
     }
 
-    free (params);
+    XRenderFreePicture (xdisplay, tmp);
+    XRenderFreePicture (xdisplay, dst);
+
+    shadow->picture = XRenderCreatePicture (xdisplay, shadow->pixmap,
+					    format, 0, NULL);
 
     shadow->width  = d_width;
     shadow->height = d_height;
+
+    free (params);
 
     return shadow;
 }
@@ -1015,4 +990,149 @@ decor_destroy_shadow (Display	     *xdisplay,
 	XFreePixmap (xdisplay, shadow->pixmap);
 
     free (shadow);
+}
+
+void
+decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
+					decor_shadow_t  *shadow,
+					decor_context_t *context,
+					Picture	        picture,
+					int	        width,
+					int	        height)
+{
+    static XTransform xident = {
+	{
+	    { 1 << 16, 0,             0 },
+	    { 0,       1 << 16,       0 },
+	    { 0,       0,       1 << 16 },
+	}
+    };
+    int w, h, x2, y2, left, right, top, bottom;
+
+    left   = context->left_space   + context->left_corner_space;
+    right  = context->right_space  + context->right_corner_space;
+    top    = context->top_space    + context->top_corner_space;
+    bottom = context->bottom_space + context->bottom_corner_space;
+
+    if (width - left - right < 0)
+    {
+	left = width / 2;
+	right = width - left;
+    }
+
+    if (height - top - bottom < 0)
+    {
+	top = height / 2;
+	bottom = height - top;
+    }
+
+    w = width - left - right;
+    h = height - top - bottom;
+
+    x2 = width - right;
+    y2 = height - bottom;
+
+    /* top left */
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+		      0, 0,
+		      0, 0,
+		      0, 0,
+		      left, top);
+
+    /* top right */
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+		      shadow->width - right, 0,
+		      0, 0,
+		      x2, 0,
+		      right, top);
+
+    /* bottom left */
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+		      0, shadow->height - bottom,
+		      0, 0,
+		      0, y2,
+		      left, bottom);
+
+    /* bottom right */
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+		      shadow->width - right, shadow->height - bottom,
+		      0, 0,
+		      x2, y2,
+		      right, bottom);
+
+    if (w > 0)
+    {
+	int sw = shadow->width - left - right;
+	int sx = left;
+
+	if (sw != w)
+	{
+	    XTransform t = {
+		{
+		    { (sw << 16) / w,       0, left << 16 },
+		    { 0,              1 << 16,          0 },
+		    { 0,                    0,    1 << 16 },
+		}
+	    };
+
+	    sx = 0;
+
+	    XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+	}
+
+	/* top */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+			  sx, 0,
+			  0, 0,
+			  left, 0,
+			  w, top);
+
+	/* bottom */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+			  sx, shadow->height - bottom,
+			  0, 0,
+			  left, y2,
+			  w, bottom);
+
+	if (sw != w)
+	    XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
+    }
+
+    if (h > 0)
+    {
+	int sh = shadow->height - top - bottom;
+	int sy = top;
+
+	if (sh != h)
+	{
+	    XTransform t = {
+		{
+		    { 1 << 16,              0,         0 },
+		    { 0,       (sh << 16) / h, top << 16 },
+		    { 0,                    0,   1 << 16 },
+		}
+	    };
+
+	    sy = 0;
+
+	    XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+	}
+
+	/* left */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+			  0, sy,
+			  0, 0,
+			  0, top,
+			  left, h);
+
+	/* right */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+			  shadow->width - right, sy,
+			  0, 0,
+			  x2, top,
+			  right, h);
+
+	if (sh != h)
+	    XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
+    }
 }
