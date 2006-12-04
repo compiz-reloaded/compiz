@@ -2871,11 +2871,10 @@ update_window_decoration_actions (WnckWindow *win)
     d->actions = wnck_window_get_actions (win);
 }
 
-static gboolean
-update_window_button_size (WnckWindow *win)
+static void
+calc_button_size (decor_t *d)
 {
-    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
-    gint    button_width;
+    gint button_width;
 
     button_width = 0;
 
@@ -2895,14 +2894,7 @@ update_window_button_size (WnckWindow *win)
     if (button_width)
 	button_width++;
 
-    if (button_width != d->button_width)
-    {
-	d->button_width = button_width;
-
-	return TRUE;
-    }
-
-    return FALSE;
+    d->button_width = button_width;
 }
 
 static gboolean
@@ -2915,6 +2907,8 @@ calc_decoration_size (decor_t *d,
 {
     decor_layout_t layout;
     int		   top_width;
+
+    calc_button_size (d);
 
     if (w < ICON_SPACE + d->button_width)
 	return FALSE;
@@ -2941,6 +2935,40 @@ calc_decoration_size (decor_t *d,
 }
 
 #ifdef USE_METACITY
+
+static void
+meta_calc_button_size (decor_t *d)
+{
+    gint i, min_x, x, y, w, h, width;
+
+    width = d->border_layout.top.x2 - d->border_layout.top.x1 -
+	d->context->extents.left - d->context->extents.right;
+    min_x = width;
+
+    for (i = 0; i < 3; i++)
+    {
+	static guint button_actions[3] = {
+	    WNCK_WINDOW_ACTION_CLOSE,
+	    WNCK_WINDOW_ACTION_MAXIMIZE,
+	    WNCK_WINDOW_ACTION_MINIMIZE
+	};
+
+	if (d->actions & button_actions[i])
+	{
+	    meta_get_button_position (d,
+				      i,
+				      width,
+				      256,
+				      &x, &y, &w, &h);
+
+	    if (x < min_x)
+		min_x = x;
+	}
+    }
+
+    d->button_width = width - min_x;
+}
+
 static gboolean
 meta_calc_decoration_size (decor_t *d,
 			   gint    w,
@@ -2975,6 +3003,8 @@ meta_calc_decoration_size (decor_t *d,
 	d->border_layout = layout;
 	d->context       = context;
 	d->shadow        = shadow;
+
+	meta_calc_button_size (d);
 
 	return TRUE;
     }
@@ -3119,7 +3149,6 @@ add_frame_window (WnckWindow *win,
 	update_window_decoration_state (win);
 	update_window_decoration_actions (win);
 	update_window_decoration_icon (win);
-	update_window_button_size (win);
 	update_window_decoration_size (win);
 
 	update_event_windows (win);
@@ -3444,15 +3473,10 @@ window_actions_changed (WnckWindow *win)
     if (d->decorated)
     {
 	update_window_decoration_actions (win);
-	if (update_window_button_size (win))
-	{
-	    update_window_decoration_size (win);
+	if (update_window_decoration_size (win))
 	    update_event_windows (win);
-	}
 	else
-	{
 	    queue_decor_draw (d);
-	}
     }
 }
 
