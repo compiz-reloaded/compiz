@@ -4032,9 +4032,9 @@ maximizeWindow (CompWindow *w,
     recalcWindowType (w);
     recalcWindowActions (w);
 
-    (*w->screen->windowStateChangeNotify) (w);
-
     updateWindowAttributes (w, FALSE);
+
+    (*w->screen->windowStateChangeNotify) (w);
 
     setWindowState (w->screen->display, w->state, w->id);
 }
