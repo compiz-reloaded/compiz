@@ -725,12 +725,7 @@ setDecorationMatrices (CompWindow *w)
 	wd->quad[i].matrix = wd->decor->texture->texture.matrix;
 
 	x0 = wd->decor->quad[i].m.x0;
-	if (wd->decor->quad[i].align & ALIGN_RIGHT)
-	    x0 -= wd->quad[i].box.x2 - wd->quad[i].box.x1;
-
 	y0 = wd->decor->quad[i].m.y0;
-	if (wd->decor->quad[i].align & ALIGN_BOTTOM)
-	    y0 -= wd->quad[i].box.y2 - wd->quad[i].box.y1;
 
 	wd->quad[i].matrix.x0 += x0 * wd->quad[i].matrix.xx;
 	wd->quad[i].matrix.y0 += y0 * wd->quad[i].matrix.yy;
@@ -740,6 +735,24 @@ setDecorationMatrices (CompWindow *w)
 
 	wd->quad[i].matrix.xx *= wd->decor->quad[i].m.xx;
 	wd->quad[i].matrix.yy *= wd->decor->quad[i].m.yy;
+
+	if (wd->decor->quad[i].align & ALIGN_RIGHT)
+	    x0 = wd->quad[i].box.x2 - wd->quad[i].box.x1;
+	else
+	    x0 = 0.0f;
+
+	if (wd->decor->quad[i].align & ALIGN_BOTTOM)
+	    y0 = wd->quad[i].box.y2 - wd->quad[i].box.y1;
+	else
+	    y0 = 0.0f;
+
+	wd->quad[i].matrix.x0 -=
+	    x0 * wd->quad[i].matrix.xx +
+	    y0 * wd->quad[i].matrix.xy;
+
+	wd->quad[i].matrix.y0 -=
+	    y0 * wd->quad[i].matrix.yy +
+	    x0 * wd->quad[i].matrix.yx;
 
 	wd->quad[i].matrix.x0 -=
 	    wd->quad[i].box.x1 * wd->quad[i].matrix.xx +
