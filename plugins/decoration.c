@@ -472,6 +472,102 @@ decorReleaseTexture (CompScreen   *screen,
     free (texture);
 }
 
+static void
+applyGravity (int gravity,
+	      int x,
+	      int y,
+	      int width,
+	      int height,
+	      int *return_x,
+	      int *return_y)
+{
+    if (gravity & GRAVITY_EAST)
+    {
+	x += width;
+	*return_x = MAX (0, x);
+    }
+    else if (gravity & GRAVITY_WEST)
+    {
+	*return_x = MIN (width, x);
+    }
+    else
+    {
+	x += width / 2;
+	x = MAX (0, x);
+	x = MIN (width, x);
+	*return_x = x;
+    }
+
+    if (gravity & GRAVITY_SOUTH)
+    {
+	y += height;
+	*return_y = MAX (0, y);
+    }
+    else if (gravity & GRAVITY_NORTH)
+    {
+	*return_y = MIN (height, y);
+    }
+    else
+    {
+	y += height / 2;
+	y = MAX (0, y);
+	y = MIN (height, y);
+	*return_y = y;
+    }
+}
+
+static void
+computeQuadBox (Quad *q,
+		int  width,
+		int  height,
+		int  *return_x1,
+		int  *return_y1,
+		int  *return_x2,
+		int  *return_y2)
+{
+    int x1, y1, x2, y2;
+
+    applyGravity (q->p1.gravity, q->p1.x, q->p1.y, width, height, &x1, &y1);
+    applyGravity (q->p2.gravity, q->p2.x, q->p2.y, width, height, &x2, &y2);
+
+    if (q->clamp & CLAMP_HORZ)
+    {
+	if (x1 < 0)
+	    x1 = 0;
+	if (x2 > width)
+	    x2 = width;
+    }
+
+    if (q->clamp & CLAMP_VERT)
+    {
+	if (y1 < 0)
+	    y1 = 0;
+	if (y2 > height)
+	    y2 = height;
+    }
+
+    if (q->maxWidth < x2 - x1)
+    {
+	if (q->align & ALIGN_RIGHT)
+	    x1 = x2 - q->maxWidth;
+	else
+	    x2 = x1 + q->maxWidth;
+    }
+
+    if (q->maxHeight < y2 - y1)
+    {
+	if (q->align & ALIGN_BOTTOM)
+	    y1 = y2 - q->maxHeight;
+	else
+	    y2 = y1 + q->maxHeight;
+    }
+
+    *return_x1 = x1;
+    *return_y1 = y1;
+    *return_x2 = x2;
+    *return_y2 = y2;
+}
+
 /*
   decoration property
   -------------------
@@ -524,6 +620,7 @@ decorCreateDecoration (CompScreen *screen,
     Quad	  *quad;
     int		  nQuad;
     int		  left, right, top, bottom;
+    int		  x1, y1, x2, y2;
     int		  flags;
 
     result = XGetWindowProperty (screen->display->display, id,
@@ -598,7 +695,10 @@ decorCreateDecoration (CompScreen *screen,
     decoration->quad  = quad;
     decoration->nQuad = nQuad;
 
-    left = right = top = bottom = 0;
+    left   = 0;
+    right  = decoration->minWidth;
+    top    = 0;
+    bottom = decoration->minHeight;
 
     while (nQuad--)
     {
@@ -626,14 +726,17 @@ decorCreateDecoration (CompScreen *screen,
 	quad->m.x0 = *prop++;
 	quad->m.y0 = *prop++;
 
-	if (quad->p1.x < left)
-	    left = quad->p1.x;
-	if (quad->p1.y < top)
-	    top = quad->p1.y;
-	if (quad->p2.x > right)
-	    right = quad->p2.x;
-	if (quad->p2.y > bottom)
-	    bottom = quad->p2.y;
+	computeQuadBox (quad, decoration->minWidth, decoration->minHeight,
+			&x1, &y1, &x2, &y2);
+
+	if (x1 < left)
+	    left = x1;
+	if (y1 < top)
+	    top = y1;
+	if (x2 > right)
+	    right = x2;
+	if (y2 > bottom)
+	    bottom = y2;
 
 	quad++;
     }
@@ -641,9 +744,9 @@ decorCreateDecoration (CompScreen *screen,
     XFree (data);
 
     decoration->output.left   = -left;
-    decoration->output.right  = right;
+    decoration->output.right  = right - decoration->minWidth;
     decoration->output.top    = -top;
-    decoration->output.bottom = bottom;
+    decoration->output.bottom = bottom - decoration->minHeight;
 
     decoration->refCount = 1;
 
@@ -765,37 +868,10 @@ setDecorationMatrices (CompWindow *w)
 }
 
 static void
-applyGravity (int gravity,
-	      int x,
-	      int y,
-	      int width,
-	      int height,
-	      int *return_x,
-	      int *return_y)
-{
-    if (gravity & GRAVITY_EAST)
-	*return_x = x + width;
-    else if (gravity & GRAVITY_WEST)
-	*return_x = x;
-    else
-	*return_x = (width >> 1) + x;
-
-    if (gravity & GRAVITY_SOUTH)
-	*return_y = y + height;
-    else if (gravity & GRAVITY_NORTH)
-	*return_y = y;
-    else
-	*return_y = (height >> 1) + y;
-}
-
-static void
 updateWindowDecorationScale (CompWindow *w)
 {
     WindowDecoration *wd;
     int		     x1, y1, x2, y2;
-    int		     maxWidth, maxHeight;
-    int		     align;
-    int		     clamp;
     int		     i;
 
     DECOR_WINDOW (w);
@@ -806,52 +882,8 @@ updateWindowDecorationScale (CompWindow *w)
 
     for (i = 0; i < wd->nQuad; i++)
     {
-	applyGravity (wd->decor->quad[i].p1.gravity,
-		      wd->decor->quad[i].p1.x, wd->decor->quad[i].p1.y,
-		      w->width, w->height,
-		      &x1, &y1);
-
-	applyGravity (wd->decor->quad[i].p2.gravity,
-		      wd->decor->quad[i].p2.x, wd->decor->quad[i].p2.y,
-		      w->width, w->height,
-		      &x2, &y2);
-
-	maxWidth  = wd->decor->quad[i].maxWidth;
-	maxHeight = wd->decor->quad[i].maxHeight;
-	align	  = wd->decor->quad[i].align;
-	clamp	  = wd->decor->quad[i].clamp;
-
-	if (clamp & CLAMP_HORZ)
-	{
-	    if (x1 < 0)
-		x1 = 0;
-	    if (x2 > w->width)
-		x2 = w->width;
-	}
-
-	if (clamp & CLAMP_VERT)
-	{
-	    if (y1 < 0)
-		y1 = 0;
-	    if (y2 > w->height)
-		y2 = w->height;
-	}
-
-	if (maxWidth < x2 - x1)
-	{
-	    if (align & ALIGN_RIGHT)
-		x1 = x2 - maxWidth;
-	    else
-		x2 = x1 + maxWidth;
-	}
-
-	if (maxHeight < y2 - y1)
-	{
-	    if (align & ALIGN_BOTTOM)
-		y1 = y2 - maxHeight;
-	    else
-		y2 = y1 + maxHeight;
-	}
+	computeQuadBox (&wd->decor->quad[i], w->width, w->height,
+			&x1, &y1, &x2, &y2);
 
 	wd->quad[i].box.x1 = x1 + w->attrib.x;
 	wd->quad[i].box.y1 = y1 + w->attrib.y;
