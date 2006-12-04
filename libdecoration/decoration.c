@@ -26,7 +26,7 @@
 
 #include <decoration.h>
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#include <X11/Xregion.h>
 
 /*
   decoration property
@@ -130,7 +130,8 @@ decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      splitY,
 			 int	      splitGravity,
 			 double	      x0,
-			 double	      y0)
+			 double	      y0,
+			 int	      rotation)
 {
     int nQuad = 0;
 
@@ -144,12 +145,23 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q->max_height = top + top_corner;
     q->align	  = ALIGN_TOP;
     q->clamp	  = CLAMP_VERT;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
     q->m.x0	  = x0;
     q->m.y0	  = y0;
+
+    if (rotation)
+    {
+	q->m.xx	= 0.0;
+	q->m.xy	= 1.0;
+	q->m.yx	= 1.0;
+	q->m.yy	= 0.0;
+    }
+    else
+    {
+	q->m.xx	= 1.0;
+	q->m.xy	= 0.0;
+	q->m.yx	= 0.0;
+	q->m.yy	= 1.0;
+    }
 
     q++; nQuad++;
 
@@ -163,12 +175,25 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q->max_height = SHRT_MAX;
     q->align	  = 0;
     q->clamp	  = CLAMP_VERT;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 0.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0 + top + top_corner;
+
+    if (rotation)
+    {
+	q->m.xx	= 0.0;
+	q->m.xy	= 0.0;
+	q->m.yx	= 1.0;
+	q->m.yy	= 0.0;
+	q->m.x0	= x0 + top + top_corner;
+	q->m.y0	= y0;
+    }
+    else
+    {
+	q->m.xx	= 1.0;
+	q->m.xy	= 0.0;
+	q->m.yx	= 0.0;
+	q->m.yy	= 0.0;
+	q->m.x0	= x0;
+	q->m.y0	= y0 + top + top_corner;
+    }
 
     q++; nQuad++;
 
@@ -182,12 +207,25 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q->max_height = bottom_corner + bottom;
     q->align	  = ALIGN_BOTTOM;
     q->clamp	  = CLAMP_VERT;
-    q->m.xx	  = 1.0;
-    q->m.xy	  = 0.0;
-    q->m.yx	  = 0.0;
-    q->m.yy	  = 1.0;
-    q->m.x0	  = x0;
-    q->m.y0	  = y0 + height;
+
+    if (rotation)
+    {
+	q->m.xx	= 0.0;
+	q->m.xy	= 1.0;
+	q->m.yx	= 1.0;
+	q->m.yy	= 0.0;
+	q->m.x0	= x0 + height;
+	q->m.y0	= y0;
+    }
+    else
+    {
+	q->m.xx	= 1.0;
+	q->m.xy	= 0.0;
+	q->m.yx	= 0.0;
+	q->m.yy	= 1.0;
+	q->m.x0	= x0;
+	q->m.y0	= y0 + height;
+    }
 
     nQuad++;
 
@@ -272,14 +310,24 @@ decor_set_horz_quad_line (decor_quad_t *q,
 }
 
 int
-decor_set_lSrS_window_quads (decor_context_t *c,
-			     decor_quad_t    *q,
-			     int	     width,
-			     int	     height)
+decor_set_lSrS_window_quads (decor_quad_t    *q,
+			     decor_context_t *c,
+			     decor_layout_t  *l)
 {
-    int splitY, n, nQuad = 0;
+    int lh, rh, splitY, n, nQuad = 0;
 
     splitY = (c->top_corner_space - c->bottom_corner_space) / 2;
+
+    if (l->rotation)
+    {
+	lh = l->left.x2 - l->left.x1;
+	rh = l->right.x2 - l->right.x1;
+    }
+    else
+    {
+	lh = l->left.y2 - l->left.y1;
+	rh = l->right.y2 - l->right.y1;
+    }
 
     /* left quads */
     n = decor_set_vert_quad_row (q,
@@ -290,11 +338,12 @@ decor_set_lSrS_window_quads (decor_context_t *c,
 				 -c->left_space,
 				 0,
 				 GRAVITY_WEST,
-				 height - c->top_space - c->bottom_space,
+				 lh,
 				 splitY,
 				 0,
-				 0.0,
-				 c->top_space + 1.0);
+				 l->left.x1,
+				 l->left.y1,
+				 l->rotation);
 
     q += n; nQuad += n;
 
@@ -307,11 +356,12 @@ decor_set_lSrS_window_quads (decor_context_t *c,
 				 0,
 				 c->right_space,
 				 GRAVITY_EAST,
-				 height - c->top_space - c->bottom_space,
+				 rh,
 				 splitY,
 				 0,
-				 width - c->right_space,
-				 c->top_space + 1.0);
+				 l->right.x1,
+				 l->right.y1,
+				 l->rotation);
 
     nQuad += n;
 
@@ -319,10 +369,9 @@ decor_set_lSrS_window_quads (decor_context_t *c,
 }
 
 int
-decor_set_lSrStSbS_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int	         width,
-				 int	         height)
+decor_set_lSrStSbS_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l)
 {
     int splitX, n, nQuad = 0;
 
@@ -337,15 +386,15 @@ decor_set_lSrStSbS_window_quads (decor_context_t *c,
 				  -c->top_space,
 				  0,
 				  GRAVITY_NORTH,
-				  width,
+				  l->top.x2 - l->top.x1,
 				  splitX,
 				  0,
-				  0.0,
-				  0.0);
+				  l->top.x1,
+				  l->top.y1);
 
     q += n; nQuad += n;
 
-    n = decor_set_lSrS_window_quads (c, q, width, height);
+    n = decor_set_lSrS_window_quads (q, c, l);
 
     q += n; nQuad += n;
 
@@ -358,11 +407,11 @@ decor_set_lSrStSbS_window_quads (decor_context_t *c,
 				  0,
 				  c->bottom_space,
 				  GRAVITY_SOUTH,
-				  width,
+				  l->bottom.x2 - l->bottom.x1,
 				  splitX,
 				  0,
-				  0.0,
-				  height - c->bottom_space);
+				  l->bottom.x1,
+				  l->bottom.y1);
 
     nQuad += n;
 
@@ -370,49 +419,19 @@ decor_set_lSrStSbS_window_quads (decor_context_t *c,
 }
 
 int
-decor_set_lSrStXbS_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int		 width,
-				 int		 height,
+decor_set_lSrStXbS_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l,
 				 int		 top_stretch_offset)
 {
-    int    splitX, n, nQuad = 0;
-    int    top_left, top_right, y;
-    double y0;
+    int splitX, n, nQuad = 0;
+    int top_left, top_right;
 
     splitX = (c->left_corner_space - c->right_corner_space) / 2;
 
     top_left  = top_stretch_offset;
-    top_right = width - c->left_space - c->right_space - top_left - 1;
-
-    /* if we need a separate line for the shadow */
-    if (c->left_corner_space > top_left || c->right_corner_space > top_right)
-    {
-	y  = -c->extents.top;
-	y0 = c->top_space - c->extents.top;
-
-	/* top quads */
-	n = decor_set_horz_quad_line (q,
-				      c->left_space,
-				      c->left_corner_space,
-				      c->right_space,
-				      c->right_corner_space,
-				      -c->top_space,
-				      y,
-				      GRAVITY_NORTH,
-				      width,
-				      splitX,
-				      0,
-				      0.0,
-				      0.0);
-
-	q += n; nQuad += n;
-    }
-    else
-    {
-	y  = -c->top_space;
-	y0 = 0.0;
-    }
+    top_right = l->top.x2 - l->top.x1 -
+	c->left_space - c->right_space - top_left - 1;
 
     /* top quads */
     n = decor_set_horz_quad_line (q,
@@ -420,18 +439,18 @@ decor_set_lSrStXbS_window_quads (decor_context_t *c,
 				  top_left,
 				  c->right_space,
 				  top_right,
-				  y,
+				  -c->top_space,
 				  0,
 				  GRAVITY_NORTH,
-				  width,
+				  l->top.x2 - l->top.x1,
 				  top_left,
 				  GRAVITY_WEST,
-				  0.0,
-				  y0);
+				  l->top.x1,
+				  l->top.y1);
 
     q += n; nQuad += n;
 
-    n = decor_set_lSrS_window_quads (c, q, width, height);
+    n = decor_set_lSrS_window_quads (q, c, l);
 
     q += n; nQuad += n;
 
@@ -444,11 +463,11 @@ decor_set_lSrStXbS_window_quads (decor_context_t *c,
 				  0,
 				  c->bottom_space,
 				  GRAVITY_SOUTH,
-				  width,
+				  l->bottom.x2 - l->bottom.x1,
 				  splitX,
 				  0,
-				  0.0,
-				  height - c->bottom_space);
+				  l->bottom.x1,
+				  l->bottom.y1);
 
     nQuad += n;
 
@@ -456,10 +475,9 @@ decor_set_lSrStXbS_window_quads (decor_context_t *c,
 }
 
 int
-decor_set_lSrStSbN_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int		 width,
-				 int		 height,
+decor_set_lSrStSbX_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l,
 				 int		 bottom_stretch_offset)
 {
     int splitX, n, nQuad = 0;
@@ -468,7 +486,8 @@ decor_set_lSrStSbN_window_quads (decor_context_t *c,
     splitX = (c->left_corner_space - c->right_corner_space) / 2;
 
     bottom_left  = bottom_stretch_offset;
-    bottom_right = width - c->left_space - c->right_space - bottom_left - 1;
+    bottom_right = l->bottom.x2 - l->bottom.x1 -
+	c->left_space - c->right_space - bottom_left - 1;
 
     /* top quads */
     n = decor_set_horz_quad_line (q,
@@ -479,15 +498,15 @@ decor_set_lSrStSbN_window_quads (decor_context_t *c,
 				  -c->top_space,
 				  0,
 				  GRAVITY_NORTH,
-				  width,
+				  l->top.x2 - l->top.x1,
 				  splitX,
 				  0,
-				  0.0,
-				  0.0);
+				  l->top.x1,
+				  l->top.y1);
 
     q += n; nQuad += n;
 
-    n = decor_set_lSrS_window_quads (c, q, width, height);
+    n = decor_set_lSrS_window_quads (q, c, l);
 
     q += n; nQuad += n;
 
@@ -500,11 +519,125 @@ decor_set_lSrStSbN_window_quads (decor_context_t *c,
 				  0,
 				  c->bottom_space,
 				  GRAVITY_SOUTH,
-				  width,
+				  l->bottom.x2 - l->bottom.x1,
 				  bottom_left,
 				  GRAVITY_WEST,
-				  0.0,
-				  height - c->bottom_space);
+				  l->bottom.x1,
+				  l->bottom.y1);
+
+    nQuad += n;
+
+    return nQuad;
+}
+
+int
+decor_set_lXrXtXbX_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l,
+				 int		 left_stretch_offset,
+				 int		 right_stretch_offset,
+				 int		 top_stretch_offset,
+				 int		 bottom_stretch_offset)
+{
+    int lh, rh, n, nQuad = 0;
+    int left_top, left_bottom;
+    int right_top, right_bottom;
+    int top_left, top_right;
+    int bottom_left, bottom_right;
+
+    top_left  = top_stretch_offset;
+    top_right = l->top.x2 - l->top.x1 -
+	c->left_space - c->right_space - top_left - 1;
+
+    bottom_left  = bottom_stretch_offset;
+    bottom_right = l->bottom.x2 - l->bottom.x1 -
+	c->left_space - c->right_space - bottom_left - 1;
+
+    if (l->rotation)
+    {
+	lh = l->left.x2 - l->left.x1;
+	rh = l->right.x2 - l->right.x1;
+    }
+    else
+    {
+	lh = l->left.y2 - l->left.y1;
+	rh = l->right.y2 - l->right.y1;
+    }
+
+    left_top    = left_stretch_offset;
+    left_bottom = lh - left_top - 1;
+
+    right_top    = right_stretch_offset;
+    right_bottom = rh - right_top - 1;
+
+
+    /* top quads */
+    n = decor_set_horz_quad_line (q,
+				  c->left_space,
+				  top_left,
+				  c->right_space,
+				  top_right,
+				  -c->top_space,
+				  0,
+				  GRAVITY_NORTH,
+				  l->top.x2 - l->top.x1,
+				  top_left,
+				  GRAVITY_WEST,
+				  l->top.x1,
+				  l->top.y1);
+
+    q += n; nQuad += n;
+
+    /* left quads */
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 left_top,
+				 0,
+				 left_bottom,
+				 -c->left_space,
+				 0,
+				 GRAVITY_WEST,
+				 lh,
+				 left_top,
+				 GRAVITY_NORTH,
+				 l->left.x1,
+				 l->left.y1,
+				 l->rotation);
+
+    q += n; nQuad += n;
+
+    /* right quads */
+    n = decor_set_vert_quad_row (q,
+				 0,
+				 right_top,
+				 0,
+				 right_bottom,
+				 0,
+				 c->right_space,
+				 GRAVITY_EAST,
+				 rh,
+				 right_top,
+				 GRAVITY_NORTH,
+				 l->right.x1,
+				 l->right.y1,
+				 l->rotation);
+
+    q += n; nQuad += n;
+
+    /* bottom quads */
+    n = decor_set_horz_quad_line (q,
+				  c->left_space,
+				  bottom_left,
+				  c->right_space,
+				  bottom_right,
+				  0,
+				  c->bottom_space,
+				  GRAVITY_SOUTH,
+				  l->bottom.x2 - l->bottom.x1,
+				  bottom_left,
+				  GRAVITY_WEST,
+				  l->bottom.x1,
+				  l->bottom.y1);
 
     nQuad += n;
 
@@ -773,10 +906,10 @@ decor_create_shadow (Display		    *xdisplay,
     c->top_space    = MAX (top,    c->top_space);
     c->bottom_space = MAX (bottom, c->bottom_space);
 
-    c->left_corner_space   = MAX (0, size - solid_left   + shadow_offset_x);
-    c->right_corner_space  = MAX (0, size - solid_right  - shadow_offset_x);
-    c->top_corner_space    = MAX (0, size - solid_top    + shadow_offset_y);
-    c->bottom_corner_space = MAX (0, size - solid_bottom - shadow_offset_y);
+    c->left_corner_space   = MAX (1, size - solid_left   + shadow_offset_x);
+    c->right_corner_space  = MAX (1, size - solid_right  - shadow_offset_x);
+    c->top_corner_space    = MAX (1, size - solid_top    + shadow_offset_y);
+    c->bottom_corner_space = MAX (1, size - solid_bottom - shadow_offset_y);
 
     width  = MAX (width, c->left_corner_space + c->right_corner_space);
     height = MAX (height, c->top_corner_space + c->bottom_corner_space);
@@ -991,21 +1124,243 @@ decor_destroy_shadow (Display	     *xdisplay,
 }
 
 void
+decor_get_default_layout (decor_context_t *c,
+			  int	          width,
+			  int	          height,
+			  decor_layout_t  *layout)
+{
+    width  = MAX (width, c->left_corner_space + c->right_corner_space);
+    height = MAX (height, c->top_corner_space + c->bottom_corner_space);
+
+    width += c->left_space + c->right_space;
+
+    layout->top.x1  = 0;
+    layout->top.y1  = 0;
+    layout->top.x2  = width;
+    layout->top.y2  = c->top_space;
+    layout->top.pad = 0;
+
+    layout->left.x1  = 0;
+    layout->left.y1  = c->top_space;
+    layout->left.x2  = c->left_space;
+    layout->left.y2  = c->top_space + height;
+    layout->left.pad = 0;
+
+    layout->right.x1  = width - c->right_space;
+    layout->right.y1  = c->top_space;
+    layout->right.x2  = width;
+    layout->right.y2  = c->top_space + height;
+    layout->right.pad = 0;
+
+    layout->bottom.x1  = 0;
+    layout->bottom.y1  = height + c->top_space;
+    layout->bottom.x2  = width;
+    layout->bottom.y2  = height + c->top_space + c->bottom_space;
+    layout->bottom.pad = 0;
+
+    layout->width  = width;
+    layout->height = height + c->top_space + c->bottom_space;
+
+    layout->rotation = 0;
+}
+
+void
+decor_get_best_layout (decor_context_t *c,
+		       int	       width,
+		       int	       height,
+		       decor_layout_t  *layout)
+{
+    int y;
+
+    /* use default layout when no left and right extents */
+    if (c->extents.left == 0 && c->extents.right == 0)
+    {
+	decor_get_default_layout (c, width, 1, layout);
+	return;
+    }
+
+    width  = MAX (width, c->left_corner_space + c->right_corner_space);
+    height = MAX (height, c->top_corner_space + c->bottom_corner_space);
+
+    width += c->left_space + c->right_space;
+
+    if (width >= (height + 2))
+    {
+	int max;
+
+	layout->width = width;
+
+	layout->top.x1 = 0;
+	layout->top.y1 = 0;
+	layout->top.x2 = width;
+	layout->top.y2 = c->top_space;
+
+	y = c->top_space;
+
+	max = MAX (c->left_space, c->right_space);
+	if (max < height)
+	{
+	    layout->rotation = 1;
+
+	    y += 2;
+
+	    layout->top.pad    = PAD_BOTTOM;
+	    layout->bottom.pad = PAD_TOP;
+	    layout->left.pad   = PAD_TOP | PAD_BOTTOM | PAD_LEFT | PAD_RIGHT;
+	    layout->right.pad  = PAD_TOP | PAD_BOTTOM | PAD_LEFT | PAD_RIGHT;
+
+	    layout->left.x1 = 1;
+	    layout->left.y1 = y;
+	    layout->left.x2 = 1 + height;
+	    layout->left.y2 = y + c->left_space;
+
+	    if ((height + 2) <= (width / 2))
+	    {
+		layout->right.x1 = height + 3;
+		layout->right.y1 = y;
+		layout->right.x2 = height + 3 + height;
+		layout->right.y2 = y + c->right_space;
+
+		y += max + 2;
+	    }
+	    else
+	    {
+		y += c->left_space + 2;
+
+		layout->right.x1 = 1;
+		layout->right.y1 = y;
+		layout->right.x2 = 1 + height;
+		layout->right.y2 = y + c->right_space;
+
+		y += c->right_space + 2;
+	    }
+	}
+	else
+	{
+	    layout->top.pad    = 0;
+	    layout->bottom.pad = 0;
+	    layout->left.pad   = 0;
+	    layout->right.pad  = 0;
+
+	    layout->left.x1 = 0;
+	    layout->left.y1 = y;
+	    layout->left.x2 = c->left_space;
+	    layout->left.y2 = y + height;
+
+	    layout->right.x1 = width - c->right_space;
+	    layout->right.y1 = y;
+	    layout->right.x2 = width;
+	    layout->right.y2 = y + height;
+
+	    y += height;
+	}
+
+	layout->bottom.x1 = 0;
+	layout->bottom.y1 = y;
+	layout->bottom.x2 = width;
+	layout->bottom.y2 = y + c->bottom_space;
+
+	y += c->bottom_space;
+    }
+    else
+    {
+	layout->rotation = 1;
+
+	layout->left.pad   = PAD_TOP | PAD_BOTTOM | PAD_LEFT | PAD_RIGHT;
+	layout->right.pad  = PAD_TOP | PAD_BOTTOM | PAD_LEFT | PAD_RIGHT;
+
+	layout->top.x1 = 0;
+	layout->top.y1 = 0;
+	layout->top.x2 = width;
+	layout->top.y2 = c->top_space;
+
+	if (((width * 2) + 3) <= (height + 2))
+	{
+	    layout->width = height + 2;
+
+	    layout->top.pad    = PAD_BOTTOM | PAD_RIGHT;
+	    layout->bottom.pad = PAD_TOP | PAD_BOTTOM | PAD_RIGHT | PAD_LEFT;
+
+	    layout->bottom.x1 = width + 2;
+	    layout->bottom.y1 = 1;
+	    layout->bottom.x2 = width + 2 + width;
+	    layout->bottom.y2 = 1 + c->bottom_space;
+
+	    y = MAX (c->top_space, 1 + c->bottom_space) + 2;
+
+	    layout->left.x1 = 1;
+	    layout->left.y1 = y;
+	    layout->left.x2 = 1 + height;
+	    layout->left.y2 = y + c->left_space;
+
+	    y += c->left_space + 2;
+
+	    layout->right.x1 = 1;
+	    layout->right.y1 = y;
+	    layout->right.x2 = 1 + height;
+	    layout->right.y2 = y + c->right_space;
+
+	    y += c->right_space;
+	}
+	else
+	{
+	    layout->width = height + 2;
+
+	    layout->top.pad    = PAD_BOTTOM | PAD_RIGHT;
+	    layout->bottom.pad = PAD_TOP | PAD_RIGHT;
+
+	    y = c->top_space + 2;
+
+	    layout->left.x1 = 1;
+	    layout->left.y1 = y;
+	    layout->left.x2 = 1 + height;
+	    layout->left.y2 = y + c->left_space;
+
+	    y += c->left_space + 2;
+
+	    layout->right.x1 = 1;
+	    layout->right.y1 = y;
+	    layout->right.x2 = 1 + height;
+	    layout->right.y2 = y + c->right_space;
+
+	    y += c->right_space + 2;
+
+	    layout->bottom.x1 = 0;
+	    layout->bottom.y1 = y;
+	    layout->bottom.x2 = width;
+	    layout->bottom.y2 = y + c->bottom_space;
+
+	    y += c->bottom_space;
+	}
+    }
+
+    layout->height = y;
+}
+
+static XTransform xident = {
+    {
+	{ 1 << 16, 0,             0 },
+	{ 0,       1 << 16,       0 },
+	{ 0,       0,       1 << 16 },
+    }
+};
+
+void
 decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 					decor_shadow_t  *shadow,
 					decor_context_t *context,
 					Picture	        picture,
-					int	        width,
-					int	        height)
+					decor_layout_t  *layout)
 {
-    static XTransform xident = {
-	{
-	    { 1 << 16, 0,             0 },
-	    { 0,       1 << 16,       0 },
-	    { 0,       0,       1 << 16 },
-	}
-    };
-    int w, h, x2, y2, left, right, top, bottom;
+    int w, h, x2, y2, left, right, top, bottom, width, height;
+
+    width = layout->top.x2 - layout->top.x1;
+    if (layout->rotation)
+	height = layout->left.x2 - layout->left.x1;
+    else
+	height = layout->left.y2 - layout->left.y1;
+
+    height += context->top_space + context->bottom_space;
 
     left   = context->left_space   + context->left_corner_space;
     right  = context->right_space  + context->right_corner_space;
@@ -1031,32 +1386,33 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
     y2 = height - bottom;
 
     /* top left */
-    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
 		      0, 0,
 		      0, 0,
-		      0, 0,
-		      left, top);
+		      layout->top.x1, layout->top.y1,
+		      left, context->top_space);
 
     /* top right */
-    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
 		      shadow->width - right, 0,
 		      0, 0,
-		      x2, 0,
-		      right, top);
+		      layout->top.x2 - right, layout->top.y1,
+		      right, context->top_space);
 
     /* bottom left */
-    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
-		      0, shadow->height - bottom,
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+		      0, shadow->height - context->bottom_space,
 		      0, 0,
-		      0, y2,
-		      left, bottom);
+		      layout->bottom.x1, layout->bottom.y1,
+		      left, context->bottom_space);
 
     /* bottom right */
-    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
-		      shadow->width - right, shadow->height - bottom,
+    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+		      shadow->width - right,
+		      shadow->height - context->bottom_space,
 		      0, 0,
-		      x2, y2,
-		      right, bottom);
+		      layout->bottom.x2 - right, layout->bottom.y1,
+		      right, context->bottom_space);
 
     if (w > 0)
     {
@@ -1068,8 +1424,8 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 	    XTransform t = {
 		{
 		    { (sw << 16) / w,       0, left << 16 },
-		    { 0,              1 << 16,          0 },
-		    { 0,                    0,    1 << 16 },
+		    {              0, 1 << 16,          0 },
+		    {              0,       0,    1 << 16 },
 		}
 	    };
 
@@ -1079,299 +1435,752 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 	}
 
 	/* top */
-	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
 			  sx, 0,
 			  0, 0,
-			  left, 0,
-			  w, top);
+			  layout->top.x1 + left, layout->top.y1,
+			  w, context->top_space);
 
 	/* bottom */
-	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
-			  sx, shadow->height - bottom,
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  sx, shadow->height - context->bottom_space,
 			  0, 0,
-			  left, y2,
-			  w, bottom);
+			  layout->bottom.x1 + left, layout->bottom.y1,
+			  w, context->bottom_space);
 
 	if (sw != w)
 	    XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
     }
 
+    if (layout->rotation)
+    {
+	XTransform t = {
+	    {
+		{       0, 1 << 16,       0 },
+		{ 1 << 16,       0,       0 },
+		{       0,       0, 1 << 16 }
+	    }
+	};
+
+	t.matrix[1][2] = context->top_space << 16;
+
+	XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+
+	/* left top */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  0, 0,
+			  0, 0,
+			  layout->left.x1,
+			  layout->left.y1,
+			  top - context->top_space, context->left_space);
+
+	t.matrix[0][2] = (shadow->width - context->right_space) << 16;
+
+	XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+
+	/* right top */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  0, 0,
+			  0, 0,
+			  layout->right.x1,
+			  layout->right.y1,
+			  top - context->top_space, context->right_space);
+
+	XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
+    }
+    else
+    {
+	/* left top */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  0, context->top_space,
+			  0, 0,
+			  layout->left.x1, layout->left.y1,
+			  context->left_space, top - context->top_space);
+
+	/* right top */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  shadow->width - context->right_space,
+			  context->top_space,
+			  0, 0,
+			  layout->right.x1, layout->right.y1,
+			  context->right_space, top - context->top_space);
+    }
+
+    if (layout->rotation)
+    {
+	XTransform t = {
+	    {
+		{       0, 1 << 16,       0 },
+		{ 1 << 16,       0,       0 },
+		{       0,       0, 1 << 16 }
+	    }
+	};
+
+	t.matrix[1][2] = (shadow->height - bottom) << 16;
+
+	XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+
+	/* left bottom */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  0, 0,
+			  0, 0,
+			  layout->left.x2 - (bottom - context->bottom_space),
+			  layout->left.y1,
+			  bottom - context->bottom_space, context->left_space);
+
+	t.matrix[0][2] = (shadow->width - context->right_space) << 16;
+
+	XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+
+	/* right bottom */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  0, 0,
+			  0, 0,
+			  layout->right.x2 - (bottom - context->bottom_space),
+			  layout->right.y1,
+			  bottom - context->bottom_space, context->right_space);
+
+	XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
+    }
+    else
+    {
+	/* left bottom */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  0, shadow->height - bottom,
+			  0, 0,
+			  layout->left.x1,
+			  layout->left.y2 - (bottom - context->bottom_space),
+			  context->left_space, bottom - context->bottom_space);
+
+	/* right bottom */
+	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			  shadow->width - context->right_space,
+			  shadow->height - bottom,
+			  0, 0,
+			  layout->right.x1,
+			  layout->right.y2 - (bottom - context->bottom_space),
+			  context->right_space, bottom - context->bottom_space);
+    }
+
     if (h > 0)
     {
 	int sh = shadow->height - top - bottom;
-	int sy = top;
 
-	if (sh != h)
+	if (layout->rotation)
 	{
 	    XTransform t = {
 		{
-		    { 1 << 16,              0,         0 },
-		    { 0,       (sh << 16) / h, top << 16 },
-		    { 0,                    0,   1 << 16 },
+		    {              0, 1 << 16,       0 },
+		    { (sh << 16) / h,       0,       0 },
+		    {              0,       0, 1 << 16 }
 		}
 	    };
 
-	    sy = 0;
+	    t.matrix[1][2] = top << 16;
 
 	    XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
-	}
 
-	/* left */
-	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
-			  0, sy,
-			  0, 0,
-			  0, top,
-			  left, h);
+	    /* left */
+	    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			      0, 0,
+			      0, 0,
+			      layout->left.x1 + (top - context->top_space),
+			      layout->left.y1,
+			      h, context->left_space);
 
-	/* right */
-	XRenderComposite (xdisplay, PictOpSrc, shadow->picture, None, picture,
-			  shadow->width - right, sy,
-			  0, 0,
-			  x2, top,
-			  right, h);
+	    t.matrix[0][2] = (shadow->width - context->right_space) << 16;
 
-	if (sh != h)
+	    XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+
+	    /* right */
+	    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			      0, 0,
+			      0, 0,
+			      layout->right.x1 + (top - context->top_space),
+			      layout->right.y1,
+			      h, context->right_space);
+
 	    XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
+
+	}
+	else
+	{
+	    int sy = top;
+
+	    if (sh != h)
+	    {
+		XTransform t = {
+		    {
+			{ 1 << 16,              0,         0 },
+			{       0, (sh << 16) / h, top << 16 },
+			{       0,              0,   1 << 16 },
+		    }
+		};
+
+		sy = 0;
+
+		XRenderSetPictureTransform (xdisplay, shadow->picture, &t);
+	    }
+
+	    /* left */
+	    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			      0, sy,
+			      0, 0,
+			      layout->left.x1,
+			      layout->left.y1 + (top - context->top_space),
+			      context->left_space, h);
+
+	    /* right */
+	    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
+			      shadow->width - right, sy,
+			      0, 0,
+			      layout->right.x2 - context->right_space,
+			      layout->right.y1 + (top - context->top_space),
+			      context->right_space, h);
+
+	    if (sh != h)
+		XRenderSetPictureTransform (xdisplay, shadow->picture, &xident);
+	}
     }
 }
 
-void
-decor_blend_transform_picture (Display	       *xdisplay,
-			       decor_context_t *context,
-			       Picture	       src,
-			       int	       xSrc,
-			       int	       ySrc,
-			       Picture	       dst,
-			       int	       width,
-			       int	       height,
-			       Region	       region,
-			       unsigned short  alpha,
-			       int	       shade_alpha)
+static void
+_decor_pad_border_picture (Display     *xdisplay,
+			   Picture     dst,
+			   decor_box_t *box)
+{
+    int x1, y1, x2, y2;
+
+    x1 = box->x1;
+    y1 = box->y1;
+    x2 = box->x2;
+    y2 = box->y2;
+
+    if (box->pad & PAD_TOP)
+    {
+	XRenderComposite (xdisplay, PictOpSrc, dst, None, dst,
+			  x1, y1,
+			  0, 0,
+			  x1, y1 - 1,
+			  x2 - x1, 1);
+
+	y1--;
+    }
+
+    if (box->pad & PAD_BOTTOM)
+    {
+	XRenderComposite (xdisplay, PictOpSrc, dst, None, dst,
+			  x1, y2 - 1,
+			  0, 0,
+			  x1, y2,
+			  x2 - x1, 1);
+
+	y2++;
+    }
+
+    if (box->pad & PAD_LEFT)
+    {
+	XRenderComposite (xdisplay, PictOpSrc, dst, None, dst,
+			  x1, y1,
+			  0, 0,
+			  x1 - 1, y1,
+			  1, y2 - y1);
+    }
+
+    if (box->pad & PAD_RIGHT)
+    {
+	XRenderComposite (xdisplay, PictOpSrc, dst, None, dst,
+			  x2 - 1, y1,
+			  0, 0,
+			  x2, y1,
+			  1, y2 - y1);
+    }
+}
+
+static void
+_decor_blend_horz_border_picture (Display	  *xdisplay,
+				  decor_context_t *context,
+				  Picture	  src,
+				  int	          xSrc,
+				  int	          ySrc,
+				  Picture	  dst,
+				  decor_layout_t  *layout,
+				  Region	  region,
+				  unsigned short  alpha,
+				  int	          shade_alpha,
+				  int		  x1,
+				  int		  y1,
+				  int		  x2,
+				  int		  y2,
+				  int		  dy,
+				  int		  direction)
 {
     XRenderColor color[3] = {
 	{ 0xffff, 0xffff, 0xffff, 0xffff },
 	{  alpha,  alpha,  alpha,  alpha }
     };
+    int		 op = PictOpSrc;
+    int		 left, right;
 
+    left   = context->extents.left;
+    right  = context->extents.right;
+
+    XOffsetRegion (region, x1, y1);
     XRenderSetPictureClipRegion (xdisplay, dst, region);
+    XOffsetRegion (region, -x1, -y1);
 
-    if (shade_alpha)
+    if (alpha != 0xffff)
     {
-	static XFixed	stop[2] = { 0, 1 << 16 };
-	XTransform      transform = {
+	op = PictOpIn;
+
+	if (shade_alpha)
+	{
+	    static XFixed	     stop[2] = { 0, 1 << 16 };
+	    XTransform		     transform = {
+		{
+		    { 1 << 16,       0,       0 },
+		    {       0, 1 << 16,       0 },
+		    {       0,       0, 1 << 16 }
+		}
+	    };
+	    Picture		     grad;
+	    XLinearGradient	     linear;
+	    XRadialGradient	     radial;
+	    XRenderPictureAttributes attrib;
+
+	    attrib.repeat = RepeatPad;
+
+	    radial.inner.x	= 0;
+	    radial.inner.y	= 0;
+	    radial.inner.radius = 0;
+	    radial.outer.x	= 0;
+	    radial.outer.y	= 0;
+
+	    /* left */
+	    radial.outer.radius = left << 16;
+
+	    grad = XRenderCreateRadialGradient (xdisplay,
+						&radial,
+						stop,
+						color,
+						2);
+
+	    transform.matrix[1][1] = (left << 16) / dy;
+	    transform.matrix[0][2] = -left << 16;
+
+	    if (direction < 0)
+		transform.matrix[1][2] = -left << 16;
+
+	    XRenderSetPictureTransform (xdisplay, grad, &transform);
+	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
+
+	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			      0, 0,
+			      0, 0,
+			      x1, y1,
+			      left, dy);
+
+	    XRenderFreePicture (xdisplay, grad);
+
+	    /* middle */
+	    linear.p1.x = 0;
+	    linear.p2.x = 0;
+
+	    if (direction > 0)
 	    {
-		{ 1 << 16,       0,       0 },
-		{       0, 1 << 16,       0 },
-		{        0,      0, 1 << 16 }
+		linear.p1.y = 0;
+		linear.p2.y = dy << 16;
 	    }
-	};
-	Picture         grad;
-	XLinearGradient linear;
-	XRadialGradient radial;
+	    else
+	    {
+		linear.p1.y = dy << 16;
+		linear.p2.y = 0;
+	    }
 
-	radial.inner.x	    = 0;
-	radial.inner.y	    = 0;
-	radial.inner.radius = 0;
-	radial.outer.x	    = 0;
-	radial.outer.y	    = 0;
+	    grad = XRenderCreateLinearGradient (xdisplay,
+						&linear,
+						stop,
+						color,
+						2);
 
-	/* top left */
-	radial.outer.radius = context->extents.left << 16;
+	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
 
-	grad = XRenderCreateRadialGradient (xdisplay,
-					    &radial,
-					    stop,
-					    color,
-					    2);
+	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			      0, 0,
+			      0, 0,
+			      x1 + left, y1,
+			      (x2 - x1) - left - right, dy);
 
-	transform.matrix[1][1] = (context->extents.left << 16) /
-	    context->extents.top;
-	transform.matrix[0][2] = -context->extents.left << 16;
-	transform.matrix[1][2] = -context->extents.left << 16;
+	    XRenderFreePicture (xdisplay, grad);
 
-	XRenderSetPictureTransform (xdisplay, grad, &transform);
+	    /* right */
+	    radial.outer.radius = right << 16;
 
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  context->left_space - context->extents.left,
-			  context->top_space - context->extents.top,
-			  context->extents.left, context->extents.top);
+	    grad = XRenderCreateRadialGradient (xdisplay,
+						&radial,
+						stop,
+						color,
+						2);
 
-	XRenderFreePicture (xdisplay, grad);
+	    transform.matrix[1][1] = (right << 16) / dy;
+	    transform.matrix[0][2] = 1 << 16;
 
-	/* top */
-	linear.p1.x = 0;
-	linear.p1.y = context->extents.top << 16;
-	linear.p2.x = 0;
-	linear.p2.y = 0;
+	    if (direction < 0)
+		transform.matrix[1][2] = -right << 16;
 
-	grad = XRenderCreateLinearGradient (xdisplay,
-					    &linear,
-					    stop,
-					    color,
-					    2);
+	    XRenderSetPictureTransform (xdisplay, grad, &transform);
+	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
 
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  context->left_space,
-			  context->top_space - context->extents.top,
-			  width - context->left_space - context->right_space,
-			  context->extents.top);
+	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			      0, 0,
+			      0, 0,
+			      x2 - right, y1,
+			      right, dy);
 
-	XRenderFreePicture (xdisplay, grad);
+	    XRenderFreePicture (xdisplay, grad);
+	}
+	else
+	{
+	    XRenderFillRectangle (xdisplay, PictOpSrc, dst, &color[1],
+				  x1, y1, x2 - x1, y2 - y1);
+	}
+    }
 
-	/* top right */
-	radial.outer.radius = context->extents.right << 16;
+    XRenderComposite (xdisplay, op, src, None, dst,
+		      -xSrc, -ySrc,
+		      0, 0,
+		      x1, y1,
+		      x2 - x1, y2 - y1);
 
-	grad = XRenderCreateRadialGradient (xdisplay,
-					    &radial,
-					    stop,
-					    color,
-					    2);
+    set_no_picture_clip (xdisplay, dst);
+}
 
-	transform.matrix[1][1] = (context->extents.right << 16) /
-	    context->extents.top;
-	transform.matrix[0][2] = 0;
-	transform.matrix[1][2] = -context->extents.right << 16;
+void
+decor_blend_top_border_picture (Display	        *xdisplay,
+				decor_context_t *context,
+				Picture	        src,
+				int	        xSrc,
+				int	        ySrc,
+				Picture	        dst,
+				decor_layout_t  *layout,
+				Region	        region,
+				unsigned short  alpha,
+				int	        shade_alpha)
+{
+    int left, right, top;
+    int x1, y1, x2, y2;
 
-	XRenderSetPictureTransform (xdisplay, grad, &transform);
+    left  = context->extents.left;
+    right = context->extents.right;
+    top   = context->extents.top;
 
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  width - context->right_space,
-			  context->top_space - context->extents.top,
-			  context->extents.right, context->extents.top);
+    x1 = layout->top.x1 + context->left_space - left;
+    y1 = layout->top.y1 + context->top_space - top;
+    x2 = layout->top.x2 - context->right_space + right;
+    y2 = layout->top.y2;
 
-	XRenderFreePicture (xdisplay, grad);
+    _decor_blend_horz_border_picture (xdisplay,
+				      context,
+				      src,
+				      xSrc,
+				      ySrc,
+				      dst,
+				      layout,
+				      region,
+				      alpha,
+				      shade_alpha,
+				      x1,
+				      y1,
+				      x2,
+				      y2,
+				      top,
+				      -1);
 
-	/* left */
-	linear.p1.x = context->extents.left << 16;
-	linear.p1.y = 0;
-	linear.p2.x = 0;
-	linear.p2.y = 0;
+    _decor_pad_border_picture (xdisplay, dst, &layout->top);
+}
 
-	grad = XRenderCreateLinearGradient (xdisplay,
-					    &linear,
-					    stop,
-					    color,
-					    2);
+void
+decor_blend_bottom_border_picture (Display	   *xdisplay,
+				   decor_context_t *context,
+				   Picture	   src,
+				   int	           xSrc,
+				   int	           ySrc,
+				   Picture	   dst,
+				   decor_layout_t  *layout,
+				   Region	   region,
+				   unsigned short  alpha,
+				   int	           shade_alpha)
+{
+    int left, right, bottom;
+    int x1, y1, x2, y2;
 
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  context->left_space - context->extents.left,
-			  context->top_space,
-			  context->extents.left,
-			  height - context->top_space - context->bottom_space);
+    left   = context->extents.left;
+    right  = context->extents.right;
+    bottom = context->extents.bottom;
 
-	XRenderFreePicture (xdisplay, grad);
+    x1 = layout->bottom.x1 + context->left_space - left;
+    y1 = layout->bottom.y1;
+    x2 = layout->bottom.x2 - context->right_space + right;
+    y2 = layout->bottom.y1 + bottom;
 
-	/* right */
-	linear.p1.x = 0;
-	linear.p1.y = 0;
-	linear.p2.x = context->extents.right << 16;
-	linear.p2.y = 0;
+    _decor_blend_horz_border_picture (xdisplay,
+				      context,
+				      src,
+				      xSrc,
+				      ySrc,
+				      dst,
+				      layout,
+				      region,
+				      alpha,
+				      shade_alpha,
+				      x1,
+				      y1,
+				      x2,
+				      y2,
+				      bottom,
+				      1);
 
-	grad = XRenderCreateLinearGradient (xdisplay,
-					    &linear,
-					    stop,
-					    color,
-					    2);
+    _decor_pad_border_picture (xdisplay, dst, &layout->bottom);
+}
 
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  width - context->right_space, context->top_space,
-			  context->extents.right,
-			  height - context->top_space - context->bottom_space);
+static void
+_decor_blend_vert_border_picture (Display	  *xdisplay,
+				  decor_context_t *context,
+				  Picture	  src,
+				  int	          xSrc,
+				  int	          ySrc,
+				  Picture	  dst,
+				  decor_layout_t  *layout,
+				  Region	  region,
+				  unsigned short  alpha,
+				  int	          shade_alpha,
+				  int		  x1,
+				  int		  y1,
+				  int		  x2,
+				  int		  y2,
+				  int		  direction)
+{
+    XRenderColor color[3] = {
+	{ 0xffff, 0xffff, 0xffff, 0xffff },
+	{  alpha,  alpha,  alpha,  alpha }
+    };
+    int		 op = PictOpSrc;
 
-	XRenderFreePicture (xdisplay, grad);
+    if (layout->rotation)
+    {
+	Region     rotated_region;
+	XRectangle rect;
+	BoxPtr     pBox = region->rects;
+	int	   nBox = region->numRects;
 
-	/* bottom left */
-	radial.outer.radius = context->extents.left << 16;
+	rotated_region = XCreateRegion ();
 
-	grad = XRenderCreateRadialGradient (xdisplay,
-					    &radial,
-					    stop,
-					    color,
-					    2);
+	while (nBox--)
+	{
+	    rect.x      = x1 + pBox->y1;
+	    rect.y	= y1 + pBox->x1;
+	    rect.width  = pBox->y2 - pBox->y1;
+	    rect.height = pBox->x2 - pBox->x1;
 
-	transform.matrix[1][1] = (context->extents.left << 16) /
-	    context->extents.bottom;
-	transform.matrix[0][2] = -context->extents.left << 16;
-	transform.matrix[1][2] = 0;
+	    XUnionRectWithRegion (&rect, rotated_region, rotated_region);
 
-	XRenderSetPictureTransform (xdisplay, grad, &transform);
+	    pBox++;
+	}
 
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  context->left_space - context->extents.left,
-			  height - context->bottom_space,
-			  context->extents.left, context->extents.bottom);
-
-	XRenderFreePicture (xdisplay, grad);
-
-	/* bottom */
-	linear.p1.x = 0;
-	linear.p1.y = 0;
-	linear.p2.x = 0;
-	linear.p2.y = context->extents.bottom << 16;
-
-	grad = XRenderCreateLinearGradient (xdisplay,
-					    &linear,
-					    stop,
-					    color,
-					    2);
-
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  context->left_space, height - context->bottom_space,
-			  width - context->left_space - context->right_space,
-			  context->extents.bottom);
-
-	XRenderFreePicture (xdisplay, grad);
-
-	/* bottom right */
-	radial.outer.radius = context->extents.right << 16;
-
-	grad = XRenderCreateRadialGradient (xdisplay,
-					    &radial,
-					    stop,
-					    color,
-					    2);
-
-	transform.matrix[1][1] = (context->extents.right << 16) /
-	    context->extents.bottom;
-	transform.matrix[0][2] = 0;
-	transform.matrix[1][2] = 0;
-
-	XRenderSetPictureTransform (xdisplay, grad, &transform);
-
-	XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
-			  0, 0,
-			  0, 0,
-			  width - context->right_space,
-			  height - context->bottom_space,
-			  context->extents.right, context->extents.bottom);
-
-	XRenderFreePicture (xdisplay, grad);
+	XRenderSetPictureClipRegion (xdisplay, dst, rotated_region);
+	XDestroyRegion (rotated_region);
     }
     else
     {
-	XRenderFillRectangle (xdisplay, PictOpSrc, dst, &color[1],
-			      0, 0, width, height);
+	XOffsetRegion (region, x1, y1);
+	XRenderSetPictureClipRegion (xdisplay, dst, region);
+	XOffsetRegion (region, -x1, -y1);
     }
 
-    XRenderComposite (xdisplay, PictOpIn, src, None, dst,
-		      -xSrc, -ySrc,
-		      0, 0,
-		      0, 0,
-		      width, height);
+    if (alpha != 0xffff)
+    {
+	op = PictOpIn;
+
+	if (shade_alpha)
+	{
+	    static XFixed	     stop[2] = { 0, 1 << 16 };
+	    Picture		     grad;
+	    XLinearGradient	     linear;
+	    XRenderPictureAttributes attrib;
+
+	    attrib.repeat = RepeatPad;
+
+	    if (layout->rotation)
+	    {
+		linear.p1.x = 0;
+		linear.p2.x = 0;
+
+		if (direction < 0)
+		{
+		    linear.p1.y = 0;
+		    linear.p2.y = (y2 - y1) << 16;
+		}
+		else
+		{
+		    linear.p1.y = (y2 - y1) << 16;
+		    linear.p2.y = 0 << 16;
+		}
+	    }
+	    else
+	    {
+		linear.p1.y = 0;
+		linear.p2.y = 0;
+
+		if (direction < 0)
+		{
+		    linear.p1.x = 0;
+		    linear.p2.x = (x2 - x1) << 16;
+		}
+		else
+		{
+		    linear.p1.x = (x2 - x1) << 16;
+		    linear.p2.x = 0;
+		}
+	    }
+
+	    grad = XRenderCreateLinearGradient (xdisplay,
+						&linear,
+						stop,
+						color,
+						2);
+
+	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
+
+	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+			      0, 0,
+			      0, 0,
+			      x1, y1,
+			      x2 - x1, y2 - y1);
+
+	    XRenderFreePicture (xdisplay, grad);
+	}
+	else
+	{
+	    XRenderFillRectangle (xdisplay, PictOpSrc, dst, &color[1],
+				  x1, y1, x2 - x1, y2 - y1);
+	}
+    }
+
+    if (layout->rotation)
+    {
+	XTransform t = {
+	    {
+		{       0, 1 << 16,       0 },
+		{ 1 << 16,       0,       0 },
+		{       0,       0, 1 << 16 }
+	    }
+	};
+
+	t.matrix[0][2] = -ySrc << 16;
+	t.matrix[1][2] = -xSrc << 16;
+
+	XRenderSetPictureTransform (xdisplay, src, &t);
+
+	XRenderComposite (xdisplay, op, src, None, dst,
+			  0, 0,
+			  0, 0,
+			  x1, y1, x2 - x1, y2 - y1);
+
+	XRenderSetPictureTransform (xdisplay, src, &xident);
+    }
+    else
+    {
+	XRenderComposite (xdisplay, op, src, None, dst,
+			  -xSrc, -ySrc,
+			  0, 0,
+			  x1, y1, x2 - x1, y2 - y1);
+    }
 
     set_no_picture_clip (xdisplay, dst);
+}
+
+void
+decor_blend_left_border_picture (Display	 *xdisplay,
+				 decor_context_t *context,
+				 Picture	 src,
+				 int	         xSrc,
+				 int	         ySrc,
+				 Picture	 dst,
+				 decor_layout_t  *layout,
+				 Region		 region,
+				 unsigned short  alpha,
+				 int	         shade_alpha)
+{
+    int x1, y1, x2, y2;
+
+    x1 = layout->left.x1;
+    y1 = layout->left.y1;
+    x2 = layout->left.x2;
+    y2 = layout->left.y2;
+
+    if (layout->rotation)
+	y1 += context->left_space - context->extents.left;
+    else
+	x1 += context->left_space - context->extents.left;
+
+    _decor_blend_vert_border_picture (xdisplay,
+				      context,
+				      src,
+				      xSrc,
+				      ySrc,
+				      dst,
+				      layout,
+				      region,
+				      alpha,
+				      shade_alpha,
+				      x1,
+				      y1,
+				      x2,
+				      y2,
+				      1);
+
+    _decor_pad_border_picture (xdisplay, dst, &layout->left);
+}
+
+void
+decor_blend_right_border_picture (Display	  *xdisplay,
+				  decor_context_t *context,
+				  Picture	  src,
+				  int	          xSrc,
+				  int	          ySrc,
+				  Picture	  dst,
+				  decor_layout_t  *layout,
+				  Region	  region,
+				  unsigned short  alpha,
+				  int	          shade_alpha)
+{
+    int x1, y1, x2, y2;
+
+    x1 = layout->right.x1;
+    y1 = layout->right.y1;
+    x2 = layout->right.x2;
+    y2 = layout->right.y2;
+
+    if (layout->rotation)
+	y2 -= context->right_space - context->extents.right;
+    else
+	x2 -= context->right_space - context->extents.right;
+
+    _decor_blend_vert_border_picture (xdisplay,
+				      context,
+				      src,
+				      xSrc,
+				      ySrc,
+				      dst,
+				      layout,
+				      region,
+				      alpha,
+				      shade_alpha,
+				      x1,
+				      y1,
+				      x2,
+				      y2,
+				      -1);
+
+    _decor_pad_border_picture (xdisplay, dst, &layout->right);
 }

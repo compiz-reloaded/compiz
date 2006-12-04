@@ -50,6 +50,11 @@
 #define YX_MASK (1 << 14)
 #define YY_MASK (1 << 15)
 
+#define PAD_TOP    (1 << 0)
+#define PAD_BOTTOM (1 << 1)
+#define PAD_LEFT   (1 << 2)
+#define PAD_RIGHT  (1 << 3)
+
 typedef struct _decor_point {
     int x;
     int y;
@@ -93,6 +98,27 @@ typedef struct _decor_context {
     int bottom_corner_space;
 } decor_context_t;
 
+typedef struct _decor_box {
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+
+    int pad;
+} decor_box_t;
+
+typedef struct _decor_layout {
+    int width;
+    int height;
+
+    decor_box_t left;
+    decor_box_t right;
+    decor_box_t top;
+    decor_box_t bottom;
+
+    int rotation;
+} decor_layout_t;
+
 typedef struct _decor_shadow_options {
     double	   shadow_radius;
     double	   shadow_opacity;
@@ -115,6 +141,10 @@ typedef void (*decor_draw_func_t) (Display	   *xdisplay,
 				   int		   height,
 				   decor_context_t *context,
 				   void		   *closure);
+
+#define BASE_PROP_SIZE 12
+#define QUAD_PROP_SIZE 9
+#define N_QUADS_MAX    24
 
 void
 decor_quads_to_property (long		 *data,
@@ -139,7 +169,8 @@ decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      splitY,
 			 int	      splitGravity,
 			 double	      x0,
-			 double	      y0);
+			 double	      y0,
+			 int	      rotation);
 
 int
 decor_set_horz_quad_line (decor_quad_t *q,
@@ -157,30 +188,35 @@ decor_set_horz_quad_line (decor_quad_t *q,
 			  double       y0);
 
 int
-decor_set_lSrS_window_quads (decor_context_t *c,
-			     decor_quad_t    *q,
-			     int	     width,
-			     int	     height);
+decor_set_lSrS_window_quads (decor_quad_t    *q,
+			     decor_context_t *c,
+			     decor_layout_t  *l);
 
 int
-decor_set_lSrStSbS_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int	         width,
-				 int	         height);
+decor_set_lSrStSbS_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l);
 
 int
-decor_set_lSrStSbN_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int		 width,
-				 int		 height,
+decor_set_lSrStXbS_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l,
+				 int		 top_stretch_offset);
+
+int
+decor_set_lSrStSbX_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l,
 				 int		 bottom_stretch_offset);
 
 int
-decor_set_lSrStXbS_window_quads (decor_context_t *c,
-				 decor_quad_t    *q,
-				 int		 width,
-				 int		 height,
-				 int		 top_stretch_offset);
+decor_set_lXrXtXbX_window_quads (decor_quad_t    *q,
+				 decor_context_t *c,
+				 decor_layout_t  *l,
+				 int		 left_stretch_offset,
+				 int		 right_stretch_offset,
+				 int		 top_stretch_offset,
+				 int		 bottom_stretch_offset);
 
 decor_shadow_t *
 decor_create_shadow (Display		    *xdisplay,
@@ -205,12 +241,23 @@ decor_destroy_shadow (Display	     *xdisplay,
 		      decor_shadow_t *shadow);
 
 void
+decor_get_default_layout (decor_context_t *c,
+			  int	          width,
+			  int	          height,
+			  decor_layout_t  *layout);
+
+void
+decor_get_best_layout (decor_context_t *c,
+		       int	       width,
+		       int	       height,
+		       decor_layout_t  *layout);
+
+void
 decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 					decor_shadow_t  *shadow,
 					decor_context_t *context,
 					Picture	        picture,
-					int	        width,
-					int	        height);
+					decor_layout_t  *layout);
 
 void
 decor_blend_transform_picture (Display	       *xdisplay,
@@ -219,10 +266,57 @@ decor_blend_transform_picture (Display	       *xdisplay,
 			       int	       xSrc,
 			       int	       ySrc,
 			       Picture	       dst,
-			       int	       width,
-			       int	       height,
+			       decor_layout_t  *layout,
 			       Region	       region,
 			       unsigned short  alpha,
 			       int	       shade_alpha);
+
+void
+decor_blend_top_border_picture (Display	        *xdisplay,
+				decor_context_t *context,
+				Picture	        src,
+				int	        xSrc,
+				int	        ySrc,
+				Picture	        dst,
+				decor_layout_t  *layout,
+				Region	        region,
+				unsigned short  alpha,
+				int	        shade_alpha);
+
+void
+decor_blend_bottom_border_picture (Display	   *xdisplay,
+				   decor_context_t *context,
+				   Picture	   src,
+				   int	           xSrc,
+				   int	           ySrc,
+				   Picture	   dst,
+				   decor_layout_t  *layout,
+				   Region	   region,
+				   unsigned short  alpha,
+				   int	           shade_alpha);
+
+void
+decor_blend_left_border_picture (Display	 *xdisplay,
+				 decor_context_t *context,
+				 Picture	 src,
+				 int	         xSrc,
+				 int	         ySrc,
+				 Picture	 dst,
+				 decor_layout_t  *layout,
+				 Region		 region,
+				 unsigned short  alpha,
+				 int	         shade_alpha);
+
+void
+decor_blend_right_border_picture (Display	  *xdisplay,
+				  decor_context_t *context,
+				  Picture	  src,
+				  int	          xSrc,
+				  int	          ySrc,
+				  Picture	  dst,
+				  decor_layout_t  *layout,
+				  Region	  region,
+				  unsigned short  alpha,
+				  int	          shade_alpha);
 
 #endif
