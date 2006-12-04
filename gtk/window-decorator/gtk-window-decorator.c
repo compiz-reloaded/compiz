@@ -462,8 +462,11 @@ decor_update_switcher_property (decor_t *d)
 
     nQuad = decor_set_lSrStSbX_window_quads (quads, &switcher_context,
 					     &d->border_layout,
-					     (d->border_layout.top.x2 -
-					      d->border_layout.top.x1) / 2);
+					     d->border_layout.top.x2 -
+					     d->border_layout.top.x1 -
+					     switcher_context.extents.left -
+					     switcher_context.extents.right -
+					     32);
 
     decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
 			     &_switcher_extents, &_switcher_extents,
@@ -3165,7 +3168,6 @@ update_switcher_window (WnckWindow *win,
 {
     decor_t    *d = g_object_get_data (G_OBJECT (win), "decor");
     GdkPixmap  *pixmap, *buffer_pixmap = NULL;
-    Picture    picture;
     gint       height, width = 0;
     WnckWindow *selected_win;
     Display    *xdisplay;
@@ -3271,6 +3273,12 @@ update_switcher_window (WnckWindow *win,
 	if (!d->gc)
 	    d->gc = gdk_gc_new (d->pixmap);
 
+	if (!d->picture)
+	    d->picture =
+		XRenderCreatePicture (xdisplay,
+				      GDK_PIXMAP_XID (d->buffer_pixmap),
+				      xformat, 0, NULL);
+
 	queue_decor_draw (d);
 	return FALSE;
     }
@@ -3285,9 +3293,6 @@ update_switcher_window (WnckWindow *win,
 	gdk_pixmap_unref (pixmap);
 	return FALSE;
     }
-
-    picture = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (buffer_pixmap),
-				    xformat, 0, NULL);
 
     if (switcher_pixmap)
 	gdk_pixmap_unref (switcher_pixmap);
@@ -3320,7 +3325,8 @@ update_switcher_window (WnckWindow *win,
     d->buffer_pixmap = buffer_pixmap;
     d->gc	     = gdk_gc_new (pixmap);
 
-    d->picture = picture;
+    d->picture = XRenderCreatePicture (xdisplay, GDK_PIXMAP_XID (buffer_pixmap),
+				       xformat, 0, NULL);
 
     d->width  = width;
     d->height = height;
