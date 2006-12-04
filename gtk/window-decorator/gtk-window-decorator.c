@@ -167,8 +167,6 @@
 #define META_ACTIVE_OPACITY       1.0
 #define META_ACTIVE_SHADE_OPACITY TRUE
 
-#define N_QUADS_MAX 24
-
 #define MWM_HINTS_DECORATIONS (1L << 1)
 
 #define MWM_DECOR_ALL      (1L << 0)
