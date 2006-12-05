@@ -3175,7 +3175,7 @@ addWindowSizeChanges (CompWindow     *w,
 		    }
 		    else if (oldY + height + w->input.bottom > max)
 		    {
-			xwc->y = workArea.y +
+			xwc->y = y + workArea.y +
 			    (workArea.height - w->input.top - height -
 			     w->input.bottom) / 2 + w->input.top;
 			mask |= CWY;
@@ -3202,7 +3202,7 @@ addWindowSizeChanges (CompWindow     *w,
 		    }
 		    else if (oldX + width + w->input.right > max)
 		    {
-			xwc->x = workArea.x +
+			xwc->x = x + workArea.x +
 			    (workArea.width - w->input.left - width -
 			     w->input.right) / 2 + w->input.left;
 			mask |= CWX;
