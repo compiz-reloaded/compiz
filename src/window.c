@@ -923,11 +923,12 @@ updateFrameWindow (CompWindow *w)
 	XRectangle rects[4];
 	int	   x, y, width, height;
 	int	   i = 0;
+	int	   bw = w->serverBorderWidth * 2;
 
 	x      = w->serverX - w->input.left;
 	y      = w->serverY - w->input.top;
-	width  = w->width  + w->input.left + w->input.right;
-	height = w->height + w->input.top  + w->input.bottom;
+	width  = w->serverWidth  + w->input.left + w->input.right + bw;
+	height = w->serverHeight + w->input.top  + w->input.bottom + bw;
 
 	if (!w->frame)
 	{
@@ -1040,6 +1041,7 @@ setWindowFrameExtents (CompWindow	 *w,
 	data[2] = input->top;
 	data[3] = input->bottom;
 
+	updateWindowSize (w);
 	updateFrameWindow (w);
 
 	XChangeProperty (w->screen->display->display, w->id,
