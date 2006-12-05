@@ -2477,17 +2477,12 @@ wobblyDamageWindowRect (CompWindow *w,
 static void
 wobblyWindowResizeNotify (CompWindow *w)
 {
-    Bool pendingResize =
-	w->attrib.width != w->serverWidth ||
-	w->attrib.height != w->serverHeight;
-
     WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
 
     if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b &&
-	!pendingResize					      &&
 	isWobblyWin (w)					      &&
-	((w->state ^ ww->state) & MAXIMIZE_STATE))
+	((w->state | ww->state) & MAXIMIZE_STATE))
     {
 	ww->state &= ~MAXIMIZE_STATE;
 	ww->state |= w->state & MAXIMIZE_STATE;
@@ -2536,7 +2531,7 @@ wobblyWindowResizeNotify (CompWindow *w)
     }
 
     /* update grab */
-    if (!pendingResize && ww->model && ww->grabbed)
+    if (ww->model && ww->grabbed)
     {
 	if (ww->model->anchorObject)
 	    ww->model->anchorObject->immobile = FALSE;
