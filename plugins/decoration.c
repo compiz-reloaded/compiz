@@ -133,13 +133,16 @@ typedef struct _WindowDecoration {
 #define DECOR_SHADOW_OFFSET_MIN     -16
 #define DECOR_SHADOW_OFFSET_MAX      16
 
+#define DECOR_MIPMAP_DEFAULT FALSE
+
 #define DECOR_DISPLAY_OPTION_SHADOW_RADIUS   0
 #define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
 #define DECOR_DISPLAY_OPTION_SHADOW_COLOR    2
 #define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X 3
 #define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y 4
 #define DECOR_DISPLAY_OPTION_COMMAND         5
-#define DECOR_DISPLAY_OPTION_NUM             6
+#define DECOR_DISPLAY_OPTION_MIPMAP          6
+#define DECOR_DISPLAY_OPTION_NUM             7
 
 static int displayPrivateIndex;
 
@@ -258,6 +261,10 @@ decorSetDisplayOption (CompDisplay     *display,
 
 	    return TRUE;
 	}
+	break;
+    case DECOR_DISPLAY_OPTION_MIPMAP:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -327,6 +334,13 @@ decorDisplayInitOptions (DecorDisplay *dd)
     o->value.s		= strdup ("");
     o->rest.s.string	= NULL;
     o->rest.s.nString	= 0;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_MIPMAP];
+    o->name	 = "mipmap";
+    o->shortDesc = N_("Mipmap");
+    o->longDesc	 = ("Allow mipmaps to be generated for decoration textures");
+    o->type	 = CompOptionTypeBool;
+    o->value.b   = DECOR_MIPMAP_DEFAULT;
 }
 
 static Bool
@@ -427,6 +441,9 @@ decorGetTexture (CompScreen *screen,
 	free (texture);
 	return NULL;
     }
+
+    if (!dd->opt[DECOR_DISPLAY_OPTION_MIPMAP].value.b)
+	texture->texture.mipmap = FALSE;
 
     texture->damage = XDamageCreate (screen->display->display, pixmap,
 				     XDamageReportRawRectangles);
