@@ -12225,6 +12225,34 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/decoration/allscreens/options/mipmap</key>
+            <applyto>/apps/compiz/plugins/decoration/allscreens/options/mipmap</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Mipmap</short>
+                <long>Allow mipmaps to be generated for decoration textures</long>
+            </locale>
+            <locale name="hu">
+                <short>MIP térkép</short>
+                <long>Allow mipmaps to be generated for decoration textures</long>
+            </locale>
+            <locale name="ja">
+                <short>ミップマップ</short>
+                <long>Allow mipmaps to be generated for decoration textures</long>
+            </locale>
+            <locale name="pl">
+                <short>Mipmapa</short>
+                <long>Allow mipmaps to be generated for decoration textures</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Mapa</short>
+                <long>Allow mipmaps to be generated for decoration textures</long>
+            </locale>
+        </schema>
+
         <!-- wobbly options -->
 
         <schema>
