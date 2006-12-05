@@ -3557,14 +3557,14 @@ window_opened (WnckScreen *screen,
 
     xid = wnck_window_get_xid (win);
 
-    if (get_window_prop (xid, frame_window_atom, &window))
-    {
-	add_frame_window (win, window);
-    }
-    else if (get_window_prop (xid, select_window_atom, &window))
+    if (get_window_prop (xid, select_window_atom, &window))
     {
 	d->prop_xid = wnck_window_get_xid (win);
 	update_switcher_window (win, window);
+    }
+    else if (get_window_prop (xid, frame_window_atom, &window))
+    {
+	add_frame_window (win, window);
     }
 }
 
@@ -4684,12 +4684,15 @@ event_filter_func (GdkXEvent *gdkxevent,
 	    win = wnck_window_get (xid);
 	    if (win)
 	    {
-		Window frame;
+		Window frame, window;
 
-		if (get_window_prop (xid, frame_window_atom, &frame))
-		    add_frame_window (win, frame);
-		else
-		    remove_frame_window (win);
+		if (!get_window_prop (xid, select_window_atom, &window))
+		{
+		    if (get_window_prop (xid, frame_window_atom, &frame))
+			add_frame_window (win, frame);
+		    else
+			remove_frame_window (win);
+		}
 	    }
 	}
 	else if (xevent->xproperty.atom == mwm_hints_atom)
