@@ -1815,6 +1815,7 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.state	 |= CompActionStateInitEdgeDnd;
     o->value.action.type	  = CompBindingTypeKey;
     o->value.action.state	 |= CompActionStateInitKey;
+    o->value.action.state	 |= CompActionStateInitButton;
     o->value.action.key.modifiers = SCALE_INITIATE_MODIFIERS_DEFAULT;
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display,
@@ -1833,6 +1834,7 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.state    |= CompActionStateInitEdgeDnd;
     o->value.action.type      = 0;
     o->value.action.state    |= CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
 
     o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP];
     o->name		      = "initiate_group";
@@ -1848,6 +1850,7 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
     o->value.action.state    |= CompActionStateInitEdgeDnd;
     o->value.action.type      = 0;
     o->value.action.state    |= CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
 }
 
 static Bool
