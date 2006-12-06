@@ -950,6 +950,10 @@ switchNext (CompDisplay     *d,
 
 	    if (state & CompActionStateInitButton)
 		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitEdge)
+		action->state |= CompActionStateTermEdge;
+
 	}
 
 	switchToWindow (s, TRUE);
@@ -984,6 +988,9 @@ switchPrev (CompDisplay     *d,
 
 	    if (state & CompActionStateInitButton)
 		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitEdge)
+		action->state |= CompActionStateTermEdge;
 	}
 
 	switchToWindow (s, FALSE);
@@ -1018,6 +1025,9 @@ switchNextAll (CompDisplay     *d,
 
 	    if (state & CompActionStateInitButton)
 		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitEdge)
+		action->state |= CompActionStateTermEdge;
 	}
 
 	switchToWindow (s, TRUE);
@@ -1052,6 +1062,9 @@ switchPrevAll (CompDisplay     *d,
 
 	    if (state & CompActionStateInitButton)
 		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitEdge)
+		action->state |= CompActionStateTermEdge;
 	}
 
 	switchToWindow (s, FALSE);
