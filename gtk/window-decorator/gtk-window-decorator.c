@@ -2791,12 +2791,19 @@ update_window_decoration_name (WnckWindow *win)
     {
 	gint w, n_line;
 
-	w  = d->border_layout.top.x2 - d->border_layout.top.x1 -
-	    d->context->left_space - d->context->right_space -
-	    ICON_SPACE - 4 - d->button_width;
+	if (theme_draw_window_decoration != draw_window_decoration)
+	{
+	    w = SHRT_MAX;
+	}
+	else
+	{
+	    w  = d->border_layout.top.x2 - d->border_layout.top.x1 -
+		d->context->left_space - d->context->right_space -
+		ICON_SPACE - 2 - d->button_width;
 
-	if (w < 1)
-	    w = 1;
+	    if (w < 1)
+		w = 1;
+	}
 
 	pango_layout_set_width (d->layout, w * PANGO_SCALE);
 	pango_layout_set_text (d->layout, name, name_length);
@@ -2945,7 +2952,7 @@ meta_calc_button_size (decor_t *d)
     gint i, min_x, x, y, w, h, width;
 
     width = d->border_layout.top.x2 - d->border_layout.top.x1 -
-	d->context->extents.left - d->context->extents.right;
+	d->context->left_space - d->context->right_space;
     min_x = width;
 
     for (i = 0; i < 3; i++)
