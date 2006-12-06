@@ -241,6 +241,15 @@ decor_destroy_shadow (Display	     *xdisplay,
 		      decor_shadow_t *shadow);
 
 void
+decor_draw_simple (Display	   *xdisplay,
+		   Pixmap	   pixmap,
+		   Picture	   picture,
+		   int		   width,
+		   int		   height,
+		   decor_context_t *c,
+		   void		   *closure);
+
+void
 decor_get_default_layout (decor_context_t *c,
 			  int	          width,
 			  int	          height,

@@ -1111,6 +1111,32 @@ decor_create_shadow (Display		    *xdisplay,
 }
 
 void
+decor_draw_simple (Display	   *xdisplay,
+		   Pixmap	   pixmap,
+		   Picture	   picture,
+		   int		   width,
+		   int		   height,
+		   decor_context_t *c,
+		   void		   *closure)
+{
+    static XRenderColor clear = { 0x0000, 0x0000, 0x0000, 0x0000 };
+    static XRenderColor white = { 0xffff, 0xffff, 0xffff, 0xffff };
+
+    XRenderFillRectangle (xdisplay, PictOpSrc, picture, &clear,
+			  0,
+			  0,
+			  width,
+			  height);
+    XRenderFillRectangle (xdisplay, PictOpSrc, picture, &white,
+			  c->left_space - c->extents.left,
+			  c->top_space - c->extents.top,
+			  width - c->left_space - c->right_space +
+			  c->extents.left + c->extents.right,
+			  height - c->top_space - c->bottom_space +
+			  c->extents.top + c->extents.bottom);
+}
+
+void
 decor_destroy_shadow (Display	     *xdisplay,
 		      decor_shadow_t *shadow)
 {

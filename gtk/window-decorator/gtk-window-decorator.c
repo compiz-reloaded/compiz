@@ -5071,32 +5071,6 @@ update_style (GtkWidget *widget)
 #define TRANSLUCENT_CORNER_SIZE 3
 
 static void
-draw_simple_shape (Display	   *xdisplay,
-		   Pixmap	   pixmap,
-		   Picture	   picture,
-		   int		   width,
-		   int		   height,
-		   decor_context_t *c,
-		   void		   *closure)
-{
-    static XRenderColor clear = { 0x0000, 0x0000, 0x0000, 0x0000 };
-    static XRenderColor white = { 0xffff, 0xffff, 0xffff, 0xffff };
-
-    XRenderFillRectangle (xdisplay, PictOpSrc, picture, &clear,
-			  0,
-			  0,
-			  width,
-			  height);
-    XRenderFillRectangle (xdisplay, PictOpSrc, picture, &white,
-			  c->left_space - c->extents.left,
-			  c->top_space - c->extents.top,
-			  width - c->left_space - c->right_space +
-			  c->extents.left + c->extents.right,
-			  height - c->top_space - c->bottom_space +
-			  c->extents.top + c->extents.bottom);
-}
-
-static void
 draw_border_shape (Display	   *xdisplay,
 		   Pixmap	   pixmap,
 		   Picture	   picture,
@@ -5184,7 +5158,7 @@ update_shadow (void)
 					    0, 0, 0, 0,
 					    &opt,
 					    &shadow_context,
-					    draw_simple_shape,
+					    decor_draw_simple,
 					    0);
 
     if (border_shadow)
@@ -5262,7 +5236,7 @@ update_shadow (void)
 					   TRANSLUCENT_CORNER_SIZE,
 					   &opt,
 					   &switcher_context,
-					   draw_simple_shape,
+					   decor_draw_simple,
 					   0);
 
     return 1;
