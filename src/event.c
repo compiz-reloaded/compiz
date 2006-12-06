@@ -261,7 +261,7 @@ triggerButtonPressBindings (CompDisplay *d,
     unsigned int    bindMods;
     unsigned int    edge = 0;
 
-    if (event->xbutton.window == edgeWindow)
+    if (edgeWindow)
     {
 	CompScreen   *s;
 	unsigned int i;
@@ -269,6 +269,12 @@ triggerButtonPressBindings (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xbutton.root);
 	if (!s)
 	    return FALSE;
+
+	if (event->xbutton.window != edgeWindow)
+	{
+	    if (!s->maxGrab || event->xbutton.window != s->root)
+		return FALSE;
+	}
 
 	for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	{
