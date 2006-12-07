@@ -1261,10 +1261,10 @@ scaleInitiateCommon (CompScreen      *s,
     SCALE_DISPLAY (s->display);
     SCALE_SCREEN (s);
 
-    if (!layoutThumbs (s))
+    if (otherScreenGrabExist (s, "scale", 0))
 	return FALSE;
 
-    if (otherScreenGrabExist (s, "scale", 0))
+    if (!layoutThumbs (s))
 	return FALSE;
 
     if (state & CompActionStateInitEdgeDnd)
