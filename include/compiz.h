@@ -46,6 +46,10 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 #if COMPOSITE_MAJOR > 0 || COMPOSITE_MINOR > 2
 #define USE_COW
 #endif
@@ -2410,5 +2414,9 @@ initSession (char *smPrevClientId);
 
 void
 closeSession (void);
+
+#ifdef  __cplusplus
+}
+#endif
 
 #endif

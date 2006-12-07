@@ -32,6 +32,10 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 #define GRAVITY_WEST  (1 << 0)
 #define GRAVITY_EAST  (1 << 1)
 #define GRAVITY_NORTH (1 << 2)
@@ -327,5 +331,9 @@ decor_blend_right_border_picture (Display	  *xdisplay,
 				  Region	  region,
 				  unsigned short  alpha,
 				  int	          shade_alpha);
+
+#ifdef  __cplusplus
+}
+#endif
 
 #endif
