@@ -1873,7 +1873,7 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
     }
 
     XRenderComposite (xdisplay, op, src, None, dst,
-		      -xSrc, -ySrc,
+		      xSrc, ySrc,
 		      0, 0,
 		      x1, y1,
 		      x2 - x1, y2 - y1);
@@ -2102,8 +2102,8 @@ _decor_blend_vert_border_picture (Display	  *xdisplay,
 	    }
 	};
 
-	t.matrix[0][2] = -ySrc << 16;
-	t.matrix[1][2] = -xSrc << 16;
+	t.matrix[0][2] = xSrc << 16;
+	t.matrix[1][2] = ySrc << 16;
 
 	XRenderSetPictureTransform (xdisplay, src, &t);
 
@@ -2117,7 +2117,7 @@ _decor_blend_vert_border_picture (Display	  *xdisplay,
     else
     {
 	XRenderComposite (xdisplay, op, src, None, dst,
-			  -xSrc, -ySrc,
+			  xSrc, ySrc,
 			  0, 0,
 			  x1, y1, x2 - x1, y2 - y1);
     }
