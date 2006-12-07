@@ -332,6 +332,34 @@ decor_blend_right_border_picture (Display	  *xdisplay,
 				  unsigned short  alpha,
 				  int	          shade_alpha);
 
+#define DECOR_ACQUIRE_STATUS_SUCCESS	      0
+#define DECOR_ACQUIRE_STATUS_FAILED	      1
+#define DECOR_ACQUIRE_STATUS_OTHER_DM_RUNNING 2
+
+int
+decor_acquire_dm_session (Display *xdisplay,
+			  int	   screen,
+			  char     *name,
+			  int	   replace_current_dm,
+			  Time	   *timestamp);
+
+void
+decor_set_dm_check_hint (Display *xdisplay,
+			 int	 screen);
+
+#define DECOR_SELECTION_KEEP    0
+#define DECOR_SELECTION_GIVE_UP 1
+
+int
+decor_handle_selection_clear (Display *xdisplay,
+			      XEvent  *xevent,
+			      int     screen);
+
+void
+decor_handle_selection_request (Display *xdisplay,
+				XEvent  *event,
+				Time    dm_sn_timestamp);
+
 #ifdef  __cplusplus
 }
 #endif

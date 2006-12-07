@@ -21,11 +21,13 @@
 #include <config.h>
 #endif
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
 #include <decoration.h>
 
+#include <X11/Xatom.h>
 #include <X11/Xregion.h>
 
 /*
@@ -2209,4 +2211,274 @@ decor_blend_right_border_picture (Display	  *xdisplay,
 				      -1);
 
     _decor_pad_border_picture (xdisplay, dst, &layout->right);
+}
+
+int
+decor_acquire_dm_session (Display *xdisplay,
+			  int	   screen,
+			  char     *name,
+			  int	   replace_current_dm,
+			  Time	   *timestamp)
+{
+    XEvent		 event;
+    XSetWindowAttributes attr;
+    Window		 current_dm_sn_owner, new_dm_sn_owner;
+    Atom		 dm_sn_atom;
+    Atom		 manager_atom;
+    Atom		 dm_name_atom;
+    Atom		 utf8_string_atom;
+    Time		 dm_sn_timestamp;
+    char		 buf[128];
+
+    manager_atom = XInternAtom (xdisplay, "MANAGER", FALSE);
+    dm_name_atom = XInternAtom (xdisplay, "_NET_DM_NAME", 0);
+
+    utf8_string_atom = XInternAtom (xdisplay, "UTF8_STRING", 0);
+
+    sprintf (buf, "DM_S%d", screen);
+    dm_sn_atom = XInternAtom (xdisplay, buf, 0);
+
+    current_dm_sn_owner = XGetSelectionOwner (xdisplay, dm_sn_atom);
+
+    if (current_dm_sn_owner != None)
+    {
+	if (!replace_current_dm)
+	    return DECOR_ACQUIRE_STATUS_OTHER_DM_RUNNING;
+
+	XSelectInput (xdisplay, current_dm_sn_owner, StructureNotifyMask);
+    }
+
+    attr.override_redirect = TRUE;
+    attr.event_mask	   = PropertyChangeMask;
+
+    new_dm_sn_owner =
+	XCreateWindow (xdisplay, XRootWindow (xdisplay, screen),
+		       -100, -100, 1, 1, 0,
+		       CopyFromParent, CopyFromParent,
+		       CopyFromParent,
+		       CWOverrideRedirect | CWEventMask,
+		       &attr);
+
+    XChangeProperty (xdisplay,
+		     new_dm_sn_owner,
+		     dm_name_atom,
+		     utf8_string_atom, 8,
+		     PropModeReplace,
+		     (unsigned char *) name,
+		     strlen (name));
+
+    XWindowEvent (xdisplay,
+		  new_dm_sn_owner,
+		  PropertyChangeMask,
+		  &event);
+
+    dm_sn_timestamp = event.xproperty.time;
+
+    XSetSelectionOwner (xdisplay, dm_sn_atom, new_dm_sn_owner,
+			dm_sn_timestamp);
+
+    if (XGetSelectionOwner (xdisplay, dm_sn_atom) != new_dm_sn_owner)
+    {
+	XDestroyWindow (xdisplay, new_dm_sn_owner);
+
+	return DECOR_ACQUIRE_STATUS_FAILED;
+    }
+
+    /* Send client message indicating that we are now the DM */
+    event.xclient.type	       = ClientMessage;
+    event.xclient.window       = XRootWindow (xdisplay, screen);
+    event.xclient.message_type = manager_atom;
+    event.xclient.format       = 32;
+    event.xclient.data.l[0]    = dm_sn_timestamp;
+    event.xclient.data.l[1]    = dm_sn_atom;
+    event.xclient.data.l[2]    = 0;
+    event.xclient.data.l[3]    = 0;
+    event.xclient.data.l[4]    = 0;
+
+    XSendEvent (xdisplay, XRootWindow (xdisplay, screen), 0,
+		StructureNotifyMask, &event);
+
+    /* Wait for old decoration manager to go away */
+    if (current_dm_sn_owner != None)
+    {
+	do {
+	    XWindowEvent (xdisplay, current_dm_sn_owner,
+			  StructureNotifyMask, &event);
+	} while (event.type != DestroyNotify);
+    }
+
+    *timestamp = dm_sn_timestamp;
+
+    return DECOR_ACQUIRE_STATUS_SUCCESS;
+}
+
+void
+decor_set_dm_check_hint (Display *xdisplay,
+			 int	 screen)
+{
+    XSetWindowAttributes attrs;
+    unsigned long	 data;
+    Window		 xroot;
+    Atom		 atom;
+
+    attrs.override_redirect = 1;
+    attrs.event_mask	    = PropertyChangeMask;
+
+    xroot = RootWindow (xdisplay, screen);
+
+    data = XCreateWindow (xdisplay,
+			  xroot,
+			  -100, -100, 1, 1,
+			  0,
+			  CopyFromParent,
+			  CopyFromParent,
+			  (Visual *) CopyFromParent,
+			  CWOverrideRedirect | CWEventMask,
+			  &attrs);
+
+    atom = XInternAtom (xdisplay, "_NET_SUPPORTING_DM_CHECK", 0);
+
+    XChangeProperty (xdisplay, xroot,
+		     atom,
+		     XA_WINDOW,
+		     32, PropModeReplace, (unsigned char *) &data, 1);
+}
+
+/* from fvwm2, Copyright Matthias Clasen, Dominik Vogt */
+static int
+convert_property (Display *xdisplay,
+		  Window  w,
+		  Atom    target,
+		  Atom    property,
+		  Time    dm_sn_timestamp)
+{
+
+#define N_TARGETS 4
+
+    Atom conversion_targets[N_TARGETS];
+    long icccm_version[] = { 2, 0 };
+
+    conversion_targets[0] = XInternAtom (xdisplay, "TARGETS", 0);
+    conversion_targets[1] = XInternAtom (xdisplay, "MULTIPLE", 0);
+    conversion_targets[2] = XInternAtom (xdisplay, "TIMESTAMP", 0);
+    conversion_targets[3] = XInternAtom (xdisplay, "VERSION", 0);
+
+    if (target == conversion_targets[0])
+	XChangeProperty (xdisplay, w, property,
+			 XA_ATOM, 32, PropModeReplace,
+			 (unsigned char *) conversion_targets, N_TARGETS);
+    else if (target == conversion_targets[2])
+	XChangeProperty (xdisplay, w, property,
+			 XA_INTEGER, 32, PropModeReplace,
+			 (unsigned char *) &dm_sn_timestamp, 1);
+    else if (target == conversion_targets[3])
+	XChangeProperty (xdisplay, w, property,
+			 XA_INTEGER, 32, PropModeReplace,
+			 (unsigned char *) icccm_version, 2);
+    else
+	return 0;
+
+    /* Be sure the PropertyNotify has arrived so we
+     * can send SelectionNotify
+     */
+    XSync (xdisplay, 0);
+
+    return 1;
+}
+
+void
+decor_handle_selection_request (Display *xdisplay,
+				XEvent  *event,
+				Time    timestamp)
+{
+    XSelectionEvent reply;
+    Atom	    multiple_atom;
+    Atom	    atom_pair_atom;
+
+    reply.type	    = SelectionNotify;
+    reply.display   = xdisplay;
+    reply.requestor = event->xselectionrequest.requestor;
+    reply.selection = event->xselectionrequest.selection;
+    reply.target    = event->xselectionrequest.target;
+    reply.property  = None;
+    reply.time	    = event->xselectionrequest.time;
+
+    multiple_atom  = XInternAtom (xdisplay, "MULTIPLE", 0);
+    atom_pair_atom = XInternAtom (xdisplay, "ATOM_PAIR", 0);
+
+    if (event->xselectionrequest.target == multiple_atom)
+    {
+	if (event->xselectionrequest.property != None)
+	{
+	    Atom	  type, *adata;
+	    int		  i, format;
+	    unsigned long num, rest;
+	    unsigned char *data;
+
+	    if (XGetWindowProperty (xdisplay,
+				    event->xselectionrequest.requestor,
+				    event->xselectionrequest.property,
+				    0, 256, FALSE,
+				    atom_pair_atom,
+				    &type, &format, &num, &rest,
+				    &data) != Success)
+		return;
+
+	    /* FIXME: to be 100% correct, should deal with rest > 0,
+	     * but since we have 4 possible targets, we will hardly ever
+	     * meet multiple requests with a length > 8
+	     */
+	    adata = (Atom *) data;
+	    i = 0;
+	    while (i < (int) num)
+	    {
+		if (!convert_property (xdisplay,
+				       event->xselectionrequest.requestor,
+				       adata[i], adata[i + 1],
+				       timestamp))
+		    adata[i + 1] = None;
+
+		i += 2;
+	    }
+
+	    XChangeProperty (xdisplay,
+			     event->xselectionrequest.requestor,
+			     event->xselectionrequest.property,
+			     atom_pair_atom,
+			     32, PropModeReplace, data, num);
+	}
+    }
+    else
+    {
+	if (event->xselectionrequest.property == None)
+	    event->xselectionrequest.property = event->xselectionrequest.target;
+
+	if (convert_property (xdisplay,
+			      event->xselectionrequest.requestor,
+			      event->xselectionrequest.target,
+			      event->xselectionrequest.property,
+			      timestamp))
+	    reply.property = event->xselectionrequest.property;
+    }
+
+    XSendEvent (xdisplay,
+		event->xselectionrequest.requestor,
+		FALSE, 0L, (XEvent *) &reply);
+}
+
+int
+decor_handle_selection_clear (Display *xdisplay,
+			      XEvent  *xevent,
+			      int     screen)
+{
+    Atom dm_sn_atom;
+    char buf[128];
+
+    sprintf (buf, "DM_S%d", screen);
+    dm_sn_atom = XInternAtom (xdisplay, buf, 0);
+
+    if (xevent->xselectionclear.selection == dm_sn_atom)
+	return DECOR_SELECTION_GIVE_UP;
+
+    return DECOR_SELECTION_KEEP;
 }
