@@ -37,30 +37,7 @@
 #include <X11/extensions/shape.h>
 
 #include <compiz.h>
-
-#define GRAVITY_WEST  (1 << 0)
-#define GRAVITY_EAST  (1 << 1)
-#define GRAVITY_NORTH (1 << 2)
-#define GRAVITY_SOUTH (1 << 3)
-
-#define ALIGN_LEFT   (0)
-#define ALIGN_RIGHT  (1 << 0)
-#define ALIGN_TOP    (0)
-#define ALIGN_BOTTOM (1 << 1)
-
-#define CLAMP_HORZ (1 << 0)
-#define CLAMP_VERT (1 << 1)
-
-#define XX_MASK (1 << 12)
-#define XY_MASK (1 << 13)
-#define YX_MASK (1 << 14)
-#define YY_MASK (1 << 15)
-
-typedef struct _Point {
-    int	x;
-    int	y;
-    int gravity;
-} Point;
+#include <decoration.h>
 
 typedef struct _Vector {
     int	dx;
@@ -68,16 +45,6 @@ typedef struct _Vector {
     int	x0;
     int	y0;
 } Vector;
-
-typedef struct _Quad {
-    Point      p1;
-    Point      p2;
-    int	       maxWidth;
-    int	       maxHeight;
-    int	       align;
-    int	       clamp;
-    CompMatrix m;
-} Quad;
 
 #define DECOR_BARE   0
 #define DECOR_NORMAL 1
@@ -100,7 +67,7 @@ typedef struct _Decoration {
     CompWindowExtents maxInput;
     int		      minWidth;
     int		      minHeight;
-    Quad	      *quad;
+    decor_quad_t      *quad;
     int		      nQuad;
 } Decoration;
 
@@ -534,13 +501,13 @@ applyGravity (int gravity,
 }
 
 static void
-computeQuadBox (Quad *q,
-		int  width,
-		int  height,
-		int  *return_x1,
-		int  *return_y1,
-		int  *return_x2,
-		int  *return_y2)
+computeQuadBox (decor_quad_t *q,
+		int	     width,
+		int	     height,
+		int	     *return_x1,
+		int	     *return_y1,
+		int	     *return_x2,
+		int	     *return_y2)
 {
     int x1, y1, x2, y2;
 
@@ -563,20 +530,20 @@ computeQuadBox (Quad *q,
 	    y2 = height;
     }
 
-    if (q->maxWidth < x2 - x1)
+    if (q->max_width < x2 - x1)
     {
 	if (q->align & ALIGN_RIGHT)
-	    x1 = x2 - q->maxWidth;
+	    x1 = x2 - q->max_width;
 	else
-	    x2 = x1 + q->maxWidth;
+	    x2 = x1 + q->max_width;
     }
 
-    if (q->maxHeight < y2 - y1)
+    if (q->max_height < y2 - y1)
     {
 	if (q->align & ALIGN_BOTTOM)
-	    y1 = y2 - q->maxHeight;
+	    y1 = y2 - q->max_height;
 	else
-	    y2 = y1 + q->maxHeight;
+	    y2 = y1 + q->max_height;
     }
 
     *return_x1 = x1;
@@ -634,7 +601,7 @@ decorCreateDecoration (CompScreen *screen,
     unsigned char *data;
     long	  *prop;
     Pixmap	  pixmap;
-    Quad	  *quad;
+    decor_quad_t  *quad;
     int		  nQuad;
     int		  left, right, top, bottom;
     int		  x1, y1, x2, y2;
@@ -700,7 +667,7 @@ decorCreateDecoration (CompScreen *screen,
 
     nQuad = (n - 12) / 9;
 
-    quad = malloc (sizeof (Quad) * nQuad);
+    quad = malloc (sizeof (decor_quad_t) * nQuad);
     if (!quad)
     {
 	decorReleaseTexture (screen, decoration->texture);
@@ -737,8 +704,8 @@ decorCreateDecoration (CompScreen *screen,
 	quad->p2.x = *prop++;
 	quad->p2.y = *prop++;
 
-	quad->maxWidth  = *prop++;
-	quad->maxHeight = *prop++;
+	quad->max_width  = *prop++;
+	quad->max_height = *prop++;
 
 	quad->m.x0 = *prop++;
 	quad->m.y0 = *prop++;
