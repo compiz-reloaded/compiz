@@ -552,60 +552,26 @@ computeQuadBox (decor_quad_t *q,
     *return_y2 = y2;
 }
 
-/*
-  decoration property
-  -------------------
-
-  data[0] = version
-
-  data[1] = pixmap
-
-  data[2] = input left
-  data[3] = input right
-  data[4] = input top
-  data[5] = input bottom
-
-  data[6] = input left when maximized
-  data[7] = input right when maximized
-  data[8] = input top when maximized
-  data[9] = input bottom when maximized
-
-  data[10] = min width
-  data[11] = min height
-
-  flags
-
-  1st to 4nd bit p1 gravity, 5rd to 8th bit p2 gravity,
-  9rd and 10th bit alignment, 11rd and 12th bit clamp,
-  13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
-
-  data[11 + n * 9 + 1] = flags
-  data[11 + n * 9 + 2] = p1 x
-  data[11 + n * 9 + 3] = p1 y
-  data[11 + n * 9 + 4] = p2 x
-  data[11 + n * 9 + 5] = p2 y
-  data[11 + n * 9 + 6] = widthMax
-  data[11 + n * 9 + 7] = heightMax
-  data[11 + n * 9 + 8] = x0
-  data[11 + n * 9 + 9] = y0
- */
 static Decoration *
 decorCreateDecoration (CompScreen *screen,
 		       Window	  id,
 		       Atom	  decorAtom)
 {
-    Decoration	  *decoration;
-    Atom	  actual;
-    int		  result, format;
-    unsigned long n, nleft;
-    unsigned char *data;
-    long	  *prop;
-    Pixmap	  pixmap;
-    decor_quad_t  *quad;
-    int		  nQuad;
-    int		  left, right, top, bottom;
-    int		  x1, y1, x2, y2;
-    int		  flags;
+    Decoration	    *decoration;
+    Atom	    actual;
+    int		    result, format;
+    unsigned long   n, nleft;
+    unsigned char   *data;
+    long	    *prop;
+    Pixmap	    pixmap;
+    decor_extents_t input;
+    decor_extents_t maxInput;
+    decor_quad_t    *quad;
+    int		    nQuad;
+    int		    minWidth;
+    int		    minHeight;
+    int		    left, right, top, bottom;
+    int		    x1, y1, x2, y2;
 
     result = XGetWindowProperty (screen->display->display, id,
 				 decorAtom, 0L, 1024L, FALSE,
@@ -615,103 +581,73 @@ decorCreateDecoration (CompScreen *screen,
     if (result != Success || !n || !data)
 	return NULL;
 
-    if (n < 12 + 9)
-    {
-	XFree (data);
-	return NULL;
-    }
-
     prop = (long *) data;
 
-    if (*prop != DECOR_INTERFACE_VERSION)
+    if (decor_property_get_version (prop) != decor_version ())
     {
 	fprintf (stderr, "%s: decoration: property ignored because "
 		 "version is %d and decoration plugin version is %d\n",
-		 programName, (int) *prop, DECOR_INTERFACE_VERSION);
+		 programName, decor_property_get_version (prop),
+		 decor_version ());
 
 	XFree (data);
 	return NULL;
     }
 
-    prop++;
+    nQuad = (n - BASE_PROP_SIZE) / QUAD_PROP_SIZE;
+
+    quad = malloc (sizeof (decor_quad_t) * nQuad);
+    if (!quad)
+    {
+	XFree (data);
+	return NULL;
+    }
+
+    nQuad = decor_property_to_quads (prop,
+				     n,
+				     &pixmap,
+				     &input,
+				     &maxInput,
+				     &minWidth,
+				     &minHeight,
+				     quad);
+
+    XFree (data);
+
+    if (!nQuad)
+    {
+	free (quad);
+	return NULL;
+    }
 
     decoration = malloc (sizeof (Decoration));
     if (!decoration)
     {
-	XFree (data);
+	free (quad);
 	return NULL;
     }
-
-    memcpy (&pixmap, prop++, sizeof (Pixmap));
 
     decoration->texture = decorGetTexture (screen, pixmap);
     if (!decoration->texture)
     {
 	free (decoration);
-	XFree (data);
+	free (quad);
 	return NULL;
     }
 
-    decoration->input.left   = *prop++;
-    decoration->input.right  = *prop++;
-    decoration->input.top    = *prop++;
-    decoration->input.bottom = *prop++;
-
-    decoration->maxInput.left   = *prop++;
-    decoration->maxInput.right  = *prop++;
-    decoration->maxInput.top    = *prop++;
-    decoration->maxInput.bottom = *prop++;
-
-    decoration->minWidth  = *prop++;
-    decoration->minHeight = *prop++;
-
-    nQuad = (n - 12) / 9;
-
-    quad = malloc (sizeof (decor_quad_t) * nQuad);
-    if (!quad)
-    {
-	decorReleaseTexture (screen, decoration->texture);
-	free (decoration);
-	XFree (data);
-	return NULL;
-    }
-
-    decoration->quad  = quad;
-    decoration->nQuad = nQuad;
+    decoration->minWidth  = minWidth;
+    decoration->minHeight = minHeight;
+    decoration->quad	  = quad;
+    decoration->nQuad	  = nQuad;
 
     left   = 0;
-    right  = decoration->minWidth;
+    right  = minWidth;
     top    = 0;
-    bottom = decoration->minHeight;
+    bottom = minHeight;
 
     while (nQuad--)
     {
-	flags = *prop++;
-
-	quad->p1.gravity = (flags >> 0) & 0xf;
-	quad->p2.gravity = (flags >> 4) & 0xf;
-
-	quad->align = (flags >> 8)  & 0x3;
-	quad->clamp = (flags >> 10) & 0x3;
-
-	quad->m.xx = (flags & XX_MASK) ? 1.0f : 0.0f;
-	quad->m.xy = (flags & XY_MASK) ? 1.0f : 0.0f;
-	quad->m.yx = (flags & YX_MASK) ? 1.0f : 0.0f;
-	quad->m.yy = (flags & YY_MASK) ? 1.0f : 0.0f;
-
-	quad->p1.x = *prop++;
-	quad->p1.y = *prop++;
-	quad->p2.x = *prop++;
-	quad->p2.y = *prop++;
-
-	quad->max_width  = *prop++;
-	quad->max_height = *prop++;
-
-	quad->m.x0 = *prop++;
-	quad->m.y0 = *prop++;
-
-	computeQuadBox (quad, decoration->minWidth, decoration->minHeight,
-			&x1, &y1, &x2, &y2);
+	computeQuadBox (quad, minWidth, minHeight, &x1, &y1, &x2, &y2);
 
 	if (x1 < left)
 	    left = x1;
@@ -725,12 +661,20 @@ decorCreateDecoration (CompScreen *screen,
 	quad++;
     }
 
-    XFree (data);
-
     decoration->output.left   = -left;
-    decoration->output.right  = right - decoration->minWidth;
+    decoration->output.right  = right - minWidth;
     decoration->output.top    = -top;
-    decoration->output.bottom = bottom - decoration->minHeight;
+    decoration->output.bottom = bottom - minHeight;
+
+    decoration->input.left   = input.left;
+    decoration->input.right  = input.right;
+    decoration->input.top    = input.top;
+    decoration->input.bottom = input.bottom;
+
+    decoration->maxInput.left   = maxInput.left;
+    decoration->maxInput.right  = maxInput.right;
+    decoration->maxInput.top    = maxInput.top;
+    decoration->maxInput.bottom = maxInput.bottom;
 
     decoration->refCount = 1;
 

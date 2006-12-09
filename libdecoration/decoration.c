@@ -30,6 +30,12 @@
 #include <X11/Xatom.h>
 #include <X11/Xregion.h>
 
+int
+decor_version (void)
+{
+    return DECOR_INTERFACE_VERSION;
+}
+
 /*
   decoration property
   -------------------
@@ -117,6 +123,81 @@ decor_quads_to_property (long		 *data,
 
 	quad++;
     }
+}
+
+int
+decor_property_get_version (long *data)
+{
+    return (int) *data;
+}
+
+int
+decor_property_to_quads (long		 *data,
+			 int		 size,
+			 Pixmap		 *pixmap,
+			 decor_extents_t *input,
+			 decor_extents_t *max_input,
+			 int		 *min_width,
+			 int		 *min_height,
+			 decor_quad_t    *quad)
+{
+    int i, n, flags;
+
+    if (size < BASE_PROP_SIZE + QUAD_PROP_SIZE)
+	return 0;
+
+    if (decor_property_get_version (data) != decor_version ())
+	return 0;
+
+    data++;
+
+    memcpy (pixmap, data++, sizeof (Pixmap));
+
+    input->left   = *data++;
+    input->right  = *data++;
+    input->top    = *data++;
+    input->bottom = *data++;
+
+    max_input->left   = *data++;
+    max_input->right  = *data++;
+    max_input->top    = *data++;
+    max_input->bottom = *data++;
+
+    *min_width  = *data++;
+    *min_height = *data++;
+
+    n = (size - BASE_PROP_SIZE) / QUAD_PROP_SIZE;
+
+    for (i = 0; i < n; i++)
+    {
+	flags = *data++;
+
+	quad->p1.gravity = (flags >> 0) & 0xf;
+	quad->p2.gravity = (flags >> 4) & 0xf;
+
+	quad->align = (flags >> 8)  & 0x3;
+	quad->clamp = (flags >> 10) & 0x3;
+
+	quad->m.xx = (flags & XX_MASK) ? 1.0f : 0.0f;
+	quad->m.xy = (flags & XY_MASK) ? 1.0f : 0.0f;
+	quad->m.yx = (flags & YX_MASK) ? 1.0f : 0.0f;
+	quad->m.yy = (flags & YY_MASK) ? 1.0f : 0.0f;
+
+	quad->p1.x = *data++;
+	quad->p1.y = *data++;
+	quad->p2.x = *data++;
+	quad->p2.y = *data++;
+
+	quad->max_width  = *data++;
+	quad->max_height = *data++;
+
+	quad->m.x0 = *data++;
+	quad->m.y0 = *data++;
+
+	quad++;
+    }
+
+    return n;
 }
 
 int

@@ -150,6 +150,9 @@ typedef void (*decor_draw_func_t) (Display	   *xdisplay,
 #define QUAD_PROP_SIZE 9
 #define N_QUADS_MAX    24
 
+int
+decor_version (void);
+
 void
 decor_quads_to_property (long		 *data,
 			 Pixmap		 pixmap,
@@ -159,6 +162,19 @@ decor_quads_to_property (long		 *data,
 			 int		 min_height,
 			 decor_quad_t    *quad,
 			 int		 nQuad);
+
+int
+decor_property_get_version (long *data);
+
+int
+decor_property_to_quads (long		 *data,
+			 int		 size,
+			 Pixmap		 *pixmap,
+			 decor_extents_t *input,
+			 decor_extents_t *max_input,
+			 int		 *min_width,
+			 int		 *min_height,
+			 decor_quad_t    *quad);
 
 int
 decor_set_vert_quad_row (decor_quad_t *q,

@@ -34,8 +34,10 @@ libresize_la_LDFLAGS = -module -avoid-version -no-undefined
 libresize_la_LIBADD = @COMPIZ_LIBS@
 libresize_la_SOURCES = resize.c
 
+libdecoration_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libdecoration_la_LDFLAGS = -module -avoid-version -no-undefined
-libdecoration_la_LIBADD = @COMPIZ_LIBS@
+libdecoration_la_LIBADD = @COMPIZ_LIBS@		       \
+	$(top_builddir)/libdecoration/libdecoration.la
 libdecoration_la_SOURCES = decoration.c
 
 libswitcher_la_LDFLAGS = -module -avoid-version -no-undefined
