@@ -32,11 +32,13 @@
 
 #include <compiz.h>
 
-#define COMPIZ_DBUS_SERVICE_NAME	   "org.freedesktop.compiz"
-#define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME   "activate"
-#define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME "deactivate"
-#define COMPIZ_DBUS_SET_MEMBER_NAME        "set"
-#define COMPIZ_DBUS_GET_MEMBER_NAME        "get"
+#define COMPIZ_DBUS_SERVICE_NAME	             "org.freedesktop.compiz"
+#define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME             "activate"
+#define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME           "deactivate"
+#define COMPIZ_DBUS_SET_MEMBER_NAME                  "set"
+#define COMPIZ_DBUS_GET_MEMBER_NAME                  "get"
+#define COMPIZ_DBUS_GET_METADATA_MEMBER_NAME	     "getMetadata"
+#define COMPIZ_DBUS_LIST_MEMBER_NAME		     "list"
 
 typedef enum {
     DbusActionIndexKeyBinding    = 0,
@@ -140,15 +142,14 @@ dbusGetOptionsFromPath (CompDisplay *d,
  * /org/freedesktop/compiz/cube/allscreens/unfold	      \
  * org.freedesktop.compiz.activate			      \
  * string:'root'					      \
- * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`     \
- * string:'face' int32:1
+ * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`
  *
  * dbus-send --type=method_call --dest=org.freedesktop.compiz \
  * /org/freedesktop/compiz/cube/allscreens/unfold	      \
  * org.freedesktop.compiz.deactivate			      \
  * string:'root'					      \
- * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`     \
- * string:'face' int32:1
+ * int32:`xwininfo -root | grep id: | awk '{ print $4 }'`
+ *
  */
 static Bool
 dbusHandleActionMessage (DBusConnection *connection,
@@ -629,22 +630,20 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
 			    CompDisplay	   *d,
 			    char	   **path)
 {
-    CompScreen *s;
-    CompOption *option;
-    int	       nOption;
+    CompScreen  *s;
+    CompOption  *option;
+    int	        nOption = 0;
+    DBusMessage *reply;
 
     option = dbusGetOptionsFromPath (d, path, &s, &nOption);
-    if (!option)
-	return FALSE;
+
+    reply = dbus_message_new_method_return (message);
 
     while (nOption--)
     {
 	if (strcmp (option->name, path[2]) == 0)
 	{
-	    DBusMessage *reply;
-	    int		i;
-
-	    reply = dbus_message_new_method_return (message);
+	    int	i;
 
 	    if (option->type == CompOptionTypeList)
 	    {
@@ -688,18 +687,141 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
 		dbusAppendOptionValue (reply, option->type, &option->value);
 	    }
 
-	    dbus_connection_send (connection, reply, NULL);
-	    dbus_connection_flush (connection);
-
-	    dbus_message_unref (reply);
-
-	    return TRUE;
+	    break;
 	}
 
 	option++;
     }
 
-    return FALSE;
+    dbus_connection_send (connection, reply, NULL);
+    dbus_connection_flush (connection);
+
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandleListMessage (DBusConnection *connection,
+		       DBusMessage    *message,
+		       CompDisplay    *d,
+		       char	      **path)
+{
+    CompScreen  *s;
+    CompOption  *option;
+    int	        nOption = 0;
+    DBusMessage *reply;
+
+    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+
+    reply = dbus_message_new_method_return (message);
+
+    while (nOption--)
+    {
+	dbus_message_append_args (reply,
+				  DBUS_TYPE_STRING, &option->name,
+				  DBUS_TYPE_INVALID);
+	option++;
+    }
+
+    dbus_connection_send (connection, reply, NULL);
+    dbus_connection_flush (connection);
+
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandleGetMetadataMessage (DBusConnection *connection,
+			      DBusMessage    *message,
+			      CompDisplay    *d,
+			      char	     **path)
+{
+    CompScreen  *s;
+    CompOption  *option;
+    int	        nOption = 0;
+    DBusMessage *reply;
+
+    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+
+    reply = dbus_message_new_method_return (message);
+
+    while (nOption--)
+    {
+	if (strcmp (option->name, path[2]) == 0)
+	{
+	    CompOptionType restrictionType = option->type;
+	    char	   *type;
+
+	    type = optionTypeToString (option->type);
+
+	    dbus_message_append_args (reply,
+				      DBUS_TYPE_STRING, &option->shortDesc,
+				      DBUS_TYPE_STRING, &option->longDesc,
+				      DBUS_TYPE_STRING, &type,
+				      DBUS_TYPE_INVALID);
+
+	    if (restrictionType == CompOptionTypeList)
+	    {
+		type = optionTypeToString (option->value.list.type);
+		restrictionType = option->value.list.type;
+
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &type,
+					  DBUS_TYPE_INVALID);
+	    }
+
+	    switch (restrictionType) {
+	    case CompOptionTypeInt:
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_INT32, &option->rest.i.min,
+					  DBUS_TYPE_INT32, &option->rest.i.max,
+					  DBUS_TYPE_INVALID);
+		break;
+	    case CompOptionTypeFloat: {
+		double min, max, precision;
+
+		min	  = option->rest.f.min;
+		max	  = option->rest.f.max;
+		precision = option->rest.f.precision;
+
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_DOUBLE, &min,
+					  DBUS_TYPE_DOUBLE, &max,
+					  DBUS_TYPE_DOUBLE, &precision,
+					  DBUS_TYPE_INVALID);
+	    } break;
+	    case CompOptionTypeString:
+		if (option->rest.s.nString)
+		{
+		    char *possible;
+		    int  i;
+
+		    for (i = 0; i < option->rest.s.nString; i++)
+		    {
+			possible = option->rest.s.string[i];
+
+			dbus_message_append_args (reply,
+						  DBUS_TYPE_STRING, &possible,
+						  DBUS_TYPE_INVALID);
+		    }
+		}
+	    default:
+		break;
+	    }
+	}
+
+	option++;
+    }
+
+    dbus_connection_send (connection, reply, NULL);
+    dbus_connection_flush (connection);
+
+    dbus_message_unref (reply);
+
+    return TRUE;
+
 }
 
 static DBusHandlerResult
@@ -728,7 +850,7 @@ dbusHandleMessage (DBusConnection *connection,
     if (!dbus_message_get_path_decomposed (message, &path))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
-    if (!path[0] || !path[1] || !path[2] || !path[3] || !path[4] || !path[5])
+    if (!path[0] || !path[1] || !path[2] || !path[3] || !path[4])
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
     if (strcmp (path[0], "org")	       ||
@@ -736,24 +858,40 @@ dbusHandleMessage (DBusConnection *connection,
 	strcmp (path[2], "compiz"))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
-    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
+    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME) &&
+				 path[5])
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  TRUE);
     }
     else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
+				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME) &&
+				      path[5])
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  FALSE);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME))
+    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME) &&
+				      path[5])
     {
 	status = dbusHandleSetOptionMessage (connection, message, d, &path[3]);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_GET_MEMBER_NAME))
+    else if (dbus_message_has_member (message,
+				      COMPIZ_DBUS_GET_MEMBER_NAME) && path[5])
     {
 	status = dbusHandleGetOptionMessage (connection, message, d, &path[3]);
+    }
+    else if (dbus_message_has_member (message,
+				      COMPIZ_DBUS_GET_METADATA_MEMBER_NAME) &&
+	     path[5])
+    {
+	status = dbusHandleGetMetadataMessage (connection, message, d,
+					       &path[3]);
+    }
+    else if (dbus_message_has_member (message,
+				      COMPIZ_DBUS_LIST_MEMBER_NAME))
+    {
+	status = dbusHandleListMessage (connection, message, d, &path[3]);
     }
 
     dbus_free_string_array (path);
