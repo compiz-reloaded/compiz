@@ -704,22 +704,26 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
     CompScreen  *s;
     CompOption  *option;
     int	        nOption = 0;
-    DBusMessage *reply;
+    DBusMessage *reply = NULL;
 
     option = dbusGetOptionsFromPath (d, path, &s, &nOption);
-
-    reply = dbus_message_new_method_return (message);
 
     while (nOption--)
     {
 	if (strcmp (option->name, path[2]) == 0)
 	{
+	    reply = dbus_message_new_method_return (message);
 	    dbusAppendOptionValue (d, reply, option->type, &option->value);
 	    break;
 	}
 
 	option++;
     }
+
+    if (!reply)
+	reply = dbus_message_new_error (message,
+					DBUS_ERROR_FAILED,
+					"No such option");
 
     dbus_connection_send (connection, reply, NULL);
     dbus_connection_flush (connection);
@@ -769,11 +773,9 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
     CompScreen  *s;
     CompOption  *option;
     int	        nOption = 0;
-    DBusMessage *reply;
+    DBusMessage *reply = NULL;
 
     option = dbusGetOptionsFromPath (d, path, &s, &nOption);
-
-    reply = dbus_message_new_method_return (message);
 
     while (nOption--)
     {
@@ -781,6 +783,8 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 	{
 	    CompOptionType restrictionType = option->type;
 	    char	   *type;
+
+	    reply = dbus_message_new_method_return (message);
 
 	    type = optionTypeToString (option->type);
 
@@ -838,10 +842,16 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 	    default:
 		break;
 	    }
+	    break;
 	}
 
 	option++;
     }
+
+    if (!reply)
+	reply = dbus_message_new_error (message,
+					DBUS_ERROR_FAILED,
+					"No such option");
 
     dbus_connection_send (connection, reply, NULL);
     dbus_connection_flush (connection);
