@@ -33,12 +33,15 @@
 #include <compiz.h>
 
 #define COMPIZ_DBUS_SERVICE_NAME	             "org.freedesktop.compiz"
+
 #define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME             "activate"
 #define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME           "deactivate"
 #define COMPIZ_DBUS_SET_MEMBER_NAME                  "set"
 #define COMPIZ_DBUS_GET_MEMBER_NAME                  "get"
 #define COMPIZ_DBUS_GET_METADATA_MEMBER_NAME	     "getMetadata"
 #define COMPIZ_DBUS_LIST_MEMBER_NAME		     "list"
+
+#define COMPIZ_DBUS_CHANGED_SIGNAL_NAME		     "changed"
 
 typedef enum {
     DbusActionIndexKeyBinding    = 0,
@@ -51,15 +54,31 @@ typedef enum {
 static int displayPrivateIndex;
 
 typedef struct _DbusDisplay {
+    int screenPrivateIndex;
+
     DBusConnection    *connection;
     CompWatchFdHandle watchFdHandle;
+
+    SetDisplayOptionProc	  setDisplayOption;
+    SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 } DbusDisplay;
+
+typedef struct _DbusScreen {
+    SetScreenOptionProc		 setScreenOption;
+    SetScreenOptionForPluginProc setScreenOptionForPlugin;
+} DbusScreen;
 
 #define GET_DBUS_DISPLAY(d)				     \
     ((DbusDisplay *) (d)->privates[displayPrivateIndex].ptr)
 
 #define DBUS_DISPLAY(d)			   \
     DbusDisplay *dd = GET_DBUS_DISPLAY (d)
+
+#define GET_DBUS_SCREEN(s, dd)				         \
+    ((DbusScreen *) (s)->privates[(dd)->screenPrivateIndex].ptr)
+
+#define DBUS_SCREEN(s)						        \
+    DbusScreen *ds = GET_DBUS_SCREEN (s, GET_DBUS_DISPLAY (s->display))
 
 
 static CompOption *
@@ -570,9 +589,9 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 }
 
 static void
-dbusAppendOptionValue (DBusMessage     *message,
-		       CompOptionType  type,
-		       CompOptionValue *value)
+dbusAppendSimpleOptionValue (DBusMessage     *message,
+			     CompOptionType  type,
+			     CompOptionValue *value)
 {
     double d;
     char   *s;
@@ -614,6 +633,58 @@ dbusAppendOptionValue (DBusMessage     *message,
     }
 }
 
+static void
+dbusAppendOptionValue (CompDisplay     *d,
+		       DBusMessage     *message,
+		       CompOptionType  type,
+		       CompOptionValue *value)
+{
+    int	i;
+
+    if (type == CompOptionTypeList)
+    {
+	for (i = 0; i < value->list.nValue; i++)
+	    dbusAppendSimpleOptionValue (message, value->list.type,
+					 &value->list.value[i]);
+    }
+    else if (type == CompOptionTypeAction)
+    {
+	CompAction *a = &value->action;
+	char	   *key = "Disabled";
+	char	   *button = "Disabled";
+	char	   edge[256];
+	int	   edgeButton = 0;
+
+	if (a->type & CompBindingTypeKey)
+	    key = keyBindingToString (d, &a->key);
+
+	if (a->type & CompBindingTypeButton)
+	    button = buttonBindingToString (d, &a->button);
+
+	*edge = '\0';
+
+	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	    if (a->edgeMask & (1 << i))
+		strcpy (edge + strlen (edge), edgeToString (i));
+
+	if (a->type & CompBindingTypeEdgeButton)
+	    edgeButton = a->edgeButton;
+
+	dbus_message_append_args (message,
+				  DBUS_TYPE_STRING, &key,
+				  DBUS_TYPE_STRING, &button,
+				  DBUS_TYPE_BOOLEAN, &a->bell,
+				  DBUS_TYPE_STRING, &edge,
+				  DBUS_TYPE_INT32, &edgeButton,
+				  DBUS_TYPE_INVALID);
+    }
+    else
+    {
+	dbusAppendSimpleOptionValue (message, type, value);
+    }
+
+}
+
 /*
  * 'Get' can be used to retrieve the value of any existing option.
  *
@@ -643,50 +714,7 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
     {
 	if (strcmp (option->name, path[2]) == 0)
 	{
-	    int	i;
-
-	    if (option->type == CompOptionTypeList)
-	    {
-		for (i = 0; i < option->value.list.nValue; i++)
-		    dbusAppendOptionValue (reply, option->value.list.type,
-					   &option->value.list.value[i]);
-	    }
-	    else if (option->type == CompOptionTypeAction)
-	    {
-		CompAction *a = &option->value.action;
-		char	   *key = "Disabled";
-		char	   *button = "Disabled";
-		char	   edge[256];
-		int	   edgeButton = 0;
-
-		if (a->type & CompBindingTypeKey)
-		    key = keyBindingToString (d, &a->key);
-
-		if (a->type & CompBindingTypeButton)
-		    button = buttonBindingToString (d, &a->button);
-
-		*edge = '\0';
-
-		for (i = 0; i < SCREEN_EDGE_NUM; i++)
-		    if (a->edgeMask & (1 << i))
-			strcpy (edge + strlen (edge), edgeToString (i));
-
-		if (a->type & CompBindingTypeEdgeButton)
-		    edgeButton = a->edgeButton;
-
-		dbus_message_append_args (reply,
-					  DBUS_TYPE_STRING, &key,
-					  DBUS_TYPE_STRING, &button,
-					  DBUS_TYPE_BOOLEAN, &a->bell,
-					  DBUS_TYPE_STRING, &edge,
-					  DBUS_TYPE_INT32, &edgeButton,
-					  DBUS_TYPE_INVALID);
-	    }
-	    else
-	    {
-		dbusAppendOptionValue (reply, option->type, &option->value);
-	    }
-
+	    dbusAppendOptionValue (d, reply, option->type, &option->value);
 	    break;
 	}
 
@@ -920,6 +948,187 @@ dbusProcessMessages (void *data)
     return TRUE;
 }
 
+static void
+dbusSendChangeSignalForOption (CompDisplay     *d,
+			       CompOptionType  type,
+			       CompOptionValue *value,
+			       char	       *path)
+{
+    DBusMessage *signal;
+
+    DBUS_DISPLAY (d);
+
+    signal = dbus_message_new_signal (path,
+				      COMPIZ_DBUS_SERVICE_NAME,
+				      COMPIZ_DBUS_CHANGED_SIGNAL_NAME);
+
+    dbusAppendOptionValue (d, signal, type,  value);
+
+    dbus_connection_send (dd->connection, signal, NULL);
+    dbus_connection_flush (dd->connection);
+
+    dbus_message_unref (signal);
+}
+
+static void
+dbusSendChangeSignalForDisplayOption (CompDisplay *d,
+				      CompOption  *o,
+				      char	  *plugin)
+{
+    char path[256];
+
+    if (o)
+    {
+	sprintf (path, "/org/freedesktop/compiz/%s/allscreens/%s",
+		 plugin, o->name);
+	dbusSendChangeSignalForOption (d, o->type, &o->value, path);
+    }
+}
+
+static void
+dbusSendChangeSignalForScreenOption (CompScreen *s,
+				     CompOption *o,
+				     char	*plugin)
+{
+    char path[256];
+
+    if (o)
+    {
+	sprintf (path, "/org/freedesktop/compiz/%s/screens%d/%s",
+		 plugin, s->screenNum, o->name);
+	dbusSendChangeSignalForOption (s->display, o->type, &o->value, path);
+    }
+}
+
+static Bool
+dbusSetDisplayOption (CompDisplay     *d,
+		      char	      *name,
+		      CompOptionValue *value)
+{
+    Bool status;
+
+    DBUS_DISPLAY (d);
+
+    UNWRAP (dd, d, setDisplayOption);
+    status = (*d->setDisplayOption) (d, name, value);
+    WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
+
+    if (status)
+    {
+	CompOption *option;
+	int	   nOption;
+
+	option = compGetDisplayOptions (d, &nOption);
+	dbusSendChangeSignalForDisplayOption (d,
+					      compFindOption (option, nOption,
+							      name, 0),
+					      "core");
+    }
+
+    return status;
+}
+
+static Bool
+dbusSetDisplayOptionForPlugin (CompDisplay     *d,
+			       char	       *plugin,
+			       char	       *name,
+			       CompOptionValue *value)
+{
+    Bool status;
+
+    DBUS_DISPLAY (d);
+
+    UNWRAP (dd, d, setDisplayOptionForPlugin);
+    status = (*d->setDisplayOptionForPlugin) (d, plugin, name, value);
+    WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
+
+    if (status)
+    {
+	CompPlugin *p;
+
+	p = findActivePlugin (plugin);
+	if (p && p->vTable->getDisplayOptions)
+	{
+	    CompOption *option;
+	    int	       nOption;
+
+	    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	    dbusSendChangeSignalForDisplayOption (d,
+						  compFindOption (option,
+								  nOption,
+								  name, 0),
+						  p->vTable->name);
+	}
+    }
+
+    return status;
+}
+
+static Bool
+dbusSetScreenOption (CompScreen      *s,
+		     char	     *name,
+		     CompOptionValue *value)
+{
+    Bool status;
+
+    DBUS_SCREEN (s);
+
+    UNWRAP (ds, s, setScreenOption);
+    status = (*s->setScreenOption) (s, name, value);
+    WRAP (ds, s, setScreenOption, dbusSetScreenOption);
+
+    if (status)
+    {
+	CompOption *option;
+	int	   nOption;
+
+	option = compGetScreenOptions (s, &nOption);
+	dbusSendChangeSignalForScreenOption (s,
+					     compFindOption (option,
+							     nOption,
+							     name, 0),
+					     "core");
+    }
+
+    return status;
+}
+
+static Bool
+dbusSetScreenOptionForPlugin (CompScreen      *s,
+			      char	      *plugin,
+			      char	      *name,
+			      CompOptionValue *value)
+{
+    Bool status;
+
+    DBUS_SCREEN (s);
+
+    UNWRAP (ds, s, setScreenOptionForPlugin);
+    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
+    WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
+
+    if (status)
+    {
+	CompPlugin *p;
+
+	p = findActivePlugin (plugin);
+	if (p && p->vTable->getScreenOptions)
+	{
+	    CompOption *option;
+	    int	       nOption;
+
+	    option = (*p->vTable->getScreenOptions) (s, &nOption);
+	    dbusSendChangeSignalForScreenOption (s,
+						 compFindOption (option,
+								 nOption,
+								 name, 0),
+						 p->vTable->name);
+	}
+    }
+
+    return status;
+}
+
 static Bool
 dbusInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -933,6 +1142,13 @@ dbusInitDisplay (CompPlugin  *p,
     if (!dd)
 	return FALSE;
 
+    dd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (dd->screenPrivateIndex < 0)
+    {
+	free (dd);
+	return FALSE;
+    }
+
     dbus_error_init (&error);
 
     dd->connection = dbus_bus_get (DBUS_BUS_SESSION, &error);
@@ -942,6 +1158,7 @@ dbusInitDisplay (CompPlugin  *p,
 		 programName, error.message);
 
 	dbus_error_free (&error);
+	free (dd);
 
 	return FALSE;
     }
@@ -959,6 +1176,7 @@ dbusInitDisplay (CompPlugin  *p,
 
 	/* dbus_connection_unref (dd->connection); */
 	dbus_error_free (&error);
+	free (dd);
 
 	return FALSE;
     }
@@ -971,6 +1189,7 @@ dbusInitDisplay (CompPlugin  *p,
 		 "primary owner\n", programName);
 
 	/* dbus_connection_unref (dd->connection); */
+	free (dd);
 
 	return FALSE;
     }
@@ -984,6 +1203,7 @@ dbusInitDisplay (CompPlugin  *p,
 		 programName);
 
 	/* dbus_connection_unref (dd->connection); */
+	free (dd);
 
 	return FALSE;
     }
@@ -995,6 +1215,7 @@ dbusInitDisplay (CompPlugin  *p,
 		 programName);
 
 	/* dbus_connection_unref (dd->connection); */
+	free (dd);
 
 	return FALSE;
     }
@@ -1003,6 +1224,9 @@ dbusInitDisplay (CompPlugin  *p,
 					POLLIN | POLLPRI | POLLHUP | POLLERR,
 					dbusProcessMessages,
 					d);
+
+    WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
+    WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
 
     d->privates[displayPrivateIndex].ptr = dd;
 
@@ -1026,7 +1250,42 @@ dbusFiniDisplay (CompPlugin  *p,
       dbus_connection_unref (dd->connection);
     */
 
+    UNWRAP (dd, d, setDisplayOption);
+    UNWRAP (dd, d, setDisplayOptionForPlugin);
+
     free (dd);
+}
+
+static Bool
+dbusInitScreen (CompPlugin *p,
+		CompScreen *s)
+{
+    DbusScreen *ds;
+
+    DBUS_DISPLAY (s->display);
+
+    ds = malloc (sizeof (DbusScreen));
+    if (!ds)
+	return FALSE;
+
+    WRAP (ds, s, setScreenOption, dbusSetScreenOption);
+    WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
+
+    s->privates[dd->screenPrivateIndex].ptr = ds;
+
+    return TRUE;
+}
+
+static void
+dbusFiniScreen (CompPlugin *p,
+		CompScreen *s)
+{
+    DBUS_SCREEN (s);
+
+    UNWRAP (ds, s, setScreenOption);
+    UNWRAP (ds, s, setScreenOptionForPlugin);
+
+    free (ds);
 }
 
 static Bool
@@ -1062,8 +1321,8 @@ CompPluginVTable dbusVTable = {
     dbusFini,
     dbusInitDisplay,
     dbusFiniDisplay,
-    0, /* InitScreen */
-    0, /* FiniScreen */
+    dbusInitScreen,
+    dbusFiniScreen,
     0, /* InitWindow */
     0, /* FiniWindow */
     0, /* GetDisplayOptions */
