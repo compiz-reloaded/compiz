@@ -499,6 +499,9 @@ stringToColor (const char     *color,
 char *
 colorToString (unsigned short *rgba);
 
+char *
+optionTypeToString (CompOptionType type);
+
 
 /* display.c */
 

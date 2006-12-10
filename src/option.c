@@ -667,3 +667,26 @@ colorToString (unsigned short *rgba)
 
     return strdup (tmp);
 }
+
+char *
+optionTypeToString (CompOptionType type)
+{
+    switch (type) {
+    case CompOptionTypeAction:
+	return "action";
+    case CompOptionTypeBool:
+	return "bool";
+    case CompOptionTypeInt:
+	return "int";
+    case CompOptionTypeFloat:
+	return "float";
+    case CompOptionTypeString:
+	return "string";
+    case CompOptionTypeColor:
+	return "color";
+    case CompOptionTypeList:
+	return "list";
+    }
+
+    return "unknown";
+}
