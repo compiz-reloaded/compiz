@@ -1050,6 +1050,10 @@ gconfFiniDisplay (CompPlugin  *p,
 
     g_object_unref (gd->client);
 
+    UNWRAP (gd, d, initPluginForDisplay);
+    UNWRAP (gd, d, setDisplayOption);
+    UNWRAP (gd, d, setDisplayOptionForPlugin);
+
     freeScreenPrivateIndex (d, gd->screenPrivateIndex);
 
     free (gd);
