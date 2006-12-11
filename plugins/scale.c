@@ -111,10 +111,11 @@ typedef struct _ScaleSlot {
     float scale;
 } ScaleSlot;
 
-#define SCALE_DISPLAY_OPTION_INITIATE       0
-#define SCALE_DISPLAY_OPTION_INITIATE_ALL   1
-#define SCALE_DISPLAY_OPTION_INITIATE_GROUP 2
-#define SCALE_DISPLAY_OPTION_NUM            3
+#define SCALE_DISPLAY_OPTION_INITIATE        0
+#define SCALE_DISPLAY_OPTION_INITIATE_ALL    1
+#define SCALE_DISPLAY_OPTION_INITIATE_GROUP  2
+#define SCALE_DISPLAY_OPTION_INITIATE_OUTPUT 3
+#define SCALE_DISPLAY_OPTION_NUM             4
 
 typedef struct _ScaleDisplay {
     int		    screenPrivateIndex;
@@ -140,6 +141,7 @@ typedef struct _ScaleDisplay {
 
 typedef enum {
     ScaleTypeNormal = 0,
+    ScaleTypeOutput,
     ScaleTypeGroup,
     ScaleTypeAll
 } ScaleType;
@@ -459,11 +461,17 @@ isScaleWin (CompWindow *w)
     if (!w->mapNum || w->attrib.map_state != IsViewable)
 	return FALSE;
 
-    if (ss->type == ScaleTypeGroup)
-    {
+    switch (ss->type) {
+    case ScaleTypeGroup:
 	if (ss->clientLeader != w->clientLeader &&
 	    ss->clientLeader != w->id)
 	    return FALSE;
+	break;
+    case ScaleTypeOutput:
+	if (outputDeviceForWindow(w) != w->screen->currentOutputDev)
+	    return FALSE;
+    default:
+	break;
     }
 
     return TRUE;
@@ -1391,6 +1399,33 @@ scaleInitiateGroup (CompDisplay     *d,
 }
 
 static Bool
+scaleInitiateOutput (CompDisplay     *d,
+		     CompAction      *action,
+		     CompActionState state,
+		     CompOption      *option,
+		     int	     nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SCALE_SCREEN (s);
+
+	if (ss->state != SCALE_STATE_WAIT && ss->state != SCALE_STATE_OUT)
+	{
+	    ss->type = ScaleTypeOutput;
+	    return scaleInitiateCommon (s, action, state, option, nOption);
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
 scaleSelectWindowAt (CompScreen *s,
 		     int	 x,
 		     int	 y)
@@ -1787,6 +1822,7 @@ scaleSetDisplayOption (CompDisplay     *display,
     case SCALE_DISPLAY_OPTION_INITIATE:
     case SCALE_DISPLAY_OPTION_INITIATE_ALL:
     case SCALE_DISPLAY_OPTION_INITIATE_GROUP:
+    case SCALE_DISPLAY_OPTION_INITIATE_OUTPUT:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
     default:
@@ -1843,6 +1879,23 @@ scaleDisplayInitOptions (ScaleDisplay *sd,
 				   "window group");
     o->type		      = CompOptionTypeAction;
     o->value.action.initiate  = scaleInitiateGroup;
+    o->value.action.terminate = scaleTerminate;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.state     = CompActionStateInitEdge;
+    o->value.action.state    |= CompActionStateInitEdgeDnd;
+    o->value.action.type      = 0;
+    o->value.action.state    |= CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
+
+    o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT];
+    o->name		      = "initiate_output";
+    o->shortDesc	      = N_("Initiate Window Picker For Windows on "
+				   "Current Output");
+    o->longDesc		      = N_("Layout and start transforming "
+				   "windows on current output");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = scaleInitiateOutput;
     o->value.action.terminate = scaleTerminate;
     o->value.action.bell      = FALSE;
     o->value.action.edgeMask  = 0;
@@ -1950,6 +2003,8 @@ scaleInitScreen (CompPlugin *p,
 		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
     addScreenAction (s,
 		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP].value.action);
+    addScreenAction (s,
+		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT].value.action);
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
