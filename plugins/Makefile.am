@@ -60,6 +60,10 @@ libclone_la_LDFLAGS = -module -avoid-version -no-undefined
 libclone_la_LIBADD = @COMPIZ_LIBS@
 libclone_la_SOURCES = clone.c
 
+libpng_la_LDFLAGS = -module -avoid-version -no-undefined
+libpng_la_LIBADD = @COMPIZ_LIBS@
+libpng_la_SOURCES = png.c
+
 if ANNOTATE_PLUGIN
 libannotate_la_LDFLAGS = -module -avoid-version -no-undefined
 libannotate_la_LIBADD = @COMPIZ_LIBS@ @ANNOTATE_LIBS@
@@ -154,6 +158,7 @@ module_LTLIBRARIES =		\
 	libscreenshot.la	\
 	libplane.la		\
 	libclone.la		\
+	libpng.la		\
 	$(libannotate_module)	\
 	$(libgconf_dump_module)
 
