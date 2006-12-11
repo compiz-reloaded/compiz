@@ -217,44 +217,6 @@ setVirtualScreenSize (CompScreen *screen,
     setDesktopHints (screen);
 }
 
-static Bool
-updateDefaultIcon (CompScreen *screen)
-{
-    CompIcon     *icon;
-    char         *data;
-    unsigned int width, height;
-
-    if (!readPng (screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON].value.s,
-		  &data, &width, &height))
-	return FALSE;
-
-    icon = malloc (sizeof (CompIcon) + width * height * sizeof (CARD32));
-    if (!icon)
-    {
-	free (data);
-	return FALSE;
-    }
-
-    if (screen->defaultIcon)
-    {
-	finiTexture (screen, &screen->defaultIcon->texture);
-	free (screen->defaultIcon);
-    }
-
-    initTexture (screen, &icon->texture);
-
-    icon->width  = width;
-    icon->height = height;
-
-    memcpy (icon + 1, data, + width * height * sizeof (CARD32));
-
-    screen->defaultIcon = icon;
-
-    free (data);
-
-    return TRUE;
-}
-
 static void
 updateOutputDevices (CompScreen	*s)
 {
@@ -1931,12 +1893,6 @@ addScreen (CompDisplay *display,
     initTexture (s, &s->backgroundTexture);
 
     s->defaultIcon = NULL;
-    if (!updateDefaultIcon (s))
-    {
-	fprintf (stderr, "%s: Couldn't load default window icon.\n",
-		 programName);
-	return FALSE;
-    }
 
     s->desktopWindowCount = 0;
 
@@ -3596,4 +3552,43 @@ clearScreenOutput (CompScreen	*s,
     {
 	glClear (mask);
     }
+}
+
+Bool
+updateDefaultIcon (CompScreen *screen)
+{
+    CompIcon *icon;
+    char     *file = screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON].value.s;
+    void     *data;
+    int      width, height;
+
+    if (screen->defaultIcon)
+    {
+	finiTexture (screen, &screen->defaultIcon->texture);
+	free (screen->defaultIcon);
+	screen->defaultIcon = NULL;
+    }
+
+    if (!readImageFromFile (screen->display, file, &width, &height, &data))
+	return FALSE;
+
+    icon = malloc (sizeof (CompIcon) + width * height * sizeof (CARD32));
+    if (!icon)
+    {
+	free (data);
+	return FALSE;
+    }
+
+    initTexture (screen, &icon->texture);
+
+    icon->width  = width;
+    icon->height = height;
+
+    memcpy (icon + 1, data, + width * height * sizeof (CARD32));
+
+    screen->defaultIcon = icon;
+
+    free (data);
+
+    return TRUE;
 }

@@ -2522,6 +2522,9 @@ addDisplay (char *name,
     d->handleEvent	 = handleEvent;
     d->handleCompizEvent = handleCompizEvent;
 
+    d->fileToImage = fileToImage;
+    d->imageToFile = imageToFile;
+
     d->supportedAtom	     = XInternAtom (dpy, "_NET_SUPPORTED", 0);
     d->supportingWmCheckAtom = XInternAtom (dpy, "_NET_SUPPORTING_WM_CHECK", 0);
 
@@ -3355,4 +3358,87 @@ clearTargetOutput (CompDisplay	*display,
 	clearScreenOutput (targetScreen,
 			   targetOutput,
 			   mask);
+}
+
+#define HOME_IMAGEDIR ".compiz/images"
+
+Bool
+readImageFromFile (CompDisplay *display,
+		   const char  *name,
+		   int	       *width,
+		   int	       *height,
+		   void	       **data)
+{
+    Bool status;
+    int  stride;
+
+    status = (*display->fileToImage) (display, NULL, name, width, height,
+				      &stride, data);
+    if (!status)
+    {
+	char *home;
+
+	home = getenv ("HOME");
+	if (home)
+	{
+	    char *path;
+
+	    path = malloc (strlen (home) + strlen (HOME_IMAGEDIR) + 2);
+	    if (path)
+	    {
+		sprintf (path, "%s/%s", home, HOME_IMAGEDIR);
+		status = (*display->fileToImage) (display, path, name,
+						  width, height, &stride,
+						  data);
+
+		free (path);
+
+		if (status)
+		    return TRUE;
+	    }
+	}
+
+	status = (*display->fileToImage) (display, IMAGEDIR, name,
+					  width, height, &stride, data);
+    }
+
+    return status;
+}
+
+Bool
+writeImageToFile (CompDisplay *display,
+		  const char  *path,
+		  const char  *name,
+		  const char  *format,
+		  int	      width,
+		  int	      height,
+		  void	      *data)
+{
+    return (*display->imageToFile) (display, path, name, format, width, height,
+				    width * 4, data);
+}
+
+Bool
+fileToImage (CompDisplay *display,
+	     const char	 *path,
+	     const char	 *name,
+	     int	 *width,
+	     int	 *height,
+	     int	 *stride,
+	     void	 **data)
+{
+    return FALSE;
+}
+
+Bool
+imageToFile (CompDisplay *display,
+	     const char	 *path,
+	     const char	 *name,
+	     const char	 *format,
+	     int	 width,
+	     int	 height,
+	     int	 stride,
+	     void	 *data)
+{
+    return FALSE;
 }

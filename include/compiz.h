@@ -257,33 +257,6 @@ freePrivateIndex (int  len,
 		  int  index);
 
 
-/* readpng.c */
-
-Bool
-openImageFile (const char *filename,
-	       char	  **returnFilename,
-	       FILE	  **returnFile);
-
-Bool
-readPng (const char   *filename,
-	 char	      **data,
-	 unsigned int *width,
-	 unsigned int *height);
-
-Bool
-readPngBuffer (const unsigned char *buffer,
-	       char		   **data,
-	       unsigned int	   *width,
-	       unsigned int	   *height);
-
-Bool
-writePngToFile (unsigned char *buffer,
-		char	      *filename,
-		int	      width,
-		int	      height,
-		int	      stride);
-
-
 /* option.c */
 
 typedef enum {
@@ -596,6 +569,23 @@ typedef Bool (*CallBackProc) (void *closure);
 typedef void (*ForEachWindowProc) (CompWindow *window,
 				   void	      *closure);
 
+typedef Bool (*FileToImageProc) (CompDisplay *display,
+				 const char  *path,
+				 const char  *name,
+				 int	     *width,
+				 int	     *height,
+				 int	     *stride,
+				 void	     **data);
+
+typedef Bool (*ImageToFileProc) (CompDisplay *display,
+				 const char  *path,
+				 const char  *name,
+				 const char  *format,
+				 int	     width,
+				 int	     height,
+				 int	     stride,
+				 void	     *data);
+
 struct _CompDisplay {
     Display    *display;
     CompScreen *screens;
@@ -778,6 +768,9 @@ struct _CompDisplay {
     HandleEventProc       handleEvent;
     HandleCompizEventProc handleCompizEvent;
 
+    FileToImageProc fileToImage;
+    ImageToFileProc imageToFile;
+
     CompPrivate *privates;
 };
 
@@ -876,6 +869,41 @@ Bool
 setDisplayAction (CompDisplay     *display,
 		  CompOption      *o,
 		  CompOptionValue *value);
+
+Bool
+readImageFromFile (CompDisplay *display,
+		   const char  *name,
+		   int	       *width,
+		   int	       *height,
+		   void	       **data);
+
+Bool
+writeImageToFile (CompDisplay *display,
+		  const char  *path,
+		  const char  *name,
+		  const char  *format,
+		  int	      width,
+		  int	      height,
+		  void	      *data);
+
+Bool
+fileToImage (CompDisplay *display,
+	     const char	 *path,
+	     const char	 *name,
+	     int	 *width,
+	     int	 *height,
+	     int	 *stride,
+	     void	 **data);
+
+Bool
+imageToFile (CompDisplay *display,
+	     const char	 *path,
+	     const char	 *name,
+	     const char	 *format,
+	     int	 width,
+	     int	 height,
+	     int	 stride,
+	     void	 *data);
 
 
 /* event.c */
@@ -1138,13 +1166,6 @@ readImageToTexture (CompScreen   *screen,
 		    const char	 *imageFileName,
 		    unsigned int *width,
 		    unsigned int *height);
-
-Bool
-readImageBufferToTexture (CompScreen	      *screen,
-			  CompTexture	      *texture,
-			  const unsigned char *imageBuffer,
-			  unsigned int	      *returnWidth,
-			  unsigned int	      *returnHeight);
 
 Bool
 iconToTexture (CompScreen *screen,
@@ -1818,6 +1839,9 @@ void
 clearScreenOutput (CompScreen   *s,
 		   int	        output,
 		   unsigned int mask);
+
+Bool
+updateDefaultIcon (CompScreen *screen);
 
 
 /* window.c */

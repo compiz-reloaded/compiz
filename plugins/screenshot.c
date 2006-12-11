@@ -250,7 +250,7 @@ shotPaintScreen (CompScreen		 *s,
 		    n = scandir (dir, &namelist, shotFilter, shotSort);
 		    if (n >= 0)
 		    {
-			char *name;
+			char name[256];
 			int  number = 0;
 
 			if (n > 0)
@@ -263,16 +263,13 @@ shotPaintScreen (CompScreen		 *s,
 			if (n)
 			    free (namelist);
 
-			name = malloc (strlen (dir) + 256);
-			if (name)
+			sprintf (name, "screenshot%d.png", number);
+
+			if (!writeImageToFile (s->display, dir, name, "png",
+					       w, h, buffer))
 			{
-			    sprintf (name, "%s/screenshot%d.png", dir, number);
-
-			    if (!writePngToFile (buffer, name, w, h, w * 4))
-				fprintf (stderr, "%s: failed to write "
-					 "screenshot image", programName);
-
-			    free (name);
+			    fprintf (stderr, "%s: failed to write "
+				     "screenshot image", programName);
 			}
 		    }
 		    else

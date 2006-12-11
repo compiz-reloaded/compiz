@@ -245,8 +245,7 @@ readSvgToTexture (CompScreen   *s,
 
     CUBE_SCREEN (s);
 
-    if (!openImageFile (svgFileName, &name, NULL))
-	return FALSE;
+    name = strdup (svgFileName);
 
     svgHandle = rsvg_handle_new_from_file (name, &error);
 

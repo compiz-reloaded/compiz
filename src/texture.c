@@ -169,37 +169,12 @@ readImageToTexture (CompScreen   *screen,
 		    unsigned int *returnWidth,
 		    unsigned int *returnHeight)
 {
-    char	 *image;
-    unsigned int width, height;
-    Bool	 status;
+    void *image;
+    int  width, height;
+    Bool status;
 
-    if (!readPng (imageFileName, &image, &width, &height))
-	return FALSE;
-
-    status = imageToTexture (screen, texture, image, width, height);
-
-    free (image);
-
-    if (returnWidth)
-	*returnWidth = width;
-    if (returnHeight)
-	*returnHeight = height;
-
-    return status;
-}
-
-Bool
-readImageBufferToTexture (CompScreen	      *screen,
-			  CompTexture	      *texture,
-			  const unsigned char *imageBuffer,
-			  unsigned int	      *returnWidth,
-			  unsigned int	      *returnHeight)
-{
-    char	 *image;
-    unsigned int width, height;
-    Bool	 status;
-
-    if (!readPngBuffer (imageBuffer, &image, &width, &height))
+    if (!readImageFromFile (screen->display, imageFileName,
+			    &width, &height, &image))
 	return FALSE;
 
     status = imageToTexture (screen, texture, image, width, height);

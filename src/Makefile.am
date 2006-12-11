@@ -20,5 +20,4 @@ compiz_SOURCES =   \
 	paint.c	   \
 	option.c   \
 	plugin.c   \
-	readpng.c  \
 	session.c
