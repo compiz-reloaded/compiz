@@ -212,7 +212,7 @@ AC_SUBST(SCALE_CORNER)
 AC_ARG_WITH(default-plugins,
   [  --with-default-plugins  Set default plugins],
   [DEFAULT_PLUGINS="$withval"],
-  [DEFAULT_PLUGINS="decoration,fade,minimize,move,resize,switcher"])
+  [DEFAULT_PLUGINS="png,decoration,fade,minimize,move,resize,switcher"])
 
 if test -n "$DEFAULT_PLUGINS"; then
   AC_DEFINE_UNQUOTED(DEFAULT_PLUGINS, "$DEFAULT_PLUGINS", [Default plugins])
