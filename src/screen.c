@@ -63,7 +63,7 @@
 
 #define UNREDIRECT_FS_DEFAULT FALSE
 
-#define DEFAULT_ICON_DEFAULT "icon.png"
+#define DEFAULT_ICON_DEFAULT "icon"
 
 #define SYNC_TO_VBLANK_DEFAULT TRUE
 
