@@ -64,6 +64,13 @@ libpng_la_LDFLAGS = -module -avoid-version -no-undefined
 libpng_la_LIBADD = @COMPIZ_LIBS@
 libpng_la_SOURCES = png.c
 
+if USE_LIBRSVG
+libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
+libsvg_la_LIBADD = @COMPIZ_LIBS@ @LIBRSVG_LIBS@
+libsvg_la_SOURCES = svg.c
+libsvg_module = libsvg.la
+endif
+
 if ANNOTATE_PLUGIN
 libannotate_la_LDFLAGS = -module -avoid-version -no-undefined
 libannotate_la_LIBADD = @COMPIZ_LIBS@ @ANNOTATE_LIBS@
@@ -159,6 +166,7 @@ module_LTLIBRARIES =		\
 	libplane.la		\
 	libclone.la		\
 	libpng.la		\
+	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libgconf_dump_module)
 
