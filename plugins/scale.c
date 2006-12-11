@@ -517,9 +517,12 @@ scalePaintWindow (CompWindow		  *w,
 		sAttrib.brightness = sAttrib.brightness / 2;
 	    }
 
-	    /* hide windows that are currently not in scale mode */
-	    if (!isNeverScaleWin (w))
+	    /* hide windows on this output that are not in scale mode */
+	    if (!isNeverScaleWin (w) &&
+		outputDeviceForWindow (w) == s->currentOutputDev)
+	    {
 		sAttrib.opacity = 0;
+	    }
 	}
 
 	UNWRAP (ss, s, paintWindow);
