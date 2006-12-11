@@ -3381,9 +3381,9 @@ makeScreenCurrent (CompScreen *s)
     {
 	glXMakeCurrent (s->display->display, s->output, s->ctx);
 	currentRoot = s->root;
-
-	s->pendingCommands = TRUE;
     }
+
+    s->pendingCommands = TRUE;
 }
 
 void
