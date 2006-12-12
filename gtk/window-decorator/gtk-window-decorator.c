@@ -2755,10 +2755,11 @@ update_window_decoration_name (WnckWindow *win)
 	}
 	else
 	{
-	    w  = d->border_layout.top.x2 - d->border_layout.top.x1 -
-		d->context->left_space - d->context->right_space -
-		ICON_SPACE - 2 - d->button_width;
+	    gint width;
 
+	    wnck_window_get_geometry (win, NULL, NULL, &width, NULL);
+
+	    w = width - ICON_SPACE - 2 - d->button_width;
 	    if (w < 1)
 		w = 1;
 	}
