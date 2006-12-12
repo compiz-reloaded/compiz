@@ -637,7 +637,7 @@ draw_shadow_background (decor_t		*d,
 {
     Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-    if (!s || !d->picture)
+    if (!s || !s->picture ||!d->picture)
     {
 	cairo_set_source_rgba (cr, 0.0, 0.0, 0.0, 0.0);
 	cairo_paint (cr);
