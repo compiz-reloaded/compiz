@@ -652,20 +652,42 @@ dbusAppendOptionValue (CompDisplay     *d,
 	CompAction *a = &value->action;
 	char	   *key = "Disabled";
 	char	   *button = "Disabled";
-	char	   edge[256];
+	char	   *edge = "";
+	char	   *keyValue = NULL;
+	char	   *buttonValue = NULL;
+	char	   *edgeValue = NULL;
 	int	   edgeButton = 0;
 
 	if (a->type & CompBindingTypeKey)
-	    key = keyBindingToString (d, &a->key);
+	    key = keyValue = keyBindingToString (d, &a->key);
 
 	if (a->type & CompBindingTypeButton)
-	    button = buttonBindingToString (d, &a->button);
-
-	*edge = '\0';
+	    button = buttonValue = buttonBindingToString (d, &a->button);
 
 	for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	{
 	    if (a->edgeMask & (1 << i))
-		strcpy (edge + strlen (edge), edgeToString (i));
+	    {
+		if (strlen (edge))
+		{
+		    char *e;
+
+		    e = malloc (strlen (edge) + strlen (edgeToString (i)) + 2);
+		    if (e)
+		    {
+			sprintf (e, "%s,%s", edge, edgeToString (i));
+			if (edgeValue)
+			    free (edgeValue);
+
+			edge = edgeValue = e;
+		    }
+		}
+		else
+		{
+		    edge = edgeToString (i);
+		}
+	    }
+	}
 
 	if (a->type & CompBindingTypeEdgeButton)
 	    edgeButton = a->edgeButton;
@@ -677,6 +699,15 @@ dbusAppendOptionValue (CompDisplay     *d,
 				  DBUS_TYPE_STRING, &edge,
 				  DBUS_TYPE_INT32, &edgeButton,
 				  DBUS_TYPE_INVALID);
+
+	if (keyValue)
+	    free (keyValue);
+
+	if (buttonValue)
+	    free (buttonValue);
+
+	if (edgeValue)
+	    free (edgeValue);
     }
     else
     {
