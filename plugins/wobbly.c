@@ -534,10 +534,10 @@ findNextWestEdge (CompWindow *w,
 	    if (w == p)
 		continue;
 
-	    if (w->mapNum && w->struts)
+	    if (p->mapNum && p->struts)
 	    {
-		s = w->struts->left.y;
-		e = w->struts->left.y + w->struts->left.height;
+		s = p->struts->left.y;
+		e = p->struts->left.y + p->struts->left.height;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
@@ -567,8 +567,8 @@ findNextWestEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		if (w->mapNum && w->struts)
-		    v = p->struts->left.x + w->struts->left.width;
+		if (p->mapNum && p->struts)
+		    v = p->struts->left.x + p->struts->left.width;
 		else
 		    v = p->attrib.x + p->width + p->input.right;
 
@@ -634,10 +634,10 @@ findNextEastEdge (CompWindow *w,
 	    if (w == p)
 		continue;
 
-	    if (w->mapNum && w->struts)
+	    if (p->mapNum && p->struts)
 	    {
-		s = w->struts->right.y;
-		e = w->struts->right.y + w->struts->right.height;
+		s = p->struts->right.y;
+		e = p->struts->right.y + p->struts->right.height;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
@@ -667,7 +667,7 @@ findNextEastEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		if (w->mapNum && w->struts)
+		if (p->mapNum && p->struts)
 		    v = p->struts->right.x;
 		else
 		    v = p->attrib.x - p->input.left;
@@ -727,17 +727,17 @@ findNextNorthEdge (CompWindow *w,
     {
 	CompWindow *p;
 
-	v1 = w->screen->workArea.y;
+	v1 = 0;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
 	    if (w == p)
 		continue;
 
-	    if (w->mapNum && w->struts)
+	    if (p->mapNum && p->struts)
 	    {
-		s = w->struts->top.x;
-		e = w->struts->top.x + w->struts->top.width;
+		s = p->struts->top.x;
+		e = p->struts->top.x + p->struts->top.width;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
@@ -767,7 +767,7 @@ findNextNorthEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		if (w->mapNum && w->struts)
+		if (p->mapNum && p->struts)
 		    v = p->struts->top.y + p->struts->top.height;
 		else
 		    v = p->attrib.y + p->height + p->input.bottom;
@@ -834,10 +834,10 @@ findNextSouthEdge (CompWindow *w,
 	    if (w == p)
 		continue;
 
-	    if (w->mapNum && w->struts)
+	    if (p->mapNum && p->struts)
 	    {
-		s = w->struts->bottom.x;
-		e = w->struts->bottom.x + w->struts->bottom.width;
+		s = p->struts->bottom.x;
+		e = p->struts->bottom.x + p->struts->bottom.width;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
@@ -867,7 +867,7 @@ findNextSouthEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		if (w->mapNum && w->struts)
+		if (p->mapNum && p->struts)
 		    v = p->struts->bottom.y;
 		else
 		    v = p->attrib.y - p->input.top;
