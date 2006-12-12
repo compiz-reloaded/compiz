@@ -501,6 +501,11 @@ wobblyScreenInitOptions (WobblyScreen *ws,
     o->value.b    = WOBBLY_MAXIMIZE_EFFECT_DEFAULT;
 }
 
+#define SNAP_WINDOW_TYPE (CompWindowTypeNormalMask  | \
+			  CompWindowTypeToolbarMask | \
+			  CompWindowTypeMenuMask    | \
+			  CompWindowTypeUtilMask)
+
 static void
 findNextWestEdge (CompWindow *w,
 		  Object     *object)
@@ -518,19 +523,31 @@ findNextWestEdge (CompWindow *w,
 
     x = object->position.x + w->output.left - w->input.left;
 
-    if (x >= w->screen->workArea.x)
+    if (x >= 0)
     {
 	CompWindow *p;
 
-	v1 = w->screen->workArea.x;
+	v1 = 0;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
-	    if (p->invisible || w == p || p->type != CompWindowTypeNormalMask)
+	    if (w == p)
 		continue;
 
-	    s = p->attrib.y - p->output.top;
-	    e = p->attrib.y + p->height + p->output.bottom;
+	    if (w->mapNum && w->struts)
+	    {
+		s = w->struts->left.y;
+		e = w->struts->left.y + w->struts->left.height;
+	    }
+	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
+	    {
+		s = p->attrib.y - p->output.top;
+		e = p->attrib.y + p->height + p->output.bottom;
+	    }
+	    else
+	    {
+		continue;
+	    }
 
 	    if (s > object->position.y)
 	    {
@@ -550,7 +567,11 @@ findNextWestEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		v = p->attrib.x + p->width + p->input.right;
+		if (w->mapNum && w->struts)
+		    v = p->struts->left.x + w->struts->left.width;
+		else
+		    v = p->attrib.x + p->width + p->input.right;
+
 		if (v <= x)
 		{
 		    if (v > v1)
@@ -566,7 +587,7 @@ findNextWestEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->workArea.x;
+	v2 = 0;
     }
 
     v1 = v1 - w->output.left + w->input.left;
@@ -602,19 +623,31 @@ findNextEastEdge (CompWindow *w,
 
     x = object->position.x - w->output.right + w->input.right;
 
-    if (x <= w->screen->workArea.x + w->screen->workArea.width)
+    if (x <= w->screen->width)
     {
 	CompWindow *p;
 
-	v1 = w->screen->workArea.x + w->screen->workArea.width;
+	v1 = w->screen->width;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
-	    if (p->invisible || w == p || p->type != CompWindowTypeNormalMask)
+	    if (w == p)
 		continue;
 
-	    s = p->attrib.y - p->output.top;
-	    e = p->attrib.y + p->height + p->output.bottom;
+	    if (w->mapNum && w->struts)
+	    {
+		s = w->struts->right.y;
+		e = w->struts->right.y + w->struts->right.height;
+	    }
+	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
+	    {
+		s = p->attrib.y - p->output.top;
+		e = p->attrib.y + p->height + p->output.bottom;
+	    }
+	    else
+	    {
+		continue;
+	    }
 
 	    if (s > object->position.y)
 	    {
@@ -634,7 +667,11 @@ findNextEastEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		v = p->attrib.x - p->input.left;
+		if (w->mapNum && w->struts)
+		    v = p->struts->right.x;
+		else
+		    v = p->attrib.x - p->input.left;
+
 		if (v >= x)
 		{
 		    if (v < v1)
@@ -686,7 +723,7 @@ findNextNorthEdge (CompWindow *w,
 
     y = object->position.y + w->output.top - w->input.top;
 
-    if (y >= w->screen->workArea.y)
+    if (y >= 0)
     {
 	CompWindow *p;
 
@@ -694,11 +731,23 @@ findNextNorthEdge (CompWindow *w,
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
-	    if (p->invisible || w == p || p->type != CompWindowTypeNormalMask)
+	    if (w == p)
 		continue;
 
-	    s = p->attrib.x - p->output.left;
-	    e = p->attrib.x + p->width + p->output.right;
+	    if (w->mapNum && w->struts)
+	    {
+		s = w->struts->top.x;
+		e = w->struts->top.x + w->struts->top.width;
+	    }
+	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
+	    {
+		s = p->attrib.x - p->output.left;
+		e = p->attrib.x + p->width + p->output.right;
+	    }
+	    else
+	    {
+		continue;
+	    }
 
 	    if (s > object->position.x)
 	    {
@@ -718,7 +767,11 @@ findNextNorthEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		v = p->attrib.y + p->height + p->input.bottom;
+		if (w->mapNum && w->struts)
+		    v = p->struts->top.y + p->struts->top.height;
+		else
+		    v = p->attrib.y + p->height + p->input.bottom;
+
 		if (v <= y)
 		{
 		    if (v > v1)
@@ -734,7 +787,7 @@ findNextNorthEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->workArea.y;
+	v2 = 0;
     }
 
     v1 = v1 - w->output.top + w->input.top;
@@ -770,19 +823,31 @@ findNextSouthEdge (CompWindow *w,
 
     y = object->position.y - w->output.bottom + w->input.bottom;
 
-    if (y <= w->screen->workArea.y + w->screen->workArea.height)
+    if (y <= w->screen->height)
     {
 	CompWindow *p;
 
-	v1 = w->screen->workArea.y + w->screen->workArea.height;
+	v1 = w->screen->height;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
-	    if (p->invisible || w == p || p->type != CompWindowTypeNormalMask)
+	    if (w == p)
 		continue;
 
-	    s = p->attrib.x - p->output.left;
-	    e = p->attrib.x + p->width + p->output.right;
+	    if (w->mapNum && w->struts)
+	    {
+		s = w->struts->bottom.x;
+		e = w->struts->bottom.x + w->struts->bottom.width;
+	    }
+	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
+	    {
+		s = p->attrib.x - p->output.left;
+		e = p->attrib.x + p->width + p->output.right;
+	    }
+	    else
+	    {
+		continue;
+	    }
 
 	    if (s > object->position.x)
 	    {
@@ -802,7 +867,11 @@ findNextSouthEdge (CompWindow *w,
 		if (e < end)
 		    end = e;
 
-		v = p->attrib.y - p->input.top;
+		if (w->mapNum && w->struts)
+		    v = p->struts->bottom.y;
+		else
+		    v = p->attrib.y - p->input.top;
+
 		if (v >= y)
 		{
 		    if (v < v1)
@@ -818,7 +887,7 @@ findNextSouthEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->workArea.y + w->screen->workArea.height;
+	v2 = w->screen->height;
     }
 
     v1 = v1 + w->output.bottom - w->input.bottom;
