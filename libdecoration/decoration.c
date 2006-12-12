@@ -1463,6 +1463,9 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 {
     int w, h, x2, y2, left, right, top, bottom, width, height;
 
+    if (!shadow->picture)
+	return;
+
     width = layout->top.x2 - layout->top.x1;
     if (layout->rotation)
 	height = layout->left.x2 - layout->left.x1;
