@@ -691,7 +691,7 @@ findNextEastEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->workArea.x + w->screen->workArea.width;
+	v2 = w->screen->width;
     }
 
     v1 = v1 + w->output.right - w->input.right;
