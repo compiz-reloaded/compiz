@@ -536,13 +536,15 @@ findNextWestEdge (CompWindow *w,
 
 	    if (p->mapNum && p->struts)
 	    {
-		s = p->struts->left.y;
-		e = p->struts->left.y + p->struts->left.height;
+		s = p->struts->left.y - w->output.top;
+		e = p->struts->left.y + p->struts->left.height +
+		    w->output.bottom;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
-		s = p->attrib.y - p->output.top;
-		e = p->attrib.y + p->height + p->output.bottom;
+		s = p->attrib.y - p->input.top - w->output.top;
+		e = p->attrib.y + p->height + p->input.bottom +
+		    w->output.bottom;
 	    }
 	    else
 	    {
@@ -636,13 +638,15 @@ findNextEastEdge (CompWindow *w,
 
 	    if (p->mapNum && p->struts)
 	    {
-		s = p->struts->right.y;
-		e = p->struts->right.y + p->struts->right.height;
+		s = p->struts->right.y - w->output.top;
+		e = p->struts->right.y + p->struts->right.height +
+		    w->output.bottom;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
-		s = p->attrib.y - p->output.top;
-		e = p->attrib.y + p->height + p->output.bottom;
+		s = p->attrib.y - p->input.top - w->output.top;
+		e = p->attrib.y + p->height + p->input.bottom +
+		    w->output.bottom;
 	    }
 	    else
 	    {
@@ -736,13 +740,13 @@ findNextNorthEdge (CompWindow *w,
 
 	    if (p->mapNum && p->struts)
 	    {
-		s = p->struts->top.x;
-		e = p->struts->top.x + p->struts->top.width;
+		s = p->struts->top.x - w->output.left;
+		e = p->struts->top.x + p->struts->top.width + w->output.right;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
-		s = p->attrib.x - p->output.left;
-		e = p->attrib.x + p->width + p->output.right;
+		s = p->attrib.x - p->input.left - w->output.left;
+		e = p->attrib.x + p->width + p->input.right + w->output.right;
 	    }
 	    else
 	    {
@@ -836,13 +840,14 @@ findNextSouthEdge (CompWindow *w,
 
 	    if (p->mapNum && p->struts)
 	    {
-		s = p->struts->bottom.x;
-		e = p->struts->bottom.x + p->struts->bottom.width;
+		s = p->struts->bottom.x - w->output.left;
+		e = p->struts->bottom.x + p->struts->bottom.width +
+		    w->output.right;
 	    }
 	    else if (!p->invisible && (p->type & SNAP_WINDOW_TYPE))
 	    {
-		s = p->attrib.x - p->output.left;
-		e = p->attrib.x + p->width + p->output.right;
+		s = p->attrib.x - p->input.left - w->output.left;
+		e = p->attrib.x + p->width + p->input.right + w->output.right;
 	    }
 	    else
 	    {
