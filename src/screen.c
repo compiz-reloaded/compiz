@@ -1974,9 +1974,11 @@ addScreen (CompDisplay *display,
     XFree (children);
 
     attrib.override_redirect = 1;
+    attrib.event_mask	     = PropertyChangeMask;
+
     s->grabWindow = XCreateWindow (dpy, s->root, -100, -100, 1, 1, 0,
-				   CopyFromParent, InputOnly,
-				   CopyFromParent, CWOverrideRedirect,
+				   CopyFromParent, InputOnly, CopyFromParent,
+				   CWOverrideRedirect | CWEventMask,
 				   &attrib);
     XMapWindow (dpy, s->grabWindow);
 
