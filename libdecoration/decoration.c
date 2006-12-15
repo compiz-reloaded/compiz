@@ -911,7 +911,7 @@ create_gaussian_kernel (double radius,
 #define ALPHA(r) (r)
 
 decor_shadow_t *
-decor_create_shadow (Display		    *xdisplay,
+decor_shadow_create (Display		    *xdisplay,
 		     Screen		    *screen,
 		     int		    width,
 		     int		    height,
@@ -949,6 +949,8 @@ decor_create_shadow (Display		    *xdisplay,
     shadow = malloc (sizeof (decor_shadow_t));
     if (!shadow)
 	return NULL;
+
+    shadow->ref_count = 1;
 
     shadow->pixmap  = 0;
     shadow->picture = 0;
@@ -1194,9 +1196,13 @@ decor_create_shadow (Display		    *xdisplay,
 }
 
 void
-decor_destroy_shadow (Display	     *xdisplay,
+decor_shadow_destroy (Display	     *xdisplay,
 		      decor_shadow_t *shadow)
 {
+    shadow->ref_count--;
+    if (shadow->ref_count)
+	return;
+
     if (shadow->picture)
 	XRenderFreePicture (xdisplay, shadow->picture);
 
@@ -1204,6 +1210,12 @@ decor_destroy_shadow (Display	     *xdisplay,
 	XFreePixmap (xdisplay, shadow->pixmap);
 
     free (shadow);
+}
+
+void
+decor_shadow_reference (decor_shadow_t *shadow)
+{
+    shadow->ref_count++;
 }
 
 void

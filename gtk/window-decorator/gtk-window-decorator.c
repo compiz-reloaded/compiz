@@ -4893,11 +4893,11 @@ update_shadow (void)
 
     if (no_border_shadow)
     {
-	decor_destroy_shadow (xdisplay, no_border_shadow);
+	decor_shadow_destroy (xdisplay, no_border_shadow);
 	no_border_shadow = NULL;
     }
 
-    no_border_shadow = decor_create_shadow (xdisplay,
+    no_border_shadow = decor_shadow_create (xdisplay,
 					    gdk_x11_screen_get_xscreen (screen),
 					    1, 1,
 					    0,
@@ -4912,11 +4912,11 @@ update_shadow (void)
 
     if (border_shadow)
     {
-	decor_destroy_shadow (xdisplay, border_shadow);
+	decor_shadow_destroy (xdisplay, border_shadow);
 	border_shadow = NULL;
     }
 
-    border_shadow = decor_create_shadow (xdisplay,
+    border_shadow = decor_shadow_create (xdisplay,
 					 gdk_x11_screen_get_xscreen (screen),
 					 1, 1,
 					 _win_extents.left,
@@ -4939,12 +4939,12 @@ update_shadow (void)
 
     if (max_border_shadow)
     {
-	decor_destroy_shadow (xdisplay, max_border_shadow);
+	decor_shadow_destroy (xdisplay, max_border_shadow);
 	max_border_shadow = NULL;
     }
 
     max_border_shadow =
-	decor_create_shadow (xdisplay,
+	decor_shadow_create (xdisplay,
 			     gdk_x11_screen_get_xscreen (screen),
 			     1, 1,
 			     _max_win_extents.left,
@@ -4964,11 +4964,11 @@ update_shadow (void)
 
     if (switcher_shadow)
     {
-	decor_destroy_shadow (xdisplay, switcher_shadow);
+	decor_shadow_destroy (xdisplay, switcher_shadow);
 	switcher_shadow = NULL;
     }
 
-    switcher_shadow = decor_create_shadow (xdisplay,
+    switcher_shadow = decor_shadow_create (xdisplay,
 					   gdk_x11_screen_get_xscreen (screen),
 					   1, 1,
 					   _switcher_extents.left,

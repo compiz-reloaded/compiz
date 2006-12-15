@@ -132,6 +132,7 @@ typedef struct _decor_shadow_options {
 } decor_shadow_options_t;
 
 typedef struct _decor_shadow {
+    int     ref_count;
     Pixmap  pixmap;
     Picture picture;
     int	    width;
@@ -239,7 +240,7 @@ decor_set_lXrXtXbX_window_quads (decor_quad_t    *q,
 				 int		 bottom_stretch_offset);
 
 decor_shadow_t *
-decor_create_shadow (Display		    *xdisplay,
+decor_shadow_create (Display		    *xdisplay,
 		     Screen		    *screen,
 		     int		    width,
 		     int		    height,
@@ -257,7 +258,14 @@ decor_create_shadow (Display		    *xdisplay,
 		     void		    *closure);
 
 void
-decor_destroy_shadow (Display	     *xdisplay,
+decor_shadow_destroy (Display	     *xdisplay,
+		      decor_shadow_t *shadow);
+
+void
+decor_shadow_reference (decor_shadow_t *shadow);
+
+void
+decor_shadow (Display	     *xdisplay,
 		      decor_shadow_t *shadow);
 
 void
