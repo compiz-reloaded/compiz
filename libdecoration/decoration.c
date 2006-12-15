@@ -1194,6 +1194,19 @@ decor_create_shadow (Display		    *xdisplay,
 }
 
 void
+decor_destroy_shadow (Display	     *xdisplay,
+		      decor_shadow_t *shadow)
+{
+    if (shadow->picture)
+	XRenderFreePicture (xdisplay, shadow->picture);
+
+    if (shadow->pixmap)
+	XFreePixmap (xdisplay, shadow->pixmap);
+
+    free (shadow);
+}
+
+void
 decor_draw_simple (Display	   *xdisplay,
 		   Pixmap	   pixmap,
 		   Picture	   picture,
@@ -1217,19 +1230,6 @@ decor_draw_simple (Display	   *xdisplay,
 			  c->extents.left + c->extents.right,
 			  height - c->top_space - c->bottom_space +
 			  c->extents.top + c->extents.bottom);
-}
-
-void
-decor_destroy_shadow (Display	     *xdisplay,
-		      decor_shadow_t *shadow)
-{
-    if (shadow->picture)
-	XRenderFreePicture (xdisplay, shadow->picture);
-
-    if (shadow->pixmap)
-	XFreePixmap (xdisplay, shadow->pixmap);
-
-    free (shadow);
 }
 
 void
