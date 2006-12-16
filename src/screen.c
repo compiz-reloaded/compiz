@@ -541,7 +541,8 @@ setScreenOption (CompScreen      *screen,
 	    return updateDefaultIcon (screen);
 	break;
     case COMP_SCREEN_OPTION_OUTPUTS:
-	if (screen->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
+	if (!noDetection &&
+	    screen->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b)
 	    return FALSE;
 
 	if (compSetOptionList (o, value))
