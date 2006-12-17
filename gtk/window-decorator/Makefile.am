@@ -27,3 +27,5 @@ install-data-local:
 INCLUDES = -I$(top_srcdir)/include @GTK_WINDOW_DECORATOR_CFLAGS@ @METACITY_CFLAGS@
 
 bin_PROGRAMS = $(gtk_window_decorator_program)
+
+EXTRA_DIST = $(schema_in_files)
