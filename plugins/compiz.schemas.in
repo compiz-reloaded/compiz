@@ -11641,7 +11641,7 @@
             <applyto>/apps/compiz/general/screen0/options/default_icon</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>icon.png</default>
+            <default>icon</default>
             <locale name="C">
                 <short>Default Icon</short>
                 <long>Default window icon image</long>
@@ -15946,7 +15946,7 @@
             <owner>compiz</owner>
             <type>list</type>
             <list_type>string</list_type>
-            <default>[freedesktop.png]</default>
+            <default>[freedesktop]</default>
             <locale name="C">
                 <short>Image files</short>
                 <long>List of PNG and SVG files that should be rendered on top face of cube</long>
@@ -17113,6 +17113,67 @@
             <locale name="C">
                 <short>Initiate Window Picker For Window Group</short>
                 <long>Layout and start transforming window group</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_output_key</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_output_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Windows on Current Output</short>
+                <long>Layout and start transforming windows on current output</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_output_button</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_output_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Windows on Current Output</short>
+                <long>Layout and start transforming windows on current output</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_output_bell</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_output_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Windows on Current Output</short>
+                <long>Layout and start transforming windows on current output</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_output_edge</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_output_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Windows on Current Output</short>
+                <long>Layout and start transforming windows on current output (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/scale/allscreens/options/initiate_output_edgebutton</key>
+            <applyto>/apps/compiz/plugins/scale/allscreens/options/initiate_output_edgebutton</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Initiate Window Picker For Windows on Current Output</short>
+                <long>Layout and start transforming windows on current output</long>
             </locale>
         </schema>
 
@@ -23673,6 +23734,294 @@
             <locale name="zh_TW">
                 <short>起始化</short>
                 <long>Initiate clone selection</long>
+            </locale>
+        </schema>
+
+        <!-- png options -->
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/png/info</key>
+            <applyto>/apps/compiz/plugins/png/info</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Png</short>
+                <long>Png image loader</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/png/load_before</key>
+            <applyto>/apps/compiz/plugins/png/load_before</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Plugins that this must load before</short>
+                <long>Do not modify</long>
+            </locale>
+            <locale name="cs">
+                <short>Moduly, které musí být tímto předem načteny</short>
+                <long>Neměnit</long>
+            </locale>
+            <locale name="de">
+                <short>Plugins, die zuvor geladen werden müssen</short>
+                <long>Nicht ändern</long>
+            </locale>
+            <locale name="es">
+                <short>Complementos que esto debe cargar antes</short>
+                <long>No modificar</long>
+            </locale>
+            <locale name="fi">
+                <short>Etukäteen tätä varten ladattavat liitännäiset</short>
+                <long>Älä muuta</long>
+            </locale>
+            <locale name="fr">
+                <short>Plug-ins à charger avant</short>
+                <long>Ne pas modifier</long>
+            </locale>
+            <locale name="hu">
+                <short>Kötelezően betöltendő beépülő modulok </short>
+                <long>Nem módosít</long>
+            </locale>
+            <locale name="it">
+                <short>Plug-in da caricare per primi</short>
+                <long>Non modificare</long>
+            </locale>
+            <locale name="ja">
+                <short>これを前にロードする必要のあるプラグイン</short>
+                <long>変更しないでください</long>
+            </locale>
+            <locale name="pl">
+                <short>Wtyczki, które muszą zostać załadowane przed</short>
+                <long>Bez zmian</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Plug-ins que devem ser carregados antes de</short>
+                <long>Não modificar</long>
+            </locale>
+            <locale name="sv">
+                <short>Insticksmoduler som måste läsas in före</short>
+                <long>Ändra inte</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>必须先装载的插件</short>
+                <long>不修改</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>在此之前必須先載入的外掛程式</short>
+                <long>不要修改</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/png/requires</key>
+            <applyto>/apps/compiz/plugins/png/requires</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Plugins that this requires</short>
+                <long>Do not modify</long>
+            </locale>
+            <locale name="cs">
+                <short>Moduly, které jsou tímto vyžadovány</short>
+                <long>Neměnit</long>
+            </locale>
+            <locale name="de">
+                <short>Erforderliche Plugins</short>
+                <long>Nicht ändern</long>
+            </locale>
+            <locale name="es">
+                <short>Complementos que esto requiere</short>
+                <long>No modificar</long>
+            </locale>
+            <locale name="fi">
+                <short>Tähän vaadittavat liitännäiset</short>
+                <long>Älä muuta</long>
+            </locale>
+            <locale name="fr">
+                <short>Plug-ins requis</short>
+                <long>Ne pas modifier</long>
+            </locale>
+            <locale name="hu">
+                <short>Szükséges beépülő modulok</short>
+                <long>Nem módosít</long>
+            </locale>
+            <locale name="it">
+                <short>Plug-in necessari</short>
+                <long>Non modificare</long>
+            </locale>
+            <locale name="ja">
+                <short>これが必要なプラグイン</short>
+                <long>変更しないでください</long>
+            </locale>
+            <locale name="pl">
+                <short>Wtyczki wymagane przez ten element</short>
+                <long>Bez zmian</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Plug-ins necessários</short>
+                <long>Não modificar</long>
+            </locale>
+            <locale name="sv">
+                <short>Insticksmoduler som den här kräver</short>
+                <long>Ändra inte</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>需要的插件</short>
+                <long>不修改</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>這時需要的外掛程式</short>
+                <long>不要修改</long>
+            </locale>
+        </schema>
+
+        <!-- svg options -->
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/svg/info</key>
+            <applyto>/apps/compiz/plugins/svg/info</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Svg</short>
+                <long>Svg image loader</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/svg/load_before</key>
+            <applyto>/apps/compiz/plugins/svg/load_before</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Plugins that this must load before</short>
+                <long>Do not modify</long>
+            </locale>
+            <locale name="cs">
+                <short>Moduly, které musí být tímto předem načteny</short>
+                <long>Neměnit</long>
+            </locale>
+            <locale name="de">
+                <short>Plugins, die zuvor geladen werden müssen</short>
+                <long>Nicht ändern</long>
+            </locale>
+            <locale name="es">
+                <short>Complementos que esto debe cargar antes</short>
+                <long>No modificar</long>
+            </locale>
+            <locale name="fi">
+                <short>Etukäteen tätä varten ladattavat liitännäiset</short>
+                <long>Älä muuta</long>
+            </locale>
+            <locale name="fr">
+                <short>Plug-ins à charger avant</short>
+                <long>Ne pas modifier</long>
+            </locale>
+            <locale name="hu">
+                <short>Kötelezően betöltendő beépülő modulok </short>
+                <long>Nem módosít</long>
+            </locale>
+            <locale name="it">
+                <short>Plug-in da caricare per primi</short>
+                <long>Non modificare</long>
+            </locale>
+            <locale name="ja">
+                <short>これを前にロードする必要のあるプラグイン</short>
+                <long>変更しないでください</long>
+            </locale>
+            <locale name="pl">
+                <short>Wtyczki, które muszą zostać załadowane przed</short>
+                <long>Bez zmian</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Plug-ins que devem ser carregados antes de</short>
+                <long>Não modificar</long>
+            </locale>
+            <locale name="sv">
+                <short>Insticksmoduler som måste läsas in före</short>
+                <long>Ändra inte</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>必须先装载的插件</short>
+                <long>不修改</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>在此之前必須先載入的外掛程式</short>
+                <long>不要修改</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/svg/requires</key>
+            <applyto>/apps/compiz/plugins/svg/requires</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Plugins that this requires</short>
+                <long>Do not modify</long>
+            </locale>
+            <locale name="cs">
+                <short>Moduly, které jsou tímto vyžadovány</short>
+                <long>Neměnit</long>
+            </locale>
+            <locale name="de">
+                <short>Erforderliche Plugins</short>
+                <long>Nicht ändern</long>
+            </locale>
+            <locale name="es">
+                <short>Complementos que esto requiere</short>
+                <long>No modificar</long>
+            </locale>
+            <locale name="fi">
+                <short>Tähän vaadittavat liitännäiset</short>
+                <long>Älä muuta</long>
+            </locale>
+            <locale name="fr">
+                <short>Plug-ins requis</short>
+                <long>Ne pas modifier</long>
+            </locale>
+            <locale name="hu">
+                <short>Szükséges beépülő modulok</short>
+                <long>Nem módosít</long>
+            </locale>
+            <locale name="it">
+                <short>Plug-in necessari</short>
+                <long>Non modificare</long>
+            </locale>
+            <locale name="ja">
+                <short>これが必要なプラグイン</short>
+                <long>変更しないでください</long>
+            </locale>
+            <locale name="pl">
+                <short>Wtyczki wymagane przez ten element</short>
+                <long>Bez zmian</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Plug-ins necessários</short>
+                <long>Não modificar</long>
+            </locale>
+            <locale name="sv">
+                <short>Insticksmoduler som den här kräver</short>
+                <long>Ändra inte</long>
+            </locale>
+            <locale name="zh_CN">
+                <short>需要的插件</short>
+                <long>不修改</long>
+            </locale>
+            <locale name="zh_TW">
+                <short>這時需要的外掛程式</short>
+                <long>不要修改</long>
             </locale>
         </schema>
 
