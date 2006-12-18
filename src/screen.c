@@ -3416,7 +3416,7 @@ outputDeviceForPoint (CompScreen *s,
 	x2 = s->outputDev[i].region.extents.x2;
 	y2 = s->outputDev[i].region.extents.y2;
 
-	if (x1 < x && x2 >= x && y1 < y && y2 >= y)
+	if (x1 <= x && x2 > x && y1 <= y && y2 > y)
 	    return i;
     }
 
