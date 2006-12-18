@@ -298,22 +298,84 @@ if test "$use_gnome" = yes; then
 fi
 
 AC_ARG_ENABLE(kde,
-  [  --enable-kde           Enable kde window decorator],
-  [use_kde=$enableval], [use_kde=no])
+  [  --disable-kde         Enable kde window decorator],
+  [use_kde=$enableval], [use_kde=yes])
 
 if test "x$use_kde" = "xyes"; then
-  PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
-		    QtCore QtGui,
-		    [use_kde=yes], [use_kde=no])
+  qt_incdirs="$QTINC /usr/local/qt/include /usr/include/qt /usr/include /usr/X11R6/include/X11/qt /usr/X11R6/include/qt /usr/lib/qt3/include /usr/lib/qt/include /usr/share/qt3/include"
+  qt_libdirs="$QTLIB /usr/local/qt/lib /usr/lib/qt /usr/lib /usr/X11R6/lib/X11/qt /usr/X11R6/lib/qt /usr/lib/qt3/lib /usr/lib/qt/lib /usr/share/qt3/lib"
+
+  if test -n "$QTDIR" ; then
+    qt_incdirs="$QTDIR/include $qt_incdirs"
+    qt_libdirs="$QTDIR/lib $qt_libdirs"
+  fi
+
+  qt_test_include="qstyle.h"
+  qt_test_library="libqt-mt.la"
+
+  dnl Check for Qt headers
+  AC_MSG_CHECKING([for Qt headers])
+  qt_incdir="no"
+  for it in $qt_incdirs ; do
+    if test -r "$it/$qt_test_include" ; then
+      qt_incdir="$it"
+      break
+    fi
+  done
+  AC_MSG_RESULT([$qt_incdir])
+
+  dnl Check for Qt libraries
+  AC_MSG_CHECKING([for Qt libraries])
+  qt_libdir="no"
+  for qt_check in $qt_libdirs ; do
+    if test -r "$qt_check/$qt_test_library" ; then
+      qt_libdir="$qt_check"
+      break
+    fi
+  done
+  AC_MSG_RESULT([$qt_libdir])
+
+  use_kde=no;
+  if test "x$qt_libdir" != "xno" ; then
+    if test "x$qt_incdir" != "xno" ; then
+      use_kde=yes;
+    fi
+  fi
+
+  QT_CXXFLAGS="-I$qt_incdir"
+  QT_LIBS="-L$qt_libdir"
+
+  if test "x$use_kde" = xyes; then
+    kdedir=`kde-config --prefix --expandvars 2>/dev/null`
+    kdelibs=`kde-config --install lib --expandvars 2>/dev/null`
+    kdeincs=$kdedir/include
+    if test -d $kdelibs; then
+      PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
+			dbus-1 xdamage xcomposite,
+			[use_kde=yes], [use_kde=no])
+
+      KDE_CFLAGS="$QT_CXXFLAGS -I$kdeincs"
+      KDE_LIBS="$QT_LIBS -L$kdelibs -lkdecore -lkdecorations -ldbus-qt-1"
+
+      QT_MOC=$QTDIR/bin/moc
+      DCOPIDL=$kdedir/bin/dcopidl
+      DCOPIDL2CPP=$kdedir/bin/dcopidl2cpp
+    else
+      use_kde=no;
+    fi
+  fi
 fi
 
 AM_CONDITIONAL(USE_KDE, test "x$use_kde" = "xyes")
 if test "$use_kde" = yes; then
   AC_DEFINE(USE_KDE, 1, [Build kde window decorator])
-  QT_MOC=`$PKG_CONFIG --variable=exec_prefix QtCore`
-  QT_MOC=${QT_MOC}/bin/moc
 fi
+
+AC_SUBST(KDE_CFLAGS)
+AC_SUBST(KDE_LIBS)
 AC_SUBST(QT_MOC)
+AC_SUBST(DCOPIDL)
+AC_SUBST(DCOPIDL2CPP)
 
 AC_OUTPUT([
 compiz.pc
