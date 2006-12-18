@@ -66,7 +66,7 @@ main (int argc, char **argv)
 
     if (args->isSet ("-active-opacity-shade"))
 	activeDecorationOpacityShade = true;
-    
+
     app = new KWD::Decorator ();
 
     if (!XDamageQueryExtension (qt_xdisplay (), &event, &error))
