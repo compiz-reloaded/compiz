@@ -1756,7 +1756,7 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 
 	    /* right */
 	    XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
-			      shadow->width - right, sy,
+			      shadow->width - context->right_space, sy,
 			      0, 0,
 			      layout->right.x2 - context->right_space,
 			      layout->right.y1 + (top - context->top_space),
