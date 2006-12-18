@@ -243,16 +243,10 @@ KWD::Decorator::~Decorator (void)
 	delete (*it);
 
     if (mDecorNormal)
-    {
 	delete mDecorNormal;
-	mDecorNormal = NULL;
-    }
 
     if (mDecorActive)
-    {
 	delete mDecorActive;
-	mDecorNormal = NULL;
-    }
 
     delete mOptions;
     delete mPlugins;
