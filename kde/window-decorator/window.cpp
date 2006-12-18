@@ -1820,4 +1820,3 @@ KWD::Window::processDamage (void)
     }
 }
 
-#include "window.moc"

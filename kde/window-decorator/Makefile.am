@@ -1,10 +1,17 @@
 if USE_KDE
+
+BUILDSOURCES =		       \
+	decorator.moc.cpp      \
+	window.moc.cpp	       \
+	KWinInterface_skel.cpp
+
 kde_window_decorator_DEPENDENCIES = \
 	$(top_builddir)/libdecoration/libdecoration.la
 kde_window_decorator_LDADD   =			       \
 	$(top_builddir)/libdecoration/libdecoration.la \
 	@KDE_WINDOW_DECORATOR_LIBS@ @KDE_LIBS@
 kde_window_decorator_SOURCES = \
+	$(BUILDSOURCES)	       \
 	main.cpp	       \
 	utils.cpp	       \
 	utils.h		       \
@@ -14,7 +21,6 @@ kde_window_decorator_SOURCES = \
 	window.h	       \
 	options.cpp	       \
 	options.h	       \
-	KWinInterface_skel.cpp \
 	KWinInterface.h
 
 kde_window_decorator_program = kde-window-decorator
@@ -23,15 +29,16 @@ INCLUDES = -I$(top_srcdir)/include @KDE_WINDOW_DECORATOR_CFLAGS@ @KDE_CFLAGS@
 
 bin_PROGRAMS = $(kde_window_decorator_program)
 
-%.moc: %.h
+%.moc.cpp: %.h
 	$(QT_MOC) $< > $@
 
-%.kidl: ./KWinInterface.h
+%.kidl: %.h
 	$(DCOPIDL) $< > $@
 
-%skel.cpp: ./KWinInterface.kidl
+%_skel.cpp: %.kidl
 	$(DCOPIDL2CPP) $< > $@
 
-EXTRA_DIST = window.moc decorator.moc KWinInterface_skel.cpp
+CLEANFILES = $(BUILDSOURCES) KWinInterface_skel.* KWinInterface_stub.*
+EXTRA_DIST = $(BUILDSOURCES)
 
 endif

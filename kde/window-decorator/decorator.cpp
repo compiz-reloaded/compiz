@@ -947,4 +947,3 @@ KWD::Decorator::sendClientMessage (WId  eventWid,
     KWD::popXError ();
 }
 
-#include "decorator.moc"
