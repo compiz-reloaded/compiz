@@ -341,7 +341,7 @@ KWD::Decorator::updateDefaultShadow (KWD::Window *w)
 
     mDefaultContext = *w->context ();
     mDefaultShadow  = w->shadow ();
-    
+
     if (mDefaultShadow)
 	decor_shadow_reference (mDefaultShadow);
 }
@@ -816,7 +816,7 @@ KWD::Decorator::handleWindowAdded (WId id)
 
 	    mClients.insert (id, client);
 	    mWindows.insert (client->winId (), client);
-	    mFrames.insert (frame, client);	    
+	    mFrames.insert (frame, client);
 	}
 	else
 	{
