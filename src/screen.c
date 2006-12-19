@@ -2661,14 +2661,26 @@ computeWorkareaForBox (CompScreen *s,
 		       XRectangle *area)
 {
     CompWindow *w;
+    Region     region;
+    REGION     r;
     int	       x1, y1, x2, y2;
-    int	       strutX1, strutY1, strutX2, strutY2;
-    int	       left, right, top, bottom;
 
-    strutX1 = pBox->x1;
-    strutY1 = pBox->y1;
-    strutX2 = pBox->x2;
-    strutY2 = pBox->y2;
+    region = XCreateRegion ();
+    if (!region)
+    {
+	area->x      = pBox->x1;
+	area->y      = pBox->y1;
+	area->width  = pBox->x1 - pBox->x1;
+	area->height = pBox->y2 - pBox->y1;
+
+	return;
+    }
+
+    r.rects    = &r.extents;
+    r.numRects = r.size = 1;
+    r.extents  = *pBox;
+
+    XUnionRegion (&r, region, region);
 
     for (w = s->windows; w; w = w->next)
     {
@@ -2677,74 +2689,72 @@ computeWorkareaForBox (CompScreen *s,
 
 	if (w->struts)
 	{
-	    left  = pBox->x1;
-	    right = pBox->x2;
+	    r.extents.y1 = pBox->y1;
+	    r.extents.y2 = pBox->y2;
 
 	    x1 = w->struts->left.x;
 	    y1 = w->struts->left.y;
 	    x2 = x1 + w->struts->left.width;
 	    y2 = y1 + w->struts->left.height;
 
-	    /* left edge must less than right box edge to be valid */
-	    if (y1 < pBox->y2 && y2 > pBox->y1 && x2 < pBox->x2)
-		left = x2;
+	    if (y1 < pBox->y2 && y2 > pBox->y1)
+	    {
+		r.extents.x1 = x1;
+		r.extents.x2 = x2;
+
+		XSubtractRegion (region, &r, region);
+	    }
 
 	    x1 = w->struts->right.x;
 	    y1 = w->struts->right.y;
 	    x2 = x1 + w->struts->right.width;
 	    y2 = y1 + w->struts->right.height;
 
-	    /* right edge must greater than left box edge to be valid */
-	    if (y1 < pBox->y2 && y2 > pBox->y1 && x1 > pBox->x1)
-		right = x1;
-
-	    /* horizontal struts are only valid if they are not overlapping */
-	    if (left < right)
+	    if (y1 < pBox->y2 && y2 > pBox->y1)
 	    {
-		if (left > strutX1)
-		    strutX1 = left;
+		r.extents.x1 = x1;
+		r.extents.x2 = x2;
 
-		if (right < strutX2)
-		    strutX2 = right;
+		XSubtractRegion (region, &r, region);
 	    }
 
-	    top    = pBox->y1;
-	    bottom = pBox->y2;
+	    r.extents.x1 = pBox->x1;
+	    r.extents.x2 = pBox->x2;
 
 	    x1 = w->struts->top.x;
 	    y1 = w->struts->top.y;
 	    x2 = x1 + w->struts->top.width;
 	    y2 = y1 + w->struts->top.height;
 
-	    /* top edge must less than bottom box edge to be valid */
-	    if (x1 < pBox->x2 && x2 > pBox->x1 && y2 < pBox->y2)
-		top = y2;
+	    if (x1 < pBox->x2 && x2 > pBox->x1)
+	    {
+		r.extents.y1 = y1;
+		r.extents.y2 = y2;
+
+		XSubtractRegion (region, &r, region);
+	    }
 
 	    x1 = w->struts->bottom.x;
 	    y1 = w->struts->bottom.y;
 	    x2 = x1 + w->struts->bottom.width;
 	    y2 = y1 + w->struts->bottom.height;
 
-	    /* bottom edge must greater than top box edge to be valid */
-	    if (x1 < pBox->x2 && x2 > pBox->x1 && y1 > pBox->y1)
-		bottom = y1;
-
-	    /* vertical struts are only valid if they are not overlapping */
-	    if (top < bottom)
+	    if (x1 < pBox->x2 && x2 > pBox->x1)
 	    {
-		if (top > strutY1)
-		    strutY1 = top;
+		r.extents.y1 = y1;
+		r.extents.y2 = y2;
 
-		if (bottom < strutY2)
-		    strutY2 = bottom;
+		XSubtractRegion (region, &r, region);
 	    }
 	}
     }
 
-    area->x      = strutX1;
-    area->y      = strutY1;
-    area->width  = strutX2 - strutX1;
-    area->height = strutY2 - strutY1;
+    area->x      = region->extents.x1;
+    area->y      = region->extents.y1;
+    area->width  = region->extents.x2 - region->extents.x1;
+    area->height = region->extents.y2 - region->extents.y1;
+
+    XDestroyRegion (region);
 }
 
 void
