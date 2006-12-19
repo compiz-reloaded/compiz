@@ -2663,6 +2663,7 @@ computeWorkareaForBox (CompScreen *s,
     CompWindow *w;
     int	       x1, y1, x2, y2;
     int	       strutX1, strutY1, strutX2, strutY2;
+    int	       left, right, top, bottom;
 
     strutX1 = pBox->x1;
     strutY1 = pBox->y1;
@@ -2676,48 +2677,66 @@ computeWorkareaForBox (CompScreen *s,
 
 	if (w->struts)
 	{
+	    left  = pBox->x1;
+	    right = pBox->x2;
+
 	    x1 = w->struts->left.x;
 	    y1 = w->struts->left.y;
 	    x2 = x1 + w->struts->left.width;
 	    y2 = y1 + w->struts->left.height;
 
-	    if (y1 < pBox->y2 && y2 > pBox->y1)
-	    {
-		if (x2 > strutX1)
-		    strutX1 = x2;
-	    }
+	    /* left edge must less than right box edge to be valid */
+	    if (y1 < pBox->y2 && y2 > pBox->y1 && x2 < pBox->x2)
+		left = x2;
 
 	    x1 = w->struts->right.x;
 	    y1 = w->struts->right.y;
 	    x2 = x1 + w->struts->right.width;
 	    y2 = y1 + w->struts->right.height;
 
-	    if (y1 < pBox->y2 && y2 > pBox->y1)
+	    /* right edge must greater than left box edge to be valid */
+	    if (y1 < pBox->y2 && y2 > pBox->y1 && x1 > pBox->x1)
+		right = x1;
+
+	    /* horizontal struts are only valid if they are not overlapping */
+	    if (left < right)
 	    {
-		if (x1 < strutX2)
-		    strutX2 = x1;
+		if (left > strutX1)
+		    strutX1 = left;
+
+		if (right < strutX2)
+		    strutX2 = right;
 	    }
+
+	    top    = pBox->y1;
+	    bottom = pBox->y2;
 
 	    x1 = w->struts->top.x;
 	    y1 = w->struts->top.y;
 	    x2 = x1 + w->struts->top.width;
 	    y2 = y1 + w->struts->top.height;
 
-	    if (x1 < pBox->x2 && x2 > pBox->x1)
-	    {
-		if (y2 > strutY1)
-		    strutY1 = y2;
-	    }
+	    /* top edge must less than bottom box edge to be valid */
+	    if (x1 < pBox->x2 && x2 > pBox->x1 && y2 < pBox->y2)
+		top = y2;
 
 	    x1 = w->struts->bottom.x;
 	    y1 = w->struts->bottom.y;
 	    x2 = x1 + w->struts->bottom.width;
 	    y2 = y1 + w->struts->bottom.height;
 
-	    if (x1 < pBox->x2 && x2 > pBox->x1)
+	    /* bottom edge must greater than top box edge to be valid */
+	    if (x1 < pBox->x2 && x2 > pBox->x1 && y1 > pBox->y1)
+		bottom = y1;
+
+	    /* vertical struts are only valid if they are not overlapping */
+	    if (top < bottom)
 	    {
-		if (y1 < strutY2)
-		    strutY2 = y1;
+		if (top > strutY1)
+		    strutY1 = top;
+
+		if (bottom < strutY2)
+		    strutY2 = bottom;
 	    }
 	}
     }
