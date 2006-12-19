@@ -2614,6 +2614,7 @@ update_event_windows (WnckWindow *win)
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     gint    x0, y0, width, height, x, y, w, h;
     gint    i, j, k, l;
+    gint    actions = d->actions;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
@@ -2652,7 +2653,7 @@ update_event_windows (WnckWindow *win)
 
 	for (j = 0; j < 3; j++)
 	{
-	    if (d->actions & event_window_actions[i][j] && i >= k && i <= l)
+	    if (actions & event_window_actions[i][j] && i >= k && i <= l)
 	    {
 		(*theme_get_event_window_position) (d, i, j, width, height,
 						    &x, &y, &w, &h);
@@ -2668,6 +2669,10 @@ update_event_windows (WnckWindow *win)
 	}
     }
 
+    /* no button event windows if width is less than minimum width */
+    if (width < ICON_SPACE + d->button_width)
+	actions = 0;
+
     for (i = 0; i < 3; i++)
     {
 	static guint button_actions[3] = {
@@ -2676,7 +2681,7 @@ update_event_windows (WnckWindow *win)
 	    WNCK_WINDOW_ACTION_MINIMIZE
 	};
 
-	if (d->actions & button_actions[i])
+	if (actions & button_actions[i])
 	{
 	    (*theme_get_button_position) (d, i, width, height, &x, &y, &w, &h);
 
