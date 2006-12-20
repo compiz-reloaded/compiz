@@ -460,15 +460,7 @@ KWD::Window::isPreview (void) const
 QRect
 KWD::Window::geometry (void) const
 {
-    if (mDecor)
-    {
-	return QRect (mGeometry.x () - mBorder.left,
-		      mGeometry.y () - mBorder.top,
-		      mGeometry.width () + mBorder.left + mBorder.right,
-		      mGeometry.height () + mBorder.top + mBorder.bottom);
-    }
-
-    return mGeometry;
+    return QWidget::geometry ();
 }
 
 QRect
