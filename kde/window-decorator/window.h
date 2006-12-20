@@ -163,6 +163,7 @@ class Window:public QWidget, public KDecorationBridge {
 	{
 	    return mShadow;
 	}
+	QRect clientGeometry (void);
 
     private:
 	void createDecoration (void);

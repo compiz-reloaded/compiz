@@ -449,7 +449,12 @@ KWD::Window::isPreview (void) const
 QRect
 KWD::Window::geometry (void) const
 {
-    return QWidget::geometry ();
+    QRect rect = QWidget::geometry ();
+
+    return QRect (rect.x () - ROOT_OFF_X,
+		  rect.y () - ROOT_OFF_Y,
+		  rect.width (),
+		  rect.height ());
 }
 
 QRect
@@ -457,6 +462,18 @@ KWD::Window::iconGeometry (void) const
 {
     return QRect ();
 }
+
+QRect
+KWD::Window::clientGeometry (void)
+{
+    QRect frame = geometry ();
+
+    return QRect (frame.x () + mBorder.left,
+		  frame.y () + mBorder.top,
+		  frame.width () - mBorder.left - mBorder.right,
+		  frame.height () - mBorder.top - mBorder.bottom);
+}
+
 QRegion
 KWD::Window::unobscuredRegion (const QRegion & r) const
 {
