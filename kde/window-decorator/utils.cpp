@@ -44,6 +44,8 @@ namespace KWD
 	Atom wmTakeFocus;
 	Atom netWmContextHelp;
 	Atom wmProtocols;
+	Atom toolkitActionAtom;
+	Atom toolkitActionWindowMenuAtom;
     }
 }
 
@@ -186,4 +188,7 @@ KWD::Atoms::init (void)
     wmProtocols = XInternAtom (xdisplay, "WM_PROTOCOLS", false);
     netWmWindowOpacity =
 	XInternAtom (xdisplay, "_NET_WM_WINDOW_OPACITY", false);
+    toolkitActionAtom = XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION", false);
+    toolkitActionWindowMenuAtom =
+	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", false);
 }

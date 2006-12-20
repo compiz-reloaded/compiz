@@ -313,6 +313,12 @@ KWD::Decorator::enableDecorations (Time timestamp,
 
     connect (this, SIGNAL (appearanceChanged ()), SLOT (reconfigure ()));
 
+    (void) QApplication::desktop (); // trigger creation of desktop widget
+
+    // select for client messages
+    XSelectInput (qt_xdisplay(), qt_xrootwin (),
+		  StructureNotifyMask | PropertyChangeMask);
+
     return true;
 }
 
@@ -716,6 +722,35 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 	    return true;
 	}
     } break;
+    case ClientMessage:
+	if (xevent->xclient.message_type == Atoms::toolkitActionAtom)
+	{
+	    long action;
+
+	    action = xevent->xclient.data.l[0];
+	    if (action == Atoms::toolkitActionWindowMenuAtom)
+	    {
+		if (mClients.contains (xevent->xclient.window))
+		{
+		    QPoint pos;
+
+		    client = mClients[xevent->xclient.window];
+
+		    if (xevent->xclient.data.l[2])
+		    {
+			pos = QPoint (xevent->xclient.data.l[3],
+				      xevent->xclient.data.l[4]);
+		    }
+		    else
+		    {
+			pos = client->clientGeometry ().topLeft ();
+		    }
+
+		    client->showWindowMenu (pos);
+		}
+	    }
+	}
+	break;
     default:
 	if (xevent->type == mDamageEvent + XDamageNotify)
 	{

@@ -40,6 +40,8 @@ namespace KWD
 	extern Atom wmTakeFocus;
 	extern Atom netWmContextHelp;
 	extern Atom wmProtocols;
+	extern Atom toolkitActionAtom;
+	extern Atom toolkitActionWindowMenuAtom;
 
 	void init (void);
     }
