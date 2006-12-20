@@ -311,7 +311,7 @@ if test "x$use_kde" = "xyes"; then
   fi
 
   qt_test_include="qstyle.h"
-  qt_test_library="libqt-mt.la"
+  qt_test_library="libqt-mt.so"
 
   dnl Check for Qt headers
   AC_MSG_CHECKING([for Qt headers])
