@@ -74,7 +74,6 @@ KWD::Window::Window (QWidget *parent,
     mUniqueVertShape (false),
     mPopup (0),
     mAdvancedMenu (0),
-    mOpacityMenu (0),
     mMapped (false),
     mPendingMap (0),
     mPendingConfigure (0)
@@ -327,18 +326,8 @@ KWD::Window::showWindowMenu (QPoint pos)
 	mPopup->insertItem (i18n ("Ma&ximize"), Options::MaximizeOp);
 	mPopup->insertItem (i18n ("Sh&ade"), Options::ShadeOp);
 
-	mOpacityMenu = new QPopupMenu (mPopup);
-	mOpacityMenu->setFont (KGlobalSettings::menuFont ());
-	mOpacityMenu->insertItem ("25%", ChangeOpacity25);
-	mOpacityMenu->insertItem ("50%", ChangeOpacity50);
-	mOpacityMenu->insertItem ("75%", ChangeOpacity75);
-	mOpacityMenu->insertItem ("100%", ChangeOpacity100);
-	mPopup->insertItem (i18n ("Opacity"), mOpacityMenu);
-
-	connect (mOpacityMenu, SIGNAL (activated (int)),
-		 SLOT (handleOpacityChange (int)));
-
 	mPopup->insertSeparator ();
+
 	mPopup->insertItem (SmallIconSet ("fileclose"), i18n ("&Close"),
 			    Options::CloseOp);
 
@@ -1428,11 +1417,6 @@ KWD::Window::handlePopupAboutToShow (void)
 
     mPopup->setItemEnabled (Options::MinimizeOp, isMinimizable ());
     mPopup->setItemEnabled (Options::CloseOp, isCloseable ());
-
-    mOpacityMenu->setItemEnabled (ChangeOpacity25, mOpacity != 0x3fff);
-    mOpacityMenu->setItemEnabled (ChangeOpacity50, mOpacity != 0x7fff);
-    mOpacityMenu->setItemEnabled (ChangeOpacity75, mOpacity != 0xbfff);
-    mOpacityMenu->setItemEnabled (ChangeOpacity100, mOpacity != 0xffff);
 }
 
 void
@@ -1488,30 +1472,6 @@ KWD::Window::updateIcons (void)
     mIcons = QIconSet (KWin::icon (mClientId, 16, 16, TRUE),
 		       KWin::icon (mClientId, 32, 32, TRUE));
     mDecor->iconChange ();
-}
-
-void
-KWD::Window::handleOpacityChange (int id)
-{
-    int opacity = 0xffff;
-
-    switch (id) {
-    case ChangeOpacity25:
-	opacity = 0xffff / 4;
-	break;
-    case ChangeOpacity50:
-	opacity = 0xffff / 2;
-	break;
-    case ChangeOpacity75:
-	opacity = (0xffff / 4) * 3;
-    default:
-	break;
-    }
-
-    Decorator::sendClientMessage (qt_xrootwin (),
-				  mClientId,
-				  Atoms::netWmWindowOpacity,
-				  (opacity << 16) | opacity);
 }
 
 NET::Direction

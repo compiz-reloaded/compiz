@@ -165,14 +165,6 @@ class Window:public QWidget, public KDecorationBridge {
 	}
 
     private:
-	enum WindowOpacityChange {
-	    ChangeOpacity25,
-	    ChangeOpacity50,
-	    ChangeOpacity75,
-	    ChangeOpacity100
-	};
-
-    private:
 	void createDecoration (void);
 	void updateShadow (void);
 	bool resizeDecoration (bool force = false);
@@ -188,7 +180,6 @@ class Window:public QWidget, public KDecorationBridge {
     private slots:
 	void handlePopupActivated (int id);
 	void handlePopupAboutToShow (void);
-	void handleOpacityChange (int id);
 
     private:
 	Type mType;
@@ -222,7 +213,6 @@ class Window:public QWidget, public KDecorationBridge {
 	bool mSupportContextHelp;
 	QPopupMenu *mPopup;
 	QPopupMenu *mAdvancedMenu;
-	QPopupMenu *mOpacityMenu;
 	unsigned long mState;
 	bool mMapped;
 	int mPendingMap;
