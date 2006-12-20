@@ -749,6 +749,13 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 		    client->showWindowMenu (pos);
 		}
 	    }
+	    else if (action == Atoms::toolkitActionMainMenuAtom)
+	    {
+		dcopClient ()->send ("kicker",
+				     "kicker",
+				     "showKMenu()",
+				     QByteArray ());
+	    }
 	    else if (action == Atoms::toolkitActionRunDialogAtom)
 	    {
 		dcopClient ()->send ("kdesktop",
