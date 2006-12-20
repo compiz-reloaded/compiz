@@ -40,7 +40,7 @@ char *programName;
 char **programArgv;
 int  programArgc;
 
-char *backgroundImage = "background.png";
+char *backgroundImage = NULL;
 
 REGION   emptyRegion;
 REGION   infiniteRegion;

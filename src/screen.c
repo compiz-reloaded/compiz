@@ -1040,7 +1040,7 @@ updateScreenBackground (CompScreen  *screen,
 	initTexture (screen, texture);
     }
 
-    if (!texture->name)
+    if (!texture->name && backgroundImage)
 	readImageToTexture (screen, texture, backgroundImage, &width, &height);
 
     if (texture->target == GL_TEXTURE_2D)
