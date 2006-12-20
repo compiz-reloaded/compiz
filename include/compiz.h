@@ -1489,6 +1489,7 @@ struct _CompScreen {
     int		      sizeExpose;
     int		      nExpose;
     CompTexture       backgroundTexture;
+    Bool	      backgroundLoaded;
     unsigned int      pendingDestroys;
     int		      desktopWindowCount;
     unsigned int      mapNum;

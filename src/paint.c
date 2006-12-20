@@ -895,13 +895,17 @@ paintBackground (CompScreen   *s,
 	    initTexture (s, bg);
 	}
 
+	s->backgroundLoaded = FALSE;
+
 	if (!(mask & PAINT_BACKGROUND_WITH_STENCIL_MASK))
 	    return;
     }
     else
     {
-	if (!bg->name)
+	if (!s->backgroundLoaded)
 	    updateScreenBackground (s, bg);
+
+	s->backgroundLoaded = TRUE;
     }
 
     data = malloc (sizeof (GLfloat) * nBox * 16);
@@ -955,14 +959,23 @@ paintBackground (CompScreen   *s,
     }
     else
     {
-	if (mask & PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK)
-	    enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);
+	if (bg->name)
+	{
+	    if (mask & PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK)
+		enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);
+	    else
+		enableTexture (s, bg, COMP_TEXTURE_FILTER_FAST);
+
+	    glDrawArrays (GL_QUADS, 0, nBox * 4);
+
+	    disableTexture (s, bg);
+	}
 	else
-	    enableTexture (s, bg, COMP_TEXTURE_FILTER_FAST);
-
-	glDrawArrays (GL_QUADS, 0, nBox * 4);
-
-	disableTexture (s, bg);
+	{
+	    glColor4us (0, 0, 0, 0);
+	    glDrawArrays (GL_QUADS, 0, nBox * 4);
+	    glColor4usv (defaultColor);
+	}
     }
 
     if (mask & PAINT_BACKGROUND_WITH_STENCIL_MASK)

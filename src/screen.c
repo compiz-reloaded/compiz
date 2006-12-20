@@ -1892,6 +1892,7 @@ addScreen (CompDisplay *display,
     }
 
     initTexture (s, &s->backgroundTexture);
+    s->backgroundLoaded = FALSE;
 
     s->defaultIcon = NULL;
 
