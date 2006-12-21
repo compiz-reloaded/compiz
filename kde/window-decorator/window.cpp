@@ -114,6 +114,10 @@ KWD::Window::Window (QWidget *parent,
 	mGeometry = QRect (50, 50, 30, 1);
     }
 
+    setGeometry (QRect (mGeometry.x () + ROOT_OFF_X,
+			mGeometry.y () + ROOT_OFF_Y,
+			tmGeometry.width (), mGeometry.height ()));
+
     createDecoration ();
 
     mActiveChild = NULL;
