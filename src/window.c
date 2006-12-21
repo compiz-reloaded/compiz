@@ -3708,6 +3708,9 @@ closeWindow (CompWindow *w,
 {
     CompDisplay *display = w->screen->display;
 
+    if (serverTime == 0)
+	serverTime = getCurrentTimeFromDisplay (display);
+
     if (w->alive)
     {
 	if (w->protocols & CompWindowProtocolDeleteMask)
