@@ -29,6 +29,7 @@
 #include <kwinmodule.h>
 #include <klocale.h>
 #include <kcommondecoration.h>
+#include <kwin.h>
 #include <qpoint.h>
 
 #include <X11/Xlib.h>
@@ -858,9 +859,28 @@ KWD::Decorator::handleWindowAdded (WId id)
     KWD::readWindowProperty (id, Atoms::netFrameWindow, (long *) &frame);
     if (KWD::readWindowProperty (id, Atoms::switchSelectWindow,
 				 (long *) &select))
+    {
 	type = KWD::Window::Switcher;
+    }
     else
+    {
+	KWin::WindowInfo wInfo = KWin::windowInfo (id, NET::WMWindowType, 0);
+
+	switch (wInfo.windowType (~0)) {
+	case NET::Normal:
+	case NET::Dialog:
+	case NET::Toolbar:
+	case NET::Menu:
+	case NET::Utility:
+	case NET::Splash:
+	    /* decorate these window types */
+	    break;
+	default:
+	    return;
+	}
+
 	type = KWD::Window::Normal;
+    }
 
     if (frame)
     {
