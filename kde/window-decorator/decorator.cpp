@@ -873,6 +873,7 @@ KWD::Decorator::handleWindowAdded (WId id)
 	case NET::Menu:
 	case NET::Utility:
 	case NET::Splash:
+	case NET::Unknown:
 	    /* decorate these window types */
 	    break;
 	default:
