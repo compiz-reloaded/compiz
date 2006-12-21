@@ -763,6 +763,20 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 				     "popupExecuteCommand()",
 				     QByteArray ());
 	    }
+	    else if (action == Atoms::toolkitActionForceQuitDialogAtom)
+	    {
+		if (mClients.contains (xevent->xclient.window))
+		{
+		    Time timestamp = xevent->xclient.data.l[1];
+
+		    client = mClients[xevent->xclient.window];
+
+		    if (xevent->xclient.data.l[2])
+			client->showKillProcessDialog (timestamp);
+		    else
+			client->hideKillProcessDialog ();
+		}
+	    }
 	}
 	break;
     default:

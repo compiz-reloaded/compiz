@@ -34,6 +34,7 @@
 #include "utils.h"
 #include "options.h"
 
+class KProcess;
 class KDecoration;
 class QPopupMenu;
 
@@ -164,6 +165,8 @@ class Window:public QWidget, public KDecorationBridge {
 	    return mShadow;
 	}
 	QRect clientGeometry (void);
+	void showKillProcessDialog (Time timestamp);
+	void hideKillProcessDialog (void);
 
     private:
 	void createDecoration (void);
@@ -181,6 +184,7 @@ class Window:public QWidget, public KDecorationBridge {
     private slots:
 	void handlePopupActivated (int id);
 	void handlePopupAboutToShow (void);
+	void handleProcessKillerExited (void);
 
     private:
 	Type mType;
@@ -218,6 +222,7 @@ class Window:public QWidget, public KDecorationBridge {
 	bool mMapped;
 	int mPendingMap;
 	int mPendingConfigure;
+	KProcess *mProcessKiller;
     };
 }
 

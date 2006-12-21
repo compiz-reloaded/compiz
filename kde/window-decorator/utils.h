@@ -44,6 +44,7 @@ namespace KWD
 	extern Atom toolkitActionWindowMenuAtom;
 	extern Atom toolkitActionMainMenuAtom;
 	extern Atom toolkitActionRunDialogAtom;
+	extern Atom toolkitActionForceQuitDialogAtom;
 
 	void init (void);
     }

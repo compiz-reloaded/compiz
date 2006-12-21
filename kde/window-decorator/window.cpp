@@ -37,6 +37,8 @@
 #include <kdecoration.h>
 #include <kwin.h>
 #include <klocale.h>
+#include <kprocess.h>
+#include <kstandarddirs.h>
 
 #include <qapplication.h>
 #include <qlayout.h>
@@ -76,7 +78,8 @@ KWD::Window::Window (QWidget *parent,
     mAdvancedMenu (0),
     mMapped (false),
     mPendingMap (0),
-    mPendingConfigure (0)
+    mPendingConfigure (0),
+    mProcessKiller (0)
 {
     if (mType == Normal || mType == Switcher)
     {
@@ -135,6 +138,9 @@ KWD::Window::~Window (void)
 
     if (mPopup)
 	delete mPopup;
+
+    if (mProcessKiller)
+	delete mProcessKiller;
 }
 
 bool
@@ -1787,4 +1793,65 @@ KWD::Window::processDamage (void)
 
 	updateProperty ();
     }
+}
+
+void
+KWD::Window::handleProcessKillerExited (void)
+{
+    if (mProcessKiller)
+    {
+	delete mProcessKiller;
+	mProcessKiller = NULL;
+    }
+}
+
+void
+KWD::Window::showKillProcessDialog (Time timestamp)
+{
+    KWin::WindowInfo kWinInfo =
+	KWin::windowInfo (mClientId, 0,
+			  NET::WM2WindowClass | NET::WM2ClientMachine);
+    NETWinInfo       wInfo = NETWinInfo (qt_xdisplay(), mClientId,
+					 qt_xrootwin (), NET::WMPid);
+    QCString	     clientMachine, resourceClass;
+    pid_t	     pid;
+    char	     buf[257];
+
+    if (mProcessKiller)
+	return;
+
+    clientMachine = kWinInfo.clientMachine ();
+    resourceClass = kWinInfo.windowClassClass ();
+    pid		  = wInfo.pid ();
+
+    if (gethostname (buf, sizeof (buf) - 1) == 0)
+    {
+	if (strcmp (buf, clientMachine) == 0)
+	    clientMachine = "localhost";
+    }
+
+    mProcessKiller = new KProcess (this);
+
+    *mProcessKiller << KStandardDirs::findExe ("kwin_killer_helper") <<
+	"--pid" << QCString ().setNum (pid) <<
+	"--hostname" << clientMachine <<
+	"--windowname" << mName.utf8 () <<
+	"--applicationname" << resourceClass <<
+	"--wid" << QCString ().setNum (mClientId) <<
+	"--timestamp" << QCString ().setNum (timestamp);
+
+    connect (mProcessKiller, SIGNAL (processExited (KProcess *)),
+	     SLOT (handleProcessKillerExited ()));
+
+    if (!mProcessKiller->start (KProcess::NotifyOnExit))
+    {
+	delete mProcessKiller;
+	mProcessKiller = NULL;
+    }
+}
+
+void
+KWD::Window::hideKillProcessDialog (void)
+{
+    handleProcessKillerExited ();
 }
