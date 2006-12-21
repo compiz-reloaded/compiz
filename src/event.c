@@ -1512,7 +1512,11 @@ handleEvent (CompDisplay *d,
 		finiTexture (s, &s->backgroundTexture);
 		initTexture (s, &s->backgroundTexture);
 
-		damageScreen (s);
+		if (s->backgroundLoaded)
+		{
+		    s->backgroundLoaded = FALSE;
+		    damageScreen (s);
+		}
 	    }
 	}
 	else if (event->xproperty.atom == d->wmStrutAtom ||
