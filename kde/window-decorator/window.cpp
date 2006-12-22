@@ -76,6 +76,7 @@ KWD::Window::Window (QWidget *parent,
     mUniqueVertShape (false),
     mPopup (0),
     mAdvancedMenu (0),
+    mDesktopMenu (0),
     mMapped (false),
     mPendingMap (0),
     mPendingConfigure (0),
@@ -327,6 +328,15 @@ KWD::Window::showWindowMenu (QPoint pos)
 				   Options::FullScreenOp);
 
 	mPopup->insertItem (i18n ("Ad&vanced"), mAdvancedMenu);
+
+	mDesktopMenu = new QPopupMenu (mPopup);
+	mDesktopMenu->setCheckable (true);
+	mDesktopMenu->setFont (KGlobalSettings::menuFont ());
+
+	connect (mDesktopMenu, SIGNAL (activated (int)),
+		 SLOT (handleDesktopPopupActivated (int)));
+
+	mPopup->insertItem (i18n ("To &Desktop"), mDesktopMenu, Options::NoOp);
 
 	mPopup->insertItem (SmallIconSet ("move"), i18n ("&Move"),
 			    Options::MoveOp);
@@ -1425,8 +1435,53 @@ KWD::Window::handlePopupActivated (int id)
 }
 
 void
+KWD::Window::handleDesktopPopupActivated (int id)
+{
+    if (id)
+	setDesktop (id);
+    else
+	KWin::setOnAllDesktops (mClientId, true);
+}
+
+void
 KWD::Window::handlePopupAboutToShow (void)
 {
+    int numberOfDesktops;
+
+    numberOfDesktops = KWin::numberOfDesktops ();
+    if (numberOfDesktops > 1)
+    {
+	NETRootInfo *rootInfo = Decorator::rootInfo ();
+	QString	    name;
+	int	    id, i;
+	int	    winDesktop = desktop ();
+
+	mDesktopMenu->clear ();
+
+	id = mDesktopMenu->insertItem (i18n ("&All Desktops"), 0);
+
+	mDesktopMenu->setItemChecked (id, (winDesktop == NET::OnAllDesktops));
+	mDesktopMenu->insertSeparator ();
+
+	for (i = 1; i <= numberOfDesktops; i++)
+	{
+	    QString name;
+
+	    name =
+		QString ("&%1 ").arg (i) +
+		QString (rootInfo->desktopName (i)).replace ('&', "&&");
+
+	    id = mDesktopMenu->insertItem (name, i);
+	    mDesktopMenu->setItemChecked (id, (winDesktop == i));
+	}
+
+	mPopup->setItemVisible (Options::NoOp, true);
+    }
+    else
+    {
+	mPopup->setItemVisible (Options::NoOp, false);
+    }
+
     mPopup->setItemEnabled (Options::ResizeOp, isResizable ());
     mPopup->setItemEnabled (Options::MoveOp, isMovable ());
 

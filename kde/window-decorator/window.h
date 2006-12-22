@@ -183,6 +183,7 @@ class Window:public QWidget, public KDecorationBridge {
 
     private slots:
 	void handlePopupActivated (int id);
+	void handleDesktopPopupActivated (int id);
 	void handlePopupAboutToShow (void);
 	void handleProcessKillerExited (void);
 
@@ -218,6 +219,7 @@ class Window:public QWidget, public KDecorationBridge {
 	bool mSupportContextHelp;
 	QPopupMenu *mPopup;
 	QPopupMenu *mAdvancedMenu;
+	QPopupMenu *mDesktopMenu;
 	unsigned long mState;
 	bool mMapped;
 	int mPendingMap;
