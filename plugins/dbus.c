@@ -765,6 +765,16 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
     return TRUE;
 }
 
+/*
+ * 'List' can be used to retrieve a list of available options.
+ *
+ * Example:
+ *
+ * dbus-send --print-reply --type=method_call \
+ * --dest=org.freedesktop.compiz	      \
+ * /org/freedesktop/compiz/core/allscreens    \
+ * org.freedesktop.compiz.list
+ */
 static Bool
 dbusHandleListMessage (DBusConnection *connection,
 		       DBusMessage    *message,
@@ -796,6 +806,16 @@ dbusHandleListMessage (DBusConnection *connection,
     return TRUE;
 }
 
+/*
+ * 'GetMetadata' can be used to retrieve metadata for an option.
+ *
+ * Example:
+ *
+ * dbus-send --print-reply --type=method_call		\
+ * --dest=org.freedesktop.compiz			\
+ * /org/freedesktop/compiz/core/allscreens/run_command0 \
+ * org.freedesktop.compiz.getMetadata
+ */
 static Bool
 dbusHandleGetMetadataMessage (DBusConnection *connection,
 			      DBusMessage    *message,
