@@ -2372,8 +2372,12 @@ typedef Bool (*LoadPluginProc) (CompPlugin *p,
 
 typedef void (*UnloadPluginProc) (CompPlugin *p);
 
+typedef char **(*ListPluginsProc) (char *path,
+				   int	*n);
+
 extern LoadPluginProc   loaderLoadPlugin;
 extern UnloadPluginProc loaderUnloadPlugin;
+extern ListPluginsProc  loaderListPlugins;
 
 struct _CompPlugin {
     CompPlugin       *next;
@@ -2433,6 +2437,9 @@ popPlugin (void);
 
 CompPlugin *
 getPlugins (void);
+
+char **
+availablePlugins (int *n);
 
 
 /* session.c */
