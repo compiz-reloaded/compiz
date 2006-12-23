@@ -40,6 +40,7 @@
 #define COMPIZ_DBUS_GET_MEMBER_NAME                  "get"
 #define COMPIZ_DBUS_GET_METADATA_MEMBER_NAME	     "getMetadata"
 #define COMPIZ_DBUS_LIST_MEMBER_NAME		     "list"
+#define COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME	     "getPlugins"
 
 #define COMPIZ_DBUS_CHANGED_SIGNAL_NAME		     "changed"
 
@@ -890,7 +891,54 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
     dbus_message_unref (reply);
 
     return TRUE;
+}
 
+/*
+ * 'GetPlugins' can be used to retrieve a list of available plugins. There's
+ * no guarantee that a plugin in this list can actually be loaded.
+ *
+ * Example:
+ *
+ * dbus-send --print-reply --type=method_call \
+ * --dest=org.freedesktop.compiz	      \
+ * /org/freedesktop/compiz		      \
+ * org.freedesktop.compiz.getPlugins
+ */
+static Bool
+dbusHandleGetPluginsMessage (DBusConnection *connection,
+			     DBusMessage    *message,
+			     CompDisplay    *d)
+{
+    DBusMessage *reply;
+    char	**plugins, **p;
+    int		n;
+
+    reply = dbus_message_new_method_return (message);
+
+    plugins = availablePlugins (&n);
+    if (plugins)
+    {
+	p = plugins;
+
+	while (n--)
+	{
+	    dbus_message_append_args (reply,
+				      DBUS_TYPE_STRING, p,
+				      DBUS_TYPE_INVALID);
+	    free (*p);
+
+	    p++;
+	}
+
+	free (plugins);
+    }
+
+    dbus_connection_send (connection, reply, NULL);
+    dbus_connection_flush (connection);
+
+    dbus_message_unref (reply);
+
+    return TRUE;
 }
 
 static DBusHandlerResult
@@ -919,48 +967,74 @@ dbusHandleMessage (DBusConnection *connection,
     if (!dbus_message_get_path_decomposed (message, &path))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
-    if (!path[0] || !path[1] || !path[2] || !path[3] || !path[4])
+    if (!path[0] || !path[1] || !path[2])
+    {
+	dbus_free_string_array (path);
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+    }
 
-    if (strcmp (path[0], "org")	       ||
-	strcmp (path[1], "freedesktop")||
+    if (strcmp (path[0], "org")	        ||
+	strcmp (path[1], "freedesktop") ||
 	strcmp (path[2], "compiz"))
+    {
+	dbus_free_string_array (path);
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+    }
 
-    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME) &&
-				 path[5])
+    if (dbus_message_has_member (message, COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
+    {
+	if (dbusHandleGetPluginsMessage (connection, message, d))
+	{
+	    dbus_free_string_array (path);
+	    return DBUS_HANDLER_RESULT_HANDLED;
+	}
+    }
+
+    if (!path[3] || !path[4])
+    {
+	dbus_free_string_array (path);
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+    }
+
+    if (dbus_message_has_member (message, COMPIZ_DBUS_LIST_MEMBER_NAME))
+    {
+	if (dbusHandleListMessage (connection, message, d, &path[3]))
+	{
+	    dbus_free_string_array (path);
+	    return DBUS_HANDLER_RESULT_HANDLED;
+	}
+    }
+
+    if (!path[5])
+    {
+	dbus_free_string_array (path);
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+    }
+
+    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  TRUE);
     }
     else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME) &&
-				      path[5])
+				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  FALSE);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME) &&
-				      path[5])
+    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME))
     {
 	status = dbusHandleSetOptionMessage (connection, message, d, &path[3]);
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_GET_MEMBER_NAME) && path[5])
+    else if (dbus_message_has_member (message, COMPIZ_DBUS_GET_MEMBER_NAME))
     {
 	status = dbusHandleGetOptionMessage (connection, message, d, &path[3]);
     }
     else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_GET_METADATA_MEMBER_NAME) &&
-	     path[5])
+				      COMPIZ_DBUS_GET_METADATA_MEMBER_NAME))
     {
 	status = dbusHandleGetMetadataMessage (connection, message, d,
 					       &path[3]);
-    }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_LIST_MEMBER_NAME))
-    {
-	status = dbusHandleListMessage (connection, message, d, &path[3]);
     }
 
     dbus_free_string_array (path);
