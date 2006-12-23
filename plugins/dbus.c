@@ -32,17 +32,18 @@
 
 #include <compiz.h>
 
-#define COMPIZ_DBUS_SERVICE_NAME	             "org.freedesktop.compiz"
+#define COMPIZ_DBUS_SERVICE_NAME	            "org.freedesktop.compiz"
 
-#define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME             "activate"
-#define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME           "deactivate"
-#define COMPIZ_DBUS_SET_MEMBER_NAME                  "set"
-#define COMPIZ_DBUS_GET_MEMBER_NAME                  "get"
-#define COMPIZ_DBUS_GET_METADATA_MEMBER_NAME	     "getMetadata"
-#define COMPIZ_DBUS_LIST_MEMBER_NAME		     "list"
-#define COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME	     "getPlugins"
+#define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME            "activate"
+#define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME          "deactivate"
+#define COMPIZ_DBUS_SET_MEMBER_NAME                 "set"
+#define COMPIZ_DBUS_GET_MEMBER_NAME                 "get"
+#define COMPIZ_DBUS_GET_METADATA_MEMBER_NAME	    "getMetadata"
+#define COMPIZ_DBUS_LIST_MEMBER_NAME		    "list"
+#define COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME	    "getPlugins"
+#define COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME "getPluginMetadata"
 
-#define COMPIZ_DBUS_CHANGED_SIGNAL_NAME		     "changed"
+#define COMPIZ_DBUS_CHANGED_SIGNAL_NAME		    "changed"
 
 typedef enum {
     DbusActionIndexKeyBinding    = 0,
@@ -961,6 +962,122 @@ dbusHandleGetPluginsMessage (DBusConnection *connection,
     return TRUE;
 }
 
+/*
+ * 'GetPluginMetadata' can be used to retrieve metadata for a plugin.
+ *
+ * Example:
+ *
+ * dbus-send --print-reply --type=method_call \
+ * --dest=org.freedesktop.compiz	      \
+ * /org/freedesktop/compiz		      \
+ * org.freedesktop.compiz.getPluginMetadata   \
+ * string:'png'
+ */
+static Bool
+dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
+				    DBusMessage    *message,
+				    CompDisplay    *d)
+{
+    DBusMessage     *reply;
+    DBusMessageIter iter;
+    char	    *name;
+    CompPlugin	    *p, *loadedPlugin = NULL;
+
+    if (!dbus_message_iter_init (message, &iter))
+	return FALSE;
+
+    if (!dbusTryGetValueWithType (&iter,
+				  DBUS_TYPE_STRING,
+				  &name))
+	return FALSE;
+
+    p = findActivePlugin (name);
+    if (!p)
+	p = loadedPlugin = loadPlugin (name);
+
+    if (p)
+    {
+	CompPluginDep *deps;
+	int	      nDeps;
+	dbus_bool_t   supportedABI;
+	int	      version;
+
+	reply = dbus_message_new_method_return (message);
+
+	dbus_message_append_args (reply,
+				  DBUS_TYPE_STRING, &p->vTable->name,
+				  DBUS_TYPE_STRING, &p->vTable->shortDesc,
+				  DBUS_TYPE_STRING, &p->vTable->longDesc,
+				  DBUS_TYPE_INVALID);
+
+	version = (*p->vTable->getVersion) (p, ABIVERSION);
+	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
+
+	dbus_message_append_args (reply,
+				  DBUS_TYPE_BOOLEAN, &supportedABI,
+				  DBUS_TYPE_INVALID);
+
+	deps  = p->vTable->deps;
+	nDeps = p->vTable->nDeps;
+
+	while (nDeps--)
+	{
+	    char *str;
+
+	    str = malloc ((strlen (deps->name) + 10) * sizeof (char));
+	    if (str)
+	    {
+		switch (deps->rule) {
+		case CompPluginRuleBefore:
+		    sprintf (str, "before:%s", deps->name);
+		    break;
+		case CompPluginRuleAfter:
+		    sprintf (str, "after:%s", deps->name);
+		    break;
+		case CompPluginRuleRequire:
+		default:
+		    sprintf (str, "required:%s", deps->name);
+		    break;
+		}
+
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &str,
+					  DBUS_TYPE_INVALID);
+
+		free (str);
+	    }
+
+	    deps++;
+	}
+    }
+    else
+    {
+	char *str;
+
+	str = malloc (strlen (name) + 256);
+	if (!str)
+	    return FALSE;
+
+	sprintf (str, "Plugin '%s' could not be loaded", name);
+
+	reply = dbus_message_new_error (message,
+					DBUS_ERROR_FAILED,
+					str);
+
+	free (str);
+    }
+
+    if (loadedPlugin)
+	unloadPlugin (loadedPlugin);
+
+    dbus_connection_send (connection, reply, NULL);
+    dbus_connection_flush (connection);
+
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
 static DBusHandlerResult
 dbusHandleMessage (DBusConnection *connection,
 		   DBusMessage    *message,
@@ -1001,7 +1118,17 @@ dbusHandleMessage (DBusConnection *connection,
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
     }
 
-    if (dbus_message_has_member (message, COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
+    if (dbus_message_has_member (message,
+				 COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME))
+    {
+	if (dbusHandleGetPluginMetadataMessage (connection, message, d))
+	{
+	    dbus_free_string_array (path);
+	    return DBUS_HANDLER_RESULT_HANDLED;
+	}
+    }
+    else if (dbus_message_has_member (message,
+				      COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
     {
 	if (dbusHandleGetPluginsMessage (connection, message, d))
 	{
