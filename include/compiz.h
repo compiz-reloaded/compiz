@@ -1342,10 +1342,6 @@ typedef Bool (*DamageWindowRectProc) (CompWindow *w,
 typedef Bool (*DamageWindowRegionProc) (CompWindow *w,
 					Region     region);
 
-typedef void (*SetWindowScaleProc) (CompWindow *w,
-				    float      xScale,
-				    float      yScale);
-
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
 typedef void (*WindowResizeNotifyProc) (CompWindow *window);
