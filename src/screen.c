@@ -1461,19 +1461,20 @@ addScreen (CompDisplay *display,
     s->initPluginForScreen = initPluginForScreen;
     s->finiPluginForScreen = finiPluginForScreen;
 
-    s->preparePaintScreen     = preparePaintScreen;
-    s->donePaintScreen        = donePaintScreen;
-    s->paintScreen	      = paintScreen;
-    s->paintTransformedScreen = paintTransformedScreen;
-    s->applyScreenTransform   = applyScreenTransform;
-    s->paintBackground        = paintBackground;
-    s->paintWindow            = paintWindow;
-    s->drawWindow             = drawWindow;
-    s->addWindowGeometry      = addWindowGeometry;
-    s->drawWindowTexture      = drawWindowTexture;
-    s->drawWindowGeometry     = drawWindowGeometry;
-    s->damageWindowRect       = damageWindowRect;
-    s->focusWindow	      = focusWindow;
+    s->preparePaintScreen	 = preparePaintScreen;
+    s->donePaintScreen		 = donePaintScreen;
+    s->paintScreen		 = paintScreen;
+    s->paintTransformedScreen	 = paintTransformedScreen;
+    s->applyScreenTransform	 = applyScreenTransform;
+    s->paintBackground		 = paintBackground;
+    s->paintWindow		 = paintWindow;
+    s->drawWindow		 = drawWindow;
+    s->addWindowGeometry	 = addWindowGeometry;
+    s->drawWindowTexture	 = drawWindowTexture;
+    s->drawWindowGeometry	 = drawWindowGeometry;
+    s->damageWindowRect		 = damageWindowRect;
+    s->getOutputExtentsForWindow = getOutputExtentsForWindow;
+    s->focusWindow		 = focusWindow;
 
     s->windowResizeNotify = windowResizeNotify;
     s->windowMoveNotify	  = windowMoveNotify;

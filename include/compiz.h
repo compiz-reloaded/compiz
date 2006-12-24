@@ -73,12 +73,13 @@ extern "C" {
 #define  _(x) x
 #define N_(x) x
 
-typedef struct _CompPlugin  CompPlugin;
-typedef struct _CompDisplay CompDisplay;
-typedef struct _CompScreen  CompScreen;
-typedef struct _CompWindow  CompWindow;
-typedef struct _CompTexture CompTexture;
-typedef struct _CompIcon    CompIcon;
+typedef struct _CompPlugin	  CompPlugin;
+typedef struct _CompDisplay	  CompDisplay;
+typedef struct _CompScreen	  CompScreen;
+typedef struct _CompWindow	  CompWindow;
+typedef struct _CompTexture	  CompTexture;
+typedef struct _CompIcon	  CompIcon;
+typedef struct _CompWindowExtents CompWindowExtents;
 
 /* virtual modifiers */
 
@@ -1342,6 +1343,9 @@ typedef Bool (*DamageWindowRectProc) (CompWindow *w,
 typedef Bool (*DamageWindowRegionProc) (CompWindow *w,
 					Region     region);
 
+typedef void (*GetOutputExtentsForWindowProc) (CompWindow	 *w,
+					       CompWindowExtents *output);
+
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
 typedef void (*WindowResizeNotifyProc) (CompWindow *window);
@@ -1596,19 +1600,20 @@ struct _CompScreen {
     InitPluginForScreenProc initPluginForScreen;
     FiniPluginForScreenProc finiPluginForScreen;
 
-    PreparePaintScreenProc     preparePaintScreen;
-    DonePaintScreenProc	       donePaintScreen;
-    PaintScreenProc	       paintScreen;
-    PaintTransformedScreenProc paintTransformedScreen;
-    ApplyScreenTransformProc   applyScreenTransform;
-    PaintBackgroundProc        paintBackground;
-    PaintWindowProc	       paintWindow;
-    DrawWindowProc	       drawWindow;
-    AddWindowGeometryProc      addWindowGeometry;
-    DrawWindowGeometryProc     drawWindowGeometry;
-    DrawWindowTextureProc      drawWindowTexture;
-    DamageWindowRectProc       damageWindowRect;
-    FocusWindowProc	       focusWindow;
+    PreparePaintScreenProc	  preparePaintScreen;
+    DonePaintScreenProc		  donePaintScreen;
+    PaintScreenProc		  paintScreen;
+    PaintTransformedScreenProc	  paintTransformedScreen;
+    ApplyScreenTransformProc	  applyScreenTransform;
+    PaintBackgroundProc		  paintBackground;
+    PaintWindowProc		  paintWindow;
+    DrawWindowProc		  drawWindow;
+    AddWindowGeometryProc	  addWindowGeometry;
+    DrawWindowGeometryProc	  drawWindowGeometry;
+    DrawWindowTextureProc	  drawWindowTexture;
+    DamageWindowRectProc	  damageWindowRect;
+    GetOutputExtentsForWindowProc getOutputExtentsForWindow;
+    FocusWindowProc		  focusWindow;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
@@ -1856,12 +1861,12 @@ typedef Bool (*InitPluginForWindowProc) (CompPlugin *plugin,
 typedef void (*FiniPluginForWindowProc) (CompPlugin *plugin,
 					 CompWindow *window);
 
-typedef struct _CompWindowExtents {
+struct _CompWindowExtents {
     int left;
     int right;
     int top;
     int bottom;
-} CompWindowExtents;
+};
 
 typedef struct _CompStruts {
     XRectangle left;
@@ -2084,8 +2089,10 @@ setWmState (CompDisplay *display,
 
 void
 setWindowFrameExtents (CompWindow	 *w,
-		       CompWindowExtents *input,
-		       CompWindowExtents *output);
+		       CompWindowExtents *input);
+
+void
+updateWindowOutputExtents (CompWindow *w);
 
 void
 updateWindowRegion (CompWindow *w);
@@ -2162,6 +2169,10 @@ circulateWindow (CompWindow	 *w,
 void
 addWindowDamageRect (CompWindow *w,
 		     BoxPtr     rect);
+
+void
+getOutputExtentsForWindow (CompWindow	     *w,
+			   CompWindowExtents *output);
 
 void
 addWindowDamage (CompWindow *w);

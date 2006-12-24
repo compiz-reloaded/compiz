@@ -1024,8 +1024,7 @@ updateFrameWindow (CompWindow *w)
 
 void
 setWindowFrameExtents (CompWindow	 *w,
-		       CompWindowExtents *input,
-		       CompWindowExtents *output)
+		       CompWindowExtents *input)
 {
     if (input->left   != w->input.left  ||
 	input->right  != w->input.right ||
@@ -1049,13 +1048,21 @@ setWindowFrameExtents (CompWindow	 *w,
 			 XA_CARDINAL, 32, PropModeReplace,
 			 (unsigned char *) data, 4);
     }
+}
 
-    if (output->left   != w->output.left  ||
-	output->right  != w->output.right ||
-	output->top    != w->output.top   ||
-	output->bottom != w->output.bottom)
+void
+updateWindowOutputExtents (CompWindow *w)
+{
+    CompWindowExtents output;
+
+    (*w->screen->getOutputExtentsForWindow) (w, &output);
+
+    if (output.left   != w->output.left  ||
+	output.right  != w->output.right ||
+	output.top    != w->output.top   ||
+	output.bottom != w->output.bottom)
     {
-	w->output = *output;
+	w->output = output;
 
 	(*w->screen->windowResizeNotify) (w);
     }
@@ -1295,6 +1302,16 @@ addWindowDamageRect (CompWindow *w,
 
 	damageScreenRegion (w->screen, &region);
     }
+}
+
+void
+getOutputExtentsForWindow (CompWindow	     *w,
+			   CompWindowExtents *output)
+{
+    output->left   = 0;
+    output->right  = 0;
+    output->top    = 0;
+    output->bottom = 0;
 }
 
 void

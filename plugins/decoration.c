@@ -131,8 +131,9 @@ typedef struct _DecorScreen {
 
     Decoration *decor[DECOR_NUM];
 
-    DrawWindowProc	 drawWindow;
-    DamageWindowRectProc damageWindowRect;
+    DrawWindowProc		  drawWindow;
+    DamageWindowRectProc	  damageWindowRect;
+    GetOutputExtentsForWindowProc getOutputExtentsForWindow;
 
     WindowMoveNotifyProc   windowMoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
@@ -908,10 +909,11 @@ decorWindowUpdate (CompWindow *w,
 	    return FALSE;
 
 	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    setWindowFrameExtents (w, &decor->maxInput, &decor->output);
+	    setWindowFrameExtents (w, &decor->maxInput);
 	else
-	    setWindowFrameExtents (w, &decor->input, &decor->output);
+	    setWindowFrameExtents (w, &decor->input);
 
+	updateWindowOutputExtents (w);
 	damageWindowOutputExtents (w);
 	updateWindowDecorationScale (w);
     }
@@ -1168,6 +1170,33 @@ decorDamageWindowRect (CompWindow *w,
 }
 
 static void
+decorGetOutputExtentsForWindow (CompWindow	  *w,
+				CompWindowExtents *output)
+{
+    DECOR_SCREEN (w->screen);
+    DECOR_WINDOW (w);
+
+    UNWRAP (ds, w->screen, getOutputExtentsForWindow);
+    (*w->screen->getOutputExtentsForWindow) (w, output);
+    WRAP (ds, w->screen, getOutputExtentsForWindow,
+	  decorGetOutputExtentsForWindow);
+
+    if (dw->wd)
+    {
+	CompWindowExtents *e = &dw->wd->decor->output;
+
+	if (e->left > output->left)
+	    output->left = e->left;
+	if (e->right > output->right)
+	    output->right = e->right;
+	if (e->top > output->top)
+	    output->top = e->top;
+	if (e->bottom > output->bottom)
+	    output->bottom = e->bottom;
+    }
+}
+
+static void
 decorWindowMoveNotify (CompWindow *w,
 		       int	  dx,
 		       int	  dy,
@@ -1221,9 +1250,9 @@ decorWindowStateChangeNotify (CompWindow *w)
 	Decoration *decor = dw->wd->decor;
 
 	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    setWindowFrameExtents (w, &decor->maxInput, &decor->output);
+	    setWindowFrameExtents (w, &decor->maxInput);
 	else
-	    setWindowFrameExtents (w, &decor->input, &decor->output);
+	    setWindowFrameExtents (w, &decor->input);
     }
 
     UNWRAP (ds, w->screen, windowStateChangeNotify);
@@ -1307,6 +1336,7 @@ decorInitScreen (CompPlugin *p,
 
     WRAP (ds, s, drawWindow, decorDrawWindow);
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
+    WRAP (ds, s, getOutputExtentsForWindow, decorGetOutputExtentsForWindow);
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
@@ -1332,6 +1362,7 @@ decorFiniScreen (CompPlugin *p,
 
     UNWRAP (ds, s, drawWindow);
     UNWRAP (ds, s, damageWindowRect);
+    UNWRAP (ds, s, getOutputExtentsForWindow);
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
     UNWRAP (ds, s, windowStateChangeNotify);
