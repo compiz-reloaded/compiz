@@ -31,8 +31,6 @@
 
 #include <compiz.h>
 
-#define HOME_PLUGINDIR ".compiz/plugins"
-
 CompPlugin *plugins = 0;
 
 static Bool

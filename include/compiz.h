@@ -481,6 +481,7 @@ optionTypeToString (CompOptionType type);
 
 typedef int CompTimeoutHandle;
 typedef int CompWatchFdHandle;
+typedef int CompFileWatchHandle;
 
 #define COMP_DISPLAY_OPTION_ACTIVE_PLUGINS                0
 #define COMP_DISPLAY_OPTION_TEXTURE_FILTER                1
@@ -586,6 +587,28 @@ typedef Bool (*ImageToFileProc) (CompDisplay *display,
 				 int	     height,
 				 int	     stride,
 				 void	     *data);
+
+#define NOTIFY_CREATE_MASK (1 << 0)
+#define NOTIFY_DELETE_MASK (1 << 1)
+#define NOTIFY_MOVE_MASK   (1 << 2)
+
+typedef void (*FileWatchCallBackProc) (const char *name,
+				       void	  *closure);
+
+typedef struct _CompFileWatch {
+    struct _CompFileWatch *next;
+    char		  *path;
+    int			  mask;
+    FileWatchCallBackProc callBack;
+    void		  *closure;
+    CompFileWatchHandle   handle;
+} CompFileWatch;
+
+typedef void (*FileWatchAddedProc) (CompDisplay	  *display,
+				    CompFileWatch *fileWatch);
+
+typedef void (*FileWatchRemovedProc) (CompDisplay   *display,
+				      CompFileWatch *fileWatch);
 
 struct _CompDisplay {
     Display    *display;
@@ -760,6 +783,8 @@ struct _CompDisplay {
     CompOptionValue plugin;
     Bool	    dirtyPluginList;
 
+    CompFileWatch *fileWatch;
+
     SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
@@ -771,6 +796,9 @@ struct _CompDisplay {
 
     FileToImageProc fileToImage;
     ImageToFileProc imageToFile;
+
+    FileWatchAddedProc   fileWatchAdded;
+    FileWatchRemovedProc fileWatchRemoved;
 
     CompPrivate *privates;
 };
@@ -803,6 +831,25 @@ compAddWatchFd (int	     fd,
 
 void
 compRemoveWatchFd (CompWatchFdHandle handle);
+
+CompFileWatchHandle
+addFileWatch (CompDisplay	    *display,
+	      const char	    *path,
+	      int		    mask,
+	      FileWatchCallBackProc callBack,
+	      void		    *closure);
+
+void
+removeFileWatch (CompDisplay	     *display,
+		 CompFileWatchHandle handle);
+
+void
+fileWatchAdded (CompDisplay   *display,
+		CompFileWatch *fileWatch);
+
+void
+fileWatchRemoved (CompDisplay   *display,
+		  CompFileWatch *fileWatch);
 
 int
 compCheckForError (Display *dpy);
@@ -2318,6 +2365,8 @@ setDesktopForWindow (CompWindow   *w,
 
 
 /* plugin.c */
+
+#define HOME_PLUGINDIR ".compiz/plugins"
 
 typedef int (*GetVersionProc) (CompPlugin *plugin,
 			       int	  version);

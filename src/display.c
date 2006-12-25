@@ -77,6 +77,8 @@ static CompWatchFdHandle lastWatchFdHandle = 1;
 static struct pollfd     *watchPollFds = 0;
 static int               nWatchFds = 0;
 
+static CompFileWatchHandle lastFileWatchHandle = 1;
+
 static CompScreen *targetScreen = NULL;
 static int        targetOutput = 0;
 
@@ -2525,6 +2527,11 @@ addDisplay (char *name,
     d->fileToImage = fileToImage;
     d->imageToFile = imageToFile;
 
+    d->fileWatchAdded   = fileWatchAdded;
+    d->fileWatchRemoved = fileWatchRemoved;
+
+    d->fileWatch = NULL;
+
     d->supportedAtom	     = XInternAtom (dpy, "_NET_SUPPORTED", 0);
     d->supportingWmCheckAtom = XInternAtom (dpy, "_NET_SUPPORTING_WM_CHECK", 0);
 
@@ -3441,4 +3448,76 @@ imageToFile (CompDisplay *display,
 	     void	 *data)
 {
     return FALSE;
+}
+
+CompFileWatchHandle
+addFileWatch (CompDisplay	    *display,
+	      const char	    *path,
+	      int		    mask,
+	      FileWatchCallBackProc callBack,
+	      void		    *closure)
+{
+    CompFileWatch *fileWatch;
+
+    fileWatch = malloc (sizeof (CompFileWatch));
+    if (!fileWatch)
+	return 0;
+
+    fileWatch->path	= strdup (path);
+    fileWatch->mask	= mask;
+    fileWatch->callBack = callBack;
+    fileWatch->closure  = closure;
+    fileWatch->handle   = lastFileWatchHandle++;
+
+    if (lastFileWatchHandle == MAXSHORT)
+	lastFileWatchHandle = 1;
+
+    fileWatch->next = display->fileWatch;
+    display->fileWatch = fileWatch;
+
+    (*display->fileWatchAdded) (display, fileWatch);
+
+    return fileWatch->handle;
+}
+
+void
+removeFileWatch (CompDisplay	     *display,
+		 CompFileWatchHandle handle)
+{
+    CompFileWatch *p = 0, *w;
+
+    for (w = display->fileWatch; w; w = w->next)
+    {
+	if (w->handle == handle)
+	    break;
+
+	p = w;
+    }
+
+    if (w)
+    {
+	if (p)
+	    p->next = w->next;
+	else
+	    display->fileWatch = w->next;
+
+	(*display->fileWatchRemoved) (display, w);
+
+	if (w->path)
+	    free (w->path);
+
+	free (w);
+    }
+}
+
+void
+fileWatchAdded (CompDisplay   *display,
+		CompFileWatch *fileWatch)
+{
+}
+
+void
+fileWatchRemoved (CompDisplay   *display,
+		  CompFileWatch *fileWatch)
+{
 }
