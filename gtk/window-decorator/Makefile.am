@@ -15,6 +15,7 @@ gtk_window_decorator_SOURCES	  = \
 gtk_window_decorator_program = gtk-window-decorator
 endif
 
+if USE_GCONF
 schemadir       = $(GCONF_SCHEMA_FILE_DIR)
 schema_in_files = gwd.schemas.in
 schema_DATA     = $(schema_in_files:.schemas.in=.schemas)
@@ -22,7 +23,8 @@ schema_DATA     = $(schema_in_files:.schemas.in=.schemas)
 install-data-local:
 	if test -z "$(DESTDIR)" ; then \
 		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
-        fi
+	fi
+endif
 
 INCLUDES = -I$(top_srcdir)/include @GTK_WINDOW_DECORATOR_CFLAGS@ @METACITY_CFLAGS@
 

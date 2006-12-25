@@ -39,7 +39,9 @@
 #include <gtk/gtkwindow.h>
 #include <gdk/gdkx.h>
 
+#ifdef USE_GCONF
 #include <gconf/gconf-client.h>
+#endif
 
 #define WNCK_I_KNOW_THIS_IS_UNSTABLE
 #include <libwnck/libwnck.h>
@@ -5067,6 +5069,7 @@ get_titlebar_font (void)
 	return titlebar_font;
 }
 
+#ifdef USE_GCONF
 static void
 titlebar_font_changed (GConfClient *client)
 {
@@ -5106,6 +5109,7 @@ double_click_titlebar_changed (GConfClient *client)
 	g_free (action);
     }
 }
+#endif
 
 static void
 update_border_extents (gint text_height)
@@ -5184,6 +5188,7 @@ update_titlebar_font (void)
     pango_font_metrics_unref (metrics);
 }
 
+#ifdef USE_GCONF
 static gboolean
 shadow_settings_changed (GConfClient *client)
 {
@@ -5516,14 +5521,17 @@ value_changed (GConfClient *client,
 	}
     }
 }
+#endif
 
 static gboolean
 init_settings (WnckScreen *screen)
 {
     GtkSettings	*settings;
-    GConfClient	*gconf;
     GdkScreen   *gdkscreen;
     GdkColormap *colormap;
+
+#ifdef USE_GCONF
+    GConfClient	*gconf;
 
     gconf = gconf_client_get_default ();
 
@@ -5556,6 +5564,7 @@ init_settings (WnckScreen *screen)
 		      "value_changed",
 		      G_CALLBACK (value_changed),
 		      screen);
+#endif
 
     style_window = gtk_window_new (GTK_WINDOW_POPUP);
 
@@ -5577,19 +5586,30 @@ init_settings (WnckScreen *screen)
 
     pango_context = gtk_widget_create_pango_context (style_window);
 
+#ifdef USE_GCONF
     use_system_font = gconf_client_get_bool (gconf,
 					     COMPIZ_USE_SYSTEM_FONT_KEY,
 					     NULL);
-
     theme_changed (gconf);
     theme_opacity_changed (gconf);
+#endif
+
     update_style (style_window);
+
+#ifdef USE_GCONF
     titlebar_font_changed (gconf);
+#endif
+
     update_titlebar_font ();
+
+#ifdef USE_GCONF
     double_click_titlebar_changed (gconf);
     shadow_settings_changed (gconf);
     bell_settings_changed (gconf);
+#endif
+
     (*theme_update_border_extents) (text_height);
+
     update_shadow ();
 
     return TRUE;
@@ -5605,6 +5625,10 @@ main (int argc, char *argv[])
     gint       i, j, status;
     gboolean   replace = FALSE;
 
+#ifdef USE_METACITY
+    char       *meta_theme = NULL;
+#endif
+
     program_name = argv[0];
 
     gtk_init (&argc, &argv);
@@ -5615,17 +5639,78 @@ main (int argc, char *argv[])
 	{
 	    minimal = TRUE;
 	}
-	else  if (strcmp (argv[i], "--replace") == 0)
+	else if (strcmp (argv[i], "--replace") == 0)
 	{
 	    replace = TRUE;
 	}
-	else  if (strcmp (argv[i], "--help") == 0)
+
+#ifdef USE_METACITY
+	else if (strcmp (argv[i], "--opacity") == 0)
 	{
-	    fprintf (stderr, "%s [--minimal] [--replace] [--help]\n",
-		     program_name);
+	    if (argc > ++i)
+		meta_opacity = atof (argv[i]);
+	}
+	else if (strcmp (argv[i], "--no-opacity-shade") == 0)
+	{
+	    meta_shade_opacity = FALSE;
+	}
+	else if (strcmp (argv[i], "--active-opacity") == 0)
+	{
+	    if (argc > ++i)
+		meta_active_opacity = atof (argv[i]);
+	}
+	else if (strcmp (argv[i], "--no-active-opacity-shade") == 0)
+	{
+	    meta_active_shade_opacity = FALSE;
+	}
+	else if (strcmp (argv[i], "--metacity-theme") == 0)
+	{
+	    if (argc > ++i)
+		meta_theme = argv[i];
+	}
+#endif
+
+	else if (strcmp (argv[i], "--help") == 0)
+	{
+	    fprintf (stderr, "%s "
+		     "[--minimal] "
+		     "[--replace] "
+
+#ifdef USE_METACITY
+		     "[--opacity OPACITY] "
+		     "[--no-opacity-shade] "
+		     "[--active-opacity OPACITY] "
+		     "[--no-active-opacity-shade] "
+		     "[--metacity-theme THEME] "
+#endif
+
+		     "[--help]"
+
+		     "\n", program_name);
 	    return 0;
 	}
     }
+
+    theme_draw_window_decoration    = draw_window_decoration;
+    theme_calc_decoration_size	    = calc_decoration_size;
+    theme_update_border_extents	    = update_border_extents;
+    theme_get_event_window_position = get_event_window_position;
+    theme_get_button_position       = get_button_position;
+
+#ifdef USE_METACITY
+    if (meta_theme)
+    {
+	meta_theme_set_current (meta_theme, TRUE);
+	if (meta_theme_get_current ())
+	{
+	    theme_draw_window_decoration    = meta_draw_window_decoration;
+	    theme_calc_decoration_size	    = meta_calc_decoration_size;
+	    theme_update_border_extents	    = meta_update_border_extents;
+	    theme_get_event_window_position = meta_get_event_window_position;
+	    theme_get_button_position	    = meta_get_button_position;
+	}
+    }
+#endif
 
     gdkdisplay = gdk_display_get_default ();
     xdisplay   = gdk_x11_display_get_xdisplay (gdkdisplay);

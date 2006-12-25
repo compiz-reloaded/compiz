@@ -248,7 +248,6 @@ if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
 		    gtk+-2.0 >= 2.8.0 \
-		    gconf-2.0	      \
 		    libwnck-1.0	      \
 		    pangocairo,
 		    [use_gtk=yes], [use_gtk=no])
