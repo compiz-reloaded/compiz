@@ -171,6 +171,19 @@ if test "$use_dbus" = yes; then
   AC_DEFINE(USE_DBUS, 1, [Build dbus plugin])
 fi
 
+AC_ARG_ENABLE(inotify,
+  [  --disable-inotify          Disable inotify plugin],
+  [use_inotify=$enableval], [use_inotify=yes])
+
+if test "x$use_inotify" = "xyes"; then
+  AC_CHECK_HEADERS([sys/inotify.h], [use_inotify=yes], [use_inotify=no])
+fi
+
+AM_CONDITIONAL(INOTIFY_PLUGIN, test "x$use_inotify" = "xyes")
+if test "$use_inotify" = yes; then
+  AC_DEFINE(USE_INOTIFY, 1, [Build inotify plugin])
+fi
+
 AC_ARG_ENABLE(annotate,
   [  --disable-annotate      Disable annotate plugin],
   [use_annotate=$enableval], [use_annotate=yes])

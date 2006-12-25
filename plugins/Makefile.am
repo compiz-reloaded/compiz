@@ -133,6 +133,13 @@ libdbus_la_SOURCES = dbus.c
 libdbus_module = libdbus.la
 endif
 
+if INOTIFY_PLUGIN
+libinotify_la_LDFLAGS = -module -avoid-version -no-undefined
+libinotify_la_LIBADD = @COMPIZ_LIBS@
+libinotify_la_SOURCES = inotify.c
+libinotify_module = libinotify.la
+endif
+
 INCLUDES =					\
 	@COMPIZ_CFLAGS@				\
 	@LIBRSVG_CFLAGS@			\
@@ -142,6 +149,8 @@ INCLUDES =					\
 	@DBUS_CFLAGS@				\
 	-DALL_LINGUAS="\"@ALL_LINGUAS@\""	\
 	-DLOCALEDIR="\"@datadir@/locale\""	\
+	-DPLUGINDIR=\"$(plugindir)\"		\
+	-DIMAGEDIR=\"$(imagedir)\"		\
 	-I$(top_srcdir)/include
 
 moduledir = $(plugindir)
@@ -168,6 +177,7 @@ module_LTLIBRARIES =		\
 	libpng.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
-	$(libgconf_dump_module)
+	$(libgconf_dump_module) \
+	$(libinotify_module)
 
 EXTRA_DIST = $(schema_in_files)
