@@ -44,6 +44,12 @@
 #define COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME "getPluginMetadata"
 
 #define COMPIZ_DBUS_CHANGED_SIGNAL_NAME		    "changed"
+#define COMPIZ_DBUS_PLUGINS_CHANGED_SIGNAL_NAME	    "pluginsChanged"
+
+#define DBUS_FILE_WATCH_CURRENT 0
+#define DBUS_FILE_WATCH_PLUGIN  1
+#define DBUS_FILE_WATCH_HOME    2
+#define DBUS_FILE_WATCH_NUM     3
 
 typedef enum {
     DbusActionIndexKeyBinding    = 0,
@@ -60,6 +66,8 @@ typedef struct _DbusDisplay {
 
     DBusConnection    *connection;
     CompWatchFdHandle watchFdHandle;
+
+    CompFileWatchHandle fileWatch[DBUS_FILE_WATCH_NUM];
 
     SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
@@ -1391,6 +1399,25 @@ dbusSetScreenOptionForPlugin (CompScreen      *s,
     return status;
 }
 
+static void
+dbusSendPluginsChangedSignal (const char *name,
+			      void	 *closure)
+{
+    CompDisplay *d = (CompDisplay *) closure;
+    DBusMessage *signal;
+
+    DBUS_DISPLAY (d);
+
+    signal = dbus_message_new_signal ("/org/freedesktop/compiz",
+				      COMPIZ_DBUS_SERVICE_NAME,
+				      COMPIZ_DBUS_PLUGINS_CHANGED_SIGNAL_NAME);
+
+    dbus_connection_send (dd->connection, signal, NULL);
+    dbus_connection_flush (dd->connection);
+
+    dbus_message_unref (signal);
+}
+
 static Bool
 dbusInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -1398,7 +1425,8 @@ dbusInitDisplay (CompPlugin  *p,
     DbusDisplay *dd;
     DBusError	error;
     dbus_bool_t status;
-    int		fd, ret;
+    int		fd, ret, mask;
+    char        *home, *plugindir;
 
     dd = malloc (sizeof (DbusDisplay));
     if (!dd)
@@ -1487,6 +1515,39 @@ dbusInitDisplay (CompPlugin  *p,
 					dbusProcessMessages,
 					d);
 
+    mask = NOTIFY_CREATE_MASK | NOTIFY_DELETE_MASK | NOTIFY_MOVE_MASK;
+
+    dd->fileWatch[DBUS_FILE_WATCH_CURRENT] =
+	addFileWatch (d,
+		      ".",
+		      mask,
+		      dbusSendPluginsChangedSignal,
+		      (void *) d);
+    dd->fileWatch[DBUS_FILE_WATCH_PLUGIN]  =
+	addFileWatch (d,
+		      PLUGINDIR,
+		      mask,
+		      dbusSendPluginsChangedSignal,
+		      (void *) d);
+    dd->fileWatch[DBUS_FILE_WATCH_HOME] = 0;
+
+    home = getenv ("HOME");
+    if (home)
+    {
+	plugindir = malloc (strlen (home) + strlen (HOME_PLUGINDIR) + 3);
+	if (plugindir)
+	{
+	    sprintf (plugindir, "%s/%s", home, HOME_PLUGINDIR);
+
+	    dd->fileWatch[DBUS_FILE_WATCH_HOME]  =
+		addFileWatch (d,
+			      plugindir,
+			      mask,
+			      dbusSendPluginsChangedSignal,
+			      (void *) d);
+	}
+    }
+
     WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
     WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
 
@@ -1499,7 +1560,12 @@ static void
 dbusFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
+    int i;
+
     DBUS_DISPLAY (d);
+
+    for (i = 0; i < DBUS_FILE_WATCH_NUM; i++)
+	removeFileWatch (d, dd->fileWatch[i]);
 
     compRemoveWatchFd (dd->watchFdHandle);
 
