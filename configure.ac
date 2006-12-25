@@ -131,7 +131,7 @@ fi
 
 AM_GCONF_SOURCE_2
 
-AM_CONDITIONAL(GCONF_PLUGIN, test "x$use_gconf" = "xyes")
+AM_CONDITIONAL(USE_GCONF, test "x$use_gconf" = "xyes")
 if test "$use_gconf" = yes; then
   AC_DEFINE(USE_GCONF, 1, [Build gconf plugin])
 fi

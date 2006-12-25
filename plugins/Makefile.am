@@ -78,7 +78,7 @@ libannotate_la_SOURCES = annotate.c
 libannotate_module = libannotate.la
 endif
 
-if GCONF_PLUGIN
+if USE_GCONF
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @COMPIZ_LIBS@ @GCONF_LIBS@
 libgconf_la_SOURCES = gconf.c
