@@ -184,7 +184,7 @@ if test "$use_dbus" = yes; then
 fi
 
 AC_ARG_ENABLE(inotify,
-  [  --disable-inotify          Disable inotify plugin],
+  [  --disable-inotify       Disable inotify plugin],
   [use_inotify=$enableval], [use_inotify=yes])
 
 if test "x$use_inotify" = "xyes"; then
@@ -322,7 +322,7 @@ if test "$use_gnome" = yes; then
 fi
 
 AC_ARG_ENABLE(kde,
-  [  --disable-kde         Enable kde window decorator],
+  [  --disable-kde           Enable kde window decorator],
   [use_kde=$enableval], [use_kde=yes])
 
 if test "x$use_kde" = "xyes"; then
