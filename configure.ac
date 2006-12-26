@@ -171,6 +171,18 @@ if test "$use_dbus" = yes; then
   AC_DEFINE(USE_DBUS, 1, [Build dbus plugin])
 fi
 
+AC_ARG_ENABLE(dbus-glib,
+  [  --disable-dbus-glib     Disable dbus-glib support],
+  [use_dbus_glib=$enableval], [use_dbus_glib=yes])
+
+if test "x$use_dbus_glib" = "xyes"; then
+  PKG_CHECK_MODULES(DBUS_GLIB, dbus-glib-1, [use_dbus_glib=yes], [use_dbus_glib=no])
+fi
+
+if test "$use_dbus" = yes; then
+  AC_DEFINE(USE_DBUS_GLIB, 1, [Build dbus glib support])
+fi
+
 AC_ARG_ENABLE(inotify,
   [  --disable-inotify          Disable inotify plugin],
   [use_inotify=$enableval], [use_inotify=yes])
