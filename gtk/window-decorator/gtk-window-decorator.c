@@ -5421,8 +5421,8 @@ theme_opacity_changed (GConfClient *client)
     gdouble  opacity;
 
     opacity = gconf_client_get_float (client,
-				    META_THEME_OPACITY_KEY,
-				    NULL);
+				      META_THEME_OPACITY_KEY,
+				      NULL);
 
     if (opacity != meta_opacity)
     {
@@ -5433,8 +5433,8 @@ theme_opacity_changed (GConfClient *client)
     if (opacity < 1.0)
     {
 	shade_opacity = gconf_client_get_bool (client,
-					     META_THEME_SHADE_OPACITY_KEY,
-					     NULL);
+					       META_THEME_SHADE_OPACITY_KEY,
+					       NULL);
 
 	if (shade_opacity != meta_shade_opacity)
 	{
@@ -5444,8 +5444,8 @@ theme_opacity_changed (GConfClient *client)
     }
 
     opacity = gconf_client_get_float (client,
-				    META_THEME_ACTIVE_OPACITY_KEY,
-				    NULL);
+				      META_THEME_ACTIVE_OPACITY_KEY,
+				      NULL);
 
     if (opacity != meta_active_opacity)
     {
