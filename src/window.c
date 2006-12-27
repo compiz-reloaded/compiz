@@ -1985,7 +1985,12 @@ removeWindow (CompWindow *w)
     updateClientListForScreen (w->screen);
 
     if (!w->redirected)
+    {
 	w->screen->overlayWindowCount--;
+
+	if (w->screen->overlayWindowCount < 1)
+	    showOutputWindow (w->screen);
+    }
 
     windowFiniPlugins (w);
 
@@ -4191,6 +4196,9 @@ unredirectWindow (CompWindow *w)
 
     w->redirected = FALSE;
     w->screen->overlayWindowCount++;
+
+    if (w->screen->overlayWindowCount > 0)
+	hideOutputWindow (w->screen);
 }
 
 void
@@ -4204,6 +4212,9 @@ redirectWindow (CompWindow *w)
 
     w->redirected = TRUE;
     w->screen->overlayWindowCount--;
+
+    if (w->screen->overlayWindowCount < 1)
+	showOutputWindow (w->screen);
 }
 
 /* Returns the current viewport for a window. If the window spans more than

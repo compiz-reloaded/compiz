@@ -1289,26 +1289,75 @@ getDesktopHints (CompScreen *s)
 		     (unsigned char *) data, 1);
 }
 
+void
+showOutputWindow (CompScreen *s)
+{
+
 #ifdef USE_COW
+    if (useCow)
+    {
+	Display       *dpy = s->display->display;
+	XserverRegion region;
+
+	region = XFixesCreateRegion (dpy, NULL, 0);
+
+	XFixesSetWindowShapeRegion (dpy,
+				    s->output,
+				    ShapeBounding,
+				    0, 0, 0);
+	XFixesSetWindowShapeRegion (dpy,
+				    s->output,
+				    ShapeInput,
+				    0, 0, region);
+
+	XFixesDestroyRegion (dpy, region);
+
+	damageScreen (s);
+    }
+#endif
+
+}
+
+void
+hideOutputWindow (CompScreen *s)
+{
+
+#ifdef USE_COW
+    if (useCow)
+    {
+	Display       *dpy = s->display->display;
+	XserverRegion region;
+
+	region = XFixesCreateRegion (dpy, NULL, 0);
+
+	XFixesSetWindowShapeRegion (dpy,
+				    s->output,
+				    ShapeBounding,
+				    0, 0, region);
+
+	XFixesDestroyRegion (dpy, region);
+    }
+#endif
+
+}
+
 static void
 makeOutputWindow (CompScreen *s)
 {
-    Display       *dpy = s->display->display;
-    XserverRegion region;
 
-    s->overlay   = XCompositeGetOverlayWindow (dpy, s->root);
-    s->output    = s->overlay;
-
-    region = XFixesCreateRegion (dpy, NULL, 0);
-
-    XFixesSetWindowShapeRegion (dpy,
-				s->output,
-				ShapeInput,
-				0, 0, region);
-
-    XFixesDestroyRegion (dpy, region);
-}
+#ifdef USE_COW
+    if (useCow)
+    {
+	s->overlay = XCompositeGetOverlayWindow (s->display->display, s->root);
+	s->output  = s->overlay;
+    }
+    else
 #endif
+
+	s->output = s->overlay = s->root;
+
+    showOutputWindow (s);
+}
 
 Bool
 addScreen (CompDisplay *display,
@@ -1497,13 +1546,7 @@ addScreen (CompDisplay *display,
 
     s->grabWindow = None;
 
-#ifdef USE_COW
-    if (useCow)
-	makeOutputWindow (s);
-    else
-#endif
-
-	s->overlay = s->output = s->root;
+    makeOutputWindow (s);
 
     templ.visualid = XVisualIDFromVisual (s->attrib.visual);
 

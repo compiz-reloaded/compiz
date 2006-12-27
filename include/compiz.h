@@ -1700,6 +1700,12 @@ updateScreenBackground (CompScreen  *screen,
 void
 detectRefreshRateOfScreen (CompScreen *s);
 
+void
+showOutputWindow (CompScreen *s);
+
+void
+hideOutputWindow (CompScreen *s);
+
 Bool
 addScreen (CompDisplay *display,
 	   int	       screenNum,
