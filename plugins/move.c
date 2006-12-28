@@ -80,6 +80,8 @@ typedef struct _MoveDisplay {
     CompWindow *w;
     int	       x;
     int	       y;
+    Region     region;
+    int        status;
     KeyCode    key[NUM_KEYS];
 
     GLushort moveOpacity;
@@ -159,6 +161,14 @@ moveInitiate (CompDisplay     *d,
 	if (state & CompActionStateInitButton)
 	    action->state |= CompActionStateTermButton;
 
+	if (md->region)
+	{
+	    XDestroyRegion (md->region);
+	    md->region = NULL;
+	}
+
+	md->status = RectangleOut;
+
 	md->x = 0;
 	md->y = 0;
 
@@ -237,6 +247,57 @@ moveTerminate (CompDisplay     *d,
     return FALSE;
 }
 
+/* creates a region containing top and bottom struts. only struts that are
+   outside the screen workarea are considered. */
+static Region
+moveGetYConstrainRegion (CompScreen *s)
+{
+    CompWindow *w;
+    Region     region;
+    REGION     r;
+
+    region = XCreateRegion ();
+    if (!region)
+	return NULL;
+
+    r.rects    = &r.extents;
+    r.numRects = r.size = 1;
+
+    r.extents.x1 = MINSHORT;
+    r.extents.y1 = 0;
+    r.extents.x2 = MAXSHORT;
+    r.extents.y2 = s->height;
+
+    XUnionRegion (&r, region, region);
+
+    for (w = s->windows; w; w = w->next)
+    {
+	if (!w->mapNum)
+	    continue;
+
+	if (w->struts)
+	{
+	    r.extents.x1 = w->struts->top.x;
+	    r.extents.y1 = w->struts->top.y;
+	    r.extents.x2 = r.extents.x1 + w->struts->top.width;
+	    r.extents.y2 = r.extents.y1 + w->struts->top.height;
+
+	    if (r.extents.y2 <= s->workArea.y)
+		XSubtractRegion (region, &r, region);
+
+	    r.extents.x1 = w->struts->bottom.x;
+	    r.extents.y1 = w->struts->bottom.y;
+	    r.extents.x2 = r.extents.x1 + w->struts->bottom.width;
+	    r.extents.y2 = r.extents.y1 + w->struts->bottom.height;
+
+	    if (r.extents.y1 >= (s->workArea.y + s->workArea.height))
+		XSubtractRegion (region, &r, region);
+	}
+    }
+
+    return region;
+}
+
 static void
 moveHandleMotionEvent (CompScreen *s,
 		       int	  xRoot,
@@ -274,13 +335,58 @@ moveHandleMotionEvent (CompScreen *s,
 
 	    if (md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b)
 	    {
-		min = workArea.y + w->input.top;
-		max = workArea.y + workArea.height;
+		if (!md->region)
+		    md->region = moveGetYConstrainRegion (s);
 
-		if (w->attrib.y + dy < min)
-		    dy = min - w->attrib.y;
-		else if (w->attrib.y + dy > max)
-		    dy = max - w->attrib.y;
+		/* make sure that the top frame extents or the top row of
+		   pixels are within what is currently our valid screen
+		   region */
+		if (md->region)
+		{
+		    int x, y, width, height;
+		    int status;
+
+		    x	   = w->attrib.x + dx - w->input.left;
+		    y	   = w->attrib.y + dy - w->input.top;
+		    width  = w->width + w->input.left + w->input.right;
+		    height = w->input.top ? w->input.top : 1;
+
+		    status = XRectInRegion (md->region, x, y, width, height);
+
+		    /* only constrain movement if previous position was valid */
+		    if (md->status == RectangleIn)
+		    {
+			int xStatus = status;
+
+			while (dx && xStatus != RectangleIn)
+			{
+			    xStatus = XRectInRegion (md->region,
+						     x, y - dy,
+						     width, height);
+
+			    if (xStatus != RectangleIn)
+				dx += (dx < 0) ? 1 : -1;
+
+			    x = w->attrib.x + dx - w->input.left;
+			}
+
+			while (dy && status != RectangleIn)
+			{
+			    status = XRectInRegion (md->region,
+						    x, y,
+						    width, height);
+
+			    if (status != RectangleIn)
+				dy += (dy < 0) ? 1 : -1;
+
+			    y = w->attrib.y + dy - w->input.top;
+			}
+		    }
+		    else
+		    {
+			md->status = status;
+		    }
+		}
 	    }
 
 	    if (md->opt[MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED].value.b)
@@ -651,7 +757,9 @@ moveInitDisplay (CompPlugin  *p,
 
     moveDisplayInitOptions (md, d->display);
 
-    md->w = 0;
+    md->w      = 0;
+    md->region = NULL;
+    md->status = RectangleOut;
 
     for (i = 0; i < NUM_KEYS; i++)
 	md->key[i] = XKeysymToKeycode (d->display,
