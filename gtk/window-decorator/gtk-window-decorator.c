@@ -247,7 +247,7 @@ static decor_context_t shadow_context = {
 
 static gdouble shadow_radius   = SHADOW_RADIUS;
 static gdouble shadow_opacity  = SHADOW_OPACITY;
-static gint    shadow_color[3] = {
+static gushort shadow_color[3] = {
     SHADOW_COLOR_RED,
     SHADOW_COLOR_GREEN,
     SHADOW_COLOR_BLUE
