@@ -19769,6 +19769,128 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_key</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Next window</short>
+                <long>Select next window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_button</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Next window</short>
+                <long>Select next window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_bell</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Next window</short>
+                <long>Select next window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_edge</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Next window</short>
+                <long>Select next window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_edgebutton</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/next_no_popup_edgebutton</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Next window</short>
+                <long>Select next window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_key</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Prev window</short>
+                <long>Select previous window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_button</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Prev window</short>
+                <long>Select previous window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_bell</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Prev window</short>
+                <long>Select previous window</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_edge</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Prev window</short>
+                <long>Select previous window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_edgebutton</key>
+            <applyto>/apps/compiz/plugins/switcher/allscreens/options/prev_no_popup_edgebutton</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Prev window</short>
+                <long>Select previous window</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/plugins/switcher/screen0/options/speed</key>
             <applyto>/apps/compiz/plugins/switcher/screen0/options/speed</applyto>
             <owner>compiz</owner>
@@ -20466,18 +20588,6 @@
             <locale name="zh_TW">
                 <short>最小化</short>
                 <long>顯示最小化的視窗</long>
-            </locale>
-        </schema>
-
-        <schema>
-            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/window_list</key>
-            <applyto>/apps/compiz/plugins/switcher/screen0/options/window_list</applyto>
-            <owner>compiz</owner>
-            <type>bool</type>
-            <default>true</default>
-            <locale name="C">
-                <short>Window list</short>
-                <long>Show window list</long>
             </locale>
         </schema>
 
