@@ -99,7 +99,9 @@ static int displayPrivateIndex;
 #define SWITCH_DISPLAY_OPTION_PREV	     1
 #define SWITCH_DISPLAY_OPTION_NEXT_ALL	     2
 #define SWITCH_DISPLAY_OPTION_PREV_ALL	     3
-#define SWITCH_DISPLAY_OPTION_NUM	     4
+#define SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP  4
+#define SWITCH_DISPLAY_OPTION_PREV_NO_POPUP  5
+#define SWITCH_DISPLAY_OPTION_NUM	     6
 
 typedef struct _SwitchDisplay {
     int		    screenPrivateIndex;
@@ -726,7 +728,8 @@ findArgbVisual (Display *dpy, int scr)
 
 static void
 switchInitiate (CompScreen *s,
-		Bool	   allWindows)
+		Bool	   allWindows,
+		Bool	   showPopup)
 {
     int count;
 
@@ -741,7 +744,7 @@ switchInitiate (CompScreen *s,
     if (count < 1)
 	return;
 
-    if (!ss->popupWindow)
+    if (!ss->popupWindow && showPopup)
     {
 	Display		     *dpy = s->display->display;
 	XSizeHints	     xsh;
@@ -827,7 +830,7 @@ switchInitiate (CompScreen *s,
 
 	    ss->sTranslate = ss->zoom;
 
-	    if (ss->popupWindow)
+	    if (ss->popupWindow && showPopup)
 	    {
 		CompWindow *w;
 
@@ -943,7 +946,7 @@ switchNext (CompDisplay     *d,
 
 	if (!ss->switching)
 	{
-	    switchInitiate (s, FALSE);
+	    switchInitiate (s, FALSE, TRUE);
 
 	    if (state & CompActionStateInitKey)
 		action->state |= CompActionStateTermKey;
@@ -981,7 +984,7 @@ switchPrev (CompDisplay     *d,
 
 	if (!ss->switching)
 	{
-	    switchInitiate (s, FALSE);
+	    switchInitiate (s, FALSE, TRUE);
 
 	    if (state & CompActionStateInitKey)
 		action->state |= CompActionStateTermKey;
@@ -1018,7 +1021,7 @@ switchNextAll (CompDisplay     *d,
 
 	if (!ss->switching)
 	{
-	    switchInitiate (s, TRUE);
+	    switchInitiate (s, TRUE, TRUE);
 
 	    if (state & CompActionStateInitKey)
 		action->state |= CompActionStateTermKey;
@@ -1055,7 +1058,82 @@ switchPrevAll (CompDisplay     *d,
 
 	if (!ss->switching)
 	{
-	    switchInitiate (s, TRUE);
+	    switchInitiate (s, TRUE, TRUE);
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitEdge)
+		action->state |= CompActionStateTermEdge;
+	}
+
+	switchToWindow (s, FALSE);
+    }
+
+    return FALSE;
+}
+
+static Bool
+switchNextNoPopup (CompDisplay     *d,
+		   CompAction      *action,
+		   CompActionState state,
+		   CompOption      *option,
+		   int	           nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SWITCH_SCREEN (s);
+
+	if (!ss->switching)
+	{
+	    switchInitiate (s, FALSE, FALSE);
+
+	    if (state & CompActionStateInitKey)
+		action->state |= CompActionStateTermKey;
+
+	    if (state & CompActionStateInitButton)
+		action->state |= CompActionStateTermButton;
+
+	    if (state & CompActionStateInitEdge)
+		action->state |= CompActionStateTermEdge;
+
+	}
+
+	switchToWindow (s, TRUE);
+    }
+
+    return FALSE;
+}
+
+static Bool
+switchPrevNoPopup (CompDisplay     *d,
+		   CompAction      *action,
+		   CompActionState state,
+		   CompOption      *option,
+		   int	           nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SWITCH_SCREEN (s);
+
+	if (!ss->switching)
+	{
+	    switchInitiate (s, FALSE, FALSE);
 
 	    if (state & CompActionStateInitKey)
 		action->state |= CompActionStateTermKey;
@@ -1838,8 +1916,10 @@ switchSetDisplayOption (CompDisplay     *display,
     switch (index) {
     case SWITCH_DISPLAY_OPTION_NEXT:
     case SWITCH_DISPLAY_OPTION_NEXT_ALL:
+    case SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP:
     case SWITCH_DISPLAY_OPTION_PREV:
     case SWITCH_DISPLAY_OPTION_PREV_ALL:
+    case SWITCH_DISPLAY_OPTION_PREV_NO_POPUP:
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
     default:
@@ -1928,6 +2008,32 @@ switchDisplayInitOptions (SwitchDisplay *sd,
     o->value.action.key.keycode   =
 	XKeysymToKeycode (display,
 			  XStringToKeysym (SWITCH_PREV_ALL_KEY_DEFAULT));
+
+    o = &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP];
+    o->name		      = "next_no_popup";
+    o->shortDesc	      = N_("Next window");
+    o->longDesc		      = N_("Select next window");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = switchNextNoPopup;
+    o->value.action.terminate = switchTerminate;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.state     = CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
+    o->value.action.type      = 0;
+
+    o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP];
+    o->name		      = "prev_no_popup";
+    o->shortDesc	      = N_("Prev window");
+    o->longDesc		      = N_("Select previous window");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = switchPrevNoPopup;
+    o->value.action.terminate = switchTerminate;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.state     = CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
+    o->value.action.type      = 0;
 }
 
 static Bool
@@ -2028,6 +2134,8 @@ switchInitScreen (CompPlugin *p,
     addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
     addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
     addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL].value.action);
+    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP].value.action);
+    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP].value.action);
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
