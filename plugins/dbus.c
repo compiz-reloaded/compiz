@@ -1019,10 +1019,13 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
     if (p)
     {
-	CompPluginDep *deps;
-	int	      nDeps;
-	dbus_bool_t   supportedABI;
-	int	      version;
+	CompPluginDep	*deps;
+	int		nDeps;
+	dbus_bool_t	supportedABI;
+	int		version;
+	DBusMessageIter iter;
+	DBusMessageIter listIter;
+	char		sig[2];
 
 	reply = dbus_message_new_method_return (message);
 
@@ -1038,6 +1041,13 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	dbus_message_append_args (reply,
 				  DBUS_TYPE_BOOLEAN, &supportedABI,
 				  DBUS_TYPE_INVALID);
+
+	sig[0] = DBUS_TYPE_STRING;
+	sig[1] = '\0';
+
+	dbus_message_iter_init_append (reply, &iter);
+	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+					  sig, &listIter);
 
 	deps  = p->vTable->deps;
 	nDeps = p->vTable->nDeps;
@@ -1062,15 +1072,17 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 		    break;
 		}
 
-		dbus_message_append_args (reply,
-					  DBUS_TYPE_STRING, &str,
-					  DBUS_TYPE_INVALID);
+		dbus_message_iter_append_basic (&listIter,
+						DBUS_TYPE_STRING,
+						&str);
 
 		free (str);
 	    }
 
 	    deps++;
 	}
+
+	dbus_message_iter_close_container (&iter, &listIter);
     }
     else
     {
