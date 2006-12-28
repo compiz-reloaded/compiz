@@ -1019,13 +1019,15 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
     if (p)
     {
-	CompPluginDep	*deps;
-	int		nDeps;
-	dbus_bool_t	supportedABI;
-	int		version;
-	DBusMessageIter iter;
-	DBusMessageIter listIter;
-	char		sig[2];
+	CompPluginDep	  *deps;
+	int		  nDeps;
+	CompPluginFeature *features;
+	int		  nFeatures;
+	dbus_bool_t	  supportedABI;
+	int		  version;
+	DBusMessageIter   iter;
+	DBusMessageIter   listIter;
+	char		  sig[2];
 
 	reply = dbus_message_new_method_return (message);
 
@@ -1080,6 +1082,24 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	    }
 
 	    deps++;
+	}
+
+	dbus_message_iter_close_container (&iter, &listIter);
+
+	dbus_message_iter_init_append (reply, &iter);
+	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+					  sig, &listIter);
+
+	features  = p->vTable->features;
+	nFeatures = p->vTable->nFeatures;
+
+	while (nFeatures--)
+	{
+	    dbus_message_iter_append_basic (&listIter,
+					    DBUS_TYPE_STRING,
+					    &features->name);
+
+	    features++;
 	}
 
 	dbus_message_iter_close_container (&iter, &listIter);
