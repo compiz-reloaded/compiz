@@ -877,7 +877,10 @@ create_gaussian_kernel (double radius,
 
     params = malloc (sizeof (XFixed) * n);
     if (!params)
+    {
+	free (amp);
 	return NULL;
+    }
 
     i   = 0;
     sum = 0.0f;
