@@ -83,8 +83,6 @@
 
 #define SWITCH_MINIMIZED_DEFAULT TRUE
 
-#define SWITCH_SHOW_WINDOW_LIST_DEFAULT TRUE
-
 static char *winType[] = {
     N_("Toolbar"),
     N_("Utility"),
@@ -112,19 +110,18 @@ typedef struct _SwitchDisplay {
     Atom selectWinAtom;
 } SwitchDisplay;
 
-#define SWITCH_SCREEN_OPTION_SPEED	      0
-#define SWITCH_SCREEN_OPTION_TIMESTEP	      1
-#define SWITCH_SCREEN_OPTION_WINDOW_TYPE      2
-#define SWITCH_SCREEN_OPTION_MIPMAP	      3
-#define SWITCH_SCREEN_OPTION_SATURATION	      4
-#define SWITCH_SCREEN_OPTION_BRIGHTNESS	      5
-#define SWITCH_SCREEN_OPTION_OPACITY	      6
-#define SWITCH_SCREEN_OPTION_BRINGTOFRONT     7
-#define SWITCH_SCREEN_OPTION_ZOOM	      8
-#define SWITCH_SCREEN_OPTION_ICON	      9
-#define SWITCH_SCREEN_OPTION_MINIMIZED	      10
-#define SWITCH_SCREEN_OPTION_SHOW_WINDOW_LIST 11
-#define SWITCH_SCREEN_OPTION_NUM	      12
+#define SWITCH_SCREEN_OPTION_SPEED	  0
+#define SWITCH_SCREEN_OPTION_TIMESTEP	  1
+#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  2
+#define SWITCH_SCREEN_OPTION_MIPMAP	  3
+#define SWITCH_SCREEN_OPTION_SATURATION	  4
+#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  5
+#define SWITCH_SCREEN_OPTION_OPACITY	  6
+#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 7
+#define SWITCH_SCREEN_OPTION_ZOOM	  8
+#define SWITCH_SCREEN_OPTION_ICON	  9
+#define SWITCH_SCREEN_OPTION_MINIMIZED	  10
+#define SWITCH_SCREEN_OPTION_NUM	  11
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -285,7 +282,6 @@ switchSetScreenOption (CompScreen      *screen,
     case SWITCH_SCREEN_OPTION_MIPMAP:
     case SWITCH_SCREEN_OPTION_ICON:
     case SWITCH_SCREEN_OPTION_MINIMIZED:
-    case SWITCH_SCREEN_OPTION_SHOW_WINDOW_LIST:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -447,13 +443,6 @@ switchScreenInitOptions (SwitchScreen *ss)
     o->longDesc	  = N_("Show minimized windows");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_MINIMIZED_DEFAULT;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_SHOW_WINDOW_LIST];
-    o->name	 = "window_list";
-    o->shortDesc = N_("Window list");
-    o->longDesc	 = N_("Show window list");
-    o->type	 = CompOptionTypeBool;
-    o->value.b   = SWITCH_SHOW_WINDOW_LIST_DEFAULT;
 }
 
 static void
@@ -739,8 +728,7 @@ static void
 switchInitiate (CompScreen *s,
 		Bool	   allWindows)
 {
-    Bool showWindowList;
-    int  count;
+    int count;
 
     SWITCH_SCREEN (s);
 
@@ -753,9 +741,7 @@ switchInitiate (CompScreen *s,
     if (count < 1)
 	return;
 
-    showWindowList = ss->opt[SWITCH_SCREEN_OPTION_SHOW_WINDOW_LIST].value.b;
-
-    if (showWindowList && !ss->popupWindow)
+    if (!ss->popupWindow)
     {
 	Display		     *dpy = s->display->display;
 	XSizeHints	     xsh;
@@ -841,7 +827,7 @@ switchInitiate (CompScreen *s,
 
 	    ss->sTranslate = ss->zoom;
 
-	    if (showWindowList && ss->popupWindow)
+	    if (ss->popupWindow)
 	    {
 		CompWindow *w;
 
@@ -857,8 +843,7 @@ switchInitiate (CompScreen *s,
 		}
 	    }
 
-	    if (showWindowList)
-		setSelectedWindowHint (s);
+	    setSelectedWindowHint (s);
 	}
 
 	damageScreen (s);
