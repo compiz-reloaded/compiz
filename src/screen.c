@@ -893,6 +893,12 @@ reshape (CompScreen *s,
 	 int	    w,
 	 int	    h)
 {
+
+#ifdef USE_COW
+    if (useCow)
+	XMoveResizeWindow (s->display->display, s->overlay, 0, 0, w, h);
+#endif
+
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     glMatrixMode (GL_MODELVIEW);
