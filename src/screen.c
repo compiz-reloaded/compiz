@@ -1607,22 +1607,49 @@ addScreen (CompDisplay *display,
     if (display->screens)
 	shareList = display->screens->ctx;
 
-    s->ctx = glXCreateContext (dpy, visinfo, shareList, !indirectRendering);
-    if (!s->ctx)
+    /* try both direct and indirect rendering contexts in case one of them
+       fail to support GLX_EXT_texture_from_pixmap */
+    for (i = 0; i < 2; i++)
     {
-	fprintf (stderr, "%s: glXCreateContext failed\n", programName);
-	return FALSE;
+	s->ctx = glXCreateContext (dpy, visinfo, shareList, !indirectRendering);
+	if (!s->ctx)
+	{
+	    fprintf (stderr, "%s: glXCreateContext failed\n", programName);
+	    XFree (visinfo);
+
+	    return FALSE;
+	}
+
+	if (glXIsDirect (dpy, s->ctx) == indirectRendering)
+	    i++;
+
+	glxExtensions = glXQueryExtensionsString (dpy, screenNum);
+	if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
+	{
+	    if (i > 0)
+	    {
+		fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
+			 programName);
+		XFree (visinfo);
+
+		return FALSE;
+	    }
+	    else
+	    {
+		fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is not "
+			 "supported by %s rendering context, trying %s "
+			 "rendering context instead\n", programName,
+			 indirectRendering ? "indirect" : "direct",
+			 indirectRendering ? "direct" : "indirect");
+
+		indirectRendering = !indirectRendering;
+
+		glXDestroyContext (dpy, s->ctx);
+	    }
+	}
     }
 
     XFree (visinfo);
-
-    glxExtensions = glXQueryExtensionsString (s->display->display, screenNum);
-    if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
-    {
-	fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
-		 programName);
-	return FALSE;
-    }
 
     if (!strstr (glxExtensions, "GLX_SGIX_fbconfig"))
     {
