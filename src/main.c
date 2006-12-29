@@ -79,7 +79,7 @@ CompWindow *lastDamagedWindow = 0;
 
 Bool replaceCurrentWm = FALSE;
 Bool indirectRendering = FALSE;
-Bool strictBinding = FALSE;
+Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
 
 #ifdef USE_COW
@@ -95,7 +95,7 @@ usage (void)
 	    "[--refresh-rate RATE]\n       "
 	    "[--fast-filter] "
 	    "[--indirect-rendering] "
-	    "[--strict-binding] "
+	    "[--loose-binding] "
 	    "[--replace]\n       "
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
@@ -192,9 +192,9 @@ main (int argc, char **argv)
 	{
 	    indirectRendering = TRUE;
 	}
-	else if (!strcmp (argv[i], "--strict-binding"))
+	else if (!strcmp (argv[i], "--loose-binding"))
 	{
-	    strictBinding = TRUE;
+	    strictBinding = FALSE;
 	}
 
 #ifdef USE_COW
