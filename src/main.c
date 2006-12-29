@@ -83,7 +83,7 @@ Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
 
 #ifdef USE_COW
-Bool useCow = FALSE;
+Bool useCow = TRUE;
 #endif
 
 static void
@@ -103,7 +103,7 @@ usage (void)
 	    "[--version]\n       "
 
 #ifdef USE_COW
-	    "[--use-cow] "
+	    "[--use-root-window] "
 #endif
 
 	    "[--help] "
@@ -198,9 +198,9 @@ main (int argc, char **argv)
 	}
 
 #ifdef USE_COW
-	else if (!strcmp (argv[i], "--use-cow"))
+	else if (!strcmp (argv[i], "--use-root-window"))
 	{
-	    useCow = TRUE;
+	    useCow = FALSE;
 	}
 #endif
 
