@@ -401,6 +401,15 @@ AC_SUBST(QT_MOC)
 AC_SUBST(DCOPIDL)
 AC_SUBST(DCOPIDL2CPP)
 
+AC_ARG_WITH(max-desktops,
+  [  --with-max-desktops     Max reasonable desktops],
+  [MAX_DESKTOPS=$withval],
+  [MAX_DESKTOPS=36])
+
+if test -n "$MAX_DESKTOPS"; then
+  AC_DEFINE_UNQUOTED(MAX_DESKTOPS, $MAX_DESKTOPS, [Max reasonable desktops])
+fi
+
 AC_OUTPUT([
 compiz.pc
 Makefile
