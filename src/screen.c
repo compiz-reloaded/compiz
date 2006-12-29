@@ -934,7 +934,7 @@ configureScreen (CompScreen	 *s,
 
 	reshape (s, ce->width, ce->height);
 
-	updateOutputDevices (s);
+	detectOutputDevices (s);
 
 	damageScreen (s);
     }
