@@ -303,6 +303,10 @@ KWD::Window::caption (void) const
     return mName;
 }
 
+/* TODO: We should use libtaskmanager, which is part of kdebase to create
+   the window menu instead but the headers for that library are currently
+   not installed. If kdebase could install those headers, we wouldn't have
+   to have our own window menu implementaion here. */
 void
 KWD::Window::showWindowMenu (QPoint pos)
 {
