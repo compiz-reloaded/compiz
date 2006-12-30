@@ -77,6 +77,8 @@ typedef struct _ResizeDisplay {
     unsigned int      mask;
     int		      width;
     int		      height;
+    int		      ucWidth;	/* unconstrained width */
+    int		      ucHeight;	/* unconstrained height */
     KeyCode	      key[NUM_KEYS];
 } ResizeDisplay;
 
@@ -184,6 +186,8 @@ resizeInitiate (CompDisplay     *d,
 
 	rd->w	        = w;
 	rd->mask        = mask;
+	rd->ucWidth     = w->attrib.width;
+	rd->ucHeight    = w->attrib.height;
 	rd->width       = w->attrib.width;
 	rd->height      = w->attrib.height;
 	rd->savedAttrib = w->attrib;
@@ -473,8 +477,8 @@ resizeHandleMotionEvent (CompScreen *s,
 	{
 	    int w, h;
 
-	    w = rd->width;
-	    h = rd->height;
+	    w = rd->ucWidth;
+	    h = rd->ucHeight;
 
 	    if (rd->mask & ResizeLeftMask)
 		w -= pointerDx;
@@ -485,6 +489,9 @@ resizeHandleMotionEvent (CompScreen *s,
 		h -= pointerDy;
 	    else if (rd->mask & ResizeDownMask)
 		h += pointerDy;
+
+	    rd->ucWidth  = w;
+	    rd->ucHeight = h;
 
 	    resizeConstrainMinMax (rd->w, w, h, &w, &h);
 
