@@ -300,6 +300,12 @@ static struct _cursor {
     { C (bottom_left_corner), C (bottom_side), C (bottom_right_corner) }
 };
 
+#define BUTTON_CLOSE 0
+#define BUTTON_MAX   1
+#define BUTTON_MIN   2
+#define BUTTON_MENU  3
+#define BUTTON_NUM   4
+
 static struct _pos {
     int x, y, w, h;
     int xw, yh, ww, hh, yth, hth;
@@ -317,10 +323,11 @@ static struct _pos {
 	{ 10, 21, -8,  6,   0, 1, 1, 0, 1, 0 },
 	{  2, 17, 10, 10,   1, 1, 0, 0, 1, 0 }
     }
-}, bpos[3] = {
+}, bpos[BUTTON_NUM] = {
     { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
     { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
-    { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 }
+    { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
+    { 6, 2, 16, 16,   0, 0, 0, 0, 0, 0 }
 };
 
 typedef struct _decor_color {
@@ -334,8 +341,8 @@ typedef struct _decor_color {
 
 typedef struct _decor {
     Window	      event_windows[3][3];
-    Window	      button_windows[3];
-    guint	      button_states[3];
+    Window	      button_windows[BUTTON_NUM];
+    guint	      button_states[BUTTON_NUM];
     GdkPixmap	      *pixmap;
     GdkPixmap	      *buffer_pixmap;
     GdkGC	      *gc;
@@ -1042,7 +1049,7 @@ draw_window_decoration (decor_t *d)
     {
 	button_state_offsets (button_x,
 			      y1 - 3.0 + titlebar_height / 2,
-			      d->button_states[0], &x, &y);
+			      d->button_states[BUTTON_CLOSE], &x, &y);
 
 	button_x -= 17;
 
@@ -1050,7 +1057,8 @@ draw_window_decoration (decor_t *d)
 	{
 	    cairo_move_to (cr, x, y);
 	    draw_close_button (d, cr, 3.0);
-	    button_state_paint (cr, style, &color, d->button_states[0]);
+	    button_state_paint (cr, style, &color,
+				d->button_states[BUTTON_CLOSE]);
 	}
 	else
 	{
@@ -1067,7 +1075,7 @@ draw_window_decoration (decor_t *d)
     {
 	button_state_offsets (button_x,
 			      y1 - 3.0 + titlebar_height / 2,
-			      d->button_states[1], &x, &y);
+			      d->button_states[BUTTON_MAX], &x, &y);
 
 	button_x -= 17;
 
@@ -1086,7 +1094,8 @@ draw_window_decoration (decor_t *d)
 	    else
 		draw_max_button (d, cr, 4.0);
 
-	    button_state_paint (cr, style, &color, d->button_states[1]);
+	    button_state_paint (cr, style, &color,
+				d->button_states[BUTTON_MAX]);
 	}
 	else
 	{
@@ -1109,7 +1118,7 @@ draw_window_decoration (decor_t *d)
     {
 	button_state_offsets (button_x,
 			      y1 - 3.0 + titlebar_height / 2,
-			      d->button_states[2], &x, &y);
+			      d->button_states[BUTTON_MIN], &x, &y);
 
 	button_x -= 17;
 
@@ -1120,7 +1129,8 @@ draw_window_decoration (decor_t *d)
 					      STROKE_ALPHA);
 	    cairo_move_to (cr, x, y);
 	    draw_min_button (d, cr, 4.0);
-	    button_state_paint (cr, style, &color, d->button_states[2]);
+	    button_state_paint (cr, style, &color,
+				d->button_states[BUTTON_MIN]);
 	}
 	else
 	{
@@ -1479,17 +1489,18 @@ meta_button_state_for_button_type (decor_t	  *d,
     switch (type) {
     case META_BUTTON_TYPE_RIGHT_LEFT_BACKGROUND:
     case META_BUTTON_TYPE_MINIMIZE:
-	return meta_button_state (d->button_states[2]);
+	return meta_button_state (d->button_states[BUTTON_MIN]);
     case META_BUTTON_TYPE_RIGHT_MIDDLE_BACKGROUND:
     case META_BUTTON_TYPE_MAXIMIZE:
-	return meta_button_state (d->button_states[1]);
+	return meta_button_state (d->button_states[BUTTON_MAX]);
     case META_BUTTON_TYPE_RIGHT_RIGHT_BACKGROUND:
     case META_BUTTON_TYPE_CLOSE:
-	return meta_button_state (d->button_states[0]);
+	return meta_button_state (d->button_states[BUTTON_CLOSE]);
     case META_BUTTON_TYPE_LEFT_LEFT_BACKGROUND:
+    case META_BUTTON_TYPE_MENU:
+	return meta_button_state (d->button_states[BUTTON_MENU]);
     case META_BUTTON_TYPE_LEFT_MIDDLE_BACKGROUND:
     case META_BUTTON_TYPE_LEFT_RIGHT_BACKGROUND:
-    case META_BUTTON_TYPE_MENU:
     default:
 	break;
     }
@@ -2461,7 +2472,9 @@ get_button_position (decor_t *d,
     *h = bpos[i].h + bpos[i].hh * height + bpos[i].hth +
 	(titlebar_height - 17);
 
-    *x -= 10 + 16 * i;
+    /* hack to position multiple buttons on the right */
+    if (i != BUTTON_MENU)
+	*x -= 10 + 16 * i;
 }
 
 #ifdef USE_METACITY
@@ -2593,13 +2606,16 @@ meta_get_button_position (decor_t *d,
 				  &clip);
 
     switch (i) {
-    case 2:
+    case BUTTON_MENU:
+	space = &fgeom.menu_rect;
+	break;
+    case BUTTON_MIN:
 	space = &fgeom.min_rect;
 	break;
-    case 1:
+    case BUTTON_MAX:
 	space = &fgeom.max_rect;
 	break;
-    case 0:
+    case BUTTON_CLOSE:
     default:
 	space = &fgeom.close_rect;
 	break;
@@ -2687,15 +2703,16 @@ update_event_windows (WnckWindow *win)
     if (width < ICON_SPACE + d->button_width)
 	actions = 0;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < BUTTON_NUM; i++)
     {
-	static guint button_actions[3] = {
+	static guint button_actions[BUTTON_NUM] = {
 	    WNCK_WINDOW_ACTION_CLOSE,
 	    WNCK_WINDOW_ACTION_MAXIMIZE,
-	    WNCK_WINDOW_ACTION_MINIMIZE
+	    WNCK_WINDOW_ACTION_MINIMIZE,
+	    0
 	};
 
-	if (actions & button_actions[i])
+	if (!button_actions[i] || (actions & button_actions[i]))
 	{
 	    (*theme_get_button_position) (d, i, width, height, &x, &y, &w, &h);
 
@@ -3104,7 +3121,7 @@ add_frame_window (WnckWindow *win,
 
     attr.event_mask |= ButtonReleaseMask;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < BUTTON_NUM; i++)
     {
 	d->button_windows[i] =
 	    XCreateWindow (xdisplay,
@@ -3128,11 +3145,10 @@ add_frame_window (WnckWindow *win,
 				     GINT_TO_POINTER (d->event_windows[i][j]),
 				     GINT_TO_POINTER (xid));
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < BUTTON_NUM; i++)
 	    g_hash_table_insert (frame_table,
 				 GINT_TO_POINTER (d->button_windows[i]),
 				 GINT_TO_POINTER (xid));
-
 
 	update_window_decoration_state (win);
 	update_window_decoration_actions (win);
@@ -3866,38 +3882,40 @@ handle_tooltip_event (WnckWindow *win,
     }
 }
 
+#define BUTTON_EVENT_ACTION_STATE (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW)
+
 static void
 close_button_event (WnckWindow *win,
 		    XEvent     *xevent)
 {
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
-    guint   state = d->button_states[0];
+    guint   state = d->button_states[BUTTON_CLOSE];
 
     handle_tooltip_event (win, xevent, state, "Close Window");
 
     switch (xevent->type) {
     case ButtonPress:
 	if (xevent->xbutton.button == 1)
-	    d->button_states[0] |= PRESSED_EVENT_WINDOW;
+	    d->button_states[BUTTON_CLOSE] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
-	    if (d->button_states[0] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	    if (d->button_states[BUTTON_CLOSE] == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_close (win, xevent->xbutton.time);
 
-	    d->button_states[0] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[BUTTON_CLOSE] &= ~PRESSED_EVENT_WINDOW;
 	}
 	break;
     case EnterNotify:
-	d->button_states[0] |= IN_EVENT_WINDOW;
+	d->button_states[BUTTON_CLOSE] |= IN_EVENT_WINDOW;
 	break;
     case LeaveNotify:
-	d->button_states[0] &= ~IN_EVENT_WINDOW;
+	d->button_states[BUTTON_CLOSE] &= ~IN_EVENT_WINDOW;
 	break;
     }
 
-    if (state != d->button_states[0])
+    if (state != d->button_states[BUTTON_CLOSE])
 	queue_decor_draw (d);
 }
 
@@ -3906,7 +3924,7 @@ max_button_event (WnckWindow *win,
 		  XEvent     *xevent)
 {
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
-    guint   state = d->button_states[1];
+    guint   state = d->button_states[BUTTON_MAX];
 
     if (wnck_window_is_maximized (win))
 	handle_tooltip_event (win, xevent, state, "Unmaximize Window");
@@ -3916,12 +3934,12 @@ max_button_event (WnckWindow *win,
     switch (xevent->type) {
     case ButtonPress:
 	if (xevent->xbutton.button == 1)
-	    d->button_states[1] |= PRESSED_EVENT_WINDOW;
+	    d->button_states[BUTTON_MAX] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
-	    if (d->button_states[1] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	    if (d->button_states[BUTTON_MAX] == BUTTON_EVENT_ACTION_STATE)
 	    {
 		if (wnck_window_is_maximized (win))
 		    wnck_window_unmaximize (win);
@@ -3929,18 +3947,18 @@ max_button_event (WnckWindow *win,
 		    wnck_window_maximize (win);
 	    }
 
-	    d->button_states[1] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[BUTTON_MAX] &= ~PRESSED_EVENT_WINDOW;
 	}
 	break;
     case EnterNotify:
-	d->button_states[1] |= IN_EVENT_WINDOW;
+	d->button_states[BUTTON_MAX] |= IN_EVENT_WINDOW;
 	break;
     case LeaveNotify:
-	d->button_states[1] &= ~IN_EVENT_WINDOW;
+	d->button_states[BUTTON_MAX] &= ~IN_EVENT_WINDOW;
 	break;
     }
 
-    if (state != d->button_states[1])
+    if (state != d->button_states[BUTTON_MAX])
 	queue_decor_draw (d);
 }
 
@@ -3949,35 +3967,33 @@ min_button_event (WnckWindow *win,
 		  XEvent     *xevent)
 {
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
-    guint   state = d->button_states[2];
+    guint   state = d->button_states[BUTTON_MIN];
 
     handle_tooltip_event (win, xevent, state, "Minimize Window");
 
     switch (xevent->type) {
     case ButtonPress:
 	if (xevent->xbutton.button == 1)
-	    d->button_states[2] |= PRESSED_EVENT_WINDOW;
+	    d->button_states[BUTTON_MIN] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
-	    if (d->button_states[2] == (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW))
+	    if (d->button_states[BUTTON_MIN] == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_minimize (win);
 
-	    d->button_states[2] &= ~PRESSED_EVENT_WINDOW;
+	    d->button_states[BUTTON_MIN] &= ~PRESSED_EVENT_WINDOW;
 	}
 	break;
     case EnterNotify:
-	d->button_states[2] |= IN_EVENT_WINDOW;
-	if (wnck_window_is_active (win))
-	    tooltip_start_delay ("Minimize Window");
+	d->button_states[BUTTON_MIN] |= IN_EVENT_WINDOW;
 	break;
     case LeaveNotify:
-	d->button_states[2] &= ~IN_EVENT_WINDOW;
+	d->button_states[BUTTON_MIN] &= ~IN_EVENT_WINDOW;
 	break;
     }
 
-    if (state != d->button_states[2])
+    if (state != d->button_states[BUTTON_MIN])
 	queue_decor_draw (d);
 }
 
@@ -4035,8 +4051,8 @@ position_action_menu (GtkMenu  *menu,
 
 static void
 action_menu_map (WnckWindow *win,
-		 long	    button,
-		 Time	    time)
+		 long	     button,
+		 Time	     time)
 {
     GdkDisplay *gdkdisplay;
     GdkScreen  *screen;
@@ -4083,20 +4099,60 @@ action_menu_map (WnckWindow *win,
 
     gtk_widget_show (action_menu);
 
-    if (button)
-	gtk_menu_popup (GTK_MENU (action_menu),
-			NULL, NULL,
-			NULL, NULL,
-			button,
-			time);
-    else
+    if (!button || button == 1)
+    {
 	gtk_menu_popup (GTK_MENU (action_menu),
 			NULL, NULL,
 			position_action_menu, (gpointer) win,
 			button,
 			time);
+    }
+    else
+    {
+	gtk_menu_popup (GTK_MENU (action_menu),
+			NULL, NULL,
+			NULL, NULL,
+			button,
+			time);
+    }
 
     action_menu_mapped = TRUE;
+}
+
+static void
+menu_button_event (WnckWindow *win,
+		   XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_MENU];
+
+    handle_tooltip_event (win, xevent, state, "Window Menu");
+
+    switch (xevent->type) {
+    case ButtonPress:
+	if (xevent->xbutton.button == 1)
+	{
+	    action_menu_map (win,
+			     xevent->xbutton.button,
+			     xevent->xbutton.time);
+
+	    d->button_states[BUTTON_MENU] |= PRESSED_EVENT_WINDOW;
+	}
+	break;
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	    d->button_states[BUTTON_MENU] &= ~PRESSED_EVENT_WINDOW;
+	break;
+    case EnterNotify:
+	d->button_states[BUTTON_MENU] |= IN_EVENT_WINDOW;
+	break;
+    case LeaveNotify:
+	d->button_states[BUTTON_MENU] &= ~IN_EVENT_WINDOW;
+	break;
+    }
+
+    if (state != d->button_states[BUTTON_MENU])
+	queue_decor_draw (d);
 }
 
 static double
@@ -4127,8 +4183,8 @@ title_event (WnckWindow *win,
 
     if (xevent->xbutton.button == 1)
     {
-	if (xevent->xbutton.button == last_button_num			  &&
-	    xevent->xbutton.window == last_button_xwindow		  &&
+	if (xevent->xbutton.button == last_button_num			   &&
+	    xevent->xbutton.window == last_button_xwindow		   &&
 	    xevent->xbutton.time < last_button_time + double_click_timeout &&
 	    dist (xevent->xbutton.x, xevent->xbutton.y,
 		  last_button_x, last_button_y) < DOUBLE_CLICK_DISTANCE)
@@ -4577,10 +4633,11 @@ event_filter_func (GdkXEvent *gdkxevent,
 		{ left_event,	     title_event,  right_event	      },
 		{ bottom_left_event, bottom_event, bottom_right_event }
 	    };
-	    static event_callback button_callback[3] = {
+	    static event_callback button_callback[BUTTON_NUM] = {
 		close_button_event,
 		max_button_event,
-		min_button_event
+		min_button_event,
+		menu_button_event
 	    };
 	    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
 
@@ -4593,7 +4650,7 @@ event_filter_func (GdkXEvent *gdkxevent,
 			if (d->event_windows[i][j] == xevent->xany.window)
 			    (*callback[i][j]) (win, xevent);
 
-		for (i = 0; i < 3; i++)
+		for (i = 0; i < BUTTON_NUM; i++)
 		    if (d->button_windows[i] == xevent->xany.window)
 			(*button_callback[i]) (win, xevent);
 	    }
