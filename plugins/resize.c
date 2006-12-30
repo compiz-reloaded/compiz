@@ -278,7 +278,7 @@ resizeTerminate (CompDisplay	 *d,
 	    xwc.width  = rd->savedAttrib.width;
 	    xwc.height = rd->savedAttrib.height;
 
-	    XConfigureWindow (d->display, rd->w->id,
+	    configureXWindow (rd->w,
 			      CWX | CWY | CWWidth | CWHeight,
 			      &xwc);
 	}
