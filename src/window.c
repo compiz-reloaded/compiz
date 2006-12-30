@@ -3021,37 +3021,6 @@ configureXWindow (CompWindow	 *w,
 		  unsigned int	 valueMask,
 		  XWindowChanges *xwc)
 {
-    XWindowChanges frameXwc;
-    unsigned int   frameValueMask;
-
-    frameValueMask = valueMask & (CWX | CWY | CWSibling | CWStackMode);
-
-    if (valueMask & (CWSibling | CWStackMode))
-    {
-	if (valueMask & CWSibling)
-	    frameXwc.sibling = xwc->sibling;
-
-	if (valueMask & CWStackMode)
-	    frameXwc.stack_mode = xwc->stack_mode;
-    }
-
-    if (valueMask & (CWX | CWY))
-    {
-	int dx = 0;
-	int dy = 0;
-
-	if (valueMask & CWX)
-	    dx = xwc->x - w->attrib.x;
-
-	if (valueMask & CWY)
-	    dy = xwc->y - w->attrib.y;
-
-	moveWindow (w, dx, dy, TRUE, TRUE);
-
-	frameXwc.x = w->attrib.x - w->input.left;
-	frameXwc.y = w->attrib.y - w->input.top;
-    }
-
     if (valueMask & CWWidth)
 	w->serverWidth = xwc->width;
 
@@ -3064,9 +3033,9 @@ configureXWindow (CompWindow	 *w,
     XConfigureWindow (w->screen->display->display, w->id,
 		      valueMask, xwc);
 
-    if (w->frame && frameValueMask)
+    if (w->frame && (valueMask & (CWSibling | CWStackMode)))
 	XConfigureWindow (w->screen->display->display, w->frame,
-			  frameValueMask, &frameXwc);
+			  valueMask & (CWSibling | CWStackMode), xwc);
 }
 
 static Bool
