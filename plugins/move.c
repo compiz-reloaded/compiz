@@ -78,6 +78,8 @@ typedef struct _MoveDisplay {
     CompOption opt[MOVE_DISPLAY_OPTION_NUM];
 
     CompWindow *w;
+    int	       savedX;
+    int	       savedY;
     int	       x;
     int	       y;
     Region     region;
@@ -169,6 +171,9 @@ moveInitiate (CompDisplay     *d,
 
 	md->status = RectangleOut;
 
+	md->savedX = w->serverX;
+	md->savedY = w->serverY;
+
 	md->x = 0;
 	md->y = 0;
 
@@ -227,8 +232,8 @@ moveTerminate (CompDisplay     *d,
 
 	if (state & CompActionStateCancel)
 	    moveWindow (md->w,
-			md->w->serverX - md->w->attrib.x,
-			md->w->serverY - md->w->attrib.y,
+			md->savedX - md->w->attrib.x,
+			md->savedY - md->w->attrib.y,
 			TRUE, FALSE);
 
 	syncWindowPosition (md->w);
