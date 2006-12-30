@@ -408,7 +408,7 @@ static gint	     double_click_timeout = 250;
 
 static GtkWidget     *tip_window;
 static GtkWidget     *tip_label;
-static GTimeVal	     tooltip_last_popdown = { -1, -1 };
+static GTimeVal	     tooltip_last_popdown = { 0, 0 };
 static gint	     tooltip_timer_tag = 0;
 
 static GSList *draw_list = NULL;
@@ -3778,8 +3778,11 @@ tooltip_recently_shown (void)
 
     g_get_current_time (&now);
 
-    msec = (now.tv_sec - tooltip_last_popdown.tv_sec) * 1000 +
-	(now.tv_usec - tooltip_last_popdown.tv_usec) / 1000;
+    msec = now.tv_sec - tooltip_last_popdown.tv_sec;
+    if (msec > STICKY_REVERT_DELAY / 1000)
+	return FALSE;
+
+    msec = msec * 1000 + (now.tv_usec - tooltip_last_popdown.tv_usec) / 1000;
 
     return (msec < STICKY_REVERT_DELAY);
 }
