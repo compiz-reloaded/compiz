@@ -1,3 +1,39 @@
+Release 0.3.6 (2006-12-31 David Reveman <davidr@novell.com>)
+============================================================
+Development release.
+
+Add support for unredirect of fullscreen windows when using
+the composite overlay window and make usage of the
+composite overlay window for output default.
+
+Add file notification API.
+
+Add inotify plugin that implements file notification API.
+
+A "GetPlugins" method has been added to dbus plugin
+and it can be used to retrieve a list of available plugins.
+
+A 'GetPluginMetadata' method has been added to dbus plugin
+and it returns metadata for available plugins.
+
+Add support for switching between windows without having
+the thumbnail window show up.
+
+Switcher thumbnails now include decorations and shadows.
+
+Basic drag and drop support has been added to scale plugin.
+
+It's now possible to initiate scale plugin for specific window
+groups.
+
+Window menu icon support has been added to gtk window decorator.
+
+Improved support for metacity themes.
+
+Add KDE window decorator with support for shadows and opacity
+has been added.
+
+
 Release 0.3.4 (2006-11-21 David Reveman <davidr@novell.com>)
 ============================================================
 Development release.
