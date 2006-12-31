@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-21 10:53-0500\n"
+"POT-Creation-Date: 2006-12-31 11:38+0100\n"
 "PO-Revision-Date: 2006-07-20 10:20-0400\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -15,193 +15,193 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/cube.c:990
+#: plugins/cube.c:989
 msgid "Cube Color"
 msgstr "Cor do Cubo"
 
-#: plugins/cube.c:991
+#: plugins/cube.c:990
 msgid "Color of top and bottom sides of the cube"
 msgstr "Cor dos lados superior e inferior do cubo"
 
-#: plugins/cube.c:1000
+#: plugins/cube.c:999
 msgid "Inside Cube"
 msgstr "Dentro do Cubo"
 
-#: plugins/cube.c:1001
+#: plugins/cube.c:1000
 msgid "Inside cube"
 msgstr "Dentro do cubo"
 
-#: plugins/cube.c:1007
+#: plugins/cube.c:1006
 msgid "Scale image"
 msgstr "Dimensionar imagem"
 
-#: plugins/cube.c:1008
+#: plugins/cube.c:1007
 msgid "Scale images to cover top face of cube"
 msgstr "Dimensionar imagens para cobertura da face superior do cubo"
 
-#: plugins/cube.c:1014
+#: plugins/cube.c:1013
 msgid "Image files"
 msgstr "Arquivos de imagem"
 
-#: plugins/cube.c:1015
+#: plugins/cube.c:1014
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Lista de arquivos PNG e SVG que devem ser renderizados na face superior do "
 "cubo"
 
-#: plugins/cube.c:1028
+#: plugins/cube.c:1027
 msgid "Skydome"
 msgstr "Skydome"
 
-#: plugins/cube.c:1029
+#: plugins/cube.c:1028
 msgid "Render skydome"
 msgstr "Renderizar skydome"
 
-#: plugins/cube.c:1035
+#: plugins/cube.c:1034
 msgid "Skydome Image"
 msgstr "Imagem do Skydome"
 
-#: plugins/cube.c:1036
+#: plugins/cube.c:1035
 msgid "Image to use as texture for the skydome"
 msgstr "Imagem a usar como textura no skydome"
 
-#: plugins/cube.c:1044
+#: plugins/cube.c:1043
 msgid "Animate Skydome"
 msgstr "Animar Skydome"
 
-#: plugins/cube.c:1045
+#: plugins/cube.c:1044
 msgid "Animate skydome when rotating cube"
 msgstr "Animar Skydome ao girar o cubo"
 
-#: plugins/cube.c:1051
+#: plugins/cube.c:1050
 msgid "Skydome Gradient Start Color"
 msgstr ""
 
-#: plugins/cube.c:1052
+#: plugins/cube.c:1051
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 
-#: plugins/cube.c:1062
+#: plugins/cube.c:1061
 msgid "Skydome Gradient End Color"
 msgstr ""
 
-#: plugins/cube.c:1063
+#: plugins/cube.c:1062
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
 
-#: plugins/cube.c:1073 plugins/rotate.c:302
+#: plugins/cube.c:1072 plugins/rotate.c:302
 msgid "Acceleration"
 msgstr "Aceleração"
 
-#: plugins/cube.c:1074
+#: plugins/cube.c:1073
 msgid "Fold Acceleration"
 msgstr "Aceleração Dobrada"
 
-#: plugins/cube.c:1083 plugins/minimize.c:203 plugins/rotate.c:319
-#: plugins/scale.c:335 plugins/switcher.c:347 plugins/zoom.c:239
+#: plugins/cube.c:1082 plugins/minimize.c:203 plugins/rotate.c:319
+#: plugins/scale.c:357 plugins/switcher.c:349 plugins/zoom.c:239
 msgid "Speed"
 msgstr "Velocidade"
 
-#: plugins/cube.c:1084
+#: plugins/cube.c:1083
 msgid "Fold Speed"
 msgstr "Velocidade Dobrada"
 
-#: plugins/cube.c:1093 plugins/minimize.c:213 plugins/rotate.c:329
-#: plugins/scale.c:345 plugins/switcher.c:357 plugins/zoom.c:249
+#: plugins/cube.c:1092 plugins/minimize.c:213 plugins/rotate.c:329
+#: plugins/scale.c:367 plugins/switcher.c:359 plugins/zoom.c:249
 msgid "Timestep"
 msgstr "Timestep"
 
-#: plugins/cube.c:1094
+#: plugins/cube.c:1093
 msgid "Fold Timestep"
 msgstr "Timestep Dobrado"
 
-#: plugins/cube.c:1103 plugins/switcher.c:382
+#: plugins/cube.c:1102 plugins/decoration.c:308 plugins/switcher.c:384
 msgid "Mipmap"
 msgstr "Mapa"
 
-#: plugins/cube.c:1104 plugins/switcher.c:383
+#: plugins/cube.c:1103 plugins/switcher.c:385
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Gerar mapas quando possível para dimensionamento de melhor qualidade"
 
-#: plugins/cube.c:1795
+#: plugins/cube.c:1794
 msgid "Unfold"
 msgstr "Desdobrar"
 
-#: plugins/cube.c:1796
+#: plugins/cube.c:1795
 msgid "Unfold cube"
 msgstr "Desdobrar cubo"
 
-#: plugins/cube.c:1813
+#: plugins/cube.c:1812
 msgid "Next Slide"
 msgstr "Próximo Slide"
 
-#: plugins/cube.c:1814
+#: plugins/cube.c:1813
 msgid "Advance to next slide"
 msgstr "Avançar para o slide seguinte"
 
-#: plugins/cube.c:1831
+#: plugins/cube.c:1830
 msgid "Previous Slide"
 msgstr "Slide Anterior"
 
-#: plugins/cube.c:1832
+#: plugins/cube.c:1831
 msgid "Go back to previous slide"
 msgstr "Voltar ao slide anterior"
 
-#: plugins/cube.c:2037
+#: plugins/cube.c:2036
 msgid "Desktop Cube"
 msgstr "Cubo da Área de Trabalho"
 
-#: plugins/cube.c:2038
+#: plugins/cube.c:2037
 msgid "Place windows on cube"
 msgstr "Colocar janelas no cubo"
 
-#: plugins/decoration.c:275
+#: plugins/decoration.c:250
 msgid "Shadow Radius"
 msgstr "Raio da Sombra"
 
-#: plugins/decoration.c:276
+#: plugins/decoration.c:251
 msgid "Drop shadow radius"
 msgstr "Diminuir raio da sombra"
 
-#: plugins/decoration.c:285
+#: plugins/decoration.c:260
 msgid "Shadow Opacity"
 msgstr "Opacidade da Sombra"
 
-#: plugins/decoration.c:286
+#: plugins/decoration.c:261
 msgid "Drop shadow opacity"
 msgstr "Diminuir opacidade da sombra"
 
-#: plugins/decoration.c:305
+#: plugins/decoration.c:280
 msgid "Shadow Offset X"
 msgstr "Deslocamento X da Sombra"
 
-#: plugins/decoration.c:306
+#: plugins/decoration.c:281
 msgid "Drop shadow X offset"
 msgstr "Diminuir deslocamento X da sombra"
 
-#: plugins/decoration.c:314
+#: plugins/decoration.c:289
 msgid "Shadow Offset Y"
 msgstr "Deslocamento Y da Sombra"
 
-#: plugins/decoration.c:315
+#: plugins/decoration.c:290
 msgid "Drop shadow Y offset"
 msgstr "Diminuir deslocamento Y da sombra"
 
-#: plugins/decoration.c:323
+#: plugins/decoration.c:298
 #, fuzzy
 msgid "Command"
 msgstr "Linha de comando %d"
 
-#: plugins/decoration.c:324
+#: plugins/decoration.c:299
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 
-#: plugins/decoration.c:1453
+#: plugins/decoration.c:1451
 msgid "Window Decoration"
 msgstr "Decoração da Janela"
 
-#: plugins/decoration.c:1454
+#: plugins/decoration.c:1452
 msgid "Window decorations"
 msgstr "Decorações das janelas"
 
@@ -209,67 +209,67 @@ msgstr "Decorações das janelas"
 msgid "Dock"
 msgstr "Âncora"
 
-#: plugins/fade.c:38 plugins/minimize.c:49 plugins/scale.c:72
-#: plugins/switcher.c:87 plugins/wobbly.c:162 src/main.c:56
+#: plugins/fade.c:38 plugins/minimize.c:49 plugins/scale.c:73
+#: plugins/switcher.c:87 plugins/wobbly.c:159 src/main.c:56
 msgid "Toolbar"
 msgstr "Barra de Ferramentas"
 
-#: plugins/fade.c:39 plugins/wobbly.c:163 src/main.c:57
+#: plugins/fade.c:39 plugins/wobbly.c:160 src/main.c:57
 msgid "Menu"
 msgstr "Menu"
 
-#: plugins/fade.c:40 plugins/minimize.c:50 plugins/scale.c:73
-#: plugins/switcher.c:88 plugins/wobbly.c:164 src/main.c:58
+#: plugins/fade.c:40 plugins/minimize.c:50 plugins/scale.c:74
+#: plugins/switcher.c:88 plugins/wobbly.c:161 src/main.c:58
 msgid "Utility"
 msgstr "Utilitário"
 
-#: plugins/fade.c:41 plugins/wobbly.c:149 src/main.c:59
+#: plugins/fade.c:41 plugins/wobbly.c:146 src/main.c:59
 msgid "Splash"
 msgstr "Tela de Apresentação"
 
-#: plugins/fade.c:42 plugins/minimize.c:52 plugins/scale.c:77
-#: plugins/switcher.c:92 plugins/wobbly.c:167 src/main.c:61
+#: plugins/fade.c:42 plugins/minimize.c:52 plugins/scale.c:78
+#: plugins/switcher.c:92 plugins/wobbly.c:164 src/main.c:61
 msgid "Normal"
 msgstr "Normal"
 
-#: plugins/fade.c:43 plugins/minimize.c:51 plugins/scale.c:74
-#: plugins/switcher.c:89 plugins/wobbly.c:165 src/main.c:60
+#: plugins/fade.c:43 plugins/minimize.c:51 plugins/scale.c:75
+#: plugins/switcher.c:89 plugins/wobbly.c:162 src/main.c:60
 msgid "Dialog"
 msgstr "Caixa de Diálogo"
 
-#: plugins/fade.c:44 plugins/scale.c:75 plugins/switcher.c:90
-#: plugins/wobbly.c:166 src/main.c:68
+#: plugins/fade.c:44 plugins/scale.c:76 plugins/switcher.c:90
+#: plugins/wobbly.c:163 src/main.c:68
 msgid "ModalDialog"
 msgstr "Caixa de Diálogo Modal"
 
-#: plugins/fade.c:45 plugins/wobbly.c:150 src/main.c:62
+#: plugins/fade.c:45 plugins/wobbly.c:147 src/main.c:62
 #, fuzzy
 msgid "DropdownMenu"
 msgstr "Menu da Janela"
 
-#: plugins/fade.c:46 plugins/wobbly.c:151 src/main.c:63
+#: plugins/fade.c:46 plugins/wobbly.c:148 src/main.c:63
 #, fuzzy
 msgid "PopupMenu"
 msgstr "Menu"
 
-#: plugins/fade.c:47 plugins/wobbly.c:152 src/main.c:64
+#: plugins/fade.c:47 plugins/wobbly.c:149 src/main.c:64
 msgid "Tooltip"
 msgstr ""
 
-#: plugins/fade.c:48 plugins/wobbly.c:153 src/main.c:65
+#: plugins/fade.c:48 plugins/wobbly.c:150 src/main.c:65
 #, fuzzy
 msgid "Notification"
 msgstr "Atrito"
 
-#: plugins/fade.c:49 plugins/wobbly.c:154 src/main.c:66
+#: plugins/fade.c:49 plugins/wobbly.c:151 src/main.c:66
 msgid "Combo"
 msgstr ""
 
-#: plugins/fade.c:50 plugins/wobbly.c:155 src/main.c:67
+#: plugins/fade.c:50 plugins/wobbly.c:152 src/main.c:67
 msgid "Dnd"
 msgstr ""
 
-#: plugins/fade.c:51 plugins/wobbly.c:156 src/main.c:70
+#: plugins/fade.c:51 plugins/wobbly.c:153 src/main.c:70
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -281,8 +281,8 @@ msgstr "Velocidade de Esmaecimento"
 msgid "Window fade speed"
 msgstr "Velocidade de esmaecimento das janelas"
 
-#: plugins/fade.c:194 plugins/minimize.c:223 plugins/scale.c:355
-#: plugins/switcher.c:367
+#: plugins/fade.c:194 plugins/minimize.c:223 plugins/scale.c:377
+#: plugins/switcher.c:369
 msgid "Window Types"
 msgstr "Tipos de Janelas"
 
@@ -306,11 +306,11 @@ msgstr "Campainha Visual de Tela Inteira"
 msgid "Fullscreen fade effect on system beep"
 msgstr "Efeito de esmaecimento de tela inteira ao som de bip do sistema"
 
-#: plugins/fade.c:831
+#: plugins/fade.c:830
 msgid "Fading Windows"
 msgstr "Janelas Esmaecidas"
 
-#: plugins/fade.c:832
+#: plugins/fade.c:831
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
 "Avivar janelas quando houver mapeamento e esmaecê-las quando não houver "
@@ -361,44 +361,44 @@ msgstr "Minimizar Efeito"
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Transformar janelas quando elas forem minimizadas e desminimizadas"
 
-#: plugins/move.c:540
+#: plugins/move.c:651
 msgid "Initiate Window Move"
 msgstr "Iniciar Movimento de Janelas"
 
-#: plugins/move.c:541
+#: plugins/move.c:652
 msgid "Start moving window"
 msgstr "Iniciar movimento da janela"
 
-#: plugins/move.c:559 plugins/scale.c:377 plugins/switcher.c:408
+#: plugins/move.c:670 plugins/scale.c:399 plugins/switcher.c:410
 msgid "Opacity"
 msgstr "Opacidade"
 
-#: plugins/move.c:560
+#: plugins/move.c:671
 msgid "Opacity level of moving windows"
 msgstr "Nível de opacidade das janelas em movimento"
 
-#: plugins/move.c:568
+#: plugins/move.c:679
 msgid "Constrain Y"
 msgstr "Restringir Y"
 
-#: plugins/move.c:569
+#: plugins/move.c:680
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Restringir a coordenada Y conforme a área de trabalho"
 
-#: plugins/move.c:575
+#: plugins/move.c:686
 msgid "Snapoff maximized windows"
 msgstr "Janelas maximizadas quebradas"
 
-#: plugins/move.c:576
+#: plugins/move.c:687
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
 "Janelas maximizadas quebradas e automaticamente desmaximizadas ao arrastar"
 
-#: plugins/move.c:742
+#: plugins/move.c:855
 msgid "Move Window"
 msgstr "Mover Janela"
 
-#: plugins/move.c:743
+#: plugins/move.c:856
 msgid "Move window"
 msgstr "Mover janela"
 
@@ -418,19 +418,19 @@ msgstr "Colocar Janelas"
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Colocar janelas nas posições apropriadas quando houver mapeamento"
 
-#: plugins/resize.c:711
+#: plugins/resize.c:718
 msgid "Initiate Window Resize"
 msgstr "Iniciar Redimensionamento de Janelas"
 
-#: plugins/resize.c:712
+#: plugins/resize.c:719
 msgid "Start resizing window"
 msgstr "Iniciar redimensionamento da janela"
 
-#: plugins/resize.c:855
+#: plugins/resize.c:862
 msgid "Resize Window"
 msgstr "Redimensionar Janela"
 
-#: plugins/resize.c:856
+#: plugins/resize.c:863
 msgid "Resize window"
 msgstr "Redimensionar janela"
 
@@ -470,7 +470,7 @@ msgstr "Velocidade da Rotação"
 msgid "Rotation Timestep"
 msgstr "Timestep da Rotação"
 
-#: plugins/rotate.c:1743 plugins/water.c:1647 plugins/zoom.c:750
+#: plugins/rotate.c:1743 plugins/water.c:1649 plugins/zoom.c:750
 msgid "Initiate"
 msgstr "Iniciar"
 
@@ -615,376 +615,415 @@ msgstr "Girar Cubo"
 msgid "Rotate desktop cube"
 msgstr "Girar cubo da área de trabalho"
 
-#: plugins/scale.c:76 plugins/switcher.c:91 src/main.c:69
+#: plugins/scale.c:77 plugins/switcher.c:91 src/main.c:69
 msgid "Fullscreen"
 msgstr "Tela Inteira"
 
-#: plugins/scale.c:88 plugins/wobbly.c:134
+#: plugins/scale.c:89 plugins/wobbly.c:131
 msgid "None"
 msgstr "Nenhuma"
 
-#: plugins/scale.c:89
+#: plugins/scale.c:90
 msgid "Emblem"
 msgstr "Emblema"
 
-#: plugins/scale.c:90
+#: plugins/scale.c:91
 msgid "Big"
 msgstr "Grande"
 
-#: plugins/scale.c:319
+#: plugins/scale.c:341
 msgid "Spacing"
 msgstr "Espaçamento"
 
-#: plugins/scale.c:320
+#: plugins/scale.c:342
 msgid "Space between windows"
 msgstr "Espaço entre janelas"
 
-#: plugins/scale.c:328
+#: plugins/scale.c:350
 msgid "Sloppy Focus"
 msgstr "Foco Fraco"
 
-#: plugins/scale.c:329
+#: plugins/scale.c:351
 msgid "Focus window when mouse moves over them"
 msgstr "Destacar janela quando o mouse estiver sobre ela"
 
-#: plugins/scale.c:336
+#: plugins/scale.c:358
 msgid "Scale speed"
 msgstr "Dimensionar velocidade"
 
-#: plugins/scale.c:346
+#: plugins/scale.c:368
 msgid "Scale timestep"
 msgstr "Dimensionar timestep"
 
-#: plugins/scale.c:356
+#: plugins/scale.c:378
 msgid "Window types that should scaled in scale mode"
 msgstr "Tipos de janelas que deveriam ser dimensionados no modo de escala"
 
-#: plugins/scale.c:370
+#: plugins/scale.c:392
 msgid "Darken Background"
 msgstr "Escurecer Segundo Plano"
 
-#: plugins/scale.c:371
+#: plugins/scale.c:393
 msgid "Darken background when scaling windows"
 msgstr "Escurecer segundo plano ao dimensionar janelas"
 
-#: plugins/scale.c:378 plugins/switcher.c:409
+#: plugins/scale.c:400 plugins/switcher.c:411
 msgid "Amount of opacity in percent"
 msgstr "Volume de opacidade em percentual"
 
-#: plugins/scale.c:386
+#: plugins/scale.c:408
 msgid "Overlay Icon"
 msgstr "Ícone de Instalação Sobreposta"
 
-#: plugins/scale.c:387
+#: plugins/scale.c:409
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 "Instalação sobreposta de um ícone nas janelas quando elas são dimensionadas"
 
-#: plugins/scale.c:1521
+#: plugins/scale.c:417
+msgid "Hover Time"
+msgstr ""
+
+#: plugins/scale.c:418
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+
+#: plugins/scale.c:1846
 msgid "Initiate Window Picker"
 msgstr "Iniciar Seletor de Janelas"
 
-#: plugins/scale.c:1522
+#: plugins/scale.c:1847
 msgid "Layout and start transforming windows"
 msgstr "Criar layout das janelas e iniciar sua transformação"
 
-#: plugins/scale.c:1538
+#: plugins/scale.c:1865
 #, fuzzy
 msgid "Initiate Window Picker For All Windows"
 msgstr "Iniciar Seletor de Janelas"
 
-#: plugins/scale.c:1539
+#: plugins/scale.c:1866
 #, fuzzy
 msgid "Layout and start transforming all windows"
 msgstr "Criar layout das janelas e iniciar sua transformação"
 
-#: plugins/scale.c:1741
+#: plugins/scale.c:1880
+#, fuzzy
+msgid "Initiate Window Picker For Window Group"
+msgstr "Iniciar Seletor de Janelas"
+
+#: plugins/scale.c:1881
+#, fuzzy
+msgid "Layout and start transforming window group"
+msgstr "Criar layout das janelas e iniciar sua transformação"
+
+#: plugins/scale.c:1896
+#, fuzzy
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Iniciar Seletor de Janelas"
+
+#: plugins/scale.c:1898
+#, fuzzy
+msgid "Layout and start transforming windows on current output"
+msgstr "Criar layout das janelas e iniciar sua transformação"
+
+#: plugins/scale.c:2107
 msgid "Scale"
 msgstr "Dimensionar"
 
-#: plugins/scale.c:1742
+#: plugins/scale.c:2108
 msgid "Scale windows"
 msgstr "Dimensionar janelas"
 
-#: plugins/switcher.c:348
+#: plugins/switcher.c:350
 msgid "Switcher speed"
 msgstr "Velocidade do alternador"
 
-#: plugins/switcher.c:358
+#: plugins/switcher.c:360
 msgid "Switcher timestep"
 msgstr "Timestep do alternador"
 
-#: plugins/switcher.c:368
+#: plugins/switcher.c:370
 msgid "Window types that should shown in switcher"
 msgstr "Tipos de janelas que deveriam ser mostrados no alternador"
 
-#: plugins/switcher.c:390
+#: plugins/switcher.c:392
 msgid "Saturation"
 msgstr "Saturação"
 
-#: plugins/switcher.c:391
+#: plugins/switcher.c:393
 msgid "Amount of saturation in percent"
 msgstr "Volume de saturação em percentual"
 
-#: plugins/switcher.c:399
+#: plugins/switcher.c:401
 msgid "Brightness"
 msgstr "Brilho"
 
-#: plugins/switcher.c:400
+#: plugins/switcher.c:402
 msgid "Amount of brightness in percent"
 msgstr "Volume de brilho em percentual"
 
-#: plugins/switcher.c:417
+#: plugins/switcher.c:419
 msgid "Bring To Front"
 msgstr "Colocar em Primeiro Plano"
 
-#: plugins/switcher.c:418
+#: plugins/switcher.c:420
 msgid "Bring selected window to front"
 msgstr "Colocar a janela selecionada em primeiro plano"
 
-#: plugins/switcher.c:424
+#: plugins/switcher.c:426
 msgid "Zoom"
 msgstr "Zoom"
 
-#: plugins/switcher.c:425
+#: plugins/switcher.c:427
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr "Durante a troca de janelas, deve-se reduzir a área de trabalho remota"
 
-#: plugins/switcher.c:435
+#: plugins/switcher.c:437
 msgid "Icon"
 msgstr "Ícone"
 
-#: plugins/switcher.c:436
+#: plugins/switcher.c:438
 msgid "Show icon next to thumbnail"
 msgstr "Mostrar ícone ao lado da miniatura"
 
-#: plugins/switcher.c:442
+#: plugins/switcher.c:444
 msgid "Minimized"
 msgstr "Minimizado"
 
-#: plugins/switcher.c:443
+#: plugins/switcher.c:445
 msgid "Show minimized windows"
 msgstr "Mostrar janelas minimizadas"
 
-#: plugins/switcher.c:1880 plugins/switcher.c:1916
+#: plugins/switcher.c:1940 plugins/switcher.c:1976 plugins/switcher.c:2014
 #, fuzzy
 msgid "Next window"
 msgstr "Mover janela"
 
-#: plugins/switcher.c:1881
+#: plugins/switcher.c:1941
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 
-#: plugins/switcher.c:1898 plugins/switcher.c:1935
+#: plugins/switcher.c:1958 plugins/switcher.c:1995 plugins/switcher.c:2027
 #, fuzzy
 msgid "Prev window"
 msgstr "Janela de Visualização"
 
-#: plugins/switcher.c:1899
+#: plugins/switcher.c:1959
 #, fuzzy
 msgid "Popup switcher if not visible and select previous window"
 msgstr "Tecla modificadora para seleção da janela anterior"
 
-#: plugins/switcher.c:1917
+#: plugins/switcher.c:1977
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 
-#: plugins/switcher.c:1936
+#: plugins/switcher.c:1996
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 
-#: plugins/switcher.c:2107 plugins/switcher.c:2108
+#: plugins/switcher.c:2015
+#, fuzzy
+msgid "Select next window"
+msgstr "Mover janela"
+
+#: plugins/switcher.c:2028
+#, fuzzy
+msgid "Select previous window"
+msgstr "Janela de Visualização"
+
+#: plugins/switcher.c:2195 plugins/switcher.c:2196
 msgid "Application Switcher"
 msgstr "Alternador de Aplicativos"
 
-#: plugins/water.c:1648
+#: plugins/water.c:1650
 msgid "Enable pointer water effects"
 msgstr "Habilitar ponteiro de efeitos aquáticos"
 
-#: plugins/water.c:1661
+#: plugins/water.c:1663
 msgid "Toggle rain"
 msgstr "Alternar chuva"
 
-#: plugins/water.c:1662
+#: plugins/water.c:1664
 msgid "Toggle rain effect"
 msgstr "Alternar efeito de chuva"
 
-#: plugins/water.c:1677
+#: plugins/water.c:1679
 msgid "Toggle wiper"
 msgstr ""
 
-#: plugins/water.c:1678
+#: plugins/water.c:1680
 msgid "Toggle wiper effect"
 msgstr ""
 
-#: plugins/water.c:1693
+#: plugins/water.c:1695
 msgid "Offset Scale"
 msgstr "Escala de Deslocamento"
 
-#: plugins/water.c:1694
+#: plugins/water.c:1696
 msgid "Water offset scale"
 msgstr "Escala de deslocamento da água"
 
-#: plugins/water.c:1703
+#: plugins/water.c:1705
 msgid "Rain Delay"
 msgstr "Atraso da Chuva"
 
-#: plugins/water.c:1704
+#: plugins/water.c:1706
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Intervalo (in ms) entre cada gota de chuva"
 
-#: plugins/water.c:1712
+#: plugins/water.c:1714
 msgid "Title wave"
 msgstr ""
 
-#: plugins/water.c:1713
+#: plugins/water.c:1715
 msgid "Wave effect from window title"
 msgstr ""
 
-#: plugins/water.c:1724
+#: plugins/water.c:1726
 msgid "Point"
 msgstr ""
 
-#: plugins/water.c:1725
+#: plugins/water.c:1727
 msgid "Add point"
 msgstr ""
 
-#: plugins/water.c:1736
+#: plugins/water.c:1738
 msgid "Line"
 msgstr ""
 
-#: plugins/water.c:1737
+#: plugins/water.c:1739
 msgid "Add line"
 msgstr ""
 
-#: plugins/water.c:1887
+#: plugins/water.c:1889
 msgid "Water Effect"
 msgstr "Efeito Aquático"
 
-#: plugins/water.c:1888
+#: plugins/water.c:1890
 msgid "Adds water effects to different desktop actions"
 msgstr "Adiciona efeitos aquáticos a diferentes ações da área de trabalho"
 
-#: plugins/wobbly.c:135 plugins/wobbly.c:2930
+#: plugins/wobbly.c:132 plugins/wobbly.c:2915
 msgid "Shiver"
 msgstr "Tremor"
 
-#: plugins/wobbly.c:390
+#: plugins/wobbly.c:385
 msgid "Friction"
 msgstr "Atrito"
 
-#: plugins/wobbly.c:391
+#: plugins/wobbly.c:386
 msgid "Spring Friction"
 msgstr "Atrito do Salto"
 
-#: plugins/wobbly.c:400
+#: plugins/wobbly.c:395
 msgid "Spring K"
 msgstr "Salto K"
 
-#: plugins/wobbly.c:401
+#: plugins/wobbly.c:396
 msgid "Spring Konstant"
 msgstr "Salto Konstant"
 
-#: plugins/wobbly.c:410
+#: plugins/wobbly.c:405
 msgid "Grid Resolution"
 msgstr "Resolução de Grade"
 
-#: plugins/wobbly.c:411
+#: plugins/wobbly.c:406
 msgid "Vertex Grid Resolution"
 msgstr "Resolução da Grade de Vértices"
 
-#: plugins/wobbly.c:419
+#: plugins/wobbly.c:414
 msgid "Minimum Grid Size"
 msgstr "Tamanho Mínimo da Grade"
 
-#: plugins/wobbly.c:420
+#: plugins/wobbly.c:415
 msgid "Minimum Vertex Grid Size"
 msgstr "Tamanho Mínimo do Vértice da Grade"
 
-#: plugins/wobbly.c:428
+#: plugins/wobbly.c:423
 msgid "Map Effect"
 msgstr "Efeito de Mapa"
 
-#: plugins/wobbly.c:429
+#: plugins/wobbly.c:424
 msgid "Map Window Effect"
 msgstr "Efeito de Mapa da Janela"
 
-#: plugins/wobbly.c:437
+#: plugins/wobbly.c:432
 msgid "Focus Effect"
 msgstr "Efeito de Destaque"
 
-#: plugins/wobbly.c:438
+#: plugins/wobbly.c:433
 msgid "Focus Window Effect"
 msgstr "Efeito de Destaque da Janela"
 
-#: plugins/wobbly.c:446
+#: plugins/wobbly.c:441
 msgid "Map Window Types"
 msgstr "Tipos de Mapa de Janelas"
 
-#: plugins/wobbly.c:447
+#: plugins/wobbly.c:442
 msgid "Window types that should wobble when mapped"
 msgstr "Tipos de janelas que deveriam ficar instáveis quando mapeados"
 
-#: plugins/wobbly.c:461
+#: plugins/wobbly.c:456
 msgid "Focus Window Types"
 msgstr "Tipos de Destaque de Janelas"
 
-#: plugins/wobbly.c:462
+#: plugins/wobbly.c:457
 msgid "Window types that should wobble when focused"
 msgstr "Tipos de janelas que deveriam ficar instáveis quando destacados"
 
-#: plugins/wobbly.c:474
+#: plugins/wobbly.c:469
 msgid "Move Window Types"
 msgstr "Tipos de Movimentação de Janelas"
 
-#: plugins/wobbly.c:475
+#: plugins/wobbly.c:470
 msgid "Window types that should wobble when moved"
 msgstr "Tipos de janelas que deveriam ficar instáveis quando movidos"
 
-#: plugins/wobbly.c:489
+#: plugins/wobbly.c:484
 msgid "Grab Window Types"
 msgstr "Capturar Tipos de Janelas"
 
-#: plugins/wobbly.c:490
+#: plugins/wobbly.c:485
 msgid "Window types that should wobble when grabbed"
 msgstr "Tipos de janelas que deveriam ficar instáveis quando capturados"
 
-#: plugins/wobbly.c:502
+#: plugins/wobbly.c:497
 msgid "Maximize Effect"
 msgstr "Maximizar Efeito"
 
-#: plugins/wobbly.c:503
+#: plugins/wobbly.c:498
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "Efeito de instabilidade ao maximizar e desmaximizar janelas"
 
-#: plugins/wobbly.c:2909
+#: plugins/wobbly.c:2894
 msgid "Snap windows"
 msgstr "Fechar janelas"
 
-#: plugins/wobbly.c:2910
+#: plugins/wobbly.c:2895
 msgid "Toggle window snapping"
 msgstr "Alternar fechamento de janelas"
 
-#: plugins/wobbly.c:2923
+#: plugins/wobbly.c:2908
 msgid "Snap Inverted"
 msgstr ""
 
-#: plugins/wobbly.c:2924
+#: plugins/wobbly.c:2909
 #, fuzzy
 msgid "Inverted window snapping"
 msgstr "Alternar fechamento de janelas"
 
-#: plugins/wobbly.c:2931
+#: plugins/wobbly.c:2916
 #, fuzzy
 msgid "Make window shiver"
 msgstr "Dimensionar janelas"
 
-#: plugins/wobbly.c:3135
+#: plugins/wobbly.c:3116
 msgid "Wobbly Windows"
 msgstr "Janelas Instáveis"
 
-#: plugins/wobbly.c:3136
+#: plugins/wobbly.c:3117
 msgid "Use spring model for wobbly window effect"
 msgstr "Usar modelo de salto para efeito de instabilidade na janela"
 
@@ -1025,143 +1064,143 @@ msgstr "Aproximar Área de Trabalho"
 msgid "Zoom and pan desktop cube"
 msgstr "Aplicar zoom e pan ao cubo da área de trabalho"
 
-#: src/display.c:161
+#: src/display.c:163
 msgid "Fast"
 msgstr "Rápida"
 
-#: src/display.c:161
+#: src/display.c:163
 msgid "Good"
 msgstr "Boa"
 
-#: src/display.c:161
+#: src/display.c:163
 msgid "Best"
 msgstr "Melhor"
 
-#: src/display.c:725
+#: src/display.c:727
 msgid "Active Plugins"
 msgstr "Plug-ins Ativos"
 
-#: src/display.c:726
+#: src/display.c:728
 msgid "List of currently active plugins"
 msgstr "Lista de plug-ins atualmente ativos"
 
-#: src/display.c:740
+#: src/display.c:742
 msgid "Texture Filter"
 msgstr "Filtro de Textura"
 
-#: src/display.c:741
+#: src/display.c:743
 msgid "Texture filtering"
 msgstr "Filtragem de textura"
 
-#: src/display.c:749
+#: src/display.c:751
 msgid "Click To Focus"
 msgstr "Clique para Posicionar o Foco"
 
-#: src/display.c:750
+#: src/display.c:752
 msgid "Click on window moves input focus to it"
 msgstr "O clique na janela transfere o foco para ela"
 
-#: src/display.c:756
+#: src/display.c:758
 msgid "Auto-Raise"
 msgstr "Elevação Automática"
 
-#: src/display.c:757
+#: src/display.c:759
 msgid "Raise selected windows after interval"
 msgstr "Elevar janelas selecionadas após intervalo"
 
-#: src/display.c:763
+#: src/display.c:765
 msgid "Auto-Raise Delay"
 msgstr "Atraso na Elevação Automática"
 
-#: src/display.c:764
+#: src/display.c:766
 msgid "Interval before raising selected windows"
 msgstr "Intervalo que precede a elevação das janelas selecionadas"
 
-#: src/display.c:772
+#: src/display.c:774
 msgid "Close Window"
 msgstr "Fechar Janela"
 
-#: src/display.c:773
+#: src/display.c:775
 msgid "Close active window"
 msgstr "Fechar a janela ativa"
 
-#: src/display.c:789
+#: src/display.c:791
 msgid "Show Main Menu"
 msgstr "Mostrar Menu Principal"
 
-#: src/display.c:790
+#: src/display.c:792
 msgid "Show the main menu"
 msgstr "Mostrar o menu principal"
 
-#: src/display.c:806
+#: src/display.c:808
 msgid "Run Dialog"
 msgstr "Caixa de Diálogo Executar"
 
-#: src/display.c:807
+#: src/display.c:809
 msgid "Show Run Application dialog"
 msgstr "Mostrar caixa de diálogo Executar Aplicativo"
 
-#: src/display.c:823
+#: src/display.c:825
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Janela"
 
-#: src/display.c:824
+#: src/display.c:826
 msgid "Unmaximize active window"
 msgstr "Desmaximizar janela ativa"
 
-#: src/display.c:840
+#: src/display.c:842
 msgid "Minimize Window"
 msgstr "Minimizar Janela"
 
-#: src/display.c:841
+#: src/display.c:843
 msgid "Minimize active window"
 msgstr "Minimizar janela ativa"
 
-#: src/display.c:857
+#: src/display.c:859
 msgid "Maximize Window"
 msgstr "Maximizar Janela"
 
-#: src/display.c:858
+#: src/display.c:860
 msgid "Maximize active window"
 msgstr "Maximizar janela ativa"
 
-#: src/display.c:874
+#: src/display.c:876
 msgid "Maximize Window Horizontally"
 msgstr "Maximizar Janela Horizontalmente"
 
-#: src/display.c:875
+#: src/display.c:877
 msgid "Maximize active window horizontally"
 msgstr "Maximizar janela ativa horizontalmente"
 
-#: src/display.c:887
+#: src/display.c:889
 msgid "Maximize Window Vertically"
 msgstr "Maximizar Janela Verticalmente"
 
-#: src/display.c:888
+#: src/display.c:890
 msgid "Maximize active window vertically"
 msgstr "Maximizar janela ativa verticalmente"
 
-#: src/display.c:900 src/display.c:901
+#: src/display.c:902 src/display.c:903
 msgid "Hide all windows and focus desktop"
 msgstr "Ocultar todas as janelas e enfocar área de trabalho"
 
-#: src/display.c:915
+#: src/display.c:917
 #, c-format
 msgid "Command line %d"
 msgstr "Linha de comando %d"
 
-#: src/display.c:916
+#: src/display.c:918
 #, c-format
 msgid "Command line to be executed in shell when run_command%d is invoked"
 msgstr ""
 "Linha de comando a ser executada no shell quando run_command%d for acionado"
 
-#: src/display.c:918
+#: src/display.c:920
 #, c-format
 msgid "Run command %d"
 msgstr "Executar comando %d"
 
-#: src/display.c:919
+#: src/display.c:921
 #, c-format
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -1170,136 +1209,136 @@ msgstr ""
 "Um atalho de teclado que, quando acionado, executa o comando shell "
 "identificado pelo comando%d"
 
-#: src/display.c:963
+#: src/display.c:965
 msgid "Slow Animations"
 msgstr "Animações Lentas"
 
-#: src/display.c:964
+#: src/display.c:966
 msgid "Toggle use of slow animations"
 msgstr "Alternar uso de animações lentas"
 
-#: src/display.c:980
+#: src/display.c:982
 #, fuzzy
 msgid "Raise Window"
 msgstr "Redimensionar Janela"
 
-#: src/display.c:981
+#: src/display.c:983
 #, fuzzy
 msgid "Raise window above other windows"
 msgstr "Janela mais baixa sob as demais janelas"
 
-#: src/display.c:995
+#: src/display.c:997
 msgid "Lower Window"
 msgstr "Janela Mais Baixa"
 
-#: src/display.c:996
+#: src/display.c:998
 msgid "Lower window beneath other windows"
 msgstr "Janela mais baixa sob as demais janelas"
 
-#: src/display.c:1010
+#: src/display.c:1012
 msgid "Increase Opacity"
 msgstr "Aumentar Opacidade"
 
-#: src/display.c:1011
+#: src/display.c:1013
 msgid "Increase window opacity"
 msgstr "Aumentar opacidade da janela"
 
-#: src/display.c:1025
+#: src/display.c:1027
 msgid "Decrease Opacity"
 msgstr "Reduzir Opacidade"
 
-#: src/display.c:1026
+#: src/display.c:1028
 msgid "Decrease window opacity"
 msgstr "Reduzir opacidade da janela"
 
-#: src/display.c:1040 src/display.c:1041
+#: src/display.c:1042 src/display.c:1043
 msgid "Take a screenshot"
 msgstr "Efetuar uma captura de tela"
 
-#: src/display.c:1057 src/display.c:1058
+#: src/display.c:1059 src/display.c:1060
 msgid "Screenshot command line"
 msgstr "Capturar tela da linha de comando"
 
-#: src/display.c:1066 src/display.c:1067
+#: src/display.c:1068 src/display.c:1069
 msgid "Take a screenshot of a window"
 msgstr "Efetuar captura de tela de uma janela"
 
-#: src/display.c:1084 src/display.c:1085
+#: src/display.c:1086 src/display.c:1087
 msgid "Window screenshot command line"
 msgstr "Linha de comando para captura de tela de janelas"
 
-#: src/display.c:1093
+#: src/display.c:1095
 msgid "Window Menu"
 msgstr "Menu da Janela"
 
-#: src/display.c:1094
+#: src/display.c:1096
 msgid "Open window menu"
 msgstr "Abrir menu de janelas"
 
-#: src/display.c:1113
+#: src/display.c:1115
 msgid "Raise On Click"
 msgstr "Elevar com um Clique"
 
-#: src/display.c:1114
+#: src/display.c:1116
 msgid "Raise windows when clicked"
 msgstr "Elevar janelas quando clicadas"
 
-#: src/display.c:1120
+#: src/display.c:1122
 msgid "Audible Bell"
 msgstr "Campainha Audível"
 
-#: src/display.c:1121
+#: src/display.c:1123
 msgid "Audible system beep"
 msgstr "Bip do sistema audível"
 
-#: src/display.c:1127
+#: src/display.c:1129
 msgid "Toggle Window Maximized"
 msgstr "Alternar Janela Maximizada"
 
-#: src/display.c:1128
+#: src/display.c:1130
 msgid "Toggle active window maximized"
 msgstr "Alternar janela ativa maximizada"
 
-#: src/display.c:1140
+#: src/display.c:1142
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Alternar Janela Maximizada Horizontalmente"
 
-#: src/display.c:1142
+#: src/display.c:1144
 msgid "Toggle active window maximized horizontally"
 msgstr "Alternar janela ativa maximizada horizontalmente"
 
-#: src/display.c:1154
+#: src/display.c:1156
 msgid "Toggle Window Maximized Vertically"
 msgstr "Alternar Janela Maximizada Verticalmente"
 
-#: src/display.c:1156
+#: src/display.c:1158
 msgid "Toggle active window maximized vertically"
 msgstr "Alternar janela ativa maximizada verticalmente"
 
-#: src/display.c:1168
+#: src/display.c:1170
 msgid "Hide Skip Taskbar Windows"
 msgstr "Ocultar Janelas Ignorar Barra de Tarefas"
 
-#: src/display.c:1169
+#: src/display.c:1171
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Ocultar as janelas que não estão na barra de tarefas ao entrar no modo "
 "mostrar área de trabalho"
 
-#: src/display.c:1176
+#: src/display.c:1178
 msgid "Toggle Window Shaded"
 msgstr "Alternar Janela Sombreada"
 
-#: src/display.c:1177
+#: src/display.c:1179
 msgid "Toggle active window shaded"
 msgstr "Alternar janela ativa sombreada"
 
-#: src/display.c:1193
+#: src/display.c:1195
 #, fuzzy
 msgid "Ignore Hints When Maximized"
 msgstr "Alternar Janela Maximizada"
 
-#: src/display.c:1194
+#: src/display.c:1196
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 
@@ -1307,108 +1346,108 @@ msgstr ""
 msgid "Desktop"
 msgstr "Área de Trabalho"
 
-#: src/screen.c:619
+#: src/screen.c:582
 msgid "Detect Refresh Rate"
 msgstr "Detectar Taxa de Atualização"
 
-#: src/screen.c:620
+#: src/screen.c:583
 msgid "Automatic detection of refresh rate"
 msgstr "Detecção automática da taxa de atualização"
 
-#: src/screen.c:626
+#: src/screen.c:589
 msgid "Lighting"
 msgstr "Iluminação"
 
-#: src/screen.c:627
+#: src/screen.c:590
 msgid "Use diffuse light when screen is transformed"
 msgstr "Usar luz difusa quando a tela for transformada"
 
-#: src/screen.c:633
+#: src/screen.c:596
 msgid "Refresh Rate"
 msgstr "Taxa de Atualização"
 
-#: src/screen.c:634
+#: src/screen.c:597
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Taxa em que a tela é redesenhada (vezes/segundo)"
 
-#: src/screen.c:643
+#: src/screen.c:606
 #, fuzzy
 msgid "Horizontal Virtual Size"
 msgstr "Tamanho Virtual"
 
-#: src/screen.c:644
+#: src/screen.c:607
 #, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplicador de tamanho de tela para tamanho virtual"
 
-#: src/screen.c:652
+#: src/screen.c:615
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "Tamanho Virtual"
 
-#: src/screen.c:653
+#: src/screen.c:616
 #, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicador de tamanho de tela para tamanho virtual"
 
-#: src/screen.c:661
+#: src/screen.c:624
 msgid "Opacity Step"
 msgstr "Etapa de Opacidade"
 
-#: src/screen.c:662
+#: src/screen.c:625
 msgid "Opacity change step"
 msgstr "Etapa de mudança de opacidade"
 
-#: src/screen.c:670
+#: src/screen.c:633
 msgid "Unredirect Fullscreen Windows"
 msgstr "Anular redirecionamento de janelas de tela inteira"
 
-#: src/screen.c:671
+#: src/screen.c:634
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Permitir que o desenho das janelas em tela inteira não seja redirecionado "
 "para pixmaps fora da tela"
 
-#: src/screen.c:678
+#: src/screen.c:641
 msgid "Default Icon"
 msgstr "Ícone Padrão"
 
-#: src/screen.c:679
+#: src/screen.c:642
 msgid "Default window icon image"
 msgstr "Imagem do ícone padrão da janela"
 
-#: src/screen.c:687
+#: src/screen.c:650
 msgid "Sync To VBlank"
 msgstr ""
 
-#: src/screen.c:688
+#: src/screen.c:651
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
-#: src/screen.c:695
+#: src/screen.c:658
 #, fuzzy
 msgid "Number of Desktops"
 msgstr "Aproximar Área de Trabalho"
 
-#: src/screen.c:696
+#: src/screen.c:659
 msgid "Number of virtual desktops"
 msgstr ""
 
-#: src/screen.c:704
+#: src/screen.c:667
 msgid "Detect Outputs"
 msgstr ""
 
-#: src/screen.c:705
+#: src/screen.c:668
 #, fuzzy
 msgid "Automatic detection of output devices"
 msgstr "Detecção automática da taxa de atualização"
 
-#: src/screen.c:711
+#: src/screen.c:674
 msgid "Outputs"
 msgstr ""
 
-#: src/screen.c:712
+#: src/screen.c:675
 msgid "List of strings describing output devices"
 msgstr ""
 
