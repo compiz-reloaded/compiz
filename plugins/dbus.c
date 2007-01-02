@@ -443,20 +443,19 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 	if (strcmp (option->name, path[2]) == 0)
 	{
 	    DBusMessageIter iter;
+	    CompOptionValue value, tmpValue;
+	    Bool	    status = FALSE;
 
-	    if (dbus_message_iter_init (message, &iter))
+	    memset (&value, 0, sizeof (value));
+
+	    if (option->type == CompOptionTypeList)
 	    {
-		CompOptionValue value, tmpValue;
-		DbusActionIndex	actionIndex = DbusActionIndexKeyBinding;
-		Bool		status = FALSE;
-
-		memset (&value, 0, sizeof (value));
-
-		do
+		if (dbus_message_iter_init (message, &iter))
 		{
-		    if (option->type == CompOptionTypeList)
+		    do
 		    {
-			if (dbusGetOptionValue (&iter, option->type, &tmpValue))
+			if (dbusGetOptionValue (&iter, option->value.list.type,
+						&tmpValue))
 			{
 			    CompOptionValue *v;
 
@@ -467,11 +466,20 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 			    {
 				v[value.list.nValue++] = tmpValue;
 				value.list.value = v;
-				status |= TRUE;
 			    }
 			}
-		    }
-		    else if (option->type == CompOptionTypeAction)
+		    } while (dbus_message_iter_next (&iter));
+		}
+
+		status = TRUE;
+	    }
+	    else if (dbus_message_iter_init (message, &iter))
+	    {
+		DbusActionIndex	actionIndex = DbusActionIndexKeyBinding;
+
+		do
+		{
+		    if (option->type == CompOptionTypeAction)
 		    {
 			CompAction *a = &value.action;
 			char	   *str;
@@ -555,36 +563,36 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 			status |= TRUE;
 		    }
 		} while (dbus_message_iter_next (&iter));
+	    }
 
-		if (status)
+	    if (status)
+	    {
+		if (s)
 		{
-		    if (s)
-		    {
-			if (strcmp (path[0], "core"))
-			    (*s->setScreenOptionForPlugin) (s,
-							    path[0],
-							    option->name,
-							    &value);
-			else
-			    (*s->setScreenOption) (s, option->name, &value);
-		    }
+		    if (strcmp (path[0], "core"))
+			(*s->setScreenOptionForPlugin) (s,
+							path[0],
+							option->name,
+							&value);
 		    else
-		    {
-			if (strcmp (path[0], "core"))
-			    (*d->setDisplayOptionForPlugin) (d,
-							     path[0],
-							     option->name,
-							     &value);
-			else
-			    (*d->setDisplayOption) (d, option->name, &value);
-		    }
-
-		    return TRUE;
+			(*s->setScreenOption) (s, option->name, &value);
 		}
 		else
 		{
-		    return FALSE;
+		    if (strcmp (path[0], "core"))
+			(*d->setDisplayOptionForPlugin) (d,
+							 path[0],
+							 option->name,
+							 &value);
+		    else
+			(*d->setDisplayOption) (d, option->name, &value);
 		}
+
+		return TRUE;
+	    }
+	    else
+	    {
+		return FALSE;
 	    }
 	}
 
