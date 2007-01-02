@@ -1930,16 +1930,19 @@ wobblyPreparePaintScreen (CompScreen *s,
 		    {
 			ww->model = 0;
 
-			moveWindow (w,
-				    model->topLeft.x + w->output.left -
-				    w->attrib.x,
-				    model->topLeft.y + w->output.top -
-				    w->attrib.y,
-				    TRUE, TRUE);
+			if (w->attrib.x == w->serverX &&
+			    w->attrib.y == w->serverY)
+			{
+			    moveWindow (w,
+					model->topLeft.x + w->output.left -
+					w->attrib.x,
+					model->topLeft.y + w->output.top -
+					w->attrib.y,
+					TRUE, TRUE);
+			    syncWindowPosition (w);
+			}
 
 			ww->model = model;
-
-			syncWindowPosition (w);
 		    }
 
 		    if (!(s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK))
