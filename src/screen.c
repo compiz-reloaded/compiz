@@ -2007,6 +2007,7 @@ addScreen (CompDisplay *display,
 
     detectRefreshRateOfScreen (s);
     detectOutputDevices (s);
+    updateOutputDevices (s);
 
     glLightModelfv (GL_LIGHT_MODEL_AMBIENT, globalAmbient);
 
