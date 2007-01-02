@@ -161,11 +161,11 @@ northwestcmp (gconstpointer a,
     int	       from_origin_b;
     int	       ax, ay, bx, by;
 
-    ax = aw->attrib.x - aw->input.left;
-    ay = aw->attrib.y - aw->input.top;
+    ax = aw->serverX - aw->input.left;
+    ay = aw->serverY - aw->input.top;
 
-    bx = bw->attrib.x - bw->input.left;
-    by = bw->attrib.y - bw->input.top;
+    bx = bw->serverX - bw->input.left;
+    by = bw->serverY - bw->input.top;
 
     /* probably there's a fast good-enough-guess we could use here. */
     from_origin_a = sqrt (ax * ax + ay * ay);
@@ -259,8 +259,8 @@ find_next_cascade (CompWindow *window,
 	w = tmp->data;
 
 	/* we want frame position, not window position */
-	wx = w->attrib.x - w->input.left;
-	wy = w->attrib.y - w->input.top;
+	wx = w->serverX - w->input.left;
+	wy = w->serverY - w->input.top;
 
 	if (ABS (wx - cascade_x) < x_threshold &&
 	    ABS (wy - cascade_y) < y_threshold)
@@ -269,8 +269,8 @@ find_next_cascade (CompWindow *window,
 	     * point. The new window frame should go at the origin
 	     * of the client window we're stacking above.
 	     */
-	    wx = w->attrib.x;
-	    wy = w->attrib.y;
+	    wx = w->serverX;
+	    wy = w->serverY;
 
 	    cascade_x = wx;
 	    cascade_y = wy;
@@ -510,8 +510,8 @@ leftmost_cmp (gconstpointer a,
     CompWindow *bw = (gpointer) b;
     int	       ax, bx;
 
-    ax = aw->attrib.x - aw->input.left;
-    bx = bw->attrib.x - bw->input.left;
+    ax = aw->serverX - aw->input.left;
+    bx = bw->serverX - bw->input.left;
 
     if (ax < bx)
 	return -1;
@@ -529,8 +529,8 @@ topmost_cmp (gconstpointer a,
     CompWindow *bw = (gpointer) b;
     int	       ay, by;
 
-    ay = aw->attrib.y - aw->input.top;
-    by = bw->attrib.y - bw->input.top;
+    ay = aw->serverY - aw->input.top;
+    by = bw->serverY - bw->input.top;
 
     if (ay < by)
 	return -1;
@@ -824,8 +824,8 @@ placeWindow (CompWindow *window,
 	{
 	    int	w;
 
-	    x = parent->attrib.x;
-	    y = parent->attrib.y;
+	    x = parent->serverX;
+	    y = parent->serverY;
 
 	    w = get_window_width (parent);
 
@@ -844,8 +844,8 @@ placeWindow (CompWindow *window,
 	    y += window->input.top;
 
 	    /* clip to screen if parent is visible in current viewport */
-	    if (parent->attrib.x < parent->screen->width &&
-		parent->attrib.x + parent->screen->width > 0)
+	    if (parent->serverX < parent->screen->width &&
+		parent->serverX + parent->screen->width > 0)
 	    {
 		XRectangle area;
 
@@ -893,10 +893,10 @@ placeWindow (CompWindow *window,
 	if (!wi->shaded && wi->attrib.map_state != IsViewable)
 	    continue;
 
-	if (wi->attrib.x >= work_area.x + work_area.width       ||
-	    wi->attrib.x + get_window_width (wi) <= work_area.x	||
-	    wi->attrib.y >= work_area.y + work_area.height      ||
-	    wi->attrib.y + get_window_height (wi) <= work_area.y)
+	if (wi->serverX >= work_area.x + work_area.width       ||
+	    wi->serverY + get_window_width (wi) <= work_area.x ||
+	    wi->serverY >= work_area.y + work_area.height      ||
+	    wi->serverY + get_window_height (wi) <= work_area.y)
 	    continue;
 
 	if (wi->attrib.override_redirect)
@@ -1037,11 +1037,11 @@ placeDamageWindowRect (CompWindow *w,
     {
 	int newX, newY;
 
-	placeWindow (w, w->attrib.x, w->attrib.y, &newX, &newY);
+	placeWindow (w, w->serverX, w->serverY, &newX, &newY);
 
 	w->placed = TRUE;
 
-	if (newX != w->attrib.x || newY != w->attrib.y)
+	if (newX != w->serverX || newY != w->serverY)
 	{
 	    moveWindow (w, newX - w->attrib.x, newY - w->attrib.y, FALSE, TRUE);
 	    syncWindowPosition (w);

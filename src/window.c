@@ -112,8 +112,8 @@ recalcNormalHints (CompWindow *window)
     maxSize = window->screen->maxTextureSize;
     maxSize -= window->serverBorderWidth * 2;
 
-    window->sizeHints.x      = window->attrib.x;
-    window->sizeHints.y      = window->attrib.y;
+    window->sizeHints.x      = window->serverX;
+    window->sizeHints.y      = window->serverY;
     window->sizeHints.width  = window->serverWidth;
     window->sizeHints.height = window->serverHeight;
 
@@ -2053,8 +2053,8 @@ sendConfigureNotify (CompWindow *w)
     }
     else
     {
-	xev.x		 = w->attrib.x;
-	xev.y		 = w->attrib.y;
+	xev.x		 = w->serverX;
+	xev.y		 = w->serverY;
 	xev.width	 = w->serverWidth;
 	xev.height	 = w->serverHeight;
 	xev.border_width = w->serverBorderWidth;
@@ -2199,29 +2199,6 @@ resizeWindow (CompWindow *w,
 	      int	 height,
 	      int	 borderWidth)
 {
-    Window frame = None;
-
-    if (x != w->serverX)
-    {
-	frame	   = w->frame;
-	w->serverX = x;
-    }
-    else
-	x = w->attrib.x;
-
-    if (y != w->serverY)
-    {
-	frame	   = w->frame;
-	w->serverY = y;
-    }
-    else
-	y = w->attrib.y;
-
-    if (frame)
-	XMoveWindow (w->screen->display->display, frame,
-		     w->serverX - w->input.left,
-		     w->serverY - w->input.top);
-
     if (w->attrib.width        != width  ||
 	w->attrib.height       != height ||
 	w->attrib.border_width != borderWidth)
@@ -2289,6 +2266,11 @@ resizeWindow (CompWindow *w,
 	dy = y - w->attrib.y;
 
 	moveWindow (w, dx, dy, TRUE, TRUE);
+
+	if (w->frame)
+	    XMoveWindow (w->screen->display->display, w->frame,
+			 w->attrib.x - w->input.left,
+			 w->attrib.y - w->input.top);
     }
 
     return TRUE;
@@ -2437,6 +2419,8 @@ configureWindow (CompWindow	 *w,
     {
 	if (ce->override_redirect)
 	{
+	    w->serverX		 = ce->x;
+	    w->serverY		 = ce->y;
 	    w->serverWidth       = ce->width;
 	    w->serverHeight      = ce->height;
 	    w->serverBorderWidth = ce->border_width;
@@ -2498,12 +2482,15 @@ moveWindow (CompWindow *w,
 void
 syncWindowPosition (CompWindow *w)
 {
+    w->serverX = w->attrib.x;
+    w->serverY = w->attrib.y;
+
     XMoveWindow (w->screen->display->display, w->id, w->attrib.x, w->attrib.y);
 
     if (w->frame)
 	XMoveWindow (w->screen->display->display, w->frame,
-		     w->attrib.x - w->input.left,
-		     w->attrib.y - w->input.top);
+		     w->serverX - w->input.left,
+		     w->serverY - w->input.top);
 }
 
 Bool
@@ -2948,10 +2935,10 @@ saveWindowGeometry (CompWindow *w,
 	return;
 
     if (m & CWX)
-	w->saveWc.x = w->attrib.x;
+	w->saveWc.x = w->serverX;
 
     if (m & CWY)
-	w->saveWc.y = w->attrib.y;
+	w->saveWc.y = w->serverY;
 
     if (m & CWWidth)
 	w->saveWc.width = w->serverWidth;
@@ -3021,6 +3008,12 @@ configureXWindow (CompWindow	 *w,
 		  unsigned int	 valueMask,
 		  XWindowChanges *xwc)
 {
+    if (valueMask & CWX)
+	w->serverX = xwc->x;
+
+    if (valueMask & CWY)
+	w->serverY = xwc->y;
+
     if (valueMask & CWWidth)
 	w->serverWidth = xwc->width;
 
@@ -3303,9 +3296,9 @@ moveResizeWindow (CompWindow     *w,
 	gravity = w->sizeHints.win_gravity;
 
     if (!(xwcm & CWX))
-	xwc->x = w->attrib.x;
+	xwc->x = w->serverX;
     if (!(xwcm & CWY))
-	xwc->y = w->attrib.y;
+	xwc->y = w->serverY;
     if (!(xwcm & CWWidth))
 	xwc->width = w->serverWidth;
     if (!(xwcm & CWHeight))
@@ -3459,7 +3452,7 @@ updateWindowSize (CompWindow *w)
 	return;
 
     mask = addWindowSizeChanges (w, &xwc,
-				 w->attrib.x, w->attrib.y,
+				 w->serverX, w->serverY,
 				 w->serverWidth, w->serverHeight,
 				 w->serverBorderWidth);
     if (mask)
@@ -3612,7 +3605,7 @@ updateWindowAttributes (CompWindow *w,
 
     mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
     mask |= addWindowSizeChanges (w, &xwc,
-				  w->attrib.x, w->attrib.y,
+				  w->serverX, w->serverY,
 				  w->serverWidth, w->serverHeight,
 				  w->serverBorderWidth);
 
@@ -3643,6 +3636,8 @@ static void
 ensureWindowVisibility (CompWindow *w)
 {
     int x1, y1, x2, y2;
+    int	width = w->serverWidth + w->serverBorderWidth * 2;
+    int	height = w->serverHeight + w->serverBorderWidth * 2;
     int dx = 0;
     int dy = 0;
 
@@ -3659,15 +3654,15 @@ ensureWindowVisibility (CompWindow *w)
     x2 = x1 + w->screen->workArea.width + w->screen->hsize * w->screen->width;
     y2 = y1 + w->screen->workArea.height + w->screen->vsize * w->screen->height;
 
-    if (w->attrib.x - w->input.left >= x2)
-	dx = (x2 - 25) - w->attrib.x;
-    else if (w->attrib.x + w->width + w->input.right <= x1)
-	dx = (x1 + 25) - (w->attrib.x + w->width);
+    if (w->serverX - w->input.left >= x2)
+	dx = (x2 - 25) - w->serverX;
+    else if (w->serverX + width + w->input.right <= x1)
+	dx = (x1 + 25) - (w->serverX + width);
 
-    if (w->attrib.y - w->input.top >= y2)
-	dy = (y2 - 25) - w->attrib.y;
-    else if (w->attrib.y + w->height + w->input.bottom <= y1)
-	dy = (y1 + 25) - (w->attrib.y + w->height);
+    if (w->serverY - w->input.top >= y2)
+	dy = (y2 - 25) - w->serverY;
+    else if (w->serverY + height + w->input.bottom <= y1)
+	dy = (y1 + 25) - (w->serverY + height);
 
     if (dx || dy)
     {
@@ -4229,11 +4224,13 @@ defaultViewportForWindow (CompWindow *w,
 			  int	     *vy)
 {
     CompScreen *s = w->screen;
+    int	       width = w->serverWidth + w->serverBorderWidth * 2;
+    int	       height = w->serverHeight + w->serverBorderWidth * 2;
     int	       x;
     int	       y;
 
-    if ((w->attrib.x < s->width && w->attrib.x + w->width > 0)	&&
-	(w->attrib.y < s->height && w->attrib.y + w->height > 0))
+    if ((w->serverX < s->width  && w->serverX + width  > 0) &&
+	(w->serverY < s->height && w->serverY + height > 0))
     {
 	if (vx)
 	    *vx = s->x;
@@ -4246,7 +4243,7 @@ defaultViewportForWindow (CompWindow *w,
 
     if (vx)
     {
-	x = w->attrib.x + (w->width >> 1);
+	x = w->serverX + (width >> 1);
 	if (x < 0)
 	    *vx = s->x + ((x / s->width) - 1) % s->hsize;
 	else
@@ -4255,7 +4252,7 @@ defaultViewportForWindow (CompWindow *w,
 
     if (vy)
     {
-	y = w->attrib.y + (w->height >> 1);
+	y = w->serverY + (height >> 1);
 	if (y < 0)
 	    *vy = s->y + ((y / s->height) - 1) % s->vsize;
 	else
@@ -4412,6 +4409,8 @@ int
 outputDeviceForWindow (CompWindow *w)
 {
     int output = w->screen->currentOutputDev;
+    int	width = w->serverWidth + w->serverBorderWidth * 2;
+    int	height = w->serverHeight + w->serverBorderWidth * 2;
     int x1, y1, x2, y2;
 
     x1 = w->screen->outputDev[output].region.extents.x1;
@@ -4419,14 +4418,14 @@ outputDeviceForWindow (CompWindow *w)
     x2 = w->screen->outputDev[output].region.extents.x2;
     y2 = w->screen->outputDev[output].region.extents.y2;
 
-    if (x1 > w->attrib.x + w->width  ||
-	y1 > w->attrib.y + w->height ||
-	x2 < w->attrib.x	     ||
-	y2 < w->attrib.y)
+    if (x1 > w->serverX + width  ||
+	y1 > w->serverY + height ||
+	x2 < w->serverX		 ||
+	y2 < w->serverY)
     {
 	output = outputDeviceForPoint (w->screen,
-				       w->attrib.x + w->width  / 2,
-				       w->attrib.y + w->height / 2);
+				       w->serverX + width  / 2,
+				       w->serverY + height / 2);
     }
 
     return output;
