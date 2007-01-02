@@ -561,29 +561,25 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 		    if (s)
 		    {
 			if (strcmp (path[0], "core"))
-			    status =
-				(*s->setScreenOptionForPlugin) (s,
-								path[0],
-								option->name,
-								&value);
-			else
-			    status = (*s->setScreenOption) (s, option->name,
+			    (*s->setScreenOptionForPlugin) (s,
+							    path[0],
+							    option->name,
 							    &value);
+			else
+			    (*s->setScreenOption) (s, option->name, &value);
 		    }
 		    else
 		    {
 			if (strcmp (path[0], "core"))
-			    status =
-				(*d->setDisplayOptionForPlugin) (d,
-								 path[0],
-								 option->name,
-								 &value);
-			else
-			    status = (*d->setDisplayOption) (d, option->name,
+			    (*d->setDisplayOptionForPlugin) (d,
+							     path[0],
+							     option->name,
 							     &value);
+			else
+			    (*d->setDisplayOption) (d, option->name, &value);
 		    }
 
-		    return status;
+		    return TRUE;
 		}
 		else
 		{
