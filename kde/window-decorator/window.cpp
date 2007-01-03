@@ -177,7 +177,8 @@ KWD::Window::isMaximizable (void) const
     return true;
 }
 
-KDecoration::MaximizeMode KWD::Window::maximizeMode (void) const
+KDecoration::MaximizeMode
+KWD::Window::maximizeMode (void) const
 {
     MaximizeMode mode = MaximizeRestore;
 
