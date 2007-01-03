@@ -317,6 +317,18 @@ dbusHandleActionMessage (DBusConnection *connection,
 	    if (argument)
 		free (argument);
 
+	    if (!dbus_message_get_no_reply (message))
+	    {
+		DBusMessage *reply;
+
+		reply = dbus_message_new_method_return (message);
+
+		dbus_connection_send (connection, reply, NULL);
+		dbus_connection_flush (connection);
+
+		dbus_message_unref (reply);
+	    }
+
 	    return TRUE;
 	}
 
@@ -586,6 +598,18 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 							 &value);
 		    else
 			(*d->setDisplayOption) (d, option->name, &value);
+		}
+
+		if (!dbus_message_get_no_reply (message))
+		{
+		    DBusMessage *reply;
+
+		    reply = dbus_message_new_method_return (message);
+
+		    dbus_connection_send (connection, reply, NULL);
+		    dbus_connection_flush (connection);
+
+		    dbus_message_unref (reply);
 		}
 
 		return TRUE;
