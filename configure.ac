@@ -101,6 +101,14 @@ DECORATION_REQUIRES="xrender"
 PKG_CHECK_MODULES(DECORATION, $DECORATION_REQUIRES)
 AC_SUBST(DECORATION_REQUIRES)
 
+PKG_CHECK_EXISTS(xrender >= 0.9.3,
+		 [have_xrender_0_9_3=yes], [have_xrender_0_9_3=no])
+
+if test "$have_xrender_0_9_3" = yes; then
+  AC_DEFINE(HAVE_XRENDER_0_9_3, 1,
+	    [Define to 1 if xrender version >= 0.9.3])
+fi
+
 AC_MSG_CHECKING(for GL_CFLAGS)
 AC_ARG_WITH(gl-cflags, [  --with-gl-cflags=CFLAGS ],
 		       [GL_CFLAGS="$withval"],

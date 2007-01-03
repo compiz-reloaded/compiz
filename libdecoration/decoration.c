@@ -1826,6 +1826,41 @@ _decor_pad_border_picture (Display     *xdisplay,
     }
 }
 
+#ifndef HAVE_XRENDER_0_9_3
+/* XRenderCreateLinearGradient and XRenderCreateRadialGradient used to be
+ * broken. Flushing Xlib's output buffer before calling one of these
+ * functions will avoid this specific issue.
+ */
+static Picture
+XRenderCreateLinearGradient_wrapper (Display		   *xdisplay,
+				     const XLinearGradient *gradient,
+				     const XFixed	   *stops,
+				     const XRenderColor	   *colors,
+				     int		   nStops)
+{
+    XFlush (xdisplay);
+
+    return XRenderCreateLinearGradient (xdisplay, gradient,
+					stops, colors, nStops);
+}
+
+static Picture
+XRenderCreateRadialGradient_wrapper (Display		   *xdisplay,
+				     const XRadialGradient *gradient,
+				     const XFixed	   *stops,
+				     const XRenderColor	   *colors,
+				     int		   nStops)
+{
+    XFlush (xdisplay);
+
+    return XRenderCreateRadialGradient (xdisplay, gradient,
+					stops, colors, nStops);
+}
+
+#define XRenderCreateLinearGradient XRenderCreateLinearGradient_wrapper
+#define XRenderCreateRadialGradient XRenderCreateRadialGradient_wrapper
+#endif
+
 static void
 _decor_blend_horz_border_picture (Display	  *xdisplay,
 				  decor_context_t *context,
