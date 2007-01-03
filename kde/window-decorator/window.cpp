@@ -1519,7 +1519,7 @@ KWD::Window::updateState (void)
     if (stateChange & NET::Max)
     {
 	mDecor->maximizeChange ();
-	resizeDecoration (true);
+	resizeDecoration (false);
     }
 
     if (stateChange & NET::KeepAbove && !(mState & NET::KeepAbove))
