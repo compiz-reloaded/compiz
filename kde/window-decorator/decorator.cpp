@@ -32,6 +32,7 @@
 #include <klocale.h>
 #include <kcommondecoration.h>
 #include <kwin.h>
+#include <qwidgetlist.h>
 #include <qpoint.h>
 
 #include <X11/Xlib.h>
@@ -190,8 +191,7 @@ KWD::Decorator::Decorator (void) : DCOPObject ("KWinInterface"),
     mConfig (0),
     mKWinModule (new KWinModule (this, KWinModule::INFO_ALL)),
     mDBusQtConnection (this),
-    mCompositeWindow (0, 0, Qt::WType_TopLevel | Qt::WStyle_NoBorder |
-		      Qt::WX11BypassWM)
+    mCompositeWindow (0)
 {
     DCOPClient *client;
     int	       i, j;
@@ -231,10 +231,14 @@ KWD::Decorator::Decorator (void) : DCOPObject ("KWinInterface"),
     mShadowOptions.shadow_color[2] = SHADOW_COLOR_BLUE;
     mShadowOptions.shadow_color[3] = 0xffff;
 
-    mCompositeWindow.setGeometry (QRect (-ROOT_OFF_X, -ROOT_OFF_Y, 1, 1));
-    mCompositeWindow.show ();
+    mCompositeWindow = new QWidget (0, "KWDCompositeWidget",
+				    Qt::WType_TopLevel | Qt::WStyle_NoBorder |
+				    Qt::WX11BypassWM);
 
-    XCompositeRedirectSubwindows (qt_xdisplay (), mCompositeWindow.winId (),
+    mCompositeWindow->setGeometry (QRect (-ROOT_OFF_X, -ROOT_OFF_Y, 1, 1));
+    mCompositeWindow->show ();
+
+    XCompositeRedirectSubwindows (qt_xdisplay (), mCompositeWindow->winId (),
 				  CompositeRedirectManual);
 }
 
@@ -250,6 +254,9 @@ KWD::Decorator::~Decorator (void)
 
     if (mDecorActive)
 	delete mDecorActive;
+
+    /* XXX: mCompositeWindow is not deleted, some plugins seem to rely on
+       it not being deleted... not sure what to do about this. */
 
     delete mOptions;
     delete mPlugins;
@@ -291,9 +298,9 @@ KWD::Decorator::enableDecorations (Time timestamp,
 
     updateShadow ();
 
-    mDecorNormal = new KWD::Window (&mCompositeWindow, qt_xrootwin (),
+    mDecorNormal = new KWD::Window (mCompositeWindow, qt_xrootwin (),
 				    0, Window::Default);
-    mDecorActive = new KWD::Window (&mCompositeWindow, qt_xrootwin (),
+    mDecorActive = new KWD::Window (mCompositeWindow, qt_xrootwin (),
 				    0, Window::DefaultActive);
 
     connect (mKWinModule, SIGNAL (windowAdded (WId)),
@@ -850,9 +857,25 @@ KWD::Decorator::handleWindowAdded (WId id)
     unsigned int			     width, height, border, depth;
     int					     x, y;
     XID					     root;
+    QWidgetList				     *widgets;
+
+    /* avoid adding any of our own top level windows */
+    widgets = QApplication::topLevelWidgets ();
+    if (widgets)
+    {
+	for (QWidgetListIt it (*widgets); it.current (); ++it)
+	{
+	    if (it.current ()->winId () == id)
+	    {
+		delete widgets;
+		return;
+	    }
+	}
+
+	delete widgets;
+    }
 
     KWD::trapXError ();
-    XSelectInput (qt_xdisplay (), id, StructureNotifyMask | PropertyChangeMask);
     XGetGeometry (qt_xdisplay (), id, &root, &x, &y, &width, &height,
 		  &border, &depth);
     if (KWD::popXError ())
@@ -885,11 +908,15 @@ KWD::Decorator::handleWindowAdded (WId id)
 	type = KWD::Window::Normal;
     }
 
+    KWD::trapXError ();
+    XSelectInput (qt_xdisplay (), id, StructureNotifyMask | PropertyChangeMask);
+    KWD::popXError ();
+
     if (frame)
     {
 	if (!mClients.contains (id))
 	{
-	    client = new KWD::Window (&mCompositeWindow, id, frame, type,
+	    client = new KWD::Window (mCompositeWindow, id, frame, type,
 				      x, y,
 				      width + border * 2,
 				      height + border * 2);
@@ -911,7 +938,7 @@ KWD::Decorator::handleWindowAdded (WId id)
     {
 	if (!mClients.contains (id))
 	{
-	    client = new KWD::Window (&mCompositeWindow, id, 0, type,
+	    client = new KWD::Window (mCompositeWindow, id, 0, type,
 				      x, y,
 				      width + border * 2,
 				      height + border * 2);
