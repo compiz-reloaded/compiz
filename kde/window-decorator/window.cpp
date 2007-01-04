@@ -1260,12 +1260,37 @@ KWD::Window::updateProperty (void)
 
     if (mType == Normal || mType == Switcher)
     {
+	int topXOffset = w / 2;
+
+	if (mDecor)
+	{
+	    const QObjectList *children = mDecor->widget ()->children ();
+	    QWidget	      *child;
+	    int		      x;
+
+	    x = w - mContext.left_space - mContext.left_corner_space;
+	    if (x > topXOffset)
+		topXOffset = x;
+
+	    for (QObjectListIt it(*children); it.current (); ++it)
+	    {
+		if (!it.current ()->isWidgetType ())
+		    continue;
+
+		child = static_cast <QWidget *> (it.current ());
+
+		x = child->x () - mBorder.left - 2;
+		if (x > w / 2 && x < topXOffset)
+		    topXOffset = x;
+	    }
+	}
+
 	nQuad = decor_set_lXrXtXbX_window_quads (quads,
 						 &mContext,
 						 &mLayout,
 						 lh / 2,
 						 rh / 2,
-						 w / 2,
+						 topXOffset,
 						 w / 2);
 
 	minWidth = mContext.left_corner_space + 1 + mContext.right_corner_space;
