@@ -125,6 +125,7 @@ typedef struct _ScaleDisplay {
 
     unsigned int lastActiveNum;
     Window       lastActiveWindow;
+    Window       selectedWindow;
     KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
 } ScaleDisplay;
 
@@ -497,8 +498,10 @@ scalePaintWindow (CompWindow		  *w,
 
 	if (sw->adjust || sw->slot)
 	{
-	    if (w->id	    != s->display->activeWindow &&
-		ss->opacity != OPAQUE			&&
+	    SCALE_DISPLAY (s->display);
+
+	    if (w->id	    != sd->selectedWindow &&
+		ss->opacity != OPAQUE		  &&
 		ss->state   != SCALE_STATE_IN)
 	    {
 		/* modify opacity of windows that are not active */
@@ -1296,6 +1299,7 @@ scaleInitiateCommon (CompScreen      *s,
 	    sd->lastActiveNum = s->activeNum - 1;
 
 	sd->lastActiveWindow = s->display->activeWindow;
+	sd->selectedWindow   = s->display->activeWindow;
 
 	ss->state = SCALE_STATE_OUT;
 
@@ -1431,7 +1435,8 @@ scaleInitiateOutput (CompDisplay     *d,
 static Bool
 scaleSelectWindowAt (CompScreen *s,
 		     int	 x,
-		     int	 y)
+		     int	 y,
+		     Bool	 moveInputFocus)
 
 {
     CompWindow *w;
@@ -1441,10 +1446,28 @@ scaleSelectWindowAt (CompScreen *s,
     {
 	SCALE_DISPLAY (s->display);
 
-	sd->lastActiveNum    = w->activeNum;
-	sd->lastActiveWindow = w->id;
+	if (sd->selectedWindow != w->id)
+	{
+	    CompWindow *old, *new;
 
-	moveInputFocusToWindow (w);
+	    old = findWindowAtScreen (s, sd->selectedWindow);
+	    new = findWindowAtScreen (s, w->id);
+
+	    sd->selectedWindow = w->id;
+
+	    if (old)
+		addWindowDamage (old);
+
+	    addWindowDamage (new);
+	}
+
+	if (moveInputFocus)
+	{
+	    sd->lastActiveNum    = w->activeNum;
+	    sd->lastActiveWindow = w->id;
+
+	    moveInputFocusToWindow (w);
+	}
 
 	return TRUE;
     }
@@ -1459,6 +1482,7 @@ scaleMoveFocusWindow (CompScreen *s,
 
 {
     CompWindow *active;
+
 
     active = findWindowAtScreen (s, s->display->activeWindow);
     if (active)
@@ -1505,6 +1529,7 @@ scaleMoveFocusWindow (CompScreen *s,
 
 	    sd->lastActiveNum    = focus->activeNum;
 	    sd->lastActiveWindow = focus->id;
+	    sd->selectedWindow   = focus->id;
 
 	    moveInputFocusToWindow (focus);
 	}
@@ -1552,14 +1577,24 @@ scaleHoverTimeout (void *closure)
 
     if (ss->grab && ss->state != SCALE_STATE_IN)
     {
+	CompWindow *w;
 	CompOption o;
 	CompAction *action =
 	    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
 
+	w = findWindowAtDisplay (s->display, sd->selectedWindow);
+	if (w)
+	{
+	    sd->lastActiveNum    = w->activeNum;
+	    sd->lastActiveWindow = w->id;
+
+	    moveInputFocusToWindow (w);
+	}
+
 	o.type    = CompOptionTypeInt;
 	o.name    = "root";
 	o.value.i = s->root;
-
+	
 	scaleTerminate (s->display, action, 0, &o, 1);
     }
 
@@ -1617,7 +1652,8 @@ scaleHandleEvent (CompDisplay *d,
 
 		    if (scaleSelectWindowAt (s,
 					     event->xbutton.x_root,
-					     event->xbutton.y_root))
+					     event->xbutton.y_root,
+					     TRUE))
 		    {
 			scaleTerminate (d, action, 0, &o, 1);
 		    }
@@ -1641,12 +1677,17 @@ scaleHandleEvent (CompDisplay *d,
 	{
 	    SCALE_SCREEN (s);
 
-	    if (ss->grabIndex		    &&
-		ss->state != SCALE_STATE_IN &&
-		ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b)
+	    if (ss->grabIndex && ss->state != SCALE_STATE_IN)
+	    {
+		Bool focus;
+
+		focus = ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b;
+
 		scaleSelectWindowAt (s,
 				     event->xmotion.x_root,
-				     event->xmotion.y_root);
+				     event->xmotion.y_root,
+				     focus);
+	    }
 	}
 	break;
     case ClientMessage:
@@ -1657,17 +1698,20 @@ scaleHandleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
+		Bool focus;
+
 		SCALE_SCREEN (w->screen);
 
 		s = w->screen;
+
+		focus = ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b;
 
 		if (w->id == ss->dndTarget)
 		    sendDndStatusMessage (w->screen, event->xclient.data.l[0]);
 
 		if (ss->grab			&&
 		    ss->state != SCALE_STATE_IN &&
-		    w->id == ss->dndTarget	&&
-		    ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b)
+		    w->id == ss->dndTarget)
 		{
 		    int x = event->xclient.data.l[2] >> 16;
 		    int y = event->xclient.data.l[2] & 0xffff;
@@ -1681,7 +1725,7 @@ scaleHandleEvent (CompDisplay *d,
 
 			if (ss->hoverHandle)
 			{
-			    if (w->activeNum != sd->lastActiveNum)
+			    if (w->id != sd->selectedWindow)
 			    {
 				compRemoveTimeout (ss->hoverHandle);
 				ss->hoverHandle = 0;
@@ -1694,7 +1738,7 @@ scaleHandleEvent (CompDisplay *d,
 						scaleHoverTimeout,
 						s);
 
-			scaleSelectWindowAt (s, x, y);
+			scaleSelectWindowAt (s, x, y, focus);
 		    }
 		    else
 		    {
@@ -1927,6 +1971,7 @@ scaleInitDisplay (CompPlugin  *p,
     }
 
     sd->lastActiveNum = None;
+    sd->selectedWindow = None;
 
     scaleDisplayInitOptions (sd, d->display);
 
