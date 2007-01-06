@@ -43,8 +43,6 @@
 #define SCALE_SPACING_MIN     0
 #define SCALE_SPACING_MAX     250
 
-#define SCALE_SLOPPY_FOCUS_DEFAULT TRUE
-
 #define SCALE_INITIATE_KEY_DEFAULT       "Up"
 #define SCALE_INITIATE_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
 
@@ -130,15 +128,14 @@ typedef struct _ScaleDisplay {
 } ScaleDisplay;
 
 #define SCALE_SCREEN_OPTION_SPACING      0
-#define SCALE_SCREEN_OPTION_SLOPPY_FOCUS 1
-#define SCALE_SCREEN_OPTION_SPEED	 2
-#define SCALE_SCREEN_OPTION_TIMESTEP	 3
-#define SCALE_SCREEN_OPTION_WINDOW_TYPE  4
-#define SCALE_SCREEN_OPTION_DARKEN_BACK  5
-#define SCALE_SCREEN_OPTION_OPACITY      6
-#define SCALE_SCREEN_OPTION_ICON         7
-#define SCALE_SCREEN_OPTION_HOVER_TIME   8
-#define SCALE_SCREEN_OPTION_NUM          9
+#define SCALE_SCREEN_OPTION_SPEED	 1
+#define SCALE_SCREEN_OPTION_TIMESTEP	 2
+#define SCALE_SCREEN_OPTION_WINDOW_TYPE  3
+#define SCALE_SCREEN_OPTION_DARKEN_BACK  4
+#define SCALE_SCREEN_OPTION_OPACITY      5
+#define SCALE_SCREEN_OPTION_ICON         6
+#define SCALE_SCREEN_OPTION_HOVER_TIME   7
+#define SCALE_SCREEN_OPTION_NUM          8
 
 typedef enum {
     ScaleTypeNormal = 0,
@@ -267,10 +264,6 @@ scaleSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case SCALE_SCREEN_OPTION_SLOPPY_FOCUS:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case SCALE_SCREEN_OPTION_SPEED:
 	if (compSetFloatOption (o, value))
 	{
@@ -345,13 +338,6 @@ scaleScreenInitOptions (ScaleScreen *ss)
     o->value.i	  = SCALE_SPACING_DEFAULT;
     o->rest.i.min = SCALE_SPACING_MIN;
     o->rest.i.max = SCALE_SPACING_MAX;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS];
-    o->name	  = "sloppy_focus";
-    o->shortDesc  = N_("Sloppy Focus");
-    o->longDesc   = N_("Focus window when mouse moves over them");
-    o->type	  = CompOptionTypeBool;
-    o->value.b	  = SCALE_SLOPPY_FOCUS_DEFAULT;
 
     o = &ss->opt[SCALE_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -1681,7 +1667,7 @@ scaleHandleEvent (CompDisplay *d,
 	    {
 		Bool focus;
 
-		focus = ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b;
+		focus = !d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b;
 
 		scaleSelectWindowAt (s,
 				     event->xmotion.x_root,
@@ -1704,7 +1690,7 @@ scaleHandleEvent (CompDisplay *d,
 
 		s = w->screen;
 
-		focus = ss->opt[SCALE_SCREEN_OPTION_SLOPPY_FOCUS].value.b;
+		focus = !d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b;
 
 		if (w->id == ss->dndTarget)
 		    sendDndStatusMessage (w->screen, event->xclient.data.l[0]);
