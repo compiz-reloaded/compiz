@@ -1418,6 +1418,28 @@ scaleInitiateOutput (CompDisplay     *d,
     return FALSE;
 }
 
+static void
+scaleSelectWindow (CompWindow *w)
+
+{
+    SCALE_DISPLAY (w->screen->display);
+
+    if (sd->selectedWindow != w->id)
+    {
+	CompWindow *old, *new;
+
+	old = findWindowAtScreen (w->screen, sd->selectedWindow);
+	new = findWindowAtScreen (w->screen, w->id);
+
+	sd->selectedWindow = w->id;
+
+	if (old)
+	    addWindowDamage (old);
+
+	addWindowDamage (new);
+    }
+}
+
 static Bool
 scaleSelectWindowAt (CompScreen *s,
 		     int	 x,
@@ -1432,20 +1454,7 @@ scaleSelectWindowAt (CompScreen *s,
     {
 	SCALE_DISPLAY (s->display);
 
-	if (sd->selectedWindow != w->id)
-	{
-	    CompWindow *old, *new;
-
-	    old = findWindowAtScreen (s, sd->selectedWindow);
-	    new = findWindowAtScreen (s, w->id);
-
-	    sd->selectedWindow = w->id;
-
-	    if (old)
-		addWindowDamage (old);
-
-	    addWindowDamage (new);
-	}
+	scaleSelectWindow (w);
 
 	if (moveInputFocus)
 	{
@@ -1468,57 +1477,77 @@ scaleMoveFocusWindow (CompScreen *s,
 
 {
     CompWindow *active;
-
+    CompWindow *focus = NULL;
 
     active = findWindowAtScreen (s, s->display->activeWindow);
     if (active)
     {
-	CompWindow *w, *focus = NULL;
-	ScaleSlot  *slot;
-	int	   x, y, cx, cy, d, min = MAXSHORT;
-
-	SCALE_SCREEN (s);
 	SCALE_WINDOW (active);
 
-	if (!sw->slot)
-	    return;
+	if (sw->slot)
+	{
+	    SCALE_SCREEN (s);
 
-	cx = (sw->slot->x1 + sw->slot->x2) / 2;
-	cy = (sw->slot->y1 + sw->slot->y2) / 2;
+	    CompWindow *w;
+	    ScaleSlot  *slot;
+	    int	       x, y, cx, cy, d, min = MAXSHORT;
+
+	    cx = (sw->slot->x1 + sw->slot->x2) / 2;
+	    cy = (sw->slot->y1 + sw->slot->y2) / 2;
+
+	    for (w = s->windows; w; w = w->next)
+	    {
+		slot = GET_SCALE_WINDOW (w, ss)->slot;
+		if (!slot)
+		    continue;
+
+		x = (slot->x1 + slot->x2) / 2;
+		y = (slot->y1 + slot->y2) / 2;
+
+		d = abs (x - cx) + abs (y - cy);
+		if (d < min)
+		{
+		    if ((dx > 0 && slot->x1 < sw->slot->x2) ||
+			(dx < 0 && slot->x2 > sw->slot->x1) ||
+			(dy > 0 && slot->y1 < sw->slot->y2) ||
+			(dy < 0 && slot->y2 > sw->slot->y1))
+			continue;
+
+		    min   = d;
+		    focus = w;
+		}
+	    }
+	}
+    }
+
+    /* move focus to the last focused window if no slot window is currently
+       focused */
+    if (!focus)
+    {
+	CompWindow *w;
+
+	SCALE_SCREEN (s);
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    slot = GET_SCALE_WINDOW (w, ss)->slot;
-	    if (!slot)
+	    if (!GET_SCALE_WINDOW (w, ss)->slot)
 		continue;
 
-	    x = (slot->x1 + slot->x2) / 2;
-	    y = (slot->y1 + slot->y2) / 2;
-
-	    d = abs (x - cx) + abs (y - cy);
-	    if (d < min)
-	    {
-		if ((dx > 0 && slot->x1 < sw->slot->x2) ||
-		    (dx < 0 && slot->x2 > sw->slot->x1) ||
-		    (dy > 0 && slot->y1 < sw->slot->y2) ||
-		    (dy < 0 && slot->y2 > sw->slot->y1))
-		    continue;
-
-		min   = d;
+	    if (!focus || focus->activeNum < w->activeNum)
 		focus = w;
-	    }
 	}
+    }
 
-	if (focus)
-	{
-	    SCALE_DISPLAY (s->display);
+    if (focus)
+    {
+	SCALE_DISPLAY (s->display);
 
-	    sd->lastActiveNum    = focus->activeNum;
-	    sd->lastActiveWindow = focus->id;
-	    sd->selectedWindow   = focus->id;
+	scaleSelectWindow (focus);
 
-	    moveInputFocusToWindow (focus);
-	}
+	sd->lastActiveNum    = focus->activeNum;
+	sd->lastActiveWindow = focus->id;
+
+	moveInputFocusToWindow (focus);
     }
 }
 
