@@ -1580,7 +1580,7 @@ scaleHoverTimeout (void *closure)
 	o.type    = CompOptionTypeInt;
 	o.name    = "root";
 	o.value.i = s->root;
-	
+
 	scaleTerminate (s->display, action, 0, &o, 1);
     }
 
