@@ -1619,6 +1619,8 @@ dbusInitDisplay (CompPlugin  *p,
 			      mask,
 			      dbusSendPluginsChangedSignal,
 			      (void *) d);
+
+	    free (plugindir);
 	}
     }
 
