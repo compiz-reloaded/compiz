@@ -64,6 +64,10 @@ libpng_la_LDFLAGS = -module -avoid-version -no-undefined
 libpng_la_LIBADD = @COMPIZ_LIBS@
 libpng_la_SOURCES = png.c
 
+libblur_la_LDFLAGS = -module -avoid-version -no-undefined
+libblur_la_LIBADD = @COMPIZ_LIBS@
+libblur_la_SOURCES = blur.c
+
 if USE_LIBRSVG
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
 libsvg_la_LIBADD = @COMPIZ_LIBS@ @LIBRSVG_LIBS@
@@ -175,6 +179,7 @@ module_LTLIBRARIES =		\
 	libplane.la		\
 	libclone.la		\
 	libpng.la		\
+	libblur.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libgconf_dump_module) \

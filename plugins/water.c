@@ -1850,6 +1850,10 @@ waterGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+CompPluginDep waterDeps[] = {
+    { CompPluginRuleBefore, "blur" }
+};
+
 static CompPluginVTable waterVTable = {
     "water",
     N_("Water Effect"),
@@ -1867,8 +1871,8 @@ static CompPluginVTable waterVTable = {
     waterSetDisplayOption,
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
-    0, /* Deps */
-    0, /* nDeps */
+    waterDeps,
+    sizeof (waterDeps) / sizeof (waterDeps[0]),
     0, /* Features */
     0  /* nFeatures */
 };
