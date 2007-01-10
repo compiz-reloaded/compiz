@@ -653,7 +653,7 @@ rotateInitiate (CompDisplay     *d,
 	}
     }
 
-    return FALSE;
+    return TRUE;
 }
 
 static Bool

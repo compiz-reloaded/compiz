@@ -104,7 +104,7 @@ shotInitiate (CompDisplay     *d,
 	ss->grab = TRUE;
     }
 
-    return FALSE;
+    return TRUE;
 }
 
 static Bool

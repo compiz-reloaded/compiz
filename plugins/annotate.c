@@ -500,7 +500,7 @@ annoInitiate (CompDisplay     *d,
 	as->eraseMode = FALSE;
     }
 
-    return FALSE;
+    return TRUE;
 }
 
 static Bool
