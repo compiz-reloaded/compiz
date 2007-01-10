@@ -118,6 +118,11 @@ struct _CompFunction {
     int		     mask;
 };
 
+typedef struct _FetchInfo {
+    int  index;
+    char *data;
+} FetchInfo;
+
 typedef void (*DataOpCallBackProc) (CompDataOp *op,
 				    int	       index,
 				    void       *closure);
@@ -488,20 +493,27 @@ addFetchOffsetVariables (CompDataOp *op,
 {
     if (op->type == CompOpTypeDataOffset)
     {
-	char *str, **pStr = (char **) closure;
-	int  oldSize = (*pStr) ? strlen (*pStr) : 0;
-	int  newSize;
-	char data[256];
+	FetchInfo *info = (FetchInfo *) closure;
 
-	snprintf (data, 256, "TEMP __tmp_texcoord%d;", index);
-
-	newSize = oldSize + strlen (data);
-
-	str = realloc (*pStr, newSize + 1);
-	if (str)
+	if (info->index != index)
 	{
-	    strcpy (str + oldSize, data);
-	    *pStr = str;
+	    char *str;
+	    int	 oldSize = strlen (info->data);
+	    int	 newSize;
+	    char data[256];
+
+	    snprintf (data, 256, "TEMP __tmp_texcoord%d;", index);
+
+	    newSize = oldSize + strlen (data);
+
+	    str = realloc (info->data, newSize + 1);
+	    if (str)
+	    {
+		strcpy (str + oldSize, data);
+		info->data = str;
+	    }
+
+	    info->index = index;
 	}
     }
 }
@@ -511,15 +523,16 @@ addData (CompDataOp *op,
 	 int	    index,
 	 void       *closure)
 {
-    char *str, **pStr = (char **) closure;
-    int  oldSize = (*pStr) ? strlen (*pStr) : 0;
-    int  newSize = oldSize + strlen (op->data);
+    FetchInfo *info = (FetchInfo *) closure;
+    char      *str;
+    int	      oldSize = strlen (info->data);
+    int	      newSize = oldSize + strlen (op->data);
 
-    str = realloc (*pStr, newSize + 1);
+    str = realloc (info->data, newSize + 1);
     if (str)
     {
 	strcpy (str + oldSize, op->data);
-	*pStr = str;
+	info->data = str;
     }
 }
 
@@ -527,13 +540,13 @@ static CompProgram *
 buildFragmentProgram (CompScreen     *s,
 		      FragmentAttrib *attrib)
 {
-    char	 *data = NULL;
     CompProgram	 *program;
     CompFunction **functionList;
     int		 nFunctionList;
     int		 mask = COMP_FUNCTION_MASK;
     int		 type;
     GLint	 errorPos;
+    FetchInfo    info;
     int		 i;
 
     program = malloc (sizeof (CompProgram));
@@ -593,13 +606,14 @@ buildFragmentProgram (CompScreen     *s,
 
     type = functionMaskToType (mask);
 
-    data = strdup ("!!ARBfp1.0");
+    info.data  = strdup ("!!ARBfp1.0");
+    info.index = -1;
 
     forEachDataOp (functionList, nFunctionList, type,
-		   addFetchOffsetVariables, (void *) &data);
+		   addFetchOffsetVariables, (void *) &info);
 
     program->blending = forEachDataOp (functionList, nFunctionList, type,
-				       addData, (void *) &data);
+				       addData, (void *) &info);
 
     program->type = GL_FRAGMENT_PROGRAM_ARB;
 
@@ -609,7 +623,7 @@ buildFragmentProgram (CompScreen     *s,
     (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, program->name);
     (*s->programString) (GL_FRAGMENT_PROGRAM_ARB,
 			 GL_PROGRAM_FORMAT_ASCII_ARB,
-			 strlen (data), data);
+			 strlen (info.data), info.data);
 
     glGetIntegerv (GL_PROGRAM_ERROR_POSITION_ARB, &errorPos);
     if (glGetError () != GL_NO_ERROR || errorPos != -1)
@@ -622,7 +636,7 @@ buildFragmentProgram (CompScreen     *s,
 	program->type = 0;
     }
 
-    free (data);
+    free (info.data);
     free (functionList);
 
     return program;
