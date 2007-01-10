@@ -119,7 +119,7 @@ struct _CompFunction {
 };
 
 typedef struct _FetchInfo {
-    int  index;
+    int  indices[MAX_FRAGMENT_FUNCTIONS];
     char *data;
 } FetchInfo;
 
@@ -268,9 +268,15 @@ forEachDataOpInFunction (CompFunction	    **list,
 		    dataOp.data = data;
 
 		    (*callBack) (&dataOp, index, closure);
-		}
 
-		offset = f->data[type].body[i].fetch.offset;
+		    snprintf (data, 256, "__tmp_texcoord%d", index);
+
+		    offset = data;
+		}
+		else
+		{
+		    offset = f->data[type].body[i].fetch.offset;
+		}
 	    }
 
 	    forEachDataOpInFunction (list, index - 1, type,
@@ -495,7 +501,7 @@ addFetchOffsetVariables (CompDataOp *op,
     {
 	FetchInfo *info = (FetchInfo *) closure;
 
-	if (info->index != index)
+	if (!info->indices[index])
 	{
 	    char *str;
 	    int	 oldSize = strlen (info->data);
@@ -513,7 +519,7 @@ addFetchOffsetVariables (CompDataOp *op,
 		info->data = str;
 	    }
 
-	    info->index = index;
+	    info->indices[index] = TRUE;
 	}
     }
 }
@@ -606,8 +612,9 @@ buildFragmentProgram (CompScreen     *s,
 
     type = functionMaskToType (mask);
 
-    info.data  = strdup ("!!ARBfp1.0");
-    info.index = -1;
+    info.data = strdup ("!!ARBfp1.0");
+
+    memset (info.indices, 0, sizeof (info.indices));
 
     forEachDataOp (functionList, nFunctionList, type,
 		   addFetchOffsetVariables, (void *) &info);
