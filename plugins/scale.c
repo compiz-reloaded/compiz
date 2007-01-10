@@ -646,9 +646,14 @@ scalePaintWindow (CompWindow		  *w,
 						     &iconReg);
 
 		if (w->vCount)
+		{
+		    FragmentAttrib fAttrib = { 0 };
+
 		    (*w->screen->drawWindowTexture) (w,
 						     &icon->texture, &sAttrib,
+						     &fAttrib,
 						     mask);
+		}
 	    }
 	}
     }

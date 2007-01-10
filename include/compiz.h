@@ -80,6 +80,10 @@ typedef struct _CompWindow	  CompWindow;
 typedef struct _CompTexture	  CompTexture;
 typedef struct _CompIcon	  CompIcon;
 typedef struct _CompWindowExtents CompWindowExtents;
+typedef struct _CompProgram	  CompProgram;
+typedef struct _CompFunction	  CompFunction;
+typedef struct _CompFunctionData  CompFunctionData;
+typedef struct _FragmentAttrib    FragmentAttrib;
 
 /* virtual modifiers */
 
@@ -1083,6 +1087,7 @@ typedef void (*AddWindowGeometryProc) (CompWindow *window,
 typedef void (*DrawWindowTextureProc) (CompWindow	       *w,
 				       CompTexture	       *texture,
 				       const WindowPaintAttrib *attrib,
+				       const FragmentAttrib    *fragment,
 				       unsigned int	       mask);
 
 typedef void (*DrawWindowGeometryProc) (CompWindow *window);
@@ -1151,6 +1156,7 @@ void
 drawWindowTexture (CompWindow		   *w,
 		   CompTexture		   *texture,
 		   const WindowPaintAttrib *attrib,
+		   const FragmentAttrib	   *fragment,
 		   unsigned int		   mask);
 
 Bool
@@ -1344,12 +1350,12 @@ typedef void (*GLProgramStringProc) (GLenum	  target,
 				     GLenum	  format,
 				     GLsizei	  len,
 				     const GLvoid *string);
-typedef void (*GLProgramLocalParameter4fProc) (GLenum  target,
-					       GLuint  index,
-					       GLfloat x,
-					       GLfloat y,
-					       GLfloat z,
-					       GLfloat w);
+typedef void (*GLProgramParameter4fProc) (GLenum  target,
+					  GLuint  index,
+					  GLfloat x,
+					  GLfloat y,
+					  GLfloat z,
+					  GLfloat w);
 
 typedef void (*GLGenFramebuffersProc) (GLsizei n,
 				       GLuint  *framebuffers);
@@ -1594,6 +1600,13 @@ struct _CompScreen {
     int		   timeLeft;
     Bool	   pendingCommands;
 
+    int lastFunctionId;
+
+    CompFunction *fragmentFunctions;
+    CompProgram  *fragmentPrograms;
+
+    int saturateFunction[2][64];
+
     GLint stencilRef;
 
     Bool clearBuffers;
@@ -1624,11 +1637,12 @@ struct _CompScreen {
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;
 
-    GLGenProgramsProc		  genPrograms;
-    GLDeleteProgramsProc	  deletePrograms;
-    GLBindProgramProc		  bindProgram;
-    GLProgramStringProc		  programString;
-    GLProgramLocalParameter4fProc programLocalParameter4f;
+    GLGenProgramsProc	     genPrograms;
+    GLDeleteProgramsProc     deletePrograms;
+    GLBindProgramProc	     bindProgram;
+    GLProgramStringProc	     programString;
+    GLProgramParameter4fProc programEnvParameter4f;
+    GLProgramParameter4fProc programLocalParameter4f;
 
     GLGenFramebuffersProc        genFramebuffers;
     GLDeleteFramebuffersProc     deleteFramebuffers;
@@ -2511,6 +2525,88 @@ initSession (char *smPrevClientId);
 
 void
 closeSession (void);
+
+
+/* fragment.c */
+
+#define MAX_FRAGMENT_FUNCTIONS 16
+
+struct _FragmentAttrib {
+    int	nTexture;
+    int function[MAX_FRAGMENT_FUNCTIONS];
+    int	nFunction;
+    int	nParam;
+};
+
+CompFunctionData *
+createFunctionData (void);
+
+void
+destroyFunctionData (CompFunctionData *data);
+
+Bool
+addTempHeaderOpToFunctionData (CompFunctionData *data,
+			       char		*name);
+
+Bool
+addParamHeaderOpToFunctionData (CompFunctionData *data,
+				char		 *name);
+
+Bool
+addAttribHeaderOpToFunctionData (CompFunctionData *data,
+				 char		  *name);
+
+#define COMP_FETCH_TARGET_2D   0
+#define COMP_FETCH_TARGET_RECT 1
+#define COMP_FETCH_TARGET_NUM  2
+
+Bool
+addFetchOpToFunctionData (CompFunctionData *data,
+			  char		   *dst,
+			  char		   *offset,
+			  int		   target);
+
+Bool
+addColorOpToFunctionData (CompFunctionData *data,
+			  char		   *dst,
+			  char		   *src);
+
+Bool
+addDataOpToFunctionData (CompFunctionData *data,
+			 char		  *str);
+
+int
+createFragmentFunction (CompScreen	 *s,
+			char		 *name,
+			CompFunctionData *data);
+
+void
+destroyFragmentFunction (CompScreen *s,
+			 int	    id);
+
+int
+getSaturateFragmentFunction (CompScreen  *s,
+			     CompTexture *texture,
+			     int	 param);
+
+int
+allocFragmentTextureUnit (FragmentAttrib *attrib);
+
+int
+allocFragmentParameter (FragmentAttrib *attrib);
+
+void
+addFragmentFunction (FragmentAttrib *attrib,
+		     int	    function);
+
+Bool
+enableFragmentAttrib (CompScreen     *s,
+		      FragmentAttrib *attrib,
+		      Bool	     *blending);
+
+void
+disableFragmentAttrib (CompScreen     *s,
+		       FragmentAttrib *attrib);
 
 #ifdef  __cplusplus
 }

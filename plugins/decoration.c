@@ -354,10 +354,14 @@ decorDrawWindow (CompWindow		 *w,
 	    }
 
 	    if (w->vCount)
+	    {
+		FragmentAttrib fAttrib = { 0 };
+
 		(*w->screen->drawWindowTexture) (w,
 						 &wd->decor->texture->texture,
-						 attrib, mask |
+						 attrib, &fAttrib, mask |
 						 PAINT_WINDOW_TRANSLUCENT_MASK);
+	    }
 	}
     }
 

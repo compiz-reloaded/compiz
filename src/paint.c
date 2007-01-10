@@ -570,10 +570,304 @@ drawWindowGeometry (CompWindow *w)
     }
 }
 
+static Bool
+enableFragmentProgramAndDrawGeometry (CompWindow	      *w,
+				      CompTexture	      *texture,
+				      const WindowPaintAttrib *attrib,
+				      const FragmentAttrib    *fAttrib,
+				      int		      filter,
+				      unsigned int	      mask)
+{
+    FragmentAttrib fa = *fAttrib;
+    CompScreen     *s = w->screen;
+    Bool	   blending;
+
+    if (s->canDoSaturated && attrib->saturation != COLOR)
+    {
+	int param, function;
+
+	param    = allocFragmentParameter (&fa);
+	function = getSaturateFragmentFunction (s, texture, param);
+
+	addFragmentFunction (&fa, function);
+
+	(*s->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB, param,
+				     RED_SATURATION_WEIGHT,
+				     GREEN_SATURATION_WEIGHT,
+				     BLUE_SATURATION_WEIGHT,
+				     attrib->saturation / 65535.0f);
+    }
+
+    if (!enableFragmentAttrib (s, &fa, &blending))
+	return FALSE;
+
+    enableTexture (s, texture, filter);
+
+    if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+    {
+	if (blending)
+	    glEnable (GL_BLEND);
+
+	if (attrib->opacity != OPAQUE || attrib->brightness != BRIGHT)
+	{
+	    GLushort color;
+
+	    color = (attrib->opacity * attrib->brightness) >> 16;
+
+	    screenTexEnvMode (s, GL_MODULATE);
+	    glColor4us (color, color, color, attrib->opacity);
+
+	    (*s->drawWindowGeometry) (w);
+
+	    glColor4usv (defaultColor);
+	    screenTexEnvMode (s, GL_REPLACE);
+	}
+	else
+	{
+	    (*s->drawWindowGeometry) (w);
+	}
+
+	if (blending)
+	    glDisable (GL_BLEND);
+    }
+    else if (attrib->brightness != BRIGHT)
+    {
+	screenTexEnvMode (s, GL_MODULATE);
+	glColor4us (attrib->brightness, attrib->brightness,
+		    attrib->brightness, BRIGHT);
+
+	(*w->screen->drawWindowGeometry) (w);
+
+	glColor4usv (defaultColor);
+	screenTexEnvMode (s, GL_REPLACE);
+    }
+    else
+    {
+	(*w->screen->drawWindowGeometry) (w);
+    }
+
+    disableTexture (w->screen, texture);
+
+    disableFragmentAttrib (s, &fa);
+
+    return TRUE;
+}
+
+static void
+enableFragmentOperationsAndDrawGeometry (CompWindow	         *w,
+					 CompTexture	         *texture,
+					 const WindowPaintAttrib *attrib,
+					 const FragmentAttrib    *fAttrib,
+					 int			 filter,
+					 unsigned int	         mask)
+{
+    CompScreen *s = w->screen;
+
+    if (s->canDoSaturated && attrib->saturation != COLOR)
+    {
+	GLfloat constant[4];
+
+	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	    glEnable (GL_BLEND);
+
+	enableTexture (s, texture, filter);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PRIMARY_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE2_RGB, GL_PRIMARY_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_SRC_ALPHA);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_TEXTURE);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
+
+	glColor4f (1.0f, 1.0f, 1.0f, 0.5f);
+
+	s->activeTexture (GL_TEXTURE1_ARB);
+
+	enableTexture (s, texture, filter);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_DOT3_RGB);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_PREVIOUS);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_CONSTANT);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
+
+	if (s->canDoSlightlySaturated && attrib->saturation > 0)
+	{
+	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
+
+	    constant[0] = 0.5f + 0.5f * RED_SATURATION_WEIGHT;
+	    constant[1] = 0.5f + 0.5f * GREEN_SATURATION_WEIGHT;
+	    constant[2] = 0.5f + 0.5f * BLUE_SATURATION_WEIGHT;
+	    constant[3] = 1.0;
+
+	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
+
+	    s->activeTexture (GL_TEXTURE2_ARB);
+
+	    enableTexture (s, texture, filter);
+
+	    glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+
+	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE0);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PREVIOUS);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE2_RGB, GL_CONSTANT);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_SRC_ALPHA);
+
+	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
+
+	    constant[3] = attrib->saturation / 65535.0f;
+
+	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
+
+	    if (attrib->opacity < OPAQUE || attrib->brightness != BRIGHT)
+	    {
+		s->activeTexture (GL_TEXTURE3_ARB);
+
+		enableTexture (s, texture, filter);
+
+		constant[3] = attrib->opacity / 65535.0f;
+		constant[0] = constant[1] = constant[2] = constant[3] *
+		    attrib->brightness / 65535.0f;
+
+		glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
+
+		glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+
+		glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
+		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_PREVIOUS);
+		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_CONSTANT);
+		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
+		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
+
+		glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_MODULATE);
+		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
+		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_ALPHA, GL_CONSTANT);
+		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
+		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_ALPHA, GL_SRC_ALPHA);
+
+		(*s->drawWindowGeometry) (w);
+
+		disableTexture (s, texture);
+
+		glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+		s->activeTexture (GL_TEXTURE2_ARB);
+	    }
+	    else
+	    {
+		(*s->drawWindowGeometry) (w);
+	    }
+
+	    disableTexture (s, texture);
+
+	    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+	    s->activeTexture (GL_TEXTURE1_ARB);
+	}
+	else
+	{
+	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_MODULATE);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_ALPHA, GL_CONSTANT);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
+	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_ALPHA, GL_SRC_ALPHA);
+
+	    constant[3] = attrib->opacity / 65535.0f;
+	    constant[0] = constant[1] = constant[2] = constant[3] *
+		attrib->brightness / 65535.0f;
+
+	    constant[0] = 0.5f + 0.5f * RED_SATURATION_WEIGHT   * constant[0];
+	    constant[1] = 0.5f + 0.5f * GREEN_SATURATION_WEIGHT * constant[1];
+	    constant[2] = 0.5f + 0.5f * BLUE_SATURATION_WEIGHT  * constant[2];
+
+	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
+
+	    (*s->drawWindowGeometry) (w);
+	}
+
+	disableTexture (s, texture);
+
+	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+	s->activeTexture (GL_TEXTURE0_ARB);
+
+	disableTexture (s, texture);
+
+	glColor4usv (defaultColor);
+	screenTexEnvMode (s, GL_REPLACE);
+
+	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	    glDisable (GL_BLEND);
+    }
+    else
+    {
+	enableTexture (s, texture, filter);
+
+	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	{
+	    glEnable (GL_BLEND);
+	    if (attrib->opacity != OPAQUE || attrib->brightness != BRIGHT)
+	    {
+		GLushort color;
+
+		color = (attrib->opacity * attrib->brightness) >> 16;
+
+		screenTexEnvMode (s, GL_MODULATE);
+		glColor4us (color, color, color, attrib->opacity);
+
+		(*s->drawWindowGeometry) (w);
+
+		glColor4usv (defaultColor);
+		screenTexEnvMode (s, GL_REPLACE);
+	    }
+	    else
+	    {
+		(*s->drawWindowGeometry) (w);
+	    }
+
+	    glDisable (GL_BLEND);
+	}
+	else if (attrib->brightness != BRIGHT)
+	{
+	    screenTexEnvMode (s, GL_MODULATE);
+	    glColor4us (attrib->brightness, attrib->brightness,
+			attrib->brightness, BRIGHT);
+
+	    (*w->screen->drawWindowGeometry) (w);
+
+	    glColor4usv (defaultColor);
+	    screenTexEnvMode (s, GL_REPLACE);
+	}
+	else
+	{
+	    (*w->screen->drawWindowGeometry) (w);
+	}
+
+	disableTexture (w->screen, texture);
+    }
+}
+
 void
 drawWindowTexture (CompWindow		   *w,
 		   CompTexture		   *texture,
 		   const WindowPaintAttrib *attrib,
+		   const FragmentAttrib	   *fAttrib,
 		   unsigned int		   mask)
 {
     int filter;
@@ -599,203 +893,19 @@ drawWindowTexture (CompWindow		   *w,
 	filter = w->screen->filter[NOTHING_TRANS_FILTER];
     }
 
-    if (w->screen->canDoSaturated && attrib->saturation != COLOR)
+    if (!fAttrib->nFunction || !enableFragmentProgramAndDrawGeometry (w,
+								      texture,
+								      attrib,
+								      fAttrib,
+								      filter,
+								      mask))
     {
-	GLfloat constant[4];
-
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
-	    glEnable (GL_BLEND);
-
-	enableTexture (w->screen, texture, filter);
-
-	glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-
-	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
-	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE);
-	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PRIMARY_COLOR);
-	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE2_RGB, GL_PRIMARY_COLOR);
-	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
-	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
-	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_SRC_ALPHA);
-
-	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
-	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_TEXTURE);
-	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
-
-	glColor4f (1.0f, 1.0f, 1.0f, 0.5f);
-
-	w->screen->activeTexture (GL_TEXTURE1_ARB);
-
-	enableTexture (w->screen, texture, filter);
-
-	glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-
-	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_DOT3_RGB);
-	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_PREVIOUS);
-	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_CONSTANT);
-	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
-	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
-
-	if (w->screen->canDoSlightlySaturated && attrib->saturation > 0)
-	{
-	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
-
-	    constant[0] = 0.5f + 0.5f * RED_SATURATION_WEIGHT;
-	    constant[1] = 0.5f + 0.5f * GREEN_SATURATION_WEIGHT;
-	    constant[2] = 0.5f + 0.5f * BLUE_SATURATION_WEIGHT;
-	    constant[3] = 1.0;
-
-	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
-
-	    w->screen->activeTexture (GL_TEXTURE2_ARB);
-
-	    enableTexture (w->screen, texture, filter);
-
-	    glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-
-	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE0);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PREVIOUS);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE2_RGB, GL_CONSTANT);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_SRC_ALPHA);
-
-	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
-
-	    constant[3] = attrib->saturation / 65535.0f;
-
-	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
-
-	    if (attrib->opacity < OPAQUE || attrib->brightness != BRIGHT)
-	    {
-		w->screen->activeTexture (GL_TEXTURE3_ARB);
-
-		enableTexture (w->screen, texture, filter);
-
-		constant[3] = attrib->opacity / 65535.0f;
-		constant[0] = constant[1] = constant[2] = constant[3] *
-		    attrib->brightness / 65535.0f;
-
-		glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
-
-		glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-
-		glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
-		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_PREVIOUS);
-		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_CONSTANT);
-		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
-		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
-
-		glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_MODULATE);
-		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
-		glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_ALPHA, GL_CONSTANT);
-		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
-		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_ALPHA, GL_SRC_ALPHA);
-
-		(*w->screen->drawWindowGeometry) (w);
-
-		disableTexture (w->screen, texture);
-
-		glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-		w->screen->activeTexture (GL_TEXTURE2_ARB);
-	    }
-	    else
-	    {
-		(*w->screen->drawWindowGeometry) (w);
-	    }
-
-	    disableTexture (w->screen, texture);
-
-	    glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-	    w->screen->activeTexture (GL_TEXTURE1_ARB);
-	}
-	else
-	{
-	    glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_MODULATE);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_ALPHA, GL_CONSTANT);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_ALPHA, GL_SRC_ALPHA);
-
-	    constant[3] = attrib->opacity / 65535.0f;
-	    constant[0] = constant[1] = constant[2] = constant[3] *
-		attrib->brightness / 65535.0f;
-
-	    constant[0] = 0.5f + 0.5f * RED_SATURATION_WEIGHT   * constant[0];
-	    constant[1] = 0.5f + 0.5f * GREEN_SATURATION_WEIGHT * constant[1];
-	    constant[2] = 0.5f + 0.5f * BLUE_SATURATION_WEIGHT  * constant[2];
-
-	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
-
-	    (*w->screen->drawWindowGeometry) (w);
-	}
-
-	disableTexture (w->screen, texture);
-
-	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-	w->screen->activeTexture (GL_TEXTURE0_ARB);
-
-	disableTexture (w->screen, texture);
-
-	glColor4usv (defaultColor);
-	screenTexEnvMode (w->screen, GL_REPLACE);
-
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
-	    glDisable (GL_BLEND);
-    }
-    else
-    {
-	enableTexture (w->screen, texture, filter);
-
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
-	{
-	    glEnable (GL_BLEND);
-	    if (attrib->opacity != OPAQUE || attrib->brightness != BRIGHT)
-	    {
-		GLushort color;
-
-		color = (attrib->opacity * attrib->brightness) >> 16;
-
-		screenTexEnvMode (w->screen, GL_MODULATE);
-		glColor4us (color, color, color, attrib->opacity);
-
-		(*w->screen->drawWindowGeometry) (w);
-
-		glColor4usv (defaultColor);
-		screenTexEnvMode (w->screen, GL_REPLACE);
-	    }
-	    else
-	    {
-		(*w->screen->drawWindowGeometry) (w);
-	    }
-
-	    glDisable (GL_BLEND);
-	}
-	else if (attrib->brightness != BRIGHT)
-	{
-	    screenTexEnvMode (w->screen, GL_MODULATE);
-	    glColor4us (attrib->brightness, attrib->brightness,
-			attrib->brightness, BRIGHT);
-
-	    (*w->screen->drawWindowGeometry) (w);
-
-	    glColor4usv (defaultColor);
-	    screenTexEnvMode (w->screen, GL_REPLACE);
-	}
-	else
-	{
-	    (*w->screen->drawWindowGeometry) (w);
-	}
-
-	disableTexture (w->screen, texture);
+	enableFragmentOperationsAndDrawGeometry (w,
+						 texture,
+						 attrib,
+						 fAttrib,
+						 filter,
+						 mask);
     }
 
     glPopMatrix ();
@@ -850,7 +960,11 @@ drawWindow (CompWindow		    *w,
     w->vCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);
     if (w->vCount)
-	(*w->screen->drawWindowTexture) (w, w->texture, attrib, mask);
+    {
+	FragmentAttrib fAttrib = { 0 };
+
+	(*w->screen->drawWindowTexture) (w, w->texture, attrib, &fAttrib, mask);
+    }
 
     return TRUE;
 }

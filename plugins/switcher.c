@@ -1700,9 +1700,13 @@ switchPaintThumb (CompWindow		  *w,
 	w->vCount = 0;
 	addWindowGeometry (w, &matrix, 1, &iconReg, &infiniteRegion);
 	if (w->vCount)
+	{
+	    FragmentAttrib fAttrib = { 0 };
+
 	    (*w->screen->drawWindowTexture) (w,
-					     &icon->texture, &sAttrib,
+					     &icon->texture, &sAttrib, &fAttrib,
 					     mask);
+	}
     }
 
     w->screen->drawWindowGeometry = oldDrawWindowGeometry;

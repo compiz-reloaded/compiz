@@ -1499,6 +1499,13 @@ addScreen (CompDisplay *display,
 
     s->pendingCommands = TRUE;
 
+    s->lastFunctionId = 0;
+
+    s->fragmentFunctions = NULL;
+    s->fragmentPrograms = NULL;
+
+    memset (s->saturateFunction, 0, sizeof (s->saturateFunction));
+
     s->showingDesktopMask = 0;
 
     s->overlayWindowCount = 0;
@@ -1792,13 +1799,16 @@ addScreen (CompDisplay *display,
 	    getProcAddress (s, "glBindProgramARB");
 	s->programString = (GLProgramStringProc)
 	    getProcAddress (s, "glProgramStringARB");
-	s->programLocalParameter4f = (GLProgramLocalParameter4fProc)
+	s->programEnvParameter4f = (GLProgramParameter4fProc)
+	    getProcAddress (s, "glProgramEnvParameter4fARB");
+	s->programLocalParameter4f = (GLProgramParameter4fProc)
 	    getProcAddress (s, "glProgramLocalParameter4fARB");
 
-	if (s->genPrograms    &&
-	    s->deletePrograms &&
-	    s->bindProgram    &&
-	    s->programString  &&
+	if (s->genPrograms	     &&
+	    s->deletePrograms	     &&
+	    s->bindProgram	     &&
+	    s->programString	     &&
+	    s->programEnvParameter4f &&
 	    s->programLocalParameter4f)
 	    s->fragmentProgram = 1;
     }

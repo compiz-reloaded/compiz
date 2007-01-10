@@ -20,4 +20,5 @@ compiz_SOURCES =   \
 	paint.c	   \
 	option.c   \
 	plugin.c   \
-	session.c
+	session.c  \
+	fragment.c
