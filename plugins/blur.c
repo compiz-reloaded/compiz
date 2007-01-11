@@ -551,7 +551,7 @@ blurHandleEvent (CompDisplay *d,
 
     BLUR_DISPLAY (d);
 
-    if (event->type == PropertyNotify && 
+    if (event->type == PropertyNotify &&
 	event->xproperty.atom == d->winActiveAtom)
 	activeWindow = d->activeWindow;
 
