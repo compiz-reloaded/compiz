@@ -47,6 +47,19 @@ static char *winType[] = {
 };
 #define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
 
+static char *filterString[] = {
+    N_("4xBilinear"),
+    N_("12xBilinear")
+};
+static int  nFilterString = sizeof (filterString) / sizeof (filterString[0]);
+
+#define BLUR_FILTER_DEFAULT (filterString[0])
+
+typedef enum {
+    BlurFilter4xBilinear,
+    BlurFilter12xBilinear
+} BlurFilter;
+
 typedef struct _BlurFunction {
     struct _BlurFunction *next;
 
@@ -70,7 +83,8 @@ typedef struct _BlurDisplay {
 #define BLUR_SCREEN_OPTION_BLUR_SPEED  0
 #define BLUR_SCREEN_OPTION_WINDOW_TYPE 1
 #define BLUR_SCREEN_OPTION_FOCUS_BLUR  2
-#define BLUR_SCREEN_OPTION_NUM	       3
+#define BLUR_SCREEN_OPTION_FILTER      3
+#define BLUR_SCREEN_OPTION_NUM	       4
 
 typedef struct _BlurScreen {
     int	windowPrivateIndex;
@@ -84,6 +98,8 @@ typedef struct _BlurScreen {
     int  wMask;
     int	 blurTime;
     Bool moreBlur;
+
+    BlurFilter filter;
 
     BlurFunction *blurFunctions;
 } BlurScreen;
@@ -114,6 +130,35 @@ typedef struct _BlurWindow {
 		     GET_BLUR_DISPLAY (w->screen->display)))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
+
+static BlurFilter
+blurFilterFromString (CompOptionValue *value)
+{
+    if (strcasecmp (value->s, "12xbilinear") == 0)
+	return BlurFilter12xBilinear;
+
+    return BlurFilter4xBilinear;
+}
+
+static void
+blurDestroyFragmentFunctions (CompScreen *s)
+{
+    BlurFunction *function, *next;
+
+    BLUR_SCREEN (s);
+
+    function = bs->blurFunctions;
+    while (function)
+    {
+	destroyFragmentFunction (s, function->handle);
+
+	next = function->next;
+	free (function);
+	function = next;
+    }
+
+    bs->blurFunctions = NULL;
+}
 
 static CompOption *
 blurGetScreenOptions (CompScreen *screen,
@@ -159,6 +204,17 @@ blurSetScreenOption (CompScreen      *screen,
 	{
 	    bs->moreBlur = TRUE;
 	    damageScreen (screen);
+	    return TRUE;
+	}
+	break;
+    case BLUR_SCREEN_OPTION_FILTER:
+	if (compSetStringOption (o, value))
+	{
+	    bs->filter = blurFilterFromString (&o->value);
+	    bs->moreBlur = TRUE;
+	    blurDestroyFragmentFunctions (screen);
+	    damageScreen (screen);
+	    return TRUE;
 	}
     default:
 	break;
@@ -204,6 +260,17 @@ blurScreenInitOptions (BlurScreen *bs)
     o->longDesc	 = N_("Blur windows that doesn't have focus");
     o->type	 = CompOptionTypeBool;
     o->value.b   = BLUR_FOCUS_BLUR_DEFAULT;
+
+    o = &bs->opt[BLUR_SCREEN_OPTION_FILTER];
+    o->name	         = "filter";
+    o->shortDesc         = N_("Blur Filter");
+    o->longDesc	         = N_("Filter method used for blurring");
+    o->type	         = CompOptionTypeString;
+    o->value.s		 = strdup (BLUR_FILTER_DEFAULT);
+    o->rest.s.string     = filterString;
+    o->rest.s.nString    = nFilterString;
+
+    bs->filter = blurFilterFromString (&o->value);
 }
 
 static void
@@ -339,14 +406,69 @@ getBlurFragmentFunction (CompScreen  *s,
 		  param, param);
 
 	ok &= addDataOpToFunctionData (data, str);
-	ok &= addFetchOpToFunctionData (data, "output", "offset0", target);
-	ok &= addDataOpToFunctionData (data, "MUL sum, output, 0.25;");
-	ok &= addFetchOpToFunctionData (data, "output", "-offset0", target);
-	ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.25, sum;");
-	ok &= addFetchOpToFunctionData (data, "output", "offset1", target);
-	ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.25, sum;");
-	ok &= addFetchOpToFunctionData (data, "output", "-offset1", target);
-	ok &= addDataOpToFunctionData (data, "MAD output, output, 0.25, sum;");
+
+	switch (bs->filter) {
+	case BlurFilter4xBilinear:
+	    ok &= addFetchOpToFunctionData (data, "output", "offset0", target);
+	    ok &= addDataOpToFunctionData (data, "MUL sum, output, 0.25;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset0", target);
+	    ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.25, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "offset1", target);
+	    ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.25, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset1", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD output, output, 0.25, sum;");
+	    break;
+	case BlurFilter12xBilinear:
+	    ok &= addFetchOpToFunctionData (data, "output", "offset0", target);
+	    ok &= addDataOpToFunctionData (data, "MUL sum, output, 0.125;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset0", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.125, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "offset1", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.125, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset1", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.125, sum;");
+
+	    snprintf (str, 1024,
+		      "MUL offset0, program.env[%d].xyzw, "
+		      "{ 3.0, 3.0, 0.0, 0.0 };"
+		      "MUL offset1, program.env[%d].zwww, "
+		      "{ 3.0, 3.0, 0.0, 0.0 };",
+		      param, param);
+
+	    ok &= addDataOpToFunctionData (data, str);
+	    ok &= addFetchOpToFunctionData (data, "output", "offset0", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.05, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset0", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.05, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "offset1", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.05, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset1", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD sum, output, 0.05, sum;");
+
+	    snprintf (str, 1024,
+		      "MUL offset0, offset0, { 1.0, 0.0, 0.0, 0.0 };"
+		      "MUL offset1, offset1, { 0.0, 1.0, 0.0, 0.0 };");
+
+	    ok &= addDataOpToFunctionData (data, str);
+	    ok &= addFetchOpToFunctionData (data, "output", "offset0", target);
+	    ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.1, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset0", target);
+	    ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.1, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "offset1", target);
+	    ok &= addDataOpToFunctionData (data, "MAD sum, output, 0.1, sum;");
+	    ok &= addFetchOpToFunctionData (data, "output", "-offset1", target);
+	    ok &= addDataOpToFunctionData (data,
+					   "MAD output, output, 0.1, sum;");
+	    break;
+	}
 
 	if (!ok)
 	{
@@ -626,21 +748,10 @@ static void
 blurFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
-    BlurFunction *function, *next;
-
     BLUR_SCREEN (s);
 
+    blurDestroyFragmentFunctions (s);
     damageScreen (s);
-
-    function = bs->blurFunctions;
-    while (function)
-    {
-	destroyFragmentFunction (s, function->handle);
-
-	next = function->next;
-	free (function);
-	function = next;
-    }
 
     freeWindowPrivateIndex (s, bs->windowPrivateIndex);
 
