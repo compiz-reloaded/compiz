@@ -815,6 +815,10 @@ switchInitiate (CompScreen *s,
 	setWindowProp (s->display, ss->popupWindow,
 		       s->display->winDesktopAtom,
 		       0xffffffff);
+
+	setWindowProp (s->display, ss->popupWindow,
+		       s->display->winTypeAtom,
+		       s->display->winTypeUtilAtom);
     }
 
     if (!ss->grabIndex)
