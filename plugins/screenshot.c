@@ -36,9 +36,10 @@
 
 static int displayPrivateIndex;
 
-#define SHOT_DISPLAY_OPTION_INITIATE 0
-#define SHOT_DISPLAY_OPTION_DIR      1
-#define SHOT_DISPLAY_OPTION_NUM	     2
+#define SHOT_DISPLAY_OPTION_INITIATE   0
+#define SHOT_DISPLAY_OPTION_DIR        1
+#define SHOT_DISPLAY_OPTION_LAUNCH_APP 2
+#define SHOT_DISPLAY_OPTION_NUM        3
 
 typedef struct _ShotDisplay {
     int		    screenPrivateIndex;
@@ -251,6 +252,7 @@ shotPaintScreen (CompScreen		 *s,
 		    if (n >= 0)
 		    {
 			char name[256];
+			char *app;
 			int  number = 0;
 
 			if (n > 0)
@@ -265,11 +267,29 @@ shotPaintScreen (CompScreen		 *s,
 
 			sprintf (name, "screenshot%d.png", number);
 
+			app = sd->opt[SHOT_DISPLAY_OPTION_LAUNCH_APP].value.s;
+
 			if (!writeImageToFile (s->display, dir, name, "png",
 					       w, h, buffer))
 			{
 			    fprintf (stderr, "%s: failed to write "
 				     "screenshot image", programName);
+			}
+			else if (*app != '\0')
+			{
+			    char *command;
+
+			    command = malloc (strlen (app) +
+					      strlen (dir) +
+					      strlen (name) + 3);
+			    if (command)
+			    {
+				sprintf (command, "%s %s/%s", app, dir, name);
+
+				runCommand (s, command);
+
+				free (command);
+			    }
 			}
 		    }
 		    else
@@ -380,6 +400,15 @@ shotDisplayInitOptions (ShotDisplay *sd)
     o->value.s	      = strdup (SHOT_DIR_DEFAULT);
     o->rest.s.string  = 0;
     o->rest.s.nString = 0;
+
+    o = &sd->opt[SHOT_DISPLAY_OPTION_LAUNCH_APP];
+    o->name           = "launch_app";
+    o->shortDesc      = N_("Launch Application");
+    o->longDesc       = N_("Automatically open screenshot in this application");
+    o->type           = CompOptionTypeString;
+    o->value.s        = strdup ("");
+    o->rest.s.string  = NULL;
+    o->rest.s.nString = 0;
 }
 
 static CompOption *
@@ -412,6 +441,10 @@ shotSetDisplayOption (CompDisplay    *display,
 	    return TRUE;
 	break;
     case SHOT_DISPLAY_OPTION_DIR:
+	if (compSetStringOption (o, value))
+	    return TRUE;
+	break;
+    case SHOT_DISPLAY_OPTION_LAUNCH_APP:
 	if (compSetStringOption (o, value))
 	    return TRUE;
     default:
