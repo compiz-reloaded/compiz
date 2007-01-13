@@ -49,6 +49,65 @@ static char		 *smClientId;
 static void iceInit (void);
 
 static void
+setStringListProperty (SmcConn	  connection,
+		       const char *name,
+		       const char **values,
+		       int	  nValues)
+{
+    SmProp prop, *pProp;
+    int	   i;
+
+    prop.name = (char *) name;
+    prop.type = SmLISTofARRAY8;
+
+    prop.vals = malloc (nValues * sizeof (SmPropValue));
+    if (!prop.vals)
+	return;
+
+    for (i = 0; i < nValues; i++)
+    {
+	prop.vals[i].value = (char *) values[i];
+	prop.vals[i].length = strlen (values[i]);
+    }
+
+    prop.num_vals = nValues;
+
+    pProp = &prop;
+
+    SmcSetProperties (connection, 1, &pProp);
+
+    free (prop.vals);
+}
+
+static void
+setCloneRestartCommands (SmcConn connection)
+{
+    setStringListProperty (connection, SmCloneCommand,
+			   (const char **) programArgv, programArgc);
+    setStringListProperty (connection, SmRestartCommand,
+			   (const char **) programArgv, programArgc);
+}
+
+static void
+setRestartStyle (SmcConn connection)
+{
+    SmProp	prop, *pProp;
+    SmPropValue propVal;
+    char        hint = SmRestartImmediately;
+
+    prop.name = SmRestartStyleHint;
+    prop.type = SmCARD8;
+    prop.num_vals = 1;
+    prop.vals = &propVal;
+    propVal.value = &hint;
+    propVal.length = 1;
+
+    pProp = &prop;
+
+    SmcSetProperties (connection, 1, &pProp);
+}
+
+static void
 saveYourselfGotProps (SmcConn   connection,
 		      SmPointer client_data,
 		      int       num_props,
@@ -56,12 +115,16 @@ saveYourselfGotProps (SmcConn   connection,
 {
     int p, i;
 
-    for (p = 0; p < num_props; p++) {
-	if (!strcmp (props[p]->name, SmRestartCommand)) {
-	    for (i = 0; i < props[p]->num_vals - 1; i++) {
+    for (p = 0; p < num_props; p++)
+    {
+	if (!strcmp (props[p]->name, SmRestartCommand))
+	{
+	    for (i = 0; i < props[p]->num_vals - 1; i++)
+	    {
 		if (!strncmp (props[p]->vals[i].value,
 			      "--sm-client-id",
-			      props[p]->vals[i].length)) {
+			      props[p]->vals[i].length))
+		{
 		    SmPropValue oldVal = props[p]->vals[i + 1];
 
 		    props[p]->vals[i + 1].value = smClientId;
@@ -69,12 +132,15 @@ saveYourselfGotProps (SmcConn   connection,
 		    SmcSetProperties (connection, 1, &props[p]);
 		    props[p]->vals[i + 1] = oldVal;
 
-		    SmcSaveYourselfDone (connection, 1);
-		    return;
+		    goto out;
 		}
 	    }
 	}
     }
+
+out:
+    setRestartStyle (connection);
+    setCloneRestartCommands (connection);
 
     SmcSaveYourselfDone (connection, 1);
 }
