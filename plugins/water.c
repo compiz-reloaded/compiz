@@ -1056,8 +1056,8 @@ waterDrawWindowTexture (CompWindow		*w,
 
 	WATER_DISPLAY (w->screen->display);
 
-	param = allocFragmentParameter (&fa);
-	unit  = allocFragmentTextureUnit (&fa);
+	param = allocFragmentParameters (&fa, 1);
+	unit  = allocFragmentTextureUnits (&fa, 1);
 
 	function = getBumpMapFragmentFunction (w->screen, texture, unit, param);
 	if (function)

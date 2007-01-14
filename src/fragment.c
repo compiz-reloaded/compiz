@@ -50,6 +50,7 @@ typedef enum {
     CompOpTypeData,
     CompOpTypeDataStore,
     CompOpTypeDataOffset,
+    CompOpTypeDataBlend,
     CompOpTypeHeaderTemp,
     CompOpTypeHeaderParam,
     CompOpTypeHeaderAttrib,
@@ -349,6 +350,9 @@ forEachDataOpInFunction (CompFunction	    **list,
 	    }
 	    *color = TRUE;
 	    break;
+	case CompOpTypeDataBlend:
+	    *blend = TRUE;
+	    /* fall-through */
 	case CompOpTypeData:
 	    (*callBack) (&f->data[type].body[i].data, index, closure);
 	    break;
@@ -725,6 +729,7 @@ finiFunctionData (CompFunctionData *data)
 	case CompOpTypeHeaderAttrib:
 	    break;
 	case CompOpTypeData:
+	case CompOpTypeDataBlend:
 	case CompOpTypeDataStore:
 	case CompOpTypeDataOffset:
 	    free (data->body[i].data.data);
@@ -882,6 +887,7 @@ copyFunctionData (CompFunctionData	 *dst,
 	case CompOpTypeHeaderAttrib:
 	    break;
 	case CompOpTypeData:
+	case CompOpTypeDataBlend:
 	case CompOpTypeDataStore:
 	case CompOpTypeDataOffset:
 	    dst->body[i].data.data = copyData (dst->header,
@@ -1031,6 +1037,21 @@ addDataOpToFunctionData (CompFunctionData *data,
 	return FALSE;
 
     data->body[index].type	= CompOpTypeData;
+    data->body[index].data.data = strdup (str);
+
+    return TRUE;
+}
+
+Bool
+addBlendOpToFunctionData (CompFunctionData *data,
+			  char		   *str)
+{
+    int index = data->nBody;
+
+    if (!allocBodyOpInFunctionData (data))
+	return FALSE;
+
+    data->body[index].type	= CompOpTypeDataBlend;
     data->body[index].data.data = strdup (str);
 
     return TRUE;
@@ -1224,16 +1245,26 @@ getSaturateFragmentFunction (CompScreen  *s,
 }
 
 int
-allocFragmentTextureUnit (FragmentAttrib *attrib)
+allocFragmentTextureUnits (FragmentAttrib *attrib,
+			   int		  nTexture)
 {
+    int first = attrib->nTexture;
+
+    attrib->nTexture += nTexture;
+
     /* 0 is reserved for source texture */
-    return 1 + attrib->nTexture++;
+    return 1 + first;
 }
 
 int
-allocFragmentParameter (FragmentAttrib *attrib)
+allocFragmentParameters (FragmentAttrib *attrib,
+			 int		nParam)
 {
-    return attrib->nParam++;
+    int first = attrib->nParam;
+
+    attrib->nParam += nParam;
+
+    return first;
 }
 
 void

@@ -586,7 +586,7 @@ enableFragmentProgramAndDrawGeometry (CompWindow	      *w,
     {
 	int param, function;
 
-	param    = allocFragmentParameter (&fa);
+	param    = allocFragmentParameters (&fa, 1);
 	function = getSaturateFragmentFunction (s, texture, param);
 
 	addFragmentFunction (&fa, function);

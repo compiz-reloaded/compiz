@@ -2575,6 +2575,10 @@ Bool
 addDataOpToFunctionData (CompFunctionData *data,
 			 char		  *str);
 
+Bool
+addBlendOpToFunctionData (CompFunctionData *data,
+			  char		   *str);
+
 int
 createFragmentFunction (CompScreen	 *s,
 			char		 *name,
@@ -2590,10 +2594,12 @@ getSaturateFragmentFunction (CompScreen  *s,
 			     int	 param);
 
 int
-allocFragmentTextureUnit (FragmentAttrib *attrib);
+allocFragmentTextureUnits (FragmentAttrib *attrib,
+			   int		  nTexture);
 
 int
-allocFragmentParameter (FragmentAttrib *attrib);
+allocFragmentParameters (FragmentAttrib *attrib,
+			 int		nParam);
 
 void
 addFragmentFunction (FragmentAttrib *attrib,
