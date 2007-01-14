@@ -22210,6 +22210,18 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/screenshot/allscreens/options/launch_app</key>
+            <applyto>/apps/compiz/plugins/screenshot/allscreens/options/launch_app</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Launch Application</short>
+                <long>Automatically open screenshot in this application</long>
+            </locale>
+        </schema>
+
         <!-- plane options -->
 
         <schema>
@@ -24246,6 +24258,30 @@
             <locale name="C">
                 <short>Focus Blur</short>
                 <long>Blur windows that doesn't have focus</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/blur/screen0/options/alpha_blur</key>
+            <applyto>/apps/compiz/plugins/blur/screen0/options/alpha_blur</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Alpha Blur</short>
+                <long>Blur behind translucent parts of windows</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/blur/screen0/options/filter</key>
+            <applyto>/apps/compiz/plugins/blur/screen0/options/filter</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>4xBilinear</default>
+            <locale name="C">
+                <short>Blur Filter</short>
+                <long>Filter method used for blurring (4xBilinear)</long>
             </locale>
         </schema>
 
