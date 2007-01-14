@@ -489,6 +489,20 @@ moveHandleEvent (CompDisplay *d,
     MOVE_DISPLAY (d);
 
     switch (event->type) {
+    case ButtonPress:
+	s = findScreenAtDisplay (d, event->xbutton.root);
+	if (s)
+	{
+	    MOVE_SCREEN (s);
+
+	    if (ms->grabIndex)
+	    {
+		moveTerminate (d,
+			       &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action,
+			       0, NULL, 0);
+	    }
+	}
+	break;
     case KeyPress:
     case KeyRelease:
 	s = findScreenAtDisplay (d, event->xkey.root);
