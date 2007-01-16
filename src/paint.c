@@ -872,18 +872,11 @@ drawWindowTexture (CompWindow		   *w,
 {
     int filter;
 
-    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-    {
-	filter = w->screen->filter[WINDOW_TRANS_FILTER];
-    }
-    else if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
-    {
+    if (mask & (PAINT_WINDOW_TRANSFORMED_MASK |
+		PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK))
 	filter = w->screen->filter[SCREEN_TRANS_FILTER];
-    }
     else
-    {
 	filter = w->screen->filter[NOTHING_TRANS_FILTER];
-    }
 
     if (!fAttrib->nFunction || !enableFragmentProgramAndDrawGeometry (w,
 								      texture,
