@@ -28,6 +28,8 @@
 
 #include <compiz.h>
 
+#include <GL/glu.h>
+
 #define BLUR_SPEED_DEFAULT    3.5f
 #define BLUR_SPEED_MIN        0.1f
 #define BLUR_SPEED_MAX       10.0f
@@ -108,6 +110,7 @@ typedef struct _BlurScreen {
     BlurFunction *dstBlurFunctions;
 
     Region region;
+    Region tmpRegion;
 
     GLuint dst;
     GLenum target;
@@ -588,22 +591,53 @@ getDstBlurFragmentFunction (CompScreen  *s,
     return 0;
 }
 
+static Bool
+projectVertices (const float *object,
+		 float	     *screen,
+		 int	     n)
+{
+    GLdouble model[16];
+    GLdouble proj[16];
+    GLint    viewport[4];
+    double   x, y, z;
+
+    /* we need to get rid of these as fetching GL like this is expensive.
+       viewport is not too hard to figure out. the core should keep track
+       of modelview and projection matrices. */
+    glGetDoublev (GL_MODELVIEW_MATRIX, model);
+    glGetDoublev (GL_PROJECTION_MATRIX, proj);
+    glGetIntegerv (GL_VIEWPORT, viewport);
+
+    while (n--)
+    {
+	if (!gluProject (object[0], object[1], 0.0,
+			 model, proj, viewport,
+			 &x, &y, &z))
+	    return FALSE;
+
+	screen[0] = x;
+	screen[1] = y;
+
+	object += 2;
+	screen += 2;
+    }
+
+    return TRUE;
+}
+
 /*
   TODO:
 
-   1. This function should just update the minimum required destination
-   region for reasonable destination blurring performance. Some GL to
-   screen space coordinate transformations needs to be done to get
-   that right.
-
-   2. We should check for cases where one solid window covers the
+   1. We should check for cases where one solid window covers the
    complete destination region and in those cases use that window texture
    as destionation instead. This should give us another major performance
    improvement.
 */
 static void
-blurBindDstTexture (CompScreen *s)
+blurBindDstTexture (CompWindow *w)
 {
+    CompScreen *s = w->screen;
+
     BLUR_SCREEN (s);
 
     if (!bs->dst || bs->width != s->width || bs->height != s->height)
@@ -653,9 +687,89 @@ blurBindDstTexture (CompScreen *s)
     }
     else
     {
-	BoxPtr pBox = bs->region->rects;
-	int    nBox = bs->region->numRects;
-	int    y;
+	BoxPtr pBox;
+	int    nBox;
+	REGION region;
+	int    y, i, stride = (1 + w->texUnits) * 2;
+	float  *v, *vertices = w->vertices + (stride - 2);
+	float  screen[8];
+	float  extents[8];
+	float  minX, maxX, minY, maxY;
+
+	minX = s->width;
+	maxX = 0;
+	minY = s->height;
+	maxY = 0;
+
+	/* Computing vertex extents in object space. This should instead be
+	   done by addWindowGeometry. It more efficiently there and the
+	   result can be shared by all plugins. */
+	for (i = 0; i < w->vCount; i++)
+	{
+	    v = vertices + stride * i;
+
+	    if (v[0] < minX)
+		minX = v[0];
+
+	    if (v[0] > maxX)
+		maxX = v[0];
+
+	    if (v[1] < minY)
+		minY = v[1];
+
+	    if (v[1] > maxY)
+		maxY = v[1];
+	}
+
+	extents[0] = extents[6] = minX;
+	extents[2] = extents[4] = maxX;
+	extents[1] = extents[3] = minY;
+	extents[5] = extents[7] = maxY;
+
+	/* Project extents and calculate a bounding box in screen space. It
+	   might make sense to move this into the core so that the result
+	   can be reused by other plugins. */
+	if (projectVertices (extents, screen, 4))
+	{
+	    minX = s->width;
+	    maxX = 0;
+	    minY = s->height;
+	    maxY = 0;
+
+	    for (i = 0; i < 8; i += 2)
+	    {
+		if (screen[i] < minX)
+		    minX = screen[i];
+
+		if (screen[i] > maxX)
+		    maxX = screen[i];
+
+		if (screen[i + 1] < minY)
+		    minY = screen[i + 1];
+
+		if (screen[i + 1] > maxY)
+		    maxY = screen[i + 1];
+	    }
+
+	    /* 1.0f is the filter radius */
+	    region.extents.x1 = minX - 1.0f;
+	    region.extents.y1 = (s->height - maxY - 1.0f);
+	    region.extents.x2 = maxX + 1.0f + 0.5f;
+	    region.extents.y2 = (s->height - minY + 1.0f + 0.5f);
+
+	    region.rects    = &region.extents;
+	    region.numRects = 1;
+
+	    XIntersectRegion (&region, bs->region, bs->tmpRegion);
+
+	    pBox = bs->tmpRegion->rects;
+	    nBox = bs->tmpRegion->numRects;
+	}
+	else
+	{
+	    pBox = bs->region->rects;
+	    nBox = bs->region->numRects;
+	}
 
 	glBindTexture (bs->target, bs->dst);
 
@@ -744,7 +858,7 @@ blurDrawWindowTexture (CompWindow	       *w,
 		addFragmentFunction (&fa, function);
 
 		(*w->screen->activeTexture) (GL_TEXTURE0_ARB + unit);
-		blurBindDstTexture (w->screen);
+		blurBindDstTexture (w);
 		(*w->screen->activeTexture) (GL_TEXTURE0_ARB);
 
 		dx = bs->tx / 2.1f;
@@ -979,12 +1093,24 @@ blurInitScreen (CompPlugin *p,
 
     bs->region = XCreateRegion ();
     if (!bs->region)
+    {
+	free (bs);
 	return FALSE;
+    }
+
+    bs->tmpRegion = XCreateRegion ();
+    if (!bs->tmpRegion)
+    {
+	XDestroyRegion (bs->region);
+	free (bs);
+	return FALSE;
+    }
 
     bs->windowPrivateIndex = allocateWindowPrivateIndex (s);
     if (bs->windowPrivateIndex < 0)
     {
 	XDestroyRegion (bs->region);
+	XDestroyRegion (bs->tmpRegion);
 	free (bs);
 	return FALSE;
     }
@@ -1020,6 +1146,7 @@ blurFiniScreen (CompPlugin *p,
     damageScreen (s);
 
     XDestroyRegion (bs->region);
+    XDestroyRegion (bs->tmpRegion);
 
     freeWindowPrivateIndex (s, bs->windowPrivateIndex);
 

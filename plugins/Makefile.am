@@ -65,7 +65,7 @@ libpng_la_LIBADD = @COMPIZ_LIBS@
 libpng_la_SOURCES = png.c
 
 libblur_la_LDFLAGS = -module -avoid-version -no-undefined
-libblur_la_LIBADD = @COMPIZ_LIBS@
+libblur_la_LIBADD = @COMPIZ_LIBS@ -lGLU
 libblur_la_SOURCES = blur.c
 
 if USE_LIBRSVG
