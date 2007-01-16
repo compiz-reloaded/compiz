@@ -321,6 +321,10 @@ decorDrawWindow (CompWindow		 *w,
 
     DECOR_SCREEN (w->screen);
 
+    UNWRAP (ds, w->screen, drawWindow);
+    status = (*w->screen->drawWindow) (w, attrib, region, mask);
+    WRAP (ds, w->screen, drawWindow, decorDrawWindow);
+
     if (!(mask & PAINT_WINDOW_SOLID_MASK))
     {
 	DECOR_WINDOW (w);
@@ -370,10 +374,6 @@ decorDrawWindow (CompWindow		 *w,
 	    }
 	}
     }
-
-    UNWRAP (ds, w->screen, drawWindow);
-    status = (*w->screen->drawWindow) (w, attrib, region, mask);
-    WRAP (ds, w->screen, drawWindow, decorDrawWindow);
 
     return status;
 }
