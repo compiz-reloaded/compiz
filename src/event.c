@@ -1879,6 +1879,8 @@ handleEvent (CompDisplay *d,
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
 
+		w->initialTimestampSet = FALSE;
+
 		applyStartupProperties (w->screen, w);
 
 		w->pendingMaps++;
@@ -1888,7 +1890,21 @@ handleEvent (CompDisplay *d,
 		updateWindowAttributes (w, FALSE);
 
 		if (focusWindowOnMap (w))
+		{
 		    moveInputFocusToWindow (w);
+		}
+		else if (w->type & ~CompWindowTypeSplashMask)
+		{
+		    CompWindow *p;
+
+		    for (p = w->prev; p; p = p->prev)
+			if (p->id == d->activeWindow)
+			    break;
+
+		    /* window is above active window so we should lower it */
+		    if (p)
+			restackWindowBelow (w, p);
+		}
 	    }
 
 	    setWindowProp (d, w->id, d->winDesktopAtom, w->desktop);

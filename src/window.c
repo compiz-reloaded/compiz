@@ -1661,6 +1661,9 @@ addWindow (CompScreen *screen,
     w->initialViewportX = screen->x;
     w->initialViewportY = screen->y;
 
+    w->initialTimestamp	   = 0;
+    w->initialTimestampSet = FALSE;
+
     w->pendingUnmaps = 0;
     w->pendingMaps   = 0;
 
@@ -4153,26 +4156,75 @@ setWindowUserTime (CompWindow *w,
 		     (unsigned char *) &value, 1);
 }
 
+/*
+ * Macros from metacity
+ *
+ * Xserver time can wraparound, thus comparing two timestamps needs to
+ * take this into account.  Here's a little macro to help out.  If no
+ * wraparound has occurred, this is equivalent to
+ *   time1 < time2
+ * Of course, the rest of the ugliness of this macro comes from
+ * accounting for the fact that wraparound can occur and the fact that
+ * a timestamp of 0 must be special-cased since it means older than
+ * anything else.
+ *
+ * Note that this is NOT an equivalent for time1 <= time2; if that's
+ * what you need then you'll need to swap the order of the arguments
+ * and negate the result.
+ */
+#define XSERVER_TIME_IS_BEFORE_ASSUMING_REAL_TIMESTAMPS(time1, time2) \
+    ( (( (time1) < (time2) ) &&					      \
+       ( (time2) - (time1) < ((unsigned long) -1) / 2 )) ||	      \
+      (( (time1) > (time2) ) &&					      \
+       ( (time1) - (time2) > ((unsigned long) -1) / 2 ))	      \
+	)
+#define XSERVER_TIME_IS_BEFORE(time1, time2)				 \
+    ( (time1) == 0 ||							 \
+      (XSERVER_TIME_IS_BEFORE_ASSUMING_REAL_TIMESTAMPS (time1, time2) && \
+       (time2) != 0)							 \
+	)
+
 Bool
 focusWindowOnMap (CompWindow *w)
 {
-    Time userTime;
+    CompDisplay *d = w->screen->display;
+    CompWindow  *active;
+    Time	wUserTime, aUserTime;
 
+    /* do not focus windows of these types */
     if (w->type & (CompWindowTypeDesktopMask |
-		   CompWindowTypeDockMask))
+		   CompWindowTypeDockMask    |
+		   CompWindowTypeSplashMask))
 	return FALSE;
 
-    if (w->initialViewportX != w->screen->x)
+    /* window doesn't take focus */
+    if (!w->inputHint && !(w->protocols & CompWindowProtocolTakeFocusMask))
 	return FALSE;
 
-    if (w->initialViewportY != w->screen->y)
+    /* not in current viewport */
+    if (w->initialViewportX != w->screen->x ||
+	w->initialViewportY != w->screen->y)
 	return FALSE;
 
-    if (!w->inputHint &&
-	!(w->protocols & CompWindowProtocolTakeFocusMask))
+    if (!getWindowUserTime (w, &wUserTime))
+    {
+	/* no user time or initial timestamp */
+	if (!w->initialTimestampSet)
+	    return TRUE;
+
+	wUserTime = w->initialTimestamp;
+    }
+
+    /* window explicitly requested no focus */
+    if (!wUserTime)
 	return FALSE;
 
-    if (getWindowUserTime (w, &userTime) && userTime == 0)
+    /* can't get user time for active window */
+    active = findWindowAtDisplay (d, d->activeWindow);
+    if (!active || !getWindowUserTime (active, &aUserTime))
+	return TRUE;
+
+    if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
 	return FALSE;
 
     return TRUE;

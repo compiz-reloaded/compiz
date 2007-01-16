@@ -1989,6 +1989,9 @@ struct _CompWindow {
     unsigned int initialViewportX;
     unsigned int initialViewportY;
 
+    Time initialTimestamp;
+    Bool initialTimestampSet;
+
     Bool placed;
     Bool minimized;
     Bool inShowDesktopMode;

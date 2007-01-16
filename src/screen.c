@@ -3314,7 +3314,11 @@ applyStartupProperties (CompScreen *screen,
 	window->initialViewportX = s->viewportX;
 	window->initialViewportY = s->viewportY;
 
-	window->desktop = sn_startup_sequence_get_workspace (s->sequence);
+	window->desktop	= sn_startup_sequence_get_workspace (s->sequence);
+
+	window->initialTimestamp    =
+	    sn_startup_sequence_get_timestamp (s->sequence);
+	window->initialTimestampSet = TRUE;
     }
 }
 
