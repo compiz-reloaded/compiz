@@ -649,10 +649,16 @@ scalePaintWindow (CompWindow		  *w,
 		{
 		    FragmentAttrib fAttrib = { 0 };
 
+		    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+			pushWindowTransform (w, &sAttrib);
+
 		    (*w->screen->drawWindowTexture) (w,
 						     &icon->texture, &sAttrib,
 						     &fAttrib,
 						     mask);
+
+		    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+			glPopMatrix ();
 		}
 	    }
 	}

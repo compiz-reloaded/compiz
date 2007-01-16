@@ -357,10 +357,16 @@ decorDrawWindow (CompWindow		 *w,
 	    {
 		FragmentAttrib fAttrib = { 0 };
 
+		if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+		    pushWindowTransform (w, attrib);
+
 		(*w->screen->drawWindowTexture) (w,
 						 &wd->decor->texture->texture,
 						 attrib, &fAttrib, mask |
 						 PAINT_WINDOW_TRANSLUCENT_MASK);
+
+		if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+		    glPopMatrix ();
 	    }
 	}
     }

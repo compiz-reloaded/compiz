@@ -872,16 +872,8 @@ drawWindowTexture (CompWindow		   *w,
 {
     int filter;
 
-    glPushMatrix ();
-
     if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
     {
-	glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
-	glScalef (attrib->xScale, attrib->yScale, 0.0f);
-	glTranslatef (attrib->xTranslate / attrib->xScale - w->attrib.x,
-		      attrib->yTranslate / attrib->yScale - w->attrib.y,
-		      0.0f);
-
 	filter = w->screen->filter[WINDOW_TRANS_FILTER];
     }
     else if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
@@ -907,8 +899,6 @@ drawWindowTexture (CompWindow		   *w,
 						 filter,
 						 mask);
     }
-
-    glPopMatrix ();
 }
 
 Bool
@@ -963,7 +953,13 @@ drawWindow (CompWindow		    *w,
     {
 	FragmentAttrib fAttrib = { 0 };
 
+	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	    pushWindowTransform (w, attrib);
+
 	(*w->screen->drawWindowTexture) (w, w->texture, attrib, &fAttrib, mask);
+
+	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	    glPopMatrix ();
     }
 
     return TRUE;
@@ -1100,4 +1096,16 @@ paintBackground (CompScreen   *s,
     }
 
     free (data);
+}
+
+void
+pushWindowTransform (CompWindow	      *w,
+		     const WindowPaintAttrib *attrib)
+{
+    glPushMatrix ();
+    glTranslatef (w->attrib.x, w->attrib.y, 0.0f);
+    glScalef (attrib->xScale, attrib->yScale, 0.0f);
+    glTranslatef (attrib->xTranslate / attrib->xScale - w->attrib.x,
+		  attrib->yTranslate / attrib->yScale - w->attrib.y,
+		  0.0f);
 }

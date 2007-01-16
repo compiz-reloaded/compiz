@@ -1176,6 +1176,9 @@ paintBackground (CompScreen   *screen,
 		 Region	      region,
 		 unsigned int mask);
 
+void
+pushWindowTransform (CompWindow	      *w,
+		     const WindowPaintAttrib *attrib);
 
 /* texture.c */
 
