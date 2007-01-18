@@ -966,7 +966,8 @@ updateFrameWindow (CompWindow *w)
 			     (unsigned char *) &w->frame, 1);
 	}
 
-	XResizeWindow (w->screen->display->display, w->frame, width, height);
+	XMoveResizeWindow (w->screen->display->display, w->frame,
+			   x, y, width, height);
 
 	rects[i].x	= 0;
 	rects[i].y	= 0;
