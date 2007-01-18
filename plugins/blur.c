@@ -71,6 +71,16 @@ typedef struct _BlurFunction {
     int unit;
 } BlurFunction;
 
+#define BLUR_STATE_CLIENT 0
+#define BLUR_STATE_DECOR  1
+#define BLUR_STATE_NUM    2
+
+typedef struct _BlurState {
+    BlurFilter filter;
+    int        threshold;
+    Region     region;
+} BlurState;
+
 static int displayPrivateIndex;
 
 #define BLUR_DISPLAY_OPTION_PULSE 0
@@ -123,6 +133,10 @@ typedef struct _BlurScreen {
 typedef struct _BlurWindow {
     int  blur;
     Bool pulse;
+
+    BlurState state[BLUR_STATE_NUM];
+
+    Region region;
 } BlurWindow;
 
 #define GET_BLUR_DISPLAY(d)				     \
@@ -1163,6 +1177,7 @@ blurInitWindow (CompPlugin *p,
 		CompWindow *w)
 {
     BlurWindow *bw;
+    int	       i;
 
     BLUR_SCREEN (w->screen);
 
@@ -1173,6 +1188,15 @@ blurInitWindow (CompPlugin *p,
     bw->blur  = 0;
     bw->pulse = FALSE;
 
+    for (i = 0; i < BLUR_STATE_NUM; i++)
+    {
+	bw->state[i].filter    = BlurFilter4xBilinear;
+	bw->state[i].threshold = 0;
+	bw->state[i].region    = NULL;
+    }
+
+    bw->region = NULL;
+
     w->privates[bs->windowPrivateIndex].ptr = bw;
 
     return TRUE;
@@ -1182,7 +1206,16 @@ static void
 blurFiniWindow (CompPlugin *p,
 		CompWindow *w)
 {
+    int i;
+
     BLUR_WINDOW (w);
+
+    for (i = 0; i < BLUR_STATE_NUM; i++)
+	if (bw->state[i].region)
+	    XDestroyRegion (bw->state[i].region);
+
+    if (bw->region)
+	XDestroyRegion (bw->region);
 
     free (bw);
 }
