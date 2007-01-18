@@ -380,7 +380,7 @@ if test "x$use_kde" = "xyes"; then
   if test "x$use_kde" = xyes; then
     kdedir=`kde-config --prefix --expandvars 2>/dev/null`
     kdelibs=`kde-config --install lib --expandvars 2>/dev/null`
-    kdeincs=$kdedir/include
+    kdeincs=`kde-config --install include --expandvars 2>/dev/null`
     if test -d $kdelibs; then
       PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
 			dbus-1 xdamage xcomposite,
