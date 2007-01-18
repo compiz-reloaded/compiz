@@ -226,6 +226,10 @@ main (int argc, char **argv)
 	    if (i + 1 < argc)
 		backgroundImage = argv[++i];
 	}
+	else if (*argv[i] == '-')
+	{
+	    fprintf (stderr, "%s: Unknown option '%s'\n", programName, argv[i]);
+	}
 	else
 	{
 	    if (nPlugin < 256)
