@@ -2113,14 +2113,8 @@ mapWindow (CompWindow *w)
 
     if (w->protocols & CompWindowProtocolSyncRequestMask)
     {
-	/* XXX: override_redirect windows and _NET_WM_SYNC_REQUEST
-	   protocol is causing issues. Avoid sending sync requests to
-	   override_redirect windows until this is solved. */
-	if (!w->attrib.override_redirect)
-	{
-	    sendSyncRequest (w);
-	    sendConfigureNotify (w);
-	}
+	sendSyncRequest (w);
+	sendConfigureNotify (w);
     }
 
     if (!w->attrib.override_redirect)
