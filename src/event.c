@@ -91,6 +91,8 @@ handleSyncAlarm (CompWindow *w)
 	    w->syncWaitHandle = 0;
 	}
 
+	w->syncWait = FALSE;
+
 	if (resizeWindow (w,
 			  w->syncX, w->syncY,
 			  w->syncWidth, w->syncHeight,
@@ -111,7 +113,12 @@ handleSyncAlarm (CompWindow *w)
 	    }
 
 	    w->nDamage = 0;
-	    w->syncWait = FALSE;
+	}
+	else
+	{
+	    /* resizeWindow failing means that there is another pending
+	       resize and we must send a new sync request to the client */
+	    sendSyncRequest (w);
 	}
     }
 }
