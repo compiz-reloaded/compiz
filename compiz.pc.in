@@ -8,5 +8,5 @@ Description: OpenGL compositing manager
 Version: @VERSION@
 
 Requires: @COMPIZ_REQUIRES@
-Libs: @COMPIZ_LIBS@ @GL_LIBS@
+Libs:
 Cflags: @COMPIZ_CFLAGS@ @GL_CFLAGS@ -I${includedir}/compiz
