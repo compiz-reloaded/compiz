@@ -571,14 +571,13 @@ drawWindowGeometry (CompWindow *w)
 }
 
 static Bool
-enableFragmentProgramAndDrawGeometry (CompWindow	      *w,
-				      CompTexture	      *texture,
-				      const WindowPaintAttrib *attrib,
-				      const FragmentAttrib    *fAttrib,
-				      int		      filter,
-				      unsigned int	      mask)
+enableFragmentProgramAndDrawGeometry (CompWindow	   *w,
+				      CompTexture	   *texture,
+				      const FragmentAttrib *attrib,
+				      int		   filter,
+				      unsigned int	   mask)
 {
-    FragmentAttrib fa = *fAttrib;
+    FragmentAttrib fa = *attrib;
     CompScreen     *s = w->screen;
     Bool	   blending;
 
@@ -654,12 +653,11 @@ enableFragmentProgramAndDrawGeometry (CompWindow	      *w,
 }
 
 static void
-enableFragmentOperationsAndDrawGeometry (CompWindow	         *w,
-					 CompTexture	         *texture,
-					 const WindowPaintAttrib *attrib,
-					 const FragmentAttrib    *fAttrib,
-					 int			 filter,
-					 unsigned int	         mask)
+enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
+					 CompTexture	      *texture,
+					 const FragmentAttrib *attrib,
+					 int		      filter,
+					 unsigned int	      mask)
 {
     CompScreen *s = w->screen;
 
@@ -864,11 +862,10 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	         *w,
 }
 
 void
-drawWindowTexture (CompWindow		   *w,
-		   CompTexture		   *texture,
-		   const WindowPaintAttrib *attrib,
-		   const FragmentAttrib	   *fAttrib,
-		   unsigned int		   mask)
+drawWindowTexture (CompWindow		*w,
+		   CompTexture		*texture,
+		   const FragmentAttrib	*attrib,
+		   unsigned int		mask)
 {
     int filter;
 
@@ -878,27 +875,25 @@ drawWindowTexture (CompWindow		   *w,
     else
 	filter = w->screen->filter[NOTHING_TRANS_FILTER];
 
-    if (!fAttrib->nFunction || !enableFragmentProgramAndDrawGeometry (w,
-								      texture,
-								      attrib,
-								      fAttrib,
-								      filter,
-								      mask))
+    if (!attrib->nFunction || !enableFragmentProgramAndDrawGeometry (w,
+								     texture,
+								     attrib,
+								     filter,
+								     mask))
     {
 	enableFragmentOperationsAndDrawGeometry (w,
 						 texture,
 						 attrib,
-						 fAttrib,
 						 filter,
 						 mask);
     }
 }
 
 Bool
-drawWindow (CompWindow		    *w,
-	    const WindowPaintAttrib *attrib,
-	    Region		    region,
-	    unsigned int	    mask)
+drawWindow (CompWindow		 *w,
+	    const FragmentAttrib *fragment,
+	    Region		 region,
+	    unsigned int	 mask)
 {
     if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
 	region = &infiniteRegion;
@@ -914,12 +909,12 @@ drawWindow (CompWindow		    *w,
 	if (w->alpha)
 	    return FALSE;
 
-	if (attrib->opacity != OPAQUE)
+	if (fragment->opacity != OPAQUE)
 	    return FALSE;
     }
     else if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
     {
-	if (!w->alpha && attrib->opacity == OPAQUE)
+	if (!w->alpha && fragment->opacity == OPAQUE)
 	    return FALSE;
     }
     else
@@ -927,7 +922,7 @@ drawWindow (CompWindow		    *w,
 	if (w->attrib.map_state != IsViewable)
 	    return TRUE;
 
-	if (w->alpha || attrib->opacity != OPAQUE)
+	if (w->alpha || fragment->opacity != OPAQUE)
 	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 	else
 	    mask |= PAINT_WINDOW_SOLID_MASK;
@@ -943,17 +938,7 @@ drawWindow (CompWindow		    *w,
     w->vCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);
     if (w->vCount)
-    {
-	FragmentAttrib fAttrib = { 0 };
-
-	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-	    pushWindowTransform (w, attrib);
-
-	(*w->screen->drawWindowTexture) (w, w->texture, attrib, &fAttrib, mask);
-
-	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-	    glPopMatrix ();
-    }
+	(*w->screen->drawWindowTexture) (w, w->texture, fragment, mask);
 
     return TRUE;
 }
@@ -964,6 +949,9 @@ paintWindow (CompWindow		     *w,
 	     Region		     region,
 	     unsigned int	     mask)
 {
+    FragmentAttrib fragment;
+    Bool	   status;
+
     w->lastPaint = *attrib;
 
     if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
@@ -974,7 +962,17 @@ paintWindow (CompWindow		     *w,
 	return TRUE;
     }
 
-    return (*w->screen->drawWindow) (w, attrib, region, mask);
+    initFragmentAttrib (&fragment, attrib);
+
+    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	pushWindowTransform (w, attrib);
+
+    status = (*w->screen->drawWindow) (w, &fragment, region, mask);
+
+    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	glPopMatrix ();
+
+    return status;
 }
 
 void

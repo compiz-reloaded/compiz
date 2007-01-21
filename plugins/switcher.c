@@ -1592,7 +1592,8 @@ switchPaintThumb (CompWindow		  *w,
 
     if (w->mapNum)
     {
-	int ww, wh;
+	FragmentAttrib fragment;
+	int	       ww, wh;
 
 	SWITCH_SCREEN (w->screen);
 
@@ -1626,7 +1627,13 @@ switchPaintThumb (CompWindow		  *w,
 	sAttrib.xTranslate = wx - w->attrib.x + w->input.left * sAttrib.xScale;
 	sAttrib.yTranslate = wy - w->attrib.y + w->input.top  * sAttrib.yScale;
 
-	(w->screen->drawWindow) (w, &sAttrib, &infiniteRegion, mask);
+	initFragmentAttrib (&fragment, &sAttrib);
+
+	pushWindowTransform (w, &sAttrib);
+
+	(w->screen->drawWindow) (w, &fragment, &infiniteRegion, mask);
+
+	glPopMatrix ();
 
 	if (ss->opt[SWITCH_SCREEN_OPTION_ICON].value.b)
 	{
@@ -1705,17 +1712,17 @@ switchPaintThumb (CompWindow		  *w,
 	addWindowGeometry (w, &matrix, 1, &iconReg, &infiniteRegion);
 	if (w->vCount)
 	{
-	    FragmentAttrib fAttrib = { 0 };
+	    FragmentAttrib fragment;
 
-	    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-		pushWindowTransform (w, &sAttrib);
+	    initFragmentAttrib (&fragment, &sAttrib);
+
+	    pushWindowTransform (w, &sAttrib);
 
 	    (*w->screen->drawWindowTexture) (w,
-					     &icon->texture, &sAttrib, &fAttrib,
+					     &icon->texture, &fragment,
 					     mask);
 
-	    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-		glPopMatrix ();
+	    glPopMatrix ();
 	}
     }
 

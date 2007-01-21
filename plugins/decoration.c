@@ -312,10 +312,10 @@ decorDisplayInitOptions (DecorDisplay *dd)
 }
 
 static Bool
-decorDrawWindow (CompWindow		 *w,
-		 const WindowPaintAttrib *attrib,
-		 Region			 region,
-		 unsigned int		 mask)
+decorDrawWindow (CompWindow	      *w,
+		 const FragmentAttrib *attrib,
+		 Region		      region,
+		 unsigned int	      mask)
 {
     Bool status;
 
@@ -358,20 +358,10 @@ decorDrawWindow (CompWindow		 *w,
 	    }
 
 	    if (w->vCount)
-	    {
-		FragmentAttrib fAttrib = { 0 };
-
-		if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-		    pushWindowTransform (w, attrib);
-
 		(*w->screen->drawWindowTexture) (w,
 						 &wd->decor->texture->texture,
-						 attrib, &fAttrib, mask |
+						 attrib, mask |
 						 PAINT_WINDOW_TRANSLUCENT_MASK);
-
-		if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-		    glPopMatrix ();
-	    }
 	}
     }
 

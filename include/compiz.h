@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20061227
+#define ABIVERSION 20070121
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1073,10 +1073,10 @@ typedef Bool (*PaintWindowProc) (CompWindow		 *window,
 				 Region			 region,
 				 unsigned int		 mask);
 
-typedef Bool (*DrawWindowProc) (CompWindow		*window,
-				const WindowPaintAttrib *attrib,
-				Region			region,
-				unsigned int		mask);
+typedef Bool (*DrawWindowProc) (CompWindow	     *window,
+				const FragmentAttrib *fragment,
+				Region		     region,
+				unsigned int	     mask);
 
 typedef void (*AddWindowGeometryProc) (CompWindow *window,
 				       CompMatrix *matrix,
@@ -1084,11 +1084,10 @@ typedef void (*AddWindowGeometryProc) (CompWindow *window,
 				       Region	  region,
 				       Region	  clip);
 
-typedef void (*DrawWindowTextureProc) (CompWindow	       *w,
-				       CompTexture	       *texture,
-				       const WindowPaintAttrib *attrib,
-				       const FragmentAttrib    *fragment,
-				       unsigned int	       mask);
+typedef void (*DrawWindowTextureProc) (CompWindow	    *w,
+				       CompTexture	    *texture,
+				       const FragmentAttrib *fragment,
+				       unsigned int	    mask);
 
 typedef void (*DrawWindowGeometryProc) (CompWindow *window);
 
@@ -1153,17 +1152,16 @@ void
 drawWindowGeometry (CompWindow *w);
 
 void
-drawWindowTexture (CompWindow		   *w,
-		   CompTexture		   *texture,
-		   const WindowPaintAttrib *attrib,
-		   const FragmentAttrib	   *fragment,
-		   unsigned int		   mask);
+drawWindowTexture (CompWindow		*w,
+		   CompTexture		*texture,
+		   const FragmentAttrib	*fragment,
+		   unsigned int		mask);
 
 Bool
-drawWindow (CompWindow		    *w,
-	    const WindowPaintAttrib *attrib,
-	    Region		    region,
-	    unsigned int	    mask);
+drawWindow (CompWindow		 *w,
+	    const FragmentAttrib *fragment,
+	    Region		 region,
+	    unsigned int	 mask);
 
 Bool
 paintWindow (CompWindow		     *w,
@@ -2538,10 +2536,13 @@ closeSession (void);
 #define MAX_FRAGMENT_FUNCTIONS 16
 
 struct _FragmentAttrib {
-    int	nTexture;
-    int function[MAX_FRAGMENT_FUNCTIONS];
-    int	nFunction;
-    int	nParam;
+    GLushort opacity;
+    GLushort brightness;
+    GLushort saturation;
+    int	     nTexture;
+    int	     function[MAX_FRAGMENT_FUNCTIONS];
+    int	     nFunction;
+    int	     nParam;
 };
 
 CompFunctionData *
@@ -2610,6 +2611,10 @@ allocFragmentParameters (FragmentAttrib *attrib,
 void
 addFragmentFunction (FragmentAttrib *attrib,
 		     int	    function);
+
+void
+initFragmentAttrib (FragmentAttrib	    *attrib,
+		    const WindowPaintAttrib *paint);
 
 Bool
 enableFragmentAttrib (CompScreen     *s,

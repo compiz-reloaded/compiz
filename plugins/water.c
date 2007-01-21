@@ -1039,17 +1039,16 @@ waterReset (CompScreen *s)
 }
 
 static void
-waterDrawWindowTexture (CompWindow		*w,
-			CompTexture		*texture,
-			const WindowPaintAttrib *attrib,
-			const FragmentAttrib	*fAttrib,
-			unsigned int		mask)
+waterDrawWindowTexture (CompWindow	     *w,
+			CompTexture	     *texture,
+			const FragmentAttrib *attrib,
+			unsigned int	     mask)
 {
     WATER_SCREEN (w->screen);
 
     if (ws->count)
     {
-	FragmentAttrib fa = *fAttrib;
+	FragmentAttrib fa = *attrib;
 	Bool	       lighting = w->screen->lighting;
 	int	       param, function, unit;
 	GLfloat	       plane[4];
@@ -1100,7 +1099,7 @@ waterDrawWindowTexture (CompWindow		*w,
 	mask |= PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK;
 
 	UNWRAP (ws, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, attrib, &fa, mask);
+	(*w->screen->drawWindowTexture) (w, texture, &fa, mask);
 	WRAP (ws, w->screen, drawWindowTexture, waterDrawWindowTexture);
 
 	if (function)
@@ -1117,7 +1116,7 @@ waterDrawWindowTexture (CompWindow		*w,
     else
     {
 	UNWRAP (ws, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, attrib, fAttrib, mask);
+	(*w->screen->drawWindowTexture) (w, texture, attrib, mask);
 	WRAP (ws, w->screen, drawWindowTexture, waterDrawWindowTexture);
     }
 }

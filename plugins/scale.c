@@ -520,15 +520,22 @@ scalePaintWindow (CompWindow		  *w,
 
 	if (scaled)
 	{
-	    WindowPaintAttrib sa = w->lastPaint;
+	    WindowPaintAttrib sa;
+	    FragmentAttrib    fragment;
 
 	    sa.xScale     = sw->scale;
 	    sa.yScale     = sw->scale;
 	    sa.xTranslate = sw->tx;
 	    sa.yTranslate = sw->ty;
 
-	    (*s->drawWindow) (w, &sa, region,
+	    initFragmentAttrib (&fragment, &w->lastPaint);
+
+	    pushWindowTransform (w, &sa);
+
+	    (*s->drawWindow) (w, &fragment, region,
 			      mask | PAINT_WINDOW_TRANSFORMED_MASK);
+
+	    glPopMatrix ();
 	}
 
 	if ((ss->iconOverlay != ScaleIconNone) && scaled)
@@ -647,14 +654,15 @@ scalePaintWindow (CompWindow		  *w,
 
 		if (w->vCount)
 		{
-		    FragmentAttrib fAttrib = { 0 };
+		    FragmentAttrib fragment;
+
+		    initFragmentAttrib (&fragment, &sAttrib);
 
 		    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
 			pushWindowTransform (w, &sAttrib);
 
 		    (*w->screen->drawWindowTexture) (w,
-						     &icon->texture, &sAttrib,
-						     &fAttrib,
+						     &icon->texture, &fragment,
 						     mask);
 
 		    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)

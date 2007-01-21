@@ -622,23 +622,27 @@ minPaintWindow (CompWindow		*w,
 
     if (mw->adjust)
     {
-	WindowPaintAttrib mAttrib;
+	WindowPaintAttrib ma;
+	FragmentAttrib	  fragment;
 
 	UNWRAP (ms, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, region,
 				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);
 	WRAP (ms, s, paintWindow, minPaintWindow);
 
-	mAttrib = w->lastPaint;
+	ma.xScale     = mw->xScale;
+	ma.yScale     = mw->yScale;
+	ma.xTranslate = mw->tx;
+	ma.yTranslate = mw->ty;
 
-	mAttrib.xScale = mw->xScale;
-	mAttrib.yScale = mw->yScale;
+	initFragmentAttrib (&fragment, &w->lastPaint);
 
-	mAttrib.xTranslate = mw->tx;
-	mAttrib.yTranslate = mw->ty;
+	pushWindowTransform (w, &ma);
 
-	(*s->drawWindow) (w, &mAttrib, region,
+	(*s->drawWindow) (w, &fragment, region,
 			  mask | PAINT_WINDOW_TRANSFORMED_MASK);
+
+	glPopMatrix ();
     }
     else
     {

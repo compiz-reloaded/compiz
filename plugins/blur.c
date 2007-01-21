@@ -108,6 +108,7 @@ typedef struct _BlurScreen {
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc    donePaintScreen;
     PaintScreenProc	   paintScreen;
+    DrawWindowProc	   drawWindow;
     DrawWindowTextureProc  drawWindowTexture;
 
     int  wMask;
@@ -137,6 +138,7 @@ typedef struct _BlurWindow {
     BlurState state[BLUR_STATE_NUM];
 
     Region region;
+    Bool   alphaBlur;
 } BlurWindow;
 
 #define GET_BLUR_DISPLAY(d)				     \
@@ -648,7 +650,7 @@ projectVertices (const float *object,
    improvement.
 */
 static void
-blurBindDstTexture (CompWindow *w)
+blurUpdateDstTexture (CompWindow *w)
 {
     CompScreen *s = w->screen;
 
@@ -698,6 +700,8 @@ blurBindDstTexture (CompWindow *w)
 	glTexParameteri (bs->target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	glCopyTexSubImage2D (bs->target, 0, 0, 0, 0, 0, bs->width, bs->height);
+
+	glBindTexture (bs->target, 0);
     }
     else
     {
@@ -799,6 +803,8 @@ blurBindDstTexture (CompWindow *w)
 
 	    pBox++;
 	}
+
+	glBindTexture (bs->target, 0);
     }
 }
 
@@ -835,27 +841,65 @@ blurPaintScreen (CompScreen		 *s,
     return status;
 }
 
-static void
-blurDrawWindowTexture (CompWindow	       *w,
-		       CompTexture	       *texture,
-		       const WindowPaintAttrib *attrib,
-		       const FragmentAttrib    *fAttrib,
-		       unsigned int	       mask)
+static Bool
+blurDrawWindow (CompWindow	     *w,
+		const FragmentAttrib *attrib,
+		Region		     region,
+		unsigned int	     mask)
 {
-    Bool alphaBlur = FALSE;
+    Bool status;
 
     BLUR_SCREEN (w->screen);
     BLUR_WINDOW (w);
 
     if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
     {
-	if (w->alpha && texture == w->texture)
-	    alphaBlur = TRUE;
+	if (w->alpha)
+	{
+	    Region reg;
+
+	    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+		reg = &infiniteRegion;
+	    else
+		reg = region;
+
+	    w->vCount = 0;
+	    (*w->screen->addWindowGeometry) (w, NULL, 0, w->region, reg);
+	    if (w->vCount)
+	    {
+		blurUpdateDstTexture (w);
+
+		bw->alphaBlur = TRUE;
+	    }
+	}
     }
+
+    UNWRAP (bs, w->screen, drawWindow);
+    status = (*w->screen->drawWindow) (w, attrib, region, mask);
+    WRAP (bs, w->screen, drawWindow, blurDrawWindow);
+
+    bw->alphaBlur = FALSE;
+
+    return status;
+}
+
+static void
+blurDrawWindowTexture (CompWindow	    *w,
+		       CompTexture	    *texture,
+		       const FragmentAttrib *attrib,
+		       unsigned int	    mask)
+{
+    Bool alphaBlur = FALSE;
+
+    BLUR_SCREEN (w->screen);
+    BLUR_WINDOW (w);
+
+    if (bw->alphaBlur && texture == w->texture)
+	alphaBlur = TRUE;
 
     if (bw->blur || alphaBlur)
     {
-	FragmentAttrib fa = *fAttrib;
+	FragmentAttrib fa = *attrib;
 	int	       param, function;
 	int	       unit = 0;
 	GLfloat	       dx, dy;
@@ -872,7 +916,7 @@ blurDrawWindowTexture (CompWindow	       *w,
 		addFragmentFunction (&fa, function);
 
 		(*w->screen->activeTexture) (GL_TEXTURE0_ARB + unit);
-		blurBindDstTexture (w);
+		glBindTexture (bs->target, bs->dst);
 		(*w->screen->activeTexture) (GL_TEXTURE0_ARB);
 
 		dx = bs->tx / 2.1f;
@@ -908,7 +952,7 @@ blurDrawWindowTexture (CompWindow	       *w,
 	}
 
 	UNWRAP (bs, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, attrib, &fa, mask);
+	(*w->screen->drawWindowTexture) (w, texture, &fa, mask);
 	WRAP (bs, w->screen, drawWindowTexture, blurDrawWindowTexture);
 
 	if (unit)
@@ -921,7 +965,7 @@ blurDrawWindowTexture (CompWindow	       *w,
     else
     {
 	UNWRAP (bs, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, attrib, fAttrib, mask);
+	(*w->screen->drawWindowTexture) (w, texture, attrib, mask);
 	WRAP (bs, w->screen, drawWindowTexture, blurDrawWindowTexture);
     }
 }
@@ -1141,6 +1185,7 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
     WRAP (bs, s, paintScreen, blurPaintScreen);
+    WRAP (bs, s, drawWindow, blurDrawWindow);
     WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
 
     s->privates[bd->screenPrivateIndex].ptr = bs;
@@ -1167,6 +1212,7 @@ blurFiniScreen (CompPlugin *p,
     UNWRAP (bs, s, preparePaintScreen);
     UNWRAP (bs, s, donePaintScreen);
     UNWRAP (bs, s, paintScreen);
+    UNWRAP (bs, s, drawWindow);
     UNWRAP (bs, s, drawWindowTexture);
 
     free (bs);
@@ -1196,6 +1242,8 @@ blurInitWindow (CompPlugin *p,
     }
 
     bw->region = NULL;
+
+    bw->alphaBlur = FALSE;
 
     w->privates[bs->windowPrivateIndex].ptr = bw;
 

@@ -1275,6 +1275,20 @@ addFragmentFunction (FragmentAttrib *attrib,
 	attrib->function[attrib->nFunction++] = function;
 }
 
+void
+initFragmentAttrib (FragmentAttrib	    *attrib,
+		    const WindowPaintAttrib *paint)
+{
+    attrib->opacity    = paint->opacity;
+    attrib->brightness = paint->brightness;
+    attrib->saturation = paint->saturation;
+    attrib->nTexture   = 0;
+    attrib->nFunction  = 0;
+    attrib->nParam     = 0;
+
+    memset (attrib->function, 0, sizeof (attrib->function));
+}
+
 Bool
 enableFragmentAttrib (CompScreen     *s,
 		      FragmentAttrib *attrib,
