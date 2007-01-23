@@ -49,8 +49,9 @@ libclone_la_SOURCES = clone.c
 libpng_la_LDFLAGS = -module -avoid-version -no-undefined
 libpng_la_SOURCES = png.c
 
+libblur_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libblur_la_LDFLAGS = -module -avoid-version -no-undefined
-libblur_la_LIBADD = -lGLU
+libblur_la_LIBADD = $(top_builddir)/libdecoration/libdecoration.la -lGLU
 libblur_la_SOURCES = blur.c
 
 if USE_LIBRSVG

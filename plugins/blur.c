@@ -27,7 +27,9 @@
 #include <string.h>
 
 #include <compiz.h>
+#include <decoration.h>
 
+#include <X11/Xatom.h>
 #include <GL/glu.h>
 
 #define BLUR_SPEED_DEFAULT    3.5f
@@ -37,7 +39,7 @@
 
 #define BLUR_FOCUS_BLUR_DEFAULT FALSE
 
-#define BLUR_ALPHA_BLUR_DEFAULT FALSE
+#define BLUR_ALPHA_BLUR_DEFAULT TRUE
 
 #define BLUR_PULSE_DEFAULT FALSE
 
@@ -71,14 +73,22 @@ typedef struct _BlurFunction {
     int unit;
 } BlurFunction;
 
+typedef struct _BlurBox {
+    decor_point_t p1;
+    decor_point_t p2;
+} BlurBox;
+
 #define BLUR_STATE_CLIENT 0
 #define BLUR_STATE_DECOR  1
 #define BLUR_STATE_NUM    2
 
 typedef struct _BlurState {
-    BlurFilter filter;
     int        threshold;
-    Region     region;
+    BlurFilter filter;
+    BlurBox    *box;
+    int	       nBox;
+    Bool       active;
+    Bool       clipped;
 } BlurState;
 
 static int displayPrivateIndex;
@@ -91,6 +101,8 @@ typedef struct _BlurDisplay {
     HandleEventProc handleEvent;
 
     CompOption opt[BLUR_DISPLAY_OPTION_NUM];
+
+    Atom blurAtom[BLUR_STATE_NUM];
 } BlurDisplay;
 
 #define BLUR_SCREEN_OPTION_BLUR_SPEED  0
@@ -111,6 +123,8 @@ typedef struct _BlurScreen {
     DrawWindowProc	   drawWindow;
     DrawWindowTextureProc  drawWindowTexture;
 
+    WindowMoveNotifyProc windowMoveNotify;
+
     int  wMask;
     int	 blurTime;
     Bool moreBlur;
@@ -122,6 +136,10 @@ typedef struct _BlurScreen {
 
     Region region;
     Region tmpRegion;
+
+    BoxRec stencilBox;
+
+    int output;
 
     GLuint dst;
     GLenum target;
@@ -138,7 +156,6 @@ typedef struct _BlurWindow {
     BlurState state[BLUR_STATE_NUM];
 
     Region region;
-    Bool   alphaBlur;
 } BlurWindow;
 
 #define GET_BLUR_DISPLAY(d)				     \
@@ -314,6 +331,226 @@ blurScreenInitOptions (BlurScreen *bs)
     o->rest.s.nString    = nFilterString;
 
     bs->filter = blurFilterFromString (&o->value);
+}
+
+static Region
+regionFromBoxes (BlurBox *box,
+		 int	 nBox,
+		 int	 width,
+		 int	 height)
+{
+    Region region;
+    REGION r;
+    int    x, y;
+
+    region = XCreateRegion ();
+    if (!region)
+	return NULL;
+
+    r.rects = &r.extents;
+    r.numRects = r.size = 1;
+
+    while (nBox--)
+    {
+	decor_apply_gravity (box->p1.gravity, box->p1.x, box->p1.y,
+			     width, height,
+			     &x, &y);
+
+	r.extents.x1 = x;
+	r.extents.y1 = y;
+
+	decor_apply_gravity (box->p2.gravity, box->p2.x, box->p2.y,
+			     width, height,
+			     &x, &y);
+
+	r.extents.x2 = x;
+	r.extents.y2 = y;
+
+	if (r.extents.x2 > r.extents.x1 && r.extents.y2 > r.extents.y1)
+	    XUnionRegion (region, &r, region);
+
+	box++;
+    }
+
+    return region;
+}
+
+static void
+blurWindowUpdateRegion (CompWindow *w)
+{
+    Region region, q;
+
+    BLUR_WINDOW (w);
+
+    region = XCreateRegion ();
+    if (!region)
+	return;
+
+    if (bw->state[BLUR_STATE_DECOR].threshold)
+    {
+	REGION r;
+
+	r.rects = &r.extents;
+	r.numRects = r.size = 1;
+
+	r.extents.x1 = -w->output.left;
+	r.extents.y1 = -w->output.top;
+	r.extents.x2 = w->width + w->output.right;
+	r.extents.y2 = w->height + w->output.bottom;
+
+	XUnionRegion (&r, region, region);
+
+	r.extents.x1 = 0;
+	r.extents.y1 = 0;
+	r.extents.x2 = w->width;
+	r.extents.y2 = w->height;
+
+	XSubtractRegion (region, &r, region);
+
+	bw->state[BLUR_STATE_DECOR].clipped = FALSE;
+
+	if (bw->state[BLUR_STATE_DECOR].nBox)
+	{
+	    q = regionFromBoxes (bw->state[BLUR_STATE_DECOR].box,
+				 bw->state[BLUR_STATE_DECOR].nBox,
+				 w->width, w->height);
+	    if (q)
+	    {
+		XIntersectRegion (q, region, q);
+		if (!XEqualRegion (q, region))
+		{
+		    XSubtractRegion (q, &emptyRegion, region);
+		    bw->state[BLUR_STATE_DECOR].clipped = TRUE;
+		}
+
+		XDestroyRegion (q);
+	    }
+	}
+
+	XOffsetRegion (region, w->attrib.x, w->attrib.y);
+    }
+
+    if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
+    {
+	bw->state[BLUR_STATE_CLIENT].clipped = FALSE;
+
+	if (bw->state[BLUR_STATE_CLIENT].nBox)
+	{
+	    q = regionFromBoxes (bw->state[BLUR_STATE_CLIENT].box,
+				 bw->state[BLUR_STATE_CLIENT].nBox,
+				 w->width, w->height);
+	    if (q)
+	    {
+		XOffsetRegion (q, w->attrib.x, w->attrib.y);
+		XIntersectRegion (q, w->region, q);
+		if (!XEqualRegion (q, w->region))
+		    bw->state[BLUR_STATE_CLIENT].clipped = TRUE;
+
+		XUnionRegion (q, region, region);
+	    }
+	}
+	else
+	{
+	    XUnionRegion (w->region, region, region);
+	}
+    }
+
+    if (bw->region)
+	XDestroyRegion (bw->region);
+
+    if (XEmptyRegion (region))
+    {
+	bw->region = NULL;
+	XDestroyRegion (region);
+    }
+    else
+    {
+	bw->region = region;
+    }
+}
+
+static void
+blurSetWindowBlur (CompWindow *w,
+		   int	      state,
+		   int	      threshold,
+		   BlurFilter filter,
+		   BlurBox    *box,
+		   int	      nBox)
+{
+    BLUR_WINDOW (w);
+
+    if (bw->state[state].box)
+	free (bw->state[state].box);
+
+    bw->state[state].threshold = threshold;
+    bw->state[state].filter    = filter;
+    bw->state[state].box       = box;
+    bw->state[state].nBox      = nBox;
+
+    blurWindowUpdateRegion (w);
+
+    addWindowDamage (w);
+}
+
+static void
+blurWindowUpdate (CompWindow *w,
+		  int	 state)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *propData;
+    int		  threshold = 0;
+    BlurBox	  *box = NULL;
+    int		  nBox = 0;
+
+    BLUR_DISPLAY (w->screen->display);
+
+    result = XGetWindowProperty (w->screen->display->display, w->id,
+				 bd->blurAtom[state], 0L, 8192L, FALSE,
+				 XA_INTEGER, &actual, &format,
+				 &n, &left, &propData);
+
+    if (result == Success && n && propData)
+    {
+	if (n >= 2)
+	{
+	    long *data = (long *) propData;
+
+	    threshold = data[0];
+
+	    nBox = (n - 2) / 6;
+	    if (nBox)
+	    {
+		box = malloc (sizeof (BlurBox) * nBox);
+		if (box)
+		{
+		    int i;
+
+		    data += 2;
+
+		    for (i = 0; i < nBox; i++)
+		    {
+			box[i].p1.gravity = *data++;
+			box[i].p1.x       = *data++;
+			box[i].p1.y       = *data++;
+			box[i].p2.gravity = *data++;
+			box[i].p2.x       = *data++;
+			box[i].p2.y       = *data++;
+		    }
+		}
+	    }
+	}
+
+	XFree (propData);
+    }
+
+    blurSetWindowBlur (w,
+		       state,
+		       threshold,
+		       BlurFilter4xBilinear,
+		       box,
+		       nBox);
 }
 
 static void
@@ -537,15 +774,12 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	ok &= addFetchOpToFunctionData (data, "output", NULL, target);
 	ok &= addColorOpToFunctionData (data, "output", "output");
 
-	/* 0.95 is the threshold. it should probably be exposed as an option */
 	snprintf (str, 1024,
-		  "SUB output.a, 1.0, output.a;"
-		  "SLT mask, output.a, 0.95;"
-		  "MUL mask, mask, { 1.0, 1.0, 0.0, 0.0 };"
+		  "MUL_SAT mask, output.a, program.env[%d];"
 		  "MUL offset0, program.env[%d].xyzw, mask;"
 		  "MUL offset1, program.env[%d].zwww, mask;"
 		  "MUL coord, fragment.position, program.env[%d];",
-		  param, param, param + 1);
+		  param, param + 1, param + 1, param + 2);
 
 	ok &= addDataOpToFunctionData (data, str);
 
@@ -575,7 +809,10 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    break;
 	}
 
-	snprintf (str, 1024, "MAD output.rgb, sum, output.a, output;");
+	snprintf (str, 1024,
+		  "SUB output.a, 1.0, output.a;"
+		  "MAD output.rgb, sum, output.a, output;"
+		  "MOV output.a, 1.0;");
 
 	ok &= addBlendOpToFunctionData (data, str);
 
@@ -649,12 +886,90 @@ projectVertices (const float *object,
    as destionation instead. This should give us another major performance
    improvement.
 */
-static void
-blurUpdateDstTexture (CompWindow *w)
+static Bool
+blurUpdateDstTexture (CompWindow *w,
+		      BoxPtr	 pExtents)
 {
     CompScreen *s = w->screen;
+    BoxPtr     pBox;
+    int	       nBox;
+    REGION     region;
+    int        y, i, stride = (1 + w->texUnits) * 2;
+    float      *v, *vertices = w->vertices + (stride - 2);
+    float      screen[8];
+    float      extents[8];
+    float      minX, maxX, minY, maxY;
 
     BLUR_SCREEN (s);
+
+    minX = s->width;
+    maxX = 0;
+    minY = s->height;
+    maxY = 0;
+
+    for (i = 0; i < w->vCount; i++)
+    {
+	v = vertices + stride * i;
+
+	if (v[0] < minX)
+	    minX = v[0];
+
+	if (v[0] > maxX)
+	    maxX = v[0];
+
+	if (v[1] < minY)
+	    minY = v[1];
+
+	if (v[1] > maxY)
+	    maxY = v[1];
+    }
+
+    extents[0] = extents[6] = minX;
+    extents[2] = extents[4] = maxX;
+    extents[1] = extents[3] = minY;
+    extents[5] = extents[7] = maxY;
+
+    /* Project extents and calculate a bounding box in screen space. It
+       might make sense to move this into the core so that the result
+       can be reused by other plugins. */
+    if (!projectVertices (extents, screen, 4))
+	return FALSE;
+
+    minX = s->width;
+    maxX = 0;
+    minY = s->height;
+    maxY = 0;
+
+    for (i = 0; i < 8; i += 2)
+    {
+	if (screen[i] < minX)
+	    minX = screen[i];
+
+	if (screen[i] > maxX)
+	    maxX = screen[i];
+
+	if (screen[i + 1] < minY)
+	    minY = screen[i + 1];
+
+	if (screen[i + 1] > maxY)
+	    maxY = screen[i + 1];
+    }
+
+    /* 1.0f is the filter radius */
+    region.extents.x1 = minX - 1.0f;
+    region.extents.y1 = (s->height - maxY - 1.0f);
+    region.extents.x2 = maxX + 1.0f + 0.5f;
+    region.extents.y2 = (s->height - minY + 1.0f + 0.5f);
+
+    region.rects    = &region.extents;
+    region.numRects = 1;
+
+    XIntersectRegion (&region, bs->region, bs->tmpRegion);
+
+    pBox = bs->tmpRegion->rects;
+    nBox = bs->tmpRegion->numRects;
+
+    *pExtents = bs->tmpRegion->extents;
 
     if (!bs->dst || bs->width != s->width || bs->height != s->height)
     {
@@ -705,90 +1020,6 @@ blurUpdateDstTexture (CompWindow *w)
     }
     else
     {
-	BoxPtr pBox;
-	int    nBox;
-	REGION region;
-	int    y, i, stride = (1 + w->texUnits) * 2;
-	float  *v, *vertices = w->vertices + (stride - 2);
-	float  screen[8];
-	float  extents[8];
-	float  minX, maxX, minY, maxY;
-
-	minX = s->width;
-	maxX = 0;
-	minY = s->height;
-	maxY = 0;
-
-	/* Computing vertex extents in object space. This should instead be
-	   done by addWindowGeometry. It more efficiently there and the
-	   result can be shared by all plugins. */
-	for (i = 0; i < w->vCount; i++)
-	{
-	    v = vertices + stride * i;
-
-	    if (v[0] < minX)
-		minX = v[0];
-
-	    if (v[0] > maxX)
-		maxX = v[0];
-
-	    if (v[1] < minY)
-		minY = v[1];
-
-	    if (v[1] > maxY)
-		maxY = v[1];
-	}
-
-	extents[0] = extents[6] = minX;
-	extents[2] = extents[4] = maxX;
-	extents[1] = extents[3] = minY;
-	extents[5] = extents[7] = maxY;
-
-	/* Project extents and calculate a bounding box in screen space. It
-	   might make sense to move this into the core so that the result
-	   can be reused by other plugins. */
-	if (projectVertices (extents, screen, 4))
-	{
-	    minX = s->width;
-	    maxX = 0;
-	    minY = s->height;
-	    maxY = 0;
-
-	    for (i = 0; i < 8; i += 2)
-	    {
-		if (screen[i] < minX)
-		    minX = screen[i];
-
-		if (screen[i] > maxX)
-		    maxX = screen[i];
-
-		if (screen[i + 1] < minY)
-		    minY = screen[i + 1];
-
-		if (screen[i + 1] > maxY)
-		    maxY = screen[i + 1];
-	    }
-
-	    /* 1.0f is the filter radius */
-	    region.extents.x1 = minX - 1.0f;
-	    region.extents.y1 = (s->height - maxY - 1.0f);
-	    region.extents.x2 = maxX + 1.0f + 0.5f;
-	    region.extents.y2 = (s->height - minY + 1.0f + 0.5f);
-
-	    region.rects    = &region.extents;
-	    region.numRects = 1;
-
-	    XIntersectRegion (&region, bs->region, bs->tmpRegion);
-
-	    pBox = bs->tmpRegion->rects;
-	    nBox = bs->tmpRegion->numRects;
-	}
-	else
-	{
-	    pBox = bs->region->rects;
-	    nBox = bs->region->numRects;
-	}
-
 	glBindTexture (bs->target, bs->dst);
 
 	while (nBox--)
@@ -806,6 +1037,8 @@ blurUpdateDstTexture (CompWindow *w)
 
 	glBindTexture (bs->target, 0);
     }
+
+    return TRUE;
 }
 
 static Bool
@@ -821,6 +1054,8 @@ blurPaintScreen (CompScreen		 *s,
 
     if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
     {
+	bs->stencilBox = region->extents;
+
 	XSubtractRegion (region, &emptyRegion, bs->region);
 
 	/* TODO: only expand region if it intersects a blur window */
@@ -833,6 +1068,8 @@ blurPaintScreen (CompScreen		 *s,
 	    region = bs->region;
 	}
     }
+
+    bs->output = output;
 
     UNWRAP (bs, s, paintScreen);
     status = (*s->paintScreen) (s, sAttrib, region, output, mask);
@@ -847,14 +1084,15 @@ blurDrawWindow (CompWindow	     *w,
 		Region		     region,
 		unsigned int	     mask)
 {
-    Bool status;
+    CompScreen *s = w->screen;
+    Bool       status;
 
-    BLUR_SCREEN (w->screen);
+    BLUR_SCREEN (s);
     BLUR_WINDOW (w);
 
     if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
     {
-	if (w->alpha)
+	if (bw->region)
 	{
 	    Region reg;
 
@@ -864,21 +1102,98 @@ blurDrawWindow (CompWindow	     *w,
 		reg = region;
 
 	    w->vCount = 0;
-	    (*w->screen->addWindowGeometry) (w, NULL, 0, w->region, reg);
+	    (*w->screen->addWindowGeometry) (w, NULL, 0, bw->region, reg);
 	    if (w->vCount)
 	    {
-		blurUpdateDstTexture (w);
+		Bool   clipped = FALSE;
+		BoxRec box;
 
-		bw->alphaBlur = TRUE;
+		if (blurUpdateDstTexture (w, &box))
+		{
+		    if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
+		    {
+			bw->state[BLUR_STATE_CLIENT].active = TRUE;
+			if (bw->state[BLUR_STATE_CLIENT].clipped)
+			    clipped = TRUE;
+		    }
+
+		    if (bw->state[BLUR_STATE_DECOR].threshold)
+		    {
+			bw->state[BLUR_STATE_DECOR].active = TRUE;
+			if (bw->state[BLUR_STATE_DECOR].clipped)
+			    clipped = TRUE;
+		    }
+		}
+
+		/* assumes s->stencilRef never greater than 1 */
+		if (clipped)
+		{
+		    BoxRec clearBox = bs->stencilBox;
+
+		    bs->stencilBox = box;
+
+		    glPushAttrib (GL_STENCIL_BUFFER_BIT);
+		    glEnable (GL_STENCIL_TEST);
+
+		    glColorMask (GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+
+		    if (clearBox.x2 > clearBox.x1 && clearBox.y2 > clearBox.y1)
+		    {
+			if (s->stencilRef)
+			{
+			    glPushMatrix ();
+			    glLoadIdentity ();
+
+			    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+
+			    prepareXCoords (s, bs->output, -DEFAULT_Z_CAMERA);
+
+			    glStencilFunc (GL_EQUAL, s->stencilRef + 1, ~0);
+			    glStencilOp (GL_KEEP, GL_KEEP, GL_DECR);
+
+			    glBegin (GL_QUADS);
+			    glVertex2i (clearBox.x1, clearBox.y2);
+			    glVertex2i (clearBox.x2, clearBox.y2);
+			    glVertex2i (clearBox.x2, clearBox.y1);
+			    glVertex2i (clearBox.x1, clearBox.y1);
+			    glEnd ();
+
+			    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+
+			    glPopMatrix ();
+			}
+			else
+			{
+			    glPushAttrib (GL_SCISSOR_BIT);
+			    glEnable (GL_SCISSOR_TEST);
+			    glScissor (clearBox.x1,
+				       s->height - clearBox.y2,
+				       clearBox.x2 - clearBox.x1,
+				       clearBox.y2 - clearBox.y1);
+			    glClear (GL_STENCIL_BUFFER_BIT);
+			    glPopAttrib ();
+			}
+		    }
+
+		    glStencilFunc (GL_EQUAL, s->stencilRef | 0x2, 0x1);
+		    glStencilOp (GL_KEEP, GL_KEEP, GL_REPLACE);
+
+		    (*s->drawWindowGeometry) (w);
+
+		    glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
+		    glPopAttrib ();
+		}
 	    }
 	}
     }
 
-    UNWRAP (bs, w->screen, drawWindow);
-    status = (*w->screen->drawWindow) (w, attrib, region, mask);
-    WRAP (bs, w->screen, drawWindow, blurDrawWindow);
+    UNWRAP (bs, s, drawWindow);
+    status = (*s->drawWindow) (w, attrib, region, mask);
+    WRAP (bs, s, drawWindow, blurDrawWindow);
 
-    bw->alphaBlur = FALSE;
+    bw->state[BLUR_STATE_CLIENT].active = FALSE;
+    bw->state[BLUR_STATE_DECOR].active  = FALSE;
 
     return status;
 }
@@ -889,47 +1204,22 @@ blurDrawWindowTexture (CompWindow	    *w,
 		       const FragmentAttrib *attrib,
 		       unsigned int	    mask)
 {
-    Bool alphaBlur = FALSE;
+    int state;
 
     BLUR_SCREEN (w->screen);
     BLUR_WINDOW (w);
 
-    if (bw->alphaBlur && texture == w->texture)
-	alphaBlur = TRUE;
+    if (texture == w->texture)
+	state = BLUR_STATE_CLIENT;
+    else
+	state = BLUR_STATE_DECOR;
 
-    if (bw->blur || alphaBlur)
+    if (bw->blur || bw->state[state].active)
     {
 	FragmentAttrib fa = *attrib;
 	int	       param, function;
 	int	       unit = 0;
 	GLfloat	       dx, dy;
-
-	if (alphaBlur)
-	{
-	    param = allocFragmentParameters (&fa, 2);
-	    unit  = allocFragmentTextureUnits (&fa, 1);
-
-	    function = getDstBlurFragmentFunction (w->screen, texture, param,
-						   unit);
-	    if (function)
-	    {
-		addFragmentFunction (&fa, function);
-
-		(*w->screen->activeTexture) (GL_TEXTURE0_ARB + unit);
-		glBindTexture (bs->target, bs->dst);
-		(*w->screen->activeTexture) (GL_TEXTURE0_ARB);
-
-		dx = bs->tx / 2.1f;
-		dy = bs->ty / 2.1f;
-
-		(*w->screen->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
-						     param, dx, dy, dx, -dy);
-
-		(*w->screen->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
-						     param + 1, bs->tx, bs->ty,
-						     0.0f, 0.0f);
-	    }
-	}
 
 	if (bw->blur)
 	{
@@ -951,9 +1241,77 @@ blurDrawWindowTexture (CompWindow	    *w,
 	    }
 	}
 
-	UNWRAP (bs, w->screen, drawWindowTexture);
-	(*w->screen->drawWindowTexture) (w, texture, &fa, mask);
-	WRAP (bs, w->screen, drawWindowTexture, blurDrawWindowTexture);
+	if (bw->state[state].active)
+	{
+	    FragmentAttrib dstFa = fa;
+
+	    param = allocFragmentParameters (&dstFa, 3);
+	    unit  = allocFragmentTextureUnits (&dstFa, 1);
+
+	    function = getDstBlurFragmentFunction (w->screen, texture, param,
+						   unit);
+	    if (function)
+	    {
+		float threshold = (float) bw->state[state].threshold;
+
+		addFragmentFunction (&dstFa, function);
+
+		(*w->screen->activeTexture) (GL_TEXTURE0_ARB + unit);
+		glBindTexture (bs->target, bs->dst);
+		(*w->screen->activeTexture) (GL_TEXTURE0_ARB);
+
+		dx = bs->tx / 2.1f;
+		dy = bs->ty / 2.1f;
+
+		(*w->screen->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
+						     param,
+						     threshold, threshold,
+						     0.0f, 0.0f);
+
+		(*w->screen->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
+						     param + 1,
+						     dx, dy, dx, -dy);
+
+		(*w->screen->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
+						     param + 2,
+						     bs->tx, bs->ty,
+						     0.0f, 0.0f);
+	    }
+
+	    if (bw->state[state].clipped)
+	    {
+		glPushAttrib (GL_STENCIL_BUFFER_BIT);
+		glEnable (GL_STENCIL_TEST);
+		glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
+
+		glStencilFunc (GL_EQUAL, w->screen->stencilRef, ~0);
+
+		/* draw region without destination blur */
+		UNWRAP (bs, w->screen, drawWindowTexture);
+		(*w->screen->drawWindowTexture) (w, texture, &fa, mask);
+
+		glStencilFunc (GL_EQUAL, w->screen->stencilRef | 0x2, ~0);
+
+		/* draw region with destination blur */
+		(*w->screen->drawWindowTexture) (w, texture, &dstFa, mask);
+		WRAP (bs, w->screen, drawWindowTexture, blurDrawWindowTexture);
+
+		glPopAttrib ();
+	    }
+	    else
+	    {
+		/* draw with destination blur */
+		UNWRAP (bs, w->screen, drawWindowTexture);
+		(*w->screen->drawWindowTexture) (w, texture, &dstFa, mask);
+		WRAP (bs, w->screen, drawWindowTexture, blurDrawWindowTexture);
+	    }
+	}
+	else
+	{
+	    UNWRAP (bs, w->screen, drawWindowTexture);
+	    (*w->screen->drawWindowTexture) (w, texture, &fa, mask);
+	    WRAP (bs, w->screen, drawWindowTexture, blurDrawWindowTexture);
+	}
 
 	if (unit)
 	{
@@ -986,36 +1344,73 @@ blurHandleEvent (CompDisplay *d,
     (*d->handleEvent) (d, event);
     WRAP (bd, d, handleEvent, blurHandleEvent);
 
-    if (event->type == PropertyNotify		  &&
-	event->xproperty.atom == d->winActiveAtom &&
-	d->activeWindow != activeWindow)
+    if (event->type == PropertyNotify)
     {
-	CompWindow *w;
-
-	w = findWindowAtDisplay (d, activeWindow);
-	if (w)
+	if (event->xproperty.atom == d->winActiveAtom)
 	{
-	    BLUR_SCREEN (w->screen);
-
-	    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
+	    if (d->activeWindow != activeWindow)
 	    {
-		addWindowDamage (w);
-		bs->moreBlur = TRUE;
+		CompWindow *w;
+
+		w = findWindowAtDisplay (d, activeWindow);
+		if (w)
+		{
+		    BLUR_SCREEN (w->screen);
+
+		    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
+		    {
+			addWindowDamage (w);
+			bs->moreBlur = TRUE;
+		    }
+		}
+
+		w = findWindowAtDisplay (d, d->activeWindow);
+		if (w)
+		{
+		    BLUR_SCREEN (w->screen);
+
+		    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
+		    {
+			addWindowDamage (w);
+			bs->moreBlur = TRUE;
+		    }
+		}
 	    }
 	}
-
-	w = findWindowAtDisplay (d, d->activeWindow);
-	if (w)
+	else
 	{
-	    BLUR_SCREEN (w->screen);
+	    int i;
 
-	    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
+	    for (i = 0; i < BLUR_STATE_NUM; i++)
 	    {
-		addWindowDamage (w);
-		bs->moreBlur = TRUE;
+		if (event->xproperty.atom == bd->blurAtom[i])
+		{
+		    CompWindow *w;
+
+		    w = findWindowAtDisplay (d, event->xproperty.window);
+		    if (w)
+			blurWindowUpdate (w, i);
+		}
 	    }
 	}
     }
+}
+
+static void
+blurWindowMoveNotify (CompWindow *w,
+		      int	 dx,
+		      int	 dy,
+		      Bool	 immediate)
+{
+    BLUR_SCREEN (w->screen);
+    BLUR_WINDOW (w);
+
+    if (bw->region)
+	XOffsetRegion (bw->region, dx, dy);
+
+    UNWRAP (bs, w->screen, windowMoveNotify);
+    (*w->screen->windowMoveNotify) (w, dx, dy, immediate);
+    WRAP (bs, w->screen, windowMoveNotify, blurWindowMoveNotify);
 }
 
 static CompOption *
@@ -1115,6 +1510,11 @@ blurInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
+    bd->blurAtom[BLUR_STATE_CLIENT] =
+	XInternAtom (d->display, "_COMPIZ_WM_WINDOW_BLUR", 0);
+    bd->blurAtom[BLUR_STATE_DECOR] =
+	XInternAtom (d->display, "_COMPIZ_WM_WINDOW_BLUR_DECOR", 0);
+
     WRAP (bd, d, handleEvent, blurHandleEvent);
 
     blurDisplayInitOptions (bd);
@@ -1187,6 +1587,7 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, paintScreen, blurPaintScreen);
     WRAP (bs, s, drawWindow, blurDrawWindow);
     WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
+    WRAP (bs, s, windowMoveNotify, blurWindowMoveNotify);
 
     s->privates[bd->screenPrivateIndex].ptr = bs;
 
@@ -1214,6 +1615,7 @@ blurFiniScreen (CompPlugin *p,
     UNWRAP (bs, s, paintScreen);
     UNWRAP (bs, s, drawWindow);
     UNWRAP (bs, s, drawWindowTexture);
+    UNWRAP (bs, s, windowMoveNotify);
 
     free (bs);
 }
@@ -1238,14 +1640,18 @@ blurInitWindow (CompPlugin *p,
     {
 	bw->state[i].filter    = BlurFilter4xBilinear;
 	bw->state[i].threshold = 0;
-	bw->state[i].region    = NULL;
+	bw->state[i].box       = NULL;
+	bw->state[i].nBox      = 0;
+	bw->state[i].clipped   = FALSE;
+	bw->state[i].active    = FALSE;
     }
 
     bw->region = NULL;
 
-    bw->alphaBlur = FALSE;
-
     w->privates[bs->windowPrivateIndex].ptr = bw;
+
+    blurWindowUpdate (w, BLUR_STATE_CLIENT);
+    blurWindowUpdate (w, BLUR_STATE_DECOR);
 
     return TRUE;
 }
@@ -1259,8 +1665,8 @@ blurFiniWindow (CompPlugin *p,
     BLUR_WINDOW (w);
 
     for (i = 0; i < BLUR_STATE_NUM; i++)
-	if (bw->state[i].region)
-	    XDestroyRegion (bw->state[i].region);
+	if (bw->state[i].box)
+	    free (bw->state[i].box);
 
     if (bw->region)
 	XDestroyRegion (bw->region);
