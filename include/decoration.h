@@ -177,6 +177,15 @@ decor_property_to_quads (long		 *data,
 			 int		 *min_height,
 			 decor_quad_t    *quad);
 
+void
+decor_apply_gravity (int gravity,
+		     int x,
+		     int y,
+		     int width,
+		     int height,
+		     int *return_x,
+		     int *return_y);
+
 int
 decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      top,

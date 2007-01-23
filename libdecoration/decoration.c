@@ -202,6 +202,50 @@ decor_property_to_quads (long		 *data,
     return n;
 }
 
+void
+decor_apply_gravity (int gravity,
+		     int x,
+		     int y,
+		     int width,
+		     int height,
+		     int *return_x,
+		     int *return_y)
+{
+    if (gravity & GRAVITY_EAST)
+    {
+	x += width;
+	*return_x = MAX (0, x);
+    }
+    else if (gravity & GRAVITY_WEST)
+    {
+	*return_x = MIN (width, x);
+    }
+    else
+    {
+	x += width / 2;
+	x = MAX (0, x);
+	x = MIN (width, x);
+	*return_x = x;
+    }
+
+    if (gravity & GRAVITY_SOUTH)
+    {
+	y += height;
+	*return_y = MAX (0, y);
+    }
+    else if (gravity & GRAVITY_NORTH)
+    {
+	*return_y = MIN (height, y);
+    }
+    else
+    {
+	y += height / 2;
+	y = MAX (0, y);
+	y = MIN (height, y);
+	*return_y = y;
+    }
+}
+
 int
 decor_set_vert_quad_row (decor_quad_t *q,
 			 int	      top,

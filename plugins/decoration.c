@@ -458,50 +458,6 @@ decorReleaseTexture (CompScreen   *screen,
 }
 
 static void
-applyGravity (int gravity,
-	      int x,
-	      int y,
-	      int width,
-	      int height,
-	      int *return_x,
-	      int *return_y)
-{
-    if (gravity & GRAVITY_EAST)
-    {
-	x += width;
-	*return_x = MAX (0, x);
-    }
-    else if (gravity & GRAVITY_WEST)
-    {
-	*return_x = MIN (width, x);
-    }
-    else
-    {
-	x += width / 2;
-	x = MAX (0, x);
-	x = MIN (width, x);
-	*return_x = x;
-    }
-
-    if (gravity & GRAVITY_SOUTH)
-    {
-	y += height;
-	*return_y = MAX (0, y);
-    }
-    else if (gravity & GRAVITY_NORTH)
-    {
-	*return_y = MIN (height, y);
-    }
-    else
-    {
-	y += height / 2;
-	y = MAX (0, y);
-	y = MIN (height, y);
-	*return_y = y;
-    }
-}
-
-static void
 computeQuadBox (decor_quad_t *q,
 		int	     width,
 		int	     height,
@@ -512,8 +468,10 @@ computeQuadBox (decor_quad_t *q,
 {
     int x1, y1, x2, y2;
 
-    applyGravity (q->p1.gravity, q->p1.x, q->p1.y, width, height, &x1, &y1);
-    applyGravity (q->p2.gravity, q->p2.x, q->p2.y, width, height, &x2, &y2);
+    decor_apply_gravity (q->p1.gravity, q->p1.x, q->p1.y, width, height,
+			 &x1, &y1);
+    decor_apply_gravity (q->p2.gravity, q->p2.x, q->p2.y, width, height,
+			 &x2, &y2);
 
     if (q->clamp & CLAMP_HORZ)
     {
