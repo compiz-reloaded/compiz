@@ -1487,7 +1487,7 @@ addScreen (CompDisplay *display,
     s->windows = 0;
     s->reverseWindows = 0;
 
-    s->stencilRef = 0x1;
+    s->stencilRef = 0;
 
     s->opacityStep = OPACITY_STEP_DEFAULT;
 
