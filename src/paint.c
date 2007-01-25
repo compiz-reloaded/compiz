@@ -116,11 +116,6 @@ paintTransformedScreen (CompScreen		*screen,
 
     (*screen->applyScreenTransform) (screen, sAttrib, output, &sTransform);
 
-    transformToScreenSpace (screen, output, -sAttrib->zTranslate, &sTransform);
-
-    glPushMatrix ();
-    glLoadMatrixf (sTransform.m);
-
     if (mask & PAINT_SCREEN_TRANSFORMED_MASK)
     {
 	windowMask = PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK;
@@ -128,11 +123,30 @@ paintTransformedScreen (CompScreen		*screen,
 
 	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
 	{
-	    backgroundMask |= PAINT_BACKGROUND_WITH_STENCIL_MASK;
+	    static GLdouble clipPlane0[] = {  0.0, -1.0, 0.0, 0.5 };
+	    static GLdouble clipPlane1[] = {  0.0,  1.0, 0.0, 0.5 };
+	    static GLdouble clipPlane2[] = {  1.0,  0.0, 0.0, 0.5 };
+	    static GLdouble clipPlane3[] = { -1.0,  0.0, 0.0, 0.5 };
+
+	    glPushMatrix ();
+	    glLoadMatrixf (sTransform.m);
+
+	    glClipPlane (GL_CLIP_PLANE0, clipPlane0);
+	    glClipPlane (GL_CLIP_PLANE1, clipPlane1);
+	    glClipPlane (GL_CLIP_PLANE2, clipPlane2);
+	    glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+
+	    glEnable (GL_CLIP_PLANE0);
+	    glEnable (GL_CLIP_PLANE1);
+	    glEnable (GL_CLIP_PLANE2);
+	    glEnable (GL_CLIP_PLANE3);
+
+	    transformToScreenSpace (screen, output, -sAttrib->zTranslate,
+				    &sTransform);
+
+	    glLoadMatrixf (sTransform.m);
 
 	    (*screen->paintBackground) (screen, region, backgroundMask);
-
-	    glEnable (GL_STENCIL_TEST);
 
 	    for (w = screen->windows; w; w = w->next)
 	    {
@@ -149,7 +163,10 @@ paintTransformedScreen (CompScreen		*screen,
 					windowMask);
 	    }
 
-	    glDisable (GL_STENCIL_TEST);
+	    glDisable (GL_CLIP_PLANE0);
+	    glDisable (GL_CLIP_PLANE1);
+	    glDisable (GL_CLIP_PLANE2);
+	    glDisable (GL_CLIP_PLANE3);
 
 	    glPopMatrix ();
 
@@ -158,6 +175,11 @@ paintTransformedScreen (CompScreen		*screen,
     }
     else
 	windowMask = backgroundMask = 0;
+
+    transformToScreenSpace (screen, output, -sAttrib->zTranslate, &sTransform);
+
+    glPushMatrix ();
+    glLoadMatrixf (sTransform.m);
 
     (*screen->paintBackground) (screen, region, backgroundMask);
 

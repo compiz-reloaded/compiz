@@ -1585,11 +1585,6 @@ cubePaintBackground (CompScreen   *s,
 {
     CUBE_SCREEN (s);
 
-    if (mask & PAINT_BACKGROUND_WITH_STENCIL_MASK)
-	s->stencilRef = 1;
-    else
-	s->stencilRef = 0;
-
     UNWRAP (cs, s, paintBackground);
     (*s->paintBackground) (s, region, mask);
     WRAP (cs, s, paintBackground, cubePaintBackground);
