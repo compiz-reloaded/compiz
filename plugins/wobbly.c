@@ -2214,6 +2214,7 @@ wobblyDrawWindowGeometry (CompWindow *w)
 static Bool
 wobblyPaintWindow (CompWindow		   *w,
 		   const WindowPaintAttrib *attrib,
+		   const CompTransform	   *transform,
 		   Region		   region,
 		   unsigned int		   mask)
 {
@@ -2231,7 +2232,7 @@ wobblyPaintWindow (CompWindow		   *w,
     }
 
     UNWRAP (ws, w->screen, paintWindow);
-    status = (*w->screen->paintWindow) (w, attrib, region, mask);
+    status = (*w->screen->paintWindow) (w, attrib, transform, region, mask);
     WRAP (ws, w->screen, paintWindow, wobblyPaintWindow);
 
     return status;
@@ -2823,6 +2824,7 @@ wobblyWindowUngrabNotify (CompWindow *w)
 static Bool
 wobblyPaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
+		   const CompTransform	   *transform,
 		   Region		   region,
 		   int			   output,
 		   unsigned int		   mask)
@@ -2835,7 +2837,7 @@ wobblyPaintScreen (CompScreen		   *s,
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
     UNWRAP (ws, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (ws, s, paintScreen, wobblyPaintScreen);
 
     return status;

@@ -183,6 +183,7 @@ shotSort (const void *_a,
 static Bool
 shotPaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
 		 Region			 region,
 		 int			 output,
 		 unsigned int		 mask)
@@ -192,7 +193,7 @@ shotPaintScreen (CompScreen		 *s,
     SHOT_SCREEN (s);
 
     UNWRAP (ss, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (ss, s, paintScreen, shotPaintScreen);
 
     if (status && ss->grab)

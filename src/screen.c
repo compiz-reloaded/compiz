@@ -835,47 +835,47 @@ updateScreenEdges (CompScreen *s)
 }
 
 static void
-frustum (GLfloat left,
+frustum (GLfloat *m,
+	 GLfloat left,
 	 GLfloat right,
 	 GLfloat bottom,
 	 GLfloat top,
 	 GLfloat nearval,
 	 GLfloat farval)
 {
-   GLfloat x, y, a, b, c, d;
-   GLfloat m[16];
+    GLfloat x, y, a, b, c, d;
 
-   x = (2.0 * nearval) / (right - left);
-   y = (2.0 * nearval) / (top - bottom);
-   a = (right + left) / (right - left);
-   b = (top + bottom) / (top - bottom);
-   c = -(farval + nearval) / ( farval - nearval);
-   d = -(2.0 * farval * nearval) / (farval - nearval);
+    x = (2.0 * nearval) / (right - left);
+    y = (2.0 * nearval) / (top - bottom);
+    a = (right + left) / (right - left);
+    b = (top + bottom) / (top - bottom);
+    c = -(farval + nearval) / ( farval - nearval);
+    d = -(2.0 * farval * nearval) / (farval - nearval);
 
 #define M(row,col)  m[col*4+row]
-   M(0,0) = x;     M(0,1) = 0.0F;  M(0,2) = a;      M(0,3) = 0.0F;
-   M(1,0) = 0.0F;  M(1,1) = y;     M(1,2) = b;      M(1,3) = 0.0F;
-   M(2,0) = 0.0F;  M(2,1) = 0.0F;  M(2,2) = c;      M(2,3) = d;
-   M(3,0) = 0.0F;  M(3,1) = 0.0F;  M(3,2) = -1.0F;  M(3,3) = 0.0F;
+    M(0,0) = x;     M(0,1) = 0.0f;  M(0,2) = a;      M(0,3) = 0.0f;
+    M(1,0) = 0.0f;  M(1,1) = y;     M(1,2) = b;      M(1,3) = 0.0f;
+    M(2,0) = 0.0f;  M(2,1) = 0.0f;  M(2,2) = c;      M(2,3) = d;
+    M(3,0) = 0.0f;  M(3,1) = 0.0f;  M(3,2) = -1.0f;  M(3,3) = 0.0f;
 #undef M
 
-   glMultMatrixf (m);
 }
 
 static void
-perspective (GLfloat fovy,
+perspective (GLfloat *m,
+	     GLfloat fovy,
 	     GLfloat aspect,
 	     GLfloat zNear,
 	     GLfloat zFar)
 {
-   GLfloat xmin, xmax, ymin, ymax;
+    GLfloat xmin, xmax, ymin, ymax;
 
-   ymax = zNear * tan (fovy * M_PI / 360.0);
-   ymin = -ymax;
-   xmin = ymin * aspect;
-   xmax = ymax * aspect;
+    ymax = zNear * tan (fovy * M_PI / 360.0);
+    ymin = -ymax;
+    xmin = ymin * aspect;
+    xmax = ymax * aspect;
 
-   frustum (xmin, xmax, ymin, ymax, zNear, zFar);
+    frustum (m, xmin, xmax, ymin, ymax, zNear, zFar);
 }
 
 void
@@ -909,9 +909,11 @@ reshape (CompScreen *s,
 
     s->rasterX = s->rasterY = 0;
 
+    perspective (s->projection, 60.0f, 1.0f, 0.1f, 100.0f);
+
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-    perspective (60.0f, 1.0f, 0.1f, 100.0f);
+    glMultMatrixf (s->projection);
     glMatrixMode (GL_MODELVIEW);
 
     s->region.rects = &s->region.extents;

@@ -590,6 +590,7 @@ minDonePaintScreen (CompScreen *s)
 static Bool
 minPaintScreen (CompScreen		*s,
 		const ScreenPaintAttrib *sAttrib,
+		const CompTransform	*transform,
 		Region		        region,
 		int			output,
 		unsigned int		mask)
@@ -602,7 +603,7 @@ minPaintScreen (CompScreen		*s,
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
     UNWRAP (ms, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (ms, s, paintScreen, minPaintScreen);
 
     return status;
@@ -611,6 +612,7 @@ minPaintScreen (CompScreen		*s,
 static Bool
 minPaintWindow (CompWindow		*w,
 		const WindowPaintAttrib *attrib,
+		const CompTransform	*transform,
 		Region			region,
 		unsigned int		mask)
 {
@@ -622,24 +624,27 @@ minPaintWindow (CompWindow		*w,
 
     if (mw->adjust)
     {
-	WindowPaintAttrib ma;
-	FragmentAttrib	  fragment;
+	FragmentAttrib fragment;
+	CompTransform  wTransform = *transform;
 
 	UNWRAP (ms, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region,
+	status = (*s->paintWindow) (w, attrib, transform, region,
 				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);
 	WRAP (ms, s, paintWindow, minPaintWindow);
 
-	ma.xScale     = mw->xScale;
-	ma.yScale     = mw->yScale;
-	ma.xTranslate = mw->tx;
-	ma.yTranslate = mw->ty;
-
 	initFragmentAttrib (&fragment, &w->lastPaint);
 
-	pushWindowTransform (w, &ma);
+	matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
+	matrixScale (&wTransform, mw->xScale, mw->yScale, 0.0f);
+	matrixTranslate (&wTransform,
+			 mw->tx / mw->xScale - w->attrib.x,
+			 mw->ty / mw->yScale - w->attrib.y,
+			 0.0f);
 
-	(*s->drawWindow) (w, &fragment, region,
+	glPushMatrix ();
+	glLoadMatrixf (wTransform.m);
+
+	(*s->drawWindow) (w, &wTransform, &fragment, region,
 			  mask | PAINT_WINDOW_TRANSFORMED_MASK);
 
 	glPopMatrix ();
@@ -647,7 +652,7 @@ minPaintWindow (CompWindow		*w,
     else
     {
 	UNWRAP (ms, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region, mask);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (ms, s, paintWindow, minPaintWindow);
     }
 

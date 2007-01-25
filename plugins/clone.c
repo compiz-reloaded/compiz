@@ -287,6 +287,7 @@ cloneDonePaintScreen (CompScreen *s)
 static Bool
 clonePaintScreen (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
+		  const CompTransform	  *transform,
 		  Region		  region,
 		  int			  output,
 		  unsigned int		  mask)
@@ -317,16 +318,17 @@ clonePaintScreen (CompScreen		  *s,
     }
 
     UNWRAP (cs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, dst, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, dst, mask);
     WRAP (cs, s, paintScreen, clonePaintScreen);
 
     if (cs->grab)
     {
-	CompWindow *w;
-	GLenum	   filter;
-	float      zoom1, zoom2x, zoom2y, x1, y1, x2, y2;
-	float      zoomX, zoomY;
-	int        dx, dy;
+	CompTransform sTransform = *transform;
+	CompWindow    *w;
+	GLenum	      filter;
+	float         zoom1, zoom2x, zoom2y, x1, y1, x2, y2;
+	float         zoomX, zoomY;
+	int           dx, dy;
 
 	zoom1 = 160.0f / s->outputDev[cs->src].height;
 
@@ -373,16 +375,19 @@ clonePaintScreen (CompScreen		  *s,
 	zoomX = zoom1 * (1.0f - cs->offset) + zoom2x * cs->offset;
 	zoomY = zoom1 * (1.0f - cs->offset) + zoom2y * cs->offset;
 
-	glPushMatrix ();
+	matrixTranslate (&sTransform, -0.5f, -0.5f, -DEFAULT_Z_CAMERA);
+	matrixScale (&sTransform, 
+		     1.0f  / s->outputDev[output].width,
+		     -1.0f / s->outputDev[output].height,
+		     1.0f);
+	matrixTranslate (&sTransform, 
+			 dx - s->outputDev[output].region.extents.x1,
+			 dy - s->outputDev[output].region.extents.y2,
+			 0.0f);
+	matrixScale (&sTransform, zoomX, zoomY, 1.0f);
 
-	glTranslatef (-0.5f, -0.5f, -DEFAULT_Z_CAMERA);
-	glScalef (1.0f  / s->outputDev[output].width,
-		  -1.0f / s->outputDev[output].height,
-		  1.0f);
-	glTranslatef (dx - s->outputDev[output].region.extents.x1,
-		      dy - s->outputDev[output].region.extents.y2,
-		      0.0f);
-	glScalef (zoomX, zoomY, 1.0f);
+	glPushMatrix ();
+	glLoadMatrixf (sTransform.m);
 
 	filter = s->display->textureFilter;
 
@@ -400,7 +405,8 @@ clonePaintScreen (CompScreen		  *s,
 		    continue;
 	    }
 
-	    (*s->paintWindow) (w, &w->paint, &s->outputDev[cs->src].region,
+	    (*s->paintWindow) (w, &w->paint, &sTransform,
+			       &s->outputDev[cs->src].region,
 			       PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK);
 	}
 
@@ -415,6 +421,7 @@ clonePaintScreen (CompScreen		  *s,
 static Bool
 clonePaintWindow (CompWindow		  *w,
 		  const WindowPaintAttrib *attrib,
+		  const CompTransform	  *transform,
 		  Region		  region,
 		  unsigned int		  mask)
 {
@@ -426,7 +433,7 @@ clonePaintWindow (CompWindow		  *w,
 	mask |= PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK;
 
     UNWRAP (cs, w->screen, paintWindow);
-    status = (*w->screen->paintWindow) (w, attrib, region, mask);
+    status = (*w->screen->paintWindow) (w, attrib, transform, region, mask);
     WRAP (cs, w->screen, paintWindow, clonePaintWindow);
 
     return status;

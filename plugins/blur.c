@@ -845,26 +845,34 @@ getDstBlurFragmentFunction (CompScreen  *s,
 }
 
 static Bool
-projectVertices (const float *object,
-		 float	     *screen,
-		 int	     n)
+projectVertices (CompScreen	     *s,
+		 int		     output,
+		 const CompTransform *transform,
+		 const float	     *object,
+		 float		     *screen,
+		 int		     n)
 {
-    GLdouble model[16];
-    GLdouble proj[16];
+    GLdouble dProjection[16];
+    GLdouble dModel[16];
     GLint    viewport[4];
     double   x, y, z;
+    int	     i;
 
-    /* we need to get rid of these as fetching GL like this is expensive.
-       viewport is not too hard to figure out. the core should keep track
-       of modelview and projection matrices. */
-    glGetDoublev (GL_MODELVIEW_MATRIX, model);
-    glGetDoublev (GL_PROJECTION_MATRIX, proj);
-    glGetIntegerv (GL_VIEWPORT, viewport);
+    viewport[0] = s->outputDev[output].region.extents.x1;
+    viewport[1] = s->height - s->outputDev[output].region.extents.y2;
+    viewport[2] = s->outputDev[output].width;
+    viewport[3] = s->outputDev[output].height;
+
+    for (i = 0; i < 16; i++)
+    {
+	dModel[i]      = transform->m[i];
+	dProjection[i] = s->projection[i];
+    }
 
     while (n--)
     {
 	if (!gluProject (object[0], object[1], 0.0,
-			 model, proj, viewport,
+			 dModel, dProjection, viewport,
 			 &x, &y, &z))
 	    return FALSE;
 
@@ -887,8 +895,9 @@ projectVertices (const float *object,
    improvement.
 */
 static Bool
-blurUpdateDstTexture (CompWindow *w,
-		      BoxPtr	 pExtents)
+blurUpdateDstTexture (CompWindow	  *w,
+		      const CompTransform *transform,
+		      BoxPtr		  pExtents)
 {
     CompScreen *s = w->screen;
     BoxPtr     pBox;
@@ -932,7 +941,7 @@ blurUpdateDstTexture (CompWindow *w,
     /* Project extents and calculate a bounding box in screen space. It
        might make sense to move this into the core so that the result
        can be reused by other plugins. */
-    if (!projectVertices (extents, screen, 4))
+    if (!projectVertices (w->screen, bs->output, transform, extents, screen, 4))
 	return FALSE;
 
     minX = s->width;
@@ -1044,6 +1053,7 @@ blurUpdateDstTexture (CompWindow *w,
 static Bool
 blurPaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
 		 Region			 region,
 		 int			 output,
 		 unsigned int		 mask)
@@ -1072,7 +1082,7 @@ blurPaintScreen (CompScreen		 *s,
     bs->output = output;
 
     UNWRAP (bs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (bs, s, paintScreen, blurPaintScreen);
 
     return status;
@@ -1080,6 +1090,7 @@ blurPaintScreen (CompScreen		 *s,
 
 static Bool
 blurDrawWindow (CompWindow	     *w,
+		const CompTransform  *transform,
 		const FragmentAttrib *attrib,
 		Region		     region,
 		unsigned int	     mask)
@@ -1108,7 +1119,7 @@ blurDrawWindow (CompWindow	     *w,
 		Bool   clipped = FALSE;
 		BoxRec box;
 
-		if (blurUpdateDstTexture (w, &box))
+		if (blurUpdateDstTexture (w, transform, &box))
 		{
 		    if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
 		    {
@@ -1189,7 +1200,7 @@ blurDrawWindow (CompWindow	     *w,
     }
 
     UNWRAP (bs, s, drawWindow);
-    status = (*s->drawWindow) (w, attrib, region, mask);
+    status = (*s->drawWindow) (w, transform, attrib, region, mask);
     WRAP (bs, s, drawWindow, blurDrawWindow);
 
     bw->state[BLUR_STATE_CLIENT].active = FALSE;

@@ -86,6 +86,15 @@ static Bool inHandleEvent = FALSE;
 
 static Bool shutDown = FALSE;
 
+static const CompTransform identity = {
+    {
+	1.0, 0.0, 0.0, 0.0,
+	0.0, 1.0, 0.0, 0.0,
+	0.0, 0.0, 1.0, 0.0,
+	0.0, 0.0, 0.0, 1.0
+    }
+};
+
 int lastPointerX = 0;
 int lastPointerY = 0;
 int pointerX     = 0;
@@ -2094,6 +2103,7 @@ eventLoop (void)
 			{
 			    (*s->paintScreen) (s,
 					       &defaultScreenPaintAttrib,
+					       &identity,
 					       &s->outputDev[i].region, i,
 					       PAINT_SCREEN_REGION_MASK |
 					       PAINT_SCREEN_FULL_MASK);
@@ -2106,11 +2116,13 @@ eventLoop (void)
 
 			    if (!(*s->paintScreen) (s,
 						    &defaultScreenPaintAttrib,
+						    &identity,
 						    outputRegion, i,
 						    PAINT_SCREEN_REGION_MASK))
 			    {
 				(*s->paintScreen) (s,
 						   &defaultScreenPaintAttrib,
+						   &identity,
 						   &s->outputDev[i].region, i,
 						   PAINT_SCREEN_FULL_MASK);
 

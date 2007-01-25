@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070121
+#define ABIVERSION 20070124
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -996,6 +996,11 @@ clearTargetOutput (CompDisplay	*display,
 /* camera distance from screen, 0.5 * tan (FOV) */
 #define DEFAULT_Z_CAMERA 0.866025404f
 
+typedef struct _CompTransform {
+    float m[16];
+} CompTransform;
+
+/* XXX: ScreenPaintAttrib will be removed */
 typedef struct _ScreenPaintAttrib {
     GLfloat xRotate;
     GLfloat yRotate;
@@ -1006,6 +1011,7 @@ typedef struct _ScreenPaintAttrib {
     GLfloat zCamera;
 } ScreenPaintAttrib;
 
+/* XXX: scale and translate fields will be removed */
 typedef struct _WindowPaintAttrib {
     GLushort opacity;
     GLushort brightness;
@@ -1047,19 +1053,23 @@ typedef void (*DonePaintScreenProc) (CompScreen *screen);
 
 typedef Bool (*PaintScreenProc) (CompScreen		 *screen,
 				 const ScreenPaintAttrib *sAttrib,
+				 const CompTransform	 *transform,
 				 Region			 region,
 				 int		         output,
 				 unsigned int		 mask);
 
 typedef void (*PaintTransformedScreenProc) (CompScreen		    *screen,
 					    const ScreenPaintAttrib *sAttrib,
+					    const CompTransform	    *transform,
 					    Region		    region,
 					    int			    output,
 					    unsigned int	    mask);
 
+/* XXX: ApplyScreenTransformProc will be removed */
 typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 					  const ScreenPaintAttrib *sAttrib,
-					  int			  output);
+					  int			  output,
+					  CompTransform	          *transform);
 
 
 #define PAINT_WINDOW_SOLID_MASK			(1 << 0)
@@ -1070,10 +1080,12 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 
 typedef Bool (*PaintWindowProc) (CompWindow		 *window,
 				 const WindowPaintAttrib *attrib,
+				 const CompTransform     *transform,
 				 Region			 region,
 				 unsigned int		 mask);
 
 typedef Bool (*DrawWindowProc) (CompWindow	     *window,
+				const CompTransform  *transform,
 				const FragmentAttrib *fragment,
 				Region		     region,
 				unsigned int	     mask);
@@ -1098,7 +1110,6 @@ typedef void (*PaintBackgroundProc) (CompScreen   *screen,
 				     Region	  region,
 				     unsigned int mask);
 
-
 void
 preparePaintScreen (CompScreen *screen,
 		    int	       msSinceLastPaint);
@@ -1107,8 +1118,12 @@ void
 donePaintScreen (CompScreen *screen);
 
 void
-translateRotateScreen (const ScreenPaintAttrib *sa);
+transformToScreenSpace (CompScreen    *screen,
+			int	      output,
+			float         z,
+			CompTransform *transform);
 
+/* XXX: prepareXCoords will be removed */
 void
 prepareXCoords (CompScreen *screen,
 		int	   output,
@@ -1117,18 +1132,22 @@ prepareXCoords (CompScreen *screen,
 void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
+			const CompTransform	*transform,
 			Region			region,
 			int			output,
 			unsigned int	        mask);
 
+/* XXX: applyScreenTransform will be removed */
 void
 applyScreenTransform (CompScreen	      *screen,
 		      const ScreenPaintAttrib *sAttrib,
-		      int		      output);
+		      int		      output,
+		      CompTransform	      *transform);
 
 Bool
 paintScreen (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
+	     const CompTransform     *transform,
 	     Region		     region,
 	     int		     output,
 	     unsigned int	     mask);
@@ -1159,6 +1178,7 @@ drawWindowTexture (CompWindow		*w,
 
 Bool
 drawWindow (CompWindow		 *w,
+	    const CompTransform  *transform,
 	    const FragmentAttrib *fragment,
 	    Region		 region,
 	    unsigned int	 mask);
@@ -1166,6 +1186,7 @@ drawWindow (CompWindow		 *w,
 Bool
 paintWindow (CompWindow		     *w,
 	     const WindowPaintAttrib *attrib,
+	     const CompTransform     *transform,
 	     Region		     region,
 	     unsigned int	     mask);
 
@@ -1174,9 +1195,6 @@ paintBackground (CompScreen   *screen,
 		 Region	      region,
 		 unsigned int mask);
 
-void
-pushWindowTransform (CompWindow	      *w,
-		     const WindowPaintAttrib *attrib);
 
 /* texture.c */
 
@@ -1609,6 +1627,8 @@ struct _CompScreen {
     int saturateFunction[2][64];
 
     GLint stencilRef;
+
+    GLfloat projection[16];
 
     Bool clearBuffers;
 
@@ -2624,6 +2644,28 @@ enableFragmentAttrib (CompScreen     *s,
 void
 disableFragmentAttrib (CompScreen     *s,
 		       FragmentAttrib *attrib);
+
+
+/* matrix.c */
+
+void
+matrixRotate (CompTransform *transform,
+	      float	    angle,
+	      float	    x,
+	      float	    y,
+	      float	    z);
+
+void
+matrixScale (CompTransform *transform,
+	     float	   x,
+	     float	   y,
+	     float	   z);
+
+void
+matrixTranslate (CompTransform *transform,
+		 float	       x,
+		 float	       y,
+		 float	       z);
 
 #ifdef  __cplusplus
 }

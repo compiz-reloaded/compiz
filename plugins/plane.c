@@ -214,17 +214,18 @@ planePreparePaintScreen (CompScreen *s,
 static void
 planePaintTransformedScreen (CompScreen		     *screen,
 			     const ScreenPaintAttrib *sAttrib,
+			     const CompTransform     *transform,
 			     Region		     region,
 			     int                     output,
 			     unsigned int	     mask)
 {
     PLANE_SCREEN (screen);
 
-    glPushMatrix ();
     UNWRAP (ps, screen, paintTransformedScreen);
 
     if (ps->timeoutHandle)
     {
+	CompTransform sTransform = *transform;
 	double dx, dy, tx, ty;
 	int vx, vy;
 
@@ -268,71 +269,71 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    vy--;
 	}
 
-	glPushMatrix ();
+	matrixTranslate (&sTransform, dx, -dy, 0.0);
 
-	glTranslatef (dx, -dy, 0.0);
-	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
-					   mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+					   region, output, mask);
+
 	if (dx > 0)
 	{
-	    glTranslatef (-1.0, 0.0, 0.0);
+	    matrixTranslate (&sTransform, -1.0, 0.0, 0.0);
 	    moveScreenViewport (screen, 1, 0, FALSE);
 	}
 	else
 	{
-	    glTranslatef (1.0, 0.0, 0.0);
+	    matrixTranslate (&sTransform, 1.0, 0.0, 0.0);
 	    moveScreenViewport (screen, -1, 0, FALSE);
 	}
-	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
-					   mask);
+
+	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+					   region, output, mask);
+
 	if (dy > 0)
 	{
-	    glTranslatef (0.0, 1.0, 0.0);
+	    matrixTranslate (&sTransform, 0.0, 1.0, 0.0);
 	    moveScreenViewport (screen, 0, 1, FALSE);
 	}
 	else
 	{
-	    glTranslatef (0.0, -1.0, 0.0);
+	    matrixTranslate (&sTransform, 0.0, -1.0, 0.0);
 	    moveScreenViewport (screen, 0, -1, FALSE);
 	}
-	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
-					   mask);
+
+	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+					   region, output, mask);
+
 	if (dx > 0)
 	{
-	    glTranslatef (1.0, 0.0, 0.0);
+	    matrixTranslate (&sTransform, 1.0, 0.0, 0.0);
 	    moveScreenViewport (screen, -1, 0, FALSE);
 	}
 	else
 	{
-	    glTranslatef (-1.0, 0.0, 0.0);
+	    matrixTranslate (&sTransform, -1.0, 0.0, 0.0);
 	    moveScreenViewport (screen, 1, 0, FALSE);
 	}
-	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
-					   mask);
+
+	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+					   region, output, mask);
+
 	if (dy > 0)
 	{
-	    glTranslatef (0.0, -1.0, 0.0);
 	    moveScreenViewport (screen, 0, -1, FALSE);
 	}
 	else
 	{
-	    glTranslatef (0.0, 1.0, 0.0);
 	    moveScreenViewport (screen, 0, 1, FALSE);
 	}
-	glTranslatef (-dx, -dy, 0.0);
-	glPopMatrix ();
 
 	moveScreenViewport (screen, -vx, -vy, FALSE);
     }
     else
     {
-	(*screen->paintTransformedScreen) (screen, sAttrib, region, output,
-					   mask);
+	(*screen->paintTransformedScreen) (screen, sAttrib, transform,
+					   region, output, mask);
     }
 
     WRAP (ps, screen, paintTransformedScreen, planePaintTransformedScreen);
-    glPopMatrix ();
-
 }
 
 static void
@@ -353,6 +354,7 @@ planeDonePaintScreen (CompScreen *s)
 static Bool
 planePaintScreen (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
+		  const CompTransform	  *transform,
 		  Region		  region,
 		  int			  output,
 		  unsigned int		  mask)
@@ -368,7 +370,7 @@ planePaintScreen (CompScreen		  *s,
     }
 
     UNWRAP (ps, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (ps, s, paintScreen, planePaintScreen);
 
     return status;

@@ -401,6 +401,7 @@ zoomDonePaintScreen (CompScreen *s)
 static Bool
 zoomPaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
 		 Region		         region,
 		 int			 output,
 		 unsigned int		 mask)
@@ -443,7 +444,7 @@ zoomPaintScreen (CompScreen		 *s,
 	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
 
 	UNWRAP (zs, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, region, output, mask);
+	status = (*s->paintScreen) (s, &sa, transform, region, output, mask);
 	WRAP (zs, s, paintScreen, zoomPaintScreen);
 
 	s->filter[SCREEN_TRANS_FILTER] = saveFilter;
@@ -451,7 +452,8 @@ zoomPaintScreen (CompScreen		 *s,
     else
     {
 	UNWRAP (zs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
+				    mask);
 	WRAP (zs, s, paintScreen, zoomPaintScreen);
     }
 

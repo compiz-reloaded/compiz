@@ -609,6 +609,7 @@ annoClear (CompDisplay     *d,
 static Bool
 annoPaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
 		 Region			 region,
 		 int			 output,
 		 unsigned int		 mask)
@@ -618,7 +619,7 @@ annoPaintScreen (CompScreen		 *s,
     ANNO_SCREEN (s);
 
     UNWRAP (as, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (as, s, paintScreen, annoPaintScreen);
 
     if (status && as->content && region->numRects)

@@ -624,6 +624,7 @@ moveHandleEvent (CompDisplay *d,
 static Bool
 movePaintWindow (CompWindow		 *w,
 		 const WindowPaintAttrib *attrib,
+		 const CompTransform	 *transform,
 		 Region			 region,
 		 unsigned int		 mask)
 {
@@ -648,7 +649,7 @@ movePaintWindow (CompWindow		 *w,
     }
 
     UNWRAP (ms, s, paintWindow);
-    status = (*s->paintWindow) (w, attrib, region, mask);
+    status = (*s->paintWindow) (w, attrib, transform, region, mask);
     WRAP (ms, s, paintWindow, movePaintWindow);
 
     return status;

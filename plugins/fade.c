@@ -261,6 +261,7 @@ fadeWindowStop (CompWindow *w)
 static Bool
 fadePaintWindow (CompWindow		 *w,
 		 const WindowPaintAttrib *attrib,
+		 const CompTransform	 *transform,
 		 Region			 region,
 		 unsigned int		 mask)
 {
@@ -357,13 +358,13 @@ fadePaintWindow (CompWindow		 *w,
 	fAttrib.saturation = fw->saturation;
 
 	UNWRAP (fs, s, paintWindow);
-	status = (*s->paintWindow) (w, &fAttrib, region, mask);
+	status = (*s->paintWindow) (w, &fAttrib, transform, region, mask);
 	WRAP (fs, s, paintWindow, fadePaintWindow);
     }
     else
     {
 	UNWRAP (fs, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region, mask);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (fs, s, paintWindow, fadePaintWindow);
     }
 

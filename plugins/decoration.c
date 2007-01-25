@@ -313,6 +313,7 @@ decorDisplayInitOptions (DecorDisplay *dd)
 
 static Bool
 decorDrawWindow (CompWindow	      *w,
+		 const CompTransform  *transform,
 		 const FragmentAttrib *attrib,
 		 Region		      region,
 		 unsigned int	      mask)
@@ -322,7 +323,7 @@ decorDrawWindow (CompWindow	      *w,
     DECOR_SCREEN (w->screen);
 
     UNWRAP (ds, w->screen, drawWindow);
-    status = (*w->screen->drawWindow) (w, attrib, region, mask);
+    status = (*w->screen->drawWindow) (w, transform, attrib, region, mask);
     WRAP (ds, w->screen, drawWindow, decorDrawWindow);
 
     if (!(mask & PAINT_WINDOW_SOLID_MASK))

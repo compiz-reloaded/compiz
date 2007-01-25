@@ -21,4 +21,5 @@ compiz_SOURCES =   \
 	option.c   \
 	plugin.c   \
 	session.c  \
-	fragment.c
+	fragment.c \
+	matrix.c

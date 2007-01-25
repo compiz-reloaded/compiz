@@ -1176,6 +1176,7 @@ cubePreparePaintScreen (CompScreen *s,
 static Bool
 cubePaintScreen (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	*transform,
 		 Region			 region,
 		 int			 output,
 		 unsigned int		 mask)
@@ -1191,7 +1192,7 @@ cubePaintScreen (CompScreen		 *s,
     }
 
     UNWRAP (cs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (cs, s, paintScreen, cubePaintScreen);
 
     return status;
@@ -1213,6 +1214,7 @@ cubeDonePaintScreen (CompScreen *s)
 static void
 cubeMoveViewportAndPaint (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
+			  const CompTransform	  *transform,
 			  int			  output,
 			  unsigned int		  mask,
 			  int			  dx)
@@ -1244,7 +1246,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	output = cs->output[cubeOutput];
 
 	moveScreenViewport (s, -dView, 0, FALSE);
-	(*s->paintTransformedScreen) (s, sAttrib,
+	(*s->paintTransformedScreen) (s, sAttrib, transform,
 				      &s->outputDev[output].region,
 				      output, mask);
 	moveScreenViewport (s, dView, 0, FALSE);
@@ -1252,7 +1254,8 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
     else
     {
 	moveScreenViewport (s, dx, 0, FALSE);
-	(*s->paintTransformedScreen) (s, sAttrib, &s->region, output, mask);
+	(*s->paintTransformedScreen) (s, sAttrib, transform, &s->region,
+				      output, mask);
 	moveScreenViewport (s, -dx, 0, FALSE);
     }
 }
@@ -1260,6 +1263,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
+			    const CompTransform	    *transform,
 			    Region		    region,
 			    int			    output,
 			    unsigned int	    mask)
@@ -1394,6 +1398,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
     if (cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
+	CompTransform sTransform = *transform;
+
 	screenLighting (s, TRUE);
 
 	glColor3usv (cs->color);
@@ -1403,14 +1409,16 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	if (sAttrib->xRotate > 0.0f)
 	{
 	    sa.yRotate += 360.0f / size;
-	    (s->applyScreenTransform) (s, &sa, output);
+	    (*s->applyScreenTransform) (s, &sa, output, &sTransform);
+	    glLoadMatrixf (sTransform.m);
 	    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
 	    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
 	    sa.yRotate -= 360.0f / size;
 	}
 	else
 	{
-	    (s->applyScreenTransform) (s, &sa, output);
+	    (*s->applyScreenTransform) (s, &sa, output, &sTransform);
+	    glLoadMatrixf (sTransform.m);
 	    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
 	    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
 	}
@@ -1463,7 +1471,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    for (i = 0; i < hsize; i++)
 	    {
-		cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+		cubeMoveViewportAndPaint (s, &sa, transform, output, mask,
+					  xMove);
 
 		sa.yRotate -= 360.0f / size;
 		xMove++;
@@ -1477,14 +1486,15 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    {
 		xMove = cs->xrotations;
 
-		cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+		cubeMoveViewportAndPaint (s, &sa, transform, output, mask,
+					  xMove);
 
 		xMove++;
 	    }
 
 	    sa.yRotate -= 360.0f / size;
 
-	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
 	}
     }
     else
@@ -1520,7 +1530,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    for (i = 0; i < hsize; i++)
 	    {
-		cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+		cubeMoveViewportAndPaint (s, &sa, transform, output, mask,
+					  xMove);
 
 		sa.yRotate += 360.0f / size;
 		xMove++;
@@ -1530,17 +1541,17 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
 	else
 	{
-	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = -cs->xrotations;
 
-	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = 1 - cs->xrotations;
 
-	    cubeMoveViewportAndPaint (s, &sa, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
 	}
     }
 
@@ -1550,20 +1561,21 @@ cubePaintTransformedScreen (CompScreen		    *s,
 static void
 cubeApplyScreenTransform (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
-			  int			  output)
+			  int			  output,
+			  CompTransform	          *transform)
 {
     CUBE_SCREEN (s);
 
-    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
-    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
+    matrixTranslate (transform, cs->outputXOffset, -cs->outputYOffset, 0.0f);
+    matrixScale (transform, cs->outputXScale, cs->outputYScale, 1.0f);
 
     UNWRAP (cs, s, applyScreenTransform);
-    (*s->applyScreenTransform) (s, sAttrib, output);
+    (*s->applyScreenTransform) (s, sAttrib, output, transform);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
 
-    glScalef (1.0f / cs->outputXScale, 1.0f / cs->outputYScale, 1.0f);
-    glTranslatef (-cs->outputXOffset, cs->outputYOffset, 0.0f);
-
+    matrixScale (transform, 1.0f / cs->outputXScale,
+		 1.0f / cs->outputYScale, 1.0f);
+    matrixTranslate (transform, -cs->outputXOffset, cs->outputYOffset, 0.0f);
 }
 
 static void

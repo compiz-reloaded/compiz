@@ -1447,6 +1447,7 @@ switchPreparePaintScreen (CompScreen *s,
 static Bool
 switchPaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
+		   const CompTransform	   *transform,
 		   Region		   region,
 		   int			   output,
 		   unsigned int		   mask)
@@ -1498,7 +1499,7 @@ switchPaintScreen (CompScreen		   *s,
 	}
 
 	UNWRAP (ss, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, region, output, mask);
+	status = (*s->paintScreen) (s, &sa, transform, region, output, mask);
 	WRAP (ss, s, paintScreen, switchPaintScreen);
 
 	if (zoomed)
@@ -1509,17 +1510,20 @@ switchPaintScreen (CompScreen		   *s,
 
 	if (switcher)
 	{
+	    CompTransform sTransform = *transform;
+
 	    switcher->destroyed = saveDestroyed;
 
-	    glPushMatrix ();
+	    transformToScreenSpace (s, output, -DEFAULT_Z_CAMERA, &sTransform);
 
-	    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
+	    glPushMatrix ();
+	    glLoadMatrixf (sTransform.m);
 
 	    if (!switcher->destroyed			 &&
 		switcher->attrib.map_state == IsViewable &&
 		switcher->damaged)
 	    {
-		(*s->paintWindow) (switcher, &switcher->paint,
+		(*s->paintWindow) (switcher, &switcher->paint, &sTransform,
 				   &infiniteRegion, 0);
 	    }
 
@@ -1529,7 +1533,8 @@ switchPaintScreen (CompScreen		   *s,
     else
     {
 	UNWRAP (ss, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, region, output, mask);
+	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
+				    mask);
 	WRAP (ss, s, paintScreen, switchPaintScreen);
     }
 
@@ -1565,6 +1570,7 @@ switchDonePaintScreen (CompScreen *s)
 static void
 switchPaintThumb (CompWindow		  *w,
 		  const WindowPaintAttrib *attrib,
+		  const CompTransform	  *transform,
 		  unsigned int		  mask,
 		  int			  x,
 		  int			  y,
@@ -1593,6 +1599,7 @@ switchPaintThumb (CompWindow		  *w,
     if (w->mapNum)
     {
 	FragmentAttrib fragment;
+	CompTransform  wTransform = *transform;
 	int	       ww, wh;
 
 	SWITCH_SCREEN (w->screen);
@@ -1629,9 +1636,18 @@ switchPaintThumb (CompWindow		  *w,
 
 	initFragmentAttrib (&fragment, &sAttrib);
 
-	pushWindowTransform (w, &sAttrib);
+	matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
+	matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 0.0f);
+	matrixTranslate (&wTransform,
+			 sAttrib.xTranslate / sAttrib.xScale - w->attrib.x,
+			 sAttrib.yTranslate / sAttrib.yScale - w->attrib.y,
+			 0.0f);
 
-	(w->screen->drawWindow) (w, &fragment, &infiniteRegion, mask);
+	glPushMatrix ();
+	glLoadMatrixf (wTransform.m);
+
+	(w->screen->drawWindow) (w, &wTransform, &fragment, &infiniteRegion,
+				 mask);
 
 	glPopMatrix ();
 
@@ -1713,10 +1729,19 @@ switchPaintThumb (CompWindow		  *w,
 	if (w->vCount)
 	{
 	    FragmentAttrib fragment;
+	    CompTransform  wTransform = *transform;
 
 	    initFragmentAttrib (&fragment, &sAttrib);
 
-	    pushWindowTransform (w, &sAttrib);
+	    matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
+	    matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 0.0f);
+	    matrixTranslate (&wTransform,
+			     sAttrib.xTranslate / sAttrib.xScale - w->attrib.x,
+			     sAttrib.yTranslate / sAttrib.yScale - w->attrib.y,
+			     0.0f);
+
+	    glPushMatrix ();
+	    glLoadMatrixf (wTransform.m);
 
 	    (*w->screen->drawWindowTexture) (w,
 					     &icon->texture, &fragment,
@@ -1732,6 +1757,7 @@ switchPaintThumb (CompWindow		  *w,
 static Bool
 switchPaintWindow (CompWindow		   *w,
 		   const WindowPaintAttrib *attrib,
+		   const CompTransform	   *transform,
 		   Region		   region,
 		   unsigned int		   mask)
 {
@@ -1749,7 +1775,7 @@ switchPaintWindow (CompWindow		   *w,
 	    return FALSE;
 
 	UNWRAP (ss, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region, mask);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
 
 	if (!(mask & PAINT_WINDOW_TRANSFORMED_MASK) && region->numRects == 0)
@@ -1774,8 +1800,8 @@ switchPaintWindow (CompWindow		   *w,
 	for (i = 0; i < ss->nWindows; i++)
 	{
 	    if (x + WIDTH > x1)
-		switchPaintThumb (ss->windows[i], &w->lastPaint, mask,
-				  x, y, x1, x2);
+		switchPaintThumb (ss->windows[i], &w->lastPaint, transform,
+				  mask, x, y, x1, x2);
 
 	    x += WIDTH;
 	}
@@ -1785,7 +1811,7 @@ switchPaintWindow (CompWindow		   *w,
 	    if (x > x2)
 		break;
 
-	    switchPaintThumb (ss->windows[i], &w->lastPaint, mask,
+	    switchPaintThumb (ss->windows[i], &w->lastPaint, transform, mask,
 			      x, y, x1, x2);
 
 	    x += WIDTH;
@@ -1811,24 +1837,27 @@ switchPaintWindow (CompWindow		   *w,
     }
     else if (w->id == ss->selectedWindow)
     {
-	glPushMatrix ();
+	CompTransform wTransform = *transform;
 
 	if (ss->bringToFront)
 	{
 	    if (ss->selectedWindow == ss->zoomedWindow)
-		glTranslatef (0.0f, 0.0f, MIN (ss->translate, ss->sTranslate));
+	    {
+		matrixTranslate (&wTransform, 0.0f, 0.0f,
+				 MIN (ss->translate, ss->sTranslate));
+
+		mask |= PAINT_WINDOW_TRANSFORMED_MASK;
+	    }
 	}
 
 	glPushAttrib (GL_STENCIL_BUFFER_BIT);
 	glDisable (GL_STENCIL_TEST);
 
 	UNWRAP (ss, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region, mask);
+	status = (*s->paintWindow) (w, attrib, &wTransform, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
 
 	glPopAttrib ();
-
-	glPopMatrix ();
     }
     else if (ss->switching)
     {
@@ -1845,31 +1874,33 @@ switchPaintWindow (CompWindow		   *w,
 
 	if (ss->bringToFront && w->id == ss->zoomedWindow)
 	{
-	    glPushMatrix ();
-	    glTranslatef (0.0f, 0.0f, MIN (ss->translate, ss->sTranslate));
+	    CompTransform wTransform = *transform;
+
+	    matrixTranslate (&wTransform, 0.0f, 0.0f,
+			     MIN (ss->translate, ss->sTranslate));
+
+	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
 
 	    glPushAttrib (GL_STENCIL_BUFFER_BIT);
 	    glDisable (GL_STENCIL_TEST);
 
 	    UNWRAP (ss, s, paintWindow);
-	    status = (*s->paintWindow) (w, &sAttrib, region, mask);
+	    status = (*s->paintWindow) (w, &sAttrib, &wTransform, region, mask);
 	    WRAP (ss, s, paintWindow, switchPaintWindow);
 
 	    glPopAttrib ();
-
-	    glPopMatrix ();
 	}
 	else
 	{
 	    UNWRAP (ss, s, paintWindow);
-	    status = (*s->paintWindow) (w, &sAttrib, region, mask);
+	    status = (*s->paintWindow) (w, &sAttrib, transform, region, mask);
 	    WRAP (ss, s, paintWindow, switchPaintWindow);
 	}
     }
     else
     {
 	UNWRAP (ss, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, region, mask);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
     }
 
