@@ -1625,8 +1625,6 @@ struct _CompScreen {
 
     int saturateFunction[2][64];
 
-    GLint stencilRef;
-
     GLfloat projection[16];
 
     Bool clearBuffers;

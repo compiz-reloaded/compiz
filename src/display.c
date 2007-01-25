@@ -2027,8 +2027,6 @@ eventLoop (void)
 		    if (timeDiff < 0)
 			timeDiff = 0;
 
-		    s->stencilRef = 0;
-
 		    makeScreenCurrent (s);
 
 		    if (s->slowAnimations)

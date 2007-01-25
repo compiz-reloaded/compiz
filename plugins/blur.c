@@ -138,6 +138,7 @@ typedef struct _BlurScreen {
     Region tmpRegion;
 
     BoxRec stencilBox;
+    GLint  stencilBits;
 
     int output;
 
@@ -1123,20 +1124,37 @@ blurDrawWindow (CompWindow	     *w,
 		{
 		    if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
 		    {
-			bw->state[BLUR_STATE_CLIENT].active = TRUE;
 			if (bw->state[BLUR_STATE_CLIENT].clipped)
-			    clipped = TRUE;
+			{
+			    if (bs->stencilBits)
+			    {
+				bw->state[BLUR_STATE_CLIENT].active = TRUE;
+				clipped = TRUE;
+			    }
+			}
+			else
+			{
+			    bw->state[BLUR_STATE_CLIENT].active = TRUE;
+			}
 		    }
 
 		    if (bw->state[BLUR_STATE_DECOR].threshold)
 		    {
-			bw->state[BLUR_STATE_DECOR].active = TRUE;
 			if (bw->state[BLUR_STATE_DECOR].clipped)
-			    clipped = TRUE;
+			{
+			    if (bs->stencilBits)
+			    {
+				bw->state[BLUR_STATE_DECOR].active = TRUE;
+				clipped = TRUE;
+			    }
+			}
+			else
+			{
+			    bw->state[BLUR_STATE_DECOR].active = TRUE;
+			}
 		    }
 		}
 
-		/* assumes s->stencilRef never greater than 1 */
 		if (clipped)
 		{
 		    BoxRec clearBox = bs->stencilBox;
@@ -1150,43 +1168,17 @@ blurDrawWindow (CompWindow	     *w,
 
 		    if (clearBox.x2 > clearBox.x1 && clearBox.y2 > clearBox.y1)
 		    {
-			if (s->stencilRef)
-			{
-			    glPushMatrix ();
-			    glLoadIdentity ();
-
-			    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-
-			    prepareXCoords (s, bs->output, -DEFAULT_Z_CAMERA);
-
-			    glStencilFunc (GL_EQUAL, s->stencilRef + 1, ~0);
-			    glStencilOp (GL_KEEP, GL_KEEP, GL_DECR);
-
-			    glBegin (GL_QUADS);
-			    glVertex2i (clearBox.x1, clearBox.y2);
-			    glVertex2i (clearBox.x2, clearBox.y2);
-			    glVertex2i (clearBox.x2, clearBox.y1);
-			    glVertex2i (clearBox.x1, clearBox.y1);
-			    glEnd ();
-
-			    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
-
-			    glPopMatrix ();
-			}
-			else
-			{
-			    glPushAttrib (GL_SCISSOR_BIT);
-			    glEnable (GL_SCISSOR_TEST);
-			    glScissor (clearBox.x1,
-				       s->height - clearBox.y2,
-				       clearBox.x2 - clearBox.x1,
-				       clearBox.y2 - clearBox.y1);
-			    glClear (GL_STENCIL_BUFFER_BIT);
-			    glPopAttrib ();
-			}
+			glPushAttrib (GL_SCISSOR_BIT);
+			glEnable (GL_SCISSOR_TEST);
+			glScissor (clearBox.x1,
+				   s->height - clearBox.y2,
+				   clearBox.x2 - clearBox.x1,
+				   clearBox.y2 - clearBox.y1);
+			glClear (GL_STENCIL_BUFFER_BIT);
+			glPopAttrib ();
 		    }
 
-		    glStencilFunc (GL_EQUAL, s->stencilRef | 0x2, 0x1);
+		    glStencilFunc (GL_ALWAYS, 0x1, ~0);
 		    glStencilOp (GL_KEEP, GL_KEEP, GL_REPLACE);
 
 		    (*s->drawWindowGeometry) (w);
@@ -1295,13 +1287,13 @@ blurDrawWindowTexture (CompWindow	    *w,
 		glEnable (GL_STENCIL_TEST);
 		glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
 
-		glStencilFunc (GL_EQUAL, w->screen->stencilRef, ~0);
+		glStencilFunc (GL_EQUAL, 0, ~0);
 
 		/* draw region without destination blur */
 		UNWRAP (bs, w->screen, drawWindowTexture);
 		(*w->screen->drawWindowTexture) (w, texture, &fa, mask);
 
-		glStencilFunc (GL_EQUAL, w->screen->stencilRef | 0x2, ~0);
+		glStencilFunc (GL_EQUAL, 0x1, ~0);
 
 		/* draw region with destination blur */
 		(*w->screen->drawWindowTexture) (w, texture, &dstFa, mask);
@@ -1590,6 +1582,11 @@ blurInitScreen (CompPlugin *p,
     bs->moreBlur	 = FALSE;
 
     bs->dst = 0;
+
+    glGetIntegerv (GL_STENCIL_BITS, &bs->stencilBits);
+    if (!bs->stencilBits)
+	fprintf (stderr, "%s: No stencil buffer. Region based blur disabled\n",
+		 programName);
 
     blurScreenInitOptions (bs);
 

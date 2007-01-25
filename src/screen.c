@@ -1387,7 +1387,6 @@ addScreen (CompDisplay *display,
     unsigned int	 nchildren;
     int			 defaultDepth, nvisinfo, nElements, value, i;
     const char		 *glxExtensions, *glExtensions;
-    GLint	         stencilBits;
     XSetWindowAttributes attrib;
     GLfloat		 globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 0.1f };
     GLfloat		 ambientLight[]   = { 0.0f, 0.0f,  0.0f, 0.0f };
@@ -1488,8 +1487,6 @@ addScreen (CompDisplay *display,
 
     s->windows = 0;
     s->reverseWindows = 0;
-
-    s->stencilRef = 0;
 
     s->opacityStep = OPACITY_STEP_DEFAULT;
 
@@ -1986,14 +1983,6 @@ addScreen (CompDisplay *display,
     s->defaultIcon = NULL;
 
     s->desktopWindowCount = 0;
-
-    glGetIntegerv (GL_STENCIL_BITS, &stencilBits);
-    if (!stencilBits)
-    {
-	fprintf (stderr, "%s: No stencil buffer. Clipping of transformed "
-		 "windows is not going to be correct when screen is "
-		 "transformed.\n", programName);
-    }
 
     glClearColor (0.0, 0.0, 0.0, 1.0);
     glBlendFunc (GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
