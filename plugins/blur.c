@@ -123,7 +123,8 @@ typedef struct _BlurScreen {
     DrawWindowProc	   drawWindow;
     DrawWindowTextureProc  drawWindowTexture;
 
-    WindowMoveNotifyProc windowMoveNotify;
+    WindowResizeNotifyProc windowResizeNotify;
+    WindowMoveNotifyProc   windowMoveNotify;
 
     int  wMask;
     int	 blurTime;
@@ -380,6 +381,7 @@ static void
 blurWindowUpdateRegion (CompWindow *w)
 {
     Region region, q;
+    REGION r;
 
     BLUR_WINDOW (w);
 
@@ -387,13 +389,11 @@ blurWindowUpdateRegion (CompWindow *w)
     if (!region)
 	return;
 
+    r.rects = &r.extents;
+    r.numRects = r.size = 1;
+
     if (bw->state[BLUR_STATE_DECOR].threshold)
     {
-	REGION r;
-
-	r.rects = &r.extents;
-	r.numRects = r.size = 1;
-
 	r.extents.x1 = -w->output.left;
 	r.extents.y1 = -w->output.top;
 	r.extents.x2 = w->width + w->output.right;
@@ -433,6 +433,11 @@ blurWindowUpdateRegion (CompWindow *w)
 
     if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
     {
+	r.extents.x1 = 0;
+	r.extents.y1 = 0;
+	r.extents.x2 = w->width;
+	r.extents.y2 = w->height;
+
 	bw->state[BLUR_STATE_CLIENT].clipped = FALSE;
 
 	if (bw->state[BLUR_STATE_CLIENT].nBox)
@@ -443,16 +448,17 @@ blurWindowUpdateRegion (CompWindow *w)
 	    if (q)
 	    {
 		XOffsetRegion (q, w->attrib.x, w->attrib.y);
-		XIntersectRegion (q, w->region, q);
-		if (!XEqualRegion (q, w->region))
+		XIntersectRegion (q, &r, q);
+		if (!XEqualRegion (q, &r))
 		    bw->state[BLUR_STATE_CLIENT].clipped = TRUE;
 
 		XUnionRegion (q, region, region);
+		XDestroyRegion (q);
 	    }
 	}
 	else
 	{
-	    XUnionRegion (w->region, region, region);
+	    XUnionRegion (&r, region, region);
 	}
     }
 
@@ -1400,6 +1406,25 @@ blurHandleEvent (CompDisplay *d,
 }
 
 static void
+blurWindowResizeNotify (CompWindow *w)
+{
+    BLUR_SCREEN (w->screen);
+
+    if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
+    {
+	BLUR_WINDOW (w);
+
+	if ((bw->state[BLUR_STATE_CLIENT].threshold && w->alpha) ||
+	    bw->state[BLUR_STATE_DECOR].threshold)
+	    blurWindowUpdateRegion (w);
+    }
+
+    UNWRAP (bs, w->screen, windowResizeNotify);
+    (*w->screen->windowResizeNotify) (w);
+    WRAP (bs, w->screen, windowResizeNotify, blurWindowResizeNotify);
+}
+
+static void
 blurWindowMoveNotify (CompWindow *w,
 		      int	 dx,
 		      int	 dy,
@@ -1595,6 +1620,7 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, paintScreen, blurPaintScreen);
     WRAP (bs, s, drawWindow, blurDrawWindow);
     WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
+    WRAP (bs, s, windowResizeNotify, blurWindowResizeNotify);
     WRAP (bs, s, windowMoveNotify, blurWindowMoveNotify);
 
     s->privates[bd->screenPrivateIndex].ptr = bs;
@@ -1623,6 +1649,7 @@ blurFiniScreen (CompPlugin *p,
     UNWRAP (bs, s, paintScreen);
     UNWRAP (bs, s, drawWindow);
     UNWRAP (bs, s, drawWindowTexture);
+    UNWRAP (bs, s, windowResizeNotify);
     UNWRAP (bs, s, windowMoveNotify);
 
     free (bs);
