@@ -1054,8 +1054,7 @@ paintBackground (CompScreen   *s,
 
 	s->backgroundLoaded = FALSE;
 
-	if (!(mask & PAINT_BACKGROUND_WITH_STENCIL_MASK))
-	    return;
+	return;
     }
     else
     {
@@ -1100,13 +1099,6 @@ paintBackground (CompScreen   *s,
 	pBox++;
     }
 
-    if (mask & PAINT_BACKGROUND_WITH_STENCIL_MASK)
-    {
-	glEnable (GL_STENCIL_TEST);
-	glStencilFunc (GL_ALWAYS, s->stencilRef, ~0);
-	glStencilOp (GL_REPLACE, GL_REPLACE, GL_REPLACE);
-    }
-
     glTexCoordPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data);
     glVertexPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data + 2);
 
@@ -1133,13 +1125,6 @@ paintBackground (CompScreen   *s,
 	    glDrawArrays (GL_QUADS, 0, nBox * 4);
 	    glColor4usv (defaultColor);
 	}
-    }
-
-    if (mask & PAINT_BACKGROUND_WITH_STENCIL_MASK)
-    {
-	glStencilFunc (GL_EQUAL, s->stencilRef, ~0);
-	glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
-	glDisable (GL_STENCIL_TEST);
     }
 
     free (data);

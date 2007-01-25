@@ -1104,7 +1104,6 @@ typedef void (*DrawWindowTextureProc) (CompWindow	    *w,
 typedef void (*DrawWindowGeometryProc) (CompWindow *window);
 
 #define PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK (1 << 0)
-#define PAINT_BACKGROUND_WITH_STENCIL_MASK          (1 << 1)
 
 typedef void (*PaintBackgroundProc) (CompScreen   *screen,
 				     Region	  region,
