@@ -131,7 +131,6 @@ typedef struct _CubeScreen {
     PaintScreenProc	       paintScreen;
     PaintTransformedScreenProc paintTransformedScreen;
     ApplyScreenTransformProc   applyScreenTransform;
-    PaintBackgroundProc	       paintBackground;
     SetScreenOptionProc	       setScreenOption;
     OutputChangeNotifyProc     outputChangeNotify;
 
@@ -1578,18 +1577,6 @@ cubeApplyScreenTransform (CompScreen		  *s,
     matrixTranslate (transform, -cs->outputXOffset, cs->outputYOffset, 0.0f);
 }
 
-static void
-cubePaintBackground (CompScreen   *s,
-		     Region	  region,
-		     unsigned int mask)
-{
-    CUBE_SCREEN (s);
-
-    UNWRAP (cs, s, paintBackground);
-    (*s->paintBackground) (s, region, mask);
-    WRAP (cs, s, paintBackground, cubePaintBackground);
-}
-
 static Bool
 cubeUnfold (CompDisplay     *d,
 	    CompAction      *action,
@@ -1959,7 +1946,6 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, paintScreen, cubePaintScreen);
     WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
-    WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
 
@@ -1991,7 +1977,6 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, paintScreen);
     UNWRAP (cs, s, paintTransformedScreen);
     UNWRAP (cs, s, applyScreenTransform);
-    UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, setScreenOption);
     UNWRAP (cs, s, outputChangeNotify);
 
