@@ -427,8 +427,6 @@ blurWindowUpdateRegion (CompWindow *w)
 		XDestroyRegion (q);
 	    }
 	}
-
-	XOffsetRegion (region, w->attrib.x, w->attrib.y);
     }
 
     if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
@@ -447,7 +445,6 @@ blurWindowUpdateRegion (CompWindow *w)
 				 w->width, w->height);
 	    if (q)
 	    {
-		XOffsetRegion (q, w->attrib.x, w->attrib.y);
 		XIntersectRegion (q, &r, q);
 		if (!XEqualRegion (q, &r))
 		    bw->state[BLUR_STATE_CLIENT].clipped = TRUE;
@@ -473,6 +470,7 @@ blurWindowUpdateRegion (CompWindow *w)
     else
     {
 	bw->region = region;
+	XOffsetRegion (bw->region, w->attrib.x, w->attrib.y);
     }
 }
 
