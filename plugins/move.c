@@ -427,6 +427,11 @@ moveHandleMotionEvent (CompScreen *s,
 			{
 			    int wy;
 
+			    /* update server position before maximizing
+			       window again so that it is maximized on
+			       correct output */
+			    syncWindowPosition (w);
+
 			    maximizeWindow (w, ms->origState);
 
 			    wy  = workArea.y + (w->input.top >> 1);
