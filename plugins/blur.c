@@ -1185,7 +1185,9 @@ blurDrawWindow (CompWindow	     *w,
 		    glStencilFunc (GL_ALWAYS, 0x1, ~0);
 		    glStencilOp (GL_KEEP, GL_KEEP, GL_REPLACE);
 
+		    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 		    (*s->drawWindowGeometry) (w);
+		    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 
 		    glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
