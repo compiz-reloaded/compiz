@@ -421,7 +421,7 @@ dbusGetOptionValue (DBusMessageIter *iter,
  * dbus-send --type=method_call --dest=org.freedesktop.compiz \
  * /org/freedesktop/compiz/core/allscreens/active_plugins     \
  * org.freedesktop.compiz.set				      \
- * string:'dbus' string:'decoration' string:'place'
+ * array:string:'dbus','decoration','place'
  *
  * Example (will set run_command0 option to trigger on key
  * binding <Control><Alt>Return and not trigger on any button
@@ -454,7 +454,7 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
     {
 	if (strcmp (option->name, path[2]) == 0)
 	{
-	    DBusMessageIter iter;
+	    DBusMessageIter iter, aiter;
 	    CompOptionValue value, tmpValue;
 	    Bool	    status = FALSE;
 
@@ -462,11 +462,15 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 
 	    if (option->type == CompOptionTypeList)
 	    {
-		if (dbus_message_iter_init (message, &iter))
+		if (dbus_message_iter_init (message, &iter) &&
+		    dbus_message_iter_get_arg_type (&iter) == DBUS_TYPE_ARRAY)
 		{
+		    dbus_message_iter_recurse (&iter, &aiter);
+
 		    do
 		    {
-			if (dbusGetOptionValue (&iter, option->value.list.type,
+			if (dbusGetOptionValue (&aiter,
+						option->value.list.type,
 						&tmpValue))
 			{
 			    CompOptionValue *v;
@@ -480,10 +484,10 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 				value.list.value = v;
 			    }
 			}
-		    } while (dbus_message_iter_next (&iter));
-		}
+		    } while (dbus_message_iter_next (&aiter));
 
-		status = TRUE;
+		    status = TRUE;
+		}
 	    }
 	    else if (dbus_message_iter_init (message, &iter))
 	    {
