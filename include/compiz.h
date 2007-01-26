@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070124
+#define ABIVERSION 20070125
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1167,9 +1167,6 @@ addWindowGeometry (CompWindow *w,
 		   Region     clip);
 
 void
-drawWindowGeometry (CompWindow *w);
-
-void
 drawWindowTexture (CompWindow		*w,
 		   CompTexture		*texture,
 		   const FragmentAttrib	*fragment,
@@ -1688,7 +1685,6 @@ struct _CompScreen {
     PaintWindowProc		  paintWindow;
     DrawWindowProc		  drawWindow;
     AddWindowGeometryProc	  addWindowGeometry;
-    DrawWindowGeometryProc	  drawWindowGeometry;
     DrawWindowTextureProc	  drawWindowTexture;
     DamageWindowRectProc	  damageWindowRect;
     GetOutputExtentsForWindowProc getOutputExtentsForWindow;
@@ -2076,6 +2072,9 @@ struct _CompWindow {
     int      texUnits;
     int      texCoordSize;
     int      indexCount;
+
+    /* must be set by addWindowGeometry */
+    DrawWindowGeometryProc drawWindowGeometry;
 
     CompPrivate *privates;
 };

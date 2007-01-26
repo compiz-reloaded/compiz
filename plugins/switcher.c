@@ -1578,16 +1578,10 @@ switchPaintThumb (CompWindow		  *w,
 		  int			  x1,
 		  int			  x2)
 {
-    DrawWindowGeometryProc oldDrawWindowGeometry;
-    WindowPaintAttrib	   sAttrib = *attrib;
-    int			   wx, wy;
-    float		   width, height;
-    CompIcon		   *icon = NULL;
-
-    /* Wrap drawWindowGeometry to make sure the general
-       drawWindowGeometry function is used */
-    oldDrawWindowGeometry = w->screen->drawWindowGeometry;
-    w->screen->drawWindowGeometry = drawWindowGeometry;
+    WindowPaintAttrib sAttrib = *attrib;
+    int		      wx, wy;
+    float	      width, height;
+    CompIcon	      *icon = NULL;
 
     mask |= PAINT_WINDOW_TRANSFORMED_MASK;
 
@@ -1751,8 +1745,6 @@ switchPaintThumb (CompWindow		  *w,
 	    glPopMatrix ();
 	}
     }
-
-    w->screen->drawWindowGeometry = oldDrawWindowGeometry;
 }
 
 static Bool

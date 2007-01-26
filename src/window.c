@@ -1703,6 +1703,8 @@ addWindow (CompScreen *screen,
     w->indexCount   = 0;
     w->texCoordSize = 2;
 
+    w->drawWindowGeometry = NULL;
+
     w->struts = 0;
 
     w->icon  = 0;

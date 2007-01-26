@@ -210,7 +210,6 @@ typedef struct _WobblyScreen {
     PaintWindowProc	   paintWindow;
     DamageWindowRectProc   damageWindowRect;
     AddWindowGeometryProc  addWindowGeometry;
-    DrawWindowGeometryProc drawWindowGeometry;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
@@ -1999,6 +1998,46 @@ wobblyDonePaintScreen (CompScreen *s)
 }
 
 static void
+wobblyDrawWindowGeometry (CompWindow *w)
+{
+    int     texUnit = w->texUnits;
+    int     currentTexUnit = 0;
+    int     stride = (1 + texUnit) * 2;
+    GLfloat *vertices = w->vertices + (stride - 2);
+
+    stride *= sizeof (GLfloat);
+
+    glVertexPointer (2, GL_FLOAT, stride, vertices);
+
+    while (texUnit--)
+    {
+	if (texUnit != currentTexUnit)
+	{
+	    w->screen->clientActiveTexture (GL_TEXTURE0_ARB + texUnit);
+	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+	    currentTexUnit = texUnit;
+	}
+	vertices -= 2;
+	glTexCoordPointer (2, GL_FLOAT, stride, vertices);
+    }
+
+    glDrawElements (GL_QUADS, w->indexCount, GL_UNSIGNED_SHORT, w->indices);
+
+    /* disable all texture coordinate arrays except 0 */
+    texUnit = w->texUnits;
+    if (texUnit > 1)
+    {
+	while (--texUnit)
+	{
+	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
+	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	}
+
+	(*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB);
+    }
+}
+
+static void
 wobblyAddWindowGeometry (CompWindow *w,
 			 CompMatrix *matrix,
 			 int	    nMatrix,
@@ -2148,67 +2187,15 @@ wobblyAddWindowGeometry (CompWindow *w,
 	    pClip++;
 	}
 
-	w->vCount     = nVertices;
-	w->indexCount = nIndices;
+	w->vCount	      = nVertices;
+	w->indexCount	      = nIndices;
+	w->drawWindowGeometry = wobblyDrawWindowGeometry;
     }
     else
     {
 	UNWRAP (ws, w->screen, addWindowGeometry);
 	(*w->screen->addWindowGeometry) (w, matrix, nMatrix, region, clip);
 	WRAP (ws, w->screen, addWindowGeometry, wobblyAddWindowGeometry);
-    }
-}
-
-static void
-wobblyDrawWindowGeometry (CompWindow *w)
-{
-    WOBBLY_WINDOW (w);
-
-    if (ww->wobbly)
-    {
-	int     texUnit = w->texUnits;
-	int     currentTexUnit = 0;
-	int     stride = (1 + texUnit) * 2;
-	GLfloat *vertices = w->vertices + (stride - 2);
-
-	stride *= sizeof (GLfloat);
-
-	glVertexPointer (2, GL_FLOAT, stride, vertices);
-
-	while (texUnit--)
-	{
-	    if (texUnit != currentTexUnit)
-	    {
-		w->screen->clientActiveTexture (GL_TEXTURE0_ARB + texUnit);
-		glEnableClientState (GL_TEXTURE_COORD_ARRAY);
-		currentTexUnit = texUnit;
-	    }
-	    vertices -= 2;
-	    glTexCoordPointer (2, GL_FLOAT, stride, vertices);
-	}
-
-	glDrawElements (GL_QUADS, w->indexCount, GL_UNSIGNED_SHORT, w->indices);
-
-	/* disable all texture coordinate arrays except 0 */
-	texUnit = w->texUnits;
-	if (texUnit > 1)
-	{
-	    while (--texUnit)
-	    {
-		(*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
-		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	    }
-
-	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB);
-	}
-    }
-    else
-    {
-	WOBBLY_SCREEN (w->screen);
-
-	UNWRAP (ws, w->screen, drawWindowGeometry);
-	(*w->screen->drawWindowGeometry) (w);
-	WRAP (ws, w->screen, drawWindowGeometry, wobblyDrawWindowGeometry);
     }
 }
 
@@ -3007,7 +2994,6 @@ wobblyInitScreen (CompPlugin *p,
     WRAP (ws, s, paintWindow, wobblyPaintWindow);
     WRAP (ws, s, damageWindowRect, wobblyDamageWindowRect);
     WRAP (ws, s, addWindowGeometry, wobblyAddWindowGeometry);
-    WRAP (ws, s, drawWindowGeometry, wobblyDrawWindowGeometry);
     WRAP (ws, s, windowResizeNotify, wobblyWindowResizeNotify);
     WRAP (ws, s, windowMoveNotify, wobblyWindowMoveNotify);
     WRAP (ws, s, windowGrabNotify, wobblyWindowGrabNotify);
@@ -3035,7 +3021,6 @@ wobblyFiniScreen (CompPlugin *p,
     UNWRAP (ws, s, paintWindow);
     UNWRAP (ws, s, damageWindowRect);
     UNWRAP (ws, s, addWindowGeometry);
-    UNWRAP (ws, s, drawWindowGeometry);
     UNWRAP (ws, s, windowResizeNotify);
     UNWRAP (ws, s, windowMoveNotify);
     UNWRAP (ws, s, windowGrabNotify);

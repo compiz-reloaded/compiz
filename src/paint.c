@@ -439,6 +439,46 @@ moreWindowIndices (CompWindow *w,
     return TRUE;
 }
 
+static void
+drawWindowGeometry (CompWindow *w)
+{
+    int     texUnit = w->texUnits;
+    int     currentTexUnit = 0;
+    int     stride = (1 + texUnit) * 2;
+    GLfloat *vertices = w->vertices + (stride - 2);
+
+    stride *= sizeof (GLfloat);
+
+    glVertexPointer (2, GL_FLOAT, stride, vertices);
+
+    while (texUnit--)
+    {
+	if (texUnit != currentTexUnit)
+	{
+	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
+	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+	    currentTexUnit = texUnit;
+	}
+	vertices -= 2;
+	glTexCoordPointer (2, GL_FLOAT, stride, vertices);
+    }
+
+    glDrawArrays (GL_QUADS, 0, w->vCount);
+
+    /* disable all texture coordinate arrays except 0 */
+    texUnit = w->texUnits;
+    if (texUnit > 1)
+    {
+	while (--texUnit)
+	{
+	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
+	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	}
+
+	(*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB);
+    }
+}
+
 void
 addWindowGeometry (CompWindow *w,
 		   CompMatrix *matrix,
@@ -577,47 +617,9 @@ addWindowGeometry (CompWindow *w,
 		}
 	    }
 	}
-	w->vCount = n * 4;
-    }
-}
 
-void
-drawWindowGeometry (CompWindow *w)
-{
-    int     texUnit = w->texUnits;
-    int     currentTexUnit = 0;
-    int     stride = (1 + texUnit) * 2;
-    GLfloat *vertices = w->vertices + (stride - 2);
-
-    stride *= sizeof (GLfloat);
-
-    glVertexPointer (2, GL_FLOAT, stride, vertices);
-
-    while (texUnit--)
-    {
-	if (texUnit != currentTexUnit)
-	{
-	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
-	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
-	    currentTexUnit = texUnit;
-	}
-	vertices -= 2;
-	glTexCoordPointer (2, GL_FLOAT, stride, vertices);
-    }
-
-    glDrawArrays (GL_QUADS, 0, w->vCount);
-
-    /* disable all texture coordinate arrays except 0 */
-    texUnit = w->texUnits;
-    if (texUnit > 1)
-    {
-	while (--texUnit)
-	{
-	    (*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB + texUnit);
-	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	}
-
-	(*w->screen->clientActiveTexture) (GL_TEXTURE0_ARB);
+	w->vCount	      = n * 4;
+	w->drawWindowGeometry = drawWindowGeometry;
     }
 }
 
@@ -667,14 +669,14 @@ enableFragmentProgramAndDrawGeometry (CompWindow	   *w,
 	    screenTexEnvMode (s, GL_MODULATE);
 	    glColor4us (color, color, color, attrib->opacity);
 
-	    (*s->drawWindowGeometry) (w);
+	    (*w->drawWindowGeometry) (w);
 
 	    glColor4usv (defaultColor);
 	    screenTexEnvMode (s, GL_REPLACE);
 	}
 	else
 	{
-	    (*s->drawWindowGeometry) (w);
+	    (*w->drawWindowGeometry) (w);
 	}
 
 	if (blending)
@@ -686,14 +688,14 @@ enableFragmentProgramAndDrawGeometry (CompWindow	   *w,
 	glColor4us (attrib->brightness, attrib->brightness,
 		    attrib->brightness, BRIGHT);
 
-	(*w->screen->drawWindowGeometry) (w);
+	(*w->drawWindowGeometry) (w);
 
 	glColor4usv (defaultColor);
 	screenTexEnvMode (s, GL_REPLACE);
     }
     else
     {
-	(*w->screen->drawWindowGeometry) (w);
+	(*w->drawWindowGeometry) (w);
     }
 
     disableTexture (w->screen, texture);
@@ -810,7 +812,7 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
 		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
 		glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_ALPHA, GL_SRC_ALPHA);
 
-		(*s->drawWindowGeometry) (w);
+		(*w->drawWindowGeometry) (w);
 
 		disableTexture (s, texture);
 
@@ -820,7 +822,7 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
 	    }
 	    else
 	    {
-		(*s->drawWindowGeometry) (w);
+		(*w->drawWindowGeometry) (w);
 	    }
 
 	    disableTexture (s, texture);
@@ -847,7 +849,7 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
 
 	    glTexEnvfv (GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, constant);
 
-	    (*s->drawWindowGeometry) (w);
+	    (*w->drawWindowGeometry) (w);
 	}
 
 	disableTexture (s, texture);
@@ -880,14 +882,14 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
 		screenTexEnvMode (s, GL_MODULATE);
 		glColor4us (color, color, color, attrib->opacity);
 
-		(*s->drawWindowGeometry) (w);
+		(*w->drawWindowGeometry) (w);
 
 		glColor4usv (defaultColor);
 		screenTexEnvMode (s, GL_REPLACE);
 	    }
 	    else
 	    {
-		(*s->drawWindowGeometry) (w);
+		(*w->drawWindowGeometry) (w);
 	    }
 
 	    glDisable (GL_BLEND);
@@ -898,14 +900,14 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
 	    glColor4us (attrib->brightness, attrib->brightness,
 			attrib->brightness, BRIGHT);
 
-	    (*w->screen->drawWindowGeometry) (w);
+	    (*w->drawWindowGeometry) (w);
 
 	    glColor4usv (defaultColor);
 	    screenTexEnvMode (s, GL_REPLACE);
 	}
 	else
 	{
-	    (*w->screen->drawWindowGeometry) (w);
+	    (*w->drawWindowGeometry) (w);
 	}
 
 	disableTexture (w->screen, texture);

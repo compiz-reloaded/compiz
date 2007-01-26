@@ -1532,7 +1532,6 @@ addScreen (CompDisplay *display,
     s->drawWindow		 = drawWindow;
     s->addWindowGeometry	 = addWindowGeometry;
     s->drawWindowTexture	 = drawWindowTexture;
-    s->drawWindowGeometry	 = drawWindowGeometry;
     s->damageWindowRect		 = damageWindowRect;
     s->getOutputExtentsForWindow = getOutputExtentsForWindow;
     s->focusWindow		 = focusWindow;
