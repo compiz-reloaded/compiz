@@ -1,6 +1,17 @@
 <gconfschemafile>
     <schemalist>
         <schema>
+            <key>/schemas/apps/gwd/blur_type</key>
+            <applyto>/apps/gwd/blur_type</applyto>
+            <owner>gwd</owner>
+            <type>string</type>
+            <default>none</default>
+            <locale name="C">
+                <short>Blur type</short>
+                <long>Type of blur used for window decorations</long>
+            </locale>
+        </schema>
+        <schema>
             <key>/schemas/apps/gwd/use_metacity_theme</key>
             <applyto>/apps/gwd/use_metacity_theme</applyto>
             <owner>gwd</owner>
