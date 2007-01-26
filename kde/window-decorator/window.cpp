@@ -29,6 +29,7 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/shape.h>
 #include <X11/extensions/Xcomposite.h>
+#include <X11/Xregion.h>
 
 #include <fixx11h.h>
 
@@ -1222,6 +1223,107 @@ KWD::Window::handleConfigure (void)
 }
 
 void
+KWD::Window::updateBlurProperty (int topOffset,
+				 int bottomOffset,
+				 int leftOffset,
+				 int rightOffset)
+{
+    Atom    atom = Atoms::compizWindowBlurDecor;
+    QRegion topQRegion, bottomQRegion, leftQRegion, rightQRegion;
+    Region  topRegion = NULL;
+    Region  bottomRegion = NULL;
+    Region  leftRegion = NULL;
+    Region  rightRegion = NULL;
+    int     size = 0;
+    int     w, h;
+
+    w = mGeometry.width () + mContext.extents.left + mContext.extents.right;
+    h = mGeometry.height () + mContext.extents.top + mContext.extents.bottom;
+
+    if (blurType != BLUR_TYPE_NONE)
+    {
+	QRegion r, shape = QRegion (0, 0, w, h);
+
+	if (mShapeSet)
+	    shape = mShape;
+	    
+	r = QRegion (0, 0, w, mContext.extents.top);
+	topQRegion = r.intersect (shape);
+	if (!topQRegion.isEmpty ())
+	{
+	    topQRegion.translate (-mContext.extents.left,
+				  -mContext.extents.top);
+	    topRegion = topQRegion.handle ();
+	}
+
+	if (blurType = BLUR_TYPE_ALL)
+	{
+	    r = QRegion (0, h - mContext.extents.bottom,
+			 w, mContext.extents.bottom);
+	    bottomQRegion = r.intersect (shape);
+	    if (!bottomQRegion.isEmpty ())
+	    {
+		bottomQRegion.translate (-mContext.extents.left,
+					 -mContext.extents.top);
+		bottomRegion = bottomQRegion.handle ();
+	    }
+
+	    r = QRegion (0, mContext.extents.top, mContext.extents.left, h);
+	    leftQRegion = r.intersect (shape);
+	    if (!leftQRegion.isEmpty ())
+	    {
+		leftQRegion.translate (-mContext.extents.left,
+				       -mContext.extents.top);
+		leftRegion = leftQRegion.handle ();
+	    }
+
+	    r = QRegion (w - mContext.extents.right, mContext.extents.top,
+			 mContext.extents.right, h);
+	    rightQRegion = r.intersect (shape);
+	    if (!rightQRegion.isEmpty ())
+	    {
+		rightQRegion.translate (-mContext.extents.left,
+					-mContext.extents.top);
+		rightRegion = rightQRegion.handle ();
+	    }
+	}
+    }
+
+    if (topRegion)
+	size += topRegion->numRects;
+    if (bottomRegion)
+	size += bottomRegion->numRects;
+    if (leftRegion)
+	size += leftRegion->numRects;
+    if (rightRegion)
+	size += rightRegion->numRects;
+
+    if (size)
+    {
+	long data[size * 6 + 2];
+
+	decor_region_to_blur_property (data, 4, 0, w, h,
+				       topRegion, topOffset,
+				       bottomRegion, bottomOffset,
+				       leftRegion, leftOffset,
+				       rightRegion, rightOffset);
+
+	KWD::trapXError ();
+	XChangeProperty (qt_xdisplay (), mClientId, atom,
+			 XA_INTEGER,
+			 32, PropModeReplace, (unsigned char *) data,
+			 2 + size * 6);
+	KWD::popXError ();
+    }
+    else
+    {
+	KWD::trapXError ();
+	XDeleteProperty (qt_xdisplay (), mClientId, atom);
+	KWD::popXError ();
+    }
+}
+
+void
 KWD::Window::updateProperty (void)
 {
     Atom	    atom = Atoms::netWindowDecor;
@@ -1292,6 +1394,8 @@ KWD::Window::updateProperty (void)
 						 rh / 2,
 						 topXOffset,
 						 w / 2);
+
+	updateBlurProperty (topXOffset, w / 2, lh / 2, rh / 2);
 
 	minWidth = mContext.left_corner_space + 1 + mContext.right_corner_space;
     }

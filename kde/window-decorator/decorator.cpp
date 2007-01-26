@@ -61,6 +61,7 @@ double decorationOpacity = 0.75;
 bool   decorationOpacityShade = false;
 double activeDecorationOpacity = 1.0;
 bool   activeDecorationOpacityShade = false;
+int    blurType = BLUR_TYPE_NONE;
 
 decor_context_t KWD::Decorator::mDefaultContext;
 decor_shadow_t *KWD::Decorator::mNoBorderShadow = 0;

@@ -174,6 +174,10 @@ class Window:public QWidget, public KDecorationBridge {
 	void createDecoration (void);
 	void updateShadow (void);
 	bool resizeDecoration (bool force = false);
+	void updateBlurProperty (int topOffset,
+				 int bottomOffset,
+				 int leftOffset,
+				 int rightOffset);
 	void updateProperty (void);
 	void getWindowProtocols (void);
 	void performMouseCommand (KWD::Options::MouseCommand command,

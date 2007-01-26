@@ -32,13 +32,15 @@
 
 static const KCmdLineOptions options[] = {
     { "replace", "Replace existing window decorator", 0 },
-    { "opacity", "Decoration opacity", "0.75" },
+    { "opacity <value>", "Decoration opacity", "0.75" },
     { "no-opacity-shade", "No decoration opacity shading", 0 },
-    { "active-opacity", "Active decoration opacity", "1.0" },
+    { "active-opacity <value>", "Active decoration opacity", "1.0" },
     { "no-active-opacity-shade", "No active decoration opacity shading", 0 },
+    { "blur <type>", "Blur type", "none" },
     KCmdLineLastOption
 };
 
+#include <kdebug.h>
 int
 main (int argc, char **argv)
 {
@@ -68,6 +70,16 @@ main (int argc, char **argv)
 
     if (args->isSet ("-active-opacity-shade"))
 	activeDecorationOpacityShade = true;
+
+    if (args->isSet ("blur"))
+    {
+	QString blur = args->getOption ("blur");
+
+	if (blur == QString ("titlebar"))
+	    blurType = BLUR_TYPE_TITLEBAR;
+	else if (blur == QString ("all"))
+	    blurType = BLUR_TYPE_ALL;
+    }
 
     app = new KWD::Decorator ();
 

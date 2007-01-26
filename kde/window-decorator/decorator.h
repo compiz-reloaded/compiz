@@ -63,6 +63,12 @@ extern bool   decorationOpacityShade;
 extern double activeDecorationOpacity;
 extern bool   activeDecorationOpacityShade;
 
+#define BLUR_TYPE_NONE     0
+#define BLUR_TYPE_TITLEBAR 1
+#define BLUR_TYPE_ALL      2
+
+extern int blurType;
+
 class KConfig;
 class KWinModule;
 
