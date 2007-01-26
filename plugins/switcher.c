@@ -1593,9 +1593,10 @@ switchPaintThumb (CompWindow		  *w,
 
     if (w->mapNum)
     {
-	FragmentAttrib fragment;
-	CompTransform  wTransform = *transform;
-	int	       ww, wh;
+	AddWindowGeometryProc oldAddWindowGeometry;
+	FragmentAttrib	      fragment;
+	CompTransform	      wTransform = *transform;
+	int		      ww, wh;
 
 	SWITCH_SCREEN (w->screen);
 
@@ -1641,8 +1642,14 @@ switchPaintThumb (CompWindow		  *w,
 	glPushMatrix ();
 	glLoadMatrixf (wTransform.m);
 
+	/* XXX: replacing the addWindowGeometry function like this is
+	   very ugly but necessary until the vertex stage has been made
+	   fully pluggable. */
+	oldAddWindowGeometry = w->screen->addWindowGeometry;
+	w->screen->addWindowGeometry = addWindowGeometry;
 	(w->screen->drawWindow) (w, &wTransform, &fragment, &infiniteRegion,
 				 mask);
+	w->screen->addWindowGeometry = oldAddWindowGeometry;
 
 	glPopMatrix ();
 
