@@ -987,7 +987,7 @@ drawWindow (CompWindow		 *w,
 	    return FALSE;
     }
 
-    w->vCount = 0;
+    w->vCount = w->indexCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);
     if (w->vCount)
 	(*w->screen->drawWindowTexture) (w, w->texture, fragment, mask);

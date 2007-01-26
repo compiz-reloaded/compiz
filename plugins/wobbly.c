@@ -2052,7 +2052,7 @@ wobblyAddWindowGeometry (CompWindow *w,
 	vSize = 2 + nMatrix * 2;
 
 	nVertices = w->vCount;
-	nIndices  = w->vCount;
+	nIndices  = w->indexCount;
 
 	v = w->vertices + (nVertices * vSize);
 	i = w->indices  + nIndices;
@@ -2148,7 +2148,8 @@ wobblyAddWindowGeometry (CompWindow *w,
 	    pClip++;
 	}
 
-	w->vCount = nIndices;
+	w->vCount     = nVertices;
+	w->indexCount = nIndices;
     }
     else
     {
@@ -2186,7 +2187,7 @@ wobblyDrawWindowGeometry (CompWindow *w)
 	    glTexCoordPointer (2, GL_FLOAT, stride, vertices);
 	}
 
-	glDrawElements (GL_QUADS, w->vCount, GL_UNSIGNED_SHORT, w->indices);
+	glDrawElements (GL_QUADS, w->indexCount, GL_UNSIGNED_SHORT, w->indices);
 
 	/* disable all texture coordinate arrays except 0 */
 	texUnit = w->texUnits;

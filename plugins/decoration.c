@@ -342,7 +342,7 @@ decorDrawWindow (CompWindow	      *w,
 	    box.rects	 = &box.extents;
 	    box.numRects = 1;
 
-	    w->vCount = 0;
+	    w->vCount = w->indexCount = 0;
 
 	    for (i = 0; i < wd->nQuad; i++)
 	    {

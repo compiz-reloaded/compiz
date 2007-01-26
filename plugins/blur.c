@@ -1119,7 +1119,7 @@ blurDrawWindow (CompWindow	     *w,
 	    else
 		reg = region;
 
-	    w->vCount = 0;
+	    w->vCount = w->indexCount = 0;
 	    (*w->screen->addWindowGeometry) (w, NULL, 0, bw->region, reg);
 	    if (w->vCount)
 	    {

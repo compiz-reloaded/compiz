@@ -642,7 +642,7 @@ scalePaintWindow (CompWindow		  *w,
 		iconReg.extents.x2 = iconReg.extents.x1 + width;
 		iconReg.extents.y2 = iconReg.extents.y1 + height;
 
-		w->vCount = 0;
+		w->vCount = w->indexCount = 0;
 		if (iconReg.extents.x1 < iconReg.extents.x2 &&
 		    iconReg.extents.y1 < iconReg.extents.y2)
 		    (*w->screen->addWindowGeometry) (w,

@@ -1725,7 +1725,7 @@ switchPaintThumb (CompWindow		  *w,
 	sAttrib.xTranslate = wx - w->attrib.x;
 	sAttrib.yTranslate = wy - w->attrib.y;
 
-	w->vCount = 0;
+	w->vCount = w->indexCount = 0;
 	addWindowGeometry (w, &matrix, 1, &iconReg, &infiniteRegion);
 	if (w->vCount)
 	{
