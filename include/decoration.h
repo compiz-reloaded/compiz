@@ -178,6 +178,21 @@ decor_property_to_quads (long		 *data,
 			 decor_quad_t    *quad);
 
 void
+decor_region_to_blur_property (long   *data,
+			       int    threshold,
+			       int    filter,
+			       int    width,
+			       int    height,
+			       Region topRegion,
+			       int    topOffset,
+			       Region bottomRegion,
+			       int    bottomOffset,
+			       Region leftRegion,
+			       int    leftOffset,
+			       Region rightRegion,
+			       int    rightOffset);
+
+void
 decor_apply_gravity (int gravity,
 		     int x,
 		     int y,
