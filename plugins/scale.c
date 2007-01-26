@@ -824,13 +824,13 @@ fillInWindows (CompScreen *s)
 
 	    sw->slot->scale = MIN (MIN (sx, sy), 1.0f);
 
-	    sx = w->width  * sw->slot->scale;
-	    sy = w->height * sw->slot->scale;
+	    sx = width  * sw->slot->scale;
+	    sy = height * sw->slot->scale;
 	    cx = (sw->slot->x1 + sw->slot->x2) / 2;
 	    cy = (sw->slot->y1 + sw->slot->y2) / 2;
 
-	    cx += (w->input.left - w->input.right)  * sw->slot->scale;
-	    cy += (w->input.top  - w->input.bottom) * sw->slot->scale;
+	    cx += w->input.left * sw->slot->scale;
+	    cy += w->input.top  * sw->slot->scale;
 
 	    sw->slot->x1 = cx - sx / 2;
 	    sw->slot->y1 = cy - sy / 2;
