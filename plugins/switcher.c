@@ -1468,6 +1468,7 @@ switchPaintScreen (CompScreen		   *s,
 	{
 	    mask &= ~PAINT_SCREEN_REGION_MASK;
 	    mask |= PAINT_SCREEN_TRANSFORMED_MASK | PAINT_SCREEN_CLEAR_MASK;
+	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
 	    sa.zCamera -= ss->translate;
 	}
