@@ -1555,6 +1555,11 @@ typedef Bool (*InitPluginForScreenProc) (CompPlugin *plugin,
 typedef void (*FiniPluginForScreenProc) (CompPlugin *plugin,
 					 CompScreen *screen);
 
+typedef void (*EnterShowDesktopModeProc) (CompScreen *screen);
+
+typedef void (*LeaveShowDesktopModeProc) (CompScreen *screen,
+					  CompWindow *window);
+
 typedef Bool (*DamageWindowRectProc) (CompWindow *w,
 				      Bool       initial,
 				      BoxPtr     rect);
@@ -1901,6 +1906,9 @@ struct _CompScreen {
     WindowGrabNotifyProc   windowGrabNotify;
     WindowUngrabNotifyProc windowUngrabNotify;
 
+    EnterShowDesktopModeProc enterShowDesktopMode;
+    LeaveShowDesktopModeProc leaveShowDesktopMode;
+
     WindowStateChangeNotifyProc windowStateChangeNotify;
 
     OutputChangeNotifyProc outputChangeNotify;
@@ -2056,13 +2064,6 @@ findGroupAtScreen (CompScreen *s,
 void
 applyStartupProperties (CompScreen *screen,
 			CompWindow *window);
-
-void
-enterShowDesktopMode (CompScreen *s);
-
-void
-leaveShowDesktopMode (CompScreen *s,
-		      CompWindow *window);
 
 void
 sendWindowActivationRequest (CompScreen *s,

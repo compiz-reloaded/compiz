@@ -1797,9 +1797,9 @@ handleEvent (CompDisplay *d,
 		    event->xclient.window == None)
 		{
 		    if (event->xclient.data.l[0])
-			enterShowDesktopMode (s);
+			(*s->enterShowDesktopMode) (s);
 		    else
-			leaveShowDesktopMode (s, NULL);
+			(*s->leaveShowDesktopMode) (s, NULL);
 		}
 	    }
 	}
@@ -1838,7 +1838,7 @@ handleEvent (CompDisplay *d,
 	    if (w->minimized)
 		unminimizeWindow (w);
 
-	    leaveShowDesktopMode (w->screen, w);
+	    (*w->screen->leaveShowDesktopMode) (w->screen, w);
 
 	    w->managed = TRUE;
 

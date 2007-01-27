@@ -3877,7 +3877,7 @@ revealWindow (CompWindow *w)
     if (w->minimized)
 	unminimizeWindow (w);
 
-    leaveShowDesktopMode (w->screen, w);
+    (*w->screen->leaveShowDesktopMode) (w->screen, w);
 }
 
 static void
