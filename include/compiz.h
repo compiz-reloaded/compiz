@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070125
+#define ABIVERSION 20070201
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1286,7 +1286,8 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS  9
 #define COMP_SCREEN_OPTION_DETECT_OUTPUTS      10
 #define COMP_SCREEN_OPTION_OUTPUTS	       11
-#define COMP_SCREEN_OPTION_NUM		       12
+#define COMP_SCREEN_OPTION_FOCUS_PREVENTION    12
+#define COMP_SCREEN_OPTION_NUM		       13
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0

@@ -4221,8 +4221,12 @@ focusWindowOnMap (CompWindow *w)
     if (!active || !getWindowUserTime (active, &aUserTime))
 	return TRUE;
 
-    if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
-	return FALSE;
+    /* focus prevention */
+    if (w->screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION].value.b)
+    {
+	if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
+	    return FALSE;
+    }
 
     return TRUE;
 }
