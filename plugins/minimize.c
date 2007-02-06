@@ -651,6 +651,10 @@ minPaintWindow (CompWindow		*w,
     }
     else
     {
+	/* no core instance from windows that have been animated */
+	if (mw->state == IconicState)
+	    mask |= PAINT_WINDOW_NO_CORE_INSTANCE_MASK;
+
 	UNWRAP (ms, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (ms, s, paintWindow, minPaintWindow);
@@ -723,10 +727,10 @@ minHandleEvent (CompDisplay *d,
 		}
 		else if (!w->invisible && (ms->wMask & w->type))
 		{
-		    mw->newState = IconicState;
-
 		    if (minGetWindowIconGeometry (w, &mw->icon))
 		    {
+			mw->newState = IconicState;
+
 			mw->xScale = w->paint.xScale;
 			mw->yScale = w->paint.yScale;
 			mw->tx	   = w->attrib.x - w->serverX;
@@ -747,10 +751,6 @@ minHandleEvent (CompDisplay *d,
 			w->unmapRefCnt++;
 
 			addWindowDamage (w);
-		    }
-		    else
-		    {
-			mw->state = mw->newState;
 		    }
 		}
 	    }
