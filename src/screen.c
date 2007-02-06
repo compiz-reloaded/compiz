@@ -3136,9 +3136,9 @@ moveScreenViewport (CompScreen *s,
 	else
 	{
 	    m = w->attrib.x + tx;
-	    if (m - w->output.left < s->width - vWidth)
+	    if (m - w->input.left < s->width - vWidth)
 		wx = tx + vWidth;
-	    else if (m + w->width + w->output.right > vWidth)
+	    else if (m + w->width + w->input.right > vWidth)
 		wx = tx - vWidth;
 	    else
 		wx = tx;
@@ -3155,9 +3155,9 @@ moveScreenViewport (CompScreen *s,
 	else
 	{
 	    m = w->attrib.y + ty;
-	    if (m - w->output.top < s->height - vHeight)
+	    if (m - w->input.top < s->height - vHeight)
 		wy = ty + vHeight;
-	    else if (m + w->height + w->output.bottom > vHeight)
+	    else if (m + w->height + w->input.bottom > vHeight)
 		wy = ty - vHeight;
 	    else
 		wy = ty;
