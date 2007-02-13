@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070201
+#define ABIVERSION 20070213
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -543,7 +543,9 @@ typedef int CompFileWatchHandle;
 #define COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS     53
 #define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED          54
 #define COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED   55
-#define COMP_DISPLAY_OPTION_NUM                           56
+#define COMP_DISPLAY_OPTION_TERMINAL			  56
+#define COMP_DISPLAY_OPTION_RUN_TERMINAL		  57
+#define COMP_DISPLAY_OPTION_NUM                           58
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);

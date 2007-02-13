@@ -604,6 +604,25 @@ runCommandWindowScreenshot (CompDisplay     *d,
 }
 
 static Bool
+runCommandTerminal (CompDisplay     *d,
+		    CompAction      *action,
+		    CompActionState state,
+		    CompOption      *option,
+		    int	            nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+	runCommand (s, d->opt[COMP_DISPLAY_OPTION_TERMINAL].value.s);
+
+    return TRUE;
+}
+
+static Bool
 windowMenu (CompDisplay     *d,
 	    CompAction      *action,
 	    CompActionState state,
@@ -1206,6 +1225,28 @@ compDisplayInitOptions (CompDisplay *display,
 	"maximized");
     o->type	 = CompOptionTypeBool;
     o->value.b	 = IGNORE_HINTS_WHEN_MAXIMIZED_DEFAULT;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_TERMINAL];
+    o->name	      = "command_terminal";
+    o->shortDesc      = N_("Terminal command line");
+    o->longDesc	      = N_("Terminal command line");
+    o->type	      = CompOptionTypeString;
+    o->value.s	      = strdup ("");
+    o->rest.s.string  = NULL;
+    o->rest.s.nString = 0;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_RUN_TERMINAL];
+    o->name		      = "run_command_terminal";
+    o->shortDesc	      = N_("Open a terminal");
+    o->longDesc		      = N_("Open a terminal");
+    o->type		      = CompOptionTypeAction;
+    o->value.action.initiate  = runCommandTerminal;
+    o->value.action.terminate = 0;
+    o->value.action.bell      = FALSE;
+    o->value.action.edgeMask  = 0;
+    o->value.action.state     = CompActionStateInitKey;
+    o->value.action.state    |= CompActionStateInitButton;
+    o->value.action.type      = CompBindingTypeNone;
 }
 
 CompOption *
@@ -1289,6 +1330,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_COMMAND11:
     case COMP_DISPLAY_OPTION_SCREENSHOT:
     case COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_TERMINAL:
 	if (compSetStringOption (o, value))
 	    return TRUE;
 	break;
@@ -1320,6 +1362,7 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_OPACITY_DECREASE:
     case COMP_DISPLAY_OPTION_RUN_SCREENSHOT:
     case COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT:
+    case COMP_DISPLAY_OPTION_RUN_TERMINAL:
     case COMP_DISPLAY_OPTION_WINDOW_MENU:
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED:
     case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ:
@@ -2433,6 +2476,7 @@ addScreenActions (CompDisplay *d, CompScreen *s)
 		     &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.action);
     addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.action);
     addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.action);
+    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_TERMINAL].value.action);
     addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU].value.action);
     addScreenAction (s,
 		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED].value.action);
