@@ -30,7 +30,7 @@
 
 #define FADE_SPEED_DEFAULT    5.0f
 #define FADE_SPEED_MIN        0.1f
-#define FADE_SPEED_MAX       10.0f
+#define FADE_SPEED_MAX       25.0f
 #define FADE_SPEED_PRECISION  0.1f
 
 static char *winType[] = {
