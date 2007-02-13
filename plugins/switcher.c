@@ -1850,14 +1850,9 @@ switchPaintWindow (CompWindow		   *w,
 	    }
 	}
 
-	glPushAttrib (GL_STENCIL_BUFFER_BIT);
-	glDisable (GL_STENCIL_TEST);
-
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, &wTransform, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
-
-	glPopAttrib ();
     }
     else if (ss->switching)
     {
@@ -1881,14 +1876,9 @@ switchPaintWindow (CompWindow		   *w,
 
 	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
 
-	    glPushAttrib (GL_STENCIL_BUFFER_BIT);
-	    glDisable (GL_STENCIL_TEST);
-
 	    UNWRAP (ss, s, paintWindow);
 	    status = (*s->paintWindow) (w, &sAttrib, &wTransform, region, mask);
 	    WRAP (ss, s, paintWindow, switchPaintWindow);
-
-	    glPopAttrib ();
 	}
 	else
 	{
