@@ -1207,10 +1207,10 @@ damageTransformedWindowRect (CompWindow *w,
     reg.rects    = &reg.extents;
     reg.numRects = 1;
 
-    reg.extents.x1 = (rect->x1 * xScale);
-    reg.extents.y1 = (rect->y1 * yScale);
-    reg.extents.x2 = (rect->x2 * xScale + 0.5f);
-    reg.extents.y2 = (rect->y2 * yScale + 0.5f);
+    reg.extents.x1 = (rect->x1 * xScale) - 1;
+    reg.extents.y1 = (rect->y1 * yScale) - 1;
+    reg.extents.x2 = (rect->x2 * xScale + 0.5f) + 1;
+    reg.extents.y2 = (rect->y2 * yScale + 0.5f) + 1;
 
     reg.extents.x1 += xTranslate;
     reg.extents.y1 += yTranslate;
