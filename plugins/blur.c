@@ -49,6 +49,11 @@
 #define BLUR_GAUSSIAN_RADIUS_MAX       10.0f
 #define BLUR_GAUSSIAN_RADIUS_PRECISION  0.1f
 
+#define BLUR_MIPMAP_LOD_DEFAULT   2.5f
+#define BLUR_MIPMAP_LOD_MIN       0.1f
+#define BLUR_MIPMAP_LOD_MAX       5.0f
+#define BLUR_MIPMAP_LOD_PRECISION 0.1f
+
 static char *winType[] = {
     N_("Toolbar"),
     N_("Menu"),
@@ -61,7 +66,8 @@ static char *winType[] = {
 
 static char *filterString[] = {
     N_("4xBilinear"),
-    N_("Gaussian")
+    N_("Gaussian"),
+    N_("Mipmap")
 };
 static int  nFilterString = sizeof (filterString) / sizeof (filterString[0]);
 
@@ -69,7 +75,8 @@ static int  nFilterString = sizeof (filterString) / sizeof (filterString[0]);
 
 typedef enum {
     BlurFilter4xBilinear,
-    BlurFilterGaussian
+    BlurFilterGaussian,
+    BlurFilterMipmap
 } BlurFilter;
 
 typedef struct _BlurFunction {
@@ -118,7 +125,8 @@ typedef struct _BlurDisplay {
 #define BLUR_SCREEN_OPTION_ALPHA_BLUR      3
 #define BLUR_SCREEN_OPTION_FILTER          4
 #define BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS 5
-#define BLUR_SCREEN_OPTION_NUM		   6
+#define BLUR_SCREEN_OPTION_MIPMAP_LOD      6
+#define BLUR_SCREEN_OPTION_NUM		   7
 
 typedef struct _BlurScreen {
     int	windowPrivateIndex;
@@ -202,6 +210,8 @@ blurFilterFromString (CompOptionValue *value)
 {
     if (strcmp (value->s, N_("Gaussian")) == 0)
 	return BlurFilterGaussian;
+    else if (strcmp (value->s, N_("Mipmap")) == 0)
+	return BlurFilterMipmap;
     else
 	return BlurFilter4xBilinear;
 }
@@ -271,6 +281,11 @@ blurUpdateFilterRadius (CompScreen *s)
 	size = blurCreateGaussianKernel (radius, SIGMA (radius), radius, NULL);
 	bs->filterRadius = size / 2;
     } break;
+    case BlurFilterMipmap: {
+	float lod = bs->opt[BLUR_SCREEN_OPTION_MIPMAP_LOD].value.f;
+
+	bs->filterRadius = powf (2.0f, ceilf (lod));
+    } break;
     }
 }
 
@@ -301,6 +316,8 @@ blurReset (CompScreen *s)
     blurUpdateFilterRadius (s);
     blurDestroyFragmentFunctions (s, &bs->srcBlurFunctions);
     blurDestroyFragmentFunctions (s, &bs->dstBlurFunctions);
+
+    bs->width = bs->height = 0;
 
     if (bs->program)
     {
@@ -367,7 +384,6 @@ blurSetScreenOption (CompScreen      *screen,
 	if (compSetStringOption (o, value))
 	{
 	    bs->filter = blurFilterFromString (&o->value);
-	    bs->moreBlur = TRUE;
 	    blurReset (screen);
 	    damageScreen (screen);
 	    return TRUE;
@@ -378,7 +394,17 @@ blurSetScreenOption (CompScreen      *screen,
 	{
 	    if (bs->filter == BlurFilterGaussian)
 	    {
-		bs->moreBlur = TRUE;
+		blurReset (screen);
+		damageScreen (screen);
+	    }
+	    return TRUE;
+	}
+	break;
+    case BLUR_SCREEN_OPTION_MIPMAP_LOD:
+	if (compSetFloatOption (o, value))
+	{
+	    if (bs->filter == BlurFilterMipmap)
+	    {
 		blurReset (screen);
 		damageScreen (screen);
 	    }
@@ -456,6 +482,16 @@ blurScreenInitOptions (BlurScreen *bs)
     o->rest.f.min	= BLUR_GAUSSIAN_RADIUS_MIN;
     o->rest.f.max	= BLUR_GAUSSIAN_RADIUS_MAX;
     o->rest.f.precision = BLUR_GAUSSIAN_RADIUS_PRECISION;
+
+    o = &bs->opt[BLUR_SCREEN_OPTION_MIPMAP_LOD];
+    o->name		= "mipmap_lod";
+    o->shortDesc	= N_("Mipmap LOD");
+    o->longDesc		= N_("Mipmap level-of-detail");
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= BLUR_MIPMAP_LOD_DEFAULT;
+    o->rest.f.min	= BLUR_MIPMAP_LOD_MIN;
+    o->rest.f.max	= BLUR_MIPMAP_LOD_MAX;
+    o->rest.f.precision = BLUR_MIPMAP_LOD_PRECISION;
 }
 
 static Region
@@ -970,9 +1006,7 @@ getDstBlurFragmentFunction (CompScreen  *s,
     data = createFunctionData ();
     if (data)
     {
-	static char *temp[] = {
-	    "coord", "mask", "sum", "dst"
-	};
+	static char *temp[] = { "coord", "mask", "sum", "dst" };
 	int	    i, handle = 0;
 	char	    str[1024];
 	Bool	    ok = TRUE;
@@ -1098,6 +1132,22 @@ getDstBlurFragmentFunction (CompScreen  *s,
 		ok &= addDataOpToFunctionData (data, str);
 	    }
 	} break;
+	case BlurFilterMipmap:
+	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
+	    ok &= addColorOpToFunctionData (data, "output", "output");
+
+	    snprintf (str, 1024,
+		      "MUL coord, fragment.position, program.env[%d].xyzz;"
+		      "TEX dst, coord, texture[%d], %s;"
+		      "MOV coord.w, program.env[%d].w;"
+		      "TXB sum, coord, texture[%d], %s;"
+		      "MUL_SAT mask, output.a, program.env[%d];",
+		      param, unit, targetString,
+		      param, unit, targetString,
+		      param + 1);
+
+	    ok &= addDataOpToFunctionData (data, str);
+	    break;
 	}
 
 	snprintf (str, 1024,
@@ -1416,14 +1466,6 @@ fboUpdate (CompScreen *s,
     return TRUE;
 }
 
-/*
-  TODO:
-
-   1. We should check for cases where one solid window covers the
-   complete destination region and in those cases use that window texture
-   as destionation instead. This should give us another major performance
-   improvement.
-*/
 static Bool
 blurUpdateDstTexture (CompWindow	  *w,
 		      const CompTransform *transform,
@@ -1568,6 +1610,31 @@ blurUpdateDstTexture (CompWindow	  *w,
 	    glTexParameteri (bs->target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	    glTexParameteri (bs->target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+	    if (bs->filter == BlurFilterMipmap)
+	    {
+		if (!s->fbo)
+		{
+		    fprintf (stderr,
+			     "%s: blur: GL_EXT_framebuffer_object extension "
+			     "is required for mipmap filter\n",
+			     programName);
+		}
+		else if (bs->target != GL_TEXTURE_2D)
+		{
+		    fprintf (stderr,
+			     "%s: blur: GL_ARB_texture_non_power_of_two "
+			     "extension is required for mipmap filter\n",
+			     programName);
+		}
+		else
+		{
+		    glTexParameteri (bs->target, GL_TEXTURE_MIN_FILTER,
+				     GL_LINEAR_MIPMAP_LINEAR);
+		    glTexParameteri (bs->target, GL_TEXTURE_MAG_FILTER,
+				     GL_LINEAR_MIPMAP_LINEAR);
+		}
+	    }
+
 	    glTexParameteri (bs->target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	    glTexParameteri (bs->target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
@@ -1593,10 +1660,17 @@ blurUpdateDstTexture (CompWindow	  *w,
 	}
     }
 
-    glBindTexture (bs->target, 0);
-
-    if (bs->filter == BlurFilterGaussian)
+    switch (bs->filter) {
+    case BlurFilterGaussian:
 	return fboUpdate (s, bs->tmpRegion->rects, bs->tmpRegion->numRects);
+    case BlurFilterMipmap:
+	(*s->generateMipmap) (bs->target);
+	break;
+    case BlurFilter4xBilinear:
+	break;
+    }
+
+    glBindTexture (bs->target, 0);
 
     return TRUE;
 }
@@ -1829,6 +1903,32 @@ blurDrawWindowTexture (CompWindow	    *w,
 						     0.0f, 0.0f);
 		}
 		break;
+	    case BlurFilterMipmap:
+		param = allocFragmentParameters (&dstFa, 2);
+		unit  = allocFragmentTextureUnits (&dstFa, 1);
+
+		function = getDstBlurFragmentFunction (s, texture, param, unit);
+		if (function)
+		{
+		    float lod = bs->opt[BLUR_SCREEN_OPTION_MIPMAP_LOD].value.f;
+
+		    addFragmentFunction (&dstFa, function);
+
+		    (*s->activeTexture) (GL_TEXTURE0_ARB + unit);
+		    glBindTexture (bs->target, bs->texture[0]);
+		    (*s->activeTexture) (GL_TEXTURE0_ARB);
+
+		    (*s->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
+						 param,
+						 bs->tx, bs->ty,
+						 0.0f, lod);
+
+		    (*s->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
+						 param + 1,
+						 threshold, threshold,
+						 threshold, threshold);
+		}
+		break;
 	    }
 
 	    if (bw->state[state].clipped)
@@ -1869,6 +1969,8 @@ blurDrawWindowTexture (CompWindow	    *w,
 	if (unit)
 	{
 	    (*s->activeTexture) (GL_TEXTURE0_ARB + unit);
+	    glBindTexture (bs->target, 0);
+	    (*s->activeTexture) (GL_TEXTURE0_ARB + unit + 1);
 	    glBindTexture (bs->target, 0);
 	    (*s->activeTexture) (GL_TEXTURE0_ARB);
 	}
