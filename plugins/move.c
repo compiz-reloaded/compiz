@@ -209,6 +209,9 @@ moveInitiate (CompDisplay     *d,
 
 		warpPointer (d, xRoot - pointerX, yRoot - pointerY);
 	    }
+
+	    if (md->moveOpacity != OPAQUE)
+		addWindowDamage (w);
 	}
     }
 
@@ -243,6 +246,9 @@ moveTerminate (CompDisplay     *d,
 	    removeScreenGrab (md->w->screen, ms->grabIndex, NULL);
 	    ms->grabIndex = 0;
 	}
+
+	if (md->moveOpacity != OPAQUE)
+	    addWindowDamage (md->w);
 
 	md->w = 0;
     }
