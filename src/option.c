@@ -54,14 +54,14 @@ struct _Modifier {
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _Modifier))
 
 static char *edgeName[] = {
-    N_("Left"),
-    N_("Right"),
-    N_("Top"),
-    N_("Bottom"),
-    N_("TopLeft"),
-    N_("TopRight"),
-    N_("BottomLeft"),
-    N_("BottomRight")
+    "Left",
+    "Right",
+    "Top",
+    "Bottom",
+    "TopLeft",
+    "TopRight",
+    "BottomLeft",
+    "BottomRight"
 };
 
 CompOption *
