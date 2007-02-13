@@ -430,7 +430,7 @@ isScaleWin (CompWindow *w)
     if (isNeverScaleWin (w))
 	return FALSE;
 
-    if (!ss->type)
+    if (!ss->type || ss->type == ScaleTypeOutput)
     {
 	if (!(*w->screen->focusWindow) (w))
 	    return FALSE;
