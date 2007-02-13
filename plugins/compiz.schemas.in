@@ -11366,6 +11366,18 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/ping_delay</key>
+            <applyto>/apps/compiz/general/allscreens/options/ping_delay</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>5000</default>
+            <locale name="C">
+                <short>Ping Delay</short>
+                <long>Interval between ping messages (1000-30000)</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/screen0/options/detect_refresh_rate</key>
             <applyto>/apps/compiz/general/screen0/options/detect_refresh_rate</applyto>
             <owner>compiz</owner>
@@ -13980,59 +13992,59 @@
             <default>5.000000</default>
             <locale name="C">
                 <short>Fade Speed</short>
-                <long>Window fade speed (0.0-10.0)</long>
+                <long>Window fade speed (0.0-25.0)</long>
             </locale>
             <locale name="cs">
                 <short>Rychlost blednutí</short>
-                <long>Rychlost blednutí oken (0.0-10.0)</long>
+                <long>Rychlost blednutí oken (0.0-25.0)</long>
             </locale>
             <locale name="de">
                 <short>Ausblendgeschwindigkeit</short>
-                <long>Fenster-Ein-/Ausblendgeschwindigkeit (0,0-10,0)</long>
+                <long>Fenster-Ein-/Ausblendgeschwindigkeit (0,0-25,0)</long>
             </locale>
             <locale name="es">
                 <short>Velocidad de desvanecimiento</short>
-                <long>Velocidad de desvanecimiento de ventana (0,0-10,0)</long>
+                <long>Velocidad de desvanecimiento de ventana (0,0-25,0)</long>
             </locale>
             <locale name="fi">
                 <short>Häivytyksen nopeus</short>
-                <long>Ikkunan häivytysnopeus (0.0-10.0)</long>
+                <long>Ikkunan häivytysnopeus (0.0-25.0)</long>
             </locale>
             <locale name="fr">
                 <short>Vitesse de fondu</short>
-                <long>Vitesse de fondu de la fenêtre (0,0-10,0)</long>
+                <long>Vitesse de fondu de la fenêtre (0,0-25,0)</long>
             </locale>
             <locale name="hu">
                 <short>Elhalványulás sebessége</short>
-                <long>Ablak elhalványulásának sebessége (0,0-10,0)</long>
+                <long>Ablak elhalványulásának sebessége (0,0-25,0)</long>
             </locale>
             <locale name="it">
                 <short>Velocità dissolvenza</short>
-                <long>Velocità dissolvenza finestre (0.0-10.0)</long>
+                <long>Velocità dissolvenza finestre (0.0-25.0)</long>
             </locale>
             <locale name="ja">
                 <short>フェードスピード</short>
-                <long>ウィンドウフェード効果(0.1-10.0) (0.0-10.0)</long>
+                <long>ウィンドウフェード効果(0.1-10.0) (0.0-25.0)</long>
             </locale>
             <locale name="pl">
                 <short>Szybkość pojawiania się/zanikania</short>
-                <long>Szybkość płynnego pojawiania się/zanikania okien (0.0-10.0)</long>
+                <long>Szybkość płynnego pojawiania się/zanikania okien (0.0-25.0)</long>
             </locale>
             <locale name="pt_BR">
                 <short>Velocidade de Esmaecimento</short>
-                <long>Velocidade de esmaecimento das janelas (0.0-10.0)</long>
+                <long>Velocidade de esmaecimento das janelas (0.0-25.0)</long>
             </locale>
             <locale name="sv">
                 <short>Toningshastighet</short>
-                <long>Window fade speed (0.0-10.0)</long>
+                <long>Window fade speed (0.0-25.0)</long>
             </locale>
             <locale name="zh_CN">
                 <short>减弱速度</short>
-                <long>窗口减弱速度 (0.0-10.0)</long>
+                <long>窗口减弱速度 (0.0-25.0)</long>
             </locale>
             <locale name="zh_TW">
                 <short>淡出/淡入速度</short>
-                <long>視窗淡出/淡入速度 (0.0-10.0)</long>
+                <long>視窗淡出/淡入速度 (0.0-25.0)</long>
             </locale>
         </schema>
 
