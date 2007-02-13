@@ -11293,6 +11293,79 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/command_terminal</key>
+            <applyto>/apps/compiz/general/allscreens/options/command_terminal</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Terminal command line</short>
+                <long>Terminal command line</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/run_command_terminal_key</key>
+            <applyto>/apps/compiz/general/allscreens/options/run_command_terminal_key</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Open a terminal</short>
+                <long>Open a terminal</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/run_command_terminal_button</key>
+            <applyto>/apps/compiz/general/allscreens/options/run_command_terminal_button</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Disabled</default>
+            <locale name="C">
+                <short>Open a terminal</short>
+                <long>Open a terminal</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/run_command_terminal_bell</key>
+            <applyto>/apps/compiz/general/allscreens/options/run_command_terminal_bell</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Open a terminal</short>
+                <long>Open a terminal</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/run_command_terminal_edge</key>
+            <applyto>/apps/compiz/general/allscreens/options/run_command_terminal_edge</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Open a terminal</short>
+                <long>Open a terminal (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/allscreens/options/run_command_terminal_edgebutton</key>
+            <applyto>/apps/compiz/general/allscreens/options/run_command_terminal_edgebutton</applyto>
+            <owner>compiz</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Open a terminal</short>
+                <long>Open a terminal</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/compiz/general/screen0/options/detect_refresh_rate</key>
             <applyto>/apps/compiz/general/screen0/options/detect_refresh_rate</applyto>
             <owner>compiz</owner>
@@ -11746,6 +11819,18 @@
             <locale name="C">
                 <short>Outputs</short>
                 <long>List of strings describing output devices</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/focus_prevention</key>
+            <applyto>/apps/compiz/general/screen0/options/focus_prevention</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Focus prevention</short>
+                <long>Enable focus prevention</long>
             </locale>
         </schema>
 
@@ -24266,7 +24351,7 @@
             <applyto>/apps/compiz/plugins/blur/screen0/options/alpha_blur</applyto>
             <owner>compiz</owner>
             <type>bool</type>
-            <default>false</default>
+            <default>true</default>
             <locale name="C">
                 <short>Alpha Blur</short>
                 <long>Blur behind translucent parts of windows</long>
@@ -24281,7 +24366,79 @@
             <default>4xBilinear</default>
             <locale name="C">
                 <short>Blur Filter</short>
-                <long>Filter method used for blurring (4xBilinear)</long>
+                <long>Filter method used for blurring (4xBilinear, Gaussian, Mipmap)</long>
+            </locale>
+            <locale name="hu">
+                <short>Blur Filter</short>
+                <long>Filter method used for blurring (4xBilinear, Gaussian, Mipmap [MIP térkép])</long>
+            </locale>
+            <locale name="ja">
+                <short>Blur Filter</short>
+                <long>Filter method used for blurring (4xBilinear, Gaussian, Mipmap [ミップマップ])</long>
+            </locale>
+            <locale name="pl">
+                <short>Blur Filter</short>
+                <long>Filter method used for blurring (4xBilinear, Gaussian, Mipmap [Mipmapa])</long>
+            </locale>
+            <locale name="pt_BR">
+                <short>Blur Filter</short>
+                <long>Filter method used for blurring (4xBilinear, Gaussian, Mipmap [Mapa])</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/blur/screen0/options/gaussian_radius</key>
+            <applyto>/apps/compiz/plugins/blur/screen0/options/gaussian_radius</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>3.000000</default>
+            <locale name="C">
+                <short>Gaussian Radius</short>
+                <long>Gaussian radius (0.0-10.0)</long>
+            </locale>
+            <locale name="de">
+                <short>Gaussian Radius</short>
+                <long>Gaussian radius (0,0-10,0)</long>
+            </locale>
+            <locale name="es">
+                <short>Gaussian Radius</short>
+                <long>Gaussian radius (0,0-10,0)</long>
+            </locale>
+            <locale name="fr">
+                <short>Gaussian Radius</short>
+                <long>Gaussian radius (0,0-10,0)</long>
+            </locale>
+            <locale name="hu">
+                <short>Gaussian Radius</short>
+                <long>Gaussian radius (0,0-10,0)</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/blur/screen0/options/mipmap_lod</key>
+            <applyto>/apps/compiz/plugins/blur/screen0/options/mipmap_lod</applyto>
+            <owner>compiz</owner>
+            <type>float</type>
+            <default>2.500000</default>
+            <locale name="C">
+                <short>Mipmap LOD</short>
+                <long>Mipmap level-of-detail (0.0-5.0)</long>
+            </locale>
+            <locale name="de">
+                <short>Mipmap LOD</short>
+                <long>Mipmap level-of-detail (0,0-5,0)</long>
+            </locale>
+            <locale name="es">
+                <short>Mipmap LOD</short>
+                <long>Mipmap level-of-detail (0,0-5,0)</long>
+            </locale>
+            <locale name="fr">
+                <short>Mipmap LOD</short>
+                <long>Mipmap level-of-detail (0,0-5,0)</long>
+            </locale>
+            <locale name="hu">
+                <short>Mipmap LOD</short>
+                <long>Mipmap level-of-detail (0,0-5,0)</long>
             </locale>
         </schema>
 
