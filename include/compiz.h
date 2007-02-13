@@ -545,7 +545,8 @@ typedef int CompFileWatchHandle;
 #define COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED   55
 #define COMP_DISPLAY_OPTION_TERMINAL			  56
 #define COMP_DISPLAY_OPTION_RUN_TERMINAL		  57
-#define COMP_DISPLAY_OPTION_NUM                           58
+#define COMP_DISPLAY_OPTION_PING_DELAY			  58
+#define COMP_DISPLAY_OPTION_NUM				  59
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);

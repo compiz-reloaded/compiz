@@ -167,11 +167,15 @@ int pointerY     = 0;
 
 #define IGNORE_HINTS_WHEN_MAXIMIZED_DEFAULT TRUE
 
-#define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
+#define PING_DELAY_DEFAULT 5000
+#define PING_DELAY_MIN	   1000
+#define PING_DELAY_MAX	   30000
 
 static char *textureFilter[] = { N_("Fast"), N_("Good"), N_("Best") };
 
 #define NUM_TEXTURE_FILTER (sizeof (textureFilter) / sizeof (textureFilter[0]))
+
+#define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
 CompDisplay *compDisplays = 0;
 
@@ -1247,6 +1251,15 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.action.state     = CompActionStateInitKey;
     o->value.action.state    |= CompActionStateInitButton;
     o->value.action.type      = CompBindingTypeNone;
+
+    o = &display->opt[COMP_DISPLAY_OPTION_PING_DELAY];
+    o->name	  = "ping_delay";
+    o->shortDesc  = N_("Ping Delay");
+    o->longDesc	  = N_("Interval between ping messages");
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = PING_DELAY_DEFAULT;
+    o->rest.i.min = PING_DELAY_MIN;
+    o->rest.i.max = PING_DELAY_MAX;
 }
 
 CompOption *
@@ -1266,6 +1279,78 @@ setAudibleBell (CompDisplay *display,
 				  XkbUseCoreKbd,
 				  XkbAudibleBellMask,
 				  audible ? XkbAudibleBellMask : 0);
+}
+
+static Bool
+pingTimeout (void *closure)
+{
+    CompDisplay *d = closure;
+    CompScreen  *s;
+    CompWindow  *w;
+    XEvent      ev;
+    int		ping = d->lastPing + 1;
+
+    ev.type		    = ClientMessage;
+    ev.xclient.window	    = 0;
+    ev.xclient.message_type = d->wmProtocolsAtom;
+    ev.xclient.format	    = 32;
+    ev.xclient.data.l[0]    = d->wmPingAtom;
+    ev.xclient.data.l[1]    = ping;
+    ev.xclient.data.l[2]    = 0;
+    ev.xclient.data.l[3]    = 0;
+    ev.xclient.data.l[4]    = 0;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	for (w = s->windows; w; w = w->next)
+	{
+	    if (w->attrib.map_state != IsViewable)
+		continue;
+
+	    if (!(w->type & CompWindowTypeNormalMask))
+		continue;
+
+	    if (w->protocols & CompWindowProtocolPingMask)
+	    {
+		if (w->transientFor)
+		    continue;
+
+		if (w->lastPong < d->lastPing)
+		{
+		    if (w->alive)
+		    {
+			w->alive	    = FALSE;
+			w->paint.brightness = 0xa8a8;
+			w->paint.saturation = 0;
+
+			if (w->closeRequests)
+			{
+			    toolkitAction (s,
+					   d->toolkitActionForceQuitDialogAtom,
+					   w->lastCloseRequestTime,
+					   w->id,
+					   TRUE,
+					   0,
+					   0);
+
+			    w->closeRequests = 0;
+			}
+
+			addWindowDamage (w);
+		    }
+		}
+
+		ev.xclient.window    = w->id;
+		ev.xclient.data.l[2] = w->id;
+
+		XSendEvent (d->display, w->id, FALSE, NoEventMask, &ev);
+	    }
+	}
+    }
+
+    d->lastPing = ping;
+
+    return TRUE;
 }
 
 static Bool
@@ -1315,6 +1400,17 @@ setDisplayOption (CompDisplay     *display,
     case COMP_DISPLAY_OPTION_AUTORAISE_DELAY:
 	if (compSetIntOption (o, value))
 	    return TRUE;
+	break;
+    case COMP_DISPLAY_OPTION_PING_DELAY:
+	if (compSetIntOption (o, value))
+	{
+	    if (display->pingHandle)
+		compRemoveTimeout (display->pingHandle);
+
+	    display->pingHandle =
+		compAddTimeout (o->value.i, pingTimeout, display);
+	    return TRUE;
+	}
 	break;
     case COMP_DISPLAY_OPTION_COMMAND0:
     case COMP_DISPLAY_OPTION_COMMAND1:
@@ -2363,80 +2459,6 @@ compCheckForError (Display *dpy)
     return e;
 }
 
-#define PING_DELAY 5000
-
-static Bool
-pingTimeout (void *closure)
-{
-    CompDisplay *d = closure;
-    CompScreen  *s;
-    CompWindow  *w;
-    XEvent      ev;
-    int		ping = d->lastPing + 1;
-
-    ev.type		    = ClientMessage;
-    ev.xclient.window	    = 0;
-    ev.xclient.message_type = d->wmProtocolsAtom;
-    ev.xclient.format	    = 32;
-    ev.xclient.data.l[0]    = d->wmPingAtom;
-    ev.xclient.data.l[1]    = ping;
-    ev.xclient.data.l[2]    = 0;
-    ev.xclient.data.l[3]    = 0;
-    ev.xclient.data.l[4]    = 0;
-
-    for (s = d->screens; s; s = s->next)
-    {
-	for (w = s->windows; w; w = w->next)
-	{
-	    if (w->attrib.map_state != IsViewable)
-		continue;
-
-	    if (!(w->type & CompWindowTypeNormalMask))
-		continue;
-
-	    if (w->protocols & CompWindowProtocolPingMask)
-	    {
-		if (w->transientFor)
-		    continue;
-
-		if (w->lastPong < d->lastPing)
-		{
-		    if (w->alive)
-		    {
-			w->alive	    = FALSE;
-			w->paint.brightness = 0xa8a8;
-			w->paint.saturation = 0;
-
-			if (w->closeRequests)
-			{
-			    toolkitAction (s,
-					   d->toolkitActionForceQuitDialogAtom,
-					   w->lastCloseRequestTime,
-					   w->id,
-					   TRUE,
-					   0,
-					   0);
-
-			    w->closeRequests = 0;
-			}
-
-			addWindowDamage (w);
-		    }
-		}
-
-		ev.xclient.window    = w->id;
-		ev.xclient.data.l[2] = w->id;
-
-		XSendEvent (d->display, w->id, FALSE, NoEventMask, &ev);
-	    }
-	}
-    }
-
-    d->lastPing = ping;
-
-    return TRUE;
-}
-
 static void
 addScreenActions (CompDisplay *d, CompScreen *s)
 {
@@ -3047,7 +3069,9 @@ addDisplay (char *name,
 	    focusDefaultWindow (d);
     }
 
-    d->pingHandle = compAddTimeout (PING_DELAY, pingTimeout, d);
+    d->pingHandle =
+	compAddTimeout (d->opt[COMP_DISPLAY_OPTION_PING_DELAY].value.i,
+			pingTimeout, d);
 
     return TRUE;
 }
