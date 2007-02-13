@@ -4225,7 +4225,17 @@ focusWindowOnMap (CompWindow *w)
     if (w->screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION].value.b)
     {
 	if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
+	{
+	    unsigned int state = w->state;
+
+	    /* add demands attention state if focus was prevented */
+	    w->state |= CompWindowStateDemandsAttentionMask;
+
+	    if (w->state != state)
+		setWindowState (d, w->state, w->id);
+
 	    return FALSE;
+	}
     }
 
     return TRUE;
