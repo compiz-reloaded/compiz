@@ -794,6 +794,10 @@ fadeFiniWindow (CompPlugin *p,
     fadeRemoveDisplayModal (w->screen->display, w);
     fadeWindowStop (w);
 
+    w->paint.opacity    = w->opacity;
+    w->paint.brightness = w->brightness;
+    w->paint.saturation = w->saturation;
+
     free (fw);
 }
 
