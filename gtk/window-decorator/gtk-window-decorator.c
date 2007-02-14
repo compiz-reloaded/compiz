@@ -488,6 +488,7 @@ decor_update_blur_property (decor_t *d,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data,
 			 2 + size * 6);
+	gdk_display_sync (gdk_display_get_default ());
 	gdk_error_trap_pop ();
 
 	free (data);
@@ -496,6 +497,7 @@ decor_update_blur_property (decor_t *d,
     {
 	gdk_error_trap_push ();
 	XDeleteProperty (xdisplay, d->prop_xid, win_blur_decor_atom);
+	gdk_display_sync (gdk_display_get_default ());
 	gdk_error_trap_pop ();
     }
 }
@@ -541,6 +543,7 @@ decor_update_window_property (decor_t *d)
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data,
 		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 
     top.rects = &top.extents;
@@ -609,7 +612,7 @@ decor_update_switcher_property (decor_t *d)
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data,
 		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
-    XSync (xdisplay, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 }
 
@@ -1398,6 +1401,7 @@ decor_update_meta_window_property (decor_t	  *d,
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data,
 		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 
     decor_update_blur_property (d,
@@ -2248,7 +2252,7 @@ draw_switcher_background (decor_t *d)
     gdk_error_trap_push ();
     XSetWindowBackground (xdisplay, d->prop_xid, pixel);
     XClearWindow (xdisplay, d->prop_xid);
-    XSync (xdisplay, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 
     d->prop_xid = 0;
@@ -2881,7 +2885,7 @@ update_event_windows (WnckWindow *win)
 	    XUnmapWindow (xdisplay, d->button_windows[i]);
     }
 
-    XSync (xdisplay, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 }
 
@@ -3291,7 +3295,7 @@ add_frame_window (WnckWindow *win,
 	d->button_states[i] = 0;
     }
 
-    XSync (xdisplay, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     if (!gdk_error_trap_pop ())
     {
 	if (get_mwm_prop (xid) & (MWM_DECOR_ALL | MWM_DECOR_TITLE))
@@ -3740,7 +3744,7 @@ window_closed (WnckScreen *screen,
 
     gdk_error_trap_push ();
     XDeleteProperty (xdisplay, wnck_window_get_xid (win), win_decor_atom);
-    XSync (xdisplay, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 
     g_free (d);
@@ -4462,7 +4466,7 @@ force_quit_dialog_realize (GtkWidget *dialog,
     XSetTransientForHint (gdk_display,
 			  GDK_WINDOW_XID (dialog->window),
 			  wnck_window_get_xid (win));
-    XSync (gdk_display, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 }
 
@@ -4532,7 +4536,7 @@ kill_window (WnckWindow *win)
 
     gdk_error_trap_push ();
     XKillClient (gdk_display, wnck_window_get_xid (win));
-    XSync (gdk_display, FALSE);
+    gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 }
 
@@ -4709,7 +4713,7 @@ event_filter_func (GdkXEvent *gdkxevent,
 		    {
 			gdk_error_trap_push ();
 			XDeleteProperty (xdisplay, xid, win_decor_atom);
-			XSync (xdisplay, FALSE);
+			gdk_display_sync (gdk_display_get_default ());
 			gdk_error_trap_pop ();
 		    }
 		}
