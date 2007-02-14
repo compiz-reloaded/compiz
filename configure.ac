@@ -330,7 +330,7 @@ if test "$use_gnome" = yes; then
 fi
 
 AC_ARG_ENABLE(kde,
-  [  --disable-kde           Enable kde window decorator],
+  [  --disable-kde           Disable kde window decorator],
   [use_kde=$enableval], [use_kde=yes])
 
 if test "x$use_kde" = "xyes"; then
