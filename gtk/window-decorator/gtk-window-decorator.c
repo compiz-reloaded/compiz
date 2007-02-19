@@ -2027,11 +2027,9 @@ meta_draw_window_decoration (decor_t *d)
 	if (top_region)
 	    XOffsetRegion (top_region, -fgeom.left_width, -fgeom.top_height);
 	if (bottom_region)
-	    XOffsetRegion (bottom_region, -fgeom.left_width, -fgeom.top_height);
+	    XOffsetRegion (bottom_region, -fgeom.left_width, 0);
 	if (left_region)
-	    XOffsetRegion (left_region, -fgeom.left_width, -fgeom.top_height);
-	if (right_region)
-	    XOffsetRegion (right_region, -fgeom.left_width, -fgeom.top_height);
+	    XOffsetRegion (left_region, -fgeom.left_width, 0);
 
 	decor_update_meta_window_property (d, theme, flags,
 					   top_region,
