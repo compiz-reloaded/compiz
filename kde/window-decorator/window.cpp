@@ -1246,7 +1246,7 @@ KWD::Window::updateBlurProperty (int topOffset,
 
 	if (mShapeSet)
 	    shape = mShape;
-	    
+
 	r = QRegion (0, 0, w, mContext.extents.top);
 	topQRegion = r.intersect (shape);
 	if (!topQRegion.isEmpty ())
@@ -1256,7 +1256,7 @@ KWD::Window::updateBlurProperty (int topOffset,
 	    topRegion = topQRegion.handle ();
 	}
 
-	if (blurType = BLUR_TYPE_ALL)
+	if (blurType == BLUR_TYPE_ALL)
 	{
 	    r = QRegion (0, h - mContext.extents.bottom,
 			 w, mContext.extents.bottom);
@@ -1264,11 +1264,12 @@ KWD::Window::updateBlurProperty (int topOffset,
 	    if (!bottomQRegion.isEmpty ())
 	    {
 		bottomQRegion.translate (-mContext.extents.left,
-					 -mContext.extents.top);
+					 -(h - mContext.extents.bottom));
 		bottomRegion = bottomQRegion.handle ();
 	    }
 
-	    r = QRegion (0, mContext.extents.top, mContext.extents.left, h);
+	    r = QRegion (0, mContext.extents.top,
+			 mContext.extents.left, mGeometry.height ());
 	    leftQRegion = r.intersect (shape);
 	    if (!leftQRegion.isEmpty ())
 	    {
@@ -1278,11 +1279,11 @@ KWD::Window::updateBlurProperty (int topOffset,
 	    }
 
 	    r = QRegion (w - mContext.extents.right, mContext.extents.top,
-			 mContext.extents.right, h);
+			 mContext.extents.right, mGeometry.height ());
 	    rightQRegion = r.intersect (shape);
 	    if (!rightQRegion.isEmpty ())
 	    {
-		rightQRegion.translate (-mContext.extents.left,
+		rightQRegion.translate (-(w - mContext.extents.right),
 					-mContext.extents.top);
 		rightRegion = rightQRegion.handle ();
 	    }
@@ -1302,7 +1303,9 @@ KWD::Window::updateBlurProperty (int topOffset,
     {
 	long data[size * 6 + 2];
 
-	decor_region_to_blur_property (data, 4, 0, w, h,
+	decor_region_to_blur_property (data, 4, 0,
+				       mGeometry.width (),
+				       mGeometry.height (),
 				       topRegion, topOffset,
 				       bottomRegion, bottomOffset,
 				       leftRegion, leftOffset,
