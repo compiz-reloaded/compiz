@@ -135,6 +135,9 @@ KWD::Window::~Window (void)
     if (mPicture)
 	XRenderFreePicture (qt_xdisplay (), mPicture);
 
+    if (mPixmap)
+	XFreePixmap (qt_xdisplay (), mPixmap);
+
     if (mTexturePicture)
 	XRenderFreePicture (qt_xdisplay (), mTexturePicture);
 
