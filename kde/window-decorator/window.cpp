@@ -1735,6 +1735,7 @@ KWD::Window::moveWindow (QMouseEvent *qme)
     XUngrabPointer (qt_xdisplay (), CurrentTime);
     XUngrabKeyboard (qt_xdisplay (), CurrentTime);
 
+    Decorator::rootInfo ()->restackRequest (mClientId, None, Above);
     Decorator::rootInfo ()->moveResizeRequest (mClientId,
 					       qme->globalX (),
 					       qme->globalY (),
