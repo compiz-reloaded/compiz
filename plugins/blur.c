@@ -588,7 +588,7 @@ blurWindowUpdateRegion (CompWindow *w)
 	}
     }
 
-    if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
+    if (bw->state[BLUR_STATE_CLIENT].threshold)
     {
 	r.extents.x1 = 0;
 	r.extents.y1 = 0;
@@ -1708,7 +1708,7 @@ blurDrawWindow (CompWindow	     *w,
 
 		if (blurUpdateDstTexture (w, transform, &box))
 		{
-		    if (bw->state[BLUR_STATE_CLIENT].threshold && w->alpha)
+		    if (bw->state[BLUR_STATE_CLIENT].threshold)
 		    {
 			if (bw->state[BLUR_STATE_CLIENT].clipped)
 			{
@@ -2060,7 +2060,7 @@ blurWindowResizeNotify (CompWindow *w)
     {
 	BLUR_WINDOW (w);
 
-	if ((bw->state[BLUR_STATE_CLIENT].threshold && w->alpha) ||
+	if (bw->state[BLUR_STATE_CLIENT].threshold ||
 	    bw->state[BLUR_STATE_DECOR].threshold)
 	    blurWindowUpdateRegion (w);
     }
