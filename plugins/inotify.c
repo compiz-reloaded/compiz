@@ -188,10 +188,12 @@ inotifyInitDisplay (CompPlugin  *p,
     id->fd = inotify_init ();
     if (id->fd < 0)
     {
-        perror ("inotify_init");
+	perror ("inotify_init");
 	free (id);
 	return FALSE;
     }
+
+    id->watch = NULL;
 
     id->watchFdHandle = compAddWatchFd (id->fd,
 					POLLIN | POLLPRI | POLLHUP | POLLERR,
