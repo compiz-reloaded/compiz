@@ -143,6 +143,8 @@ typedef struct _BlurScreen {
     WindowMoveNotifyProc   windowMoveNotify;
 
     int  wMask;
+    Bool alphaBlur;
+
     int	 blurTime;
     Bool moreBlur;
 
@@ -361,7 +363,11 @@ blurSetScreenOption (CompScreen      *screen,
     case BLUR_SCREEN_OPTION_WINDOW_TYPE:
 	if (compSetOptionList (o, value))
 	{
-	    bs->wMask = compWindowTypeMaskFromStringList (&o->value);
+	    if (screen->fragmentProgram)
+		bs->wMask = compWindowTypeMaskFromStringList (&o->value);
+	    else
+		bs->wMask = 0;
+
 	    return TRUE;
 	}
 	break;
@@ -376,6 +382,11 @@ blurSetScreenOption (CompScreen      *screen,
     case BLUR_SCREEN_OPTION_ALPHA_BLUR:
 	if (compSetBoolOption (o, value))
 	{
+	    if (screen->fragmentProgram && o->value.b)
+		bs->alphaBlur = TRUE;
+	    else
+		bs->alphaBlur = FALSE;
+
 	    damageScreen (screen);
 	    return TRUE;
 	}
@@ -461,6 +472,8 @@ blurScreenInitOptions (BlurScreen *bs)
     o->longDesc	 = N_("Blur behind translucent parts of windows");
     o->type	 = CompOptionTypeBool;
     o->value.b   = BLUR_ALPHA_BLUR_DEFAULT;
+
+    bs->alphaBlur = o->value.b;
 
     o = &bs->opt[BLUR_SCREEN_OPTION_FILTER];
     o->name	         = "filter";
@@ -786,7 +799,7 @@ blurPreparePaintScreen (CompScreen *s,
     if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
     {
 	/* walk from bottom to top and expand damage */
-	if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
+	if (bs->alphaBlur)
 	{
 	    CompWindow *w;
 	    int	       x1, y1, x2, y2;
@@ -837,7 +850,7 @@ blurPaintScreen (CompScreen		 *s,
 
     BLUR_SCREEN (s);
 
-    if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
+    if (bs->alphaBlur)
     {
 	bs->stencilBox = region->extents;
 	XSubtractRegion (region, &emptyRegion, bs->region);
@@ -1688,7 +1701,7 @@ blurDrawWindow (CompWindow	     *w,
     BLUR_SCREEN (s);
     BLUR_WINDOW (w);
 
-    if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
+    if (bs->alphaBlur)
     {
 	if (bw->region)
 	{
@@ -2056,7 +2069,7 @@ blurWindowResizeNotify (CompWindow *w)
 {
     BLUR_SCREEN (w->screen);
 
-    if (bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b)
+    if (bs->alphaBlur)
     {
 	BLUR_WINDOW (w);
 
@@ -2271,6 +2284,13 @@ blurInitScreen (CompPlugin *p,
 		 programName);
 
     blurScreenInitOptions (bs);
+
+    /* We need GL_ARB_fragment_program for blur */
+    if (!s->fragmentProgram)
+    {
+	bs->alphaBlur = FALSE;
+	bs->wMask     = 0;
+    }
 
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
