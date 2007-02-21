@@ -41,7 +41,7 @@
     "/apps/compiz/general/allscreens/options/autoraise_delay"
 
 #define COMPIZ_MOUSE_MOVE_KEY				 \
-    "/apps/compiz/plugins/move/screen0/options/initiate"
+    "/apps/compiz/plugins/move/allscreens/options/initiate_button"
 
 #define GCONF_DIR "/apps/metacity/general"
 
