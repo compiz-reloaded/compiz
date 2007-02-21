@@ -1522,6 +1522,8 @@ addScreen (CompDisplay *display,
     s->desktopHintData = NULL;
     s->desktopHintSize = 0;
 
+    s->cursors = NULL;
+
     s->clearBuffers = TRUE;
 
     gettimeofday (&s->lastRedraw, 0);
@@ -1545,6 +1547,9 @@ addScreen (CompDisplay *display,
     s->damageWindowRect		 = damageWindowRect;
     s->getOutputExtentsForWindow = getOutputExtentsForWindow;
     s->focusWindow		 = focusWindow;
+
+    s->paintCursor      = paintCursor;
+    s->damageCursorRect	= damageCursorRect;
 
     s->windowResizeNotify = windowResizeNotify;
     s->windowMoveNotify	  = windowMoveNotify;
@@ -3716,4 +3721,23 @@ updateDefaultIcon (CompScreen *screen)
     free (data);
 
     return TRUE;
+}
+
+CompCursor *
+findCursorAtScreen (CompScreen *screen)
+{
+    return screen->cursors;
+}
+
+CompCursorImage *
+findCursorImageAtScreen (CompScreen    *screen,
+			 unsigned long serial)
+{
+    CompCursorImage *image;
+
+    for (image = screen->cursorImages; image; image = image->next)
+	if (image->serial == serial)
+	    return image;
+
+    return NULL;
 }

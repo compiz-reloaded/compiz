@@ -22,4 +22,5 @@ compiz_SOURCES =   \
 	plugin.c   \
 	session.c  \
 	fragment.c \
-	matrix.c
+	matrix.c   \
+	cursor.c

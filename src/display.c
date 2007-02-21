@@ -2536,6 +2536,7 @@ addDisplay (char *name,
     Window	focus;
     int		revertTo, i;
     int		compositeMajor, compositeMinor;
+    int		fixesMinor;
     int		xkbOpcode;
 
     d = &compDisplay;
@@ -2812,6 +2813,21 @@ addDisplay (char *name,
 	fprintf (stderr, "%s: No sync extension\n", programName);
 	return FALSE;
     }
+
+    if (!XFixesQueryExtension (dpy, &d->fixesEvent, &d->fixesError))
+    {
+	fprintf (stderr, "%s: No fixes extension\n", programName);
+	return FALSE;
+    }
+
+    XFixesQueryVersion (dpy, &d->fixesVersion, &fixesMinor);
+    /*
+    if (d->fixesVersion < 5)
+    {
+	fprintf (stderr, "%s: Need fixes extension version 5 or later "
+		 "for client-side cursor\n", programName);
+    }
+    */
 
     d->shapeExtension = XShapeQueryExtension (dpy,
 					      &d->shapeEvent,
@@ -3598,4 +3614,16 @@ void
 fileWatchRemoved (CompDisplay   *display,
 		  CompFileWatch *fileWatch)
 {
+}
+
+CompCursor *
+findCursorAtDisplay (CompDisplay *display)
+{
+    CompScreen *s;
+
+    for (s = display->screens; s; s = s->next)
+	if (s->cursors)
+	    return s->cursors;
+
+    return NULL;
 }

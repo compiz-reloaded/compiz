@@ -84,6 +84,7 @@ typedef struct _CompProgram	  CompProgram;
 typedef struct _CompFunction	  CompFunction;
 typedef struct _CompFunctionData  CompFunctionData;
 typedef struct _FragmentAttrib    FragmentAttrib;
+typedef struct _CompCursor	  CompCursor;
 
 /* virtual modifiers */
 
@@ -628,6 +629,7 @@ struct _CompDisplay {
     int damageEvent, damageError;
     int randrEvent, randrError;
     int syncEvent, syncError;
+    int fixesEvent, fixesError, fixesVersion;
 
     Bool shapeExtension;
     int  shapeEvent, shapeError;
@@ -960,6 +962,9 @@ imageToFile (CompDisplay *display,
 	     int	 stride,
 	     void	 *data);
 
+CompCursor *
+findCursorAtDisplay (CompDisplay *display);
+
 
 /* event.c */
 
@@ -1106,6 +1111,11 @@ typedef void (*DrawWindowTextureProc) (CompWindow	    *w,
 
 typedef void (*DrawWindowGeometryProc) (CompWindow *window);
 
+typedef void (*PaintCursorProc) (CompCursor	     *cursor,
+				 const CompTransform *transform,
+				 Region		     region,
+				 unsigned int	     mask);
+
 #define PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK (1 << 0)
 
 typedef void (*PaintBackgroundProc) (CompScreen   *screen,
@@ -1190,6 +1200,12 @@ paintWindow (CompWindow		     *w,
 	     unsigned int	     mask);
 
 void
+paintCursor (CompCursor		 *cursor,
+	     const CompTransform *transform,
+	     Region		 region,
+	     unsigned int	 mask);
+
+void
 paintBackground (CompScreen   *screen,
 		 Region	      region,
 		 unsigned int mask);
@@ -1231,6 +1247,13 @@ createTexture (CompScreen *screen);
 void
 destroyTexture (CompScreen  *screen,
 		CompTexture *texture);
+
+Bool
+imageBufferToTexture (CompScreen   *screen,
+		      CompTexture  *texture,
+		      char	   *image,
+		      unsigned int width,
+		      unsigned int height);
 
 Bool
 readImageToTexture (CompScreen   *screen,
@@ -1415,6 +1438,11 @@ typedef Bool (*DamageWindowRectProc) (CompWindow *w,
 typedef Bool (*DamageWindowRegionProc) (CompWindow *w,
 					Region     region);
 
+typedef Bool (*DamageCursorRectProc) (CompCursor *c,
+				      Bool       initial,
+				      BoxPtr     rect);
+
+
 typedef void (*GetOutputExtentsForWindowProc) (CompWindow	 *w,
 					       CompWindowExtents *output);
 
@@ -1518,6 +1546,30 @@ typedef struct _CompOutput {
     int        height;
     XRectangle workArea;
 } CompOutput;
+
+typedef struct _CompCursorImage {
+    struct _CompCursorImage *next;
+
+    unsigned long serial;
+    Pixmap	  pixmap;
+    CompTexture   texture;
+    int		  xhot;
+    int	          yhot;
+    int		  width;
+    int	          height;
+} CompCursorImage;
+
+struct _CompCursor {
+    struct _CompCursor *next;
+
+    CompScreen	    *screen;
+    CompCursorImage *image;
+
+    int	x;
+    int	y;
+
+    CompMatrix matrix;
+};
 
 struct _CompScreen {
     CompScreen  *next;
@@ -1642,6 +1694,9 @@ struct _CompScreen {
     unsigned long *desktopHintData;
     int           desktopHintSize;
 
+    CompCursor      *cursors;
+    CompCursorImage *cursorImages;
+
     GLXGetProcAddressProc    getProcAddress;
     GLXBindTexImageProc      bindTexImage;
     GLXReleaseTexImageProc   releaseTexImage;
@@ -1693,6 +1748,9 @@ struct _CompScreen {
     DamageWindowRectProc	  damageWindowRect;
     GetOutputExtentsForWindowProc getOutputExtentsForWindow;
     FocusWindowProc		  focusWindow;
+
+    PaintCursorProc      paintCursor;
+    DamageCursorRectProc damageCursorRect;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
@@ -1929,6 +1987,13 @@ clearScreenOutput (CompScreen   *s,
 
 Bool
 updateDefaultIcon (CompScreen *screen);
+
+CompCursor *
+findCursorAtScreen (CompScreen *screen);
+
+CompCursorImage *
+findCursorImageAtScreen (CompScreen    *screen,
+			 unsigned long serial);
 
 
 /* window.c */
@@ -2666,6 +2731,30 @@ matrixTranslate (CompTransform *transform,
 		 float	       x,
 		 float	       y,
 		 float	       z);
+
+
+/* cursor.c */
+
+void
+addCursor (CompScreen *s);
+
+Bool
+damageCursorRect (CompCursor *c,
+		  Bool       initial,
+		  BoxPtr     rect);
+
+void
+addCursorDamageRect (CompCursor *c,
+		     BoxPtr     rect);
+
+void
+addCursorDamage (CompCursor *c);
+
+void
+updateCursor (CompCursor    *c,
+	      int	    x,
+	      int	    y,
+	      unsigned long serial);
 
 #ifdef  __cplusplus
 }

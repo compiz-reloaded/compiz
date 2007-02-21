@@ -163,6 +163,16 @@ imageToTexture (CompScreen   *screen,
 }
 
 Bool
+imageBufferToTexture (CompScreen   *screen,
+		      CompTexture  *texture,
+		      char	   *image,
+		      unsigned int width,
+		      unsigned int height)
+{
+    return imageToTexture (screen, texture, image, width, height);    
+}
+
+Bool
 readImageToTexture (CompScreen   *screen,
 		    CompTexture  *texture,
 		    const char	 *imageFileName,

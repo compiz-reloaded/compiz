@@ -97,6 +97,50 @@ prepareXCoords (CompScreen *screen,
 }
 
 void
+paintCursor (CompCursor		 *c,
+	     const CompTransform *transform,
+	     Region		 region,
+	     unsigned int	 mask)
+{
+    int x1, y1, x2, y2;
+
+    if (!c->image)
+	return;
+
+    x1 = c->x;
+    y1 = c->y;
+    x2 = c->x + c->image->width;
+    y2 = c->y + c->image->height;
+
+    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+    glEnable (GL_BLEND);
+
+    enableTexture (c->screen, &c->image->texture, COMP_TEXTURE_FILTER_FAST);
+
+    glBegin (GL_QUADS);
+
+    glTexCoord2f (COMP_TEX_COORD_X (&c->matrix, x1),
+		  COMP_TEX_COORD_Y (&c->matrix, y2));
+    glVertex2i (x1, y2);
+    glTexCoord2f (COMP_TEX_COORD_X (&c->matrix, x2),
+		  COMP_TEX_COORD_Y (&c->matrix, y2));
+    glVertex2i (x2, y2);
+    glTexCoord2f (COMP_TEX_COORD_X (&c->matrix, x2),
+		  COMP_TEX_COORD_Y (&c->matrix, y1));
+    glVertex2i (x2, y1);
+    glTexCoord2f (COMP_TEX_COORD_X (&c->matrix, x1),
+		  COMP_TEX_COORD_Y (&c->matrix, y1));
+    glVertex2i (x1, y1);
+
+    glEnd ();
+
+    disableTexture (c->screen, &c->image->texture);
+
+    glDisable (GL_BLEND);
+    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+}
+
+void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			const CompTransform	*transform,
@@ -106,6 +150,7 @@ paintTransformedScreen (CompScreen		*screen,
 {
     CompTransform sTransform = *transform;
     CompWindow	  *w;
+    CompCursor	  *c;
     int	          windowMask;
     int	          backgroundMask;
 
@@ -197,6 +242,10 @@ paintTransformedScreen (CompScreen		*screen,
 	(*screen->paintWindow) (w, &w->paint, &sTransform, region, windowMask);
     }
 
+    /* paint cursors */
+    for (c = screen->cursors; c; c = c->next)
+	(*screen->paintCursor) (c, &sTransform, region, 0);
+
     glPopMatrix ();
 }
 
@@ -211,6 +260,7 @@ paintScreen (CompScreen		     *screen,
     static Region tmpRegion = NULL;
     CompTransform sTransform = *transform;
     CompWindow	  *w;
+    CompCursor	  *c;
 
     if (mask & PAINT_SCREEN_REGION_MASK)
     {
@@ -334,6 +384,10 @@ paintScreen (CompScreen		     *screen,
 				    PAINT_WINDOW_TRANSLUCENT_MASK);
 	}
     }
+
+    /* paint cursors */
+    for (c = screen->cursors; c; c = c->next)
+	(*screen->paintCursor) (c, &sTransform, region, 0);
 
     glPopMatrix ();
 

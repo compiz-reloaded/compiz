@@ -30,6 +30,7 @@
 #include <X11/Xatom.h>
 #include <X11/extensions/shape.h>
 #include <X11/extensions/Xrandr.h>
+#include <X11/extensions/Xfixes.h>
 
 #include <compiz.h>
 
@@ -1046,7 +1047,18 @@ handleActionEvent (CompDisplay *d,
 	}
 	break;
     default:
-	if (event->type == d->xkbEvent)
+	if (event->type == d->fixesEvent + XFixesCursorNotify)
+	{
+	    /*
+	    XFixesCursorNotifyEvent *ce = (XFixesCursorNotifyEvent *) event;
+	    CompCursor		    *cursor;
+
+	    cursor = findCursorAtDisplay (d);
+	    if (cursor)
+		updateCursor (cursor, ce->x, ce->y, ce->cursor_serial);
+	    */
+	}
+	else if (event->type == d->xkbEvent)
 	{
 	    XkbAnyEvent *xkbEvent = (XkbAnyEvent *) event;
 
