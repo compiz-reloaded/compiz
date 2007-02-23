@@ -1096,6 +1096,9 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	for (i = 0; i < sizeof (temp) / sizeof (temp[0]); i++)
 	    ok &= addTempHeaderOpToFunctionData (data, temp[i]);
 
+	if (saturation < 100)
+	    ok &= addTempHeaderOpToFunctionData (data, "sat");
+
 	switch (bs->filter) {
 	case BlurFilter4xBilinear: {
 	    static char *filterTemp[] = {
