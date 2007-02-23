@@ -48,6 +48,11 @@
 #define BLUR_GAUSSIAN_RADIUS_MIN      1
 #define BLUR_GAUSSIAN_RADIUS_MAX     15
 
+#define BLUR_GAUSSIAN_STRENGTH_DEFAULT   1.0f
+#define BLUR_GAUSSIAN_STRENGTH_MIN       0.0f
+#define BLUR_GAUSSIAN_STRENGTH_MAX       1.0f
+#define BLUR_GAUSSIAN_STRENGTH_PRECISION 0.01f
+
 #define BLUR_MIPMAP_LOD_DEFAULT   2.5f
 #define BLUR_MIPMAP_LOD_MIN       0.1f
 #define BLUR_MIPMAP_LOD_MAX       5.0f
@@ -118,14 +123,15 @@ typedef struct _BlurDisplay {
     Atom blurAtom[BLUR_STATE_NUM];
 } BlurDisplay;
 
-#define BLUR_SCREEN_OPTION_BLUR_SPEED      0
-#define BLUR_SCREEN_OPTION_WINDOW_TYPE     1
-#define BLUR_SCREEN_OPTION_FOCUS_BLUR      2
-#define BLUR_SCREEN_OPTION_ALPHA_BLUR      3
-#define BLUR_SCREEN_OPTION_FILTER          4
-#define BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS 5
-#define BLUR_SCREEN_OPTION_MIPMAP_LOD      6
-#define BLUR_SCREEN_OPTION_NUM		   7
+#define BLUR_SCREEN_OPTION_BLUR_SPEED        0
+#define BLUR_SCREEN_OPTION_WINDOW_TYPE       1
+#define BLUR_SCREEN_OPTION_FOCUS_BLUR        2
+#define BLUR_SCREEN_OPTION_ALPHA_BLUR        3
+#define BLUR_SCREEN_OPTION_FILTER            4
+#define BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS   5
+#define BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH 6
+#define BLUR_SCREEN_OPTION_MIPMAP_LOD        7
+#define BLUR_SCREEN_OPTION_NUM		     8
 
 typedef struct _BlurScreen {
     int	windowPrivateIndex;
@@ -431,6 +437,17 @@ blurSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
+    case BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH:
+	if (compSetFloatOption (o, value))
+	{
+	    if (bs->filter == BlurFilterGaussian)
+	    {
+		blurReset (screen);
+		damageScreen (screen);
+	    }
+	    return TRUE;
+	}
+	break;
     case BLUR_SCREEN_OPTION_MIPMAP_LOD:
 	if (compSetFloatOption (o, value))
 	{
@@ -507,13 +524,23 @@ blurScreenInitOptions (BlurScreen *bs)
     bs->filter = blurFilterFromString (&o->value);
 
     o = &bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS];
-    o->name		= "gaussian_radius";
-    o->shortDesc	= N_("Gaussian Radius");
-    o->longDesc		= N_("Gaussian radius");
-    o->type		= CompOptionTypeInt;
-    o->value.i		= BLUR_GAUSSIAN_RADIUS_DEFAULT;
-    o->rest.i.min	= BLUR_GAUSSIAN_RADIUS_MIN;
-    o->rest.i.max	= BLUR_GAUSSIAN_RADIUS_MAX;
+    o->name	  = "gaussian_radius";
+    o->shortDesc  = N_("Gaussian Radius");
+    o->longDesc	  = N_("Gaussian radius");
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = BLUR_GAUSSIAN_RADIUS_DEFAULT;
+    o->rest.i.min = BLUR_GAUSSIAN_RADIUS_MIN;
+    o->rest.i.max = BLUR_GAUSSIAN_RADIUS_MAX;
+
+    o = &bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH];
+    o->name		= "gaussian_strength";
+    o->shortDesc	= N_("Gaussian Strength");
+    o->longDesc		= N_("Gaussian strength");
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= BLUR_GAUSSIAN_STRENGTH_DEFAULT;
+    o->rest.f.min	= BLUR_GAUSSIAN_STRENGTH_MIN;
+    o->rest.f.max	= BLUR_GAUSSIAN_STRENGTH_MAX;
+    o->rest.f.precision = BLUR_GAUSSIAN_STRENGTH_PRECISION;
 
     o = &bs->opt[BLUR_SCREEN_OPTION_MIPMAP_LOD];
     o->name		= "mipmap_lod";
@@ -1101,11 +1128,13 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    };
 	    int		radius =
 		bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+	    float	strength =
+		bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH].value.f;
 	    float	amp[BLUR_GAUSSIAN_RADIUS_MAX];
 	    float	pos[BLUR_GAUSSIAN_RADIUS_MAX];
 	    int		numTexop;
 
-	    blurCreateGaussianLinearKernel (radius, 1.0f, amp, pos,
+	    blurCreateGaussianLinearKernel (radius, strength, amp, pos,
 					    &numTexop);
 
 	    for (i = 0; i < sizeof (filterTemp) / sizeof (filterTemp[0]); i++)
@@ -1292,13 +1321,15 @@ loadFilterProgram (CompScreen *s)
     float pos[BLUR_GAUSSIAN_RADIUS_MAX];
     int   numTexop;
     int   radius;
+    float strength;
     int   i;
 
     BLUR_SCREEN (s);
 
     radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+    strength = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH].value.f;
 
-    blurCreateGaussianLinearKernel (radius, 1.0f, amp, pos, &numTexop);
+    blurCreateGaussianLinearKernel (radius, strength, amp, pos, &numTexop);
 
     if (bs->target == GL_TEXTURE_2D)
 	targetString = "2D";
@@ -1429,10 +1460,12 @@ fboUpdate (CompScreen *s,
     float pos[BLUR_GAUSSIAN_RADIUS_MAX];
     int   numTexop;
     float radius;
+    float strength;
 
     BLUR_SCREEN (s);
 
     radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+    strength = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH].value.f;
 
     if (!bs->program)
 	if (!loadFilterProgram (s))
@@ -1448,7 +1481,7 @@ fboUpdate (CompScreen *s,
     glEnable (GL_FRAGMENT_PROGRAM_ARB);
     (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, bs->program);
 
-    blurCreateGaussianLinearKernel (radius, 1.0f, amp, pos, &numTexop);
+    blurCreateGaussianLinearKernel (radius, strength, amp, pos, &numTexop);
 
     for (i = 0; i < numTexop; i++)
 	(*s->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, i,
@@ -1909,9 +1942,11 @@ blurDrawWindowTexture (CompWindow	    *w,
 		    int   numTexop;
 		    int   radius =
 			bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+		    float strength =
+			bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH].value.f;
 		    int   i;
 
-		    blurCreateGaussianLinearKernel (radius, 1.0f, amp,
+		    blurCreateGaussianLinearKernel (radius, strength, amp,
 						    pos, &numTexop);
 
 		    addFragmentFunction (&dstFa, function);
