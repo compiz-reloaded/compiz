@@ -526,6 +526,9 @@ scalePaintWindow (CompWindow		  *w,
 
 	    initFragmentAttrib (&fragment, &w->lastPaint);
 
+	    if (w->alpha || fragment.opacity != OPAQUE)
+		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
 	    matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
 	    matrixScale (&wTransform, sw->scale, sw->scale, 0.0f);
 	    matrixTranslate (&wTransform,
@@ -632,7 +635,7 @@ scalePaintWindow (CompWindow		  *w,
 		    sAttrib.opacity = sAttrib.opacity * o;
 		}
 
-		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+		mask |= PAINT_WINDOW_BLEND_MASK;
 
 		iconReg.rects    = &iconReg.extents;
 		iconReg.numRects = 1;

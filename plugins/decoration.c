@@ -326,7 +326,7 @@ decorDrawWindow (CompWindow	      *w,
     status = (*w->screen->drawWindow) (w, transform, attrib, region, mask);
     WRAP (ds, w->screen, drawWindow, decorDrawWindow);
 
-    if (!(mask & PAINT_WINDOW_SOLID_MASK))
+    if (!(mask & PAINT_WINDOW_CLIP_OPAQUE_MASK))
     {
 	DECOR_WINDOW (w);
 
@@ -338,6 +338,8 @@ decorDrawWindow (CompWindow	      *w,
 	    WindowDecoration *wd = dw->wd;
 	    REGION	     box;
 	    int		     i;
+
+	    mask |= PAINT_WINDOW_BLEND_MASK;
 
 	    box.rects	 = &box.extents;
 	    box.numRects = 1;
@@ -361,8 +363,7 @@ decorDrawWindow (CompWindow	      *w,
 	    if (w->vCount)
 		(*w->screen->drawWindowTexture) (w,
 						 &wd->decor->texture->texture,
-						 attrib, mask |
-						 PAINT_WINDOW_TRANSLUCENT_MASK);
+						 attrib, mask);
 	}
     }
 

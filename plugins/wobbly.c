@@ -2213,7 +2213,7 @@ wobblyPaintWindow (CompWindow		   *w,
 
     if (ww->wobbly)
     {
-	if (mask & PAINT_WINDOW_SOLID_MASK)
+	if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
 	    return FALSE;
 
 	mask |= PAINT_WINDOW_TRANSFORMED_MASK;

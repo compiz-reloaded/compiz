@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070223
+#define ABIVERSION 20070224
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -86,6 +86,7 @@ typedef struct _CompFunctionData  CompFunctionData;
 typedef struct _FragmentAttrib    FragmentAttrib;
 typedef struct _CompCursor	  CompCursor;
 typedef struct _CompMatch	  CompMatch;
+
 /* virtual modifiers */
 
 #define CompModAlt        0
@@ -1151,12 +1152,56 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 					  int			  output,
 					  CompTransform	          *transform);
 
+/*
+  window paint flags
 
-#define PAINT_WINDOW_SOLID_MASK			(1 << 0)
-#define PAINT_WINDOW_TRANSLUCENT_MASK		(1 << 1)
-#define PAINT_WINDOW_TRANSFORMED_MASK           (1 << 2)
-#define PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK (1 << 3)
-#define PAINT_WINDOW_NO_CORE_INSTANCE_MASK	(1 << 4)
+  bit 1-16 are used for read-only flags and they provide
+  information that describe the screen rendering pass
+  currently in process.
+
+  bit 17-32 are writable flags and they provide information
+  that is used to optimize rendering.
+*/
+
+/*
+  this flag is present when we are painting clipped
+  opaque window regions only.
+*/
+#define PAINT_WINDOW_CLIP_OPAQUE_MASK		(1 << 0)
+
+/*
+  this flag is present when we are painting clipped
+  translucent window regions only.
+*/
+#define PAINT_WINDOW_CLIP_TRANSLUCENT_MASK	(1 << 1)
+
+/*
+  this flag is present when window is being painted
+  on a transformed screen.
+*/
+#define PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK (1 << 2)
+
+/*
+  flag indicate that window is translucent.
+*/
+#define PAINT_WINDOW_TRANSLUCENT_MASK           (1 << 16)
+
+/*
+  flag indicate that window is transformed.
+*/
+#define PAINT_WINDOW_TRANSFORMED_MASK           (1 << 17)
+
+/*
+  flag indicate that core PaintWindow function should
+  not draw this window.
+*/
+#define PAINT_WINDOW_NO_CORE_INSTANCE_MASK	(1 << 18)
+
+/*
+  flag indicate that blending is required.
+*/
+#define PAINT_WINDOW_BLEND_MASK			(1 << 19)
+
 
 typedef Bool (*PaintWindowProc) (CompWindow		 *window,
 				 const WindowPaintAttrib *attrib,

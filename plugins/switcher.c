@@ -1632,6 +1632,9 @@ switchPaintThumb (CompWindow		  *w,
 
 	initFragmentAttrib (&fragment, &sAttrib);
 
+	if (w->alpha || fragment.opacity != OPAQUE)
+	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
 	matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
 	matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 0.0f);
 	matrixTranslate (&wTransform,
@@ -1709,7 +1712,7 @@ switchPaintThumb (CompWindow		  *w,
 	REGION     iconReg;
 	CompMatrix matrix;
 
-	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+	mask |= PAINT_WINDOW_BLEND_MASK;
 
 	iconReg.rects    = &iconReg.extents;
 	iconReg.numRects = 1;
@@ -1771,7 +1774,7 @@ switchPaintWindow (CompWindow		   *w,
 	GLenum filter;
 	int    x, y, x1, x2, cx, i;
 
-	if (mask & PAINT_WINDOW_SOLID_MASK)
+	if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
 	    return FALSE;
 
 	UNWRAP (ss, s, paintWindow);

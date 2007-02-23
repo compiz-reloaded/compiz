@@ -345,7 +345,7 @@ paintScreen (CompScreen		     *screen,
 	    }
 
 	    if ((*screen->paintWindow) (w, &w->paint, &sTransform, tmpRegion,
-					PAINT_WINDOW_SOLID_MASK))
+					PAINT_WINDOW_CLIP_OPAQUE_MASK))
 	    {
 		XSubtractRegion (tmpRegion, w->region, tmpRegion);
 
@@ -381,7 +381,7 @@ paintScreen (CompScreen		     *screen,
 	    }
 
 	    (*screen->paintWindow) (w, &w->paint, &sTransform, w->clip,
-				    PAINT_WINDOW_TRANSLUCENT_MASK);
+				    PAINT_WINDOW_CLIP_TRANSLUCENT_MASK);
 	}
     }
 
@@ -709,7 +709,7 @@ enableFragmentProgramAndDrawGeometry (CompWindow	   *w,
 
     enableTexture (s, texture, filter);
 
-    if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+    if (mask & PAINT_WINDOW_BLEND_MASK)
     {
 	if (blending)
 	    glEnable (GL_BLEND);
@@ -772,7 +772,7 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
     {
 	GLfloat constant[4];
 
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	if (mask & PAINT_WINDOW_BLEND_MASK)
 	    glEnable (GL_BLEND);
 
 	enableTexture (s, texture, filter);
@@ -917,14 +917,14 @@ enableFragmentOperationsAndDrawGeometry (CompWindow	      *w,
 	glColor4usv (defaultColor);
 	screenTexEnvMode (s, GL_REPLACE);
 
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	if (mask & PAINT_WINDOW_BLEND_MASK)
 	    glDisable (GL_BLEND);
     }
     else
     {
 	enableTexture (s, texture, filter);
 
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	if (mask & PAINT_WINDOW_BLEND_MASK)
 	{
 	    glEnable (GL_BLEND);
 	    if (attrib->opacity != OPAQUE || attrib->brightness != BRIGHT)
@@ -1009,20 +1009,12 @@ drawWindow (CompWindow		 *w,
     if (!region->numRects)
 	return TRUE;
 
-    if (mask & PAINT_WINDOW_SOLID_MASK)
+    if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
     {
 	if (w->attrib.map_state != IsViewable)
 	    return FALSE;
 
-	if (w->alpha)
-	    return FALSE;
-
-	if (fragment->opacity != OPAQUE)
-	    return FALSE;
-    }
-    else if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
-    {
-	if (!w->alpha && fragment->opacity == OPAQUE)
+	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
 	    return FALSE;
     }
     else
@@ -1030,10 +1022,11 @@ drawWindow (CompWindow		 *w,
 	if (w->attrib.map_state != IsViewable)
 	    return TRUE;
 
-	if (w->alpha || fragment->opacity != OPAQUE)
-	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
-	else
-	    mask |= PAINT_WINDOW_SOLID_MASK;
+	if (mask & PAINT_WINDOW_CLIP_TRANSLUCENT_MASK)
+	{
+	    if (!(mask & PAINT_WINDOW_TRANSLUCENT_MASK))
+		return FALSE;
+	}
     }
 
     if (!w->texture->pixmap)
@@ -1042,6 +1035,9 @@ drawWindow (CompWindow		 *w,
 	if (!w->mapNum)
 	    return FALSE;
     }
+
+    if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	mask |= PAINT_WINDOW_BLEND_MASK;
 
     w->vCount = w->indexCount = 0;
     (*w->screen->addWindowGeometry) (w, &w->matrix, 1, w->region, region);
@@ -1065,13 +1061,16 @@ paintWindow (CompWindow		     *w,
 
     if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
     {
-	if (mask & PAINT_WINDOW_SOLID_MASK)
+	if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
 	    return FALSE;
 
 	return TRUE;
     }
 
     initFragmentAttrib (&fragment, attrib);
+
+    if (w->alpha || fragment.opacity != OPAQUE)
+	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
     if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
     {
