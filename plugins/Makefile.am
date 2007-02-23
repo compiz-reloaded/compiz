@@ -54,6 +54,9 @@ libblur_la_LDFLAGS = -module -avoid-version -no-undefined
 libblur_la_LIBADD = $(top_builddir)/libdecoration/libdecoration.la -lGLU
 libblur_la_SOURCES = blur.c
 
+libregex_la_LDFLAGS = -module -avoid-version -no-undefined
+libregex_la_SOURCES = regex.c
+
 if USE_LIBRSVG
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
 libsvg_la_LIBADD = @LIBRSVG_LIBS@
@@ -165,6 +168,7 @@ module_LTLIBRARIES =		\
 	libclone.la		\
 	libpng.la		\
 	libblur.la		\
+	libregex.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libgconf_dump_module) \
