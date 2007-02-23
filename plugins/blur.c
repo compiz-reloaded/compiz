@@ -44,10 +44,9 @@
 
 #define BLUR_PULSE_DEFAULT FALSE
 
-#define BLUR_GAUSSIAN_RADIUS_DEFAULT    3.0f
-#define BLUR_GAUSSIAN_RADIUS_MIN        0.1f
-#define BLUR_GAUSSIAN_RADIUS_MAX       10.0f
-#define BLUR_GAUSSIAN_RADIUS_PRECISION  0.1f
+#define BLUR_GAUSSIAN_RADIUS_DEFAULT  3
+#define BLUR_GAUSSIAN_RADIUS_MIN      1
+#define BLUR_GAUSSIAN_RADIUS_MAX     15
 
 #define BLUR_MIPMAP_LOD_DEFAULT   2.5f
 #define BLUR_MIPMAP_LOD_MIN       0.1f
@@ -218,54 +217,79 @@ blurFilterFromString (CompOptionValue *value)
 	return BlurFilter4xBilinear;
 }
 
+/* pascal triangle based kernel generator */
 static int
-blurCreateGaussianKernel (float radius,
-			  float sigma,
-			  float alpha,
-			  float *amp)
+blurCreateGaussianLinearKernel (int   radius,
+				float strength,
+				float *amp,
+				float *pos,
+				int   *optSize)
 {
-    float scale, x_scale, fx, sum;
-    int   size, half_size, x, i;
+    float factor = 0.5f + (strength / 2.0f);
+    float buffer1[BLUR_GAUSSIAN_RADIUS_MAX * 3];
+    float buffer2[BLUR_GAUSSIAN_RADIUS_MAX * 3];
+    float *ar1 = buffer1;
+    float *ar2 = buffer2;
+    float *tmp;
+    float sum = 0;
+    int   size = (radius * 2) + 1;
+    int   mySize = ceil (radius / 2.0f);
+    int   i, j;
 
-    scale = 1.0f / (2.0f * M_PI * sigma * sigma);
-    half_size = alpha + 0.5f;
+    ar1[0] = 1.0;
+    ar1[1] = 1.0;
 
-    if (half_size == 0)
-	half_size = 1;
-
-    size = half_size * 2 + 1;
-
-    if (!amp)
-	return size;
-
-    x_scale = 2.0f * radius / size;
-
-    i   = 0;
-    sum = 0.0f;
-
-    for (x = 0; x < size; x++)
+    for (i = 3; i <= size;i++)
     {
-	fx = x_scale * (x - half_size);
+	ar2[0] = 1;
 
-	amp[i] = scale * exp ((-1.0f * (fx * fx)) / (2.0f * sigma * sigma));
+	for (j = 1; j < i - 1; j++)
+	    ar2[j] = (ar1[j - 1] + ar1[j]) * factor;
 
-	sum += amp[i];
+	ar2[i - 1] = 1;
 
-	i++;
+	tmp = ar1;
+	ar1 = ar2;
+	ar2 = tmp;
     }
 
     /* normalize */
+    for (i = 0; i < size; i++)
+	sum += ar1[i];
+
     if (sum != 0.0f)
 	sum = 1.0f / sum;
 
     for (i = 0; i < size; i++)
-	amp[i] *= sum;
+	ar1[i] *= sum;
 
-    return size;
+    i = 0;
+    j = 0;
+
+    if (radius & 1)
+    {
+	pos[i] = radius;
+	amp[i] = ar1[i];
+	i = 1;
+	j = 1;
+    }
+
+    for (; i < mySize; i++)
+    {
+	pos[i]  = radius - j;
+	pos[i] -= ar1[j + 1] / (ar1[j] + ar1[j + 1]);
+	amp[i]  = ar1[j] + ar1[j + 1];
+
+	j += 2;
+    }
+
+    pos[mySize] = 0.0;
+    amp[mySize] = ar1[radius];
+
+    *optSize = mySize;
+
+    return radius;
 }
-
-#define SIGMA(r) ((r) / 2.0)
-#define ALPHA(r) (r)
 
 static void
 blurUpdateFilterRadius (CompScreen *s)
@@ -276,13 +300,9 @@ blurUpdateFilterRadius (CompScreen *s)
     case BlurFilter4xBilinear:
 	bs->filterRadius = 2;
 	break;
-    case BlurFilterGaussian: {
-	float radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.f;
-	int   size;
-
-	size = blurCreateGaussianKernel (radius, SIGMA (radius), radius, NULL);
-	bs->filterRadius = size / 2;
-    } break;
+    case BlurFilterGaussian:
+	bs->filterRadius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+	break;
     case BlurFilterMipmap: {
 	float lod = bs->opt[BLUR_SCREEN_OPTION_MIPMAP_LOD].value.f;
 
@@ -401,7 +421,7 @@ blurSetScreenOption (CompScreen      *screen,
 	}
 	break;
     case BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS:
-	if (compSetFloatOption (o, value))
+	if (compSetIntOption (o, value))
 	{
 	    if (bs->filter == BlurFilterGaussian)
 	    {
@@ -490,11 +510,10 @@ blurScreenInitOptions (BlurScreen *bs)
     o->name		= "gaussian_radius";
     o->shortDesc	= N_("Gaussian Radius");
     o->longDesc		= N_("Gaussian radius");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= BLUR_GAUSSIAN_RADIUS_DEFAULT;
-    o->rest.f.min	= BLUR_GAUSSIAN_RADIUS_MIN;
-    o->rest.f.max	= BLUR_GAUSSIAN_RADIUS_MAX;
-    o->rest.f.precision = BLUR_GAUSSIAN_RADIUS_PRECISION;
+    o->type		= CompOptionTypeInt;
+    o->value.i		= BLUR_GAUSSIAN_RADIUS_DEFAULT;
+    o->rest.i.min	= BLUR_GAUSSIAN_RADIUS_MIN;
+    o->rest.i.max	= BLUR_GAUSSIAN_RADIUS_MAX;
 
     o = &bs->opt[BLUR_SCREEN_OPTION_MIPMAP_LOD];
     o->name		= "mipmap_lod";
@@ -1077,24 +1096,20 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    ok &= addDataOpToFunctionData (data, str);
 	} break;
 	case BlurFilterGaussian: {
-	    float radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.f;
-	    float amp[256];
-	    int   size;
+	    static char *filterTemp[] = {
+		"tCoord", "pix"
+	    };
+	    int		radius =
+		bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+	    float	amp[BLUR_GAUSSIAN_RADIUS_MAX];
+	    float	pos[BLUR_GAUSSIAN_RADIUS_MAX];
+	    int		numTexop;
 
-	    size = blurCreateGaussianKernel (radius, SIGMA (radius), radius,
-					     amp);
+	    blurCreateGaussianLinearKernel (radius, 1.0f, amp, pos,
+					    &numTexop);
 
-	    for (i = 0; i < bs->filterRadius; i++)
-	    {
-		snprintf (str, 1024, "t%d", i);
-		ok &= addTempHeaderOpToFunctionData (data, str);
-		snprintf (str, 1024, "s%d", i);
-		ok &= addTempHeaderOpToFunctionData (data, str);
-		snprintf (str, 1024, "t%d", bs->filterRadius + i);
-		ok &= addTempHeaderOpToFunctionData (data, str);
-		snprintf (str, 1024, "s%d", bs->filterRadius + i);
-		ok &= addTempHeaderOpToFunctionData (data, str);
-	    }
+	    for (i = 0; i < sizeof (filterTemp) / sizeof (filterTemp[0]); i++)
+		ok &= addTempHeaderOpToFunctionData (data, filterTemp[i]);
 
 	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
 	    ok &= addColorOpToFunctionData (data, "output", "output");
@@ -1111,36 +1126,29 @@ getDstBlurFragmentFunction (CompScreen  *s,
 
 	    ok &= addDataOpToFunctionData (data, str);
 
-	    for (i = 0; i < bs->filterRadius; i++)
-	    {
-		snprintf (str, 1024,
-			  "ADD t%d, coord, program.env[%d];"
-			  "TEX s%d, t%d, texture[%d], %s;"
-			  "SUB t%d, coord, program.env[%d];"
-			  "TEX s%d, t%d, texture[%d], %s;",
-			  i, param + 2 + i,
-			  i, i, unit + 1, targetString,
-			  bs->filterRadius + i, param + 2 + i,
-			  bs->filterRadius + i, bs->filterRadius + i,
-			  unit + 1, targetString);
-
-		ok &= addDataOpToFunctionData (data, str);
-	    }
-
 	    snprintf (str, 1024,
 		      "TEX dst, coord, texture[%d], %s;"
 		      "MUL_SAT mask, output.a, program.env[%d];"
 		      "MUL sum, sum, %f;",
-		      unit, targetString, param + 1, amp[bs->filterRadius]);
+		      unit, targetString, param + 1, amp[numTexop]);
 
 	    ok &= addDataOpToFunctionData (data, str);
 
-	    for (i = 0; i < bs->filterRadius; i++)
+	    for (i = 0; i < numTexop; i++)
 	    {
 		snprintf (str, 1024,
-			  "MAD sum, s%d, %f, sum;"
-			  "MAD sum, s%d, %f, sum;",
-			  i, amp[i], bs->filterRadius + i, amp[i]);
+			  "ADD tCoord, coord, program.env[%d];"
+			  "TEX pix, tCoord, texture[%d], %s;"
+			  "MAD sum, pix, %f, sum;"
+			  "SUB tCoord, coord, program.env[%d];"
+			  "TEX pix, tCoord, texture[%d], %s;"
+			  "MAD sum, pix, %f, sum;",
+			  param + 2 + i,
+			  unit + 1, targetString,
+			  amp[i],
+			  param + 2 + i,
+			  unit + 1, targetString,
+			  amp[i]);
 
 		ok &= addDataOpToFunctionData (data, str);
 	    }
@@ -1277,18 +1285,20 @@ loadFragmentProgram (CompScreen *s,
 static Bool
 loadFilterProgram (CompScreen *s)
 {
-    char buffer[2048];
-    char *targetString;
-    char *str = buffer;
-    float amp[256];
-    float radius;
+    char  buffer[2048];
+    char  *targetString;
+    char  *str = buffer;
+    float amp[BLUR_GAUSSIAN_RADIUS_MAX];
+    float pos[BLUR_GAUSSIAN_RADIUS_MAX];
+    int   numTexop;
+    int   radius;
     int   i;
 
     BLUR_SCREEN (s);
 
-    radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.f;
+    radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
 
-    blurCreateGaussianKernel (radius, SIGMA (radius), radius, amp);
+    blurCreateGaussianLinearKernel (radius, 1.0f, amp, pos, &numTexop);
 
     if (bs->target == GL_TEXTURE_2D)
 	targetString = "2D";
@@ -1300,40 +1310,30 @@ loadFilterProgram (CompScreen *s)
 		    "ATTRIB texcoord = fragment.texcoord[0];"
 		    "TEMP sum;");
 
-    for (i = 0; i < bs->filterRadius; i++)
-	str += sprintf (str, "TEMP t%d, s%d, t%d, s%d;",
-			i, i, bs->filterRadius + i, bs->filterRadius + i);
-
+    str += sprintf (str, "TEMP tCoord, pix;");
 
     str += sprintf (str,
 		    "TEX sum, texcoord, texture[0], %s;",
 		    targetString);
 
-    for (i = 0; i < bs->filterRadius; i++)
-	str += sprintf (str,
-			"ADD t%d, texcoord, program.local[%d];"
-			"TEX s%d, t%d, texture[0], %s;"
-			"SUB t%d, texcoord, program.local[%d];"
-			"TEX s%d, t%d, texture[0], %s;",
-			i, i, i, i, targetString,
-			bs->filterRadius + i, i, bs->filterRadius + i,
-			bs->filterRadius + i, targetString);
-
     str += sprintf (str,
 		    "MUL sum, sum, %f;",
-		    amp[bs->filterRadius]);
+		    amp[numTexop]);
 
-    for (i = 0; i < bs->filterRadius - 1; i++)
+    for (i = 0; i < numTexop; i++)
 	str += sprintf (str,
-			"MAD sum, s%d, %f, sum;"
-			"MAD sum, s%d, %f, sum;",
-			i, amp[i], bs->filterRadius + i, amp[i]);
+			"ADD tCoord, texcoord, program.local[%d];"
+			"TEX pix, tCoord, texture[0], %s;"
+			"MAD sum, pix, %f, sum;"
+			"SUB tCoord, texcoord, program.local[%d];"
+			"TEX pix, tCoord, texture[0], %s;"
+			"MAD sum, pix, %f, sum;",
+			i, targetString, amp[i],
+			i, targetString, amp[i]);
 
     str += sprintf (str,
-		    "MAD sum, s%d, %f, sum;"
-		    "MAD result.color, s%d, %f, sum;"
-		    "END",
-		    i, amp[i], bs->filterRadius + i, amp[i]);
+		    "MOV result.color, sum;"
+		    "END");
 
     return loadFragmentProgram (s, &bs->program, buffer);
 }
@@ -1424,9 +1424,15 @@ fboUpdate (CompScreen *s,
 	   BoxPtr     pBox,
 	   int	      nBox)
 {
-    int i, y;
+    int   i, y;
+    float amp[BLUR_GAUSSIAN_RADIUS_MAX];
+    float pos[BLUR_GAUSSIAN_RADIUS_MAX];
+    int   numTexop;
+    float radius;
 
     BLUR_SCREEN (s);
+
+    radius = bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
 
     if (!bs->program)
 	if (!loadFilterProgram (s))
@@ -1442,9 +1448,11 @@ fboUpdate (CompScreen *s,
     glEnable (GL_FRAGMENT_PROGRAM_ARB);
     (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, bs->program);
 
-    for (i = 0; i < bs->filterRadius; i++)
+    blurCreateGaussianLinearKernel (radius, 1.0f, amp, pos, &numTexop);
+
+    for (i = 0; i < numTexop; i++)
 	(*s->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, i,
-				       bs->tx * 1.0f * (bs->filterRadius - i),
+				       bs->tx * pos[i],
 				       0.0f, 0.0f, 0.0f);
 
     glBegin (GL_QUADS);
@@ -1896,7 +1904,15 @@ blurDrawWindowTexture (CompWindow	    *w,
 		function = getDstBlurFragmentFunction (s, texture, param, unit);
 		if (function)
 		{
-		    int i;
+		    float amp[BLUR_GAUSSIAN_RADIUS_MAX];
+		    float pos[BLUR_GAUSSIAN_RADIUS_MAX];
+		    int   numTexop;
+		    int   radius =
+			bs->opt[BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS].value.i;
+		    int   i;
+
+		    blurCreateGaussianLinearKernel (radius, 1.0f, amp,
+						    pos, &numTexop);
 
 		    addFragmentFunction (&dstFa, function);
 
@@ -1916,11 +1932,11 @@ blurDrawWindowTexture (CompWindow	    *w,
 						 threshold, threshold,
 						 threshold, threshold);
 
-		    for (i = 0; i < bs->filterRadius; i++)
+
+		    for (i = 0; i < numTexop; i++)
 			(*s->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
 						     param + 2 + i,
-						     0.0f, bs->ty * 1.0f *
-						     (bs->filterRadius - i),
+						     0.0f, bs->ty * pos[i],
 						     0.0f, 0.0f);
 		}
 		break;
