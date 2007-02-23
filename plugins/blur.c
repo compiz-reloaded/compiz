@@ -1701,9 +1701,17 @@ blurDrawWindow (CompWindow	     *w,
     BLUR_SCREEN (s);
     BLUR_WINDOW (w);
 
-    if (bs->alphaBlur && !(mask & PAINT_WINDOW_CLIP_OPAQUE_MASK))
+    if (bs->alphaBlur && bw->region && !(mask & PAINT_WINDOW_CLIP_OPAQUE_MASK))
     {
-	if (bw->region)
+	int clientThreshold;
+
+	/* only care about client window blurring when it's translucent */
+	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
+	    clientThreshold = bw->state[BLUR_STATE_CLIENT].threshold;
+	else
+	    clientThreshold = 0;
+
+	if (bw->state[BLUR_STATE_DECOR].threshold || clientThreshold)
 	{
 	    Region reg;
 
