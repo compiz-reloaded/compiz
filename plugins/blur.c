@@ -58,10 +58,9 @@
 #define BLUR_MIPMAP_LOD_MAX       5.0f
 #define BLUR_MIPMAP_LOD_PRECISION 0.1f
 
-#define BLUR_SATURATION_DEFAULT   100.0f
-#define BLUR_SATURATION_MIN         0.0f
-#define BLUR_SATURATION_MAX       100.0f
-#define BLUR_SATURATION_PRECISION   1.0f
+#define BLUR_SATURATION_DEFAULT 100
+#define BLUR_SATURATION_MIN       0
+#define BLUR_SATURATION_MAX     100
 
 static char *winType[] = {
     N_("Toolbar"),
@@ -136,7 +135,7 @@ typedef struct _BlurDisplay {
 #define BLUR_SCREEN_OPTION_GAUSSIAN_RADIUS   5
 #define BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH 6
 #define BLUR_SCREEN_OPTION_MIPMAP_LOD        7
-#define BLUR_SCREEN_OPTION_BLUR_SATURATION   8
+#define BLUR_SCREEN_OPTION_SATURATION        8
 #define BLUR_SCREEN_OPTION_NUM		     9
 
 typedef struct _BlurScreen {
@@ -465,8 +464,8 @@ blurSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case BLUR_SCREEN_OPTION_BLUR_SATURATION:
-	if (compSetFloatOption (o, value))
+    case BLUR_SCREEN_OPTION_SATURATION:
+	if (compSetIntOption (o, value))
 	{
 	    blurReset (screen);
 	    damageScreen (screen);
@@ -566,15 +565,14 @@ blurScreenInitOptions (BlurScreen *bs)
     o->rest.f.max	= BLUR_MIPMAP_LOD_MAX;
     o->rest.f.precision = BLUR_MIPMAP_LOD_PRECISION;
 
-    o = &bs->opt[BLUR_SCREEN_OPTION_BLUR_SATURATION];
-    o->name		= "blur_saturation";
-    o->shortDesc	= N_("Blur Saturation");
-    o->longDesc		= N_("Blur saturation");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= BLUR_SATURATION_DEFAULT;
-    o->rest.f.min	= BLUR_SATURATION_MIN;
-    o->rest.f.max	= BLUR_SATURATION_MAX;
-    o->rest.f.precision = BLUR_SATURATION_PRECISION;
+    o = &bs->opt[BLUR_SCREEN_OPTION_SATURATION];
+    o->name	  = "saturation";
+    o->shortDesc  = N_("Blur Saturation");
+    o->longDesc	  = N_("Blur saturation");
+    o->type	  = CompOptionTypeInt;
+    o->value.i	  = BLUR_SATURATION_DEFAULT;
+    o->rest.i.min = BLUR_SATURATION_MIN;
+    o->rest.i.max = BLUR_SATURATION_MAX;
 }
 
 static Region
@@ -1092,8 +1090,7 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	static char *temp[] = { "coord", "mask", "sum", "dst" };
 	int	    i, handle = 0;
 	char	    str[1024];
-	float	    saturation =
-	    bs->opt[BLUR_SCREEN_OPTION_BLUR_SATURATION].value.f / 100.0;
+	int	    saturation = bs->opt[BLUR_SCREEN_OPTION_SATURATION].value.i;
 	Bool	    ok = TRUE;
 
 	for (i = 0; i < sizeof (temp) / sizeof (temp[0]); i++)
@@ -1226,14 +1223,14 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    break;
 	}
 
-	if (saturation < 1.0f)
+	if (saturation < 100)
 	{
 	    snprintf (str, 1024,
 		      "MUL sat, sum, { 1.0, 1.0, 1.0, 0.0 };"
 		      "DP3 sat, sat, { %f, %f, %f, %f };"
 		      "LRP sum.xyz, %f, sum, sat;",
 		      RED_SATURATION_WEIGHT, GREEN_SATURATION_WEIGHT,
-		      BLUE_SATURATION_WEIGHT, 0.0, saturation);
+		      BLUE_SATURATION_WEIGHT, 0.0f, saturation / 100.0f);
 
 	    ok &= addDataOpToFunctionData (data, str);
 	}
