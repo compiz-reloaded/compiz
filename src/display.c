@@ -2609,6 +2609,10 @@ addDisplay (char *name,
 
     d->fileWatch = NULL;
 
+    d->matchInitExp	      = matchInitExp;
+    d->matchExpHandlerChanged = matchExpHandlerChanged;
+    d->matchPropertyChanged   = matchPropertyChanged;
+
     d->supportedAtom	     = XInternAtom (dpy, "_NET_SUPPORTED", 0);
     d->supportingWmCheckAtom = XInternAtom (dpy, "_NET_SUPPORTING_WM_CHECK", 0);
 

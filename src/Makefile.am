@@ -23,4 +23,5 @@ compiz_SOURCES =   \
 	session.c  \
 	fragment.c \
 	matrix.c   \
-	cursor.c
+	cursor.c   \
+	match.c

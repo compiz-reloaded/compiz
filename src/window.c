@@ -671,6 +671,46 @@ constrainWindowState (unsigned int state,
     return state;
 }
 
+unsigned int
+compWindowTypeFromString (char *str)
+{
+    if (strcasecmp (str, "desktop") == 0)
+	return CompWindowTypeDesktopMask;
+    else if (strcasecmp (str, "dock") == 0)
+	return CompWindowTypeDockMask;
+    else if (strcasecmp (str, "toolbar") == 0)
+	return CompWindowTypeToolbarMask;
+    else if (strcasecmp (str, "menu") == 0)
+	return CompWindowTypeMenuMask;
+    else if (strcasecmp (str, "utility") == 0)
+	return CompWindowTypeUtilMask;
+    else if (strcasecmp (str, "splash") == 0)
+	return CompWindowTypeSplashMask;
+    else if (strcasecmp (str, "dialog") == 0)
+	return CompWindowTypeDialogMask;
+    else if (strcasecmp (str, "normal") == 0)
+	return CompWindowTypeNormalMask;
+    else if (strcasecmp (str, "dropdownmenu") == 0)
+	return CompWindowTypeDropdownMenuMask;
+    else if (strcasecmp (str, "popupmenu") == 0)
+	return CompWindowTypePopupMenuMask;
+    else if (strcasecmp (str, "tooltip") == 0)
+	return CompWindowTypeTooltipMask;
+    else if (strcasecmp (str, "notification") == 0)
+	return CompWindowTypeNotificationMask;
+    else if (strcasecmp (str, "combo") == 0)
+	return CompWindowTypeComboMask;
+    else if (strcasecmp (str, "dnd") == 0)
+	return CompWindowTypeDndMask;
+    else if (strcasecmp (str, "modaldialog") == 0)
+	return CompWindowTypeModalDialogMask;
+    else if (strcasecmp (str, "fullscreen") == 0)
+	return CompWindowTypeFullscreenMask;
+    else if (strcasecmp (str, "unknown") == 0)
+	return CompWindowTypeUnknownMask;
+
+    return 0;
+}
 
 unsigned int
 getWindowType (CompDisplay *display,

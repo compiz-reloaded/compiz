@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070213
+#define ABIVERSION 20070223
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -85,7 +85,7 @@ typedef struct _CompFunction	  CompFunction;
 typedef struct _CompFunctionData  CompFunctionData;
 typedef struct _FragmentAttrib    FragmentAttrib;
 typedef struct _CompCursor	  CompCursor;
-
+typedef struct _CompMatch	  CompMatch;
 /* virtual modifiers */
 
 #define CompModAlt        0
@@ -420,6 +420,10 @@ compSetOptionList (CompOption      *option,
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value);
 
+void
+compAddStringListToMatch (CompOptionValue *value,
+			  CompMatch       *match);
+
 Bool
 getBoolOptionNamed (CompOption *option,
 		    int	       nOption,
@@ -618,6 +622,70 @@ typedef void (*FileWatchAddedProc) (CompDisplay	  *display,
 typedef void (*FileWatchRemovedProc) (CompDisplay   *display,
 				      CompFileWatch *fileWatch);
 
+#define MATCH_EXP_AND_MASK (1 << 0)
+#define MATCH_EXP_NOT_MASK (1 << 1)
+
+typedef enum {
+    CompMatchOpTypeGroup,
+    CompMatchOpTypeExp
+} CompMatchOpType;
+
+typedef struct _CompMatchAnyOp {
+    CompMatchOpType type;
+    int		    flags;
+} CompMatchAnyOp;
+
+typedef union _CompMatchOp CompMatchOp;
+
+typedef struct _CompMatchGroupOp {
+    CompMatchOpType type;
+    int		    flags;
+    CompMatchOp	    *op;
+    int		    nOp;
+} CompMatchGroupOp;
+
+typedef void (*CompMatchExpFiniProc) (CompDisplay *display,
+				      CompPrivate private);
+
+typedef Bool (*CompMatchExpEvalProc) (CompDisplay *display,
+				      CompWindow  *window,
+				      CompPrivate private);
+
+typedef struct _CompMatchExp {
+    CompMatchExpFiniProc fini;
+    CompMatchExpEvalProc eval;
+    CompPrivate		 private;
+} CompMatchExp;
+
+typedef struct _CompMatchExpOp {
+    CompMatchOpType type;
+    int		    flags;
+    char	    *value;
+    CompMatchExp    e;
+} CompMatchExpOp;
+
+union _CompMatchOp {
+    CompMatchOpType  type;
+    CompMatchAnyOp   any;
+    CompMatchGroupOp group;
+    CompMatchExpOp   exp;
+};
+
+struct _CompMatch {
+    CompDisplay *display;
+    CompMatchOp *op;
+    int		nOp;
+};
+
+typedef void (*MatchInitExpProc) (CompDisplay  *display,
+				  CompMatchExp *exp,
+				  char	       *value);
+
+typedef void (*MatchExpHandlerChangedProc) (CompDisplay *display);
+
+typedef void (*MatchPropertyChangedProc) (CompDisplay *display,
+					  CompWindow  *window);
+
 struct _CompDisplay {
     Display    *display;
     CompScreen *screens;
@@ -808,6 +876,10 @@ struct _CompDisplay {
 
     FileWatchAddedProc   fileWatchAdded;
     FileWatchRemovedProc fileWatchRemoved;
+
+    MatchInitExpProc	       matchInitExp;
+    MatchExpHandlerChangedProc matchExpHandlerChanged;
+    MatchPropertyChangedProc   matchPropertyChanged;
 
     CompPrivate *privates;
 };
@@ -2176,6 +2248,9 @@ constrainWindowState (unsigned int state,
 		      unsigned int actions);
 
 unsigned int
+compWindowTypeFromString (char *str);
+
+unsigned int
 getWindowType (CompDisplay *display,
 	       Window      id);
 
@@ -2755,6 +2830,58 @@ updateCursor (CompCursor    *c,
 	      int	    x,
 	      int	    y,
 	      unsigned long serial);
+
+
+/* match.c */
+
+void
+matchInit (CompMatch *match);
+
+void
+matchFini (CompMatch *match);
+
+char *
+matchParseFlags (char *str,
+		 int  *flags);
+
+Bool
+matchAddGroup (CompMatch *match,
+	       int	 flags,
+	       CompMatch *group);
+
+Bool
+matchAddExp (CompMatch *match,
+	     int	flags,
+	     char	*value);
+
+Bool
+matchAddExpFromString (CompMatch *match,
+		       char	 *str);
+
+Bool
+matchAddExtentedExpFromString (CompMatch *match,
+			       char	 *str);
+
+void
+matchUpdate (CompDisplay *display,
+	     CompMatch   *match);
+
+Bool
+matchEval (CompMatch  *match,
+	   CompWindow *window);
+
+void
+matchInitExp (CompDisplay  *display,
+	      CompMatchExp *exp,
+	      char	   *value);
+
+void
+matchExpHandlerChanged (CompDisplay *display);
+
+void
+matchPropertyChanged (CompDisplay *display,
+		      CompWindow  *window);
+
 
 #ifdef  __cplusplus
 }

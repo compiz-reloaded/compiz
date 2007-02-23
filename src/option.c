@@ -315,44 +315,63 @@ compWindowTypeMaskFromStringList (CompOptionValue *value)
     unsigned int mask = 0;
 
     for (i = 0; i < value->list.nValue; i++)
-    {
-	if (strcasecmp (value->list.value[i].s, "desktop") == 0)
-	    mask |= CompWindowTypeDesktopMask;
-	else if (strcasecmp (value->list.value[i].s, "dock") == 0)
-	    mask |= CompWindowTypeDockMask;
-	else if (strcasecmp (value->list.value[i].s, "toolbar") == 0)
-	    mask |= CompWindowTypeToolbarMask;
-	else if (strcasecmp (value->list.value[i].s, "menu") == 0)
-	    mask |= CompWindowTypeMenuMask;
-	else if (strcasecmp (value->list.value[i].s, "utility") == 0)
-	    mask |= CompWindowTypeUtilMask;
-	else if (strcasecmp (value->list.value[i].s, "splash") == 0)
-	    mask |= CompWindowTypeSplashMask;
-	else if (strcasecmp (value->list.value[i].s, "dialog") == 0)
-	    mask |= CompWindowTypeDialogMask;
-	else if (strcasecmp (value->list.value[i].s, "normal") == 0)
-	    mask |= CompWindowTypeNormalMask;
-	else if (strcasecmp (value->list.value[i].s, "dropdownmenu") == 0)
-	    mask |= CompWindowTypeDropdownMenuMask;
-	else if (strcasecmp (value->list.value[i].s, "popupmenu") == 0)
-	    mask |= CompWindowTypePopupMenuMask;
-	else if (strcasecmp (value->list.value[i].s, "tooltip") == 0)
-	    mask |= CompWindowTypeTooltipMask;
-	else if (strcasecmp (value->list.value[i].s, "notification") == 0)
-	    mask |= CompWindowTypeNotificationMask;
-	else if (strcasecmp (value->list.value[i].s, "combo") == 0)
-	    mask |= CompWindowTypeComboMask;
-	else if (strcasecmp (value->list.value[i].s, "dnd") == 0)
-	    mask |= CompWindowTypeDndMask;
-	else if (strcasecmp (value->list.value[i].s, "modaldialog") == 0)
-	    mask |= CompWindowTypeModalDialogMask;
-	else if (strcasecmp (value->list.value[i].s, "fullscreen") == 0)
-	    mask |= CompWindowTypeFullscreenMask;
-	else if (strcasecmp (value->list.value[i].s, "unknown") == 0)
-	    mask |= CompWindowTypeUnknownMask;
-    }
+	mask |= compWindowTypeFromString (value->list.value[i].s);
 
     return mask;
+}
+
+static int
+addStringListToMatchUsingIndex (CompOptionValue *value,
+				CompMatch       *match,
+				int	        i)
+{
+    char *str;
+
+    while (i < value->list.nValue)
+    {
+	str = value->list.value[i++].s;
+
+	if (*str == '+')
+	{
+	    CompMatch group;
+	    int	      flags;
+
+	    matchInit (&group);
+
+	    matchParseFlags (++str, &flags);
+
+	    i += addStringListToMatchUsingIndex (value, &group, i);
+
+	    matchAddGroup (match, flags & MATCH_EXP_AND_MASK, &group);
+
+	    matchFini (&group);
+	}
+	else if (*str == '-')
+	{
+	    matchAddExpFromString (match, ++str);
+	    return i;
+	}
+	else
+	{
+	    matchAddExpFromString (match, str);
+	}
+    }
+
+    return i;
+}
+
+/*
+  Optional prefix '+' or '-' can be used to create groups of expressions.
+
+  Example:
+  '(a & b) | (c & d)' -> '+ a', '-and b', '+or c', '-and d'
+  'a | b | (c & d)'   -> 'a', 'or b', '+or c', '-and d'
+*/
+void
+compAddStringListToMatch (CompOptionValue *value,
+			  CompMatch       *match)
+{
+    addStringListToMatchUsingIndex (value, match, 0);
 }
 
 Bool
