@@ -1701,7 +1701,7 @@ blurDrawWindow (CompWindow	     *w,
     BLUR_SCREEN (s);
     BLUR_WINDOW (w);
 
-    if (bs->alphaBlur)
+    if (bs->alphaBlur && !(mask & PAINT_WINDOW_CLIP_OPAQUE_MASK))
     {
 	if (bw->region)
 	{
