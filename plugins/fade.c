@@ -59,9 +59,10 @@ static char *winType[] = {
 static int displayPrivateIndex;
 
 typedef struct _FadeDisplay {
-    int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
-    int		    displayModals;
+    int			       screenPrivateIndex;
+    HandleEventProc	       handleEvent;
+    MatchExpHandlerChangedProc matchExpHandlerChanged;
+    int			       displayModals;
 } FadeDisplay;
 
 #define FADE_SCREEN_OPTION_FADE_SPEED		  0
@@ -82,7 +83,7 @@ typedef struct _FadeScreen {
     FocusWindowProc	   focusWindow;
     WindowResizeNotifyProc windowResizeNotify;
 
-    int wMask;
+    CompMatch match;
 } FadeScreen;
 
 typedef struct _FadeWindow {
@@ -122,6 +123,24 @@ typedef struct _FadeWindow {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static void
+fadeUpdateWindowFadeMatch (CompDisplay     *display,
+			   CompOptionValue *value,
+			   CompMatch       *match)
+{
+    CompMatch group;
+
+    matchFini (match);
+    matchInit (match);
+    matchAddExpFromString (match, "not type=desktop");
+    matchInit (&group);
+    compAddStringListToMatch (value, &group);
+    matchAddGroup (match, MATCH_EXP_AND_MASK, &group);
+    matchFini (&group);
+
+    matchUpdate (display, match);
+}
+
 static CompOption *
 fadeGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -157,8 +176,7 @@ fadeSetScreenOption (CompScreen      *screen,
     case FADE_SCREEN_OPTION_WINDOW_TYPE:
 	if (compSetOptionList (o, value))
 	{
-	    fs->wMask = compWindowTypeMaskFromStringList (&o->value);
-	    fs->wMask &= ~CompWindowTypeDesktopMask;
+	    fadeUpdateWindowFadeMatch (screen->display, &o->value, &fs->match);
 	    return TRUE;
 	}
 	break;
@@ -199,10 +217,8 @@ fadeScreenInitOptions (FadeScreen *fs)
     o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
     for (i = 0; i < N_WIN_TYPE; i++)
 	o->value.list.value[i].s = strdup (winType[i]);
-    o->rest.s.string     = windowTypeString;
-    o->rest.s.nString    = nWindowTypeString;
-
-    fs->wMask = compWindowTypeMaskFromStringList (&o->value);
+    o->rest.s.string     = NULL;
+    o->rest.s.nString    = 0;
 
     o = &fs->opt[FADE_SCREEN_OPTION_VISUAL_BELL];
     o->name	  = "visual_bell";
@@ -462,7 +478,7 @@ fadeHandleEvent (CompDisplay *d,
 	{
 	    FADE_SCREEN (w->screen);
 
-	    if (w->texture->pixmap && (fs->wMask & w->type))
+	    if (w->texture->pixmap && matchEval (&fs->match, w))
 	    {
 		FADE_WINDOW (w);
 
@@ -489,7 +505,7 @@ fadeHandleEvent (CompDisplay *d,
 
 	    fw->shaded = w->shaded;
 
-	    if (!fw->shaded && w->texture->pixmap && (fs->wMask & w->type))
+	    if (!fw->shaded && w->texture->pixmap && matchEval (&fs->match, w))
 	    {
 		w->paint.opacity = 0;
 
@@ -618,7 +634,7 @@ fadeDamageWindowRect (CompWindow *w,
 	{
 	    fw->shaded = w->shaded;
 	}
-	else if ((fs->wMask & w->type) && fw->opacity == w->paint.opacity)
+	else if (matchEval (&fs->match, w) && fw->opacity == w->paint.opacity)
 	{
 	    fw->opacity = 0;
 	}
@@ -662,6 +678,21 @@ fadeWindowResizeNotify (CompWindow *w)
     WRAP (fs, w->screen, windowResizeNotify, fadeWindowResizeNotify);
 }
 
+static void
+fadeMatchExpHandlerChanged (CompDisplay *d)
+{
+    CompScreen *s;
+
+    FADE_DISPLAY (d);
+
+    for (s = d->screens; s; s = s->next)
+	matchUpdate (d, &GET_FADE_SCREEN (s,fd)->match);
+
+    UNWRAP (fd, d, matchExpHandlerChanged);
+    (*d->matchExpHandlerChanged) (d);
+    WRAP (fd, d, matchExpHandlerChanged, fadeMatchExpHandlerChanged);
+}
+
 static Bool
 fadeInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -682,6 +713,7 @@ fadeInitDisplay (CompPlugin  *p,
     fd->displayModals = 0;
 
     WRAP (fd, d, handleEvent, fadeHandleEvent);
+    WRAP (fd, d, matchExpHandlerChanged, fadeMatchExpHandlerChanged);
 
     d->privates[displayPrivateIndex].ptr = fd;
 
@@ -697,6 +729,7 @@ fadeFiniDisplay (CompPlugin *p,
     freeScreenPrivateIndex (d, fd->screenPrivateIndex);
 
     UNWRAP (fd, d, handleEvent);
+    UNWRAP (fd, d, matchExpHandlerChanged);
 
     free (fd);
 }
@@ -724,6 +757,12 @@ fadeInitScreen (CompPlugin *p,
 
     fadeScreenInitOptions (fs);
 
+    matchInit (&fs->match);
+
+    fadeUpdateWindowFadeMatch (s->display,
+			       &fs->opt[FADE_SCREEN_OPTION_WINDOW_TYPE].value,
+			       &fs->match);
+
     WRAP (fs, s, preparePaintScreen, fadePreparePaintScreen);
     WRAP (fs, s, paintWindow, fadePaintWindow);
     WRAP (fs, s, damageWindowRect, fadeDamageWindowRect);
@@ -740,6 +779,8 @@ fadeFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     FADE_SCREEN (s);
+
+    matchFini (&fs->match);
 
     freeWindowPrivateIndex (s, fs->windowPrivateIndex);
 
