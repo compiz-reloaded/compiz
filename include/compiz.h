@@ -619,8 +619,8 @@ typedef void (*FileWatchAddedProc) (CompDisplay	  *display,
 typedef void (*FileWatchRemovedProc) (CompDisplay   *display,
 				      CompFileWatch *fileWatch);
 
-#define MATCH_EXP_AND_MASK (1 << 0)
-#define MATCH_EXP_NOT_MASK (1 << 1)
+#define MATCH_OP_AND_MASK (1 << 0)
+#define MATCH_OP_NOT_MASK (1 << 1)
 
 typedef enum {
     CompMatchOpTypeGroup,

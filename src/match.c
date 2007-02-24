@@ -109,7 +109,7 @@ matchAddOp (CompMatch	    *match,
 
     /* remove AND prefix if this is the first op in this group */
     if (!match->nOp)
-	flags &= ~MATCH_EXP_AND_MASK;
+	flags &= ~MATCH_OP_AND_MASK;
 
     op = realloc (match->op, sizeof (CompMatchOp) * (match->nOp + 1));
     if (!op)
@@ -322,7 +322,7 @@ matchAddFromString (CompMatch *match,
 
 	if (str[i] == '!')
 	{
-	    flags |= MATCH_EXP_NOT_MASK;
+	    flags |= MATCH_OP_NOT_MASK;
 
 	    i++;
 	    while (str[i] == ' ')
@@ -394,7 +394,7 @@ matchAddFromString (CompMatch *match,
 	if (str[i] != '\0')
 	{
 	    if (str[i] == '&')
-		flags = MATCH_EXP_AND_MASK;
+		flags = MATCH_OP_AND_MASK;
 
 	    i++;
 	}
@@ -441,7 +441,7 @@ matchEvalOps (CompDisplay *display,
     while (nOp--)
     {
 	/* fast evaluation */
-	if (op->any.flags & MATCH_EXP_AND_MASK)
+	if (op->any.flags & MATCH_OP_AND_MASK)
 	{
 	    /* result will never be true */
 	    if (!result)
@@ -464,10 +464,10 @@ matchEvalOps (CompDisplay *display,
 	    break;
 	}
 
-	if (op->any.flags & MATCH_EXP_NOT_MASK)
+	if (op->any.flags & MATCH_OP_NOT_MASK)
 	    value = !value;
 
-	if (op->any.flags & MATCH_EXP_AND_MASK)
+	if (op->any.flags & MATCH_OP_AND_MASK)
 	    result = (result && value);
 	else
 	    result = (result || value);

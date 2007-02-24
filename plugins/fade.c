@@ -118,7 +118,7 @@ fadeUpdateWindowFadeMatch (CompDisplay     *display,
     matchAddFromString (match, "!type=desktop");
     matchInit (&group);
     matchAddFromString (&group, value->s);
-    matchAddGroup (match, MATCH_EXP_AND_MASK, &group);
+    matchAddGroup (match, MATCH_OP_AND_MASK, &group);
     matchFini (&group);
 
     matchUpdate (display, match);
