@@ -320,60 +320,6 @@ compWindowTypeMaskFromStringList (CompOptionValue *value)
     return mask;
 }
 
-static int
-addStringListToMatchUsingIndex (CompOptionValue *value,
-				CompMatch       *match,
-				int	        i)
-{
-    char *str;
-
-    while (i < value->list.nValue)
-    {
-	str = value->list.value[i++].s;
-
-	if (*str == '+')
-	{
-	    CompMatch group;
-	    int	      flags;
-
-	    matchInit (&group);
-
-	    matchParseFlags (++str, &flags);
-
-	    i += addStringListToMatchUsingIndex (value, &group, i);
-
-	    matchAddGroup (match, flags & MATCH_EXP_AND_MASK, &group);
-
-	    matchFini (&group);
-	}
-	else if (*str == '-')
-	{
-	    matchAddExpFromString (match, ++str);
-	    return i;
-	}
-	else
-	{
-	    matchAddExpFromString (match, str);
-	}
-    }
-
-    return i;
-}
-
-/*
-  Optional prefix '+' or '-' can be used to create groups of expressions.
-
-  Example:
-  '(a & b) | (c & d)' -> '+ a', '-and b', '+or c', '-and d'
-  'a | b | (c & d)'   -> 'a', 'or b', '+or c', '-and d'
-*/
-void
-compAddStringListToMatch (CompOptionValue *value,
-			  CompMatch       *match)
-{
-    addStringListToMatchUsingIndex (value, match, 0);
-}
-
 Bool
 getBoolOptionNamed (CompOption *option,
 		    int	       nOption,

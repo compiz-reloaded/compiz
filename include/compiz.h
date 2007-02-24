@@ -421,10 +421,6 @@ compSetOptionList (CompOption      *option,
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value);
 
-void
-compAddStringListToMatch (CompOptionValue *value,
-			  CompMatch       *match);
-
 Bool
 getBoolOptionNamed (CompOption *option,
 		    int	       nOption,
@@ -2899,13 +2895,9 @@ matchAddExp (CompMatch *match,
 	     int	flags,
 	     char	*value);
 
-Bool
-matchAddExpFromString (CompMatch *match,
-		       char	 *str);
-
-Bool
-matchAddExtentedExpFromString (CompMatch *match,
-			       char	 *str);
+void
+matchAddFromString (CompMatch *match,
+		    char      *str);
 
 void
 matchUpdate (CompDisplay *display,

@@ -203,44 +203,10 @@ matchAddGroup (CompMatch *match,
 	return FALSE;
     }
 
-    op->group.flags = flags;
-    op->group.op    = opDst;
-    op->group.nOp   = group->nOp;
+    op->group.op  = opDst;
+    op->group.nOp = group->nOp;
 
     return TRUE;
-}
-
-char *
-matchParseFlags (char *str,
-		 int  *flags)
-{
-    static struct _Prefix {
-	char *s;
-	int  flags;
-    } prefix[] = {
-	{ "not ",    MATCH_EXP_NOT_MASK			     },
-	{ "or ",     0					     },
-	{ "ornot ",  MATCH_EXP_NOT_MASK			     },
-	{ "and ",    MATCH_EXP_AND_MASK			     },
-	{ "andnot ", MATCH_EXP_AND_MASK | MATCH_EXP_NOT_MASK }
-    };
-    int	i;
-
-    while (*str == ' ') str++;
-
-    for (i = 0; i < sizeof (prefix) / sizeof (prefix[0]); i++)
-    {
-	if (strncasecmp (str, prefix[i].s, strlen (prefix[i].s)) == 0)
-	{
-	    str   += strlen (prefix[i].s);
-	    while (*str == ' ') str++;
-	    *flags = prefix[i].flags;
-	    return str;
-	}
-    }
-
-    *flags = 0;
-    return str;
 }
 
 Bool
@@ -262,7 +228,6 @@ matchAddExp (CompMatch *match,
 	return FALSE;
     }
 
-    op->exp.flags	  = flags;
     op->exp.value	  = value;
     op->exp.e.fini	  = NULL;
     op->exp.e.eval	  = NULL;
@@ -271,27 +236,169 @@ matchAddExp (CompMatch *match,
     return TRUE;
 }
 
+static int
+nextIndex (char *str,
+	   int  i)
+{
+    while (str[i] == '\\')
+	if (str[++i] != '\0')
+	    i++;
+
+    return i;
+}
+
+static char *
+strndupValue (char *str,
+	      int  n)
+{
+    char *value;
+
+    value = malloc (sizeof (char) * (n + 1));
+    if (value)
+    {
+	int i, j;
+
+	/* count trialing white spaces */
+	i = j = 0;
+	while (i < n)
+	{
+	    if (str[i] != ' ')
+	    {
+		j = 0;
+		if (str[i] == '\\')
+		    i++;
+	    }
+	    else
+	    {
+		j++;
+	    }
+
+	    i++;
+	}
+
+	/* remove trialing white spaces */
+	n -= j;
+
+	i = j = 0;
+	for (;;)
+	{
+	    if (str[i] == '\\')
+		i++;
+
+	    value[j++] = str[i++];
+
+	    if (i >= n)
+	    {
+		value[j] = '\0';
+		return value;
+	    }
+	}
+    }
+
+    return NULL;
+}
+
 /*
-  Adds expression by parsing a string. An optional prefix of 'not', 'or',
-  'ornot', 'and', 'andnot' can be used and it must be followed by a
-  whitespace. 'not' is the same as 'ornot' and no second prefix is
-  the same as 'or'.
+  Add match expressions from string. Special characters are
+  '(', ')', '!', '&', '|'. Escape character is '\'.
 
   Example:
-  'a'      -> 'a'
-  '!a'     -> 'not a'
-  'a & b'  -> 'a', 'and b'
-  '!a | b' -> 'not a', 'or b'
+
+  "type=desktop | !type=dock"
+  "!type=dock & (state=fullscreen | state=shaded)"
 */
-Bool
-matchAddExpFromString (CompMatch *match,
-		       char	 *str)
+void
+matchAddFromString (CompMatch *match,
+		    char      *str)
 {
-    int	flags;
+    char *value;
+    int	 j, i = 0;
+    int	 flags = 0;
 
-    str = matchParseFlags (str, &flags);
+    while (str[i] != '\0')
+    {
+	while (str[i] == ' ')
+	    i++;
 
-    return matchAddExp (match, flags, str);
+	if (str[i] == '!')
+	{
+	    flags |= MATCH_EXP_NOT_MASK;
+
+	    i++;
+	    while (str[i] == ' ')
+		i++;
+	}
+
+	if (str[i] == '(')
+	{
+	    int	level = 1;
+	    int length;
+
+	    j = i++;
+
+	    while (str[j] != '\0')
+	    {
+		if (str[j] == '(')
+		{
+		    level++;
+		}
+		else if (str[j] == ')')
+		{
+		    level--;
+		    if (level == 0)
+			break;
+		}
+
+		j = nextIndex (str, ++j);
+	    }
+
+	    length = j - i;
+
+	    value = malloc (sizeof (char) * (length + 1));
+	    if (value)
+	    {
+		CompMatch group;
+
+		strncpy (value, &str[i], length);
+		value[length] = '\0';
+
+		matchInit (&group);
+		matchAddFromString (&group, value);
+		matchAddGroup (match, flags, &group);
+		matchFini (&group);
+
+		free (value);
+	    }
+
+	    while (str[j] != '\0' && str[j] != '|' && str[j] != '&')
+		j++;
+	}
+	else
+	{
+	    j = i;
+
+	    while (str[j] != '\0' && str[j] != '|' && str[j] != '&')
+		j = nextIndex (str, ++j);
+
+	    value = strndupValue (&str[i], j - i);
+	    if (value)
+	    {
+		matchAddExp (match, flags, value);
+
+		free (value);
+	    }
+	}
+
+	i = j;
+
+	if (str[i] != '\0')
+	{
+	    if (str[i] == '&')
+		flags = MATCH_EXP_AND_MASK;
+
+	    i++;
+	}
+    }
 }
 
 static void

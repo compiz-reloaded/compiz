@@ -33,24 +33,7 @@
 #define FADE_SPEED_MAX       25.0f
 #define FADE_SPEED_PRECISION  0.1f
 
-static char *winType[] = {
-    N_("Dock"),
-    N_("Toolbar"),
-    N_("Menu"),
-    N_("Utility"),
-    N_("Splash"),
-    N_("Normal"),
-    N_("Dialog"),
-    N_("ModalDialog"),
-    N_("DropdownMenu"),
-    N_("PopupMenu"),
-    N_("Tooltip"),
-    N_("Notification"),
-    N_("Combo"),
-    N_("Dnd"),
-    N_("Unknown")
-};
-#define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
+#define FADE_WINDOW_MATCH_DEFAULT "any"
 
 #define FADE_VISUAL_BELL_DEFAULT FALSE
 
@@ -66,7 +49,7 @@ typedef struct _FadeDisplay {
 } FadeDisplay;
 
 #define FADE_SCREEN_OPTION_FADE_SPEED		  0
-#define FADE_SCREEN_OPTION_WINDOW_TYPE		  1
+#define FADE_SCREEN_OPTION_WINDOW_MATCH		  1
 #define FADE_SCREEN_OPTION_VISUAL_BELL		  2
 #define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL 3
 #define FADE_SCREEN_OPTION_NUM			  4
@@ -132,9 +115,9 @@ fadeUpdateWindowFadeMatch (CompDisplay     *display,
 
     matchFini (match);
     matchInit (match);
-    matchAddExpFromString (match, "not type=desktop");
+    matchAddFromString (match, "!type=desktop");
     matchInit (&group);
-    compAddStringListToMatch (value, &group);
+    matchAddFromString (&group, value->s);
     matchAddGroup (match, MATCH_EXP_AND_MASK, &group);
     matchFini (&group);
 
@@ -173,8 +156,8 @@ fadeSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case FADE_SCREEN_OPTION_WINDOW_TYPE:
-	if (compSetOptionList (o, value))
+    case FADE_SCREEN_OPTION_WINDOW_MATCH:
+	if (compSetStringOption (o, value))
 	{
 	    fadeUpdateWindowFadeMatch (screen->display, &o->value, &fs->match);
 	    return TRUE;
@@ -195,7 +178,6 @@ static void
 fadeScreenInitOptions (FadeScreen *fs)
 {
     CompOption *o;
-    int	       i;
 
     o = &fs->opt[FADE_SCREEN_OPTION_FADE_SPEED];
     o->name		= "fade_speed";
@@ -207,16 +189,12 @@ fadeScreenInitOptions (FadeScreen *fs)
     o->rest.f.max	= FADE_SPEED_MAX;
     o->rest.f.precision = FADE_SPEED_PRECISION;
 
-    o = &fs->opt[FADE_SCREEN_OPTION_WINDOW_TYPE];
-    o->name	         = "window_types";
-    o->shortDesc         = N_("Window Types");
-    o->longDesc	         = N_("Window types that should be fading");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_WIN_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
-    for (i = 0; i < N_WIN_TYPE; i++)
-	o->value.list.value[i].s = strdup (winType[i]);
+    o = &fs->opt[FADE_SCREEN_OPTION_WINDOW_MATCH];
+    o->name	         = "window_match";
+    o->shortDesc         = N_("Fade windows");
+    o->longDesc	         = N_("Windows that should be fading");
+    o->type	         = CompOptionTypeString;
+    o->value.s		 = strdup (FADE_WINDOW_MATCH_DEFAULT);
     o->rest.s.string     = NULL;
     o->rest.s.nString    = 0;
 
@@ -760,7 +738,7 @@ fadeInitScreen (CompPlugin *p,
     matchInit (&fs->match);
 
     fadeUpdateWindowFadeMatch (s->display,
-			       &fs->opt[FADE_SCREEN_OPTION_WINDOW_TYPE].value,
+			       &fs->opt[FADE_SCREEN_OPTION_WINDOW_MATCH].value,
 			       &fs->match);
 
     WRAP (fs, s, preparePaintScreen, fadePreparePaintScreen);
