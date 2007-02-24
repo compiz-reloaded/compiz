@@ -1411,6 +1411,8 @@ handleEvent (CompDisplay *d,
 			setDesktopForWindow (w, 0xffffffff);
 
 		    updateClientListForScreen (w->screen);
+
+		    (*d->matchPropertyChanged) (d, w);
 		}
 	    }
 	}
