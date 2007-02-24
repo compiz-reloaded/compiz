@@ -708,6 +708,8 @@ compWindowTypeFromString (char *str)
 	return CompWindowTypeFullscreenMask;
     else if (strcasecmp (str, "unknown") == 0)
 	return CompWindowTypeUnknownMask;
+    else if (strcasecmp (str, "any") == 0)
+	return ~0;
 
     return 0;
 }
