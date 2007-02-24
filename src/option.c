@@ -315,7 +315,7 @@ compWindowTypeMaskFromStringList (CompOptionValue *value)
     unsigned int mask = 0;
 
     for (i = 0; i < value->list.nValue; i++)
-	mask |= compWindowTypeFromString (value->list.value[i].s);
+	mask |= windowTypeFromString (value->list.value[i].s);
 
     return mask;
 }

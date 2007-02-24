@@ -2273,6 +2273,9 @@ windowStateMask (CompDisplay *display,
 		 Atom	     state);
 
 unsigned int
+windowStateFromString (char *str);
+
+unsigned int
 getWindowState (CompDisplay *display,
 		Window      id);
 
@@ -2289,7 +2292,7 @@ constrainWindowState (unsigned int state,
 		      unsigned int actions);
 
 unsigned int
-compWindowTypeFromString (char *str);
+windowTypeFromString (char *str);
 
 unsigned int
 getWindowType (CompDisplay *display,

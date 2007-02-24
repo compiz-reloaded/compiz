@@ -1435,6 +1435,8 @@ handleEvent (CompDisplay *d,
 
 		    if (w->type & CompWindowTypeDesktopMask)
 			w->paint.opacity = OPAQUE;
+
+		    (*d->matchPropertyChanged) (d, w);
 		}
 	    }
 	}

@@ -464,6 +464,39 @@ windowStateMask (CompDisplay *display,
 }
 
 unsigned int
+windowStateFromString (char *str)
+{
+    if (strcasecmp (str, "modal") == 0)
+	return CompWindowStateModalMask;
+    else if (strcasecmp (str, "sticky") == 0)
+	return CompWindowStateStickyMask;
+    else if (strcasecmp (str, "maxvert") == 0)
+	return CompWindowStateMaximizedVertMask;
+    else if (strcasecmp (str, "maxhorz") == 0)
+	return CompWindowStateMaximizedHorzMask;
+    else if (strcasecmp (str, "shaded") == 0)
+	return CompWindowStateShadedMask;
+    else if (strcasecmp (str, "skiptaskbar") == 0)
+	return CompWindowStateSkipTaskbarMask;
+    else if (strcasecmp (str, "skippager") == 0)
+	return CompWindowStateSkipPagerMask;
+    else if (strcasecmp (str, "hidden") == 0)
+	return CompWindowStateHiddenMask;
+    else if (strcasecmp (str, "fullscreen") == 0)
+	return CompWindowStateFullscreenMask;
+    else if (strcasecmp (str, "above") == 0)
+	return CompWindowStateAboveMask;
+    else if (strcasecmp (str, "below") == 0)
+	return CompWindowStateBelowMask;
+    else if (strcasecmp (str, "demandsattention") == 0)
+	return CompWindowStateDemandsAttentionMask;
+    else if (strcasecmp (str, "demandsattention") == 0)
+	return CompWindowStateDemandsAttentionMask;
+
+    return 0;
+}
+
+unsigned int
 getWindowState (CompDisplay *display,
 		Window      id)
 {
@@ -672,7 +705,7 @@ constrainWindowState (unsigned int state,
 }
 
 unsigned int
-compWindowTypeFromString (char *str)
+windowTypeFromString (char *str)
 {
     if (strcasecmp (str, "desktop") == 0)
 	return CompWindowTypeDesktopMask;

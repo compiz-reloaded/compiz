@@ -496,17 +496,32 @@ matchEvalTypeExp (CompDisplay *display,
     return (private.uval & window->wmType);
 }
 
+static Bool
+matchEvalStateExp (CompDisplay *display,
+		   CompWindow  *window,
+		   CompPrivate private)
+{
+    return (private.uval & window->state);
+}
+
 void
 matchInitExp (CompDisplay  *display,
 	      CompMatchExp *exp,
 	      char	   *value)
 {
-    exp->eval = matchEvalTypeExp;
+    if (strncmp (value, "state=", 6) == 0)
+    {
+	exp->eval	  = matchEvalStateExp;
+	exp->private.uval = windowStateFromString (value + 6);
+    }
+    else
+    {
+	if (strncmp (value, "type=", 5) == 0)
+	    value += 5;
 
-    if (strncmp (value, "type=", 5) == 0)
-	value += 5;
-
-    exp->private.uval = compWindowTypeFromString (value);
+	exp->eval	  = matchEvalTypeExp;
+	exp->private.uval = windowTypeFromString (value);
+    }
 }
 
 void
