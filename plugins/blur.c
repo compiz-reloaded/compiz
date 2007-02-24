@@ -1827,9 +1827,7 @@ blurDrawWindow (CompWindow	     *w,
 
 		    bs->stencilBox = box;
 
-		    glPushAttrib (GL_STENCIL_BUFFER_BIT);
 		    glEnable (GL_STENCIL_TEST);
-
 		    glColorMask (GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 
 		    if (clearBox.x2 > clearBox.x1 && clearBox.y2 > clearBox.y1)
@@ -1852,8 +1850,7 @@ blurDrawWindow (CompWindow	     *w,
 		    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 
 		    glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-
-		    glPopAttrib ();
+		    glDisable (GL_STENCIL_TEST);
 		}
 	    }
 	}
@@ -2013,10 +2010,9 @@ blurDrawWindowTexture (CompWindow	    *w,
 
 	    if (bw->state[state].clipped)
 	    {
-		glPushAttrib (GL_STENCIL_BUFFER_BIT);
 		glEnable (GL_STENCIL_TEST);
-		glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
 
+		glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
 		glStencilFunc (GL_EQUAL, 0, ~0);
 
 		/* draw region without destination blur */
@@ -2029,7 +2025,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 		(*s->drawWindowTexture) (w, texture, &dstFa, mask);
 		WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
 
-		glPopAttrib ();
+		glDisable (GL_STENCIL_TEST);
 	    }
 	    else
 	    {
