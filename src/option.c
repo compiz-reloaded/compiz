@@ -233,7 +233,8 @@ Bool
 compSetMatchOption (CompOption      *option,
 		    CompOptionValue *value)
 {
-    CompMatch match;
+    CompDisplay *display = option->value.match.display;
+    CompMatch	match;
 
     if (matchEqual (&option->value.match, &value->match))
 	return FALSE;
@@ -245,6 +246,9 @@ compSetMatchOption (CompOption      *option,
 
     option->value.match.op  = match.op;
     option->value.match.nOp = match.nOp;
+
+    if (display)
+	matchUpdate (display, &option->value.match);
 
     return TRUE;
 }
