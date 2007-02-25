@@ -45,26 +45,22 @@
 #define MIN_SHADE_RESISTANCE_MIN       0
 #define MIN_SHADE_RESISTANCE_MAX       100
 
-static char *winType[] = {
-    N_("Toolbar"),
-    N_("Utility"),
-    N_("Dialog"),
-    N_("Normal")
-};
-#define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
+#define MIN_WINDOW_MATCH_DEFAULT \
+    "Toolbar | Utility | Dialog | Normal"
 
 static int displayPrivateIndex;
 
 typedef struct _MinDisplay {
-    int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
-    Atom	    winChangeStateAtom;
-    Atom	    winIconGeometryAtom;
+    int			       screenPrivateIndex;
+    HandleEventProc	       handleEvent;
+    MatchExpHandlerChangedProc matchExpHandlerChanged;
+    Atom		       winChangeStateAtom;
+    Atom		       winIconGeometryAtom;
 } MinDisplay;
 
 #define MIN_SCREEN_OPTION_SPEED		   0
 #define MIN_SCREEN_OPTION_TIMESTEP	   1
-#define MIN_SCREEN_OPTION_WINDOW_TYPE	   2
+#define MIN_SCREEN_OPTION_WINDOW_MATCH	   2
 #define MIN_SCREEN_OPTION_SHADE_RESISTANCE 3
 #define MIN_SCREEN_OPTION_NUM		   4
 
@@ -85,9 +81,9 @@ typedef struct _MinScreen {
 
     int shadeStep;
 
-    unsigned int wMask;
-
     int moreAdjust;
+
+    CompMatch match;
 } MinScreen;
 
 typedef struct _MinWindow {
@@ -168,10 +164,14 @@ minSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case MIN_SCREEN_OPTION_WINDOW_TYPE:
-	if (compSetOptionList (o, value))
+    case MIN_SCREEN_OPTION_WINDOW_MATCH:
+	if (compSetStringOption (o, value))
 	{
-	    ms->wMask = compWindowTypeMaskFromStringList (&o->value);
+	    matchFini (&ms->match);
+	    matchInit (&ms->match);
+	    matchAddFromString (&ms->match, o->value.s);
+	    matchUpdate (screen->display, &ms->match);
+
 	    return TRUE;
 	}
 	break;
@@ -196,7 +196,6 @@ static void
 minScreenInitOptions (MinScreen *ms)
 {
     CompOption *o;
-    int	       i;
 
     o = &ms->opt[MIN_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -218,21 +217,14 @@ minScreenInitOptions (MinScreen *ms)
     o->rest.f.max	= MIN_TIMESTEP_MAX;
     o->rest.f.precision = MIN_TIMESTEP_PRECISION;
 
-    o = &ms->opt[MIN_SCREEN_OPTION_WINDOW_TYPE];
-    o->name	         = "window_types";
-    o->shortDesc         = N_("Window Types");
-    o->longDesc	         = N_("Window types that should be transformed when "
-	"minimized");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_WIN_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
-    for (i = 0; i < N_WIN_TYPE; i++)
-	o->value.list.value[i].s = strdup (winType[i]);
-    o->rest.s.string     = windowTypeString;
-    o->rest.s.nString    = nWindowTypeString;
-
-    ms->wMask = compWindowTypeMaskFromStringList (&o->value);
+    o = &ms->opt[MIN_SCREEN_OPTION_WINDOW_MATCH];
+    o->name	      = "window_match";
+    o->shortDesc      = N_("Minimize Windows");
+    o->longDesc	      = N_("Windows that should be transformed when minimized");
+    o->type	      = CompOptionTypeString;
+    o->value.s	      = strdup (MIN_WINDOW_MATCH_DEFAULT);
+    o->rest.s.string  = NULL;
+    o->rest.s.nString = 0;
 
     o = &ms->opt[MIN_SCREEN_OPTION_SHADE_RESISTANCE];
     o->name		= "shade_resistance";
@@ -725,7 +717,7 @@ minHandleEvent (CompDisplay *d,
 			addWindowDamage (w);
 		    }
 		}
-		else if (!w->invisible && (ms->wMask & w->type))
+		else if (!w->invisible && matchEval (&ms->match, w))
 		{
 		    if (minGetWindowIconGeometry (w, &mw->icon))
 		    {
@@ -800,8 +792,8 @@ minDamageWindowRect (CompWindow *w,
     {
 	if (mw->state == IconicState)
 	{
-	    if (!w->invisible	      &&
-		(ms->wMask & w->type) &&
+	    if (!w->invisible		  &&
+		matchEval (&ms->match, w) &&
 		minGetWindowIconGeometry (w, &mw->icon))
 	    {
 		if (!mw->adjust)
@@ -876,6 +868,21 @@ minFocusWindow (CompWindow *w)
     return status;
 }
 
+static void
+minMatchExpHandlerChanged (CompDisplay *d)
+{
+    CompScreen *s;
+
+    MIN_DISPLAY (d);
+
+    for (s = d->screens; s; s = s->next)
+	matchUpdate (d, &GET_MIN_SCREEN (s, md)->match);
+
+    UNWRAP (md, d, matchExpHandlerChanged);
+    (*d->matchExpHandlerChanged) (d);
+    WRAP (md, d, matchExpHandlerChanged, minMatchExpHandlerChanged);
+}
+
 static Bool
 minInitDisplay (CompPlugin  *p,
 		CompDisplay *d)
@@ -898,6 +905,7 @@ minInitDisplay (CompPlugin  *p,
 	XInternAtom (d->display, "_NET_WM_ICON_GEOMETRY", 0);
 
     WRAP (md, d, handleEvent, minHandleEvent);
+    WRAP (md, d, matchExpHandlerChanged, minMatchExpHandlerChanged);
 
     d->privates[displayPrivateIndex].ptr = md;
 
@@ -913,6 +921,7 @@ minFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, md->screenPrivateIndex);
 
     UNWRAP (md, d, handleEvent);
+    UNWRAP (md, d, matchExpHandlerChanged);
 
     free (md);
 }
@@ -944,6 +953,11 @@ minInitScreen (CompPlugin *p,
 
     minScreenInitOptions (ms);
 
+    matchInit (&ms->match);
+    matchAddFromString (&ms->match,
+			ms->opt[MIN_SCREEN_OPTION_WINDOW_MATCH].value.s);
+    matchUpdate (s->display, &ms->match);
+
     WRAP (ms, s, preparePaintScreen, minPreparePaintScreen);
     WRAP (ms, s, donePaintScreen, minDonePaintScreen);
     WRAP (ms, s, paintScreen, minPaintScreen);
@@ -961,6 +975,8 @@ minFiniScreen (CompPlugin *p,
 	       CompScreen *s)
 {
     MIN_SCREEN (s);
+
+    matchFini (&ms->match);
 
     freeWindowPrivateIndex (s, ms->windowPrivateIndex);
 
