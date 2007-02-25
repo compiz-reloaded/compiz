@@ -394,6 +394,16 @@ dbusGetOptionValue (DBusMessageIter *iter,
 	    if (stringToColor (s, value->c))
 		return TRUE;
 	}
+	break;
+    case CompOptionTypeMatch:
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_STRING,
+				     &s))
+	{
+	    matchAddFromString (&value->match, s);
+	    return TRUE;
+	}
+
     default:
 	break;
     }
@@ -663,6 +673,16 @@ dbusAppendSimpleOptionValue (DBusMessage     *message,
 	break;
     case CompOptionTypeColor:
 	s = colorToString (value->c);
+	if (s)
+	{
+	    dbus_message_append_args (message,
+				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_INVALID);
+	    free (s);
+	}
+	break;
+    case CompOptionTypeMatch:
+	s = matchToString (&value->match);
 	if (s)
 	{
 	    dbus_message_append_args (message,

@@ -336,6 +336,10 @@ getLongDesc (CompOption *o, const char *option_name)
 
 	out = g_string_free (str, FALSE);
     }
+    else if (o->type == CompOptionTypeAction)
+    {
+	out = g_strdup_printf ("%s (match)", base);
+    }
     else
 	return base;
 

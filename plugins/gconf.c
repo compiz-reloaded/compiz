@@ -104,6 +104,8 @@ gconfTypeFromCompType (CompOptionType type)
 	return GCONF_VALUE_STRING;
     case CompOptionTypeAction:
 	return GCONF_VALUE_STRING;
+    case CompOptionTypeMatch:
+	return GCONF_VALUE_STRING;
     case CompOptionTypeList:
 	return GCONF_VALUE_LIST;
     default:
@@ -139,6 +141,14 @@ gconfSetValue (CompDisplay     *d,
 	gconf_value_set_string (gvalue, color);
 
 	free (color);
+    } break;
+    case CompOptionTypeMatch: {
+	gchar *match;
+
+	match = matchToString (&value->match);
+	gconf_value_set_string (gvalue, match);
+
+	free (match);
     } break;
     default:
 	break;
@@ -201,6 +211,7 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeFloat:
     case CompOptionTypeString:
     case CompOptionTypeColor:
+    case CompOptionTypeMatch:
 	existingValue = gconf_client_get (gd->client, key, NULL);
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
 	gconfSetValue (d, &o->value, o->type, gvalue);
@@ -381,6 +392,18 @@ gconfGetValue (CompDisplay     *d,
 
 	if (stringToColor (color, value->c))
 	    return TRUE;
+    }
+    else if (type         == CompOptionTypeMatch &&
+	     gvalue->type == GCONF_VALUE_STRING)
+    {
+	const gchar *match;
+
+	match = gconf_value_get_string (gvalue);
+
+	matchInit (&value->match);
+	matchAddFromString (&value->match, match);
+
+	return TRUE;
     }
 
     return FALSE;
@@ -739,8 +762,20 @@ gconfGetOptionValue (CompDisplay *d,
 
 		    if (o->type == CompOptionTypeList)
 		    {
+			if (o->value.list.type == CompOptionTypeMatch)
+			{
+			    int i;
+
+			    for (i = 0; i < value.list.nValue; i++)
+				matchFini (&value.list.value[i].match);
+			}
+
 			if (value.list.value)
 			    free (value.list.value);
+		    }
+		    else if (o->type == CompOptionTypeMatch)
+		    {
+			matchFini (&value.match);
 		    }
 		}
 	    }
