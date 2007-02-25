@@ -208,10 +208,10 @@ minScreenInitOptions (MinScreen *ms)
     o->rest.f.precision = MIN_TIMESTEP_PRECISION;
 
     o = &ms->opt[MIN_SCREEN_OPTION_WINDOW_MATCH];
-    o->name	      = "window_match";
-    o->shortDesc      = N_("Minimize Windows");
-    o->longDesc	      = N_("Windows that should be transformed when minimized");
-    o->type	      = CompOptionTypeMatch;
+    o->name	 = "window_match";
+    o->shortDesc = N_("Minimize Windows");
+    o->longDesc	 = N_("Windows that should be transformed when minimized");
+    o->type	 = CompOptionTypeMatch;
 
     matchInit (&o->value.match);
     matchAddFromString (&o->value.match, MIN_WINDOW_MATCH_DEFAULT);
