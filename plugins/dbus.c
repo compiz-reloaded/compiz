@@ -199,7 +199,7 @@ dbusHandleActionMessage (DBusConnection *connection,
 	if (strcmp (option->name, path[2]) == 0)
 	{
 	    CompOption	    *argument = NULL;
-	    int		    nArgument = 0;
+	    int		    i, nArgument = 0;
 	    DBusMessageIter iter;
 
 	    if (option->type != CompOptionTypeAction)
@@ -268,9 +268,25 @@ dbusHandleActionMessage (DBusConnection *connection,
 			    break;
 			case DBUS_TYPE_STRING:
 			    hasValue = TRUE;
-			    type     = CompOptionTypeString;
 
-			    dbus_message_iter_get_basic (&iter, &value.s);
+			    /* XXX: use match option type if name is "match" */
+			    if (name && strcmp (name, "match") == 0)
+			    {
+				char *s;
+
+				type = CompOptionTypeMatch;
+
+				dbus_message_iter_get_basic (&iter, &s);
+
+				matchInit (&value.match);
+				matchAddFromString (&value.match, s);
+			    }
+			    else
+			    {
+				type = CompOptionTypeString;
+
+				dbus_message_iter_get_basic (&iter, &value.s);
+			    }
 			default:
 			    break;
 			}
@@ -313,6 +329,10 @@ dbusHandleActionMessage (DBusConnection *connection,
 						   0,
 						   argument, nArgument);
 	    }
+
+	    for (i = 0; i < nArgument; i++)
+		if (argument[i].type == CompOptionTypeMatch)
+		    matchFini (&argument[i].value.match);
 
 	    if (argument)
 		free (argument);
