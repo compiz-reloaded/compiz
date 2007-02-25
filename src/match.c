@@ -411,6 +411,8 @@ matchOpsToString (CompMatchOp *op,
 
     while (nOp--)
     {
+	value = NULL;
+
 	switch (op->type) {
 	case CompMatchOpTypeGroup:
 	    group = matchOpsToString (op->group.op, op->group.nOp);
@@ -424,10 +426,6 @@ matchOpsToString (CompMatchOp *op,
 			     group, nOp ? " " : "");
 
 		free (group);
-	    }
-	    else
-	    {
-		value = NULL;
 	    }
 	    break;
 	case CompMatchOpTypeExp:
