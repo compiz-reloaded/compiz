@@ -77,6 +77,8 @@
 
 #define FOCUS_PREVENTION_DEFAULT TRUE
 
+#define FOCUS_PREVENTION_MATCH_DEFAULT "any"
+
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -466,6 +468,10 @@ setScreenOption (CompScreen      *screen,
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
+    case COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH:
+	if (compSetMatchOption (o, value))
+	    return TRUE;
+	break;
     case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
 	if (compSetBoolOption (o, value))
 	{
@@ -686,10 +692,19 @@ compScreenInitOptions (CompScreen *screen)
 
     o = &screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION];
     o->name      = "focus_prevention";
-    o->shortDesc = N_("Focus prevention");
+    o->shortDesc = N_("Focus Prevention");
     o->longDesc  = N_("Enable focus prevention");
     o->type      = CompOptionTypeBool;
     o->value.b   = FOCUS_PREVENTION_DEFAULT;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH];
+    o->name      = "focus_prevention_match";
+    o->shortDesc = N_("Focus Prevention Windows");
+    o->longDesc  = N_("Focus prevention windows");
+    o->type      = CompOptionTypeMatch;
+
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, FOCUS_PREVENTION_MATCH_DEFAULT);
 }
 
 static void
@@ -2112,6 +2127,9 @@ addScreen (CompDisplay *display,
     s->filter[NOTHING_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
     s->filter[SCREEN_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
     s->filter[WINDOW_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
+
+    matchUpdate (s->display,
+		 &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match);
 
     return TRUE;
 }

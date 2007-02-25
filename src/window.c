@@ -4260,8 +4260,10 @@ Bool
 focusWindowOnMap (CompWindow *w)
 {
     CompDisplay *d = w->screen->display;
+    CompScreen  *s = w->screen;
     CompWindow  *active;
     Time	wUserTime, aUserTime;
+    CompMatch   *match;
 
     /* do not focus windows of these types */
     if (w->type & (CompWindowTypeDesktopMask |
@@ -4296,8 +4298,11 @@ focusWindowOnMap (CompWindow *w)
     if (!active || !getWindowUserTime (active, &aUserTime))
 	return TRUE;
 
+    match = &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match;
+
     /* focus prevention */
-    if (w->screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION].value.b)
+    if (s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION].value.b &&
+	matchEval (match, w))
     {
 	if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
 	{
