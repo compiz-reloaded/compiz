@@ -67,15 +67,8 @@
 #define SCALE_OPACITY_MIN     0
 #define SCALE_OPACITY_MAX     100
 
-static char *winType[] = {
-    N_("Toolbar"),
-    N_("Utility"),
-    N_("Dialog"),
-    N_("ModalDialog"),
-    N_("Fullscreen"),
-    N_("Normal")
-};
-#define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
+#define SCALE_WINDOW_MATCH_DEFAULT \
+    "Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal"
 
 typedef enum {
     ScaleIconNone = 0,
@@ -130,7 +123,7 @@ typedef struct _ScaleDisplay {
 #define SCALE_SCREEN_OPTION_SPACING      0
 #define SCALE_SCREEN_OPTION_SPEED	 1
 #define SCALE_SCREEN_OPTION_TIMESTEP	 2
-#define SCALE_SCREEN_OPTION_WINDOW_TYPE  3
+#define SCALE_SCREEN_OPTION_WINDOW_MATCH 3
 #define SCALE_SCREEN_OPTION_DARKEN_BACK  4
 #define SCALE_SCREEN_OPTION_OPACITY      5
 #define SCALE_SCREEN_OPTION_ICON         6
@@ -159,8 +152,6 @@ typedef struct _ScaleScreen {
 
     float speed;
     float timestep;
-
-    unsigned int wMask;
 
     Bool grab;
     int  grabIndex;
@@ -278,12 +269,9 @@ scaleSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case SCALE_SCREEN_OPTION_WINDOW_TYPE:
-	if (compSetOptionList (o, value))
-	{
-	    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
+    case SCALE_SCREEN_OPTION_WINDOW_MATCH:
+	if (compSetMatchOption (o, value))
 	    return TRUE;
-	}
 	break;
     case SCALE_SCREEN_OPTION_DARKEN_BACK:
 	if (compSetBoolOption (o, value))
@@ -328,7 +316,6 @@ static void
 scaleScreenInitOptions (ScaleScreen *ss)
 {
     CompOption *o;
-    int	       i;
 
     o = &ss->opt[SCALE_SCREEN_OPTION_SPACING];
     o->name	  = "spacing";
@@ -359,20 +346,14 @@ scaleScreenInitOptions (ScaleScreen *ss)
     o->rest.f.max	= SCALE_TIMESTEP_MAX;
     o->rest.f.precision = SCALE_TIMESTEP_PRECISION;
 
-    o = &ss->opt[SCALE_SCREEN_OPTION_WINDOW_TYPE];
-    o->name	         = "window_types";
-    o->shortDesc         = N_("Window Types");
-    o->longDesc	         = N_("Window types that should scaled in scale mode");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_WIN_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
-    for (i = 0; i < N_WIN_TYPE; i++)
-	o->value.list.value[i].s = strdup (winType[i]);
-    o->rest.s.string     = windowTypeString;
-    o->rest.s.nString    = nWindowTypeString;
+    o = &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH];
+    o->name	 = "window_match";
+    o->shortDesc = N_("Scale Windows");
+    o->longDesc	 = N_("Windows that should be scaled in scale mode");
+    o->type	 = CompOptionTypeMatch;
 
-    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, SCALE_WINDOW_MATCH_DEFAULT);
 
     o = &ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK];
     o->name      = "darken_back";
@@ -436,9 +417,6 @@ isScaleWin (CompWindow *w)
 	    return FALSE;
     }
 
-    if (!(ss->wMask & w->type))
-	return FALSE;
-
     if (w->state & CompWindowStateSkipPagerMask)
 	return FALSE;
 
@@ -460,6 +438,9 @@ isScaleWin (CompWindow *w)
     default:
 	break;
     }
+
+    if (!matchEval (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match, w))
+	return FALSE;
 
     return TRUE;
 }
@@ -2084,6 +2065,9 @@ scaleInitScreen (CompPlugin *p,
 
     scaleScreenInitOptions (ss);
 
+    matchUpdate (s->display,
+		 &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
+
     addScreenAction (s, &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
     addScreenAction (s,
 		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
@@ -2110,6 +2094,8 @@ scaleFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     SCALE_SCREEN (s);
+
+    matchFini (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
