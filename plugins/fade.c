@@ -111,16 +111,10 @@ fadeUpdateWindowFadeMatch (CompDisplay     *display,
 			   CompOptionValue *value,
 			   CompMatch       *match)
 {
-    CompMatch group;
-
     matchFini (match);
     matchInit (match);
     matchAddFromString (match, "!type=desktop");
-    matchInit (&group);
-    matchAddFromString (&group, value->s);
-    matchAddGroup (match, MATCH_OP_AND_MASK, &group);
-    matchFini (&group);
-
+    matchAddGroup (match, MATCH_OP_AND_MASK, &value->match);
     matchUpdate (display, match);
 }
 
@@ -157,7 +151,7 @@ fadeSetScreenOption (CompScreen      *screen,
 	}
 	break;
     case FADE_SCREEN_OPTION_WINDOW_MATCH:
-	if (compSetStringOption (o, value))
+	if (compSetMatchOption (o, value))
 	{
 	    fadeUpdateWindowFadeMatch (screen->display, &o->value, &fs->match);
 	    return TRUE;
@@ -193,10 +187,10 @@ fadeScreenInitOptions (FadeScreen *fs)
     o->name	         = "window_match";
     o->shortDesc         = N_("Fade windows");
     o->longDesc	         = N_("Windows that should be fading");
-    o->type	         = CompOptionTypeString;
-    o->value.s		 = strdup (FADE_WINDOW_MATCH_DEFAULT);
-    o->rest.s.string     = NULL;
-    o->rest.s.nString    = 0;
+    o->type	         = CompOptionTypeMatch;
+
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, FADE_WINDOW_MATCH_DEFAULT);
 
     o = &fs->opt[FADE_SCREEN_OPTION_VISUAL_BELL];
     o->name	  = "visual_bell";
@@ -758,6 +752,7 @@ fadeFiniScreen (CompPlugin *p,
 {
     FADE_SCREEN (s);
 
+    matchFini (&fs->opt[FADE_SCREEN_OPTION_WINDOW_MATCH].value.match);
     matchFini (&fs->match);
 
     freeWindowPrivateIndex (s, fs->windowPrivateIndex);
