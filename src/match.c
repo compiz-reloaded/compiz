@@ -401,6 +401,83 @@ matchAddFromString (CompMatch *match,
     }
 }
 
+static char *
+matchOpsToString (CompMatchOp *op,
+		  int	      nOp)
+{
+    char *value, *group;
+    char *str = NULL;
+    int  length = 0;
+
+    while (nOp--)
+    {
+	switch (op->type) {
+	case CompMatchOpTypeGroup:
+	    group = matchOpsToString (op->group.op, op->group.nOp);
+	    if (group)
+	    {
+		value = malloc (sizeof (char) * (strlen (group) + 7));
+		if (value)
+		    sprintf (value, "%s%s(%s)%s",
+			     (op->any.flags & MATCH_OP_AND_MASK) ? "& " : "",
+			     (op->any.flags & MATCH_OP_NOT_MASK) ? "!" : "",
+			     group, nOp ? " " : "");
+
+		free (group);
+	    }
+	    else
+	    {
+		value = NULL;
+	    }
+	    break;
+	case CompMatchOpTypeExp:
+	    value = malloc (sizeof (char) * (strlen (op->exp.value) + 5));
+	    if (value)
+		sprintf (value, "%s%s%s%s",
+			 (op->any.flags & MATCH_OP_AND_MASK) ? "& " : "",
+			 (op->any.flags & MATCH_OP_NOT_MASK) ? "!" : "",
+			 op->exp.value, nOp ? " " : "");
+	    break;
+	}
+
+	if (value)
+	{
+	    char *s;
+	    int  valueLength = strlen (value);
+
+	    s = malloc (sizeof (char) * (length + valueLength + 1));
+	    if (s)
+	    {
+		if (str)
+		    memcpy (s, str, sizeof (char) * length);
+
+		memcpy (s + length, value, sizeof (char) * valueLength);
+
+		length += valueLength;
+
+		s[length] = '\0';
+
+		if (str)
+		    free (str);
+
+		str = s;
+	    }
+
+	    free (value);
+	}
+
+	op++;
+    }
+
+    return str;
+}
+
+char *
+matchToString (CompMatch *match)
+{
+    return matchOpsToString (match->op, match->nOp);
+}
+
 static void
 matchUpdateOps (CompDisplay *display,
 		CompMatchOp *op,

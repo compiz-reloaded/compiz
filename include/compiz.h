@@ -2902,6 +2902,9 @@ void
 matchAddFromString (CompMatch *match,
 		    char      *str);
 
+char *
+matchToString (CompMatch *match);
+
 void
 matchUpdate (CompDisplay *display,
 	     CompMatch   *match);
