@@ -182,6 +182,9 @@ typedef struct _ScaleScreen {
     ScaleType type;
 
     Window clientLeader;
+
+    CompMatch match;
+    CompMatch *currentMatch;
 } ScaleScreen;
 
 typedef struct _ScaleWindow {
@@ -439,7 +442,7 @@ isScaleWin (CompWindow *w)
 	break;
     }
 
-    if (!matchEval (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match, w))
+    if (!matchEval (ss->currentMatch, w))
 	return FALSE;
 
     return TRUE;
@@ -1262,11 +1265,27 @@ scaleInitiateCommon (CompScreen      *s,
 		     CompOption      *option,
 		     int	     nOption)
 {
+    CompMatch *match;
+
     SCALE_DISPLAY (s->display);
     SCALE_SCREEN (s);
 
     if (otherScreenGrabExist (s, "scale", 0))
 	return FALSE;
+
+    ss->currentMatch = &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match;
+
+    match = getMatchOptionNamed (option, nOption, "match", NULL);
+    if (match)
+    {
+	matchFini (&ss->match);
+	matchInit (&ss->match);
+	if (matchCopy (&ss->match, match))
+	{
+	    matchUpdate (s->display, &ss->match);
+	    ss->currentMatch = &ss->match;
+	}
+    }
 
     if (!layoutThumbs (s))
 	return FALSE;
@@ -2065,6 +2084,7 @@ scaleInitScreen (CompPlugin *p,
 
     scaleScreenInitOptions (ss);
 
+    matchInit (&ss->match);
     matchUpdate (s->display,
 		 &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
 
@@ -2095,6 +2115,7 @@ scaleFiniScreen (CompPlugin *p,
 {
     SCALE_SCREEN (s);
 
+    matchFini (&ss->match);
     matchFini (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
 
     UNWRAP (ss, s, preparePaintScreen);
