@@ -647,12 +647,25 @@ matchEvalStateExp (CompDisplay *display,
     return (private.uval & window->state);
 }
 
+static Bool
+matchEvalIdExp (CompDisplay *display,
+		CompWindow  *window,
+		CompPrivate private)
+{
+    return (private.val == window->id);
+}
+
 void
 matchInitExp (CompDisplay  *display,
 	      CompMatchExp *exp,
 	      const char   *value)
 {
-    if (strncmp (value, "state=", 6) == 0)
+    if (strncmp (value, "xid=", 4) == 0)
+    {
+	exp->eval	 = matchEvalIdExp;
+	exp->private.val = strtol (value + 4, NULL, 0);
+    }
+    else if (strncmp (value, "state=", 6) == 0)
     {
 	exp->eval	  = matchEvalStateExp;
 	exp->private.uval = windowStateFromString (value + 6);
