@@ -541,7 +541,13 @@ matchOpsToString (CompMatchOp *op,
 char *
 matchToString (CompMatch *match)
 {
-    return matchOpsToString (match->op, match->nOp);
+    char *str;
+
+    str = matchOpsToString (match->op, match->nOp);
+    if (!str)
+	str = strdup ("");
+
+    return str;
 }
 
 static void
