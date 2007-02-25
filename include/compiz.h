@@ -273,6 +273,7 @@ typedef enum {
     CompOptionTypeString,
     CompOptionTypeColor,
     CompOptionTypeAction,
+    CompOptionTypeMatch,
     CompOptionTypeList
 } CompOptionType;
 
@@ -334,6 +335,14 @@ struct _CompAction {
     int		 edgeButton;
 };
 
+typedef union _CompMatchOp CompMatchOp;
+
+struct _CompMatch {
+    CompDisplay *display;
+    CompMatchOp *op;
+    int		nOp;
+};
+
 typedef struct {
     CompOptionType  type;
     CompOptionValue *value;
@@ -347,6 +356,7 @@ union _CompOptionValue {
     char	   *s;
     unsigned short c[4];
     CompAction     action;
+    CompMatch      match;
     CompListValue  list;
 };
 
@@ -413,6 +423,10 @@ compSetColorOption (CompOption	    *option,
 Bool
 compSetActionOption (CompOption      *option,
 		     CompOptionValue *value);
+
+Bool
+compSetMatchOption (CompOption      *option,
+		    CompOptionValue *value);
 
 Bool
 compSetOptionList (CompOption      *option,
@@ -632,8 +646,6 @@ typedef struct _CompMatchAnyOp {
     int		    flags;
 } CompMatchAnyOp;
 
-typedef union _CompMatchOp CompMatchOp;
-
 typedef struct _CompMatchGroupOp {
     CompMatchOpType type;
     int		    flags;
@@ -668,15 +680,9 @@ union _CompMatchOp {
     CompMatchExpOp   exp;
 };
 
-struct _CompMatch {
-    CompDisplay *display;
-    CompMatchOp *op;
-    int		nOp;
-};
-
 typedef void (*MatchInitExpProc) (CompDisplay  *display,
 				  CompMatchExp *exp,
-				  char	       *value);
+				  const char   *value);
 
 typedef void (*MatchExpHandlerChangedProc) (CompDisplay *display);
 
@@ -2273,7 +2279,7 @@ windowStateMask (CompDisplay *display,
 		 Atom	     state);
 
 unsigned int
-windowStateFromString (char *str);
+windowStateFromString (const char *str);
 
 unsigned int
 getWindowState (CompDisplay *display,
@@ -2292,7 +2298,7 @@ constrainWindowState (unsigned int state,
 		      unsigned int actions);
 
 unsigned int
-windowTypeFromString (char *str);
+windowTypeFromString (const char *str);
 
 unsigned int
 getWindowType (CompDisplay *display,
@@ -2884,9 +2890,13 @@ matchInit (CompMatch *match);
 void
 matchFini (CompMatch *match);
 
-char *
-matchParseFlags (char *str,
-		 int  *flags);
+Bool
+matchEqual (CompMatch *m1,
+	    CompMatch *m2);
+
+Bool
+matchCopy (CompMatch *dst,
+	   CompMatch *src);
 
 Bool
 matchAddGroup (CompMatch *match,
@@ -2896,11 +2906,11 @@ matchAddGroup (CompMatch *match,
 Bool
 matchAddExp (CompMatch *match,
 	     int	flags,
-	     char	*value);
+	     const char	*value);
 
 void
-matchAddFromString (CompMatch *match,
-		    char      *str);
+matchAddFromString (CompMatch  *match,
+		    const char *str);
 
 char *
 matchToString (CompMatch *match);
@@ -2916,7 +2926,7 @@ matchEval (CompMatch  *match,
 void
 matchInitExp (CompDisplay  *display,
 	      CompMatchExp *exp,
-	      char	   *value);
+	      const char   *value);
 
 void
 matchExpHandlerChanged (CompDisplay *display);

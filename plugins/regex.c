@@ -138,7 +138,7 @@ regexMatchExpEvalName (CompDisplay *d,
 static void
 regexMatchInitExp (CompDisplay  *d,
 		   CompMatchExp *exp,
-		   char	        *value)
+		   const char	*value)
 {
     static struct _Prefix {
 	char		     *s;

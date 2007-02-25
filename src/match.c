@@ -100,6 +100,52 @@ matchFini (CompMatch *match)
     free (match->op);
 }
 
+static Bool
+matchOpsEqual (CompMatchOp *op1,
+	       CompMatchOp *op2,
+	       int	   nOp)
+{
+    while (nOp--)
+    {
+	if (op1->type != op2->type)
+	    return FALSE;
+
+	switch (op1->type) {
+	case CompMatchOpTypeGroup:
+	    if (op1->group.nOp != op2->group.nOp)
+		return FALSE;
+
+	    if (!matchOpsEqual (op1->group.op, op2->group.op, op1->group.nOp))
+		return FALSE;
+
+	    break;
+	case CompMatchOpTypeExp:
+	    if (op1->exp.flags != op2->exp.flags)
+		return FALSE;
+
+	    if (strcmp (op1->exp.value, op2->exp.value))
+		return FALSE;
+
+	    break;
+	}
+
+	op1++;
+	op2++;
+    }
+
+    return TRUE;
+}
+
+Bool
+matchEqual (CompMatch *m1,
+	    CompMatch *m2)
+{
+    if (m1->nOp != m2->nOp)
+	return FALSE;
+
+    return matchOpsEqual (m1->op, m2->op, m1->nOp);
+}
+
 static CompMatchOp *
 matchAddOp (CompMatch	    *match,
 	    CompMatchOpType type,
@@ -125,9 +171,9 @@ matchAddOp (CompMatch	    *match,
 }
 
 static Bool
-matchCopyOps (CompMatchOp *opSrc,
-	      int	   nOpSrc,
-	      CompMatchOp *opDst)
+matchCopyOps (CompMatchOp *opDst,
+	      CompMatchOp *opSrc,
+	      int	   nOpSrc)
 {
     CompMatchOp *op, *first = opDst;
     int		count = 0;
@@ -146,7 +192,7 @@ matchCopyOps (CompMatchOp *opSrc,
 		return FALSE;
 	    }
 
-	    if (!matchCopyOps (opSrc->group.op, opSrc->group.nOp, op))
+	    if (!matchCopyOps (op, opSrc->group.op, opSrc->group.nOp))
 	    {
 		free (op);
 		matchFiniOps (first, count);
@@ -179,6 +225,28 @@ matchCopyOps (CompMatchOp *opSrc,
 }
 
 Bool
+matchCopy (CompMatch *dst,
+	   CompMatch *src)
+{
+    CompMatchOp *opDst;
+
+    opDst = malloc (sizeof (CompMatchOp) * src->nOp);
+    if (!opDst)
+	return FALSE;
+
+    if (!matchCopyOps (opDst, src->op, src->nOp))
+    {
+	free (opDst);
+	return FALSE;
+    }
+
+    dst->op  = opDst;
+    dst->nOp = src->nOp;
+
+    return TRUE;
+}
+
+Bool
 matchAddGroup (CompMatch *match,
 	       int	 flags,
 	       CompMatch *group)
@@ -189,7 +257,7 @@ matchAddGroup (CompMatch *match,
     if (!opDst)
 	return FALSE;
 
-    if (!matchCopyOps (group->op, group->nOp, opDst))
+    if (!matchCopyOps (opDst, group->op, group->nOp))
     {
 	free (opDst);
 	return FALSE;
@@ -210,9 +278,9 @@ matchAddGroup (CompMatch *match,
 }
 
 Bool
-matchAddExp (CompMatch *match,
-	     int       flags,
-	     char      *str)
+matchAddExp (CompMatch  *match,
+	     int        flags,
+	     const char *str)
 {
     CompMatchOp *op;
     char	*value;
@@ -237,8 +305,8 @@ matchAddExp (CompMatch *match,
 }
 
 static int
-nextIndex (char *str,
-	   int  i)
+nextIndex (const char *str,
+	   int	      i)
 {
     while (str[i] == '\\')
 	if (str[++i] != '\0')
@@ -248,8 +316,8 @@ nextIndex (char *str,
 }
 
 static char *
-strndupValue (char *str,
-	      int  n)
+strndupValue (const char *str,
+	      int	 n)
 {
     char *value;
 
@@ -308,8 +376,8 @@ strndupValue (char *str,
   "!type=dock & (state=fullscreen | state=shaded)"
 */
 void
-matchAddFromString (CompMatch *match,
-		    char      *str)
+matchAddFromString (CompMatch  *match,
+		    const char *str)
 {
     char *value;
     int	 j, i = 0;
@@ -582,7 +650,7 @@ matchEvalStateExp (CompDisplay *display,
 void
 matchInitExp (CompDisplay  *display,
 	      CompMatchExp *exp,
-	      char	   *value)
+	      const char   *value)
 {
     if (strncmp (value, "state=", 6) == 0)
     {
@@ -599,9 +667,54 @@ matchInitExp (CompDisplay  *display,
     }
 }
 
+static void
+matchUpdateMatchOptions (CompOption *option,
+			 int	    nOption)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeMatch)
+	    if (option->value.match.display)
+		matchUpdate (option->value.match.display, &option->value.match);
+
+	option++;
+    }
+}
+
 void
 matchExpHandlerChanged (CompDisplay *display)
 {
+    CompOption *option;
+    int	       nOption;
+    CompPlugin *p;
+    CompScreen *s;
+
+    for (p = getPlugins (); p; p = p->next)
+    {
+	if (p->vTable->getDisplayOptions)
+	{
+	    option = (*p->vTable->getDisplayOptions) (display, &nOption);
+	    matchUpdateMatchOptions (option, nOption);
+	}
+    }
+
+    option = compGetDisplayOptions (display, &nOption);
+    matchUpdateMatchOptions (option, nOption);
+
+    for (s = display->screens; s; s = s->next)
+    {
+	for (p = getPlugins (); p; p = p->next)
+	{
+	    if (p->vTable->getScreenOptions)
+	    {
+		option = (*p->vTable->getScreenOptions) (s, &nOption);
+		matchUpdateMatchOptions (option, nOption);
+	    }
+	}
+
+	option = compGetScreenOptions (s, &nOption);
+	matchUpdateMatchOptions (option, nOption);
+    }
 }
 
 void

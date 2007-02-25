@@ -230,6 +230,26 @@ compSetActionOption (CompOption      *option,
 }
 
 Bool
+compSetMatchOption (CompOption      *option,
+		    CompOptionValue *value)
+{
+    CompMatch match;
+
+    if (matchEqual (&option->value.match, &value->match))
+	return FALSE;
+
+    if (!matchCopy (&match, &value->match))
+	return FALSE;
+
+    matchFini (&option->value.match);
+
+    option->value.match.op  = match.op;
+    option->value.match.nOp = match.nOp;
+
+    return TRUE;
+}
+
+Bool
 compSetOptionList (CompOption      *option,
 		   CompOptionValue *value)
 {
@@ -639,6 +659,8 @@ optionTypeToString (CompOptionType type)
     switch (type) {
     case CompOptionTypeAction:
 	return "action";
+    case CompOptionTypeMatch:
+	return "match";
     case CompOptionTypeBool:
 	return "bool";
     case CompOptionTypeInt:

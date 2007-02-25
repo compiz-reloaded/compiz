@@ -464,7 +464,7 @@ windowStateMask (CompDisplay *display,
 }
 
 unsigned int
-windowStateFromString (char *str)
+windowStateFromString (const char *str)
 {
     if (strcasecmp (str, "modal") == 0)
 	return CompWindowStateModalMask;
@@ -705,7 +705,7 @@ constrainWindowState (unsigned int state,
 }
 
 unsigned int
-windowTypeFromString (char *str)
+windowTypeFromString (const char *str)
 {
     if (strcasecmp (str, "desktop") == 0)
 	return CompWindowTypeDesktopMask;
