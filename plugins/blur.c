@@ -147,8 +147,6 @@ typedef struct _BlurScreen {
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
 
-    CompMatch focusMatch;
-
     Bool alphaBlur;
 
     int	 blurTime;
@@ -370,11 +368,12 @@ static void
 blurUpdateWindowMatch (BlurScreen *bs,
 		       CompWindow *w)
 {
-    Bool focus;
+    CompMatch *match = &bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.match;
+    Bool      focus;
 
     BLUR_WINDOW (w);
 
-    focus = matchEval (&bs->focusMatch, w);
+    focus = w->screen->fragmentProgram && matchEval (match, w);
     if (focus != bw->focusBlur)
     {
 	bw->focusBlur = focus;
@@ -415,17 +414,9 @@ blurSetScreenOption (CompScreen      *screen,
 	}
 	break;
     case BLUR_SCREEN_OPTION_FOCUS_BLUR_MATCH:
-	if (compSetStringOption (o, value))
+	if (compSetMatchOption (o, value))
 	{
 	    CompWindow *w;
-
-	    matchFini (&bs->focusMatch);
-	    matchInit (&bs->focusMatch);
-
-	    if (screen->fragmentProgram)
-		matchAddFromString (&bs->focusMatch, o->value.s);
-
-	    matchUpdate (screen->display, &bs->focusMatch);
 
 	    for (w = screen->windows; w; w = w->next)
 		blurUpdateWindowMatch (bs, w);
@@ -532,9 +523,9 @@ blurScreenInitOptions (BlurScreen *bs)
     o->shortDesc      = N_("Focus blur windows");
     o->longDesc	      = N_("Windows that should be affected by focus blur");
     o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (BLUR_FOCUS_BLUR_MATCH_DEFAULT);
-    o->rest.s.string  = NULL;
-    o->rest.s.nString = 0;
+
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, BLUR_FOCUS_BLUR_MATCH_DEFAULT);
 
     o = &bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR];
     o->name	 = "focus_blur";
@@ -2225,7 +2216,7 @@ blurPulse (CompDisplay     *d,
     xid = getIntOptionNamed (option, nOption, "window", d->activeWindow);
 
     w = findWindowAtDisplay (d, xid);
-    if (w)
+    if (w && w->screen->fragmentProgram)
     {
 	BLUR_SCREEN (w->screen);
 	BLUR_WINDOW (w);
@@ -2247,19 +2238,18 @@ blurMatchExpHandlerChanged (CompDisplay *d)
 
     BLUR_DISPLAY (d);
 
+    UNWRAP (bd, d, matchExpHandlerChanged);
+    (*d->matchExpHandlerChanged) (d);
+    WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);
+
+    /* match options are up to date after the call to matchExpHandlerChanged */
     for (s = d->screens; s; s = s->next)
     {
 	BLUR_SCREEN (s);
 
-	matchUpdate (d, &bs->focusMatch);
-
 	for (w = s->windows; w; w = w->next)
 	    blurUpdateWindowMatch (bs, w);
     }
-
-    UNWRAP (bd, d, matchExpHandlerChanged);
-    (*d->matchExpHandlerChanged) (d);
-    WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);
 }
 
 static void
@@ -2403,20 +2393,12 @@ blurInitScreen (CompPlugin *p,
 
     blurScreenInitOptions (bs);
 
-    matchInit (&bs->focusMatch);
+    matchUpdate (s->display,
+		 &bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.match);
 
     /* We need GL_ARB_fragment_program for blur */
-    if (s->fragmentProgram)
-    {
-	char *str = bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR_MATCH].value.s;
-
-	matchAddFromString (&bs->focusMatch, str);
-	matchUpdate (s->display, &bs->focusMatch);
-    }
-    else
-    {
+    if (!s->fragmentProgram)
 	bs->alphaBlur = FALSE;
-    }
 
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
@@ -2458,7 +2440,7 @@ blurFiniScreen (CompPlugin *p,
 
     freeWindowPrivateIndex (s, bs->windowPrivateIndex);
 
-    matchFini (&bs->focusMatch);
+    matchFini (&bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.match);
 
     UNWRAP (bs, s, preparePaintScreen);
     UNWRAP (bs, s, donePaintScreen);
