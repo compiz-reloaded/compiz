@@ -83,15 +83,8 @@
 
 #define SWITCH_MINIMIZED_DEFAULT TRUE
 
-static char *winType[] = {
-    N_("Toolbar"),
-    N_("Utility"),
-    N_("Dialog"),
-    N_("ModalDialog"),
-    N_("Fullscreen"),
-    N_("Normal"),
-};
-#define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
+#define SWITCH_WINDOW_MATCH_DEFAULT \
+    "Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal"
 
 static int displayPrivateIndex;
 
@@ -114,7 +107,7 @@ typedef struct _SwitchDisplay {
 
 #define SWITCH_SCREEN_OPTION_SPEED	  0
 #define SWITCH_SCREEN_OPTION_TIMESTEP	  1
-#define SWITCH_SCREEN_OPTION_WINDOW_TYPE  2
+#define SWITCH_SCREEN_OPTION_WINDOW_MATCH 2
 #define SWITCH_SCREEN_OPTION_MIPMAP	  3
 #define SWITCH_SCREEN_OPTION_SATURATION	  4
 #define SWITCH_SCREEN_OPTION_BRIGHTNESS	  5
@@ -143,8 +136,6 @@ typedef struct _SwitchScreen {
     float speed;
     float timestep;
     float zoom;
-
-    unsigned int wMask;
 
     int grabIndex;
 
@@ -274,12 +265,9 @@ switchSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case SWITCH_SCREEN_OPTION_WINDOW_TYPE:
-	if (compSetOptionList (o, value))
-	{
-	    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
+    case SWITCH_SCREEN_OPTION_WINDOW_MATCH:
+	if (compSetMatchOption (o, value))
 	    return TRUE;
-	}
 	break;
     case SWITCH_SCREEN_OPTION_MIPMAP:
     case SWITCH_SCREEN_OPTION_ICON:
@@ -342,7 +330,6 @@ static void
 switchScreenInitOptions (SwitchScreen *ss)
 {
     CompOption *o;
-    int	       i;
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
     o->name		= "speed";
@@ -364,20 +351,14 @@ switchScreenInitOptions (SwitchScreen *ss)
     o->rest.f.max	= SWITCH_TIMESTEP_MAX;
     o->rest.f.precision = SWITCH_TIMESTEP_PRECISION;
 
-    o = &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_TYPE];
-    o->name	         = "window_types";
-    o->shortDesc         = N_("Window Types");
-    o->longDesc	         = N_("Window types that should shown in switcher");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_WIN_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
-    for (i = 0; i < N_WIN_TYPE; i++)
-	o->value.list.value[i].s = strdup (winType[i]);
-    o->rest.s.string     = windowTypeString;
-    o->rest.s.nString    = nWindowTypeString;
+    o = &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH];
+    o->name	 = "window_match";
+    o->shortDesc = N_("Switcher windows");
+    o->longDesc	 = N_("Windows that should be shown in switcher");
+    o->type	 = CompOptionTypeMatch;
 
-    ss->wMask = compWindowTypeMaskFromStringList (&o->value);
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, SWITCH_WINDOW_MATCH_DEFAULT);
 
     o = &ss->opt[SWITCH_SCREEN_OPTION_MIPMAP];
     o->name	  = "mipmap";
@@ -479,9 +460,6 @@ isSwitchWin (CompWindow *w)
     if (w->attrib.override_redirect)
 	return FALSE;
 
-    if (!(ss->wMask & w->type))
-	return FALSE;
-
     if (w->wmType & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
 	return FALSE;
 
@@ -504,6 +482,9 @@ isSwitchWin (CompWindow *w)
 		return FALSE;
 	}
     }
+
+    if (!matchEval (&ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match, w))
+	return FALSE;
 
     return TRUE;
 }
@@ -1867,8 +1848,11 @@ switchPaintWindow (CompWindow		   *w,
 	if (ss->brightness != 0xffff)
 	    sAttrib.brightness = (sAttrib.brightness * ss->brightness) >> 16;
 
-	if ((ss->wMask & w->type) && ss->opacity != OPAQUE)
-	    sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
+	if (w->wmType & ~(CompWindowTypeDockMask | CompWindowTypeDesktopMask))
+	{
+	    if (ss->opacity != OPAQUE)
+		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
+	}
 
 	if (ss->bringToFront && w->id == ss->zoomedWindow)
 	{
@@ -2175,6 +2159,9 @@ switchInitScreen (CompPlugin *p,
 
     switchScreenInitOptions (ss);
 
+    matchUpdate (s->display,
+		 &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match);
+
     addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT].value.action);
     addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
     addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
@@ -2198,6 +2185,8 @@ switchFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     SWITCH_SCREEN (s);
+
+    matchFini (&ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
