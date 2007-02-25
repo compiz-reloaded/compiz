@@ -488,8 +488,9 @@ matchOpsToString (CompMatchOp *op,
 	    {
 		value = malloc (sizeof (char) * (strlen (group) + 7));
 		if (value)
-		    sprintf (value, "%s%s(%s)%s",
-			     (op->any.flags & MATCH_OP_AND_MASK) ? "& " : "",
+		    sprintf (value, "%s%s(%s)%s", !str ? "" :
+			     ((op->any.flags & MATCH_OP_AND_MASK) ?
+			      "& " : "| "),
 			     (op->any.flags & MATCH_OP_NOT_MASK) ? "!" : "",
 			     group, nOp ? " " : "");
 
@@ -499,8 +500,8 @@ matchOpsToString (CompMatchOp *op,
 	case CompMatchOpTypeExp:
 	    value = malloc (sizeof (char) * (strlen (op->exp.value) + 5));
 	    if (value)
-		sprintf (value, "%s%s%s%s",
-			 (op->any.flags & MATCH_OP_AND_MASK) ? "& " : "",
+		sprintf (value, "%s%s%s%s", !str ? "" :
+			 ((op->any.flags & MATCH_OP_AND_MASK) ? "& " : "| "),
 			 (op->any.flags & MATCH_OP_NOT_MASK) ? "!" : "",
 			 op->exp.value, nOp ? " " : "");
 	    break;
