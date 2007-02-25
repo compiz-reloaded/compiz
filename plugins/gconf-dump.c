@@ -114,14 +114,14 @@ gconfTypeToString (CompOptionType type)
     switch (type) {
     case CompOptionTypeBool:
 	return "bool";
+    case CompOptionTypeString:
     case CompOptionTypeColor:
+    case CompOptionTypeMatch:
 	return "string";
     case CompOptionTypeInt:
 	return "int";
     case CompOptionTypeFloat:
 	return "float";
-    case CompOptionTypeString:
-	return "string";
     case CompOptionTypeList:
 	return "list";
     default:
@@ -150,6 +150,15 @@ gconfValueToString (CompDisplay	    *d,
     case CompOptionTypeString:
 	escaped = g_markup_escape_text (value->s, -1);
 	return escaped;
+    case CompOptionTypeMatch:
+	tmp = matchToString (&value->match);
+	if (tmp)
+	{
+	    escaped = g_markup_escape_text (tmp, -1);
+	    free (tmp);
+	    return escaped;
+	}
+	break;
     case CompOptionTypeList: {
 	char *tmp2, *tmp3;
 	int  i;
@@ -336,7 +345,7 @@ getLongDesc (CompOption *o, const char *option_name)
 
 	out = g_string_free (str, FALSE);
     }
-    else if (o->type == CompOptionTypeAction)
+    else if (o->type == CompOptionTypeMatch)
     {
 	out = g_strdup_printf ("%s (match)", base);
     }
