@@ -522,7 +522,7 @@ blurScreenInitOptions (BlurScreen *bs)
     o->name	      = "focus_blur_match";
     o->shortDesc      = N_("Focus blur windows");
     o->longDesc	      = N_("Windows that should be affected by focus blur");
-    o->type	      = CompOptionTypeString;
+    o->type	      = CompOptionTypeMatch;
 
     matchInit (&o->value.match);
     matchAddFromString (&o->value.match, BLUR_FOCUS_BLUR_MATCH_DEFAULT);
