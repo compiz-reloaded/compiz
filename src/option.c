@@ -434,6 +434,24 @@ getColorOptionNamed (CompOption	    *option,
     return defaultValue;
 }
 
+CompMatch *
+getMatchOptionNamed (CompOption	*option,
+		     int	nOption,
+		     char	*name,
+		     CompMatch  *defaultValue)
+{
+    while (nOption--)
+    {
+	if (option->type == CompOptionTypeMatch)
+	    if (strcmp (option->name, name) == 0)
+		return &option->value.match;
+
+	option++;
+    }
+
+    return defaultValue;
+}
+
 static char *
 stringAppend (char *s,
 	      char *a)
