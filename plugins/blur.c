@@ -62,15 +62,8 @@
 #define BLUR_SATURATION_MIN       0
 #define BLUR_SATURATION_MAX     100
 
-static char *winType[] = {
-    N_("Toolbar"),
-    N_("Menu"),
-    N_("Utility"),
-    N_("Normal"),
-    N_("Dialog"),
-    N_("ModalDialog")
-};
-#define N_WIN_TYPE (sizeof (winType) / sizeof (winType[0]))
+#define BLUR_FOCUS_BLUR_MATCH_DEFAULT \
+    "Toolbar | Menu | Utility | Normal | Dialog | ModalDialog"
 
 static char *filterString[] = {
     N_("4xBilinear"),
@@ -119,8 +112,10 @@ static int displayPrivateIndex;
 #define BLUR_DISPLAY_OPTION_NUM   1
 
 typedef struct _BlurDisplay {
-    int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
+    int			       screenPrivateIndex;
+    HandleEventProc	       handleEvent;
+    MatchExpHandlerChangedProc matchExpHandlerChanged;
+    MatchPropertyChangedProc   matchPropertyChanged;
 
     CompOption opt[BLUR_DISPLAY_OPTION_NUM];
 
@@ -128,7 +123,7 @@ typedef struct _BlurDisplay {
 } BlurDisplay;
 
 #define BLUR_SCREEN_OPTION_BLUR_SPEED        0
-#define BLUR_SCREEN_OPTION_WINDOW_TYPE       1
+#define BLUR_SCREEN_OPTION_FOCUS_BLUR_MATCH  1
 #define BLUR_SCREEN_OPTION_FOCUS_BLUR        2
 #define BLUR_SCREEN_OPTION_ALPHA_BLUR        3
 #define BLUR_SCREEN_OPTION_FILTER            4
@@ -152,7 +147,8 @@ typedef struct _BlurScreen {
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
 
-    int  wMask;
+    CompMatch focusMatch;
+
     Bool alphaBlur;
 
     int	 blurTime;
@@ -193,6 +189,7 @@ typedef struct _BlurScreen {
 typedef struct _BlurWindow {
     int  blur;
     Bool pulse;
+    Bool focusBlur;
 
     BlurState state[BLUR_STATE_NUM];
 
@@ -369,6 +366,22 @@ blurReset (CompScreen *s)
     }
 }
 
+static void
+blurUpdateWindowMatch (BlurScreen *bs,
+		       CompWindow *w)
+{
+    Bool focus;
+
+    BLUR_WINDOW (w);
+
+    focus = matchEval (&bs->focusMatch, w);
+    if (focus != bw->focusBlur)
+    {
+	bw->focusBlur = focus;
+	addWindowDamage (w);
+    }
+}
+
 static CompOption *
 blurGetScreenOptions (CompScreen *screen,
 		      int	 *count)
@@ -401,13 +414,24 @@ blurSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case BLUR_SCREEN_OPTION_WINDOW_TYPE:
-	if (compSetOptionList (o, value))
+    case BLUR_SCREEN_OPTION_FOCUS_BLUR_MATCH:
+	if (compSetStringOption (o, value))
 	{
+	    CompWindow *w;
+
+	    matchFini (&bs->focusMatch);
+	    matchInit (&bs->focusMatch);
+
 	    if (screen->fragmentProgram)
-		bs->wMask = compWindowTypeMaskFromStringList (&o->value);
-	    else
-		bs->wMask = 0;
+		matchAddFromString (&bs->focusMatch, o->value.s);
+
+	    matchUpdate (screen->display, &bs->focusMatch);
+
+	    for (w = screen->windows; w; w = w->next)
+		blurUpdateWindowMatch (bs, w);
+
+	    bs->moreBlur = TRUE;
+	    damageScreen (screen);
 
 	    return TRUE;
 	}
@@ -492,7 +516,6 @@ static void
 blurScreenInitOptions (BlurScreen *bs)
 {
     CompOption *o;
-    int	       i;
 
     o = &bs->opt[BLUR_SCREEN_OPTION_BLUR_SPEED];
     o->name		= "blur_speed";
@@ -504,20 +527,14 @@ blurScreenInitOptions (BlurScreen *bs)
     o->rest.f.max	= BLUR_SPEED_MAX;
     o->rest.f.precision = BLUR_SPEED_PRECISION;
 
-    o = &bs->opt[BLUR_SCREEN_OPTION_WINDOW_TYPE];
-    o->name	         = "window_types";
-    o->shortDesc         = N_("Window Types");
-    o->longDesc	         = N_("Window types that should be blurred");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_WIN_TYPE;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_WIN_TYPE);
-    for (i = 0; i < N_WIN_TYPE; i++)
-	o->value.list.value[i].s = strdup (winType[i]);
-    o->rest.s.string     = windowTypeString;
-    o->rest.s.nString    = nWindowTypeString;
-
-    bs->wMask = compWindowTypeMaskFromStringList (&o->value);
+    o = &bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR_MATCH];
+    o->name	      = "focus_blur_match";
+    o->shortDesc      = N_("Focus blur windows");
+    o->longDesc	      = N_("Windows that should be affected by focus blur");
+    o->type	      = CompOptionTypeString;
+    o->value.s	      = strdup (BLUR_FOCUS_BLUR_MATCH_DEFAULT);
+    o->rest.s.string  = NULL;
+    o->rest.s.nString = 0;
 
     o = &bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR];
     o->name	 = "focus_blur";
@@ -816,6 +833,7 @@ blurPreparePaintScreen (CompScreen *s,
 	CompWindow  *w;
 	int	    steps;
 	Bool        focus = bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b;
+	Bool        focusBlur;
 
 	steps = (msSinceLastPaint * 0xffff) / bs->blurTime;
 	if (steps < 12)
@@ -825,45 +843,44 @@ blurPreparePaintScreen (CompScreen *s,
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    if (bs->wMask & w->type)
+	    BLUR_WINDOW (w);
+
+	    focusBlur = bw->focusBlur && focus;
+
+	    if (!bw->pulse && (!focusBlur || w->id == s->display->activeWindow))
 	    {
-		BLUR_WINDOW (w);
-
-		if (!bw->pulse && (!focus || w->id == s->display->activeWindow))
+		if (bw->blur)
 		{
-		    if (bw->blur)
-		    {
-			bw->blur -= steps;
-			if (bw->blur > 0)
-			    bs->moreBlur = TRUE;
-			else
-			    bw->blur = 0;
-		    }
+		    bw->blur -= steps;
+		    if (bw->blur > 0)
+			bs->moreBlur = TRUE;
+		    else
+			bw->blur = 0;
 		}
-		else
+	    }
+	    else
+	    {
+		if (bw->blur < 0xffff)
 		{
-		    if (bw->blur < 0xffff)
+		    if (bw->pulse)
 		    {
-			if (bw->pulse)
+			bw->blur += steps * 2;
+
+			if (bw->blur >= 0xffff)
 			{
-			    bw->blur += steps * 2;
+			    bw->blur = 0xffff - 1;
+			    bw->pulse = FALSE;
+			}
 
-			    if (bw->blur >= 0xffff)
-			    {
-				bw->blur = 0xffff - 1;
-				bw->pulse = FALSE;
-			    }
-
+			bs->moreBlur = TRUE;
+		    }
+		    else
+		    {
+			bw->blur += steps;
+			if (bw->blur < 0xffff)
 			    bs->moreBlur = TRUE;
-			}
 			else
-			{
-			    bw->blur += steps;
-			    if (bw->blur < 0xffff)
-				bs->moreBlur = TRUE;
-			    else
-				bw->blur = 0xffff;
-			}
+			    bw->blur = 0xffff;
 		    }
 		}
 	    }
@@ -968,13 +985,10 @@ blurDonePaintScreen (CompScreen *s)
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    if (bs->wMask & w->type)
-	    {
-		BLUR_WINDOW (w);
+	    BLUR_WINDOW (w);
 
-		if (bw->blur > 0 && bw->blur < 0xffff)
-		    addWindowDamage (w);
-	    }
+	    if (bw->blur > 0 && bw->blur < 0xffff)
+		addWindowDamage (w);
 	}
     }
 
@@ -2226,6 +2240,43 @@ blurPulse (CompDisplay     *d,
 }
 
 static void
+blurMatchExpHandlerChanged (CompDisplay *d)
+{
+    CompScreen *s;
+    CompWindow *w;
+
+    BLUR_DISPLAY (d);
+
+    for (s = d->screens; s; s = s->next)
+    {
+	BLUR_SCREEN (s);
+
+	matchUpdate (d, &bs->focusMatch);
+
+	for (w = s->windows; w; w = w->next)
+	    blurUpdateWindowMatch (bs, w);
+    }
+
+    UNWRAP (bd, d, matchExpHandlerChanged);
+    (*d->matchExpHandlerChanged) (d);
+    WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);
+}
+
+static void
+blurMatchPropertyChanged (CompDisplay *d,
+			  CompWindow  *w)
+{
+    BLUR_DISPLAY (d);
+    BLUR_SCREEN (w->screen);
+
+    blurUpdateWindowMatch (bs, w);
+
+    UNWRAP (bd, d, matchPropertyChanged);
+    (*d->matchPropertyChanged) (d, w);
+    WRAP (bd, d, matchPropertyChanged, blurMatchPropertyChanged);
+}
+
+static void
 blurDisplayInitOptions (BlurDisplay *bd)
 {
     CompOption *o;
@@ -2266,6 +2317,8 @@ blurInitDisplay (CompPlugin  *p,
 	XInternAtom (d->display, "_COMPIZ_WM_WINDOW_BLUR_DECOR", 0);
 
     WRAP (bd, d, handleEvent, blurHandleEvent);
+    WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);
+    WRAP (bd, d, matchPropertyChanged, blurMatchPropertyChanged);
 
     blurDisplayInitOptions (bd);
 
@@ -2283,6 +2336,8 @@ blurFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, bd->screenPrivateIndex);
 
     UNWRAP (bd, d, handleEvent);
+    UNWRAP (bd, d, matchExpHandlerChanged);
+    UNWRAP (bd, d, matchPropertyChanged);
 
     free (bd);
 }
@@ -2348,11 +2403,19 @@ blurInitScreen (CompPlugin *p,
 
     blurScreenInitOptions (bs);
 
+    matchInit (&bs->focusMatch);
+
     /* We need GL_ARB_fragment_program for blur */
-    if (!s->fragmentProgram)
+    if (s->fragmentProgram)
+    {
+	char *str = bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR_MATCH].value.s;
+
+	matchAddFromString (&bs->focusMatch, str);
+	matchUpdate (s->display, &bs->focusMatch);
+    }
+    else
     {
 	bs->alphaBlur = FALSE;
-	bs->wMask     = 0;
     }
 
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
@@ -2395,6 +2458,8 @@ blurFiniScreen (CompPlugin *p,
 
     freeWindowPrivateIndex (s, bs->windowPrivateIndex);
 
+    matchFini (&bs->focusMatch);
+
     UNWRAP (bs, s, preparePaintScreen);
     UNWRAP (bs, s, donePaintScreen);
     UNWRAP (bs, s, paintScreen);
@@ -2419,8 +2484,9 @@ blurInitWindow (CompPlugin *p,
     if (!bw)
 	return FALSE;
 
-    bw->blur  = 0;
-    bw->pulse = FALSE;
+    bw->blur      = 0;
+    bw->pulse     = FALSE;
+    bw->focusBlur = FALSE;
 
     for (i = 0; i < BLUR_STATE_NUM; i++)
     {
@@ -2437,6 +2503,8 @@ blurInitWindow (CompPlugin *p,
 
     blurWindowUpdate (w, BLUR_STATE_CLIENT);
     blurWindowUpdate (w, BLUR_STATE_DECOR);
+
+    blurUpdateWindowMatch (bs, w);
 
     return TRUE;
 }
