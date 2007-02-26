@@ -616,6 +616,9 @@ minPaintWindow (CompWindow		*w,
 
 	initFragmentAttrib (&fragment, &w->lastPaint);
 
+	if (w->alpha || fragment.opacity != OPAQUE)
+	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
 	matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
 	matrixScale (&wTransform, mw->xScale, mw->yScale, 0.0f);
 	matrixTranslate (&wTransform,
