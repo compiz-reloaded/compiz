@@ -1485,7 +1485,6 @@ rotateHandleEvent (CompDisplay *d,
 		    break;
 
 		/* reset movement */
-		rs->moving = FALSE;
 		rs->moveTo = 0.0f;
 
 		defaultViewportForWindow (w, &dx, NULL);
@@ -1532,8 +1531,13 @@ rotateHandleEvent (CompDisplay *d,
 	    {
 		int dx;
 
+		ROTATE_SCREEN (s);
+
 		if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
 		    break;
+
+		/* reset movement */
+		rs->moveTo = 0.0f;
 
 		dx = event->xclient.data.l[0] / s->width - s->x;
 		if (dx)
