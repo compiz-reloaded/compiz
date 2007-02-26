@@ -86,6 +86,8 @@
 #define SWITCH_WINDOW_MATCH_DEFAULT \
     "Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal"
 
+#define SWITCH_AUTO_ROTATE_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 #define SWITCH_DISPLAY_OPTION_NEXT	     0
@@ -116,7 +118,8 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_ZOOM	  8
 #define SWITCH_SCREEN_OPTION_ICON	  9
 #define SWITCH_SCREEN_OPTION_MINIMIZED	  10
-#define SWITCH_SCREEN_OPTION_NUM	  11
+#define SWITCH_SCREEN_OPTION_AUTO_ROTATE  11
+#define SWITCH_SCREEN_OPTION_NUM	  12
 
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
@@ -272,6 +275,7 @@ switchSetScreenOption (CompScreen      *screen,
     case SWITCH_SCREEN_OPTION_MIPMAP:
     case SWITCH_SCREEN_OPTION_ICON:
     case SWITCH_SCREEN_OPTION_MINIMIZED:
+    case SWITCH_SCREEN_OPTION_AUTO_ROTATE:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -426,6 +430,13 @@ switchScreenInitOptions (SwitchScreen *ss)
     o->longDesc	  = N_("Show minimized windows");
     o->type	  = CompOptionTypeBool;
     o->value.b    = SWITCH_MINIMIZED_DEFAULT;
+
+    o = &ss->opt[SWITCH_SCREEN_OPTION_AUTO_ROTATE];
+    o->name	  = "auto_rotate";
+    o->shortDesc  = N_("Auto Rotate");
+    o->longDesc	  = N_("Rotate to the selected window while switching");
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = SWITCH_AUTO_ROTATE_DEFAULT;
 }
 
 static void
@@ -589,7 +600,7 @@ switchToWindow (CompScreen *s,
 		Bool	   toNext)
 {
     CompWindow *w;
-    int cur;
+    int	       cur;
 
     SWITCH_SCREEN (s);
 
@@ -613,6 +624,31 @@ switchToWindow (CompScreen *s,
     if (w)
     {
 	Window old = ss->selectedWindow;
+
+	if (ss->allWindows && ss->opt[SWITCH_SCREEN_OPTION_AUTO_ROTATE].value.b)
+	{
+	    XEvent xev;
+	    int	   x, y;
+
+	    defaultViewportForWindow (w, &x, &y);
+
+	    xev.xclient.type = ClientMessage;
+	    xev.xclient.display = s->display->display;
+	    xev.xclient.format = 32;
+
+	    xev.xclient.message_type = s->display->desktopViewportAtom;
+	    xev.xclient.window = s->root;
+
+	    xev.xclient.data.l[0] = x * s->width;
+	    xev.xclient.data.l[1] = y * s->height;
+	    xev.xclient.data.l[2] = 0;
+	    xev.xclient.data.l[3] = 0;
+	    xev.xclient.data.l[4] = 0;
+
+	    XSendEvent (s->display->display, s->root, FALSE,
+			SubstructureRedirectMask | SubstructureNotifyMask,
+			&xev);
+	}
 
 	ss->lastActiveNum  = w->activeNum;
 	ss->selectedWindow = w->id;
