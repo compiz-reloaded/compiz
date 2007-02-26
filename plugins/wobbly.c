@@ -2349,7 +2349,8 @@ wobblyHandleEvent (CompDisplay *d,
 	{
 	    WOBBLY_SCREEN (s);
 
-	    if (ws->moveWindow &&
+	    if (ws->grabWindow &&
+		ws->moveWindow &&
 		ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
 	    {
 		WOBBLY_WINDOW (ws->grabWindow);
