@@ -509,7 +509,18 @@ rotatePreparePaintScreen (CompScreen *s,
 			}
 		    }
 		    else
-			focusDefaultWindow (s->display);
+		    {
+			int i;
+
+			for (i = 0; i < s->maxGrab; i++)
+			    if (s->grabs[i].active &&
+				strcmp ("switcher", s->grabs[i].name) == 0)
+				break;
+
+			/* only focus default window if switcher isn't active */
+			if (i == s->maxGrab)
+			    focusDefaultWindow (s->display);
+		    }
 
 		    rs->moveWindow = 0;
 		}
