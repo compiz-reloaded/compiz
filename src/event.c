@@ -1987,6 +1987,7 @@ handleEvent (CompDisplay *d,
     case EnterNotify:
 	if (!d->screens->maxGrab		    &&
 	    event->xcrossing.mode   != NotifyGrab   &&
+	    event->xcrossing.mode   != NotifyUngrab &&
 	    event->xcrossing.detail != NotifyInferior)
 	{
 	    Bool raise;
