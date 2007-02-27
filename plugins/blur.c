@@ -2120,65 +2120,56 @@ static void
 blurHandleEvent (CompDisplay *d,
 		 XEvent      *event)
 {
-    Window activeWindow = 0;
+    Window activeWindow = d->activeWindow;
 
     BLUR_DISPLAY (d);
-
-    if (event->type == PropertyNotify &&
-	event->xproperty.atom == d->winActiveAtom)
-	activeWindow = d->activeWindow;
 
     UNWRAP (bd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (bd, d, handleEvent, blurHandleEvent);
 
+    if (d->activeWindow != activeWindow)
+    {
+	CompWindow *w;
+
+	w = findWindowAtDisplay (d, activeWindow);
+	if (w)
+	{
+	    BLUR_SCREEN (w->screen);
+
+	    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
+	    {
+		addWindowDamage (w);
+		bs->moreBlur = TRUE;
+	    }
+	}
+
+	w = findWindowAtDisplay (d, d->activeWindow);
+	if (w)
+	{
+	    BLUR_SCREEN (w->screen);
+
+	    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
+	    {
+		addWindowDamage (w);
+		bs->moreBlur = TRUE;
+	    }
+	}
+    }
+
     if (event->type == PropertyNotify)
     {
-	if (event->xproperty.atom == d->winActiveAtom)
+	int i;
+
+	for (i = 0; i < BLUR_STATE_NUM; i++)
 	{
-	    if (d->activeWindow != activeWindow)
+	    if (event->xproperty.atom == bd->blurAtom[i])
 	    {
 		CompWindow *w;
 
-		w = findWindowAtDisplay (d, activeWindow);
+		w = findWindowAtDisplay (d, event->xproperty.window);
 		if (w)
-		{
-		    BLUR_SCREEN (w->screen);
-
-		    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
-		    {
-			addWindowDamage (w);
-			bs->moreBlur = TRUE;
-		    }
-		}
-
-		w = findWindowAtDisplay (d, d->activeWindow);
-		if (w)
-		{
-		    BLUR_SCREEN (w->screen);
-
-		    if (bs->opt[BLUR_SCREEN_OPTION_FOCUS_BLUR].value.b)
-		    {
-			addWindowDamage (w);
-			bs->moreBlur = TRUE;
-		    }
-		}
-	    }
-	}
-	else
-	{
-	    int i;
-
-	    for (i = 0; i < BLUR_STATE_NUM; i++)
-	    {
-		if (event->xproperty.atom == bd->blurAtom[i])
-		{
-		    CompWindow *w;
-
-		    w = findWindowAtDisplay (d, event->xproperty.window);
-		    if (w)
-			blurWindowUpdate (w, i);
-		}
+		    blurWindowUpdate (w, i);
 	    }
 	}
     }

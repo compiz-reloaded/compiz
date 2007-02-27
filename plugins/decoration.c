@@ -967,16 +967,12 @@ static void
 decorHandleEvent (CompDisplay *d,
 		  XEvent      *event)
 {
-    Window     activeWindow = 0;
+    Window     activeWindow = d->activeWindow;
     CompWindow *w;
 
     DECOR_DISPLAY (d);
 
     switch (event->type) {
-    case PropertyNotify:
-	if (event->xproperty.atom == d->winActiveAtom)
-	    activeWindow = d->activeWindow;
-	break;
     case DestroyNotify:
 	w = findWindowAtDisplay (d, event->xdestroywindow.window);
 	if (w)
@@ -1028,22 +1024,20 @@ decorHandleEvent (CompDisplay *d,
     (*d->handleEvent) (d, event);
     WRAP (dd, d, handleEvent, decorHandleEvent);
 
+    if (d->activeWindow != activeWindow)
+    {
+	w = findWindowAtDisplay (d, activeWindow);
+	if (w)
+	    decorWindowUpdate (w, FALSE);
+
+	w = findWindowAtDisplay (d, d->activeWindow);
+	if (w)
+	    decorWindowUpdate (w, FALSE);
+    }
+
     switch (event->type) {
     case PropertyNotify:
-	if (event->xproperty.atom == d->winActiveAtom)
-	{
-	    if (d->activeWindow != activeWindow)
-	    {
-		w = findWindowAtDisplay (d, activeWindow);
-		if (w)
-		    decorWindowUpdate (w, FALSE);
-
-		w = findWindowAtDisplay (d, d->activeWindow);
-		if (w)
-		    decorWindowUpdate (w, FALSE);
-	    }
-	}
-	else if (event->xproperty.atom == dd->winDecorAtom)
+	if (event->xproperty.atom == dd->winDecorAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)

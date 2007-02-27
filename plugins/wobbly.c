@@ -2274,17 +2274,13 @@ static void
 wobblyHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
-    Window     activeWindow = 0;
+    Window     activeWindow = d->activeWindow;
     CompWindow *w;
     CompScreen *s;
 
     WOBBLY_DISPLAY (d);
 
     switch (event->type) {
-    case PropertyNotify:
-	if (event->xproperty.atom == d->winActiveAtom)
-	    activeWindow = d->activeWindow;
-	break;
     case MapNotify:
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
@@ -2384,47 +2380,43 @@ wobblyHandleEvent (CompDisplay *d,
 		}
 	    }
 	}
-	break;
-    case PropertyNotify:
-	if (event->xproperty.atom == d->winActiveAtom)
-	{
-	    if (d->activeWindow != activeWindow)
-	    {
-		w = findWindowAtDisplay (d, d->activeWindow);
-		if (w && isWobblyWin (w))
-		{
-		    int mIndex;
-
-		    WOBBLY_WINDOW (w);
-		    WOBBLY_SCREEN (w->screen);
-
-		    mIndex = WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_MATCH;
-
-		    if (ws->focusEffect				    &&
-			matchEval (&ws->opt[mIndex].value.match, w) &&
-			wobblyEnsureModel (w))
-		    {
-			switch (ws->focusEffect) {
-			case WobblyEffectShiver:
-			    modelAdjustObjectsForShiver (ww->model,
-							 WIN_X (w),
-							 WIN_Y (w),
-							 WIN_W (w),
-							 WIN_H (w));
-			default:
-			    break;
-			}
-
-			ww->wobbly |= WobblyInitial;
-			ws->wobblyWindows |= ww->wobbly;
-
-			damagePendingOnScreen (w->screen);
-		    }
-		}
-	    }
-	}
     default:
 	break;
+    }
+
+    if (d->activeWindow != activeWindow)
+    {
+	w = findWindowAtDisplay (d, d->activeWindow);
+	if (w && isWobblyWin (w))
+	{
+	    int mIndex;
+
+	    WOBBLY_WINDOW (w);
+	    WOBBLY_SCREEN (w->screen);
+
+	    mIndex = WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_MATCH;
+
+	    if (ws->focusEffect				    &&
+		matchEval (&ws->opt[mIndex].value.match, w) &&
+		wobblyEnsureModel (w))
+	    {
+		switch (ws->focusEffect) {
+		case WobblyEffectShiver:
+		    modelAdjustObjectsForShiver (ww->model,
+						 WIN_X (w),
+						 WIN_Y (w),
+						 WIN_W (w),
+						 WIN_H (w));
+		default:
+		    break;
+		}
+
+		ww->wobbly |= WobblyInitial;
+		ws->wobblyWindows |= ww->wobbly;
+
+		damagePendingOnScreen (w->screen);
+	    }
+	}
     }
 }
 

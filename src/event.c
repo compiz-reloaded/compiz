@@ -1361,25 +1361,7 @@ handleEvent (CompDisplay *d,
 	}
 	break;
     case PropertyNotify:
-	if (event->xproperty.atom == d->winActiveAtom)
-	{
-	    Window newActiveWindow;
-
-	    newActiveWindow = getActiveWindow (d, event->xproperty.window);
-	    if (newActiveWindow != d->activeWindow)
-	    {
-		d->activeWindow = newActiveWindow;
-
-		s = findScreenAtDisplay (d, event->xproperty.window);
-		if (s)
-		{
-		    w = findWindowAtDisplay (d, newActiveWindow);
-		    if (w)
-			w->activeNum = s->activeNum++;
-		}
-	    }
-	}
-	else if (event->xproperty.atom == d->winTypeAtom)
+	if (event->xproperty.atom == d->winTypeAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
@@ -1985,10 +1967,15 @@ handleEvent (CompDisplay *d,
 		unsigned int state = w->state;
 
 		if (w->id != d->activeWindow)
+		{
+		    d->activeWindow = w->id;
+		    w->activeNum = w->screen->activeNum++;
+
 		    XChangeProperty (d->display, w->screen->root,
 				     d->winActiveAtom,
 				     XA_WINDOW, 32, PropModeReplace,
 				     (unsigned char *) &w->id, 1);
+		}
 
 		w->state &= ~CompWindowStateDemandsAttentionMask;
 
