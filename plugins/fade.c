@@ -262,11 +262,16 @@ fadePaintWindow (CompWindow		 *w,
     if (!w->screen->canDoSlightlySaturated)
 	fw->saturation = attrib->saturation;
 
-    if (fw->opacity    != attrib->opacity    ||
+    if (fw->destroyCnt			     ||
+	fw->unmapCnt			     ||
+	fw->opacity    != attrib->opacity    ||
 	fw->brightness != attrib->brightness ||
 	fw->saturation != attrib->saturation)
     {
 	WindowPaintAttrib fAttrib = *attrib;
+
+	if (fw->destroyCnt || fw->unmapCnt)
+	    fAttrib.opacity = 0;
 
 	if (fw->steps)
 	{
@@ -275,21 +280,21 @@ fadePaintWindow (CompWindow		 *w,
 	    GLint saturation;
 
 	    opacity = fw->opacity;
-	    if (attrib->opacity > fw->opacity)
+	    if (fAttrib.opacity > fw->opacity)
 	    {
 		opacity = fw->opacity + fw->steps;
-		if (opacity > attrib->opacity)
-		    opacity = attrib->opacity;
+		if (opacity > fAttrib.opacity)
+		    opacity = fAttrib.opacity;
 	    }
-	    else if (attrib->opacity < fw->opacity)
+	    else if (fAttrib.opacity < fw->opacity)
 	    {
 		if (w->type & CompWindowTypeUnknownMask)
 		    opacity = fw->opacity - (fw->steps >> 1);
 		else
 		    opacity = fw->opacity - fw->steps;
 
-		if (opacity < attrib->opacity)
-		    opacity = attrib->opacity;
+		if (opacity < fAttrib.opacity)
+		    opacity = fAttrib.opacity;
 	    }
 
 	    brightness = fw->brightness;
@@ -454,8 +459,6 @@ fadeHandleEvent (CompDisplay *d,
 	    {
 		FADE_WINDOW (w);
 
-		w->paint.opacity = 0;
-
 		if (fw->opacity == 0xffff)
 		    fw->opacity = 0xfffe;
 
@@ -479,8 +482,6 @@ fadeHandleEvent (CompDisplay *d,
 
 	    if (!fw->shaded && w->texture->pixmap && matchEval (&fs->match, w))
 	    {
-		w->paint.opacity = 0;
-
 		if (fw->opacity == 0xffff)
 		    fw->opacity = 0xfffe;
 
@@ -497,11 +498,6 @@ fadeHandleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
-	    if (!(w->type & CompWindowTypeDesktopMask))
-		w->paint.opacity = getWindowProp32 (d, w->id,
-						    d->winOpacityAtom,
-						    OPAQUE);
-
 	    fadeWindowStop (w);
 
 	    if (w->state & CompWindowStateDisplayModalMask)
@@ -606,7 +602,7 @@ fadeDamageWindowRect (CompWindow *w,
 	{
 	    fw->shaded = w->shaded;
 	}
-	else if (matchEval (&fs->match, w) && fw->opacity == w->paint.opacity)
+	else if (matchEval (&fs->match, w))
 	{
 	    fw->opacity = 0;
 	}
