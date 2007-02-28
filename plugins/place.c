@@ -1225,24 +1225,18 @@ placeWindow (CompWindow *window,
     /* Maximize windows if they are too big for their work area (bit of
      * a hack here). Assume undecorated windows probably don't intend to
      * be maximized.
-     *
-    if (window->has_maximize_func &&
-	window->decorated	  &&
-	!window->fullscreen)
+     */
+    if ((window->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
+	(window->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
+	!(window->state & CompWindowStateFullscreenMask))
     {
-	XRectangle workarea;
 	XRectangle outer;
 
-	workarea = s->workArea;
 	getOuterRectOfWindow (window, &outer);
 
-	if (outer.width >= workarea.width &&
-	    outer.height >= workarea.height)
-	{
-	    window->maximize_after_placement = TRUE;
-	}
+	if (outer.width >= work_area.width && outer.height >= work_area.height)
+	    maximizeWindow (window, MAXIMIZE_STATE);
     }
-    */
 
 done_check_denied_focus:
     /* If the window is being denied focus and isn't a transient of the
