@@ -1604,11 +1604,11 @@ switchPaintThumb (CompWindow		  *w,
 
     if (w->mapNum)
     {
-	if (!w->texture->pixmap)
+	if (!w->texture->pixmap && !w->bindFailed)
 	    bindWindow (w);
     }
 
-    if (w->mapNum)
+    if (w->texture->pixmap)
     {
 	AddWindowGeometryProc oldAddWindowGeometry;
 	FragmentAttrib	      fragment;

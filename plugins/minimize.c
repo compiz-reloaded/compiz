@@ -817,7 +817,7 @@ minDamageWindowRect (CompWindow *w,
 		XOffsetRegion (mw->region, -w->attrib.x, -w->attrib.y);
 
 		/* bind pixmap here so we have something to unshade with */
-		if (!w->texture->pixmap)
+		if (!w->texture->pixmap && !w->bindFailed)
 		    bindWindow (w);
 
 		ms->moreAdjust = TRUE;

@@ -47,7 +47,7 @@ handleWindowDamageRect (CompWindow *w,
     REGION region;
     Bool   initial = FALSE;
 
-    if (!w->redirected)
+    if (!w->redirected || w->bindFailed)
 	return;
 
     if (!w->damaged)

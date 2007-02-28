@@ -1029,12 +1029,8 @@ drawWindow (CompWindow		 *w,
 	}
     }
 
-    if (!w->texture->pixmap)
-    {
-	bindWindow (w);
-	if (!w->mapNum)
-	    return FALSE;
-    }
+    if (!w->texture->pixmap && !bindWindow (w))
+	return FALSE;
 
     if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
 	mask |= PAINT_WINDOW_BLEND_MASK;

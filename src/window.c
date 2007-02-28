@@ -1152,7 +1152,7 @@ setWindowMatrix (CompWindow *w)
     w->matrix.y0 -= (w->attrib.y * w->matrix.yy);
 }
 
-void
+Bool
 bindWindow (CompWindow *w)
 {
     redirectWindow (w);
@@ -1169,8 +1169,9 @@ bindWindow (CompWindow *w)
 	{
 	    XUngrabServer (w->screen->display->display);
 	    finiTexture (w->screen, w->texture);
-	    w->mapNum = 0;
-	    return;
+	    w->damaged = FALSE;
+	    w->bindFailed = TRUE;
+	    return FALSE;
 	}
 
 	w->pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
@@ -1188,6 +1189,8 @@ bindWindow (CompWindow *w)
     }
 
     setWindowMatrix (w);
+
+    return TRUE;
 }
 
 void
@@ -1760,6 +1763,7 @@ addWindow (CompScreen *screen,
     w->damaged    = FALSE;
     w->redirected = TRUE;
     w->managed    = FALSE;
+    w->bindFailed = FALSE;
 
     w->destroyRefCnt = 1;
     w->unmapRefCnt   = 1;
@@ -2171,9 +2175,10 @@ mapWindow (CompWindow *w)
     if (!w->attrib.override_redirect)
 	setWmState (w->screen->display, NormalState, w->id);
 
-    w->invisible = TRUE;
-    w->damaged   = FALSE;
-    w->alive     = TRUE;
+    w->invisible  = TRUE;
+    w->damaged    = FALSE;
+    w->alive      = TRUE;
+    w->bindFailed = FALSE;
 
     w->lastPong = w->screen->display->lastPing;
 
