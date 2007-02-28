@@ -559,6 +559,32 @@ setScreenOption (CompScreen      *screen,
 	    updateOutputDevices (screen);
 	    return TRUE;
 	}
+	break;
+    case COMP_SCREEN_OPTION_OPACITY_MATCHES:
+	if (compSetOptionList (o, value))
+	{
+	    CompWindow *w;
+	    int	       i;
+
+	    for (i = 0; i < o->value.list.nValue; i++)
+		matchUpdate (screen->display, &o->value.list.value[i].match);
+
+	    for (w = screen->windows; w; w = w->next)
+		updateWindowOpacity (w);
+
+	    return TRUE;
+	}
+	break;
+    case COMP_SCREEN_OPTION_OPACITY_VALUES:
+	if (compSetOptionList (o, value))
+	{
+	    CompWindow *w;
+
+	    for (w = screen->windows; w; w = w->next)
+		updateWindowOpacity (w);
+
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -705,6 +731,30 @@ compScreenInitOptions (CompScreen *screen)
 
     matchInit (&o->value.match);
     matchAddFromString (&o->value.match, FOCUS_PREVENTION_MATCH_DEFAULT);
+
+    o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_MATCHES];
+    o->name	         = "opacity_matches";
+    o->shortDesc         = N_("Opacity windows");
+    o->longDesc	         = N_("Windows that should be translucent by "
+				"default");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeMatch;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.s.string     = NULL;
+    o->rest.s.nString    = 0;
+
+    o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_VALUES];
+    o->name	         = "opacity_values";
+    o->shortDesc         = N_("Opacity window values");
+    o->longDesc	         = N_("Opacity values for windows that should be "
+				"translucent by default");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeInt;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.i.min	 = 0;
+    o->rest.i.max	 = 100;
 }
 
 static void

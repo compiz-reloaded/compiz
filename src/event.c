@@ -1454,16 +1454,11 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w && (w->type & CompWindowTypeDesktopMask) == 0)
 	    {
-		GLushort opacity;
+		w->opacity	  = OPAQUE;
+		w->opacityPropSet =
+		    readWindowProp32 (d, w->id, d->winOpacityAtom, &w->opacity);
 
-		opacity = getWindowProp32 (d, w->id,
-					   d->winOpacityAtom,
-					   OPAQUE);
-		if (opacity != w->opacity)
-		{
-		    w->opacity = w->paint.opacity = opacity;
-		    addWindowDamage (w);
-		}
+		updateWindowOpacity (w);
 	    }
 	}
 	else if (event->xproperty.atom == d->winBrightnessAtom)
@@ -1588,17 +1583,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w && (w->type & CompWindowTypeDesktopMask) == 0)
 	    {
-		GLushort opacity;
+		GLushort opacity = event->xclient.data.l[0] >> 16;
 
-		opacity = event->xclient.data.l[0] >> 16;
-		if (opacity != w->paint.opacity)
-		{
-		    w->paint.opacity = opacity;
-
-		    setWindowProp32 (d, w->id, d->winOpacityAtom,
-				     w->paint.opacity);
-		    addWindowDamage (w);
-		}
+		setWindowProp32 (d, w->id, d->winOpacityAtom, opacity);
 	    }
 	}
 	else if (event->xclient.message_type == d->winBrightnessAtom)
@@ -1606,17 +1593,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
-		GLushort brightness;
+		GLushort brightness = event->xclient.data.l[0] >> 16;
 
-		brightness = event->xclient.data.l[0] >> 16;
-		if (brightness != w->paint.brightness)
-		{
-		    w->paint.brightness = brightness;
-
-		    setWindowProp32 (d, w->id, d->winBrightnessAtom,
-				     w->paint.brightness);
-		    addWindowDamage (w);
-		}
+		setWindowProp32 (d, w->id, d->winBrightnessAtom, brightness);
 	    }
 	}
 	else if (event->xclient.message_type == d->winSaturationAtom)
@@ -1624,22 +1603,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w && w->screen->canDoSaturated)
 	    {
-		GLushort saturation;
+		GLushort saturation = event->xclient.data.l[0] >> 16;
 
-		saturation = event->xclient.data.l[0] >> 16;
-		if (saturation != w->saturation)
-		{
-		    w->saturation = saturation;
-
-		    setWindowProp32 (d, w->id, d->winSaturationAtom,
-				     w->saturation);
-
-		    if (w->alive)
-		    {
-			w->paint.saturation = w->saturation;
-			addWindowDamage (w);
-		    }
-		}
+		setWindowProp32 (d, w->id, d->winSaturationAtom, saturation);
 	    }
 	}
 	else if (event->xclient.message_type == d->winStateAtom)

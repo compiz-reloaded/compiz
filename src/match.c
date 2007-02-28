@@ -693,9 +693,24 @@ matchUpdateMatchOptions (CompOption *option,
 {
     while (nOption--)
     {
-	if (option->type == CompOptionTypeMatch)
+	switch (option->type) {
+	case CompOptionTypeMatch:
 	    if (option->value.match.display)
 		matchUpdate (option->value.match.display, &option->value.match);
+	    break;
+	case CompOptionTypeList:
+	    if (option->value.list.type == CompOptionTypeMatch)
+	    {
+		int i;
+
+		for (i = 0; i < option->value.list.nValue; i++)
+		    if (option->value.list.value[i].match.display)
+			matchUpdate (option->value.list.value[i].match.display,
+				     &option->value.list.value[i].match);
+	    }
+	default:
+	    break;
+	}
 
 	option++;
     }
@@ -708,6 +723,7 @@ matchExpHandlerChanged (CompDisplay *display)
     int	       nOption;
     CompPlugin *p;
     CompScreen *s;
+    CompWindow *w;
 
     for (p = getPlugins (); p; p = p->next)
     {
@@ -734,11 +750,15 @@ matchExpHandlerChanged (CompDisplay *display)
 
 	option = compGetScreenOptions (s, &nOption);
 	matchUpdateMatchOptions (option, nOption);
+
+	for (w = s->windows; w; w = w->next)
+	    updateWindowOpacity (w);
     }
 }
 
 void
 matchPropertyChanged (CompDisplay *display,
-		      CompWindow  *window)
+		      CompWindow  *w)
 {
+    updateWindowOpacity (w);
 }

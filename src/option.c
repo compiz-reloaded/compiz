@@ -271,15 +271,15 @@ compSetOptionList (CompOption      *option,
 
 	min = MIN (value->list.nValue, option->value.list.nValue);
 
-	if (min < option->value.list.nValue)
+	for (i = min; i < option->value.list.nValue; i++)
 	{
 	    switch (option->value.list.type) {
 	    case CompOptionTypeString:
-		for (i = min; i < option->value.list.nValue; i++)
-		{
-		    if (option->value.list.value[i].s)
-			free (option->value.list.value[i].s);
-		}
+		if (option->value.list.value[i].s)
+		    free (option->value.list.value[i].s);
+		break;
+	    case CompOptionTypeMatch:
+		matchFini (&option->value.list.value[i].match);
 	    default:
 		break;
 	    }
@@ -322,6 +322,9 @@ compSetOptionList (CompOption      *option,
 	    break;
 	case CompOptionTypeColor:
 	    status |= compSetColorOption (&o, &value->list.value[i]);
+	    break;
+	case CompOptionTypeMatch:
+	    status |= compSetMatchOption (&o, &value->list.value[i]);
 	default:
 	    break;
 	}

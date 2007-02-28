@@ -473,23 +473,20 @@ changeWindowOpacity (CompWindow *w,
 
     step = (OPAQUE * w->screen->opacityStep) / 100;
 
-    opacity = w->paint.opacity + step * direction;
-    if (opacity > OPAQUE)
+    w->opacityFactor = w->opacityFactor + step * direction;
+    if (w->opacityFactor > OPAQUE)
     {
-	opacity = OPAQUE;
+	w->opacityFactor = OPAQUE;
     }
-    else if (opacity < step)
+    else if (w->opacityFactor < step)
     {
-	opacity = step;
+	w->opacityFactor = step;
     }
 
-    if (w->paint.opacity != opacity)
+    opacity = w->opacity * w->opacityFactor / OPAQUE;
+    if (opacity != w->paint.opacity)
     {
 	w->paint.opacity = opacity;
-
-	setWindowProp32 (w->screen->display, w->id,
-			 w->screen->display->winOpacityAtom,
-			 w->paint.opacity);
 	addWindowDamage (w);
     }
 }

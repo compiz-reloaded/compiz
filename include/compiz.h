@@ -1439,7 +1439,9 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_OUTPUTS		  11
 #define COMP_SCREEN_OPTION_FOCUS_PREVENTION	  12
 #define COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH 13
-#define COMP_SCREEN_OPTION_NUM		          14
+#define COMP_SCREEN_OPTION_OPACITY_MATCHES	  14
+#define COMP_SCREEN_OPTION_OPACITY_VALUES	  15
+#define COMP_SCREEN_OPTION_NUM		          16
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -2226,6 +2228,9 @@ struct _CompWindow {
     GLushort brightness;
     GLushort saturation;
 
+    Bool opacityPropSet;
+    int  opacityFactor;
+
     WindowPaintAttrib paint;
     WindowPaintAttrib lastPaint;
 
@@ -2337,6 +2342,12 @@ setWindowProp (CompDisplay  *display,
 	       Atom	    property,
 	       unsigned int value);
 
+Bool
+readWindowProp32 (CompDisplay    *display,
+		  Window	 id,
+		  Atom		 property,
+		  unsigned short *returnValue);
+
 unsigned short
 getWindowProp32 (CompDisplay	*display,
 		 Window		id,
@@ -2348,6 +2359,9 @@ setWindowProp32 (CompDisplay    *display,
 		 Window         id,
 		 Atom		property,
 		 unsigned short value);
+
+void
+updateWindowOpacity (CompWindow *window);
 
 void
 updateNormalHints (CompWindow *window);

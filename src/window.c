@@ -946,11 +946,11 @@ setWindowProp (CompDisplay  *display,
 		     (unsigned char *) &data, 1);
 }
 
-unsigned short
-getWindowProp32 (CompDisplay	*display,
-		 Window		id,
-		 Atom		property,
-		 unsigned short defaultValue)
+Bool
+readWindowProp32 (CompDisplay    *display,
+		  Window	 id,
+		  Atom		 property,
+		  unsigned short *returnValue)
 {
     Atom	  actual;
     int		  result, format;
@@ -969,8 +969,24 @@ getWindowProp32 (CompDisplay	*display,
 
 	XFree (data);
 
-	return value >> 16;
+	*returnValue = value >> 16;
+
+	return TRUE;
     }
+
+    return FALSE;
+}
+
+unsigned short
+getWindowProp32 (CompDisplay	*display,
+		 Window		id,
+		 Atom		property,
+		 unsigned short defaultValue)
+{
+    unsigned short result;
+
+    if (readWindowProp32 (display, id, property, &result))
+	return result;
 
     return defaultValue;
 }
@@ -988,6 +1004,38 @@ setWindowProp32 (CompDisplay    *display,
     XChangeProperty (display->display, id, property,
 		     XA_CARDINAL, 32, PropModeReplace,
 		     (unsigned char *) &value32, 1);
+}
+
+void
+updateWindowOpacity (CompWindow *w)
+{
+    CompScreen *s = w->screen;
+    int	       opacity = w->opacity;
+
+    if (!w->opacityPropSet && !(w->type & CompWindowTypeDesktopMask))
+    {
+	CompOption *matches = &s->opt[COMP_SCREEN_OPTION_OPACITY_MATCHES];
+	CompOption *values = &s->opt[COMP_SCREEN_OPTION_OPACITY_VALUES];
+	int	   i, min;
+
+	min = MIN (matches->value.list.nValue, values->value.list.nValue);
+
+	for (i = 0; i < min; i++)
+	{
+	    if (matchEval (&matches->value.list.value[i].match, w))
+	    {
+		opacity = (values->value.list.value[i].i * OPAQUE) / 100;
+		break;
+	    }
+	}
+    }
+
+    opacity = opacity * w->opacityFactor / OPAQUE;
+    if (opacity != w->paint.opacity)
+    {
+	w->paint.opacity = opacity;
+	addWindowDamage (w);
+    }
 }
 
 static void
@@ -1807,6 +1855,10 @@ addWindow (CompScreen *screen,
     w->paint.xTranslate	= 0.0f;
     w->paint.yTranslate	= 0.0f;
 
+    w->opacityFactor = OPAQUE;
+
+    w->opacityPropSet = FALSE;
+
     w->lastPaint = w->paint;
 
     w->alive = TRUE;
@@ -1970,10 +2022,10 @@ addWindow (CompScreen *screen,
 		w->desktop = desktop;
 
 	    if (!(w->type & CompWindowTypeDesktopMask))
-		w->opacity =
-		    getWindowProp32 (w->screen->display, w->id,
-				     w->screen->display->winOpacityAtom,
-				     OPAQUE);
+		w->opacityPropSet =
+		    readWindowProp32 (w->screen->display, w->id,
+				      w->screen->display->winOpacityAtom,
+				      &w->opacity);
 	}
 
 	w->brightness =
@@ -2045,6 +2097,8 @@ addWindow (CompScreen *screen,
     }
 
     windowInitPlugins (w);
+
+    updateWindowOpacity (w);
 
     if (w->shaded)
 	resizeWindow (w,
