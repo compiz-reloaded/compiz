@@ -1195,7 +1195,7 @@ getDstBlurFragmentFunction (CompScreen  *s,
 		      "MAD t2, coord, program.env[%d], { -1.0, 1.0, 0.0, 0.0 };"
 		      "TEX s2, t2, texture[%d], %s;"
 
-		      "MAD t2, coord, program.env[%d], { 1.0, -1.0, 0.0, 0.0 };"
+		      "MAD t3, coord, program.env[%d], { 1.0, -1.0, 0.0, 0.0 };"
 		      "TEX s3, t3, texture[%d], %s;"
 
 		      "TEX dst, coord, texture[%d], %s;"
