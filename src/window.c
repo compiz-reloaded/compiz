@@ -3265,12 +3265,23 @@ addWindowSizeChanges (CompWindow     *w,
     int	       vx, vy;
     int	       output;
 
-    defaultViewportForWindow (w, &vx, &vy);
+    viewportForGeometry (w->screen,
+			 oldX,
+			 oldY,
+			 oldWidth,
+			 oldHeight,
+			 oldBorderWidth,
+			 &vx, &vy);
 
     x = (vx - w->screen->x) * w->screen->width;
     y = (vy - w->screen->y) * w->screen->height;
 
-    output = outputDeviceForWindow (w);
+   output = outputDeviceForGeometry (w->screen,
+				      oldX,
+				      oldY,
+				      oldWidth,
+				      oldHeight,
+				      oldBorderWidth);
     getWorkareaForOutput (w->screen, output, &workArea);
 
     if (w->type & CompWindowTypeFullscreenMask)
