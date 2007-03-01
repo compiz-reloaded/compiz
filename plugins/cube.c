@@ -1303,9 +1303,6 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
     if (cs->sky.name)
     {
-	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
-	    clearTargetOutput (s->display, GL_STENCIL_BUFFER_BIT);
-
 	screenLighting (s, FALSE);
 
 	glPushMatrix ();
@@ -1325,11 +1322,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     }
     else
     {
-	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
-	    clearTargetOutput (s->display,
-			       GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	else
-	    clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
+	clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
     }
 
     mask &= ~PAINT_SCREEN_CLEAR_MASK;
