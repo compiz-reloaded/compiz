@@ -88,6 +88,9 @@
 
 #define SWITCH_AUTO_ROTATE_DEFAULT FALSE
 
+#define ZOOMED_WINDOW_MASK (1 << 0)
+#define NORMAL_WINDOW_MASK (1 << 1)
+
 static int displayPrivateIndex;
 
 #define SWITCH_DISPLAY_OPTION_NEXT	     0
@@ -144,6 +147,7 @@ typedef struct _SwitchScreen {
 
     Bool switching;
     Bool zooming;
+    int  zoomMask;
 
     int moreAdjust;
 
@@ -1473,6 +1477,8 @@ switchPaintScreen (CompScreen		   *s,
 
     SWITCH_SCREEN (s);
 
+    ss->zoomMask = ZOOMED_WINDOW_MASK | NORMAL_WINDOW_MASK;
+
     if (ss->grabIndex || (ss->zooming && ss->translate > 0.001f))
     {
 	ScreenPaintAttrib sa = *sAttrib;
@@ -1485,9 +1491,10 @@ switchPaintScreen (CompScreen		   *s,
 	{
 	    mask &= ~PAINT_SCREEN_REGION_MASK;
 	    mask |= PAINT_SCREEN_TRANSFORMED_MASK | PAINT_SCREEN_CLEAR_MASK;
-	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
 	    sa.zCamera -= ss->translate;
+
+	    ss->zoomMask = NORMAL_WINDOW_MASK;
 	}
 
 	switcher = findWindowAtScreen (s, ss->popupWindow);
@@ -1519,6 +1526,20 @@ switchPaintScreen (CompScreen		   *s,
 	UNWRAP (ss, s, paintScreen);
 	status = (*s->paintScreen) (s, &sa, transform, region, output, mask);
 	WRAP (ss, s, paintScreen, switchPaintScreen);
+
+	if (ss->zooming)
+	{
+	    mask &= ~PAINT_SCREEN_CLEAR_MASK;
+
+	    ss->zoomMask = ZOOMED_WINDOW_MASK;
+
+	    sa.zCamera += MIN (ss->sTranslate, ss->translate);
+
+	    UNWRAP (ss, s, paintScreen);
+	    status = (*s->paintScreen) (s, &sa, transform, region, output,
+					mask);
+	    WRAP (ss, s, paintScreen, switchPaintScreen);
+	}
 
 	if (zoomed)
 	{
@@ -1782,6 +1803,7 @@ switchPaintWindow (CompWindow		   *w,
 		   unsigned int		   mask)
 {
     CompScreen *s = w->screen;
+    int	       zoomType = NORMAL_WINDOW_MASK;
     Bool       status;
 
     SWITCH_SCREEN (s);
@@ -1857,21 +1879,14 @@ switchPaintWindow (CompWindow		   *w,
     }
     else if (w->id == ss->selectedWindow)
     {
-	CompTransform wTransform = *transform;
+	if (ss->bringToFront && ss->selectedWindow == ss->zoomedWindow)
+	    zoomType = ZOOMED_WINDOW_MASK;
 
-	if (ss->bringToFront)
-	{
-	    if (ss->selectedWindow == ss->zoomedWindow)
-	    {
-		matrixTranslate (&wTransform, 0.0f, 0.0f,
-				 MIN (ss->translate, ss->sTranslate));
-
-		mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-	    }
-	}
+	if (!(ss->zoomMask & zoomType))
+	    return (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK) ? FALSE : TRUE;
 
 	UNWRAP (ss, s, paintWindow);
-	status = (*s->paintWindow) (w, attrib, &wTransform, region, mask);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
     }
     else if (ss->switching)
@@ -1891,27 +1906,20 @@ switchPaintWindow (CompWindow		   *w,
 	}
 
 	if (ss->bringToFront && w->id == ss->zoomedWindow)
-	{
-	    CompTransform wTransform = *transform;
+	    zoomType = ZOOMED_WINDOW_MASK;
 
-	    matrixTranslate (&wTransform, 0.0f, 0.0f,
-			     MIN (ss->translate, ss->sTranslate));
+	if (!(ss->zoomMask & zoomType))
+	    return (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK) ? FALSE : TRUE;
 
-	    mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-
-	    UNWRAP (ss, s, paintWindow);
-	    status = (*s->paintWindow) (w, &sAttrib, &wTransform, region, mask);
-	    WRAP (ss, s, paintWindow, switchPaintWindow);
-	}
-	else
-	{
-	    UNWRAP (ss, s, paintWindow);
-	    status = (*s->paintWindow) (w, &sAttrib, transform, region, mask);
-	    WRAP (ss, s, paintWindow, switchPaintWindow);
-	}
+	UNWRAP (ss, s, paintWindow);
+	status = (*s->paintWindow) (w, &sAttrib, transform, region, mask);
+	WRAP (ss, s, paintWindow, switchPaintWindow);
     }
     else
     {
+	if (!(ss->zoomMask & zoomType))
+	    return (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK) ? FALSE : TRUE;
+
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, transform, region, mask);
 	WRAP (ss, s, paintWindow, switchPaintWindow);
@@ -2176,6 +2184,8 @@ switchInitScreen (CompPlugin *p,
     ss->zoom     = SWITCH_ZOOM_DEFAULT / 30.0f;
 
     ss->zooming  = (SWITCH_ZOOM_DEFAULT > 0.05f) ? TRUE : FALSE;
+
+    ss->zoomMask = ~0;
 
     ss->moreAdjust = 0;
 
