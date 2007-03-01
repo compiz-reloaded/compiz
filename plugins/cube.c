@@ -1274,6 +1274,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     ScreenPaintAttrib sa = *sAttrib;
     int		      hsize, xMove = 0;
     float	      size;
+    Bool	      clear;
 
     CUBE_SCREEN (s);
 
@@ -1305,7 +1306,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	cs->outputYOffset = 0.0f;
     }
 
-    if (!cs->cleared[output])
+    clear = cs->cleared[output];
+    if (!clear)
     {
 	if (cs->sky.name)
 	{
@@ -1396,7 +1398,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
     }
 
-    if (cs->grabIndex == 0 && hsize > 2 &&
+    if (!clear && cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
 	CompTransform sTransform = *transform;
