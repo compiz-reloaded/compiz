@@ -2113,6 +2113,24 @@ clearScreenOutput (CompScreen   *s,
 		   int	        output,
 		   unsigned int mask);
 
+void
+viewportForGeometry (CompScreen *s,
+		     int	x,
+		     int	y,
+		     int	width,
+		     int	height,
+		     int	borderWidth,
+		     int	*viewportX,
+		     int	*viewportY);
+
+int
+outputDeviceForGeometry (CompScreen *s,
+			 int	    x,
+			 int	    y,
+			 int	    width,
+			 int	    height,
+			 int	    borderWidth);
+
 Bool
 updateDefaultIcon (CompScreen *screen);
 

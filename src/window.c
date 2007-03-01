@@ -4414,54 +4414,17 @@ redirectWindow (CompWindow *w)
 	showOutputWindow (w->screen);
 }
 
-/* Returns the current viewport for a window. If the window spans more than
-   one viewport the most appropriate viewport is returned. How the most
-   appropriate viewport is computed can be made optional if necessary. It is
-   currently computed as the viewport where the center of the window is
-   located, except for when the window is visible in the current viewport as
-   the current viewport is then always returned. */
 void
 defaultViewportForWindow (CompWindow *w,
 			  int	     *vx,
 			  int	     *vy)
 {
-    CompScreen *s = w->screen;
-    int	       width = w->serverWidth + w->serverBorderWidth * 2;
-    int	       height = w->serverHeight + w->serverBorderWidth * 2;
-    int	       x;
-    int	       y;
-
-    if ((w->serverX < s->width  && w->serverX + width  > 0) &&
-	(w->serverY < s->height && w->serverY + height > 0))
-    {
-	if (vx)
-	    *vx = s->x;
-
-	if (vy)
-	    *vy = s->y;
-
-	return;
-    }
-
-    if (vx)
-    {
-	x = w->serverX + (width >> 1);
-	if (x < 0)
-	    *vx = s->x + ((x / s->width) - 1) % s->hsize;
-	else
-	    *vx = s->x + (x / s->width) % s->hsize;
-    }
-
-    if (vy)
-    {
-	y = w->serverY + (height >> 1);
-	if (y < 0)
-	    *vy = s->y + ((y / s->height) - 1) % s->vsize;
-	else
-	    *vy = s->y + (y / s->height) % s->vsize;
-    }
+    viewportForGeometry (w->screen,
+			 w->serverX, w->serverY,
+			 w->serverWidth, w->serverHeight,
+			 w->serverBorderWidth,
+			 vx, vy);
 }
-
 
 /* returns icon with dimensions as close as possible to width and height
    but never greater. */

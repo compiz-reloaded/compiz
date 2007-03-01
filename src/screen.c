@@ -3752,6 +3752,89 @@ clearScreenOutput (CompScreen	*s,
     }
 }
 
+/* Returns default viewport for some window geometry. If the window spans
+   more than one viewport the most appropriate viewport is returned. How the
+   most appropriate viewport is computed can be made optional if necessary. It
+   is currently computed as the viewport where the center of the window is
+   located, except for when the window is visible in the current viewport as
+   the current viewport is then always returned. */
+void
+viewportForGeometry (CompScreen *s,
+		     int	x,
+		     int	y,
+		     int	width,
+		     int	height,
+		     int	borderWidth,
+		     int	*viewportX,
+		     int	*viewportY)
+{
+    int	centerX;
+    int	centerY;
+
+    width  += borderWidth * 2;
+    height += borderWidth * 2;
+
+    if ((x < s->width  && x + width  > 0) &&
+	(y < s->height && y + height > 0))
+    {
+	if (viewportX)
+	    *viewportX = s->x;
+
+	if (viewportY)
+	    *viewportY = s->y;
+
+	return;
+    }
+
+    if (viewportX)
+    {
+	centerX = x + (width >> 1);
+	if (centerX < 0)
+	    *viewportX = s->x + ((centerX / s->width) - 1) % s->hsize;
+	else
+	    *viewportX = s->x + (centerX / s->width) % s->hsize;
+    }
+
+    if (viewportY)
+    {
+	centerY = y + (height >> 1);
+	if (centerY < 0)
+	    *viewportY = s->y + ((centerY / s->height) - 1) % s->vsize;
+	else
+	    *viewportY = s->y + (centerY / s->height) % s->vsize;
+    }
+}
+
+int
+outputDeviceForGeometry (CompScreen *s,
+			 int	    x,
+			 int	    y,
+			 int	    width,
+			 int	    height,
+			 int	    borderWidth)
+{
+    int output = s->currentOutputDev;
+    int x1, y1, x2, y2;
+
+    width  += borderWidth * 2;
+    height += borderWidth * 2;
+
+    x1 = s->outputDev[output].region.extents.x1;
+    y1 = s->outputDev[output].region.extents.y1;
+    x2 = s->outputDev[output].region.extents.x2;
+    y2 = s->outputDev[output].region.extents.y2;
+
+    if (x1 > x + width  ||
+	y1 > y + height ||
+	x2 < x		||
+	y2 < y)
+    {
+	output = outputDeviceForPoint (s, x + width  / 2, y + height / 2);
+    }
+
+    return output;
+}
+
 Bool
 updateDefaultIcon (CompScreen *screen)
 {
