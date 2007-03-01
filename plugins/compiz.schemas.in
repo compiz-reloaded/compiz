@@ -11858,6 +11858,32 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/opacity_matches</key>
+            <applyto>/apps/compiz/general/screen0/options/opacity_matches</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>string</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Opacity windows</short>
+                <long>Windows that should be translucent by default</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/general/screen0/options/opacity_values</key>
+            <applyto>/apps/compiz/general/screen0/options/opacity_values</applyto>
+            <owner>compiz</owner>
+            <type>list</type>
+            <list_type>int</list_type>
+            <default>[]</default>
+            <locale name="C">
+                <short>Opacity window values</short>
+                <long>Opacity values for windows that should be translucent by default</long>
+            </locale>
+        </schema>
+
         <!-- decoration options -->
 
         <schema>
@@ -13353,7 +13379,7 @@
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/map_effect</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>Shiver</default>
+            <default>None</default>
             <locale name="C">
                 <short>Map Effect</short>
                 <long>Map Window Effect (None, Shiver)</long>
@@ -13517,7 +13543,7 @@
             <applyto>/apps/compiz/plugins/wobbly/screen0/options/move_window_match</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>Toolbar | Menu | Utility | Dialog | ModalDialog | Normal</default>
+            <default>Toolbar | Menu | Utility | Dialog | Normal | Unknown</default>
             <locale name="C">
                 <short>Move Windows</short>
                 <long>Windows that should wobble when moved (match)</long>
@@ -17165,7 +17191,7 @@
             <applyto>/apps/compiz/plugins/scale/screen0/options/window_match</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal</default>
+            <default>Toolbar | Utility | Dialog | Normal | Unknown</default>
             <locale name="C">
                 <short>Scale Windows</short>
                 <long>Windows that should be scaled in scale mode (match)</long>
@@ -18858,6 +18884,18 @@
             </locale>
         </schema>
 
+        <schema>
+            <key>/schemas/apps/compiz/plugins/place/screen0/options/mode</key>
+            <applyto>/apps/compiz/plugins/place/screen0/options/mode</applyto>
+            <owner>compiz</owner>
+            <type>string</type>
+            <default>Cascade</default>
+            <locale name="C">
+                <short>Placement Mode</short>
+                <long>Algorithm to use for window placement (Cascade, Centered, Smart, Maximize, Random)</long>
+            </locale>
+        </schema>
+
         <!-- dbus options -->
 
         <schema>
@@ -19697,7 +19735,7 @@
             <applyto>/apps/compiz/plugins/switcher/screen0/options/window_match</applyto>
             <owner>compiz</owner>
             <type>string</type>
-            <default>Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal</default>
+            <default>Toolbar | Utility | Dialog | Normal | Unknown</default>
             <locale name="C">
                 <short>Switcher windows</short>
                 <long>Windows that should be shown in switcher (match)</long>
@@ -20209,6 +20247,18 @@
             <locale name="zh_TW">
                 <short>最小化</short>
                 <long>顯示最小化的視窗</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/compiz/plugins/switcher/screen0/options/auto_rotate</key>
+            <applyto>/apps/compiz/plugins/switcher/screen0/options/auto_rotate</applyto>
+            <owner>compiz</owner>
+            <type>bool</type>
+            <default>false</default>
+            <locale name="C">
+                <short>Auto Rotate</short>
+                <long>Rotate to the selected window while switching</long>
             </locale>
         </schema>
 
