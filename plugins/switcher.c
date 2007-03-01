@@ -1366,8 +1366,8 @@ adjustSwitchVelocity (CompScreen *s)
 	if (ss->selectedWindow == ss->zoomedWindow)
 	{
 	    if (fabs (dx) < 0.1f   && fabs (ss->mVelocity) < 0.2f   &&
-		fabs (dt) < 0.002f && fabs (ss->tVelocity) < 0.002f &&
-		fabs (ds) < 0.002f && fabs (ss->sVelocity) < 0.002f)
+		fabs (dt) < 0.001f && fabs (ss->tVelocity) < 0.001f &&
+		fabs (ds) < 0.001f && fabs (ss->sVelocity) < 0.001f)
 	    {
 		ss->mVelocity = ss->tVelocity = ss->sVelocity = 0.0f;
 		return 0;
