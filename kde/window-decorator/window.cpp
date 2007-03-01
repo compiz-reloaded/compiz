@@ -85,6 +85,8 @@ KWD::Window::Window (QWidget *parent,
     mPendingConfigure (0),
     mProcessKiller (0)
 {
+    memset (&mBorder, 0, sizeof (mBorder));
+
     if (mType == Normal || mType == Switcher)
     {
 	KWin::WindowInfo wInfo = KWin::windowInfo (mClientId, NET::WMState, 0);
