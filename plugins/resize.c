@@ -335,11 +335,11 @@ resizeUpdateWindowSize (CompDisplay *d)
     {
 	XWindowChanges xwc;
 
-	xwc.x = rd->w->attrib.x;
+	xwc.x = rd->w->serverX;
 	if (rd->mask & ResizeLeftMask)
 	    xwc.x -= width - rd->w->serverWidth;
 
-	xwc.y = rd->w->attrib.y;
+	xwc.y = rd->w->serverY;
 	if (rd->mask & ResizeUpMask)
 	    xwc.y -= height - rd->w->serverHeight;
 
