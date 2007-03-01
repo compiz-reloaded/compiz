@@ -84,7 +84,7 @@
 #define SWITCH_MINIMIZED_DEFAULT TRUE
 
 #define SWITCH_WINDOW_MATCH_DEFAULT \
-    "Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal"
+    "Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal | Unknown"
 
 #define SWITCH_AUTO_ROTATE_DEFAULT FALSE
 
