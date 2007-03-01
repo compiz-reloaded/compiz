@@ -139,7 +139,7 @@ static WobblyEffect effectType[] = {
 
 #define NUM_EFFECT (sizeof (effectType) / sizeof (effectType[0]))
 
-#define WOBBLY_MAP_DEFAULT   (effectName[1])
+#define WOBBLY_MAP_DEFAULT   (effectName[0])
 #define WOBBLY_FOCUS_DEFAULT (effectName[0])
 
 #define WOBBLY_MAP_WINDOW_MATCH_DEFAULT \
@@ -2930,7 +2930,7 @@ wobblyInitScreen (CompPlugin *p,
 
     ws->wobblyWindows = FALSE;
 
-    ws->mapEffect   = WobblyEffectShiver;
+    ws->mapEffect   = WobblyEffectNone;
     ws->focusEffect = WobblyEffectNone;
 
     ws->grabMask   = 0;
