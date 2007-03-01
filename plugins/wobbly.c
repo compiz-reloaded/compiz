@@ -149,7 +149,7 @@ static WobblyEffect effectType[] = {
 #define WOBBLY_FOCUS_WINDOW_MATCH_DEFAULT ""
 
 #define WOBBLY_MOVE_WINDOW_MATCH_DEFAULT \
-    "Toolbar | Menu | Utility | Dialog | ModalDialog | Normal"
+    "Toolbar | Menu | Utility | Dialog | Normal | Unknown"
 
 #define WOBBLY_GRAB_WINDOW_MATCH_DEFAULT ""
 
