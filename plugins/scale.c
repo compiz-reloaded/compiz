@@ -68,7 +68,7 @@
 #define SCALE_OPACITY_MAX     100
 
 #define SCALE_WINDOW_MATCH_DEFAULT \
-    "Toolbar | Utility | Dialog | ModalDialog | Fullscreen | Normal | Unknown"
+    "Toolbar | Utility | Dialog | Normal | Unknown"
 
 typedef enum {
     ScaleIconNone = 0,
