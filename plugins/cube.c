@@ -170,6 +170,8 @@ typedef struct _CubeScreen {
     int output[64];
     int outputMask[64];
 
+    Bool cleared[64];
+
     Bool fullscreenOutput;
 
     float outputXScale;
@@ -1166,6 +1168,8 @@ cubePreparePaintScreen (CompScreen *s,
 	}
     }
 
+    memset (cs->cleared, 0, sizeof (Bool) * s->nOutputDev);
+
     UNWRAP (cs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
@@ -1301,28 +1305,33 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	cs->outputYOffset = 0.0f;
     }
 
-    if (cs->sky.name)
+    if (!cs->cleared[output])
     {
-	screenLighting (s, FALSE);
-
-	glPushMatrix ();
-
-	if (cs->animateSkyDome && cs->grabIndex == 0)
+	if (cs->sky.name)
 	{
-	    glRotatef (sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
-	    glRotatef (sAttrib->vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
+	    screenLighting (s, FALSE);
+
+	    glPushMatrix ();
+
+	    if (cs->animateSkyDome && cs->grabIndex == 0)
+	    {
+		glRotatef (sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
+		glRotatef (sAttrib->vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
+	    }
+	    else
+	    {
+		glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
+	    }
+
+	    glCallList (cs->skyListId);
+	    glPopMatrix ();
 	}
 	else
 	{
-	    glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
+	    clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
 	}
 
-	glCallList (cs->skyListId);
-	glPopMatrix ();
-    }
-    else
-    {
-	clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
+	cs->cleared[output] = TRUE;
     }
 
     mask &= ~PAINT_SCREEN_CLEAR_MASK;
@@ -1926,6 +1935,8 @@ cubeInitScreen (CompPlugin *p,
     cs->unfoldVelocity = 0.0f;
 
     cs->fullscreenOutput = TRUE;
+
+    memset (cs->cleared, 0, sizeof (cs->cleared));
 
     cubeScreenInitOptions (cs, s->display->display);
 
