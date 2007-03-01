@@ -968,6 +968,26 @@ modelSetMiddleAnchor (Model *model,
 }
 
 static void
+modelSetTopAnchor (Model *model,
+		   int   x,
+		   int   y,
+		   int   width)
+{
+    float gx;
+
+    gx = ((GRID_WIDTH - 1) / 2 * width)  / (float) (GRID_WIDTH - 1);
+
+    if (model->anchorObject)
+	model->anchorObject->immobile = FALSE;
+
+    model->anchorObject = &model->objects[(GRID_WIDTH - 1) / 2];
+    model->anchorObject->position.x = x + gx;
+    model->anchorObject->position.y = y;
+
+    model->anchorObject->immobile = TRUE;
+}
+
+static void
 modelAddEdgeAnchors (Model *model,
 		     int   x,
 		     int   y,
@@ -2541,9 +2561,16 @@ wobblyWindowResizeNotify (CompWindow *w)
     }
     else if (ww->model)
     {
-	if (!ww->wobbly)
+	if (ww->wobbly)
+	{
+	    if (!(ww->state & MAXIMIZE_STATE))
+		modelSetTopAnchor (ww->model, WIN_X (w), WIN_Y (w), WIN_W (w));
+	}
+	else
+	{
 	    modelInitObjects (ww->model,
 			      WIN_X (w), WIN_Y (w), WIN_W (w), WIN_H (w));
+	}
 
 	modelInitSprings (ww->model,
 			  WIN_X (w), WIN_Y (w), WIN_W (w), WIN_H (w));
