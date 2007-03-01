@@ -791,6 +791,8 @@ minDamageWindowRect (CompWindow *w,
 	    CompMatch *match =
 		&ms->opt[MIN_SCREEN_OPTION_WINDOW_MATCH].value.match;
 
+	    mw->state = NormalState;
+
 	    if (!w->invisible	     &&
 		matchEval (match, w) &&
 		minGetWindowIconGeometry (w, &mw->icon))
