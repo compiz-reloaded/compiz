@@ -1301,7 +1301,7 @@ getDesktopHints (CompScreen *s)
 				 XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
 
-    if (result == Success && n && propData)
+    if (result == Success && n && propData && useDesktopHints)
     {
 	memcpy (data, propData, sizeof (unsigned long));
 	XFree (propData);
@@ -1336,7 +1336,7 @@ getDesktopHints (CompScreen *s)
 				 XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
 
-    if (result == Success && n && propData)
+    if (result == Success && n && propData && useDesktopHints)
     {
 	memcpy (data, propData, sizeof (unsigned long));
 	XFree (propData);

@@ -81,6 +81,7 @@ Bool replaceCurrentWm = FALSE;
 Bool indirectRendering = FALSE;
 Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
+Bool useDesktopHints = TRUE;
 
 #ifdef USE_COW
 Bool useCow = TRUE;
@@ -99,14 +100,15 @@ usage (void)
 	    "[--replace]\n       "
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
-	    "[--no-detection] "
-	    "[--version]\n       "
+	    "[--no-detection]\n       "
+	    "[--ignore-desktop-hints] "
+	    "[--version] "
 
 #ifdef USE_COW
 	    "[--use-root-window] "
 #endif
 
-	    "[--help] "
+	    "[--help]\n       "
 	    "[PLUGIN]...\n",
 	    programName);
 }
@@ -195,6 +197,10 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--loose-binding"))
 	{
 	    strictBinding = FALSE;
+	}
+	else if (!strcmp (argv[i], "--ignore-desktop-hints"))
+	{
+	    useDesktopHints = FALSE;
 	}
 
 #ifdef USE_COW

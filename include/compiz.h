@@ -216,6 +216,7 @@ extern Bool       indirectRendering;
 extern Bool       strictBinding;
 extern Bool       useCow;
 extern Bool       noDetection;
+extern Bool	  useDesktopHints;
 
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
