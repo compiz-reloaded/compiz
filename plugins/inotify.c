@@ -114,6 +114,9 @@ inotifyMask (CompFileWatch *fileWatch)
     if (fileWatch->mask & NOTIFY_MOVE_MASK)
 	mask |= IN_MOVE;
 
+    if (fileWatch->mask & NOTIFY_MODIFY_MASK)
+	mask |= IN_MODIFY;
+
     return mask;
 }
 

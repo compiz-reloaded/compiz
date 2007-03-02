@@ -621,6 +621,7 @@ typedef Bool (*ImageToFileProc) (CompDisplay *display,
 #define NOTIFY_CREATE_MASK (1 << 0)
 #define NOTIFY_DELETE_MASK (1 << 1)
 #define NOTIFY_MOVE_MASK   (1 << 2)
+#define NOTIFY_MODIFY_MASK (1 << 3)
 
 typedef void (*FileWatchCallBackProc) (const char *name,
 				       void	  *closure);
