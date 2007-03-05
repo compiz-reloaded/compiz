@@ -131,7 +131,7 @@ moveInitiate (CompDisplay     *d,
     xid = getIntOptionNamed (option, nOption, "window", 0);
 
     w = findWindowAtDisplay (d, xid);
-    if (w)
+    if (w && (w->actions & CompWindowActionMoveMask))
     {
 	XRectangle   workArea;
 	unsigned int mods;

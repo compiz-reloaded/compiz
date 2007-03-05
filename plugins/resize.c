@@ -126,7 +126,7 @@ resizeInitiate (CompDisplay     *d,
     xid = getIntOptionNamed (option, nOption, "window", 0);
 
     w = findWindowAtDisplay (d, xid);
-    if (w)
+    if (w && (w->actions & CompWindowActionResizeMask))
     {
 	unsigned int mods;
 	unsigned int mask;
