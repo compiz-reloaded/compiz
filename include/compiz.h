@@ -2209,6 +2209,7 @@ struct _CompWindow {
     unsigned int      wmType;
     unsigned int      type;
     unsigned int      state;
+    unsigned int      lastState;
     unsigned int      actions;
     unsigned int      protocols;
     unsigned int      mwmDecor;

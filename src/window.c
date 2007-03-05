@@ -1964,6 +1964,7 @@ addWindow (CompScreen *screen,
     w->alpha     = (w->attrib.depth == 32);
     w->wmType    = 0;
     w->state     = 0;
+    w->lastState = 0;
     w->actions   = 0;
     w->protocols = 0;
     w->type      = CompWindowTypeUnknownMask;
@@ -2706,6 +2707,7 @@ windowUngrabNotify (CompWindow *w)
 void
 windowStateChangeNotify (CompWindow *w)
 {
+    w->lastState = w->state;
 }
 
 static Bool
