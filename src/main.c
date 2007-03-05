@@ -103,7 +103,7 @@ usage (void)
 	    "[--sm-client-id ID] "
 	    "[--no-detection]\n       "
 	    "[--ignore-desktop-hints] "
- 	    "[--only-current-screen]"
+	    "[--only-current-screen]"
 
 #ifdef USE_COW
 	    " [--use-root-window]\n       "
