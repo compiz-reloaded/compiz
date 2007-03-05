@@ -1203,7 +1203,7 @@ updateWindowOutputExtents (CompWindow *w)
     {
 	w->output = output;
 
-	(*w->screen->windowResizeNotify) (w);
+	(*w->screen->windowResizeNotify) (w, 0, 0, 0, 0);
     }
 }
 
@@ -2353,6 +2353,7 @@ resizeWindow (CompWindow *w,
 	w->attrib.border_width != borderWidth)
     {
 	unsigned int pw, ph, actualWidth, actualHeight, ui;
+	int	     dx, dy, dwidth, dheight;
 	Pixmap	     pixmap = None;
 	Window	     root;
 	Status	     result;
@@ -2383,6 +2384,11 @@ resizeWindow (CompWindow *w,
 
 	addWindowDamage (w);
 
+	dx      = x - w->attrib.x;
+	dy      = y - w->attrib.y;
+	dwidth  = width - w->attrib.width;
+	dheight = height - w->attrib.height;
+
 	w->attrib.x	       = x;
 	w->attrib.y	       = y;
 	w->attrib.width	       = width;
@@ -2399,7 +2405,7 @@ resizeWindow (CompWindow *w,
 	if (w->mapNum)
 	    updateWindowRegion (w);
 
-	(*w->screen->windowResizeNotify) (w);
+	(*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
 
 	addWindowDamage (w);
 
@@ -2667,7 +2673,11 @@ focusWindow (CompWindow *w)
 }
 
 void
-windowResizeNotify (CompWindow *w)
+windowResizeNotify (CompWindow *w,
+		    int        dx,
+		    int	       dy,
+		    int	       dwidth,
+		    int        dheight)
 {
 }
 

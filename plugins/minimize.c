@@ -254,7 +254,7 @@ minSetShade (CompWindow *w,
     w->matrix.x0 -= (w->attrib.x * w->matrix.xx);
     w->matrix.y0 -= ((w->attrib.y - (h - shade)) * w->matrix.yy);
 
-    (*w->screen->windowResizeNotify) (w);
+    (*w->screen->windowResizeNotify) (w, 0, 0, 0, 0);
 }
 
 static Bool

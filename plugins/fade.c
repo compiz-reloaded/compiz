@@ -641,7 +641,11 @@ fadeFocusWindow (CompWindow *w)
 }
 
 static void
-fadeWindowResizeNotify (CompWindow *w)
+fadeWindowResizeNotify (CompWindow *w,
+			int	   dx,
+			int	   dy,
+			int	   dwidth,
+			int	   dheight)
 {
     FADE_SCREEN (w->screen);
 
@@ -649,7 +653,7 @@ fadeWindowResizeNotify (CompWindow *w)
 	fadeWindowStop (w);
 
     UNWRAP (fs, w->screen, windowResizeNotify);
-    (*w->screen->windowResizeNotify) (w);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
     WRAP (fs, w->screen, windowResizeNotify, fadeWindowResizeNotify);
 }
 

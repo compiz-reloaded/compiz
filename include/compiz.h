@@ -1578,7 +1578,11 @@ typedef void (*GetOutputExtentsForWindowProc) (CompWindow	 *w,
 
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
-typedef void (*WindowResizeNotifyProc) (CompWindow *window);
+typedef void (*WindowResizeNotifyProc) (CompWindow *window,
+					int        dx,
+					int        dy,
+					int        dwidth,
+					int        dheight);
 
 typedef void (*WindowMoveNotifyProc) (CompWindow *window,
 				      int	 dx,
@@ -2524,7 +2528,11 @@ Bool
 focusWindow (CompWindow *w);
 
 void
-windowResizeNotify (CompWindow *w);
+windowResizeNotify (CompWindow *w,
+		    int	       dx,
+		    int	       dy,
+		    int	       dwidth,
+		    int	       dheight);
 
 void
 windowMoveNotify (CompWindow *w,

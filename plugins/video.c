@@ -942,7 +942,11 @@ videoWindowMoveNotify (CompWindow *w,
 }
 
 static void
-videoWindowResizeNotify (CompWindow *w)
+videoWindowResizeNotify (CompWindow *w,
+			 int        dx,
+			 int        dy,
+			 int        dwidth,
+			 int        dheight)
 {
     VIDEO_SCREEN (w->screen);
     VIDEO_WINDOW (w);
@@ -951,7 +955,7 @@ videoWindowResizeNotify (CompWindow *w)
 	updateWindowVideoContext (w, vw->source);
 
     UNWRAP (vs, w->screen, windowResizeNotify);
-    (*w->screen->windowResizeNotify) (w);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
     WRAP (vs, w->screen, windowResizeNotify, videoWindowResizeNotify);
 }
 

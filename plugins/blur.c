@@ -2176,7 +2176,11 @@ blurHandleEvent (CompDisplay *d,
 }
 
 static void
-blurWindowResizeNotify (CompWindow *w)
+blurWindowResizeNotify (CompWindow *w,
+			int	   dx,
+			int	   dy,
+			int	   dwidth,
+			int	   dheight)
 {
     BLUR_SCREEN (w->screen);
 
@@ -2190,7 +2194,7 @@ blurWindowResizeNotify (CompWindow *w)
     }
 
     UNWRAP (bs, w->screen, windowResizeNotify);
-    (*w->screen->windowResizeNotify) (w);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
     WRAP (bs, w->screen, windowResizeNotify, blurWindowResizeNotify);
 }
 

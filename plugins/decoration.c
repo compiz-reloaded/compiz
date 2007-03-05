@@ -1181,7 +1181,11 @@ decorWindowMoveNotify (CompWindow *w,
 }
 
 static void
-decorWindowResizeNotify (CompWindow *w)
+decorWindowResizeNotify (CompWindow *w,
+			 int	    dx,
+			 int	    dy,
+			 int	    dwidth,
+			 int	    dheight)
 {
     DECOR_SCREEN (w->screen);
 
@@ -1189,7 +1193,7 @@ decorWindowResizeNotify (CompWindow *w)
 	updateWindowDecorationScale (w);
 
     UNWRAP (ds, w->screen, windowResizeNotify);
-    (*w->screen->windowResizeNotify) (w);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
     WRAP (ds, w->screen, windowResizeNotify, decorWindowResizeNotify);
 }
 

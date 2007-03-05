@@ -2514,7 +2514,11 @@ wobblyDamageWindowRect (CompWindow *w,
 }
 
 static void
-wobblyWindowResizeNotify (CompWindow *w)
+wobblyWindowResizeNotify (CompWindow *w,
+			  int	     dx,
+			  int        dy,
+			  int	     dwidth,
+			  int	     dheight)
 {
     WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
@@ -2594,7 +2598,7 @@ wobblyWindowResizeNotify (CompWindow *w)
     }
 
     UNWRAP (ws, w->screen, windowResizeNotify);
-    (*w->screen->windowResizeNotify) (w);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
     WRAP (ws, w->screen, windowResizeNotify, wobblyWindowResizeNotify);
 }
 
