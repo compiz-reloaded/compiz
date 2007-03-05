@@ -1489,8 +1489,8 @@ placeDamageWindowRect (CompWindow *w,
 
 	if (placeMatchViewport (w, &viewportX, &viewportY))
 	{
-	    viewportX = MIN (MAX (viewportX, w->screen->hsize), 0);
-	    viewportY = MIN (MAX (viewportY, w->screen->vsize), 0);
+	    viewportX = MAX (MIN (viewportX, w->screen->hsize), 0);
+	    viewportY = MAX (MIN (viewportY, w->screen->vsize), 0);
 
 	    newX += (viewportX - w->screen->x) * w->screen->width;
 	    newY += (viewportY - w->screen->y) * w->screen->height;
