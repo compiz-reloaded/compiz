@@ -563,6 +563,19 @@ setWindowState (CompDisplay  *display,
 		     (unsigned char *) data, i);
 }
 
+void
+changeWindowState (CompWindow   *w,
+		   unsigned int newState)
+{
+    CompDisplay *d = w->screen->display;
+
+    w->state = newState;
+
+    setWindowState (d, w->state, w->id);
+
+    (*d->matchPropertyChanged) (d, w);
+}
+
 static void
 setWindowActions (CompDisplay  *display,
 		  unsigned int actions,

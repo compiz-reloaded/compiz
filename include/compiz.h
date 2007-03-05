@@ -2324,6 +2324,10 @@ setWindowState (CompDisplay  *display,
 		Window       id);
 
 void
+changeWindowState (CompWindow   *w,
+		   unsigned int newState);
+
+void
 recalcWindowActions (CompWindow *w);
 
 unsigned int
