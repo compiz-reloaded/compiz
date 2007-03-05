@@ -1294,7 +1294,7 @@ handleEvent (CompDisplay *d,
 
 		    (*w->screen->windowStateChangeNotify) (w);
 
-		    setWindowState (d, w->state, w->id);
+		    changeWindowState (w, w->state);
 		    updateClientListForScreen (w->screen);
 		}
 
@@ -1655,7 +1655,7 @@ handleEvent (CompDisplay *d,
 
 		    updateWindowAttributes (w, FALSE);
 
-		    setWindowState (d, w->state, w->id);
+		    changeWindowState (w, w->state);
 		}
 	    }
 	}
@@ -1943,10 +1943,10 @@ handleEvent (CompDisplay *d,
 				     (unsigned char *) &w->id, 1);
 		}
 
-		w->state &= ~CompWindowStateDemandsAttentionMask;
+		state &= ~CompWindowStateDemandsAttentionMask;
 
 		if (w->state != state)
-		    setWindowState (d, w->state, w->id);
+		    changeWindowState (w, state);
 	    }
 	}
 	break;

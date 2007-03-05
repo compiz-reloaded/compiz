@@ -4121,7 +4121,7 @@ hideWindow (CompWindow *w)
 
     (*w->screen->windowStateChangeNotify) (w);
 
-    setWindowState (w->screen->display, w->state, w->id);
+    changeWindowState (w, w->state);
 }
 
 void
@@ -4143,7 +4143,7 @@ showWindow (CompWindow *w)
 
 		(*w->screen->windowStateChangeNotify) (w);
 
-		setWindowState (w->screen->display, w->state, w->id);
+		changeWindowState (w, w->state);
 	    }
 	}
 
@@ -4181,7 +4181,7 @@ showWindow (CompWindow *w)
 
     (*w->screen->windowStateChangeNotify) (w);
 
-    setWindowState (w->screen->display, w->state, w->id);
+    changeWindowState (w, w->state);
 }
 
 static void
@@ -4268,7 +4268,7 @@ maximizeWindow (CompWindow *w,
 
     updateWindowAttributes (w, FALSE);
 
-    setWindowState (w->screen->display, w->state, w->id);
+    changeWindowState (w, w->state);
 }
 
 Bool
@@ -4391,10 +4391,10 @@ focusWindowOnMap (CompWindow *w)
 	    unsigned int state = w->state;
 
 	    /* add demands attention state if focus was prevented */
-	    w->state |= CompWindowStateDemandsAttentionMask;
+	    state |= CompWindowStateDemandsAttentionMask;
 
 	    if (w->state != state)
-		setWindowState (d, w->state, w->id);
+		changeWindowState (w, state);
 
 	    return FALSE;
 	}
