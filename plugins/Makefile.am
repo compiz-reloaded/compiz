@@ -57,6 +57,11 @@ libblur_la_SOURCES = blur.c
 libregex_la_LDFLAGS = -module -avoid-version -no-undefined
 libregex_la_SOURCES = regex.c
 
+libvideo_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
+libvideo_la_LDFLAGS = -module -avoid-version -no-undefined
+libvideo_la_LIBADD = $(top_builddir)/libdecoration/libdecoration.la
+libvideo_la_SOURCES = video.c
+
 if USE_LIBRSVG
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
 libsvg_la_LIBADD = @LIBRSVG_LIBS@
@@ -169,6 +174,7 @@ module_LTLIBRARIES =		\
 	libpng.la		\
 	libblur.la		\
 	libregex.la		\
+	libvideo.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libgconf_dump_module) \
