@@ -2581,6 +2581,14 @@ blurGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+CompPluginDep blurDeps[] = {
+    { CompPluginRuleBefore, "video" }
+};
+
+CompPluginFeature blurFeatures[] = {
+    { "blur" }
+};
+
 static CompPluginVTable blurVTable = {
     "blur",
     N_("Blur Windows"),
@@ -2598,10 +2606,10 @@ static CompPluginVTable blurVTable = {
     blurSetDisplayOption,
     blurGetScreenOptions,
     blurSetScreenOption,
-    0, /* Deps */
-    0, /* nDeps */
-    0, /* Features */
-    0  /* nFeatures */
+    blurDeps,
+    sizeof (blurDeps) / sizeof (blurDeps[0]),
+    blurFeatures,
+    sizeof (blurFeatures) / sizeof (blurFeatures[0])
 };
 
 CompPluginVTable *

@@ -1850,7 +1850,8 @@ waterGetVersion (CompPlugin *plugin,
 }
 
 CompPluginDep waterDeps[] = {
-    { CompPluginRuleBefore, "blur" }
+    { CompPluginRuleBefore, "blur" },
+    { CompPluginRuleBefore, "video" }
 };
 
 static CompPluginVTable waterVTable = {
