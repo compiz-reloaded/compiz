@@ -573,6 +573,8 @@ changeWindowState (CompWindow   *w,
 
     setWindowState (d, w->state, w->id);
 
+    (*w->screen->windowStateChangeNotify) (w);
+
     (*d->matchPropertyChanged) (d, w);
 }
 
@@ -4119,8 +4121,6 @@ hideWindow (CompWindow *w)
 
     XUnmapWindow (w->screen->display->display, w->id);
 
-    (*w->screen->windowStateChangeNotify) (w);
-
     changeWindowState (w, w->state);
 }
 
@@ -4140,8 +4140,6 @@ showWindow (CompWindow *w)
 	    if (w->state & CompWindowStateHiddenMask)
 	    {
 		w->state &= ~CompWindowStateHiddenMask;
-
-		(*w->screen->windowStateChangeNotify) (w);
 
 		changeWindowState (w, w->state);
 	    }
@@ -4178,8 +4176,6 @@ showWindow (CompWindow *w)
     w->pendingMaps++;
 
     XMapWindow (w->screen->display->display, w->id);
-
-    (*w->screen->windowStateChangeNotify) (w);
 
     changeWindowState (w, w->state);
 }
@@ -4264,11 +4260,9 @@ maximizeWindow (CompWindow *w,
     recalcWindowType (w);
     recalcWindowActions (w);
 
-    (*w->screen->windowStateChangeNotify) (w);
+    changeWindowState (w, w->state);
 
     updateWindowAttributes (w, FALSE);
-
-    changeWindowState (w, w->state);
 }
 
 Bool
