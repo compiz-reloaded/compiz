@@ -2535,6 +2535,7 @@ addDisplay (char *name,
     int		compositeMajor, compositeMinor;
     int		fixesMinor;
     int		xkbOpcode;
+    int		firstScreen, lastScreen;
 
     d = &compDisplay;
 
@@ -2871,7 +2872,18 @@ addDisplay (char *name,
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));
     d->returnKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Return"));
 
-    for (i = 0; i < ScreenCount (dpy); i++)
+    if (onlyCurrentScreen)
+    {
+	firstScreen = DefaultScreen (dpy);
+	lastScreen  = DefaultScreen (dpy);
+    }
+    else
+    {
+	firstScreen = 0;
+	lastScreen  = ScreenCount (dpy) - 1;
+    }
+
+    for (i = firstScreen; i <= lastScreen; i++)
     {
 	Window		     newWmSnOwner = None, newCmSnOwner = None;
 	Atom		     wmSnAtom = 0, cmSnAtom = 0;

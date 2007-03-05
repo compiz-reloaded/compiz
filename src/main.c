@@ -82,6 +82,7 @@ Bool indirectRendering = FALSE;
 Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
 Bool useDesktopHints = TRUE;
+Bool onlyCurrentScreen = FALSE;
 
 #ifdef USE_COW
 Bool useCow = TRUE;
@@ -102,13 +103,16 @@ usage (void)
 	    "[--sm-client-id ID] "
 	    "[--no-detection]\n       "
 	    "[--ignore-desktop-hints] "
-	    "[--version] "
+ 	    "[--only-current-screen]"
 
 #ifdef USE_COW
-	    "[--use-root-window] "
+	    " [--use-root-window]\n       "
+#else
+	    "\n       "
 #endif
 
-	    "[--help]\n       "
+	    "[--version] "
+	    "[--help] "
 	    "[PLUGIN]...\n",
 	    programName);
 }
@@ -201,6 +205,10 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--ignore-desktop-hints"))
 	{
 	    useDesktopHints = FALSE;
+	}
+	else if (!strcmp (argv[i], "--only-current-screen"))
+	{
+	    onlyCurrentScreen = TRUE;
 	}
 
 #ifdef USE_COW

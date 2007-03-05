@@ -217,6 +217,7 @@ extern Bool       strictBinding;
 extern Bool       useCow;
 extern Bool       noDetection;
 extern Bool	  useDesktopHints;
+extern Bool       onlyCurrentScreen;
 
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
