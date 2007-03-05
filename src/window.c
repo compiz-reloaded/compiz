@@ -4371,8 +4371,7 @@ focusWindowOnMap (CompWindow *w)
     match = &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match;
 
     /* focus prevention */
-    if (s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION].value.b &&
-	matchEval (match, w))
+    if (matchEval (match, w))
     {
 	if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
 	{

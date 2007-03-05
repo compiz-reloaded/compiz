@@ -75,8 +75,6 @@
 
 #define OUTPUTS_DEFAULT "640x480+0+0"
 
-#define FOCUS_PREVENTION_DEFAULT TRUE
-
 #define FOCUS_PREVENTION_MATCH_DEFAULT "any"
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
@@ -464,7 +462,6 @@ setScreenOption (CompScreen      *screen,
     case COMP_SCREEN_OPTION_LIGHTING:
     case COMP_SCREEN_OPTION_UNREDIRECT_FS:
     case COMP_SCREEN_OPTION_SYNC_TO_VBLANK:
-    case COMP_SCREEN_OPTION_FOCUS_PREVENTION:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -715,13 +712,6 @@ compScreenInitOptions (CompScreen *screen)
     o->value.list.value->s = strdup (OUTPUTS_DEFAULT);
     o->rest.s.string       = NULL;
     o->rest.s.nString      = 0;
-
-    o = &screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION];
-    o->name      = "focus_prevention";
-    o->shortDesc = N_("Focus Prevention");
-    o->longDesc  = N_("Enable focus prevention");
-    o->type      = CompOptionTypeBool;
-    o->value.b   = FOCUS_PREVENTION_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH];
     o->name      = "focus_prevention_match";
