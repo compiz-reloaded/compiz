@@ -2234,6 +2234,7 @@ struct _CompWindow {
     Bool inShowDesktopMode;
     Bool shaded;
     Bool hidden;
+    Bool grabbed;
 
     unsigned int desktop;
 

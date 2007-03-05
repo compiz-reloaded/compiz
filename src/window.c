@@ -1797,6 +1797,7 @@ addWindow (CompScreen *screen,
     w->inShowDesktopMode = FALSE;
     w->shaded		 = FALSE;
     w->hidden		 = FALSE;
+    w->grabbed		 = FALSE;
 
     w->desktop = 0xffffffff;
 
@@ -2697,11 +2698,13 @@ windowGrabNotify (CompWindow   *w,
 		  unsigned int state,
 		  unsigned int mask)
 {
+    w->grabbed = TRUE;
 }
 
 void
 windowUngrabNotify (CompWindow *w)
 {
+    w->grabbed = FALSE;
 }
 
 void
