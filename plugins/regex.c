@@ -39,6 +39,7 @@ typedef struct _RegexDisplay {
     int		     screenPrivateIndex;
     HandleEventProc  handleEvent;
     MatchInitExpProc matchInitExp;
+    Atom	     roleAtom;
 } RegexDisplay;
 
 typedef struct _RegexScreen {
@@ -47,6 +48,7 @@ typedef struct _RegexScreen {
 
 typedef struct _RegexWindow {
     char *title;
+    char *role;
 } RegexWindow;
 
 #define GET_REGEX_DISPLAY(d)				      \
@@ -100,6 +102,26 @@ regexMatchExpEvalTitle (CompDisplay *d,
 }
 
 static Bool
+regexMatchExpEvalRole (CompDisplay *d,
+		       CompWindow  *w,
+		       CompPrivate private)
+{
+    regex_t *preg = (regex_t *) private.ptr;
+    int	    status;
+
+    REGEX_WINDOW (w);
+
+    if (!rw->role)
+	return FALSE;
+
+    status = regexec (preg, rw->role, 0, NULL, 0);
+    if (status)
+	return FALSE;
+
+    return TRUE;
+}
+
+static Bool
 regexMatchExpEvalClass (CompDisplay *d,
 			CompWindow  *w,
 			CompPrivate private)
@@ -146,6 +168,7 @@ regexMatchInitExp (CompDisplay  *d,
 	CompMatchExpEvalProc eval;
     } prefix[] = {
 	{ "title=", 6, regexMatchExpEvalTitle },
+	{ "role=",  5, regexMatchExpEvalRole  },
 	{ "class=", 6, regexMatchExpEvalClass },
 	{ "name=",  5, regexMatchExpEvalName  }
     };
@@ -259,6 +282,21 @@ regexHandleEvent (CompDisplay *d,
 		(*d->matchPropertyChanged) (d, w);
 	    }
 	}
+	if (event->xproperty.atom == rd->roleAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xproperty.window);
+	    if (w)
+	    {
+		REGEX_WINDOW (w);
+
+		if (rw->role)
+		    free (rw->role);
+
+		rw->role = regexGetStringPropertyLatin1 (w, rd->roleAtom);
+
+		(*d->matchPropertyChanged) (d, w);
+	    }
+	}
 	else if (event->xproperty.atom == XA_WM_CLASS)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
@@ -294,6 +332,8 @@ regexInitDisplay (CompPlugin  *p,
 	free (rd);
 	return FALSE;
     }
+
+    rd->roleAtom = XInternAtom (d->display, "WM_WINDOW_ROLE", 0);
 
     WRAP (rd, d, handleEvent, regexHandleEvent);
     WRAP (rd, d, matchInitExp, regexMatchInitExp);
@@ -364,6 +404,7 @@ regexInitWindow (CompPlugin *p,
 {
     RegexWindow *rw;
 
+    REGEX_DISPLAY (w->screen->display);
     REGEX_SCREEN (w->screen);
 
     rw = malloc (sizeof (RegexWindow));
@@ -371,6 +412,7 @@ regexInitWindow (CompPlugin *p,
 	return FALSE;
 
     rw->title = regexGetStringPropertyLatin1 (w, XA_WM_NAME);
+    rw->role  = regexGetStringPropertyLatin1 (w, rd->roleAtom);
 
     w->privates[rs->windowPrivateIndex].ptr = rw;
 
@@ -385,6 +427,9 @@ regexFiniWindow (CompPlugin *p,
 
     if (rw->title)
 	free (rw->title);
+
+    if (rw->role)
+	free (rw->role);
 
     free (rw);
 }
