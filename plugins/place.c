@@ -61,9 +61,15 @@ typedef struct _PlaceDisplay {
     HandleEventProc handleEvent;
 } PlaceDisplay;
 
-#define PLACE_SCREEN_OPTION_WORKAROUND 0
-#define PLACE_SCREEN_OPTION_MODE       1
-#define PLACE_SCREEN_OPTION_NUM        2
+#define PLACE_SCREEN_OPTION_WORKAROUND        0
+#define PLACE_SCREEN_OPTION_MODE              1
+#define PLACE_SCREEN_OPTION_POSITION_MATCHES  2
+#define PLACE_SCREEN_OPTION_POSITION_X_VALUES 3
+#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES 4
+#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES  5
+#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES 6
+#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES 7
+#define PLACE_SCREEN_OPTION_NUM               8
 
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
@@ -86,6 +92,66 @@ typedef struct _PlaceScreen {
     PlaceScreen *ps = GET_PLACE_SCREEN (s, GET_PLACE_DISPLAY (s->display))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
+
+static Bool
+placeMatchXYValue (CompWindow *w,
+		   CompOption *matches,
+		   CompOption *xValues,
+		   CompOption *yValues,
+		   int	      *x,
+		   int	      *y)
+{
+    int i, min;
+
+    if (w->type & CompWindowTypeDesktopMask)
+	return FALSE;
+
+    min = MIN (matches->value.list.nValue, xValues->value.list.nValue);
+    min = MIN (min, yValues->value.list.nValue);
+
+    for (i = 0; i < min; i++)
+    {
+	if (matchEval (&matches->value.list.value[i].match, w))
+	{
+	    *x = xValues->value.list.value[i].i;
+	    *y = yValues->value.list.value[i].i;
+
+	    return TRUE;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
+placeMatchPosition (CompWindow *w,
+		    int	       *x,
+		    int	       *y)
+{
+    PLACE_SCREEN (w->screen);
+
+    return placeMatchXYValue (w,
+			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_MATCHES],
+			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_X_VALUES],
+			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_Y_VALUES],
+			      x,
+			      y);
+}
+
+static Bool
+placeMatchViewport (CompWindow *w,
+		    int	       *x,
+		    int	       *y)
+{
+    PLACE_SCREEN (w->screen);
+
+    return placeMatchXYValue (w,
+			      &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_MATCHES],
+			      &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES],
+			      &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES],
+			      x,
+			      y);
+}
 
 static void
 placeUpdateMode (CompScreen *screen)
@@ -142,6 +208,25 @@ placeSetScreenOption (CompScreen      *screen,
 	    placeUpdateMode (screen);
 	    return TRUE;
 	}
+	break;
+    case PLACE_SCREEN_OPTION_POSITION_MATCHES:
+    case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
+	if (compSetOptionList (o, value))
+	{
+	    int i;
+
+	    for (i = 0; i < o->value.list.nValue; i++)
+		matchUpdate (screen->display, &o->value.list.value[i].match);
+
+	    return TRUE;
+	}
+	break;
+    case PLACE_SCREEN_OPTION_POSITION_X_VALUES:
+    case PLACE_SCREEN_OPTION_POSITION_Y_VALUES:
+    case PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES:
+    case PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES:
+	if (compSetOptionList (o, value))
+	    return TRUE;
     default:
 	break;
     }
@@ -169,6 +254,73 @@ placeScreenInitOptions (PlaceScreen *ps)
     o->value.s	      = strdup (PLACE_MODE_DEFAULT);
     o->rest.s.string  = modeString;
     o->rest.s.nString = nModeString;
+
+    o = &ps->opt[PLACE_SCREEN_OPTION_POSITION_MATCHES];
+    o->name	         = "position_matches";
+    o->shortDesc         = N_("Positioned windows");
+    o->longDesc	         = N_("Windows that should be positioned by default");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeMatch;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.s.string     = NULL;
+    o->rest.s.nString    = 0;
+
+    o = &ps->opt[PLACE_SCREEN_OPTION_POSITION_X_VALUES];
+    o->name	         = "position_x_values";
+    o->shortDesc         = N_("X Positions");
+    o->longDesc	         = N_("X position values");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeInt;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.i.min	 = MINSHORT;
+    o->rest.i.max	 = MAXSHORT;
+
+    o = &ps->opt[PLACE_SCREEN_OPTION_POSITION_Y_VALUES];
+    o->name	         = "position_y_values";
+    o->shortDesc         = N_("Y Positions");
+    o->longDesc	         = N_("Y position values");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeInt;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.i.min	 = MINSHORT;
+    o->rest.i.max	 = MAXSHORT;
+
+    o = &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_MATCHES];
+    o->name	         = "viewport_matches";
+    o->shortDesc         = N_("Viewport positioned windows");
+    o->longDesc	         = N_("Windows that should positioned in specific "
+			      "viewports by default");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeMatch;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.s.string     = NULL;
+    o->rest.s.nString    = 0;
+
+    o = &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES];
+    o->name	         = "viewport_x_values";
+    o->shortDesc         = N_("X Viewport Positions");
+    o->longDesc	         = N_("Horizontal viewport positions");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeInt;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.i.min	 = 0;
+    o->rest.i.max	 = 32;
+
+    o = &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES];
+    o->name	         = "viewport_y_values";
+    o->shortDesc         = N_("Y Viewport Positions");
+    o->longDesc	         = N_("Vertical viewport positions");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeInt;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.i.min	 = 0;
+    o->rest.i.max	 = 32;
 }
 
 typedef enum {
@@ -1198,28 +1350,31 @@ placeWindow (CompWindow *window,
     x = x0;
     y = y0;
 
-    switch (ps->placeMode) {
-    case PlaceModeCascade:
-	if (find_first_fit (window, windows, x, y, &x, &y))
-	    goto done_check_denied_focus;
+    if (!placeMatchPosition (window, &x, &y))
+    {
+	switch (ps->placeMode) {
+	case PlaceModeCascade:
+	    if (find_first_fit (window, windows, x, y, &x, &y))
+		goto done_check_denied_focus;
 
-	/* if the window wasn't placed at the origin of screen,
-	 * cascade it onto the current screen
-	 */
-	find_next_cascade (window, windows, x, y, &x, &y);
-	break;
-    case PlaceModeCentered:
-	placeCentered (window, &work_area, &x, &y);
-	break;
-    case PlaceModeRandom:
-	placeRandom (window, &work_area, &x, &y);
-	break;
-    case PlaceModeSmart:
-	placeSmart (window, &work_area, &x, &y);
-	break;
-    case PlaceModeMaximize:
-	maximizeWindow (window, MAXIMIZE_STATE);
-	break;
+	    /* if the window wasn't placed at the origin of screen,
+	     * cascade it onto the current screen
+	     */
+	    find_next_cascade (window, windows, x, y, &x, &y);
+	    break;
+	case PlaceModeCentered:
+	    placeCentered (window, &work_area, &x, &y);
+	    break;
+	case PlaceModeRandom:
+	    placeRandom (window, &work_area, &x, &y);
+	    break;
+	case PlaceModeSmart:
+	    placeSmart (window, &work_area, &x, &y);
+	    break;
+	case PlaceModeMaximize:
+	    maximizeWindow (window, MAXIMIZE_STATE);
+	    break;
+	}
     }
 
     /* Maximize windows if they are too big for their work area (bit of
@@ -1327,9 +1482,19 @@ placeDamageWindowRect (CompWindow *w,
 
     if (initial && !w->attrib.override_redirect && !w->placed)
     {
+	int viewportX, viewportY;
 	int newX, newY;
 
 	placeWindow (w, w->serverX, w->serverY, &newX, &newY);
+
+	if (placeMatchViewport (w, &viewportX, &viewportY))
+	{
+	    viewportX = MIN (MAX (viewportX, w->screen->hsize), 0);
+	    viewportY = MIN (MAX (viewportY, w->screen->vsize), 0);
+
+	    newX += (viewportX - w->screen->x) * w->screen->width;
+	    newY += (viewportY - w->screen->y) * w->screen->height;
+	}
 
 	w->placed = TRUE;
 
