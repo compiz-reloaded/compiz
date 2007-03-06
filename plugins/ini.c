@@ -437,10 +437,10 @@ iniLoadOptionsFromFile (CompDisplay *d,
     char *actionTmp = NULL;
     char *realOption = NULL;
     char tmp[MAX_OPTION_LENGTH];
-    CompOption *option, *o;
+    CompOption *option = NULL, *o;
     int nOption;
     CompScreen *s = NULL;
-    CompPlugin *p;
+    CompPlugin *p = NULL;
     Bool status = FALSE;
     Bool hv = FALSE;
     CompOptionValue value;
@@ -1152,7 +1152,7 @@ static Bool
 iniInitDisplay (CompPlugin *p, CompDisplay *d)
 {
     IniDisplay *id;
-    char *homeDir, *baseDir;
+    char *homeDir, *baseDir = NULL;
 
     id = malloc (sizeof (IniDisplay));
     if (!id)
