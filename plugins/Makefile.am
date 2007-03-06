@@ -62,6 +62,9 @@ libvideo_la_LDFLAGS = -module -avoid-version -no-undefined
 libvideo_la_LIBADD = $(top_builddir)/libdecoration/libdecoration.la
 libvideo_la_SOURCES = video.c
 
+libini_la_LDFLAGS = -module -avoid-version -no-undefined
+libini_la_SOURCES = ini.c
+
 if USE_LIBRSVG
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
 libsvg_la_LIBADD = @LIBRSVG_LIBS@
@@ -175,6 +178,7 @@ module_LTLIBRARIES =		\
 	libblur.la		\
 	libregex.la		\
 	libvideo.la		\
+	libini.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libgconf_dump_module) \
