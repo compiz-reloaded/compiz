@@ -228,6 +228,10 @@ paintScreenRegion (CompScreen	       *screen,
 	(*screen->paintCursor) (c, transform, tmpRegion, 0);
 }
 
+
+#define CLIP_PLANE_MASK (PAINT_SCREEN_TRANSFORMED_MASK | \
+			 PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
+
 void
 paintTransformedScreen (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
@@ -245,54 +249,52 @@ paintTransformedScreen (CompScreen		*screen,
 
     (*screen->applyScreenTransform) (screen, sAttrib, output, &sTransform);
 
-    if (mask & PAINT_SCREEN_TRANSFORMED_MASK)
+    if ((mask & CLIP_PLANE_MASK) == CLIP_PLANE_MASK)
     {
-	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
-	{
-	    static GLdouble clipPlane0[] = {  0.0, -1.0, 0.0, 0.5 };
-	    static GLdouble clipPlane1[] = {  0.0,  1.0, 0.0, 0.5 };
-	    static GLdouble clipPlane2[] = {  1.0,  0.0, 0.0, 0.5 };
-	    static GLdouble clipPlane3[] = { -1.0,  0.0, 0.0, 0.5 };
+	static GLdouble clipPlane0[] = {  0.0, -1.0, 0.0, 0.5 };
+	static GLdouble clipPlane1[] = {  0.0,  1.0, 0.0, 0.5 };
+	static GLdouble clipPlane2[] = {  1.0,  0.0, 0.0, 0.5 };
+	static GLdouble clipPlane3[] = { -1.0,  0.0, 0.0, 0.5 };
 
-	    glPushMatrix ();
-	    glLoadMatrixf (sTransform.m);
+	glPushMatrix ();
+	glLoadMatrixf (sTransform.m);
 
-	    glClipPlane (GL_CLIP_PLANE0, clipPlane0);
-	    glClipPlane (GL_CLIP_PLANE1, clipPlane1);
-	    glClipPlane (GL_CLIP_PLANE2, clipPlane2);
-	    glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+	glClipPlane (GL_CLIP_PLANE0, clipPlane0);
+	glClipPlane (GL_CLIP_PLANE1, clipPlane1);
+	glClipPlane (GL_CLIP_PLANE2, clipPlane2);
+	glClipPlane (GL_CLIP_PLANE3, clipPlane3);
 
-	    glEnable (GL_CLIP_PLANE0);
-	    glEnable (GL_CLIP_PLANE1);
-	    glEnable (GL_CLIP_PLANE2);
-	    glEnable (GL_CLIP_PLANE3);
+	glEnable (GL_CLIP_PLANE0);
+	glEnable (GL_CLIP_PLANE1);
+	glEnable (GL_CLIP_PLANE2);
+	glEnable (GL_CLIP_PLANE3);
 
-	    transformToScreenSpace (screen, output, -sAttrib->zTranslate,
-				    &sTransform);
+	transformToScreenSpace (screen, output, -sAttrib->zTranslate,
+				&sTransform);
 
-	    glLoadMatrixf (sTransform.m);
+	glLoadMatrixf (sTransform.m);
 
-	    paintScreenRegion (screen, &sTransform, region, output, mask);
+	paintScreenRegion (screen, &sTransform, region, output, mask);
 
-	    glDisable (GL_CLIP_PLANE0);
-	    glDisable (GL_CLIP_PLANE1);
-	    glDisable (GL_CLIP_PLANE2);
-	    glDisable (GL_CLIP_PLANE3);
+	glDisable (GL_CLIP_PLANE0);
+	glDisable (GL_CLIP_PLANE1);
+	glDisable (GL_CLIP_PLANE2);
+	glDisable (GL_CLIP_PLANE3);
 
-	    glPopMatrix ();
-
-	    return;
-	}
+	glPopMatrix ();
     }
+    else
+    {
+	transformToScreenSpace (screen, output, -sAttrib->zTranslate,
+				&sTransform);
 
-    transformToScreenSpace (screen, output, -sAttrib->zTranslate, &sTransform);
+	glPushMatrix ();
+	glLoadMatrixf (sTransform.m);
 
-    glPushMatrix ();
-    glLoadMatrixf (sTransform.m);
+	paintScreenRegion (screen, &sTransform, region, output, mask);
 
-    paintScreenRegion (screen, &sTransform, region, output, mask);
-
-    glPopMatrix ();
+	glPopMatrix ();
+    }
 }
 
 Bool
