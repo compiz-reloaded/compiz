@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070305
+#define ABIVERSION 20070306
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1175,28 +1175,16 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 */
 
 /*
-  this flag is present when we are painting clipped
-  opaque window regions only.
-*/
-#define PAINT_WINDOW_CLIP_OPAQUE_MASK		(1 << 0)
-
-/*
-  this flag is present when we are painting clipped
-  translucent window regions only.
-*/
-#define PAINT_WINDOW_CLIP_TRANSLUCENT_MASK	(1 << 1)
-
-/*
   this flag is present when window is being painted
   on a transformed screen.
 */
-#define PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK (1 << 2)
+#define PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK (1 << 0)
 
 /*
   this flag is present when window is being tested
   for occlusion of other windows.
 */
-#define PAINT_WINDOW_OCCLUSION_DETECTION_MASK (1 << 3)
+#define PAINT_WINDOW_OCCLUSION_DETECTION_MASK   (1 << 1)
 
 /*
   flag indicate that window is translucent.

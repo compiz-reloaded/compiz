@@ -609,6 +609,9 @@ minPaintWindow (CompWindow		*w,
 	FragmentAttrib fragment;
 	CompTransform  wTransform = *transform;
 
+	if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
+	    return FALSE;
+
 	UNWRAP (ms, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, transform, region,
 				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);

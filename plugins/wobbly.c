@@ -2173,12 +2173,7 @@ wobblyPaintWindow (CompWindow		   *w,
     WOBBLY_WINDOW (w);
 
     if (ww->wobbly)
-    {
-	if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
-	    return FALSE;
-
 	mask |= PAINT_WINDOW_TRANSFORMED_MASK;
-    }
 
     UNWRAP (ws, w->screen, paintWindow);
     status = (*w->screen->paintWindow) (w, attrib, transform, region, mask);

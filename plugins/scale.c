@@ -508,6 +508,9 @@ scalePaintWindow (CompWindow		  *w,
 	    FragmentAttrib fragment;
 	    CompTransform  wTransform = *transform;
 
+	    if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
+		return FALSE;
+
 	    initFragmentAttrib (&fragment, &w->lastPaint);
 
 	    if (w->alpha || fragment.opacity != OPAQUE)

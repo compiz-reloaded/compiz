@@ -197,7 +197,6 @@ paintScreenRegion (CompScreen	       *screen,
 	XSubtractRegion (tmpRegion, &emptyRegion, w->clip);
 
 	if ((*screen->paintWindow) (w, &w->paint, transform, tmpRegion,
-				    PAINT_WINDOW_CLIP_OPAQUE_MASK |
 				    PAINT_WINDOW_OCCLUSION_DETECTION_MASK))
 	{
 	    /* unredirect top most fullscreen windows. */
@@ -974,25 +973,8 @@ drawWindow (CompWindow		 *w,
     if (!region->numRects)
 	return TRUE;
 
-    if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
-    {
-	if (w->attrib.map_state != IsViewable)
-	    return FALSE;
-
-	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
-	    return FALSE;
-    }
-    else
-    {
-	if (w->attrib.map_state != IsViewable)
-	    return TRUE;
-
-	if (mask & PAINT_WINDOW_CLIP_TRANSLUCENT_MASK)
-	{
-	    if (!(mask & PAINT_WINDOW_TRANSLUCENT_MASK))
-		return FALSE;
-	}
-    }
+    if (w->attrib.map_state != IsViewable)
+	return TRUE;
 
     if (!w->texture->pixmap && !bindWindow (w))
 	return FALSE;
@@ -1038,12 +1020,7 @@ paintWindow (CompWindow		     *w,
     w->lastPaint = *attrib;
 
     if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
-    {
-	if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
-	    return FALSE;
-
 	return TRUE;
-    }
 
     initFragmentAttrib (&fragment, attrib);
 

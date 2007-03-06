@@ -321,50 +321,46 @@ decorDrawWindow (CompWindow	      *w,
     Bool status;
 
     DECOR_SCREEN (w->screen);
+    DECOR_WINDOW (w);
 
     UNWRAP (ds, w->screen, drawWindow);
     status = (*w->screen->drawWindow) (w, transform, attrib, region, mask);
     WRAP (ds, w->screen, drawWindow, decorDrawWindow);
 
-    if (!(mask & PAINT_WINDOW_CLIP_OPAQUE_MASK))
+    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	region = &infiniteRegion;
+
+    if (dw->wd && region->numRects)
     {
-	DECOR_WINDOW (w);
+	WindowDecoration *wd = dw->wd;
+	REGION	     box;
+	int		     i;
 
-	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
-	    region = &infiniteRegion;
+	mask |= PAINT_WINDOW_BLEND_MASK;
 
-	if (dw->wd && region->numRects)
+	box.rects	 = &box.extents;
+	box.numRects = 1;
+
+	w->vCount = w->indexCount = 0;
+
+	for (i = 0; i < wd->nQuad; i++)
 	{
-	    WindowDecoration *wd = dw->wd;
-	    REGION	     box;
-	    int		     i;
+	    box.extents = wd->quad[i].box;
 
-	    mask |= PAINT_WINDOW_BLEND_MASK;
-
-	    box.rects	 = &box.extents;
-	    box.numRects = 1;
-
-	    w->vCount = w->indexCount = 0;
-
-	    for (i = 0; i < wd->nQuad; i++)
+	    if (box.extents.x1 < box.extents.x2 &&
+		box.extents.y1 < box.extents.y2)
 	    {
-		box.extents = wd->quad[i].box;
-
-		if (box.extents.x1 < box.extents.x2 &&
-		    box.extents.y1 < box.extents.y2)
-		{
-		    (*w->screen->addWindowGeometry) (w,
-						     &wd->quad[i].matrix, 1,
-						     &box,
-						     region);
-		}
+		(*w->screen->addWindowGeometry) (w,
+						 &wd->quad[i].matrix, 1,
+						 &box,
+						 region);
 	    }
-
-	    if (w->vCount)
-		(*w->screen->drawWindowTexture) (w,
-						 &wd->decor->texture->texture,
-						 attrib, mask);
 	}
+
+	if (w->vCount)
+	    (*w->screen->drawWindowTexture) (w,
+					     &wd->decor->texture->texture,
+					     attrib, mask);
     }
 
     return status;

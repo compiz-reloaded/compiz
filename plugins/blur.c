@@ -1817,7 +1817,7 @@ blurDrawWindow (CompWindow	     *w,
     BLUR_SCREEN (s);
     BLUR_WINDOW (w);
 
-    if (bs->alphaBlur && bw->region && !(mask & PAINT_WINDOW_CLIP_OPAQUE_MASK))
+    if (bs->alphaBlur && bw->region)
     {
 	int clientThreshold;
 

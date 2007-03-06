@@ -1813,7 +1813,7 @@ switchPaintWindow (CompWindow		   *w,
 	GLenum filter;
 	int    x, y, x1, x2, cx, i;
 
-	if (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK)
+	if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
 	    return FALSE;
 
 	UNWRAP (ss, s, paintWindow);
@@ -1883,7 +1883,8 @@ switchPaintWindow (CompWindow		   *w,
 	    zoomType = ZOOMED_WINDOW_MASK;
 
 	if (!(ss->zoomMask & zoomType))
-	    return (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK) ? FALSE : TRUE;
+	    return (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK) ?
+		FALSE : TRUE;
 
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, transform, region, mask);
@@ -1909,7 +1910,8 @@ switchPaintWindow (CompWindow		   *w,
 	    zoomType = ZOOMED_WINDOW_MASK;
 
 	if (!(ss->zoomMask & zoomType))
-	    return (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK) ? FALSE : TRUE;
+	    return (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK) ?
+		FALSE : TRUE;
 
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, &sAttrib, transform, region, mask);
@@ -1918,7 +1920,8 @@ switchPaintWindow (CompWindow		   *w,
     else
     {
 	if (!(ss->zoomMask & zoomType))
-	    return (mask & PAINT_WINDOW_CLIP_OPAQUE_MASK) ? FALSE : TRUE;
+	    return (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK) ?
+		FALSE : TRUE;
 
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, attrib, transform, region, mask);
