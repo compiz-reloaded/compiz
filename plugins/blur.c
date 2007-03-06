@@ -163,6 +163,8 @@ typedef struct _BlurScreen {
 
     Region region;
     Region tmpRegion;
+    Region tmpRegion2;
+    Region tmpRegion3;
 
     BoxRec stencilBox;
     GLint  stencilBits;
@@ -1595,88 +1597,220 @@ fboUpdate (CompScreen *s,
     return TRUE;
 }
 
+#define MAX_VERTEX_PROJECT_COUNT 20
+
+static void
+blurProjectRegion (CompWindow	       *w,
+		   int		       output,
+		   const CompTransform *transform)
+{
+    CompScreen *s = w->screen;
+    float      screen[MAX_VERTEX_PROJECT_COUNT * 2];
+    float      vertices[MAX_VERTEX_PROJECT_COUNT * 2];
+    int	       nVertices;
+    int        i, j, stride;
+    float      *v, *vert;
+    float      minX, maxX, minY, maxY;
+    float      *scr;
+    REGION     region;
+
+    BLUR_SCREEN(s);
+
+    w->vCount = w->indexCount = 0;
+    (*w->screen->addWindowGeometry) (w, NULL, 0, bs->tmpRegion2,
+				     &infiniteRegion);
+
+    if (!w->vCount)
+	return;
+
+    nVertices = (w->indexCount) ? w->indexCount: w->vCount;
+
+    stride = (1 + w->texUnits) * 2;
+    vert = w->vertices + (stride - 2);
+
+    /* we need to find the best value here */
+    if (nVertices <= MAX_VERTEX_PROJECT_COUNT)
+    {
+	for (i = 0; i < nVertices; i++)
+	{
+	    if (w->indexCount)
+	    {
+		v = vert + (stride * w->indices[i]);
+	    }
+	    else
+	    {
+		v = vert + (stride * i);
+	    }
+
+	    vertices[i * 2] = v[0];
+	    vertices[(i * 2) + 1] = v[1];
+	}
+    }
+    else
+    {
+	minX = s->width;
+	maxX = 0;
+	minY = s->height;
+	maxY = 0;
+
+	for (i = 0; i < w->vCount; i++)
+	{
+	    v = vert + (stride * i);
+
+	    if (v[0] < minX)
+		minX = v[0];
+
+	    if (v[0] > maxX)
+		maxX = v[0];
+
+	    if (v[1] < minY)
+		minY = v[1];
+
+	    if (v[1] > maxY)
+		maxY = v[1];
+	}
+
+	vertices[0] = vertices[6] = minX;
+	vertices[1] = vertices[3] = minY;
+	vertices[2] = vertices[4] = maxX;
+	vertices[5] = vertices[7] = maxY;
+
+	nVertices = 4;
+    }
+
+    if (!projectVertices (w->screen, output, transform, vertices, screen,
+			  nVertices))
+	return;
+
+    region.rects    = &region.extents;
+    region.numRects = 1;
+
+    for (i = 0; i < nVertices / 4; i++)
+    {
+	scr = screen + (i * 4 * 2);
+
+	minX = s->width;
+	maxX = 0;
+	minY = s->height;
+	maxY = 0;
+
+	for (j = 0; j < 8; j += 2)
+	{
+	    if (scr[j] < minX)
+		minX = scr[j];
+
+	    if (scr[j] > maxX)
+		maxX = scr[j];
+
+	    if (scr[j + 1] < minY)
+		minY = scr[j + 1];
+
+	    if (scr[j + 1] > maxY)
+		maxY = scr[j + 1];
+	}
+
+	region.extents.x1 = minX - bs->filterRadius;
+	region.extents.y1 = (s->height - maxY - bs->filterRadius);
+	region.extents.x2 = maxX + bs->filterRadius + 0.5f;
+	region.extents.y2 = (s->height - minY + bs->filterRadius + 0.5f);
+
+	XUnionRegion (&region, bs->tmpRegion3, bs->tmpRegion3);
+    }
+}
+
 static Bool
 blurUpdateDstTexture (CompWindow	  *w,
 		      const CompTransform *transform,
+		      Region		  clip,
 		      BoxPtr		  pExtents)
 {
     CompScreen *s = w->screen;
     BoxPtr     pBox;
     int	       nBox;
-    REGION     region;
-    int        y, i, stride = (1 + w->texUnits) * 2;
-    float      *v, *vertices = w->vertices + (stride - 2);
-    float      screen[8];
-    float      extents[8];
-    float      minX, maxX, minY, maxY;
+    int        y;
 
     BLUR_SCREEN (s);
+    BLUR_WINDOW (w);
 
-    minX = s->width;
-    maxX = 0;
-    minY = s->height;
-    maxY = 0;
+    /* create empty region */
+    XSubtractRegion (&emptyRegion, &emptyRegion, bs->tmpRegion3);
 
-    for (i = 0; i < w->vCount; i++)
+    if (bs->filter == BlurFilterGaussian)
     {
-	v = vertices + stride * i;
+	REGION region;
 
-	if (v[0] < minX)
-	    minX = v[0];
+	/* get region that needs blur */
+	XIntersectRegion (bw->region, clip, bs->tmpRegion);
 
-	if (v[0] > maxX)
-	    maxX = v[0];
+	region.rects    = &region.extents;
+	region.numRects = 1;
 
-	if (v[1] < minY)
-	    minY = v[1];
+	/* top */
+	region.extents.x1 = w->attrib.x - w->output.left;
+	region.extents.y1 = w->attrib.y - w->output.top;
+	region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	region.extents.y2 = w->attrib.y;
 
-	if (v[1] > maxY)
-	    maxY = v[1];
+	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	if (bs->tmpRegion2->numRects)
+	    blurProjectRegion (w, bs->output, transform);
+
+	/* bottom */
+	region.extents.x1 = w->attrib.x - w->output.left;
+	region.extents.y1 = w->attrib.y + w->height;
+	region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	region.extents.y2 = w->attrib.y + w->height + w->output.bottom;
+
+	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	if (bs->tmpRegion2->numRects)
+	    blurProjectRegion (w, bs->output, transform);
+
+	/* left */
+	region.extents.x1 = w->attrib.x - w->output.left;
+	region.extents.y1 = w->attrib.y;
+	region.extents.x2 = w->attrib.x;
+	region.extents.y2 = w->attrib.y + w->height;
+
+	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	if (bs->tmpRegion2->numRects)
+	    blurProjectRegion (w, bs->output, transform);
+
+	/* right */
+	region.extents.x1 = w->attrib.x + w->width;
+	region.extents.y1 = w->attrib.y;
+	region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	region.extents.y2 = w->attrib.y + w->height;
+
+	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	if (bs->tmpRegion2->numRects)
+	    blurProjectRegion (w, bs->output, transform);
+
+	/* center */
+	region.extents.x1 = w->attrib.x;
+	region.extents.y1 = w->attrib.y;
+	region.extents.x2 = w->attrib.x + w->width;
+	region.extents.y2 = w->attrib.y + w->height;
+
+	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	if (bs->tmpRegion2->numRects)
+	    blurProjectRegion (w, bs->output, transform);
+    }
+    else
+    {
+	/* get region that needs blur */
+	XIntersectRegion (bw->region, clip, bs->tmpRegion2);
+
+	if (bs->tmpRegion2->numRects)
+	    blurProjectRegion (w, bs->output, transform);
     }
 
-    extents[0] = extents[6] = minX;
-    extents[2] = extents[4] = maxX;
-    extents[1] = extents[3] = minY;
-    extents[5] = extents[7] = maxY;
+    XIntersectRegion (bs->tmpRegion3, bs->region, bs->tmpRegion);
 
-    /* Project extents and calculate a bounding box in screen space. It
-       might make sense to move this into the core so that the result
-       can be reused by other plugins. */
-    if (!projectVertices (w->screen, bs->output, transform, extents, screen, 4))
+    if (XEmptyRegion (bs->tmpRegion))
 	return FALSE;
 
-    minX = s->width;
-    maxX = 0;
-    minY = s->height;
-    maxY = 0;
-
-    for (i = 0; i < 8; i += 2)
-    {
-	if (screen[i] < minX)
-	    minX = screen[i];
-
-	if (screen[i] > maxX)
-	    maxX = screen[i];
-
-	if (screen[i + 1] < minY)
-	    minY = screen[i + 1];
-
-	if (screen[i + 1] > maxY)
-	    maxY = screen[i + 1];
-    }
-
-    region.extents.x1 = minX - bs->filterRadius;
-    region.extents.y1 = (s->height - maxY - bs->filterRadius);
-    region.extents.x2 = maxX + bs->filterRadius + 0.5f;
-    region.extents.y2 = (s->height - minY + bs->filterRadius + 0.5f);
-
-    region.rects    = &region.extents;
-    region.numRects = 1;
-
-    XIntersectRegion (&region, bs->region, bs->tmpRegion);
-
-    pBox = bs->tmpRegion->rects;
-    nBox = bs->tmpRegion->numRects;
+    pBox = &bs->tmpRegion->extents;
+    nBox = 1;
 
     *pExtents = bs->tmpRegion->extents;
 
@@ -1829,6 +1963,8 @@ blurDrawWindow (CompWindow	     *w,
 
 	if (bw->state[BLUR_STATE_DECOR].threshold || clientThreshold)
 	{
+	    Bool   clipped = FALSE;
+	    BoxRec box;
 	    Region reg;
 
 	    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
@@ -1836,49 +1972,46 @@ blurDrawWindow (CompWindow	     *w,
 	    else
 		reg = region;
 
-	    w->vCount = w->indexCount = 0;
-	    (*w->screen->addWindowGeometry) (w, NULL, 0, bw->region, reg);
-	    if (w->vCount)
+	    if (blurUpdateDstTexture (w, transform, reg, &box))
 	    {
-		Bool   clipped = FALSE;
-		BoxRec box;
-
-		if (blurUpdateDstTexture (w, transform, &box))
+		if (bw->state[BLUR_STATE_CLIENT].threshold)
 		{
-		    if (bw->state[BLUR_STATE_CLIENT].threshold)
+		    if (bw->state[BLUR_STATE_CLIENT].clipped)
 		    {
-			if (bw->state[BLUR_STATE_CLIENT].clipped)
-			{
-			    if (bs->stencilBits)
-			    {
-				bw->state[BLUR_STATE_CLIENT].active = TRUE;
-				clipped = TRUE;
-			    }
-			}
-			else
+			if (bs->stencilBits)
 			{
 			    bw->state[BLUR_STATE_CLIENT].active = TRUE;
+			    clipped = TRUE;
 			}
 		    }
-
-		    if (bw->state[BLUR_STATE_DECOR].threshold)
+		    else
 		    {
-			if (bw->state[BLUR_STATE_DECOR].clipped)
-			{
-			    if (bs->stencilBits)
-			    {
-				bw->state[BLUR_STATE_DECOR].active = TRUE;
-				clipped = TRUE;
-			    }
-			}
-			else
-			{
-			    bw->state[BLUR_STATE_DECOR].active = TRUE;
-			}
+			bw->state[BLUR_STATE_CLIENT].active = TRUE;
 		    }
 		}
 
-		if (clipped)
+		if (bw->state[BLUR_STATE_DECOR].threshold)
+		{
+		    if (bw->state[BLUR_STATE_DECOR].clipped)
+		    {
+			if (bs->stencilBits)
+			{
+			    bw->state[BLUR_STATE_DECOR].active = TRUE;
+			    clipped = TRUE;
+			}
+		    }
+		    else
+		    {
+			bw->state[BLUR_STATE_DECOR].active = TRUE;
+		    }
+		}
+	    }
+
+	    if (clipped)
+	    {
+		w->vCount = w->indexCount = 0;
+		(*w->screen->addWindowGeometry) (w, NULL, 0, bw->region, reg);
+		if (w->vCount)
 		{
 		    BoxRec clearBox = bs->stencilBox;
 
@@ -2407,11 +2540,32 @@ blurInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
+    bs->tmpRegion2 = XCreateRegion ();
+    if (!bs->tmpRegion2)
+    {
+	XDestroyRegion (bs->region);
+	XDestroyRegion (bs->tmpRegion);
+	free (bs);
+	return FALSE;
+    }
+
+    bs->tmpRegion3 = XCreateRegion ();
+    if (!bs->tmpRegion3)
+    {
+	XDestroyRegion (bs->region);
+	XDestroyRegion (bs->tmpRegion);
+	XDestroyRegion (bs->tmpRegion2);
+	free (bs);
+	return FALSE;
+    }
+
     bs->windowPrivateIndex = allocateWindowPrivateIndex (s);
     if (bs->windowPrivateIndex < 0)
     {
 	XDestroyRegion (bs->region);
 	XDestroyRegion (bs->tmpRegion);
+	XDestroyRegion (bs->tmpRegion2);
+	XDestroyRegion (bs->tmpRegion3);
 	free (bs);
 	return FALSE;
     }
@@ -2479,6 +2633,8 @@ blurFiniScreen (CompPlugin *p,
 
     XDestroyRegion (bs->region);
     XDestroyRegion (bs->tmpRegion);
+    XDestroyRegion (bs->tmpRegion2);
+    XDestroyRegion (bs->tmpRegion3);
 
     if (bs->fbo)
 	(*s->deleteFramebuffers) (1, &bs->fbo);
