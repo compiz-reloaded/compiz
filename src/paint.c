@@ -348,7 +348,7 @@ paintScreen (CompScreen		     *screen,
 		    continue;
 	    }
 
-	    (*screen->paintWindow) (w, &w->paint, &sTransform, region, 0);
+	    (*screen->paintWindow) (w, &w->paint, &sTransform, w->clip, 0);
 	}
     }
     else
