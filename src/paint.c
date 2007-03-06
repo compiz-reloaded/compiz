@@ -237,8 +237,6 @@ paintTransformedScreen (CompScreen		*screen,
 			unsigned int		mask)
 {
     CompTransform sTransform = *transform;
-    int	          windowMask;
-    int	          backgroundMask;
 
     if (mask & PAINT_SCREEN_CLEAR_MASK)
 	clearTargetOutput (screen->display, GL_COLOR_BUFFER_BIT);
@@ -249,9 +247,6 @@ paintTransformedScreen (CompScreen		*screen,
 
     if (mask & PAINT_SCREEN_TRANSFORMED_MASK)
     {
-	windowMask = PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK;
-	backgroundMask = PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK;
-
 	if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
 	{
 	    static GLdouble clipPlane0[] = {  0.0, -1.0, 0.0, 0.5 };
