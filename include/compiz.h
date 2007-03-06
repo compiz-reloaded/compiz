@@ -1193,6 +1193,12 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 #define PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK (1 << 2)
 
 /*
+  this flag is present when window is being tested
+  for occlusion of other windows.
+*/
+#define PAINT_WINDOW_OCCLUSION_DETECTION_MASK (1 << 3)
+
+/*
   flag indicate that window is translucent.
 */
 #define PAINT_WINDOW_TRANSLUCENT_MASK           (1 << 16)
