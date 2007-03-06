@@ -149,6 +149,7 @@ paintScreenRegion (CompScreen	       *screen,
 {
     static Region tmpRegion = NULL;
     CompWindow    *w;
+    CompCursor	  *c;
     int		  count, windowMask, backgroundMask;
 
     if (!tmpRegion)
@@ -221,6 +222,10 @@ paintScreenRegion (CompScreen	       *screen,
 
 	(*screen->paintWindow) (w, &w->paint, transform, w->clip, windowMask);
     }
+
+    /* paint cursors */
+    for (c = screen->cursors; c; c = c->next)
+	(*screen->paintCursor) (c, transform, tmpRegion, 0);
 }
 
 void
@@ -232,7 +237,6 @@ paintTransformedScreen (CompScreen		*screen,
 			unsigned int		mask)
 {
     CompTransform sTransform = *transform;
-    CompCursor	  *c;
     int	          windowMask;
     int	          backgroundMask;
 
@@ -295,10 +299,6 @@ paintTransformedScreen (CompScreen		*screen,
 
     paintScreenRegion (screen, &sTransform, region, output, mask);
 
-    /* paint cursors */
-    for (c = screen->cursors; c; c = c->next)
-	(*screen->paintCursor) (c, &sTransform, region, 0);
-
     glPopMatrix ();
 }
 
@@ -311,7 +311,6 @@ paintScreen (CompScreen		     *screen,
 	     unsigned int	     mask)
 {
     CompTransform sTransform = *transform;
-    CompCursor	  *c;
 
     if (mask & PAINT_SCREEN_REGION_MASK)
     {
@@ -352,10 +351,6 @@ paintScreen (CompScreen		     *screen,
     glLoadMatrixf (sTransform.m);
 
     paintScreenRegion (screen, &sTransform, region, output, mask);
-
-    /* paint cursors */
-    for (c = screen->cursors; c; c = c->next)
-	(*screen->paintCursor) (c, &sTransform, region, 0);
 
     glPopMatrix ();
 
