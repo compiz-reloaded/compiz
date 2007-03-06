@@ -302,6 +302,38 @@ paintScreen (CompScreen		     *screen,
 
     if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
     {
+	if (!tmpRegion)
+	{
+	    tmpRegion = XCreateRegion ();
+	    if (!tmpRegion)
+		return FALSE;
+	}
+
+	XSubtractRegion (region, &emptyRegion, tmpRegion);
+
+	/* detect occlusions */
+	for (w = screen->reverseWindows; w; w = w->prev)
+	{
+	    if (w->destroyed)
+		continue;
+
+	    if (!w->shaded)
+	    {
+		if (w->attrib.map_state != IsViewable || !w->damaged)
+		    continue;
+	    }
+
+	    /* copy region */
+	    XSubtractRegion (tmpRegion, &emptyRegion, w->clip);
+
+	    if ((*screen->paintWindow) (w, &w->paint, &sTransform, tmpRegion,
+					PAINT_WINDOW_CLIP_OPAQUE_MASK |
+					PAINT_WINDOW_OCCLUSION_DETECTION_MASK))
+	    {
+		XSubtractRegion (tmpRegion, w->region, tmpRegion);
+	    }
+	}
+
 	(*screen->paintBackground) (screen, region, 0);
 
 	/* paint all windows from bottom to top */
