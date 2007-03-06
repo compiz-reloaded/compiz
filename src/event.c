@@ -1924,7 +1924,7 @@ handleEvent (CompDisplay *d,
     case FocusIn:
 	if (event->xfocus.mode != NotifyGrab)
 	{
-	    w = findWindowAtDisplay (d, event->xfocus.window);
+	    w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
 	    if (w && w->managed)
 	    {
 		unsigned int state = w->state;
