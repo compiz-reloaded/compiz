@@ -149,7 +149,7 @@ paintScreenRegion (CompScreen	       *screen,
 {
     static Region tmpRegion = NULL;
     CompWindow    *w;
-    int		  count, backgroundMask;
+    int		  count, windowMask, backgroundMask;
 
     if (!tmpRegion)
     {
@@ -158,14 +158,16 @@ paintScreenRegion (CompScreen	       *screen,
 	    return;
     }
 
-    if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
+    if (mask & PAINT_SCREEN_TRANSFORMED_MASK)
     {
 	backgroundMask = PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK;
+	windowMask     = PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK;
 	count	       = 1;
     }
     else
     {
 	backgroundMask = 0;
+	windowMask     = 0;
 	count	       = 0;
     }
 
@@ -217,7 +219,7 @@ paintScreenRegion (CompScreen	       *screen,
 		continue;
 	}
 
-	(*screen->paintWindow) (w, &w->paint, transform, w->clip, mask);
+	(*screen->paintWindow) (w, &w->paint, transform, w->clip, windowMask);
     }
 }
 
@@ -379,7 +381,7 @@ paintScreen (CompScreen		     *screen,
     glPushMatrix ();
     glLoadMatrixf (sTransform.m);
 
-    paintScreenRegion (screen, &sTransform, region, output, 0);
+    paintScreenRegion (screen, &sTransform, region, output, mask);
 
     /* paint cursors */
     for (c = screen->cursors; c; c = c->next)
