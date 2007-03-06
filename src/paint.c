@@ -140,6 +140,13 @@ paintCursor (CompCursor		 *c,
     glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 }
 
+/* This function currently always performs occlusion detection to
+   minimize paint regions. OpenGL precision requirements are no good
+   enough to guarantee that the results from using occlusion detection
+   is the same as without. It's likely not possible to see any
+   difference with most hardware but occlusion detection in the
+   transformed screen case should be made optional for those who do
+   see a difference. */
 static void
 paintScreenRegion (CompScreen	       *screen,
 		   const CompTransform *transform,
