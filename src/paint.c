@@ -300,17 +300,17 @@ paintScreen (CompScreen		     *screen,
     glPushMatrix ();
     glLoadMatrixf (sTransform.m);
 
+    if (!tmpRegion)
+    {
+	tmpRegion = XCreateRegion ();
+	if (!tmpRegion)
+	    return FALSE;
+    }
+
+    XSubtractRegion (region, &emptyRegion, tmpRegion);
+
     if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
     {
-	if (!tmpRegion)
-	{
-	    tmpRegion = XCreateRegion ();
-	    if (!tmpRegion)
-		return FALSE;
-	}
-
-	XSubtractRegion (region, &emptyRegion, tmpRegion);
-
 	/* detect occlusions */
 	for (w = screen->reverseWindows; w; w = w->prev)
 	{
@@ -354,15 +354,6 @@ paintScreen (CompScreen		     *screen,
     else
     {
 	int cnt = 0;
-
-	if (!tmpRegion)
-	{
-	    tmpRegion = XCreateRegion ();
-	    if (!tmpRegion)
-		return FALSE;
-	}
-
-	XSubtractRegion (region, &emptyRegion, tmpRegion);
 
 	/* paint solid windows */
 	for (w = screen->reverseWindows; w; w = w->prev)
