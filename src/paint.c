@@ -1053,6 +1053,23 @@ paintWindow (CompWindow		     *w,
     FragmentAttrib fragment;
     Bool	   status;
 
+    if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
+    {
+	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
+	    return FALSE;
+
+	if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
+	    return FALSE;
+
+	if (w->alpha)
+	    return FALSE;
+
+	if (attrib->opacity != OPAQUE)
+	    return FALSE;
+
+	return TRUE;
+    }
+
     w->lastPaint = *attrib;
 
     if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
