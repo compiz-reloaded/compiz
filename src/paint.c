@@ -232,7 +232,6 @@ paintTransformedScreen (CompScreen		*screen,
 			unsigned int		mask)
 {
     CompTransform sTransform = *transform;
-    CompWindow	  *w;
     CompCursor	  *c;
     int	          windowMask;
     int	          backgroundMask;
@@ -274,22 +273,7 @@ paintTransformedScreen (CompScreen		*screen,
 
 	    glLoadMatrixf (sTransform.m);
 
-	    (*screen->paintBackground) (screen, region, backgroundMask);
-
-	    for (w = screen->windows; w; w = w->next)
-	    {
-		if (w->destroyed)
-		    continue;
-
-		if (!w->shaded)
-		{
-		    if (w->attrib.map_state != IsViewable || !w->damaged)
-			continue;
-		}
-
-		(*screen->paintWindow) (w, &w->paint, &sTransform, region,
-					windowMask);
-	    }
+	    paintScreenRegion (screen, &sTransform, region, output, mask);
 
 	    glDisable (GL_CLIP_PLANE0);
 	    glDisable (GL_CLIP_PLANE1);
@@ -309,21 +293,7 @@ paintTransformedScreen (CompScreen		*screen,
     glPushMatrix ();
     glLoadMatrixf (sTransform.m);
 
-    (*screen->paintBackground) (screen, region, backgroundMask);
-
-    for (w = screen->windows; w; w = w->next)
-    {
-	if (w->destroyed)
-	    continue;
-
-	if (!w->shaded)
-	{
-	    if (w->attrib.map_state != IsViewable || !w->damaged)
-		continue;
-	}
-
-	(*screen->paintWindow) (w, &w->paint, &sTransform, region, windowMask);
-    }
+    paintScreenRegion (screen, &sTransform, region, output, mask);
 
     /* paint cursors */
     for (c = screen->cursors; c; c = c->next)
