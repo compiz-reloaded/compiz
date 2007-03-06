@@ -145,12 +145,11 @@ paintScreenRegion (CompScreen	       *screen,
 		   const CompTransform *transform,
 		   Region	       region,
 		   int		       output,
-		   unsigned int	       windowMask,
-		   unsigned int	       backgroundMask)
+		   unsigned int	       mask)
 {
     static Region tmpRegion = NULL;
     CompWindow    *w;
-    int		  count;
+    int		  count, backgroundMask;
 
     if (!tmpRegion)
     {
@@ -159,10 +158,16 @@ paintScreenRegion (CompScreen	       *screen,
 	    return;
     }
 
-    if (windowMask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
-	count = 1;
+    if (mask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
+    {
+	backgroundMask = PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK;
+	count	       = 1;
+    }
     else
-	count = 0;
+    {
+	backgroundMask = 0;
+	count	       = 0;
+    }
 
     XSubtractRegion (region, &emptyRegion, tmpRegion);
 
@@ -212,7 +217,7 @@ paintScreenRegion (CompScreen	       *screen,
 		continue;
 	}
 
-	(*screen->paintWindow) (w, &w->paint, transform, w->clip, windowMask);
+	(*screen->paintWindow) (w, &w->paint, transform, w->clip, mask);
     }
 }
 
@@ -387,7 +392,7 @@ paintScreen (CompScreen		     *screen,
 
     if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
     {
-	paintScreenRegion (screen, &sTransform, region, output, 0, 0);
+	paintScreenRegion (screen, &sTransform, region, output, 0);
     }
     else
     {
