@@ -693,11 +693,19 @@ recalcWindowActions (CompWindow *w)
 	    actions &= ~CompWindowActionCloseMask;
     }
 
+    actions &= ~(*w->screen->getAllowedActionsForWindow) (w);
+
     if (actions != w->actions)
     {
 	w->actions = actions;
 	setWindowActions (w->screen->display, actions, w->id);
     }
+}
+
+unsigned int
+getAllowedActionsForWindow (CompWindow *w)
+{
+    return ~0;
 }
 
 unsigned int

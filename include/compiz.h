@@ -1570,6 +1570,8 @@ typedef Bool (*DamageCursorRectProc) (CompCursor *c,
 typedef void (*GetOutputExtentsForWindowProc) (CompWindow	 *w,
 					       CompWindowExtents *output);
 
+typedef unsigned int (*GetAllowedActionsForWindowProc) (CompWindow *w);
+
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
 typedef void (*WindowResizeNotifyProc) (CompWindow *window,
@@ -1863,19 +1865,20 @@ struct _CompScreen {
     InitPluginForScreenProc initPluginForScreen;
     FiniPluginForScreenProc finiPluginForScreen;
 
-    PreparePaintScreenProc	  preparePaintScreen;
-    DonePaintScreenProc		  donePaintScreen;
-    PaintScreenProc		  paintScreen;
-    PaintTransformedScreenProc	  paintTransformedScreen;
-    ApplyScreenTransformProc	  applyScreenTransform;
-    PaintBackgroundProc		  paintBackground;
-    PaintWindowProc		  paintWindow;
-    DrawWindowProc		  drawWindow;
-    AddWindowGeometryProc	  addWindowGeometry;
-    DrawWindowTextureProc	  drawWindowTexture;
-    DamageWindowRectProc	  damageWindowRect;
-    GetOutputExtentsForWindowProc getOutputExtentsForWindow;
-    FocusWindowProc		  focusWindow;
+    PreparePaintScreenProc	   preparePaintScreen;
+    DonePaintScreenProc		   donePaintScreen;
+    PaintScreenProc		   paintScreen;
+    PaintTransformedScreenProc	   paintTransformedScreen;
+    ApplyScreenTransformProc	   applyScreenTransform;
+    PaintBackgroundProc		   paintBackground;
+    PaintWindowProc		   paintWindow;
+    DrawWindowProc		   drawWindow;
+    AddWindowGeometryProc	   addWindowGeometry;
+    DrawWindowTextureProc	   drawWindowTexture;
+    DamageWindowRectProc	   damageWindowRect;
+    GetOutputExtentsForWindowProc  getOutputExtentsForWindow;
+    GetAllowedActionsForWindowProc getAllowedActionsForWindow;
+    FocusWindowProc		   focusWindow;
 
     PaintCursorProc      paintCursor;
     DamageCursorRectProc damageCursorRect;
@@ -2500,6 +2503,9 @@ addWindowDamageRect (CompWindow *w,
 void
 getOutputExtentsForWindow (CompWindow	     *w,
 			   CompWindowExtents *output);
+
+unsigned int
+getAllowedActionsForWindow (CompWindow *w);
 
 void
 addWindowDamage (CompWindow *w);
