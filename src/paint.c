@@ -150,6 +150,7 @@ paintScreenRegion (CompScreen	       *screen,
 {
     static Region tmpRegion = NULL;
     CompWindow    *w;
+    int		  count;
 
     if (!tmpRegion)
     {
@@ -157,6 +158,11 @@ paintScreenRegion (CompScreen	       *screen,
 	if (!tmpRegion)
 	    return;
     }
+
+    if (windowMask & PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK)
+	count = 1;
+    else
+	count = 0;
 
     XSubtractRegion (region, &emptyRegion, tmpRegion);
 
@@ -179,6 +185,15 @@ paintScreenRegion (CompScreen	       *screen,
 				    PAINT_WINDOW_CLIP_OPAQUE_MASK |
 				    PAINT_WINDOW_OCCLUSION_DETECTION_MASK))
 	{
+	    /* unredirect top most fullscreen windows. */
+	    if (count == 0					      &&
+		!REGION_NOT_EMPTY (tmpRegion)			      &&
+		screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
+		XEqualRegion (w->region, &screen->region))
+	    {
+		unredirectWindow (w);
+	    }
+
 	    XSubtractRegion (tmpRegion, w->region, tmpRegion);
 	}
     }
