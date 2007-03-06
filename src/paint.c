@@ -338,9 +338,7 @@ paintScreen (CompScreen		     *screen,
 	     int		     output,
 	     unsigned int	     mask)
 {
-    static Region tmpRegion = NULL;
     CompTransform sTransform = *transform;
-    CompWindow	  *w;
     CompCursor	  *c;
 
     if (mask & PAINT_SCREEN_REGION_MASK)
@@ -381,75 +379,7 @@ paintScreen (CompScreen		     *screen,
     glPushMatrix ();
     glLoadMatrixf (sTransform.m);
 
-    if (!tmpRegion)
-    {
-	tmpRegion = XCreateRegion ();
-	if (!tmpRegion)
-	    return FALSE;
-    }
-
-    XSubtractRegion (region, &emptyRegion, tmpRegion);
-
-    if (mask & PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
-    {
-	paintScreenRegion (screen, &sTransform, region, output, 0);
-    }
-    else
-    {
-	int cnt = 0;
-
-	/* paint solid windows */
-	for (w = screen->reverseWindows; w; w = w->prev)
-	{
-	    if (w->destroyed)
-		continue;
-
-	    if (!w->shaded)
-	    {
-		if (w->attrib.map_state != IsViewable || !w->damaged)
-		    continue;
-	    }
-
-	    if ((*screen->paintWindow) (w, &w->paint, &sTransform, tmpRegion,
-					PAINT_WINDOW_CLIP_OPAQUE_MASK))
-	    {
-		XSubtractRegion (tmpRegion, w->region, tmpRegion);
-
-		/* unredirect top most fullscreen windows. */
-		if (cnt == 0						  &&
-		    !REGION_NOT_EMPTY (tmpRegion)			  &&
-		    screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
-		    XEqualRegion (w->region, &screen->region))
-		{
-		    unredirectWindow (w);
-		}
-	    }
-
-	    /* copy region */
-	    XSubtractRegion (tmpRegion, &emptyRegion, w->clip);
-
-	    cnt++;
-	}
-
-	if (tmpRegion->numRects)
-	    (*screen->paintBackground) (screen, tmpRegion, 0);
-
-	/* paint translucent windows */
-	for (w = screen->windows; w; w = w->next)
-	{
-	    if (w->destroyed)
-		continue;
-
-	    if (!w->shaded)
-	    {
-		if (w->attrib.map_state != IsViewable || !w->damaged)
-		    continue;
-	    }
-
-	    (*screen->paintWindow) (w, &w->paint, &sTransform, w->clip,
-				    PAINT_WINDOW_CLIP_TRANSLUCENT_MASK);
-	}
-    }
+    paintScreenRegion (screen, &sTransform, region, output, 0);
 
     /* paint cursors */
     for (c = screen->cursors; c; c = c->next)
