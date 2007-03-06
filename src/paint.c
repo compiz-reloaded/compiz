@@ -1014,6 +1014,9 @@ paintWindow (CompWindow		     *w,
 	if (attrib->opacity != OPAQUE)
 	    return FALSE;
 
+	if (w->shaded)
+	    return FALSE;
+
 	return TRUE;
     }
 
