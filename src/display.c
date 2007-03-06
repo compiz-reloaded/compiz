@@ -471,19 +471,19 @@ changeWindowOpacity (CompWindow *w,
     if (w->type & CompWindowTypeDesktopMask)
 	return;
 
-    step = (OPAQUE * w->screen->opacityStep) / 100;
+    step = (0xff * w->screen->opacityStep) / 100;
 
     w->opacityFactor = w->opacityFactor + step * direction;
-    if (w->opacityFactor > OPAQUE)
+    if (w->opacityFactor > 0xff)
     {
-	w->opacityFactor = OPAQUE;
+	w->opacityFactor = 0xff;
     }
     else if (w->opacityFactor < step)
     {
 	w->opacityFactor = step;
     }
 
-    opacity = w->opacity * w->opacityFactor / OPAQUE;
+    opacity = (w->opacity * w->opacityFactor) / 0xff;
     if (opacity != w->paint.opacity)
     {
 	w->paint.opacity = opacity;

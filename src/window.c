@@ -1045,7 +1045,7 @@ updateWindowOpacity (CompWindow *w)
 	}
     }
 
-    opacity = opacity * w->opacityFactor / OPAQUE;
+    opacity = (opacity * w->opacityFactor) / 0xff;
     if (opacity != w->paint.opacity)
     {
 	w->paint.opacity = opacity;
@@ -1871,7 +1871,7 @@ addWindow (CompScreen *screen,
     w->paint.xTranslate	= 0.0f;
     w->paint.yTranslate	= 0.0f;
 
-    w->opacityFactor = OPAQUE;
+    w->opacityFactor = 0xff;
 
     w->opacityPropSet = FALSE;
 
