@@ -284,8 +284,6 @@ paintTransformedScreen (CompScreen		*screen,
 	    return;
 	}
     }
-    else
-	windowMask = backgroundMask = 0;
 
     transformToScreenSpace (screen, output, -sAttrib->zTranslate, &sTransform);
 
