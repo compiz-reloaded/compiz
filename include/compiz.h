@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070306
+#define ABIVERSION 20070307
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2184,6 +2184,8 @@ struct _CompWindow {
     Window	      frame;
     unsigned int      mapNum;
     unsigned int      activeNum;
+    int		      activeViewportX;
+    int		      activeViewportY;
     XWindowAttributes attrib;
     int		      serverX;
     int		      serverY;
@@ -2652,6 +2654,10 @@ onCurrentDesktop (CompWindow *w);
 void
 setDesktopForWindow (CompWindow   *w,
 		     unsigned int desktop);
+
+int
+compareWindowActiveness (CompWindow *w1,
+			 CompWindow *w2);
 
 
 /* plugin.c */

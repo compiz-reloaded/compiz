@@ -1794,6 +1794,9 @@ addWindow (CompScreen *screen,
     w->mapNum	 = 0;
     w->activeNum = 0;
 
+    w->activeViewportX = 0;
+    w->activeViewportY = 0;
+
     w->frame = None;
 
     w->placed		 = FALSE;
@@ -4666,4 +4669,26 @@ setDesktopForWindow (CompWindow   *w,
     setWindowProp (w->screen->display, w->id,
 		   w->screen->display->winDesktopAtom,
 		   w->desktop);
+}
+
+/* The compareWindowActiveness function compares the two windows 'w1'
+   and 'w2'. It returns an integer less than, equal to, or greater
+   than zero if 'w1' is found, respectively, to activated longer time
+   ago than, to be activated at the same time, or be activated more
+   recently than 'w2'. */
+int
+compareWindowActiveness (CompWindow *w1,
+			 CompWindow *w2)
+{
+    int v1, v2;
+    int x = w1->screen->x;
+    int y = w1->screen->y;
+
+    v1 = (w1->activeViewportX == x && w1->activeViewportY == y);
+    v2 = (w2->activeViewportX == x && w2->activeViewportY == y);
+
+    if (v1 != v2)
+	return v1 - v2;
+
+    return w1->activeNum - w2->activeNum;
 }

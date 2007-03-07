@@ -3142,7 +3142,7 @@ focusDefaultWindow (CompDisplay *d)
 				   CompWindowTypeDialogMask |
 				   CompWindowTypeModalDialogMask))
 		    {
-			if (w->activeNum > focus->activeNum)
+			if (compareWindowActiveness (focus, w) < 0)
 			    focus = w;
 		    }
 		}

@@ -3238,7 +3238,25 @@ moveScreenViewport (CompScreen *s,
     }
 
     if (sync)
+    {
 	setDesktopHints (s);
+
+	w = findWindowAtDisplay (s->display, s->display->activeWindow);
+	if (w)
+	{
+	    int x, y;
+
+	    defaultViewportForWindow (w, &x, &y);
+
+	    /* update active viewport coordinates if we're still in the default
+	       viewport for the active window. */
+	    if (s->x == x && s->y == y)
+	    {
+		w->activeViewportX = x;
+		w->activeViewportY = y;
+	    }
+	}
+    }
 }
 
 void
