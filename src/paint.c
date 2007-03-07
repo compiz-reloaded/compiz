@@ -210,6 +210,8 @@ paintScreenRegion (CompScreen	       *screen,
 
 	    XSubtractRegion (tmpRegion, w->region, tmpRegion);
 	}
+
+	count++;
     }
 
     (*screen->paintBackground) (screen, tmpRegion, backgroundMask);
