@@ -849,11 +849,7 @@ recalcWindowType (CompWindow *w)
 	(w->state & CompWindowStateModalMask))
 	type = CompWindowTypeModalDialogMask;
 
-    if (type != w->type)
-    {
-	w->type = type;
-	recalcWindowActions (w);
-    }
+    w->type = type;
 }
 
 void
@@ -2034,8 +2030,6 @@ addWindow (CompScreen *screen,
 
 	getMwmHints (w->screen->display, w->id, &w->mwmFunc, &w->mwmDecor);
 
-	recalcWindowActions (w);
-
 	if (!(w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask)))
 	{
 	    unsigned int desktop;
@@ -2123,6 +2117,7 @@ addWindow (CompScreen *screen,
 
     windowInitPlugins (w);
 
+    recalcWindowActions (w);
     updateWindowOpacity (w);
 
     if (w->shaded)
