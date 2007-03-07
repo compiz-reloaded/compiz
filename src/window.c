@@ -1794,9 +1794,6 @@ addWindow (CompScreen *screen,
     w->mapNum	 = 0;
     w->activeNum = 0;
 
-    w->activeViewportX = 0;
-    w->activeViewportY = 0;
-
     w->frame = None;
 
     w->placed		 = FALSE;
@@ -4680,15 +4677,22 @@ int
 compareWindowActiveness (CompWindow *w1,
 			 CompWindow *w2)
 {
-    int v1, v2;
-    int x = w1->screen->x;
-    int y = w1->screen->y;
+    CompScreen		    *s = w1->screen;
+    CompActiveWindowHistory *history = &s->history[s->currentHistory];
+    int			    i;
 
-    v1 = (w1->activeViewportX == x && w1->activeViewportY == y);
-    v2 = (w2->activeViewportX == x && w2->activeViewportY == y);
+    /* check current window history first */
+    for (i = 0; i < ACTIVE_WINDOW_HISTORY_SIZE; i++)
+    {
+	if (history->id[i] == w1->id)
+	    return 1;
 
-    if (v1 != v2)
-	return v1 - v2;
+	if (history->id[i] == w2->id)
+	    return -1;
+
+	if (!history->id[i])
+	    break;
+    }
 
     return w1->activeNum - w2->activeNum;
 }

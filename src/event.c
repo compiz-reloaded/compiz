@@ -1931,21 +1931,10 @@ handleEvent (CompDisplay *d,
 
 		if (w->id != d->activeWindow)
 		{
-		    int x, y;
-
 		    d->activeWindow = w->id;
 		    w->activeNum = w->screen->activeNum++;
 
-		    defaultViewportForWindow (w, &x, &y);
-
-		    /* update active viewport coordinates when default
-		       viewport for window that received focus is the
-		       current viewport. */
-		    if (x == w->screen->x && y == w->screen->y)
-		    {
-			w->activeViewportX = x;
-			w->activeViewportY = y;
-		    }
+		    addToCurrentActiveWindowHistory (w->screen, w->id);
 
 		    XChangeProperty (d->display, w->screen->root,
 				     d->winActiveAtom,

@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070307
+#define ABIVERSION 20070308
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1701,6 +1701,16 @@ struct _CompCursor {
     CompMatrix matrix;
 };
 
+#define ACTIVE_WINDOW_HISTORY_SIZE 64
+#define ACTIVE_WINDOW_HISTORY_NUM  32
+
+typedef struct _CompActiveWindowHistory {
+    Window id[ACTIVE_WINDOW_HISTORY_SIZE];
+    int    x;
+    int    y;
+    int    activeNum;
+} CompActiveWindowHistory;
+
 struct _CompScreen {
     CompScreen  *next;
     CompDisplay *display;
@@ -1752,6 +1762,9 @@ struct _CompScreen {
     CompOutput *outputDev;
     int	       nOutputDev;
     int	       currentOutputDev;
+
+    CompActiveWindowHistory history[ACTIVE_WINDOW_HISTORY_NUM];
+    int			    currentHistory;
 
     int overlayWindowCount;
 
@@ -2144,6 +2157,15 @@ CompCursorImage *
 findCursorImageAtScreen (CompScreen    *screen,
 			 unsigned long serial);
 
+void
+setCurrentActiveWindowHistory (CompScreen *s,
+			       int	  x,
+			       int	  y);
+
+void
+addToCurrentActiveWindowHistory (CompScreen *s,
+				 Window	    id);
+
 
 /* window.c */
 
@@ -2184,8 +2206,6 @@ struct _CompWindow {
     Window	      frame;
     unsigned int      mapNum;
     unsigned int      activeNum;
-    int		      activeViewportX;
-    int		      activeViewportY;
     XWindowAttributes attrib;
     int		      serverX;
     int		      serverY;

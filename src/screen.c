@@ -1572,6 +1572,9 @@ addScreen (CompDisplay *display,
 
     s->showingDesktopMask = 0;
 
+    memset (s->history, 0, sizeof (s->history));
+    s->currentHistory = 0;
+
     s->overlayWindowCount = 0;
 
     s->desktopHintData = NULL;
@@ -3241,6 +3244,8 @@ moveScreenViewport (CompScreen *s,
     {
 	setDesktopHints (s);
 
+	setCurrentActiveWindowHistory (s, s->x, s->y);
+
 	w = findWindowAtDisplay (s->display, s->display->activeWindow);
 	if (w)
 	{
@@ -3248,13 +3253,10 @@ moveScreenViewport (CompScreen *s,
 
 	    defaultViewportForWindow (w, &x, &y);
 
-	    /* update active viewport coordinates if we're still in the default
-	       viewport for the active window. */
+	    /* add window to current history if it's default viewport is
+	       still the current one. */
 	    if (s->x == x && s->y == y)
-	    {
-		w->activeViewportX = x;
-		w->activeViewportY = y;
-	    }
+		addToCurrentActiveWindowHistory (s, w->id);
 	}
     }
 }
@@ -3900,4 +3902,56 @@ findCursorImageAtScreen (CompScreen    *screen,
 	    return image;
 
     return NULL;
+}
+
+void
+setCurrentActiveWindowHistory (CompScreen *s,
+			       int	  x,
+			       int	  y)
+{
+    int	i, min = 0;
+
+    for (i = 0; i < ACTIVE_WINDOW_HISTORY_NUM; i++)
+    {
+	if (s->history[i].x == x && s->history[i].y == y)
+	{
+	    s->currentHistory = i;
+	    return;
+	}
+    }
+
+    for (i = 1; i < ACTIVE_WINDOW_HISTORY_NUM; i++)
+	if (s->history[i].activeNum < s->history[min].activeNum)
+	    min = i;
+
+    s->currentHistory = min;
+
+    s->history[min].activeNum = s->activeNum;
+    s->history[min].x	      = x;
+    s->history[min].y	      = y;
+
+    memset (s->history[min].id, 0, sizeof (s->history[min].id));
+}
+
+void
+addToCurrentActiveWindowHistory (CompScreen *s,
+				 Window	    id)
+{
+    CompActiveWindowHistory *history = &s->history[s->currentHistory];
+    Window		    tmp, next = id;
+    int			    i;
+
+    /* walk and move history */
+    for (i = 0; i < ACTIVE_WINDOW_HISTORY_SIZE; i++)
+    {
+	tmp = history->id[i];
+	history->id[i] = next;
+	next = tmp;
+
+	/* we're done when we find an old instance or an empty slot */
+	if (tmp == id || tmp == None)
+	    break;
+    }
+
+    history->activeNum = s->activeNum;
 }
