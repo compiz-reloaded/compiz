@@ -3747,16 +3747,33 @@ void
 restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling)
 {
-    for (sibling = sibling->prev; sibling; sibling = sibling->prev)
-	if (validSiblingBelow (w, sibling))
+    CompWindow *lowest, *p;
+
+    /* get lowest sibling we're allowed to stack above */
+    lowest = findLowestSiblingBelow (w);
+
+    /* walk from bottom up */
+    for (p = w->screen->windows; p; p = p->next)
+    {
+	/* stop walking whe we reach the sibling we should try to stack below */
+	if (p == sibling)
 	    break;
 
-    if (sibling)
+	if (!validSiblingBelow (w, p))
+	    break;
+
+	/* update lowest as we find windows below sibling that we're allowed
+	   to stack above */
+	if (p->prev == lowest)
+	    lowest = p;
+    }
+
+    if (lowest)
     {
 	XWindowChanges xwc;
 	int	       mask;
 
-	mask = addWindowStackChanges (w, &xwc, sibling);
+	mask = addWindowStackChanges (w, &xwc, lowest);
 	if (mask)
 	    configureXWindow (w, mask, &xwc);
     }
