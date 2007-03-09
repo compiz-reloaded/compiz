@@ -204,6 +204,19 @@ if test "$use_inotify" = yes; then
   AC_DEFINE(USE_INOTIFY, 1, [Build inotify plugin])
 fi
 
+AC_ARG_ENABLE(fuse,
+  [  --disable-fuse          Disable fuse plugin],
+  [use_fuse=$enableval], [use_fuse=yes])
+
+if test "x$use_fuse" = "xyes"; then
+  PKG_CHECK_MODULES(FUSE, fuse, [use_fuse=yes], [use_fuse=no])
+fi
+
+AM_CONDITIONAL(FUSE_PLUGIN, test "x$use_fuse" = "xyes")
+if test "$use_fuse" = yes; then
+  AC_DEFINE(USE_FUSE, 1, [Build fuse plugin])
+fi
+
 AC_ARG_ENABLE(annotate,
   [  --disable-annotate      Disable annotate plugin],
   [use_annotate=$enableval], [use_annotate=yes])
@@ -445,6 +458,8 @@ echo "  place:    $use_place"
 echo "  dbus:     $use_dbus"
 echo "  annotate: $use_annotate"
 echo "  svg:      $use_librsvg"
+echo "  inotify:  $use_inotify"
+echo "  fuse:     $use_fuse"
 echo ""
 echo "and the following optional features will be compiled:"
 echo "  svg:      $use_librsvg"

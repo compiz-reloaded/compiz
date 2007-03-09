@@ -96,7 +96,7 @@ schemadir = $(GCONF_SCHEMA_FILE_DIR)
 schema_in_files = compiz.schemas.in
 schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
-schema_modules = $(patsubst gconf%,,$(subst rotate,,$(subst zoom,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))))
+schema_modules = $(patsubst gconf%,,$(subst ini,,$(subst minimize,,$(subst rotate,,$(subst zoom,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))))))
 
 compiz.schemas.in:
 	rm -f compiz.schemas.dump;
@@ -106,6 +106,7 @@ compiz.schemas.in:
 		COMPIZ_SCHEMA_PLUGINS="$$module" \
 		compiz --replace --no-detection --sm-disable "$$module" gconf-dump; \
 	done;
+	COMPIZ_SCHEMA_PLUGINS="minimize" compiz --replace --no-detection --sm-disable minimize gconf-dump;
 	COMPIZ_SCHEMA_PLUGINS="rotate" compiz --replace --no-detection --sm-disable cube rotate gconf-dump;
 	COMPIZ_SCHEMA_PLUGINS="zoom" compiz --replace --no-detection --sm-disable cube zoom gconf-dump;
 	echo -e "    </schemalist>\n</gconfschemafile>" >> compiz.schemas.dump;
@@ -140,6 +141,13 @@ libinotify_la_SOURCES = inotify.c
 libinotify_module = libinotify.la
 endif
 
+if FUSE_PLUGIN
+libfs_la_LDFLAGS = -module -avoid-version -no-undefined
+libfs_la_LIBADD = @FUSE_LIBS@
+libfs_la_SOURCES = fuse.c
+libfs_module = libfs.la
+endif
+
 INCLUDES =					\
 	@COMPIZ_CFLAGS@				\
 	@LIBRSVG_CFLAGS@			\
@@ -147,6 +155,8 @@ INCLUDES =					\
 	@GCONF_CFLAGS@				\
 	@PLACE_CFLAGS@				\
 	@DBUS_CFLAGS@				\
+	@FUSE_CFLAGS@				\
+	-DFUSE_USE_VERSION=26			\
 	-DALL_LINGUAS="\"@ALL_LINGUAS@\""	\
 	-DLOCALEDIR="\"@datadir@/locale\""	\
 	-DPLUGINDIR=\"$(plugindir)\"		\
@@ -182,6 +192,7 @@ module_LTLIBRARIES =		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libgconf_dump_module) \
-	$(libinotify_module)
+	$(libinotify_module)	\
+	$(libfs_module)
 
 EXTRA_DIST = $(schema_in_files)
