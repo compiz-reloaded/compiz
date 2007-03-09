@@ -1354,6 +1354,7 @@ KWD::Window::updateProperty (void)
     mDecor->borders (maxExtents.left, maxExtents.right,
 		     maxExtents.top, maxExtents.bottom);
     mState = saveState;
+    mDecor->borders (mBorder.left, mBorder.right, mBorder.top, mBorder.bottom);
 
     if (mLayout.rotation)
 	lh = mLayout.left.x2 - mLayout.left.x1;
