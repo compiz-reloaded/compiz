@@ -999,11 +999,7 @@ KWD::Window::updateShadow (void)
 					    &mLayout);
 
     if (mPixmap)
-    {
-	/* hm, update or repaint doesn't seem to do it */
-	mDecor->widget ()->hide ();
-	mDecor->widget ()->show ();
-    }
+	mDecor->widget ()->repaint ();
 
     mUpdateProperty = true;
 }
@@ -1167,6 +1163,7 @@ KWD::Window::resizeDecoration (bool force)
 
     mDecor->resize (QSize (w, h));
     mDecor->widget ()->show ();
+    mDecor->widget ()->repaint ();
 
     return TRUE;
 }
