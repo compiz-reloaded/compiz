@@ -259,18 +259,29 @@ paintTransformedScreen (CompScreen		*screen,
 
     if ((mask & CLIP_PLANE_MASK) == CLIP_PLANE_MASK)
     {
-	static GLdouble clipPlane0[] = {  0.0, -1.0, 0.0, 0.5 };
-	static GLdouble clipPlane1[] = {  0.0,  1.0, 0.0, 0.5 };
-	static GLdouble clipPlane2[] = {  1.0,  0.0, 0.0, 0.5 };
-	static GLdouble clipPlane3[] = { -1.0,  0.0, 0.0, 0.5 };
+	GLdouble h = screen->height;
+
+	GLdouble p1[2] = { region->extents.x1, h - region->extents.y2 };
+	GLdouble p2[2] = { region->extents.x2, h - region->extents.y1 };
+
+	GLdouble halfW = screen->outputDev[output].width / 2.0;
+	GLdouble halfH = screen->outputDev[output].height / 2.0;
+
+	GLdouble cx = screen->outputDev[output].region.extents.x1 + halfW;
+	GLdouble cy = (h - screen->outputDev[output].region.extents.y2) + halfH;
+
+	GLdouble top[4]    = { 0.0, halfH / (cy - p1[1]), 0.0, 0.5 };
+	GLdouble bottom[4] = { 0.0, halfH / (cy - p2[1]), 0.0, 0.5 };
+	GLdouble left[4]   = { halfW / (cx - p1[0]), 0.0, 0.0, 0.5 };
+	GLdouble right[4]  = { halfW / (cx - p2[0]), 0.0, 0.0, 0.5 };
 
 	glPushMatrix ();
 	glLoadMatrixf (sTransform.m);
 
-	glClipPlane (GL_CLIP_PLANE0, clipPlane0);
-	glClipPlane (GL_CLIP_PLANE1, clipPlane1);
-	glClipPlane (GL_CLIP_PLANE2, clipPlane2);
-	glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+	glClipPlane (GL_CLIP_PLANE0, top);
+	glClipPlane (GL_CLIP_PLANE1, bottom);
+	glClipPlane (GL_CLIP_PLANE2, left);
+	glClipPlane (GL_CLIP_PLANE3, right);
 
 	glEnable (GL_CLIP_PLANE0);
 	glEnable (GL_CLIP_PLANE1);
