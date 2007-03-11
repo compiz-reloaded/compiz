@@ -2454,6 +2454,7 @@ update_default_decorations (GdkScreen *screen)
 
     d.context = &window_context;
     d.shadow  = border_shadow;
+    d.layout  = pango_layout_new (pango_context);
 
     decor_get_default_layout (d.context, 1, 1, &d.border_layout);
 
@@ -2518,6 +2519,9 @@ update_default_decorations (GdkScreen *screen)
 			 32, PropModeReplace, (guchar *) data,
 			 BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
     }
+
+    if (d.layout)
+	g_object_unref (G_OBJECT (d.layout));
 }
 
 static gboolean
