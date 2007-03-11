@@ -650,26 +650,26 @@ resizeHandleEvent (CompDisplay *d,
 
 	    resizeTerminate (d, action, 0, NULL, 0);
 	}
-	break;
     default:
-	if (event->type == d->syncEvent + XSyncAlarmNotify)
-	{
-	    if (rd->w)
-	    {
-		XSyncAlarmNotifyEvent *sa;
-
-		sa = (XSyncAlarmNotifyEvent *) event;
-
-		if (rd->w->syncAlarm == sa->alarm)
-		    resizeUpdateWindowSize (d);
-	    }
-	}
 	break;
     }
 
     UNWRAP (rd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (rd, d, handleEvent, resizeHandleEvent);
+
+    if (event->type == d->syncEvent + XSyncAlarmNotify)
+    {
+	if (rd->w)
+	{
+	    XSyncAlarmNotifyEvent *sa;
+
+	    sa = (XSyncAlarmNotifyEvent *) event;
+
+	    if (rd->w->syncAlarm == sa->alarm)
+		resizeUpdateWindowSize (d);
+	}
+    }
 }
 
 static CompOption *
