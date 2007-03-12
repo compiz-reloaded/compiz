@@ -102,6 +102,8 @@ typedef struct _WindowDecoration {
 
 #define DECOR_MIPMAP_DEFAULT FALSE
 
+#define DECOR_DECOR_MATCH_DEFAULT "any"
+
 #define DECOR_DISPLAY_OPTION_SHADOW_RADIUS   0
 #define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
 #define DECOR_DISPLAY_OPTION_SHADOW_COLOR    2
@@ -109,7 +111,8 @@ typedef struct _WindowDecoration {
 #define DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y 4
 #define DECOR_DISPLAY_OPTION_COMMAND         5
 #define DECOR_DISPLAY_OPTION_MIPMAP          6
-#define DECOR_DISPLAY_OPTION_NUM             7
+#define DECOR_DISPLAY_OPTION_DECOR_MATCH     7
+#define DECOR_DISPLAY_OPTION_NUM             8
 
 static int displayPrivateIndex;
 
@@ -167,149 +170,6 @@ typedef struct _DecorWindow {
 		      GET_DECOR_DISPLAY (w->screen->display)))
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
-
-static CompOption *
-decorGetDisplayOptions (CompDisplay *display,
-			int	    *count)
-{
-    DECOR_DISPLAY (display);
-
-    *count = NUM_OPTIONS (dd);
-    return dd->opt;
-}
-
-static Bool
-decorSetDisplayOption (CompDisplay     *display,
-		       char	       *name,
-		       CompOptionValue *value)
-{
-    CompOption *o;
-    int	       index;
-
-    DECOR_DISPLAY (display);
-
-    o = compFindOption (dd->opt, NUM_OPTIONS (dd), name, &index);
-    if (!o)
-	return FALSE;
-
-    switch (index) {
-    case DECOR_DISPLAY_OPTION_SHADOW_RADIUS:
-    case DECOR_DISPLAY_OPTION_SHADOW_OPACITY:
-	if (compSetFloatOption (o, value))
-	    return TRUE;
-	break;
-    case DECOR_DISPLAY_OPTION_SHADOW_COLOR:
-	if (compSetColorOption (o, value))
-	    return TRUE;
-	break;
-    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X:
-    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
-    case DECOR_DISPLAY_OPTION_COMMAND:
-	if (compSetStringOption (o, value))
-	{
-	    if (display->screens && *o->value.s != '\0')
-	    {
-		DECOR_SCREEN (display->screens);
-
-		/* run decorator command if no decorator is present on
-		   first screen */
-		if (!ds->dmWin)
-		{
-		    if (fork () == 0)
-		    {
-			putenv (display->displayString);
-			execl ("/bin/sh", "/bin/sh", "-c", o->value.s, NULL);
-			exit (0);
-		    }
-		}
-	    }
-
-	    return TRUE;
-	}
-	break;
-    case DECOR_DISPLAY_OPTION_MIPMAP:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-    default:
-	break;
-    }
-
-    return FALSE;
-}
-
-static void
-decorDisplayInitOptions (DecorDisplay *dd)
-{
-    CompOption *o;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_RADIUS];
-    o->name		= "shadow_radius";
-    o->shortDesc	= N_("Shadow Radius");
-    o->longDesc		= N_("Drop shadow radius");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= DECOR_SHADOW_RADIUS_DEFAULT;
-    o->rest.f.min	= DECOR_SHADOW_RADIUS_MIN;
-    o->rest.f.max	= DECOR_SHADOW_RADIUS_MAX;
-    o->rest.f.precision = DECOR_SHADOW_RADIUS_PRECISION;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OPACITY];
-    o->name		= "shadow_opacity";
-    o->shortDesc	= N_("Shadow Opacity");
-    o->longDesc		= N_("Drop shadow opacity");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= DECOR_SHADOW_OPACITY_DEFAULT;
-    o->rest.f.min	= DECOR_SHADOW_OPACITY_MIN;
-    o->rest.f.max	= DECOR_SHADOW_OPACITY_MAX;
-    o->rest.f.precision = DECOR_SHADOW_OPACITY_PRECISION;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_COLOR];
-    o->name		= "shadow_color";
-    o->shortDesc	= "Shadow Color";
-    o->longDesc		= "Drop shadow color";
-    o->type		= CompOptionTypeColor;
-    o->value.c[0]	= DECOR_SHADOW_COLOR_RED_DEFAULT;
-    o->value.c[1]	= DECOR_SHADOW_COLOR_GREEN_DEFAULT;
-    o->value.c[2]	= DECOR_SHADOW_COLOR_BLUE_DEFAULT;
-    o->value.c[3]	= 0xffff;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X];
-    o->name		= "shadow_offset_x";
-    o->shortDesc	= N_("Shadow Offset X");
-    o->longDesc		= N_("Drop shadow X offset");
-    o->type		= CompOptionTypeInt;
-    o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
-    o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
-    o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y];
-    o->name		= "shadow_offset_y";
-    o->shortDesc	= N_("Shadow Offset Y");
-    o->longDesc		= N_("Drop shadow Y offset");
-    o->type		= CompOptionTypeInt;
-    o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
-    o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
-    o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_COMMAND];
-    o->name		= "command";
-    o->shortDesc	= N_("Command");
-    o->longDesc		= N_("Decorator command line that is executed if no "
-			     "decorator is already running");
-    o->type		= CompOptionTypeString;
-    o->value.s		= strdup ("");
-    o->rest.s.string	= NULL;
-    o->rest.s.nString	= 0;
-
-    o = &dd->opt[DECOR_DISPLAY_OPTION_MIPMAP];
-    o->name	 = "mipmap";
-    o->shortDesc = N_("Mipmap");
-    o->longDesc	 = ("Allow mipmaps to be generated for decoration textures");
-    o->type	 = CompOptionTypeBool;
-    o->value.b   = DECOR_MIPMAP_DEFAULT;
-}
 
 static Bool
 decorDrawWindow (CompWindow	      *w,
@@ -792,21 +652,26 @@ decorWindowUpdate (CompWindow *w,
 {
     WindowDecoration *wd;
     Decoration	     *old, *decor = NULL;
+    Bool	     decorate = TRUE;
 
+    DECOR_DISPLAY (w->screen->display);
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
 
     wd = dw->wd;
     old = (wd) ? wd->decor : NULL;
 
-    if (dw->decor && decorCheckSize (w, dw->decor))
+    if (!matchEval (&dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match, w))
+	decorate = FALSE;
+
+    if (decorate && dw->decor && decorCheckSize (w, dw->decor))
     {
 	if (w->type != CompWindowTypeFullscreenMask)
 	    decor = dw->decor;
     }
     else
     {
-	if (w->attrib.override_redirect)
+	if (w->attrib.override_redirect || !decorate)
 	{
 	    if (w->region->numRects == 1 && !w->alpha)
 		decor = ds->decor[DECOR_BARE];
@@ -1146,6 +1011,169 @@ decorGetOutputExtentsForWindow (CompWindow	  *w,
     }
 }
 
+static CompOption *
+decorGetDisplayOptions (CompDisplay *display,
+			int	    *count)
+{
+    DECOR_DISPLAY (display);
+
+    *count = NUM_OPTIONS (dd);
+    return dd->opt;
+}
+
+static Bool
+decorSetDisplayOption (CompDisplay     *display,
+		       char	       *name,
+		       CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    DECOR_DISPLAY (display);
+
+    o = compFindOption (dd->opt, NUM_OPTIONS (dd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case DECOR_DISPLAY_OPTION_SHADOW_RADIUS:
+    case DECOR_DISPLAY_OPTION_SHADOW_OPACITY:
+	if (compSetFloatOption (o, value))
+	    return TRUE;
+	break;
+    case DECOR_DISPLAY_OPTION_SHADOW_COLOR:
+	if (compSetColorOption (o, value))
+	    return TRUE;
+	break;
+    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X:
+    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y:
+	if (compSetIntOption (o, value))
+	    return TRUE;
+	break;
+    case DECOR_DISPLAY_OPTION_COMMAND:
+	if (compSetStringOption (o, value))
+	{
+	    if (display->screens && *o->value.s != '\0')
+	    {
+		DECOR_SCREEN (display->screens);
+
+		/* run decorator command if no decorator is present on
+		   first screen */
+		if (!ds->dmWin)
+		{
+		    if (fork () == 0)
+		    {
+			putenv (display->displayString);
+			execl ("/bin/sh", "/bin/sh", "-c", o->value.s, NULL);
+			exit (0);
+		    }
+		}
+	    }
+
+	    return TRUE;
+	}
+	break;
+    case DECOR_DISPLAY_OPTION_MIPMAP:
+	if (compSetBoolOption (o, value))
+	    return TRUE;
+	break;
+    case DECOR_DISPLAY_OPTION_DECOR_MATCH:
+	if (compSetMatchOption (o, value))
+	{
+	    CompScreen *s;
+	    CompWindow *w;
+
+	    for (s = display->screens; s; s = s->next)
+		for (w = s->windows; w; w = w->next)
+		    decorWindowUpdate (w, TRUE);
+	}
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+decorDisplayInitOptions (DecorDisplay *dd)
+{
+    CompOption *o;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_RADIUS];
+    o->name		= "shadow_radius";
+    o->shortDesc	= N_("Shadow Radius");
+    o->longDesc		= N_("Drop shadow radius");
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= DECOR_SHADOW_RADIUS_DEFAULT;
+    o->rest.f.min	= DECOR_SHADOW_RADIUS_MIN;
+    o->rest.f.max	= DECOR_SHADOW_RADIUS_MAX;
+    o->rest.f.precision = DECOR_SHADOW_RADIUS_PRECISION;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OPACITY];
+    o->name		= "shadow_opacity";
+    o->shortDesc	= N_("Shadow Opacity");
+    o->longDesc		= N_("Drop shadow opacity");
+    o->type		= CompOptionTypeFloat;
+    o->value.f		= DECOR_SHADOW_OPACITY_DEFAULT;
+    o->rest.f.min	= DECOR_SHADOW_OPACITY_MIN;
+    o->rest.f.max	= DECOR_SHADOW_OPACITY_MAX;
+    o->rest.f.precision = DECOR_SHADOW_OPACITY_PRECISION;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_COLOR];
+    o->name		= "shadow_color";
+    o->shortDesc	= "Shadow Color";
+    o->longDesc		= "Drop shadow color";
+    o->type		= CompOptionTypeColor;
+    o->value.c[0]	= DECOR_SHADOW_COLOR_RED_DEFAULT;
+    o->value.c[1]	= DECOR_SHADOW_COLOR_GREEN_DEFAULT;
+    o->value.c[2]	= DECOR_SHADOW_COLOR_BLUE_DEFAULT;
+    o->value.c[3]	= 0xffff;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X];
+    o->name		= "shadow_offset_x";
+    o->shortDesc	= N_("Shadow Offset X");
+    o->longDesc		= N_("Drop shadow X offset");
+    o->type		= CompOptionTypeInt;
+    o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
+    o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
+    o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y];
+    o->name		= "shadow_offset_y";
+    o->shortDesc	= N_("Shadow Offset Y");
+    o->longDesc		= N_("Drop shadow Y offset");
+    o->type		= CompOptionTypeInt;
+    o->value.i		= DECOR_SHADOW_OFFSET_DEFAULT;
+    o->rest.i.min	= DECOR_SHADOW_OFFSET_MIN;
+    o->rest.i.max	= DECOR_SHADOW_OFFSET_MAX;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_COMMAND];
+    o->name		= "command";
+    o->shortDesc	= N_("Command");
+    o->longDesc		= N_("Decorator command line that is executed if no "
+			     "decorator is already running");
+    o->type		= CompOptionTypeString;
+    o->value.s		= strdup ("");
+    o->rest.s.string	= NULL;
+    o->rest.s.nString	= 0;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_MIPMAP];
+    o->name	 = "mipmap";
+    o->shortDesc = N_("Mipmap");
+    o->longDesc	 = ("Allow mipmaps to be generated for decoration textures");
+    o->type	 = CompOptionTypeBool;
+    o->value.b   = DECOR_MIPMAP_DEFAULT;
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH];
+    o->name	 = "decoration_match";
+    o->shortDesc = N_("Decoration windows");
+    o->longDesc	 = N_("Windows that should be decorated");
+    o->type	 = CompOptionTypeMatch;
+
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, DECOR_DECOR_MATCH_DEFAULT);
+}
+
 static void
 decorWindowMoveNotify (CompWindow *w,
 		       int	  dx,
@@ -1245,6 +1273,8 @@ decorInitDisplay (CompPlugin  *p,
 
     decorDisplayInitOptions (dd);
 
+    matchUpdate (d, &dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match);
+
     WRAP (dd, d, handleEvent, decorHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = dd;
@@ -1257,6 +1287,8 @@ decorFiniDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     DECOR_DISPLAY (d);
+
+    matchFini (&dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match);
 
     freeScreenPrivateIndex (d, dd->screenPrivateIndex);
 
