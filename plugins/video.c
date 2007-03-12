@@ -35,6 +35,8 @@
 #include <compiz.h>
 #include <decoration.h>
 
+#define VIDEO_YV12_DEFAULT TRUE
+
 /*
  * compiz composited video
  *
@@ -90,6 +92,9 @@ typedef struct _VideoFunction {
 
 static int displayPrivateIndex;
 
+#define VIDEO_DISPLAY_OPTION_YV12 0
+#define VIDEO_DISPLAY_OPTION_NUM  1
+
 typedef struct _VideoDisplay {
     int		     screenPrivateIndex;
     HandleEventProc  handleEvent;
@@ -97,6 +102,8 @@ typedef struct _VideoDisplay {
     Atom	     videoAtom;
     Atom	     videoSupportedAtom;
     Atom	     videoImageFormatAtom[IMAGE_FORMAT_NUM];
+
+    CompOption opt[VIDEO_DISPLAY_OPTION_NUM];
 } VideoDisplay;
 
 typedef struct _VideoScreen {
@@ -162,6 +169,84 @@ typedef struct _VideoWindow {
     VideoWindow *vw = GET_VIDEO_WINDOW  (w,		       \
 		      GET_VIDEO_SCREEN  (w->screen,	       \
 		      GET_VIDEO_DISPLAY (w->screen->display)))
+
+#define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
+
+static void
+videoSetSupportedHint (CompScreen *s)
+{
+    Atom data[16];
+    int  i, n = 0;
+
+    VIDEO_DISPLAY (s->display);
+    VIDEO_SCREEN (s);
+
+    for (i = 0; i < IMAGE_FORMAT_NUM; i++)
+    {
+	if (!vs->imageFormat[i])
+	    continue;
+
+	if (i == 0 || vd->opt[i - 1].value.b)
+	    data[n++] = vd->videoImageFormatAtom[i];
+    }
+
+    XChangeProperty (s->display->display, s->root,
+		     vd->videoSupportedAtom, XA_ATOM, 32,
+		     PropModeReplace, (unsigned char *) data, n);
+}
+
+static CompOption *
+videoGetDisplayOptions (CompDisplay *display,
+			int	    *count)
+{
+    VIDEO_DISPLAY (display);
+
+    *count = NUM_OPTIONS (vd);
+    return vd->opt;
+}
+
+static Bool
+videoSetDisplayOption (CompDisplay     *display,
+		       char	       *name,
+		       CompOptionValue *value)
+{
+    CompOption *o;
+    int	       index;
+
+    VIDEO_DISPLAY (display);
+
+    o = compFindOption (vd->opt, NUM_OPTIONS (vd), name, &index);
+    if (!o)
+	return FALSE;
+
+    switch (index) {
+    case VIDEO_DISPLAY_OPTION_YV12:
+	if (compSetBoolOption (o, value))
+	{
+	    CompScreen *s;
+
+	    for (s = display->screens; s; s = s->next)
+		videoSetSupportedHint (s);
+	}
+    default:
+	break;
+    }
+
+    return FALSE;
+}
+
+static void
+videoDisplayInitOptions (VideoDisplay *vd)
+{
+    CompOption *o;
+
+    o = &vd->opt[VIDEO_DISPLAY_OPTION_YV12];
+    o->name	 = "yv12";
+    o->shortDesc = N_("YV12 colorspace");
+    o->longDesc	 = N_("Provide YV12 colorspace support");
+    o->type	 = CompOptionTypeBool;
+    o->value.b   = VIDEO_YV12_DEFAULT;
+}
 
 static int
 getYV12FragmentFunction (CompScreen  *s,
@@ -990,6 +1075,8 @@ videoInitDisplay (CompPlugin  *p,
 
     WRAP (vd, d, handleEvent, videoHandleEvent);
 
+    videoDisplayInitOptions (vd);
+
     d->privates[displayPrivateIndex].ptr = vd;
 
     return TRUE;
@@ -1013,8 +1100,6 @@ videoInitScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     VideoScreen *vs;
-    Atom	data[16];
-    int		i, n = 0;
 
     VIDEO_DISPLAY (s->display);
 
@@ -1048,13 +1133,6 @@ videoInitScreen (CompPlugin *p,
 	}
     }
 
-    for (i = 0; i < IMAGE_FORMAT_NUM; i++)
-	data[n++] = vd->videoImageFormatAtom[i];
-
-    XChangeProperty (s->display->display, s->root,
-		     vd->videoSupportedAtom, XA_ATOM, 32,
-		     PropModeReplace, (unsigned char *) data, n);
-
     WRAP (vs, s, drawWindow, videoDrawWindow);
     WRAP (vs, s, drawWindowTexture, videoDrawWindowTexture);
     WRAP (vs, s, damageWindowRect, videoDamageWindowRect);
@@ -1062,6 +1140,8 @@ videoInitScreen (CompPlugin *p,
     WRAP (vs, s, windowResizeNotify, videoWindowResizeNotify);
 
     s->privates[vd->screenPrivateIndex].ptr = vs;
+
+    videoSetSupportedHint (s);
 
     return TRUE;
 }
@@ -1168,8 +1248,8 @@ static CompPluginVTable videoVTable = {
     videoFiniScreen,
     videoInitWindow,
     videoFiniWindow,
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
+    videoGetDisplayOptions,
+    videoSetDisplayOption,
     0, /* GetScreenOptions */
     0, /* SetScreenOption */
     0, /* Deps */
