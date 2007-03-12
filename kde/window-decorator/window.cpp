@@ -168,19 +168,25 @@ KWD::Window::isActive (void) const
 bool
 KWD::Window::isCloseable (void) const
 {
+    KWin::WindowInfo wInfo;
+
     if (mType != Normal)
 	return false;
 
-    return true;
+    wInfo = KWin::windowInfo (mClientId, NET::WMPid, NET::WM2AllowedActions);
+    return wInfo.actionSupported (NET::ActionClose);
 }
 
 bool
 KWD::Window::isMaximizable (void) const
 {
+    KWin::WindowInfo wInfo;
+
     if (mType != Normal)
 	return false;
 
-    return true;
+    wInfo = KWin::windowInfo (mClientId, NET::WMPid, NET::WM2AllowedActions);
+    return wInfo.actionSupported (NET::ActionMax);
 }
 
 KDecoration::MaximizeMode
@@ -201,10 +207,13 @@ KWD::Window::maximizeMode (void) const
 bool
 KWD::Window::isMinimizable (void) const
 {
+    KWin::WindowInfo wInfo;
+
     if (mType != Normal)
 	return false;
 
-    return true;
+    wInfo = KWin::windowInfo (mClientId, NET::WMPid, NET::WM2AllowedActions);
+    return wInfo.actionSupported (NET::ActionMinimize);
 }
 
 bool
