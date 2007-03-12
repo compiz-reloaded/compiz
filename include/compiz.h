@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070308
+#define ABIVERSION 20070312
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2278,6 +2278,8 @@ struct _CompWindow {
 
     WindowPaintAttrib paint;
     WindowPaintAttrib lastPaint;
+
+    unsigned int lastMask;
 
     CompWindowExtents input;
     CompWindowExtents output;

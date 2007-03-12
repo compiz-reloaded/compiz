@@ -67,6 +67,8 @@
 
 #define BLUR_ALPHA_BLUR_MATCH_DEFAULT ""
 
+#define BLUR_BLUR_OCCLUSION_DEFAULT TRUE
+
 static char *filterString[] = {
     N_("4xBilinear"),
     N_("Gaussian"),
@@ -134,18 +136,21 @@ typedef struct _BlurDisplay {
 #define BLUR_SCREEN_OPTION_GAUSSIAN_STRENGTH 7
 #define BLUR_SCREEN_OPTION_MIPMAP_LOD        8
 #define BLUR_SCREEN_OPTION_SATURATION        9
-#define BLUR_SCREEN_OPTION_NUM		     10
+#define BLUR_SCREEN_OPTION_BLUR_OCCLUSION    10
+#define BLUR_SCREEN_OPTION_NUM		     11
 
 typedef struct _BlurScreen {
     int	windowPrivateIndex;
 
     CompOption opt[BLUR_SCREEN_OPTION_NUM];
 
-    PreparePaintScreenProc preparePaintScreen;
-    DonePaintScreenProc    donePaintScreen;
-    PaintScreenProc	   paintScreen;
-    DrawWindowProc	   drawWindow;
-    DrawWindowTextureProc  drawWindowTexture;
+    PreparePaintScreenProc       preparePaintScreen;
+    DonePaintScreenProc          donePaintScreen;
+    PaintScreenProc	         paintScreen;
+    PaintTransformedScreenProc	 paintTransformedScreen;
+    PaintWindowProc	         paintWindow;
+    DrawWindowProc	         drawWindow;
+    DrawWindowTextureProc        drawWindowTexture;
 
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
@@ -154,6 +159,8 @@ typedef struct _BlurScreen {
 
     int	 blurTime;
     Bool moreBlur;
+
+    Bool blurOcclusion;
 
     BlurFilter filter;
     int        filterRadius;
@@ -165,6 +172,7 @@ typedef struct _BlurScreen {
     Region tmpRegion;
     Region tmpRegion2;
     Region tmpRegion3;
+    Region occlusion;
 
     BoxRec stencilBox;
     GLint  stencilBits;
@@ -198,6 +206,7 @@ typedef struct _BlurWindow {
     Bool      propSet[BLUR_STATE_NUM];
 
     Region region;
+    Region clip;
 } BlurWindow;
 
 #define GET_BLUR_DISPLAY(d)				     \
@@ -691,6 +700,17 @@ blurSetScreenOption (CompScreen      *screen,
 	    damageScreen (screen);
 	    return TRUE;
 	}
+	break;
+    case BLUR_SCREEN_OPTION_BLUR_OCCLUSION:
+	if (compSetBoolOption (o, value))
+	{
+	    bs->blurOcclusion = o->value.b;
+	    blurReset (screen);
+	    damageScreen (screen);
+	    return TRUE;
+	}
+	break;
+
     default:
 	break;
     }
@@ -795,6 +815,13 @@ blurScreenInitOptions (BlurScreen *bs)
     o->value.i	  = BLUR_SATURATION_DEFAULT;
     o->rest.i.min = BLUR_SATURATION_MIN;
     o->rest.i.max = BLUR_SATURATION_MAX;
+    
+    o = &bs->opt[BLUR_SCREEN_OPTION_BLUR_OCCLUSION];
+    o->name	  = "occlusion";
+    o->shortDesc  = N_("Blur Occlusion");
+    o->longDesc	  = N_("blur occlusion");
+    o->type	  = CompOptionTypeBool;
+    o->value.b	  = BLUR_BLUR_OCCLUSION_DEFAULT;
 }
 
 static void
@@ -987,7 +1014,7 @@ blurPaintScreen (CompScreen		 *s,
 		 unsigned int		 mask)
 {
     Bool status;
-
+	
     BLUR_SCREEN (s);
 
     if (bs->alphaBlur)
@@ -1010,6 +1037,17 @@ blurPaintScreen (CompScreen		 *s,
 	}
     }
 
+    if (!bs->blurOcclusion)
+    {
+	CompWindow *w;
+    
+	XSubtractRegion(&emptyRegion, &emptyRegion, bs->occlusion);
+	
+	for (w = s->windows; w; w = w->next)
+	    XSubtractRegion(&emptyRegion, &emptyRegion, 
+		    GET_BLUR_WINDOW(w, bs)->clip);
+    }
+
     bs->output = output;
 
     UNWRAP (bs, s, paintScreen);
@@ -1017,6 +1055,33 @@ blurPaintScreen (CompScreen		 *s,
     WRAP (bs, s, paintScreen, blurPaintScreen);
 
     return status;
+}
+
+static void
+blurPaintTransformedScreen (CompScreen		    *s,
+			    const ScreenPaintAttrib *sAttrib,
+			    const CompTransform	    *transform,
+			    Region		    region,
+			    int			    output,
+			    unsigned int	    mask)
+{
+    BLUR_SCREEN (s);
+
+    if (!bs->blurOcclusion)
+    {
+	CompWindow *w;
+    
+	XSubtractRegion(&emptyRegion, &emptyRegion, bs->occlusion);
+	
+	for (w = s->windows; w; w = w->next)
+	    XSubtractRegion(&emptyRegion, &emptyRegion, 
+		    GET_BLUR_WINDOW(w, bs)->clip);
+    }
+
+    UNWRAP (bs, s, paintTransformedScreen);
+    (*s->paintTransformedScreen) (s, sAttrib, transform,
+				   region, output, mask);
+    WRAP (bs, s, paintTransformedScreen, blurPaintTransformedScreen);
 }
 
 static void
@@ -1040,6 +1105,34 @@ blurDonePaintScreen (CompScreen *s)
     UNWRAP (bs, s, donePaintScreen);
     (*s->donePaintScreen) (s);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
+}
+
+static Bool
+blurPaintWindow (CompWindow		 *w,
+		 const WindowPaintAttrib *attrib,
+		 const CompTransform	 *transform,
+		 Region			 region,
+		 unsigned int		 mask)
+{
+    CompScreen *s = w->screen;
+    Bool       status;
+
+    BLUR_SCREEN (s);
+    BLUR_WINDOW (w);
+
+    UNWRAP (bs, s, paintWindow);
+    status = (*s->paintWindow) (w, attrib, transform, region, mask);
+    WRAP (bs, s, paintWindow, blurPaintWindow);
+
+    if (!bs->blurOcclusion && (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK))
+    {
+    	XSubtractRegion(bs->occlusion, &emptyRegion, bw->clip);
+	if (!(w->lastMask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK) &&
+	    !(w->lastMask & PAINT_WINDOW_TRANSFORMED_MASK) && bw->region)
+    	    XUnionRegion(bs->occlusion, bw->region, bs->occlusion);
+    }
+
+    return status;
 }
 
 static int
@@ -1721,8 +1814,8 @@ blurProjectRegion (CompWindow	       *w,
 static Bool
 blurUpdateDstTexture (CompWindow	  *w,
 		      const CompTransform *transform,
-		      Region		  clip,
-		      BoxPtr		  pExtents)
+		      BoxPtr		  pExtents,
+		      int                 clientThreshold)
 {
     CompScreen *s = w->screen;
     BoxPtr     pBox;
@@ -1739,66 +1832,69 @@ blurUpdateDstTexture (CompWindow	  *w,
     {
 	REGION region;
 
-	/* get region that needs blur */
-	XIntersectRegion (bw->region, clip, bs->tmpRegion);
-
 	region.rects    = &region.extents;
 	region.numRects = 1;
 
-	/* top */
-	region.extents.x1 = w->attrib.x - w->output.left;
-	region.extents.y1 = w->attrib.y - w->output.top;
-	region.extents.x2 = w->attrib.x + w->width + w->output.right;
-	region.extents.y2 = w->attrib.y;
+	if (bw->state[BLUR_STATE_DECOR].threshold)
+	{
+	    /* top */
+	    region.extents.x1 = w->attrib.x - w->output.left;
+	    region.extents.y1 = w->attrib.y - w->output.top;
+	    region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	    region.extents.y2 = w->attrib.y;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
 
-	/* bottom */
-	region.extents.x1 = w->attrib.x - w->output.left;
-	region.extents.y1 = w->attrib.y + w->height;
-	region.extents.x2 = w->attrib.x + w->width + w->output.right;
-	region.extents.y2 = w->attrib.y + w->height + w->output.bottom;
+	    /* bottom */
+	    region.extents.x1 = w->attrib.x - w->output.left;
+	    region.extents.y1 = w->attrib.y + w->height;
+	    region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	    region.extents.y2 = w->attrib.y + w->height + w->output.bottom;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
 
-	/* left */
-	region.extents.x1 = w->attrib.x - w->output.left;
-	region.extents.y1 = w->attrib.y;
-	region.extents.x2 = w->attrib.x;
-	region.extents.y2 = w->attrib.y + w->height;
+	    /* left */
+	    region.extents.x1 = w->attrib.x - w->output.left;
+	    region.extents.y1 = w->attrib.y;
+	    region.extents.x2 = w->attrib.x;
+	    region.extents.y2 = w->attrib.y + w->height;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
 
-	/* right */
-	region.extents.x1 = w->attrib.x + w->width;
-	region.extents.y1 = w->attrib.y;
-	region.extents.x2 = w->attrib.x + w->width + w->output.right;
-	region.extents.y2 = w->attrib.y + w->height;
+	    /* right */
+	    region.extents.x1 = w->attrib.x + w->width;
+	    region.extents.y1 = w->attrib.y;
+	    region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	    region.extents.y2 = w->attrib.y + w->height;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+	        blurProjectRegion (w, bs->output, transform);
+	}
 
-	/* center */
-	region.extents.x1 = w->attrib.x;
-	region.extents.y1 = w->attrib.y;
-	region.extents.x2 = w->attrib.x + w->width;
-	region.extents.y2 = w->attrib.y + w->height;
+	if (clientThreshold)
+	{
+	    /* center */
+	    region.extents.x1 = w->attrib.x;
+	    region.extents.y1 = w->attrib.y;
+	    region.extents.x2 = w->attrib.x + w->width;
+	    region.extents.y2 = w->attrib.y + w->height;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
+	}
     }
     else
     {
 	/* get region that needs blur */
-	XIntersectRegion (bw->region, clip, bs->tmpRegion2);
+	XIntersectRegion (bs->tmpRegion, &emptyRegion, bs->tmpRegion2);
 
 	if (bs->tmpRegion2->numRects)
 	    blurProjectRegion (w, bs->output, transform);
@@ -1964,7 +2060,7 @@ blurDrawWindow (CompWindow	     *w,
 	if (bw->state[BLUR_STATE_DECOR].threshold || clientThreshold)
 	{
 	    Bool   clipped = FALSE;
-	    BoxRec box;
+	    BoxRec box = { 0, 0, 0, 0 };
 	    Region reg;
 
 	    if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
@@ -1972,9 +2068,13 @@ blurDrawWindow (CompWindow	     *w,
 	    else
 		reg = region;
 
-	    if (blurUpdateDstTexture (w, transform, reg, &box))
+	    XIntersectRegion (bw->region, reg, bs->tmpRegion);
+	    if (!bs->blurOcclusion && !(mask & PAINT_WINDOW_TRANSFORMED_MASK))
+		XSubtractRegion(bs->tmpRegion, bw->clip, bs->tmpRegion);
+
+	    if (blurUpdateDstTexture (w, transform, &box, clientThreshold))
 	    {
-		if (bw->state[BLUR_STATE_CLIENT].threshold)
+		if (clientThreshold)
 		{
 		    if (bw->state[BLUR_STATE_CLIENT].clipped)
 		    {
@@ -2005,12 +2105,20 @@ blurDrawWindow (CompWindow	     *w,
 			bw->state[BLUR_STATE_DECOR].active = TRUE;
 		    }
 		}
+		
+		if (!bs->blurOcclusion && bw->clip->numRects)
+		    clipped = TRUE;
 	    }
+
+	    if (!bs->blurOcclusion)
+		XSubtractRegion (bw->region, bw->clip, bs->tmpRegion);
+	    else
+		XSubtractRegion (bw->region, &emptyRegion, bs->tmpRegion);
 
 	    if (clipped)
 	    {
 		w->vCount = w->indexCount = 0;
-		(*w->screen->addWindowGeometry) (w, NULL, 0, bw->region, reg);
+		(*w->screen->addWindowGeometry) (w, NULL, 0, bs->tmpRegion, reg);
 		if (w->vCount)
 		{
 		    BoxRec clearBox = bs->stencilBox;
@@ -2198,7 +2306,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 		break;
 	    }
 
-	    if (bw->state[state].clipped)
+	    if (bw->state[state].clipped || (!bs->blurOcclusion && bw->clip->numRects))
 	    {
 		glEnable (GL_STENCIL_TEST);
 
@@ -2559,6 +2667,18 @@ blurInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
+    bs->occlusion = XCreateRegion ();
+    if (!bs->occlusion)
+    {
+	XDestroyRegion (bs->region);
+	XDestroyRegion (bs->tmpRegion);
+	XDestroyRegion (bs->tmpRegion2);
+	XDestroyRegion (bs->tmpRegion3);
+	free (bs);
+	return FALSE;
+    }
+
+
     bs->windowPrivateIndex = allocateWindowPrivateIndex (s);
     if (bs->windowPrivateIndex < 0)
     {
@@ -2566,6 +2686,7 @@ blurInitScreen (CompPlugin *p,
 	XDestroyRegion (bs->tmpRegion);
 	XDestroyRegion (bs->tmpRegion2);
 	XDestroyRegion (bs->tmpRegion3);
+	XDestroyRegion (bs->occlusion);
 	free (bs);
 	return FALSE;
     }
@@ -2579,6 +2700,7 @@ blurInitScreen (CompPlugin *p,
     bs->dstBlurFunctions = NULL;
     bs->blurTime	 = 1000.0f / BLUR_SPEED_DEFAULT;
     bs->moreBlur	 = FALSE;
+    bs->blurOcclusion    = BLUR_BLUR_OCCLUSION_DEFAULT;
 
     for (i = 0; i < 2; i++)
 	bs->texture[i] = 0;
@@ -2606,6 +2728,8 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
     WRAP (bs, s, paintScreen, blurPaintScreen);
+    WRAP (bs, s, paintTransformedScreen, blurPaintTransformedScreen);
+    WRAP (bs, s, paintWindow, blurPaintWindow);
     WRAP (bs, s, drawWindow, blurDrawWindow);
     WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
     WRAP (bs, s, windowResizeNotify, blurWindowResizeNotify);
@@ -2635,6 +2759,7 @@ blurFiniScreen (CompPlugin *p,
     XDestroyRegion (bs->tmpRegion);
     XDestroyRegion (bs->tmpRegion2);
     XDestroyRegion (bs->tmpRegion3);
+    XDestroyRegion (bs->occlusion);
 
     if (bs->fbo)
 	(*s->deleteFramebuffers) (1, &bs->fbo);
@@ -2651,6 +2776,8 @@ blurFiniScreen (CompPlugin *p,
     UNWRAP (bs, s, preparePaintScreen);
     UNWRAP (bs, s, donePaintScreen);
     UNWRAP (bs, s, paintScreen);
+    UNWRAP (bs, s, paintTransformedScreen);
+    UNWRAP (bs, s, paintWindow);
     UNWRAP (bs, s, drawWindow);
     UNWRAP (bs, s, drawWindowTexture);
     UNWRAP (bs, s, windowResizeNotify);
@@ -2689,6 +2816,10 @@ blurInitWindow (CompPlugin *p,
 
     bw->region = NULL;
 
+    bw->clip = XCreateRegion();
+    if (!bw->clip)
+	return FALSE;
+
     w->privates[bs->windowPrivateIndex].ptr = bw;
 
     blurWindowUpdate (w, BLUR_STATE_CLIENT);
@@ -2713,6 +2844,8 @@ blurFiniWindow (CompPlugin *p,
 
     if (bw->region)
 	XDestroyRegion (bw->region);
+
+    XDestroyRegion(bw->clip);
 
     free (bw);
 }
