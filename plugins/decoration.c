@@ -652,58 +652,61 @@ decorWindowUpdate (CompWindow *w,
 {
     WindowDecoration *wd;
     Decoration	     *old, *decor = NULL;
-    Bool	     decorate = TRUE;
+    Bool	     decorate = FALSE;
 
-    DECOR_DISPLAY (w->screen->display);
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
 
     wd = dw->wd;
     old = (wd) ? wd->decor : NULL;
 
-    if (!matchEval (&dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match, w))
+    switch (w->type) {
+    case CompWindowTypeDialogMask:
+    case CompWindowTypeModalDialogMask:
+    case CompWindowTypeUtilMask:
+    case CompWindowTypeNormalMask:
+	if (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))
+	    decorate = TRUE;
+    default:
+	break;
+    }
+
+    if (w->attrib.override_redirect)
 	decorate = FALSE;
 
-    if (decorate && dw->decor && decorCheckSize (w, dw->decor))
+    if (decorate)
     {
-	if (w->type != CompWindowTypeFullscreenMask)
-	    decor = dw->decor;
+	CompMatch *match;
+
+	DECOR_DISPLAY (w->screen->display);
+
+	match = &dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match;
+	if (!matchEval (match, w))
+	    decorate = FALSE;
     }
-    else
+
+    if (decorate)
     {
-	if (w->attrib.override_redirect || !decorate)
+	if (dw->decor && decorCheckSize (w, dw->decor))
 	{
-	    if (w->region->numRects == 1 && !w->alpha)
-		decor = ds->decor[DECOR_BARE];
+	    decor = dw->decor;
 	}
 	else
 	{
-	    switch (w->type) {
-	    case CompWindowTypeDialogMask:
-	    case CompWindowTypeModalDialogMask:
-	    case CompWindowTypeUtilMask:
-	    case CompWindowTypeNormalMask:
-		if (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))
-		{
-		    if (w->id == w->screen->display->activeWindow)
-			decor = ds->decor[DECOR_ACTIVE];
-		    else
-			decor = ds->decor[DECOR_NORMAL];
-
-		    break;
-		}
-		/* fall-through */
-	    default:
-		if (w->region->numRects == 1 && !w->alpha)
-		    decor = ds->decor[DECOR_BARE];
-
-		/* no decoration on windows with below state */
-		if (w->state & CompWindowStateBelowMask)
-		    decor = NULL;
-
-		break;
-	    }
+	    if (w->id == w->screen->display->activeWindow)
+		decor = ds->decor[DECOR_ACTIVE];
+	    else
+		decor = ds->decor[DECOR_NORMAL];
 	}
+    }
+    else
+    {
+	if (w->region->numRects == 1 && !w->alpha)
+	    decor = ds->decor[DECOR_BARE];
+
+	/* no decoration on windows with below state */
+	if (w->state & CompWindowStateBelowMask)
+	    decor = NULL;
 
 	if (decor)
 	{
@@ -1227,14 +1230,15 @@ decorWindowStateChangeNotify (CompWindow *w)
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
 
-    if (dw->wd && dw->wd->decor)
+    if (!decorWindowUpdate (w, FALSE))
     {
-	Decoration *decor = dw->wd->decor;
-
-	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    setWindowFrameExtents (w, &decor->maxInput);
-	else
-	    setWindowFrameExtents (w, &decor->input);
+	if (dw->decor)
+	{
+	    if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+		setWindowFrameExtents (w, &dw->decor->maxInput);
+	    else
+		setWindowFrameExtents (w, &dw->decor->input);
+	}
     }
 
     UNWRAP (ds, w->screen, windowStateChangeNotify);
