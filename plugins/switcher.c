@@ -774,8 +774,6 @@ switchInitiate (CompScreen *s,
 	int		     nState = 0;
 	XSetWindowAttributes attr;
 	Visual		     *visual;
-	Atom		     mwmHintsAtom;
-	MwmHints	     mwmHints;
 
 	visual = findArgbVisual (dpy, s->screenNum);
 	if (!visual)
@@ -811,17 +809,6 @@ switchInitiate (CompScreen *s,
 	XSetWMProperties (dpy, ss->popupWindow, NULL, NULL,
 			  programArgv, programArgc,
 			  &xsh, &xwmh, NULL);
-
-	mwmHintsAtom = XInternAtom (dpy, "_MOTIF_WM_HINTS", 0);
-
-	memset (&mwmHints, 0, sizeof (mwmHints));
-
-	mwmHints.flags	     = MwmHintsDecorations;
-	mwmHints.decorations = 0;
-
-	XChangeProperty (dpy, ss->popupWindow, mwmHintsAtom, mwmHintsAtom,
-			 8, PropModeReplace, (unsigned char *) &mwmHints,
-			 sizeof (mwmHints));
 
 	state[nState++] = s->display->winStateAboveAtom;
 	state[nState++] = s->display->winStateStickyAtom;
