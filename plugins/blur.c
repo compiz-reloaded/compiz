@@ -815,7 +815,7 @@ blurScreenInitOptions (BlurScreen *bs)
     o->value.i	  = BLUR_SATURATION_DEFAULT;
     o->rest.i.min = BLUR_SATURATION_MIN;
     o->rest.i.max = BLUR_SATURATION_MAX;
-    
+
     o = &bs->opt[BLUR_SCREEN_OPTION_BLUR_OCCLUSION];
     o->name	  = "occlusion";
     o->shortDesc  = N_("Blur Occlusion");
@@ -1014,7 +1014,7 @@ blurPaintScreen (CompScreen		 *s,
 		 unsigned int		 mask)
 {
     Bool status;
-	
+
     BLUR_SCREEN (s);
 
     if (bs->alphaBlur)
@@ -1040,12 +1040,12 @@ blurPaintScreen (CompScreen		 *s,
     if (!bs->blurOcclusion)
     {
 	CompWindow *w;
-    
-	XSubtractRegion(&emptyRegion, &emptyRegion, bs->occlusion);
-	
+
+	XSubtractRegion (&emptyRegion, &emptyRegion, bs->occlusion);
+
 	for (w = s->windows; w; w = w->next)
-	    XSubtractRegion(&emptyRegion, &emptyRegion, 
-		    GET_BLUR_WINDOW(w, bs)->clip);
+	    XSubtractRegion (&emptyRegion, &emptyRegion,
+			     GET_BLUR_WINDOW (w, bs)->clip);
     }
 
     bs->output = output;
@@ -1070,12 +1070,12 @@ blurPaintTransformedScreen (CompScreen		    *s,
     if (!bs->blurOcclusion)
     {
 	CompWindow *w;
-    
-	XSubtractRegion(&emptyRegion, &emptyRegion, bs->occlusion);
-	
+
+	XSubtractRegion (&emptyRegion, &emptyRegion, bs->occlusion);
+
 	for (w = s->windows; w; w = w->next)
-	    XSubtractRegion(&emptyRegion, &emptyRegion, 
-		    GET_BLUR_WINDOW(w, bs)->clip);
+	    XSubtractRegion (&emptyRegion, &emptyRegion,
+			     GET_BLUR_WINDOW (w, bs)->clip);
     }
 
     UNWRAP (bs, s, paintTransformedScreen);
@@ -1126,10 +1126,11 @@ blurPaintWindow (CompWindow		 *w,
 
     if (!bs->blurOcclusion && (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK))
     {
-    	XSubtractRegion(bs->occlusion, &emptyRegion, bw->clip);
+	XSubtractRegion (bs->occlusion, &emptyRegion, bw->clip);
+
 	if (!(w->lastMask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK) &&
 	    !(w->lastMask & PAINT_WINDOW_TRANSFORMED_MASK) && bw->region)
-    	    XUnionRegion(bs->occlusion, bw->region, bs->occlusion);
+	    XUnionRegion (bs->occlusion, bw->region, bs->occlusion);
     }
 
     return status;
@@ -1875,7 +1876,7 @@ blurUpdateDstTexture (CompWindow	  *w,
 
 	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
 	    if (bs->tmpRegion2->numRects)
-	        blurProjectRegion (w, bs->output, transform);
+		blurProjectRegion (w, bs->output, transform);
 	}
 
 	if (clientThreshold)
@@ -2105,7 +2106,7 @@ blurDrawWindow (CompWindow	     *w,
 			bw->state[BLUR_STATE_DECOR].active = TRUE;
 		    }
 		}
-		
+
 		if (!bs->blurOcclusion && bw->clip->numRects)
 		    clipped = TRUE;
 	    }
@@ -2306,7 +2307,8 @@ blurDrawWindowTexture (CompWindow	    *w,
 		break;
 	    }
 
-	    if (bw->state[state].clipped || (!bs->blurOcclusion && bw->clip->numRects))
+	    if (bw->state[state].clipped ||
+		(!bs->blurOcclusion && bw->clip->numRects))
 	    {
 		glEnable (GL_STENCIL_TEST);
 
