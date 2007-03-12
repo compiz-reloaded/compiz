@@ -1013,6 +1013,13 @@ paintWindow (CompWindow		     *w,
     FragmentAttrib fragment;
     Bool	   status;
 
+    w->lastPaint = *attrib;
+
+    if (w->alpha || attrib->opacity != OPAQUE)
+	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
+    w->lastMask = mask;
+
     if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
     {
 	if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
@@ -1021,10 +1028,7 @@ paintWindow (CompWindow		     *w,
 	if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
 	    return FALSE;
 
-	if (w->alpha)
-	    return FALSE;
-
-	if (attrib->opacity != OPAQUE)
+	if (mask & PAINT_WINDOW_TRANSLUCENT_MASK)
 	    return FALSE;
 
 	if (w->shaded)
@@ -1033,15 +1037,10 @@ paintWindow (CompWindow		     *w,
 	return TRUE;
     }
 
-    w->lastPaint = *attrib;
-
     if (mask & PAINT_WINDOW_NO_CORE_INSTANCE_MASK)
 	return TRUE;
 
     initFragmentAttrib (&fragment, attrib);
-
-    if (w->alpha || fragment.opacity != OPAQUE)
-	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
     if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
     {
