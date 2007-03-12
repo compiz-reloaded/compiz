@@ -1722,7 +1722,8 @@ static Bool
 blurUpdateDstTexture (CompWindow	  *w,
 		      const CompTransform *transform,
 		      Region		  clip,
-		      BoxPtr		  pExtents)
+		      BoxPtr		  pExtents,
+		      int                 clientThreshold)
 {
     CompScreen *s = w->screen;
     BoxPtr     pBox;
@@ -1745,55 +1746,61 @@ blurUpdateDstTexture (CompWindow	  *w,
 	region.rects    = &region.extents;
 	region.numRects = 1;
 
-	/* top */
-	region.extents.x1 = w->attrib.x - w->output.left;
-	region.extents.y1 = w->attrib.y - w->output.top;
-	region.extents.x2 = w->attrib.x + w->width + w->output.right;
-	region.extents.y2 = w->attrib.y;
+	if (bw->state[BLUR_STATE_DECOR].threshold)
+	{
+	    /* top */
+	    region.extents.x1 = w->attrib.x - w->output.left;
+	    region.extents.y1 = w->attrib.y - w->output.top;
+	    region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	    region.extents.y2 = w->attrib.y;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
 
-	/* bottom */
-	region.extents.x1 = w->attrib.x - w->output.left;
-	region.extents.y1 = w->attrib.y + w->height;
-	region.extents.x2 = w->attrib.x + w->width + w->output.right;
-	region.extents.y2 = w->attrib.y + w->height + w->output.bottom;
+	    /* bottom */
+	    region.extents.x1 = w->attrib.x - w->output.left;
+	    region.extents.y1 = w->attrib.y + w->height;
+	    region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	    region.extents.y2 = w->attrib.y + w->height + w->output.bottom;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
 
-	/* left */
-	region.extents.x1 = w->attrib.x - w->output.left;
-	region.extents.y1 = w->attrib.y;
-	region.extents.x2 = w->attrib.x;
-	region.extents.y2 = w->attrib.y + w->height;
+	    /* left */
+	    region.extents.x1 = w->attrib.x - w->output.left;
+	    region.extents.y1 = w->attrib.y;
+	    region.extents.x2 = w->attrib.x;
+	    region.extents.y2 = w->attrib.y + w->height;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
 
-	/* right */
-	region.extents.x1 = w->attrib.x + w->width;
-	region.extents.y1 = w->attrib.y;
-	region.extents.x2 = w->attrib.x + w->width + w->output.right;
-	region.extents.y2 = w->attrib.y + w->height;
+	    /* right */
+	    region.extents.x1 = w->attrib.x + w->width;
+	    region.extents.y1 = w->attrib.y;
+	    region.extents.x2 = w->attrib.x + w->width + w->output.right;
+	    region.extents.y2 = w->attrib.y + w->height;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+	        blurProjectRegion (w, bs->output, transform);
+	}
 
-	/* center */
-	region.extents.x1 = w->attrib.x;
-	region.extents.y1 = w->attrib.y;
-	region.extents.x2 = w->attrib.x + w->width;
-	region.extents.y2 = w->attrib.y + w->height;
+	if (clientThreshold)
+	{
+	    /* center */
+	    region.extents.x1 = w->attrib.x;
+	    region.extents.y1 = w->attrib.y;
+	    region.extents.x2 = w->attrib.x + w->width;
+	    region.extents.y2 = w->attrib.y + w->height;
 
-	XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
-	if (bs->tmpRegion2->numRects)
-	    blurProjectRegion (w, bs->output, transform);
+	    XIntersectRegion (bs->tmpRegion, &region, bs->tmpRegion2);
+	    if (bs->tmpRegion2->numRects)
+		blurProjectRegion (w, bs->output, transform);
+	}
     }
     else
     {
@@ -1972,9 +1979,9 @@ blurDrawWindow (CompWindow	     *w,
 	    else
 		reg = region;
 
-	    if (blurUpdateDstTexture (w, transform, reg, &box))
+	    if (blurUpdateDstTexture (w, transform, reg, &box, clientThreshold))
 	    {
-		if (bw->state[BLUR_STATE_CLIENT].threshold)
+		if (clientThreshold)
 		{
 		    if (bw->state[BLUR_STATE_CLIENT].clipped)
 		    {
