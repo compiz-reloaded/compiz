@@ -940,78 +940,6 @@ fuseUnmount (CompDisplay *d)
     }
 }
 
-static CompDisplay *fuse_instance = NULL;
-
-/* FIXME: we need all this signal handling until compiz can do a
-   clean shutdown */
-static Bool
-fuseCleanupExit (void *closure)
-{
-    if (fuse_instance)
-	fuseUnmount (fuse_instance);
-
-    exit (0);
-}
-
-static void
-exit_handler (int sig)
-{
-    compAddTimeout (0, fuseCleanupExit, NULL);
-}
-
-static int
-set_one_signal_handler (int  sig,
-			void (*handler) (int))
-{
-    struct sigaction sa;
-    struct sigaction old_sa;
-
-    memset (&sa, 0, sizeof (struct sigaction));
-
-    sa.sa_handler = handler;
-    sigemptyset (&sa.sa_mask);
-    sa.sa_flags = 0;
-
-    if (sigaction (sig, NULL, &old_sa) == -1)
-    {
-	perror("fuse: cannot get old signal handler");
-	return -1;
-    }
-
-    if (old_sa.sa_handler == SIG_DFL && sigaction (sig, &sa, NULL) == -1)
-    {
-	perror("fuse: cannot set signal handler");
-	return -1;
-    }
-
-    return 0;
-}
-
-static int
-set_signal_handlers (CompDisplay *d)
-{
-    if (set_one_signal_handler (SIGHUP,  exit_handler) == -1 ||
-	set_one_signal_handler (SIGINT,  exit_handler) == -1 ||
-	set_one_signal_handler (SIGTERM, exit_handler) == -1 ||
-	set_one_signal_handler (SIGPIPE, SIG_IGN) == -1)
-	return -1;
-
-    fuse_instance = d;
-
-    return 0;
-}
-
-static void
-remove_signal_handlers (void)
-{
-    set_one_signal_handler (SIGHUP, SIG_DFL);
-    set_one_signal_handler (SIGINT, SIG_DFL);
-    set_one_signal_handler (SIGTERM, SIG_DFL);
-    set_one_signal_handler (SIGPIPE, SIG_DFL);
-
-    fuse_instance = NULL;
-}
-
 static Bool
 fuseProcessMessages (void *data)
 {
@@ -1140,7 +1068,17 @@ static Bool
 fuseInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
-    FuseDisplay	*fd;
+    FuseDisplay	     *fd;
+    struct sigaction sa;
+
+    memset (&sa, 0, sizeof (struct sigaction));
+
+    sa.sa_handler = SIG_IGN;
+    sigemptyset (&sa.sa_mask);
+    sa.sa_flags = 0;
+
+    if (sigaction (SIGPIPE, &sa, NULL) == -1)
+	return FALSE;
 
     fd = malloc (sizeof (FuseDisplay));
     if (!fd)
@@ -1156,8 +1094,6 @@ fuseInitDisplay (CompPlugin  *p,
 	free (fd);
 	return FALSE;
     }
-
-    set_signal_handlers (d);
 
     fd->watchFdHandle = 0;
     fd->channel	      = NULL;
@@ -1176,8 +1112,6 @@ fuseFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
     FUSE_DISPLAY (d);
-
-    remove_signal_handlers ();
 
     fuseUnmount (d);
 
