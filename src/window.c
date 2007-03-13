@@ -2000,7 +2000,7 @@ addWindow (CompScreen *screen,
 				   XDamageReportRawRectangles);
 
 	/* need to check for DisplayModal state on all windows */
-	w->state = getWindowState (w->screen->display, w->id);
+	w->state = getWindowState (screen->display, w->id);
 
 	updateWindowClassHints (w);
     }
@@ -2012,8 +2012,8 @@ addWindow (CompScreen *screen,
 
     w->invisible = TRUE;
 
-    w->wmType    = getWindowType (w->screen->display, w->id);
-    w->protocols = getProtocols (w->screen->display, w->id);
+    w->wmType    = getWindowType (screen->display, w->id);
+    w->protocols = getProtocols (screen->display, w->id);
 
     if (!w->attrib.override_redirect)
     {
@@ -2028,12 +2028,12 @@ addWindow (CompScreen *screen,
 
 	recalcWindowType (w);
 
-	getMwmHints (w->screen->display, w->id, &w->mwmFunc, &w->mwmDecor);
+	getMwmHints (screen->display, w->id, &w->mwmFunc, &w->mwmDecor);
 
 	if (!(w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask)))
 	{
-	    w->desktop = getWindowProp (w->screen->display, w->id,
-					w->screen->display->winDesktopAtom,
+	    w->desktop = getWindowProp (screen->display, w->id,
+					screen->display->winDesktopAtom,
 					w->desktop);
 	    if (w->desktop != 0xffffffff)
 	    {
@@ -2043,14 +2043,14 @@ addWindow (CompScreen *screen,
 
 	    if (!(w->type & CompWindowTypeDesktopMask))
 		w->opacityPropSet =
-		    readWindowProp32 (w->screen->display, w->id,
-				      w->screen->display->winOpacityAtom,
+		    readWindowProp32 (screen->display, w->id,
+				      screen->display->winOpacityAtom,
 				      &w->opacity);
 	}
 
 	w->brightness =
-	    getWindowProp32 (w->screen->display, w->id,
-			     w->screen->display->winBrightnessAtom,
+	    getWindowProp32 (screen->display, w->id,
+			     screen->display->winBrightnessAtom,
 			     BRIGHT);
 
 	if (w->alive)
@@ -2059,11 +2059,11 @@ addWindow (CompScreen *screen,
 	    w->paint.brightness = w->brightness;
 	}
 
-	if (w->screen->canDoSaturated)
+	if (screen->canDoSaturated)
 	{
 	    w->saturation =
-		getWindowProp32 (w->screen->display, w->id,
-				 w->screen->display->winSaturationAtom,
+		getWindowProp32 (screen->display, w->id,
+				 screen->display->winSaturationAtom,
 				 COLOR);
 	    if (w->alive)
 		w->paint.saturation = w->saturation;
@@ -2090,10 +2090,10 @@ addWindow (CompScreen *screen,
 	    else
 	    {
 		if (w->desktop != 0xffffffff)
-		    w->desktop = w->screen->currentDesktop;
+		    w->desktop = screen->currentDesktop;
 
-		setWindowProp (w->screen->display, w->id,
-			       w->screen->display->winDesktopAtom,
+		setWindowProp (screen->display, w->id,
+			       screen->display->winDesktopAtom,
 			       w->desktop);
 	    }
 	}
