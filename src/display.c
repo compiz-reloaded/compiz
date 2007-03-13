@@ -34,6 +34,7 @@
 #include <string.h>
 #include <sys/poll.h>
 #include <unistd.h>
+#include <signal.h>
 
 #define XK_MISCELLANY
 #include <X11/keysymdef.h>
@@ -422,11 +423,11 @@ toggleSlowAnimations (CompDisplay     *d,
 }
 
 static Bool
-raise (CompDisplay     *d,
-       CompAction      *action,
-       CompActionState state,
-       CompOption      *option,
-       int	       nOption)
+raiseInitiate (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
 {
     CompWindow *w;
     Window     xid;
@@ -441,11 +442,11 @@ raise (CompDisplay     *d,
 }
 
 static Bool
-lower (CompDisplay     *d,
-       CompAction      *action,
-       CompActionState state,
-       CompOption      *option,
-       int	       nOption)
+lowerInitiate (CompDisplay     *d,
+	       CompAction      *action,
+	       CompActionState state,
+	       CompOption      *option,
+	       int	       nOption)
 {
     CompWindow *w;
     Window     xid;
@@ -1011,7 +1012,7 @@ compDisplayInitOptions (CompDisplay *display,
     o->shortDesc		     = N_("Raise Window");
     o->longDesc			     = N_("Raise window above other windows");
     o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = raise;
+    o->value.action.initiate	     = raiseInitiate;
     o->value.action.terminate        = 0;
     o->value.action.bell	     = FALSE;
     o->value.action.edgeMask	     = 0;
@@ -1026,7 +1027,7 @@ compDisplayInitOptions (CompDisplay *display,
     o->shortDesc		     = N_("Lower Window");
     o->longDesc			     = N_("Lower window beneath other windows");
     o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = lower;
+    o->value.action.initiate	     = lowerInitiate;
     o->value.action.terminate        = 0;
     o->value.action.bell	     = FALSE;
     o->value.action.edgeMask	     = 0;
@@ -2523,6 +2524,47 @@ addScreenToDisplay (CompDisplay *display,
     addScreenActions (display, s);
 }
 
+static Bool
+setSignalHandler (int  sig,
+		  void (*handler) (int))
+{
+    struct sigaction sa;
+
+    memset (&sa, 0, sizeof (struct sigaction));
+
+    sa.sa_handler = handler;
+    sigemptyset (&sa.sa_mask);
+    sa.sa_flags = 0;
+
+    if (sigaction (sig, &sa, NULL) == -1)
+	return FALSE;
+
+    return TRUE;
+}
+
+static void
+exitHandler (int sig)
+{
+    shutDown = TRUE;
+}
+
+static void
+restartHandler (int sig)
+{
+    restartSignal = TRUE;
+}
+
+static Bool
+setSignalHandlers (void)
+{
+    if (!setSignalHandler (SIGHUP,  restartHandler) ||
+	!setSignalHandler (SIGINT,  exitHandler)    ||
+	!setSignalHandler (SIGTERM, exitHandler))
+	return FALSE;
+
+    return TRUE;
+}
+
 Bool
 addDisplay (char *name,
 	    char **plugin,
@@ -3101,6 +3143,8 @@ addDisplay (char *name,
     d->pingHandle =
 	compAddTimeout (d->opt[COMP_DISPLAY_OPTION_PING_DELAY].value.i,
 			pingTimeout, d);
+
+    setSignalHandlers ();
 
     return TRUE;
 }
