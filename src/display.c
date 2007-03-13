@@ -2053,11 +2053,13 @@ eventLoop (void)
 
 	if (restartSignal)
 	{
+	    while (popPlugin ());
 	    execvp (programName, programArgv);
 	    exit (1);
 	}
 	else if (shutDown)
 	{
+	    while (popPlugin ());
 	    exit (0);
 	}
 
