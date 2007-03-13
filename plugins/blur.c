@@ -1895,7 +1895,7 @@ blurUpdateDstTexture (CompWindow	  *w,
     else
     {
 	/* get region that needs blur */
-	XIntersectRegion (bs->tmpRegion, &emptyRegion, bs->tmpRegion2);
+	XSubtractRegion (bs->tmpRegion, &emptyRegion, bs->tmpRegion2);
 
 	if (bs->tmpRegion2->numRects)
 	    blurProjectRegion (w, bs->output, transform);
