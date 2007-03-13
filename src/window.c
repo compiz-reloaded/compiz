@@ -1803,7 +1803,7 @@ addWindow (CompScreen *screen,
     w->hidden		 = FALSE;
     w->grabbed		 = FALSE;
 
-    w->desktop = 0xffffffff;
+    w->desktop = screen->currentDesktop;
 
     w->initialViewportX = screen->x;
     w->initialViewportY = screen->y;
@@ -2032,13 +2032,14 @@ addWindow (CompScreen *screen,
 
 	if (!(w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask)))
 	{
-	    unsigned int desktop;
-
-	    desktop = getWindowProp (w->screen->display, w->id,
-				     w->screen->display->winDesktopAtom,
-				     w->screen->currentDesktop);
-	    if (desktop >= 0 && desktop < w->screen->nDesktop)
-		w->desktop = desktop;
+	    w->desktop = getWindowProp (w->screen->display, w->id,
+					w->screen->display->winDesktopAtom,
+					w->desktop);
+	    if (w->desktop != 0xffffffff)
+	    {
+		if (w->desktop < 0 || w->desktop >= screen->nDesktop)
+		    w->desktop = screen->currentDesktop;
+	    }
 
 	    if (!(w->type & CompWindowTypeDesktopMask))
 		w->opacityPropSet =
@@ -2083,14 +2084,18 @@ addWindow (CompScreen *screen,
 
 	    if (w->wmType & (CompWindowTypeDockMask |
 			     CompWindowTypeDesktopMask))
+	    {
 		setDesktopForWindow (w, 0xffffffff);
+	    }
+	    else
+	    {
+		if (w->desktop != 0xffffffff)
+		    w->desktop = w->screen->currentDesktop;
 
-	    if (w->desktop != 0xffffffff)
-		w->desktop = w->screen->currentDesktop;
-
-	    setWindowProp (w->screen->display, w->id,
-			   w->screen->display->winDesktopAtom,
-			   w->desktop);
+		setWindowProp (w->screen->display, w->id,
+			       w->screen->display->winDesktopAtom,
+			       w->desktop);
+	    }
 	}
 
 	w->pendingMaps++;
