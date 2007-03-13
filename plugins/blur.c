@@ -1294,7 +1294,6 @@ getDstBlurFragmentFunction (CompScreen  *s,
 		      "MAD t3, program.env[%d], { 1.0, -1.0, 0.0, 0.0 }, coord;"
 		      "TEX s3, t3, texture[%d], %s;"
 
-		      "TEX dst, coord, texture[%d], %s;"
 		      "MUL_SAT mask, output.a, program.env[%d];"
 
 		      "MUL sum, s0, 0.25;"
@@ -1306,7 +1305,6 @@ getDstBlurFragmentFunction (CompScreen  *s,
 		      param + 2, unit, targetString,
 		      param + 2, unit, targetString,
 		      param + 2, unit, targetString,
-		      unit, targetString,
 		      param + 1);
 
 	    ok &= addDataOpToFunctionData (data, str);
@@ -1335,10 +1333,9 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    ok &= addDataOpToFunctionData (data, str);
 
 	    snprintf (str, 1024,
-		      "TEX dst, coord, texture[%d], %s;"
 		      "MUL_SAT mask, output.a, program.env[%d];"
 		      "MUL sum, sum, %f;",
-		      unit, targetString, param + 1, bs->amp[bs->numTexop]);
+		      param + 1, bs->amp[bs->numTexop]);
 
 	    ok &= addDataOpToFunctionData (data, str);
 
@@ -1367,12 +1364,10 @@ getDstBlurFragmentFunction (CompScreen  *s,
 
 	    snprintf (str, 1024,
 		      "MUL coord, fragment.position, program.env[%d].xyzz;"
-		      "TEX dst, coord, texture[%d], %s;"
 		      "MOV coord.w, program.env[%d].w;"
 		      "TXB sum, coord, texture[%d], %s;"
 		      "MUL_SAT mask, output.a, program.env[%d];",
-		      param, unit, targetString,
-		      param, unit, targetString,
+		      param, param, unit, targetString,
 		      param + 1);
 
 	    ok &= addDataOpToFunctionData (data, str);
@@ -1392,12 +1387,11 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	}
 
 	snprintf (str, 1024,
-		  "LRP sum, mask, sum, dst;"
-		  "SUB output.a, 1.0, output.a;"
-		  "MAD output.rgb, sum, output.a, output;"
-		  "MOV output.a, 1.0;");
+		  "MAD dst, mask, -output.a, mask;"
+		  "MAD output.rgb, sum, dst.a, output;"
+		  "ADD output.a, output.a, dst.a;");
 
-	ok &= addBlendOpToFunctionData (data, str);
+	ok &= addDataOpToFunctionData (data, str);
 
 	if (!ok)
 	{
