@@ -256,6 +256,391 @@ dbusIntrospectEndRoot (xmlTextWriterPtr writer)
     xmlTextWriterEndDocument (writer);
 }
 
+/* introspection handlers */
+static Bool
+dbusHandleRootIntrospectMessage (DBusConnection *connection,
+				 DBusMessage    *message,
+				 CompDisplay	*d)
+{
+    char **plugins, **plugin_name;
+    int nPlugins;
+
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+    dbusIntrospectStartInterface (writer);
+
+    dbusIntrospectAddMethod (writer, COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME, 1,
+			     "as", "out");
+    dbusIntrospectAddMethod (writer,
+			     COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME, 7,
+			     "s", "in", "s", "out", "s", "out", "s", "out",
+			     "b", "out", "as", "out", "as", "out");
+    dbusIntrospectAddSignal (writer,
+			     COMPIZ_DBUS_PLUGINS_CHANGED_SIGNAL_NAME, 0);
+
+    dbusIntrospectEndInterface (writer);
+
+    plugins = availablePlugins (&nPlugins);
+    if (plugins)
+    {
+	plugin_name = plugins;
+
+	while (nPlugins--)
+	{
+	    dbusIntrospectAddNode (writer, *plugin_name);
+	    free (*plugin_name);
+	    plugin_name++;
+	}
+
+	free (plugins);
+    }
+    else
+    {
+	xmlFreeTextWriter (writer);
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    dbusIntrospectAddNode (writer, "core");
+
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandlePluginIntrospectMessage (DBusConnection *connection,
+				    DBusMessage   *message,
+				    CompDisplay	  *d,
+				    char          **path)
+{
+    CompScreen *s;
+    char screen_name[256];
+
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+
+    dbusIntrospectAddNode (writer, "allscreens");
+
+    for (s = d->screens; s; s = s->next)
+    {
+	sprintf (screen_name, "screen%d", s->screenNum);
+	dbusIntrospectAddNode (writer, screen_name);
+    }
+
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandleScreenIntrospectMessage (DBusConnection *connection,
+				   DBusMessage    *message,
+				   CompDisplay	  *d,
+				   char           **path)
+{
+    CompOption *option = NULL;
+    int nOptions;
+
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+    dbusIntrospectStartInterface (writer);
+
+    dbusIntrospectAddMethod (writer, COMPIZ_DBUS_LIST_MEMBER_NAME, 1,
+			     "as", "out");
+
+    dbusIntrospectEndInterface (writer);
+
+    option = dbusGetOptionsFromPath (d, path, NULL, &nOptions);
+    if (option)
+    {
+	while (nOptions--)
+	{
+	    dbusIntrospectAddNode (writer, option->name);
+	    option++;
+	}
+    }
+
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandleOptionIntrospectMessage (DBusConnection *connection,
+				   DBusMessage    *message,
+				   CompDisplay	  *d,
+				   char           **path)
+{
+    CompOption *option;
+    int nOptions;
+    CompOptionType restrictionType;
+    Bool getHandled, metadataHandled;
+    char *type;
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+    Bool is_list = FALSE;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+    dbusIntrospectStartInterface (writer);
+
+    option = dbusGetOptionsFromPath (d, path, NULL, &nOptions);
+    if (!option)
+    {
+	xmlFreeTextWriter (writer);
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    while (nOptions--)
+    {
+	if (strcmp (option->name, path[2]) == 0)
+	{
+	    restrictionType = option->type;
+	    if (restrictionType == CompOptionTypeList)
+	    {
+		restrictionType = option->value.list.type;
+		is_list = TRUE;
+	    }
+
+	    getHandled = metadataHandled = FALSE;
+	    switch (restrictionType)
+	    {
+	    case CompOptionTypeInt:
+		if (is_list)
+		    type = "ai";
+		else
+		    type = "i";
+
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 6, "s", "out", "s", "out",
+					 "b", "out", "s", "out",
+					 "i", "out", "i", "out");
+		metadataHandled = TRUE;
+		break;
+	    case CompOptionTypeFloat:
+		if (is_list)
+		    type = "ad";
+		else
+		    type = "d";
+
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 7, "s", "out", "s", "out",
+					 "b", "out", "s", "out",
+					 "d", "out", "d", "out",
+					 "d", "out");
+		metadataHandled = TRUE;
+		break;
+	    case CompOptionTypeString:
+		if (is_list)
+		    type = "as";
+		else
+		    type = "s";
+
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 5, "s", "out", "s", "out",
+					 "b", "out", "s", "out",
+					 "as", "out");
+		metadataHandled = TRUE;
+		break;
+	    case CompOptionTypeBool:
+		if (is_list)
+		    type = "ab";
+		else
+		    type = "b";
+
+		break;
+	    case CompOptionTypeAction:
+		dbusIntrospectAddMethod (writer, COMPIZ_DBUS_GET_MEMBER_NAME,
+					    5, "s", "out", "s", "out",
+					    "b", "out", "s", "out", "i", "out");
+		dbusIntrospectAddMethod (writer, COMPIZ_DBUS_SET_MEMBER_NAME,
+					    5, "s", "in", "s", "in",
+					    "b", "in", "s", "in", "i", "in");
+		dbusIntrospectAddSignal (writer,
+					 COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 5,
+					 "s", "out", "s", "out", "b", "out",
+					 "s", "out", "i", "out");
+		getHandled = TRUE;
+		break;
+	    case CompOptionTypeColor:
+	    case CompOptionTypeMatch:
+		if (is_list)
+		    type = "as";
+		else
+		    type = "s";
+
+		break;
+	    }
+
+	    if (!getHandled)
+	    {
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_MEMBER_NAME, 1,
+					 type, "out");
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_SET_MEMBER_NAME, 1,
+					 type, "in");
+		dbusIntrospectAddSignal (writer,
+					 COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 1,
+					 type, "out");
+	    }
+
+	    if (!metadataHandled)
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 4, "s", "out", "s", "out",
+					 "b", "out", "s", "out");
+	    break;
+	}
+
+	option++;
+    }
+
+    dbusIntrospectEndInterface (writer);
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+
 /*
  * Activate can be used to trigger any existing action. Arguments
  * should be a pair of { string, bool|int32|double|string }.
