@@ -102,7 +102,8 @@ typedef struct _WindowDecoration {
 
 #define DECOR_MIPMAP_DEFAULT FALSE
 
-#define DECOR_DECOR_MATCH_DEFAULT "any"
+#define DECOR_DECOR_MATCH_DEFAULT  "any"
+#define DECOR_SHADOW_MATCH_DEFAULT "any"
 
 #define DECOR_DISPLAY_OPTION_SHADOW_RADIUS   0
 #define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
@@ -112,7 +113,8 @@ typedef struct _WindowDecoration {
 #define DECOR_DISPLAY_OPTION_COMMAND         5
 #define DECOR_DISPLAY_OPTION_MIPMAP          6
 #define DECOR_DISPLAY_OPTION_DECOR_MATCH     7
-#define DECOR_DISPLAY_OPTION_NUM             8
+#define DECOR_DISPLAY_OPTION_SHADOW_MATCH    8
+#define DECOR_DISPLAY_OPTION_NUM             9
 
 static int displayPrivateIndex;
 
@@ -653,7 +655,9 @@ decorWindowUpdate (CompWindow *w,
     WindowDecoration *wd;
     Decoration	     *old, *decor = NULL;
     Bool	     decorate = FALSE;
+    CompMatch	     *match;
 
+    DECOR_DISPLAY (w->screen->display);
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
 
@@ -676,10 +680,6 @@ decorWindowUpdate (CompWindow *w,
 
     if (decorate)
     {
-	CompMatch *match;
-
-	DECOR_DISPLAY (w->screen->display);
-
 	match = &dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match;
 	if (!matchEval (match, w))
 	    decorate = FALSE;
@@ -701,17 +701,21 @@ decorWindowUpdate (CompWindow *w,
     }
     else
     {
-	if (w->region->numRects == 1 && !w->alpha)
-	    decor = ds->decor[DECOR_BARE];
-
-	/* no decoration on windows with below state */
-	if (w->state & CompWindowStateBelowMask)
-	    decor = NULL;
-
-	if (decor)
+	match = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_MATCH].value.match;
+	if (matchEval (match, w))
 	{
-	    if (!decorCheckSize (w, decor))
+	    if (w->region->numRects == 1 && !w->alpha)
+		decor = ds->decor[DECOR_BARE];
+
+	    /* no decoration on windows with below state */
+	    if (w->state & CompWindowStateBelowMask)
 		decor = NULL;
+
+	    if (decor)
+	    {
+		if (!decorCheckSize (w, decor))
+		    decor = NULL;
+	    }
 	}
     }
 
@@ -1081,6 +1085,7 @@ decorSetDisplayOption (CompDisplay     *display,
 	    return TRUE;
 	break;
     case DECOR_DISPLAY_OPTION_DECOR_MATCH:
+    case DECOR_DISPLAY_OPTION_SHADOW_MATCH:
 	if (compSetMatchOption (o, value))
 	{
 	    CompScreen *s;
@@ -1175,6 +1180,15 @@ decorDisplayInitOptions (DecorDisplay *dd)
 
     matchInit (&o->value.match);
     matchAddFromString (&o->value.match, DECOR_DECOR_MATCH_DEFAULT);
+
+    o = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_MATCH];
+    o->name	 = "shadow_match";
+    o->shortDesc = N_("Shadow windows");
+    o->longDesc	 = N_("Windows that should be have a shadow");
+    o->type	 = CompOptionTypeMatch;
+
+    matchInit (&o->value.match);
+    matchAddFromString (&o->value.match, DECOR_SHADOW_MATCH_DEFAULT);
 }
 
 static void
@@ -1278,6 +1292,7 @@ decorInitDisplay (CompPlugin  *p,
     decorDisplayInitOptions (dd);
 
     matchUpdate (d, &dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match);
+    matchUpdate (d, &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_MATCH].value.match);
 
     WRAP (dd, d, handleEvent, decorHandleEvent);
 
@@ -1293,6 +1308,7 @@ decorFiniDisplay (CompPlugin  *p,
     DECOR_DISPLAY (d);
 
     matchFini (&dd->opt[DECOR_DISPLAY_OPTION_DECOR_MATCH].value.match);
+    matchFini (&dd->opt[DECOR_DISPLAY_OPTION_SHADOW_MATCH].value.match);
 
     freeScreenPrivateIndex (d, dd->screenPrivateIndex);
 
