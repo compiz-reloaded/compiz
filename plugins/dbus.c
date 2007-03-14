@@ -1907,6 +1907,226 @@ dbusSendChangeSignalForScreenOption (CompScreen *s,
 }
 
 static Bool
+dbusGetPathDecomposed (char *data,
+		       char ***path)
+{
+    char **retval;
+    char *temp;
+    char *token;
+    int nComponents;
+    int i;
+
+    nComponents = 0;
+    if (strlen (data) > 1)
+    {
+	i = 0;
+	while (i < strlen (data))
+	{
+            if (data[i] == '/')
+		nComponents += 1;
+	    ++i;
+	}
+    }
+  
+    retval = malloc (sizeof (char*) * nComponents + 1);
+
+    if (nComponents == 0)
+    {
+	retval[0] = malloc (1);
+	retval[0][0] = '\0';
+	*path = retval;
+	return TRUE;
+    }
+
+    temp = strdup (data);
+
+    i = 0;
+    token = strtok (temp, "/");
+    while (token != NULL)
+    {
+	retval[i] = strdup (token);
+	token = strtok (NULL, "/");
+	i++;
+    }
+    free (temp);
+
+    *path = retval;
+    return TRUE;
+}
+
+/* dbus registration */
+static Bool
+dbusRegisterOptions (DBusConnection *connection,
+		     CompDisplay    *d,
+		     char           *screen_path)
+{
+    CompOption *option = NULL;
+    int nOptions, size;
+    char *option_path;
+    char **path;
+
+    dbusGetPathDecomposed (screen_path, &path);
+
+    option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
+
+    if (!option)
+	return FALSE;
+
+    while (nOptions--)
+    {
+	size = strlen (screen_path) + strlen (option->name) + 2;
+	option_path = malloc (size);
+	snprintf (option_path, size, "%s/%s", screen_path, option->name);
+
+	dbus_connection_register_object_path (connection, option_path,
+					      &dbus_messages_vtable, d);
+	free (option_path);
+	option++;
+    }
+
+    return TRUE;
+}
+
+static Bool
+dbusUnregisterOptions (DBusConnection *connection,
+		       CompDisplay    *d,
+		       char           *screen_path)
+{
+    CompOption *option = NULL;
+    int nOptions, size;
+    char *option_path;
+    char **path;
+
+    dbusGetPathDecomposed (screen_path, &path);
+
+    option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
+
+    if (!option)
+	return FALSE;
+
+    while (nOptions--)
+    {
+	size = strlen (screen_path) + strlen (option->name) + 2;
+	option_path = malloc (size);
+	snprintf (option_path, size, "%s/%s", screen_path, option->name);
+
+	dbus_connection_unregister_object_path (connection, option_path);
+	free (option_path);
+	option++;
+    }
+
+    return TRUE;
+}
+
+static void
+dbusRegisterScreen (DBusConnection *connection,
+		    CompDisplay   *d,
+		    char          *plugin_name,
+		    char          *screen_name)
+{
+    char *screen_path;
+    int  size;
+
+    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (plugin_name) +
+		strlen (screen_name) + 3;
+
+    screen_path = malloc (size);
+    snprintf (screen_path, size, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      plugin_name, screen_name);
+    dbus_connection_register_object_path (connection, screen_path,
+					  &dbus_messages_vtable, d);
+    dbusRegisterOptions (connection, d, screen_path);
+    free (screen_path);
+}
+
+static void
+dbusUnregisterScreen (DBusConnection *connection,
+		      CompDisplay   *d,
+		      char          *plugin_name,
+		      char          *screen_name)
+{
+    char *screen_path;
+    int  size;
+
+    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (plugin_name) +
+		strlen (screen_name) + 3;
+
+    screen_path = malloc (size);
+    snprintf (screen_path, size, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      plugin_name, screen_name);
+
+    dbusUnregisterOptions (connection, d, screen_path);
+    free (screen_path);
+}
+
+static Bool
+dbusRegisterScreens (DBusConnection *connection,
+		     CompDisplay    *d,
+		     char           *plugin_name)
+{
+    CompScreen *s;
+
+    dbusRegisterScreen (connection, d, plugin_name, "allscreens");
+
+    for (s = d->screens; s; s = s->next)
+    {
+	char screen_name[256];
+	sprintf (screen_name, "screen%d", s->screenNum);
+	dbusRegisterScreen (connection, d, plugin_name, screen_name);
+    }
+
+    return TRUE;
+}
+
+static void
+dbusRegisterPlugin (DBusConnection *connection,
+		    CompDisplay    *d,
+		    char           *plugin_name)
+{
+    int size;
+    char *plugin_path;
+
+    //root path + plugin name + separator + \0
+    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (plugin_name) + 2;
+    plugin_path = malloc (size);
+    snprintf (plugin_path, size, "%s/%s", COMPIZ_DBUS_ROOT_PATH, plugin_name);
+    dbus_connection_register_object_path (connection, plugin_path,
+					  &dbus_messages_vtable, d);
+
+    dbusRegisterScreens (connection, d, plugin_name);
+
+    free (plugin_path);
+}
+
+static Bool
+dbusRegisterPlugins (DBusConnection *connection,
+		     CompDisplay    *d)
+{
+    int nPlugins;
+    char **plugins, **plugin_name;
+
+    //register core 'plugin'
+    dbusRegisterPlugin (connection, d, "core");
+
+    plugins = availablePlugins (&nPlugins);
+    if (plugins)
+    {
+	plugin_name = plugins;
+	while (nPlugins--)
+	{
+		dbusRegisterPlugin (connection, d, *plugin_name);
+		free (*plugin_name);
+		plugin_name++;
+	}
+
+	free (plugins);
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+static Bool
 dbusSetDisplayOption (CompDisplay     *d,
 		      char	      *name,
 		      CompOptionValue *value)
@@ -2124,6 +2344,8 @@ dbusInitDisplay (CompPlugin  *p,
     dbus_connection_register_object_path (dd->connection,
 					  COMPIZ_DBUS_ROOT_PATH,
 					  &dbus_messages_vtable, d);
+
+    dbusRegisterPlugins (dd->connection, d);
  
     status = dbus_connection_get_unix_fd (dd->connection, &fd);
     if (!status)
