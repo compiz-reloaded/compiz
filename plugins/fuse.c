@@ -80,15 +80,35 @@
 			FUSE_INODE_TYPE_OPTION  | \
 			FUSE_INODE_TYPE_SELECTION)
 
+#define ACTION_MASK (FUSE_INODE_TYPE_KEY	 | \
+		     FUSE_INODE_TYPE_BUTTON	 | \
+		     FUSE_INODE_TYPE_EDGE_BUTTON | \
+		     FUSE_INODE_TYPE_BELL)
+
+#define WRITE_MASK (FUSE_INODE_TYPE_VALUE	| \
+		    FUSE_INODE_TYPE_KEY		| \
+		    FUSE_INODE_TYPE_BUTTON	| \
+		    FUSE_INODE_TYPE_EDGE_BUTTON | \
+		    FUSE_INODE_TYPE_BELL)
+
+#define FUSE_INODE_FLAG_TRUNC (1 << 0)
+
 typedef struct _FuseInode {
     struct _FuseInode *parent;
     struct _FuseInode *child;
     struct _FuseInode *sibling;
 
     int	       type;
+    int	       flags;
     fuse_ino_t ino;
     char       *name;
 } FuseInode;
+
+typedef struct _FuseWriteBuffer {
+    char *data;
+    int  size;
+    Bool dirty;
+} FuseWriteBuffer;
 
 static int displayPrivateIndex;
 
@@ -131,6 +151,7 @@ fuseAddInode (FuseInode	*parent,
     inode->sibling = NULL;
     inode->child   = NULL;
     inode->type    = type;
+    inode->flags   = 0;
     inode->ino     = nextIno++;
     inode->name	   = strdup (name);
 
@@ -339,6 +360,9 @@ fuseGetStringFromInode (CompDisplay *d,
     option = fuseGetOptionFromInode (d, inode->parent);
     if (!option)
 	return NULL;
+
+    if (inode->flags & FUSE_INODE_FLAG_TRUNC)
+	return strdup ("");
 
     if (inode->type & FUSE_INODE_TYPE_TYPE)
     {
@@ -704,7 +728,11 @@ fuseInodeStat (CompDisplay *d,
     {
 	char *str;
 
-	stbuf->st_mode  = S_IFREG | 0444;
+	if (inode->type & WRITE_MASK)
+	    stbuf->st_mode = S_IFREG | 0666;
+	else
+	    stbuf->st_mode = S_IFREG | 0444;
+
 	stbuf->st_nlink = 1;
 	stbuf->st_size  = 0;
 
@@ -714,6 +742,148 @@ fuseInodeStat (CompDisplay *d,
 	    stbuf->st_size = strlen (str);
 	    free (str);
 	}
+    }
+}
+
+static Bool
+fuseInitValueFromString (CompOptionValue *value,
+			 CompOptionType  type,
+			 char		 *str)
+{
+    switch (type) {
+    case CompOptionTypeBool:
+	value->b = strcmp (str, "true") ? FALSE : TRUE;
+	break;
+    case CompOptionTypeInt:
+	value->i = atoi (str);
+	break;
+    case CompOptionTypeFloat:
+	value->f = strtod (str, NULL);
+	break;
+    case CompOptionTypeString:
+	value->s = strdup (str);
+	break;
+    case CompOptionTypeColor:
+	if (!stringToColor (str, value->c))
+	    return FALSE;
+	break;
+    case CompOptionTypeMatch:
+	matchInit (&value->match);
+	matchAddFromString (&value->match, str);
+	break;
+    default:
+	return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void
+fuseFiniValue (CompOptionValue *value,
+	       CompOptionType  type)
+{
+    int i;
+
+    switch (type) {
+    case CompOptionTypeString:
+	if (value->s)
+	    free (value->s);
+	break;
+    case CompOptionTypeMatch:
+	matchFini (&value->match);
+	break;
+    case CompOptionTypeList:
+	for (i = 0; i < value->list.nValue; i++)
+	    fuseFiniValue (&value->list.value[i], value->list.type);
+    default:
+	break;
+    }
+}
+
+static void
+fuseSetInodeOptionUsingString (CompDisplay *d,
+			       FuseInode   *inode,
+			       char	   *str)
+{
+    CompOption *option;
+
+    option = fuseGetOptionFromInode (d, inode->parent);
+    if (option)
+    {
+	CompOptionValue value;
+	CompScreen	*s = NULL;
+	char		*plugin = NULL;
+	FuseInode	*screenInode = NULL;
+
+	if (inode->type & FUSE_INODE_TYPE_VALUE)
+	{
+	    if (!fuseInitValueFromString (&value, option->type, str))
+		return;
+
+	    screenInode = inode->parent->parent;
+	}
+	else if (inode->type & ACTION_MASK)
+	{
+	    value.action = option->value.action;
+
+	    if (inode->type & FUSE_INODE_TYPE_KEY)
+	    {
+		if (!stringToKeyBinding (d, str, &value.action.key))
+		    return;
+	    }
+	    else if (inode->type & FUSE_INODE_TYPE_BUTTON)
+	    {
+		if (!stringToButtonBinding (d, str, &value.action.button))
+		    return;
+	    }
+	    else if (inode->type & FUSE_INODE_TYPE_BELL)
+	    {
+		value.action.bell = strcmp (str, "true") ? FALSE : TRUE;
+	    }
+	    else if (inode->type & FUSE_INODE_TYPE_EDGE_BUTTON)
+	    {
+		value.action.edgeButton = atoi (str);
+	    }
+
+	    screenInode = inode->parent->parent;
+	}
+
+	if (screenInode->type & FUSE_INODE_TYPE_SCREEN)
+	{
+	    int screenNum = -1;
+
+	    sscanf (screenInode->name, "screen%d", &screenNum);
+
+	    for (s = d->screens; s; s = s->next)
+		if (s->screenNum == screenNum)
+		    break;
+	}
+
+	if (screenInode->parent->type & FUSE_INODE_TYPE_PLUGIN)
+	    plugin = screenInode->parent->name;
+
+	if (s)
+	{
+	    if (plugin)
+		(*s->setScreenOptionForPlugin) (s,
+						plugin,
+						option->name,
+						&value);
+	    else
+		(*s->setScreenOption) (s, option->name, &value);
+	}
+	else
+	{
+	    if (plugin)
+		(*d->setDisplayOptionForPlugin) (d,
+						 plugin,
+						 option->name,
+						 &value);
+	    else
+		(*d->setDisplayOption) (d, option->name, &value);
+	}
+
+	fuseFiniValue (&value, option->type);
     }
 }
 
@@ -729,6 +899,47 @@ compiz_getattr (fuse_req_t	      req,
     if (inode)
     {
 	struct stat stbuf;
+
+	memset (&stbuf, 0, sizeof (stbuf));
+
+	fuseInodeStat (d, inode, &stbuf);
+
+	fuse_reply_attr (req, &stbuf, 1.0);
+    }
+    else
+    {
+	fuse_reply_err (req, ENOENT);
+    }
+}
+
+static void
+compiz_setattr (fuse_req_t	      req,
+		fuse_ino_t	      ino,
+		struct stat	      *attr,
+		int		      to_set,
+		struct fuse_file_info *fi)
+{
+    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
+    FuseInode   *inode;
+
+    inode = fuseFindInode (inodes, ino, WRITE_MASK);
+    if (inode)
+    {
+	struct stat stbuf;
+
+	if ((to_set & FUSE_SET_ATTR_SIZE) != FUSE_SET_ATTR_SIZE)
+	{
+	    fuse_reply_err (req, EACCES);
+	    return;
+	}
+
+	if (attr->st_size != 0)
+	{
+	    fuse_reply_err (req, EACCES);
+	    return;
+	}
+
+	inode->flags |= FUSE_INODE_FLAG_TRUNC;
 
 	memset (&stbuf, 0, sizeof (stbuf));
 
@@ -856,7 +1067,8 @@ compiz_open (fuse_req_t		   req,
 	     fuse_ino_t		   ino,
 	     struct fuse_file_info *fi)
 {
-    FuseInode *inode;
+    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
+    FuseInode   *inode;
 
     inode = fuseFindInode (inodes, ino, ~0);
     if (!inode)
@@ -865,9 +1077,44 @@ compiz_open (fuse_req_t		   req,
 	return;
     }
 
+    fi->fh = 0;
+
     if (inode->type & DIR_MASK)
     {
 	fuse_reply_err (req, EISDIR);
+    }
+    else if (inode->type & WRITE_MASK)
+    {
+	if ((fi->flags & 3) != O_RDONLY)
+	{
+	    char *data;
+
+	    if (fi->flags & O_TRUNC)
+		data = strdup ("");
+	    else
+		data = fuseGetStringFromInode (d, inode);
+
+	    if (data)
+	    {
+		FuseWriteBuffer *wb;
+
+		wb = malloc (sizeof (FuseWriteBuffer));
+		if (wb)
+		{
+		    wb->data  = data;
+		    wb->size  = strlen (wb->data);
+		    wb->dirty = TRUE;
+
+		    fi->fh = (unsigned long) wb;
+		}
+		else
+		{
+		    free (data);
+		}
+	    }
+	}
+
+	fuse_reply_open (req, fi);
     }
     else if ((fi->flags & 3) != O_RDONLY)
     {
@@ -905,12 +1152,114 @@ compiz_read (fuse_req_t		   req,
     }
 }
 
+static void
+compiz_write (fuse_req_t	    req,
+	      fuse_ino_t	    ino,
+	      const char	    *buf,
+	      size_t		    size,
+	      off_t		    off,
+	      struct fuse_file_info *fi)
+{
+    FuseInode *inode;
+
+    inode = fuseFindInode (inodes, ino, WRITE_MASK);
+    if (inode && fi->fh)
+    {
+	FuseWriteBuffer *wb = (FuseWriteBuffer *) (uintptr_t) fi->fh;
+
+	if (off + size > wb->size)
+	{
+	    char *data;
+
+	    data = realloc (wb->data, off + size + 1);
+	    if (!data)
+	    {
+		fuse_reply_err (req, ENOBUFS);
+		return;
+	    }
+
+	    data[off + size] = '\0';
+
+	    wb->data = data;
+	    wb->size = off + size;
+	}
+
+	memcpy (wb->data + off, buf, size);
+
+	wb->dirty = TRUE;
+
+	fuse_reply_write (req, size);
+    }
+    else
+    {
+	fuse_reply_err (req, ENOENT);
+    }
+}
+
+static void
+compiz_release (fuse_req_t	      req,
+		fuse_ino_t	      ino,
+		struct fuse_file_info *fi)
+{
+    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
+
+    if (fi->fh)
+    {
+	FuseWriteBuffer *wb = (FuseWriteBuffer *) (uintptr_t) fi->fh;
+	FuseInode	*inode;
+
+	inode = fuseFindInode (inodes, ino, WRITE_MASK);
+	if (inode && wb->dirty)
+	{
+	    fuseSetInodeOptionUsingString (d, inode, wb->data);
+
+	    inode->flags &= ~FUSE_INODE_FLAG_TRUNC;
+	}
+
+	free (wb->data);
+	free (wb);
+    }
+
+    fuse_reply_err (req, 0);
+}
+
+static void
+compiz_fsync (fuse_req_t	    req,
+	      fuse_ino_t	    ino,
+	      int		    datasync,
+	      struct fuse_file_info *fi)
+{
+    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
+
+    if (fi->fh)
+    {
+	FuseWriteBuffer *wb = (FuseWriteBuffer *) (uintptr_t) fi->fh;
+	FuseInode	*inode;
+
+	inode = fuseFindInode (inodes, ino, WRITE_MASK);
+	if (inode && wb->dirty)
+	{
+	    fuseSetInodeOptionUsingString (d, inode, wb->data);
+
+	    inode->flags &= ~FUSE_INODE_FLAG_TRUNC;
+
+	    wb->dirty = FALSE;
+	}
+    }
+
+    fuse_reply_err (req, 0);
+}
+
 static struct fuse_lowlevel_ops compiz_ll_oper = {
     .lookup  = compiz_lookup,
     .getattr = compiz_getattr,
+    .setattr = compiz_setattr,
     .readdir = compiz_readdir,
     .open    = compiz_open,
-    .read    = compiz_read
+    .read    = compiz_read,
+    .write   = compiz_write,
+    .release = compiz_release,
+    .fsync   = compiz_fsync
 };
 
 static void
@@ -976,7 +1325,8 @@ fuseProcessMessages (void *data)
 static void
 fuseMount (CompDisplay *d)
 {
-    char *mountPoint;
+    char	     *mountPoint;
+    struct fuse_args args = FUSE_ARGS_INIT (0, NULL);
 
     FUSE_DISPLAY (d);
 
@@ -984,12 +1334,19 @@ fuseMount (CompDisplay *d)
     if (!mountPoint)
 	return;
 
-    fd->channel = fuse_mount (mountPoint, NULL);
+    fuse_opt_add_arg (&args, "");
+    fuse_opt_add_arg (&args, "-o");
+    fuse_opt_add_arg (&args, "allow_root");
+
+    fd->channel = fuse_mount (mountPoint, &args);
     if (!fd->channel)
     {
+	fuse_opt_free_args (&args);
 	free (mountPoint);
 	return;
     }
+
+    fuse_opt_free_args (&args);
 
     fd->buffer = malloc (fuse_chan_bufsize (fd->channel));
     if (!fd->buffer)
