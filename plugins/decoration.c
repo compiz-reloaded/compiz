@@ -119,12 +119,13 @@ typedef struct _WindowDecoration {
 static int displayPrivateIndex;
 
 typedef struct _DecorDisplay {
-    int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
-    DecorTexture    *textures;
-    Atom	    supportingDmCheckAtom;
-    Atom	    winDecorAtom;
-    Atom	    decorAtom[DECOR_NUM];
+    int			     screenPrivateIndex;
+    HandleEventProc	     handleEvent;
+    MatchPropertyChangedProc matchPropertyChanged;
+    DecorTexture	     *textures;
+    Atom		     supportingDmCheckAtom;
+    Atom		     winDecorAtom;
+    Atom		     decorAtom[DECOR_NUM];
 
     CompOption opt[DECOR_DISPLAY_OPTION_NUM];
 } DecorDisplay;
@@ -1260,6 +1261,19 @@ decorWindowStateChangeNotify (CompWindow *w)
     WRAP (ds, w->screen, windowStateChangeNotify, decorWindowStateChangeNotify);
 }
 
+static void
+decorMatchPropertyChanged (CompDisplay *d,
+			   CompWindow  *w)
+{
+    DECOR_DISPLAY (d);
+
+    decorWindowUpdate (w, FALSE);
+
+    UNWRAP (dd, d, matchPropertyChanged);
+    (*d->matchPropertyChanged) (d, w);
+    WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);
+}
+
 static Bool
 decorInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
@@ -1295,6 +1309,7 @@ decorInitDisplay (CompPlugin  *p,
     matchUpdate (d, &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_MATCH].value.match);
 
     WRAP (dd, d, handleEvent, decorHandleEvent);
+    WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);
 
     d->privates[displayPrivateIndex].ptr = dd;
 
@@ -1313,6 +1328,7 @@ decorFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, dd->screenPrivateIndex);
 
     UNWRAP (dd, d, handleEvent);
+    UNWRAP (dd, d, matchPropertyChanged);
 
     free (dd);
 }
