@@ -29,6 +29,7 @@
 
 #define DBUS_API_SUBJECT_TO_CHANGE
 #include <dbus/dbus.h>
+#include <libxml/xmlwriter.h>
 
 #include <compiz.h>
 
@@ -148,6 +149,111 @@ dbusGetOptionsFromPath (CompDisplay *d,
     }
 
     return NULL;
+}
+
+/* functions to create introspection XML */
+static void
+dbusIntrospectStartInterface (xmlTextWriterPtr writer)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "interface");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name",
+				 BAD_CAST COMPIZ_DBUS_SERVICE_NAME);
+}
+
+static void
+dbusIntrospectEndInterface (xmlTextWriterPtr writer)
+{
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddArgument (xmlTextWriterPtr writer,
+			   char             *type,
+			   char             *direction)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "arg");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "type", BAD_CAST type);
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "direction",
+				 BAD_CAST direction);
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddMethod (xmlTextWriterPtr writer,
+			 char             *name,
+			 int              nArgs,
+			 ...)
+{
+    va_list var_args;
+    char *type, *direction;
+
+    xmlTextWriterStartElement (writer, BAD_CAST "method");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST name);
+
+    va_start (var_args, nArgs);
+    while (nArgs)
+    {
+	type = va_arg (var_args, char *);
+	direction = va_arg (var_args, char *);
+	dbusIntrospectAddArgument (writer, type, direction);
+	nArgs--;
+    }
+    va_end (var_args);
+
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddSignal (xmlTextWriterPtr writer,
+			 char             *name,
+			 int              nArgs,
+			 ...)
+{
+    va_list var_args;
+    char *type;
+
+    xmlTextWriterStartElement (writer, BAD_CAST "signal");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST name);
+
+    va_start (var_args, nArgs);
+    while (nArgs)
+    {
+	type = va_arg (var_args, char *);
+	dbusIntrospectAddArgument (writer, type, "out");
+	nArgs--;
+    }
+    va_end (var_args);
+
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddNode (xmlTextWriterPtr writer,
+		       char             *name)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "node");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST name);
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectStartRoot (xmlTextWriterPtr writer)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "node");
+
+    xmlTextWriterStartElement (writer, BAD_CAST "interface");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name",
+				 BAD_CAST "org.freedesktop.DBus.Introspectable");
+
+    dbusIntrospectAddMethod (writer, "Introspect", 1, "s", "out");
+
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectEndRoot (xmlTextWriterPtr writer)
+{
+    xmlTextWriterEndDocument (writer);
 }
 
 /*
