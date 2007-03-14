@@ -34,6 +34,8 @@
 #include <compiz.h>
 
 #define COMPIZ_DBUS_SERVICE_NAME	            "org.freedesktop.compiz"
+#define COMPIZ_DBUS_INTERFACE			    "org.freedesktop.compiz"
+#define COMPIZ_DBUS_ROOT_PATH			    "/org/freedesktop/compiz"
 
 #define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME            "activate"
 #define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME          "deactivate"
@@ -78,6 +80,15 @@ typedef struct _DbusScreen {
     SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 } DbusScreen;
+
+static DBusHandlerResult dbusHandleMessage (DBusConnection *,
+					    DBusMessage *,
+					    void *);
+
+static DBusObjectPathVTable dbus_messages_vtable = {
+    NULL, dbusHandleMessage, /* handler function */
+    NULL, NULL, NULL, NULL
+};
 
 #define GET_DBUS_DISPLAY(d)				     \
     ((DbusDisplay *) (d)->privates[displayPrivateIndex].ptr)
@@ -1703,20 +1714,6 @@ dbusHandleMessage (DBusConnection *connection,
     CompDisplay *d = (CompDisplay *) userData;
     Bool	status = FALSE;
     char	**path;
-    const char  *service, *interface, *member;
-
-    service   = dbus_message_get_destination (message);
-    interface = dbus_message_get_interface (message);
-    member    = dbus_message_get_member (message);
-
-    if (!service || !interface || !member)
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-
-    if (!dbus_message_is_method_call (message, interface, member))
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-
-    if (!dbus_message_has_destination (message, COMPIZ_DBUS_SERVICE_NAME))
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
     if (!dbus_message_get_path_decomposed (message, &path))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
@@ -1727,75 +1724,105 @@ dbusHandleMessage (DBusConnection *connection,
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
     }
 
-    if (strcmp (path[0], "org")	        ||
-	strcmp (path[1], "freedesktop") ||
-	strcmp (path[2], "compiz"))
+    //root messages
+    if (!path[3])
     {
-	dbus_free_string_array (path);
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-    }
-
-    if (dbus_message_has_member (message,
+	if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+					 "Introspect"))
+	{
+	    if (dbusHandleRootIntrospectMessage (connection, message, d))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
+	}
+	else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
 				 COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME))
-    {
-	if (dbusHandleGetPluginMetadataMessage (connection, message, d))
 	{
-	    dbus_free_string_array (path);
-	    return DBUS_HANDLER_RESULT_HANDLED;
+	    if (dbusHandleGetPluginMetadataMessage (connection, message, d))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
+	}
+	else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
+	{
+	    if (dbusHandleGetPluginsMessage (connection, message, d))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
 	}
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
+    //plugin message
+    else if (!path[4])
     {
-	if (dbusHandleGetPluginsMessage (connection, message, d))
+	if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+					 "Introspect"))
 	{
-	    dbus_free_string_array (path);
-	    return DBUS_HANDLER_RESULT_HANDLED;
+	    if (dbusHandlePluginIntrospectMessage (connection, message, d,
+						   &path[3]))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
 	}
     }
-
-    if (!path[3] || !path[4])
+    //screen message
+    else if (!path[5])
     {
-	dbus_free_string_array (path);
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-    }
-
-    if (dbus_message_has_member (message, COMPIZ_DBUS_LIST_MEMBER_NAME))
-    {
-	if (dbusHandleListMessage (connection, message, d, &path[3]))
+	if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+					 "Introspect"))
 	{
-	    dbus_free_string_array (path);
-	    return DBUS_HANDLER_RESULT_HANDLED;
+	    if (dbusHandleScreenIntrospectMessage (connection, message, d,
+						   &path[3]))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
+	}
+	else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					      COMPIZ_DBUS_LIST_MEMBER_NAME))
+	{
+	    if (dbusHandleListMessage (connection, message, d, &path[3]))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
 	}
     }
-
-    if (!path[5])
+    //option message
+    if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+				     "Introspect"))
     {
-	dbus_free_string_array (path);
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+	status = dbusHandleOptionIntrospectMessage (connection, message, d,
+						    &path[3]);
     }
-
-    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  TRUE);
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  FALSE);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_SET_MEMBER_NAME))
     {
 	status = dbusHandleSetOptionMessage (connection, message, d, &path[3]);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_GET_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_GET_MEMBER_NAME))
     {
 	status = dbusHandleGetOptionMessage (connection, message, d, &path[3]);
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_GET_METADATA_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_GET_METADATA_MEMBER_NAME))
     {
 	status = dbusHandleGetMetadataMessage (connection, message, d,
 					       &path[3]);
@@ -2093,20 +2120,11 @@ dbusInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    status = dbus_connection_add_filter (dd->connection,
-					 dbusHandleMessage,
-					 d, NULL);
-    if (!status)
-    {
-	fprintf (stderr, "%s: dbus_connection_add_filter failed\n",
-		 programName);
-
-	/* dbus_connection_unref (dd->connection); */
-	free (dd);
-
-	return FALSE;
-    }
-
+    //register the objects
+    dbus_connection_register_object_path (dd->connection,
+					  COMPIZ_DBUS_ROOT_PATH,
+					  &dbus_messages_vtable, d);
+ 
     status = dbus_connection_get_unix_fd (dd->connection, &fd);
     if (!status)
     {
