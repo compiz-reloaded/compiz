@@ -57,7 +57,12 @@ struct _IniFileData {
     char		 *filename;
     char		 *plugin;
     int			 screen;
-    int			 pendingWrites;
+
+    Bool		 blockWrites;
+    Bool		 blockReads;
+
+    IniFileData		 *next;
+    IniFileData		 *prev;
 };
 
 typedef struct _IniDisplay {
@@ -68,6 +73,8 @@ typedef struct _IniDisplay {
     InitPluginForDisplayProc      initPluginForDisplay;
     SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
+
+    IniFileData			*fileData;
 } IniDisplay;
 
 typedef struct _IniScreen {
@@ -76,27 +83,31 @@ typedef struct _IniScreen {
     SetScreenOptionForPluginProc   setScreenOptionForPlugin;
 } IniScreen;
 
-static Bool
+static IniFileData *
 iniGetFileDataFromFilename (CompDisplay *d,
-			    const char *filename,
-			    IniFileData **fileData)
+			    const char *filename)
 {
     int len, i;
     int pluginSep = 0, screenSep = 0;
     char *pluginStr, *screenStr;
+    IniFileData *fd;
+
+    INI_DISPLAY (d);
 
     if (!filename)
-	return FALSE;
+	return NULL;
 
     len = strlen (filename);
 
-    if (len < 6)
-	return FALSE;
+    if (len < (strlen(FILE_SUFFIX) + 2))
+	return NULL;
 
     if ((filename[0]=='.') || (filename[len-1]=='~'))
-	return FALSE;
+	return NULL;
 
-    (*fileData)->filename = strdup (filename);
+    for (fd = id->fileData; fd; fd = fd->next)
+	if (strcmp (fd->filename, filename) == 0)
+	    return fd;
 
     for (i=0; i<len; i++)
     {
@@ -105,25 +116,41 @@ iniGetFileDataFromFilename (CompDisplay *d,
 	    if (!pluginSep)
 		pluginSep = i-1;
 	    else
-		return FALSE; /*found a second dash */
+		return NULL; /*found a second dash */
 	}
 	else if (filename[i] == '.')
 	{
 	    if (!screenSep)
 		screenSep = i-1;
 	    else
-		return FALSE; /*found a second dot */
+		return NULL; /*found a second dot */
 	}
     }
 
     if (!pluginSep || !screenSep)
-	return FALSE;
+	return NULL;
+
+    /* If we get here then there is no fd in the display variable */
+    IniFileData *newFd = malloc (sizeof (IniFileData));
+    if (!newFd)
+	return NULL;
+
+    /* fd now contains 'prev' or NULL */
+    if (fd)
+	fd->next = newFd;
+    else
+	id->fileData = newFd;
+
+    newFd->prev = fd;
+    newFd->next = NULL;
+
+    newFd->filename = strdup (filename);
 
     pluginStr = malloc (sizeof (char) * pluginSep + 1);
     screenStr = malloc (sizeof (char) * (screenSep - pluginSep) + 1);
 
     if (!pluginStr || !screenStr)
-	return FALSE;
+	return NULL;
 
     strncpy (pluginStr, filename, pluginSep + 1);
     pluginStr[pluginSep + 1] = '\0';
@@ -132,19 +159,22 @@ iniGetFileDataFromFilename (CompDisplay *d,
     screenStr[(screenSep - pluginSep) -1] = '\0';
 
     if (strcmp (pluginStr, CORE_NAME) == 0)
-	(*fileData)->plugin = NULL;
+	newFd->plugin = NULL;
     else
-	(*fileData)->plugin = strdup (pluginStr);
+	newFd->plugin = strdup (pluginStr);
 
     if (strcmp (screenStr, "allscreens") == 0)
-	(*fileData)->screen = -1;
+	newFd->screen = -1;
     else
-	(*fileData)->screen = atoi(&screenStr[6]);
+	newFd->screen = atoi(&screenStr[6]);
+
+    newFd->blockReads  = FALSE;
+    newFd->blockWrites = FALSE;
 
     free (pluginStr);
     free (screenStr);
 
-    return TRUE;
+    return newFd;
 }
 
 static char *
@@ -179,6 +209,28 @@ iniOptionValueToString (CompOptionValue *value, CompOptionType type)
 }
 
 static Bool
+iniGetHomeDir (char **homeDir)
+{
+    char *home = NULL, *tmp;
+
+    home = getenv ("HOME");
+    if (home)
+    {
+	tmp = malloc (strlen (home) + strlen (HOME_OPTION_DIR) + 2);
+	if (tmp)
+	{
+	    sprintf (tmp, "%s/%s", home, HOME_OPTION_DIR);
+	    (*homeDir) = strdup (tmp);
+	    free (tmp);
+
+	    return TRUE;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
 iniGetFilename (CompDisplay *d,
 		int screen,
 		char *plugin,
@@ -186,22 +238,7 @@ iniGetFilename (CompDisplay *d,
 {
     CompScreen *s;
     int	       len;
-    char       *fn = NULL;
-    char       *screenStr;
-    char       *homeDir, *baseDir;
-
-    homeDir = getenv ("HOME");
-    if (homeDir)
-    {
-	baseDir = malloc (strlen (homeDir) + strlen (HOME_OPTION_DIR) + 3);
-	if (baseDir)
-	    sprintf (baseDir, "%s/%s", homeDir, HOME_OPTION_DIR);
-    }
-    else
-    {
-	fprintf(stderr, "Could not get HOME environmental variable\n");
-	return FALSE;
-    }
+    char       *fn = NULL, *screenStr;
 
     screenStr = malloc (sizeof(char) * 12);
     if (!screenStr)
@@ -226,39 +263,28 @@ iniGetFilename (CompDisplay *d,
 	strncpy (screenStr, "allscreens", 12);
     }
 
-    /* add extra for allscreens/screen0/.conf etc */
-    len = strlen (baseDir) + 27;
+    len = strlen (screenStr) + strlen (FILE_SUFFIX) + 2;
 
     if (plugin)
 	len += strlen (plugin);
     else
 	len += strlen (CORE_NAME);
 
-    fn = realloc (fn, sizeof (char) * len);
-    if (!fn)
-	return FALSE;
-
-    if (plugin)
-    {
-	sprintf (fn, "%s/%s-%s%s", baseDir,
-		 plugin, screenStr, FILE_SUFFIX);
-    }
-    else
-    {
-	sprintf (fn, "%s/%s-%s%s", baseDir,
-		 CORE_NAME, screenStr, FILE_SUFFIX);
-    }
-
-    if (baseDir)
-	free (baseDir);
-    free (screenStr);
-
+    fn = malloc (sizeof (char) * len);
     if (fn)
     {
+	sprintf (fn, "%s-%s%s",
+		 plugin?plugin:CORE_NAME, screenStr, FILE_SUFFIX);
+
 	*filename = strdup (fn);
+
+	free (screenStr);
 	free (fn);
+
 	return TRUE;
     }
+
+    free (screenStr);
 
     return FALSE;
 }
@@ -315,9 +341,8 @@ iniParseLine (char *line, char **optionName, char **optionValue)
 static Bool
 csvToList (char *csv, CompListValue *list, CompOptionType type)
 {
-    char *csvtmp;
-    csvtmp = strdup (csv);
-    int count = 1;
+    char *csvtmp, *split, *item = NULL;
+    int  count = 1, i, itemLength;
 
     if (csv[0] == '\0')
     {
@@ -325,6 +350,7 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 	return FALSE;
     }
 
+    csvtmp = strdup (csv);
     csvtmp = strchr (csv, ',');
 
     while (csvtmp)
@@ -333,12 +359,6 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 	count++;
 	csvtmp = strchr (csvtmp, ',');
     }
-
-    csvtmp = strdup (csv);
-
-    int i, itemLength;
-    char *split;
-    char *item = NULL;
 
     list->value = malloc (sizeof (CompOptionValue) * count);
     if (list->value)
@@ -399,30 +419,22 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 }
 
 static Bool
-iniMakeDirectories (int screen)
+iniMakeDirectories (void)
 {
-    char *homeDir, *baseDir;
-    baseDir = NULL;
-    homeDir = getenv ("HOME");
-    if (homeDir)
+    char *homeDir;
+
+    if (iniGetHomeDir (&homeDir))
     {
-	baseDir = malloc (sizeof (char) * (strlen (homeDir) + strlen (HOME_OPTION_DIR) + 3));
-	if (baseDir)
-	    sprintf (baseDir, "%s/%s", homeDir, HOME_OPTION_DIR);
-	else
-	    return FALSE;
+	mkdir (homeDir, 0700);
+	free (homeDir);
+
+	return TRUE;
     }
     else
     {
 	fprintf(stderr, "Could not get HOME environmental variable\n");
 	return FALSE;
     }
-
-    mkdir (baseDir, 0700);
-
-    free (baseDir);
-
-    return TRUE;
 }
 
 static Bool
@@ -470,6 +482,24 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	}
     }
 
+    if (plugin && p)
+    {
+	if (s && p->vTable->getScreenOptions)
+	{
+	    option = (*p->vTable->getScreenOptions) (s, &nOption);
+	}
+	else if (p->vTable->getDisplayOptions)
+	{
+	    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	}
+    }
+    else
+    {
+	if (s)
+	    option = compGetScreenOptions (s, &nOption);
+	else
+	    option = compGetDisplayOptions (d, &nOption);
+    }
 
     while (fgets (&tmp[0], MAX_OPTION_LENGTH, optionFile) != NULL)
     {
@@ -480,27 +510,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    fprintf(stderr,
 		    "Ignoring line '%s' in %s %i\n", tmp, plugin, screen);
 	    continue;
-	}
-
-	if (plugin && p)
-	{
-	    if (s)
-	    {
-		if (p->vTable->getScreenOptions)
-		    option = (*p->vTable->getScreenOptions) (s, &nOption);
-	    }
-	    else
-	    {
-		if (p->vTable->getDisplayOptions)
-		    option = (*p->vTable->getDisplayOptions) (d, &nOption);
-	    }
-	}
-	else
-	{
-	    if (s)
-		option = compGetScreenOptions (s, &nOption);
-	    else
-		option = compGetDisplayOptions (d, &nOption);
 	}
 
 	if (option)
@@ -718,7 +727,7 @@ iniSaveOptions (CompDisplay *d,
     CompScreen *s = NULL;
     CompOption *option;
     int	       nOption = 0;
-    char       *filename, *strVal = NULL;
+    char       *filename, *directory, *fullPath, *strVal = NULL;
 
     if (screen > -1)
     {
@@ -761,24 +770,44 @@ iniSaveOptions (CompDisplay *d,
     if (!iniGetFilename (d, screen, plugin, &filename))
 	return FALSE;
 
-
     IniFileData *fileData;
-    fileData = malloc (sizeof (IniFileData));
-    if (!fileData)
-	return FALSE;
 
-    Bool fileMatch = iniGetFileDataFromFilename (d, filename, &fileData);
-    if (fileMatch)
-	fileData->pendingWrites++;
-
-    FILE *optionFile = fopen (filename, "w");
-    if (!optionFile)
+    fileData = iniGetFileDataFromFilename (d, filename);
+    if (!fileData || (fileData && fileData->blockWrites))
     {
-	fprintf(stderr, "Failed to write to %s, check you " \
-			"have the correct permissions\n", filename);
 	free (filename);
 	return FALSE;
     }
+
+    if (!iniGetHomeDir (&directory))
+	return FALSE;
+
+    fullPath = malloc (sizeof(char) * (strlen(filename) + strlen(directory) + 2));
+    if (!fullPath)
+    {
+	free (filename);
+	free (directory);
+	return FALSE;
+    }
+
+    sprintf(fullPath, "%s/%s", directory, filename);
+
+    FILE *optionFile = fopen (fullPath, "w");
+
+    if (!optionFile && iniMakeDirectories ())
+	optionFile = fopen (fullPath, "w");
+
+    if (!optionFile)
+    {
+	fprintf(stderr, "Failed to write to %s, check you " \
+			"have the correct permissions\n", fullPath);
+	free (filename);
+	free (directory);
+	free (fullPath);
+	return FALSE;
+    }
+
+    fileData->blockReads = TRUE;
 
     Bool status, firstInList;
     while (nOption--)
@@ -812,6 +841,8 @@ iniSaveOptions (CompDisplay *d,
 		strVal = buttonBindingToString (d, &option->value.action.button);
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "button", strVal);
 
+	    if (!(strVal = realloc (strVal, sizeof (char) * 32)))
+		return FALSE;
 	    sprintf(strVal, "%i", (int)option->value.action.bell);
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "bell", strVal);
 
@@ -855,6 +886,10 @@ iniSaveOptions (CompDisplay *d,
 	    case CompOptionTypeColor:
 	    case CompOptionTypeMatch:
 	    {
+		if (option->value.list.nValue && 
+		    !(strVal = realloc (strVal, sizeof (char) * MAX_OPTION_LENGTH * option->value.list.nValue)))
+		    return FALSE;
+
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
 		    char listVal[MAX_OPTION_LENGTH];
@@ -863,9 +898,6 @@ iniSaveOptions (CompDisplay *d,
 						&option->value.list.value[i],
 						option->value.list.type),
 						MAX_OPTION_LENGTH);
-
-		    if (!(strVal = realloc (strVal, 2048)))
-			return FALSE;
 
 		    if (!firstInList)
 			strVal = strcat (strVal, ",");
@@ -894,14 +926,15 @@ iniSaveOptions (CompDisplay *d,
 	option++;
     }
 
+    fileData->blockReads = FALSE;
+
     fclose (optionFile);
 
     if (strVal)
 	free (strVal);
-    if (filename)
-	free (filename);
-    if (fileData)
-	free (fileData);
+    free (filename);
+    free (directory);
+    free (fullPath);
 
     return TRUE;
 }
@@ -911,17 +944,45 @@ iniLoadOptions (CompDisplay *d,
 	        int         screen,
 	        char        *plugin)
 {
-    char         *filename;
+    char         *filename, *directory, *fullPath;
     FILE         *optionFile;
     Bool         loadRes;
+    IniFileData *fileData;
+
+    filename = directory = fullPath = NULL;
+    optionFile = NULL;
+    fileData = NULL;
 
     if (!iniGetFilename (d, screen, plugin, &filename))
 	return FALSE;
 
-    optionFile = fopen (filename, "r");
+    fileData = iniGetFileDataFromFilename (d, filename);
+    if (!fileData || (fileData && fileData->blockReads))
+    {
+	free(filename);
+	return FALSE;
+    }
 
-    if (!optionFile && iniMakeDirectories (screen))
-	optionFile = fopen (filename, "r");
+    if (!iniGetHomeDir (&directory))
+    {
+	free (filename);
+	return FALSE;
+    }
+
+    fullPath = malloc (sizeof(char) * (strlen(filename) + strlen(directory) + 2));
+    if (!fullPath)
+    {
+	free (filename);
+	free (directory);
+	return FALSE;
+    }
+
+    sprintf(fullPath, "%s/%s", directory, filename);
+
+    optionFile = fopen (fullPath, "r");
+
+    if (!optionFile && iniMakeDirectories ())
+	optionFile = fopen (fullPath, "r");
 
     if (!optionFile)
     {
@@ -930,48 +991,81 @@ iniLoadOptions (CompDisplay *d,
 	    CompOptionValue value;
 	    value.list.value = malloc (NUM_DEFAULT_PLUGINS * sizeof (CompListValue));
 	    if (!value.list.value)
+	    {
+		free (filename);
+		free (directory);
+		free (fullPath);
 		return FALSE;
+	    }
 
 	    if (!csvToList (DEFAULT_PLUGINS,
 		            &value.list,
 		            CompOptionTypeString))
 	    {
+		free (filename);
+		free (directory);
+		free (fullPath);
 		return FALSE;
 	    }
 
 	    value.list.type = CompOptionTypeString;
 
-	    fprintf(stderr, "Could not open main display config file %s\n", filename);
+	    fprintf(stderr, "Could not open main display config file %s\n", fullPath);
 	    fprintf(stderr, "Loading default plugins (%s)\n", DEFAULT_PLUGINS);
 
 	    (*d->setDisplayOption) (d, "active_plugins", &value);
 
 	    free (value.list.value);
-	    return FALSE;
+
+	    fileData->blockWrites = FALSE;
+
+	    iniSaveOptions (d, screen, plugin);
+
+	    fileData->blockWrites = TRUE;
+
+	    optionFile = fopen (fullPath, "r");
+
+	    if (!optionFile)
+	    {
+		free (filename);
+		free (directory);
+		free (fullPath);
+		return FALSE;
+	    }
 	}
 	else
 	{
 	    fprintf(stderr, "Could not open config file %s - using " \
-			    "defaults for %s\n", filename, (plugin)?plugin:"core");
+			    "defaults for %s\n", fullPath, (plugin)?plugin:"core");
+
+	    fileData->blockWrites = FALSE;
 
 	    iniSaveOptions (d, screen, plugin);
 
-	    optionFile = fopen (filename, "r");
+	    fileData->blockWrites = TRUE;
+
+	    optionFile = fopen (fullPath, "r");
 	    if (!optionFile)
 	    {
-		if (filename)
-		    free (filename);
+		free (filename);
+		free (directory);
+		free (fullPath);
 		return FALSE;
 	    }
 	}
     }
 
+    fileData->blockWrites = TRUE;
+
     loadRes = iniLoadOptionsFromFile (d, optionFile, plugin, screen);
 
-    if (filename)
-	free (filename);
+    fileData->blockWrites = FALSE;
 
     fclose (optionFile);
+
+    free (filename);
+    free (directory);
+    free (fullPath);
 
     return TRUE;
 }
@@ -983,18 +1077,30 @@ iniFileModified (const char *name,
     CompDisplay *d;
     IniFileData *fd;
 
-    fd = malloc (sizeof (IniFileData));
-    if (!fd)
-	return;
-
     d = (CompDisplay *) closure;
 
-    if (iniGetFileDataFromFilename (d, name, &fd))
+    fd = iniGetFileDataFromFilename (d, name);
+    if (fd)
     {
 	iniLoadOptions (d, fd->screen, fd->plugin);
     }
+}
 
-    free (fd);
+static void
+iniFreeFileData (CompDisplay *d)
+{
+    IniFileData *fd, *tmp;
+
+    INI_DISPLAY (d);
+
+    fd = id->fileData;
+    tmp = fd;
+
+    while (tmp && fd)
+    {
+	free (tmp);
+	tmp = fd->next;
+    }
 }
 
 /*
@@ -1135,14 +1241,7 @@ iniSetScreenOptionForPlugin (CompScreen      *s,
 
 	p = findActivePlugin (plugin);
 	if (p && p->vTable->getScreenOptions)
-	{
-	    CompOption *option;
-	    int	       nOption;
-
-	    option = (*p->vTable->getScreenOptions) (s, &nOption);
-
 	    iniSaveOptions (s->display, s->screenNum, plugin);
-	}
     }
 
     return status;
@@ -1152,7 +1251,7 @@ static Bool
 iniInitDisplay (CompPlugin *p, CompDisplay *d)
 {
     IniDisplay *id;
-    char *homeDir, *baseDir = NULL;
+    char *homeDir;
 
     id = malloc (sizeof (IniDisplay));
     if (!id)
@@ -1165,6 +1264,9 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
         return FALSE;
     }
 
+    id->fileData = NULL;
+    id->directoryWatch = 0;
+
     WRAP (id, d, initPluginForDisplay, iniInitPluginForDisplay);
     WRAP (id, d, setDisplayOption, iniSetDisplayOption);
     WRAP (id, d, setDisplayOptionForPlugin, iniSetDisplayOptionForPlugin);
@@ -1173,23 +1275,15 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
 
     iniLoadOptions (d, -1, NULL);
 
-    homeDir = getenv ("HOME");
-    if (homeDir)
+    if (iniGetHomeDir (&homeDir))
     {
-	baseDir = malloc (strlen (homeDir) + strlen (HOME_OPTION_DIR) + 3);
-	if (baseDir)
-	{
-	    sprintf (baseDir, "%s/%s", homeDir, HOME_OPTION_DIR);
-	    id->directoryWatch = addFileWatch (d, baseDir,
-					       NOTIFY_DELETE_MASK |
-					       NOTIFY_CREATE_MASK |
-					       NOTIFY_MODIFY_MASK,
-					       iniFileModified, d);
-	}
+	id->directoryWatch = addFileWatch (d, homeDir,
+					   NOTIFY_DELETE_MASK |
+					   NOTIFY_CREATE_MASK |
+					   NOTIFY_MODIFY_MASK,
+					   iniFileModified, (void *) d);
+	free (homeDir);
     }
-
-    if (baseDir)
-	free (baseDir);
 
     return TRUE;
 }
@@ -1198,6 +1292,11 @@ static void
 iniFiniDisplay (CompPlugin *p, CompDisplay *d)
 {
     INI_DISPLAY (d);
+
+    if (id->directoryWatch)
+	removeFileWatch (d, id->directoryWatch);
+
+    iniFreeFileData (d);
 
     freeScreenPrivateIndex (d, id->screenPrivateIndex);
 
