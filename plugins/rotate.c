@@ -800,16 +800,19 @@ rotateWithWindow (CompDisplay     *d,
 
 	    rotateReleaseMoveWindow (s);
 
-	    w = findWindowAtScreen (s, xid);
-	    if (w)
+	    if (!rs->grabIndex && !rs->moving)
 	    {
-		if (!(w->type & (CompWindowTypeDesktopMask |
-				 CompWindowTypeDockMask)))
+		w = findWindowAtScreen (s, xid);
+		if (w)
 		{
-		    if (!(w->state & CompWindowStateStickyMask))
+		    if (!(w->type & (CompWindowTypeDesktopMask |
+				     CompWindowTypeDockMask)))
 		    {
-			rs->moveWindow  = w->id;
-			rs->moveWindowX = w->attrib.x;
+			if (!(w->state & CompWindowStateStickyMask))
+			{
+			    rs->moveWindow  = w->id;
+			    rs->moveWindowX = w->attrib.x;
+			}
 		    }
 		}
 	    }
