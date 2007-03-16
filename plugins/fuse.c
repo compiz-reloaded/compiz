@@ -86,6 +86,7 @@
 		     FUSE_INODE_TYPE_BELL)
 
 #define WRITE_MASK (FUSE_INODE_TYPE_VALUE	| \
+		    FUSE_INODE_TYPE_ITEM_VALUE	| \
 		    FUSE_INODE_TYPE_KEY		| \
 		    FUSE_INODE_TYPE_BUTTON	| \
 		    FUSE_INODE_TYPE_EDGE_BUTTON | \
@@ -746,6 +747,38 @@ fuseInodeStat (CompDisplay *d,
 }
 
 static Bool
+fuseInitValue (CompOptionValue *value,
+	       CompOptionType  type,
+	       CompOptionValue *src)
+{
+    switch (type) {
+    case CompOptionTypeBool:
+	value->b = src->b;
+	break;
+    case CompOptionTypeInt:
+	value->i = src->i;
+	break;
+    case CompOptionTypeFloat:
+	value->f = src->f;
+	break;
+    case CompOptionTypeString:
+	value->s = strdup (src->s);
+	break;
+    case CompOptionTypeColor:
+	memcpy (value->c, src->c, sizeof (*src->c));
+	break;
+    case CompOptionTypeMatch:
+	matchInit (&value->match);
+	matchCopy (&value->match, &src->match);
+	break;
+    default:
+	return FALSE;
+    }
+
+    return TRUE;
+}
+
+static Bool
 fuseInitValueFromString (CompOptionValue *value,
 			 CompOptionType  type,
 			 char		 *str)
@@ -793,8 +826,13 @@ fuseFiniValue (CompOptionValue *value,
 	matchFini (&value->match);
 	break;
     case CompOptionTypeList:
-	for (i = 0; i < value->list.nValue; i++)
-	    fuseFiniValue (&value->list.value[i], value->list.type);
+	if (value->list.nValue)
+	{
+	    for (i = 0; i < value->list.nValue; i++)
+		fuseFiniValue (&value->list.value[i], value->list.type);
+
+	    free (value->list.value);
+	}
     default:
 	break;
     }
@@ -846,6 +884,52 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	    }
 
 	    screenInode = inode->parent->parent;
+	}
+	else if (inode->type & FUSE_INODE_TYPE_ITEM_VALUE)
+	{
+	    int i, item, nValue = option->value.list.nValue;
+
+	    if (!sscanf (inode->name, "value%d", &item))
+		return;
+
+	    if (item >= nValue)
+		return;
+
+	    value.list.value = malloc (sizeof (CompOptionValue) * nValue);
+	    if (!value.list.value)
+		return;
+
+	    value.list.type   = option->value.list.type;
+	    value.list.nValue = 0;
+
+	    for (i = 0; i < nValue; i++)
+	    {
+		if (i == item)
+		{
+		    if (!fuseInitValueFromString (&value.list.value[i],
+						  value.list.type,
+						  str))
+			break;
+		}
+		else
+		{
+		    if (!fuseInitValue (&value.list.value[i],
+					value.list.type,
+					&option->value.list.value[i]))
+			break;
+		}
+
+		value.list.nValue++;
+	    }
+
+	    /* failed */
+	    if (value.list.nValue < nValue)
+	    {
+		fuseFiniValue (&value, option->type);
+		return;
+	    }
+
+	    screenInode = inode->parent->parent->parent;
 	}
 
 	if (screenInode->type & FUSE_INODE_TYPE_SCREEN)
