@@ -52,16 +52,14 @@
 #define FUSE_INODE_TYPE_ITEM_VALUE  (1 << 13)
 #define FUSE_INODE_TYPE_KEY         (1 << 14)
 #define FUSE_INODE_TYPE_BUTTON      (1 << 15)
-#define FUSE_INODE_TYPE_EDGE_COUNT  (1 << 16)
-#define FUSE_INODE_TYPE_EDGES       (1 << 17)
-#define FUSE_INODE_TYPE_EDGE        (1 << 18)
-#define FUSE_INODE_TYPE_EDGE_BUTTON (1 << 19)
-#define FUSE_INODE_TYPE_BELL        (1 << 20)
-#define FUSE_INODE_TYPE_MIN         (1 << 21)
-#define FUSE_INODE_TYPE_MAX         (1 << 22)
-#define FUSE_INODE_TYPE_PRECISION   (1 << 23)
-#define FUSE_INODE_TYPE_SELECTION   (1 << 24)
-#define FUSE_INODE_TYPE_ALTERNATIVE (1 << 25)
+#define FUSE_INODE_TYPE_EDGE        (1 << 16)
+#define FUSE_INODE_TYPE_EDGE_BUTTON (1 << 17)
+#define FUSE_INODE_TYPE_BELL        (1 << 18)
+#define FUSE_INODE_TYPE_MIN         (1 << 19)
+#define FUSE_INODE_TYPE_MAX         (1 << 20)
+#define FUSE_INODE_TYPE_PRECISION   (1 << 21)
+#define FUSE_INODE_TYPE_SELECTION   (1 << 22)
+#define FUSE_INODE_TYPE_ALTERNATIVE (1 << 23)
 
 #define DIR_MASK (FUSE_INODE_TYPE_ROOT    | \
 		  FUSE_INODE_TYPE_CORE    | \
@@ -70,7 +68,6 @@
 		  FUSE_INODE_TYPE_DISPLAY | \
 		  FUSE_INODE_TYPE_OPTION  | \
 		  FUSE_INODE_TYPE_ITEMS   | \
-		  FUSE_INODE_TYPE_EDGES   | \
 		  FUSE_INODE_TYPE_SELECTION)
 
 #define CONST_DIR_MASK (FUSE_INODE_TYPE_CORE    | \
@@ -82,6 +79,7 @@
 
 #define ACTION_MASK (FUSE_INODE_TYPE_KEY	 | \
 		     FUSE_INODE_TYPE_BUTTON	 | \
+		     FUSE_INODE_TYPE_EDGE	 | \
 		     FUSE_INODE_TYPE_EDGE_BUTTON | \
 		     FUSE_INODE_TYPE_BELL)
 
@@ -89,6 +87,7 @@
 		    FUSE_INODE_TYPE_ITEM_VALUE	| \
 		    FUSE_INODE_TYPE_KEY		| \
 		    FUSE_INODE_TYPE_BUTTON	| \
+		    FUSE_INODE_TYPE_EDGE	| \
 		    FUSE_INODE_TYPE_EDGE_BUTTON | \
 		    FUSE_INODE_TYPE_BELL)
 
@@ -134,13 +133,24 @@ typedef struct _FuseDisplay {
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
+static const char *edgeName[] = {
+    "edge_left",
+    "edge_right",
+    "edge_top",
+    "edge_bottom",
+    "edge_top_left",
+    "edge_top_right",
+    "edge_bottom_left",
+    "edge_bottom_right"
+};
+
 static fuse_ino_t nextIno = 1;
 static FuseInode  *inodes = NULL;
 
 static FuseInode *
-fuseAddInode (FuseInode	*parent,
-	      int	type,
-	      char	*name)
+fuseAddInode (FuseInode	 *parent,
+	      int	 type,
+	      const char *name)
 {
     FuseInode *inode;
 
@@ -321,15 +331,12 @@ fuseGetOptionFromInode (CompDisplay *d,
 {
     if (inode->type & (FUSE_INODE_TYPE_OPTION |
 		       FUSE_INODE_TYPE_ITEMS  |
-		       FUSE_INODE_TYPE_EDGES  |
 		       FUSE_INODE_TYPE_SELECTION))
     {
 	CompOption *option;
 	int	   nOption;
 
-	if (inode->type & (FUSE_INODE_TYPE_ITEMS |
-			   FUSE_INODE_TYPE_EDGES |
-			   FUSE_INODE_TYPE_SELECTION))
+	if (inode->type & (FUSE_INODE_TYPE_ITEMS | FUSE_INODE_TYPE_SELECTION))
 	    inode = inode->parent;
 
 	option = fuseGetOptionsFromInode (d, inode->parent, &nOption);
@@ -469,32 +476,18 @@ fuseGetStringFromInode (CompDisplay *d,
 	else
 	    return strdup ("Disabled");
     }
-    else if (inode->type & FUSE_INODE_TYPE_EDGE_COUNT)
-    {
-	int i, n = 0;
-
-	for (i = 0; i < SCREEN_EDGE_NUM; i++)
-	{
-	    if (option->value.action.edgeMask & (1 << i))
-		n++;
-	}
-
-	snprintf (str, 256, "%d", n);
-	return strdup (str);
-    }
     else if (inode->type & FUSE_INODE_TYPE_EDGE)
     {
-	int i, m, n = 0;
+	int i;
 
-	if (sscanf (inode->name, "edge%d", &m))
+	for (i = 0; i < sizeof (edgeName) / sizeof (edgeName[0]); i++)
 	{
-	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	    if (strcmp (inode->name, edgeName[i]) == 0)
 	    {
 		if (option->value.action.edgeMask & (1 << i))
-		    n++;
-
-		if ((m + 1) == n)
-		    return strdup (edgeToString (i));
+		    return strdup ("true");
+		else
+		    return strdup ("false");
 	    }
 	}
     }
@@ -594,6 +587,8 @@ fuseUpdateInode (CompDisplay *d,
 	option = fuseGetOptionFromInode (d, inode);
 	if (option)
 	{
+	    int i;
+
 	    fuseAddInode (inode, FUSE_INODE_TYPE_SHORT_DESC,
 			  "short_description");
 	    fuseAddInode (inode, FUSE_INODE_TYPE_LONG_DESC,
@@ -622,9 +617,10 @@ fuseUpdateInode (CompDisplay *d,
 	    case CompOptionTypeAction:
 		fuseAddInode (inode, FUSE_INODE_TYPE_KEY, "key");
 		fuseAddInode (inode, FUSE_INODE_TYPE_BUTTON, "button");
-		fuseAddInode (inode, FUSE_INODE_TYPE_EDGES, "edges");
-		fuseAddInode (inode, FUSE_INODE_TYPE_EDGE_COUNT,
-			      "number_of_edges");
+
+		for (i = 0; i < sizeof (edgeName) / sizeof (edgeName[0]); i++)
+		    fuseAddInode (inode, FUSE_INODE_TYPE_EDGE, edgeName[i]);
+
 		fuseAddInode (inode, FUSE_INODE_TYPE_EDGE_BUTTON,
 			      "edge_button");
 		fuseAddInode (inode, FUSE_INODE_TYPE_BELL, "bell");
@@ -666,33 +662,6 @@ fuseUpdateInode (CompDisplay *d,
 		next = c->sibling;
 
 		if (sscanf (c->name, "value%d", &i) == 0 || i >= nValue)
-		    fuseRemoveInode (inode, c);
-	    }
-	}
-    }
-    else if (inode->type & FUSE_INODE_TYPE_EDGES)
-    {
-	option = fuseGetOptionFromInode (d, inode->parent);
-	if (option)
-	{
-	    FuseInode *c, *next;
-	    int	      i, n = 0;
-
-	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
-	    {
-		if (option->value.action.edgeMask & (1 << i))
-		{
-		    sprintf (str, "edge%d", n++);
-		    if (!fuseLookupChild (inode, str))
-			fuseAddInode (inode, FUSE_INODE_TYPE_EDGE, str);
-		}
-	    }
-
-	    for (c = inode->child; c; c = next)
-	    {
-		next = c->sibling;
-
-		if (sscanf (c->name, "edge%d", &i) == 0 || i >= n)
 		    fuseRemoveInode (inode, c);
 	    }
 	}
@@ -877,6 +846,23 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	    else if (inode->type & FUSE_INODE_TYPE_BELL)
 	    {
 		value.action.bell = strcmp (str, "true") ? FALSE : TRUE;
+	    }
+	    else if (inode->type & FUSE_INODE_TYPE_EDGE)
+	    {
+		int i;
+
+		for (i = 0; i < sizeof (edgeName) / sizeof (edgeName[0]); i++)
+		{
+		    if (strcmp (inode->name, edgeName[i]) == 0)
+		    {
+			if (strcmp (str, "true") == 0)
+			    value.action.edgeMask |= (1 << i);
+			else
+			    value.action.edgeMask &= ~(1 << i);
+
+			break;
+		    }
+		}
 	    }
 	    else if (inode->type & FUSE_INODE_TYPE_EDGE_BUTTON)
 	    {
