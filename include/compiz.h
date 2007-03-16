@@ -663,16 +663,16 @@ typedef struct _CompMatchGroupOp {
 } CompMatchGroupOp;
 
 typedef void (*CompMatchExpFiniProc) (CompDisplay *display,
-				      CompPrivate private);
+				      CompPrivate priv);
 
 typedef Bool (*CompMatchExpEvalProc) (CompDisplay *display,
 				      CompWindow  *window,
-				      CompPrivate private);
+				      CompPrivate priv);
 
 typedef struct _CompMatchExp {
     CompMatchExpFiniProc fini;
     CompMatchExpEvalProc eval;
-    CompPrivate		 private;
+    CompPrivate		 priv;
 } CompMatchExp;
 
 typedef struct _CompMatchExpOp {

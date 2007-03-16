@@ -206,9 +206,9 @@ regexMatchInitExp (CompDisplay  *d,
 	    }
 	    else
 	    {
-		exp->fini	 = regexMatchExpFini;
-		exp->eval	 = prefix[i].eval;
-		exp->private.ptr = preg;
+		exp->fini     = regexMatchExpFini;
+		exp->eval     = prefix[i].eval;
+		exp->priv.ptr = preg;
 	    }
 	}
     }

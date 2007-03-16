@@ -42,12 +42,12 @@ matchResetOps (CompDisplay *display,
 	case CompMatchOpTypeExp:
 	    if (op->exp.e.fini)
 	    {
-		(*op->exp.e.fini) (display, op->exp.e.private);
+		(*op->exp.e.fini) (display, op->exp.e.priv);
 		op->exp.e.fini = NULL;
 	    }
 
-	    op->exp.e.eval	  = NULL;
-	    op->exp.e.private.val = 0;
+	    op->exp.e.eval     = NULL;
+	    op->exp.e.priv.val = 0;
 	    break;
 	}
 
@@ -210,9 +210,9 @@ matchCopyOps (CompMatchOp *opDst,
 		return FALSE;
 	    }
 
-	    opDst->exp.e.fini	     = NULL;
-	    opDst->exp.e.eval	     = NULL;
-	    opDst->exp.e.private.val = 0;
+	    opDst->exp.e.fini	  = NULL;
+	    opDst->exp.e.eval	  = NULL;
+	    opDst->exp.e.priv.val = 0;
 	    break;
 	}
 
@@ -296,10 +296,10 @@ matchAddExp (CompMatch  *match,
 	return FALSE;
     }
 
-    op->exp.value	  = value;
-    op->exp.e.fini	  = NULL;
-    op->exp.e.eval	  = NULL;
-    op->exp.e.private.val = 0;
+    op->exp.value      = value;
+    op->exp.e.fini     = NULL;
+    op->exp.e.eval     = NULL;
+    op->exp.e.priv.val = 0;
 
     return TRUE;
 }
@@ -610,7 +610,7 @@ matchEvalOps (CompDisplay *display,
 	    break;
 	case CompMatchOpTypeExp:
 	default:
-	    value = (*op->exp.e.eval) (display, window, op->exp.e.private);
+	    value = (*op->exp.e.eval) (display, window, op->exp.e.priv);
 	    break;
 	}
 
@@ -669,21 +669,21 @@ matchInitExp (CompDisplay  *display,
 {
     if (strncmp (value, "xid=", 4) == 0)
     {
-	exp->eval	 = matchEvalIdExp;
-	exp->private.val = strtol (value + 4, NULL, 0);
+	exp->eval     = matchEvalIdExp;
+	exp->priv.val = strtol (value + 4, NULL, 0);
     }
     else if (strncmp (value, "state=", 6) == 0)
     {
-	exp->eval	  = matchEvalStateExp;
-	exp->private.uval = windowStateFromString (value + 6);
+	exp->eval      = matchEvalStateExp;
+	exp->priv.uval = windowStateFromString (value + 6);
     }
     else
     {
 	if (strncmp (value, "type=", 5) == 0)
 	    value += 5;
 
-	exp->eval	  = matchEvalTypeExp;
-	exp->private.uval = windowTypeFromString (value);
+	exp->eval      = matchEvalTypeExp;
+	exp->priv.uval = windowTypeFromString (value);
     }
 }
 
