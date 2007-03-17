@@ -230,7 +230,6 @@ KWD::Decorator::Decorator (void) : DCOPObject ("KWinInterface"),
     mShadowOptions.shadow_color[0] = SHADOW_COLOR_RED;
     mShadowOptions.shadow_color[1] = SHADOW_COLOR_GREEN;
     mShadowOptions.shadow_color[2] = SHADOW_COLOR_BLUE;
-    mShadowOptions.shadow_color[3] = 0xffff;
 
     mCompositeWindow = new QWidget (0, "KWDCompositeWidget",
 				    Qt::WType_TopLevel | Qt::WStyle_NoBorder |
