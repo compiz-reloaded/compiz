@@ -564,6 +564,9 @@ setDecorationMatrices (CompWindow *w)
     WindowDecoration *wd;
     int		     i;
     float	     x0, y0;
+    decor_matrix_t   a;
+    CompMatrix       b;
+
 
     DECOR_WINDOW (w);
 
@@ -578,14 +581,15 @@ setDecorationMatrices (CompWindow *w)
 	x0 = wd->decor->quad[i].m.x0;
 	y0 = wd->decor->quad[i].m.y0;
 
-	wd->quad[i].matrix.x0 += x0 * wd->quad[i].matrix.xx;
-	wd->quad[i].matrix.y0 += y0 * wd->quad[i].matrix.yy;
+	a = wd->decor->quad[i].m;
+	b = wd->quad[i].matrix;
 
-	wd->quad[i].matrix.xy = wd->decor->quad[i].m.xy * wd->quad[i].matrix.xx;
-	wd->quad[i].matrix.yx = wd->decor->quad[i].m.yx * wd->quad[i].matrix.yy;
-
-	wd->quad[i].matrix.xx *= wd->decor->quad[i].m.xx;
-	wd->quad[i].matrix.yy *= wd->decor->quad[i].m.yy;
+	wd->quad[i].matrix.xx = a.xx * b.xx + a.yx * b.xy;
+	wd->quad[i].matrix.yx = a.xx * b.yx + a.yx * b.yy;
+	wd->quad[i].matrix.xy = a.xy * b.xx + a.yy * b.xy;
+	wd->quad[i].matrix.yy = a.xy * b.yx + a.yy * b.yy;
+	wd->quad[i].matrix.x0 = x0 * b.xx + y0 * b.xy + b.x0;
+	wd->quad[i].matrix.y0 = x0 * b.yx + y0 * b.yy + b.y0;
 
 	if (wd->decor->quad[i].align & ALIGN_RIGHT)
 	    x0 = wd->quad[i].box.x2 - wd->quad[i].box.x1;
