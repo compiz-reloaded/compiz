@@ -74,6 +74,8 @@ typedef struct _Decoration {
 typedef struct _ScaledQuad {
     CompMatrix matrix;
     BoxRec     box;
+    float      sx;
+    float      sy;
 } ScaledQuad;
 
 typedef struct _WindowDecoration {
@@ -325,9 +327,13 @@ computeQuadBox (decor_quad_t *q,
 		int	     *return_x1,
 		int	     *return_y1,
 		int	     *return_x2,
-		int	     *return_y2)
+		int	     *return_y2,
+		float        *return_sx,
+		float        *return_sy)
 {
-    int x1, y1, x2, y2;
+    int   x1, y1, x2, y2;
+    float sx = 1.0f;
+    float sy = 1.0f;
 
     decor_apply_gravity (q->p1.gravity, q->p1.x, q->p1.y, width, height,
 			 &x1, &y1);
@@ -350,7 +356,11 @@ computeQuadBox (decor_quad_t *q,
 	    y2 = height;
     }
 
-    if (q->max_width < x2 - x1)
+    if (q->stretch & STRETCH_X)
+    {
+	sx = (float)q->max_width / ((float)(x2 - x1));
+    }
+    else if (q->max_width < x2 - x1)
     {
 	if (q->align & ALIGN_RIGHT)
 	    x1 = x2 - q->max_width;
@@ -358,7 +368,11 @@ computeQuadBox (decor_quad_t *q,
 	    x2 = x1 + q->max_width;
     }
 
-    if (q->max_height < y2 - y1)
+    if (q->stretch & STRETCH_Y)
+    {
+	sy = (float)q->max_height / ((float)(y2 - y1));
+    }
+    else if (q->max_height < y2 - y1)
     {
 	if (q->align & ALIGN_BOTTOM)
 	    y1 = y2 - q->max_height;
@@ -370,6 +384,11 @@ computeQuadBox (decor_quad_t *q,
     *return_y1 = y1;
     *return_x2 = x2;
     *return_y2 = y2;
+
+    if (return_sx)
+	*return_sx = sx;
+    if (return_sy)
+	*return_sy = sy;
 }
 
 static Decoration *
@@ -467,7 +486,8 @@ decorCreateDecoration (CompScreen *screen,
 
     while (nQuad--)
     {
-	computeQuadBox (quad, minWidth, minHeight, &x1, &y1, &x2, &y2);
+	computeQuadBox (quad, minWidth, minHeight, &x1, &y1, &x2, &y2,
+			NULL, NULL);
 
 	if (x1 < left)
 	    left = x1;
@@ -591,6 +611,11 @@ setDecorationMatrices (CompWindow *w)
 	wd->quad[i].matrix.x0 = x0 * b.xx + y0 * b.xy + b.x0;
 	wd->quad[i].matrix.y0 = x0 * b.yx + y0 * b.yy + b.y0;
 
+	wd->quad[i].matrix.xx *= wd->quad[i].sx;
+	wd->quad[i].matrix.yx *= wd->quad[i].sx;
+	wd->quad[i].matrix.xy *= wd->quad[i].sy;
+	wd->quad[i].matrix.yy *= wd->quad[i].sy;
+
 	if (wd->decor->quad[i].align & ALIGN_RIGHT)
 	    x0 = wd->quad[i].box.x2 - wd->quad[i].box.x1;
 	else
@@ -624,6 +649,7 @@ updateWindowDecorationScale (CompWindow *w)
 {
     WindowDecoration *wd;
     int		     x1, y1, x2, y2;
+    float            sx, sy;
     int		     i;
 
     DECOR_WINDOW (w);
@@ -635,12 +661,14 @@ updateWindowDecorationScale (CompWindow *w)
     for (i = 0; i < wd->nQuad; i++)
     {
 	computeQuadBox (&wd->decor->quad[i], w->width, w->height,
-			&x1, &y1, &x2, &y2);
+			&x1, &y1, &x2, &y2, &sx, &sy);
 
 	wd->quad[i].box.x1 = x1 + w->attrib.x;
 	wd->quad[i].box.y1 = y1 + w->attrib.y;
 	wd->quad[i].box.x2 = x2 + w->attrib.x;
 	wd->quad[i].box.y2 = y2 + w->attrib.y;
+	wd->quad[i].sx     = sx;
+	wd->quad[i].sy     = sy;
     }
 
     setDecorationMatrices (w);

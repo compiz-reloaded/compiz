@@ -49,10 +49,13 @@ extern "C" {
 #define CLAMP_HORZ (1 << 0)
 #define CLAMP_VERT (1 << 1)
 
-#define XX_MASK (1 << 12)
-#define XY_MASK (1 << 13)
-#define YX_MASK (1 << 14)
-#define YY_MASK (1 << 15)
+#define STRETCH_X (1 << 0)
+#define STRETCH_Y (1 << 1)
+
+#define XX_MASK (1 << 16)
+#define XY_MASK (1 << 17)
+#define YX_MASK (1 << 18)
+#define YY_MASK (1 << 19)
 
 #define PAD_TOP    (1 << 0)
 #define PAD_BOTTOM (1 << 1)
@@ -78,6 +81,7 @@ typedef struct _decor_quad {
     int		   max_height;
     int		   align;
     int		   clamp;
+    int            stretch;
     decor_matrix_t m;
 } decor_quad_t;
 

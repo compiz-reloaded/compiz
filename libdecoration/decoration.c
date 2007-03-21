@@ -109,6 +109,7 @@ decor_quads_to_property (long		 *data,
 	    (quad->p2.gravity << 4)    |
 	    (quad->align      << 8)    |
 	    (quad->clamp      << 10)   |
+	    (quad->stretch    << 12)   |
 	    (quad->m.xx ? XX_MASK : 0) |
 	    (quad->m.xy ? XY_MASK : 0) |
 	    (quad->m.yx ? YX_MASK : 0) |
@@ -177,8 +178,9 @@ decor_property_to_quads (long		 *data,
 	quad->p1.gravity = (flags >> 0) & 0xf;
 	quad->p2.gravity = (flags >> 4) & 0xf;
 
-	quad->align = (flags >> 8)  & 0x3;
-	quad->clamp = (flags >> 10) & 0x3;
+	quad->align   = (flags >> 8)  & 0x3;
+	quad->clamp   = (flags >> 10) & 0x3;
+	quad->stretch = (flags >> 12) & 0x3;
 
 	quad->m.xx = (flags & XX_MASK) ? 1.0f : 0.0f;
 	quad->m.xy = (flags & XY_MASK) ? 1.0f : 0.0f;
@@ -409,6 +411,7 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q->max_height = top + top_corner;
     q->align	  = ALIGN_TOP;
     q->clamp	  = CLAMP_VERT;
+    q->stretch    = 0;
     q->m.x0	  = x0;
     q->m.y0	  = y0;
 
@@ -439,6 +442,7 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q->max_height = SHRT_MAX;
     q->align	  = 0;
     q->clamp	  = CLAMP_VERT;
+    q->stretch    = 0;
 
     if (rotation)
     {
@@ -471,6 +475,7 @@ decor_set_vert_quad_row (decor_quad_t *q,
     q->max_height = bottom_corner + bottom;
     q->align	  = ALIGN_BOTTOM;
     q->clamp	  = CLAMP_VERT;
+    q->stretch    = 0;
 
     if (rotation)
     {
@@ -523,6 +528,7 @@ decor_set_horz_quad_line (decor_quad_t *q,
     q->max_height = SHRT_MAX;
     q->align	  = ALIGN_LEFT;
     q->clamp	  = 0;
+    q->stretch    = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -542,6 +548,7 @@ decor_set_horz_quad_line (decor_quad_t *q,
     q->max_height = SHRT_MAX;
     q->align	  = 0;
     q->clamp	  = 0;
+    q->stretch    = 0;
     q->m.xx	  = 0.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
@@ -561,6 +568,7 @@ decor_set_horz_quad_line (decor_quad_t *q,
     q->max_height = SHRT_MAX;
     q->align	  = ALIGN_RIGHT;
     q->clamp	  = 0;
+    q->stretch    = 0;
     q->m.xx	  = 1.0;
     q->m.xy	  = 0.0;
     q->m.yx	  = 0.0;
