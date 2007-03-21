@@ -76,8 +76,6 @@ typedef struct _PlaneDisplay {
     HandleEventProc	handleEvent;
 
     CompOption		opt[PLANE_N_DISPLAY_OPTIONS];
-
-    int			flipTime;
 } PlaneDisplay;
 
 typedef struct _PlaneScreen {
@@ -86,7 +84,6 @@ typedef struct _PlaneScreen {
     DonePaintScreenProc			donePaintScreen;
     PaintScreenProc			paintScreen;
 
-    SetScreenOptionForPluginProc	setScreenOptionForPlugin;
     WindowGrabNotifyProc		windowGrabNotify;
     WindowUngrabNotifyProc		windowUngrabNotify;
 
@@ -465,22 +462,6 @@ planeWindowUngrabNotify (CompWindow *w)
     WRAP (ps, w->screen, windowUngrabNotify, planeWindowUngrabNotify);
 }
 
-static Bool
-planeSetScreenOptionForPlugin (CompScreen      *s,
-			       char	       *plugin,
-			       char	       *name,
-			       CompOptionValue *value)
-{
-    PLANE_SCREEN (s);
-    Bool status;
-
-    UNWRAP (ps, s, setScreenOptionForPlugin);
-    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
-    WRAP (ps, s, setScreenOptionForPlugin, planeSetScreenOptionForPlugin);
-
-    return status;
-}
-
 static CompOption *
 planeGetDisplayOptions (CompDisplay *display,
 			int	    *count)
@@ -825,7 +806,6 @@ planeInitScreen (CompPlugin *p,
     WRAP (ps, s, preparePaintScreen, planePreparePaintScreen);
     WRAP (ps, s, donePaintScreen, planeDonePaintScreen);
     WRAP (ps, s, paintScreen, planePaintScreen);
-    WRAP (ps, s, setScreenOptionForPlugin, planeSetScreenOptionForPlugin);
     WRAP (ps, s, windowGrabNotify, planeWindowGrabNotify);
     WRAP (ps, s, windowUngrabNotify, planeWindowUngrabNotify);
 
@@ -844,7 +824,6 @@ planeFiniScreen (CompPlugin *p,
     UNWRAP (ps, s, preparePaintScreen);
     UNWRAP (ps, s, donePaintScreen);
     UNWRAP (ps, s, paintScreen);
-    UNWRAP (ps, s, setScreenOptionForPlugin);
     UNWRAP (ps, s, windowGrabNotify);
     UNWRAP (ps, s, windowUngrabNotify);
 
