@@ -504,6 +504,24 @@ isSwitchWin (CompWindow *w)
     return TRUE;
 }
 
+static void switchActivateEvent (CompScreen *s, Bool activating)
+{
+	CompOption o[2];
+
+	o[0].type = CompOptionTypeInt;
+	o[0].name = "root";
+	o[0].value.i = s->root;
+
+	o[1].type = CompOptionTypeBool;
+	o[1].name = "active";
+	o[1].value.b = activating;
+
+	(*s->display->handleCompizEvent) (s->display, 
+					  "switcher", 
+					  "activate", 
+					  o, 2);
+}
+
 static int
 compareWindows (const void *elem1,
 		const void *elem2)
@@ -859,6 +877,8 @@ switchInitiate (CompScreen *s,
 	    }
 
 	    setSelectedWindowHint (s);
+
+	    switchActivateEvent (s, TRUE);
 	}
 
 	damageScreen (s);
@@ -921,6 +941,8 @@ switchTerminate (CompDisplay     *d,
 	    {
 		ss->selectedWindow = None;
 		ss->zoomedWindow   = None;
+
+		switchActivateEvent (s, FALSE);
 	    }
 	    else
 	    {
@@ -1417,6 +1439,8 @@ switchPreparePaintScreen (CompScreen *s,
 			    removeScreenGrab (s, ss->grabIndex, 0);
 			    ss->grabIndex = 0;
 			}
+
+			switchActivateEvent (s, FALSE);
 		    }
 		}
 		break;
