@@ -121,9 +121,10 @@ compSetFloatOption (CompOption	    *option,
 		    CompOptionValue *value)
 {
     float v, p;
+    int sign = (value->f < 0 ? -1 : 1);
 
     p = 1.0f / option->rest.f.precision;
-    v = ((int) (value->f * p + 0.5f)) / p;
+    v = ((int) (value->f * p + sign * 0.5f)) / p;
 
     if (v < option->rest.f.min ||
 	v > option->rest.f.max ||
