@@ -395,9 +395,9 @@ showDesktop (CompDisplay     *d,
     if (s)
     {
 	if (s->showingDesktopMask == 0)
-	    enterShowDesktopMode (s);
+	    (*s->enterShowDesktopMode) (s);
 	else
-	    leaveShowDesktopMode (s, NULL);
+	    (*s->leaveShowDesktopMode) (s, NULL);
     }
 
     return TRUE;

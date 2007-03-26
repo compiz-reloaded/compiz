@@ -1706,7 +1706,7 @@ scaleHandleEvent (CompDisplay *d,
 						      s->workArea.height))
 		    {
 			scaleTerminate (d, action, 0, &o, 1);
-			enterShowDesktopMode (s);
+			(*s->enterShowDesktopMode) (s);
 		    }
 		}
 	    }

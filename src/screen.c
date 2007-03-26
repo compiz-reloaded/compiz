@@ -1346,7 +1346,7 @@ getDesktopHints (CompScreen *s)
 	XFree (propData);
 
 	if (data[0])
-	    enterShowDesktopMode (s);
+	    (*s->enterShowDesktopMode) (s);
     }
 
     data[0] = s->currentDesktop;
@@ -1430,6 +1430,88 @@ makeOutputWindow (CompScreen *s)
 	s->output = s->overlay = s->root;
 
     showOutputWindow (s);
+}
+
+static void
+enterShowDesktopMode (CompScreen *s)
+{
+    CompDisplay   *d = s->display;
+    CompWindow    *w;
+    unsigned long data = 1;
+    int		  count = 0;
+    CompOption    *st = &d->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
+
+    s->showingDesktopMask = ~(CompWindowTypeDesktopMask |
+			      CompWindowTypeDockMask);
+
+    for (w = s->windows; w; w = w->next)
+    {
+	if ((s->showingDesktopMask & w->type) &&
+	    (!(w->state & CompWindowStateSkipTaskbarMask) || st->value.b))
+	{
+	    if (!w->inShowDesktopMode && (*s->focusWindow) (w))
+	    {
+		w->inShowDesktopMode = TRUE;
+		hideWindow (w);
+	    }
+	}
+
+	if (w->inShowDesktopMode)
+	    count++;
+    }
+
+    if (!count)
+    {
+	s->showingDesktopMask = 0;
+	data = 0;
+    }
+
+    XChangeProperty (s->display->display, s->root,
+		     s->display->showingDesktopAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) &data, 1);
+}
+
+static void
+leaveShowDesktopMode (CompScreen *s,
+		      CompWindow *window)
+{
+    CompWindow    *w;
+    unsigned long data = 0;
+
+    if (window)
+    {
+	if (!window->inShowDesktopMode)
+	    return;
+
+	window->inShowDesktopMode = FALSE;
+	showWindow (window);
+
+	/* return if some other window is still in show desktop mode */
+	for (w = s->windows; w; w = w->next)
+	    if (w->inShowDesktopMode)
+		return;
+
+	s->showingDesktopMask = 0;
+    }
+    else
+    {
+	s->showingDesktopMask = 0;
+
+	for (w = s->windows; w; w = w->next)
+	{
+	    if (!w->inShowDesktopMode)
+		continue;
+
+	    w->inShowDesktopMode = FALSE;
+	    showWindow (w);
+	}
+    }
+
+    XChangeProperty (s->display->display, s->root,
+		     s->display->showingDesktopAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) &data, 1);
 }
 
 Bool
@@ -1614,6 +1696,9 @@ addScreen (CompDisplay *display,
     s->windowMoveNotify	  = windowMoveNotify;
     s->windowGrabNotify   = windowGrabNotify;
     s->windowUngrabNotify = windowUngrabNotify;
+
+    s->enterShowDesktopMode = enterShowDesktopMode;
+    s->leaveShowDesktopMode = leaveShowDesktopMode;
 
     s->windowStateChangeNotify = windowStateChangeNotify;
 
@@ -3404,88 +3489,6 @@ applyStartupProperties (CompScreen *screen,
 	    sn_startup_sequence_get_timestamp (s->sequence);
 	window->initialTimestampSet = TRUE;
     }
-}
-
-void
-enterShowDesktopMode (CompScreen *s)
-{
-    CompDisplay   *d = s->display;
-    CompWindow    *w;
-    unsigned long data = 1;
-    int		  count = 0;
-    CompOption    *st = &d->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
-
-    s->showingDesktopMask = ~(CompWindowTypeDesktopMask |
-			      CompWindowTypeDockMask);
-
-    for (w = s->windows; w; w = w->next)
-    {
-	if ((s->showingDesktopMask & w->type) &&
-	    (!(w->state & CompWindowStateSkipTaskbarMask) || st->value.b))
-	{
-	    if ((*s->focusWindow) (w))
-	    {
-		w->inShowDesktopMode = TRUE;
-		hideWindow (w);
-	    }
-	}
-
-	if (w->inShowDesktopMode)
-	    count++;
-    }
-
-    if (!count)
-    {
-	s->showingDesktopMask = 0;
-	data = 0;
-    }
-
-    XChangeProperty (s->display->display, s->root,
-		     s->display->showingDesktopAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) &data, 1);
-}
-
-void
-leaveShowDesktopMode (CompScreen *s,
-		      CompWindow *window)
-{
-    CompWindow    *w;
-    unsigned long data = 0;
-
-    if (window)
-    {
-	if (!window->inShowDesktopMode)
-	    return;
-
-	window->inShowDesktopMode = FALSE;
-	showWindow (window);
-
-	/* return if some other window is still in show desktop mode */
-	for (w = s->windows; w; w = w->next)
-	    if (w->inShowDesktopMode)
-		return;
-
-	s->showingDesktopMask = 0;
-    }
-    else
-    {
-	s->showingDesktopMask = 0;
-
-	for (w = s->windows; w; w = w->next)
-	{
-	    if (!w->inShowDesktopMode)
-		continue;
-
-	    w->inShowDesktopMode = FALSE;
-	    showWindow (w);
-	}
-    }
-
-    XChangeProperty (s->display->display, s->root,
-		     s->display->showingDesktopAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) &data, 1);
 }
 
 void

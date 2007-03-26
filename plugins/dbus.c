@@ -464,7 +464,7 @@ dbusGetOptionValue (DBusMessageIter *iter,
  * string:'Disabled'					      \
  * boolean:'false'					      \
  * string:''						      \
- * int:'0'
+ * int32:'0'
  */
 static Bool
 dbusHandleSetOptionMessage (DBusConnection *connection,
