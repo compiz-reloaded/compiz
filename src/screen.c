@@ -1792,14 +1792,8 @@ addScreen (CompDisplay *display,
 
 	if (glXIsDirect (dpy, s->ctx) == indirectRendering)
 	    i++;
-    if (indirectRendering)
-    { 
-			glxExtensions = glXQueryServerString(s->display->display, screenNum, GLX_EXTENSIONS);
-    }
-    else 
-	{
-			glxExtensions = glXQueryExtensionsString (dpy, screenNum);
-	}
+
+	glxExtensions = glXQueryExtensionsString (dpy, screenNum);
 	if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
 	{
 	    if (i > 0)
