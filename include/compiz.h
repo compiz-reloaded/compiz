@@ -1375,8 +1375,17 @@ imageBufferToTexture (CompScreen   *screen,
 		      CompTexture  *texture,
 		      char	   *image,
 		      unsigned int width,
-		      unsigned int height,
-		      Bool         fixedRGBA);
+		      unsigned int height);
+
+Bool
+imageDataToTexture (CompScreen   *screen,
+		    CompTexture  *texture,
+		    char	 *image,
+		    unsigned int width,
+		    unsigned int height,
+		    GLenum       format,
+		    GLenum       type);
+
 
 Bool
 readImageToTexture (CompScreen   *screen,
