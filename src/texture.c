@@ -98,7 +98,8 @@ imageToTexture (CompScreen   *screen,
 		char	     *image,
 		unsigned int width,
 		unsigned int height,
-		Bool         fixedRGBA)
+		GLenum       format,
+		GLenum       type)
 {
     char *data;
     int	 i;
@@ -136,16 +137,7 @@ imageToTexture (CompScreen   *screen,
     glBindTexture (texture->target, texture->name);
 
     glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0, 
-		  fixedRGBA ? GL_RGBA : GL_BGRA,
-		  fixedRGBA ? GL_UNSIGNED_BYTE :
-
-#if IMAGE_BYTE_ORDER == MSBFirst
-		  GL_UNSIGNED_INT_8_8_8_8_REV,
-#else
-		  GL_UNSIGNED_BYTE,
-#endif
-
-		  data);
+		  format, type, data);
 
     texture->filter = GL_NEAREST;
 
@@ -170,11 +162,29 @@ imageBufferToTexture (CompScreen   *screen,
 		      CompTexture  *texture,
 		      char	   *image,
 		      unsigned int width,
-		      unsigned int height,
-		      Bool         fixedRGBA)
+		      unsigned int height)
 {
-    return imageToTexture (screen, texture, image, width, height, fixedRGBA);    
+#if IMAGE_BYTE_ORDER == MSBFirst
+    return imageToTexture (screen, texture, image, width, height,
+			   GL_BGRA, GL_UNSIGNED_BYTE);
+#else
+    return imageToTexture (screen, texture, image, width, height,
+			   GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV);
+#endif
 }
+
+Bool
+imageDataToTexture (CompScreen   *screen,
+		    CompTexture  *texture,
+		    char	   *image,
+		    unsigned int width,
+		    unsigned int height,
+		    GLenum       format,
+		    GLenum       type)
+{
+    return imageToTexture (screen, texture, image, width, height, format, type);    
+}
+
 
 Bool
 readImageToTexture (CompScreen   *screen,
@@ -191,7 +201,7 @@ readImageToTexture (CompScreen   *screen,
 			    &width, &height, &image))
 	return FALSE;
 
-    status = imageToTexture (screen, texture, image, width, height, FALSE);
+    status = imageBufferToTexture (screen, texture, image, width, height);
 
     free (image);
 
@@ -207,12 +217,10 @@ Bool
 iconToTexture (CompScreen *screen,
 	       CompIcon   *icon)
 {
-    return imageToTexture (screen,
-			   &icon->texture,
-			   (char *) (icon + 1),
-			   icon->width,
-			   icon->height,
-			   FALSE);
+    return imageBufferToTexture (screen, &icon->texture,
+				 (char *) (icon + 1),
+				 icon->width,
+				 icon->height);
 }
 
 Bool
