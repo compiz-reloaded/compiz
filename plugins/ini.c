@@ -65,6 +65,20 @@ struct _IniFileData {
     IniFileData		 *prev;
 };
 
+#define N_ACTION_PARTS 5
+typedef struct _IniActionProxy {
+    int               nSet;
+
+    CompBindingType   type;
+    CompKeyBinding    key;
+    CompButtonBinding button;
+
+    Bool bell;
+
+    unsigned int edgeMask;
+    int		 edgeButton;
+} IniActionProxy;
+
 typedef struct _IniDisplay {
     int		                  screenPrivateIndex;
 
@@ -82,6 +96,25 @@ typedef struct _IniScreen {
     SetScreenOptionProc		   setScreenOption;
     SetScreenOptionForPluginProc   setScreenOptionForPlugin;
 } IniScreen;
+
+static void
+initActionProxy (IniActionProxy *a)
+{
+    a->type = 0;
+
+    a->nSet = 0;
+
+    a->key.keycode = 0;
+    a->key.modifiers = 0;
+
+    a->button.button = 0;
+    a->button.modifiers = 0;
+
+    a->bell = FALSE;
+
+    a->edgeMask = 0;
+    a->edgeButton = 0;
+}
 
 static IniFileData *
 iniGetFileDataFromFilename (CompDisplay *d,
@@ -501,6 +534,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    option = compGetDisplayOptions (d, &nOption);
     }
 
+    IniActionProxy actionProxy;
+    initActionProxy (&actionProxy);
+
     while (fgets (&tmp[0], MAX_OPTION_LENGTH, optionFile) != NULL)
     {
 	status = FALSE;
@@ -517,6 +553,42 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    o = compFindOption (option, nOption, optionName, 0);
 	    if (o)
 	    {
+		if (actionProxy.nSet != 0)
+		{
+		    /* there is an action where a line is
+		       missing / out of order.  realOption
+		       should still be set from the last loop */
+
+		    value.action.type       = actionProxy.type;
+		    value.action.key        = actionProxy.key;
+		    value.action.button     = actionProxy.button;
+		    value.action.bell       = actionProxy.bell;
+		    value.action.edgeMask   = actionProxy.edgeMask;
+		    value.action.edgeButton = actionProxy.edgeButton;
+
+		    if (plugin && p)
+		    {
+			if (s)
+			    status = (*s->setScreenOptionForPlugin) (s,
+								     plugin,
+								     realOption,
+								     &value);
+			else
+			    status = (*d->setDisplayOptionForPlugin) (d, plugin,
+								      realOption,
+								      &value);
+		    }
+		    else
+		    {
+			if (s)
+			    status = (*s->setScreenOption) (s, realOption, &value);
+			else
+			    status = (*d->setDisplayOption) (d, realOption, &value);
+		    }
+
+		    initActionProxy (&actionProxy);
+		}
+
 		value = o->value;
 
 		switch (o->type)
@@ -615,35 +687,35 @@ iniLoadOptionsFromFile (CompDisplay *d,
 				if (!*optionValue ||
 				    strcasecmp (optionValue, "disabled") == 0)
 				{
-					value.action.type &= ~CompBindingTypeKey;
-					hv = TRUE;
+				    actionProxy.type &= ~CompBindingTypeKey;
 				}
 				else
 				{
-					value.action.type |= CompBindingTypeKey;
-					hv = stringToKeyBinding (d,
-								 optionValue,
-								 &value.action.key);
+				    if (stringToKeyBinding (d,
+							     optionValue,
+							     &actionProxy.key))
+					actionProxy.type |= CompBindingTypeKey;
 				}
+				actionProxy.nSet++;
 			    }
 			    else if (strcmp (actionTmp, "button") == 0)
 			    {
 				if (!*optionValue ||
 				    strcasecmp (optionValue, "disabled") == 0)
 				{
-					value.action.type &= ~CompBindingTypeButton;
-					hv = TRUE;
+				    actionProxy.type &= ~CompBindingTypeButton;
 				}
 				else
 				{
-					value.action.type |= CompBindingTypeButton;
-					hv = stringToButtonBinding (d, optionValue,
-								    &value.action.button);
+				    if (stringToButtonBinding (d, optionValue,
+								&actionProxy.button))
+					actionProxy.type |= CompBindingTypeButton;
 				}
+				actionProxy.nSet++;
 			    }
 			    else if (strcmp (actionTmp, "edge") == 0)
 			    {
-				value.action.edgeMask = 0;
+				actionProxy.edgeMask = 0;
 				if (optionValue[0] != '\0')
 				{
 				    int i, e;
@@ -656,32 +728,39 @@ iniLoadOptionsFromFile (CompDisplay *d,
 					    for (e=0; e<edges.nValue; e++)
 					    {
 						if (strcasecmp (edges.value[e].s, edgeToString (i)) == 0)
-						    value.action.edgeMask |= 1 << i;
+						    actionProxy.edgeMask |= 1 << i;
 					    }
 					}
 				    }
 				}
-				hv = TRUE;
+				actionProxy.nSet++;
 			    }
 			    else if (strcmp (actionTmp, "edgebutton") == 0)
 			    {
-				value.action.edgeButton = atoi (optionValue);
+				actionProxy.edgeButton = atoi (optionValue);
 
-				if (value.action.edgeButton)
-				    value.action.type |= CompBindingTypeEdgeButton;
+				if (actionProxy.edgeButton)
+				    actionProxy.type |= CompBindingTypeEdgeButton;
 				else
-				    value.action.type &= ~CompBindingTypeEdgeButton;
+				    actionProxy.type &= ~CompBindingTypeEdgeButton;
 
-				hv = TRUE;
+				actionProxy.nSet++;
 			    }
 			    else if (strcmp (actionTmp, "bell") == 0)
 			    {
-				value.action.bell = (Bool) atoi (optionValue);
-				hv = TRUE;
+				actionProxy.bell = (Bool) atoi (optionValue);
+				actionProxy.nSet++;
 			    }
 
-			    if (hv)
+			    if (actionProxy.nSet >= N_ACTION_PARTS)
 			    {
+				value.action.type       = actionProxy.type;
+				value.action.key        = actionProxy.key;
+				value.action.button     = actionProxy.button;
+				value.action.bell       = actionProxy.bell;
+				value.action.edgeMask   = actionProxy.edgeMask;
+				value.action.edgeButton = actionProxy.edgeButton;
+
 				if (plugin && p)
 				{
 				    if (s)
@@ -701,6 +780,8 @@ iniLoadOptionsFromFile (CompDisplay *d,
 				    else
 					status = (*d->setDisplayOption) (d, realOption, &value);
 				}
+
+				initActionProxy (&actionProxy);
 			    }
 			}
 		    }
