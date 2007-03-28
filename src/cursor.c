@@ -149,7 +149,8 @@ updateCursor (CompCursor    *c,
 				       &cursorImage->texture,
 				       (char *) image->pixels,
 				       image->width,
-				       image->height))
+				       image->height, 
+				       FALSE))
 	    {
 		free (cursorImage);
 		XFree (image);

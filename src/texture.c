@@ -97,7 +97,8 @@ imageToTexture (CompScreen   *screen,
 		CompTexture  *texture,
 		char	     *image,
 		unsigned int width,
-		unsigned int height)
+		unsigned int height,
+		Bool         fixedRGBA)
 {
     char *data;
     int	 i;
@@ -134,7 +135,9 @@ imageToTexture (CompScreen   *screen,
 
     glBindTexture (texture->target, texture->name);
 
-    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0, GL_BGRA,
+    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0, 
+		  fixedRGBA ? GL_RGBA : GL_BGRA,
+		  fixedRGBA ? GL_UNSIGNED_BYTE :
 
 #if IMAGE_BYTE_ORDER == MSBFirst
 		  GL_UNSIGNED_INT_8_8_8_8_REV,
@@ -167,9 +170,10 @@ imageBufferToTexture (CompScreen   *screen,
 		      CompTexture  *texture,
 		      char	   *image,
 		      unsigned int width,
-		      unsigned int height)
+		      unsigned int height,
+		      Bool         fixedRGBA)
 {
-    return imageToTexture (screen, texture, image, width, height);    
+    return imageToTexture (screen, texture, image, width, height, fixedRGBA);    
 }
 
 Bool
@@ -187,7 +191,7 @@ readImageToTexture (CompScreen   *screen,
 			    &width, &height, &image))
 	return FALSE;
 
-    status = imageToTexture (screen, texture, image, width, height);
+    status = imageToTexture (screen, texture, image, width, height, FALSE);
 
     free (image);
 
@@ -207,7 +211,8 @@ iconToTexture (CompScreen *screen,
 			   &icon->texture,
 			   (char *) (icon + 1),
 			   icon->width,
-			   icon->height);
+			   icon->height,
+			   FALSE);
 }
 
 Bool
