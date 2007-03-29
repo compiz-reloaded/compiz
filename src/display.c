@@ -2051,16 +2051,10 @@ eventLoop (void)
 	if (display->dirtyPluginList)
 	    updatePlugins (display);
 
-	if (restartSignal)
+	if (restartSignal || shutDown)
 	{
 	    while (popPlugin ());
-	    execvp (programName, programArgv);
-	    exit (1);
-	}
-	else if (shutDown)
-	{
-	    while (popPlugin ());
-	    exit (0);
+	    return;
 	}
 
 	while (XPending (display->display))
