@@ -262,5 +262,11 @@ main (int argc, char **argv)
     if (!disableSm)
 	closeSession ();
 
+    if (restartSignal)
+    {
+	execvp (programName, programArgv);
+	return 1;
+    }
+
     return 0;
 }
