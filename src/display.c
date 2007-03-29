@@ -85,8 +85,6 @@ static int        targetOutput = 0;
 
 static Bool inHandleEvent = FALSE;
 
-static Bool shutDown = FALSE;
-
 static const CompTransform identity = {
     {
 	1.0, 0.0, 0.0, 0.0,

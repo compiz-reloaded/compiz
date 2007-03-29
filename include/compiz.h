@@ -208,6 +208,7 @@ extern REGION     emptyRegion;
 extern REGION     infiniteRegion;
 extern GLushort   defaultColor[4];
 extern Window     currentRoot;
+extern Bool       shutDown;
 extern Bool       restartSignal;
 extern CompWindow *lastFoundWindow;
 extern CompWindow *lastDamagedWindow;

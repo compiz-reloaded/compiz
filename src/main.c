@@ -72,6 +72,7 @@ char *windowTypeString[] = {
 int  nWindowTypeString =
     sizeof (windowTypeString) / sizeof (windowTypeString[0]);
 
+Bool shutDown = FALSE;
 Bool restartSignal = FALSE;
 
 CompWindow *lastFoundWindow = 0;
@@ -128,6 +129,10 @@ signalHandler (int sig)
 	break;
     case SIGHUP:
 	restartSignal = TRUE;
+	break;
+    case SIGINT:
+    case SIGTERM:
+	shutDown = TRUE;
     default:
 	break;
     }
@@ -148,6 +153,8 @@ main (int argc, char **argv)
 
     signal (SIGHUP, signalHandler);
     signal (SIGCHLD, signalHandler);
+    signal (SIGINT, signalHandler);
+    signal (SIGTERM, signalHandler);
 
     emptyRegion.rects = &emptyRegion.extents;
     emptyRegion.numRects = 0;
