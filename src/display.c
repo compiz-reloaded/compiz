@@ -33,8 +33,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/poll.h>
-#include <unistd.h>
-#include <signal.h>
 
 #define XK_MISCELLANY
 #include <X11/keysymdef.h>
@@ -2518,47 +2516,6 @@ addScreenToDisplay (CompDisplay *display,
     addScreenActions (display, s);
 }
 
-static Bool
-setSignalHandler (int  sig,
-		  void (*handler) (int))
-{
-    struct sigaction sa;
-
-    memset (&sa, 0, sizeof (struct sigaction));
-
-    sa.sa_handler = handler;
-    sigemptyset (&sa.sa_mask);
-    sa.sa_flags = 0;
-
-    if (sigaction (sig, &sa, NULL) == -1)
-	return FALSE;
-
-    return TRUE;
-}
-
-static void
-exitHandler (int sig)
-{
-    shutDown = TRUE;
-}
-
-static void
-restartHandler (int sig)
-{
-    restartSignal = TRUE;
-}
-
-static Bool
-setSignalHandlers (void)
-{
-    if (!setSignalHandler (SIGHUP,  restartHandler) ||
-	!setSignalHandler (SIGINT,  exitHandler)    ||
-	!setSignalHandler (SIGTERM, exitHandler))
-	return FALSE;
-
-    return TRUE;
-}
-
 Bool
 addDisplay (char *name,
 	    char **plugin,
@@ -3137,8 +3094,6 @@ addDisplay (char *name,
     d->pingHandle =
 	compAddTimeout (d->opt[COMP_DISPLAY_OPTION_PING_DELAY].value.i,
 			pingTimeout, d);
-
-    setSignalHandlers ();
 
     return TRUE;
 }
