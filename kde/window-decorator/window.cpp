@@ -1381,24 +1381,33 @@ KWD::Window::updateProperty (void)
 
 	if (mDecor)
 	{
-	    const QObjectList *children = mDecor->widget ()->children ();
-	    QWidget	      *child;
-	    int		      x;
+	    QWidget *widget = mDecor->widget ();
+	    int	    x;
 
 	    x = w - mContext.left_space - mContext.left_corner_space;
 	    if (x > topXOffset)
 		topXOffset = x;
 
-	    for (QObjectListIt it(*children); it.current (); ++it)
+	    if (widget)
 	    {
-		if (!it.current ()->isWidgetType ())
-		    continue;
+		const QObjectList *children = widget->children ();
 
-		child = static_cast <QWidget *> (it.current ());
+		if (children)
+		{
+		    QWidget *child;
 
-		x = child->x () - mBorder.left - 2;
-		if (x > w / 2 && x < topXOffset)
-		    topXOffset = x;
+		    for (QObjectListIt it(*children); it.current (); ++it)
+		    {
+			if (!it.current ()->isWidgetType ())
+			    continue;
+
+			child = static_cast <QWidget *> (it.current ());
+
+			x = child->x () - mBorder.left - 2;
+			if (x > w / 2 && x < topXOffset)
+			    topXOffset = x;
+		    }
+		}
 	    }
 	}
 
