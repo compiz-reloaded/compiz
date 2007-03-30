@@ -4102,18 +4102,35 @@ max_button_event (WnckWindow *win,
 
     switch (xevent->type) {
     case ButtonPress:
-	if (xevent->xbutton.button == 1)
+	if (xevent->xbutton.button <= 3)
 	    d->button_states[BUTTON_MAX] |= PRESSED_EVENT_WINDOW;
 	break;
     case ButtonRelease:
-	if (xevent->xbutton.button == 1)
+	if (xevent->xbutton.button <= 3)
 	{
 	    if (d->button_states[BUTTON_MAX] == BUTTON_EVENT_ACTION_STATE)
 	    {
-		if (wnck_window_is_maximized (win))
-		    wnck_window_unmaximize (win);
+		if (xevent->xbutton.button == 2)
+		{
+		    if (wnck_window_is_maximized_vertically (win))
+			wnck_window_unmaximize_vertically (win);
+		    else
+			wnck_window_maximize_vertically (win);
+		}
+		else if (xevent->xbutton.button == 3)
+		{
+		    if (wnck_window_is_maximized_horizontally (win))
+			wnck_window_unmaximize_horizontally (win);
+		    else
+			wnck_window_maximize_horizontally (win);
+		}
 		else
-		    wnck_window_maximize (win);
+		{
+		    if (wnck_window_is_maximized (win))
+			wnck_window_unmaximize (win);
+		    else
+			wnck_window_maximize (win);
+		}
 	    }
 
 	    d->button_states[BUTTON_MAX] &= ~PRESSED_EVENT_WINDOW;
