@@ -1438,9 +1438,10 @@ static int
 radius_to_width (int radius,
 		 int i)
 {
-    int r2 = radius * radius - (radius - i) * (radius - i);
+    float r1 = sqrt (radius) + radius;
+    float r2 = r1 * r1 - (r1 - (i + 0.5)) * (r1 - (i + 0.5));
 
-    return 1 + (radius - floor (sqrt (r2) + 0.5));
+    return floor (0.5f + r1 - sqrt (r2));
 }
 
 static Region
@@ -1536,7 +1537,7 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 	    w = radius_to_width (bottom_left_radius, i);
 
 	    xrect.x	 = 0;
-	    xrect.y	 = fgeom->bottom_height - i;
+	    xrect.y	 = fgeom->bottom_height - i - 1;
 	    xrect.width  = w;
 	    xrect.height = 1;
 
@@ -1551,7 +1552,7 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 	    w = radius_to_width (bottom_right_radius, i);
 
 	    xrect.x	 = width - w;
-	    xrect.y	 = fgeom->bottom_height - i;
+	    xrect.y	 = fgeom->bottom_height - i - 1;
 	    xrect.width  = w;
 	    xrect.height = 1;
 
