@@ -19,7 +19,7 @@ AC_PROG_LIBTOOL
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 
-ALL_LINGUAS="cs de es fi fr hu it ja pl pt_BR sv zh_CN zh_TW"
+ALL_LINGUAS="cs de es fi fr hu it ja pl pt_BR sv zh_CN zh_TW af ar bg bn bs ca cy da el en_GB en_US et gl gu he hi hr id ka km ko lo lt mk mr nb nl pa pt ro ru sk sl sr ta tr uk vi xh zu"
 AC_SUBST(ALL_LINGUAS)
 AM_GLIB_GNU_GETTEXT
 GETTEXT_PACKAGE=compiz

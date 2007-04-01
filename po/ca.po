@@ -1,0 +1,1755 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-02-14 22:14+0100\n"
+"PO-Revision-Date: 2007-02-26 12:39+0100\n"
+"Last-Translator: Anna Mititieri <mitipeiro@yahoo.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../plugins/annotate.c:745 ../plugins/clone.c:724 ../plugins/rotate.c:1745
+#: ../plugins/screenshot.c:384 ../plugins/water.c:1606 ../plugins/zoom.c:752
+msgid "Initiate"
+msgstr "Inicia"
+
+#: ../plugins/annotate.c:746
+msgid "Initiate annotate drawing"
+msgstr ""
+
+#: ../plugins/annotate.c:760
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/annotate.c:761
+msgid "Draw using tool"
+msgstr ""
+
+#: ../plugins/annotate.c:772
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Inicia"
+
+#: ../plugins/annotate.c:773
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Inicia el canvi de mida de la finestra"
+
+#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
+msgid "Clear"
+msgstr ""
+
+#: ../plugins/annotate.c:805
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/annotate.c:806
+msgid "Fill color for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:815
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: ../plugins/annotate.c:816
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:825
+msgid "Line width"
+msgstr ""
+
+#: ../plugins/annotate.c:826
+msgid "Line width for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:835
+msgid "Stroke width"
+msgstr ""
+
+#: ../plugins/annotate.c:836
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:1009
+#, fuzzy
+msgid "Annotate"
+msgstr "Inicia"
+
+#: ../plugins/annotate.c:1010
+#, fuzzy
+msgid "Annotate plugin"
+msgstr "Connectors actius"
+
+#: ../plugins/blur.c:58 ../plugins/fade.c:38 ../plugins/minimize.c:49
+#: ../plugins/scale.c:71 ../plugins/switcher.c:87 ../plugins/wobbly.c:159
+#: ../src/main.c:56
+msgid "Toolbar"
+msgstr "Barra d'eines"
+
+#: ../plugins/blur.c:59 ../plugins/fade.c:39 ../plugins/wobbly.c:160
+#: ../src/main.c:57
+msgid "Menu"
+msgstr "Menú"
+
+#: ../plugins/blur.c:60 ../plugins/fade.c:40 ../plugins/minimize.c:50
+#: ../plugins/scale.c:72 ../plugins/switcher.c:88 ../plugins/wobbly.c:161
+#: ../src/main.c:58
+msgid "Utility"
+msgstr "Utilitat"
+
+#: ../plugins/blur.c:61 ../plugins/fade.c:42 ../plugins/minimize.c:52
+#: ../plugins/scale.c:76 ../plugins/switcher.c:92 ../plugins/wobbly.c:164
+#: ../src/main.c:61
+msgid "Normal"
+msgstr "Normal"
+
+#: ../plugins/blur.c:62 ../plugins/fade.c:43 ../plugins/minimize.c:51
+#: ../plugins/scale.c:73 ../plugins/switcher.c:89 ../plugins/wobbly.c:162
+#: ../src/main.c:60
+msgid "Dialog"
+msgstr "Diàleg"
+
+#: ../plugins/blur.c:63 ../plugins/fade.c:44 ../plugins/scale.c:74
+#: ../plugins/switcher.c:90 ../plugins/wobbly.c:163 ../src/main.c:68
+msgid "ModalDialog"
+msgstr "Diàleg de mode"
+
+#: ../plugins/blur.c:68
+#, fuzzy
+msgid "4xBilinear"
+msgstr "Filtre lineal"
+
+#: ../plugins/blur.c:69 ../plugins/blur.c:211
+msgid "Gaussian"
+msgstr ""
+
+#: ../plugins/blur.c:70 ../plugins/blur.c:213 ../plugins/cube.c:1101
+#: ../plugins/decoration.c:308 ../plugins/switcher.c:384
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../plugins/blur.c:428
+#, fuzzy
+msgid "Blur Speed"
+msgstr "Velocitat de plegament"
+
+#: ../plugins/blur.c:429
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Velocitat d'esvaïment de la finestra"
+
+#: ../plugins/blur.c:438 ../plugins/fade.c:194 ../plugins/minimize.c:223
+#: ../plugins/scale.c:364 ../plugins/switcher.c:369
+msgid "Window Types"
+msgstr "Tipus de finestres"
+
+#: ../plugins/blur.c:439
+#, fuzzy
+msgid "Window types that should be blurred"
+msgstr "Tipus de finestres que s'hauran d'esvair"
+
+#: ../plugins/blur.c:453
+msgid "Focus Blur"
+msgstr ""
+
+#: ../plugins/blur.c:454
+#, fuzzy
+msgid "Blur windows that doesn't have focus"
+msgstr "Tipus de finestres que hauran de tremolar quan rebin el focus"
+
+#: ../plugins/blur.c:460
+msgid "Alpha Blur"
+msgstr ""
+
+#: ../plugins/blur.c:461
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#: ../plugins/blur.c:467
+#, fuzzy
+msgid "Blur Filter"
+msgstr "Filtre de textura"
+
+#: ../plugins/blur.c:468
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: ../plugins/blur.c:478
+msgid "Gaussian Radius"
+msgstr ""
+
+#: ../plugins/blur.c:479
+msgid "Gaussian radius"
+msgstr ""
+
+#: ../plugins/blur.c:488
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Mipmap"
+
+#: ../plugins/blur.c:489
+msgid "Mipmap level-of-detail"
+msgstr ""
+
+#: ../plugins/blur.c:2159
+msgid "Pulse"
+msgstr ""
+
+#: ../plugins/blur.c:2160
+#, fuzzy
+msgid "Pulse effect"
+msgstr "Passa el focus a l'efecte"
+
+#: ../plugins/blur.c:2405
+#, fuzzy
+msgid "Blur Windows"
+msgstr "Situa les finestres"
+
+#: ../plugins/blur.c:2406
+#, fuzzy
+msgid "Blur windows"
+msgstr "Canvia la mida de les finestres"
+
+#: ../plugins/clone.c:725
+msgid "Initiate clone selection"
+msgstr ""
+
+#: ../plugins/clone.c:854
+#, fuzzy
+msgid "Clone Output"
+msgstr "Sortides"
+
+#: ../plugins/clone.c:855
+msgid "Output clone handler"
+msgstr ""
+
+#: ../plugins/cube.c:988
+msgid "Cube Color"
+msgstr "Color del cub"
+
+#: ../plugins/cube.c:989
+msgid "Color of top and bottom sides of the cube"
+msgstr "Color de les cares superior i inferior del cub"
+
+#: ../plugins/cube.c:998
+msgid "Inside Cube"
+msgstr "Interior del cub"
+
+#: ../plugins/cube.c:999
+msgid "Inside cube"
+msgstr "Interior del cub"
+
+#: ../plugins/cube.c:1005
+msgid "Scale image"
+msgstr "Canvia la mida de la imatge"
+
+#: ../plugins/cube.c:1006
+msgid "Scale images to cover top face of cube"
+msgstr "Canvia la mida de les imatges per a cobrir la cara superior del cub"
+
+#: ../plugins/cube.c:1012
+msgid "Image files"
+msgstr "Fitxers d'imatge"
+
+#: ../plugins/cube.c:1013
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"Llista de fitxers PNG i SVG que s'hauran de representar a la cara superior "
+"del cub"
+
+#: ../plugins/cube.c:1026
+msgid "Skydome"
+msgstr "Cúpula"
+
+#: ../plugins/cube.c:1027
+msgid "Render skydome"
+msgstr "Renderitza la cúpula"
+
+#: ../plugins/cube.c:1033
+msgid "Skydome Image"
+msgstr "Imatge de la cúpula"
+
+#: ../plugins/cube.c:1034
+msgid "Image to use as texture for the skydome"
+msgstr "Imatge que s'utilitzarà com a textura per a la cúpula"
+
+#: ../plugins/cube.c:1042
+msgid "Animate Skydome"
+msgstr "Cúpula animada"
+
+#: ../plugins/cube.c:1043
+msgid "Animate skydome when rotating cube"
+msgstr "Representació animada de la cúpula en girar el cub"
+
+#: ../plugins/cube.c:1049
+msgid "Skydome Gradient Start Color"
+msgstr "Color inicial del degradat de la cúpula"
+
+#: ../plugins/cube.c:1050
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+"Color que s'utilitzarà com color superior del degradat alternatiu de la "
+"cúpula"
+
+#: ../plugins/cube.c:1060
+msgid "Skydome Gradient End Color"
+msgstr "Color final del degradat de la cúpula"
+
+#: ../plugins/cube.c:1061
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+"Color que s'utilitzarà com a color inferior del degradat alternatiu de la "
+"cúpula"
+
+#: ../plugins/cube.c:1071 ../plugins/rotate.c:302
+msgid "Acceleration"
+msgstr "Acceleració"
+
+#: ../plugins/cube.c:1072
+msgid "Fold Acceleration"
+msgstr "Acceleració de plegament"
+
+#: ../plugins/cube.c:1081 ../plugins/minimize.c:203 ../plugins/rotate.c:319
+#: ../plugins/scale.c:344 ../plugins/switcher.c:349 ../plugins/zoom.c:239
+msgid "Speed"
+msgstr "Velocitat"
+
+#: ../plugins/cube.c:1082
+msgid "Fold Speed"
+msgstr "Velocitat de plegament"
+
+#: ../plugins/cube.c:1091 ../plugins/minimize.c:213 ../plugins/rotate.c:329
+#: ../plugins/scale.c:354 ../plugins/switcher.c:359 ../plugins/zoom.c:249
+msgid "Timestep"
+msgstr "Etapa"
+
+#: ../plugins/cube.c:1092
+msgid "Fold Timestep"
+msgstr "Etapa de plegament"
+
+#: ../plugins/cube.c:1102 ../plugins/switcher.c:385
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"Genera mipmaps sempre que sigui possible per a un canvi de mida de millor "
+"qualitat"
+
+#: ../plugins/cube.c:1791
+msgid "Unfold"
+msgstr "Desplega"
+
+#: ../plugins/cube.c:1792
+msgid "Unfold cube"
+msgstr "Desplega el cub"
+
+#: ../plugins/cube.c:1809
+msgid "Next Slide"
+msgstr "Diapositiva següent"
+
+#: ../plugins/cube.c:1810
+msgid "Advance to next slide"
+msgstr "Avança cap a la diapositiva següent"
+
+#: ../plugins/cube.c:1827
+msgid "Previous Slide"
+msgstr "Diapositiva anterior"
+
+#: ../plugins/cube.c:1828
+msgid "Go back to previous slide"
+msgstr "Torna a la diapositiva anterior"
+
+#: ../plugins/cube.c:2031
+msgid "Desktop Cube"
+msgstr "Cub de l'escriptori"
+
+#: ../plugins/cube.c:2032
+msgid "Place windows on cube"
+msgstr "Situa les finestres al cub"
+
+#: ../plugins/decoration.c:250
+msgid "Shadow Radius"
+msgstr "Radi de l'ombra"
+
+#: ../plugins/decoration.c:251
+msgid "Drop shadow radius"
+msgstr "Radi de l'ombra descendent"
+
+#: ../plugins/decoration.c:260
+msgid "Shadow Opacity"
+msgstr "Opacitat de l'ombra"
+
+#: ../plugins/decoration.c:261
+msgid "Drop shadow opacity"
+msgstr "Opacitat de l'ombra descendent"
+
+#: ../plugins/decoration.c:280
+msgid "Shadow Offset X"
+msgstr "Desplaçament en X de l'ombra"
+
+#: ../plugins/decoration.c:281
+msgid "Drop shadow X offset"
+msgstr "Desplaçament en X de l'ombra descendent"
+
+#: ../plugins/decoration.c:289
+msgid "Shadow Offset Y"
+msgstr "Desplaçament en Y de l'ombra"
+
+#: ../plugins/decoration.c:290
+msgid "Drop shadow Y offset"
+msgstr "Desplaçament en Y de l'ombra descendent"
+
+#: ../plugins/decoration.c:298
+msgid "Command"
+msgstr "Ordre"
+
+#: ../plugins/decoration.c:299
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"Línia d'ordres del decorador que s'executa si no s'està executant cap "
+"decorador"
+
+#: ../plugins/decoration.c:1410
+msgid "Window Decoration"
+msgstr "Decoració de la finestra"
+
+# RU
+#: ../plugins/decoration.c:1411
+msgid "Window decorations"
+msgstr "Decoracions de finestres"
+
+#: ../plugins/fade.c:37 ../src/main.c:55
+msgid "Dock"
+msgstr "Acoblament"
+
+#: ../plugins/fade.c:41 ../plugins/wobbly.c:146 ../src/main.c:59
+msgid "Splash"
+msgstr "Pantalla de presentació"
+
+#: ../plugins/fade.c:45 ../plugins/wobbly.c:147 ../src/main.c:62
+msgid "DropdownMenu"
+msgstr "Menú desplegable"
+
+#: ../plugins/fade.c:46 ../plugins/wobbly.c:148 ../src/main.c:63
+msgid "PopupMenu"
+msgstr "Menú emergent"
+
+#: ../plugins/fade.c:47 ../plugins/wobbly.c:149 ../src/main.c:64
+msgid "Tooltip"
+msgstr "Indicador de funció"
+
+#: ../plugins/fade.c:48 ../plugins/wobbly.c:150 ../src/main.c:65
+msgid "Notification"
+msgstr "Notificació"
+
+#: ../plugins/fade.c:49 ../plugins/wobbly.c:151 ../src/main.c:66
+msgid "Combo"
+msgstr "Quadre combinat"
+
+#: ../plugins/fade.c:50 ../plugins/wobbly.c:152 ../src/main.c:67
+msgid "Dnd"
+msgstr "Dnd"
+
+#: ../plugins/fade.c:51 ../plugins/wobbly.c:153 ../src/main.c:70
+msgid "Unknown"
+msgstr "Desconeguda"
+
+#: ../plugins/fade.c:184
+msgid "Fade Speed"
+msgstr "Velocitat d'esvaïment"
+
+#: ../plugins/fade.c:185
+msgid "Window fade speed"
+msgstr "Velocitat d'esvaïment de la finestra"
+
+#: ../plugins/fade.c:195
+msgid "Window types that should be fading"
+msgstr "Tipus de finestres que s'hauran d'esvair"
+
+#: ../plugins/fade.c:209
+msgid "Visual Bell"
+msgstr "Campana visual"
+
+#: ../plugins/fade.c:210
+msgid "Fade effect on system beep"
+msgstr "Efecte d'esvaïment amb avís sonor del sistema"
+
+#: ../plugins/fade.c:216
+msgid "Fullscreen Visual Bell"
+msgstr "Campana visual a pantalla completa"
+
+#: ../plugins/fade.c:217
+msgid "Fullscreen fade effect on system beep"
+msgstr "Efecte d'esvaïment a pantalla completa amb avís sonor del sistema"
+
+#: ../plugins/fade.c:835
+msgid "Fading Windows"
+msgstr "Esvaïment de finestres"
+
+#: ../plugins/fade.c:836
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Es fan aparèixer progressivament les finestres quan s'assignen i s'esvaeixen "
+"quan no estan assignades"
+
+#. Decimal point character
+#: ../plugins/gconf-dump.c:81
+msgid "."
+msgstr ","
+
+#: ../plugins/gconf-dump.c:603
+msgid "Plugins that this must load before"
+msgstr "Connectors que ha de carregar prèviament"
+
+#: ../plugins/gconf-dump.c:604 ../plugins/gconf-dump.c:614
+msgid "Do not modify"
+msgstr "No modifiquis"
+
+#: ../plugins/gconf-dump.c:613
+msgid "Plugins that this requires"
+msgstr "Connectors que necessita"
+
+#: ../plugins/minimize.c:204
+msgid "Minimize speed"
+msgstr "Minimitza la velocitat"
+
+#: ../plugins/minimize.c:214
+msgid "Minimize timestep"
+msgstr "Minimitza l'etapa"
+
+#: ../plugins/minimize.c:224
+msgid "Window types that should be transformed when minimized"
+msgstr "Tipus de finestres que s'hauran de transformar en minimitzar-se"
+
+#: ../plugins/minimize.c:239
+msgid "Shade Resistance"
+msgstr "Resistència a l'ombra"
+
+#: ../plugins/minimize.c:240
+msgid "Shade resistance"
+msgstr "Resistència a l'ombra"
+
+#: ../plugins/minimize.c:1070
+msgid "Minimize Effect"
+msgstr "Minimitza l'efecte"
+
+#: ../plugins/minimize.c:1071
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Transforma les finestres quan es minimitzen i es maximitzen"
+
+#: ../plugins/move.c:677
+msgid "Initiate Window Move"
+msgstr "Inicia el moviment de la finestra"
+
+#: ../plugins/move.c:678
+msgid "Start moving window"
+msgstr "Comença el moviment de la finestra"
+
+#: ../plugins/move.c:696 ../plugins/scale.c:386 ../plugins/switcher.c:410
+msgid "Opacity"
+msgstr "Opacitat"
+
+#: ../plugins/move.c:697
+msgid "Opacity level of moving windows"
+msgstr "Nivell d'opacitat de les finestres en moviment"
+
+#: ../plugins/move.c:705
+msgid "Constrain Y"
+msgstr "Restringeix Y"
+
+#: ../plugins/move.c:706
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Restringeix la coordenada Y a l'àrea de l'espai de treball"
+
+#: ../plugins/move.c:712
+msgid "Snapoff maximized windows"
+msgstr "Separa les finestres maximitzades"
+
+#: ../plugins/move.c:713
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr "Separa i desmaximitza les finestres maximitzades en arrossegar"
+
+#: ../plugins/move.c:881
+msgid "Move Window"
+msgstr "Mou la finestra"
+
+#: ../plugins/move.c:882
+msgid "Move window"
+msgstr "Mou la finestra"
+
+#: ../plugins/place.c:104
+msgid "Workarounds"
+msgstr "Solucions alternatives"
+
+#: ../plugins/place.c:105
+msgid "Window placement workarounds"
+msgstr "Solucions alternatives de disposició de finestres"
+
+#: ../plugins/place.c:1145
+msgid "Place Windows"
+msgstr "Situa les finestres"
+
+#: ../plugins/place.c:1146
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Situa les finestres en les posicions adequades quan s'assignin"
+
+#: ../plugins/plane.c:643
+#, fuzzy
+msgid "Plane Left"
+msgstr "Gira cap a l'esquerra"
+
+#: ../plugins/plane.c:644
+#, fuzzy
+msgid "Plane left"
+msgstr "Gira cap a l'esquerra"
+
+#: ../plugins/plane.c:662
+#, fuzzy
+msgid "Plane Right"
+msgstr "Gira cap a la dreta"
+
+#: ../plugins/plane.c:663
+#, fuzzy
+msgid "Plane right"
+msgstr "Gira cap a la dreta"
+
+#: ../plugins/plane.c:681
+#, fuzzy
+msgid "Plane Down"
+msgstr "Situa les finestres"
+
+#: ../plugins/plane.c:682
+#, fuzzy
+msgid "Plane down"
+msgstr "Situa les finestres"
+
+#: ../plugins/plane.c:700
+msgid "Plane Up"
+msgstr ""
+
+#: ../plugins/plane.c:701
+msgid "Plane up"
+msgstr ""
+
+#: ../plugins/plane.c:717
+#, fuzzy, c-format
+msgid "Plane To Face %d"
+msgstr "Gira cap a la cara %d"
+
+#: ../plugins/plane.c:718
+#, fuzzy, c-format
+msgid "Plane to face %d"
+msgstr "Gira cap a la cara %d"
+
+#: ../plugins/plane.c:719
+#, fuzzy, c-format
+msgid "Plane To Face %d with Window"
+msgstr "Gira cap a la cara %d amb la finestra"
+
+#: ../plugins/plane.c:720
+#, fuzzy, c-format
+msgid "Plane to face %d and bring active window along"
+msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+
+#: ../plugins/plane.c:889
+#, fuzzy
+msgid "Desktop Plane"
+msgstr "Cub de l'escriptori"
+
+#: ../plugins/plane.c:890
+#, fuzzy
+msgid "Place windows on a plane"
+msgstr "Situa les finestres al cub"
+
+#: ../plugins/resize.c:718
+msgid "Initiate Window Resize"
+msgstr "Inicia el canvi de mida de la finestra"
+
+#: ../plugins/resize.c:719
+msgid "Start resizing window"
+msgstr "Comença el canvi de mida de la finestra"
+
+#: ../plugins/resize.c:862
+msgid "Resize Window"
+msgstr "Canvia la mida de la finestra"
+
+#: ../plugins/resize.c:863
+msgid "Resize window"
+msgstr "Canvia la mida de la finestra"
+
+#: ../plugins/rotate.c:285 ../plugins/zoom.c:222
+msgid "Pointer Invert Y"
+msgstr "Punter inverteix Y"
+
+#: ../plugins/rotate.c:286 ../plugins/zoom.c:223
+msgid "Invert Y axis for pointer movement"
+msgstr "Inverteix l'eix Y per al moviment del punter"
+
+#: ../plugins/rotate.c:292 ../plugins/zoom.c:229
+msgid "Pointer Sensitivity"
+msgstr "Sensibilitat del punter"
+
+#: ../plugins/rotate.c:293 ../plugins/zoom.c:230
+msgid "Sensitivity of pointer movement"
+msgstr "Sensibilitat del moviment del punter"
+
+# RU
+#: ../plugins/rotate.c:303
+msgid "Rotation Acceleration"
+msgstr "Acceleració de gir"
+
+#: ../plugins/rotate.c:312
+msgid "Snap To Top Face"
+msgstr "Desplaça a la cara superior"
+
+#: ../plugins/rotate.c:313
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Desplaça el gir del cub a la cara superior"
+
+#: ../plugins/rotate.c:320
+msgid "Rotation Speed"
+msgstr "Velocitat del gir"
+
+#: ../plugins/rotate.c:330
+msgid "Rotation Timestep"
+msgstr "Etapa del gir"
+
+#: ../plugins/rotate.c:1746
+msgid "Start Rotation"
+msgstr "Inicia el gir"
+
+#: ../plugins/rotate.c:1760
+msgid "Rotate Left"
+msgstr "Gira cap a l'esquerra"
+
+#: ../plugins/rotate.c:1761
+msgid "Rotate left"
+msgstr "Gira cap a l'esquerra"
+
+#: ../plugins/rotate.c:1779
+msgid "Rotate Right"
+msgstr "Gira cap a la dreta"
+
+#: ../plugins/rotate.c:1780
+msgid "Rotate right"
+msgstr "Gira cap a la dreta"
+
+#: ../plugins/rotate.c:1798
+msgid "Rotate Left with Window"
+msgstr "Gira cap a l'esquerra amb la finestra"
+
+#: ../plugins/rotate.c:1799
+msgid "Rotate left and bring active window along"
+msgstr "Gira cap a l'esquerra i s'emporta la finestra activa"
+
+#: ../plugins/rotate.c:1818
+msgid "Rotate Right with Window"
+msgstr "Gira cap a la dreta amb la finestra"
+
+#: ../plugins/rotate.c:1819
+msgid "Rotate right and bring active window along"
+msgstr "Gira cap a la dreta i s'emporta la finestra activa"
+
+#: ../plugins/rotate.c:1836
+#, c-format
+msgid "Rotate To Face %d"
+msgstr "Gira cap a la cara %d"
+
+#: ../plugins/rotate.c:1837
+#, c-format
+msgid "Rotate to face %d"
+msgstr "Gira cap a la cara %d"
+
+#: ../plugins/rotate.c:1838
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "Gira cap a la cara %d amb la finestra"
+
+#: ../plugins/rotate.c:1839
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+
+#: ../plugins/rotate.c:1888
+msgid "Rotate To"
+msgstr "Gira cap a"
+
+#: ../plugins/rotate.c:1889
+msgid "Rotate to viewport"
+msgstr "Gira cap a l'àrea de visualització"
+
+#: ../plugins/rotate.c:1900
+msgid "Rotate Window"
+msgstr "Gira la finestra"
+
+#: ../plugins/rotate.c:1901
+msgid "Rotate with window"
+msgstr "Gira amb la finestra"
+
+#: ../plugins/rotate.c:1912
+msgid "Rotate Flip Left"
+msgstr "Gira i inverteix cap a l'esquerra"
+
+#: ../plugins/rotate.c:1913
+msgid "Flip to left viewport and warp pointer"
+msgstr "Inverteix cap a l'àrea de visualització esquerra i deforma el punter"
+
+#: ../plugins/rotate.c:1928
+msgid "Rotate Flip Right"
+msgstr "Gira i inverteix cap a la dreta"
+
+#: ../plugins/rotate.c:1929
+msgid "Flip to right viewport and warp pointer"
+msgstr "Inverteix cap a l'àrea de visualització dreta i deforma el punter"
+
+#: ../plugins/rotate.c:1944
+msgid "Edge Flip Pointer"
+msgstr "Punter d'inversió de vora"
+
+#: ../plugins/rotate.c:1945
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Inverteix cap a la propera àrea de visualització en moure el punter cap a la "
+"vora de la pantalla"
+
+#: ../plugins/rotate.c:1952
+msgid "Edge Flip Move"
+msgstr "Moviment d'inversió de vora"
+
+#: ../plugins/rotate.c:1953
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Inverteix cap a la propera àrea de visualització en moure la finestra cap a "
+"la vora de la pantalla"
+
+#: ../plugins/rotate.c:1960
+msgid "Edge Flip DnD"
+msgstr "DnD d'inversió de vora"
+
+#: ../plugins/rotate.c:1961
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Inverteix cap a la propera àrea de visualització en arrossegar l'objecte cap "
+"a la vora de la pantalla"
+
+#: ../plugins/rotate.c:1968
+msgid "Flip Time"
+msgstr "Temps d'inversió"
+
+#: ../plugins/rotate.c:1969
+msgid "Timeout before flipping viewport"
+msgstr "Temps d'espera abans d'invertir l'àrea de visualització"
+
+#: ../plugins/rotate.c:2137
+msgid "Rotate Cube"
+msgstr "Gira el cub"
+
+#: ../plugins/rotate.c:2138
+msgid "Rotate desktop cube"
+msgstr "Gira el cub de l'escriptori"
+
+#: ../plugins/scale.c:75 ../plugins/switcher.c:91 ../src/main.c:69
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+#: ../plugins/scale.c:87 ../plugins/wobbly.c:131
+msgid "None"
+msgstr "Cap"
+
+#: ../plugins/scale.c:88
+msgid "Emblem"
+msgstr "Distintiu"
+
+#: ../plugins/scale.c:89
+msgid "Big"
+msgstr "Gran"
+
+# ES
+#: ../plugins/scale.c:335
+msgid "Spacing"
+msgstr "Espaiat"
+
+#: ../plugins/scale.c:336
+msgid "Space between windows"
+msgstr "Espai entre finestres"
+
+#: ../plugins/scale.c:345
+msgid "Scale speed"
+msgstr "Canvia la velocitat"
+
+#: ../plugins/scale.c:355
+msgid "Scale timestep"
+msgstr "Canvia la mida de l'etapa"
+
+#: ../plugins/scale.c:365
+msgid "Window types that should scaled in scale mode"
+msgstr "Tipus de finestres que s'hauran de canviar de mida en el mode d'escala"
+
+#: ../plugins/scale.c:379
+msgid "Darken Background"
+msgstr "Enfosqueix el fons"
+
+#: ../plugins/scale.c:380
+msgid "Darken background when scaling windows"
+msgstr "Enfosqueix el fons en canviar la mida de les finestres"
+
+#: ../plugins/scale.c:387 ../plugins/switcher.c:411
+msgid "Amount of opacity in percent"
+msgstr "Quantitat d'opacitat en percentatge"
+
+#: ../plugins/scale.c:395
+msgid "Overlay Icon"
+msgstr "Superposa la icona"
+
+#: ../plugins/scale.c:396
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Superposa una icona a les finestres un cop se n'ha canviat la mida"
+
+#: ../plugins/scale.c:404
+msgid "Hover Time"
+msgstr "Temps de passar per sobre"
+
+#: ../plugins/scale.c:405
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Temps (en ms) abans de finalitzar el mode d'escala en passar el punter per "
+"sobre una finestra"
+
+#: ../plugins/scale.c:1925
+msgid "Initiate Window Picker"
+msgstr "Inicia el seleccionador de finestres"
+
+#: ../plugins/scale.c:1926
+msgid "Layout and start transforming windows"
+msgstr "Dissenya i inicia la transformació de les finestres"
+
+#: ../plugins/scale.c:1944
+msgid "Initiate Window Picker For All Windows"
+msgstr "Inicia el seleccionador per a totes les finestres"
+
+#: ../plugins/scale.c:1945
+msgid "Layout and start transforming all windows"
+msgstr "Dissenya i inicia la transformació de totes les finestres"
+
+#: ../plugins/scale.c:1959
+msgid "Initiate Window Picker For Window Group"
+msgstr "Inicia el seleccionador per a un grup de finestres"
+
+#: ../plugins/scale.c:1960
+msgid "Layout and start transforming window group"
+msgstr "Dissenya i inicia la transformació del grup de finestres"
+
+#: ../plugins/scale.c:1975
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Inicia el seleccionador per a les finestres de la sortida actual"
+
+#: ../plugins/scale.c:1977
+msgid "Layout and start transforming windows on current output"
+msgstr ""
+"Dissenya i inicia la transformació de les finestres de la sortida actual"
+
+#: ../plugins/scale.c:2187
+msgid "Scale"
+msgstr "Canvia la mida"
+
+#: ../plugins/scale.c:2188
+msgid "Scale windows"
+msgstr "Canvia la mida de les finestres"
+
+#: ../plugins/screenshot.c:385
+#, fuzzy
+msgid "Initiate rectangle screenshot"
+msgstr "Fes una captura de pantalla"
+
+#: ../plugins/screenshot.c:398
+msgid "Directory"
+msgstr ""
+
+#: ../plugins/screenshot.c:399
+msgid "Put screenshot images in this directory"
+msgstr ""
+
+#: ../plugins/screenshot.c:407
+#, fuzzy
+msgid "Launch Application"
+msgstr "Mostra el diàleg d'execució de l'aplicació"
+
+#: ../plugins/screenshot.c:408
+msgid "Automatically open screenshot in this application"
+msgstr ""
+
+#: ../plugins/screenshot.c:558
+#, fuzzy
+msgid "Screenshot"
+msgstr "Fes una captura de pantalla"
+
+#: ../plugins/screenshot.c:559
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Línia d'ordres de captura de pantalla"
+
+#: ../plugins/switcher.c:350
+msgid "Switcher speed"
+msgstr "Velocitat del canviador"
+
+#: ../plugins/switcher.c:360
+msgid "Switcher timestep"
+msgstr "Etapa del canviador"
+
+#: ../plugins/switcher.c:370
+msgid "Window types that should shown in switcher"
+msgstr "Tipus de finestres que s'hauran de mostrar al canviador"
+
+#: ../plugins/switcher.c:392
+msgid "Saturation"
+msgstr "Saturació"
+
+#: ../plugins/switcher.c:393
+msgid "Amount of saturation in percent"
+msgstr "Quantitat de saturació en percentatge"
+
+#: ../plugins/switcher.c:401
+msgid "Brightness"
+msgstr "Brillantor"
+
+#: ../plugins/switcher.c:402
+msgid "Amount of brightness in percent"
+msgstr "Quantitat de brillantor en percentatge"
+
+#: ../plugins/switcher.c:419
+msgid "Bring To Front"
+msgstr "Porta endavant"
+
+#: ../plugins/switcher.c:420
+msgid "Bring selected window to front"
+msgstr "Porta la finestra seleccionada endavant"
+
+#: ../plugins/switcher.c:426
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../plugins/switcher.c:427
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"Distància a la qual s'haurà d'allunyar el zoom de l'escriptori mentre es "
+"canvia de finestra"
+
+#: ../plugins/switcher.c:437
+msgid "Icon"
+msgstr "Icona"
+
+#: ../plugins/switcher.c:438
+msgid "Show icon next to thumbnail"
+msgstr "Mostra la icona al costat de la miniatura"
+
+#: ../plugins/switcher.c:444
+msgid "Minimized"
+msgstr "Minimitzades"
+
+#: ../plugins/switcher.c:445
+msgid "Show minimized windows"
+msgstr "Mostra les finestres minimitzades"
+
+#: ../plugins/switcher.c:1982 ../plugins/switcher.c:2018
+#: ../plugins/switcher.c:2056
+msgid "Next window"
+msgstr "Finestra següent"
+
+#: ../plugins/switcher.c:1983
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+"Fa sortir el canviador si no està visible i selecciona la finestra següent"
+
+#: ../plugins/switcher.c:2000 ../plugins/switcher.c:2037
+#: ../plugins/switcher.c:2069
+msgid "Prev window"
+msgstr "Finestra anterior"
+
+#: ../plugins/switcher.c:2001
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+"Fes sortir el canviador si no està visible i selecciona la finestra anterior"
+
+#: ../plugins/switcher.c:2019
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Fes sortir el canviador si no està visible i selecciona la següent de totes "
+"les finestres"
+
+#: ../plugins/switcher.c:2038
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Fes sortir el canviador si no està visible i selecciona l'anterior de totes "
+"les finestres"
+
+#: ../plugins/switcher.c:2057
+msgid "Select next window"
+msgstr "Selecciona la finestra següent"
+
+#: ../plugins/switcher.c:2070
+msgid "Select previous window"
+msgstr "Selecciona la finestra anterior"
+
+#: ../plugins/switcher.c:2237 ../plugins/switcher.c:2238
+msgid "Application Switcher"
+msgstr "Canviador d'aplicacions"
+
+#: ../plugins/water.c:1607
+msgid "Enable pointer water effects"
+msgstr "Habilita els efectes d'aigua del punter"
+
+#: ../plugins/water.c:1620
+msgid "Toggle rain"
+msgstr "Commuta la pluja"
+
+#: ../plugins/water.c:1621
+msgid "Toggle rain effect"
+msgstr "Commuta l'efecte de pluja"
+
+#: ../plugins/water.c:1636
+msgid "Toggle wiper"
+msgstr "Commuta l'eixugaparabrises"
+
+#: ../plugins/water.c:1637
+msgid "Toggle wiper effect"
+msgstr "Commuta l'efecte de l'eixugaparabrises"
+
+#: ../plugins/water.c:1652
+msgid "Offset Scale"
+msgstr "Escala de desplaçament"
+
+#: ../plugins/water.c:1653
+msgid "Water offset scale"
+msgstr "Escala de desplaçament d'aigua"
+
+# SH
+#: ../plugins/water.c:1662
+msgid "Rain Delay"
+msgstr "Retard de pluja"
+
+#: ../plugins/water.c:1663
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Retard (en ms) entre cada gota de pluja"
+
+#: ../plugins/water.c:1671
+msgid "Title wave"
+msgstr "Títol en onada"
+
+#: ../plugins/water.c:1672
+msgid "Wave effect from window title"
+msgstr "Efecte d'onada del títol de la finestra"
+
+#: ../plugins/water.c:1683
+msgid "Point"
+msgstr "Punt"
+
+#: ../plugins/water.c:1684
+msgid "Add point"
+msgstr "Afegeix un punt"
+
+#: ../plugins/water.c:1695
+msgid "Line"
+msgstr "Línia"
+
+#: ../plugins/water.c:1696
+msgid "Add line"
+msgstr "Afegeix una línia"
+
+#: ../plugins/water.c:1858
+msgid "Water Effect"
+msgstr "Efecte d'aigua"
+
+#: ../plugins/water.c:1859
+msgid "Adds water effects to different desktop actions"
+msgstr "Afegeix efectes d'aigua a diferents accions de l'escriptori"
+
+#: ../plugins/wobbly.c:132 ../plugins/wobbly.c:2908
+msgid "Shiver"
+msgstr "Estremeix"
+
+#: ../plugins/wobbly.c:384
+msgid "Friction"
+msgstr "Fricció"
+
+#: ../plugins/wobbly.c:385
+msgid "Spring Friction"
+msgstr "Fricció d'elasticitat"
+
+#: ../plugins/wobbly.c:394
+msgid "Spring K"
+msgstr "Constant elàstica"
+
+#: ../plugins/wobbly.c:395
+msgid "Spring Konstant"
+msgstr "Constant elàstica"
+
+#: ../plugins/wobbly.c:404
+msgid "Grid Resolution"
+msgstr "Resolució de la graella"
+
+#: ../plugins/wobbly.c:405
+msgid "Vertex Grid Resolution"
+msgstr "Resolució de la graella del vèrtex"
+
+#: ../plugins/wobbly.c:413
+msgid "Minimum Grid Size"
+msgstr "Mida mínima de la graella"
+
+#: ../plugins/wobbly.c:414
+msgid "Minimum Vertex Grid Size"
+msgstr "Mida mínima de la graella del vèrtex"
+
+#: ../plugins/wobbly.c:422
+msgid "Map Effect"
+msgstr "Assigna l'efecte"
+
+#: ../plugins/wobbly.c:423
+msgid "Map Window Effect"
+msgstr "Assigna l'efecte de la finestra"
+
+#: ../plugins/wobbly.c:431
+msgid "Focus Effect"
+msgstr "Passa el focus a l'efecte"
+
+#: ../plugins/wobbly.c:432
+msgid "Focus Window Effect"
+msgstr "Passa el focus a l'efecte de finestra"
+
+#: ../plugins/wobbly.c:440
+msgid "Map Window Types"
+msgstr "Assigna tipus de finestres"
+
+#: ../plugins/wobbly.c:441
+msgid "Window types that should wobble when mapped"
+msgstr "Tipus de finestres que hauran de tremolar quan s'assignin"
+
+#: ../plugins/wobbly.c:455
+msgid "Focus Window Types"
+msgstr "Tipus de finestres de focus"
+
+#: ../plugins/wobbly.c:456
+msgid "Window types that should wobble when focused"
+msgstr "Tipus de finestres que hauran de tremolar quan rebin el focus"
+
+#: ../plugins/wobbly.c:468
+msgid "Move Window Types"
+msgstr "Tipus de finestres de moviment"
+
+#: ../plugins/wobbly.c:469
+msgid "Window types that should wobble when moved"
+msgstr "Tipus de finestres que hauran de tremolar quan es moguin"
+
+#: ../plugins/wobbly.c:483
+msgid "Grab Window Types"
+msgstr "Tipus de finestres de captura"
+
+#: ../plugins/wobbly.c:484
+msgid "Window types that should wobble when grabbed"
+msgstr "Tipus de finestres que hauran de tremolar quan s'agafin"
+
+#: ../plugins/wobbly.c:496
+msgid "Maximize Effect"
+msgstr "Efecte de maximitzar"
+
+#: ../plugins/wobbly.c:497
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Efecte de tremolor en maximitzar i desmaximitzar finestres"
+
+#: ../plugins/wobbly.c:2887
+msgid "Snap windows"
+msgstr "Ajusta les finestres"
+
+#: ../plugins/wobbly.c:2888
+msgid "Toggle window snapping"
+msgstr "Commuta l'ajustament de finestres"
+
+#: ../plugins/wobbly.c:2901
+msgid "Snap Inverted"
+msgstr "Ajustament invertit"
+
+#: ../plugins/wobbly.c:2902
+msgid "Inverted window snapping"
+msgstr "Ajustament de finestres invertit"
+
+#: ../plugins/wobbly.c:2909
+msgid "Make window shiver"
+msgstr "Fes estremir la finestra"
+
+#: ../plugins/wobbly.c:3107
+msgid "Wobbly Windows"
+msgstr "Finestres tremoloses"
+
+#: ../plugins/wobbly.c:3108
+msgid "Use spring model for wobbly window effect"
+msgstr "Utilitza el model d'elàstic per a l'efecte de finestra tremolosa"
+
+#: ../plugins/zoom.c:240
+msgid "Zoom Speed"
+msgstr "Velocitat del zoom"
+
+#: ../plugins/zoom.c:250
+msgid "Zoom Timestep"
+msgstr "Etapa del zoom"
+
+#: ../plugins/zoom.c:259 ../plugins/zoom.c:260
+msgid "Zoom factor"
+msgstr "Factor del zoom"
+
+#: ../plugins/zoom.c:269
+msgid "Filter Linear"
+msgstr "Filtre lineal"
+
+#: ../plugins/zoom.c:270
+msgid "USe linear filter when zoomed in"
+msgstr "Utilitza el filtre lineal en ampliar el zoom"
+
+#: ../plugins/zoom.c:753 ../plugins/zoom.c:767 ../plugins/zoom.c:768
+msgid "Zoom In"
+msgstr "Amplia el zoom"
+
+#: ../plugins/zoom.c:782 ../plugins/zoom.c:783
+msgid "Zoom Out"
+msgstr "Allunya el zoom"
+
+#: ../plugins/zoom.c:934
+msgid "Zoom Desktop"
+msgstr "Fes zoom a l'escriptori"
+
+#: ../plugins/zoom.c:935
+msgid "Zoom and pan desktop cube"
+msgstr "Fes zoom i gira el cub de l'escriptori"
+
+#: ../src/display.c:174
+msgid "Fast"
+msgstr "Ràpid"
+
+#: ../src/display.c:174
+msgid "Good"
+msgstr "Bo"
+
+#: ../src/display.c:174
+msgid "Best"
+msgstr "Millor"
+
+#: ../src/display.c:759
+msgid "Active Plugins"
+msgstr "Connectors actius"
+
+#: ../src/display.c:760
+msgid "List of currently active plugins"
+msgstr "Llista dels connectors actius actualment"
+
+#: ../src/display.c:774
+msgid "Texture Filter"
+msgstr "Filtre de textura"
+
+#: ../src/display.c:775
+msgid "Texture filtering"
+msgstr "Aplicació del filtre de textura"
+
+#: ../src/display.c:783
+msgid "Click To Focus"
+msgstr "Feu clic per a passar el focus"
+
+#: ../src/display.c:784
+msgid "Click on window moves input focus to it"
+msgstr "En fer clic a la finestra, aquesta rep el focus d'entrada"
+
+#: ../src/display.c:790
+msgid "Auto-Raise"
+msgstr "Elevació automàtica"
+
+#: ../src/display.c:791
+msgid "Raise selected windows after interval"
+msgstr "Eleva les finestres seleccionades un cop transcorregut l'interval"
+
+#: ../src/display.c:797
+msgid "Auto-Raise Delay"
+msgstr "Retard de l'elevació automàtica"
+
+#: ../src/display.c:798
+msgid "Interval before raising selected windows"
+msgstr ""
+"Interval que ha de transcórrer abans d'elevar les finestres seleccionades"
+
+#: ../src/display.c:806
+msgid "Close Window"
+msgstr "Tanca la finestra"
+
+#: ../src/display.c:807
+msgid "Close active window"
+msgstr "Tanca la finestra activa"
+
+#: ../src/display.c:823
+msgid "Show Main Menu"
+msgstr "Mostra el menú principal"
+
+#: ../src/display.c:824
+msgid "Show the main menu"
+msgstr "Mostra el menú principal"
+
+#: ../src/display.c:840
+msgid "Run Dialog"
+msgstr "Diàleg d'execució"
+
+#: ../src/display.c:841
+msgid "Show Run Application dialog"
+msgstr "Mostra el diàleg d'execució de l'aplicació"
+
+#: ../src/display.c:857
+msgid "Unmaximize Window"
+msgstr "Desmaximitza la finestra"
+
+#: ../src/display.c:858
+msgid "Unmaximize active window"
+msgstr "Desmaximitza la finestra activa"
+
+#: ../src/display.c:874
+msgid "Minimize Window"
+msgstr "Minimitza la finestra"
+
+#: ../src/display.c:875
+msgid "Minimize active window"
+msgstr "Minimitza la finestra activa"
+
+#: ../src/display.c:891
+msgid "Maximize Window"
+msgstr "Maximitza la finestra"
+
+#: ../src/display.c:892
+msgid "Maximize active window"
+msgstr "Maximitza la finestra activa"
+
+#: ../src/display.c:908
+msgid "Maximize Window Horizontally"
+msgstr "Maximitza la finestra horitzontalment"
+
+#: ../src/display.c:909
+msgid "Maximize active window horizontally"
+msgstr "Maximitza la finestra activa horitzontalment"
+
+#: ../src/display.c:921
+msgid "Maximize Window Vertically"
+msgstr "Maximitza la finestra verticalment"
+
+#: ../src/display.c:922
+msgid "Maximize active window vertically"
+msgstr "Maximitza la finestra activa verticalment"
+
+#: ../src/display.c:934 ../src/display.c:935
+msgid "Hide all windows and focus desktop"
+msgstr "Oculta totes les finestres i passa el focus a l'escriptori"
+
+#: ../src/display.c:949
+#, c-format
+msgid "Command line %d"
+msgstr "Línia d'ordres %d"
+
+#: ../src/display.c:950
+#, c-format
+msgid "Command line to be executed in shell when run_command%d is invoked"
+msgstr ""
+"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
+"d"
+
+#: ../src/display.c:952
+#, c-format
+msgid "Run command %d"
+msgstr "Executa l'ordre %d"
+
+#: ../src/display.c:953
+#, c-format
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command%d"
+msgstr ""
+"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
+"identificada amb l'ordre %d"
+
+#: ../src/display.c:997
+msgid "Slow Animations"
+msgstr "Animacions lentes"
+
+#: ../src/display.c:998
+msgid "Toggle use of slow animations"
+msgstr "Commuta l'ús d'animacions lentes"
+
+#: ../src/display.c:1014
+msgid "Raise Window"
+msgstr "Eleva la finestra"
+
+#: ../src/display.c:1015
+msgid "Raise window above other windows"
+msgstr "Eleva la finestra per damunt de les altres"
+
+#: ../src/display.c:1029
+msgid "Lower Window"
+msgstr "Abaixa la finestra"
+
+#: ../src/display.c:1030
+msgid "Lower window beneath other windows"
+msgstr "Abaixa la finestra per sota de les altres"
+
+#: ../src/display.c:1044
+msgid "Increase Opacity"
+msgstr "Augmenta l'opacitat"
+
+#: ../src/display.c:1045
+msgid "Increase window opacity"
+msgstr "Augmenta l'opacitat de la finestra"
+
+#: ../src/display.c:1059
+msgid "Decrease Opacity"
+msgstr "Redueix l'opacitat"
+
+#: ../src/display.c:1060
+msgid "Decrease window opacity"
+msgstr "Redueix l'opacitat de la finestra"
+
+#: ../src/display.c:1074 ../src/display.c:1075
+msgid "Take a screenshot"
+msgstr "Fes una captura de pantalla"
+
+#: ../src/display.c:1091 ../src/display.c:1092
+msgid "Screenshot command line"
+msgstr "Línia d'ordres de captura de pantalla"
+
+#: ../src/display.c:1100 ../src/display.c:1101
+msgid "Take a screenshot of a window"
+msgstr "Fes una captura de pantalla d'una finestra"
+
+#: ../src/display.c:1118 ../src/display.c:1119
+msgid "Window screenshot command line"
+msgstr "Línia d'ordres de captura de pantalla de finestra"
+
+#: ../src/display.c:1127
+msgid "Window Menu"
+msgstr "Menú de la finestra"
+
+#: ../src/display.c:1128
+msgid "Open window menu"
+msgstr "Obre el menú de la finestra"
+
+#: ../src/display.c:1147
+msgid "Raise On Click"
+msgstr "Eleva en fer clic"
+
+#: ../src/display.c:1148
+msgid "Raise windows when clicked"
+msgstr "Eleva les finestres en fer clic"
+
+#: ../src/display.c:1154
+msgid "Audible Bell"
+msgstr "Avís sonor"
+
+#: ../src/display.c:1155
+msgid "Audible system beep"
+msgstr "Avís sonor del sistema"
+
+#: ../src/display.c:1161
+msgid "Toggle Window Maximized"
+msgstr "Commuta la finestra maximitzada"
+
+#: ../src/display.c:1162
+msgid "Toggle active window maximized"
+msgstr "Commuta la finestra activa maximitzada"
+
+#: ../src/display.c:1174
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Commuta la finestra maximitzada horitzontalment"
+
+#: ../src/display.c:1176
+msgid "Toggle active window maximized horizontally"
+msgstr "Commuta la finestra activa maximitzada horitzontalment"
+
+#: ../src/display.c:1188
+msgid "Toggle Window Maximized Vertically"
+msgstr "Commuta la finestra maximitzada verticalment"
+
+#: ../src/display.c:1190
+msgid "Toggle active window maximized vertically"
+msgstr "Commuta la finestra activa maximitzada verticalment"
+
+#: ../src/display.c:1202
+msgid "Hide Skip Taskbar Windows"
+msgstr "Oculta les finestres ignorades de la barra de tasques"
+
+#: ../src/display.c:1203
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Oculta les finestres que no es troben a la barra de tasques en accedir al "
+"mode d'escriptori de visualització"
+
+#: ../src/display.c:1210
+msgid "Toggle Window Shaded"
+msgstr "Commuta la finestra ombrejada"
+
+#: ../src/display.c:1211
+msgid "Toggle active window shaded"
+msgstr "Commuta la finestra activa ombrejada"
+
+#: ../src/display.c:1227
+msgid "Ignore Hints When Maximized"
+msgstr "Ignora els suggeriments quan està maximitzada"
+
+#: ../src/display.c:1228
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Ignora els suggeriments d'increment de mida i aspecte quan la finestra es "
+"troba maximitzada"
+
+#: ../src/display.c:1235 ../src/display.c:1236
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Línia d'ordres de captura de pantalla"
+
+#: ../src/display.c:1244 ../src/display.c:1245
+msgid "Open a terminal"
+msgstr ""
+
+# SH
+#: ../src/display.c:1257
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Retard de pluja"
+
+#: ../src/display.c:1258
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../src/main.c:54
+msgid "Desktop"
+msgstr "Escriptori"
+
+#: ../src/screen.c:585
+msgid "Detect Refresh Rate"
+msgstr "Detecta la freqüència d'actualització"
+
+#: ../src/screen.c:586
+msgid "Automatic detection of refresh rate"
+msgstr "Detecció automàtica de la freqüència d'actualització"
+
+#: ../src/screen.c:592
+msgid "Lighting"
+msgstr "Il·luminació"
+
+#: ../src/screen.c:593
+msgid "Use diffuse light when screen is transformed"
+msgstr "Utilitza llum de difusió en transformar la pantalla"
+
+#: ../src/screen.c:599
+msgid "Refresh Rate"
+msgstr "Freqüència d'actualització"
+
+#: ../src/screen.c:600
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr ""
+"Freqüència amb la qual es torna a representar la pantalla (vegades/segon)"
+
+#: ../src/screen.c:609
+msgid "Horizontal Virtual Size"
+msgstr "Mida virtual horitzontal"
+
+#: ../src/screen.c:610
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr ""
+"Multiplicador de la mida de la pantalla per a la mida virtual horitzontal"
+
+#: ../src/screen.c:618
+msgid "Vertical Virtual Size"
+msgstr "Mida virtual vertical"
+
+#: ../src/screen.c:619
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Multiplicador de la mida de la pantalla per a la mida virtual vertical"
+
+#: ../src/screen.c:627
+msgid "Opacity Step"
+msgstr "Etapa d'opacitat"
+
+#: ../src/screen.c:628
+msgid "Opacity change step"
+msgstr "Etapa de canvi d'opacitat"
+
+#: ../src/screen.c:636
+msgid "Unredirect Fullscreen Windows"
+msgstr "No redirigeixis les finestres a pantalla completa"
+
+#: ../src/screen.c:637
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Permet que la representació de finestres a pantalla completa no es "
+"redirigeixi cap a mapes de píxels fora de la pantalla"
+
+#: ../src/screen.c:644
+msgid "Default Icon"
+msgstr "Icona per defecte"
+
+#: ../src/screen.c:645
+msgid "Default window icon image"
+msgstr "Imatge d'icona de finestra per defecte"
+
+#: ../src/screen.c:653
+msgid "Sync To VBlank"
+msgstr "Sincronitza amb enfosquiment vertical"
+
+#: ../src/screen.c:654
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+"Només actualitza la pantalla durant els períodes d'enfosquiment vertical"
+
+#: ../src/screen.c:661
+msgid "Number of Desktops"
+msgstr "Nombre d'escriptoris"
+
+#: ../src/screen.c:662
+msgid "Number of virtual desktops"
+msgstr "Nombre d'escriptoris virtuals"
+
+#: ../src/screen.c:670
+msgid "Detect Outputs"
+msgstr "Detecta les sortides"
+
+#: ../src/screen.c:671
+msgid "Automatic detection of output devices"
+msgstr "Detecció automàtica dels dispositius de sortida"
+
+#: ../src/screen.c:677
+msgid "Outputs"
+msgstr "Sortides"
+
+#: ../src/screen.c:678
+msgid "List of strings describing output devices"
+msgstr "Llista de cadenes que descriuen els dispositius de sortida"
+
+#: ../src/screen.c:689
+msgid "Focus prevention"
+msgstr ""
+
+#: ../src/screen.c:690
+msgid "Enable focus prevention"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Sloppy Focus"
+#~ msgstr "Disquetera"
+
+#, fuzzy
+#~ msgid "Start moving window using keyboard"
+#~ msgstr "Iniciant el dimoni."
+
+#, fuzzy
+#~ msgid "Terminate"
+#~ msgstr "Terminals"
