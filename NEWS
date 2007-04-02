@@ -1,3 +1,33 @@
+Release 0.5.0 (2007-04-02 David Reveman <davidr@novell.com>)
+============================================================
+Development release.
+
+Remove stencil buffer requirement.
+
+Focus stealing prevention support.
+
+Blur plugin that provide support for blurring windows and
+contents behind translucent windows.
+
+Fragment attribute interface that allow plugins
+to perform more advanced fragment shading effects and
+integrate properly with other plugins.
+
+Extensible window matching interface and new option type
+that provide advanced window selection functionality.
+
+Plugin that provide a composited video interface for
+efficient video playback.
+
+FUSE plugin that maps compiz options to a file-system and
+allow efficient manipulation of options by reading and
+writing files.
+
+Better occlusion detection and more efficient rendering.
+
+Flat file configuration backend.
+
+
 Release 0.3.6 (2006-12-31 David Reveman <davidr@novell.com>)
 ============================================================
 Development release.
