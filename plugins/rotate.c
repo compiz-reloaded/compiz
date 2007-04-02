@@ -2111,6 +2111,20 @@ rotateFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     ROTATE_SCREEN (s);
+    ROTATE_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&rd->opt[ROTATE_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s, &rd->opt[ROTATE_DISPLAY_OPTION_LEFT].value.action);
+    removeScreenAction (s, &rd->opt[ROTATE_DISPLAY_OPTION_RIGHT].value.action);
+    removeScreenAction (s,
+	   		&rd->opt[ROTATE_DISPLAY_OPTION_LEFT_WINDOW].value.action);
+    removeScreenAction (s,
+	   		&rd->opt[ROTATE_DISPLAY_OPTION_RIGHT_WINDOW].value.action);
+    removeScreenAction (s, 
+			&rd->opt[ROTATE_DISPLAY_OPTION_FLIP_LEFT].value.action);
+    removeScreenAction (s,
+	   		&rd->opt[ROTATE_DISPLAY_OPTION_FLIP_RIGHT].value.action);
 
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);

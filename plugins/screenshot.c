@@ -523,6 +523,10 @@ shotFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     SHOT_SCREEN (s);
+    SHOT_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&sd->opt[SHOT_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (ss, s, paintScreen);
 

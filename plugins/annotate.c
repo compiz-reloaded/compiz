@@ -963,6 +963,7 @@ annoFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ANNO_SCREEN (s);
+    ANNO_DISPLAY (s->display);
 
     if (as->cairo)
 	cairo_destroy (as->cairo);
@@ -974,6 +975,11 @@ annoFiniScreen (CompPlugin *p,
 
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
+
+    removeScreenAction (s, 
+			&ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
+    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
 
     UNWRAP (as, s, paintScreen);
 

@@ -2117,9 +2117,19 @@ scaleFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     SCALE_SCREEN (s);
+    SCALE_DISPLAY (s->display);
 
     matchFini (&ss->match);
     matchFini (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
+
+    removeScreenAction (s, 
+			&sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s,
+	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
+    removeScreenAction (s,
+	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP].value.action);
+    removeScreenAction (s,
+	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT].value.action);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);

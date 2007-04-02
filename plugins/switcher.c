@@ -2245,8 +2245,20 @@ switchFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     SWITCH_SCREEN (s);
+    SWITCH_DISPLAY (s->display);
 
     matchFini (&ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match);
+
+    removeScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT].value.action);
+    removeScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP].value.action);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);

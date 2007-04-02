@@ -1974,9 +1974,12 @@ cubeFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     CUBE_SCREEN (s);
+    CUBE_DISPLAY (s->display);
 
     if (cs->skyListId)
 	glDeleteLists (cs->skyListId, 1);
+
+    removeScreenAction (s, &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD].value.action);
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);

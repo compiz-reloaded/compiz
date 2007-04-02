@@ -846,6 +846,10 @@ moveFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     MOVE_SCREEN (s);
+    MOVE_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (ms, s, paintWindow);
 

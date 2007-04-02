@@ -896,6 +896,11 @@ zoomFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ZOOM_SCREEN (s);
+    ZOOM_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&zd->opt[ZOOM_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_IN].value.action);
 
     UNWRAP (zs, s, preparePaintScreen);
     UNWRAP (zs, s, donePaintScreen);

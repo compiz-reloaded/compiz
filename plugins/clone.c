@@ -815,6 +815,10 @@ cloneFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     CLONE_SCREEN (s);
+    CLONE_DISPLAY (s->display);
+    
+    removeScreenAction (s, 
+			&cd->opt[CLONE_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);

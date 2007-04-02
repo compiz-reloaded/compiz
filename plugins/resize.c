@@ -829,6 +829,7 @@ resizeFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
 
     if (rs->leftCursor)
 	XFreeCursor (s->display->display, rs->leftCursor);
@@ -848,6 +849,9 @@ resizeFiniScreen (CompPlugin *p,
 	XFreeCursor (s->display->display, rs->downLeftCursor);
     if (rs->downRightCursor)
 	XFreeCursor (s->display->display, rs->downRightCursor);
+    
+    removeScreenAction (s, 
+			&rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action);
 
     free (rs);
 }
