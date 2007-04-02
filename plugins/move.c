@@ -849,6 +849,9 @@ moveFiniScreen (CompPlugin *p,
 
     UNWRAP (ms, s, paintWindow);
 
+    if (ms->moveCursor)
+	XFreeCursor (s->display->display, ms->moveCursor);
+
     free (ms);
 }
 

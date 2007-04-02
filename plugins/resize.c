@@ -830,6 +830,25 @@ resizeFiniScreen (CompPlugin *p,
 {
     RESIZE_SCREEN (s);
 
+    if (rs->leftCursor)
+	XFreeCursor (s->display->display, rs->leftCursor);
+    if (rs->rightCursor)
+	XFreeCursor (s->display->display, rs->rightCursor);
+    if (rs->upCursor)
+	XFreeCursor (s->display->display, rs->upCursor);
+    if (rs->downCursor)
+	XFreeCursor (s->display->display, rs->downCursor);
+    if (rs->middleCursor)
+	XFreeCursor (s->display->display, rs->middleCursor);
+    if (rs->upLeftCursor)
+	XFreeCursor (s->display->display, rs->upLeftCursor);
+    if (rs->upRightCursor)
+	XFreeCursor (s->display->display, rs->upRightCursor);
+    if (rs->downLeftCursor)
+	XFreeCursor (s->display->display, rs->downLeftCursor);
+    if (rs->downRightCursor)
+	XFreeCursor (s->display->display, rs->downRightCursor);
+
     free (rs);
 }
 

@@ -2127,6 +2127,9 @@ scaleFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, damageWindowRect);
 
+    if (ss->cursor)
+	XFreeCursor (s->display->display, ss->cursor);
+
     if (ss->slotsSize)
 	free (ss->slots);
 
