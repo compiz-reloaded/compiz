@@ -1,0 +1,2135 @@
+# Russian message file for YaST2 (@memory@).
+# Copyright (C) 2005, 2006 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 1999, 2000, 2001 SuSE GmbH.
+# Aleksey Osipov <pepela@yandex.ru>, 2005, 2006
+# Aleksey Novodvorksy <aen@logic.ru>, 2000.
+# Eugene Osintsev <osgene@omskelecom.ru>, 1999, 2000.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-04-01 18:26+0200\n"
+"PO-Revision-Date: 2006-01-04 08:58+0100\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
+#: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
+msgid "Initiate"
+msgstr "Инициировать"
+
+#: plugins/annotate.c:746
+msgid "Initiate annotate drawing"
+msgstr ""
+
+#: plugins/annotate.c:760
+msgid "Draw"
+msgstr ""
+
+#: plugins/annotate.c:761
+msgid "Draw using tool"
+msgstr ""
+
+#: plugins/annotate.c:772
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Инициировать"
+
+#: plugins/annotate.c:773
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Инициировать изменение размеров окна"
+
+#: plugins/annotate.c:787 plugins/annotate.c:788
+#, fuzzy
+msgid "Clear"
+msgstr "О_чистить"
+
+#: plugins/annotate.c:805
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: plugins/annotate.c:806
+msgid "Fill color for annotations"
+msgstr ""
+
+#: plugins/annotate.c:815
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: plugins/annotate.c:816
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: plugins/annotate.c:825
+msgid "Line width"
+msgstr ""
+
+#: plugins/annotate.c:826
+msgid "Line width for annotations"
+msgstr ""
+
+#: plugins/annotate.c:835
+msgid "Stroke width"
+msgstr ""
+
+#: plugins/annotate.c:836
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: plugins/annotate.c:1009
+#, fuzzy
+msgid "Annotate"
+msgstr "Инициировать"
+
+#: plugins/annotate.c:1010
+#, fuzzy
+msgid "Annotate plugin"
+msgstr "Активные модули"
+
+#: plugins/blur.c:73
+#, fuzzy
+msgid "4xBilinear"
+msgstr "Линейная фильтрация"
+
+#: plugins/blur.c:74 plugins/blur.c:237
+#, fuzzy
+msgid "Gaussian"
+msgstr "Русский"
+
+#: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
+#: plugins/decoration.c:1203 plugins/switcher.c:373
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#  combo box item
+#: plugins/blur.c:728
+#, fuzzy
+msgid "Blur Speed"
+msgstr "Скорость свертывания"
+
+#: plugins/blur.c:729
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Скорость проявления/исчезания окна"
+
+#: plugins/blur.c:738
+#, fuzzy
+msgid "Focus blur windows"
+msgstr "Масштабирование окон"
+
+#: plugins/blur.c:739
+#, fuzzy
+msgid "Windows that should be affected by focus blur"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: plugins/blur.c:747
+msgid "Focus Blur"
+msgstr ""
+
+#: plugins/blur.c:748
+#, fuzzy
+msgid "Blur windows that doesn't have focus"
+msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
+
+#: plugins/blur.c:754
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "Масштабирование окон"
+
+#: plugins/blur.c:755
+#, fuzzy
+msgid "Windows that should use alpha blur by default"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: plugins/blur.c:763
+msgid "Alpha Blur"
+msgstr ""
+
+#: plugins/blur.c:764
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#  MenuButton label
+#  menubutton label
+#: plugins/blur.c:772
+#, fuzzy
+msgid "Blur Filter"
+msgstr "Фильтр текстур"
+
+#: plugins/blur.c:773
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: plugins/blur.c:783
+msgid "Gaussian Radius"
+msgstr ""
+
+#: plugins/blur.c:784
+#, fuzzy
+msgid "Gaussian radius"
+msgstr "Российская Федерация"
+
+#: plugins/blur.c:792
+#, fuzzy
+msgid "Gaussian Strength"
+msgstr "Русский"
+
+#: plugins/blur.c:793
+#, fuzzy
+msgid "Gaussian strength"
+msgstr "Русский"
+
+#: plugins/blur.c:802
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Mipmap"
+
+#: plugins/blur.c:803
+msgid "Mipmap level-of-detail"
+msgstr ""
+
+#  Table header 4/5
+#: plugins/blur.c:812
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "Насыщенность"
+
+#  Table header 4/5
+#: plugins/blur.c:813
+#, fuzzy
+msgid "Blur saturation"
+msgstr "Насыщенность"
+
+#: plugins/blur.c:821
+msgid "Blur Occlusion"
+msgstr ""
+
+#: plugins/blur.c:822
+msgid "blur occlusion"
+msgstr ""
+
+#: plugins/blur.c:2560
+msgid "Pulse"
+msgstr ""
+
+#: plugins/blur.c:2561
+#, fuzzy
+msgid "Pulse effect"
+msgstr "Эффект фокусировки"
+
+#: plugins/blur.c:2883
+#, fuzzy
+msgid "Blur Windows"
+msgstr "Размещение окон"
+
+#: plugins/blur.c:2884
+#, fuzzy
+msgid "Blur windows"
+msgstr "Масштабирование окон"
+
+#: plugins/clone.c:725
+#, fuzzy
+msgid "Initiate clone selection"
+msgstr "Выбор видео режима"
+
+#: plugins/clone.c:854
+#, fuzzy
+msgid "Clone Output"
+msgstr "Устройства вывода"
+
+#: plugins/clone.c:855
+msgid "Output clone handler"
+msgstr ""
+
+#: plugins/cube.c:990
+msgid "Cube Color"
+msgstr "Цвета куба"
+
+#: plugins/cube.c:991
+msgid "Color of top and bottom sides of the cube"
+msgstr "Цвет верхней и нижней сторон куба"
+
+#: plugins/cube.c:1000
+msgid "Inside Cube"
+msgstr "Внутренняя поверхность куба"
+
+#: plugins/cube.c:1001
+msgid "Inside cube"
+msgstr "Внутренняя поверхность куба"
+
+#: plugins/cube.c:1007
+msgid "Scale image"
+msgstr "Масштабировать изображение"
+
+#: plugins/cube.c:1008
+msgid "Scale images to cover top face of cube"
+msgstr "Масштабировать изображения для покрытия верхней грани куба"
+
+#  summary information text - header
+#: plugins/cube.c:1014
+msgid "Image files"
+msgstr "Файлы изображений"
+
+#: plugins/cube.c:1015
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"Список PNG- и SVG-файлов, которые следует отобразить на верхней грани куба"
+
+#: plugins/cube.c:1028
+msgid "Skydome"
+msgstr "Фон"
+
+#: plugins/cube.c:1029
+msgid "Render skydome"
+msgstr "Отрисовка фона"
+
+#: plugins/cube.c:1035
+msgid "Skydome Image"
+msgstr "Изображение для фона"
+
+#: plugins/cube.c:1036
+msgid "Image to use as texture for the skydome"
+msgstr "Изображение, используемое в качестве текстуры для фона"
+
+#: plugins/cube.c:1044
+msgid "Animate Skydome"
+msgstr "Анимировать фон"
+
+#: plugins/cube.c:1045
+msgid "Animate skydome when rotating cube"
+msgstr "Анимирование фона при вращении куба"
+
+#: plugins/cube.c:1051
+msgid "Skydome Gradient Start Color"
+msgstr "Начальный цвет градиента для фона"
+
+#: plugins/cube.c:1052
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "Цвет, используемый для верхней границы градиента фона"
+
+#: plugins/cube.c:1062
+msgid "Skydome Gradient End Color"
+msgstr "Конечный цвет градиента для фона"
+
+#: plugins/cube.c:1063
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "Цвет, используемый для нижней границы градиента фона"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#: plugins/cube.c:1073 plugins/rotate.c:302
+msgid "Acceleration"
+msgstr "Ускорение"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#: plugins/cube.c:1074
+msgid "Fold Acceleration"
+msgstr "Ускорение свертывания"
+
+#  combo box item
+#: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
+#: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
+msgid "Speed"
+msgstr "Скорость"
+
+#  combo box item
+#: plugins/cube.c:1084
+msgid "Fold Speed"
+msgstr "Скорость свертывания"
+
+#: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
+#: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
+msgid "Timestep"
+msgstr "Квант времени "
+
+#: plugins/cube.c:1094
+msgid "Fold Timestep"
+msgstr "Квант времени для свертывания"
+
+#: plugins/cube.c:1104 plugins/switcher.c:374
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"По возможности применять множественное отображение для масштабирования "
+"качества изображения"
+
+#: plugins/cube.c:1795
+msgid "Unfold"
+msgstr "Развертывание"
+
+#: plugins/cube.c:1796
+msgid "Unfold cube"
+msgstr "Развертывание куба"
+
+#: plugins/cube.c:1813
+msgid "Next Slide"
+msgstr "Следующий слайд"
+
+#  this is a menu entry
+#: plugins/cube.c:1814
+msgid "Advance to next slide"
+msgstr "Переход к следующему слайду"
+
+#: plugins/cube.c:1831
+msgid "Previous Slide"
+msgstr "Предыдущий слайд"
+
+#: plugins/cube.c:1832
+msgid "Go back to previous slide"
+msgstr "Возврат к предыдущему слайду"
+
+#: plugins/cube.c:2037
+msgid "Desktop Cube"
+msgstr "Куб рабочего стола"
+
+#: plugins/cube.c:2038
+msgid "Place windows on cube"
+msgstr "Размещение окон на кубе"
+
+#: plugins/decoration.c:1145
+msgid "Shadow Radius"
+msgstr "Радиус тени"
+
+#: plugins/decoration.c:1146
+msgid "Drop shadow radius"
+msgstr "Радиус отбрасываемой тени"
+
+#  int field
+#: plugins/decoration.c:1155
+msgid "Shadow Opacity"
+msgstr "Прозрачность тени"
+
+#  int field
+#: plugins/decoration.c:1156
+msgid "Drop shadow opacity"
+msgstr "Прозрачность отбрасываемой тени"
+
+#: plugins/decoration.c:1175
+msgid "Shadow Offset X"
+msgstr "Смещение тени по оси X"
+
+#: plugins/decoration.c:1176
+msgid "Drop shadow X offset"
+msgstr "Смещение отбрасываемой тени по оси X"
+
+#: plugins/decoration.c:1184
+msgid "Shadow Offset Y"
+msgstr "Смещение тени по оси Y"
+
+#: plugins/decoration.c:1185
+msgid "Drop shadow Y offset"
+msgstr "Смещение отбрасываемой тени по оси Y"
+
+#: plugins/decoration.c:1193
+msgid "Command"
+msgstr "Команда"
+
+#: plugins/decoration.c:1194
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"Командная строка декоратора, которая выполняется, если декоратор еще не "
+"запущен"
+
+#: plugins/decoration.c:1210
+#, fuzzy
+msgid "Decoration windows"
+msgstr "Масштабирование окон"
+
+#: plugins/decoration.c:1211
+#, fuzzy
+msgid "Windows that should be decorated"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: plugins/decoration.c:1219
+#, fuzzy
+msgid "Shadow windows"
+msgstr "Привязка окон"
+
+#: plugins/decoration.c:1220
+#, fuzzy
+msgid "Windows that should be have a shadow"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: plugins/decoration.c:1505
+msgid "Window Decoration"
+msgstr "Оформление окна"
+
+#: plugins/decoration.c:1506
+msgid "Window decorations"
+msgstr "Оформление окна"
+
+#: plugins/fade.c:179
+msgid "Fade Speed"
+msgstr "Скорость проявления/исчезания"
+
+#: plugins/fade.c:180
+msgid "Window fade speed"
+msgstr "Скорость проявления/исчезания окна"
+
+#: plugins/fade.c:189
+#, fuzzy
+msgid "Fade windows"
+msgstr "Масштабирование окон"
+
+#: plugins/fade.c:190
+#, fuzzy
+msgid "Windows that should be fading"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: plugins/fade.c:198
+msgid "Visual Bell"
+msgstr "Визуализация звукового сигнала"
+
+#: plugins/fade.c:199
+msgid "Fade effect on system beep"
+msgstr "Эффект проявления/исчезания при системном звуковом сигнале"
+
+#: plugins/fade.c:205
+msgid "Fullscreen Visual Bell"
+msgstr "Полноэкранная визуализация звукового сигнала"
+
+#: plugins/fade.c:206
+msgid "Fullscreen fade effect on system beep"
+msgstr ""
+"Полноэкранный эффект проявления/исчезания при системном звуковом сигнале"
+
+#: plugins/fade.c:857
+msgid "Fading Windows"
+msgstr "Проявление/исчезание окон"
+
+#: plugins/fade.c:858
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Постепенное проявление окон при отображении и постепенное исчезновение при "
+"отмене отображения"
+
+#: plugins/fuse.c:1486
+#, fuzzy
+msgid "Mount Point"
+msgstr "Точка"
+
+#: plugins/fuse.c:1487
+#, fuzzy
+msgid "Mount point"
+msgstr "Добавить точку"
+
+#: plugins/fuse.c:1586
+msgid "Userspace File System"
+msgstr ""
+
+#: plugins/fuse.c:1587
+msgid "Userspace file system"
+msgstr ""
+
+#. Decimal point character
+#: plugins/gconf-dump.c:81
+msgid "."
+msgstr "."
+
+#: plugins/gconf-dump.c:616
+msgid "Plugins that this must load before"
+msgstr "Предварительно должны быть загружены модули"
+
+#: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
+msgid "Do not modify"
+msgstr "Не изменять"
+
+#: plugins/gconf-dump.c:626
+msgid "Plugins that this requires"
+msgstr "Необходимые модули"
+
+#: plugins/minimize.c:193
+msgid "Minimize speed"
+msgstr "Скорость свертывания"
+
+#: plugins/minimize.c:203
+msgid "Minimize timestep"
+msgstr "Квант времени свертывания"
+
+#: plugins/minimize.c:212
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "Свернуть окно"
+
+#: plugins/minimize.c:213
+#, fuzzy
+msgid "Windows that should be transformed when minimized"
+msgstr "Типы окон, которые должны быть преобразованы при свертывании"
+
+#: plugins/minimize.c:221
+msgid "Shade Resistance"
+msgstr "Устойчивость тени"
+
+#: plugins/minimize.c:222
+msgid "Shade resistance"
+msgstr "Устойчивость тени"
+
+#: plugins/minimize.c:1071
+msgid "Minimize Effect"
+msgstr "Эффект свертывания"
+
+#: plugins/minimize.c:1072
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Преобразовывать окна при свертывании и отмене свертывания"
+
+#: plugins/move.c:677
+msgid "Initiate Window Move"
+msgstr "Инициировать движение окна"
+
+#: plugins/move.c:678
+msgid "Start moving window"
+msgstr "Запуск перемещения окна"
+
+#  int field
+#: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
+msgid "Opacity"
+msgstr "Прозрачность"
+
+#: plugins/move.c:697
+msgid "Opacity level of moving windows"
+msgstr "Степень прозрачности движущихся окон"
+
+#: plugins/move.c:705
+msgid "Constrain Y"
+msgstr "Ограничить Y"
+
+#: plugins/move.c:706
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Ограничение координаты Y пределами рабочей области"
+
+#: plugins/move.c:712
+msgid "Snapoff maximized windows"
+msgstr "Отменить привязку полностью развернутых окон"
+
+#: plugins/move.c:713
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"Отмена привязки и автоматическая отмена развертывания полностью развернутых "
+"окон при перетаскивании"
+
+#: plugins/move.c:881
+msgid "Move Window"
+msgstr "Переместить окно"
+
+#: plugins/move.c:882
+msgid "Move window"
+msgstr "Переместить окно"
+
+#: plugins/place.c:42
+msgid "Cascade"
+msgstr ""
+
+#: plugins/place.c:43
+msgid "Centered"
+msgstr ""
+
+#: plugins/place.c:44
+msgid "Smart"
+msgstr ""
+
+#: plugins/place.c:45
+#, fuzzy
+msgid "Maximize"
+msgstr "Свернутые"
+
+#: plugins/place.c:46
+msgid "Random"
+msgstr ""
+
+#: plugins/place.c:244
+msgid "Workarounds"
+msgstr "Обходные пути"
+
+#: plugins/place.c:245
+msgid "Window placement workarounds"
+msgstr "Обходные пути при размещении окна"
+
+#: plugins/place.c:251
+msgid "Placement Mode"
+msgstr ""
+
+#: plugins/place.c:252
+msgid "Algorithm to use for window placement"
+msgstr ""
+
+#: plugins/place.c:260
+#, fuzzy
+msgid "Positioned windows"
+msgstr "Отображение свернутых окон"
+
+#: plugins/place.c:261
+#, fuzzy
+msgid "Windows that should be positioned by default"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: plugins/place.c:271
+msgid "X Positions"
+msgstr ""
+
+#: plugins/place.c:272
+msgid "X position values"
+msgstr ""
+
+#: plugins/place.c:282
+msgid "Y Positions"
+msgstr ""
+
+#: plugins/place.c:283
+msgid "Y position values"
+msgstr ""
+
+#: plugins/place.c:293
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: plugins/place.c:294
+#, fuzzy
+msgid "Windows that should positioned in specific viewports by default"
+msgstr "Типы окон, для которых следует применять режим масштабирования"
+
+#: plugins/place.c:305
+msgid "X Viewport Positions"
+msgstr ""
+
+#: plugins/place.c:306
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Виртуальный размер по горизонтали"
+
+#: plugins/place.c:316
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: plugins/place.c:317
+msgid "Vertical viewport positions"
+msgstr ""
+
+#: plugins/place.c:1604
+msgid "Place Windows"
+msgstr "Размещение окон"
+
+#: plugins/place.c:1605
+msgid "Place windows at appropriate positions when mapped"
+msgstr "При отображении разместите окна в нужных местах"
+
+#: plugins/plane.c:624
+#, fuzzy
+msgid "Plane Left"
+msgstr "Вращать влево"
+
+#: plugins/plane.c:625
+#, fuzzy
+msgid "Plane left"
+msgstr "Вращение влево"
+
+#: plugins/plane.c:643
+#, fuzzy
+msgid "Plane Right"
+msgstr "Вращать вправо"
+
+#: plugins/plane.c:644
+#, fuzzy
+msgid "Plane right"
+msgstr "Вращение вправо"
+
+#: plugins/plane.c:662
+#, fuzzy
+msgid "Plane Down"
+msgstr "Page Down"
+
+#: plugins/plane.c:663
+#, fuzzy
+msgid "Plane down"
+msgstr "Размещение окон"
+
+#: plugins/plane.c:681
+#, fuzzy
+msgid "Plane Up"
+msgstr "Page Up"
+
+#: plugins/plane.c:682
+msgid "Plane up"
+msgstr ""
+
+#: plugins/plane.c:698
+#, fuzzy, c-format
+msgid "Plane To Face %d"
+msgstr "Вращать до грани %d"
+
+#: plugins/plane.c:699
+#, fuzzy, c-format
+msgid "Plane to face %d"
+msgstr "Вращение до грани %d"
+
+#: plugins/plane.c:700
+#, fuzzy, c-format
+msgid "Plane To Face %d with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: plugins/plane.c:701
+#, fuzzy, c-format
+msgid "Plane to face %d and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: plugins/plane.c:868
+#, fuzzy
+msgid "Desktop Plane"
+msgstr "Куб рабочего стола"
+
+#: plugins/plane.c:869
+#, fuzzy
+msgid "Place windows on a plane"
+msgstr "Размещение окон на кубе"
+
+#: plugins/regex.c:463
+msgid "Regex Matching"
+msgstr ""
+
+#: plugins/regex.c:464
+#, fuzzy
+msgid "Regex window matching"
+msgstr "Переключение привязки окон"
+
+#: plugins/resize.c:718
+msgid "Initiate Window Resize"
+msgstr "Инициировать изменение размеров окна"
+
+#: plugins/resize.c:719
+msgid "Start resizing window"
+msgstr "Запуск изменения размеров окна"
+
+#: plugins/resize.c:862
+msgid "Resize Window"
+msgstr "Изменить размеры окна"
+
+#: plugins/resize.c:863
+msgid "Resize window"
+msgstr "Изменение размеров окна"
+
+#: plugins/rotate.c:285 plugins/zoom.c:222
+msgid "Pointer Invert Y"
+msgstr "Инвертировать для курсора ось Y"
+
+#: plugins/rotate.c:286 plugins/zoom.c:223
+msgid "Invert Y axis for pointer movement"
+msgstr "Инвертировать ось Y для перемещений курсора"
+
+#  dialog caption
+#: plugins/rotate.c:292 plugins/zoom.c:229
+msgid "Pointer Sensitivity"
+msgstr "Чувствительность курсора"
+
+#: plugins/rotate.c:293 plugins/zoom.c:230
+msgid "Sensitivity of pointer movement"
+msgstr "Чувствительность к перемещениям курсора"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#: plugins/rotate.c:303
+msgid "Rotation Acceleration"
+msgstr "Ускорение вращения"
+
+#: plugins/rotate.c:312
+msgid "Snap To Top Face"
+msgstr "Привязать к верхней грани"
+
+#: plugins/rotate.c:313
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Привязка вращения куба к верхней грани"
+
+#: plugins/rotate.c:320
+msgid "Rotation Speed"
+msgstr "Скорость вращения"
+
+#: plugins/rotate.c:330
+msgid "Rotation Timestep"
+msgstr "Квант времени вращения"
+
+#: plugins/rotate.c:1764
+msgid "Start Rotation"
+msgstr "Запуск вращения"
+
+#: plugins/rotate.c:1778
+msgid "Rotate Left"
+msgstr "Вращать влево"
+
+#: plugins/rotate.c:1779
+msgid "Rotate left"
+msgstr "Вращение влево"
+
+#: plugins/rotate.c:1797
+msgid "Rotate Right"
+msgstr "Вращать вправо"
+
+#: plugins/rotate.c:1798
+msgid "Rotate right"
+msgstr "Вращение вправо"
+
+#: plugins/rotate.c:1816
+msgid "Rotate Left with Window"
+msgstr "Вращать влево вместе с окном"
+
+#: plugins/rotate.c:1817
+msgid "Rotate left and bring active window along"
+msgstr "Вращение влево вместе с активным окном"
+
+#: plugins/rotate.c:1836
+msgid "Rotate Right with Window"
+msgstr "Вращать вправо вместе с окном"
+
+#: plugins/rotate.c:1837
+msgid "Rotate right and bring active window along"
+msgstr "Вращение вправо вместе с активным окном"
+
+#: plugins/rotate.c:1854
+#, c-format
+msgid "Rotate To Face %d"
+msgstr "Вращать до грани %d"
+
+#: plugins/rotate.c:1855
+#, c-format
+msgid "Rotate to face %d"
+msgstr "Вращение до грани %d"
+
+#: plugins/rotate.c:1856
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: plugins/rotate.c:1857
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#  Translators: text entry label
+#: plugins/rotate.c:1906
+msgid "Rotate To"
+msgstr "Вращать до"
+
+#: plugins/rotate.c:1907
+msgid "Rotate to viewport"
+msgstr "Вращение до кадрового окна"
+
+#: plugins/rotate.c:1918
+msgid "Rotate Window"
+msgstr "Вращать окно"
+
+#: plugins/rotate.c:1919
+msgid "Rotate with window"
+msgstr "Вращение вместе с окном"
+
+#: plugins/rotate.c:1930
+msgid "Rotate Flip Left"
+msgstr "Вращать с отражением влево"
+
+#: plugins/rotate.c:1931
+msgid "Flip to left viewport and warp pointer"
+msgstr "Отражение в левое кадровое окно и искажение курсора"
+
+#: plugins/rotate.c:1946
+msgid "Rotate Flip Right"
+msgstr "Вращать с отражением вправо"
+
+#: plugins/rotate.c:1947
+msgid "Flip to right viewport and warp pointer"
+msgstr "Отражение в правое кадровое окно и искажение курсора"
+
+#: plugins/rotate.c:1962
+msgid "Edge Flip Pointer"
+msgstr "Отражение при курсоре на краю"
+
+#: plugins/rotate.c:1963
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при смещении курсора к краю экрана"
+
+#: plugins/rotate.c:1970
+msgid "Edge Flip Move"
+msgstr "Отражение при перемещении к краю"
+
+#: plugins/rotate.c:1971
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при перемещении окна к краю экрана"
+
+#: plugins/rotate.c:1978
+msgid "Edge Flip DnD"
+msgstr "Отражение при перетаскивании к краю"
+
+#: plugins/rotate.c:1979
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при перетаскивании объекта к краю экрана"
+
+#: plugins/rotate.c:1986
+msgid "Flip Time"
+msgstr "Время отражения"
+
+#: plugins/rotate.c:1987
+msgid "Timeout before flipping viewport"
+msgstr "Задержка во времени до отражения кадрового окна"
+
+#  Translators: text entry label
+#: plugins/rotate.c:2155
+msgid "Rotate Cube"
+msgstr "Вращать куб"
+
+#: plugins/rotate.c:2156
+msgid "Rotate desktop cube"
+msgstr "Вращение куба рабочего стола"
+
+#: plugins/scale.c:80 plugins/wobbly.c:131
+msgid "None"
+msgstr "Никакой"
+
+#: plugins/scale.c:81
+msgid "Emblem"
+msgstr "Эмблема"
+
+#: plugins/scale.c:82
+msgid "Big"
+msgstr "Большой"
+
+#: plugins/scale.c:325
+msgid "Spacing"
+msgstr "Интервал"
+
+#: plugins/scale.c:326
+msgid "Space between windows"
+msgstr "Расстояние между окнами"
+
+#: plugins/scale.c:335
+msgid "Scale speed"
+msgstr "Скорость масштабирования"
+
+#: plugins/scale.c:345
+msgid "Scale timestep"
+msgstr "Квант времени масштабирования"
+
+#: plugins/scale.c:354
+#, fuzzy
+msgid "Scale Windows"
+msgstr "Масштабирование окон"
+
+#: plugins/scale.c:355
+#, fuzzy
+msgid "Windows that should be scaled in scale mode"
+msgstr "Типы окон, для которых следует применять режим масштабирования"
+
+#: plugins/scale.c:363
+msgid "Darken Background"
+msgstr "Затемнить фон"
+
+#: plugins/scale.c:364
+msgid "Darken background when scaling windows"
+msgstr "Затемнение фона при масштабировании окон"
+
+#: plugins/scale.c:371 plugins/switcher.c:400
+msgid "Amount of opacity in percent"
+msgstr "Степень прозрачности в процентах"
+
+#: plugins/scale.c:379
+msgid "Overlay Icon"
+msgstr "Наложить значок"
+
+#: plugins/scale.c:380
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Наложение значка на окна при их масштабировании"
+
+#: plugins/scale.c:388
+msgid "Hover Time"
+msgstr "Время задержки при наведении"
+
+#: plugins/scale.c:389
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Время (в мс) до завершения режима масштабирования при наведении указателя на "
+"окно"
+
+#: plugins/scale.c:1931
+msgid "Initiate Window Picker"
+msgstr "Инициировать средство выбора окна"
+
+#: plugins/scale.c:1932
+msgid "Layout and start transforming windows"
+msgstr "Компоновка и запуск преобразования окон"
+
+#: plugins/scale.c:1950
+msgid "Initiate Window Picker For All Windows"
+msgstr "Инициировать средство выбора окна для всех окон"
+
+#: plugins/scale.c:1951
+msgid "Layout and start transforming all windows"
+msgstr "Компоновка и запуск преобразования всех окон"
+
+#: plugins/scale.c:1965
+msgid "Initiate Window Picker For Window Group"
+msgstr "Инициировать средство выбора окна для группы окон"
+
+#: plugins/scale.c:1966
+msgid "Layout and start transforming window group"
+msgstr "Компоновка и запуск преобразования группы окон"
+
+#: plugins/scale.c:1981
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Инициировать средство выбора окна для окон текущего устройства вывода"
+
+#: plugins/scale.c:1983
+msgid "Layout and start transforming windows on current output"
+msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
+
+#: plugins/scale.c:2200
+msgid "Scale"
+msgstr "Масштабировать"
+
+#: plugins/scale.c:2201
+msgid "Scale windows"
+msgstr "Масштабирование окон"
+
+#: plugins/screenshot.c:385
+#, fuzzy
+msgid "Initiate rectangle screenshot"
+msgstr "Сделать снимок экрана"
+
+#: plugins/screenshot.c:398
+#, fuzzy
+msgid "Directory"
+msgstr "Каталог\n"
+
+#: plugins/screenshot.c:399
+#, fuzzy
+msgid "Put screenshot images in this directory"
+msgstr "Рекурсия в каталог"
+
+#: plugins/screenshot.c:407
+#, fuzzy
+msgid "Launch Application"
+msgstr "Запустить приложение"
+
+#: plugins/screenshot.c:408
+#, fuzzy
+msgid "Automatically open screenshot in this application"
+msgstr "Автоматически запускать апплет при входе в систему"
+
+#: plugins/screenshot.c:558
+#, fuzzy
+msgid "Screenshot"
+msgstr "Экран"
+
+#: plugins/screenshot.c:559
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Командная строка снимка экрана"
+
+#: plugins/switcher.c:345
+msgid "Switcher speed"
+msgstr "Скорость переключателя"
+
+#: plugins/switcher.c:355
+msgid "Switcher timestep"
+msgstr "Квант времени переключателя"
+
+#: plugins/switcher.c:364
+#, fuzzy
+msgid "Switcher windows"
+msgstr "Масштабирование окон"
+
+#: plugins/switcher.c:365
+#, fuzzy
+msgid "Windows that should be shown in switcher"
+msgstr "Типы окон, которые должны быть отображены в переключателе"
+
+#  Table header 4/5
+#: plugins/switcher.c:381
+msgid "Saturation"
+msgstr "Насыщенность"
+
+#: plugins/switcher.c:382
+msgid "Amount of saturation in percent"
+msgstr "Уровень насыщенности в процентах"
+
+#: plugins/switcher.c:390
+msgid "Brightness"
+msgstr "Яркость"
+
+#: plugins/switcher.c:391
+msgid "Amount of brightness in percent"
+msgstr "Уровень яркости в процентах"
+
+#: plugins/switcher.c:408
+msgid "Bring To Front"
+msgstr "Переместить на передний план"
+
+#: plugins/switcher.c:409
+msgid "Bring selected window to front"
+msgstr "Перемещение выбранного окна на передний план"
+
+#: plugins/switcher.c:415
+msgid "Zoom"
+msgstr "Изменить масштаб"
+
+#: plugins/switcher.c:416
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"При переключении окон рабочий стол на заднем плане должен быть уменьшен"
+
+#: plugins/switcher.c:426
+msgid "Icon"
+msgstr "Значок"
+
+#: plugins/switcher.c:427
+msgid "Show icon next to thumbnail"
+msgstr "Отображение значка рядом с эскизом"
+
+#: plugins/switcher.c:433
+msgid "Minimized"
+msgstr "Свернутые"
+
+#: plugins/switcher.c:434
+msgid "Show minimized windows"
+msgstr "Отображение свернутых окон"
+
+#: plugins/switcher.c:440
+#, fuzzy
+msgid "Auto Rotate"
+msgstr "Автоматический вызов"
+
+#: plugins/switcher.c:441
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+#: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
+msgid "Next window"
+msgstr "Следующее окно"
+
+#: plugins/switcher.c:2028
+msgid "Popup switcher if not visible and select next window"
+msgstr "Отображение переключателя (если он невидим) и выбор следующего окна"
+
+#: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
+msgid "Prev window"
+msgstr "Предыдущее окно"
+
+#: plugins/switcher.c:2046
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Отображение переключателя (если он невидим) и выбор предыдущего окна"
+
+#: plugins/switcher.c:2064
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Отображение переключателя (если он невидим) и выбор следующего окна из всех "
+"имеющихся"
+
+#: plugins/switcher.c:2083
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Отображение переключателя (если он невидим) и выбор предыдущего окна из всех "
+"имеющихся"
+
+#: plugins/switcher.c:2102
+msgid "Select next window"
+msgstr "Выбрать следующее окно"
+
+#: plugins/switcher.c:2115
+msgid "Select previous window"
+msgstr "Выбрать предыдущее окно"
+
+#: plugins/switcher.c:2289 plugins/switcher.c:2290
+msgid "Application Switcher"
+msgstr "Переключатель приложений"
+
+#: plugins/video.c:245
+msgid "YV12 colorspace"
+msgstr ""
+
+#: plugins/video.c:246
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: plugins/video.c:1240
+msgid "Video Playback"
+msgstr ""
+
+#: plugins/video.c:1241
+msgid "Video playback"
+msgstr ""
+
+#: plugins/water.c:1607
+msgid "Enable pointer water effects"
+msgstr "Включить для курсора эффекты воды"
+
+#  translators: toggle button label
+#: plugins/water.c:1620
+msgid "Toggle rain"
+msgstr "Переключить дождь"
+
+#: plugins/water.c:1621
+msgid "Toggle rain effect"
+msgstr "Включение или отключение эффекта дождя"
+
+#  translators: toggle button label
+#: plugins/water.c:1636
+msgid "Toggle wiper"
+msgstr "Переключить стеклоочиститель"
+
+#: plugins/water.c:1637
+msgid "Toggle wiper effect"
+msgstr "Включение или отключение эффекта стеклоочистителя"
+
+#: plugins/water.c:1652
+msgid "Offset Scale"
+msgstr "Масштаб смещения"
+
+#: plugins/water.c:1653
+msgid "Water offset scale"
+msgstr "Масштаб смещения воды"
+
+#: plugins/water.c:1662
+msgid "Rain Delay"
+msgstr "Задержка дождя"
+
+#: plugins/water.c:1663
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Задержка (в мс) между каплями дождя"
+
+#: plugins/water.c:1671
+msgid "Title wave"
+msgstr "Волны заголовка"
+
+#: plugins/water.c:1672
+msgid "Wave effect from window title"
+msgstr "Эффект волн в заголовке окна"
+
+#: plugins/water.c:1683
+msgid "Point"
+msgstr "Точка"
+
+#: plugins/water.c:1684
+msgid "Add point"
+msgstr "Добавить точку"
+
+#: plugins/water.c:1695
+msgid "Line"
+msgstr "Линия"
+
+#: plugins/water.c:1696
+msgid "Add line"
+msgstr "Добавить линию"
+
+#: plugins/water.c:1859
+msgid "Water Effect"
+msgstr "Эффект воды"
+
+#: plugins/water.c:1860
+msgid "Adds water effects to different desktop actions"
+msgstr "Добавление эффектов воды к различным действиям рабочего стола"
+
+# 'driver' as in '(hardware) driver update'
+#: plugins/wobbly.c:132 plugins/wobbly.c:2884
+msgid "Shiver"
+msgstr "Дрожание"
+
+#  Table header 5/5
+#: plugins/wobbly.c:345
+msgid "Friction"
+msgstr "Трение"
+
+#  Table header 5/5
+#: plugins/wobbly.c:346
+msgid "Spring Friction"
+msgstr "Упругое трение"
+
+#: plugins/wobbly.c:355
+msgid "Spring K"
+msgstr "K упругости"
+
+#: plugins/wobbly.c:356
+msgid "Spring Konstant"
+msgstr "Константа упругости"
+
+#: plugins/wobbly.c:365
+msgid "Grid Resolution"
+msgstr "Разрешение решетки"
+
+#: plugins/wobbly.c:366
+msgid "Vertex Grid Resolution"
+msgstr "Разрешение решетки на вершинах"
+
+#  combo box item
+#: plugins/wobbly.c:374
+msgid "Minimum Grid Size"
+msgstr "Минимальный размер решетки"
+
+#  combo box item
+#: plugins/wobbly.c:375
+msgid "Minimum Vertex Grid Size"
+msgstr "Минимальный размер решетки на вершинах"
+
+#: plugins/wobbly.c:383
+msgid "Map Effect"
+msgstr "Эффект отражения"
+
+#: plugins/wobbly.c:384
+msgid "Map Window Effect"
+msgstr "Эффект отражения окна"
+
+#: plugins/wobbly.c:392
+msgid "Focus Effect"
+msgstr "Эффект фокусировки"
+
+#: plugins/wobbly.c:393
+msgid "Focus Window Effect"
+msgstr "Эффект фокусировки окна"
+
+#: plugins/wobbly.c:401
+#, fuzzy
+msgid "Map Windows"
+msgstr "Типы отражения окна"
+
+#: plugins/wobbly.c:402
+#, fuzzy
+msgid "Windows that should wobble when mapped"
+msgstr "Типы окон, которые должны отражаться как вязкие"
+
+#: plugins/wobbly.c:410
+#, fuzzy
+msgid "Focus Windows"
+msgstr "Типы окон с фокусом"
+
+#: plugins/wobbly.c:411
+#, fuzzy
+msgid "Windows that should wobble when focused"
+msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
+
+#: plugins/wobbly.c:419
+#, fuzzy
+msgid "Move Windows"
+msgstr "Переместить окно"
+
+#: plugins/wobbly.c:420
+#, fuzzy
+msgid "Windows that should wobble when moved"
+msgstr "Типы окон, которые должны стать вязкими при движении"
+
+#: plugins/wobbly.c:428
+#, fuzzy
+msgid "Grab Windows"
+msgstr "Типы окон при захвате"
+
+#: plugins/wobbly.c:429
+#, fuzzy
+msgid "Windows that should wobble when grabbed"
+msgstr "Типы окон, которые должны стать вязкими при захвате"
+
+#: plugins/wobbly.c:437
+msgid "Maximize Effect"
+msgstr "Эффект развертывания"
+
+#: plugins/wobbly.c:438
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Эффект вязкости при развертывании и свертывании окон"
+
+#: plugins/wobbly.c:2863
+msgid "Snap windows"
+msgstr "Привязка окон"
+
+#: plugins/wobbly.c:2864
+msgid "Toggle window snapping"
+msgstr "Переключение привязки окон"
+
+#: plugins/wobbly.c:2877
+msgid "Snap Inverted"
+msgstr "Инвертированная привязка"
+
+#: plugins/wobbly.c:2878
+msgid "Inverted window snapping"
+msgstr "Инвертированная привязка окна"
+
+#: plugins/wobbly.c:2885
+msgid "Make window shiver"
+msgstr "Включить дрожание окна"
+
+#: plugins/wobbly.c:3098
+msgid "Wobbly Windows"
+msgstr "Вязкие окна"
+
+#: plugins/wobbly.c:3099
+msgid "Use spring model for wobbly window effect"
+msgstr "Использовать модель пружины в эффекте вязкого окна"
+
+#  combo box item
+#: plugins/zoom.c:240
+msgid "Zoom Speed"
+msgstr "Скорость изменения масштаба"
+
+#: plugins/zoom.c:250
+msgid "Zoom Timestep"
+msgstr "Квант времени изменения масштаба"
+
+#  combo box item
+#: plugins/zoom.c:259 plugins/zoom.c:260
+msgid "Zoom factor"
+msgstr "Коэффициент масштабирования"
+
+#: plugins/zoom.c:269
+msgid "Filter Linear"
+msgstr "Линейная фильтрация"
+
+#: plugins/zoom.c:270
+msgid "USe linear filter when zoomed in"
+msgstr "Использовать линейный фильтр при уменьшении"
+
+#: plugins/zoom.c:753 plugins/zoom.c:767 plugins/zoom.c:768
+msgid "Zoom In"
+msgstr "Уменьшить"
+
+#  combo box item
+#: plugins/zoom.c:782 plugins/zoom.c:783
+msgid "Zoom Out"
+msgstr "Увеличить"
+
+#: plugins/zoom.c:934
+msgid "Zoom Desktop"
+msgstr "Изменить масштаб рабочего стола"
+
+#: plugins/zoom.c:935
+msgid "Zoom and pan desktop cube"
+msgstr "Изменение масштаба и сдвига куба рабочего стола"
+
+#: src/display.c:171
+msgid "Fast"
+msgstr "Быстрое"
+
+#: src/display.c:171
+msgid "Good"
+msgstr "Хорошее"
+
+#: src/display.c:171
+msgid "Best"
+msgstr "Наилучшее"
+
+#: src/display.c:753
+msgid "Active Plugins"
+msgstr "Активные модули"
+
+#  command line help text for the 'list detected only' option
+#: src/display.c:754
+msgid "List of currently active plugins"
+msgstr "Список текущих активных модулей"
+
+#  MenuButton label
+#  menubutton label
+#: src/display.c:768
+msgid "Texture Filter"
+msgstr "Фильтр текстур"
+
+#  MenuButton label
+#  menubutton label
+#: src/display.c:769
+msgid "Texture filtering"
+msgstr "Фильтрация текстур"
+
+#: src/display.c:777
+msgid "Click To Focus"
+msgstr "Щелкните для передачи фокуса"
+
+#: src/display.c:778
+msgid "Click on window moves input focus to it"
+msgstr "Щелкните окно, чтобы передать ему фокус ввода"
+
+#: src/display.c:784
+msgid "Auto-Raise"
+msgstr "Автоматический вызов"
+
+#: src/display.c:785
+msgid "Raise selected windows after interval"
+msgstr "Вызов выбранных окон по истечении интервала времени"
+
+#: src/display.c:791
+msgid "Auto-Raise Delay"
+msgstr "Задержка автоматического вызова"
+
+#: src/display.c:792
+msgid "Interval before raising selected windows"
+msgstr "Интервал времени до вызова выбранных окон"
+
+#: src/display.c:800
+msgid "Close Window"
+msgstr "Закрыть окно"
+
+#: src/display.c:801
+msgid "Close active window"
+msgstr "Закрытие активного окна"
+
+#: src/display.c:817
+msgid "Show Main Menu"
+msgstr "Отобразить главное меню"
+
+#: src/display.c:818
+msgid "Show the main menu"
+msgstr "Отображение главного меню"
+
+#: src/display.c:834
+msgid "Run Dialog"
+msgstr "Диалоговое окно запуска"
+
+#: src/display.c:835
+msgid "Show Run Application dialog"
+msgstr "Отображение диалогового окна запуска приложения"
+
+#: src/display.c:851
+msgid "Unmaximize Window"
+msgstr "Отменить полное развертывание окна"
+
+#: src/display.c:852
+msgid "Unmaximize active window"
+msgstr "Отмена полного развертывания активного окна"
+
+#: src/display.c:868
+msgid "Minimize Window"
+msgstr "Свернуть окно"
+
+#: src/display.c:869
+msgid "Minimize active window"
+msgstr "Свертывание активного окна"
+
+#: src/display.c:885
+msgid "Maximize Window"
+msgstr "Развернуть окно"
+
+#: src/display.c:886
+msgid "Maximize active window"
+msgstr "Развертывание активного окна"
+
+#: src/display.c:902
+msgid "Maximize Window Horizontally"
+msgstr "Развернуть окно горизонтально"
+
+#: src/display.c:903
+msgid "Maximize active window horizontally"
+msgstr "Развертывание активного окна горизонтально"
+
+#: src/display.c:915
+msgid "Maximize Window Vertically"
+msgstr "Развернуть окно вертикально"
+
+#: src/display.c:916
+msgid "Maximize active window vertically"
+msgstr "Развертывание активного окна вертикально"
+
+#: src/display.c:928 src/display.c:929
+msgid "Hide all windows and focus desktop"
+msgstr "Скрыть все окна и передать фокус рабочему столу"
+
+#: src/display.c:943
+#, c-format
+msgid "Command line %d"
+msgstr "Командная строка %d"
+
+#: src/display.c:944
+#, c-format
+msgid "Command line to be executed in shell when run_command%d is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: src/display.c:946
+#, c-format
+msgid "Run command %d"
+msgstr "Команда запуска %d"
+
+#: src/display.c:947
+#, c-format
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command%d"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: src/display.c:991
+msgid "Slow Animations"
+msgstr "Замедлить анимацию"
+
+#: src/display.c:992
+msgid "Toggle use of slow animations"
+msgstr "Переключатель для использования медленной анимации"
+
+#: src/display.c:1008
+msgid "Raise Window"
+msgstr "Вызвать окно"
+
+#: src/display.c:1009
+msgid "Raise window above other windows"
+msgstr "Вызов и размещение окна поверх других окон"
+
+#: src/display.c:1023
+msgid "Lower Window"
+msgstr "Переместить окно на задний план"
+
+#: src/display.c:1024
+msgid "Lower window beneath other windows"
+msgstr "Расположение окна позади других окон"
+
+#: src/display.c:1038
+msgid "Increase Opacity"
+msgstr "Уменьшить прозрачность"
+
+#: src/display.c:1039
+msgid "Increase window opacity"
+msgstr "Уменьшение прозрачности окна"
+
+#: src/display.c:1053
+msgid "Decrease Opacity"
+msgstr "Увеличить прозрачность"
+
+#: src/display.c:1054
+msgid "Decrease window opacity"
+msgstr "Увеличение прозрачности окна"
+
+#: src/display.c:1068 src/display.c:1069
+msgid "Take a screenshot"
+msgstr "Сделать снимок экрана"
+
+#: src/display.c:1085 src/display.c:1086
+msgid "Screenshot command line"
+msgstr "Командная строка снимка экрана"
+
+#: src/display.c:1094 src/display.c:1095
+msgid "Take a screenshot of a window"
+msgstr "Сделать снимок окна"
+
+#: src/display.c:1112 src/display.c:1113
+msgid "Window screenshot command line"
+msgstr "Командная строка снимка окна"
+
+#: src/display.c:1121
+msgid "Window Menu"
+msgstr "Меню окна"
+
+#: src/display.c:1122
+msgid "Open window menu"
+msgstr "Открыть меню окна"
+
+#: src/display.c:1141
+msgid "Raise On Click"
+msgstr "Вызвать щелчком"
+
+#: src/display.c:1142
+msgid "Raise windows when clicked"
+msgstr "Вызов окон щелчком"
+
+#: src/display.c:1148
+msgid "Audible Bell"
+msgstr "Слышимый сигнал"
+
+#: src/display.c:1149
+msgid "Audible system beep"
+msgstr "Слышимый системный звуковой сигнал"
+
+#: src/display.c:1155
+msgid "Toggle Window Maximized"
+msgstr "Развертывать окно"
+
+#: src/display.c:1156
+msgid "Toggle active window maximized"
+msgstr "Развертывание активного окна"
+
+#: src/display.c:1168
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Развертывать окно по горизонтали"
+
+#: src/display.c:1170
+msgid "Toggle active window maximized horizontally"
+msgstr "Развертывание активного окна по горизонтали"
+
+#: src/display.c:1182
+msgid "Toggle Window Maximized Vertically"
+msgstr "Развертывать окно по вертикали"
+
+#: src/display.c:1184
+msgid "Toggle active window maximized vertically"
+msgstr "Развертывание активного окна по вертикали"
+
+#: src/display.c:1196
+msgid "Hide Skip Taskbar Windows"
+msgstr "Скрыть все, кроме окон панели задач"
+
+#: src/display.c:1197
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"При переходе в режим отображения рабочего стола окна, отсутствующие на "
+"панели задач, не отображаются"
+
+#: src/display.c:1204
+msgid "Toggle Window Shaded"
+msgstr "Переключить свертывание окна в полоску"
+
+#: src/display.c:1205
+msgid "Toggle active window shaded"
+msgstr "Переключение свертывания активного окна в полоску"
+
+#: src/display.c:1221
+msgid "Ignore Hints When Maximized"
+msgstr "Игнорировать подсказки в развернутом состоянии"
+
+#: src/display.c:1222
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Игнорирование подсказок увеличения размеров и соотношения сторон для "
+"развернутого окна"
+
+#: src/display.c:1229 src/display.c:1230
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Командная строка снимка экрана"
+
+#: src/display.c:1238 src/display.c:1239
+#, fuzzy
+msgid "Open a terminal"
+msgstr "Запуск в терминале"
+
+#: src/display.c:1251
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Задержка дождя"
+
+#: src/display.c:1252
+msgid "Interval between ping messages"
+msgstr ""
+
+#: src/main.c:54
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+#: src/main.c:55
+msgid "Dock"
+msgstr "Встраивание"
+
+#: src/main.c:56
+msgid "Toolbar"
+msgstr "Панель инструментов"
+
+#: src/main.c:57
+msgid "Menu"
+msgstr "Меню"
+
+#: src/main.c:58
+msgid "Utility"
+msgstr "Утилита"
+
+#: src/main.c:59
+msgid "Splash"
+msgstr "Заставка"
+
+#: src/main.c:60
+msgid "Dialog"
+msgstr "Диалоговое окно"
+
+#: src/main.c:61
+msgid "Normal"
+msgstr "Нормальный"
+
+#: src/main.c:62
+msgid "DropdownMenu"
+msgstr "Раскрывающееся меню"
+
+#: src/main.c:63
+msgid "PopupMenu"
+msgstr "Всплывающее меню"
+
+#: src/main.c:64
+msgid "Tooltip"
+msgstr "Совет по использованию"
+
+#: src/main.c:65
+msgid "Notification"
+msgstr "Уведомление"
+
+#: src/main.c:66
+msgid "Combo"
+msgstr "Поле ввода со списком"
+
+#: src/main.c:67
+msgid "Dnd"
+msgstr "Перетаскивание"
+
+#: src/main.c:68
+msgid "ModalDialog"
+msgstr "Модальное диалоговое окно"
+
+#: src/main.c:69
+msgid "Fullscreen"
+msgstr "Полноэкранный режим"
+
+#: src/main.c:70
+msgid "Unknown"
+msgstr "Неизвестный"
+
+#  headline for dialog "Select for update"
+#: src/screen.c:614
+msgid "Detect Refresh Rate"
+msgstr "Определить частоту обновления"
+
+#: src/screen.c:615
+msgid "Automatic detection of refresh rate"
+msgstr "Автоматическое определение частоты обновления"
+
+#: src/screen.c:621
+msgid "Lighting"
+msgstr "Освещение"
+
+#: src/screen.c:622
+msgid "Use diffuse light when screen is transformed"
+msgstr "Использование рассеянного света при преобразовании экрана"
+
+#: src/screen.c:628
+msgid "Refresh Rate"
+msgstr "Частота обновления"
+
+#: src/screen.c:629
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
+
+#: src/screen.c:638
+msgid "Horizontal Virtual Size"
+msgstr "Виртуальный размер по горизонтали"
+
+#: src/screen.c:639
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
+
+#: src/screen.c:647
+msgid "Vertical Virtual Size"
+msgstr "Виртуальный размер по вертикали"
+
+#: src/screen.c:648
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
+
+#: src/screen.c:656
+msgid "Opacity Step"
+msgstr "Шаг прозрачности"
+
+#: src/screen.c:657
+msgid "Opacity change step"
+msgstr "Шаг, с которым меняется прозрачность"
+
+#: src/screen.c:665
+msgid "Unredirect Fullscreen Windows"
+msgstr "Отменить перенаправление окон в полноэкранном режиме"
+
+#: src/screen.c:666
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Позволяет рисовать окна в полноэкранном режиме без перенаправления в области "
+"растрового отображения за пределами экрана"
+
+#: src/screen.c:673
+msgid "Default Icon"
+msgstr "Значок по умолчанию"
+
+#: src/screen.c:674
+msgid "Default window icon image"
+msgstr "Изображение значка окна по умолчанию"
+
+#: src/screen.c:682
+msgid "Sync To VBlank"
+msgstr "Синхронизировать с VBlank"
+
+#: src/screen.c:683
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+"Обновления экрана выполняются только во время гашения обратного хода луча "
+"кадровой развертки"
+
+#: src/screen.c:690
+msgid "Number of Desktops"
+msgstr "Число рабочих столов"
+
+#: src/screen.c:691
+msgid "Number of virtual desktops"
+msgstr "Число виртуальных рабочих столов"
+
+#: src/screen.c:699
+msgid "Detect Outputs"
+msgstr "Определить устройства вывода"
+
+#: src/screen.c:700
+msgid "Automatic detection of output devices"
+msgstr "Автоматическое определение устройств вывода"
+
+#: src/screen.c:706
+msgid "Outputs"
+msgstr "Устройства вывода"
+
+#: src/screen.c:707
+msgid "List of strings describing output devices"
+msgstr "Список строк, описывающих устройства вывода"
+
+#: src/screen.c:718
+#, fuzzy
+msgid "Focus Prevention Windows"
+msgstr "Типы окон с фокусом"
+
+#: src/screen.c:719
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Выбрать предыдущее окно"
+
+#: src/screen.c:727
+#, fuzzy
+msgid "Opacity windows"
+msgstr "Расстояние между окнами"
+
+#: src/screen.c:728
+#, fuzzy
+msgid "Windows that should be translucent by default"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: src/screen.c:739
+msgid "Opacity window values"
+msgstr ""
+
+#: src/screen.c:740
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+
+#~ msgid "Window Types"
+#~ msgstr "Типы окон"
+
+#~ msgid "Move Window Types"
+#~ msgstr "Типы движущихся окон"
+
+#, fuzzy
+#~ msgid "Enable focus prevention"
+#~ msgstr "Включить раздел ZEN"
+
+#, fuzzy
+#~ msgid "Command line 1"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 10"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 11"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 2"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 3"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 4"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 5"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 6"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 7"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 8"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Command line 9"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Corners"
+#~ msgstr "Конвертеры"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#, fuzzy
+#~ msgid "Fold Acceleration (1.0-20.0)"
+#~ msgstr "3D ускорение:"
+
+#, fuzzy
+#~ msgid "Initiate Keyboard Window Resize"
+#~ msgstr "Начальный RAM диск"
+
+#, fuzzy
+#~ msgid "Run command 1"
+#~ msgstr "Команда '%1'"
+
+#, fuzzy
+#~ msgid "Run command 10"
+#~ msgstr "Команда '%1'"
+
+#, fuzzy
+#~ msgid "Run command 11"
+#~ msgstr "Команда '%1'"
+
+#, fuzzy
+#~ msgid "Run command 2"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 3"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 4"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 5"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 6"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 7"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 8"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Run command 9"
+#~ msgstr "Команда: "
+
+#, fuzzy
+#~ msgid "Show switcher"
+#~ msgstr "Показать и&зменения"
+
+#, fuzzy
+#~ msgid "Sloppy Focus"
+#~ msgstr "Гибкий диск"
+
+#, fuzzy
+#~ msgid "Start moving window using keyboard"
+#~ msgstr "Запускается демон."
+
+#, fuzzy
+#~ msgid "Terminate"
+#~ msgstr "Терминалы"

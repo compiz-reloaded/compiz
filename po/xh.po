@@ -1,29 +1,24 @@
-# Swedish message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2001 SuSE GmbH.
-# Mattias Newzella <newzella@linux.nu>, 2001.
-# Gudmund Areskoug <fta@algonet.se>, 2001.
+# Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: base\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-04-01 18:26+0200\n"
-"PO-Revision-Date: 2002-01-04 13:30+0100\n"
-"Last-Translator: Mattias Newzella <newzella@linux.nu>\n"
-"Language-Team: Swedish <i18n@suse.de>\n"
-"MIME-Version: 1\n"
+"PO-Revision-Date: 2006-11-03 14:26\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-# Libris vill ha det så.
 #: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
 #: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
 #, fuzzy
 msgid "Initiate"
-msgstr "Hettitiska språk"
+msgstr "Kuyandululwa"
 
 #: plugins/annotate.c:746
 msgid "Initiate annotate drawing"
@@ -37,20 +32,18 @@ msgstr ""
 msgid "Draw using tool"
 msgstr ""
 
-# Libris vill ha det så.
 #: plugins/annotate.c:772
 #, fuzzy
 msgid "Initiate erase"
-msgstr "Hettitiska språk"
+msgstr "Kuyandululwa"
 
 #: plugins/annotate.c:773
 msgid "Initiate annotate erasing"
 msgstr ""
 
 #: plugins/annotate.c:787 plugins/annotate.c:788
-#, fuzzy
 msgid "Clear"
-msgstr "R_ensa"
+msgstr ""
 
 #: plugins/annotate.c:805
 msgid "Annotate Fill Color"
@@ -73,9 +66,8 @@ msgid "Line width"
 msgstr ""
 
 #: plugins/annotate.c:826
-#, fuzzy
 msgid "Line width for annotations"
-msgstr "Lär dig mer med hjälp av dokumentation"
+msgstr ""
 
 #: plugins/annotate.c:835
 msgid "Stroke width"
@@ -85,47 +77,39 @@ msgstr ""
 msgid "Stroke width for annotations"
 msgstr ""
 
-# Libris vill ha det så.
 #: plugins/annotate.c:1009
 #, fuzzy
 msgid "Annotate"
-msgstr "Hettitiska språk"
+msgstr "Kuyandululwa"
 
 #: plugins/annotate.c:1010
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "Aktiv profil"
+msgstr ""
 
 #: plugins/blur.c:73
-#, fuzzy
 msgid "4xBilinear"
-msgstr "Filter: "
+msgstr ""
 
 #: plugins/blur.c:74 plugins/blur.c:237
-#, fuzzy
 msgid "Gaussian"
-msgstr "Rysk"
+msgstr ""
 
 #: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
 #: plugins/decoration.c:1203 plugins/switcher.c:373
-#, fuzzy
 msgid "Mipmap"
-msgstr "Mic-mac"
+msgstr ""
 
 #: plugins/blur.c:728
-#, fuzzy
 msgid "Blur Speed"
-msgstr "Vald"
+msgstr ""
 
 #: plugins/blur.c:729
-#, fuzzy
 msgid "Window blur speed"
-msgstr "Windows ledigt (%1)"
+msgstr ""
 
 #: plugins/blur.c:738
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/blur.c:739
 msgid "Windows that should be affected by focus blur"
@@ -140,9 +124,8 @@ msgid "Blur windows that doesn't have focus"
 msgstr ""
 
 #: plugins/blur.c:754
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/blur.c:755
 msgid "Windows that should use alpha blur by default"
@@ -157,9 +140,8 @@ msgid "Blur behind translucent parts of windows"
 msgstr ""
 
 #: plugins/blur.c:772
-#, fuzzy
 msgid "Blur Filter"
-msgstr "Ange &filter"
+msgstr ""
 
 #: plugins/blur.c:773
 msgid "Filter method used for blurring"
@@ -170,24 +152,20 @@ msgid "Gaussian Radius"
 msgstr ""
 
 #: plugins/blur.c:784
-#, fuzzy
 msgid "Gaussian radius"
-msgstr "Ryska federationen"
+msgstr ""
 
 #: plugins/blur.c:792
-#, fuzzy
 msgid "Gaussian Strength"
-msgstr "Rysk"
+msgstr ""
 
 #: plugins/blur.c:793
-#, fuzzy
 msgid "Gaussian strength"
-msgstr "Rysk"
+msgstr ""
 
 #: plugins/blur.c:802
-#, fuzzy
 msgid "Mipmap LOD"
-msgstr "Mic-mac"
+msgstr ""
 
 #: plugins/blur.c:803
 msgid "Mipmap level-of-detail"
@@ -196,12 +174,12 @@ msgstr ""
 #: plugins/blur.c:812
 #, fuzzy
 msgid "Blur Saturation"
-msgstr "Varaktighet"
+msgstr "Gcina ubumbeko"
 
 #: plugins/blur.c:813
 #, fuzzy
 msgid "Blur saturation"
-msgstr "Varaktighet"
+msgstr "Gcina ubumbeko"
 
 #: plugins/blur.c:821
 msgid "Blur Occlusion"
@@ -220,34 +198,29 @@ msgid "Pulse effect"
 msgstr ""
 
 #: plugins/blur.c:2883
-#, fuzzy
 msgid "Blur Windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/blur.c:2884
-#, fuzzy
 msgid "Blur windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/clone.c:725
 #, fuzzy
 msgid "Initiate clone selection"
-msgstr "Val av videoläge"
+msgstr "Ukukhetha Ikhathalogu"
 
 #: plugins/clone.c:854
-#, fuzzy
 msgid "Clone Output"
-msgstr "Utmatningen var"
+msgstr ""
 
 #: plugins/clone.c:855
 msgid "Output clone handler"
 msgstr ""
 
-# KM
 #: plugins/cube.c:990
-#, fuzzy
 msgid "Cube Color"
-msgstr "Färger"
+msgstr ""
 
 #: plugins/cube.c:991
 msgid "Color of top and bottom sides of the cube"
@@ -262,27 +235,24 @@ msgid "Inside cube"
 msgstr ""
 
 #: plugins/cube.c:1007
-#, fuzzy
 msgid "Scale image"
-msgstr "Lokal tid"
+msgstr ""
 
 #: plugins/cube.c:1008
 msgid "Scale images to cover top face of cube"
 msgstr ""
 
 #: plugins/cube.c:1014
-#, fuzzy
 msgid "Image files"
-msgstr "Misslyckade filer"
+msgstr ""
 
 #: plugins/cube.c:1015
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 
 #: plugins/cube.c:1028
-#, fuzzy
 msgid "Skydome"
-msgstr "Sydney"
+msgstr ""
 
 #: plugins/cube.c:1029
 msgid "Render skydome"
@@ -321,38 +291,30 @@ msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
 
 #: plugins/cube.c:1073 plugins/rotate.c:302
-#, fuzzy
 msgid "Acceleration"
-msgstr "3D-acceleration:"
+msgstr ""
 
 #: plugins/cube.c:1074
-#, fuzzy
 msgid "Fold Acceleration"
-msgstr "3D-acceleration:"
+msgstr ""
 
 #: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
 #: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
-#, fuzzy
 msgid "Speed"
-msgstr "Vald"
+msgstr ""
 
 #: plugins/cube.c:1084
-#, fuzzy
 msgid "Fold Speed"
-msgstr "Vald"
+msgstr ""
 
-# TL
 #: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
 #: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
-#, fuzzy
 msgid "Timestep"
-msgstr "Östtimor"
+msgstr ""
 
-# TL
 #: plugins/cube.c:1094
-#, fuzzy
 msgid "Fold Timestep"
-msgstr "Östtimor"
+msgstr ""
 
 #: plugins/cube.c:1104 plugins/switcher.c:374
 msgid "Generate mipmaps when possible for higher quality scaling"
@@ -367,52 +329,44 @@ msgid "Unfold cube"
 msgstr ""
 
 #: plugins/cube.c:1813
-#, fuzzy
 msgid "Next Slide"
-msgstr "Ny storlek"
+msgstr ""
 
 #: plugins/cube.c:1814
-#, fuzzy
 msgid "Advance to next slide"
-msgstr "Avancerade alternativ"
+msgstr ""
 
 #: plugins/cube.c:1831
-#, fuzzy
 msgid "Previous Slide"
-msgstr "Föregående kärna"
+msgstr ""
 
 #: plugins/cube.c:1832
 msgid "Go back to previous slide"
 msgstr ""
 
 #: plugins/cube.c:2037
-#, fuzzy
 msgid "Desktop Cube"
-msgstr "Kontorsdator"
+msgstr ""
 
 #: plugins/cube.c:2038
 msgid "Place windows on cube"
 msgstr ""
 
 #: plugins/decoration.c:1145
-#, fuzzy
 msgid "Shadow Radius"
-msgstr "Radius"
+msgstr ""
 
 #: plugins/decoration.c:1146
-#, fuzzy
 msgid "Drop shadow radius"
-msgstr "Radius"
+msgstr ""
 
 #: plugins/decoration.c:1155
-#, fuzzy
 msgid "Shadow Opacity"
-msgstr "&Låg kapacitet"
+msgstr ""
 
 #: plugins/decoration.c:1156
-#, fuzzy
 msgid "Drop shadow opacity"
-msgstr "&Låg kapacitet"
+msgstr ""
 
 #: plugins/decoration.c:1175
 msgid "Shadow Offset X"
@@ -433,7 +387,7 @@ msgstr ""
 #: plugins/decoration.c:1193
 #, fuzzy
 msgid "Command"
-msgstr "Kommando: "
+msgstr "Umyalelo:"
 
 #: plugins/decoration.c:1194
 msgid ""
@@ -443,44 +397,39 @@ msgstr ""
 #: plugins/decoration.c:1210
 #, fuzzy
 msgid "Decoration windows"
-msgstr "Ta bort Win&dows"
+msgstr "Musa Ukukhetha &Nto"
 
 #: plugins/decoration.c:1211
 msgid "Windows that should be decorated"
 msgstr ""
 
 #: plugins/decoration.c:1219
-#, fuzzy
 msgid "Shadow windows"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: plugins/decoration.c:1220
 msgid "Windows that should be have a shadow"
 msgstr ""
 
 #: plugins/decoration.c:1505
-#, fuzzy
 msgid "Window Decoration"
-msgstr "Ingen beskrivning"
+msgstr ""
 
 #: plugins/decoration.c:1506
-#, fuzzy
 msgid "Window decorations"
-msgstr "ypbind-alternativ"
+msgstr ""
 
 #: plugins/fade.c:179
 msgid "Fade Speed"
 msgstr ""
 
 #: plugins/fade.c:180
-#, fuzzy
 msgid "Window fade speed"
-msgstr "Windows ledigt (%1)"
+msgstr ""
 
 #: plugins/fade.c:189
-#, fuzzy
 msgid "Fade windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/fade.c:190
 msgid "Windows that should be fading"
@@ -503,9 +452,8 @@ msgid "Fullscreen fade effect on system beep"
 msgstr ""
 
 #: plugins/fade.c:857
-#, fuzzy
 msgid "Fading Windows"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: plugins/fade.c:858
 msgid "Fade in windows when mapped and fade out windows when unmapped"
@@ -516,9 +464,8 @@ msgid "Mount Point"
 msgstr ""
 
 #: plugins/fuse.c:1487
-#, fuzzy
 msgid "Mount point"
-msgstr "L&ägg till länk"
+msgstr ""
 
 #: plugins/fuse.c:1586
 msgid "Userspace File System"
@@ -538,28 +485,24 @@ msgid "Plugins that this must load before"
 msgstr ""
 
 #: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
-#, fuzzy
 msgid "Do not modify"
-msgstr "Logga inget"
+msgstr ""
 
 #: plugins/gconf-dump.c:626
 msgid "Plugins that this requires"
 msgstr ""
 
 #: plugins/minimize.c:193
-#, fuzzy
 msgid "Minimize speed"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: plugins/minimize.c:203
-#, fuzzy
 msgid "Minimize timestep"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: plugins/minimize.c:212
-#, fuzzy
 msgid "Minimize Windows"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: plugins/minimize.c:213
 msgid "Windows that should be transformed when minimized"
@@ -586,24 +529,20 @@ msgid "Initiate Window Move"
 msgstr ""
 
 #: plugins/move.c:678
-#, fuzzy
 msgid "Start moving window"
-msgstr "Startar demon."
+msgstr ""
 
 #: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
-#, fuzzy
 msgid "Opacity"
-msgstr "&Låg kapacitet"
+msgstr ""
 
 #: plugins/move.c:697
-#, fuzzy
 msgid "Opacity level of moving windows"
-msgstr "Startar demon."
+msgstr ""
 
 #: plugins/move.c:705
-#, fuzzy
 msgid "Constrain Y"
-msgstr "Innehåller"
+msgstr ""
 
 #: plugins/move.c:706
 msgid "Constrain Y coordinate to workspace area"
@@ -618,14 +557,12 @@ msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
 
 #: plugins/move.c:881
-#, fuzzy
 msgid "Move Window"
-msgstr "Fl&ytta ner"
+msgstr ""
 
 #: plugins/move.c:882
-#, fuzzy
 msgid "Move window"
-msgstr "Fl&ytta ner"
+msgstr ""
 
 #: plugins/place.c:42
 msgid "Cascade"
@@ -648,9 +585,8 @@ msgid "Random"
 msgstr ""
 
 #: plugins/place.c:244
-#, fuzzy
 msgid "Workarounds"
-msgstr "Ar&betsgrupp"
+msgstr ""
 
 #: plugins/place.c:245
 msgid "Window placement workarounds"
@@ -665,9 +601,8 @@ msgid "Algorithm to use for window placement"
 msgstr ""
 
 #: plugins/place.c:260
-#, fuzzy
 msgid "Positioned windows"
-msgstr "Misslyckades med att ändra storlek."
+msgstr ""
 
 #: plugins/place.c:261
 msgid "Windows that should be positioned by default"
@@ -702,9 +637,8 @@ msgid "X Viewport Positions"
 msgstr ""
 
 #: plugins/place.c:306
-#, fuzzy
 msgid "Horizontal viewport positions"
-msgstr "Virtuell enhet"
+msgstr ""
 
 #: plugins/place.c:316
 msgid "Y Viewport Positions"
@@ -715,9 +649,8 @@ msgid "Vertical viewport positions"
 msgstr ""
 
 #: plugins/place.c:1604
-#, fuzzy
 msgid "Place Windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/place.c:1605
 msgid "Place windows at appropriate positions when mapped"
@@ -732,47 +665,43 @@ msgid "Plane left"
 msgstr ""
 
 #: plugins/plane.c:643
-#, fuzzy
 msgid "Plane Right"
-msgstr "Åt höger"
+msgstr ""
 
 #: plugins/plane.c:644
 msgid "Plane right"
 msgstr ""
 
 #: plugins/plane.c:662
-#, fuzzy
 msgid "Plane Down"
-msgstr "Page Down"
+msgstr ""
 
 #: plugins/plane.c:663
-#, fuzzy
 msgid "Plane down"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/plane.c:681
-#, fuzzy
 msgid "Plane Up"
-msgstr "Page Up"
+msgstr ""
 
 #: plugins/plane.c:682
 msgid "Plane up"
 msgstr ""
 
 #: plugins/plane.c:698
-#, fuzzy, c-format
+#, c-format
 msgid "Plane To Face %d"
-msgstr "Rotera skärm"
+msgstr ""
 
 #: plugins/plane.c:699
-#, fuzzy, c-format
+#, c-format
 msgid "Plane to face %d"
-msgstr "Rotera skärm"
+msgstr ""
 
 #: plugins/plane.c:700
-#, fuzzy, c-format
+#, c-format
 msgid "Plane To Face %d with Window"
-msgstr "Startar demon."
+msgstr ""
 
 #: plugins/plane.c:701
 #, c-format
@@ -780,14 +709,12 @@ msgid "Plane to face %d and bring active window along"
 msgstr ""
 
 #: plugins/plane.c:868
-#, fuzzy
 msgid "Desktop Plane"
-msgstr "Kontorsdator"
+msgstr ""
 
 #: plugins/plane.c:869
-#, fuzzy
 msgid "Place windows on a plane"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/regex.c:463
 msgid "Regex Matching"
@@ -802,42 +729,36 @@ msgid "Initiate Window Resize"
 msgstr ""
 
 #: plugins/resize.c:719
-#, fuzzy
 msgid "Start resizing window"
-msgstr "Startar demon."
+msgstr ""
 
 #: plugins/resize.c:862
-#, fuzzy
 msgid "Resize Window"
-msgstr "Misslyckades med att ändra storlek."
+msgstr ""
 
 #: plugins/resize.c:863
-#, fuzzy
 msgid "Resize window"
-msgstr "Misslyckades med att ändra storlek."
+msgstr ""
 
 #: plugins/rotate.c:285 plugins/zoom.c:222
-#, fuzzy
 msgid "Pointer Invert Y"
-msgstr "Pekare till %1"
+msgstr ""
 
 #: plugins/rotate.c:286 plugins/zoom.c:223
 msgid "Invert Y axis for pointer movement"
 msgstr ""
 
 #: plugins/rotate.c:292 plugins/zoom.c:229
-#, fuzzy
 msgid "Pointer Sensitivity"
-msgstr "Skrivarbeskrivnin&g"
+msgstr ""
 
 #: plugins/rotate.c:293 plugins/zoom.c:230
 msgid "Sensitivity of pointer movement"
 msgstr ""
 
 #: plugins/rotate.c:303
-#, fuzzy
 msgid "Rotation Acceleration"
-msgstr "3D-acceleration:"
+msgstr ""
 
 #: plugins/rotate.c:312
 msgid "Snap To Top Face"
@@ -848,19 +769,18 @@ msgid "Snap Cube Rotation to Top Face"
 msgstr ""
 
 #: plugins/rotate.c:320
-msgid "Rotation Speed"
-msgstr ""
-
-# TL
-#: plugins/rotate.c:330
 #, fuzzy
+msgid "Rotation Speed"
+msgstr "Kugqityiwe Ukuhlohla"
+
+#: plugins/rotate.c:330
 msgid "Rotation Timestep"
-msgstr "Östtimor"
+msgstr ""
 
 #: plugins/rotate.c:1764
 #, fuzzy
 msgid "Start Rotation"
-msgstr "Starta identifiering"
+msgstr "Kuqaliswa Ukuhlohla..."
 
 #: plugins/rotate.c:1778
 msgid "Rotate Left"
@@ -895,14 +815,14 @@ msgid "Rotate right and bring active window along"
 msgstr ""
 
 #: plugins/rotate.c:1854
-#, fuzzy, c-format
+#, c-format
 msgid "Rotate To Face %d"
-msgstr "Rotera skärm"
+msgstr ""
 
 #: plugins/rotate.c:1855
-#, fuzzy, c-format
+#, c-format
 msgid "Rotate to face %d"
-msgstr "Rotera skärm"
+msgstr ""
 
 #: plugins/rotate.c:1856
 #, c-format
@@ -915,23 +835,20 @@ msgid "Rotate to face %d and bring active window along"
 msgstr ""
 
 #: plugins/rotate.c:1906
-#, fuzzy
 msgid "Rotate To"
-msgstr "Fjärrdelnät"
+msgstr ""
 
 #: plugins/rotate.c:1907
 msgid "Rotate to viewport"
 msgstr ""
 
 #: plugins/rotate.c:1918
-#, fuzzy
 msgid "Rotate Window"
-msgstr "Fl&ytta ner"
+msgstr ""
 
 #: plugins/rotate.c:1919
-#, fuzzy
 msgid "Rotate with window"
-msgstr "Startar demon."
+msgstr ""
 
 #: plugins/rotate.c:1930
 msgid "Rotate Flip Left"
@@ -942,9 +859,8 @@ msgid "Flip to left viewport and warp pointer"
 msgstr ""
 
 #: plugins/rotate.c:1946
-#, fuzzy
 msgid "Rotate Flip Right"
-msgstr "Åt höger"
+msgstr ""
 
 #: plugins/rotate.c:1947
 msgid "Flip to right viewport and warp pointer"
@@ -975,18 +891,16 @@ msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
 
 #: plugins/rotate.c:1986
-#, fuzzy
 msgid "Flip Time"
-msgstr "Realtid"
+msgstr ""
 
 #: plugins/rotate.c:1987
 msgid "Timeout before flipping viewport"
 msgstr ""
 
 #: plugins/rotate.c:2155
-#, fuzzy
 msgid "Rotate Cube"
-msgstr "Fjärrdelnät"
+msgstr ""
 
 #: plugins/rotate.c:2156
 msgid "Rotate desktop cube"
@@ -994,50 +908,43 @@ msgstr ""
 
 #: plugins/scale.c:80 plugins/wobbly.c:131
 msgid "None"
-msgstr "Ingen"
+msgstr ""
 
 #: plugins/scale.c:81
-#, fuzzy
 msgid "Emblem"
-msgstr "Emblem"
+msgstr ""
 
 #: plugins/scale.c:82
 msgid "Big"
-msgstr "Stor"
+msgstr ""
 
 #: plugins/scale.c:325
-#, fuzzy
 msgid "Spacing"
-msgstr "Spanien"
+msgstr ""
 
 #: plugins/scale.c:326
-#, fuzzy
 msgid "Space between windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/scale.c:335
-#, fuzzy
 msgid "Scale speed"
-msgstr "Lokal tid"
+msgstr ""
 
 #: plugins/scale.c:345
-#, fuzzy
 msgid "Scale timestep"
-msgstr "Lokal tid"
+msgstr ""
 
 #: plugins/scale.c:354
-#, fuzzy
 msgid "Scale Windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/scale.c:355
 msgid "Windows that should be scaled in scale mode"
 msgstr ""
 
 #: plugins/scale.c:363
-#, fuzzy
 msgid "Darken Background"
-msgstr "Bakgrund"
+msgstr ""
 
 #: plugins/scale.c:364
 msgid "Darken background when scaling windows"
@@ -1073,18 +980,16 @@ msgid "Layout and start transforming windows"
 msgstr ""
 
 #: plugins/scale.c:1950
-#, fuzzy
 msgid "Initiate Window Picker For All Windows"
-msgstr "Initial RAM-disk"
+msgstr ""
 
 #: plugins/scale.c:1951
 msgid "Layout and start transforming all windows"
 msgstr ""
 
 #: plugins/scale.c:1965
-#, fuzzy
 msgid "Initiate Window Picker For Window Group"
-msgstr "Initial RAM-disk"
+msgstr ""
 
 #: plugins/scale.c:1966
 msgid "Layout and start transforming window group"
@@ -1099,14 +1004,12 @@ msgid "Layout and start transforming windows on current output"
 msgstr ""
 
 #: plugins/scale.c:2200
-#, fuzzy
 msgid "Scale"
-msgstr "Bildläsare"
+msgstr ""
 
 #: plugins/scale.c:2201
-#, fuzzy
 msgid "Scale windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/screenshot.c:385
 msgid "Initiate rectangle screenshot"
@@ -1115,45 +1018,39 @@ msgstr ""
 #: plugins/screenshot.c:398
 #, fuzzy
 msgid "Directory"
-msgstr "Katalog\n"
+msgstr "I-&Uvimba Weefayili Zendawo Ethile..."
 
 #: plugins/screenshot.c:399
 msgid "Put screenshot images in this directory"
 msgstr ""
 
 #: plugins/screenshot.c:407
-#, fuzzy
 msgid "Launch Application"
-msgstr "Starta ett program"
+msgstr ""
 
 #: plugins/screenshot.c:408
-#, fuzzy
 msgid "Automatically open screenshot in this application"
-msgstr "Starta uppdateraren automatiskt vid inloggning"
+msgstr ""
 
 #: plugins/screenshot.c:558
-#, fuzzy
 msgid "Screenshot"
-msgstr "Skärm"
+msgstr ""
 
 #: plugins/screenshot.c:559
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "Fel uppstod kommandoraden skulle tydas."
+msgstr ""
 
 #: plugins/switcher.c:345
-#, fuzzy
 msgid "Switcher speed"
-msgstr "Byt skript"
+msgstr ""
 
 #: plugins/switcher.c:355
 msgid "Switcher timestep"
 msgstr ""
 
 #: plugins/switcher.c:364
-#, fuzzy
 msgid "Switcher windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/switcher.c:365
 msgid "Windows that should be shown in switcher"
@@ -1162,16 +1059,15 @@ msgstr ""
 #: plugins/switcher.c:381
 #, fuzzy
 msgid "Saturation"
-msgstr "Varaktighet"
+msgstr "Gcina ubumbeko"
 
 #: plugins/switcher.c:382
 msgid "Amount of saturation in percent"
 msgstr ""
 
 #: plugins/switcher.c:390
-#, fuzzy
 msgid "Brightness"
-msgstr "Brygga"
+msgstr ""
 
 #: plugins/switcher.c:391
 msgid "Amount of brightness in percent"
@@ -1180,7 +1076,7 @@ msgstr ""
 #: plugins/switcher.c:408
 #, fuzzy
 msgid "Bring To Front"
-msgstr "Under start"
+msgstr "Ngethuba Lokumisela Inkqubo"
 
 #: plugins/switcher.c:409
 msgid "Bring selected window to front"
@@ -1195,9 +1091,8 @@ msgid "Distance desktop should be zoom out while switching windows"
 msgstr ""
 
 #: plugins/switcher.c:426
-#, fuzzy
 msgid "Icon"
-msgstr "Ikoner"
+msgstr ""
 
 #: plugins/switcher.c:427
 msgid "Show icon next to thumbnail"
@@ -1214,25 +1109,23 @@ msgstr ""
 #: plugins/switcher.c:440
 #, fuzzy
 msgid "Auto Rotate"
-msgstr "Automatiskt"
+msgstr "Kuyandululwa"
 
 #: plugins/switcher.c:441
 msgid "Rotate to the selected window while switching"
 msgstr ""
 
 #: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
-#, fuzzy
 msgid "Next window"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/switcher.c:2028
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 
 #: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
-#, fuzzy
 msgid "Prev window"
-msgstr "Windows"
+msgstr ""
 
 #: plugins/switcher.c:2046
 msgid "Popup switcher if not visible and select previous window"
@@ -1250,17 +1143,15 @@ msgstr ""
 #: plugins/switcher.c:2102
 #, fuzzy
 msgid "Select next window"
-msgstr "Ta bort Win&dows"
+msgstr "Musa Ukukhetha &Nto"
 
 #: plugins/switcher.c:2115
-#, fuzzy
 msgid "Select previous window"
-msgstr "Startar demon."
+msgstr ""
 
 #: plugins/switcher.c:2289 plugins/switcher.c:2290
-#, fuzzy
 msgid "Application Switcher"
-msgstr "Programordning"
+msgstr ""
 
 #: plugins/video.c:245
 msgid "YV12 colorspace"
@@ -1283,18 +1174,16 @@ msgid "Enable pointer water effects"
 msgstr ""
 
 #: plugins/water.c:1620
-#, fuzzy
 msgid "Toggle rain"
-msgstr "Token ring"
+msgstr ""
 
 #: plugins/water.c:1621
 msgid "Toggle rain effect"
 msgstr ""
 
 #: plugins/water.c:1636
-#, fuzzy
 msgid "Toggle wiper"
-msgstr "Token ring"
+msgstr ""
 
 #: plugins/water.c:1637
 msgid "Toggle wiper effect"
@@ -1309,18 +1198,16 @@ msgid "Water offset scale"
 msgstr ""
 
 #: plugins/water.c:1662
-#, fuzzy
 msgid "Rain Delay"
-msgstr "Fördröjning"
+msgstr ""
 
 #: plugins/water.c:1663
 msgid "Delay (in ms) between each rain-drop"
 msgstr ""
 
 #: plugins/water.c:1671
-#, fuzzy
 msgid "Title wave"
-msgstr "Rubrik: %1"
+msgstr ""
 
 #: plugins/water.c:1672
 msgid "Wave effect from window title"
@@ -1331,18 +1218,16 @@ msgid "Point"
 msgstr ""
 
 #: plugins/water.c:1684
-#, fuzzy
 msgid "Add point"
-msgstr "L&ägg till länk"
+msgstr ""
 
 #: plugins/water.c:1695
 msgid "Line"
 msgstr ""
 
 #: plugins/water.c:1696
-#, fuzzy
 msgid "Add line"
-msgstr "L&ägg till länk"
+msgstr ""
 
 #: plugins/water.c:1859
 msgid "Water Effect"
@@ -1352,60 +1237,49 @@ msgstr ""
 msgid "Adds water effects to different desktop actions"
 msgstr ""
 
-# 'driver' as in '(hardware) driver update'
 #: plugins/wobbly.c:132 plugins/wobbly.c:2884
-#, fuzzy
 msgid "Shiver"
-msgstr "Drivrutin"
+msgstr ""
 
 #: plugins/wobbly.c:345
-#, fuzzy
 msgid "Friction"
-msgstr "Åtgärd"
+msgstr ""
 
 #: plugins/wobbly.c:346
-#, fuzzy
 msgid "Spring Friction"
-msgstr "Åtgärd"
+msgstr ""
 
 #: plugins/wobbly.c:355
-#, fuzzy
 msgid "Spring K"
-msgstr "Stegning"
+msgstr ""
 
 #: plugins/wobbly.c:356
-#, fuzzy
 msgid "Spring Konstant"
-msgstr "Stegning"
+msgstr ""
 
 #: plugins/wobbly.c:365
-#, fuzzy
 msgid "Grid Resolution"
-msgstr "Upplösning"
+msgstr ""
 
 #: plugins/wobbly.c:366
-#, fuzzy
 msgid "Vertex Grid Resolution"
-msgstr "Serverupplösning"
+msgstr ""
 
 #: plugins/wobbly.c:374
-#, fuzzy
 msgid "Minimum Grid Size"
-msgstr "Maximal storlek"
+msgstr ""
 
 #: plugins/wobbly.c:375
-#, fuzzy
 msgid "Minimum Vertex Grid Size"
-msgstr "Maximal storlek"
+msgstr ""
 
 #: plugins/wobbly.c:383
 msgid "Map Effect"
 msgstr ""
 
 #: plugins/wobbly.c:384
-#, fuzzy
 msgid "Map Window Effect"
-msgstr "Windows"
+msgstr ""
 
 #: plugins/wobbly.c:392
 msgid "Focus Effect"
@@ -1416,36 +1290,32 @@ msgid "Focus Window Effect"
 msgstr ""
 
 #: plugins/wobbly.c:401
-#, fuzzy
 msgid "Map Windows"
-msgstr "Windows"
+msgstr ""
 
 #: plugins/wobbly.c:402
 msgid "Windows that should wobble when mapped"
 msgstr ""
 
 #: plugins/wobbly.c:410
-#, fuzzy
 msgid "Focus Windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/wobbly.c:411
 msgid "Windows that should wobble when focused"
 msgstr ""
 
 #: plugins/wobbly.c:419
-#, fuzzy
 msgid "Move Windows"
-msgstr "Fl&ytta ner"
+msgstr ""
 
 #: plugins/wobbly.c:420
 msgid "Windows that should wobble when moved"
 msgstr ""
 
 #: plugins/wobbly.c:428
-#, fuzzy
 msgid "Grab Windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/wobbly.c:429
 msgid "Windows that should wobble when grabbed"
@@ -1460,9 +1330,8 @@ msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr ""
 
 #: plugins/wobbly.c:2863
-#, fuzzy
 msgid "Snap windows"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: plugins/wobbly.c:2864
 msgid "Toggle window snapping"
@@ -1477,39 +1346,32 @@ msgid "Inverted window snapping"
 msgstr ""
 
 #: plugins/wobbly.c:2885
-#, fuzzy
 msgid "Make window shiver"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: plugins/wobbly.c:3098
-#, fuzzy
 msgid "Wobbly Windows"
-msgstr "Windows"
+msgstr ""
 
 #: plugins/wobbly.c:3099
 msgid "Use spring model for wobbly window effect"
 msgstr ""
 
 #: plugins/zoom.c:240
-#, fuzzy
 msgid "Zoom Speed"
-msgstr "Vald"
+msgstr ""
 
-# TL
 #: plugins/zoom.c:250
-#, fuzzy
 msgid "Zoom Timestep"
-msgstr "Östtimor"
+msgstr ""
 
 #: plugins/zoom.c:259 plugins/zoom.c:260
-#, fuzzy
 msgid "Zoom factor"
-msgstr "Logga ut"
+msgstr ""
 
 #: plugins/zoom.c:269
-#, fuzzy
 msgid "Filter Linear"
-msgstr "Filter: "
+msgstr ""
 
 #: plugins/zoom.c:270
 msgid "USe linear filter when zoomed in"
@@ -1520,14 +1382,12 @@ msgid "Zoom In"
 msgstr ""
 
 #: plugins/zoom.c:782 plugins/zoom.c:783
-#, fuzzy
 msgid "Zoom Out"
-msgstr "Logga ut"
+msgstr ""
 
 #: plugins/zoom.c:934
-#, fuzzy
 msgid "Zoom Desktop"
-msgstr "Kontorsdator"
+msgstr ""
 
 #: plugins/zoom.c:935
 msgid "Zoom and pan desktop cube"
@@ -1546,24 +1406,20 @@ msgid "Best"
 msgstr ""
 
 #: src/display.c:753
-#, fuzzy
 msgid "Active Plugins"
-msgstr "Aktiv profil"
+msgstr ""
 
 #: src/display.c:754
-#, fuzzy
 msgid "List of currently active plugins"
-msgstr "Visa endast identifierade skrivare"
+msgstr ""
 
 #: src/display.c:768
-#, fuzzy
 msgid "Texture Filter"
-msgstr "Ange &filter"
+msgstr ""
 
 #: src/display.c:769
-#, fuzzy
 msgid "Texture filtering"
-msgstr "Ange &filter"
+msgstr ""
 
 #: src/display.c:777
 msgid "Click To Focus"
@@ -1574,9 +1430,8 @@ msgid "Click on window moves input focus to it"
 msgstr ""
 
 #: src/display.c:784
-#, fuzzy
 msgid "Auto-Raise"
-msgstr "Automatiskt"
+msgstr ""
 
 #: src/display.c:785
 msgid "Raise selected windows after interval"
@@ -1591,28 +1446,24 @@ msgid "Interval before raising selected windows"
 msgstr ""
 
 #: src/display.c:800
-#, fuzzy
 msgid "Close Window"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: src/display.c:801
 msgid "Close active window"
 msgstr ""
 
 #: src/display.c:817
-#, fuzzy
 msgid "Show Main Menu"
-msgstr "Vi&sa startmeny"
+msgstr ""
 
 #: src/display.c:818
-#, fuzzy
 msgid "Show the main menu"
-msgstr "Vi&sa startmeny"
+msgstr ""
 
 #: src/display.c:834
-#, fuzzy
 msgid "Run Dialog"
-msgstr "&Tonval"
+msgstr ""
 
 #: src/display.c:835
 msgid "Show Run Application dialog"
@@ -1627,9 +1478,8 @@ msgid "Unmaximize active window"
 msgstr ""
 
 #: src/display.c:868
-#, fuzzy
 msgid "Minimize Window"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: src/display.c:869
 msgid "Minimize active window"
@@ -1644,18 +1494,16 @@ msgid "Maximize active window"
 msgstr ""
 
 #: src/display.c:902
-#, fuzzy
 msgid "Maximize Window Horizontally"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: src/display.c:903
 msgid "Maximize active window horizontally"
 msgstr ""
 
 #: src/display.c:915
-#, fuzzy
 msgid "Maximize Window Vertically"
-msgstr "Krymp Window&s"
+msgstr ""
 
 #: src/display.c:916
 msgid "Maximize active window vertically"
@@ -1668,7 +1516,7 @@ msgstr ""
 #: src/display.c:943
 #, fuzzy, c-format
 msgid "Command line %d"
-msgstr "Kommando: "
+msgstr "Umyalelo '%1'"
 
 #: src/display.c:944
 #, c-format
@@ -1678,7 +1526,7 @@ msgstr ""
 #: src/display.c:946
 #, fuzzy, c-format
 msgid "Run command %d"
-msgstr "Kommando: "
+msgstr "Umyalelo '%1'"
 
 #: src/display.c:947
 #, c-format
@@ -1688,27 +1536,24 @@ msgid ""
 msgstr ""
 
 #: src/display.c:991
-#, fuzzy
 msgid "Slow Animations"
-msgstr "Visa alla partitioner"
+msgstr ""
 
 #: src/display.c:992
 msgid "Toggle use of slow animations"
 msgstr ""
 
 #: src/display.c:1008
-#, fuzzy
 msgid "Raise Window"
-msgstr "Misslyckades med att ändra storlek."
+msgstr ""
 
 #: src/display.c:1009
 msgid "Raise window above other windows"
 msgstr ""
 
 #: src/display.c:1023
-#, fuzzy
 msgid "Lower Window"
-msgstr "Lågsorbiska"
+msgstr ""
 
 #: src/display.c:1024
 msgid "Lower window beneath other windows"
@@ -1727,18 +1572,16 @@ msgid "Decrease Opacity"
 msgstr ""
 
 #: src/display.c:1054
-#, fuzzy
 msgid "Decrease window opacity"
-msgstr "Ta bort Win&dows helt"
+msgstr ""
 
 #: src/display.c:1068 src/display.c:1069
 msgid "Take a screenshot"
 msgstr ""
 
 #: src/display.c:1085 src/display.c:1086
-#, fuzzy
 msgid "Screenshot command line"
-msgstr "Fel uppstod kommandoraden skulle tydas."
+msgstr ""
 
 #: src/display.c:1094 src/display.c:1095
 msgid "Take a screenshot of a window"
@@ -1749,18 +1592,16 @@ msgid "Window screenshot command line"
 msgstr ""
 
 #: src/display.c:1121
-#, fuzzy
 msgid "Window Menu"
-msgstr "Fönsterhanterare"
+msgstr ""
 
 #: src/display.c:1122
 msgid "Open window menu"
 msgstr ""
 
 #: src/display.c:1141
-#, fuzzy
 msgid "Raise On Click"
-msgstr "&Radioklocka"
+msgstr ""
 
 #: src/display.c:1142
 msgid "Raise windows when clicked"
@@ -1771,9 +1612,8 @@ msgid "Audible Bell"
 msgstr ""
 
 #: src/display.c:1149
-#, fuzzy
 msgid "Audible system beep"
-msgstr "Filsystem"
+msgstr ""
 
 #: src/display.c:1155
 msgid "Toggle Window Maximized"
@@ -1826,114 +1666,99 @@ msgstr ""
 #: src/display.c:1229 src/display.c:1230
 #, fuzzy
 msgid "Terminal command line"
-msgstr "Fel uppstod kommandoraden skulle tydas."
+msgstr "Umyalelo '%1'"
 
 #: src/display.c:1238 src/display.c:1239
-#, fuzzy
 msgid "Open a terminal"
-msgstr "Kör i terminal"
+msgstr ""
 
 #: src/display.c:1251
-#, fuzzy
 msgid "Ping Delay"
-msgstr "Fördröjning"
+msgstr ""
 
 #: src/display.c:1252
 msgid "Interval between ping messages"
 msgstr ""
 
 #: src/main.c:54
-#, fuzzy
 msgid "Desktop"
-msgstr "Skrivbord"
+msgstr ""
 
 #: src/main.c:55
 msgid "Dock"
 msgstr ""
 
 #: src/main.c:56
-#, fuzzy
 msgid "Toolbar"
-msgstr "Verktyg"
+msgstr ""
 
 #: src/main.c:57
 msgid "Menu"
-msgstr "Meny"
+msgstr ""
 
 #: src/main.c:58
-#, fuzzy
 msgid "Utility"
-msgstr "Drivrutinsdisk..."
+msgstr ""
 
 #: src/main.c:59
-#, fuzzy
 msgid "Splash"
-msgstr "startskärm"
+msgstr ""
 
 #: src/main.c:60
-#, fuzzy
 msgid "Dialog"
-msgstr "&Tonval"
+msgstr ""
 
 #: src/main.c:61
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: src/main.c:62
-#, fuzzy
 msgid "DropdownMenu"
-msgstr "Fönsterhanterare"
+msgstr ""
 
 #: src/main.c:63
-#, fuzzy
 msgid "PopupMenu"
-msgstr "Meny"
+msgstr ""
 
 #: src/main.c:64
-#, fuzzy
 msgid "Tooltip"
-msgstr "Verktyg"
+msgstr ""
 
 #: src/main.c:65
-#, fuzzy
 msgid "Notification"
-msgstr "Åtgärd"
+msgstr ""
 
 #: src/main.c:66
 msgid "Combo"
 msgstr ""
 
 #: src/main.c:67
-#, fuzzy
 msgid "Dnd"
-msgstr "End"
+msgstr ""
 
 #: src/main.c:68
 msgid "ModalDialog"
 msgstr ""
 
 #: src/main.c:69
-#, fuzzy
 msgid "Fullscreen"
-msgstr "Pekskärm"
+msgstr ""
 
 #: src/main.c:70
 msgid "Unknown"
-msgstr "Okänd"
+msgstr "Akwaziwa"
 
 #: src/screen.c:614
-#, fuzzy
 msgid "Detect Refresh Rate"
-msgstr "Välj för uppdatering"
+msgstr ""
 
 #: src/screen.c:615
 msgid "Automatic detection of refresh rate"
 msgstr ""
 
 #: src/screen.c:621
-#, fuzzy
 msgid "Lighting"
-msgstr "Loggning"
+msgstr ""
 
 #: src/screen.c:622
 msgid "Use diffuse light when screen is transformed"
@@ -1942,25 +1767,23 @@ msgstr ""
 #: src/screen.c:628
 #, fuzzy
 msgid "Refresh Rate"
-msgstr "Uppdatera"
+msgstr "&Hlaziya"
 
 #: src/screen.c:629
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr ""
 
 #: src/screen.c:638
-#, fuzzy
 msgid "Horizontal Virtual Size"
-msgstr "Virtuell enhet"
+msgstr ""
 
 #: src/screen.c:639
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
 #: src/screen.c:647
-#, fuzzy
 msgid "Vertical Virtual Size"
-msgstr "Virtuell enhet"
+msgstr ""
 
 #: src/screen.c:648
 msgid "Screen size multiplier for vertical virtual size"
@@ -1970,11 +1793,9 @@ msgstr ""
 msgid "Opacity Step"
 msgstr ""
 
-# Libris vill ha det så.
 #: src/screen.c:657
-#, fuzzy
 msgid "Opacity change step"
-msgstr "Langue d'oc (1500-)"
+msgstr ""
 
 #: src/screen.c:665
 msgid "Unredirect Fullscreen Windows"
@@ -1986,14 +1807,12 @@ msgid ""
 msgstr ""
 
 #: src/screen.c:673
-#, fuzzy
 msgid "Default Icon"
-msgstr "Förvald sektion"
+msgstr ""
 
 #: src/screen.c:674
-#, fuzzy
 msgid "Default window icon image"
-msgstr "Förvald domän"
+msgstr ""
 
 #: src/screen.c:682
 msgid "Sync To VBlank"
@@ -2004,9 +1823,8 @@ msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
 #: src/screen.c:690
-#, fuzzy
 msgid "Number of Desktops"
-msgstr "Fjärrskrivbord"
+msgstr ""
 
 #: src/screen.c:691
 msgid "Number of virtual desktops"
@@ -2017,14 +1835,12 @@ msgid "Detect Outputs"
 msgstr ""
 
 #: src/screen.c:700
-#, fuzzy
 msgid "Automatic detection of output devices"
-msgstr "Automatisk identifiering"
+msgstr ""
 
 #: src/screen.c:706
-#, fuzzy
 msgid "Outputs"
-msgstr "Utmatningen var"
+msgstr ""
 
 #: src/screen.c:707
 msgid "List of strings describing output devices"
@@ -2035,14 +1851,12 @@ msgid "Focus Prevention Windows"
 msgstr ""
 
 #: src/screen.c:719
-#, fuzzy
 msgid "Focus prevention windows"
-msgstr "Startar demon."
+msgstr ""
 
 #: src/screen.c:727
-#, fuzzy
 msgid "Opacity windows"
-msgstr "Ta bort Win&dows"
+msgstr ""
 
 #: src/screen.c:728
 msgid "Windows that should be translucent by default"
@@ -2055,131 +1869,3 @@ msgstr ""
 #: src/screen.c:740
 msgid "Opacity values for windows that should be translucent by default"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Window Types"
-#~ msgstr "Windows"
-
-#, fuzzy
-#~ msgid "Move Window Types"
-#~ msgstr "Leverantörstyp"
-
-#, fuzzy
-#~ msgid "Enable focus prevention"
-#~ msgstr "Aktivera ZEN-partition"
-
-#, fuzzy
-#~ msgid "Command line 1"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 10"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 11"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 2"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 3"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 4"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 5"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 6"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 7"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 8"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Command line 9"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Corners"
-#~ msgstr "Korniska"
-
-#, fuzzy
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "3D-acceleration: "
-
-#, fuzzy
-#~ msgid "Initiate Keyboard Window Resize"
-#~ msgstr "Initial RAM-disk"
-
-#, fuzzy
-#~ msgid "Run command 1"
-#~ msgstr "Kommando \"%1\""
-
-#, fuzzy
-#~ msgid "Run command 10"
-#~ msgstr "Kommando \"%1\""
-
-#, fuzzy
-#~ msgid "Run command 11"
-#~ msgstr "Kommando \"%1\""
-
-#, fuzzy
-#~ msgid "Run command 2"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 3"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 4"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 5"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 6"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 7"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 8"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 9"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Show switcher"
-#~ msgstr "Visa ändrin&gar"
-
-#, fuzzy
-#~ msgid "Sloppy Focus"
-#~ msgstr "Diskett"
-
-#, fuzzy
-#~ msgid "Start moving window using keyboard"
-#~ msgstr "Startar demon."
-
-#, fuzzy
-#~ msgid "Terminate"
-#~ msgstr "Terminaler"
