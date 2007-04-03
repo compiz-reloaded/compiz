@@ -673,7 +673,8 @@ resizeHandleEvent (CompDisplay *d,
 }
 
 static CompOption *
-resizeGetDisplayOptions (CompDisplay *display,
+resizeGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
 			 int	     *count)
 {
     RESIZE_DISPLAY (display);
@@ -683,7 +684,8 @@ resizeGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-resizeSetDisplayOption (CompDisplay     *display,
+resizeSetDisplayOption (CompPlugin      *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {

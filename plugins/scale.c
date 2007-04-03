@@ -226,7 +226,8 @@ typedef struct _ScaleWindow {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-scaleGetScreenOptions (CompScreen *screen,
+scaleGetScreenOptions (CompPlugin  *plugin,
+		       CompScreen *screen,
 		       int	  *count)
 {
     SCALE_SCREEN (screen);
@@ -236,7 +237,8 @@ scaleGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-scaleSetScreenOption (CompScreen      *screen,
+scaleSetScreenOption (CompPlugin  *plugin,
+		      CompScreen      *screen,
 		      char	      *name,
 		      CompOptionValue *value)
 {
@@ -1882,7 +1884,8 @@ scaleDamageWindowRect (CompWindow *w,
 }
 
 static CompOption *
-scaleGetDisplayOptions (CompDisplay *display,
+scaleGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     SCALE_DISPLAY (display);
@@ -1892,7 +1895,8 @@ scaleGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-scaleSetDisplayOption (CompDisplay     *display,
+scaleSetDisplayOption (CompPlugin  *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {

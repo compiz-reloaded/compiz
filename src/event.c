@@ -725,7 +725,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerButtonPressBindings (d, option, nOption, event,
 						o, 7))
 		    return TRUE;
@@ -756,7 +756,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerButtonReleaseBindings (d, option, nOption, event,
 						  o, 7))
 		    return TRUE;
@@ -787,7 +787,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerKeyPressBindings (d, option, nOption, event, o, 7))
 		    return TRUE;
 	    }
@@ -817,7 +817,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerKeyReleaseBindings (d, option, nOption, event, o, 7))
 		    return TRUE;
 	    }
@@ -871,7 +871,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeLeaveBindings (d, option, nOption, state,
 						      edge, o, 6))
 			    return TRUE;
@@ -915,7 +915,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeEnterBindings (d, option, nOption, state,
 						      edge, o, 6))
 			    return TRUE;
@@ -975,7 +975,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeLeaveBindings (d, option, nOption, state,
 						      edge, o, 5))
 			    return TRUE;
@@ -1030,7 +1030,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeEnterBindings (d, option, nOption, state,
 						      edge, o, 5))
 			    return TRUE;
@@ -1079,7 +1079,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerStateNotifyBindings (d, option, nOption,
 							stateEvent, o, 3))
 			    return TRUE;
@@ -1105,7 +1105,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerBellNotifyBindings (d, option, nOption,
 						       o, 2))
 			    return TRUE;

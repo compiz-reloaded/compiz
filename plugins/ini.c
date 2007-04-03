@@ -519,11 +519,11 @@ iniLoadOptionsFromFile (CompDisplay *d,
     {
 	if (s && p->vTable->getScreenOptions)
 	{
-	    option = (*p->vTable->getScreenOptions) (s, &nOption);
+	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	}
 	else if (p->vTable->getDisplayOptions)
 	{
-	    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 	}
     }
     else
@@ -832,9 +832,9 @@ iniSaveOptions (CompDisplay *d,
 	    return FALSE;
 
 	if (s)
-	    option = (*p->vTable->getScreenOptions) (s, &nOption);
+	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	else
-	    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
     }
     else
     {

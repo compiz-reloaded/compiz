@@ -250,7 +250,8 @@ typedef struct _WobblyWindow {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-wobblyGetScreenOptions (CompScreen *screen,
+wobblyGetScreenOptions (CompPlugin *plugin,
+			CompScreen *screen,
 			int	   *count)
 {
     WOBBLY_SCREEN (screen);
@@ -260,9 +261,10 @@ wobblyGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-wobblySetScreenOption (CompScreen      *screen,
-		     char	     *name,
-		     CompOptionValue *value)
+wobblySetScreenOption (CompPlugin      *plugin,
+		       CompScreen      *screen,
+		       char	       *name,
+		       CompOptionValue *value)
 {
     CompOption *o;
     int	       index;
@@ -2808,7 +2810,8 @@ wobblyPaintScreen (CompScreen		   *s,
 }
 
 static CompOption *
-wobblyGetDisplayOptions (CompDisplay *display,
+wobblyGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
 			 int	     *count)
 {
     WOBBLY_DISPLAY (display);
@@ -2818,7 +2821,8 @@ wobblyGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-wobblySetDisplayOption (CompDisplay     *display,
+wobblySetDisplayOption (CompPlugin  *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {

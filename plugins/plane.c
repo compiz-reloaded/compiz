@@ -463,7 +463,8 @@ planeWindowUngrabNotify (CompWindow *w)
 }
 
 static CompOption *
-planeGetDisplayOptions (CompDisplay *display,
+planeGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     PLANE_DISPLAY (display);
@@ -473,7 +474,8 @@ planeGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-planeSetDisplayOption (CompDisplay     *display,
+planeSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {

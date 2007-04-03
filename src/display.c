@@ -1484,7 +1484,7 @@ setDisplayOptionForPlugin (CompDisplay     *display,
 
     p = findActivePlugin (plugin);
     if (p && p->vTable->setDisplayOption)
-	return (*p->vTable->setDisplayOption) (display, name, value);
+	return (*p->vTable->setDisplayOption) (p, display, name, value);
 
     return FALSE;
 }

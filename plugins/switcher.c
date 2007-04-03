@@ -234,7 +234,8 @@ static float _boxVertices[] =
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-switchGetScreenOptions (CompScreen *screen,
+switchGetScreenOptions (CompPlugin *plugin,
+			CompScreen *screen,
 			int	   *count)
 {
     SWITCH_SCREEN (screen);
@@ -244,7 +245,8 @@ switchGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-switchSetScreenOption (CompScreen      *screen,
+switchSetScreenOption (CompPlugin *plugin,
+		       CompScreen      *screen,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -1977,8 +1979,9 @@ switchDamageWindowRect (CompWindow *w,
 }
 
 static CompOption *
-switchGetDisplayOptions (CompDisplay *display,
-		       int	   *count)
+switchGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
+			 int	     *count)
 {
     SWITCH_DISPLAY (display);
 
@@ -1987,7 +1990,8 @@ switchGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-switchSetDisplayOption (CompDisplay     *display,
+switchSetDisplayOption (CompPlugin  *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {

@@ -138,12 +138,12 @@ dbusGetOptionsFromPath (CompDisplay *d,
 	if (s)
 	{
 	    if (p->vTable->getScreenOptions)
-		return (*p->vTable->getScreenOptions) (s, nOption);
+		return (*p->vTable->getScreenOptions) (p, s, nOption);
 	}
 	else
 	{
 	    if (p->vTable->getDisplayOptions)
-		return (*p->vTable->getDisplayOptions) (d, nOption);
+		return (*p->vTable->getDisplayOptions) (p, d, nOption);
 	}
     }
 
@@ -1440,7 +1440,7 @@ dbusSetDisplayOptionForPlugin (CompDisplay     *d,
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 	    dbusSendChangeSignalForDisplayOption (d,
 						  compFindOption (option,
 								  nOption,
@@ -1505,7 +1505,7 @@ dbusSetScreenOptionForPlugin (CompScreen      *s,
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getScreenOptions) (s, &nOption);
+	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	    dbusSendChangeSignalForScreenOption (s,
 						 compFindOption (option,
 								 nOption,

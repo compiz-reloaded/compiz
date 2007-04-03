@@ -202,7 +202,8 @@ typedef struct _RotateScreen {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-rotateGetScreenOptions (CompScreen *screen,
+rotateGetScreenOptions (CompPlugin *plugin,
+			CompScreen *screen,
 			int	   *count)
 {
     ROTATE_SCREEN (screen);
@@ -212,7 +213,8 @@ rotateGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-rotateSetScreenOption (CompScreen      *screen,
+rotateSetScreenOption (CompPlugin      *plugin,
+		       CompScreen      *screen,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -1641,7 +1643,7 @@ rotateUpdateCubeOptions (CompScreen *s)
 	CompOption *options, *option;
 	int	   nOptions;
 
-	options = (*p->vTable->getScreenOptions) (s, &nOptions);
+	options = (*p->vTable->getScreenOptions) (p, s, &nOptions);
 	option = compFindOption (options, nOptions, "in", 0);
 	if (option)
 	    rs->invert = option->value.b ? -1 : 1;
@@ -1669,7 +1671,8 @@ rotateSetScreenOptionForPlugin (CompScreen      *s,
 }
 
 static CompOption *
-rotateGetDisplayOptions (CompDisplay *display,
+rotateGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
 			 int	     *count)
 {
     ROTATE_DISPLAY (display);
@@ -1679,7 +1682,8 @@ rotateGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-rotateSetDisplayOption (CompDisplay     *display,
+rotateSetDisplayOption (CompPlugin      *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {

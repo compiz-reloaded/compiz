@@ -680,7 +680,8 @@ cloneOutputChangeNotify (CompScreen *s)
 }
 
 static CompOption *
-cloneGetDisplayOptions (CompDisplay *display,
+cloneGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     CLONE_DISPLAY (display);
@@ -690,7 +691,8 @@ cloneGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-cloneSetDisplayOption (CompDisplay     *display,
+cloneSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {

@@ -1531,7 +1531,8 @@ waterHandleEvent (CompDisplay *d,
 }
 
 static CompOption *
-waterGetDisplayOptions (CompDisplay *display,
+waterGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     WATER_DISPLAY (display);
@@ -1541,7 +1542,8 @@ waterGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-waterSetDisplayOption (CompDisplay     *display,
+waterSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {

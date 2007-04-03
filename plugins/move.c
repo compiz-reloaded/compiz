@@ -717,7 +717,8 @@ moveDisplayInitOptions (MoveDisplay *md,
 }
 
 static CompOption *
-moveGetDisplayOptions (CompDisplay *display,
+moveGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     MOVE_DISPLAY (display);
@@ -727,7 +728,8 @@ moveGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-moveSetDisplayOption (CompDisplay    *display,
+moveSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay    *display,
 		      char	     *name,
 		      CompOptionValue *value)
 {

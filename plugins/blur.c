@@ -585,7 +585,8 @@ blurUpdateWindowMatch (BlurScreen *bs,
 }
 
 static CompOption *
-blurGetScreenOptions (CompScreen *screen,
+blurGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
 		      int	 *count)
 {
     BLUR_SCREEN (screen);
@@ -595,7 +596,8 @@ blurGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-blurSetScreenOption (CompScreen      *screen,
+blurSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
 		     char	     *name,
 		     CompOptionValue *value)
 {
@@ -2453,7 +2455,8 @@ blurWindowMoveNotify (CompWindow *w,
 }
 
 static CompOption *
-blurGetDisplayOptions (CompDisplay *display,
+blurGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     BLUR_DISPLAY (display);
@@ -2463,7 +2466,8 @@ blurGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-blurSetDisplayOption (CompDisplay     *display,
+blurSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
 {

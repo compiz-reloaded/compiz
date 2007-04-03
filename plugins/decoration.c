@@ -1052,7 +1052,8 @@ decorGetOutputExtentsForWindow (CompWindow	  *w,
 }
 
 static CompOption *
-decorGetDisplayOptions (CompDisplay *display,
+decorGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     DECOR_DISPLAY (display);
@@ -1062,7 +1063,8 @@ decorGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-decorSetDisplayOption (CompDisplay     *display,
+decorSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {
