@@ -3364,11 +3364,25 @@ addWindowSizeChanges (CompWindow     *w,
 	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
 	}
 
+	/* constrain window width if smaller than minimum width */
+	if (!(mask & CWWidth) && w->serverWidth < w->sizeHints.min_width)
+	{
+	    xwc->width = w->sizeHints.min_width;
+	    mask |= CWWidth;
+	}
+
 	/* constrain window width if greater than maximum width */
 	if (!(mask & CWWidth) && w->serverWidth > w->sizeHints.max_width)
 	{
 	    xwc->width = w->sizeHints.max_width;
 	    mask |= CWWidth;
+	}
+
+	/* constrain window height if smaller than minimum height */
+	if (!(mask & CWHeight) && w->serverHeight < w->sizeHints.min_height)
+	{
+	    xwc->height = w->sizeHints.min_height;
+	    mask |= CWHeight;
 	}
 
 	/* constrain window height if greater than maximum height */
