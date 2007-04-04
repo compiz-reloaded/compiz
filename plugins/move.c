@@ -406,23 +406,26 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if ((yRoot - workArea.y) - ms->snapOffY >= SNAP_OFF)
 		    {
-			int width = w->serverWidth;
+			if (!otherScreenGrabExist (s, "move", 0))
+			{
+			    int width = w->serverWidth;
 
-			w->saveMask |= CWX | CWY;
+			    w->saveMask |= CWX | CWY;
 
-			if (w->saveMask & CWWidth)
-			    width = w->saveWc.width;
+			    if (w->saveMask & CWWidth)
+				width = w->saveWc.width;
 
-			w->saveWc.x = xRoot - (width >> 1);
-			w->saveWc.y = yRoot + (w->input.top >> 1);
+			    w->saveWc.x = xRoot - (width >> 1);
+			    w->saveWc.y = yRoot + (w->input.top >> 1);
 
-			md->x = md->y = 0;
+			    md->x = md->y = 0;
 
-			maximizeWindow (w, 0);
+			    maximizeWindow (w, 0);
 
-			ms->snapOffY = ms->snapBackY;
+			    ms->snapOffY = ms->snapBackY;
 
-			return;
+			    return;
+			}
 		    }
 		}
 		else if (ms->origState & CompWindowStateMaximizedVertMask)
@@ -717,7 +720,8 @@ moveDisplayInitOptions (MoveDisplay *md,
 }
 
 static CompOption *
-moveGetDisplayOptions (CompDisplay *display,
+moveGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     MOVE_DISPLAY (display);
@@ -727,7 +731,8 @@ moveGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-moveSetDisplayOption (CompDisplay    *display,
+moveSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay    *display,
 		      char	     *name,
 		      CompOptionValue *value)
 {

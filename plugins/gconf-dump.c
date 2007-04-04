@@ -636,7 +636,7 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 
     if (p->vTable->getDisplayOptions)
     {
-	option = p->vTable->getDisplayOptions (d, &nOption);
+	option = p->vTable->getDisplayOptions (p, d, &nOption);
 	while (nOption--)
 	{
 	    if (option->type == CompOptionTypeAction)
@@ -668,7 +668,7 @@ dumpPluginOptions (CompDisplay *d, CompPlugin *p)
 
     if (p->vTable->getScreenOptions)
     {
-	option = p->vTable->getScreenOptions (&d->screens[0], &nOption);
+	option = p->vTable->getScreenOptions (p, &d->screens[0], &nOption);
 	while (nOption--)
 	{
 	    if (option->type == CompOptionTypeAction)

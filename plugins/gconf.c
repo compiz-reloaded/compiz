@@ -478,12 +478,12 @@ gconfGetOptionValue (CompDisplay *d,
 	    if (s)
 	    {
 		if (p->vTable->getScreenOptions)
-		    option = (*p->vTable->getScreenOptions) (s, &nOption);
+		    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	    }
 	    else
 	    {
 		if (p->vTable->getDisplayOptions)
-		    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 	    }
 	}
     }
@@ -864,7 +864,7 @@ gconfSetDisplayOptionForPlugin (CompDisplay     *d,
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 	    gconfSetOption (d, compFindOption (option, nOption, name, 0),
 			    "allscreens", plugin);
 	}
@@ -931,7 +931,7 @@ gconfSetScreenOptionForPlugin (CompScreen      *s,
 
 	    screen = g_strdup_printf ("screen%d", s->screenNum);
 
-	    option = (*p->vTable->getScreenOptions) (s, &nOption);
+	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	    gconfSetOption (s->display,
 			    compFindOption (option, nOption, name, 0),
 			    screen, plugin);
@@ -960,7 +960,7 @@ gconfInitPluginForDisplay (CompPlugin  *p,
 	CompOption *option;
 	int	   nOption;
 
-	option = (*p->vTable->getDisplayOptions) (d, &nOption);
+	option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 	while (nOption--)
 	    gconfInitOption (d, option++, "allscreens", p->vTable->name);
     }
@@ -988,7 +988,7 @@ gconfInitPluginForScreen (CompPlugin *p,
 
 	screen = g_strdup_printf ("screen%d", s->screenNum);
 
-	option = (*p->vTable->getScreenOptions) (s, &nOption);
+	option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	while (nOption--)
 	    gconfInitOption (s->display, option++, screen, p->vTable->name);
 

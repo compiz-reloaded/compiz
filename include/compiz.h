@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070328
+#define ABIVERSION 20070403
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -578,6 +578,13 @@ typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 typedef Bool (*SetDisplayOptionProc) (CompDisplay     *display,
 				      char	      *name,
 				      CompOptionValue *value);
+typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
+						    CompDisplay *display,
+					            int	        *count);
+typedef Bool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
+					    CompDisplay     *display,
+					    char	    *name,
+					    CompOptionValue *value);
 typedef Bool (*SetDisplayOptionForPluginProc) (CompDisplay     *display,
 					       char	       *plugin,
 					       char	       *name,
@@ -1555,6 +1562,13 @@ typedef CompOption *(*GetScreenOptionsProc) (CompScreen *screen,
 typedef Bool (*SetScreenOptionProc) (CompScreen      *screen,
 				     char	     *name,
 				     CompOptionValue *value);
+typedef CompOption *(*GetPluginScreenOptionsProc) (CompPlugin *plugin,
+						   CompScreen *screen,
+						   int	      *count);
+typedef Bool (*SetPluginScreenOptionProc) (CompPlugin      *plugin,
+					   CompScreen      *screen,
+					   char	           *name,
+					   CompOptionValue *value);
 typedef Bool (*SetScreenOptionForPluginProc) (CompScreen      *screen,
 					      char	      *plugin,
 					      char	      *name,
@@ -2738,10 +2752,10 @@ typedef struct _CompPluginVTable {
     InitPluginForWindowProc initWindow;
     FiniPluginForWindowProc finiWindow;
 
-    GetDisplayOptionsProc getDisplayOptions;
-    SetDisplayOptionProc  setDisplayOption;
-    GetScreenOptionsProc  getScreenOptions;
-    SetScreenOptionProc   setScreenOption;
+    GetPluginDisplayOptionsProc getDisplayOptions;
+    SetPluginDisplayOptionProc  setDisplayOption;
+    GetPluginScreenOptionsProc  getScreenOptions;
+    SetPluginScreenOptionProc   setScreenOption;
 
     CompPluginDep *deps;
     int		  nDeps;

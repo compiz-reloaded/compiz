@@ -174,7 +174,8 @@ placeUpdateMode (CompScreen *screen)
 }
 
 static CompOption *
-placeGetScreenOptions (CompScreen *screen,
+placeGetScreenOptions (CompPlugin *plugin,
+		       CompScreen *screen,
 		       int	  *count)
 {
     PLACE_SCREEN (screen);
@@ -184,7 +185,8 @@ placeGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-placeSetScreenOption (CompScreen      *screen,
+placeSetScreenOption (CompPlugin      *plugin,
+		      CompScreen      *screen,
 		      char	      *name,
 		      CompOptionValue *value)
 {

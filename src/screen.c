@@ -599,7 +599,7 @@ setScreenOptionForPlugin (CompScreen      *screen,
 
     p = findActivePlugin (plugin);
     if (p && p->vTable->setScreenOption)
-	return (*p->vTable->setScreenOption) (screen, name, value);
+	return (*p->vTable->setScreenOption) (p, screen, name, value);
 
     return FALSE;
 }

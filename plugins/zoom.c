@@ -142,7 +142,8 @@ typedef struct _ZoomScreen {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-zoomGetScreenOptions (CompScreen *screen,
+zoomGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
 		      int	 *count)
 {
     ZOOM_SCREEN (screen);
@@ -152,7 +153,8 @@ zoomGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-zoomSetScreenOption (CompScreen      *screen,
+zoomSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
 		     char	     *name,
 		     CompOptionValue *value)
 {
@@ -674,7 +676,7 @@ zoomUpdateCubeOptions (CompScreen *s)
 	CompOption *options, *option;
 	int	   nOptions;
 
-	options = (*p->vTable->getScreenOptions) (s, &nOptions);
+	options = (*p->vTable->getScreenOptions) (p, s, &nOptions);
 	option = compFindOption (options, nOptions, "in", 0);
 	if (option)
 	    zs->maxTranslate = option->value.b ? 0.85f : 1.5f;
@@ -702,7 +704,8 @@ zoomSetScreenOptionForPlugin (CompScreen      *s,
 }
 
 static CompOption *
-zoomGetDisplayOptions (CompDisplay *display,
+zoomGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     ZOOM_DISPLAY (display);
@@ -712,7 +715,8 @@ zoomGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-zoomSetDisplayOption (CompDisplay     *display,
+zoomSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
 {

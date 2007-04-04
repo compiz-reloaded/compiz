@@ -120,7 +120,8 @@ fadeUpdateWindowFadeMatch (CompDisplay     *display,
 }
 
 static CompOption *
-fadeGetScreenOptions (CompScreen *screen,
+fadeGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
 		      int	 *count)
 {
     FADE_SCREEN (screen);
@@ -130,7 +131,8 @@ fadeGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-fadeSetScreenOption (CompScreen      *screen,
+fadeSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
 		     char	     *name,
 		     CompOptionValue *value)
 {

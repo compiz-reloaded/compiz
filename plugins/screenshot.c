@@ -413,7 +413,8 @@ shotDisplayInitOptions (ShotDisplay *sd)
 }
 
 static CompOption *
-shotGetDisplayOptions (CompDisplay *display,
+shotGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     SHOT_DISPLAY (display);
@@ -423,7 +424,8 @@ shotGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-shotSetDisplayOption (CompDisplay    *display,
+shotSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay    *display,
 		      char	     *name,
 		      CompOptionValue *value)
 {

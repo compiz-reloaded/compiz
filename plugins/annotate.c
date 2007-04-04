@@ -842,7 +842,8 @@ annoDisplayInitOptions (AnnoDisplay *ad,
 }
 
 static CompOption *
-annoGetDisplayOptions (CompDisplay *display,
+annoGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     ANNO_DISPLAY (display);
@@ -852,8 +853,9 @@ annoGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-annoSetDisplayOption (CompDisplay    *display,
-		      char	     *name,
+annoSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      char	      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

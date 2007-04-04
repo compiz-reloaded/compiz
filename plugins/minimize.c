@@ -123,7 +123,8 @@ typedef struct _MinWindow {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-minGetScreenOptions (CompScreen *screen,
+minGetScreenOptions (CompPlugin *plugin,
+		     CompScreen *screen,
 		     int	*count)
 {
     MIN_SCREEN (screen);
@@ -133,7 +134,8 @@ minGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-minSetScreenOption (CompScreen      *screen,
+minSetScreenOption (CompPlugin      *plugin,
+		    CompScreen      *screen,
 		    char	    *name,
 		    CompOptionValue *value)
 {

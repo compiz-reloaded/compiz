@@ -196,7 +196,8 @@ videoSetSupportedHint (CompScreen *s)
 }
 
 static CompOption *
-videoGetDisplayOptions (CompDisplay *display,
+videoGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     VIDEO_DISPLAY (display);
@@ -206,7 +207,8 @@ videoGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-videoSetDisplayOption (CompDisplay     *display,
+videoSetDisplayOption (CompPlugin  *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {
