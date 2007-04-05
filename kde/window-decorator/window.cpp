@@ -1476,24 +1476,24 @@ KWD::Window::updateSelected (WId selectedId)
 void
 KWD::Window::updateWindowGeometry (void)
 {
-    unsigned int w, h, bw, d;
-    int          x, y;
-    XID		 root;
+    KWin::WindowInfo wInfo = KWin::windowInfo (mClientId, NET::WMGeometry);
+    QRect	     geometry = wInfo.geometry ();
 
-    KWD::trapXError ();
-    XGetGeometry (qt_xdisplay (), mClientId, &root, &x, &y, &w, &h, &bw, &d);
-    if (KWD::popXError ())
-	return;
+    if (mGeometry.width ()  != geometry.width () ||
+	mGeometry.height () != geometry.height ())
+    {
+	mGeometry = geometry;
 
-    w += bw * 2;
-    h += bw * 2;
+	if (resizeDecoration ())
+	    return;
+    }
+    else
+    {
+	mGeometry = geometry;
+    }
 
-    mGeometry = QRect (x, y, w, h);
-    if (resizeDecoration ())
-	return;
-
-    move (x + ROOT_OFF_X - mBorder.left,
-	  y + ROOT_OFF_Y - mBorder.top);
+    move (mGeometry.x () + ROOT_OFF_X - mBorder.left,
+	  mGeometry.y () + ROOT_OFF_Y - mBorder.top);
 }
 
 void
