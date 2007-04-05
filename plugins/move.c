@@ -320,10 +320,17 @@ moveHandleMotionEvent (CompScreen *s,
     {
 	CompWindow *w;
 	int	   dx, dy;
+	int	   wX, wY;
+	int	   wWidth, wHeight;
 
 	MOVE_DISPLAY (s->display);
 
 	w = md->w;
+
+	wX      = w->serverX;
+	wY      = w->serverY;
+	wWidth  = w->serverWidth  + w->serverBorderWidth * 2;
+	wHeight = w->serverHeight + w->serverBorderWidth * 2;
 
 	md->x += xRoot - lastPointerX;
 	md->y += yRoot - lastPointerY;
@@ -357,9 +364,9 @@ moveHandleMotionEvent (CompScreen *s,
 		    int x, y, width, height;
 		    int status;
 
-		    x	   = w->attrib.x + dx - w->input.left;
-		    y	   = w->attrib.y + dy - w->input.top;
-		    width  = w->width + w->input.left + w->input.right;
+		    x	   = wX + dx - w->input.left;
+		    y	   = wY + dy - w->input.top;
+		    width  = wWidth + w->input.left + w->input.right;
 		    height = w->input.top ? w->input.top : 1;
 
 		    status = XRectInRegion (md->region, x, y, width, height);
@@ -378,7 +385,7 @@ moveHandleMotionEvent (CompScreen *s,
 			    if (xStatus != RectangleIn)
 				dx += (dx < 0) ? 1 : -1;
 
-			    x = w->attrib.x + dx - w->input.left;
+			    x = wX + dx - w->input.left;
 			}
 
 			while (dy && status != RectangleIn)
@@ -390,7 +397,7 @@ moveHandleMotionEvent (CompScreen *s,
 			    if (status != RectangleIn)
 				dy += (dy < 0) ? 1 : -1;
 
-			    y = w->attrib.y + dy - w->input.top;
+			    y = wY + dy - w->input.top;
 			}
 		    }
 		    else
@@ -457,40 +464,44 @@ moveHandleMotionEvent (CompScreen *s,
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
 		min = workArea.y + w->input.top;
-		max = workArea.y + workArea.height -
-		    w->input.bottom - w->serverHeight -
-		    w->serverBorderWidth * 2;
+		max = workArea.y + workArea.height - w->input.bottom - wHeight;
 
-		if (w->attrib.y + dy < min)
-		    dy = min - w->attrib.y;
-		else if (w->attrib.y + dy > max)
-		    dy = max - w->attrib.y;
+		if (wY + dy < min)
+		    dy = min - wY;
+		else if (wY + dy > max)
+		    dy = max - wY;
 	    }
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
-		if (w->attrib.x > s->width || w->attrib.x + w->width < 0)
+		if (wX > s->width || wX + w->width < 0)
 		    return;
 
-		if (w->attrib.x + w->serverWidth + w->serverBorderWidth < 0)
+		if (wX + wWidth < 0)
 		    return;
 
 		min = workArea.x + w->input.left;
-		max = workArea.x + workArea.width -
-		    w->input.right - w->serverWidth -
-		    w->serverBorderWidth * 2;
+		max = workArea.x + workArea.width - w->input.right - wWidth;
 
-		if (w->attrib.x + dx < min)
-		    dx = min - w->attrib.x;
-		else if (w->attrib.x + dx > max)
-		    dx = max - w->attrib.x;
+		if (wX + dx < min)
+		    dx = min - wX;
+		else if (wX + dx > max)
+		    dx = max - wX;
 	    }
 	}
 
-	moveWindow (md->w, dx, dy, TRUE, FALSE);
+	if (dx || dy)
+	{
+	    moveWindow (w,
+			wX + dx - w->attrib.x,
+			wY + dy - w->attrib.y,
+			TRUE, FALSE);
 
-	md->x -= dx;
-	md->y -= dy;
+	    syncWindowPosition (w);
+
+	    md->x -= dx;
+	    md->y -= dy;
+	}
     }
 }
 
