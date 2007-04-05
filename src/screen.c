@@ -1137,6 +1137,9 @@ detectRefreshRateOfScreen (CompScreen *s)
 	config  = XRRGetScreenInfo (s->display->display, s->root);
 	value.i = (int) XRRConfigCurrentRate (config);
 
+	if (value.i == 0)
+	    value.i = defaultRefreshRate;
+
 	XRRFreeScreenConfigInfo (config);
 
 	name = s->opt[COMP_SCREEN_OPTION_REFRESH_RATE].name;
