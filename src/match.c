@@ -402,7 +402,7 @@ matchAddFromString (CompMatch  *match,
 	    int	level = 1;
 	    int length;
 
-	    j = i++;
+	    j = ++i;
 
 	    while (str[j] != '\0')
 	    {
