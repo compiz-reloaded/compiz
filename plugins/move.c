@@ -266,6 +266,9 @@ moveGetYConstrainRegion (CompScreen *s)
     CompWindow *w;
     Region     region;
     REGION     r;
+    XRectangle workArea;
+    BoxRec     extents;
+    int	       i;
 
     region = XCreateRegion ();
     if (!region)
@@ -276,33 +279,70 @@ moveGetYConstrainRegion (CompScreen *s)
 
     r.extents.x1 = MINSHORT;
     r.extents.y1 = 0;
-    r.extents.x2 = MAXSHORT;
+    r.extents.x2 = 0;
     r.extents.y2 = s->height;
 
     XUnionRegion (&r, region, region);
 
-    for (w = s->windows; w; w = w->next)
+    r.extents.x1 = s->width;
+    r.extents.x2 = MAXSHORT;
+
+    XUnionRegion (&r, region, region);
+
+    for (i = 0; i < s->nOutputDev; i++)
     {
-	if (!w->mapNum)
-	    continue;
+	XUnionRegion (&s->outputDev[i].region, region, region);
 
-	if (w->struts)
+	getWorkareaForOutput (s, i, &workArea);
+	extents = s->outputDev[i].region.extents;
+
+	for (w = s->windows; w; w = w->next)
 	{
-	    r.extents.x1 = w->struts->top.x;
-	    r.extents.y1 = w->struts->top.y;
-	    r.extents.x2 = r.extents.x1 + w->struts->top.width;
-	    r.extents.y2 = r.extents.y1 + w->struts->top.height;
+	    if (!w->mapNum)
+		continue;
 
-	    if (r.extents.y2 <= s->workArea.y)
-		XSubtractRegion (region, &r, region);
+	    if (w->struts)
+	    {
+		r.extents.x1 = w->struts->top.x;
+		r.extents.y1 = w->struts->top.y;
+		r.extents.x2 = r.extents.x1 + w->struts->top.width;
+		r.extents.y2 = r.extents.y1 + w->struts->top.height;
 
-	    r.extents.x1 = w->struts->bottom.x;
-	    r.extents.y1 = w->struts->bottom.y;
-	    r.extents.x2 = r.extents.x1 + w->struts->bottom.width;
-	    r.extents.y2 = r.extents.y1 + w->struts->bottom.height;
+		if (r.extents.x1 < extents.x1)
+		    r.extents.x1 = extents.x1;
+		if (r.extents.x2 > extents.x2)
+		    r.extents.x2 = extents.x2;
+		if (r.extents.y1 < extents.y1)
+		    r.extents.y1 = extents.y1;
+		if (r.extents.y2 > extents.y2)
+		    r.extents.y2 = extents.y2;
 
-	    if (r.extents.y1 >= (s->workArea.y + s->workArea.height))
-		XSubtractRegion (region, &r, region);
+		if (r.extents.x1 < r.extents.x2 && r.extents.y1 < r.extents.y2)
+		{
+		    if (r.extents.y2 <= workArea.y)
+			XSubtractRegion (region, &r, region);
+		}
+
+		r.extents.x1 = w->struts->bottom.x;
+		r.extents.y1 = w->struts->bottom.y;
+		r.extents.x2 = r.extents.x1 + w->struts->bottom.width;
+		r.extents.y2 = r.extents.y1 + w->struts->bottom.height;
+
+		if (r.extents.x1 < extents.x1)
+		    r.extents.x1 = extents.x1;
+		if (r.extents.x2 > extents.x2)
+		    r.extents.x2 = extents.x2;
+		if (r.extents.y1 < extents.y1)
+		    r.extents.y1 = extents.y1;
+		if (r.extents.y2 > extents.y2)
+		    r.extents.y2 = extents.y2;
+
+		if (r.extents.x1 < r.extents.x2 && r.extents.y1 < r.extents.y2)
+		{
+		    if (r.extents.y1 >= (workArea.y + workArea.height))
+			XSubtractRegion (region, &r, region);
+		}
+	    }
 	}
     }
 
