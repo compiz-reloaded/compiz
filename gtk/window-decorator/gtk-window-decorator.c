@@ -357,6 +357,8 @@ typedef struct _decor {
     gint	      button_width;
     gint	      width;
     gint	      height;
+    gint	      client_width;
+    gint	      client_height;
     gboolean	      decorated;
     gboolean	      active;
     PangoLayout	      *layout;
@@ -3607,8 +3609,18 @@ window_geometry_changed (WnckWindow *win)
 
     if (d->decorated)
     {
-	update_window_decoration_size (win);
-	update_event_windows (win);
+	int width, height;
+
+	wnck_window_get_geometry (win, NULL, NULL, &width, &height);
+
+	if (width != d->client_width || height != d->client_height)
+	{
+	    d->client_width  = width;
+	    d->client_height = height;
+
+	    update_window_decoration_size (win);
+	    update_event_windows (win);
+	}
     }
 }
 
@@ -3714,6 +3726,10 @@ window_opened (WnckScreen *screen,
     d = calloc (1, sizeof (decor_t));
     if (!d)
 	return;
+
+    wnck_window_get_geometry (win, NULL, NULL,
+			      &d->client_width,
+			      &d->client_height);
 
     d->active = wnck_window_is_active (win);
 
