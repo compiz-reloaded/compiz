@@ -1520,7 +1520,7 @@ modelStepObject (CompWindow *window,
 		    object->position.y > object->vertEdge.end)
 		    findNextWestEdge (window, object);
 
-		if (object->vertEdge.snapped == FALSE ||
+		if (!object->vertEdge.snapped ||
 		    objectReleaseWestEdge (window, model, object))
 		{
 		    object->position.x += object->velocity.x;
@@ -1555,7 +1555,7 @@ modelStepObject (CompWindow *window,
 		    object->position.y > object->vertEdge.end)
 		    findNextEastEdge (window, object);
 
-		if (object->vertEdge.snapped == FALSE ||
+		if (!object->vertEdge.snapped ||
 		    objectReleaseEastEdge (window, model, object))
 		{
 		    object->position.x += object->velocity.x;
@@ -1593,7 +1593,7 @@ modelStepObject (CompWindow *window,
 		    object->position.x > object->horzEdge.end)
 		    findNextNorthEdge (window, object);
 
-		if (object->horzEdge.snapped == FALSE ||
+		if (!object->horzEdge.snapped ||
 		    objectReleaseNorthEdge (window, model, object))
 		{
 		    object->position.y += object->velocity.y;
@@ -1628,7 +1628,7 @@ modelStepObject (CompWindow *window,
 		    object->position.x > object->horzEdge.end)
 		    findNextSouthEdge (window, object);
 
-		if (object->horzEdge.snapped == FALSE ||
+		if (!object->horzEdge.snapped ||
 		    objectReleaseSouthEdge (window, model, object))
 		{
 		    object->position.y += object->velocity.y;
