@@ -3840,8 +3840,8 @@ outputDeviceForGeometry (CompScreen *s,
 
     if (x1 >= x + width  ||
 	y1 >= y + height ||
-	x2 < x 		 ||
-	y2 < y)
+	x2 <= x		 ||
+	y2 <= y)
     {
 	output = outputDeviceForPoint (s, x + width  / 2, y + height / 2);
     }
