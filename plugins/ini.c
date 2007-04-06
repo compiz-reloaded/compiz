@@ -535,6 +535,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
     }
 
     IniActionProxy actionProxy;
+
     initActionProxy (&actionProxy);
 
     while (fgets (&tmp[0], MAX_OPTION_LENGTH, optionFile) != NULL)
@@ -656,17 +657,17 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    else
 	    {
 		/* option not found, it might be an action option */
-		actionTmp = strdup (optionName);
-		actionTmp = strchr (actionTmp, '_');
+		actionTmp = strchr (optionName, '_');
 		if (actionTmp)
 		{
 		    actionTmp++;  /* skip the _ */
 		    actionTest = strchr (actionTmp, '_');
-		    while (actionTest && actionTmp)
+		    while (actionTest)
 		    {
 			actionTmp++;
 			actionTest = strchr (actionTmp, '_');
-			actionTmp = strchr (actionTmp, '_');
+			if (actionTest)
+			    actionTmp = strchr (actionTmp, '_');
 		    }
 
 		    if (actionTmp)
@@ -761,7 +762,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
 				value.action.edgeMask   = actionProxy.edgeMask;
 				value.action.edgeButton = actionProxy.edgeButton;
 
-				if (plugin && p)
+				if (plugin)
 				{
 				    if (s)
 					status = (*s->setScreenOptionForPlugin) (s,
