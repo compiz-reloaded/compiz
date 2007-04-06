@@ -39,6 +39,8 @@
 
 #define FADE_FULLSCREEN_VISUAL_BELL_DEFAULT FALSE
 
+#define FADE_MINIMIZE_OPEN_CLOSE_DEFAULT TRUE
+
 static int displayPrivateIndex;
 
 typedef struct _FadeDisplay {
@@ -52,7 +54,8 @@ typedef struct _FadeDisplay {
 #define FADE_SCREEN_OPTION_WINDOW_MATCH		  1
 #define FADE_SCREEN_OPTION_VISUAL_BELL		  2
 #define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL 3
-#define FADE_SCREEN_OPTION_NUM			  4
+#define FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE	  4
+#define FADE_SCREEN_OPTION_NUM			  5
 
 typedef struct _FadeScreen {
     int			   windowPrivateIndex;
@@ -162,8 +165,10 @@ fadeSetScreenOption (CompPlugin      *plugin,
 	break;
     case FADE_SCREEN_OPTION_VISUAL_BELL:
     case FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL:
+    case FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
+	break;
     default:
 	break;
     }
@@ -208,6 +213,13 @@ fadeScreenInitOptions (FadeScreen *fs)
     o->longDesc	  = N_("Fullscreen fade effect on system beep");
     o->type	  = CompOptionTypeBool;
     o->value.b    = FADE_FULLSCREEN_VISUAL_BELL_DEFAULT;
+
+    o = &fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE];
+    o->name	  = "minimize_open_close";
+    o->shortDesc  = N_("Fade On Minimize/Open/Close");
+    o->longDesc	  = N_("Fade effect on minimize/open/close window events");
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = FADE_MINIMIZE_OPEN_CLOSE_DEFAULT;
 }
 
 static void
@@ -458,6 +470,9 @@ fadeHandleEvent (CompDisplay *d,
 	{
 	    FADE_SCREEN (w->screen);
 
+	    if (!fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
+		break;
+
 	    if (w->texture->pixmap && matchEval (&fs->match, w))
 	    {
 		FADE_WINDOW (w);
@@ -485,6 +500,9 @@ fadeHandleEvent (CompDisplay *d,
 
 	    fw->shaded = w->shaded;
 
+	    if (!fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
+		break;
+
 	    if (!fw->shaded && w->texture->pixmap && matchEval (&fs->match, w))
 	    {
 		if (fw->opacity == 0xffff)
@@ -505,6 +523,11 @@ fadeHandleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
+	    FADE_SCREEN(w->screen);
+
+	    if (!fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
+		break;
+
 	    fadeWindowStop (w);
 
 	    if (w->state & CompWindowStateDisplayModalMask)
@@ -613,7 +636,10 @@ fadeDamageWindowRect (CompWindow *w,
 	}
 	else if (matchEval (&fs->match, w))
 	{
-	    fw->opacity = 0;
+	    if (fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
+	    {
+		fw->opacity = 0;
+	    }
 	}
     }
 

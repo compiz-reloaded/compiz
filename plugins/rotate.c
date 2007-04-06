@@ -727,7 +727,8 @@ rotate (CompDisplay     *d,
 	if (s->hsize < 2)
 	    return FALSE;
 
-	if (otherScreenGrabExist (s, "rotate", "move", "switcher", "cube", 0))
+	if (otherScreenGrabExist (s, "rotate", "move", "switcher", 
+				  "group-drag", "cube", 0))
 	    return FALSE;
 
 	direction = getIntOptionNamed (option, nOption, "direction", 0);
@@ -992,7 +993,7 @@ rotateFlipLeft (void *closure)
     rs->moveTo = 0.0f;
     rs->slow = FALSE;
 
-    if (otherScreenGrabExist (s, "rotate", "move", 0))
+    if (otherScreenGrabExist (s, "rotate", "move", "group-drag", 0))
 	return FALSE;
 
     warpX = pointerX + s->width;
@@ -1037,7 +1038,7 @@ rotateFlipRight (void *closure)
     rs->moveTo = 0.0f;
     rs->slow = FALSE;
 
-    if (otherScreenGrabExist (s, "rotate", "move", 0))
+    if (otherScreenGrabExist (s, "rotate", "move", "group-drag", 0))
 	return FALSE;
 
     warpX = pointerX - s->width;
@@ -1086,7 +1087,7 @@ rotateEdgeFlip (CompScreen      *s,
     if (s->hsize < 2)
 	return;
 
-    if (otherScreenGrabExist (s, "rotate", "move", 0))
+    if (otherScreenGrabExist (s, "rotate", "move", "group-drag", 0))
 	return;
 
     if (state & CompActionStateInitEdgeDnd)
@@ -1097,7 +1098,7 @@ rotateEdgeFlip (CompScreen      *s,
 	if (otherScreenGrabExist (s, "rotate", 0))
 	    return;
     }
-    else if (otherScreenGrabExist (s, "rotate", 0))
+    else if (otherScreenGrabExist (s, "rotate", "group-drag", 0))
     {
 	ROTATE_SCREEN (s);
 
@@ -1110,6 +1111,12 @@ rotateEdgeFlip (CompScreen      *s,
 	/* bail out if window is horizontally maximized or fullscreen */
 	if (rs->grabWindow->state & (CompWindowStateMaximizedHorzMask |
 				     CompWindowStateFullscreenMask))
+	    return;
+    }
+    else if (otherScreenGrabExist (s, "rotate", 0))
+    {
+	/* in that case, 'group-drag' must be the active screen grab */
+	if (!rd->opt[ROTATE_DISPLAY_OPTION_EDGEFLIP_WINDOW].value.b)
 	    return;
     }
     else

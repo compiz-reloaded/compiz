@@ -3314,7 +3314,7 @@ addWindowSizeChanges (CompWindow     *w,
     x = (vx - w->screen->x) * w->screen->width;
     y = (vy - w->screen->y) * w->screen->height;
 
-   output = outputDeviceForGeometry (w->screen,
+    output = outputDeviceForGeometry (w->screen,
 				      oldX,
 				      oldY,
 				      oldWidth,
@@ -3364,11 +3364,25 @@ addWindowSizeChanges (CompWindow     *w,
 	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
 	}
 
+	/* constrain window width if smaller than minimum width */
+	if (!(mask & CWWidth) && w->serverWidth < w->sizeHints.min_width)
+	{
+	    xwc->width = w->sizeHints.min_width;
+	    mask |= CWWidth;
+	}
+
 	/* constrain window width if greater than maximum width */
 	if (!(mask & CWWidth) && w->serverWidth > w->sizeHints.max_width)
 	{
 	    xwc->width = w->sizeHints.max_width;
 	    mask |= CWWidth;
+	}
+
+	/* constrain window height if smaller than minimum height */
+	if (!(mask & CWHeight) && w->serverHeight < w->sizeHints.min_height)
+	{
+	    xwc->height = w->sizeHints.min_height;
+	    mask |= CWHeight;
 	}
 
 	/* constrain window height if greater than maximum height */
@@ -3977,6 +3991,9 @@ getOuterRectOfWindow (CompWindow *w,
     r->height = w->height + w->input.top  + w->input.bottom;
 }
 
+#define PVertResizeInc (1 << 0)
+#define PHorzResizeInc (1 << 1)
+
 Bool
 constrainNewWindowSize (CompWindow *w,
 			int        width,
@@ -3995,11 +4012,20 @@ constrainNewWindowSize (CompWindow *w,
     int		     max_width = MAXSHORT;
     int		     max_height = MAXSHORT;
     long	     flags = hints->flags;
+    long	     resizeIncFlags = (flags & PResizeInc) ? ~0 : 0;
 
     if (d->opt[COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED].value.b)
     {
-	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    flags &= ~(PResizeInc | PAspect);
+	if (w->state & MAXIMIZE_STATE)
+	{
+	    flags &= ~PAspect;
+
+	    if (w->state & CompWindowStateMaximizedHorzMask)
+		resizeIncFlags &= ~PHorzResizeInc;
+
+	    if (w->state & CompWindowStateMaximizedVertMask)
+		resizeIncFlags &= ~PVertResizeInc;
+	}
     }
 
     /* Ater gdk_window_constrain_size(), which is partially borrowed from fvwm.
@@ -4043,11 +4069,11 @@ constrainNewWindowSize (CompWindow *w,
 	max_height = hints->max_height;
     }
 
-    if (flags & PResizeInc)
-    {
+    if (resizeIncFlags & PHorzResizeInc)
 	xinc = MAX (xinc, hints->width_inc);
+
+    if (resizeIncFlags & PVertResizeInc)
 	yinc = MAX (yinc, hints->height_inc);
-    }
 
     /* clamp width and height to min and max values */
     width  = CLAMP (width, min_width, max_width);

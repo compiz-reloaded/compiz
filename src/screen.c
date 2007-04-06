@@ -1137,6 +1137,9 @@ detectRefreshRateOfScreen (CompScreen *s)
 	config  = XRRGetScreenInfo (s->display->display, s->root);
 	value.i = (int) XRRConfigCurrentRate (config);
 
+	if (value.i == 0)
+	    value.i = defaultRefreshRate;
+
 	XRRFreeScreenConfigInfo (config);
 
 	name = s->opt[COMP_SCREEN_OPTION_REFRESH_RATE].name;
@@ -3838,10 +3841,10 @@ outputDeviceForGeometry (CompScreen *s,
     x2 = s->outputDev[output].region.extents.x2;
     y2 = s->outputDev[output].region.extents.y2;
 
-    if (x1 > x + width  ||
-	y1 > y + height ||
-	x2 < x		||
-	y2 < y)
+    if (x1 >= x + width  ||
+	y1 >= y + height ||
+	x2 <= x		 ||
+	y2 <= y)
     {
 	output = outputDeviceForPoint (s, x + width  / 2, y + height / 2);
     }
