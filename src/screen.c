@@ -459,16 +459,6 @@ setScreenOption (CompScreen      *screen,
 	return FALSE;
 
     switch (index) {
-    case COMP_SCREEN_OPTION_LIGHTING:
-    case COMP_SCREEN_OPTION_UNREDIRECT_FS:
-    case COMP_SCREEN_OPTION_SYNC_TO_VBLANK:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
     case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
 	if (compSetBoolOption (o, value))
 	{
@@ -583,6 +573,8 @@ setScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
