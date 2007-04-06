@@ -1437,6 +1437,7 @@ setDisplayOption (CompDisplay     *display,
 	    setAudibleBell (display, o->value.b);
 	    return TRUE;
 	}
+	break;
     default:
 	if (compSetOption (o, value))
 	    return TRUE;

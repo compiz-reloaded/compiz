@@ -572,6 +572,7 @@ setScreenOption (CompScreen      *screen,
 
 	    return TRUE;
 	}
+	break;
     default:
 	if (compSetOption (o, value))
 	    return TRUE;
