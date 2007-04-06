@@ -4371,8 +4371,14 @@ position_action_menu (GtkMenu  *menu,
 		      gpointer user_data)
 {
     WnckWindow *win = (WnckWindow *) user_data;
+    decor_t    *d = g_object_get_data (G_OBJECT (win), "decor");
+    gint	bx, by, width, height;
 
-    wnck_window_get_geometry (win, x, y, NULL, NULL);
+    wnck_window_get_geometry (win, x, y, &width, &height);
+
+    if ((*theme_get_button_position) (d, BUTTON_MENU, width, height,
+				      &bx, &by, &width, &height))
+	*x = *x - _win_extents.left + bx;
 
     *push_in = TRUE;
 }
