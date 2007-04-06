@@ -274,10 +274,6 @@ scaleSetScreenOption (CompPlugin  *plugin,
 	    return TRUE;
 	}
 	break;
-    case SCALE_SCREEN_OPTION_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
     case SCALE_SCREEN_OPTION_DARKEN_BACK:
 	if (compSetBoolOption (o, value))
 	{
@@ -307,10 +303,9 @@ scaleSetScreenOption (CompPlugin  *plugin,
 	    }
 	}
 	break;
-    case SCALE_SCREEN_OPTION_HOVER_TIME:
-	if (compSetIntOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

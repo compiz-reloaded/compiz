@@ -204,10 +204,9 @@ zoomSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case ZOOM_SCREEN_OPTION_FILTER_LINEAR:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

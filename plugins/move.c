@@ -808,14 +808,9 @@ moveSetDisplayOption (CompPlugin  *plugin,
 	    return TRUE;
 	}
 	break;
-    case MOVE_DISPLAY_OPTION_CONSTRAIN_Y:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

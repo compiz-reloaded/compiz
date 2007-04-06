@@ -443,14 +443,9 @@ shotSetDisplayOption (CompPlugin  *plugin,
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
 	break;
-    case SHOT_DISPLAY_OPTION_DIR:
-	if (compSetStringOption (o, value))
-	    return TRUE;
-	break;
-    case SHOT_DISPLAY_OPTION_LAUNCH_APP:
-	if (compSetStringOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

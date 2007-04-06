@@ -874,16 +874,9 @@ annoSetDisplayOption (CompPlugin      *plugin,
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
 	break;
-    case ANNO_DISPLAY_OPTION_FILL_COLOR:
-    case ANNO_DISPLAY_OPTION_STROKE_COLOR:
-	if (compSetColorOption (o, value))
-	    return TRUE;
-	break;
-    case ANNO_DISPLAY_OPTION_LINE_WIDTH:
-    case ANNO_DISPLAY_OPTION_STROKE_WIDTH:
-	if (compSetFloatOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

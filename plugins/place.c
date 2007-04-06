@@ -200,10 +200,6 @@ placeSetScreenOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case PLACE_SCREEN_OPTION_WORKAROUND:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case PLACE_SCREEN_OPTION_MODE:
 	if (compSetStringOption (o, value))
 	{
@@ -223,13 +219,9 @@ placeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case PLACE_SCREEN_OPTION_POSITION_X_VALUES:
-    case PLACE_SCREEN_OPTION_POSITION_Y_VALUES:
-    case PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES:
-    case PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES:
-	if (compSetOptionList (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

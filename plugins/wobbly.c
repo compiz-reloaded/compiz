@@ -276,19 +276,6 @@ wobblySetScreenOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case WOBBLY_SCREEN_OPTION_FRICTION:
-    case WOBBLY_SCREEN_OPTION_SPRING_K:
-	if (compSetFloatOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_SCREEN_OPTION_GRID_RESOLUTION:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_SCREEN_OPTION_MIN_GRID_SIZE:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
     case WOBBLY_SCREEN_OPTION_MAP_EFFECT:
 	if (compSetStringOption (o, value))
 	{
@@ -319,17 +306,9 @@ wobblySetScreenOption (CompPlugin      *plugin,
 	    }
 	}
 	break;
-    case WOBBLY_SCREEN_OPTION_MAP_WINDOW_MATCH:
-    case WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_MATCH:
-    case WOBBLY_SCREEN_OPTION_MOVE_WINDOW_MATCH:
-    case WOBBLY_SCREEN_OPTION_GRAB_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
