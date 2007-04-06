@@ -435,6 +435,10 @@ Bool
 compSetOptionList (CompOption      *option,
 		   CompOptionValue *value);
 
+Bool
+compSetOption (CompOption      *option,
+	       CompOptionValue *value);
+
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value);
 
