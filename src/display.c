@@ -1383,18 +1383,6 @@ setDisplayOption (CompDisplay     *display,
 	    return TRUE;
 	}
 	break;
-    case COMP_DISPLAY_OPTION_CLICK_TO_FOCUS:
-    case COMP_DISPLAY_OPTION_AUTORAISE:
-    case COMP_DISPLAY_OPTION_RAISE_ON_CLICK:
-    case COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS:
-    case COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case COMP_DISPLAY_OPTION_AUTORAISE_DELAY:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
     case COMP_DISPLAY_OPTION_PING_DELAY:
 	if (compSetIntOption (o, value))
 	{
@@ -1405,24 +1393,6 @@ setDisplayOption (CompDisplay     *display,
 		compAddTimeout (o->value.i, pingTimeout, display);
 	    return TRUE;
 	}
-	break;
-    case COMP_DISPLAY_OPTION_COMMAND0:
-    case COMP_DISPLAY_OPTION_COMMAND1:
-    case COMP_DISPLAY_OPTION_COMMAND2:
-    case COMP_DISPLAY_OPTION_COMMAND3:
-    case COMP_DISPLAY_OPTION_COMMAND4:
-    case COMP_DISPLAY_OPTION_COMMAND5:
-    case COMP_DISPLAY_OPTION_COMMAND6:
-    case COMP_DISPLAY_OPTION_COMMAND7:
-    case COMP_DISPLAY_OPTION_COMMAND8:
-    case COMP_DISPLAY_OPTION_COMMAND9:
-    case COMP_DISPLAY_OPTION_COMMAND10:
-    case COMP_DISPLAY_OPTION_COMMAND11:
-    case COMP_DISPLAY_OPTION_SCREENSHOT:
-    case COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT:
-    case COMP_DISPLAY_OPTION_TERMINAL:
-	if (compSetStringOption (o, value))
-	    return TRUE;
 	break;
     case COMP_DISPLAY_OPTION_CLOSE_WINDOW:
     case COMP_DISPLAY_OPTION_MAIN_MENU:
@@ -1468,6 +1438,8 @@ setDisplayOption (CompDisplay     *display,
 	    return TRUE;
 	}
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
