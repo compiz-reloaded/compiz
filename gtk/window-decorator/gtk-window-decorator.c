@@ -2862,6 +2862,23 @@ meta_get_event_window_position (decor_t *d,
 }
 
 static gboolean
+meta_button_present (MetaButtonLayout   *button_layout,
+		     MetaButtonFunction function)
+{
+    int i;
+		     
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+	if (button_layout->left_buttons[i] == function)
+	    return TRUE;
+
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+	if (button_layout->right_buttons[i] == function)
+	    return TRUE;
+
+    return FALSE;
+}
+
+static gboolean
 meta_get_button_position (decor_t *d,
 			  gint    i,
 			  gint	  width,
@@ -2890,40 +2907,73 @@ meta_get_button_position (decor_t *d,
 
     switch (i) {
     case BUTTON_MENU:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_MENU))
+	    return FALSE;
+
 	space = &fgeom.menu_rect;
 	break;
     case BUTTON_MIN:
+	if (!meta_button_present (&button_layout,
+				  META_BUTTON_FUNCTION_MINIMIZE))
+	    return FALSE;
+
 	space = &fgeom.min_rect;
 	break;
     case BUTTON_MAX:
+	if (!meta_button_present (&button_layout,
+				  META_BUTTON_FUNCTION_MAXIMIZE))
+	    return FALSE;
+
 	space = &fgeom.max_rect;
+	break;
+    case BUTTON_CLOSE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_CLOSE))
+	    return FALSE;
+
+	space = &fgeom.close_rect;
 	break;
 
 #ifdef HAVE_METACITY_2_17_0
     case BUTTON_SHADE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_SHADE))
+	    return FALSE;
+
 	space = &fgeom.shade_rect;
 	break;
     case BUTTON_ABOVE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_ABOVE))
+	    return FALSE;
+
 	space = &fgeom.above_rect;
 	break;
     case BUTTON_STICK:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_STICK))
+	    return FALSE;
+
 	space = &fgeom.stick_rect;
 	break;
     case BUTTON_UNSHADE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNSHADE))
+	    return FALSE;
+
 	space = &fgeom.unshade_rect;
 	break;
     case BUTTON_UNABOVE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNABOVE))
+	    return FALSE;
+
 	space = &fgeom.unabove_rect;
 	break;
     case BUTTON_UNSTICK:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNSTICK))
+	    return FALSE;
+
 	space = &fgeom.unstick_rect;
 	break;
 #endif
 
-    case BUTTON_CLOSE:
     default:
-	space = &fgeom.close_rect;
-	break;
+	return FALSE;
     }
 
 #ifdef HAVE_METACITY_2_15_21
