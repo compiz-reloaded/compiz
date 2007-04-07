@@ -1812,8 +1812,10 @@ meta_get_decoration_geometry (decor_t		*d,
     if (d->state & WNCK_WINDOW_STATE_FULLSCREEN)
 	*flags |= META_FRAME_FULLSCREEN;
 
+#ifdef HAVE_METACITY_2_17_0
     if (d->state & WNCK_WINDOW_STATE_ABOVE)
 	*flags |= META_FRAME_ABOVE;
+#endif
 
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
