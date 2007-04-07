@@ -5629,7 +5629,9 @@ double_click_titlebar_changed (GConfClient *client)
 	g_free (action);
     }
 }
+#endif
 
+#ifdef USE_METACITY
 static MetaButtonFunction
 meta_button_function_from_string (const char *str)
 {
@@ -6146,13 +6148,13 @@ button_layout_changed (GConfClient *client)
 
 	return TRUE;
     }
-#endif
 
     if (meta_button_layout_set)
     {
 	meta_button_layout_set = FALSE;
 	return TRUE;
     }
+#endif
 
     return FALSE;
 }
