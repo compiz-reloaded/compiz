@@ -1653,6 +1653,8 @@ meta_function_to_type (MetaButtonFunction function)
 	return META_BUTTON_TYPE_MAXIMIZE;
     case META_BUTTON_FUNCTION_CLOSE:
 	return META_BUTTON_TYPE_CLOSE;
+
+#ifdef HAVE_METACITY_2_17_0
     case META_BUTTON_FUNCTION_SHADE:
 	return META_BUTTON_TYPE_SHADE;
     case META_BUTTON_FUNCTION_ABOVE:
@@ -1665,6 +1667,8 @@ meta_function_to_type (MetaButtonFunction function)
 	return META_BUTTON_TYPE_UNABOVE;
     case META_BUTTON_FUNCTION_UNSTICK:
 	return META_BUTTON_TYPE_UNSTICK;
+#endif
+
     default:
 	break;
     }
@@ -1707,6 +1711,8 @@ meta_button_state_for_button_type (decor_t	  *d,
 	return meta_button_state (d->button_states[BUTTON_MIN]);
     case META_BUTTON_TYPE_MENU:
 	return meta_button_state (d->button_states[BUTTON_MENU]);
+
+#ifdef HAVE_METACITY_2_17_0
     case META_BUTTON_TYPE_SHADE:
 	return meta_button_state (d->button_states[BUTTON_SHADE]);
     case META_BUTTON_TYPE_ABOVE:
@@ -1719,6 +1725,8 @@ meta_button_state_for_button_type (decor_t	  *d,
 	return meta_button_state (d->button_states[BUTTON_UNABOVE]);
     case META_BUTTON_TYPE_UNSTICK:
 	return meta_button_state (d->button_states[BUTTON_UNSTICK]);
+#endif
+
     default:
 	break;
     }
@@ -2884,9 +2892,8 @@ meta_get_button_position (decor_t *d,
     case BUTTON_MAX:
 	space = &fgeom.max_rect;
 	break;
-    case BUTTON_CLOSE:
-	space = &fgeom.close_rect;
-	break;
+
+#ifdef HAVE_METACITY_2_17_0
     case BUTTON_SHADE:
 	space = &fgeom.shade_rect;
 	break;
@@ -2903,8 +2910,13 @@ meta_get_button_position (decor_t *d,
 	space = &fgeom.unabove_rect;
 	break;
     case BUTTON_UNSTICK:
-    default:
 	space = &fgeom.unstick_rect;
+	break;
+#endif
+
+    case BUTTON_CLOSE:
+    default:
+	space = &fgeom.close_rect;
 	break;
     }
 
@@ -5625,6 +5637,8 @@ meta_button_function_from_string (const char *str)
 	return META_BUTTON_FUNCTION_MAXIMIZE;
     else if (strcmp (str, "close") == 0)
 	return META_BUTTON_FUNCTION_CLOSE;
+
+#ifdef HAVE_METACITY_2_17_0
     else if (strcmp (str, "shade") == 0)
 	return META_BUTTON_FUNCTION_SHADE;
     else if (strcmp (str, "above") == 0)
@@ -5637,6 +5651,8 @@ meta_button_function_from_string (const char *str)
 	return META_BUTTON_FUNCTION_UNABOVE;
     else if (strcmp (str, "unstick") == 0)
 	return META_BUTTON_FUNCTION_UNSTICK;
+#endif
+
     else
 	return META_BUTTON_FUNCTION_LAST;
 }
