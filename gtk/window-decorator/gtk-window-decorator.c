@@ -1794,9 +1794,6 @@ meta_get_decoration_geometry (decor_t		*d,
     if ((d->state & META_MAXIMIZED) == META_MAXIMIZED)
 	*flags |= META_FRAME_MAXIMIZED;
 
-    if (d->state & WNCK_WINDOW_STATE_SHADED)
-	*flags |= META_FRAME_SHADED;
-
     if (d->state & WNCK_WINDOW_STATE_STICKY)
 	*flags |= META_FRAME_STUCK;
 
