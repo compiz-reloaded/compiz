@@ -2102,7 +2102,7 @@ addWindow (CompScreen *screen,
 
 	mapWindow (w);
 
-	updateWindowAttributes (w, FALSE);
+	updateWindowAttributes (w, CompStackingUpdateModeNormal);
     }
     else if (!w->attrib.override_redirect)
     {
@@ -3799,11 +3799,11 @@ restackWindowBelow (CompWindow *w,
 }
 
 void
-updateWindowAttributes (CompWindow *w,
-			Bool	   aboveFs)
+updateWindowAttributes (CompWindow             *w,
+			CompStackingUpdateMode stackingMode)
 {
     XWindowChanges xwc;
-    int		   mask;
+    int		   mask = 0;
 
     if (w->attrib.override_redirect || !w->managed)
 	return;
@@ -3817,7 +3817,14 @@ updateWindowAttributes (CompWindow *w,
 	showWindow (w);
     }
 
-    mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+    if (stackingMode != CompStackingUpdateModeNone)
+    {
+	Bool aboveFs;
+
+	aboveFs = (stackingMode == CompStackingUpdateModeAboveFullscreen);
+        mask |= addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+    }
+
     mask |= addWindowSizeChanges (w, &xwc,
 				  w->serverX, w->serverY,
 				  w->serverWidth, w->serverHeight,
@@ -3929,7 +3936,7 @@ activateWindow (CompWindow *w)
 	return;
 
     ensureWindowVisibility (w);
-    updateWindowAttributes (w, TRUE);
+    updateWindowAttributes (w, CompStackingUpdateModeAboveFullscreen);
     moveInputFocusToWindow (w);
 }
 
@@ -4328,7 +4335,7 @@ maximizeWindow (CompWindow *w,
 
     changeWindowState (w, w->state);
 
-    updateWindowAttributes (w, FALSE);
+    updateWindowAttributes (w, CompStackingUpdateModeNone);
 }
 
 Bool
