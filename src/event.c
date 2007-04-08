@@ -195,7 +195,7 @@ autoRaiseTimeout (void *closure)
 
 	w = findWindowAtDisplay (display, display->autoRaiseWindow);
 	if (w)
-	    updateWindowAttributes (w, FALSE);
+	    updateWindowAttributes (w, CompStackingUpdateModeNormal);
     }
 
     return FALSE;
@@ -1348,7 +1348,8 @@ handleEvent (CompDisplay *d,
 		if (w)
 		{
 		    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
-			updateWindowAttributes (w, TRUE);
+			updateWindowAttributes (w, 
+					CompStackingUpdateModeAboveFullscreen);
 
 		    if (!(w->type & CompWindowTypeDockMask))
 			moveInputFocusToWindow (w);
@@ -1652,7 +1653,7 @@ handleEvent (CompDisplay *d,
 
 		    changeWindowState (w, w->state);
 
-		    updateWindowAttributes (w, FALSE);
+		    updateWindowAttributes (w, CompStackingUpdateModeNone);
 		}
 	    }
 	}
@@ -1855,7 +1856,7 @@ handleEvent (CompDisplay *d,
 
 		XMapWindow (d->display, event->xmaprequest.window);
 
-		updateWindowAttributes (w, FALSE);
+		updateWindowAttributes (w, CompStackingUpdateModeNormal);
 
 		if (focusWindowOnMap (w))
 		{
@@ -1996,7 +1997,8 @@ handleEvent (CompDisplay *d,
 				    compAddTimeout (delay, autoRaiseTimeout, d);
 			    }
 			    else
-				updateWindowAttributes (w, FALSE);
+				updateWindowAttributes (w, 
+					CompStackingUpdateModeNormal);
 			}
 		    }
 		}

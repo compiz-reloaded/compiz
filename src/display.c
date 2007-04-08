@@ -733,7 +733,7 @@ shade (CompDisplay     *d,
     if (w && (w->actions & CompWindowActionShadeMask))
     {
 	w->state ^= CompWindowStateShadedMask;
-	updateWindowAttributes (w, FALSE);
+	updateWindowAttributes (w, CompStackingUpdateModeNone);
     }
 
     return TRUE;
