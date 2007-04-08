@@ -2684,7 +2684,7 @@ get_mwm_prop (Window xwindow)
     Atom	  actual;
     int		  err, result, format;
     unsigned long n, left;
-    MwmHints	  *mwm_hints;
+    unsigned char *data;
     unsigned int  decor = MWM_DECOR_ALL;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
@@ -2693,22 +2693,23 @@ get_mwm_prop (Window xwindow)
 
     result = XGetWindowProperty (xdisplay, xwindow, mwm_hints_atom,
 				 0L, 20L, FALSE, mwm_hints_atom,
-				 &actual, &format, &n, &left,
-				 (unsigned char **) &mwm_hints);
+				 &actual, &format, &n, &left, &data);
 
     err = gdk_error_trap_pop ();
     if (err != Success || result != Success)
 	return decor;
 
-    if (n && mwm_hints)
+    if (n && data)
     {
+	MwmHints *mwm_hints = (MwmHints *) data;
+
 	if (n >= PROP_MOTIF_WM_HINT_ELEMENTS)
 	{
 	    if (mwm_hints->flags & MWM_HINTS_DECORATIONS)
 		decor = mwm_hints->decorations;
 	}
 
-	XFree (mwm_hints);
+	XFree (data);
     }
 
     return decor;
@@ -4807,7 +4808,7 @@ get_client_machine (Window xwindow)
 {
     Atom   atom, type;
     gulong nitems, bytes_after;
-    gchar  *str = NULL;
+    guchar *str = NULL;
     int    format, result;
     char   *retval;
 
@@ -4819,7 +4820,7 @@ get_client_machine (Window xwindow)
 				 xwindow, atom,
 				 0, G_MAXLONG,
 				 FALSE, XA_STRING, &type, &format, &nitems,
-				 &bytes_after, (guchar **) &str);
+				 &bytes_after, &str);
 
     gdk_error_trap_pop ();
 
@@ -4832,7 +4833,7 @@ get_client_machine (Window xwindow)
 	return NULL;
     }
 
-    retval = g_strdup (str);
+    retval = g_strdup ((gchar *) str);
 
     XFree (str);
 
