@@ -35,7 +35,7 @@
 #define DEFAULT_PLUGINS     "ini,inotify,png,decoration,move,resize,switcher"
 #define NUM_DEFAULT_PLUGINS 7
 #define MAX_OPTION_LENGTH   1024
-#define HOME_OPTION_DIR     ".compiz/options"
+#define HOME_OPTIONDIR     ".compiz/options"
 #define CORE_NAME           "general"
 #define FILE_SUFFIX         ".conf"
 
@@ -249,10 +249,10 @@ iniGetHomeDir (char **homeDir)
     home = getenv ("HOME");
     if (home)
     {
-	tmp = malloc (strlen (home) + strlen (HOME_OPTION_DIR) + 2);
+	tmp = malloc (strlen (home) + strlen (HOME_OPTIONDIR) + 2);
 	if (tmp)
 	{
-	    sprintf (tmp, "%s/%s", home, HOME_OPTION_DIR);
+	    sprintf (tmp, "%s/%s", home, HOME_OPTIONDIR);
 	    (*homeDir) = strdup (tmp);
 	    free (tmp);
 
