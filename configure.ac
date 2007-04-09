@@ -57,11 +57,6 @@ if test "x$GCC" = "xyes"; then
   *) CFLAGS="$CFLAGS -Wnested-externs" ;;
   esac
 
-  case " $CFLAGS " in
-  *[[\ \	]]-fno-strict-aliasing[[\ \	]]*) ;;
-  *) CFLAGS="$CFLAGS -fno-strict-aliasing" ;;
-  esac
-
   if test "x$enable_ansi" = "xyes"; then
     case " $CFLAGS " in
     *[[\ \	]]-ansi[[\ \	]]*) ;;
@@ -314,6 +309,9 @@ if test "x$use_gtk" = "xyes"; then
     use_metacity="no"
     use_gnome="no"
   fi
+else
+  use_metacity="no"
+  use_gnome="no"
 fi
 
 AC_SUBST(windowsettingsdatadir)

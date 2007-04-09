@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070403
+#define ABIVERSION 20070407
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -434,6 +434,10 @@ compSetMatchOption (CompOption      *option,
 Bool
 compSetOptionList (CompOption      *option,
 		   CompOptionValue *value);
+
+Bool
+compSetOption (CompOption      *option,
+	       CompOptionValue *value);
 
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value);
@@ -2208,6 +2212,12 @@ typedef Bool (*InitPluginForWindowProc) (CompPlugin *plugin,
 typedef void (*FiniPluginForWindowProc) (CompPlugin *plugin,
 					 CompWindow *window);
 
+typedef enum {
+    CompStackingUpdateModeNone = 0,
+    CompStackingUpdateModeNormal,
+    CompStackingUpdateModeAboveFullscreen
+} CompStackingUpdateMode;
+
 struct _CompWindowExtents {
     int left;
     int right;
@@ -2626,8 +2636,8 @@ restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling);
 
 void
-updateWindowAttributes (CompWindow *w,
-			Bool	   aboveFs);
+updateWindowAttributes (CompWindow             *w,
+			CompStackingUpdateMode stackingMode);
 
 void
 activateWindow (CompWindow *w);

@@ -31,6 +31,10 @@
 #include <X11/extensions/Xrender.h>
 #include <X11/Xregion.h>
 
+#ifndef GDK_DISABLE_DEPRECATED
+#define GDK_DISABLE_DEPRECATED
+#endif
+
 #ifndef GTK_DISABLE_DEPRECATED
 #define GTK_DISABLE_DEPRECATED
 #endif
@@ -663,12 +667,12 @@ create_pixmap (int w,
     colormap = gdk_colormap_new (visual, FALSE);
     if (!colormap)
     {
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 	return NULL;
     }
 
     gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), colormap);
-    gdk_colormap_unref (colormap);
+    g_object_unref (G_OBJECT (colormap));
 
     return pixmap;
 }
@@ -1653,6 +1657,8 @@ meta_function_to_type (MetaButtonFunction function)
 	return META_BUTTON_TYPE_MAXIMIZE;
     case META_BUTTON_FUNCTION_CLOSE:
 	return META_BUTTON_TYPE_CLOSE;
+
+#ifdef HAVE_METACITY_2_17_0
     case META_BUTTON_FUNCTION_SHADE:
 	return META_BUTTON_TYPE_SHADE;
     case META_BUTTON_FUNCTION_ABOVE:
@@ -1665,6 +1671,8 @@ meta_function_to_type (MetaButtonFunction function)
 	return META_BUTTON_TYPE_UNABOVE;
     case META_BUTTON_FUNCTION_UNSTICK:
 	return META_BUTTON_TYPE_UNSTICK;
+#endif
+
     default:
 	break;
     }
@@ -1707,6 +1715,8 @@ meta_button_state_for_button_type (decor_t	  *d,
 	return meta_button_state (d->button_states[BUTTON_MIN]);
     case META_BUTTON_TYPE_MENU:
 	return meta_button_state (d->button_states[BUTTON_MENU]);
+
+#ifdef HAVE_METACITY_2_17_0
     case META_BUTTON_TYPE_SHADE:
 	return meta_button_state (d->button_states[BUTTON_SHADE]);
     case META_BUTTON_TYPE_ABOVE:
@@ -1719,6 +1729,8 @@ meta_button_state_for_button_type (decor_t	  *d,
 	return meta_button_state (d->button_states[BUTTON_UNABOVE]);
     case META_BUTTON_TYPE_UNSTICK:
 	return meta_button_state (d->button_states[BUTTON_UNSTICK]);
+#endif
+
     default:
 	break;
     }
@@ -1794,17 +1806,16 @@ meta_get_decoration_geometry (decor_t		*d,
     if ((d->state & META_MAXIMIZED) == META_MAXIMIZED)
 	*flags |= META_FRAME_MAXIMIZED;
 
-    if (d->state & WNCK_WINDOW_STATE_SHADED)
-	*flags |= META_FRAME_SHADED;
-
     if (d->state & WNCK_WINDOW_STATE_STICKY)
 	*flags |= META_FRAME_STUCK;
 
     if (d->state & WNCK_WINDOW_STATE_FULLSCREEN)
 	*flags |= META_FRAME_FULLSCREEN;
 
+#ifdef HAVE_METACITY_2_17_0
     if (d->state & WNCK_WINDOW_STATE_ABOVE)
 	*flags |= META_FRAME_ABOVE;
+#endif
 
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
@@ -2009,7 +2020,7 @@ meta_draw_window_decoration (decor_t *d)
 
 	cairo_destroy (cr);
 
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 
 	XRenderFreePicture (xdisplay, src);
     }
@@ -2108,7 +2119,7 @@ meta_draw_window_decoration (decor_t *d)
 
 	cairo_destroy (cr);
 
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 
 	XRenderFreePicture (xdisplay, src);
     }
@@ -2569,7 +2580,7 @@ update_default_decorations (GdkScreen *screen)
     d.draw = theme_draw_window_decoration;
 
     if (decor_normal_pixmap)
-	gdk_pixmap_unref (decor_normal_pixmap);
+	g_object_unref (G_OBJECT (decor_normal_pixmap));
 
     nQuad = decor_set_lSrStSbS_window_quads (quads, d.context,
 					     &d.border_layout);
@@ -2598,7 +2609,7 @@ update_default_decorations (GdkScreen *screen)
     }
 
     if (decor_active_pixmap)
-	gdk_pixmap_unref (decor_active_pixmap);
+	g_object_unref (G_OBJECT (decor_active_pixmap));
 
     decor_active_pixmap = create_pixmap (d.width, d.height);
     if (decor_active_pixmap)
@@ -2673,7 +2684,7 @@ get_mwm_prop (Window xwindow)
     Atom	  actual;
     int		  err, result, format;
     unsigned long n, left;
-    MwmHints	  *mwm_hints;
+    unsigned char *data;
     unsigned int  decor = MWM_DECOR_ALL;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
@@ -2682,22 +2693,23 @@ get_mwm_prop (Window xwindow)
 
     result = XGetWindowProperty (xdisplay, xwindow, mwm_hints_atom,
 				 0L, 20L, FALSE, mwm_hints_atom,
-				 &actual, &format, &n, &left,
-				 (unsigned char **) &mwm_hints);
+				 &actual, &format, &n, &left, &data);
 
     err = gdk_error_trap_pop ();
     if (err != Success || result != Success)
 	return decor;
 
-    if (n && mwm_hints)
+    if (n && data)
     {
+	MwmHints *mwm_hints = (MwmHints *) data;
+
 	if (n >= PROP_MOTIF_WM_HINT_ELEMENTS)
 	{
 	    if (mwm_hints->flags & MWM_HINTS_DECORATIONS)
 		decor = mwm_hints->decorations;
 	}
 
-	XFree (mwm_hints);
+	XFree (data);
     }
 
     return decor;
@@ -2851,6 +2863,23 @@ meta_get_event_window_position (decor_t *d,
 }
 
 static gboolean
+meta_button_present (MetaButtonLayout   *button_layout,
+		     MetaButtonFunction function)
+{
+    int i;
+		     
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+	if (button_layout->left_buttons[i] == function)
+	    return TRUE;
+
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+	if (button_layout->right_buttons[i] == function)
+	    return TRUE;
+
+    return FALSE;
+}
+
+static gboolean
 meta_get_button_position (decor_t *d,
 			  gint    i,
 			  gint	  width,
@@ -2879,36 +2908,73 @@ meta_get_button_position (decor_t *d,
 
     switch (i) {
     case BUTTON_MENU:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_MENU))
+	    return FALSE;
+
 	space = &fgeom.menu_rect;
 	break;
     case BUTTON_MIN:
+	if (!meta_button_present (&button_layout,
+				  META_BUTTON_FUNCTION_MINIMIZE))
+	    return FALSE;
+
 	space = &fgeom.min_rect;
 	break;
     case BUTTON_MAX:
+	if (!meta_button_present (&button_layout,
+				  META_BUTTON_FUNCTION_MAXIMIZE))
+	    return FALSE;
+
 	space = &fgeom.max_rect;
 	break;
     case BUTTON_CLOSE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_CLOSE))
+	    return FALSE;
+
 	space = &fgeom.close_rect;
 	break;
+
+#ifdef HAVE_METACITY_2_17_0
     case BUTTON_SHADE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_SHADE))
+	    return FALSE;
+
 	space = &fgeom.shade_rect;
 	break;
     case BUTTON_ABOVE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_ABOVE))
+	    return FALSE;
+
 	space = &fgeom.above_rect;
 	break;
     case BUTTON_STICK:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_STICK))
+	    return FALSE;
+
 	space = &fgeom.stick_rect;
 	break;
     case BUTTON_UNSHADE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNSHADE))
+	    return FALSE;
+
 	space = &fgeom.unshade_rect;
 	break;
     case BUTTON_UNABOVE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNABOVE))
+	    return FALSE;
+
 	space = &fgeom.unabove_rect;
 	break;
     case BUTTON_UNSTICK:
-    default:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNSTICK))
+	    return FALSE;
+
 	space = &fgeom.unstick_rect;
 	break;
+#endif
+
+    default:
+	return FALSE;
     }
 
 #ifdef HAVE_METACITY_2_15_21
@@ -3142,19 +3208,19 @@ update_window_decoration_icon (WnckWindow *win)
 
     if (d->icon_pixmap)
     {
-	gdk_pixmap_unref (d->icon_pixmap);
+	g_object_unref (G_OBJECT (d->icon_pixmap));
 	d->icon_pixmap = NULL;
     }
 
     if (d->icon_pixbuf)
-	gdk_pixbuf_unref (d->icon_pixbuf);
+	g_object_unref (G_OBJECT (d->icon_pixbuf));
 
     d->icon_pixbuf = wnck_window_get_mini_icon (win);
     if (d->icon_pixbuf)
     {
 	cairo_t	*cr;
 
-	gdk_pixbuf_ref (d->icon_pixbuf);
+	g_object_ref (G_OBJECT (d->icon_pixbuf));
 
 	d->icon_pixmap = pixmap_new_from_pixbuf (d->icon_pixbuf);
 	cr = gdk_cairo_create (GDK_DRAWABLE (d->icon_pixmap));
@@ -3352,7 +3418,7 @@ update_window_decoration_size (WnckWindow *win)
     buffer_pixmap = create_pixmap (width, height);
     if (!buffer_pixmap)
     {
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 	return FALSE;
     }
 
@@ -3360,13 +3426,13 @@ update_window_decoration_size (WnckWindow *win)
 				    xformat, 0, NULL);
 
     if (d->pixmap)
-	gdk_pixmap_unref (d->pixmap);
+	g_object_unref (G_OBJECT (d->pixmap));
 
     if (d->buffer_pixmap)
-	gdk_pixmap_unref (d->buffer_pixmap);
+	g_object_unref (G_OBJECT (d->buffer_pixmap));
 
     if (d->gc)
-	gdk_gc_unref (d->gc);
+	g_object_unref (G_OBJECT (d->gc));
 
     if (d->picture)
 	XRenderFreePicture (xdisplay, d->picture);
@@ -3491,13 +3557,13 @@ update_switcher_window (WnckWindow *win,
 
     if (!d->pixmap && switcher_pixmap)
     {
-	gdk_pixmap_ref (switcher_pixmap);
+	g_object_ref (G_OBJECT (switcher_pixmap));
 	d->pixmap = switcher_pixmap;
     }
 
     if (!d->buffer_pixmap && switcher_buffer_pixmap)
     {
-	gdk_pixmap_ref (switcher_buffer_pixmap);
+	g_object_ref (G_OBJECT (switcher_buffer_pixmap));
 	d->buffer_pixmap = switcher_buffer_pixmap;
     }
 
@@ -3595,24 +3661,24 @@ update_switcher_window (WnckWindow *win,
     buffer_pixmap = create_pixmap (width, height);
     if (!buffer_pixmap)
     {
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 	return FALSE;
     }
 
     if (switcher_pixmap)
-	gdk_pixmap_unref (switcher_pixmap);
+	g_object_unref (G_OBJECT (switcher_pixmap));
 
     if (switcher_buffer_pixmap)
-	gdk_pixmap_unref (switcher_buffer_pixmap);
+	g_object_unref (G_OBJECT (switcher_buffer_pixmap));
 
     if (d->pixmap)
-	gdk_pixmap_unref (d->pixmap);
+	g_object_unref (G_OBJECT (d->pixmap));
 
     if (d->buffer_pixmap)
-	gdk_pixmap_unref (d->buffer_pixmap);
+	g_object_unref (G_OBJECT (d->buffer_pixmap));
 
     if (d->gc)
-	gdk_gc_unref (d->gc);
+	g_object_unref (G_OBJECT (d->gc));
 
     if (d->picture)
 	XRenderFreePicture (xdisplay, d->picture);
@@ -3623,8 +3689,8 @@ update_switcher_window (WnckWindow *win,
     switcher_width  = width;
     switcher_height = height;
 
-    gdk_pixmap_ref (pixmap);
-    gdk_pixmap_ref (buffer_pixmap);
+    g_object_ref (G_OBJECT (pixmap));
+    g_object_ref (G_OBJECT (buffer_pixmap));
 
     d->pixmap	     = pixmap;
     d->buffer_pixmap = buffer_pixmap;
@@ -3653,19 +3719,19 @@ remove_frame_window (WnckWindow *win)
 
     if (d->pixmap)
     {
-	gdk_pixmap_unref (d->pixmap);
+	g_object_unref (G_OBJECT (d->pixmap));
 	d->pixmap = NULL;
     }
 
     if (d->buffer_pixmap)
     {
-	gdk_pixmap_unref (d->buffer_pixmap);
+	g_object_unref (G_OBJECT (d->buffer_pixmap));
 	d->buffer_pixmap = NULL;
     }
 
     if (d->gc)
     {
-	gdk_gc_unref (d->gc);
+	g_object_unref (G_OBJECT (d->gc));
 	d->gc = NULL;
     }
 
@@ -3695,13 +3761,13 @@ remove_frame_window (WnckWindow *win)
 
     if (d->icon_pixmap)
     {
-	gdk_pixmap_unref (d->icon_pixmap);
+	g_object_unref (G_OBJECT (d->icon_pixmap));
 	d->icon_pixmap = NULL;
     }
 
     if (d->icon_pixbuf)
     {
-	gdk_pixbuf_unref (d->icon_pixbuf);
+	g_object_unref (G_OBJECT (d->icon_pixbuf));
 	d->icon_pixbuf = NULL;
     }
 
@@ -4742,7 +4808,7 @@ get_client_machine (Window xwindow)
 {
     Atom   atom, type;
     gulong nitems, bytes_after;
-    gchar  *str = NULL;
+    guchar *str = NULL;
     int    format, result;
     char   *retval;
 
@@ -4754,7 +4820,7 @@ get_client_machine (Window xwindow)
 				 xwindow, atom,
 				 0, G_MAXLONG,
 				 FALSE, XA_STRING, &type, &format, &nitems,
-				 &bytes_after, (guchar **) &str);
+				 &bytes_after, &str);
 
     gdk_error_trap_pop ();
 
@@ -4767,7 +4833,7 @@ get_client_machine (Window xwindow)
 	return NULL;
     }
 
-    retval = g_strdup (str);
+    retval = g_strdup ((gchar *) str);
 
     XFree (str);
 
@@ -5388,7 +5454,7 @@ draw_border_shape (Display	   *xdisplay,
 			  width - c->left_space - c->right_space,
 			  height - c->top_space - c->bottom_space);
 
-    gdk_pixmap_unref (d.pixmap);
+    g_object_unref (G_OBJECT (d.pixmap));
 }
 
 static int
@@ -5616,7 +5682,9 @@ double_click_titlebar_changed (GConfClient *client)
 	g_free (action);
     }
 }
+#endif
 
+#ifdef USE_METACITY
 static MetaButtonFunction
 meta_button_function_from_string (const char *str)
 {
@@ -5628,6 +5696,8 @@ meta_button_function_from_string (const char *str)
 	return META_BUTTON_FUNCTION_MAXIMIZE;
     else if (strcmp (str, "close") == 0)
 	return META_BUTTON_FUNCTION_CLOSE;
+
+#ifdef HAVE_METACITY_2_17_0
     else if (strcmp (str, "shade") == 0)
 	return META_BUTTON_FUNCTION_SHADE;
     else if (strcmp (str, "above") == 0)
@@ -5640,6 +5710,8 @@ meta_button_function_from_string (const char *str)
 	return META_BUTTON_FUNCTION_UNABOVE;
     else if (strcmp (str, "unstick") == 0)
 	return META_BUTTON_FUNCTION_UNSTICK;
+#endif
+
     else
 	return META_BUTTON_FUNCTION_LAST;
 }
@@ -6129,13 +6201,13 @@ button_layout_changed (GConfClient *client)
 
 	return TRUE;
     }
-#endif
 
     if (meta_button_layout_set)
     {
 	meta_button_layout_set = FALSE;
 	return TRUE;
     }
+#endif
 
     return FALSE;
 }

@@ -163,10 +163,6 @@ minSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case MIN_SCREEN_OPTION_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
     case MIN_SCREEN_OPTION_SHADE_RESISTANCE:
 	if (compSetIntOption (o, value))
 	{
@@ -177,7 +173,10 @@ minSetScreenOption (CompPlugin      *plugin,
 
 	    return TRUE;
 	}
+	break;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

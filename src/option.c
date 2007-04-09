@@ -336,6 +336,32 @@ compSetOptionList (CompOption      *option,
     return status;
 }
 
+Bool
+compSetOption (CompOption      *option,
+	       CompOptionValue *value)
+{
+    switch (option->type) {
+    case CompOptionTypeBool:
+	return compSetBoolOption (option, value);
+    case CompOptionTypeInt:
+	return compSetIntOption (option, value);
+    case CompOptionTypeFloat:
+	return compSetFloatOption (option, value);
+    case CompOptionTypeString:
+	return compSetStringOption (option, value);
+    case CompOptionTypeColor:
+	return compSetColorOption (option, value);
+    case CompOptionTypeMatch:
+	return compSetMatchOption (option, value);
+    case CompOptionTypeAction:
+	return compSetActionOption (option, value);
+    case CompOptionTypeList:
+	return compSetOptionList (option, value);
+    }
+
+    return FALSE;
+}
+
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value)
 {

@@ -376,11 +376,11 @@ clonePaintScreen (CompScreen		  *s,
 	zoomY = zoom1 * (1.0f - cs->offset) + zoom2y * cs->offset;
 
 	matrixTranslate (&sTransform, -0.5f, -0.5f, -DEFAULT_Z_CAMERA);
-	matrixScale (&sTransform, 
+	matrixScale (&sTransform,
 		     1.0f  / s->outputDev[output].width,
 		     -1.0f / s->outputDev[output].height,
 		     1.0f);
-	matrixTranslate (&sTransform, 
+	matrixTranslate (&sTransform,
 			 dx - s->outputDev[output].region.extents.x1,
 			 dy - s->outputDev[output].region.extents.y2,
 			 0.0f);
@@ -818,8 +818,8 @@ cloneFiniScreen (CompPlugin *p,
 {
     CLONE_SCREEN (s);
     CLONE_DISPLAY (s->display);
-    
-    removeScreenAction (s, 
+
+    removeScreenAction (s,
 			&cd->opt[CLONE_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (cs, s, preparePaintScreen);

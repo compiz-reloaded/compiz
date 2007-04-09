@@ -274,17 +274,6 @@ switchSetScreenOption (CompPlugin *plugin,
 	    return TRUE;
 	}
 	break;
-    case SWITCH_SCREEN_OPTION_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
-    case SWITCH_SCREEN_OPTION_MIPMAP:
-    case SWITCH_SCREEN_OPTION_ICON:
-    case SWITCH_SCREEN_OPTION_MINIMIZED:
-    case SWITCH_SCREEN_OPTION_AUTO_ROTATE:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case SWITCH_SCREEN_OPTION_SATURATION:
 	if (compSetIntOption (o, value))
 	{
@@ -329,7 +318,10 @@ switchSetScreenOption (CompPlugin *plugin,
 
 	    return TRUE;
 	}
+	break;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

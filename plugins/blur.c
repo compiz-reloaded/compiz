@@ -711,8 +711,6 @@ blurSetScreenOption (CompPlugin      *plugin,
 	    damageScreen (screen);
 	    return TRUE;
 	}
-	break;
-
     default:
 	break;
     }

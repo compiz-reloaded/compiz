@@ -163,13 +163,9 @@ fadeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case FADE_SCREEN_OPTION_VISUAL_BELL:
-    case FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL:
-    case FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
