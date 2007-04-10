@@ -309,6 +309,9 @@ if test "x$use_gtk" = "xyes"; then
     use_metacity="no"
     use_gnome="no"
   fi
+else
+  use_metacity="no"
+  use_gnome="no"
 fi
 
 AC_SUBST(windowsettingsdatadir)
