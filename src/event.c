@@ -1646,6 +1646,20 @@ handleEvent (CompDisplay *d,
 
 		if (wState != w->state)
 		{
+		    CompStackingUpdateMode stackingUpdateMode;
+		    unsigned long          dState = wState ^ w->state;
+
+		    stackingUpdateMode = CompStackingUpdateModeNone;
+
+		    /* raise the window whenever its fullscreen state,
+		       above/below state or maximization state changed */
+		    if (dState & (CompWindowStateFullscreenMask |
+				  CompWindowStateAboveMask |
+				  CompWindowStateBelowMask |
+				  CompWindowStateMaximizedHorzMask |
+				  CompWindowStateMaximizedVertMask))
+			stackingUpdateMode = CompStackingUpdateModeNormal;
+
 		    w->state = wState;
 
 		    recalcWindowType (w);
@@ -1653,7 +1667,7 @@ handleEvent (CompDisplay *d,
 
 		    changeWindowState (w, w->state);
 
-		    updateWindowAttributes (w, CompStackingUpdateModeNone);
+		    updateWindowAttributes (w, stackingUpdateMode);
 		}
 	    }
 	}
