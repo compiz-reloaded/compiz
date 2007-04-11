@@ -26,6 +26,7 @@
  *                       David Reveman <davidr@novell.com>
  */
 
+#define _GNU_SOURCE /* for asprintf */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -926,7 +927,6 @@ iniSaveOptions (CompDisplay *d,
     while (nOption--)
     {
 	status = FALSE;
-	strVal = strdup ("");
 	int i;
 
 	switch (option->type)
@@ -938,8 +938,11 @@ iniSaveOptions (CompDisplay *d,
 	case CompOptionTypeColor:
 	case CompOptionTypeMatch:
 		strVal = iniOptionValueToString (&option->value, option->type);
-		if (strVal[0] != '\0')
+		if (strVal)
+		{
 		    fprintf (optionFile, "%s=%s\n", option->name, strVal);
+		    free (strVal);
+		}
 		else
 		    fprintf (optionFile, "%s=\n", option->name);
 		break;
@@ -947,47 +950,43 @@ iniSaveOptions (CompDisplay *d,
 	    firstInList = TRUE;
 	    if (option->value.action.type & CompBindingTypeKey)
 		strVal = keyBindingToString (d, &option->value.action.key);
+	    else
+		strVal = strdup ("");
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "key", strVal);
+	    free (strVal);
 
-	    strVal = strdup ("");
 	    if (option->value.action.type & CompBindingTypeButton)
 		strVal = buttonBindingToString (d, &option->value.action.button);
+	    else
+		strVal = strdup ("");
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "button", strVal);
+	    free (strVal);
 
-	    if (!(strVal = realloc (strVal, sizeof (char) * 32)))
-		return FALSE;
-	    sprintf(strVal, "%i", (int)option->value.action.bell);
+	    asprintf(&strVal, "%i", (int)option->value.action.bell);
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "bell", strVal);
+	    free (strVal);
 
-	    strVal = strdup ("");
+	    strVal = malloc (sizeof(char) * MAX_OPTION_LENGTH);
+	    strcpy (strVal, "");
 	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	    {
 		if (option->value.action.edgeMask & (1 << i))
 		{
-		    char listVal[MAX_OPTION_LENGTH];
-		    strcpy (listVal, edgeToString (i));
-		    if (!(strVal = realloc (strVal, MAX_OPTION_LENGTH)))
-			return FALSE;
-
-		    if (!firstInList)
-			strVal = strcat (strVal, ",");
-		    firstInList = FALSE;
-
-		    if (listVal)
-			strVal = strcat (strVal, listVal);
+		    strncat (strVal, edgeToString (i), MAX_OPTION_LENGTH);
+		    strncat (strVal, ",", MAX_OPTION_LENGTH);
 		}
 	    }
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edge", strVal);
+	    free (strVal);
 
-	    strVal = strdup ("");
 	    if (option->value.action.type & CompBindingTypeEdgeButton)
-		sprintf(strVal, "%i", option->value.action.edgeButton);
+		asprintf (&strVal, "%i", option->value.action.edgeButton);
 	    else
-		sprintf(strVal, "%i", 0);
+		asprintf (&strVal, "%i", 0);
 
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edgebutton", strVal);
-
-		break;
+	    free (strVal);
+  	    break;
 	case CompOptionTypeList:
 	    firstInList = TRUE;
 	    switch (option->value.list.type)
@@ -999,30 +998,30 @@ iniSaveOptions (CompDisplay *d,
 	    case CompOptionTypeColor:
 	    case CompOptionTypeMatch:
 	    {
-		if (option->value.list.nValue && 
-		    !(strVal = realloc (strVal, sizeof (char) * MAX_OPTION_LENGTH * option->value.list.nValue)))
+		int stringLen = MAX_OPTION_LENGTH * option->value.list.nValue;
+		char *itemVal;
+
+		strVal = malloc (sizeof(char) * stringLen);
+		if (!strVal)
 		    return FALSE;
+		strcpy (strVal, "");
 
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
-		    char listVal[MAX_OPTION_LENGTH];
-
-		    strncpy (listVal, iniOptionValueToString (
+		    itemVal = iniOptionValueToString (
 						&option->value.list.value[i],
-						option->value.list.type),
-						MAX_OPTION_LENGTH);
+						option->value.list.type);
 
-		    if (!firstInList)
-			strVal = strcat (strVal, ",");
-		    firstInList = FALSE;
-
-		    if (listVal)
-			strVal = strcat (strVal, listVal);
+		    if (itemVal)
+		    {
+			strncat (strVal, itemVal, stringLen);
+			free (itemVal);
+		    }
+		    strncat (strVal, ",", stringLen);
 		}
-		if (strVal[0] != '\0')
-		    fprintf (optionFile, "%s=%s\n", option->name, strVal);
-		else
-		    fprintf (optionFile, "%s=\n", option->name);
+
+		fprintf (optionFile, "%s=%s\n", option->name, strVal);
+		free (strVal);
 		break;
 	    }
 	    default:
@@ -1043,8 +1042,6 @@ iniSaveOptions (CompDisplay *d,
 
     fclose (optionFile);
 
-    if (strVal)
-	free (strVal);
     free (filename);
     free (directory);
     free (fullPath);
