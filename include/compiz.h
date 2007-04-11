@@ -40,6 +40,8 @@
 #include <X11/Xregion.h>
 #include <X11/XKBlib.h>
 
+#include <libxml/parser.h>
+
 #define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
 
@@ -86,6 +88,7 @@ typedef struct _CompFunctionData  CompFunctionData;
 typedef struct _FragmentAttrib    FragmentAttrib;
 typedef struct _CompCursor	  CompCursor;
 typedef struct _CompMatch	  CompMatch;
+typedef struct _CompMetadata      CompMetadata;
 
 /* virtual modifiers */
 
@@ -230,6 +233,8 @@ extern int lastPointerX;
 extern int lastPointerY;
 extern int pointerX;
 extern int pointerY;
+
+extern Display *dpy;
 
 #define RESTRICT_VALUE(value, min, max)				     \
     (((value) < (min)) ? (min): ((value) > (max)) ? (max) : (value))
@@ -3054,6 +3059,58 @@ matchExpHandlerChanged (CompDisplay *display);
 void
 matchPropertyChanged (CompDisplay *display,
 		      CompWindow  *window);
+
+/* metadata.c */
+
+struct _CompMetadata
+{
+    char               *plugin;
+    xmlDoc             *doc;
+};
+
+CompMetadata *
+compGetMetadataFromFile (const char *file, const char *plugin);
+
+CompMetadata *
+compGetMetadataFromString (char *string, const char *plugin);
+
+void
+compFreeMetadata (CompMetadata *data);
+
+Bool
+compInitScreenOptionFromMetadata (CompMetadata *m,
+				  CompOption   *o,
+				  const char   *name);
+
+Bool
+compInitDisplayOptionFromMetadata (CompMetadata *m,
+				   CompOption   *o,
+				   const char   *name);
+char *
+compGetStringFromMetadataPath (CompMetadata *m,
+			       char         *path);
+
+char *
+compGetShortPluginDescription (CompMetadata *m);
+
+char *
+compGetLongPluginDescription (CompMetadata *m);
+
+char *
+compGetShortScreenOptionDescription (CompMetadata *m,
+				     CompOption   *o);
+
+char *
+compGetLongScreenOptionDescription (CompMetadata *m,
+				    CompOption   *o);
+
+char *
+compGetShortDisplayOptionDescription (CompMetadata *m,
+				      CompOption   *o);
+
+char *
+compGetLongDisplayOptionDescription (CompMetadata *m,
+				     CompOption   *o);
 
 
 #ifdef  __cplusplus

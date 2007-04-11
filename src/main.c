@@ -258,6 +258,9 @@ main (int argc, char **argv)
 	}
     }
 
+    xmlInitParser();
+    LIBXML_TEST_VERSION
+    
     if (!disableSm)
 	initSession (clientId);
 
@@ -266,6 +269,8 @@ main (int argc, char **argv)
 
     eventLoop ();
 
+    xmlCleanupParser();
+    
     if (!disableSm)
 	closeSession ();
 

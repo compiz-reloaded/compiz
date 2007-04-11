@@ -24,4 +24,5 @@ compiz_SOURCES =   \
 	fragment.c \
 	matrix.c   \
 	cursor.c   \
-	match.c
+	match.c    \
+	metadata.c

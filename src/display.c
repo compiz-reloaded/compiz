@@ -45,6 +45,8 @@
 
 #include <compiz.h>
 
+Display	*dpy;
+
 static unsigned int virtualModMask[] = {
     CompAltMask, CompMetaMask, CompSuperMask, CompHyperMask,
     CompModeSwitchMask, CompNumLockMask, CompScrollLockMask
@@ -2495,7 +2497,6 @@ addDisplay (char *name,
 	    int  nPlugin)
 {
     CompDisplay *d;
-    Display	*dpy;
     Window	focus;
     int		revertTo, i;
     int		compositeMajor, compositeMinor;
