@@ -78,9 +78,8 @@ AC_SUBST(plugindir)
 imagedir=$datadir/compiz
 AC_SUBST(imagedir)
 
-metadatadir=$libdir/compiz
+metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
-
 
 COMPIZ_REQUIRES="libpng	    \
 		 xcomposite \
