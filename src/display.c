@@ -45,8 +45,6 @@
 
 #include <compiz.h>
 
-CompMetadata coreMetadata;
-
 static unsigned int virtualModMask[] = {
     CompAltMask, CompMetaMask, CompSuperMask, CompHyperMask,
     CompModeSwitchMask, CompNumLockMask, CompScrollLockMask
@@ -2210,17 +2208,6 @@ addDisplay (char *name,
 		 programName, XDisplayName (name));
 	return FALSE;
     }
-
-    if (!compInitMetadata (&coreMetadata))
-    {
-	fprintf (stderr, "%s: Couldn't initialize core metadata\n",
-		 programName);
-	return FALSE;
-    }
-
-    if (!compAddMetadataFromFile (&coreMetadata,
-				  METADATADIR "/compiz.metadata"))
-	return FALSE;
 
     compDisplayInitOptions (d, plugin, nPlugin);
 

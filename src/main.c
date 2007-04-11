@@ -89,6 +89,8 @@ Bool onlyCurrentScreen = FALSE;
 Bool useCow = TRUE;
 #endif
 
+CompMetadata coreMetadata;
+
 static void
 usage (void)
 {
@@ -260,7 +262,18 @@ main (int argc, char **argv)
 
     xmlInitParser();
     LIBXML_TEST_VERSION
-    
+
+    if (!compInitMetadata (&coreMetadata))
+    {
+	fprintf (stderr, "%s: Couldn't initialize core metadata\n",
+		 programName);
+	return 1;
+    }
+
+    if (!compAddMetadataFromFile (&coreMetadata,
+				  METADATADIR "/compiz.metadata"))
+	return 1;
+
     if (!disableSm)
 	initSession (clientId);
 
