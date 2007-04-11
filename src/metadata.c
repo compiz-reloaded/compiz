@@ -357,7 +357,7 @@ initColorValue (CompOptionValue *v, xmlNodePtr node)
 }
 
 static void
-convertKeyBinding (CompKeyBinding *kb, char *bind)
+convertKeyBinding (CompDisplay *d, CompKeyBinding *kb, char *bind)
 {
     char *tok = strtok (bind, "+");
     int i;
@@ -374,7 +374,7 @@ convertKeyBinding (CompKeyBinding *kb, char *bind)
 	    }
 	if (!changed)
 	{
-	    kb->keycode = XKeysymToKeycode (dpy, XStringToKeysym (tok));
+	    kb->keycode = XKeysymToKeycode (d->display, XStringToKeysym (tok));
 	    break;
 	}
 	tok = strtok(NULL,"+");
@@ -412,7 +412,7 @@ convertButtonBinding (CompButtonBinding *bb, char *bind)
 }
 
 static void
-initActionValue (CompOptionValue *v, xmlNodePtr node)
+initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 {
     xmlNode *cur = node->xmlChildrenNode;
 
@@ -434,7 +434,7 @@ initActionValue (CompOptionValue *v, xmlNodePtr node)
 	    !xmlStrcmp (cur->name, BAD_CAST "element") ||
             !xmlStrcmp (cur->name, BAD_CAST "action"))
 	{
-	    initActionValue (v, cur->xmlChildrenNode);
+	    initActionValue (d, v, cur->xmlChildrenNode);
 	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "key"))
@@ -446,7 +446,7 @@ initActionValue (CompOptionValue *v, xmlNodePtr node)
 	    if (key && xmlStrlen (key))
 	    {
 		v->action.type |= CompBindingTypeKey;
-		convertKeyBinding (&v->action.key, (char *) key);
+		convertKeyBinding (d, &v->action.key, (char *) key);
 	    }
 	    xmlFree(key);
 	    
@@ -616,7 +616,7 @@ initMatchValue (CompOptionValue *v, xmlNodePtr node)
 }
 
 static void
-initListValue (CompOptionValue *v, xmlNodePtr node)
+initListValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 {
     xmlNode *cur = node->xmlChildrenNode;
 
@@ -695,7 +695,7 @@ initListValue (CompOptionValue *v, xmlNodePtr node)
 			initColorValue (&v->list.value[i], cur);
 			break;
 		    case CompOptionTypeAction:
-			initActionValue (&v->list.value[i], cur);
+			initActionValue (d, &v->list.value[i], cur);
 			break;
 		    case CompOptionTypeMatch:
 			initMatchValue (&v->list.value[i], cur);
@@ -816,7 +816,7 @@ initStringRestriction (CompOptionRestriction *r, xmlNodePtr node)
 }
 
 static Bool
-initOptionFromNode (CompOption *o, xmlNodePtr node)
+initOptionFromNode (CompDisplay *d, CompOption *o, xmlNodePtr node)
 {
     xmlChar *name;
     xmlChar *type;
@@ -870,13 +870,13 @@ initOptionFromNode (CompOption *o, xmlNodePtr node)
 	initColorValue (&o->value, node);
 	break;
     case CompOptionTypeAction:
-	initActionValue (&o->value, node);
+	initActionValue (d, &o->value, node);
 	break;
     case CompOptionTypeMatch:
 	initMatchValue (&o->value, node);
 	break;
     case CompOptionTypeList:
-	initListValue (&o->value, node);
+	initListValue (d, &o->value, node);
 	switch (o->value.list.type)
 	{
 	case CompOptionTypeInt:
@@ -901,7 +901,8 @@ initOptionFromNode (CompOption *o, xmlNodePtr node)
 }
 
 static Bool
-initOptionFromMetadataPath (CompMetadata *m,
+initOptionFromMetadataPath (CompDisplay  *d,
+			    CompMetadata *m,
 			    CompOption *o,
 			    const xmlChar *path)
 {
@@ -918,7 +919,7 @@ initOptionFromMetadataPath (CompMetadata *m,
 
     size = (xpathObj->nodesetval)? xpathObj->nodesetval->nodeNr : 0;
     for (i = 0; i < size && !rv; i++)
-	rv |= initOptionFromNode (o, xpathObj->nodesetval->nodeTab[i]);
+	rv |= initOptionFromNode (d, o, xpathObj->nodesetval->nodeTab[i]);
     
     xmlXPathFreeObject (xpathObj);
     xmlXPathFreeContext (xpathCtx);
@@ -926,7 +927,8 @@ initOptionFromMetadataPath (CompMetadata *m,
 }
 
 Bool
-compInitScreenOptionFromMetadata (CompMetadata *m,
+compInitScreenOptionFromMetadata (CompScreen   *s,
+				  CompMetadata *m,
 				  CompOption *o,
 				  const char *name)
 {
@@ -946,11 +948,12 @@ compInitScreenOptionFromMetadata (CompMetadata *m,
 		"option[@name=\"%s\"]", name);
     }
     
-    return initOptionFromMetadataPath (m, o, BAD_CAST str);
+    return initOptionFromMetadataPath (s->display, m, o, BAD_CAST str);
 }
 
 Bool
-compInitDisplayOptionFromMetadata (CompMetadata *m,
+compInitDisplayOptionFromMetadata (CompDisplay  *d,
+				   CompMetadata *m,
 				   CompOption *o,
 				   const char *name)
 {
@@ -970,7 +973,7 @@ compInitDisplayOptionFromMetadata (CompMetadata *m,
 		"option[@name=\"%s\"]", name);
     }
     
-    return initOptionFromMetadataPath (m, o, BAD_CAST str);
+    return initOptionFromMetadataPath (d, m, o, BAD_CAST str);
 }
 
 char *

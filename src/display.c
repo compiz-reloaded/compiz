@@ -45,7 +45,6 @@
 
 #include <compiz.h>
 
-Display	*dpy = NULL;
 CompMetadata *coreMetadata = NULL;
 
 static unsigned int virtualModMask[] = {
@@ -678,7 +677,7 @@ compDisplayInitOptions (CompDisplay *display,
     CompMetadata *m = coreMetadata;
     
     o = &display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
-    compInitDisplayOptionFromMetadata (m, o, "active_plugins");
+    compInitDisplayOptionFromMetadata (display, m, o, "active_plugins");
     o->shortDesc         = N_("Active Plugins");
     o->longDesc	         = N_("List of currently active plugins");
     o->value.list.nValue = nPlugin;
@@ -689,77 +688,77 @@ compDisplayInitOptions (CompDisplay *display,
     display->dirtyPluginList = TRUE;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TEXTURE_FILTER];
-    compInitDisplayOptionFromMetadata (m, o, "texture_filter");
+    compInitDisplayOptionFromMetadata (display, m, o, "texture_filter");
     o->shortDesc      = N_("Texture Filter");
     o->longDesc	      = N_("Texture filtering");
     free (o->value.s);
     o->value.s	      = strdup (defaultTextureFilter);
 
     o = &display->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS];
-    compInitDisplayOptionFromMetadata (m, o, "click_to_focus");
+    compInitDisplayOptionFromMetadata (display, m, o, "click_to_focus");
     o->shortDesc      = N_("Click To Focus");
     o->longDesc	      = N_("Click on window moves input focus to it");
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUTORAISE];
-    compInitDisplayOptionFromMetadata (m, o, "autoraise");
+    compInitDisplayOptionFromMetadata (display, m, o, "autoraise");
     o->shortDesc      = N_("Auto-Raise");
     o->longDesc	      = N_("Raise selected windows after interval");
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUTORAISE_DELAY];
-    compInitDisplayOptionFromMetadata (m, o, "autoraise_delay");
+    compInitDisplayOptionFromMetadata (display, m, o, "autoraise_delay");
     o->shortDesc  = N_("Auto-Raise Delay");
     o->longDesc	  = N_("Interval before raising selected windows");
 
     o = &display->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW];
-    compInitDisplayOptionFromMetadata (m, o, "close_window");
+    compInitDisplayOptionFromMetadata (display, m, o, "close_window");
     o->shortDesc		  = N_("Close Window");
     o->longDesc			  = N_("Close active window");
     o->value.action.initiate      = closeWin;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAIN_MENU];
-    compInitDisplayOptionFromMetadata (m, o, "main_menu");
+    compInitDisplayOptionFromMetadata (display, m, o, "main_menu");
     o->shortDesc		  = N_("Show Main Menu");
     o->longDesc			  = N_("Show the main menu");
     o->value.action.initiate      = mainMenu;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_DIALOG];
-    compInitDisplayOptionFromMetadata (m, o, "run");
+    compInitDisplayOptionFromMetadata (display, m, o, "run");
     o->shortDesc		  = N_("Run Dialog");
     o->longDesc			  = N_("Show Run Application dialog");
     o->value.action.initiate      = runDialog;
 
     o = &display->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW];
-    compInitDisplayOptionFromMetadata (m, o, "unmaximize_window");
+    compInitDisplayOptionFromMetadata (display, m, o, "unmaximize_window");
     o->shortDesc		  = N_("Unmaximize Window");
     o->longDesc			  = N_("Unmaximize active window");
     o->value.action.initiate      = unmaximize;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW];
-    compInitDisplayOptionFromMetadata (m, o, "minimize_window");
+    compInitDisplayOptionFromMetadata (display, m, o, "minimize_window");
     o->shortDesc		  = N_("Minimize Window");
     o->longDesc			  = N_("Minimize active window");
     o->value.action.initiate      = minimize;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW];
-    compInitDisplayOptionFromMetadata (m, o, "maximize_window");
+    compInitDisplayOptionFromMetadata (display, m, o, "maximize_window");
     o->shortDesc		  = N_("Maximize Window");
     o->longDesc			  = N_("Maximize active window");
     o->value.action.initiate      = maximize;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ];
-    compInitDisplayOptionFromMetadata (m, o, "maximize_window_horizontally");
+    compInitDisplayOptionFromMetadata (display, m, o, "maximize_window_horizontally");
     o->shortDesc		  = N_("Maximize Window Horizontally");
     o->longDesc			  = N_("Maximize active window horizontally");
     o->value.action.initiate      = maximizeHorizontally;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT];
-    compInitDisplayOptionFromMetadata (m, o, "maximize_window_vertically");
+    compInitDisplayOptionFromMetadata (display, m, o, "maximize_window_vertically");
     o->shortDesc		  = N_("Maximize Window Vertically");
     o->longDesc			  = N_("Maximize active window vertically");
     o->value.action.initiate      = maximizeVertically;
 
     o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
-    compInitDisplayOptionFromMetadata (m, o, "show_desktop");
+    compInitDisplayOptionFromMetadata (display, m, o, "show_desktop");
     o->shortDesc		  = N_("Hide all windows and focus desktop");
     o->longDesc			  = N_("Hide all windows and focus desktop");
     o->value.action.initiate      = showDesktop;
@@ -773,13 +772,13 @@ compDisplayInitOptions (CompDisplay *display,
 
 #define COMMAND_OPTION(num, cname, rname)				    \
     o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
-    compInitDisplayOptionFromMetadata (m, o, cname);                        \
+    compInitDisplayOptionFromMetadata (display, m, o, cname);                        \
     asprintf (&str, COMMAND_OPTION_SHORT, num);				    \
     o->shortDesc		  = str;				    \
     asprintf (&str, COMMAND_OPTION_LONG, num);				    \
     o->longDesc			  = str;				    \
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num ];		    \
-    compInitDisplayOptionFromMetadata (m, o, rname);                        \
+    compInitDisplayOptionFromMetadata (display, m, o, rname);                        \
     asprintf (&str, RUN_OPTION_SHORT, num);				    \
     o->shortDesc		  = str;				    \
     asprintf (&str, RUN_OPTION_LONG, num);				    \
@@ -800,81 +799,81 @@ compDisplayInitOptions (CompDisplay *display,
     COMMAND_OPTION (11, "command11", "run_command11");
 
     o = &display->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS];
-    compInitDisplayOptionFromMetadata (m, o, "slow_animations");
+    compInitDisplayOptionFromMetadata (display, m, o, "slow_animations");
     o->shortDesc		  = N_("Slow Animations");
     o->longDesc			  = N_("Toggle use of slow animations");
     o->value.action.initiate      = toggleSlowAnimations;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_WINDOW];
-    compInitDisplayOptionFromMetadata (m, o, "raise_window");
+    compInitDisplayOptionFromMetadata (display, m, o, "raise_window");
     o->shortDesc		     = N_("Raise Window");
     o->longDesc			     = N_("Raise window above other windows");
     o->value.action.initiate	     = raiseInitiate;
 
     o = &display->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW];
-    compInitDisplayOptionFromMetadata (m, o, "lower_window");
+    compInitDisplayOptionFromMetadata (display, m, o, "lower_window");
     o->shortDesc		     = N_("Lower Window");
     o->longDesc			     = N_("Lower window beneath other windows");
     o->value.action.initiate	     = lowerInitiate;
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE];
-    compInitDisplayOptionFromMetadata (m, o, "opacity_increase");
+    compInitDisplayOptionFromMetadata (display, m, o, "opacity_increase");
     o->shortDesc		     = N_("Increase Opacity");
     o->longDesc			     = N_("Increase window opacity");
     o->value.action.initiate	     = increaseOpacity;
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE];
-    compInitDisplayOptionFromMetadata (m, o, "opacity_decrease");
+    compInitDisplayOptionFromMetadata (display, m, o, "opacity_decrease");
     o->shortDesc		     = N_("Decrease Opacity");
     o->longDesc			     = N_("Decrease window opacity");
     o->value.action.initiate	     = decreaseOpacity;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT];
-    compInitDisplayOptionFromMetadata (m, o, "run_command_screenshot");
+    compInitDisplayOptionFromMetadata (display, m, o, "run_command_screenshot");
     o->shortDesc		  = N_("Take a screenshot");
     o->longDesc			  = N_("Take a screenshot");
     o->value.action.initiate      = runCommandScreenshot;
 
     o = &display->opt[COMP_DISPLAY_OPTION_SCREENSHOT];
-    compInitDisplayOptionFromMetadata (m, o, "command_screenshot");
+    compInitDisplayOptionFromMetadata (display, m, o, "command_screenshot");
     o->shortDesc		  = N_("Screenshot command line");
     o->longDesc			  = N_("Screenshot command line");
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT];
-    compInitDisplayOptionFromMetadata (m, o, "run_command_window_screenshot");
+    compInitDisplayOptionFromMetadata (display, m, o, "run_command_window_screenshot");
     o->shortDesc		  = N_("Take a screenshot of a window");
     o->longDesc			  = N_("Take a screenshot of a window");
     o->value.action.initiate      = runCommandWindowScreenshot;
 
     o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT];
-    compInitDisplayOptionFromMetadata (m, o, "command_window_screenshot");
+    compInitDisplayOptionFromMetadata (display, m, o, "command_window_screenshot");
     o->shortDesc		  = N_("Window screenshot command line");
     o->longDesc			  = N_("Window screenshot command line");
 
     o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_MENU];
-    compInitDisplayOptionFromMetadata (m, o, "window_menu");
+    compInitDisplayOptionFromMetadata (display, m, o, "window_menu");
     o->shortDesc		     = N_("Window Menu");
     o->longDesc			     = N_("Open window menu");
     o->value.action.initiate	     = windowMenu;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK];
-    compInitDisplayOptionFromMetadata (m, o, "raise_on_click");
+    compInitDisplayOptionFromMetadata (display, m, o, "raise_on_click");
     o->shortDesc      = N_("Raise On Click");
     o->longDesc	      = N_("Raise windows when clicked");
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUDIBLE_BELL];
-    compInitDisplayOptionFromMetadata (m, o, "audible_bell");
+    compInitDisplayOptionFromMetadata (display, m, o, "audible_bell");
     o->shortDesc      = N_("Audible Bell");
     o->longDesc	      = N_("Audible system beep");
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED];
-    compInitDisplayOptionFromMetadata (m, o, "toggle_window_maximized");
+    compInitDisplayOptionFromMetadata (display, m, o, "toggle_window_maximized");
     o->shortDesc		  = N_("Toggle Window Maximized");
     o->longDesc			  = N_("Toggle active window maximized");
     o->value.action.initiate      = toggleMaximized;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ];
-    compInitDisplayOptionFromMetadata (m, o,
+    compInitDisplayOptionFromMetadata (display, m, o,
 				       "toggle_window_maximized_horizontally");
     o->shortDesc		  = N_("Toggle Window Maximized Horizontally");
     o->longDesc			  =
@@ -882,7 +881,7 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.action.initiate      = toggleMaximizedHorizontally;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT];
-    compInitDisplayOptionFromMetadata (m, o,
+    compInitDisplayOptionFromMetadata (display, m, o,
 				       "toggle_window_maximized_vertically");
     o->shortDesc		  = N_("Toggle Window Maximized Vertically");
     o->longDesc			  =
@@ -890,36 +889,36 @@ compDisplayInitOptions (CompDisplay *display,
     o->value.action.initiate      = toggleMaximizedVertically;
 
     o = &display->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
-    compInitDisplayOptionFromMetadata (m, o, "hide_skip_taskbar_windows");
+    compInitDisplayOptionFromMetadata (display, m, o, "hide_skip_taskbar_windows");
     o->shortDesc = N_("Hide Skip Taskbar Windows");
     o->longDesc	 = N_("Hide windows not in taskbar when entering show "
 	"desktop mode");
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED];
-    compInitDisplayOptionFromMetadata (m, o, "toggle_window_shaded");
+    compInitDisplayOptionFromMetadata (display, m, o, "toggle_window_shaded");
     o->shortDesc		  = N_("Toggle Window Shaded");
     o->longDesc			  = N_("Toggle active window shaded");
     o->value.action.initiate      = shade;
 
     o = &display->opt[COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED];
-    compInitDisplayOptionFromMetadata (m, o, "ignore_hints_when_maximized");
+    compInitDisplayOptionFromMetadata (display, m, o, "ignore_hints_when_maximized");
     o->shortDesc = N_("Ignore Hints When Maximized");
     o->longDesc	 = N_("Ignore size increment and aspect hints when window is "
 	"maximized");
 
     o = &display->opt[COMP_DISPLAY_OPTION_TERMINAL];
-    compInitDisplayOptionFromMetadata (m, o, "command_terminal");
+    compInitDisplayOptionFromMetadata (display, m, o, "command_terminal");
     o->shortDesc      = N_("Terminal command line");
     o->longDesc	      = N_("Terminal command line");
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_TERMINAL];
-    compInitDisplayOptionFromMetadata (m, o, "run_command_terminal");
+    compInitDisplayOptionFromMetadata (display, m, o, "run_command_terminal");
     o->shortDesc	      = N_("Open a terminal");
     o->longDesc		      = N_("Open a terminal");
     o->value.action.initiate  = runCommandTerminal;
 
     o = &display->opt[COMP_DISPLAY_OPTION_PING_DELAY];
-    compInitDisplayOptionFromMetadata (m, o, "ping_delay");
+    compInitDisplayOptionFromMetadata (display, m, o, "ping_delay");
     o->shortDesc  = N_("Ping Delay");
     o->longDesc	  = N_("Interval between ping messages");
 }
@@ -2163,6 +2162,7 @@ addDisplay (char *name,
 	    int  nPlugin)
 {
     CompDisplay *d;
+    Display     *dpy;
     Window	focus;
     int		revertTo, i;
     int		compositeMajor, compositeMinor;

@@ -234,8 +234,6 @@ extern int lastPointerY;
 extern int pointerX;
 extern int pointerY;
 
-extern Display *dpy;
-
 extern CompMetadata *coreMetadata;
 
 #define RESTRICT_VALUE(value, min, max)				     \
@@ -3080,12 +3078,14 @@ void
 compFreeMetadata (CompMetadata *data);
 
 Bool
-compInitScreenOptionFromMetadata (CompMetadata *m,
+compInitScreenOptionFromMetadata (CompScreen   *s,
+				  CompMetadata *m,
 				  CompOption   *o,
 				  const char   *name);
 
 Bool
-compInitDisplayOptionFromMetadata (CompMetadata *m,
+compInitDisplayOptionFromMetadata (CompDisplay  *d,
+				   CompMetadata *m,
 				   CompOption   *o,
 				   const char   *name);
 char *
