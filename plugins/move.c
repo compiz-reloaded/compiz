@@ -266,6 +266,9 @@ moveGetYConstrainRegion (CompScreen *s)
     CompWindow *w;
     Region     region;
     REGION     r;
+    XRectangle workArea;
+    BoxRec     extents;
+    int	       i;
 
     region = XCreateRegion ();
     if (!region)
@@ -276,33 +279,70 @@ moveGetYConstrainRegion (CompScreen *s)
 
     r.extents.x1 = MINSHORT;
     r.extents.y1 = 0;
-    r.extents.x2 = MAXSHORT;
+    r.extents.x2 = 0;
     r.extents.y2 = s->height;
 
     XUnionRegion (&r, region, region);
 
-    for (w = s->windows; w; w = w->next)
+    r.extents.x1 = s->width;
+    r.extents.x2 = MAXSHORT;
+
+    XUnionRegion (&r, region, region);
+
+    for (i = 0; i < s->nOutputDev; i++)
     {
-	if (!w->mapNum)
-	    continue;
+	XUnionRegion (&s->outputDev[i].region, region, region);
 
-	if (w->struts)
+	getWorkareaForOutput (s, i, &workArea);
+	extents = s->outputDev[i].region.extents;
+
+	for (w = s->windows; w; w = w->next)
 	{
-	    r.extents.x1 = w->struts->top.x;
-	    r.extents.y1 = w->struts->top.y;
-	    r.extents.x2 = r.extents.x1 + w->struts->top.width;
-	    r.extents.y2 = r.extents.y1 + w->struts->top.height;
+	    if (!w->mapNum)
+		continue;
 
-	    if (r.extents.y2 <= s->workArea.y)
-		XSubtractRegion (region, &r, region);
+	    if (w->struts)
+	    {
+		r.extents.x1 = w->struts->top.x;
+		r.extents.y1 = w->struts->top.y;
+		r.extents.x2 = r.extents.x1 + w->struts->top.width;
+		r.extents.y2 = r.extents.y1 + w->struts->top.height;
 
-	    r.extents.x1 = w->struts->bottom.x;
-	    r.extents.y1 = w->struts->bottom.y;
-	    r.extents.x2 = r.extents.x1 + w->struts->bottom.width;
-	    r.extents.y2 = r.extents.y1 + w->struts->bottom.height;
+		if (r.extents.x1 < extents.x1)
+		    r.extents.x1 = extents.x1;
+		if (r.extents.x2 > extents.x2)
+		    r.extents.x2 = extents.x2;
+		if (r.extents.y1 < extents.y1)
+		    r.extents.y1 = extents.y1;
+		if (r.extents.y2 > extents.y2)
+		    r.extents.y2 = extents.y2;
 
-	    if (r.extents.y1 >= (s->workArea.y + s->workArea.height))
-		XSubtractRegion (region, &r, region);
+		if (r.extents.x1 < r.extents.x2 && r.extents.y1 < r.extents.y2)
+		{
+		    if (r.extents.y2 <= workArea.y)
+			XSubtractRegion (region, &r, region);
+		}
+
+		r.extents.x1 = w->struts->bottom.x;
+		r.extents.y1 = w->struts->bottom.y;
+		r.extents.x2 = r.extents.x1 + w->struts->bottom.width;
+		r.extents.y2 = r.extents.y1 + w->struts->bottom.height;
+
+		if (r.extents.x1 < extents.x1)
+		    r.extents.x1 = extents.x1;
+		if (r.extents.x2 > extents.x2)
+		    r.extents.x2 = extents.x2;
+		if (r.extents.y1 < extents.y1)
+		    r.extents.y1 = extents.y1;
+		if (r.extents.y2 > extents.y2)
+		    r.extents.y2 = extents.y2;
+
+		if (r.extents.x1 < r.extents.x2 && r.extents.y1 < r.extents.y2)
+		{
+		    if (r.extents.y1 >= (workArea.y + workArea.height))
+			XSubtractRegion (region, &r, region);
+		}
+	    }
 	}
     }
 
@@ -320,10 +360,17 @@ moveHandleMotionEvent (CompScreen *s,
     {
 	CompWindow *w;
 	int	   dx, dy;
+	int	   wX, wY;
+	int	   wWidth, wHeight;
 
 	MOVE_DISPLAY (s->display);
 
 	w = md->w;
+
+	wX      = w->serverX;
+	wY      = w->serverY;
+	wWidth  = w->serverWidth  + w->serverBorderWidth * 2;
+	wHeight = w->serverHeight + w->serverBorderWidth * 2;
 
 	md->x += xRoot - lastPointerX;
 	md->y += yRoot - lastPointerY;
@@ -357,9 +404,9 @@ moveHandleMotionEvent (CompScreen *s,
 		    int x, y, width, height;
 		    int status;
 
-		    x	   = w->attrib.x + dx - w->input.left;
-		    y	   = w->attrib.y + dy - w->input.top;
-		    width  = w->width + w->input.left + w->input.right;
+		    x	   = wX + dx - w->input.left;
+		    y	   = wY + dy - w->input.top;
+		    width  = wWidth + w->input.left + w->input.right;
 		    height = w->input.top ? w->input.top : 1;
 
 		    status = XRectInRegion (md->region, x, y, width, height);
@@ -378,7 +425,7 @@ moveHandleMotionEvent (CompScreen *s,
 			    if (xStatus != RectangleIn)
 				dx += (dx < 0) ? 1 : -1;
 
-			    x = w->attrib.x + dx - w->input.left;
+			    x = wX + dx - w->input.left;
 			}
 
 			while (dy && status != RectangleIn)
@@ -390,7 +437,7 @@ moveHandleMotionEvent (CompScreen *s,
 			    if (status != RectangleIn)
 				dy += (dy < 0) ? 1 : -1;
 
-			    y = w->attrib.y + dy - w->input.top;
+			    y = wY + dy - w->input.top;
 			}
 		    }
 		    else
@@ -406,23 +453,26 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if ((yRoot - workArea.y) - ms->snapOffY >= SNAP_OFF)
 		    {
-			int width = w->serverWidth;
+			if (!otherScreenGrabExist (s, "move", 0))
+			{
+			    int width = w->serverWidth;
 
-			w->saveMask |= CWX | CWY;
+			    w->saveMask |= CWX | CWY;
 
-			if (w->saveMask & CWWidth)
-			    width = w->saveWc.width;
+			    if (w->saveMask & CWWidth)
+				width = w->saveWc.width;
 
-			w->saveWc.x = xRoot - (width >> 1);
-			w->saveWc.y = yRoot + (w->input.top >> 1);
+			    w->saveWc.x = xRoot - (width >> 1);
+			    w->saveWc.y = yRoot + (w->input.top >> 1);
 
-			md->x = md->y = 0;
+			    md->x = md->y = 0;
 
-			maximizeWindow (w, 0);
+			    maximizeWindow (w, 0);
 
-			ms->snapOffY = ms->snapBackY;
+			    ms->snapOffY = ms->snapBackY;
 
-			return;
+			    return;
+			}
 		    }
 		}
 		else if (ms->origState & CompWindowStateMaximizedVertMask)
@@ -454,40 +504,44 @@ moveHandleMotionEvent (CompScreen *s,
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
 		min = workArea.y + w->input.top;
-		max = workArea.y + workArea.height -
-		    w->input.bottom - w->serverHeight -
-		    w->serverBorderWidth * 2;
+		max = workArea.y + workArea.height - w->input.bottom - wHeight;
 
-		if (w->attrib.y + dy < min)
-		    dy = min - w->attrib.y;
-		else if (w->attrib.y + dy > max)
-		    dy = max - w->attrib.y;
+		if (wY + dy < min)
+		    dy = min - wY;
+		else if (wY + dy > max)
+		    dy = max - wY;
 	    }
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
-		if (w->attrib.x > s->width || w->attrib.x + w->width < 0)
+		if (wX > s->width || wX + w->width < 0)
 		    return;
 
-		if (w->attrib.x + w->serverWidth + w->serverBorderWidth < 0)
+		if (wX + wWidth < 0)
 		    return;
 
 		min = workArea.x + w->input.left;
-		max = workArea.x + workArea.width -
-		    w->input.right - w->serverWidth -
-		    w->serverBorderWidth * 2;
+		max = workArea.x + workArea.width - w->input.right - wWidth;
 
-		if (w->attrib.x + dx < min)
-		    dx = min - w->attrib.x;
-		else if (w->attrib.x + dx > max)
-		    dx = max - w->attrib.x;
+		if (wX + dx < min)
+		    dx = min - wX;
+		else if (wX + dx > max)
+		    dx = max - wX;
 	    }
 	}
 
-	moveWindow (md->w, dx, dy, TRUE, FALSE);
+	if (dx || dy)
+	{
+	    moveWindow (w,
+			wX + dx - w->attrib.x,
+			wY + dy - w->attrib.y,
+			TRUE, FALSE);
 
-	md->x -= dx;
-	md->y -= dy;
+	    syncWindowPosition (w);
+
+	    md->x -= dx;
+	    md->y -= dy;
+	}
     }
 }
 
@@ -717,7 +771,8 @@ moveDisplayInitOptions (MoveDisplay *md,
 }
 
 static CompOption *
-moveGetDisplayOptions (CompDisplay *display,
+moveGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     MOVE_DISPLAY (display);
@@ -727,7 +782,8 @@ moveGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-moveSetDisplayOption (CompDisplay    *display,
+moveSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay    *display,
 		      char	     *name,
 		      CompOptionValue *value)
 {
@@ -752,14 +808,9 @@ moveSetDisplayOption (CompDisplay    *display,
 	    return TRUE;
 	}
 	break;
-    case MOVE_DISPLAY_OPTION_CONSTRAIN_Y:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -846,8 +897,15 @@ moveFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     MOVE_SCREEN (s);
+    MOVE_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (ms, s, paintWindow);
+
+    if (ms->moveCursor)
+	XFreeCursor (s->display->display, ms->moveCursor);
 
     free (ms);
 }

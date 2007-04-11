@@ -1052,7 +1052,8 @@ decorGetOutputExtentsForWindow (CompWindow	  *w,
 }
 
 static CompOption *
-decorGetDisplayOptions (CompDisplay *display,
+decorGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     DECOR_DISPLAY (display);
@@ -1062,7 +1063,8 @@ decorGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-decorSetDisplayOption (CompDisplay     *display,
+decorSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -1076,20 +1078,6 @@ decorSetDisplayOption (CompDisplay     *display,
 	return FALSE;
 
     switch (index) {
-    case DECOR_DISPLAY_OPTION_SHADOW_RADIUS:
-    case DECOR_DISPLAY_OPTION_SHADOW_OPACITY:
-	if (compSetFloatOption (o, value))
-	    return TRUE;
-	break;
-    case DECOR_DISPLAY_OPTION_SHADOW_COLOR:
-	if (compSetColorOption (o, value))
-	    return TRUE;
-	break;
-    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_X:
-    case DECOR_DISPLAY_OPTION_SHADOW_OFFSET_Y:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
     case DECOR_DISPLAY_OPTION_COMMAND:
 	if (compSetStringOption (o, value))
 	{
@@ -1113,10 +1101,6 @@ decorSetDisplayOption (CompDisplay     *display,
 	    return TRUE;
 	}
 	break;
-    case DECOR_DISPLAY_OPTION_MIPMAP:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case DECOR_DISPLAY_OPTION_DECOR_MATCH:
     case DECOR_DISPLAY_OPTION_SHADOW_MATCH:
 	if (compSetMatchOption (o, value))
@@ -1128,7 +1112,10 @@ decorSetDisplayOption (CompDisplay     *display,
 		for (w = s->windows; w; w = w->next)
 		    decorWindowUpdate (w, TRUE);
 	}
+	break;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

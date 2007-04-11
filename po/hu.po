@@ -1,420 +1,755 @@
+# translation of compiz.po to
 # translation of hu.po to
 # translation of compiz.hu.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Kéménczy Kálmán <kkemenczy@novell.com>, 2006.
 #
+# Kalman Kemenczy <kkemenczy@novell.com>, 2006, 2007.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: hu\n"
+"Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-31 11:38+0100\n"
-"PO-Revision-Date: 2006-07-20 10:19-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2007-04-01 18:26+0200\n"
+"PO-Revision-Date: 2007-02-20 15:08+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: plugins/cube.c:989
-msgid "Cube Color"
-msgstr "Kocka színe"
+#: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
+#: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
+msgid "Initiate"
+msgstr "Indítás"
 
-#: plugins/cube.c:990
-msgid "Color of top and bottom sides of the cube"
-msgstr "A kocka alsó és felső oldalának színe"
+#: plugins/annotate.c:746
+msgid "Initiate annotate drawing"
+msgstr "Feljegyzésrajzolás indítása"
 
-#: plugins/cube.c:999
-msgid "Inside Cube"
-msgstr "A kocka belseje"
+#: plugins/annotate.c:760
+msgid "Draw"
+msgstr "Rajzolás"
 
-#: plugins/cube.c:1000
-msgid "Inside cube"
-msgstr "A kocka belseje"
+# 58721 AttribValues/label
+#: plugins/annotate.c:761
+msgid "Draw using tool"
+msgstr "Rajzolás az eszközzel"
 
-#: plugins/cube.c:1006
-msgid "Scale image"
-msgstr "Kép méretezése"
+#: plugins/annotate.c:772
+msgid "Initiate erase"
+msgstr "Törlés indítása"
 
-#: plugins/cube.c:1007
-msgid "Scale images to cover top face of cube"
-msgstr "Kép méretezése a kocka tetejének lefedésére"
+#: plugins/annotate.c:773
+msgid "Initiate annotate erasing"
+msgstr "Feljegyzéstörlés indítása"
 
-#: plugins/cube.c:1013
-msgid "Image files"
-msgstr "Képfájlok"
+#: plugins/annotate.c:787 plugins/annotate.c:788
+msgid "Clear"
+msgstr "Törlés"
 
-#: plugins/cube.c:1014
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "A kocka tetejére kerülő PNG és SVG fájlok listája"
+#: plugins/annotate.c:805
+msgid "Annotate Fill Color"
+msgstr "Feljegyzés kitöltő színe"
 
-#: plugins/cube.c:1027
-msgid "Skydome"
-msgstr "Kupola"
+#: plugins/annotate.c:806
+msgid "Fill color for annotations"
+msgstr "Feljegyzések kitöltő színe"
 
-#: plugins/cube.c:1028
-msgid "Render skydome"
-msgstr "Kupola renderelése"
+#: plugins/annotate.c:815
+msgid "Annotate Stroke Color"
+msgstr "Feljegyzés körvonalszíne"
 
-#: plugins/cube.c:1034
-msgid "Skydome Image"
-msgstr "Kupola képe"
+#: plugins/annotate.c:816
+msgid "Stroke color for annotations"
+msgstr "Feljegyzések körvonalának színe"
 
-#: plugins/cube.c:1035
-msgid "Image to use as texture for the skydome"
-msgstr "A kupola textúrájaként használt kép"
+#: plugins/annotate.c:825
+msgid "Line width"
+msgstr "Vonalvastagság"
 
-#: plugins/cube.c:1043
-msgid "Animate Skydome"
-msgstr "Kupola animálása"
+#: plugins/annotate.c:826
+msgid "Line width for annotations"
+msgstr "Feljegyzések vonalvastagsága"
 
-#: plugins/cube.c:1044
-msgid "Animate skydome when rotating cube"
-msgstr "Kupola animálása a kocka forgatásánál"
+#: plugins/annotate.c:835
+msgid "Stroke width"
+msgstr "Körvonal vastagsága"
 
-#: plugins/cube.c:1050
-msgid "Skydome Gradient Start Color"
-msgstr ""
+#: plugins/annotate.c:836
+msgid "Stroke width for annotations"
+msgstr "Feljegyzések körvonal-vastagsága"
 
-#: plugins/cube.c:1051
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
+#: plugins/annotate.c:1009
+msgid "Annotate"
+msgstr "Feljegyzés"
 
-#: plugins/cube.c:1061
-msgid "Skydome Gradient End Color"
-msgstr ""
+#: plugins/annotate.c:1010
+msgid "Annotate plugin"
+msgstr "Feljegyzés bővítmény"
 
-#: plugins/cube.c:1062
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr ""
+#: plugins/blur.c:73
+msgid "4xBilinear"
+msgstr "4x bilineáris"
 
-#: plugins/cube.c:1072 plugins/rotate.c:302
-msgid "Acceleration"
-msgstr "Gyorsítás"
+#: plugins/blur.c:74 plugins/blur.c:237
+msgid "Gaussian"
+msgstr "Gauss"
 
-#: plugins/cube.c:1073
-msgid "Fold Acceleration"
-msgstr "Hajtás gyorsulása"
-
-#: plugins/cube.c:1082 plugins/minimize.c:203 plugins/rotate.c:319
-#: plugins/scale.c:357 plugins/switcher.c:349 plugins/zoom.c:239
-msgid "Speed"
-msgstr "Sebesség"
-
-#: plugins/cube.c:1083
-msgid "Fold Speed"
-msgstr "Hajtás sebessége"
-
-#: plugins/cube.c:1092 plugins/minimize.c:213 plugins/rotate.c:329
-#: plugins/scale.c:367 plugins/switcher.c:359 plugins/zoom.c:249
-msgid "Timestep"
-msgstr "Időköz"
-
-#: plugins/cube.c:1093
-msgid "Fold Timestep"
-msgstr "Hajtás időköz"
-
-#: plugins/cube.c:1102 plugins/decoration.c:308 plugins/switcher.c:384
+#: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
+#: plugins/decoration.c:1203 plugins/switcher.c:373
 msgid "Mipmap"
 msgstr "MIP térkép"
 
-#: plugins/cube.c:1103 plugins/switcher.c:385
+#: plugins/blur.c:728
+msgid "Blur Speed"
+msgstr "Elmosás sebessége"
+
+#: plugins/blur.c:729
+msgid "Window blur speed"
+msgstr "Ablak elmosásának sebessége"
+
+#: plugins/blur.c:738
+#, fuzzy
+msgid "Focus blur windows"
+msgstr "Ablakok elmosása"
+
+#: plugins/blur.c:739
+#, fuzzy
+msgid "Windows that should be affected by focus blur"
+msgstr "Elmosandó ablaktípusok"
+
+#: plugins/blur.c:747
+msgid "Focus Blur"
+msgstr "Fókuszelmosás"
+
+#: plugins/blur.c:748
+msgid "Blur windows that doesn't have focus"
+msgstr "Fókusszal nem rendelkező ablakok elmosása"
+
+#: plugins/blur.c:754
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "Ablakok elmosása"
+
+#: plugins/blur.c:755
+#, fuzzy
+msgid "Windows that should use alpha blur by default"
+msgstr "Elmosandó ablaktípusok"
+
+#: plugins/blur.c:763
+msgid "Alpha Blur"
+msgstr "Alfa elmosás"
+
+#: plugins/blur.c:764
+msgid "Blur behind translucent parts of windows"
+msgstr "Elmosás az ablakok áttetsző részei mögött"
+
+#: plugins/blur.c:772
+msgid "Blur Filter"
+msgstr "Elmosásszűrő"
+
+#: plugins/blur.c:773
+msgid "Filter method used for blurring"
+msgstr "Az elmosáshoz használt szűrőmódszer"
+
+#: plugins/blur.c:783
+msgid "Gaussian Radius"
+msgstr "Gauss-sugár"
+
+# RU
+#: plugins/blur.c:784
+msgid "Gaussian radius"
+msgstr "Gauss-sugár"
+
+#: plugins/blur.c:792
+#, fuzzy
+msgid "Gaussian Strength"
+msgstr "Gauss"
+
+#: plugins/blur.c:793
+#, fuzzy
+msgid "Gaussian strength"
+msgstr "Gauss"
+
+#: plugins/blur.c:802
+msgid "Mipmap LOD"
+msgstr "Mipmap részletesség"
+
+#: plugins/blur.c:803
+msgid "Mipmap level-of-detail"
+msgstr "Mipmap részletesség szintje"
+
+#: plugins/blur.c:812
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "Telítettség"
+
+#: plugins/blur.c:813
+#, fuzzy
+msgid "Blur saturation"
+msgstr "Telítettség"
+
+#: plugins/blur.c:821
+msgid "Blur Occlusion"
+msgstr ""
+
+#: plugins/blur.c:822
+msgid "blur occlusion"
+msgstr ""
+
+#: plugins/blur.c:2560
+msgid "Pulse"
+msgstr "Impulzus"
+
+#: plugins/blur.c:2561
+msgid "Pulse effect"
+msgstr "Impulzus effektus"
+
+#: plugins/blur.c:2883
+msgid "Blur Windows"
+msgstr "Ablak elmosása"
+
+#: plugins/blur.c:2884
+msgid "Blur windows"
+msgstr "Ablakok elmosása"
+
+# /tmp/xapi:301
+#: plugins/clone.c:725
+msgid "Initiate clone selection"
+msgstr "Klónkiválasztás indítása"
+
+#: plugins/clone.c:854
+msgid "Clone Output"
+msgstr "Kimenet klónozása"
+
+#: plugins/clone.c:855
+msgid "Output clone handler"
+msgstr "Kimenet klónkezelője"
+
+#: plugins/cube.c:990
+msgid "Cube Color"
+msgstr "Kocka színe"
+
+#: plugins/cube.c:991
+msgid "Color of top and bottom sides of the cube"
+msgstr "A kocka alsó és felső oldalának színe"
+
+#: plugins/cube.c:1000
+msgid "Inside Cube"
+msgstr "A kocka belseje"
+
+#: plugins/cube.c:1001
+msgid "Inside cube"
+msgstr "A kocka belseje"
+
+#: plugins/cube.c:1007
+msgid "Scale image"
+msgstr "Kép méretezése"
+
+#: plugins/cube.c:1008
+msgid "Scale images to cover top face of cube"
+msgstr "Kép méretezése a kocka tetejének lefedésére"
+
+#: plugins/cube.c:1014
+msgid "Image files"
+msgstr "Képfájlok"
+
+#: plugins/cube.c:1015
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "A kocka tetejére kerülő PNG és SVG fájlok listája"
+
+#: plugins/cube.c:1028
+msgid "Skydome"
+msgstr "Kupola"
+
+#: plugins/cube.c:1029
+msgid "Render skydome"
+msgstr "Kupola renderelése"
+
+#: plugins/cube.c:1035
+msgid "Skydome Image"
+msgstr "Kupola képe"
+
+#: plugins/cube.c:1036
+msgid "Image to use as texture for the skydome"
+msgstr "A kupola textúrájaként használt kép"
+
+#: plugins/cube.c:1044
+msgid "Animate Skydome"
+msgstr "Kupola animálása"
+
+#: plugins/cube.c:1045
+msgid "Animate skydome when rotating cube"
+msgstr "Kupola animálása a kocka forgatásánál"
+
+#: plugins/cube.c:1051
+msgid "Skydome Gradient Start Color"
+msgstr "Kupola színátmenetének induló színe"
+
+#: plugins/cube.c:1052
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "A kupola tartalék színátmenet felső színállomásához használandó szín"
+
+#: plugins/cube.c:1062
+msgid "Skydome Gradient End Color"
+msgstr "Kupola színátmenetének záró színe"
+
+#: plugins/cube.c:1063
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "A kupola tartalék színátmenet alsó színállomásához használandó szín"
+
+#: plugins/cube.c:1073 plugins/rotate.c:302
+msgid "Acceleration"
+msgstr "Gyorsítás"
+
+#: plugins/cube.c:1074
+msgid "Fold Acceleration"
+msgstr "Hajtás gyorsulása"
+
+#: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
+#: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
+msgid "Speed"
+msgstr "Sebesség"
+
+#: plugins/cube.c:1084
+msgid "Fold Speed"
+msgstr "Hajtás sebessége"
+
+#: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
+#: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
+msgid "Timestep"
+msgstr "Időköz"
+
+#: plugins/cube.c:1094
+msgid "Fold Timestep"
+msgstr "Hajtás időköz"
+
+#: plugins/cube.c:1104 plugins/switcher.c:374
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 "MIP térképek készítése, hacsak lehetséges, a jobb minőségű skálázás érdekében"
 
-#: plugins/cube.c:1794
+#: plugins/cube.c:1795
 msgid "Unfold"
 msgstr "Kibontás"
 
-#: plugins/cube.c:1795
+#: plugins/cube.c:1796
 msgid "Unfold cube"
 msgstr "Kocka kibontása"
 
-#: plugins/cube.c:1812
+#: plugins/cube.c:1813
 msgid "Next Slide"
 msgstr "Következő dia"
 
-#: plugins/cube.c:1813
+#: plugins/cube.c:1814
 msgid "Advance to next slide"
 msgstr "Továbblépés a következő diára"
 
-#: plugins/cube.c:1830
+#: plugins/cube.c:1831
 msgid "Previous Slide"
 msgstr "Előző dia"
 
-#: plugins/cube.c:1831
+#: plugins/cube.c:1832
 msgid "Go back to previous slide"
 msgstr "Visszatérés az előző diára"
 
-#: plugins/cube.c:2036
+#: plugins/cube.c:2037
 msgid "Desktop Cube"
 msgstr "Munkaasztal kocka"
 
-#: plugins/cube.c:2037
+#: plugins/cube.c:2038
 msgid "Place windows on cube"
 msgstr "Ablakok elhelyezése a kockán"
 
-#: plugins/decoration.c:250
+#: plugins/decoration.c:1145
 msgid "Shadow Radius"
 msgstr "Árnyék átmérője"
 
-#: plugins/decoration.c:251
+#: plugins/decoration.c:1146
 msgid "Drop shadow radius"
 msgstr "Árnyék átmérője"
 
-#: plugins/decoration.c:260
+#: plugins/decoration.c:1155
 msgid "Shadow Opacity"
 msgstr "Árnyék átlátszatlansága"
 
-#: plugins/decoration.c:261
+#: plugins/decoration.c:1156
 msgid "Drop shadow opacity"
 msgstr "Árnyék átlátszatlansága"
 
-#: plugins/decoration.c:280
+#: plugins/decoration.c:1175
 msgid "Shadow Offset X"
 msgstr "Árnyék X eltolás"
 
-#: plugins/decoration.c:281
+#: plugins/decoration.c:1176
 msgid "Drop shadow X offset"
 msgstr "Árnyék X-eltolása"
 
-#: plugins/decoration.c:289
+#: plugins/decoration.c:1184
 msgid "Shadow Offset Y"
 msgstr "Árnyék Y eltolás"
 
-#: plugins/decoration.c:290
+#: plugins/decoration.c:1185
 msgid "Drop shadow Y offset"
-msgstr "Árnyék X-eltolása"
+msgstr "Árnyék Y-eltolása"
 
-#: plugins/decoration.c:298
-#, fuzzy
+#: plugins/decoration.c:1193
 msgid "Command"
-msgstr "%d. parancssor"
+msgstr "Parancs"
 
-#: plugins/decoration.c:299
+#: plugins/decoration.c:1194
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
+"Díszítő parancs, amely akkor kerül végrehajtásra, ha még nem fut díszítő"
 
-#: plugins/decoration.c:1451
+#: plugins/decoration.c:1210
+#, fuzzy
+msgid "Decoration windows"
+msgstr "Ablakok méretezése"
+
+#: plugins/decoration.c:1211
+#, fuzzy
+msgid "Windows that should be decorated"
+msgstr "Elmosandó ablaktípusok"
+
+#: plugins/decoration.c:1219
+#, fuzzy
+msgid "Shadow windows"
+msgstr "Ablakok illesztése"
+
+#: plugins/decoration.c:1220
+#, fuzzy
+msgid "Windows that should be have a shadow"
+msgstr "Ablaktípusok, amelyek elhalványulhatnak"
+
+#: plugins/decoration.c:1505
 msgid "Window Decoration"
 msgstr "Ablakdekoráció"
 
-#: plugins/decoration.c:1452
+#: plugins/decoration.c:1506
 msgid "Window decorations"
 msgstr "Ablakdekorációk"
 
-#: plugins/fade.c:37 src/main.c:55
-msgid "Dock"
-msgstr "Dokk"
-
-#: plugins/fade.c:38 plugins/minimize.c:49 plugins/scale.c:73
-#: plugins/switcher.c:87 plugins/wobbly.c:159 src/main.c:56
-msgid "Toolbar"
-msgstr "Eszköztár"
-
-#: plugins/fade.c:39 plugins/wobbly.c:160 src/main.c:57
-msgid "Menu"
-msgstr "Menü"
-
-#: plugins/fade.c:40 plugins/minimize.c:50 plugins/scale.c:74
-#: plugins/switcher.c:88 plugins/wobbly.c:161 src/main.c:58
-msgid "Utility"
-msgstr "Segédprogram"
-
-#: plugins/fade.c:41 plugins/wobbly.c:146 src/main.c:59
-msgid "Splash"
-msgstr "Párbeszéd"
-
-#: plugins/fade.c:42 plugins/minimize.c:52 plugins/scale.c:78
-#: plugins/switcher.c:92 plugins/wobbly.c:164 src/main.c:61
-msgid "Normal"
-msgstr "Normál"
-
-#: plugins/fade.c:43 plugins/minimize.c:51 plugins/scale.c:75
-#: plugins/switcher.c:89 plugins/wobbly.c:162 src/main.c:60
-msgid "Dialog"
-msgstr ""
-
-#: plugins/fade.c:44 plugins/scale.c:76 plugins/switcher.c:90
-#: plugins/wobbly.c:163 src/main.c:68
-msgid "ModalDialog"
-msgstr ""
-
-#: plugins/fade.c:45 plugins/wobbly.c:147 src/main.c:62
-#, fuzzy
-msgid "DropdownMenu"
-msgstr "Ablak menü"
-
-#: plugins/fade.c:46 plugins/wobbly.c:148 src/main.c:63
-#, fuzzy
-msgid "PopupMenu"
-msgstr "Menü"
-
-#: plugins/fade.c:47 plugins/wobbly.c:149 src/main.c:64
-msgid "Tooltip"
-msgstr ""
-
-#: plugins/fade.c:48 plugins/wobbly.c:150 src/main.c:65
-#, fuzzy
-msgid "Notification"
-msgstr "Súrlódás"
-
-#: plugins/fade.c:49 plugins/wobbly.c:151 src/main.c:66
-msgid "Combo"
-msgstr ""
-
-#: plugins/fade.c:50 plugins/wobbly.c:152 src/main.c:67
-msgid "Dnd"
-msgstr ""
-
-#: plugins/fade.c:51 plugins/wobbly.c:153 src/main.c:70
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: plugins/fade.c:184
+#: plugins/fade.c:179
 msgid "Fade Speed"
 msgstr "Elhalványulás sebessége"
 
-#: plugins/fade.c:185
+#: plugins/fade.c:180
 msgid "Window fade speed"
 msgstr "Ablak elhalványulásának sebessége"
 
-#: plugins/fade.c:194 plugins/minimize.c:223 plugins/scale.c:377
-#: plugins/switcher.c:369
-msgid "Window Types"
-msgstr "Ablaktípusok"
+#: plugins/fade.c:189
+#, fuzzy
+msgid "Fade windows"
+msgstr "Ablakok méretezése"
 
-#: plugins/fade.c:195
-msgid "Window types that should be fading"
+#: plugins/fade.c:190
+#, fuzzy
+msgid "Windows that should be fading"
 msgstr "Ablaktípusok, amelyek elhalványulhatnak"
 
-#: plugins/fade.c:209
+#: plugins/fade.c:198
 msgid "Visual Bell"
 msgstr "Vizuális csengő"
 
-#: plugins/fade.c:210
+#: plugins/fade.c:199
 msgid "Fade effect on system beep"
 msgstr "Elhalványulás effektus rendszerhang esetén"
 
-#: plugins/fade.c:216
+#: plugins/fade.c:205
 msgid "Fullscreen Visual Bell"
 msgstr "Teljes képernyő vizuális csengő"
 
-#: plugins/fade.c:217
+#: plugins/fade.c:206
 msgid "Fullscreen fade effect on system beep"
 msgstr "Teljes képernyő halványuló effektus rendszercsengő esetén"
 
-#: plugins/fade.c:830
+#: plugins/fade.c:857
 msgid "Fading Windows"
 msgstr "Ablakok elhalványítása"
 
-#: plugins/fade.c:831
+#: plugins/fade.c:858
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "Leképezés esetén az ablak erősítése, lecsatolás esetén elhalványítása"
+
+#: plugins/fuse.c:1486
+#, fuzzy
+msgid "Mount Point"
+msgstr "Pont"
+
+#: plugins/fuse.c:1487
+#, fuzzy
+msgid "Mount point"
+msgstr "Pont hozzáadása"
+
+#: plugins/fuse.c:1586
+msgid "Userspace File System"
+msgstr ""
+
+#: plugins/fuse.c:1587
+msgid "Userspace file system"
+msgstr ""
 
 #. Decimal point character
 #: plugins/gconf-dump.c:81
 msgid "."
 msgstr ","
 
-#: plugins/gconf-dump.c:603
+#: plugins/gconf-dump.c:616
 msgid "Plugins that this must load before"
-msgstr "Kötelezően betöltendő beépülő modulok "
+msgstr "Kötelezően betöltendő bővítmények"
 
-#: plugins/gconf-dump.c:604 plugins/gconf-dump.c:614
+#: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
 msgid "Do not modify"
 msgstr "Nem módosít"
 
-#: plugins/gconf-dump.c:613
+#: plugins/gconf-dump.c:626
 msgid "Plugins that this requires"
-msgstr "Szükséges beépülő modulok"
+msgstr "Szükséges bővítmények"
 
-#: plugins/minimize.c:204
+#: plugins/minimize.c:193
 msgid "Minimize speed"
 msgstr "Minimalizálás sebessége"
 
-#: plugins/minimize.c:214
+#: plugins/minimize.c:203
 msgid "Minimize timestep"
 msgstr "Minimalizálási időköz"
 
-#: plugins/minimize.c:224
-msgid "Window types that should be transformed when minimized"
+#: plugins/minimize.c:212
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "Ablak minimalizálása"
+
+#: plugins/minimize.c:213
+#, fuzzy
+msgid "Windows that should be transformed when minimized"
 msgstr "Ablaktípusok, amelyek transzformálhatók, amikor ikonizáltak"
 
-#: plugins/minimize.c:239
+#: plugins/minimize.c:221
 msgid "Shade Resistance"
 msgstr "Árnyék ellenállása"
 
-#: plugins/minimize.c:240
+#: plugins/minimize.c:222
 msgid "Shade resistance"
 msgstr "Árnyék ellenállása"
 
-#: plugins/minimize.c:1061
+#: plugins/minimize.c:1071
 msgid "Minimize Effect"
 msgstr "Minimalizálás effektus"
 
-#: plugins/minimize.c:1062
+#: plugins/minimize.c:1072
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Ablakok transzformációja ikonizáláskor és visszaállításkor"
 
-#: plugins/move.c:651
+#: plugins/move.c:677
 msgid "Initiate Window Move"
 msgstr "Ablakmozgatás indítása"
 
-#: plugins/move.c:652
+#: plugins/move.c:678
 msgid "Start moving window"
 msgstr "Ablakmozgatás indítása"
 
-#: plugins/move.c:670 plugins/scale.c:399 plugins/switcher.c:410
+#: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
 msgid "Opacity"
 msgstr "Átlátszatlanság"
 
-#: plugins/move.c:671
+#: plugins/move.c:697
 msgid "Opacity level of moving windows"
 msgstr "Ablakmozgatás átlátszatlanságának szintje"
 
-#: plugins/move.c:679
+#: plugins/move.c:705
 msgid "Constrain Y"
 msgstr "Y megszorítás"
 
-#: plugins/move.c:680
+#: plugins/move.c:706
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Y koordináta-megszorítás a munkafelületre"
 
-#: plugins/move.c:686
+#: plugins/move.c:712
 msgid "Snapoff maximized windows"
 msgstr "A maximalizált ablakok azonnali visszaállítása"
 
-#: plugins/move.c:687
+#: plugins/move.c:713
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Az ablakok azonnali, automatikus visszaállítása azok mozgatásakor"
 
-#: plugins/move.c:855
+#: plugins/move.c:881
 msgid "Move Window"
 msgstr "Ablak mozgatása"
 
-#: plugins/move.c:856
+#: plugins/move.c:882
 msgid "Move window"
 msgstr "Ablak mozgatása"
 
-#: plugins/place.c:104
+#: plugins/place.c:42
+msgid "Cascade"
+msgstr ""
+
+#: plugins/place.c:43
+msgid "Centered"
+msgstr ""
+
+#: plugins/place.c:44
+msgid "Smart"
+msgstr ""
+
+#: plugins/place.c:45
+#, fuzzy
+msgid "Maximize"
+msgstr "Minimalizálva"
+
+#: plugins/place.c:46
+msgid "Random"
+msgstr ""
+
+#: plugins/place.c:244
 msgid "Workarounds"
 msgstr "Kerülő megoldások"
 
-#: plugins/place.c:105
+#: plugins/place.c:245
 msgid "Window placement workarounds"
 msgstr "Kerülőmegoldások az ablak elhelyezésére"
 
-#: plugins/place.c:1145
+#: plugins/place.c:251
+msgid "Placement Mode"
+msgstr ""
+
+#: plugins/place.c:252
+msgid "Algorithm to use for window placement"
+msgstr ""
+
+#: plugins/place.c:260
+#, fuzzy
+msgid "Positioned windows"
+msgstr "Ikonizált ablakok megjelenítése"
+
+#: plugins/place.c:261
+#, fuzzy
+msgid "Windows that should be positioned by default"
+msgstr "Ablaktípusok, amelyek elhalványulhatnak"
+
+#: plugins/place.c:271
+msgid "X Positions"
+msgstr ""
+
+#: plugins/place.c:272
+msgid "X position values"
+msgstr ""
+
+#: plugins/place.c:282
+msgid "Y Positions"
+msgstr ""
+
+#: plugins/place.c:283
+msgid "Y position values"
+msgstr ""
+
+#: plugins/place.c:293
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: plugins/place.c:294
+#, fuzzy
+msgid "Windows that should positioned in specific viewports by default"
+msgstr "Ablaktípusok, amelyek skálázás módban méretezendők"
+
+#: plugins/place.c:305
+msgid "X Viewport Positions"
+msgstr ""
+
+#: plugins/place.c:306
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Vízszintes virtuális méret"
+
+#: plugins/place.c:316
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: plugins/place.c:317
+msgid "Vertical viewport positions"
+msgstr ""
+
+#: plugins/place.c:1604
 msgid "Place Windows"
 msgstr "Ablak elhelyezése"
 
-#: plugins/place.c:1146
+#: plugins/place.c:1605
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Térképezés esetén az ablakok elhelyezése a megfelelő pozícióba"
+
+#: plugins/plane.c:624
+msgid "Plane Left"
+msgstr "Gördítés balra"
+
+#: plugins/plane.c:625
+msgid "Plane left"
+msgstr "Gördítés balra"
+
+#: plugins/plane.c:643
+msgid "Plane Right"
+msgstr "Gördítés jobbra"
+
+#: plugins/plane.c:644
+msgid "Plane right"
+msgstr "Gördítés jobbra"
+
+#: plugins/plane.c:662
+msgid "Plane Down"
+msgstr "Gördítés le"
+
+#: plugins/plane.c:663
+msgid "Plane down"
+msgstr "Gördítés le"
+
+#: plugins/plane.c:681
+msgid "Plane Up"
+msgstr "Gördítés fel"
+
+#: plugins/plane.c:682
+msgid "Plane up"
+msgstr "Gördítés fel"
+
+#: plugins/plane.c:698
+#, c-format
+msgid "Plane To Face %d"
+msgstr "Gördítés a(z) %d. előlap felé"
+
+#: plugins/plane.c:699
+#, c-format
+msgid "Plane to face %d"
+msgstr "Gördítés a(z) %d. előlap felé"
+
+#: plugins/plane.c:700
+#, c-format
+msgid "Plane To Face %d with Window"
+msgstr "Gördítés a(z) %d. előlap felé az ablakkal együtt"
+
+#: plugins/plane.c:701
+#, c-format
+msgid "Plane to face %d and bring active window along"
+msgstr "Gördítés a(z) %d. előlap felé az aktív ablakkal együtt"
+
+#: plugins/plane.c:868
+msgid "Desktop Plane"
+msgstr "Munkaasztal sík"
+
+#: plugins/plane.c:869
+msgid "Place windows on a plane"
+msgstr "Ablakok elhelyezése a síkon"
+
+#: plugins/regex.c:463
+msgid "Regex Matching"
+msgstr ""
+
+#: plugins/regex.c:464
+#, fuzzy
+msgid "Regex window matching"
+msgstr "\"Ablakok illesztése\" effektus kapcsoló"
 
 #: plugins/resize.c:718
 msgid "Initiate Window Resize"
@@ -468,554 +803,600 @@ msgstr "Forgatás sebessége"
 msgid "Rotation Timestep"
 msgstr "Forgatás időköze"
 
-#: plugins/rotate.c:1743 plugins/water.c:1649 plugins/zoom.c:750
-msgid "Initiate"
-msgstr "Indítás"
-
-#: plugins/rotate.c:1744
+#: plugins/rotate.c:1764
 msgid "Start Rotation"
 msgstr "Forgatás indítása"
 
-#: plugins/rotate.c:1758
+#: plugins/rotate.c:1778
 msgid "Rotate Left"
 msgstr "Forgatás balra"
 
-#: plugins/rotate.c:1759
+#: plugins/rotate.c:1779
 msgid "Rotate left"
 msgstr "Balra forgatás"
 
-#: plugins/rotate.c:1777
+#: plugins/rotate.c:1797
 msgid "Rotate Right"
 msgstr "Forgatás jobbra"
 
-#: plugins/rotate.c:1778
+#: plugins/rotate.c:1798
 msgid "Rotate right"
 msgstr "Jobbra forgatás"
 
-#: plugins/rotate.c:1796
+#: plugins/rotate.c:1816
 msgid "Rotate Left with Window"
 msgstr "Forgatás balra az ablakkal együtt"
 
-#: plugins/rotate.c:1797
+#: plugins/rotate.c:1817
 msgid "Rotate left and bring active window along"
 msgstr "Balra forgatás az aktív ablakkal együtt"
 
-#: plugins/rotate.c:1816
+#: plugins/rotate.c:1836
 msgid "Rotate Right with Window"
 msgstr "Forgatás jobbra az ablakkal együtt"
 
-#: plugins/rotate.c:1817
+#: plugins/rotate.c:1837
 msgid "Rotate right and bring active window along"
 msgstr "Jobbra forgatás az aktív ablakkal együtt"
 
-#: plugins/rotate.c:1834
+#: plugins/rotate.c:1854
 #, c-format
 msgid "Rotate To Face %d"
-msgstr ""
+msgstr "Forgatás a(z) %d. előlap felé"
 
-#: plugins/rotate.c:1835
+#: plugins/rotate.c:1855
 #, c-format
 msgid "Rotate to face %d"
-msgstr ""
+msgstr "Forgatás a(z) %d. előlap felé"
 
-#: plugins/rotate.c:1836
+#: plugins/rotate.c:1856
 #, c-format
 msgid "Rotate To Face %d with Window"
-msgstr ""
+msgstr "Forgatás a(z) %d. előlap felé az ablakkal együtt"
 
-#: plugins/rotate.c:1837
+#: plugins/rotate.c:1857
 #, c-format
 msgid "Rotate to face %d and bring active window along"
-msgstr ""
+msgstr "Forgatás a(z) %d. előlap felé az aktív ablakkal együtt"
 
-#: plugins/rotate.c:1886
-#, fuzzy
+#: plugins/rotate.c:1906
 msgid "Rotate To"
-msgstr "Forgatás balra"
+msgstr "Forgatás"
 
-#: plugins/rotate.c:1887
-#, fuzzy
+#: plugins/rotate.c:1907
 msgid "Rotate to viewport"
-msgstr "Forgatás balra"
+msgstr "Forgatás munkalapra"
 
-#: plugins/rotate.c:1898
-#, fuzzy
+#: plugins/rotate.c:1918
 msgid "Rotate Window"
-msgstr "Ablak mozgatása"
+msgstr "Ablak forgatása"
 
-#: plugins/rotate.c:1899
-#, fuzzy
+#: plugins/rotate.c:1919
 msgid "Rotate with window"
-msgstr "Forgatás balra az ablakkal együtt"
+msgstr "Forgatás az ablakkal együtt"
 
-#: plugins/rotate.c:1910
-#, fuzzy
+#: plugins/rotate.c:1930
 msgid "Rotate Flip Left"
 msgstr "Forgatás balra"
 
-#: plugins/rotate.c:1911
-#, fuzzy
+#: plugins/rotate.c:1931
 msgid "Flip to left viewport and warp pointer"
-msgstr "Mutató kép szélére húzása esetén forgatás a következő nézőpontig"
+msgstr "Forgatás a bal oldali nézőpontig és mutató léptetése"
 
-#: plugins/rotate.c:1926
-#, fuzzy
+#: plugins/rotate.c:1946
 msgid "Rotate Flip Right"
 msgstr "Forgatás jobbra"
 
-#: plugins/rotate.c:1927
-#, fuzzy
+#: plugins/rotate.c:1947
 msgid "Flip to right viewport and warp pointer"
-msgstr "Mutató kép szélére húzása esetén forgatás a következő nézőpontig"
+msgstr "Forgatás a jobb oldali nézőpontig és mutató léptetése"
 
-#: plugins/rotate.c:1942
+#: plugins/rotate.c:1962
 msgid "Edge Flip Pointer"
 msgstr "Élforgatás mutató"
 
-#: plugins/rotate.c:1943
+#: plugins/rotate.c:1963
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr "Mutató kép szélére húzása esetén forgatás a következő nézőpontig"
 
-#: plugins/rotate.c:1950
+#: plugins/rotate.c:1970
 msgid "Edge Flip Move"
 msgstr "Élforgatás áthelyezés"
 
-#: plugins/rotate.c:1951
+#: plugins/rotate.c:1971
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr "Egy ablak kép szélére húzása esetén forgatás a következő nézőpontig"
 
-#: plugins/rotate.c:1958
+#: plugins/rotate.c:1978
 msgid "Edge Flip DnD"
 msgstr "Élforgatás egérművelet"
 
-#: plugins/rotate.c:1959
+#: plugins/rotate.c:1979
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr "Objektum kép szélére húzása esetén forgatás a következő nézőpontig"
 
-#: plugins/rotate.c:1966
+#: plugins/rotate.c:1986
 msgid "Flip Time"
 msgstr "Forgatási idő"
 
-#: plugins/rotate.c:1967
+#: plugins/rotate.c:1987
 msgid "Timeout before flipping viewport"
 msgstr "A nézőpont váltása előtti időkorlát"
 
-#: plugins/rotate.c:2135
+#: plugins/rotate.c:2155
 msgid "Rotate Cube"
 msgstr "Kocka forgatása"
 
-#: plugins/rotate.c:2136
+#: plugins/rotate.c:2156
 msgid "Rotate desktop cube"
 msgstr "A munkaasztalkocka forgatása"
 
-#: plugins/scale.c:77 plugins/switcher.c:91 src/main.c:69
-msgid "Fullscreen"
-msgstr "Teljes képernyős"
-
-#: plugins/scale.c:89 plugins/wobbly.c:131
+#: plugins/scale.c:80 plugins/wobbly.c:131
 msgid "None"
-msgstr "Nincs"
+msgstr "Egyik sem"
 
-#: plugins/scale.c:90
+#: plugins/scale.c:81
 msgid "Emblem"
 msgstr "Embléma"
 
-#: plugins/scale.c:91
+#: plugins/scale.c:82
 msgid "Big"
 msgstr "Nagy"
 
-#: plugins/scale.c:341
+#: plugins/scale.c:325
 msgid "Spacing"
 msgstr "Távolság"
 
-#: plugins/scale.c:342
+#: plugins/scale.c:326
 msgid "Space between windows"
 msgstr "Ablakok közti távolság"
 
-#: plugins/scale.c:350
-msgid "Sloppy Focus"
-msgstr "Lassú fókusz"
-
-#: plugins/scale.c:351
-msgid "Focus window when mouse moves over them"
-msgstr "Ablakra fókuszálás, ha az egér fölé kerül"
-
-#: plugins/scale.c:358
+#: plugins/scale.c:335
 msgid "Scale speed"
 msgstr "Méretezés sebessége"
 
-#: plugins/scale.c:368
+#: plugins/scale.c:345
 msgid "Scale timestep"
 msgstr "Méretezés időköze"
 
-#: plugins/scale.c:378
-msgid "Window types that should scaled in scale mode"
+#: plugins/scale.c:354
+#, fuzzy
+msgid "Scale Windows"
+msgstr "Ablakok méretezése"
+
+#: plugins/scale.c:355
+#, fuzzy
+msgid "Windows that should be scaled in scale mode"
 msgstr "Ablaktípusok, amelyek skálázás módban méretezendők"
 
-#: plugins/scale.c:392
+#: plugins/scale.c:363
 msgid "Darken Background"
 msgstr "Sötétülő háttér"
 
-#: plugins/scale.c:393
+#: plugins/scale.c:364
 msgid "Darken background when scaling windows"
 msgstr "Sötétülő háttér az ablakok átméretezésekor"
 
-#: plugins/scale.c:400 plugins/switcher.c:411
+#: plugins/scale.c:371 plugins/switcher.c:400
 msgid "Amount of opacity in percent"
 msgstr "Átlátszatlanság (0-100%)"
 
-#: plugins/scale.c:408
+#: plugins/scale.c:379
 msgid "Overlay Icon"
 msgstr "Átfedő ikon"
 
-#: plugins/scale.c:409
+#: plugins/scale.c:380
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Ikon átfedése az ablakon átméretezéskor"
 
-#: plugins/scale.c:417
+#: plugins/scale.c:388
 msgid "Hover Time"
-msgstr ""
+msgstr "Mutatás ideje"
 
-#: plugins/scale.c:418
+#: plugins/scale.c:389
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
+"Az átméretezési mód befejezés előtt eltelő idő (ezredmásodpercben) ablakra "
+"mutatáskor"
 
-#: plugins/scale.c:1846
+#: plugins/scale.c:1931
 msgid "Initiate Window Picker"
 msgstr "Ablakválasztó indítása"
 
-#: plugins/scale.c:1847
+#: plugins/scale.c:1932
 msgid "Layout and start transforming windows"
 msgstr "Ablaktranszformáció és elrendezés indítása"
 
-#: plugins/scale.c:1865
-#, fuzzy
+#: plugins/scale.c:1950
 msgid "Initiate Window Picker For All Windows"
-msgstr "Ablakválasztó indítása"
+msgstr "Ablakválasztó indítása minden ablakhoz"
 
-#: plugins/scale.c:1866
-#, fuzzy
+#: plugins/scale.c:1951
 msgid "Layout and start transforming all windows"
-msgstr "Ablaktranszformáció és elrendezés indítása"
+msgstr "Elrendezés és ablaktranszformáció indítása"
 
-#: plugins/scale.c:1880
-#, fuzzy
+#: plugins/scale.c:1965
 msgid "Initiate Window Picker For Window Group"
-msgstr "Ablakválasztó indítása"
+msgstr "Ablakválasztó indítása ablakcsoporthoz"
 
-#: plugins/scale.c:1881
-#, fuzzy
+#: plugins/scale.c:1966
 msgid "Layout and start transforming window group"
-msgstr "Ablaktranszformáció és elrendezés indítása"
+msgstr "Elrendezés és ablakcsoport-transzformáció indítása"
 
-#: plugins/scale.c:1896
-#, fuzzy
+#: plugins/scale.c:1981
 msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Ablakválasztó indítása"
+msgstr "Ablakválasztó indítása a jelenlegi kimenet ablakain"
 
-#: plugins/scale.c:1898
-#, fuzzy
+#: plugins/scale.c:1983
 msgid "Layout and start transforming windows on current output"
-msgstr "Ablaktranszformáció és elrendezés indítása"
+msgstr "Elrendezés és a jelenlegi kimenet ablakai transzformációjának indítása"
 
-#: plugins/scale.c:2107
+#: plugins/scale.c:2200
 msgid "Scale"
 msgstr "Méretarány"
 
-#: plugins/scale.c:2108
+#: plugins/scale.c:2201
 msgid "Scale windows"
 msgstr "Ablakok méretezése"
 
-#: plugins/switcher.c:350
+#: plugins/screenshot.c:385
+msgid "Initiate rectangle screenshot"
+msgstr "Téglalap képernyőkép készítése"
+
+#: plugins/screenshot.c:398
+msgid "Directory"
+msgstr "Könyvtár"
+
+#: plugins/screenshot.c:399
+msgid "Put screenshot images in this directory"
+msgstr "Képernyőképek elhelyezése ebbe a könyvtárba"
+
+#: plugins/screenshot.c:407
+msgid "Launch Application"
+msgstr "Alkalmazás indítása"
+
+#: plugins/screenshot.c:408
+msgid "Automatically open screenshot in this application"
+msgstr "A automatikus indítása bejelentkezéskor"
+
+# /tmp/intro:67 /tmp/xapi:379
+#: plugins/screenshot.c:558
+msgid "Screenshot"
+msgstr "Képernyőkép"
+
+#: plugins/screenshot.c:559
+msgid "Screenshot plugin"
+msgstr "Képernyőkép bővítmény"
+
+#: plugins/switcher.c:345
 msgid "Switcher speed"
 msgstr "Váltás sebessége"
 
-#: plugins/switcher.c:360
+#: plugins/switcher.c:355
 msgid "Switcher timestep"
 msgstr "Váltás időköz"
 
-#: plugins/switcher.c:370
-msgid "Window types that should shown in switcher"
-msgstr "Ablaktípusok, amelyek megjelenítendők az ablakválasztóban"
+#: plugins/switcher.c:364
+#, fuzzy
+msgid "Switcher windows"
+msgstr "Ablakok méretezése"
 
-#: plugins/switcher.c:392
+#: plugins/switcher.c:365
+#, fuzzy
+msgid "Windows that should be shown in switcher"
+msgstr "Az ablakválasztóban megjelenítendő ablaktípusok"
+
+#: plugins/switcher.c:381
 msgid "Saturation"
 msgstr "Telítettség"
 
-#: plugins/switcher.c:393
+#: plugins/switcher.c:382
 msgid "Amount of saturation in percent"
 msgstr "Telítettség (0-100%)"
 
-#: plugins/switcher.c:401
+#: plugins/switcher.c:390
 msgid "Brightness"
 msgstr "Fényerő"
 
-#: plugins/switcher.c:402
+#: plugins/switcher.c:391
 msgid "Amount of brightness in percent"
 msgstr "Fényerősség (0-100%)"
 
-#: plugins/switcher.c:419
+#: plugins/switcher.c:408
 msgid "Bring To Front"
 msgstr "Előrehozás"
 
-#: plugins/switcher.c:420
+#: plugins/switcher.c:409
 msgid "Bring selected window to front"
 msgstr "A kijelölt ablak az előtérbe hozása"
 
-#: plugins/switcher.c:426
+#: plugins/switcher.c:415
 msgid "Zoom"
 msgstr "Nagyítás"
 
-#: plugins/switcher.c:427
+#: plugins/switcher.c:416
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr "A munkaasztal kinagyításának mértéke ablakváltás során"
 
-#: plugins/switcher.c:437
+#: plugins/switcher.c:426
 msgid "Icon"
 msgstr "Ikon"
 
-#: plugins/switcher.c:438
+#: plugins/switcher.c:427
 msgid "Show icon next to thumbnail"
 msgstr "Ikon megjelenítése a miniatűr mellett"
 
-#: plugins/switcher.c:444
+#: plugins/switcher.c:433
 msgid "Minimized"
 msgstr "Minimalizálva"
 
-#: plugins/switcher.c:445
+#: plugins/switcher.c:434
 msgid "Show minimized windows"
 msgstr "Ikonizált ablakok megjelenítése"
 
-#: plugins/switcher.c:1940 plugins/switcher.c:1976 plugins/switcher.c:2014
+#: plugins/switcher.c:440
 #, fuzzy
-msgid "Next window"
-msgstr "Ablak mozgatása"
+msgid "Auto Rotate"
+msgstr "Automatikus megnyitás"
 
-#: plugins/switcher.c:1941
-msgid "Popup switcher if not visible and select next window"
+#: plugins/switcher.c:441
+msgid "Rotate to the selected window while switching"
 msgstr ""
 
-#: plugins/switcher.c:1958 plugins/switcher.c:1995 plugins/switcher.c:2027
-#, fuzzy
+#: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
+msgid "Next window"
+msgstr "Következő ablak"
+
+#: plugins/switcher.c:2028
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+"Ablakváltó megjelenítése ha nem látható és a következő ablak kiválasztása"
+
+#: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
 msgid "Prev window"
 msgstr "Előző ablak"
 
-#: plugins/switcher.c:1959
-#, fuzzy
+#: plugins/switcher.c:2046
 msgid "Popup switcher if not visible and select previous window"
-msgstr "Módosító billentyű az előző ablak kiválasztásához"
+msgstr "Ablakváltó megjelenítése ha nem látható és az előző ablak kiválasztása"
 
-#: plugins/switcher.c:1977
+#: plugins/switcher.c:2064
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
+"Ablakváltó megjelenítése ha nem látható és az összes ablak közül a következő "
+"kiválasztása"
 
-#: plugins/switcher.c:1996
+#: plugins/switcher.c:2083
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
+"Ablakváltó megjelenítése ha nem látható és az összes ablak közül az előző "
+"kiválasztása"
 
-#: plugins/switcher.c:2015
-#, fuzzy
+#: plugins/switcher.c:2102
 msgid "Select next window"
-msgstr "Ablak mozgatása"
+msgstr "Következő ablak kiválasztása"
 
-#: plugins/switcher.c:2028
-#, fuzzy
+#: plugins/switcher.c:2115
 msgid "Select previous window"
-msgstr "Előző ablak"
+msgstr "Előző ablak kiválasztása"
 
-#: plugins/switcher.c:2195 plugins/switcher.c:2196
+#: plugins/switcher.c:2289 plugins/switcher.c:2290
 msgid "Application Switcher"
 msgstr "Alkalmazásváltó"
 
-#: plugins/water.c:1650
+#: plugins/video.c:245
+msgid "YV12 colorspace"
+msgstr ""
+
+#: plugins/video.c:246
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: plugins/video.c:1240
+msgid "Video Playback"
+msgstr ""
+
+#: plugins/video.c:1241
+msgid "Video playback"
+msgstr ""
+
+#: plugins/water.c:1607
 msgid "Enable pointer water effects"
 msgstr "Mutató víz effektus bekapcsolása"
 
-#: plugins/water.c:1663
+#: plugins/water.c:1620
 msgid "Toggle rain"
 msgstr "\"Eső\" kapcsoló"
 
-#: plugins/water.c:1664
+#: plugins/water.c:1621
 msgid "Toggle rain effect"
 msgstr "\"Eső\" effektus kapcsoló"
 
-#: plugins/water.c:1679
+#: plugins/water.c:1636
 msgid "Toggle wiper"
-msgstr ""
+msgstr "\"Ablaktörlő\" kapcsoló"
 
-#: plugins/water.c:1680
+#: plugins/water.c:1637
 msgid "Toggle wiper effect"
-msgstr ""
+msgstr "\"Ablaktörlő\" effektus kapcsoló"
 
-#: plugins/water.c:1695
+#: plugins/water.c:1652
 msgid "Offset Scale"
 msgstr "Eltolás skálája"
 
-#: plugins/water.c:1696
+#: plugins/water.c:1653
 msgid "Water offset scale"
 msgstr "Víz eltolás mértéke"
 
-#: plugins/water.c:1705
+#: plugins/water.c:1662
 msgid "Rain Delay"
 msgstr "Eső késleltetése"
 
-#: plugins/water.c:1706
+#: plugins/water.c:1663
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Esőcseppek közötti késleltetés (0-3600000 ms)"
 
-#: plugins/water.c:1714
+#: plugins/water.c:1671
 msgid "Title wave"
-msgstr ""
+msgstr "Címhullám"
 
-#: plugins/water.c:1715
+#: plugins/water.c:1672
 msgid "Wave effect from window title"
-msgstr ""
+msgstr "Hullám effektus az ablakcímből"
 
-#: plugins/water.c:1726
+#: plugins/water.c:1683
 msgid "Point"
-msgstr ""
+msgstr "Pont"
 
-#: plugins/water.c:1727
+#: plugins/water.c:1684
 msgid "Add point"
-msgstr ""
+msgstr "Pont hozzáadása"
 
-#: plugins/water.c:1738
+#: plugins/water.c:1695
 msgid "Line"
-msgstr ""
+msgstr "Vonal"
 
-#: plugins/water.c:1739
+#: plugins/water.c:1696
 msgid "Add line"
-msgstr ""
+msgstr "Vonal hozzáadása"
 
-#: plugins/water.c:1889
+#: plugins/water.c:1859
 msgid "Water Effect"
 msgstr "Víz effektus"
 
-#: plugins/water.c:1890
+#: plugins/water.c:1860
 msgid "Adds water effects to different desktop actions"
 msgstr "Víz effektus hozzáadása a különböző munkaasztal-műveletekhez"
 
-#: plugins/wobbly.c:132 plugins/wobbly.c:2915
+# 'driver' as in '(hardware) driver update'
+#: plugins/wobbly.c:132 plugins/wobbly.c:2884
 msgid "Shiver"
-msgstr "darabos"
+msgstr "Összetörés"
 
-#: plugins/wobbly.c:385
+#: plugins/wobbly.c:345
 msgid "Friction"
 msgstr "Súrlódás"
 
-#: plugins/wobbly.c:386
+#: plugins/wobbly.c:346
 msgid "Spring Friction"
 msgstr "Rugó súrlódása"
 
-#: plugins/wobbly.c:395
+#: plugins/wobbly.c:355
 msgid "Spring K"
 msgstr "Rugó K"
 
-#: plugins/wobbly.c:396
+#: plugins/wobbly.c:356
 msgid "Spring Konstant"
 msgstr "Rugóállandó"
 
-#: plugins/wobbly.c:405
+#: plugins/wobbly.c:365
 msgid "Grid Resolution"
 msgstr "Rács felbontása"
 
-#: plugins/wobbly.c:406
+#: plugins/wobbly.c:366
 msgid "Vertex Grid Resolution"
 msgstr "Csúcspontrács felbontása"
 
-#: plugins/wobbly.c:414
+#: plugins/wobbly.c:374
 msgid "Minimum Grid Size"
 msgstr "Rács minimális mérete"
 
-#: plugins/wobbly.c:415
+#: plugins/wobbly.c:375
 msgid "Minimum Vertex Grid Size"
 msgstr "Minimum csúcs-rácspont mérete"
 
-#: plugins/wobbly.c:423
+#: plugins/wobbly.c:383
 msgid "Map Effect"
 msgstr "Térkép effektus"
 
-#: plugins/wobbly.c:424
+#: plugins/wobbly.c:384
 msgid "Map Window Effect"
 msgstr "Ablaktérkép-effektus"
 
-#: plugins/wobbly.c:432
+#: plugins/wobbly.c:392
 msgid "Focus Effect"
 msgstr "Fókusz effektus"
 
-#: plugins/wobbly.c:433
+#: plugins/wobbly.c:393
 msgid "Focus Window Effect"
 msgstr "Ablakfókusz-effektus"
 
-#: plugins/wobbly.c:441
-msgid "Map Window Types"
+#: plugins/wobbly.c:401
+#, fuzzy
+msgid "Map Windows"
 msgstr "Ablaktérkép-típusok"
 
-#: plugins/wobbly.c:442
-msgid "Window types that should wobble when mapped"
+#: plugins/wobbly.c:402
+#, fuzzy
+msgid "Windows that should wobble when mapped"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak, amikor térképezettek"
 
-#: plugins/wobbly.c:456
-msgid "Focus Window Types"
+#: plugins/wobbly.c:410
+#, fuzzy
+msgid "Focus Windows"
 msgstr "Ablakfókusz-típusok"
 
-#: plugins/wobbly.c:457
-msgid "Window types that should wobble when focused"
+#: plugins/wobbly.c:411
+#, fuzzy
+msgid "Windows that should wobble when focused"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak fókuszáláskor"
 
-#: plugins/wobbly.c:469
-msgid "Move Window Types"
-msgstr "Ablakmozgatás típusai"
+#: plugins/wobbly.c:419
+#, fuzzy
+msgid "Move Windows"
+msgstr "Ablak mozgatása"
 
-#: plugins/wobbly.c:470
-msgid "Window types that should wobble when moved"
+#: plugins/wobbly.c:420
+#, fuzzy
+msgid "Windows that should wobble when moved"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak mozgatáskor"
 
-#: plugins/wobbly.c:484
-msgid "Grab Window Types"
+#: plugins/wobbly.c:428
+#, fuzzy
+msgid "Grab Windows"
 msgstr "Ablaktípusok érzékelése"
 
-#: plugins/wobbly.c:485
-msgid "Window types that should wobble when grabbed"
+#: plugins/wobbly.c:429
+#, fuzzy
+msgid "Windows that should wobble when grabbed"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak megfogáskor"
 
-#: plugins/wobbly.c:497
+#: plugins/wobbly.c:437
 msgid "Maximize Effect"
-msgstr "Maximalizás effektus"
+msgstr "Maximalizálás effektus"
 
-#: plugins/wobbly.c:498
+#: plugins/wobbly.c:438
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "Imbolygás ablakok maximalizálásakor és visszaállításakor"
 
-#: plugins/wobbly.c:2894
+#: plugins/wobbly.c:2863
 msgid "Snap windows"
 msgstr "Ablakok illesztése"
 
-#: plugins/wobbly.c:2895
+#: plugins/wobbly.c:2864
 msgid "Toggle window snapping"
 msgstr "\"Ablakok illesztése\" effektus kapcsoló"
 
-#: plugins/wobbly.c:2908
+# 52895 AttribValues/label
+#: plugins/wobbly.c:2877
 msgid "Snap Inverted"
-msgstr ""
+msgstr "Illesztés fordítva"
 
-#: plugins/wobbly.c:2909
-#, fuzzy
+#: plugins/wobbly.c:2878
 msgid "Inverted window snapping"
-msgstr "\"Ablakok illesztése\" effektus kapcsoló"
+msgstr "Ablakok illesztése fordítva"
 
-#: plugins/wobbly.c:2916
-#, fuzzy
+#: plugins/wobbly.c:2885
 msgid "Make window shiver"
-msgstr "Ablakok méretezése"
+msgstr "Ablak összetörése"
 
-#: plugins/wobbly.c:3116
+#: plugins/wobbly.c:3098
 msgid "Wobbly Windows"
 msgstr "Imbolygó ablakok"
 
-#: plugins/wobbly.c:3117
+#: plugins/wobbly.c:3099
 msgid "Use spring model for wobbly window effect"
 msgstr "Rugómodell használata az imbolygó ablakeffektusnál"
 
@@ -1028,9 +1409,8 @@ msgid "Zoom Timestep"
 msgstr "Nagyítás időköz"
 
 #: plugins/zoom.c:259 plugins/zoom.c:260
-#, fuzzy
 msgid "Zoom factor"
-msgstr "Kicsinyítés"
+msgstr "Nagyítási arány"
 
 #: plugins/zoom.c:269
 msgid "Filter Linear"
@@ -1040,434 +1420,514 @@ msgstr "Egyenes szűrő"
 msgid "USe linear filter when zoomed in"
 msgstr "Lineáris szűrő használata nagyításnál"
 
-#: plugins/zoom.c:751 plugins/zoom.c:765 plugins/zoom.c:766
+#: plugins/zoom.c:753 plugins/zoom.c:767 plugins/zoom.c:768
 msgid "Zoom In"
 msgstr "Nagyítás"
 
-#: plugins/zoom.c:780 plugins/zoom.c:781
+#: plugins/zoom.c:782 plugins/zoom.c:783
 msgid "Zoom Out"
 msgstr "Kicsinyítés"
 
-#: plugins/zoom.c:932
+#: plugins/zoom.c:934
 msgid "Zoom Desktop"
 msgstr "Munkaasztal nagyítása"
 
-#: plugins/zoom.c:933
+#: plugins/zoom.c:935
 msgid "Zoom and pan desktop cube"
 msgstr "A munkaasztalkocka nagyítása és pásztázása"
 
-#: src/display.c:163
+#: src/display.c:171
 msgid "Fast"
-msgstr "gyors"
+msgstr "Gyors"
 
-#: src/display.c:163
+#: src/display.c:171
 msgid "Good"
-msgstr "jó"
+msgstr "Jó"
 
-#: src/display.c:163
+#: src/display.c:171
 msgid "Best"
-msgstr "legjobb"
+msgstr "Legjobb"
 
-#: src/display.c:727
+#: src/display.c:753
 msgid "Active Plugins"
-msgstr "Aktív beépülő modulok"
+msgstr "Aktív bővítmények"
 
-#: src/display.c:728
+#: src/display.c:754
 msgid "List of currently active plugins"
-msgstr "Az aktuális beépülő modulok listája"
+msgstr "Az aktuális bővítmények listája"
 
-#: src/display.c:742
+#: src/display.c:768
 msgid "Texture Filter"
 msgstr "Textúraszűrő"
 
-#: src/display.c:743
+#: src/display.c:769
 msgid "Texture filtering"
 msgstr "Textúraszűrés"
 
-#: src/display.c:751
+#: src/display.c:777
 msgid "Click To Focus"
 msgstr "Kattintson a fókuszáláshoz"
 
-#: src/display.c:752
+#: src/display.c:778
 msgid "Click on window moves input focus to it"
 msgstr "Az ablakra kattintással az ablakra irányítja a fókuszt"
 
-#: src/display.c:758
+#: src/display.c:784
 msgid "Auto-Raise"
 msgstr "Automatikus megnyitás"
 
-#: src/display.c:759
+#: src/display.c:785
 msgid "Raise selected windows after interval"
 msgstr "A kijelölt ablak megnyitása ennyi idő után"
 
-#: src/display.c:765
+#: src/display.c:791
 msgid "Auto-Raise Delay"
 msgstr "Automatikus megnyitás késleltetése"
 
-#: src/display.c:766
+#: src/display.c:792
 msgid "Interval before raising selected windows"
-msgstr "A kiválasztott ablak növelését megelőző intervallum"
+msgstr "A kiválasztott ablakok megnyitását megelőző intervallum"
 
-#: src/display.c:774
+#: src/display.c:800
 msgid "Close Window"
 msgstr "Ablak bezárása"
 
-#: src/display.c:775
+#: src/display.c:801
 msgid "Close active window"
 msgstr "Aktív ablak bezárása"
 
-#: src/display.c:791
+#: src/display.c:817
 msgid "Show Main Menu"
 msgstr "Főmenü megjelenítése"
 
-#: src/display.c:792
+#: src/display.c:818
 msgid "Show the main menu"
 msgstr "Főmenü megjelenítése"
 
-#: src/display.c:808
+#: src/display.c:834
 msgid "Run Dialog"
 msgstr "Párbeszéd futtatása"
 
-#: src/display.c:809
+#: src/display.c:835
 msgid "Show Run Application dialog"
 msgstr "\"Alkalmazás futtatása\" párbeszédablak megjelenítése"
 
-#: src/display.c:825
+#: src/display.c:851
 msgid "Unmaximize Window"
 msgstr "Ablak visszaállítása"
 
-#: src/display.c:826
+#: src/display.c:852
 msgid "Unmaximize active window"
 msgstr "Aktív ablak visszaállítása"
 
-#: src/display.c:842
+#: src/display.c:868
 msgid "Minimize Window"
 msgstr "Ablak minimalizálása"
 
-#: src/display.c:843
+#: src/display.c:869
 msgid "Minimize active window"
 msgstr "Aktív ablak minimalizálása"
 
-#: src/display.c:859
+#: src/display.c:885
 msgid "Maximize Window"
 msgstr "Ablak maximalizálása"
 
-#: src/display.c:860
+#: src/display.c:886
 msgid "Maximize active window"
 msgstr "Aktív ablak maximalizálása"
 
-#: src/display.c:876
+#: src/display.c:902
 msgid "Maximize Window Horizontally"
 msgstr "Ablak maximalizálása vízszintesen"
 
-#: src/display.c:877
+#: src/display.c:903
 msgid "Maximize active window horizontally"
 msgstr "Aktív ablak maximalizálása vízszintesen"
 
-#: src/display.c:889
+#: src/display.c:915
 msgid "Maximize Window Vertically"
 msgstr "Ablak maximalizálása függőlegesen"
 
-#: src/display.c:890
+#: src/display.c:916
 msgid "Maximize active window vertically"
 msgstr "Aktív ablak maximalizálása függőlegesen"
 
-#: src/display.c:902 src/display.c:903
+#: src/display.c:928 src/display.c:929
 msgid "Hide all windows and focus desktop"
 msgstr "Összes ablak elrejtése és fókuszálás a munkaasztalra"
 
-#: src/display.c:917
+#: src/display.c:943
 #, c-format
 msgid "Command line %d"
 msgstr "%d. parancssor"
 
-#: src/display.c:918
+#: src/display.c:944
 #, c-format
 msgid "Command line to be executed in shell when run_command%d is invoked"
 msgstr "A run_command%d által elindított parancs"
 
-#: src/display.c:920
+#: src/display.c:946
 #, c-format
 msgid "Run command %d"
 msgstr "%d. parancs futtatása"
 
-#: src/display.c:921
+#: src/display.c:947
 #, c-format
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command%d"
 msgstr "A command%d parancs futtatására használt billentyűzetkombináció"
 
-#: src/display.c:965
+#: src/display.c:991
 msgid "Slow Animations"
 msgstr "Lassú animációk"
 
-#: src/display.c:966
+#: src/display.c:992
 msgid "Toggle use of slow animations"
 msgstr "\"Lassú animációk\" effektus kapcsoló"
 
-#: src/display.c:982
-#, fuzzy
+#: src/display.c:1008
 msgid "Raise Window"
-msgstr "Ablak átméretezése"
+msgstr "Ablak előtérbe hozása"
 
-#: src/display.c:983
-#, fuzzy
+#: src/display.c:1009
 msgid "Raise window above other windows"
-msgstr "Alacsonyabb ablak egy másik ablak alatt"
+msgstr "Ablak másik ablakok fölé hozása"
 
-#: src/display.c:997
+#: src/display.c:1023
 msgid "Lower Window"
 msgstr "Alacsonyabb ablak"
 
-#: src/display.c:998
+#: src/display.c:1024
 msgid "Lower window beneath other windows"
 msgstr "Alacsonyabb ablak egy másik ablak alatt"
 
-#: src/display.c:1012
+#: src/display.c:1038
 msgid "Increase Opacity"
 msgstr "Átlátszatlanság növelése"
 
-#: src/display.c:1013
+#: src/display.c:1039
 msgid "Increase window opacity"
 msgstr "Ablak átlátszatlanság növelése"
 
-#: src/display.c:1027
+#: src/display.c:1053
 msgid "Decrease Opacity"
 msgstr "Átlátszatlanság csökkentése"
 
-#: src/display.c:1028
+#: src/display.c:1054
 msgid "Decrease window opacity"
 msgstr "Ablak átlátszatlanságának csökkentése"
 
-#: src/display.c:1042 src/display.c:1043
-msgid "Take a screenshot"
-msgstr "Képernyőfotó készítése"
-
-#: src/display.c:1059 src/display.c:1060
-msgid "Screenshot command line"
-msgstr "Képernyőfotó parancssor"
-
 #: src/display.c:1068 src/display.c:1069
+msgid "Take a screenshot"
+msgstr "Képernyőkép készítése"
+
+#: src/display.c:1085 src/display.c:1086
+msgid "Screenshot command line"
+msgstr "Képernyőkép parancssor"
+
+#: src/display.c:1094 src/display.c:1095
 msgid "Take a screenshot of a window"
-msgstr "Képernyőfotó készítése az ablakról"
+msgstr "Képernyőkép készítése az ablakról"
 
-#: src/display.c:1086 src/display.c:1087
+#: src/display.c:1112 src/display.c:1113
 msgid "Window screenshot command line"
-msgstr "Ablak képernyőfotó parancssor"
+msgstr "Ablak képernyőkép parancssor"
 
-#: src/display.c:1095
+#: src/display.c:1121
 msgid "Window Menu"
 msgstr "Ablak menü"
 
-#: src/display.c:1096
+#: src/display.c:1122
 msgid "Open window menu"
 msgstr "Ablak menü megnyitása"
 
-#: src/display.c:1115
+#: src/display.c:1141
 msgid "Raise On Click"
 msgstr "Kattintás esetén megnyitás"
 
-#: src/display.c:1116
+#: src/display.c:1142
 msgid "Raise windows when clicked"
 msgstr "Ablakok megnyitása kattintás esetén"
 
-#: src/display.c:1122
+#: src/display.c:1148
 msgid "Audible Bell"
 msgstr "Hallható csengő"
 
-#: src/display.c:1123
+#: src/display.c:1149
 msgid "Audible system beep"
 msgstr "Hallható rendszercsengő"
 
-#: src/display.c:1129
+#: src/display.c:1155
 msgid "Toggle Window Maximized"
 msgstr "Ablak maximális méret átkapcsolása"
 
-#: src/display.c:1130
+#: src/display.c:1156
 msgid "Toggle active window maximized"
 msgstr "Aktív ablak maximális méret átkapcsolása"
 
-#: src/display.c:1142
+#: src/display.c:1168
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Ablak vízszintes maximális méret átkapcsolása"
 
-#: src/display.c:1144
+#: src/display.c:1170
 msgid "Toggle active window maximized horizontally"
 msgstr "Aktív ablak vízszintes maximális méret átkapcsolása"
 
-#: src/display.c:1156
+#: src/display.c:1182
 msgid "Toggle Window Maximized Vertically"
 msgstr "Ablak függőleges maximális méret átkapcsolása"
 
-#: src/display.c:1158
+#: src/display.c:1184
 msgid "Toggle active window maximized vertically"
 msgstr "Aktív ablak függőleges maximális méret átkapcsolása"
 
-#: src/display.c:1170
+#: src/display.c:1196
 msgid "Hide Skip Taskbar Windows"
 msgstr "Kihagyott tálcaablakok elrejtése"
 
-#: src/display.c:1171
+#: src/display.c:1197
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Az asztal megjelenítése módba kapcsoláskor a tálcán nem lévő ablakok "
 "elrejtése"
 
-#: src/display.c:1178
+#: src/display.c:1204
 msgid "Toggle Window Shaded"
 msgstr "Ablakárnyékolás átkapcsolása"
 
-#: src/display.c:1179
+#: src/display.c:1205
 msgid "Toggle active window shaded"
 msgstr "Aktív ablak árnyékolás átkapcsolása"
 
-#: src/display.c:1195
-#, fuzzy
+#: src/display.c:1221
 msgid "Ignore Hints When Maximized"
-msgstr "Ablak maximális méret átkapcsolása"
+msgstr "Maximális méretben tanácsok figyelmen kívül hagyása"
 
-#: src/display.c:1196
+#: src/display.c:1222
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
+"Méretnövelési és méretezési tanácsok figyelmen kívül hagyása ha az ablak "
+"maximális méretű"
+
+#: src/display.c:1229 src/display.c:1230
+msgid "Terminal command line"
+msgstr "Terminál parancssor"
+
+#: src/display.c:1238 src/display.c:1239
+msgid "Open a terminal"
+msgstr "Terminál megnyitása"
+
+#: src/display.c:1251
+msgid "Ping Delay"
+msgstr "Ping késleltetése"
+
+#: src/display.c:1252
+msgid "Interval between ping messages"
+msgstr "Ping üzenetek közti időköz"
 
 #: src/main.c:54
 msgid "Desktop"
 msgstr "Munkaasztal"
 
-#: src/screen.c:582
+#: src/main.c:55
+msgid "Dock"
+msgstr "Dokk"
+
+#: src/main.c:56
+msgid "Toolbar"
+msgstr "Eszköztár"
+
+#: src/main.c:57
+msgid "Menu"
+msgstr "Menü"
+
+# /tmp/xapi:353
+#: src/main.c:58
+msgid "Utility"
+msgstr "Segédprogram"
+
+#: src/main.c:59
+msgid "Splash"
+msgstr "Indítókép"
+
+#: src/main.c:60
+msgid "Dialog"
+msgstr "Párbeszédablak"
+
+#: src/main.c:61
+msgid "Normal"
+msgstr "Szokványos"
+
+#: src/main.c:62
+msgid "DropdownMenu"
+msgstr "LegördülőMenü"
+
+#: src/main.c:63
+msgid "PopupMenu"
+msgstr "FelbukkanóMenü"
+
+#: src/main.c:64
+msgid "Tooltip"
+msgstr "Buboréksúgó"
+
+#: src/main.c:65
+msgid "Notification"
+msgstr "Értesítés"
+
+#: src/main.c:66
+msgid "Combo"
+msgstr "Legördülő"
+
+# modules/inst_custom_part.ycp:493
+#: src/main.c:67
+msgid "Dnd"
+msgstr "Egérművelet"
+
+#: src/main.c:68
+msgid "ModalDialog"
+msgstr "KizárólagosPárbeszédablak"
+
+#: src/main.c:69
+msgid "Fullscreen"
+msgstr "Teljes képernyős"
+
+#: src/main.c:70
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: src/screen.c:614
 msgid "Detect Refresh Rate"
 msgstr "Frissítési frekvencia felismerése"
 
-#: src/screen.c:583
+#: src/screen.c:615
 msgid "Automatic detection of refresh rate"
 msgstr "Frissítési frekvencia automatikus érzékelése"
 
-#: src/screen.c:589
+#: src/screen.c:621
 msgid "Lighting"
 msgstr "Világosítás"
 
-#: src/screen.c:590
+#: src/screen.c:622
 msgid "Use diffuse light when screen is transformed"
-msgstr "Szórt fény használata képernyőtranszformációnál"
+msgstr "Szórt fény használata képernyő-transzformációnál"
 
-#: src/screen.c:596
+#: src/screen.c:628
 msgid "Refresh Rate"
 msgstr "Frissítési frekvencia"
 
-#: src/screen.c:597
+#: src/screen.c:629
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "A képernyő-újrarajzolás gyakorisága (alkalom/másodperc)"
 
-#: src/screen.c:606
-#, fuzzy
+#: src/screen.c:638
 msgid "Horizontal Virtual Size"
-msgstr "Virtuális méret"
+msgstr "Vízszintes virtuális méret"
 
-#: src/screen.c:607
-#, fuzzy
+#: src/screen.c:639
 msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Képernyőméret-szorzó a virtuális mérethez"
+msgstr "Képernyőméret-szorzó a vízszintes virtuális mérethez"
 
-#: src/screen.c:615
-#, fuzzy
+#: src/screen.c:647
 msgid "Vertical Virtual Size"
-msgstr "Virtuális méret"
+msgstr "Függőleges virtuális méret"
 
-#: src/screen.c:616
-#, fuzzy
+#: src/screen.c:648
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Képernyőméret-szorzó a virtuális mérethez"
 
-#: src/screen.c:624
+#: src/screen.c:656
 msgid "Opacity Step"
 msgstr "Átlátszatlanság mértéke"
 
-#: src/screen.c:625
+#: src/screen.c:657
 msgid "Opacity change step"
 msgstr "Átlátszatlanság változásának léptéke"
 
-#: src/screen.c:633
+#: src/screen.c:665
 msgid "Unredirect Fullscreen Windows"
 msgstr "Teljes méretű ablakok visszairányítása"
 
-#: src/screen.c:634
+#: src/screen.c:666
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "A teljes méretű ablakok nem irányíthatók át képen kívüli pixeltérképekre"
 
-#: src/screen.c:641
+#: src/screen.c:673
 msgid "Default Icon"
 msgstr "Alapértelmezett ikon"
 
-#: src/screen.c:642
+#: src/screen.c:674
 msgid "Default window icon image"
 msgstr "Alapértelmezett ikon képe"
 
-#: src/screen.c:650
+#: src/screen.c:682
 msgid "Sync To VBlank"
-msgstr ""
+msgstr "Szinkronizálás VBlank-ra"
 
-#: src/screen.c:651
+#: src/screen.c:683
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
+"A képernyő-frissítések végrehajtása csak a függőleges törlési periódusban"
 
-#: src/screen.c:658
-#, fuzzy
+#: src/screen.c:690
 msgid "Number of Desktops"
-msgstr "Munkaasztal nagyítása"
+msgstr "Munkaasztalok száma"
 
-#: src/screen.c:659
+#: src/screen.c:691
 msgid "Number of virtual desktops"
-msgstr ""
+msgstr "Virtuális munkaasztalok száma"
 
-#: src/screen.c:667
+#: src/screen.c:699
 msgid "Detect Outputs"
-msgstr ""
+msgstr "Kimenetek észlelése"
 
-#: src/screen.c:668
-#, fuzzy
+#: src/screen.c:700
 msgid "Automatic detection of output devices"
-msgstr "Frissítési frekvencia automatikus érzékelése"
+msgstr "Kimeneti eszközök automatikus érzékelése"
 
-#: src/screen.c:674
+#: src/screen.c:706
 msgid "Outputs"
-msgstr ""
+msgstr "Kimenetek"
 
-#: src/screen.c:675
+#: src/screen.c:707
 msgid "List of strings describing output devices"
+msgstr "Kimeneti eszközöket leíró karakterláncok listája"
+
+#: src/screen.c:718
+#, fuzzy
+msgid "Focus Prevention Windows"
+msgstr "Fókuszmegelőzés"
+
+#: src/screen.c:719
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Fókuszmegelőzés"
+
+#: src/screen.c:727
+#, fuzzy
+msgid "Opacity windows"
+msgstr "Ablakok közti távolság"
+
+#: src/screen.c:728
+#, fuzzy
+msgid "Windows that should be translucent by default"
+msgstr "Elmosandó ablaktípusok"
+
+#: src/screen.c:739
+msgid "Opacity window values"
 msgstr ""
 
-#~ msgid "Initiate Window Switcher"
-#~ msgstr "Ablakváltás indítása"
+#: src/screen.c:740
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
 
-#~ msgid "Show switcher"
-#~ msgstr "Ablakválasztó megjelenítése"
+#~ msgid "Window Types"
+#~ msgstr "Ablaktípusok"
 
-#~ msgid "Initiate All Windows"
-#~ msgstr "Minden ablak indítása"
+#~ msgid "Move Window Types"
+#~ msgstr "Ablakmozgatás típusai"
 
-#~ msgid "Modifier to show switcher for all windows"
-#~ msgstr "Módosító billentyű az ablakválasztó indításához"
-
-#~ msgid "Wobble effect on system beep"
-#~ msgstr "Imbolygás rendszercsengő esetén"
-
-#~ msgid "TopLeft"
-#~ msgstr "bal felső"
-
-#~ msgid "TopRight"
-#~ msgstr "jobb felső"
-
-#~ msgid "BottomLeft"
-#~ msgstr "bal alsó"
-
-#~ msgid "BottomRight"
-#~ msgstr "jobb alsó"
-
-#~ msgid "Corners"
-#~ msgstr "Sarkok"
-
-#~ msgid "Hot corners that should initiate scale mode"
-#~ msgstr "Skálázó módot indító sarkok"
+#~ msgid "Enable focus prevention"
+#~ msgstr "Fókuszmegelőzés engedélyezése"

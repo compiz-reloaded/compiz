@@ -861,18 +861,19 @@ getMwmHints (CompDisplay  *display,
     Atom	  actual;
     int		  result, format;
     unsigned long n, left;
-    MwmHints	  *mwmHints;
+    unsigned char *data;
 
     *func  = MwmFuncAll;
     *decor = MwmDecorAll;
 
     result = XGetWindowProperty (display->display, id, display->mwmHintsAtom,
 				 0L, 20L, FALSE, display->mwmHintsAtom,
-				 &actual, &format, &n, &left,
-				 (unsigned char **) &mwmHints);
+				 &actual, &format, &n, &left, &data);
 
-    if (result == Success && n && mwmHints)
+    if (result == Success && n && data)
     {
+	MwmHints *mwmHints = (MwmHints *) data;
+
 	if (n >= PropMotifWmHintElements)
 	{
 	    if (mwmHints->flags & MwmHintsDecorations)
@@ -882,7 +883,7 @@ getMwmHints (CompDisplay  *display,
 		*func = mwmHints->functions;
 	}
 
-	XFree (mwmHints);
+	XFree (data);
     }
 }
 
@@ -893,17 +894,17 @@ getProtocols (CompDisplay *display,
     Atom	  actual;
     int		  result, format;
     unsigned long n, left;
-    Atom	  *protocol;
+    unsigned char *data;
     unsigned int  protocols = 0;
 
     result = XGetWindowProperty (display->display, id, display->wmProtocolsAtom,
 				 0L, 20L, FALSE, XA_ATOM,
-				 &actual, &format, &n, &left,
-				 (unsigned char **) &protocol);
+				 &actual, &format, &n, &left, &data);
 
-    if (result == Success && n && protocol)
+    if (result == Success && n && data)
     {
-	int i;
+	Atom *protocol = (Atom *) data;
+	int  i;
 
 	for (i = 0; i < n; i++)
 	{
@@ -917,7 +918,7 @@ getProtocols (CompDisplay *display,
 		protocols |= CompWindowProtocolSyncRequestMask;
 	}
 
-	XFree (protocol);
+	XFree (data);
     }
 
     return protocols;
@@ -1552,7 +1553,7 @@ updateWindowStruts (CompWindow *w)
     Atom	  actual;
     int		  result, format;
     unsigned long n, left;
-    unsigned long *struts = NULL;
+    unsigned char *data;
     Bool	  hasOld, hasNew;
     CompStruts    old, new;
 
@@ -1597,10 +1598,12 @@ updateWindowStruts (CompWindow *w)
     result = XGetWindowProperty (w->screen->display->display, w->id,
 				 w->screen->display->wmStrutPartialAtom,
 				 0L, 12L, FALSE, XA_CARDINAL, &actual, &format,
-				 &n, &left, (unsigned char **) &struts);
+				 &n, &left, &data);
 
-    if (result == Success && n && struts)
+    if (result == Success && n && data)
     {
+	unsigned long *struts = (unsigned long *) data;
+
 	if (n == 12)
 	{
 	    int gap;
@@ -1633,7 +1636,7 @@ updateWindowStruts (CompWindow *w)
 	    new.bottom.width = struts[11] - new.bottom.x + 1;
 	}
 
-	XFree (struts);
+	XFree (data);
     }
 
     if (!hasNew)
@@ -1641,11 +1644,12 @@ updateWindowStruts (CompWindow *w)
 	result = XGetWindowProperty (w->screen->display->display, w->id,
 				     w->screen->display->wmStrutAtom,
 				     0L, 4L, FALSE, XA_CARDINAL,
-				     &actual, &format, &n, &left,
-				     (unsigned char **) &struts);
+				     &actual, &format, &n, &left, &data);
 
-	if (result == Success && n && struts)
+	if (result == Success && n && data)
 	{
+	    unsigned long *struts = (unsigned long *) data;
+
 	    if (n == 4)
 	    {
 		int gap;
@@ -1671,7 +1675,7 @@ updateWindowStruts (CompWindow *w)
 		new.bottom.y = w->screen->height - new.bottom.height;
 	    }
 
-	    XFree (struts);
+	    XFree (data);
 	}
     }
 
@@ -2102,7 +2106,7 @@ addWindow (CompScreen *screen,
 
 	mapWindow (w);
 
-	updateWindowAttributes (w, FALSE);
+	updateWindowAttributes (w, CompStackingUpdateModeNormal);
     }
     else if (!w->attrib.override_redirect)
     {
@@ -2458,7 +2462,7 @@ initializeSyncCounter (CompWindow *w)
     Atom		 actual;
     int			 result, format;
     unsigned long	 n, left;
-    unsigned long	 *counter;
+    unsigned char	 *data;
 
     if (w->syncCounter)
 	return w->syncAlarm != None;
@@ -2469,13 +2473,15 @@ initializeSyncCounter (CompWindow *w)
     result = XGetWindowProperty (w->screen->display->display, w->id,
 				 w->screen->display->wmSyncRequestCounterAtom,
 				 0L, 1L, FALSE, XA_CARDINAL, &actual, &format,
-				 &n, &left, (unsigned char **) &counter);
+				 &n, &left, &data);
 
-    if (result == Success && n && counter)
+    if (result == Success && n && data)
     {
+	unsigned long *counter = (unsigned long *) data;
+
 	w->syncCounter = *counter;
 
-	XFree (counter);
+	XFree (data);
 
 	XSyncIntsToValue (&w->syncValue, (unsigned int) rand (), 0);
 	XSyncSetCounter (w->screen->display->display,
@@ -3314,7 +3320,7 @@ addWindowSizeChanges (CompWindow     *w,
     x = (vx - w->screen->x) * w->screen->width;
     y = (vy - w->screen->y) * w->screen->height;
 
-   output = outputDeviceForGeometry (w->screen,
+    output = outputDeviceForGeometry (w->screen,
 				      oldX,
 				      oldY,
 				      oldWidth,
@@ -3364,11 +3370,25 @@ addWindowSizeChanges (CompWindow     *w,
 	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
 	}
 
+	/* constrain window width if smaller than minimum width */
+	if (!(mask & CWWidth) && w->serverWidth < w->sizeHints.min_width)
+	{
+	    xwc->width = w->sizeHints.min_width;
+	    mask |= CWWidth;
+	}
+
 	/* constrain window width if greater than maximum width */
 	if (!(mask & CWWidth) && w->serverWidth > w->sizeHints.max_width)
 	{
 	    xwc->width = w->sizeHints.max_width;
 	    mask |= CWWidth;
+	}
+
+	/* constrain window height if smaller than minimum height */
+	if (!(mask & CWHeight) && w->serverHeight < w->sizeHints.min_height)
+	{
+	    xwc->height = w->sizeHints.min_height;
+	    mask |= CWHeight;
 	}
 
 	/* constrain window height if greater than maximum height */
@@ -3785,11 +3805,11 @@ restackWindowBelow (CompWindow *w,
 }
 
 void
-updateWindowAttributes (CompWindow *w,
-			Bool	   aboveFs)
+updateWindowAttributes (CompWindow             *w,
+			CompStackingUpdateMode stackingMode)
 {
     XWindowChanges xwc;
-    int		   mask;
+    int		   mask = 0;
 
     if (w->attrib.override_redirect || !w->managed)
 	return;
@@ -3803,7 +3823,14 @@ updateWindowAttributes (CompWindow *w,
 	showWindow (w);
     }
 
-    mask  = addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+    if (stackingMode != CompStackingUpdateModeNone)
+    {
+	Bool aboveFs;
+
+	aboveFs = (stackingMode == CompStackingUpdateModeAboveFullscreen);
+        mask |= addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+    }
+
     mask |= addWindowSizeChanges (w, &xwc,
 				  w->serverX, w->serverY,
 				  w->serverWidth, w->serverHeight,
@@ -3915,7 +3942,7 @@ activateWindow (CompWindow *w)
 	return;
 
     ensureWindowVisibility (w);
-    updateWindowAttributes (w, TRUE);
+    updateWindowAttributes (w, CompStackingUpdateModeAboveFullscreen);
     moveInputFocusToWindow (w);
 }
 
@@ -3977,6 +4004,9 @@ getOuterRectOfWindow (CompWindow *w,
     r->height = w->height + w->input.top  + w->input.bottom;
 }
 
+#define PVertResizeInc (1 << 0)
+#define PHorzResizeInc (1 << 1)
+
 Bool
 constrainNewWindowSize (CompWindow *w,
 			int        width,
@@ -3995,11 +4025,20 @@ constrainNewWindowSize (CompWindow *w,
     int		     max_width = MAXSHORT;
     int		     max_height = MAXSHORT;
     long	     flags = hints->flags;
+    long	     resizeIncFlags = (flags & PResizeInc) ? ~0 : 0;
 
     if (d->opt[COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED].value.b)
     {
-	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    flags &= ~(PResizeInc | PAspect);
+	if (w->state & MAXIMIZE_STATE)
+	{
+	    flags &= ~PAspect;
+
+	    if (w->state & CompWindowStateMaximizedHorzMask)
+		resizeIncFlags &= ~PHorzResizeInc;
+
+	    if (w->state & CompWindowStateMaximizedVertMask)
+		resizeIncFlags &= ~PVertResizeInc;
+	}
     }
 
     /* Ater gdk_window_constrain_size(), which is partially borrowed from fvwm.
@@ -4043,11 +4082,11 @@ constrainNewWindowSize (CompWindow *w,
 	max_height = hints->max_height;
     }
 
-    if (flags & PResizeInc)
-    {
+    if (resizeIncFlags & PHorzResizeInc)
 	xinc = MAX (xinc, hints->width_inc);
+
+    if (resizeIncFlags & PVertResizeInc)
 	yinc = MAX (yinc, hints->height_inc);
-    }
 
     /* clamp width and height to min and max values */
     width  = CLAMP (width, min_width, max_width);
@@ -4302,7 +4341,7 @@ maximizeWindow (CompWindow *w,
 
     changeWindowState (w, w->state);
 
-    updateWindowAttributes (w, FALSE);
+    updateWindowAttributes (w, CompStackingUpdateModeNone);
 }
 
 Bool
@@ -4499,16 +4538,16 @@ getWindowIcon (CompWindow *w,
 	Atom	      actual;
 	int	      result, format;
 	unsigned long n, left;
-	unsigned long *data;
+	unsigned char *data;
 
 	result = XGetWindowProperty (w->screen->display->display, w->id,
 				     w->screen->display->wmIconAtom,
 				     0L, 65536L,
 				     FALSE, XA_CARDINAL,
 				     &actual, &format, &n,
-				     &left, (unsigned char **) &data);
+				     &left, &data);
 
-	if (result == Success && n)
+	if (result == Success && n && data)
 	{
 	    CompIcon **pIcon;
 	    CARD32   *p;
@@ -4517,8 +4556,10 @@ getWindowIcon (CompWindow *w,
 
 	    for (i = 0; i + 2 < n; i += iw * ih + 2)
 	    {
-		iw  = data[i];
-		ih = data[i + 1];
+		unsigned long *idata = (unsigned long *) data;
+
+		iw  = idata[i];
+		ih = idata[i + 1];
 
 		if (iw * ih + 2 > n - i)
 		    break;
@@ -4554,10 +4595,10 @@ getWindowIcon (CompWindow *w,
 		       be unpremultiplied. */
 		    for (j = 0; j < iw * ih; j++)
 		    {
-			alpha = (data[i + j + 2] >> 24) & 0xff;
-			red   = (data[i + j + 2] >> 16) & 0xff;
-			green = (data[i + j + 2] >>  8) & 0xff;
-			blue  = (data[i + j + 2] >>  0) & 0xff;
+			alpha = (idata[i + j + 2] >> 24) & 0xff;
+			red   = (idata[i + j + 2] >> 16) & 0xff;
+			green = (idata[i + j + 2] >>  8) & 0xff;
+			blue  = (idata[i + j + 2] >>  0) & 0xff;
 
 			red   = (red   * alpha) >> 8;
 			green = (green * alpha) >> 8;

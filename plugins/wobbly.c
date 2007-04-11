@@ -250,7 +250,8 @@ typedef struct _WobblyWindow {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-wobblyGetScreenOptions (CompScreen *screen,
+wobblyGetScreenOptions (CompPlugin *plugin,
+			CompScreen *screen,
 			int	   *count)
 {
     WOBBLY_SCREEN (screen);
@@ -260,9 +261,10 @@ wobblyGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-wobblySetScreenOption (CompScreen      *screen,
-		     char	     *name,
-		     CompOptionValue *value)
+wobblySetScreenOption (CompPlugin      *plugin,
+		       CompScreen      *screen,
+		       char	       *name,
+		       CompOptionValue *value)
 {
     CompOption *o;
     int	       index;
@@ -274,19 +276,6 @@ wobblySetScreenOption (CompScreen      *screen,
 	return FALSE;
 
     switch (index) {
-    case WOBBLY_SCREEN_OPTION_FRICTION:
-    case WOBBLY_SCREEN_OPTION_SPRING_K:
-	if (compSetFloatOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_SCREEN_OPTION_GRID_RESOLUTION:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_SCREEN_OPTION_MIN_GRID_SIZE:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
     case WOBBLY_SCREEN_OPTION_MAP_EFFECT:
 	if (compSetStringOption (o, value))
 	{
@@ -317,17 +306,9 @@ wobblySetScreenOption (CompScreen      *screen,
 	    }
 	}
 	break;
-    case WOBBLY_SCREEN_OPTION_MAP_WINDOW_MATCH:
-    case WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_MATCH:
-    case WOBBLY_SCREEN_OPTION_MOVE_WINDOW_MATCH:
-    case WOBBLY_SCREEN_OPTION_GRAB_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -1518,7 +1499,7 @@ modelStepObject (CompWindow *window,
 		    object->position.y > object->vertEdge.end)
 		    findNextWestEdge (window, object);
 
-		if (object->vertEdge.snapped == FALSE ||
+		if (!object->vertEdge.snapped ||
 		    objectReleaseWestEdge (window, model, object))
 		{
 		    object->position.x += object->velocity.x;
@@ -1553,7 +1534,7 @@ modelStepObject (CompWindow *window,
 		    object->position.y > object->vertEdge.end)
 		    findNextEastEdge (window, object);
 
-		if (object->vertEdge.snapped == FALSE ||
+		if (!object->vertEdge.snapped ||
 		    objectReleaseEastEdge (window, model, object))
 		{
 		    object->position.x += object->velocity.x;
@@ -1591,7 +1572,7 @@ modelStepObject (CompWindow *window,
 		    object->position.x > object->horzEdge.end)
 		    findNextNorthEdge (window, object);
 
-		if (object->horzEdge.snapped == FALSE ||
+		if (!object->horzEdge.snapped ||
 		    objectReleaseNorthEdge (window, model, object))
 		{
 		    object->position.y += object->velocity.y;
@@ -1626,7 +1607,7 @@ modelStepObject (CompWindow *window,
 		    object->position.x > object->horzEdge.end)
 		    findNextSouthEdge (window, object);
 
-		if (object->horzEdge.snapped == FALSE ||
+		if (!object->horzEdge.snapped ||
 		    objectReleaseSouthEdge (window, model, object))
 		{
 		    object->position.y += object->velocity.y;
@@ -2808,7 +2789,8 @@ wobblyPaintScreen (CompScreen		   *s,
 }
 
 static CompOption *
-wobblyGetDisplayOptions (CompDisplay *display,
+wobblyGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
 			 int	     *count)
 {
     WOBBLY_DISPLAY (display);
@@ -2818,7 +2800,8 @@ wobblyGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-wobblySetDisplayOption (CompDisplay     *display,
+wobblySetDisplayOption (CompPlugin  *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {

@@ -413,7 +413,8 @@ shotDisplayInitOptions (ShotDisplay *sd)
 }
 
 static CompOption *
-shotGetDisplayOptions (CompDisplay *display,
+shotGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     SHOT_DISPLAY (display);
@@ -423,7 +424,8 @@ shotGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-shotSetDisplayOption (CompDisplay    *display,
+shotSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay    *display,
 		      char	     *name,
 		      CompOptionValue *value)
 {
@@ -441,14 +443,9 @@ shotSetDisplayOption (CompDisplay    *display,
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
 	break;
-    case SHOT_DISPLAY_OPTION_DIR:
-	if (compSetStringOption (o, value))
-	    return TRUE;
-	break;
-    case SHOT_DISPLAY_OPTION_LAUNCH_APP:
-	if (compSetStringOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -523,6 +520,10 @@ shotFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     SHOT_SCREEN (s);
+    SHOT_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&sd->opt[SHOT_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (ss, s, paintScreen);
 

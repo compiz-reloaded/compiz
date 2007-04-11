@@ -202,7 +202,8 @@ typedef struct _RotateScreen {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-rotateGetScreenOptions (CompScreen *screen,
+rotateGetScreenOptions (CompPlugin *plugin,
+			CompScreen *screen,
 			int	   *count)
 {
     ROTATE_SCREEN (screen);
@@ -212,7 +213,8 @@ rotateGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-rotateSetScreenOption (CompScreen      *screen,
+rotateSetScreenOption (CompPlugin      *plugin,
+		       CompScreen      *screen,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -725,7 +727,8 @@ rotate (CompDisplay     *d,
 	if (s->hsize < 2)
 	    return FALSE;
 
-	if (otherScreenGrabExist (s, "rotate", "move", "switcher", "cube", 0))
+	if (otherScreenGrabExist (s, "rotate", "move", "switcher", 
+				  "group-drag", "cube", 0))
 	    return FALSE;
 
 	direction = getIntOptionNamed (option, nOption, "direction", 0);
@@ -990,7 +993,7 @@ rotateFlipLeft (void *closure)
     rs->moveTo = 0.0f;
     rs->slow = FALSE;
 
-    if (otherScreenGrabExist (s, "rotate", "move", 0))
+    if (otherScreenGrabExist (s, "rotate", "move", "group-drag", 0))
 	return FALSE;
 
     warpX = pointerX + s->width;
@@ -1035,7 +1038,7 @@ rotateFlipRight (void *closure)
     rs->moveTo = 0.0f;
     rs->slow = FALSE;
 
-    if (otherScreenGrabExist (s, "rotate", "move", 0))
+    if (otherScreenGrabExist (s, "rotate", "move", "group-drag", 0))
 	return FALSE;
 
     warpX = pointerX - s->width;
@@ -1084,7 +1087,7 @@ rotateEdgeFlip (CompScreen      *s,
     if (s->hsize < 2)
 	return;
 
-    if (otherScreenGrabExist (s, "rotate", "move", 0))
+    if (otherScreenGrabExist (s, "rotate", "move", "group-drag", 0))
 	return;
 
     if (state & CompActionStateInitEdgeDnd)
@@ -1095,7 +1098,7 @@ rotateEdgeFlip (CompScreen      *s,
 	if (otherScreenGrabExist (s, "rotate", 0))
 	    return;
     }
-    else if (otherScreenGrabExist (s, "rotate", 0))
+    else if (otherScreenGrabExist (s, "rotate", "group-drag", 0))
     {
 	ROTATE_SCREEN (s);
 
@@ -1108,6 +1111,12 @@ rotateEdgeFlip (CompScreen      *s,
 	/* bail out if window is horizontally maximized or fullscreen */
 	if (rs->grabWindow->state & (CompWindowStateMaximizedHorzMask |
 				     CompWindowStateFullscreenMask))
+	    return;
+    }
+    else if (otherScreenGrabExist (s, "rotate", 0))
+    {
+	/* in that case, 'group-drag' must be the active screen grab */
+	if (!rd->opt[ROTATE_DISPLAY_OPTION_EDGEFLIP_WINDOW].value.b)
 	    return;
     }
     else
@@ -1641,7 +1650,7 @@ rotateUpdateCubeOptions (CompScreen *s)
 	CompOption *options, *option;
 	int	   nOptions;
 
-	options = (*p->vTable->getScreenOptions) (s, &nOptions);
+	options = (*p->vTable->getScreenOptions) (p, s, &nOptions);
 	option = compFindOption (options, nOptions, "in", 0);
 	if (option)
 	    rs->invert = option->value.b ? -1 : 1;
@@ -1669,7 +1678,8 @@ rotateSetScreenOptionForPlugin (CompScreen      *s,
 }
 
 static CompOption *
-rotateGetDisplayOptions (CompDisplay *display,
+rotateGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
 			 int	     *count)
 {
     ROTATE_DISPLAY (display);
@@ -1679,7 +1689,8 @@ rotateGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-rotateSetDisplayOption (CompDisplay     *display,
+rotateSetDisplayOption (CompPlugin      *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {
@@ -2111,6 +2122,20 @@ rotateFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     ROTATE_SCREEN (s);
+    ROTATE_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&rd->opt[ROTATE_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s, &rd->opt[ROTATE_DISPLAY_OPTION_LEFT].value.action);
+    removeScreenAction (s, &rd->opt[ROTATE_DISPLAY_OPTION_RIGHT].value.action);
+    removeScreenAction (s,
+	   		&rd->opt[ROTATE_DISPLAY_OPTION_LEFT_WINDOW].value.action);
+    removeScreenAction (s,
+	   		&rd->opt[ROTATE_DISPLAY_OPTION_RIGHT_WINDOW].value.action);
+    removeScreenAction (s, 
+			&rd->opt[ROTATE_DISPLAY_OPTION_FLIP_LEFT].value.action);
+    removeScreenAction (s,
+	   		&rd->opt[ROTATE_DISPLAY_OPTION_FLIP_RIGHT].value.action);
 
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);

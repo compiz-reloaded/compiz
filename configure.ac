@@ -1,6 +1,6 @@
 AC_PREREQ(2.57)
 
-AC_INIT([compiz], [0.3.7], [davidr@novell.com])
+AC_INIT([compiz], [0.5.1], [davidr@novell.com])
 
 AC_CONFIG_AUX_DIR(config)
 
@@ -9,7 +9,7 @@ AC_CONFIG_HEADER([config.h])
 AM_MAINTAINER_MODE
 
 /* decorator interface version */
-AC_DEFINE(DECOR_INTERFACE_VERSION, 20061011, [Decorator interface version])
+AC_DEFINE(DECOR_INTERFACE_VERSION, 20070319, [Decorator interface version])
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -19,7 +19,7 @@ AC_PROG_LIBTOOL
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 
-ALL_LINGUAS="cs de es fi fr hu it ja pl pt_BR sv zh_CN zh_TW"
+ALL_LINGUAS="cs de es fi fr hu it ja pl pt_BR sv zh_CN zh_TW af ar bg bn bs ca cy da el en_GB en_US et gl gu he hi hr id ka km ko lo lt mk mr nb nl pa pt ro ru sk sl sr ta tr uk vi xh zu"
 AC_SUBST(ALL_LINGUAS)
 AM_GLIB_GNU_GETTEXT
 GETTEXT_PACKAGE=compiz
@@ -55,11 +55,6 @@ if test "x$GCC" = "xyes"; then
   case " $CFLAGS " in
   *[[\ \	]]-Wnested-externs[[\ \	]]*) ;;
   *) CFLAGS="$CFLAGS -Wnested-externs" ;;
-  esac
-
-  case " $CFLAGS " in
-  *[[\ \	]]-fno-strict-aliasing[[\ \	]]*) ;;
-  *) CFLAGS="$CFLAGS -fno-strict-aliasing" ;;
   esac
 
   if test "x$enable_ansi" = "xyes"; then
@@ -314,6 +309,9 @@ if test "x$use_gtk" = "xyes"; then
     use_metacity="no"
     use_gnome="no"
   fi
+else
+  use_metacity="no"
+  use_gnome="no"
 fi
 
 AC_SUBST(windowsettingsdatadir)
@@ -446,6 +444,8 @@ gtk/window-decorator/Makefile
 gtk/window-decorator/gwd.schemas
 gtk/gnome/Makefile
 gtk/gnome/compiz.desktop
+gtk/gnome/50-compiz-key.xml
+gtk/gnome/50-compiz-desktop-key.xml
 kde/Makefile
 kde/window-decorator/Makefile
 po/Makefile.in

@@ -402,7 +402,7 @@ matchAddFromString (CompMatch  *match,
 	    int	level = 1;
 	    int length;
 
-	    j = i++;
+	    j = ++i;
 
 	    while (str[j] != '\0')
 	    {
@@ -729,7 +729,7 @@ matchExpHandlerChanged (CompDisplay *display)
     {
 	if (p->vTable->getDisplayOptions)
 	{
-	    option = (*p->vTable->getDisplayOptions) (display, &nOption);
+	    option = (*p->vTable->getDisplayOptions) (p, display, &nOption);
 	    matchUpdateMatchOptions (option, nOption);
 	}
     }
@@ -743,7 +743,7 @@ matchExpHandlerChanged (CompDisplay *display)
 	{
 	    if (p->vTable->getScreenOptions)
 	    {
-		option = (*p->vTable->getScreenOptions) (s, &nOption);
+		option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 		matchUpdateMatchOptions (option, nOption);
 	    }
 	}

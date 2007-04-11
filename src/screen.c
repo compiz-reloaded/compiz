@@ -459,16 +459,6 @@ setScreenOption (CompScreen      *screen,
 	return FALSE;
 
     switch (index) {
-    case COMP_SCREEN_OPTION_LIGHTING:
-    case COMP_SCREEN_OPTION_UNREDIRECT_FS:
-    case COMP_SCREEN_OPTION_SYNC_TO_VBLANK:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
     case COMP_SCREEN_OPTION_DETECT_REFRESH_RATE:
 	if (compSetBoolOption (o, value))
 	{
@@ -582,7 +572,10 @@ setScreenOption (CompScreen      *screen,
 
 	    return TRUE;
 	}
+	break;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -599,7 +592,7 @@ setScreenOptionForPlugin (CompScreen      *screen,
 
     p = findActivePlugin (plugin);
     if (p && p->vTable->setScreenOption)
-	return (*p->vTable->setScreenOption) (screen, name, value);
+	return (*p->vTable->setScreenOption) (p, screen, name, value);
 
     return FALSE;
 }
@@ -1136,6 +1129,9 @@ detectRefreshRateOfScreen (CompScreen *s)
 
 	config  = XRRGetScreenInfo (s->display->display, s->root);
 	value.i = (int) XRRConfigCurrentRate (config);
+
+	if (value.i == 0)
+	    value.i = defaultRefreshRate;
 
 	XRRFreeScreenConfigInfo (config);
 
@@ -3838,10 +3834,10 @@ outputDeviceForGeometry (CompScreen *s,
     x2 = s->outputDev[output].region.extents.x2;
     y2 = s->outputDev[output].region.extents.y2;
 
-    if (x1 > x + width  ||
-	y1 > y + height ||
-	x2 < x		||
-	y2 < y)
+    if (x1 >= x + width  ||
+	y1 >= y + height ||
+	x2 <= x		 ||
+	y2 <= y)
     {
 	output = outputDeviceForPoint (s, x + width  / 2, y + height / 2);
     }

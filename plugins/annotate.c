@@ -842,7 +842,8 @@ annoDisplayInitOptions (AnnoDisplay *ad,
 }
 
 static CompOption *
-annoGetDisplayOptions (CompDisplay *display,
+annoGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     ANNO_DISPLAY (display);
@@ -852,8 +853,9 @@ annoGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-annoSetDisplayOption (CompDisplay    *display,
-		      char	     *name,
+annoSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      char	      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;
@@ -872,16 +874,9 @@ annoSetDisplayOption (CompDisplay    *display,
 	if (setDisplayAction (display, o, value))
 	    return TRUE;
 	break;
-    case ANNO_DISPLAY_OPTION_FILL_COLOR:
-    case ANNO_DISPLAY_OPTION_STROKE_COLOR:
-	if (compSetColorOption (o, value))
-	    return TRUE;
-	break;
-    case ANNO_DISPLAY_OPTION_LINE_WIDTH:
-    case ANNO_DISPLAY_OPTION_STROKE_WIDTH:
-	if (compSetFloatOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -963,6 +958,7 @@ annoFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ANNO_SCREEN (s);
+    ANNO_DISPLAY (s->display);
 
     if (as->cairo)
 	cairo_destroy (as->cairo);
@@ -974,6 +970,11 @@ annoFiniScreen (CompPlugin *p,
 
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
+
+    removeScreenAction (s, 
+			&ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
+    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
 
     UNWRAP (as, s, paintScreen);
 

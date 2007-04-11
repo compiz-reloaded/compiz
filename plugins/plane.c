@@ -463,7 +463,8 @@ planeWindowUngrabNotify (CompWindow *w)
 }
 
 static CompOption *
-planeGetDisplayOptions (CompDisplay *display,
+planeGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     PLANE_DISPLAY (display);
@@ -473,7 +474,8 @@ planeGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-planeSetDisplayOption (CompDisplay     *display,
+planeSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -819,6 +821,25 @@ planeFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     PLANE_SCREEN (s);
+    PLANE_DISPLAY (s->display);
+
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_LEFT].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_RIGHT].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_DOWN].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_UP].value.action);
+
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_1].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_2].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_3].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_4].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_5].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_6].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_7].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_8].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_9].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_10].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_11].value.action);
+    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_12].value.action);
 
     UNWRAP (ps, s, paintTransformedScreen);
     UNWRAP (ps, s, preparePaintScreen);

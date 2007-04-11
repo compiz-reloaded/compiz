@@ -226,7 +226,8 @@ typedef struct _ScaleWindow {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-scaleGetScreenOptions (CompScreen *screen,
+scaleGetScreenOptions (CompPlugin  *plugin,
+		       CompScreen *screen,
 		       int	  *count)
 {
     SCALE_SCREEN (screen);
@@ -236,7 +237,8 @@ scaleGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-scaleSetScreenOption (CompScreen      *screen,
+scaleSetScreenOption (CompPlugin  *plugin,
+		      CompScreen      *screen,
 		      char	      *name,
 		      CompOptionValue *value)
 {
@@ -272,10 +274,6 @@ scaleSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case SCALE_SCREEN_OPTION_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
     case SCALE_SCREEN_OPTION_DARKEN_BACK:
 	if (compSetBoolOption (o, value))
 	{
@@ -305,10 +303,9 @@ scaleSetScreenOption (CompScreen      *screen,
 	    }
 	}
 	break;
-    case SCALE_SCREEN_OPTION_HOVER_TIME:
-	if (compSetIntOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -1882,7 +1879,8 @@ scaleDamageWindowRect (CompWindow *w,
 }
 
 static CompOption *
-scaleGetDisplayOptions (CompDisplay *display,
+scaleGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     SCALE_DISPLAY (display);
@@ -1892,7 +1890,8 @@ scaleGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-scaleSetDisplayOption (CompDisplay     *display,
+scaleSetDisplayOption (CompPlugin  *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -2117,15 +2116,28 @@ scaleFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     SCALE_SCREEN (s);
+    SCALE_DISPLAY (s->display);
 
     matchFini (&ss->match);
     matchFini (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
+
+    removeScreenAction (s, 
+			&sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s,
+	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
+    removeScreenAction (s,
+	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP].value.action);
+    removeScreenAction (s,
+	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT].value.action);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
     UNWRAP (ss, s, paintScreen);
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, damageWindowRect);
+
+    if (ss->cursor)
+	XFreeCursor (s->display->display, ss->cursor);
 
     if (ss->slotsSize)
 	free (ss->slots);

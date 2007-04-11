@@ -142,7 +142,8 @@ typedef struct _ZoomScreen {
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-zoomGetScreenOptions (CompScreen *screen,
+zoomGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
 		      int	 *count)
 {
     ZOOM_SCREEN (screen);
@@ -152,7 +153,8 @@ zoomGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-zoomSetScreenOption (CompScreen      *screen,
+zoomSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
 		     char	     *name,
 		     CompOptionValue *value)
 {
@@ -202,10 +204,9 @@ zoomSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case ZOOM_SCREEN_OPTION_FILTER_LINEAR:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -674,7 +675,7 @@ zoomUpdateCubeOptions (CompScreen *s)
 	CompOption *options, *option;
 	int	   nOptions;
 
-	options = (*p->vTable->getScreenOptions) (s, &nOptions);
+	options = (*p->vTable->getScreenOptions) (p, s, &nOptions);
 	option = compFindOption (options, nOptions, "in", 0);
 	if (option)
 	    zs->maxTranslate = option->value.b ? 0.85f : 1.5f;
@@ -702,7 +703,8 @@ zoomSetScreenOptionForPlugin (CompScreen      *s,
 }
 
 static CompOption *
-zoomGetDisplayOptions (CompDisplay *display,
+zoomGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     ZOOM_DISPLAY (display);
@@ -712,7 +714,8 @@ zoomGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-zoomSetDisplayOption (CompDisplay     *display,
+zoomSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
 {
@@ -896,6 +899,11 @@ zoomFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ZOOM_SCREEN (s);
+    ZOOM_DISPLAY (s->display);
+
+    removeScreenAction (s, 
+			&zd->opt[ZOOM_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_IN].value.action);
 
     UNWRAP (zs, s, preparePaintScreen);
     UNWRAP (zs, s, donePaintScreen);

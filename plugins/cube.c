@@ -583,7 +583,8 @@ cubeUpdateOutputs (CompScreen *s)
 }
 
 static CompOption *
-cubeGetScreenOptions (CompScreen *screen,
+cubeGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
 		      int	 *count)
 {
     CUBE_SCREEN (screen);
@@ -851,7 +852,8 @@ cubeUpdateSkyDomeList (CompScreen *s,
 }
 
 static Bool
-cubeSetScreenOption (CompScreen      *screen,
+cubeSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
 		     char	     *name,
 		     CompOptionValue *value)
 {
@@ -1744,7 +1746,8 @@ cubeSetGlobalScreenOption (CompScreen      *s,
 }
 
 static CompOption *
-cubeGetDisplayOptions (CompDisplay *display,
+cubeGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     CUBE_DISPLAY (display);
@@ -1754,7 +1757,8 @@ cubeGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-cubeSetDisplayOption (CompDisplay     *display,
+cubeSetDisplayOption (CompPlugin  *plugin,
+		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
 {
@@ -1974,9 +1978,12 @@ cubeFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     CUBE_SCREEN (s);
+    CUBE_DISPLAY (s->display);
 
     if (cs->skyListId)
 	glDeleteLists (cs->skyListId, 1);
+
+    removeScreenAction (s, &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD].value.action);
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);

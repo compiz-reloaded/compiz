@@ -234,7 +234,8 @@ static float _boxVertices[] =
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-switchGetScreenOptions (CompScreen *screen,
+switchGetScreenOptions (CompPlugin *plugin,
+			CompScreen *screen,
 			int	   *count)
 {
     SWITCH_SCREEN (screen);
@@ -244,7 +245,8 @@ switchGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-switchSetScreenOption (CompScreen      *screen,
+switchSetScreenOption (CompPlugin *plugin,
+		       CompScreen      *screen,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -271,17 +273,6 @@ switchSetScreenOption (CompScreen      *screen,
 	    ss->timestep = o->value.f;
 	    return TRUE;
 	}
-	break;
-    case SWITCH_SCREEN_OPTION_WINDOW_MATCH:
-	if (compSetMatchOption (o, value))
-	    return TRUE;
-	break;
-    case SWITCH_SCREEN_OPTION_MIPMAP:
-    case SWITCH_SCREEN_OPTION_ICON:
-    case SWITCH_SCREEN_OPTION_MINIMIZED:
-    case SWITCH_SCREEN_OPTION_AUTO_ROTATE:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
 	break;
     case SWITCH_SCREEN_OPTION_SATURATION:
 	if (compSetIntOption (o, value))
@@ -327,7 +318,10 @@ switchSetScreenOption (CompScreen      *screen,
 
 	    return TRUE;
 	}
+	break;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 
@@ -1977,8 +1971,9 @@ switchDamageWindowRect (CompWindow *w,
 }
 
 static CompOption *
-switchGetDisplayOptions (CompDisplay *display,
-		       int	   *count)
+switchGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
+			 int	     *count)
 {
     SWITCH_DISPLAY (display);
 
@@ -1987,7 +1982,8 @@ switchGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-switchSetDisplayOption (CompDisplay     *display,
+switchSetDisplayOption (CompPlugin  *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {
@@ -2245,8 +2241,20 @@ switchFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     SWITCH_SCREEN (s);
+    SWITCH_DISPLAY (s->display);
 
     matchFini (&ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match);
+
+    removeScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT].value.action);
+    removeScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP].value.action);
+    removeScreenAction (s, 
+			&sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP].value.action);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);

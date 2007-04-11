@@ -673,7 +673,8 @@ resizeHandleEvent (CompDisplay *d,
 }
 
 static CompOption *
-resizeGetDisplayOptions (CompDisplay *display,
+resizeGetDisplayOptions (CompPlugin  *plugin,
+			 CompDisplay *display,
 			 int	     *count)
 {
     RESIZE_DISPLAY (display);
@@ -683,7 +684,8 @@ resizeGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-resizeSetDisplayOption (CompDisplay     *display,
+resizeSetDisplayOption (CompPlugin      *plugin,
+			CompDisplay     *display,
 			char	        *name,
 			CompOptionValue *value)
 {
@@ -829,6 +831,29 @@ resizeFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
+
+    if (rs->leftCursor)
+	XFreeCursor (s->display->display, rs->leftCursor);
+    if (rs->rightCursor)
+	XFreeCursor (s->display->display, rs->rightCursor);
+    if (rs->upCursor)
+	XFreeCursor (s->display->display, rs->upCursor);
+    if (rs->downCursor)
+	XFreeCursor (s->display->display, rs->downCursor);
+    if (rs->middleCursor)
+	XFreeCursor (s->display->display, rs->middleCursor);
+    if (rs->upLeftCursor)
+	XFreeCursor (s->display->display, rs->upLeftCursor);
+    if (rs->upRightCursor)
+	XFreeCursor (s->display->display, rs->upRightCursor);
+    if (rs->downLeftCursor)
+	XFreeCursor (s->display->display, rs->downLeftCursor);
+    if (rs->downRightCursor)
+	XFreeCursor (s->display->display, rs->downRightCursor);
+    
+    removeScreenAction (s, 
+			&rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action);
 
     free (rs);
 }

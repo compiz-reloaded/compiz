@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070328
+#define ABIVERSION 20070407
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -435,6 +435,10 @@ Bool
 compSetOptionList (CompOption      *option,
 		   CompOptionValue *value);
 
+Bool
+compSetOption (CompOption      *option,
+	       CompOptionValue *value);
+
 unsigned int
 compWindowTypeMaskFromStringList (CompOptionValue *value);
 
@@ -578,6 +582,13 @@ typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 typedef Bool (*SetDisplayOptionProc) (CompDisplay     *display,
 				      char	      *name,
 				      CompOptionValue *value);
+typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
+						    CompDisplay *display,
+					            int	        *count);
+typedef Bool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
+					    CompDisplay     *display,
+					    char	    *name,
+					    CompOptionValue *value);
 typedef Bool (*SetDisplayOptionForPluginProc) (CompDisplay     *display,
 					       char	       *plugin,
 					       char	       *name,
@@ -1555,6 +1566,13 @@ typedef CompOption *(*GetScreenOptionsProc) (CompScreen *screen,
 typedef Bool (*SetScreenOptionProc) (CompScreen      *screen,
 				     char	     *name,
 				     CompOptionValue *value);
+typedef CompOption *(*GetPluginScreenOptionsProc) (CompPlugin *plugin,
+						   CompScreen *screen,
+						   int	      *count);
+typedef Bool (*SetPluginScreenOptionProc) (CompPlugin      *plugin,
+					   CompScreen      *screen,
+					   char	           *name,
+					   CompOptionValue *value);
 typedef Bool (*SetScreenOptionForPluginProc) (CompScreen      *screen,
 					      char	      *plugin,
 					      char	      *name,
@@ -2194,6 +2212,12 @@ typedef Bool (*InitPluginForWindowProc) (CompPlugin *plugin,
 typedef void (*FiniPluginForWindowProc) (CompPlugin *plugin,
 					 CompWindow *window);
 
+typedef enum {
+    CompStackingUpdateModeNone = 0,
+    CompStackingUpdateModeNormal,
+    CompStackingUpdateModeAboveFullscreen
+} CompStackingUpdateMode;
+
 struct _CompWindowExtents {
     int left;
     int right;
@@ -2612,8 +2636,8 @@ restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling);
 
 void
-updateWindowAttributes (CompWindow *w,
-			Bool	   aboveFs);
+updateWindowAttributes (CompWindow             *w,
+			CompStackingUpdateMode stackingMode);
 
 void
 activateWindow (CompWindow *w);
@@ -2738,10 +2762,10 @@ typedef struct _CompPluginVTable {
     InitPluginForWindowProc initWindow;
     FiniPluginForWindowProc finiWindow;
 
-    GetDisplayOptionsProc getDisplayOptions;
-    SetDisplayOptionProc  setDisplayOption;
-    GetScreenOptionsProc  getScreenOptions;
-    SetScreenOptionProc   setScreenOption;
+    GetPluginDisplayOptionsProc getDisplayOptions;
+    SetPluginDisplayOptionProc  setDisplayOption;
+    GetPluginScreenOptionsProc  getScreenOptions;
+    SetPluginScreenOptionProc   setScreenOption;
 
     CompPluginDep *deps;
     int		  nDeps;

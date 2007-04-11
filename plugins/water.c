@@ -1531,7 +1531,8 @@ waterHandleEvent (CompDisplay *d,
 }
 
 static CompOption *
-waterGetDisplayOptions (CompDisplay *display,
+waterGetDisplayOptions (CompPlugin  *plugin,
+			CompDisplay *display,
 			int	    *count)
 {
     WATER_DISPLAY (display);
@@ -1541,7 +1542,8 @@ waterGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-waterSetDisplayOption (CompDisplay     *display,
+waterSetDisplayOption (CompPlugin      *plugin,
+		       CompDisplay     *display,
 		       char	       *name,
 		       CompOptionValue *value)
 {
@@ -1786,6 +1788,7 @@ waterFiniScreen (CompPlugin *p,
     int		  i;
 
     WATER_SCREEN (s);
+    WATER_DISPLAY (s->display);
 
     if (ws->rainHandle)
 	compRemoveTimeout (ws->rainHandle);
@@ -1817,6 +1820,19 @@ waterFiniScreen (CompPlugin *p,
 	free (function);
 	function = next;
     }
+
+    removeScreenAction (s, 
+			&wd->opt[WATER_DISPLAY_OPTION_INITIATE].value.action);
+    removeScreenAction (s,
+	   		&wd->opt[WATER_DISPLAY_OPTION_TOGGLE_RAIN].value.action);
+    removeScreenAction (s,
+	   		&wd->opt[WATER_DISPLAY_OPTION_TOGGLE_WIPER].value.action);
+    removeScreenAction (s, 
+			&wd->opt[WATER_DISPLAY_OPTION_TITLE_WAVE].value.action);
+    removeScreenAction (s, 
+			&wd->opt[WATER_DISPLAY_OPTION_POINT].value.action);
+    removeScreenAction (s, 
+			&wd->opt[WATER_DISPLAY_OPTION_LINE].value.action);
 
     UNWRAP (ws, s, preparePaintScreen);
     UNWRAP (ws, s, donePaintScreen);

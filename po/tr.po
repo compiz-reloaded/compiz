@@ -1,0 +1,2257 @@
+# Turkish message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 1999, 2000, 2001 SuSE GmbH.
+# Görkem Çetin <gorkem@gelecek.com.tr>, 1999, 2000.
+# Mehmet Mıdık <mmidik@setra.net.tr>, 2000.
+# Metin Oral <moral@suse.de>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-04-01 18:26+0200\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
+#: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
+#, fuzzy
+msgid "Initiate"
+msgstr "Başlangıç"
+
+#: plugins/annotate.c:746
+msgid "Initiate annotate drawing"
+msgstr ""
+
+#: plugins/annotate.c:760
+msgid "Draw"
+msgstr ""
+
+#: plugins/annotate.c:761
+msgid "Draw using tool"
+msgstr ""
+
+#: plugins/annotate.c:772
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Başlangıç"
+
+#: plugins/annotate.c:773
+msgid "Initiate annotate erasing"
+msgstr ""
+
+#: plugins/annotate.c:787 plugins/annotate.c:788
+msgid "Clear"
+msgstr ""
+
+#: plugins/annotate.c:805
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: plugins/annotate.c:806
+msgid "Fill color for annotations"
+msgstr ""
+
+#: plugins/annotate.c:815
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: plugins/annotate.c:816
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: plugins/annotate.c:825
+msgid "Line width"
+msgstr ""
+
+#: plugins/annotate.c:826
+msgid "Line width for annotations"
+msgstr ""
+
+#: plugins/annotate.c:835
+msgid "Stroke width"
+msgstr ""
+
+#: plugins/annotate.c:836
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: plugins/annotate.c:1009
+#, fuzzy
+msgid "Annotate"
+msgstr "Başlangıç"
+
+#: plugins/annotate.c:1010
+#, fuzzy
+msgid "Annotate plugin"
+msgstr "Aktif profil"
+
+#: plugins/blur.c:73
+#, fuzzy
+msgid "4xBilinear"
+msgstr "Filtre:"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:638
+#: plugins/blur.c:74 plugins/blur.c:237
+#, fuzzy
+msgid "Gaussian"
+msgstr "Rusça"
+
+#: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
+#: plugins/decoration.c:1203 plugins/switcher.c:373
+#, fuzzy
+msgid "Mipmap"
+msgstr "Lima"
+
+#: plugins/blur.c:728
+#, fuzzy
+msgid "Blur Speed"
+msgstr "Seçili"
+
+# clients/inst_resize_ui.ycp:597
+#: plugins/blur.c:729
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Windows içermeyen alan (%1)"
+
+# clients/inst_target_part.ycp:404
+#: plugins/blur.c:738
+#, fuzzy
+msgid "Focus blur windows"
+msgstr "Windows'u &sil"
+
+#: plugins/blur.c:739
+msgid "Windows that should be affected by focus blur"
+msgstr ""
+
+#: plugins/blur.c:747
+msgid "Focus Blur"
+msgstr ""
+
+#: plugins/blur.c:748
+msgid "Blur windows that doesn't have focus"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/blur.c:754
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "Windows'u &sil"
+
+#: plugins/blur.c:755
+msgid "Windows that should use alpha blur by default"
+msgstr ""
+
+#: plugins/blur.c:763
+msgid "Alpha Blur"
+msgstr ""
+
+#: plugins/blur.c:764
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+# include/tv/ui.ycp:493
+#: plugins/blur.c:772
+#, fuzzy
+msgid "Blur Filter"
+msgstr "&Filtre koy"
+
+#: plugins/blur.c:773
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: plugins/blur.c:783
+msgid "Gaussian Radius"
+msgstr ""
+
+# RU
+#: plugins/blur.c:784
+#, fuzzy
+msgid "Gaussian radius"
+msgstr "Rusya Federasyonu"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:638
+#: plugins/blur.c:792
+#, fuzzy
+msgid "Gaussian Strength"
+msgstr "Rusça"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:638
+#: plugins/blur.c:793
+#, fuzzy
+msgid "Gaussian strength"
+msgstr "Rusça"
+
+#: plugins/blur.c:802
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Lima"
+
+#: plugins/blur.c:803
+msgid "Mipmap level-of-detail"
+msgstr ""
+
+#: plugins/blur.c:812
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "Süre"
+
+#: plugins/blur.c:813
+#, fuzzy
+msgid "Blur saturation"
+msgstr "Süre"
+
+#: plugins/blur.c:821
+msgid "Blur Occlusion"
+msgstr ""
+
+#: plugins/blur.c:822
+msgid "blur occlusion"
+msgstr ""
+
+#: plugins/blur.c:2560
+msgid "Pulse"
+msgstr ""
+
+#: plugins/blur.c:2561
+msgid "Pulse effect"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/blur.c:2883
+#, fuzzy
+msgid "Blur Windows"
+msgstr "Windows'u &sil"
+
+# clients/inst_target_part.ycp:404
+#: plugins/blur.c:2884
+#, fuzzy
+msgid "Blur windows"
+msgstr "Windows'u &sil"
+
+#: plugins/clone.c:725
+msgid "Initiate clone selection"
+msgstr ""
+
+#: plugins/clone.c:854
+#, fuzzy
+msgid "Clone Output"
+msgstr "Kısa çıktı"
+
+#: plugins/clone.c:855
+msgid "Output clone handler"
+msgstr ""
+
+# include/security/ui.ycp:774
+#: plugins/cube.c:990
+#, fuzzy
+msgid "Cube Color"
+msgstr "Normal saat"
+
+#: plugins/cube.c:991
+msgid "Color of top and bottom sides of the cube"
+msgstr ""
+
+#: plugins/cube.c:1000
+msgid "Inside Cube"
+msgstr ""
+
+#: plugins/cube.c:1001
+msgid "Inside cube"
+msgstr ""
+
+# clients/inst_environment.ycp:306
+#: plugins/cube.c:1007
+#, fuzzy
+msgid "Scale image"
+msgstr "yerel zaman"
+
+#: plugins/cube.c:1008
+msgid "Scale images to cover top face of cube"
+msgstr ""
+
+#: plugins/cube.c:1014
+#, fuzzy
+msgid "Image files"
+msgstr "Başarısız dosyalar"
+
+#: plugins/cube.c:1015
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+
+#: plugins/cube.c:1028
+#, fuzzy
+msgid "Skydome"
+msgstr "Sidney"
+
+#: plugins/cube.c:1029
+msgid "Render skydome"
+msgstr ""
+
+#: plugins/cube.c:1035
+msgid "Skydome Image"
+msgstr ""
+
+#: plugins/cube.c:1036
+msgid "Image to use as texture for the skydome"
+msgstr ""
+
+#: plugins/cube.c:1044
+msgid "Animate Skydome"
+msgstr ""
+
+#: plugins/cube.c:1045
+msgid "Animate skydome when rotating cube"
+msgstr ""
+
+#: plugins/cube.c:1051
+msgid "Skydome Gradient Start Color"
+msgstr ""
+
+#: plugins/cube.c:1052
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: plugins/cube.c:1062
+msgid "Skydome Gradient End Color"
+msgstr ""
+
+#: plugins/cube.c:1063
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+
+# include/x11/resolution_dialog.ycp:81
+#: plugins/cube.c:1073 plugins/rotate.c:302
+#, fuzzy
+msgid "Acceleration"
+msgstr "3D hızlandırma:"
+
+# include/x11/resolution_dialog.ycp:81
+#: plugins/cube.c:1074
+#, fuzzy
+msgid "Fold Acceleration"
+msgstr "3D hızlandırma:"
+
+#: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
+#: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
+#, fuzzy
+msgid "Speed"
+msgstr "Seçili"
+
+#: plugins/cube.c:1084
+#, fuzzy
+msgid "Fold Speed"
+msgstr "Seçili"
+
+# classnames.ycp:73
+#: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
+#: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
+#, fuzzy
+msgid "Timestep"
+msgstr "Süre"
+
+# classnames.ycp:73
+#: plugins/cube.c:1094
+#, fuzzy
+msgid "Fold Timestep"
+msgstr "Süre"
+
+#: plugins/cube.c:1104 plugins/switcher.c:374
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+
+#: plugins/cube.c:1795
+msgid "Unfold"
+msgstr ""
+
+#: plugins/cube.c:1796
+msgid "Unfold cube"
+msgstr ""
+
+# clients/inst_sw_single.ycp:1623
+#: plugins/cube.c:1813
+#, fuzzy
+msgid "Next Slide"
+msgstr "Sonraki güncelleme"
+
+#: plugins/cube.c:1814
+msgid "Advance to next slide"
+msgstr ""
+
+#: plugins/cube.c:1831
+#, fuzzy
+msgid "Previous Slide"
+msgstr "Onceki cekirdek"
+
+#: plugins/cube.c:1832
+msgid "Go back to previous slide"
+msgstr ""
+
+# clients/inst_sw_single.ycp:146
+#: plugins/cube.c:2037
+#, fuzzy
+msgid "Desktop Cube"
+msgstr "Masaüstü:"
+
+#: plugins/cube.c:2038
+msgid "Place windows on cube"
+msgstr ""
+
+#: plugins/decoration.c:1145
+#, fuzzy
+msgid "Shadow Radius"
+msgstr "Radius"
+
+#: plugins/decoration.c:1146
+#, fuzzy
+msgid "Drop shadow radius"
+msgstr "Radius"
+
+#: plugins/decoration.c:1155
+#, fuzzy
+msgid "Shadow Opacity"
+msgstr "&Düşük seviye"
+
+#: plugins/decoration.c:1156
+#, fuzzy
+msgid "Drop shadow opacity"
+msgstr "&Düşük seviye"
+
+#: plugins/decoration.c:1175
+msgid "Shadow Offset X"
+msgstr ""
+
+#: plugins/decoration.c:1176
+msgid "Drop shadow X offset"
+msgstr ""
+
+#: plugins/decoration.c:1184
+msgid "Shadow Offset Y"
+msgstr ""
+
+#: plugins/decoration.c:1185
+msgid "Drop shadow Y offset"
+msgstr ""
+
+# clients/support_registration.ycp:66
+#: plugins/decoration.c:1193
+#, fuzzy
+msgid "Command"
+msgstr "Komut: "
+
+#: plugins/decoration.c:1194
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/decoration.c:1210
+#, fuzzy
+msgid "Decoration windows"
+msgstr "Windows'u &sil"
+
+#: plugins/decoration.c:1211
+msgid "Windows that should be decorated"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: plugins/decoration.c:1219
+#, fuzzy
+msgid "Shadow windows"
+msgstr "Windows'u &küçült"
+
+#: plugins/decoration.c:1220
+msgid "Windows that should be have a shadow"
+msgstr ""
+
+#: plugins/decoration.c:1505
+#, fuzzy
+msgid "Window Decoration"
+msgstr "Tanımsız"
+
+#: plugins/decoration.c:1506
+#, fuzzy
+msgid "Window decorations"
+msgstr "ypbind seçenekleri"
+
+#: plugins/fade.c:179
+msgid "Fade Speed"
+msgstr ""
+
+# clients/inst_resize_ui.ycp:597
+#: plugins/fade.c:180
+#, fuzzy
+msgid "Window fade speed"
+msgstr "Windows içermeyen alan (%1)"
+
+# clients/inst_target_part.ycp:404
+#: plugins/fade.c:189
+#, fuzzy
+msgid "Fade windows"
+msgstr "Windows'u &sil"
+
+#: plugins/fade.c:190
+msgid "Windows that should be fading"
+msgstr ""
+
+#: plugins/fade.c:198
+msgid "Visual Bell"
+msgstr ""
+
+#: plugins/fade.c:199
+msgid "Fade effect on system beep"
+msgstr ""
+
+#: plugins/fade.c:205
+msgid "Fullscreen Visual Bell"
+msgstr ""
+
+#: plugins/fade.c:206
+msgid "Fullscreen fade effect on system beep"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: plugins/fade.c:857
+#, fuzzy
+msgid "Fading Windows"
+msgstr "Windows'u &küçült"
+
+#: plugins/fade.c:858
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+
+#: plugins/fuse.c:1486
+msgid "Mount Point"
+msgstr ""
+
+# clients/inst_custom_part.ycp:2928
+#: plugins/fuse.c:1487
+#, fuzzy
+msgid "Mount point"
+msgstr "Geri dönüşüm noktası oluştur"
+
+#: plugins/fuse.c:1586
+msgid "Userspace File System"
+msgstr ""
+
+#: plugins/fuse.c:1587
+msgid "Userspace file system"
+msgstr ""
+
+#. Decimal point character
+#: plugins/gconf-dump.c:81
+msgid "."
+msgstr ""
+
+#: plugins/gconf-dump.c:616
+msgid "Plugins that this must load before"
+msgstr ""
+
+#: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
+msgid "Do not modify"
+msgstr ""
+
+#: plugins/gconf-dump.c:626
+msgid "Plugins that this requires"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: plugins/minimize.c:193
+#, fuzzy
+msgid "Minimize speed"
+msgstr "Windows'u &küçült"
+
+# clients/inst_target_part.ycp:387
+#: plugins/minimize.c:203
+#, fuzzy
+msgid "Minimize timestep"
+msgstr "Windows'u &küçült"
+
+# clients/inst_target_part.ycp:387
+#: plugins/minimize.c:212
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "Windows'u &küçült"
+
+#: plugins/minimize.c:213
+msgid "Windows that should be transformed when minimized"
+msgstr ""
+
+#: plugins/minimize.c:221
+msgid "Shade Resistance"
+msgstr ""
+
+#: plugins/minimize.c:222
+msgid "Shade resistance"
+msgstr ""
+
+#: plugins/minimize.c:1071
+msgid "Minimize Effect"
+msgstr ""
+
+#: plugins/minimize.c:1072
+msgid "Transform windows when they are minimized and unminimized"
+msgstr ""
+
+#: plugins/move.c:677
+msgid "Initiate Window Move"
+msgstr ""
+
+# include/nis_server/io.ycp:465
+#: plugins/move.c:678
+#, fuzzy
+msgid "Start moving window"
+msgstr "Daemon başlatılıyor."
+
+#: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
+#, fuzzy
+msgid "Opacity"
+msgstr "&Düşük seviye"
+
+# include/nis_server/io.ycp:465
+#: plugins/move.c:697
+#, fuzzy
+msgid "Opacity level of moving windows"
+msgstr "Daemon başlatılıyor."
+
+# include/ui/common_messages.ycp:23
+#: plugins/move.c:705
+#, fuzzy
+msgid "Constrain Y"
+msgstr "İçerecek"
+
+#: plugins/move.c:706
+msgid "Constrain Y coordinate to workspace area"
+msgstr ""
+
+#: plugins/move.c:712
+msgid "Snapoff maximized windows"
+msgstr ""
+
+#: plugins/move.c:713
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+
+#: plugins/move.c:881
+#, fuzzy
+msgid "Move Window"
+msgstr "&Aşağı"
+
+#: plugins/move.c:882
+#, fuzzy
+msgid "Move window"
+msgstr "&Aşağı"
+
+#: plugins/place.c:42
+msgid "Cascade"
+msgstr ""
+
+#: plugins/place.c:43
+msgid "Centered"
+msgstr ""
+
+#: plugins/place.c:44
+msgid "Smart"
+msgstr ""
+
+#: plugins/place.c:45
+msgid "Maximize"
+msgstr ""
+
+#: plugins/place.c:46
+msgid "Random"
+msgstr ""
+
+#: plugins/place.c:244
+#, fuzzy
+msgid "Workarounds"
+msgstr "&İş grubu"
+
+#: plugins/place.c:245
+msgid "Window placement workarounds"
+msgstr ""
+
+#: plugins/place.c:251
+msgid "Placement Mode"
+msgstr ""
+
+#: plugins/place.c:252
+msgid "Algorithm to use for window placement"
+msgstr ""
+
+#: plugins/place.c:260
+#, fuzzy
+msgid "Positioned windows"
+msgstr "Boyut değiştirme işlemi başarısız oldu"
+
+#: plugins/place.c:261
+msgid "Windows that should be positioned by default"
+msgstr ""
+
+#: plugins/place.c:271
+msgid "X Positions"
+msgstr ""
+
+#: plugins/place.c:272
+msgid "X position values"
+msgstr ""
+
+#: plugins/place.c:282
+msgid "Y Positions"
+msgstr ""
+
+#: plugins/place.c:283
+msgid "Y position values"
+msgstr ""
+
+#: plugins/place.c:293
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: plugins/place.c:294
+msgid "Windows that should positioned in specific viewports by default"
+msgstr ""
+
+#: plugins/place.c:305
+msgid "X Viewport Positions"
+msgstr ""
+
+#: plugins/place.c:306
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Sanal diskler"
+
+#: plugins/place.c:316
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: plugins/place.c:317
+msgid "Vertical viewport positions"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/place.c:1604
+#, fuzzy
+msgid "Place Windows"
+msgstr "Windows'u &sil"
+
+#: plugins/place.c:1605
+msgid "Place windows at appropriate positions when mapped"
+msgstr ""
+
+#: plugins/plane.c:624
+msgid "Plane Left"
+msgstr ""
+
+#: plugins/plane.c:625
+msgid "Plane left"
+msgstr ""
+
+#: plugins/plane.c:643
+msgid "Plane Right"
+msgstr ""
+
+#: plugins/plane.c:644
+msgid "Plane right"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/plane.c:662
+#, fuzzy
+msgid "Plane Down"
+msgstr "Windows'u &sil"
+
+# clients/inst_target_part.ycp:404
+#: plugins/plane.c:663
+#, fuzzy
+msgid "Plane down"
+msgstr "Windows'u &sil"
+
+#: plugins/plane.c:681
+msgid "Plane Up"
+msgstr ""
+
+#: plugins/plane.c:682
+msgid "Plane up"
+msgstr ""
+
+#: plugins/plane.c:698
+#, c-format
+msgid "Plane To Face %d"
+msgstr ""
+
+#: plugins/plane.c:699
+#, c-format
+msgid "Plane to face %d"
+msgstr ""
+
+# include/nis_server/io.ycp:465
+#: plugins/plane.c:700
+#, fuzzy, c-format
+msgid "Plane To Face %d with Window"
+msgstr "Daemon başlatılıyor."
+
+#: plugins/plane.c:701
+#, c-format
+msgid "Plane to face %d and bring active window along"
+msgstr ""
+
+# clients/inst_sw_single.ycp:146
+#: plugins/plane.c:868
+#, fuzzy
+msgid "Desktop Plane"
+msgstr "Masaüstü:"
+
+# clients/inst_target_part.ycp:404
+#: plugins/plane.c:869
+#, fuzzy
+msgid "Place windows on a plane"
+msgstr "Windows'u &sil"
+
+#: plugins/regex.c:463
+msgid "Regex Matching"
+msgstr ""
+
+#: plugins/regex.c:464
+msgid "Regex window matching"
+msgstr ""
+
+#: plugins/resize.c:718
+msgid "Initiate Window Resize"
+msgstr ""
+
+# include/nis_server/io.ycp:465
+#: plugins/resize.c:719
+#, fuzzy
+msgid "Start resizing window"
+msgstr "Daemon başlatılıyor."
+
+#: plugins/resize.c:862
+#, fuzzy
+msgid "Resize Window"
+msgstr "Boyut değiştirme işlemi başarısız oldu"
+
+#: plugins/resize.c:863
+#, fuzzy
+msgid "Resize window"
+msgstr "Boyut değiştirme işlemi başarısız oldu"
+
+#: plugins/rotate.c:285 plugins/zoom.c:222
+#, fuzzy
+msgid "Pointer Invert Y"
+msgstr "%1 için göstergeç"
+
+#: plugins/rotate.c:286 plugins/zoom.c:223
+msgid "Invert Y axis for pointer movement"
+msgstr ""
+
+# include/cups/ui.ycp:541
+#: plugins/rotate.c:292 plugins/zoom.c:229
+#, fuzzy
+msgid "Pointer Sensitivity"
+msgstr "Yazıcı aygıtı"
+
+#: plugins/rotate.c:293 plugins/zoom.c:230
+msgid "Sensitivity of pointer movement"
+msgstr ""
+
+# include/x11/resolution_dialog.ycp:81
+#: plugins/rotate.c:303
+#, fuzzy
+msgid "Rotation Acceleration"
+msgstr "3D hızlandırma:"
+
+#: plugins/rotate.c:312
+msgid "Snap To Top Face"
+msgstr ""
+
+#: plugins/rotate.c:313
+msgid "Snap Cube Rotation to Top Face"
+msgstr ""
+
+#: plugins/rotate.c:320
+msgid "Rotation Speed"
+msgstr ""
+
+# classnames.ycp:73
+#: plugins/rotate.c:330
+#, fuzzy
+msgid "Rotation Timestep"
+msgstr "Süre"
+
+# include/ui/wizard_hw.ycp:51
+#: plugins/rotate.c:1764
+#, fuzzy
+msgid "Start Rotation"
+msgstr "Algılamayı başlat"
+
+#: plugins/rotate.c:1778
+msgid "Rotate Left"
+msgstr ""
+
+#: plugins/rotate.c:1779
+msgid "Rotate left"
+msgstr ""
+
+#: plugins/rotate.c:1797
+msgid "Rotate Right"
+msgstr ""
+
+#: plugins/rotate.c:1798
+msgid "Rotate right"
+msgstr ""
+
+#: plugins/rotate.c:1816
+msgid "Rotate Left with Window"
+msgstr ""
+
+#: plugins/rotate.c:1817
+msgid "Rotate left and bring active window along"
+msgstr ""
+
+#: plugins/rotate.c:1836
+msgid "Rotate Right with Window"
+msgstr ""
+
+#: plugins/rotate.c:1837
+msgid "Rotate right and bring active window along"
+msgstr ""
+
+#: plugins/rotate.c:1854
+#, c-format
+msgid "Rotate To Face %d"
+msgstr ""
+
+#: plugins/rotate.c:1855
+#, c-format
+msgid "Rotate to face %d"
+msgstr ""
+
+#: plugins/rotate.c:1856
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr ""
+
+#: plugins/rotate.c:1857
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr ""
+
+#: plugins/rotate.c:1906
+#, fuzzy
+msgid "Rotate To"
+msgstr "Uzak alt ağ"
+
+#: plugins/rotate.c:1907
+msgid "Rotate to viewport"
+msgstr ""
+
+#: plugins/rotate.c:1918
+#, fuzzy
+msgid "Rotate Window"
+msgstr "&Aşağı"
+
+# include/nis_server/io.ycp:465
+#: plugins/rotate.c:1919
+#, fuzzy
+msgid "Rotate with window"
+msgstr "Daemon başlatılıyor."
+
+#: plugins/rotate.c:1930
+msgid "Rotate Flip Left"
+msgstr ""
+
+#: plugins/rotate.c:1931
+msgid "Flip to left viewport and warp pointer"
+msgstr ""
+
+#: plugins/rotate.c:1946
+msgid "Rotate Flip Right"
+msgstr ""
+
+#: plugins/rotate.c:1947
+msgid "Flip to right viewport and warp pointer"
+msgstr ""
+
+#: plugins/rotate.c:1962
+msgid "Edge Flip Pointer"
+msgstr ""
+
+#: plugins/rotate.c:1963
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+
+#: plugins/rotate.c:1970
+msgid "Edge Flip Move"
+msgstr ""
+
+#: plugins/rotate.c:1971
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+
+#: plugins/rotate.c:1978
+msgid "Edge Flip DnD"
+msgstr ""
+
+#: plugins/rotate.c:1979
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+
+# clients/online_update.ycp:223
+#: plugins/rotate.c:1986
+#, fuzzy
+msgid "Flip Time"
+msgstr "Gerçek zamanlı"
+
+#: plugins/rotate.c:1987
+msgid "Timeout before flipping viewport"
+msgstr ""
+
+#: plugins/rotate.c:2155
+#, fuzzy
+msgid "Rotate Cube"
+msgstr "Uzak alt ağ"
+
+#: plugins/rotate.c:2156
+msgid "Rotate desktop cube"
+msgstr ""
+
+#: plugins/scale.c:80 plugins/wobbly.c:131
+msgid "None"
+msgstr "Hiçbiri"
+
+#: plugins/scale.c:81
+msgid "Emblem"
+msgstr ""
+
+#: plugins/scale.c:82
+msgid "Big"
+msgstr ""
+
+# /usr/lib/YaST2/keyboard_raw.ycp:200
+#: plugins/scale.c:325
+#, fuzzy
+msgid "Spacing"
+msgstr "İspanya"
+
+# clients/inst_target_part.ycp:404
+#: plugins/scale.c:326
+#, fuzzy
+msgid "Space between windows"
+msgstr "Windows'u &sil"
+
+# clients/inst_environment.ycp:306
+#: plugins/scale.c:335
+#, fuzzy
+msgid "Scale speed"
+msgstr "yerel zaman"
+
+# clients/inst_environment.ycp:306
+#: plugins/scale.c:345
+#, fuzzy
+msgid "Scale timestep"
+msgstr "yerel zaman"
+
+# clients/inst_target_part.ycp:404
+#: plugins/scale.c:354
+#, fuzzy
+msgid "Scale Windows"
+msgstr "Windows'u &sil"
+
+#: plugins/scale.c:355
+msgid "Windows that should be scaled in scale mode"
+msgstr ""
+
+#: plugins/scale.c:363
+#, fuzzy
+msgid "Darken Background"
+msgstr "Arka plan"
+
+#: plugins/scale.c:364
+msgid "Darken background when scaling windows"
+msgstr ""
+
+#: plugins/scale.c:371 plugins/switcher.c:400
+msgid "Amount of opacity in percent"
+msgstr ""
+
+#: plugins/scale.c:379
+msgid "Overlay Icon"
+msgstr ""
+
+#: plugins/scale.c:380
+msgid "Overlay an icon on windows once they are scaled"
+msgstr ""
+
+#: plugins/scale.c:388
+msgid "Hover Time"
+msgstr ""
+
+#: plugins/scale.c:389
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+
+#: plugins/scale.c:1931
+msgid "Initiate Window Picker"
+msgstr ""
+
+#: plugins/scale.c:1932
+msgid "Layout and start transforming windows"
+msgstr ""
+
+#: plugins/scale.c:1950
+msgid "Initiate Window Picker For All Windows"
+msgstr ""
+
+#: plugins/scale.c:1951
+msgid "Layout and start transforming all windows"
+msgstr ""
+
+#: plugins/scale.c:1965
+msgid "Initiate Window Picker For Window Group"
+msgstr ""
+
+#: plugins/scale.c:1966
+msgid "Layout and start transforming window group"
+msgstr ""
+
+#: plugins/scale.c:1981
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr ""
+
+#: plugins/scale.c:1983
+msgid "Layout and start transforming windows on current output"
+msgstr ""
+
+# menuentries/menuentry_scanner.ycp:36
+#: plugins/scale.c:2200
+#, fuzzy
+msgid "Scale"
+msgstr "Tarayıcı"
+
+# clients/inst_target_part.ycp:404
+#: plugins/scale.c:2201
+#, fuzzy
+msgid "Scale windows"
+msgstr "Windows'u &sil"
+
+#: plugins/screenshot.c:385
+msgid "Initiate rectangle screenshot"
+msgstr ""
+
+#: plugins/screenshot.c:398
+#, fuzzy
+msgid "Directory"
+msgstr "Dizin\n"
+
+#: plugins/screenshot.c:399
+#, fuzzy
+msgid "Put screenshot images in this directory"
+msgstr "Dizinin içine girerek devam et"
+
+#: plugins/screenshot.c:407
+msgid "Launch Application"
+msgstr ""
+
+#: plugins/screenshot.c:408
+msgid "Automatically open screenshot in this application"
+msgstr ""
+
+#: plugins/screenshot.c:558
+#, fuzzy
+msgid "Screenshot"
+msgstr "Komut satırı girdisi incelenirken hata oluştu."
+
+#: plugins/screenshot.c:559
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Komut satırı girdisi incelenirken hata oluştu."
+
+#: plugins/switcher.c:345
+msgid "Switcher speed"
+msgstr ""
+
+#: plugins/switcher.c:355
+msgid "Switcher timestep"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/switcher.c:364
+#, fuzzy
+msgid "Switcher windows"
+msgstr "Windows'u &sil"
+
+#: plugins/switcher.c:365
+msgid "Windows that should be shown in switcher"
+msgstr ""
+
+#: plugins/switcher.c:381
+#, fuzzy
+msgid "Saturation"
+msgstr "Süre"
+
+#: plugins/switcher.c:382
+msgid "Amount of saturation in percent"
+msgstr ""
+
+# classnames.ycp:50 classnames.ycp:59
+#: plugins/switcher.c:390
+#, fuzzy
+msgid "Brightness"
+msgstr "Köprü"
+
+#: plugins/switcher.c:391
+msgid "Amount of brightness in percent"
+msgstr ""
+
+#: plugins/switcher.c:408
+msgid "Bring To Front"
+msgstr ""
+
+#: plugins/switcher.c:409
+msgid "Bring selected window to front"
+msgstr ""
+
+#: plugins/switcher.c:415
+msgid "Zoom"
+msgstr ""
+
+#: plugins/switcher.c:416
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+
+#: plugins/switcher.c:426
+#, fuzzy
+msgid "Icon"
+msgstr "İkonlar"
+
+#: plugins/switcher.c:427
+msgid "Show icon next to thumbnail"
+msgstr ""
+
+#: plugins/switcher.c:433
+msgid "Minimized"
+msgstr ""
+
+#: plugins/switcher.c:434
+msgid "Show minimized windows"
+msgstr ""
+
+#: plugins/switcher.c:440
+#, fuzzy
+msgid "Auto Rotate"
+msgstr "Otomatik"
+
+#: plugins/switcher.c:441
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
+#, fuzzy
+msgid "Next window"
+msgstr "Windows'u &sil"
+
+#: plugins/switcher.c:2028
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+
+# clients/inst_resize_ui.ycp:688
+#: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
+#, fuzzy
+msgid "Prev window"
+msgstr "Windows"
+
+#: plugins/switcher.c:2046
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+
+#: plugins/switcher.c:2064
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+
+#: plugins/switcher.c:2083
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/switcher.c:2102
+#, fuzzy
+msgid "Select next window"
+msgstr "Windows'u &sil"
+
+# include/nis_server/io.ycp:465
+#: plugins/switcher.c:2115
+#, fuzzy
+msgid "Select previous window"
+msgstr "Daemon başlatılıyor."
+
+#: plugins/switcher.c:2289 plugins/switcher.c:2290
+#, fuzzy
+msgid "Application Switcher"
+msgstr "Uygulama sırası"
+
+#: plugins/video.c:245
+msgid "YV12 colorspace"
+msgstr ""
+
+#: plugins/video.c:246
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: plugins/video.c:1240
+msgid "Video Playback"
+msgstr ""
+
+#: plugins/video.c:1241
+msgid "Video playback"
+msgstr ""
+
+#: plugins/water.c:1607
+msgid "Enable pointer water effects"
+msgstr ""
+
+#: plugins/water.c:1620
+#, fuzzy
+msgid "Toggle rain"
+msgstr "&Durum aç/kapa"
+
+#: plugins/water.c:1621
+msgid "Toggle rain effect"
+msgstr ""
+
+#: plugins/water.c:1636
+#, fuzzy
+msgid "Toggle wiper"
+msgstr "&Durum aç/kapa"
+
+#: plugins/water.c:1637
+msgid "Toggle wiper effect"
+msgstr ""
+
+#: plugins/water.c:1652
+msgid "Offset Scale"
+msgstr ""
+
+#: plugins/water.c:1653
+msgid "Water offset scale"
+msgstr ""
+
+# clients/hwinfo.ycp:71
+#: plugins/water.c:1662
+#, fuzzy
+msgid "Rain Delay"
+msgstr "Bekleme"
+
+#: plugins/water.c:1663
+msgid "Delay (in ms) between each rain-drop"
+msgstr ""
+
+#: plugins/water.c:1671
+msgid "Title wave"
+msgstr ""
+
+#: plugins/water.c:1672
+msgid "Wave effect from window title"
+msgstr ""
+
+#: plugins/water.c:1683
+msgid "Point"
+msgstr ""
+
+# clients/inst_custom_part.ycp:2928
+#: plugins/water.c:1684
+#, fuzzy
+msgid "Add point"
+msgstr "Geri dönüşüm noktası oluştur"
+
+#: plugins/water.c:1695
+msgid "Line"
+msgstr ""
+
+#: plugins/water.c:1696
+#, fuzzy
+msgid "Add line"
+msgstr "Bağlantı &ekle"
+
+#: plugins/water.c:1859
+msgid "Water Effect"
+msgstr ""
+
+#: plugins/water.c:1860
+msgid "Adds water effects to different desktop actions"
+msgstr ""
+
+# 'driver' as in '(hardware) driver update'
+#: plugins/wobbly.c:132 plugins/wobbly.c:2884
+#, fuzzy
+msgid "Shiver"
+msgstr "Sürücü"
+
+#: plugins/wobbly.c:345
+#, fuzzy
+msgid "Friction"
+msgstr "Hareket"
+
+#: plugins/wobbly.c:346
+#, fuzzy
+msgid "Spring Friction"
+msgstr "Hareket"
+
+# clients/hwinfo.ycp:104
+#: plugins/wobbly.c:355
+#, fuzzy
+msgid "Spring K"
+msgstr "Adımlama"
+
+# clients/hwinfo.ycp:104
+#: plugins/wobbly.c:356
+#, fuzzy
+msgid "Spring Konstant"
+msgstr "Adımlama"
+
+#: plugins/wobbly.c:365
+#, fuzzy
+msgid "Grid Resolution"
+msgstr "Çözünürlük"
+
+#: plugins/wobbly.c:366
+#, fuzzy
+msgid "Vertex Grid Resolution"
+msgstr "Sunucu çözümlemesi"
+
+# clients/ui_widgets.ycp:182 clients/ui_widgets.ycp:210
+#: plugins/wobbly.c:374
+#, fuzzy
+msgid "Minimum Grid Size"
+msgstr "En düşük g&rup belirticisi"
+
+# clients/ui_widgets.ycp:182 clients/ui_widgets.ycp:210
+#: plugins/wobbly.c:375
+#, fuzzy
+msgid "Minimum Vertex Grid Size"
+msgstr "En düşük g&rup belirticisi"
+
+#: plugins/wobbly.c:383
+msgid "Map Effect"
+msgstr ""
+
+# clients/inst_resize_ui.ycp:688
+#: plugins/wobbly.c:384
+#, fuzzy
+msgid "Map Window Effect"
+msgstr "Windows"
+
+#: plugins/wobbly.c:392
+msgid "Focus Effect"
+msgstr ""
+
+#: plugins/wobbly.c:393
+msgid "Focus Window Effect"
+msgstr ""
+
+# clients/inst_resize_ui.ycp:688
+#: plugins/wobbly.c:401
+#, fuzzy
+msgid "Map Windows"
+msgstr "Windows"
+
+#: plugins/wobbly.c:402
+msgid "Windows that should wobble when mapped"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/wobbly.c:410
+#, fuzzy
+msgid "Focus Windows"
+msgstr "Windows'u &sil"
+
+#: plugins/wobbly.c:411
+msgid "Windows that should wobble when focused"
+msgstr ""
+
+#: plugins/wobbly.c:419
+#, fuzzy
+msgid "Move Windows"
+msgstr "&Aşağı"
+
+#: plugins/wobbly.c:420
+msgid "Windows that should wobble when moved"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/wobbly.c:428
+#, fuzzy
+msgid "Grab Windows"
+msgstr "Windows'u &sil"
+
+#: plugins/wobbly.c:429
+msgid "Windows that should wobble when grabbed"
+msgstr ""
+
+#: plugins/wobbly.c:437
+msgid "Maximize Effect"
+msgstr ""
+
+#: plugins/wobbly.c:438
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: plugins/wobbly.c:2863
+#, fuzzy
+msgid "Snap windows"
+msgstr "Windows'u &küçült"
+
+#: plugins/wobbly.c:2864
+msgid "Toggle window snapping"
+msgstr ""
+
+#: plugins/wobbly.c:2877
+msgid "Snap Inverted"
+msgstr ""
+
+#: plugins/wobbly.c:2878
+msgid "Inverted window snapping"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: plugins/wobbly.c:2885
+#, fuzzy
+msgid "Make window shiver"
+msgstr "Windows'u &sil"
+
+# clients/inst_resize_ui.ycp:688
+#: plugins/wobbly.c:3098
+#, fuzzy
+msgid "Wobbly Windows"
+msgstr "Windows"
+
+#: plugins/wobbly.c:3099
+msgid "Use spring model for wobbly window effect"
+msgstr ""
+
+#: plugins/zoom.c:240
+#, fuzzy
+msgid "Zoom Speed"
+msgstr "Seçili"
+
+# classnames.ycp:73
+#: plugins/zoom.c:250
+#, fuzzy
+msgid "Zoom Timestep"
+msgstr "Süre"
+
+#: plugins/zoom.c:259 plugins/zoom.c:260
+#, fuzzy
+msgid "Zoom factor"
+msgstr "Kullanıcı çıkışı yap"
+
+#: plugins/zoom.c:269
+#, fuzzy
+msgid "Filter Linear"
+msgstr "Filtre:"
+
+#: plugins/zoom.c:270
+msgid "USe linear filter when zoomed in"
+msgstr ""
+
+#: plugins/zoom.c:753 plugins/zoom.c:767 plugins/zoom.c:768
+msgid "Zoom In"
+msgstr ""
+
+#: plugins/zoom.c:782 plugins/zoom.c:783
+#, fuzzy
+msgid "Zoom Out"
+msgstr "Kullanıcı çıkışı yap"
+
+# clients/inst_sw_single.ycp:146
+#: plugins/zoom.c:934
+#, fuzzy
+msgid "Zoom Desktop"
+msgstr "Masaüstü:"
+
+#: plugins/zoom.c:935
+msgid "Zoom and pan desktop cube"
+msgstr ""
+
+#: src/display.c:171
+msgid "Fast"
+msgstr ""
+
+#: src/display.c:171
+msgid "Good"
+msgstr ""
+
+#: src/display.c:171
+msgid "Best"
+msgstr ""
+
+#: src/display.c:753
+#, fuzzy
+msgid "Active Plugins"
+msgstr "Aktif profil"
+
+# include/scanner/scanner_functions.ycp:218
+#: src/display.c:754
+#, fuzzy
+msgid "List of currently active plugins"
+msgstr "Sadece algılanan yazıcıları listele"
+
+# include/tv/ui.ycp:493
+#: src/display.c:768
+#, fuzzy
+msgid "Texture Filter"
+msgstr "&Filtre koy"
+
+# include/tv/ui.ycp:493
+#: src/display.c:769
+#, fuzzy
+msgid "Texture filtering"
+msgstr "&Filtre koy"
+
+#: src/display.c:777
+msgid "Click To Focus"
+msgstr ""
+
+#: src/display.c:778
+msgid "Click on window moves input focus to it"
+msgstr ""
+
+#: src/display.c:784
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "Otomatik"
+
+#: src/display.c:785
+msgid "Raise selected windows after interval"
+msgstr ""
+
+#: src/display.c:791
+msgid "Auto-Raise Delay"
+msgstr ""
+
+#: src/display.c:792
+msgid "Interval before raising selected windows"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#: src/display.c:800
+#, fuzzy
+msgid "Close Window"
+msgstr "Windows'u &sil"
+
+#: src/display.c:801
+msgid "Close active window"
+msgstr ""
+
+#: src/display.c:817
+msgid "Show Main Menu"
+msgstr ""
+
+#: src/display.c:818
+msgid "Show the main menu"
+msgstr ""
+
+#: src/display.c:834
+msgid "Run Dialog"
+msgstr ""
+
+#: src/display.c:835
+msgid "Show Run Application dialog"
+msgstr ""
+
+#: src/display.c:851
+msgid "Unmaximize Window"
+msgstr ""
+
+#: src/display.c:852
+msgid "Unmaximize active window"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: src/display.c:868
+#, fuzzy
+msgid "Minimize Window"
+msgstr "Windows'u &küçült"
+
+#: src/display.c:869
+msgid "Minimize active window"
+msgstr ""
+
+#: src/display.c:885
+msgid "Maximize Window"
+msgstr ""
+
+#: src/display.c:886
+msgid "Maximize active window"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: src/display.c:902
+#, fuzzy
+msgid "Maximize Window Horizontally"
+msgstr "Windows'u &küçült"
+
+#: src/display.c:903
+msgid "Maximize active window horizontally"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#: src/display.c:915
+#, fuzzy
+msgid "Maximize Window Vertically"
+msgstr "Windows'u &küçült"
+
+#: src/display.c:916
+msgid "Maximize active window vertically"
+msgstr ""
+
+#: src/display.c:928 src/display.c:929
+msgid "Hide all windows and focus desktop"
+msgstr ""
+
+# clients/support_registration.ycp:66
+#: src/display.c:943
+#, fuzzy, c-format
+msgid "Command line %d"
+msgstr "Komut: "
+
+#: src/display.c:944
+#, c-format
+msgid "Command line to be executed in shell when run_command%d is invoked"
+msgstr ""
+
+# clients/support_registration.ycp:66
+#: src/display.c:946
+#, fuzzy, c-format
+msgid "Run command %d"
+msgstr "Komut: "
+
+#: src/display.c:947
+#, c-format
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command%d"
+msgstr ""
+
+#: src/display.c:991
+#, fuzzy
+msgid "Slow Animations"
+msgstr "Tüm bölümleri göster"
+
+#: src/display.c:992
+msgid "Toggle use of slow animations"
+msgstr ""
+
+#: src/display.c:1008
+#, fuzzy
+msgid "Raise Window"
+msgstr "Boyut değiştirme işlemi başarısız oldu"
+
+#: src/display.c:1009
+msgid "Raise window above other windows"
+msgstr ""
+
+# clients/inst_resize_ui.ycp:688
+#: src/display.c:1023
+#, fuzzy
+msgid "Lower Window"
+msgstr "Windows"
+
+#: src/display.c:1024
+msgid "Lower window beneath other windows"
+msgstr ""
+
+#: src/display.c:1038
+msgid "Increase Opacity"
+msgstr ""
+
+#: src/display.c:1039
+msgid "Increase window opacity"
+msgstr ""
+
+#: src/display.c:1053
+msgid "Decrease Opacity"
+msgstr ""
+
+# include/partitioning/auto_part_ui.ycp:147
+#: src/display.c:1054
+#, fuzzy
+msgid "Decrease window opacity"
+msgstr "Windows'u &tamamen sil"
+
+#: src/display.c:1068 src/display.c:1069
+msgid "Take a screenshot"
+msgstr ""
+
+#: src/display.c:1085 src/display.c:1086
+#, fuzzy
+msgid "Screenshot command line"
+msgstr "Komut satırı girdisi incelenirken hata oluştu."
+
+#: src/display.c:1094 src/display.c:1095
+msgid "Take a screenshot of a window"
+msgstr ""
+
+#: src/display.c:1112 src/display.c:1113
+msgid "Window screenshot command line"
+msgstr ""
+
+# clients/inst_sw_single.ycp:188
+#: src/display.c:1121
+#, fuzzy
+msgid "Window Menu"
+msgstr "Pencere yöneticisi"
+
+#: src/display.c:1122
+msgid "Open window menu"
+msgstr ""
+
+#: src/display.c:1141
+msgid "Raise On Click"
+msgstr ""
+
+#: src/display.c:1142
+msgid "Raise windows when clicked"
+msgstr ""
+
+#: src/display.c:1148
+msgid "Audible Bell"
+msgstr ""
+
+# include/partitioning/custom_part_dialogs.ycp:288
+#: src/display.c:1149
+#, fuzzy
+msgid "Audible system beep"
+msgstr "Dosya &sistemi"
+
+#: src/display.c:1155
+msgid "Toggle Window Maximized"
+msgstr ""
+
+#: src/display.c:1156
+msgid "Toggle active window maximized"
+msgstr ""
+
+#: src/display.c:1168
+msgid "Toggle Window Maximized Horizontally"
+msgstr ""
+
+#: src/display.c:1170
+msgid "Toggle active window maximized horizontally"
+msgstr ""
+
+#: src/display.c:1182
+msgid "Toggle Window Maximized Vertically"
+msgstr ""
+
+#: src/display.c:1184
+msgid "Toggle active window maximized vertically"
+msgstr ""
+
+#: src/display.c:1196
+msgid "Hide Skip Taskbar Windows"
+msgstr ""
+
+#: src/display.c:1197
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+
+#: src/display.c:1204
+msgid "Toggle Window Shaded"
+msgstr ""
+
+#: src/display.c:1205
+msgid "Toggle active window shaded"
+msgstr ""
+
+#: src/display.c:1221
+msgid "Ignore Hints When Maximized"
+msgstr ""
+
+#: src/display.c:1222
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+
+#: src/display.c:1229 src/display.c:1230
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Komut satırı girdisi incelenirken hata oluştu."
+
+#: src/display.c:1238 src/display.c:1239
+msgid "Open a terminal"
+msgstr ""
+
+# clients/hwinfo.ycp:71
+#: src/display.c:1251
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Bekleme"
+
+#: src/display.c:1252
+msgid "Interval between ping messages"
+msgstr ""
+
+# clients/inst_sw_single.ycp:146
+#: src/main.c:54
+#, fuzzy
+msgid "Desktop"
+msgstr "Masaüstü:"
+
+#: src/main.c:55
+msgid "Dock"
+msgstr ""
+
+#: src/main.c:56
+msgid "Toolbar"
+msgstr ""
+
+#: src/main.c:57
+msgid "Menu"
+msgstr "Menü"
+
+#: src/main.c:58
+msgid "Utility"
+msgstr ""
+
+#: src/main.c:59
+msgid "Splash"
+msgstr ""
+
+# /usr/lib/YaST2/keyboard_raw.ycp:230
+#: src/main.c:60
+#, fuzzy
+msgid "Dialog"
+msgstr "Katalog"
+
+#: src/main.c:61
+msgid "Normal"
+msgstr ""
+
+# clients/inst_sw_single.ycp:188
+#: src/main.c:62
+#, fuzzy
+msgid "DropdownMenu"
+msgstr "Pencere yöneticisi"
+
+#: src/main.c:63
+#, fuzzy
+msgid "PopupMenu"
+msgstr "Menü"
+
+#: src/main.c:64
+msgid "Tooltip"
+msgstr ""
+
+#: src/main.c:65
+#, fuzzy
+msgid "Notification"
+msgstr "Hareket"
+
+#: src/main.c:66
+msgid "Combo"
+msgstr ""
+
+#: src/main.c:67
+msgid "Dnd"
+msgstr ""
+
+#: src/main.c:68
+msgid "ModalDialog"
+msgstr ""
+
+#: src/main.c:69
+msgid "Fullscreen"
+msgstr ""
+
+#: src/main.c:70
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+# clients/inst_sw_single.ycp:1620
+#: src/screen.c:614
+#, fuzzy
+msgid "Detect Refresh Rate"
+msgstr "Güncelleme için seçin"
+
+#: src/screen.c:615
+msgid "Automatic detection of refresh rate"
+msgstr ""
+
+#: src/screen.c:621
+#, fuzzy
+msgid "Lighting"
+msgstr "Kayıt tutma"
+
+#: src/screen.c:622
+msgid "Use diffuse light when screen is transformed"
+msgstr ""
+
+#: src/screen.c:628
+#, fuzzy
+msgid "Refresh Rate"
+msgstr "&Listeyi tazele"
+
+#: src/screen.c:629
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr ""
+
+#: src/screen.c:638
+#, fuzzy
+msgid "Horizontal Virtual Size"
+msgstr "Sanal diskler"
+
+#: src/screen.c:639
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr ""
+
+#: src/screen.c:647
+#, fuzzy
+msgid "Vertical Virtual Size"
+msgstr "Sanal diskler"
+
+#: src/screen.c:648
+msgid "Screen size multiplier for vertical virtual size"
+msgstr ""
+
+#: src/screen.c:656
+msgid "Opacity Step"
+msgstr ""
+
+#: src/screen.c:657
+msgid "Opacity change step"
+msgstr ""
+
+#: src/screen.c:665
+msgid "Unredirect Fullscreen Windows"
+msgstr ""
+
+#: src/screen.c:666
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+
+# include/tv/ui.ycp:398
+#: src/screen.c:673
+#, fuzzy
+msgid "Default Icon"
+msgstr "Geçerli bölüm"
+
+#: src/screen.c:674
+#, fuzzy
+msgid "Default window icon image"
+msgstr "Öntanımlı es&kime tarihi"
+
+#: src/screen.c:682
+msgid "Sync To VBlank"
+msgstr ""
+
+#: src/screen.c:683
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+
+# clients/inst_sw_single.ycp:146
+#: src/screen.c:690
+#, fuzzy
+msgid "Number of Desktops"
+msgstr "Masaüstü:"
+
+#: src/screen.c:691
+msgid "Number of virtual desktops"
+msgstr ""
+
+#: src/screen.c:699
+#, fuzzy
+msgid "Detect Outputs"
+msgstr "Kısa çıktı"
+
+#: src/screen.c:700
+msgid "Automatic detection of output devices"
+msgstr ""
+
+#: src/screen.c:706
+msgid "Outputs"
+msgstr ""
+
+#: src/screen.c:707
+msgid "List of strings describing output devices"
+msgstr ""
+
+#: src/screen.c:718
+msgid "Focus Prevention Windows"
+msgstr ""
+
+# include/nis_server/io.ycp:465
+#: src/screen.c:719
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Daemon başlatılıyor."
+
+# clients/inst_target_part.ycp:404
+#: src/screen.c:727
+#, fuzzy
+msgid "Opacity windows"
+msgstr "Windows'u &sil"
+
+#: src/screen.c:728
+msgid "Windows that should be translucent by default"
+msgstr ""
+
+#: src/screen.c:739
+msgid "Opacity window values"
+msgstr ""
+
+#: src/screen.c:740
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+
+# clients/inst_resize_ui.ycp:688
+#, fuzzy
+#~ msgid "Window Types"
+#~ msgstr "Windows"
+
+#, fuzzy
+#~ msgid "Move Window Types"
+#~ msgstr "Servis sağlayıcı türü"
+
+#, fuzzy
+#~ msgid "Enable focus prevention"
+#~ msgstr "ZEN bölümünü etkinleştir"
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 1"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 10"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 11"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 2"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 3"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 4"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 5"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 6"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 7"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 8"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Command line 9"
+#~ msgstr "Komut: "
+
+#, fuzzy
+#~ msgid "Corners"
+#~ msgstr "Dönüştürücüler"
+
+#, fuzzy
+#~ msgid "Run command 1"
+#~ msgstr "Komut '%1'"
+
+#, fuzzy
+#~ msgid "Run command 10"
+#~ msgstr "Komut '%1'"
+
+#, fuzzy
+#~ msgid "Run command 11"
+#~ msgstr "Komut '%1'"
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 2"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 3"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 4"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 5"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 6"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 7"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 8"
+#~ msgstr "Komut: "
+
+# clients/support_registration.ycp:66
+#, fuzzy
+#~ msgid "Run command 9"
+#~ msgstr "Komut: "
+
+#, fuzzy
+#~ msgid "Show switcher"
+#~ msgstr "&Değişiklikleri göster"
+
+# clients/hwinfo.ycp:72
+#, fuzzy
+#~ msgid "Sloppy Focus"
+#~ msgstr "Disket sürücü"
+
+# include/nis_server/io.ycp:465
+#, fuzzy
+#~ msgid "Start moving window using keyboard"
+#~ msgstr "Daemon başlatılıyor."
+
+#, fuzzy
+#~ msgid "Terminate"
+#~ msgstr "Terminaller"

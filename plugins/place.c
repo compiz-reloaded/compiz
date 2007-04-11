@@ -174,7 +174,8 @@ placeUpdateMode (CompScreen *screen)
 }
 
 static CompOption *
-placeGetScreenOptions (CompScreen *screen,
+placeGetScreenOptions (CompPlugin *plugin,
+		       CompScreen *screen,
 		       int	  *count)
 {
     PLACE_SCREEN (screen);
@@ -184,7 +185,8 @@ placeGetScreenOptions (CompScreen *screen,
 }
 
 static Bool
-placeSetScreenOption (CompScreen      *screen,
+placeSetScreenOption (CompPlugin      *plugin,
+		      CompScreen      *screen,
 		      char	      *name,
 		      CompOptionValue *value)
 {
@@ -198,10 +200,6 @@ placeSetScreenOption (CompScreen      *screen,
 	return FALSE;
 
     switch (index) {
-    case PLACE_SCREEN_OPTION_WORKAROUND:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case PLACE_SCREEN_OPTION_MODE:
 	if (compSetStringOption (o, value))
 	{
@@ -221,13 +219,9 @@ placeSetScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case PLACE_SCREEN_OPTION_POSITION_X_VALUES:
-    case PLACE_SCREEN_OPTION_POSITION_Y_VALUES:
-    case PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES:
-    case PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES:
-	if (compSetOptionList (o, value))
-	    return TRUE;
     default:
+	if (compSetOption (o, value))
+	    return TRUE;
 	break;
     }
 

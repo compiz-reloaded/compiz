@@ -267,7 +267,7 @@ fuseGetDisplayOptionsFromInode (CompDisplay *d,
 
 	p = findActivePlugin (inode->name);
 	if (p && p->vTable->getDisplayOptions)
-	    option = (*p->vTable->getDisplayOptions) (d, nOption);
+	    option = (*p->vTable->getDisplayOptions) (p, d, nOption);
     }
 
     return option;
@@ -290,7 +290,7 @@ fuseGetScreenOptionsFromInode (CompScreen *s,
 
 	p = findActivePlugin (inode->name);
 	if (p && p->vTable->getScreenOptions)
-	    option = (*p->vTable->getScreenOptions) (s, nOption);
+	    option = (*p->vTable->getScreenOptions) (p, s, nOption);
     }
 
     return option;
@@ -1438,7 +1438,8 @@ fuseMount (CompDisplay *d)
 }
 
 static CompOption *
-fuseGetDisplayOptions (CompDisplay *display,
+fuseGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
 		       int	   *count)
 {
     FUSE_DISPLAY (display);
@@ -1448,7 +1449,8 @@ fuseGetDisplayOptions (CompDisplay *display,
 }
 
 static Bool
-fuseSetDisplayOption (CompDisplay     *display,
+fuseSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
 {

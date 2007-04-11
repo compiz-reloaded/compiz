@@ -31,12 +31,15 @@
 #include <X11/extensions/Xrender.h>
 #include <X11/Xregion.h>
 
+#ifndef GDK_DISABLE_DEPRECATED
+#define GDK_DISABLE_DEPRECATED
+#endif
+
 #ifndef GTK_DISABLE_DEPRECATED
 #define GTK_DISABLE_DEPRECATED
 #endif
 
 #include <gtk/gtk.h>
-#include <gtk/gtkwindow.h>
 #include <gdk/gdkx.h>
 
 #ifdef USE_GCONF
@@ -114,6 +117,9 @@
 
 #define META_THEME_KEY		\
     METACITY_GCONF_DIR "/theme"
+
+#define META_BUTTON_LAYOUT_KEY		\
+    METACITY_GCONF_DIR "/button_layout"
 
 #define COMPIZ_GCONF_DIR2 "/apps/compiz/general/allscreens/options"
 
@@ -263,6 +269,9 @@ static double   meta_opacity              = META_OPACITY;
 static gboolean meta_shade_opacity        = META_SHADE_OPACITY;
 static double   meta_active_opacity       = META_ACTIVE_OPACITY;
 static gboolean meta_active_shade_opacity = META_ACTIVE_SHADE_OPACITY;
+
+static gboolean         meta_button_layout_set = FALSE;
+static MetaButtonLayout meta_button_layout;
 #endif
 
 static decor_shadow_t *no_border_shadow = NULL;
@@ -304,11 +313,17 @@ static struct _cursor {
     { C (bottom_left_corner), C (bottom_side), C (bottom_right_corner) }
 };
 
-#define BUTTON_CLOSE 0
-#define BUTTON_MAX   1
-#define BUTTON_MIN   2
-#define BUTTON_MENU  3
-#define BUTTON_NUM   4
+#define BUTTON_CLOSE   0
+#define BUTTON_MAX     1
+#define BUTTON_MIN     2
+#define BUTTON_MENU    3
+#define BUTTON_SHADE   4
+#define BUTTON_ABOVE   5
+#define BUTTON_STICK   6
+#define BUTTON_UNSHADE 7
+#define BUTTON_UNABOVE 8
+#define BUTTON_UNSTICK 9
+#define BUTTON_NUM     10
 
 static struct _pos {
     int x, y, w, h;
@@ -327,7 +342,7 @@ static struct _pos {
 	{ 10, 21, -8,  6,   0, 1, 1, 0, 1, 0 },
 	{  2, 17, 10, 10,   1, 1, 0, 0, 1, 0 }
     }
-}, bpos[BUTTON_NUM] = {
+}, bpos[] = {
     { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
     { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
     { 0, 6, 16, 16,   1, 0, 0, 0, 0, 0 },
@@ -357,6 +372,8 @@ typedef struct _decor {
     gint	      button_width;
     gint	      width;
     gint	      height;
+    gint	      client_width;
+    gint	      client_height;
     gboolean	      decorated;
     gboolean	      active;
     PangoLayout	      *layout;
@@ -388,7 +405,7 @@ void     (*theme_get_event_window_position) (decor_t *d,
 					     gint    *y,
 					     gint    *w,
 					     gint    *h);
-void     (*theme_get_button_position)       (decor_t *d,
+gboolean (*theme_get_button_position)       (decor_t *d,
 					     gint    i,
 					     gint    width,
 					     gint    height,
@@ -650,12 +667,12 @@ create_pixmap (int w,
     colormap = gdk_colormap_new (visual, FALSE);
     if (!colormap)
     {
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 	return NULL;
     }
 
     gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), colormap);
-    gdk_colormap_unref (colormap);
+    g_object_unref (G_OBJECT (colormap));
 
     return pixmap;
 }
@@ -1627,25 +1644,93 @@ meta_button_state (int state)
 
     return META_BUTTON_STATE_NORMAL;
 }
+
+static MetaButtonType
+meta_function_to_type (MetaButtonFunction function)
+{
+    switch (function) {
+    case META_BUTTON_FUNCTION_MENU:
+	return META_BUTTON_TYPE_MENU;
+    case META_BUTTON_FUNCTION_MINIMIZE:
+	return META_BUTTON_TYPE_MINIMIZE;
+    case META_BUTTON_FUNCTION_MAXIMIZE:
+	return META_BUTTON_TYPE_MAXIMIZE;
+    case META_BUTTON_FUNCTION_CLOSE:
+	return META_BUTTON_TYPE_CLOSE;
+
+#ifdef HAVE_METACITY_2_17_0
+    case META_BUTTON_FUNCTION_SHADE:
+	return META_BUTTON_TYPE_SHADE;
+    case META_BUTTON_FUNCTION_ABOVE:
+	return META_BUTTON_TYPE_ABOVE;
+    case META_BUTTON_FUNCTION_STICK:
+	return META_BUTTON_TYPE_STICK;
+    case META_BUTTON_FUNCTION_UNSHADE:
+	return META_BUTTON_TYPE_UNSHADE;
+    case META_BUTTON_FUNCTION_UNABOVE:
+	return META_BUTTON_TYPE_UNABOVE;
+    case META_BUTTON_FUNCTION_UNSTICK:
+	return META_BUTTON_TYPE_UNSTICK;
+#endif
+
+    default:
+	break;
+    }
+
+    return META_BUTTON_TYPE_LAST;
+}
+
 static MetaButtonState
 meta_button_state_for_button_type (decor_t	  *d,
 				   MetaButtonType type)
 {
     switch (type) {
+    case META_BUTTON_TYPE_LEFT_LEFT_BACKGROUND:
+	type = meta_function_to_type (meta_button_layout.left_buttons[0]);
+	break;
+    case META_BUTTON_TYPE_LEFT_MIDDLE_BACKGROUND:
+	type = meta_function_to_type (meta_button_layout.left_buttons[1]);
+	break;
+    case META_BUTTON_TYPE_LEFT_RIGHT_BACKGROUND:
+	type = meta_function_to_type (meta_button_layout.left_buttons[2]);
+	break;
     case META_BUTTON_TYPE_RIGHT_LEFT_BACKGROUND:
-    case META_BUTTON_TYPE_MINIMIZE:
-	return meta_button_state (d->button_states[BUTTON_MIN]);
+	type = meta_function_to_type (meta_button_layout.right_buttons[0]);
+	break;
     case META_BUTTON_TYPE_RIGHT_MIDDLE_BACKGROUND:
-    case META_BUTTON_TYPE_MAXIMIZE:
-	return meta_button_state (d->button_states[BUTTON_MAX]);
+	type = meta_function_to_type (meta_button_layout.right_buttons[1]);
+	break;
     case META_BUTTON_TYPE_RIGHT_RIGHT_BACKGROUND:
+	type = meta_function_to_type (meta_button_layout.right_buttons[2]);
+    default:
+	break;
+    }
+
+    switch (type) {
     case META_BUTTON_TYPE_CLOSE:
 	return meta_button_state (d->button_states[BUTTON_CLOSE]);
-    case META_BUTTON_TYPE_LEFT_LEFT_BACKGROUND:
+    case META_BUTTON_TYPE_MAXIMIZE:
+	return meta_button_state (d->button_states[BUTTON_MAX]);
+    case META_BUTTON_TYPE_MINIMIZE:
+	return meta_button_state (d->button_states[BUTTON_MIN]);
     case META_BUTTON_TYPE_MENU:
 	return meta_button_state (d->button_states[BUTTON_MENU]);
-    case META_BUTTON_TYPE_LEFT_MIDDLE_BACKGROUND:
-    case META_BUTTON_TYPE_LEFT_RIGHT_BACKGROUND:
+
+#ifdef HAVE_METACITY_2_17_0
+    case META_BUTTON_TYPE_SHADE:
+	return meta_button_state (d->button_states[BUTTON_SHADE]);
+    case META_BUTTON_TYPE_ABOVE:
+	return meta_button_state (d->button_states[BUTTON_ABOVE]);
+    case META_BUTTON_TYPE_STICK:
+	return meta_button_state (d->button_states[BUTTON_STICK]);
+    case META_BUTTON_TYPE_UNSHADE:
+	return meta_button_state (d->button_states[BUTTON_UNSHADE]);
+    case META_BUTTON_TYPE_UNABOVE:
+	return meta_button_state (d->button_states[BUTTON_UNABOVE]);
+    case META_BUTTON_TYPE_UNSTICK:
+	return meta_button_state (d->button_states[BUTTON_UNSTICK]);
+#endif
+
     default:
 	break;
     }
@@ -1662,19 +1747,27 @@ meta_get_decoration_geometry (decor_t		*d,
 			      GdkRectangle      *clip)
 {
     gint left_width, right_width, top_height, bottom_height;
-    gint i;
 
-    button_layout->left_buttons[0] = META_BUTTON_FUNCTION_MENU;
+    if (meta_button_layout_set)
+    {
+	*button_layout = meta_button_layout;
+    }
+    else
+    {
+	gint i;
 
-    for (i = 1; i < MAX_BUTTONS_PER_CORNER; i++)
-	button_layout->left_buttons[i] = META_BUTTON_FUNCTION_LAST;
+	button_layout->left_buttons[0] = META_BUTTON_FUNCTION_MENU;
 
-    button_layout->right_buttons[0] = META_BUTTON_FUNCTION_MINIMIZE;
-    button_layout->right_buttons[1] = META_BUTTON_FUNCTION_MAXIMIZE;
-    button_layout->right_buttons[2] = META_BUTTON_FUNCTION_CLOSE;
+	for (i = 1; i < MAX_BUTTONS_PER_CORNER; i++)
+	    button_layout->left_buttons[i] = META_BUTTON_FUNCTION_LAST;
 
-    for (i = 3; i < MAX_BUTTONS_PER_CORNER; i++)
-	button_layout->right_buttons[i] = META_BUTTON_FUNCTION_LAST;
+	button_layout->right_buttons[0] = META_BUTTON_FUNCTION_MINIMIZE;
+	button_layout->right_buttons[1] = META_BUTTON_FUNCTION_MAXIMIZE;
+	button_layout->right_buttons[2] = META_BUTTON_FUNCTION_CLOSE;
+
+	for (i = 3; i < MAX_BUTTONS_PER_CORNER; i++)
+	    button_layout->right_buttons[i] = META_BUTTON_FUNCTION_LAST;
+    }
 
     *flags = 0;
 
@@ -1688,12 +1781,21 @@ meta_get_decoration_geometry (decor_t		*d,
 	*flags |= META_FRAME_ALLOWS_MAXIMIZE;
 
     *flags |= META_FRAME_ALLOWS_MENU;
-    *flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
-    *flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
-    *flags |= META_FRAME_ALLOWS_MOVE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_RESIZE)
+    {
+	*flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
+	*flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
+    }
+
+    if (d->actions & WNCK_WINDOW_ACTION_MOVE)
+	*flags |= META_FRAME_ALLOWS_MOVE;
 
     if (d->actions & WNCK_WINDOW_ACTION_MAXIMIZE)
 	*flags |= META_FRAME_ALLOWS_MAXIMIZE;
+
+    if (d->actions & WNCK_WINDOW_ACTION_SHADE)
+	*flags |= META_FRAME_ALLOWS_SHADE;
 
     if (d->active)
 	*flags |= META_FRAME_HAS_FOCUS;
@@ -1703,6 +1805,17 @@ meta_get_decoration_geometry (decor_t		*d,
 
     if ((d->state & META_MAXIMIZED) == META_MAXIMIZED)
 	*flags |= META_FRAME_MAXIMIZED;
+
+    if (d->state & WNCK_WINDOW_STATE_STICKY)
+	*flags |= META_FRAME_STUCK;
+
+    if (d->state & WNCK_WINDOW_STATE_FULLSCREEN)
+	*flags |= META_FRAME_FULLSCREEN;
+
+#ifdef HAVE_METACITY_2_17_0
+    if (d->state & WNCK_WINDOW_STATE_ABOVE)
+	*flags |= META_FRAME_ABOVE;
+#endif
 
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
@@ -1907,7 +2020,7 @@ meta_draw_window_decoration (decor_t *d)
 
 	cairo_destroy (cr);
 
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 
 	XRenderFreePicture (xdisplay, src);
     }
@@ -2006,7 +2119,7 @@ meta_draw_window_decoration (decor_t *d)
 
 	cairo_destroy (cr);
 
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 
 	XRenderFreePicture (xdisplay, src);
     }
@@ -2467,7 +2580,7 @@ update_default_decorations (GdkScreen *screen)
     d.draw = theme_draw_window_decoration;
 
     if (decor_normal_pixmap)
-	gdk_pixmap_unref (decor_normal_pixmap);
+	g_object_unref (G_OBJECT (decor_normal_pixmap));
 
     nQuad = decor_set_lSrStSbS_window_quads (quads, d.context,
 					     &d.border_layout);
@@ -2496,7 +2609,7 @@ update_default_decorations (GdkScreen *screen)
     }
 
     if (decor_active_pixmap)
-	gdk_pixmap_unref (decor_active_pixmap);
+	g_object_unref (G_OBJECT (decor_active_pixmap));
 
     decor_active_pixmap = create_pixmap (d.width, d.height);
     if (decor_active_pixmap)
@@ -2571,7 +2684,7 @@ get_mwm_prop (Window xwindow)
     Atom	  actual;
     int		  err, result, format;
     unsigned long n, left;
-    MwmHints	  *mwm_hints;
+    unsigned char *data;
     unsigned int  decor = MWM_DECOR_ALL;
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
@@ -2580,22 +2693,23 @@ get_mwm_prop (Window xwindow)
 
     result = XGetWindowProperty (xdisplay, xwindow, mwm_hints_atom,
 				 0L, 20L, FALSE, mwm_hints_atom,
-				 &actual, &format, &n, &left,
-				 (unsigned char **) &mwm_hints);
+				 &actual, &format, &n, &left, &data);
 
     err = gdk_error_trap_pop ();
     if (err != Success || result != Success)
 	return decor;
 
-    if (n && mwm_hints)
+    if (n && data)
     {
+	MwmHints *mwm_hints = (MwmHints *) data;
+
 	if (n >= PROP_MOTIF_WM_HINT_ELEMENTS)
 	{
 	    if (mwm_hints->flags & MWM_HINTS_DECORATIONS)
 		decor = mwm_hints->decorations;
 	}
 
-	XFree (mwm_hints);
+	XFree (data);
     }
 
     return decor;
@@ -2620,7 +2734,7 @@ get_event_window_position (decor_t *d,
 	(titlebar_height - 17);
 }
 
-static void
+static gboolean
 get_button_position (decor_t *d,
 		     gint    i,
 		     gint    width,
@@ -2630,6 +2744,9 @@ get_button_position (decor_t *d,
 		     gint    *w,
 		     gint    *h)
 {
+    if (i > BUTTON_MENU)
+	return FALSE;
+
     *x = bpos[i].x + bpos[i].xw * width;
     *y = bpos[i].y + bpos[i].yh * height + bpos[i].yth *
 	(titlebar_height - 17);
@@ -2640,6 +2757,8 @@ get_button_position (decor_t *d,
     /* hack to position multiple buttons on the right */
     if (i != BUTTON_MENU)
 	*x -= 10 + 16 * i;
+
+    return TRUE;
 }
 
 #ifdef USE_METACITY
@@ -2743,7 +2862,24 @@ meta_get_event_window_position (decor_t *d,
     }
 }
 
-static void
+static gboolean
+meta_button_present (MetaButtonLayout   *button_layout,
+		     MetaButtonFunction function)
+{
+    int i;
+		     
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+	if (button_layout->left_buttons[i] == function)
+	    return TRUE;
+
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+	if (button_layout->right_buttons[i] == function)
+	    return TRUE;
+
+    return FALSE;
+}
+
+static gboolean
 meta_get_button_position (decor_t *d,
 			  gint    i,
 			  gint	  width,
@@ -2772,18 +2908,73 @@ meta_get_button_position (decor_t *d,
 
     switch (i) {
     case BUTTON_MENU:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_MENU))
+	    return FALSE;
+
 	space = &fgeom.menu_rect;
 	break;
     case BUTTON_MIN:
+	if (!meta_button_present (&button_layout,
+				  META_BUTTON_FUNCTION_MINIMIZE))
+	    return FALSE;
+
 	space = &fgeom.min_rect;
 	break;
     case BUTTON_MAX:
+	if (!meta_button_present (&button_layout,
+				  META_BUTTON_FUNCTION_MAXIMIZE))
+	    return FALSE;
+
 	space = &fgeom.max_rect;
 	break;
     case BUTTON_CLOSE:
-    default:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_CLOSE))
+	    return FALSE;
+
 	space = &fgeom.close_rect;
 	break;
+
+#ifdef HAVE_METACITY_2_17_0
+    case BUTTON_SHADE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_SHADE))
+	    return FALSE;
+
+	space = &fgeom.shade_rect;
+	break;
+    case BUTTON_ABOVE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_ABOVE))
+	    return FALSE;
+
+	space = &fgeom.above_rect;
+	break;
+    case BUTTON_STICK:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_STICK))
+	    return FALSE;
+
+	space = &fgeom.stick_rect;
+	break;
+    case BUTTON_UNSHADE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNSHADE))
+	    return FALSE;
+
+	space = &fgeom.unshade_rect;
+	break;
+    case BUTTON_UNABOVE:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNABOVE))
+	    return FALSE;
+
+	space = &fgeom.unabove_rect;
+	break;
+    case BUTTON_UNSTICK:
+	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_UNSTICK))
+	    return FALSE;
+
+	space = &fgeom.unstick_rect;
+	break;
+#endif
+
+    default:
+	return FALSE;
     }
 
 #ifdef HAVE_METACITY_2_15_21
@@ -2798,6 +2989,7 @@ meta_get_button_position (decor_t *d,
     *h = space->height;
 #endif
 
+    return TRUE;
 }
 
 #endif
@@ -2874,18 +3066,30 @@ update_event_windows (WnckWindow *win)
 	    WNCK_WINDOW_ACTION_CLOSE,
 	    WNCK_WINDOW_ACTION_MAXIMIZE,
 	    WNCK_WINDOW_ACTION_MINIMIZE,
-	    0
+	    0,
+	    WNCK_WINDOW_ACTION_SHADE,
+	    WNCK_WINDOW_ACTION_ABOVE,
+	    WNCK_WINDOW_ACTION_STICK,
+	    WNCK_WINDOW_ACTION_UNSHADE,
+	    WNCK_WINDOW_ACTION_ABOVE,
+	    WNCK_WINDOW_ACTION_UNSTICK
 	};
 
-	if (!button_actions[i] || (actions & button_actions[i]))
+	if (button_actions[i] && !(actions & button_actions[i]))
 	{
-	    (*theme_get_button_position) (d, i, width, height, &x, &y, &w, &h);
+	    XUnmapWindow (xdisplay, d->button_windows[i]);
+	    continue;
+	}
 
+	if ((*theme_get_button_position) (d, i, width, height, &x, &y, &w, &h))
+	{
 	    XMapWindow (xdisplay, d->button_windows[i]);
 	    XMoveResizeWindow (xdisplay, d->button_windows[i], x, y, w, h);
 	}
 	else
+	{
 	    XUnmapWindow (xdisplay, d->button_windows[i]);
+	}
     }
 
     gdk_display_sync (gdk_display_get_default ());
@@ -3004,19 +3208,19 @@ update_window_decoration_icon (WnckWindow *win)
 
     if (d->icon_pixmap)
     {
-	gdk_pixmap_unref (d->icon_pixmap);
+	g_object_unref (G_OBJECT (d->icon_pixmap));
 	d->icon_pixmap = NULL;
     }
 
     if (d->icon_pixbuf)
-	gdk_pixbuf_unref (d->icon_pixbuf);
+	g_object_unref (G_OBJECT (d->icon_pixbuf));
 
     d->icon_pixbuf = wnck_window_get_mini_icon (win);
     if (d->icon_pixbuf)
     {
 	cairo_t	*cr;
 
-	gdk_pixbuf_ref (d->icon_pixbuf);
+	g_object_ref (G_OBJECT (d->icon_pixbuf));
 
 	d->icon_pixmap = pixmap_new_from_pixbuf (d->icon_pixbuf);
 	cr = gdk_cairo_create (GDK_DRAWABLE (d->icon_pixmap));
@@ -3125,18 +3329,19 @@ meta_calc_button_size (decor_t *d)
 
 	if (d->actions & button_actions[i])
 	{
-	    meta_get_button_position (d,
-				      i,
-				      width,
-				      256,
-				      &x, &y, &w, &h);
-
-	    if (x < min_x)
-		min_x = x;
+	    if (meta_get_button_position (d,
+					  i,
+					  width,
+					  256,
+					  &x, &y, &w, &h))
+	    {
+		if (x > width / 2 && x < min_x)
+		    min_x = x;
+	    }
 	}
     }
 
-    d->button_width = width - min_x;
+    d->button_width = width - min_x + 6;
 }
 
 static gboolean
@@ -3213,7 +3418,7 @@ update_window_decoration_size (WnckWindow *win)
     buffer_pixmap = create_pixmap (width, height);
     if (!buffer_pixmap)
     {
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 	return FALSE;
     }
 
@@ -3221,13 +3426,13 @@ update_window_decoration_size (WnckWindow *win)
 				    xformat, 0, NULL);
 
     if (d->pixmap)
-	gdk_pixmap_unref (d->pixmap);
+	g_object_unref (G_OBJECT (d->pixmap));
 
     if (d->buffer_pixmap)
-	gdk_pixmap_unref (d->buffer_pixmap);
+	g_object_unref (G_OBJECT (d->buffer_pixmap));
 
     if (d->gc)
-	gdk_gc_unref (d->gc);
+	g_object_unref (G_OBJECT (d->gc));
 
     if (d->picture)
 	XRenderFreePicture (xdisplay, d->picture);
@@ -3352,13 +3557,13 @@ update_switcher_window (WnckWindow *win,
 
     if (!d->pixmap && switcher_pixmap)
     {
-	gdk_pixmap_ref (switcher_pixmap);
+	g_object_ref (G_OBJECT (switcher_pixmap));
 	d->pixmap = switcher_pixmap;
     }
 
     if (!d->buffer_pixmap && switcher_buffer_pixmap)
     {
-	gdk_pixmap_ref (switcher_buffer_pixmap);
+	g_object_ref (G_OBJECT (switcher_buffer_pixmap));
 	d->buffer_pixmap = switcher_buffer_pixmap;
     }
 
@@ -3456,24 +3661,24 @@ update_switcher_window (WnckWindow *win,
     buffer_pixmap = create_pixmap (width, height);
     if (!buffer_pixmap)
     {
-	gdk_pixmap_unref (pixmap);
+	g_object_unref (G_OBJECT (pixmap));
 	return FALSE;
     }
 
     if (switcher_pixmap)
-	gdk_pixmap_unref (switcher_pixmap);
+	g_object_unref (G_OBJECT (switcher_pixmap));
 
     if (switcher_buffer_pixmap)
-	gdk_pixmap_unref (switcher_buffer_pixmap);
+	g_object_unref (G_OBJECT (switcher_buffer_pixmap));
 
     if (d->pixmap)
-	gdk_pixmap_unref (d->pixmap);
+	g_object_unref (G_OBJECT (d->pixmap));
 
     if (d->buffer_pixmap)
-	gdk_pixmap_unref (d->buffer_pixmap);
+	g_object_unref (G_OBJECT (d->buffer_pixmap));
 
     if (d->gc)
-	gdk_gc_unref (d->gc);
+	g_object_unref (G_OBJECT (d->gc));
 
     if (d->picture)
 	XRenderFreePicture (xdisplay, d->picture);
@@ -3484,8 +3689,8 @@ update_switcher_window (WnckWindow *win,
     switcher_width  = width;
     switcher_height = height;
 
-    gdk_pixmap_ref (pixmap);
-    gdk_pixmap_ref (buffer_pixmap);
+    g_object_ref (G_OBJECT (pixmap));
+    g_object_ref (G_OBJECT (buffer_pixmap));
 
     d->pixmap	     = pixmap;
     d->buffer_pixmap = buffer_pixmap;
@@ -3514,19 +3719,19 @@ remove_frame_window (WnckWindow *win)
 
     if (d->pixmap)
     {
-	gdk_pixmap_unref (d->pixmap);
+	g_object_unref (G_OBJECT (d->pixmap));
 	d->pixmap = NULL;
     }
 
     if (d->buffer_pixmap)
     {
-	gdk_pixmap_unref (d->buffer_pixmap);
+	g_object_unref (G_OBJECT (d->buffer_pixmap));
 	d->buffer_pixmap = NULL;
     }
 
     if (d->gc)
     {
-	gdk_gc_unref (d->gc);
+	g_object_unref (G_OBJECT (d->gc));
 	d->gc = NULL;
     }
 
@@ -3556,13 +3761,13 @@ remove_frame_window (WnckWindow *win)
 
     if (d->icon_pixmap)
     {
-	gdk_pixmap_unref (d->icon_pixmap);
+	g_object_unref (G_OBJECT (d->icon_pixmap));
 	d->icon_pixmap = NULL;
     }
 
     if (d->icon_pixbuf)
     {
-	gdk_pixbuf_unref (d->icon_pixbuf);
+	g_object_unref (G_OBJECT (d->icon_pixbuf));
 	d->icon_pixbuf = NULL;
     }
 
@@ -3607,8 +3812,18 @@ window_geometry_changed (WnckWindow *win)
 
     if (d->decorated)
     {
-	update_window_decoration_size (win);
-	update_event_windows (win);
+	int width, height;
+
+	wnck_window_get_geometry (win, NULL, NULL, &width, &height);
+
+	if (width != d->client_width || height != d->client_height)
+	{
+	    d->client_width  = width;
+	    d->client_height = height;
+
+	    update_window_decoration_size (win);
+	    update_event_windows (win);
+	}
     }
 }
 
@@ -3714,6 +3929,10 @@ window_opened (WnckScreen *screen,
     d = calloc (1, sizeof (decor_t));
     if (!d)
 	return;
+
+    wnck_window_get_geometry (win, NULL, NULL,
+			      &d->client_width,
+			      &d->client_height);
 
     d->active = wnck_window_is_active (win);
 
@@ -4052,6 +4271,39 @@ handle_tooltip_event (WnckWindow *win,
     }
 }
 
+static void
+common_button_event (WnckWindow *win,
+		     XEvent     *xevent,
+		     int	button,
+		     int	max,
+		     char	*tooltip)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[button];
+
+    handle_tooltip_event (win, xevent, state, tooltip);
+
+    switch (xevent->type) {
+    case ButtonPress:
+	if (xevent->xbutton.button <= max)
+	    d->button_states[button] |= PRESSED_EVENT_WINDOW;
+	break;
+    case ButtonRelease:
+	if (xevent->xbutton.button <= max)
+	    d->button_states[button] &= ~PRESSED_EVENT_WINDOW;
+	break;
+    case EnterNotify:
+	d->button_states[button] |= IN_EVENT_WINDOW;
+	break;
+    case LeaveNotify:
+	d->button_states[button] &= ~IN_EVENT_WINDOW;
+	break;
+    }
+
+    if (state != d->button_states[button])
+	queue_decor_draw (d);
+}
+
 #define BUTTON_EVENT_ACTION_STATE (PRESSED_EVENT_WINDOW | IN_EVENT_WINDOW)
 
 static void
@@ -4061,32 +4313,17 @@ close_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_CLOSE];
 
-    handle_tooltip_event (win, xevent, state, "Close Window");
+    common_button_event (win, xevent, BUTTON_CLOSE, 1, "Close Window");
 
     switch (xevent->type) {
-    case ButtonPress:
-	if (xevent->xbutton.button == 1)
-	    d->button_states[BUTTON_CLOSE] |= PRESSED_EVENT_WINDOW;
-	break;
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
-	    if (d->button_states[BUTTON_CLOSE] == BUTTON_EVENT_ACTION_STATE)
+	    if (state == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_close (win, xevent->xbutton.time);
-
-	    d->button_states[BUTTON_CLOSE] &= ~PRESSED_EVENT_WINDOW;
 	}
 	break;
-    case EnterNotify:
-	d->button_states[BUTTON_CLOSE] |= IN_EVENT_WINDOW;
-	break;
-    case LeaveNotify:
-	d->button_states[BUTTON_CLOSE] &= ~IN_EVENT_WINDOW;
-	break;
     }
-
-    if (state != d->button_states[BUTTON_CLOSE])
-	queue_decor_draw (d);
 }
 
 static void
@@ -4097,19 +4334,15 @@ max_button_event (WnckWindow *win,
     guint   state = d->button_states[BUTTON_MAX];
 
     if (wnck_window_is_maximized (win))
-	handle_tooltip_event (win, xevent, state, "Unmaximize Window");
+	common_button_event (win, xevent, BUTTON_MAX, 3, "Unmaximize Window");
     else
-	handle_tooltip_event (win, xevent, state, "Maximize Window");
+	common_button_event (win, xevent, BUTTON_MAX, 3, "Maximize Window");
 
     switch (xevent->type) {
-    case ButtonPress:
-	if (xevent->xbutton.button <= 3)
-	    d->button_states[BUTTON_MAX] |= PRESSED_EVENT_WINDOW;
-	break;
     case ButtonRelease:
 	if (xevent->xbutton.button <= 3)
 	{
-	    if (d->button_states[BUTTON_MAX] == BUTTON_EVENT_ACTION_STATE)
+	    if (state == BUTTON_EVENT_ACTION_STATE)
 	    {
 		if (xevent->xbutton.button == 2)
 		{
@@ -4133,20 +4366,9 @@ max_button_event (WnckWindow *win,
 			wnck_window_maximize (win);
 		}
 	    }
-
-	    d->button_states[BUTTON_MAX] &= ~PRESSED_EVENT_WINDOW;
 	}
 	break;
-    case EnterNotify:
-	d->button_states[BUTTON_MAX] |= IN_EVENT_WINDOW;
-	break;
-    case LeaveNotify:
-	d->button_states[BUTTON_MAX] &= ~IN_EVENT_WINDOW;
-	break;
     }
-
-    if (state != d->button_states[BUTTON_MAX])
-	queue_decor_draw (d);
 }
 
 static void
@@ -4156,32 +4378,17 @@ min_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_MIN];
 
-    handle_tooltip_event (win, xevent, state, "Minimize Window");
+    common_button_event (win, xevent, BUTTON_MIN, 1, "Minimize Window");
 
     switch (xevent->type) {
-    case ButtonPress:
-	if (xevent->xbutton.button == 1)
-	    d->button_states[BUTTON_MIN] |= PRESSED_EVENT_WINDOW;
-	break;
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
-	    if (d->button_states[BUTTON_MIN] == BUTTON_EVENT_ACTION_STATE)
+	    if (state == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_minimize (win);
-
-	    d->button_states[BUTTON_MIN] &= ~PRESSED_EVENT_WINDOW;
 	}
 	break;
-    case EnterNotify:
-	d->button_states[BUTTON_MIN] |= IN_EVENT_WINDOW;
-	break;
-    case LeaveNotify:
-	d->button_states[BUTTON_MIN] &= ~IN_EVENT_WINDOW;
-	break;
     }
-
-    if (state != d->button_states[BUTTON_MIN])
-	queue_decor_draw (d);
 }
 
 static void
@@ -4230,8 +4437,14 @@ position_action_menu (GtkMenu  *menu,
 		      gpointer user_data)
 {
     WnckWindow *win = (WnckWindow *) user_data;
+    decor_t    *d = g_object_get_data (G_OBJECT (win), "decor");
+    gint	bx, by, width, height;
 
-    wnck_window_get_geometry (win, x, y, NULL, NULL);
+    wnck_window_get_geometry (win, x, y, &width, &height);
+
+    if ((*theme_get_button_position) (d, BUTTON_MENU, width, height,
+				      &bx, &by, &width, &height))
+	*x = *x - _win_extents.left + bx;
 
     *push_in = TRUE;
 }
@@ -4310,36 +4523,136 @@ static void
 menu_button_event (WnckWindow *win,
 		   XEvent     *xevent)
 {
-    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
-    guint   state = d->button_states[BUTTON_MENU];
-
-    handle_tooltip_event (win, xevent, state, "Window Menu");
+    common_button_event (win, xevent, BUTTON_MENU, 1, "Window Menu");
 
     switch (xevent->type) {
     case ButtonPress:
 	if (xevent->xbutton.button == 1)
-	{
 	    action_menu_map (win,
 			     xevent->xbutton.button,
 			     xevent->xbutton.time);
-
-	    d->button_states[BUTTON_MENU] |= PRESSED_EVENT_WINDOW;
-	}
-	break;
-    case ButtonRelease:
-	if (xevent->xbutton.button == 1)
-	    d->button_states[BUTTON_MENU] &= ~PRESSED_EVENT_WINDOW;
-	break;
-    case EnterNotify:
-	d->button_states[BUTTON_MENU] |= IN_EVENT_WINDOW;
-	break;
-    case LeaveNotify:
-	d->button_states[BUTTON_MENU] &= ~IN_EVENT_WINDOW;
 	break;
     }
+}
 
-    if (state != d->button_states[BUTTON_MENU])
-	queue_decor_draw (d);
+static void
+shade_button_event (WnckWindow *win,
+		    XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_SHADE];
+
+    common_button_event (win, xevent, BUTTON_SHADE, 1, "Shade");
+
+    switch (xevent->type) {
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+		wnck_window_shade (win);
+	}
+	break;
+    }
+}
+
+static void
+above_button_event (WnckWindow *win,
+		    XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_ABOVE];
+
+    common_button_event (win, xevent, BUTTON_ABOVE, 1, "Make Above");
+
+    switch (xevent->type) {
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+		wnck_window_make_above (win);
+	}
+	break;
+    }
+}
+
+static void
+stick_button_event (WnckWindow *win,
+		    XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_STICK];
+
+    common_button_event (win, xevent, BUTTON_STICK, 1, "Stick");
+
+    switch (xevent->type) {
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+		wnck_window_stick (win);
+	}
+	break;
+    }
+}
+
+static void
+unshade_button_event (WnckWindow *win,
+		      XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_UNSHADE];
+
+    common_button_event (win, xevent, BUTTON_UNSHADE, 1, "Unshade");
+
+    switch (xevent->type) {
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+		wnck_window_unshade (win);
+	}
+	break;
+    }
+}
+
+static void
+unabove_button_event (WnckWindow *win,
+		      XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_UNABOVE];
+
+    common_button_event (win, xevent, BUTTON_UNABOVE, 1, "Unmake Above");
+
+    switch (xevent->type) {
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+		wnck_window_unmake_above (win);
+	}
+	break;
+    }
+}
+
+static void
+unstick_button_event (WnckWindow *win,
+		      XEvent     *xevent)
+{
+    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    guint   state = d->button_states[BUTTON_UNSTICK];
+
+    common_button_event (win, xevent, BUTTON_UNSTICK, 1, "Unstick");
+
+    switch (xevent->type) {
+    case ButtonRelease:
+	if (xevent->xbutton.button == 1)
+	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+		wnck_window_unstick (win);
+	}
+	break;
+    }
 }
 
 static double
@@ -4495,7 +4808,7 @@ get_client_machine (Window xwindow)
 {
     Atom   atom, type;
     gulong nitems, bytes_after;
-    gchar  *str = NULL;
+    guchar *str = NULL;
     int    format, result;
     char   *retval;
 
@@ -4507,7 +4820,7 @@ get_client_machine (Window xwindow)
 				 xwindow, atom,
 				 0, G_MAXLONG,
 				 FALSE, XA_STRING, &type, &format, &nitems,
-				 &bytes_after, (guchar **) &str);
+				 &bytes_after, &str);
 
     gdk_error_trap_pop ();
 
@@ -4520,7 +4833,7 @@ get_client_machine (Window xwindow)
 	return NULL;
     }
 
-    retval = g_strdup (str);
+    retval = g_strdup ((gchar *) str);
 
     XFree (str);
 
@@ -4824,7 +5137,13 @@ event_filter_func (GdkXEvent *gdkxevent,
 		close_button_event,
 		max_button_event,
 		min_button_event,
-		menu_button_event
+		menu_button_event,
+		shade_button_event,
+		above_button_event,
+		stick_button_event,
+		unshade_button_event,
+		unabove_button_event,
+		unstick_button_event
 	    };
 	    decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
 
@@ -5135,7 +5454,7 @@ draw_border_shape (Display	   *xdisplay,
 			  width - c->left_space - c->right_space,
 			  height - c->top_space - c->bottom_space);
 
-    gdk_pixmap_unref (d.pixmap);
+    g_object_unref (G_OBJECT (d.pixmap));
 }
 
 static int
@@ -5362,6 +5681,118 @@ double_click_titlebar_changed (GConfClient *client)
 
 	g_free (action);
     }
+}
+#endif
+
+#ifdef USE_METACITY
+static MetaButtonFunction
+meta_button_function_from_string (const char *str)
+{
+    if (strcmp (str, "menu") == 0)
+	return META_BUTTON_FUNCTION_MENU;
+    else if (strcmp (str, "minimize") == 0)
+	return META_BUTTON_FUNCTION_MINIMIZE;
+    else if (strcmp (str, "maximize") == 0)
+	return META_BUTTON_FUNCTION_MAXIMIZE;
+    else if (strcmp (str, "close") == 0)
+	return META_BUTTON_FUNCTION_CLOSE;
+
+#ifdef HAVE_METACITY_2_17_0
+    else if (strcmp (str, "shade") == 0)
+	return META_BUTTON_FUNCTION_SHADE;
+    else if (strcmp (str, "above") == 0)
+	return META_BUTTON_FUNCTION_ABOVE;
+    else if (strcmp (str, "stick") == 0)
+	return META_BUTTON_FUNCTION_STICK;
+    else if (strcmp (str, "unshade") == 0)
+	return META_BUTTON_FUNCTION_UNSHADE;
+    else if (strcmp (str, "unabove") == 0)
+	return META_BUTTON_FUNCTION_UNABOVE;
+    else if (strcmp (str, "unstick") == 0)
+	return META_BUTTON_FUNCTION_UNSTICK;
+#endif
+
+    else
+	return META_BUTTON_FUNCTION_LAST;
+}
+
+static void
+meta_update_button_layout (const char *value)
+{
+    MetaButtonLayout   new_layout;
+    MetaButtonFunction f;
+    char	       **sides;
+    int		       i;
+
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+    {
+	new_layout.left_buttons[i] = META_BUTTON_FUNCTION_LAST;
+	new_layout.right_buttons[i] = META_BUTTON_FUNCTION_LAST;
+    }
+
+    sides = g_strsplit (value, ":", 2);
+
+    if (sides[0] != NULL)
+    {
+	gboolean used[META_BUTTON_FUNCTION_LAST];
+	char	 **buttons;
+	int	 b;
+
+	memset (used, 0, sizeof (used));
+
+	buttons = g_strsplit (sides[0], ",", -1);
+
+	i = b = 0;
+	while (buttons[b] != NULL)
+	{
+	    f = meta_button_function_from_string (buttons[b]);
+	    if (f != META_BUTTON_FUNCTION_LAST && !used[f])
+	    {
+		new_layout.left_buttons[i++] = f;
+		used[f] = TRUE;
+	    }
+	    else
+	    {
+		fprintf (stderr, "%s: Ignoring unknown or already-used "
+			 "button name \"%s\"\n", program_name, buttons[b]);
+	    }
+
+	    b++;
+	}
+
+	g_strfreev (buttons);
+
+	if (sides[1] != NULL)
+	{
+	    memset (used, 0, sizeof (used));
+
+	    buttons = g_strsplit (sides[1], ",", -1);
+
+	    i = b = 0;
+	    while (buttons[b] != NULL)
+	    {
+		f = meta_button_function_from_string (buttons[b]);
+		if (f != META_BUTTON_FUNCTION_LAST && !used[f])
+		{
+		    new_layout.right_buttons[i++] = f;
+		    used[f] = TRUE;
+		}
+		else
+		{
+		    fprintf (stderr, "%s: Ignoring unknown or already-used "
+			     "button name \"%s\"\n", program_name, buttons[b]);
+		}
+
+		b++;
+	    }
+
+	    g_strfreev (buttons);
+	}
+    }
+
+    g_strfreev (sides);
+
+    meta_button_layout = new_layout;
 }
 #endif
 
@@ -5749,6 +6180,38 @@ theme_opacity_changed (GConfClient *client)
 
 }
 
+static gboolean
+button_layout_changed (GConfClient *client)
+{
+
+#ifdef USE_METACITY
+    gchar *button_layout;
+
+    button_layout = gconf_client_get_string (client,
+					     META_BUTTON_LAYOUT_KEY,
+					     NULL);
+
+    if (button_layout)
+    {
+	meta_update_button_layout (button_layout);
+
+	meta_button_layout_set = TRUE;
+
+	g_free (button_layout);
+
+	return TRUE;
+    }
+
+    if (meta_button_layout_set)
+    {
+	meta_button_layout_set = FALSE;
+	return TRUE;
+    }
+#endif
+
+    return FALSE;
+}
+
 static void
 value_changed (GConfClient *client,
 	       const gchar *key,
@@ -5800,6 +6263,11 @@ value_changed (GConfClient *client,
 	     strcmp (key, META_THEME_KEY) == 0)
     {
 	if (theme_changed (client))
+	    changed = TRUE;
+    }
+    else if (strcmp (key, META_BUTTON_LAYOUT_KEY) == 0)
+    {
+	if (button_layout_changed (client))
 	    changed = TRUE;
     }
     else if (strcmp (key, META_THEME_OPACITY_KEY)	       == 0 ||
@@ -6107,6 +6575,7 @@ init_settings (WnckScreen *screen)
 					     NULL);
     theme_changed (gconf);
     theme_opacity_changed (gconf);
+    button_layout_changed (gconf);
 #endif
 
     update_style (style_window);

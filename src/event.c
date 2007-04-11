@@ -195,7 +195,7 @@ autoRaiseTimeout (void *closure)
 
 	w = findWindowAtDisplay (display, display->autoRaiseWindow);
 	if (w)
-	    updateWindowAttributes (w, FALSE);
+	    updateWindowAttributes (w, CompStackingUpdateModeNormal);
     }
 
     return FALSE;
@@ -725,7 +725,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerButtonPressBindings (d, option, nOption, event,
 						o, 7))
 		    return TRUE;
@@ -756,7 +756,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerButtonReleaseBindings (d, option, nOption, event,
 						  o, 7))
 		    return TRUE;
@@ -787,7 +787,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerKeyPressBindings (d, option, nOption, event, o, 7))
 		    return TRUE;
 	    }
@@ -817,7 +817,7 @@ handleActionEvent (CompDisplay *d,
 	{
 	    if (p->vTable->getDisplayOptions)
 	    {
-		option = (*p->vTable->getDisplayOptions) (d, &nOption);
+		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 		if (triggerKeyReleaseBindings (d, option, nOption, event, o, 7))
 		    return TRUE;
 	    }
@@ -871,7 +871,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeLeaveBindings (d, option, nOption, state,
 						      edge, o, 6))
 			    return TRUE;
@@ -915,7 +915,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeEnterBindings (d, option, nOption, state,
 						      edge, o, 6))
 			    return TRUE;
@@ -975,7 +975,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeLeaveBindings (d, option, nOption, state,
 						      edge, o, 5))
 			    return TRUE;
@@ -1030,7 +1030,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerEdgeEnterBindings (d, option, nOption, state,
 						      edge, o, 5))
 			    return TRUE;
@@ -1079,7 +1079,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerStateNotifyBindings (d, option, nOption,
 							stateEvent, o, 3))
 			    return TRUE;
@@ -1105,7 +1105,7 @@ handleActionEvent (CompDisplay *d,
 		{
 		    if (p->vTable->getDisplayOptions)
 		    {
-			option = (*p->vTable->getDisplayOptions) (d, &nOption);
+			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 			if (triggerBellNotifyBindings (d, option, nOption,
 						       o, 2))
 			    return TRUE;
@@ -1348,7 +1348,8 @@ handleEvent (CompDisplay *d,
 		if (w)
 		{
 		    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
-			updateWindowAttributes (w, TRUE);
+			updateWindowAttributes (w, 
+					CompStackingUpdateModeAboveFullscreen);
 
 		    if (!(w->type & CompWindowTypeDockMask))
 			moveInputFocusToWindow (w);
@@ -1645,6 +1646,20 @@ handleEvent (CompDisplay *d,
 
 		if (wState != w->state)
 		{
+		    CompStackingUpdateMode stackingUpdateMode;
+		    unsigned long          dState = wState ^ w->state;
+
+		    stackingUpdateMode = CompStackingUpdateModeNone;
+
+		    /* raise the window whenever its fullscreen state,
+		       above/below state or maximization state changed */
+		    if (dState & (CompWindowStateFullscreenMask |
+				  CompWindowStateAboveMask |
+				  CompWindowStateBelowMask |
+				  CompWindowStateMaximizedHorzMask |
+				  CompWindowStateMaximizedVertMask))
+			stackingUpdateMode = CompStackingUpdateModeNormal;
+
 		    w->state = wState;
 
 		    recalcWindowType (w);
@@ -1652,7 +1667,7 @@ handleEvent (CompDisplay *d,
 
 		    changeWindowState (w, w->state);
 
-		    updateWindowAttributes (w, FALSE);
+		    updateWindowAttributes (w, stackingUpdateMode);
 		}
 	    }
 	}
@@ -1855,7 +1870,7 @@ handleEvent (CompDisplay *d,
 
 		XMapWindow (d->display, event->xmaprequest.window);
 
-		updateWindowAttributes (w, FALSE);
+		updateWindowAttributes (w, CompStackingUpdateModeNormal);
 
 		if (focusWindowOnMap (w))
 		{
@@ -1996,7 +2011,8 @@ handleEvent (CompDisplay *d,
 				    compAddTimeout (delay, autoRaiseTimeout, d);
 			    }
 			    else
-				updateWindowAttributes (w, FALSE);
+				updateWindowAttributes (w, 
+					CompStackingUpdateModeNormal);
 			}
 		    }
 		}
