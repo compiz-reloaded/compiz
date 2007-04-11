@@ -234,7 +234,7 @@ extern int lastPointerY;
 extern int pointerX;
 extern int pointerY;
 
-extern CompMetadata *coreMetadata;
+extern CompMetadata coreMetadata;
 
 #define RESTRICT_VALUE(value, min, max)				     \
     (((value) < (min)) ? (min): ((value) > (max)) ? (max) : (value))
@@ -3068,16 +3068,23 @@ struct _CompMetadata {
     xmlDoc *doc;
 };
 
-CompMetadata *
-compGetMetadataFromFile (const char *file,
-			 const char *plugin);
+Bool
+compInitMetadata (CompMetadata *metadata);
 
-CompMetadata *
-compGetMetadataFromString (const char *string,
-			   const char *plugin);
+Bool
+compInitPluginMetadata (CompMetadata *metadata,
+			const char   *plugin);
 
 void
-compFreeMetadata (CompMetadata *data);
+compFiniMetadata (CompMetadata *metadata);
+
+Bool
+compAddMetadataFromFile (CompMetadata *metadata,
+			 const char   *file);
+
+Bool
+compAddMetadataFromString (CompMetadata *metadata,
+			   const char	*string);
 
 Bool
 compInitScreenOptionFromMetadata (CompScreen   *screen,

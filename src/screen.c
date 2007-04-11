@@ -601,7 +601,7 @@ static void
 compScreenInitOptions (CompScreen *screen)
 {
     CompOption *o;
-    CompMetadata *m = coreMetadata;
+    CompMetadata *m = &coreMetadata;
 
     o = &screen->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE];
     compInitScreenOptionFromMetadata (screen, m, o, "detect_refresh_rate");

@@ -51,72 +51,73 @@ struct _XmlMod {
 
 #define N_XMLMODS (sizeof (xmlMods) / sizeof (struct _XmlMod))
 
-CompMetadata *
-compGetMetadataFromFile (const char *file, const char *plugin)
+Bool
+compInitMetadata (CompMetadata *metadata)
 {
-    xmlDoc *doc = NULL;
-    CompMetadata *m;
-    char str[1024];
-
-    if (plugin)
-	snprintf (str, 1024, "plugin[@name=\"%s\"]", plugin);
-    else
-	strcpy (str, "general");
-
-    doc = xmlReadFile (file, NULL, 0);
-    if (!doc)
-    {
-	fprintf (stderr, "%s: Unable to parse XML metadata form file \"%s\" "
-		 "for \"%s\"\n",
-		 programName, file, plugin);
-	return NULL;
-    }
-    m = malloc (sizeof(CompMetadata));
-    m->path = strdup (str);
-    if (!m->path)
-    {
-	free (m);
+    metadata->path = strdup ("general");
+    if (!metadata->path)
 	return FALSE;
-    }
-    m->doc = doc;
-    return m;
+
+    metadata->doc = NULL;
+
+    return TRUE;
 }
 
-CompMetadata *
-compGetMetadataFromString (const char *string, const char *plugin)
+Bool
+compInitPluginMetadata (CompMetadata *metadata,
+			const char   *plugin)
 {
-    xmlDoc *doc = NULL;
-    CompMetadata *m;
     char str[1024];
 
-    if (plugin)
-	snprintf (str, 1024, "plugin[@name=\"%s\"]", plugin);
-    else
-	strcpy (str, "general");
+    snprintf (str, 1024, "plugin[@name=\"%s\"]", plugin);
 
-    doc = xmlReadMemory (string, strlen(string), NULL, NULL, 0);
-    if (!doc)
-    {
-	fprintf (stderr, "%s: Unable to parse XML metadata for \"%s\"\n",
-		 programName, plugin);
-	return NULL;
-    }
-    m = malloc (sizeof(CompMetadata));
-    m->path = strdup (str);
-    if (!m->path)
-    {
-	free (m);
+    metadata->path = strdup (str);
+    if (!metadata->path)
 	return FALSE;
-    }
-    m->doc = doc;
-    return m;
+
+    metadata->doc = NULL;
+
+    return TRUE;
 }
 
 void
-compFreeMetadata (CompMetadata *data)
+compFiniMetadata (CompMetadata *metadata)
 {
-    xmlFreeDoc (data->doc);
-    free (data->path);
+    if (metadata->doc)
+	xmlFreeDoc (metadata->doc);
+
+    free (metadata->path);
+}
+
+Bool
+compAddMetadataFromFile (CompMetadata *metadata,
+			 const char   *file)
+{
+    metadata->doc = xmlReadFile (file, NULL, 0);
+    if (!metadata->doc)
+    {
+	fprintf (stderr, "%s: Unable to parse XML metadata from file \"%s\"\n",
+		 programName, file);
+
+	return FALSE;
+    }
+
+    return TRUE;
+}
+
+Bool
+compAddMetadataFromString (CompMetadata *metadata,
+			   const char   *string)
+{
+    metadata->doc = xmlReadMemory (string, strlen (string), NULL, NULL, 0);
+    if (!metadata->doc)
+    {
+	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
+
+	return FALSE;
+    }
+
+    return TRUE;
 }
 
 static Bool

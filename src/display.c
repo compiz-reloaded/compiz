@@ -45,7 +45,7 @@
 
 #include <compiz.h>
 
-CompMetadata *coreMetadata = NULL;
+CompMetadata coreMetadata;
 
 static unsigned int virtualModMask[] = {
     CompAltMask, CompMetaMask, CompSuperMask, CompHyperMask,
@@ -674,7 +674,7 @@ compDisplayInitOptions (CompDisplay *display,
     CompOption *o;
     int        i;
     char       *str;
-    CompMetadata *m = coreMetadata;
+    CompMetadata *m = &coreMetadata;
     
     o = &display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
     compInitDisplayOptionFromMetadata (display, m, o, "active_plugins");
@@ -2211,15 +2211,17 @@ addDisplay (char *name,
 	return FALSE;
     }
 
-    coreMetadata = compGetMetadataFromFile (METADATADIR "/compiz.metadata",
-					    NULL);
-    if (!coreMetadata)
+    if (!compInitMetadata (&coreMetadata))
     {
 	fprintf (stderr, "%s: Couldn't initialize core metadata\n",
 		 programName);
 	return FALSE;
     }
-    
+
+    if (!compAddMetadataFromFile (&coreMetadata,
+				  METADATADIR "/compiz.metadata"))
+	return FALSE;
+
     compDisplayInitOptions (d, plugin, nPlugin);
 
     snprintf (d->displayString, 255, "DISPLAY=%s", DisplayString (dpy));
