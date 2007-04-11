@@ -554,7 +554,8 @@ parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *acti
 	strncpy(realOptionName, optionName, len);
 	realOptionName[len] = '\0';
 
-	if (strcmp(action->realOptionName, realOptionName) != 0) {
+	if (strcmp(action->realOptionName, realOptionName) != 0)
+	{
 	    free(realOptionName);
 	    return FALSE;
 	}
@@ -588,8 +589,10 @@ parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *acti
 	    if (optionValue[0] != '\0' &&
 		csvToList (optionValue, &edges, CompOptionTypeString))
 	    {
-		for (i = 0; i < edges.nValue; i++) {
-		    for (j = 0; j < SCREEN_EDGE_NUM; j++) {
+		for (i = 0; i < edges.nValue; i++)
+		{
+		    for (j = 0; j < SCREEN_EDGE_NUM; j++)
+		    {
 			if (strcasecmp (edges.value[i].s, edgeToString(j)) == 0)
 			{
 			    action->a.edgeMask |= (1 << j);
@@ -806,10 +809,13 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		action.realOptionName = NULL;
 
 		/* we missed the current line because we exited it in the first call */
-		if (!o && action.valueMasks == ACTION_VALUES_ALL) {
+		if (!o && action.valueMasks == ACTION_VALUES_ALL)
+		{
 		    action.valueMasks = 0;
 		    parseAction(d, optionName, optionValue, &action);
-		} else {
+		}
+		else
+		{
 		    action.valueMasks = 0;
 		}
 	    }
