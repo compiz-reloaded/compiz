@@ -292,7 +292,10 @@ initStringValue (CompOptionValue *v, xmlNodePtr node)
 	    xmlChar *value = xmlNodeListGetString (cur->doc,
 						   cur->xmlChildrenNode, 1);
 	    if (!value)
+	    {
+		cur = cur->next;
 		continue;
+	    }
 	    free (v->s);
 	    v->s = strdup ((char *) value);
 	    xmlFree (value);
@@ -327,7 +330,6 @@ initColorValue (CompOptionValue *v, xmlNodePtr node)
 						  cur->xmlChildrenNode, 1);
 	    v->c[0] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
 	    xmlFree (value);
-	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "green"))
 	{
@@ -335,7 +337,6 @@ initColorValue (CompOptionValue *v, xmlNodePtr node)
 						   cur->xmlChildrenNode, 1);
 	    v->c[1] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
 	    xmlFree (value);
-	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "blue"))
 	{
@@ -343,7 +344,6 @@ initColorValue (CompOptionValue *v, xmlNodePtr node)
 						   cur->xmlChildrenNode, 1);
 	    v->c[2] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
 	    xmlFree (value);
-	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "alpha"))
 	{
@@ -351,7 +351,6 @@ initColorValue (CompOptionValue *v, xmlNodePtr node)
 						   cur->xmlChildrenNode, 1);
 	    v->c[3] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
 	    xmlFree (value);
-	    return;
 	}
 	cur = cur->next;
     }
@@ -604,7 +603,10 @@ initMatchValue (CompOptionValue *v, xmlNodePtr node)
 	    xmlChar *value = xmlNodeListGetString (cur->doc,
 						   cur->xmlChildrenNode, 1);
 	    if (!value)
+	    {
+		cur = cur->next;
 		continue;
+	    }
             matchAddFromString (&v->match, (char *) value);
 	    xmlFree (value);
 	    return;
@@ -628,7 +630,7 @@ initListValue (CompOptionValue *v, xmlNodePtr node)
             !xmlStrcmp (cur->name, BAD_CAST "list"))
 	{
 	    CompOptionType oType;
-	    xmlChar *type = xmlGetProp (node, BAD_CAST "type");
+	    xmlChar *type = xmlGetProp (cur, BAD_CAST "type");
 	    xmlXPathObjectPtr xpathObj;
             xmlXPathContextPtr xpathCtx;
 	    int i;
@@ -726,7 +728,6 @@ initIntRestriction (CompOptionRestriction *r, xmlNodePtr node)
 						  1);
 	    r->i.min = strtol ((char *) value, NULL, 0);
 	    xmlFree (value);
-	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "max"))
 	{
@@ -735,7 +736,6 @@ initIntRestriction (CompOptionRestriction *r, xmlNodePtr node)
 						  1);
 	    r->i.max = strtol ((char *) value, NULL, 0);
 	    xmlFree (value);
-	    return;
 	}
 	cur = cur->next;
     }
@@ -759,7 +759,6 @@ initFloatRestriction (CompOptionRestriction *r, xmlNodePtr node)
 						  1);
 	    r->f.min = strtod ((char *) value, NULL);
 	    xmlFree (value);
-	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "max"))
 	{
@@ -768,7 +767,6 @@ initFloatRestriction (CompOptionRestriction *r, xmlNodePtr node)
 						  1);
 	    r->f.max = strtod ((char *) value, NULL);
 	    xmlFree (value);
-	    return;
 	}
 	else if (!xmlStrcmp (cur->name, BAD_CAST "precision"))
 	{
@@ -777,7 +775,6 @@ initFloatRestriction (CompOptionRestriction *r, xmlNodePtr node)
 						  1);
 	    r->f.precision = strtod ((char *) value, NULL);
 	    xmlFree (value);
-	    return;
 	}
 	cur = cur->next;
     }
