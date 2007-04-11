@@ -26,6 +26,7 @@
  *                       David Reveman <davidr@novell.com>
  */
 
+#define _GNU_SOURCE /* for asprintf */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +36,7 @@
 #define DEFAULT_PLUGINS     "ini,inotify,png,decoration,move,resize,switcher"
 #define NUM_DEFAULT_PLUGINS 7
 #define MAX_OPTION_LENGTH   1024
-#define HOME_OPTION_DIR     ".compiz/options"
+#define HOME_OPTIONDIR     ".compiz/options"
 #define CORE_NAME           "general"
 #define FILE_SUFFIX         ".conf"
 
@@ -52,6 +53,9 @@
 
 static int displayPrivateIndex;
 
+/*
+ * IniFileData
+ */
 typedef struct _IniFileData IniFileData;
 struct _IniFileData {
     char		 *filename;
@@ -65,20 +69,9 @@ struct _IniFileData {
     IniFileData		 *prev;
 };
 
-#define N_ACTION_PARTS 5
-typedef struct _IniActionProxy {
-    int               nSet;
-
-    CompBindingType   type;
-    CompKeyBinding    key;
-    CompButtonBinding button;
-
-    Bool bell;
-
-    unsigned int edgeMask;
-    int		 edgeButton;
-} IniActionProxy;
-
+/*
+ * IniDisplay
+ */
 typedef struct _IniDisplay {
     int		                  screenPrivateIndex;
 
@@ -91,30 +84,60 @@ typedef struct _IniDisplay {
     IniFileData			*fileData;
 } IniDisplay;
 
+/*
+ * IniScreeen
+ */
 typedef struct _IniScreen {
     InitPluginForScreenProc        initPluginForScreen;
     SetScreenOptionProc		   setScreenOption;
     SetScreenOptionForPluginProc   setScreenOptionForPlugin;
 } IniScreen;
 
-static void
-initActionProxy (IniActionProxy *a)
-{
-    a->type = 0;
+/*
+ * IniAction
+ */
+static char * validActionTypes[] = {
+	"key",
+	"button",
+	"bell",
+	"edge",
+	"edgebutton"};
 
-    a->nSet = 0;
+#define ACTION_VALUE_KEY	    (1 << 0)
+#define ACTION_VALUE_BUTTON	    (1 << 1)
+#define ACTION_VALUE_BELL	    (1 << 2)
+#define ACTION_VALUE_EDGE	    (1 << 3)
+#define ACTION_VALUE_EDGEBUTTON	    (1 << 4)
+#define ACTION_VALUES_ALL \
+	( ACTION_VALUE_KEY \
+	| ACTION_VALUE_BUTTON \
+	| ACTION_VALUE_BELL \
+	| ACTION_VALUE_EDGE \
+	| ACTION_VALUE_EDGEBUTTON )
 
-    a->key.keycode = 0;
-    a->key.modifiers = 0;
+static int actionValueMasks[] = {
+    ACTION_VALUE_KEY,
+    ACTION_VALUE_BUTTON,
+    ACTION_VALUE_BELL,
+    ACTION_VALUE_EDGE,
+    ACTION_VALUE_EDGEBUTTON
+};
 
-    a->button.button = 0;
-    a->button.modifiers = 0;
+enum {
+    ACTION_TYPE_KEY = 0,
+    ACTION_TYPE_BUTTON,
+    ACTION_TYPE_BELL,
+    ACTION_TYPE_EDGE,
+    ACTION_TYPE_EDGEBUTTON,
+    ACTION_TYPES_NUM
+};
 
-    a->bell = FALSE;
+typedef struct _IniAction {
+    char *realOptionName;
+    unsigned int valueMasks;
+    CompAction a;
+} IniAction;
 
-    a->edgeMask = 0;
-    a->edgeButton = 0;
-}
 
 static IniFileData *
 iniGetFileDataFromFilename (CompDisplay *d,
@@ -249,10 +272,10 @@ iniGetHomeDir (char **homeDir)
     home = getenv ("HOME");
     if (home)
     {
-	tmp = malloc (strlen (home) + strlen (HOME_OPTION_DIR) + 2);
+	tmp = malloc (strlen (home) + strlen (HOME_OPTIONDIR) + 2);
 	if (tmp)
 	{
-	    sprintf (tmp, "%s/%s", home, HOME_OPTION_DIR);
+	    sprintf (tmp, "%s/%s", home, HOME_OPTIONDIR);
 	    (*homeDir) = strdup (tmp);
 	    free (tmp);
 
@@ -471,6 +494,138 @@ iniMakeDirectories (void)
 }
 
 static Bool
+findActionType(char *optionName, int *type)
+{ 
+    char * optionType = strrchr(optionName, '_');
+    if (!optionType)
+	return FALSE;
+
+    optionType++; /* skip the '_' */
+
+    int i;
+    for (i = 0; i < ACTION_TYPES_NUM; i++)
+    {
+	if (strcmp(optionType, validActionTypes[i]) == 0)
+	{
+	    if (type)
+		*type = i;
+	    return TRUE;
+	}
+    }
+
+    return FALSE;
+}
+
+static Bool
+parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *action)
+{ 
+    int type;
+    if (!findActionType(optionName, &type))
+	return FALSE; /* no action, exit the loop */
+
+    /* we have a new action */
+    if (!action->realOptionName)
+    {
+	char *optionType = strrchr(optionName, '_');
+	/* chars until the last "_" */
+	int len = strlen(optionName) - strlen(optionType);
+	
+	action->realOptionName = malloc(sizeof(char)*(len+1));
+	strncpy(action->realOptionName, optionName, len);
+	action->realOptionName[len] = '\0';
+
+	/* make sure all defaults are set */
+	action->a.type = 0;
+	action->a.key.keycode = 0;
+	action->a.key.modifiers = 0;
+	action->a.button.button = 0;
+	action->a.button.modifiers = 0;
+	action->a.bell = FALSE;
+	action->a.edgeMask = 0;
+	action->a.edgeButton = 0;
+    }
+    /* detect a new option (might happen when the options are incomplete) */
+    else if (action->valueMasks != ACTION_VALUES_ALL)
+    {
+	char *optionType = strrchr(optionName, '_');
+	/* chars until the last "_" */
+	int len = strlen(optionName) - strlen(optionType);
+	
+	char *realOptionName = malloc(sizeof(char)*(len+1));
+	strncpy(realOptionName, optionName, len);
+	realOptionName[len] = '\0';
+
+	if (strcmp(action->realOptionName, realOptionName) != 0)
+	{
+	    free(realOptionName);
+	    return FALSE;
+	}
+	
+	free(realOptionName);
+    } 
+
+    int i, j;
+    CompListValue edges;
+    switch (type)
+    {
+	case ACTION_TYPE_KEY: 
+	    if (optionValue[0] != '\0' &&
+		strcasecmp(optionValue, "disabled") != 0 &&
+		stringToKeyBinding (d, optionValue, &action->a.key))
+		action->a.type |= CompBindingTypeKey;
+	    break;
+
+	case ACTION_TYPE_BUTTON:
+	    if (optionValue[0] != '\0' &&
+		strcasecmp(optionValue, "disabled") != 0 &&
+		stringToButtonBinding (d, optionValue, &action->a.button))
+		action->a.type |= CompBindingTypeButton;
+	    break;
+
+	case ACTION_TYPE_BELL:
+	    action->a.bell  = (Bool) atoi(optionValue);
+	    break;
+
+	case ACTION_TYPE_EDGE:
+	    if (optionValue[0] != '\0' &&
+		csvToList (optionValue, &edges, CompOptionTypeString))
+	    {
+		for (i = 0; i < edges.nValue; i++)
+		{
+		    for (j = 0; j < SCREEN_EDGE_NUM; j++)
+		    {
+			if (strcasecmp (edges.value[i].s, edgeToString(j)) == 0)
+			{
+			    action->a.edgeMask |= (1 << j);
+
+			    /* found corresponding mask, next value */
+			    break; 
+			}
+		    }
+		}
+	    }
+	    break;
+
+	case ACTION_TYPE_EDGEBUTTON:
+	    action->a.edgeButton = atoi(optionValue);
+	    if (action->a.edgeButton != 0)
+		action->a.type |= CompBindingTypeEdgeButton;
+	    break;
+
+	default:
+	    break;
+    }
+
+    action->valueMasks |= actionValueMasks[type];
+
+    /* no need to read any further since all value are set */
+    if (action->valueMasks == ACTION_VALUES_ALL)
+	return FALSE;
+
+    return TRUE; /* continue loop, not finished parsing yet */
+}
+
+static Bool
 iniLoadOptionsFromFile (CompDisplay *d,
 			FILE *optionFile,
 			char *plugin,
@@ -478,9 +633,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 {
     char *optionName = NULL;
     char *optionValue = NULL;
-    char *actionTest = NULL;
-    char *actionTmp = NULL;
-    char *realOption = NULL;
     char tmp[MAX_OPTION_LENGTH];
     CompOption *option = NULL, *o;
     int nOption;
@@ -534,10 +686,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    option = compGetDisplayOptions (d, &nOption);
     }
 
-    IniActionProxy actionProxy;
-
-    initActionProxy (&actionProxy);
-
+    IniAction action;
+    action.realOptionName = NULL;
+    Bool continueReading = FALSE;
     while (fgets (&tmp[0], MAX_OPTION_LENGTH, optionFile) != NULL)
     {
 	status = FALSE;
@@ -554,42 +705,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    o = compFindOption (option, nOption, optionName, 0);
 	    if (o)
 	    {
-		if (actionProxy.nSet != 0)
-		{
-		    /* there is an action where a line is
-		       missing / out of order.  realOption
-		       should still be set from the last loop */
-
-		    value.action.type       = actionProxy.type;
-		    value.action.key        = actionProxy.key;
-		    value.action.button     = actionProxy.button;
-		    value.action.bell       = actionProxy.bell;
-		    value.action.edgeMask   = actionProxy.edgeMask;
-		    value.action.edgeButton = actionProxy.edgeButton;
-
-		    if (plugin && p)
-		    {
-			if (s)
-			    status = (*s->setScreenOptionForPlugin) (s,
-								     plugin,
-								     realOption,
-								     &value);
-			else
-			    status = (*d->setDisplayOptionForPlugin) (d, plugin,
-								      realOption,
-								      &value);
-		    }
-		    else
-		    {
-			if (s)
-			    status = (*s->setScreenOption) (s, realOption, &value);
-			else
-			    status = (*d->setDisplayOption) (d, realOption, &value);
-		    }
-
-		    initActionProxy (&actionProxy);
-		}
-
 		value = o->value;
 
 		switch (o->type)
@@ -656,147 +771,64 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    }
 	    else
 	    {
-		/* option not found, it might be an action option */
-		actionTmp = strchr (optionName, '_');
-		if (actionTmp)
+		/* an action has several values, so we need
+		   to read more then one line into our buffer */
+		continueReading = parseAction(d, optionName, optionValue, &action);
+	    }
+
+	    /* parsing action finished, write it */
+	    if (action.realOptionName &&
+		!continueReading)
+	    {
+		o = compFindOption (option, nOption, action.realOptionName, 0);
+		value = o->value;
+
+		value.action.type = action.a.type;
+		value.action.key = action.a.key;
+		value.action.button = action.a.button;
+		value.action.bell = action.a.bell;
+		value.action.edgeMask = action.a.edgeMask;
+		value.action.edgeButton = action.a.edgeButton;
+
+		if (plugin)
 		{
-		    actionTmp++;  /* skip the _ */
-		    actionTest = strchr (actionTmp, '_');
-		    while (actionTest)
-		    {
-			actionTmp++;
-			actionTest = strchr (actionTmp, '_');
-			if (actionTest)
-			    actionTmp = strchr (actionTmp, '_');
-		    }
+		    if (s)
+			status = (*s->setScreenOptionForPlugin) (s, plugin, action.realOptionName, &value);
+		    else
+			status = (*d->setDisplayOptionForPlugin) (d, plugin, action.realOptionName, &value);
+		}
+		else
+		{
+		    if (s)
+			status = (*s->setScreenOption) (s, action.realOptionName, &value);
+		    else
+			status = (*d->setDisplayOption) (d, action.realOptionName, &value);
+		}
 
-		    if (actionTmp)
-		    {
-			/* find the real option */
-			int len = strlen (optionName) - strlen (actionTmp) - 1;
-			realOption = realloc (realOption, sizeof (char) * len);
-			strncpy (realOption, optionName, len);
-			realOption[len] = '\0';
-			o = compFindOption (option, nOption, realOption, 0);
+		/* clear the buffer */
+		free(action.realOptionName);
+		action.realOptionName = NULL;
 
-			if (o)
-			{
-			    value = o->value;
-
-			    if (strcmp (actionTmp, "key") == 0)
-			    {
-				if (!*optionValue ||
-				    strcasecmp (optionValue, "disabled") == 0)
-				{
-				    actionProxy.type &= ~CompBindingTypeKey;
-				}
-				else
-				{
-				    if (stringToKeyBinding (d,
-							     optionValue,
-							     &actionProxy.key))
-					actionProxy.type |= CompBindingTypeKey;
-				}
-				actionProxy.nSet++;
-			    }
-			    else if (strcmp (actionTmp, "button") == 0)
-			    {
-				if (!*optionValue ||
-				    strcasecmp (optionValue, "disabled") == 0)
-				{
-				    actionProxy.type &= ~CompBindingTypeButton;
-				}
-				else
-				{
-				    if (stringToButtonBinding (d, optionValue,
-								&actionProxy.button))
-					actionProxy.type |= CompBindingTypeButton;
-				}
-				actionProxy.nSet++;
-			    }
-			    else if (strcmp (actionTmp, "edge") == 0)
-			    {
-				actionProxy.edgeMask = 0;
-				if (optionValue[0] != '\0')
-				{
-				    int i, e;
-				    CompListValue edges;
-
-				    if (csvToList (optionValue, &edges, CompOptionTypeString))
-				    {
-					for (i = 0; i < SCREEN_EDGE_NUM; i++)
-					{
-					    for (e=0; e<edges.nValue; e++)
-					    {
-						if (strcasecmp (edges.value[e].s, edgeToString (i)) == 0)
-						    actionProxy.edgeMask |= 1 << i;
-					    }
-					}
-				    }
-				}
-				actionProxy.nSet++;
-			    }
-			    else if (strcmp (actionTmp, "edgebutton") == 0)
-			    {
-				actionProxy.edgeButton = atoi (optionValue);
-
-				if (actionProxy.edgeButton)
-				    actionProxy.type |= CompBindingTypeEdgeButton;
-				else
-				    actionProxy.type &= ~CompBindingTypeEdgeButton;
-
-				actionProxy.nSet++;
-			    }
-			    else if (strcmp (actionTmp, "bell") == 0)
-			    {
-				actionProxy.bell = (Bool) atoi (optionValue);
-				actionProxy.nSet++;
-			    }
-
-			    if (actionProxy.nSet >= N_ACTION_PARTS)
-			    {
-				value.action.type       = actionProxy.type;
-				value.action.key        = actionProxy.key;
-				value.action.button     = actionProxy.button;
-				value.action.bell       = actionProxy.bell;
-				value.action.edgeMask   = actionProxy.edgeMask;
-				value.action.edgeButton = actionProxy.edgeButton;
-
-				if (plugin)
-				{
-				    if (s)
-					status = (*s->setScreenOptionForPlugin) (s,
-										plugin,
-										realOption,
-										&value);
-				    else
-					status = (*d->setDisplayOptionForPlugin) (d, plugin,
-										realOption,
-										&value);
-				}
-				else
-				{
-				    if (s)
-					status = (*s->setScreenOption) (s, realOption, &value);
-				    else
-					status = (*d->setDisplayOption) (d, realOption, &value);
-				}
-
-				initActionProxy (&actionProxy);
-			    }
-			}
-		    }
+		/* we missed the current line because we exited it in the first call */
+		if (!o && action.valueMasks == ACTION_VALUES_ALL)
+		{
+		    action.valueMasks = 0;
+		    parseAction(d, optionName, optionValue, &action);
+		}
+		else
+		{
+		    action.valueMasks = 0;
 		}
 	    }
 	}
-    }
 
-    if (optionName)
-	free (optionName);
-    if (optionValue)
-	free (optionValue);
-    if (realOption)
-	free (realOption);
+	/* clear up */
+	if (optionName)
+	    free (optionName);
+	if (optionValue)
+	    free (optionValue);
+	continueReading = FALSE;
+    } 
 
     return TRUE;
 }
@@ -895,7 +927,6 @@ iniSaveOptions (CompDisplay *d,
     while (nOption--)
     {
 	status = FALSE;
-	strVal = strdup ("");
 	int i;
 
 	switch (option->type)
@@ -907,8 +938,11 @@ iniSaveOptions (CompDisplay *d,
 	case CompOptionTypeColor:
 	case CompOptionTypeMatch:
 		strVal = iniOptionValueToString (&option->value, option->type);
-		if (strVal[0] != '\0')
+		if (strVal)
+		{
 		    fprintf (optionFile, "%s=%s\n", option->name, strVal);
+		    free (strVal);
+		}
 		else
 		    fprintf (optionFile, "%s=\n", option->name);
 		break;
@@ -916,47 +950,43 @@ iniSaveOptions (CompDisplay *d,
 	    firstInList = TRUE;
 	    if (option->value.action.type & CompBindingTypeKey)
 		strVal = keyBindingToString (d, &option->value.action.key);
+	    else
+		strVal = strdup ("");
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "key", strVal);
+	    free (strVal);
 
-	    strVal = strdup ("");
 	    if (option->value.action.type & CompBindingTypeButton)
 		strVal = buttonBindingToString (d, &option->value.action.button);
+	    else
+		strVal = strdup ("");
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "button", strVal);
+	    free (strVal);
 
-	    if (!(strVal = realloc (strVal, sizeof (char) * 32)))
-		return FALSE;
-	    sprintf(strVal, "%i", (int)option->value.action.bell);
+	    asprintf(&strVal, "%i", (int)option->value.action.bell);
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "bell", strVal);
+	    free (strVal);
 
-	    strVal = strdup ("");
+	    strVal = malloc (sizeof(char) * MAX_OPTION_LENGTH);
+	    strcpy (strVal, "");
 	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	    {
 		if (option->value.action.edgeMask & (1 << i))
 		{
-		    char listVal[MAX_OPTION_LENGTH];
-		    strcpy (listVal, edgeToString (i));
-		    if (!(strVal = realloc (strVal, MAX_OPTION_LENGTH)))
-			return FALSE;
-
-		    if (!firstInList)
-			strVal = strcat (strVal, ",");
-		    firstInList = FALSE;
-
-		    if (listVal)
-			strVal = strcat (strVal, listVal);
+		    strncat (strVal, edgeToString (i), MAX_OPTION_LENGTH);
+		    strncat (strVal, ",", MAX_OPTION_LENGTH);
 		}
 	    }
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edge", strVal);
+	    free (strVal);
 
-	    strVal = strdup ("");
 	    if (option->value.action.type & CompBindingTypeEdgeButton)
-		sprintf(strVal, "%i", option->value.action.edgeButton);
+		asprintf (&strVal, "%i", option->value.action.edgeButton);
 	    else
-		sprintf(strVal, "%i", 0);
+		asprintf (&strVal, "%i", 0);
 
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edgebutton", strVal);
-
-		break;
+	    free (strVal);
+  	    break;
 	case CompOptionTypeList:
 	    firstInList = TRUE;
 	    switch (option->value.list.type)
@@ -968,30 +998,30 @@ iniSaveOptions (CompDisplay *d,
 	    case CompOptionTypeColor:
 	    case CompOptionTypeMatch:
 	    {
-		if (option->value.list.nValue && 
-		    !(strVal = realloc (strVal, sizeof (char) * MAX_OPTION_LENGTH * option->value.list.nValue)))
+		int stringLen = MAX_OPTION_LENGTH * option->value.list.nValue;
+		char *itemVal;
+
+		strVal = malloc (sizeof(char) * stringLen);
+		if (!strVal)
 		    return FALSE;
+		strcpy (strVal, "");
 
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
-		    char listVal[MAX_OPTION_LENGTH];
-
-		    strncpy (listVal, iniOptionValueToString (
+		    itemVal = iniOptionValueToString (
 						&option->value.list.value[i],
-						option->value.list.type),
-						MAX_OPTION_LENGTH);
+						option->value.list.type);
 
-		    if (!firstInList)
-			strVal = strcat (strVal, ",");
-		    firstInList = FALSE;
-
-		    if (listVal)
-			strVal = strcat (strVal, listVal);
+		    if (itemVal)
+		    {
+			strncat (strVal, itemVal, stringLen);
+			free (itemVal);
+		    }
+		    strncat (strVal, ",", stringLen);
 		}
-		if (strVal[0] != '\0')
-		    fprintf (optionFile, "%s=%s\n", option->name, strVal);
-		else
-		    fprintf (optionFile, "%s=\n", option->name);
+
+		fprintf (optionFile, "%s=%s\n", option->name, strVal);
+		free (strVal);
 		break;
 	    }
 	    default:
@@ -1012,8 +1042,6 @@ iniSaveOptions (CompDisplay *d,
 
     fclose (optionFile);
 
-    if (strVal)
-	free (strVal);
     free (filename);
     free (directory);
     free (fullPath);

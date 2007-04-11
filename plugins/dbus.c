@@ -29,10 +29,13 @@
 
 #define DBUS_API_SUBJECT_TO_CHANGE
 #include <dbus/dbus.h>
+#include <libxml/xmlwriter.h>
 
 #include <compiz.h>
 
 #define COMPIZ_DBUS_SERVICE_NAME	            "org.freedesktop.compiz"
+#define COMPIZ_DBUS_INTERFACE			    "org.freedesktop.compiz"
+#define COMPIZ_DBUS_ROOT_PATH			    "/org/freedesktop/compiz"
 
 #define COMPIZ_DBUS_ACTIVATE_MEMBER_NAME            "activate"
 #define COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME          "deactivate"
@@ -61,6 +64,13 @@ typedef enum {
 
 static int displayPrivateIndex;
 
+typedef struct _DbusRegisteredPlugin DbusRegisteredPlugin;
+
+struct _DbusRegisteredPlugin {
+    char                 *name;
+    DbusRegisteredPlugin *next;
+};
+
 typedef struct _DbusDisplay {
     int screenPrivateIndex;
 
@@ -69,14 +79,31 @@ typedef struct _DbusDisplay {
 
     CompFileWatchHandle fileWatch[DBUS_FILE_WATCH_NUM];
 
+    DbusRegisteredPlugin *registeredPlugins;
+
     SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
+    InitPluginForDisplayProc      initPluginForDisplay;
+    FiniPluginForDisplayProc      finiPluginForDisplay;
 } DbusDisplay;
 
 typedef struct _DbusScreen {
+    DbusRegisteredPlugin *registeredPlugins;
+
     SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
+    InitPluginForScreenProc      initPluginForScreen;
+    FiniPluginForScreenProc      finiPluginForScreen;
 } DbusScreen;
+
+static DBusHandlerResult dbusHandleMessage (DBusConnection *,
+					    DBusMessage *,
+					    void *);
+
+static DBusObjectPathVTable dbusMessagesVTable = {
+    NULL, dbusHandleMessage, /* handler function */
+    NULL, NULL, NULL, NULL
+};
 
 #define GET_DBUS_DISPLAY(d)				     \
     ((DbusDisplay *) (d)->privates[displayPrivateIndex].ptr)
@@ -149,6 +176,497 @@ dbusGetOptionsFromPath (CompDisplay *d,
 
     return NULL;
 }
+
+/* functions to create introspection XML */
+static void
+dbusIntrospectStartInterface (xmlTextWriterPtr writer)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "interface");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name",
+				 BAD_CAST COMPIZ_DBUS_SERVICE_NAME);
+}
+
+static void
+dbusIntrospectEndInterface (xmlTextWriterPtr writer)
+{
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddArgument (xmlTextWriterPtr writer,
+			   char             *type,
+			   char             *direction)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "arg");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "type", BAD_CAST type);
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "direction",
+				 BAD_CAST direction);
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddMethod (xmlTextWriterPtr writer,
+			 char             *name,
+			 int              nArgs,
+			 ...)
+{
+    va_list var_args;
+    char *type, *direction;
+
+    xmlTextWriterStartElement (writer, BAD_CAST "method");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST name);
+
+    va_start (var_args, nArgs);
+    while (nArgs)
+    {
+	type = va_arg (var_args, char *);
+	direction = va_arg (var_args, char *);
+	dbusIntrospectAddArgument (writer, type, direction);
+	nArgs--;
+    }
+    va_end (var_args);
+
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddSignal (xmlTextWriterPtr writer,
+			 char             *name,
+			 int              nArgs,
+			 ...)
+{
+    va_list var_args;
+    char *type;
+
+    xmlTextWriterStartElement (writer, BAD_CAST "signal");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST name);
+
+    va_start (var_args, nArgs);
+    while (nArgs)
+    {
+	type = va_arg (var_args, char *);
+	dbusIntrospectAddArgument (writer, type, "out");
+	nArgs--;
+    }
+    va_end (var_args);
+
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectAddNode (xmlTextWriterPtr writer,
+		       char             *name)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "node");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST name);
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectStartRoot (xmlTextWriterPtr writer)
+{
+    xmlTextWriterStartElement (writer, BAD_CAST "node");
+
+    xmlTextWriterStartElement (writer, BAD_CAST "interface");
+    xmlTextWriterWriteAttribute (writer, BAD_CAST "name",
+				 BAD_CAST "org.freedesktop.DBus.Introspectable");
+
+    dbusIntrospectAddMethod (writer, "Introspect", 1, "s", "out");
+
+    xmlTextWriterEndElement (writer);
+}
+
+static void
+dbusIntrospectEndRoot (xmlTextWriterPtr writer)
+{
+    xmlTextWriterEndDocument (writer);
+}
+
+/* introspection handlers */
+static Bool
+dbusHandleRootIntrospectMessage (DBusConnection *connection,
+				 DBusMessage    *message,
+				 CompDisplay	*d)
+{
+    char **plugins, **pluginName;
+    int nPlugins;
+
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+    dbusIntrospectStartInterface (writer);
+
+    dbusIntrospectAddMethod (writer, COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME, 1,
+			     "as", "out");
+    dbusIntrospectAddMethod (writer,
+			     COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME, 7,
+			     "s", "in", "s", "out", "s", "out", "s", "out",
+			     "b", "out", "as", "out", "as", "out");
+    dbusIntrospectAddSignal (writer,
+			     COMPIZ_DBUS_PLUGINS_CHANGED_SIGNAL_NAME, 0);
+
+    dbusIntrospectEndInterface (writer);
+
+    plugins = availablePlugins (&nPlugins);
+    if (plugins)
+    {
+	pluginName = plugins;
+
+	while (nPlugins--)
+	{
+	    dbusIntrospectAddNode (writer, *pluginName);
+	    free (*pluginName);
+	    pluginName++;
+	}
+
+	free (plugins);
+    }
+    else
+    {
+	xmlFreeTextWriter (writer);
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    dbusIntrospectAddNode (writer, "core");
+
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandlePluginIntrospectMessage (DBusConnection *connection,
+				    DBusMessage   *message,
+				    CompDisplay	  *d,
+				    char          **path)
+{
+    CompScreen *s;
+    char screenName[256];
+
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+
+    dbusIntrospectAddNode (writer, "allscreens");
+
+    for (s = d->screens; s; s = s->next)
+    {
+	sprintf (screenName, "screen%d", s->screenNum);
+	dbusIntrospectAddNode (writer, screenName);
+    }
+
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandleScreenIntrospectMessage (DBusConnection *connection,
+				   DBusMessage    *message,
+				   CompDisplay	  *d,
+				   char           **path)
+{
+    CompOption *option = NULL;
+    int nOptions;
+
+    xmlTextWriterPtr writer;
+    xmlBufferPtr buf;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+    dbusIntrospectStartInterface (writer);
+
+    dbusIntrospectAddMethod (writer, COMPIZ_DBUS_LIST_MEMBER_NAME, 1,
+			     "as", "out");
+
+    dbusIntrospectEndInterface (writer);
+
+    option = dbusGetOptionsFromPath (d, path, NULL, &nOptions);
+    if (option)
+    {
+	while (nOptions--)
+	{
+	    dbusIntrospectAddNode (writer, option->name);
+	    option++;
+	}
+    }
+
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
+static Bool
+dbusHandleOptionIntrospectMessage (DBusConnection *connection,
+				   DBusMessage    *message,
+				   CompDisplay	  *d,
+				   char           **path)
+{
+    CompOption       *option;
+    int              nOptions;
+    CompOptionType   restrictionType;
+    Bool             getHandled, metadataHandled;
+    char             type[3];
+    xmlTextWriterPtr writer;
+    xmlBufferPtr     buf;
+    Bool             isList = FALSE;
+
+    buf = xmlBufferCreate ();
+    writer = xmlNewTextWriterMemory (buf, 0);
+
+    dbusIntrospectStartRoot (writer);
+    dbusIntrospectStartInterface (writer);
+
+    option = dbusGetOptionsFromPath (d, path, NULL, &nOptions);
+    if (!option)
+    {
+	xmlFreeTextWriter (writer);
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    while (nOptions--)
+    {
+	if (strcmp (option->name, path[2]) == 0)
+	{
+	    restrictionType = option->type;
+	    if (restrictionType == CompOptionTypeList)
+	    {
+		restrictionType = option->value.list.type;
+		isList = TRUE;
+	    }
+
+	    getHandled = metadataHandled = FALSE;
+	    switch (restrictionType)
+	    {
+	    case CompOptionTypeInt:
+		if (isList)
+		    strcpy (type, "ai");
+		else
+		    strcpy (type, "i");
+
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 6, "s", "out", "s", "out",
+					 "b", "out", "s", "out",
+					 "i", "out", "i", "out");
+		metadataHandled = TRUE;
+		break;
+	    case CompOptionTypeFloat:
+		if (isList)
+		    strcpy (type, "ad");
+		else
+		    strcpy (type, "d");
+
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 7, "s", "out", "s", "out",
+					 "b", "out", "s", "out",
+					 "d", "out", "d", "out",
+					 "d", "out");
+		metadataHandled = TRUE;
+		break;
+	    case CompOptionTypeString:
+		if (isList)
+		    strcpy (type, "as");
+		else
+		    strcpy (type, "s");
+
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 5, "s", "out", "s", "out",
+					 "b", "out", "s", "out",
+					 "as", "out");
+		metadataHandled = TRUE;
+		break;
+	    case CompOptionTypeBool:
+		if (isList)
+		    strcpy (type, "ab");
+		else
+		    strcpy (type, "b");
+
+		break;
+	    case CompOptionTypeAction:
+		dbusIntrospectAddMethod (writer, COMPIZ_DBUS_GET_MEMBER_NAME,
+					    5, "s", "out", "s", "out",
+					    "b", "out", "s", "out", "i", "out");
+		dbusIntrospectAddMethod (writer, COMPIZ_DBUS_SET_MEMBER_NAME,
+					    5, "s", "in", "s", "in",
+					    "b", "in", "s", "in", "i", "in");
+		dbusIntrospectAddSignal (writer,
+					 COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 5,
+					 "s", "out", "s", "out", "b", "out",
+					 "s", "out", "i", "out");
+		getHandled = TRUE;
+		break;
+	    case CompOptionTypeColor:
+	    case CompOptionTypeMatch:
+		if (isList)
+		    strcpy (type, "as");
+		else
+		    strcpy (type, "s");
+
+	    default:
+		break;
+	    }
+
+	    if (!getHandled)
+	    {
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_MEMBER_NAME, 1,
+					 type, "out");
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_SET_MEMBER_NAME, 1,
+					 type, "in");
+		dbusIntrospectAddSignal (writer,
+					 COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 1,
+					 type, "out");
+	    }
+
+	    if (!metadataHandled)
+		dbusIntrospectAddMethod (writer,
+					 COMPIZ_DBUS_GET_METADATA_MEMBER_NAME,
+					 4, "s", "out", "s", "out",
+					 "b", "out", "s", "out");
+	    break;
+	}
+
+	option++;
+    }
+
+    dbusIntrospectEndInterface (writer);
+    dbusIntrospectEndRoot (writer);
+
+    xmlFreeTextWriter (writer);
+
+    DBusMessage *reply = dbus_message_new_method_return (message);
+    if (!reply)
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    DBusMessageIter args;
+    dbus_message_iter_init_append (reply, &args);
+
+    if (!dbus_message_iter_append_basic (&args, DBUS_TYPE_STRING,
+					 &buf->content))
+    {
+	xmlBufferFree (buf);
+	return FALSE;
+    }
+
+    xmlBufferFree (buf);
+
+    if (!dbus_connection_send (connection, reply, NULL))
+    {
+	return FALSE;
+    }
+
+    dbus_connection_flush (connection);
+    dbus_message_unref (reply);
+
+    return TRUE;
+}
+
 
 /*
  * Activate can be used to trigger any existing action. Arguments
@@ -1212,20 +1730,6 @@ dbusHandleMessage (DBusConnection *connection,
     CompDisplay *d = (CompDisplay *) userData;
     Bool	status = FALSE;
     char	**path;
-    const char  *service, *interface, *member;
-
-    service   = dbus_message_get_destination (message);
-    interface = dbus_message_get_interface (message);
-    member    = dbus_message_get_member (message);
-
-    if (!service || !interface || !member)
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-
-    if (!dbus_message_is_method_call (message, interface, member))
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-
-    if (!dbus_message_has_destination (message, COMPIZ_DBUS_SERVICE_NAME))
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 
     if (!dbus_message_get_path_decomposed (message, &path))
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
@@ -1236,75 +1740,105 @@ dbusHandleMessage (DBusConnection *connection,
 	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
     }
 
-    if (strcmp (path[0], "org")	        ||
-	strcmp (path[1], "freedesktop") ||
-	strcmp (path[2], "compiz"))
+    /* root messages */
+    if (!path[3])
     {
-	dbus_free_string_array (path);
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-    }
-
-    if (dbus_message_has_member (message,
+	if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+					 "Introspect"))
+	{
+	    if (dbusHandleRootIntrospectMessage (connection, message, d))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
+	}
+	else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
 				 COMPIZ_DBUS_GET_PLUGIN_METADATA_MEMBER_NAME))
-    {
-	if (dbusHandleGetPluginMetadataMessage (connection, message, d))
 	{
-	    dbus_free_string_array (path);
-	    return DBUS_HANDLER_RESULT_HANDLED;
+	    if (dbusHandleGetPluginMetadataMessage (connection, message, d))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
+	}
+	else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
+	{
+	    if (dbusHandleGetPluginsMessage (connection, message, d))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
 	}
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_GET_PLUGINS_MEMBER_NAME))
+    /* plugin message */
+    else if (!path[4])
     {
-	if (dbusHandleGetPluginsMessage (connection, message, d))
+	if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+					 "Introspect"))
 	{
-	    dbus_free_string_array (path);
-	    return DBUS_HANDLER_RESULT_HANDLED;
+	    if (dbusHandlePluginIntrospectMessage (connection, message, d,
+						   &path[3]))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
 	}
     }
-
-    if (!path[3] || !path[4])
+    /* screen message */
+    else if (!path[5])
     {
-	dbus_free_string_array (path);
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
-    }
-
-    if (dbus_message_has_member (message, COMPIZ_DBUS_LIST_MEMBER_NAME))
-    {
-	if (dbusHandleListMessage (connection, message, d, &path[3]))
+	if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+					 "Introspect"))
 	{
-	    dbus_free_string_array (path);
-	    return DBUS_HANDLER_RESULT_HANDLED;
+	    if (dbusHandleScreenIntrospectMessage (connection, message, d,
+						   &path[3]))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
+	}
+	else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					      COMPIZ_DBUS_LIST_MEMBER_NAME))
+	{
+	    if (dbusHandleListMessage (connection, message, d, &path[3]))
+	    {
+		dbus_free_string_array (path);
+		return DBUS_HANDLER_RESULT_HANDLED;
+	    }
 	}
     }
-
-    if (!path[5])
+    /* option message */
+    if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
+				     "Introspect"))
     {
-	dbus_free_string_array (path);
-	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+	status = dbusHandleOptionIntrospectMessage (connection, message, d,
+						    &path[3]);
     }
-
-    if (dbus_message_has_member (message, COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_ACTIVATE_MEMBER_NAME))
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  TRUE);
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_DEACTIVATE_MEMBER_NAME))
     {
 	status = dbusHandleActionMessage (connection, message, d, &path[3],
 					  FALSE);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_SET_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_SET_MEMBER_NAME))
     {
 	status = dbusHandleSetOptionMessage (connection, message, d, &path[3]);
     }
-    else if (dbus_message_has_member (message, COMPIZ_DBUS_GET_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_GET_MEMBER_NAME))
     {
 	status = dbusHandleGetOptionMessage (connection, message, d, &path[3]);
     }
-    else if (dbus_message_has_member (message,
-				      COMPIZ_DBUS_GET_METADATA_MEMBER_NAME))
+    else if (dbus_message_is_method_call (message, COMPIZ_DBUS_INTERFACE,
+					  COMPIZ_DBUS_GET_METADATA_MEMBER_NAME))
     {
 	status = dbusHandleGetMetadataMessage (connection, message, d,
 					       &path[3]);
@@ -1386,6 +1920,390 @@ dbusSendChangeSignalForScreenOption (CompScreen *s,
 		 plugin, s->screenNum, o->name);
 	dbusSendChangeSignalForOption (s->display, o->type, &o->value, path);
     }
+}
+
+static Bool
+dbusGetPathDecomposed (char *data,
+		       char ***path)
+{
+    char **retval;
+    char *temp;
+    char *token;
+    int nComponents;
+    int i;
+
+    nComponents = 0;
+    if (strlen (data) > 1)
+    {
+	i = 0;
+	while (i < strlen (data))
+	{
+            if (data[i] == '/')
+		nComponents += 1;
+	    ++i;
+	}
+    }
+  
+    retval = malloc (sizeof (char*) * nComponents + 1);
+
+    if (nComponents == 0)
+    {
+	retval[0] = malloc (1);
+	retval[0][0] = '\0';
+	*path = retval;
+	return TRUE;
+    }
+
+    temp = strdup (data);
+
+    i = 0;
+    token = strtok (temp, "/");
+    while (token != NULL)
+    {
+	retval[i] = strdup (token);
+	token = strtok (NULL, "/");
+	i++;
+    }
+    free (temp);
+
+    *path = retval;
+    return TRUE;
+}
+
+/* dbus registration */
+
+static Bool
+dbusPluginRegistered (DbusRegisteredPlugin *list, char *pluginName)
+{
+    DbusRegisteredPlugin *reg;
+
+    reg = list;
+
+    while (reg)
+    {
+	if (strcmp (reg->name, pluginName) == 0)
+	    return TRUE;
+
+	reg = reg->next;
+    }
+
+    return FALSE;
+}
+
+static Bool
+dbusPluginAddRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
+{
+    DbusRegisteredPlugin *new;
+
+    DBUS_DISPLAY (d);
+
+    if (dbusPluginRegistered (dd->registeredPlugins, pluginName))
+	return FALSE;
+
+    new = malloc (sizeof (DbusRegisteredPlugin));
+    if (!new)
+	return FALSE;
+
+    new->name = strdup (pluginName);
+    new->next = dd->registeredPlugins;
+
+    dd->registeredPlugins = new;
+
+    return TRUE;
+}
+
+static Bool
+dbusPluginAddRegisteredPluginForScreen (CompScreen *s, char *pluginName)
+{
+    DbusRegisteredPlugin *new;
+
+    DBUS_SCREEN (s);
+
+    if (dbusPluginRegistered (ds->registeredPlugins, pluginName))
+	return FALSE;
+
+    new = malloc (sizeof (DbusRegisteredPlugin));
+    if (!new)
+	return FALSE;
+
+    new->name = strdup (pluginName);
+    new->next = ds->registeredPlugins;
+
+    ds->registeredPlugins = new;
+
+    return TRUE;
+}
+
+static Bool
+dbusPluginRemoveRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
+{
+    DbusRegisteredPlugin *remove;
+
+    DBUS_DISPLAY (d);
+
+    if (!dbusPluginRegistered (dd->registeredPlugins, pluginName))
+	return FALSE;
+
+    remove = dd->registeredPlugins;
+
+    dd->registeredPlugins = remove->next;
+
+    free (remove->name);
+    free (remove);
+
+    return TRUE;
+}
+
+static Bool
+dbusPluginRemoveRegisteredPluginForScreen (CompScreen *s, char *pluginName)
+{
+    DbusRegisteredPlugin *remove;
+
+    DBUS_SCREEN (s);
+
+    if (!dbusPluginRegistered (ds->registeredPlugins, pluginName))
+	return FALSE;
+
+    remove = ds->registeredPlugins;
+
+    ds->registeredPlugins = remove->next;
+
+    free (remove->name);
+    free (remove);
+
+    return TRUE;
+}
+
+static Bool
+dbusRegisterOptions (DBusConnection *connection,
+		     CompDisplay    *d,
+		     char           *screen_path)
+{
+    CompOption *option = NULL;
+    int nOptions, size;
+    char *option_path;
+    char **path;
+
+    dbusGetPathDecomposed (screen_path, &path);
+
+    option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
+
+    if (!option)
+	return FALSE;
+
+    while (nOptions--)
+    {
+	size = strlen (screen_path) + strlen (option->name) + 2;
+	option_path = malloc (sizeof (char) * size);
+	snprintf (option_path, size, "%s/%s", screen_path, option->name);
+
+	dbus_connection_register_object_path (connection, option_path,
+					      &dbusMessagesVTable, d);
+	free (option_path);
+	option++;
+    }
+
+    return TRUE;
+}
+
+static Bool
+dbusUnregisterOptions (DBusConnection *connection,
+		       CompDisplay    *d,
+		       char           *screen_path)
+{
+    CompOption *option = NULL;
+    int nOptions, size;
+    char *option_path;
+    char **path;
+
+    dbusGetPathDecomposed (screen_path, &path);
+
+    option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
+
+    if (!option)
+	return FALSE;
+
+    while (nOptions--)
+    {
+	size = strlen (screen_path) + strlen (option->name) + 2;
+	option_path = malloc (sizeof (char) * size);
+	snprintf (option_path, size, "%s/%s", screen_path, option->name);
+
+	dbus_connection_unregister_object_path (connection, option_path);
+	free (option_path);
+	option++;
+    }
+
+    return TRUE;
+}
+
+static void
+dbusRegisterScreen (DBusConnection *connection,
+		    CompDisplay   *d,
+		    char          *pluginName,
+		    char          *screenName)
+{
+    char *screen_path;
+    int  size;
+
+    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (pluginName) +
+		strlen (screenName) + 3;
+
+    screen_path = malloc (sizeof (char) * size);
+    snprintf (screen_path, size, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, screenName);
+    dbus_connection_register_object_path (connection, screen_path,
+					  &dbusMessagesVTable, d);
+
+    dbusRegisterOptions (connection, d, screen_path);
+    free (screen_path);
+}
+
+static void
+dbusUnregisterScreen (DBusConnection *connection,
+		      CompDisplay   *d,
+		      char          *pluginName,
+		      char          *screenName)
+{
+    char *screen_path;
+    int  size;
+
+    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (pluginName) +
+		strlen (screenName) + 3;
+
+    screen_path = malloc (sizeof (char) * size);
+    snprintf (screen_path, size, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, screenName);
+
+    dbusUnregisterOptions (connection, d, screen_path);
+    free (screen_path);
+}
+
+static void
+dbusRegisterPluginForDisplay (DBusConnection *connection,
+			      CompDisplay    *d,
+			      char           *pluginName)
+{
+    int  size;
+    char *plugin_path;
+
+    if (!dbusPluginAddRegisteredPluginForDisplay (d, pluginName))
+	return;
+
+    /* root path + plugin name + separator + \0 */
+    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (pluginName) + 2;
+    plugin_path = malloc (sizeof (char) * size);
+    snprintf (plugin_path, size, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
+
+    dbus_connection_register_object_path (connection, plugin_path,
+					  &dbusMessagesVTable, d);
+    free (plugin_path);
+
+    dbusRegisterScreen (connection, d, pluginName, "allscreens");
+}
+
+static void
+dbusRegisterPluginForScreen (DBusConnection *connection,
+			     CompScreen     *s,
+			     char           *pluginName)
+{
+    char screenName[32];
+
+    sprintf (screenName, "screen%d", s->screenNum);
+
+    if (!dbusPluginAddRegisteredPluginForScreen (s, pluginName))
+	return;
+
+    dbusRegisterScreen (connection, s->display, pluginName, screenName);
+}
+
+static void
+dbusUnregisterPluginForDisplay (DBusConnection *connection,
+			        CompDisplay    *d,
+			        char           *pluginName)
+{
+    if (!dbusPluginRemoveRegisteredPluginForDisplay (d, pluginName))
+	return;
+
+    dbusUnregisterScreen (connection, d, pluginName, "allscreens");
+}
+
+static void
+dbusUnregisterPluginForScreen (DBusConnection *connection,
+			       CompScreen     *s,
+			       char           *pluginName)
+{
+    char screenName[32];
+
+    sprintf (screenName, "screen%d", s->screenNum);
+
+    if (!dbusPluginRemoveRegisteredPluginForScreen (s, pluginName))
+	return;
+
+    dbusUnregisterScreen (connection, s->display, pluginName, screenName);
+}
+
+static Bool
+dbusInitPluginForDisplay (CompPlugin  *p,
+			  CompDisplay *d)
+{
+    DBUS_DISPLAY (d);
+    Bool status;
+
+    UNWRAP (dd, d, initPluginForDisplay);
+    status = (*d->initPluginForDisplay) (p, d);
+    WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
+
+    if (status)
+	dbusRegisterPluginForDisplay (dd->connection, d, p->vTable->name);
+
+    return status;
+}
+
+static void
+dbusFiniPluginForDisplay (CompPlugin  *p,
+			  CompDisplay *d)
+{
+    DBUS_DISPLAY (d);
+
+    dbusUnregisterPluginForDisplay (dd->connection, d, p->vTable->name);
+
+    UNWRAP (dd, d, finiPluginForDisplay);
+    (*d->finiPluginForDisplay) (p, d);
+    WRAP (dd, d, finiPluginForDisplay, dbusFiniPluginForDisplay);
+}
+
+static Bool
+dbusInitPluginForScreen (CompPlugin *p,
+			 CompScreen *s)
+{
+    Bool status;
+
+    DBUS_SCREEN (s);
+    DBUS_DISPLAY (s->display);
+
+    UNWRAP (ds, s, initPluginForScreen);
+    status = (*s->initPluginForScreen) (p, s);
+    WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
+
+    if (status)
+	dbusRegisterPluginForScreen (dd->connection, s, p->vTable->name);
+
+    return status;
+}
+
+static void
+dbusFiniPluginForScreen (CompPlugin *p,
+			 CompScreen *s)
+{
+    DBUS_SCREEN (s);
+    DBUS_DISPLAY (s->display);
+
+    dbusUnregisterPluginForScreen (dd->connection, s, p->vTable->name);
+
+    UNWRAP (ds, s, finiPluginForScreen);
+    (*s->finiPluginForScreen) (p, s);
+    WRAP (ds, s, finiPluginForScreen, dbusFiniPluginForScreen);
 }
 
 static Bool
@@ -1602,20 +2520,6 @@ dbusInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    status = dbus_connection_add_filter (dd->connection,
-					 dbusHandleMessage,
-					 d, NULL);
-    if (!status)
-    {
-	fprintf (stderr, "%s: dbus_connection_add_filter failed\n",
-		 programName);
-
-	/* dbus_connection_unref (dd->connection); */
-	free (dd);
-
-	return FALSE;
-    }
-
     status = dbus_connection_get_unix_fd (dd->connection, &fd);
     if (!status)
     {
@@ -1668,10 +2572,25 @@ dbusInitDisplay (CompPlugin  *p,
 	}
     }
 
+    /* register the objects */
+    dbus_connection_register_object_path (dd->connection,
+					  COMPIZ_DBUS_ROOT_PATH,
+					  &dbusMessagesVTable, d);
+
     WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
     WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
+    WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
+    WRAP (dd, d, finiPluginForDisplay, dbusFiniPluginForDisplay);
 
     d->privates[displayPrivateIndex].ptr = dd;
+
+    dd->registeredPlugins = NULL;
+
+    /* register core 'plugin' */
+    dbusRegisterPluginForDisplay (dd->connection, d, "core");
+
+    for (p = getPlugins (); p; p = p->next)
+	dbusRegisterPluginForDisplay (dd->connection, d, p->vTable->name);
 
     return TRUE;
 }
@@ -1700,6 +2619,8 @@ dbusFiniDisplay (CompPlugin  *p,
 
     UNWRAP (dd, d, setDisplayOption);
     UNWRAP (dd, d, setDisplayOptionForPlugin);
+    UNWRAP (dd, d, initPluginForDisplay);
+    UNWRAP (dd, d, finiPluginForDisplay);
 
     free (dd);
 }
@@ -1718,8 +2639,19 @@ dbusInitScreen (CompPlugin *p,
 
     WRAP (ds, s, setScreenOption, dbusSetScreenOption);
     WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
+    WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
+    WRAP (ds, s, finiPluginForScreen, dbusFiniPluginForScreen);
 
     s->privates[dd->screenPrivateIndex].ptr = ds;
+
+    ds->registeredPlugins = NULL;
+
+    /* register core 'plugin' */
+    dbusRegisterPluginForScreen (dd->connection, s, "core");
+
+    for (p = getPlugins (); p; p = p->next)
+	dbusRegisterPluginForScreen (dd->connection, s, p->vTable->name);
+
 
     return TRUE;
 }
@@ -1729,9 +2661,15 @@ dbusFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     DBUS_SCREEN (s);
+    DBUS_DISPLAY (s->display);
 
     UNWRAP (ds, s, setScreenOption);
     UNWRAP (ds, s, setScreenOptionForPlugin);
+    UNWRAP (ds, s, initPluginForScreen);
+    UNWRAP (ds, s, finiPluginForScreen);
+
+    /* unregister core 'plugin' */
+    dbusUnregisterPluginForScreen (dd->connection, s, "core");
 
     free (ds);
 }

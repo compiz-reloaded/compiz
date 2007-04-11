@@ -13,6 +13,10 @@ desktopfiles_in_files = compiz.desktop.in
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 noinst_DATA           = $(desktopfiles_files)
 
+xmldir       = $(datadir)/gnome-control-center/keybindings
+xml_in_files = 50-compiz-desktop-key.xml.in 50-compiz-key.xml.in
+xml_DATA     = $(xml_in_files:.xml.in=.xml)
+
 install-exec-local:
 	if mkdir -p $(moduledir) && test -w $(moduledir); then ( \
 		$(LIBTOOL) --mode=install $(INSTALL) $(libcompiz_module) \

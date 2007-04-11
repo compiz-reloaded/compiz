@@ -166,7 +166,7 @@ AC_ARG_ENABLE(dbus,
   [use_dbus=$enableval], [use_dbus=yes])
 
 if test "x$use_dbus" = "xyes"; then
-  PKG_CHECK_MODULES(DBUS, dbus-1, [use_dbus=yes], [use_dbus=no])
+  PKG_CHECK_MODULES(DBUS, dbus-1 libxml-2.0, [use_dbus=yes], [use_dbus=no])
 fi
 
 AM_CONDITIONAL(DBUS_PLUGIN, test "x$use_dbus" = "xyes")
@@ -444,6 +444,8 @@ gtk/window-decorator/Makefile
 gtk/window-decorator/gwd.schemas
 gtk/gnome/Makefile
 gtk/gnome/compiz.desktop
+gtk/gnome/50-compiz-key.xml
+gtk/gnome/50-compiz-desktop-key.xml
 kde/Makefile
 kde/window-decorator/Makefile
 po/Makefile.in
