@@ -3,7 +3,8 @@ INCLUDES =			     \
 	@GL_CFLAGS@		     \
 	-I$(top_srcdir)/include	     \
 	-DPLUGINDIR=\"$(plugindir)\" \
-	-DIMAGEDIR=\"$(imagedir)\"
+	-DIMAGEDIR=\"$(imagedir)\"   \
+	-DMETADATADIR=\"$(metadatadir)\"
 
 bin_PROGRAMS = compiz
 

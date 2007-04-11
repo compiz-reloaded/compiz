@@ -601,143 +601,89 @@ static void
 compScreenInitOptions (CompScreen *screen)
 {
     CompOption *o;
+    CompMetadata *m = coreMetadata;
 
     o = &screen->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE];
-    o->name       = "detect_refresh_rate";
+    compInitScreenOptionFromMetadata (m, o, "detect_refresh_rate");
     o->shortDesc  = N_("Detect Refresh Rate");
     o->longDesc   = N_("Automatic detection of refresh rate");
-    o->type       = CompOptionTypeBool;
-    o->value.b    = DETECT_REFRESH_RATE_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_LIGHTING];
-    o->name       = "lighting";
+    compInitScreenOptionFromMetadata (m, o, "lighting");
     o->shortDesc  = N_("Lighting");
     o->longDesc   = N_("Use diffuse light when screen is transformed");
-    o->type       = CompOptionTypeBool;
-    o->value.b    = LIGHTING_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_REFRESH_RATE];
-    o->name       = "refresh_rate";
+    compInitScreenOptionFromMetadata (m, o, "refresh_rate");
     o->shortDesc  = N_("Refresh Rate");
     o->longDesc   = N_("The rate at which the screen is redrawn "
 		       "(times/second)");
-    o->type       = CompOptionTypeInt;
     o->value.i    = defaultRefreshRate;
-    o->rest.i.min = 1;
-    o->rest.i.max = 200;
 
     o = &screen->opt[COMP_SCREEN_OPTION_HSIZE];
-    o->name	  = "hsize";
+    compInitScreenOptionFromMetadata (m, o, "hsize");
     o->shortDesc  = N_("Horizontal Virtual Size");
     o->longDesc	  = N_("Screen size multiplier for horizontal virtual size");
-    o->type	  = CompOptionTypeInt;
-    o->value.i    = SCREEN_HSIZE_DEFAULT;
-    o->rest.i.min = SCREEN_HSIZE_MIN;
-    o->rest.i.max = SCREEN_HSIZE_MAX;
 
     o = &(screen->opt[COMP_SCREEN_OPTION_VSIZE]);
-    o->name	      = "vsize";
+    compInitScreenOptionFromMetadata (m, o, "vsize");
     o->shortDesc      = N_("Vertical Virtual Size");
     o->longDesc	      = N_("Screen size multiplier for vertical virtual size");
-    o->type	      = CompOptionTypeInt;
-    o->value.i	      = SCREEN_VSIZE_DEFAULT;
-    o->rest.i.min     = SCREEN_VSIZE_MIN;
-    o->rest.i.max     = SCREEN_VSIZE_MAX;
 
     o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_STEP];
-    o->name		= "opacity_step";
+    compInitScreenOptionFromMetadata (m, o, "opacity_step");
     o->shortDesc	= N_("Opacity Step");
     o->longDesc		= N_("Opacity change step");
-    o->type		= CompOptionTypeInt;
-    o->value.i		= OPACITY_STEP_DEFAULT;
-    o->rest.i.min	= OPACITY_STEP_MIN;
-    o->rest.i.max	= OPACITY_STEP_MAX;
 
     o = &screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS];
-    o->name       = "unredirect_fullscreen_windows";
+    compInitScreenOptionFromMetadata (m, o, "unredirect_fullscreen_windows");
     o->shortDesc  = N_("Unredirect Fullscreen Windows");
     o->longDesc   = N_("Allow drawing of fullscreen windows to not be "
 		       "redirected to offscreen pixmaps");
-    o->type       = CompOptionTypeBool;
-    o->value.b    = UNREDIRECT_FS_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_DEFAULT_ICON];
-    o->name	      = "default_icon";
+    compInitScreenOptionFromMetadata (m, o, "default_icon");
     o->shortDesc      = N_("Default Icon");
     o->longDesc	      = N_("Default window icon image");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (DEFAULT_ICON_DEFAULT);
-    o->rest.s.string  = 0;
-    o->rest.s.nString = 0;
 
     o = &screen->opt[COMP_SCREEN_OPTION_SYNC_TO_VBLANK];
-    o->name       = "sync_to_vblank";
+    compInitScreenOptionFromMetadata (m, o, "sync_to_vblank");
     o->shortDesc  = N_("Sync To VBlank");
     o->longDesc   = N_("Only perform screen updates during vertical "
 		       "blanking period");
-    o->type       = CompOptionTypeBool;
-    o->value.b    = SYNC_TO_VBLANK_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS];
-    o->name	      = "number_of_desktops";
+    compInitScreenOptionFromMetadata (m, o, "number_of_desktops");
     o->shortDesc      = N_("Number of Desktops");
     o->longDesc	      = N_("Number of virtual desktops");
-    o->type	      = CompOptionTypeInt;
-    o->value.i	      = SCREEN_NUMBER_OF_DESKTOPS_DEFAULT;
-    o->rest.i.min     = SCREEN_NUMBER_OF_DESKTOPS_MIN;
-    o->rest.i.max     = SCREEN_NUMBER_OF_DESKTOPS_MAX;
 
     o = &screen->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS];
-    o->name       = "detect_outputs";
+    compInitScreenOptionFromMetadata (m, o, "detect_outputs");
     o->shortDesc  = N_("Detect Outputs");
     o->longDesc   = N_("Automatic detection of output devices");
-    o->type       = CompOptionTypeBool;
-    o->value.b    = DETECT_OUTPUTS_DEFAULT;
 
     o = &screen->opt[COMP_SCREEN_OPTION_OUTPUTS];
-    o->name	           = "outputs";
+    compInitScreenOptionFromMetadata (m, o, "outputs");
     o->shortDesc           = N_("Outputs");
     o->longDesc	           = N_("List of strings describing output devices");
-    o->type	           = CompOptionTypeList;
-    o->value.list.type     = CompOptionTypeString;
-    o->value.list.nValue   = 1;
-    o->value.list.value    = malloc (sizeof (CompOptionValue));
-    o->value.list.value->s = strdup (OUTPUTS_DEFAULT);
-    o->rest.s.string       = NULL;
-    o->rest.s.nString      = 0;
 
     o = &screen->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH];
-    o->name      = "focus_prevention_match";
+    compInitScreenOptionFromMetadata (m, o, "focus_prevention_match");
     o->shortDesc = N_("Focus Prevention Windows");
     o->longDesc  = N_("Focus prevention windows");
-    o->type      = CompOptionTypeMatch;
-
-    matchInit (&o->value.match);
-    matchAddFromString (&o->value.match, FOCUS_PREVENTION_MATCH_DEFAULT);
 
     o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_MATCHES];
-    o->name	         = "opacity_matches";
+    compInitScreenOptionFromMetadata (m, o, "opacity_matches");
     o->shortDesc         = N_("Opacity windows");
     o->longDesc	         = N_("Windows that should be translucent by "
 				"default");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeMatch;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.s.string     = NULL;
-    o->rest.s.nString    = 0;
 
     o = &screen->opt[COMP_SCREEN_OPTION_OPACITY_VALUES];
-    o->name	         = "opacity_values";
+    compInitScreenOptionFromMetadata (m, o, "opacity_values");
     o->shortDesc         = N_("Opacity window values");
     o->longDesc	         = N_("Opacity values for windows that should be "
 				"translucent by default");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeInt;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.i.min	 = 0;
-    o->rest.i.max	 = 100;
+
 }
 
 static void

@@ -45,7 +45,8 @@
 
 #include <compiz.h>
 
-Display	*dpy;
+Display	*dpy = NULL;
+CompMetadata *coreMetadata = NULL;
 
 static unsigned int virtualModMask[] = {
     CompAltMask, CompMetaMask, CompSuperMask, CompHyperMask,
@@ -98,81 +99,6 @@ int lastPointerX = 0;
 int lastPointerY = 0;
 int pointerX     = 0;
 int pointerY     = 0;
-
-#define CLICK_TO_FOCUS_DEFAULT TRUE
-
-#define AUTORAISE_DEFAULT TRUE
-
-#define AUTORAISE_DELAY_DEFAULT 1000
-#define AUTORAISE_DELAY_MIN	0
-#define AUTORAISE_DELAY_MAX	10000
-
-#define SLOW_ANIMATIONS_KEY_DEFAULT       "F10"
-#define SLOW_ANIMATIONS_MODIFIERS_DEFAULT ShiftMask
-
-#define MAIN_MENU_KEY_DEFAULT       "F1"
-#define MAIN_MENU_MODIFIERS_DEFAULT CompAltMask
-
-#define RUN_DIALOG_KEY_DEFAULT       "F2"
-#define RUN_DIALOG_MODIFIERS_DEFAULT CompAltMask
-
-#define CLOSE_WINDOW_KEY_DEFAULT       "F4"
-#define CLOSE_WINDOW_MODIFIERS_DEFAULT CompAltMask
-
-#define UNMAXIMIZE_WINDOW_KEY_DEFAULT       "F5"
-#define UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
-
-#define MINIMIZE_WINDOW_KEY_DEFAULT       "F9"
-#define MINIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
-
-#define MAXIMIZE_WINDOW_KEY_DEFAULT       "F10"
-#define MAXIMIZE_WINDOW_MODIFIERS_DEFAULT CompAltMask
-
-#define RAISE_WINDOW_BUTTON_DEFAULT    6
-#define RAISE_WINDOW_MODIFIERS_DEFAULT ControlMask
-
-#define LOWER_WINDOW_BUTTON_DEFAULT    6
-#define LOWER_WINDOW_MODIFIERS_DEFAULT CompAltMask
-
-#define SHOW_DESKTOP_KEY_DEFAULT       "d"
-#define SHOW_DESKTOP_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
-
-#define OPACITY_INCREASE_BUTTON_DEFAULT    Button4
-#define OPACITY_INCREASE_MODIFIERS_DEFAULT CompAltMask
-
-#define OPACITY_DECREASE_BUTTON_DEFAULT    Button5
-#define OPACITY_DECREASE_MODIFIERS_DEFAULT CompAltMask
-
-#define SCREENSHOT_DEFAULT               "gnome-screenshot"
-#define RUN_SCREENSHOT_KEY_DEFAULT       "Print"
-#define RUN_SCREENSHOT_MODIFIERS_DEFAULT 0
-
-#define WINDOW_SCREENSHOT_DEFAULT               "gnome-screenshot --window"
-#define RUN_WINDOW_SCREENSHOT_KEY_DEFAULT       "Print"
-#define RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT CompAltMask
-
-#define WINDOW_MENU_BUTTON_DEFAULT    Button3
-#define WINDOW_MENU_KEY_DEFAULT       "space"
-#define WINDOW_MENU_MODIFIERS_DEFAULT CompAltMask
-
-#define RAISE_ON_CLICK_DEFAULT TRUE
-
-#define AUDIBLE_BELL_DEFAULT TRUE
-
-#define HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT TRUE
-
-#define TOGGLE_WINDOW_SHADING_KEY_DEFAULT       "s"
-#define TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
-
-#define IGNORE_HINTS_WHEN_MAXIMIZED_DEFAULT TRUE
-
-#define PING_DELAY_DEFAULT 5000
-#define PING_DELAY_MIN	   1000
-#define PING_DELAY_MAX	   30000
-
-static char *textureFilter[] = { N_("Fast"), N_("Good"), N_("Best") };
-
-#define NUM_TEXTURE_FILTER (sizeof (textureFilter) / sizeof (textureFilter[0]))
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
@@ -749,198 +675,94 @@ compDisplayInitOptions (CompDisplay *display,
     CompOption *o;
     int        i;
     char       *str;
-
+    CompMetadata *m = coreMetadata;
+    
     o = &display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
-    o->name	         = "active_plugins";
+    compInitDisplayOptionFromMetadata (m, o, "active_plugins");
     o->shortDesc         = N_("Active Plugins");
     o->longDesc	         = N_("List of currently active plugins");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
     o->value.list.nValue = nPlugin;
     o->value.list.value  = malloc (sizeof (CompOptionValue) * nPlugin);
     for (i = 0; i < nPlugin; i++)
 	o->value.list.value[i].s = strdup (plugin[i]);
-    o->rest.s.string     = 0;
-    o->rest.s.nString    = 0;
 
     display->dirtyPluginList = TRUE;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TEXTURE_FILTER];
-    o->name	      = "texture_filter";
+    compInitDisplayOptionFromMetadata (m, o, "texture_filter");
     o->shortDesc      = N_("Texture Filter");
     o->longDesc	      = N_("Texture filtering");
-    o->type	      = CompOptionTypeString;
+    free (o->value.s);
     o->value.s	      = strdup (defaultTextureFilter);
-    o->rest.s.string  = textureFilter;
-    o->rest.s.nString = NUM_TEXTURE_FILTER;
 
     o = &display->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS];
-    o->name	      = "click_to_focus";
+    compInitDisplayOptionFromMetadata (m, o, "click_to_focus");
     o->shortDesc      = N_("Click To Focus");
     o->longDesc	      = N_("Click on window moves input focus to it");
-    o->type	      = CompOptionTypeBool;
-    o->value.b	      = CLICK_TO_FOCUS_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUTORAISE];
-    o->name	      = "autoraise";
+    compInitDisplayOptionFromMetadata (m, o, "autoraise");
     o->shortDesc      = N_("Auto-Raise");
     o->longDesc	      = N_("Raise selected windows after interval");
-    o->type	      = CompOptionTypeBool;
-    o->value.b	      = AUTORAISE_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUTORAISE_DELAY];
-    o->name	  = "autoraise_delay";
+    compInitDisplayOptionFromMetadata (m, o, "autoraise_delay");
     o->shortDesc  = N_("Auto-Raise Delay");
     o->longDesc	  = N_("Interval before raising selected windows");
-    o->type	  = CompOptionTypeInt;
-    o->value.i	  = AUTORAISE_DELAY_DEFAULT;
-    o->rest.i.min = AUTORAISE_DELAY_MIN;
-    o->rest.i.max = AUTORAISE_DELAY_MAX;
 
     o = &display->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW];
-    o->name			  = "close_window";
+    compInitDisplayOptionFromMetadata (m, o, "close_window");
     o->shortDesc		  = N_("Close Window");
     o->longDesc			  = N_("Close active window");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = closeWin;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = CLOSE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (CLOSE_WINDOW_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAIN_MENU];
-    o->name			  = "main_menu";
+    compInitDisplayOptionFromMetadata (m, o, "main_menu");
     o->shortDesc		  = N_("Show Main Menu");
     o->longDesc			  = N_("Show the main menu");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = mainMenu;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = MAIN_MENU_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (MAIN_MENU_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_DIALOG];
-    o->name			  = "run";
+    compInitDisplayOptionFromMetadata (m, o, "run");
     o->shortDesc		  = N_("Run Dialog");
     o->longDesc			  = N_("Show Run Application dialog");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = runDialog;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = RUN_DIALOG_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (RUN_DIALOG_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW];
-    o->name			  = "unmaximize_window";
+    compInitDisplayOptionFromMetadata (m, o, "unmaximize_window");
     o->shortDesc		  = N_("Unmaximize Window");
     o->longDesc			  = N_("Unmaximize active window");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = unmaximize;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = UNMAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (UNMAXIMIZE_WINDOW_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW];
-    o->name			  = "minimize_window";
+    compInitDisplayOptionFromMetadata (m, o, "minimize_window");
     o->shortDesc		  = N_("Minimize Window");
     o->longDesc			  = N_("Minimize active window");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = minimize;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = MINIMIZE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (MINIMIZE_WINDOW_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW];
-    o->name			  = "maximize_window";
+    compInitDisplayOptionFromMetadata (m, o, "maximize_window");
     o->shortDesc		  = N_("Maximize Window");
     o->longDesc			  = N_("Maximize active window");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = maximize;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = MAXIMIZE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (MAXIMIZE_WINDOW_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ];
-    o->name			  = "maximize_window_horizontally";
+    compInitDisplayOptionFromMetadata (m, o, "maximize_window_horizontally");
     o->shortDesc		  = N_("Maximize Window Horizontally");
     o->longDesc			  = N_("Maximize active window horizontally");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = maximizeHorizontally;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT];
-    o->name			  = "maximize_window_vertically";
+    compInitDisplayOptionFromMetadata (m, o, "maximize_window_vertically");
     o->shortDesc		  = N_("Maximize Window Vertically");
     o->longDesc			  = N_("Maximize active window vertically");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = maximizeVertically;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP];
-    o->name			  = "show_desktop";
+    compInitDisplayOptionFromMetadata (m, o, "show_desktop");
     o->shortDesc		  = N_("Hide all windows and focus desktop");
     o->longDesc			  = N_("Hide all windows and focus desktop");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = showDesktop;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = SHOW_DESKTOP_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (SHOW_DESKTOP_KEY_DEFAULT));
 
 #define COMMAND_OPTION_SHORT N_("Command line %d")
 #define COMMAND_OPTION_LONG  N_("Command line to be executed in shell when " \
@@ -951,29 +773,18 @@ compDisplayInitOptions (CompDisplay *display,
 
 #define COMMAND_OPTION(num, cname, rname)				    \
     o = &display->opt[COMP_DISPLAY_OPTION_COMMAND ## num ];		    \
-    o->name			  = cname;				    \
+    compInitDisplayOptionFromMetadata (m, o, cname);                        \
     asprintf (&str, COMMAND_OPTION_SHORT, num);				    \
     o->shortDesc		  = str;				    \
     asprintf (&str, COMMAND_OPTION_LONG, num);				    \
     o->longDesc			  = str;				    \
-    o->type			  = CompOptionTypeString;		    \
-    o->value.s			  = strdup ("");			    \
-    o->rest.s.string		  = NULL;				    \
-    o->rest.s.nString		  = 0;					    \
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_COMMAND ## num ];		    \
-    o->name			  =  rname;				    \
+    compInitDisplayOptionFromMetadata (m, o, rname);                        \
     asprintf (&str, RUN_OPTION_SHORT, num);				    \
     o->shortDesc		  = str;				    \
     asprintf (&str, RUN_OPTION_LONG, num);				    \
     o->longDesc			  = str;				    \
-    o->type		          = CompOptionTypeAction;		    \
     o->value.action.initiate      = runCommandDispatch;			    \
-    o->value.action.terminate     = 0;					    \
-    o->value.action.bell          = FALSE;				    \
-    o->value.action.edgeMask	  = 0;					    \
-    o->value.action.state	  = CompActionStateInitKey;		    \
-    o->value.action.state	 |= CompActionStateInitButton;		    \
-    o->value.action.type	  = CompBindingTypeNone
 
     COMMAND_OPTION (0, "command0", "run_command0");
     COMMAND_OPTION (1, "command1", "run_command1");
@@ -989,273 +800,128 @@ compDisplayInitOptions (CompDisplay *display,
     COMMAND_OPTION (11, "command11", "run_command11");
 
     o = &display->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS];
-    o->name			  = "slow_animations";
+    compInitDisplayOptionFromMetadata (m, o, "slow_animations");
     o->shortDesc		  = N_("Slow Animations");
     o->longDesc			  = N_("Toggle use of slow animations");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = toggleSlowAnimations;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = SLOW_ANIMATIONS_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (SLOW_ANIMATIONS_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_WINDOW];
-    o->name			     = "raise_window";
+    compInitDisplayOptionFromMetadata (m, o, "raise_window");
     o->shortDesc		     = N_("Raise Window");
     o->longDesc			     = N_("Raise window above other windows");
-    o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = raiseInitiate;
-    o->value.action.terminate        = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = RAISE_WINDOW_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = RAISE_WINDOW_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW];
-    o->name			     = "lower_window";
+    compInitDisplayOptionFromMetadata (m, o, "lower_window");
     o->shortDesc		     = N_("Lower Window");
     o->longDesc			     = N_("Lower window beneath other windows");
-    o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = lowerInitiate;
-    o->value.action.terminate        = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = LOWER_WINDOW_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = LOWER_WINDOW_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE];
-    o->name			     = "opacity_increase";
+    compInitDisplayOptionFromMetadata (m, o, "opacity_increase");
     o->shortDesc		     = N_("Increase Opacity");
     o->longDesc			     = N_("Increase window opacity");
-    o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = increaseOpacity;
-    o->value.action.terminate        = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = OPACITY_INCREASE_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = OPACITY_INCREASE_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE];
-    o->name			     = "opacity_decrease";
+    compInitDisplayOptionFromMetadata (m, o, "opacity_decrease");
     o->shortDesc		     = N_("Decrease Opacity");
     o->longDesc			     = N_("Decrease window opacity");
-    o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = decreaseOpacity;
-    o->value.action.terminate        = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = OPACITY_DECREASE_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = OPACITY_DECREASE_BUTTON_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT];
-    o->name			  = "run_command_screenshot";
+    compInitDisplayOptionFromMetadata (m, o, "run_command_screenshot");
     o->shortDesc		  = N_("Take a screenshot");
     o->longDesc			  = N_("Take a screenshot");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = runCommandScreenshot;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = RUN_SCREENSHOT_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (RUN_SCREENSHOT_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_SCREENSHOT];
-    o->name			  = "command_screenshot";
+    compInitDisplayOptionFromMetadata (m, o, "command_screenshot");
     o->shortDesc		  = N_("Screenshot command line");
     o->longDesc			  = N_("Screenshot command line");
-    o->type			  = CompOptionTypeString;
-    o->value.s			  = strdup (SCREENSHOT_DEFAULT);
-    o->rest.s.string		  = NULL;
-    o->rest.s.nString		  = 0;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT];
-    o->name			  = "run_command_window_screenshot";
+    compInitDisplayOptionFromMetadata (m, o, "run_command_window_screenshot");
     o->shortDesc		  = N_("Take a screenshot of a window");
     o->longDesc			  = N_("Take a screenshot of a window");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = runCommandWindowScreenshot;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers =
-	RUN_WINDOW_SCREENSHOT_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (RUN_WINDOW_SCREENSHOT_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT];
-    o->name			  = "command_window_screenshot";
+    compInitDisplayOptionFromMetadata (m, o, "command_window_screenshot");
     o->shortDesc		  = N_("Window screenshot command line");
     o->longDesc			  = N_("Window screenshot command line");
-    o->type			  = CompOptionTypeString;
-    o->value.s			  = strdup (WINDOW_SCREENSHOT_DEFAULT);
-    o->rest.s.string		  = NULL;
-    o->rest.s.nString		  = 0;
 
     o = &display->opt[COMP_DISPLAY_OPTION_WINDOW_MENU];
-    o->name			     = "window_menu";
+    compInitDisplayOptionFromMetadata (m, o, "window_menu");
     o->shortDesc		     = N_("Window Menu");
     o->longDesc			     = N_("Open window menu");
-    o->type			     = CompOptionTypeAction;
     o->value.action.initiate	     = windowMenu;
-    o->value.action.terminate        = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = WINDOW_MENU_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = WINDOW_MENU_BUTTON_DEFAULT;
-    o->value.action.type	    |= CompBindingTypeKey;
-    o->value.action.key.modifiers    = WINDOW_MENU_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode      =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (WINDOW_MENU_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK];
-    o->name	      = "raise_on_click";
+    compInitDisplayOptionFromMetadata (m, o, "raise_on_click");
     o->shortDesc      = N_("Raise On Click");
     o->longDesc	      = N_("Raise windows when clicked");
-    o->type	      = CompOptionTypeBool;
-    o->value.b	      = RAISE_ON_CLICK_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_AUDIBLE_BELL];
-    o->name	      = "audible_bell";
+    compInitDisplayOptionFromMetadata (m, o, "audible_bell");
     o->shortDesc      = N_("Audible Bell");
     o->longDesc	      = N_("Audible system beep");
-    o->type	      = CompOptionTypeBool;
-    o->value.b	      = AUDIBLE_BELL_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED];
-    o->name			  = "toggle_window_maximized";
+    compInitDisplayOptionFromMetadata (m, o, "toggle_window_maximized");
     o->shortDesc		  = N_("Toggle Window Maximized");
     o->longDesc			  = N_("Toggle active window maximized");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = toggleMaximized;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ];
-    o->name			  = "toggle_window_maximized_horizontally";
+    compInitDisplayOptionFromMetadata (m, o,
+				       "toggle_window_maximized_horizontally");
     o->shortDesc		  = N_("Toggle Window Maximized Horizontally");
     o->longDesc			  =
 	N_("Toggle active window maximized horizontally");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = toggleMaximizedHorizontally;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT];
-    o->name			  = "toggle_window_maximized_vertically";
+    compInitDisplayOptionFromMetadata (m, o,
+				       "toggle_window_maximized_vertically");
     o->shortDesc		  = N_("Toggle Window Maximized Vertically");
     o->longDesc			  =
 	N_("Toggle active window maximized vertically");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = toggleMaximizedVertically;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS];
-    o->name	 = "hide_skip_taskbar_windows";
+    compInitDisplayOptionFromMetadata (m, o, "hide_skip_taskbar_windows");
     o->shortDesc = N_("Hide Skip Taskbar Windows");
     o->longDesc	 = N_("Hide windows not in taskbar when entering show "
 	"desktop mode");
-    o->type	 = CompOptionTypeBool;
-    o->value.b	 = HIDE_SKIP_TASKBAR_WINDOWS_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED];
-    o->name			  = "toggle_window_shaded";
+    compInitDisplayOptionFromMetadata (m, o, "toggle_window_shaded");
     o->shortDesc		  = N_("Toggle Window Shaded");
     o->longDesc			  = N_("Toggle active window shaded");
-    o->type		          = CompOptionTypeAction;
     o->value.action.initiate      = shade;
-    o->value.action.terminate     = 0;
-    o->value.action.bell          = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = TOGGLE_WINDOW_SHADING_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display->display,
-			  XStringToKeysym (TOGGLE_WINDOW_SHADING_KEY_DEFAULT));
 
     o = &display->opt[COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED];
-    o->name	 = "ignore_hints_when_maximized";
+    compInitDisplayOptionFromMetadata (m, o, "ignore_hints_when_maximized");
     o->shortDesc = N_("Ignore Hints When Maximized");
     o->longDesc	 = N_("Ignore size increment and aspect hints when window is "
 	"maximized");
-    o->type	 = CompOptionTypeBool;
-    o->value.b	 = IGNORE_HINTS_WHEN_MAXIMIZED_DEFAULT;
 
     o = &display->opt[COMP_DISPLAY_OPTION_TERMINAL];
-    o->name	      = "command_terminal";
+    compInitDisplayOptionFromMetadata (m, o, "command_terminal");
     o->shortDesc      = N_("Terminal command line");
     o->longDesc	      = N_("Terminal command line");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup ("");
-    o->rest.s.string  = NULL;
-    o->rest.s.nString = 0;
 
     o = &display->opt[COMP_DISPLAY_OPTION_RUN_TERMINAL];
-    o->name		      = "run_command_terminal";
+    compInitDisplayOptionFromMetadata (m, o, "run_command_terminal");
     o->shortDesc	      = N_("Open a terminal");
     o->longDesc		      = N_("Open a terminal");
-    o->type		      = CompOptionTypeAction;
     o->value.action.initiate  = runCommandTerminal;
-    o->value.action.terminate = 0;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.state     = CompActionStateInitKey;
-    o->value.action.state    |= CompActionStateInitButton;
-    o->value.action.type      = CompBindingTypeNone;
 
     o = &display->opt[COMP_DISPLAY_OPTION_PING_DELAY];
-    o->name	  = "ping_delay";
+    compInitDisplayOptionFromMetadata (m, o, "ping_delay");
     o->shortDesc  = N_("Ping Delay");
     o->longDesc	  = N_("Interval between ping messages");
-    o->type	  = CompOptionTypeInt;
-    o->value.i	  = PING_DELAY_DEFAULT;
-    o->rest.i.min = PING_DELAY_MIN;
-    o->rest.i.max = PING_DELAY_MAX;
 }
 
 CompOption *
@@ -2545,6 +2211,15 @@ addDisplay (char *name,
 	return FALSE;
     }
 
+    coreMetadata = compGetMetadataFromFile (METADATADIR "/compiz.metadata",
+					    NULL);
+    if (!coreMetadata)
+    {
+	fprintf (stderr, "%s: Couldn't initialize core metadata\n",
+		 programName);
+	return FALSE;
+    }
+    
     compDisplayInitOptions (d, plugin, nPlugin);
 
     snprintf (d->displayString, 255, "DISPLAY=%s", DisplayString (dpy));

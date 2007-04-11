@@ -236,6 +236,8 @@ extern int pointerY;
 
 extern Display *dpy;
 
+extern CompMetadata *coreMetadata;
+
 #define RESTRICT_VALUE(value, min, max)				     \
     (((value) < (min)) ? (min): ((value) > (max)) ? (max) : (value))
 

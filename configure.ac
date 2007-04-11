@@ -78,6 +78,10 @@ AC_SUBST(plugindir)
 imagedir=$datadir/compiz
 AC_SUBST(imagedir)
 
+metadatadir=$libdir/compiz
+AC_SUBST(metadatadir)
+
+
 COMPIZ_REQUIRES="libpng	    \
 		 xcomposite \
 		 xfixes	    \
@@ -450,6 +454,7 @@ gtk/gnome/50-compiz-desktop-key.xml
 kde/Makefile
 kde/window-decorator/Makefile
 po/Makefile.in
+metadata/Makefile
 ])
 
 echo ""
