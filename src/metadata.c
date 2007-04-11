@@ -56,6 +56,12 @@ compGetMetadataFromFile (const char *file, const char *plugin)
 {
     xmlDoc *doc = NULL;
     CompMetadata *m;
+    char str[1024];
+
+    if (plugin)
+	snprintf (str, 1024, "plugin[@name=\"%s\"]", plugin);
+    else
+	strcpy (str, "general");
 
     if (!file)
 	return NULL;
@@ -69,7 +75,12 @@ compGetMetadataFromFile (const char *file, const char *plugin)
 	return NULL;
     }
     m = malloc (sizeof(CompMetadata));
-    m->plugin = (plugin) ? strdup(plugin) : strdup("");
+    m->path = strdup (str);
+    if (!m->path)
+    {
+	free (m);
+	return FALSE;
+    }
     m->doc = doc;
     return m;
 }
@@ -79,6 +90,12 @@ compGetMetadataFromString (const char *string, const char *plugin)
 {
     xmlDoc *doc = NULL;
     CompMetadata *m;
+    char str[1024];
+
+    if (plugin)
+	snprintf (str, 1024, "plugin[@name=\"%s\"]", plugin);
+    else
+	strcpy (str, "general");
 
     if (!string)
 	return NULL;
@@ -91,7 +108,12 @@ compGetMetadataFromString (const char *string, const char *plugin)
 	return NULL;
     }
     m = malloc (sizeof(CompMetadata));
-    m->plugin = (plugin) ? strdup(plugin) : strdup("");
+    m->path = strdup (str);
+    if (!m->path)
+    {
+	free (m);
+	return FALSE;
+    }
     m->doc = doc;
     return m;
 }
@@ -103,7 +125,7 @@ compFreeMetadata (CompMetadata *data)
 	return;
     
     xmlFreeDoc (data->doc);
-    free (data->plugin);
+    free (data->path);
 }
 
 static Bool
@@ -937,17 +959,8 @@ compInitScreenOptionFromMetadata (CompScreen   *s,
     if (!m || !o || !name)
 	return FALSE;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/screen//"
-		"option[@name=\"%s\"]", m->plugin, name);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/screen//"
-		"option[@name=\"%s\"]", name);
-    }
-    
+    sprintf (str, "/compiz/%s/screen//option[@name=\"%s\"]", m->path, name);
+
     return initOptionFromMetadataPath (s->display, m, o, BAD_CAST str);
 }
 
@@ -962,17 +975,8 @@ compInitDisplayOptionFromMetadata (CompDisplay  *d,
     if (!m || !o || !name)
 	return FALSE;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/display//"
-		"option[@name=\"%s\"]", m->plugin, name);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/display//"
-		"option[@name=\"%s\"]", name);
-    }
-    
+    sprintf (str, "/compiz/%s/display//option[@name=\"%s\"]", m->path, name);
+
     return initOptionFromMetadataPath (d, m, o, BAD_CAST str);
 }
 
@@ -1008,16 +1012,8 @@ compGetShortPluginDescription (CompMetadata *m)
     if (!m)
 	return NULL;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/short/child::text()",
-		 m->plugin);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/short/child::text()");
-    }
-    
+    sprintf (str, "/compiz/%s/short/child::text()", m->path);
+
     return compGetStringFromMetadataPath (m, str);
 }
 
@@ -1029,16 +1025,8 @@ compGetLongPluginDescription (CompMetadata *m)
     if (!m)
 	return NULL;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/long/child::text()",
-		 m->plugin);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/long/child::text()");
-    }
-    
+    sprintf (str, "/compiz/%s/long/child::text()", m->path);
+
     return compGetStringFromMetadataPath (m, str);
 }
 
@@ -1051,18 +1039,9 @@ compGetShortScreenOptionDescription (CompMetadata *m,
     if (!m)
 	return NULL;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/screen//"
-		"option[@name=\"%s\"]/short/child::text()",
-		m->plugin, o->name);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/screen//"
-		"option[@name=\"%s\"]/short/child::text()", o->name);
-    }
-    
+    sprintf (str, "/compiz/%s/screen//option[@name=\"%s\"]/short/child::text()",
+	     m->path, o->name);
+
     return compGetStringFromMetadataPath (m, str);
 }
 
@@ -1075,18 +1054,9 @@ compGetLongScreenOptionDescription (CompMetadata *m,
     if (!m)
 	return NULL;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/screen//"
-		"option[@name=\"%s\"]/long/child::text()",
-		m->plugin, o->name);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/screen//"
-		"option[@name=\"%s\"]/long/child::text()", o->name);
-    }
-    
+    sprintf (str, "/compiz/%s/screen//option[@name=\"%s\"]/long/child::text()",
+	     m->path, o->name);
+
     return compGetStringFromMetadataPath (m, str);
 }
 
@@ -1100,18 +1070,10 @@ compGetShortDisplayOptionDescription (CompMetadata *m,
     if (!m)
 	return NULL;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/display//"
-		"option[@name=\"%s\"]/short/child::text()",
-		m->plugin, o->name);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/display//"
-		"option[@name=\"%s\"]/short/child::text()", o->name);
-    }
-    
+    sprintf (str,
+	     "/compiz/%s/display//option[@name=\"%s\"]/short/child::text()",
+	     m->path, o->name);
+
     return compGetStringFromMetadataPath (m, str);
 }
 
@@ -1125,17 +1087,8 @@ compGetLongDisplayOptionDescription (CompMetadata *m,
     if (!m)
 	return NULL;
 
-    if (strlen (m->plugin))
-    {
-	sprintf (str, "/compiz/plugin[@name=\"%s\"]/display//"
-		"option[@name=\"%s\"]/long/child::text()",
-		m->plugin, o->name);
-    }
-    else
-    {
-	sprintf (str, "/compiz/general/display//"
-		"option[@name=\"%s\"]/long/child::text()", o->name);
-    }
-    
+    sprintf (str, "/compiz/%s/display//option[@name=\"%s\"]/long/child::text()",
+	     m->path, o->name);
+
     return compGetStringFromMetadataPath (m, str);
 }

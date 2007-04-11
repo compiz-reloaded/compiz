@@ -3064,7 +3064,7 @@ matchPropertyChanged (CompDisplay *display,
 /* metadata.c */
 
 struct _CompMetadata {
-    char   *plugin;
+    char   *path;
     xmlDoc *doc;
 };
 
