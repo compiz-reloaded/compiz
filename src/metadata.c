@@ -75,7 +75,7 @@ compGetMetadataFromFile (const char *file, const char *plugin)
 }
 
 CompMetadata *
-compGetMetadataFromString (char *string, const char *plugin)
+compGetMetadataFromString (const char *string, const char *plugin)
 {
     xmlDoc *doc = NULL;
     CompMetadata *m;

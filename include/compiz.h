@@ -3073,7 +3073,7 @@ compGetMetadataFromFile (const char *file,
 			 const char *plugin);
 
 CompMetadata *
-compGetMetadataFromString (char	      *string,
+compGetMetadataFromString (const char *string,
 			   const char *plugin);
 
 void
