@@ -444,6 +444,8 @@ gtk/window-decorator/Makefile
 gtk/window-decorator/gwd.schemas
 gtk/gnome/Makefile
 gtk/gnome/compiz.desktop
+gtk/gnome/50-compiz-key.xml
+gtk/gnome/50-compiz-desktop-key.xml
 kde/Makefile
 kde/window-decorator/Makefile
 po/Makefile.in
