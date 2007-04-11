@@ -90,8 +90,8 @@ COMPIZ_REQUIRES="libpng	    \
 		 xinerama   \
 		 ice	    \
 		 sm	    \
-		 libstartup-notification-1.0 >= 0.7 \
-                 libxml-2.0"
+		 libxml-2.0 \
+		 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
 AC_SUBST(COMPIZ_REQUIRES)
