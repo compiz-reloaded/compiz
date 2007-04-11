@@ -63,9 +63,6 @@ compGetMetadataFromFile (const char *file, const char *plugin)
     else
 	strcpy (str, "general");
 
-    if (!file)
-	return NULL;
-    
     doc = xmlReadFile (file, NULL, 0);
     if (!doc)
     {
@@ -97,9 +94,6 @@ compGetMetadataFromString (const char *string, const char *plugin)
     else
 	strcpy (str, "general");
 
-    if (!string)
-	return NULL;
-
     doc = xmlReadMemory (string, strlen(string), NULL, NULL, 0);
     if (!doc)
     {
@@ -121,9 +115,6 @@ compGetMetadataFromString (const char *string, const char *plugin)
 void
 compFreeMetadata (CompMetadata *data)
 {
-    if (!data)
-	return;
-    
     xmlFreeDoc (data->doc);
     free (data->path);
 }
@@ -955,9 +946,6 @@ compInitScreenOptionFromMetadata (CompScreen   *s,
 				  const char *name)
 {
     char str[1024];
-    
-    if (!m || !o || !name)
-	return FALSE;
 
     sprintf (str, "/compiz/%s/screen//option[@name=\"%s\"]", m->path, name);
 
@@ -971,9 +959,6 @@ compInitDisplayOptionFromMetadata (CompDisplay  *d,
 				   const char *name)
 {
     char str[1024];
-    
-    if (!m || !o || !name)
-	return FALSE;
 
     sprintf (str, "/compiz/%s/display//option[@name=\"%s\"]", m->path, name);
 
@@ -1008,9 +993,6 @@ char *
 compGetShortPluginDescription (CompMetadata *m)
 {
     char str[1024];
-    
-    if (!m)
-	return NULL;
 
     sprintf (str, "/compiz/%s/short/child::text()", m->path);
 
@@ -1021,9 +1003,6 @@ char *
 compGetLongPluginDescription (CompMetadata *m)
 {
     char str[1024];
-    
-    if (!m)
-	return NULL;
 
     sprintf (str, "/compiz/%s/long/child::text()", m->path);
 
@@ -1035,9 +1014,6 @@ compGetShortScreenOptionDescription (CompMetadata *m,
 				     CompOption   *o)
 {
     char str[1024];
-    
-    if (!m)
-	return NULL;
 
     sprintf (str, "/compiz/%s/screen//option[@name=\"%s\"]/short/child::text()",
 	     m->path, o->name);
@@ -1050,9 +1026,6 @@ compGetLongScreenOptionDescription (CompMetadata *m,
 				    CompOption   *o)
 {
     char str[1024];
-    
-    if (!m)
-	return NULL;
 
     sprintf (str, "/compiz/%s/screen//option[@name=\"%s\"]/long/child::text()",
 	     m->path, o->name);
@@ -1066,9 +1039,6 @@ compGetShortDisplayOptionDescription (CompMetadata *m,
 				      CompOption   *o)
 {
     char str[1024];
-    
-    if (!m)
-	return NULL;
 
     sprintf (str,
 	     "/compiz/%s/display//option[@name=\"%s\"]/short/child::text()",
@@ -1083,9 +1053,6 @@ compGetLongDisplayOptionDescription (CompMetadata *m,
 				     CompOption   *o)
 {
     char str[1024];
-    
-    if (!m)
-	return NULL;
 
     sprintf (str, "/compiz/%s/display//option[@name=\"%s\"]/long/child::text()",
 	     m->path, o->name);
