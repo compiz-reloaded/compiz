@@ -210,6 +210,48 @@ compAddMetadataFromString (CompMetadata *metadata,
     return TRUE;
 }
 
+typedef struct _CompXPath {
+    xmlXPathObjectPtr  obj;
+    xmlXPathContextPtr ctx;
+} CompXPath;
+
+static Bool
+initXPathFromMetadataPath (CompXPath	 *xPath,
+			   CompMetadata  *metadata,
+			   const xmlChar *path)
+{
+    xmlXPathObjectPtr  obj;
+    xmlXPathContextPtr ctx;
+    int		       i;
+
+    for (i = 0; i < metadata->nDoc; i++)
+    {
+	ctx = xmlXPathNewContext (metadata->doc[i]);
+	if (ctx)
+	{
+	    obj = xmlXPathEvalExpression (path, ctx);
+	    if (obj)
+	    {
+		xPath->ctx = ctx;
+		xPath->obj = obj;
+
+		return TRUE;
+	    }
+
+	    xmlXPathFreeContext (ctx);
+	}
+    }
+
+    return FALSE;
+}
+
+static void
+finiXPath (CompXPath *xPath)
+{
+    xmlXPathFreeObject (xPath->obj);
+    xmlXPathFreeContext (xPath->ctx);
+}
+
 static Bool
 getOptionType (char *type, CompOptionType *oType)
 {
@@ -1005,29 +1047,26 @@ initOptionFromNode (CompDisplay *d, CompOption *o, xmlNodePtr node)
 }
 
 static Bool
-initOptionFromMetadataPath (CompDisplay  *d,
-			    CompMetadata *m,
-			    CompOption *o,
+initOptionFromMetadataPath (CompDisplay   *d,
+			    CompMetadata  *metadata,
+			    CompOption	  *option,
 			    const xmlChar *path)
 {
-    xmlXPathObjectPtr xpathObj;
-    xmlXPathContextPtr xpathCtx;
-    int i;
-    int size;
-    Bool rv = FALSE;
+    CompXPath xPath;
+    int	      size, i;
 
-    xpathCtx = xmlXPathNewContext (m->doc[0]);
-    xpathObj = xmlXPathEvalExpression (path, xpathCtx);
-    if (!xpathObj)
-        return FALSE;
+    if (!initXPathFromMetadataPath (&xPath, metadata, BAD_CAST path))
+	return FALSE;
 
-    size = (xpathObj->nodesetval)? xpathObj->nodesetval->nodeNr : 0;
-    for (i = 0; i < size && !rv; i++)
-	rv |= initOptionFromNode (d, o, xpathObj->nodesetval->nodeTab[i]);
-    
-    xmlXPathFreeObject (xpathObj);
-    xmlXPathFreeContext (xpathCtx);
-    return rv;
+    size = (xPath.obj->nodesetval) ? xPath.obj->nodesetval->nodeNr : 0;
+
+    for (i = 0; i < size; i++)
+	if (initOptionFromNode (d, option, xPath.obj->nodesetval->nodeTab[i]))
+	    break;
+
+    finiXPath (&xPath);
+
+    return (i < size) ? TRUE : FALSE;
 }
 
 Bool
@@ -1060,24 +1099,20 @@ char *
 compGetStringFromMetadataPath (CompMetadata *m,
 			       char         *path)
 {
-    xmlXPathObjectPtr xpathObj;
-    xmlXPathContextPtr xpathCtx;
-    char *rv = NULL;
+    CompXPath xPath;
+    char      *v = NULL;
 
-    xpathCtx = xmlXPathNewContext (m->doc[0]);
-    xpathObj = xmlXPathEvalExpression (BAD_CAST path, xpathCtx);
-    if (!xpathObj)
-        return NULL;
-    xpathObj = xmlXPathConvertString (xpathObj);
+    if (!initXPathFromMetadataPath (&xPath, m, BAD_CAST path))
+	return NULL;
 
-    if (xpathObj->type == XPATH_STRING && xpathObj->stringval)
-    {
-	rv = strdup ((char *) xpathObj->stringval);
-    }
+    xPath.obj = xmlXPathConvertString (xPath.obj);
 
-    xmlXPathFreeObject (xpathObj);
-    xmlXPathFreeContext (xpathCtx);
-    return rv;
+    if (xPath.obj->type == XPATH_STRING && xPath.obj->stringval)
+	v = strdup ((char *) xPath.obj->stringval);
+
+    finiXPath (&xPath);
+
+    return v;
 }
 
 char *
