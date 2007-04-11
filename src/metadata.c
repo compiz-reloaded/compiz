@@ -6,9 +6,9 @@
  * fee, provided that the above copyright notice appear in all copies
  * and that both that copyright notice and this permission notice
  * appear in supporting documentation, and that the name of
- * Mike Dransfield not be used in advertising or publicity pertaining to
+ * Dennis Kasprzyk not be used in advertising or publicity pertaining to
  * distribution of the software without specific, written prior permission.
- * Mike Dransfield makes no representations about the suitability of this
+ * Dennis Kasprzyk makes no representations about the suitability of this
  * software for any purpose. It is provided "as is" without express or
  * implied warranty.
  *
