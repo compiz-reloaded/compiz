@@ -3060,59 +3060,61 @@ void
 matchPropertyChanged (CompDisplay *display,
 		      CompWindow  *window);
 
+
 /* metadata.c */
 
-struct _CompMetadata
-{
-    char               *plugin;
-    xmlDoc             *doc;
+struct _CompMetadata {
+    char   *plugin;
+    xmlDoc *doc;
 };
 
 CompMetadata *
-compGetMetadataFromFile (const char *file, const char *plugin);
+compGetMetadataFromFile (const char *file,
+			 const char *plugin);
 
 CompMetadata *
-compGetMetadataFromString (char *string, const char *plugin);
+compGetMetadataFromString (char	      *string,
+			   const char *plugin);
 
 void
 compFreeMetadata (CompMetadata *data);
 
 Bool
-compInitScreenOptionFromMetadata (CompScreen   *s,
-				  CompMetadata *m,
-				  CompOption   *o,
+compInitScreenOptionFromMetadata (CompScreen   *screen,
+				  CompMetadata *metadata,
+				  CompOption   *option,
 				  const char   *name);
 
 Bool
-compInitDisplayOptionFromMetadata (CompDisplay  *d,
-				   CompMetadata *m,
-				   CompOption   *o,
+compInitDisplayOptionFromMetadata (CompDisplay  *display,
+				   CompMetadata *metadata,
+				   CompOption   *option,
 				   const char   *name);
 char *
-compGetStringFromMetadataPath (CompMetadata *m,
+compGetStringFromMetadataPath (CompMetadata *metadata,
 			       char         *path);
 
 char *
-compGetShortPluginDescription (CompMetadata *m);
+compGetShortPluginDescription (CompMetadata *metadata);
 
 char *
-compGetLongPluginDescription (CompMetadata *m);
+compGetLongPluginDescription (CompMetadata *metadata);
 
 char *
-compGetShortScreenOptionDescription (CompMetadata *m,
-				     CompOption   *o);
+compGetShortScreenOptionDescription (CompMetadata *metadata,
+				     CompOption   *option);
 
 char *
-compGetLongScreenOptionDescription (CompMetadata *m,
-				    CompOption   *o);
+compGetLongScreenOptionDescription (CompMetadata *metadata,
+				    CompOption   *option);
 
 char *
-compGetShortDisplayOptionDescription (CompMetadata *m,
-				      CompOption   *o);
+compGetShortDisplayOptionDescription (CompMetadata *metadata,
+				      CompOption   *option);
 
 char *
-compGetLongDisplayOptionDescription (CompMetadata *m,
-				     CompOption   *o);
+compGetLongDisplayOptionDescription (CompMetadata *metadata,
+				     CompOption   *option);
 
 
 #ifdef  __cplusplus
