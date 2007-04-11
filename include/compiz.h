@@ -3065,7 +3065,8 @@ matchPropertyChanged (CompDisplay *display,
 
 struct _CompMetadata {
     char   *path;
-    xmlDoc *doc;
+    xmlDoc **doc;
+    int    nDoc;
 };
 
 Bool

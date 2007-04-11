@@ -61,7 +61,8 @@ compInitMetadata (CompMetadata *metadata)
     if (!metadata->path)
 	return FALSE;
 
-    metadata->doc = NULL;
+    metadata->doc  = NULL;
+    metadata->nDoc = 0;
 
     return TRUE;
 }
@@ -78,7 +79,8 @@ compInitPluginMetadata (CompMetadata *metadata,
     if (!metadata->path)
 	return FALSE;
 
-    metadata->doc = NULL;
+    metadata->doc  = NULL;
+    metadata->nDoc = 0;
 
     return TRUE;
 }
@@ -86,8 +88,13 @@ compInitPluginMetadata (CompMetadata *metadata,
 void
 compFiniMetadata (CompMetadata *metadata)
 {
+    int i;
+
+    for (i = 0; i < metadata->nDoc; i++)
+	xmlFreeDoc (metadata->doc[i]);
+
     if (metadata->doc)
-	xmlFreeDoc (metadata->doc);
+	free (metadata->doc);
 
     free (metadata->path);
 }
@@ -133,7 +140,7 @@ Bool
 compAddMetadataFromFile (CompMetadata *metadata,
 			 const char   *file)
 {
-    xmlDoc *doc;
+    xmlDoc **d, *doc = NULL;
     char   *home;
 
     home = getenv ("HOME");
@@ -147,26 +154,31 @@ compAddMetadataFromFile (CompMetadata *metadata,
 	    sprintf (path, "%s/%s", home, HOME_METADATADIR);
 	    doc = readXmlFile (path, file);
 	    free (path);
-
-	    if (doc)
-	    {
-		metadata->doc = doc;
-		return TRUE;
-	    }
 	}
     }
 
-    doc = readXmlFile (METADATADIR, file);
     if (!doc)
     {
-	fprintf (stderr,
-		 "%s: Unable to parse XML metadata from file \"%s%s\"\n",
-		 programName, file, EXTENSION);
+	doc = readXmlFile (METADATADIR, file);
+	if (!doc)
+	{
+	    fprintf (stderr,
+		     "%s: Unable to parse XML metadata from file \"%s%s\"\n",
+		     programName, file, EXTENSION);
 
+	    return FALSE;
+	}
+    }
+
+    d = realloc (metadata->doc, (metadata->nDoc + 1) * sizeof (xmlDoc *));
+    if (!d)
+    {
+	xmlFreeDoc (doc);
 	return FALSE;
     }
 
-    metadata->doc = doc;
+    d[metadata->nDoc++] = doc;
+    metadata->doc = d;
 
     return TRUE;
 }
@@ -175,13 +187,25 @@ Bool
 compAddMetadataFromString (CompMetadata *metadata,
 			   const char   *string)
 {
-    metadata->doc = xmlReadMemory (string, strlen (string), NULL, NULL, 0);
-    if (!metadata->doc)
+    xmlDoc **d, *doc;
+
+    doc = xmlReadMemory (string, strlen (string), NULL, NULL, 0);
+    if (!doc)
     {
 	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
 
 	return FALSE;
     }
+
+    d = realloc (metadata->doc, (metadata->nDoc + 1) * sizeof (xmlDoc *));
+    if (!d)
+    {
+	xmlFreeDoc (doc);
+	return FALSE;
+    }
+
+    d[metadata->nDoc++] = doc;
+    metadata->doc = d;
 
     return TRUE;
 }
@@ -992,7 +1016,7 @@ initOptionFromMetadataPath (CompDisplay  *d,
     int size;
     Bool rv = FALSE;
 
-    xpathCtx = xmlXPathNewContext (m->doc);
+    xpathCtx = xmlXPathNewContext (m->doc[0]);
     xpathObj = xmlXPathEvalExpression (path, xpathCtx);
     if (!xpathObj)
         return FALSE;
@@ -1040,7 +1064,7 @@ compGetStringFromMetadataPath (CompMetadata *m,
     xmlXPathContextPtr xpathCtx;
     char *rv = NULL;
 
-    xpathCtx = xmlXPathNewContext (m->doc);
+    xpathCtx = xmlXPathNewContext (m->doc[0]);
     xpathObj = xmlXPathEvalExpression (BAD_CAST path, xpathCtx);
     if (!xpathObj)
         return NULL;
