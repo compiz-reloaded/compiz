@@ -260,8 +260,9 @@ main (int argc, char **argv)
 	}
     }
 
-    xmlInitParser();
-    LIBXML_TEST_VERSION
+    xmlInitParser ();
+
+    LIBXML_TEST_VERSION;
 
     if (!compInitMetadata (&coreMetadata))
     {
@@ -282,10 +283,10 @@ main (int argc, char **argv)
 
     eventLoop ();
 
-    xmlCleanupParser();
-    
     if (!disableSm)
 	closeSession ();
+
+    xmlCleanupParser ();
 
     if (restartSignal)
     {
