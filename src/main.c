@@ -271,8 +271,7 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    if (!compAddMetadataFromFile (&coreMetadata,
-				  METADATADIR "/compiz.metadata"))
+    if (!compAddMetadataFromFile (&coreMetadata, "compiz"))
 	return 1;
 
     if (!disableSm)

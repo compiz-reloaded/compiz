@@ -31,6 +31,9 @@
 
 #include <compiz.h>
 
+#define HOME_METADATADIR ".compiz/metadata"
+#define EXTENSION ".metadata"
+
 struct _XmlMod {
     char *name;
     int  modifier;
@@ -89,18 +92,81 @@ compFiniMetadata (CompMetadata *metadata)
     free (metadata->path);
 }
 
+static xmlDoc *
+readXmlFile (const char	*path,
+	     const char	*name)
+{
+    char   *file;
+    int    length = strlen (name) + strlen (EXTENSION) + 1;
+    xmlDoc *doc = NULL;
+    FILE   *fp;
+
+    if (path)
+	length += strlen (path) + 1;
+
+    file = malloc (length);
+    if (!file)
+	return NULL;
+
+    if (path)
+	sprintf (file, "%s/%s%s", path, name, EXTENSION);
+    else
+	sprintf (file, "%s%s", name, EXTENSION);
+
+    fp = fopen (file, "r");
+    if (!fp)
+    {
+	free (file);
+	return NULL;
+    }
+
+    fclose (fp);
+
+    doc = xmlReadFile (file, NULL, 0);
+
+    free (file);
+
+    return doc;
+}
+
 Bool
 compAddMetadataFromFile (CompMetadata *metadata,
 			 const char   *file)
 {
-    metadata->doc = xmlReadFile (file, NULL, 0);
-    if (!metadata->doc)
+    xmlDoc *doc;
+    char   *home;
+
+    home = getenv ("HOME");
+    if (home)
     {
-	fprintf (stderr, "%s: Unable to parse XML metadata from file \"%s\"\n",
-		 programName, file);
+	char *path;
+
+	path = malloc (strlen (home) + strlen (HOME_METADATADIR) + 2);
+	if (path)
+	{
+	    sprintf (path, "%s/%s", home, HOME_METADATADIR);
+	    doc = readXmlFile (path, file);
+	    free (path);
+
+	    if (doc)
+	    {
+		metadata->doc = doc;
+		return TRUE;
+	    }
+	}
+    }
+
+    doc = readXmlFile (METADATADIR, file);
+    if (!doc)
+    {
+	fprintf (stderr,
+		 "%s: Unable to parse XML metadata from file \"%s%s\"\n",
+		 programName, file, EXTENSION);
 
 	return FALSE;
     }
+
+    metadata->doc = doc;
 
     return TRUE;
 }
