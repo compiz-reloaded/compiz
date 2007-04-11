@@ -257,50 +257,28 @@ finiXPath (CompXPath *xPath)
     xmlXPathFreeContext (xPath->ctx);
 }
 
-static Bool
-getOptionType (char *type, CompOptionType *oType)
+static CompOptionType
+getOptionType (char *name)
 {
-    if (!strcasecmp (type, "bool"))
-    {
-	*oType = CompOptionTypeBool;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "int"))
-    {
-	*oType = CompOptionTypeInt;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "float"))
-    {
-	*oType = CompOptionTypeFloat;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "string"))
-    {
-	*oType = CompOptionTypeString;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "color"))
-    {
-	*oType = CompOptionTypeColor;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "action"))
-    {
-	*oType = CompOptionTypeAction;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "match"))
-    {
-	*oType = CompOptionTypeMatch;
-	return TRUE;
-    }
-    else if (!strcasecmp (type, "list"))
-    {
-	*oType = CompOptionTypeList;
-	return TRUE;
-    }
-    return FALSE;
+    static struct _TypeMap {
+	char	       *name;
+	CompOptionType type;
+    } map[] = {
+	{ "int",    CompOptionTypeInt    },
+	{ "float",  CompOptionTypeFloat  },
+	{ "string", CompOptionTypeString },
+	{ "color",  CompOptionTypeColor  },
+	{ "action", CompOptionTypeAction },
+	{ "match",  CompOptionTypeMatch  },
+	{ "list",   CompOptionTypeList   }
+    };
+    int i;
+
+    for (i = 0; i < sizeof (map) / sizeof (map[0]); i++)
+	if (strcasecmp (name, map[i].name) == 0)
+	    return map[i].type;
+
+    return CompOptionTypeBool;
 }
 
 static void
@@ -795,14 +773,10 @@ initListValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 		   xmlFree (type);
 		return;
 	    }
-	    if (!getOptionType ((char *)type, &oType))
-	    {
-        	fprintf (stderr, "%s: Not supported list type \"%s\"\n",
-		         programName, (char *) type);
-		xmlFree (type);
-		return;
-	    }
+
+	    oType = getOptionType ((char *) type);
 	    xmlFree (type);
+
 	    if (oType == CompOptionTypeList)
 	    {
         	fprintf (stderr, "%s: Not supported list type \"list\"\n",
@@ -989,13 +963,8 @@ initOptionFromNode (CompDisplay *d, CompOption *o, xmlNodePtr node)
 	   xmlFree (type);
 	return FALSE;
     }
-    if (!getOptionType ((char *)type, &oType))
-    {
-        fprintf (stderr, "%s: Not supported option type \"%s\"\n",
-		 programName, (char *) type);
-        xmlFree (type);
-	return FALSE;
-    }
+
+    oType = getOptionType ((char *) type);
     xmlFree (type);
 
     o->type = oType;
