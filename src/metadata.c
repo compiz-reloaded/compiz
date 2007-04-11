@@ -941,106 +941,80 @@ initStringRestriction (CompOptionRestriction *r, xmlNodePtr node)
 }
 
 static Bool
-initOptionFromNode (CompDisplay *d, CompOption *o, xmlNodePtr node)
-{
-    xmlChar *name;
-    xmlChar *type;
-    CompOptionType oType;
-
-    memset (o, 0, sizeof(CompOption));
-    
-    name = xmlGetProp (node, BAD_CAST "name");
-    type = xmlGetProp (node, BAD_CAST "type");
-
-    o->name = strdup ((char *)name);
-    xmlFree (name);
-    
-    if (!type || !xmlStrlen(type))
-    {
-        fprintf (stderr, "%s: No Option Type defined for option \"%s\"\n",
-		 programName, o->name);
-        if (type)
-	   xmlFree (type);
-	return FALSE;
-    }
-
-    oType = getOptionType ((char *) type);
-    xmlFree (type);
-
-    o->type = oType;
-    
-    switch (oType)
-    {
-    case CompOptionTypeBool:
-	initBoolValue (&o->value, node);
-	break;
-    case CompOptionTypeInt:
-	initIntValue (&o->value, node);
-	initIntRestriction (&o->rest, node);
-	break;
-    case CompOptionTypeFloat:
-	initFloatValue (&o->value, node);
-	initFloatRestriction (&o->rest, node);
-	break;
-    case CompOptionTypeString:
-	initStringValue (&o->value, node);
-	initStringRestriction (&o->rest, node);
-	break;
-    case CompOptionTypeColor:
-	initColorValue (&o->value, node);
-	break;
-    case CompOptionTypeAction:
-	initActionValue (d, &o->value, node);
-	break;
-    case CompOptionTypeMatch:
-	initMatchValue (&o->value, node);
-	break;
-    case CompOptionTypeList:
-	initListValue (d, &o->value, node);
-	switch (o->value.list.type)
-	{
-	case CompOptionTypeInt:
-	    initIntRestriction (&o->rest, node);
-	    break;
-	case CompOptionTypeFloat:
-	    initFloatRestriction (&o->rest, node);
-	    break;
-	case CompOptionTypeString:
-	    initStringRestriction (&o->rest, node);
-	    break;
-	default:
-	    break;
-	}
-	break;
-    default:
-	return FALSE;
-    }
-   
-    
-    return TRUE;
-}
-
-static Bool
 initOptionFromMetadataPath (CompDisplay   *d,
 			    CompMetadata  *metadata,
 			    CompOption	  *option,
 			    const xmlChar *path)
 {
     CompXPath xPath;
-    int	      size, i;
+    xmlNode   *node;
+    xmlChar   *name, *type;
 
     if (!initXPathFromMetadataPath (&xPath, metadata, BAD_CAST path))
 	return FALSE;
 
-    size = xPath.obj->nodesetval->nodeNr;
+    node = *xPath.obj->nodesetval->nodeTab;
 
-    for (i = 0; i < size; i++)
-	if (initOptionFromNode (d, option, xPath.obj->nodesetval->nodeTab[i]))
+    type = xmlGetProp (node, BAD_CAST "type");
+    if (type)
+    {
+	option->type = getOptionType ((char *) type);
+	xmlFree (type);
+    }
+    else
+    {
+	option->type = CompOptionTypeBool;
+    }
+
+    name = xmlGetProp (node, BAD_CAST "name");
+    option->name = strdup ((char *) name);
+    xmlFree (name);
+
+    switch (option->type) {
+    case CompOptionTypeBool:
+	initBoolValue (&option->value, node);
+	break;
+    case CompOptionTypeInt:
+	initIntValue (&option->value, node);
+	initIntRestriction (&option->rest, node);
+	break;
+    case CompOptionTypeFloat:
+	initFloatValue (&option->value, node);
+	initFloatRestriction (&option->rest, node);
+	break;
+    case CompOptionTypeString:
+	initStringValue (&option->value, node);
+	initStringRestriction (&option->rest, node);
+	break;
+    case CompOptionTypeColor:
+	initColorValue (&option->value, node);
+	break;
+    case CompOptionTypeAction:
+	initActionValue (d, &option->value, node);
+	break;
+    case CompOptionTypeMatch:
+	initMatchValue (&option->value, node);
+	break;
+    case CompOptionTypeList:
+	initListValue (d, &option->value, node);
+	switch (option->value.list.type) {
+	case CompOptionTypeInt:
+	    initIntRestriction (&option->rest, node);
 	    break;
+	case CompOptionTypeFloat:
+	    initFloatRestriction (&option->rest, node);
+	    break;
+	case CompOptionTypeString:
+	    initStringRestriction (&option->rest, node);
+	default:
+	    break;
+	}
+	break;
+    }
 
     finiXPath (&xPath);
 
-    return (i < size) ? TRUE : FALSE;
+    return TRUE;
 }
 
 Bool
