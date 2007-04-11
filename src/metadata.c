@@ -232,10 +232,15 @@ initXPathFromMetadataPath (CompXPath	 *xPath,
 	    obj = xmlXPathEvalExpression (path, ctx);
 	    if (obj)
 	    {
-		xPath->ctx = ctx;
-		xPath->obj = obj;
+		if (obj->nodesetval && obj->nodesetval->nodeNr)
+		{
+		    xPath->ctx = ctx;
+		    xPath->obj = obj;
 
-		return TRUE;
+		    return TRUE;
+		}
+
+		xmlXPathFreeObject (obj);
 	    }
 
 	    xmlXPathFreeContext (ctx);
@@ -1058,7 +1063,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
     if (!initXPathFromMetadataPath (&xPath, metadata, BAD_CAST path))
 	return FALSE;
 
-    size = (xPath.obj->nodesetval) ? xPath.obj->nodesetval->nodeNr : 0;
+    size = xPath.obj->nodesetval->nodeNr;
 
     for (i = 0; i < size; i++)
 	if (initOptionFromNode (d, option, xPath.obj->nodesetval->nodeTab[i]))
