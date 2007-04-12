@@ -268,7 +268,7 @@ zoomScreenInitOptions (ZoomScreen *zs)
     o = &zs->opt[ZOOM_SCREEN_OPTION_FILTER_LINEAR];
     o->name	  = "filter_linear";
     o->shortDesc  = N_("Filter Linear");
-    o->longDesc	  = N_("USe linear filter when zoomed in");
+    o->longDesc	  = N_("Use linear filter when zoomed in");
     o->type	  = CompOptionTypeBool;
     o->value.b    = ZOOM_FILTER_LINEAR_DEFAULT;
 }
