@@ -330,7 +330,7 @@ iniGetFilename (CompDisplay *d,
     if (fn)
     {
 	sprintf (fn, "%s-%s%s",
-		 plugin?plugin:CORE_NAME, screenStr, FILE_SUFFIX);
+		 plugin ? plugin : CORE_NAME, screenStr, FILE_SUFFIX);
 
 	*filename = strdup (fn);
 
@@ -606,7 +606,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
     CompScreen *s = NULL;
     CompPlugin *p = NULL;
     Bool status = FALSE;
-    Bool hv = FALSE;
+    Bool has_value = FALSE;
     CompOptionValue value;
 
     if (plugin)
@@ -655,12 +655,13 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
     IniAction action;
     action.realOptionName = NULL;
-    Bool continueReading = FALSE;
-    while (fgets (&tmp[0], MAX_OPTION_LENGTH, optionFile) != NULL)
+    Bool continueReading;
+    while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
     {
 	status = FALSE;
+	continueReading = FALSE;
 
-	if (!iniParseLine (&tmp[0], &optionName, &optionValue))
+	if (!iniParseLine (tmp, &optionName, &optionValue))
 	{
 	    fprintf(stderr,
 		    "Ignoring line '%s' in %s %i\n", tmp, plugin, screen);
@@ -677,29 +678,29 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		switch (o->type)
 		{
 		case CompOptionTypeBool:
-		    hv = TRUE;
+		    has_value = TRUE;
 		    value.b = (Bool) atoi (optionValue);
 			break;
 		case CompOptionTypeInt:
-		    hv = TRUE;
+		    has_value = TRUE;
 		    value.i = atoi (optionValue);
 			break;
 		case CompOptionTypeFloat:
-		    hv = TRUE;
+		    has_value = TRUE;
 		    value.f = atof (optionValue);
 			break;
 		case CompOptionTypeString:
-		    hv = TRUE;
+		    has_value = TRUE;
 		    value.s = strdup (optionValue);
 			break;
 		case CompOptionTypeColor:
-		    hv = stringToColor (optionValue, value.c);
+		    has_value = stringToColor (optionValue, value.c);
 			break;
 		case CompOptionTypeList:
-		    hv = csvToList (optionValue, &value.list, value.list.type);
+		    has_value = csvToList (optionValue, &value.list, value.list.type);
 			break;
 		case CompOptionTypeMatch:
-		    hv = TRUE;
+		    has_value = TRUE;
 		    matchInit (&value.match);
 		    matchAddFromString (&value.match, optionValue);
 			break;
@@ -707,7 +708,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			break;
 		}
 
-		if (hv)
+		if (has_value)
 		{
 		    if (plugin && p)
 		    {
@@ -797,7 +798,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    free (optionName);
 	if (optionValue)
 	    free (optionValue);
-	continueReading = FALSE;
     } 
 
     return TRUE;
