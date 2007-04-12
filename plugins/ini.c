@@ -348,48 +348,20 @@ iniGetFilename (CompDisplay *d,
 static Bool
 iniParseLine (char *line, char **optionName, char **optionValue)
 {
-    int  pos = 0;
-    int  splitPos = 0;
-    int  endPos = 0;
-    char tmpName[MAX_OPTION_LENGTH];
-    char tmpValue[MAX_OPTION_LENGTH];
+    char *split_pos;
+    int length;
 
     if (line[0] == '\0' || line[0] == '\n')
 	return FALSE;
 
-    while (pos < strlen(line))
-    {
-	if (!splitPos && line[pos] == '=')
-	    splitPos = pos;
-	if (line[pos] == '\n')
-	{
-	    endPos = pos;
-	    break;
-	}
-	pos++;
-    }
-
-    if (splitPos && endPos)
-    {
-	tmpName[0] = '\0';
-	tmpValue[0] = '\0';
-
-	int i;
-	for (i=0; i < splitPos; i++)
-	    tmpName[i] = line[i];
-	tmpName[splitPos] = '\0';
-
-	for (i=splitPos+1; i<endPos; i++)
-	    tmpValue[i - (splitPos+1)] = line[i];
-	tmpValue[endPos - (splitPos+1)] = '\0';
-
-	*optionName = strdup (tmpName);
-	*optionValue = strdup (tmpValue);
-    }
-    else
-    {
+    split_pos = strchr(line, '=');
+    if (!split_pos)
 	return FALSE;
-    }
+
+    length = strlen(line) - strlen(split_pos);
+    *optionName = strndup(line, length);
+    split_pos++;
+    *optionValue = strndup(split_pos, strlen(split_pos)-1);
 
     return TRUE;
 }
