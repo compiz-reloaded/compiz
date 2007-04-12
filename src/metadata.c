@@ -486,41 +486,38 @@ initActionValue (CompDisplay	 *d,
 		xmlFree (value);
 	    }
 	}
-	else if (!xmlStrcmp (child->name, BAD_CAST "edge"))
+	else if (!xmlStrcmp (child->name, BAD_CAST "edges"))
 	{
-	    xmlChar *button;
-	    xmlChar *edge = xmlNodeListGetString (child->doc,
-		                                  child->xmlChildrenNode, 1);
-	    char *tok = strtok ((char *) edge, ",");
-	    
-	    while (tok && edge)
+	    static char *edge[] = {
+		"left",
+		"right",
+		"top",
+		"bottom",
+		"top_left",
+		"top_right",
+		"bottom_left",
+		"bottom_right"
+	    };
+	    int i;
+
+	    for (i = 0; i < sizeof (edge) / sizeof (edge[0]); i++)
 	    {
-		if (!strcasecmp(tok,"left"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_LEFT);
-		else if (!strcasecmp(tok,"right"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_RIGHT);
-		else if (!strcasecmp(tok,"top"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_TOP);
-		else if (!strcasecmp(tok,"bottom"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_BOTTOM);
-		else if (!strcasecmp(tok,"topleft"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_TOPLEFT);
-		else if (!strcasecmp(tok,"topright"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_TOPRIGHT);
-		else if (!strcasecmp(tok,"bottomleft"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_BOTTOMLEFT);
-		else if (!strcasecmp(tok,"bottomright"))
-			v->action.edgeMask |= (1 << SCREEN_EDGE_BOTTOMRIGHT);
-		tok = strtok(NULL,",");
+		value = xmlGetProp (child, BAD_CAST edge);
+		if (value)
+		{
+		    if (strcasecmp ((char *) value, "true") == 0)
+			v->action.edgeMask |= (1 << i);
+
+		    xmlFree (value);
+		}
 	    }
-	    xmlFree(edge);
-	   
-	    button = xmlGetProp (child, BAD_CAST "button");
-            if (button)
+
+	    value = xmlGetProp (child, BAD_CAST "button");
+	    if (value)
 	    {
-                v->action.edgeButton = strtol ((char *) button, NULL, 0);
+		v->action.edgeButton = strtol ((char *) value, NULL, 0);
+		xmlFree (value);
 	    }
-	    xmlFree(button);
 	}
 	else if (!xmlStrcmp (child->name, (const xmlChar *) "bell"))
 	{
