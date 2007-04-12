@@ -865,16 +865,16 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initBoolValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeInt:
-	initIntValue (&option->value, defaultDoc, defaultNode);
 	initIntRestriction (metadata, &option->rest, (char *) path);
+	initIntValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeFloat:
-	initFloatValue (&option->value, defaultDoc, defaultNode);
 	initFloatRestriction (metadata, &option->rest, (char *) path);
+	initFloatValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeString:
-	initStringValue (&option->value, defaultDoc, defaultNode);
 	initStringRestriction (metadata, &option->rest, (char *) path);
+	initStringValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeColor:
 	initColorValue (&option->value, defaultDoc, defaultNode);
@@ -897,8 +897,6 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	    option->value.list.type = CompOptionTypeBool;
 	}
 
-	initListValue (d, &option->value, defaultDoc, defaultNode);
-
 	switch (option->value.list.type) {
 	case CompOptionTypeInt:
 	    initIntRestriction (metadata, &option->rest, (char *) path);
@@ -911,6 +909,8 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	default:
 	    break;
 	}
+
+	initListValue (d, &option->value, defaultDoc, defaultNode);
 	break;
     }
 
