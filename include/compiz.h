@@ -3100,7 +3100,7 @@ compInitDisplayOptionFromMetadata (CompDisplay  *display,
 				   const char   *name);
 char *
 compGetStringFromMetadataPath (CompMetadata *metadata,
-			       char         *path);
+			       const char   *path);
 
 char *
 compGetShortPluginDescription (CompMetadata *metadata);
