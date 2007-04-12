@@ -971,12 +971,16 @@ iniSaveOptions (CompDisplay *d,
 
 	    strVal = malloc (sizeof(char) * MAX_OPTION_LENGTH);
 	    strcpy (strVal, "");
+	    firstInList = TRUE;
 	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	    {
 		if (option->value.action.edgeMask & (1 << i))
 		{
+		    if (!firstInList)
+		    	strncat (strVal, ",", MAX_OPTION_LENGTH);
+		    firstInList = FALSE;
+		    
 		    strncat (strVal, edgeToString (i), MAX_OPTION_LENGTH);
-		    strncat (strVal, ",", MAX_OPTION_LENGTH);
 		}
 	    }
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edge", strVal);
@@ -1008,19 +1012,22 @@ iniSaveOptions (CompDisplay *d,
 		if (!strVal)
 		    return FALSE;
 		strcpy (strVal, "");
+		firstInList = TRUE;
 
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
 		    itemVal = iniOptionValueToString (
 						&option->value.list.value[i],
 						option->value.list.type);
-
+		    if (!firstInList)
+		        strncat (strVal, ",", stringLen);
+		    firstInList = FALSE;
+			
 		    if (itemVal)
 		    {
 			strncat (strVal, itemVal, stringLen);
 			free (itemVal);
 		    }
-		    strncat (strVal, ",", stringLen);
 		}
 
 		fprintf (optionFile, "%s=%s\n", option->name, strVal);
