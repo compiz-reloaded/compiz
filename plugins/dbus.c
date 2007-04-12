@@ -2038,14 +2038,14 @@ dbusPluginRemoveRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
 static Bool
 dbusRegisterOptions (DBusConnection *connection,
 		     CompDisplay    *d,
-		     char           *screen_path)
+		     char           *screenPath)
 {
     CompOption *option = NULL;
-    int nOptions;
-    char objectPath[256];
-    char **path;
+    int        nOptions;
+    char       objectPath[256];
+    char       **path;
 
-    dbusGetPathDecomposed (screen_path, &path);
+    dbusGetPathDecomposed (screenPath, &path);
 
     option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
 
@@ -2054,7 +2054,7 @@ dbusRegisterOptions (DBusConnection *connection,
 
     while (nOptions--)
     {
-	snprintf (objectPath, 256, "%s/%s", screen_path, option->name);
+	snprintf (objectPath, 256, "%s/%s", screenPath, option->name);
 
 	dbus_connection_register_object_path (connection, objectPath,
 					      &dbusMessagesVTable, d);
@@ -2067,14 +2067,14 @@ dbusRegisterOptions (DBusConnection *connection,
 static Bool
 dbusUnregisterOptions (DBusConnection *connection,
 		       CompDisplay    *d,
-		       char           *screen_path)
+		       char           *screenPath)
 {
     CompOption *option = NULL;
     int nOptions;
     char objectPath[256];
     char **path;
 
-    dbusGetPathDecomposed (screen_path, &path);
+    dbusGetPathDecomposed (screenPath, &path);
 
     option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
 
@@ -2083,7 +2083,7 @@ dbusUnregisterOptions (DBusConnection *connection,
 
     while (nOptions--)
     {
-	snprintf (objectPath, 256, "%s/%s", screen_path, option->name);
+	snprintf (objectPath, 256, "%s/%s", screenPath, option->name);
 
 	dbus_connection_unregister_object_path (connection, objectPath);
 	option++;
