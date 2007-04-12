@@ -509,12 +509,15 @@ convertButtonBinding (CompButtonBinding *bb, char *bind)
 static void
 initActionValue (CompDisplay	 *d,
 		 CompOptionValue *v,
+		 CompActionState state,
 		 xmlDocPtr       doc,
 		 xmlNodePtr      node)
 {
     xmlNodePtr child;
 
     memset (&v->action, 0, sizeof (v->action));
+
+    v->action.state = state;
 
     if (!doc)
 	return;
@@ -523,7 +526,6 @@ initActionValue (CompDisplay	 *d,
     {
 	if (!xmlStrcmp (child->name, BAD_CAST "key"))
 	{
-	    xmlChar *state;
 	    xmlChar *key = xmlNodeListGetString (child->doc,
 		                                 child->xmlChildrenNode, 1);
 
@@ -533,30 +535,9 @@ initActionValue (CompDisplay	 *d,
 		convertKeyBinding (d, &v->action.key, (char *) key);
 	    }
 	    xmlFree(key);
-	    
-	    state = xmlGetProp (child, BAD_CAST "state");
-
-	    if (!state)
-	    {
-		v->action.state |= CompActionStateInitKey;
-	    }
-	    else
-	    {
-		char *tok = strtok ((char *) state, ",");
-		while (tok)
-		{
-		    if (!strcasecmp (tok, "init"))
-			v->action.state |= CompActionStateInitKey;
-		    else if (!strcasecmp (tok, "term"))
-			v->action.state |= CompActionStateTermKey;
-		    tok = strtok (NULL, ",");
-		}
-	    }
-	    xmlFree(state);
 	}
 	else if (!xmlStrcmp (child->name, BAD_CAST "button"))
 	{
-	    xmlChar *state;
 	    xmlChar *button = xmlNodeListGetString (child->doc,
 		                                    child->xmlChildrenNode, 1);
 	    if (button && xmlStrlen (button))
@@ -565,29 +546,9 @@ initActionValue (CompDisplay	 *d,
 		convertButtonBinding (&v->action.button, (char *) button);
 	    }
 	    xmlFree(button);
-     
-	    state = xmlGetProp (child, BAD_CAST "state");
-	    if (!state)
-	    {
-		v->action.state |= CompActionStateInitButton;
-	    }
-	    else
-	    {
-		char *tok = strtok((char *)state,",");
-		while (tok)
-		{
-		    if (!strcasecmp(tok,"init"))
-                        v->action.state |= CompActionStateInitButton;
-		    else if (!strcasecmp(tok,"term"))
-                        v->action.state |= CompActionStateTermButton;
-		    tok = strtok(NULL,",");
-		}
-	    }
-	    xmlFree(state);
 	}
 	else if (!xmlStrcmp (child->name, BAD_CAST "edge"))
 	{
-	    xmlChar *state;
 	    xmlChar *button;
 	    xmlChar *edge = xmlNodeListGetString (child->doc,
 		                                  child->xmlChildrenNode, 1);
@@ -615,29 +576,6 @@ initActionValue (CompDisplay	 *d,
 	    }
 	    xmlFree(edge);
 	   
-	    state = xmlGetProp (child, BAD_CAST "state");
-	    if (!state)
-	    {
-		v->action.state |= CompActionStateInitEdge;
-	    }
-	    else
-	    {
-		char *tok = strtok ((char *) state, ",");
-		while (tok)
-		{
-		    if (!strcasecmp(tok,"init"))
-			v->action.state |= CompActionStateInitEdge;
-		    else if (!strcasecmp(tok,"term"))
-			v->action.state |= CompActionStateTermEdge;
-		    else if (!strcasecmp(tok,"initdnd"))
-			v->action.state |= CompActionStateInitEdgeDnd;
-		    else if (!strcasecmp(tok,"termdnd"))
-			v->action.state |= CompActionStateTermEdgeDnd;
-		    tok = strtok(NULL,",");
-		}
-	    }
-	    xmlFree(state);
-
 	    button = xmlGetProp (child, BAD_CAST "button");
             if (button)
 	    {
@@ -652,8 +590,6 @@ initActionValue (CompDisplay	 *d,
 	    if (bell)
 		v->action.bell = (xmlStrcasecmp (bell, BAD_CAST "true") == 0);
 	    xmlFree(bell);
-	    
-	    v->action.state |= CompActionStateInitBell;
 	}
     }
 }
@@ -682,6 +618,7 @@ static void
 initListValue (CompDisplay	     *d,
 	       CompOptionValue	     *v,
 	       CompOptionRestriction *r,
+	       CompActionState	     state,
 	       xmlDocPtr	     doc,
 	       xmlNodePtr	     node)
 {
@@ -721,7 +658,7 @@ initListValue (CompDisplay	     *d,
 		initColorValue (&value[v->list.nValue], doc, child);
 		break;
 	    case CompOptionTypeAction:
-		initActionValue (d, &value[v->list.nValue], doc, child);
+		initActionValue (d, &value[v->list.nValue], state, doc, child);
 		break;
 	    case CompOptionTypeMatch:
 		initMatchValue (&value[v->list.nValue], doc, child);
@@ -849,17 +786,55 @@ initStringRestriction (CompMetadata	     *metadata,
     finiXPath (&xPath);
 }
 
+static void
+initActionState (CompMetadata    *metadata,
+		 CompActionState *state,
+		 const char      *path)
+{
+    static struct _StateMap {
+	char	       *name;
+	CompActionState state;
+    } map[] = {
+	{ "key",     CompActionStateInitKey     },
+	{ "button",  CompActionStateInitButton  },
+	{ "bell",    CompActionStateInitBell    },
+	{ "edge",    CompActionStateInitEdge    },
+	{ "edgednd", CompActionStateInitEdgeDnd }
+    };
+    int	      i;
+    CompXPath xPath;
+
+    *state = 0;
+
+    if (!initXPathFromMetadataPathElement (&xPath, metadata, BAD_CAST path,
+					   BAD_CAST "allowed"))
+	return;
+
+    for (i = 0; i < sizeof (map) / sizeof (map[0]); i++)
+    {
+	xmlChar *value;
+
+	value = xmlGetProp (*xPath.obj->nodesetval->nodeTab,
+			    BAD_CAST map[i].name);
+	if (value && xmlStrcmp (value, BAD_CAST "true") == 0)
+	    *state |= map[i].state;
+    }
+
+    finiXPath (&xPath);
+}
+
 static Bool
 initOptionFromMetadataPath (CompDisplay   *d,
 			    CompMetadata  *metadata,
 			    CompOption	  *option,
 			    const xmlChar *path)
 {
-    CompXPath  xPath, xDefaultPath;
-    xmlNodePtr node, defaultNode;
-    xmlDocPtr  defaultDoc;
-    xmlChar    *name, *type;
-    char       *value;
+    CompXPath	    xPath, xDefaultPath;
+    xmlNodePtr	    node, defaultNode;
+    xmlDocPtr	    defaultDoc;
+    xmlChar	    *name, *type;
+    char	    *value;
+    CompActionState state = 0;
 
     if (!initXPathFromMetadataPath (&xPath, metadata, path))
 	return FALSE;
@@ -914,7 +889,8 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initColorValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeAction:
-	initActionValue (d, &option->value, defaultDoc, defaultNode);
+	initActionState (metadata, &state, (char *) path);
+	initActionValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeMatch:
 	initMatchValue (&option->value, defaultDoc, defaultNode);
@@ -940,11 +916,14 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	    break;
 	case CompOptionTypeString:
 	    initStringRestriction (metadata, &option->rest, (char *) path);
+	    break;
+	case CompOptionTypeAction:
+	    initActionState (metadata, &state, (char *) path);
 	default:
 	    break;
 	}
 
-	initListValue (d, &option->value, &option->rest,
+	initListValue (d, &option->value, &option->rest, state,
 		       defaultDoc, defaultNode);
 	break;
     }
