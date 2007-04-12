@@ -1239,13 +1239,82 @@ dbusAppendOptionValue (CompDisplay     *d,
 		       CompOptionType  type,
 		       CompOptionValue *value)
 {
-    int	i;
+    int  i;
+    char *s;
 
     if (type == CompOptionTypeList)
     {
+	DBusMessageIter iter;
+	DBusMessageIter listIter;
+	char		sig[2];
+
+	switch (value->list.type)
+	{
+	case CompOptionTypeInt:
+	    sig[0] = DBUS_TYPE_INT32;
+	    break;
+	case CompOptionTypeFloat:
+	    sig[0] = DBUS_TYPE_DOUBLE;
+	    break;
+	case CompOptionTypeBool:
+	    sig[0] = DBUS_TYPE_BOOLEAN;
+	    break;
+	default:
+	    sig[0] = DBUS_TYPE_STRING;
+	    break;
+	}
+	sig[1] = '\0';
+
+	dbus_message_iter_init_append (message, &iter);
+	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+					  sig, &listIter);
+
 	for (i = 0; i < value->list.nValue; i++)
-	    dbusAppendSimpleOptionValue (message, value->list.type,
-					 &value->list.value[i]);
+	{
+	    switch (value->list.type)
+	    {
+	    case CompOptionTypeInt:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].i);
+		break;
+	    case CompOptionTypeFloat:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].f);
+		break;
+	    case CompOptionTypeBool:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].b);
+		break;
+	    case CompOptionTypeString:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].s);
+		break;
+	    case CompOptionTypeMatch:
+	    s = matchToString (&value->list.value[i].match);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+		break;
+	    case CompOptionTypeColor:
+	    s = colorToString (value->list.value[i].c);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+		break;
+	    default:
+		break;
+	    }
+	}
+
+	dbus_message_iter_close_container (&iter, &listIter);
     }
     else if (type == CompOptionTypeAction)
     {
