@@ -969,9 +969,7 @@ addScreenToDisplay (CompDisplay *display,
 		    CompScreen *s);
 
 Bool
-addDisplay (char *name,
-	    char **plugin,
-	    int  nPlugin);
+addDisplay (char *name);
 
 Time
 getCurrentTimeFromDisplay (CompDisplay *d);
@@ -3063,6 +3061,17 @@ matchPropertyChanged (CompDisplay *display,
 
 /* metadata.c */
 
+typedef struct _CompMetadataOptionInfo {
+    char		   *name;
+    char		   *type;
+    char		   *data;
+    CompActionCallBackProc initiate;
+    CompActionCallBackProc terminate;
+} CompMetadataOptionInfo;
+
+extern CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM];
+extern CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM];
+
 struct _CompMetadata {
     char   *path;
     xmlDoc **doc;
@@ -3124,6 +3133,8 @@ char *
 compGetLongDisplayOptionDescription (CompMetadata *metadata,
 				     CompOption   *option);
 
+char *
+compMetadataOptionInfoToXml (const CompMetadataOptionInfo *info);
 
 #ifdef  __cplusplus
 }

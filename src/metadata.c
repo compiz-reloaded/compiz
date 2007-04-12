@@ -1003,3 +1003,40 @@ compGetLongDisplayOptionDescription (CompMetadata *m,
 
     return compGetStringFromMetadataPath (m, str);
 }
+
+char *
+compMetadataOptionInfoToXml (const CompMetadataOptionInfo *info)
+{
+    char *xml;
+    int  size = strlen (info->name) + 18;
+
+    if (info->type)
+	size += strlen (info->type) + 8;
+
+    if (info->data)
+	size += strlen (info->data) + 8;
+
+    xml = malloc (sizeof (char) * size);
+    if (!xml)
+	return NULL;
+
+    if (info->type)
+    {
+	if (info->data)
+	    sprintf (xml, "<option name=\"%s\" type=\"%s\">%s</option>",
+		     info->name, info->type, info->data);
+	else
+	    sprintf (xml, "<option name=\"%s\" type=\"%s\"/>",
+		     info->name, info->type);
+    }
+    else
+    {
+	if (info->data)
+	    sprintf (xml, "<option name=\"%s\">%s</option>",
+		     info->name, info->data);
+	else
+	    sprintf (xml, "<option name=\"%s\"/>", info->name);
+    }
+
+    return xml;
+}

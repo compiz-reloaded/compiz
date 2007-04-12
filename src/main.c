@@ -91,90 +91,6 @@ Bool useCow = TRUE;
 
 CompMetadata coreMetadata;
 
-static const char *staticMetadata =
-    "<compiz>"
-    "<core>"
-    "<display>"
-    "<option name=\"active_plugins\" type=\"list\"><type>string</type></option>"
-    "<option name=\"texture_filter\" type=\"string\"/>"
-    "<option name=\"click_to_focus\" type=\"bool\"/>"
-    "<option name=\"autoraise\" type=\"bool\"/>"
-    "<option name=\"autoraise_delay\" type=\"int\"/>"
-    "<option name=\"close_window\" type=\"action\"/>"
-    "<option name=\"main_menu\" type=\"action\"/>"
-    "<option name=\"run\" type=\"action\"/>"
-    "<option name=\"command0\" type=\"string\"/>"
-    "<option name=\"command1\" type=\"string\"/>"
-    "<option name=\"command2\" type=\"string\"/>"
-    "<option name=\"command3\" type=\"string\"/>"
-    "<option name=\"command4\" type=\"string\"/>"
-    "<option name=\"command5\" type=\"string\"/>"
-    "<option name=\"command6\" type=\"string\"/>"
-    "<option name=\"command7\" type=\"string\"/>"
-    "<option name=\"command8\" type=\"string\"/>"
-    "<option name=\"command9\" type=\"string\"/>"
-    "<option name=\"command10\" type=\"string\"/>"
-    "<option name=\"command11\" type=\"string\"/>"
-    "<option name=\"run_command0\" type=\"action\"/>"
-    "<option name=\"run_command1\" type=\"action\"/>"
-    "<option name=\"run_command2\" type=\"action\"/>"
-    "<option name=\"run_command3\" type=\"action\"/>"
-    "<option name=\"run_command4\" type=\"action\"/>"
-    "<option name=\"run_command5\" type=\"action\"/>"
-    "<option name=\"run_command6\" type=\"action\"/>"
-    "<option name=\"run_command7\" type=\"action\"/>"
-    "<option name=\"run_command8\" type=\"action\"/>"
-    "<option name=\"run_command9\" type=\"action\"/>"
-    "<option name=\"run_command10\" type=\"action\"/>"
-    "<option name=\"run_command11\" type=\"action\"/>"
-    "<option name=\"slow_animations\" type=\"action\"/>"
-    "<option name=\"raise_window\" type=\"action\"/>"
-    "<option name=\"lower_window\" type=\"action\"/>"
-    "<option name=\"unmaximize_window\" type=\"action\"/>"
-    "<option name=\"minimize_window\" type=\"action\"/>"
-    "<option name=\"maximize_window\" type=\"action\"/>"
-    "<option name=\"maximize_window_horizontally\" type=\"action\"/>"
-    "<option name=\"maximize_window_vertically\" type=\"action\"/>"
-    "<option name=\"opacity_increase\" type=\"action\"/>"
-    "<option name=\"opacity_decrease\" type=\"action\"/>"
-    "<option name=\"command_screenshot\" type=\"string\"/>"
-    "<option name=\"run_command_screenshot\" type=\"action\"/>"
-    "<option name=\"command_window_screenshot\" type=\"string\"/>"
-    "<option name=\"run_command_window_screenshot\" type=\"action\"/>"
-    "<option name=\"window_menu\" type=\"action\"/>"
-    "<option name=\"show_desktop\" type=\"action\"/>"
-    "<option name=\"raise_on_click\" type=\"bool\"/>"
-    "<option name=\"audible_bell\" type=\"bool\"/>"
-    "<option name=\"toggle_window_maximized\" type=\"action\"/>"
-    "<option name=\"toggle_window_maximized_horizontally\" type=\"action\"/>"
-    "<option name=\"toggle_window_maximized_vertically\" type=\"action\"/>"
-    "<option name=\"hide_skip_taskbar_windows\" type=\"bool\"/>"
-    "<option name=\"toggle_window_shaded\" type=\"action\"/>"
-    "<option name=\"ignore_hints_when_maximized\" type=\"bool\"/>"
-    "<option name=\"command_terminal\" type=\"string\"/>"
-    "<option name=\"run_command_terminal\" type=\"action\"/>"
-    "<option name=\"ping_delay\" type=\"int\"><min>1000</min></option>"
-    "</display>"
-    "<screen>"
-    "<option name=\"detect_refresh_rate\" type=\"bool\"/>"
-    "<option name=\"lighting\" type=\"bool\"/>"
-    "<option name=\"refresh_rate\" type=\"int\"><min>1</min></option>"
-    "<option name=\"hsize\" type=\"int\"><min>1</min><max>32</max></option>"
-    "<option name=\"vsize\" type=\"int\"><min>1</min><max>32</max></option>"
-    "<option name=\"opacity_step\" type=\"int\"><min>1</min></option>"
-    "<option name=\"unredirect_fullscreen_windows\" type=\"bool\"/>"
-    "<option name=\"default_icon\" type=\"string\"/>"
-    "<option name=\"sync_to_vblank\" type=\"bool\"/>"
-    "<option name=\"number_of_desktops\" type=\"int\"><min>1</min></option>"
-    "<option name=\"detect_outputs\" type=\"bool\"/>"
-    "<option name=\"outputs\" type=\"list\"><type>string</type></option>"
-    "<option name=\"focus_prevention_match\" type=\"match\"/>"
-    "<option name=\"opacity_matches\" type=\"list\"><type>match</type></option>"
-    "<option name=\"opacity_values\" type=\"list\"><type>int</type></option>"
-    "</screen>"
-    "</core>"
-    "</compiz>";
-
 static void
 usage (void)
 {
@@ -224,14 +140,57 @@ signalHandler (int sig)
     }
 }
 
+static char *
+strAdd (char	   *dst,
+	const char *src)
+{
+    int  newSize, oldSize = 0;
+    char *s;
+
+    if (dst)
+	oldSize = strlen (dst);
+
+    newSize = oldSize + strlen (src) + 1;
+
+    s = realloc (dst, sizeof (char) * newSize);
+    if (!s)
+    {
+	fprintf (stderr, "%s: memory allocation failure\n", programName);
+	exit (1);
+    }
+
+    strcpy (s + oldSize, src);
+
+    return s;
+}
+
+static char *
+strAddOption (char			   *dst,
+	      const CompMetadataOptionInfo *info)
+{
+    char *xml;
+
+    xml = compMetadataOptionInfoToXml (info);
+    if (!xml)
+    {
+	fprintf (stderr, "%s: memory allocation failure 2\n", programName);
+	exit (1);
+    }
+
+    return strAdd (dst, xml);
+}
+
 int
 main (int argc, char **argv)
 {
     char *displayName = 0;
     char *plugin[256];
-    int  i, nPlugin = 0;
+    int  i, j, nPlugin = 0;
     Bool disableSm = FALSE;
     char *clientId = NULL;
+    char *str;
+    char *textureFilterArg = NULL;
+    char *refreshRateArg = NULL;
 
     programName = argv[0];
     programArgc = argc;
@@ -278,14 +237,16 @@ main (int argc, char **argv)
 	{
 	    if (i + 1 < argc)
 	    {
-		defaultRefreshRate = atoi (programArgv[++i]);
+		refreshRateArg = programArgv[++i];
+		defaultRefreshRate = atoi (refreshRateArg);
 		defaultRefreshRate = RESTRICT_VALUE (defaultRefreshRate,
 						     1, 1000);
 	    }
 	}
 	else if (!strcmp (argv[i], "--fast-filter"))
 	{
-	    defaultTextureFilter = "Fast";
+	    textureFilterArg = "Fast";
+	    defaultTextureFilter = textureFilterArg;
 	}
 	else if (!strcmp (argv[i], "--indirect-rendering"))
 	{
@@ -355,15 +316,85 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    if (!compAddMetadataFromString (&coreMetadata, staticMetadata))
+    str = strAdd (NULL, "<compiz><core><display>");
+
+    for (i = 0; i < COMP_DISPLAY_OPTION_NUM; i++)
+    {
+	CompMetadataOptionInfo info = coreDisplayOptionInfo[i];
+	char		       *tmp = NULL;
+
+	switch (i) {
+	case COMP_DISPLAY_OPTION_ACTIVE_PLUGINS:
+	    if (nPlugin)
+	    {
+		tmp = strAdd (tmp, "<type>string</type><default>");
+
+		for (j = 0; j < nPlugin; j++)
+		{
+		    tmp = strAdd (tmp, "<value>");
+		    tmp = strAdd (tmp, plugin[j]);
+		    tmp = strAdd (tmp, "</value>");
+		}
+
+		tmp = strAdd (tmp, "</default>");
+
+		info.data = tmp;
+	    }
+	    break;
+	case COMP_DISPLAY_OPTION_TEXTURE_FILTER:
+	    if (textureFilterArg)
+	    {
+		tmp = strAdd (tmp, "<type>string</type><default>");
+		tmp = strAdd (tmp, textureFilterArg);
+		tmp = strAdd (tmp, "</default>");
+
+		info.data = tmp;
+	    }
+	default:
+	    break;
+	}
+
+	str = strAddOption (str, &info);
+
+	if (tmp)
+	    free (tmp);
+    }
+
+    str = strAdd (str, "</display><screen>");
+
+    for (i = 0; i < COMP_SCREEN_OPTION_NUM; i++)
+    {
+	CompMetadataOptionInfo info = coreScreenOptionInfo[i];
+	char		       tmp[256];
+
+	switch (i) {
+	case COMP_SCREEN_OPTION_REFRESH_RATE:
+	    if (refreshRateArg)
+	    {
+		snprintf (tmp, 256, "<min>1</min><default>%s</default>",
+			  refreshRateArg);
+		info.data = tmp;
+	    }
+	default:
+	    break;
+	}
+
+	str = strAddOption (str, &info);
+    }
+
+    str = strAdd (str, "</screen></core></compiz>");
+
+    if (!compAddMetadataFromString (&coreMetadata, str))
 	return 1;
+
+    free (str);
 
     compAddMetadataFromFile (&coreMetadata, "compiz");
 
     if (!disableSm)
 	initSession (clientId);
 
-    if (!addDisplay (displayName, plugin, nPlugin))
+    if (!addDisplay (displayName))
 	return 1;
 
     eventLoop ();
