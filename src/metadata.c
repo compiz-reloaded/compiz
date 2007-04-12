@@ -522,13 +522,15 @@ initActionValue (CompDisplay	 *d,
 	    }
 	    xmlFree(button);
 	}
-	else if (!xmlStrcmp(child->name, (const xmlChar *) "bell"))
+	else if (!xmlStrcmp (child->name, (const xmlChar *) "bell"))
 	{
-	    xmlChar *bell = xmlNodeListGetString (child->doc,
-		                                  child->xmlChildrenNode, 1);
-	    if (bell)
-		v->action.bell = (xmlStrcasecmp (bell, BAD_CAST "true") == 0);
-	    xmlFree(bell);
+	    value = xmlNodeListGetString (child->doc,
+					  child->xmlChildrenNode, 1);
+	    if (value)
+	    {
+		v->action.bell = !strcasecmp ((char *) value, "true");
+		xmlFree (value);
+	    }
 	}
     }
 }
