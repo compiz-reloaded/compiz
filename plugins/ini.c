@@ -397,53 +397,47 @@ iniParseLine (char *line, char **optionName, char **optionValue)
 static Bool
 csvToList (char *csv, CompListValue *list, CompOptionType type)
 {
-    char *csvtmp, *split, *item = NULL;
-    int  count = 1, i, itemLength;
+    char *split_start = NULL;
+    char *split_end = NULL;
+    char *item = NULL;
+    int itemLength;
+    int count;
+    int i;
 
     if (csv[0] == '\0')
     {
 	list->nValue = 0;
 	return FALSE;
     }
+ 
+    count = 0;
+    for (i = 0; csv[i] != '\0'; i++)
+	if (csv[i] == ',')
+	    count++;
 
-    csvtmp = strdup (csv);
-    csvtmp = strchr (csv, ',');
-
-    while (csvtmp)
-    {
-	csvtmp++;  /* avoid the comma */
-	count++;
-	csvtmp = strchr (csvtmp, ',');
-    }
-
+    split_start = csv;
     list->value = malloc (sizeof (CompOptionValue) * count);
     if (list->value)
     {
-	for (i=0; i<count; i++)
+	for (i = 0; i < count; i++)
 	{
-	    split = strchr (csv, ',');
-	    if (split)
+	    split_end = strchr(split_start, ',');
+
+	    if (split_end)
 	    {
-		/* > 1 value */
-		itemLength = strlen(csv) - strlen(split);
-		item = realloc (item, sizeof (char) * (itemLength+1));
-		strncpy (item, csv, itemLength);
-		item[itemLength] = '\0';
-		csv += itemLength + 1;
+		itemLength = strlen(split_start) - strlen(split_end);
+		item = strndup(split_start, itemLength);
 	    }
-	    else
+	    else // last value
 	    {
-		/* 1 value only */
-		itemLength = strlen(csv);
-		item = realloc (item, sizeof (char) * (itemLength+1));
-		strncpy (item, csv, itemLength);
-		item[itemLength] = '\0';
+		item = strdup(split_start);
 	    }
 
 	    switch (type)
 	    {
 		case CompOptionTypeString:
-		    list->value[i].s = strdup (item);
+		    if (item[0] != '\0')
+			list->value[i].s = strdup (item);
 		    break;
 		case CompOptionTypeBool:
 		    if (item[0] != '\0')
@@ -464,12 +458,13 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 		default:
 		    break;
 	    }
+
+	    split_start = ++split_end;
+	    if (item)
+		free(item);
 	}
 	list->nValue = count;
     }
-
-    if (item)
-	free (item);
 
     return TRUE;
 }
