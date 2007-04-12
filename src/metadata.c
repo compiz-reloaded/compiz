@@ -213,6 +213,7 @@ compAddMetadataFromString (CompMetadata *metadata,
 typedef struct _CompXPath {
     xmlXPathObjectPtr  obj;
     xmlXPathContextPtr ctx;
+    xmlDocPtr	       doc;
 } CompXPath;
 
 static Bool
@@ -236,6 +237,7 @@ initXPathFromMetadataPath (CompXPath	 *xPath,
 		{
 		    xPath->ctx = ctx;
 		    xPath->obj = obj;
+		    xPath->doc = metadata->doc[i];
 
 		    return TRUE;
 		}
@@ -248,6 +250,19 @@ initXPathFromMetadataPath (CompXPath	 *xPath,
     }
 
     return FALSE;
+}
+
+static Bool
+initXPathFromMetadataPathElement (CompXPath	*xPath,
+				  CompMetadata  *metadata,
+				  const xmlChar *path,
+				  const xmlChar *element)
+{
+    char str[1024];
+
+    snprintf (str, 1024, "%s/%s", path, element);
+
+    return initXPathFromMetadataPath (xPath, metadata, BAD_CAST str);
 }
 
 static void
@@ -282,206 +297,125 @@ getOptionType (char *name)
 }
 
 static void
-initBoolValue (CompOptionValue *v, xmlNodePtr node)
+initBoolValue (CompOptionValue *v,
+	       xmlDocPtr       doc,
+	       xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlChar *value;
 
     v->b = FALSE;
-    
-    if (!xmlStrcmp (cur->name, BAD_CAST "element") ||
-	!xmlStrcmp (cur->name, BAD_CAST "bool") ||
-	!xmlStrcmp (cur->name, BAD_CAST "default"))
-    {
-	xmlChar *value = xmlNodeListGetString (node->doc,
-					       node->xmlChildrenNode, 1);
-	if (!value)
-	    return;
-	v->b = (!strcasecmp ((char *) value, "true")) ? TRUE : FALSE;
-	xmlFree (value);
+
+    if (!doc)
 	return;
-    }
-    
-    while (cur != NULL)
+
+    value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
+    if (value)
     {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-            !xmlStrcmp (cur->name, BAD_CAST "bool"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    if (!value)
-		continue;
-	    v->b = (!strcasecmp ((char *) value, "true")) ? TRUE : FALSE;
-	    xmlFree (value);
-	    return;
-	}
-	cur = cur->next;
+	if (strcasecmp ((char *) value, "true") == 0)
+	    v->b = TRUE;
+
+	xmlFree (value);
     }
 }
 
 static void
-initIntValue (CompOptionValue *v, xmlNodePtr node)
+initIntValue (CompOptionValue *v,
+	      xmlDocPtr       doc,
+	      xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlChar *value;
 
     v->i = 0;
-    
-    if (!xmlStrcmp (cur->name, BAD_CAST "element") ||
-	!xmlStrcmp (cur->name, BAD_CAST "int") ||
-	!xmlStrcmp (cur->name, BAD_CAST "default"))
+
+    if (!doc)
+	return;
+
+    value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
+    if (value)
     {
-	xmlChar *value = xmlNodeListGetString (node->doc,
-					       node->xmlChildrenNode, 1);
-	if (!value)
-	    return;
 	v->i = strtol ((char *) value, NULL, 0);
 	xmlFree (value);
-	return;
-    }
-    
-    while (cur != NULL)
-    {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-            !xmlStrcmp (cur->name, BAD_CAST "int"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    if (!value)
-		continue;
-	    v->i = strtol ((char *) value, NULL, 0);
-	    xmlFree (value);
-	    return;
-	}
-	cur = cur->next;
     }
 }
 
 static void
-initFloatValue (CompOptionValue *v, xmlNodePtr node)
+initFloatValue (CompOptionValue *v,
+		xmlDocPtr       doc,
+		xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlChar *value;
 
-    v->f = 0;
-    
-    if (!xmlStrcmp (cur->name, BAD_CAST "element") ||
-	!xmlStrcmp (cur->name, BAD_CAST "float") ||
-	!xmlStrcmp (cur->name, BAD_CAST "default"))
+    v->f = 0.0f;
+
+    if (!doc)
+	return;
+
+    value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
+    if (value)
     {
-	xmlChar *value = xmlNodeListGetString (node->doc,
-					       node->xmlChildrenNode, 1);
-	if (!value)
-	    return;
 	v->f = strtod ((char *) value, NULL);
 	xmlFree (value);
-	return;
-    }
-    
-    while (cur != NULL)
-    {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-            !xmlStrcmp (cur->name, BAD_CAST "float"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    if (!value)
-		continue;
-	    v->f = strtod ((char *) value, NULL);
-	    xmlFree (value);
-	    return;
-	}
-	cur = cur->next;
     }
 }
 
 static void
-initStringValue (CompOptionValue *v, xmlNodePtr node)
+initStringValue (CompOptionValue *v,
+		 xmlDocPtr       doc,
+		 xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlChar *value;
 
-    v->s = strdup("");
-    
-    if (!xmlStrcmp (cur->name, BAD_CAST "element") ||
-	!xmlStrcmp (cur->name, BAD_CAST "string") ||
-	!xmlStrcmp (cur->name, BAD_CAST "default"))
+    v->s = strdup ("");
+
+    if (!doc)
+	return;
+
+    value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
+    if (value)
     {
-	xmlChar *value = xmlNodeListGetString (node->doc,
-					       node->xmlChildrenNode, 1);
-	if (!value)
-	    return;
 	free (v->s);
 	v->s = strdup ((char *) value);
 	xmlFree (value);
-	return;
-    }
-    
-    while (cur != NULL)
-    {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-            !xmlStrcmp (cur->name, BAD_CAST "string"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    if (!value)
-	    {
-		cur = cur->next;
-		continue;
-	    }
-	    free (v->s);
-	    v->s = strdup ((char *) value);
-	    xmlFree (value);
-	    return;
-	}
-	cur = cur->next;
     }
 }
 
 static void
-initColorValue (CompOptionValue *v, xmlNodePtr node)
+initColorValue (CompOptionValue *v,
+		xmlDocPtr       doc,
+		xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlNodePtr child;
 
-    v->c[0] = 0;
-    v->c[1] = 0;
-    v->c[2] = 0;
-    v->c[3] = 0;
-    
-    while (cur != NULL)
+    memset (v->c, 0, sizeof (v->c));
+
+    if (!doc)
+	return;
+
+    for (child = node->xmlChildrenNode; child; child = child->next)
     {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-	    !xmlStrcmp (cur->name, BAD_CAST "element") ||
-            !xmlStrcmp (cur->name, BAD_CAST "color"))
+	xmlChar *value;
+	int	index;
+
+	if (!xmlStrcmp (child->name, BAD_CAST "red"))
+	    index = 0;
+	else if (!xmlStrcmp (child->name, BAD_CAST "green"))
+	    index = 1;
+	else if (!xmlStrcmp (child->name, BAD_CAST "blue"))
+	    index = 2;
+	else if (!xmlStrcmp (child->name, BAD_CAST "alpha"))
+	    index = 3;
+	else
+	    continue;
+
+	value = xmlNodeListGetString (child->doc, child->xmlChildrenNode, 1);
+	if (value)
 	{
-	    initColorValue (v, cur->xmlChildrenNode);
-	    return;
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "red"))
-	{
-	    xmlChar *value = xmlNodeListGetString(cur->doc,
-						  cur->xmlChildrenNode, 1);
-	    v->c[0] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
+	    int color = strtol ((char *) value, NULL , 0);
+
+	    v->c[index] = MAX (0, MIN (0xffff, color));
+
 	    xmlFree (value);
 	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "green"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    v->c[1] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
-	    xmlFree (value);
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "blue"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    v->c[2] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
-	    xmlFree (value);
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "alpha"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    v->c[3] = MAX (0, MIN (0xffff, strtol ((char *) value, NULL , 0)));
-	    xmlFree (value);
-	}
-	cur = cur->next;
     }
 }
 
@@ -541,36 +475,25 @@ convertButtonBinding (CompButtonBinding *bb, char *bind)
 }
 
 static void
-initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
+initActionValue (CompDisplay	 *d,
+		 CompOptionValue *v,
+		 xmlDocPtr       doc,
+		 xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlNodePtr child;
 
-    v->action.initiate         = NULL;
-    v->action.terminate        = NULL;
-    v->action.state            = 0;
-    v->action.type             = 0;
-    v->action.key.keycode      = 0;
-    v->action.key.modifiers    = 0;
-    v->action.button.button    = 0;
-    v->action.button.modifiers = 0;
-    v->action.bell             = FALSE;
-    v->action.edgeMask         = 0;
-    v->action.edgeButton       = 0;
+    memset (&v->action, 0, sizeof (v->action));
 
-    while (cur != NULL)
+    if (!doc)
+	return;
+
+    for (child = node->xmlChildrenNode; child; child = child->next)
     {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-	    !xmlStrcmp (cur->name, BAD_CAST "element") ||
-            !xmlStrcmp (cur->name, BAD_CAST "action"))
-	{
-	    initActionValue (d, v, cur->xmlChildrenNode);
-	    return;
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "key"))
+	if (!xmlStrcmp (child->name, BAD_CAST "key"))
 	{
 	    xmlChar *state;
-	    xmlChar *key = xmlNodeListGetString (cur->doc,
-		                                 cur->xmlChildrenNode, 1);
+	    xmlChar *key = xmlNodeListGetString (child->doc,
+		                                 child->xmlChildrenNode, 1);
 
 	    if (key && xmlStrlen (key))
 	    {
@@ -579,7 +502,7 @@ initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 	    }
 	    xmlFree(key);
 	    
-	    state = xmlGetProp(cur, BAD_CAST "state");
+	    state = xmlGetProp (child, BAD_CAST "state");
 
 	    if (!state)
 	    {
@@ -599,11 +522,11 @@ initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 	    }
 	    xmlFree(state);
 	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "button"))
+	else if (!xmlStrcmp (child->name, BAD_CAST "button"))
 	{
 	    xmlChar *state;
-	    xmlChar *button = xmlNodeListGetString (cur->doc,
-		                                    cur->xmlChildrenNode, 1);
+	    xmlChar *button = xmlNodeListGetString (child->doc,
+		                                    child->xmlChildrenNode, 1);
 	    if (button && xmlStrlen (button))
 	    {
                 v->action.type |= CompBindingTypeButton;
@@ -611,7 +534,7 @@ initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 	    }
 	    xmlFree(button);
      
-	    state = xmlGetProp(cur, (xmlChar *)"state");
+	    state = xmlGetProp (child, BAD_CAST "state");
 	    if (!state)
 	    {
 		v->action.state |= CompActionStateInitButton;
@@ -630,12 +553,12 @@ initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 	    }
 	    xmlFree(state);
 	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "edge"))
+	else if (!xmlStrcmp (child->name, BAD_CAST "edge"))
 	{
 	    xmlChar *state;
 	    xmlChar *button;
-	    xmlChar *edge = xmlNodeListGetString (cur->doc,
-		                                  cur->xmlChildrenNode, 1);
+	    xmlChar *edge = xmlNodeListGetString (child->doc,
+		                                  child->xmlChildrenNode, 1);
 	    char *tok = strtok ((char *) edge, ",");
 	    
 	    while (tok && edge)
@@ -660,7 +583,7 @@ initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 	    }
 	    xmlFree(edge);
 	   
-	    state = xmlGetProp (cur, BAD_CAST "state");
+	    state = xmlGetProp (child, BAD_CAST "state");
 	    if (!state)
 	    {
 		v->action.state |= CompActionStateInitEdge;
@@ -683,156 +606,99 @@ initActionValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
 	    }
 	    xmlFree(state);
 
-	    button = xmlGetProp (cur, BAD_CAST "button");
+	    button = xmlGetProp (child, BAD_CAST "button");
             if (button)
 	    {
                 v->action.edgeButton = strtol ((char *) button, NULL, 0);
 	    }
 	    xmlFree(button);
 	}
-	else if (!xmlStrcmp(cur->name, (const xmlChar *) "bell"))
+	else if (!xmlStrcmp(child->name, (const xmlChar *) "bell"))
 	{
-	    xmlChar *bell = xmlNodeListGetString (cur->doc,
-		                                  cur->xmlChildrenNode, 1);
+	    xmlChar *bell = xmlNodeListGetString (child->doc,
+		                                  child->xmlChildrenNode, 1);
 	    if (bell)
 		v->action.bell = (xmlStrcasecmp (bell, BAD_CAST "true") == 0);
 	    xmlFree(bell);
 	    
 	    v->action.state |= CompActionStateInitBell;
 	}
-	cur = cur->next;
     }
 }
 
 static void
-initMatchValue (CompOptionValue *v, xmlNodePtr node)
+initMatchValue (CompOptionValue *v,
+		xmlDocPtr       doc,
+		xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlChar *value;
 
     matchInit (&v->match);
-    
-    if (!xmlStrcmp (cur->name, BAD_CAST "element") ||
-	!xmlStrcmp (cur->name, BAD_CAST "match") ||
-	!xmlStrcmp (cur->name, BAD_CAST "default"))
+
+    if (!doc)
+	return;
+
+    value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
+    if (value)
     {
-	xmlChar *value = xmlNodeListGetString (node->doc,
-					       node->xmlChildrenNode, 1);
-	if (!value)
-	    return;
 	matchAddFromString (&v->match, (char *) value);
 	xmlFree (value);
-	return;
-    }
-    
-    while (cur != NULL)
-    {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-            !xmlStrcmp (cur->name, BAD_CAST "match"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode, 1);
-	    if (!value)
-	    {
-		cur = cur->next;
-		continue;
-	    }
-            matchAddFromString (&v->match, (char *) value);
-	    xmlFree (value);
-	    return;
-	}
-	cur = cur->next;
     }
 }
 
 static void
-initListValue (CompDisplay *d, CompOptionValue *v, xmlNodePtr node)
+initListValue (CompDisplay     *d,
+	       CompOptionValue *v,
+	       xmlDocPtr       doc,
+	       xmlNodePtr      node)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    xmlNodePtr child;
 
-    v->list.type = CompOptionTypeBool;
-    v->list.value = NULL;
+    v->list.value  = NULL;
     v->list.nValue = 0;
-    
-    while (cur != NULL)
+
+    if (!doc)
+	return;
+
+    for (child = node->xmlChildrenNode; child; child = child->next)
     {
-	if (!xmlStrcmp (cur->name, BAD_CAST "default") ||
-            !xmlStrcmp (cur->name, BAD_CAST "list"))
+	CompOptionValue *value;
+
+	if (xmlStrcmp (child->name, BAD_CAST "element"))
+	    continue;
+
+	value = realloc (v->list.value,
+			 sizeof (CompOptionValue) * (v->list.nValue + 1));
+	if (value)
 	{
-	    CompOptionType oType;
-	    xmlChar *type = xmlGetProp (cur, BAD_CAST "type");
-	    xmlXPathObjectPtr xpathObj;
-            xmlXPathContextPtr xpathCtx;
-	    int i;
-	    int num;
-
-	    if (!type || !xmlStrlen(type))
-	    {
-       		fprintf (stderr, "%s: No list type defined in metadata\n",
-		         programName);
-		if (type)
-		   xmlFree (type);
-		return;
+	    switch (v->list.type) {
+	    case CompOptionTypeBool:
+		initBoolValue (&value[v->list.nValue], doc, child);
+		break;
+	    case CompOptionTypeInt:
+		initIntValue (&value[v->list.nValue], doc, child);
+		break;
+	    case CompOptionTypeFloat:
+		initFloatValue (&value[v->list.nValue], doc, child);
+		break;
+	    case CompOptionTypeString:
+		initStringValue (&value[v->list.nValue], doc, child);
+		break;
+	    case CompOptionTypeColor:
+		initColorValue (&value[v->list.nValue], doc, child);
+		break;
+	    case CompOptionTypeAction:
+		initActionValue (d, &value[v->list.nValue], doc, child);
+		break;
+	    case CompOptionTypeMatch:
+		initMatchValue (&value[v->list.nValue], doc, child);
+	    default:
+		break;
 	    }
 
-	    oType = getOptionType ((char *) type);
-	    xmlFree (type);
-
-	    if (oType == CompOptionTypeList)
-	    {
-        	fprintf (stderr, "%s: Not supported list type \"list\"\n",
-		         programName);
-		return;
-	    }
-
-	    v->list.type = oType;
-
-	    xpathCtx = xmlXPathNewContext (cur->doc);
-            xpathCtx->node = cur;
-            xpathObj = xmlXPathEvalExpression (BAD_CAST "*", xpathCtx);
-
-	    if (!xpathObj)
-		return;
-
-	    num = (xpathObj->nodesetval)? xpathObj->nodesetval->nodeNr : 0;
-	    if (num)
-	    {
-		v->list.value = malloc (sizeof (CompOptionValue) * num);
-		v->list.nValue = num;
-		for (i = 0; i < num; i++)
-		{
-		    xmlNodePtr cur = xpathObj->nodesetval->nodeTab[i];
-
-		    switch (oType)
-		    {
-		    case CompOptionTypeBool:
-			initBoolValue (&v->list.value[i], cur);
-			break;
-		    case CompOptionTypeInt:
-			initIntValue (&v->list.value[i], cur);
-			break;
-		    case CompOptionTypeFloat:
-			initFloatValue (&v->list.value[i], cur);
-			break;
-		    case CompOptionTypeString:
-			initStringValue (&v->list.value[i], cur);
-			break;
-		    case CompOptionTypeColor:
-			initColorValue (&v->list.value[i], cur);
-			break;
-		    case CompOptionTypeAction:
-			initActionValue (d, &v->list.value[i], cur);
-			break;
-		    case CompOptionTypeMatch:
-			initMatchValue (&v->list.value[i], cur);
-			break;
-		    default:
-			break;
-		    }
-		}
-	    }
-	    return;
+	    v->list.value = value;
+	    v->list.nValue++;
 	}
-	cur = cur->next;
     }
 }
 
@@ -946,11 +812,12 @@ initOptionFromMetadataPath (CompDisplay   *d,
 			    CompOption	  *option,
 			    const xmlChar *path)
 {
-    CompXPath xPath;
-    xmlNode   *node;
-    xmlChar   *name, *type;
+    CompXPath  xPath, xDefaultPath, xTypePath;
+    xmlNodePtr node, defaultNode;
+    xmlDocPtr  defaultDoc;
+    xmlChar    *name, *type;
 
-    if (!initXPathFromMetadataPath (&xPath, metadata, BAD_CAST path))
+    if (!initXPathFromMetadataPath (&xPath, metadata, path))
 	return FALSE;
 
     node = *xPath.obj->nodesetval->nodeTab;
@@ -970,33 +837,67 @@ initOptionFromMetadataPath (CompDisplay   *d,
     option->name = strdup ((char *) name);
     xmlFree (name);
 
+    if (initXPathFromMetadataPathElement (&xDefaultPath, metadata, path,
+					  BAD_CAST "default"))
+    {
+	defaultDoc  = xDefaultPath.doc;
+	defaultNode = *xDefaultPath.obj->nodesetval->nodeTab;
+    }
+    else
+    {
+	defaultDoc  = NULL;
+	defaultNode = NULL;
+    }
+
     switch (option->type) {
     case CompOptionTypeBool:
-	initBoolValue (&option->value, node);
+	initBoolValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeInt:
-	initIntValue (&option->value, node);
+	initIntValue (&option->value, defaultDoc, defaultNode);
 	initIntRestriction (&option->rest, node);
 	break;
     case CompOptionTypeFloat:
-	initFloatValue (&option->value, node);
+	initFloatValue (&option->value, defaultDoc, defaultNode);
 	initFloatRestriction (&option->rest, node);
 	break;
     case CompOptionTypeString:
-	initStringValue (&option->value, node);
+	initStringValue (&option->value, defaultDoc, defaultNode);
 	initStringRestriction (&option->rest, node);
 	break;
     case CompOptionTypeColor:
-	initColorValue (&option->value, node);
+	initColorValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeAction:
-	initActionValue (d, &option->value, node);
+	initActionValue (d, &option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeMatch:
-	initMatchValue (&option->value, node);
+	initMatchValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeList:
-	initListValue (d, &option->value, node);
+	option->value.list.type = CompOptionTypeBool;
+
+	if (initXPathFromMetadataPathElement (&xTypePath, metadata, path,
+					      BAD_CAST "type"))
+	{
+	    xmlNodePtr typeNode;
+	    xmlChar    *value;
+
+	    typeNode = *xTypePath.obj->nodesetval->nodeTab;
+
+	    value = xmlNodeListGetString (xTypePath.doc,
+					  typeNode->xmlChildrenNode, 1);
+	    if (value)
+	    {
+		option->value.list.type = getOptionType ((char *) value);
+		xmlFree (value);
+	    }
+
+	    finiXPath (&xTypePath);
+	}
+
+	initListValue (d, &option->value, defaultDoc, defaultNode);
+
 	switch (option->value.list.type) {
 	case CompOptionTypeInt:
 	    initIntRestriction (&option->rest, node);
@@ -1011,6 +912,9 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	}
 	break;
     }
+
+    if (defaultDoc)
+	finiXPath (&xDefaultPath);
 
     finiXPath (&xPath);
 
@@ -1044,13 +948,13 @@ compInitDisplayOptionFromMetadata (CompDisplay  *d,
 }
 
 char *
-compGetStringFromMetadataPath (CompMetadata *m,
-			       char         *path)
+compGetStringFromMetadataPath (CompMetadata *metadata,
+			       const char   *path)
 {
     CompXPath xPath;
     char      *v = NULL;
 
-    if (!initXPathFromMetadataPath (&xPath, m, BAD_CAST path))
+    if (!initXPathFromMetadataPath (&xPath, metadata, BAD_CAST path))
 	return NULL;
 
     xPath.obj = xmlXPathConvertString (xPath.obj);
