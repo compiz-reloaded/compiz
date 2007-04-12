@@ -1901,7 +1901,7 @@ dbusSendChangeSignalForDisplayOption (CompDisplay *d,
 
     if (o)
     {
-	sprintf (path, "/org/freedesktop/compiz/%s/allscreens/%s",
+	sprintf (path, "%s/%s/allscreens/%s", COMPIZ_DBUS_ROOT_PATH
 		 plugin, o->name);
 	dbusSendChangeSignalForOption (d, o->type, &o->value, path);
     }
@@ -1916,7 +1916,7 @@ dbusSendChangeSignalForScreenOption (CompScreen *s,
 
     if (o)
     {
-	sprintf (path, "/org/freedesktop/compiz/%s/screens%d/%s",
+	sprintf (path, "%s/%s/screens%d/%s", COMPIZ_DBUS_ROOT_PATH
 		 plugin, s->screenNum, o->name);
 	dbusSendChangeSignalForOption (s->display, o->type, &o->value, path);
     }
@@ -2430,7 +2430,7 @@ dbusSendPluginsChangedSignal (const char *name,
 
     DBUS_DISPLAY (d);
 
-    signal = dbus_message_new_signal ("/org/freedesktop/compiz",
+    signal = dbus_message_new_signal (COMPIZ_DBUS_ROOT_PATH,
 				      COMPIZ_DBUS_SERVICE_NAME,
 				      COMPIZ_DBUS_PLUGINS_CHANGED_SIGNAL_NAME);
 
