@@ -64,13 +64,6 @@ typedef enum {
 
 static int displayPrivateIndex;
 
-typedef struct _DbusRegisteredPlugin DbusRegisteredPlugin;
-
-struct _DbusRegisteredPlugin {
-    char                 *name;
-    DbusRegisteredPlugin *next;
-};
-
 typedef struct _DbusDisplay {
     int screenPrivateIndex;
 
@@ -79,21 +72,15 @@ typedef struct _DbusDisplay {
 
     CompFileWatchHandle fileWatch[DBUS_FILE_WATCH_NUM];
 
-    DbusRegisteredPlugin *registeredPlugins;
-
     SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
     InitPluginForDisplayProc      initPluginForDisplay;
-    FiniPluginForDisplayProc      finiPluginForDisplay;
 } DbusDisplay;
 
 typedef struct _DbusScreen {
-    DbusRegisteredPlugin *registeredPlugins;
-
     SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
     InitPluginForScreenProc      initPluginForScreen;
-    FiniPluginForScreenProc      finiPluginForScreen;
 } DbusScreen;
 
 static DBusHandlerResult dbusHandleMessage (DBusConnection *,
@@ -1239,13 +1226,82 @@ dbusAppendOptionValue (CompDisplay     *d,
 		       CompOptionType  type,
 		       CompOptionValue *value)
 {
-    int	i;
+    int  i;
+    char *s;
 
     if (type == CompOptionTypeList)
     {
+	DBusMessageIter iter;
+	DBusMessageIter listIter;
+	char		sig[2];
+
+	switch (value->list.type)
+	{
+	case CompOptionTypeInt:
+	    sig[0] = DBUS_TYPE_INT32;
+	    break;
+	case CompOptionTypeFloat:
+	    sig[0] = DBUS_TYPE_DOUBLE;
+	    break;
+	case CompOptionTypeBool:
+	    sig[0] = DBUS_TYPE_BOOLEAN;
+	    break;
+	default:
+	    sig[0] = DBUS_TYPE_STRING;
+	    break;
+	}
+	sig[1] = '\0';
+
+	dbus_message_iter_init_append (message, &iter);
+	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+					  sig, &listIter);
+
 	for (i = 0; i < value->list.nValue; i++)
-	    dbusAppendSimpleOptionValue (message, value->list.type,
-					 &value->list.value[i]);
+	{
+	    switch (value->list.type)
+	    {
+	    case CompOptionTypeInt:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].i);
+		break;
+	    case CompOptionTypeFloat:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].f);
+		break;
+	    case CompOptionTypeBool:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].b);
+		break;
+	    case CompOptionTypeString:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].s);
+		break;
+	    case CompOptionTypeMatch:
+	    s = matchToString (&value->list.value[i].match);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+		break;
+	    case CompOptionTypeColor:
+	    s = colorToString (value->list.value[i].c);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+		break;
+	    default:
+		break;
+	    }
+	}
+
+	dbus_message_iter_close_container (&iter, &listIter);
     }
     else if (type == CompOptionTypeAction)
     {
@@ -1901,7 +1957,7 @@ dbusSendChangeSignalForDisplayOption (CompDisplay *d,
 
     if (o)
     {
-	sprintf (path, "/org/freedesktop/compiz/%s/allscreens/%s",
+	sprintf (path, "%s/%s/allscreens/%s", COMPIZ_DBUS_ROOT_PATH,
 		 plugin, o->name);
 	dbusSendChangeSignalForOption (d, o->type, &o->value, path);
     }
@@ -1916,7 +1972,7 @@ dbusSendChangeSignalForScreenOption (CompScreen *s,
 
     if (o)
     {
-	sprintf (path, "/org/freedesktop/compiz/%s/screens%d/%s",
+	sprintf (path, "%s/%s/screens%d/%s", COMPIZ_DBUS_ROOT_PATH,
 		 plugin, s->screenNum, o->name);
 	dbusSendChangeSignalForOption (s->display, o->type, &o->value, path);
     }
@@ -1974,66 +2030,6 @@ dbusGetPathDecomposed (char *data,
 }
 
 /* dbus registration */
-
-static Bool
-dbusPluginRegistered (DbusRegisteredPlugin *list, char *pluginName)
-{
-    DbusRegisteredPlugin *reg;
-
-    reg = list;
-
-    while (reg)
-    {
-	if (strcmp (reg->name, pluginName) == 0)
-	    return TRUE;
-
-	reg = reg->next;
-    }
-
-    return FALSE;
-}
-
-static Bool
-dbusPluginAddRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
-{
-    DbusRegisteredPlugin *new;
-
-    DBUS_DISPLAY (d);
-
-    if (dbusPluginRegistered (dd->registeredPlugins, pluginName))
-	return FALSE;
-
-    new = malloc (sizeof (DbusRegisteredPlugin));
-    if (!new)
-	return FALSE;
-
-    new->name = strdup (pluginName);
-    new->next = dd->registeredPlugins;
-
-    dd->registeredPlugins = new;
-
-    return TRUE;
-}
-
-static Bool
-dbusPluginRemoveRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
-{
-    DbusRegisteredPlugin *remove;
-
-    DBUS_DISPLAY (d);
-
-    if (!dbusPluginRegistered (dd->registeredPlugins, pluginName))
-	return FALSE;
-
-    remove = dd->registeredPlugins;
-
-    dd->registeredPlugins = remove->next;
-
-    free (remove->name);
-    free (remove);
-
-    return TRUE;
-}
 
 static Bool
 dbusRegisterOptions (DBusConnection *connection,
@@ -2098,9 +2094,6 @@ dbusRegisterPluginForDisplay (DBusConnection *connection,
 			      char           *pluginName)
 {
     char       objectPath[256];
-
-    if (!dbusPluginAddRegisteredPluginForDisplay (d, pluginName))
-	return;
 
     /* register plugin root path */
     snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
@@ -2178,17 +2171,14 @@ dbusUnregisterPluginForDisplay (DBusConnection *connection,
 {
     char objectPath[256];
 
-    if (!dbusPluginRemoveRegisteredPluginForDisplay (d, pluginName))
-	return;
-
     snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
 	      pluginName, "allscreens");
+
+    dbusUnregisterOptions (connection, d, objectPath);
     dbus_connection_unregister_object_path (connection, objectPath);
 
     snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
     dbus_connection_unregister_object_path (connection, objectPath);
-
-    dbusUnregisterOptions (connection, d, objectPath);
 }
 
 static void
@@ -2215,9 +2205,9 @@ dbusUnregisterPluginForScreen (DBusConnection *connection,
 
     snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
 	      pluginName, s->screenNum);
-    dbus_connection_unregister_object_path (connection, objectPath);
 
     dbusUnregisterOptions (connection, s->display, objectPath);
+    dbus_connection_unregister_object_path (connection, objectPath);
 }
 
 static void
@@ -2430,7 +2420,7 @@ dbusSendPluginsChangedSignal (const char *name,
 
     DBUS_DISPLAY (d);
 
-    signal = dbus_message_new_signal ("/org/freedesktop/compiz",
+    signal = dbus_message_new_signal (COMPIZ_DBUS_ROOT_PATH,
 				      COMPIZ_DBUS_SERVICE_NAME,
 				      COMPIZ_DBUS_PLUGINS_CHANGED_SIGNAL_NAME);
 
@@ -2569,8 +2559,6 @@ dbusInitDisplay (CompPlugin  *p,
 					  COMPIZ_DBUS_ROOT_PATH,
 					  &dbusMessagesVTable, d);
 
-    dd->registeredPlugins = NULL;
-
     /* register core 'plugin' */
     dbusRegisterPluginForDisplay (dd->connection, d, "core");
     dbusRegisterPluginsForDisplay (dd->connection, d);
@@ -2643,11 +2631,10 @@ dbusInitScreen (CompPlugin *p,
 
     s->privates[dd->screenPrivateIndex].ptr = ds;
 
-    ds->registeredPlugins = NULL;
-
     snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, "core", s->screenNum);
 
     dbusRegisterPluginForScreen (dd->connection, s, "core");
+    dbusRegisterPluginsForScreen (dd->connection, s);
     dbusRegisterOptions (dd->connection, s->display, objectPath);
 
     return TRUE;
