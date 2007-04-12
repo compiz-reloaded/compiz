@@ -715,71 +715,60 @@ stringFromMetadataPathElement (CompMetadata *metadata,
 }
 
 static void
-initIntRestriction (CompOptionRestriction *r, xmlNodePtr node)
+initIntRestriction (CompMetadata	  *metadata,
+		    CompOptionRestriction *r,
+		    const char		  *path)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    char *value;
 
-    r->i.min = 0;
-    r->i.max = 100;
-    
-    while (cur != NULL)
+    r->i.min = MINSHORT;
+    r->i.max = MAXSHORT;
+
+    value = stringFromMetadataPathElement (metadata, path, "min");
+    if (value)
     {
-	if (!xmlStrcmp (cur->name, BAD_CAST "min"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode,
-						  1);
-	    r->i.min = strtol ((char *) value, NULL, 0);
-	    xmlFree (value);
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "max"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode,
-						  1);
-	    r->i.max = strtol ((char *) value, NULL, 0);
-	    xmlFree (value);
-	}
-	cur = cur->next;
+	r->i.min = strtol ((char *) value, NULL, 0);
+	free (value);
+    }
+
+    value = stringFromMetadataPathElement (metadata, path, "max");
+    if (value)
+    {
+	r->i.max = strtol ((char *) value, NULL, 0);
+	free (value);
     }
 }
 
 static void
-initFloatRestriction (CompOptionRestriction *r, xmlNodePtr node)
+initFloatRestriction (CompMetadata	    *metadata,
+		      CompOptionRestriction *r,
+		      const char	    *path)
 {
-    xmlNode *cur = node->xmlChildrenNode;
+    char *value;
 
-    r->f.min = 0.0;
-    r->f.max = 100.0;
-    r->f.min = 0.1;
-    
-    while (cur != NULL)
+    r->f.min	   = MINSHORT;
+    r->f.max	   = MAXSHORT;
+    r->f.precision = 0.1f;
+
+    value = stringFromMetadataPathElement (metadata, path, "min");
+    if (value)
     {
-	if (!xmlStrcmp (cur->name, BAD_CAST "min"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode,
-						  1);
-	    r->f.min = strtod ((char *) value, NULL);
-	    xmlFree (value);
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "max"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode,
-						  1);
-	    r->f.max = strtod ((char *) value, NULL);
-	    xmlFree (value);
-	}
-	else if (!xmlStrcmp (cur->name, BAD_CAST "precision"))
-	{
-	    xmlChar *value = xmlNodeListGetString (cur->doc,
-						   cur->xmlChildrenNode,
-						  1);
-	    r->f.precision = strtod ((char *) value, NULL);
-	    xmlFree (value);
-	}
-	cur = cur->next;
+	r->f.min = strtod ((char *) value, NULL);
+	free (value);
+    }
+
+    value = stringFromMetadataPathElement (metadata, path, "max");
+    if (value)
+    {
+	r->f.max = strtod ((char *) value, NULL);
+	free (value);
+    }
+
+    value = stringFromMetadataPathElement (metadata, path, "precision");
+    if (value)
+    {
+	r->f.precision = strtod ((char *) value, NULL);
+	free (value);
     }
 }
 
@@ -868,11 +857,11 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	break;
     case CompOptionTypeInt:
 	initIntValue (&option->value, defaultDoc, defaultNode);
-	initIntRestriction (&option->rest, node);
+	initIntRestriction (metadata, &option->rest, (char *) path);
 	break;
     case CompOptionTypeFloat:
 	initFloatValue (&option->value, defaultDoc, defaultNode);
-	initFloatRestriction (&option->rest, node);
+	initFloatRestriction (metadata, &option->rest, (char *) path);
 	break;
     case CompOptionTypeString:
 	initStringValue (&option->value, defaultDoc, defaultNode);
@@ -903,10 +892,10 @@ initOptionFromMetadataPath (CompDisplay   *d,
 
 	switch (option->value.list.type) {
 	case CompOptionTypeInt:
-	    initIntRestriction (&option->rest, node);
+	    initIntRestriction (metadata, &option->rest, (char *) path);
 	    break;
 	case CompOptionTypeFloat:
-	    initFloatRestriction (&option->rest, node);
+	    initFloatRestriction (metadata, &option->rest, (char *) path);
 	    break;
 	case CompOptionTypeString:
 	    initStringRestriction (&option->rest, node);
