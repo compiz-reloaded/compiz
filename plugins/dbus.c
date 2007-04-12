@@ -2032,24 +2032,6 @@ dbusGetPathDecomposed (char *data,
 /* dbus registration */
 
 static Bool
-dbusPluginRegistered (DbusRegisteredPlugin *list, char *pluginName)
-{
-    DbusRegisteredPlugin *reg;
-
-    reg = list;
-
-    while (reg)
-    {
-	if (strcmp (reg->name, pluginName) == 0)
-	    return TRUE;
-
-	reg = reg->next;
-    }
-
-    return FALSE;
-}
-
-static Bool
 dbusRegisterOptions (DBusConnection *connection,
 		     CompDisplay    *d,
 		     char           *screenPath)
@@ -2577,8 +2559,6 @@ dbusInitDisplay (CompPlugin  *p,
 					  COMPIZ_DBUS_ROOT_PATH,
 					  &dbusMessagesVTable, d);
 
-    dd->registeredPlugins = NULL;
-
     /* register core 'plugin' */
     dbusRegisterPluginForDisplay (dd->connection, d, "core");
     dbusRegisterPluginsForDisplay (dd->connection, d);
@@ -2650,8 +2630,6 @@ dbusInitScreen (CompPlugin *p,
     WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
 
     s->privates[dd->screenPrivateIndex].ptr = ds;
-
-    ds->registeredPlugins = NULL;
 
     snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, "core", s->screenNum);
 
