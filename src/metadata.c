@@ -773,38 +773,47 @@ initFloatRestriction (CompMetadata	    *metadata,
 }
 
 static void
-initStringRestriction (CompOptionRestriction *r, xmlNodePtr node)
+initStringRestriction (CompMetadata	     *metadata,
+		       CompOptionRestriction *r,
+		       const char	     *path)
 {
-    xmlXPathObjectPtr xpathObj;
-    xmlXPathContextPtr xpathCtx;
-    int num;
-    int i;
-    
-    xpathCtx = xmlXPathNewContext (node->doc);
-    xpathCtx->node = node;
-    xpathObj = xmlXPathEvalExpression (BAD_CAST "allowed/string", xpathCtx);
+    CompXPath  xPath;
+    xmlNodePtr node, child;
 
-    r->s.string = NULL;
+    r->s.string  = NULL;
     r->s.nString = 0;
-    
-    if (!xpathObj)
+
+    if (!initXPathFromMetadataPathElement (&xPath, metadata, BAD_CAST path,
+					   BAD_CAST "allowed"))
 	return;
 
-    num = (xpathObj->nodesetval)? xpathObj->nodesetval->nodeNr : 0;
-    if (num)
-    {
-	r->s.string = malloc (sizeof (char*) * num);
-	r->s.nString = num;
-	for (i = 0; i < num; i++)
-	{
-	    xmlChar *value;
-	    xmlNodePtr cur = xpathObj->nodesetval->nodeTab[i];
+    node = *xPath.obj->nodesetval->nodeTab;
 
-	    value = xmlNodeListGetString (cur->doc,
-					  cur->xmlChildrenNode, 1);
-	    r->s.string[i] = (value)? strdup ((char *) value) : strdup ("");
+    for (child = node->xmlChildrenNode; child; child = child->next)
+    {
+	xmlChar *value;
+
+	if (xmlStrcmp (child->name, BAD_CAST "string"))
+	    continue;
+
+	value = xmlNodeListGetString (child->doc, child->xmlChildrenNode, 1);
+	if (value)
+	{
+	    char **string;
+
+	    string = realloc (r->s.string, sizeof (char *) *
+			      (r->s.nString + 1));
+	    if (string)
+	    {
+		string[r->s.nString] = strdup ((char *) value);
+
+		r->s.string = string;
+		r->s.nString++;
+	    }
 	}
     }
+
+    finiXPath (&xPath);
 }
 
 static Bool
@@ -865,7 +874,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	break;
     case CompOptionTypeString:
 	initStringValue (&option->value, defaultDoc, defaultNode);
-	initStringRestriction (&option->rest, node);
+	initStringRestriction (metadata, &option->rest, (char *) path);
 	break;
     case CompOptionTypeColor:
 	initColorValue (&option->value, defaultDoc, defaultNode);
@@ -898,7 +907,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	    initFloatRestriction (metadata, &option->rest, (char *) path);
 	    break;
 	case CompOptionTypeString:
-	    initStringRestriction (&option->rest, node);
+	    initStringRestriction (metadata, &option->rest, (char *) path);
 	default:
 	    break;
 	}
