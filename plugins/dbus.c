@@ -2648,6 +2648,7 @@ dbusInitScreen (CompPlugin *p,
     snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, "core", s->screenNum);
 
     dbusRegisterPluginForScreen (dd->connection, s, "core");
+    dbusRegisterPluginsForScreen (dd->connection, s);
     dbusRegisterOptions (dd->connection, s->display, objectPath);
 
     return TRUE;
