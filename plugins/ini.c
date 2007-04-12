@@ -781,43 +781,46 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		!continueReading)
 	    {
 		o = compFindOption (option, nOption, action.realOptionName, 0);
-		value = o->value;
-
-		value.action.type = action.a.type;
-		value.action.key = action.a.key;
-		value.action.button = action.a.button;
-		value.action.bell = action.a.bell;
-		value.action.edgeMask = action.a.edgeMask;
-		value.action.edgeButton = action.a.edgeButton;
-
-		if (plugin)
+		if (o)
 		{
-		    if (s)
-			status = (*s->setScreenOptionForPlugin) (s, plugin, action.realOptionName, &value);
+		    value = o->value;
+
+		    value.action.type = action.a.type;
+		    value.action.key = action.a.key;
+		    value.action.button = action.a.button;
+		    value.action.bell = action.a.bell;
+		    value.action.edgeMask = action.a.edgeMask;
+		    value.action.edgeButton = action.a.edgeButton;
+
+		    if (plugin)
+		    {
+			if (s)
+			    status = (*s->setScreenOptionForPlugin) (s, plugin, action.realOptionName, &value);
+			else
+			    status = (*d->setDisplayOptionForPlugin) (d, plugin, action.realOptionName, &value);
+		    }
 		    else
-			status = (*d->setDisplayOptionForPlugin) (d, plugin, action.realOptionName, &value);
-		}
-		else
-		{
-		    if (s)
-			status = (*s->setScreenOption) (s, action.realOptionName, &value);
+		    {
+			if (s)
+			    status = (*s->setScreenOption) (s, action.realOptionName, &value);
+			else
+			    status = (*d->setDisplayOption) (d, action.realOptionName, &value);
+		    }
+
+		    /* clear the buffer */
+		    free(action.realOptionName);
+		    action.realOptionName = NULL;
+
+		    /* we missed the current line because we exited it in the first call */
+		    if (!o && action.valueMasks == ACTION_VALUES_ALL)
+		    {
+		        action.valueMasks = 0;
+		        parseAction(d, optionName, optionValue, &action);
+		    }
 		    else
-			status = (*d->setDisplayOption) (d, action.realOptionName, &value);
-		}
-
-		/* clear the buffer */
-		free(action.realOptionName);
-		action.realOptionName = NULL;
-
-		/* we missed the current line because we exited it in the first call */
-		if (!o && action.valueMasks == ACTION_VALUES_ALL)
-		{
-		    action.valueMasks = 0;
-		    parseAction(d, optionName, optionValue, &action);
-		}
-		else
-		{
-		    action.valueMasks = 0;
+		    {
+		        action.valueMasks = 0;
+		    }
 		}
 	    }
 	}
@@ -968,12 +971,16 @@ iniSaveOptions (CompDisplay *d,
 
 	    strVal = malloc (sizeof(char) * MAX_OPTION_LENGTH);
 	    strcpy (strVal, "");
+	    firstInList = TRUE;
 	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	    {
 		if (option->value.action.edgeMask & (1 << i))
 		{
+		    if (!firstInList)
+		    	strncat (strVal, ",", MAX_OPTION_LENGTH);
+		    firstInList = FALSE;
+		    
 		    strncat (strVal, edgeToString (i), MAX_OPTION_LENGTH);
-		    strncat (strVal, ",", MAX_OPTION_LENGTH);
 		}
 	    }
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edge", strVal);
@@ -1005,19 +1012,22 @@ iniSaveOptions (CompDisplay *d,
 		if (!strVal)
 		    return FALSE;
 		strcpy (strVal, "");
+		firstInList = TRUE;
 
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
 		    itemVal = iniOptionValueToString (
 						&option->value.list.value[i],
 						option->value.list.type);
-
+		    if (!firstInList)
+		        strncat (strVal, ",", stringLen);
+		    firstInList = FALSE;
+			
 		    if (itemVal)
 		    {
 			strncat (strVal, itemVal, stringLen);
 			free (itemVal);
 		    }
-		    strncat (strVal, ",", stringLen);
 		}
 
 		fprintf (optionFile, "%s=%s\n", option->name, strVal);
