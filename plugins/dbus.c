@@ -1943,12 +1943,12 @@ dbusGetPathDecomposed (char *data,
 	    ++i;
 	}
     }
-  
+
     retval = malloc (sizeof (char*) * nComponents + 1);
 
     if (nComponents == 0)
     {
-	retval[0] = malloc (1);
+	retval[0] = malloc (sizeof (char));
 	retval[0][0] = '\0';
 	*path = retval;
 	return TRUE;
@@ -1964,6 +1964,9 @@ dbusGetPathDecomposed (char *data,
 	token = strtok (NULL, "/");
 	i++;
     }
+    retval[i] = malloc (sizeof (char));
+    retval[i][0] = '\0';
+
     free (temp);
 
     *path = retval;
@@ -2013,28 +2016,6 @@ dbusPluginAddRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
 }
 
 static Bool
-dbusPluginAddRegisteredPluginForScreen (CompScreen *s, char *pluginName)
-{
-    DbusRegisteredPlugin *new;
-
-    DBUS_SCREEN (s);
-
-    if (dbusPluginRegistered (ds->registeredPlugins, pluginName))
-	return FALSE;
-
-    new = malloc (sizeof (DbusRegisteredPlugin));
-    if (!new)
-	return FALSE;
-
-    new->name = strdup (pluginName);
-    new->next = ds->registeredPlugins;
-
-    ds->registeredPlugins = new;
-
-    return TRUE;
-}
-
-static Bool
 dbusPluginRemoveRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
 {
     DbusRegisteredPlugin *remove;
@@ -2055,33 +2036,13 @@ dbusPluginRemoveRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
 }
 
 static Bool
-dbusPluginRemoveRegisteredPluginForScreen (CompScreen *s, char *pluginName)
-{
-    DbusRegisteredPlugin *remove;
-
-    DBUS_SCREEN (s);
-
-    if (!dbusPluginRegistered (ds->registeredPlugins, pluginName))
-	return FALSE;
-
-    remove = ds->registeredPlugins;
-
-    ds->registeredPlugins = remove->next;
-
-    free (remove->name);
-    free (remove);
-
-    return TRUE;
-}
-
-static Bool
 dbusRegisterOptions (DBusConnection *connection,
 		     CompDisplay    *d,
 		     char           *screen_path)
 {
     CompOption *option = NULL;
-    int nOptions, size;
-    char *option_path;
+    int nOptions;
+    char objectPath[256];
     char **path;
 
     dbusGetPathDecomposed (screen_path, &path);
@@ -2093,13 +2054,10 @@ dbusRegisterOptions (DBusConnection *connection,
 
     while (nOptions--)
     {
-	size = strlen (screen_path) + strlen (option->name) + 2;
-	option_path = malloc (sizeof (char) * size);
-	snprintf (option_path, size, "%s/%s", screen_path, option->name);
+	snprintf (objectPath, 256, "%s/%s", screen_path, option->name);
 
-	dbus_connection_register_object_path (connection, option_path,
+	dbus_connection_register_object_path (connection, objectPath,
 					      &dbusMessagesVTable, d);
-	free (option_path);
 	option++;
     }
 
@@ -2112,8 +2070,8 @@ dbusUnregisterOptions (DBusConnection *connection,
 		       char           *screen_path)
 {
     CompOption *option = NULL;
-    int nOptions, size;
-    char *option_path;
+    int nOptions;
+    char objectPath[256];
     char **path;
 
     dbusGetPathDecomposed (screen_path, &path);
@@ -2125,12 +2083,9 @@ dbusUnregisterOptions (DBusConnection *connection,
 
     while (nOptions--)
     {
-	size = strlen (screen_path) + strlen (option->name) + 2;
-	option_path = malloc (sizeof (char) * size);
-	snprintf (option_path, size, "%s/%s", screen_path, option->name);
+	snprintf (objectPath, 256, "%s/%s", screen_path, option->name);
 
-	dbus_connection_unregister_object_path (connection, option_path);
-	free (option_path);
+	dbus_connection_unregister_object_path (connection, objectPath);
 	option++;
     }
 
@@ -2138,68 +2093,25 @@ dbusUnregisterOptions (DBusConnection *connection,
 }
 
 static void
-dbusRegisterScreen (DBusConnection *connection,
-		    CompDisplay   *d,
-		    char          *pluginName,
-		    char          *screenName)
-{
-    char *screen_path;
-    int  size;
-
-    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (pluginName) +
-		strlen (screenName) + 3;
-
-    screen_path = malloc (sizeof (char) * size);
-    snprintf (screen_path, size, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
-	      pluginName, screenName);
-    dbus_connection_register_object_path (connection, screen_path,
-					  &dbusMessagesVTable, d);
-
-    dbusRegisterOptions (connection, d, screen_path);
-    free (screen_path);
-}
-
-static void
-dbusUnregisterScreen (DBusConnection *connection,
-		      CompDisplay   *d,
-		      char          *pluginName,
-		      char          *screenName)
-{
-    char *screen_path;
-    int  size;
-
-    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (pluginName) +
-		strlen (screenName) + 3;
-
-    screen_path = malloc (sizeof (char) * size);
-    snprintf (screen_path, size, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
-	      pluginName, screenName);
-
-    dbusUnregisterOptions (connection, d, screen_path);
-    free (screen_path);
-}
-
-static void
 dbusRegisterPluginForDisplay (DBusConnection *connection,
 			      CompDisplay    *d,
 			      char           *pluginName)
 {
-    int  size;
-    char *plugin_path;
+    char       objectPath[256];
 
     if (!dbusPluginAddRegisteredPluginForDisplay (d, pluginName))
 	return;
 
-    /* root path + plugin name + separator + \0 */
-    size = strlen (COMPIZ_DBUS_ROOT_PATH) + strlen (pluginName) + 2;
-    plugin_path = malloc (sizeof (char) * size);
-    snprintf (plugin_path, size, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
-
-    dbus_connection_register_object_path (connection, plugin_path,
+    /* register plugin root path */
+    snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
+    dbus_connection_register_object_path (connection, objectPath,
 					  &dbusMessagesVTable, d);
-    free (plugin_path);
 
-    dbusRegisterScreen (connection, d, pluginName, "allscreens");
+    /* register plugin/screen path */
+    snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, "allscreens");
+    dbus_connection_register_object_path (connection, objectPath,
+					  &dbusMessagesVTable, d);
 }
 
 static void
@@ -2207,14 +2119,56 @@ dbusRegisterPluginForScreen (DBusConnection *connection,
 			     CompScreen     *s,
 			     char           *pluginName)
 {
-    char screenName[32];
+    char       objectPath[256];
 
-    sprintf (screenName, "screen%d", s->screenNum);
+    /* register plugin/screen path */
+    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, s->screenNum);
+    dbus_connection_register_object_path (connection, objectPath,
+					  &dbusMessagesVTable, s->display);
+}
 
-    if (!dbusPluginAddRegisteredPluginForScreen (s, pluginName))
-	return;
+static void
+dbusRegisterPluginsForDisplay (DBusConnection *connection,
+			       CompDisplay    *d)
+{
+    CompListValue *pl;
+    int           nPlugins;
+    char          path[256];
 
-    dbusRegisterScreen (connection, s->display, pluginName, screenName);
+    pl = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+
+    nPlugins = pl->nValue;
+
+    while (nPlugins--)
+    {
+	snprintf (path, 256, "%s/%s/allscreens", COMPIZ_DBUS_ROOT_PATH,
+						 pl->value[nPlugins].s);
+	dbusRegisterPluginForDisplay (connection, d, pl->value[nPlugins].s);
+	dbusRegisterOptions (connection, d, path);
+    }
+}
+
+static void
+dbusRegisterPluginsForScreen (DBusConnection *connection,
+			      CompScreen    *s)
+{
+    CompListValue *pl;
+    int           nPlugins;
+    char          path[256];
+
+    pl = &s->display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+
+    nPlugins = pl->nValue;
+
+    while (nPlugins--)
+    {
+	snprintf (path, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
+						 pl->value[nPlugins].s,
+						 s->screenNum);
+	dbusRegisterPluginForScreen (connection, s, pl->value[nPlugins].s);
+	dbusRegisterOptions (connection, s->display, path);
+    }
 }
 
 static void
@@ -2222,10 +2176,34 @@ dbusUnregisterPluginForDisplay (DBusConnection *connection,
 			        CompDisplay    *d,
 			        char           *pluginName)
 {
+    char objectPath[256];
+
     if (!dbusPluginRemoveRegisteredPluginForDisplay (d, pluginName))
 	return;
 
-    dbusUnregisterScreen (connection, d, pluginName, "allscreens");
+    snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, "allscreens");
+    dbus_connection_unregister_object_path (connection, objectPath);
+
+    snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
+    dbus_connection_unregister_object_path (connection, objectPath);
+
+    dbusUnregisterOptions (connection, d, objectPath);
+}
+
+static void
+dbusUnregisterPluginsForDisplay (DBusConnection *connection,
+			         CompDisplay    *d)
+{
+    CompListValue *pl;
+    int           nPlugins;
+
+    pl = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+
+    nPlugins = pl->nValue;
+
+    while (nPlugins--)
+	dbusUnregisterPluginForDisplay (connection, d, pl->value[nPlugins].s);
 }
 
 static void
@@ -2233,44 +2211,50 @@ dbusUnregisterPluginForScreen (DBusConnection *connection,
 			       CompScreen     *s,
 			       char           *pluginName)
 {
-    char screenName[32];
+    char objectPath[256];
 
-    sprintf (screenName, "screen%d", s->screenNum);
+    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, s->screenNum);
+    dbus_connection_unregister_object_path (connection, objectPath);
 
-    if (!dbusPluginRemoveRegisteredPluginForScreen (s, pluginName))
-	return;
+    dbusUnregisterOptions (connection, s->display, objectPath);
+}
 
-    dbusUnregisterScreen (connection, s->display, pluginName, screenName);
+static void
+dbusUnregisterPluginsForScreen (DBusConnection *connection,
+			        CompScreen     *s)
+{
+    CompListValue *pl;
+    int           nPlugins;
+
+    pl = &s->display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+
+    nPlugins = pl->nValue;
+
+    while (nPlugins--)
+	dbusUnregisterPluginForScreen (connection, s, pl->value[nPlugins].s);
 }
 
 static Bool
 dbusInitPluginForDisplay (CompPlugin  *p,
 			  CompDisplay *d)
 {
-    DBUS_DISPLAY (d);
     Bool status;
+    char objectPath[256];
+
+    DBUS_DISPLAY (d);
 
     UNWRAP (dd, d, initPluginForDisplay);
     status = (*d->initPluginForDisplay) (p, d);
     WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
 
     if (status)
-	dbusRegisterPluginForDisplay (dd->connection, d, p->vTable->name);
+    {
+	snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH, p->vTable->name, "allscreens");
+	dbusRegisterOptions (dd->connection, d, objectPath);
+    }
 
     return status;
-}
-
-static void
-dbusFiniPluginForDisplay (CompPlugin  *p,
-			  CompDisplay *d)
-{
-    DBUS_DISPLAY (d);
-
-    dbusUnregisterPluginForDisplay (dd->connection, d, p->vTable->name);
-
-    UNWRAP (dd, d, finiPluginForDisplay);
-    (*d->finiPluginForDisplay) (p, d);
-    WRAP (dd, d, finiPluginForDisplay, dbusFiniPluginForDisplay);
 }
 
 static Bool
@@ -2278,6 +2262,7 @@ dbusInitPluginForScreen (CompPlugin *p,
 			 CompScreen *s)
 {
     Bool status;
+    char objectPath[256];
 
     DBUS_SCREEN (s);
     DBUS_DISPLAY (s->display);
@@ -2287,23 +2272,12 @@ dbusInitPluginForScreen (CompPlugin *p,
     WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
 
     if (status)
-	dbusRegisterPluginForScreen (dd->connection, s, p->vTable->name);
+    {
+	snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, p->vTable->name, s->screenNum);
+	dbusRegisterOptions (dd->connection, s->display, objectPath);
+    }
 
     return status;
-}
-
-static void
-dbusFiniPluginForScreen (CompPlugin *p,
-			 CompScreen *s)
-{
-    DBUS_SCREEN (s);
-    DBUS_DISPLAY (s->display);
-
-    dbusUnregisterPluginForScreen (dd->connection, s, p->vTable->name);
-
-    UNWRAP (ds, s, finiPluginForScreen);
-    (*s->finiPluginForScreen) (p, s);
-    WRAP (ds, s, finiPluginForScreen, dbusFiniPluginForScreen);
 }
 
 static Bool
@@ -2311,7 +2285,8 @@ dbusSetDisplayOption (CompDisplay     *d,
 		      char	      *name,
 		      CompOptionValue *value)
 {
-    Bool status;
+    CompScreen *s;
+    Bool       status;
 
     DBUS_DISPLAY (d);
 
@@ -2329,6 +2304,17 @@ dbusSetDisplayOption (CompDisplay     *d,
 					      compFindOption (option, nOption,
 							      name, 0),
 					      "core");
+
+	if (strcmp (name, "active_plugins") == 0)
+	{
+	    dbusUnregisterPluginsForDisplay (dd->connection, d);
+	    dbusRegisterPluginsForDisplay (dd->connection, d);
+	    for (s = d->screens; s; s = s->next)
+	    {
+		dbusUnregisterPluginsForScreen (dd->connection, s);
+		dbusRegisterPluginsForScreen (dd->connection, s);
+	    }
+	}
     }
 
     return status;
@@ -2462,7 +2448,7 @@ dbusInitDisplay (CompPlugin  *p,
     DBusError	error;
     dbus_bool_t status;
     int		fd, ret, mask;
-    char        *home, *plugindir;
+    char        *home, *plugindir, objectPath[256];
 
     dd = malloc (sizeof (DbusDisplay));
     if (!dd)
@@ -2572,25 +2558,26 @@ dbusInitDisplay (CompPlugin  *p,
 	}
     }
 
+    WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
+    WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
+    WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
+
+    d->privates[displayPrivateIndex].ptr = dd;
+
     /* register the objects */
     dbus_connection_register_object_path (dd->connection,
 					  COMPIZ_DBUS_ROOT_PATH,
 					  &dbusMessagesVTable, d);
 
-    WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
-    WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
-    WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
-    WRAP (dd, d, finiPluginForDisplay, dbusFiniPluginForDisplay);
-
-    d->privates[displayPrivateIndex].ptr = dd;
-
     dd->registeredPlugins = NULL;
 
     /* register core 'plugin' */
     dbusRegisterPluginForDisplay (dd->connection, d, "core");
+    dbusRegisterPluginsForDisplay (dd->connection, d);
 
-    for (p = getPlugins (); p; p = p->next)
-	dbusRegisterPluginForDisplay (dd->connection, d, p->vTable->name);
+    snprintf (objectPath, 256, "%s/core/allscreens", COMPIZ_DBUS_ROOT_PATH);
+
+    dbusRegisterOptions (dd->connection, d, objectPath);
 
     return TRUE;
 }
@@ -2599,9 +2586,22 @@ static void
 dbusFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
-    int i;
+    CompScreen *s;
+    int        i;
 
     DBUS_DISPLAY (d);
+
+    dbusUnregisterPluginForDisplay (dd->connection, d, "core");
+    dbusUnregisterPluginsForDisplay (dd->connection, d);
+
+    /* we must unregister the screens here not in finiScreen
+       because when finiScreen is called the connection has
+       been dropped */
+    for (s = d->screens; s; s = s->next)
+    {
+	dbusUnregisterPluginForScreen (dd->connection, s, "core");
+	dbusUnregisterPluginsForScreen (dd->connection, s);
+    }
 
     for (i = 0; i < DBUS_FILE_WATCH_NUM; i++)
 	removeFileWatch (d, dd->fileWatch[i]);
@@ -2620,7 +2620,6 @@ dbusFiniDisplay (CompPlugin  *p,
     UNWRAP (dd, d, setDisplayOption);
     UNWRAP (dd, d, setDisplayOptionForPlugin);
     UNWRAP (dd, d, initPluginForDisplay);
-    UNWRAP (dd, d, finiPluginForDisplay);
 
     free (dd);
 }
@@ -2629,6 +2628,7 @@ static Bool
 dbusInitScreen (CompPlugin *p,
 		CompScreen *s)
 {
+    char objectPath[256];
     DbusScreen *ds;
 
     DBUS_DISPLAY (s->display);
@@ -2640,18 +2640,15 @@ dbusInitScreen (CompPlugin *p,
     WRAP (ds, s, setScreenOption, dbusSetScreenOption);
     WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
     WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
-    WRAP (ds, s, finiPluginForScreen, dbusFiniPluginForScreen);
 
     s->privates[dd->screenPrivateIndex].ptr = ds;
 
     ds->registeredPlugins = NULL;
 
-    /* register core 'plugin' */
+    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, "core", s->screenNum);
+
     dbusRegisterPluginForScreen (dd->connection, s, "core");
-
-    for (p = getPlugins (); p; p = p->next)
-	dbusRegisterPluginForScreen (dd->connection, s, p->vTable->name);
-
+    dbusRegisterOptions (dd->connection, s->display, objectPath);
 
     return TRUE;
 }
@@ -2661,15 +2658,10 @@ dbusFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     DBUS_SCREEN (s);
-    DBUS_DISPLAY (s->display);
 
     UNWRAP (ds, s, setScreenOption);
     UNWRAP (ds, s, setScreenOptionForPlugin);
     UNWRAP (ds, s, initPluginForScreen);
-    UNWRAP (ds, s, finiPluginForScreen);
-
-    /* unregister core 'plugin' */
-    dbusUnregisterPluginForScreen (dd->connection, s, "core");
 
     free (ds);
 }
