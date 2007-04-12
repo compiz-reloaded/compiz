@@ -64,13 +64,6 @@ typedef enum {
 
 static int displayPrivateIndex;
 
-typedef struct _DbusRegisteredPlugin DbusRegisteredPlugin;
-
-struct _DbusRegisteredPlugin {
-    char                 *name;
-    DbusRegisteredPlugin *next;
-};
-
 typedef struct _DbusDisplay {
     int screenPrivateIndex;
 
@@ -79,21 +72,15 @@ typedef struct _DbusDisplay {
 
     CompFileWatchHandle fileWatch[DBUS_FILE_WATCH_NUM];
 
-    DbusRegisteredPlugin *registeredPlugins;
-
     SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
     InitPluginForDisplayProc      initPluginForDisplay;
-    FiniPluginForDisplayProc      finiPluginForDisplay;
 } DbusDisplay;
 
 typedef struct _DbusScreen {
-    DbusRegisteredPlugin *registeredPlugins;
-
     SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
     InitPluginForScreenProc      initPluginForScreen;
-    FiniPluginForScreenProc      finiPluginForScreen;
 } DbusScreen;
 
 static DBusHandlerResult dbusHandleMessage (DBusConnection *,
@@ -2063,48 +2050,6 @@ dbusPluginRegistered (DbusRegisteredPlugin *list, char *pluginName)
 }
 
 static Bool
-dbusPluginAddRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
-{
-    DbusRegisteredPlugin *new;
-
-    DBUS_DISPLAY (d);
-
-    if (dbusPluginRegistered (dd->registeredPlugins, pluginName))
-	return FALSE;
-
-    new = malloc (sizeof (DbusRegisteredPlugin));
-    if (!new)
-	return FALSE;
-
-    new->name = strdup (pluginName);
-    new->next = dd->registeredPlugins;
-
-    dd->registeredPlugins = new;
-
-    return TRUE;
-}
-
-static Bool
-dbusPluginRemoveRegisteredPluginForDisplay (CompDisplay *d, char *pluginName)
-{
-    DbusRegisteredPlugin *remove;
-
-    DBUS_DISPLAY (d);
-
-    if (!dbusPluginRegistered (dd->registeredPlugins, pluginName))
-	return FALSE;
-
-    remove = dd->registeredPlugins;
-
-    dd->registeredPlugins = remove->next;
-
-    free (remove->name);
-    free (remove);
-
-    return TRUE;
-}
-
-static Bool
 dbusRegisterOptions (DBusConnection *connection,
 		     CompDisplay    *d,
 		     char           *screenPath)
@@ -2167,9 +2112,6 @@ dbusRegisterPluginForDisplay (DBusConnection *connection,
 			      char           *pluginName)
 {
     char       objectPath[256];
-
-    if (!dbusPluginAddRegisteredPluginForDisplay (d, pluginName))
-	return;
 
     /* register plugin root path */
     snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
@@ -2247,16 +2189,13 @@ dbusUnregisterPluginForDisplay (DBusConnection *connection,
 {
     char objectPath[256];
 
-    if (!dbusPluginRemoveRegisteredPluginForDisplay (d, pluginName))
-	return;
-
-    snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
+    snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      pluginName, "allscreens");
 
     dbusUnregisterOptions (connection, d, objectPath);
     dbus_connection_unregister_object_path (connection, objectPath);
 
-    snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
-	      pluginName, "allscreens");
+    snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
     dbus_connection_unregister_object_path (connection, objectPath);
 }
 
