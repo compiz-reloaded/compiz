@@ -382,9 +382,10 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 	return FALSE;
     }
  
-    count = 0;
+    int length = strlen(csv);
+    count = 1;
     for (i = 0; csv[i] != '\0'; i++)
-	if (csv[i] == ',')
+	if (csv[i] == ',' && i != length-1)
 	    count++;
 
     split_start = csv;
