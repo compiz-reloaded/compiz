@@ -2181,14 +2181,14 @@ dbusUnregisterPluginForDisplay (DBusConnection *connection,
     if (!dbusPluginRemoveRegisteredPluginForDisplay (d, pluginName))
 	return;
 
+    snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
+
+    dbusUnregisterOptions (connection, d, objectPath);
+    dbus_connection_unregister_object_path (connection, objectPath);
+
     snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
 	      pluginName, "allscreens");
     dbus_connection_unregister_object_path (connection, objectPath);
-
-    snprintf (objectPath, 256, "%s/%s", COMPIZ_DBUS_ROOT_PATH, pluginName);
-    dbus_connection_unregister_object_path (connection, objectPath);
-
-    dbusUnregisterOptions (connection, d, objectPath);
 }
 
 static void
@@ -2215,9 +2215,9 @@ dbusUnregisterPluginForScreen (DBusConnection *connection,
 
     snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
 	      pluginName, s->screenNum);
-    dbus_connection_unregister_object_path (connection, objectPath);
 
     dbusUnregisterOptions (connection, s->display, objectPath);
+    dbus_connection_unregister_object_path (connection, objectPath);
 }
 
 static void
