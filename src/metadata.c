@@ -34,26 +34,6 @@
 #define HOME_METADATADIR ".compiz/metadata"
 #define EXTENSION ".metadata"
 
-struct _XmlMod {
-    char *name;
-    int  modifier;
-} xmlMods[] = {
-    { "Shift",      ShiftMask	       },
-    { "Control",    ControlMask	       },
-    { "Mod1",       Mod1Mask	       },
-    { "Mod2",       Mod2Mask	       },
-    { "Mod3",       Mod3Mask	       },
-    { "Mod4",       Mod4Mask	       },
-    { "Mod5",       Mod5Mask	       },
-    { "Alt",	    CompAltMask        },
-    { "Meta",	    CompMetaMask       },
-    { "Super",      CompSuperMask      },
-    { "Hyper",      CompHyperMask      },
-    { "ModeSwitch", CompModeSwitchMask },
-};
-
-#define N_XMLMODS (sizeof (xmlMods) / sizeof (struct _XmlMod))
-
 Bool
 compInitMetadata (CompMetadata *metadata)
 {
@@ -452,61 +432,6 @@ initColorValue (CompOptionValue *v,
 }
 
 static void
-convertKeyBinding (CompDisplay *d, CompKeyBinding *kb, char *bind)
-{
-    char *tok = strtok (bind, "+");
-    int i;
-    Bool changed;
-
-    while (tok)
-    {
-	changed = FALSE;
-	for (i = 0; i < N_XMLMODS && !changed; i++)
-	    if (!strcmp (tok, xmlMods[i].name))
-	    {
-		kb->modifiers |= xmlMods[i].modifier;
-		changed = TRUE;
-	    }
-	if (!changed)
-	{
-	    kb->keycode = XKeysymToKeycode (d->display, XStringToKeysym (tok));
-	    break;
-	}
-	tok = strtok(NULL,"+");
-    }
-}
-
-static void
-convertButtonBinding (CompButtonBinding *bb, char *bind)
-{
-    char *tok = strtok (bind, "+");
-    int i;
-    Bool changed;
-
-    while (tok)
-    {
-	changed = FALSE;
-	for (i = 0; i < N_XMLMODS && !changed; i++)
-	    if (!strcmp (tok, xmlMods[i].name))
-	    {
-		bb->modifiers |= xmlMods[i].modifier;
-		changed = TRUE;
-	    }
-	    
-	if (!changed && strncmp(tok, "Button", strlen("Button")) == 0)
-	{
-	    int but;
-	    if (sscanf (tok, "Button%d", &but) == 1)
-	    {
-		bb->button = but;
-		break;
-	    }
-	}
-	tok = strtok(NULL,"+");
-    }
-}
-
-static void
 initActionValue (CompDisplay	 *d,
 		 CompOptionValue *v,
 		 CompActionState state,
@@ -514,6 +439,7 @@ initActionValue (CompDisplay	 *d,
 		 xmlNodePtr      node)
 {
     xmlNodePtr child;
+    xmlChar    *value;
 
     memset (&v->action, 0, sizeof (v->action));
 
@@ -526,26 +452,39 @@ initActionValue (CompDisplay	 *d,
     {
 	if (!xmlStrcmp (child->name, BAD_CAST "key"))
 	{
-	    xmlChar *key = xmlNodeListGetString (child->doc,
-		                                 child->xmlChildrenNode, 1);
-
-	    if (key && xmlStrlen (key))
+	    value = xmlNodeListGetString (child->doc,
+					  child->xmlChildrenNode, 1);
+	    if (value)
 	    {
-		v->action.type |= CompBindingTypeKey;
-		convertKeyBinding (d, &v->action.key, (char *) key);
+		char *binding = (char *) value;
+
+		if (strcasecmp (binding, "disabled") && *binding)
+		{
+		    v->action.type |= CompBindingTypeKey;
+		    if (!stringToKeyBinding (d, binding, &v->action.key))
+			v->action.type &= ~CompBindingTypeKey;
+		}
+
+		xmlFree (value);
 	    }
-	    xmlFree(key);
 	}
 	else if (!xmlStrcmp (child->name, BAD_CAST "button"))
 	{
-	    xmlChar *button = xmlNodeListGetString (child->doc,
-		                                    child->xmlChildrenNode, 1);
-	    if (button && xmlStrlen (button))
+	    value = xmlNodeListGetString (child->doc,
+					  child->xmlChildrenNode, 1);
+	    if (value)
 	    {
-                v->action.type |= CompBindingTypeButton;
-		convertButtonBinding (&v->action.button, (char *) button);
+		char *binding = (char *) value;
+
+		if (strcasecmp (binding, "disabled") && *binding)
+		{
+		    v->action.type |= CompBindingTypeButton;
+		    if (!stringToButtonBinding (d, binding, &v->action.button))
+			v->action.type &= ~CompBindingTypeButton;
+		}
+
+		xmlFree (value);
 	    }
-	    xmlFree(button);
 	}
 	else if (!xmlStrcmp (child->name, BAD_CAST "edge"))
 	{
