@@ -319,13 +319,14 @@ initBoolValue (CompOptionValue *v,
 }
 
 static void
-initIntValue (CompOptionValue *v,
-	      xmlDocPtr       doc,
-	      xmlNodePtr      node)
+initIntValue (CompOptionValue	    *v,
+	      CompOptionRestriction *r,
+	      xmlDocPtr		    doc,
+	      xmlNodePtr	    node)
 {
     xmlChar *value;
 
-    v->i = 0;
+    v->i = (r->i.min + r->i.max) / 2;
 
     if (!doc)
 	return;
@@ -333,19 +334,24 @@ initIntValue (CompOptionValue *v,
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
-	v->i = strtol ((char *) value, NULL, 0);
+	int i = strtol ((char *) value, NULL, 0);
+
+	if (i >= r->i.min && i <= r->i.max)
+	    v->i = i;
+
 	xmlFree (value);
     }
 }
 
 static void
-initFloatValue (CompOptionValue *v,
-		xmlDocPtr       doc,
-		xmlNodePtr      node)
+initFloatValue (CompOptionValue	      *v,
+		CompOptionRestriction *r,
+		xmlDocPtr	      doc,
+		xmlNodePtr	      node)
 {
     xmlChar *value;
 
-    v->f = 0.0f;
+    v->f = (r->f.min + r->f.max) / 2;
 
     if (!doc)
 	return;
@@ -353,19 +359,27 @@ initFloatValue (CompOptionValue *v,
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
-	v->f = strtod ((char *) value, NULL);
+	float f = strtol ((char *) value, NULL, 0);
+
+	if (f >= r->f.min && f <= r->f.max)
+	    v->f = f;
+
 	xmlFree (value);
     }
 }
 
 static void
-initStringValue (CompOptionValue *v,
-		 xmlDocPtr       doc,
-		 xmlNodePtr      node)
+initStringValue (CompOptionValue       *v,
+		 CompOptionRestriction *r,
+		 xmlDocPtr	       doc,
+		 xmlNodePtr	       node)
 {
     xmlChar *value;
 
-    v->s = strdup ("");
+    if (r->s.nString)
+	v->s = strdup (r->s.string[0]);
+    else
+	v->s = strdup ("");
 
     if (!doc)
 	return;
@@ -373,8 +387,26 @@ initStringValue (CompOptionValue *v,
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
-	free (v->s);
-	v->s = strdup ((char *) value);
+	if (r->s.nString)
+	{
+	    int i;
+
+	    for (i = 0; i < r->s.nString; i++)
+	    {
+		if (strcmp (r->s.string[i], (char *) value) == 0)
+		{
+		    free (v->s);
+		    v->s = strdup (r->s.string[i]);
+		    break;
+		}
+	    }
+	}
+	else
+	{
+	    free (v->s);
+	    v->s = strdup ((char *) value);
+	}
+
 	xmlFree (value);
     }
 }
@@ -647,10 +679,11 @@ initMatchValue (CompOptionValue *v,
 }
 
 static void
-initListValue (CompDisplay     *d,
-	       CompOptionValue *v,
-	       xmlDocPtr       doc,
-	       xmlNodePtr      node)
+initListValue (CompDisplay	     *d,
+	       CompOptionValue	     *v,
+	       CompOptionRestriction *r,
+	       xmlDocPtr	     doc,
+	       xmlNodePtr	     node)
 {
     xmlNodePtr child;
 
@@ -676,13 +709,13 @@ initListValue (CompDisplay     *d,
 		initBoolValue (&value[v->list.nValue], doc, child);
 		break;
 	    case CompOptionTypeInt:
-		initIntValue (&value[v->list.nValue], doc, child);
+		initIntValue (&value[v->list.nValue], r, doc, child);
 		break;
 	    case CompOptionTypeFloat:
-		initFloatValue (&value[v->list.nValue], doc, child);
+		initFloatValue (&value[v->list.nValue], r, doc, child);
 		break;
 	    case CompOptionTypeString:
-		initStringValue (&value[v->list.nValue], doc, child);
+		initStringValue (&value[v->list.nValue], r, doc, child);
 		break;
 	    case CompOptionTypeColor:
 		initColorValue (&value[v->list.nValue], doc, child);
@@ -866,15 +899,16 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	break;
     case CompOptionTypeInt:
 	initIntRestriction (metadata, &option->rest, (char *) path);
-	initIntValue (&option->value, defaultDoc, defaultNode);
+	initIntValue (&option->value, &option->rest, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeFloat:
 	initFloatRestriction (metadata, &option->rest, (char *) path);
-	initFloatValue (&option->value, defaultDoc, defaultNode);
+	initFloatValue (&option->value, &option->rest, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeString:
 	initStringRestriction (metadata, &option->rest, (char *) path);
-	initStringValue (&option->value, defaultDoc, defaultNode);
+	initStringValue (&option->value, &option->rest,
+			 defaultDoc, defaultNode);
 	break;
     case CompOptionTypeColor:
 	initColorValue (&option->value, defaultDoc, defaultNode);
@@ -910,7 +944,8 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	    break;
 	}
 
-	initListValue (d, &option->value, defaultDoc, defaultNode);
+	initListValue (d, &option->value, &option->rest,
+		       defaultDoc, defaultNode);
 	break;
     }
 
