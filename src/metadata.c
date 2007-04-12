@@ -702,6 +702,18 @@ initListValue (CompDisplay     *d,
     }
 }
 
+static char *
+stringFromMetadataPathElement (CompMetadata *metadata,
+			       const char   *path,
+			       const char   *element)
+{
+    char str[1024];
+
+    snprintf (str, 1024, "%s/%s", path, element);
+
+    return compGetStringFromMetadataPath (metadata, str);
+}
+
 static void
 initIntRestriction (CompOptionRestriction *r, xmlNodePtr node)
 {
@@ -812,10 +824,11 @@ initOptionFromMetadataPath (CompDisplay   *d,
 			    CompOption	  *option,
 			    const xmlChar *path)
 {
-    CompXPath  xPath, xDefaultPath, xTypePath;
+    CompXPath  xPath, xDefaultPath;
     xmlNodePtr node, defaultNode;
     xmlDocPtr  defaultDoc;
     xmlChar    *name, *type;
+    char       *value;
 
     if (!initXPathFromMetadataPath (&xPath, metadata, path))
 	return FALSE;
@@ -875,25 +888,15 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initMatchValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeList:
-	option->value.list.type = CompOptionTypeBool;
-
-	if (initXPathFromMetadataPathElement (&xTypePath, metadata, path,
-					      BAD_CAST "type"))
+	value = stringFromMetadataPathElement (metadata, (char *) path, "type");
+	if (value)
 	{
-	    xmlNodePtr typeNode;
-	    xmlChar    *value;
-
-	    typeNode = *xTypePath.obj->nodesetval->nodeTab;
-
-	    value = xmlNodeListGetString (xTypePath.doc,
-					  typeNode->xmlChildrenNode, 1);
-	    if (value)
-	    {
-		option->value.list.type = getOptionType ((char *) value);
-		xmlFree (value);
-	    }
-
-	    finiXPath (&xTypePath);
+	    option->value.list.type = getOptionType ((char *) value);
+	    free (value);
+	}
+	else
+	{
+	    option->value.list.type = CompOptionTypeBool;
 	}
 
 	initListValue (d, &option->value, defaultDoc, defaultNode);
