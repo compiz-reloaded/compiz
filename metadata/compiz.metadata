@@ -7,7 +7,7 @@
 	    <option name="active_plugins" type="list">
 		<short>Active Plugins</short>
 		<long>List of currently active plugins</long>
-		<list type="string"/>
+		<type>string</type>
 	    </option>
 	    <option name="texture_filter" type="string">
 		<short>Texture Filter</short>
@@ -39,20 +39,26 @@
 	    <option name="close_window" type="action">
 		<short>Close Window</short>
 		<long>Close active window</long>
-		<key>Alt+F4</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F4</key>
+		</default>
 	    </option>
 	    <option name="main_menu" type="action">
 		<short>Show Main Menu</short>
 		<long>Show the main menu</long>
-		<key>Alt+F1</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F1</key>
+		</default>
 	    </option>
 	    <option name="run" type="action">
 		<short>Run Dialog</short>
 		<long>Show Run Application dialog</long>
-		<key>Alt+F2</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F2</key>
+		</default>
 	    </option>
 	    <option name="command0" type="string">
 		<short>Command line 0</short>
@@ -117,134 +123,136 @@
 	    <option name="run_command0" type="action">
 		<short>Run command 0</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command0</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command1" type="action">
 		<short>Run command 1</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command1</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command2" type="action">
 		<short>Run command 2</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command2</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command3" type="action">
 		<short>Run command 3</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command3</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command4" type="action">
 		<short>Run command 4</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command4</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command5" type="action">
 		<short>Run command 5</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command5</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command6" type="action">
 		<short>Run command 6</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command6</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command7" type="action">
 		<short>Run command 7</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command7</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command8" type="action">
 		<short>Run command 8</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command8</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command9" type="action">
 		<short>Run command 9</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command9</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command10" type="action">
 		<short>Run command 10</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command10</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="run_command11" type="action">
 		<short>Run command 11</short>
 		<long>A keybinding that when invoked, will run the shell command identified by command11</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="slow_animations" type="action">
 		<short>Slow Animations</short>
 		<long>Toggle use of slow animations</long>
-		<key>Shift+F10</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Shift&gt;F10</key>
+		</default>
 	    </option>
 	    <option name="raise_window" type="action">
 		<short>Raise Window</short>
 		<long>Raise window above other windows</long>
-		<key/>
-		<button>Control+Button6</button>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Control&gt;Button6</button>
+		</default>
 	    </option>
 	    <option name="lower_window" type="action">
 		<short>Lower Window</short>
 		<long>Lower window beneath other windows</long>
-		<key/>
-		<button>Alt+Button6</button>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Alt&gt;Button6</button>
+		</default>
 	    </option>
 	    <option name="unmaximize_window" type="action">
 		<short>Unmaximize Window</short>
 		<long>Unmaximize active window</long>
-		<key>Alt+F5</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F5</key>
+		</default>
 	    </option>
 	    <option name="minimize_window" type="action">
 		<short>Minimize Window</short>
 		<long>Minimize active window</long>
-		<key>Alt+F9</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F9</key>
+		</default>
 	    </option>
 	    <option name="maximize_window" type="action">
 		<short>Maximize Window</short>
 		<long>Maximize active window</long>
-		<key>Alt+F10</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F10</key>
+		</default>
 	    </option>
 	    <option name="maximize_window_horizontally" type="action">
 		<short>Maximize Window Horizontally</short>
 		<long>Maximize active window horizontally</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="maximize_window_vertically" type="action">
 		<short>Maximize Window Vertically</short>
 		<long>Maximize active window vertically</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="opacity_increase" type="action">
 		<short>Increase Opacity</short>
 		<long>Increase window opacity</long>
-		<key/>
-		<button>Alt+Button4</button>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Alt&gt;Button4</button>
+		</default>
 	    </option>
 	    <option name="opacity_decrease" type="action">
 		<short>Decrease Opacity</short>
 		<long>Decrease window opacity</long>
-		<key/>
-		<button>Alt+Button5</button>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Alt&gt;Button5</button>
+		</default>
 	    </option>
 	    <option name="command_screenshot" type="string">
 		<short>Screenshot command line</short>
@@ -254,8 +262,10 @@
 	    <option name="run_command_screenshot" type="action">
 		<short>Take a screenshot</short>
 		<long>Take a screenshot</long>
-		<key>Print</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>Print</key>
+		</default>
 	    </option>
 	    <option name="command_window_screenshot" type="string">
 		<short>Window screenshot command line</short>
@@ -265,20 +275,27 @@
 	    <option name="run_command_window_screenshot" type="action">
 		<short>Take a screenshot of a window</short>
 		<long>Take a screenshot of a window</long>
-		<key>Alt+Print</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;Print</key>
+		</default>
 	    </option>
 	    <option name="window_menu" type="action">
 		<short>Window Menu</short>
 		<long>Open window menu</long>
-		<key>Alt+space</key>
-		<button>Alt+Button3</button>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;space</key>
+		    <button>&lt;Alt&gt;Button3</button>
+		</default>
 	    </option>
 	    <option name="show_desktop" type="action">
 		<short>Hide all windows and focus desktop</short>
 		<long>Hide all windows and focus desktop</long>
-		<key>Control+Alt+d</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;d</key>
+		</default>
 	    </option>
 	    <option name="raise_on_click" type="bool">
 		<short>Raise On Click</short>
@@ -293,20 +310,17 @@
 	    <option name="toggle_window_maximized" type="action">
 		<short>Toggle Window Maximized</short>
 		<long>Toggle active window maximized</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="toggle_window_maximized_horizontally" type="action">
 		<short>Toggle Window Maximized Horizontally</short>
 		<long>Toggle active window maximized horizontally</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="toggle_window_maximized_vertically" type="action">
 		<short>Toggle Window Maximized Vertically</short>
 		<long>Toggle active window maximized vertically</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="hide_skip_taskbar_windows" type="bool">
 		<short>Hide Skip Taskbar Windows</short>
@@ -316,8 +330,10 @@
 	    <option name="toggle_window_shaded" type="action">
 		<short>Toggle Window Shaded</short>
 		<long>Toggle active window shaded</long>
-		<key>Control+Alt+s</key>
-		<button/>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;s</key>
+		</default>
 	    </option>
 	    <option name="ignore_hints_when_maximized" type="bool">
 		<short>Ignore Hints When Maximized</short>
@@ -332,8 +348,7 @@
 	    <option name="run_command_terminal" type="action">
 		<short>Open a terminal</short>
 		<long>Open a terminal</long>
-		<key/>
-		<button/>
+		<allowed key="true" button="true"/>
 	    </option>
 	    <option name="ping_delay" type="int">
 		<short>Ping Delay</short>
@@ -412,9 +427,10 @@
 	    <option name="outputs" type="list">
 		<short>Outputs</short>
 		<long>List of strings describing output devices</long>
-		<list type="string">
+		<type>string</type>
+		<default>
 		    <element>640x480+0+0</element>
-		</list>
+		</default>
 	    </option>
 	    <option name="focus_prevention_match" type="match">
 		<short>Focus Prevention Windows</short>
@@ -424,12 +440,12 @@
 	    <option name="opacity_matches" type="list">
 		<short>Opacity windows</short>
 		<long>Windows that should be translucent by default</long>
-		<list type="match"/>
+		<type>match</type>
 	    </option>
 	    <option name="opacity_values" type="list">
 		<short>Opacity window values</short>
 		<long>Opacity values for windows that should be translucent by default</long>
-		<list type="int"/>
+		<type>int</type>
 	    </option>
 	</screen>
     </general>
