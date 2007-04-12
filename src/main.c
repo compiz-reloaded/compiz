@@ -358,8 +358,7 @@ main (int argc, char **argv)
     if (!compAddMetadataFromString (&coreMetadata, staticMetadata))
 	return 1;
 
-    if (!compAddMetadataFromFile (&coreMetadata, "compiz"))
-	return 1;
+    compAddMetadataFromFile (&coreMetadata, "compiz");
 
     if (!disableSm)
 	initSession (clientId);
