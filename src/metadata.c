@@ -572,7 +572,7 @@ initListValue (CompDisplay	     *d,
     {
 	CompOptionValue *value;
 
-	if (xmlStrcmp (child->name, BAD_CAST "element"))
+	if (xmlStrcmp (child->name, BAD_CAST "value"))
 	    continue;
 
 	value = realloc (v->list.value,
