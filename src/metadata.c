@@ -37,7 +37,7 @@
 Bool
 compInitMetadata (CompMetadata *metadata)
 {
-    metadata->path = strdup ("general");
+    metadata->path = strdup ("core");
     if (!metadata->path)
 	return FALSE;
 
