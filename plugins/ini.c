@@ -511,6 +511,7 @@ parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *acti
 	action->a.bell = FALSE;
 	action->a.edgeMask = 0;
 	action->a.edgeButton = 0;
+	action->valueMasks = 0;
     }
     /* detect a new option (might happen when the options are incomplete) */
     else if (action->valueMasks != ACTION_VALUES_ALL)
@@ -749,10 +750,10 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    if (action.realOptionName &&
 		!continueReading)
 	    {
-		o = compFindOption (option, nOption, action.realOptionName, 0);
-		if (o)
+		CompOption *realOption = compFindOption (option, nOption, action.realOptionName, 0);
+		if (realOption)
 		{
-		    value = o->value;
+		    value = realOption->value;
 
 		    value.action.type = action.a.type;
 		    value.action.key = action.a.key;
@@ -780,16 +781,12 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		    free(action.realOptionName);
 		    action.realOptionName = NULL;
 
-		    /* we missed the current line because we exited it in the first call */
-		    if (!o && action.valueMasks == ACTION_VALUES_ALL)
-		    {
-		        action.valueMasks = 0;
+		    /* we missed the current line because we exited it in the first call.
+		       we also need to check wether we have a incomplete options here,
+		       because otherwise parsing the last line again, would cause real
+		       trouble. ;-) */
+		    if (!o && action.valueMasks != ACTION_VALUES_ALL)
 		        parseAction(d, optionName, optionValue, &action);
-		    }
-		    else
-		    {
-		        action.valueMasks = 0;
-		    }
 		}
 	    }
 	}
