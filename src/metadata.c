@@ -702,7 +702,7 @@ initStringRestriction (CompMetadata	     *metadata,
     {
 	xmlChar *value;
 
-	if (xmlStrcmp (child->name, BAD_CAST "string"))
+	if (xmlStrcmp (child->name, BAD_CAST "value"))
 	    continue;
 
 	value = xmlNodeListGetString (child->doc, child->xmlChildrenNode, 1);
