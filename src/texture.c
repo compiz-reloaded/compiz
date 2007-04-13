@@ -182,7 +182,7 @@ imageDataToTexture (CompScreen   *screen,
 		    GLenum       format,
 		    GLenum       type)
 {
-    return imageToTexture (screen, texture, image, width, height, format, type);    
+    return imageToTexture (screen, texture, image, width, height, format, type);
 }
 
 
