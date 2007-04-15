@@ -40,6 +40,8 @@
 #include <X11/Xregion.h>
 #include <X11/XKBlib.h>
 
+#include <libxml/parser.h>
+
 #define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
 
@@ -86,6 +88,7 @@ typedef struct _CompFunctionData  CompFunctionData;
 typedef struct _FragmentAttrib    FragmentAttrib;
 typedef struct _CompCursor	  CompCursor;
 typedef struct _CompMatch	  CompMatch;
+typedef struct _CompMetadata      CompMetadata;
 
 /* virtual modifiers */
 
@@ -230,6 +233,8 @@ extern int lastPointerX;
 extern int lastPointerY;
 extern int pointerX;
 extern int pointerY;
+
+extern CompMetadata coreMetadata;
 
 #define RESTRICT_VALUE(value, min, max)				     \
     (((value) < (min)) ? (min): ((value) > (max)) ? (max) : (value))
@@ -964,9 +969,7 @@ addScreenToDisplay (CompDisplay *display,
 		    CompScreen *s);
 
 Bool
-addDisplay (char *name,
-	    char **plugin,
-	    int  nPlugin);
+addDisplay (char *name);
 
 Time
 getCurrentTimeFromDisplay (CompDisplay *d);
@@ -3055,6 +3058,83 @@ void
 matchPropertyChanged (CompDisplay *display,
 		      CompWindow  *window);
 
+
+/* metadata.c */
+
+typedef struct _CompMetadataOptionInfo {
+    char		   *name;
+    char		   *type;
+    char		   *data;
+    CompActionCallBackProc initiate;
+    CompActionCallBackProc terminate;
+} CompMetadataOptionInfo;
+
+extern CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM];
+extern CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM];
+
+struct _CompMetadata {
+    char   *path;
+    xmlDoc **doc;
+    int    nDoc;
+};
+
+Bool
+compInitMetadata (CompMetadata *metadata);
+
+Bool
+compInitPluginMetadata (CompMetadata *metadata,
+			const char   *plugin);
+
+void
+compFiniMetadata (CompMetadata *metadata);
+
+Bool
+compAddMetadataFromFile (CompMetadata *metadata,
+			 const char   *file);
+
+Bool
+compAddMetadataFromString (CompMetadata *metadata,
+			   const char	*string);
+
+Bool
+compInitScreenOptionFromMetadata (CompScreen   *screen,
+				  CompMetadata *metadata,
+				  CompOption   *option,
+				  const char   *name);
+
+Bool
+compInitDisplayOptionFromMetadata (CompDisplay  *display,
+				   CompMetadata *metadata,
+				   CompOption   *option,
+				   const char   *name);
+char *
+compGetStringFromMetadataPath (CompMetadata *metadata,
+			       const char   *path);
+
+char *
+compGetShortPluginDescription (CompMetadata *metadata);
+
+char *
+compGetLongPluginDescription (CompMetadata *metadata);
+
+char *
+compGetShortScreenOptionDescription (CompMetadata *metadata,
+				     CompOption   *option);
+
+char *
+compGetLongScreenOptionDescription (CompMetadata *metadata,
+				    CompOption   *option);
+
+char *
+compGetShortDisplayOptionDescription (CompMetadata *metadata,
+				      CompOption   *option);
+
+char *
+compGetLongDisplayOptionDescription (CompMetadata *metadata,
+				     CompOption   *option);
+
+char *
+compMetadataOptionInfoToXml (const CompMetadataOptionInfo *info);
 
 #ifdef  __cplusplus
 }

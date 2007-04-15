@@ -3,7 +3,8 @@ INCLUDES =			     \
 	@GL_CFLAGS@		     \
 	-I$(top_srcdir)/include	     \
 	-DPLUGINDIR=\"$(plugindir)\" \
-	-DIMAGEDIR=\"$(imagedir)\"
+	-DIMAGEDIR=\"$(imagedir)\"   \
+	-DMETADATADIR=\"$(metadatadir)\"
 
 bin_PROGRAMS = compiz
 
@@ -24,4 +25,5 @@ compiz_SOURCES =   \
 	fragment.c \
 	matrix.c   \
 	cursor.c   \
-	match.c
+	match.c    \
+	metadata.c

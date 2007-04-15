@@ -78,6 +78,9 @@ AC_SUBST(plugindir)
 imagedir=$datadir/compiz
 AC_SUBST(imagedir)
 
+metadatadir=$datadir/compiz
+AC_SUBST(metadatadir)
+
 COMPIZ_REQUIRES="libpng	    \
 		 xcomposite \
 		 xfixes	    \
@@ -86,6 +89,7 @@ COMPIZ_REQUIRES="libpng	    \
 		 xinerama   \
 		 ice	    \
 		 sm	    \
+		 libxml-2.0 \
 		 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
@@ -449,6 +453,7 @@ gtk/gnome/50-compiz-desktop-key.xml
 kde/Makefile
 kde/window-decorator/Makefile
 po/Makefile.in
+metadata/Makefile
 ])
 
 echo ""

@@ -89,6 +89,8 @@ Bool onlyCurrentScreen = FALSE;
 Bool useCow = TRUE;
 #endif
 
+CompMetadata coreMetadata;
+
 static void
 usage (void)
 {
@@ -138,14 +140,57 @@ signalHandler (int sig)
     }
 }
 
+static char *
+strAdd (char	   *dst,
+	const char *src)
+{
+    int  newSize, oldSize = 0;
+    char *s;
+
+    if (dst)
+	oldSize = strlen (dst);
+
+    newSize = oldSize + strlen (src) + 1;
+
+    s = realloc (dst, sizeof (char) * newSize);
+    if (!s)
+    {
+	fprintf (stderr, "%s: memory allocation failure\n", programName);
+	exit (1);
+    }
+
+    strcpy (s + oldSize, src);
+
+    return s;
+}
+
+static char *
+strAddOption (char			   *dst,
+	      const CompMetadataOptionInfo *info)
+{
+    char *xml;
+
+    xml = compMetadataOptionInfoToXml (info);
+    if (!xml)
+    {
+	fprintf (stderr, "%s: memory allocation failure 2\n", programName);
+	exit (1);
+    }
+
+    return strAdd (dst, xml);
+}
+
 int
 main (int argc, char **argv)
 {
     char *displayName = 0;
     char *plugin[256];
-    int  i, nPlugin = 0;
+    int  i, j, nPlugin = 0;
     Bool disableSm = FALSE;
     char *clientId = NULL;
+    char *str;
+    char *textureFilterArg = NULL;
+    char *refreshRateArg = NULL;
 
     programName = argv[0];
     programArgc = argc;
@@ -192,14 +237,16 @@ main (int argc, char **argv)
 	{
 	    if (i + 1 < argc)
 	    {
-		defaultRefreshRate = atoi (programArgv[++i]);
+		refreshRateArg = programArgv[++i];
+		defaultRefreshRate = atoi (refreshRateArg);
 		defaultRefreshRate = RESTRICT_VALUE (defaultRefreshRate,
 						     1, 1000);
 	    }
 	}
 	else if (!strcmp (argv[i], "--fast-filter"))
 	{
-	    defaultTextureFilter = "Fast";
+	    textureFilterArg = "Fast";
+	    defaultTextureFilter = textureFilterArg;
 	}
 	else if (!strcmp (argv[i], "--indirect-rendering"))
 	{
@@ -258,16 +305,104 @@ main (int argc, char **argv)
 	}
     }
 
+    xmlInitParser ();
+
+    LIBXML_TEST_VERSION;
+
+    if (!compInitMetadata (&coreMetadata))
+    {
+	fprintf (stderr, "%s: Couldn't initialize core metadata\n",
+		 programName);
+	return 1;
+    }
+
+    str = strAdd (NULL, "<compiz><core><display>");
+
+    for (i = 0; i < COMP_DISPLAY_OPTION_NUM; i++)
+    {
+	CompMetadataOptionInfo info = coreDisplayOptionInfo[i];
+	char		       *tmp = NULL;
+
+	switch (i) {
+	case COMP_DISPLAY_OPTION_ACTIVE_PLUGINS:
+	    if (nPlugin)
+	    {
+		tmp = strAdd (tmp, "<type>string</type><default>");
+
+		for (j = 0; j < nPlugin; j++)
+		{
+		    tmp = strAdd (tmp, "<value>");
+		    tmp = strAdd (tmp, plugin[j]);
+		    tmp = strAdd (tmp, "</value>");
+		}
+
+		tmp = strAdd (tmp, "</default>");
+
+		info.data = tmp;
+	    }
+	    break;
+	case COMP_DISPLAY_OPTION_TEXTURE_FILTER:
+	    if (textureFilterArg)
+	    {
+		tmp = strAdd (tmp, "<type>string</type><default>");
+		tmp = strAdd (tmp, textureFilterArg);
+		tmp = strAdd (tmp, "</default>");
+
+		info.data = tmp;
+	    }
+	default:
+	    break;
+	}
+
+	str = strAddOption (str, &info);
+
+	if (tmp)
+	    free (tmp);
+    }
+
+    str = strAdd (str, "</display><screen>");
+
+    for (i = 0; i < COMP_SCREEN_OPTION_NUM; i++)
+    {
+	CompMetadataOptionInfo info = coreScreenOptionInfo[i];
+	char		       tmp[256];
+
+	switch (i) {
+	case COMP_SCREEN_OPTION_REFRESH_RATE:
+	    if (refreshRateArg)
+	    {
+		snprintf (tmp, 256, "<min>1</min><default>%s</default>",
+			  refreshRateArg);
+		info.data = tmp;
+	    }
+	default:
+	    break;
+	}
+
+	str = strAddOption (str, &info);
+    }
+
+    str = strAdd (str, "</screen></core></compiz>");
+
+    if (!compAddMetadataFromString (&coreMetadata, str))
+	return 1;
+
+    free (str);
+
+    compAddMetadataFromFile (&coreMetadata, "compiz");
+
     if (!disableSm)
 	initSession (clientId);
 
-    if (!addDisplay (displayName, plugin, nPlugin))
+    if (!addDisplay (displayName))
 	return 1;
 
     eventLoop ();
 
     if (!disableSm)
 	closeSession ();
+
+    xmlCleanupParser ();
 
     if (restartSignal)
     {

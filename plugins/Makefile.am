@@ -161,7 +161,8 @@ INCLUDES =					\
 	-DLOCALEDIR="\"@datadir@/locale\""	\
 	-DPLUGINDIR=\"$(plugindir)\"		\
 	-DIMAGEDIR=\"$(imagedir)\"		\
-	-I$(top_srcdir)/include
+	-I$(top_srcdir)/include                 \
+	-DMETADATADIR=\"$(metadatadir)\"
 
 moduledir = $(plugindir)
 
