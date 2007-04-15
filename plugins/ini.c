@@ -434,7 +434,10 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 
 	    splitStart = ++splitEnd;
 	    if (item)
+	    {
 		free (item);
+		item = NULL;
+	    }
 	}
 	list->nValue = count;
     }
