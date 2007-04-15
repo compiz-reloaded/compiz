@@ -369,8 +369,8 @@ iniParseLine (char *line, char **optionName, char **optionValue)
 static Bool
 csvToList (char *csv, CompListValue *list, CompOptionType type)
 {
-    char *split_start = NULL;
-    char *split_end = NULL;
+    char *splitStart = NULL;
+    char *splitEnd = NULL;
     char *item = NULL;
     int itemLength;
     int count;
@@ -388,22 +388,22 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 	if (csv[i] == ',' && i != length-1)
 	    count++;
 
-    split_start = csv;
+    splitStart = csv;
     list->value = malloc (sizeof (CompOptionValue) * count);
     if (list->value)
     {
 	for (i = 0; i < count; i++)
 	{
-	    split_end = strchr(split_start, ',');
+	    splitEnd = strchr(splitStart, ',');
 
-	    if (split_end)
+	    if (splitEnd)
 	    {
-		itemLength = strlen(split_start) - strlen(split_end);
-		item = strndup(split_start, itemLength);
+		itemLength = strlen(splitStart) - strlen(splitEnd);
+		item = strndup(splitStart, itemLength);
 	    }
 	    else // last value
 	    {
-		item = strdup(split_start);
+		item = strdup(splitStart);
 	    }
 
 	    switch (type)
@@ -432,7 +432,7 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 		    break;
 	    }
 
-	    split_start = ++split_end;
+	    splitStart = ++splitEnd;
 	    if (item)
 		free(item);
 	}
@@ -607,7 +607,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
     CompScreen *s = NULL;
     CompPlugin *p = NULL;
     Bool status = FALSE;
-    Bool has_value = FALSE;
+    Bool hasValue = FALSE;
     CompOptionValue value;
 
     if (plugin)
@@ -679,29 +679,29 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		switch (o->type)
 		{
 		case CompOptionTypeBool:
-		    has_value = TRUE;
+		    hasValue = TRUE;
 		    value.b = (Bool) atoi (optionValue);
 			break;
 		case CompOptionTypeInt:
-		    has_value = TRUE;
+		    hasValue = TRUE;
 		    value.i = atoi (optionValue);
 			break;
 		case CompOptionTypeFloat:
-		    has_value = TRUE;
+		    hasValue = TRUE;
 		    value.f = atof (optionValue);
 			break;
 		case CompOptionTypeString:
-		    has_value = TRUE;
+		    hasValue = TRUE;
 		    value.s = strdup (optionValue);
 			break;
 		case CompOptionTypeColor:
-		    has_value = stringToColor (optionValue, value.c);
+		    hasValue = stringToColor (optionValue, value.c);
 			break;
 		case CompOptionTypeList:
-		    has_value = csvToList (optionValue, &value.list, value.list.type);
+		    hasValue = csvToList (optionValue, &value.list, value.list.type);
 			break;
 		case CompOptionTypeMatch:
-		    has_value = TRUE;
+		    hasValue = TRUE;
 		    matchInit (&value.match);
 		    matchAddFromString (&value.match, optionValue);
 			break;
@@ -709,7 +709,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			break;
 		}
 
-		if (has_value)
+		if (hasValue)
 		{
 		    if (plugin && p)
 		    {
