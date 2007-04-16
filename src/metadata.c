@@ -340,7 +340,7 @@ initFloatValue (CompOptionValue	      *v,
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
-	float f = strtol ((char *) value, NULL, 0);
+	float f = strtod ((char *) value, NULL);
 
 	if (f >= r->f.min && f <= r->f.max)
 	    v->f = f;
