@@ -1,0 +1,451 @@
+<compiz>
+    <core>
+	<_short>General Options</_short>
+	<_long>General compiz options</_long>
+	<display>
+	    <option name="active_plugins" type="list">
+		<_short>Active Plugins</_short>
+		<_long>List of currently active plugins</_long>
+		<type>string</type>
+	    </option>
+	    <option name="texture_filter" type="string">
+		<_short>Texture Filter</_short>
+		<_long>Texture filtering</_long>
+		<default>Good</default>
+		<allowed>
+		    <value>Fast</value>
+		    <value>Good</value>
+		    <value>Best</value>
+		</allowed>
+	    </option>
+	    <option name="click_to_focus" type="bool">
+		<_short>Click To Focus</_short>
+		<_long>Click on window moves input focus to it</_long>
+		<default>true</default>
+	    </option>
+	    <option name="autoraise" type="bool">
+		<_short>Auto-Raise</_short>
+		<_long>Raise selected windows after interval</_long>
+		<default>true</default>
+	    </option>
+	    <option name="autoraise_delay" type="int">
+		<_short>Auto-Raise Delay</_short>
+		<_long>Interval before raising selected windows</_long>
+		<default>1000</default>
+		<min>0</min>
+		<max>10000</max>
+	    </option>
+	    <option name="close_window" type="action">
+		<_short>Close Window</_short>
+		<_long>Close active window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F4</key>
+		</default>
+	    </option>
+	    <option name="main_menu" type="action">
+		<_short>Show Main Menu</_short>
+		<_long>Show the main menu</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F1</key>
+		</default>
+	    </option>
+	    <option name="run" type="action">
+		<_short>Run Dialog</_short>
+		<_long>Show Run Application dialog</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F2</key>
+		</default>
+	    </option>
+	    <option name="command0" type="string">
+		<_short>Command line 0</_short>
+		<_long>Command line to be executed in shell when run_command0 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command1" type="string">
+		<_short>Command line 1</_short>
+		<_long>Command line to be executed in shell when run_command1 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command2" type="string">
+		<_short>Command line 2</_short>
+		<_long>Command line to be executed in shell when run_command2 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command3" type="string">
+		<_short>Command line 3</_short>
+		<_long>Command line to be executed in shell when run_command3 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command4" type="string">
+		<_short>Command line 4</_short>
+		<_long>Command line to be executed in shell when run_command4 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command5" type="string">
+		<_short>Command line 5</_short>
+		<_long>Command line to be executed in shell when run_command5 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command6" type="string">
+		<_short>Command line 6</_short>
+		<_long>Command line to be executed in shell when run_command6 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command7" type="string">
+		<_short>Command line 7</_short>
+		<_long>Command line to be executed in shell when run_command7 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command8" type="string">
+		<_short>Command line 8</_short>
+		<_long>Command line to be executed in shell when run_command8 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command9" type="string">
+		<_short>Command line 9</_short>
+		<_long>Command line to be executed in shell when run_command9 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command10" type="string">
+		<_short>Command line 10</_short>
+		<_long>Command line to be executed in shell when run_command10 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="command11" type="string">
+		<_short>Command line 11</_short>
+		<_long>Command line to be executed in shell when run_command11 is invoked</_long>
+		<default></default>
+	    </option>
+	    <option name="run_command0" type="action">
+		<_short>Run command 0</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command0</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command1" type="action">
+		<_short>Run command 1</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command1</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command2" type="action">
+		<_short>Run command 2</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command2</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command3" type="action">
+		<_short>Run command 3</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command3</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command4" type="action">
+		<_short>Run command 4</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command4</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command5" type="action">
+		<_short>Run command 5</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command5</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command6" type="action">
+		<_short>Run command 6</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command6</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command7" type="action">
+		<_short>Run command 7</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command7</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command8" type="action">
+		<_short>Run command 8</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command8</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command9" type="action">
+		<_short>Run command 9</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command9</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command10" type="action">
+		<_short>Run command 10</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command10</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="run_command11" type="action">
+		<_short>Run command 11</_short>
+		<_long>A keybinding that when invoked, will run the shell command identified by command11</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="slow_animations" type="action">
+		<_short>Slow Animations</_short>
+		<_long>Toggle use of slow animations</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Shift&gt;F10</key>
+		</default>
+	    </option>
+	    <option name="raise_window" type="action">
+		<_short>Raise Window</_short>
+		<_long>Raise window above other windows</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Control&gt;Button6</button>
+		</default>
+	    </option>
+	    <option name="lower_window" type="action">
+		<_short>Lower Window</_short>
+		<_long>Lower window beneath other windows</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Alt&gt;Button6</button>
+		</default>
+	    </option>
+	    <option name="unmaximize_window" type="action">
+		<_short>Unmaximize Window</_short>
+		<_long>Unmaximize active window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F5</key>
+		</default>
+	    </option>
+	    <option name="minimize_window" type="action">
+		<_short>Minimize Window</_short>
+		<_long>Minimize active window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F9</key>
+		</default>
+	    </option>
+	    <option name="maximize_window" type="action">
+		<_short>Maximize Window</_short>
+		<_long>Maximize active window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F10</key>
+		</default>
+	    </option>
+	    <option name="maximize_window_horizontally" type="action">
+		<_short>Maximize Window Horizontally</_short>
+		<_long>Maximize active window horizontally</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="maximize_window_vertically" type="action">
+		<_short>Maximize Window Vertically</_short>
+		<_long>Maximize active window vertically</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="opacity_increase" type="action">
+		<_short>Increase Opacity</_short>
+		<_long>Increase window opacity</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Alt&gt;Button4</button>
+		</default>
+	    </option>
+	    <option name="opacity_decrease" type="action">
+		<_short>Decrease Opacity</_short>
+		<_long>Decrease window opacity</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Alt&gt;Button5</button>
+		</default>
+	    </option>
+	    <option name="command_screenshot" type="string">
+		<_short>Screenshot command line</_short>
+		<_long>Screenshot command line</_long>
+		<default>gnome-screenshot</default>
+	    </option>
+	    <option name="run_command_screenshot" type="action">
+		<_short>Take a screenshot</_short>
+		<_long>Take a screenshot</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>Print</key>
+		</default>
+	    </option>
+	    <option name="command_window_screenshot" type="string">
+		<_short>Window screenshot command line</_short>
+		<_long>Window screenshot command line</_long>
+		<default>gnome-screenshot --window</default>
+	    </option>
+	    <option name="run_command_window_screenshot" type="action">
+		<_short>Take a screenshot of a window</_short>
+		<_long>Take a screenshot of a window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;Print</key>
+		</default>
+	    </option>
+	    <option name="window_menu" type="action">
+		<_short>Window Menu</_short>
+		<_long>Open window menu</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;space</key>
+		    <button>&lt;Alt&gt;Button3</button>
+		</default>
+	    </option>
+	    <option name="show_desktop" type="action">
+		<_short>Hide all windows and focus desktop</_short>
+		<_long>Hide all windows and focus desktop</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;d</key>
+		</default>
+	    </option>
+	    <option name="raise_on_click" type="bool">
+		<_short>Raise On Click</_short>
+		<_long>Raise windows when clicked</_long>
+		<default>true</default>
+	    </option>
+	    <option name="audible_bell" type="bool">
+		<_short>Audible Bell</_short>
+		<_long>Audible system beep</_long>
+		<default>true</default>
+	    </option>
+	    <option name="toggle_window_maximized" type="action">
+		<_short>Toggle Window Maximized</_short>
+		<_long>Toggle active window maximized</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="toggle_window_maximized_horizontally" type="action">
+		<_short>Toggle Window Maximized Horizontally</_short>
+		<_long>Toggle active window maximized horizontally</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="toggle_window_maximized_vertically" type="action">
+		<_short>Toggle Window Maximized Vertically</_short>
+		<_long>Toggle active window maximized vertically</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="hide_skip_taskbar_windows" type="bool">
+		<_short>Hide Skip Taskbar Windows</_short>
+		<_long>Hide windows not in taskbar when entering show desktop mode</_long>
+		<default>true</default>
+	    </option>
+	    <option name="toggle_window_shaded" type="action">
+		<_short>Toggle Window Shaded</_short>
+		<_long>Toggle active window shaded</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;s</key>
+		</default>
+	    </option>
+	    <option name="ignore_hints_when_maximized" type="bool">
+		<_short>Ignore Hints When Maximized</_short>
+		<_long>Ignore size increment and aspect hints when window is maximized</_long>
+		<default>true</default>
+	    </option>
+	    <option name="command_terminal" type="string">
+		<_short>Terminal command line</_short>
+		<_long>Terminal command line</_long>
+		<default></default>
+	    </option>
+	    <option name="run_command_terminal" type="action">
+		<_short>Open a terminal</_short>
+		<_long>Open a terminal</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="ping_delay" type="int">
+		<_short>Ping Delay</_short>
+		<_long>Interval between ping messages</_long>
+		<default>5000</default>
+		<min>1000</min>
+		<max>30000</max>
+	    </option>
+	</display>
+	<screen>
+	    <option name="detect_refresh_rate" type="bool">
+		<_short>Detect Refresh Rate</_short>
+		<_long>Automatic detection of refresh rate</_long>
+		<default>true</default>
+	    </option>
+	    <option name="lighting" type="bool">
+		<_short>Lighting</_short>
+		<_long>Use diffuse light when screen is transformed</_long>
+		<default>true</default>
+	    </option>
+	    <option name="refresh_rate" type="int">
+		<_short>Refresh Rate</_short>
+		<_long>The rate at which the screen is redrawn (times/second)</_long>
+		<default>50</default>
+		<min>1</min>
+		<max>200</max>
+	    </option>
+	    <option name="hsize" type="int">
+		<_short>Horizontal Virtual Size</_short>
+		<_long>Screen size multiplier for horizontal virtual size</_long>
+		<default>4</default>
+		<min>1</min>
+		<max>32</max>
+	    </option>
+	    <option name="vsize" type="int">
+		<_short>Vertical Virtual Size</_short>
+		<_long>Screen size multiplier for vertical virtual size</_long>
+		<default>1</default>
+		<min>1</min>
+		<max>32</max>
+	    </option>
+	    <option name="opacity_step" type="int">
+		<_short>Opacity Step</_short>
+		<_long>Opacity change step</_long>
+		<default>10</default>
+		<min>1</min>
+		<max>50</max>
+	    </option>
+	    <option name="unredirect_fullscreen_windows" type="bool">
+		<_short>Unredirect Fullscreen Windows</_short>
+		<_long>Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps</_long>
+		<default>false</default>
+	    </option>
+	    <option name="default_icon" type="string">
+		<_short>Default Icon</_short>
+		<_long>Default window icon image</_long>
+		<default>icon</default>
+	    </option>
+	    <option name="sync_to_vblank" type="bool">
+		<_short>Sync To VBlank</_short>
+		<_long>Only perform screen updates during vertical blanking period</_long>
+		<default>true</default>
+	    </option>
+	    <option name="number_of_desktops" type="int">
+		<_short>Number of Desktops</_short>
+		<_long>Number of virtual desktops</_long>
+		<default>1</default>
+		<min>1</min>
+		<max>36</max>
+	    </option>
+	    <option name="detect_outputs" type="bool">
+		<_short>Detect Outputs</_short>
+		<_long>Automatic detection of output devices</_long>
+		<default>true</default>
+	    </option>
+	    <option name="outputs" type="list">
+		<_short>Outputs</_short>
+		<_long>List of strings describing output devices</_long>
+		<type>string</type>
+		<default>
+		    <value>640x480+0+0</value>
+		</default>
+	    </option>
+	    <option name="focus_prevention_match" type="match">
+		<_short>Focus Prevention Windows</_short>
+		<_long>Focus prevention windows</_long>
+		<default>any</default>
+	    </option>
+	    <option name="opacity_matches" type="list">
+		<_short>Opacity windows</_short>
+		<_long>Windows that should be translucent by default</_long>
+		<type>match</type>
+	    </option>
+	    <option name="opacity_values" type="list">
+		<_short>Opacity window values</_short>
+		<_long>Opacity values for windows that should be translucent by default</_long>
+		<type>int</type>
+	    </option>
+	</screen>
+    </core>
+</compiz>

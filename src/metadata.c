@@ -33,7 +33,7 @@
 #include <compiz.h>
 
 #define HOME_METADATADIR ".compiz/metadata"
-#define EXTENSION ".metadata"
+#define EXTENSION ".xml"
 
 Bool
 compInitMetadata (CompMetadata *metadata)
