@@ -202,17 +202,14 @@ iniGetFileDataFromFilename (CompDisplay *d,
 
     newFd->filename = strdup (filename);
 
-    pluginStr = malloc (sizeof (char) * pluginSep + 1);
-    screenStr = malloc (sizeof (char) * (screenSep - pluginSep) + 1);
+    pluginStr = calloc (1, sizeof (char) * pluginSep + 2);
+    screenStr = calloc (1, sizeof (char) * (screenSep - pluginSep));
 
     if (!pluginStr || !screenStr)
 	return NULL;
 
     strncpy (pluginStr, filename, pluginSep + 1);
-    pluginStr[pluginSep + 1] = '\0';
-
-    strncpy (screenStr, &filename[pluginSep+2], (screenSep - pluginSep) + 1);
-    screenStr[(screenSep - pluginSep) -1] = '\0';
+    strncpy (screenStr, &filename[pluginSep+2], (screenSep - pluginSep) - 1);
 
     if (strcmp (pluginStr, CORE_NAME) == 0)
 	newFd->plugin = NULL;
@@ -330,7 +327,7 @@ iniGetFilename (CompDisplay *d,
     if (fn)
     {
 	sprintf (fn, "%s-%s%s",
-		 plugin?plugin:CORE_NAME, screenStr, FILE_SUFFIX);
+		 plugin ? plugin : CORE_NAME, screenStr, FILE_SUFFIX);
 
 	*filename = strdup (fn);
 
@@ -348,48 +345,20 @@ iniGetFilename (CompDisplay *d,
 static Bool
 iniParseLine (char *line, char **optionName, char **optionValue)
 {
-    int  pos = 0;
-    int  splitPos = 0;
-    int  endPos = 0;
-    char tmpName[MAX_OPTION_LENGTH];
-    char tmpValue[MAX_OPTION_LENGTH];
+    char *split_pos;
+    int length;
 
     if (line[0] == '\0' || line[0] == '\n')
 	return FALSE;
 
-    while (pos < strlen(line))
-    {
-	if (!splitPos && line[pos] == '=')
-	    splitPos = pos;
-	if (line[pos] == '\n')
-	{
-	    endPos = pos;
-	    break;
-	}
-	pos++;
-    }
-
-    if (splitPos && endPos)
-    {
-	tmpName[0] = '\0';
-	tmpValue[0] = '\0';
-
-	int i;
-	for (i=0; i < splitPos; i++)
-	    tmpName[i] = line[i];
-	tmpName[splitPos] = '\0';
-
-	for (i=splitPos+1; i<endPos; i++)
-	    tmpValue[i - (splitPos+1)] = line[i];
-	tmpValue[endPos - (splitPos+1)] = '\0';
-
-	*optionName = strdup (tmpName);
-	*optionValue = strdup (tmpValue);
-    }
-    else
-    {
+    split_pos = strchr(line, '=');
+    if (!split_pos)
 	return FALSE;
-    }
+
+    length = strlen(line) - strlen(split_pos);
+    *optionName = strndup(line, length);
+    split_pos++;
+    *optionValue = strndup(split_pos, strlen(split_pos)-1);
 
     return TRUE;
 }
@@ -397,53 +366,48 @@ iniParseLine (char *line, char **optionName, char **optionValue)
 static Bool
 csvToList (char *csv, CompListValue *list, CompOptionType type)
 {
-    char *csvtmp, *split, *item = NULL;
-    int  count = 1, i, itemLength;
+    char *splitStart = NULL;
+    char *splitEnd = NULL;
+    char *item = NULL;
+    int itemLength;
+    int count;
+    int i;
 
     if (csv[0] == '\0')
     {
 	list->nValue = 0;
 	return FALSE;
     }
+ 
+    int length = strlen (csv);
+    count = 1;
+    for (i = 0; csv[i] != '\0'; i++)
+	if (csv[i] == ',' && i != length-1)
+	    count++;
 
-    csvtmp = strdup (csv);
-    csvtmp = strchr (csv, ',');
-
-    while (csvtmp)
-    {
-	csvtmp++;  /* avoid the comma */
-	count++;
-	csvtmp = strchr (csvtmp, ',');
-    }
-
+    splitStart = csv;
     list->value = malloc (sizeof (CompOptionValue) * count);
     if (list->value)
     {
-	for (i=0; i<count; i++)
+	for (i = 0; i < count; i++)
 	{
-	    split = strchr (csv, ',');
-	    if (split)
+	    splitEnd = strchr (splitStart, ',');
+
+	    if (splitEnd)
 	    {
-		/* > 1 value */
-		itemLength = strlen(csv) - strlen(split);
-		item = realloc (item, sizeof (char) * (itemLength+1));
-		strncpy (item, csv, itemLength);
-		item[itemLength] = '\0';
-		csv += itemLength + 1;
+		itemLength = strlen (splitStart) - strlen (splitEnd);
+		item = strndup (splitStart, itemLength);
 	    }
-	    else
+	    else // last value
 	    {
-		/* 1 value only */
-		itemLength = strlen(csv);
-		item = realloc (item, sizeof (char) * (itemLength+1));
-		strncpy (item, csv, itemLength);
-		item[itemLength] = '\0';
+		item = strdup (splitStart);
 	    }
 
 	    switch (type)
 	    {
 		case CompOptionTypeString:
-		    list->value[i].s = strdup (item);
+		    if (item[0] != '\0')
+			list->value[i].s = strdup (item);
 		    break;
 		case CompOptionTypeBool:
 		    if (item[0] != '\0')
@@ -464,12 +428,16 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 		default:
 		    break;
 	    }
+
+	    splitStart = ++splitEnd;
+	    if (item)
+	    {
+		free (item);
+		item = NULL;
+	    }
 	}
 	list->nValue = count;
     }
-
-    if (item)
-	free (item);
 
     return TRUE;
 }
@@ -496,7 +464,7 @@ iniMakeDirectories (void)
 static Bool
 findActionType(char *optionName, int *type)
 { 
-    char * optionType = strrchr(optionName, '_');
+    char * optionType = strrchr (optionName, '_');
     if (!optionType)
 	return FALSE;
 
@@ -505,7 +473,7 @@ findActionType(char *optionName, int *type)
     int i;
     for (i = 0; i < ACTION_TYPES_NUM; i++)
     {
-	if (strcmp(optionType, validActionTypes[i]) == 0)
+	if (strcmp (optionType, validActionTypes[i]) == 0)
 	{
 	    if (type)
 		*type = i;
@@ -520,18 +488,19 @@ static Bool
 parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *action)
 { 
     int type;
-    if (!findActionType(optionName, &type))
+
+    if (!findActionType (optionName, &type))
 	return FALSE; /* no action, exit the loop */
 
     /* we have a new action */
     if (!action->realOptionName)
     {
-	char *optionType = strrchr(optionName, '_');
+	char *optionType = strrchr (optionName, '_');
 	/* chars until the last "_" */
-	int len = strlen(optionName) - strlen(optionType);
+	int len = strlen (optionName) - strlen (optionType);
 	
-	action->realOptionName = malloc(sizeof(char)*(len+1));
-	strncpy(action->realOptionName, optionName, len);
+	action->realOptionName = malloc (sizeof (char) * (len+1));
+	strncpy (action->realOptionName, optionName, len);
 	action->realOptionName[len] = '\0';
 
 	/* make sure all defaults are set */
@@ -543,25 +512,26 @@ parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *acti
 	action->a.bell = FALSE;
 	action->a.edgeMask = 0;
 	action->a.edgeButton = 0;
+	action->valueMasks = 0;
     }
     /* detect a new option (might happen when the options are incomplete) */
     else if (action->valueMasks != ACTION_VALUES_ALL)
     {
-	char *optionType = strrchr(optionName, '_');
+	char *optionType = strrchr (optionName, '_');
 	/* chars until the last "_" */
-	int len = strlen(optionName) - strlen(optionType);
+	int len = strlen (optionName) - strlen (optionType);
 	
-	char *realOptionName = malloc(sizeof(char)*(len+1));
-	strncpy(realOptionName, optionName, len);
+	char *realOptionName = malloc (sizeof (char) * (len+1));
+	strncpy (realOptionName, optionName, len);
 	realOptionName[len] = '\0';
 
-	if (strcmp(action->realOptionName, realOptionName) != 0)
+	if (strcmp (action->realOptionName, realOptionName) != 0)
 	{
-	    free(realOptionName);
+	    free (realOptionName);
 	    return FALSE;
 	}
 	
-	free(realOptionName);
+	free (realOptionName);
     } 
 
     int i, j;
@@ -570,20 +540,20 @@ parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *acti
     {
 	case ACTION_TYPE_KEY: 
 	    if (optionValue[0] != '\0' &&
-		strcasecmp(optionValue, "disabled") != 0 &&
+		strcasecmp (optionValue, "disabled") != 0 &&
 		stringToKeyBinding (d, optionValue, &action->a.key))
 		action->a.type |= CompBindingTypeKey;
 	    break;
 
 	case ACTION_TYPE_BUTTON:
 	    if (optionValue[0] != '\0' &&
-		strcasecmp(optionValue, "disabled") != 0 &&
+		strcasecmp (optionValue, "disabled") != 0 &&
 		stringToButtonBinding (d, optionValue, &action->a.button))
 		action->a.type |= CompBindingTypeButton;
 	    break;
 
 	case ACTION_TYPE_BELL:
-	    action->a.bell  = (Bool) atoi(optionValue);
+	    action->a.bell  = (Bool) atoi (optionValue);
 	    break;
 
 	case ACTION_TYPE_EDGE:
@@ -607,7 +577,7 @@ parseAction(CompDisplay *d, char *optionName, char *optionValue, IniAction *acti
 	    break;
 
 	case ACTION_TYPE_EDGEBUTTON:
-	    action->a.edgeButton = atoi(optionValue);
+	    action->a.edgeButton = atoi (optionValue);
 	    if (action->a.edgeButton != 0)
 		action->a.type |= CompBindingTypeEdgeButton;
 	    break;
@@ -639,7 +609,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
     CompScreen *s = NULL;
     CompPlugin *p = NULL;
     Bool status = FALSE;
-    Bool hv = FALSE;
+    Bool hasValue = FALSE;
     CompOptionValue value;
 
     if (plugin)
@@ -688,12 +658,13 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
     IniAction action;
     action.realOptionName = NULL;
-    Bool continueReading = FALSE;
-    while (fgets (&tmp[0], MAX_OPTION_LENGTH, optionFile) != NULL)
+    Bool continueReading;
+    while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
     {
 	status = FALSE;
+	continueReading = FALSE;
 
-	if (!iniParseLine (&tmp[0], &optionName, &optionValue))
+	if (!iniParseLine (tmp, &optionName, &optionValue))
 	{
 	    fprintf(stderr,
 		    "Ignoring line '%s' in %s %i\n", tmp, plugin, screen);
@@ -710,29 +681,29 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		switch (o->type)
 		{
 		case CompOptionTypeBool:
-		    hv = TRUE;
+		    hasValue = TRUE;
 		    value.b = (Bool) atoi (optionValue);
 			break;
 		case CompOptionTypeInt:
-		    hv = TRUE;
+		    hasValue = TRUE;
 		    value.i = atoi (optionValue);
 			break;
 		case CompOptionTypeFloat:
-		    hv = TRUE;
+		    hasValue = TRUE;
 		    value.f = atof (optionValue);
 			break;
 		case CompOptionTypeString:
-		    hv = TRUE;
+		    hasValue = TRUE;
 		    value.s = strdup (optionValue);
 			break;
 		case CompOptionTypeColor:
-		    hv = stringToColor (optionValue, value.c);
+		    hasValue = stringToColor (optionValue, value.c);
 			break;
 		case CompOptionTypeList:
-		    hv = csvToList (optionValue, &value.list, value.list.type);
+		    hasValue = csvToList (optionValue, &value.list, value.list.type);
 			break;
 		case CompOptionTypeMatch:
-		    hv = TRUE;
+		    hasValue = TRUE;
 		    matchInit (&value.match);
 		    matchAddFromString (&value.match, optionValue);
 			break;
@@ -740,7 +711,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			break;
 		}
 
-		if (hv)
+		if (hasValue)
 		{
 		    if (plugin && p)
 		    {
@@ -780,10 +751,10 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    if (action.realOptionName &&
 		!continueReading)
 	    {
-		o = compFindOption (option, nOption, action.realOptionName, 0);
-		if (o)
+		CompOption *realOption = compFindOption (option, nOption, action.realOptionName, 0);
+		if (realOption)
 		{
-		    value = o->value;
+		    value = realOption->value;
 
 		    value.action.type = action.a.type;
 		    value.action.key = action.a.key;
@@ -811,16 +782,12 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		    free(action.realOptionName);
 		    action.realOptionName = NULL;
 
-		    /* we missed the current line because we exited it in the first call */
-		    if (!o && action.valueMasks == ACTION_VALUES_ALL)
-		    {
-		        action.valueMasks = 0;
+		    /* we missed the current line because we exited it in the first call.
+		       we also need to check wether we have a incomplete options here,
+		       because otherwise parsing the last line again, would cause real
+		       trouble. ;-) */
+		    if (!o && action.valueMasks != ACTION_VALUES_ALL)
 		        parseAction(d, optionName, optionValue, &action);
-		    }
-		    else
-		    {
-		        action.valueMasks = 0;
-		    }
 		}
 	    }
 	}
@@ -830,7 +797,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    free (optionName);
 	if (optionValue)
 	    free (optionValue);
-	continueReading = FALSE;
     } 
 
     return TRUE;
@@ -899,7 +865,7 @@ iniSaveOptions (CompDisplay *d,
     if (!iniGetHomeDir (&directory))
 	return FALSE;
 
-    fullPath = malloc (sizeof(char) * (strlen(filename) + strlen(directory) + 2));
+    fullPath = malloc (sizeof (char) * (strlen (filename) + strlen (directory) + 2));
     if (!fullPath)
     {
 	free (filename);
@@ -907,7 +873,7 @@ iniSaveOptions (CompDisplay *d,
 	return FALSE;
     }
 
-    sprintf(fullPath, "%s/%s", directory, filename);
+    sprintf (fullPath, "%s/%s", directory, filename);
 
     FILE *optionFile = fopen (fullPath, "w");
 
@@ -916,8 +882,8 @@ iniSaveOptions (CompDisplay *d,
 
     if (!optionFile)
     {
-	fprintf(stderr, "Failed to write to %s, check you " \
-			"have the correct permissions\n", fullPath);
+	fprintf (stderr, "Failed to write to %s, check you " \
+			 "have the correct permissions\n", fullPath);
 	free (filename);
 	free (directory);
 	free (fullPath);
@@ -979,7 +945,7 @@ iniSaveOptions (CompDisplay *d,
 		    if (!firstInList)
 		    	strncat (strVal, ",", MAX_OPTION_LENGTH);
 		    firstInList = FALSE;
-		    
+
 		    strncat (strVal, edgeToString (i), MAX_OPTION_LENGTH);
 		}
 	    }
@@ -1035,9 +1001,9 @@ iniSaveOptions (CompDisplay *d,
 		break;
 	    }
 	    default:
-		fprintf(stderr, "Unknown list option type %d, %s\n",
-				option->value.list.type,
-				optionTypeToString (option->value.list.type));
+		fprintf (stderr, "Unknown list option type %d, %s\n",
+				  option->value.list.type,
+				  optionTypeToString (option->value.list.type));
 		break;
 	    }
 		break;
@@ -1089,7 +1055,7 @@ iniLoadOptions (CompDisplay *d,
 	return FALSE;
     }
 
-    fullPath = malloc (sizeof(char) * (strlen(filename) + strlen(directory) + 2));
+    fullPath = malloc (sizeof (char) * (strlen (filename) + strlen (directory) + 2));
     if (!fullPath)
     {
 	free (filename);
