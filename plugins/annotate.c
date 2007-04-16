@@ -971,7 +971,7 @@ annoFiniScreen (CompPlugin *p,
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
 
-    removeScreenAction (s, 
+    removeScreenAction (s,
 			&ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
     removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
     removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
