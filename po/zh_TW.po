@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-01 18:26+0200\n"
+"POT-Creation-Date: 2007-04-15 20:19-0400\n"
 "PO-Revision-Date: 2006-06-21 16:26\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -15,1923 +15,3819 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
-#: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
-msgid "Initiate"
-msgstr "起始化"
-
-#: plugins/annotate.c:746
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: plugins/annotate.c:760
-msgid "Draw"
-msgstr ""
-
-#: plugins/annotate.c:761
-msgid "Draw using tool"
-msgstr ""
-
-#: plugins/annotate.c:772
+#: ../metadata/compiz.xml.in.h:1 ../plugins/compiz.schemas.in.h:1
 #, fuzzy
-msgid "Initiate erase"
-msgstr "起始化"
-
-#: plugins/annotate.c:773
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "起始化視窗調整大小"
-
-#: plugins/annotate.c:787 plugins/annotate.c:788
-#, fuzzy
-msgid "Clear"
-msgstr "清除(_C)"
-
-#: plugins/annotate.c:805
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: plugins/annotate.c:806
-msgid "Fill color for annotations"
-msgstr ""
-
-#: plugins/annotate.c:815
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: plugins/annotate.c:816
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: plugins/annotate.c:825
-msgid "Line width"
-msgstr ""
-
-#: plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr ""
-
-#: plugins/annotate.c:835
-msgid "Stroke width"
-msgstr ""
-
-#: plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: plugins/annotate.c:1009
-#, fuzzy
-msgid "Annotate"
-msgstr "起始化"
-
-#: plugins/annotate.c:1010
-#, fuzzy
-msgid "Annotate plugin"
-msgstr "主動式外掛程式"
-
-#: plugins/blur.c:73
-#, fuzzy
-msgid "4xBilinear"
-msgstr "線性過濾器"
-
-#: plugins/blur.c:74 plugins/blur.c:237
-#, fuzzy
-msgid "Gaussian"
-msgstr "俄語"
-
-#: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
-#: plugins/decoration.c:1203 plugins/switcher.c:373
-msgid "Mipmap"
-msgstr "Mipmap"
-
-#: plugins/blur.c:728
-#, fuzzy
-msgid "Blur Speed"
-msgstr "摺疊速度"
-
-#: plugins/blur.c:729
-#, fuzzy
-msgid "Window blur speed"
-msgstr "Window 淡出/淡入速度"
-
-#: plugins/blur.c:738
-#, fuzzy
-msgid "Focus blur windows"
-msgstr "調整視窗比例"
-
-#: plugins/blur.c:739
-#, fuzzy
-msgid "Windows that should be affected by focus blur"
-msgstr "應該淡出/淡入的視窗類型"
-
-#: plugins/blur.c:747
-msgid "Focus Blur"
-msgstr ""
-
-#: plugins/blur.c:748
-#, fuzzy
-msgid "Blur windows that doesn't have focus"
-msgstr "應該要在定焦時搖擺的視窗類型"
-
-#: plugins/blur.c:754
-#, fuzzy
-msgid "Alpha blur windows"
-msgstr "調整視窗比例"
-
-#: plugins/blur.c:755
-#, fuzzy
-msgid "Windows that should use alpha blur by default"
-msgstr "應該淡出/淡入的視窗類型"
-
-#: plugins/blur.c:763
-msgid "Alpha Blur"
-msgstr ""
-
-#: plugins/blur.c:764
-msgid "Blur behind translucent parts of windows"
-msgstr ""
-
-#: plugins/blur.c:772
-#, fuzzy
-msgid "Blur Filter"
-msgstr "材質過濾器"
-
-#: plugins/blur.c:773
-msgid "Filter method used for blurring"
-msgstr ""
-
-#: plugins/blur.c:783
-msgid "Gaussian Radius"
-msgstr ""
-
-#: plugins/blur.c:784
-#, fuzzy
-msgid "Gaussian radius"
-msgstr "俄羅斯聯邦"
-
-#: plugins/blur.c:792
-#, fuzzy
-msgid "Gaussian Strength"
-msgstr "俄語"
-
-#: plugins/blur.c:793
-#, fuzzy
-msgid "Gaussian strength"
-msgstr "俄語"
-
-#: plugins/blur.c:802
-#, fuzzy
-msgid "Mipmap LOD"
-msgstr "Mipmap"
-
-#: plugins/blur.c:803
-msgid "Mipmap level-of-detail"
-msgstr ""
-
-#: plugins/blur.c:812
-#, fuzzy
-msgid "Blur Saturation"
-msgstr "飽和度"
-
-#: plugins/blur.c:813
-#, fuzzy
-msgid "Blur saturation"
-msgstr "飽和度"
-
-#: plugins/blur.c:821
-msgid "Blur Occlusion"
-msgstr ""
-
-#: plugins/blur.c:822
-msgid "blur occlusion"
-msgstr ""
-
-#: plugins/blur.c:2560
-msgid "Pulse"
-msgstr ""
-
-#: plugins/blur.c:2561
-#, fuzzy
-msgid "Pulse effect"
-msgstr "定焦特效"
-
-#: plugins/blur.c:2883
-#, fuzzy
-msgid "Blur Windows"
-msgstr "放置視窗"
-
-#: plugins/blur.c:2884
-#, fuzzy
-msgid "Blur windows"
-msgstr "調整視窗比例"
-
-#: plugins/clone.c:725
-#, fuzzy
-msgid "Initiate clone selection"
-msgstr "視訊模式選項"
-
-#: plugins/clone.c:854
-#, fuzzy
-msgid "Clone Output"
-msgstr "輸出"
-
-#: plugins/clone.c:855
-msgid "Output clone handler"
-msgstr ""
-
-#: plugins/cube.c:990
-msgid "Cube Color"
-msgstr "立方體色彩"
-
-#: plugins/cube.c:991
-msgid "Color of top and bottom sides of the cube"
-msgstr "立方體的頂面和底面顏色"
-
-#: plugins/cube.c:1000
-msgid "Inside Cube"
-msgstr "立方體內部"
-
-#: plugins/cube.c:1001
-msgid "Inside cube"
-msgstr "立方體內部"
-
-#: plugins/cube.c:1007
-msgid "Scale image"
-msgstr "調整影像比例"
-
-#: plugins/cube.c:1008
-msgid "Scale images to cover top face of cube"
-msgstr "調整影像比例以覆蓋立方體頂面"
-
-#: plugins/cube.c:1014
-msgid "Image files"
-msgstr "影像檔"
-
-#: plugins/cube.c:1015
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "應該要描繪至立方體頂面的 PNG 和 SVG 檔案清單"
-
-#: plugins/cube.c:1028
-msgid "Skydome"
-msgstr "天空頂"
-
-#: plugins/cube.c:1029
-msgid "Render skydome"
-msgstr "描繪天空頂"
-
-#: plugins/cube.c:1035
-msgid "Skydome Image"
-msgstr "天空頂影像"
-
-#: plugins/cube.c:1036
-msgid "Image to use as texture for the skydome"
-msgstr "用來作為天空頂材質的影像"
-
-#: plugins/cube.c:1044
-msgid "Animate Skydome"
-msgstr "顯示天空頂動畫"
-
-#: plugins/cube.c:1045
-msgid "Animate skydome when rotating cube"
-msgstr "旋轉立方體時顯示天空頂動畫"
-
-#: plugins/cube.c:1051
-msgid "Skydome Gradient Start Color"
-msgstr "天空頂漸層開始色彩"
-
-#: plugins/cube.c:1052
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "要使用的天空頂後援漸層之頂部色彩停止點"
-
-#: plugins/cube.c:1062
-msgid "Skydome Gradient End Color"
-msgstr "天空頂漸層結束色彩"
-
-#: plugins/cube.c:1063
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "要使用的天空頂後援漸層之底部色彩停止點"
-
-#: plugins/cube.c:1073 plugins/rotate.c:302
-msgid "Acceleration"
-msgstr "加速"
-
-#: plugins/cube.c:1074
-msgid "Fold Acceleration"
-msgstr "摺疊加速"
-
-#: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
-#: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
-msgid "Speed"
-msgstr "速度"
-
-#: plugins/cube.c:1084
-msgid "Fold Speed"
-msgstr "摺疊速度"
-
-#: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
-#: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
-msgid "Timestep"
-msgstr "時間間隔"
-
-#: plugins/cube.c:1094
-msgid "Fold Timestep"
-msgstr "摺疊時間間隔"
-
-#: plugins/cube.c:1104 plugins/switcher.c:374
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "在可能使用更高品質比例時產生 Mipmap"
-
-#: plugins/cube.c:1795
-msgid "Unfold"
-msgstr "展開"
-
-#: plugins/cube.c:1796
-msgid "Unfold cube"
-msgstr "展開立方體"
-
-#: plugins/cube.c:1813
-msgid "Next Slide"
-msgstr "下一張投影片"
-
-#: plugins/cube.c:1814
-msgid "Advance to next slide"
-msgstr "換至下一張投影片"
-
-#: plugins/cube.c:1831
-msgid "Previous Slide"
-msgstr "上一張投影片"
-
-#: plugins/cube.c:1832
-msgid "Go back to previous slide"
-msgstr "返回上一張投影片"
-
-#: plugins/cube.c:2037
-msgid "Desktop Cube"
-msgstr "桌面立方體"
-
-#: plugins/cube.c:2038
-msgid "Place windows on cube"
-msgstr "將視窗放到立方體"
-
-#: plugins/decoration.c:1145
-msgid "Shadow Radius"
-msgstr "陰影半徑"
-
-#: plugins/decoration.c:1146
-msgid "Drop shadow radius"
-msgstr "投影半徑"
-
-#: plugins/decoration.c:1155
-msgid "Shadow Opacity"
-msgstr "陰影不透明度"
-
-#: plugins/decoration.c:1156
-msgid "Drop shadow opacity"
-msgstr "投影半徑不透明度"
-
-#: plugins/decoration.c:1175
-msgid "Shadow Offset X"
-msgstr "陰影偏移 X 軸"
-
-#: plugins/decoration.c:1176
-msgid "Drop shadow X offset"
-msgstr "投影 X 軸偏移"
-
-#: plugins/decoration.c:1184
-msgid "Shadow Offset Y"
-msgstr "陰影偏移 Y 軸"
-
-#: plugins/decoration.c:1185
-msgid "Drop shadow Y offset"
-msgstr "投影 Y 軸偏移"
-
-#: plugins/decoration.c:1193
-msgid "Command"
-msgstr "指令"
-
-#: plugins/decoration.c:1194
 msgid ""
-"Decorator command line that is executed if no decorator is already running"
-msgstr "如果沒有裝飾程式正在執行，則需執行的裝飾程式指令行。"
-
-#: plugins/decoration.c:1210
-#, fuzzy
-msgid "Decoration windows"
-msgstr "調整視窗比例"
-
-#: plugins/decoration.c:1211
-#, fuzzy
-msgid "Windows that should be decorated"
-msgstr "應該淡出/淡入的視窗類型"
-
-#: plugins/decoration.c:1219
-#, fuzzy
-msgid "Shadow windows"
-msgstr "嵌入視窗"
-
-#: plugins/decoration.c:1220
-#, fuzzy
-msgid "Windows that should be have a shadow"
-msgstr "應該淡出/淡入的視窗類型"
-
-#: plugins/decoration.c:1505
-msgid "Window Decoration"
-msgstr "視窗裝飾"
-
-#: plugins/decoration.c:1506
-msgid "Window decorations"
-msgstr "視窗裝飾"
-
-#: plugins/fade.c:179
-msgid "Fade Speed"
-msgstr "淡出/淡入速度"
-
-#: plugins/fade.c:180
-msgid "Window fade speed"
-msgstr "Window 淡出/淡入速度"
-
-#: plugins/fade.c:189
-#, fuzzy
-msgid "Fade windows"
-msgstr "調整視窗比例"
-
-#: plugins/fade.c:190
-#, fuzzy
-msgid "Windows that should be fading"
-msgstr "應該淡出/淡入的視窗類型"
-
-#: plugins/fade.c:198
-msgid "Visual Bell"
-msgstr "警示鈴聲"
-
-#: plugins/fade.c:199
-msgid "Fade effect on system beep"
-msgstr "系統發出嗶聲時啟用淡出/淡入特效"
-
-#: plugins/fade.c:205
-msgid "Fullscreen Visual Bell"
-msgstr "全螢幕警示鈴聲"
-
-#: plugins/fade.c:206
-msgid "Fullscreen fade effect on system beep"
-msgstr "系統發出嗶聲時啟用全螢幕淡出/淡入特效"
-
-#: plugins/fade.c:857
-msgid "Fading Windows"
-msgstr "視窗淡出中"
-
-#: plugins/fade.c:858
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "在映射時淡入視窗，以及在解除映射時淡出視窗"
-
-#: plugins/fuse.c:1486
-#, fuzzy
-msgid "Mount Point"
-msgstr "點"
-
-#: plugins/fuse.c:1487
-#, fuzzy
-msgid "Mount point"
-msgstr "新增點"
-
-#: plugins/fuse.c:1586
-msgid "Userspace File System"
-msgstr ""
-
-#: plugins/fuse.c:1587
-msgid "Userspace file system"
-msgstr ""
-
-#. Decimal point character
-#: plugins/gconf-dump.c:81
-msgid "."
-msgstr "."
-
-#: plugins/gconf-dump.c:616
-msgid "Plugins that this must load before"
-msgstr "在此之前必須先載入的外掛程式"
-
-#: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
-msgid "Do not modify"
-msgstr "不要修改"
-
-#: plugins/gconf-dump.c:626
-msgid "Plugins that this requires"
-msgstr "這時需要的外掛程式"
-
-#: plugins/minimize.c:193
-msgid "Minimize speed"
-msgstr "最小化速度"
-
-#: plugins/minimize.c:203
-msgid "Minimize timestep"
-msgstr "最小化時間間隔"
-
-#: plugins/minimize.c:212
-#, fuzzy
-msgid "Minimize Windows"
-msgstr "最小化視窗"
-
-#: plugins/minimize.c:213
-#, fuzzy
-msgid "Windows that should be transformed when minimized"
-msgstr "最小化時應該轉換的視窗類型"
-
-#: plugins/minimize.c:221
-msgid "Shade Resistance"
-msgstr "遮蔽阻力"
-
-#: plugins/minimize.c:222
-msgid "Shade resistance"
-msgstr "遮蔽阻力"
-
-#: plugins/minimize.c:1071
-msgid "Minimize Effect"
-msgstr "最小化特效"
-
-#: plugins/minimize.c:1072
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "在最小化和解除最小化時轉換視窗"
-
-#: plugins/move.c:677
-msgid "Initiate Window Move"
-msgstr "起始化視窗移動"
-
-#: plugins/move.c:678
-msgid "Start moving window"
-msgstr "開始移動視窗"
-
-#: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
-msgid "Opacity"
-msgstr "不透明度"
-
-#: plugins/move.c:697
-msgid "Opacity level of moving windows"
-msgstr "移動視窗的不透明度"
-
-#: plugins/move.c:705
-msgid "Constrain Y"
-msgstr "等比縮放 Y 軸"
-
-#: plugins/move.c:706
-msgid "Constrain Y coordinate to workspace area"
-msgstr "等比縮放 Y 軸對應到工作環境區域"
-
-#: plugins/move.c:712
-msgid "Snapoff maximized windows"
-msgstr "解除嵌入最大化視窗"
-
-#: plugins/move.c:713
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "在拖曳已最大化視窗時為其解除嵌入和自動解除最大化"
-
-#: plugins/move.c:881
-msgid "Move Window"
-msgstr "移動視窗"
-
-#: plugins/move.c:882
-msgid "Move window"
-msgstr "移動視窗"
-
-#: plugins/place.c:42
-msgid "Cascade"
-msgstr ""
-
-#: plugins/place.c:43
-msgid "Centered"
-msgstr ""
-
-#: plugins/place.c:44
-msgid "Smart"
-msgstr ""
-
-#: plugins/place.c:45
-#, fuzzy
-msgid "Maximize"
-msgstr "最小化"
-
-#: plugins/place.c:46
-msgid "Random"
-msgstr ""
-
-#: plugins/place.c:244
-msgid "Workarounds"
-msgstr "解決方式"
-
-#: plugins/place.c:245
-msgid "Window placement workarounds"
-msgstr "視窗位置解決方式"
-
-#: plugins/place.c:251
-msgid "Placement Mode"
-msgstr ""
-
-#: plugins/place.c:252
-msgid "Algorithm to use for window placement"
-msgstr ""
-
-#: plugins/place.c:260
-#, fuzzy
-msgid "Positioned windows"
-msgstr "顯示最小化的視窗"
-
-#: plugins/place.c:261
-#, fuzzy
-msgid "Windows that should be positioned by default"
-msgstr "應該淡出/淡入的視窗類型"
-
-#: plugins/place.c:271
-msgid "X Positions"
-msgstr ""
-
-#: plugins/place.c:272
-msgid "X position values"
-msgstr ""
-
-#: plugins/place.c:282
-msgid "Y Positions"
-msgstr ""
-
-#: plugins/place.c:283
-msgid "Y position values"
-msgstr ""
-
-#: plugins/place.c:293
-msgid "Viewport positioned windows"
-msgstr ""
-
-#: plugins/place.c:294
-#, fuzzy
-msgid "Windows that should positioned in specific viewports by default"
-msgstr "應該要在調整比例模式中調整比例的視窗類型"
-
-#: plugins/place.c:305
-msgid "X Viewport Positions"
-msgstr ""
-
-#: plugins/place.c:306
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "水平虛擬大小"
-
-#: plugins/place.c:316
-msgid "Y Viewport Positions"
-msgstr ""
-
-#: plugins/place.c:317
-msgid "Vertical viewport positions"
-msgstr ""
-
-#: plugins/place.c:1604
-msgid "Place Windows"
-msgstr "放置視窗"
-
-#: plugins/place.c:1605
-msgid "Place windows at appropriate positions when mapped"
-msgstr "在映射時將視窗放置到適當位置"
-
-#: plugins/plane.c:624
-#, fuzzy
-msgid "Plane Left"
-msgstr "往左旋轉"
-
-#: plugins/plane.c:625
-#, fuzzy
-msgid "Plane left"
-msgstr "往左旋轉"
-
-#: plugins/plane.c:643
-#, fuzzy
-msgid "Plane Right"
-msgstr "往右旋轉"
-
-#: plugins/plane.c:644
-#, fuzzy
-msgid "Plane right"
-msgstr "往右旋轉"
-
-#: plugins/plane.c:662
-#, fuzzy
-msgid "Plane Down"
-msgstr "Page Down"
-
-#: plugins/plane.c:663
-#, fuzzy
-msgid "Plane down"
-msgstr "放置視窗"
-
-#: plugins/plane.c:681
-#, fuzzy
-msgid "Plane Up"
-msgstr "Page Up"
-
-#: plugins/plane.c:682
-msgid "Plane up"
-msgstr ""
-
-#: plugins/plane.c:698
-#, fuzzy, c-format
-msgid "Plane To Face %d"
-msgstr "往面 %d 旋轉"
-
-#: plugins/plane.c:699
-#, fuzzy, c-format
-msgid "Plane to face %d"
-msgstr "往面 %d 旋轉"
-
-#: plugins/plane.c:700
-#, fuzzy, c-format
-msgid "Plane To Face %d with Window"
-msgstr "隨視窗往面 %d 旋轉"
-
-#: plugins/plane.c:701
-#, fuzzy, c-format
-msgid "Plane to face %d and bring active window along"
-msgstr "往面 %d 旋轉並隨同作用中視窗一起旋轉"
-
-#: plugins/plane.c:868
-#, fuzzy
-msgid "Desktop Plane"
-msgstr "桌面立方體"
-
-#: plugins/plane.c:869
-#, fuzzy
-msgid "Place windows on a plane"
-msgstr "將視窗放到立方體"
-
-#: plugins/regex.c:463
-msgid "Regex Matching"
-msgstr ""
-
-#: plugins/regex.c:464
-#, fuzzy
-msgid "Regex window matching"
-msgstr "切換視窗嵌入"
-
-#: plugins/resize.c:718
-msgid "Initiate Window Resize"
-msgstr "起始化視窗調整大小"
-
-#: plugins/resize.c:719
-msgid "Start resizing window"
-msgstr "開始調整視窗大小"
-
-#: plugins/resize.c:862
-msgid "Resize Window"
-msgstr "調整大小視窗"
-
-#: plugins/resize.c:863
-msgid "Resize window"
-msgstr "調整大小視窗"
-
-#: plugins/rotate.c:285 plugins/zoom.c:222
-msgid "Pointer Invert Y"
-msgstr "指標反轉 Y 軸"
-
-#: plugins/rotate.c:286 plugins/zoom.c:223
-msgid "Invert Y axis for pointer movement"
-msgstr "指標移動時反轉 Y 軸"
-
-#: plugins/rotate.c:292 plugins/zoom.c:229
-msgid "Pointer Sensitivity"
-msgstr "指標靈敏度"
-
-#: plugins/rotate.c:293 plugins/zoom.c:230
-msgid "Sensitivity of pointer movement"
-msgstr "指標移動靈敏度"
-
-#: plugins/rotate.c:303
-msgid "Rotation Acceleration"
-msgstr "旋轉加速"
-
-#: plugins/rotate.c:312
-msgid "Snap To Top Face"
-msgstr "嵌入至頂面"
-
-#: plugins/rotate.c:313
-msgid "Snap Cube Rotation to Top Face"
-msgstr "嵌入立方體旋轉至頂面"
-
-#: plugins/rotate.c:320
-msgid "Rotation Speed"
-msgstr "旋轉速度"
-
-#: plugins/rotate.c:330
-msgid "Rotation Timestep"
-msgstr "旋轉時間間隔"
-
-#: plugins/rotate.c:1764
-msgid "Start Rotation"
-msgstr "開始旋轉"
-
-#: plugins/rotate.c:1778
-msgid "Rotate Left"
-msgstr "往左旋轉"
-
-#: plugins/rotate.c:1779
-msgid "Rotate left"
-msgstr "往左旋轉"
-
-#: plugins/rotate.c:1797
-msgid "Rotate Right"
-msgstr "往右旋轉"
-
-#: plugins/rotate.c:1798
-msgid "Rotate right"
-msgstr "往右旋轉"
-
-#: plugins/rotate.c:1816
-msgid "Rotate Left with Window"
-msgstr "隨視窗往左旋轉"
-
-#: plugins/rotate.c:1817
-msgid "Rotate left and bring active window along"
-msgstr "往左旋轉並隨同作用中視窗一起旋轉"
-
-#: plugins/rotate.c:1836
-msgid "Rotate Right with Window"
-msgstr "隨視窗往右旋轉"
-
-#: plugins/rotate.c:1837
-msgid "Rotate right and bring active window along"
-msgstr "往右旋轉並隨同作用中視窗一起旋轉"
-
-#: plugins/rotate.c:1854
-#, c-format
-msgid "Rotate To Face %d"
-msgstr "往面 %d 旋轉"
-
-#: plugins/rotate.c:1855
-#, c-format
-msgid "Rotate to face %d"
-msgstr "往面 %d 旋轉"
-
-#: plugins/rotate.c:1856
-#, c-format
-msgid "Rotate To Face %d with Window"
-msgstr "隨視窗往面 %d 旋轉"
-
-#: plugins/rotate.c:1857
-#, c-format
-msgid "Rotate to face %d and bring active window along"
-msgstr "往面 %d 旋轉並隨同作用中視窗一起旋轉"
-
-#: plugins/rotate.c:1906
-msgid "Rotate To"
-msgstr "旋轉至"
-
-#: plugins/rotate.c:1907
-msgid "Rotate to viewport"
-msgstr "往檢視區旋轉"
-
-#: plugins/rotate.c:1918
-msgid "Rotate Window"
-msgstr "旋轉視窗"
-
-#: plugins/rotate.c:1919
-msgid "Rotate with window"
-msgstr "隨視窗旋轉"
-
-#: plugins/rotate.c:1930
-msgid "Rotate Flip Left"
-msgstr "往左旋轉翻轉"
-
-#: plugins/rotate.c:1931
-msgid "Flip to left viewport and warp pointer"
-msgstr "往左檢視區翻轉並使指標變形"
-
-#: plugins/rotate.c:1946
-msgid "Rotate Flip Right"
-msgstr "往右旋轉翻轉"
-
-#: plugins/rotate.c:1947
-msgid "Flip to right viewport and warp pointer"
-msgstr "往右檢視區翻轉並使指標變形"
-
-#: plugins/rotate.c:1962
-msgid "Edge Flip Pointer"
-msgstr "邊緣翻轉指標"
-
-#: plugins/rotate.c:1963
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "將指標移動到螢幕邊緣時翻轉到下一個檢視區"
-
-#: plugins/rotate.c:1970
-msgid "Edge Flip Move"
-msgstr "邊緣翻轉移動"
-
-#: plugins/rotate.c:1971
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr "將視窗移動到螢幕邊緣時翻轉到下一個檢視區"
-
-#: plugins/rotate.c:1978
-msgid "Edge Flip DnD"
-msgstr "邊緣翻轉 DnD"
-
-#: plugins/rotate.c:1979
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr "將物件拖曳到螢幕邊緣時翻轉到下一個檢視區"
-
-#: plugins/rotate.c:1986
-msgid "Flip Time"
-msgstr "翻轉時間"
-
-#: plugins/rotate.c:1987
-msgid "Timeout before flipping viewport"
-msgstr "逾時多久需翻轉檢視區"
-
-#: plugins/rotate.c:2155
-msgid "Rotate Cube"
-msgstr "旋轉立方體"
-
-#: plugins/rotate.c:2156
-msgid "Rotate desktop cube"
-msgstr "旋轉桌面立方體"
-
-#: plugins/scale.c:80 plugins/wobbly.c:131
-msgid "None"
-msgstr "無"
-
-#: plugins/scale.c:81
-msgid "Emblem"
-msgstr "象徵"
-
-#: plugins/scale.c:82
-msgid "Big"
-msgstr "大"
-
-#: plugins/scale.c:325
-msgid "Spacing"
-msgstr "間距"
-
-#: plugins/scale.c:326
-msgid "Space between windows"
-msgstr "視窗間隔"
-
-#: plugins/scale.c:335
-msgid "Scale speed"
-msgstr "調整比例速度"
-
-#: plugins/scale.c:345
-msgid "Scale timestep"
-msgstr "調整比例時間間隔"
-
-#: plugins/scale.c:354
-#, fuzzy
-msgid "Scale Windows"
-msgstr "調整視窗比例"
-
-#: plugins/scale.c:355
-#, fuzzy
-msgid "Windows that should be scaled in scale mode"
-msgstr "應該要在調整比例模式中調整比例的視窗類型"
-
-#: plugins/scale.c:363
-msgid "Darken Background"
-msgstr "暗化背景"
-
-#: plugins/scale.c:364
-msgid "Darken background when scaling windows"
-msgstr "調整視窗比例時暗化背景"
-
-#: plugins/scale.c:371 plugins/switcher.c:400
-msgid "Amount of opacity in percent"
-msgstr "不透明度比例"
-
-#: plugins/scale.c:379
-msgid "Overlay Icon"
-msgstr "重疊圖示"
-
-#: plugins/scale.c:380
-msgid "Overlay an icon on windows once they are scaled"
-msgstr "調整視窗比例後在上面重疊圖示"
-
-#: plugins/scale.c:388
-msgid "Hover Time"
-msgstr "停留時間"
-
-#: plugins/scale.c:389
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "啟用時將執行經 command10 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:2 ../plugins/compiz.schemas.in.h:3
 msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr "停留在視窗上多久 (毫秒) 後停止調整比例模式"
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "啟用時將執行經 command1 識別之外圍程序指令的按鍵組合"
 
-#: plugins/scale.c:1931
-msgid "Initiate Window Picker"
-msgstr "起始化視窗選擇器"
-
-#: plugins/scale.c:1932
-msgid "Layout and start transforming windows"
-msgstr "配置和開始轉換視窗"
-
-#: plugins/scale.c:1950
-msgid "Initiate Window Picker For All Windows"
-msgstr "啟始化所有視窗的視窗選擇器"
-
-#: plugins/scale.c:1951
-msgid "Layout and start transforming all windows"
-msgstr "配置並開始轉換所有視窗"
-
-#: plugins/scale.c:1965
-msgid "Initiate Window Picker For Window Group"
-msgstr "啟始化視窗群組的視窗選擇器"
-
-#: plugins/scale.c:1966
-msgid "Layout and start transforming window group"
-msgstr "配置並開始轉換視窗群組"
-
-#: plugins/scale.c:1981
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "在目前輸出啟始化群組的視窗選擇器"
-
-#: plugins/scale.c:1983
-msgid "Layout and start transforming windows on current output"
-msgstr "在目前輸出配置並開始轉換視窗"
-
-#: plugins/scale.c:2200
-msgid "Scale"
-msgstr "調整比例"
-
-#: plugins/scale.c:2201
-msgid "Scale windows"
-msgstr "調整視窗比例"
-
-#: plugins/screenshot.c:385
-#, fuzzy
-msgid "Initiate rectangle screenshot"
-msgstr "擷取螢幕畫面"
-
-#: plugins/screenshot.c:398
-#, fuzzy
-msgid "Directory"
-msgstr "目錄\n"
-
-#: plugins/screenshot.c:399
-#, fuzzy
-msgid "Put screenshot images in this directory"
-msgstr "遞迴搜尋此目錄"
-
-#: plugins/screenshot.c:407
-#, fuzzy
-msgid "Launch Application"
-msgstr "啟動應用程式"
-
-#: plugins/screenshot.c:408
-#, fuzzy
-msgid "Automatically open screenshot in this application"
-msgstr "登入時自動啟動 applet"
-
-#: plugins/screenshot.c:558
-#, fuzzy
-msgid "Screenshot"
-msgstr "螢幕"
-
-#: plugins/screenshot.c:559
-#, fuzzy
-msgid "Screenshot plugin"
-msgstr "螢幕擷取指令行"
-
-#: plugins/switcher.c:345
-msgid "Switcher speed"
-msgstr "切換器速度"
-
-#: plugins/switcher.c:355
-msgid "Switcher timestep"
-msgstr "切換器時間間隔"
-
-#: plugins/switcher.c:364
-#, fuzzy
-msgid "Switcher windows"
-msgstr "調整視窗比例"
-
-#: plugins/switcher.c:365
-#, fuzzy
-msgid "Windows that should be shown in switcher"
-msgstr "應該要顯示在切換器中的視窗類型"
-
-#: plugins/switcher.c:381
-msgid "Saturation"
-msgstr "飽和度"
-
-#: plugins/switcher.c:382
-msgid "Amount of saturation in percent"
-msgstr "飽和度比例"
-
-#: plugins/switcher.c:390
-msgid "Brightness"
-msgstr "亮度"
-
-#: plugins/switcher.c:391
-msgid "Amount of brightness in percent"
-msgstr "亮度比例"
-
-#: plugins/switcher.c:408
-msgid "Bring To Front"
-msgstr "提到最上層"
-
-#: plugins/switcher.c:409
-msgid "Bring selected window to front"
-msgstr "將選取視窗提到最上層"
-
-#: plugins/switcher.c:415
-msgid "Zoom"
-msgstr "縮放"
-
-#: plugins/switcher.c:416
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr "切換視窗時桌面應縮小的距離"
-
-#: plugins/switcher.c:426
-msgid "Icon"
-msgstr "圖示"
-
-#: plugins/switcher.c:427
-msgid "Show icon next to thumbnail"
-msgstr "顯示圖示於縮圖旁"
-
-#: plugins/switcher.c:433
-msgid "Minimized"
-msgstr "最小化"
-
-#: plugins/switcher.c:434
-msgid "Show minimized windows"
-msgstr "顯示最小化的視窗"
-
-#: plugins/switcher.c:440
-#, fuzzy
-msgid "Auto Rotate"
-msgstr "自動發出"
-
-#: plugins/switcher.c:441
-msgid "Rotate to the selected window while switching"
-msgstr ""
-
-#: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
-msgid "Next window"
-msgstr "下一個視窗"
-
-#: plugins/switcher.c:2028
-msgid "Popup switcher if not visible and select next window"
-msgstr "看不到切換器時快顯切換器，並選取下一個視窗"
-
-#: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
-msgid "Prev window"
-msgstr "上一個視窗"
-
-#: plugins/switcher.c:2046
-msgid "Popup switcher if not visible and select previous window"
-msgstr "看不到切換器時快顯切換器，並選取上一個視窗"
-
-#: plugins/switcher.c:2064
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "看不到切換器時快顯切換器，並從所有視窗選取下一個視窗"
-
-#: plugins/switcher.c:2083
+#: ../metadata/compiz.xml.in.h:3 ../plugins/compiz.schemas.in.h:5
 msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr "看不到切換器時快顯切換器，並從所有視窗選取上一個視窗"
-
-#: plugins/switcher.c:2102
-msgid "Select next window"
-msgstr "選取下一個視窗"
-
-#: plugins/switcher.c:2115
-msgid "Select previous window"
-msgstr "選取上一個視窗"
-
-#: plugins/switcher.c:2289 plugins/switcher.c:2290
-msgid "Application Switcher"
-msgstr "應用程式切換器"
-
-#: plugins/video.c:245
-msgid "YV12 colorspace"
-msgstr ""
-
-#: plugins/video.c:246
-msgid "Provide YV12 colorspace support"
-msgstr ""
-
-#: plugins/video.c:1240
-msgid "Video Playback"
-msgstr ""
-
-#: plugins/video.c:1241
-msgid "Video playback"
-msgstr ""
-
-#: plugins/water.c:1607
-msgid "Enable pointer water effects"
-msgstr "啟用指標水波特效"
-
-#: plugins/water.c:1620
-msgid "Toggle rain"
-msgstr "切換下雨"
-
-#: plugins/water.c:1621
-msgid "Toggle rain effect"
-msgstr "切換下雨特效"
-
-#: plugins/water.c:1636
-msgid "Toggle wiper"
-msgstr "切換雨刷"
-
-#: plugins/water.c:1637
-msgid "Toggle wiper effect"
-msgstr "切換雨刷效果"
-
-#: plugins/water.c:1652
-msgid "Offset Scale"
-msgstr "偏移比例"
-
-#: plugins/water.c:1653
-msgid "Water offset scale"
-msgstr "水波偏移比例"
-
-#: plugins/water.c:1662
-msgid "Rain Delay"
-msgstr "下雨延遲"
-
-#: plugins/water.c:1663
-msgid "Delay (in ms) between each rain-drop"
-msgstr "每滴雨之間的延遲 (毫秒)"
-
-#: plugins/water.c:1671
-msgid "Title wave"
-msgstr "標題波紋"
-
-#: plugins/water.c:1672
-msgid "Wave effect from window title"
-msgstr "視窗標題的波紋效果"
-
-#: plugins/water.c:1683
-msgid "Point"
-msgstr "點"
-
-#: plugins/water.c:1684
-msgid "Add point"
-msgstr "新增點"
-
-#: plugins/water.c:1695
-msgid "Line"
-msgstr "線"
-
-#: plugins/water.c:1696
-msgid "Add line"
-msgstr "新增線"
-
-#: plugins/water.c:1859
-msgid "Water Effect"
-msgstr "水波特效"
-
-#: plugins/water.c:1860
-msgid "Adds water effects to different desktop actions"
-msgstr "新增水波特效到不同的桌面動作"
-
-# 'driver' as in '(hardware) driver update'
-#: plugins/wobbly.c:132 plugins/wobbly.c:2884
-msgid "Shiver"
-msgstr "晃動"
-
-#: plugins/wobbly.c:345
-msgid "Friction"
-msgstr "摩擦力"
-
-#: plugins/wobbly.c:346
-msgid "Spring Friction"
-msgstr "彈簧摩擦力"
-
-#: plugins/wobbly.c:355
-msgid "Spring K"
-msgstr "彈簧 K 值"
-
-#: plugins/wobbly.c:356
-msgid "Spring Konstant"
-msgstr "彈簧常數"
-
-#: plugins/wobbly.c:365
-msgid "Grid Resolution"
-msgstr "格線解析度"
-
-#: plugins/wobbly.c:366
-msgid "Vertex Grid Resolution"
-msgstr "頂點格線解析度"
-
-#: plugins/wobbly.c:374
-msgid "Minimum Grid Size"
-msgstr "最小格線大小"
-
-#: plugins/wobbly.c:375
-msgid "Minimum Vertex Grid Size"
-msgstr "最小頂點格線大小"
-
-#: plugins/wobbly.c:383
-msgid "Map Effect"
-msgstr "映射特效"
-
-#: plugins/wobbly.c:384
-msgid "Map Window Effect"
-msgstr "映射視窗特效"
-
-#: plugins/wobbly.c:392
-msgid "Focus Effect"
-msgstr "定焦特效"
-
-#: plugins/wobbly.c:393
-msgid "Focus Window Effect"
-msgstr "定焦視窗特效"
-
-#: plugins/wobbly.c:401
-#, fuzzy
-msgid "Map Windows"
-msgstr "映射視窗類型"
-
-#: plugins/wobbly.c:402
-#, fuzzy
-msgid "Windows that should wobble when mapped"
-msgstr "應該要在映射時搖擺的視窗類型"
-
-#: plugins/wobbly.c:410
-#, fuzzy
-msgid "Focus Windows"
-msgstr "定焦視窗類型"
-
-#: plugins/wobbly.c:411
-#, fuzzy
-msgid "Windows that should wobble when focused"
-msgstr "應該要在定焦時搖擺的視窗類型"
-
-#: plugins/wobbly.c:419
-#, fuzzy
-msgid "Move Windows"
-msgstr "移動視窗"
-
-#: plugins/wobbly.c:420
-#, fuzzy
-msgid "Windows that should wobble when moved"
-msgstr "應該要在移動時搖擺的視窗類型"
-
-#: plugins/wobbly.c:428
-#, fuzzy
-msgid "Grab Windows"
-msgstr "抓取視窗類型"
-
-#: plugins/wobbly.c:429
-#, fuzzy
-msgid "Windows that should wobble when grabbed"
-msgstr "應該要在抓取時搖擺的視窗類型"
-
-#: plugins/wobbly.c:437
-msgid "Maximize Effect"
-msgstr "最大化特效"
-
-#: plugins/wobbly.c:438
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "視窗最大化和解除最大化時啟用搖擺特效"
-
-#: plugins/wobbly.c:2863
-msgid "Snap windows"
-msgstr "嵌入視窗"
-
-#: plugins/wobbly.c:2864
-msgid "Toggle window snapping"
-msgstr "切換視窗嵌入"
-
-#: plugins/wobbly.c:2877
-msgid "Snap Inverted"
-msgstr "嵌入反轉"
-
-#: plugins/wobbly.c:2878
-msgid "Inverted window snapping"
-msgstr "反轉視窗嵌入"
-
-#: plugins/wobbly.c:2885
-msgid "Make window shiver"
-msgstr "讓視窗晃動"
-
-#: plugins/wobbly.c:3098
-msgid "Wobbly Windows"
-msgstr "搖擺視窗"
-
-#: plugins/wobbly.c:3099
-msgid "Use spring model for wobbly window effect"
-msgstr "針對搖擺視窗特效使用彈簧模式"
-
-#: plugins/zoom.c:240
-msgid "Zoom Speed"
-msgstr "縮放速度"
-
-#: plugins/zoom.c:250
-msgid "Zoom Timestep"
-msgstr "縮放時間間隔"
-
-#: plugins/zoom.c:259 plugins/zoom.c:260
-msgid "Zoom factor"
-msgstr "縮放倍率"
-
-#: plugins/zoom.c:269
-msgid "Filter Linear"
-msgstr "線性過濾器"
-
-#: plugins/zoom.c:270
-msgid "USe linear filter when zoomed in"
-msgstr "在放大時使用線性過濾器"
-
-#: plugins/zoom.c:753 plugins/zoom.c:767 plugins/zoom.c:768
-msgid "Zoom In"
-msgstr "放大"
-
-#: plugins/zoom.c:782 plugins/zoom.c:783
-msgid "Zoom Out"
-msgstr "縮小"
-
-#: plugins/zoom.c:934
-msgid "Zoom Desktop"
-msgstr "縮放桌面"
-
-#: plugins/zoom.c:935
-msgid "Zoom and pan desktop cube"
-msgstr "縮放和平移桌面立方體"
-
-#: src/display.c:171
-msgid "Fast"
-msgstr "快"
-
-#: src/display.c:171
-msgid "Good"
-msgstr "好"
-
-#: src/display.c:171
-msgid "Best"
-msgstr "最佳"
-
-#: src/display.c:753
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "啟用時將執行經 command10 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:4 ../plugins/compiz.schemas.in.h:7
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "啟用時將執行經 command11 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:5 ../plugins/compiz.schemas.in.h:9
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "啟用時將執行經 command2 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:6 ../plugins/compiz.schemas.in.h:11
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "啟用時將執行經 command3 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:7 ../plugins/compiz.schemas.in.h:13
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "啟用時將執行經 command4 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:8 ../plugins/compiz.schemas.in.h:15
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "啟用時將執行經 command5 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:9 ../plugins/compiz.schemas.in.h:17
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "啟用時將執行經 command6 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:10 ../plugins/compiz.schemas.in.h:19
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "啟用時將執行經 command7 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:11 ../plugins/compiz.schemas.in.h:21
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "啟用時將執行經 command8 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:12 ../plugins/compiz.schemas.in.h:23
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "啟用時將執行經 command9 識別之外圍程序指令的按鍵組合"
+
+#: ../metadata/compiz.xml.in.h:13 ../plugins/compiz.schemas.in.h:26
 msgid "Active Plugins"
 msgstr "主動式外掛程式"
 
-#: src/display.c:754
-msgid "List of currently active plugins"
-msgstr "最新主動式外掛程式清單"
-
-#: src/display.c:768
-msgid "Texture Filter"
-msgstr "材質過濾器"
-
-#: src/display.c:769
-msgid "Texture filtering"
-msgstr "材質篩選"
-
-#: src/display.c:777
-msgid "Click To Focus"
-msgstr "按一下以定焦"
-
-#: src/display.c:778
-msgid "Click on window moves input focus to it"
-msgstr "在視窗上按一下便可將輸入焦點移動到該視窗"
-
-#: src/display.c:784
-msgid "Auto-Raise"
-msgstr "自動發出"
-
-#: src/display.c:785
-msgid "Raise selected windows after interval"
-msgstr "在時間間隔後提高選定視窗"
-
-#: src/display.c:791
-msgid "Auto-Raise Delay"
-msgstr "自動發出延遲"
-
-#: src/display.c:792
-msgid "Interval before raising selected windows"
-msgstr "提高選定視窗的時間間隔"
-
-#: src/display.c:800
-msgid "Close Window"
-msgstr "關閉視窗"
-
-#: src/display.c:801
-msgid "Close active window"
-msgstr "關閉作用中視窗"
-
-#: src/display.c:817
-msgid "Show Main Menu"
-msgstr "顯示主功能表"
-
-#: src/display.c:818
-msgid "Show the main menu"
-msgstr "顯示主功能表"
-
-#: src/display.c:834
-msgid "Run Dialog"
-msgstr "執行對話方塊"
-
-#: src/display.c:835
-msgid "Show Run Application dialog"
-msgstr "顯示執行應用程式對話方塊"
-
-#: src/display.c:851
-msgid "Unmaximize Window"
-msgstr "視窗解除最大化"
-
-#: src/display.c:852
-msgid "Unmaximize active window"
-msgstr "作用中視窗解除最大化"
-
-#: src/display.c:868
-msgid "Minimize Window"
-msgstr "最小化視窗"
-
-#: src/display.c:869
-msgid "Minimize active window"
-msgstr "最小化作用中視窗"
-
-#: src/display.c:885
-msgid "Maximize Window"
-msgstr "最大化視窗"
-
-#: src/display.c:886
-msgid "Maximize active window"
-msgstr "最大化作用中視窗"
-
-#: src/display.c:902
-msgid "Maximize Window Horizontally"
-msgstr "將視窗水平最大化"
-
-#: src/display.c:903
-msgid "Maximize active window horizontally"
-msgstr "將作用中視窗水平最大化"
-
-#: src/display.c:915
-msgid "Maximize Window Vertically"
-msgstr "將視窗垂直最大化"
-
-#: src/display.c:916
-msgid "Maximize active window vertically"
-msgstr "將作用中視窗垂直最大化"
-
-#: src/display.c:928 src/display.c:929
-msgid "Hide all windows and focus desktop"
-msgstr "隱藏全部視窗並定焦桌面"
-
-#: src/display.c:943
-#, c-format
-msgid "Command line %d"
-msgstr "指令行 %d"
-
-#: src/display.c:944
-#, c-format
-msgid "Command line to be executed in shell when run_command%d is invoked"
-msgstr "啟用 run_command%d 時要在外圍程序中執行的指令行"
-
-#: src/display.c:946
-#, c-format
-msgid "Run command %d"
-msgstr "執行指令 %d"
-
-#: src/display.c:947
-#, c-format
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command%d"
-msgstr "啟用時將執行經 command%d 識別之外圍程序指令的按鍵組合"
-
-#: src/display.c:991
-msgid "Slow Animations"
-msgstr "減慢動畫速度"
-
-#: src/display.c:992
-msgid "Toggle use of slow animations"
-msgstr "切換使用減慢動畫速度"
-
-#: src/display.c:1008
-msgid "Raise Window"
-msgstr "提高視窗"
-
-#: src/display.c:1009
-msgid "Raise window above other windows"
-msgstr "將視窗提高到比其他視窗高"
-
-#: src/display.c:1023
-msgid "Lower Window"
-msgstr "降低視窗高度"
-
-#: src/display.c:1024
-msgid "Lower window beneath other windows"
-msgstr "將視窗降低到其他視窗之下"
-
-#: src/display.c:1038
-msgid "Increase Opacity"
-msgstr "提高不透明度"
-
-#: src/display.c:1039
-msgid "Increase window opacity"
-msgstr "提高視窗不透明度"
-
-#: src/display.c:1053
-msgid "Decrease Opacity"
-msgstr "降低不透明度"
-
-#: src/display.c:1054
-msgid "Decrease window opacity"
-msgstr "降低視窗不透明度"
-
-#: src/display.c:1068 src/display.c:1069
-msgid "Take a screenshot"
-msgstr "擷取螢幕畫面"
-
-#: src/display.c:1085 src/display.c:1086
-msgid "Screenshot command line"
-msgstr "螢幕擷取指令行"
-
-#: src/display.c:1094 src/display.c:1095
-msgid "Take a screenshot of a window"
-msgstr "擷取視窗螢幕畫面"
-
-#: src/display.c:1112 src/display.c:1113
-msgid "Window screenshot command line"
-msgstr "視窗螢幕擷取指令行"
-
-#: src/display.c:1121
-msgid "Window Menu"
-msgstr "視窗功能表"
-
-#: src/display.c:1122
-msgid "Open window menu"
-msgstr "開啟視窗功能表"
-
-#: src/display.c:1141
-msgid "Raise On Click"
-msgstr "按一下時提高"
-
-#: src/display.c:1142
-msgid "Raise windows when clicked"
-msgstr "在按一下時提高視窗高度"
-
-#: src/display.c:1148
-msgid "Audible Bell"
-msgstr "聲訊鈴聲"
-
-#: src/display.c:1149
-msgid "Audible system beep"
-msgstr "系統發出嗶聲時啟用聲訊"
-
-#: src/display.c:1155
-msgid "Toggle Window Maximized"
-msgstr "將視窗切換到最大"
-
-#: src/display.c:1156
-msgid "Toggle active window maximized"
-msgstr "將使用中視窗切換到最大"
-
-#: src/display.c:1168
-msgid "Toggle Window Maximized Horizontally"
-msgstr "將視窗水平切換到最大"
-
-#: src/display.c:1170
-msgid "Toggle active window maximized horizontally"
-msgstr "將使用中視窗水平切換到最大"
-
-#: src/display.c:1182
-msgid "Toggle Window Maximized Vertically"
-msgstr "將視窗垂直切換到最大"
-
-#: src/display.c:1184
-msgid "Toggle active window maximized vertically"
-msgstr "將使用中視窗垂直切換到最大"
-
-#: src/display.c:1196
-msgid "Hide Skip Taskbar Windows"
-msgstr "隱藏跳過工作列視窗"
-
-#: src/display.c:1197
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "進入顯示桌面模式時隱藏未在工作列的視窗"
-
-#: src/display.c:1204
-msgid "Toggle Window Shaded"
-msgstr "將視窗切換到遮蔽"
-
-#: src/display.c:1205
-msgid "Toggle active window shaded"
-msgstr "將使用中視窗切換到遮蔽"
-
-#: src/display.c:1221
-msgid "Ignore Hints When Maximized"
-msgstr "最大化時忽略提示"
-
-#: src/display.c:1222
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "視窗最大化時忽略大小增量與畫面提示"
-
-#: src/display.c:1229 src/display.c:1230
-#, fuzzy
-msgid "Terminal command line"
-msgstr "螢幕擷取指令行"
-
-#: src/display.c:1238 src/display.c:1239
-#, fuzzy
-msgid "Open a terminal"
-msgstr "在終端機執行"
-
-#: src/display.c:1251
-#, fuzzy
-msgid "Ping Delay"
-msgstr "下雨延遲"
-
-#: src/display.c:1252
-msgid "Interval between ping messages"
-msgstr ""
-
-#: src/main.c:54
-msgid "Desktop"
-msgstr "桌面"
-
-#: src/main.c:55
-msgid "Dock"
-msgstr "黏合"
-
-#: src/main.c:56
-msgid "Toolbar"
-msgstr "工具列"
-
-#: src/main.c:57
-msgid "Menu"
-msgstr "功能表"
-
-#: src/main.c:58
-msgid "Utility"
-msgstr "公用程式"
-
-#: src/main.c:59
-msgid "Splash"
-msgstr "開頭顯示畫面"
-
-#: src/main.c:60
-msgid "Dialog"
-msgstr "對話方塊"
-
-#: src/main.c:61
-msgid "Normal"
-msgstr "一般"
-
-#: src/main.c:62
-msgid "DropdownMenu"
-msgstr "DropdownMenu"
-
-#: src/main.c:63
-msgid "PopupMenu"
-msgstr "PopupMenu"
-
-#: src/main.c:64
-msgid "Tooltip"
-msgstr "工具提示"
-
-#: src/main.c:65
-msgid "Notification"
-msgstr "通知"
-
-#: src/main.c:66
-msgid "Combo"
-msgstr "組合"
-
-#: src/main.c:67
-msgid "Dnd"
-msgstr "Dnd"
-
-#: src/main.c:68
-msgid "ModalDialog"
-msgstr "ModalDialog"
-
-#: src/main.c:69
-msgid "Fullscreen"
-msgstr "全螢幕"
-
-#: src/main.c:70
-msgid "Unknown"
-msgstr "未知的"
-
-#: src/screen.c:614
-msgid "Detect Refresh Rate"
-msgstr "偵測重新整理速率"
-
-#: src/screen.c:615
-msgid "Automatic detection of refresh rate"
-msgstr "自動偵測重新整理速率"
-
-#: src/screen.c:621
-msgid "Lighting"
-msgstr "光源"
-
-#: src/screen.c:622
-msgid "Use diffuse light when screen is transformed"
-msgstr "在螢幕轉換時使用擴散光"
-
-#: src/screen.c:628
-msgid "Refresh Rate"
-msgstr "重新整理速率"
-
-#: src/screen.c:629
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "螢幕重新描繪的速率 (次數/秒)"
-
-#: src/screen.c:638
-msgid "Horizontal Virtual Size"
-msgstr "水平虛擬大小"
-
-#: src/screen.c:639
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "水平虛擬大小的螢幕大小倍數"
-
-#: src/screen.c:647
-msgid "Vertical Virtual Size"
-msgstr "垂直虛擬大小"
-
-#: src/screen.c:648
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "垂直虛擬大小的螢幕大小倍數"
-
-#: src/screen.c:656
-msgid "Opacity Step"
-msgstr "不透明度間隔"
-
-#: src/screen.c:657
-msgid "Opacity change step"
-msgstr "不透明度變更間隔"
-
-#: src/screen.c:665
-msgid "Unredirect Fullscreen Windows"
-msgstr "全螢幕視窗解除重新導向"
-
-#: src/screen.c:666
+#: ../metadata/compiz.xml.in.h:14 ../plugins/compiz.schemas.in.h:35
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr "使全螢幕的描繪動作不會重新導向到幕後 Pixmap"
 
-#: src/screen.c:673
-msgid "Default Icon"
-msgstr "預設圖示"
+#: ../metadata/compiz.xml.in.h:15 ../plugins/compiz.schemas.in.h:49
+msgid "Audible Bell"
+msgstr "聲訊鈴聲"
 
-#: src/screen.c:674
-msgid "Default window icon image"
-msgstr "預設的視窗圖示影像"
+#: ../metadata/compiz.xml.in.h:16 ../plugins/compiz.schemas.in.h:50
+msgid "Audible system beep"
+msgstr "系統發出嗶聲時啟用聲訊"
 
-#: src/screen.c:682
-msgid "Sync To VBlank"
-msgstr "同步化到 VBlank"
+#: ../metadata/compiz.xml.in.h:17 ../plugins/compiz.schemas.in.h:52
+msgid "Auto-Raise"
+msgstr "自動發出"
 
-#: src/screen.c:683
-msgid "Only perform screen updates during vertical blanking period"
-msgstr "只在垂直空白期間執行螢幕更新"
+#: ../metadata/compiz.xml.in.h:18 ../plugins/compiz.schemas.in.h:53
+msgid "Auto-Raise Delay"
+msgstr "自動發出延遲"
 
-#: src/screen.c:690
-msgid "Number of Desktops"
-msgstr "桌面數"
-
-#: src/screen.c:691
-msgid "Number of virtual desktops"
-msgstr "虛擬桌面數"
-
-#: src/screen.c:699
-msgid "Detect Outputs"
-msgstr "偵測輸出"
-
-#: src/screen.c:700
+#: ../metadata/compiz.xml.in.h:19 ../plugins/compiz.schemas.in.h:54
 msgid "Automatic detection of output devices"
 msgstr "自動偵測輸出設備"
 
-#: src/screen.c:706
-msgid "Outputs"
-msgstr "輸出"
+#: ../metadata/compiz.xml.in.h:20 ../plugins/compiz.schemas.in.h:55
+msgid "Automatic detection of refresh rate"
+msgstr "自動偵測重新整理速率"
 
-#: src/screen.c:707
-msgid "List of strings describing output devices"
-msgstr "描述輸出設備的字串清單"
+#: ../metadata/compiz.xml.in.h:21 ../plugins/compiz.schemas.in.h:71
+msgid "Click To Focus"
+msgstr "按一下以定焦"
 
-#: src/screen.c:718
+#: ../metadata/compiz.xml.in.h:22 ../plugins/compiz.schemas.in.h:72
+msgid "Click on window moves input focus to it"
+msgstr "在視窗上按一下便可將輸入焦點移動到該視窗"
+
+#: ../metadata/compiz.xml.in.h:23 ../plugins/compiz.schemas.in.h:74
+msgid "Close Window"
+msgstr "關閉視窗"
+
+#: ../metadata/compiz.xml.in.h:24 ../plugins/compiz.schemas.in.h:75
+msgid "Close active window"
+msgstr "關閉作用中視窗"
+
+#: ../metadata/compiz.xml.in.h:25 ../plugins/compiz.schemas.in.h:81
+#, fuzzy
+msgid "Command line 0"
+msgstr "指令行 10"
+
+#: ../metadata/compiz.xml.in.h:26 ../plugins/compiz.schemas.in.h:82
+msgid "Command line 1"
+msgstr "指令行 1"
+
+#: ../metadata/compiz.xml.in.h:27 ../plugins/compiz.schemas.in.h:83
+msgid "Command line 10"
+msgstr "指令行 10"
+
+#: ../metadata/compiz.xml.in.h:28 ../plugins/compiz.schemas.in.h:84
+msgid "Command line 11"
+msgstr "指令行 11"
+
+#: ../metadata/compiz.xml.in.h:29 ../plugins/compiz.schemas.in.h:85
+msgid "Command line 2"
+msgstr "指令行 2"
+
+#: ../metadata/compiz.xml.in.h:30 ../plugins/compiz.schemas.in.h:86
+msgid "Command line 3"
+msgstr "指令行 3"
+
+#: ../metadata/compiz.xml.in.h:31 ../plugins/compiz.schemas.in.h:87
+msgid "Command line 4"
+msgstr "指令行 4"
+
+#: ../metadata/compiz.xml.in.h:32 ../plugins/compiz.schemas.in.h:88
+msgid "Command line 5"
+msgstr "指令行 5"
+
+#: ../metadata/compiz.xml.in.h:33 ../plugins/compiz.schemas.in.h:89
+msgid "Command line 6"
+msgstr "指令行 6"
+
+#: ../metadata/compiz.xml.in.h:34 ../plugins/compiz.schemas.in.h:90
+msgid "Command line 7"
+msgstr "指令行 7"
+
+#: ../metadata/compiz.xml.in.h:35 ../plugins/compiz.schemas.in.h:91
+msgid "Command line 8"
+msgstr "指令行 8"
+
+#: ../metadata/compiz.xml.in.h:36 ../plugins/compiz.schemas.in.h:92
+msgid "Command line 9"
+msgstr "指令行 9"
+
+#: ../metadata/compiz.xml.in.h:37 ../plugins/compiz.schemas.in.h:93
+#, fuzzy
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "啟用 run_command10 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:38 ../plugins/compiz.schemas.in.h:94
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "啟用 run_command1 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:39 ../plugins/compiz.schemas.in.h:95
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "啟用 run_command10 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:40 ../plugins/compiz.schemas.in.h:96
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "啟用 run_command11 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:41 ../plugins/compiz.schemas.in.h:97
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "啟用 run_command2 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:42 ../plugins/compiz.schemas.in.h:98
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "啟用 run_command3 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:43 ../plugins/compiz.schemas.in.h:99
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "啟用 run_command4 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:44 ../plugins/compiz.schemas.in.h:100
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "啟用 run_command5 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:45 ../plugins/compiz.schemas.in.h:101
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "啟用 run_command6 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:46 ../plugins/compiz.schemas.in.h:102
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "啟用 run_command7 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:47 ../plugins/compiz.schemas.in.h:103
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "啟用 run_command8 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:48 ../plugins/compiz.schemas.in.h:104
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "啟用 run_command9 時要在外圍程序中執行的指令行"
+
+#: ../metadata/compiz.xml.in.h:49 ../plugins/compiz.schemas.in.h:114
+msgid "Decrease Opacity"
+msgstr "降低不透明度"
+
+#: ../metadata/compiz.xml.in.h:50 ../plugins/compiz.schemas.in.h:115
+msgid "Decrease window opacity"
+msgstr "降低視窗不透明度"
+
+#: ../metadata/compiz.xml.in.h:51 ../plugins/compiz.schemas.in.h:117
+msgid "Default Icon"
+msgstr "預設圖示"
+
+#: ../metadata/compiz.xml.in.h:52 ../plugins/compiz.schemas.in.h:118
+msgid "Default window icon image"
+msgstr "預設的視窗圖示影像"
+
+#: ../metadata/compiz.xml.in.h:53 ../plugins/compiz.schemas.in.h:122
+msgid "Detect Outputs"
+msgstr "偵測輸出"
+
+#: ../metadata/compiz.xml.in.h:54 ../plugins/compiz.schemas.in.h:123
+msgid "Detect Refresh Rate"
+msgstr "偵測重新整理速率"
+
+#: ../metadata/compiz.xml.in.h:55 ../plugins/compiz.schemas.in.h:163
 #, fuzzy
 msgid "Focus Prevention Windows"
 msgstr "定焦視窗類型"
 
-#: src/screen.c:719
+#: ../metadata/compiz.xml.in.h:56
 #, fuzzy
 msgid "Focus prevention windows"
-msgstr "選取上一個視窗"
+msgstr "定焦視窗類型"
 
-#: src/screen.c:727
+#: ../metadata/compiz.xml.in.h:57
+msgid "General Options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:58
+msgid "General compiz options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:59 ../plugins/compiz.schemas.in.h:183
+msgid "Hide Skip Taskbar Windows"
+msgstr "隱藏跳過工作列視窗"
+
+#: ../metadata/compiz.xml.in.h:60 ../plugins/compiz.schemas.in.h:184
+msgid "Hide all windows and focus desktop"
+msgstr "隱藏全部視窗並定焦桌面"
+
+#: ../metadata/compiz.xml.in.h:61 ../plugins/compiz.schemas.in.h:186
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr "進入顯示桌面模式時隱藏未在工作列的視窗"
+
+#: ../metadata/compiz.xml.in.h:62 ../plugins/compiz.schemas.in.h:187
+msgid "Horizontal Virtual Size"
+msgstr "水平虛擬大小"
+
+#: ../metadata/compiz.xml.in.h:63 ../plugins/compiz.schemas.in.h:193
+msgid "Ignore Hints When Maximized"
+msgstr "最大化時忽略提示"
+
+#: ../metadata/compiz.xml.in.h:64 ../plugins/compiz.schemas.in.h:194
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr "視窗最大化時忽略大小增量與畫面提示"
+
+#: ../metadata/compiz.xml.in.h:65 ../plugins/compiz.schemas.in.h:197
+msgid "Increase Opacity"
+msgstr "提高不透明度"
+
+#: ../metadata/compiz.xml.in.h:66 ../plugins/compiz.schemas.in.h:198
+msgid "Increase window opacity"
+msgstr "提高視窗不透明度"
+
+#: ../metadata/compiz.xml.in.h:67
+#, fuzzy
+msgid "Interval before raising selected windows"
+msgstr "提高選定視窗的時間間隔"
+
+#: ../metadata/compiz.xml.in.h:68
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:69 ../plugins/compiz.schemas.in.h:232
+msgid "Lighting"
+msgstr "光源"
+
+#: ../metadata/compiz.xml.in.h:70 ../plugins/compiz.schemas.in.h:237
+msgid "List of currently active plugins"
+msgstr "最新主動式外掛程式清單"
+
+#: ../metadata/compiz.xml.in.h:71 ../plugins/compiz.schemas.in.h:238
+msgid "List of strings describing output devices"
+msgstr "描述輸出設備的字串清單"
+
+#: ../metadata/compiz.xml.in.h:72 ../plugins/compiz.schemas.in.h:239
+msgid "Lower Window"
+msgstr "降低視窗高度"
+
+#: ../metadata/compiz.xml.in.h:73 ../plugins/compiz.schemas.in.h:240
+msgid "Lower window beneath other windows"
+msgstr "將視窗降低到其他視窗之下"
+
+#: ../metadata/compiz.xml.in.h:74 ../plugins/compiz.schemas.in.h:248
+msgid "Maximize Window"
+msgstr "最大化視窗"
+
+#: ../metadata/compiz.xml.in.h:75 ../plugins/compiz.schemas.in.h:249
+msgid "Maximize Window Horizontally"
+msgstr "將視窗水平最大化"
+
+#: ../metadata/compiz.xml.in.h:76 ../plugins/compiz.schemas.in.h:250
+msgid "Maximize Window Vertically"
+msgstr "將視窗垂直最大化"
+
+#: ../metadata/compiz.xml.in.h:77 ../plugins/compiz.schemas.in.h:251
+msgid "Maximize active window"
+msgstr "最大化作用中視窗"
+
+#: ../metadata/compiz.xml.in.h:78 ../plugins/compiz.schemas.in.h:253
+msgid "Maximize active window horizontally"
+msgstr "將作用中視窗水平最大化"
+
+#: ../metadata/compiz.xml.in.h:79 ../plugins/compiz.schemas.in.h:255
+msgid "Maximize active window vertically"
+msgstr "將作用中視窗垂直最大化"
+
+#: ../metadata/compiz.xml.in.h:80 ../plugins/compiz.schemas.in.h:258
+msgid "Minimize Window"
+msgstr "最小化視窗"
+
+#: ../metadata/compiz.xml.in.h:81 ../plugins/compiz.schemas.in.h:260
+msgid "Minimize active window"
+msgstr "最小化作用中視窗"
+
+#: ../metadata/compiz.xml.in.h:82 ../plugins/compiz.schemas.in.h:278
+msgid "Number of Desktops"
+msgstr "桌面數"
+
+#: ../metadata/compiz.xml.in.h:83
+#, fuzzy
+msgid "Number of virtual desktops"
+msgstr "虛擬桌面數"
+
+#: ../metadata/compiz.xml.in.h:84 ../plugins/compiz.schemas.in.h:281
+msgid "Only perform screen updates during vertical blanking period"
+msgstr "只在垂直空白期間執行螢幕更新"
+
+#: ../metadata/compiz.xml.in.h:85 ../plugins/compiz.schemas.in.h:284
+msgid "Opacity Step"
+msgstr "不透明度間隔"
+
+#: ../metadata/compiz.xml.in.h:86
+#, fuzzy
+msgid "Opacity change step"
+msgstr "不透明度變更間隔"
+
+#: ../metadata/compiz.xml.in.h:87 ../plugins/compiz.schemas.in.h:288
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:88 ../plugins/compiz.schemas.in.h:289
+msgid "Opacity window values"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:89 ../plugins/compiz.schemas.in.h:290
 #, fuzzy
 msgid "Opacity windows"
 msgstr "視窗間隔"
 
-#: src/screen.c:728
+#: ../metadata/compiz.xml.in.h:90 ../plugins/compiz.schemas.in.h:291
+#, fuzzy
+msgid "Open a terminal"
+msgstr "在終端機執行"
+
+#: ../metadata/compiz.xml.in.h:91 ../plugins/compiz.schemas.in.h:293
+msgid "Open window menu"
+msgstr "開啟視窗功能表"
+
+#: ../metadata/compiz.xml.in.h:92 ../plugins/compiz.schemas.in.h:298
+msgid "Outputs"
+msgstr "輸出"
+
+#: ../metadata/compiz.xml.in.h:93 ../plugins/compiz.schemas.in.h:301
+#, fuzzy
+msgid "Ping Delay"
+msgstr "下雨延遲"
+
+#: ../metadata/compiz.xml.in.h:94 ../plugins/compiz.schemas.in.h:379
+msgid "Raise On Click"
+msgstr "按一下時提高"
+
+#: ../metadata/compiz.xml.in.h:95 ../plugins/compiz.schemas.in.h:380
+msgid "Raise Window"
+msgstr "提高視窗"
+
+#: ../metadata/compiz.xml.in.h:96 ../plugins/compiz.schemas.in.h:381
+msgid "Raise selected windows after interval"
+msgstr "在時間間隔後提高選定視窗"
+
+#: ../metadata/compiz.xml.in.h:97 ../plugins/compiz.schemas.in.h:382
+msgid "Raise window above other windows"
+msgstr "將視窗提高到比其他視窗高"
+
+#: ../metadata/compiz.xml.in.h:98 ../plugins/compiz.schemas.in.h:384
+msgid "Raise windows when clicked"
+msgstr "在按一下時提高視窗高度"
+
+#: ../metadata/compiz.xml.in.h:99 ../plugins/compiz.schemas.in.h:385
+msgid "Refresh Rate"
+msgstr "重新整理速率"
+
+#: ../metadata/compiz.xml.in.h:100 ../plugins/compiz.schemas.in.h:491
+msgid "Run Dialog"
+msgstr "執行對話方塊"
+
+#: ../metadata/compiz.xml.in.h:101 ../plugins/compiz.schemas.in.h:492
+#, fuzzy
+msgid "Run command 0"
+msgstr "執行指令 10"
+
+#: ../metadata/compiz.xml.in.h:102 ../plugins/compiz.schemas.in.h:493
+msgid "Run command 1"
+msgstr "執行指令 1"
+
+#: ../metadata/compiz.xml.in.h:103 ../plugins/compiz.schemas.in.h:494
+msgid "Run command 10"
+msgstr "執行指令 10"
+
+#: ../metadata/compiz.xml.in.h:104 ../plugins/compiz.schemas.in.h:495
+msgid "Run command 11"
+msgstr "執行指令 11"
+
+#: ../metadata/compiz.xml.in.h:105 ../plugins/compiz.schemas.in.h:496
+msgid "Run command 2"
+msgstr "執行指令 2"
+
+#: ../metadata/compiz.xml.in.h:106 ../plugins/compiz.schemas.in.h:497
+msgid "Run command 3"
+msgstr "執行指令 3"
+
+#: ../metadata/compiz.xml.in.h:107 ../plugins/compiz.schemas.in.h:498
+msgid "Run command 4"
+msgstr "執行指令 4"
+
+#: ../metadata/compiz.xml.in.h:108 ../plugins/compiz.schemas.in.h:499
+msgid "Run command 5"
+msgstr "執行指令 5"
+
+#: ../metadata/compiz.xml.in.h:109 ../plugins/compiz.schemas.in.h:500
+msgid "Run command 6"
+msgstr "執行指令 6"
+
+#: ../metadata/compiz.xml.in.h:110 ../plugins/compiz.schemas.in.h:501
+msgid "Run command 7"
+msgstr "執行指令 7"
+
+#: ../metadata/compiz.xml.in.h:111 ../plugins/compiz.schemas.in.h:502
+msgid "Run command 8"
+msgstr "執行指令 8"
+
+#: ../metadata/compiz.xml.in.h:112 ../plugins/compiz.schemas.in.h:503
+msgid "Run command 9"
+msgstr "執行指令 9"
+
+#: ../metadata/compiz.xml.in.h:113
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "水平虛擬大小的螢幕大小倍數"
+
+#: ../metadata/compiz.xml.in.h:114
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "垂直虛擬大小的螢幕大小倍數"
+
+#: ../metadata/compiz.xml.in.h:115 ../plugins/compiz.schemas.in.h:515
+msgid "Screenshot command line"
+msgstr "螢幕擷取指令行"
+
+#: ../metadata/compiz.xml.in.h:116 ../plugins/compiz.schemas.in.h:532
+msgid "Show Main Menu"
+msgstr "顯示主功能表"
+
+#: ../metadata/compiz.xml.in.h:117 ../plugins/compiz.schemas.in.h:533
+msgid "Show Run Application dialog"
+msgstr "顯示執行應用程式對話方塊"
+
+#: ../metadata/compiz.xml.in.h:118 ../plugins/compiz.schemas.in.h:537
+msgid "Show the main menu"
+msgstr "顯示主功能表"
+
+#: ../metadata/compiz.xml.in.h:119 ../plugins/compiz.schemas.in.h:543
+msgid "Slow Animations"
+msgstr "減慢動畫速度"
+
+#: ../metadata/compiz.xml.in.h:120 ../plugins/compiz.schemas.in.h:570
+msgid "Sync To VBlank"
+msgstr "同步化到 VBlank"
+
+#: ../metadata/compiz.xml.in.h:121 ../plugins/compiz.schemas.in.h:571
+msgid "Take a screenshot"
+msgstr "擷取螢幕畫面"
+
+#: ../metadata/compiz.xml.in.h:122 ../plugins/compiz.schemas.in.h:573
+msgid "Take a screenshot of a window"
+msgstr "擷取視窗螢幕畫面"
+
+#: ../metadata/compiz.xml.in.h:123 ../plugins/compiz.schemas.in.h:575
+#, fuzzy
+msgid "Terminal command line"
+msgstr "螢幕擷取指令行"
+
+#: ../metadata/compiz.xml.in.h:124 ../plugins/compiz.schemas.in.h:576
+msgid "Texture Filter"
+msgstr "材質過濾器"
+
+#: ../metadata/compiz.xml.in.h:125
+msgid "Texture filtering"
+msgstr "材質篩選"
+
+#: ../metadata/compiz.xml.in.h:126
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "螢幕重新描繪的速率 (次數/秒)"
+
+#: ../metadata/compiz.xml.in.h:127 ../plugins/compiz.schemas.in.h:583
+msgid "Toggle Window Maximized"
+msgstr "將視窗切換到最大"
+
+#: ../metadata/compiz.xml.in.h:128 ../plugins/compiz.schemas.in.h:584
+msgid "Toggle Window Maximized Horizontally"
+msgstr "將視窗水平切換到最大"
+
+#: ../metadata/compiz.xml.in.h:129 ../plugins/compiz.schemas.in.h:585
+msgid "Toggle Window Maximized Vertically"
+msgstr "將視窗垂直切換到最大"
+
+#: ../metadata/compiz.xml.in.h:130 ../plugins/compiz.schemas.in.h:586
+msgid "Toggle Window Shaded"
+msgstr "將視窗切換到遮蔽"
+
+#: ../metadata/compiz.xml.in.h:131 ../plugins/compiz.schemas.in.h:587
+msgid "Toggle active window maximized"
+msgstr "將使用中視窗切換到最大"
+
+#: ../metadata/compiz.xml.in.h:132 ../plugins/compiz.schemas.in.h:589
+msgid "Toggle active window maximized horizontally"
+msgstr "將使用中視窗水平切換到最大"
+
+#: ../metadata/compiz.xml.in.h:133 ../plugins/compiz.schemas.in.h:591
+msgid "Toggle active window maximized vertically"
+msgstr "將使用中視窗垂直切換到最大"
+
+#: ../metadata/compiz.xml.in.h:134 ../plugins/compiz.schemas.in.h:593
+msgid "Toggle active window shaded"
+msgstr "將使用中視窗切換到遮蔽"
+
+#: ../metadata/compiz.xml.in.h:135 ../plugins/compiz.schemas.in.h:598
+msgid "Toggle use of slow animations"
+msgstr "切換使用減慢動畫速度"
+
+#: ../metadata/compiz.xml.in.h:136 ../plugins/compiz.schemas.in.h:610
+msgid "Unmaximize Window"
+msgstr "視窗解除最大化"
+
+#: ../metadata/compiz.xml.in.h:137 ../plugins/compiz.schemas.in.h:611
+msgid "Unmaximize active window"
+msgstr "作用中視窗解除最大化"
+
+#: ../metadata/compiz.xml.in.h:138 ../plugins/compiz.schemas.in.h:613
+msgid "Unredirect Fullscreen Windows"
+msgstr "全螢幕視窗解除重新導向"
+
+#: ../metadata/compiz.xml.in.h:139 ../plugins/compiz.schemas.in.h:614
+msgid "Use diffuse light when screen is transformed"
+msgstr "在螢幕轉換時使用擴散光"
+
+#: ../metadata/compiz.xml.in.h:140 ../plugins/compiz.schemas.in.h:619
+msgid "Vertical Virtual Size"
+msgstr "垂直虛擬大小"
+
+#: ../metadata/compiz.xml.in.h:141 ../plugins/compiz.schemas.in.h:631
+msgid "Window Menu"
+msgstr "視窗功能表"
+
+#: ../metadata/compiz.xml.in.h:142 ../plugins/compiz.schemas.in.h:636
+msgid "Window screenshot command line"
+msgstr "視窗螢幕擷取指令行"
+
+#: ../metadata/compiz.xml.in.h:143 ../plugins/compiz.schemas.in.h:645
 #, fuzzy
 msgid "Windows that should be translucent by default"
 msgstr "應該淡出/淡入的視窗類型"
 
-#: src/screen.c:739
-msgid "Opacity window values"
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1 ../src/main.c:54
+msgid "Desktop"
+msgstr "桌面"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+#, fuzzy
+msgid "Window Management"
+msgstr "視窗功能表"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+#, fuzzy
+msgid "Blur type"
+msgstr "摺疊速度"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+#, fuzzy
+msgid "Metacity theme active window opacity"
+msgstr "降低視窗不透明度"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+#, fuzzy
+msgid "Metacity theme active window opacity shade"
+msgstr "將作用中視窗水平最大化"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+msgid "Metacity theme opacity"
 msgstr ""
 
-#: src/screen.c:740
-msgid "Opacity values for windows that should be translucent by default"
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity shade"
 msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid "Type of blur used for window decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Use metacity theme"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Use metacity theme when drawing window decorations"
+msgstr ""
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr ""
+
+#: ../plugins/annotate.c:745 ../plugins/clone.c:726
+#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
+#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "起始化"
+
+#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
+#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
+#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "起始化"
+
+#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "起始化視窗調整大小"
+
+#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
+#: ../plugins/compiz.schemas.in.h:69
+#, fuzzy
+msgid "Clear"
+msgstr "清除(_C)"
+
+#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr ""
+
+#: ../plugins/annotate.c:826
+msgid "Line width for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr ""
+
+#: ../plugins/annotate.c:836
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#, fuzzy
+msgid "Annotate"
+msgstr "起始化"
+
+#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#, fuzzy
+msgid "Annotate plugin"
+msgstr "主動式外掛程式"
+
+#: ../plugins/blur.c:73
+#, fuzzy
+msgid "4xBilinear"
+msgstr "線性過濾器"
+
+#: ../plugins/blur.c:74 ../plugins/blur.c:237
+#, fuzzy
+msgid "Gaussian"
+msgstr "俄語"
+
+#: ../plugins/blur.c:75 ../plugins/blur.c:239
+#: ../plugins/compiz.schemas.in.h:268 ../plugins/cube.c:1105
+#: ../plugins/decoration.c:1190 ../plugins/switcher.c:367
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../plugins/blur.c:728 ../plugins/compiz.schemas.in.h:60
+#, fuzzy
+msgid "Blur Speed"
+msgstr "摺疊速度"
+
+#: ../plugins/blur.c:729
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Window 淡出/淡入速度"
+
+#: ../plugins/blur.c:738 ../plugins/compiz.schemas.in.h:166
+#, fuzzy
+msgid "Focus blur windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/blur.c:739
+#, fuzzy
+msgid "Windows that should be affected by focus blur"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/blur.c:747 ../plugins/compiz.schemas.in.h:161
+msgid "Focus Blur"
+msgstr ""
+
+#: ../plugins/blur.c:748 ../plugins/compiz.schemas.in.h:65
+#, fuzzy
+msgid "Blur windows that doesn't have focus"
+msgstr "應該要在定焦時搖擺的視窗類型"
+
+#: ../plugins/blur.c:754 ../plugins/compiz.schemas.in.h:38
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/blur.c:755
+#, fuzzy
+msgid "Windows that should use alpha blur by default"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/blur.c:763 ../plugins/compiz.schemas.in.h:37
+msgid "Alpha Blur"
+msgstr ""
+
+#: ../plugins/blur.c:764 ../plugins/compiz.schemas.in.h:62
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#: ../plugins/blur.c:772 ../plugins/compiz.schemas.in.h:57
+#, fuzzy
+msgid "Blur Filter"
+msgstr "材質過濾器"
+
+#: ../plugins/blur.c:773
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: ../plugins/blur.c:783 ../plugins/compiz.schemas.in.h:174
+msgid "Gaussian Radius"
+msgstr ""
+
+#: ../plugins/blur.c:784
+#, fuzzy
+msgid "Gaussian radius"
+msgstr "俄羅斯聯邦"
+
+#: ../plugins/blur.c:792 ../plugins/compiz.schemas.in.h:175
+#, fuzzy
+msgid "Gaussian Strength"
+msgstr "俄語"
+
+#: ../plugins/blur.c:793
+#, fuzzy
+msgid "Gaussian strength"
+msgstr "俄語"
+
+#: ../plugins/blur.c:802 ../plugins/compiz.schemas.in.h:269
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Mipmap"
+
+#: ../plugins/blur.c:803
+msgid "Mipmap level-of-detail"
+msgstr ""
+
+#: ../plugins/blur.c:812 ../plugins/compiz.schemas.in.h:59
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "飽和度"
+
+#: ../plugins/blur.c:813
+#, fuzzy
+msgid "Blur saturation"
+msgstr "飽和度"
+
+#: ../plugins/blur.c:821 ../plugins/compiz.schemas.in.h:58
+msgid "Blur Occlusion"
+msgstr ""
+
+#: ../plugins/blur.c:822 ../plugins/compiz.schemas.in.h:673
+msgid "blur occlusion"
+msgstr ""
+
+#: ../plugins/blur.c:2562 ../plugins/compiz.schemas.in.h:374
+msgid "Pulse"
+msgstr ""
+
+#: ../plugins/blur.c:2563 ../plugins/compiz.schemas.in.h:375
+#, fuzzy
+msgid "Pulse effect"
+msgstr "定焦特效"
+
+#: ../plugins/blur.c:2885 ../plugins/compiz.schemas.in.h:61
+#, fuzzy
+msgid "Blur Windows"
+msgstr "放置視窗"
+
+#: ../plugins/blur.c:2886 ../plugins/compiz.schemas.in.h:64
+#, fuzzy
+msgid "Blur windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
+#, fuzzy
+msgid "Initiate clone selection"
+msgstr "視訊模式選項"
+
+#: ../plugins/clone.c:860 ../plugins/compiz.schemas.in.h:73
+#, fuzzy
+msgid "Clone Output"
+msgstr "輸出"
+
+#: ../plugins/clone.c:861 ../plugins/compiz.schemas.in.h:297
+msgid "Output clone handler"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:2
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command10 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:4
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command1 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:6
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command10 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:8
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command11 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:10
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command2 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:12
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command3 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:14
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command4 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:16
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command5 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:18
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command6 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:20
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command7 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:22
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command8 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:24
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "啟用時將執行經 command9 識別之外圍程序指令的按鍵組合"
+
+#: ../plugins/compiz.schemas.in.h:25 ../plugins/cube.c:1075
+#: ../plugins/rotate.c:304
+msgid "Acceleration"
+msgstr "加速"
+
+#: ../plugins/compiz.schemas.in.h:27 ../plugins/water.c:1698
+msgid "Add line"
+msgstr "新增線"
+
+#: ../plugins/compiz.schemas.in.h:28
+#, fuzzy
+msgid ""
+"Add line (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:29 ../plugins/water.c:1686
+msgid "Add point"
+msgstr "新增點"
+
+#: ../plugins/compiz.schemas.in.h:30
+#, fuzzy
+msgid ""
+"Add point (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:31 ../plugins/water.c:1876
+msgid "Adds water effects to different desktop actions"
+msgstr "新增水波特效到不同的桌面動作"
+
+#: ../plugins/compiz.schemas.in.h:32 ../plugins/cube.c:1818
+msgid "Advance to next slide"
+msgstr "換至下一張投影片"
+
+#: ../plugins/compiz.schemas.in.h:33
+#, fuzzy
+msgid ""
+"Advance to next slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:34
+msgid ""
+"Algorithm to use for window placement (Cascade, Centered, Smart, Maximize, "
+"Random)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:36
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:39
+#, fuzzy
+msgid "Amount of brightness in percent (0-100)"
+msgstr "亮度比例"
+
+#: ../plugins/compiz.schemas.in.h:40
+#, fuzzy
+msgid "Amount of opacity in percent (0-100)"
+msgstr "不透明度比例"
+
+#: ../plugins/compiz.schemas.in.h:41
+#, fuzzy
+msgid "Amount of saturation in percent (0-100)"
+msgstr "飽和度比例"
+
+#: ../plugins/compiz.schemas.in.h:42 ../plugins/cube.c:1046
+msgid "Animate Skydome"
+msgstr "顯示天空頂動畫"
+
+#: ../plugins/compiz.schemas.in.h:43 ../plugins/cube.c:1047
+msgid "Animate skydome when rotating cube"
+msgstr "旋轉立方體時顯示天空頂動畫"
+
+#: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
+#: ../plugins/switcher.c:2298
+msgid "Application Switcher"
+msgstr "應用程式切換器"
+
+#: ../plugins/compiz.schemas.in.h:51 ../plugins/switcher.c:434
+#, fuzzy
+msgid "Auto Rotate"
+msgstr "自動發出"
+
+#: ../plugins/compiz.schemas.in.h:56 ../plugins/screenshot.c:408
+#, fuzzy
+msgid "Automatically open screenshot in this application"
+msgstr "登入時自動啟動 applet"
+
+#: ../plugins/compiz.schemas.in.h:63
+#, fuzzy
+msgid "Blur saturation (0-100)"
+msgstr "飽和度"
+
+#: ../plugins/compiz.schemas.in.h:66 ../plugins/switcher.c:384
+msgid "Brightness"
+msgstr "亮度"
+
+#: ../plugins/compiz.schemas.in.h:67 ../plugins/switcher.c:402
+msgid "Bring To Front"
+msgstr "提到最上層"
+
+#: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
+msgid "Bring selected window to front"
+msgstr "將選取視窗提到最上層"
+
+#: ../plugins/compiz.schemas.in.h:70
+#, fuzzy
+msgid ""
+"Clear (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:76
+#, fuzzy
+msgid ""
+"Close active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:77 ../plugins/cube.c:993
+msgid "Color of top and bottom sides of the cube"
+msgstr "立方體的頂面和底面顏色"
+
+#: ../plugins/compiz.schemas.in.h:78 ../plugins/cube.c:1065
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "要使用的天空頂後援漸層之底部色彩停止點"
+
+#: ../plugins/compiz.schemas.in.h:79 ../plugins/cube.c:1054
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "要使用的天空頂後援漸層之頂部色彩停止點"
+
+#: ../plugins/compiz.schemas.in.h:80 ../plugins/decoration.c:1180
+msgid "Command"
+msgstr "指令"
+
+#: ../plugins/compiz.schemas.in.h:105 ../plugins/move.c:759
+msgid "Constrain Y"
+msgstr "等比縮放 Y 軸"
+
+#: ../plugins/compiz.schemas.in.h:106 ../plugins/move.c:760
+msgid "Constrain Y coordinate to workspace area"
+msgstr "等比縮放 Y 軸對應到工作環境區域"
+
+#: ../plugins/compiz.schemas.in.h:107 ../plugins/cube.c:992
+msgid "Cube Color"
+msgstr "立方體色彩"
+
+#: ../plugins/compiz.schemas.in.h:108 ../plugins/scale.c:360
+msgid "Darken Background"
+msgstr "暗化背景"
+
+#: ../plugins/compiz.schemas.in.h:109 ../plugins/scale.c:361
+msgid "Darken background when scaling windows"
+msgstr "調整視窗比例時暗化背景"
+
+#: ../plugins/compiz.schemas.in.h:110
+msgid "Dbus"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:111
+msgid "Dbus Control Backend"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:112 ../plugins/decoration.c:1197
+#, fuzzy
+msgid "Decoration windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/compiz.schemas.in.h:113 ../plugins/decoration.c:1181
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr "如果沒有裝飾程式正在執行，則需執行的裝飾程式指令行。"
+
+#: ../plugins/compiz.schemas.in.h:116
+#, fuzzy
+msgid ""
+"Decrease window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:119
+#, fuzzy
+msgid "Delay (in ms) between each rain-drop (0-3600000)"
+msgstr "每滴雨之間的延遲 (毫秒)"
+
+#: ../plugins/compiz.schemas.in.h:120 ../plugins/cube.c:2044
+msgid "Desktop Cube"
+msgstr "桌面立方體"
+
+#: ../plugins/compiz.schemas.in.h:121 ../plugins/plane.c:889
+#, fuzzy
+msgid "Desktop Plane"
+msgstr "桌面立方體"
+
+#: ../plugins/compiz.schemas.in.h:124 ../plugins/screenshot.c:398
+#, fuzzy
+msgid "Directory"
+msgstr "目錄\n"
+
+#: ../plugins/compiz.schemas.in.h:125
+#, fuzzy
+msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
+msgstr "切換視窗時桌面應縮小的距離"
+
+#: ../plugins/compiz.schemas.in.h:126 ../plugins/gconf-dump.c:617
+#: ../plugins/gconf-dump.c:627
+msgid "Do not modify"
+msgstr "不要修改"
+
+#: ../plugins/compiz.schemas.in.h:129
+#, fuzzy
+msgid ""
+"Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:130
+#, fuzzy
+msgid "Drop shadow X offset (-16-16)"
+msgstr "投影 X 軸偏移"
+
+#: ../plugins/compiz.schemas.in.h:131
+#, fuzzy
+msgid "Drop shadow Y offset (-16-16)"
+msgstr "投影 Y 軸偏移"
+
+#: ../plugins/compiz.schemas.in.h:132
+#, fuzzy
+msgid "Drop shadow color"
+msgstr "投影半徑"
+
+#: ../plugins/compiz.schemas.in.h:133
+#, fuzzy
+msgid "Drop shadow opacity (0.01-6.00)"
+msgstr "投影半徑不透明度"
+
+#: ../plugins/compiz.schemas.in.h:134
+#, fuzzy
+msgid "Drop shadow radius (0.0-48.0)"
+msgstr "投影半徑"
+
+#: ../plugins/compiz.schemas.in.h:135 ../plugins/rotate.c:1989
+msgid "Edge Flip DnD"
+msgstr "邊緣翻轉 DnD"
+
+#: ../plugins/compiz.schemas.in.h:136 ../plugins/rotate.c:1981
+msgid "Edge Flip Move"
+msgstr "邊緣翻轉移動"
+
+#: ../plugins/compiz.schemas.in.h:137 ../plugins/rotate.c:1973
+msgid "Edge Flip Pointer"
+msgstr "邊緣翻轉指標"
+
+#: ../plugins/compiz.schemas.in.h:138 ../plugins/water.c:1609
+msgid "Enable pointer water effects"
+msgstr "啟用指標水波特效"
+
+#: ../plugins/compiz.schemas.in.h:139
+#, fuzzy
+msgid ""
+"Enable pointer water effects (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:140 ../plugins/fade.c:215
+msgid "Fade On Minimize/Open/Close"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:141 ../plugins/fade.c:182
+msgid "Fade Speed"
+msgstr "淡出/淡入速度"
+
+#: ../plugins/compiz.schemas.in.h:142 ../plugins/fade.c:216
+msgid "Fade effect on minimize/open/close window events"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:143 ../plugins/fade.c:202
+msgid "Fade effect on system beep"
+msgstr "系統發出嗶聲時啟用淡出/淡入特效"
+
+#: ../plugins/compiz.schemas.in.h:144 ../plugins/fade.c:882
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr "在映射時淡入視窗，以及在解除映射時淡出視窗"
+
+#: ../plugins/compiz.schemas.in.h:145 ../plugins/fade.c:192
+#, fuzzy
+msgid "Fade windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/compiz.schemas.in.h:146 ../plugins/fade.c:881
+msgid "Fading Windows"
+msgstr "視窗淡出中"
+
+#: ../plugins/compiz.schemas.in.h:147
+msgid "File change notification plugin"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:148
+#, fuzzy
+msgid "Fill Color"
+msgstr "立方體色彩"
+
+#: ../plugins/compiz.schemas.in.h:150
+msgid "Fill color for filled outline mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:151 ../plugins/zoom.c:270
+msgid "Filter Linear"
+msgstr "線性過濾器"
+
+#: ../plugins/compiz.schemas.in.h:152
+msgid "Filter method used for blurring (4xBilinear, Gaussian, Mipmap)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:153 ../plugins/rotate.c:1997
+msgid "Flip Time"
+msgstr "翻轉時間"
+
+#: ../plugins/compiz.schemas.in.h:154 ../plugins/rotate.c:1942
+msgid "Flip to left viewport and warp pointer"
+msgstr "往左檢視區翻轉並使指標變形"
+
+#: ../plugins/compiz.schemas.in.h:155
+#, fuzzy
+msgid ""
+"Flip to left viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:156 ../plugins/rotate.c:1990
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr "將物件拖曳到螢幕邊緣時翻轉到下一個檢視區"
+
+#: ../plugins/compiz.schemas.in.h:157 ../plugins/rotate.c:1974
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr "將指標移動到螢幕邊緣時翻轉到下一個檢視區"
+
+#: ../plugins/compiz.schemas.in.h:158 ../plugins/rotate.c:1982
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr "將視窗移動到螢幕邊緣時翻轉到下一個檢視區"
+
+#: ../plugins/compiz.schemas.in.h:159 ../plugins/rotate.c:1958
+msgid "Flip to right viewport and warp pointer"
+msgstr "往右檢視區翻轉並使指標變形"
+
+#: ../plugins/compiz.schemas.in.h:160
+#, fuzzy
+msgid ""
+"Flip to right viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:162 ../plugins/wobbly.c:373
+msgid "Focus Effect"
+msgstr "定焦特效"
+
+#: ../plugins/compiz.schemas.in.h:164
+msgid "Focus Window Effect (None, Shiver)"
+msgstr "定焦視窗特效 (無、瞬間)"
+
+#: ../plugins/compiz.schemas.in.h:165 ../plugins/wobbly.c:391
+#, fuzzy
+msgid "Focus Windows"
+msgstr "定焦視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:167
+#, fuzzy
+msgid "Focus prevention windows (match)"
+msgstr "選取上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:168
+msgid "Fold Acceleration (1.0-20.0)"
+msgstr "摺疊加速 (1.0-20.0)"
+
+#: ../plugins/compiz.schemas.in.h:169
+#, fuzzy
+msgid "Fold Speed (0.0-50.0)"
+msgstr "摺疊速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:170
+#, fuzzy
+msgid "Fold Timestep (0.0-50.0)"
+msgstr "摺疊時間間隔 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:171 ../plugins/wobbly.c:326
+msgid "Friction"
+msgstr "摩擦力"
+
+#: ../plugins/compiz.schemas.in.h:172 ../plugins/fade.c:208
+msgid "Fullscreen Visual Bell"
+msgstr "全螢幕警示鈴聲"
+
+#: ../plugins/compiz.schemas.in.h:173 ../plugins/fade.c:209
+msgid "Fullscreen fade effect on system beep"
+msgstr "系統發出嗶聲時啟用全螢幕淡出/淡入特效"
+
+#: ../plugins/compiz.schemas.in.h:176
+#, fuzzy
+msgid "Gaussian radius (1-15)"
+msgstr "俄羅斯聯邦"
+
+#: ../plugins/compiz.schemas.in.h:177
+#, fuzzy
+msgid "Gaussian strength (0.00-1.00)"
+msgstr "俄語"
+
+#: ../plugins/compiz.schemas.in.h:178 ../plugins/cube.c:1106
+#: ../plugins/switcher.c:368
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "在可能使用更高品質比例時產生 Mipmap"
+
+#: ../plugins/compiz.schemas.in.h:179 ../plugins/cube.c:1836
+msgid "Go back to previous slide"
+msgstr "返回上一張投影片"
+
+#: ../plugins/compiz.schemas.in.h:180
+#, fuzzy
+msgid ""
+"Go back to previous slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:181 ../plugins/wobbly.c:409
+#, fuzzy
+msgid "Grab Windows"
+msgstr "抓取視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:182 ../plugins/wobbly.c:346
+msgid "Grid Resolution"
+msgstr "格線解析度"
+
+#: ../plugins/compiz.schemas.in.h:185
+#, fuzzy
+msgid ""
+"Hide all windows and focus desktop (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:188 ../plugins/place.c:300
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "水平虛擬大小"
+
+#: ../plugins/compiz.schemas.in.h:189 ../plugins/scale.c:385
+msgid "Hover Time"
+msgstr "停留時間"
+
+#: ../plugins/compiz.schemas.in.h:190 ../plugins/switcher.c:420
+msgid "Icon"
+msgstr "圖示"
+
+#: ../plugins/compiz.schemas.in.h:191
+msgid ""
+"If this is set to true the window will repaint itself during resize, which "
+"may cause some lag."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:192
+msgid ""
+"If this is set, the pointer will be warped to the closest corner when you "
+"press start a resize."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:195 ../plugins/cube.c:1016
+msgid "Image files"
+msgstr "影像檔"
+
+#: ../plugins/compiz.schemas.in.h:196 ../plugins/cube.c:1038
+msgid "Image to use as texture for the skydome"
+msgstr "用來作為天空頂材質的影像"
+
+#: ../plugins/compiz.schemas.in.h:199
+#, fuzzy
+msgid ""
+"Increase window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:201 ../plugins/move.c:731
+msgid "Initiate Window Move"
+msgstr "起始化視窗移動"
+
+#: ../plugins/compiz.schemas.in.h:202 ../plugins/scale.c:1930
+msgid "Initiate Window Picker"
+msgstr "起始化視窗選擇器"
+
+#: ../plugins/compiz.schemas.in.h:203 ../plugins/scale.c:1949
+msgid "Initiate Window Picker For All Windows"
+msgstr "啟始化所有視窗的視窗選擇器"
+
+#: ../plugins/compiz.schemas.in.h:204 ../plugins/scale.c:1964
+msgid "Initiate Window Picker For Window Group"
+msgstr "啟始化視窗群組的視窗選擇器"
+
+#: ../plugins/compiz.schemas.in.h:205 ../plugins/scale.c:1980
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "在目前輸出啟始化群組的視窗選擇器"
+
+#: ../plugins/compiz.schemas.in.h:206 ../plugins/resize.c:720
+msgid "Initiate Window Resize"
+msgstr "起始化視窗調整大小"
+
+#: ../plugins/compiz.schemas.in.h:208
+#, fuzzy
+msgid ""
+"Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:210
+#, fuzzy
+msgid ""
+"Initiate annotate erasing (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:212
+#, fuzzy
+msgid ""
+"Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
+#, fuzzy
+msgid "Initiate rectangle screenshot"
+msgstr "擷取螢幕畫面"
+
+#: ../plugins/compiz.schemas.in.h:215
+#, fuzzy
+msgid ""
+"Initiate rectangle screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:216
+#, fuzzy
+msgid "Inotify"
+msgstr "不要修改"
+
+#: ../plugins/compiz.schemas.in.h:217 ../plugins/cube.c:1002
+msgid "Inside Cube"
+msgstr "立方體內部"
+
+#: ../plugins/compiz.schemas.in.h:218 ../plugins/cube.c:1003
+msgid "Inside cube"
+msgstr "立方體內部"
+
+#: ../plugins/compiz.schemas.in.h:219
+#, fuzzy
+msgid "Interval before raising selected windows (0-10000)"
+msgstr "提高選定視窗的時間間隔"
+
+#: ../plugins/compiz.schemas.in.h:220
+msgid "Interval between ping messages (1000-30000)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:221 ../plugins/rotate.c:288
+#: ../plugins/zoom.c:224
+msgid "Invert Y axis for pointer movement"
+msgstr "指標移動時反轉 Y 軸"
+
+#: ../plugins/compiz.schemas.in.h:222 ../plugins/wobbly.c:2861
+msgid "Inverted window snapping"
+msgstr "反轉視窗嵌入"
+
+#: ../plugins/compiz.schemas.in.h:223 ../plugins/screenshot.c:407
+#, fuzzy
+msgid "Launch Application"
+msgstr "啟動應用程式"
+
+#: ../plugins/compiz.schemas.in.h:224 ../plugins/scale.c:1950
+msgid "Layout and start transforming all windows"
+msgstr "配置並開始轉換所有視窗"
+
+#: ../plugins/compiz.schemas.in.h:225
+#, fuzzy
+msgid ""
+"Layout and start transforming all windows (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:226 ../plugins/scale.c:1965
+msgid "Layout and start transforming window group"
+msgstr "配置並開始轉換視窗群組"
+
+#: ../plugins/compiz.schemas.in.h:227
+#, fuzzy
+msgid ""
+"Layout and start transforming window group (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:228 ../plugins/scale.c:1931
+msgid "Layout and start transforming windows"
+msgstr "配置和開始轉換視窗"
+
+#: ../plugins/compiz.schemas.in.h:229
+#, fuzzy
+msgid ""
+"Layout and start transforming windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:230 ../plugins/scale.c:1982
+msgid "Layout and start transforming windows on current output"
+msgstr "在目前輸出配置並開始轉換視窗"
+
+#: ../plugins/compiz.schemas.in.h:231
+#, fuzzy
+msgid ""
+"Layout and start transforming windows on current output (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "在目前輸出配置並開始轉換視窗"
+
+#: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
+msgid "Line"
+msgstr "線"
+
+#: ../plugins/compiz.schemas.in.h:235
+msgid "Line width for annotations (0.0-100.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:236 ../plugins/cube.c:1017
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "應該要描繪至立方體頂面的 PNG 和 SVG 檔案清單"
+
+#: ../plugins/compiz.schemas.in.h:241
+#, fuzzy
+msgid ""
+"Lower window beneath other windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:242 ../plugins/wobbly.c:2868
+msgid "Make window shiver"
+msgstr "讓視窗晃動"
+
+#: ../plugins/compiz.schemas.in.h:243
+#, fuzzy
+msgid ""
+"Make window shiver (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:244 ../plugins/wobbly.c:364
+msgid "Map Effect"
+msgstr "映射特效"
+
+#: ../plugins/compiz.schemas.in.h:245
+msgid "Map Window Effect (None, Shiver)"
+msgstr "映射視窗特效 (無、瞬間)"
+
+#: ../plugins/compiz.schemas.in.h:246 ../plugins/wobbly.c:382
+#, fuzzy
+msgid "Map Windows"
+msgstr "映射視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:247 ../plugins/wobbly.c:418
+msgid "Maximize Effect"
+msgstr "最大化特效"
+
+#: ../plugins/compiz.schemas.in.h:252
+#, fuzzy
+msgid ""
+"Maximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:254
+#, fuzzy
+msgid ""
+"Maximize active window horizontally (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:256
+#, fuzzy
+msgid ""
+"Maximize active window vertically (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:257 ../plugins/minimize.c:1072
+msgid "Minimize Effect"
+msgstr "最小化特效"
+
+#: ../plugins/compiz.schemas.in.h:259 ../plugins/minimize.c:213
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "最小化視窗"
+
+#: ../plugins/compiz.schemas.in.h:261
+#, fuzzy
+msgid ""
+"Minimize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:262
+#, fuzzy
+msgid "Minimize speed (0.0-50.0)"
+msgstr "最小化速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:263
+#, fuzzy
+msgid "Minimize timestep (0.0-50.0)"
+msgstr "最小化速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:264 ../plugins/switcher.c:427
+msgid "Minimized"
+msgstr "最小化"
+
+#: ../plugins/compiz.schemas.in.h:265 ../plugins/wobbly.c:355
+msgid "Minimum Grid Size"
+msgstr "最小格線大小"
+
+#: ../plugins/compiz.schemas.in.h:266
+#, fuzzy
+msgid "Minimum Vertex Grid Size (4-128)"
+msgstr "最小頂點格線大小"
+
+#: ../plugins/compiz.schemas.in.h:267
+msgid "Minimum opacity for opacify"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:270
+msgid "Mipmap level-of-detail (0.0-5.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:271 ../plugins/fuse.c:1488
+#, fuzzy
+msgid "Mount Point"
+msgstr "點"
+
+#: ../plugins/compiz.schemas.in.h:272 ../plugins/fuse.c:1489
+#, fuzzy
+msgid "Mount point"
+msgstr "新增點"
+
+#: ../plugins/compiz.schemas.in.h:273 ../plugins/move.c:939
+msgid "Move Window"
+msgstr "移動視窗"
+
+#: ../plugins/compiz.schemas.in.h:274 ../plugins/wobbly.c:400
+#, fuzzy
+msgid "Move Windows"
+msgstr "移動視窗"
+
+#: ../plugins/compiz.schemas.in.h:275 ../plugins/move.c:940
+msgid "Move window"
+msgstr "移動視窗"
+
+#: ../plugins/compiz.schemas.in.h:276 ../plugins/cube.c:1817
+msgid "Next Slide"
+msgstr "下一張投影片"
+
+#: ../plugins/compiz.schemas.in.h:277 ../plugins/switcher.c:2023
+#: ../plugins/switcher.c:2059 ../plugins/switcher.c:2097
+msgid "Next window"
+msgstr "下一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:279
+#, fuzzy
+msgid "Number of virtual desktops (1-36)"
+msgstr "虛擬桌面數"
+
+#: ../plugins/compiz.schemas.in.h:280 ../plugins/water.c:1654
+msgid "Offset Scale"
+msgstr "偏移比例"
+
+#: ../plugins/compiz.schemas.in.h:282
+msgid "Opacify only windows whose opacity is higher than this value (1-100)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:283 ../plugins/move.c:750
+#: ../plugins/scale.c:367 ../plugins/switcher.c:393
+msgid "Opacity"
+msgstr "不透明度"
+
+#: ../plugins/compiz.schemas.in.h:285
+#, fuzzy
+msgid "Opacity change step (1-50)"
+msgstr "不透明度變更間隔"
+
+#: ../plugins/compiz.schemas.in.h:286
+#, fuzzy
+msgid "Opacity level of moving windows (1-100)"
+msgstr "移動視窗的不透明度"
+
+#: ../plugins/compiz.schemas.in.h:287
+#, fuzzy
+msgid "Opacity level of resizing windows (1-100)"
+msgstr "移動視窗的不透明度"
+
+#: ../plugins/compiz.schemas.in.h:292
+#, fuzzy
+msgid ""
+"Open a terminal (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:294
+#, fuzzy
+msgid ""
+"Open window menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:295
+#, fuzzy
+msgid "Outline Color"
+msgstr "立方體色彩"
+
+#: ../plugins/compiz.schemas.in.h:296
+msgid "Outline color for outline and filled outline mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:299 ../plugins/scale.c:376
+msgid "Overlay Icon"
+msgstr "重疊圖示"
+
+#: ../plugins/compiz.schemas.in.h:300
+#, fuzzy
+msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
+msgstr "調整視窗比例後在上面重疊圖示"
+
+#: ../plugins/compiz.schemas.in.h:302 ../plugins/place.c:1598
+msgid "Place Windows"
+msgstr "放置視窗"
+
+#: ../plugins/compiz.schemas.in.h:303 ../plugins/place.c:1599
+msgid "Place windows at appropriate positions when mapped"
+msgstr "在映射時將視窗放置到適當位置"
+
+#: ../plugins/compiz.schemas.in.h:304 ../plugins/plane.c:890
+#, fuzzy
+msgid "Place windows on a plane"
+msgstr "將視窗放到立方體"
+
+#: ../plugins/compiz.schemas.in.h:305 ../plugins/cube.c:2045
+msgid "Place windows on cube"
+msgstr "將視窗放到立方體"
+
+#: ../plugins/compiz.schemas.in.h:306 ../plugins/place.c:245
+msgid "Placement Mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:307 ../plugins/plane.c:664
+#, fuzzy
+msgid "Plane Down"
+msgstr "Page Down"
+
+#: ../plugins/compiz.schemas.in.h:308 ../plugins/plane.c:626
+#, fuzzy
+msgid "Plane Left"
+msgstr "往左旋轉"
+
+#: ../plugins/compiz.schemas.in.h:309 ../plugins/plane.c:645
+#, fuzzy
+msgid "Plane Right"
+msgstr "往右旋轉"
+
+#: ../plugins/compiz.schemas.in.h:310
+#, fuzzy
+msgid "Plane To Face 1"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:311
+#, fuzzy
+msgid "Plane To Face 10"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:312
+#, fuzzy
+msgid "Plane To Face 11"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:313
+#, fuzzy
+msgid "Plane To Face 12"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:314
+#, fuzzy
+msgid "Plane To Face 2"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:315
+#, fuzzy
+msgid "Plane To Face 3"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:316
+#, fuzzy
+msgid "Plane To Face 4"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:317
+#, fuzzy
+msgid "Plane To Face 5"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:318
+#, fuzzy
+msgid "Plane To Face 6"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:319
+#, fuzzy
+msgid "Plane To Face 7"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:320
+#, fuzzy
+msgid "Plane To Face 8"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:321
+#, fuzzy
+msgid "Plane To Face 9"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:322 ../plugins/plane.c:683
+#, fuzzy
+msgid "Plane Up"
+msgstr "Page Up"
+
+#: ../plugins/compiz.schemas.in.h:323 ../plugins/plane.c:665
+#, fuzzy
+msgid "Plane down"
+msgstr "放置視窗"
+
+#: ../plugins/compiz.schemas.in.h:324
+#, fuzzy
+msgid ""
+"Plane down (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:325 ../plugins/plane.c:627
+#, fuzzy
+msgid "Plane left"
+msgstr "往左旋轉"
+
+#: ../plugins/compiz.schemas.in.h:326
+#, fuzzy
+msgid ""
+"Plane left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:327 ../plugins/plane.c:646
+#, fuzzy
+msgid "Plane right"
+msgstr "往右旋轉"
+
+#: ../plugins/compiz.schemas.in.h:328
+#, fuzzy
+msgid ""
+"Plane right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:329
+#, fuzzy
+msgid "Plane to face 1"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:330
+#, fuzzy
+msgid ""
+"Plane to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:331
+#, fuzzy
+msgid "Plane to face 10"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:332
+#, fuzzy
+msgid ""
+"Plane to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:333
+#, fuzzy
+msgid "Plane to face 11"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:334
+#, fuzzy
+msgid ""
+"Plane to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:335
+#, fuzzy
+msgid "Plane to face 12"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:336
+#, fuzzy
+msgid ""
+"Plane to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:337
+#, fuzzy
+msgid "Plane to face 2"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:338
+#, fuzzy
+msgid ""
+"Plane to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:339
+#, fuzzy
+msgid "Plane to face 3"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:340
+#, fuzzy
+msgid ""
+"Plane to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:341
+#, fuzzy
+msgid "Plane to face 4"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:342
+#, fuzzy
+msgid ""
+"Plane to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:343
+#, fuzzy
+msgid "Plane to face 5"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:344
+#, fuzzy
+msgid ""
+"Plane to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:345
+#, fuzzy
+msgid "Plane to face 6"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:346
+#, fuzzy
+msgid ""
+"Plane to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:347
+#, fuzzy
+msgid "Plane to face 7"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:348
+#, fuzzy
+msgid ""
+"Plane to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:349
+#, fuzzy
+msgid "Plane to face 8"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:350
+#, fuzzy
+msgid ""
+"Plane to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:351
+#, fuzzy
+msgid "Plane to face 9"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:352
+#, fuzzy
+msgid ""
+"Plane to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:353 ../plugins/plane.c:684
+msgid "Plane up"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:354
+#, fuzzy
+msgid ""
+"Plane up (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:355 ../plugins/gconf-dump.c:616
+msgid "Plugins that this must load before"
+msgstr "在此之前必須先載入的外掛程式"
+
+#: ../plugins/compiz.schemas.in.h:356 ../plugins/gconf-dump.c:626
+msgid "Plugins that this requires"
+msgstr "這時需要的外掛程式"
+
+#: ../plugins/compiz.schemas.in.h:357
+msgid "Png"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:358
+msgid "Png image loader"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:359 ../plugins/water.c:1685
+msgid "Point"
+msgstr "點"
+
+#: ../plugins/compiz.schemas.in.h:360 ../plugins/rotate.c:287
+#: ../plugins/zoom.c:223
+msgid "Pointer Invert Y"
+msgstr "指標反轉 Y 軸"
+
+#: ../plugins/compiz.schemas.in.h:361 ../plugins/rotate.c:294
+#: ../plugins/zoom.c:230
+msgid "Pointer Sensitivity"
+msgstr "指標靈敏度"
+
+#: ../plugins/compiz.schemas.in.h:362 ../plugins/switcher.c:2024
+msgid "Popup switcher if not visible and select next window"
+msgstr "看不到切換器時快顯切換器，並選取下一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:363
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select next window (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "看不到切換器時快顯切換器，並從所有視窗選取下一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:364 ../plugins/switcher.c:2060
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr "看不到切換器時快顯切換器，並從所有視窗選取下一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:365
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select next window out of all windows "
+"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "看不到切換器時快顯切換器，並從所有視窗選取下一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:366 ../plugins/switcher.c:2042
+msgid "Popup switcher if not visible and select previous window"
+msgstr "看不到切換器時快顯切換器，並選取上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:367
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select previous window (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "看不到切換器時快顯切換器，並從所有視窗選取上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:368 ../plugins/switcher.c:2079
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr "看不到切換器時快顯切換器，並從所有視窗選取上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:369
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows "
+"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "看不到切換器時快顯切換器，並從所有視窗選取上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:370 ../plugins/place.c:254
+#, fuzzy
+msgid "Positioned windows"
+msgstr "顯示最小化的視窗"
+
+#: ../plugins/compiz.schemas.in.h:371 ../plugins/switcher.c:2041
+#: ../plugins/switcher.c:2078 ../plugins/switcher.c:2110
+msgid "Prev window"
+msgstr "上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:372 ../plugins/cube.c:1835
+msgid "Previous Slide"
+msgstr "上一張投影片"
+
+#: ../plugins/compiz.schemas.in.h:373 ../plugins/video.c:248
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:376
+#, fuzzy
+msgid ""
+"Pulse effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:377 ../plugins/screenshot.c:399
+#, fuzzy
+msgid "Put screenshot images in this directory"
+msgstr "遞迴搜尋此目錄"
+
+#: ../plugins/compiz.schemas.in.h:378 ../plugins/water.c:1664
+msgid "Rain Delay"
+msgstr "下雨延遲"
+
+#: ../plugins/compiz.schemas.in.h:383
+#, fuzzy
+msgid ""
+"Raise window above other windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:386 ../plugins/regex.c:463
+msgid "Regex Matching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:387 ../plugins/regex.c:464
+#, fuzzy
+msgid "Regex window matching"
+msgstr "切換視窗嵌入"
+
+#: ../plugins/compiz.schemas.in.h:388 ../plugins/cube.c:1031
+msgid "Render skydome"
+msgstr "描繪天空頂"
+
+#: ../plugins/compiz.schemas.in.h:389
+msgid "Repaints the window on each resize step"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:390
+msgid "Resize Display Mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:391 ../plugins/resize.c:887
+msgid "Resize Window"
+msgstr "調整大小視窗"
+
+#: ../plugins/compiz.schemas.in.h:392 ../plugins/resize.c:888
+msgid "Resize window"
+msgstr "調整大小視窗"
+
+#: ../plugins/compiz.schemas.in.h:393 ../plugins/rotate.c:2180
+msgid "Rotate Cube"
+msgstr "旋轉立方體"
+
+#: ../plugins/compiz.schemas.in.h:394 ../plugins/rotate.c:1941
+msgid "Rotate Flip Left"
+msgstr "往左旋轉翻轉"
+
+#: ../plugins/compiz.schemas.in.h:395 ../plugins/rotate.c:1957
+msgid "Rotate Flip Right"
+msgstr "往右旋轉翻轉"
+
+#: ../plugins/compiz.schemas.in.h:396 ../plugins/rotate.c:1789
+msgid "Rotate Left"
+msgstr "往左旋轉"
+
+#: ../plugins/compiz.schemas.in.h:397 ../plugins/rotate.c:1827
+msgid "Rotate Left with Window"
+msgstr "隨視窗往左旋轉"
+
+#: ../plugins/compiz.schemas.in.h:398 ../plugins/rotate.c:1808
+msgid "Rotate Right"
+msgstr "往右旋轉"
+
+#: ../plugins/compiz.schemas.in.h:399 ../plugins/rotate.c:1847
+msgid "Rotate Right with Window"
+msgstr "隨視窗往右旋轉"
+
+#: ../plugins/compiz.schemas.in.h:400 ../plugins/rotate.c:1917
+msgid "Rotate To"
+msgstr "旋轉至"
+
+#: ../plugins/compiz.schemas.in.h:401
+#, fuzzy
+msgid "Rotate To Face 1"
+msgstr "往面 10 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:402
+#, fuzzy
+msgid "Rotate To Face 1 with Window"
+msgstr "隨視窗往面 10 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:403
+msgid "Rotate To Face 10"
+msgstr "往面 10 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:404
+msgid "Rotate To Face 10 with Window"
+msgstr "隨視窗往面 10 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:405
+msgid "Rotate To Face 11"
+msgstr "往面 11 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:406
+msgid "Rotate To Face 11 with Window"
+msgstr "隨視窗往面 11 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:407
+msgid "Rotate To Face 12"
+msgstr "往面 12 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:408
+msgid "Rotate To Face 12 with Window"
+msgstr "隨視窗往面 12 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:409
+msgid "Rotate To Face 2"
+msgstr "往面 2 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:410
+msgid "Rotate To Face 2 with Window"
+msgstr "隨視窗往面 2 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:411
+msgid "Rotate To Face 3"
+msgstr "往面 3 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:412
+msgid "Rotate To Face 3 with Window"
+msgstr "隨視窗往面 3 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:413
+msgid "Rotate To Face 4"
+msgstr "往面 4 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:414
+msgid "Rotate To Face 4 with Window"
+msgstr "隨視窗往面 4 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:415
+msgid "Rotate To Face 5"
+msgstr "往面 5 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:416
+msgid "Rotate To Face 5 with Window"
+msgstr "隨視窗往面 5 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:417
+msgid "Rotate To Face 6"
+msgstr "往面 6 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:418
+msgid "Rotate To Face 6 with Window"
+msgstr "隨視窗往面 6 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:419
+msgid "Rotate To Face 7"
+msgstr "往面 7 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:420
+msgid "Rotate To Face 7 with Window"
+msgstr "隨視窗往面 7 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:421
+msgid "Rotate To Face 8"
+msgstr "往面 8 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:422
+msgid "Rotate To Face 8 with Window"
+msgstr "隨視窗往面 8 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:423
+msgid "Rotate To Face 9"
+msgstr "往面 9 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:424
+msgid "Rotate To Face 9 with Window"
+msgstr "隨視窗往面 9 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:425 ../plugins/rotate.c:1929
+msgid "Rotate Window"
+msgstr "旋轉視窗"
+
+#: ../plugins/compiz.schemas.in.h:426 ../plugins/rotate.c:2181
+msgid "Rotate desktop cube"
+msgstr "旋轉桌面立方體"
+
+#: ../plugins/compiz.schemas.in.h:427 ../plugins/rotate.c:1790
+msgid "Rotate left"
+msgstr "往左旋轉"
+
+#: ../plugins/compiz.schemas.in.h:428
+#, fuzzy
+msgid ""
+"Rotate left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:429 ../plugins/rotate.c:1828
+msgid "Rotate left and bring active window along"
+msgstr "往左旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:430
+#, fuzzy
+msgid ""
+"Rotate left and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:431 ../plugins/rotate.c:1809
+msgid "Rotate right"
+msgstr "往右旋轉"
+
+#: ../plugins/compiz.schemas.in.h:432
+#, fuzzy
+msgid ""
+"Rotate right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:433 ../plugins/rotate.c:1848
+msgid "Rotate right and bring active window along"
+msgstr "往右旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:434
+#, fuzzy
+msgid ""
+"Rotate right and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:435
+#, fuzzy
+msgid "Rotate to face 1"
+msgstr "往面 10 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:436
+#, fuzzy
+msgid ""
+"Rotate to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:437
+#, fuzzy
+msgid "Rotate to face 1 and bring active window along"
+msgstr "往面 10 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:438
+#, fuzzy
+msgid ""
+"Rotate to face 1 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:439
+msgid "Rotate to face 10"
+msgstr "往面 10 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:440
+#, fuzzy
+msgid ""
+"Rotate to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:441
+msgid "Rotate to face 10 and bring active window along"
+msgstr "往面 10 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:442
+#, fuzzy
+msgid ""
+"Rotate to face 10 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:443
+msgid "Rotate to face 11"
+msgstr "往面 11 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:444
+#, fuzzy
+msgid ""
+"Rotate to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:445
+msgid "Rotate to face 11 and bring active window along"
+msgstr "往面 11 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:446
+#, fuzzy
+msgid ""
+"Rotate to face 11 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:447
+msgid "Rotate to face 12"
+msgstr "往面 12 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:448
+#, fuzzy
+msgid ""
+"Rotate to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:449
+msgid "Rotate to face 12 and bring active window along"
+msgstr "往面 12 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:450
+#, fuzzy
+msgid ""
+"Rotate to face 12 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:451
+msgid "Rotate to face 2"
+msgstr "往面 2 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:452
+#, fuzzy
+msgid ""
+"Rotate to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:453
+msgid "Rotate to face 2 and bring active window along"
+msgstr "往面 2 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:454
+#, fuzzy
+msgid ""
+"Rotate to face 2 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:455
+msgid "Rotate to face 3"
+msgstr "往面 3 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:456
+#, fuzzy
+msgid ""
+"Rotate to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:457
+msgid "Rotate to face 3 and bring active window along"
+msgstr "往面 3 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:458
+#, fuzzy
+msgid ""
+"Rotate to face 3 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:459
+msgid "Rotate to face 4"
+msgstr "往面 4 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:460
+#, fuzzy
+msgid ""
+"Rotate to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:461
+msgid "Rotate to face 4 and bring active window along"
+msgstr "往面 4 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:462
+#, fuzzy
+msgid ""
+"Rotate to face 4 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:463
+msgid "Rotate to face 5"
+msgstr "往面 5 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:464
+#, fuzzy
+msgid ""
+"Rotate to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:465
+msgid "Rotate to face 5 and bring active window along"
+msgstr "往面 5 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:466
+#, fuzzy
+msgid ""
+"Rotate to face 5 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:467
+msgid "Rotate to face 6"
+msgstr "往面 6 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:468
+#, fuzzy
+msgid ""
+"Rotate to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:469
+msgid "Rotate to face 6 and bring active window along"
+msgstr "往面 6 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:470
+#, fuzzy
+msgid ""
+"Rotate to face 6 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:471
+msgid "Rotate to face 7"
+msgstr "往面 7 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:472
+#, fuzzy
+msgid ""
+"Rotate to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:473
+msgid "Rotate to face 7 and bring active window along"
+msgstr "往面 7 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:474
+#, fuzzy
+msgid ""
+"Rotate to face 7 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:475
+msgid "Rotate to face 8"
+msgstr "往面 8 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:476
+#, fuzzy
+msgid ""
+"Rotate to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:477
+msgid "Rotate to face 8 and bring active window along"
+msgstr "往面 8 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:478
+#, fuzzy
+msgid ""
+"Rotate to face 8 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:479
+msgid "Rotate to face 9"
+msgstr "往面 9 旋轉"
+
+#: ../plugins/compiz.schemas.in.h:480
+#, fuzzy
+msgid ""
+"Rotate to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:481
+msgid "Rotate to face 9 and bring active window along"
+msgstr "往面 9 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/compiz.schemas.in.h:482
+#, fuzzy
+msgid ""
+"Rotate to face 9 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:483 ../plugins/switcher.c:435
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:484 ../plugins/rotate.c:1918
+msgid "Rotate to viewport"
+msgstr "往檢視區旋轉"
+
+#: ../plugins/compiz.schemas.in.h:485
+#, fuzzy
+msgid ""
+"Rotate to viewport (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:486 ../plugins/rotate.c:1930
+msgid "Rotate with window"
+msgstr "隨視窗旋轉"
+
+#: ../plugins/compiz.schemas.in.h:487
+#, fuzzy
+msgid ""
+"Rotate with window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:488
+#, fuzzy
+msgid "Rotation Acceleration (1.0-20.0)"
+msgstr "摺疊加速 (1.0-20.0)"
+
+#: ../plugins/compiz.schemas.in.h:489
+#, fuzzy
+msgid "Rotation Speed (0.0-50.0)"
+msgstr "縮放速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:490
+#, fuzzy
+msgid "Rotation Timestep (0.0-50.0)"
+msgstr "縮放時間間隔 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:504 ../plugins/switcher.c:375
+msgid "Saturation"
+msgstr "飽和度"
+
+#: ../plugins/compiz.schemas.in.h:505 ../plugins/scale.c:2212
+msgid "Scale"
+msgstr "調整比例"
+
+#: ../plugins/compiz.schemas.in.h:506 ../plugins/scale.c:351
+#, fuzzy
+msgid "Scale Windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/compiz.schemas.in.h:507 ../plugins/cube.c:1009
+msgid "Scale image"
+msgstr "調整影像比例"
+
+#: ../plugins/compiz.schemas.in.h:508 ../plugins/cube.c:1010
+msgid "Scale images to cover top face of cube"
+msgstr "調整影像比例以覆蓋立方體頂面"
+
+#: ../plugins/compiz.schemas.in.h:509
+#, fuzzy
+msgid "Scale speed (0.0-50.0)"
+msgstr "調整比例速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:510
+#, fuzzy
+msgid "Scale timestep (0.0-50.0)"
+msgstr "調整比例時間間隔 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:511 ../plugins/scale.c:2213
+msgid "Scale windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/compiz.schemas.in.h:512
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size (1-32)"
+msgstr "水平虛擬大小的螢幕大小倍數"
+
+#: ../plugins/compiz.schemas.in.h:513
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size (1-32)"
+msgstr "垂直虛擬大小的螢幕大小倍數"
+
+#: ../plugins/compiz.schemas.in.h:514 ../plugins/screenshot.c:559
+#, fuzzy
+msgid "Screenshot"
+msgstr "螢幕"
+
+#: ../plugins/compiz.schemas.in.h:516 ../plugins/screenshot.c:560
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "螢幕擷取指令行"
+
+#: ../plugins/compiz.schemas.in.h:517
+msgid ""
+"Select between normal, stretched texture, outline and filled outline mode. "
+"(Normal, Stretch, Outline, Filled Outline)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:518 ../plugins/switcher.c:2098
+msgid "Select next window"
+msgstr "選取下一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:519
+#, fuzzy
+msgid ""
+"Select next window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:520 ../plugins/switcher.c:2111
+msgid "Select previous window"
+msgstr "選取上一個視窗"
+
+#: ../plugins/compiz.schemas.in.h:521
+#, fuzzy
+msgid ""
+"Select previous window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:522
+#, fuzzy
+msgid "Sensitivity of pointer movement (0.01-100.00)"
+msgstr "指標移動靈敏度"
+
+#: ../plugins/compiz.schemas.in.h:523 ../plugins/minimize.c:222
+msgid "Shade Resistance"
+msgstr "遮蔽阻力"
+
+#: ../plugins/compiz.schemas.in.h:524
+msgid "Shade resistance (0-100)"
+msgstr "遮蔽阻力 (0-100)"
+
+#: ../plugins/compiz.schemas.in.h:525
+#, fuzzy
+msgid "Shadow Color"
+msgstr "嵌入視窗"
+
+#: ../plugins/compiz.schemas.in.h:526 ../plugins/decoration.c:1162
+msgid "Shadow Offset X"
+msgstr "陰影偏移 X 軸"
+
+#: ../plugins/compiz.schemas.in.h:527 ../plugins/decoration.c:1171
+msgid "Shadow Offset Y"
+msgstr "陰影偏移 Y 軸"
+
+#: ../plugins/compiz.schemas.in.h:528 ../plugins/decoration.c:1142
+msgid "Shadow Opacity"
+msgstr "陰影不透明度"
+
+#: ../plugins/compiz.schemas.in.h:529 ../plugins/decoration.c:1132
+msgid "Shadow Radius"
+msgstr "陰影半徑"
+
+#: ../plugins/compiz.schemas.in.h:530 ../plugins/decoration.c:1206
+#, fuzzy
+msgid "Shadow windows"
+msgstr "嵌入視窗"
+
+# 'driver' as in '(hardware) driver update'
+#: ../plugins/compiz.schemas.in.h:531 ../plugins/wobbly.c:132
+#: ../plugins/wobbly.c:2867
+msgid "Shiver"
+msgstr "晃動"
+
+#: ../plugins/compiz.schemas.in.h:534
+#, fuzzy
+msgid ""
+"Show Run Application dialog (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:535 ../plugins/switcher.c:421
+msgid "Show icon next to thumbnail"
+msgstr "顯示圖示於縮圖旁"
+
+#: ../plugins/compiz.schemas.in.h:536 ../plugins/switcher.c:428
+msgid "Show minimized windows"
+msgstr "顯示最小化的視窗"
+
+#: ../plugins/compiz.schemas.in.h:538
+#, fuzzy
+msgid ""
+"Show the main menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:539 ../plugins/cube.c:1030
+msgid "Skydome"
+msgstr "天空頂"
+
+#: ../plugins/compiz.schemas.in.h:540 ../plugins/cube.c:1064
+msgid "Skydome Gradient End Color"
+msgstr "天空頂漸層結束色彩"
+
+#: ../plugins/compiz.schemas.in.h:541 ../plugins/cube.c:1053
+msgid "Skydome Gradient Start Color"
+msgstr "天空頂漸層開始色彩"
+
+#: ../plugins/compiz.schemas.in.h:542 ../plugins/cube.c:1037
+msgid "Skydome Image"
+msgstr "天空頂影像"
+
+#: ../plugins/compiz.schemas.in.h:544 ../plugins/rotate.c:315
+msgid "Snap Cube Rotation to Top Face"
+msgstr "嵌入立方體旋轉至頂面"
+
+#: ../plugins/compiz.schemas.in.h:545 ../plugins/wobbly.c:2860
+msgid "Snap Inverted"
+msgstr "嵌入反轉"
+
+#: ../plugins/compiz.schemas.in.h:546 ../plugins/rotate.c:314
+msgid "Snap To Top Face"
+msgstr "嵌入至頂面"
+
+#: ../plugins/compiz.schemas.in.h:547 ../plugins/wobbly.c:2846
+msgid "Snap windows"
+msgstr "嵌入視窗"
+
+#: ../plugins/compiz.schemas.in.h:548 ../plugins/move.c:767
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr "在拖曳已最大化視窗時為其解除嵌入和自動解除最大化"
+
+#: ../plugins/compiz.schemas.in.h:549 ../plugins/move.c:766
+msgid "Snapoff maximized windows"
+msgstr "解除嵌入最大化視窗"
+
+#: ../plugins/compiz.schemas.in.h:550
+#, fuzzy
+msgid "Space between windows (0-250)"
+msgstr "視窗間隔"
+
+#: ../plugins/compiz.schemas.in.h:551 ../plugins/scale.c:322
+msgid "Spacing"
+msgstr "間距"
+
+#: ../plugins/compiz.schemas.in.h:552 ../plugins/cube.c:1085
+#: ../plugins/minimize.c:193 ../plugins/rotate.c:321 ../plugins/scale.c:331
+#: ../plugins/switcher.c:338 ../plugins/zoom.c:240
+msgid "Speed"
+msgstr "速度"
+
+#: ../plugins/compiz.schemas.in.h:553
+#, fuzzy
+msgid "Spring Friction (0.0-10.0)"
+msgstr "彈簧摩擦力"
+
+#: ../plugins/compiz.schemas.in.h:554 ../plugins/wobbly.c:336
+msgid "Spring K"
+msgstr "彈簧 K 值"
+
+#: ../plugins/compiz.schemas.in.h:555
+#, fuzzy
+msgid "Spring Konstant (0.0-10.0)"
+msgstr "彈簧常數"
+
+#: ../plugins/compiz.schemas.in.h:556 ../plugins/rotate.c:1775
+msgid "Start Rotation"
+msgstr "開始旋轉"
+
+#: ../plugins/compiz.schemas.in.h:557
+#, fuzzy
+msgid ""
+"Start Rotation (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:558 ../plugins/move.c:732
+msgid "Start moving window"
+msgstr "開始移動視窗"
+
+#: ../plugins/compiz.schemas.in.h:559
+#, fuzzy
+msgid ""
+"Start moving window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:560 ../plugins/resize.c:721
+msgid "Start resizing window"
+msgstr "開始調整視窗大小"
+
+#: ../plugins/compiz.schemas.in.h:561
+#, fuzzy
+msgid ""
+"Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:564
+msgid "Stroke width for annotations (0.0-20.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:565
+msgid "Svg"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:566
+msgid "Svg image loader"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:567
+#, fuzzy
+msgid "Switcher speed (0.0-50.0)"
+msgstr "調整比例速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:568
+#, fuzzy
+msgid "Switcher timestep (0.0-50.0)"
+msgstr "調整比例時間間隔 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:569 ../plugins/switcher.c:358
+#, fuzzy
+msgid "Switcher windows"
+msgstr "調整視窗比例"
+
+#: ../plugins/compiz.schemas.in.h:572
+#, fuzzy
+msgid ""
+"Take a screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:574
+#, fuzzy
+msgid ""
+"Take a screenshot of a window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:577
+msgid "Texture filtering (Fast, Good, Best)"
+msgstr "材質篩選 (快、好、最佳)"
+
+#: ../plugins/compiz.schemas.in.h:578
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second) (1-200)"
+msgstr "螢幕重新描繪的速率 (次數/秒)"
+
+#: ../plugins/compiz.schemas.in.h:579
+#, fuzzy
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window (50-"
+"10000)"
+msgstr "停留在視窗上多久 (毫秒) 後停止調整比例模式"
+
+#: ../plugins/compiz.schemas.in.h:580
+#, fuzzy
+msgid "Timeout before flipping viewport (0-1000)"
+msgstr "逾時多久需翻轉檢視區"
+
+#: ../plugins/compiz.schemas.in.h:581 ../plugins/cube.c:1095
+#: ../plugins/minimize.c:203 ../plugins/rotate.c:331 ../plugins/scale.c:341
+#: ../plugins/switcher.c:348 ../plugins/zoom.c:250
+msgid "Timestep"
+msgstr "時間間隔"
+
+#: ../plugins/compiz.schemas.in.h:582 ../plugins/water.c:1673
+msgid "Title wave"
+msgstr "標題波紋"
+
+#: ../plugins/compiz.schemas.in.h:588
+#, fuzzy
+msgid ""
+"Toggle active window maximized (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:590
+#, fuzzy
+msgid ""
+"Toggle active window maximized horizontally (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:592
+#, fuzzy
+msgid ""
+"Toggle active window maximized vertically (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:594
+#, fuzzy
+msgid ""
+"Toggle active window shaded (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:595 ../plugins/water.c:1622
+msgid "Toggle rain"
+msgstr "切換下雨"
+
+#: ../plugins/compiz.schemas.in.h:596 ../plugins/water.c:1623
+msgid "Toggle rain effect"
+msgstr "切換下雨特效"
+
+#: ../plugins/compiz.schemas.in.h:597
+#, fuzzy
+msgid ""
+"Toggle rain effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:599
+#, fuzzy
+msgid ""
+"Toggle use of slow animations (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:600 ../plugins/wobbly.c:2847
+msgid "Toggle window snapping"
+msgstr "切換視窗嵌入"
+
+#: ../plugins/compiz.schemas.in.h:601
+#, fuzzy
+msgid ""
+"Toggle window snapping (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:602 ../plugins/water.c:1638
+msgid "Toggle wiper"
+msgstr "切換雨刷"
+
+#: ../plugins/compiz.schemas.in.h:603 ../plugins/water.c:1639
+msgid "Toggle wiper effect"
+msgstr "切換雨刷效果"
+
+#: ../plugins/compiz.schemas.in.h:604
+#, fuzzy
+msgid ""
+"Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:605 ../plugins/minimize.c:1073
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "在最小化和解除最小化時轉換視窗"
+
+#: ../plugins/compiz.schemas.in.h:606
+msgid "USe linear filter when zoomed in"
+msgstr "在放大時使用線性過濾器"
+
+#: ../plugins/compiz.schemas.in.h:607 ../plugins/cube.c:1799
+msgid "Unfold"
+msgstr "展開"
+
+#: ../plugins/compiz.schemas.in.h:608 ../plugins/cube.c:1800
+msgid "Unfold cube"
+msgstr "展開立方體"
+
+#: ../plugins/compiz.schemas.in.h:609
+#, fuzzy
+msgid ""
+"Unfold cube (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:612
+#, fuzzy
+msgid ""
+"Unmaximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:615 ../plugins/wobbly.c:3082
+msgid "Use spring model for wobbly window effect"
+msgstr "針對搖擺視窗特效使用彈簧模式"
+
+#: ../plugins/compiz.schemas.in.h:616 ../plugins/fuse.c:1588
+msgid "Userspace File System"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:617 ../plugins/fuse.c:1589
+msgid "Userspace file system"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:618
+#, fuzzy
+msgid "Vertex Grid Resolution (1-64)"
+msgstr "頂點格線解析度"
+
+#: ../plugins/compiz.schemas.in.h:620 ../plugins/place.c:311
+msgid "Vertical viewport positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:621 ../plugins/video.c:1242
+msgid "Video Playback"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:622 ../plugins/video.c:1243
+msgid "Video playback"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:623 ../plugins/place.c:287
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:624 ../plugins/fade.c:201
+msgid "Visual Bell"
+msgstr "警示鈴聲"
+
+#: ../plugins/compiz.schemas.in.h:625
+msgid "Warp pointer when starting a resize with mouse initiate combo."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:626 ../plugins/water.c:1875
+msgid "Water Effect"
+msgstr "水波特效"
+
+#: ../plugins/compiz.schemas.in.h:627
+#, fuzzy
+msgid "Water offset scale (0.0-10.0)"
+msgstr "水波偏移比例"
+
+#: ../plugins/compiz.schemas.in.h:628 ../plugins/water.c:1674
+msgid "Wave effect from window title"
+msgstr "視窗標題的波紋效果"
+
+#: ../plugins/compiz.schemas.in.h:629
+#, fuzzy
+msgid ""
+"Wave effect from window title (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:630 ../plugins/decoration.c:1492
+msgid "Window Decoration"
+msgstr "視窗裝飾"
+
+#: ../plugins/compiz.schemas.in.h:632
+#, fuzzy
+msgid "Window blur speed (0.0-10.0)"
+msgstr "Window 淡出/淡入速度"
+
+#: ../plugins/compiz.schemas.in.h:633 ../plugins/decoration.c:1493
+msgid "Window decorations"
+msgstr "視窗裝飾"
+
+#: ../plugins/compiz.schemas.in.h:634
+#, fuzzy
+msgid "Window fade speed (0.0-25.0)"
+msgstr "Window 淡出/淡入速度"
+
+#: ../plugins/compiz.schemas.in.h:635 ../plugins/place.c:239
+msgid "Window placement workarounds"
+msgstr "視窗位置解決方式"
+
+#: ../plugins/compiz.schemas.in.h:637
+#, fuzzy
+msgid "Windows that should be affected by focus blur (match)"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:638
+#, fuzzy
+msgid "Windows that should be decorated (match)"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:639
+#, fuzzy
+msgid "Windows that should be fading (match)"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:640
+#, fuzzy
+msgid "Windows that should be have a shadow (match)"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:641 ../plugins/place.c:255
+#, fuzzy
+msgid "Windows that should be positioned by default"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:642
+#, fuzzy
+msgid "Windows that should be scaled in scale mode (match)"
+msgstr "應該要在調整比例模式中調整比例的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:643
+#, fuzzy
+msgid "Windows that should be shown in switcher (match)"
+msgstr "應該要顯示在切換器中的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:644
+#, fuzzy
+msgid "Windows that should be transformed when minimized (match)"
+msgstr "最小化時應該轉換的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:646 ../plugins/place.c:288
+#, fuzzy
+msgid "Windows that should positioned in specific viewports by default"
+msgstr "應該要在調整比例模式中調整比例的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:647
+#, fuzzy
+msgid "Windows that should use alpha blur by default (match)"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:648
+#, fuzzy
+msgid "Windows that should wobble when focused (match)"
+msgstr "應該要在定焦時搖擺的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:649
+#, fuzzy
+msgid "Windows that should wobble when grabbed (match)"
+msgstr "應該要在抓取時搖擺的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:650
+#, fuzzy
+msgid "Windows that should wobble when mapped (match)"
+msgstr "應該要在映射時搖擺的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:651
+#, fuzzy
+msgid "Windows that should wobble when moved (match)"
+msgstr "應該要在移動時搖擺的視窗類型"
+
+#: ../plugins/compiz.schemas.in.h:652 ../plugins/wobbly.c:419
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "視窗最大化和解除最大化時啟用搖擺特效"
+
+#: ../plugins/compiz.schemas.in.h:653 ../plugins/wobbly.c:3081
+msgid "Wobbly Windows"
+msgstr "搖擺視窗"
+
+#: ../plugins/compiz.schemas.in.h:654 ../plugins/place.c:238
+msgid "Workarounds"
+msgstr "解決方式"
+
+#: ../plugins/compiz.schemas.in.h:655 ../plugins/place.c:265
+msgid "X Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:656 ../plugins/place.c:299
+msgid "X Viewport Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:657 ../plugins/place.c:266
+msgid "X position values"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:658 ../plugins/place.c:276
+msgid "Y Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:659 ../plugins/place.c:310
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:660 ../plugins/place.c:277
+msgid "Y position values"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:661 ../plugins/video.c:247
+msgid "YV12 colorspace"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:662 ../plugins/switcher.c:409
+msgid "Zoom"
+msgstr "縮放"
+
+#: ../plugins/compiz.schemas.in.h:663 ../plugins/zoom.c:942
+msgid "Zoom Desktop"
+msgstr "縮放桌面"
+
+#: ../plugins/compiz.schemas.in.h:664 ../plugins/zoom.c:756
+#: ../plugins/zoom.c:770 ../plugins/zoom.c:771
+msgid "Zoom In"
+msgstr "放大"
+
+#: ../plugins/compiz.schemas.in.h:665
+#, fuzzy
+msgid ""
+"Zoom In (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:666 ../plugins/zoom.c:785
+#: ../plugins/zoom.c:786
+msgid "Zoom Out"
+msgstr "縮小"
+
+#: ../plugins/compiz.schemas.in.h:667
+#, fuzzy
+msgid ""
+"Zoom Out (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:668
+#, fuzzy
+msgid "Zoom Speed (0.0-50.0)"
+msgstr "縮放速度 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:669
+#, fuzzy
+msgid "Zoom Timestep (0.0-50.0)"
+msgstr "縮放時間間隔 (0.1-50.0)"
+
+#: ../plugins/compiz.schemas.in.h:670 ../plugins/zoom.c:943
+msgid "Zoom and pan desktop cube"
+msgstr "縮放和平移桌面立方體"
+
+#: ../plugins/compiz.schemas.in.h:671 ../plugins/zoom.c:260
+#: ../plugins/zoom.c:261
+msgid "Zoom factor"
+msgstr "縮放倍率"
+
+#: ../plugins/compiz.schemas.in.h:672
+#, fuzzy
+msgid "Zoom factor (1.01-3.00)"
+msgstr "縮放倍率"
+
+#: ../plugins/cube.c:1076
+msgid "Fold Acceleration"
+msgstr "摺疊加速"
+
+#: ../plugins/cube.c:1086
+msgid "Fold Speed"
+msgstr "摺疊速度"
+
+#: ../plugins/cube.c:1096
+msgid "Fold Timestep"
+msgstr "摺疊時間間隔"
+
+#: ../plugins/decoration.c:1133
+msgid "Drop shadow radius"
+msgstr "投影半徑"
+
+#: ../plugins/decoration.c:1143
+msgid "Drop shadow opacity"
+msgstr "投影半徑不透明度"
+
+#: ../plugins/decoration.c:1163
+msgid "Drop shadow X offset"
+msgstr "投影 X 軸偏移"
+
+#: ../plugins/decoration.c:1172
+msgid "Drop shadow Y offset"
+msgstr "投影 Y 軸偏移"
+
+#: ../plugins/decoration.c:1198
+#, fuzzy
+msgid "Windows that should be decorated"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/decoration.c:1207
+#, fuzzy
+msgid "Windows that should be have a shadow"
+msgstr "應該淡出/淡入的視窗類型"
+
+#: ../plugins/fade.c:183
+msgid "Window fade speed"
+msgstr "Window 淡出/淡入速度"
+
+#: ../plugins/fade.c:193
+#, fuzzy
+msgid "Windows that should be fading"
+msgstr "應該淡出/淡入的視窗類型"
+
+#. Decimal point character
+#: ../plugins/gconf-dump.c:81
+msgid "."
+msgstr "."
+
+#: ../plugins/minimize.c:194
+msgid "Minimize speed"
+msgstr "最小化速度"
+
+#: ../plugins/minimize.c:204
+msgid "Minimize timestep"
+msgstr "最小化時間間隔"
+
+#: ../plugins/minimize.c:214
+#, fuzzy
+msgid "Windows that should be transformed when minimized"
+msgstr "最小化時應該轉換的視窗類型"
+
+#: ../plugins/minimize.c:223
+msgid "Shade resistance"
+msgstr "遮蔽阻力"
+
+#: ../plugins/move.c:751
+msgid "Opacity level of moving windows"
+msgstr "移動視窗的不透明度"
+
+#: ../plugins/place.c:42
+msgid "Cascade"
+msgstr ""
+
+#: ../plugins/place.c:43
+msgid "Centered"
+msgstr ""
+
+#: ../plugins/place.c:44
+msgid "Smart"
+msgstr ""
+
+#: ../plugins/place.c:45
+#, fuzzy
+msgid "Maximize"
+msgstr "最小化"
+
+#: ../plugins/place.c:46
+msgid "Random"
+msgstr ""
+
+#: ../plugins/place.c:246
+msgid "Algorithm to use for window placement"
+msgstr ""
+
+#: ../plugins/plane.c:700
+#, fuzzy, c-format
+msgid "Plane To Face %d"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/plane.c:701
+#, fuzzy, c-format
+msgid "Plane to face %d"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/plane.c:702
+#, fuzzy, c-format
+msgid "Plane To Face %d with Window"
+msgstr "隨視窗往面 %d 旋轉"
+
+#: ../plugins/plane.c:703
+#, fuzzy, c-format
+msgid "Plane to face %d and bring active window along"
+msgstr "往面 %d 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/rotate.c:295 ../plugins/zoom.c:231
+msgid "Sensitivity of pointer movement"
+msgstr "指標移動靈敏度"
+
+#: ../plugins/rotate.c:305
+msgid "Rotation Acceleration"
+msgstr "旋轉加速"
+
+#: ../plugins/rotate.c:322
+msgid "Rotation Speed"
+msgstr "旋轉速度"
+
+#: ../plugins/rotate.c:332
+msgid "Rotation Timestep"
+msgstr "旋轉時間間隔"
+
+#: ../plugins/rotate.c:1865
+#, c-format
+msgid "Rotate To Face %d"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/rotate.c:1866
+#, c-format
+msgid "Rotate to face %d"
+msgstr "往面 %d 旋轉"
+
+#: ../plugins/rotate.c:1867
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "隨視窗往面 %d 旋轉"
+
+#: ../plugins/rotate.c:1868
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "往面 %d 旋轉並隨同作用中視窗一起旋轉"
+
+#: ../plugins/rotate.c:1998
+msgid "Timeout before flipping viewport"
+msgstr "逾時多久需翻轉檢視區"
+
+#: ../plugins/scale.c:80 ../plugins/wobbly.c:131
+msgid "None"
+msgstr "無"
+
+#: ../plugins/scale.c:81
+msgid "Emblem"
+msgstr "象徵"
+
+#: ../plugins/scale.c:82
+msgid "Big"
+msgstr "大"
+
+#: ../plugins/scale.c:323
+msgid "Space between windows"
+msgstr "視窗間隔"
+
+#: ../plugins/scale.c:332
+msgid "Scale speed"
+msgstr "調整比例速度"
+
+#: ../plugins/scale.c:342
+msgid "Scale timestep"
+msgstr "調整比例時間間隔"
+
+#: ../plugins/scale.c:352
+#, fuzzy
+msgid "Windows that should be scaled in scale mode"
+msgstr "應該要在調整比例模式中調整比例的視窗類型"
+
+#: ../plugins/scale.c:368 ../plugins/switcher.c:394
+msgid "Amount of opacity in percent"
+msgstr "不透明度比例"
+
+#: ../plugins/scale.c:377
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "調整視窗比例後在上面重疊圖示"
+
+#: ../plugins/scale.c:386
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr "停留在視窗上多久 (毫秒) 後停止調整比例模式"
+
+#: ../plugins/switcher.c:339
+msgid "Switcher speed"
+msgstr "切換器速度"
+
+#: ../plugins/switcher.c:349
+msgid "Switcher timestep"
+msgstr "切換器時間間隔"
+
+#: ../plugins/switcher.c:359
+#, fuzzy
+msgid "Windows that should be shown in switcher"
+msgstr "應該要顯示在切換器中的視窗類型"
+
+#: ../plugins/switcher.c:376
+msgid "Amount of saturation in percent"
+msgstr "飽和度比例"
+
+#: ../plugins/switcher.c:385
+msgid "Amount of brightness in percent"
+msgstr "亮度比例"
+
+#: ../plugins/switcher.c:410
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr "切換視窗時桌面應縮小的距離"
+
+#: ../plugins/water.c:1655
+msgid "Water offset scale"
+msgstr "水波偏移比例"
+
+#: ../plugins/water.c:1665
+msgid "Delay (in ms) between each rain-drop"
+msgstr "每滴雨之間的延遲 (毫秒)"
+
+#: ../plugins/wobbly.c:327
+msgid "Spring Friction"
+msgstr "彈簧摩擦力"
+
+#: ../plugins/wobbly.c:337
+msgid "Spring Konstant"
+msgstr "彈簧常數"
+
+#: ../plugins/wobbly.c:347
+msgid "Vertex Grid Resolution"
+msgstr "頂點格線解析度"
+
+#: ../plugins/wobbly.c:356
+msgid "Minimum Vertex Grid Size"
+msgstr "最小頂點格線大小"
+
+#: ../plugins/wobbly.c:365
+msgid "Map Window Effect"
+msgstr "映射視窗特效"
+
+#: ../plugins/wobbly.c:374
+msgid "Focus Window Effect"
+msgstr "定焦視窗特效"
+
+#: ../plugins/wobbly.c:383
+#, fuzzy
+msgid "Windows that should wobble when mapped"
+msgstr "應該要在映射時搖擺的視窗類型"
+
+#: ../plugins/wobbly.c:392
+#, fuzzy
+msgid "Windows that should wobble when focused"
+msgstr "應該要在定焦時搖擺的視窗類型"
+
+#: ../plugins/wobbly.c:401
+#, fuzzy
+msgid "Windows that should wobble when moved"
+msgstr "應該要在移動時搖擺的視窗類型"
+
+#: ../plugins/wobbly.c:410
+#, fuzzy
+msgid "Windows that should wobble when grabbed"
+msgstr "應該要在抓取時搖擺的視窗類型"
+
+#: ../plugins/zoom.c:241
+msgid "Zoom Speed"
+msgstr "縮放速度"
+
+#: ../plugins/zoom.c:251
+msgid "Zoom Timestep"
+msgstr "縮放時間間隔"
+
+#: ../plugins/zoom.c:271
+#, fuzzy
+msgid "Use linear filter when zoomed in"
+msgstr "在放大時使用線性過濾器"
+
+#: ../src/main.c:55
+msgid "Dock"
+msgstr "黏合"
+
+#: ../src/main.c:56
+msgid "Toolbar"
+msgstr "工具列"
+
+#: ../src/main.c:57
+msgid "Menu"
+msgstr "功能表"
+
+#: ../src/main.c:58
+msgid "Utility"
+msgstr "公用程式"
+
+#: ../src/main.c:59
+msgid "Splash"
+msgstr "開頭顯示畫面"
+
+#: ../src/main.c:60
+msgid "Dialog"
+msgstr "對話方塊"
+
+#: ../src/main.c:61
+msgid "Normal"
+msgstr "一般"
+
+#: ../src/main.c:62
+msgid "DropdownMenu"
+msgstr "DropdownMenu"
+
+#: ../src/main.c:63
+msgid "PopupMenu"
+msgstr "PopupMenu"
+
+#: ../src/main.c:64
+msgid "Tooltip"
+msgstr "工具提示"
+
+#: ../src/main.c:65
+msgid "Notification"
+msgstr "通知"
+
+#: ../src/main.c:66
+msgid "Combo"
+msgstr "組合"
+
+#: ../src/main.c:67
+msgid "Dnd"
+msgstr "Dnd"
+
+#: ../src/main.c:68
+msgid "ModalDialog"
+msgstr "ModalDialog"
+
+#: ../src/main.c:69
+msgid "Fullscreen"
+msgstr "全螢幕"
+
+#: ../src/main.c:70
+msgid "Unknown"
+msgstr "未知的"
+
+#~ msgid "Fast"
+#~ msgstr "快"
+
+#~ msgid "Good"
+#~ msgstr "好"
+
+#~ msgid "Best"
+#~ msgstr "最佳"
+
+#~ msgid "Command line %d"
+#~ msgstr "指令行 %d"
+
+#~ msgid "Command line to be executed in shell when run_command%d is invoked"
+#~ msgstr "啟用 run_command%d 時要在外圍程序中執行的指令行"
+
+#~ msgid "Run command %d"
+#~ msgstr "執行指令 %d"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command%d"
+#~ msgstr "啟用時將執行經 command%d 識別之外圍程序指令的按鍵組合"
 
 #~ msgid "Window Types"
 #~ msgstr "視窗類型"
@@ -1943,149 +3839,11 @@ msgstr ""
 #~ msgid "Enable focus prevention"
 #~ msgstr "啟用 ZEN 分割區"
 
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1"
-#~ msgstr "啟用時將執行經 command1 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10"
-#~ msgstr "啟用時將執行經 command10 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11"
-#~ msgstr "啟用時將執行經 command11 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2"
-#~ msgstr "啟用時將執行經 command2 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3"
-#~ msgstr "啟用時將執行經 command3 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4"
-#~ msgstr "啟用時將執行經 command4 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5"
-#~ msgstr "啟用時將執行經 command5 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6"
-#~ msgstr "啟用時將執行經 command6 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7"
-#~ msgstr "啟用時將執行經 command7 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8"
-#~ msgstr "啟用時將執行經 command8 識別之外圍程序指令的按鍵組合"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9"
-#~ msgstr "啟用時將執行經 command9 識別之外圍程序指令的按鍵組合"
-
-#~ msgid "Command line 1"
-#~ msgstr "指令行 1"
-
-#~ msgid "Command line 10"
-#~ msgstr "指令行 10"
-
-#~ msgid "Command line 11"
-#~ msgstr "指令行 11"
-
-#~ msgid "Command line 2"
-#~ msgstr "指令行 2"
-
-#~ msgid "Command line 3"
-#~ msgstr "指令行 3"
-
-#~ msgid "Command line 4"
-#~ msgstr "指令行 4"
-
-#~ msgid "Command line 5"
-#~ msgstr "指令行 5"
-
-#~ msgid "Command line 6"
-#~ msgstr "指令行 6"
-
-#~ msgid "Command line 7"
-#~ msgstr "指令行 7"
-
-#~ msgid "Command line 8"
-#~ msgstr "指令行 8"
-
-#~ msgid "Command line 9"
-#~ msgstr "指令行 9"
-
-#~ msgid "Command line to be executed in shell when run_command1 is invoked"
-#~ msgstr "啟用 run_command1 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command10 is invoked"
-#~ msgstr "啟用 run_command10 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command11 is invoked"
-#~ msgstr "啟用 run_command11 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command2 is invoked"
-#~ msgstr "啟用 run_command2 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command3 is invoked"
-#~ msgstr "啟用 run_command3 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command4 is invoked"
-#~ msgstr "啟用 run_command4 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command5 is invoked"
-#~ msgstr "啟用 run_command5 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command6 is invoked"
-#~ msgstr "啟用 run_command6 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command7 is invoked"
-#~ msgstr "啟用 run_command7 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command8 is invoked"
-#~ msgstr "啟用 run_command8 時要在外圍程序中執行的指令行"
-
-#~ msgid "Command line to be executed in shell when run_command9 is invoked"
-#~ msgstr "啟用 run_command9 時要在外圍程序中執行的指令行"
-
 #~ msgid "Corners"
 #~ msgstr "角"
 
-#~ msgid "Focus Window Effect (None, Shiver)"
-#~ msgstr "定焦視窗特效 (無、瞬間)"
-
 #~ msgid "Focus window when mouse moves over them"
 #~ msgstr "在滑鼠移動到上方時啟用定焦視窗"
-
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "摺疊加速 (1.0-20.0)"
-
-#~ msgid "Fold Speed (0.1-50.0)"
-#~ msgstr "摺疊速度 (0.1-50.0)"
-
-#~ msgid "Fold Timestep (0.1-50.0)"
-#~ msgstr "摺疊時間間隔 (0.1-50.0)"
-
-#~ msgid ""
-#~ "Hot corners that should initiate scale mode (TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
 
 #~ msgid "Initiate All Windows"
 #~ msgstr "起始化全部視窗"
@@ -2099,191 +3857,11 @@ msgstr ""
 #~ msgid "Initiate Window Switcher"
 #~ msgstr "起始化視窗切換器"
 
-#~ msgid "Map Window Effect (None, Shiver)"
-#~ msgstr "映射視窗特效 (無、瞬間)"
-
-#~ msgid "Minimize speed (0.1-50.0)"
-#~ msgstr "最小化速度 (0.1-50.0)"
-
 #~ msgid "Modifier to show switcher for all windows"
 #~ msgstr "可使所有視窗顯示切換器的修改鍵"
 
 #~ msgid "Return from scale view"
 #~ msgstr "從比例檢視返回"
-
-#~ msgid "Rotate To Face 10"
-#~ msgstr "往面 10 旋轉"
-
-#~ msgid "Rotate To Face 10 with Window"
-#~ msgstr "隨視窗往面 10 旋轉"
-
-#~ msgid "Rotate To Face 11"
-#~ msgstr "往面 11 旋轉"
-
-#~ msgid "Rotate To Face 11 with Window"
-#~ msgstr "隨視窗往面 11 旋轉"
-
-#~ msgid "Rotate To Face 12"
-#~ msgstr "往面 12 旋轉"
-
-#~ msgid "Rotate To Face 12 with Window"
-#~ msgstr "隨視窗往面 12 旋轉"
-
-#~ msgid "Rotate To Face 2"
-#~ msgstr "往面 2 旋轉"
-
-#~ msgid "Rotate To Face 2 with Window"
-#~ msgstr "隨視窗往面 2 旋轉"
-
-#~ msgid "Rotate To Face 3"
-#~ msgstr "往面 3 旋轉"
-
-#~ msgid "Rotate To Face 3 with Window"
-#~ msgstr "隨視窗往面 3 旋轉"
-
-#~ msgid "Rotate To Face 4"
-#~ msgstr "往面 4 旋轉"
-
-#~ msgid "Rotate To Face 4 with Window"
-#~ msgstr "隨視窗往面 4 旋轉"
-
-#~ msgid "Rotate To Face 5"
-#~ msgstr "往面 5 旋轉"
-
-#~ msgid "Rotate To Face 5 with Window"
-#~ msgstr "隨視窗往面 5 旋轉"
-
-#~ msgid "Rotate To Face 6"
-#~ msgstr "往面 6 旋轉"
-
-#~ msgid "Rotate To Face 6 with Window"
-#~ msgstr "隨視窗往面 6 旋轉"
-
-#~ msgid "Rotate To Face 7"
-#~ msgstr "往面 7 旋轉"
-
-#~ msgid "Rotate To Face 7 with Window"
-#~ msgstr "隨視窗往面 7 旋轉"
-
-#~ msgid "Rotate To Face 8"
-#~ msgstr "往面 8 旋轉"
-
-#~ msgid "Rotate To Face 8 with Window"
-#~ msgstr "隨視窗往面 8 旋轉"
-
-#~ msgid "Rotate To Face 9"
-#~ msgstr "往面 9 旋轉"
-
-#~ msgid "Rotate To Face 9 with Window"
-#~ msgstr "隨視窗往面 9 旋轉"
-
-#~ msgid "Rotate to face 10"
-#~ msgstr "往面 10 旋轉"
-
-#~ msgid "Rotate to face 10 and bring active window along"
-#~ msgstr "往面 10 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 11"
-#~ msgstr "往面 11 旋轉"
-
-#~ msgid "Rotate to face 11 and bring active window along"
-#~ msgstr "往面 11 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 12"
-#~ msgstr "往面 12 旋轉"
-
-#~ msgid "Rotate to face 12 and bring active window along"
-#~ msgstr "往面 12 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 2"
-#~ msgstr "往面 2 旋轉"
-
-#~ msgid "Rotate to face 2 and bring active window along"
-#~ msgstr "往面 2 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 3"
-#~ msgstr "往面 3 旋轉"
-
-#~ msgid "Rotate to face 3 and bring active window along"
-#~ msgstr "往面 3 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 4"
-#~ msgstr "往面 4 旋轉"
-
-#~ msgid "Rotate to face 4 and bring active window along"
-#~ msgstr "往面 4 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 5"
-#~ msgstr "往面 5 旋轉"
-
-#~ msgid "Rotate to face 5 and bring active window along"
-#~ msgstr "往面 5 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 6"
-#~ msgstr "往面 6 旋轉"
-
-#~ msgid "Rotate to face 6 and bring active window along"
-#~ msgstr "往面 6 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 7"
-#~ msgstr "往面 7 旋轉"
-
-#~ msgid "Rotate to face 7 and bring active window along"
-#~ msgstr "往面 7 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 8"
-#~ msgstr "往面 8 旋轉"
-
-#~ msgid "Rotate to face 8 and bring active window along"
-#~ msgstr "往面 8 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Rotate to face 9"
-#~ msgstr "往面 9 旋轉"
-
-#~ msgid "Rotate to face 9 and bring active window along"
-#~ msgstr "往面 9 旋轉並隨同作用中視窗一起旋轉"
-
-#~ msgid "Run command 1"
-#~ msgstr "執行指令 1"
-
-#~ msgid "Run command 10"
-#~ msgstr "執行指令 10"
-
-#~ msgid "Run command 11"
-#~ msgstr "執行指令 11"
-
-#~ msgid "Run command 2"
-#~ msgstr "執行指令 2"
-
-#~ msgid "Run command 3"
-#~ msgstr "執行指令 3"
-
-#~ msgid "Run command 4"
-#~ msgstr "執行指令 4"
-
-#~ msgid "Run command 5"
-#~ msgstr "執行指令 5"
-
-#~ msgid "Run command 6"
-#~ msgstr "執行指令 6"
-
-#~ msgid "Run command 7"
-#~ msgstr "執行指令 7"
-
-#~ msgid "Run command 8"
-#~ msgstr "執行指令 8"
-
-#~ msgid "Run command 9"
-#~ msgstr "執行指令 9"
-
-#~ msgid "Scale speed (0.1-50.0)"
-#~ msgstr "調整比例速度 (0.1-50.0)"
-
-#~ msgid "Scale timestep (0.1-50.0)"
-#~ msgstr "調整比例時間間隔 (0.1-50.0)"
-
-#~ msgid "Shade resistance (0-100)"
-#~ msgstr "遮蔽阻力 (0-100)"
 
 #~ msgid "Show switcher"
 #~ msgstr "顯示切換器"
@@ -2299,9 +3877,6 @@ msgstr ""
 
 #~ msgid "Terminate"
 #~ msgstr "終止"
-
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "材質篩選 (快、好、最佳)"
 
 #~ msgid "Water effect on system beep"
 #~ msgstr "系統發出嗶聲時啟用水波特效"
@@ -2365,9 +3940,3 @@ msgstr ""
 
 #~ msgid "Wobble effect on system beep"
 #~ msgstr "系統發出嗶聲時啟用搖擺特效"
-
-#~ msgid "Zoom Speed (0.1-50.0)"
-#~ msgstr "縮放速度 (0.1-50.0)"
-
-#~ msgid "Zoom Timestep (0.1-50.0)"
-#~ msgstr "縮放時間間隔 (0.1-50.0)"

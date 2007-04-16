@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-01 18:26+0200\n"
+"POT-Creation-Date: 2007-04-15 20:19-0400\n"
 "PO-Revision-Date: 2006-06-21 12:04\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -15,1969 +15,4136 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
-#: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
-msgid "Initiate"
-msgstr "Lancer"
-
-#: plugins/annotate.c:746
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: plugins/annotate.c:760
-msgid "Draw"
-msgstr ""
-
-#: plugins/annotate.c:761
-msgid "Draw using tool"
-msgstr ""
-
-#: plugins/annotate.c:772
+#: ../metadata/compiz.xml.in.h:1 ../plugins/compiz.schemas.in.h:1
 #, fuzzy
-msgid "Initiate erase"
-msgstr "Lancer"
-
-#: plugins/annotate.c:773
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "Lancer le redimensionnement de fenêtre"
-
-#: plugins/annotate.c:787 plugins/annotate.c:788
-#, fuzzy
-msgid "Clear"
-msgstr "E_ffacer"
-
-#: plugins/annotate.c:805
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: plugins/annotate.c:806
-msgid "Fill color for annotations"
-msgstr ""
-
-#: plugins/annotate.c:815
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: plugins/annotate.c:816
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: plugins/annotate.c:825
-msgid "Line width"
-msgstr ""
-
-#: plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr ""
-
-#: plugins/annotate.c:835
-msgid "Stroke width"
-msgstr ""
-
-#: plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: plugins/annotate.c:1009
-#, fuzzy
-msgid "Annotate"
-msgstr "Lancer"
-
-#: plugins/annotate.c:1010
-#, fuzzy
-msgid "Annotate plugin"
-msgstr "Plug-ins actifs"
-
-#: plugins/blur.c:73
-#, fuzzy
-msgid "4xBilinear"
-msgstr "Filtre linéaire"
-
-#: plugins/blur.c:74 plugins/blur.c:237
-#, fuzzy
-msgid "Gaussian"
-msgstr "Russe"
-
-#: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
-#: plugins/decoration.c:1203 plugins/switcher.c:373
-msgid "Mipmap"
-msgstr "Mipmap"
-
-#: plugins/blur.c:728
-#, fuzzy
-msgid "Blur Speed"
-msgstr "Vitesse de pliage"
-
-#: plugins/blur.c:729
-#, fuzzy
-msgid "Window blur speed"
-msgstr "Vitesse de fondu de la fenêtre"
-
-#: plugins/blur.c:738
-#, fuzzy
-msgid "Focus blur windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/blur.c:739
-#, fuzzy
-msgid "Windows that should be affected by focus blur"
-msgstr "Types de fenêtres devant utiliser le fondu"
-
-#: plugins/blur.c:747
-msgid "Focus Blur"
-msgstr ""
-
-#: plugins/blur.c:748
-#, fuzzy
-msgid "Blur windows that doesn't have focus"
-msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
-
-#: plugins/blur.c:754
-#, fuzzy
-msgid "Alpha blur windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/blur.c:755
-#, fuzzy
-msgid "Windows that should use alpha blur by default"
-msgstr "Types de fenêtres devant utiliser le fondu"
-
-#: plugins/blur.c:763
-msgid "Alpha Blur"
-msgstr ""
-
-#: plugins/blur.c:764
-msgid "Blur behind translucent parts of windows"
-msgstr ""
-
-#: plugins/blur.c:772
-#, fuzzy
-msgid "Blur Filter"
-msgstr "Filtre de texture"
-
-#: plugins/blur.c:773
-msgid "Filter method used for blurring"
-msgstr ""
-
-#: plugins/blur.c:783
-msgid "Gaussian Radius"
-msgstr ""
-
-#: plugins/blur.c:784
-#, fuzzy
-msgid "Gaussian radius"
-msgstr "Fédération de Russie"
-
-#: plugins/blur.c:792
-#, fuzzy
-msgid "Gaussian Strength"
-msgstr "Russe"
-
-#: plugins/blur.c:793
-#, fuzzy
-msgid "Gaussian strength"
-msgstr "Russe"
-
-#: plugins/blur.c:802
-#, fuzzy
-msgid "Mipmap LOD"
-msgstr "Mipmap"
-
-#: plugins/blur.c:803
-msgid "Mipmap level-of-detail"
-msgstr ""
-
-#: plugins/blur.c:812
-#, fuzzy
-msgid "Blur Saturation"
-msgstr "Saturation"
-
-#: plugins/blur.c:813
-#, fuzzy
-msgid "Blur saturation"
-msgstr "Saturation"
-
-#: plugins/blur.c:821
-msgid "Blur Occlusion"
-msgstr ""
-
-#: plugins/blur.c:822
-msgid "blur occlusion"
-msgstr ""
-
-#: plugins/blur.c:2560
-msgid "Pulse"
-msgstr ""
-
-#: plugins/blur.c:2561
-#, fuzzy
-msgid "Pulse effect"
-msgstr "Effet de focus"
-
-#: plugins/blur.c:2883
-#, fuzzy
-msgid "Blur Windows"
-msgstr "Placer des fenêtres"
-
-#: plugins/blur.c:2884
-#, fuzzy
-msgid "Blur windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/clone.c:725
-#, fuzzy
-msgid "Initiate clone selection"
-msgstr "Sélection du mode vidéo"
-
-#: plugins/clone.c:854
-#, fuzzy
-msgid "Clone Output"
-msgstr "Produit"
-
-#: plugins/clone.c:855
-msgid "Output clone handler"
-msgstr ""
-
-#: plugins/cube.c:990
-msgid "Cube Color"
-msgstr "Couleur du cube"
-
-#: plugins/cube.c:991
-msgid "Color of top and bottom sides of the cube"
-msgstr "Couleur des côtés supérieur et inférieur du cube"
-
-#: plugins/cube.c:1000
-msgid "Inside Cube"
-msgstr "À l'intérieur du cube"
-
-#: plugins/cube.c:1001
-msgid "Inside cube"
-msgstr "À l'intérieur du cube"
-
-#: plugins/cube.c:1007
-msgid "Scale image"
-msgstr "Mettre l'image à l'échelle"
-
-#: plugins/cube.c:1008
-msgid "Scale images to cover top face of cube"
-msgstr "Mettre les images à l'échelle pour couvrir la face supérieure du cube"
-
-#: plugins/cube.c:1014
-msgid "Image files"
-msgstr "Fichiers image"
-
-#: plugins/cube.c:1015
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "Liste de fichiers PNG et SVG à afficher sur la face supérieure du cube"
-
-#: plugins/cube.c:1028
-msgid "Skydome"
-msgstr "Skydome"
-
-#: plugins/cube.c:1029
-msgid "Render skydome"
-msgstr "Afficher le skydome"
-
-#: plugins/cube.c:1035
-msgid "Skydome Image"
-msgstr "Image du skydome"
-
-#: plugins/cube.c:1036
-msgid "Image to use as texture for the skydome"
-msgstr "Image à utiliser comme texture pour le skydome"
-
-#: plugins/cube.c:1044
-msgid "Animate Skydome"
-msgstr "Animer le skydome"
-
-#: plugins/cube.c:1045
-msgid "Animate skydome when rotating cube"
-msgstr "Animer le skydome lors de la rotation de cube"
-
-#: plugins/cube.c:1051
-msgid "Skydome Gradient Start Color"
-msgstr "Couleur de début du gradient de skydome"
-
-#: plugins/cube.c:1052
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
-"Couleur à utiliser pour l'arrêt de couleur supérieure du gradient de rappel "
-"de skydome"
-
-#: plugins/cube.c:1062
-msgid "Skydome Gradient End Color"
-msgstr "Couleur de fin du gradient de skydome"
-
-#: plugins/cube.c:1063
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr ""
-"Couleur à utiliser pour l'arrêt de couleur inférieure du gradient de rappel "
-"de skydome"
-
-#: plugins/cube.c:1073 plugins/rotate.c:302
-msgid "Acceleration"
-msgstr "Accélération"
-
-#: plugins/cube.c:1074
-msgid "Fold Acceleration"
-msgstr "Accélération de pliage"
-
-#: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
-#: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
-msgid "Speed"
-msgstr "Vitesse"
-
-#: plugins/cube.c:1084
-msgid "Fold Speed"
-msgstr "Vitesse de pliage"
-
-#: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
-#: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
-msgid "Timestep"
-msgstr "Intervalle"
-
-#: plugins/cube.c:1094
-msgid "Fold Timestep"
-msgstr "Intervalle de pliage"
-
-#: plugins/cube.c:1104 plugins/switcher.c:374
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
-"Générer des mipmaps dans la mesure du possible pour une mise à l'échelle de "
-"meilleure qualité"
-
-#: plugins/cube.c:1795
-msgid "Unfold"
-msgstr "Déplier"
-
-#: plugins/cube.c:1796
-msgid "Unfold cube"
-msgstr "Déplier le cube"
-
-#: plugins/cube.c:1813
-msgid "Next Slide"
-msgstr "Diapositive suivante"
-
-#: plugins/cube.c:1814
-msgid "Advance to next slide"
-msgstr "Passer à la diapositive suivante"
-
-#: plugins/cube.c:1831
-msgid "Previous Slide"
-msgstr "Diapositive précédente"
-
-#: plugins/cube.c:1832
-msgid "Go back to previous slide"
-msgstr "Revenir à la diapositive précédente"
-
-#: plugins/cube.c:2037
-msgid "Desktop Cube"
-msgstr "Cube du bureau"
-
-#: plugins/cube.c:2038
-msgid "Place windows on cube"
-msgstr "Placer des fenêtres sur le cube"
-
-#: plugins/decoration.c:1145
-msgid "Shadow Radius"
-msgstr "Rayon de l'ombre"
-
-#: plugins/decoration.c:1146
-msgid "Drop shadow radius"
-msgstr "Rayon de l'ombre des gouttes"
-
-#: plugins/decoration.c:1155
-msgid "Shadow Opacity"
-msgstr "Opacité de l'ombre"
-
-#: plugins/decoration.c:1156
-msgid "Drop shadow opacity"
-msgstr "Opacité de l'ombre des gouttes"
-
-#: plugins/decoration.c:1175
-msgid "Shadow Offset X"
-msgstr "Décalage X de l'ombre"
-
-#: plugins/decoration.c:1176
-msgid "Drop shadow X offset"
-msgstr "Décalage X de l'ombre des gouttes"
-
-#: plugins/decoration.c:1184
-msgid "Shadow Offset Y"
-msgstr "Décalage Y de l'ombre"
-
-#: plugins/decoration.c:1185
-msgid "Drop shadow Y offset"
-msgstr "Décalage Y de l'ombre des gouttes"
-
-#: plugins/decoration.c:1193
-msgid "Command"
-msgstr "Commande"
-
-#: plugins/decoration.c:1194
 msgid ""
-"Decorator command line that is executed if no decorator is already running"
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
 msgstr ""
-"Ligne de commande du décorateur qui est exécutée si aucun décorateur ne "
-"fonctionne"
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command10"
 
-#: plugins/decoration.c:1210
-#, fuzzy
-msgid "Decoration windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/decoration.c:1211
-#, fuzzy
-msgid "Windows that should be decorated"
-msgstr "Types de fenêtres devant utiliser le fondu"
-
-#: plugins/decoration.c:1219
-#, fuzzy
-msgid "Shadow windows"
-msgstr "Aligner les fenêtres"
-
-#: plugins/decoration.c:1220
-#, fuzzy
-msgid "Windows that should be have a shadow"
-msgstr "Types de fenêtres devant utiliser le fondu"
-
-#: plugins/decoration.c:1505
-msgid "Window Decoration"
-msgstr "Décoration de la fenêtre"
-
-#: plugins/decoration.c:1506
-msgid "Window decorations"
-msgstr "Décoration des fenêtres"
-
-#: plugins/fade.c:179
-msgid "Fade Speed"
-msgstr "Vitesse de fondu"
-
-#: plugins/fade.c:180
-msgid "Window fade speed"
-msgstr "Vitesse de fondu de la fenêtre"
-
-#: plugins/fade.c:189
-#, fuzzy
-msgid "Fade windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/fade.c:190
-#, fuzzy
-msgid "Windows that should be fading"
-msgstr "Types de fenêtres devant utiliser le fondu"
-
-#: plugins/fade.c:198
-msgid "Visual Bell"
-msgstr "Cloche virtuelle"
-
-#: plugins/fade.c:199
-msgid "Fade effect on system beep"
-msgstr "Effet de fondu au signal sonore du système"
-
-#: plugins/fade.c:205
-msgid "Fullscreen Visual Bell"
-msgstr "Cloche visuelle plein écran"
-
-#: plugins/fade.c:206
-msgid "Fullscreen fade effect on system beep"
-msgstr "Effet de fondu plein écran au signal sonore du système"
-
-#: plugins/fade.c:857
-msgid "Fading Windows"
-msgstr "Fondu des fenêtres"
-
-#: plugins/fade.c:858
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr ""
-"Apparition en fondu des fenêtres en mode mapped et disparition en fondu des "
-"fenêtres en mode unmapped"
-
-#: plugins/fuse.c:1486
-#, fuzzy
-msgid "Mount Point"
-msgstr "Point"
-
-#: plugins/fuse.c:1487
-#, fuzzy
-msgid "Mount point"
-msgstr "Ajouter un point"
-
-#: plugins/fuse.c:1586
-msgid "Userspace File System"
-msgstr ""
-
-#: plugins/fuse.c:1587
-msgid "Userspace file system"
-msgstr ""
-
-#. Decimal point character
-#: plugins/gconf-dump.c:81
-msgid "."
-msgstr "."
-
-#: plugins/gconf-dump.c:616
-msgid "Plugins that this must load before"
-msgstr "Plug-ins à charger avant"
-
-#: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
-msgid "Do not modify"
-msgstr "Ne pas modifier"
-
-#: plugins/gconf-dump.c:626
-msgid "Plugins that this requires"
-msgstr "Plug-ins requis"
-
-#: plugins/minimize.c:193
-msgid "Minimize speed"
-msgstr "Minimiser la vitesse"
-
-#: plugins/minimize.c:203
-msgid "Minimize timestep"
-msgstr "Minimiser l'intervalle"
-
-#: plugins/minimize.c:212
-#, fuzzy
-msgid "Minimize Windows"
-msgstr "Minimiser la fenêtre"
-
-#: plugins/minimize.c:213
-#, fuzzy
-msgid "Windows that should be transformed when minimized"
-msgstr "Types de fenêtres à transformer lorsqu'elles sont réduites"
-
-#: plugins/minimize.c:221
-msgid "Shade Resistance"
-msgstr "Ombrer la résistance"
-
-#: plugins/minimize.c:222
-msgid "Shade resistance"
-msgstr "Ombrer la résistance"
-
-#: plugins/minimize.c:1071
-msgid "Minimize Effect"
-msgstr "Minimiser l'effet"
-
-#: plugins/minimize.c:1072
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "Transformer les fenêtres lorsqu'elles sont réduites ou agrandies"
-
-#: plugins/move.c:677
-msgid "Initiate Window Move"
-msgstr "Lancer le déplacement de fenêtre"
-
-#: plugins/move.c:678
-msgid "Start moving window"
-msgstr "Démarrer le déplacement de la fenêtre"
-
-#: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
-msgid "Opacity"
-msgstr "Opacité"
-
-#: plugins/move.c:697
-msgid "Opacity level of moving windows"
-msgstr "Niveau d'opacité pour déplacer des fenêtres"
-
-#: plugins/move.c:705
-msgid "Constrain Y"
-msgstr "Contraindre Y"
-
-#: plugins/move.c:706
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Contraindre la coordonnée Y à être dans la zone de l'espace de travail"
-
-#: plugins/move.c:712
-msgid "Snapoff maximized windows"
-msgstr "Désactiver l'alignement des fenêtres agrandies"
-
-#: plugins/move.c:713
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
-"Désactiver l'alignement et la réduction automatique des fenêtres lorsque "
-"vous les faites glisser"
-
-#: plugins/move.c:881
-msgid "Move Window"
-msgstr "Déplacer la fenêtre"
-
-#: plugins/move.c:882
-msgid "Move window"
-msgstr "Déplacer la fenêtre"
-
-#: plugins/place.c:42
-msgid "Cascade"
-msgstr ""
-
-#: plugins/place.c:43
-msgid "Centered"
-msgstr ""
-
-#: plugins/place.c:44
-msgid "Smart"
-msgstr ""
-
-#: plugins/place.c:45
-#, fuzzy
-msgid "Maximize"
-msgstr "Minimisé"
-
-#: plugins/place.c:46
-msgid "Random"
-msgstr ""
-
-#: plugins/place.c:244
-msgid "Workarounds"
-msgstr "Solutions"
-
-#: plugins/place.c:245
-msgid "Window placement workarounds"
-msgstr "Solution de placement de fenêtre"
-
-#: plugins/place.c:251
-msgid "Placement Mode"
-msgstr ""
-
-#: plugins/place.c:252
-msgid "Algorithm to use for window placement"
-msgstr ""
-
-#: plugins/place.c:260
-#, fuzzy
-msgid "Positioned windows"
-msgstr "Afficher des fenêtres réduites"
-
-#: plugins/place.c:261
-#, fuzzy
-msgid "Windows that should be positioned by default"
-msgstr "Types de fenêtres devant utiliser le fondu"
-
-#: plugins/place.c:271
-msgid "X Positions"
-msgstr ""
-
-#: plugins/place.c:272
-msgid "X position values"
-msgstr ""
-
-#: plugins/place.c:282
-msgid "Y Positions"
-msgstr ""
-
-#: plugins/place.c:283
-msgid "Y position values"
-msgstr ""
-
-#: plugins/place.c:293
-msgid "Viewport positioned windows"
-msgstr ""
-
-#: plugins/place.c:294
-#, fuzzy
-msgid "Windows that should positioned in specific viewports by default"
-msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
-
-#: plugins/place.c:305
-msgid "X Viewport Positions"
-msgstr ""
-
-#: plugins/place.c:306
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Taille virtuelle horizontale"
-
-#: plugins/place.c:316
-msgid "Y Viewport Positions"
-msgstr ""
-
-#: plugins/place.c:317
-msgid "Vertical viewport positions"
-msgstr ""
-
-#: plugins/place.c:1604
-msgid "Place Windows"
-msgstr "Placer des fenêtres"
-
-#: plugins/place.c:1605
-msgid "Place windows at appropriate positions when mapped"
-msgstr "Placer des fenêtres aux positions correctes lorsqu'elles sont mappées"
-
-#: plugins/plane.c:624
-#, fuzzy
-msgid "Plane Left"
-msgstr "Rotation à gauche"
-
-#: plugins/plane.c:625
-#, fuzzy
-msgid "Plane left"
-msgstr "Rotation à gauche"
-
-#: plugins/plane.c:643
-#, fuzzy
-msgid "Plane Right"
-msgstr "Rotation à droite"
-
-#: plugins/plane.c:644
-#, fuzzy
-msgid "Plane right"
-msgstr "Rotation à droite"
-
-#: plugins/plane.c:662
-#, fuzzy
-msgid "Plane Down"
-msgstr "Page bas"
-
-#: plugins/plane.c:663
-#, fuzzy
-msgid "Plane down"
-msgstr "Placer des fenêtres"
-
-#: plugins/plane.c:681
-#, fuzzy
-msgid "Plane Up"
-msgstr "Page haut"
-
-#: plugins/plane.c:682
-msgid "Plane up"
-msgstr ""
-
-#: plugins/plane.c:698
-#, fuzzy, c-format
-msgid "Plane To Face %d"
-msgstr "Rotation vers la face %d"
-
-#: plugins/plane.c:699
-#, fuzzy, c-format
-msgid "Plane to face %d"
-msgstr "Rotation vers la face %d"
-
-#: plugins/plane.c:700
-#, fuzzy, c-format
-msgid "Plane To Face %d with Window"
-msgstr "Rotation vers la face %d avec la fenêtre"
-
-#: plugins/plane.c:701
-#, fuzzy, c-format
-msgid "Plane to face %d and bring active window along"
-msgstr "Rotation vers la face %d avec la fenêtre active"
-
-#: plugins/plane.c:868
-#, fuzzy
-msgid "Desktop Plane"
-msgstr "Cube du bureau"
-
-#: plugins/plane.c:869
-#, fuzzy
-msgid "Place windows on a plane"
-msgstr "Placer des fenêtres sur le cube"
-
-#: plugins/regex.c:463
-msgid "Regex Matching"
-msgstr ""
-
-#: plugins/regex.c:464
-#, fuzzy
-msgid "Regex window matching"
-msgstr "Basculer l'alignement des fenêtres"
-
-#: plugins/resize.c:718
-msgid "Initiate Window Resize"
-msgstr "Lancer le redimensionnement de fenêtre"
-
-#: plugins/resize.c:719
-msgid "Start resizing window"
-msgstr "Commencer à redimensionner la fenêtre"
-
-#: plugins/resize.c:862
-msgid "Resize Window"
-msgstr "Redimensionner la fenêtre"
-
-#: plugins/resize.c:863
-msgid "Resize window"
-msgstr "Redimensionner la fenêtre"
-
-#: plugins/rotate.c:285 plugins/zoom.c:222
-msgid "Pointer Invert Y"
-msgstr "Inversion Y du pointeur"
-
-#: plugins/rotate.c:286 plugins/zoom.c:223
-msgid "Invert Y axis for pointer movement"
-msgstr "Insérer l'axe Y pour le mouvement du pointeur"
-
-#: plugins/rotate.c:292 plugins/zoom.c:229
-msgid "Pointer Sensitivity"
-msgstr "Sensibilité du pointeur"
-
-#: plugins/rotate.c:293 plugins/zoom.c:230
-msgid "Sensitivity of pointer movement"
-msgstr "Sensibilité du mouvement du pointeur"
-
-#: plugins/rotate.c:303
-msgid "Rotation Acceleration"
-msgstr "Accélération de la rotation"
-
-#: plugins/rotate.c:312
-msgid "Snap To Top Face"
-msgstr "Aligner sur la face supérieure"
-
-#: plugins/rotate.c:313
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Aligner la rotation du cube sur la face supérieure"
-
-#: plugins/rotate.c:320
-msgid "Rotation Speed"
-msgstr "Vitesse de la rotation"
-
-#: plugins/rotate.c:330
-msgid "Rotation Timestep"
-msgstr "Intervalle de la rotation"
-
-#: plugins/rotate.c:1764
-msgid "Start Rotation"
-msgstr "Démarrer la rotation"
-
-#: plugins/rotate.c:1778
-msgid "Rotate Left"
-msgstr "Rotation à gauche"
-
-#: plugins/rotate.c:1779
-msgid "Rotate left"
-msgstr "Rotation à gauche"
-
-#: plugins/rotate.c:1797
-msgid "Rotate Right"
-msgstr "Rotation à droite"
-
-#: plugins/rotate.c:1798
-msgid "Rotate right"
-msgstr "Rotation à droite"
-
-#: plugins/rotate.c:1816
-msgid "Rotate Left with Window"
-msgstr "Rotation à gauche avec la fenêtre"
-
-#: plugins/rotate.c:1817
-msgid "Rotate left and bring active window along"
-msgstr "Rotation à gauche avec la fenêtre active"
-
-#: plugins/rotate.c:1836
-msgid "Rotate Right with Window"
-msgstr "Rotation à droite avec la fenêtre"
-
-#: plugins/rotate.c:1837
-msgid "Rotate right and bring active window along"
-msgstr "Rotation à droite avec la fenêtre active"
-
-#: plugins/rotate.c:1854
-#, c-format
-msgid "Rotate To Face %d"
-msgstr "Rotation vers la face %d"
-
-#: plugins/rotate.c:1855
-#, c-format
-msgid "Rotate to face %d"
-msgstr "Rotation vers la face %d"
-
-#: plugins/rotate.c:1856
-#, c-format
-msgid "Rotate To Face %d with Window"
-msgstr "Rotation vers la face %d avec la fenêtre"
-
-#: plugins/rotate.c:1857
-#, c-format
-msgid "Rotate to face %d and bring active window along"
-msgstr "Rotation vers la face %d avec la fenêtre active"
-
-#: plugins/rotate.c:1906
-msgid "Rotate To"
-msgstr "Rotation vers"
-
-#: plugins/rotate.c:1907
-msgid "Rotate to viewport"
-msgstr "Rotation vers un bureau"
-
-#: plugins/rotate.c:1918
-msgid "Rotate Window"
-msgstr "Rotation de la fenêtre"
-
-#: plugins/rotate.c:1919
-msgid "Rotate with window"
-msgstr "Rotation avec la fenêtre"
-
-#: plugins/rotate.c:1930
-msgid "Rotate Flip Left"
-msgstr "Rotation sur le côté gauche"
-
-#: plugins/rotate.c:1931
-msgid "Flip to left viewport and warp pointer"
-msgstr "Rotation sur le coté gauche avec le pointeur"
-
-#: plugins/rotate.c:1946
-msgid "Rotate Flip Right"
-msgstr "Rotation sur le côté droit"
-
-#: plugins/rotate.c:1947
-msgid "Flip to right viewport and warp pointer"
-msgstr "Rotation sur le coté droit avec le pointeur"
-
-#: plugins/rotate.c:1962
-msgid "Edge Flip Pointer"
-msgstr "Rotation de côté - Pointeur"
-
-#: plugins/rotate.c:1963
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-"Rotation vers la fenêtre suivante - Déplacement du pointeur vers le côté de "
-"l'écran"
-
-#: plugins/rotate.c:1970
-msgid "Edge Flip Move"
-msgstr "Rotation de côté - Déplacement"
-
-#: plugins/rotate.c:1971
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
-"Rotation vers la fenêtre suivante - Déplacement de la fenêtre vers le côté "
-"de l'écran"
-
-#: plugins/rotate.c:1978
-msgid "Edge Flip DnD"
-msgstr "Rotation de côté - Glissement-déplacement"
-
-#: plugins/rotate.c:1979
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
-"Rotation vers la fenêtre suivante - Glissement d'un objet vers le côté de "
-"l'écran"
-
-#: plugins/rotate.c:1986
-msgid "Flip Time"
-msgstr "Temps de rotation"
-
-#: plugins/rotate.c:1987
-msgid "Timeout before flipping viewport"
-msgstr "Timeout avant la rotation du bureau"
-
-#: plugins/rotate.c:2155
-msgid "Rotate Cube"
-msgstr "Rotation du cube"
-
-#: plugins/rotate.c:2156
-msgid "Rotate desktop cube"
-msgstr "Rotation du cube de bureau"
-
-#: plugins/scale.c:80 plugins/wobbly.c:131
-msgid "None"
-msgstr "Aucun"
-
-#: plugins/scale.c:81
-msgid "Emblem"
-msgstr "Emblème"
-
-#: plugins/scale.c:82
-msgid "Big"
-msgstr "Grand"
-
-#: plugins/scale.c:325
-msgid "Spacing"
-msgstr "Espacement"
-
-#: plugins/scale.c:326
-msgid "Space between windows"
-msgstr "Espace entre les fenêtres"
-
-#: plugins/scale.c:335
-msgid "Scale speed"
-msgstr "Vitesse d'échelle"
-
-#: plugins/scale.c:345
-msgid "Scale timestep"
-msgstr "Intervalle d'échelle"
-
-#: plugins/scale.c:354
-#, fuzzy
-msgid "Scale Windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/scale.c:355
-#, fuzzy
-msgid "Windows that should be scaled in scale mode"
-msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
-
-#: plugins/scale.c:363
-msgid "Darken Background"
-msgstr "Assombrir l'arrière-plan"
-
-#: plugins/scale.c:364
-msgid "Darken background when scaling windows"
-msgstr "Assombrir l'arrière-plan lors de la mise à l'échelle des fenêtres"
-
-#: plugins/scale.c:371 plugins/switcher.c:400
-msgid "Amount of opacity in percent"
-msgstr "Quantité d'opacité en pourcentage"
-
-#: plugins/scale.c:379
-msgid "Overlay Icon"
-msgstr "Superposer l'icône"
-
-#: plugins/scale.c:380
-msgid "Overlay an icon on windows once they are scaled"
-msgstr ""
-"Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
-
-#: plugins/scale.c:388
-msgid "Hover Time"
-msgstr "Temps de survol"
-
-#: plugins/scale.c:389
+#: ../metadata/compiz.xml.in.h:2 ../plugins/compiz.schemas.in.h:3
 msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
 msgstr ""
-"Temps (en ms) avant que le mode échelle soit terminé lors du survol au-"
-"dessus d'une fenêtre"
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command1"
 
-#: plugins/scale.c:1931
-msgid "Initiate Window Picker"
-msgstr "Lancer le sélecteur de fenêtre"
-
-#: plugins/scale.c:1932
-msgid "Layout and start transforming windows"
-msgstr "Disposer et commencer à transformer les fenêtres"
-
-#: plugins/scale.c:1950
-msgid "Initiate Window Picker For All Windows"
-msgstr "Lancer le sélecteur de fenêtre pour toutes les fenêtres"
-
-#: plugins/scale.c:1951
-msgid "Layout and start transforming all windows"
-msgstr "Disposer et commencer à transformer les fenêtres"
-
-#: plugins/scale.c:1965
-msgid "Initiate Window Picker For Window Group"
-msgstr "Lancer le sélecteur de fenêtre pour un groupe de fenêtres"
-
-#: plugins/scale.c:1966
-msgid "Layout and start transforming window group"
-msgstr "Disposer et commencer à transformer un groupe de fenêtres"
-
-#: plugins/scale.c:1981
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr ""
-"Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
-
-#: plugins/scale.c:1983
-msgid "Layout and start transforming windows on current output"
-msgstr ""
-"Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
-
-#: plugins/scale.c:2200
-msgid "Scale"
-msgstr "Échelle"
-
-#: plugins/scale.c:2201
-msgid "Scale windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/screenshot.c:385
-#, fuzzy
-msgid "Initiate rectangle screenshot"
-msgstr "Faire une capture d'écran"
-
-#: plugins/screenshot.c:398
-#, fuzzy
-msgid "Directory"
-msgstr "Répertoire\n"
-
-#: plugins/screenshot.c:399
-#, fuzzy
-msgid "Put screenshot images in this directory"
-msgstr "Traitement récursif dans le répertoire"
-
-#: plugins/screenshot.c:407
-#, fuzzy
-msgid "Launch Application"
-msgstr "Lancer une Application"
-
-#: plugins/screenshot.c:408
-#, fuzzy
-msgid "Automatically open screenshot in this application"
-msgstr "Démarrer automatiquement l'applet lors du login"
-
-#: plugins/screenshot.c:558
-#, fuzzy
-msgid "Screenshot"
-msgstr "Écran"
-
-#: plugins/screenshot.c:559
-#, fuzzy
-msgid "Screenshot plugin"
-msgstr "Ligne de commande de capture d'écran"
-
-#: plugins/switcher.c:345
-msgid "Switcher speed"
-msgstr "Vitesse du commutateur"
-
-#: plugins/switcher.c:355
-msgid "Switcher timestep"
-msgstr "Intervalle du commutateur"
-
-#: plugins/switcher.c:364
-#, fuzzy
-msgid "Switcher windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
-#: plugins/switcher.c:365
-#, fuzzy
-msgid "Windows that should be shown in switcher"
-msgstr "Types de fenêtres à afficher dans le commutateur"
-
-#: plugins/switcher.c:381
-msgid "Saturation"
-msgstr "Saturation"
-
-#: plugins/switcher.c:382
-msgid "Amount of saturation in percent"
-msgstr "Quantité de saturation en pourcentage"
-
-#: plugins/switcher.c:390
-msgid "Brightness"
-msgstr "Luminosité"
-
-#: plugins/switcher.c:391
-msgid "Amount of brightness in percent"
-msgstr "Quantité de luminosité en pourcentage"
-
-#: plugins/switcher.c:408
-msgid "Bring To Front"
-msgstr "Placer au-dessus"
-
-#: plugins/switcher.c:409
-msgid "Bring selected window to front"
-msgstr "Placer la fenêtre sélectionnée au-dessus"
-
-#: plugins/switcher.c:415
-msgid "Zoom"
-msgstr "Zoom"
-
-#: plugins/switcher.c:416
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr ""
-"Le bureau à distance doit être en zoom arrière lors du passage d'une fenêtre "
-"à une autre"
-
-#: plugins/switcher.c:426
-msgid "Icon"
-msgstr "Icône"
-
-#: plugins/switcher.c:427
-msgid "Show icon next to thumbnail"
-msgstr "Afficher l'icône à côté de la miniature"
-
-#: plugins/switcher.c:433
-msgid "Minimized"
-msgstr "Minimisé"
-
-#: plugins/switcher.c:434
-msgid "Show minimized windows"
-msgstr "Afficher des fenêtres réduites"
-
-#: plugins/switcher.c:440
-#, fuzzy
-msgid "Auto Rotate"
-msgstr "Remontée automatique"
-
-#: plugins/switcher.c:441
-msgid "Rotate to the selected window while switching"
-msgstr ""
-
-#: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
-msgid "Next window"
-msgstr "Fenêtre suivante"
-
-#: plugins/switcher.c:2028
-msgid "Popup switcher if not visible and select next window"
-msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre suivante"
-
-#: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
-msgid "Prev window"
-msgstr "Fenêtre précédente"
-
-#: plugins/switcher.c:2046
-msgid "Popup switcher if not visible and select previous window"
-msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre précédente"
-
-#: plugins/switcher.c:2064
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre suivante parmi toutes les fenêtres"
-
-#: plugins/switcher.c:2083
+#: ../metadata/compiz.xml.in.h:3 ../plugins/compiz.schemas.in.h:5
 msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
 msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre précédente parmi toutes les fenêtres"
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command10"
 
-#: plugins/switcher.c:2102
-msgid "Select next window"
-msgstr "Sélectionner la fenêtre suivante"
-
-#: plugins/switcher.c:2115
-msgid "Select previous window"
-msgstr "Sélectionner la fenêtre précédente"
-
-#: plugins/switcher.c:2289 plugins/switcher.c:2290
-msgid "Application Switcher"
-msgstr "Commutateur d'application"
-
-#: plugins/video.c:245
-msgid "YV12 colorspace"
+#: ../metadata/compiz.xml.in.h:4 ../plugins/compiz.schemas.in.h:7
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
 msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command11"
 
-#: plugins/video.c:246
-msgid "Provide YV12 colorspace support"
+#: ../metadata/compiz.xml.in.h:5 ../plugins/compiz.schemas.in.h:9
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
 msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command2"
 
-#: plugins/video.c:1240
-msgid "Video Playback"
+#: ../metadata/compiz.xml.in.h:6 ../plugins/compiz.schemas.in.h:11
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
 msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command3"
 
-#: plugins/video.c:1241
-msgid "Video playback"
+#: ../metadata/compiz.xml.in.h:7 ../plugins/compiz.schemas.in.h:13
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
 msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command4"
 
-#: plugins/water.c:1607
-msgid "Enable pointer water effects"
-msgstr "Activer les effets d'eau du pointeur"
-
-#: plugins/water.c:1620
-msgid "Toggle rain"
-msgstr "Basculer la pluie"
-
-#: plugins/water.c:1621
-msgid "Toggle rain effect"
-msgstr "Basculer l'effet de pluie"
-
-#: plugins/water.c:1636
-msgid "Toggle wiper"
-msgstr "Activer/désactiver l'essuie-glace"
-
-#: plugins/water.c:1637
-msgid "Toggle wiper effect"
-msgstr "Activer/désactiver l'effet d'essuie-glace"
-
-#: plugins/water.c:1652
-msgid "Offset Scale"
-msgstr "Échelle de décalage"
-
-#: plugins/water.c:1653
-msgid "Water offset scale"
-msgstr "Échelle de décalage d'eau"
-
-#: plugins/water.c:1662
-msgid "Rain Delay"
-msgstr "Délai de pluie"
-
-#: plugins/water.c:1663
-msgid "Delay (in ms) between each rain-drop"
-msgstr "Délai (en ms) en chaque goutte de pluie"
-
-#: plugins/water.c:1671
-msgid "Title wave"
-msgstr "Vague sur le titre"
-
-#: plugins/water.c:1672
-msgid "Wave effect from window title"
-msgstr "Effet de vague sur le titre de la fenêtre"
-
-#: plugins/water.c:1683
-msgid "Point"
-msgstr "Point"
-
-#: plugins/water.c:1684
-msgid "Add point"
-msgstr "Ajouter un point"
-
-#: plugins/water.c:1695
-msgid "Line"
-msgstr "Ligne"
-
-#: plugins/water.c:1696
-msgid "Add line"
-msgstr "Ajouter une ligne"
-
-#: plugins/water.c:1859
-msgid "Water Effect"
-msgstr "Effet d'eau"
-
-#: plugins/water.c:1860
-msgid "Adds water effects to different desktop actions"
-msgstr "Ajoute des effets d'eau à différentes opérations du bureau"
-
-# 'driver' as in '(hardware) driver update'
-#: plugins/wobbly.c:132 plugins/wobbly.c:2884
-msgid "Shiver"
-msgstr "Déformation"
-
-#: plugins/wobbly.c:345
-msgid "Friction"
-msgstr "Friction"
-
-#: plugins/wobbly.c:346
-msgid "Spring Friction"
-msgstr "Friction de ressort"
-
-#: plugins/wobbly.c:355
-msgid "Spring K"
-msgstr "Ressort K"
-
-#: plugins/wobbly.c:356
-msgid "Spring Konstant"
-msgstr "Constante de ressort"
-
-#: plugins/wobbly.c:365
-msgid "Grid Resolution"
-msgstr "Résolution de la grille"
-
-#: plugins/wobbly.c:366
-msgid "Vertex Grid Resolution"
-msgstr "Résolution de la grille de sommet"
-
-#: plugins/wobbly.c:374
-msgid "Minimum Grid Size"
-msgstr "Taille de grille minimale"
-
-#: plugins/wobbly.c:375
-msgid "Minimum Vertex Grid Size"
-msgstr "Taille de grille de sommet minimale"
-
-#: plugins/wobbly.c:383
-msgid "Map Effect"
-msgstr "Mapper l'effet"
-
-#: plugins/wobbly.c:384
-msgid "Map Window Effect"
-msgstr "Mapper l'effet de la fenêtre"
-
-#: plugins/wobbly.c:392
-msgid "Focus Effect"
-msgstr "Effet de focus"
-
-#: plugins/wobbly.c:393
-msgid "Focus Window Effect"
-msgstr "Effet de focus de la fenêtre"
-
-#: plugins/wobbly.c:401
-#, fuzzy
-msgid "Map Windows"
-msgstr "Mapper les types de fenêtres"
-
-#: plugins/wobbly.c:402
-#, fuzzy
-msgid "Windows that should wobble when mapped"
-msgstr "Types de fenêtres à déformer lorsqu'elles sont mappées"
-
-#: plugins/wobbly.c:410
-#, fuzzy
-msgid "Focus Windows"
-msgstr "Focus des types de fenêtres"
-
-#: plugins/wobbly.c:411
-#, fuzzy
-msgid "Windows that should wobble when focused"
-msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
-
-#: plugins/wobbly.c:419
-#, fuzzy
-msgid "Move Windows"
-msgstr "Déplacer la fenêtre"
-
-#: plugins/wobbly.c:420
-#, fuzzy
-msgid "Windows that should wobble when moved"
-msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
-
-#: plugins/wobbly.c:428
-#, fuzzy
-msgid "Grab Windows"
-msgstr "Saisir les types de fenêtres"
-
-#: plugins/wobbly.c:429
-#, fuzzy
-msgid "Windows that should wobble when grabbed"
-msgstr "Types de fenêtres à déformer lorsqu'elles sont saisies"
-
-#: plugins/wobbly.c:437
-msgid "Maximize Effect"
-msgstr "Optimiser l'effet"
-
-#: plugins/wobbly.c:438
-msgid "Wobble effect when maximizing and unmaximizing windows"
+#: ../metadata/compiz.xml.in.h:8 ../plugins/compiz.schemas.in.h:15
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
 msgstr ""
-"Effet de déformation lors de la réduction et de l'agrandissement des fenêtres"
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command5"
 
-#: plugins/wobbly.c:2863
-msgid "Snap windows"
-msgstr "Aligner les fenêtres"
+#: ../metadata/compiz.xml.in.h:9 ../plugins/compiz.schemas.in.h:17
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command6"
 
-#: plugins/wobbly.c:2864
-msgid "Toggle window snapping"
-msgstr "Basculer l'alignement des fenêtres"
+#: ../metadata/compiz.xml.in.h:10 ../plugins/compiz.schemas.in.h:19
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command7"
 
-#: plugins/wobbly.c:2877
-msgid "Snap Inverted"
-msgstr "Alignement inversé"
+#: ../metadata/compiz.xml.in.h:11 ../plugins/compiz.schemas.in.h:21
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command8"
 
-#: plugins/wobbly.c:2878
-msgid "Inverted window snapping"
-msgstr "Alignement inversé de la fenêtre"
+#: ../metadata/compiz.xml.in.h:12 ../plugins/compiz.schemas.in.h:23
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command9"
 
-#: plugins/wobbly.c:2885
-msgid "Make window shiver"
-msgstr "Déformer la fenêtre"
-
-#: plugins/wobbly.c:3098
-msgid "Wobbly Windows"
-msgstr "Fenêtres déformées"
-
-#: plugins/wobbly.c:3099
-msgid "Use spring model for wobbly window effect"
-msgstr "Utiliser le modèle de ressort pour l'effet de tremblement de fenêtre"
-
-#: plugins/zoom.c:240
-msgid "Zoom Speed"
-msgstr "Vitesse du zoom"
-
-#: plugins/zoom.c:250
-msgid "Zoom Timestep"
-msgstr "Intervalle du zoom"
-
-#: plugins/zoom.c:259 plugins/zoom.c:260
-msgid "Zoom factor"
-msgstr "Facteur du zoom"
-
-#: plugins/zoom.c:269
-msgid "Filter Linear"
-msgstr "Filtre linéaire"
-
-#: plugins/zoom.c:270
-msgid "USe linear filter when zoomed in"
-msgstr "Utiliser le filtre linéaire pour le zoom avant"
-
-#: plugins/zoom.c:753 plugins/zoom.c:767 plugins/zoom.c:768
-msgid "Zoom In"
-msgstr "Zoom avant"
-
-#: plugins/zoom.c:782 plugins/zoom.c:783
-msgid "Zoom Out"
-msgstr "Zoom arrière"
-
-#: plugins/zoom.c:934
-msgid "Zoom Desktop"
-msgstr "Zoom - Bureau"
-
-#: plugins/zoom.c:935
-msgid "Zoom and pan desktop cube"
-msgstr "Zoom et panoramique du cube du bureau"
-
-#: src/display.c:171
-msgid "Fast"
-msgstr "Rapide"
-
-#: src/display.c:171
-msgid "Good"
-msgstr "Bon"
-
-#: src/display.c:171
-msgid "Best"
-msgstr "Meilleur"
-
-#: src/display.c:753
+#: ../metadata/compiz.xml.in.h:13 ../plugins/compiz.schemas.in.h:26
 msgid "Active Plugins"
 msgstr "Plug-ins actifs"
 
-#: src/display.c:754
-msgid "List of currently active plugins"
-msgstr "Liste des plug-ins actuellement actifs"
-
-#: src/display.c:768
-msgid "Texture Filter"
-msgstr "Filtre de texture"
-
-#: src/display.c:769
-msgid "Texture filtering"
-msgstr "Filtrage de texture"
-
-#: src/display.c:777
-msgid "Click To Focus"
-msgstr "Cliquer pour obtenir le focus"
-
-#: src/display.c:778
-msgid "Click on window moves input focus to it"
-msgstr "Si vous cliquez sur la fenêtre, vous déplacez le focus dessus"
-
-#: src/display.c:784
-msgid "Auto-Raise"
-msgstr "Remontée automatique"
-
-#: src/display.c:785
-msgid "Raise selected windows after interval"
-msgstr "Remonter les fenêtres sélectionnées après l'intervalle"
-
-#: src/display.c:791
-msgid "Auto-Raise Delay"
-msgstr "Délai de remontée automatique"
-
-#: src/display.c:792
-msgid "Interval before raising selected windows"
-msgstr "Intervalle avant de remonter les fenêtres sélectionnées"
-
-#: src/display.c:800
-msgid "Close Window"
-msgstr "Fermer la fenêtre"
-
-#: src/display.c:801
-msgid "Close active window"
-msgstr "Fermer la fenêtre active"
-
-#: src/display.c:817
-msgid "Show Main Menu"
-msgstr "Afficher le menu principal"
-
-#: src/display.c:818
-msgid "Show the main menu"
-msgstr "Afficher le menu principal"
-
-#: src/display.c:834
-msgid "Run Dialog"
-msgstr "Boîte de dialogue d'exécution"
-
-#: src/display.c:835
-msgid "Show Run Application dialog"
-msgstr "Afficher la boîte de dialogue d'exécution de l'application"
-
-#: src/display.c:851
-msgid "Unmaximize Window"
-msgstr "Agrandir la fenêtre"
-
-#: src/display.c:852
-msgid "Unmaximize active window"
-msgstr "Agrandir la fenêtre active"
-
-#: src/display.c:868
-msgid "Minimize Window"
-msgstr "Minimiser la fenêtre"
-
-#: src/display.c:869
-msgid "Minimize active window"
-msgstr "Minimiser la fenêtre active"
-
-#: src/display.c:885
-msgid "Maximize Window"
-msgstr "Optimiser la fenêtre"
-
-#: src/display.c:886
-msgid "Maximize active window"
-msgstr "Optimiser la fenêtre active"
-
-#: src/display.c:902
-msgid "Maximize Window Horizontally"
-msgstr "Optimiser la fenêtre horizontalement"
-
-#: src/display.c:903
-msgid "Maximize active window horizontally"
-msgstr "Optimiser la fenêtre active horizontalement"
-
-#: src/display.c:915
-msgid "Maximize Window Vertically"
-msgstr "Optimiser la fenêtre verticalement"
-
-#: src/display.c:916
-msgid "Maximize active window vertically"
-msgstr "Optimiser la fenêtre active verticalement"
-
-#: src/display.c:928 src/display.c:929
-msgid "Hide all windows and focus desktop"
-msgstr "Masquer toutes les fenêtres et focus du bureau"
-
-#: src/display.c:943
-#, c-format
-msgid "Command line %d"
-msgstr "Ligne de commande %d"
-
-#: src/display.c:944
-#, c-format
-msgid "Command line to be executed in shell when run_command%d is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command%d est appelé"
-
-#: src/display.c:946
-#, c-format
-msgid "Run command %d"
-msgstr "Exécuter une commande %d"
-
-#: src/display.c:947
-#, c-format
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command%d"
-msgstr ""
-"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
-"par la commande %d"
-
-#: src/display.c:991
-msgid "Slow Animations"
-msgstr "Ralentir les animations"
-
-#: src/display.c:992
-msgid "Toggle use of slow animations"
-msgstr "Basculer l'utilisation d'animations lentes"
-
-#: src/display.c:1008
-msgid "Raise Window"
-msgstr "Remonter la fenêtre"
-
-#: src/display.c:1009
-msgid "Raise window above other windows"
-msgstr "Remonter la fenêtre au-dessus des autres"
-
-#: src/display.c:1023
-msgid "Lower Window"
-msgstr "Abaisser la fenêtre"
-
-#: src/display.c:1024
-msgid "Lower window beneath other windows"
-msgstr "Abaisser la fenêtre sous d'autres fenêtres"
-
-#: src/display.c:1038
-msgid "Increase Opacity"
-msgstr "Augmenter l'opacité"
-
-#: src/display.c:1039
-msgid "Increase window opacity"
-msgstr "Augmenter l'opacité de la fenêtre"
-
-#: src/display.c:1053
-msgid "Decrease Opacity"
-msgstr "Réduire l'opacité"
-
-#: src/display.c:1054
-msgid "Decrease window opacity"
-msgstr "Réduire l'opacité de la fenêtre"
-
-#: src/display.c:1068 src/display.c:1069
-msgid "Take a screenshot"
-msgstr "Faire une capture d'écran"
-
-#: src/display.c:1085 src/display.c:1086
-msgid "Screenshot command line"
-msgstr "Ligne de commande de capture d'écran"
-
-#: src/display.c:1094 src/display.c:1095
-msgid "Take a screenshot of a window"
-msgstr "Faire une capture d'écran d'une fenêtre"
-
-#: src/display.c:1112 src/display.c:1113
-msgid "Window screenshot command line"
-msgstr "Ligne de commande de capture de fenêtre"
-
-#: src/display.c:1121
-msgid "Window Menu"
-msgstr "Menu de la fenêtre"
-
-#: src/display.c:1122
-msgid "Open window menu"
-msgstr "Ouvrir le menu de la fenêtre"
-
-#: src/display.c:1141
-msgid "Raise On Click"
-msgstr "Remonter au clic"
-
-#: src/display.c:1142
-msgid "Raise windows when clicked"
-msgstr "Remonter les fenêtres lorsque vous cliquez dessus"
-
-#: src/display.c:1148
-msgid "Audible Bell"
-msgstr "Cloche audible"
-
-#: src/display.c:1149
-msgid "Audible system beep"
-msgstr "Signal sonore du système audible"
-
-#: src/display.c:1155
-msgid "Toggle Window Maximized"
-msgstr "Basculer la fenêtre agrandie"
-
-#: src/display.c:1156
-msgid "Toggle active window maximized"
-msgstr "Basculer la fenêtre active agrandie"
-
-#: src/display.c:1168
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Basculer la fenêtre agrandie horizontalement"
-
-#: src/display.c:1170
-msgid "Toggle active window maximized horizontally"
-msgstr "Basculer la fenêtre active agrandie horizontalement"
-
-#: src/display.c:1182
-msgid "Toggle Window Maximized Vertically"
-msgstr "Basculer la fenêtre agrandie verticalement"
-
-#: src/display.c:1184
-msgid "Toggle active window maximized vertically"
-msgstr "Basculer la fenêtre active agrandie verticalement"
-
-#: src/display.c:1196
-msgid "Hide Skip Taskbar Windows"
-msgstr "Masquer les fenêtres de la barre des tâches Ignorer"
-
-#: src/display.c:1197
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"Masquer les fenêtres qui ne se trouvent pas dans la barre des tâches lorsque "
-"vous passez en mode d'affichage du bureau"
-
-#: src/display.c:1204
-msgid "Toggle Window Shaded"
-msgstr "Basculer la fenêtre ombrée"
-
-#: src/display.c:1205
-msgid "Toggle active window shaded"
-msgstr "Basculer la fenêtre active ombrée"
-
-#: src/display.c:1221
-msgid "Ignore Hints When Maximized"
-msgstr "Ignorer les conseils lorsque la fenêtre est agrandie"
-
-#: src/display.c:1222
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
-"Ignorer l'incrément de taille et les conseils d'aspect lorsque la fenêtre "
-"est agrandie"
-
-#: src/display.c:1229 src/display.c:1230
-#, fuzzy
-msgid "Terminal command line"
-msgstr "Ligne de commande de capture d'écran"
-
-#: src/display.c:1238 src/display.c:1239
-#, fuzzy
-msgid "Open a terminal"
-msgstr "Exécuter en terminal"
-
-#: src/display.c:1251
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Délai de pluie"
-
-#: src/display.c:1252
-msgid "Interval between ping messages"
-msgstr ""
-
-#: src/main.c:54
-msgid "Desktop"
-msgstr "Bureau"
-
-#: src/main.c:55
-msgid "Dock"
-msgstr "Accueil"
-
-#: src/main.c:56
-msgid "Toolbar"
-msgstr "Barre d'outils"
-
-#: src/main.c:57
-msgid "Menu"
-msgstr "Menu"
-
-#: src/main.c:58
-msgid "Utility"
-msgstr "Utilitaire"
-
-#: src/main.c:59
-msgid "Splash"
-msgstr "Splash"
-
-#: src/main.c:60
-msgid "Dialog"
-msgstr "Dialog"
-
-#: src/main.c:61
-msgid "Normal"
-msgstr "Normal"
-
-#: src/main.c:62
-msgid "DropdownMenu"
-msgstr "Menu déroulant"
-
-#: src/main.c:63
-msgid "PopupMenu"
-msgstr "Menu contextuel"
-
-#: src/main.c:64
-msgid "Tooltip"
-msgstr "Info-bulle"
-
-#: src/main.c:65
-msgid "Notification"
-msgstr "Notification"
-
-#: src/main.c:66
-msgid "Combo"
-msgstr "Zone de liste"
-
-#: src/main.c:67
-msgid "Dnd"
-msgstr "Dnd"
-
-#: src/main.c:68
-msgid "ModalDialog"
-msgstr "Boîte de dialogue modale"
-
-#: src/main.c:69
-msgid "Fullscreen"
-msgstr "Fullscreen (Plein écran)"
-
-# TLABEL autoinst_2002_08_07_0216__168
-#: src/main.c:70
-msgid "Unknown"
-msgstr "Inconnu"
-
-#: src/screen.c:614
-msgid "Detect Refresh Rate"
-msgstr "Détecter la fréquence de rafraîchissement"
-
-#: src/screen.c:615
-msgid "Automatic detection of refresh rate"
-msgstr "Détection automatique de la fréquence de rafraîchissement"
-
-#: src/screen.c:621
-msgid "Lighting"
-msgstr "Éclairage"
-
-#: src/screen.c:622
-msgid "Use diffuse light when screen is transformed"
-msgstr "Utiliser la lumière diffuse lorsque l'écran est transformé"
-
-#: src/screen.c:628
-msgid "Refresh Rate"
-msgstr "Fréquence de rafraîchissement"
-
-#: src/screen.c:629
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "Vitesse à laquelle l'écran est redessiné (fois/seconde)"
-
-#: src/screen.c:638
-msgid "Horizontal Virtual Size"
-msgstr "Taille virtuelle horizontale"
-
-#: src/screen.c:639
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Multiplicateur de taille d'écran pour taille virtuelle horizontale"
-
-#: src/screen.c:647
-msgid "Vertical Virtual Size"
-msgstr "Taille virtuelle verticale"
-
-#: src/screen.c:648
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "Multiplicateur de taille d'écran pour taille virtuelle verticale"
-
-#: src/screen.c:656
-msgid "Opacity Step"
-msgstr "Incrément d'opacité"
-
-#: src/screen.c:657
-msgid "Opacity change step"
-msgstr "Incrément de changement d'opacité"
-
-#: src/screen.c:665
-msgid "Unredirect Fullscreen Windows"
-msgstr "Ne pas rediriger les fenêtres plein écran"
-
-#: src/screen.c:666
+#: ../metadata/compiz.xml.in.h:14 ../plugins/compiz.schemas.in.h:35
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Empêcher la redirection vers des pixmaps hors de l'écran lors de l'affichage "
 "des fenêtres plein écran"
 
-#: src/screen.c:673
+#: ../metadata/compiz.xml.in.h:15 ../plugins/compiz.schemas.in.h:49
+msgid "Audible Bell"
+msgstr "Cloche audible"
+
+#: ../metadata/compiz.xml.in.h:16 ../plugins/compiz.schemas.in.h:50
+msgid "Audible system beep"
+msgstr "Signal sonore du système audible"
+
+#: ../metadata/compiz.xml.in.h:17 ../plugins/compiz.schemas.in.h:52
+msgid "Auto-Raise"
+msgstr "Remontée automatique"
+
+#: ../metadata/compiz.xml.in.h:18 ../plugins/compiz.schemas.in.h:53
+msgid "Auto-Raise Delay"
+msgstr "Délai de remontée automatique"
+
+#: ../metadata/compiz.xml.in.h:19 ../plugins/compiz.schemas.in.h:54
+msgid "Automatic detection of output devices"
+msgstr "Détection automatiques des périphériques de sortie"
+
+#: ../metadata/compiz.xml.in.h:20 ../plugins/compiz.schemas.in.h:55
+msgid "Automatic detection of refresh rate"
+msgstr "Détection automatique de la fréquence de rafraîchissement"
+
+#: ../metadata/compiz.xml.in.h:21 ../plugins/compiz.schemas.in.h:71
+msgid "Click To Focus"
+msgstr "Cliquer pour obtenir le focus"
+
+#: ../metadata/compiz.xml.in.h:22 ../plugins/compiz.schemas.in.h:72
+msgid "Click on window moves input focus to it"
+msgstr "Si vous cliquez sur la fenêtre, vous déplacez le focus dessus"
+
+#: ../metadata/compiz.xml.in.h:23 ../plugins/compiz.schemas.in.h:74
+msgid "Close Window"
+msgstr "Fermer la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:24 ../plugins/compiz.schemas.in.h:75
+msgid "Close active window"
+msgstr "Fermer la fenêtre active"
+
+#: ../metadata/compiz.xml.in.h:25 ../plugins/compiz.schemas.in.h:81
+#, fuzzy
+msgid "Command line 0"
+msgstr "Ligne de commande 10"
+
+#: ../metadata/compiz.xml.in.h:26 ../plugins/compiz.schemas.in.h:82
+msgid "Command line 1"
+msgstr "Ligne de commande 1"
+
+#: ../metadata/compiz.xml.in.h:27 ../plugins/compiz.schemas.in.h:83
+msgid "Command line 10"
+msgstr "Ligne de commande 10"
+
+#: ../metadata/compiz.xml.in.h:28 ../plugins/compiz.schemas.in.h:84
+msgid "Command line 11"
+msgstr "Ligne de commande 11"
+
+#: ../metadata/compiz.xml.in.h:29 ../plugins/compiz.schemas.in.h:85
+msgid "Command line 2"
+msgstr "Ligne de commande 2"
+
+#: ../metadata/compiz.xml.in.h:30 ../plugins/compiz.schemas.in.h:86
+msgid "Command line 3"
+msgstr "Ligne de commande 3"
+
+#: ../metadata/compiz.xml.in.h:31 ../plugins/compiz.schemas.in.h:87
+msgid "Command line 4"
+msgstr "Ligne de commande 4"
+
+#: ../metadata/compiz.xml.in.h:32 ../plugins/compiz.schemas.in.h:88
+msgid "Command line 5"
+msgstr "Ligne de commande 5"
+
+#: ../metadata/compiz.xml.in.h:33 ../plugins/compiz.schemas.in.h:89
+msgid "Command line 6"
+msgstr "Ligne de commande 6"
+
+#: ../metadata/compiz.xml.in.h:34 ../plugins/compiz.schemas.in.h:90
+msgid "Command line 7"
+msgstr "Ligne de commande 7"
+
+#: ../metadata/compiz.xml.in.h:35 ../plugins/compiz.schemas.in.h:91
+msgid "Command line 8"
+msgstr "Ligne de commande 8"
+
+#: ../metadata/compiz.xml.in.h:36 ../plugins/compiz.schemas.in.h:92
+msgid "Command line 9"
+msgstr "Ligne de commande 9"
+
+#: ../metadata/compiz.xml.in.h:37 ../plugins/compiz.schemas.in.h:93
+#, fuzzy
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
+
+#: ../metadata/compiz.xml.in.h:38 ../plugins/compiz.schemas.in.h:94
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command1 est appelé"
+
+#: ../metadata/compiz.xml.in.h:39 ../plugins/compiz.schemas.in.h:95
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
+
+#: ../metadata/compiz.xml.in.h:40 ../plugins/compiz.schemas.in.h:96
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command11 est appelé"
+
+#: ../metadata/compiz.xml.in.h:41 ../plugins/compiz.schemas.in.h:97
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command2 est appelé"
+
+#: ../metadata/compiz.xml.in.h:42 ../plugins/compiz.schemas.in.h:98
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command3 est appelé"
+
+#: ../metadata/compiz.xml.in.h:43 ../plugins/compiz.schemas.in.h:99
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command4 est appelé"
+
+#: ../metadata/compiz.xml.in.h:44 ../plugins/compiz.schemas.in.h:100
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command5 est appelé"
+
+#: ../metadata/compiz.xml.in.h:45 ../plugins/compiz.schemas.in.h:101
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command6 est appelé"
+
+#: ../metadata/compiz.xml.in.h:46 ../plugins/compiz.schemas.in.h:102
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command7 est appelé"
+
+#: ../metadata/compiz.xml.in.h:47 ../plugins/compiz.schemas.in.h:103
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command8 est appelé"
+
+#: ../metadata/compiz.xml.in.h:48 ../plugins/compiz.schemas.in.h:104
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
+
+#: ../metadata/compiz.xml.in.h:49 ../plugins/compiz.schemas.in.h:114
+msgid "Decrease Opacity"
+msgstr "Réduire l'opacité"
+
+#: ../metadata/compiz.xml.in.h:50 ../plugins/compiz.schemas.in.h:115
+msgid "Decrease window opacity"
+msgstr "Réduire l'opacité de la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:51 ../plugins/compiz.schemas.in.h:117
 msgid "Default Icon"
 msgstr "Icône par défaut"
 
-#: src/screen.c:674
+#: ../metadata/compiz.xml.in.h:52 ../plugins/compiz.schemas.in.h:118
 msgid "Default window icon image"
 msgstr "Image de l'icône de la fenêtre par défaut"
 
-#: src/screen.c:682
-msgid "Sync To VBlank"
-msgstr "Sync vers VBlank"
+#: ../metadata/compiz.xml.in.h:53 ../plugins/compiz.schemas.in.h:122
+msgid "Detect Outputs"
+msgstr "Détection des sorties"
 
-#: src/screen.c:683
+#: ../metadata/compiz.xml.in.h:54 ../plugins/compiz.schemas.in.h:123
+msgid "Detect Refresh Rate"
+msgstr "Détecter la fréquence de rafraîchissement"
+
+#: ../metadata/compiz.xml.in.h:55 ../plugins/compiz.schemas.in.h:163
+#, fuzzy
+msgid "Focus Prevention Windows"
+msgstr "Focus des types de fenêtres"
+
+#: ../metadata/compiz.xml.in.h:56
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Focus des types de fenêtres"
+
+#: ../metadata/compiz.xml.in.h:57
+msgid "General Options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:58
+msgid "General compiz options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:59 ../plugins/compiz.schemas.in.h:183
+msgid "Hide Skip Taskbar Windows"
+msgstr "Masquer les fenêtres de la barre des tâches Ignorer"
+
+#: ../metadata/compiz.xml.in.h:60 ../plugins/compiz.schemas.in.h:184
+msgid "Hide all windows and focus desktop"
+msgstr "Masquer toutes les fenêtres et focus du bureau"
+
+#: ../metadata/compiz.xml.in.h:61 ../plugins/compiz.schemas.in.h:186
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Masquer les fenêtres qui ne se trouvent pas dans la barre des tâches lorsque "
+"vous passez en mode d'affichage du bureau"
+
+#: ../metadata/compiz.xml.in.h:62 ../plugins/compiz.schemas.in.h:187
+msgid "Horizontal Virtual Size"
+msgstr "Taille virtuelle horizontale"
+
+#: ../metadata/compiz.xml.in.h:63 ../plugins/compiz.schemas.in.h:193
+msgid "Ignore Hints When Maximized"
+msgstr "Ignorer les conseils lorsque la fenêtre est agrandie"
+
+#: ../metadata/compiz.xml.in.h:64 ../plugins/compiz.schemas.in.h:194
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Ignorer l'incrément de taille et les conseils d'aspect lorsque la fenêtre "
+"est agrandie"
+
+#: ../metadata/compiz.xml.in.h:65 ../plugins/compiz.schemas.in.h:197
+msgid "Increase Opacity"
+msgstr "Augmenter l'opacité"
+
+#: ../metadata/compiz.xml.in.h:66 ../plugins/compiz.schemas.in.h:198
+msgid "Increase window opacity"
+msgstr "Augmenter l'opacité de la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:67
+#, fuzzy
+msgid "Interval before raising selected windows"
+msgstr "Intervalle avant de remonter les fenêtres sélectionnées"
+
+#: ../metadata/compiz.xml.in.h:68
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:69 ../plugins/compiz.schemas.in.h:232
+msgid "Lighting"
+msgstr "Éclairage"
+
+#: ../metadata/compiz.xml.in.h:70 ../plugins/compiz.schemas.in.h:237
+msgid "List of currently active plugins"
+msgstr "Liste des plug-ins actuellement actifs"
+
+#: ../metadata/compiz.xml.in.h:71 ../plugins/compiz.schemas.in.h:238
+msgid "List of strings describing output devices"
+msgstr "Liste des chaînes décrivant les périphériques de sortie"
+
+#: ../metadata/compiz.xml.in.h:72 ../plugins/compiz.schemas.in.h:239
+msgid "Lower Window"
+msgstr "Abaisser la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:73 ../plugins/compiz.schemas.in.h:240
+msgid "Lower window beneath other windows"
+msgstr "Abaisser la fenêtre sous d'autres fenêtres"
+
+#: ../metadata/compiz.xml.in.h:74 ../plugins/compiz.schemas.in.h:248
+msgid "Maximize Window"
+msgstr "Optimiser la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:75 ../plugins/compiz.schemas.in.h:249
+msgid "Maximize Window Horizontally"
+msgstr "Optimiser la fenêtre horizontalement"
+
+#: ../metadata/compiz.xml.in.h:76 ../plugins/compiz.schemas.in.h:250
+msgid "Maximize Window Vertically"
+msgstr "Optimiser la fenêtre verticalement"
+
+#: ../metadata/compiz.xml.in.h:77 ../plugins/compiz.schemas.in.h:251
+msgid "Maximize active window"
+msgstr "Optimiser la fenêtre active"
+
+#: ../metadata/compiz.xml.in.h:78 ../plugins/compiz.schemas.in.h:253
+msgid "Maximize active window horizontally"
+msgstr "Optimiser la fenêtre active horizontalement"
+
+#: ../metadata/compiz.xml.in.h:79 ../plugins/compiz.schemas.in.h:255
+msgid "Maximize active window vertically"
+msgstr "Optimiser la fenêtre active verticalement"
+
+#: ../metadata/compiz.xml.in.h:80 ../plugins/compiz.schemas.in.h:258
+msgid "Minimize Window"
+msgstr "Minimiser la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:81 ../plugins/compiz.schemas.in.h:260
+msgid "Minimize active window"
+msgstr "Minimiser la fenêtre active"
+
+#: ../metadata/compiz.xml.in.h:82 ../plugins/compiz.schemas.in.h:278
+msgid "Number of Desktops"
+msgstr "Nombre de bureaux"
+
+#: ../metadata/compiz.xml.in.h:83
+#, fuzzy
+msgid "Number of virtual desktops"
+msgstr "Nombre de bureaux virtuels"
+
+#: ../metadata/compiz.xml.in.h:84 ../plugins/compiz.schemas.in.h:281
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "N'effectuer les mises à jour de l'écran que lors de la période de vidage "
 "vertical"
 
-#: src/screen.c:690
-msgid "Number of Desktops"
-msgstr "Nombre de bureaux"
+#: ../metadata/compiz.xml.in.h:85 ../plugins/compiz.schemas.in.h:284
+msgid "Opacity Step"
+msgstr "Incrément d'opacité"
 
-#: src/screen.c:691
-msgid "Number of virtual desktops"
-msgstr "Nombre de bureaux virtuels"
-
-#: src/screen.c:699
-msgid "Detect Outputs"
-msgstr "Détection des sorties"
-
-#: src/screen.c:700
-msgid "Automatic detection of output devices"
-msgstr "Détection automatiques des périphériques de sortie"
-
-#: src/screen.c:706
-msgid "Outputs"
-msgstr "Produit"
-
-#: src/screen.c:707
-msgid "List of strings describing output devices"
-msgstr "Liste des chaînes décrivant les périphériques de sortie"
-
-#: src/screen.c:718
+#: ../metadata/compiz.xml.in.h:86
 #, fuzzy
-msgid "Focus Prevention Windows"
-msgstr "Focus des types de fenêtres"
+msgid "Opacity change step"
+msgstr "Incrément de changement d'opacité"
 
-#: src/screen.c:719
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Sélectionner la fenêtre précédente"
+#: ../metadata/compiz.xml.in.h:87 ../plugins/compiz.schemas.in.h:288
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
 
-#: src/screen.c:727
+#: ../metadata/compiz.xml.in.h:88 ../plugins/compiz.schemas.in.h:289
+msgid "Opacity window values"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:89 ../plugins/compiz.schemas.in.h:290
 #, fuzzy
 msgid "Opacity windows"
 msgstr "Espace entre les fenêtres"
 
-#: src/screen.c:728
+#: ../metadata/compiz.xml.in.h:90 ../plugins/compiz.schemas.in.h:291
+#, fuzzy
+msgid "Open a terminal"
+msgstr "Exécuter en terminal"
+
+#: ../metadata/compiz.xml.in.h:91 ../plugins/compiz.schemas.in.h:293
+msgid "Open window menu"
+msgstr "Ouvrir le menu de la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:92 ../plugins/compiz.schemas.in.h:298
+msgid "Outputs"
+msgstr "Produit"
+
+#: ../metadata/compiz.xml.in.h:93 ../plugins/compiz.schemas.in.h:301
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Délai de pluie"
+
+#: ../metadata/compiz.xml.in.h:94 ../plugins/compiz.schemas.in.h:379
+msgid "Raise On Click"
+msgstr "Remonter au clic"
+
+#: ../metadata/compiz.xml.in.h:95 ../plugins/compiz.schemas.in.h:380
+msgid "Raise Window"
+msgstr "Remonter la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:96 ../plugins/compiz.schemas.in.h:381
+msgid "Raise selected windows after interval"
+msgstr "Remonter les fenêtres sélectionnées après l'intervalle"
+
+#: ../metadata/compiz.xml.in.h:97 ../plugins/compiz.schemas.in.h:382
+msgid "Raise window above other windows"
+msgstr "Remonter la fenêtre au-dessus des autres"
+
+#: ../metadata/compiz.xml.in.h:98 ../plugins/compiz.schemas.in.h:384
+msgid "Raise windows when clicked"
+msgstr "Remonter les fenêtres lorsque vous cliquez dessus"
+
+#: ../metadata/compiz.xml.in.h:99 ../plugins/compiz.schemas.in.h:385
+msgid "Refresh Rate"
+msgstr "Fréquence de rafraîchissement"
+
+#: ../metadata/compiz.xml.in.h:100 ../plugins/compiz.schemas.in.h:491
+msgid "Run Dialog"
+msgstr "Boîte de dialogue d'exécution"
+
+#: ../metadata/compiz.xml.in.h:101 ../plugins/compiz.schemas.in.h:492
+#, fuzzy
+msgid "Run command 0"
+msgstr "Exécuter la commande 10"
+
+#: ../metadata/compiz.xml.in.h:102 ../plugins/compiz.schemas.in.h:493
+msgid "Run command 1"
+msgstr "Exécuter la commande 1"
+
+#: ../metadata/compiz.xml.in.h:103 ../plugins/compiz.schemas.in.h:494
+msgid "Run command 10"
+msgstr "Exécuter la commande 10"
+
+#: ../metadata/compiz.xml.in.h:104 ../plugins/compiz.schemas.in.h:495
+msgid "Run command 11"
+msgstr "Exécuter la commande 11"
+
+#: ../metadata/compiz.xml.in.h:105 ../plugins/compiz.schemas.in.h:496
+msgid "Run command 2"
+msgstr "Exécuter la commande 2"
+
+#: ../metadata/compiz.xml.in.h:106 ../plugins/compiz.schemas.in.h:497
+msgid "Run command 3"
+msgstr "Exécuter la commande 3"
+
+#: ../metadata/compiz.xml.in.h:107 ../plugins/compiz.schemas.in.h:498
+msgid "Run command 4"
+msgstr "Exécuter la commande 4"
+
+#: ../metadata/compiz.xml.in.h:108 ../plugins/compiz.schemas.in.h:499
+msgid "Run command 5"
+msgstr "Exécuter la commande 5"
+
+#: ../metadata/compiz.xml.in.h:109 ../plugins/compiz.schemas.in.h:500
+msgid "Run command 6"
+msgstr "Exécuter la commande 6"
+
+#: ../metadata/compiz.xml.in.h:110 ../plugins/compiz.schemas.in.h:501
+msgid "Run command 7"
+msgstr "Exécuter la commande 7"
+
+#: ../metadata/compiz.xml.in.h:111 ../plugins/compiz.schemas.in.h:502
+msgid "Run command 8"
+msgstr "Exécuter la commande 8"
+
+#: ../metadata/compiz.xml.in.h:112 ../plugins/compiz.schemas.in.h:503
+msgid "Run command 9"
+msgstr "Exécuter la commande 9"
+
+#: ../metadata/compiz.xml.in.h:113
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Multiplicateur de taille d'écran pour taille virtuelle horizontale"
+
+#: ../metadata/compiz.xml.in.h:114
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Multiplicateur de taille d'écran pour taille virtuelle verticale"
+
+#: ../metadata/compiz.xml.in.h:115 ../plugins/compiz.schemas.in.h:515
+msgid "Screenshot command line"
+msgstr "Ligne de commande de capture d'écran"
+
+#: ../metadata/compiz.xml.in.h:116 ../plugins/compiz.schemas.in.h:532
+msgid "Show Main Menu"
+msgstr "Afficher le menu principal"
+
+#: ../metadata/compiz.xml.in.h:117 ../plugins/compiz.schemas.in.h:533
+msgid "Show Run Application dialog"
+msgstr "Afficher la boîte de dialogue d'exécution de l'application"
+
+#: ../metadata/compiz.xml.in.h:118 ../plugins/compiz.schemas.in.h:537
+msgid "Show the main menu"
+msgstr "Afficher le menu principal"
+
+#: ../metadata/compiz.xml.in.h:119 ../plugins/compiz.schemas.in.h:543
+msgid "Slow Animations"
+msgstr "Ralentir les animations"
+
+#: ../metadata/compiz.xml.in.h:120 ../plugins/compiz.schemas.in.h:570
+msgid "Sync To VBlank"
+msgstr "Sync vers VBlank"
+
+#: ../metadata/compiz.xml.in.h:121 ../plugins/compiz.schemas.in.h:571
+msgid "Take a screenshot"
+msgstr "Faire une capture d'écran"
+
+#: ../metadata/compiz.xml.in.h:122 ../plugins/compiz.schemas.in.h:573
+msgid "Take a screenshot of a window"
+msgstr "Faire une capture d'écran d'une fenêtre"
+
+#: ../metadata/compiz.xml.in.h:123 ../plugins/compiz.schemas.in.h:575
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Ligne de commande de capture d'écran"
+
+#: ../metadata/compiz.xml.in.h:124 ../plugins/compiz.schemas.in.h:576
+msgid "Texture Filter"
+msgstr "Filtre de texture"
+
+#: ../metadata/compiz.xml.in.h:125
+msgid "Texture filtering"
+msgstr "Filtrage de texture"
+
+#: ../metadata/compiz.xml.in.h:126
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Vitesse à laquelle l'écran est redessiné (fois/seconde)"
+
+#: ../metadata/compiz.xml.in.h:127 ../plugins/compiz.schemas.in.h:583
+msgid "Toggle Window Maximized"
+msgstr "Basculer la fenêtre agrandie"
+
+#: ../metadata/compiz.xml.in.h:128 ../plugins/compiz.schemas.in.h:584
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Basculer la fenêtre agrandie horizontalement"
+
+#: ../metadata/compiz.xml.in.h:129 ../plugins/compiz.schemas.in.h:585
+msgid "Toggle Window Maximized Vertically"
+msgstr "Basculer la fenêtre agrandie verticalement"
+
+#: ../metadata/compiz.xml.in.h:130 ../plugins/compiz.schemas.in.h:586
+msgid "Toggle Window Shaded"
+msgstr "Basculer la fenêtre ombrée"
+
+#: ../metadata/compiz.xml.in.h:131 ../plugins/compiz.schemas.in.h:587
+msgid "Toggle active window maximized"
+msgstr "Basculer la fenêtre active agrandie"
+
+#: ../metadata/compiz.xml.in.h:132 ../plugins/compiz.schemas.in.h:589
+msgid "Toggle active window maximized horizontally"
+msgstr "Basculer la fenêtre active agrandie horizontalement"
+
+#: ../metadata/compiz.xml.in.h:133 ../plugins/compiz.schemas.in.h:591
+msgid "Toggle active window maximized vertically"
+msgstr "Basculer la fenêtre active agrandie verticalement"
+
+#: ../metadata/compiz.xml.in.h:134 ../plugins/compiz.schemas.in.h:593
+msgid "Toggle active window shaded"
+msgstr "Basculer la fenêtre active ombrée"
+
+#: ../metadata/compiz.xml.in.h:135 ../plugins/compiz.schemas.in.h:598
+msgid "Toggle use of slow animations"
+msgstr "Basculer l'utilisation d'animations lentes"
+
+#: ../metadata/compiz.xml.in.h:136 ../plugins/compiz.schemas.in.h:610
+msgid "Unmaximize Window"
+msgstr "Agrandir la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:137 ../plugins/compiz.schemas.in.h:611
+msgid "Unmaximize active window"
+msgstr "Agrandir la fenêtre active"
+
+#: ../metadata/compiz.xml.in.h:138 ../plugins/compiz.schemas.in.h:613
+msgid "Unredirect Fullscreen Windows"
+msgstr "Ne pas rediriger les fenêtres plein écran"
+
+#: ../metadata/compiz.xml.in.h:139 ../plugins/compiz.schemas.in.h:614
+msgid "Use diffuse light when screen is transformed"
+msgstr "Utiliser la lumière diffuse lorsque l'écran est transformé"
+
+#: ../metadata/compiz.xml.in.h:140 ../plugins/compiz.schemas.in.h:619
+msgid "Vertical Virtual Size"
+msgstr "Taille virtuelle verticale"
+
+#: ../metadata/compiz.xml.in.h:141 ../plugins/compiz.schemas.in.h:631
+msgid "Window Menu"
+msgstr "Menu de la fenêtre"
+
+#: ../metadata/compiz.xml.in.h:142 ../plugins/compiz.schemas.in.h:636
+msgid "Window screenshot command line"
+msgstr "Ligne de commande de capture de fenêtre"
+
+#: ../metadata/compiz.xml.in.h:143 ../plugins/compiz.schemas.in.h:645
 #, fuzzy
 msgid "Windows that should be translucent by default"
 msgstr "Types de fenêtres devant utiliser le fondu"
 
-#: src/screen.c:739
-msgid "Opacity window values"
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1 ../src/main.c:54
+msgid "Desktop"
+msgstr "Bureau"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+#, fuzzy
+msgid "Window Management"
+msgstr "Menu de la fenêtre"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+#, fuzzy
+msgid "Blur type"
+msgstr "Vitesse de pliage"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+#, fuzzy
+msgid "Metacity theme active window opacity"
+msgstr "Réduire l'opacité de la fenêtre"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+#, fuzzy
+msgid "Metacity theme active window opacity shade"
+msgstr "Optimiser la fenêtre active horizontalement"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+msgid "Metacity theme opacity"
 msgstr ""
 
-#: src/screen.c:740
-msgid "Opacity values for windows that should be translucent by default"
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity shade"
 msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid "Type of blur used for window decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Use metacity theme"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Use metacity theme when drawing window decorations"
+msgstr ""
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr ""
+
+#: ../plugins/annotate.c:745 ../plugins/clone.c:726
+#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
+#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "Lancer"
+
+#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
+#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
+#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Lancer"
+
+#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Lancer le redimensionnement de fenêtre"
+
+#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
+#: ../plugins/compiz.schemas.in.h:69
+#, fuzzy
+msgid "Clear"
+msgstr "E_ffacer"
+
+#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr ""
+
+#: ../plugins/annotate.c:826
+msgid "Line width for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr ""
+
+#: ../plugins/annotate.c:836
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#, fuzzy
+msgid "Annotate"
+msgstr "Lancer"
+
+#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#, fuzzy
+msgid "Annotate plugin"
+msgstr "Plug-ins actifs"
+
+#: ../plugins/blur.c:73
+#, fuzzy
+msgid "4xBilinear"
+msgstr "Filtre linéaire"
+
+#: ../plugins/blur.c:74 ../plugins/blur.c:237
+#, fuzzy
+msgid "Gaussian"
+msgstr "Russe"
+
+#: ../plugins/blur.c:75 ../plugins/blur.c:239
+#: ../plugins/compiz.schemas.in.h:268 ../plugins/cube.c:1105
+#: ../plugins/decoration.c:1190 ../plugins/switcher.c:367
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../plugins/blur.c:728 ../plugins/compiz.schemas.in.h:60
+#, fuzzy
+msgid "Blur Speed"
+msgstr "Vitesse de pliage"
+
+#: ../plugins/blur.c:729
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Vitesse de fondu de la fenêtre"
+
+#: ../plugins/blur.c:738 ../plugins/compiz.schemas.in.h:166
+#, fuzzy
+msgid "Focus blur windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/blur.c:739
+#, fuzzy
+msgid "Windows that should be affected by focus blur"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/blur.c:747 ../plugins/compiz.schemas.in.h:161
+msgid "Focus Blur"
+msgstr ""
+
+#: ../plugins/blur.c:748 ../plugins/compiz.schemas.in.h:65
+#, fuzzy
+msgid "Blur windows that doesn't have focus"
+msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
+
+#: ../plugins/blur.c:754 ../plugins/compiz.schemas.in.h:38
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/blur.c:755
+#, fuzzy
+msgid "Windows that should use alpha blur by default"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/blur.c:763 ../plugins/compiz.schemas.in.h:37
+msgid "Alpha Blur"
+msgstr ""
+
+#: ../plugins/blur.c:764 ../plugins/compiz.schemas.in.h:62
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#: ../plugins/blur.c:772 ../plugins/compiz.schemas.in.h:57
+#, fuzzy
+msgid "Blur Filter"
+msgstr "Filtre de texture"
+
+#: ../plugins/blur.c:773
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: ../plugins/blur.c:783 ../plugins/compiz.schemas.in.h:174
+msgid "Gaussian Radius"
+msgstr ""
+
+#: ../plugins/blur.c:784
+#, fuzzy
+msgid "Gaussian radius"
+msgstr "Fédération de Russie"
+
+#: ../plugins/blur.c:792 ../plugins/compiz.schemas.in.h:175
+#, fuzzy
+msgid "Gaussian Strength"
+msgstr "Russe"
+
+#: ../plugins/blur.c:793
+#, fuzzy
+msgid "Gaussian strength"
+msgstr "Russe"
+
+#: ../plugins/blur.c:802 ../plugins/compiz.schemas.in.h:269
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Mipmap"
+
+#: ../plugins/blur.c:803
+msgid "Mipmap level-of-detail"
+msgstr ""
+
+#: ../plugins/blur.c:812 ../plugins/compiz.schemas.in.h:59
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "Saturation"
+
+#: ../plugins/blur.c:813
+#, fuzzy
+msgid "Blur saturation"
+msgstr "Saturation"
+
+#: ../plugins/blur.c:821 ../plugins/compiz.schemas.in.h:58
+msgid "Blur Occlusion"
+msgstr ""
+
+#: ../plugins/blur.c:822 ../plugins/compiz.schemas.in.h:673
+msgid "blur occlusion"
+msgstr ""
+
+#: ../plugins/blur.c:2562 ../plugins/compiz.schemas.in.h:374
+msgid "Pulse"
+msgstr ""
+
+#: ../plugins/blur.c:2563 ../plugins/compiz.schemas.in.h:375
+#, fuzzy
+msgid "Pulse effect"
+msgstr "Effet de focus"
+
+#: ../plugins/blur.c:2885 ../plugins/compiz.schemas.in.h:61
+#, fuzzy
+msgid "Blur Windows"
+msgstr "Placer des fenêtres"
+
+#: ../plugins/blur.c:2886 ../plugins/compiz.schemas.in.h:64
+#, fuzzy
+msgid "Blur windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
+#, fuzzy
+msgid "Initiate clone selection"
+msgstr "Sélection du mode vidéo"
+
+#: ../plugins/clone.c:860 ../plugins/compiz.schemas.in.h:73
+#, fuzzy
+msgid "Clone Output"
+msgstr "Produit"
+
+#: ../plugins/clone.c:861 ../plugins/compiz.schemas.in.h:297
+msgid "Output clone handler"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:2
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command10"
+
+#: ../plugins/compiz.schemas.in.h:4
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command1"
+
+#: ../plugins/compiz.schemas.in.h:6
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command10"
+
+#: ../plugins/compiz.schemas.in.h:8
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command11"
+
+#: ../plugins/compiz.schemas.in.h:10
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command2"
+
+#: ../plugins/compiz.schemas.in.h:12
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command3"
+
+#: ../plugins/compiz.schemas.in.h:14
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command4"
+
+#: ../plugins/compiz.schemas.in.h:16
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command5"
+
+#: ../plugins/compiz.schemas.in.h:18
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command6"
+
+#: ../plugins/compiz.schemas.in.h:20
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command7"
+
+#: ../plugins/compiz.schemas.in.h:22
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command8"
+
+#: ../plugins/compiz.schemas.in.h:24
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
+"par command9"
+
+#: ../plugins/compiz.schemas.in.h:25 ../plugins/cube.c:1075
+#: ../plugins/rotate.c:304
+msgid "Acceleration"
+msgstr "Accélération"
+
+#: ../plugins/compiz.schemas.in.h:27 ../plugins/water.c:1698
+msgid "Add line"
+msgstr "Ajouter une ligne"
+
+#: ../plugins/compiz.schemas.in.h:28
+#, fuzzy
+msgid ""
+"Add line (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:29 ../plugins/water.c:1686
+msgid "Add point"
+msgstr "Ajouter un point"
+
+#: ../plugins/compiz.schemas.in.h:30
+#, fuzzy
+msgid ""
+"Add point (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:31 ../plugins/water.c:1876
+msgid "Adds water effects to different desktop actions"
+msgstr "Ajoute des effets d'eau à différentes opérations du bureau"
+
+#: ../plugins/compiz.schemas.in.h:32 ../plugins/cube.c:1818
+msgid "Advance to next slide"
+msgstr "Passer à la diapositive suivante"
+
+#: ../plugins/compiz.schemas.in.h:33
+#, fuzzy
+msgid ""
+"Advance to next slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:34
+msgid ""
+"Algorithm to use for window placement (Cascade, Centered, Smart, Maximize, "
+"Random)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:36
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:39
+#, fuzzy
+msgid "Amount of brightness in percent (0-100)"
+msgstr "Quantité de luminosité en pourcentage"
+
+#: ../plugins/compiz.schemas.in.h:40
+#, fuzzy
+msgid "Amount of opacity in percent (0-100)"
+msgstr "Quantité d'opacité en pourcentage"
+
+#: ../plugins/compiz.schemas.in.h:41
+#, fuzzy
+msgid "Amount of saturation in percent (0-100)"
+msgstr "Quantité de saturation en pourcentage"
+
+#: ../plugins/compiz.schemas.in.h:42 ../plugins/cube.c:1046
+msgid "Animate Skydome"
+msgstr "Animer le skydome"
+
+#: ../plugins/compiz.schemas.in.h:43 ../plugins/cube.c:1047
+msgid "Animate skydome when rotating cube"
+msgstr "Animer le skydome lors de la rotation de cube"
+
+#: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
+#: ../plugins/switcher.c:2298
+msgid "Application Switcher"
+msgstr "Commutateur d'application"
+
+#: ../plugins/compiz.schemas.in.h:51 ../plugins/switcher.c:434
+#, fuzzy
+msgid "Auto Rotate"
+msgstr "Remontée automatique"
+
+#: ../plugins/compiz.schemas.in.h:56 ../plugins/screenshot.c:408
+#, fuzzy
+msgid "Automatically open screenshot in this application"
+msgstr "Démarrer automatiquement l'applet lors du login"
+
+#: ../plugins/compiz.schemas.in.h:63
+#, fuzzy
+msgid "Blur saturation (0-100)"
+msgstr "Saturation"
+
+#: ../plugins/compiz.schemas.in.h:66 ../plugins/switcher.c:384
+msgid "Brightness"
+msgstr "Luminosité"
+
+#: ../plugins/compiz.schemas.in.h:67 ../plugins/switcher.c:402
+msgid "Bring To Front"
+msgstr "Placer au-dessus"
+
+#: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
+msgid "Bring selected window to front"
+msgstr "Placer la fenêtre sélectionnée au-dessus"
+
+#: ../plugins/compiz.schemas.in.h:70
+#, fuzzy
+msgid ""
+"Clear (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:76
+#, fuzzy
+msgid ""
+"Close active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:77 ../plugins/cube.c:993
+msgid "Color of top and bottom sides of the cube"
+msgstr "Couleur des côtés supérieur et inférieur du cube"
+
+#: ../plugins/compiz.schemas.in.h:78 ../plugins/cube.c:1065
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+"Couleur à utiliser pour l'arrêt de couleur inférieure du gradient de rappel "
+"de skydome"
+
+#: ../plugins/compiz.schemas.in.h:79 ../plugins/cube.c:1054
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+"Couleur à utiliser pour l'arrêt de couleur supérieure du gradient de rappel "
+"de skydome"
+
+#: ../plugins/compiz.schemas.in.h:80 ../plugins/decoration.c:1180
+msgid "Command"
+msgstr "Commande"
+
+#: ../plugins/compiz.schemas.in.h:105 ../plugins/move.c:759
+msgid "Constrain Y"
+msgstr "Contraindre Y"
+
+#: ../plugins/compiz.schemas.in.h:106 ../plugins/move.c:760
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Contraindre la coordonnée Y à être dans la zone de l'espace de travail"
+
+#: ../plugins/compiz.schemas.in.h:107 ../plugins/cube.c:992
+msgid "Cube Color"
+msgstr "Couleur du cube"
+
+#: ../plugins/compiz.schemas.in.h:108 ../plugins/scale.c:360
+msgid "Darken Background"
+msgstr "Assombrir l'arrière-plan"
+
+#: ../plugins/compiz.schemas.in.h:109 ../plugins/scale.c:361
+msgid "Darken background when scaling windows"
+msgstr "Assombrir l'arrière-plan lors de la mise à l'échelle des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:110
+msgid "Dbus"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:111
+msgid "Dbus Control Backend"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:112 ../plugins/decoration.c:1197
+#, fuzzy
+msgid "Decoration windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:113 ../plugins/decoration.c:1181
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"Ligne de commande du décorateur qui est exécutée si aucun décorateur ne "
+"fonctionne"
+
+#: ../plugins/compiz.schemas.in.h:116
+#, fuzzy
+msgid ""
+"Decrease window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:119
+#, fuzzy
+msgid "Delay (in ms) between each rain-drop (0-3600000)"
+msgstr "Délai (en ms) en chaque goutte de pluie"
+
+#: ../plugins/compiz.schemas.in.h:120 ../plugins/cube.c:2044
+msgid "Desktop Cube"
+msgstr "Cube du bureau"
+
+#: ../plugins/compiz.schemas.in.h:121 ../plugins/plane.c:889
+#, fuzzy
+msgid "Desktop Plane"
+msgstr "Cube du bureau"
+
+#: ../plugins/compiz.schemas.in.h:124 ../plugins/screenshot.c:398
+#, fuzzy
+msgid "Directory"
+msgstr "Répertoire\n"
+
+#: ../plugins/compiz.schemas.in.h:125
+#, fuzzy
+msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
+msgstr ""
+"Le bureau à distance doit être en zoom arrière lors du passage d'une fenêtre "
+"à une autre"
+
+#: ../plugins/compiz.schemas.in.h:126 ../plugins/gconf-dump.c:617
+#: ../plugins/gconf-dump.c:627
+msgid "Do not modify"
+msgstr "Ne pas modifier"
+
+#: ../plugins/compiz.schemas.in.h:129
+#, fuzzy
+msgid ""
+"Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:130
+#, fuzzy
+msgid "Drop shadow X offset (-16-16)"
+msgstr "Décalage X de l'ombre des gouttes"
+
+#: ../plugins/compiz.schemas.in.h:131
+#, fuzzy
+msgid "Drop shadow Y offset (-16-16)"
+msgstr "Décalage Y de l'ombre des gouttes"
+
+#: ../plugins/compiz.schemas.in.h:132
+#, fuzzy
+msgid "Drop shadow color"
+msgstr "Rayon de l'ombre des gouttes"
+
+#: ../plugins/compiz.schemas.in.h:133
+#, fuzzy
+msgid "Drop shadow opacity (0.01-6.00)"
+msgstr "Opacité de l'ombre des gouttes"
+
+#: ../plugins/compiz.schemas.in.h:134
+#, fuzzy
+msgid "Drop shadow radius (0.0-48.0)"
+msgstr "Rayon de l'ombre des gouttes"
+
+#: ../plugins/compiz.schemas.in.h:135 ../plugins/rotate.c:1989
+msgid "Edge Flip DnD"
+msgstr "Rotation de côté - Glissement-déplacement"
+
+#: ../plugins/compiz.schemas.in.h:136 ../plugins/rotate.c:1981
+msgid "Edge Flip Move"
+msgstr "Rotation de côté - Déplacement"
+
+#: ../plugins/compiz.schemas.in.h:137 ../plugins/rotate.c:1973
+msgid "Edge Flip Pointer"
+msgstr "Rotation de côté - Pointeur"
+
+#: ../plugins/compiz.schemas.in.h:138 ../plugins/water.c:1609
+msgid "Enable pointer water effects"
+msgstr "Activer les effets d'eau du pointeur"
+
+#: ../plugins/compiz.schemas.in.h:139
+#, fuzzy
+msgid ""
+"Enable pointer water effects (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:140 ../plugins/fade.c:215
+msgid "Fade On Minimize/Open/Close"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:141 ../plugins/fade.c:182
+msgid "Fade Speed"
+msgstr "Vitesse de fondu"
+
+#: ../plugins/compiz.schemas.in.h:142 ../plugins/fade.c:216
+msgid "Fade effect on minimize/open/close window events"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:143 ../plugins/fade.c:202
+msgid "Fade effect on system beep"
+msgstr "Effet de fondu au signal sonore du système"
+
+#: ../plugins/compiz.schemas.in.h:144 ../plugins/fade.c:882
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Apparition en fondu des fenêtres en mode mapped et disparition en fondu des "
+"fenêtres en mode unmapped"
+
+#: ../plugins/compiz.schemas.in.h:145 ../plugins/fade.c:192
+#, fuzzy
+msgid "Fade windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:146 ../plugins/fade.c:881
+msgid "Fading Windows"
+msgstr "Fondu des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:147
+msgid "File change notification plugin"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:148
+#, fuzzy
+msgid "Fill Color"
+msgstr "Couleur du cube"
+
+#: ../plugins/compiz.schemas.in.h:150
+msgid "Fill color for filled outline mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:151 ../plugins/zoom.c:270
+msgid "Filter Linear"
+msgstr "Filtre linéaire"
+
+#: ../plugins/compiz.schemas.in.h:152
+msgid "Filter method used for blurring (4xBilinear, Gaussian, Mipmap)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:153 ../plugins/rotate.c:1997
+msgid "Flip Time"
+msgstr "Temps de rotation"
+
+#: ../plugins/compiz.schemas.in.h:154 ../plugins/rotate.c:1942
+msgid "Flip to left viewport and warp pointer"
+msgstr "Rotation sur le coté gauche avec le pointeur"
+
+#: ../plugins/compiz.schemas.in.h:155
+#, fuzzy
+msgid ""
+"Flip to left viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:156 ../plugins/rotate.c:1990
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Rotation vers la fenêtre suivante - Glissement d'un objet vers le côté de "
+"l'écran"
+
+#: ../plugins/compiz.schemas.in.h:157 ../plugins/rotate.c:1974
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Rotation vers la fenêtre suivante - Déplacement du pointeur vers le côté de "
+"l'écran"
+
+#: ../plugins/compiz.schemas.in.h:158 ../plugins/rotate.c:1982
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Rotation vers la fenêtre suivante - Déplacement de la fenêtre vers le côté "
+"de l'écran"
+
+#: ../plugins/compiz.schemas.in.h:159 ../plugins/rotate.c:1958
+msgid "Flip to right viewport and warp pointer"
+msgstr "Rotation sur le coté droit avec le pointeur"
+
+#: ../plugins/compiz.schemas.in.h:160
+#, fuzzy
+msgid ""
+"Flip to right viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:162 ../plugins/wobbly.c:373
+msgid "Focus Effect"
+msgstr "Effet de focus"
+
+#: ../plugins/compiz.schemas.in.h:164
+msgid "Focus Window Effect (None, Shiver)"
+msgstr "Effet de focus de la fenêtre (aucun effet ou effet de déformation)"
+
+#: ../plugins/compiz.schemas.in.h:165 ../plugins/wobbly.c:391
+#, fuzzy
+msgid "Focus Windows"
+msgstr "Focus des types de fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:167
+#, fuzzy
+msgid "Focus prevention windows (match)"
+msgstr "Sélectionner la fenêtre précédente"
+
+#: ../plugins/compiz.schemas.in.h:168
+msgid "Fold Acceleration (1.0-20.0)"
+msgstr "Accélération de pliage (1,0-20,0)"
+
+#: ../plugins/compiz.schemas.in.h:169
+#, fuzzy
+msgid "Fold Speed (0.0-50.0)"
+msgstr "Vitesse de pliage (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:170
+#, fuzzy
+msgid "Fold Timestep (0.0-50.0)"
+msgstr "Intervalle de pliage (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:171 ../plugins/wobbly.c:326
+msgid "Friction"
+msgstr "Friction"
+
+#: ../plugins/compiz.schemas.in.h:172 ../plugins/fade.c:208
+msgid "Fullscreen Visual Bell"
+msgstr "Cloche visuelle plein écran"
+
+#: ../plugins/compiz.schemas.in.h:173 ../plugins/fade.c:209
+msgid "Fullscreen fade effect on system beep"
+msgstr "Effet de fondu plein écran au signal sonore du système"
+
+#: ../plugins/compiz.schemas.in.h:176
+#, fuzzy
+msgid "Gaussian radius (1-15)"
+msgstr "Fédération de Russie"
+
+#: ../plugins/compiz.schemas.in.h:177
+#, fuzzy
+msgid "Gaussian strength (0.00-1.00)"
+msgstr "Russe"
+
+#: ../plugins/compiz.schemas.in.h:178 ../plugins/cube.c:1106
+#: ../plugins/switcher.c:368
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"Générer des mipmaps dans la mesure du possible pour une mise à l'échelle de "
+"meilleure qualité"
+
+#: ../plugins/compiz.schemas.in.h:179 ../plugins/cube.c:1836
+msgid "Go back to previous slide"
+msgstr "Revenir à la diapositive précédente"
+
+#: ../plugins/compiz.schemas.in.h:180
+#, fuzzy
+msgid ""
+"Go back to previous slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:181 ../plugins/wobbly.c:409
+#, fuzzy
+msgid "Grab Windows"
+msgstr "Saisir les types de fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:182 ../plugins/wobbly.c:346
+msgid "Grid Resolution"
+msgstr "Résolution de la grille"
+
+#: ../plugins/compiz.schemas.in.h:185
+#, fuzzy
+msgid ""
+"Hide all windows and focus desktop (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:188 ../plugins/place.c:300
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Taille virtuelle horizontale"
+
+#: ../plugins/compiz.schemas.in.h:189 ../plugins/scale.c:385
+msgid "Hover Time"
+msgstr "Temps de survol"
+
+#: ../plugins/compiz.schemas.in.h:190 ../plugins/switcher.c:420
+msgid "Icon"
+msgstr "Icône"
+
+#: ../plugins/compiz.schemas.in.h:191
+msgid ""
+"If this is set to true the window will repaint itself during resize, which "
+"may cause some lag."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:192
+msgid ""
+"If this is set, the pointer will be warped to the closest corner when you "
+"press start a resize."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:195 ../plugins/cube.c:1016
+msgid "Image files"
+msgstr "Fichiers image"
+
+#: ../plugins/compiz.schemas.in.h:196 ../plugins/cube.c:1038
+msgid "Image to use as texture for the skydome"
+msgstr "Image à utiliser comme texture pour le skydome"
+
+#: ../plugins/compiz.schemas.in.h:199
+#, fuzzy
+msgid ""
+"Increase window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:201 ../plugins/move.c:731
+msgid "Initiate Window Move"
+msgstr "Lancer le déplacement de fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:202 ../plugins/scale.c:1930
+msgid "Initiate Window Picker"
+msgstr "Lancer le sélecteur de fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:203 ../plugins/scale.c:1949
+msgid "Initiate Window Picker For All Windows"
+msgstr "Lancer le sélecteur de fenêtre pour toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:204 ../plugins/scale.c:1964
+msgid "Initiate Window Picker For Window Group"
+msgstr "Lancer le sélecteur de fenêtre pour un groupe de fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:205 ../plugins/scale.c:1980
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr ""
+"Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
+
+#: ../plugins/compiz.schemas.in.h:206 ../plugins/resize.c:720
+msgid "Initiate Window Resize"
+msgstr "Lancer le redimensionnement de fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:208
+#, fuzzy
+msgid ""
+"Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:210
+#, fuzzy
+msgid ""
+"Initiate annotate erasing (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:212
+#, fuzzy
+msgid ""
+"Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
+#, fuzzy
+msgid "Initiate rectangle screenshot"
+msgstr "Faire une capture d'écran"
+
+#: ../plugins/compiz.schemas.in.h:215
+#, fuzzy
+msgid ""
+"Initiate rectangle screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:216
+#, fuzzy
+msgid "Inotify"
+msgstr "Ne pas modifier"
+
+#: ../plugins/compiz.schemas.in.h:217 ../plugins/cube.c:1002
+msgid "Inside Cube"
+msgstr "À l'intérieur du cube"
+
+#: ../plugins/compiz.schemas.in.h:218 ../plugins/cube.c:1003
+msgid "Inside cube"
+msgstr "À l'intérieur du cube"
+
+#: ../plugins/compiz.schemas.in.h:219
+#, fuzzy
+msgid "Interval before raising selected windows (0-10000)"
+msgstr "Intervalle avant de remonter les fenêtres sélectionnées"
+
+#: ../plugins/compiz.schemas.in.h:220
+msgid "Interval between ping messages (1000-30000)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:221 ../plugins/rotate.c:288
+#: ../plugins/zoom.c:224
+msgid "Invert Y axis for pointer movement"
+msgstr "Insérer l'axe Y pour le mouvement du pointeur"
+
+#: ../plugins/compiz.schemas.in.h:222 ../plugins/wobbly.c:2861
+msgid "Inverted window snapping"
+msgstr "Alignement inversé de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:223 ../plugins/screenshot.c:407
+#, fuzzy
+msgid "Launch Application"
+msgstr "Lancer une Application"
+
+#: ../plugins/compiz.schemas.in.h:224 ../plugins/scale.c:1950
+msgid "Layout and start transforming all windows"
+msgstr "Disposer et commencer à transformer les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:225
+#, fuzzy
+msgid ""
+"Layout and start transforming all windows (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:226 ../plugins/scale.c:1965
+msgid "Layout and start transforming window group"
+msgstr "Disposer et commencer à transformer un groupe de fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:227
+#, fuzzy
+msgid ""
+"Layout and start transforming window group (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:228 ../plugins/scale.c:1931
+msgid "Layout and start transforming windows"
+msgstr "Disposer et commencer à transformer les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:229
+#, fuzzy
+msgid ""
+"Layout and start transforming windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:230 ../plugins/scale.c:1982
+msgid "Layout and start transforming windows on current output"
+msgstr ""
+"Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
+
+#: ../plugins/compiz.schemas.in.h:231
+#, fuzzy
+msgid ""
+"Layout and start transforming windows on current output (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
+
+#: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
+msgid "Line"
+msgstr "Ligne"
+
+#: ../plugins/compiz.schemas.in.h:235
+msgid "Line width for annotations (0.0-100.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:236 ../plugins/cube.c:1017
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "Liste de fichiers PNG et SVG à afficher sur la face supérieure du cube"
+
+#: ../plugins/compiz.schemas.in.h:241
+#, fuzzy
+msgid ""
+"Lower window beneath other windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:242 ../plugins/wobbly.c:2868
+msgid "Make window shiver"
+msgstr "Déformer la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:243
+#, fuzzy
+msgid ""
+"Make window shiver (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:244 ../plugins/wobbly.c:364
+msgid "Map Effect"
+msgstr "Mapper l'effet"
+
+#: ../plugins/compiz.schemas.in.h:245
+msgid "Map Window Effect (None, Shiver)"
+msgstr "Mapper l'effet de la fenêtre (aucun effet ou effet de déformation)"
+
+#: ../plugins/compiz.schemas.in.h:246 ../plugins/wobbly.c:382
+#, fuzzy
+msgid "Map Windows"
+msgstr "Mapper les types de fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:247 ../plugins/wobbly.c:418
+msgid "Maximize Effect"
+msgstr "Optimiser l'effet"
+
+#: ../plugins/compiz.schemas.in.h:252
+#, fuzzy
+msgid ""
+"Maximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:254
+#, fuzzy
+msgid ""
+"Maximize active window horizontally (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:256
+#, fuzzy
+msgid ""
+"Maximize active window vertically (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:257 ../plugins/minimize.c:1072
+msgid "Minimize Effect"
+msgstr "Minimiser l'effet"
+
+#: ../plugins/compiz.schemas.in.h:259 ../plugins/minimize.c:213
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "Minimiser la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:261
+#, fuzzy
+msgid ""
+"Minimize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:262
+#, fuzzy
+msgid "Minimize speed (0.0-50.0)"
+msgstr "Minimiser la vitesse (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:263
+#, fuzzy
+msgid "Minimize timestep (0.0-50.0)"
+msgstr "Minimiser la vitesse (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:264 ../plugins/switcher.c:427
+msgid "Minimized"
+msgstr "Minimisé"
+
+#: ../plugins/compiz.schemas.in.h:265 ../plugins/wobbly.c:355
+msgid "Minimum Grid Size"
+msgstr "Taille de grille minimale"
+
+#: ../plugins/compiz.schemas.in.h:266
+#, fuzzy
+msgid "Minimum Vertex Grid Size (4-128)"
+msgstr "Taille de grille de sommet minimale"
+
+#: ../plugins/compiz.schemas.in.h:267
+msgid "Minimum opacity for opacify"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:270
+msgid "Mipmap level-of-detail (0.0-5.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:271 ../plugins/fuse.c:1488
+#, fuzzy
+msgid "Mount Point"
+msgstr "Point"
+
+#: ../plugins/compiz.schemas.in.h:272 ../plugins/fuse.c:1489
+#, fuzzy
+msgid "Mount point"
+msgstr "Ajouter un point"
+
+#: ../plugins/compiz.schemas.in.h:273 ../plugins/move.c:939
+msgid "Move Window"
+msgstr "Déplacer la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:274 ../plugins/wobbly.c:400
+#, fuzzy
+msgid "Move Windows"
+msgstr "Déplacer la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:275 ../plugins/move.c:940
+msgid "Move window"
+msgstr "Déplacer la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:276 ../plugins/cube.c:1817
+msgid "Next Slide"
+msgstr "Diapositive suivante"
+
+#: ../plugins/compiz.schemas.in.h:277 ../plugins/switcher.c:2023
+#: ../plugins/switcher.c:2059 ../plugins/switcher.c:2097
+msgid "Next window"
+msgstr "Fenêtre suivante"
+
+#: ../plugins/compiz.schemas.in.h:279
+#, fuzzy
+msgid "Number of virtual desktops (1-36)"
+msgstr "Nombre de bureaux virtuels"
+
+#: ../plugins/compiz.schemas.in.h:280 ../plugins/water.c:1654
+msgid "Offset Scale"
+msgstr "Échelle de décalage"
+
+#: ../plugins/compiz.schemas.in.h:282
+msgid "Opacify only windows whose opacity is higher than this value (1-100)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:283 ../plugins/move.c:750
+#: ../plugins/scale.c:367 ../plugins/switcher.c:393
+msgid "Opacity"
+msgstr "Opacité"
+
+#: ../plugins/compiz.schemas.in.h:285
+#, fuzzy
+msgid "Opacity change step (1-50)"
+msgstr "Incrément de changement d'opacité"
+
+#: ../plugins/compiz.schemas.in.h:286
+#, fuzzy
+msgid "Opacity level of moving windows (1-100)"
+msgstr "Niveau d'opacité pour déplacer des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:287
+#, fuzzy
+msgid "Opacity level of resizing windows (1-100)"
+msgstr "Niveau d'opacité pour déplacer des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:292
+#, fuzzy
+msgid ""
+"Open a terminal (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:294
+#, fuzzy
+msgid ""
+"Open window menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:295
+#, fuzzy
+msgid "Outline Color"
+msgstr "Couleur du cube"
+
+#: ../plugins/compiz.schemas.in.h:296
+msgid "Outline color for outline and filled outline mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:299 ../plugins/scale.c:376
+msgid "Overlay Icon"
+msgstr "Superposer l'icône"
+
+#: ../plugins/compiz.schemas.in.h:300
+#, fuzzy
+msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
+msgstr ""
+"Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:302 ../plugins/place.c:1598
+msgid "Place Windows"
+msgstr "Placer des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:303 ../plugins/place.c:1599
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Placer des fenêtres aux positions correctes lorsqu'elles sont mappées"
+
+#: ../plugins/compiz.schemas.in.h:304 ../plugins/plane.c:890
+#, fuzzy
+msgid "Place windows on a plane"
+msgstr "Placer des fenêtres sur le cube"
+
+#: ../plugins/compiz.schemas.in.h:305 ../plugins/cube.c:2045
+msgid "Place windows on cube"
+msgstr "Placer des fenêtres sur le cube"
+
+#: ../plugins/compiz.schemas.in.h:306 ../plugins/place.c:245
+msgid "Placement Mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:307 ../plugins/plane.c:664
+#, fuzzy
+msgid "Plane Down"
+msgstr "Page bas"
+
+#: ../plugins/compiz.schemas.in.h:308 ../plugins/plane.c:626
+#, fuzzy
+msgid "Plane Left"
+msgstr "Rotation à gauche"
+
+#: ../plugins/compiz.schemas.in.h:309 ../plugins/plane.c:645
+#, fuzzy
+msgid "Plane Right"
+msgstr "Rotation à droite"
+
+#: ../plugins/compiz.schemas.in.h:310
+#, fuzzy
+msgid "Plane To Face 1"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:311
+#, fuzzy
+msgid "Plane To Face 10"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:312
+#, fuzzy
+msgid "Plane To Face 11"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:313
+#, fuzzy
+msgid "Plane To Face 12"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:314
+#, fuzzy
+msgid "Plane To Face 2"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:315
+#, fuzzy
+msgid "Plane To Face 3"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:316
+#, fuzzy
+msgid "Plane To Face 4"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:317
+#, fuzzy
+msgid "Plane To Face 5"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:318
+#, fuzzy
+msgid "Plane To Face 6"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:319
+#, fuzzy
+msgid "Plane To Face 7"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:320
+#, fuzzy
+msgid "Plane To Face 8"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:321
+#, fuzzy
+msgid "Plane To Face 9"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:322 ../plugins/plane.c:683
+#, fuzzy
+msgid "Plane Up"
+msgstr "Page haut"
+
+#: ../plugins/compiz.schemas.in.h:323 ../plugins/plane.c:665
+#, fuzzy
+msgid "Plane down"
+msgstr "Placer des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:324
+#, fuzzy
+msgid ""
+"Plane down (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:325 ../plugins/plane.c:627
+#, fuzzy
+msgid "Plane left"
+msgstr "Rotation à gauche"
+
+#: ../plugins/compiz.schemas.in.h:326
+#, fuzzy
+msgid ""
+"Plane left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:327 ../plugins/plane.c:646
+#, fuzzy
+msgid "Plane right"
+msgstr "Rotation à droite"
+
+#: ../plugins/compiz.schemas.in.h:328
+#, fuzzy
+msgid ""
+"Plane right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:329
+#, fuzzy
+msgid "Plane to face 1"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:330
+#, fuzzy
+msgid ""
+"Plane to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:331
+#, fuzzy
+msgid "Plane to face 10"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:332
+#, fuzzy
+msgid ""
+"Plane to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:333
+#, fuzzy
+msgid "Plane to face 11"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:334
+#, fuzzy
+msgid ""
+"Plane to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:335
+#, fuzzy
+msgid "Plane to face 12"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:336
+#, fuzzy
+msgid ""
+"Plane to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:337
+#, fuzzy
+msgid "Plane to face 2"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:338
+#, fuzzy
+msgid ""
+"Plane to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:339
+#, fuzzy
+msgid "Plane to face 3"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:340
+#, fuzzy
+msgid ""
+"Plane to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:341
+#, fuzzy
+msgid "Plane to face 4"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:342
+#, fuzzy
+msgid ""
+"Plane to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:343
+#, fuzzy
+msgid "Plane to face 5"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:344
+#, fuzzy
+msgid ""
+"Plane to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:345
+#, fuzzy
+msgid "Plane to face 6"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:346
+#, fuzzy
+msgid ""
+"Plane to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:347
+#, fuzzy
+msgid "Plane to face 7"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:348
+#, fuzzy
+msgid ""
+"Plane to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:349
+#, fuzzy
+msgid "Plane to face 8"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:350
+#, fuzzy
+msgid ""
+"Plane to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:351
+#, fuzzy
+msgid "Plane to face 9"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/compiz.schemas.in.h:352
+#, fuzzy
+msgid ""
+"Plane to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:353 ../plugins/plane.c:684
+msgid "Plane up"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:354
+#, fuzzy
+msgid ""
+"Plane up (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:355 ../plugins/gconf-dump.c:616
+msgid "Plugins that this must load before"
+msgstr "Plug-ins à charger avant"
+
+#: ../plugins/compiz.schemas.in.h:356 ../plugins/gconf-dump.c:626
+msgid "Plugins that this requires"
+msgstr "Plug-ins requis"
+
+#: ../plugins/compiz.schemas.in.h:357
+msgid "Png"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:358
+msgid "Png image loader"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:359 ../plugins/water.c:1685
+msgid "Point"
+msgstr "Point"
+
+#: ../plugins/compiz.schemas.in.h:360 ../plugins/rotate.c:287
+#: ../plugins/zoom.c:223
+msgid "Pointer Invert Y"
+msgstr "Inversion Y du pointeur"
+
+#: ../plugins/compiz.schemas.in.h:361 ../plugins/rotate.c:294
+#: ../plugins/zoom.c:230
+msgid "Pointer Sensitivity"
+msgstr "Sensibilité du pointeur"
+
+#: ../plugins/compiz.schemas.in.h:362 ../plugins/switcher.c:2024
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre suivante"
+
+#: ../plugins/compiz.schemas.in.h:363
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select next window (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre suivante parmi toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:364 ../plugins/switcher.c:2060
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre suivante parmi toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:365
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select next window out of all windows "
+"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre suivante parmi toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:366 ../plugins/switcher.c:2042
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre précédente"
+
+#: ../plugins/compiz.schemas.in.h:367
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select previous window (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre précédente parmi toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:368 ../plugins/switcher.c:2079
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre précédente parmi toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:369
+#, fuzzy
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows "
+"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Afficher la touche de modification si elle n'est pas visible et sélectionner "
+"la fenêtre précédente parmi toutes les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:370 ../plugins/place.c:254
+#, fuzzy
+msgid "Positioned windows"
+msgstr "Afficher des fenêtres réduites"
+
+#: ../plugins/compiz.schemas.in.h:371 ../plugins/switcher.c:2041
+#: ../plugins/switcher.c:2078 ../plugins/switcher.c:2110
+msgid "Prev window"
+msgstr "Fenêtre précédente"
+
+#: ../plugins/compiz.schemas.in.h:372 ../plugins/cube.c:1835
+msgid "Previous Slide"
+msgstr "Diapositive précédente"
+
+#: ../plugins/compiz.schemas.in.h:373 ../plugins/video.c:248
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:376
+#, fuzzy
+msgid ""
+"Pulse effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:377 ../plugins/screenshot.c:399
+#, fuzzy
+msgid "Put screenshot images in this directory"
+msgstr "Traitement récursif dans le répertoire"
+
+#: ../plugins/compiz.schemas.in.h:378 ../plugins/water.c:1664
+msgid "Rain Delay"
+msgstr "Délai de pluie"
+
+#: ../plugins/compiz.schemas.in.h:383
+#, fuzzy
+msgid ""
+"Raise window above other windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:386 ../plugins/regex.c:463
+msgid "Regex Matching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:387 ../plugins/regex.c:464
+#, fuzzy
+msgid "Regex window matching"
+msgstr "Basculer l'alignement des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:388 ../plugins/cube.c:1031
+msgid "Render skydome"
+msgstr "Afficher le skydome"
+
+#: ../plugins/compiz.schemas.in.h:389
+msgid "Repaints the window on each resize step"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:390
+msgid "Resize Display Mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:391 ../plugins/resize.c:887
+msgid "Resize Window"
+msgstr "Redimensionner la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:392 ../plugins/resize.c:888
+msgid "Resize window"
+msgstr "Redimensionner la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:393 ../plugins/rotate.c:2180
+msgid "Rotate Cube"
+msgstr "Rotation du cube"
+
+#: ../plugins/compiz.schemas.in.h:394 ../plugins/rotate.c:1941
+msgid "Rotate Flip Left"
+msgstr "Rotation sur le côté gauche"
+
+#: ../plugins/compiz.schemas.in.h:395 ../plugins/rotate.c:1957
+msgid "Rotate Flip Right"
+msgstr "Rotation sur le côté droit"
+
+#: ../plugins/compiz.schemas.in.h:396 ../plugins/rotate.c:1789
+msgid "Rotate Left"
+msgstr "Rotation à gauche"
+
+#: ../plugins/compiz.schemas.in.h:397 ../plugins/rotate.c:1827
+msgid "Rotate Left with Window"
+msgstr "Rotation à gauche avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:398 ../plugins/rotate.c:1808
+msgid "Rotate Right"
+msgstr "Rotation à droite"
+
+#: ../plugins/compiz.schemas.in.h:399 ../plugins/rotate.c:1847
+msgid "Rotate Right with Window"
+msgstr "Rotation à droite avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:400 ../plugins/rotate.c:1917
+msgid "Rotate To"
+msgstr "Rotation vers"
+
+#: ../plugins/compiz.schemas.in.h:401
+#, fuzzy
+msgid "Rotate To Face 1"
+msgstr "Rotation vers la face 10"
+
+#: ../plugins/compiz.schemas.in.h:402
+#, fuzzy
+msgid "Rotate To Face 1 with Window"
+msgstr "Rotation vers la face 10 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:403
+msgid "Rotate To Face 10"
+msgstr "Rotation vers la face 10"
+
+#: ../plugins/compiz.schemas.in.h:404
+msgid "Rotate To Face 10 with Window"
+msgstr "Rotation vers la face 10 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:405
+msgid "Rotate To Face 11"
+msgstr "Rotation vers la face 11"
+
+#: ../plugins/compiz.schemas.in.h:406
+msgid "Rotate To Face 11 with Window"
+msgstr "Rotation vers la face 11 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:407
+msgid "Rotate To Face 12"
+msgstr "Rotation vers la face 12"
+
+#: ../plugins/compiz.schemas.in.h:408
+msgid "Rotate To Face 12 with Window"
+msgstr "Rotation vers la face 12 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:409
+msgid "Rotate To Face 2"
+msgstr "Rotation vers la face 2"
+
+#: ../plugins/compiz.schemas.in.h:410
+msgid "Rotate To Face 2 with Window"
+msgstr "Rotation vers la face 2 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:411
+msgid "Rotate To Face 3"
+msgstr "Rotation vers la face 3"
+
+#: ../plugins/compiz.schemas.in.h:412
+msgid "Rotate To Face 3 with Window"
+msgstr "Rotation vers la face 3 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:413
+msgid "Rotate To Face 4"
+msgstr "Rotation vers la face 4"
+
+#: ../plugins/compiz.schemas.in.h:414
+msgid "Rotate To Face 4 with Window"
+msgstr "Rotation vers la face 4 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:415
+msgid "Rotate To Face 5"
+msgstr "Rotation vers la face 5"
+
+#: ../plugins/compiz.schemas.in.h:416
+msgid "Rotate To Face 5 with Window"
+msgstr "Rotation vers la face 5 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:417
+msgid "Rotate To Face 6"
+msgstr "Rotation vers la face 6"
+
+#: ../plugins/compiz.schemas.in.h:418
+msgid "Rotate To Face 6 with Window"
+msgstr "Rotation vers la face 6 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:419
+msgid "Rotate To Face 7"
+msgstr "Rotation vers la face 7"
+
+#: ../plugins/compiz.schemas.in.h:420
+msgid "Rotate To Face 7 with Window"
+msgstr "Rotation vers la face 7 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:421
+msgid "Rotate To Face 8"
+msgstr "Rotation vers la face 8"
+
+#: ../plugins/compiz.schemas.in.h:422
+msgid "Rotate To Face 8 with Window"
+msgstr "Rotation vers la face 8 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:423
+msgid "Rotate To Face 9"
+msgstr "Rotation vers la face 9"
+
+#: ../plugins/compiz.schemas.in.h:424
+msgid "Rotate To Face 9 with Window"
+msgstr "Rotation vers la face 9 avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:425 ../plugins/rotate.c:1929
+msgid "Rotate Window"
+msgstr "Rotation de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:426 ../plugins/rotate.c:2181
+msgid "Rotate desktop cube"
+msgstr "Rotation du cube de bureau"
+
+#: ../plugins/compiz.schemas.in.h:427 ../plugins/rotate.c:1790
+msgid "Rotate left"
+msgstr "Rotation à gauche"
+
+#: ../plugins/compiz.schemas.in.h:428
+#, fuzzy
+msgid ""
+"Rotate left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:429 ../plugins/rotate.c:1828
+msgid "Rotate left and bring active window along"
+msgstr "Rotation à gauche avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:430
+#, fuzzy
+msgid ""
+"Rotate left and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:431 ../plugins/rotate.c:1809
+msgid "Rotate right"
+msgstr "Rotation à droite"
+
+#: ../plugins/compiz.schemas.in.h:432
+#, fuzzy
+msgid ""
+"Rotate right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:433 ../plugins/rotate.c:1848
+msgid "Rotate right and bring active window along"
+msgstr "Rotation à droite avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:434
+#, fuzzy
+msgid ""
+"Rotate right and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:435
+#, fuzzy
+msgid "Rotate to face 1"
+msgstr "Rotation vers la face 10"
+
+#: ../plugins/compiz.schemas.in.h:436
+#, fuzzy
+msgid ""
+"Rotate to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:437
+#, fuzzy
+msgid "Rotate to face 1 and bring active window along"
+msgstr "Rotation vers la face 10 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:438
+#, fuzzy
+msgid ""
+"Rotate to face 1 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:439
+msgid "Rotate to face 10"
+msgstr "Rotation vers la face 10"
+
+#: ../plugins/compiz.schemas.in.h:440
+#, fuzzy
+msgid ""
+"Rotate to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:441
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Rotation vers la face 10 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:442
+#, fuzzy
+msgid ""
+"Rotate to face 10 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:443
+msgid "Rotate to face 11"
+msgstr "Rotation vers la face 11"
+
+#: ../plugins/compiz.schemas.in.h:444
+#, fuzzy
+msgid ""
+"Rotate to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:445
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Rotation vers la face 11 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:446
+#, fuzzy
+msgid ""
+"Rotate to face 11 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:447
+msgid "Rotate to face 12"
+msgstr "Rotation vers la face 12"
+
+#: ../plugins/compiz.schemas.in.h:448
+#, fuzzy
+msgid ""
+"Rotate to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:449
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Rotation vers la face 12 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:450
+#, fuzzy
+msgid ""
+"Rotate to face 12 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:451
+msgid "Rotate to face 2"
+msgstr "Rotation vers la face 2"
+
+#: ../plugins/compiz.schemas.in.h:452
+#, fuzzy
+msgid ""
+"Rotate to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:453
+msgid "Rotate to face 2 and bring active window along"
+msgstr "Rotation vers la face 2 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:454
+#, fuzzy
+msgid ""
+"Rotate to face 2 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:455
+msgid "Rotate to face 3"
+msgstr "Rotation vers la face 3"
+
+#: ../plugins/compiz.schemas.in.h:456
+#, fuzzy
+msgid ""
+"Rotate to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:457
+msgid "Rotate to face 3 and bring active window along"
+msgstr "Rotation vers la face 3 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:458
+#, fuzzy
+msgid ""
+"Rotate to face 3 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:459
+msgid "Rotate to face 4"
+msgstr "Rotation vers la face 4"
+
+#: ../plugins/compiz.schemas.in.h:460
+#, fuzzy
+msgid ""
+"Rotate to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:461
+msgid "Rotate to face 4 and bring active window along"
+msgstr "Rotation vers la face 4 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:462
+#, fuzzy
+msgid ""
+"Rotate to face 4 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:463
+msgid "Rotate to face 5"
+msgstr "Rotation vers la face 5"
+
+#: ../plugins/compiz.schemas.in.h:464
+#, fuzzy
+msgid ""
+"Rotate to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:465
+msgid "Rotate to face 5 and bring active window along"
+msgstr "Rotation vers la face 5 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:466
+#, fuzzy
+msgid ""
+"Rotate to face 5 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:467
+msgid "Rotate to face 6"
+msgstr "Rotation vers la face 6"
+
+#: ../plugins/compiz.schemas.in.h:468
+#, fuzzy
+msgid ""
+"Rotate to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:469
+msgid "Rotate to face 6 and bring active window along"
+msgstr "Rotation vers la face 6 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:470
+#, fuzzy
+msgid ""
+"Rotate to face 6 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:471
+msgid "Rotate to face 7"
+msgstr "Rotation vers la face 7"
+
+#: ../plugins/compiz.schemas.in.h:472
+#, fuzzy
+msgid ""
+"Rotate to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:473
+msgid "Rotate to face 7 and bring active window along"
+msgstr "Rotation vers la face 7 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:474
+#, fuzzy
+msgid ""
+"Rotate to face 7 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:475
+msgid "Rotate to face 8"
+msgstr "Rotation vers la face 8"
+
+#: ../plugins/compiz.schemas.in.h:476
+#, fuzzy
+msgid ""
+"Rotate to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:477
+msgid "Rotate to face 8 and bring active window along"
+msgstr "Rotation vers la face 8 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:478
+#, fuzzy
+msgid ""
+"Rotate to face 8 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:479
+msgid "Rotate to face 9"
+msgstr "Rotation vers la face 9"
+
+#: ../plugins/compiz.schemas.in.h:480
+#, fuzzy
+msgid ""
+"Rotate to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:481
+msgid "Rotate to face 9 and bring active window along"
+msgstr "Rotation vers la face 9 avec la fenêtre active"
+
+#: ../plugins/compiz.schemas.in.h:482
+#, fuzzy
+msgid ""
+"Rotate to face 9 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:483 ../plugins/switcher.c:435
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:484 ../plugins/rotate.c:1918
+msgid "Rotate to viewport"
+msgstr "Rotation vers un bureau"
+
+#: ../plugins/compiz.schemas.in.h:485
+#, fuzzy
+msgid ""
+"Rotate to viewport (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:486 ../plugins/rotate.c:1930
+msgid "Rotate with window"
+msgstr "Rotation avec la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:487
+#, fuzzy
+msgid ""
+"Rotate with window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:488
+#, fuzzy
+msgid "Rotation Acceleration (1.0-20.0)"
+msgstr "Accélération de pliage (1,0-20,0)"
+
+#: ../plugins/compiz.schemas.in.h:489
+#, fuzzy
+msgid "Rotation Speed (0.0-50.0)"
+msgstr "Vitesse du zoom (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:490
+#, fuzzy
+msgid "Rotation Timestep (0.0-50.0)"
+msgstr "Intervalle du zoom (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:504 ../plugins/switcher.c:375
+msgid "Saturation"
+msgstr "Saturation"
+
+#: ../plugins/compiz.schemas.in.h:505 ../plugins/scale.c:2212
+msgid "Scale"
+msgstr "Échelle"
+
+#: ../plugins/compiz.schemas.in.h:506 ../plugins/scale.c:351
+#, fuzzy
+msgid "Scale Windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:507 ../plugins/cube.c:1009
+msgid "Scale image"
+msgstr "Mettre l'image à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:508 ../plugins/cube.c:1010
+msgid "Scale images to cover top face of cube"
+msgstr "Mettre les images à l'échelle pour couvrir la face supérieure du cube"
+
+#: ../plugins/compiz.schemas.in.h:509
+#, fuzzy
+msgid "Scale speed (0.0-50.0)"
+msgstr "Vitesse d'échelle (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:510
+#, fuzzy
+msgid "Scale timestep (0.0-50.0)"
+msgstr "Intervalle d'échelle (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:511 ../plugins/scale.c:2213
+msgid "Scale windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:512
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size (1-32)"
+msgstr "Multiplicateur de taille d'écran pour taille virtuelle horizontale"
+
+#: ../plugins/compiz.schemas.in.h:513
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size (1-32)"
+msgstr "Multiplicateur de taille d'écran pour taille virtuelle verticale"
+
+#: ../plugins/compiz.schemas.in.h:514 ../plugins/screenshot.c:559
+#, fuzzy
+msgid "Screenshot"
+msgstr "Écran"
+
+#: ../plugins/compiz.schemas.in.h:516 ../plugins/screenshot.c:560
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Ligne de commande de capture d'écran"
+
+#: ../plugins/compiz.schemas.in.h:517
+msgid ""
+"Select between normal, stretched texture, outline and filled outline mode. "
+"(Normal, Stretch, Outline, Filled Outline)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:518 ../plugins/switcher.c:2098
+msgid "Select next window"
+msgstr "Sélectionner la fenêtre suivante"
+
+#: ../plugins/compiz.schemas.in.h:519
+#, fuzzy
+msgid ""
+"Select next window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:520 ../plugins/switcher.c:2111
+msgid "Select previous window"
+msgstr "Sélectionner la fenêtre précédente"
+
+#: ../plugins/compiz.schemas.in.h:521
+#, fuzzy
+msgid ""
+"Select previous window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:522
+#, fuzzy
+msgid "Sensitivity of pointer movement (0.01-100.00)"
+msgstr "Sensibilité du mouvement du pointeur"
+
+#: ../plugins/compiz.schemas.in.h:523 ../plugins/minimize.c:222
+msgid "Shade Resistance"
+msgstr "Ombrer la résistance"
+
+#: ../plugins/compiz.schemas.in.h:524
+msgid "Shade resistance (0-100)"
+msgstr "Ombrer la résistance (0-100)"
+
+#: ../plugins/compiz.schemas.in.h:525
+#, fuzzy
+msgid "Shadow Color"
+msgstr "Aligner les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:526 ../plugins/decoration.c:1162
+msgid "Shadow Offset X"
+msgstr "Décalage X de l'ombre"
+
+#: ../plugins/compiz.schemas.in.h:527 ../plugins/decoration.c:1171
+msgid "Shadow Offset Y"
+msgstr "Décalage Y de l'ombre"
+
+#: ../plugins/compiz.schemas.in.h:528 ../plugins/decoration.c:1142
+msgid "Shadow Opacity"
+msgstr "Opacité de l'ombre"
+
+#: ../plugins/compiz.schemas.in.h:529 ../plugins/decoration.c:1132
+msgid "Shadow Radius"
+msgstr "Rayon de l'ombre"
+
+#: ../plugins/compiz.schemas.in.h:530 ../plugins/decoration.c:1206
+#, fuzzy
+msgid "Shadow windows"
+msgstr "Aligner les fenêtres"
+
+# 'driver' as in '(hardware) driver update'
+#: ../plugins/compiz.schemas.in.h:531 ../plugins/wobbly.c:132
+#: ../plugins/wobbly.c:2867
+msgid "Shiver"
+msgstr "Déformation"
+
+#: ../plugins/compiz.schemas.in.h:534
+#, fuzzy
+msgid ""
+"Show Run Application dialog (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:535 ../plugins/switcher.c:421
+msgid "Show icon next to thumbnail"
+msgstr "Afficher l'icône à côté de la miniature"
+
+#: ../plugins/compiz.schemas.in.h:536 ../plugins/switcher.c:428
+msgid "Show minimized windows"
+msgstr "Afficher des fenêtres réduites"
+
+#: ../plugins/compiz.schemas.in.h:538
+#, fuzzy
+msgid ""
+"Show the main menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:539 ../plugins/cube.c:1030
+msgid "Skydome"
+msgstr "Skydome"
+
+#: ../plugins/compiz.schemas.in.h:540 ../plugins/cube.c:1064
+msgid "Skydome Gradient End Color"
+msgstr "Couleur de fin du gradient de skydome"
+
+#: ../plugins/compiz.schemas.in.h:541 ../plugins/cube.c:1053
+msgid "Skydome Gradient Start Color"
+msgstr "Couleur de début du gradient de skydome"
+
+#: ../plugins/compiz.schemas.in.h:542 ../plugins/cube.c:1037
+msgid "Skydome Image"
+msgstr "Image du skydome"
+
+#: ../plugins/compiz.schemas.in.h:544 ../plugins/rotate.c:315
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Aligner la rotation du cube sur la face supérieure"
+
+#: ../plugins/compiz.schemas.in.h:545 ../plugins/wobbly.c:2860
+msgid "Snap Inverted"
+msgstr "Alignement inversé"
+
+#: ../plugins/compiz.schemas.in.h:546 ../plugins/rotate.c:314
+msgid "Snap To Top Face"
+msgstr "Aligner sur la face supérieure"
+
+#: ../plugins/compiz.schemas.in.h:547 ../plugins/wobbly.c:2846
+msgid "Snap windows"
+msgstr "Aligner les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:548 ../plugins/move.c:767
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"Désactiver l'alignement et la réduction automatique des fenêtres lorsque "
+"vous les faites glisser"
+
+#: ../plugins/compiz.schemas.in.h:549 ../plugins/move.c:766
+msgid "Snapoff maximized windows"
+msgstr "Désactiver l'alignement des fenêtres agrandies"
+
+#: ../plugins/compiz.schemas.in.h:550
+#, fuzzy
+msgid "Space between windows (0-250)"
+msgstr "Espace entre les fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:551 ../plugins/scale.c:322
+msgid "Spacing"
+msgstr "Espacement"
+
+#: ../plugins/compiz.schemas.in.h:552 ../plugins/cube.c:1085
+#: ../plugins/minimize.c:193 ../plugins/rotate.c:321 ../plugins/scale.c:331
+#: ../plugins/switcher.c:338 ../plugins/zoom.c:240
+msgid "Speed"
+msgstr "Vitesse"
+
+#: ../plugins/compiz.schemas.in.h:553
+#, fuzzy
+msgid "Spring Friction (0.0-10.0)"
+msgstr "Friction de ressort"
+
+#: ../plugins/compiz.schemas.in.h:554 ../plugins/wobbly.c:336
+msgid "Spring K"
+msgstr "Ressort K"
+
+#: ../plugins/compiz.schemas.in.h:555
+#, fuzzy
+msgid "Spring Konstant (0.0-10.0)"
+msgstr "Constante de ressort"
+
+#: ../plugins/compiz.schemas.in.h:556 ../plugins/rotate.c:1775
+msgid "Start Rotation"
+msgstr "Démarrer la rotation"
+
+#: ../plugins/compiz.schemas.in.h:557
+#, fuzzy
+msgid ""
+"Start Rotation (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:558 ../plugins/move.c:732
+msgid "Start moving window"
+msgstr "Démarrer le déplacement de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:559
+#, fuzzy
+msgid ""
+"Start moving window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:560 ../plugins/resize.c:721
+msgid "Start resizing window"
+msgstr "Commencer à redimensionner la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:561
+#, fuzzy
+msgid ""
+"Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:564
+msgid "Stroke width for annotations (0.0-20.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:565
+msgid "Svg"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:566
+msgid "Svg image loader"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:567
+#, fuzzy
+msgid "Switcher speed (0.0-50.0)"
+msgstr "Vitesse d'échelle (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:568
+#, fuzzy
+msgid "Switcher timestep (0.0-50.0)"
+msgstr "Intervalle d'échelle (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:569 ../plugins/switcher.c:358
+#, fuzzy
+msgid "Switcher windows"
+msgstr "Mettre les fenêtres à l'échelle"
+
+#: ../plugins/compiz.schemas.in.h:572
+#, fuzzy
+msgid ""
+"Take a screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:574
+#, fuzzy
+msgid ""
+"Take a screenshot of a window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:577
+msgid "Texture filtering (Fast, Good, Best)"
+msgstr "Filtrage de texture (rapide, bon ou supérieur)"
+
+#: ../plugins/compiz.schemas.in.h:578
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second) (1-200)"
+msgstr "Vitesse à laquelle l'écran est redessiné (fois/seconde)"
+
+#: ../plugins/compiz.schemas.in.h:579
+#, fuzzy
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window (50-"
+"10000)"
+msgstr ""
+"Temps (en ms) avant que le mode échelle soit terminé lors du survol au-"
+"dessus d'une fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:580
+#, fuzzy
+msgid "Timeout before flipping viewport (0-1000)"
+msgstr "Timeout avant la rotation du bureau"
+
+#: ../plugins/compiz.schemas.in.h:581 ../plugins/cube.c:1095
+#: ../plugins/minimize.c:203 ../plugins/rotate.c:331 ../plugins/scale.c:341
+#: ../plugins/switcher.c:348 ../plugins/zoom.c:250
+msgid "Timestep"
+msgstr "Intervalle"
+
+#: ../plugins/compiz.schemas.in.h:582 ../plugins/water.c:1673
+msgid "Title wave"
+msgstr "Vague sur le titre"
+
+#: ../plugins/compiz.schemas.in.h:588
+#, fuzzy
+msgid ""
+"Toggle active window maximized (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:590
+#, fuzzy
+msgid ""
+"Toggle active window maximized horizontally (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:592
+#, fuzzy
+msgid ""
+"Toggle active window maximized vertically (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:594
+#, fuzzy
+msgid ""
+"Toggle active window shaded (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:595 ../plugins/water.c:1622
+msgid "Toggle rain"
+msgstr "Basculer la pluie"
+
+#: ../plugins/compiz.schemas.in.h:596 ../plugins/water.c:1623
+msgid "Toggle rain effect"
+msgstr "Basculer l'effet de pluie"
+
+#: ../plugins/compiz.schemas.in.h:597
+#, fuzzy
+msgid ""
+"Toggle rain effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:599
+#, fuzzy
+msgid ""
+"Toggle use of slow animations (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:600 ../plugins/wobbly.c:2847
+msgid "Toggle window snapping"
+msgstr "Basculer l'alignement des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:601
+#, fuzzy
+msgid ""
+"Toggle window snapping (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:602 ../plugins/water.c:1638
+msgid "Toggle wiper"
+msgstr "Activer/désactiver l'essuie-glace"
+
+#: ../plugins/compiz.schemas.in.h:603 ../plugins/water.c:1639
+msgid "Toggle wiper effect"
+msgstr "Activer/désactiver l'effet d'essuie-glace"
+
+#: ../plugins/compiz.schemas.in.h:604
+#, fuzzy
+msgid ""
+"Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:605 ../plugins/minimize.c:1073
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Transformer les fenêtres lorsqu'elles sont réduites ou agrandies"
+
+#: ../plugins/compiz.schemas.in.h:606
+msgid "USe linear filter when zoomed in"
+msgstr "Utiliser le filtre linéaire pour le zoom avant"
+
+#: ../plugins/compiz.schemas.in.h:607 ../plugins/cube.c:1799
+msgid "Unfold"
+msgstr "Déplier"
+
+#: ../plugins/compiz.schemas.in.h:608 ../plugins/cube.c:1800
+msgid "Unfold cube"
+msgstr "Déplier le cube"
+
+#: ../plugins/compiz.schemas.in.h:609
+#, fuzzy
+msgid ""
+"Unfold cube (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:612
+#, fuzzy
+msgid ""
+"Unmaximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:615 ../plugins/wobbly.c:3082
+msgid "Use spring model for wobbly window effect"
+msgstr "Utiliser le modèle de ressort pour l'effet de tremblement de fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:616 ../plugins/fuse.c:1588
+msgid "Userspace File System"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:617 ../plugins/fuse.c:1589
+msgid "Userspace file system"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:618
+#, fuzzy
+msgid "Vertex Grid Resolution (1-64)"
+msgstr "Résolution de la grille de sommet"
+
+#: ../plugins/compiz.schemas.in.h:620 ../plugins/place.c:311
+msgid "Vertical viewport positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:621 ../plugins/video.c:1242
+msgid "Video Playback"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:622 ../plugins/video.c:1243
+msgid "Video playback"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:623 ../plugins/place.c:287
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:624 ../plugins/fade.c:201
+msgid "Visual Bell"
+msgstr "Cloche virtuelle"
+
+#: ../plugins/compiz.schemas.in.h:625
+msgid "Warp pointer when starting a resize with mouse initiate combo."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:626 ../plugins/water.c:1875
+msgid "Water Effect"
+msgstr "Effet d'eau"
+
+#: ../plugins/compiz.schemas.in.h:627
+#, fuzzy
+msgid "Water offset scale (0.0-10.0)"
+msgstr "Échelle de décalage d'eau"
+
+#: ../plugins/compiz.schemas.in.h:628 ../plugins/water.c:1674
+msgid "Wave effect from window title"
+msgstr "Effet de vague sur le titre de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:629
+#, fuzzy
+msgid ""
+"Wave effect from window title (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:630 ../plugins/decoration.c:1492
+msgid "Window Decoration"
+msgstr "Décoration de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:632
+#, fuzzy
+msgid "Window blur speed (0.0-10.0)"
+msgstr "Vitesse de fondu de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:633 ../plugins/decoration.c:1493
+msgid "Window decorations"
+msgstr "Décoration des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:634
+#, fuzzy
+msgid "Window fade speed (0.0-25.0)"
+msgstr "Vitesse de fondu de la fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:635 ../plugins/place.c:239
+msgid "Window placement workarounds"
+msgstr "Solution de placement de fenêtre"
+
+#: ../plugins/compiz.schemas.in.h:637
+#, fuzzy
+msgid "Windows that should be affected by focus blur (match)"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/compiz.schemas.in.h:638
+#, fuzzy
+msgid "Windows that should be decorated (match)"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/compiz.schemas.in.h:639
+#, fuzzy
+msgid "Windows that should be fading (match)"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/compiz.schemas.in.h:640
+#, fuzzy
+msgid "Windows that should be have a shadow (match)"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/compiz.schemas.in.h:641 ../plugins/place.c:255
+#, fuzzy
+msgid "Windows that should be positioned by default"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/compiz.schemas.in.h:642
+#, fuzzy
+msgid "Windows that should be scaled in scale mode (match)"
+msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
+
+#: ../plugins/compiz.schemas.in.h:643
+#, fuzzy
+msgid "Windows that should be shown in switcher (match)"
+msgstr "Types de fenêtres à afficher dans le commutateur"
+
+#: ../plugins/compiz.schemas.in.h:644
+#, fuzzy
+msgid "Windows that should be transformed when minimized (match)"
+msgstr "Types de fenêtres à transformer lorsqu'elles sont réduites"
+
+#: ../plugins/compiz.schemas.in.h:646 ../plugins/place.c:288
+#, fuzzy
+msgid "Windows that should positioned in specific viewports by default"
+msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
+
+#: ../plugins/compiz.schemas.in.h:647
+#, fuzzy
+msgid "Windows that should use alpha blur by default (match)"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/compiz.schemas.in.h:648
+#, fuzzy
+msgid "Windows that should wobble when focused (match)"
+msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
+
+#: ../plugins/compiz.schemas.in.h:649
+#, fuzzy
+msgid "Windows that should wobble when grabbed (match)"
+msgstr "Types de fenêtres à déformer lorsqu'elles sont saisies"
+
+#: ../plugins/compiz.schemas.in.h:650
+#, fuzzy
+msgid "Windows that should wobble when mapped (match)"
+msgstr "Types de fenêtres à déformer lorsqu'elles sont mappées"
+
+#: ../plugins/compiz.schemas.in.h:651
+#, fuzzy
+msgid "Windows that should wobble when moved (match)"
+msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
+
+#: ../plugins/compiz.schemas.in.h:652 ../plugins/wobbly.c:419
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr ""
+"Effet de déformation lors de la réduction et de l'agrandissement des fenêtres"
+
+#: ../plugins/compiz.schemas.in.h:653 ../plugins/wobbly.c:3081
+msgid "Wobbly Windows"
+msgstr "Fenêtres déformées"
+
+#: ../plugins/compiz.schemas.in.h:654 ../plugins/place.c:238
+msgid "Workarounds"
+msgstr "Solutions"
+
+#: ../plugins/compiz.schemas.in.h:655 ../plugins/place.c:265
+msgid "X Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:656 ../plugins/place.c:299
+msgid "X Viewport Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:657 ../plugins/place.c:266
+msgid "X position values"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:658 ../plugins/place.c:276
+msgid "Y Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:659 ../plugins/place.c:310
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:660 ../plugins/place.c:277
+msgid "Y position values"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:661 ../plugins/video.c:247
+msgid "YV12 colorspace"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:662 ../plugins/switcher.c:409
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../plugins/compiz.schemas.in.h:663 ../plugins/zoom.c:942
+msgid "Zoom Desktop"
+msgstr "Zoom - Bureau"
+
+#: ../plugins/compiz.schemas.in.h:664 ../plugins/zoom.c:756
+#: ../plugins/zoom.c:770 ../plugins/zoom.c:771
+msgid "Zoom In"
+msgstr "Zoom avant"
+
+#: ../plugins/compiz.schemas.in.h:665
+#, fuzzy
+msgid ""
+"Zoom In (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:666 ../plugins/zoom.c:785
+#: ../plugins/zoom.c:786
+msgid "Zoom Out"
+msgstr "Zoom arrière"
+
+#: ../plugins/compiz.schemas.in.h:667
+#, fuzzy
+msgid ""
+"Zoom Out (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+"Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, bas "
+"à gauche et bas à droite)"
+
+#: ../plugins/compiz.schemas.in.h:668
+#, fuzzy
+msgid "Zoom Speed (0.0-50.0)"
+msgstr "Vitesse du zoom (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:669
+#, fuzzy
+msgid "Zoom Timestep (0.0-50.0)"
+msgstr "Intervalle du zoom (0,1-50,0)"
+
+#: ../plugins/compiz.schemas.in.h:670 ../plugins/zoom.c:943
+msgid "Zoom and pan desktop cube"
+msgstr "Zoom et panoramique du cube du bureau"
+
+#: ../plugins/compiz.schemas.in.h:671 ../plugins/zoom.c:260
+#: ../plugins/zoom.c:261
+msgid "Zoom factor"
+msgstr "Facteur du zoom"
+
+#: ../plugins/compiz.schemas.in.h:672
+#, fuzzy
+msgid "Zoom factor (1.01-3.00)"
+msgstr "Facteur du zoom"
+
+#: ../plugins/cube.c:1076
+msgid "Fold Acceleration"
+msgstr "Accélération de pliage"
+
+#: ../plugins/cube.c:1086
+msgid "Fold Speed"
+msgstr "Vitesse de pliage"
+
+#: ../plugins/cube.c:1096
+msgid "Fold Timestep"
+msgstr "Intervalle de pliage"
+
+#: ../plugins/decoration.c:1133
+msgid "Drop shadow radius"
+msgstr "Rayon de l'ombre des gouttes"
+
+#: ../plugins/decoration.c:1143
+msgid "Drop shadow opacity"
+msgstr "Opacité de l'ombre des gouttes"
+
+#: ../plugins/decoration.c:1163
+msgid "Drop shadow X offset"
+msgstr "Décalage X de l'ombre des gouttes"
+
+#: ../plugins/decoration.c:1172
+msgid "Drop shadow Y offset"
+msgstr "Décalage Y de l'ombre des gouttes"
+
+#: ../plugins/decoration.c:1198
+#, fuzzy
+msgid "Windows that should be decorated"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/decoration.c:1207
+#, fuzzy
+msgid "Windows that should be have a shadow"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#: ../plugins/fade.c:183
+msgid "Window fade speed"
+msgstr "Vitesse de fondu de la fenêtre"
+
+#: ../plugins/fade.c:193
+#, fuzzy
+msgid "Windows that should be fading"
+msgstr "Types de fenêtres devant utiliser le fondu"
+
+#. Decimal point character
+#: ../plugins/gconf-dump.c:81
+msgid "."
+msgstr "."
+
+#: ../plugins/minimize.c:194
+msgid "Minimize speed"
+msgstr "Minimiser la vitesse"
+
+#: ../plugins/minimize.c:204
+msgid "Minimize timestep"
+msgstr "Minimiser l'intervalle"
+
+#: ../plugins/minimize.c:214
+#, fuzzy
+msgid "Windows that should be transformed when minimized"
+msgstr "Types de fenêtres à transformer lorsqu'elles sont réduites"
+
+#: ../plugins/minimize.c:223
+msgid "Shade resistance"
+msgstr "Ombrer la résistance"
+
+#: ../plugins/move.c:751
+msgid "Opacity level of moving windows"
+msgstr "Niveau d'opacité pour déplacer des fenêtres"
+
+#: ../plugins/place.c:42
+msgid "Cascade"
+msgstr ""
+
+#: ../plugins/place.c:43
+msgid "Centered"
+msgstr ""
+
+#: ../plugins/place.c:44
+msgid "Smart"
+msgstr ""
+
+#: ../plugins/place.c:45
+#, fuzzy
+msgid "Maximize"
+msgstr "Minimisé"
+
+#: ../plugins/place.c:46
+msgid "Random"
+msgstr ""
+
+#: ../plugins/place.c:246
+msgid "Algorithm to use for window placement"
+msgstr ""
+
+#: ../plugins/plane.c:700
+#, fuzzy, c-format
+msgid "Plane To Face %d"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/plane.c:701
+#, fuzzy, c-format
+msgid "Plane to face %d"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/plane.c:702
+#, fuzzy, c-format
+msgid "Plane To Face %d with Window"
+msgstr "Rotation vers la face %d avec la fenêtre"
+
+#: ../plugins/plane.c:703
+#, fuzzy, c-format
+msgid "Plane to face %d and bring active window along"
+msgstr "Rotation vers la face %d avec la fenêtre active"
+
+#: ../plugins/rotate.c:295 ../plugins/zoom.c:231
+msgid "Sensitivity of pointer movement"
+msgstr "Sensibilité du mouvement du pointeur"
+
+#: ../plugins/rotate.c:305
+msgid "Rotation Acceleration"
+msgstr "Accélération de la rotation"
+
+#: ../plugins/rotate.c:322
+msgid "Rotation Speed"
+msgstr "Vitesse de la rotation"
+
+#: ../plugins/rotate.c:332
+msgid "Rotation Timestep"
+msgstr "Intervalle de la rotation"
+
+#: ../plugins/rotate.c:1865
+#, c-format
+msgid "Rotate To Face %d"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/rotate.c:1866
+#, c-format
+msgid "Rotate to face %d"
+msgstr "Rotation vers la face %d"
+
+#: ../plugins/rotate.c:1867
+#, c-format
+msgid "Rotate To Face %d with Window"
+msgstr "Rotation vers la face %d avec la fenêtre"
+
+#: ../plugins/rotate.c:1868
+#, c-format
+msgid "Rotate to face %d and bring active window along"
+msgstr "Rotation vers la face %d avec la fenêtre active"
+
+#: ../plugins/rotate.c:1998
+msgid "Timeout before flipping viewport"
+msgstr "Timeout avant la rotation du bureau"
+
+#: ../plugins/scale.c:80 ../plugins/wobbly.c:131
+msgid "None"
+msgstr "Aucun"
+
+#: ../plugins/scale.c:81
+msgid "Emblem"
+msgstr "Emblème"
+
+#: ../plugins/scale.c:82
+msgid "Big"
+msgstr "Grand"
+
+#: ../plugins/scale.c:323
+msgid "Space between windows"
+msgstr "Espace entre les fenêtres"
+
+#: ../plugins/scale.c:332
+msgid "Scale speed"
+msgstr "Vitesse d'échelle"
+
+#: ../plugins/scale.c:342
+msgid "Scale timestep"
+msgstr "Intervalle d'échelle"
+
+#: ../plugins/scale.c:352
+#, fuzzy
+msgid "Windows that should be scaled in scale mode"
+msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
+
+#: ../plugins/scale.c:368 ../plugins/switcher.c:394
+msgid "Amount of opacity in percent"
+msgstr "Quantité d'opacité en pourcentage"
+
+#: ../plugins/scale.c:377
+msgid "Overlay an icon on windows once they are scaled"
+msgstr ""
+"Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
+
+#: ../plugins/scale.c:386
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Temps (en ms) avant que le mode échelle soit terminé lors du survol au-"
+"dessus d'une fenêtre"
+
+#: ../plugins/switcher.c:339
+msgid "Switcher speed"
+msgstr "Vitesse du commutateur"
+
+#: ../plugins/switcher.c:349
+msgid "Switcher timestep"
+msgstr "Intervalle du commutateur"
+
+#: ../plugins/switcher.c:359
+#, fuzzy
+msgid "Windows that should be shown in switcher"
+msgstr "Types de fenêtres à afficher dans le commutateur"
+
+#: ../plugins/switcher.c:376
+msgid "Amount of saturation in percent"
+msgstr "Quantité de saturation en pourcentage"
+
+#: ../plugins/switcher.c:385
+msgid "Amount of brightness in percent"
+msgstr "Quantité de luminosité en pourcentage"
+
+#: ../plugins/switcher.c:410
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"Le bureau à distance doit être en zoom arrière lors du passage d'une fenêtre "
+"à une autre"
+
+#: ../plugins/water.c:1655
+msgid "Water offset scale"
+msgstr "Échelle de décalage d'eau"
+
+#: ../plugins/water.c:1665
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Délai (en ms) en chaque goutte de pluie"
+
+#: ../plugins/wobbly.c:327
+msgid "Spring Friction"
+msgstr "Friction de ressort"
+
+#: ../plugins/wobbly.c:337
+msgid "Spring Konstant"
+msgstr "Constante de ressort"
+
+#: ../plugins/wobbly.c:347
+msgid "Vertex Grid Resolution"
+msgstr "Résolution de la grille de sommet"
+
+#: ../plugins/wobbly.c:356
+msgid "Minimum Vertex Grid Size"
+msgstr "Taille de grille de sommet minimale"
+
+#: ../plugins/wobbly.c:365
+msgid "Map Window Effect"
+msgstr "Mapper l'effet de la fenêtre"
+
+#: ../plugins/wobbly.c:374
+msgid "Focus Window Effect"
+msgstr "Effet de focus de la fenêtre"
+
+#: ../plugins/wobbly.c:383
+#, fuzzy
+msgid "Windows that should wobble when mapped"
+msgstr "Types de fenêtres à déformer lorsqu'elles sont mappées"
+
+#: ../plugins/wobbly.c:392
+#, fuzzy
+msgid "Windows that should wobble when focused"
+msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
+
+#: ../plugins/wobbly.c:401
+#, fuzzy
+msgid "Windows that should wobble when moved"
+msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
+
+#: ../plugins/wobbly.c:410
+#, fuzzy
+msgid "Windows that should wobble when grabbed"
+msgstr "Types de fenêtres à déformer lorsqu'elles sont saisies"
+
+#: ../plugins/zoom.c:241
+msgid "Zoom Speed"
+msgstr "Vitesse du zoom"
+
+#: ../plugins/zoom.c:251
+msgid "Zoom Timestep"
+msgstr "Intervalle du zoom"
+
+#: ../plugins/zoom.c:271
+#, fuzzy
+msgid "Use linear filter when zoomed in"
+msgstr "Utiliser le filtre linéaire pour le zoom avant"
+
+#: ../src/main.c:55
+msgid "Dock"
+msgstr "Accueil"
+
+#: ../src/main.c:56
+msgid "Toolbar"
+msgstr "Barre d'outils"
+
+#: ../src/main.c:57
+msgid "Menu"
+msgstr "Menu"
+
+#: ../src/main.c:58
+msgid "Utility"
+msgstr "Utilitaire"
+
+#: ../src/main.c:59
+msgid "Splash"
+msgstr "Splash"
+
+#: ../src/main.c:60
+msgid "Dialog"
+msgstr "Dialog"
+
+#: ../src/main.c:61
+msgid "Normal"
+msgstr "Normal"
+
+#: ../src/main.c:62
+msgid "DropdownMenu"
+msgstr "Menu déroulant"
+
+#: ../src/main.c:63
+msgid "PopupMenu"
+msgstr "Menu contextuel"
+
+#: ../src/main.c:64
+msgid "Tooltip"
+msgstr "Info-bulle"
+
+#: ../src/main.c:65
+msgid "Notification"
+msgstr "Notification"
+
+#: ../src/main.c:66
+msgid "Combo"
+msgstr "Zone de liste"
+
+#: ../src/main.c:67
+msgid "Dnd"
+msgstr "Dnd"
+
+#: ../src/main.c:68
+msgid "ModalDialog"
+msgstr "Boîte de dialogue modale"
+
+#: ../src/main.c:69
+msgid "Fullscreen"
+msgstr "Fullscreen (Plein écran)"
+
+# TLABEL autoinst_2002_08_07_0216__168
+#: ../src/main.c:70
+msgid "Unknown"
+msgstr "Inconnu"
+
+#~ msgid "Fast"
+#~ msgstr "Rapide"
+
+#~ msgid "Good"
+#~ msgstr "Bon"
+
+#~ msgid "Best"
+#~ msgstr "Meilleur"
+
+#~ msgid "Command line %d"
+#~ msgstr "Ligne de commande %d"
+
+#~ msgid "Command line to be executed in shell when run_command%d is invoked"
+#~ msgstr ""
+#~ "Ligne de commande à exécuter dans le shell lorsque run_command%d est "
+#~ "appelé"
+
+#~ msgid "Run command %d"
+#~ msgstr "Exécuter une commande %d"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command%d"
+#~ msgstr ""
+#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
+#~ "identifiée par la commande %d"
 
 #~ msgid "Window Types"
 #~ msgstr "Types de fenêtres"
@@ -1989,186 +4156,11 @@ msgstr ""
 #~ msgid "Enable focus prevention"
 #~ msgstr "Activer la partition ZEN"
 
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command1"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command10"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command11"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command2"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command3"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command4"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command5"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command6"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command7"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command8"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command9"
-
-#~ msgid "Command line 1"
-#~ msgstr "Ligne de commande 1"
-
-#~ msgid "Command line 10"
-#~ msgstr "Ligne de commande 10"
-
-#~ msgid "Command line 11"
-#~ msgstr "Ligne de commande 11"
-
-#~ msgid "Command line 2"
-#~ msgstr "Ligne de commande 2"
-
-#~ msgid "Command line 3"
-#~ msgstr "Ligne de commande 3"
-
-#~ msgid "Command line 4"
-#~ msgstr "Ligne de commande 4"
-
-#~ msgid "Command line 5"
-#~ msgstr "Ligne de commande 5"
-
-#~ msgid "Command line 6"
-#~ msgstr "Ligne de commande 6"
-
-#~ msgid "Command line 7"
-#~ msgstr "Ligne de commande 7"
-
-#~ msgid "Command line 8"
-#~ msgstr "Ligne de commande 8"
-
-#~ msgid "Command line 9"
-#~ msgstr "Ligne de commande 9"
-
-#~ msgid "Command line to be executed in shell when run_command1 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command1 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command10 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command10 est "
-#~ "appelé"
-
-#~ msgid "Command line to be executed in shell when run_command11 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command11 est "
-#~ "appelé"
-
-#~ msgid "Command line to be executed in shell when run_command2 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command2 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command3 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command3 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command4 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command4 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command5 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command5 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command6 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command6 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command7 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command7 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command8 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command8 est appelé"
-
-#~ msgid "Command line to be executed in shell when run_command9 is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
-
 #~ msgid "Corners"
 #~ msgstr "Angles"
 
-#~ msgid "Focus Window Effect (None, Shiver)"
-#~ msgstr "Effet de focus de la fenêtre (aucun effet ou effet de déformation)"
-
 #~ msgid "Focus window when mouse moves over them"
 #~ msgstr "Focus de la fenêtre lorsque la souris se déplace sur elle"
-
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "Accélération de pliage (1,0-20,0)"
-
-#~ msgid "Fold Speed (0.1-50.0)"
-#~ msgstr "Vitesse de pliage (0,1-50,0)"
-
-#~ msgid "Fold Timestep (0.1-50.0)"
-#~ msgstr "Intervalle de pliage (0,1-50,0)"
-
-#~ msgid ""
-#~ "Hot corners that should initiate scale mode (TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
 
 #~ msgid "Initiate All Windows"
 #~ msgstr "Lancer toutes les fenêtres"
@@ -2182,192 +4174,12 @@ msgstr ""
 #~ msgid "Initiate Window Switcher"
 #~ msgstr "Lancer le commutateur de fenêtre"
 
-#~ msgid "Map Window Effect (None, Shiver)"
-#~ msgstr "Mapper l'effet de la fenêtre (aucun effet ou effet de déformation)"
-
-#~ msgid "Minimize speed (0.1-50.0)"
-#~ msgstr "Minimiser la vitesse (0,1-50,0)"
-
 #~ msgid "Modifier to show switcher for all windows"
 #~ msgstr ""
 #~ "Touche de modification pour afficher le commutateur de toutes les fenêtres"
 
 #~ msgid "Return from scale view"
 #~ msgstr "Revenir de la vue d'échelle"
-
-#~ msgid "Rotate To Face 10"
-#~ msgstr "Rotation vers la face 10"
-
-#~ msgid "Rotate To Face 10 with Window"
-#~ msgstr "Rotation vers la face 10 avec la fenêtre"
-
-#~ msgid "Rotate To Face 11"
-#~ msgstr "Rotation vers la face 11"
-
-#~ msgid "Rotate To Face 11 with Window"
-#~ msgstr "Rotation vers la face 11 avec la fenêtre"
-
-#~ msgid "Rotate To Face 12"
-#~ msgstr "Rotation vers la face 12"
-
-#~ msgid "Rotate To Face 12 with Window"
-#~ msgstr "Rotation vers la face 12 avec la fenêtre"
-
-#~ msgid "Rotate To Face 2"
-#~ msgstr "Rotation vers la face 2"
-
-#~ msgid "Rotate To Face 2 with Window"
-#~ msgstr "Rotation vers la face 2 avec la fenêtre"
-
-#~ msgid "Rotate To Face 3"
-#~ msgstr "Rotation vers la face 3"
-
-#~ msgid "Rotate To Face 3 with Window"
-#~ msgstr "Rotation vers la face 3 avec la fenêtre"
-
-#~ msgid "Rotate To Face 4"
-#~ msgstr "Rotation vers la face 4"
-
-#~ msgid "Rotate To Face 4 with Window"
-#~ msgstr "Rotation vers la face 4 avec la fenêtre"
-
-#~ msgid "Rotate To Face 5"
-#~ msgstr "Rotation vers la face 5"
-
-#~ msgid "Rotate To Face 5 with Window"
-#~ msgstr "Rotation vers la face 5 avec la fenêtre"
-
-#~ msgid "Rotate To Face 6"
-#~ msgstr "Rotation vers la face 6"
-
-#~ msgid "Rotate To Face 6 with Window"
-#~ msgstr "Rotation vers la face 6 avec la fenêtre"
-
-#~ msgid "Rotate To Face 7"
-#~ msgstr "Rotation vers la face 7"
-
-#~ msgid "Rotate To Face 7 with Window"
-#~ msgstr "Rotation vers la face 7 avec la fenêtre"
-
-#~ msgid "Rotate To Face 8"
-#~ msgstr "Rotation vers la face 8"
-
-#~ msgid "Rotate To Face 8 with Window"
-#~ msgstr "Rotation vers la face 8 avec la fenêtre"
-
-#~ msgid "Rotate To Face 9"
-#~ msgstr "Rotation vers la face 9"
-
-#~ msgid "Rotate To Face 9 with Window"
-#~ msgstr "Rotation vers la face 9 avec la fenêtre"
-
-#~ msgid "Rotate to face 10"
-#~ msgstr "Rotation vers la face 10"
-
-#~ msgid "Rotate to face 10 and bring active window along"
-#~ msgstr "Rotation vers la face 10 avec la fenêtre active"
-
-#~ msgid "Rotate to face 11"
-#~ msgstr "Rotation vers la face 11"
-
-#~ msgid "Rotate to face 11 and bring active window along"
-#~ msgstr "Rotation vers la face 11 avec la fenêtre active"
-
-#~ msgid "Rotate to face 12"
-#~ msgstr "Rotation vers la face 12"
-
-#~ msgid "Rotate to face 12 and bring active window along"
-#~ msgstr "Rotation vers la face 12 avec la fenêtre active"
-
-#~ msgid "Rotate to face 2"
-#~ msgstr "Rotation vers la face 2"
-
-#~ msgid "Rotate to face 2 and bring active window along"
-#~ msgstr "Rotation vers la face 2 avec la fenêtre active"
-
-#~ msgid "Rotate to face 3"
-#~ msgstr "Rotation vers la face 3"
-
-#~ msgid "Rotate to face 3 and bring active window along"
-#~ msgstr "Rotation vers la face 3 avec la fenêtre active"
-
-#~ msgid "Rotate to face 4"
-#~ msgstr "Rotation vers la face 4"
-
-#~ msgid "Rotate to face 4 and bring active window along"
-#~ msgstr "Rotation vers la face 4 avec la fenêtre active"
-
-#~ msgid "Rotate to face 5"
-#~ msgstr "Rotation vers la face 5"
-
-#~ msgid "Rotate to face 5 and bring active window along"
-#~ msgstr "Rotation vers la face 5 avec la fenêtre active"
-
-#~ msgid "Rotate to face 6"
-#~ msgstr "Rotation vers la face 6"
-
-#~ msgid "Rotate to face 6 and bring active window along"
-#~ msgstr "Rotation vers la face 6 avec la fenêtre active"
-
-#~ msgid "Rotate to face 7"
-#~ msgstr "Rotation vers la face 7"
-
-#~ msgid "Rotate to face 7 and bring active window along"
-#~ msgstr "Rotation vers la face 7 avec la fenêtre active"
-
-#~ msgid "Rotate to face 8"
-#~ msgstr "Rotation vers la face 8"
-
-#~ msgid "Rotate to face 8 and bring active window along"
-#~ msgstr "Rotation vers la face 8 avec la fenêtre active"
-
-#~ msgid "Rotate to face 9"
-#~ msgstr "Rotation vers la face 9"
-
-#~ msgid "Rotate to face 9 and bring active window along"
-#~ msgstr "Rotation vers la face 9 avec la fenêtre active"
-
-#~ msgid "Run command 1"
-#~ msgstr "Exécuter la commande 1"
-
-#~ msgid "Run command 10"
-#~ msgstr "Exécuter la commande 10"
-
-#~ msgid "Run command 11"
-#~ msgstr "Exécuter la commande 11"
-
-#~ msgid "Run command 2"
-#~ msgstr "Exécuter la commande 2"
-
-#~ msgid "Run command 3"
-#~ msgstr "Exécuter la commande 3"
-
-#~ msgid "Run command 4"
-#~ msgstr "Exécuter la commande 4"
-
-#~ msgid "Run command 5"
-#~ msgstr "Exécuter la commande 5"
-
-#~ msgid "Run command 6"
-#~ msgstr "Exécuter la commande 6"
-
-#~ msgid "Run command 7"
-#~ msgstr "Exécuter la commande 7"
-
-#~ msgid "Run command 8"
-#~ msgstr "Exécuter la commande 8"
-
-#~ msgid "Run command 9"
-#~ msgstr "Exécuter la commande 9"
-
-#~ msgid "Scale speed (0.1-50.0)"
-#~ msgstr "Vitesse d'échelle (0,1-50,0)"
-
-#~ msgid "Scale timestep (0.1-50.0)"
-#~ msgstr "Intervalle d'échelle (0,1-50,0)"
-
-#~ msgid "Shade resistance (0-100)"
-#~ msgstr "Ombrer la résistance (0-100)"
 
 #~ msgid "Show switcher"
 #~ msgstr "Afficher le commutateur"
@@ -2383,9 +4195,6 @@ msgstr ""
 
 #~ msgid "Terminate"
 #~ msgstr "Fermer"
-
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "Filtrage de texture (rapide, bon ou supérieur)"
 
 #~ msgid "Water effect on system beep"
 #~ msgstr "Effet d'eau au signal sonore du système"
@@ -2457,9 +4266,3 @@ msgstr ""
 
 #~ msgid "Wobble effect on system beep"
 #~ msgstr "Effet de déformation au signal sonore du système"
-
-#~ msgid "Zoom Speed (0.1-50.0)"
-#~ msgstr "Vitesse du zoom (0,1-50,0)"
-
-#~ msgid "Zoom Timestep (0.1-50.0)"
-#~ msgstr "Intervalle du zoom (0,1-50,0)"
