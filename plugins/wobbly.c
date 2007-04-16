@@ -3081,6 +3081,7 @@ CompPluginVTable wobblyVTable = {
     N_("Wobbly Windows"),
     N_("Use spring model for wobbly window effect"),
     wobblyGetVersion,
+    0, /* GetMetadata */
     wobblyInit,
     wobblyFini,
     wobblyInitDisplay,

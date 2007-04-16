@@ -2297,6 +2297,7 @@ CompPluginVTable switchVTable = {
     N_("Application Switcher"),
     N_("Application Switcher"),
     switchGetVersion,
+    0, /* GetMetadata */
     switchInit,
     switchFini,
     switchInitDisplay,

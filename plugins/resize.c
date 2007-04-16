@@ -887,6 +887,7 @@ CompPluginVTable resizeVTable = {
     N_("Resize Window"),
     N_("Resize window"),
     resizeGetVersion,
+    0, /* GetMetadata */
     resizeInit,
     resizeFini,
     resizeInitDisplay,

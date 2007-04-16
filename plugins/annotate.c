@@ -1010,6 +1010,7 @@ static CompPluginVTable annoVTable = {
     N_("Annotate"),
     N_("Annotate plugin"),
     annoGetVersion,
+    0, /* GetMetadata */
     annoInit,
     annoFini,
     annoInitDisplay,

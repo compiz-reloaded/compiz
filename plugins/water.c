@@ -1875,6 +1875,7 @@ static CompPluginVTable waterVTable = {
     N_("Water Effect"),
     N_("Adds water effects to different desktop actions"),
     waterGetVersion,
+    0, /* GetMetadata */
     waterInit,
     waterFini,
     waterInitDisplay,

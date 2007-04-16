@@ -2180,6 +2180,7 @@ CompPluginVTable rotateVTable = {
     N_("Rotate Cube"),
     N_("Rotate desktop cube"),
     rotateGetVersion,
+    0, /* GetMetadata */
     rotateInit,
     rotateFini,
     rotateInitDisplay,

@@ -1072,6 +1072,7 @@ static CompPluginVTable minVTable = {
     N_("Minimize Effect"),
     N_("Transform windows when they are minimized and unminimized"),
     minGetVersion,
+    0, /* GetMetadata */
     minInit,
     minFini,
     minInitDisplay,

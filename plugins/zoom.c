@@ -942,6 +942,7 @@ CompPluginVTable zoomVTable = {
     N_("Zoom Desktop"),
     N_("Zoom and pan desktop cube"),
     zoomGetVersion,
+    0, /* GetMetadata */
     zoomInit,
     zoomFini,
     zoomInitDisplay,

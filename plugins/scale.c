@@ -2212,6 +2212,7 @@ CompPluginVTable scaleVTable = {
     N_("Scale"),
     N_("Scale windows"),
     scaleGetVersion,
+    0, /* GetMetadata */
     scaleInit,
     scaleFini,
     scaleInitDisplay,

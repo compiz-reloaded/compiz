@@ -463,6 +463,7 @@ static CompPluginVTable regexVTable = {
     N_("Regex Matching"),
     N_("Regex window matching"),
     regexGetVersion,
+    0, /* GetMetadata */
     regexInit,
     regexFini,
     regexInitDisplay,

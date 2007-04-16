@@ -1176,6 +1176,7 @@ CompPluginVTable gconfVTable = {
     "GConf",
     "GConf Control Backend",
     gconfGetVersion,
+    0, /* GetMetadata */
     gconfInit,
     gconfFini,
     gconfInitDisplay,

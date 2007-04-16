@@ -2885,6 +2885,7 @@ static CompPluginVTable blurVTable = {
     N_("Blur Windows"),
     N_("Blur windows"),
     blurGetVersion,
+    0, /* GetMetadata */
     blurInit,
     blurFini,
     blurInitDisplay,

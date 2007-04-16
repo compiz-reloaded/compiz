@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070407
+#define ABIVERSION 20070408
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2735,6 +2735,8 @@ typedef int (*GetVersionProc) (CompPlugin *plugin,
 typedef Bool (*InitPluginProc) (CompPlugin *plugin);
 typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
+typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
+
 typedef enum {
     CompPluginRuleBefore,
     CompPluginRuleAfter,
@@ -2755,7 +2757,8 @@ typedef struct _CompPluginVTable {
     char *shortDesc;
     char *longDesc;
 
-    GetVersionProc getVersion;
+    GetVersionProc  getVersion;
+    GetMetadataProc getMetadata;
 
     InitPluginProc init;
     FiniPluginProc fini;

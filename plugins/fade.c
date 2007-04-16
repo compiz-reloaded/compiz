@@ -881,6 +881,7 @@ static CompPluginVTable fadeVTable = {
     N_("Fading Windows"),
     N_("Fade in windows when mapped and fade out windows when unmapped"),
     fadeGetVersion,
+    0, /* GetMetadata */
     fadeInit,
     fadeFini,
     fadeInitDisplay,

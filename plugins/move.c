@@ -939,6 +939,7 @@ CompPluginVTable moveVTable = {
     N_("Move Window"),
     N_("Move window"),
     moveGetVersion,
+    0, /* GetMetadata */
     moveInit,
     moveFini,
     moveInitDisplay,

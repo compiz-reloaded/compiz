@@ -1588,6 +1588,7 @@ CompPluginVTable fuseVTable = {
     N_("Userspace File System"),
     N_("Userspace file system"),
     fuseGetVersion,
+    0, /* GetMetadata */
     fuseInit,
     fuseFini,
     fuseInitDisplay,

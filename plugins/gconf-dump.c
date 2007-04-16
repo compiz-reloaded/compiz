@@ -845,6 +845,7 @@ CompPluginVTable gconfDumpVTable = {
     "GConf dump",
     "GConf dump - dumps gconf schemas",
     gconfDumpGetVersion,
+    0, /* GetMetadata */
     gconfDumpInit,
     gconfDumpFini,
     gconfDumpInitDisplay,
