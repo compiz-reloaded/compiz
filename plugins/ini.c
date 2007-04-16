@@ -202,17 +202,14 @@ iniGetFileDataFromFilename (CompDisplay *d,
 
     newFd->filename = strdup (filename);
 
-    pluginStr = malloc (sizeof (char) * pluginSep + 1);
-    screenStr = malloc (sizeof (char) * (screenSep - pluginSep) + 1);
+    pluginStr = calloc (1, sizeof (char) * pluginSep + 2);
+    screenStr = calloc (1, sizeof (char) * (screenSep - pluginSep) + 2);
 
     if (!pluginStr || !screenStr)
 	return NULL;
 
     strncpy (pluginStr, filename, pluginSep + 1);
-    pluginStr[pluginSep + 1] = '\0';
-
     strncpy (screenStr, &filename[pluginSep+2], (screenSep - pluginSep) + 1);
-    screenStr[(screenSep - pluginSep) -1] = '\0';
 
     if (strcmp (pluginStr, CORE_NAME) == 0)
 	newFd->plugin = NULL;
