@@ -203,13 +203,13 @@ iniGetFileDataFromFilename (CompDisplay *d,
     newFd->filename = strdup (filename);
 
     pluginStr = calloc (1, sizeof (char) * pluginSep + 2);
-    screenStr = calloc (1, sizeof (char) * (screenSep - pluginSep) + 2);
+    screenStr = calloc (1, sizeof (char) * (screenSep - pluginSep));
 
     if (!pluginStr || !screenStr)
 	return NULL;
 
     strncpy (pluginStr, filename, pluginSep + 1);
-    strncpy (screenStr, &filename[pluginSep+2], (screenSep - pluginSep) + 1);
+    strncpy (screenStr, &filename[pluginSep+2], (screenSep - pluginSep) - 1);
 
     if (strcmp (pluginStr, CORE_NAME) == 0)
 	newFd->plugin = NULL;
