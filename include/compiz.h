@@ -584,16 +584,20 @@ typedef int CompFileWatchHandle;
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
+
 typedef Bool (*SetDisplayOptionProc) (CompDisplay     *display,
 				      char	      *name,
 				      CompOptionValue *value);
+
 typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
 						    CompDisplay *display,
-					            int	        *count);
+						    int	        *count);
+
 typedef Bool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
 					    CompDisplay     *display,
 					    char	    *name,
 					    CompOptionValue *value);
+
 typedef Bool (*SetDisplayOptionForPluginProc) (CompDisplay     *display,
 					       char	       *plugin,
 					       char	       *name,
