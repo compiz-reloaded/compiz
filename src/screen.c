@@ -2140,9 +2140,6 @@ addScreen (CompDisplay *display,
     s->filter[SCREEN_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
     s->filter[WINDOW_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
 
-    matchUpdate (s->display,
-		 &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match);
-
     return TRUE;
 }
 
