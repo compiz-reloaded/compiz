@@ -1014,8 +1014,8 @@ initOptionFromMetadataPath (CompDisplay   *d,
 Bool
 compInitScreenOptionFromMetadata (CompScreen   *s,
 				  CompMetadata *m,
-				  CompOption *o,
-				  const char *name)
+				  CompOption   *o,
+				  const char   *name)
 {
     char str[1024];
 
@@ -1072,8 +1072,8 @@ compFiniScreenOptions (CompScreen *s,
 Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *d,
 				   CompMetadata *m,
-				   CompOption *o,
-				   const char *name)
+				   CompOption	*o,
+				   const char	*name)
 {
     char str[1024];
 
