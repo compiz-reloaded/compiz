@@ -462,7 +462,7 @@ initFloatValue (CompOptionValue	      *v,
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
-	float f = strtol ((char *) value, NULL, 0);
+	float f = strtod ((char *) value, NULL);
 
 	if (f >= r->f.min && f <= r->f.max)
 	    v->f = f;
@@ -656,7 +656,8 @@ initActionValue (CompDisplay	 *d,
 }
 
 static void
-initMatchValue (CompOptionValue *v,
+initMatchValue (CompDisplay     *d,
+		CompOptionValue *v,
 		xmlDocPtr       doc,
 		xmlNodePtr      node)
 {
@@ -673,6 +674,7 @@ initMatchValue (CompOptionValue *v,
 	matchAddFromString (&v->match, (char *) value);
 	xmlFree (value);
     }
+    matchUpdate (d, &v->match);
 }
 
 static void
@@ -722,7 +724,7 @@ initListValue (CompDisplay	     *d,
 		initActionValue (d, &value[v->list.nValue], state, doc, child);
 		break;
 	    case CompOptionTypeMatch:
-		initMatchValue (&value[v->list.nValue], doc, child);
+		initMatchValue (d, &value[v->list.nValue], doc, child);
 	    default:
 		break;
 	    }
@@ -966,7 +968,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initActionValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeMatch:
-	initMatchValue (&option->value, defaultDoc, defaultNode);
+	initMatchValue (d, &option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeList:
 	value = stringFromMetadataPathElement (metadata, (char *) path, "type");
