@@ -597,7 +597,7 @@ setScreenOptionForPlugin (CompScreen      *screen,
     return FALSE;
 }
 
-CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
+const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "detect_refresh_rate", "bool", 0, 0, 0 },
     { "lighting", "bool", 0, 0, 0 },
     { "refresh_rate", "int", "<min>1</min>", 0, 0 },
@@ -614,18 +614,6 @@ CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
     { "opacity_values", "list", "<type>int</type>", 0, 0 }
 };
-
-static void
-compScreenInitOptions (CompScreen *screen)
-{
-    int i;
-
-    for (i = 0; i < COMP_SCREEN_OPTION_NUM; i++)
-	compInitScreenOptionFromMetadata (screen,
-					  &coreMetadata,
-					  &screen->opt[i],
-					  coreScreenOptionInfo[i].name);
-}
 
 static void
 updateStartupFeedback (CompScreen *s)
@@ -1447,7 +1435,12 @@ addScreen (CompDisplay *display,
 
     s->display = display;
 
-    compScreenInitOptions (s);
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &coreMetadata,
+					    coreScreenOptionInfo,
+					    s->opt,
+					    COMP_SCREEN_OPTION_NUM))
+	return FALSE;
 
     s->damage = XCreateRegion ();
     if (!s->damage)

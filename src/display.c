@@ -664,7 +664,7 @@ shade (CompDisplay     *d,
     return TRUE;
 }
 
-CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
+const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "active_plugins", "list", "<type>string</type>", 0, 0 },
     { "texture_filter", "string", 0, 0, 0 },
     { "click_to_focus", "bool", 0, 0, 0 },
@@ -728,28 +728,6 @@ CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "run_command_terminal", "action", 0, runCommandTerminal, 0 },
     { "ping_delay", "int", "<min>1000</min>", 0, 0 }
 };
-
-static void
-compDisplayInitOptions (CompDisplay *display)
-{
-    int i;
-
-    for (i = 0; i < COMP_DISPLAY_OPTION_NUM; i++)
-    {
-	compInitDisplayOptionFromMetadata (display,
-					   &coreMetadata,
-					   &display->opt[i],
-					   coreDisplayOptionInfo[i].name);
-
-	if (coreDisplayOptionInfo[i].initiate)
-	    display->opt[i].value.action.initiate =
-		coreDisplayOptionInfo[i].initiate;
-
-	if (coreDisplayOptionInfo[i].terminate)
-	    display->opt[i].value.action.terminate =
-		coreDisplayOptionInfo[i].terminate;
-    }
-}
 
 CompOption *
 compGetDisplayOptions (CompDisplay *display,
@@ -2039,7 +2017,12 @@ addDisplay (char *name)
 	return FALSE;
     }
 
-    compDisplayInitOptions (d);
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &coreMetadata,
+					     coreDisplayOptionInfo,
+					     d->opt,
+					     COMP_DISPLAY_OPTION_NUM))
+	return FALSE;
 
     snprintf (d->displayString, 255, "DISPLAY=%s", DisplayString (dpy));
 

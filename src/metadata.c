@@ -191,6 +191,128 @@ compAddMetadataFromString (CompMetadata *metadata,
     return TRUE;
 }
 
+Bool
+compAddMetadataFromIO (CompMetadata	     *metadata,
+		       xmlInputReadCallback  ioread,
+		       xmlInputCloseCallback ioclose,
+		       void		     *ioctx)
+{
+    xmlDoc **d, *doc;
+
+    doc = xmlReadIO (ioread, ioclose, ioctx, NULL, NULL, 0);
+    if (!doc)
+    {
+	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
+
+	return FALSE;
+    }
+
+    d = realloc (metadata->doc, (metadata->nDoc + 1) * sizeof (xmlDoc *));
+    if (!d)
+    {
+	xmlFreeDoc (doc);
+	return FALSE;
+    }
+
+    d[metadata->nDoc++] = doc;
+    metadata->doc = d;
+
+    return TRUE;
+}
+
+typedef struct _CompIOCtx {
+    int				 offset;
+    const char			 *name;
+    const CompMetadataOptionInfo *displayOInfo;
+    int				 nDisplayOInfo;
+    const CompMetadataOptionInfo *screenOInfo;
+    int				 nScreenOInfo;
+} CompIOCtx;
+
+static int
+readPluginXmlCallback (void *context,
+		       char *buffer,
+		       int  length)
+{
+    CompIOCtx *ctx = (CompIOCtx *) context;
+    int	      offset = ctx->offset;
+    int	      i, j;
+
+    i = compReadXmlChunk ("<compiz><plugin name=\"", &offset, buffer, length);
+    i += compReadXmlChunk (ctx->name, &offset, buffer + i, length - i);
+    i += compReadXmlChunk ("\">", &offset, buffer + i, length - i);
+
+    if (ctx->nDisplayOInfo)
+    {
+	i += compReadXmlChunk ("<display>", &offset, buffer + i, length - i);
+
+	for (j = 0; j < ctx->nDisplayOInfo; j++)
+	    i += compReadXmlChunkFromMetadataOptionInfo (&ctx->displayOInfo[j],
+							 &offset,
+							 buffer + i,
+							 length - i);
+
+	i += compReadXmlChunk ("</display>", &offset, buffer + i, length - i);
+    }
+
+    if (ctx->nScreenOInfo)
+    {
+	i += compReadXmlChunk ("<screen>", &offset, buffer + i, length - i);
+
+	for (j = 0; j < ctx->nScreenOInfo; j++)
+	    i += compReadXmlChunkFromMetadataOptionInfo (&ctx->screenOInfo[j],
+							 &offset,
+							 buffer + i,
+							 length - i);
+
+	i += compReadXmlChunk ("</screen>", &offset, buffer + i, length - i);
+    }
+
+    i += compReadXmlChunk ("</plugin></compiz>", &offset, buffer + i,
+			   length - i);
+
+    if (!offset && length > i)
+	buffer[i++] = '\0';
+
+    ctx->offset += i;
+
+    return i;
+}
+
+Bool
+compInitPluginMetadataFromInfo (CompMetadata		     *metadata,
+				const char		     *plugin,
+				const CompMetadataOptionInfo *displayOptionInfo,
+				int			     nDisplayOptionInfo,
+				const CompMetadataOptionInfo *screenOptionInfo,
+				int			     nScreenOptionInfo)
+{
+    if (!compInitPluginMetadata (metadata, plugin))
+	return FALSE;
+
+    if (nDisplayOptionInfo || nScreenOptionInfo)
+    {
+	CompIOCtx ctx;
+
+	ctx.offset	  = 0;
+	ctx.name	  = plugin;
+	ctx.displayOInfo  = displayOptionInfo;
+	ctx.nDisplayOInfo = nDisplayOptionInfo;
+	ctx.screenOInfo   = screenOptionInfo;
+	ctx.nScreenOInfo  = nScreenOptionInfo;
+
+	if (!compAddMetadataFromIO (metadata,
+				    readPluginXmlCallback, NULL,
+				    (void *) &ctx))
+	{
+	    compFiniMetadata (metadata);
+	    return FALSE;
+	}
+    }
+
+    return TRUE;
+}
+
 typedef struct _CompXPath {
     xmlXPathObjectPtr  obj;
     xmlXPathContextPtr ctx;
@@ -900,6 +1022,51 @@ compInitScreenOptionFromMetadata (CompScreen   *s,
     return initOptionFromMetadataPath (s->display, m, o, BAD_CAST str);
 }
 
+void
+compFiniScreenOption (CompScreen *s,
+		      CompOption *o)
+{
+    compFiniOption (o);
+}
+
+Bool
+compInitScreenOptionsFromMetadata (CompScreen			*s,
+				   CompMetadata			*m,
+				   const CompMetadataOptionInfo *info,
+				   CompOption			*opt,
+				   int				n)
+{
+    int i;
+
+    for (i = 0; i < n; i++)
+    {
+	if (!compInitScreenOptionFromMetadata (s, m, &opt[i], info[i].name))
+	{
+	    compFiniScreenOptions (s, opt, i);
+	    return FALSE;
+	}
+
+	if (info[i].initiate)
+	    opt[i].value.action.initiate = info[i].initiate;
+
+	if (info[i].terminate)
+	    opt[i].value.action.terminate = info[i].terminate;
+    }
+
+    return TRUE;
+}
+
+void
+compFiniScreenOptions (CompScreen *s,
+		       CompOption *opt,
+		       int	  n)
+{
+    int i;
+
+    for (i = 0; i < n; i++)
+	compFiniScreenOption (s, &opt[i]);
+}
+
 Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *d,
 				   CompMetadata *m,
@@ -911,6 +1078,51 @@ compInitDisplayOptionFromMetadata (CompDisplay  *d,
     sprintf (str, "/compiz/%s/display//option[@name=\"%s\"]", m->path, name);
 
     return initOptionFromMetadataPath (d, m, o, BAD_CAST str);
+}
+
+void
+compFiniDisplayOption (CompDisplay *d,
+		       CompOption  *o)
+{
+    compFiniOption (o);
+}
+
+Bool
+compInitDisplayOptionsFromMetadata (CompDisplay			 *d,
+				    CompMetadata		 *m,
+				    const CompMetadataOptionInfo *info,
+				    CompOption			 *opt,
+				    int				 n)
+{
+    int i;
+
+    for (i = 0; i < n; i++)
+    {
+	if (!compInitDisplayOptionFromMetadata (d, m, &opt[i], info[i].name))
+	{
+	    compFiniDisplayOptions (d, opt, i);
+	    return FALSE;
+	}
+
+	if (info[i].initiate)
+	    opt[i].value.action.initiate = info[i].initiate;
+
+	if (info[i].terminate)
+	    opt[i].value.action.terminate = info[i].terminate;
+    }
+
+    return TRUE;
+}
+
+void
+compFiniDisplayOptions (CompDisplay *d,
+			CompOption  *opt,
+			int	    n)
+{
+    int i;
+
+    for (i = 0; i < n; i++)
+	compFiniDisplayOption (d, &opt[i]);
 }
 
 char *
@@ -1004,39 +1216,63 @@ compGetLongDisplayOptionDescription (CompMetadata *m,
     return compGetStringFromMetadataPath (m, str);
 }
 
-char *
-compMetadataOptionInfoToXml (const CompMetadataOptionInfo *info)
+int
+compReadXmlChunk (const char *src,
+		  int	     *offset,
+		  char	     *buffer,
+		  int	     length)
 {
-    char *xml;
-    int  size = strlen (info->name) + 18;
+    int srcLength = strlen (src);
+    int srcOffset = *offset;
 
-    if (info->type)
-	size += strlen (info->type) + 8;
+    if (srcOffset > srcLength)
+	srcOffset = srcLength;
 
-    if (info->data)
-	size += strlen (info->data) + 8;
+    *offset -= srcOffset;
 
-    xml = malloc (sizeof (char) * size);
-    if (!xml)
-	return NULL;
+    src += srcOffset;
+    srcLength -= srcOffset;
+
+    if (srcLength > 0 && length > 0)
+    {
+	if (srcLength < length)
+	    length = srcLength;
+
+	memcpy (buffer, src, length);
+
+	return length;
+    }
+
+    return 0;
+}
+
+int
+compReadXmlChunkFromMetadataOptionInfo (const CompMetadataOptionInfo *info,
+					int			     *offset,
+					char			     *buffer,
+					int			     length)
+{
+    int i;
+
+    i = compReadXmlChunk ("<option name=\"", offset, buffer, length);
+    i += compReadXmlChunk (info->name, offset, buffer + i, length - i);
 
     if (info->type)
     {
-	if (info->data)
-	    sprintf (xml, "<option name=\"%s\" type=\"%s\">%s</option>",
-		     info->name, info->type, info->data);
-	else
-	    sprintf (xml, "<option name=\"%s\" type=\"%s\"/>",
-		     info->name, info->type);
+	i += compReadXmlChunk ("\" type=\"", offset, buffer + i, length - i);
+	i += compReadXmlChunk (info->type, offset, buffer + i, length - i);
+    }
+
+    if (info->data)
+    {
+	i += compReadXmlChunk ("\">", offset, buffer + i, length - i);
+	i += compReadXmlChunk (info->data, offset, buffer + i, length - i);
+	i += compReadXmlChunk ("</option>", offset, buffer + i, length - i);
     }
     else
     {
-	if (info->data)
-	    sprintf (xml, "<option name=\"%s\">%s</option>",
-		     info->name, info->data);
-	else
-	    sprintf (xml, "<option name=\"%s\"/>", info->name);
+	i += compReadXmlChunk ("\"/>", offset, buffer + i, length - i);
     }
 
-    return xml;
+    return i;
 }

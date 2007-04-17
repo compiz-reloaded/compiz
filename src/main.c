@@ -140,57 +140,88 @@ signalHandler (int sig)
     }
 }
 
-static char *
-strAdd (char	   *dst,
-	const char *src)
+typedef struct _CompIOCtx {
+    int	 offset;
+    char *pluginData;
+    char *textureFilterData;
+    char *refreshRateData;
+} CompIOCtx;
+
+static int
+readCoreXmlCallback (void *context,
+		     char *buffer,
+		     int  length)
 {
-    int  newSize, oldSize = 0;
-    char *s;
+    CompIOCtx *ctx = (CompIOCtx *) context;
+    int	      offset = ctx->offset;
+    int	      i, j;
 
-    if (dst)
-	oldSize = strlen (dst);
+    i = compReadXmlChunk ("<compiz><core><display>", &offset, buffer, length);
 
-    newSize = oldSize + strlen (src) + 1;
-
-    s = realloc (dst, sizeof (char) * newSize);
-    if (!s)
+    for (j = 0; j < COMP_DISPLAY_OPTION_NUM; j++)
     {
-	fprintf (stderr, "%s: memory allocation failure\n", programName);
-	exit (1);
+	CompMetadataOptionInfo info = coreDisplayOptionInfo[j];
+
+	switch (j) {
+	case COMP_DISPLAY_OPTION_ACTIVE_PLUGINS:
+	    if (ctx->pluginData)
+		info.data = ctx->pluginData;
+	    break;
+	case COMP_DISPLAY_OPTION_TEXTURE_FILTER:
+	    if (ctx->textureFilterData)
+		info.data = ctx->textureFilterData;
+	default:
+	    break;
+	}
+
+	i += compReadXmlChunkFromMetadataOptionInfo (&info,
+						     &offset,
+						     buffer + i,
+						     length - i);
     }
 
-    strcpy (s + oldSize, src);
+    i += compReadXmlChunk ("</display><screen>", &offset,
+			   buffer + i, length - 1);
 
-    return s;
-}
-
-static char *
-strAddOption (char			   *dst,
-	      const CompMetadataOptionInfo *info)
-{
-    char *xml;
-
-    xml = compMetadataOptionInfoToXml (info);
-    if (!xml)
+    for (j = 0; j < COMP_SCREEN_OPTION_NUM; j++)
     {
-	fprintf (stderr, "%s: memory allocation failure 2\n", programName);
-	exit (1);
+	CompMetadataOptionInfo info = coreScreenOptionInfo[j];
+
+	switch (j) {
+	case COMP_SCREEN_OPTION_REFRESH_RATE:
+	    if (ctx->refreshRateData)
+		info.data = ctx->refreshRateData;
+	default:
+	    break;
+	}
+
+	i += compReadXmlChunkFromMetadataOptionInfo (&info,
+						     &offset,
+						     buffer + i,
+						     length - i);
     }
 
-    return strAdd (dst, xml);
+    i += compReadXmlChunk ("</screen></core></compiz>", &offset, buffer + i,
+			   length - i);
+
+    if (!offset && length > i)
+	buffer[i++] = '\0';
+
+    ctx->offset += i;
+
+    return i;
 }
 
 int
 main (int argc, char **argv)
 {
-    char *displayName = 0;
-    char *plugin[256];
-    int  i, j, nPlugin = 0;
-    Bool disableSm = FALSE;
-    char *clientId = NULL;
-    char *str;
-    char *textureFilterArg = NULL;
-    char *refreshRateArg = NULL;
+    CompIOCtx ctx;
+    char      *displayName = 0;
+    char      *plugin[256];
+    int	      i, nPlugin = 0;
+    Bool      disableSm = FALSE;
+    char      *clientId = NULL;
+    char      *refreshRateArg = NULL;
 
     programName = argv[0];
     programArgc = argc;
@@ -215,6 +246,8 @@ main (int argc, char **argv)
     infiniteRegion.extents.y1 = MINSHORT;
     infiniteRegion.extents.x2 = MAXSHORT;
     infiniteRegion.extents.y2 = MAXSHORT;
+
+    memset (&ctx, 0, sizeof (ctx));
 
     for (i = 1; i < argc; i++)
     {
@@ -245,8 +278,8 @@ main (int argc, char **argv)
 	}
 	else if (!strcmp (argv[i], "--fast-filter"))
 	{
-	    textureFilterArg = "Fast";
-	    defaultTextureFilter = textureFilterArg;
+	    ctx.textureFilterData = "<default>Fast</default>";
+	    defaultTextureFilter = "Fast";
 	}
 	else if (!strcmp (argv[i], "--indirect-rendering"))
 	{
@@ -305,6 +338,36 @@ main (int argc, char **argv)
 	}
     }
 
+    if (refreshRateArg)
+    {
+	ctx.refreshRateData = malloc (strlen (refreshRateArg) + 256);
+	if (ctx.refreshRateData)
+	    sprintf (ctx.refreshRateData,
+		     "<min>1</min><default>%s</default>",
+		     refreshRateArg);
+    }
+
+    if (nPlugin)
+    {
+	int size = 256;
+
+	for (i = 0; i < nPlugin; i++)
+	    size += strlen (plugin[i]) + 16;
+
+	ctx.pluginData = malloc (size);
+	if (ctx.pluginData)
+	{
+	    char *ptr = ctx.pluginData;
+
+	    ptr += sprintf (ptr, "<type>string</type><default>");
+
+	    for (i = 0; i < nPlugin; i++)
+		ptr += sprintf (ptr, "<value>%s</value>", plugin[i]);
+
+	    ptr += sprintf (ptr, "</default>");
+	}
+    }
+
     xmlInitParser ();
 
     LIBXML_TEST_VERSION;
@@ -316,78 +379,16 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    str = strAdd (NULL, "<compiz><core><display>");
-
-    for (i = 0; i < COMP_DISPLAY_OPTION_NUM; i++)
-    {
-	CompMetadataOptionInfo info = coreDisplayOptionInfo[i];
-	char		       *tmp = NULL;
-
-	switch (i) {
-	case COMP_DISPLAY_OPTION_ACTIVE_PLUGINS:
-	    if (nPlugin)
-	    {
-		tmp = strAdd (tmp, "<type>string</type><default>");
-
-		for (j = 0; j < nPlugin; j++)
-		{
-		    tmp = strAdd (tmp, "<value>");
-		    tmp = strAdd (tmp, plugin[j]);
-		    tmp = strAdd (tmp, "</value>");
-		}
-
-		tmp = strAdd (tmp, "</default>");
-
-		info.data = tmp;
-	    }
-	    break;
-	case COMP_DISPLAY_OPTION_TEXTURE_FILTER:
-	    if (textureFilterArg)
-	    {
-		tmp = strAdd (tmp, "<type>string</type><default>");
-		tmp = strAdd (tmp, textureFilterArg);
-		tmp = strAdd (tmp, "</default>");
-
-		info.data = tmp;
-	    }
-	default:
-	    break;
-	}
-
-	str = strAddOption (str, &info);
-
-	if (tmp)
-	    free (tmp);
-    }
-
-    str = strAdd (str, "</display><screen>");
-
-    for (i = 0; i < COMP_SCREEN_OPTION_NUM; i++)
-    {
-	CompMetadataOptionInfo info = coreScreenOptionInfo[i];
-	char		       tmp[256];
-
-	switch (i) {
-	case COMP_SCREEN_OPTION_REFRESH_RATE:
-	    if (refreshRateArg)
-	    {
-		snprintf (tmp, 256, "<min>1</min><default>%s</default>",
-			  refreshRateArg);
-		info.data = tmp;
-	    }
-	default:
-	    break;
-	}
-
-	str = strAddOption (str, &info);
-    }
-
-    str = strAdd (str, "</screen></core></compiz>");
-
-    if (!compAddMetadataFromString (&coreMetadata, str))
+    if (!compAddMetadataFromIO (&coreMetadata,
+				readCoreXmlCallback, NULL,
+				&ctx))
 	return 1;
 
-    free (str);
+    if (ctx.refreshRateData)
+	free (ctx.refreshRateData);
+
+    if (ctx.pluginData)
+	free (ctx.pluginData);
 
     compAddMetadataFromFile (&coreMetadata, "compiz");
 
