@@ -3,9 +3,9 @@ AC_PREREQ(2.57)
 AC_INIT([compiz], [0.5.1], [davidr@novell.com])
 
 AC_CONFIG_AUX_DIR(config)
-
 AM_INIT_AUTOMAKE([dist-bzip2])
 AC_CONFIG_HEADER([config.h])
+AC_PROG_INTLTOOL([0.23])
 AM_MAINTAINER_MODE
 
 /* decorator interface version */
@@ -445,11 +445,7 @@ plugins/compiz.schemas
 images/Makefile
 gtk/Makefile
 gtk/window-decorator/Makefile
-gtk/window-decorator/gwd.schemas
 gtk/gnome/Makefile
-gtk/gnome/compiz.desktop
-gtk/gnome/50-compiz-key.xml
-gtk/gnome/50-compiz-desktop-key.xml
 kde/Makefile
 kde/window-decorator/Makefile
 po/Makefile.in

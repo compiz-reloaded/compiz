@@ -20,7 +20,10 @@ endif
 if USE_GCONF
 schemadir       = $(GCONF_SCHEMA_FILE_DIR)
 schema_in_files = gwd.schemas.in
-schema_DATA     = $(schema_in_files:.schemas.in=.schemas)
+schema_files    = $(schema_in_files:.schemas.in=.schemas)
+schema_DATA     = $(schema_files)
+
+@INTLTOOL_SCHEMAS_RULE@
 
 install-data-local:
 	if test -z "$(DESTDIR)" ; then \
@@ -32,4 +35,6 @@ INCLUDES = -I$(top_srcdir)/include @GTK_WINDOW_DECORATOR_CFLAGS@ @METACITY_CFLAG
 
 bin_PROGRAMS = $(gtk_window_decorator_program)
 
-EXTRA_DIST = $(schema_in_files)
+EXTRA_DIST =		\
+	$(schema_files) \
+	$(schema_in_files)

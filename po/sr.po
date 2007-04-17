@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST2 (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-01 18:26+0200\n"
+"POT-Creation-Date: 2007-04-15 20:19-0400\n"
 "PO-Revision-Date: 2004-03-31 11:34+0200\n"
 "Last-Translator: Bojan Jovanovic <bojov@fon.bg.ac.yu>\n"
 "Language-Team: Serbian <i18n@suse.de>\n"
@@ -18,309 +18,1072 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : (n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: plugins/annotate.c:745 plugins/clone.c:724 plugins/rotate.c:1763
-#: plugins/screenshot.c:384 plugins/water.c:1606 plugins/zoom.c:752
+#: ../metadata/compiz.xml.in.h:1 ../plugins/compiz.schemas.in.h:1
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:2 ../plugins/compiz.schemas.in.h:3
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:3 ../plugins/compiz.schemas.in.h:5
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:4 ../plugins/compiz.schemas.in.h:7
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:5 ../plugins/compiz.schemas.in.h:9
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:6 ../plugins/compiz.schemas.in.h:11
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:7 ../plugins/compiz.schemas.in.h:13
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:8 ../plugins/compiz.schemas.in.h:15
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:9 ../plugins/compiz.schemas.in.h:17
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:10 ../plugins/compiz.schemas.in.h:19
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:11 ../plugins/compiz.schemas.in.h:21
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:12 ../plugins/compiz.schemas.in.h:23
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+
+#  Label text
+#: ../metadata/compiz.xml.in.h:13 ../plugins/compiz.schemas.in.h:26
+#, fuzzy
+msgid "Active Plugins"
+msgstr "Aktivan profil"
+
+#: ../metadata/compiz.xml.in.h:14 ../plugins/compiz.schemas.in.h:35
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:15 ../plugins/compiz.schemas.in.h:49
+msgid "Audible Bell"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:16 ../plugins/compiz.schemas.in.h:50
+#, fuzzy
+msgid "Audible system beep"
+msgstr "Sistemi datoteka"
+
+#  ComboBox item
+#  Combobox item
+#: ../metadata/compiz.xml.in.h:17 ../plugins/compiz.schemas.in.h:52
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "Automatski"
+
+#: ../metadata/compiz.xml.in.h:18 ../plugins/compiz.schemas.in.h:53
+msgid "Auto-Raise Delay"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:19 ../plugins/compiz.schemas.in.h:54
+msgid "Automatic detection of output devices"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:20 ../plugins/compiz.schemas.in.h:55
+msgid "Automatic detection of refresh rate"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:21 ../plugins/compiz.schemas.in.h:71
+msgid "Click To Focus"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:22 ../plugins/compiz.schemas.in.h:72
+msgid "Click on window moves input focus to it"
+msgstr ""
+
+#  button text
+#: ../metadata/compiz.xml.in.h:23 ../plugins/compiz.schemas.in.h:74
+#, fuzzy
+msgid "Close Window"
+msgstr "&Obriši Windowse"
+
+#: ../metadata/compiz.xml.in.h:24 ../plugins/compiz.schemas.in.h:75
+msgid "Close active window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:25 ../plugins/compiz.schemas.in.h:81
+#, fuzzy
+msgid "Command line 0"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:26 ../plugins/compiz.schemas.in.h:82
+#, fuzzy
+msgid "Command line 1"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:27 ../plugins/compiz.schemas.in.h:83
+#, fuzzy
+msgid "Command line 10"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:28 ../plugins/compiz.schemas.in.h:84
+#, fuzzy
+msgid "Command line 11"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:29 ../plugins/compiz.schemas.in.h:85
+#, fuzzy
+msgid "Command line 2"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:30 ../plugins/compiz.schemas.in.h:86
+#, fuzzy
+msgid "Command line 3"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:31 ../plugins/compiz.schemas.in.h:87
+#, fuzzy
+msgid "Command line 4"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:32 ../plugins/compiz.schemas.in.h:88
+#, fuzzy
+msgid "Command line 5"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:33 ../plugins/compiz.schemas.in.h:89
+#, fuzzy
+msgid "Command line 6"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:34 ../plugins/compiz.schemas.in.h:90
+#, fuzzy
+msgid "Command line 7"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:35 ../plugins/compiz.schemas.in.h:91
+#, fuzzy
+msgid "Command line 8"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:36 ../plugins/compiz.schemas.in.h:92
+#, fuzzy
+msgid "Command line 9"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:37 ../plugins/compiz.schemas.in.h:93
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:38 ../plugins/compiz.schemas.in.h:94
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:39 ../plugins/compiz.schemas.in.h:95
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:40 ../plugins/compiz.schemas.in.h:96
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:41 ../plugins/compiz.schemas.in.h:97
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:42 ../plugins/compiz.schemas.in.h:98
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:43 ../plugins/compiz.schemas.in.h:99
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:44 ../plugins/compiz.schemas.in.h:100
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:45 ../plugins/compiz.schemas.in.h:101
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:46 ../plugins/compiz.schemas.in.h:102
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:47 ../plugins/compiz.schemas.in.h:103
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:48 ../plugins/compiz.schemas.in.h:104
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:49 ../plugins/compiz.schemas.in.h:114
+msgid "Decrease Opacity"
+msgstr ""
+
+#  Radio button for using an entire (Windows) partition for Linux
+#: ../metadata/compiz.xml.in.h:50 ../plugins/compiz.schemas.in.h:115
+#, fuzzy
+msgid "Decrease window opacity"
+msgstr "&Obriši Windows kompletno"
+
+#  table item / label
+#: ../metadata/compiz.xml.in.h:51 ../plugins/compiz.schemas.in.h:117
+#, fuzzy
+msgid "Default Icon"
+msgstr "Podrazumevana sekcija"
+
+#  progress stage title
+#: ../metadata/compiz.xml.in.h:52 ../plugins/compiz.schemas.in.h:118
+#, fuzzy
+msgid "Default window icon image"
+msgstr "Pokretanje podrazumevanog menadžera prozora"
+
+#: ../metadata/compiz.xml.in.h:53 ../plugins/compiz.schemas.in.h:122
+msgid "Detect Outputs"
+msgstr ""
+
+#  headline for dialog "Select for update"
+#  headline for dialog "Select for update"
+#: ../metadata/compiz.xml.in.h:54 ../plugins/compiz.schemas.in.h:123
+#, fuzzy
+msgid "Detect Refresh Rate"
+msgstr "Izaberi za ažuriranje"
+
+#: ../metadata/compiz.xml.in.h:55 ../plugins/compiz.schemas.in.h:163
+msgid "Focus Prevention Windows"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:56
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Startujem servis"
+
+#: ../metadata/compiz.xml.in.h:57
+msgid "General Options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:58
+msgid "General compiz options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:59 ../plugins/compiz.schemas.in.h:183
+msgid "Hide Skip Taskbar Windows"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:60 ../plugins/compiz.schemas.in.h:184
+msgid "Hide all windows and focus desktop"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:61 ../plugins/compiz.schemas.in.h:186
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+
+#  Aliases dialog caption
+#: ../metadata/compiz.xml.in.h:62 ../plugins/compiz.schemas.in.h:187
+#, fuzzy
+msgid "Horizontal Virtual Size"
+msgstr "Virtuelni alias-i"
+
+#: ../metadata/compiz.xml.in.h:63 ../plugins/compiz.schemas.in.h:193
+msgid "Ignore Hints When Maximized"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:64 ../plugins/compiz.schemas.in.h:194
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:65 ../plugins/compiz.schemas.in.h:197
+msgid "Increase Opacity"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:66 ../plugins/compiz.schemas.in.h:198
+msgid "Increase window opacity"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:67
+msgid "Interval before raising selected windows"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:68
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:69 ../plugins/compiz.schemas.in.h:232
+#, fuzzy
+msgid "Lighting"
+msgstr "Zapisivanje događaja"
+
+#: ../metadata/compiz.xml.in.h:70 ../plugins/compiz.schemas.in.h:237
+#, fuzzy
+msgid "List of currently active plugins"
+msgstr "Listaj samo detektovane štampače"
+
+#: ../metadata/compiz.xml.in.h:71 ../plugins/compiz.schemas.in.h:238
+msgid "List of strings describing output devices"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:72 ../plugins/compiz.schemas.in.h:239
+msgid "Lower Window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:73 ../plugins/compiz.schemas.in.h:240
+msgid "Lower window beneath other windows"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:74 ../plugins/compiz.schemas.in.h:248
+msgid "Maximize Window"
+msgstr ""
+
+#  button text
+#  button text
+#: ../metadata/compiz.xml.in.h:75 ../plugins/compiz.schemas.in.h:249
+#, fuzzy
+msgid "Maximize Window Horizontally"
+msgstr "&Smanji Windowse"
+
+#  button text
+#  button text
+#: ../metadata/compiz.xml.in.h:76 ../plugins/compiz.schemas.in.h:250
+#, fuzzy
+msgid "Maximize Window Vertically"
+msgstr "&Smanji Windowse"
+
+#: ../metadata/compiz.xml.in.h:77 ../plugins/compiz.schemas.in.h:251
+msgid "Maximize active window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:78 ../plugins/compiz.schemas.in.h:253
+msgid "Maximize active window horizontally"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:79 ../plugins/compiz.schemas.in.h:255
+msgid "Maximize active window vertically"
+msgstr ""
+
+#  button text
+#  button text
+#: ../metadata/compiz.xml.in.h:80 ../plugins/compiz.schemas.in.h:258
+#, fuzzy
+msgid "Minimize Window"
+msgstr "&Smanji Windowse"
+
+#: ../metadata/compiz.xml.in.h:81 ../plugins/compiz.schemas.in.h:260
+msgid "Minimize active window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:82 ../plugins/compiz.schemas.in.h:278
+msgid "Number of Desktops"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:83
+msgid "Number of virtual desktops"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:84 ../plugins/compiz.schemas.in.h:281
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:85 ../plugins/compiz.schemas.in.h:284
+msgid "Opacity Step"
+msgstr ""
+
+# ???
+#: ../metadata/compiz.xml.in.h:86
+#, fuzzy
+msgid "Opacity change step"
+msgstr "окситан (после 1500.)"
+
+#: ../metadata/compiz.xml.in.h:87 ../plugins/compiz.schemas.in.h:288
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:88 ../plugins/compiz.schemas.in.h:289
+msgid "Opacity window values"
+msgstr ""
+
+#  button text
+#: ../metadata/compiz.xml.in.h:89 ../plugins/compiz.schemas.in.h:290
+#, fuzzy
+msgid "Opacity windows"
+msgstr "&Obriši Windowse"
+
+#: ../metadata/compiz.xml.in.h:90 ../plugins/compiz.schemas.in.h:291
+msgid "Open a terminal"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:91 ../plugins/compiz.schemas.in.h:293
+msgid "Open window menu"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:92 ../plugins/compiz.schemas.in.h:298
+msgid "Outputs"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:93 ../plugins/compiz.schemas.in.h:301
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Čekanje"
+
+#: ../metadata/compiz.xml.in.h:94 ../plugins/compiz.schemas.in.h:379
+#, fuzzy
+msgid "Raise On Click"
+msgstr "&Radio Clock"
+
+#  button text
+#: ../metadata/compiz.xml.in.h:95 ../plugins/compiz.schemas.in.h:380
+#, fuzzy
+msgid "Raise Window"
+msgstr "&Obriši Windowse"
+
+#: ../metadata/compiz.xml.in.h:96 ../plugins/compiz.schemas.in.h:381
+msgid "Raise selected windows after interval"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:97 ../plugins/compiz.schemas.in.h:382
+msgid "Raise window above other windows"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:98 ../plugins/compiz.schemas.in.h:384
+msgid "Raise windows when clicked"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:99 ../plugins/compiz.schemas.in.h:385
+#, fuzzy
+msgid "Refresh Rate"
+msgstr "&Osveži Listu"
+
+#: ../metadata/compiz.xml.in.h:100 ../plugins/compiz.schemas.in.h:491
+msgid "Run Dialog"
+msgstr ""
+
+#  Process <command> "help"
+#  translators: %1 is the command name
+#: ../metadata/compiz.xml.in.h:101 ../plugins/compiz.schemas.in.h:492
+#, fuzzy
+msgid "Run command 0"
+msgstr "Komanda  '%1'"
+
+#  Process <command> "help"
+#  translators: %1 is the command name
+#: ../metadata/compiz.xml.in.h:102 ../plugins/compiz.schemas.in.h:493
+#, fuzzy
+msgid "Run command 1"
+msgstr "Komanda  '%1'"
+
+#  Process <command> "help"
+#  translators: %1 is the command name
+#: ../metadata/compiz.xml.in.h:103 ../plugins/compiz.schemas.in.h:494
+#, fuzzy
+msgid "Run command 10"
+msgstr "Komanda  '%1'"
+
+#  Process <command> "help"
+#  translators: %1 is the command name
+#: ../metadata/compiz.xml.in.h:104 ../plugins/compiz.schemas.in.h:495
+#, fuzzy
+msgid "Run command 11"
+msgstr "Komanda  '%1'"
+
+#: ../metadata/compiz.xml.in.h:105 ../plugins/compiz.schemas.in.h:496
+#, fuzzy
+msgid "Run command 2"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:106 ../plugins/compiz.schemas.in.h:497
+#, fuzzy
+msgid "Run command 3"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:107 ../plugins/compiz.schemas.in.h:498
+#, fuzzy
+msgid "Run command 4"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:108 ../plugins/compiz.schemas.in.h:499
+#, fuzzy
+msgid "Run command 5"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:109 ../plugins/compiz.schemas.in.h:500
+#, fuzzy
+msgid "Run command 6"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:110 ../plugins/compiz.schemas.in.h:501
+#, fuzzy
+msgid "Run command 7"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:111 ../plugins/compiz.schemas.in.h:502
+#, fuzzy
+msgid "Run command 8"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:112 ../plugins/compiz.schemas.in.h:503
+#, fuzzy
+msgid "Run command 9"
+msgstr "Komanda :"
+
+#: ../metadata/compiz.xml.in.h:113
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:114
+msgid "Screen size multiplier for vertical virtual size"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:115 ../plugins/compiz.schemas.in.h:515
+#, fuzzy
+msgid "Screenshot command line"
+msgstr "Greška, niste uneli ispravno komandu."
+
+#: ../metadata/compiz.xml.in.h:116 ../plugins/compiz.schemas.in.h:532
+msgid "Show Main Menu"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:117 ../plugins/compiz.schemas.in.h:533
+msgid "Show Run Application dialog"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:118 ../plugins/compiz.schemas.in.h:537
+msgid "Show the main menu"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:119 ../plugins/compiz.schemas.in.h:543
+#, fuzzy
+msgid "Slow Animations"
+msgstr "Prikaži sve Particije"
+
+#: ../metadata/compiz.xml.in.h:120 ../plugins/compiz.schemas.in.h:570
+msgid "Sync To VBlank"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:121 ../plugins/compiz.schemas.in.h:571
+msgid "Take a screenshot"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:122 ../plugins/compiz.schemas.in.h:573
+msgid "Take a screenshot of a window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:123 ../plugins/compiz.schemas.in.h:575
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Greška, niste uneli ispravno komandu."
+
+#  MenuButton label
+#  menubutton label
+#: ../metadata/compiz.xml.in.h:124 ../plugins/compiz.schemas.in.h:576
+#, fuzzy
+msgid "Texture Filter"
+msgstr "&Podesite filter"
+
+#  MenuButton label
+#  menubutton label
+#: ../metadata/compiz.xml.in.h:125
+#, fuzzy
+msgid "Texture filtering"
+msgstr "&Podesite filter"
+
+#: ../metadata/compiz.xml.in.h:126
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:127 ../plugins/compiz.schemas.in.h:583
+msgid "Toggle Window Maximized"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:128 ../plugins/compiz.schemas.in.h:584
+msgid "Toggle Window Maximized Horizontally"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:129 ../plugins/compiz.schemas.in.h:585
+msgid "Toggle Window Maximized Vertically"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:130 ../plugins/compiz.schemas.in.h:586
+msgid "Toggle Window Shaded"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:131 ../plugins/compiz.schemas.in.h:587
+msgid "Toggle active window maximized"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:132 ../plugins/compiz.schemas.in.h:589
+msgid "Toggle active window maximized horizontally"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:133 ../plugins/compiz.schemas.in.h:591
+msgid "Toggle active window maximized vertically"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:134 ../plugins/compiz.schemas.in.h:593
+msgid "Toggle active window shaded"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:135 ../plugins/compiz.schemas.in.h:598
+msgid "Toggle use of slow animations"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:136 ../plugins/compiz.schemas.in.h:610
+msgid "Unmaximize Window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:137 ../plugins/compiz.schemas.in.h:611
+msgid "Unmaximize active window"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:138 ../plugins/compiz.schemas.in.h:613
+msgid "Unredirect Fullscreen Windows"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:139 ../plugins/compiz.schemas.in.h:614
+msgid "Use diffuse light when screen is transformed"
+msgstr ""
+
+#  Aliases dialog caption
+#: ../metadata/compiz.xml.in.h:140 ../plugins/compiz.schemas.in.h:619
+#, fuzzy
+msgid "Vertical Virtual Size"
+msgstr "Virtuelni alias-i"
+
+#: ../metadata/compiz.xml.in.h:141 ../plugins/compiz.schemas.in.h:631
+#, fuzzy
+msgid "Window Menu"
+msgstr "Window Manager"
+
+#: ../metadata/compiz.xml.in.h:142 ../plugins/compiz.schemas.in.h:636
+msgid "Window screenshot command line"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:143 ../plugins/compiz.schemas.in.h:645
+msgid "Windows that should be translucent by default"
+msgstr ""
+
+#  Headline for X11 configuration screen:
+#  The user selects screen resolution and color depth.
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1 ../src/main.c:54
+#, fuzzy
+msgid "Desktop"
+msgstr "Setovanja Desktop-a"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+#, fuzzy
+msgid "Window Management"
+msgstr "Window Manager"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+#, fuzzy
+msgid "Blur type"
+msgstr "Suspend"
+
+#  Radio button for using an entire (Windows) partition for Linux
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+#, fuzzy
+msgid "Metacity theme active window opacity"
+msgstr "&Obriši Windows kompletno"
+
+#  Radio button for using an entire (Windows) partition for Linux
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+#, fuzzy
+msgid "Metacity theme active window opacity shade"
+msgstr "&Obriši Windows kompletno"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+msgid "Metacity theme opacity"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity shade"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid "Type of blur used for window decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Use metacity theme"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Use metacity theme when drawing window decorations"
+msgstr ""
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr ""
+
+#: ../plugins/annotate.c:745 ../plugins/clone.c:726
+#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
+#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
 #, fuzzy
 msgid "Initiate"
 msgstr "хетски"
 
-#: plugins/annotate.c:746
+#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
 msgid "Initiate annotate drawing"
 msgstr ""
 
-#: plugins/annotate.c:760
+#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
 msgid "Draw"
 msgstr ""
 
-#: plugins/annotate.c:761
+#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
 msgid "Draw using tool"
 msgstr ""
 
-#: plugins/annotate.c:772
+#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
 #, fuzzy
 msgid "Initiate erase"
 msgstr "хетски"
 
-#: plugins/annotate.c:773
+#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
 msgid "Initiate annotate erasing"
 msgstr ""
 
-#: plugins/annotate.c:787 plugins/annotate.c:788
+#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
+#: ../plugins/compiz.schemas.in.h:69
 #, fuzzy
 msgid "Clear"
 msgstr "XF86Clear"
 
-#: plugins/annotate.c:805
+#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
 msgid "Annotate Fill Color"
 msgstr ""
 
-#: plugins/annotate.c:806
+#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
 msgid "Fill color for annotations"
 msgstr ""
 
-#: plugins/annotate.c:815
+#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
 msgid "Annotate Stroke Color"
 msgstr ""
 
-#: plugins/annotate.c:816
+#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
 msgid "Stroke color for annotations"
 msgstr ""
 
-#: plugins/annotate.c:825
+#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
 msgid "Line width"
 msgstr ""
 
-#: plugins/annotate.c:826
+#: ../plugins/annotate.c:826
 msgid "Line width for annotations"
 msgstr ""
 
-#: plugins/annotate.c:835
+#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
 msgid "Stroke width"
 msgstr ""
 
-#: plugins/annotate.c:836
+#: ../plugins/annotate.c:836
 msgid "Stroke width for annotations"
 msgstr ""
 
-#: plugins/annotate.c:1009
+#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
 #, fuzzy
 msgid "Annotate"
 msgstr "хетски"
 
 #  Label text
-#: plugins/annotate.c:1010
+#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "Aktivan profil"
 
-#: plugins/blur.c:73
+#: ../plugins/blur.c:73
 #, fuzzy
 msgid "4xBilinear"
 msgstr "Filter: "
 
-#: plugins/blur.c:74 plugins/blur.c:237
+#: ../plugins/blur.c:74 ../plugins/blur.c:237
 #, fuzzy
 msgid "Gaussian"
 msgstr "Rusija"
 
-#: plugins/blur.c:75 plugins/blur.c:239 plugins/cube.c:1103
-#: plugins/decoration.c:1203 plugins/switcher.c:373
+#: ../plugins/blur.c:75 ../plugins/blur.c:239
+#: ../plugins/compiz.schemas.in.h:268 ../plugins/cube.c:1105
+#: ../plugins/decoration.c:1190 ../plugins/switcher.c:367
 #, fuzzy
 msgid "Mipmap"
 msgstr "микмак"
 
-#: plugins/blur.c:728
+#: ../plugins/blur.c:728 ../plugins/compiz.schemas.in.h:60
 #, fuzzy
 msgid "Blur Speed"
 msgstr "Suspend"
 
 #  label text, %1 is replaced by a unit value ("MB")
 #  label text, %1 is replaced by a unit value ("MB")
-#: plugins/blur.c:729
+#: ../plugins/blur.c:729
 #, fuzzy
 msgid "Window blur speed"
 msgstr "Windows slobodno (%1)"
 
 #  button text
-#: plugins/blur.c:738
+#: ../plugins/blur.c:738 ../plugins/compiz.schemas.in.h:166
 #, fuzzy
 msgid "Focus blur windows"
 msgstr "&Obriši Windowse"
 
-#: plugins/blur.c:739
+#: ../plugins/blur.c:739
 msgid "Windows that should be affected by focus blur"
 msgstr ""
 
-#: plugins/blur.c:747
+#: ../plugins/blur.c:747 ../plugins/compiz.schemas.in.h:161
 msgid "Focus Blur"
 msgstr ""
 
-#: plugins/blur.c:748
+#: ../plugins/blur.c:748 ../plugins/compiz.schemas.in.h:65
 msgid "Blur windows that doesn't have focus"
 msgstr ""
 
 #  button text
-#: plugins/blur.c:754
+#: ../plugins/blur.c:754 ../plugins/compiz.schemas.in.h:38
 #, fuzzy
 msgid "Alpha blur windows"
 msgstr "&Obriši Windowse"
 
-#: plugins/blur.c:755
+#: ../plugins/blur.c:755
 msgid "Windows that should use alpha blur by default"
 msgstr ""
 
-#: plugins/blur.c:763
+#: ../plugins/blur.c:763 ../plugins/compiz.schemas.in.h:37
 msgid "Alpha Blur"
 msgstr ""
 
-#: plugins/blur.c:764
+#: ../plugins/blur.c:764 ../plugins/compiz.schemas.in.h:62
 msgid "Blur behind translucent parts of windows"
 msgstr ""
 
 #  MenuButton label
 #  menubutton label
-#: plugins/blur.c:772
+#: ../plugins/blur.c:772 ../plugins/compiz.schemas.in.h:57
 #, fuzzy
 msgid "Blur Filter"
 msgstr "&Podesite filter"
 
-#: plugins/blur.c:773
+#: ../plugins/blur.c:773
 msgid "Filter method used for blurring"
 msgstr ""
 
-#: plugins/blur.c:783
+#: ../plugins/blur.c:783 ../plugins/compiz.schemas.in.h:174
 msgid "Gaussian Radius"
 msgstr ""
 
-#: plugins/blur.c:784
+#: ../plugins/blur.c:784
 #, fuzzy
 msgid "Gaussian radius"
 msgstr "Руска Федерација"
 
-#: plugins/blur.c:792
+#: ../plugins/blur.c:792 ../plugins/compiz.schemas.in.h:175
 #, fuzzy
 msgid "Gaussian Strength"
 msgstr "Rusija"
 
-#: plugins/blur.c:793
+#: ../plugins/blur.c:793
 #, fuzzy
 msgid "Gaussian strength"
 msgstr "Rusija"
 
-#: plugins/blur.c:802
+#: ../plugins/blur.c:802 ../plugins/compiz.schemas.in.h:269
 #, fuzzy
 msgid "Mipmap LOD"
 msgstr "микмак"
 
-#: plugins/blur.c:803
+#: ../plugins/blur.c:803
 msgid "Mipmap level-of-detail"
 msgstr ""
 
-#: plugins/blur.c:812
+#: ../plugins/blur.c:812 ../plugins/compiz.schemas.in.h:59
 #, fuzzy
 msgid "Blur Saturation"
 msgstr "Trajanje"
 
-#: plugins/blur.c:813
+#: ../plugins/blur.c:813
 #, fuzzy
 msgid "Blur saturation"
 msgstr "Trajanje"
 
-#: plugins/blur.c:821
+#: ../plugins/blur.c:821 ../plugins/compiz.schemas.in.h:58
 msgid "Blur Occlusion"
 msgstr ""
 
-#: plugins/blur.c:822
+#: ../plugins/blur.c:822 ../plugins/compiz.schemas.in.h:673
 msgid "blur occlusion"
 msgstr ""
 
-#: plugins/blur.c:2560
+#: ../plugins/blur.c:2562 ../plugins/compiz.schemas.in.h:374
 msgid "Pulse"
 msgstr ""
 
-#: plugins/blur.c:2561
+#: ../plugins/blur.c:2563 ../plugins/compiz.schemas.in.h:375
 msgid "Pulse effect"
 msgstr ""
 
 #  button text
-#: plugins/blur.c:2883
+#: ../plugins/blur.c:2885 ../plugins/compiz.schemas.in.h:61
 #, fuzzy
 msgid "Blur Windows"
 msgstr "&Obriši Windowse"
 
 #  button text
-#: plugins/blur.c:2884
+#: ../plugins/blur.c:2886 ../plugins/compiz.schemas.in.h:64
 #, fuzzy
 msgid "Blur windows"
 msgstr "&Obriši Windowse"
 
-#: plugins/clone.c:725
+#: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 msgid "Initiate clone selection"
 msgstr ""
 
-#: plugins/clone.c:854
+#: ../plugins/clone.c:860 ../plugins/compiz.schemas.in.h:73
 msgid "Clone Output"
 msgstr ""
 
-#: plugins/clone.c:855
+#: ../plugins/clone.c:861 ../plugins/compiz.schemas.in.h:297
 msgid "Output clone handler"
 msgstr ""
 
-#: plugins/cube.c:990
-#, fuzzy
-msgid "Cube Color"
-msgstr "Dumb Clock"
-
-#: plugins/cube.c:991
-msgid "Color of top and bottom sides of the cube"
+#: ../plugins/compiz.schemas.in.h:2
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1000
-msgid "Inside Cube"
+#: ../plugins/compiz.schemas.in.h:4
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1001
-msgid "Inside cube"
+#: ../plugins/compiz.schemas.in.h:6
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#  ComboBox entry: hardware clock set to local time
-#: plugins/cube.c:1007
-#, fuzzy
-msgid "Scale image"
-msgstr "lokalno vreme"
-
-#: plugins/cube.c:1008
-msgid "Scale images to cover top face of cube"
+#: ../plugins/compiz.schemas.in.h:8
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1014
-#, fuzzy
-msgid "Image files"
-msgstr "Instaliacija slike diska"
-
-#: plugins/cube.c:1015
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
+#: ../plugins/compiz.schemas.in.h:10
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1028
-#, fuzzy
-msgid "Skydome"
-msgstr "Sidnej"
-
-#: plugins/cube.c:1029
-msgid "Render skydome"
+#: ../plugins/compiz.schemas.in.h:12
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1035
-msgid "Skydome Image"
+#: ../plugins/compiz.schemas.in.h:14
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1036
-msgid "Image to use as texture for the skydome"
+#: ../plugins/compiz.schemas.in.h:16
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1044
-msgid "Animate Skydome"
+#: ../plugins/compiz.schemas.in.h:18
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1045
-msgid "Animate skydome when rotating cube"
+#: ../plugins/compiz.schemas.in.h:20
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1051
-msgid "Skydome Gradient Start Color"
+#: ../plugins/compiz.schemas.in.h:22
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1052
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
-
-#: plugins/cube.c:1062
-msgid "Skydome Gradient End Color"
-msgstr ""
-
-#: plugins/cube.c:1063
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+#: ../plugins/compiz.schemas.in.h:24
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
 #  ...
@@ -335,548 +1098,2574 @@ msgstr ""
 #  if the status is false we had to check if the card
 #  or the environment is capable of using 3D
 #  ---
-#: plugins/cube.c:1073 plugins/rotate.c:302
+#: ../plugins/compiz.schemas.in.h:25 ../plugins/cube.c:1075
+#: ../plugins/rotate.c:304
 #, fuzzy
 msgid "Acceleration"
 msgstr "3D akceleratori"
 
-#  ...
-#  at the end of the suggestion text we will add the
-#  3D status. Therefore the D3Active variable is handled
-#  if the status is false we had to check if the card
-#  or the environment is capable of using 3D
-#  ---
-#  ...
-#  at the end of the suggestion text we will add the
-#  3D status. Therefore the D3Active variable is handled
-#  if the status is false we had to check if the card
-#  or the environment is capable of using 3D
-#  ---
-#: plugins/cube.c:1074
-#, fuzzy
-msgid "Fold Acceleration"
-msgstr "3D akceleratori"
-
-#: plugins/cube.c:1083 plugins/minimize.c:192 plugins/rotate.c:319
-#: plugins/scale.c:334 plugins/switcher.c:344 plugins/zoom.c:239
-#, fuzzy
-msgid "Speed"
-msgstr "Suspend"
-
-#: plugins/cube.c:1084
-#, fuzzy
-msgid "Fold Speed"
-msgstr "Suspend"
-
-#: plugins/cube.c:1093 plugins/minimize.c:202 plugins/rotate.c:329
-#: plugins/scale.c:344 plugins/switcher.c:354 plugins/zoom.c:249
-#, fuzzy
-msgid "Timestep"
-msgstr "Источни Тимор"
-
-#: plugins/cube.c:1094
-#, fuzzy
-msgid "Fold Timestep"
-msgstr "Источни Тимор"
-
-#: plugins/cube.c:1104 plugins/switcher.c:374
-msgid "Generate mipmaps when possible for higher quality scaling"
+#: ../plugins/compiz.schemas.in.h:27 ../plugins/water.c:1698
+msgid "Add line"
 msgstr ""
 
-#: plugins/cube.c:1795
-msgid "Unfold"
+#: ../plugins/compiz.schemas.in.h:28
+msgid ""
+"Add line (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1796
-msgid "Unfold cube"
+#: ../plugins/compiz.schemas.in.h:29 ../plugins/water.c:1686
+#, fuzzy
+msgid "Add point"
+msgstr "Додај догађај"
+
+#: ../plugins/compiz.schemas.in.h:30
+msgid ""
+"Add point (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1813
-msgid "Next Slide"
+#: ../plugins/compiz.schemas.in.h:31 ../plugins/water.c:1876
+msgid "Adds water effects to different desktop actions"
 msgstr ""
 
-#: plugins/cube.c:1814
+#: ../plugins/compiz.schemas.in.h:32 ../plugins/cube.c:1818
 msgid "Advance to next slide"
 msgstr ""
 
-#: plugins/cube.c:1831
-msgid "Previous Slide"
+#: ../plugins/compiz.schemas.in.h:33
+msgid ""
+"Advance to next slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
 msgstr ""
 
-#: plugins/cube.c:1832
-msgid "Go back to previous slide"
+#: ../plugins/compiz.schemas.in.h:34
+msgid ""
+"Algorithm to use for window placement (Cascade, Centered, Smart, Maximize, "
+"Random)"
 msgstr ""
 
-#  Headline for X11 configuration screen:
-#  The user selects screen resolution and color depth.
-#: plugins/cube.c:2037
+#: ../plugins/compiz.schemas.in.h:36
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:39
+msgid "Amount of brightness in percent (0-100)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:40
+msgid "Amount of opacity in percent (0-100)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:41
+msgid "Amount of saturation in percent (0-100)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:42 ../plugins/cube.c:1046
+msgid "Animate Skydome"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:43 ../plugins/cube.c:1047
+msgid "Animate skydome when rotating cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
+#: ../plugins/switcher.c:2298
 #, fuzzy
-msgid "Desktop Cube"
-msgstr "Setovanja Desktop-a"
+msgid "Application Switcher"
+msgstr "Redosled"
 
-#: plugins/cube.c:2038
-msgid "Place windows on cube"
-msgstr ""
-
-#: plugins/decoration.c:1145
+#  ComboBox item
+#  Combobox item
+#: ../plugins/compiz.schemas.in.h:51 ../plugins/switcher.c:434
 #, fuzzy
-msgid "Shadow Radius"
-msgstr "Radius"
+msgid "Auto Rotate"
+msgstr "Automatski"
 
-#: plugins/decoration.c:1146
+#: ../plugins/compiz.schemas.in.h:56 ../plugins/screenshot.c:408
+msgid "Automatically open screenshot in this application"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:63
 #, fuzzy
-msgid "Drop shadow radius"
-msgstr "Radius"
+msgid "Blur saturation (0-100)"
+msgstr "Trajanje"
 
-#: plugins/decoration.c:1155
+#: ../plugins/compiz.schemas.in.h:66 ../plugins/switcher.c:384
 #, fuzzy
-msgid "Shadow Opacity"
-msgstr "&Loše stanje"
+msgid "Brightness"
+msgstr "Most"
 
-#: plugins/decoration.c:1156
-#, fuzzy
-msgid "Drop shadow opacity"
-msgstr "&Loše stanje"
-
-#: plugins/decoration.c:1175
-msgid "Shadow Offset X"
+#: ../plugins/compiz.schemas.in.h:67 ../plugins/switcher.c:402
+msgid "Bring To Front"
 msgstr ""
 
-#: plugins/decoration.c:1176
-msgid "Drop shadow X offset"
+#: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
+msgid "Bring selected window to front"
 msgstr ""
 
-#: plugins/decoration.c:1184
-msgid "Shadow Offset Y"
+#: ../plugins/compiz.schemas.in.h:70
+msgid ""
+"Clear (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
 msgstr ""
 
-#: plugins/decoration.c:1185
-msgid "Drop shadow Y offset"
+#: ../plugins/compiz.schemas.in.h:76
+msgid ""
+"Close active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
 msgstr ""
 
-#: plugins/decoration.c:1193
+#: ../plugins/compiz.schemas.in.h:77 ../plugins/cube.c:993
+msgid "Color of top and bottom sides of the cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:78 ../plugins/cube.c:1065
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:79 ../plugins/cube.c:1054
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:80 ../plugins/decoration.c:1180
 #, fuzzy
 msgid "Command"
 msgstr "Komanda :"
 
-#: plugins/decoration.c:1194
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
+#  header text
+#: ../plugins/compiz.schemas.in.h:105 ../plugins/move.c:759
+#, fuzzy
+msgid "Constrain Y"
+msgstr " Kontejner"
+
+#: ../plugins/compiz.schemas.in.h:106 ../plugins/move.c:760
+msgid "Constrain Y coordinate to workspace area"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:107 ../plugins/cube.c:992
+#, fuzzy
+msgid "Cube Color"
+msgstr "Dumb Clock"
+
+#: ../plugins/compiz.schemas.in.h:108 ../plugins/scale.c:360
+#, fuzzy
+msgid "Darken Background"
+msgstr "Pozadine"
+
+#: ../plugins/compiz.schemas.in.h:109 ../plugins/scale.c:361
+msgid "Darken background when scaling windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:110
+msgid "Dbus"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:111
+msgid "Dbus Control Backend"
 msgstr ""
 
 #  button text
-#: plugins/decoration.c:1210
+#: ../plugins/compiz.schemas.in.h:112 ../plugins/decoration.c:1197
 #, fuzzy
 msgid "Decoration windows"
 msgstr "&Obriši Windowse"
 
-#: plugins/decoration.c:1211
-msgid "Windows that should be decorated"
+#: ../plugins/compiz.schemas.in.h:113 ../plugins/decoration.c:1181
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
 msgstr ""
 
-#  button text
-#  button text
-#: plugins/decoration.c:1219
-#, fuzzy
-msgid "Shadow windows"
-msgstr "&Smanji Windowse"
-
-#: plugins/decoration.c:1220
-msgid "Windows that should be have a shadow"
+#: ../plugins/compiz.schemas.in.h:116
+msgid ""
+"Decrease window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
 msgstr ""
 
-#: plugins/decoration.c:1505
-#, fuzzy
-msgid "Window Decoration"
-msgstr "Bez opisa"
+#: ../plugins/compiz.schemas.in.h:119
+msgid "Delay (in ms) between each rain-drop (0-3600000)"
+msgstr ""
 
-#: plugins/decoration.c:1506
+#  Headline for X11 configuration screen:
+#  The user selects screen resolution and color depth.
+#: ../plugins/compiz.schemas.in.h:120 ../plugins/cube.c:2044
 #, fuzzy
-msgid "Window decorations"
-msgstr "ypbind opcije"
+msgid "Desktop Cube"
+msgstr "Setovanja Desktop-a"
 
-#: plugins/fade.c:179
+#  Headline for X11 configuration screen:
+#  The user selects screen resolution and color depth.
+#: ../plugins/compiz.schemas.in.h:121 ../plugins/plane.c:889
+#, fuzzy
+msgid "Desktop Plane"
+msgstr "Setovanja Desktop-a"
+
+#: ../plugins/compiz.schemas.in.h:124 ../plugins/screenshot.c:398
+#, fuzzy
+msgid "Directory"
+msgstr "Директоријум\n"
+
+#: ../plugins/compiz.schemas.in.h:125
+msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:126 ../plugins/gconf-dump.c:617
+#: ../plugins/gconf-dump.c:627
+msgid "Do not modify"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:129
+msgid ""
+"Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:130
+msgid "Drop shadow X offset (-16-16)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:131
+msgid "Drop shadow Y offset (-16-16)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:132
+#, fuzzy
+msgid "Drop shadow color"
+msgstr "Radius"
+
+#: ../plugins/compiz.schemas.in.h:133
+#, fuzzy
+msgid "Drop shadow opacity (0.01-6.00)"
+msgstr "&Loše stanje"
+
+#: ../plugins/compiz.schemas.in.h:134
+#, fuzzy
+msgid "Drop shadow radius (0.0-48.0)"
+msgstr "Radius"
+
+#: ../plugins/compiz.schemas.in.h:135 ../plugins/rotate.c:1989
+msgid "Edge Flip DnD"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:136 ../plugins/rotate.c:1981
+msgid "Edge Flip Move"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:137 ../plugins/rotate.c:1973
+msgid "Edge Flip Pointer"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:138 ../plugins/water.c:1609
+msgid "Enable pointer water effects"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:139
+msgid ""
+"Enable pointer water effects (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:140 ../plugins/fade.c:215
+msgid "Fade On Minimize/Open/Close"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:141 ../plugins/fade.c:182
 msgid "Fade Speed"
 msgstr ""
 
-#  label text, %1 is replaced by a unit value ("MB")
-#  label text, %1 is replaced by a unit value ("MB")
-#: plugins/fade.c:180
-#, fuzzy
-msgid "Window fade speed"
-msgstr "Windows slobodno (%1)"
+#: ../plugins/compiz.schemas.in.h:142 ../plugins/fade.c:216
+msgid "Fade effect on minimize/open/close window events"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:143 ../plugins/fade.c:202
+msgid "Fade effect on system beep"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:144 ../plugins/fade.c:882
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
 
 #  button text
-#: plugins/fade.c:189
+#: ../plugins/compiz.schemas.in.h:145 ../plugins/fade.c:192
 #, fuzzy
 msgid "Fade windows"
 msgstr "&Obriši Windowse"
 
-#: plugins/fade.c:190
-msgid "Windows that should be fading"
-msgstr ""
-
-#: plugins/fade.c:198
-msgid "Visual Bell"
-msgstr ""
-
-#: plugins/fade.c:199
-msgid "Fade effect on system beep"
-msgstr ""
-
-#: plugins/fade.c:205
-msgid "Fullscreen Visual Bell"
-msgstr ""
-
-#: plugins/fade.c:206
-msgid "Fullscreen fade effect on system beep"
-msgstr ""
-
 #  button text
 #  button text
-#: plugins/fade.c:857
+#: ../plugins/compiz.schemas.in.h:146 ../plugins/fade.c:881
 #, fuzzy
 msgid "Fading Windows"
 msgstr "&Smanji Windowse"
 
-#: plugins/fade.c:858
-msgid "Fade in windows when mapped and fade out windows when unmapped"
+#: ../plugins/compiz.schemas.in.h:147
+msgid "File change notification plugin"
 msgstr ""
 
-#: plugins/fuse.c:1486
+#: ../plugins/compiz.schemas.in.h:148
+#, fuzzy
+msgid "Fill Color"
+msgstr "Dumb Clock"
+
+#: ../plugins/compiz.schemas.in.h:150
+msgid "Fill color for filled outline mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:151 ../plugins/zoom.c:270
+#, fuzzy
+msgid "Filter Linear"
+msgstr "Filter: "
+
+#: ../plugins/compiz.schemas.in.h:152
+msgid "Filter method used for blurring (4xBilinear, Gaussian, Mipmap)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:153 ../plugins/rotate.c:1997
+#, fuzzy
+msgid "Flip Time"
+msgstr "U realnom vremenu"
+
+#: ../plugins/compiz.schemas.in.h:154 ../plugins/rotate.c:1942
+msgid "Flip to left viewport and warp pointer"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:155
+msgid ""
+"Flip to left viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:156 ../plugins/rotate.c:1990
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:157 ../plugins/rotate.c:1974
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:158 ../plugins/rotate.c:1982
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:159 ../plugins/rotate.c:1958
+msgid "Flip to right viewport and warp pointer"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:160
+msgid ""
+"Flip to right viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:162 ../plugins/wobbly.c:373
+msgid "Focus Effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:164
+msgid "Focus Window Effect (None, Shiver)"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:165 ../plugins/wobbly.c:391
+#, fuzzy
+msgid "Focus Windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:167
+#, fuzzy
+msgid "Focus prevention windows (match)"
+msgstr "Startujem servis"
+
+#  ...
+#  at the end of the suggestion text we will add the
+#  3D status. Therefore the D3Active variable is handled
+#  if the status is false we had to check if the card
+#  or the environment is capable of using 3D
+#  ---
+#  ...
+#  at the end of the suggestion text we will add the
+#  3D status. Therefore the D3Active variable is handled
+#  if the status is false we had to check if the card
+#  or the environment is capable of using 3D
+#  ---
+#: ../plugins/compiz.schemas.in.h:168
+#, fuzzy
+msgid "Fold Acceleration (1.0-20.0)"
+msgstr "3D akceleratori"
+
+#: ../plugins/compiz.schemas.in.h:169
+#, fuzzy
+msgid "Fold Speed (0.0-50.0)"
+msgstr "Suspend"
+
+#: ../plugins/compiz.schemas.in.h:170
+#, fuzzy
+msgid "Fold Timestep (0.0-50.0)"
+msgstr "Источни Тимор"
+
+#: ../plugins/compiz.schemas.in.h:171 ../plugins/wobbly.c:326
+#, fuzzy
+msgid "Friction"
+msgstr "Akcija"
+
+#: ../plugins/compiz.schemas.in.h:172 ../plugins/fade.c:208
+msgid "Fullscreen Visual Bell"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:173 ../plugins/fade.c:209
+msgid "Fullscreen fade effect on system beep"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:176
+#, fuzzy
+msgid "Gaussian radius (1-15)"
+msgstr "Руска Федерација"
+
+#: ../plugins/compiz.schemas.in.h:177
+#, fuzzy
+msgid "Gaussian strength (0.00-1.00)"
+msgstr "Rusija"
+
+#: ../plugins/compiz.schemas.in.h:178 ../plugins/cube.c:1106
+#: ../plugins/switcher.c:368
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:179 ../plugins/cube.c:1836
+msgid "Go back to previous slide"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:180
+msgid ""
+"Go back to previous slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:181 ../plugins/wobbly.c:409
+#, fuzzy
+msgid "Grab Windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:182 ../plugins/wobbly.c:346
+#, fuzzy
+msgid "Grid Resolution"
+msgstr "Rezolucija"
+
+#: ../plugins/compiz.schemas.in.h:185
+msgid ""
+"Hide all windows and focus desktop (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#  Aliases dialog caption
+#: ../plugins/compiz.schemas.in.h:188 ../plugins/place.c:300
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Virtuelni alias-i"
+
+#: ../plugins/compiz.schemas.in.h:189 ../plugins/scale.c:385
+msgid "Hover Time"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:190 ../plugins/switcher.c:420
+#, fuzzy
+msgid "Icon"
+msgstr "Ikone"
+
+#: ../plugins/compiz.schemas.in.h:191
+msgid ""
+"If this is set to true the window will repaint itself during resize, which "
+"may cause some lag."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:192
+msgid ""
+"If this is set, the pointer will be warped to the closest corner when you "
+"press start a resize."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:195 ../plugins/cube.c:1016
+#, fuzzy
+msgid "Image files"
+msgstr "Instaliacija slike diska"
+
+#: ../plugins/compiz.schemas.in.h:196 ../plugins/cube.c:1038
+msgid "Image to use as texture for the skydome"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:199
+msgid ""
+"Increase window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:201 ../plugins/move.c:731
+msgid "Initiate Window Move"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:202 ../plugins/scale.c:1930
+msgid "Initiate Window Picker"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:203 ../plugins/scale.c:1949
+msgid "Initiate Window Picker For All Windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:204 ../plugins/scale.c:1964
+msgid "Initiate Window Picker For Window Group"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:205 ../plugins/scale.c:1980
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:206 ../plugins/resize.c:720
+msgid "Initiate Window Resize"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:208
+msgid ""
+"Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:210
+msgid ""
+"Initiate annotate erasing (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:212
+msgid ""
+"Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
+msgid "Initiate rectangle screenshot"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:215
+msgid ""
+"Initiate rectangle screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:216
+msgid "Inotify"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:217 ../plugins/cube.c:1002
+msgid "Inside Cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:218 ../plugins/cube.c:1003
+msgid "Inside cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:219
+msgid "Interval before raising selected windows (0-10000)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:220
+msgid "Interval between ping messages (1000-30000)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:221 ../plugins/rotate.c:288
+#: ../plugins/zoom.c:224
+msgid "Invert Y axis for pointer movement"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:222 ../plugins/wobbly.c:2861
+msgid "Inverted window snapping"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:223 ../plugins/screenshot.c:407
+#, fuzzy
+msgid "Launch Application"
+msgstr "Покрени програм"
+
+#: ../plugins/compiz.schemas.in.h:224 ../plugins/scale.c:1950
+msgid "Layout and start transforming all windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:225
+msgid ""
+"Layout and start transforming all windows (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:226 ../plugins/scale.c:1965
+msgid "Layout and start transforming window group"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:227
+msgid ""
+"Layout and start transforming window group (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:228 ../plugins/scale.c:1931
+msgid "Layout and start transforming windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:229
+msgid ""
+"Layout and start transforming windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:230 ../plugins/scale.c:1982
+msgid "Layout and start transforming windows on current output"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:231
+msgid ""
+"Layout and start transforming windows on current output (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
+msgid "Line"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:235
+msgid "Line width for annotations (0.0-100.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:236 ../plugins/cube.c:1017
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:241
+msgid ""
+"Lower window beneath other windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:242 ../plugins/wobbly.c:2868
+#, fuzzy
+msgid "Make window shiver"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:243
+msgid ""
+"Make window shiver (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:244 ../plugins/wobbly.c:364
+msgid "Map Effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:245
+msgid "Map Window Effect (None, Shiver)"
+msgstr ""
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:246 ../plugins/wobbly.c:382
+#, fuzzy
+msgid "Map Windows"
+msgstr "&Smanji Windowse"
+
+#: ../plugins/compiz.schemas.in.h:247 ../plugins/wobbly.c:418
+msgid "Maximize Effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:252
+msgid ""
+"Maximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:254
+msgid ""
+"Maximize active window horizontally (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:256
+msgid ""
+"Maximize active window vertically (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:257 ../plugins/minimize.c:1072
+msgid "Minimize Effect"
+msgstr ""
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:259 ../plugins/minimize.c:213
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "&Smanji Windowse"
+
+#: ../plugins/compiz.schemas.in.h:261
+msgid ""
+"Minimize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:262
+#, fuzzy
+msgid "Minimize speed (0.0-50.0)"
+msgstr "&Smanji Windowse"
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:263
+#, fuzzy
+msgid "Minimize timestep (0.0-50.0)"
+msgstr "&Smanji Windowse"
+
+#: ../plugins/compiz.schemas.in.h:264 ../plugins/switcher.c:427
+msgid "Minimized"
+msgstr ""
+
+#  To translators: intfield label
+#: ../plugins/compiz.schemas.in.h:265 ../plugins/wobbly.c:355
+#, fuzzy
+msgid "Minimum Grid Size"
+msgstr "Minimalan &GUID"
+
+#  To translators: intfield label
+#: ../plugins/compiz.schemas.in.h:266
+#, fuzzy
+msgid "Minimum Vertex Grid Size (4-128)"
+msgstr "Minimalan &GUID"
+
+#: ../plugins/compiz.schemas.in.h:267
+msgid "Minimum opacity for opacify"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:270
+msgid "Mipmap level-of-detail (0.0-5.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:271 ../plugins/fuse.c:1488
 msgid "Mount Point"
 msgstr ""
 
-#: plugins/fuse.c:1487
+#: ../plugins/compiz.schemas.in.h:272 ../plugins/fuse.c:1489
 #, fuzzy
 msgid "Mount point"
 msgstr "Додај догађај"
 
-#: plugins/fuse.c:1586
-msgid "Userspace File System"
+#  button text
+#: ../plugins/compiz.schemas.in.h:273 ../plugins/move.c:939
+#, fuzzy
+msgid "Move Window"
+msgstr "&Obriši Windowse"
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:274 ../plugins/wobbly.c:400
+#, fuzzy
+msgid "Move Windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:275 ../plugins/move.c:940
+msgid "Move window"
 msgstr ""
 
-#: plugins/fuse.c:1587
-msgid "Userspace file system"
+#: ../plugins/compiz.schemas.in.h:276 ../plugins/cube.c:1817
+msgid "Next Slide"
 msgstr ""
 
-#. Decimal point character
-#: plugins/gconf-dump.c:81
-msgid "."
+#  button text
+#: ../plugins/compiz.schemas.in.h:277 ../plugins/switcher.c:2023
+#: ../plugins/switcher.c:2059 ../plugins/switcher.c:2097
+#, fuzzy
+msgid "Next window"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:279
+msgid "Number of virtual desktops (1-36)"
 msgstr ""
 
-#: plugins/gconf-dump.c:616
+#: ../plugins/compiz.schemas.in.h:280 ../plugins/water.c:1654
+msgid "Offset Scale"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:282
+msgid "Opacify only windows whose opacity is higher than this value (1-100)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:283 ../plugins/move.c:750
+#: ../plugins/scale.c:367 ../plugins/switcher.c:393
+#, fuzzy
+msgid "Opacity"
+msgstr "&Loše stanje"
+
+# ???
+#: ../plugins/compiz.schemas.in.h:285
+#, fuzzy
+msgid "Opacity change step (1-50)"
+msgstr "окситан (после 1500.)"
+
+#: ../plugins/compiz.schemas.in.h:286
+#, fuzzy
+msgid "Opacity level of moving windows (1-100)"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:287
+#, fuzzy
+msgid "Opacity level of resizing windows (1-100)"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:292
+msgid ""
+"Open a terminal (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:294
+msgid ""
+"Open window menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:295
+#, fuzzy
+msgid "Outline Color"
+msgstr "Dumb Clock"
+
+#: ../plugins/compiz.schemas.in.h:296
+msgid "Outline color for outline and filled outline mode"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:299 ../plugins/scale.c:376
+msgid "Overlay Icon"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:300
+msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:302 ../plugins/place.c:1598
+#, fuzzy
+msgid "Place Windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:303 ../plugins/place.c:1599
+msgid "Place windows at appropriate positions when mapped"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:304 ../plugins/plane.c:890
+#, fuzzy
+msgid "Place windows on a plane"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:305 ../plugins/cube.c:2045
+msgid "Place windows on cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:306 ../plugins/place.c:245
+msgid "Placement Mode"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:307 ../plugins/plane.c:664
+#, fuzzy
+msgid "Plane Down"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:308 ../plugins/plane.c:626
+msgid "Plane Left"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:309 ../plugins/plane.c:645
+msgid "Plane Right"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:310
+#, fuzzy
+msgid "Plane To Face 1"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:311
+#, fuzzy
+msgid "Plane To Face 10"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:312
+#, fuzzy
+msgid "Plane To Face 11"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:313
+#, fuzzy
+msgid "Plane To Face 12"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:314
+#, fuzzy
+msgid "Plane To Face 2"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:315
+#, fuzzy
+msgid "Plane To Face 3"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:316
+#, fuzzy
+msgid "Plane To Face 4"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:317
+#, fuzzy
+msgid "Plane To Face 5"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:318
+#, fuzzy
+msgid "Plane To Face 6"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:319
+#, fuzzy
+msgid "Plane To Face 7"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:320
+#, fuzzy
+msgid "Plane To Face 8"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:321
+#, fuzzy
+msgid "Plane To Face 9"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:322 ../plugins/plane.c:683
+msgid "Plane Up"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:323 ../plugins/plane.c:665
+#, fuzzy
+msgid "Plane down"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:324
+msgid ""
+"Plane down (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:325 ../plugins/plane.c:627
+msgid "Plane left"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:326
+msgid ""
+"Plane left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:327 ../plugins/plane.c:646
+msgid "Plane right"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:328
+msgid ""
+"Plane right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:329
+msgid "Plane to face 1"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:330
+msgid ""
+"Plane to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:331
+msgid "Plane to face 10"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:332
+msgid ""
+"Plane to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:333
+msgid "Plane to face 11"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:334
+msgid ""
+"Plane to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:335
+msgid "Plane to face 12"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:336
+msgid ""
+"Plane to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:337
+msgid "Plane to face 2"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:338
+msgid ""
+"Plane to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:339
+msgid "Plane to face 3"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:340
+msgid ""
+"Plane to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:341
+msgid "Plane to face 4"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:342
+msgid ""
+"Plane to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:343
+msgid "Plane to face 5"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:344
+msgid ""
+"Plane to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:345
+msgid "Plane to face 6"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:346
+msgid ""
+"Plane to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:347
+msgid "Plane to face 7"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:348
+msgid ""
+"Plane to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:349
+msgid "Plane to face 8"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:350
+msgid ""
+"Plane to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:351
+msgid "Plane to face 9"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:352
+msgid ""
+"Plane to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:353 ../plugins/plane.c:684
+msgid "Plane up"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:354
+msgid ""
+"Plane up (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:355 ../plugins/gconf-dump.c:616
 msgid "Plugins that this must load before"
 msgstr ""
 
-#: plugins/gconf-dump.c:617 plugins/gconf-dump.c:627
-msgid "Do not modify"
-msgstr ""
-
-#: plugins/gconf-dump.c:626
+#: ../plugins/compiz.schemas.in.h:356 ../plugins/gconf-dump.c:626
 msgid "Plugins that this requires"
 msgstr ""
 
+#: ../plugins/compiz.schemas.in.h:357
+msgid "Png"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:358
+msgid "Png image loader"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:359 ../plugins/water.c:1685
+msgid "Point"
+msgstr ""
+
+#  table entry, %1 is host name
+#: ../plugins/compiz.schemas.in.h:360 ../plugins/rotate.c:287
+#: ../plugins/zoom.c:223
+#, fuzzy
+msgid "Pointer Invert Y"
+msgstr "Pokazivač na %1"
+
+#: ../plugins/compiz.schemas.in.h:361 ../plugins/rotate.c:294
+#: ../plugins/zoom.c:230
+#, fuzzy
+msgid "Pointer Sensitivity"
+msgstr "Štampač"
+
+#: ../plugins/compiz.schemas.in.h:362 ../plugins/switcher.c:2024
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:363
+msgid ""
+"Popup switcher if not visible and select next window (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:364 ../plugins/switcher.c:2060
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:365
+msgid ""
+"Popup switcher if not visible and select next window out of all windows "
+"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:366 ../plugins/switcher.c:2042
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:367
+msgid ""
+"Popup switcher if not visible and select previous window (Left, Right, Top, "
+"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:368 ../plugins/switcher.c:2079
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:369
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows "
+"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
 #  button text
 #  button text
-#: plugins/minimize.c:193
+#: ../plugins/compiz.schemas.in.h:370 ../plugins/place.c:254
+#, fuzzy
+msgid "Positioned windows"
+msgstr "&Smanji Windowse"
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:371 ../plugins/switcher.c:2041
+#: ../plugins/switcher.c:2078 ../plugins/switcher.c:2110
+#, fuzzy
+msgid "Prev window"
+msgstr "&Smanji Windowse"
+
+#: ../plugins/compiz.schemas.in.h:372 ../plugins/cube.c:1835
+msgid "Previous Slide"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:373 ../plugins/video.c:248
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:376
+msgid ""
+"Pulse effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:377 ../plugins/screenshot.c:399
+msgid "Put screenshot images in this directory"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:378 ../plugins/water.c:1664
+#, fuzzy
+msgid "Rain Delay"
+msgstr "Čekanje"
+
+#: ../plugins/compiz.schemas.in.h:383
+msgid ""
+"Raise window above other windows (Left, Right, Top, Bottom, TopLeft, "
+"TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:386 ../plugins/regex.c:463
+msgid "Regex Matching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:387 ../plugins/regex.c:464
+msgid "Regex window matching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:388 ../plugins/cube.c:1031
+msgid "Render skydome"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:389
+msgid "Repaints the window on each resize step"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:390
+msgid "Resize Display Mode"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:391 ../plugins/resize.c:887
+#, fuzzy
+msgid "Resize Window"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:392 ../plugins/resize.c:888
+msgid "Resize window"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:393 ../plugins/rotate.c:2180
+msgid "Rotate Cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:394 ../plugins/rotate.c:1941
+msgid "Rotate Flip Left"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:395 ../plugins/rotate.c:1957
+msgid "Rotate Flip Right"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:396 ../plugins/rotate.c:1789
+msgid "Rotate Left"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:397 ../plugins/rotate.c:1827
+msgid "Rotate Left with Window"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:398 ../plugins/rotate.c:1808
+msgid "Rotate Right"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:399 ../plugins/rotate.c:1847
+msgid "Rotate Right with Window"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:400 ../plugins/rotate.c:1917
+msgid "Rotate To"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:401
+msgid "Rotate To Face 1"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:402
+#, fuzzy
+msgid "Rotate To Face 1 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:403
+msgid "Rotate To Face 10"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:404
+#, fuzzy
+msgid "Rotate To Face 10 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:405
+msgid "Rotate To Face 11"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:406
+#, fuzzy
+msgid "Rotate To Face 11 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:407
+msgid "Rotate To Face 12"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:408
+#, fuzzy
+msgid "Rotate To Face 12 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:409
+msgid "Rotate To Face 2"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:410
+#, fuzzy
+msgid "Rotate To Face 2 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:411
+msgid "Rotate To Face 3"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:412
+#, fuzzy
+msgid "Rotate To Face 3 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:413
+msgid "Rotate To Face 4"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:414
+#, fuzzy
+msgid "Rotate To Face 4 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:415
+msgid "Rotate To Face 5"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:416
+#, fuzzy
+msgid "Rotate To Face 5 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:417
+msgid "Rotate To Face 6"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:418
+#, fuzzy
+msgid "Rotate To Face 6 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:419
+msgid "Rotate To Face 7"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:420
+#, fuzzy
+msgid "Rotate To Face 7 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:421
+msgid "Rotate To Face 8"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:422
+#, fuzzy
+msgid "Rotate To Face 8 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:423
+msgid "Rotate To Face 9"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:424
+#, fuzzy
+msgid "Rotate To Face 9 with Window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:425 ../plugins/rotate.c:1929
+#, fuzzy
+msgid "Rotate Window"
+msgstr "XF86RotateWindows"
+
+#: ../plugins/compiz.schemas.in.h:426 ../plugins/rotate.c:2181
+msgid "Rotate desktop cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:427 ../plugins/rotate.c:1790
+msgid "Rotate left"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:428
+msgid ""
+"Rotate left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:429 ../plugins/rotate.c:1828
+msgid "Rotate left and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:430
+msgid ""
+"Rotate left and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:431 ../plugins/rotate.c:1809
+msgid "Rotate right"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:432
+msgid ""
+"Rotate right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:433 ../plugins/rotate.c:1848
+msgid "Rotate right and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:434
+msgid ""
+"Rotate right and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:435
+msgid "Rotate to face 1"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:436
+msgid ""
+"Rotate to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:437
+msgid "Rotate to face 1 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:438
+msgid ""
+"Rotate to face 1 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:439
+msgid "Rotate to face 10"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:440
+msgid ""
+"Rotate to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:441
+msgid "Rotate to face 10 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:442
+msgid ""
+"Rotate to face 10 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:443
+msgid "Rotate to face 11"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:444
+msgid ""
+"Rotate to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:445
+msgid "Rotate to face 11 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:446
+msgid ""
+"Rotate to face 11 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:447
+msgid "Rotate to face 12"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:448
+msgid ""
+"Rotate to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:449
+msgid "Rotate to face 12 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:450
+msgid ""
+"Rotate to face 12 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:451
+msgid "Rotate to face 2"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:452
+msgid ""
+"Rotate to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:453
+msgid "Rotate to face 2 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:454
+msgid ""
+"Rotate to face 2 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:455
+msgid "Rotate to face 3"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:456
+msgid ""
+"Rotate to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:457
+msgid "Rotate to face 3 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:458
+msgid ""
+"Rotate to face 3 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:459
+msgid "Rotate to face 4"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:460
+msgid ""
+"Rotate to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:461
+msgid "Rotate to face 4 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:462
+msgid ""
+"Rotate to face 4 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:463
+msgid "Rotate to face 5"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:464
+msgid ""
+"Rotate to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:465
+msgid "Rotate to face 5 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:466
+msgid ""
+"Rotate to face 5 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:467
+msgid "Rotate to face 6"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:468
+msgid ""
+"Rotate to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:469
+msgid "Rotate to face 6 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:470
+msgid ""
+"Rotate to face 6 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:471
+msgid "Rotate to face 7"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:472
+msgid ""
+"Rotate to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:473
+msgid "Rotate to face 7 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:474
+msgid ""
+"Rotate to face 7 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:475
+msgid "Rotate to face 8"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:476
+msgid ""
+"Rotate to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:477
+msgid "Rotate to face 8 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:478
+msgid ""
+"Rotate to face 8 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:479
+msgid "Rotate to face 9"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:480
+msgid ""
+"Rotate to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:481
+msgid "Rotate to face 9 and bring active window along"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:482
+msgid ""
+"Rotate to face 9 and bring active window along (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:483 ../plugins/switcher.c:435
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:484 ../plugins/rotate.c:1918
+msgid "Rotate to viewport"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:485
+msgid ""
+"Rotate to viewport (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:486 ../plugins/rotate.c:1930
+#, fuzzy
+msgid "Rotate with window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:487
+msgid ""
+"Rotate with window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#  ...
+#  at the end of the suggestion text we will add the
+#  3D status. Therefore the D3Active variable is handled
+#  if the status is false we had to check if the card
+#  or the environment is capable of using 3D
+#  ---
+#  ...
+#  at the end of the suggestion text we will add the
+#  3D status. Therefore the D3Active variable is handled
+#  if the status is false we had to check if the card
+#  or the environment is capable of using 3D
+#  ---
+#: ../plugins/compiz.schemas.in.h:488
+#, fuzzy
+msgid "Rotation Acceleration (1.0-20.0)"
+msgstr "3D akceleratori"
+
+#: ../plugins/compiz.schemas.in.h:489
+msgid "Rotation Speed (0.0-50.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:490
+#, fuzzy
+msgid "Rotation Timestep (0.0-50.0)"
+msgstr "Источни Тимор"
+
+#: ../plugins/compiz.schemas.in.h:504 ../plugins/switcher.c:375
+#, fuzzy
+msgid "Saturation"
+msgstr "Trajanje"
+
+#  label of an output field
+#: ../plugins/compiz.schemas.in.h:505 ../plugins/scale.c:2212
+#, fuzzy
+msgid "Scale"
+msgstr "Skener"
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:506 ../plugins/scale.c:351
+#, fuzzy
+msgid "Scale Windows"
+msgstr "&Obriši Windowse"
+
+#  ComboBox entry: hardware clock set to local time
+#: ../plugins/compiz.schemas.in.h:507 ../plugins/cube.c:1009
+#, fuzzy
+msgid "Scale image"
+msgstr "lokalno vreme"
+
+#: ../plugins/compiz.schemas.in.h:508 ../plugins/cube.c:1010
+msgid "Scale images to cover top face of cube"
+msgstr ""
+
+#  ComboBox entry: hardware clock set to local time
+#: ../plugins/compiz.schemas.in.h:509
+#, fuzzy
+msgid "Scale speed (0.0-50.0)"
+msgstr "lokalno vreme"
+
+#  ComboBox entry: hardware clock set to local time
+#: ../plugins/compiz.schemas.in.h:510
+#, fuzzy
+msgid "Scale timestep (0.0-50.0)"
+msgstr "lokalno vreme"
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:511 ../plugins/scale.c:2213
+#, fuzzy
+msgid "Scale windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:512
+msgid "Screen size multiplier for horizontal virtual size (1-32)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:513
+msgid "Screen size multiplier for vertical virtual size (1-32)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:514 ../plugins/screenshot.c:559
+#, fuzzy
+msgid "Screenshot"
+msgstr "Greška, niste uneli ispravno komandu."
+
+#: ../plugins/compiz.schemas.in.h:516 ../plugins/screenshot.c:560
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Greška, niste uneli ispravno komandu."
+
+#: ../plugins/compiz.schemas.in.h:517
+msgid ""
+"Select between normal, stretched texture, outline and filled outline mode. "
+"(Normal, Stretch, Outline, Filled Outline)"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:518 ../plugins/switcher.c:2098
+#, fuzzy
+msgid "Select next window"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:519
+msgid ""
+"Select next window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:520 ../plugins/switcher.c:2111
+#, fuzzy
+msgid "Select previous window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:521
+msgid ""
+"Select previous window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:522
+msgid "Sensitivity of pointer movement (0.01-100.00)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:523 ../plugins/minimize.c:222
+msgid "Shade Resistance"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:524
+msgid "Shade resistance (0-100)"
+msgstr ""
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:525
+#, fuzzy
+msgid "Shadow Color"
+msgstr "&Smanji Windowse"
+
+#: ../plugins/compiz.schemas.in.h:526 ../plugins/decoration.c:1162
+msgid "Shadow Offset X"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:527 ../plugins/decoration.c:1171
+msgid "Shadow Offset Y"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:528 ../plugins/decoration.c:1142
+#, fuzzy
+msgid "Shadow Opacity"
+msgstr "&Loše stanje"
+
+#: ../plugins/compiz.schemas.in.h:529 ../plugins/decoration.c:1132
+#, fuzzy
+msgid "Shadow Radius"
+msgstr "Radius"
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:530 ../plugins/decoration.c:1206
+#, fuzzy
+msgid "Shadow windows"
+msgstr "&Smanji Windowse"
+
+# 'driver' as in '(hardware) driver update'
+#: ../plugins/compiz.schemas.in.h:531 ../plugins/wobbly.c:132
+#: ../plugins/wobbly.c:2867
+#, fuzzy
+msgid "Shiver"
+msgstr "Драјвер"
+
+#: ../plugins/compiz.schemas.in.h:534
+msgid ""
+"Show Run Application dialog (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:535 ../plugins/switcher.c:421
+msgid "Show icon next to thumbnail"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:536 ../plugins/switcher.c:428
+msgid "Show minimized windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:538
+msgid ""
+"Show the main menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:539 ../plugins/cube.c:1030
+#, fuzzy
+msgid "Skydome"
+msgstr "Sidnej"
+
+#: ../plugins/compiz.schemas.in.h:540 ../plugins/cube.c:1064
+msgid "Skydome Gradient End Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:541 ../plugins/cube.c:1053
+msgid "Skydome Gradient Start Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:542 ../plugins/cube.c:1037
+msgid "Skydome Image"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:544 ../plugins/rotate.c:315
+msgid "Snap Cube Rotation to Top Face"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:545 ../plugins/wobbly.c:2860
+msgid "Snap Inverted"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:546 ../plugins/rotate.c:314
+msgid "Snap To Top Face"
+msgstr ""
+
+#  button text
+#  button text
+#: ../plugins/compiz.schemas.in.h:547 ../plugins/wobbly.c:2846
+#, fuzzy
+msgid "Snap windows"
+msgstr "&Smanji Windowse"
+
+#: ../plugins/compiz.schemas.in.h:548 ../plugins/move.c:767
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:549 ../plugins/move.c:766
+msgid "Snapoff maximized windows"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:550
+#, fuzzy
+msgid "Space between windows (0-250)"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:551 ../plugins/scale.c:322
+#, fuzzy
+msgid "Spacing"
+msgstr "Španija"
+
+#: ../plugins/compiz.schemas.in.h:552 ../plugins/cube.c:1085
+#: ../plugins/minimize.c:193 ../plugins/rotate.c:321 ../plugins/scale.c:331
+#: ../plugins/switcher.c:338 ../plugins/zoom.c:240
+#, fuzzy
+msgid "Speed"
+msgstr "Suspend"
+
+#: ../plugins/compiz.schemas.in.h:553
+#, fuzzy
+msgid "Spring Friction (0.0-10.0)"
+msgstr "Akcija"
+
+#: ../plugins/compiz.schemas.in.h:554 ../plugins/wobbly.c:336
+#, fuzzy
+msgid "Spring K"
+msgstr "Preskakanje %1"
+
+#: ../plugins/compiz.schemas.in.h:555
+#, fuzzy
+msgid "Spring Konstant (0.0-10.0)"
+msgstr "Preskakanje %1"
+
+#: ../plugins/compiz.schemas.in.h:556 ../plugins/rotate.c:1775
+#, fuzzy
+msgid "Start Rotation"
+msgstr "Startuj detekciju..."
+
+#: ../plugins/compiz.schemas.in.h:557
+msgid ""
+"Start Rotation (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:558 ../plugins/move.c:732
+#, fuzzy
+msgid "Start moving window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:559
+msgid ""
+"Start moving window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:560 ../plugins/resize.c:721
+#, fuzzy
+msgid "Start resizing window"
+msgstr "Startujem servis"
+
+#: ../plugins/compiz.schemas.in.h:561
+msgid ""
+"Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:564
+msgid "Stroke width for annotations (0.0-20.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:565
+msgid "Svg"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:566
+msgid "Svg image loader"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:567
+msgid "Switcher speed (0.0-50.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:568
+msgid "Switcher timestep (0.0-50.0)"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:569 ../plugins/switcher.c:358
+#, fuzzy
+msgid "Switcher windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:572
+msgid ""
+"Take a screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:574
+msgid ""
+"Take a screenshot of a window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#  MenuButton label
+#  menubutton label
+#: ../plugins/compiz.schemas.in.h:577
+#, fuzzy
+msgid "Texture filtering (Fast, Good, Best)"
+msgstr "&Podesite filter"
+
+#: ../plugins/compiz.schemas.in.h:578
+msgid "The rate at which the screen is redrawn (times/second) (1-200)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:579
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window (50-"
+"10000)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:580
+msgid "Timeout before flipping viewport (0-1000)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:581 ../plugins/cube.c:1095
+#: ../plugins/minimize.c:203 ../plugins/rotate.c:331 ../plugins/scale.c:341
+#: ../plugins/switcher.c:348 ../plugins/zoom.c:250
+#, fuzzy
+msgid "Timestep"
+msgstr "Источни Тимор"
+
+#: ../plugins/compiz.schemas.in.h:582 ../plugins/water.c:1673
+msgid "Title wave"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:588
+msgid ""
+"Toggle active window maximized (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:590
+msgid ""
+"Toggle active window maximized horizontally (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:592
+msgid ""
+"Toggle active window maximized vertically (Left, Right, Top, Bottom, "
+"TopLeft, TopRight, BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:594
+msgid ""
+"Toggle active window shaded (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#  translators: toggle button label
+#: ../plugins/compiz.schemas.in.h:595 ../plugins/water.c:1622
+#, fuzzy
+msgid "Toggle rain"
+msgstr "&Promena statusa"
+
+#: ../plugins/compiz.schemas.in.h:596 ../plugins/water.c:1623
+msgid "Toggle rain effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:597
+msgid ""
+"Toggle rain effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:599
+msgid ""
+"Toggle use of slow animations (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:600 ../plugins/wobbly.c:2847
+msgid "Toggle window snapping"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:601
+msgid ""
+"Toggle window snapping (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#  translators: toggle button label
+#: ../plugins/compiz.schemas.in.h:602 ../plugins/water.c:1638
+#, fuzzy
+msgid "Toggle wiper"
+msgstr "&Promena statusa"
+
+#: ../plugins/compiz.schemas.in.h:603 ../plugins/water.c:1639
+msgid "Toggle wiper effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:604
+msgid ""
+"Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:605 ../plugins/minimize.c:1073
+msgid "Transform windows when they are minimized and unminimized"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:606
+msgid "USe linear filter when zoomed in"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:607 ../plugins/cube.c:1799
+msgid "Unfold"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:608 ../plugins/cube.c:1800
+msgid "Unfold cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:609
+msgid ""
+"Unfold cube (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:612
+msgid ""
+"Unmaximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:615 ../plugins/wobbly.c:3082
+msgid "Use spring model for wobbly window effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:616 ../plugins/fuse.c:1588
+msgid "Userspace File System"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:617 ../plugins/fuse.c:1589
+msgid "Userspace file system"
+msgstr ""
+
+#  translators: frame title for method of incoming request resolution
+#  translators: frame title for method of incoming request resolution
+#: ../plugins/compiz.schemas.in.h:618
+#, fuzzy
+msgid "Vertex Grid Resolution (1-64)"
+msgstr "Rezolucija servera"
+
+#: ../plugins/compiz.schemas.in.h:620 ../plugins/place.c:311
+msgid "Vertical viewport positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:621 ../plugins/video.c:1242
+msgid "Video Playback"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:622 ../plugins/video.c:1243
+msgid "Video playback"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:623 ../plugins/place.c:287
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:624 ../plugins/fade.c:201
+msgid "Visual Bell"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:625
+msgid "Warp pointer when starting a resize with mouse initiate combo."
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:626 ../plugins/water.c:1875
+msgid "Water Effect"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:627
+msgid "Water offset scale (0.0-10.0)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:628 ../plugins/water.c:1674
+msgid "Wave effect from window title"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:629
+msgid ""
+"Wave effect from window title (Left, Right, Top, Bottom, TopLeft, TopRight, "
+"BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:630 ../plugins/decoration.c:1492
+#, fuzzy
+msgid "Window Decoration"
+msgstr "Bez opisa"
+
+#  label text, %1 is replaced by a unit value ("MB")
+#  label text, %1 is replaced by a unit value ("MB")
+#: ../plugins/compiz.schemas.in.h:632
+#, fuzzy
+msgid "Window blur speed (0.0-10.0)"
+msgstr "Windows slobodno (%1)"
+
+#: ../plugins/compiz.schemas.in.h:633 ../plugins/decoration.c:1493
+#, fuzzy
+msgid "Window decorations"
+msgstr "ypbind opcije"
+
+#  label text, %1 is replaced by a unit value ("MB")
+#  label text, %1 is replaced by a unit value ("MB")
+#: ../plugins/compiz.schemas.in.h:634
+#, fuzzy
+msgid "Window fade speed (0.0-25.0)"
+msgstr "Windows slobodno (%1)"
+
+#: ../plugins/compiz.schemas.in.h:635 ../plugins/place.c:239
+msgid "Window placement workarounds"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:637
+msgid "Windows that should be affected by focus blur (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:638
+msgid "Windows that should be decorated (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:639
+msgid "Windows that should be fading (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:640
+msgid "Windows that should be have a shadow (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:641 ../plugins/place.c:255
+msgid "Windows that should be positioned by default"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:642
+msgid "Windows that should be scaled in scale mode (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:643
+msgid "Windows that should be shown in switcher (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:644
+msgid "Windows that should be transformed when minimized (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:646 ../plugins/place.c:288
+msgid "Windows that should positioned in specific viewports by default"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:647
+msgid "Windows that should use alpha blur by default (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:648
+msgid "Windows that should wobble when focused (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:649
+msgid "Windows that should wobble when grabbed (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:650
+msgid "Windows that should wobble when mapped (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:651
+msgid "Windows that should wobble when moved (match)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:652 ../plugins/wobbly.c:419
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr ""
+
+#  button text
+#: ../plugins/compiz.schemas.in.h:653 ../plugins/wobbly.c:3081
+#, fuzzy
+msgid "Wobbly Windows"
+msgstr "&Obriši Windowse"
+
+#: ../plugins/compiz.schemas.in.h:654 ../plugins/place.c:238
+#, fuzzy
+msgid "Workarounds"
+msgstr "&Radna grupa"
+
+#: ../plugins/compiz.schemas.in.h:655 ../plugins/place.c:265
+msgid "X Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:656 ../plugins/place.c:299
+msgid "X Viewport Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:657 ../plugins/place.c:266
+msgid "X position values"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:658 ../plugins/place.c:276
+msgid "Y Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:659 ../plugins/place.c:310
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:660 ../plugins/place.c:277
+msgid "Y position values"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:661 ../plugins/video.c:247
+msgid "YV12 colorspace"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:662 ../plugins/switcher.c:409
+msgid "Zoom"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:663 ../plugins/zoom.c:942
+msgid "Zoom Desktop"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:664 ../plugins/zoom.c:756
+#: ../plugins/zoom.c:770 ../plugins/zoom.c:771
+msgid "Zoom In"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:665
+msgid ""
+"Zoom In (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:666 ../plugins/zoom.c:785
+#: ../plugins/zoom.c:786
+#, fuzzy
+msgid "Zoom Out"
+msgstr "Odjavi se"
+
+#: ../plugins/compiz.schemas.in.h:667
+msgid ""
+"Zoom Out (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+"BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:668
+#, fuzzy
+msgid "Zoom Speed (0.0-50.0)"
+msgstr "Suspend"
+
+#: ../plugins/compiz.schemas.in.h:669
+#, fuzzy
+msgid "Zoom Timestep (0.0-50.0)"
+msgstr "Источни Тимор"
+
+#: ../plugins/compiz.schemas.in.h:670 ../plugins/zoom.c:943
+msgid "Zoom and pan desktop cube"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:671 ../plugins/zoom.c:260
+#: ../plugins/zoom.c:261
+#, fuzzy
+msgid "Zoom factor"
+msgstr "Odjavi se"
+
+#: ../plugins/compiz.schemas.in.h:672
+#, fuzzy
+msgid "Zoom factor (1.01-3.00)"
+msgstr "Odjavi se"
+
+#  ...
+#  at the end of the suggestion text we will add the
+#  3D status. Therefore the D3Active variable is handled
+#  if the status is false we had to check if the card
+#  or the environment is capable of using 3D
+#  ---
+#  ...
+#  at the end of the suggestion text we will add the
+#  3D status. Therefore the D3Active variable is handled
+#  if the status is false we had to check if the card
+#  or the environment is capable of using 3D
+#  ---
+#: ../plugins/cube.c:1076
+#, fuzzy
+msgid "Fold Acceleration"
+msgstr "3D akceleratori"
+
+#: ../plugins/cube.c:1086
+#, fuzzy
+msgid "Fold Speed"
+msgstr "Suspend"
+
+#: ../plugins/cube.c:1096
+#, fuzzy
+msgid "Fold Timestep"
+msgstr "Источни Тимор"
+
+#: ../plugins/decoration.c:1133
+#, fuzzy
+msgid "Drop shadow radius"
+msgstr "Radius"
+
+#: ../plugins/decoration.c:1143
+#, fuzzy
+msgid "Drop shadow opacity"
+msgstr "&Loše stanje"
+
+#: ../plugins/decoration.c:1163
+msgid "Drop shadow X offset"
+msgstr ""
+
+#: ../plugins/decoration.c:1172
+msgid "Drop shadow Y offset"
+msgstr ""
+
+#: ../plugins/decoration.c:1198
+msgid "Windows that should be decorated"
+msgstr ""
+
+#: ../plugins/decoration.c:1207
+msgid "Windows that should be have a shadow"
+msgstr ""
+
+#  label text, %1 is replaced by a unit value ("MB")
+#  label text, %1 is replaced by a unit value ("MB")
+#: ../plugins/fade.c:183
+#, fuzzy
+msgid "Window fade speed"
+msgstr "Windows slobodno (%1)"
+
+#: ../plugins/fade.c:193
+msgid "Windows that should be fading"
+msgstr ""
+
+#. Decimal point character
+#: ../plugins/gconf-dump.c:81
+msgid "."
+msgstr ""
+
+#  button text
+#  button text
+#: ../plugins/minimize.c:194
 #, fuzzy
 msgid "Minimize speed"
 msgstr "&Smanji Windowse"
 
 #  button text
 #  button text
-#: plugins/minimize.c:203
+#: ../plugins/minimize.c:204
 #, fuzzy
 msgid "Minimize timestep"
 msgstr "&Smanji Windowse"
 
-#  button text
-#  button text
-#: plugins/minimize.c:212
-#, fuzzy
-msgid "Minimize Windows"
-msgstr "&Smanji Windowse"
-
-#: plugins/minimize.c:213
+#: ../plugins/minimize.c:214
 msgid "Windows that should be transformed when minimized"
 msgstr ""
 
-#: plugins/minimize.c:221
-msgid "Shade Resistance"
-msgstr ""
-
-#: plugins/minimize.c:222
+#: ../plugins/minimize.c:223
 msgid "Shade resistance"
 msgstr ""
 
-#: plugins/minimize.c:1071
-msgid "Minimize Effect"
-msgstr ""
-
-#: plugins/minimize.c:1072
-msgid "Transform windows when they are minimized and unminimized"
-msgstr ""
-
-#: plugins/move.c:677
-msgid "Initiate Window Move"
-msgstr ""
-
-#: plugins/move.c:678
-#, fuzzy
-msgid "Start moving window"
-msgstr "Startujem servis"
-
-#: plugins/move.c:696 plugins/scale.c:370 plugins/switcher.c:399
-#, fuzzy
-msgid "Opacity"
-msgstr "&Loše stanje"
-
-#: plugins/move.c:697
+#: ../plugins/move.c:751
 #, fuzzy
 msgid "Opacity level of moving windows"
 msgstr "Startujem servis"
 
-#  header text
-#: plugins/move.c:705
-#, fuzzy
-msgid "Constrain Y"
-msgstr " Kontejner"
-
-#: plugins/move.c:706
-msgid "Constrain Y coordinate to workspace area"
-msgstr ""
-
-#: plugins/move.c:712
-msgid "Snapoff maximized windows"
-msgstr ""
-
-#: plugins/move.c:713
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
-
-#  button text
-#: plugins/move.c:881
-#, fuzzy
-msgid "Move Window"
-msgstr "&Obriši Windowse"
-
-#: plugins/move.c:882
-msgid "Move window"
-msgstr ""
-
-#: plugins/place.c:42
+#: ../plugins/place.c:42
 msgid "Cascade"
 msgstr ""
 
-#: plugins/place.c:43
+#: ../plugins/place.c:43
 msgid "Centered"
 msgstr ""
 
-#: plugins/place.c:44
+#: ../plugins/place.c:44
 msgid "Smart"
 msgstr ""
 
-#: plugins/place.c:45
+#: ../plugins/place.c:45
 msgid "Maximize"
 msgstr ""
 
-#: plugins/place.c:46
+#: ../plugins/place.c:46
 msgid "Random"
 msgstr ""
 
-#: plugins/place.c:244
-#, fuzzy
-msgid "Workarounds"
-msgstr "&Radna grupa"
-
-#: plugins/place.c:245
-msgid "Window placement workarounds"
-msgstr ""
-
-#: plugins/place.c:251
-msgid "Placement Mode"
-msgstr ""
-
-#: plugins/place.c:252
+#: ../plugins/place.c:246
 msgid "Algorithm to use for window placement"
 msgstr ""
 
-#  button text
-#  button text
-#: plugins/place.c:260
-#, fuzzy
-msgid "Positioned windows"
-msgstr "&Smanji Windowse"
-
-#: plugins/place.c:261
-msgid "Windows that should be positioned by default"
-msgstr ""
-
-#: plugins/place.c:271
-msgid "X Positions"
-msgstr ""
-
-#: plugins/place.c:272
-msgid "X position values"
-msgstr ""
-
-#: plugins/place.c:282
-msgid "Y Positions"
-msgstr ""
-
-#: plugins/place.c:283
-msgid "Y position values"
-msgstr ""
-
-#: plugins/place.c:293
-msgid "Viewport positioned windows"
-msgstr ""
-
-#: plugins/place.c:294
-msgid "Windows that should positioned in specific viewports by default"
-msgstr ""
-
-#: plugins/place.c:305
-msgid "X Viewport Positions"
-msgstr ""
-
-#  Aliases dialog caption
-#: plugins/place.c:306
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Virtuelni alias-i"
-
-#: plugins/place.c:316
-msgid "Y Viewport Positions"
-msgstr ""
-
-#: plugins/place.c:317
-msgid "Vertical viewport positions"
-msgstr ""
-
-#  button text
-#: plugins/place.c:1604
-#, fuzzy
-msgid "Place Windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/place.c:1605
-msgid "Place windows at appropriate positions when mapped"
-msgstr ""
-
-#: plugins/plane.c:624
-msgid "Plane Left"
-msgstr ""
-
-#: plugins/plane.c:625
-msgid "Plane left"
-msgstr ""
-
-#: plugins/plane.c:643
-msgid "Plane Right"
-msgstr ""
-
-#: plugins/plane.c:644
-msgid "Plane right"
-msgstr ""
-
-#  button text
-#: plugins/plane.c:662
-#, fuzzy
-msgid "Plane Down"
-msgstr "&Obriši Windowse"
-
-#  button text
-#: plugins/plane.c:663
-#, fuzzy
-msgid "Plane down"
-msgstr "&Obriši Windowse"
-
-#: plugins/plane.c:681
-msgid "Plane Up"
-msgstr ""
-
-#: plugins/plane.c:682
-msgid "Plane up"
-msgstr ""
-
-#: plugins/plane.c:698
+#: ../plugins/plane.c:700
 #, c-format
 msgid "Plane To Face %d"
 msgstr ""
 
-#: plugins/plane.c:699
+#: ../plugins/plane.c:701
 #, c-format
 msgid "Plane to face %d"
 msgstr ""
 
-#: plugins/plane.c:700
+#: ../plugins/plane.c:702
 #, fuzzy, c-format
 msgid "Plane To Face %d with Window"
 msgstr "Startujem servis"
 
-#: plugins/plane.c:701
+#: ../plugins/plane.c:703
 #, c-format
 msgid "Plane to face %d and bring active window along"
 msgstr ""
 
-#  Headline for X11 configuration screen:
-#  The user selects screen resolution and color depth.
-#: plugins/plane.c:868
-#, fuzzy
-msgid "Desktop Plane"
-msgstr "Setovanja Desktop-a"
-
-#  button text
-#: plugins/plane.c:869
-#, fuzzy
-msgid "Place windows on a plane"
-msgstr "&Obriši Windowse"
-
-#: plugins/regex.c:463
-msgid "Regex Matching"
-msgstr ""
-
-#: plugins/regex.c:464
-msgid "Regex window matching"
-msgstr ""
-
-#: plugins/resize.c:718
-msgid "Initiate Window Resize"
-msgstr ""
-
-#: plugins/resize.c:719
-#, fuzzy
-msgid "Start resizing window"
-msgstr "Startujem servis"
-
-#  button text
-#: plugins/resize.c:862
-#, fuzzy
-msgid "Resize Window"
-msgstr "&Obriši Windowse"
-
-#: plugins/resize.c:863
-msgid "Resize window"
-msgstr ""
-
-#  table entry, %1 is host name
-#: plugins/rotate.c:285 plugins/zoom.c:222
-#, fuzzy
-msgid "Pointer Invert Y"
-msgstr "Pokazivač na %1"
-
-#: plugins/rotate.c:286 plugins/zoom.c:223
-msgid "Invert Y axis for pointer movement"
-msgstr ""
-
-#: plugins/rotate.c:292 plugins/zoom.c:229
-#, fuzzy
-msgid "Pointer Sensitivity"
-msgstr "Štampač"
-
-#: plugins/rotate.c:293 plugins/zoom.c:230
+#: ../plugins/rotate.c:295 ../plugins/zoom.c:231
 msgid "Sensitivity of pointer movement"
 msgstr ""
 
@@ -892,1250 +3681,258 @@ msgstr ""
 #  if the status is false we had to check if the card
 #  or the environment is capable of using 3D
 #  ---
-#: plugins/rotate.c:303
+#: ../plugins/rotate.c:305
 #, fuzzy
 msgid "Rotation Acceleration"
 msgstr "3D akceleratori"
 
-#: plugins/rotate.c:312
-msgid "Snap To Top Face"
-msgstr ""
-
-#: plugins/rotate.c:313
-msgid "Snap Cube Rotation to Top Face"
-msgstr ""
-
-#: plugins/rotate.c:320
+#: ../plugins/rotate.c:322
 msgid "Rotation Speed"
 msgstr ""
 
-#: plugins/rotate.c:330
+#: ../plugins/rotate.c:332
 #, fuzzy
 msgid "Rotation Timestep"
 msgstr "Источни Тимор"
 
-#: plugins/rotate.c:1764
-#, fuzzy
-msgid "Start Rotation"
-msgstr "Startuj detekciju..."
-
-#: plugins/rotate.c:1778
-msgid "Rotate Left"
-msgstr ""
-
-#: plugins/rotate.c:1779
-msgid "Rotate left"
-msgstr ""
-
-#: plugins/rotate.c:1797
-msgid "Rotate Right"
-msgstr ""
-
-#: plugins/rotate.c:1798
-msgid "Rotate right"
-msgstr ""
-
-#: plugins/rotate.c:1816
-msgid "Rotate Left with Window"
-msgstr ""
-
-#: plugins/rotate.c:1817
-msgid "Rotate left and bring active window along"
-msgstr ""
-
-#: plugins/rotate.c:1836
-msgid "Rotate Right with Window"
-msgstr ""
-
-#: plugins/rotate.c:1837
-msgid "Rotate right and bring active window along"
-msgstr ""
-
-#: plugins/rotate.c:1854
+#: ../plugins/rotate.c:1865
 #, c-format
 msgid "Rotate To Face %d"
 msgstr ""
 
-#: plugins/rotate.c:1855
+#: ../plugins/rotate.c:1866
 #, c-format
 msgid "Rotate to face %d"
 msgstr ""
 
-#: plugins/rotate.c:1856
+#: ../plugins/rotate.c:1867
 #, c-format
 msgid "Rotate To Face %d with Window"
 msgstr ""
 
-#: plugins/rotate.c:1857
+#: ../plugins/rotate.c:1868
 #, c-format
 msgid "Rotate to face %d and bring active window along"
 msgstr ""
 
-#: plugins/rotate.c:1906
-msgid "Rotate To"
-msgstr ""
-
-#: plugins/rotate.c:1907
-msgid "Rotate to viewport"
-msgstr ""
-
-#: plugins/rotate.c:1918
-#, fuzzy
-msgid "Rotate Window"
-msgstr "XF86RotateWindows"
-
-#: plugins/rotate.c:1919
-#, fuzzy
-msgid "Rotate with window"
-msgstr "Startujem servis"
-
-#: plugins/rotate.c:1930
-msgid "Rotate Flip Left"
-msgstr ""
-
-#: plugins/rotate.c:1931
-msgid "Flip to left viewport and warp pointer"
-msgstr ""
-
-#: plugins/rotate.c:1946
-msgid "Rotate Flip Right"
-msgstr ""
-
-#: plugins/rotate.c:1947
-msgid "Flip to right viewport and warp pointer"
-msgstr ""
-
-#: plugins/rotate.c:1962
-msgid "Edge Flip Pointer"
-msgstr ""
-
-#: plugins/rotate.c:1963
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-
-#: plugins/rotate.c:1970
-msgid "Edge Flip Move"
-msgstr ""
-
-#: plugins/rotate.c:1971
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
-
-#: plugins/rotate.c:1978
-msgid "Edge Flip DnD"
-msgstr ""
-
-#: plugins/rotate.c:1979
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
-
-#: plugins/rotate.c:1986
-#, fuzzy
-msgid "Flip Time"
-msgstr "U realnom vremenu"
-
-#: plugins/rotate.c:1987
+#: ../plugins/rotate.c:1998
 msgid "Timeout before flipping viewport"
 msgstr ""
 
-#: plugins/rotate.c:2155
-msgid "Rotate Cube"
-msgstr ""
-
-#: plugins/rotate.c:2156
-msgid "Rotate desktop cube"
-msgstr ""
-
-#: plugins/scale.c:80 plugins/wobbly.c:131
+#: ../plugins/scale.c:80 ../plugins/wobbly.c:131
 msgid "None"
 msgstr "Nema"
 
-#: plugins/scale.c:81
+#: ../plugins/scale.c:81
 msgid "Emblem"
 msgstr ""
 
-#: plugins/scale.c:82
+#: ../plugins/scale.c:82
 msgid "Big"
 msgstr ""
 
-#: plugins/scale.c:325
-#, fuzzy
-msgid "Spacing"
-msgstr "Španija"
-
 #  button text
-#: plugins/scale.c:326
+#: ../plugins/scale.c:323
 #, fuzzy
 msgid "Space between windows"
 msgstr "&Obriši Windowse"
 
 #  ComboBox entry: hardware clock set to local time
-#: plugins/scale.c:335
+#: ../plugins/scale.c:332
 #, fuzzy
 msgid "Scale speed"
 msgstr "lokalno vreme"
 
 #  ComboBox entry: hardware clock set to local time
-#: plugins/scale.c:345
+#: ../plugins/scale.c:342
 #, fuzzy
 msgid "Scale timestep"
 msgstr "lokalno vreme"
 
-#  button text
-#: plugins/scale.c:354
-#, fuzzy
-msgid "Scale Windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/scale.c:355
+#: ../plugins/scale.c:352
 msgid "Windows that should be scaled in scale mode"
 msgstr ""
 
-#: plugins/scale.c:363
-#, fuzzy
-msgid "Darken Background"
-msgstr "Pozadine"
-
-#: plugins/scale.c:364
-msgid "Darken background when scaling windows"
-msgstr ""
-
-#: plugins/scale.c:371 plugins/switcher.c:400
+#: ../plugins/scale.c:368 ../plugins/switcher.c:394
 msgid "Amount of opacity in percent"
 msgstr ""
 
-#: plugins/scale.c:379
-msgid "Overlay Icon"
-msgstr ""
-
-#: plugins/scale.c:380
+#: ../plugins/scale.c:377
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 
-#: plugins/scale.c:388
-msgid "Hover Time"
-msgstr ""
-
-#: plugins/scale.c:389
+#: ../plugins/scale.c:386
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 
-#: plugins/scale.c:1931
-msgid "Initiate Window Picker"
-msgstr ""
-
-#: plugins/scale.c:1932
-msgid "Layout and start transforming windows"
-msgstr ""
-
-#: plugins/scale.c:1950
-msgid "Initiate Window Picker For All Windows"
-msgstr ""
-
-#: plugins/scale.c:1951
-msgid "Layout and start transforming all windows"
-msgstr ""
-
-#: plugins/scale.c:1965
-msgid "Initiate Window Picker For Window Group"
-msgstr ""
-
-#: plugins/scale.c:1966
-msgid "Layout and start transforming window group"
-msgstr ""
-
-#: plugins/scale.c:1981
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr ""
-
-#: plugins/scale.c:1983
-msgid "Layout and start transforming windows on current output"
-msgstr ""
-
-#  label of an output field
-#: plugins/scale.c:2200
-#, fuzzy
-msgid "Scale"
-msgstr "Skener"
-
-#  button text
-#: plugins/scale.c:2201
-#, fuzzy
-msgid "Scale windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/screenshot.c:385
-msgid "Initiate rectangle screenshot"
-msgstr ""
-
-#: plugins/screenshot.c:398
-#, fuzzy
-msgid "Directory"
-msgstr "Директоријум\n"
-
-#: plugins/screenshot.c:399
-msgid "Put screenshot images in this directory"
-msgstr ""
-
-#: plugins/screenshot.c:407
-#, fuzzy
-msgid "Launch Application"
-msgstr "Покрени програм"
-
-#: plugins/screenshot.c:408
-msgid "Automatically open screenshot in this application"
-msgstr ""
-
-#: plugins/screenshot.c:558
-#, fuzzy
-msgid "Screenshot"
-msgstr "Greška, niste uneli ispravno komandu."
-
-#: plugins/screenshot.c:559
-#, fuzzy
-msgid "Screenshot plugin"
-msgstr "Greška, niste uneli ispravno komandu."
-
-#: plugins/switcher.c:345
+#: ../plugins/switcher.c:339
 msgid "Switcher speed"
 msgstr ""
 
-#: plugins/switcher.c:355
+#: ../plugins/switcher.c:349
 msgid "Switcher timestep"
 msgstr ""
 
-#  button text
-#: plugins/switcher.c:364
-#, fuzzy
-msgid "Switcher windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/switcher.c:365
+#: ../plugins/switcher.c:359
 msgid "Windows that should be shown in switcher"
 msgstr ""
 
-#: plugins/switcher.c:381
-#, fuzzy
-msgid "Saturation"
-msgstr "Trajanje"
-
-#: plugins/switcher.c:382
+#: ../plugins/switcher.c:376
 msgid "Amount of saturation in percent"
 msgstr ""
 
-#: plugins/switcher.c:390
-#, fuzzy
-msgid "Brightness"
-msgstr "Most"
-
-#: plugins/switcher.c:391
+#: ../plugins/switcher.c:385
 msgid "Amount of brightness in percent"
 msgstr ""
 
-#: plugins/switcher.c:408
-msgid "Bring To Front"
-msgstr ""
-
-#: plugins/switcher.c:409
-msgid "Bring selected window to front"
-msgstr ""
-
-#: plugins/switcher.c:415
-msgid "Zoom"
-msgstr ""
-
-#: plugins/switcher.c:416
+#: ../plugins/switcher.c:410
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr ""
 
-#: plugins/switcher.c:426
-#, fuzzy
-msgid "Icon"
-msgstr "Ikone"
-
-#: plugins/switcher.c:427
-msgid "Show icon next to thumbnail"
-msgstr ""
-
-#: plugins/switcher.c:433
-msgid "Minimized"
-msgstr ""
-
-#: plugins/switcher.c:434
-msgid "Show minimized windows"
-msgstr ""
-
-#  ComboBox item
-#  Combobox item
-#: plugins/switcher.c:440
-#, fuzzy
-msgid "Auto Rotate"
-msgstr "Automatski"
-
-#: plugins/switcher.c:441
-msgid "Rotate to the selected window while switching"
-msgstr ""
-
-#  button text
-#: plugins/switcher.c:2027 plugins/switcher.c:2063 plugins/switcher.c:2101
-#, fuzzy
-msgid "Next window"
-msgstr "&Obriši Windowse"
-
-#: plugins/switcher.c:2028
-msgid "Popup switcher if not visible and select next window"
-msgstr ""
-
-#  button text
-#  button text
-#: plugins/switcher.c:2045 plugins/switcher.c:2082 plugins/switcher.c:2114
-#, fuzzy
-msgid "Prev window"
-msgstr "&Smanji Windowse"
-
-#: plugins/switcher.c:2046
-msgid "Popup switcher if not visible and select previous window"
-msgstr ""
-
-#: plugins/switcher.c:2064
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-
-#: plugins/switcher.c:2083
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr ""
-
-#  button text
-#: plugins/switcher.c:2102
-#, fuzzy
-msgid "Select next window"
-msgstr "&Obriši Windowse"
-
-#: plugins/switcher.c:2115
-#, fuzzy
-msgid "Select previous window"
-msgstr "Startujem servis"
-
-#: plugins/switcher.c:2289 plugins/switcher.c:2290
-#, fuzzy
-msgid "Application Switcher"
-msgstr "Redosled"
-
-#: plugins/video.c:245
-msgid "YV12 colorspace"
-msgstr ""
-
-#: plugins/video.c:246
-msgid "Provide YV12 colorspace support"
-msgstr ""
-
-#: plugins/video.c:1240
-msgid "Video Playback"
-msgstr ""
-
-#: plugins/video.c:1241
-msgid "Video playback"
-msgstr ""
-
-#: plugins/water.c:1607
-msgid "Enable pointer water effects"
-msgstr ""
-
-#  translators: toggle button label
-#: plugins/water.c:1620
-#, fuzzy
-msgid "Toggle rain"
-msgstr "&Promena statusa"
-
-#: plugins/water.c:1621
-msgid "Toggle rain effect"
-msgstr ""
-
-#  translators: toggle button label
-#: plugins/water.c:1636
-#, fuzzy
-msgid "Toggle wiper"
-msgstr "&Promena statusa"
-
-#: plugins/water.c:1637
-msgid "Toggle wiper effect"
-msgstr ""
-
-#: plugins/water.c:1652
-msgid "Offset Scale"
-msgstr ""
-
-#: plugins/water.c:1653
+#: ../plugins/water.c:1655
 msgid "Water offset scale"
 msgstr ""
 
-#: plugins/water.c:1662
-#, fuzzy
-msgid "Rain Delay"
-msgstr "Čekanje"
-
-#: plugins/water.c:1663
+#: ../plugins/water.c:1665
 msgid "Delay (in ms) between each rain-drop"
 msgstr ""
 
-#: plugins/water.c:1671
-msgid "Title wave"
-msgstr ""
-
-#: plugins/water.c:1672
-msgid "Wave effect from window title"
-msgstr ""
-
-#: plugins/water.c:1683
-msgid "Point"
-msgstr ""
-
-#: plugins/water.c:1684
-#, fuzzy
-msgid "Add point"
-msgstr "Додај догађај"
-
-#: plugins/water.c:1695
-msgid "Line"
-msgstr ""
-
-#: plugins/water.c:1696
-msgid "Add line"
-msgstr ""
-
-#: plugins/water.c:1859
-msgid "Water Effect"
-msgstr ""
-
-#: plugins/water.c:1860
-msgid "Adds water effects to different desktop actions"
-msgstr ""
-
-# 'driver' as in '(hardware) driver update'
-#: plugins/wobbly.c:132 plugins/wobbly.c:2884
-#, fuzzy
-msgid "Shiver"
-msgstr "Драјвер"
-
-#: plugins/wobbly.c:345
-#, fuzzy
-msgid "Friction"
-msgstr "Akcija"
-
-#: plugins/wobbly.c:346
+#: ../plugins/wobbly.c:327
 #, fuzzy
 msgid "Spring Friction"
 msgstr "Akcija"
 
-#: plugins/wobbly.c:355
-#, fuzzy
-msgid "Spring K"
-msgstr "Preskakanje %1"
-
-#: plugins/wobbly.c:356
+#: ../plugins/wobbly.c:337
 #, fuzzy
 msgid "Spring Konstant"
 msgstr "Preskakanje %1"
 
-#: plugins/wobbly.c:365
-#, fuzzy
-msgid "Grid Resolution"
-msgstr "Rezolucija"
-
 #  translators: frame title for method of incoming request resolution
 #  translators: frame title for method of incoming request resolution
-#: plugins/wobbly.c:366
+#: ../plugins/wobbly.c:347
 #, fuzzy
 msgid "Vertex Grid Resolution"
 msgstr "Rezolucija servera"
 
 #  To translators: intfield label
-#: plugins/wobbly.c:374
-#, fuzzy
-msgid "Minimum Grid Size"
-msgstr "Minimalan &GUID"
-
-#  To translators: intfield label
-#: plugins/wobbly.c:375
+#: ../plugins/wobbly.c:356
 #, fuzzy
 msgid "Minimum Vertex Grid Size"
 msgstr "Minimalan &GUID"
 
-#: plugins/wobbly.c:383
-msgid "Map Effect"
-msgstr ""
-
-#: plugins/wobbly.c:384
+#: ../plugins/wobbly.c:365
 msgid "Map Window Effect"
 msgstr ""
 
-#: plugins/wobbly.c:392
-msgid "Focus Effect"
-msgstr ""
-
-#: plugins/wobbly.c:393
+#: ../plugins/wobbly.c:374
 msgid "Focus Window Effect"
 msgstr ""
 
-#  button text
-#  button text
-#: plugins/wobbly.c:401
-#, fuzzy
-msgid "Map Windows"
-msgstr "&Smanji Windowse"
-
-#: plugins/wobbly.c:402
+#: ../plugins/wobbly.c:383
 msgid "Windows that should wobble when mapped"
 msgstr ""
 
-#  button text
-#: plugins/wobbly.c:410
-#, fuzzy
-msgid "Focus Windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/wobbly.c:411
+#: ../plugins/wobbly.c:392
 msgid "Windows that should wobble when focused"
 msgstr ""
 
-#  button text
-#: plugins/wobbly.c:419
-#, fuzzy
-msgid "Move Windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/wobbly.c:420
+#: ../plugins/wobbly.c:401
 msgid "Windows that should wobble when moved"
 msgstr ""
 
-#  button text
-#: plugins/wobbly.c:428
-#, fuzzy
-msgid "Grab Windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/wobbly.c:429
+#: ../plugins/wobbly.c:410
 msgid "Windows that should wobble when grabbed"
 msgstr ""
 
-#: plugins/wobbly.c:437
-msgid "Maximize Effect"
-msgstr ""
-
-#: plugins/wobbly.c:438
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
-
-#  button text
-#  button text
-#: plugins/wobbly.c:2863
-#, fuzzy
-msgid "Snap windows"
-msgstr "&Smanji Windowse"
-
-#: plugins/wobbly.c:2864
-msgid "Toggle window snapping"
-msgstr ""
-
-#: plugins/wobbly.c:2877
-msgid "Snap Inverted"
-msgstr ""
-
-#: plugins/wobbly.c:2878
-msgid "Inverted window snapping"
-msgstr ""
-
-#  button text
-#: plugins/wobbly.c:2885
-#, fuzzy
-msgid "Make window shiver"
-msgstr "&Obriši Windowse"
-
-#  button text
-#: plugins/wobbly.c:3098
-#, fuzzy
-msgid "Wobbly Windows"
-msgstr "&Obriši Windowse"
-
-#: plugins/wobbly.c:3099
-msgid "Use spring model for wobbly window effect"
-msgstr ""
-
-#: plugins/zoom.c:240
+#: ../plugins/zoom.c:241
 #, fuzzy
 msgid "Zoom Speed"
 msgstr "Suspend"
 
-#: plugins/zoom.c:250
+#: ../plugins/zoom.c:251
 #, fuzzy
 msgid "Zoom Timestep"
 msgstr "Источни Тимор"
 
-#: plugins/zoom.c:259 plugins/zoom.c:260
-#, fuzzy
-msgid "Zoom factor"
-msgstr "Odjavi se"
-
-#: plugins/zoom.c:269
-#, fuzzy
-msgid "Filter Linear"
-msgstr "Filter: "
-
-#: plugins/zoom.c:270
-msgid "USe linear filter when zoomed in"
+#: ../plugins/zoom.c:271
+msgid "Use linear filter when zoomed in"
 msgstr ""
 
-#: plugins/zoom.c:753 plugins/zoom.c:767 plugins/zoom.c:768
-msgid "Zoom In"
-msgstr ""
-
-#: plugins/zoom.c:782 plugins/zoom.c:783
-#, fuzzy
-msgid "Zoom Out"
-msgstr "Odjavi se"
-
-#: plugins/zoom.c:934
-msgid "Zoom Desktop"
-msgstr ""
-
-#: plugins/zoom.c:935
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: src/display.c:171
-msgid "Fast"
-msgstr ""
-
-#: src/display.c:171
-msgid "Good"
-msgstr ""
-
-#: src/display.c:171
-msgid "Best"
-msgstr ""
-
-#  Label text
-#: src/display.c:753
-#, fuzzy
-msgid "Active Plugins"
-msgstr "Aktivan profil"
-
-#: src/display.c:754
-#, fuzzy
-msgid "List of currently active plugins"
-msgstr "Listaj samo detektovane štampače"
-
-#  MenuButton label
-#  menubutton label
-#: src/display.c:768
-#, fuzzy
-msgid "Texture Filter"
-msgstr "&Podesite filter"
-
-#  MenuButton label
-#  menubutton label
-#: src/display.c:769
-#, fuzzy
-msgid "Texture filtering"
-msgstr "&Podesite filter"
-
-#: src/display.c:777
-msgid "Click To Focus"
-msgstr ""
-
-#: src/display.c:778
-msgid "Click on window moves input focus to it"
-msgstr ""
-
-#  ComboBox item
-#  Combobox item
-#: src/display.c:784
-#, fuzzy
-msgid "Auto-Raise"
-msgstr "Automatski"
-
-#: src/display.c:785
-msgid "Raise selected windows after interval"
-msgstr ""
-
-#: src/display.c:791
-msgid "Auto-Raise Delay"
-msgstr ""
-
-#: src/display.c:792
-msgid "Interval before raising selected windows"
-msgstr ""
-
-#  button text
-#: src/display.c:800
-#, fuzzy
-msgid "Close Window"
-msgstr "&Obriši Windowse"
-
-#: src/display.c:801
-msgid "Close active window"
-msgstr ""
-
-#: src/display.c:817
-msgid "Show Main Menu"
-msgstr ""
-
-#: src/display.c:818
-msgid "Show the main menu"
-msgstr ""
-
-#: src/display.c:834
-msgid "Run Dialog"
-msgstr ""
-
-#: src/display.c:835
-msgid "Show Run Application dialog"
-msgstr ""
-
-#: src/display.c:851
-msgid "Unmaximize Window"
-msgstr ""
-
-#: src/display.c:852
-msgid "Unmaximize active window"
-msgstr ""
-
-#  button text
-#  button text
-#: src/display.c:868
-#, fuzzy
-msgid "Minimize Window"
-msgstr "&Smanji Windowse"
-
-#: src/display.c:869
-msgid "Minimize active window"
-msgstr ""
-
-#: src/display.c:885
-msgid "Maximize Window"
-msgstr ""
-
-#: src/display.c:886
-msgid "Maximize active window"
-msgstr ""
-
-#  button text
-#  button text
-#: src/display.c:902
-#, fuzzy
-msgid "Maximize Window Horizontally"
-msgstr "&Smanji Windowse"
-
-#: src/display.c:903
-msgid "Maximize active window horizontally"
-msgstr ""
-
-#  button text
-#  button text
-#: src/display.c:915
-#, fuzzy
-msgid "Maximize Window Vertically"
-msgstr "&Smanji Windowse"
-
-#: src/display.c:916
-msgid "Maximize active window vertically"
-msgstr ""
-
-#: src/display.c:928 src/display.c:929
-msgid "Hide all windows and focus desktop"
-msgstr ""
-
-#: src/display.c:943
-#, fuzzy, c-format
-msgid "Command line %d"
-msgstr "Komanda :"
-
-#: src/display.c:944
-#, c-format
-msgid "Command line to be executed in shell when run_command%d is invoked"
-msgstr ""
-
-#: src/display.c:946
-#, fuzzy, c-format
-msgid "Run command %d"
-msgstr "Komanda :"
-
-#: src/display.c:947
-#, c-format
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command%d"
-msgstr ""
-
-#: src/display.c:991
-#, fuzzy
-msgid "Slow Animations"
-msgstr "Prikaži sve Particije"
-
-#: src/display.c:992
-msgid "Toggle use of slow animations"
-msgstr ""
-
-#  button text
-#: src/display.c:1008
-#, fuzzy
-msgid "Raise Window"
-msgstr "&Obriši Windowse"
-
-#: src/display.c:1009
-msgid "Raise window above other windows"
-msgstr ""
-
-#: src/display.c:1023
-msgid "Lower Window"
-msgstr ""
-
-#: src/display.c:1024
-msgid "Lower window beneath other windows"
-msgstr ""
-
-#: src/display.c:1038
-msgid "Increase Opacity"
-msgstr ""
-
-#: src/display.c:1039
-msgid "Increase window opacity"
-msgstr ""
-
-#: src/display.c:1053
-msgid "Decrease Opacity"
-msgstr ""
-
-#  Radio button for using an entire (Windows) partition for Linux
-#: src/display.c:1054
-#, fuzzy
-msgid "Decrease window opacity"
-msgstr "&Obriši Windows kompletno"
-
-#: src/display.c:1068 src/display.c:1069
-msgid "Take a screenshot"
-msgstr ""
-
-#: src/display.c:1085 src/display.c:1086
-#, fuzzy
-msgid "Screenshot command line"
-msgstr "Greška, niste uneli ispravno komandu."
-
-#: src/display.c:1094 src/display.c:1095
-msgid "Take a screenshot of a window"
-msgstr ""
-
-#: src/display.c:1112 src/display.c:1113
-msgid "Window screenshot command line"
-msgstr ""
-
-#: src/display.c:1121
-#, fuzzy
-msgid "Window Menu"
-msgstr "Window Manager"
-
-#: src/display.c:1122
-msgid "Open window menu"
-msgstr ""
-
-#: src/display.c:1141
-#, fuzzy
-msgid "Raise On Click"
-msgstr "&Radio Clock"
-
-#: src/display.c:1142
-msgid "Raise windows when clicked"
-msgstr ""
-
-#: src/display.c:1148
-msgid "Audible Bell"
-msgstr ""
-
-#: src/display.c:1149
-#, fuzzy
-msgid "Audible system beep"
-msgstr "Sistemi datoteka"
-
-#: src/display.c:1155
-msgid "Toggle Window Maximized"
-msgstr ""
-
-#: src/display.c:1156
-msgid "Toggle active window maximized"
-msgstr ""
-
-#: src/display.c:1168
-msgid "Toggle Window Maximized Horizontally"
-msgstr ""
-
-#: src/display.c:1170
-msgid "Toggle active window maximized horizontally"
-msgstr ""
-
-#: src/display.c:1182
-msgid "Toggle Window Maximized Vertically"
-msgstr ""
-
-#: src/display.c:1184
-msgid "Toggle active window maximized vertically"
-msgstr ""
-
-#: src/display.c:1196
-msgid "Hide Skip Taskbar Windows"
-msgstr ""
-
-#: src/display.c:1197
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-
-#: src/display.c:1204
-msgid "Toggle Window Shaded"
-msgstr ""
-
-#: src/display.c:1205
-msgid "Toggle active window shaded"
-msgstr ""
-
-#: src/display.c:1221
-msgid "Ignore Hints When Maximized"
-msgstr ""
-
-#: src/display.c:1222
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
-
-#: src/display.c:1229 src/display.c:1230
-#, fuzzy
-msgid "Terminal command line"
-msgstr "Greška, niste uneli ispravno komandu."
-
-#: src/display.c:1238 src/display.c:1239
-msgid "Open a terminal"
-msgstr ""
-
-#: src/display.c:1251
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Čekanje"
-
-#: src/display.c:1252
-msgid "Interval between ping messages"
-msgstr ""
-
-#  Headline for X11 configuration screen:
-#  The user selects screen resolution and color depth.
-#: src/main.c:54
-#, fuzzy
-msgid "Desktop"
-msgstr "Setovanja Desktop-a"
-
-#: src/main.c:55
+#: ../src/main.c:55
 msgid "Dock"
 msgstr ""
 
-#: src/main.c:56
+#: ../src/main.c:56
 msgid "Toolbar"
 msgstr ""
 
-#: src/main.c:57
+#: ../src/main.c:57
 msgid "Menu"
 msgstr ""
 
-#: src/main.c:58
+#: ../src/main.c:58
 msgid "Utility"
 msgstr ""
 
-#: src/main.c:59
+#: ../src/main.c:59
 msgid "Splash"
 msgstr ""
 
-#: src/main.c:60
+#: ../src/main.c:60
 #, fuzzy
 msgid "Dialog"
 msgstr "тагалог"
 
-#: src/main.c:61
+#: ../src/main.c:61
 msgid "Normal"
 msgstr ""
 
-#: src/main.c:62
+#: ../src/main.c:62
 #, fuzzy
 msgid "DropdownMenu"
 msgstr "Window Manager"
 
-#: src/main.c:63
+#: ../src/main.c:63
 msgid "PopupMenu"
 msgstr ""
 
-#: src/main.c:64
+#: ../src/main.c:64
 msgid "Tooltip"
 msgstr ""
 
-#: src/main.c:65
+#: ../src/main.c:65
 #, fuzzy
 msgid "Notification"
 msgstr "Akcija"
 
-#: src/main.c:66
+#: ../src/main.c:66
 msgid "Combo"
 msgstr ""
 
-#: src/main.c:67
+#: ../src/main.c:67
 msgid "Dnd"
 msgstr ""
 
-#: src/main.c:68
+#: ../src/main.c:68
 msgid "ModalDialog"
 msgstr ""
 
-#: src/main.c:69
+#: ../src/main.c:69
 msgid "Fullscreen"
 msgstr ""
 
-#: src/main.c:70
+#: ../src/main.c:70
 msgid "Unknown"
 msgstr "Nepoznato"
 
-#  headline for dialog "Select for update"
-#  headline for dialog "Select for update"
-#: src/screen.c:614
 #, fuzzy
-msgid "Detect Refresh Rate"
-msgstr "Izaberi za ažuriranje"
+#~ msgid "Command line %d"
+#~ msgstr "Komanda :"
 
-#: src/screen.c:615
-msgid "Automatic detection of refresh rate"
-msgstr ""
-
-#: src/screen.c:621
 #, fuzzy
-msgid "Lighting"
-msgstr "Zapisivanje događaja"
-
-#: src/screen.c:622
-msgid "Use diffuse light when screen is transformed"
-msgstr ""
-
-#: src/screen.c:628
-#, fuzzy
-msgid "Refresh Rate"
-msgstr "&Osveži Listu"
-
-#: src/screen.c:629
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
-
-#  Aliases dialog caption
-#: src/screen.c:638
-#, fuzzy
-msgid "Horizontal Virtual Size"
-msgstr "Virtuelni alias-i"
-
-#: src/screen.c:639
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr ""
-
-#  Aliases dialog caption
-#: src/screen.c:647
-#, fuzzy
-msgid "Vertical Virtual Size"
-msgstr "Virtuelni alias-i"
-
-#: src/screen.c:648
-msgid "Screen size multiplier for vertical virtual size"
-msgstr ""
-
-#: src/screen.c:656
-msgid "Opacity Step"
-msgstr ""
-
-# ???
-#: src/screen.c:657
-#, fuzzy
-msgid "Opacity change step"
-msgstr "окситан (после 1500.)"
-
-#: src/screen.c:665
-msgid "Unredirect Fullscreen Windows"
-msgstr ""
-
-#: src/screen.c:666
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-
-#  table item / label
-#: src/screen.c:673
-#, fuzzy
-msgid "Default Icon"
-msgstr "Podrazumevana sekcija"
-
-#  progress stage title
-#: src/screen.c:674
-#, fuzzy
-msgid "Default window icon image"
-msgstr "Pokretanje podrazumevanog menadžera prozora"
-
-#: src/screen.c:682
-msgid "Sync To VBlank"
-msgstr ""
-
-#: src/screen.c:683
-msgid "Only perform screen updates during vertical blanking period"
-msgstr ""
-
-#: src/screen.c:690
-msgid "Number of Desktops"
-msgstr ""
-
-#: src/screen.c:691
-msgid "Number of virtual desktops"
-msgstr ""
-
-#: src/screen.c:699
-msgid "Detect Outputs"
-msgstr ""
-
-#: src/screen.c:700
-msgid "Automatic detection of output devices"
-msgstr ""
-
-#: src/screen.c:706
-msgid "Outputs"
-msgstr ""
-
-#: src/screen.c:707
-msgid "List of strings describing output devices"
-msgstr ""
-
-#: src/screen.c:718
-msgid "Focus Prevention Windows"
-msgstr ""
-
-#: src/screen.c:719
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Startujem servis"
-
-#  button text
-#: src/screen.c:727
-#, fuzzy
-msgid "Opacity windows"
-msgstr "&Obriši Windowse"
-
-#: src/screen.c:728
-msgid "Windows that should be translucent by default"
-msgstr ""
-
-#: src/screen.c:739
-msgid "Opacity window values"
-msgstr ""
-
-#: src/screen.c:740
-msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
+#~ msgid "Run command %d"
+#~ msgstr "Komanda :"
 
 #  Label for used part of the Windows partition in non-graphical mode
 #  Label for used part of the Windows partition in non-graphical mode
@@ -2149,102 +3946,8 @@ msgstr ""
 #~ msgstr "Tip provajdera"
 
 #, fuzzy
-#~ msgid "Command line 1"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 10"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 11"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 2"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 3"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 4"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 5"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 6"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 7"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 8"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Command line 9"
-#~ msgstr "Komanda :"
-
-#, fuzzy
 #~ msgid "Corners"
 #~ msgstr "корнвалски"
-
-#  Process <command> "help"
-#  translators: %1 is the command name
-#, fuzzy
-#~ msgid "Run command 1"
-#~ msgstr "Komanda  '%1'"
-
-#  Process <command> "help"
-#  translators: %1 is the command name
-#, fuzzy
-#~ msgid "Run command 10"
-#~ msgstr "Komanda  '%1'"
-
-#  Process <command> "help"
-#  translators: %1 is the command name
-#, fuzzy
-#~ msgid "Run command 11"
-#~ msgstr "Komanda  '%1'"
-
-#, fuzzy
-#~ msgid "Run command 2"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 3"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 4"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 5"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 6"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 7"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 8"
-#~ msgstr "Komanda :"
-
-#, fuzzy
-#~ msgid "Run command 9"
-#~ msgstr "Komanda :"
 
 #  Push button label
 #, fuzzy
