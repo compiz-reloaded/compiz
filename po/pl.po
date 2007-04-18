@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2007-02-20 21:46+0100\n"
 "Last-Translator: wadim dziedzic <nikdo@aviary.pl>\n"
 "Language-Team:  <pl@li.org>\n"
@@ -745,74 +745,11 @@ msgstr ""
 msgid "Compiz"
 msgstr ""
 
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "Inicjuj"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr "Rozpocznij rysowanie"
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr "Rysuj"
-
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr "Rysowanie na pulpicie"
-
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-msgid "Initiate erase"
-msgstr "Rozpocznik usuwanie"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-msgid "Initiate annotate erasing"
-msgstr "Rozpoczyna usuwanie rysunków"
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-msgid "Clear"
-msgstr "Czyść"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr "Kolor wypełnienia"
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr "Kolor wypełnienia dla rysowania"
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr "Kolor pędzla"
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr "Kolor pędzla przy rysowaniu"
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr "Szerokość linii"
-
-#: ../plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr "Szerokość linii przy rysowaniu"
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr "Szerokość pędzla"
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr "Szerokość pędzla przy rysowaniu"
-
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 msgid "Annotate"
 msgstr "Rysowanie"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 msgid "Annotate plugin"
 msgstr "Wtyczka rysowania"
 
@@ -941,6 +878,12 @@ msgstr "Rozmywaj okna"
 #: ../plugins/blur.c:2886 ../plugins/compiz.schemas.in.h:64
 msgid "Blur windows"
 msgstr "Rozmywanie okien"
+
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "Inicjuj"
 
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 msgid "Initiate clone selection"
@@ -1122,6 +1065,14 @@ msgstr "Animacja tła dla kostki"
 msgid "Animate skydome when rotating cube"
 msgstr "Animacja tła dla kostki podczas jej obracania"
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr "Kolor wypełnienia"
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr "Kolor pędzla"
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 msgid "Application Switcher"
@@ -1152,6 +1103,10 @@ msgstr "Przenieś na pierwszy plan"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr "Przenoś wybrane okno na wierzch"
+
+#: ../plugins/compiz.schemas.in.h:69
+msgid "Clear"
+msgstr "Czyść"
 
 #: ../plugins/compiz.schemas.in.h:70
 msgid ""
@@ -1251,6 +1206,14 @@ msgstr "Oddalenie pulpitu podczas przełączania okien"
 msgid "Do not modify"
 msgstr "Bez zmian"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr "Rysuj"
+
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr "Rysowanie na pulpicie"
+
 #: ../plugins/compiz.schemas.in.h:129
 msgid ""
 "Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
@@ -1343,6 +1306,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "Kolor wypełnienia"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr "Kolor wypełnienia dla rysowania"
 
 #: ../plugins/compiz.schemas.in.h:150
 #, fuzzy
@@ -1546,11 +1513,19 @@ msgstr "Inicjuj wybór okien dla okien z bieżącego wyjścia"
 msgid "Initiate Window Resize"
 msgstr "Rozpocznij zmianę rozmiarów okna"
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr "Rozpocznij rysowanie"
+
 #: ../plugins/compiz.schemas.in.h:208
 msgid ""
 "Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:209
+msgid "Initiate annotate erasing"
+msgstr "Rozpoczyna usuwanie rysunków"
 
 #: ../plugins/compiz.schemas.in.h:210
 msgid ""
@@ -1563,6 +1538,10 @@ msgid ""
 "Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:213
+msgid "Initiate erase"
+msgstr "Rozpocznik usuwanie"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 msgid "Initiate rectangle screenshot"
@@ -1654,6 +1633,10 @@ msgstr "Rozmieść i zacznij przekształcać okna w bieżącym widoku"
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
 msgstr "Linia"
+
+#: ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr "Szerokość linii"
 
 #: ../plugins/compiz.schemas.in.h:235
 #, fuzzy
@@ -3026,6 +3009,14 @@ msgid ""
 "BottomLeft, BottomRight)"
 msgstr ""
 
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr "Kolor pędzla przy rysowaniu"
+
+#: ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr "Szerokość pędzla"
+
 #: ../plugins/compiz.schemas.in.h:564
 #, fuzzy
 msgid "Stroke width for annotations (0.0-20.0)"
@@ -3797,6 +3788,12 @@ msgstr "Pełny ekran"
 #: ../src/main.c:70
 msgid "Unknown"
 msgstr "Nieznane"
+
+#~ msgid "Line width for annotations"
+#~ msgstr "Szerokość linii przy rysowaniu"
+
+#~ msgid "Stroke width for annotations"
+#~ msgstr "Szerokość pędzla przy rysowaniu"
 
 #~ msgid "Fast"
 #~ msgstr "Szybko"

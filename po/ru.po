@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -797,78 +797,12 @@ msgstr ""
 msgid "Compiz"
 msgstr ""
 
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "Инициировать"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr ""
-
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr ""
-
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-#, fuzzy
-msgid "Initiate erase"
-msgstr "Инициировать"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "Инициировать изменение размеров окна"
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-#, fuzzy
-msgid "Clear"
-msgstr "О_чистить"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr ""
-
-#: ../plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr ""
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 #, fuzzy
 msgid "Annotate"
 msgstr "Инициировать"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "Активные модули"
@@ -1014,6 +948,12 @@ msgstr "Размещение окон"
 #, fuzzy
 msgid "Blur windows"
 msgstr "Масштабирование окон"
+
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "Инициировать"
 
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 #, fuzzy
@@ -1224,6 +1164,14 @@ msgstr "Анимировать фон"
 msgid "Animate skydome when rotating cube"
 msgstr "Анимирование фона при вращении куба"
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 msgid "Application Switcher"
@@ -1256,6 +1204,11 @@ msgstr "Переместить на передний план"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr "Перемещение выбранного окна на передний план"
+
+#: ../plugins/compiz.schemas.in.h:69
+#, fuzzy
+msgid "Clear"
+msgstr "О_чистить"
 
 #: ../plugins/compiz.schemas.in.h:70
 msgid ""
@@ -1360,6 +1313,14 @@ msgstr ""
 msgid "Do not modify"
 msgstr "Не изменять"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:129
 msgid ""
 "Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
@@ -1453,6 +1414,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "Цвета куба"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:150
 msgid "Fill color for filled outline mode"
@@ -1663,11 +1628,20 @@ msgstr "Инициировать средство выбора окна для �
 msgid "Initiate Window Resize"
 msgstr "Инициировать изменение размеров окна"
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:208
 msgid ""
 "Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:209
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Инициировать изменение размеров окна"
 
 #: ../plugins/compiz.schemas.in.h:210
 msgid ""
@@ -1680,6 +1654,11 @@ msgid ""
 "Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Инициировать"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 #, fuzzy
@@ -1772,6 +1751,10 @@ msgstr "Компоновка и запуск преобразования око
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
 msgstr "Линия"
+
+#: ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:235
 msgid "Line width for annotations (0.0-100.0)"
@@ -3167,6 +3150,14 @@ msgstr "Запуск изменения размеров окна"
 msgid ""
 "Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
 msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:564

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2006-06-21 13:31\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -709,78 +709,12 @@ msgstr ""
 msgid "Compiz"
 msgstr ""
 
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "開始"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr ""
-
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr ""
-
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-#, fuzzy
-msgid "Initiate erase"
-msgstr "開始"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "ウィンドウのサイズ変更を開始"
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-#, fuzzy
-msgid "Clear"
-msgstr "_クリア"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr ""
-
-#: ../plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr ""
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 #, fuzzy
 msgid "Annotate"
 msgstr "開始"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "アクティブプラグイン"
@@ -921,6 +855,12 @@ msgstr "ウィンドウを配置する"
 #, fuzzy
 msgid "Blur windows"
 msgstr "スケールウィンドウ"
+
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "開始"
 
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 #, fuzzy
@@ -1124,6 +1064,14 @@ msgstr "スカイドームをアニメーション化する"
 msgid "Animate skydome when rotating cube"
 msgstr "キューブの回転時にスカイドームをアニメーション化する"
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 msgid "Application Switcher"
@@ -1155,6 +1103,11 @@ msgstr "正面へ移動"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr "選択したウィンドウを正面へ移動"
+
+#: ../plugins/compiz.schemas.in.h:69
+#, fuzzy
+msgid "Clear"
+msgstr "_クリア"
 
 #: ../plugins/compiz.schemas.in.h:70
 #, fuzzy
@@ -1267,6 +1220,14 @@ msgstr "ウィンドウ切り替え中デスクトップ距離をズームアウ
 msgid "Do not modify"
 msgstr "変更しないでください"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:129
 #, fuzzy
 msgid ""
@@ -1365,6 +1326,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "キューブの色"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:150
 msgid "Fill color for filled outline mode"
@@ -1576,6 +1541,10 @@ msgstr "現在の出力でウィンドウのウィンドウピッカーを起動
 msgid "Initiate Window Resize"
 msgstr "ウィンドウのサイズ変更を開始"
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:208
 #, fuzzy
 msgid ""
@@ -1584,6 +1553,11 @@ msgid ""
 msgstr ""
 "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
 "BottomRight)"
+
+#: ../plugins/compiz.schemas.in.h:209
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "ウィンドウのサイズ変更を開始"
 
 #: ../plugins/compiz.schemas.in.h:210
 #, fuzzy
@@ -1602,6 +1576,11 @@ msgid ""
 msgstr ""
 "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
 "BottomRight)"
+
+#: ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "開始"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 #, fuzzy
@@ -1706,6 +1685,10 @@ msgstr "現在の出力で配列してウィンドウの変換を開始する"
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
 msgstr "線"
+
+#: ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:235
 msgid "Line width for annotations (0.0-100.0)"
@@ -3230,6 +3213,14 @@ msgid ""
 msgstr ""
 "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
 "BottomRight)"
+
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:564
 msgid "Stroke width for annotations (0.0-20.0)"

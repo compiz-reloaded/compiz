@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2002-01-04 13:30+0100\n"
 "Last-Translator: Mattias Newzella <newzella@linux.nu>\n"
 "Language-Team: Swedish <i18n@suse.de>\n"
@@ -746,81 +746,12 @@ msgid "Compiz"
 msgstr ""
 
 # Libris vill ha det så.
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-#, fuzzy
-msgid "Initiate"
-msgstr "Hettitiska språk"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr ""
-
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr ""
-
-# Libris vill ha det så.
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-#, fuzzy
-msgid "Initiate erase"
-msgstr "Hettitiska språk"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-msgid "Initiate annotate erasing"
-msgstr ""
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-#, fuzzy
-msgid "Clear"
-msgstr "R_ensa"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr ""
-
-#: ../plugins/annotate.c:826
-#, fuzzy
-msgid "Line width for annotations"
-msgstr "Lär dig mer med hjälp av dokumentation"
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr ""
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-# Libris vill ha det så.
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 #, fuzzy
 msgid "Annotate"
 msgstr "Hettitiska språk"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "Aktiv profil"
@@ -958,6 +889,14 @@ msgstr "Ta bort Win&dows"
 #, fuzzy
 msgid "Blur windows"
 msgstr "Ta bort Win&dows"
+
+# Libris vill ha det så.
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+#, fuzzy
+msgid "Initiate"
+msgstr "Hettitiska språk"
 
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 #, fuzzy
@@ -1130,6 +1069,14 @@ msgstr ""
 msgid "Animate skydome when rotating cube"
 msgstr ""
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 #, fuzzy
@@ -1164,6 +1111,11 @@ msgstr "Under start"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:69
+#, fuzzy
+msgid "Clear"
+msgstr "R_ensa"
 
 #: ../plugins/compiz.schemas.in.h:70
 msgid ""
@@ -1270,6 +1222,14 @@ msgstr ""
 msgid "Do not modify"
 msgstr "Logga inget"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:129
 msgid ""
 "Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
@@ -1360,6 +1320,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "Färger"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:150
 msgid "Fill color for filled outline mode"
@@ -1566,10 +1530,18 @@ msgstr ""
 msgid "Initiate Window Resize"
 msgstr ""
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:208
 msgid ""
 "Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:209
+msgid "Initiate annotate erasing"
 msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:210
@@ -1583,6 +1555,12 @@ msgid ""
 "Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+# Libris vill ha det så.
+#: ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Hettitiska språk"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 msgid "Initiate rectangle screenshot"
@@ -1671,6 +1649,10 @@ msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
 msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:235
@@ -3055,6 +3037,14 @@ msgid ""
 "BottomLeft, BottomRight)"
 msgstr ""
 
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:564
 #, fuzzy
 msgid "Stroke width for annotations (0.0-20.0)"
@@ -3840,6 +3830,10 @@ msgstr "Pekskärm"
 #: ../src/main.c:70
 msgid "Unknown"
 msgstr "Okänd"
+
+#, fuzzy
+#~ msgid "Line width for annotations"
+#~ msgstr "Lär dig mer med hjälp av dokumentation"
 
 #, fuzzy
 #~ msgid "Command line %d"

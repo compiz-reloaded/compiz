@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2006-06-21 16:26\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -696,78 +696,12 @@ msgstr ""
 msgid "Compiz"
 msgstr ""
 
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "起始化"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr ""
-
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr ""
-
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-#, fuzzy
-msgid "Initiate erase"
-msgstr "起始化"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "起始化視窗調整大小"
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-#, fuzzy
-msgid "Clear"
-msgstr "清除(_C)"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr ""
-
-#: ../plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr ""
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 #, fuzzy
 msgid "Annotate"
 msgstr "起始化"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "主動式外掛程式"
@@ -908,6 +842,12 @@ msgstr "放置視窗"
 #, fuzzy
 msgid "Blur windows"
 msgstr "調整視窗比例"
+
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "起始化"
 
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 #, fuzzy
@@ -1094,6 +1034,14 @@ msgstr "顯示天空頂動畫"
 msgid "Animate skydome when rotating cube"
 msgstr "旋轉立方體時顯示天空頂動畫"
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 msgid "Application Switcher"
@@ -1125,6 +1073,11 @@ msgstr "提到最上層"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr "將選取視窗提到最上層"
+
+#: ../plugins/compiz.schemas.in.h:69
+#, fuzzy
+msgid "Clear"
+msgstr "清除(_C)"
 
 #: ../plugins/compiz.schemas.in.h:70
 #, fuzzy
@@ -1229,6 +1182,14 @@ msgstr "切換視窗時桌面應縮小的距離"
 msgid "Do not modify"
 msgstr "不要修改"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:129
 #, fuzzy
 msgid ""
@@ -1321,6 +1282,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "立方體色彩"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:150
 msgid "Fill color for filled outline mode"
@@ -1522,12 +1487,21 @@ msgstr "在目前輸出啟始化群組的視窗選擇器"
 msgid "Initiate Window Resize"
 msgstr "起始化視窗調整大小"
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:208
 #, fuzzy
 msgid ""
 "Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:209
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "起始化視窗調整大小"
 
 #: ../plugins/compiz.schemas.in.h:210
 #, fuzzy
@@ -1542,6 +1516,11 @@ msgid ""
 "Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "起始化"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 #, fuzzy
@@ -1638,6 +1617,10 @@ msgstr "在目前輸出配置並開始轉換視窗"
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
 msgstr "線"
+
+#: ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:235
 msgid "Line width for annotations (0.0-100.0)"
@@ -3024,6 +3007,14 @@ msgid ""
 "Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr "應該要起始化調整比例模式的熱角 (左上角、右上角、左下角、右下角)"
+
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:564
 msgid "Stroke width for annotations (0.0-20.0)"
