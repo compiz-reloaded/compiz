@@ -117,39 +117,16 @@ readXmlFile (const char	*path,
     return doc;
 }
 
-Bool
-compAddMetadataFromFile (CompMetadata *metadata,
+static Bool
+addMetadataFromFilename (CompMetadata *metadata,
+			 const char   *path,
 			 const char   *file)
 {
-    xmlDoc **d, *doc = NULL;
-    char   *home;
+    xmlDoc **d, *doc;
 
-    home = getenv ("HOME");
-    if (home)
-    {
-	char *path;
-
-	path = malloc (strlen (home) + strlen (HOME_METADATADIR) + 2);
-	if (path)
-	{
-	    sprintf (path, "%s/%s", home, HOME_METADATADIR);
-	    doc = readXmlFile (path, file);
-	    free (path);
-	}
-    }
-
+    doc = readXmlFile (path, file);
     if (!doc)
-    {
-	doc = readXmlFile (METADATADIR, file);
-	if (!doc)
-	{
-	    fprintf (stderr,
-		     "%s: Unable to parse XML metadata from file \"%s%s\"\n",
-		     programName, file, EXTENSION);
-
-	    return FALSE;
-	}
-    }
+	return FALSE;
 
     d = realloc (metadata->doc, (metadata->nDoc + 1) * sizeof (xmlDoc *));
     if (!d)
@@ -160,6 +137,40 @@ compAddMetadataFromFile (CompMetadata *metadata,
 
     d[metadata->nDoc++] = doc;
     metadata->doc = d;
+
+    return TRUE;
+}
+
+Bool
+compAddMetadataFromFile (CompMetadata *metadata,
+			 const char   *file)
+{
+    char *home;
+    Bool status = FALSE;
+
+    home = getenv ("HOME");
+    if (home)
+    {
+	char *path;
+
+	path = malloc (strlen (home) + strlen (HOME_METADATADIR) + 2);
+	if (path)
+	{
+	    sprintf (path, "%s/%s", home, HOME_METADATADIR);
+	    status |= addMetadataFromFilename (metadata, path, file);
+	    free (path);
+	}
+    }
+
+    status |= addMetadataFromFilename (metadata, METADATADIR, file);
+    if (!status)
+    {
+	fprintf (stderr,
+		 "%s: Unable to parse XML metadata from file \"%s%s\"\n",
+		 programName, file, EXTENSION);
+
+	return FALSE;
+    }
 
     return TRUE;
 }
