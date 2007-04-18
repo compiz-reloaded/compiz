@@ -2,7 +2,6 @@ AC_PREREQ(2.57)
 
 AC_INIT([compiz], [0.5.1], [davidr@novell.com])
 
-AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE([dist-bzip2])
 AC_CONFIG_HEADER([config.h])
 AC_PROG_INTLTOOL([0.23])
