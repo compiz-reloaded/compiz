@@ -227,6 +227,7 @@ CompPluginVTable svgVTable = {
     "Svg",
     "Svg image loader",
     svgGetVersion,
+    0, /* GetMetadata */
     svgInit,
     svgFini,
     svgInitDisplay,

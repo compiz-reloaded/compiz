@@ -207,7 +207,7 @@ moveInitiate (CompDisplay     *d,
 		xRoot = w->attrib.x + (w->width  / 2);
 		yRoot = w->attrib.y + (w->height / 2);
 
-		warpPointer (d, xRoot - pointerX, yRoot - pointerY);
+		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
 	    }
 
 	    if (md->moveOpacity != OPAQUE)
@@ -493,7 +493,7 @@ moveHandleMotionEvent (CompScreen *s,
 			    wy  = workArea.y + (w->input.top >> 1);
 			    wy += w->sizeHints.height_inc >> 1;
 
-			    warpPointer (s->display, 0, wy - pointerY);
+			    warpPointer (s, 0, wy - pointerY);
 
 			    return;
 			}
@@ -939,6 +939,7 @@ CompPluginVTable moveVTable = {
     N_("Move Window"),
     N_("Move window"),
     moveGetVersion,
+    0, /* GetMetadata */
     moveInit,
     moveFini,
     moveInitDisplay,

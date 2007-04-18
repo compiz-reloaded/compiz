@@ -889,6 +889,7 @@ CompPluginVTable planeVTable = {
     N_("Desktop Plane"),
     N_("Place windows on a plane"),
     planeGetVersion,
+    0, /* GetMetadata */
     planeInit,
     planeFini,
     planeInitDisplay,

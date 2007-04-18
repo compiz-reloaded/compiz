@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2005-03-09 13:54+0100\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -751,79 +751,12 @@ msgstr ""
 msgid "Compiz"
 msgstr ""
 
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "Initiieren"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr ""
-
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr ""
-
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-#, fuzzy
-msgid "Initiate erase"
-msgstr "Initiieren"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "Fensterskalierung initiieren"
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-msgid "Clear"
-msgstr "Leeren"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-#, fuzzy
-msgid "Line width"
-msgstr "Fensterbreite"
-
-#: ../plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-#, fuzzy
-msgid "Stroke width"
-msgstr "Breite der Quellansicht"
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 #, fuzzy
 msgid "Annotate"
 msgstr "Initiieren"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "Aktive Plugins"
@@ -964,6 +897,12 @@ msgstr "Fenster platzieren"
 #, fuzzy
 msgid "Blur windows"
 msgstr "Fenster skalieren"
+
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "Initiieren"
 
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
 #, fuzzy
@@ -1180,6 +1119,14 @@ msgstr "Skydome animieren"
 msgid "Animate skydome when rotating cube"
 msgstr "Beim Drehen von Würfel Skydome animieren"
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 msgid "Application Switcher"
@@ -1210,6 +1157,10 @@ msgstr "In den Vordergrund verschieben"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr "Ausgewähltes Fenster in den Vordergrund verschieben"
+
+#: ../plugins/compiz.schemas.in.h:69
+msgid "Clear"
+msgstr "Leeren"
 
 #: ../plugins/compiz.schemas.in.h:70
 #, fuzzy
@@ -1322,6 +1273,14 @@ msgstr ""
 msgid "Do not modify"
 msgstr "Nicht ändern"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:129
 #, fuzzy
 msgid ""
@@ -1419,6 +1378,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "Würfelfarbe"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr ""
 
 #: ../plugins/compiz.schemas.in.h:150
 msgid "Fill color for filled outline mode"
@@ -1636,6 +1599,10 @@ msgstr "Fensterauswahl für Fenster in aktueller Ausgabe initiieren"
 msgid "Initiate Window Resize"
 msgstr "Fensterskalierung initiieren"
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr ""
+
 #: ../plugins/compiz.schemas.in.h:208
 #, fuzzy
 msgid ""
@@ -1644,6 +1611,11 @@ msgid ""
 msgstr ""
 "Ecken, die Skalierungsmodus auslösen sollten (links oben, rechts oben, links "
 "unten, rechts unten)"
+
+#: ../plugins/compiz.schemas.in.h:209
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Fensterskalierung initiieren"
 
 #: ../plugins/compiz.schemas.in.h:210
 #, fuzzy
@@ -1662,6 +1634,11 @@ msgid ""
 msgstr ""
 "Ecken, die Skalierungsmodus auslösen sollten (links oben, rechts oben, links "
 "unten, rechts unten)"
+
+#: ../plugins/compiz.schemas.in.h:213
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Initiieren"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 #, fuzzy
@@ -1770,6 +1747,11 @@ msgstr ""
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
 msgstr "Linie"
+
+#: ../plugins/compiz.schemas.in.h:234
+#, fuzzy
+msgid "Line width"
+msgstr "Fensterbreite"
 
 #: ../plugins/compiz.schemas.in.h:235
 msgid "Line width for annotations (0.0-100.0)"
@@ -3296,6 +3278,15 @@ msgid ""
 msgstr ""
 "Ecken, die Skalierungsmodus auslösen sollten (links oben, rechts oben, links "
 "unten, rechts unten)"
+
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:563
+#, fuzzy
+msgid "Stroke width"
+msgstr "Breite der Quellansicht"
 
 #: ../plugins/compiz.schemas.in.h:564
 msgid "Stroke width for annotations (0.0-20.0)"

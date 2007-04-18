@@ -64,6 +64,67 @@ static char *edgeName[] = {
     "BottomRight"
 };
 
+static void
+finiOptionValue (CompOptionValue *v,
+		 CompOptionType  type)
+{
+    int i;
+
+    switch (type) {
+    case CompOptionTypeString:
+	if (v->s)
+	    free (v->s);
+	break;
+    case CompOptionTypeMatch:
+	matchFini (&v->match);
+	break;
+    case CompOptionTypeList:
+	for (i = 0; i < v->list.nValue; i++)
+	    finiOptionValue (&v->list.value[i], v->list.type);
+    default:
+	break;
+    }
+}
+
+static void
+finiOptionRestriction (CompOptionRestriction *r,
+		       CompOptionType	     type)
+{
+    int i;
+
+    switch (type) {
+    case CompOptionTypeString:
+	if (r->s.nString)
+	{
+	    for (i = 0; i < r->s.nString; i++)
+		free (r->s.string[i]);
+
+	    free (r->s.string);
+	}
+    default:
+	break;
+    }
+}
+
+void
+compInitOption (CompOption *o)
+{
+    memset (o, 0, sizeof (CompOption));
+}
+
+void
+compFiniOption (CompOption *o)
+{
+    switch (o->type) {
+    case CompOptionTypeList:
+	finiOptionRestriction (&o->rest, o->value.list.type);
+    default:
+	break;
+    }
+
+    finiOptionValue (&o->value, o->type);
+}
+
 CompOption *
 compFindOption (CompOption *option,
 		int	    nOption,

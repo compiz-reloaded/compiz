@@ -1598,6 +1598,7 @@ static CompPluginVTable placeVTable = {
     N_("Place Windows"),
     N_("Place windows at appropriate positions when mapped"),
     placeGetVersion,
+    0, /* GetMetadata */
     placeInit,
     placeFini,
     placeInitDisplay,

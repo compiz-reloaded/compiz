@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070407
+#define ABIVERSION 20070417
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -402,6 +402,12 @@ struct _CompOption {
 typedef CompOption *(*DisplayOptionsProc) (CompDisplay *display, int *count);
 typedef CompOption *(*ScreenOptionsProc) (CompScreen *screen, int *count);
 
+void
+compInitOption (CompOption *option);
+
+void
+compFiniOption (CompOption *option);
+
 CompOption *
 compFindOption (CompOption *option,
 		int	    nOption,
@@ -584,16 +590,20 @@ typedef int CompFileWatchHandle;
 
 typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
+
 typedef Bool (*SetDisplayOptionProc) (CompDisplay     *display,
 				      char	      *name,
 				      CompOptionValue *value);
+
 typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
 						    CompDisplay *display,
-					            int	        *count);
+						    int	        *count);
+
 typedef Bool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
 					    CompDisplay     *display,
 					    char	    *name,
 					    CompOptionValue *value);
+
 typedef Bool (*SetDisplayOptionForPluginProc) (CompDisplay     *display,
 					       char	       *plugin,
 					       char	       *name,
@@ -1017,7 +1027,7 @@ handleSelectionClear (CompDisplay *display,
 		      XEvent      *event);
 
 void
-warpPointer (CompDisplay *display,
+warpPointer (CompScreen *screen,
 	     int	 dx,
 	     int	 dy);
 
@@ -2731,6 +2741,8 @@ typedef int (*GetVersionProc) (CompPlugin *plugin,
 typedef Bool (*InitPluginProc) (CompPlugin *plugin);
 typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
+typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
+
 typedef enum {
     CompPluginRuleBefore,
     CompPluginRuleAfter,
@@ -2751,7 +2763,8 @@ typedef struct _CompPluginVTable {
     char *shortDesc;
     char *longDesc;
 
-    GetVersionProc getVersion;
+    GetVersionProc  getVersion;
+    GetMetadataProc getMetadata;
 
     InitPluginProc init;
     FiniPluginProc fini;
@@ -3069,8 +3082,10 @@ typedef struct _CompMetadataOptionInfo {
     CompActionCallBackProc terminate;
 } CompMetadataOptionInfo;
 
-extern CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM];
-extern CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM];
+extern const CompMetadataOptionInfo
+coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM];
+extern const CompMetadataOptionInfo
+coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM];
 
 struct _CompMetadata {
     char   *path;
@@ -3085,6 +3100,14 @@ Bool
 compInitPluginMetadata (CompMetadata *metadata,
 			const char   *plugin);
 
+Bool
+compInitPluginMetadataFromInfo (CompMetadata		     *metadata,
+				const char		     *plugin,
+				const CompMetadataOptionInfo *displayOptionInfo,
+				int			     nDisplayOptionInfo,
+				const CompMetadataOptionInfo *screenOptionInfo,
+				int			     nScreenOptionInfo);
+
 void
 compFiniMetadata (CompMetadata *metadata);
 
@@ -3097,16 +3120,55 @@ compAddMetadataFromString (CompMetadata *metadata,
 			   const char	*string);
 
 Bool
+compAddMetadataFromIO (CompMetadata	     *metadata,
+		       xmlInputReadCallback  ioread,
+		       xmlInputCloseCallback ioclose,
+		       void		     *ioctx);
+
+Bool
 compInitScreenOptionFromMetadata (CompScreen   *screen,
 				  CompMetadata *metadata,
 				  CompOption   *option,
 				  const char   *name);
+
+void
+compFiniScreenOption (CompScreen *screen,
+		      CompOption *option);
+
+Bool
+compInitScreenOptionsFromMetadata (CompScreen			*screen,
+				   CompMetadata			*metadata,
+				   const CompMetadataOptionInfo *info,
+				   CompOption			*option,
+				   int				n);
+
+void
+compFiniScreenOptions (CompScreen *screen,
+		       CompOption *option,
+		       int	  n);
 
 Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *display,
 				   CompMetadata *metadata,
 				   CompOption   *option,
 				   const char   *name);
+
+void
+compFiniDisplayOption (CompDisplay *display,
+		       CompOption  *option);
+
+Bool
+compInitDisplayOptionsFromMetadata (CompDisplay			 *display,
+				    CompMetadata		 *metadata,
+				    const CompMetadataOptionInfo *info,
+				    CompOption			 *option,
+				    int				 n);
+
+void
+compFiniDisplayOptions (CompDisplay *display,
+			CompOption  *option,
+			int	    n);
+
 char *
 compGetStringFromMetadataPath (CompMetadata *metadata,
 			       const char   *path);
@@ -3133,8 +3195,19 @@ char *
 compGetLongDisplayOptionDescription (CompMetadata *metadata,
 				     CompOption   *option);
 
-char *
-compMetadataOptionInfoToXml (const CompMetadataOptionInfo *info);
+
+int
+compReadXmlChunk (const char *src,
+		  int	     *offset,
+		  char	     *buffer,
+		  int	     length);
+
+int
+compReadXmlChunkFromMetadataOptionInfo (const CompMetadataOptionInfo *info,
+					int			     *offset,
+					char			     *buffer,
+					int			     length);
+
 
 #ifdef  __cplusplus
 }

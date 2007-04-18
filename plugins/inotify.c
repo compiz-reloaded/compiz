@@ -259,6 +259,7 @@ CompPluginVTable inotifyVTable = {
     "Inotify",
     "File change notification plugin",
     inotifyGetVersion,
+    0, /* GetMetadata */
     inotifyInit,
     inotifyFini,
     inotifyInitDisplay,

@@ -2044,6 +2044,7 @@ CompPluginVTable cubeVTable = {
     N_("Desktop Cube"),
     N_("Place windows on cube"),
     cubeGetVersion,
+    0, /* GetMetadata */
     cubeInit,
     cubeFini,
     cubeInitDisplay,

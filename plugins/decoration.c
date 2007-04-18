@@ -1492,6 +1492,7 @@ static CompPluginVTable decorVTable = {
     N_("Window Decoration"),
     N_("Window decorations"),
     decorGetVersion,
+    0, /* GetMetadata */
     decorInit,
     decorFini,
     decorInitDisplay,

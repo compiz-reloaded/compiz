@@ -1455,6 +1455,7 @@ CompPluginVTable iniVTable = {
     "Ini file backend for compiz",
     "Ini (flat file) option storage",
     iniGetVersion,
+    0, /* GetMetadata */
     iniInit,
     iniFini,
     iniInitDisplay,

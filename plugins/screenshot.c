@@ -559,6 +559,7 @@ static CompPluginVTable shotVTable = {
     N_("Screenshot"),
     N_("Screenshot plugin"),
     shotGetVersion,
+    0, /* GetMetadata */
     shotInit,
     shotFini,
     shotInitDisplay,

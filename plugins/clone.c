@@ -860,6 +860,7 @@ CompPluginVTable cloneVTable = {
     N_("Clone Output"),
     N_("Output clone handler"),
     cloneGetVersion,
+    0, /* GetMetadata */
     cloneInit,
     cloneFini,
     cloneInitDisplay,

@@ -2682,6 +2682,7 @@ CompPluginVTable dbusVTable = {
     "Dbus",
     "Dbus Control Backend",
     dbusGetVersion,
+    0, /* GetMetadata */
     dbusInit,
     dbusFini,
     dbusInitDisplay,

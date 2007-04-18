@@ -597,7 +597,7 @@ setScreenOptionForPlugin (CompScreen      *screen,
     return FALSE;
 }
 
-CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
+const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "detect_refresh_rate", "bool", 0, 0, 0 },
     { "lighting", "bool", 0, 0, 0 },
     { "refresh_rate", "int", "<min>1</min>", 0, 0 },
@@ -614,18 +614,6 @@ CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
     { "opacity_values", "list", "<type>int</type>", 0, 0 }
 };
-
-static void
-compScreenInitOptions (CompScreen *screen)
-{
-    int i;
-
-    for (i = 0; i < COMP_SCREEN_OPTION_NUM; i++)
-	compInitScreenOptionFromMetadata (screen,
-					  &coreMetadata,
-					  &screen->opt[i],
-					  coreScreenOptionInfo[i].name);
-}
 
 static void
 updateStartupFeedback (CompScreen *s)
@@ -1423,7 +1411,6 @@ addScreen (CompDisplay *display,
     GLfloat		 diffuseLight[]   = { 0.9f, 0.9f,  0.9f, 0.9f };
     GLfloat		 light0Position[] = { -0.5f, 0.5f, -9.0f, 1.0f };
     CompWindow		 *w;
-    GLXContext		 shareList = 0;
 
     s = malloc (sizeof (CompScreen));
     if (!s)
@@ -1447,7 +1434,12 @@ addScreen (CompDisplay *display,
 
     s->display = display;
 
-    compScreenInitOptions (s);
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &coreMetadata,
+					    coreScreenOptionInfo,
+					    s->opt,
+					    COMP_SCREEN_OPTION_NUM))
+	return FALSE;
 
     s->damage = XCreateRegion ();
     if (!s->damage)
@@ -1657,14 +1649,11 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    if (display->screens)
-	shareList = display->screens->ctx;
-
     /* try both direct and indirect rendering contexts in case one of them
        fail to support GLX_EXT_texture_from_pixmap */
     for (i = 0; i < 2; i++)
     {
-	s->ctx = glXCreateContext (dpy, visinfo, shareList, !indirectRendering);
+	s->ctx = glXCreateContext (dpy, visinfo, NULL, !indirectRendering);
 	if (!s->ctx)
 	{
 	    fprintf (stderr, "%s: glXCreateContext failed\n", programName);
@@ -2140,9 +2129,6 @@ addScreen (CompDisplay *display,
     s->filter[SCREEN_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
     s->filter[WINDOW_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
 
-    matchUpdate (s->display,
-		 &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match);
-
     return TRUE;
 }
 
@@ -2457,7 +2443,7 @@ removeScreenGrab (CompScreen *s,
 	else
 	{
 	    if (restorePointer)
-		warpPointer (s->display,
+		warpPointer (s,
 			     restorePointer->x - pointerX,
 			     restorePointer->y - pointerY);
 

@@ -30,32 +30,7 @@
 
 #include <compiz.h>
 
-#define ANNO_INITIATE_BUTTON_DEFAULT	       Button1
-#define ANNO_INITIATE_BUTTON_MODIFIERS_DEFAULT (CompSuperMask | CompAltMask)
-
-#define ANNO_ERASE_BUTTON_DEFAULT	    Button3
-#define ANNO_ERASE_BUTTON_MODIFIERS_DEFAULT (CompSuperMask | CompAltMask)
-
-#define ANNO_CLEAR_KEY_DEFAULT	         "k"
-#define ANNO_CLEAR_KEY_MODIFIERS_DEFAULT (CompSuperMask | CompAltMask)
-
-#define ANNO_FILL_COLOR_RED_DEFAULT   0xffff
-#define ANNO_FILL_COLOR_GREEN_DEFAULT 0x0000
-#define ANNO_FILL_COLOR_BLUE_DEFAULT  0x0000
-
-#define ANNO_STROKE_COLOR_RED_DEFAULT   0x0000
-#define ANNO_STROKE_COLOR_GREEN_DEFAULT 0xffff
-#define ANNO_STROKE_COLOR_BLUE_DEFAULT  0x0000
-
-#define ANNO_LINE_WIDTH_MIN        0.1f
-#define ANNO_LINE_WIDTH_MAX        100.0f
-#define ANNO_LINE_WIDTH_DEFAULT    3.0f
-#define ANNO_LINE_WIDTH_PRECISION  0.1f
-
-#define ANNO_STROKE_WIDTH_MIN        0.1f
-#define ANNO_STROKE_WIDTH_MAX        20.0f
-#define ANNO_STROKE_WIDTH_DEFAULT    1.0f
-#define ANNO_STROKE_WIDTH_PRECISION  0.1f
+static CompMetadata annoMetadata;
 
 static int displayPrivateIndex;
 
@@ -734,113 +709,6 @@ annoHandleEvent (CompDisplay *d,
     WRAP (ad, d, handleEvent, annoHandleEvent);
 }
 
-static void
-annoDisplayInitOptions (AnnoDisplay *ad,
-			Display	    *display)
-{
-    CompOption *o;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = N_("Initiate");
-    o->longDesc			     = N_("Initiate annotate drawing");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = annoInitiate;
-    o->value.action.terminate	     = annoTerminate;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.state	     = CompActionStateInitButton;
-    o->value.action.state	    |= CompActionStateInitKey;
-    o->value.action.button.modifiers = ANNO_INITIATE_BUTTON_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = ANNO_INITIATE_BUTTON_DEFAULT;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_DRAW];
-    o->name		      = "draw";
-    o->shortDesc	      = N_("Draw");
-    o->longDesc		      = N_("Draw using tool");
-    o->type		      = CompOptionTypeAction;
-    o->value.action.initiate  = annoDraw;
-    o->value.action.terminate = 0;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.type      = 0;
-    o->value.action.state     = 0;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_ERASE];
-    o->name			     = "erase";
-    o->shortDesc		     = N_("Initiate erase");
-    o->longDesc			     = N_("Initiate annotate erasing");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = annoEraseInitiate;
-    o->value.action.terminate	     = annoTerminate;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.state	     = CompActionStateInitButton;
-    o->value.action.state	    |= CompActionStateInitKey;
-    o->value.action.button.modifiers = ANNO_ERASE_BUTTON_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = ANNO_ERASE_BUTTON_DEFAULT;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_CLEAR];
-    o->name			  = "clear";
-    o->shortDesc		  = N_("Clear");
-    o->longDesc			  = N_("Clear");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = annoClear;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.key.modifiers = ANNO_CLEAR_KEY_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (ANNO_CLEAR_KEY_DEFAULT));
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR];
-    o->name       = "fill_color";
-    o->shortDesc  = N_("Annotate Fill Color");
-    o->longDesc   = N_("Fill color for annotations");
-    o->type       = CompOptionTypeColor;
-    o->value.c[0] = ANNO_FILL_COLOR_RED_DEFAULT;
-    o->value.c[1] = ANNO_FILL_COLOR_GREEN_DEFAULT;
-    o->value.c[2] = ANNO_FILL_COLOR_BLUE_DEFAULT;
-    o->value.c[3] = 0xffff;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_STROKE_COLOR];
-    o->name       = "stroke_color";
-    o->shortDesc  = N_("Annotate Stroke Color");
-    o->longDesc   = N_("Stroke color for annotations");
-    o->type       = CompOptionTypeColor;
-    o->value.c[0] = ANNO_STROKE_COLOR_RED_DEFAULT;
-    o->value.c[1] = ANNO_STROKE_COLOR_GREEN_DEFAULT;
-    o->value.c[2] = ANNO_STROKE_COLOR_BLUE_DEFAULT;
-    o->value.c[3] = 0xffff;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH];
-    o->name             = "line_width";
-    o->shortDesc        = N_("Line width");
-    o->longDesc         = N_("Line width for annotations");
-    o->type             = CompOptionTypeFloat;
-    o->value.f          = ANNO_LINE_WIDTH_DEFAULT;
-    o->rest.f.min       = ANNO_LINE_WIDTH_MIN;
-    o->rest.f.max       = ANNO_LINE_WIDTH_MAX;
-    o->rest.f.precision = ANNO_LINE_WIDTH_PRECISION;
-
-    o = &ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH];
-    o->name             = "stroke_width";
-    o->shortDesc        = N_("Stroke width");
-    o->longDesc         = N_("Stroke width for annotations");
-    o->type             = CompOptionTypeFloat;
-    o->value.f          = ANNO_STROKE_WIDTH_DEFAULT;
-    o->rest.f.min       = ANNO_STROKE_WIDTH_MIN;
-    o->rest.f.max       = ANNO_STROKE_WIDTH_MAX;
-    o->rest.f.precision = ANNO_STROKE_WIDTH_PRECISION;
-}
-
 static CompOption *
 annoGetDisplayOptions (CompPlugin  *plugin,
 		       CompDisplay *display,
@@ -883,6 +751,17 @@ annoSetDisplayOption (CompPlugin      *plugin,
     return FALSE;
 }
 
+static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
+    { "initiate", "action", 0, annoInitiate, annoTerminate },
+    { "draw", "action", 0, annoDraw, 0 },
+    { "erase", "action", 0, annoEraseInitiate, 0 },
+    { "clear", "action", 0, annoClear, 0 },
+    { "fill_color", "color", 0, 0, 0 },
+    { "stroke_color", "color", 0, 0, 0 },
+    { "line_width", "float", 0, 0, 0 },
+    { "stroke_width", "float", 0, 0, 0 }
+};
+
 static Bool
 annoInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -893,16 +772,25 @@ annoInitDisplay (CompPlugin  *p,
     if (!ad)
 	return FALSE;
 
-    ad->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (ad->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &annoMetadata,
+					     annoDisplayOptionInfo,
+					     ad->opt,
+					     ANNO_DISPLAY_OPTION_NUM))
     {
 	free (ad);
 	return FALSE;
     }
 
-    WRAP (ad, d, handleEvent, annoHandleEvent);
+    ad->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (ad->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, ad->opt, ANNO_DISPLAY_OPTION_NUM);
+	free (ad);
+	return FALSE;
+    }
 
-    annoDisplayInitOptions (ad, d->display);
+    WRAP (ad, d, handleEvent, annoHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = ad;
 
@@ -918,6 +806,8 @@ annoFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, ad->screenPrivateIndex);
 
     UNWRAP (ad, d, handleEvent);
+
+    compFiniDisplayOptions (d, ad->opt, ANNO_DISPLAY_OPTION_NUM);
 
     free (ad);
 }
@@ -971,7 +861,7 @@ annoFiniScreen (CompPlugin *p,
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
 
-    removeScreenAction (s, 
+    removeScreenAction (s,
 			&ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
     removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
     removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
@@ -984,9 +874,21 @@ annoFiniScreen (CompPlugin *p,
 static Bool
 annoInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&annoMetadata,
+					 p->vTable->name,
+					 annoDisplayOptionInfo,
+					 ANNO_DISPLAY_OPTION_NUM,
+					 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&annoMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&annoMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -996,6 +898,8 @@ annoFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&annoMetadata);
 }
 
 static int
@@ -1005,11 +909,18 @@ annoGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+annoGetMetadata (CompPlugin *plugin)
+{
+    return &annoMetadata;
+}
+
 static CompPluginVTable annoVTable = {
     "annotate",
     N_("Annotate"),
     N_("Annotate plugin"),
     annoGetVersion,
+    annoGetMetadata,
     annoInit,
     annoFini,
     annoInitDisplay,

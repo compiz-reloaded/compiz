@@ -997,7 +997,7 @@ rotateFlipLeft (void *closure)
 	return FALSE;
 
     warpX = pointerX + s->width;
-    warpPointer (s->display, s->width - 10, 0);
+    warpPointer (s, s->width - 10, 0);
     lastPointerX = warpX;
 
     o[0].type    = CompOptionTypeInt;
@@ -1042,7 +1042,7 @@ rotateFlipRight (void *closure)
 	return FALSE;
 
     warpX = pointerX - s->width;
-    warpPointer (s->display, 10 - s->width, 0);
+    warpPointer (s, 10 - s->width, 0);
     lastPointerX = warpX;
 
     o[0].type    = CompOptionTypeInt;
@@ -1150,7 +1150,7 @@ rotateEdgeFlip (CompScreen      *s,
 	    int warpX;
 
 	    warpX = pointerX + s->width;
-	    warpPointer (s->display, s->width - 10, 0);
+	    warpPointer (s, s->width - 10, 0);
 	    lastPointerX = warpX - pointerDx;
 
 	    o[3].value.i = -1;
@@ -1190,7 +1190,7 @@ rotateEdgeFlip (CompScreen      *s,
 	    int warpX;
 
 	    warpX = pointerX - s->width;
-	    warpPointer (s->display, 10 - s->width, 0);
+	    warpPointer (s, 10 - s->width, 0);
 	    lastPointerX = warpX - pointerDx;
 
 	    o[3].value.i = 1;
@@ -1464,7 +1464,7 @@ rotateHandleEvent (CompDisplay *d,
 			event->xmotion.x_root > s->width  - 50 ||
 			event->xmotion.y_root > s->height - 50)
 		    {
-			warpPointer (d,
+			warpPointer (s,
 				     (s->width  / 2) - pointerX,
 				     (s->height / 2) - pointerY);
 		    }
@@ -2180,6 +2180,7 @@ CompPluginVTable rotateVTable = {
     N_("Rotate Cube"),
     N_("Rotate desktop cube"),
     rotateGetVersion,
+    0, /* GetMetadata */
     rotateInit,
     rotateFini,
     rotateInitDisplay,

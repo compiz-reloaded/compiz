@@ -1242,6 +1242,7 @@ static CompPluginVTable videoVTable = {
     N_("Video Playback"),
     N_("Video playback"),
     videoGetVersion,
+    0, /* GetMetadata */
     videoInit,
     videoFini,
     videoInitDisplay,

@@ -1,0 +1,66 @@
+<compiz>
+    <plugin name="annotate">
+	<_short>Annotate</_short>
+	<_long>Annotate plugin</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate</_short>
+		<_long>Initiate annotate drawing</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Super&gt;&lt;Alt&gt;Button1</button>
+		</default>
+	    </option>
+	    <option name="draw" type="action">
+		<_short>Draw</_short>
+		<_long>Draw using tool</_long>
+	    </option>
+	    <option name="erase" type="action">
+		<_short>Initiate erase</_short>
+		<_long>Initiate annotate erasing</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Super&gt;&lt;Alt&gt;Button3</button>
+		</default>
+	    </option>
+	    <option name="clear" type="action">
+		<_short>Clear</_short>
+		<_long>Clear</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Super&gt;&lt;Alt&gt;k</key>
+		</default>
+	    </option>
+	    <option name="fill_color" type="color">
+		<_short>Annotate Fill Color</_short>
+		<_long>Fill color for annotations</_long>
+		<default>
+		    <red>0xffff</red>
+		</default>
+	    </option>
+	    <option name="stroke_color" type="color">
+		<_short>Annotate Stroke Color</_short>
+		<_long>Stroke color for annotations</_long>
+		<default>
+		    <green>0xffff</green>
+		</default>
+	    </option>
+	    <option name="line_width" type="float">
+		<_short>Line width</_short>
+		<_long>Line width for annotations</_long>
+		<default>3.0</default>
+		<min>0.1</min>
+		<max>100.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="stroke_width" type="float">
+		<_short>Stroke width</_short>
+		<_long>Stroke width for annotations</_long>
+		<default>1.0</default>
+		<min>0.1</min>
+		<max>20.0</max>
+		<precision>0.1</precision>
+	    </option>
+	</display>
+    </plugin>
+</compiz>

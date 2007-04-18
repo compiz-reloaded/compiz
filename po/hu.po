@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:19-0400\n"
+"POT-Creation-Date: 2007-04-18 12:30-0400\n"
 "PO-Revision-Date: 2007-02-20 15:08+0100\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team:  <hu@li.org>\n"
@@ -750,75 +750,11 @@ msgstr ""
 msgid "Compiz"
 msgstr ""
 
-#: ../plugins/annotate.c:745 ../plugins/clone.c:726
-#: ../plugins/compiz.schemas.in.h:200 ../plugins/rotate.c:1774
-#: ../plugins/screenshot.c:384 ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "Indítás"
-
-#: ../plugins/annotate.c:746 ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr "Feljegyzésrajzolás indítása"
-
-#: ../plugins/annotate.c:760 ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr "Rajzolás"
-
-# 58721 AttribValues/label
-#: ../plugins/annotate.c:761 ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr "Rajzolás az eszközzel"
-
-#: ../plugins/annotate.c:772 ../plugins/compiz.schemas.in.h:213
-msgid "Initiate erase"
-msgstr "Törlés indítása"
-
-#: ../plugins/annotate.c:773 ../plugins/compiz.schemas.in.h:209
-msgid "Initiate annotate erasing"
-msgstr "Feljegyzéstörlés indítása"
-
-#: ../plugins/annotate.c:787 ../plugins/annotate.c:788
-#: ../plugins/compiz.schemas.in.h:69
-msgid "Clear"
-msgstr "Törlés"
-
-#: ../plugins/annotate.c:805 ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr "Feljegyzés kitöltő színe"
-
-#: ../plugins/annotate.c:806 ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr "Feljegyzések kitöltő színe"
-
-#: ../plugins/annotate.c:815 ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr "Feljegyzés körvonalszíne"
-
-#: ../plugins/annotate.c:816 ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr "Feljegyzések körvonalának színe"
-
-#: ../plugins/annotate.c:825 ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr "Vonalvastagság"
-
-#: ../plugins/annotate.c:826
-msgid "Line width for annotations"
-msgstr "Feljegyzések vonalvastagsága"
-
-#: ../plugins/annotate.c:835 ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr "Körvonal vastagsága"
-
-#: ../plugins/annotate.c:836
-msgid "Stroke width for annotations"
-msgstr "Feljegyzések körvonal-vastagsága"
-
-#: ../plugins/annotate.c:1010 ../plugins/compiz.schemas.in.h:44
+#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
 msgid "Annotate"
 msgstr "Feljegyzés"
 
-#: ../plugins/annotate.c:1011 ../plugins/compiz.schemas.in.h:47
+#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
 msgid "Annotate plugin"
 msgstr "Feljegyzés bővítmény"
 
@@ -948,6 +884,12 @@ msgstr "Ablak elmosása"
 #: ../plugins/blur.c:2886 ../plugins/compiz.schemas.in.h:64
 msgid "Blur windows"
 msgstr "Ablakok elmosása"
+
+#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
+#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
+#: ../plugins/water.c:1608 ../plugins/zoom.c:755
+msgid "Initiate"
+msgstr "Indítás"
 
 # /tmp/xapi:301
 #: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
@@ -1130,6 +1072,14 @@ msgstr "Kupola animálása"
 msgid "Animate skydome when rotating cube"
 msgstr "Kupola animálása a kocka forgatásánál"
 
+#: ../plugins/compiz.schemas.in.h:45
+msgid "Annotate Fill Color"
+msgstr "Feljegyzés kitöltő színe"
+
+#: ../plugins/compiz.schemas.in.h:46
+msgid "Annotate Stroke Color"
+msgstr "Feljegyzés körvonalszíne"
+
 #: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
 #: ../plugins/switcher.c:2298
 msgid "Application Switcher"
@@ -1160,6 +1110,10 @@ msgstr "Előrehozás"
 #: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
 msgid "Bring selected window to front"
 msgstr "A kijelölt ablak az előtérbe hozása"
+
+#: ../plugins/compiz.schemas.in.h:69
+msgid "Clear"
+msgstr "Törlés"
 
 #: ../plugins/compiz.schemas.in.h:70
 msgid ""
@@ -1260,6 +1214,15 @@ msgstr "A munkaasztal kinagyításának mértéke ablakváltás során"
 msgid "Do not modify"
 msgstr "Nem módosít"
 
+#: ../plugins/compiz.schemas.in.h:127
+msgid "Draw"
+msgstr "Rajzolás"
+
+# 58721 AttribValues/label
+#: ../plugins/compiz.schemas.in.h:128
+msgid "Draw using tool"
+msgstr "Rajzolás az eszközzel"
+
 #: ../plugins/compiz.schemas.in.h:129
 msgid ""
 "Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
@@ -1350,6 +1313,10 @@ msgstr ""
 #, fuzzy
 msgid "Fill Color"
 msgstr "Feljegyzés kitöltő színe"
+
+#: ../plugins/compiz.schemas.in.h:149
+msgid "Fill color for annotations"
+msgstr "Feljegyzések kitöltő színe"
 
 #: ../plugins/compiz.schemas.in.h:150
 #, fuzzy
@@ -1552,11 +1519,19 @@ msgstr "Ablakválasztó indítása a jelenlegi kimenet ablakain"
 msgid "Initiate Window Resize"
 msgstr "Ablakátméretezés indítása"
 
+#: ../plugins/compiz.schemas.in.h:207
+msgid "Initiate annotate drawing"
+msgstr "Feljegyzésrajzolás indítása"
+
 #: ../plugins/compiz.schemas.in.h:208
 msgid ""
 "Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:209
+msgid "Initiate annotate erasing"
+msgstr "Feljegyzéstörlés indítása"
 
 #: ../plugins/compiz.schemas.in.h:210
 msgid ""
@@ -1569,6 +1544,10 @@ msgid ""
 "Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
 "BottomLeft, BottomRight)"
 msgstr ""
+
+#: ../plugins/compiz.schemas.in.h:213
+msgid "Initiate erase"
+msgstr "Törlés indítása"
 
 #: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
 msgid "Initiate rectangle screenshot"
@@ -1660,6 +1639,10 @@ msgstr "Elrendezés és a jelenlegi kimenet ablakai transzformációjának indí
 #: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
 msgid "Line"
 msgstr "Vonal"
+
+#: ../plugins/compiz.schemas.in.h:234
+msgid "Line width"
+msgstr "Vonalvastagság"
 
 #: ../plugins/compiz.schemas.in.h:235
 #, fuzzy
@@ -3036,6 +3019,14 @@ msgid ""
 "BottomLeft, BottomRight)"
 msgstr ""
 
+#: ../plugins/compiz.schemas.in.h:562
+msgid "Stroke color for annotations"
+msgstr "Feljegyzések körvonalának színe"
+
+#: ../plugins/compiz.schemas.in.h:563
+msgid "Stroke width"
+msgstr "Körvonal vastagsága"
+
 #: ../plugins/compiz.schemas.in.h:564
 #, fuzzy
 msgid "Stroke width for annotations (0.0-20.0)"
@@ -3809,6 +3800,12 @@ msgstr "Teljes képernyős"
 #: ../src/main.c:70
 msgid "Unknown"
 msgstr "Ismeretlen"
+
+#~ msgid "Line width for annotations"
+#~ msgstr "Feljegyzések vonalvastagsága"
+
+#~ msgid "Stroke width for annotations"
+#~ msgstr "Feljegyzések körvonal-vastagsága"
 
 #~ msgid "Fast"
 #~ msgstr "Gyors"

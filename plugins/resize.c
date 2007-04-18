@@ -248,7 +248,7 @@ resizeInitiate (CompDisplay     *d,
 		xRoot = w->attrib.x + (w->width  / 2);
 		yRoot = w->attrib.y + (w->height / 2);
 
-		warpPointer (d, xRoot - pointerX, yRoot - pointerY);
+		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
 	    }
 	}
     }
@@ -448,7 +448,7 @@ resizeHandleKeyEvent (CompScreen *s,
 		x = left + width  * (rKeys[i].dx + 1) / 2;
 		y = top  + height * (rKeys[i].dy + 1) / 2;
 
-		warpPointer (s->display, x - pointerX, y - pointerY);
+		warpPointer (s, x - pointerX, y - pointerY);
 		rd->mask = rKeys[i].resizeMask;
 		updateScreenGrab (s, rs->grabIndex, rs->cursor[i]);
 	    }
@@ -887,6 +887,7 @@ CompPluginVTable resizeVTable = {
     N_("Resize Window"),
     N_("Resize window"),
     resizeGetVersion,
+    0, /* GetMetadata */
     resizeInit,
     resizeFini,
     resizeInitDisplay,

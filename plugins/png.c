@@ -525,6 +525,7 @@ CompPluginVTable pngVTable = {
     "Png",
     "Png image loader",
     pngGetVersion,
+    0, /* GetMetadata */
     pngInit,
     pngFini,
     pngInitDisplay,
