@@ -60,6 +60,7 @@ finiTexture (CompScreen  *screen,
 {
     if (texture->name)
     {
+	makeScreenCurrent (screen);
 	releasePixmapFromTexture (screen, texture);
 	glDeleteTextures (1, &texture->name);
     }
@@ -113,6 +114,7 @@ imageToTexture (CompScreen   *screen,
 		&image[(height - i - 1) * width * 4],
 		width * 4);
 
+    makeScreenCurrent (screen);
     releasePixmapFromTexture (screen, texture);
 
     if (screen->textureNonPowerOfTwo ||
@@ -247,6 +249,7 @@ bindPixmapToTexture (CompScreen  *screen,
 	return FALSE;
     }
 
+    makeScreenCurrent (screen);
     texture->pixmap = (*screen->createPixmap) (screen->display->display,
 					       config->fbConfig, pixmap,
 					       attribs);
@@ -338,6 +341,7 @@ releasePixmapFromTexture (CompScreen  *screen,
 {
     if (texture->pixmap)
     {
+	makeScreenCurrent (screen);
 	glEnable (texture->target);
 	if (!strictBinding)
 	{
@@ -362,6 +366,7 @@ enableTexture (CompScreen	 *screen,
 	       CompTexture	 *texture,
 	       CompTextureFilter filter)
 {
+    makeScreenCurrent (screen);
     glEnable (texture->target);
     glBindTexture (texture->target, texture->name);
 
@@ -443,6 +448,7 @@ void
 disableTexture (CompScreen  *screen,
 		CompTexture *texture)
 {
+    makeScreenCurrent (screen);
     if (strictBinding)
     {
 	glBindTexture (texture->target, texture->name);
