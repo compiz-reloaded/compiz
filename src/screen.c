@@ -2447,7 +2447,7 @@ removeScreenGrab (CompScreen *s,
 	else
 	{
 	    if (restorePointer)
-		warpPointer (s->display,
+		warpPointer (s,
 			     restorePointer->x - pointerX,
 			     restorePointer->y - pointerY);
 

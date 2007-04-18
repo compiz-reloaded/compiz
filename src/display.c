@@ -2836,12 +2836,12 @@ handleSelectionClear (CompDisplay *display,
 }
 
 void
-warpPointer (CompDisplay *display,
+warpPointer (CompScreen *s,
 	     int	 dx,
 	     int	 dy)
 {
-    CompScreen *s = display->screens;
-    XEvent     event;
+    CompDisplay *display = s->display;
+    XEvent      event;
 
     pointerX += dx;
     pointerY += dy;

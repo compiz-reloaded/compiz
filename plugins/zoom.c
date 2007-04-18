@@ -639,7 +639,7 @@ zoomHandleEvent (CompDisplay *d,
 		    event->xmotion.x_root > s->width  - 50 ||
 		    event->xmotion.y_root > s->height - 50)
 		{
-		    warpPointer (d,
+		    warpPointer (s,
 				 (s->width  / 2) - pointerX,
 				 (s->height / 2) - pointerY);
 		}

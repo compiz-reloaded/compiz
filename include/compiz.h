@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070408
+#define ABIVERSION 20070409
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1027,7 +1027,7 @@ handleSelectionClear (CompDisplay *display,
 		      XEvent      *event);
 
 void
-warpPointer (CompDisplay *display,
+warpPointer (CompScreen *screen,
 	     int	 dx,
 	     int	 dy);
 
