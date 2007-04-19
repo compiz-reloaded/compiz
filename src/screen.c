@@ -1125,6 +1125,8 @@ setSupported (CompScreen *s)
     data[i++] = d->winActionCloseAtom;
     data[i++] = d->winActionShadeAtom;
     data[i++] = d->winActionChangeDesktopAtom;
+    data[i++] = d->winActionAboveAtom;
+    data[i++] = d->winActionBelowAtom;
 
     data[i++] = d->winTypeAtom;
     data[i++] = d->winTypeDesktopAtom;

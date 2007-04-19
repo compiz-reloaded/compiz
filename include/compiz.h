@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070417
+#define ABIVERSION 20070419
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -161,6 +161,8 @@ typedef struct _CompMetadata      CompMetadata;
 #define CompWindowActionCloseMask	  (1 << 7)
 #define CompWindowActionShadeMask	  (1 << 8)
 #define CompWindowActionChangeDesktopMask (1 << 9)
+#define CompWindowActionAboveMask	  (1 << 10)
+#define CompWindowActionBelowMask	  (1 << 11)
 
 #define MwmFuncAll      (1L << 0)
 #define MwmFuncResize   (1L << 1)
@@ -813,6 +815,8 @@ struct _CompDisplay {
     Atom winActionCloseAtom;
     Atom winActionShadeAtom;
     Atom winActionChangeDesktopAtom;
+    Atom winActionAboveAtom;
+    Atom winActionBelowAtom;
 
     Atom wmAllowedActionsAtom;
 

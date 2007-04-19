@@ -606,6 +606,10 @@ setWindowActions (CompDisplay  *display,
 	data[i++] = display->winActionShadeAtom;
     if (actions & CompWindowActionChangeDesktopMask)
 	data[i++] = display->winActionChangeDesktopAtom;
+    if (actions & CompWindowActionAboveMask)
+	data[i++] = display->winActionAboveAtom;
+    if (actions & CompWindowActionBelowMask)
+	data[i++] = display->winActionBelowAtom;
 
     XChangeProperty (display->display, id, display->wmAllowedActionsAtom,
 		     XA_ATOM, 32, PropModeReplace,
@@ -657,6 +661,8 @@ recalcWindowActions (CompWindow *w)
     default:
 	break;
     }
+
+    actions |= (CompWindowActionAboveMask | CompWindowActionBelowMask);
 
     switch (w->wmType) {
     case CompWindowTypeNormalMask:
