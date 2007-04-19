@@ -1073,6 +1073,9 @@ updateFrameWindow (CompWindow *w)
 	width  = w->serverWidth  + w->input.left + w->input.right + bw;
 	height = w->serverHeight + w->input.top  + w->input.bottom + bw;
 
+	if (w->shaded)
+	    height = w->input.top + w->input.bottom;
+
 	if (!w->frame)
 	{
 	    XSetWindowAttributes attr;
