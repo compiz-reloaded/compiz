@@ -1689,6 +1689,7 @@ typedef struct _CompFBConfig {
     int         yInverted;
     int         mipmap;
     int         textureFormat;
+    int         textureTargets;
 } CompFBConfig;
 
 #define NOTHING_TRANS_FILTER 0
