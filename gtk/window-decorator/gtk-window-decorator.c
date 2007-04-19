@@ -3847,10 +3847,10 @@ window_state_changed (WnckWindow *win)
     if (d->decorated)
     {
 	update_window_decoration_state (win);
-	if (update_window_decoration_size (win))
-	    update_event_windows (win);
-	else
+	if (!update_window_decoration_size (win))
 	    queue_decor_draw (d);
+
+	update_event_windows (win);
     }
 }
 
