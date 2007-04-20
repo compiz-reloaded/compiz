@@ -161,6 +161,8 @@ typedef struct _CompMetadata      CompMetadata;
 #define CompWindowActionCloseMask	  (1 << 7)
 #define CompWindowActionShadeMask	  (1 << 8)
 #define CompWindowActionChangeDesktopMask (1 << 9)
+#define CompWindowActionAboveMask	  (1 << 10)
+#define CompWindowActionBelowMask	  (1 << 11)
 
 #define MwmFuncAll      (1L << 0)
 #define MwmFuncResize   (1L << 1)
@@ -813,6 +815,8 @@ struct _CompDisplay {
     Atom winActionCloseAtom;
     Atom winActionShadeAtom;
     Atom winActionChangeDesktopAtom;
+    Atom winActionAboveAtom;
+    Atom winActionBelowAtom;
 
     Atom wmAllowedActionsAtom;
 
@@ -1695,6 +1699,7 @@ typedef struct _CompFBConfig {
     int         yInverted;
     int         mipmap;
     int         textureFormat;
+    int         textureTargets;
 } CompFBConfig;
 
 #define NOTHING_TRANS_FILTER 0

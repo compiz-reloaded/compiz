@@ -2150,6 +2150,10 @@ addDisplay (char *name)
 	XInternAtom (dpy, "_NET_WM_ACTION_SHADE", 0);
     d->winActionChangeDesktopAtom =
 	XInternAtom (dpy, "_NET_WM_ACTION_CHANGE_DESKTOP", 0);
+    d->winActionAboveAtom	  =
+	XInternAtom (dpy, "_NET_WM_ACTION_ABOVE", 0);
+    d->winActionBelowAtom	  =
+	XInternAtom (dpy, "_NET_WM_ACTION_BELOW", 0);
 
     d->wmAllowedActionsAtom = XInternAtom (dpy, "_NET_WM_ALLOWED_ACTIONS", 0);
 

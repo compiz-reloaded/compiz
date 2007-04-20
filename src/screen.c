@@ -1125,6 +1125,8 @@ setSupported (CompScreen *s)
     data[i++] = d->winActionCloseAtom;
     data[i++] = d->winActionShadeAtom;
     data[i++] = d->winActionChangeDesktopAtom;
+    data[i++] = d->winActionAboveAtom;
+    data[i++] = d->winActionBelowAtom;
 
     data[i++] = d->winTypeAtom;
     data[i++] = d->winTypeDesktopAtom;
@@ -1876,10 +1878,11 @@ addScreen (CompDisplay *display,
     {
 	int j, db, stencil, depth, alpha, mipmap, rgba;
 
-	s->glxPixmapFBConfigs[i].fbConfig      = NULL;
-	s->glxPixmapFBConfigs[i].mipmap        = 0;
-	s->glxPixmapFBConfigs[i].yInverted     = 0;
-	s->glxPixmapFBConfigs[i].textureFormat = 0;
+	s->glxPixmapFBConfigs[i].fbConfig       = NULL;
+	s->glxPixmapFBConfigs[i].mipmap         = 0;
+	s->glxPixmapFBConfigs[i].yInverted      = 0;
+	s->glxPixmapFBConfigs[i].textureFormat  = 0;
+	s->glxPixmapFBConfigs[i].textureTargets = 0;
 
 	db      = MAXSHORT;
 	stencil = MAXSHORT;
@@ -1992,8 +1995,16 @@ addScreen (CompDisplay *display,
 				     &value);
 
 	    s->glxPixmapFBConfigs[i].yInverted = value;
-	    s->glxPixmapFBConfigs[i].fbConfig  = fbConfigs[j];
-	    s->glxPixmapFBConfigs[i].mipmap    = mipmap;
+
+	    (*s->getFBConfigAttrib) (dpy,
+				     fbConfigs[j],
+				     GLX_BIND_TO_TEXTURE_TARGETS_EXT,
+				     &value);
+
+	    s->glxPixmapFBConfigs[i].textureTargets = value;
+
+	    s->glxPixmapFBConfigs[i].fbConfig = fbConfigs[j];
+	    s->glxPixmapFBConfigs[i].mipmap   = mipmap;
 	}
     }
 

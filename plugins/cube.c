@@ -123,13 +123,15 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_SPEED	      10
 #define CUBE_SCREEN_OPTION_TIMESTEP	      11
 #define CUBE_SCREEN_OPTION_MIPMAP	      12
-#define CUBE_SCREEN_OPTION_NUM                13
+#define CUBE_SCREEN_OPTION_BACKGROUNDS	      13
+#define CUBE_SCREEN_OPTION_NUM                14
 
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
     PaintScreenProc	       paintScreen;
     PaintTransformedScreenProc paintTransformedScreen;
+    PaintBackgroundProc        paintBackground;
     ApplyScreenTransformProc   applyScreenTransform;
     SetScreenOptionProc	       setScreenOption;
     OutputChangeNotifyProc     outputChangeNotify;
@@ -178,6 +180,9 @@ typedef struct _CubeScreen {
     float outputYScale;
     float outputXOffset;
     float outputYOffset;
+
+    CompTexture *bg;
+    int		nBg;
 
 #ifdef USE_LIBRSVG
     cairo_t	    *cr;
@@ -851,6 +856,63 @@ cubeUpdateSkyDomeList (CompScreen *s,
     free (cost2);
 }
 
+static void
+cubeUnloadBackgrounds (CompScreen *s)
+{
+    CUBE_SCREEN (s);
+
+    if (cs->nBg)
+    {
+	int i;
+
+	for (i = 0; i < cs->nBg; i++)
+	    finiTexture (s, &cs->bg[i]);
+
+	free (cs->bg);
+
+	cs->nBg = 0;
+    }
+}
+
+static void
+cubeLoadBackground (CompScreen *s,
+		    int	       n)
+{
+    CompOptionValue *value;
+    unsigned int    width, height;
+    int		    i;
+
+    CUBE_SCREEN (s);
+
+    value = &cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value;
+
+    if (!cs->bg)
+    {
+	cs->bg = malloc (sizeof (CompTexture) * value->list.nValue);
+	if (!cs->bg)
+	    return;
+
+	for (i = 0; i < value->list.nValue; i++)
+	    initTexture (s, &cs->bg[i]);
+
+	cs->nBg = value->list.nValue;
+    }
+
+    if (cs->bg[n].target)
+    {
+	if (readImageToTexture (s, &cs->bg[n], value->list.value[n].s,
+				&width, &height))
+	{
+	    cs->bg[n].matrix.xx *= (float) width  / s->width;
+	    cs->bg[n].matrix.yy *= (float) height / s->height;
+	}
+	else
+	{
+	    cs->bg[n].target = 0;
+	}
+    }
+}
+
 static Bool
 cubeSetScreenOption (CompPlugin      *plugin,
 		     CompScreen      *screen,
@@ -973,6 +1035,14 @@ cubeSetScreenOption (CompPlugin      *plugin,
     case CUBE_SCREEN_OPTION_MIPMAP:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
+	break;
+    case CUBE_SCREEN_OPTION_BACKGROUNDS:
+	if (compSetOptionList (o, value))
+	{
+	    cubeUnloadBackgrounds (screen);
+	    damageScreen (screen);
+	    return TRUE;
+	}
     default:
 	break;
     }
@@ -1106,6 +1176,17 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->longDesc	  = N_("Generate mipmaps when possible for higher quality scaling");
     o->type	  = CompOptionTypeBool;
     o->value.b    = CUBE_MIPMAP_DEFAULT;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS];
+    o->name	         = "backgrounds";
+    o->shortDesc         = N_("Background Images");
+    o->longDesc	         = N_("Background images");
+    o->type	         = CompOptionTypeList;
+    o->value.list.type   = CompOptionTypeString;
+    o->value.list.nValue = 0;
+    o->value.list.value  = NULL;
+    o->rest.s.string     = 0;
+    o->rest.s.nString    = 0;
 }
 
 static int
@@ -1564,6 +1645,102 @@ cubePaintTransformedScreen (CompScreen		    *s,
 }
 
 static void
+cubePaintBackground (CompScreen   *s,
+		     Region	  region,
+		     unsigned int mask)
+{
+    int n;
+
+    CUBE_SCREEN (s);
+
+    n = cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value.list.nValue;
+    if (n)
+    {
+	CompTexture *bg;
+	BoxPtr      pBox = region->rects;
+	int	    nBox = region->numRects;
+	GLfloat     *d, *data;
+
+	if (!nBox)
+	    return;
+
+	n = s->x % n;
+
+	if (s->desktopWindowCount)
+	{
+	    cubeUnloadBackgrounds (s);
+	    return;
+	}
+	else
+	{
+	    if (!cs->nBg || !cs->bg[n].name)
+		cubeLoadBackground (s, n);
+	}
+
+	bg = &cs->bg[n];
+
+	data = malloc (sizeof (GLfloat) * nBox * 16);
+	if (!data)
+	    return;
+
+	d = data;
+	n = nBox;
+	while (n--)
+	{
+	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
+	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
+
+	    *d++ = pBox->x1;
+	    *d++ = pBox->y2;
+
+	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
+	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
+
+	    *d++ = pBox->x2;
+	    *d++ = pBox->y2;
+
+	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
+	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
+
+	    *d++ = pBox->x2;
+	    *d++ = pBox->y1;
+
+	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
+	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
+
+	    *d++ = pBox->x1;
+	    *d++ = pBox->y1;
+
+	    pBox++;
+	}
+
+	glTexCoordPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data);
+	glVertexPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data + 2);
+
+	if (bg->name)
+	{
+	    enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);	
+	    glDrawArrays (GL_QUADS, 0, nBox * 4);
+	    disableTexture (s, bg);
+	}
+	else
+	{
+	    glColor4us (0, 0, 0, 0);
+	    glDrawArrays (GL_QUADS, 0, nBox * 4);
+	    glColor4usv (defaultColor);
+	}
+
+	free (data);
+    }
+    else
+    {
+	UNWRAP (cs, s, paintBackground);
+	(*s->paintBackground) (s, region, mask);
+	WRAP (cs, s, paintBackground, cubePaintBackground);
+    }
+}
+
+static void
 cubeApplyScreenTransform (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
 			  int			  output,
@@ -1716,6 +1893,7 @@ cubeOutputChangeNotify (CompScreen *s)
     CUBE_SCREEN (s);
 
     cubeUpdateOutputs (s);
+    cubeUnloadBackgrounds (s);
     cubeUpdateGeometry (s, s->hsize, cs->invert);
 
     if (cs->imgNFile)
@@ -1740,7 +1918,10 @@ cubeSetGlobalScreenOption (CompScreen      *s,
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
 
     if (status && strcmp (name, "hsize") == 0)
+    {
 	cubeUpdateGeometry (s, s->hsize, cs->invert);
+	cubeUnloadBackgrounds (s);
+    }
 
     return status;
 }
@@ -1942,6 +2123,9 @@ cubeInitScreen (CompPlugin *p,
 
     cs->fullscreenOutput = TRUE;
 
+    cs->bg  = NULL;
+    cs->nBg = 0;
+
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
     cubeScreenInitOptions (cs, s->display->display);
@@ -1955,6 +2139,7 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
     WRAP (cs, s, paintScreen, cubePaintScreen);
     WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
+    WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
@@ -1989,6 +2174,7 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, donePaintScreen);
     UNWRAP (cs, s, paintScreen);
     UNWRAP (cs, s, paintTransformedScreen);
+    UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, applyScreenTransform);
     UNWRAP (cs, s, setScreenOption);
     UNWRAP (cs, s, outputChangeNotify);
@@ -1997,6 +2183,8 @@ cubeFiniScreen (CompPlugin *p,
     finiTexture (s, &cs->sky);
 
     cubeFiniSvg (s);
+
+    cubeUnloadBackgrounds (s);
 
     free (cs);
 }
