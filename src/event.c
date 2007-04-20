@@ -1873,9 +1873,9 @@ handleEvent (CompDisplay *d,
 		    if ((*w->screen->placeWindow) (w, w->serverX, w->serverY,
 						   &newX, &newY))
 		    {
-			moveWindow (w, 
-				    newX - w->attrib.x, 
-				    newY - w->attrib.y, 
+			moveWindow (w,
+				    newX - w->attrib.x,
+				    newY - w->attrib.y,
 				    FALSE, TRUE);
 			syncWindowPosition (w);
 		    }
