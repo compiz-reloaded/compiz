@@ -2688,6 +2688,16 @@ focusWindow (CompWindow *w)
     return TRUE;
 }
 
+Bool
+placeWindow (CompWindow *w,
+	     int        x,
+	     int        y,
+	     int        *newX,
+	     int        *newY)
+{
+    return FALSE;
+}
+
 void
 windowResizeNotify (CompWindow *w,
 		    int        dx,

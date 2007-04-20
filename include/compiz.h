@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070417
+#define ABIVERSION 20070420
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1621,6 +1621,12 @@ typedef unsigned int (*GetAllowedActionsForWindowProc) (CompWindow *w);
 
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
+typedef Bool (*PlaceWindowProc) (CompWindow *window,
+				 int        x,
+				 int        y,
+				 int        *newX,
+				 int        *newY);
+
 typedef void (*WindowResizeNotifyProc) (CompWindow *window,
 					int        dx,
 					int        dy,
@@ -1939,6 +1945,7 @@ struct _CompScreen {
     GetOutputExtentsForWindowProc  getOutputExtentsForWindow;
     GetAllowedActionsForWindowProc getAllowedActionsForWindow;
     FocusWindowProc		   focusWindow;
+    PlaceWindowProc                placeWindow;
 
     PaintCursorProc      paintCursor;
     DamageCursorRectProc damageCursorRect;
@@ -2601,6 +2608,13 @@ damageTransformedWindowRect (CompWindow *w,
 
 Bool
 focusWindow (CompWindow *w);
+
+Bool
+placeWindow (CompWindow *w,
+	     int        x,
+	     int        y,
+	     int        *newX,
+	     int        *newY);
 
 void
 windowResizeNotify (CompWindow *w,

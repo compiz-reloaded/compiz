@@ -1563,6 +1563,7 @@ addScreen (CompDisplay *display,
     s->getOutputExtentsForWindow  = getOutputExtentsForWindow;
     s->getAllowedActionsForWindow = getAllowedActionsForWindow;
     s->focusWindow		  = focusWindow;
+    s->placeWindow                = placeWindow;
 
     s->paintCursor      = paintCursor;
     s->damageCursorRect	= damageCursorRect;
