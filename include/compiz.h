@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070417
+#define ABIVERSION 20070420
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -161,6 +161,8 @@ typedef struct _CompMetadata      CompMetadata;
 #define CompWindowActionCloseMask	  (1 << 7)
 #define CompWindowActionShadeMask	  (1 << 8)
 #define CompWindowActionChangeDesktopMask (1 << 9)
+#define CompWindowActionAboveMask	  (1 << 10)
+#define CompWindowActionBelowMask	  (1 << 11)
 
 #define MwmFuncAll      (1L << 0)
 #define MwmFuncResize   (1L << 1)
@@ -813,6 +815,8 @@ struct _CompDisplay {
     Atom winActionCloseAtom;
     Atom winActionShadeAtom;
     Atom winActionChangeDesktopAtom;
+    Atom winActionAboveAtom;
+    Atom winActionBelowAtom;
 
     Atom wmAllowedActionsAtom;
 
@@ -1621,6 +1625,12 @@ typedef unsigned int (*GetAllowedActionsForWindowProc) (CompWindow *w);
 
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
+typedef Bool (*PlaceWindowProc) (CompWindow *window,
+				 int        x,
+				 int        y,
+				 int        *newX,
+				 int        *newY);
+
 typedef void (*WindowResizeNotifyProc) (CompWindow *window,
 					int        dx,
 					int        dy,
@@ -1689,6 +1699,7 @@ typedef struct _CompFBConfig {
     int         yInverted;
     int         mipmap;
     int         textureFormat;
+    int         textureTargets;
 } CompFBConfig;
 
 #define NOTHING_TRANS_FILTER 0
@@ -1939,6 +1950,7 @@ struct _CompScreen {
     GetOutputExtentsForWindowProc  getOutputExtentsForWindow;
     GetAllowedActionsForWindowProc getAllowedActionsForWindow;
     FocusWindowProc		   focusWindow;
+    PlaceWindowProc                placeWindow;
 
     PaintCursorProc      paintCursor;
     DamageCursorRectProc damageCursorRect;
@@ -2601,6 +2613,13 @@ damageTransformedWindowRect (CompWindow *w,
 
 Bool
 focusWindow (CompWindow *w);
+
+Bool
+placeWindow (CompWindow *w,
+	     int        x,
+	     int        y,
+	     int        *newX,
+	     int        *newY);
 
 void
 windowResizeNotify (CompWindow *w,

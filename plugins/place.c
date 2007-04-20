@@ -58,7 +58,6 @@ static int displayPrivateIndex;
 
 typedef struct _PlaceDisplay {
     int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
 } PlaceDisplay;
 
 #define PLACE_SCREEN_OPTION_WORKAROUND        0
@@ -74,7 +73,7 @@ typedef struct _PlaceDisplay {
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
 
-    DamageWindowRectProc damageWindowRect;
+    PlaceWindowProc placeWindow;
 
     PlaceMode placeMode;
 } PlaceScreen;
@@ -1120,11 +1119,11 @@ placeSmart (CompWindow *window,
 }
 
 static void
-placeWindow (CompWindow *window,
-	     int        x,
-	     int        y,
-	     int        *new_x,
-	     int        *new_y)
+placeWin (CompWindow *window,
+     	  int        x,
+	  int        y,
+	  int        *new_x,
+	  int        *new_y)
 {
     CompWindow *wi;
     GList      *windows;
@@ -1462,44 +1461,32 @@ done_no_constraints:
 }
 
 static Bool
-placeDamageWindowRect (CompWindow *w,
-		       Bool	  initial,
-		       BoxPtr     rect)
+placePlaceWindow (CompWindow *w,
+		  int        x,
+		  int        y,
+		  int        *newX,
+		  int        *newY)
 {
-    Bool status;
-
     PLACE_SCREEN (w->screen);
 
-    UNWRAP (ps, w->screen, damageWindowRect);
-    status = (*w->screen->damageWindowRect) (w, initial, rect);
-    WRAP (ps, w->screen, damageWindowRect, placeDamageWindowRect);
+    int viewportX, viewportY;
 
-    if (initial && !w->attrib.override_redirect && !w->placed)
+    placeWin (w, x, y, newX, newY);
+
+    if (placeMatchViewport (w, &viewportX, &viewportY))
     {
-	int viewportX, viewportY;
-	int newX, newY;
+	viewportX = MAX (MIN (viewportX, w->screen->hsize), 0);
+	viewportY = MAX (MIN (viewportY, w->screen->vsize), 0);
 
-	placeWindow (w, w->serverX, w->serverY, &newX, &newY);
-
-	if (placeMatchViewport (w, &viewportX, &viewportY))
-	{
-	    viewportX = MAX (MIN (viewportX, w->screen->hsize), 0);
-	    viewportY = MAX (MIN (viewportY, w->screen->vsize), 0);
-
-	    newX += (viewportX - w->screen->x) * w->screen->width;
-	    newY += (viewportY - w->screen->y) * w->screen->height;
-	}
-
-	w->placed = TRUE;
-
-	if (newX != w->serverX || newY != w->serverY)
-	{
-	    moveWindow (w, newX - w->attrib.x, newY - w->attrib.y, FALSE, TRUE);
-	    syncWindowPosition (w);
-	}
+	*newX += (viewportX - w->screen->x) * w->screen->width;
+	*newY += (viewportY - w->screen->y) * w->screen->height;
     }
 
-    return status;
+    UNWRAP (ps, w->screen, placeWindow);
+    (*w->screen->placeWindow) (w, x, y, newX, newY);
+    WRAP (ps, w->screen, placeWindow, placePlaceWindow);
+
+    return TRUE;
 }
 
 static Bool
@@ -1549,9 +1536,9 @@ placeInitScreen (CompPlugin *p,
 
     placeScreenInitOptions (ps);
 
-    WRAP (ps, s, damageWindowRect, placeDamageWindowRect);
-
     s->privates[pd->screenPrivateIndex].ptr = ps;
+
+    WRAP (ps, s, placeWindow, placePlaceWindow);
 
     placeUpdateMode (s);
 
@@ -1564,7 +1551,7 @@ placeFiniScreen (CompPlugin *p,
 {
     PLACE_SCREEN (s);
 
-    UNWRAP (ps, s, damageWindowRect);
+    UNWRAP (ps, s, placeWindow);
 
     free (ps);
 }

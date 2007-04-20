@@ -1859,12 +1859,28 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
+		int newX, newY;
+
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
 
 		w->initialTimestampSet = FALSE;
 
 		applyStartupProperties (w->screen, w);
+
+		if (!w->placed)
+		{
+		    if ((*w->screen->placeWindow) (w, w->serverX, w->serverY,
+						   &newX, &newY))
+		    {
+			moveWindow (w, 
+				    newX - w->attrib.x, 
+				    newY - w->attrib.y, 
+				    FALSE, TRUE);
+			syncWindowPosition (w);
+		    }
+		    w->placed   = TRUE;
+		}
 
 		w->pendingMaps++;
 

@@ -233,13 +233,9 @@ bindPixmapToTexture (CompScreen  *screen,
 		     int	 height,
 		     int	 depth)
 {
-    unsigned int target;
+    unsigned int target = 0;
     CompFBConfig *config = &screen->glxPixmapFBConfigs[depth];
-    int          attribs[] = {
-	GLX_TEXTURE_FORMAT_EXT, config->textureFormat,
-	GLX_MIPMAP_TEXTURE_EXT, config->mipmap,
-	None
-    };
+    int          attribs[7], i = 0;
 
     if (!config->fbConfig)
     {
@@ -248,6 +244,28 @@ bindPixmapToTexture (CompScreen  *screen,
 
 	return FALSE;
     }
+
+    attribs[i++] = GLX_TEXTURE_FORMAT_EXT;
+    attribs[i++] = config->textureFormat;
+    attribs[i++] = GLX_MIPMAP_TEXTURE_EXT;
+    attribs[i++] = config->mipmap;
+
+    /* If only one two-dimensional texture target is supported,
+       then use that target and avoid a possible round trip in
+       glXQueryDrawable. Allow the server to choose texture target
+       when it supports more than one for this fbconfig. */
+    if (!(config->textureTargets & GLX_TEXTURE_2D_BIT_EXT))
+	target = GLX_TEXTURE_RECTANGLE_EXT;
+    else if (!(config->textureTargets & GLX_TEXTURE_RECTANGLE_BIT_EXT))
+	target = GLX_TEXTURE_2D_EXT;
+
+    if (target)
+    {
+	attribs[i++] = GLX_TEXTURE_TARGET_EXT;
+	attribs[i++] = target;
+    }
+
+    attribs[i++] = None;
 
     makeScreenCurrent (screen);
     texture->pixmap = (*screen->createPixmap) (screen->display->display,
@@ -262,10 +280,12 @@ bindPixmapToTexture (CompScreen  *screen,
 
     texture->mipmap = config->mipmap;
 
-    (*screen->queryDrawable) (screen->display->display,
-			      texture->pixmap,
-			      GLX_TEXTURE_TARGET_EXT,
-			      &target);
+    if (!target)
+	(*screen->queryDrawable) (screen->display->display,
+				  texture->pixmap,
+				  GLX_TEXTURE_TARGET_EXT,
+				  &target);
+
     switch (target) {
     case GLX_TEXTURE_2D_EXT:
 	texture->target = GL_TEXTURE_2D;
