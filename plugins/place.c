@@ -1467,24 +1467,29 @@ placePlaceWindow (CompWindow *w,
 		  int        *newX,
 		  int        *newY)
 {
-    int viewportX, viewportY;
+    Bool status;
 
     PLACE_SCREEN (w->screen);
 
-    placeWin (w, x, y, newX, newY);
-
-    if (placeMatchViewport (w, &viewportX, &viewportY))
-    {
-	viewportX = MAX (MIN (viewportX, w->screen->hsize), 0);
-	viewportY = MAX (MIN (viewportY, w->screen->vsize), 0);
-
-	*newX += (viewportX - w->screen->x) * w->screen->width;
-	*newY += (viewportY - w->screen->y) * w->screen->height;
-    }
-
     UNWRAP (ps, w->screen, placeWindow);
-    (*w->screen->placeWindow) (w, x, y, newX, newY);
+    status = (*w->screen->placeWindow) (w, x, y, newX, newY);
     WRAP (ps, w->screen, placeWindow, placePlaceWindow);
+
+    if (!status)
+    {
+	int viewportX, viewportY;
+
+	placeWin (w, x, y, newX, newY);
+
+	if (placeMatchViewport (w, &viewportX, &viewportY))
+	{
+	    viewportX = MAX (MIN (viewportX, w->screen->hsize), 0);
+	    viewportY = MAX (MIN (viewportY, w->screen->vsize), 0);
+
+	    *newX += (viewportX - w->screen->x) * w->screen->width;
+	    *newY += (viewportY - w->screen->y) * w->screen->height;
+	}
+    }
 
     return TRUE;
 }
