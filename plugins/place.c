@@ -1467,9 +1467,9 @@ placePlaceWindow (CompWindow *w,
 		  int        *newX,
 		  int        *newY)
 {
-    PLACE_SCREEN (w->screen);
-
     int viewportX, viewportY;
+
+    PLACE_SCREEN (w->screen);
 
     placeWin (w, x, y, newX, newY);
 
