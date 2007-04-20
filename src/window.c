@@ -3847,7 +3847,7 @@ updateWindowAttributes (CompWindow             *w,
 	Bool aboveFs;
 
 	aboveFs = (stackingMode == CompStackingUpdateModeAboveFullscreen);
-        mask |= addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+	mask |= addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
     }
 
     mask |= addWindowSizeChanges (w, &xwc,
