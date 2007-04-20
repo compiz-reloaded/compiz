@@ -2000,7 +2000,7 @@ dbusGetPathDecomposed (char *data,
 	}
     }
 
-    retval = malloc (sizeof (char*) * nComponents + 1);
+    retval = malloc (sizeof (char*) * (nComponents + 1));
 
     if (nComponents == 0)
     {
