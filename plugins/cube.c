@@ -1719,7 +1719,7 @@ cubePaintBackground (CompScreen   *s,
 
 	if (bg->name)
 	{
-	    enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);	
+	    enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);
 	    glDrawArrays (GL_QUADS, 0, nBox * 4);
 	    disableTexture (s, bg);
 	}
