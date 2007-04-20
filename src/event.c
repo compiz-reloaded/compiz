@@ -1859,8 +1859,6 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
-		int newX, newY;
-
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
 
@@ -1870,6 +1868,8 @@ handleEvent (CompDisplay *d,
 
 		if (!w->placed)
 		{
+		    int newX, newY;
+
 		    if ((*w->screen->placeWindow) (w, w->serverX, w->serverY,
 						   &newX, &newY))
 		    {
@@ -1879,6 +1879,7 @@ handleEvent (CompDisplay *d,
 				    FALSE, TRUE);
 			syncWindowPosition (w);
 		    }
+
 		    w->placed   = TRUE;
 		}
 
