@@ -129,6 +129,7 @@ typedef struct _SwitchScreen {
     DonePaintScreenProc    donePaintScreen;
     PaintScreenProc	   paintScreen;
     PaintWindowProc        paintWindow;
+    PaintBackgroundProc    paintBackground;
     DamageWindowRectProc   damageWindowRect;
 
     CompOption opt[SWITCH_SCREEN_OPTION_NUM];
@@ -1936,6 +1937,21 @@ switchPaintWindow (CompWindow		   *w,
     return status;
 }
 
+static void
+switchPaintBackground (CompScreen   *s,
+		       Region	    region,
+		       unsigned int mask)
+{
+    SWITCH_SCREEN (s);
+
+    if (!(ss->zoomMask & NORMAL_WINDOW_MASK))
+	return;
+
+    UNWRAP (ss, s, paintBackground);
+    (*s->paintBackground) (s, region, mask);
+    WRAP (ss, s, paintBackground, switchPaintBackground);
+}
+
 static Bool
 switchDamageWindowRect (CompWindow *w,
 			Bool	   initial,
@@ -2229,6 +2245,7 @@ switchInitScreen (CompPlugin *p,
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
     WRAP (ss, s, paintScreen, switchPaintScreen);
     WRAP (ss, s, paintWindow, switchPaintWindow);
+    WRAP (ss, s, paintBackground, switchPaintBackground);
     WRAP (ss, s, damageWindowRect, switchDamageWindowRect);
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
@@ -2260,6 +2277,7 @@ switchFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, donePaintScreen);
     UNWRAP (ss, s, paintScreen);
     UNWRAP (ss, s, paintWindow);
+    UNWRAP (ss, s, paintBackground);
     UNWRAP (ss, s, damageWindowRect);
 
     if (ss->windowsSize)

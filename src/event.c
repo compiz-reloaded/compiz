@@ -74,9 +74,6 @@ handleWindowDamageRect (CompWindow *w,
 	damageScreenRegion (w->screen, &region);
     }
 
-    if (!w->attrib.override_redirect)
-	w->placed = TRUE;
-
     if (initial)
 	damageWindowOutputExtents (w);
 }
@@ -1859,8 +1856,6 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
-		int newX, newY;
-
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
 
@@ -1870,15 +1865,18 @@ handleEvent (CompDisplay *d,
 
 		if (!w->placed)
 		{
+		    int newX, newY;
+
 		    if ((*w->screen->placeWindow) (w, w->serverX, w->serverY,
 						   &newX, &newY))
 		    {
-			moveWindow (w, 
-				    newX - w->attrib.x, 
-				    newY - w->attrib.y, 
+			moveWindow (w,
+				    newX - w->attrib.x,
+				    newY - w->attrib.y,
 				    FALSE, TRUE);
 			syncWindowPosition (w);
 		    }
+
 		    w->placed   = TRUE;
 		}
 

@@ -29,6 +29,8 @@
 
 #include <compiz.h>
 
+#define DEG2RAD (M_PI / 180.0f)
+
 ScreenPaintAttrib defaultScreenPaintAttrib = {
     0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -DEFAULT_Z_CAMERA
 };
@@ -58,9 +60,9 @@ applyScreenTransform (CompScreen	      *screen,
 		  sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
     matrixRotate (transform,
 		  sAttrib->vRotate,
-		  1.0f - sAttrib->xRotate / 90.0f,
+		  cos(sAttrib->xRotate * DEG2RAD),
 		  0.0f,
-		  sAttrib->xRotate / 90.0f);
+		  sin(sAttrib->xRotate * DEG2RAD));
     matrixRotate (transform,
 		  sAttrib->yRotate, 0.0f, 1.0f, 0.0f);
 }
