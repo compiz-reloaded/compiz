@@ -944,7 +944,7 @@ compAddTimeout (int	     time,
 		CallBackProc callBack,
 		void	     *closure);
 
-void
+void *
 compRemoveTimeout (CompTimeoutHandle handle);
 
 CompWatchFdHandle

@@ -1082,10 +1082,11 @@ compAddTimeout (int	     time,
     return timeout->handle;
 }
 
-void
+void *
 compRemoveTimeout (CompTimeoutHandle handle)
 {
     CompTimeout *p = 0, *t;
+    void        *closure = NULL;
 
     for (t = timeouts; t; t = t->next)
     {
@@ -1102,8 +1103,12 @@ compRemoveTimeout (CompTimeoutHandle handle)
 	else
 	    timeouts = t->next;
 
+	closure = t->closure;
+
 	free (t);
     }
+
+    return closure;
 }
 
 CompWatchFdHandle
