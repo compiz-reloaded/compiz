@@ -1142,6 +1142,17 @@ compFiniScreenOptions (CompScreen *s,
 }
 
 Bool
+compSetScreenOption (CompScreen      *s,
+		     CompOption      *o,
+		     CompOptionValue *value)
+{
+    if (compSetOption (o, value))
+	return TRUE;
+
+    return FALSE;
+}
+
+Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *d,
 				   CompMetadata *m,
 				   CompOption	*o,
@@ -1220,6 +1231,33 @@ compFiniDisplayOptions (CompDisplay *d,
 
     for (i = 0; i < n; i++)
 	compFiniDisplayOption (d, &opt[i]);
+}
+
+Bool
+compSetDisplayOption (CompDisplay     *d,
+		      CompOption      *o,
+		      CompOptionValue *value)
+{
+    if (o->type == CompOptionTypeAction)
+    {
+	if (o->value.action.state & CompActionStateAutoGrab)
+	{
+	    if (setDisplayAction (d, o, value))
+		return TRUE;
+	}
+	else
+	{
+	    if (compSetActionOption (o, value))
+		return TRUE;
+	}
+    }
+    else
+    {
+	if (compSetOption (o, value))
+	    return TRUE;
+    }
+
+    return FALSE;
 }
 
 char *

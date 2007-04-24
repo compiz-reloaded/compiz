@@ -3169,6 +3169,11 @@ compFiniScreenOptions (CompScreen *screen,
 		       int	  n);
 
 Bool
+compSetScreenOption (CompScreen      *screen,
+		     CompOption      *option,
+		     CompOptionValue *value);
+
+Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *display,
 				   CompMetadata *metadata,
 				   CompOption   *option,
@@ -3189,6 +3194,11 @@ void
 compFiniDisplayOptions (CompDisplay *display,
 			CompOption  *option,
 			int	    n);
+
+Bool
+compSetDisplayOption (CompDisplay     *display,
+		      CompOption      *option,
+		      CompOptionValue *value);
 
 char *
 compGetStringFromMetadataPath (CompMetadata *metadata,
