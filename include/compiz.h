@@ -305,7 +305,8 @@ typedef enum {
     CompActionStateInitEdgeDnd = 1 <<  7,
     CompActionStateTermEdgeDnd = 1 <<  8,
     CompActionStateCommit      = 1 <<  9,
-    CompActionStateCancel      = 1 << 10
+    CompActionStateCancel      = 1 << 10,
+    CompActionStateAutoGrab    = 1 << 11
 } CompActionState;
 
 typedef struct _CompKeyBinding {

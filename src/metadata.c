@@ -664,6 +664,14 @@ initActionValue (CompDisplay	 *d,
 	    }
 	}
     }
+
+    if (state & CompActionStateAutoGrab)
+    {
+	CompScreen *s;
+
+	for (s = d->screens; s; s = s->next)
+	    addScreenAction (s, &v->action);
+    }
 }
 
 static void
@@ -903,7 +911,7 @@ initActionState (CompMetadata    *metadata,
     int	      i;
     CompXPath xPath;
 
-    *state = 0;
+    *state = CompActionStateAutoGrab;
 
     if (!initXPathFromMetadataPathElement (&xPath, metadata, BAD_CAST path,
 					   BAD_CAST "allowed"))
@@ -1067,10 +1075,31 @@ compInitScreenOptionFromMetadata (CompScreen   *s,
     return initOptionFromMetadataPath (s->display, m, o, BAD_CAST str);
 }
 
+static void
+finiScreenOptionValue (CompScreen      *s,
+		       CompOptionValue *v,
+		       CompOptionType  type)
+{
+    int	i;
+
+    switch (type) {
+    case CompOptionTypeAction:
+	if (v->action.state & CompActionStateAutoGrab)
+	    removeScreenAction (s, &v->action);
+	break;
+    case CompOptionTypeList:
+	for (i = 0; i < v->list.nValue; i++)
+	    finiScreenOptionValue (s, &v->list.value[i], v->list.type);
+    default:
+	break;
+    }
+}
+
 void
 compFiniScreenOption (CompScreen *s,
 		      CompOption *o)
 {
+    finiScreenOptionValue (s, &o->value, o->type);
     compFiniOption (o);
 }
 
@@ -1125,10 +1154,33 @@ compInitDisplayOptionFromMetadata (CompDisplay  *d,
     return initOptionFromMetadataPath (d, m, o, BAD_CAST str);
 }
 
+static void
+finiDisplayOptionValue (CompDisplay	*d,
+			CompOptionValue *v,
+			CompOptionType  type)
+{
+    CompScreen *s;
+    int	       i;
+
+    switch (type) {
+    case CompOptionTypeAction:
+	if (v->action.state & CompActionStateAutoGrab)
+	    for (s = d->screens; s; s = s->next)
+		removeScreenAction (s, &v->action);
+	break;
+    case CompOptionTypeList:
+	for (i = 0; i < v->list.nValue; i++)
+	    finiDisplayOptionValue (d, &v->list.value[i], v->list.type);
+    default:
+	break;
+    }
+}
+
 void
 compFiniDisplayOption (CompDisplay *d,
 		       CompOption  *o)
 {
+    finiDisplayOptionValue (d, &o->value, o->type);
     compFiniOption (o);
 }
 

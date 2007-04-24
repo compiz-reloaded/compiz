@@ -832,10 +832,6 @@ annoInitScreen (CompPlugin *p,
 
     initTexture (s, &as->texture);
 
-    addScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
-    addScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
-    addScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
-
     WRAP (as, s, paintScreen, annoPaintScreen);
 
     s->privates[ad->screenPrivateIndex].ptr = as;
@@ -860,11 +856,6 @@ annoFiniScreen (CompPlugin *p,
 
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
-
-    removeScreenAction (s,
-			&ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
-    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
-    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
 
     UNWRAP (as, s, paintScreen);
 
