@@ -831,7 +831,6 @@ annoFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ANNO_SCREEN (s);
-    ANNO_DISPLAY (s->display);
 
     if (as->cairo)
 	cairo_destroy (as->cairo);
