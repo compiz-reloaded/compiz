@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070420
+#define ABIVERSION 20070424
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2102,6 +2102,7 @@ moveScreenViewport (CompScreen *s,
 void
 moveWindowToViewportPosition (CompWindow *w,
 			      int	 x,
+			      int        y,
 			      Bool       sync);
 
 CompGroup *
