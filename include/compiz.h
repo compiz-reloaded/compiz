@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070424
+#define ABIVERSION 20070425
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1886,8 +1886,6 @@ struct _CompScreen {
 
     Bool lighting;
     Bool slowAnimations;
-
-    int opacityStep;
 
     XRectangle workArea;
 

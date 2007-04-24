@@ -385,7 +385,8 @@ static void
 changeWindowOpacity (CompWindow *w,
 		     int	direction)
 {
-    int step, opacity;
+    CompScreen *s = w->screen;
+    int	       step, opacity;
 
     if (w->attrib.override_redirect)
 	return;
@@ -393,7 +394,7 @@ changeWindowOpacity (CompWindow *w,
     if (w->type & CompWindowTypeDesktopMask)
 	return;
 
-    step = (0xff * w->screen->opacityStep) / 100;
+    step = (0xff * s->opt[COMP_SCREEN_OPTION_OPACITY_STEP].value.i) / 100;
 
     w->opacityFactor = w->opacityFactor + step * direction;
     if (w->opacityFactor > 0xff)

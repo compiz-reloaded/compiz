@@ -525,13 +525,6 @@ setScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case COMP_SCREEN_OPTION_OPACITY_STEP:
-	if (compSetIntOption (o, value))
-	{
-	    screen->opacityStep = o->value.i;
-	    return TRUE;
-	}
-	break;
     case COMP_SCREEN_OPTION_DEFAULT_ICON:
 	if (compSetStringOption (o, value))
 	    return updateDefaultIcon (screen);
@@ -1511,8 +1504,6 @@ addScreen (CompDisplay *display,
 
     s->windows = 0;
     s->reverseWindows = 0;
-
-    s->opacityStep = OPACITY_STEP_DEFAULT;
 
     s->nextRedraw  = 0;
     s->frameStatus = 0;
