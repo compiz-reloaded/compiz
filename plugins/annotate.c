@@ -727,11 +727,10 @@ annoSetDisplayOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     ANNO_DISPLAY (display);
 
-    o = compFindOption (ad->opt, NUM_OPTIONS (ad), name, &index);
+    o = compFindOption (ad->opt, NUM_OPTIONS (ad), name, NULL);
     if (!o)
 	return FALSE;
 
