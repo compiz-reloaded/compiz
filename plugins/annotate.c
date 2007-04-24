@@ -735,20 +735,7 @@ annoSetDisplayOption (CompPlugin      *plugin,
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case ANNO_DISPLAY_OPTION_INITIATE:
-    case ANNO_DISPLAY_OPTION_ERASE:
-    case ANNO_DISPLAY_OPTION_CLEAR:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
-    default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
 static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
