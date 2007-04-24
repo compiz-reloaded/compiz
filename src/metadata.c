@@ -669,6 +669,7 @@ initActionValue (CompDisplay	 *d,
 static void
 initMatchValue (CompDisplay     *d,
 		CompOptionValue *v,
+		Bool		helper,
 		xmlDocPtr       doc,
 		xmlNodePtr      node)
 {
@@ -685,7 +686,9 @@ initMatchValue (CompDisplay     *d,
 	matchAddFromString (&v->match, (char *) value);
 	xmlFree (value);
     }
-    matchUpdate (d, &v->match);
+
+    if (!helper)
+	matchUpdate (d, &v->match);
 }
 
 static void
@@ -693,6 +696,7 @@ initListValue (CompDisplay	     *d,
 	       CompOptionValue	     *v,
 	       CompOptionRestriction *r,
 	       CompActionState	     state,
+	       Bool		     helper,
 	       xmlDocPtr	     doc,
 	       xmlNodePtr	     node)
 {
@@ -735,7 +739,7 @@ initListValue (CompDisplay	     *d,
 		initActionValue (d, &value[v->list.nValue], state, doc, child);
 		break;
 	    case CompOptionTypeMatch:
-		initMatchValue (d, &value[v->list.nValue], doc, child);
+		initMatchValue (d, &value[v->list.nValue], helper, doc, child);
 	    default:
 		break;
 	    }
@@ -756,6 +760,27 @@ stringFromMetadataPathElement (CompMetadata *metadata,
     snprintf (str, 1024, "%s/%s", path, element);
 
     return compGetStringFromMetadataPath (metadata, str);
+}
+
+static Bool
+boolFromMetadataPathElement (CompMetadata *metadata,
+			     const char   *path,
+			     const char   *element,
+			     Bool	  defaultValue)
+{
+    Bool value = FALSE;
+    char *str;
+
+    str = stringFromMetadataPathElement (metadata, path, element);
+    if (!str)
+	return defaultValue;
+
+    if (strcasecmp (str, "true") == 0)
+	value = TRUE;
+
+    free (str);
+
+    return value;
 }
 
 static void
@@ -909,6 +934,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
     xmlChar	    *name, *type;
     char	    *value;
     CompActionState state = 0;
+    Bool	    helper = FALSE;
 
     if (!initXPathFromMetadataPath (&xPath, metadata, path))
 	return FALSE;
@@ -979,7 +1005,9 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initActionValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeMatch:
-	initMatchValue (d, &option->value, defaultDoc, defaultNode);
+	helper = boolFromMetadataPathElement (metadata, (char *) path, "helper",
+					      FALSE);
+	initMatchValue (d, &option->value, helper, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeList:
 	value = stringFromMetadataPathElement (metadata, (char *) path, "type");
@@ -1005,11 +1033,15 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	    break;
 	case CompOptionTypeAction:
 	    initActionState (metadata, &state, (char *) path);
+	    break;
+	case CompOptionTypeMatch:
+	    helper = boolFromMetadataPathElement (metadata, (char *) path,
+						  "helper", FALSE);
 	default:
 	    break;
 	}
 
-	initListValue (d, &option->value, &option->rest, state,
+	initListValue (d, &option->value, &option->rest, state, helper,
 		       defaultDoc, defaultNode);
 	break;
     }
