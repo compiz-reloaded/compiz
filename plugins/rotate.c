@@ -541,6 +541,7 @@ rotatePreparePaintScreen (CompScreen *s,
 
 		moveWindowToViewportPosition (w,
 					      rs->moveWindowX - xrot * s->width,
+					      w->attrib.y,
 					      FALSE);
 	    }
 	}

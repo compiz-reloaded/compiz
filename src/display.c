@@ -385,7 +385,8 @@ static void
 changeWindowOpacity (CompWindow *w,
 		     int	direction)
 {
-    int step, opacity;
+    CompScreen *s = w->screen;
+    int	       step, opacity;
 
     if (w->attrib.override_redirect)
 	return;
@@ -393,7 +394,7 @@ changeWindowOpacity (CompWindow *w,
     if (w->type & CompWindowTypeDesktopMask)
 	return;
 
-    step = (0xff * w->screen->opacityStep) / 100;
+    step = (0xff * s->opt[COMP_SCREEN_OPTION_OPACITY_STEP].value.i) / 100;
 
     w->opacityFactor = w->opacityFactor + step * direction;
     if (w->opacityFactor > 0xff)
@@ -867,43 +868,6 @@ setDisplayOption (CompDisplay     *display,
 	    return TRUE;
 	}
 	break;
-    case COMP_DISPLAY_OPTION_CLOSE_WINDOW:
-    case COMP_DISPLAY_OPTION_MAIN_MENU:
-    case COMP_DISPLAY_OPTION_RUN_DIALOG:
-    case COMP_DISPLAY_OPTION_MINIMIZE_WINDOW:
-    case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW:
-    case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ:
-    case COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT:
-    case COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW:
-    case COMP_DISPLAY_OPTION_SHOW_DESKTOP:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND0:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND1:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND2:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND3:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND4:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND5:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND6:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND7:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND8:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND9:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND10:
-    case COMP_DISPLAY_OPTION_RUN_COMMAND11:
-    case COMP_DISPLAY_OPTION_SLOW_ANIMATIONS:
-    case COMP_DISPLAY_OPTION_RAISE_WINDOW:
-    case COMP_DISPLAY_OPTION_LOWER_WINDOW:
-    case COMP_DISPLAY_OPTION_OPACITY_INCREASE:
-    case COMP_DISPLAY_OPTION_OPACITY_DECREASE:
-    case COMP_DISPLAY_OPTION_RUN_SCREENSHOT:
-    case COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT:
-    case COMP_DISPLAY_OPTION_RUN_TERMINAL:
-    case COMP_DISPLAY_OPTION_WINDOW_MENU:
-    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED:
-    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ:
-    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT:
-    case COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
     case COMP_DISPLAY_OPTION_AUDIBLE_BELL:
 	if (compSetBoolOption (o, value))
 	{
@@ -912,7 +876,7 @@ setDisplayOption (CompDisplay     *display,
 	}
 	break;
     default:
-	if (compSetOption (o, value))
+	if (compSetDisplayOption (display, o, value))
 	    return TRUE;
 	break;
     }
@@ -1900,55 +1864,21 @@ compCheckForError (Display *dpy)
     return e;
 }
 
+/* add actions that should be automatically added as no screens
+   existed when they were initialized. */
 static void
-addScreenActions (CompDisplay *d, CompScreen *s)
+addScreenActions (CompScreen *s)
 {
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_CLOSE_WINDOW].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_MAIN_MENU].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_DIALOG].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_MINIMIZE_WINDOW].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_HORZ].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_MAXIMIZE_WINDOW_VERT].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_UNMAXIMIZE_WINDOW].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_SHOW_DESKTOP].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND0].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND1].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND2].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND3].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND4].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND5].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND6].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND7].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND8].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND9].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND10].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_COMMAND11].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_SLOW_ANIMATIONS].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RAISE_WINDOW].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_LOWER_WINDOW].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_OPACITY_INCREASE].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_OPACITY_DECREASE].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_SCREENSHOT].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_RUN_TERMINAL].value.action);
-    addScreenAction (s, &d->opt[COMP_DISPLAY_OPTION_WINDOW_MENU].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT].value.action);
-    addScreenAction (s,
-		     &d->opt[COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED].value.action);
+    int i;
+
+    for (i = 0; i < COMP_DISPLAY_OPTION_NUM; i++)
+    {
+	if (s->display->opt[i].type == CompOptionTypeAction)
+	{
+	    if (s->display->opt[i].value.action.state & CompActionStateAutoGrab)
+		addScreenAction (s, &s->display->opt[i].value.action);
+	}
+    }
 }
 
 void
@@ -1964,7 +1894,7 @@ addScreenToDisplay (CompDisplay *display,
     else
 	display->screens = s;
 
-    addScreenActions (display, s);
+    addScreenActions (s);
 }
 
 Bool
@@ -1989,6 +1919,8 @@ addDisplay (char *name)
     }
     else
 	d->privates = 0;
+
+    d->screens = NULL;
 
     d->screenPrivateIndices = 0;
     d->screenPrivateLen     = 0;

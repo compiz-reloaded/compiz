@@ -727,28 +727,14 @@ annoSetDisplayOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     ANNO_DISPLAY (display);
 
-    o = compFindOption (ad->opt, NUM_OPTIONS (ad), name, &index);
+    o = compFindOption (ad->opt, NUM_OPTIONS (ad), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case ANNO_DISPLAY_OPTION_INITIATE:
-    case ANNO_DISPLAY_OPTION_ERASE:
-    case ANNO_DISPLAY_OPTION_CLEAR:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
-    default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
 static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
@@ -832,10 +818,6 @@ annoInitScreen (CompPlugin *p,
 
     initTexture (s, &as->texture);
 
-    addScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
-    addScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
-    addScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
-
     WRAP (as, s, paintScreen, annoPaintScreen);
 
     s->privates[ad->screenPrivateIndex].ptr = as;
@@ -848,7 +830,6 @@ annoFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ANNO_SCREEN (s);
-    ANNO_DISPLAY (s->display);
 
     if (as->cairo)
 	cairo_destroy (as->cairo);
@@ -860,11 +841,6 @@ annoFiniScreen (CompPlugin *p,
 
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
-
-    removeScreenAction (s,
-			&ad->opt[ANNO_DISPLAY_OPTION_INITIATE].value.action);
-    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_ERASE].value.action);
-    removeScreenAction (s, &ad->opt[ANNO_DISPLAY_OPTION_CLEAR].value.action);
 
     UNWRAP (as, s, paintScreen);
 
