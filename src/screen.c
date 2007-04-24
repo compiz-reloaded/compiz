@@ -3230,18 +3230,25 @@ moveScreenViewport (CompScreen *s,
 void
 moveWindowToViewportPosition (CompWindow *w,
 			      int	 x,
+			      int        y,
 			      Bool       sync)
 {
     int	tx, vWidth = w->screen->width * w->screen->hsize;
+    int ty, vHeight = w->screen->height * w->screen->vsize;
 
     x += w->screen->x * w->screen->width;
     x = MOD (x, vWidth);
     x -= w->screen->x * w->screen->width;
 
+    y += w->screen->y * w->screen->height;
+    y = MOD (y, vHeight);
+    y -= w->screen->y * w->screen->height;
+
     tx = x - w->attrib.x;
-    if (tx)
+    ty = y - w->attrib.y;
+    if (tx || ty)
     {
-	int m, wx;
+	int m, wx, wy;
 
 	if (!w->managed)
 	    return;
@@ -3260,10 +3267,21 @@ moveWindowToViewportPosition (CompWindow *w,
 	else
 	    wx = tx;
 
+	m = w->attrib.y + ty;
+	if (m - w->output.top < w->screen->height - vHeight)
+	    wy = ty + vHeight;
+	else if (m + w->height + w->output.bottom > vHeight)
+	    wy = ty - vHeight;
+	else
+	    wy = ty;
+
 	if (w->saveMask & CWX)
 	    w->saveWc.x += wx;
 
-	moveWindow (w, wx, 0, sync, TRUE);
+	if (w->saveMask & CWY)
+	    w->saveWc.y += wy;
+
+	moveWindow (w, wx, wy, sync, TRUE);
 
 	if (sync)
 	    syncWindowPosition (w);
