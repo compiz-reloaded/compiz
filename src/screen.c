@@ -45,38 +45,6 @@
 
 #include <compiz.h>
 
-#define DETECT_REFRESH_RATE_DEFAULT TRUE
-
-#define SCREEN_HSIZE_DEFAULT 4
-#define SCREEN_HSIZE_MIN     1
-#define SCREEN_HSIZE_MAX     32
-
-#define SCREEN_VSIZE_DEFAULT 1
-#define SCREEN_VSIZE_MIN     1
-#define SCREEN_VSIZE_MAX     32
-
-#define LIGHTING_DEFAULT TRUE
-
-#define OPACITY_STEP_DEFAULT 10
-#define OPACITY_STEP_MIN     1
-#define OPACITY_STEP_MAX     50
-
-#define UNREDIRECT_FS_DEFAULT FALSE
-
-#define DEFAULT_ICON_DEFAULT "icon"
-
-#define SYNC_TO_VBLANK_DEFAULT TRUE
-
-#define SCREEN_NUMBER_OF_DESKTOPS_DEFAULT 1
-#define SCREEN_NUMBER_OF_DESKTOPS_MIN     1
-#define SCREEN_NUMBER_OF_DESKTOPS_MAX     MAX_DESKTOPS
-
-#define DETECT_OUTPUTS_DEFAULT TRUE
-
-#define OUTPUTS_DEFAULT "640x480+0+0"
-
-#define FOCUS_PREVENTION_MATCH_DEFAULT "any"
-
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int
@@ -525,13 +493,6 @@ setScreenOption (CompScreen      *screen,
 	    return TRUE;
 	}
 	break;
-    case COMP_SCREEN_OPTION_OPACITY_STEP:
-	if (compSetIntOption (o, value))
-	{
-	    screen->opacityStep = o->value.i;
-	    return TRUE;
-	}
-	break;
     case COMP_SCREEN_OPTION_DEFAULT_ICON:
 	if (compSetStringOption (o, value))
 	    return updateDefaultIcon (screen);
@@ -574,7 +535,7 @@ setScreenOption (CompScreen      *screen,
 	}
 	break;
     default:
-	if (compSetOption (o, value))
+	if (compSetScreenOption (screen, o, value))
 	    return TRUE;
 	break;
     }
@@ -1449,8 +1410,8 @@ addScreen (CompDisplay *display,
 
     s->x     = 0;
     s->y     = 0;
-    s->hsize = SCREEN_HSIZE_DEFAULT;
-    s->vsize = SCREEN_VSIZE_DEFAULT;
+    s->hsize = s->opt[COMP_SCREEN_OPTION_HSIZE].value.i;
+    s->vsize = s->opt[COMP_SCREEN_OPTION_VSIZE].value.i;
 
     s->nDesktop	      = 1;
     s->currentDesktop = 0;
@@ -1511,8 +1472,6 @@ addScreen (CompDisplay *display,
 
     s->windows = 0;
     s->reverseWindows = 0;
-
-    s->opacityStep = OPACITY_STEP_DEFAULT;
 
     s->nextRedraw  = 0;
     s->frameStatus = 0;
@@ -1652,46 +1611,23 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    /* try both direct and indirect rendering contexts in case one of them
-       fail to support GLX_EXT_texture_from_pixmap */
-    for (i = 0; i < 2; i++)
+    s->ctx = glXCreateContext (dpy, visinfo, NULL, !indirectRendering);
+    if (!s->ctx)
     {
-	s->ctx = glXCreateContext (dpy, visinfo, NULL, !indirectRendering);
-	if (!s->ctx)
-	{
-	    fprintf (stderr, "%s: glXCreateContext failed\n", programName);
-	    XFree (visinfo);
+	fprintf (stderr, "%s: glXCreateContext failed\n", programName);
+	XFree (visinfo);
 
-	    return FALSE;
-	}
+	return FALSE;
+    }
 
-	if (glXIsDirect (dpy, s->ctx) == indirectRendering)
-	    i++;
+    glxExtensions = glXQueryExtensionsString (dpy, screenNum);
+    if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
+    {
+	fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
+		 programName);
+	XFree (visinfo);
 
-	glxExtensions = glXQueryExtensionsString (dpy, screenNum);
-	if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
-	{
-	    if (i > 0)
-	    {
-		fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
-			 programName);
-		XFree (visinfo);
-
-		return FALSE;
-	    }
-	    else
-	    {
-		fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is not "
-			 "supported by %s rendering context, trying %s "
-			 "rendering context instead\n", programName,
-			 indirectRendering ? "indirect" : "direct",
-			 indirectRendering ? "direct" : "indirect");
-
-		indirectRendering = !indirectRendering;
-
-		glXDestroyContext (dpy, s->ctx);
-	    }
-	}
+	return FALSE;
     }
 
     XFree (visinfo);
@@ -3230,18 +3166,25 @@ moveScreenViewport (CompScreen *s,
 void
 moveWindowToViewportPosition (CompWindow *w,
 			      int	 x,
+			      int        y,
 			      Bool       sync)
 {
     int	tx, vWidth = w->screen->width * w->screen->hsize;
+    int ty, vHeight = w->screen->height * w->screen->vsize;
 
     x += w->screen->x * w->screen->width;
     x = MOD (x, vWidth);
     x -= w->screen->x * w->screen->width;
 
+    y += w->screen->y * w->screen->height;
+    y = MOD (y, vHeight);
+    y -= w->screen->y * w->screen->height;
+
     tx = x - w->attrib.x;
-    if (tx)
+    ty = y - w->attrib.y;
+    if (tx || ty)
     {
-	int m, wx;
+	int m, wx, wy;
 
 	if (!w->managed)
 	    return;
@@ -3260,10 +3203,21 @@ moveWindowToViewportPosition (CompWindow *w,
 	else
 	    wx = tx;
 
+	m = w->attrib.y + ty;
+	if (m - w->output.top < w->screen->height - vHeight)
+	    wy = ty + vHeight;
+	else if (m + w->height + w->output.bottom > vHeight)
+	    wy = ty - vHeight;
+	else
+	    wy = ty;
+
 	if (w->saveMask & CWX)
 	    w->saveWc.x += wx;
 
-	moveWindow (w, wx, 0, sync, TRUE);
+	if (w->saveMask & CWY)
+	    w->saveWc.y += wy;
+
+	moveWindow (w, wx, wy, sync, TRUE);
 
 	if (sync)
 	    syncWindowPosition (w);

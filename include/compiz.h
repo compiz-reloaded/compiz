@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070420
+#define ABIVERSION 20070425
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -305,7 +305,8 @@ typedef enum {
     CompActionStateInitEdgeDnd = 1 <<  7,
     CompActionStateTermEdgeDnd = 1 <<  8,
     CompActionStateCommit      = 1 <<  9,
-    CompActionStateCancel      = 1 << 10
+    CompActionStateCancel      = 1 << 10,
+    CompActionStateAutoGrab    = 1 << 11
 } CompActionState;
 
 typedef struct _CompKeyBinding {
@@ -945,7 +946,7 @@ compAddTimeout (int	     time,
 		CallBackProc callBack,
 		void	     *closure);
 
-void
+void *
 compRemoveTimeout (CompTimeoutHandle handle);
 
 CompWatchFdHandle
@@ -1887,8 +1888,6 @@ struct _CompScreen {
     Bool lighting;
     Bool slowAnimations;
 
-    int opacityStep;
-
     XRectangle workArea;
 
     unsigned int showingDesktopMask;
@@ -2103,6 +2102,7 @@ moveScreenViewport (CompScreen *s,
 void
 moveWindowToViewportPosition (CompWindow *w,
 			      int	 x,
+			      int        y,
 			      Bool       sync);
 
 CompGroup *
@@ -3168,6 +3168,11 @@ compFiniScreenOptions (CompScreen *screen,
 		       int	  n);
 
 Bool
+compSetScreenOption (CompScreen      *screen,
+		     CompOption      *option,
+		     CompOptionValue *value);
+
+Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *display,
 				   CompMetadata *metadata,
 				   CompOption   *option,
@@ -3188,6 +3193,11 @@ void
 compFiniDisplayOptions (CompDisplay *display,
 			CompOption  *option,
 			int	    n);
+
+Bool
+compSetDisplayOption (CompDisplay     *display,
+		      CompOption      *option,
+		      CompOptionValue *value);
 
 char *
 compGetStringFromMetadataPath (CompMetadata *metadata,

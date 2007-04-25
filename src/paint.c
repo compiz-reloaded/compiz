@@ -60,9 +60,9 @@ applyScreenTransform (CompScreen	      *screen,
 		  sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
     matrixRotate (transform,
 		  sAttrib->vRotate,
-		  cos(sAttrib->xRotate * DEG2RAD),
+		  cosf (sAttrib->xRotate * DEG2RAD),
 		  0.0f,
-		  sin(sAttrib->xRotate * DEG2RAD));
+		  sinf (sAttrib->xRotate * DEG2RAD));
     matrixRotate (transform,
 		  sAttrib->yRotate, 0.0f, 1.0f, 0.0f);
 }
@@ -160,6 +160,7 @@ paintScreenRegion (CompScreen	       *screen,
     CompWindow    *w;
     CompCursor	  *c;
     int		  count, windowMask, backgroundMask;
+    CompWindow	  *fullscreenWindow = NULL;
 
     if (!tmpRegion)
     {
@@ -201,6 +202,8 @@ paintScreenRegion (CompScreen	       *screen,
 	if ((*screen->paintWindow) (w, &w->paint, transform, tmpRegion,
 				    PAINT_WINDOW_OCCLUSION_DETECTION_MASK))
 	{
+	    XSubtractRegion (tmpRegion, w->region, tmpRegion);
+
 	    /* unredirect top most fullscreen windows. */
 	    if (count == 0					      &&
 		!REGION_NOT_EMPTY (tmpRegion)			      &&
@@ -208,9 +211,8 @@ paintScreenRegion (CompScreen	       *screen,
 		XEqualRegion (w->region, &screen->region))
 	    {
 		unredirectWindow (w);
+		fullscreenWindow = w;
 	    }
-
-	    XSubtractRegion (tmpRegion, w->region, tmpRegion);
 	}
 
 	count++;
@@ -222,6 +224,9 @@ paintScreenRegion (CompScreen	       *screen,
     for (w = screen->windows; w; w = w->next)
     {
 	if (w->destroyed)
+	    continue;
+
+	if (w == fullscreenWindow)
 	    continue;
 
 	if (!w->shaded)

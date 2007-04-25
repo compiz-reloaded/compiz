@@ -664,11 +664,20 @@ initActionValue (CompDisplay	 *d,
 	    }
 	}
     }
+
+    if (state & CompActionStateAutoGrab)
+    {
+	CompScreen *s;
+
+	for (s = d->screens; s; s = s->next)
+	    addScreenAction (s, &v->action);
+    }
 }
 
 static void
 initMatchValue (CompDisplay     *d,
 		CompOptionValue *v,
+		Bool		helper,
 		xmlDocPtr       doc,
 		xmlNodePtr      node)
 {
@@ -685,7 +694,9 @@ initMatchValue (CompDisplay     *d,
 	matchAddFromString (&v->match, (char *) value);
 	xmlFree (value);
     }
-    matchUpdate (d, &v->match);
+
+    if (!helper)
+	matchUpdate (d, &v->match);
 }
 
 static void
@@ -693,6 +704,7 @@ initListValue (CompDisplay	     *d,
 	       CompOptionValue	     *v,
 	       CompOptionRestriction *r,
 	       CompActionState	     state,
+	       Bool		     helper,
 	       xmlDocPtr	     doc,
 	       xmlNodePtr	     node)
 {
@@ -735,7 +747,7 @@ initListValue (CompDisplay	     *d,
 		initActionValue (d, &value[v->list.nValue], state, doc, child);
 		break;
 	    case CompOptionTypeMatch:
-		initMatchValue (d, &value[v->list.nValue], doc, child);
+		initMatchValue (d, &value[v->list.nValue], helper, doc, child);
 	    default:
 		break;
 	    }
@@ -756,6 +768,27 @@ stringFromMetadataPathElement (CompMetadata *metadata,
     snprintf (str, 1024, "%s/%s", path, element);
 
     return compGetStringFromMetadataPath (metadata, str);
+}
+
+static Bool
+boolFromMetadataPathElement (CompMetadata *metadata,
+			     const char   *path,
+			     const char   *element,
+			     Bool	  defaultValue)
+{
+    Bool value = FALSE;
+    char *str;
+
+    str = stringFromMetadataPathElement (metadata, path, element);
+    if (!str)
+	return defaultValue;
+
+    if (strcasecmp (str, "true") == 0)
+	value = TRUE;
+
+    free (str);
+
+    return value;
 }
 
 static void
@@ -878,7 +911,7 @@ initActionState (CompMetadata    *metadata,
     int	      i;
     CompXPath xPath;
 
-    *state = 0;
+    *state = CompActionStateAutoGrab;
 
     if (!initXPathFromMetadataPathElement (&xPath, metadata, BAD_CAST path,
 					   BAD_CAST "allowed"))
@@ -909,6 +942,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
     xmlChar	    *name, *type;
     char	    *value;
     CompActionState state = 0;
+    Bool	    helper = FALSE;
 
     if (!initXPathFromMetadataPath (&xPath, metadata, path))
 	return FALSE;
@@ -979,7 +1013,9 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initActionValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeMatch:
-	initMatchValue (d, &option->value, defaultDoc, defaultNode);
+	helper = boolFromMetadataPathElement (metadata, (char *) path, "helper",
+					      FALSE);
+	initMatchValue (d, &option->value, helper, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeList:
 	value = stringFromMetadataPathElement (metadata, (char *) path, "type");
@@ -1005,11 +1041,15 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	    break;
 	case CompOptionTypeAction:
 	    initActionState (metadata, &state, (char *) path);
+	    break;
+	case CompOptionTypeMatch:
+	    helper = boolFromMetadataPathElement (metadata, (char *) path,
+						  "helper", FALSE);
 	default:
 	    break;
 	}
 
-	initListValue (d, &option->value, &option->rest, state,
+	initListValue (d, &option->value, &option->rest, state, helper,
 		       defaultDoc, defaultNode);
 	break;
     }
@@ -1035,10 +1075,31 @@ compInitScreenOptionFromMetadata (CompScreen   *s,
     return initOptionFromMetadataPath (s->display, m, o, BAD_CAST str);
 }
 
+static void
+finiScreenOptionValue (CompScreen      *s,
+		       CompOptionValue *v,
+		       CompOptionType  type)
+{
+    int	i;
+
+    switch (type) {
+    case CompOptionTypeAction:
+	if (v->action.state & CompActionStateAutoGrab)
+	    removeScreenAction (s, &v->action);
+	break;
+    case CompOptionTypeList:
+	for (i = 0; i < v->list.nValue; i++)
+	    finiScreenOptionValue (s, &v->list.value[i], v->list.type);
+    default:
+	break;
+    }
+}
+
 void
 compFiniScreenOption (CompScreen *s,
 		      CompOption *o)
 {
+    finiScreenOptionValue (s, &o->value, o->type);
     compFiniOption (o);
 }
 
@@ -1081,6 +1142,17 @@ compFiniScreenOptions (CompScreen *s,
 }
 
 Bool
+compSetScreenOption (CompScreen      *s,
+		     CompOption      *o,
+		     CompOptionValue *value)
+{
+    if (compSetOption (o, value))
+	return TRUE;
+
+    return FALSE;
+}
+
+Bool
 compInitDisplayOptionFromMetadata (CompDisplay  *d,
 				   CompMetadata *m,
 				   CompOption	*o,
@@ -1093,10 +1165,33 @@ compInitDisplayOptionFromMetadata (CompDisplay  *d,
     return initOptionFromMetadataPath (d, m, o, BAD_CAST str);
 }
 
+static void
+finiDisplayOptionValue (CompDisplay	*d,
+			CompOptionValue *v,
+			CompOptionType  type)
+{
+    CompScreen *s;
+    int	       i;
+
+    switch (type) {
+    case CompOptionTypeAction:
+	if (v->action.state & CompActionStateAutoGrab)
+	    for (s = d->screens; s; s = s->next)
+		removeScreenAction (s, &v->action);
+	break;
+    case CompOptionTypeList:
+	for (i = 0; i < v->list.nValue; i++)
+	    finiDisplayOptionValue (d, &v->list.value[i], v->list.type);
+    default:
+	break;
+    }
+}
+
 void
 compFiniDisplayOption (CompDisplay *d,
 		       CompOption  *o)
 {
+    finiDisplayOptionValue (d, &o->value, o->type);
     compFiniOption (o);
 }
 
@@ -1136,6 +1231,33 @@ compFiniDisplayOptions (CompDisplay *d,
 
     for (i = 0; i < n; i++)
 	compFiniDisplayOption (d, &opt[i]);
+}
+
+Bool
+compSetDisplayOption (CompDisplay     *d,
+		      CompOption      *o,
+		      CompOptionValue *value)
+{
+    if (o->type == CompOptionTypeAction)
+    {
+	if (o->value.action.state & CompActionStateAutoGrab)
+	{
+	    if (setDisplayAction (d, o, value))
+		return TRUE;
+	}
+	else
+	{
+	    if (compSetActionOption (o, value))
+		return TRUE;
+	}
+    }
+    else
+    {
+	if (compSetOption (o, value))
+	    return TRUE;
+    }
+
+    return FALSE;
 }
 
 char *

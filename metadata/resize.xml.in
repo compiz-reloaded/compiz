@@ -1,0 +1,25 @@
+<compiz>
+    <plugin name="resize">
+	<_short>Resize Window</_short>
+	<_long>Resize window</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate Window Resize</_short>
+		<_long>Start resizing window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F8</key>
+		    <button>&lt;Alt&gt;Button2</button>
+		</default>
+	    </option>
+	    <option name="mode" type="string">
+		<_short>Default Resize Mode</_short>
+		<_long>Default mode used for window resizing</_long>
+		<default>Normal</default>
+		<allowed>
+		    <value>Normal</value>
+		</allowed>
+	    </option>
+	</display>
+    </plugin>
+</compiz>

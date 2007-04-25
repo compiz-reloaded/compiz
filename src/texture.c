@@ -390,7 +390,7 @@ enableTexture (CompScreen	 *screen,
     glEnable (texture->target);
     glBindTexture (texture->target, texture->name);
 
-    if (strictBinding)
+    if (strictBinding && texture->pixmap)
     {
 	(*screen->bindTexImage) (screen->display->display,
 				 texture->pixmap,
@@ -469,7 +469,7 @@ disableTexture (CompScreen  *screen,
 		CompTexture *texture)
 {
     makeScreenCurrent (screen);
-    if (strictBinding)
+    if (strictBinding && texture->pixmap)
     {
 	glBindTexture (texture->target, texture->name);
 
