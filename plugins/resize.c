@@ -57,7 +57,8 @@ struct _ResizeKeys {
 #define MIN_KEY_HEIGHT_INC 24
 
 #define RESIZE_DISPLAY_OPTION_INITIATE 0
-#define RESIZE_DISPLAY_OPTION_NUM      1
+#define RESIZE_DISPLAY_OPTION_MODE     1
+#define RESIZE_DISPLAY_OPTION_NUM      2
 
 static int displayPrivateIndex;
 
@@ -697,7 +698,8 @@ resizeSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo resizeDisplayOptionInfo[] = {
-    { "initiate", "action", 0, resizeInitiate, resizeTerminate }
+    { "initiate", "action", 0, resizeInitiate, resizeTerminate },
+    { "mode", "string", 0, 0, 0 }
 };
 
 static Bool

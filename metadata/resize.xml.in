@@ -12,6 +12,14 @@
 		    <button>&lt;Alt&gt;Button2</button>
 		</default>
 	    </option>
+	    <option name="mode" type="string">
+		<_short>Default Resize Mode</_short>
+		<_long>Default mode used for window resizing</_long>
+		<default>Normal</default>
+		<allowed>
+		    <value>Normal</value>
+		</allowed>
+	    </option>
 	</display>
     </plugin>
 </compiz>
