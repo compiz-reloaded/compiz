@@ -344,6 +344,8 @@ struct _CompAction {
 
     unsigned int edgeMask;
     int		 edgeButton;
+
+    void *priv;
 };
 
 typedef union _CompMatchOp CompMatchOp;
@@ -400,7 +402,6 @@ struct _CompOption {
     CompOptionType	  type;
     CompOptionValue	  value;
     CompOptionRestriction rest;
-	void * priv;
 };
 
 typedef CompOption *(*DisplayOptionsProc) (CompDisplay *display, int *count);
