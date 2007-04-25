@@ -490,8 +490,6 @@ windowStateFromString (const char *str)
 	return CompWindowStateBelowMask;
     else if (strcasecmp (str, "demandsattention") == 0)
 	return CompWindowStateDemandsAttentionMask;
-    else if (strcasecmp (str, "demandsattention") == 0)
-	return CompWindowStateDemandsAttentionMask;
 
     return 0;
 }
