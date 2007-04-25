@@ -399,6 +399,7 @@ struct _CompOption {
     CompOptionType	  type;
     CompOptionValue	  value;
     CompOptionRestriction rest;
+	void * priv;
 };
 
 typedef CompOption *(*DisplayOptionsProc) (CompDisplay *display, int *count);
