@@ -1,0 +1,88 @@
+<compiz>
+    <plugin name="blur">
+	<_short>Blur Windows</_short>
+	<_long>Blur windows</_long>
+	<display>
+	    <option name="pulse" type="action">
+		<_short>Pulse</_short>
+		<_long>Pulse effect</_long>
+		<allowed bell="true"/>
+	    </option>
+	</display>
+	<screen>
+	    <option name="blur_speed" type="float">
+		<_short>Blur Speed</_short>
+		<_long>Window blur speed</_long>
+		<default>3.5</default>
+		<min>0.1</min>
+		<max>10.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="focus_blur_match" type="match">
+		<_short>Focus blur windows</_short>
+		<_long>Windows that should be affected by focus blur</_long>
+		<default>toolbar | menu | utility | normal | dialog | modaldialog</default>
+	    </option>
+	    <option name="focus_blur" type="bool">
+		<_short>Focus Blur</_short>
+		<_long>Blur windows that doesn't have focus</_long>
+		<default>false</default>
+	    </option>
+	    <option name="alpha_blur_match" type="match">
+		<_short>Alpha blur windows</_short>
+		<_long>Windows that should be use alpha blur by default</_long>
+		<default></default>
+	    </option>
+	    <option name="alpha_blur" type="bool">
+		<_short>Alpha Blur</_short>
+		<_long>Blur behind translucent parts of windows</_long>
+		<default>true</default>
+	    </option>
+	    <option name="filter" type="string">
+		<_short>Blur Filter</_short>
+		<_long>Filter method used for blurring</_long>
+		<default>4xBilinear</default>
+		<allowed>
+		    <value>4xBilinear</value>
+		    <value>Gaussian</value>
+		    <value>Mipmap</value>
+		</allowed>
+	    </option>
+	    <option name="gaussian_radius" type="int">
+		<_short>Gaussian Radius</_short>
+		<_long>Gaussian radius</_long>
+		<default>3</default>
+		<min>1</min>
+		<max>15</max>
+	    </option>
+	    <option name="gaussian_strength" type="float">
+		<_short>Gaussian Strength</_short>
+		<_long>Gaussian strength</_long>
+		<default>1.0</default>
+		<min>0.0</min>
+		<max>1.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="mipmap_lod" type="float">
+		<_short>Mipmap LOD</_short>
+		<_long>Mipmap level-of-detail</_long>
+		<default>2.5</default>
+		<min>0.1</min>
+		<max>5.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="saturation" type="int">
+		<_short>Blur Saturation</_short>
+		<_long>Blur saturation</_long>
+		<default>100</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	    <option name="occlusion" type="bool">
+		<_short>Blur Occlusion</_short>
+		<_long>blur occlusion</_long>
+		<default>true</default>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>
