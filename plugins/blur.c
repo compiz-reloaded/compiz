@@ -2684,7 +2684,7 @@ blurInitWindow (CompPlugin *p,
 
     bw->region = NULL;
 
-    bw->clip = XCreateRegion();
+    bw->clip = XCreateRegion ();
     if (!bw->clip)
 	return FALSE;
 
@@ -2713,7 +2713,7 @@ blurFiniWindow (CompPlugin *p,
     if (bw->region)
 	XDestroyRegion (bw->region);
 
-    XDestroyRegion(bw->clip);
+    XDestroyRegion (bw->clip);
 
     free (bw);
 }
