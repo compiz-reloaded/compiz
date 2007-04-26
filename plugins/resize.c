@@ -796,8 +796,6 @@ resizeInitScreen (CompPlugin *p,
     rs->cursor[2] = rs->upCursor;
     rs->cursor[3] = rs->downCursor;
 
-    addScreenAction (s, &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action);
-
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
     return TRUE;
