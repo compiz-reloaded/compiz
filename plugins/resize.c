@@ -756,6 +756,8 @@ resizeFiniDisplay (CompPlugin  *p,
 
     UNWRAP (rd, d, handleEvent);
 
+    compFiniDisplayOptions (d, rd->opt, RESIZE_DISPLAY_OPTION_NUM);
+
     free (rd);
 }
 
