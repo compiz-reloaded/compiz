@@ -2934,7 +2934,7 @@ meta_get_button_position (decor_t *d,
 	space = &fgeom.close_rect;
 	break;
 
-#ifdef HAVE_METACITY_2_17_0
+#if defined (HAVE_METACITY_2_17_0) && defined (HAVE_LIBWNCK_2_18_1)
     case BUTTON_SHADE:
 	if (!meta_button_present (&button_layout, META_BUTTON_FUNCTION_SHADE))
 	    return FALSE;
@@ -3068,11 +3068,21 @@ update_event_windows (WnckWindow *win)
 	    WNCK_WINDOW_ACTION_MINIMIZE,
 	    0,
 	    WNCK_WINDOW_ACTION_SHADE,
+
+#ifdef HAVE_LIBWNCK_2_18_1
 	    WNCK_WINDOW_ACTION_ABOVE,
 	    WNCK_WINDOW_ACTION_STICK,
 	    WNCK_WINDOW_ACTION_UNSHADE,
 	    WNCK_WINDOW_ACTION_ABOVE,
 	    WNCK_WINDOW_ACTION_UNSTICK
+#else
+	    0,
+	    0,
+	    0,
+	    0,
+	    0
+#endif
+
 	};
 
 	if (button_actions[i] && !(actions & button_actions[i]))
@@ -4568,8 +4578,12 @@ above_button_event (WnckWindow *win,
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
+
+#ifdef HAVE_LIBWNCK_2_18_1
 	    if (state == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_make_above (win);
+#endif
+
 	}
 	break;
     }
@@ -4628,8 +4642,12 @@ unabove_button_event (WnckWindow *win,
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
+
+#ifdef HAVE_LIBWNCK_2_18_1
 	    if (state == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_unmake_above (win);
+#endif
+
 	}
 	break;
     }

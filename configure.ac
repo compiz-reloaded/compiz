@@ -291,6 +291,9 @@ if test "x$use_gtk" = "xyes"; then
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS"
 
+    PKG_CHECK_EXISTS(libwnck-1.0 >= 2.18.1,
+		     [have_libwnck_2_18_1=yes], [have_libwnck_2_18_1=no])
+
     if test "x$use_metacity" = "xyes"; then
       PKG_CHECK_MODULES(METACITY, libmetacity-private,
 			[use_metacity=yes], [use_metacity=no])
@@ -323,6 +326,10 @@ AC_SUBST(windowsettingslibdir)
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
 if test "$use_gtk" = yes; then
   AC_DEFINE(USE_GTK, 1, [Build gtk window decorator])
+  if test "$have_libwnck_2_18_1" = yes; then
+    AC_DEFINE(HAVE_LIBWNCK_2_18_1, 1,
+	      [Define to 1 if libwnck version >= 2_18_1])
+  fi
 fi
 
 AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")
