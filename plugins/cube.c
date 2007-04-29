@@ -102,6 +102,8 @@ static char *cubeImages[] = {
 #define CUBE_DISPLAY_OPTION_PREV   2
 #define CUBE_DISPLAY_OPTION_NUM    3
 
+#define CUBE_ADJUST_IMAGE_DEFAULT FALSE
+
 static int displayPrivateIndex;
 
 typedef struct _CubeDisplay {
@@ -124,7 +126,8 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_TIMESTEP	      11
 #define CUBE_SCREEN_OPTION_MIPMAP	      12
 #define CUBE_SCREEN_OPTION_BACKGROUNDS	      13
-#define CUBE_SCREEN_OPTION_NUM                14
+#define CUBE_SCREEN_OPTION_ADJUST_IMAGE	      14
+#define CUBE_SCREEN_OPTION_NUM                15
 
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
@@ -1033,6 +1036,7 @@ cubeSetScreenOption (CompPlugin      *plugin,
 	}
 	break;
     case CUBE_SCREEN_OPTION_MIPMAP:
+    case CUBE_SCREEN_OPTION_ADJUST_IMAGE:
 	if (compSetBoolOption (o, value))
 	    return TRUE;
 	break;
@@ -1187,6 +1191,13 @@ cubeScreenInitOptions (CubeScreen *cs,
     o->value.list.value  = NULL;
     o->rest.s.string     = 0;
     o->rest.s.nString    = 0;
+
+    o = &cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE];
+    o->name	  = "adjust_image";
+    o->shortDesc  = N_("Adjust Image");
+    o->longDesc	  = N_("Adjust top face image to rotation");
+    o->type	  = CompOptionTypeBool;
+    o->value.b    = CUBE_ADJUST_IMAGE_DEFAULT;
 }
 
 static int
@@ -1485,6 +1496,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
 	CompTransform sTransform = *transform;
+	float	      yRotate = (360.0f / size) * (cs->xrotations + 1);
 
 	screenLighting (s, TRUE);
 
@@ -1492,22 +1504,22 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	glPushMatrix ();
 
-	if (sAttrib->xRotate > 0.0f)
+	if (cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
 	{
-	    sa.yRotate += 360.0f / size;
-	    (*s->applyScreenTransform) (s, &sa, output, &sTransform);
-	    glLoadMatrixf (sTransform.m);
-	    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
-	    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
-	    sa.yRotate -= 360.0f / size;
+	    if (sAttrib->xRotate > 0.0f)
+		yRotate = 360.0f / size;
+	    else
+		yRotate = 0.0f;
 	}
-	else
-	{
-	    (*s->applyScreenTransform) (s, &sa, output, &sTransform);
-	    glLoadMatrixf (sTransform.m);
-	    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
-	    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
-	}
+
+	sa.yRotate += yRotate;
+
+	(*s->applyScreenTransform) (s, &sa, output, &sTransform);
+	glLoadMatrixf (sTransform.m);
+	glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
+	glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
+
+	sa.yRotate -= yRotate;
 
 	glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
 

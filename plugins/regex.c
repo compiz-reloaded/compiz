@@ -307,7 +307,7 @@ regexHandleEvent (CompDisplay *d,
 }
 
 static Bool
-regexRegisterExpHanlder (void *closure)
+regexRegisterExpHandler (void *closure)
 {
     CompDisplay *display = (CompDisplay *) closure;
 
@@ -342,7 +342,7 @@ regexInitDisplay (CompPlugin  *p,
 
     /* one shot timeout to which will register the expression handler
        after all screens and windows have been initialized */
-    compAddTimeout (0, regexRegisterExpHanlder, (void *) d);
+    compAddTimeout (0, regexRegisterExpHandler, (void *) d);
 
     return TRUE;
 }

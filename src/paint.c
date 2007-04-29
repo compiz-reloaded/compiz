@@ -60,9 +60,9 @@ applyScreenTransform (CompScreen	      *screen,
 		  sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
     matrixRotate (transform,
 		  sAttrib->vRotate,
-		  cos(sAttrib->xRotate * DEG2RAD),
+		  cosf (sAttrib->xRotate * DEG2RAD),
 		  0.0f,
-		  sin(sAttrib->xRotate * DEG2RAD));
+		  sinf (sAttrib->xRotate * DEG2RAD));
     matrixRotate (transform,
 		  sAttrib->yRotate, 0.0f, 1.0f, 0.0f);
 }
