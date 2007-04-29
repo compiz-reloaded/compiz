@@ -345,7 +345,7 @@ struct _CompAction {
     unsigned int edgeMask;
     int		 edgeButton;
 
-    void *priv;
+    CompPrivate priv;
 };
 
 typedef union _CompMatchOp CompMatchOp;
