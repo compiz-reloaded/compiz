@@ -1,0 +1,61 @@
+<compiz>
+    <plugin name="decoration">
+	<_short>Window Decoration</_short>
+	<_long>Window decorations</_long>
+	<display>
+	    <option name="shadow_radius" type="float">
+		<_short>Shadow Radius</_short>
+		<_long>Drop shadow radius</_long>
+		<default>8.0</default>
+		<min>0.1</min>
+		<max>18.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="shadow_opacity" type="float">
+		<_short>Shadow Opacity</_short>
+		<_long>Drop shadow opacity</_long>
+		<default>0.5</default>
+		<min>0.01</min>
+		<max>6.0</max>
+		<precision>0.01</precision>
+	    </option>
+	    <option name="shadow_color" type="color">
+		<_short>Shadow Color</_short>
+		<_long>Drop shadow color</_long>
+	    </option>
+	    <option name="shadow_x_offset" type="int">
+		<_short>Shadow Offset X</_short>
+		<_long>Drop shadow X offset</_long>
+		<default>1</default>
+		<min>-16</min>
+		<max>16</max>
+	    </option>
+	    <option name="shadow_y_offset" type="int">
+		<_short>Shadow Offset Y</_short>
+		<_long>Drop shadow Y offset</_long>
+		<default>1</default>
+		<min>-16</min>
+		<max>16</max>
+	    </option>
+	    <option name="command" type="string">
+		<_short>Command</_short>
+		<_long>Decorator command line that is executed if no decorator is already running</_long>
+	    </option>
+	    <option name="mipmap" type="bool">
+		<_short>Mipmap</_short>
+		<_long>Allow mipmaps to be generated for decoration textures</_long>
+		<default>false</default>
+	    </option>
+	    <option name="decoration_match" type="match">
+		<_short>Decoration windows</_short>
+		<_long>Windows that should be decorated</_long>
+		<default>any</default>
+	    </option>
+	    <option name="shadow_match" type="match">
+		<_short>Shadow windows</_short>
+		<_long>Windows that should have a shadow</_long>
+		<default>any</default>
+	    </option>
+	</display>
+    </plugin>
+</compiz>
