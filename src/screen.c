@@ -3195,21 +3195,28 @@ moveWindowToViewportPosition (CompWindow *w,
 	if (w->state & CompWindowStateStickyMask)
 	    return;
 
-	m = w->attrib.x + tx;
-	if (m - w->output.left < w->screen->width - vWidth)
-	    wx = tx + vWidth;
-	else if (m + w->width + w->output.right > vWidth)
-	    wx = tx - vWidth;
-	else
-	    wx = tx;
+	wx = tx;
+	wy = ty;
 
-	m = w->attrib.y + ty;
-	if (m - w->output.top < w->screen->height - vHeight)
-	    wy = ty + vHeight;
-	else if (m + w->height + w->output.bottom > vHeight)
-	    wy = ty - vHeight;
-	else
-	    wy = ty;
+	if (vWidth > w->screen->width)
+	{
+	    m = w->attrib.x + tx;
+	
+	    if (m - w->output.left < w->screen->width - vWidth)
+		wx = tx + vWidth;
+	    else if (m + w->width + w->output.right > vWidth)
+		wx = tx - vWidth;
+	}
+
+	if (vHeight > w->screen->height)
+	{
+	    m = w->attrib.y + ty;
+
+	    if (m - w->output.top < w->screen->height - vHeight)
+		wy = ty + vHeight;
+	    else if (m + w->height + w->output.bottom > vHeight)
+		wy = ty - vHeight;
+	}
 
 	if (w->saveMask & CWX)
 	    w->saveWc.x += wx;
