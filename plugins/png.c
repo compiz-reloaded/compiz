@@ -492,7 +492,7 @@ pngFiniDisplay (CompPlugin  *p,
     UNWRAP (pd, d, fileToImage);
     UNWRAP (pd, d, imageToFile);
 
-    for (s = d->screens; s; s = s->next) 
+    for (s = d->screens; s; s = s->next)
 	updateDefaultIcon (s);
 
     free (pd);
