@@ -355,10 +355,10 @@ iniParseLine (char *line, char **optionName, char **optionValue)
     if (!split_pos)
 	return FALSE;
 
-    length = strlen(line) - strlen(split_pos);
-    *optionName = strndup(line, length);
+    length = strlen (line) - strlen (split_pos);
+    *optionName = strndup (line, length);
     split_pos++;
-    *optionValue = strndup(split_pos, strlen(split_pos)-1);
+    *optionValue = strndup (split_pos, strlen (split_pos)-1);
 
     return TRUE;
 }
