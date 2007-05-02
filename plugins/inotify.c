@@ -246,6 +246,8 @@ inotifyInit (CompPlugin *p)
 	return FALSE;
     }
 
+    compAddMetadataFromFile (&inotifyMetadata, p->vTable->name);
+
     return TRUE;
 }
 

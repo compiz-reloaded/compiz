@@ -1155,6 +1155,8 @@ gconfInit (CompPlugin *p)
 	return FALSE;
     }
 
+    compAddMetadataFromFile (&gconfMetadata, p->vTable->name);
+
     return TRUE;
 }
 

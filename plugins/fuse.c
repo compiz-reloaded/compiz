@@ -1574,6 +1574,8 @@ fuseInit (CompPlugin *p)
 	return FALSE;
     }
 
+    compAddMetadataFromFile (&fuseMetadata, p->vTable->name);
+
     return TRUE;
 }
 
