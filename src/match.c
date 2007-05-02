@@ -692,7 +692,7 @@ matchInitExp (CompDisplay  *display,
 	exp->eval     = matchEvalOverrideRedirectExp;
 	exp->priv.val = strtol (value + 18, NULL, 0);
     }
-    else 
+    else
     {
 	if (strncmp (value, "type=", 5) == 0)
 	    value += 5;
