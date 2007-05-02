@@ -475,7 +475,7 @@ pngInitDisplay (CompPlugin  *p,
 
     d->privates[displayPrivateIndex].ptr = pd;
 
-    for (s = d->screens; s; s = s->next) 
+    for (s = d->screens; s; s = s->next)
 	updateDefaultIcon (s);
 
     return TRUE;
