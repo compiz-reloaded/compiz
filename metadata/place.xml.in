@@ -1,0 +1,55 @@
+<compiz>
+    <plugin name="place">
+	<_short>Place Windows</_short>
+	<_long>Place windows at appropriate positions when mapped</_long>
+	<screen>
+	    <option name="workarounds" type="bool">
+		<_short>Workarounds</_short>
+		<_long>Window placement workarounds</_long>
+		<default>true</default>
+	    </option>
+	    <option name="mode" type="string">
+		<_short>Placement Mode</_short>
+		<_long>Algorithm to use for window placement</_long>
+		<default>Cascade</default>
+		<allowed>
+		    <value>Cascade</value>
+		    <value>Centered</value>
+		    <value>Smart</value>
+		    <value>Maximize</value>
+		    <value>Random</value>
+		</allowed>
+	    </option>
+	    <option name="position_matches" type="list">
+		<_short>Positioned windows</_short>
+		<_long>Windows that should be positioned by default</_long>
+		<type>match</type>
+	    </option>
+	    <option name="position_x_values" type="list">
+		<_short>X Positions</_short>
+		<_long>X position values</_long>
+		<type>int</type>
+	    </option>
+	    <option name="position_y_values" type="list">
+		<_short>Y Positions</_short>
+		<_long>Y position values</_long>
+		<type>int</type>
+	    </option>
+	    <option name="viewport_matches" type="list">
+		<_short>Viewport positioned windows</_short>
+		<_long>Windows that should be positioned in specific viewports by default</_long>
+		<type>match</type>
+	    </option>
+	    <option name="viewport_x_values" type="list">
+		<_short>X Viewport Positions</_short>
+		<_long>Horizontal viewport positions</_long>
+		<type>int</type>
+	    </option>
+	    <option name="viewport_y_values" type="list">
+		<_short>Y Viewport Positions</_short>
+		<_long>Vertical viewport positions</_long>
+		<type>int</type>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>
