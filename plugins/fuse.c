@@ -34,7 +34,7 @@
 
 #include <compiz.h>
 
-#define FUSE_MOUNT_POINT_DEFAULT "compiz"
+static CompMetadata fuseMetadata;
 
 #define FUSE_INODE_TYPE_ROOT        (1 << 0)
 #define FUSE_INODE_TYPE_CORE        (1 << 1)
@@ -1478,20 +1478,9 @@ fuseSetDisplayOption (CompPlugin      *plugin,
     return FALSE;
 }
 
-static void
-fuseDisplayInitOptions (FuseDisplay *fd)
-{
-    CompOption *o;
-
-    o = &fd->opt[FUSE_DISPLAY_OPTION_MOUNT_POINT];
-    o->name	      = "mount_point";
-    o->shortDesc      = N_("Mount Point");
-    o->longDesc	      = N_("Mount point");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (FUSE_MOUNT_POINT_DEFAULT);
-    o->rest.s.string  = NULL;
-    o->rest.s.nString = 0;
-}
+static const CompMetadataOptionInfo fuseDisplayOptionInfo[] = {
+    { "mount_point", "string", 0, 0, 0 }
+};
 
 static Bool
 fuseInitDisplay (CompPlugin  *p,
@@ -1513,13 +1502,22 @@ fuseInitDisplay (CompPlugin  *p,
     if (!fd)
 	return FALSE;
 
-    fuseDisplayInitOptions (fd);
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &fuseMetadata,
+					     fuseDisplayOptionInfo,
+					     fd->opt,
+					     FUSE_DISPLAY_OPTION_NUM))
+    {
+	free (fd);
+	return FALSE;
+    }
 
     fd->session = fuse_lowlevel_new (NULL,
 				     &compiz_ll_oper, sizeof (compiz_ll_oper),
 				     (void *) d);
     if (!fd->session)
     {
+	compFiniDisplayOptions (d, fd->opt, FUSE_DISPLAY_OPTION_NUM);
 	free (fd);
 	return FALSE;
     }
@@ -1546,21 +1544,33 @@ fuseFiniDisplay (CompPlugin  *p,
 
     fuse_session_destroy (fd->session);
 
-    free (fd->opt[FUSE_DISPLAY_OPTION_MOUNT_POINT].value.s);
+    compFiniDisplayOptions (d, fd->opt, FUSE_DISPLAY_OPTION_NUM);
+
     free (fd);
 }
 
 static Bool
 fuseInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&fuseMetadata,
+					 p->vTable->name,
+					 fuseDisplayOptionInfo,
+					 FUSE_DISPLAY_OPTION_NUM,
+					 0, 0))
+	return FALSE;
+
     inodes = fuseAddInode (NULL, FUSE_INODE_TYPE_ROOT, ".");
     if (!inodes)
+    {
+	compFiniMetadata (&fuseMetadata);
 	return FALSE;
+    }
 
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
     {
 	fuseRemoveInode (NULL, inodes);
+	compFiniMetadata (&fuseMetadata);
 	return FALSE;
     }
 
@@ -1574,6 +1584,8 @@ fuseFini (CompPlugin *p)
 	freeDisplayPrivateIndex (displayPrivateIndex);
 
     fuseRemoveInode (NULL, inodes);
+
+    compFiniMetadata (&fuseMetadata);
 }
 
 static int
@@ -1583,12 +1595,18 @@ fuseGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+fuseGetMetadata (CompPlugin *plugin)
+{
+    return &fuseMetadata;
+}
+
 CompPluginVTable fuseVTable = {
     "fs",
     N_("Userspace File System"),
     N_("Userspace file system"),
     fuseGetVersion,
-    0, /* GetMetadata */
+    fuseGetMetadata,
     fuseInit,
     fuseFini,
     fuseInitDisplay,
