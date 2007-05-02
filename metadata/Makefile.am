@@ -12,6 +12,7 @@ xml_in_files =		  \
 	gconf.xml.in	  \
 	inotify.xml.in	  \
 	minimize.xml.in	  \
+	move.xml.in	  \
 	resize.xml.in
 xml_files    = $(xml_in_files:.xml.in=.xml)
 xml_DATA     = $(xml_files)
