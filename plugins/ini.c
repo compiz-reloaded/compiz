@@ -345,20 +345,20 @@ iniGetFilename (CompDisplay *d,
 static Bool
 iniParseLine (char *line, char **optionName, char **optionValue)
 {
-    char *split_pos;
-    int length;
+    char *splitPos;
+    int  length;
 
     if (line[0] == '\0' || line[0] == '\n')
 	return FALSE;
 
-    split_pos = strchr(line, '=');
-    if (!split_pos)
+    splitPos = strchr (line, '=');
+    if (!splitPos)
 	return FALSE;
 
-    length = strlen (line) - strlen (split_pos);
+    length = strlen (line) - strlen (splitPos);
     *optionName = strndup (line, length);
-    split_pos++;
-    *optionValue = strndup (split_pos, strlen (split_pos)-1);
+    splitPos++;
+    *optionValue = strndup (splitPos, strlen (splitPos)-1);
 
     return TRUE;
 }
@@ -369,9 +369,7 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
     char *splitStart = NULL;
     char *splitEnd = NULL;
     char *item = NULL;
-    int itemLength;
-    int count;
-    int i;
+    int  itemLength, count, i;
 
     if (csv[0] == '\0')
     {
