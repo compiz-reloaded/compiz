@@ -14,6 +14,7 @@ xml_in_files =		  \
 	minimize.xml.in	  \
 	move.xml.in	  \
 	place.xml.in	  \
+	png.xml.in	  \
 	resize.xml.in
 xml_files    = $(xml_in_files:.xml.in=.xml)
 xml_DATA     = $(xml_files)

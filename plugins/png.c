@@ -31,6 +31,8 @@
 
 #include <compiz.h>
 
+static CompMetadata pngMetadata;
+
 #define PNG_SIG_SIZE 8
 
 static int displayPrivateIndex;
@@ -499,9 +501,18 @@ pngFiniDisplay (CompPlugin  *p,
 static Bool
 pngInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&pngMetadata, p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&pngMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&pngMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -511,6 +522,8 @@ pngFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&pngMetadata);
 }
 
 static int
@@ -520,12 +533,18 @@ pngGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+pngGetMetadata (CompPlugin *plugin)
+{
+    return &pngMetadata;
+}
+
 CompPluginVTable pngVTable = {
     "png",
     "Png",
     "Png image loader",
     pngGetVersion,
-    0, /* GetMetadata */
+    pngGetMetadata,
     pngInit,
     pngFini,
     pngInitDisplay,
