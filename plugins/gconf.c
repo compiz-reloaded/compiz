@@ -35,6 +35,8 @@
 #include <glib/gprintf.h>
 #include <gconf/gconf-client.h>
 
+static CompMetadata gconfMetadata;
+
 #define APP_NAME "/apps/compiz"
 
 /* From gconf-internal.h. Bleah. */
@@ -1142,9 +1144,16 @@ gconfFiniScreen (CompPlugin *p,
 static Bool
 gconfInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&gconfMetadata, p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&gconfMetadata);
 	return FALSE;
+    }
 
     return TRUE;
 }
@@ -1154,6 +1163,8 @@ gconfFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&gconfMetadata);
 }
 
 static int
@@ -1161,6 +1172,12 @@ gconfGetVersion (CompPlugin *plugin,
 		 int	    version)
 {
     return ABIVERSION;
+}
+
+static CompMetadata *
+gconfGetMetadata (CompPlugin *plugin)
+{
+    return &gconfMetadata;
 }
 
 CompPluginDep gconfDeps[] = {
@@ -1176,7 +1193,7 @@ CompPluginVTable gconfVTable = {
     "GConf",
     "GConf Control Backend",
     gconfGetVersion,
-    0, /* GetMetadata */
+    gconfGetMetadata,
     gconfInit,
     gconfFini,
     gconfInitDisplay,

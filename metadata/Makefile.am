@@ -9,6 +9,7 @@ xml_in_files =		  \
 	decoration.xml.in \
 	fade.xml.in	  \
 	fuse.xml.in	  \
+	gconf.xml.in	  \
 	resize.xml.in
 xml_files    = $(xml_in_files:.xml.in=.xml)
 xml_DATA     = $(xml_files)
