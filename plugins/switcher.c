@@ -35,61 +35,10 @@
 
 #include <compiz.h>
 
-#define SWITCH_NEXT_KEY_DEFAULT       "Tab"
-#define SWITCH_NEXT_MODIFIERS_DEFAULT CompAltMask
-
-#define SWITCH_PREV_KEY_DEFAULT       "Tab"
-#define SWITCH_PREV_MODIFIERS_DEFAULT (CompAltMask | ShiftMask)
-
-#define SWITCH_NEXT_ALL_KEY_DEFAULT       "Tab"
-#define SWITCH_NEXT_ALL_MODIFIERS_DEFAULT (CompAltMask | ControlMask)
-
-#define SWITCH_PREV_ALL_KEY_DEFAULT       "Tab"
-#define SWITCH_PREV_ALL_MODIFIERS_DEFAULT \
-    (CompAltMask | ControlMask | ShiftMask)
-
-#define SWITCH_SPEED_DEFAULT   1.5f
-#define SWITCH_SPEED_MIN       0.1f
-#define SWITCH_SPEED_MAX       50.0f
-#define SWITCH_SPEED_PRECISION 0.1f
-
-#define SWITCH_TIMESTEP_DEFAULT   1.2f
-#define SWITCH_TIMESTEP_MIN       0.1f
-#define SWITCH_TIMESTEP_MAX       50.0f
-#define SWITCH_TIMESTEP_PRECISION 0.1f
-
-#define SWITCH_MIPMAP_DEFAULT TRUE
-
-#define SWITCH_BRINGTOFRONT_DEFAULT TRUE
-
-#define SWITCH_SATURATION_DEFAULT 100
-#define SWITCH_SATURATION_MIN     0
-#define SWITCH_SATURATION_MAX     100
-
-#define SWITCH_BRIGHTNESS_DEFAULT 65
-#define SWITCH_BRIGHTNESS_MIN     0
-#define SWITCH_BRIGHTNESS_MAX     100
-
-#define SWITCH_OPACITY_DEFAULT    40
-#define SWITCH_OPACITY_MIN        0
-#define SWITCH_OPACITY_MAX        100
-
-#define SWITCH_ZOOM_DEFAULT   1.0f
-#define SWITCH_ZOOM_MIN       0.0f
-#define SWITCH_ZOOM_MAX       5.0f
-#define SWITCH_ZOOM_PRECISION 0.1f
-
-#define SWITCH_ICON_DEFAULT TRUE
-
-#define SWITCH_MINIMIZED_DEFAULT TRUE
-
-#define SWITCH_WINDOW_MATCH_DEFAULT \
-    "Toolbar | Utility | Dialog | Normal | Unknown"
-
-#define SWITCH_AUTO_ROTATE_DEFAULT FALSE
-
 #define ZOOMED_WINDOW_MASK (1 << 0)
 #define NORMAL_WINDOW_MASK (1 << 1)
+
+static CompMetadata switchMetadata;
 
 static int displayPrivateIndex;
 
@@ -327,115 +276,6 @@ switchSetScreenOption (CompPlugin *plugin,
     }
 
     return FALSE;
-}
-
-static void
-switchScreenInitOptions (SwitchScreen *ss)
-{
-    CompOption *o;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_SPEED];
-    o->name		= "speed";
-    o->shortDesc	= N_("Speed");
-    o->longDesc		= N_("Switcher speed");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= SWITCH_SPEED_DEFAULT;
-    o->rest.f.min	= SWITCH_SPEED_MIN;
-    o->rest.f.max	= SWITCH_SPEED_MAX;
-    o->rest.f.precision = SWITCH_SPEED_PRECISION;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_TIMESTEP];
-    o->name		= "timestep";
-    o->shortDesc	= N_("Timestep");
-    o->longDesc		= N_("Switcher timestep");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= SWITCH_TIMESTEP_DEFAULT;
-    o->rest.f.min	= SWITCH_TIMESTEP_MIN;
-    o->rest.f.max	= SWITCH_TIMESTEP_MAX;
-    o->rest.f.precision = SWITCH_TIMESTEP_PRECISION;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH];
-    o->name	 = "window_match";
-    o->shortDesc = N_("Switcher windows");
-    o->longDesc	 = N_("Windows that should be shown in switcher");
-    o->type	 = CompOptionTypeMatch;
-
-    matchInit (&o->value.match);
-    matchAddFromString (&o->value.match, SWITCH_WINDOW_MATCH_DEFAULT);
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_MIPMAP];
-    o->name	  = "mipmap";
-    o->shortDesc  = N_("Mipmap");
-    o->longDesc	  = N_("Generate mipmaps when possible for higher quality "
-		       "scaling");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = SWITCH_MIPMAP_DEFAULT;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_SATURATION];
-    o->name	  = "saturation";
-    o->shortDesc  = N_("Saturation");
-    o->longDesc	  = N_("Amount of saturation in percent");
-    o->type	  = CompOptionTypeInt;
-    o->value.i    = SWITCH_SATURATION_DEFAULT;
-    o->rest.i.min = SWITCH_SATURATION_MIN;
-    o->rest.i.max = SWITCH_SATURATION_MAX;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS];
-    o->name	  = "brightness";
-    o->shortDesc  = N_("Brightness");
-    o->longDesc	  = N_("Amount of brightness in percent");
-    o->type	  = CompOptionTypeInt;
-    o->value.i    = SWITCH_BRIGHTNESS_DEFAULT;
-    o->rest.i.min = SWITCH_BRIGHTNESS_MIN;
-    o->rest.i.max = SWITCH_BRIGHTNESS_MAX;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_OPACITY];
-    o->name	  = "opacity";
-    o->shortDesc  = N_("Opacity");
-    o->longDesc	  = N_("Amount of opacity in percent");
-    o->type	  = CompOptionTypeInt;
-    o->value.i    = SWITCH_OPACITY_DEFAULT;
-    o->rest.i.min = SWITCH_OPACITY_MIN;
-    o->rest.i.max = SWITCH_OPACITY_MAX;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT];
-    o->name	  = "bring_to_front";
-    o->shortDesc  = N_("Bring To Front");
-    o->longDesc	  = N_("Bring selected window to front");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = SWITCH_BRINGTOFRONT_DEFAULT;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_ZOOM];
-    o->name		= "zoom";
-    o->shortDesc	= N_("Zoom");
-    o->longDesc		= N_("Distance desktop should be zoom out while "
-	"switching windows");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= SWITCH_ZOOM_DEFAULT;
-    o->rest.f.min	= SWITCH_ZOOM_MIN;
-    o->rest.f.max	= SWITCH_ZOOM_MAX;
-    o->rest.f.precision = SWITCH_ZOOM_PRECISION;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_ICON];
-    o->name	  = "icon";
-    o->shortDesc  = N_("Icon");
-    o->longDesc	  = N_("Show icon next to thumbnail");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = SWITCH_ICON_DEFAULT;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_MINIMIZED];
-    o->name	  = "minimized";
-    o->shortDesc  = N_("Minimized");
-    o->longDesc	  = N_("Show minimized windows");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = SWITCH_MINIMIZED_DEFAULT;
-
-    o = &ss->opt[SWITCH_SCREEN_OPTION_AUTO_ROTATE];
-    o->name	  = "auto_rotate";
-    o->shortDesc  = N_("Auto Rotate");
-    o->longDesc	  = N_("Rotate to the selected window while switching");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = SWITCH_AUTO_ROTATE_DEFAULT;
 }
 
 static void
@@ -2004,136 +1844,24 @@ switchSetDisplayOption (CompPlugin  *plugin,
 			CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     SWITCH_DISPLAY (display);
 
-    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, &index);
+    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case SWITCH_DISPLAY_OPTION_NEXT:
-    case SWITCH_DISPLAY_OPTION_NEXT_ALL:
-    case SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP:
-    case SWITCH_DISPLAY_OPTION_PREV:
-    case SWITCH_DISPLAY_OPTION_PREV_ALL:
-    case SWITCH_DISPLAY_OPTION_PREV_NO_POPUP:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-    default:
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
-static void
-switchDisplayInitOptions (SwitchDisplay *sd,
-			  Display       *display)
-{
-    CompOption *o;
-
-    o = &sd->opt[SWITCH_DISPLAY_OPTION_NEXT];
-    o->name			  = "next";
-    o->shortDesc		  = N_("Next window");
-    o->longDesc			  = N_("Popup switcher if not visible and "
-				       "select next window");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = switchNext;
-    o->value.action.terminate	  = switchTerminate;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = SWITCH_NEXT_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_NEXT_KEY_DEFAULT));
-
-    o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV];
-    o->name			  = "prev";
-    o->shortDesc		  = N_("Prev window");
-    o->longDesc			  = N_("Popup switcher if not visible and "
-				       "select previous window");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = switchPrev;
-    o->value.action.terminate	  = switchTerminate;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = SWITCH_PREV_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_PREV_KEY_DEFAULT));
-
-    o = &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL];
-    o->name			  = "next_all";
-    o->shortDesc		  = N_("Next window");
-    o->longDesc			  = N_("Popup switcher if not visible and "
-				       "select next window out of all "
-				       "windows");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = switchNextAll;
-    o->value.action.terminate	  = switchTerminate;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = SWITCH_NEXT_ALL_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_NEXT_ALL_KEY_DEFAULT));
-
-    o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL];
-    o->name			  = "prev_all";
-    o->shortDesc		  = N_("Prev window");
-    o->longDesc			  = N_("Popup switcher if not visible and "
-				       "select previous window out of all "
-				       "windows");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = switchPrevAll;
-    o->value.action.terminate	  = switchTerminate;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = SWITCH_PREV_ALL_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SWITCH_PREV_ALL_KEY_DEFAULT));
-
-    o = &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP];
-    o->name		      = "next_no_popup";
-    o->shortDesc	      = N_("Next window");
-    o->longDesc		      = N_("Select next window");
-    o->type		      = CompOptionTypeAction;
-    o->value.action.initiate  = switchNextNoPopup;
-    o->value.action.terminate = switchTerminate;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.state     = CompActionStateInitKey;
-    o->value.action.state    |= CompActionStateInitButton;
-    o->value.action.type      = 0;
-
-    o = &sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP];
-    o->name		      = "prev_no_popup";
-    o->shortDesc	      = N_("Prev window");
-    o->longDesc		      = N_("Select previous window");
-    o->type		      = CompOptionTypeAction;
-    o->value.action.initiate  = switchPrevNoPopup;
-    o->value.action.terminate = switchTerminate;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.state     = CompActionStateInitKey;
-    o->value.action.state    |= CompActionStateInitButton;
-    o->value.action.type      = 0;
-}
+static const CompMetadataOptionInfo switchDisplayOptionInfo[] = {
+    { "next", "action", 0, switchNext, switchTerminate },
+    { "prev", "action", 0, switchPrev, switchTerminate },
+    { "next_all", "action", 0, switchNextAll, switchTerminate },
+    { "prev_all", "action", 0, switchPrevAll, switchTerminate },
+    { "next_no_popup", "action", 0, switchNextNoPopup, switchTerminate },
+    { "prev_no_popup", "action", 0, switchPrevNoPopup, switchTerminate }
+};
 
 static Bool
 switchInitDisplay (CompPlugin  *p,
@@ -2145,16 +1873,25 @@ switchInitDisplay (CompPlugin  *p,
     if (!sd)
 	return FALSE;
 
-    sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (sd->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &switchMetadata,
+					     switchDisplayOptionInfo,
+					     sd->opt,
+					     SWITCH_DISPLAY_OPTION_NUM))
     {
 	free (sd);
 	return FALSE;
     }
 
-    sd->selectWinAtom = XInternAtom (d->display, SELECT_WIN_PROP, 0);
+    sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (sd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, sd->opt, SWITCH_DISPLAY_OPTION_NUM);
+	free (sd);
+	return FALSE;
+    }
 
-    switchDisplayInitOptions (sd, d->display);
+    sd->selectWinAtom = XInternAtom (d->display, SELECT_WIN_PROP, 0);
 
     WRAP (sd, d, handleEvent, switchHandleEvent);
 
@@ -2173,8 +1910,25 @@ switchFiniDisplay (CompPlugin  *p,
 
     UNWRAP (sd, d, handleEvent);
 
+    compFiniDisplayOptions (d, sd->opt, SWITCH_DISPLAY_OPTION_NUM);
+
     free (sd);
 }
+
+static const CompMetadataOptionInfo switchScreenOptionInfo[] = {
+    { "speed", "float", "<min>0.1</min>", 0, 0 },
+    { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "window_match", "match", 0, 0, 0 },
+    { "mipmap", "bool", 0, 0, 0 },
+    { "saturation", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "brightness", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "bring_to_front", "bool", 0, 0, 0 },
+    { "zoom", "float", "<min>0</min>", 0, 0 },
+    { "icon", "bool", 0, 0, 0 },
+    { "minimized", "bool", 0, 0, 0 },
+    { "auto_rotate", "bool", 0, 0, 0 }
+};
 
 static Bool
 switchInitScreen (CompPlugin *p,
@@ -2187,6 +1941,16 @@ switchInitScreen (CompPlugin *p,
     ss = malloc (sizeof (SwitchScreen));
     if (!ss)
 	return FALSE;
+
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &switchMetadata,
+					    switchScreenOptionInfo,
+					    ss->opt,
+					    SWITCH_SCREEN_OPTION_NUM))
+    {
+	free (ss);
+	return FALSE;
+    }
 
     ss->popupWindow = None;
 
@@ -2205,11 +1969,11 @@ switchInitScreen (CompPlugin *p,
 
     ss->grabIndex = 0;
 
-    ss->speed    = SWITCH_SPEED_DEFAULT;
-    ss->timestep = SWITCH_TIMESTEP_DEFAULT;
-    ss->zoom     = SWITCH_ZOOM_DEFAULT / 30.0f;
+    ss->speed    = ss->opt[SWITCH_SCREEN_OPTION_SPEED].value.f;
+    ss->timestep = ss->opt[SWITCH_SCREEN_OPTION_TIMESTEP].value.f;
+    ss->zoom     = ss->opt[SWITCH_SCREEN_OPTION_ZOOM].value.f / 30.0f;
 
-    ss->zooming  = (SWITCH_ZOOM_DEFAULT > 0.05f) ? TRUE : FALSE;
+    ss->zooming  = (ss->opt[SWITCH_SCREEN_OPTION_ZOOM].value.f > 0.05f);
 
     ss->zoomMask = ~0;
 
@@ -2222,24 +1986,15 @@ switchInitScreen (CompPlugin *p,
     ss->translate  = 0.0f;
     ss->sTranslate = 0.0f;
 
-    ss->saturation = (COLOR  * SWITCH_SATURATION_DEFAULT) / 100;
-    ss->brightness = (0xffff * SWITCH_BRIGHTNESS_DEFAULT) / 100;
-    ss->opacity    = (OPAQUE * SWITCH_OPACITY_DEFAULT)    / 100;
+    ss->saturation = 
+	(COLOR  * ss->opt[SWITCH_SCREEN_OPTION_SATURATION].value.i) / 100;
+    ss->brightness = 
+	(0xffff * ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS].value.i) / 100;
+    ss->opacity    = 
+	(OPAQUE * ss->opt[SWITCH_SCREEN_OPTION_OPACITY].value.i)    / 100;
 
-    ss->bringToFront = SWITCH_BRINGTOFRONT_DEFAULT;
+    ss->bringToFront = ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b;
     ss->allWindows   = FALSE;
-
-    switchScreenInitOptions (ss);
-
-    matchUpdate (s->display,
-		 &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match);
-
-    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT].value.action);
-    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
-    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
-    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL].value.action);
-    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP].value.action);
-    addScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP].value.action);
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
@@ -2258,20 +2013,6 @@ switchFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
     SWITCH_SCREEN (s);
-    SWITCH_DISPLAY (s->display);
-
-    matchFini (&ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match);
-
-    removeScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_NEXT].value.action);
-    removeScreenAction (s, &sd->opt[SWITCH_DISPLAY_OPTION_PREV].value.action);
-    removeScreenAction (s, 
-			&sd->opt[SWITCH_DISPLAY_OPTION_NEXT_ALL].value.action);
-    removeScreenAction (s, 
-			&sd->opt[SWITCH_DISPLAY_OPTION_PREV_ALL].value.action);
-    removeScreenAction (s, 
-			&sd->opt[SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP].value.action);
-    removeScreenAction (s, 
-			&sd->opt[SWITCH_DISPLAY_OPTION_PREV_NO_POPUP].value.action);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
@@ -2283,15 +2024,30 @@ switchFiniScreen (CompPlugin *p,
     if (ss->windowsSize)
 	free (ss->windows);
 
+    compFiniScreenOptions (s, ss->opt, SWITCH_SCREEN_OPTION_NUM);
+
     free (ss);
 }
 
 static Bool
 switchInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&switchMetadata,
+					 p->vTable->name,
+					 switchDisplayOptionInfo,
+					 SWITCH_DISPLAY_OPTION_NUM,
+					 switchScreenOptionInfo,
+					 SWITCH_SCREEN_OPTION_NUM))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&switchMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&switchMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -2301,6 +2057,8 @@ switchFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&switchMetadata);
 }
 
 static int
@@ -2310,12 +2068,18 @@ switchGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+switchGetMetadata (CompPlugin *plugin)
+{
+    return &switchMetadata;
+}
+
 CompPluginVTable switchVTable = {
     "switcher",
     N_("Application Switcher"),
     N_("Application Switcher"),
     switchGetVersion,
-    0, /* GetMetadata */
+    switchGetMetadata,
     switchInit,
     switchFini,
     switchInitDisplay,
