@@ -264,7 +264,7 @@ static const CompMetadataOptionInfo wobblyScreenOptionInfo[] = {
     { "friction", "float", "<min>0.1</min>", 0, 0 },
     { "spring_k", "float", "<min>0.1</min>", 0, 0 },
     { "grid_resolution", "int", "<min>1</min><max>64</max>", 0, 0 },
-    { "min_grid_size", "int", "<min>4</min><max>128</max", 0, 0 },
+    { "min_grid_size", "int", "<min>4</min><max>128</max>", 0, 0 },
     { "map_effect", "string", 0, 0, 0 },
     { "focus_effect", "string", 0, 0, 0 },
     { "map_window_match", "match", 0, 0, 0 },
