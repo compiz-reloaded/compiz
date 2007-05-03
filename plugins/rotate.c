@@ -84,8 +84,6 @@ typedef struct _RotateDisplay {
     HandleEventProc handleEvent;
 
     CompOption opt[ROTATE_DISPLAY_OPTION_NUM];
-
-    int	flipTime;
 } RotateDisplay;
 
 #define ROTATE_SCREEN_OPTION_POINTER_INVERT_Y	 0
@@ -1034,9 +1032,11 @@ rotateEdgeFlip (CompScreen      *s,
 
     if (edge == SCREEN_EDGE_LEFT)
     {
+	int flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
+
 	ROTATE_SCREEN (s);
 
-	if (rd->flipTime == 0 || (rs->moving && !rs->slow))
+	if (flipTime == 0 || (rs->moving && !rs->slow))
 	{
 	    int pointerDx = pointerX - lastPointerX;
 	    int warpX;
@@ -1056,8 +1056,11 @@ rotateEdgeFlip (CompScreen      *s,
 	else
 	{
 	    if (!rs->rotateHandle)
-		rs->rotateHandle =
-		    compAddTimeout (rd->flipTime, rotateFlipLeft, s);
+	    {
+		int flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
+
+		rs->rotateHandle = compAddTimeout (flipTime, rotateFlipLeft, s);
+	    }
 
 	    rs->moving  = TRUE;
 	    rs->moveTo -= 360.0f / s->hsize;
@@ -1074,9 +1077,11 @@ rotateEdgeFlip (CompScreen      *s,
     }
     else
     {
+	int flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
+
 	ROTATE_SCREEN (s);
 
-	if (rd->flipTime == 0 || (rs->moving && !rs->slow))
+	if (flipTime == 0 || (rs->moving && !rs->slow))
 	{
 	    int pointerDx = pointerX - lastPointerX;
 	    int warpX;
@@ -1096,8 +1101,12 @@ rotateEdgeFlip (CompScreen      *s,
 	else
 	{
 	    if (!rs->rotateHandle)
+	    {
+		int flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
+
 		rs->rotateHandle =
-		    compAddTimeout (rd->flipTime, rotateFlipRight, s);
+		    compAddTimeout (flipTime, rotateFlipRight, s);
+	    }
 
 	    rs->moving  = TRUE;
 	    rs->moveTo += 360.0f / s->hsize;
@@ -1587,27 +1596,14 @@ rotateSetDisplayOption (CompPlugin      *plugin,
 			CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     ROTATE_DISPLAY (display);
 
-    o = compFindOption (rd->opt, NUM_OPTIONS (rd), name, &index);
+    o = compFindOption (rd->opt, NUM_OPTIONS (rd), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case ROTATE_DISPLAY_OPTION_FLIPTIME:
-	if (compSetIntOption (o, value))
-	{
-	    rd->flipTime = o->value.i;
-	    return TRUE;
-	}
-	break;
-    default:
-	return compSetDisplayOption (display, o, value);
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
 static const CompMetadataOptionInfo rotateDisplayOptionInfo[] = {
@@ -1679,8 +1675,6 @@ rotateInitDisplay (CompPlugin  *p,
 	free (rd);
 	return FALSE;
     }
-
-    rd->flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
 
     WRAP (rd, d, handleEvent, rotateHandleEvent);
 
