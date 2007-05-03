@@ -203,6 +203,18 @@ placeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
+    case PLACE_SCREEN_OPTION_POSITION_MATCHES:
+    case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
+	if (compSetOptionList (o, value))
+	{
+	    int i;
+
+	    for (i = 0; i < o->value.list.nValue; i++)
+		matchUpdate (screen->display, &o->value.list.value[i].match);
+
+	    return TRUE;
+       }
+       break;
     default:
 	if (compSetOption (o, value))
 	    return TRUE;
