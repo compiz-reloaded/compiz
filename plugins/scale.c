@@ -106,11 +106,6 @@ typedef struct _ScaleScreen {
 
     CompOption opt[SCALE_SCREEN_OPTION_NUM];
 
-    int spacing;
-
-    float speed;
-    float timestep;
-
     Bool grab;
     int  grabIndex;
 
@@ -132,7 +127,6 @@ typedef struct _ScaleScreen {
     int        windowsSize;
     int        nWindows;
 
-    Bool     darkenBack;
     GLushort opacity;
 
     IconOverlay iconOverlay;
@@ -222,34 +216,6 @@ scaleSetScreenOption (CompPlugin  *plugin,
 	return FALSE;
 
     switch (index) {
-    case SCALE_SCREEN_OPTION_SPACING:
-	if (compSetIntOption (o, value))
-	{
-	    ss->spacing = o->value.i;
-	    return TRUE;
-	}
-	break;
-    case SCALE_SCREEN_OPTION_SPEED:
-	if (compSetFloatOption (o, value))
-	{
-	    ss->speed = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case SCALE_SCREEN_OPTION_TIMESTEP:
-	if (compSetFloatOption (o, value))
-	{
-	    ss->timestep = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case SCALE_SCREEN_OPTION_DARKEN_BACK:
-	if (compSetBoolOption (o, value))
-	{
-	    ss->darkenBack = o->value.b;
-	    return TRUE;
-	}
-	break;
     case SCALE_SCREEN_OPTION_OPACITY:
 	if (compSetIntOption (o, value))
 	{
@@ -265,9 +231,7 @@ scaleSetScreenOption (CompPlugin  *plugin,
 	}
 	break;
     default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
+	return compSetScreenOption (screen, o, value);
     }
 
     return FALSE;
@@ -364,7 +328,7 @@ scalePaintWindow (CompWindow		  *w,
 	}
 	else if (ss->state != SCALE_STATE_IN)
 	{
-	    if (ss->darkenBack)
+	    if (ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK].value.b)
 	    {
 		/* modify brightness of the other windows */
 		sAttrib.brightness = sAttrib.brightness / 2;
@@ -569,8 +533,11 @@ layoutSlots (CompScreen *s)
 {
     int i, j, x, y, width, height, lines, n;
     int x1, y1, x2, y2;
+    int spacing;
 
     SCALE_SCREEN (s);
+
+    spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
 
     ss->nSlots = 0;
 
@@ -587,16 +554,16 @@ layoutSlots (CompScreen *s)
     if (s->workArea.y + s->workArea.height < y2)
 	y2 = s->workArea.y + s->workArea.height;
 
-    y      = y1 + ss->spacing;
-    height = ((y2 - y1) - (lines + 1) * ss->spacing) / lines;
+    y      = y1 + spacing;
+    height = ((y2 - y1) - (lines + 1) * spacing) / lines;
 
     for (i = 0; i < lines; i++)
     {
 	n = MIN (ss->nWindows - ss->nSlots,
 		 ceilf ((float) ss->nWindows / lines));
 
-	x     = x1 + ss->spacing;
-	width = ((x2 - x1) - (n + 1) * ss->spacing) / n;
+	x     = x1 + spacing;
+	width = ((x2 - x1) - (n + 1) * spacing) / n;
 
 	for (j = 0; j < n; j++)
 	{
@@ -607,12 +574,12 @@ layoutSlots (CompScreen *s)
 
 	    ss->slots[ss->nSlots].filled = FALSE;
 
-	    x += width + ss->spacing;
+	    x += width + spacing;
 
 	    ss->nSlots++;
 	}
 
-	y += height + ss->spacing;
+	y += height + spacing;
     }
 }
 
@@ -885,8 +852,10 @@ scalePreparePaintScreen (CompScreen *s,
 	int        steps;
 	float      amount, chunk;
 
-	amount = msSinceLastPaint * 0.05f * ss->speed;
-	steps  = amount / (0.5f * ss->timestep);
+	amount = msSinceLastPaint * 0.05f *
+	    ss->opt[SCALE_SCREEN_OPTION_SPEED].value.f;
+	steps  = amount /
+	    (0.5f * ss->opt[SCALE_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps) steps = 1;
 	chunk  = amount / (float) steps;
 
@@ -1909,13 +1878,8 @@ scaleInitScreen (CompPlugin *p,
     ss->windows = 0;
     ss->windowsSize = 0;
 
-    ss->spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
-
-    ss->speed    = ss->opt[SCALE_SCREEN_OPTION_SPEED].value.f;
-    ss->timestep = ss->opt[SCALE_SCREEN_OPTION_TIMESTEP].value.f;
-    ss->opacity  = (OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
-
-    ss->darkenBack = ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK].value.b;
+    ss->opacity  =
+	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
 
     ss->iconOverlay =
 	scaleIconOverlayFromString (&ss->opt[SCALE_SCREEN_OPTION_ICON].value);
