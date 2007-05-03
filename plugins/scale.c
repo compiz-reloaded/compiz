@@ -39,36 +39,10 @@
 #define WIN_W(w) ((w)->width + (w)->input.left + (w)->input.right)
 #define WIN_H(w) ((w)->height + (w)->input.top + (w)->input.bottom)
 
-#define SCALE_SPACING_DEFAULT 10
-#define SCALE_SPACING_MIN     0
-#define SCALE_SPACING_MAX     250
-
-#define SCALE_INITIATE_KEY_DEFAULT       "Up"
-#define SCALE_INITIATE_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
-
-#define SCALE_SPEED_DEFAULT   1.5f
-#define SCALE_SPEED_MIN       0.1f
-#define SCALE_SPEED_MAX       50.0f
-#define SCALE_SPEED_PRECISION 0.1f
-
-#define SCALE_TIMESTEP_DEFAULT   1.2f
-#define SCALE_TIMESTEP_MIN       0.1f
-#define SCALE_TIMESTEP_MAX       50.0f
-#define SCALE_TIMESTEP_PRECISION 0.1f
-
 #define SCALE_STATE_NONE 0
 #define SCALE_STATE_OUT  1
 #define SCALE_STATE_WAIT 2
 #define SCALE_STATE_IN   3
-
-#define SCALE_DARKEN_BACK_DEFAULT TRUE
-
-#define SCALE_OPACITY_DEFAULT 75
-#define SCALE_OPACITY_MIN     0
-#define SCALE_OPACITY_MAX     100
-
-#define SCALE_WINDOW_MATCH_DEFAULT \
-    "Toolbar | Utility | Dialog | Normal | Unknown"
 
 typedef enum {
     ScaleIconNone = 0,
@@ -76,23 +50,7 @@ typedef enum {
     ScaleIconBig
 } IconOverlay;
 
-static char *iconOverlayString[] = {
-    N_("None"),
-    N_("Emblem"),
-    N_("Big")
-};
-
-static IconOverlay iconOverlay[] = {
-    ScaleIconNone,
-    ScaleIconEmblem,
-    ScaleIconBig
-};
-#define N_ICON_TYPE (sizeof (iconOverlayString) / sizeof (iconOverlayString[0]))
-#define SCALE_ICON_DEFAULT (iconOverlayString[1])
-
-#define SCALE_HOVER_TIME_DEFAULT 750
-#define SCALE_HOVER_TIME_MIN     50
-#define SCALE_HOVER_TIME_MAX     10000
+static CompMetadata scaleMetadata;
 
 static int displayPrivateIndex;
 
@@ -225,6 +183,17 @@ typedef struct _ScaleWindow {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static IconOverlay
+scaleIconOverlayFromString (CompOptionValue *value)
+{
+    if (strcasecmp (value->s, "emblem") == 0)
+	return ScaleIconEmblem;
+    else if (strcasecmp (value->s, "big") == 0)
+	return ScaleIconBig;
+    else
+	return ScaleIconNone;
+}
+
 static CompOption *
 scaleGetScreenOptions (CompPlugin  *plugin,
 		       CompScreen *screen,
@@ -291,16 +260,8 @@ scaleSetScreenOption (CompPlugin  *plugin,
     case SCALE_SCREEN_OPTION_ICON:
 	if (compSetStringOption (o, value))
 	{
-	    int i;
-
-	    for (i = 0; i < N_ICON_TYPE; i++)
-	    {
-		if (strcmp (o->value.s, iconOverlayString[i]) == 0)
-		{
-		    ss->iconOverlay = iconOverlay[i];
-		    return TRUE;
-		}
-	    }
+	    ss->iconOverlay = scaleIconOverlayFromString (&o->value);
+	    return TRUE;
 	}
 	break;
     default:
@@ -310,85 +271,6 @@ scaleSetScreenOption (CompPlugin  *plugin,
     }
 
     return FALSE;
-}
-
-static void
-scaleScreenInitOptions (ScaleScreen *ss)
-{
-    CompOption *o;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_SPACING];
-    o->name	  = "spacing";
-    o->shortDesc  = N_("Spacing");
-    o->longDesc   = N_("Space between windows");
-    o->type	  = CompOptionTypeInt;
-    o->value.i	  = SCALE_SPACING_DEFAULT;
-    o->rest.i.min = SCALE_SPACING_MIN;
-    o->rest.i.max = SCALE_SPACING_MAX;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_SPEED];
-    o->name		= "speed";
-    o->shortDesc	= N_("Speed");
-    o->longDesc		= N_("Scale speed");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= SCALE_SPEED_DEFAULT;
-    o->rest.f.min	= SCALE_SPEED_MIN;
-    o->rest.f.max	= SCALE_SPEED_MAX;
-    o->rest.f.precision = SCALE_SPEED_PRECISION;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_TIMESTEP];
-    o->name		= "timestep";
-    o->shortDesc	= N_("Timestep");
-    o->longDesc		= N_("Scale timestep");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= SCALE_TIMESTEP_DEFAULT;
-    o->rest.f.min	= SCALE_TIMESTEP_MIN;
-    o->rest.f.max	= SCALE_TIMESTEP_MAX;
-    o->rest.f.precision = SCALE_TIMESTEP_PRECISION;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH];
-    o->name	 = "window_match";
-    o->shortDesc = N_("Scale Windows");
-    o->longDesc	 = N_("Windows that should be scaled in scale mode");
-    o->type	 = CompOptionTypeMatch;
-
-    matchInit (&o->value.match);
-    matchAddFromString (&o->value.match, SCALE_WINDOW_MATCH_DEFAULT);
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK];
-    o->name      = "darken_back";
-    o->shortDesc = N_("Darken Background");
-    o->longDesc  = N_("Darken background when scaling windows");
-    o->type      = CompOptionTypeBool;
-    o->value.b   = SCALE_DARKEN_BACK_DEFAULT;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_OPACITY];
-    o->name	  = "opacity";
-    o->shortDesc  = N_("Opacity");
-    o->longDesc	  = N_("Amount of opacity in percent");
-    o->type	  = CompOptionTypeInt;
-    o->value.i    = SCALE_OPACITY_DEFAULT;
-    o->rest.i.min = SCALE_OPACITY_MIN;
-    o->rest.i.max = SCALE_OPACITY_MAX;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_ICON];
-    o->name	      = "overlay_icon";
-    o->shortDesc      = N_("Overlay Icon");
-    o->longDesc	      = N_("Overlay an icon on windows once they are scaled");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (SCALE_ICON_DEFAULT);
-    o->rest.s.string  = iconOverlayString;
-    o->rest.s.nString = N_ICON_TYPE;
-
-    o = &ss->opt[SCALE_SCREEN_OPTION_HOVER_TIME];
-    o->name	  = "hover_time";
-    o->shortDesc  = N_("Hover Time");
-    o->longDesc	  = N_("Time (in ms) before scale mode is terminated when "
-		       "hovering over a window");
-    o->type	  = CompOptionTypeInt;
-    o->value.i    = SCALE_HOVER_TIME_DEFAULT;
-    o->rest.i.min = SCALE_HOVER_TIME_MIN;
-    o->rest.i.max = SCALE_HOVER_TIME_MAX;
 }
 
 static Bool
@@ -1896,102 +1778,23 @@ scaleSetDisplayOption (CompPlugin  *plugin,
 		       CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     SCALE_DISPLAY (display);
 
-    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, &index);
+    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, NULL);
 
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case SCALE_DISPLAY_OPTION_INITIATE:
-    case SCALE_DISPLAY_OPTION_INITIATE_ALL:
-    case SCALE_DISPLAY_OPTION_INITIATE_GROUP:
-    case SCALE_DISPLAY_OPTION_INITIATE_OUTPUT:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-    default:
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
-static void
-scaleDisplayInitOptions (ScaleDisplay *sd,
-			 Display      *display)
-{
-    CompOption *o;
-
-    o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE];
-    o->name			  = "initiate";
-    o->shortDesc		  = N_("Initiate Window Picker");
-    o->longDesc			  = N_("Layout and start transforming windows");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = scaleInitiate;
-    o->value.action.terminate	  = scaleTerminate;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = (1 << SCREEN_EDGE_TOPRIGHT);
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitEdgeDnd;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.key.modifiers = SCALE_INITIATE_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (SCALE_INITIATE_KEY_DEFAULT));
-
-    o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL];
-    o->name		      = "initiate_all";
-    o->shortDesc	      = N_("Initiate Window Picker For All Windows");
-    o->longDesc		      = N_("Layout and start transforming all windows");
-    o->type		      = CompOptionTypeAction;
-    o->value.action.initiate  = scaleInitiateAll;
-    o->value.action.terminate = scaleTerminate;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.state     = CompActionStateInitEdge;
-    o->value.action.state    |= CompActionStateInitEdgeDnd;
-    o->value.action.type      = 0;
-    o->value.action.state    |= CompActionStateInitKey;
-    o->value.action.state    |= CompActionStateInitButton;
-
-    o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP];
-    o->name		      = "initiate_group";
-    o->shortDesc	      = N_("Initiate Window Picker For Window Group");
-    o->longDesc		      = N_("Layout and start transforming "
-				   "window group");
-    o->type		      = CompOptionTypeAction;
-    o->value.action.initiate  = scaleInitiateGroup;
-    o->value.action.terminate = scaleTerminate;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.state     = CompActionStateInitEdge;
-    o->value.action.state    |= CompActionStateInitEdgeDnd;
-    o->value.action.type      = 0;
-    o->value.action.state    |= CompActionStateInitKey;
-    o->value.action.state    |= CompActionStateInitButton;
-
-    o = &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT];
-    o->name		      = "initiate_output";
-    o->shortDesc	      = N_("Initiate Window Picker For Windows on "
-				   "Current Output");
-    o->longDesc		      = N_("Layout and start transforming "
-				   "windows on current output");
-    o->type		      = CompOptionTypeAction;
-    o->value.action.initiate  = scaleInitiateOutput;
-    o->value.action.terminate = scaleTerminate;
-    o->value.action.bell      = FALSE;
-    o->value.action.edgeMask  = 0;
-    o->value.action.state     = CompActionStateInitEdge;
-    o->value.action.state    |= CompActionStateInitEdgeDnd;
-    o->value.action.type      = 0;
-    o->value.action.state    |= CompActionStateInitKey;
-    o->value.action.state    |= CompActionStateInitButton;
-}
+static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
+    { "initiate", "action", 0, scaleInitiate, scaleTerminate },
+    { "initiate_all", "action", 0, scaleInitiateAll, scaleTerminate },
+    { "initiate_group", "action", 0, scaleInitiateGroup, scaleTerminate },
+    { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate }
+};
 
 static Bool
 scaleInitDisplay (CompPlugin  *p,
@@ -2003,17 +1806,26 @@ scaleInitDisplay (CompPlugin  *p,
     if (!sd)
 	return FALSE;
 
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &scaleMetadata,
+					     scaleDisplayOptionInfo,
+					     sd->opt,
+					     SCALE_DISPLAY_OPTION_NUM))
+    {
+	free (sd);
+	return FALSE;
+    }
+
     sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (sd->screenPrivateIndex < 0)
     {
+	compFiniDisplayOptions (d, sd->opt, SCALE_DISPLAY_OPTION_NUM);
 	free (sd);
 	return FALSE;
     }
 
     sd->lastActiveNum = None;
     sd->selectedWindow = None;
-
-    scaleDisplayInitOptions (sd, d->display);
 
     sd->leftKeyCode  = XKeysymToKeycode (d->display, XStringToKeysym ("Left"));
     sd->rightKeyCode = XKeysymToKeycode (d->display, XStringToKeysym ("Right"));
@@ -2037,8 +1849,21 @@ scaleFiniDisplay (CompPlugin  *p,
 
     UNWRAP (sd, d, handleEvent);
 
+    compFiniDisplayOptions (d, sd->opt, SCALE_DISPLAY_OPTION_NUM);
+
     free (sd);
 }
+
+static const CompMetadataOptionInfo scaleScreenOptionInfo[] = {
+    { "spacing", "int", "<min>0</min>", 0, 0 },
+    { "speed", "float", "<min>0.1</min>", 0, 0 },
+    { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "window_match", "match", 0, 0, 0 },
+    { "darken_back", "bool", 0, 0, 0 },
+    { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "overlay_icon", "string", 0, 0, 0 },
+    { "hover_time", "int", "<min>50</min>", 0, 0 }
+};
 
 static Bool
 scaleInitScreen (CompPlugin *p,
@@ -2052,9 +1877,20 @@ scaleInitScreen (CompPlugin *p,
     if (!ss)
 	return FALSE;
 
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &scaleMetadata,
+					    scaleScreenOptionInfo,
+					    ss->opt,
+					    SCALE_SCREEN_OPTION_NUM))
+    {
+	free (ss);
+	return FALSE;
+    }
+
     ss->windowPrivateIndex = allocateWindowPrivateIndex (s);
     if (ss->windowPrivateIndex < 0)
     {
+	compFiniScreenOptions (s, ss->opt, SCALE_SCREEN_OPTION_NUM);
 	free (ss);
 	return FALSE;
     }
@@ -2074,29 +1910,16 @@ scaleInitScreen (CompPlugin *p,
     ss->windows = 0;
     ss->windowsSize = 0;
 
-    ss->spacing = SCALE_SPACING_DEFAULT;
+    ss->spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
 
-    ss->speed    = SCALE_SPEED_DEFAULT;
-    ss->timestep = SCALE_TIMESTEP_DEFAULT;
-    ss->opacity  = (OPAQUE * SCALE_OPACITY_DEFAULT) / 100;
+    ss->speed    = ss->opt[SCALE_SCREEN_OPTION_SPEED].value.f;
+    ss->timestep = ss->opt[SCALE_SCREEN_OPTION_TIMESTEP].value.f;
+    ss->opacity  = (OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
 
-    ss->darkenBack = SCALE_DARKEN_BACK_DEFAULT;
+    ss->darkenBack = ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK].value.b;
 
-    ss->iconOverlay = ScaleIconEmblem;
-
-    scaleScreenInitOptions (ss);
-
-    matchInit (&ss->match);
-    matchUpdate (s->display,
-		 &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
-
-    addScreenAction (s, &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
-    addScreenAction (s,
-		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
-    addScreenAction (s,
-		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP].value.action);
-    addScreenAction (s,
-		     &sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT].value.action);
+    ss->iconOverlay = 
+	scaleIconOverlayFromString (&ss->opt[SCALE_SCREEN_OPTION_ICON].value);
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
@@ -2116,19 +1939,6 @@ scaleFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     SCALE_SCREEN (s);
-    SCALE_DISPLAY (s->display);
-
-    matchFini (&ss->match);
-    matchFini (&ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match);
-
-    removeScreenAction (s, 
-			&sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action);
-    removeScreenAction (s,
-	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_ALL].value.action);
-    removeScreenAction (s,
-	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_GROUP].value.action);
-    removeScreenAction (s,
-	   		&sd->opt[SCALE_DISPLAY_OPTION_INITIATE_OUTPUT].value.action);
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
@@ -2144,6 +1954,8 @@ scaleFiniScreen (CompPlugin *p,
 
     if (ss->windowsSize)
 	free (ss->windows);
+
+    compFiniScreenOptions (s, ss->opt, SCALE_SCREEN_OPTION_NUM);
 
     free (ss);
 }
@@ -2186,9 +1998,22 @@ scaleFiniWindow (CompPlugin *p,
 static Bool
 scaleInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&scaleMetadata,
+					 p->vTable->name,
+					 scaleDisplayOptionInfo,
+					 SCALE_DISPLAY_OPTION_NUM,
+					 scaleScreenOptionInfo,
+					 SCALE_SCREEN_OPTION_NUM))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&scaleMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&scaleMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -2198,6 +2023,8 @@ scaleFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&scaleMetadata);
 }
 
 static int
@@ -2207,12 +2034,18 @@ scaleGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+scaleGetMetadata (CompPlugin *plugin)
+{
+    return &scaleMetadata;
+}
+
 CompPluginVTable scaleVTable = {
     "scale",
     N_("Scale"),
     N_("Scale windows"),
     scaleGetVersion,
-    0, /* GetMetadata */
+    scaleGetMetadata,
     scaleInit,
     scaleFini,
     scaleInitDisplay,

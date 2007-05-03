@@ -17,6 +17,7 @@ xml_in_files =		  \
 	png.xml.in	  \
 	regex.xml.in	  \
 	resize.xml.in     \
+	scale.xml.in      \
 	screenshot.xml.in \
 	svg.xml.in        \
 	switcher.xml.in   \
