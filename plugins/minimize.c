@@ -60,11 +60,7 @@ typedef struct _MinScreen {
     DamageWindowRectProc   damageWindowRect;
     FocusWindowProc	   focusWindow;
 
-    float speed;
-    float timestep;
-
     int shadeStep;
-
     int moreAdjust;
 } MinScreen;
 
@@ -134,20 +130,6 @@ minSetScreenOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case MIN_SCREEN_OPTION_SPEED:
-	if (compSetFloatOption (o, value))
-	{
-	    ms->speed = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case MIN_SCREEN_OPTION_TIMESTEP:
-	if (compSetFloatOption (o, value))
-	{
-	    ms->timestep = o->value.f;
-	    return TRUE;
-	}
-	break;
     case MIN_SCREEN_OPTION_SHADE_RESISTANCE:
 	if (compSetIntOption (o, value))
 	{
@@ -361,8 +343,9 @@ minPreparePaintScreen (CompScreen *s,
 	int        steps, h;
 	float      amount, chunk;
 
-	amount = msSinceLastPaint * 0.05f * ms->speed;
-	steps  = amount / (0.5f * ms->timestep);
+	amount = msSinceLastPaint * 0.05f *
+	    ms->opt[MIN_SCREEN_OPTION_SPEED].value.f;
+	steps  = amount / (0.5f * ms->opt[MIN_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps) steps = 1;
 	chunk  = amount / (float) steps;
 
@@ -893,10 +876,7 @@ minInitScreen (CompPlugin *p,
     }
 
     ms->moreAdjust = FALSE;
-
-    ms->speed     = ms->opt[MIN_SCREEN_OPTION_SPEED].value.f;
-    ms->timestep  = ms->opt[MIN_SCREEN_OPTION_TIMESTEP].value.f;
-    ms->shadeStep = ms->opt[MIN_SCREEN_OPTION_SHADE_RESISTANCE].rest.i.max -
+    ms->shadeStep  = ms->opt[MIN_SCREEN_OPTION_SHADE_RESISTANCE].rest.i.max -
 	ms->opt[MIN_SCREEN_OPTION_SHADE_RESISTANCE].value.i + 1;
 
     WRAP (ms, s, preparePaintScreen, minPreparePaintScreen);
