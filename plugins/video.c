@@ -35,8 +35,6 @@
 #include <compiz.h>
 #include <decoration.h>
 
-#define VIDEO_YV12_DEFAULT TRUE
-
 /*
  * compiz composited video
  *
@@ -67,6 +65,8 @@
  *   +---------------+
  *
  */
+
+static CompMetadata videoMetadata;
 
 typedef struct _VideoTexture {
     struct _VideoTexture *next;
@@ -235,19 +235,6 @@ videoSetDisplayOption (CompPlugin  *plugin,
     }
 
     return FALSE;
-}
-
-static void
-videoDisplayInitOptions (VideoDisplay *vd)
-{
-    CompOption *o;
-
-    o = &vd->opt[VIDEO_DISPLAY_OPTION_YV12];
-    o->name	 = "yv12";
-    o->shortDesc = N_("YV12 colorspace");
-    o->longDesc	 = N_("Provide YV12 colorspace support");
-    o->type	 = CompOptionTypeBool;
-    o->value.b   = VIDEO_YV12_DEFAULT;
 }
 
 static int
@@ -1046,6 +1033,10 @@ videoWindowResizeNotify (CompWindow *w,
     WRAP (vs, w->screen, windowResizeNotify, videoWindowResizeNotify);
 }
 
+static const CompMetadataOptionInfo videoDisplayOptionInfo[] = {
+    { "yv12", "bool", 0, 0, 0 }
+};
+
 static Bool
 videoInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
@@ -1056,9 +1047,20 @@ videoInitDisplay (CompPlugin  *p,
     if (!vd)
 	return FALSE;
 
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &videoMetadata,
+					     videoDisplayOptionInfo,
+					     vd->opt,
+					     VIDEO_DISPLAY_OPTION_NUM))
+    {
+	free (vd);
+	return FALSE;
+    }
+
     vd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (vd->screenPrivateIndex < 0)
     {
+	compFiniDisplayOptions (d, vd->opt, VIDEO_DISPLAY_OPTION_NUM);
 	free (vd);
 	return FALSE;
     }
@@ -1077,8 +1079,6 @@ videoInitDisplay (CompPlugin  *p,
 
     WRAP (vd, d, handleEvent, videoHandleEvent);
 
-    videoDisplayInitOptions (vd);
-
     d->privates[displayPrivateIndex].ptr = vd;
 
     return TRUE;
@@ -1093,6 +1093,8 @@ videoFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, vd->screenPrivateIndex);
 
     UNWRAP (vd, d, handleEvent);
+
+    compFiniDisplayOptions (d, vd->opt, VIDEO_DISPLAY_OPTION_NUM);
 
     free (vd);
 }
@@ -1212,9 +1214,21 @@ videoFiniWindow (CompPlugin *p,
 static Bool
 videoInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&videoMetadata,
+					 p->vTable->name,
+					 videoDisplayOptionInfo,
+					 VIDEO_DISPLAY_OPTION_NUM,
+					 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&videoMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&videoMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -1224,6 +1238,8 @@ videoFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&videoMetadata);
 }
 
 static int
@@ -1231,6 +1247,12 @@ videoGetVersion (CompPlugin *plugin,
 		 int	    version)
 {
     return ABIVERSION;
+}
+
+static CompMetadata *
+videoGetMetadata (CompPlugin *plugin)
+{
+    return &videoMetadata;
 }
 
 CompPluginFeature videoFeatures[] = {
@@ -1242,7 +1264,7 @@ static CompPluginVTable videoVTable = {
     N_("Video Playback"),
     N_("Video playback"),
     videoGetVersion,
-    0, /* GetMetadata */
+    videoGetMetadata,
     videoInit,
     videoFini,
     videoInitDisplay,

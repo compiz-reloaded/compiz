@@ -33,6 +33,8 @@
 
 #include <compiz.h>
 
+static CompMetadata regexMetadata;
+
 static int displayPrivateIndex;
 
 typedef struct _RegexDisplay {
@@ -437,9 +439,18 @@ regexFiniWindow (CompPlugin *p,
 static Bool
 regexInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&regexMetadata, p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&regexMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&regexMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -449,6 +460,8 @@ regexFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&regexMetadata);
 }
 
 static int
@@ -458,12 +471,18 @@ regexGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+regexGetMetadata (CompPlugin *plugin)
+{
+    return &regexMetadata;
+}
+
 static CompPluginVTable regexVTable = {
     "regex",
     N_("Regex Matching"),
     N_("Regex window matching"),
     regexGetVersion,
-    0, /* GetMetadata */
+    regexGetMetadata,
     regexInit,
     regexFini,
     regexInitDisplay,

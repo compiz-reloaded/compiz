@@ -275,6 +275,10 @@ AC_ARG_ENABLE(gnome,
   [  --disable-gnome         Disable gnome settings module],
   [use_gnome=$enableval], [use_gnome=yes])
 
+AC_ARG_ENABLE(gnome-keybindings,
+  [  --disable-gnome-keybindings Disable gnome keybindings],
+  [use_gnome_keybindings=$enableval], [use_gnome_keybindings=yes])
+
 if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
@@ -291,6 +295,9 @@ if test "x$use_gtk" = "xyes"; then
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS"
 
+    PKG_CHECK_EXISTS(libwnck-1.0 >= 2.18.1,
+		     [have_libwnck_2_18_1=yes], [have_libwnck_2_18_1=no])
+
     if test "x$use_metacity" = "xyes"; then
       PKG_CHECK_MODULES(METACITY, libmetacity-private,
 			[use_metacity=yes], [use_metacity=no])
@@ -306,8 +313,14 @@ if test "x$use_gtk" = "xyes"; then
 			[use_gnome=yes], [use_gnome=no])
     fi
 
+    if test "x$use_gnome_keybindings" = "xyes"; then
+      PKG_CHECK_MODULES(GNOME_KEY_BINDINGS,
+			gnome-keybindings,
+			[use_gnome_keybindings=yes], [use_gnome_keybindings=no])
+    fi
+
     windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
-    windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`
+    windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`    keybindingsdir=`pkg-config --variable=keysdir gnome-keybindings`
   else
     use_metacity="no"
     use_gnome="no"
@@ -319,10 +332,15 @@ fi
 
 AC_SUBST(windowsettingsdatadir)
 AC_SUBST(windowsettingslibdir)
+AC_SUBST(keybindingsdir)
 
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
 if test "$use_gtk" = yes; then
   AC_DEFINE(USE_GTK, 1, [Build gtk window decorator])
+  if test "$have_libwnck_2_18_1" = yes; then
+    AC_DEFINE(HAVE_LIBWNCK_2_18_1, 1,
+	      [Define to 1 if libwnck version >= 2_18_1])
+  fi
 fi
 
 AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")
@@ -341,6 +359,11 @@ fi
 AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
 if test "$use_gnome" = yes; then
   AC_DEFINE(USE_GNOME, 1, [Build gnome settings module])
+fi
+
+AM_CONDITIONAL(USE_GNOME_KEYBINDINGS, test "x$use_gnome_keybindings" = "xyes")
+if test "$use_gnome_keybindings" = yes; then
+  AC_DEFINE(USE_GNOME_KEYBINDINGS, 1, [Install custom keybindings])
 fi
 
 AC_ARG_ENABLE(kde,

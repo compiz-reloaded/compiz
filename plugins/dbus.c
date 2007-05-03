@@ -33,6 +33,8 @@
 
 #include <compiz.h>
 
+static CompMetadata dbusMetadata;
+
 #define COMPIZ_DBUS_SERVICE_NAME	            "org.freedesktop.compiz"
 #define COMPIZ_DBUS_INTERFACE			    "org.freedesktop.compiz"
 #define COMPIZ_DBUS_ROOT_PATH			    "/org/freedesktop/compiz"
@@ -2656,9 +2658,16 @@ dbusFiniScreen (CompPlugin *p,
 static Bool
 dbusInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&dbusMetadata, p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&dbusMetadata);
 	return FALSE;
+    }
 
     return TRUE;
 }
@@ -2668,6 +2677,8 @@ dbusFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&dbusMetadata);
 }
 
 static int
@@ -2677,12 +2688,18 @@ dbusGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+dbusGetMetadata (CompPlugin *plugin)
+{
+    return &dbusMetadata;
+}
+
 CompPluginVTable dbusVTable = {
     "dbus",
     "Dbus",
     "Dbus Control Backend",
     dbusGetVersion,
-    0, /* GetMetadata */
+    dbusGetMetadata,
     dbusInit,
     dbusFini,
     dbusInitDisplay,

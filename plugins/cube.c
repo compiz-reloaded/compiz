@@ -46,68 +46,17 @@
 
 #include <compiz.h>
 
-#define CUBE_COLOR_RED_DEFAULT   0xefef
-#define CUBE_COLOR_GREEN_DEFAULT 0xebeb
-#define CUBE_COLOR_BLUE_DEFAULT  0xe7e7
-
-#define CUBE_IN_DEFAULT FALSE
-
-static char *cubeImages[] = {
-    "freedesktop"
-};
-#define N_CUBE_IMAGES (sizeof (cubeImages) / sizeof (cubeImages[0]))
-
-#define CUBE_SCALE_IMAGE_DEFAULT FALSE
-
-#define CUBE_NEXT_KEY_DEFAULT       "space"
-#define CUBE_NEXT_MODIFIERS_DEFAULT 0
-
-#define CUBE_PREV_KEY_DEFAULT       "BackSpace"
-#define CUBE_PREV_MODIFIERS_DEFAULT 0
-
-#define CUBE_SKYDOME_DEFAULT FALSE
-
-#define CUBE_SKYDOME_ANIMATE_DEFAULT FALSE
-
-#define CUBE_SKYDOME_GRAD_START_RED_DEFAULT   0x0d0d
-#define CUBE_SKYDOME_GRAD_START_GREEN_DEFAULT 0xb1b1
-#define CUBE_SKYDOME_GRAD_START_BLUE_DEFAULT  0xfdfd
-
-#define CUBE_SKYDOME_GRAD_END_RED_DEFAULT   0xfefe
-#define CUBE_SKYDOME_GRAD_END_GREEN_DEFAULT 0xffff
-#define CUBE_SKYDOME_GRAD_END_BLUE_DEFAULT  0xc7c7
-
-#define CUBE_UNFOLD_KEY_DEFAULT       "Down"
-#define CUBE_UNFOLD_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
-
-#define CUBE_ACCELERATION_DEFAULT   4.0f
-#define CUBE_ACCELERATION_MIN       1.0f
-#define CUBE_ACCELERATION_MAX       20.0f
-#define CUBE_ACCELERATION_PRECISION 0.1f
-
-#define CUBE_SPEED_DEFAULT   1.5f
-#define CUBE_SPEED_MIN       0.1f
-#define CUBE_SPEED_MAX       50.0f
-#define CUBE_SPEED_PRECISION 0.1f
-
-#define CUBE_TIMESTEP_DEFAULT   1.2f
-#define CUBE_TIMESTEP_MIN       0.1f
-#define CUBE_TIMESTEP_MAX       50.0f
-#define CUBE_TIMESTEP_PRECISION 0.1f
-
-#define CUBE_MIPMAP_DEFAULT TRUE
+static CompMetadata cubeMetadata;
 
 #define CUBE_DISPLAY_OPTION_UNFOLD 0
 #define CUBE_DISPLAY_OPTION_NEXT   1
 #define CUBE_DISPLAY_OPTION_PREV   2
 #define CUBE_DISPLAY_OPTION_NUM    3
 
-#define CUBE_ADJUST_IMAGE_DEFAULT FALSE
-
 static int displayPrivateIndex;
 
 typedef struct _CubeDisplay {
-    int		    screenPrivateIndex;
+    int	screenPrivateIndex;
 
     CompOption opt[CUBE_DISPLAY_OPTION_NUM];
 } CubeDisplay;
@@ -1054,152 +1003,6 @@ cubeSetScreenOption (CompPlugin      *plugin,
     return FALSE;
 }
 
-static void
-cubeScreenInitOptions (CubeScreen *cs,
-		       Display    *display)
-{
-    CompOption *o;
-    int	       i;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_COLOR];
-    o->name	  = "color";
-    o->shortDesc  = N_("Cube Color");
-    o->longDesc	  = N_("Color of top and bottom sides of the cube");
-    o->type	  = CompOptionTypeColor;
-    o->value.c[0] = CUBE_COLOR_RED_DEFAULT;
-    o->value.c[1] = CUBE_COLOR_GREEN_DEFAULT;
-    o->value.c[2] = CUBE_COLOR_BLUE_DEFAULT;
-    o->value.c[3] = 0xffff;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_IN];
-    o->name	  = "in";
-    o->shortDesc  = N_("Inside Cube");
-    o->longDesc	  = N_("Inside cube");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = CUBE_IN_DEFAULT;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE];
-    o->name	  = "scale_image";
-    o->shortDesc  = N_("Scale image");
-    o->longDesc	  = N_("Scale images to cover top face of cube");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = CUBE_SCALE_IMAGE_DEFAULT;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_IMAGES];
-    o->name	         = "images";
-    o->shortDesc         = N_("Image files");
-    o->longDesc	         = N_("List of PNG and SVG files that should be rendered "
-	"on top face of cube");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = N_CUBE_IMAGES;
-    o->value.list.value  = malloc (sizeof (CompOptionValue) * N_CUBE_IMAGES);
-    for (i = 0; i < N_CUBE_IMAGES; i++)
-	o->value.list.value[i].s = strdup (cubeImages[i]);
-    o->rest.s.string     = 0;
-    o->rest.s.nString    = 0;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME];
-    o->name	  = "skydome";
-    o->shortDesc  = N_("Skydome");
-    o->longDesc	  = N_("Render skydome");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = CUBE_SKYDOME_DEFAULT;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG];
-    o->name	      = "skydome_image";
-    o->shortDesc      = N_("Skydome Image");
-    o->longDesc	      = N_("Image to use as texture for the skydome");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup ("");
-    o->rest.s.string  = 0;
-    o->rest.s.nString = 0;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM];
-    o->name	  = "skydome_animated";
-    o->shortDesc  = N_("Animate Skydome");
-    o->longDesc	  = N_("Animate skydome when rotating cube");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = CUBE_SKYDOME_ANIMATE_DEFAULT;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_START];
-    o->name	  = "skydome_gradient_start_color";
-    o->shortDesc  = N_("Skydome Gradient Start Color");
-    o->longDesc	  = N_("Color to use for the top color-stop of the "
-		       "skydome-fallback gradient");
-    o->type	  = CompOptionTypeColor;
-    o->value.c[0] = CUBE_SKYDOME_GRAD_START_RED_DEFAULT;
-    o->value.c[1] = CUBE_SKYDOME_GRAD_START_GREEN_DEFAULT;
-    o->value.c[2] = CUBE_SKYDOME_GRAD_START_BLUE_DEFAULT;
-    o->value.c[3] = 0xffff;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SKYDOME_GRAD_END];
-    o->name	  = "skydome_gradient_end_color";
-    o->shortDesc  = N_("Skydome Gradient End Color");
-    o->longDesc	  = N_("Color to use for the bottom color-stop of the "
-		       "skydome-fallback gradient");
-    o->type	  = CompOptionTypeColor;
-    o->value.c[0] = CUBE_SKYDOME_GRAD_END_RED_DEFAULT;
-    o->value.c[1] = CUBE_SKYDOME_GRAD_END_GREEN_DEFAULT;
-    o->value.c[2] = CUBE_SKYDOME_GRAD_END_BLUE_DEFAULT;
-    o->value.c[3] = 0xffff;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_ACCELERATION];
-    o->name		= "acceleration";
-    o->shortDesc	= N_("Acceleration");
-    o->longDesc		= N_("Fold Acceleration");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= CUBE_ACCELERATION_DEFAULT;
-    o->rest.f.min	= CUBE_ACCELERATION_MIN;
-    o->rest.f.max	= CUBE_ACCELERATION_MAX;
-    o->rest.f.precision = CUBE_ACCELERATION_PRECISION;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_SPEED];
-    o->name		= "speed";
-    o->shortDesc	= N_("Speed");
-    o->longDesc		= N_("Fold Speed");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= CUBE_SPEED_DEFAULT;
-    o->rest.f.min	= CUBE_SPEED_MIN;
-    o->rest.f.max	= CUBE_SPEED_MAX;
-    o->rest.f.precision = CUBE_SPEED_PRECISION;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_TIMESTEP];
-    o->name		= "timestep";
-    o->shortDesc	= N_("Timestep");
-    o->longDesc		= N_("Fold Timestep");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= CUBE_TIMESTEP_DEFAULT;
-    o->rest.f.min	= CUBE_TIMESTEP_MIN;
-    o->rest.f.max	= CUBE_TIMESTEP_MAX;
-    o->rest.f.precision = CUBE_TIMESTEP_PRECISION;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_MIPMAP];
-    o->name	  = "mipmap";
-    o->shortDesc  = N_("Mipmap");
-    o->longDesc	  = N_("Generate mipmaps when possible for higher quality scaling");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = CUBE_MIPMAP_DEFAULT;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS];
-    o->name	         = "backgrounds";
-    o->shortDesc         = N_("Background Images");
-    o->longDesc	         = N_("Background images");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeString;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.s.string     = 0;
-    o->rest.s.nString    = 0;
-
-    o = &cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE];
-    o->name	  = "adjust_image";
-    o->shortDesc  = N_("Adjust Image");
-    o->longDesc	  = N_("Adjust top face image to rotation");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = CUBE_ADJUST_IMAGE_DEFAULT;
-}
-
 static int
 adjustVelocity (CubeScreen *cs)
 {
@@ -1950,97 +1753,29 @@ cubeGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-cubeSetDisplayOption (CompPlugin  *plugin,
+cubeSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     CUBE_DISPLAY (display);
 
-    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, &index);
-
+    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case CUBE_DISPLAY_OPTION_UNFOLD:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
-    case CUBE_DISPLAY_OPTION_NEXT:
-    case CUBE_DISPLAY_OPTION_PREV:
-	if (compSetActionOption (o, value))
-	    return TRUE;
-    default:
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
-static void
-cubeDisplayInitOptions (CubeDisplay *cd,
-			Display     *display)
-{
-    CompOption *o;
-
-    o = &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD];
-    o->name			  = "unfold";
-    o->shortDesc		  = N_("Unfold");
-    o->longDesc			  = N_("Unfold cube");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = cubeUnfold;
-    o->value.action.terminate	  = cubeFold;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = CUBE_UNFOLD_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (CUBE_UNFOLD_KEY_DEFAULT));
-
-    o = &cd->opt[CUBE_DISPLAY_OPTION_NEXT];
-    o->name			  = "next_slide";
-    o->shortDesc		  = N_("Next Slide");
-    o->longDesc			  = N_("Advance to next slide");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = cubeNextImage;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = CUBE_NEXT_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (CUBE_NEXT_KEY_DEFAULT));
-
-    o = &cd->opt[CUBE_DISPLAY_OPTION_PREV];
-    o->name			  = "prev_slide";
-    o->shortDesc		  = N_("Previous Slide");
-    o->longDesc			  = N_("Go back to previous slide");
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = cubePrevImage;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = CUBE_PREV_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (CUBE_PREV_KEY_DEFAULT));
-}
+static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
+    { "unfold", "action", 0, cubeUnfold, cubeFold },
+    { "next_slide", "action", "<passive_grab>false</passive_grab>",
+      cubePrevImage, 0 },
+    { "prev_slide", "action", "<passive_grab>false</passive_grab>",
+      cubeNextImage, 0 }
+};
 
 static Bool
 cubeInitDisplay (CompPlugin  *p,
@@ -2052,14 +1787,23 @@ cubeInitDisplay (CompPlugin  *p,
     if (!cd)
 	return FALSE;
 
-    cd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (cd->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &cubeMetadata,
+					     cubeDisplayOptionInfo,
+					     cd->opt,
+					     CUBE_DISPLAY_OPTION_NUM))
     {
 	free (cd);
 	return FALSE;
     }
 
-    cubeDisplayInitOptions (cd, d->display);
+    cd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (cd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, cd->opt, CUBE_DISPLAY_OPTION_NUM);
+	free (cd);
+	return FALSE;
+    }
 
     d->privates[displayPrivateIndex].ptr = cd;
 
@@ -2070,17 +1814,32 @@ static void
 cubeFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
-
-#ifdef USE_LIBRSVG
-    rsvg_term ();
-#endif
-
     CUBE_DISPLAY (d);
 
     freeScreenPrivateIndex (d, cd->screenPrivateIndex);
 
+    compFiniDisplayOptions (d, cd->opt, CUBE_DISPLAY_OPTION_NUM);
+
     free (cd);
 }
+
+static const CompMetadataOptionInfo cubeScreenOptionInfo[] = {
+    { "color", "color", 0, 0, 0 },
+    { "in", "bool", 0, 0, 0 },
+    { "scale_image", "bool", 0, 0, 0 },
+    { "images", "list", "<type>string</type>", 0, 0 },
+    { "skydome", "bool", 0, 0, 0 },
+    { "skydome_image", "string", 0, 0, 0 },
+    { "skydome_animated", "bool", 0, 0, 0 },
+    { "skydome_gradient_start_color", "color", 0, 0, 0 },
+    { "skydome_gradient_end_color", "color", 0, 0, 0 },
+    { "acceleration", "float", "<min>1.0</min>", 0, 0 },
+    { "speed", "float", "<min>0.1</min>", 0, 0 },
+    { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "mipmap", "bool", 0, 0, 0 },
+    { "backgrounds", "list", "<type>string</type>", 0, 0 },
+    { "adjust_image", "bool", 0, 0, 0 }
+};
 
 static Bool
 cubeInitScreen (CompPlugin *p,
@@ -2094,14 +1853,23 @@ cubeInitScreen (CompPlugin *p,
     if (!cs)
 	return FALSE;
 
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &cubeMetadata,
+					    cubeScreenOptionInfo,
+					    cs->opt,
+					    CUBE_SCREEN_OPTION_NUM))
+    {
+	free (cs);
+	return FALSE;
+    }
+
     cs->invert = 1;
 
     cs->tc[0] = cs->tc[1] = cs->tc[2] = cs->tc[3] = 0.0f;
     cs->tc[4] = cs->tc[5] = cs->tc[6] = cs->tc[7] = 0.0f;
 
-    cs->color[0] = CUBE_COLOR_RED_DEFAULT;
-    cs->color[1] = CUBE_COLOR_GREEN_DEFAULT;
-    cs->color[2] = CUBE_COLOR_BLUE_DEFAULT;
+    memcpy (cs->color, cs->opt[CUBE_SCREEN_OPTION_COLOR].value.c,
+	    sizeof (cs->color));
 
     cs->nvertices = 0;
     cs->vertices  = NULL;
@@ -2109,7 +1877,7 @@ cubeInitScreen (CompPlugin *p,
     cs->grabIndex = 0;
 
     cs->skyListId      = 0;
-    cs->animateSkyDome = CUBE_SKYDOME_ANIMATE_DEFAULT;
+    cs->animateSkyDome = cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
@@ -2124,9 +1892,9 @@ cubeInitScreen (CompPlugin *p,
     cs->imgNFile   = 0;
     cs->imgCurFile = 0;
 
-    cs->acceleration = CUBE_ACCELERATION_DEFAULT;
-    cs->speed        = CUBE_SPEED_DEFAULT;
-    cs->timestep     = CUBE_TIMESTEP_DEFAULT;
+    cs->acceleration = cs->opt[CUBE_SCREEN_OPTION_ACCELERATION].value.f;
+    cs->speed        = cs->opt[CUBE_SCREEN_OPTION_SPEED].value.f;
+    cs->timestep     = cs->opt[CUBE_SCREEN_OPTION_TIMESTEP].value.f;
 
     cs->unfolded = FALSE;
     cs->unfold   = 0.0f;
@@ -2140,12 +1908,23 @@ cubeInitScreen (CompPlugin *p,
 
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
-    cubeScreenInitOptions (cs, s->display->display);
-
     cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
     cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
 
-    addScreenAction (s, &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD].value.action);
+    cubeUpdateOutputs (s);
+
+    if (!cubeUpdateGeometry (s, s->hsize, cs->invert))
+    {
+	compFiniScreenOptions (s, cs->opt, CUBE_SCREEN_OPTION_NUM);
+	free (cs);
+	return FALSE;
+    }
+
+    if (cs->imgNFile)
+    {
+	cubeLoadImg (s, cs->imgCurFile);
+	damageScreen (s);
+    }
 
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
@@ -2156,17 +1935,6 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
 
-    cubeUpdateOutputs (s);
-
-    if (!cubeUpdateGeometry (s, s->hsize, cs->invert))
-	return FALSE;
-
-    if (cs->imgNFile)
-    {
-	cubeLoadImg (s, cs->imgCurFile);
-	damageScreen (s);
-    }
-
     return TRUE;
 }
 
@@ -2175,12 +1943,9 @@ cubeFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     CUBE_SCREEN (s);
-    CUBE_DISPLAY (s->display);
 
     if (cs->skyListId)
 	glDeleteLists (cs->skyListId, 1);
-
-    removeScreenAction (s, &cd->opt[CUBE_DISPLAY_OPTION_UNFOLD].value.action);
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);
@@ -2198,20 +1963,34 @@ cubeFiniScreen (CompPlugin *p,
 
     cubeUnloadBackgrounds (s);
 
+    compFiniScreenOptions (s, cs->opt, CUBE_SCREEN_OPTION_NUM);
+
     free (cs);
 }
 
 static Bool
 cubeInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&cubeMetadata,
+					 p->vTable->name,
+					 cubeDisplayOptionInfo,
+					 CUBE_DISPLAY_OPTION_NUM,
+					 cubeScreenOptionInfo,
+					 CUBE_SCREEN_OPTION_NUM))
+	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&cubeMetadata);
+	return FALSE;
+    }
+
+    compAddMetadataFromFile (&cubeMetadata, p->vTable->name);
 
 #ifdef USE_LIBRSVG
     rsvg_init ();
 #endif
-
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
-	return FALSE;
 
     return TRUE;
 }
@@ -2219,8 +1998,15 @@ cubeInit (CompPlugin *p)
 static void
 cubeFini (CompPlugin *p)
 {
+
+#ifdef USE_LIBRSVG
+    rsvg_term ();
+#endif
+
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&cubeMetadata);
 }
 
 static int
@@ -2228,6 +2014,12 @@ cubeGetVersion (CompPlugin *plugin,
 		int	   version)
 {
     return ABIVERSION;
+}
+
+static CompMetadata *
+cubeGetMetadata (CompPlugin *plugin)
+{
+    return &cubeMetadata;
 }
 
 CompPluginDep cubeDeps[] = {
@@ -2244,7 +2036,7 @@ CompPluginVTable cubeVTable = {
     N_("Desktop Cube"),
     N_("Place windows on cube"),
     cubeGetVersion,
-    0, /* GetMetadata */
+    cubeGetMetadata,
     cubeInit,
     cubeFini,
     cubeInitDisplay,

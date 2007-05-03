@@ -31,8 +31,7 @@
 
 #include <compiz.h>
 
-#define CLONE_INITIATE_BUTTON_DEFAULT           Button1
-#define CLONE_INITIATE_BUTTON_MODIFIERS_DEFAULT (CompSuperMask | ShiftMask)
+static CompMetadata cloneMetadata;
 
 static int displayPrivateIndex;
 
@@ -697,44 +696,20 @@ cloneSetDisplayOption (CompPlugin      *plugin,
 		       CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     CLONE_DISPLAY (display);
 
-    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, &index);
+    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case CLONE_DISPLAY_OPTION_INITIATE:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-    default:
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
-static void
-cloneDisplayInitOptions (CloneDisplay *cd)
-{
-    CompOption *o;
-
-    o = &cd->opt[CLONE_DISPLAY_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = N_("Initiate");
-    o->longDesc			     = N_("Initiate clone selection");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = cloneInitiate;
-    o->value.action.terminate	     = cloneTerminate;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = CLONE_INITIATE_BUTTON_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = CLONE_INITIATE_BUTTON_DEFAULT;
-}
+static const CompMetadataOptionInfo cloneDisplayOptionInfo[] = {
+    { "initiate", "action", "<allowed button=\"true\"/>", cloneInitiate,
+      cloneTerminate }
+};
 
 static Bool
 cloneInitDisplay (CompPlugin  *p,
@@ -746,14 +721,23 @@ cloneInitDisplay (CompPlugin  *p,
     if (!cd)
 	return FALSE;
 
-    cd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (cd->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &cloneMetadata,
+					     cloneDisplayOptionInfo,
+					     cd->opt,
+					     CLONE_DISPLAY_OPTION_NUM))
     {
 	free (cd);
 	return FALSE;
     }
 
-    cloneDisplayInitOptions (cd);
+    cd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (cd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, cd->opt, CLONE_DISPLAY_OPTION_NUM);
+	free (cd);
+	return FALSE;
+    }
 
     WRAP (cd, d, handleEvent, cloneHandleEvent);
 
@@ -771,6 +755,8 @@ cloneFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, cd->screenPrivateIndex);
 
     UNWRAP (cd, d, handleEvent);
+
+    compFiniDisplayOptions (d, cd->opt, CLONE_DISPLAY_OPTION_NUM);
 
     free (cd);
 }
@@ -799,8 +785,6 @@ cloneInitScreen (CompPlugin *p,
 
     cs->src = 0;
 
-    addScreenAction (s, &cd->opt[CLONE_DISPLAY_OPTION_INITIATE].value.action);
-
     WRAP (cs, s, preparePaintScreen, clonePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cloneDonePaintScreen);
     WRAP (cs, s, paintScreen, clonePaintScreen);
@@ -817,10 +801,6 @@ cloneFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     CLONE_SCREEN (s);
-    CLONE_DISPLAY (s->display);
-
-    removeScreenAction (s,
-			&cd->opt[CLONE_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);
@@ -834,9 +814,21 @@ cloneFiniScreen (CompPlugin *p,
 static Bool
 cloneInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&cloneMetadata,
+					 p->vTable->name,
+					 cloneDisplayOptionInfo,
+					 CLONE_DISPLAY_OPTION_NUM,
+					 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&cloneMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&cloneMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -846,6 +838,8 @@ cloneFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&cloneMetadata);
 }
 
 static int
@@ -855,12 +849,18 @@ cloneGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+cloneGetMetadata (CompPlugin *plugin)
+{
+    return &cloneMetadata;
+}
+
 CompPluginVTable cloneVTable = {
     "clone",
     N_("Clone Output"),
     N_("Output clone handler"),
     cloneGetVersion,
-    0, /* GetMetadata */
+    cloneGetMetadata,
     cloneInit,
     cloneFini,
     cloneInitDisplay,

@@ -910,8 +910,18 @@ initActionState (CompMetadata    *metadata,
     };
     int	      i;
     CompXPath xPath;
+    char      *grab;
 
     *state = CompActionStateAutoGrab;
+
+    grab = stringFromMetadataPathElement (metadata, path, "passive_grab");
+    if (grab)
+    {
+	if (strcmp (grab, "false") == 0)
+	    *state = 0;
+
+	free (grab);
+    }
 
     if (!initXPathFromMetadataPathElement (&xPath, metadata, BAD_CAST path,
 					   BAD_CAST "allowed"))

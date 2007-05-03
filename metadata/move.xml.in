@@ -1,0 +1,34 @@
+<compiz>
+    <plugin name="move">
+	<_short>Move Window</_short>
+	<_long>Move window</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate Window Move</_short>
+		<_long>Start moving window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;F7</key>
+		    <button>&lt;Alt&gt;Button1</button>
+		</default>
+	    </option>
+	    <option name="opacity" type="int">
+		<_short>Opacity</_short>
+		<_long>Opacity level of moving windows</_long>
+		<default>100</default>
+		<min>1</min>
+		<max>100</max>
+	    </option>
+	    <option name="constrain_y" type="bool">
+		<_short>Constrain Y</_short>
+		<_long>Constrain Y coordinate to workspace area</_long>
+		<default>true</default>
+	    </option>
+	    <option name="snapoff_maximized" type="bool">
+		<_short>Snapoff maximized windows</_short>
+		<_long>Snapoff and auto unmaximized maximized windows when dragging</_long>
+		<default>true</default>
+	    </option>
+	</display>
+    </plugin>
+</compiz>

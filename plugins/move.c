@@ -31,19 +31,7 @@
 
 #include <compiz.h>
 
-#define MOVE_INITIATE_BUTTON_DEFAULT	       Button1
-#define MOVE_INITIATE_BUTTON_MODIFIERS_DEFAULT CompAltMask
-
-#define MOVE_INITIATE_KEY_DEFAULT	    "F7"
-#define MOVE_INITIATE_KEY_MODIFIERS_DEFAULT CompAltMask
-
-#define MOVE_OPACITY_DEFAULT 100
-#define MOVE_OPACITY_MIN     1
-#define MOVE_OPACITY_MAX     100
-
-#define MOVE_CONSTRAIN_Y_DEFAULT TRUE
-
-#define MOVE_SNAPOFF_MAXIMIZED_DEFAULT TRUE
+static CompMetadata moveMetadata;
 
 struct _MoveKeys {
     char *name;
@@ -720,56 +708,6 @@ movePaintWindow (CompWindow		 *w,
     return status;
 }
 
-static void
-moveDisplayInitOptions (MoveDisplay *md,
-			Display     *display)
-{
-    CompOption *o;
-
-    o = &md->opt[MOVE_DISPLAY_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = N_("Initiate Window Move");
-    o->longDesc			     = N_("Start moving window");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = moveInitiate;
-    o->value.action.terminate	     = moveTerminate;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.state	     = CompActionStateInitButton;
-    o->value.action.button.modifiers = MOVE_INITIATE_BUTTON_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = MOVE_INITIATE_BUTTON_DEFAULT;
-    o->value.action.type	    |= CompBindingTypeKey;
-    o->value.action.state	    |= CompActionStateInitKey;
-    o->value.action.key.modifiers    = MOVE_INITIATE_KEY_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode      =
-	XKeysymToKeycode (display, XStringToKeysym (MOVE_INITIATE_KEY_DEFAULT));
-
-    o = &md->opt[MOVE_DISPLAY_OPTION_OPACITY];
-    o->name	  = "opacity";
-    o->shortDesc  = N_("Opacity");
-    o->longDesc	  = N_("Opacity level of moving windows");
-    o->type	  = CompOptionTypeInt;
-    o->value.i	  = MOVE_OPACITY_DEFAULT;
-    o->rest.i.min = MOVE_OPACITY_MIN;
-    o->rest.i.max = MOVE_OPACITY_MAX;
-
-    o = &md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y];
-    o->name	  = "constrain_y";
-    o->shortDesc  = N_("Constrain Y");
-    o->longDesc	  = N_("Constrain Y coordinate to workspace area");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = MOVE_CONSTRAIN_Y_DEFAULT;
-
-    o = &md->opt[MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED];
-    o->name      = "snapoff_maximized";
-    o->shortDesc = N_("Snapoff maximized windows");
-    o->longDesc  = N_("Snapoff and auto unmaximized maximized windows "
-		      "when dragging");
-    o->type      = CompOptionTypeBool;
-    o->value.b   = MOVE_SNAPOFF_MAXIMIZED_DEFAULT;
-}
-
 static CompOption *
 moveGetDisplayOptions (CompPlugin  *plugin,
 		       CompDisplay *display,
@@ -817,6 +755,13 @@ moveSetDisplayOption (CompPlugin  *plugin,
     return FALSE;
 }
 
+static const CompMetadataOptionInfo moveDisplayOptionInfo[] = {
+    { "initiate", "action", 0, moveInitiate, moveTerminate },
+    { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "constrain_y", "bool", 0, 0, 0 },
+    { "snapoff_maximized", "bool", 0, 0, 0 }
+};
+
 static Bool
 moveInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -828,16 +773,26 @@ moveInitDisplay (CompPlugin  *p,
     if (!md)
 	return FALSE;
 
-    md->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (md->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &moveMetadata,
+					     moveDisplayOptionInfo,
+					     md->opt,
+					     MOVE_DISPLAY_OPTION_NUM))
     {
 	free (md);
 	return FALSE;
     }
 
-    md->moveOpacity = (MOVE_OPACITY_DEFAULT * OPAQUE) / 100;
+    md->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (md->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, md->opt, MOVE_DISPLAY_OPTION_NUM);
+	free (md);
+	return FALSE;
+    }
 
-    moveDisplayInitOptions (md, d->display);
+    md->moveOpacity =
+	(md->opt[MOVE_DISPLAY_OPTION_OPACITY].value.i * OPAQUE) / 100;
 
     md->w      = 0;
     md->region = NULL;
@@ -864,6 +819,8 @@ moveFiniDisplay (CompPlugin  *p,
 
     UNWRAP (md, d, handleEvent);
 
+    compFiniDisplayOptions (d, md->opt, MOVE_DISPLAY_OPTION_NUM);
+
     free (md);
 }
 
@@ -883,8 +840,6 @@ moveInitScreen (CompPlugin *p,
 
     ms->moveCursor = XCreateFontCursor (s->display->display, XC_plus);
 
-    addScreenAction (s, &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action);
-
     WRAP (ms, s, paintWindow, movePaintWindow);
 
     s->privates[md->screenPrivateIndex].ptr = ms;
@@ -897,10 +852,6 @@ moveFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     MOVE_SCREEN (s);
-    MOVE_DISPLAY (s->display);
-
-    removeScreenAction (s, 
-			&md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (ms, s, paintWindow);
 
@@ -913,9 +864,21 @@ moveFiniScreen (CompPlugin *p,
 static Bool
 moveInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&moveMetadata,
+					 p->vTable->name,
+					 moveDisplayOptionInfo,
+					 MOVE_DISPLAY_OPTION_NUM,
+					 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&moveMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&moveMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -925,6 +888,8 @@ moveFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&moveMetadata);
 }
 
 static int
@@ -934,12 +899,18 @@ moveGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+moveGetMetadata (CompPlugin *plugin)
+{
+    return &moveMetadata;
+}
+
 CompPluginVTable moveVTable = {
     "move",
     N_("Move Window"),
     N_("Move window"),
     moveGetVersion,
-    0, /* GetMetadata */
+    moveGetMetadata,
     moveInit,
     moveFini,
     moveInitDisplay,
