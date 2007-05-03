@@ -99,10 +99,6 @@ typedef struct _CubeScreen {
 
     int grabIndex;
 
-    float acceleration;
-    float speed;
-    float timestep;
-
     Bool    unfolded;
     GLfloat unfold, unfoldVelocity;
 
@@ -110,15 +106,12 @@ typedef struct _CubeScreen {
     int      nvertices;
 
     GLuint skyListId;
-    Bool   animateSkyDome;
 
     Pixmap	    pixmap;
     int		    pw, ph;
     CompTexture     texture, sky;
 
-    int		    imgNFile;
-    int		    imgCurFile;
-    CompOptionValue *imgFiles;
+    int	imgCurFile;
 
     int nOutput;
     int output[64];
@@ -298,10 +291,15 @@ static void
 cubeLoadImg (CompScreen *s,
 	     int	n)
 {
-    unsigned int width, height;
-    int		 pw, ph;
+    unsigned int    width, height;
+    int		    pw, ph;
+    CompOptionValue *imgFiles;
+    int		    imgNFile;
 
     CUBE_SCREEN (s);
+
+    imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
+    imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
 
     if (!cs->fullscreenOutput)
     {
@@ -314,32 +312,32 @@ cubeLoadImg (CompScreen *s,
 	ph = s->outputDev[0].height;
     }
 
-    if (!cs->imgNFile || cs->pw != pw || cs->ph != ph)
+    if (!imgNFile || cs->pw != pw || cs->ph != ph)
     {
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
 	cubeFiniSvg (s);
 	cubeInitSvg (s);
 
-	if (!cs->imgNFile)
+	if (!imgNFile)
 	    return;
     }
 
-    cs->imgCurFile = n % cs->imgNFile;
+    cs->imgCurFile = n % imgNFile;
 
     if (readImageToTexture (s, &cs->texture,
-			    cs->imgFiles[cs->imgCurFile].s,
+			    imgFiles[cs->imgCurFile].s,
 			    &width, &height))
     {
 	cubeFiniSvg (s);
 	cubeInitSvg (s);
     }
     else if (!readSvgToTexture (s, &cs->texture,
-				cs->imgFiles[cs->imgCurFile].s,
+				imgFiles[cs->imgCurFile].s,
 				&width, &height))
     {
 	fprintf (stderr, "%s: Failed to load slide: %s\n",
-		 programName, cs->imgFiles[cs->imgCurFile].s);
+		 programName, imgFiles[cs->imgCurFile].s);
 
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
@@ -693,7 +691,7 @@ cubeUpdateSkyDomeList (CompScreen *s,
 
     CUBE_SCREEN (s);
 
-    if (cs->animateSkyDome)
+    if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b)
     {
 	iStacksStart = 11; /* min.   0 */
 	iStacksEnd = 53;   /* max.  64 */
@@ -908,9 +906,6 @@ cubeSetScreenOption (CompPlugin      *plugin,
     case CUBE_SCREEN_OPTION_IMAGES:
 	if (compSetOptionList (o, value))
 	{
-	    cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
-	    cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
-
 	    cubeLoadImg (screen, cs->imgCurFile);
 	    damageScreen (screen);
 
@@ -938,7 +933,6 @@ cubeSetScreenOption (CompPlugin      *plugin,
     case CUBE_SCREEN_OPTION_SKYDOME_ANIM:
 	if (compSetBoolOption (o, value))
 	{
-	    cs->animateSkyDome = o->value.b;
 	    cubeUpdateSkyDomeTexture (screen);
 	    cubeUpdateSkyDomeList (screen, 1.0f);
 	    damageScreen (screen);
@@ -963,32 +957,6 @@ cubeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case CUBE_SCREEN_OPTION_ACCELERATION:
-	if (compSetFloatOption (o, value))
-	{
-	    cs->acceleration = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case CUBE_SCREEN_OPTION_SPEED:
-	if (compSetFloatOption (o, value))
-	{
-	    cs->speed = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case CUBE_SCREEN_OPTION_TIMESTEP:
-	if (compSetFloatOption (o, value))
-	{
-	    cs->timestep = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case CUBE_SCREEN_OPTION_MIPMAP:
-    case CUBE_SCREEN_OPTION_ADJUST_IMAGE:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
     case CUBE_SCREEN_OPTION_BACKGROUNDS:
 	if (compSetOptionList (o, value))
 	{
@@ -996,8 +964,9 @@ cubeSetScreenOption (CompPlugin      *plugin,
 	    damageScreen (screen);
 	    return TRUE;
 	}
-    default:
 	break;
+    default:
+	return compSetScreenOption (screen, o, value);
     }
 
     return FALSE;
@@ -1013,7 +982,7 @@ adjustVelocity (CubeScreen *cs)
     else
 	unfold = 0.0f - cs->unfold;
 
-    adjust = unfold * 0.02f * cs->acceleration;
+    adjust = unfold * 0.02f * cs->opt[CUBE_SCREEN_OPTION_ACCELERATION].value.f;
     amount = fabs (unfold);
     if (amount < 1.0f)
 	amount = 1.0f;
@@ -1037,8 +1006,9 @@ cubePreparePaintScreen (CompScreen *s,
 	int   steps;
 	float amount, chunk;
 
-	amount = msSinceLastPaint * 0.2f * cs->speed;
-	steps  = amount / (0.5f * cs->timestep);
+	amount = msSinceLastPaint * 0.2f *
+	    cs->opt[CUBE_SCREEN_OPTION_SPEED].value.f;
+	steps  = amount / (0.5f * cs->opt[CUBE_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps) steps = 1;
 	chunk  = amount / (float) steps;
 
@@ -1212,7 +1182,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    glPushMatrix ();
 
-	    if (cs->animateSkyDome && cs->grabIndex == 0)
+	    if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b &&
+		cs->grabIndex == 0)
 	    {
 		glRotatef (sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
 		glRotatef (sAttrib->vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
@@ -1663,11 +1634,14 @@ cubeNextImage (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
+	int imgNFile;
+
 	CUBE_SCREEN (s);
 
-	if (cs->imgNFile)
+	imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
+	if (imgNFile)
 	{
-	    cubeLoadImg (s, (cs->imgCurFile + 1) % cs->imgNFile);
+	    cubeLoadImg (s, (cs->imgCurFile + 1) % imgNFile);
 	    damageScreen (s);
 	}
     }
@@ -1690,11 +1664,14 @@ cubePrevImage (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
+	int imgNFile;
+
 	CUBE_SCREEN (s);
 
-	if (cs->imgNFile)
+	imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
+	if (imgNFile)
 	{
-	    cubeLoadImg (s, (cs->imgCurFile - 1 + cs->imgNFile) % cs->imgNFile);
+	    cubeLoadImg (s, (cs->imgCurFile - 1 + imgNFile) % imgNFile);
 	    damageScreen (s);
 	}
     }
@@ -1711,7 +1688,7 @@ cubeOutputChangeNotify (CompScreen *s)
     cubeUnloadBackgrounds (s);
     cubeUpdateGeometry (s, s->hsize, cs->invert);
 
-    if (cs->imgNFile)
+    if (cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue)
 	cubeLoadImg (s, cs->imgCurFile);
 
     UNWRAP (cs, s, outputChangeNotify);
@@ -1876,8 +1853,7 @@ cubeInitScreen (CompPlugin *p,
 
     cs->grabIndex = 0;
 
-    cs->skyListId      = 0;
-    cs->animateSkyDome = cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b;
+    cs->skyListId = 0;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
@@ -1888,13 +1864,7 @@ cubeInitScreen (CompPlugin *p,
 
     cubeInitSvg (s);
 
-    cs->imgFiles   = 0;
-    cs->imgNFile   = 0;
     cs->imgCurFile = 0;
-
-    cs->acceleration = cs->opt[CUBE_SCREEN_OPTION_ACCELERATION].value.f;
-    cs->speed        = cs->opt[CUBE_SCREEN_OPTION_SPEED].value.f;
-    cs->timestep     = cs->opt[CUBE_SCREEN_OPTION_TIMESTEP].value.f;
 
     cs->unfolded = FALSE;
     cs->unfold   = 0.0f;
@@ -1908,9 +1878,6 @@ cubeInitScreen (CompPlugin *p,
 
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
-    cs->imgFiles = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.value;
-    cs->imgNFile = cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue;
-
     cubeUpdateOutputs (s);
 
     if (!cubeUpdateGeometry (s, s->hsize, cs->invert))
@@ -1920,7 +1887,7 @@ cubeInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
-    if (cs->imgNFile)
+    if (cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue)
     {
 	cubeLoadImg (s, cs->imgCurFile);
 	damageScreen (s);
