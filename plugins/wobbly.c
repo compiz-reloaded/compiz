@@ -2674,15 +2674,8 @@ wobblySetDisplayOption (CompPlugin  *plugin,
 	if (compSetActionOption (o, value))
 	    return TRUE;
 	break;
-    case WOBBLY_DISPLAY_OPTION_SNAP_INVERTED:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_DISPLAY_OPTION_SHIVER:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
     default:
-	break;
+	return compSetDisplayOption (display, o, value);
     }
 
     return FALSE;
@@ -2778,9 +2771,9 @@ wobblyInitScreen (CompPlugin *p,
 
     ws->wobblyWindows = FALSE;
 
-    ws->mapEffect   = 
+    ws->mapEffect   =
 	wobblyEffectFromString (&ws->opt[WOBBLY_SCREEN_OPTION_MAP_EFFECT].value);
-    ws->focusEffect = 
+    ws->focusEffect =
 	wobblyEffectFromString (&ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_EFFECT].value);
 
     ws->grabMask   = 0;
