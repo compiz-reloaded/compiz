@@ -16,7 +16,8 @@ xml_in_files =		  \
 	place.xml.in	  \
 	png.xml.in	  \
 	regex.xml.in	  \
-	resize.xml.in
+	resize.xml.in	  \
+	rotate.xml.in
 xml_files    = $(xml_in_files:.xml.in=.xml)
 xml_DATA     = $(xml_files)
 
