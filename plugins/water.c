@@ -1542,15 +1542,6 @@ waterSetDisplayOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case WATER_DISPLAY_OPTION_INITIATE:
-    case WATER_DISPLAY_OPTION_TOGGLE_RAIN:
-    case WATER_DISPLAY_OPTION_TOGGLE_WIPER:
-    case WATER_DISPLAY_OPTION_TITLE_WAVE:
-    case WATER_DISPLAY_OPTION_POINT:
-    case WATER_DISPLAY_OPTION_LINE:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
     case WATER_DISPLAY_OPTION_OFFSET_SCALE:
 	if (compSetFloatOption (o, value))
 	{
@@ -1575,8 +1566,9 @@ waterSetDisplayOption (CompPlugin      *plugin,
 	    }
 	    return TRUE;
 	}
-    default:
 	break;
+    default:
+	return compSetDisplayOption (display, o, value);
     }
 
     return FALSE;
