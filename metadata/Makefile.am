@@ -17,6 +17,7 @@ xml_in_files =		  \
 	png.xml.in	  \
 	regex.xml.in	  \
 	resize.xml.in     \
+	svg.xml.in        \
 	switcher.xml.in   \
 	video.xml.in      \
 	water.xml.in      \
