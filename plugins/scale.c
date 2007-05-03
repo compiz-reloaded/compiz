@@ -1918,7 +1918,7 @@ scaleInitScreen (CompPlugin *p,
 
     ss->darkenBack = ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK].value.b;
 
-    ss->iconOverlay = 
+    ss->iconOverlay =
 	scaleIconOverlayFromString (&ss->opt[SCALE_SCREEN_OPTION_ICON].value);
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
