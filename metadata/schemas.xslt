@@ -415,7 +415,7 @@
     <xsl:value-of select="$appName"/>
     <xsl:choose>
       <xsl:when test="ancestor::plugin">
-        <xsl:text>/plugin/</xsl:text>
+        <xsl:text>/plugins/</xsl:text>
         <xsl:value-of select="ancestor::plugin/@name"/>
       </xsl:when>
       <xsl:otherwise>
