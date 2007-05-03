@@ -8,7 +8,7 @@ xml_in_files =		  \
 	dbus.xml.in	  \
 	decoration.xml.in \
 	fade.xml.in	  \
-	fuse.xml.in	  \
+	fs.xml.in	  \
 	gconf.xml.in	  \
 	inotify.xml.in	  \
 	minimize.xml.in	  \
