@@ -720,9 +720,9 @@ moveGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-moveSetDisplayOption (CompPlugin  *plugin,
-		      CompDisplay    *display,
-		      char	     *name,
+moveSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      char	      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;
