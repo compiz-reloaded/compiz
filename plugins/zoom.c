@@ -623,7 +623,7 @@ zoomGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-zoomSetDisplayOption (CompPlugin  *plugin,
+zoomSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
 		      char	      *name,
 		      CompOptionValue *value)
@@ -763,8 +763,8 @@ zoomInitScreen (CompPlugin *p,
 
     zs->pointerInvertY = zs->opt[ZOOM_SCREEN_OPTION_POINTER_INVERT_Y].value.b;
 
-    zs->pointerSensitivity = 
-	zs->opt[ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY].value.f * 
+    zs->pointerSensitivity =
+	zs->opt[ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY].value.f *
 	ZOOM_POINTER_SENSITIVITY_FACTOR;
 
     zs->speed    = zs->opt[ZOOM_SCREEN_OPTION_SPEED].value.f;
