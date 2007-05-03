@@ -104,13 +104,9 @@ typedef struct _RotateScreen {
 
     CompOption opt[ROTATE_SCREEN_OPTION_NUM];
 
-    Bool  pointerInvertY;
     float pointerSensitivity;
-    Bool  snapTop;
-    float acceleration;
 
-    float speed;
-    float timestep;
+    Bool snapTop;
 
     int grabIndex;
 
@@ -177,13 +173,6 @@ rotateSetScreenOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case ROTATE_SCREEN_OPTION_POINTER_INVERT_Y:
-	if (compSetBoolOption (o, value))
-	{
-	    rs->pointerInvertY = o->value.b;
-	    return TRUE;
-	}
-	break;
     case ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY:
 	if (compSetFloatOption (o, value))
 	{
@@ -192,35 +181,8 @@ rotateSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case ROTATE_SCREEN_OPTION_ACCELERATION:
-	if (compSetFloatOption (o, value))
-	{
-	    rs->acceleration = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case ROTATE_SCREEN_OPTION_SNAP_TOP:
-	if (compSetBoolOption (o, value))
-	{
-	    rs->snapTop = o->value.b;
-	    return TRUE;
-	}
-	break;
-    case ROTATE_SCREEN_OPTION_SPEED:
-	if (compSetFloatOption (o, value))
-	{
-	    rs->speed = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case ROTATE_SCREEN_OPTION_TIMESTEP:
-	if (compSetFloatOption (o, value))
-	{
-	    rs->timestep = o->value.f;
-	    return TRUE;
-	}
     default:
-	break;
+	return compSetScreenOption (screen, o, value);
     }
 
     return FALSE;
@@ -245,7 +207,7 @@ adjustVelocity (RotateScreen *rs,
 	    xrot = rs->xrot - 360.0f / size;
     }
 
-    adjust = -xrot * 0.05f * rs->acceleration;
+    adjust = -xrot * 0.05f * rs->opt[ROTATE_SCREEN_OPTION_ACCELERATION].value.f;
     amount = fabs (xrot);
     if (amount < 10.0f)
 	amount = 10.0f;
@@ -257,12 +219,12 @@ adjustVelocity (RotateScreen *rs,
 
     rs->xVelocity = (amount * rs->xVelocity + adjust) / (amount + 2.0f);
 
-    if (rs->snapTop && rs->yrot > 50.0f)
+    if (rs->opt[ROTATE_SCREEN_OPTION_SNAP_TOP].value.b && rs->yrot > 50.0f)
 	yrot = -(90.f - rs->yrot);
     else
 	yrot = rs->yrot;
 
-    adjust = -yrot * 0.05f * rs->acceleration;
+    adjust = -yrot * 0.05f * rs->opt[ROTATE_SCREEN_OPTION_ACCELERATION].value.f;
     amount = fabs (rs->yrot);
     if (amount < 10.0f)
 	amount = 10.0f;
@@ -300,8 +262,10 @@ rotatePreparePaintScreen (CompScreen *s,
 	int   steps;
 	float amount, chunk;
 
-	amount = msSinceLastPaint * 0.05f * rs->speed;
-	steps  = amount / (0.5f * rs->timestep);
+	amount = msSinceLastPaint * 0.05f *
+	    rs->opt[ROTATE_SCREEN_OPTION_SPEED].value.f;
+	steps  = amount /
+	    (0.5f * rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps) steps = 1;
 	chunk  = amount / (float) steps;
 
@@ -1370,7 +1334,7 @@ rotateHandleEvent (CompDisplay *d,
 				     (s->height / 2) - pointerY);
 		    }
 
-		    if (rs->pointerInvertY)
+		    if (rs->opt[ROTATE_SCREEN_OPTION_POINTER_INVERT_Y].value.b)
 			pointerDy = -pointerDy;
 
 		    rs->xVelocity += pointerDx * rs->pointerSensitivity *
@@ -1753,16 +1717,9 @@ rotateInitScreen (CompPlugin *p,
     rs->grabMask   = FALSE;
     rs->grabWindow = NULL;
 
-    rs->acceleration = rs->opt[ROTATE_SCREEN_OPTION_ACCELERATION].value.f;
-
-    rs->pointerInvertY     =
-	rs->opt[ROTATE_SCREEN_OPTION_POINTER_INVERT_Y].value.b;
     rs->pointerSensitivity =
 	rs->opt[ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY].value.f *
 	ROTATE_POINTER_SENSITIVITY_FACTOR;
-
-    rs->speed    = rs->opt[ROTATE_SCREEN_OPTION_SPEED].value.f;
-    rs->timestep = rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP].value.f;
 
     rs->rotateHandle = 0;
 
