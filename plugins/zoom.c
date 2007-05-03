@@ -638,16 +638,12 @@ zoomSetDisplayOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case ZOOM_DISPLAY_OPTION_INITIATE:
-    case ZOOM_DISPLAY_OPTION_IN:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
     case ZOOM_DISPLAY_OPTION_OUT:
 	if (compSetActionOption (o, value))
 	    return TRUE;
-    default:
 	break;
+    default:
+	return compSetDisplayOption (display, o, value);
     }
 
     return FALSE;
