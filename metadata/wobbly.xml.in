@@ -1,0 +1,107 @@
+<compiz>
+    <plugin name="wobbly">
+	<_short>Wobbly Windows</_short>
+	<_long>Use spring model for wobbly window effect</_long>
+	<rule type="before">fade</rule>
+	<rule type="before">cube</rule>
+	<rule type="before">scale</rule>
+	<display>
+	    <option name="snap" type="action">
+		<_short>Snap windows</_short>
+		<_long>Toggle window snapping</_long>
+		<allowed key="true"/>
+		<default>
+		    <key>&lt;Shift&gt;</key>
+		</default>
+	    </option>
+	    <option name="snap_inverted" type="bool">
+		<_short>Snap Inverted</_short>
+		<_long>Inverted window snapping</_long>
+		<default>false</default>
+	    </option>
+	    <option name="shiver" type="action">
+		<_short>Shiver</_short>
+		<_long>Make window shiver</_long>
+		<allowed key="true" button="true" bell="true"/>
+		<default>
+		    <bell>false</bell>
+		</default>
+	    </option>
+	</display>
+	<screen>
+	    <option name="friction" type="float">
+		<_short>Friction</_short>
+		<_long>Spring Friction</_long>
+		<default>3</default>
+		<min>0.1</min>
+		<max>10</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="spring_k" type="float">
+		<_short>Spring K</_short>
+		<_long>Spring Konstant</_long>
+		<default>8</default>
+		<min>0.1</min>
+		<max>10</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="grid_resolution" type="int">
+		<_short>Grid Resolution</_short>
+		<_long>Vertex Grid Resolution</_long>
+		<default>8</default>
+		<min>1</min>
+		<max>64</max>
+	    </option>
+	    <option name="min_grid_size" type="int">
+		<_short>Minimum Grid Size</_short>
+		<_long>Minimum Vertex Grid Size</_long>
+		<default>8</default>
+		<min>4</min>
+		<max>128</max>
+	    </option>
+	    <option name="map_effect" type="string">
+		<_short>Map Effect</_short>
+		<_long>Map Window Effect</_long>
+		<default>None</default>
+		<allowed>
+		    <value>None</value>
+		    <value>Shiver</value>
+		</allowed>
+	    </option>
+	    <option name="focus_effect" type="string">
+		<_short>Focus Effect</_short>
+		<_long>Focus Window Effect</_long>
+		<default>None</default>
+		<allowed>
+		    <value>None</value>
+		    <value>Shiver</value>
+		</allowed>
+	    </option>
+	    <option name="map_window_match" type="match">
+		<_short>Map Windows</_short>
+		<_long>Windows that should wobble when mapped</_long>
+		<default>Splash | DropdownMenu | PopupMenu | Tooltip | Notification | Combo | Dnd | Unknown</default>
+	    </option>
+	    <option name="focus_window_match" type="match">
+		<_short>Focus Windows</_short>
+		<_long>Windows that should wobble when focused</_long>
+		<default></default>
+	    </option>
+	    <option name="grab_window_match" type="match">
+		<_short>Grab Windows</_short>
+		<_long>Windows that should wobble when grabbed</_long>
+		<default></default>
+	    </option>
+	    <option name="move_window_match" type="match">
+		<_short>Move Windows</_short>
+		<_long>Windows that should wobble when moved</_long>
+		<default>Toolbar | Menu | Utility | Dialog | Normal | Unknown</default>
+	    </option>
+	    <option name="maximize_effect" type="bool">
+		<_short>Maximize Effect</_short>
+		<_long>Wobble effect when maximizing and unmaximizing windows</_long>
+		<default>true</default>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>

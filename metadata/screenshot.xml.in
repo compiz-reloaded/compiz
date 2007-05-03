@@ -1,0 +1,26 @@
+<compiz>
+    <plugin name="screenshot">
+	<_short>Screenshot</_short>
+	<_long>Screenshot plugin</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate</_short>
+		<_long>Initiate rectangle screenshot</_long>
+		<allowed button="true"/>
+		<default>
+		    <button>&lt;Super&gt;Button1</button>
+		</default>
+	    </option>
+	    <option name="directory" type="string">
+		<_short>Directory</_short>
+		<_long>Put screenshot images in this directory</_long>
+		<default>Desktop</default>
+	    </option>
+	    <option name="launch_app" type="string">
+		<_short>Launch Application</_short>
+		<_long>Automatically open screenshot in this application</_long>
+		<default></default>
+	    </option>
+	</display>
+    </plugin>
+</compiz>

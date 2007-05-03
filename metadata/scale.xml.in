@@ -1,0 +1,97 @@
+<compiz>
+    <plugin name="scale">
+	<_short>Scale</_short>
+	<_long>Scale windows</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate Window Picker</_short>
+		<_long>Layout and start transforming windows</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;Up</key>
+		    <edges top_right="true"/>
+		</default>
+	    </option>
+	    <option name="initiate_all" type="action">
+		<_short>Initiate Window Picker For All Windows</_short>
+		<_long>Layout and start transforming all windows</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		</default>
+	    </option>
+	    <option name="initiate_group" type="action">
+		<_short>Initiate Window Picker For Window Group</_short>
+		<_long>Layout and start transforming window group</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		</default>
+	    </option>
+	    <option name="initiate_output" type="action">
+		<_short>Initiate Window Picker For Windows on Current Output</_short>
+		<_long>Layout and start transforming windows on current output</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		</default>
+	    </option>
+	</display>
+	<screen>
+	    <option name="spacing" type="int">
+		<_short>Spacing</_short>
+		<_long>Space between windows</_long>
+		<default>10</default>
+		<min>0</min>
+		<max>250</max>
+	    </option>
+	    <option name="speed" type="float">
+		<_short>Speed</_short>
+		<_long>Scale speed</_long>
+		<default>1.5</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="timestep" type="float">
+		<_short>Timestep</_short>
+		<_long>Scale timestep</_long>
+		<default>1.2</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="window_match" type="match">
+		<_short>Scale Windows</_short>
+		<_long>Windows that should be scaled in scale mode</_long>
+		<default>Toolbar | Utility | Dialog | Normal | Unknown</default>
+	    </option>
+	    <option name="darken_back" type="bool">
+		<_short>Darken Background</_short>
+		<_long>Darken background when scaling windows</_long>
+		<default>true</default>
+	    </option>
+	    <option name="opacity" type="int">
+		<_short>Opacity</_short>
+		<_long>Amount of opacity in percent</_long>
+		<default>75</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	    <option name="overlay_icon" type="string">
+		<_short>Overlay Icon</_short>
+		<_long>Overlay an icon on windows once they are scaled</_long>
+		<default>Emblem</default>
+		<allowed>
+		    <value>None</value>
+		    <value>Emblem</value>
+		    <value>Big</value>
+		</allowed>
+	    </option>
+	    <option name="hover_time" type="int">
+		<_short>Hover Time</_short>
+		<_long>Time (in ms) before scale mode is terminated when hovering over a window</_long>
+		<default>750</default>
+		<min>50</min>
+		<max>10000</max>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>

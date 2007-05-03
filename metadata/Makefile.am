@@ -8,7 +8,7 @@ xml_in_files =		  \
 	dbus.xml.in	  \
 	decoration.xml.in \
 	fade.xml.in	  \
-	fuse.xml.in	  \
+	fs.xml.in	  \
 	gconf.xml.in	  \
 	inotify.xml.in	  \
 	minimize.xml.in	  \
@@ -17,7 +17,15 @@ xml_in_files =		  \
 	png.xml.in	  \
 	regex.xml.in	  \
 	resize.xml.in	  \
-	rotate.xml.in
+	rotate.xml.in     \
+	scale.xml.in      \
+	screenshot.xml.in \
+	svg.xml.in        \
+	switcher.xml.in   \
+	video.xml.in      \
+	water.xml.in      \
+	wobbly.xml.in     \
+	zoom.xml.in
 xml_files    = $(xml_in_files:.xml.in=.xml)
 xml_DATA     = $(xml_files)
 

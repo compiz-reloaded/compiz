@@ -29,10 +29,7 @@
 
 #include <compiz.h>
 
-#define SHOT_INITIATE_BUTTON_DEFAULT	       Button1
-#define SHOT_INITIATE_BUTTON_MODIFIERS_DEFAULT CompSuperMask
-
-#define SHOT_DIR_DEFAULT "Desktop"
+static CompMetadata shotMetadata;
 
 static int displayPrivateIndex;
 
@@ -374,44 +371,6 @@ shotHandleEvent (CompDisplay *d,
     WRAP (sd, d, handleEvent, shotHandleEvent);
 }
 
-static void
-shotDisplayInitOptions (ShotDisplay *sd)
-{
-    CompOption *o;
-
-    o = &sd->opt[SHOT_DISPLAY_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = N_("Initiate");
-    o->longDesc			     = N_("Initiate rectangle screenshot");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = shotInitiate;
-    o->value.action.terminate	     = shotTerminate;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.state	     = CompActionStateInitButton;
-    o->value.action.button.modifiers = SHOT_INITIATE_BUTTON_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = SHOT_INITIATE_BUTTON_DEFAULT;
-
-    o = &sd->opt[SHOT_DISPLAY_OPTION_DIR];
-    o->name	      = "directory";
-    o->shortDesc      = N_("Directory");
-    o->longDesc	      = N_("Put screenshot images in this directory");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (SHOT_DIR_DEFAULT);
-    o->rest.s.string  = 0;
-    o->rest.s.nString = 0;
-
-    o = &sd->opt[SHOT_DISPLAY_OPTION_LAUNCH_APP];
-    o->name           = "launch_app";
-    o->shortDesc      = N_("Launch Application");
-    o->longDesc       = N_("Automatically open screenshot in this application");
-    o->type           = CompOptionTypeString;
-    o->value.s        = strdup ("");
-    o->rest.s.string  = NULL;
-    o->rest.s.nString = 0;
-}
-
 static CompOption *
 shotGetDisplayOptions (CompPlugin  *plugin,
 		       CompDisplay *display,
@@ -430,27 +389,21 @@ shotSetDisplayOption (CompPlugin  *plugin,
 		      CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     SHOT_DISPLAY (display);
 
-    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, &index);
+    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case SHOT_DISPLAY_OPTION_INITIATE:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
-    default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
+
+static const CompMetadataOptionInfo shotDisplayOptionInfo[] = {
+    { "initiate", "action", 0, shotInitiate, shotTerminate },
+    { "directory", "string", 0, 0, 0 },
+    { "launch_app", "string", 0, 0, 0 }
+};
 
 static Bool
 shotInitDisplay (CompPlugin  *p,
@@ -462,16 +415,25 @@ shotInitDisplay (CompPlugin  *p,
     if (!sd)
 	return FALSE;
 
-    sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (sd->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &shotMetadata,
+					     shotDisplayOptionInfo,
+					     sd->opt,
+					     SHOT_DISPLAY_OPTION_NUM))
     {
 	free (sd);
 	return FALSE;
     }
 
-    WRAP (sd, d, handleEvent, shotHandleEvent);
+    sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (sd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, sd->opt, SHOT_DISPLAY_OPTION_NUM);
+	free (sd);
+	return FALSE;
+    }
 
-    shotDisplayInitOptions (sd);
+    WRAP (sd, d, handleEvent, shotHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = sd;
 
@@ -487,6 +449,8 @@ shotFiniDisplay (CompPlugin  *p,
     freeScreenPrivateIndex (d, sd->screenPrivateIndex);
 
     UNWRAP (sd, d, handleEvent);
+
+    compFiniDisplayOptions (d, sd->opt, SHOT_DISPLAY_OPTION_NUM);
 
     free (sd);
 }
@@ -506,8 +470,6 @@ shotInitScreen (CompPlugin *p,
     ss->grabIndex = 0;
     ss->grab	  = FALSE;
 
-    addScreenAction (s, &sd->opt[SHOT_DISPLAY_OPTION_INITIATE].value.action);
-
     WRAP (ss, s, paintScreen, shotPaintScreen);
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
@@ -520,10 +482,6 @@ shotFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     SHOT_SCREEN (s);
-    SHOT_DISPLAY (s->display);
-
-    removeScreenAction (s, 
-			&sd->opt[SHOT_DISPLAY_OPTION_INITIATE].value.action);
 
     UNWRAP (ss, s, paintScreen);
 
@@ -533,9 +491,21 @@ shotFiniScreen (CompPlugin *p,
 static Bool
 shotInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&shotMetadata,
+					 p->vTable->name,
+					 shotDisplayOptionInfo,
+					 SHOT_DISPLAY_OPTION_NUM,
+					 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&shotMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&shotMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -545,6 +515,8 @@ shotFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&shotMetadata);
 }
 
 static int
@@ -554,12 +526,18 @@ shotGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+shotGetMetadata (CompPlugin *plugin)
+{
+    return &shotMetadata;
+}
+
 static CompPluginVTable shotVTable = {
     "screenshot",
     N_("Screenshot"),
     N_("Screenshot plugin"),
     shotGetVersion,
-    0, /* GetMetadata */
+    shotGetMetadata,
     shotInit,
     shotFini,
     shotInitDisplay,
