@@ -1582,7 +1582,7 @@ waterSetDisplayOption (CompPlugin      *plugin,
     return FALSE;
 }
 
-static CompMetadataOptionInfo waterDisplayOptionInfo[] = {
+static const CompMetadataOptionInfo waterDisplayOptionInfo[] = {
     { "initiate", "action", 0, waterInitiate, waterTerminate },
     { "toggle_rain", "action", 0, waterToggleRain, 0 },
     { "toggle_wiper", "action", 0, waterToggleWiper, 0 },

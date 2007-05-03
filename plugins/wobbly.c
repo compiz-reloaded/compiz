@@ -2688,7 +2688,7 @@ wobblySetDisplayOption (CompPlugin  *plugin,
     return FALSE;
 }
 
-static CompMetadataOptionInfo wobblyDisplayOptionInfo[] = {
+static const CompMetadataOptionInfo wobblyDisplayOptionInfo[] = {
     { "snap", "action", 0, wobblyEnableSnapping, wobblyDisableSnapping },
     { "snap_inverted", "bool", 0, 0, 0 },
     { "shiver", "action", 0, wobblyShiver, 0 }
