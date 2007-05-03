@@ -90,7 +90,12 @@ inotifyProcessEvents (void *data)
 			break;
 
 		if (fw)
-		    (*fw->callBack) (event->name, fw->closure);
+		{
+		    if (event->len)
+			(*fw->callBack) (event->name, fw->closure);
+		    else
+			(*fw->callBack) (NULL, fw->closure);
+		}
 	    }
 
 	    i += sizeof (*event) + event->len;
