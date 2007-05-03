@@ -1,0 +1,131 @@
+<compiz>
+    <plugin name="switcher">
+	<_short>Application Switcher</_short>
+	<_long>Application Switcher</_long>
+	<display>
+	    <option name="next" type="action">
+		<_short>Next window</_short>
+		<_long>Popup switcher if not visible and select next window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Alt&gt;Tab</key>
+		</default>
+	    </option>
+	    <option name="prev" type="action">
+		<_short>Prev window</_short>
+		<_long>Popup switcher if not visible and select previous window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Shift&gt;&lt;Alt&gt;Tab</key>
+		</default>
+	    </option>
+	    <option name="next_all" type="action">
+		<_short>Next window</_short>
+		<_long>Popup switcher if not visible and select next window out of all windows</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;Tab</key>
+		</default>
+	    </option>
+	    <option name="prev_all" type="action">
+		<_short>Prev window</_short>
+		<_long>Popup switcher if not visible and select previous window out of all windows</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <key>&lt;Shift&gt;&lt;Control&gt;&lt;Alt&gt;Tab</key>
+		</default>
+	    </option>
+	    <option name="next_no_popup" type="action">
+		<_short>Next window</_short>
+		<_long>Select next window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		</default>
+	    </option>
+	    <option name="prev_no_popup" type="action">
+		<_short>Prev window</_short>
+		<_long>Select previous window</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		</default>
+	    </option>
+	</display>
+	<screen>
+	    <option name="speed" type="float">
+		<_short>Speed</_short>
+		<_long>Switcher speed</_long>
+		<default>1.5</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="timestep" type="float">
+		<_short>Timestep</_short>
+		<_long>Switcher timestep</_long>
+		<default>1.2</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="window_match" type="match">
+		<_short>Switcher windows</_short>
+		<_long>Windows that should be shown in switcher</_long>
+		<default>Toolbar | Utility | Dialog | Normal | Unknown</default>
+	    </option>
+	    <option name="mipmap" type="bool">
+		<_short>Mipmap</_short>
+		<_long>Generate mipmaps when possible for higher quality scaling</_long>
+		<default>true</default>
+	    </option>
+	    <option name="saturation" type="int">
+		<_short>Saturation</_short>
+		<_long>Amount of saturation in percent</_long>
+		<default>100</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	    <option name="brightness" type="int">
+		<_short>Brightness</_short>
+		<_long>Amount of brightness in percent</_long>
+		<default>65</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	    <option name="opacity" type="int">
+		<_short>Opacity</_short>
+		<_long>Amount of opacity in percent</_long>
+		<default>40</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	    <option name="bring_to_front" type="bool">
+		<_short>Bring To Front</_short>
+		<_long>Bring selected window to front</_long>
+		<default>true</default>
+	    </option>
+	    <option name="zoom" type="float">
+		<_short>Zoom</_short>
+		<_long>Distance desktop should be zoom out while switching windows</_long>
+		<default>1</default>
+		<min>0</min>
+		<max>5</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="icon" type="bool">
+		<_short>Icon</_short>
+		<_long>Show icon next to thumbnail</_long>
+		<default>true</default>
+	    </option>
+	    <option name="minimized" type="bool">
+		<_short>Minimized</_short>
+		<_long>Show minimized windows</_long>
+		<default>true</default>
+	    </option>
+	    <option name="auto_rotate" type="bool">
+		<_short>Auto Rotate</_short>
+		<_long>Rotate to the selected window while switching</_long>
+		<default>false</default>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>

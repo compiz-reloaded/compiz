@@ -3322,10 +3322,14 @@ applyStartupProperties (CompScreen *screen,
 
     if (s)
     {
+	int workspace;
+
 	window->initialViewportX = s->viewportX;
 	window->initialViewportY = s->viewportY;
 
-	window->desktop	= sn_startup_sequence_get_workspace (s->sequence);
+	workspace = sn_startup_sequence_get_workspace (s->sequence);
+	if (workspace >= 0)
+	    window->desktop = workspace;
 
 	window->initialTimestamp    =
 	    sn_startup_sequence_get_timestamp (s->sequence);

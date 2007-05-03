@@ -30,6 +30,8 @@
 
 #include <compiz.h>
 
+static CompMetadata inotifyMetadata;
+
 static int displayPrivateIndex;
 
 typedef struct _CompInotifyWatch {
@@ -238,9 +240,18 @@ inotifyFiniDisplay (CompPlugin  *p,
 static Bool
 inotifyInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&inotifyMetadata, p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&inotifyMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&inotifyMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -250,6 +261,8 @@ inotifyFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&inotifyMetadata);
 }
 
 static int
@@ -259,12 +272,18 @@ inotifyGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+inotifyGetMetadata (CompPlugin *plugin)
+{
+    return &inotifyMetadata;
+}
+
 CompPluginVTable inotifyVTable = {
     "inotify",
     "Inotify",
     "File change notification plugin",
     inotifyGetVersion,
-    0, /* GetMetadata */
+    inotifyGetMetadata,
     inotifyInit,
     inotifyFini,
     inotifyInitDisplay,

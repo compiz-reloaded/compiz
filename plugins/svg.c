@@ -31,6 +31,8 @@
 
 #include <compiz.h>
 
+static CompMetadata svgMetadata;
+
 static int displayPrivateIndex;
 
 typedef struct _SvgDisplay {
@@ -201,9 +203,19 @@ svgFiniDisplay (CompPlugin  *p,
 static Bool
 svgInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&svgMetadata,
+					 p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&svgMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&svgMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -213,6 +225,8 @@ svgFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&svgMetadata);
 }
 
 static int
@@ -222,12 +236,18 @@ svgGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+svgGetMetadata (CompPlugin *plugin)
+{
+    return &svgMetadata;
+}
+
 CompPluginVTable svgVTable = {
     "svg",
     "Svg",
     "Svg image loader",
     svgGetVersion,
-    0, /* GetMetadata */
+    svgGetMetadata,
     svgInit,
     svgFini,
     svgInitDisplay,

@@ -31,40 +31,9 @@
 
 #include <compiz.h>
 
-#define ZOOM_POINTER_INVERT_Y_DEFAULT FALSE
-
-#define ZOOM_POINTER_SENSITIVITY_DEFAULT   1.0f
-#define ZOOM_POINTER_SENSITIVITY_MIN       0.01f
-#define ZOOM_POINTER_SENSITIVITY_MAX       100.0f
-#define ZOOM_POINTER_SENSITIVITY_PRECISION 0.01f
-
 #define ZOOM_POINTER_SENSITIVITY_FACTOR 0.001f
 
-#define ZOOM_INITIATE_BUTTON_DEFAULT    Button3
-#define ZOOM_INITIATE_MODIFIERS_DEFAULT CompSuperMask
-
-#define ZOOM_IN_BUTTON_DEFAULT    Button4
-#define ZOOM_IN_MODIFIERS_DEFAULT CompSuperMask
-
-#define ZOOM_OUT_BUTTON_DEFAULT    Button5
-#define ZOOM_OUT_MODIFIERS_DEFAULT CompSuperMask
-
-#define ZOOM_SPEED_DEFAULT   1.5f
-#define ZOOM_SPEED_MIN       0.1f
-#define ZOOM_SPEED_MAX       50.0f
-#define ZOOM_SPEED_PRECISION 0.1f
-
-#define ZOOM_TIMESTEP_DEFAULT   1.2f
-#define ZOOM_TIMESTEP_MIN       0.1f
-#define ZOOM_TIMESTEP_MAX       50.0f
-#define ZOOM_TIMESTEP_PRECISION 0.1f
-
-#define ZOOM_FACTOR_DEFAULT   2.0f
-#define ZOOM_FACTOR_MIN	      1.01f
-#define ZOOM_FACTOR_MAX	      3.0f
-#define ZOOM_FACTOR_PRECISION 0.01f
-
-#define ZOOM_FILTER_LINEAR_DEFAULT FALSE
+static CompMetadata zoomMetadata;
 
 static int displayPrivateIndex;
 
@@ -211,66 +180,6 @@ zoomSetScreenOption (CompPlugin      *plugin,
     }
 
     return FALSE;
-}
-
-static void
-zoomScreenInitOptions (ZoomScreen *zs)
-{
-    CompOption *o;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_POINTER_INVERT_Y];
-    o->name      = "invert_y";
-    o->shortDesc = N_("Pointer Invert Y");
-    o->longDesc  = N_("Invert Y axis for pointer movement");
-    o->type      = CompOptionTypeBool;
-    o->value.b   = ZOOM_POINTER_INVERT_Y_DEFAULT;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY];
-    o->name		= "sensitivity";
-    o->shortDesc	= N_("Pointer Sensitivity");
-    o->longDesc		= N_("Sensitivity of pointer movement");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= ZOOM_POINTER_SENSITIVITY_DEFAULT;
-    o->rest.f.min	= ZOOM_POINTER_SENSITIVITY_MIN;
-    o->rest.f.max	= ZOOM_POINTER_SENSITIVITY_MAX;
-    o->rest.f.precision = ZOOM_POINTER_SENSITIVITY_PRECISION;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_SPEED];
-    o->name		= "speed";
-    o->shortDesc	= N_("Speed");
-    o->longDesc		= N_("Zoom Speed");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= ZOOM_SPEED_DEFAULT;
-    o->rest.f.min	= ZOOM_SPEED_MIN;
-    o->rest.f.max	= ZOOM_SPEED_MAX;
-    o->rest.f.precision = ZOOM_SPEED_PRECISION;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_TIMESTEP];
-    o->name		= "timestep";
-    o->shortDesc	= N_("Timestep");
-    o->longDesc		= N_("Zoom Timestep");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= ZOOM_TIMESTEP_DEFAULT;
-    o->rest.f.min	= ZOOM_TIMESTEP_MIN;
-    o->rest.f.max	= ZOOM_TIMESTEP_MAX;
-    o->rest.f.precision = ZOOM_TIMESTEP_PRECISION;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_ZOOM_FACTOR];
-    o->name		= "zoom_factor";
-    o->shortDesc	= N_("Zoom factor");
-    o->longDesc		= N_("Zoom factor");
-    o->type		= CompOptionTypeFloat;
-    o->value.f		= ZOOM_FACTOR_DEFAULT;
-    o->rest.f.min	= ZOOM_FACTOR_MIN;
-    o->rest.f.max	= ZOOM_FACTOR_MAX;
-    o->rest.f.precision = ZOOM_FACTOR_PRECISION;
-
-    o = &zs->opt[ZOOM_SCREEN_OPTION_FILTER_LINEAR];
-    o->name	  = "filter_linear";
-    o->shortDesc  = N_("Filter Linear");
-    o->longDesc	  = N_("Use linear filter when zoomed in");
-    o->type	  = CompOptionTypeBool;
-    o->value.b    = ZOOM_FILTER_LINEAR_DEFAULT;
 }
 
 static int
@@ -744,57 +653,11 @@ zoomSetDisplayOption (CompPlugin  *plugin,
     return FALSE;
 }
 
-static void
-zoomDisplayInitOptions (ZoomDisplay *zd,
-			Display	    *display)
-{
-    CompOption *o;
-
-    o = &zd->opt[ZOOM_DISPLAY_OPTION_INITIATE];
-    o->name			     = "initiate";
-    o->shortDesc		     = N_("Initiate");
-    o->longDesc			     = N_("Zoom In");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = zoomInitiate;
-    o->value.action.terminate	     = zoomTerminate;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = ZOOM_INITIATE_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = ZOOM_INITIATE_BUTTON_DEFAULT;
-
-    o = &zd->opt[ZOOM_DISPLAY_OPTION_IN];
-    o->name			     = "zoom_in";
-    o->shortDesc		     = N_("Zoom In");
-    o->longDesc			     = N_("Zoom In");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = zoomIn;
-    o->value.action.terminate	     = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = ZOOM_IN_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = ZOOM_IN_BUTTON_DEFAULT;
-
-    o = &zd->opt[ZOOM_DISPLAY_OPTION_OUT];
-    o->name			     = "zoom_out";
-    o->shortDesc		     = N_("Zoom Out");
-    o->longDesc			     = N_("Zoom Out");
-    o->type			     = CompOptionTypeAction;
-    o->value.action.initiate	     = zoomOut;
-    o->value.action.terminate	     = 0;
-    o->value.action.bell	     = FALSE;
-    o->value.action.edgeMask	     = 0;
-    o->value.action.state	     = CompActionStateInitKey;
-    o->value.action.state	    |= CompActionStateInitButton;
-    o->value.action.type	     = CompBindingTypeButton;
-    o->value.action.button.modifiers = ZOOM_OUT_MODIFIERS_DEFAULT;
-    o->value.action.button.button    = ZOOM_OUT_BUTTON_DEFAULT;
-}
+static const CompMetadataOptionInfo zoomDisplayOptionInfo[] = {
+    { "initiate", "action", 0, zoomInitiate, zoomTerminate },
+    { "zoom_in", "action", 0, zoomIn, 0 },
+    { "zoom_out", "action", 0, zoomOut, 0 }
+};
 
 static Bool
 zoomInitDisplay (CompPlugin  *p,
@@ -806,14 +669,23 @@ zoomInitDisplay (CompPlugin  *p,
     if (!zd)
 	return FALSE;
 
-    zd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (zd->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &zoomMetadata,
+					     zoomDisplayOptionInfo,
+					     zd->opt,
+					     ZOOM_DISPLAY_OPTION_NUM))
     {
 	free (zd);
 	return FALSE;
     }
 
-    zoomDisplayInitOptions (zd, d->display);
+    zd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (zd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, zd->opt, ZOOM_DISPLAY_OPTION_NUM);
+	free (zd);
+	return FALSE;
+    }
 
     WRAP (zd, d, handleEvent, zoomHandleEvent);
 
@@ -832,8 +704,19 @@ zoomFiniDisplay (CompPlugin  *p,
 
     UNWRAP (zd, d, handleEvent);
 
+    compFiniDisplayOptions (d, zd->opt, ZOOM_DISPLAY_OPTION_NUM);
+
     free (zd);
 }
+
+static const CompMetadataOptionInfo zoomScreenOptionInfo[] = {
+    { "invert_y", "bool", 0, 0, 0 },
+    { "sensitivity", "float", "<min>0.01</min>", 0, 0 },
+    { "speed", "float", "<min>0.1</min>", 0, 0 },
+    { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "zoom_factor", "float", "<min>1.01</min>", 0, 0 },
+    { "filter_linear", "bool", 0, 0, 0 }
+};
 
 static Bool
 zoomInitScreen (CompPlugin *p,
@@ -846,6 +729,16 @@ zoomInitScreen (CompPlugin *p,
     zs = malloc (sizeof (ZoomScreen));
     if (!zs)
 	return FALSE;
+
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &zoomMetadata,
+					    zoomScreenOptionInfo,
+					    zs->opt,
+					    ZOOM_SCREEN_OPTION_NUM))
+    {
+	free (zs);
+	return FALSE;
+    }
 
     zs->grabIndex = 0;
 
@@ -868,19 +761,16 @@ zoomInitScreen (CompPlugin *p,
 
     zs->zoomOutput = 0;
 
-    zs->pointerInvertY     = ZOOM_POINTER_INVERT_Y_DEFAULT;
-    zs->pointerSensitivity = ZOOM_POINTER_SENSITIVITY_DEFAULT *
+    zs->pointerInvertY = zs->opt[ZOOM_SCREEN_OPTION_POINTER_INVERT_Y].value.b;
+
+    zs->pointerSensitivity = 
+	zs->opt[ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY].value.f * 
 	ZOOM_POINTER_SENSITIVITY_FACTOR;
 
-    zs->speed    = ZOOM_SPEED_DEFAULT;
-    zs->timestep = ZOOM_TIMESTEP_DEFAULT;
+    zs->speed    = zs->opt[ZOOM_SCREEN_OPTION_SPEED].value.f;
+    zs->timestep = zs->opt[ZOOM_SCREEN_OPTION_TIMESTEP].value.f;
 
-    zs->zoomFactor = ZOOM_FACTOR_DEFAULT;
-
-    zoomScreenInitOptions (zs);
-
-    addScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_INITIATE].value.action);
-    addScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_IN].value.action);
+    zs->zoomFactor = zs->opt[ZOOM_SCREEN_OPTION_ZOOM_FACTOR].value.f;
 
     WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
     WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);
@@ -899,16 +789,13 @@ zoomFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
     ZOOM_SCREEN (s);
-    ZOOM_DISPLAY (s->display);
-
-    removeScreenAction (s, 
-			&zd->opt[ZOOM_DISPLAY_OPTION_INITIATE].value.action);
-    removeScreenAction (s, &zd->opt[ZOOM_DISPLAY_OPTION_IN].value.action);
 
     UNWRAP (zs, s, preparePaintScreen);
     UNWRAP (zs, s, donePaintScreen);
     UNWRAP (zs, s, paintScreen);
     UNWRAP (zs, s, setScreenOptionForPlugin);
+
+    compFiniScreenOptions (s, zs->opt, ZOOM_SCREEN_OPTION_NUM);
 
     free (zs);
 }
@@ -916,9 +803,22 @@ zoomFiniScreen (CompPlugin *p,
 static Bool
 zoomInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&zoomMetadata,
+					 p->vTable->name,
+					 zoomDisplayOptionInfo,
+					 ZOOM_DISPLAY_OPTION_NUM,
+					 zoomScreenOptionInfo,
+					 ZOOM_SCREEN_OPTION_NUM))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&zoomMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&zoomMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -928,6 +828,8 @@ zoomFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&zoomMetadata);
 }
 
 static int
@@ -937,12 +839,18 @@ zoomGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+zoomGetMetadata (CompPlugin *plugin)
+{
+    return &zoomMetadata;
+}
+
 CompPluginVTable zoomVTable = {
     "zoom",
     N_("Zoom Desktop"),
     N_("Zoom and pan desktop cube"),
     zoomGetVersion,
-    0, /* GetMetadata */
+    zoomGetMetadata,
     zoomInit,
     zoomFini,
     zoomInitDisplay,

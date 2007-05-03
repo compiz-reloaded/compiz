@@ -1,0 +1,36 @@
+<compiz>
+    <plugin name="minimize">
+	<_short>Minimize Effect</_short>
+	<_long>Transform windows when they are minimized and unminimized</_long>
+	<screen>
+	    <option name="speed" type="float">
+		<_short>Speed</_short>
+		<_long>Minimize speed</_long>
+		<default>1.5</default>
+		<min>0.1</min>
+		<max>50.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="timetep" type="float">
+		<_short>Timestep</_short>
+		<_long>Minimize timestep</_long>
+		<default>0.5</default>
+		<min>0.1</min>
+		<max>50.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="window_match" type="match">
+		<_short>Minimize Windows</_short>
+		<_long>Windows that should be transformed when minimized</_long>
+		<default>toolbar | utility | dialog | normal</default>
+	    </option>
+	    <option name="shade_resistance" type="int">
+		<_short>Shade Resistance</_short>
+		<_long>Shade resistance</_long>
+		<default>75</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>

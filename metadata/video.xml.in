@@ -1,0 +1,14 @@
+<compiz>
+    <plugin name="video">
+	<_short>Video Playback</_short>
+	<_long>Video playback</_long>
+	<feature>video</feature>
+	<display>
+	    <option name="yv12" type="bool">
+		<_short>YV12 colorspace</_short>
+		<_long>Provide YV12 colorspace support</_long>
+		<default>true</default>
+	    </option>
+	</display>
+    </plugin>
+</compiz>

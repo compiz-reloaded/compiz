@@ -28,7 +28,7 @@
 
 #include <glib.h>
 
-#define PLACE_WORKAROUND_DEFAULT TRUE
+static CompMetadata placeMetadata;
 
 typedef enum {
     PlaceModeCascade  = 0,
@@ -45,9 +45,6 @@ static char *modeString[] = {
     N_("Maximize"),
     N_("Random")
 };
-static int nModeString = sizeof (modeString) / sizeof (modeString[0]);
-
-#define PLACE_MODE_DEFAULT (modeString[0])
 
 /* overlap types */
 #define NONE    0
@@ -206,18 +203,6 @@ placeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case PLACE_SCREEN_OPTION_POSITION_MATCHES:
-    case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
-	if (compSetOptionList (o, value))
-	{
-	    int i;
-
-	    for (i = 0; i < o->value.list.nValue; i++)
-		matchUpdate (screen->display, &o->value.list.value[i].match);
-
-	    return TRUE;
-	}
-	break;
     default:
 	if (compSetOption (o, value))
 	    return TRUE;
@@ -225,95 +210,6 @@ placeSetScreenOption (CompPlugin      *plugin,
     }
 
     return FALSE;
-}
-
-static void
-placeScreenInitOptions (PlaceScreen *ps)
-{
-    CompOption *o;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_WORKAROUND];
-    o->name	 = "workarounds";
-    o->shortDesc = N_("Workarounds");
-    o->longDesc	 = N_("Window placement workarounds");
-    o->type	 = CompOptionTypeBool;
-    o->value.b	 = PLACE_WORKAROUND_DEFAULT;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_MODE];
-    o->name	      = "mode";
-    o->shortDesc      = N_("Placement Mode");
-    o->longDesc	      = N_("Algorithm to use for window placement");
-    o->type	      = CompOptionTypeString;
-    o->value.s	      = strdup (PLACE_MODE_DEFAULT);
-    o->rest.s.string  = modeString;
-    o->rest.s.nString = nModeString;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_POSITION_MATCHES];
-    o->name	         = "position_matches";
-    o->shortDesc         = N_("Positioned windows");
-    o->longDesc	         = N_("Windows that should be positioned by default");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeMatch;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.s.string     = NULL;
-    o->rest.s.nString    = 0;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_POSITION_X_VALUES];
-    o->name	         = "position_x_values";
-    o->shortDesc         = N_("X Positions");
-    o->longDesc	         = N_("X position values");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeInt;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.i.min	 = MINSHORT;
-    o->rest.i.max	 = MAXSHORT;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_POSITION_Y_VALUES];
-    o->name	         = "position_y_values";
-    o->shortDesc         = N_("Y Positions");
-    o->longDesc	         = N_("Y position values");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeInt;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.i.min	 = MINSHORT;
-    o->rest.i.max	 = MAXSHORT;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_MATCHES];
-    o->name	         = "viewport_matches";
-    o->shortDesc         = N_("Viewport positioned windows");
-    o->longDesc	         = N_("Windows that should positioned in specific "
-			      "viewports by default");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeMatch;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.s.string     = NULL;
-    o->rest.s.nString    = 0;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES];
-    o->name	         = "viewport_x_values";
-    o->shortDesc         = N_("X Viewport Positions");
-    o->longDesc	         = N_("Horizontal viewport positions");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeInt;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.i.min	 = 0;
-    o->rest.i.max	 = 32;
-
-    o = &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES];
-    o->name	         = "viewport_y_values";
-    o->shortDesc         = N_("Y Viewport Positions");
-    o->longDesc	         = N_("Vertical viewport positions");
-    o->type	         = CompOptionTypeList;
-    o->value.list.type   = CompOptionTypeInt;
-    o->value.list.nValue = 0;
-    o->value.list.value  = NULL;
-    o->rest.i.min	 = 0;
-    o->rest.i.max	 = 32;
 }
 
 typedef enum {
@@ -1527,6 +1423,17 @@ placeFiniDisplay (CompPlugin  *p,
     free (pd);
 }
 
+static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
+    { "workarounds", "bool", 0, 0, 0 },
+    { "mode", "string", 0, 0, 0 },
+    { "position_matches", "list", "<type>match</type>", 0, 0 },
+    { "position_x_values", "list", "<type>int</type>", 0, 0 },
+    { "position_y_values", "list", "<type>int</type>", 0, 0 },
+    { "viewport_matches", "list", "<type>match</type>", 0, 0 },
+    { "viewport_x_values", "list", "<type>int</type>", 0, 0 },
+    { "viewport_y_values", "list", "<type>int</type>", 0, 0 }
+};
+
 static Bool
 placeInitScreen (CompPlugin *p,
 		 CompScreen *s)
@@ -1539,7 +1446,15 @@ placeInitScreen (CompPlugin *p,
     if (!ps)
 	return FALSE;
 
-    placeScreenInitOptions (ps);
+    if (!compInitScreenOptionsFromMetadata (s,
+					    &placeMetadata,
+					    placeScreenOptionInfo,
+					    ps->opt,
+					    PLACE_SCREEN_OPTION_NUM))
+    {
+	free (ps);
+	return FALSE;
+    }
 
     s->privates[pd->screenPrivateIndex].ptr = ps;
 
@@ -1558,15 +1473,28 @@ placeFiniScreen (CompPlugin *p,
 
     UNWRAP (ps, s, placeWindow);
 
+    compFiniScreenOptions (s, ps->opt, PLACE_SCREEN_OPTION_NUM);
+
     free (ps);
 }
 
 static Bool
 placeInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&placeMetadata,
+					 p->vTable->name, 0, 0,
+					 placeScreenOptionInfo,
+					 PLACE_SCREEN_OPTION_NUM))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&placeMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&placeMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -1576,6 +1504,8 @@ placeFini (CompPlugin *p)
 {
     if (displayPrivateIndex >= 0)
 	freeDisplayPrivateIndex (displayPrivateIndex);
+
+    compFiniMetadata (&placeMetadata);
 }
 
 static int
@@ -1585,12 +1515,18 @@ placeGetVersion (CompPlugin *plugin,
     return ABIVERSION;
 }
 
+static CompMetadata *
+placeGetMetadata (CompPlugin *plugin)
+{
+    return &placeMetadata;
+}
+
 static CompPluginVTable placeVTable = {
     "place",
     N_("Place Windows"),
     N_("Place windows at appropriate positions when mapped"),
     placeGetVersion,
-    0, /* GetMetadata */
+    placeGetMetadata,
     placeInit,
     placeFini,
     placeInitDisplay,
