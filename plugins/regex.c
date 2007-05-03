@@ -458,9 +458,7 @@ regexInit (CompPlugin *p)
 static void
 regexFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&regexMetadata);
 }
 

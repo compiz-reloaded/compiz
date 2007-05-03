@@ -520,9 +520,7 @@ pngInit (CompPlugin *p)
 static void
 pngFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&pngMetadata);
 }
 

@@ -223,9 +223,7 @@ svgInit (CompPlugin *p)
 static void
 svgFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&svgMetadata);
 }
 

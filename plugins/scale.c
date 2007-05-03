@@ -2021,9 +2021,7 @@ scaleInit (CompPlugin *p)
 static void
 scaleFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&scaleMetadata);
 }
 

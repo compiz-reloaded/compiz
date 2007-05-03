@@ -513,9 +513,7 @@ shotInit (CompPlugin *p)
 static void
 shotFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&shotMetadata);
 }
 

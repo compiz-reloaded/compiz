@@ -2675,9 +2675,7 @@ dbusInit (CompPlugin *p)
 static void
 dbusFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&dbusMetadata);
 }
 

@@ -1514,9 +1514,7 @@ placeInit (CompPlugin *p)
 static void
 placeFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&placeMetadata);
 }
 

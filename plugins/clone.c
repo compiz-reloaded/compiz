@@ -836,9 +836,7 @@ cloneInit (CompPlugin *p)
 static void
 cloneFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&cloneMetadata);
 }
 

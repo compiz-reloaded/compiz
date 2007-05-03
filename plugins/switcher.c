@@ -2055,9 +2055,7 @@ switchInit (CompPlugin *p)
 static void
 switchFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&switchMetadata);
 }
 

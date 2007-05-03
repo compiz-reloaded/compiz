@@ -1017,9 +1017,7 @@ minInit (CompPlugin *p)
 static void
 minFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&minMetadata);
 }
 

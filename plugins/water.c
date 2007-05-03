@@ -1734,9 +1734,7 @@ waterInit (CompPlugin *p)
 static void
 waterFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&waterMetadata);
 }
 

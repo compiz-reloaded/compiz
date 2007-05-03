@@ -2003,9 +2003,7 @@ cubeFini (CompPlugin *p)
     rsvg_term ();
 #endif
 
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&cubeMetadata);
 }
 

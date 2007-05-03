@@ -886,9 +886,7 @@ moveInit (CompPlugin *p)
 static void
 moveFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&moveMetadata);
 }
 

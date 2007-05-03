@@ -1830,9 +1830,7 @@ rotateInit (CompPlugin *p)
 static void
 rotateFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&rotateMetadata);
 }
 

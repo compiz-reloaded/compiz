@@ -826,9 +826,7 @@ zoomInit (CompPlugin *p)
 static void
 zoomFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&zoomMetadata);
 }
 

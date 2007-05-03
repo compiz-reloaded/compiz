@@ -2744,9 +2744,7 @@ blurInit (CompPlugin *p)
 static void
 blurFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&blurMetadata);
 }
 

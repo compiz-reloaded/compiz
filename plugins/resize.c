@@ -854,9 +854,7 @@ resizeInit (CompPlugin *p)
 static void
 resizeFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&resizeMetadata);
 }
 

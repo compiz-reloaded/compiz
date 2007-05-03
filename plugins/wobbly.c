@@ -2889,9 +2889,7 @@ wobblyInit (CompPlugin *p)
 static void
 wobblyFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&wobblyMetadata);
 }
 

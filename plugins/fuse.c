@@ -1582,11 +1582,8 @@ fuseInit (CompPlugin *p)
 static void
 fuseFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
     fuseRemoveInode (NULL, inodes);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&fuseMetadata);
 }
 
