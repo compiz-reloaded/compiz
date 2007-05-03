@@ -974,18 +974,6 @@ initOptionFromMetadataPath (CompDisplay   *d,
     option->name = strdup ((char *) name);
     xmlFree (name);
 
-    value = stringFromMetadataPathElement (metadata, (char *) path, "short");
-    if (value)
-	option->shortDesc = value;
-    else
-	option->shortDesc = strdup ("");
-
-    value = stringFromMetadataPathElement (metadata, (char *) path, "long");
-    if (value)
-	option->longDesc = value;
-    else
-	option->longDesc = strdup ("");
-
     if (initXPathFromMetadataPathElement (&xDefaultPath, metadata, path,
 					  BAD_CAST "default"))
     {

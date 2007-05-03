@@ -23,8 +23,6 @@
  * Author: Søren Sandmann <sandmann@redhat.com>
  */
 
-#define _GNU_SOURCE /* for asprintf */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -619,12 +617,9 @@ planeDisplayInitOptions (PlaneDisplay *pd,
 			 Display      *display)
 {
     CompOption *o;
-    char *str;
 
     o = &pd->opt[PLANE_DISPLAY_OPTION_LEFT];
     o->name			  = "plane_left";
-    o->shortDesc		  = N_("Plane Left");
-    o->longDesc			  = N_("Plane left");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = planeLeft;
     o->value.action.terminate	  = 0;
@@ -642,8 +637,6 @@ planeDisplayInitOptions (PlaneDisplay *pd,
 
     o = &pd->opt[PLANE_DISPLAY_OPTION_RIGHT];
     o->name			  = "plane_right";
-    o->shortDesc		  = N_("Plane Right");
-    o->longDesc			  = N_("Plane right");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = planeRight;
     o->value.action.terminate	  = 0;
@@ -661,8 +654,6 @@ planeDisplayInitOptions (PlaneDisplay *pd,
 
     o = &pd->opt[PLANE_DISPLAY_OPTION_DOWN];
     o->name			  = "plane_down";
-    o->shortDesc		  = N_("Plane Down");
-    o->longDesc			  = N_("Plane down");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = planeDown;
     o->value.action.terminate	  = 0;
@@ -680,8 +671,6 @@ planeDisplayInitOptions (PlaneDisplay *pd,
 
     o = &pd->opt[PLANE_DISPLAY_OPTION_UP];
     o->name			  = "plane_up";
-    o->shortDesc		  = N_("Plane Up");
-    o->longDesc			  = N_("Plane up");
     o->type			  = CompOptionTypeAction;
     o->value.action.initiate	  = planeUp;
     o->value.action.terminate	  = 0;
@@ -697,19 +686,9 @@ planeDisplayInitOptions (PlaneDisplay *pd,
 	XKeysymToKeycode (display,
 			  XStringToKeysym (PLANE_UP_KEY_DEFAULT));
 
-#define PLANE_TO_SHORT        N_("Plane To Face %d")
-#define PLANE_TO_LONG         N_("Plane to face %d")
-#define PLANE_TO_WINDOW_SHORT N_("Plane To Face %d with Window")
-#define PLANE_TO_WINDOW_LONG  N_("Plane to face %d and bring active " \
-				  "window along")
-
 #define PLANE_TO_OPTION(n)						 \
     o = &pd->opt[PLANE_DISPLAY_OPTION_TO_ ## n];			 \
     o->name			  = "plane_to_" #n;			 \
-    asprintf (&str, PLANE_TO_SHORT, n);				 \
-    o->shortDesc		  = str;				 \
-    asprintf (&str, PLANE_TO_LONG, n);					 \
-    o->longDesc			  = str;				 \
     o->type			  = CompOptionTypeAction;		 \
     o->value.action.initiate	  = planeTo;				 \
     o->value.action.terminate	  = 0;					 \
