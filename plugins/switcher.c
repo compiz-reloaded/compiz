@@ -1986,11 +1986,11 @@ switchInitScreen (CompPlugin *p,
     ss->translate  = 0.0f;
     ss->sTranslate = 0.0f;
 
-    ss->saturation = 
+    ss->saturation =
 	(COLOR  * ss->opt[SWITCH_SCREEN_OPTION_SATURATION].value.i) / 100;
-    ss->brightness = 
+    ss->brightness =
 	(0xffff * ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS].value.i) / 100;
-    ss->opacity    = 
+    ss->opacity    =
 	(OPAQUE * ss->opt[SWITCH_SCREEN_OPTION_OPACITY].value.i)    / 100;
 
     ss->bringToFront = ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b;
