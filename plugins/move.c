@@ -735,10 +735,6 @@ moveSetDisplayOption (CompPlugin  *plugin,
 	return FALSE;
 
     switch (index) {
-    case MOVE_DISPLAY_OPTION_INITIATE:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
     case MOVE_DISPLAY_OPTION_OPACITY:
 	if (compSetIntOption (o, value))
 	{
@@ -747,9 +743,7 @@ moveSetDisplayOption (CompPlugin  *plugin,
 	}
 	break;
     default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
+	return compSetDisplayOption (display, o, value);
     }
 
     return FALSE;
