@@ -27,8 +27,6 @@
 #  include "../config.h"
 #endif
 
-#define _GNU_SOURCE /* for asprintf */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
