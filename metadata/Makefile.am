@@ -17,6 +17,7 @@ xml_in_files =		  \
 	png.xml.in	  \
 	regex.xml.in	  \
 	resize.xml.in     \
+	video.xml.in      \
 	water.xml.in      \
 	wobbly.xml.in     \
 	zoom.xml.in
