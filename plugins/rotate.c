@@ -1804,8 +1804,6 @@ CompPluginDep rotateDeps[] = {
 
 CompPluginVTable rotateVTable = {
     "rotate",
-    N_("Rotate Cube"),
-    N_("Rotate desktop cube"),
     rotateGetVersion,
     rotateGetMetadata,
     rotateInit,

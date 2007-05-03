@@ -2003,8 +2003,6 @@ scaleGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable scaleVTable = {
     "scale",
-    N_("Scale"),
-    N_("Scale windows"),
     scaleGetVersion,
     scaleGetMetadata,
     scaleInit,

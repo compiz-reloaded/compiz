@@ -2771,8 +2771,6 @@ CompPluginFeature blurFeatures[] = {
 
 static CompPluginVTable blurVTable = {
     "blur",
-    N_("Blur Windows"),
-    N_("Blur windows"),
     blurGetVersion,
     blurGetMetadata,
     blurInit,

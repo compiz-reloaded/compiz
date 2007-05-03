@@ -2914,8 +2914,6 @@ CompPluginDep wobblyDeps[] = {
 
 CompPluginVTable wobblyVTable = {
     "wobbly",
-    N_("Wobbly Windows"),
-    N_("Use spring model for wobbly window effect"),
     wobblyGetVersion,
     wobblyGetMetadata,
     wobblyInit,

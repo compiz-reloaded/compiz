@@ -1998,8 +1998,6 @@ CompPluginFeature cubeFeatures[] = {
 
 CompPluginVTable cubeVTable = {
     "cube",
-    N_("Desktop Cube"),
-    N_("Place windows on cube"),
     cubeGetVersion,
     cubeGetMetadata,
     cubeInit,

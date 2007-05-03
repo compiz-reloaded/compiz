@@ -532,8 +532,6 @@ shotGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable shotVTable = {
     "screenshot",
-    N_("Screenshot"),
-    N_("Screenshot plugin"),
     shotGetVersion,
     shotGetMetadata,
     shotInit,

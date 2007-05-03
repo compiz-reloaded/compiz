@@ -886,8 +886,6 @@ CompPluginFeature planeFeatures[] = {
 
 CompPluginVTable planeVTable = {
     "plane",
-    N_("Desktop Plane"),
-    N_("Place windows on a plane"),
     planeGetVersion,
     0, /* GetMetadata */
     planeInit,

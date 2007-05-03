@@ -891,8 +891,6 @@ annoGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable annoVTable = {
     "annotate",
-    N_("Annotate"),
-    N_("Annotate plugin"),
     annoGetVersion,
     annoGetMetadata,
     annoInit,

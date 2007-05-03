@@ -242,8 +242,6 @@ svgGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable svgVTable = {
     "svg",
-    "Svg",
-    "Svg image loader",
     svgGetVersion,
     svgGetMetadata,
     svgInit,

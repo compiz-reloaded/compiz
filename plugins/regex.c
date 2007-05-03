@@ -477,8 +477,6 @@ regexGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable regexVTable = {
     "regex",
-    N_("Regex Matching"),
-    N_("Regex window matching"),
     regexGetVersion,
     regexGetMetadata,
     regexInit,

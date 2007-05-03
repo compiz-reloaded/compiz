@@ -1676,14 +1676,33 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	DBusMessageIter   iter;
 	DBusMessageIter   listIter;
 	char		  sig[2];
+	char		  *shortDesc = NULL;
+	char		  *longDesc = NULL;
 
 	reply = dbus_message_new_method_return (message);
 
+	if (!loadedPlugin && p->vTable->getMetadata)
+	{
+	    CompMetadata *m;
+
+	    m = (*p->vTable->getMetadata) (p);
+	    if (m)
+	    {
+		shortDesc = compGetShortPluginDescription (m);
+		longDesc  = compGetLongPluginDescription (m);
+	    }
+	}
+
 	dbus_message_append_args (reply,
 				  DBUS_TYPE_STRING, &p->vTable->name,
-				  DBUS_TYPE_STRING, &p->vTable->shortDesc,
-				  DBUS_TYPE_STRING, &p->vTable->longDesc,
+				  DBUS_TYPE_STRING, &shortDesc,
+				  DBUS_TYPE_STRING, &longDesc,
 				  DBUS_TYPE_INVALID);
+
+	if (shortDesc)
+	    free (shortDesc);
+	if (longDesc)
+	    free (longDesc);
 
 	version = (*p->vTable->getVersion) (p, ABIVERSION);
 	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
@@ -2694,8 +2713,6 @@ dbusGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable dbusVTable = {
     "dbus",
-    "Dbus",
-    "Dbus Control Backend",
     dbusGetVersion,
     dbusGetMetadata,
     dbusInit,

@@ -855,8 +855,6 @@ CompPluginDep fadeDeps[] = {
 
 static CompPluginVTable fadeVTable = {
     "fade",
-    N_("Fading Windows"),
-    N_("Fade in windows when mapped and fade out windows when unmapped"),
     fadeGetVersion,
     fadeGetMetadata,
     fadeInit,

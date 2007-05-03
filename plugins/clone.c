@@ -855,8 +855,6 @@ cloneGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable cloneVTable = {
     "clone",
-    N_("Clone Output"),
-    N_("Output clone handler"),
     cloneGetVersion,
     cloneGetMetadata,
     cloneInit,

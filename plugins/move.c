@@ -899,8 +899,6 @@ moveGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable moveVTable = {
     "move",
-    N_("Move Window"),
-    N_("Move window"),
     moveGetVersion,
     moveGetMetadata,
     moveInit,

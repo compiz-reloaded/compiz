@@ -1758,8 +1758,6 @@ CompPluginDep waterDeps[] = {
 
 static CompPluginVTable waterVTable = {
     "water",
-    N_("Water Effect"),
-    N_("Adds water effects to different desktop actions"),
     waterGetVersion,
     waterGetMetadata,
     waterInit,

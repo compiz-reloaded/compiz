@@ -1533,8 +1533,6 @@ placeGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable placeVTable = {
     "place",
-    N_("Place Windows"),
-    N_("Place windows at appropriate positions when mapped"),
     placeGetVersion,
     placeGetMetadata,
     placeInit,

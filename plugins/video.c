@@ -1259,8 +1259,6 @@ CompPluginFeature videoFeatures[] = {
 
 static CompPluginVTable videoVTable = {
     "video",
-    N_("Video Playback"),
-    N_("Video playback"),
     videoGetVersion,
     videoGetMetadata,
     videoInit,

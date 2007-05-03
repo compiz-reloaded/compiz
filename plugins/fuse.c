@@ -1602,8 +1602,6 @@ fuseGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable fuseVTable = {
     "fs",
-    N_("Userspace File System"),
-    N_("Userspace file system"),
     fuseGetVersion,
     fuseGetMetadata,
     fuseInit,

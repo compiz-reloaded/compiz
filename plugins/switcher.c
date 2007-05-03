@@ -2049,8 +2049,6 @@ switchGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable switchVTable = {
     "switcher",
-    N_("Application Switcher"),
-    N_("Application Switcher"),
     switchGetVersion,
     switchGetMetadata,
     switchInit,

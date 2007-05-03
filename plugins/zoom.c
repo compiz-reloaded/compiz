@@ -801,8 +801,6 @@ zoomGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable zoomVTable = {
     "zoom",
-    N_("Zoom Desktop"),
-    N_("Zoom and pan desktop cube"),
     zoomGetVersion,
     zoomGetMetadata,
     zoomInit,

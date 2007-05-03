@@ -539,8 +539,6 @@ pngGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable pngVTable = {
     "png",
-    "Png",
-    "Png image loader",
     pngGetVersion,
     pngGetMetadata,
     pngInit,

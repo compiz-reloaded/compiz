@@ -1190,8 +1190,6 @@ CompPluginDep gconfDeps[] = {
 
 CompPluginVTable gconfVTable = {
     "gconf",
-    "GConf",
-    "GConf Control Backend",
     gconfGetVersion,
     gconfGetMetadata,
     gconfInit,
