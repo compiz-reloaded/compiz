@@ -1,0 +1,76 @@
+<compiz>
+    <plugin name="zoom">
+	<_short>Zoom Desktop</_short>
+	<_long>Zoom and pan desktop cube</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate</_short>
+		<_long>Zoom In</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Super&gt;Button3</button>
+		</default>
+	    </option>
+	    <option name="zoom_in" type="action">
+		<_short>Zoom In</_short>
+		<_long>Zoom In</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Super&gt;Button4</button>
+		</default>
+	    </option>
+	    <option name="zoom_out" type="action">
+		<_short>Zoom Out</_short>
+		<_long>Zoom Out</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Super&gt;Button5</button>
+		</default>
+	    </option>
+	</display>
+	<screen>
+	    <option name="invert_y" type="bool">
+		<_short>Pointer Invert Y</_short>
+		<_long>Invert Y axis for pointer movement</_long>
+		<default>false</default>
+	    </option>
+	    <option name="sensitivity" type="float">
+		<_short>Pointer Sensitivity</_short>
+		<_long>Sensitivity of pointer movement</_long>
+		<default>1</default>
+		<min>0.01</min>
+		<max>100</max>
+		<precision>0.01</precision>
+	    </option>
+	    <option name="speed" type="float">
+		<_short>Speed</_short>
+		<_long>Zoom Speed</_long>
+		<default>1.5</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="timestep" type="float">
+		<_short>Timestep</_short>
+		<_long>Zoom Timestep</_long>
+		<default>1.2</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="zoom_factor" type="float">
+		<_short>Zoom factor</_short>
+		<_long>Zoom factor</_long>
+		<default>2</default>
+		<min>1.01</min>
+		<max>3</max>
+		<precision>0.01</precision>
+	    </option>
+	    <option name="filter_linear" type="bool">
+		<_short>Filter Linear</_short>
+		<_long>Use linear filter when zoomed in</_long>
+		<default>false</default>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>
