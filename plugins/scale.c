@@ -1782,7 +1782,6 @@ scaleSetDisplayOption (CompPlugin  *plugin,
     SCALE_DISPLAY (display);
 
     o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, NULL);
-
     if (!o)
 	return FALSE;
 
