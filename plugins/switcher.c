@@ -650,9 +650,10 @@ switchInitiate (CompScreen *s,
 		       s->display->winDesktopAtom,
 		       0xffffffff);
 
-	setWindowProp (s->display, ss->popupWindow,
-		       s->display->winTypeAtom,
-		       s->display->winTypeUtilAtom);
+	XChangeProperty (dpy, ss->popupWindow,
+			 s->display->winTypeAtom,
+			 XA_ATOM, 32, PropModeReplace,
+			 (unsigned char *) &s->display->winTypeUtilAtom, 1);
     }
 
     if (!ss->grabIndex)
