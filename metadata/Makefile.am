@@ -38,6 +38,9 @@ schema_DATA = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
 %.schemas: $(xml_files)
 	xsltproc -o $@ schemas.xslt $(subst compiz-,,$*).xml;
 
+xsltdir   = $(stylesheetdir)
+xslt_DATA = schemas.xslt
+
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)" ; then \
@@ -48,5 +51,4 @@ endif
 
 EXTRA_DIST =		\
 	$(xml_files)    \
-	$(xml_in_files) \
-	schemas.xslt
+	$(xml_in_files)
