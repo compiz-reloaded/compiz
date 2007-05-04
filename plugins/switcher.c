@@ -313,22 +313,21 @@ isSwitchWin (CompWindow *w)
     return TRUE;
 }
 
-static void switchActivateEvent (CompScreen *s, Bool activating)
+static void
+switchActivateEvent (CompScreen *s,
+		     Bool	activating)
 {
-	CompOption o[2];
+    CompOption o[2];
 
-	o[0].type = CompOptionTypeInt;
-	o[0].name = "root";
-	o[0].value.i = s->root;
+    o[0].type = CompOptionTypeInt;
+    o[0].name = "root";
+    o[0].value.i = s->root;
 
-	o[1].type = CompOptionTypeBool;
-	o[1].name = "active";
-	o[1].value.b = activating;
+    o[1].type = CompOptionTypeBool;
+    o[1].name = "active";
+    o[1].value.b = activating;
 
-	(*s->display->handleCompizEvent) (s->display, 
-					  "switcher", 
-					  "activate", 
-					  o, 2);
+    (*s->display->handleCompizEvent) (s->display, "switcher", "activate", o, 2);
 }
 
 static int
