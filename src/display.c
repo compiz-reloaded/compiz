@@ -2503,12 +2503,47 @@ getCurrentTimeFromDisplay (CompDisplay *d)
     return event.xproperty.time;
 }
 
+/* Attempts to focus a window located under the pointer. Returns TRUE if
+ * there is a window like that. FALSE otherwise.
+ */
+static Bool 
+focusPointerTarget (CompScreen *s)
+{
+    CompDisplay * d = s->display;
+    Window      tmpRoot, tmpChild;
+    CompWindow  * focus;
+    Bool        result;
+    int         x;
+
+    result = XQueryPointer (d->display, s->root, &tmpRoot, &tmpChild, 
+			    &x, &x, &x, &x, (unsigned int *)&x);
+
+    if (result && tmpChild)
+    {
+	focus = findWindowAtScreen (s, tmpChild);
+	if (focus && !(focus->wmType & 
+		       (CompWindowTypeDesktopMask | CompWindowTypeDockMask))) 
+	{
+	    moveInputFocusToWindow (focus);
+	    return TRUE;
+	}
+    }
+    return FALSE;
+}
+
 void
 focusDefaultWindow (CompDisplay *d)
 {
     CompScreen *s;
     CompWindow *w;
     CompWindow *focus = NULL;
+
+    if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
+    {
+	for (s = d->screens; s; s = s->next)
+	    if (focusPointerTarget (s))
+		return;
+    }
 
     for (s = d->screens; s; s = s->next)
     {
