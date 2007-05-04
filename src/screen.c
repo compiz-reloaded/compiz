@@ -2403,6 +2403,10 @@ removeScreenGrab (CompScreen *s,
     }
 }
 
+/* otherScreenGrabExist takes a series of strings terminated by a NULL.
+   It returns TRUE if a grab exists but it is NOT held by one of the
+   plugins listed, returns FALSE otherwise. */
+
 Bool
 otherScreenGrabExist (CompScreen *s, ...)
 {
