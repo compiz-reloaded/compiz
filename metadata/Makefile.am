@@ -33,10 +33,10 @@ xml_DATA     = $(xml_files)
 
 if USE_GCONF
 schemadir   = $(GCONF_SCHEMA_FILE_DIR)
-schema_DATA = $(xml_in_files:.xml.in=.schemas)
+schema_DATA = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
 
-.xml.schemas:
-	xsltproc -o $@ schemas.xslt $*.xml;
+%.schemas: $(xml_files)
+	xsltproc -o $@ schemas.xslt $(subst compiz-,,$*).xml;
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
