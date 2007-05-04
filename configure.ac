@@ -142,15 +142,6 @@ if test "$use_gconf" = yes; then
   AC_DEFINE(USE_GCONF, 1, [Build gconf plugin])
 fi
 
-AC_ARG_ENABLE(gconf-dump,
-  [  --enable-gconf-dump     Enable gconf-dump plugin (for developers)],
-  [use_gconf_dump=$enableval], [use_gconf_dump=no])
-
-AM_CONDITIONAL(GCONF_DUMP_PLUGIN, test "x$use_gconf_dump" = "xyes")
-if test "$use_gconf_dump" = yes; then
-  AC_DEFINE(USE_GCONF_DUMP, 1, [Build gconf-dump plugin])
-fi
-
 AC_ARG_ENABLE(place,
   [  --disable-place         Disable window placement plugin],
   [use_place=$enableval], [use_place=yes])
@@ -240,28 +231,6 @@ AM_CONDITIONAL(USE_LIBRSVG, test "x$use_librsvg" = "xyes")
 if test "$use_librsvg" = yes; then
   AC_DEFINE(USE_LIBRSVG, 1, [librsvg for SVG support])
 fi
-
-AC_ARG_WITH(scale-corner,
-  [  --with-scale-corner     Set default scale plugin activation corner],
-  [case $withval in
-   no) SCALE_CORNER="" ;;
-   TopLeft|TopRight|BottomLeft|BottomRight) SCALE_CORNER="$withval" ;;
-   *) AC_MSG_ERROR([Unrecognized scale corner "$withval"]) ;;
-   esac], [SCALE_CORNER="TopRight"])
-if test -n "$SCALE_CORNER"; then
-  AC_DEFINE_UNQUOTED(SCALE_CORNER, "$SCALE_CORNER", [Default scale plugin activation corner])
-fi
-AC_SUBST(SCALE_CORNER)
-
-AC_ARG_WITH(default-plugins,
-  [  --with-default-plugins  Set default plugins],
-  [DEFAULT_PLUGINS="$withval"],
-  [DEFAULT_PLUGINS="png,decoration,fade,minimize,move,resize,switcher"])
-
-if test -n "$DEFAULT_PLUGINS"; then
-  AC_DEFINE_UNQUOTED(DEFAULT_PLUGINS, "$DEFAULT_PLUGINS", [Default plugins])
-fi
-AC_SUBST(DEFAULT_PLUGINS)
 
 AC_ARG_ENABLE(gtk,
   [  --disable-gtk           Disable gtk window decorator],
@@ -463,7 +432,6 @@ libdecoration/Makefile
 libdecoration/libdecoration.pc
 include/Makefile
 plugins/Makefile
-plugins/compiz.schemas
 images/Makefile
 gtk/Makefile
 gtk/window-decorator/Makefile

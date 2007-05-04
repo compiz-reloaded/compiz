@@ -513,9 +513,7 @@ shotInit (CompPlugin *p)
 static void
 shotFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&shotMetadata);
 }
 
@@ -534,8 +532,6 @@ shotGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable shotVTable = {
     "screenshot",
-    N_("Screenshot"),
-    N_("Screenshot plugin"),
     shotGetVersion,
     shotGetMetadata,
     shotInit,

@@ -854,9 +854,7 @@ resizeInit (CompPlugin *p)
 static void
 resizeFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&resizeMetadata);
 }
 
@@ -875,8 +873,6 @@ resizeGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable resizeVTable = {
     "resize",
-    N_("Resize Window"),
-    N_("Resize window"),
     resizeGetVersion,
     resizeGetMetadata,
     resizeInit,

@@ -178,7 +178,7 @@ svgInitDisplay (CompPlugin  *p,
 
     d->privates[displayPrivateIndex].ptr = sd;
 
-    for (s = d->screens; s; s = s->next) 
+    for (s = d->screens; s; s = s->next)
 	updateDefaultIcon (s);
 
     return TRUE;
@@ -194,7 +194,7 @@ svgFiniDisplay (CompPlugin  *p,
 
     UNWRAP (sd, d, fileToImage);
 
-    for (s = d->screens; s; s = s->next) 
+    for (s = d->screens; s; s = s->next)
 	updateDefaultIcon (s);
 
     free (sd);
@@ -223,9 +223,7 @@ svgInit (CompPlugin *p)
 static void
 svgFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&svgMetadata);
 }
 
@@ -244,8 +242,6 @@ svgGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable svgVTable = {
     "svg",
-    "Svg",
-    "Svg image loader",
     svgGetVersion,
     svgGetMetadata,
     svgInit,

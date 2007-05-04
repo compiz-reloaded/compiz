@@ -1450,8 +1450,6 @@ iniGetVersion (CompPlugin *plugin, int	version)
 
 CompPluginVTable iniVTable = {
     "ini",
-    "Ini file backend for compiz",
-    "Ini (flat file) option storage",
     iniGetVersion,
     0, /* GetMetadata */
     iniInit,

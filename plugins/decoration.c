@@ -1385,9 +1385,7 @@ decorInit (CompPlugin *p)
 static void
 decorFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&decorMetadata);
 }
 
@@ -1417,8 +1415,6 @@ CompPluginFeature decorFeatures[] = {
 
 static CompPluginVTable decorVTable = {
     "decoration",
-    N_("Window Decoration"),
-    N_("Window decorations"),
     decorGetVersion,
     decorGetMetadata,
     decorInit,

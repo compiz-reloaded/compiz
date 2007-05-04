@@ -1,0 +1,259 @@
+<compiz>
+    <plugin name="rotate">
+	<_short>Rotate Cube</_short>
+	<_long>Rotate desktop cube</_long>
+	<display>
+	    <option name="initiate" type="action">
+		<_short>Initiate</_short>
+		<_long>Start Rotation</_long>
+		<allowed key="true" button="true"/>
+		<default>
+		    <button>&lt;Control&gt;&lt;Alt&gt;Button1</button>
+		</default>
+	    </option>
+	    <option name="rotate_left" type="action">
+		<_short>Rotate Left</_short>
+		<_long>Rotate left</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;Left</key>
+		</default>
+	    </option>
+	    <option name="rotate_right" type="action">
+		<_short>Rotate Right</_short>
+		<_long>Rotate right</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;Right</key>
+		</default>
+	    </option>
+	    <option name="rotate_left_window" type="action">
+		<_short>Rotate Left with Window</_short>
+		<_long>Rotate left and brind active window along</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;&lt;Shift&gt;Left</key>
+		</default>
+	    </option>
+	    <option name="rotate_right_window" type="action">
+		<_short>Rotate Right with Window</_short>
+		<_long>Rotate right and brind active window along</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <key>&lt;Control&gt;&lt;Alt&gt;&lt;Shift&gt;Right</key>
+		</default>
+	    </option>
+	    <option name="edge_flip_pointer" type="bool">
+		<_short>Edge Flip Pointer</_short>
+		<_long>Flip to next viewport when moving pointer to screen edge</_long>
+		<default>false</default>
+	    </option>
+	    <option name="edge_flip_move" type="bool">
+		<_short>Edge Flip Move</_short>
+		<_long>Flip to next viewport when moving window to screen edge</_long>
+		<default>true</default>
+	    </option>
+	    <option name="edge_flip_dnd" type="bool">
+		<_short>Edge Flip DnD</_short>
+		<_long>Flip to next viewport when dragging object to screen edge</_long>
+		<default>true</default>
+	    </option>
+	    <option name="flip_time" type="int">
+		<_short>Flip Time</_short>
+		<_long>Timeout before flipping viewport</_long>
+		<default>350</default>
+		<min>0</min>
+		<max>1000</max>
+	    </option>
+	    <option name="rotate_to_1" type="action">
+		<_short>Rotate To Face 1</_short>
+		<_long>Rotate to face 1</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_2" type="action">
+		<_short>Rotate To Face 2</_short>
+		<_long>Rotate to face 2</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_3" type="action">
+		<_short>Rotate To Face 3</_short>
+		<_long>Rotate to face 3</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_4" type="action">
+		<_short>Rotate To Face 4</_short>
+		<_long>Rotate to face 4</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_5" type="action">
+		<_short>Rotate To Face 5</_short>
+		<_long>Rotate to face 5</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_6" type="action">
+		<_short>Rotate To Face 6</_short>
+		<_long>Rotate to face 6</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_7" type="action">
+		<_short>Rotate To Face 7</_short>
+		<_long>Rotate to face 7</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_8" type="action">
+		<_short>Rotate To Face 8</_short>
+		<_long>Rotate to face 8</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_9" type="action">
+		<_short>Rotate To Face 9</_short>
+		<_long>Rotate to face 9</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_10" type="action">
+		<_short>Rotate To Face 10</_short>
+		<_long>Rotate to face 10</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_11" type="action">
+		<_short>Rotate To Face 11</_short>
+		<_long>Rotate to face 11</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_12" type="action">
+		<_short>Rotate To Face 12</_short>
+		<_long>Rotate to face 12</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_1_window" type="action">
+		<_short>Rotate To Face 1 with Window</_short>
+		<_long>Rotate to face 1 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_2_window" type="action">
+		<_short>Rotate To Face 2 with Window</_short>
+		<_long>Rotate to face 2 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_3_window" type="action">
+		<_short>Rotate To Face 3 with Window</_short>
+		<_long>Rotate to face 3 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_4_window" type="action">
+		<_short>Rotate To Face 4 with Window</_short>
+		<_long>Rotate to face 4 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_5_window" type="action">
+		<_short>Rotate To Face 5 with Window</_short>
+		<_long>Rotate to face 5 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_6_window" type="action">
+		<_short>Rotate To Face 6 with Window</_short>
+		<_long>Rotate to face 6 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_7_window" type="action">
+		<_short>Rotate To Face 7 with Window</_short>
+		<_long>Rotate to face 7 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_8_window" type="action">
+		<_short>Rotate To Face 8 with Window</_short>
+		<_long>Rotate to face 8 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_9_window" type="action">
+		<_short>Rotate To Face 9 with Window</_short>
+		<_long>Rotate to face 9 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_10_window" type="action">
+		<_short>Rotate To Face 10 with Window</_short>
+		<_long>Rotate to face 10 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_11_window" type="action">
+		<_short>Rotate To Face 11 with Window</_short>
+		<_long>Rotate to face 11 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to_12_window" type="action">
+		<_short>Rotate To Face 12 with Window</_short>
+		<_long>Rotate to face 12 and bring active window along</_long>
+		<allowed key="true" button="true"/>
+	    </option>
+	    <option name="rotate_to" type="action">
+		<_short>Rotate To</_short>
+		<_long>Rotate to viewport</_long>
+	    </option>
+	    <option name="rotate_window" type="action">
+		<_short>Rotate window</_short>
+		<_long>Rotate with window</_long>
+	    </option>
+	    <option name="rotate_flip_left" type="action">
+		<_short>Rotate Flip Left</_short>
+		<_long>Flip to left viewport and warp pointer</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <edges left="true"/>
+		</default>
+	    </option>
+	    <option name="rotate_flip_right" type="action">
+		<_short>Rotate Flip Right</_short>
+		<_long>Flip to right viewport and warp pointer</_long>
+		<allowed key="true" button="true" edge="true" edgednd="true"/>
+		<default>
+		    <edges right="true"/>
+		</default>
+	    </option>
+	</display>
+	<screen>
+	    <option name="invert_y" type="bool">
+		<_short>Pointer Invert Y</_short>
+		<_long>Invert Y axis for pointer movement</_long>
+		<default>false</default>
+	    </option>
+	    <option name="sensitivity" type="float">
+		<_short>Pointer Sensitivity</_short>
+		<_long>Sensitivity of pointer movement</_long>
+		<default>1.0</default>
+		<min>0.01</min>
+		<max>100.0</max>
+		<precision>0.01</precision>
+	    </option>
+	    <option name="acceleration" type="float">
+		<_short>Acceleration</_short>
+		<_long>Rotation Acceleration</_long>
+		<default>4.0</default>
+		<min>1.0</min>
+		<max>20.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="snap_top" type="bool">
+		<_short>Snap To Top Face</_short>
+		<_long>Snap Cube Rotation to Top Face</_long>
+		<default>false</default>
+	    </option>
+	    <option name="speed" type="float">
+		<_short>Speed</_short>
+		<_long>Rotation Speed</_long>
+		<default>2.0</default>
+		<min>0.1</min>
+		<max>50.0</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="timetep" type="float">
+		<_short>Timestep</_short>
+		<_long>Rotation Timestep</_long>
+		<default>1.0</default>
+		<min>0.1</min>
+		<max>50.0</max>
+		<precision>0.1</precision>
+	    </option>
+
+	</screen>
+    </plugin>
+</compiz>

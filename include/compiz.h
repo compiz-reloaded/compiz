@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070425
+#define ABIVERSION 20070503
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -397,8 +397,6 @@ typedef union {
 
 struct _CompOption {
     char		  *name;
-    char		  *shortDesc;
-    char		  *longDesc;
     CompOptionType	  type;
     CompOptionValue	  value;
     CompOptionRestriction rest;
@@ -2781,8 +2779,6 @@ typedef struct _CompPluginFeature {
 
 typedef struct _CompPluginVTable {
     char *name;
-    char *shortDesc;
-    char *longDesc;
 
     GetVersionProc  getVersion;
     GetMetadataProc getMetadata;

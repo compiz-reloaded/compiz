@@ -1163,9 +1163,7 @@ gconfInit (CompPlugin *p)
 static void
 gconfFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&gconfMetadata);
 }
 
@@ -1192,8 +1190,6 @@ CompPluginDep gconfDeps[] = {
 
 CompPluginVTable gconfVTable = {
     "gconf",
-    "GConf",
-    "GConf Control Backend",
     gconfGetVersion,
     gconfGetMetadata,
     gconfInit,

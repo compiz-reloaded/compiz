@@ -89,8 +89,6 @@ typedef struct _SwitchScreen {
     Window	 zoomedWindow;
     unsigned int lastActiveNum;
 
-    float speed;
-    float timestep;
     float zoom;
 
     int grabIndex;
@@ -119,7 +117,6 @@ typedef struct _SwitchScreen {
     GLushort brightness;
     GLushort opacity;
 
-    Bool bringToFront;
     Bool allWindows;
 } SwitchScreen;
 
@@ -210,20 +207,6 @@ switchSetScreenOption (CompPlugin *plugin,
 	return FALSE;
 
     switch (index) {
-    case SWITCH_SCREEN_OPTION_SPEED:
-	if (compSetFloatOption (o, value))
-	{
-	    ss->speed = o->value.f;
-	    return TRUE;
-	}
-	break;
-    case SWITCH_SCREEN_OPTION_TIMESTEP:
-	if (compSetFloatOption (o, value))
-	{
-	    ss->timestep = o->value.f;
-	    return TRUE;
-	}
-	break;
     case SWITCH_SCREEN_OPTION_SATURATION:
 	if (compSetIntOption (o, value))
 	{
@@ -245,13 +228,6 @@ switchSetScreenOption (CompPlugin *plugin,
 	    return TRUE;
 	}
 	break;
-    case SWITCH_SCREEN_OPTION_BRINGTOFRONT:
-	if (compSetBoolOption (o, value))
-	{
-	    ss->bringToFront = o->value.b;
-	    return TRUE;
-	}
-	break;
     case SWITCH_SCREEN_OPTION_ZOOM:
 	if (compSetFloatOption (o, value))
 	{
@@ -270,9 +246,7 @@ switchSetScreenOption (CompPlugin *plugin,
 	}
 	break;
     default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
+	return compSetScreenOption (screen, o, value);
     }
 
     return FALSE;
@@ -1241,8 +1215,10 @@ switchPreparePaintScreen (CompScreen *s,
 	int   steps, m;
 	float amount, chunk;
 
-	amount = msSinceLastPaint * 0.05f * ss->speed;
-	steps  = amount / (0.5f * ss->timestep);
+	amount = msSinceLastPaint * 0.05f *
+	    ss->opt[SWITCH_SCREEN_OPTION_SPEED].value.f;
+	steps  = amount /
+	    (0.5f * ss->opt[SWITCH_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps) steps = 1;
 	chunk  = amount / (float) steps;
 
@@ -1350,7 +1326,7 @@ switchPaintScreen (CompScreen		   *s,
 	    switcher->destroyed = TRUE;
 	}
 
-	if (ss->bringToFront)
+	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b)
 	{
 	    zoomed = findWindowAtScreen (s, ss->zoomedWindow);
 	    if (zoomed)
@@ -1725,7 +1701,8 @@ switchPaintWindow (CompWindow		   *w,
     }
     else if (w->id == ss->selectedWindow)
     {
-	if (ss->bringToFront && ss->selectedWindow == ss->zoomedWindow)
+	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b &&
+	    ss->selectedWindow == ss->zoomedWindow)
 	    zoomType = ZOOMED_WINDOW_MASK;
 
 	if (!(ss->zoomMask & zoomType))
@@ -1752,7 +1729,8 @@ switchPaintWindow (CompWindow		   *w,
 		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
 	}
 
-	if (ss->bringToFront && w->id == ss->zoomedWindow)
+	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b &&
+	    w->id == ss->zoomedWindow)
 	    zoomType = ZOOMED_WINDOW_MASK;
 
 	if (!(ss->zoomMask & zoomType))
@@ -1969,11 +1947,9 @@ switchInitScreen (CompPlugin *p,
 
     ss->grabIndex = 0;
 
-    ss->speed    = ss->opt[SWITCH_SCREEN_OPTION_SPEED].value.f;
-    ss->timestep = ss->opt[SWITCH_SCREEN_OPTION_TIMESTEP].value.f;
-    ss->zoom     = ss->opt[SWITCH_SCREEN_OPTION_ZOOM].value.f / 30.0f;
+    ss->zoom = ss->opt[SWITCH_SCREEN_OPTION_ZOOM].value.f / 30.0f;
 
-    ss->zooming  = (ss->opt[SWITCH_SCREEN_OPTION_ZOOM].value.f > 0.05f);
+    ss->zooming = (ss->opt[SWITCH_SCREEN_OPTION_ZOOM].value.f > 0.05f);
 
     ss->zoomMask = ~0;
 
@@ -1986,15 +1962,14 @@ switchInitScreen (CompPlugin *p,
     ss->translate  = 0.0f;
     ss->sTranslate = 0.0f;
 
-    ss->saturation = 
+    ss->saturation =
 	(COLOR  * ss->opt[SWITCH_SCREEN_OPTION_SATURATION].value.i) / 100;
-    ss->brightness = 
+    ss->brightness =
 	(0xffff * ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS].value.i) / 100;
-    ss->opacity    = 
+    ss->opacity    =
 	(OPAQUE * ss->opt[SWITCH_SCREEN_OPTION_OPACITY].value.i)    / 100;
 
-    ss->bringToFront = ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b;
-    ss->allWindows   = FALSE;
+    ss->allWindows = FALSE;
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
@@ -2055,9 +2030,7 @@ switchInit (CompPlugin *p)
 static void
 switchFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&switchMetadata);
 }
 
@@ -2076,8 +2049,6 @@ switchGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable switchVTable = {
     "switcher",
-    N_("Application Switcher"),
-    N_("Application Switcher"),
     switchGetVersion,
     switchGetMetadata,
     switchInit,

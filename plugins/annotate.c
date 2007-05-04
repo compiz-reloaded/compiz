@@ -872,9 +872,7 @@ annoInit (CompPlugin *p)
 static void
 annoFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&annoMetadata);
 }
 
@@ -893,8 +891,6 @@ annoGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable annoVTable = {
     "annotate",
-    N_("Annotate"),
-    N_("Annotate plugin"),
     annoGetVersion,
     annoGetMetadata,
     annoInit,

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-18 12:30-0400\n"
+"POT-Creation-Date: 2007-05-03 15:53-0400\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -20,715 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../metadata/compiz.xml.in.h:1 ../plugins/compiz.schemas.in.h:1
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:2 ../plugins/compiz.schemas.in.h:3
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:3 ../plugins/compiz.schemas.in.h:5
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:4 ../plugins/compiz.schemas.in.h:7
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:5 ../plugins/compiz.schemas.in.h:9
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:6 ../plugins/compiz.schemas.in.h:11
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:7 ../plugins/compiz.schemas.in.h:13
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:8 ../plugins/compiz.schemas.in.h:15
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:9 ../plugins/compiz.schemas.in.h:17
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:10 ../plugins/compiz.schemas.in.h:19
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:11 ../plugins/compiz.schemas.in.h:21
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:12 ../plugins/compiz.schemas.in.h:23
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../metadata/compiz.xml.in.h:13 ../plugins/compiz.schemas.in.h:26
-msgid "Active Plugins"
-msgstr "Активные модули"
-
-#: ../metadata/compiz.xml.in.h:14 ../plugins/compiz.schemas.in.h:35
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-"Позволяет рисовать окна в полноэкранном режиме без перенаправления в области "
-"растрового отображения за пределами экрана"
-
-#: ../metadata/compiz.xml.in.h:15 ../plugins/compiz.schemas.in.h:49
-msgid "Audible Bell"
-msgstr "Слышимый сигнал"
-
-#: ../metadata/compiz.xml.in.h:16 ../plugins/compiz.schemas.in.h:50
-msgid "Audible system beep"
-msgstr "Слышимый системный звуковой сигнал"
-
-#: ../metadata/compiz.xml.in.h:17 ../plugins/compiz.schemas.in.h:52
-msgid "Auto-Raise"
-msgstr "Автоматический вызов"
-
-#: ../metadata/compiz.xml.in.h:18 ../plugins/compiz.schemas.in.h:53
-msgid "Auto-Raise Delay"
-msgstr "Задержка автоматического вызова"
-
-#: ../metadata/compiz.xml.in.h:19 ../plugins/compiz.schemas.in.h:54
-msgid "Automatic detection of output devices"
-msgstr "Автоматическое определение устройств вывода"
-
-#: ../metadata/compiz.xml.in.h:20 ../plugins/compiz.schemas.in.h:55
-msgid "Automatic detection of refresh rate"
-msgstr "Автоматическое определение частоты обновления"
-
-#: ../metadata/compiz.xml.in.h:21 ../plugins/compiz.schemas.in.h:71
-msgid "Click To Focus"
-msgstr "Щелкните для передачи фокуса"
-
-#: ../metadata/compiz.xml.in.h:22 ../plugins/compiz.schemas.in.h:72
-msgid "Click on window moves input focus to it"
-msgstr "Щелкните окно, чтобы передать ему фокус ввода"
-
-#: ../metadata/compiz.xml.in.h:23 ../plugins/compiz.schemas.in.h:74
-msgid "Close Window"
-msgstr "Закрыть окно"
-
-#: ../metadata/compiz.xml.in.h:24 ../plugins/compiz.schemas.in.h:75
-msgid "Close active window"
-msgstr "Закрытие активного окна"
-
-#: ../metadata/compiz.xml.in.h:25 ../plugins/compiz.schemas.in.h:81
-#, fuzzy
-msgid "Command line 0"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:26 ../plugins/compiz.schemas.in.h:82
-#, fuzzy
-msgid "Command line 1"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:27 ../plugins/compiz.schemas.in.h:83
-#, fuzzy
-msgid "Command line 10"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:28 ../plugins/compiz.schemas.in.h:84
-#, fuzzy
-msgid "Command line 11"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:29 ../plugins/compiz.schemas.in.h:85
-#, fuzzy
-msgid "Command line 2"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:30 ../plugins/compiz.schemas.in.h:86
-#, fuzzy
-msgid "Command line 3"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:31 ../plugins/compiz.schemas.in.h:87
-#, fuzzy
-msgid "Command line 4"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:32 ../plugins/compiz.schemas.in.h:88
-#, fuzzy
-msgid "Command line 5"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:33 ../plugins/compiz.schemas.in.h:89
-#, fuzzy
-msgid "Command line 6"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:34 ../plugins/compiz.schemas.in.h:90
-#, fuzzy
-msgid "Command line 7"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:35 ../plugins/compiz.schemas.in.h:91
-#, fuzzy
-msgid "Command line 8"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:36 ../plugins/compiz.schemas.in.h:92
-#, fuzzy
-msgid "Command line 9"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:37 ../plugins/compiz.schemas.in.h:93
-#, fuzzy
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:38 ../plugins/compiz.schemas.in.h:94
-#, fuzzy
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:39 ../plugins/compiz.schemas.in.h:95
-#, fuzzy
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:40 ../plugins/compiz.schemas.in.h:96
-#, fuzzy
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:41 ../plugins/compiz.schemas.in.h:97
-#, fuzzy
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:42 ../plugins/compiz.schemas.in.h:98
-#, fuzzy
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:43 ../plugins/compiz.schemas.in.h:99
-#, fuzzy
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:44 ../plugins/compiz.schemas.in.h:100
-#, fuzzy
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:45 ../plugins/compiz.schemas.in.h:101
-#, fuzzy
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:46 ../plugins/compiz.schemas.in.h:102
-#, fuzzy
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:47 ../plugins/compiz.schemas.in.h:103
-#, fuzzy
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:48 ../plugins/compiz.schemas.in.h:104
-#, fuzzy
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
-
-#: ../metadata/compiz.xml.in.h:49 ../plugins/compiz.schemas.in.h:114
-msgid "Decrease Opacity"
-msgstr "Увеличить прозрачность"
-
-#: ../metadata/compiz.xml.in.h:50 ../plugins/compiz.schemas.in.h:115
-msgid "Decrease window opacity"
-msgstr "Увеличение прозрачности окна"
-
-#: ../metadata/compiz.xml.in.h:51 ../plugins/compiz.schemas.in.h:117
-msgid "Default Icon"
-msgstr "Значок по умолчанию"
-
-#: ../metadata/compiz.xml.in.h:52 ../plugins/compiz.schemas.in.h:118
-msgid "Default window icon image"
-msgstr "Изображение значка окна по умолчанию"
-
-#: ../metadata/compiz.xml.in.h:53 ../plugins/compiz.schemas.in.h:122
-msgid "Detect Outputs"
-msgstr "Определить устройства вывода"
-
-#  headline for dialog "Select for update"
-#: ../metadata/compiz.xml.in.h:54 ../plugins/compiz.schemas.in.h:123
-msgid "Detect Refresh Rate"
-msgstr "Определить частоту обновления"
-
-#: ../metadata/compiz.xml.in.h:55 ../plugins/compiz.schemas.in.h:163
-#, fuzzy
-msgid "Focus Prevention Windows"
-msgstr "Типы окон с фокусом"
-
-#: ../metadata/compiz.xml.in.h:56
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Типы окон с фокусом"
-
-#: ../metadata/compiz.xml.in.h:57
-msgid "General Options"
-msgstr ""
-
-#: ../metadata/compiz.xml.in.h:58
-msgid "General compiz options"
-msgstr ""
-
-#: ../metadata/compiz.xml.in.h:59 ../plugins/compiz.schemas.in.h:183
-msgid "Hide Skip Taskbar Windows"
-msgstr "Скрыть все, кроме окон панели задач"
-
-#: ../metadata/compiz.xml.in.h:60 ../plugins/compiz.schemas.in.h:184
-msgid "Hide all windows and focus desktop"
-msgstr "Скрыть все окна и передать фокус рабочему столу"
-
-#: ../metadata/compiz.xml.in.h:61 ../plugins/compiz.schemas.in.h:186
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"При переходе в режим отображения рабочего стола окна, отсутствующие на "
-"панели задач, не отображаются"
-
-#: ../metadata/compiz.xml.in.h:62 ../plugins/compiz.schemas.in.h:187
-msgid "Horizontal Virtual Size"
-msgstr "Виртуальный размер по горизонтали"
-
-#: ../metadata/compiz.xml.in.h:63 ../plugins/compiz.schemas.in.h:193
-msgid "Ignore Hints When Maximized"
-msgstr "Игнорировать подсказки в развернутом состоянии"
-
-#: ../metadata/compiz.xml.in.h:64 ../plugins/compiz.schemas.in.h:194
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
-"Игнорирование подсказок увеличения размеров и соотношения сторон для "
-"развернутого окна"
-
-#: ../metadata/compiz.xml.in.h:65 ../plugins/compiz.schemas.in.h:197
-msgid "Increase Opacity"
-msgstr "Уменьшить прозрачность"
-
-#: ../metadata/compiz.xml.in.h:66 ../plugins/compiz.schemas.in.h:198
-msgid "Increase window opacity"
-msgstr "Уменьшение прозрачности окна"
-
-#: ../metadata/compiz.xml.in.h:67
-#, fuzzy
-msgid "Interval before raising selected windows"
-msgstr "Интервал времени до вызова выбранных окон"
-
-#: ../metadata/compiz.xml.in.h:68
-msgid "Interval between ping messages"
-msgstr ""
-
-#: ../metadata/compiz.xml.in.h:69 ../plugins/compiz.schemas.in.h:232
-msgid "Lighting"
-msgstr "Освещение"
-
-#  command line help text for the 'list detected only' option
-#: ../metadata/compiz.xml.in.h:70 ../plugins/compiz.schemas.in.h:237
-msgid "List of currently active plugins"
-msgstr "Список текущих активных модулей"
-
-#: ../metadata/compiz.xml.in.h:71 ../plugins/compiz.schemas.in.h:238
-msgid "List of strings describing output devices"
-msgstr "Список строк, описывающих устройства вывода"
-
-#: ../metadata/compiz.xml.in.h:72 ../plugins/compiz.schemas.in.h:239
-msgid "Lower Window"
-msgstr "Переместить окно на задний план"
-
-#: ../metadata/compiz.xml.in.h:73 ../plugins/compiz.schemas.in.h:240
-msgid "Lower window beneath other windows"
-msgstr "Расположение окна позади других окон"
-
-#: ../metadata/compiz.xml.in.h:74 ../plugins/compiz.schemas.in.h:248
-msgid "Maximize Window"
-msgstr "Развернуть окно"
-
-#: ../metadata/compiz.xml.in.h:75 ../plugins/compiz.schemas.in.h:249
-msgid "Maximize Window Horizontally"
-msgstr "Развернуть окно горизонтально"
-
-#: ../metadata/compiz.xml.in.h:76 ../plugins/compiz.schemas.in.h:250
-msgid "Maximize Window Vertically"
-msgstr "Развернуть окно вертикально"
-
-#: ../metadata/compiz.xml.in.h:77 ../plugins/compiz.schemas.in.h:251
-msgid "Maximize active window"
-msgstr "Развертывание активного окна"
-
-#: ../metadata/compiz.xml.in.h:78 ../plugins/compiz.schemas.in.h:253
-msgid "Maximize active window horizontally"
-msgstr "Развертывание активного окна горизонтально"
-
-#: ../metadata/compiz.xml.in.h:79 ../plugins/compiz.schemas.in.h:255
-msgid "Maximize active window vertically"
-msgstr "Развертывание активного окна вертикально"
-
-#: ../metadata/compiz.xml.in.h:80 ../plugins/compiz.schemas.in.h:258
-msgid "Minimize Window"
-msgstr "Свернуть окно"
-
-#: ../metadata/compiz.xml.in.h:81 ../plugins/compiz.schemas.in.h:260
-msgid "Minimize active window"
-msgstr "Свертывание активного окна"
-
-#: ../metadata/compiz.xml.in.h:82 ../plugins/compiz.schemas.in.h:278
-msgid "Number of Desktops"
-msgstr "Число рабочих столов"
-
-#: ../metadata/compiz.xml.in.h:83
-#, fuzzy
-msgid "Number of virtual desktops"
-msgstr "Число виртуальных рабочих столов"
-
-#: ../metadata/compiz.xml.in.h:84 ../plugins/compiz.schemas.in.h:281
-msgid "Only perform screen updates during vertical blanking period"
-msgstr ""
-"Обновления экрана выполняются только во время гашения обратного хода луча "
-"кадровой развертки"
-
-#: ../metadata/compiz.xml.in.h:85 ../plugins/compiz.schemas.in.h:284
-msgid "Opacity Step"
-msgstr "Шаг прозрачности"
-
-#: ../metadata/compiz.xml.in.h:86
-#, fuzzy
-msgid "Opacity change step"
-msgstr "Шаг, с которым меняется прозрачность"
-
-#: ../metadata/compiz.xml.in.h:87 ../plugins/compiz.schemas.in.h:288
-msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
-
-#: ../metadata/compiz.xml.in.h:88 ../plugins/compiz.schemas.in.h:289
-msgid "Opacity window values"
-msgstr ""
-
-#: ../metadata/compiz.xml.in.h:89 ../plugins/compiz.schemas.in.h:290
-#, fuzzy
-msgid "Opacity windows"
-msgstr "Расстояние между окнами"
-
-#: ../metadata/compiz.xml.in.h:90 ../plugins/compiz.schemas.in.h:291
-#, fuzzy
-msgid "Open a terminal"
-msgstr "Запуск в терминале"
-
-#: ../metadata/compiz.xml.in.h:91 ../plugins/compiz.schemas.in.h:293
-msgid "Open window menu"
-msgstr "Открыть меню окна"
-
-#: ../metadata/compiz.xml.in.h:92 ../plugins/compiz.schemas.in.h:298
-msgid "Outputs"
-msgstr "Устройства вывода"
-
-#: ../metadata/compiz.xml.in.h:93 ../plugins/compiz.schemas.in.h:301
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Задержка дождя"
-
-#: ../metadata/compiz.xml.in.h:94 ../plugins/compiz.schemas.in.h:379
-msgid "Raise On Click"
-msgstr "Вызвать щелчком"
-
-#: ../metadata/compiz.xml.in.h:95 ../plugins/compiz.schemas.in.h:380
-msgid "Raise Window"
-msgstr "Вызвать окно"
-
-#: ../metadata/compiz.xml.in.h:96 ../plugins/compiz.schemas.in.h:381
-msgid "Raise selected windows after interval"
-msgstr "Вызов выбранных окон по истечении интервала времени"
-
-#: ../metadata/compiz.xml.in.h:97 ../plugins/compiz.schemas.in.h:382
-msgid "Raise window above other windows"
-msgstr "Вызов и размещение окна поверх других окон"
-
-#: ../metadata/compiz.xml.in.h:98 ../plugins/compiz.schemas.in.h:384
-msgid "Raise windows when clicked"
-msgstr "Вызов окон щелчком"
-
-#: ../metadata/compiz.xml.in.h:99 ../plugins/compiz.schemas.in.h:385
-msgid "Refresh Rate"
-msgstr "Частота обновления"
-
-#: ../metadata/compiz.xml.in.h:100 ../plugins/compiz.schemas.in.h:491
-msgid "Run Dialog"
-msgstr "Диалоговое окно запуска"
-
-#: ../metadata/compiz.xml.in.h:101 ../plugins/compiz.schemas.in.h:492
-#, fuzzy
-msgid "Run command 0"
-msgstr "Команда '%1'"
-
-#: ../metadata/compiz.xml.in.h:102 ../plugins/compiz.schemas.in.h:493
-#, fuzzy
-msgid "Run command 1"
-msgstr "Команда '%1'"
-
-#: ../metadata/compiz.xml.in.h:103 ../plugins/compiz.schemas.in.h:494
-#, fuzzy
-msgid "Run command 10"
-msgstr "Команда '%1'"
-
-#: ../metadata/compiz.xml.in.h:104 ../plugins/compiz.schemas.in.h:495
-#, fuzzy
-msgid "Run command 11"
-msgstr "Команда '%1'"
-
-#: ../metadata/compiz.xml.in.h:105 ../plugins/compiz.schemas.in.h:496
-#, fuzzy
-msgid "Run command 2"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:106 ../plugins/compiz.schemas.in.h:497
-#, fuzzy
-msgid "Run command 3"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:107 ../plugins/compiz.schemas.in.h:498
-#, fuzzy
-msgid "Run command 4"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:108 ../plugins/compiz.schemas.in.h:499
-#, fuzzy
-msgid "Run command 5"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:109 ../plugins/compiz.schemas.in.h:500
-#, fuzzy
-msgid "Run command 6"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:110 ../plugins/compiz.schemas.in.h:501
-#, fuzzy
-msgid "Run command 7"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:111 ../plugins/compiz.schemas.in.h:502
-#, fuzzy
-msgid "Run command 8"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:112 ../plugins/compiz.schemas.in.h:503
-#, fuzzy
-msgid "Run command 9"
-msgstr "Команда: "
-
-#: ../metadata/compiz.xml.in.h:113
-#, fuzzy
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
-
-#: ../metadata/compiz.xml.in.h:114
-#, fuzzy
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
-
-#: ../metadata/compiz.xml.in.h:115 ../plugins/compiz.schemas.in.h:515
-msgid "Screenshot command line"
-msgstr "Командная строка снимка экрана"
-
-#: ../metadata/compiz.xml.in.h:116 ../plugins/compiz.schemas.in.h:532
-msgid "Show Main Menu"
-msgstr "Отобразить главное меню"
-
-#: ../metadata/compiz.xml.in.h:117 ../plugins/compiz.schemas.in.h:533
-msgid "Show Run Application dialog"
-msgstr "Отображение диалогового окна запуска приложения"
-
-#: ../metadata/compiz.xml.in.h:118 ../plugins/compiz.schemas.in.h:537
-msgid "Show the main menu"
-msgstr "Отображение главного меню"
-
-#: ../metadata/compiz.xml.in.h:119 ../plugins/compiz.schemas.in.h:543
-msgid "Slow Animations"
-msgstr "Замедлить анимацию"
-
-#: ../metadata/compiz.xml.in.h:120 ../plugins/compiz.schemas.in.h:570
-msgid "Sync To VBlank"
-msgstr "Синхронизировать с VBlank"
-
-#: ../metadata/compiz.xml.in.h:121 ../plugins/compiz.schemas.in.h:571
-msgid "Take a screenshot"
-msgstr "Сделать снимок экрана"
-
-#: ../metadata/compiz.xml.in.h:122 ../plugins/compiz.schemas.in.h:573
-msgid "Take a screenshot of a window"
-msgstr "Сделать снимок окна"
-
-#: ../metadata/compiz.xml.in.h:123 ../plugins/compiz.schemas.in.h:575
-#, fuzzy
-msgid "Terminal command line"
-msgstr "Командная строка снимка экрана"
-
-#  MenuButton label
-#  menubutton label
-#: ../metadata/compiz.xml.in.h:124 ../plugins/compiz.schemas.in.h:576
-msgid "Texture Filter"
-msgstr "Фильтр текстур"
-
-#  MenuButton label
-#  menubutton label
-#: ../metadata/compiz.xml.in.h:125
-#, fuzzy
-msgid "Texture filtering"
-msgstr "Фильтр текстур"
-
-#: ../metadata/compiz.xml.in.h:126
-#, fuzzy
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
-
-#: ../metadata/compiz.xml.in.h:127 ../plugins/compiz.schemas.in.h:583
-msgid "Toggle Window Maximized"
-msgstr "Развертывать окно"
-
-#: ../metadata/compiz.xml.in.h:128 ../plugins/compiz.schemas.in.h:584
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Развертывать окно по горизонтали"
-
-#: ../metadata/compiz.xml.in.h:129 ../plugins/compiz.schemas.in.h:585
-msgid "Toggle Window Maximized Vertically"
-msgstr "Развертывать окно по вертикали"
-
-#: ../metadata/compiz.xml.in.h:130 ../plugins/compiz.schemas.in.h:586
-msgid "Toggle Window Shaded"
-msgstr "Переключить свертывание окна в полоску"
-
-#: ../metadata/compiz.xml.in.h:131 ../plugins/compiz.schemas.in.h:587
-msgid "Toggle active window maximized"
-msgstr "Развертывание активного окна"
-
-#: ../metadata/compiz.xml.in.h:132 ../plugins/compiz.schemas.in.h:589
-msgid "Toggle active window maximized horizontally"
-msgstr "Развертывание активного окна по горизонтали"
-
-#: ../metadata/compiz.xml.in.h:133 ../plugins/compiz.schemas.in.h:591
-msgid "Toggle active window maximized vertically"
-msgstr "Развертывание активного окна по вертикали"
-
-#: ../metadata/compiz.xml.in.h:134 ../plugins/compiz.schemas.in.h:593
-msgid "Toggle active window shaded"
-msgstr "Переключение свертывания активного окна в полоску"
-
-#: ../metadata/compiz.xml.in.h:135 ../plugins/compiz.schemas.in.h:598
-msgid "Toggle use of slow animations"
-msgstr "Переключатель для использования медленной анимации"
-
-#: ../metadata/compiz.xml.in.h:136 ../plugins/compiz.schemas.in.h:610
-msgid "Unmaximize Window"
-msgstr "Отменить полное развертывание окна"
-
-#: ../metadata/compiz.xml.in.h:137 ../plugins/compiz.schemas.in.h:611
-msgid "Unmaximize active window"
-msgstr "Отмена полного развертывания активного окна"
-
-#: ../metadata/compiz.xml.in.h:138 ../plugins/compiz.schemas.in.h:613
-msgid "Unredirect Fullscreen Windows"
-msgstr "Отменить перенаправление окон в полноэкранном режиме"
-
-#: ../metadata/compiz.xml.in.h:139 ../plugins/compiz.schemas.in.h:614
-msgid "Use diffuse light when screen is transformed"
-msgstr "Использование рассеянного света при преобразовании экрана"
-
-#: ../metadata/compiz.xml.in.h:140 ../plugins/compiz.schemas.in.h:619
-msgid "Vertical Virtual Size"
-msgstr "Виртуальный размер по вертикали"
-
-#: ../metadata/compiz.xml.in.h:141 ../plugins/compiz.schemas.in.h:631
-msgid "Window Menu"
-msgstr "Меню окна"
-
-#: ../metadata/compiz.xml.in.h:142 ../plugins/compiz.schemas.in.h:636
-msgid "Window screenshot command line"
-msgstr "Командная строка снимка окна"
-
-#: ../metadata/compiz.xml.in.h:143 ../plugins/compiz.schemas.in.h:645
-#, fuzzy
-msgid "Windows that should be translucent by default"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1 ../src/main.c:54
 msgid "Desktop"
 msgstr "Рабочий стол"
@@ -737,6 +28,10 @@ msgstr "Рабочий стол"
 #, fuzzy
 msgid "Window Management"
 msgstr "Меню окна"
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr ""
 
 #  combo box item
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
@@ -793,3097 +88,2402 @@ msgstr ""
 msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 
-#: ../gtk/gnome/compiz.desktop.in.h:1
-msgid "Compiz"
-msgstr ""
-
-#: ../plugins/annotate.c:920 ../plugins/compiz.schemas.in.h:44
+#: ../metadata/annotate.xml.in.h:1
 #, fuzzy
 msgid "Annotate"
 msgstr "Инициировать"
 
-#: ../plugins/annotate.c:921 ../plugins/compiz.schemas.in.h:47
+#: ../metadata/annotate.xml.in.h:2
+#, fuzzy
+msgid "Annotate Fill Color"
+msgstr "Цвета куба"
+
+#: ../metadata/annotate.xml.in.h:3
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:4
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "Активные модули"
 
-#: ../plugins/blur.c:73
-#, fuzzy
-msgid "4xBilinear"
-msgstr "Линейная фильтрация"
-
-#: ../plugins/blur.c:74 ../plugins/blur.c:237
-#, fuzzy
-msgid "Gaussian"
-msgstr "Русский"
-
-#: ../plugins/blur.c:75 ../plugins/blur.c:239
-#: ../plugins/compiz.schemas.in.h:268 ../plugins/cube.c:1105
-#: ../plugins/decoration.c:1190 ../plugins/switcher.c:367
-msgid "Mipmap"
-msgstr "Mipmap"
-
-#  combo box item
-#: ../plugins/blur.c:728 ../plugins/compiz.schemas.in.h:60
-#, fuzzy
-msgid "Blur Speed"
-msgstr "Скорость свертывания"
-
-#: ../plugins/blur.c:729
-#, fuzzy
-msgid "Window blur speed"
-msgstr "Скорость проявления/исчезания окна"
-
-#: ../plugins/blur.c:738 ../plugins/compiz.schemas.in.h:166
-#, fuzzy
-msgid "Focus blur windows"
-msgstr "Масштабирование окон"
-
-#: ../plugins/blur.c:739
-#, fuzzy
-msgid "Windows that should be affected by focus blur"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/blur.c:747 ../plugins/compiz.schemas.in.h:161
-msgid "Focus Blur"
-msgstr ""
-
-#: ../plugins/blur.c:748 ../plugins/compiz.schemas.in.h:65
-#, fuzzy
-msgid "Blur windows that doesn't have focus"
-msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
-
-#: ../plugins/blur.c:754 ../plugins/compiz.schemas.in.h:38
-#, fuzzy
-msgid "Alpha blur windows"
-msgstr "Масштабирование окон"
-
-#: ../plugins/blur.c:755
-#, fuzzy
-msgid "Windows that should use alpha blur by default"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/blur.c:763 ../plugins/compiz.schemas.in.h:37
-msgid "Alpha Blur"
-msgstr ""
-
-#: ../plugins/blur.c:764 ../plugins/compiz.schemas.in.h:62
-msgid "Blur behind translucent parts of windows"
-msgstr ""
-
-#  MenuButton label
-#  menubutton label
-#: ../plugins/blur.c:772 ../plugins/compiz.schemas.in.h:57
-#, fuzzy
-msgid "Blur Filter"
-msgstr "Фильтр текстур"
-
-#: ../plugins/blur.c:773
-msgid "Filter method used for blurring"
-msgstr ""
-
-#: ../plugins/blur.c:783 ../plugins/compiz.schemas.in.h:174
-msgid "Gaussian Radius"
-msgstr ""
-
-#: ../plugins/blur.c:784
-#, fuzzy
-msgid "Gaussian radius"
-msgstr "Российская Федерация"
-
-#: ../plugins/blur.c:792 ../plugins/compiz.schemas.in.h:175
-#, fuzzy
-msgid "Gaussian Strength"
-msgstr "Русский"
-
-#: ../plugins/blur.c:793
-#, fuzzy
-msgid "Gaussian strength"
-msgstr "Русский"
-
-#: ../plugins/blur.c:802 ../plugins/compiz.schemas.in.h:269
-#, fuzzy
-msgid "Mipmap LOD"
-msgstr "Mipmap"
-
-#: ../plugins/blur.c:803
-msgid "Mipmap level-of-detail"
-msgstr ""
-
-#  Table header 4/5
-#: ../plugins/blur.c:812 ../plugins/compiz.schemas.in.h:59
-#, fuzzy
-msgid "Blur Saturation"
-msgstr "Насыщенность"
-
-#  Table header 4/5
-#: ../plugins/blur.c:813
-#, fuzzy
-msgid "Blur saturation"
-msgstr "Насыщенность"
-
-#: ../plugins/blur.c:821 ../plugins/compiz.schemas.in.h:58
-msgid "Blur Occlusion"
-msgstr ""
-
-#: ../plugins/blur.c:822 ../plugins/compiz.schemas.in.h:673
-msgid "blur occlusion"
-msgstr ""
-
-#: ../plugins/blur.c:2562 ../plugins/compiz.schemas.in.h:374
-msgid "Pulse"
-msgstr ""
-
-#: ../plugins/blur.c:2563 ../plugins/compiz.schemas.in.h:375
-#, fuzzy
-msgid "Pulse effect"
-msgstr "Эффект фокусировки"
-
-#: ../plugins/blur.c:2885 ../plugins/compiz.schemas.in.h:61
-#, fuzzy
-msgid "Blur Windows"
-msgstr "Размещение окон"
-
-#: ../plugins/blur.c:2886 ../plugins/compiz.schemas.in.h:64
-#, fuzzy
-msgid "Blur windows"
-msgstr "Масштабирование окон"
-
-#: ../plugins/clone.c:726 ../plugins/compiz.schemas.in.h:200
-#: ../plugins/rotate.c:1774 ../plugins/screenshot.c:384
-#: ../plugins/water.c:1608 ../plugins/zoom.c:755
-msgid "Initiate"
-msgstr "Инициировать"
-
-#: ../plugins/clone.c:727 ../plugins/compiz.schemas.in.h:211
-#, fuzzy
-msgid "Initiate clone selection"
-msgstr "Выбор видео режима"
-
-#: ../plugins/clone.c:860 ../plugins/compiz.schemas.in.h:73
-#, fuzzy
-msgid "Clone Output"
-msgstr "Устройства вывода"
-
-#: ../plugins/clone.c:861 ../plugins/compiz.schemas.in.h:297
-msgid "Output clone handler"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:2
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:4
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:6
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:8
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:10
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:12
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:14
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:16
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:18
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:20
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:22
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-#: ../plugins/compiz.schemas.in.h:24
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-"Определенная комбинация клавиш, при нажатии которой запускается команда "
-"оболочки  %d"
-
-# workflow: "3D Beschleunigung aktivieren"
-# -ke-
-#: ../plugins/compiz.schemas.in.h:25 ../plugins/cube.c:1075
-#: ../plugins/rotate.c:304
-msgid "Acceleration"
-msgstr "Ускорение"
-
-#: ../plugins/compiz.schemas.in.h:27 ../plugins/water.c:1698
-msgid "Add line"
-msgstr "Добавить линию"
-
-#: ../plugins/compiz.schemas.in.h:28
-msgid ""
-"Add line (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:29 ../plugins/water.c:1686
-msgid "Add point"
-msgstr "Добавить точку"
-
-#: ../plugins/compiz.schemas.in.h:30
-msgid ""
-"Add point (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:31 ../plugins/water.c:1876
-msgid "Adds water effects to different desktop actions"
-msgstr "Добавление эффектов воды к различным действиям рабочего стола"
-
-#  this is a menu entry
-#: ../plugins/compiz.schemas.in.h:32 ../plugins/cube.c:1818
-msgid "Advance to next slide"
-msgstr "Переход к следующему слайду"
-
-#: ../plugins/compiz.schemas.in.h:33
-msgid ""
-"Advance to next slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:34
-msgid ""
-"Algorithm to use for window placement (Cascade, Centered, Smart, Maximize, "
-"Random)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:36
-msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:39
-#, fuzzy
-msgid "Amount of brightness in percent (0-100)"
-msgstr "Уровень яркости в процентах"
-
-#: ../plugins/compiz.schemas.in.h:40
-#, fuzzy
-msgid "Amount of opacity in percent (0-100)"
-msgstr "Степень прозрачности в процентах"
-
-#: ../plugins/compiz.schemas.in.h:41
-#, fuzzy
-msgid "Amount of saturation in percent (0-100)"
-msgstr "Уровень насыщенности в процентах"
-
-#: ../plugins/compiz.schemas.in.h:42 ../plugins/cube.c:1046
-msgid "Animate Skydome"
-msgstr "Анимировать фон"
-
-#: ../plugins/compiz.schemas.in.h:43 ../plugins/cube.c:1047
-msgid "Animate skydome when rotating cube"
-msgstr "Анимирование фона при вращении куба"
-
-#: ../plugins/compiz.schemas.in.h:45
-msgid "Annotate Fill Color"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:46
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:48 ../plugins/switcher.c:2297
-#: ../plugins/switcher.c:2298
-msgid "Application Switcher"
-msgstr "Переключатель приложений"
-
-#: ../plugins/compiz.schemas.in.h:51 ../plugins/switcher.c:434
-#, fuzzy
-msgid "Auto Rotate"
-msgstr "Автоматический вызов"
-
-#: ../plugins/compiz.schemas.in.h:56 ../plugins/screenshot.c:408
-#, fuzzy
-msgid "Automatically open screenshot in this application"
-msgstr "Автоматически запускать апплет при входе в систему"
-
-#  Table header 4/5
-#: ../plugins/compiz.schemas.in.h:63
-#, fuzzy
-msgid "Blur saturation (0-100)"
-msgstr "Насыщенность"
-
-#: ../plugins/compiz.schemas.in.h:66 ../plugins/switcher.c:384
-msgid "Brightness"
-msgstr "Яркость"
-
-#: ../plugins/compiz.schemas.in.h:67 ../plugins/switcher.c:402
-msgid "Bring To Front"
-msgstr "Переместить на передний план"
-
-#: ../plugins/compiz.schemas.in.h:68 ../plugins/switcher.c:403
-msgid "Bring selected window to front"
-msgstr "Перемещение выбранного окна на передний план"
-
-#: ../plugins/compiz.schemas.in.h:69
+#: ../metadata/annotate.xml.in.h:5
 #, fuzzy
 msgid "Clear"
 msgstr "О_чистить"
 
-#: ../plugins/compiz.schemas.in.h:70
-msgid ""
-"Clear (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+#: ../metadata/annotate.xml.in.h:6
+msgid "Draw"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:76
-msgid ""
-"Close active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
+#: ../metadata/annotate.xml.in.h:7
+msgid "Draw using tool"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:77 ../plugins/cube.c:993
+#: ../metadata/annotate.xml.in.h:8
+msgid "Fill color for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+msgid "Initiate"
+msgstr "Инициировать"
+
+#: ../metadata/annotate.xml.in.h:10
+#, fuzzy
+msgid "Initiate annotate drawing"
+msgstr "Инициировать изменение размеров окна"
+
+#: ../metadata/annotate.xml.in.h:11
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Инициировать изменение размеров окна"
+
+#: ../metadata/annotate.xml.in.h:12
+#, fuzzy
+msgid "Initiate erase"
+msgstr "Инициировать"
+
+#: ../metadata/annotate.xml.in.h:13
+msgid "Line width"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:14
+msgid "Line width for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:15
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:16
+msgid "Stroke width"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:17
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:1
+#, fuzzy
+msgid "Alpha Blur"
+msgstr "Масштабирование окон"
+
+#: ../metadata/blur.xml.in.h:2
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "Масштабирование окон"
+
+#  MenuButton label
+#  menubutton label
+#: ../metadata/blur.xml.in.h:3
+#, fuzzy
+msgid "Blur Filter"
+msgstr "Фильтр текстур"
+
+#  Table header 4/5
+#: ../metadata/blur.xml.in.h:4
+#, fuzzy
+msgid "Blur Occlusion"
+msgstr "Насыщенность"
+
+#  Table header 4/5
+#: ../metadata/blur.xml.in.h:5
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "Насыщенность"
+
+#  combo box item
+#: ../metadata/blur.xml.in.h:6
+#, fuzzy
+msgid "Blur Speed"
+msgstr "Скорость свертывания"
+
+#: ../metadata/blur.xml.in.h:7
+#, fuzzy
+msgid "Blur Windows"
+msgstr "Размещение окон"
+
+#: ../metadata/blur.xml.in.h:8
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#  Table header 4/5
+#: ../metadata/blur.xml.in.h:9
+#, fuzzy
+msgid "Blur saturation"
+msgstr "Насыщенность"
+
+#: ../metadata/blur.xml.in.h:10
+#, fuzzy
+msgid "Blur windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/blur.xml.in.h:11
+#, fuzzy
+msgid "Blur windows that doesn't have focus"
+msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
+
+#: ../metadata/blur.xml.in.h:12
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:13
+#, fuzzy
+msgid "Focus Blur"
+msgstr "Масштабирование окон"
+
+#: ../metadata/blur.xml.in.h:14
+#, fuzzy
+msgid "Focus blur windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/blur.xml.in.h:15
+#, fuzzy
+msgid "Gaussian Radius"
+msgstr "Российская Федерация"
+
+#: ../metadata/blur.xml.in.h:16
+#, fuzzy
+msgid "Gaussian Strength"
+msgstr "Русский"
+
+#: ../metadata/blur.xml.in.h:17
+#, fuzzy
+msgid "Gaussian radius"
+msgstr "Российская Федерация"
+
+#: ../metadata/blur.xml.in.h:18
+#, fuzzy
+msgid "Gaussian strength"
+msgstr "Русский"
+
+#: ../metadata/blur.xml.in.h:19
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Mipmap"
+
+#: ../metadata/blur.xml.in.h:20
+msgid "Mipmap level-of-detail"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:21
+msgid "Pulse"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:22
+#, fuzzy
+msgid "Pulse effect"
+msgstr "Эффект фокусировки"
+
+#: ../metadata/blur.xml.in.h:23
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Скорость проявления/исчезания окна"
+
+#: ../metadata/blur.xml.in.h:24
+#, fuzzy
+msgid "Windows that should be affected by focus blur"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: ../metadata/blur.xml.in.h:25
+#, fuzzy
+msgid "Windows that should be use alpha blur by default"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: ../metadata/blur.xml.in.h:26
+msgid "blur occlusion"
+msgstr ""
+
+#: ../metadata/clone.xml.in.h:1
+#, fuzzy
+msgid "Clone Output"
+msgstr "Устройства вывода"
+
+#: ../metadata/clone.xml.in.h:3
+#, fuzzy
+msgid "Initiate clone selection"
+msgstr "Выбор видео режима"
+
+#: ../metadata/clone.xml.in.h:4
+msgid "Output clone handler"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:1
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:2
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:3
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:4
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:5
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:6
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:7
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:8
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:9
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:10
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:11
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:12
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Определенная комбинация клавиш, при нажатии которой запускается команда "
+"оболочки  %d"
+
+#: ../metadata/compiz.xml.in.h:13
+msgid "Active Plugins"
+msgstr "Активные модули"
+
+#: ../metadata/compiz.xml.in.h:14
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Позволяет рисовать окна в полноэкранном режиме без перенаправления в области "
+"растрового отображения за пределами экрана"
+
+#: ../metadata/compiz.xml.in.h:15
+msgid "Audible Bell"
+msgstr "Слышимый сигнал"
+
+#: ../metadata/compiz.xml.in.h:16
+msgid "Audible system beep"
+msgstr "Слышимый системный звуковой сигнал"
+
+#: ../metadata/compiz.xml.in.h:17
+msgid "Auto-Raise"
+msgstr "Автоматический вызов"
+
+#: ../metadata/compiz.xml.in.h:18
+msgid "Auto-Raise Delay"
+msgstr "Задержка автоматического вызова"
+
+#: ../metadata/compiz.xml.in.h:19
+msgid "Automatic detection of output devices"
+msgstr "Автоматическое определение устройств вывода"
+
+#: ../metadata/compiz.xml.in.h:20
+msgid "Automatic detection of refresh rate"
+msgstr "Автоматическое определение частоты обновления"
+
+#: ../metadata/compiz.xml.in.h:21
+msgid "Click To Focus"
+msgstr "Щелкните для передачи фокуса"
+
+#: ../metadata/compiz.xml.in.h:22
+msgid "Click on window moves input focus to it"
+msgstr "Щелкните окно, чтобы передать ему фокус ввода"
+
+#: ../metadata/compiz.xml.in.h:23
+msgid "Close Window"
+msgstr "Закрыть окно"
+
+#: ../metadata/compiz.xml.in.h:24
+msgid "Close active window"
+msgstr "Закрытие активного окна"
+
+#: ../metadata/compiz.xml.in.h:25
+#, fuzzy
+msgid "Command line 0"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:26
+#, fuzzy
+msgid "Command line 1"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:27
+#, fuzzy
+msgid "Command line 10"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:28
+#, fuzzy
+msgid "Command line 11"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:29
+#, fuzzy
+msgid "Command line 2"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:30
+#, fuzzy
+msgid "Command line 3"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:31
+#, fuzzy
+msgid "Command line 4"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:32
+#, fuzzy
+msgid "Command line 5"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:33
+#, fuzzy
+msgid "Command line 6"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:34
+#, fuzzy
+msgid "Command line 7"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:35
+#, fuzzy
+msgid "Command line 8"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:36
+#, fuzzy
+msgid "Command line 9"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:37
+#, fuzzy
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:38
+#, fuzzy
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:39
+#, fuzzy
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:40
+#, fuzzy
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:41
+#, fuzzy
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:42
+#, fuzzy
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:43
+#, fuzzy
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:44
+#, fuzzy
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:45
+#, fuzzy
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:46
+#, fuzzy
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:47
+#, fuzzy
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:48
+#, fuzzy
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена оболочкой при вызове run_command%d"
+
+#: ../metadata/compiz.xml.in.h:49
+msgid "Decrease Opacity"
+msgstr "Увеличить прозрачность"
+
+#: ../metadata/compiz.xml.in.h:50
+msgid "Decrease window opacity"
+msgstr "Увеличение прозрачности окна"
+
+#: ../metadata/compiz.xml.in.h:51
+msgid "Default Icon"
+msgstr "Значок по умолчанию"
+
+#: ../metadata/compiz.xml.in.h:52
+msgid "Default window icon image"
+msgstr "Изображение значка окна по умолчанию"
+
+#: ../metadata/compiz.xml.in.h:53
+msgid "Detect Outputs"
+msgstr "Определить устройства вывода"
+
+#  headline for dialog "Select for update"
+#: ../metadata/compiz.xml.in.h:54
+msgid "Detect Refresh Rate"
+msgstr "Определить частоту обновления"
+
+#: ../metadata/compiz.xml.in.h:55
+#, fuzzy
+msgid "Focus Prevention Windows"
+msgstr "Типы окон с фокусом"
+
+#: ../metadata/compiz.xml.in.h:56
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Типы окон с фокусом"
+
+#: ../metadata/compiz.xml.in.h:57
+msgid "General Options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:58
+msgid "General compiz options"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:59
+msgid "Hide Skip Taskbar Windows"
+msgstr "Скрыть все, кроме окон панели задач"
+
+#: ../metadata/compiz.xml.in.h:60
+msgid "Hide all windows and focus desktop"
+msgstr "Скрыть все окна и передать фокус рабочему столу"
+
+#: ../metadata/compiz.xml.in.h:61
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"При переходе в режим отображения рабочего стола окна, отсутствующие на "
+"панели задач, не отображаются"
+
+#: ../metadata/compiz.xml.in.h:62
+msgid "Horizontal Virtual Size"
+msgstr "Виртуальный размер по горизонтали"
+
+#: ../metadata/compiz.xml.in.h:63
+msgid "Ignore Hints When Maximized"
+msgstr "Игнорировать подсказки в развернутом состоянии"
+
+#: ../metadata/compiz.xml.in.h:64
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Игнорирование подсказок увеличения размеров и соотношения сторон для "
+"развернутого окна"
+
+#: ../metadata/compiz.xml.in.h:65
+msgid "Increase Opacity"
+msgstr "Уменьшить прозрачность"
+
+#: ../metadata/compiz.xml.in.h:66
+msgid "Increase window opacity"
+msgstr "Уменьшение прозрачности окна"
+
+#: ../metadata/compiz.xml.in.h:67
+#, fuzzy
+msgid "Interval before raising selected windows"
+msgstr "Интервал времени до вызова выбранных окон"
+
+#: ../metadata/compiz.xml.in.h:68
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:69
+msgid "Lighting"
+msgstr "Освещение"
+
+#  command line help text for the 'list detected only' option
+#: ../metadata/compiz.xml.in.h:70
+msgid "List of currently active plugins"
+msgstr "Список текущих активных модулей"
+
+#: ../metadata/compiz.xml.in.h:71
+msgid "List of strings describing output devices"
+msgstr "Список строк, описывающих устройства вывода"
+
+#: ../metadata/compiz.xml.in.h:72
+msgid "Lower Window"
+msgstr "Переместить окно на задний план"
+
+#: ../metadata/compiz.xml.in.h:73
+msgid "Lower window beneath other windows"
+msgstr "Расположение окна позади других окон"
+
+#: ../metadata/compiz.xml.in.h:74
+msgid "Maximize Window"
+msgstr "Развернуть окно"
+
+#: ../metadata/compiz.xml.in.h:75
+msgid "Maximize Window Horizontally"
+msgstr "Развернуть окно горизонтально"
+
+#: ../metadata/compiz.xml.in.h:76
+msgid "Maximize Window Vertically"
+msgstr "Развернуть окно вертикально"
+
+#: ../metadata/compiz.xml.in.h:77
+msgid "Maximize active window"
+msgstr "Развертывание активного окна"
+
+#: ../metadata/compiz.xml.in.h:78
+msgid "Maximize active window horizontally"
+msgstr "Развертывание активного окна горизонтально"
+
+#: ../metadata/compiz.xml.in.h:79
+msgid "Maximize active window vertically"
+msgstr "Развертывание активного окна вертикально"
+
+#: ../metadata/compiz.xml.in.h:80
+msgid "Minimize Window"
+msgstr "Свернуть окно"
+
+#: ../metadata/compiz.xml.in.h:81
+msgid "Minimize active window"
+msgstr "Свертывание активного окна"
+
+#: ../metadata/compiz.xml.in.h:82
+msgid "Number of Desktops"
+msgstr "Число рабочих столов"
+
+#: ../metadata/compiz.xml.in.h:83
+#, fuzzy
+msgid "Number of virtual desktops"
+msgstr "Число виртуальных рабочих столов"
+
+#: ../metadata/compiz.xml.in.h:84
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+"Обновления экрана выполняются только во время гашения обратного хода луча "
+"кадровой развертки"
+
+#: ../metadata/compiz.xml.in.h:85
+msgid "Opacity Step"
+msgstr "Шаг прозрачности"
+
+#: ../metadata/compiz.xml.in.h:86
+#, fuzzy
+msgid "Opacity change step"
+msgstr "Шаг, с которым меняется прозрачность"
+
+#: ../metadata/compiz.xml.in.h:87
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:88
+msgid "Opacity window values"
+msgstr ""
+
+#: ../metadata/compiz.xml.in.h:89
+#, fuzzy
+msgid "Opacity windows"
+msgstr "Расстояние между окнами"
+
+#: ../metadata/compiz.xml.in.h:90
+#, fuzzy
+msgid "Open a terminal"
+msgstr "Запуск в терминале"
+
+#: ../metadata/compiz.xml.in.h:91
+msgid "Open window menu"
+msgstr "Открыть меню окна"
+
+#: ../metadata/compiz.xml.in.h:92
+msgid "Outputs"
+msgstr "Устройства вывода"
+
+#: ../metadata/compiz.xml.in.h:93
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Задержка дождя"
+
+#: ../metadata/compiz.xml.in.h:94
+msgid "Raise On Click"
+msgstr "Вызвать щелчком"
+
+#: ../metadata/compiz.xml.in.h:95
+msgid "Raise Window"
+msgstr "Вызвать окно"
+
+#: ../metadata/compiz.xml.in.h:96
+msgid "Raise selected windows after interval"
+msgstr "Вызов выбранных окон по истечении интервала времени"
+
+#: ../metadata/compiz.xml.in.h:97
+msgid "Raise window above other windows"
+msgstr "Вызов и размещение окна поверх других окон"
+
+#: ../metadata/compiz.xml.in.h:98
+msgid "Raise windows when clicked"
+msgstr "Вызов окон щелчком"
+
+#: ../metadata/compiz.xml.in.h:99
+msgid "Refresh Rate"
+msgstr "Частота обновления"
+
+#: ../metadata/compiz.xml.in.h:100
+msgid "Run Dialog"
+msgstr "Диалоговое окно запуска"
+
+#: ../metadata/compiz.xml.in.h:101
+#, fuzzy
+msgid "Run command 0"
+msgstr "Команда '%1'"
+
+#: ../metadata/compiz.xml.in.h:102
+#, fuzzy
+msgid "Run command 1"
+msgstr "Команда '%1'"
+
+#: ../metadata/compiz.xml.in.h:103
+#, fuzzy
+msgid "Run command 10"
+msgstr "Команда '%1'"
+
+#: ../metadata/compiz.xml.in.h:104
+#, fuzzy
+msgid "Run command 11"
+msgstr "Команда '%1'"
+
+#: ../metadata/compiz.xml.in.h:105
+#, fuzzy
+msgid "Run command 2"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:106
+#, fuzzy
+msgid "Run command 3"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:107
+#, fuzzy
+msgid "Run command 4"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:108
+#, fuzzy
+msgid "Run command 5"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:109
+#, fuzzy
+msgid "Run command 6"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:110
+#, fuzzy
+msgid "Run command 7"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:111
+#, fuzzy
+msgid "Run command 8"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:112
+#, fuzzy
+msgid "Run command 9"
+msgstr "Команда: "
+
+#: ../metadata/compiz.xml.in.h:113
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
+
+#: ../metadata/compiz.xml.in.h:114
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
+
+#: ../metadata/compiz.xml.in.h:115
+msgid "Screenshot command line"
+msgstr "Командная строка снимка экрана"
+
+#: ../metadata/compiz.xml.in.h:116
+msgid "Show Main Menu"
+msgstr "Отобразить главное меню"
+
+#: ../metadata/compiz.xml.in.h:117
+msgid "Show Run Application dialog"
+msgstr "Отображение диалогового окна запуска приложения"
+
+#: ../metadata/compiz.xml.in.h:118
+msgid "Show the main menu"
+msgstr "Отображение главного меню"
+
+#: ../metadata/compiz.xml.in.h:119
+msgid "Slow Animations"
+msgstr "Замедлить анимацию"
+
+#: ../metadata/compiz.xml.in.h:120
+msgid "Sync To VBlank"
+msgstr "Синхронизировать с VBlank"
+
+#: ../metadata/compiz.xml.in.h:121
+msgid "Take a screenshot"
+msgstr "Сделать снимок экрана"
+
+#: ../metadata/compiz.xml.in.h:122
+msgid "Take a screenshot of a window"
+msgstr "Сделать снимок окна"
+
+#: ../metadata/compiz.xml.in.h:123
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Командная строка снимка экрана"
+
+#  MenuButton label
+#  menubutton label
+#: ../metadata/compiz.xml.in.h:124
+msgid "Texture Filter"
+msgstr "Фильтр текстур"
+
+#  MenuButton label
+#  menubutton label
+#: ../metadata/compiz.xml.in.h:125
+#, fuzzy
+msgid "Texture filtering"
+msgstr "Фильтр текстур"
+
+#: ../metadata/compiz.xml.in.h:126
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
+
+#: ../metadata/compiz.xml.in.h:127
+msgid "Toggle Window Maximized"
+msgstr "Развертывать окно"
+
+#: ../metadata/compiz.xml.in.h:128
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Развертывать окно по горизонтали"
+
+#: ../metadata/compiz.xml.in.h:129
+msgid "Toggle Window Maximized Vertically"
+msgstr "Развертывать окно по вертикали"
+
+#: ../metadata/compiz.xml.in.h:130
+msgid "Toggle Window Shaded"
+msgstr "Переключить свертывание окна в полоску"
+
+#: ../metadata/compiz.xml.in.h:131
+msgid "Toggle active window maximized"
+msgstr "Развертывание активного окна"
+
+#: ../metadata/compiz.xml.in.h:132
+msgid "Toggle active window maximized horizontally"
+msgstr "Развертывание активного окна по горизонтали"
+
+#: ../metadata/compiz.xml.in.h:133
+msgid "Toggle active window maximized vertically"
+msgstr "Развертывание активного окна по вертикали"
+
+#: ../metadata/compiz.xml.in.h:134
+msgid "Toggle active window shaded"
+msgstr "Переключение свертывания активного окна в полоску"
+
+#: ../metadata/compiz.xml.in.h:135
+msgid "Toggle use of slow animations"
+msgstr "Переключатель для использования медленной анимации"
+
+#: ../metadata/compiz.xml.in.h:136
+msgid "Unmaximize Window"
+msgstr "Отменить полное развертывание окна"
+
+#: ../metadata/compiz.xml.in.h:137
+msgid "Unmaximize active window"
+msgstr "Отмена полного развертывания активного окна"
+
+#: ../metadata/compiz.xml.in.h:138
+msgid "Unredirect Fullscreen Windows"
+msgstr "Отменить перенаправление окон в полноэкранном режиме"
+
+#: ../metadata/compiz.xml.in.h:139
+msgid "Use diffuse light when screen is transformed"
+msgstr "Использование рассеянного света при преобразовании экрана"
+
+#: ../metadata/compiz.xml.in.h:140
+msgid "Vertical Virtual Size"
+msgstr "Виртуальный размер по вертикали"
+
+#: ../metadata/compiz.xml.in.h:141
+msgid "Window Menu"
+msgstr "Меню окна"
+
+#: ../metadata/compiz.xml.in.h:142
+msgid "Window screenshot command line"
+msgstr "Командная строка снимка окна"
+
+#: ../metadata/compiz.xml.in.h:143
+#, fuzzy
+msgid "Windows that should be translucent by default"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+msgid "Acceleration"
+msgstr "Ускорение"
+
+#: ../metadata/cube.xml.in.h:2
+msgid "Adjust Image"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:3
+msgid "Adjust top face image to rotation"
+msgstr ""
+
+#  this is a menu entry
+#: ../metadata/cube.xml.in.h:4
+msgid "Advance to next slide"
+msgstr "Переход к следующему слайду"
+
+#: ../metadata/cube.xml.in.h:5
+msgid "Animate Skydome"
+msgstr "Анимировать фон"
+
+#: ../metadata/cube.xml.in.h:6
+msgid "Animate skydome when rotating cube"
+msgstr "Анимирование фона при вращении куба"
+
+#: ../metadata/cube.xml.in.h:7
+msgid "Background Images"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:8
+msgid "Background images"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:9
 msgid "Color of top and bottom sides of the cube"
 msgstr "Цвет верхней и нижней сторон куба"
 
-#: ../plugins/compiz.schemas.in.h:78 ../plugins/cube.c:1065
+#: ../metadata/cube.xml.in.h:10
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr "Цвет, используемый для нижней границы градиента фона"
 
-#: ../plugins/compiz.schemas.in.h:79 ../plugins/cube.c:1054
+#: ../metadata/cube.xml.in.h:11
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Цвет, используемый для верхней границы градиента фона"
 
-#: ../plugins/compiz.schemas.in.h:80 ../plugins/decoration.c:1180
-msgid "Command"
-msgstr "Команда"
-
-#: ../plugins/compiz.schemas.in.h:105 ../plugins/move.c:759
-msgid "Constrain Y"
-msgstr "Ограничить Y"
-
-#: ../plugins/compiz.schemas.in.h:106 ../plugins/move.c:760
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Ограничение координаты Y пределами рабочей области"
-
-#: ../plugins/compiz.schemas.in.h:107 ../plugins/cube.c:992
+#: ../metadata/cube.xml.in.h:12
 msgid "Cube Color"
 msgstr "Цвета куба"
 
-#: ../plugins/compiz.schemas.in.h:108 ../plugins/scale.c:360
-msgid "Darken Background"
-msgstr "Затемнить фон"
+#: ../metadata/cube.xml.in.h:13
+msgid "Desktop Cube"
+msgstr "Куб рабочего стола"
 
-#: ../plugins/compiz.schemas.in.h:109 ../plugins/scale.c:361
-msgid "Darken background when scaling windows"
-msgstr "Затемнение фона при масштабировании окон"
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#: ../metadata/cube.xml.in.h:14
+msgid "Fold Acceleration"
+msgstr "Ускорение свертывания"
 
-#: ../plugins/compiz.schemas.in.h:110
+#  combo box item
+#: ../metadata/cube.xml.in.h:15
+msgid "Fold Speed"
+msgstr "Скорость свертывания"
+
+#: ../metadata/cube.xml.in.h:16
+msgid "Fold Timestep"
+msgstr "Квант времени для свертывания"
+
+#: ../metadata/cube.xml.in.h:17 ../metadata/switcher.xml.in.h:10
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"По возможности применять множественное отображение для масштабирования "
+"качества изображения"
+
+#: ../metadata/cube.xml.in.h:18
+msgid "Go back to previous slide"
+msgstr "Возврат к предыдущему слайду"
+
+#  summary information text - header
+#: ../metadata/cube.xml.in.h:19
+msgid "Image files"
+msgstr "Файлы изображений"
+
+#: ../metadata/cube.xml.in.h:20
+msgid "Image to use as texture for the skydome"
+msgstr "Изображение, используемое в качестве текстуры для фона"
+
+#: ../metadata/cube.xml.in.h:21
+msgid "Inside Cube"
+msgstr "Внутренняя поверхность куба"
+
+#: ../metadata/cube.xml.in.h:22
+msgid "Inside cube"
+msgstr "Внутренняя поверхность куба"
+
+#: ../metadata/cube.xml.in.h:23
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"Список PNG- и SVG-файлов, которые следует отобразить на верхней грани куба"
+
+#: ../metadata/cube.xml.in.h:24 ../metadata/decoration.xml.in.h:10
+#: ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../metadata/cube.xml.in.h:25
+msgid "Next Slide"
+msgstr "Следующий слайд"
+
+#: ../metadata/cube.xml.in.h:26
+msgid "Place windows on cube"
+msgstr "Размещение окон на кубе"
+
+#: ../metadata/cube.xml.in.h:27
+#, fuzzy
+msgid "Prev Slide"
+msgstr "Предыдущий слайд"
+
+#: ../metadata/cube.xml.in.h:28
+msgid "Render skydome"
+msgstr "Отрисовка фона"
+
+#: ../metadata/cube.xml.in.h:29
+msgid "Scale image"
+msgstr "Масштабировать изображение"
+
+#: ../metadata/cube.xml.in.h:30
+msgid "Scale images to cover top face of cube"
+msgstr "Масштабировать изображения для покрытия верхней грани куба"
+
+#: ../metadata/cube.xml.in.h:31
+msgid "Skydome"
+msgstr "Фон"
+
+#: ../metadata/cube.xml.in.h:32
+msgid "Skydome Gradient End Color"
+msgstr "Конечный цвет градиента для фона"
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Skydome Gradient Start Color"
+msgstr "Начальный цвет градиента для фона"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Skydome Image"
+msgstr "Изображение для фона"
+
+#  combo box item
+#: ../metadata/cube.xml.in.h:35 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:85 ../metadata/scale.xml.in.h:23
+#: ../metadata/switcher.xml.in.h:27 ../metadata/zoom.xml.in.h:7
+msgid "Speed"
+msgstr "Скорость"
+
+#: ../metadata/cube.xml.in.h:36 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:25
+#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:8
+msgid "Timestep"
+msgstr "Квант времени "
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Unfold"
+msgstr "Развертывание"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Unfold cube"
+msgstr "Развертывание куба"
+
+#: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:111
+#: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:112 ../plugins/decoration.c:1197
+#: ../metadata/decoration.xml.in.h:1
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr ""
+
+#: ../metadata/decoration.xml.in.h:2
+msgid "Command"
+msgstr "Команда"
+
+#: ../metadata/decoration.xml.in.h:3
 #, fuzzy
 msgid "Decoration windows"
 msgstr "Масштабирование окон"
 
-#: ../plugins/compiz.schemas.in.h:113 ../plugins/decoration.c:1181
+#: ../metadata/decoration.xml.in.h:4
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Командная строка декоратора, которая выполняется, если декоратор еще не "
 "запущен"
 
-#: ../plugins/compiz.schemas.in.h:116
-msgid ""
-"Decrease window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:119
-#, fuzzy
-msgid "Delay (in ms) between each rain-drop (0-3600000)"
-msgstr "Задержка (в мс) между каплями дождя"
-
-#: ../plugins/compiz.schemas.in.h:120 ../plugins/cube.c:2044
-msgid "Desktop Cube"
-msgstr "Куб рабочего стола"
-
-#: ../plugins/compiz.schemas.in.h:121 ../plugins/plane.c:889
-#, fuzzy
-msgid "Desktop Plane"
-msgstr "Куб рабочего стола"
-
-#: ../plugins/compiz.schemas.in.h:124 ../plugins/screenshot.c:398
-#, fuzzy
-msgid "Directory"
-msgstr "Каталог\n"
-
-#: ../plugins/compiz.schemas.in.h:125
-#, fuzzy
-msgid "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-msgstr ""
-"При переключении окон рабочий стол на заднем плане должен быть уменьшен"
-
-#: ../plugins/compiz.schemas.in.h:126 ../plugins/gconf-dump.c:617
-#: ../plugins/gconf-dump.c:627
-msgid "Do not modify"
-msgstr "Не изменять"
-
-#: ../plugins/compiz.schemas.in.h:127
-msgid "Draw"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:128
-msgid "Draw using tool"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:129
-msgid ""
-"Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:130
-#, fuzzy
-msgid "Drop shadow X offset (-16-16)"
+#: ../metadata/decoration.xml.in.h:5
+msgid "Drop shadow X offset"
 msgstr "Смещение отбрасываемой тени по оси X"
 
-#: ../plugins/compiz.schemas.in.h:131
-#, fuzzy
-msgid "Drop shadow Y offset (-16-16)"
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow Y offset"
 msgstr "Смещение отбрасываемой тени по оси Y"
 
-#: ../plugins/compiz.schemas.in.h:132
+#: ../metadata/decoration.xml.in.h:7
 #, fuzzy
 msgid "Drop shadow color"
 msgstr "Радиус отбрасываемой тени"
 
 #  int field
-#: ../plugins/compiz.schemas.in.h:133
-#, fuzzy
-msgid "Drop shadow opacity (0.01-6.00)"
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow opacity"
 msgstr "Прозрачность отбрасываемой тени"
 
-#: ../plugins/compiz.schemas.in.h:134
-#, fuzzy
-msgid "Drop shadow radius (0.0-48.0)"
+#: ../metadata/decoration.xml.in.h:9
+msgid "Drop shadow radius"
 msgstr "Радиус отбрасываемой тени"
 
-#: ../plugins/compiz.schemas.in.h:135 ../plugins/rotate.c:1989
-msgid "Edge Flip DnD"
-msgstr "Отражение при перетаскивании к краю"
+#: ../metadata/decoration.xml.in.h:11
+#, fuzzy
+msgid "Shadow Color"
+msgstr "Привязка окон"
 
-#: ../plugins/compiz.schemas.in.h:136 ../plugins/rotate.c:1981
-msgid "Edge Flip Move"
-msgstr "Отражение при перемещении к краю"
+#: ../metadata/decoration.xml.in.h:12
+msgid "Shadow Offset X"
+msgstr "Смещение тени по оси X"
 
-#: ../plugins/compiz.schemas.in.h:137 ../plugins/rotate.c:1973
-msgid "Edge Flip Pointer"
-msgstr "Отражение при курсоре на краю"
+#: ../metadata/decoration.xml.in.h:13
+msgid "Shadow Offset Y"
+msgstr "Смещение тени по оси Y"
 
-#: ../plugins/compiz.schemas.in.h:138 ../plugins/water.c:1609
-msgid "Enable pointer water effects"
-msgstr "Включить для курсора эффекты воды"
+#  int field
+#: ../metadata/decoration.xml.in.h:14
+msgid "Shadow Opacity"
+msgstr "Прозрачность тени"
 
-#: ../plugins/compiz.schemas.in.h:139
-msgid ""
-"Enable pointer water effects (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
+#: ../metadata/decoration.xml.in.h:15
+msgid "Shadow Radius"
+msgstr "Радиус тени"
 
-#: ../plugins/compiz.schemas.in.h:140 ../plugins/fade.c:215
+#: ../metadata/decoration.xml.in.h:16
+#, fuzzy
+msgid "Shadow windows"
+msgstr "Привязка окон"
+
+#: ../metadata/decoration.xml.in.h:17
+msgid "Window Decoration"
+msgstr "Оформление окна"
+
+#: ../metadata/decoration.xml.in.h:18
+msgid "Window decorations"
+msgstr "Оформление окна"
+
+#: ../metadata/decoration.xml.in.h:19
+#, fuzzy
+msgid "Windows that should be decorated"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: ../metadata/decoration.xml.in.h:20
+#, fuzzy
+msgid "Windows that should have a shadow"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:141 ../plugins/fade.c:182
+#: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
 msgstr "Скорость проявления/исчезания"
 
-#: ../plugins/compiz.schemas.in.h:142 ../plugins/fade.c:216
+#: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:143 ../plugins/fade.c:202
+#: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
 msgstr "Эффект проявления/исчезания при системном звуковом сигнале"
 
-#: ../plugins/compiz.schemas.in.h:144 ../plugins/fade.c:882
+#: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
 "Постепенное проявление окон при отображении и постепенное исчезновение при "
 "отмене отображения"
 
-#: ../plugins/compiz.schemas.in.h:145 ../plugins/fade.c:192
+#: ../metadata/fade.xml.in.h:6
 #, fuzzy
 msgid "Fade windows"
 msgstr "Масштабирование окон"
 
-#: ../plugins/compiz.schemas.in.h:146 ../plugins/fade.c:881
+#: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
 msgstr "Проявление/исчезание окон"
 
-#: ../plugins/compiz.schemas.in.h:147
-msgid "File change notification plugin"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:148
-#, fuzzy
-msgid "Fill Color"
-msgstr "Цвета куба"
-
-#: ../plugins/compiz.schemas.in.h:149
-msgid "Fill color for annotations"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:150
-msgid "Fill color for filled outline mode"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:151 ../plugins/zoom.c:270
-msgid "Filter Linear"
-msgstr "Линейная фильтрация"
-
-#: ../plugins/compiz.schemas.in.h:152
-msgid "Filter method used for blurring (4xBilinear, Gaussian, Mipmap)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:153 ../plugins/rotate.c:1997
-msgid "Flip Time"
-msgstr "Время отражения"
-
-#: ../plugins/compiz.schemas.in.h:154 ../plugins/rotate.c:1942
-msgid "Flip to left viewport and warp pointer"
-msgstr "Отражение в левое кадровое окно и искажение курсора"
-
-#: ../plugins/compiz.schemas.in.h:155
-msgid ""
-"Flip to left viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:156 ../plugins/rotate.c:1990
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
-"Отражение на следующее кадровое окно при перетаскивании объекта к краю экрана"
-
-#: ../plugins/compiz.schemas.in.h:157 ../plugins/rotate.c:1974
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-"Отражение на следующее кадровое окно при смещении курсора к краю экрана"
-
-#: ../plugins/compiz.schemas.in.h:158 ../plugins/rotate.c:1982
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
-"Отражение на следующее кадровое окно при перемещении окна к краю экрана"
-
-#: ../plugins/compiz.schemas.in.h:159 ../plugins/rotate.c:1958
-msgid "Flip to right viewport and warp pointer"
-msgstr "Отражение в правое кадровое окно и искажение курсора"
-
-#: ../plugins/compiz.schemas.in.h:160
-msgid ""
-"Flip to right viewport and warp pointer (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:162 ../plugins/wobbly.c:373
-msgid "Focus Effect"
-msgstr "Эффект фокусировки"
-
-#: ../plugins/compiz.schemas.in.h:164
-#, fuzzy
-msgid "Focus Window Effect (None, Shiver)"
-msgstr "Эффект фокусировки окна"
-
-#: ../plugins/compiz.schemas.in.h:165 ../plugins/wobbly.c:391
-#, fuzzy
-msgid "Focus Windows"
-msgstr "Типы окон с фокусом"
-
-#: ../plugins/compiz.schemas.in.h:167
-#, fuzzy
-msgid "Focus prevention windows (match)"
-msgstr "Выбрать предыдущее окно"
-
-# workflow: "3D Beschleunigung aktivieren"
-# -ke-
-#: ../plugins/compiz.schemas.in.h:168
-#, fuzzy
-msgid "Fold Acceleration (1.0-20.0)"
-msgstr "3D ускорение:"
-
-# workflow: "3D Beschleunigung aktivieren"
-# -ke-
-#: ../plugins/compiz.schemas.in.h:169
-#, fuzzy
-msgid "Fold Speed (0.0-50.0)"
-msgstr "3D ускорение:"
-
-#: ../plugins/compiz.schemas.in.h:170
-#, fuzzy
-msgid "Fold Timestep (0.0-50.0)"
-msgstr "Квант времени для свертывания"
-
-#  Table header 5/5
-#: ../plugins/compiz.schemas.in.h:171 ../plugins/wobbly.c:326
-msgid "Friction"
-msgstr "Трение"
-
-#: ../plugins/compiz.schemas.in.h:172 ../plugins/fade.c:208
+#: ../metadata/fade.xml.in.h:8
 msgid "Fullscreen Visual Bell"
 msgstr "Полноэкранная визуализация звукового сигнала"
 
-#: ../plugins/compiz.schemas.in.h:173 ../plugins/fade.c:209
+#: ../metadata/fade.xml.in.h:9
 msgid "Fullscreen fade effect on system beep"
 msgstr ""
 "Полноэкранный эффект проявления/исчезания при системном звуковом сигнале"
 
-#: ../plugins/compiz.schemas.in.h:176
+#: ../metadata/fade.xml.in.h:10
+msgid "Visual Bell"
+msgstr "Визуализация звукового сигнала"
+
+#: ../metadata/fade.xml.in.h:11
+msgid "Window fade speed"
+msgstr "Скорость проявления/исчезания окна"
+
+#: ../metadata/fade.xml.in.h:12
 #, fuzzy
-msgid "Gaussian radius (1-15)"
-msgstr "Российская Федерация"
+msgid "Windows that should be fading"
+msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
 
-#: ../plugins/compiz.schemas.in.h:177
-#, fuzzy
-msgid "Gaussian strength (0.00-1.00)"
-msgstr "Русский"
-
-#: ../plugins/compiz.schemas.in.h:178 ../plugins/cube.c:1106
-#: ../plugins/switcher.c:368
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
-"По возможности применять множественное отображение для масштабирования "
-"качества изображения"
-
-#: ../plugins/compiz.schemas.in.h:179 ../plugins/cube.c:1836
-msgid "Go back to previous slide"
-msgstr "Возврат к предыдущему слайду"
-
-#: ../plugins/compiz.schemas.in.h:180
-msgid ""
-"Go back to previous slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:181 ../plugins/wobbly.c:409
-#, fuzzy
-msgid "Grab Windows"
-msgstr "Типы окон при захвате"
-
-#: ../plugins/compiz.schemas.in.h:182 ../plugins/wobbly.c:346
-msgid "Grid Resolution"
-msgstr "Разрешение решетки"
-
-#: ../plugins/compiz.schemas.in.h:185
-msgid ""
-"Hide all windows and focus desktop (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:188 ../plugins/place.c:300
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Виртуальный размер по горизонтали"
-
-#: ../plugins/compiz.schemas.in.h:189 ../plugins/scale.c:385
-msgid "Hover Time"
-msgstr "Время задержки при наведении"
-
-#: ../plugins/compiz.schemas.in.h:190 ../plugins/switcher.c:420
-msgid "Icon"
-msgstr "Значок"
-
-#: ../plugins/compiz.schemas.in.h:191
-msgid ""
-"If this is set to true the window will repaint itself during resize, which "
-"may cause some lag."
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:192
-msgid ""
-"If this is set, the pointer will be warped to the closest corner when you "
-"press start a resize."
-msgstr ""
-
-#  summary information text - header
-#: ../plugins/compiz.schemas.in.h:195 ../plugins/cube.c:1016
-msgid "Image files"
-msgstr "Файлы изображений"
-
-#: ../plugins/compiz.schemas.in.h:196 ../plugins/cube.c:1038
-msgid "Image to use as texture for the skydome"
-msgstr "Изображение, используемое в качестве текстуры для фона"
-
-#: ../plugins/compiz.schemas.in.h:199
-msgid ""
-"Increase window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:201 ../plugins/move.c:731
-msgid "Initiate Window Move"
-msgstr "Инициировать движение окна"
-
-#: ../plugins/compiz.schemas.in.h:202 ../plugins/scale.c:1930
-msgid "Initiate Window Picker"
-msgstr "Инициировать средство выбора окна"
-
-#: ../plugins/compiz.schemas.in.h:203 ../plugins/scale.c:1949
-msgid "Initiate Window Picker For All Windows"
-msgstr "Инициировать средство выбора окна для всех окон"
-
-#: ../plugins/compiz.schemas.in.h:204 ../plugins/scale.c:1964
-msgid "Initiate Window Picker For Window Group"
-msgstr "Инициировать средство выбора окна для группы окон"
-
-#: ../plugins/compiz.schemas.in.h:205 ../plugins/scale.c:1980
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Инициировать средство выбора окна для окон текущего устройства вывода"
-
-#: ../plugins/compiz.schemas.in.h:206 ../plugins/resize.c:720
-msgid "Initiate Window Resize"
-msgstr "Инициировать изменение размеров окна"
-
-#: ../plugins/compiz.schemas.in.h:207
-msgid "Initiate annotate drawing"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:208
-msgid ""
-"Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:209
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "Инициировать изменение размеров окна"
-
-#: ../plugins/compiz.schemas.in.h:210
-msgid ""
-"Initiate annotate erasing (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:212
-msgid ""
-"Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:213
-#, fuzzy
-msgid "Initiate erase"
-msgstr "Инициировать"
-
-#: ../plugins/compiz.schemas.in.h:214 ../plugins/screenshot.c:385
-#, fuzzy
-msgid "Initiate rectangle screenshot"
-msgstr "Сделать снимок экрана"
-
-#: ../plugins/compiz.schemas.in.h:215
-msgid ""
-"Initiate rectangle screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:216
-#, fuzzy
-msgid "Inotify"
-msgstr "Не изменять"
-
-#: ../plugins/compiz.schemas.in.h:217 ../plugins/cube.c:1002
-msgid "Inside Cube"
-msgstr "Внутренняя поверхность куба"
-
-#: ../plugins/compiz.schemas.in.h:218 ../plugins/cube.c:1003
-msgid "Inside cube"
-msgstr "Внутренняя поверхность куба"
-
-#: ../plugins/compiz.schemas.in.h:219
-#, fuzzy
-msgid "Interval before raising selected windows (0-10000)"
-msgstr "Интервал времени до вызова выбранных окон"
-
-#: ../plugins/compiz.schemas.in.h:220
-msgid "Interval between ping messages (1000-30000)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:221 ../plugins/rotate.c:288
-#: ../plugins/zoom.c:224
-msgid "Invert Y axis for pointer movement"
-msgstr "Инвертировать ось Y для перемещений курсора"
-
-#: ../plugins/compiz.schemas.in.h:222 ../plugins/wobbly.c:2861
-msgid "Inverted window snapping"
-msgstr "Инвертированная привязка окна"
-
-#: ../plugins/compiz.schemas.in.h:223 ../plugins/screenshot.c:407
-#, fuzzy
-msgid "Launch Application"
-msgstr "Запустить приложение"
-
-#: ../plugins/compiz.schemas.in.h:224 ../plugins/scale.c:1950
-msgid "Layout and start transforming all windows"
-msgstr "Компоновка и запуск преобразования всех окон"
-
-#: ../plugins/compiz.schemas.in.h:225
-msgid ""
-"Layout and start transforming all windows (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:226 ../plugins/scale.c:1965
-msgid "Layout and start transforming window group"
-msgstr "Компоновка и запуск преобразования группы окон"
-
-#: ../plugins/compiz.schemas.in.h:227
-msgid ""
-"Layout and start transforming window group (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:228 ../plugins/scale.c:1931
-msgid "Layout and start transforming windows"
-msgstr "Компоновка и запуск преобразования окон"
-
-#: ../plugins/compiz.schemas.in.h:229
-msgid ""
-"Layout and start transforming windows (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:230 ../plugins/scale.c:1982
-msgid "Layout and start transforming windows on current output"
-msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
-
-#: ../plugins/compiz.schemas.in.h:231
-#, fuzzy
-msgid ""
-"Layout and start transforming windows on current output (Left, Right, Top, "
-"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
-
-#: ../plugins/compiz.schemas.in.h:233 ../plugins/water.c:1697
-msgid "Line"
-msgstr "Линия"
-
-#: ../plugins/compiz.schemas.in.h:234
-msgid "Line width"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:235
-msgid "Line width for annotations (0.0-100.0)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:236 ../plugins/cube.c:1017
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr ""
-"Список PNG- и SVG-файлов, которые следует отобразить на верхней грани куба"
-
-#: ../plugins/compiz.schemas.in.h:241
-msgid ""
-"Lower window beneath other windows (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:242 ../plugins/wobbly.c:2868
-msgid "Make window shiver"
-msgstr "Включить дрожание окна"
-
-#: ../plugins/compiz.schemas.in.h:243
-msgid ""
-"Make window shiver (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:244 ../plugins/wobbly.c:364
-msgid "Map Effect"
-msgstr "Эффект отражения"
-
-#: ../plugins/compiz.schemas.in.h:245
-#, fuzzy
-msgid "Map Window Effect (None, Shiver)"
-msgstr "Эффект отражения окна"
-
-#: ../plugins/compiz.schemas.in.h:246 ../plugins/wobbly.c:382
-#, fuzzy
-msgid "Map Windows"
-msgstr "Типы отражения окна"
-
-#: ../plugins/compiz.schemas.in.h:247 ../plugins/wobbly.c:418
-msgid "Maximize Effect"
-msgstr "Эффект развертывания"
-
-#: ../plugins/compiz.schemas.in.h:252
-msgid ""
-"Maximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:254
-msgid ""
-"Maximize active window horizontally (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:256
-msgid ""
-"Maximize active window vertically (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:257 ../plugins/minimize.c:1072
-msgid "Minimize Effect"
-msgstr "Эффект свертывания"
-
-#: ../plugins/compiz.schemas.in.h:259 ../plugins/minimize.c:213
-#, fuzzy
-msgid "Minimize Windows"
-msgstr "Свернуть окно"
-
-#: ../plugins/compiz.schemas.in.h:261
-msgid ""
-"Minimize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:262
-#, fuzzy
-msgid "Minimize speed (0.0-50.0)"
-msgstr "Скорость свертывания"
-
-#: ../plugins/compiz.schemas.in.h:263
-#, fuzzy
-msgid "Minimize timestep (0.0-50.0)"
-msgstr "Квант времени свертывания"
-
-#: ../plugins/compiz.schemas.in.h:264 ../plugins/switcher.c:427
-msgid "Minimized"
-msgstr "Свернутые"
-
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:265 ../plugins/wobbly.c:355
-msgid "Minimum Grid Size"
-msgstr "Минимальный размер решетки"
-
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:266
-#, fuzzy
-msgid "Minimum Vertex Grid Size (4-128)"
-msgstr "Минимальный размер решетки на вершинах"
-
-#: ../plugins/compiz.schemas.in.h:267
-msgid "Minimum opacity for opacify"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:270
-msgid "Mipmap level-of-detail (0.0-5.0)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:271 ../plugins/fuse.c:1488
+#: ../metadata/fs.xml.in.h:1
 #, fuzzy
 msgid "Mount Point"
 msgstr "Точка"
 
-#: ../plugins/compiz.schemas.in.h:272 ../plugins/fuse.c:1489
+#: ../metadata/fs.xml.in.h:2
 #, fuzzy
 msgid "Mount point"
 msgstr "Добавить точку"
 
-#: ../plugins/compiz.schemas.in.h:273 ../plugins/move.c:939
-msgid "Move Window"
-msgstr "Переместить окно"
-
-#: ../plugins/compiz.schemas.in.h:274 ../plugins/wobbly.c:400
-#, fuzzy
-msgid "Move Windows"
-msgstr "Переместить окно"
-
-#: ../plugins/compiz.schemas.in.h:275 ../plugins/move.c:940
-msgid "Move window"
-msgstr "Переместить окно"
-
-#: ../plugins/compiz.schemas.in.h:276 ../plugins/cube.c:1817
-msgid "Next Slide"
-msgstr "Следующий слайд"
-
-#: ../plugins/compiz.schemas.in.h:277 ../plugins/switcher.c:2023
-#: ../plugins/switcher.c:2059 ../plugins/switcher.c:2097
-msgid "Next window"
-msgstr "Следующее окно"
-
-#: ../plugins/compiz.schemas.in.h:279
-#, fuzzy
-msgid "Number of virtual desktops (1-36)"
-msgstr "Число виртуальных рабочих столов"
-
-#: ../plugins/compiz.schemas.in.h:280 ../plugins/water.c:1654
-msgid "Offset Scale"
-msgstr "Масштаб смещения"
-
-#: ../plugins/compiz.schemas.in.h:282
-msgid "Opacify only windows whose opacity is higher than this value (1-100)"
-msgstr ""
-
-#  int field
-#: ../plugins/compiz.schemas.in.h:283 ../plugins/move.c:750
-#: ../plugins/scale.c:367 ../plugins/switcher.c:393
-msgid "Opacity"
-msgstr "Прозрачность"
-
-#: ../plugins/compiz.schemas.in.h:285
-#, fuzzy
-msgid "Opacity change step (1-50)"
-msgstr "Шаг, с которым меняется прозрачность"
-
-#: ../plugins/compiz.schemas.in.h:286
-#, fuzzy
-msgid "Opacity level of moving windows (1-100)"
-msgstr "Степень прозрачности движущихся окон"
-
-#: ../plugins/compiz.schemas.in.h:287
-#, fuzzy
-msgid "Opacity level of resizing windows (1-100)"
-msgstr "Степень прозрачности движущихся окон"
-
-#: ../plugins/compiz.schemas.in.h:292
-msgid ""
-"Open a terminal (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:294
-msgid ""
-"Open window menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:295
-#, fuzzy
-msgid "Outline Color"
-msgstr "Цвета куба"
-
-#: ../plugins/compiz.schemas.in.h:296
-msgid "Outline color for outline and filled outline mode"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:299 ../plugins/scale.c:376
-msgid "Overlay Icon"
-msgstr "Наложить значок"
-
-#: ../plugins/compiz.schemas.in.h:300
-#, fuzzy
-msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
-msgstr "Наложение значка на окна при их масштабировании"
-
-#: ../plugins/compiz.schemas.in.h:302 ../plugins/place.c:1598
-msgid "Place Windows"
-msgstr "Размещение окон"
-
-#: ../plugins/compiz.schemas.in.h:303 ../plugins/place.c:1599
-msgid "Place windows at appropriate positions when mapped"
-msgstr "При отображении разместите окна в нужных местах"
-
-#: ../plugins/compiz.schemas.in.h:304 ../plugins/plane.c:890
-#, fuzzy
-msgid "Place windows on a plane"
-msgstr "Размещение окон на кубе"
-
-#: ../plugins/compiz.schemas.in.h:305 ../plugins/cube.c:2045
-msgid "Place windows on cube"
-msgstr "Размещение окон на кубе"
-
-#: ../plugins/compiz.schemas.in.h:306 ../plugins/place.c:245
-msgid "Placement Mode"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:307 ../plugins/plane.c:664
-#, fuzzy
-msgid "Plane Down"
-msgstr "Page Down"
-
-#: ../plugins/compiz.schemas.in.h:308 ../plugins/plane.c:626
-#, fuzzy
-msgid "Plane Left"
-msgstr "Вращать влево"
-
-#: ../plugins/compiz.schemas.in.h:309 ../plugins/plane.c:645
-#, fuzzy
-msgid "Plane Right"
-msgstr "Вращать вправо"
-
-#: ../plugins/compiz.schemas.in.h:310
-#, fuzzy
-msgid "Plane To Face 1"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:311
-#, fuzzy
-msgid "Plane To Face 10"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:312
-#, fuzzy
-msgid "Plane To Face 11"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:313
-#, fuzzy
-msgid "Plane To Face 12"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:314
-#, fuzzy
-msgid "Plane To Face 2"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:315
-#, fuzzy
-msgid "Plane To Face 3"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:316
-#, fuzzy
-msgid "Plane To Face 4"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:317
-#, fuzzy
-msgid "Plane To Face 5"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:318
-#, fuzzy
-msgid "Plane To Face 6"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:319
-#, fuzzy
-msgid "Plane To Face 7"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:320
-#, fuzzy
-msgid "Plane To Face 8"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:321
-#, fuzzy
-msgid "Plane To Face 9"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:322 ../plugins/plane.c:683
-#, fuzzy
-msgid "Plane Up"
-msgstr "Page Up"
-
-#: ../plugins/compiz.schemas.in.h:323 ../plugins/plane.c:665
-#, fuzzy
-msgid "Plane down"
-msgstr "Размещение окон"
-
-#: ../plugins/compiz.schemas.in.h:324
-msgid ""
-"Plane down (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:325 ../plugins/plane.c:627
-#, fuzzy
-msgid "Plane left"
-msgstr "Вращение влево"
-
-#: ../plugins/compiz.schemas.in.h:326
-msgid ""
-"Plane left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:327 ../plugins/plane.c:646
-#, fuzzy
-msgid "Plane right"
-msgstr "Вращение вправо"
-
-#: ../plugins/compiz.schemas.in.h:328
-msgid ""
-"Plane right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:329
-#, fuzzy
-msgid "Plane to face 1"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:330
-msgid ""
-"Plane to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:331
-#, fuzzy
-msgid "Plane to face 10"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:332
-msgid ""
-"Plane to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:333
-#, fuzzy
-msgid "Plane to face 11"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:334
-msgid ""
-"Plane to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:335
-#, fuzzy
-msgid "Plane to face 12"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:336
-msgid ""
-"Plane to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:337
-#, fuzzy
-msgid "Plane to face 2"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:338
-msgid ""
-"Plane to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:339
-#, fuzzy
-msgid "Plane to face 3"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:340
-msgid ""
-"Plane to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:341
-#, fuzzy
-msgid "Plane to face 4"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:342
-msgid ""
-"Plane to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:343
-#, fuzzy
-msgid "Plane to face 5"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:344
-msgid ""
-"Plane to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:345
-#, fuzzy
-msgid "Plane to face 6"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:346
-msgid ""
-"Plane to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:347
-#, fuzzy
-msgid "Plane to face 7"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:348
-msgid ""
-"Plane to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:349
-#, fuzzy
-msgid "Plane to face 8"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:350
-msgid ""
-"Plane to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:351
-#, fuzzy
-msgid "Plane to face 9"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:352
-msgid ""
-"Plane to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:353 ../plugins/plane.c:684
-msgid "Plane up"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:354
-msgid ""
-"Plane up (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:355 ../plugins/gconf-dump.c:616
-msgid "Plugins that this must load before"
-msgstr "Предварительно должны быть загружены модули"
-
-#: ../plugins/compiz.schemas.in.h:356 ../plugins/gconf-dump.c:626
-msgid "Plugins that this requires"
-msgstr "Необходимые модули"
-
-#: ../plugins/compiz.schemas.in.h:357
-msgid "Png"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:358
-msgid "Png image loader"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:359 ../plugins/water.c:1685
-msgid "Point"
-msgstr "Точка"
-
-#: ../plugins/compiz.schemas.in.h:360 ../plugins/rotate.c:287
-#: ../plugins/zoom.c:223
-msgid "Pointer Invert Y"
-msgstr "Инвертировать для курсора ось Y"
-
-#  dialog caption
-#: ../plugins/compiz.schemas.in.h:361 ../plugins/rotate.c:294
-#: ../plugins/zoom.c:230
-msgid "Pointer Sensitivity"
-msgstr "Чувствительность курсора"
-
-#: ../plugins/compiz.schemas.in.h:362 ../plugins/switcher.c:2024
-msgid "Popup switcher if not visible and select next window"
-msgstr "Отображение переключателя (если он невидим) и выбор следующего окна"
-
-#: ../plugins/compiz.schemas.in.h:363
-#, fuzzy
-msgid ""
-"Popup switcher if not visible and select next window (Left, Right, Top, "
-"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-"Отображение переключателя (если он невидим) и выбор следующего окна из всех "
-"имеющихся"
-
-#: ../plugins/compiz.schemas.in.h:364 ../plugins/switcher.c:2060
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-"Отображение переключателя (если он невидим) и выбор следующего окна из всех "
-"имеющихся"
-
-#: ../plugins/compiz.schemas.in.h:365
-#, fuzzy
-msgid ""
-"Popup switcher if not visible and select next window out of all windows "
-"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-"Отображение переключателя (если он невидим) и выбор следующего окна из всех "
-"имеющихся"
-
-#: ../plugins/compiz.schemas.in.h:366 ../plugins/switcher.c:2042
-msgid "Popup switcher if not visible and select previous window"
-msgstr "Отображение переключателя (если он невидим) и выбор предыдущего окна"
-
-#: ../plugins/compiz.schemas.in.h:367
-#, fuzzy
-msgid ""
-"Popup switcher if not visible and select previous window (Left, Right, Top, "
-"Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-"Отображение переключателя (если он невидим) и выбор предыдущего окна из всех "
-"имеющихся"
-
-#: ../plugins/compiz.schemas.in.h:368 ../plugins/switcher.c:2079
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr ""
-"Отображение переключателя (если он невидим) и выбор предыдущего окна из всех "
-"имеющихся"
-
-#: ../plugins/compiz.schemas.in.h:369
-#, fuzzy
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows "
-"(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-"Отображение переключателя (если он невидим) и выбор предыдущего окна из всех "
-"имеющихся"
-
-#: ../plugins/compiz.schemas.in.h:370 ../plugins/place.c:254
-#, fuzzy
-msgid "Positioned windows"
-msgstr "Отображение свернутых окон"
-
-#: ../plugins/compiz.schemas.in.h:371 ../plugins/switcher.c:2041
-#: ../plugins/switcher.c:2078 ../plugins/switcher.c:2110
-msgid "Prev window"
-msgstr "Предыдущее окно"
-
-#: ../plugins/compiz.schemas.in.h:372 ../plugins/cube.c:1835
-msgid "Previous Slide"
-msgstr "Предыдущий слайд"
-
-#: ../plugins/compiz.schemas.in.h:373 ../plugins/video.c:248
-msgid "Provide YV12 colorspace support"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:376
-msgid ""
-"Pulse effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:377 ../plugins/screenshot.c:399
-#, fuzzy
-msgid "Put screenshot images in this directory"
-msgstr "Рекурсия в каталог"
-
-#: ../plugins/compiz.schemas.in.h:378 ../plugins/water.c:1664
-msgid "Rain Delay"
-msgstr "Задержка дождя"
-
-#: ../plugins/compiz.schemas.in.h:383
-msgid ""
-"Raise window above other windows (Left, Right, Top, Bottom, TopLeft, "
-"TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:386 ../plugins/regex.c:463
-msgid "Regex Matching"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:387 ../plugins/regex.c:464
-#, fuzzy
-msgid "Regex window matching"
-msgstr "Переключение привязки окон"
-
-#: ../plugins/compiz.schemas.in.h:388 ../plugins/cube.c:1031
-msgid "Render skydome"
-msgstr "Отрисовка фона"
-
-#: ../plugins/compiz.schemas.in.h:389
-msgid "Repaints the window on each resize step"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:390
-msgid "Resize Display Mode"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:391 ../plugins/resize.c:887
-msgid "Resize Window"
-msgstr "Изменить размеры окна"
-
-#: ../plugins/compiz.schemas.in.h:392 ../plugins/resize.c:888
-msgid "Resize window"
-msgstr "Изменение размеров окна"
-
-#  Translators: text entry label
-#: ../plugins/compiz.schemas.in.h:393 ../plugins/rotate.c:2180
-msgid "Rotate Cube"
-msgstr "Вращать куб"
-
-#: ../plugins/compiz.schemas.in.h:394 ../plugins/rotate.c:1941
-msgid "Rotate Flip Left"
-msgstr "Вращать с отражением влево"
-
-#: ../plugins/compiz.schemas.in.h:395 ../plugins/rotate.c:1957
-msgid "Rotate Flip Right"
-msgstr "Вращать с отражением вправо"
-
-#: ../plugins/compiz.schemas.in.h:396 ../plugins/rotate.c:1789
-msgid "Rotate Left"
-msgstr "Вращать влево"
-
-#: ../plugins/compiz.schemas.in.h:397 ../plugins/rotate.c:1827
-msgid "Rotate Left with Window"
-msgstr "Вращать влево вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:398 ../plugins/rotate.c:1808
-msgid "Rotate Right"
-msgstr "Вращать вправо"
-
-#: ../plugins/compiz.schemas.in.h:399 ../plugins/rotate.c:1847
-msgid "Rotate Right with Window"
-msgstr "Вращать вправо вместе с окном"
-
-#  Translators: text entry label
-#: ../plugins/compiz.schemas.in.h:400 ../plugins/rotate.c:1917
-msgid "Rotate To"
-msgstr "Вращать до"
-
-#: ../plugins/compiz.schemas.in.h:401
-#, fuzzy
-msgid "Rotate To Face 1"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:402
-#, fuzzy
-msgid "Rotate To Face 1 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:403
-#, fuzzy
-msgid "Rotate To Face 10"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:404
-#, fuzzy
-msgid "Rotate To Face 10 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:405
-#, fuzzy
-msgid "Rotate To Face 11"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:406
-#, fuzzy
-msgid "Rotate To Face 11 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:407
-#, fuzzy
-msgid "Rotate To Face 12"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:408
-#, fuzzy
-msgid "Rotate To Face 12 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:409
-#, fuzzy
-msgid "Rotate To Face 2"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:410
-#, fuzzy
-msgid "Rotate To Face 2 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:411
-#, fuzzy
-msgid "Rotate To Face 3"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:412
-#, fuzzy
-msgid "Rotate To Face 3 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:413
-#, fuzzy
-msgid "Rotate To Face 4"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:414
-#, fuzzy
-msgid "Rotate To Face 4 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:415
-#, fuzzy
-msgid "Rotate To Face 5"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:416
-#, fuzzy
-msgid "Rotate To Face 5 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:417
-#, fuzzy
-msgid "Rotate To Face 6"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:418
-#, fuzzy
-msgid "Rotate To Face 6 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:419
-#, fuzzy
-msgid "Rotate To Face 7"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:420
-#, fuzzy
-msgid "Rotate To Face 7 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:421
-#, fuzzy
-msgid "Rotate To Face 8"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:422
-#, fuzzy
-msgid "Rotate To Face 8 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:423
-#, fuzzy
-msgid "Rotate To Face 9"
-msgstr "Вращать до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:424
-#, fuzzy
-msgid "Rotate To Face 9 with Window"
-msgstr "Вращать до грани %d вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:425 ../plugins/rotate.c:1929
-msgid "Rotate Window"
-msgstr "Вращать окно"
-
-#: ../plugins/compiz.schemas.in.h:426 ../plugins/rotate.c:2181
-msgid "Rotate desktop cube"
-msgstr "Вращение куба рабочего стола"
-
-#: ../plugins/compiz.schemas.in.h:427 ../plugins/rotate.c:1790
-msgid "Rotate left"
-msgstr "Вращение влево"
-
-#: ../plugins/compiz.schemas.in.h:428
-msgid ""
-"Rotate left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:429 ../plugins/rotate.c:1828
-msgid "Rotate left and bring active window along"
-msgstr "Вращение влево вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:430
-msgid ""
-"Rotate left and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:431 ../plugins/rotate.c:1809
-msgid "Rotate right"
-msgstr "Вращение вправо"
-
-#: ../plugins/compiz.schemas.in.h:432
-msgid ""
-"Rotate right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:433 ../plugins/rotate.c:1848
-msgid "Rotate right and bring active window along"
-msgstr "Вращение вправо вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:434
-msgid ""
-"Rotate right and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:435
-#, fuzzy
-msgid "Rotate to face 1"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:436
-msgid ""
-"Rotate to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:437
-#, fuzzy
-msgid "Rotate to face 1 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:438
-msgid ""
-"Rotate to face 1 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:439
-#, fuzzy
-msgid "Rotate to face 10"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:440
-msgid ""
-"Rotate to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:441
-#, fuzzy
-msgid "Rotate to face 10 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:442
-msgid ""
-"Rotate to face 10 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:443
-#, fuzzy
-msgid "Rotate to face 11"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:444
-msgid ""
-"Rotate to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:445
-#, fuzzy
-msgid "Rotate to face 11 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:446
-msgid ""
-"Rotate to face 11 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:447
-#, fuzzy
-msgid "Rotate to face 12"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:448
-msgid ""
-"Rotate to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:449
-#, fuzzy
-msgid "Rotate to face 12 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:450
-msgid ""
-"Rotate to face 12 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:451
-#, fuzzy
-msgid "Rotate to face 2"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:452
-msgid ""
-"Rotate to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:453
-#, fuzzy
-msgid "Rotate to face 2 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:454
-msgid ""
-"Rotate to face 2 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:455
-#, fuzzy
-msgid "Rotate to face 3"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:456
-msgid ""
-"Rotate to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:457
-#, fuzzy
-msgid "Rotate to face 3 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:458
-msgid ""
-"Rotate to face 3 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:459
-#, fuzzy
-msgid "Rotate to face 4"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:460
-msgid ""
-"Rotate to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:461
-#, fuzzy
-msgid "Rotate to face 4 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:462
-msgid ""
-"Rotate to face 4 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:463
-#, fuzzy
-msgid "Rotate to face 5"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:464
-msgid ""
-"Rotate to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:465
-#, fuzzy
-msgid "Rotate to face 5 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:466
-msgid ""
-"Rotate to face 5 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:467
-#, fuzzy
-msgid "Rotate to face 6"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:468
-msgid ""
-"Rotate to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:469
-#, fuzzy
-msgid "Rotate to face 6 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:470
-msgid ""
-"Rotate to face 6 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:471
-#, fuzzy
-msgid "Rotate to face 7"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:472
-msgid ""
-"Rotate to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:473
-#, fuzzy
-msgid "Rotate to face 7 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:474
-msgid ""
-"Rotate to face 7 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:475
-#, fuzzy
-msgid "Rotate to face 8"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:476
-msgid ""
-"Rotate to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:477
-#, fuzzy
-msgid "Rotate to face 8 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:478
-msgid ""
-"Rotate to face 8 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
+#: ../metadata/fs.xml.in.h:3
+msgid "Userspace File System"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:479
-#, fuzzy
-msgid "Rotate to face 9"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/compiz.schemas.in.h:480
-msgid ""
-"Rotate to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:481
-#, fuzzy
-msgid "Rotate to face 9 and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
-
-#: ../plugins/compiz.schemas.in.h:482
-msgid ""
-"Rotate to face 9 and bring active window along (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
+#: ../metadata/fs.xml.in.h:4
+msgid "Userspace file system"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:483 ../plugins/switcher.c:435
-msgid "Rotate to the selected window while switching"
+#: ../metadata/gconf.xml.in.h:1
+msgid "GConf"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:484 ../plugins/rotate.c:1918
-msgid "Rotate to viewport"
-msgstr "Вращение до кадрового окна"
-
-#: ../plugins/compiz.schemas.in.h:485
-msgid ""
-"Rotate to viewport (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
+#: ../metadata/gconf.xml.in.h:2
+msgid "GConf Control Backend"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:486 ../plugins/rotate.c:1930
-msgid "Rotate with window"
-msgstr "Вращение вместе с окном"
-
-#: ../plugins/compiz.schemas.in.h:487
-msgid ""
-"Rotate with window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
+#: ../metadata/inotify.xml.in.h:1
+msgid "File change notification plugin"
 msgstr ""
-
-# workflow: "3D Beschleunigung aktivieren"
-# -ke-
-#: ../plugins/compiz.schemas.in.h:488
-#, fuzzy
-msgid "Rotation Acceleration (1.0-20.0)"
-msgstr "3D ускорение:"
-
-#: ../plugins/compiz.schemas.in.h:489
-#, fuzzy
-msgid "Rotation Speed (0.0-50.0)"
-msgstr "Скорость вращения"
 
-#: ../plugins/compiz.schemas.in.h:490
+#: ../metadata/inotify.xml.in.h:2
 #, fuzzy
-msgid "Rotation Timestep (0.0-50.0)"
-msgstr "Квант времени вращения"
+msgid "Inotify"
+msgstr "Не изменять"
 
-#  Table header 4/5
-#: ../plugins/compiz.schemas.in.h:504 ../plugins/switcher.c:375
-msgid "Saturation"
-msgstr "Насыщенность"
+#: ../metadata/minimize.xml.in.h:1
+msgid "Minimize Effect"
+msgstr "Эффект свертывания"
 
-#: ../plugins/compiz.schemas.in.h:505 ../plugins/scale.c:2212
-msgid "Scale"
-msgstr "Масштабировать"
-
-#: ../plugins/compiz.schemas.in.h:506 ../plugins/scale.c:351
-#, fuzzy
-msgid "Scale Windows"
-msgstr "Масштабирование окон"
-
-#: ../plugins/compiz.schemas.in.h:507 ../plugins/cube.c:1009
-msgid "Scale image"
-msgstr "Масштабировать изображение"
-
-#: ../plugins/compiz.schemas.in.h:508 ../plugins/cube.c:1010
-msgid "Scale images to cover top face of cube"
-msgstr "Масштабировать изображения для покрытия верхней грани куба"
-
-#: ../plugins/compiz.schemas.in.h:509
-#, fuzzy
-msgid "Scale speed (0.0-50.0)"
-msgstr "Скорость масштабирования"
-
-#: ../plugins/compiz.schemas.in.h:510
-#, fuzzy
-msgid "Scale timestep (0.0-50.0)"
-msgstr "Квант времени масштабирования"
-
-#: ../plugins/compiz.schemas.in.h:511 ../plugins/scale.c:2213
-msgid "Scale windows"
-msgstr "Масштабирование окон"
-
-#: ../plugins/compiz.schemas.in.h:512
-#, fuzzy
-msgid "Screen size multiplier for horizontal virtual size (1-32)"
-msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
-
-#: ../plugins/compiz.schemas.in.h:513
+#: ../metadata/minimize.xml.in.h:2
 #, fuzzy
-msgid "Screen size multiplier for vertical virtual size (1-32)"
-msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
+msgid "Minimize Windows"
+msgstr "Свернуть окно"
 
-#: ../plugins/compiz.schemas.in.h:514 ../plugins/screenshot.c:559
-#, fuzzy
-msgid "Screenshot"
-msgstr "Экран"
-
-#: ../plugins/compiz.schemas.in.h:516 ../plugins/screenshot.c:560
-#, fuzzy
-msgid "Screenshot plugin"
-msgstr "Командная строка снимка экрана"
-
-#: ../plugins/compiz.schemas.in.h:517
-msgid ""
-"Select between normal, stretched texture, outline and filled outline mode. "
-"(Normal, Stretch, Outline, Filled Outline)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:518 ../plugins/switcher.c:2098
-msgid "Select next window"
-msgstr "Выбрать следующее окно"
+#: ../metadata/minimize.xml.in.h:3
+msgid "Minimize speed"
+msgstr "Скорость свертывания"
 
-#: ../plugins/compiz.schemas.in.h:519
-msgid ""
-"Select next window (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:520 ../plugins/switcher.c:2111
-msgid "Select previous window"
-msgstr "Выбрать предыдущее окно"
-
-#: ../plugins/compiz.schemas.in.h:521
-msgid ""
-"Select previous window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:522
-#, fuzzy
-msgid "Sensitivity of pointer movement (0.01-100.00)"
-msgstr "Чувствительность к перемещениям курсора"
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize timestep"
+msgstr "Квант времени свертывания"
 
-#: ../plugins/compiz.schemas.in.h:523 ../plugins/minimize.c:222
+#: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
 msgstr "Устойчивость тени"
 
-#: ../plugins/compiz.schemas.in.h:524
-#, fuzzy
-msgid "Shade resistance (0-100)"
+#: ../metadata/minimize.xml.in.h:6
+msgid "Shade resistance"
 msgstr "Устойчивость тени"
 
-#: ../plugins/compiz.schemas.in.h:525
+#: ../metadata/minimize.xml.in.h:9
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Преобразовывать окна при свертывании и отмене свертывания"
+
+#: ../metadata/minimize.xml.in.h:10
 #, fuzzy
-msgid "Shadow Color"
-msgstr "Привязка окон"
+msgid "Windows that should be transformed when minimized"
+msgstr "Типы окон, которые должны быть преобразованы при свертывании"
 
-#: ../plugins/compiz.schemas.in.h:526 ../plugins/decoration.c:1162
-msgid "Shadow Offset X"
-msgstr "Смещение тени по оси X"
+#: ../metadata/move.xml.in.h:1
+msgid "Constrain Y"
+msgstr "Ограничить Y"
 
-#: ../plugins/compiz.schemas.in.h:527 ../plugins/decoration.c:1171
-msgid "Shadow Offset Y"
-msgstr "Смещение тени по оси Y"
+#: ../metadata/move.xml.in.h:2
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Ограничение координаты Y пределами рабочей области"
+
+#: ../metadata/move.xml.in.h:3
+msgid "Initiate Window Move"
+msgstr "Инициировать движение окна"
+
+#: ../metadata/move.xml.in.h:4
+msgid "Move Window"
+msgstr "Переместить окно"
+
+#: ../metadata/move.xml.in.h:5
+msgid "Move window"
+msgstr "Переместить окно"
 
 #  int field
-#: ../plugins/compiz.schemas.in.h:528 ../plugins/decoration.c:1142
-msgid "Shadow Opacity"
-msgstr "Прозрачность тени"
+#: ../metadata/move.xml.in.h:6 ../metadata/scale.xml.in.h:13
+#: ../metadata/switcher.xml.in.h:15
+msgid "Opacity"
+msgstr "Прозрачность"
 
-#: ../plugins/compiz.schemas.in.h:529 ../plugins/decoration.c:1132
-msgid "Shadow Radius"
-msgstr "Радиус тени"
+#: ../metadata/move.xml.in.h:7
+msgid "Opacity level of moving windows"
+msgstr "Степень прозрачности движущихся окон"
 
-#: ../plugins/compiz.schemas.in.h:530 ../plugins/decoration.c:1206
-#, fuzzy
-msgid "Shadow windows"
-msgstr "Привязка окон"
-
-# 'driver' as in '(hardware) driver update'
-#: ../plugins/compiz.schemas.in.h:531 ../plugins/wobbly.c:132
-#: ../plugins/wobbly.c:2867
-msgid "Shiver"
-msgstr "Дрожание"
-
-#: ../plugins/compiz.schemas.in.h:534
-msgid ""
-"Show Run Application dialog (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:535 ../plugins/switcher.c:421
-msgid "Show icon next to thumbnail"
-msgstr "Отображение значка рядом с эскизом"
-
-#: ../plugins/compiz.schemas.in.h:536 ../plugins/switcher.c:428
-msgid "Show minimized windows"
-msgstr "Отображение свернутых окон"
-
-#: ../plugins/compiz.schemas.in.h:538
-msgid ""
-"Show the main menu (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:539 ../plugins/cube.c:1030
-msgid "Skydome"
-msgstr "Фон"
-
-#: ../plugins/compiz.schemas.in.h:540 ../plugins/cube.c:1064
-msgid "Skydome Gradient End Color"
-msgstr "Конечный цвет градиента для фона"
-
-#: ../plugins/compiz.schemas.in.h:541 ../plugins/cube.c:1053
-msgid "Skydome Gradient Start Color"
-msgstr "Начальный цвет градиента для фона"
-
-#: ../plugins/compiz.schemas.in.h:542 ../plugins/cube.c:1037
-msgid "Skydome Image"
-msgstr "Изображение для фона"
-
-#: ../plugins/compiz.schemas.in.h:544 ../plugins/rotate.c:315
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Привязка вращения куба к верхней грани"
-
-#: ../plugins/compiz.schemas.in.h:545 ../plugins/wobbly.c:2860
-msgid "Snap Inverted"
-msgstr "Инвертированная привязка"
-
-#: ../plugins/compiz.schemas.in.h:546 ../plugins/rotate.c:314
-msgid "Snap To Top Face"
-msgstr "Привязать к верхней грани"
-
-#: ../plugins/compiz.schemas.in.h:547 ../plugins/wobbly.c:2846
-msgid "Snap windows"
-msgstr "Привязка окон"
-
-#: ../plugins/compiz.schemas.in.h:548 ../plugins/move.c:767
+#: ../metadata/move.xml.in.h:8
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
 "Отмена привязки и автоматическая отмена развертывания полностью развернутых "
 "окон при перетаскивании"
 
-#: ../plugins/compiz.schemas.in.h:549 ../plugins/move.c:766
+#: ../metadata/move.xml.in.h:9
 msgid "Snapoff maximized windows"
 msgstr "Отменить привязку полностью развернутых окон"
 
-#: ../plugins/compiz.schemas.in.h:550
-#, fuzzy
-msgid "Space between windows (0-250)"
-msgstr "Расстояние между окнами"
-
-#: ../plugins/compiz.schemas.in.h:551 ../plugins/scale.c:322
-msgid "Spacing"
-msgstr "Интервал"
-
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:552 ../plugins/cube.c:1085
-#: ../plugins/minimize.c:193 ../plugins/rotate.c:321 ../plugins/scale.c:331
-#: ../plugins/switcher.c:338 ../plugins/zoom.c:240
-msgid "Speed"
-msgstr "Скорость"
-
-#  Table header 5/5
-#: ../plugins/compiz.schemas.in.h:553
-#, fuzzy
-msgid "Spring Friction (0.0-10.0)"
-msgstr "Упругое трение"
-
-#: ../plugins/compiz.schemas.in.h:554 ../plugins/wobbly.c:336
-msgid "Spring K"
-msgstr "K упругости"
-
-#: ../plugins/compiz.schemas.in.h:555
-#, fuzzy
-msgid "Spring Konstant (0.0-10.0)"
-msgstr "Константа упругости"
-
-#: ../plugins/compiz.schemas.in.h:556 ../plugins/rotate.c:1775
-msgid "Start Rotation"
-msgstr "Запуск вращения"
-
-#: ../plugins/compiz.schemas.in.h:557
-msgid ""
-"Start Rotation (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:558 ../plugins/move.c:732
+#: ../metadata/move.xml.in.h:10
 msgid "Start moving window"
 msgstr "Запуск перемещения окна"
 
-#: ../plugins/compiz.schemas.in.h:559
-msgid ""
-"Start moving window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
+#: ../metadata/place.xml.in.h:1
+msgid "Algorithm to use for window placement"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:560 ../plugins/resize.c:721
-msgid "Start resizing window"
-msgstr "Запуск изменения размеров окна"
-
-#: ../plugins/compiz.schemas.in.h:561
-msgid ""
-"Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:562
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:563
-msgid "Stroke width"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:564
-msgid "Stroke width for annotations (0.0-20.0)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:565
-msgid "Svg"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:566
-msgid "Svg image loader"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:567
+#: ../metadata/place.xml.in.h:2
 #, fuzzy
-msgid "Switcher speed (0.0-50.0)"
-msgstr "Скорость переключателя"
+msgid "Horizontal viewport positions"
+msgstr "Виртуальный размер по горизонтали"
 
-#: ../plugins/compiz.schemas.in.h:568
+#: ../metadata/place.xml.in.h:3
+msgid "Place Windows"
+msgstr "Размещение окон"
+
+#: ../metadata/place.xml.in.h:4
+msgid "Place windows at appropriate positions when mapped"
+msgstr "При отображении разместите окна в нужных местах"
+
+#: ../metadata/place.xml.in.h:5
+msgid "Placement Mode"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:6
 #, fuzzy
-msgid "Switcher timestep (0.0-50.0)"
-msgstr "Квант времени переключателя"
+msgid "Positioned windows"
+msgstr "Отображение свернутых окон"
 
-#: ../plugins/compiz.schemas.in.h:569 ../plugins/switcher.c:358
+#: ../metadata/place.xml.in.h:7
 #, fuzzy
-msgid "Switcher windows"
-msgstr "Масштабирование окон"
-
-#: ../plugins/compiz.schemas.in.h:572
-msgid ""
-"Take a screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:574
-msgid ""
-"Take a screenshot of a window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#  MenuButton label
-#  menubutton label
-#: ../plugins/compiz.schemas.in.h:577
-#, fuzzy
-msgid "Texture filtering (Fast, Good, Best)"
-msgstr "Фильтрация текстур"
-
-#: ../plugins/compiz.schemas.in.h:578
-#, fuzzy
-msgid "The rate at which the screen is redrawn (times/second) (1-200)"
-msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
-
-#: ../plugins/compiz.schemas.in.h:579
-#, fuzzy
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window (50-"
-"10000)"
-msgstr ""
-"Время (в мс) до завершения режима масштабирования при наведении указателя на "
-"окно"
-
-#: ../plugins/compiz.schemas.in.h:580
-#, fuzzy
-msgid "Timeout before flipping viewport (0-1000)"
-msgstr "Задержка во времени до отражения кадрового окна"
-
-#: ../plugins/compiz.schemas.in.h:581 ../plugins/cube.c:1095
-#: ../plugins/minimize.c:203 ../plugins/rotate.c:331 ../plugins/scale.c:341
-#: ../plugins/switcher.c:348 ../plugins/zoom.c:250
-msgid "Timestep"
-msgstr "Квант времени "
-
-#: ../plugins/compiz.schemas.in.h:582 ../plugins/water.c:1673
-msgid "Title wave"
-msgstr "Волны заголовка"
-
-#: ../plugins/compiz.schemas.in.h:588
-msgid ""
-"Toggle active window maximized (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:590
-msgid ""
-"Toggle active window maximized horizontally (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:592
-msgid ""
-"Toggle active window maximized vertically (Left, Right, Top, Bottom, "
-"TopLeft, TopRight, BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:594
-msgid ""
-"Toggle active window shaded (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#  translators: toggle button label
-#: ../plugins/compiz.schemas.in.h:595 ../plugins/water.c:1622
-msgid "Toggle rain"
-msgstr "Переключить дождь"
-
-#: ../plugins/compiz.schemas.in.h:596 ../plugins/water.c:1623
-msgid "Toggle rain effect"
-msgstr "Включение или отключение эффекта дождя"
-
-#: ../plugins/compiz.schemas.in.h:597
-msgid ""
-"Toggle rain effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:599
-msgid ""
-"Toggle use of slow animations (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:600 ../plugins/wobbly.c:2847
-msgid "Toggle window snapping"
-msgstr "Переключение привязки окон"
-
-#: ../plugins/compiz.schemas.in.h:601
-msgid ""
-"Toggle window snapping (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#  translators: toggle button label
-#: ../plugins/compiz.schemas.in.h:602 ../plugins/water.c:1638
-msgid "Toggle wiper"
-msgstr "Переключить стеклоочиститель"
-
-#: ../plugins/compiz.schemas.in.h:603 ../plugins/water.c:1639
-msgid "Toggle wiper effect"
-msgstr "Включение или отключение эффекта стеклоочистителя"
-
-#: ../plugins/compiz.schemas.in.h:604
-msgid ""
-"Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:605 ../plugins/minimize.c:1073
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "Преобразовывать окна при свертывании и отмене свертывания"
-
-#: ../plugins/compiz.schemas.in.h:606
-msgid "USe linear filter when zoomed in"
-msgstr "Использовать линейный фильтр при уменьшении"
-
-#: ../plugins/compiz.schemas.in.h:607 ../plugins/cube.c:1799
-msgid "Unfold"
-msgstr "Развертывание"
-
-#: ../plugins/compiz.schemas.in.h:608 ../plugins/cube.c:1800
-msgid "Unfold cube"
-msgstr "Развертывание куба"
-
-#: ../plugins/compiz.schemas.in.h:609
-msgid ""
-"Unfold cube (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:612
-msgid ""
-"Unmaximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:615 ../plugins/wobbly.c:3082
-msgid "Use spring model for wobbly window effect"
-msgstr "Использовать модель пружины в эффекте вязкого окна"
-
-#: ../plugins/compiz.schemas.in.h:616 ../plugins/fuse.c:1588
-msgid "Userspace File System"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:617 ../plugins/fuse.c:1589
-msgid "Userspace file system"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:618
-#, fuzzy
-msgid "Vertex Grid Resolution (1-64)"
-msgstr "Разрешение решетки на вершинах"
-
-#: ../plugins/compiz.schemas.in.h:620 ../plugins/place.c:311
 msgid "Vertical viewport positions"
-msgstr ""
+msgstr "Виртуальный размер по горизонтали"
 
-#: ../plugins/compiz.schemas.in.h:621 ../plugins/video.c:1242
-msgid "Video Playback"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:622 ../plugins/video.c:1243
-msgid "Video playback"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:623 ../plugins/place.c:287
+#: ../metadata/place.xml.in.h:8
+#, fuzzy
 msgid "Viewport positioned windows"
-msgstr ""
+msgstr "Отображение свернутых окон"
 
-#: ../plugins/compiz.schemas.in.h:624 ../plugins/fade.c:201
-msgid "Visual Bell"
-msgstr "Визуализация звукового сигнала"
-
-#: ../plugins/compiz.schemas.in.h:625
-msgid "Warp pointer when starting a resize with mouse initiate combo."
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:626 ../plugins/water.c:1875
-msgid "Water Effect"
-msgstr "Эффект воды"
-
-#: ../plugins/compiz.schemas.in.h:627
-#, fuzzy
-msgid "Water offset scale (0.0-10.0)"
-msgstr "Масштаб смещения воды"
-
-#: ../plugins/compiz.schemas.in.h:628 ../plugins/water.c:1674
-msgid "Wave effect from window title"
-msgstr "Эффект волн в заголовке окна"
-
-#: ../plugins/compiz.schemas.in.h:629
-msgid ""
-"Wave effect from window title (Left, Right, Top, Bottom, TopLeft, TopRight, "
-"BottomLeft, BottomRight)"
-msgstr ""
-
-#: ../plugins/compiz.schemas.in.h:630 ../plugins/decoration.c:1492
-msgid "Window Decoration"
-msgstr "Оформление окна"
-
-#: ../plugins/compiz.schemas.in.h:632
-#, fuzzy
-msgid "Window blur speed (0.0-10.0)"
-msgstr "Скорость проявления/исчезания окна"
-
-#: ../plugins/compiz.schemas.in.h:633 ../plugins/decoration.c:1493
-msgid "Window decorations"
-msgstr "Оформление окна"
-
-#: ../plugins/compiz.schemas.in.h:634
-#, fuzzy
-msgid "Window fade speed (0.0-25.0)"
-msgstr "Скорость проявления/исчезания окна"
-
-#: ../plugins/compiz.schemas.in.h:635 ../plugins/place.c:239
+#: ../metadata/place.xml.in.h:9
 msgid "Window placement workarounds"
 msgstr "Обходные пути при размещении окна"
 
-#: ../plugins/compiz.schemas.in.h:637
-#, fuzzy
-msgid "Windows that should be affected by focus blur (match)"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/compiz.schemas.in.h:638
-#, fuzzy
-msgid "Windows that should be decorated (match)"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/compiz.schemas.in.h:639
-#, fuzzy
-msgid "Windows that should be fading (match)"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/compiz.schemas.in.h:640
-#, fuzzy
-msgid "Windows that should be have a shadow (match)"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/compiz.schemas.in.h:641 ../plugins/place.c:255
+#: ../metadata/place.xml.in.h:10
 #, fuzzy
 msgid "Windows that should be positioned by default"
 msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
 
-#: ../plugins/compiz.schemas.in.h:642
+#: ../metadata/place.xml.in.h:11
 #, fuzzy
-msgid "Windows that should be scaled in scale mode (match)"
+msgid "Windows that should be positioned in specific viewports by default"
 msgstr "Типы окон, для которых следует применять режим масштабирования"
 
-#: ../plugins/compiz.schemas.in.h:643
-#, fuzzy
-msgid "Windows that should be shown in switcher (match)"
-msgstr "Типы окон, которые должны быть отображены в переключателе"
-
-#: ../plugins/compiz.schemas.in.h:644
-#, fuzzy
-msgid "Windows that should be transformed when minimized (match)"
-msgstr "Типы окон, которые должны быть преобразованы при свертывании"
-
-#: ../plugins/compiz.schemas.in.h:646 ../plugins/place.c:288
-#, fuzzy
-msgid "Windows that should positioned in specific viewports by default"
-msgstr "Типы окон, для которых следует применять режим масштабирования"
-
-#: ../plugins/compiz.schemas.in.h:647
-#, fuzzy
-msgid "Windows that should use alpha blur by default (match)"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/compiz.schemas.in.h:648
-#, fuzzy
-msgid "Windows that should wobble when focused (match)"
-msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
-
-#: ../plugins/compiz.schemas.in.h:649
-#, fuzzy
-msgid "Windows that should wobble when grabbed (match)"
-msgstr "Типы окон, которые должны стать вязкими при захвате"
-
-#: ../plugins/compiz.schemas.in.h:650
-#, fuzzy
-msgid "Windows that should wobble when mapped (match)"
-msgstr "Типы окон, которые должны отражаться как вязкие"
-
-#: ../plugins/compiz.schemas.in.h:651
-#, fuzzy
-msgid "Windows that should wobble when moved (match)"
-msgstr "Типы окон, которые должны стать вязкими при движении"
-
-#: ../plugins/compiz.schemas.in.h:652 ../plugins/wobbly.c:419
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Эффект вязкости при развертывании и свертывании окон"
-
-#: ../plugins/compiz.schemas.in.h:653 ../plugins/wobbly.c:3081
-msgid "Wobbly Windows"
-msgstr "Вязкие окна"
-
-#: ../plugins/compiz.schemas.in.h:654 ../plugins/place.c:238
+#: ../metadata/place.xml.in.h:12
 msgid "Workarounds"
 msgstr "Обходные пути"
 
-#: ../plugins/compiz.schemas.in.h:655 ../plugins/place.c:265
+#: ../metadata/place.xml.in.h:13
+#, fuzzy
 msgid "X Positions"
-msgstr ""
+msgstr "Отображение свернутых окон"
 
-#: ../plugins/compiz.schemas.in.h:656 ../plugins/place.c:299
+#: ../metadata/place.xml.in.h:14
+#, fuzzy
 msgid "X Viewport Positions"
-msgstr ""
+msgstr "Виртуальный размер по горизонтали"
 
-#: ../plugins/compiz.schemas.in.h:657 ../plugins/place.c:266
+#: ../metadata/place.xml.in.h:15
 msgid "X position values"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:658 ../plugins/place.c:276
+#: ../metadata/place.xml.in.h:16
+#, fuzzy
 msgid "Y Positions"
-msgstr ""
+msgstr "Отображение свернутых окон"
 
-#: ../plugins/compiz.schemas.in.h:659 ../plugins/place.c:310
+#: ../metadata/place.xml.in.h:17
+#, fuzzy
 msgid "Y Viewport Positions"
-msgstr ""
+msgstr "Виртуальный размер по горизонтали"
 
-#: ../plugins/compiz.schemas.in.h:660 ../plugins/place.c:277
+#: ../metadata/place.xml.in.h:18
 msgid "Y position values"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:661 ../plugins/video.c:247
-msgid "YV12 colorspace"
+#: ../metadata/png.xml.in.h:1
+msgid "Png"
 msgstr ""
 
-#: ../plugins/compiz.schemas.in.h:662 ../plugins/switcher.c:409
-msgid "Zoom"
-msgstr "Изменить масштаб"
-
-#: ../plugins/compiz.schemas.in.h:663 ../plugins/zoom.c:942
-msgid "Zoom Desktop"
-msgstr "Изменить масштаб рабочего стола"
-
-#: ../plugins/compiz.schemas.in.h:664 ../plugins/zoom.c:756
-#: ../plugins/zoom.c:770 ../plugins/zoom.c:771
-msgid "Zoom In"
-msgstr "Уменьшить"
-
-#: ../plugins/compiz.schemas.in.h:665
-msgid ""
-"Zoom In (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
+#: ../metadata/png.xml.in.h:2
+msgid "Png image loader"
 msgstr ""
 
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:666 ../plugins/zoom.c:785
-#: ../plugins/zoom.c:786
-msgid "Zoom Out"
-msgstr "Увеличить"
+#: ../metadata/regex.xml.in.h:1
+#, fuzzy
+msgid "Regex Matching"
+msgstr "Переключение привязки окон"
 
-#: ../plugins/compiz.schemas.in.h:667
-msgid ""
-"Zoom Out (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-"BottomRight)"
+#: ../metadata/regex.xml.in.h:2
+#, fuzzy
+msgid "Regex window matching"
+msgstr "Переключение привязки окон"
+
+#: ../metadata/resize.xml.in.h:1
+msgid "Default Resize Mode"
 msgstr ""
 
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:668
-#, fuzzy
-msgid "Zoom Speed (0.0-50.0)"
-msgstr "Скорость изменения масштаба"
-
-#: ../plugins/compiz.schemas.in.h:669
-#, fuzzy
-msgid "Zoom Timestep (0.0-50.0)"
-msgstr "Квант времени изменения масштаба"
-
-#: ../plugins/compiz.schemas.in.h:670 ../plugins/zoom.c:943
-msgid "Zoom and pan desktop cube"
-msgstr "Изменение масштаба и сдвига куба рабочего стола"
-
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:671 ../plugins/zoom.c:260
-#: ../plugins/zoom.c:261
-msgid "Zoom factor"
-msgstr "Коэффициент масштабирования"
-
-#  combo box item
-#: ../plugins/compiz.schemas.in.h:672
-#, fuzzy
-msgid "Zoom factor (1.01-3.00)"
-msgstr "Коэффициент масштабирования"
-
-# workflow: "3D Beschleunigung aktivieren"
-# -ke-
-#: ../plugins/cube.c:1076
-msgid "Fold Acceleration"
-msgstr "Ускорение свертывания"
-
-#  combo box item
-#: ../plugins/cube.c:1086
-msgid "Fold Speed"
-msgstr "Скорость свертывания"
-
-#: ../plugins/cube.c:1096
-msgid "Fold Timestep"
-msgstr "Квант времени для свертывания"
-
-#: ../plugins/decoration.c:1133
-msgid "Drop shadow radius"
-msgstr "Радиус отбрасываемой тени"
-
-#  int field
-#: ../plugins/decoration.c:1143
-msgid "Drop shadow opacity"
-msgstr "Прозрачность отбрасываемой тени"
-
-#: ../plugins/decoration.c:1163
-msgid "Drop shadow X offset"
-msgstr "Смещение отбрасываемой тени по оси X"
-
-#: ../plugins/decoration.c:1172
-msgid "Drop shadow Y offset"
-msgstr "Смещение отбрасываемой тени по оси Y"
-
-#: ../plugins/decoration.c:1198
-#, fuzzy
-msgid "Windows that should be decorated"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/decoration.c:1207
-#, fuzzy
-msgid "Windows that should be have a shadow"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#: ../plugins/fade.c:183
-msgid "Window fade speed"
-msgstr "Скорость проявления/исчезания окна"
-
-#: ../plugins/fade.c:193
-#, fuzzy
-msgid "Windows that should be fading"
-msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
-
-#. Decimal point character
-#: ../plugins/gconf-dump.c:81
-msgid "."
-msgstr "."
-
-#: ../plugins/minimize.c:194
-msgid "Minimize speed"
-msgstr "Скорость свертывания"
-
-#: ../plugins/minimize.c:204
-msgid "Minimize timestep"
-msgstr "Квант времени свертывания"
-
-#: ../plugins/minimize.c:214
-#, fuzzy
-msgid "Windows that should be transformed when minimized"
-msgstr "Типы окон, которые должны быть преобразованы при свертывании"
-
-#: ../plugins/minimize.c:223
-msgid "Shade resistance"
-msgstr "Устойчивость тени"
-
-#: ../plugins/move.c:751
-msgid "Opacity level of moving windows"
-msgstr "Степень прозрачности движущихся окон"
-
-#: ../plugins/place.c:42
-msgid "Cascade"
+#: ../metadata/resize.xml.in.h:2
+msgid "Default mode used for window resizing"
 msgstr ""
 
-#: ../plugins/place.c:43
-msgid "Centered"
-msgstr ""
+#: ../metadata/resize.xml.in.h:3
+msgid "Initiate Window Resize"
+msgstr "Инициировать изменение размеров окна"
 
-#: ../plugins/place.c:44
-msgid "Smart"
-msgstr ""
+#: ../metadata/resize.xml.in.h:4
+msgid "Resize Window"
+msgstr "Изменить размеры окна"
 
-#: ../plugins/place.c:45
+#: ../metadata/resize.xml.in.h:5
+msgid "Resize window"
+msgstr "Изменение размеров окна"
+
+#: ../metadata/resize.xml.in.h:6
+msgid "Start resizing window"
+msgstr "Запуск изменения размеров окна"
+
+#: ../metadata/rotate.xml.in.h:2
+msgid "Edge Flip DnD"
+msgstr "Отражение при перетаскивании к краю"
+
+#: ../metadata/rotate.xml.in.h:3
+msgid "Edge Flip Move"
+msgstr "Отражение при перемещении к краю"
+
+#: ../metadata/rotate.xml.in.h:4
+msgid "Edge Flip Pointer"
+msgstr "Отражение при курсоре на краю"
+
+#: ../metadata/rotate.xml.in.h:5
+msgid "Flip Time"
+msgstr "Время отражения"
+
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to left viewport and warp pointer"
+msgstr "Отражение в левое кадровое окно и искажение курсора"
+
+#: ../metadata/rotate.xml.in.h:7
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при перетаскивании объекта к краю экрана"
+
+#: ../metadata/rotate.xml.in.h:8
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при смещении курсора к краю экрана"
+
+#: ../metadata/rotate.xml.in.h:9
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при перемещении окна к краю экрана"
+
+#: ../metadata/rotate.xml.in.h:10
+msgid "Flip to right viewport and warp pointer"
+msgstr "Отражение в правое кадровое окно и искажение курсора"
+
+#: ../metadata/rotate.xml.in.h:12 ../metadata/zoom.xml.in.h:3
+msgid "Invert Y axis for pointer movement"
+msgstr "Инвертировать ось Y для перемещений курсора"
+
+#: ../metadata/rotate.xml.in.h:13 ../metadata/zoom.xml.in.h:4
+msgid "Pointer Invert Y"
+msgstr "Инвертировать для курсора ось Y"
+
+#  dialog caption
+#: ../metadata/rotate.xml.in.h:14 ../metadata/zoom.xml.in.h:5
+msgid "Pointer Sensitivity"
+msgstr "Чувствительность курсора"
+
+#  Translators: text entry label
+#: ../metadata/rotate.xml.in.h:15
+msgid "Rotate Cube"
+msgstr "Вращать куб"
+
+#: ../metadata/rotate.xml.in.h:16
+msgid "Rotate Flip Left"
+msgstr "Вращать с отражением влево"
+
+#: ../metadata/rotate.xml.in.h:17
+msgid "Rotate Flip Right"
+msgstr "Вращать с отражением вправо"
+
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate Left"
+msgstr "Вращать влево"
+
+#: ../metadata/rotate.xml.in.h:19
+msgid "Rotate Left with Window"
+msgstr "Вращать влево вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate Right"
+msgstr "Вращать вправо"
+
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Right with Window"
+msgstr "Вращать вправо вместе с окном"
+
+#  Translators: text entry label
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate To"
+msgstr "Вращать до"
+
+#: ../metadata/rotate.xml.in.h:23
 #, fuzzy
-msgid "Maximize"
-msgstr "Свернутые"
-
-#: ../plugins/place.c:46
-msgid "Random"
-msgstr ""
-
-#: ../plugins/place.c:246
-msgid "Algorithm to use for window placement"
-msgstr ""
-
-#: ../plugins/plane.c:700
-#, fuzzy, c-format
-msgid "Plane To Face %d"
+msgid "Rotate To Face 1"
 msgstr "Вращать до грани %d"
 
-#: ../plugins/plane.c:701
-#, fuzzy, c-format
-msgid "Plane to face %d"
-msgstr "Вращение до грани %d"
-
-#: ../plugins/plane.c:702
-#, fuzzy, c-format
-msgid "Plane To Face %d with Window"
+#: ../metadata/rotate.xml.in.h:24
+#, fuzzy
+msgid "Rotate To Face 1 with Window"
 msgstr "Вращать до грани %d вместе с окном"
 
-#: ../plugins/plane.c:703
-#, fuzzy, c-format
-msgid "Plane to face %d and bring active window along"
+#: ../metadata/rotate.xml.in.h:25
+#, fuzzy
+msgid "Rotate To Face 10"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:26
+#, fuzzy
+msgid "Rotate To Face 10 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:27
+#, fuzzy
+msgid "Rotate To Face 11"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:28
+#, fuzzy
+msgid "Rotate To Face 11 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:29
+#, fuzzy
+msgid "Rotate To Face 12"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:30
+#, fuzzy
+msgid "Rotate To Face 12 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:31
+#, fuzzy
+msgid "Rotate To Face 2"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:32
+#, fuzzy
+msgid "Rotate To Face 2 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:33
+#, fuzzy
+msgid "Rotate To Face 3"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:34
+#, fuzzy
+msgid "Rotate To Face 3 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:35
+#, fuzzy
+msgid "Rotate To Face 4"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:36
+#, fuzzy
+msgid "Rotate To Face 4 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:37
+#, fuzzy
+msgid "Rotate To Face 5"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:38
+#, fuzzy
+msgid "Rotate To Face 5 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:39
+#, fuzzy
+msgid "Rotate To Face 6"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:40
+#, fuzzy
+msgid "Rotate To Face 6 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:41
+#, fuzzy
+msgid "Rotate To Face 7"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:42
+#, fuzzy
+msgid "Rotate To Face 7 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:43
+#, fuzzy
+msgid "Rotate To Face 8"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:44
+#, fuzzy
+msgid "Rotate To Face 8 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:45
+#, fuzzy
+msgid "Rotate To Face 9"
+msgstr "Вращать до грани %d"
+
+#: ../metadata/rotate.xml.in.h:46
+#, fuzzy
+msgid "Rotate To Face 9 with Window"
+msgstr "Вращать до грани %d вместе с окном"
+
+#: ../metadata/rotate.xml.in.h:47
+msgid "Rotate desktop cube"
+msgstr "Вращение куба рабочего стола"
+
+#: ../metadata/rotate.xml.in.h:48
+msgid "Rotate left"
+msgstr "Вращение влево"
+
+#: ../metadata/rotate.xml.in.h:49
+#, fuzzy
+msgid "Rotate left and brind active window along"
+msgstr "Вращение влево вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate right"
+msgstr "Вращение вправо"
+
+#: ../metadata/rotate.xml.in.h:51
+#, fuzzy
+msgid "Rotate right and brind active window along"
+msgstr "Вращение вправо вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:52
+#, fuzzy
+msgid "Rotate to face 1"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:53
+#, fuzzy
+msgid "Rotate to face 1 and bring active window along"
 msgstr "Вращение до грани %d вместе с активным окном"
 
-#: ../plugins/rotate.c:295 ../plugins/zoom.c:231
-msgid "Sensitivity of pointer movement"
-msgstr "Чувствительность к перемещениям курсора"
+#: ../metadata/rotate.xml.in.h:54
+#, fuzzy
+msgid "Rotate to face 10"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:55
+#, fuzzy
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:56
+#, fuzzy
+msgid "Rotate to face 11"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:57
+#, fuzzy
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:58
+#, fuzzy
+msgid "Rotate to face 12"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:59
+#, fuzzy
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:60
+#, fuzzy
+msgid "Rotate to face 2"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:61
+#, fuzzy
+msgid "Rotate to face 2 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:62
+#, fuzzy
+msgid "Rotate to face 3"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:63
+#, fuzzy
+msgid "Rotate to face 3 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:64
+#, fuzzy
+msgid "Rotate to face 4"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:65
+#, fuzzy
+msgid "Rotate to face 4 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:66
+#, fuzzy
+msgid "Rotate to face 5"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:67
+#, fuzzy
+msgid "Rotate to face 5 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:68
+#, fuzzy
+msgid "Rotate to face 6"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:69
+#, fuzzy
+msgid "Rotate to face 6 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:70
+#, fuzzy
+msgid "Rotate to face 7"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:71
+#, fuzzy
+msgid "Rotate to face 7 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:72
+#, fuzzy
+msgid "Rotate to face 8"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:73
+#, fuzzy
+msgid "Rotate to face 8 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:74
+#, fuzzy
+msgid "Rotate to face 9"
+msgstr "Вращение до грани %d"
+
+#: ../metadata/rotate.xml.in.h:75
+#, fuzzy
+msgid "Rotate to face 9 and bring active window along"
+msgstr "Вращение до грани %d вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:76
+msgid "Rotate to viewport"
+msgstr "Вращение до кадрового окна"
+
+#: ../metadata/rotate.xml.in.h:77
+#, fuzzy
+msgid "Rotate window"
+msgstr "Вращать окно"
+
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate with window"
+msgstr "Вращение вместе с окном"
 
 # workflow: "3D Beschleunigung aktivieren"
 # -ke-
-#: ../plugins/rotate.c:305
+#: ../metadata/rotate.xml.in.h:79
 msgid "Rotation Acceleration"
 msgstr "Ускорение вращения"
 
-#: ../plugins/rotate.c:322
+#: ../metadata/rotate.xml.in.h:80
 msgid "Rotation Speed"
 msgstr "Скорость вращения"
 
-#: ../plugins/rotate.c:332
+#: ../metadata/rotate.xml.in.h:81
 msgid "Rotation Timestep"
 msgstr "Квант времени вращения"
 
-#: ../plugins/rotate.c:1865
-#, c-format
-msgid "Rotate To Face %d"
-msgstr "Вращать до грани %d"
+#: ../metadata/rotate.xml.in.h:82 ../metadata/zoom.xml.in.h:6
+msgid "Sensitivity of pointer movement"
+msgstr "Чувствительность к перемещениям курсора"
 
-#: ../plugins/rotate.c:1866
-#, c-format
-msgid "Rotate to face %d"
-msgstr "Вращение до грани %d"
+#: ../metadata/rotate.xml.in.h:83
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Привязка вращения куба к верхней грани"
 
-#: ../plugins/rotate.c:1867
-#, c-format
-msgid "Rotate To Face %d with Window"
-msgstr "Вращать до грани %d вместе с окном"
+#: ../metadata/rotate.xml.in.h:84
+msgid "Snap To Top Face"
+msgstr "Привязать к верхней грани"
 
-#: ../plugins/rotate.c:1868
-#, c-format
-msgid "Rotate to face %d and bring active window along"
-msgstr "Вращение до грани %d вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:86
+msgid "Start Rotation"
+msgstr "Запуск вращения"
 
-#: ../plugins/rotate.c:1998
+#: ../metadata/rotate.xml.in.h:87
 msgid "Timeout before flipping viewport"
 msgstr "Задержка во времени до отражения кадрового окна"
 
-#: ../plugins/scale.c:80 ../plugins/wobbly.c:131
-msgid "None"
-msgstr "Никакой"
-
-#: ../plugins/scale.c:81
-msgid "Emblem"
-msgstr "Эмблема"
-
-#: ../plugins/scale.c:82
-msgid "Big"
-msgstr "Большой"
-
-#: ../plugins/scale.c:323
-msgid "Space between windows"
-msgstr "Расстояние между окнами"
-
-#: ../plugins/scale.c:332
-msgid "Scale speed"
-msgstr "Скорость масштабирования"
-
-#: ../plugins/scale.c:342
-msgid "Scale timestep"
-msgstr "Квант времени масштабирования"
-
-#: ../plugins/scale.c:352
-#, fuzzy
-msgid "Windows that should be scaled in scale mode"
-msgstr "Типы окон, для которых следует применять режим масштабирования"
-
-#: ../plugins/scale.c:368 ../plugins/switcher.c:394
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr "Степень прозрачности в процентах"
 
-#: ../plugins/scale.c:377
+#: ../metadata/scale.xml.in.h:2
+msgid "Darken Background"
+msgstr "Затемнить фон"
+
+#: ../metadata/scale.xml.in.h:3
+msgid "Darken background when scaling windows"
+msgstr "Затемнение фона при масштабировании окон"
+
+#: ../metadata/scale.xml.in.h:4
+msgid "Hover Time"
+msgstr "Время задержки при наведении"
+
+#: ../metadata/scale.xml.in.h:5
+msgid "Initiate Window Picker"
+msgstr "Инициировать средство выбора окна"
+
+#: ../metadata/scale.xml.in.h:6
+msgid "Initiate Window Picker For All Windows"
+msgstr "Инициировать средство выбора окна для всех окон"
+
+#: ../metadata/scale.xml.in.h:7
+msgid "Initiate Window Picker For Window Group"
+msgstr "Инициировать средство выбора окна для группы окон"
+
+#: ../metadata/scale.xml.in.h:8
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Инициировать средство выбора окна для окон текущего устройства вывода"
+
+#: ../metadata/scale.xml.in.h:9
+msgid "Layout and start transforming all windows"
+msgstr "Компоновка и запуск преобразования всех окон"
+
+#: ../metadata/scale.xml.in.h:10
+msgid "Layout and start transforming window group"
+msgstr "Компоновка и запуск преобразования группы окон"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Layout and start transforming windows"
+msgstr "Компоновка и запуск преобразования окон"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Layout and start transforming windows on current output"
+msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Overlay Icon"
+msgstr "Наложить значок"
+
+#: ../metadata/scale.xml.in.h:15
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Наложение значка на окна при их масштабировании"
 
-#: ../plugins/scale.c:386
+#: ../metadata/scale.xml.in.h:16
+msgid "Scale"
+msgstr "Масштабировать"
+
+#: ../metadata/scale.xml.in.h:17
+#, fuzzy
+msgid "Scale Windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/scale.xml.in.h:18
+msgid "Scale speed"
+msgstr "Скорость масштабирования"
+
+#: ../metadata/scale.xml.in.h:19
+msgid "Scale timestep"
+msgstr "Квант времени масштабирования"
+
+#: ../metadata/scale.xml.in.h:20
+msgid "Scale windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/scale.xml.in.h:21
+msgid "Space between windows"
+msgstr "Расстояние между окнами"
+
+#: ../metadata/scale.xml.in.h:22
+msgid "Spacing"
+msgstr "Интервал"
+
+#: ../metadata/scale.xml.in.h:24
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Время (в мс) до завершения режима масштабирования при наведении указателя на "
 "окно"
 
-#: ../plugins/switcher.c:339
-msgid "Switcher speed"
-msgstr "Скорость переключателя"
-
-#: ../plugins/switcher.c:349
-msgid "Switcher timestep"
-msgstr "Квант времени переключателя"
-
-#: ../plugins/switcher.c:359
+#: ../metadata/scale.xml.in.h:26
 #, fuzzy
-msgid "Windows that should be shown in switcher"
-msgstr "Типы окон, которые должны быть отображены в переключателе"
+msgid "Windows that should be scaled in scale mode"
+msgstr "Типы окон, для которых следует применять режим масштабирования"
 
-#: ../plugins/switcher.c:376
-msgid "Amount of saturation in percent"
-msgstr "Уровень насыщенности в процентах"
+#: ../metadata/screenshot.xml.in.h:1
+#, fuzzy
+msgid "Automatically open screenshot in this application"
+msgstr "Автоматически запускать апплет при входе в систему"
 
-#: ../plugins/switcher.c:385
+#: ../metadata/screenshot.xml.in.h:2
+#, fuzzy
+msgid "Directory"
+msgstr "Каталог\n"
+
+#: ../metadata/screenshot.xml.in.h:4
+#, fuzzy
+msgid "Initiate rectangle screenshot"
+msgstr "Сделать снимок экрана"
+
+#: ../metadata/screenshot.xml.in.h:5
+#, fuzzy
+msgid "Launch Application"
+msgstr "Запустить приложение"
+
+#: ../metadata/screenshot.xml.in.h:6
+#, fuzzy
+msgid "Put screenshot images in this directory"
+msgstr "Рекурсия в каталог"
+
+#: ../metadata/screenshot.xml.in.h:7
+#, fuzzy
+msgid "Screenshot"
+msgstr "Экран"
+
+#: ../metadata/screenshot.xml.in.h:8
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Командная строка снимка экрана"
+
+#: ../metadata/svg.xml.in.h:1
+msgid "Svg"
+msgstr ""
+
+#: ../metadata/svg.xml.in.h:2
+msgid "Svg image loader"
+msgstr ""
+
+#: ../metadata/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
 msgstr "Уровень яркости в процентах"
 
-#: ../plugins/switcher.c:410
+#: ../metadata/switcher.xml.in.h:3
+msgid "Amount of saturation in percent"
+msgstr "Уровень насыщенности в процентах"
+
+#: ../metadata/switcher.xml.in.h:4
+msgid "Application Switcher"
+msgstr "Переключатель приложений"
+
+#: ../metadata/switcher.xml.in.h:5
+#, fuzzy
+msgid "Auto Rotate"
+msgstr "Автоматический вызов"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Brightness"
+msgstr "Яркость"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Bring To Front"
+msgstr "Переместить на передний план"
+
+#: ../metadata/switcher.xml.in.h:8
+msgid "Bring selected window to front"
+msgstr "Перемещение выбранного окна на передний план"
+
+#: ../metadata/switcher.xml.in.h:9
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr ""
 "При переключении окон рабочий стол на заднем плане должен быть уменьшен"
 
-#: ../plugins/water.c:1655
-msgid "Water offset scale"
-msgstr "Масштаб смещения воды"
+#: ../metadata/switcher.xml.in.h:11
+msgid "Icon"
+msgstr "Значок"
 
-#: ../plugins/water.c:1665
+#: ../metadata/switcher.xml.in.h:12
+msgid "Minimized"
+msgstr "Свернутые"
+
+#: ../metadata/switcher.xml.in.h:14
+msgid "Next window"
+msgstr "Следующее окно"
+
+#: ../metadata/switcher.xml.in.h:16
+msgid "Popup switcher if not visible and select next window"
+msgstr "Отображение переключателя (если он невидим) и выбор следующего окна"
+
+#: ../metadata/switcher.xml.in.h:17
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Отображение переключателя (если он невидим) и выбор следующего окна из всех "
+"имеющихся"
+
+#: ../metadata/switcher.xml.in.h:18
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Отображение переключателя (если он невидим) и выбор предыдущего окна"
+
+#: ../metadata/switcher.xml.in.h:19
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Отображение переключателя (если он невидим) и выбор предыдущего окна из всех "
+"имеющихся"
+
+#: ../metadata/switcher.xml.in.h:20
+msgid "Prev window"
+msgstr "Предыдущее окно"
+
+#: ../metadata/switcher.xml.in.h:21
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+#  Table header 4/5
+#: ../metadata/switcher.xml.in.h:22
+msgid "Saturation"
+msgstr "Насыщенность"
+
+#: ../metadata/switcher.xml.in.h:23
+msgid "Select next window"
+msgstr "Выбрать следующее окно"
+
+#: ../metadata/switcher.xml.in.h:24
+msgid "Select previous window"
+msgstr "Выбрать предыдущее окно"
+
+#: ../metadata/switcher.xml.in.h:25
+msgid "Show icon next to thumbnail"
+msgstr "Отображение значка рядом с эскизом"
+
+#: ../metadata/switcher.xml.in.h:26
+msgid "Show minimized windows"
+msgstr "Отображение свернутых окон"
+
+#: ../metadata/switcher.xml.in.h:28
+msgid "Switcher speed"
+msgstr "Скорость переключателя"
+
+#: ../metadata/switcher.xml.in.h:29
+msgid "Switcher timestep"
+msgstr "Квант времени переключателя"
+
+#: ../metadata/switcher.xml.in.h:30
+#, fuzzy
+msgid "Switcher windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/switcher.xml.in.h:32
+#, fuzzy
+msgid "Windows that should be shown in switcher"
+msgstr "Типы окон, которые должны быть отображены в переключателе"
+
+#: ../metadata/switcher.xml.in.h:33
+msgid "Zoom"
+msgstr "Изменить масштаб"
+
+#: ../metadata/video.xml.in.h:1
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: ../metadata/video.xml.in.h:2
+msgid "Video Playback"
+msgstr ""
+
+#: ../metadata/video.xml.in.h:3
+msgid "Video playback"
+msgstr ""
+
+#: ../metadata/video.xml.in.h:4
+msgid "YV12 colorspace"
+msgstr ""
+
+#: ../metadata/water.xml.in.h:1
+msgid "Add line"
+msgstr "Добавить линию"
+
+#: ../metadata/water.xml.in.h:2
+msgid "Add point"
+msgstr "Добавить точку"
+
+#: ../metadata/water.xml.in.h:3
+msgid "Adds water effects to different desktop actions"
+msgstr "Добавление эффектов воды к различным действиям рабочего стола"
+
+#: ../metadata/water.xml.in.h:4
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Задержка (в мс) между каплями дождя"
 
-#  Table header 5/5
-#: ../plugins/wobbly.c:327
-msgid "Spring Friction"
-msgstr "Упругое трение"
+#: ../metadata/water.xml.in.h:5
+msgid "Enable pointer water effects"
+msgstr "Включить для курсора эффекты воды"
 
-#: ../plugins/wobbly.c:337
-msgid "Spring Konstant"
-msgstr "Константа упругости"
+#: ../metadata/water.xml.in.h:7
+msgid "Line"
+msgstr "Линия"
 
-#: ../plugins/wobbly.c:347
-msgid "Vertex Grid Resolution"
-msgstr "Разрешение решетки на вершинах"
+#: ../metadata/water.xml.in.h:8
+msgid "Offset Scale"
+msgstr "Масштаб смещения"
 
-#  combo box item
-#: ../plugins/wobbly.c:356
-msgid "Minimum Vertex Grid Size"
-msgstr "Минимальный размер решетки на вершинах"
+#: ../metadata/water.xml.in.h:9
+msgid "Point"
+msgstr "Точка"
 
-#: ../plugins/wobbly.c:365
-msgid "Map Window Effect"
-msgstr "Эффект отражения окна"
+#: ../metadata/water.xml.in.h:10
+msgid "Rain Delay"
+msgstr "Задержка дождя"
 
-#: ../plugins/wobbly.c:374
+#: ../metadata/water.xml.in.h:11
+msgid "Title wave"
+msgstr "Волны заголовка"
+
+#  translators: toggle button label
+#: ../metadata/water.xml.in.h:12
+msgid "Toggle rain"
+msgstr "Переключить дождь"
+
+#: ../metadata/water.xml.in.h:13
+msgid "Toggle rain effect"
+msgstr "Включение или отключение эффекта дождя"
+
+#  translators: toggle button label
+#: ../metadata/water.xml.in.h:14
+msgid "Toggle wiper"
+msgstr "Переключить стеклоочиститель"
+
+#: ../metadata/water.xml.in.h:15
+msgid "Toggle wiper effect"
+msgstr "Включение или отключение эффекта стеклоочистителя"
+
+#: ../metadata/water.xml.in.h:16
+msgid "Water Effect"
+msgstr "Эффект воды"
+
+#: ../metadata/water.xml.in.h:17
+msgid "Water offset scale"
+msgstr "Масштаб смещения воды"
+
+#: ../metadata/water.xml.in.h:18
+msgid "Wave effect from window title"
+msgstr "Эффект волн в заголовке окна"
+
+#: ../metadata/wobbly.xml.in.h:1
+msgid "Focus Effect"
+msgstr "Эффект фокусировки"
+
+#: ../metadata/wobbly.xml.in.h:2
 msgid "Focus Window Effect"
 msgstr "Эффект фокусировки окна"
 
-#: ../plugins/wobbly.c:383
+#: ../metadata/wobbly.xml.in.h:3
 #, fuzzy
-msgid "Windows that should wobble when mapped"
-msgstr "Типы окон, которые должны отражаться как вязкие"
+msgid "Focus Windows"
+msgstr "Типы окон с фокусом"
 
-#: ../plugins/wobbly.c:392
+#  Table header 5/5
+#: ../metadata/wobbly.xml.in.h:4
+msgid "Friction"
+msgstr "Трение"
+
+#: ../metadata/wobbly.xml.in.h:5
+#, fuzzy
+msgid "Grab Windows"
+msgstr "Типы окон при захвате"
+
+#: ../metadata/wobbly.xml.in.h:6
+msgid "Grid Resolution"
+msgstr "Разрешение решетки"
+
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Inverted window snapping"
+msgstr "Инвертированная привязка окна"
+
+#: ../metadata/wobbly.xml.in.h:8
+msgid "Make window shiver"
+msgstr "Включить дрожание окна"
+
+#: ../metadata/wobbly.xml.in.h:9
+msgid "Map Effect"
+msgstr "Эффект отражения"
+
+#: ../metadata/wobbly.xml.in.h:10
+msgid "Map Window Effect"
+msgstr "Эффект отражения окна"
+
+#: ../metadata/wobbly.xml.in.h:11
+#, fuzzy
+msgid "Map Windows"
+msgstr "Типы отражения окна"
+
+#: ../metadata/wobbly.xml.in.h:12
+msgid "Maximize Effect"
+msgstr "Эффект развертывания"
+
+#  combo box item
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Minimum Grid Size"
+msgstr "Минимальный размер решетки"
+
+#  combo box item
+#: ../metadata/wobbly.xml.in.h:14
+msgid "Minimum Vertex Grid Size"
+msgstr "Минимальный размер решетки на вершинах"
+
+#: ../metadata/wobbly.xml.in.h:15
+#, fuzzy
+msgid "Move Windows"
+msgstr "Переместить окно"
+
+# 'driver' as in '(hardware) driver update'
+#: ../metadata/wobbly.xml.in.h:16
+msgid "Shiver"
+msgstr "Дрожание"
+
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Snap Inverted"
+msgstr "Инвертированная привязка"
+
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Snap windows"
+msgstr "Привязка окон"
+
+#  Table header 5/5
+#: ../metadata/wobbly.xml.in.h:19
+msgid "Spring Friction"
+msgstr "Упругое трение"
+
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Spring K"
+msgstr "K упругости"
+
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Spring Konstant"
+msgstr "Константа упругости"
+
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Toggle window snapping"
+msgstr "Переключение привязки окон"
+
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Use spring model for wobbly window effect"
+msgstr "Использовать модель пружины в эффекте вязкого окна"
+
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Vertex Grid Resolution"
+msgstr "Разрешение решетки на вершинах"
+
+#: ../metadata/wobbly.xml.in.h:25
 #, fuzzy
 msgid "Windows that should wobble when focused"
 msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
 
-#: ../plugins/wobbly.c:401
-#, fuzzy
-msgid "Windows that should wobble when moved"
-msgstr "Типы окон, которые должны стать вязкими при движении"
-
-#: ../plugins/wobbly.c:410
+#: ../metadata/wobbly.xml.in.h:26
 #, fuzzy
 msgid "Windows that should wobble when grabbed"
 msgstr "Типы окон, которые должны стать вязкими при захвате"
 
-#  combo box item
-#: ../plugins/zoom.c:241
-msgid "Zoom Speed"
-msgstr "Скорость изменения масштаба"
+#: ../metadata/wobbly.xml.in.h:27
+#, fuzzy
+msgid "Windows that should wobble when mapped"
+msgstr "Типы окон, которые должны отражаться как вязкие"
 
-#: ../plugins/zoom.c:251
-msgid "Zoom Timestep"
-msgstr "Квант времени изменения масштаба"
+#: ../metadata/wobbly.xml.in.h:28
+#, fuzzy
+msgid "Windows that should wobble when moved"
+msgstr "Типы окон, которые должны стать вязкими при движении"
 
-#: ../plugins/zoom.c:271
+#: ../metadata/wobbly.xml.in.h:29
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Эффект вязкости при развертывании и свертывании окон"
+
+#: ../metadata/wobbly.xml.in.h:30
+msgid "Wobbly Windows"
+msgstr "Вязкие окна"
+
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Линейная фильтрация"
+
+#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
 msgid "Use linear filter when zoomed in"
 msgstr "Использовать линейный фильтр при уменьшении"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Desktop"
+msgstr "Изменить масштаб рабочего стола"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom In"
+msgstr "Уменьшить"
+
+#  combo box item
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom Out"
+msgstr "Увеличить"
+
+#  combo box item
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom Speed"
+msgstr "Скорость изменения масштаба"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom Timestep"
+msgstr "Квант времени изменения масштаба"
+
+#: ../metadata/zoom.xml.in.h:15
+msgid "Zoom and pan desktop cube"
+msgstr "Изменение масштаба и сдвига куба рабочего стола"
+
+#  combo box item
+#: ../metadata/zoom.xml.in.h:16
+msgid "Zoom factor"
+msgstr "Коэффициент масштабирования"
 
 #: ../src/main.c:55
 msgid "Dock"
@@ -3948,6 +2548,629 @@ msgstr "Полноэкранный режим"
 #: ../src/main.c:70
 msgid "Unknown"
 msgstr "Неизвестный"
+
+#, fuzzy
+#~ msgid "4xBilinear"
+#~ msgstr "Линейная фильтрация"
+
+#, fuzzy
+#~ msgid "Gaussian"
+#~ msgstr "Русский"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Определенная комбинация клавиш, при нажатии которой запускается команда "
+#~ "оболочки  %d"
+
+#, fuzzy
+#~ msgid "Amount of brightness in percent (0-100)"
+#~ msgstr "Уровень яркости в процентах"
+
+#, fuzzy
+#~ msgid "Amount of opacity in percent (0-100)"
+#~ msgstr "Степень прозрачности в процентах"
+
+#, fuzzy
+#~ msgid "Amount of saturation in percent (0-100)"
+#~ msgstr "Уровень насыщенности в процентах"
+
+#  Table header 4/5
+#, fuzzy
+#~ msgid "Blur saturation (0-100)"
+#~ msgstr "Насыщенность"
+
+#, fuzzy
+#~ msgid "Delay (in ms) between each rain-drop (0-3600000)"
+#~ msgstr "Задержка (в мс) между каплями дождя"
+
+#, fuzzy
+#~ msgid "Desktop Plane"
+#~ msgstr "Куб рабочего стола"
+
+#, fuzzy
+#~ msgid ""
+#~ "Distance desktop should be zoom out while switching windows (0.0-5.0)"
+#~ msgstr ""
+#~ "При переключении окон рабочий стол на заднем плане должен быть уменьшен"
+
+#~ msgid "Do not modify"
+#~ msgstr "Не изменять"
+
+#, fuzzy
+#~ msgid "Drop shadow X offset (-16-16)"
+#~ msgstr "Смещение отбрасываемой тени по оси X"
+
+#, fuzzy
+#~ msgid "Drop shadow Y offset (-16-16)"
+#~ msgstr "Смещение отбрасываемой тени по оси Y"
+
+#  int field
+#, fuzzy
+#~ msgid "Drop shadow opacity (0.01-6.00)"
+#~ msgstr "Прозрачность отбрасываемой тени"
+
+#, fuzzy
+#~ msgid "Drop shadow radius (0.0-48.0)"
+#~ msgstr "Радиус отбрасываемой тени"
+
+#, fuzzy
+#~ msgid "Focus Window Effect (None, Shiver)"
+#~ msgstr "Эффект фокусировки окна"
+
+#, fuzzy
+#~ msgid "Focus prevention windows (match)"
+#~ msgstr "Выбрать предыдущее окно"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#, fuzzy
+#~ msgid "Fold Acceleration (1.0-20.0)"
+#~ msgstr "3D ускорение:"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#, fuzzy
+#~ msgid "Fold Speed (0.0-50.0)"
+#~ msgstr "3D ускорение:"
+
+#, fuzzy
+#~ msgid "Fold Timestep (0.0-50.0)"
+#~ msgstr "Квант времени для свертывания"
+
+#, fuzzy
+#~ msgid "Gaussian radius (1-15)"
+#~ msgstr "Российская Федерация"
+
+#, fuzzy
+#~ msgid "Gaussian strength (0.00-1.00)"
+#~ msgstr "Русский"
+
+#, fuzzy
+#~ msgid "Interval before raising selected windows (0-10000)"
+#~ msgstr "Интервал времени до вызова выбранных окон"
+
+#, fuzzy
+#~ msgid ""
+#~ "Layout and start transforming windows on current output (Left, Right, "
+#~ "Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+#~ msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
+
+#, fuzzy
+#~ msgid "Map Window Effect (None, Shiver)"
+#~ msgstr "Эффект отражения окна"
+
+#, fuzzy
+#~ msgid "Minimize speed (0.0-50.0)"
+#~ msgstr "Скорость свертывания"
+
+#, fuzzy
+#~ msgid "Minimize timestep (0.0-50.0)"
+#~ msgstr "Квант времени свертывания"
+
+#  combo box item
+#, fuzzy
+#~ msgid "Minimum Vertex Grid Size (4-128)"
+#~ msgstr "Минимальный размер решетки на вершинах"
+
+#, fuzzy
+#~ msgid "Number of virtual desktops (1-36)"
+#~ msgstr "Число виртуальных рабочих столов"
+
+#, fuzzy
+#~ msgid "Opacity change step (1-50)"
+#~ msgstr "Шаг, с которым меняется прозрачность"
+
+#, fuzzy
+#~ msgid "Opacity level of moving windows (1-100)"
+#~ msgstr "Степень прозрачности движущихся окон"
+
+#, fuzzy
+#~ msgid "Opacity level of resizing windows (1-100)"
+#~ msgstr "Степень прозрачности движущихся окон"
+
+#, fuzzy
+#~ msgid "Outline Color"
+#~ msgstr "Цвета куба"
+
+#, fuzzy
+#~ msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
+#~ msgstr "Наложение значка на окна при их масштабировании"
+
+#, fuzzy
+#~ msgid "Place windows on a plane"
+#~ msgstr "Размещение окон на кубе"
+
+#, fuzzy
+#~ msgid "Plane Down"
+#~ msgstr "Page Down"
+
+#, fuzzy
+#~ msgid "Plane Left"
+#~ msgstr "Вращать влево"
+
+#, fuzzy
+#~ msgid "Plane Right"
+#~ msgstr "Вращать вправо"
+
+#, fuzzy
+#~ msgid "Plane To Face 1"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 10"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 11"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 12"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 2"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 3"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 4"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 5"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 6"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 7"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 8"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face 9"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane Up"
+#~ msgstr "Page Up"
+
+#, fuzzy
+#~ msgid "Plane down"
+#~ msgstr "Размещение окон"
+
+#, fuzzy
+#~ msgid "Plane left"
+#~ msgstr "Вращение влево"
+
+#, fuzzy
+#~ msgid "Plane right"
+#~ msgstr "Вращение вправо"
+
+#, fuzzy
+#~ msgid "Plane to face 1"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 10"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 11"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 12"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 2"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 3"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 4"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 5"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 6"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 7"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 8"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face 9"
+#~ msgstr "Вращение до грани %d"
+
+#~ msgid "Plugins that this must load before"
+#~ msgstr "Предварительно должны быть загружены модули"
+
+#~ msgid "Plugins that this requires"
+#~ msgstr "Необходимые модули"
+
+#, fuzzy
+#~ msgid ""
+#~ "Popup switcher if not visible and select next window (Left, Right, Top, "
+#~ "Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+#~ msgstr ""
+#~ "Отображение переключателя (если он невидим) и выбор следующего окна из "
+#~ "всех имеющихся"
+
+#, fuzzy
+#~ msgid ""
+#~ "Popup switcher if not visible and select next window out of all windows "
+#~ "(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+#~ msgstr ""
+#~ "Отображение переключателя (если он невидим) и выбор следующего окна из "
+#~ "всех имеющихся"
+
+#, fuzzy
+#~ msgid ""
+#~ "Popup switcher if not visible and select previous window (Left, Right, "
+#~ "Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
+#~ msgstr ""
+#~ "Отображение переключателя (если он невидим) и выбор предыдущего окна из "
+#~ "всех имеющихся"
+
+#, fuzzy
+#~ msgid ""
+#~ "Popup switcher if not visible and select previous window out of all "
+#~ "windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
+#~ "BottomRight)"
+#~ msgstr ""
+#~ "Отображение переключателя (если он невидим) и выбор предыдущего окна из "
+#~ "всех имеющихся"
+
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
+#, fuzzy
+#~ msgid "Rotation Acceleration (1.0-20.0)"
+#~ msgstr "3D ускорение:"
+
+#, fuzzy
+#~ msgid "Rotation Speed (0.0-50.0)"
+#~ msgstr "Скорость вращения"
+
+#, fuzzy
+#~ msgid "Rotation Timestep (0.0-50.0)"
+#~ msgstr "Квант времени вращения"
+
+#, fuzzy
+#~ msgid "Scale speed (0.0-50.0)"
+#~ msgstr "Скорость масштабирования"
+
+#, fuzzy
+#~ msgid "Scale timestep (0.0-50.0)"
+#~ msgstr "Квант времени масштабирования"
+
+#, fuzzy
+#~ msgid "Screen size multiplier for horizontal virtual size (1-32)"
+#~ msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
+
+#, fuzzy
+#~ msgid "Screen size multiplier for vertical virtual size (1-32)"
+#~ msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
+
+#, fuzzy
+#~ msgid "Sensitivity of pointer movement (0.01-100.00)"
+#~ msgstr "Чувствительность к перемещениям курсора"
+
+#, fuzzy
+#~ msgid "Shade resistance (0-100)"
+#~ msgstr "Устойчивость тени"
+
+#, fuzzy
+#~ msgid "Space between windows (0-250)"
+#~ msgstr "Расстояние между окнами"
+
+#  Table header 5/5
+#, fuzzy
+#~ msgid "Spring Friction (0.0-10.0)"
+#~ msgstr "Упругое трение"
+
+#, fuzzy
+#~ msgid "Spring Konstant (0.0-10.0)"
+#~ msgstr "Константа упругости"
+
+#, fuzzy
+#~ msgid "Switcher speed (0.0-50.0)"
+#~ msgstr "Скорость переключателя"
+
+#, fuzzy
+#~ msgid "Switcher timestep (0.0-50.0)"
+#~ msgstr "Квант времени переключателя"
+
+#  MenuButton label
+#  menubutton label
+#, fuzzy
+#~ msgid "Texture filtering (Fast, Good, Best)"
+#~ msgstr "Фильтрация текстур"
+
+#, fuzzy
+#~ msgid "The rate at which the screen is redrawn (times/second) (1-200)"
+#~ msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Time (in ms) before scale mode is terminated when hovering over a window "
+#~ "(50-10000)"
+#~ msgstr ""
+#~ "Время (в мс) до завершения режима масштабирования при наведении указателя "
+#~ "на окно"
+
+#, fuzzy
+#~ msgid "Timeout before flipping viewport (0-1000)"
+#~ msgstr "Задержка во времени до отражения кадрового окна"
+
+#~ msgid "USe linear filter when zoomed in"
+#~ msgstr "Использовать линейный фильтр при уменьшении"
+
+#, fuzzy
+#~ msgid "Vertex Grid Resolution (1-64)"
+#~ msgstr "Разрешение решетки на вершинах"
+
+#, fuzzy
+#~ msgid "Water offset scale (0.0-10.0)"
+#~ msgstr "Масштаб смещения воды"
+
+#, fuzzy
+#~ msgid "Window blur speed (0.0-10.0)"
+#~ msgstr "Скорость проявления/исчезания окна"
+
+#, fuzzy
+#~ msgid "Window fade speed (0.0-25.0)"
+#~ msgstr "Скорость проявления/исчезания окна"
+
+#, fuzzy
+#~ msgid "Windows that should be affected by focus blur (match)"
+#~ msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#, fuzzy
+#~ msgid "Windows that should be decorated (match)"
+#~ msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#, fuzzy
+#~ msgid "Windows that should be fading (match)"
+#~ msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#, fuzzy
+#~ msgid "Windows that should be have a shadow (match)"
+#~ msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#, fuzzy
+#~ msgid "Windows that should be scaled in scale mode (match)"
+#~ msgstr "Типы окон, для которых следует применять режим масштабирования"
+
+#, fuzzy
+#~ msgid "Windows that should be shown in switcher (match)"
+#~ msgstr "Типы окон, которые должны быть отображены в переключателе"
+
+#, fuzzy
+#~ msgid "Windows that should be transformed when minimized (match)"
+#~ msgstr "Типы окон, которые должны быть преобразованы при свертывании"
+
+#, fuzzy
+#~ msgid "Windows that should use alpha blur by default (match)"
+#~ msgstr "Типы окон, которым следует применять эффект проявления/исчезания"
+
+#, fuzzy
+#~ msgid "Windows that should wobble when focused (match)"
+#~ msgstr "Типы окон, которые должны стать вязкими при получении фокуса"
+
+#, fuzzy
+#~ msgid "Windows that should wobble when grabbed (match)"
+#~ msgstr "Типы окон, которые должны стать вязкими при захвате"
+
+#, fuzzy
+#~ msgid "Windows that should wobble when mapped (match)"
+#~ msgstr "Типы окон, которые должны отражаться как вязкие"
+
+#, fuzzy
+#~ msgid "Windows that should wobble when moved (match)"
+#~ msgstr "Типы окон, которые должны стать вязкими при движении"
+
+#  combo box item
+#, fuzzy
+#~ msgid "Zoom Speed (0.0-50.0)"
+#~ msgstr "Скорость изменения масштаба"
+
+#, fuzzy
+#~ msgid "Zoom Timestep (0.0-50.0)"
+#~ msgstr "Квант времени изменения масштаба"
+
+#  combo box item
+#, fuzzy
+#~ msgid "Zoom factor (1.01-3.00)"
+#~ msgstr "Коэффициент масштабирования"
+
+#~ msgid "."
+#~ msgstr "."
+
+#, fuzzy
+#~ msgid "Maximize"
+#~ msgstr "Свернутые"
+
+#, fuzzy
+#~ msgid "Plane To Face %d"
+#~ msgstr "Вращать до грани %d"
+
+#, fuzzy
+#~ msgid "Plane to face %d"
+#~ msgstr "Вращение до грани %d"
+
+#, fuzzy
+#~ msgid "Plane To Face %d with Window"
+#~ msgstr "Вращать до грани %d вместе с окном"
+
+#, fuzzy
+#~ msgid "Plane to face %d and bring active window along"
+#~ msgstr "Вращение до грани %d вместе с активным окном"
+
+#~ msgid "Rotate To Face %d"
+#~ msgstr "Вращать до грани %d"
+
+#~ msgid "Rotate to face %d"
+#~ msgstr "Вращение до грани %d"
+
+#~ msgid "Rotate To Face %d with Window"
+#~ msgstr "Вращать до грани %d вместе с окном"
+
+#~ msgid "Rotate to face %d and bring active window along"
+#~ msgstr "Вращение до грани %d вместе с активным окном"
+
+#~ msgid "None"
+#~ msgstr "Никакой"
+
+#~ msgid "Emblem"
+#~ msgstr "Эмблема"
+
+#~ msgid "Big"
+#~ msgstr "Большой"
 
 #~ msgid "Fast"
 #~ msgstr "Быстрое"

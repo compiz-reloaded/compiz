@@ -203,6 +203,18 @@ placeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
+    case PLACE_SCREEN_OPTION_POSITION_MATCHES:
+    case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
+	if (compSetOptionList (o, value))
+	{
+	    int i;
+
+	    for (i = 0; i < o->value.list.nValue; i++)
+		matchUpdate (screen->display, &o->value.list.value[i].match);
+
+	    return TRUE;
+       }
+       break;
     default:
 	if (compSetOption (o, value))
 	    return TRUE;
@@ -1502,9 +1514,7 @@ placeInit (CompPlugin *p)
 static void
 placeFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&placeMetadata);
 }
 
@@ -1523,8 +1533,6 @@ placeGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable placeVTable = {
     "place",
-    N_("Place Windows"),
-    N_("Place windows at appropriate positions when mapped"),
     placeGetVersion,
     placeGetMetadata,
     placeInit,

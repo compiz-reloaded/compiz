@@ -16,7 +16,8 @@ xml_in_files =		  \
 	place.xml.in	  \
 	png.xml.in	  \
 	regex.xml.in	  \
-	resize.xml.in     \
+	resize.xml.in	  \
+	rotate.xml.in     \
 	scale.xml.in      \
 	screenshot.xml.in \
 	svg.xml.in        \
@@ -30,6 +31,22 @@ xml_DATA     = $(xml_files)
 
 @INTLTOOL_XML_RULE@
 
+if USE_GCONF
+schemadir   = $(GCONF_SCHEMA_FILE_DIR)
+schema_DATA = $(xml_in_files:.xml.in=.schemas)
+
+.xml.schemas:
+	xsltproc -o $@ schemas.xslt $*.xml;
+
+if GCONF_SCHEMAS_INSTALL
+install-data-local:
+	if test -z "$(DESTDIR)" ; then \
+		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
+        fi
+endif
+endif
+
 EXTRA_DIST =		\
 	$(xml_files)    \
-	$(xml_in_files)
+	$(xml_in_files) \
+	schemas.xslt

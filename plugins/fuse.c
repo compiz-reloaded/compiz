@@ -42,24 +42,22 @@ static CompMetadata fuseMetadata;
 #define FUSE_INODE_TYPE_SCREEN      (1 << 3)
 #define FUSE_INODE_TYPE_DISPLAY     (1 << 4)
 #define FUSE_INODE_TYPE_OPTION      (1 << 5)
-#define FUSE_INODE_TYPE_SHORT_DESC  (1 << 6)
-#define FUSE_INODE_TYPE_LONG_DESC   (1 << 7)
-#define FUSE_INODE_TYPE_TYPE        (1 << 8)
-#define FUSE_INODE_TYPE_VALUE       (1 << 9)
-#define FUSE_INODE_TYPE_ITEM_COUNT  (1 << 10)
-#define FUSE_INODE_TYPE_ITEM_TYPE   (1 << 11)
-#define FUSE_INODE_TYPE_ITEMS       (1 << 12)
-#define FUSE_INODE_TYPE_ITEM_VALUE  (1 << 13)
-#define FUSE_INODE_TYPE_KEY         (1 << 14)
-#define FUSE_INODE_TYPE_BUTTON      (1 << 15)
-#define FUSE_INODE_TYPE_EDGE        (1 << 16)
-#define FUSE_INODE_TYPE_EDGE_BUTTON (1 << 17)
-#define FUSE_INODE_TYPE_BELL        (1 << 18)
-#define FUSE_INODE_TYPE_MIN         (1 << 19)
-#define FUSE_INODE_TYPE_MAX         (1 << 20)
-#define FUSE_INODE_TYPE_PRECISION   (1 << 21)
-#define FUSE_INODE_TYPE_SELECTION   (1 << 22)
-#define FUSE_INODE_TYPE_ALTERNATIVE (1 << 23)
+#define FUSE_INODE_TYPE_TYPE        (1 << 6)
+#define FUSE_INODE_TYPE_VALUE       (1 << 7)
+#define FUSE_INODE_TYPE_ITEM_COUNT  (1 << 8)
+#define FUSE_INODE_TYPE_ITEM_TYPE   (1 << 9)
+#define FUSE_INODE_TYPE_ITEMS       (1 << 10)
+#define FUSE_INODE_TYPE_ITEM_VALUE  (1 << 11)
+#define FUSE_INODE_TYPE_KEY         (1 << 12)
+#define FUSE_INODE_TYPE_BUTTON      (1 << 13)
+#define FUSE_INODE_TYPE_EDGE        (1 << 14)
+#define FUSE_INODE_TYPE_EDGE_BUTTON (1 << 15)
+#define FUSE_INODE_TYPE_BELL        (1 << 16)
+#define FUSE_INODE_TYPE_MIN         (1 << 17)
+#define FUSE_INODE_TYPE_MAX         (1 << 18)
+#define FUSE_INODE_TYPE_PRECISION   (1 << 19)
+#define FUSE_INODE_TYPE_SELECTION   (1 << 20)
+#define FUSE_INODE_TYPE_ALTERNATIVE (1 << 21)
 
 #define DIR_MASK (FUSE_INODE_TYPE_ROOT    | \
 		  FUSE_INODE_TYPE_CORE    | \
@@ -376,14 +374,6 @@ fuseGetStringFromInode (CompDisplay *d,
     {
 	return strdup (optionTypeToString (option->type));
     }
-    else if (inode->type & FUSE_INODE_TYPE_SHORT_DESC)
-    {
-	return strdup (option->shortDesc);
-    }
-    else if (inode->type & FUSE_INODE_TYPE_LONG_DESC)
-    {
-	return strdup (option->longDesc);
-    }
     else if (inode->type & (FUSE_INODE_TYPE_VALUE | FUSE_INODE_TYPE_ITEM_VALUE))
     {
 	CompOptionValue *value = NULL;
@@ -589,10 +579,6 @@ fuseUpdateInode (CompDisplay *d,
 	{
 	    int i;
 
-	    fuseAddInode (inode, FUSE_INODE_TYPE_SHORT_DESC,
-			  "short_description");
-	    fuseAddInode (inode, FUSE_INODE_TYPE_LONG_DESC,
-			  "long_description");
 	    fuseAddInode (inode, FUSE_INODE_TYPE_TYPE, "type");
 
 	    switch (option->type) {
@@ -1582,11 +1568,8 @@ fuseInit (CompPlugin *p)
 static void
 fuseFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
     fuseRemoveInode (NULL, inodes);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&fuseMetadata);
 }
 
@@ -1605,8 +1588,6 @@ fuseGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable fuseVTable = {
     "fs",
-    N_("Userspace File System"),
-    N_("Userspace file system"),
     fuseGetVersion,
     fuseGetMetadata,
     fuseInit,

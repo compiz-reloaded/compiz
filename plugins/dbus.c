@@ -108,10 +108,11 @@ static DBusObjectPathVTable dbusMessagesVTable = {
 
 
 static CompOption *
-dbusGetOptionsFromPath (CompDisplay *d,
-			char	    **path,
-			CompScreen  **return_screen,
-			int	    *nOption)
+dbusGetOptionsFromPath (CompDisplay  *d,
+			char	     **path,
+			CompScreen   **return_screen,
+			CompMetadata **return_metadata,
+			int	     *nOption)
 {
     CompScreen *s = NULL;
 
@@ -135,6 +136,9 @@ dbusGetOptionsFromPath (CompDisplay *d,
 
     if (strcmp (path[0], "core") == 0)
     {
+	if (return_metadata)
+	    *return_metadata = &coreMetadata;
+
 	if (s)
 	    return compGetScreenOptions (s, nOption);
 	else
@@ -147,6 +151,14 @@ dbusGetOptionsFromPath (CompDisplay *d,
 	for (p = getPlugins (); p; p = p->next)
 	    if (strcmp (p->vTable->name, path[0]) == 0)
 		break;
+
+	if (return_metadata)
+	{
+	    if (p && p->vTable->getMetadata)
+		*return_metadata = (*p->vTable->getMetadata) (p);
+	    else
+		*return_metadata = NULL;
+	}
 
 	if (!p)
 	    return NULL;
@@ -439,7 +451,7 @@ dbusHandleScreenIntrospectMessage (DBusConnection *connection,
 
     dbusIntrospectEndInterface (writer);
 
-    option = dbusGetOptionsFromPath (d, path, NULL, &nOptions);
+    option = dbusGetOptionsFromPath (d, path, NULL, NULL, &nOptions);
     if (option)
     {
 	while (nOptions--)
@@ -504,7 +516,7 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
     dbusIntrospectStartRoot (writer);
     dbusIntrospectStartInterface (writer);
 
-    option = dbusGetOptionsFromPath (d, path, NULL, &nOptions);
+    option = dbusGetOptionsFromPath (d, path, NULL, NULL, &nOptions);
     if (!option)
     {
 	xmlFreeTextWriter (writer);
@@ -697,7 +709,7 @@ dbusHandleActionMessage (DBusConnection *connection,
     CompOption *option;
     int	       nOption;
 
-    option = dbusGetOptionsFromPath (d, path, NULL, &nOption);
+    option = dbusGetOptionsFromPath (d, path, NULL, NULL, &nOption);
     if (!option)
 	return FALSE;
 
@@ -983,7 +995,7 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
     CompOption *option;
     int	       nOption;
 
-    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+    option = dbusGetOptionsFromPath (d, path, &s, NULL, &nOption);
     if (!option)
 	return FALSE;
 
@@ -1395,7 +1407,7 @@ dbusHandleGetOptionMessage (DBusConnection *connection,
     int	        nOption = 0;
     DBusMessage *reply = NULL;
 
-    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+    option = dbusGetOptionsFromPath (d, path, &s, NULL, &nOption);
 
     while (nOption--)
     {
@@ -1443,7 +1455,7 @@ dbusHandleListMessage (DBusConnection *connection,
     int	        nOption = 0;
     DBusMessage *reply;
 
-    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+    option = dbusGetOptionsFromPath (d, path, &s, NULL, &nOption);
 
     reply = dbus_message_new_method_return (message);
 
@@ -1479,12 +1491,13 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 			      CompDisplay    *d,
 			      char	     **path)
 {
-    CompScreen  *s;
-    CompOption  *option;
-    int	        nOption = 0;
-    DBusMessage *reply = NULL;
+    CompScreen   *s;
+    CompOption   *option;
+    int	         nOption = 0;
+    DBusMessage  *reply = NULL;
+    CompMetadata *m;
 
-    option = dbusGetOptionsFromPath (d, path, &s, &nOption);
+    option = dbusGetOptionsFromPath (d, path, &s, &m, &nOption);
 
     while (nOption--)
     {
@@ -1492,16 +1505,38 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 	{
 	    CompOptionType restrictionType = option->type;
 	    char	   *type;
+	    char	   *shortDesc = NULL;
+	    char	   *longDesc = NULL;
 
 	    reply = dbus_message_new_method_return (message);
 
 	    type = optionTypeToString (option->type);
 
+	    if (m)
+	    {
+		if (s)
+		{
+		    shortDesc = compGetShortScreenOptionDescription (m, option);
+		    longDesc  = compGetLongScreenOptionDescription (m, option);
+		}
+		else
+		{
+		    shortDesc =
+			compGetShortDisplayOptionDescription (m, option);
+		    longDesc  = compGetLongDisplayOptionDescription (m, option);
+		}
+	    }
+
 	    dbus_message_append_args (reply,
-				      DBUS_TYPE_STRING, &option->shortDesc,
-				      DBUS_TYPE_STRING, &option->longDesc,
+				      DBUS_TYPE_STRING, &shortDesc,
+				      DBUS_TYPE_STRING, &longDesc,
 				      DBUS_TYPE_STRING, &type,
 				      DBUS_TYPE_INVALID);
+
+	    if (shortDesc)
+		free (shortDesc);
+	    if (longDesc)
+		free (longDesc);
 
 	    if (restrictionType == CompOptionTypeList)
 	    {
@@ -1676,14 +1711,33 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	DBusMessageIter   iter;
 	DBusMessageIter   listIter;
 	char		  sig[2];
+	char		  *shortDesc = NULL;
+	char		  *longDesc = NULL;
 
 	reply = dbus_message_new_method_return (message);
 
+	if (!loadedPlugin && p->vTable->getMetadata)
+	{
+	    CompMetadata *m;
+
+	    m = (*p->vTable->getMetadata) (p);
+	    if (m)
+	    {
+		shortDesc = compGetShortPluginDescription (m);
+		longDesc  = compGetLongPluginDescription (m);
+	    }
+	}
+
 	dbus_message_append_args (reply,
 				  DBUS_TYPE_STRING, &p->vTable->name,
-				  DBUS_TYPE_STRING, &p->vTable->shortDesc,
-				  DBUS_TYPE_STRING, &p->vTable->longDesc,
+				  DBUS_TYPE_STRING, &shortDesc,
+				  DBUS_TYPE_STRING, &longDesc,
 				  DBUS_TYPE_INVALID);
+
+	if (shortDesc)
+	    free (shortDesc);
+	if (longDesc)
+	    free (longDesc);
 
 	version = (*p->vTable->getVersion) (p, ABIVERSION);
 	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
@@ -2045,7 +2099,7 @@ dbusRegisterOptions (DBusConnection *connection,
 
     dbusGetPathDecomposed (screenPath, &path);
 
-    option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
+    option = dbusGetOptionsFromPath (d, &path[3], NULL, NULL, &nOptions);
 
     if (!option)
 	return FALSE;
@@ -2074,7 +2128,7 @@ dbusUnregisterOptions (DBusConnection *connection,
 
     dbusGetPathDecomposed (screenPath, &path);
 
-    option = dbusGetOptionsFromPath (d, &path[3], NULL, &nOptions);
+    option = dbusGetOptionsFromPath (d, &path[3], NULL, NULL, &nOptions);
 
     if (!option)
 	return FALSE;
@@ -2675,9 +2729,7 @@ dbusInit (CompPlugin *p)
 static void
 dbusFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&dbusMetadata);
 }
 
@@ -2696,8 +2748,6 @@ dbusGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable dbusVTable = {
     "dbus",
-    "Dbus",
-    "Dbus Control Backend",
     dbusGetVersion,
     dbusGetMetadata,
     dbusInit,

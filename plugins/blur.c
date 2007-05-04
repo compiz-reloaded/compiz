@@ -2744,9 +2744,7 @@ blurInit (CompPlugin *p)
 static void
 blurFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&blurMetadata);
 }
 
@@ -2773,8 +2771,6 @@ CompPluginFeature blurFeatures[] = {
 
 static CompPluginVTable blurVTable = {
     "blur",
-    N_("Blur Windows"),
-    N_("Blur windows"),
     blurGetVersion,
     blurGetMetadata,
     blurInit,

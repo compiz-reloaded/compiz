@@ -720,9 +720,9 @@ moveGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-moveSetDisplayOption (CompPlugin  *plugin,
-		      CompDisplay    *display,
-		      char	     *name,
+moveSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      char	      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;
@@ -735,10 +735,6 @@ moveSetDisplayOption (CompPlugin  *plugin,
 	return FALSE;
 
     switch (index) {
-    case MOVE_DISPLAY_OPTION_INITIATE:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
     case MOVE_DISPLAY_OPTION_OPACITY:
 	if (compSetIntOption (o, value))
 	{
@@ -747,9 +743,7 @@ moveSetDisplayOption (CompPlugin  *plugin,
 	}
 	break;
     default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
+	return compSetDisplayOption (display, o, value);
     }
 
     return FALSE;
@@ -886,9 +880,7 @@ moveInit (CompPlugin *p)
 static void
 moveFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&moveMetadata);
 }
 
@@ -907,8 +899,6 @@ moveGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable moveVTable = {
     "move",
-    N_("Move Window"),
-    N_("Move window"),
     moveGetVersion,
     moveGetMetadata,
     moveInit,

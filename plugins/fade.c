@@ -831,9 +831,7 @@ fadeInit (CompPlugin *p)
 static void
 fadeFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&fadeMetadata);
 }
 
@@ -857,8 +855,6 @@ CompPluginDep fadeDeps[] = {
 
 static CompPluginVTable fadeVTable = {
     "fade",
-    N_("Fading Windows"),
-    N_("Fade in windows when mapped and fade out windows when unmapped"),
     fadeGetVersion,
     fadeGetMetadata,
     fadeInit,

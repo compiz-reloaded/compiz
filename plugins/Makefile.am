@@ -84,41 +84,6 @@ libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @GCONF_LIBS@
 libgconf_la_SOURCES = gconf.c
 libgconf_module = libgconf.la
-
-if GCONF_DUMP_PLUGIN
-libgconf_dump_la_LDFLAGS = -module -avoid-version -no-undefined
-libgconf_dump_la_LIBADD = @GCONF_LIBS@
-libgconf_dump_la_SOURCES = gconf-dump.c
-libgconf_dump_module = libgconf-dump.la
-endif
-
-schemadir = $(GCONF_SCHEMA_FILE_DIR)
-schema_in_files = compiz.schemas.in
-schema_DATA = $(schema_in_files:.schemas.in=.schemas)
-
-schema_modules = $(patsubst gconf%,,$(subst ini,,$(subst minimize,,$(subst rotate,,$(subst zoom,,$(subst lib,,$(subst .la,,$(module_LTLIBRARIES))))))))
-
-compiz.schemas.in:
-	rm -f compiz.schemas.dump;
-	echo -e "<gconfschemafile>\n    <schemalist>" >> compiz.schemas.dump;
-	COMPIZ_SCHEMA_GENERAL=1 compiz --replace --no-detection --sm-disable gconf-dump;
-	for module in $(schema_modules) ; do \
-		COMPIZ_SCHEMA_PLUGINS="$$module" \
-		compiz --replace --no-detection --sm-disable "$$module" gconf-dump; \
-	done;
-	COMPIZ_SCHEMA_PLUGINS="minimize" compiz --replace --no-detection --sm-disable minimize gconf-dump;
-	COMPIZ_SCHEMA_PLUGINS="rotate" compiz --replace --no-detection --sm-disable cube rotate gconf-dump;
-	COMPIZ_SCHEMA_PLUGINS="zoom" compiz --replace --no-detection --sm-disable cube zoom gconf-dump;
-	echo -e "    </schemalist>\n</gconfschemafile>" >> compiz.schemas.dump;
-	sed -e 's/\[TopRight\]/[\@SCALE_CORNER\@\]/' -e 's/\[gconf\]/\[gconf,\@DEFAULT_PLUGINS\@\]/' < compiz.schemas.dump > compiz.schemas.in;
-	rm -f compiz.schemas.dump
-
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	if test -z "$(DESTDIR)" ; then \
-		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
-        fi
-endif
 endif
 
 if PLACE_PLUGIN
@@ -192,8 +157,6 @@ module_LTLIBRARIES =		\
 	libini.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
-	$(libgconf_dump_module) \
 	$(libinotify_module)	\
 	$(libfs_module)
 
-EXTRA_DIST = $(schema_in_files)

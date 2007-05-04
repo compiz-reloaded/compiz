@@ -2674,22 +2674,16 @@ wobblySetDisplayOption (CompPlugin  *plugin,
 	if (compSetActionOption (o, value))
 	    return TRUE;
 	break;
-    case WOBBLY_DISPLAY_OPTION_SNAP_INVERTED:
-	if (compSetBoolOption (o, value))
-	    return TRUE;
-	break;
-    case WOBBLY_DISPLAY_OPTION_SHIVER:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
     default:
-	break;
+	return compSetDisplayOption (display, o, value);
     }
 
     return FALSE;
 }
 
 static const CompMetadataOptionInfo wobblyDisplayOptionInfo[] = {
-    { "snap", "action", 0, wobblyEnableSnapping, wobblyDisableSnapping },
+    { "snap", "action", "<passive_grab>false</passive_grab>",
+      wobblyEnableSnapping, wobblyDisableSnapping },
     { "snap_inverted", "bool", 0, 0, 0 },
     { "shiver", "action", 0, wobblyShiver, 0 }
 };
@@ -2778,9 +2772,9 @@ wobblyInitScreen (CompPlugin *p,
 
     ws->wobblyWindows = FALSE;
 
-    ws->mapEffect   = 
+    ws->mapEffect   =
 	wobblyEffectFromString (&ws->opt[WOBBLY_SCREEN_OPTION_MAP_EFFECT].value);
-    ws->focusEffect = 
+    ws->focusEffect =
 	wobblyEffectFromString (&ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_EFFECT].value);
 
     ws->grabMask   = 0;
@@ -2896,9 +2890,7 @@ wobblyInit (CompPlugin *p)
 static void
 wobblyFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&wobblyMetadata);
 }
 
@@ -2923,8 +2915,6 @@ CompPluginDep wobblyDeps[] = {
 
 CompPluginVTable wobblyVTable = {
     "wobbly",
-    N_("Wobbly Windows"),
-    N_("Use spring model for wobbly window effect"),
     wobblyGetVersion,
     wobblyGetMetadata,
     wobblyInit,

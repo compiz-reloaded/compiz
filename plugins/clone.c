@@ -836,9 +836,7 @@ cloneInit (CompPlugin *p)
 static void
 cloneFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
-
+    freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&cloneMetadata);
 }
 
@@ -857,8 +855,6 @@ cloneGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable cloneVTable = {
     "clone",
-    N_("Clone Output"),
-    N_("Output clone handler"),
     cloneGetVersion,
     cloneGetMetadata,
     cloneInit,
