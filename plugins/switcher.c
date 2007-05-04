@@ -642,18 +642,18 @@ switchInitiate (CompScreen *s,
 	state[nState++] = s->display->winStateSkipPagerAtom;
 
 	XChangeProperty (dpy, ss->popupWindow,
-			 XInternAtom (dpy, "_NET_WM_STATE", 0),
+			 s->display->winStateAtom,
 			 XA_ATOM, 32, PropModeReplace,
 			 (unsigned char *) state, nState);
-
-	setWindowProp (s->display, ss->popupWindow,
-		       s->display->winDesktopAtom,
-		       0xffffffff);
 
 	XChangeProperty (dpy, ss->popupWindow,
 			 s->display->winTypeAtom,
 			 XA_ATOM, 32, PropModeReplace,
 			 (unsigned char *) &s->display->winTypeUtilAtom, 1);
+
+	setWindowProp (s->display, ss->popupWindow,
+		       s->display->winDesktopAtom,
+		       0xffffffff);
     }
 
     if (!ss->grabIndex)
