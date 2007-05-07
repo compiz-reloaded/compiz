@@ -10,6 +10,7 @@ xml_in_files =		  \
 	fade.xml.in	  \
 	fs.xml.in	  \
 	gconf.xml.in	  \
+	ini.xml.in	  \
 	inotify.xml.in	  \
 	minimize.xml.in	  \
 	move.xml.in	  \
