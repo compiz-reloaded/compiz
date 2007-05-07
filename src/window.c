@@ -4011,16 +4011,6 @@ closeWindow (CompWindow *w,
     w->lastCloseRequestTime = serverTime;
 }
 
-void
-getOuterRectOfWindow (CompWindow *w,
-		      XRectangle *r)
-{
-    r->x      = w->attrib.x - w->input.left;
-    r->y      = w->attrib.y - w->input.top;
-    r->width  = w->width  + w->input.left + w->input.right;
-    r->height = w->height + w->input.top  + w->input.bottom;
-}
-
 #define PVertResizeInc (1 << 0)
 #define PHorzResizeInc (1 << 1)
 
