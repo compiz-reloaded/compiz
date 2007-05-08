@@ -34,8 +34,9 @@ xml_DATA     = $(xml_files)
 @INTLTOOL_XML_RULE@
 
 if USE_GCONF
-schemadir   = $(GCONF_SCHEMA_FILE_DIR)
-schema_DATA = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
+schemadir    = $(GCONF_SCHEMA_FILE_DIR)
+schema_files = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
+schema_DATA  = $(schema_files)
 
 %.schemas: $(xml_files)
 	xsltproc -o $@ schemas.xslt $(subst compiz-,,$*).xml;
