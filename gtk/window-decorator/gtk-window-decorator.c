@@ -6642,6 +6642,10 @@ main (int argc, char *argv[])
 	{
 	    minimal = TRUE;
 	}
+	else if (strcmp (argv[i], "--replace") == 0)
+	{
+	    replace = TRUE;
+	}
 	else if (strcmp (argv[i], "--blur") == 0)
 	{
 	    if (argc > ++i)
