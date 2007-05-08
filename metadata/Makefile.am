@@ -56,4 +56,5 @@ endif
 EXTRA_DIST =		\
 	$(xml_files)    \
 	$(xml_in_files) \
-	$(xslt_files)
+	$(xslt_files)	\
+	$(schema_files)
