@@ -1278,13 +1278,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	glPushMatrix ();
 
-	if (cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
-	{
-	    if (sAttrib->xRotate > 0.0f)
-		yRotate = 360.0f / size;
-	    else
-		yRotate = 0.0f;
-	}
+	if (!cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
+	    yRotate -= (360.0f / size) * s->x;
 
 	sa.yRotate += yRotate;
 
