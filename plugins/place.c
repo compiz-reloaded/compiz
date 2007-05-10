@@ -317,6 +317,16 @@ get_window_height (CompWindow *window)
 }
 
 static void
+get_outer_rect_of_window (CompWindow *w,
+			  XRectangle *r)
+{
+    r->x      = w->serverX - w->input.left;
+    r->y      = w->serverY - w->input.top;
+    r->width  = get_window_width (w)  + w->input.left + w->input.right;
+    r->height = get_window_height (w) + w->input.top  + w->input.bottom;
+}
+
+static void
 find_next_cascade (CompWindow *window,
 		   GList      *windows,
 		   int        x,
@@ -464,8 +474,8 @@ find_most_freespace (CompWindow *window,
 
     get_workarea_of_current_output_device (window->screen, &work_area);
 
-    getOuterRectOfWindow (focus_window, &avoid);
-    getOuterRectOfWindow (window, &outer);
+    get_outer_rect_of_window (focus_window, &avoid);
+    get_outer_rect_of_window (window, &outer);
 
     /* Find the areas of choosing the various sides of the focus window */
     max_width  = MIN (avoid.width, outer.width);
@@ -606,7 +616,7 @@ rectangle_overlaps_some_window (XRectangle *rect,
 	case CompWindowTypeUtilMask:
 	case CompWindowTypeToolbarMask:
 	case CompWindowTypeMenuMask:
-	    getOuterRectOfWindow (other, &other_rect);
+	    get_outer_rect_of_window (other, &other_rect);
 
 	    if (rectangleIntersect (rect, &other_rect, &dest))
 		return TRUE;
@@ -727,7 +737,7 @@ find_first_fit (CompWindow *window,
     right_sorted = g_list_sort (right_sorted, topmost_cmp);
     right_sorted = g_list_sort (right_sorted, leftmost_cmp);
 
-    getOuterRectOfWindow (window, &rect);
+    get_outer_rect_of_window (window, &rect);
 
     get_workarea_of_current_output_device (window->screen, &work_area);
 
@@ -756,7 +766,7 @@ find_first_fit (CompWindow *window,
 	CompWindow *w = tmp->data;
 	XRectangle outer_rect;
 
-	getOuterRectOfWindow (w, &outer_rect);
+	get_outer_rect_of_window (w, &outer_rect);
 
 	rect.x = outer_rect.x;
 	rect.y = outer_rect.y + outer_rect.height;
@@ -782,7 +792,7 @@ find_first_fit (CompWindow *window,
 	CompWindow *w = tmp->data;
 	XRectangle outer_rect;
 
-	getOuterRectOfWindow (w, &outer_rect);
+	get_outer_rect_of_window (w, &outer_rect);
 
 	rect.x = outer_rect.x + outer_rect.width;
 	rect.y = outer_rect.y;
@@ -1288,7 +1298,7 @@ placeWin (CompWindow *window,
     {
 	XRectangle outer;
 
-	getOuterRectOfWindow (window, &outer);
+	get_outer_rect_of_window (window, &outer);
 
 	if (outer.width >= work_area.width && outer.height >= work_area.height)
 	    maximizeWindow (window, MAXIMIZE_STATE);
@@ -1312,8 +1322,8 @@ done_check_denied_focus:
 	{
 	    XRectangle wr, fwr, overlap;
 
-	    getOuterRectOfWindow (window, &wr);
-	    getOuterRectOfWindow (focus_window, &fwr);
+	    get_outer_rect_of_window (window, &wr);
+	    get_outer_rect_of_window (focus_window, &fwr);
 
 	    /* No need to do anything if the window doesn't overlap at all */
 	    found_fit = !rectangleIntersect (&wr, &fwr, &overlap);

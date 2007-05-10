@@ -6,6 +6,7 @@ EXTRA_DIST =		    \
 	COPYING.LGPL	    \
 	COPYING.MIT	    \
 	compiz.pc.in	    \
+	compiz-gconf.pc.in  \
 	intltool-extract.in \
 	intltool-merge.in   \
 	intltool-update.in
@@ -15,5 +16,9 @@ DISTCLEANFILES =	 \
 	intltool-merge   \
 	intltool-update
 
+if USE_GCONF
+gconfdata = compiz-gconf.pc
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = compiz.pc
+pkgconfig_DATA = compiz.pc $(gconfdata)

@@ -34,19 +34,9 @@
 
 #include <compiz.h>
 
+static CompMetadata planeMetadata;
+
 static int displayPrivateIndex;
-
-#define PLANE_LEFT_KEY_DEFAULT        "Left"
-#define PLANE_LEFT_MODIFIERS_DEFAULT  (ControlMask | CompAltMask)
-
-#define PLANE_RIGHT_KEY_DEFAULT       "Right"
-#define PLANE_RIGHT_MODIFIERS_DEFAULT (ControlMask | CompAltMask)
-
-#define PLANE_UP_KEY_DEFAULT          "Up"
-#define PLANE_UP_MODIFIERS_DEFAULT    (ControlMask | CompAltMask)
-
-#define PLANE_DOWN_KEY_DEFAULT        "Down"
-#define PLANE_DOWN_MODIFIERS_DEFAULT  (ControlMask | CompAltMask)
 
 enum
 {
@@ -478,40 +468,14 @@ planeSetDisplayOption (CompPlugin      *plugin,
 		       CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     PLANE_DISPLAY (display);
 
-    o = compFindOption (pd->opt, NUM_OPTIONS (pd), name, &index);
+    o = compFindOption (pd->opt, NUM_OPTIONS (pd), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case PLANE_DISPLAY_OPTION_LEFT:
-    case PLANE_DISPLAY_OPTION_RIGHT:
-    case PLANE_DISPLAY_OPTION_UP:
-    case PLANE_DISPLAY_OPTION_DOWN:
-
-    case PLANE_DISPLAY_OPTION_TO_1:
-    case PLANE_DISPLAY_OPTION_TO_2:
-    case PLANE_DISPLAY_OPTION_TO_3:
-    case PLANE_DISPLAY_OPTION_TO_4:
-    case PLANE_DISPLAY_OPTION_TO_5:
-    case PLANE_DISPLAY_OPTION_TO_6:
-    case PLANE_DISPLAY_OPTION_TO_7:
-    case PLANE_DISPLAY_OPTION_TO_8:
-    case PLANE_DISPLAY_OPTION_TO_9:
-    case PLANE_DISPLAY_OPTION_TO_10:
-    case PLANE_DISPLAY_OPTION_TO_11:
-    case PLANE_DISPLAY_OPTION_TO_12:
-	if (setDisplayAction (display, o, value))
-	    return TRUE;
-	break;
-    default:
-	break;
-    }
-
-    return FALSE;
+    return compSetDisplayOption (display, o, value);
 }
 
 static CompScreen *
@@ -612,105 +576,24 @@ planeTo (CompDisplay     *d,
     return FALSE;
 }
 
-static void
-planeDisplayInitOptions (PlaneDisplay *pd,
-			 Display      *display)
-{
-    CompOption *o;
-
-    o = &pd->opt[PLANE_DISPLAY_OPTION_LEFT];
-    o->name			  = "plane_left";
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = planeLeft;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitEdgeDnd;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = PLANE_LEFT_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (PLANE_LEFT_KEY_DEFAULT));
-
-    o = &pd->opt[PLANE_DISPLAY_OPTION_RIGHT];
-    o->name			  = "plane_right";
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = planeRight;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitEdgeDnd;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = PLANE_RIGHT_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (PLANE_RIGHT_KEY_DEFAULT));
-
-    o = &pd->opt[PLANE_DISPLAY_OPTION_DOWN];
-    o->name			  = "plane_down";
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = planeDown;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitEdgeDnd;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = PLANE_DOWN_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (PLANE_DOWN_KEY_DEFAULT));
-
-    o = &pd->opt[PLANE_DISPLAY_OPTION_UP];
-    o->name			  = "plane_up";
-    o->type			  = CompOptionTypeAction;
-    o->value.action.initiate	  = planeUp;
-    o->value.action.terminate	  = 0;
-    o->value.action.bell	  = FALSE;
-    o->value.action.edgeMask	  = 0;
-    o->value.action.state	  = CompActionStateInitEdge;
-    o->value.action.state	 |= CompActionStateInitEdgeDnd;
-    o->value.action.state	 |= CompActionStateInitKey;
-    o->value.action.state	 |= CompActionStateInitButton;
-    o->value.action.type	  = CompBindingTypeKey;
-    o->value.action.key.modifiers = PLANE_UP_MODIFIERS_DEFAULT;
-    o->value.action.key.keycode   =
-	XKeysymToKeycode (display,
-			  XStringToKeysym (PLANE_UP_KEY_DEFAULT));
-
-#define PLANE_TO_OPTION(n)						 \
-    o = &pd->opt[PLANE_DISPLAY_OPTION_TO_ ## n];			 \
-    o->name			  = "plane_to_" #n;			 \
-    o->type			  = CompOptionTypeAction;		 \
-    o->value.action.initiate	  = planeTo;				 \
-    o->value.action.terminate	  = 0;					 \
-    o->value.action.bell	  = FALSE;				 \
-    o->value.action.edgeMask	  = 0;					 \
-    o->value.action.state	  = CompActionStateInitKey;		 \
-    o->value.action.state	 |= CompActionStateInitButton;		 \
-    o->value.action.type	  = CompBindingTypeNone;
-
-    PLANE_TO_OPTION (1);
-    PLANE_TO_OPTION (2);
-    PLANE_TO_OPTION (3);
-    PLANE_TO_OPTION (4);
-    PLANE_TO_OPTION (5);
-    PLANE_TO_OPTION (6);
-    PLANE_TO_OPTION (7);
-    PLANE_TO_OPTION (8);
-    PLANE_TO_OPTION (9);
-    PLANE_TO_OPTION (10);
-    PLANE_TO_OPTION (11);
-    PLANE_TO_OPTION (12);
-}
+static const CompMetadataOptionInfo planeDisplayOptionInfo[] = {
+    { "plane_left", "action", 0, planeLeft, 0 },
+    { "plane_right", "action", 0, planeRight, 0 },
+    { "plane_down", "action", 0, planeDown, 0 },
+    { "plane_up", "action", 0, planeUp, 0 },
+    { "plane_to_1", "action", 0, planeTo, 0 },
+    { "plane_to_2", "action", 0, planeTo, 0 },
+    { "plane_to_3", "action", 0, planeTo, 0 },
+    { "plane_to_4", "action", 0, planeTo, 0 },
+    { "plane_to_5", "action", 0, planeTo, 0 },
+    { "plane_to_6", "action", 0, planeTo, 0 },
+    { "plane_to_7", "action", 0, planeTo, 0 },
+    { "plane_to_8", "action", 0, planeTo, 0 },
+    { "plane_to_9", "action", 0, planeTo, 0 },
+    { "plane_to_10", "action", 0, planeTo, 0 },
+    { "plane_to_11", "action", 0, planeTo, 0 },
+    { "plane_to_12", "action", 0, planeTo, 0 }
+};
 
 static Bool
 planeInitDisplay (CompPlugin  *p,
@@ -722,14 +605,23 @@ planeInitDisplay (CompPlugin  *p,
     if (!pd)
 	return FALSE;
 
-    pd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (pd->screenPrivateIndex < 0)
+    if (!compInitDisplayOptionsFromMetadata (d,
+					     &planeMetadata,
+					     planeDisplayOptionInfo,
+					     pd->opt,
+					     PLANE_N_DISPLAY_OPTIONS))
     {
 	free (pd);
 	return FALSE;
     }
 
-    planeDisplayInitOptions (pd, d->display);
+    pd->screenPrivateIndex = allocateScreenPrivateIndex (d);
+    if (pd->screenPrivateIndex < 0)
+    {
+	compFiniDisplayOptions (d, pd->opt, PLANE_N_DISPLAY_OPTIONS);
+	free (pd);
+	return FALSE;
+    }
 
     WRAP (pd, d, handleEvent, planeHandleEvent);
 
@@ -748,6 +640,8 @@ planeFiniDisplay (CompPlugin  *p,
 
     UNWRAP (pd, d, handleEvent);
 
+    compFiniDisplayOptions (d, pd->opt, PLANE_N_DISPLAY_OPTIONS);
+
     free (pd);
 }
 
@@ -764,24 +658,6 @@ planeInitScreen (CompPlugin *p,
 	return FALSE;
 
     ps->timeoutHandle = 0;
-
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_LEFT].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_RIGHT].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_DOWN].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_UP].value.action);
-
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_1].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_2].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_3].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_4].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_5].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_6].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_7].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_8].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_9].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_10].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_11].value.action);
-    addScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_12].value.action);
 
     WRAP (ps, s, paintTransformedScreen, planePaintTransformedScreen);
     WRAP (ps, s, preparePaintScreen, planePreparePaintScreen);
@@ -800,25 +676,6 @@ planeFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
     PLANE_SCREEN (s);
-    PLANE_DISPLAY (s->display);
-
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_LEFT].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_RIGHT].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_DOWN].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_UP].value.action);
-
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_1].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_2].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_3].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_4].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_5].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_6].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_7].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_8].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_9].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_10].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_11].value.action);
-    removeScreenAction (s, &pd->opt[PLANE_DISPLAY_OPTION_TO_12].value.action);
 
     UNWRAP (ps, s, paintTransformedScreen);
     UNWRAP (ps, s, preparePaintScreen);
@@ -833,9 +690,21 @@ planeFiniScreen (CompPlugin *p,
 static Bool
 planeInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&planeMetadata,
+					 p->vTable->name,
+					 planeDisplayOptionInfo,
+					 PLANE_N_DISPLAY_OPTIONS,
+					 NULL, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&planeMetadata);
 	return FALSE;
+    }
+
+    compAddMetadataFromFile (&planeMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -843,8 +712,8 @@ planeInit (CompPlugin *p)
 static void
 planeFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-	freeDisplayPrivateIndex (displayPrivateIndex);
+    freeDisplayPrivateIndex (displayPrivateIndex);
+    compFiniMetadata (&planeMetadata);
 }
 
 static int
@@ -852,6 +721,12 @@ planeGetVersion (CompPlugin *plugin,
 		 int	    version)
 {
     return ABIVERSION;
+}
+
+static CompMetadata *
+planeGetMetadata (CompPlugin *plugin)
+{
+    return &planeMetadata;
 }
 
 CompPluginDep planeDeps[] = {
@@ -866,7 +741,7 @@ CompPluginFeature planeFeatures[] = {
 CompPluginVTable planeVTable = {
     "plane",
     planeGetVersion,
-    0, /* GetMetadata */
+    planeGetMetadata,
     planeInit,
     planeFini,
     planeInitDisplay,

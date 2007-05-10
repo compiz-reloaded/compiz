@@ -390,7 +390,7 @@ main (int argc, char **argv)
     if (ctx.pluginData)
 	free (ctx.pluginData);
 
-    compAddMetadataFromFile (&coreMetadata, "compiz");
+    compAddMetadataFromFile (&coreMetadata, "core");
 
     if (!disableSm)
 	initSession (clientId);

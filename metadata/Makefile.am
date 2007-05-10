@@ -1,6 +1,6 @@
 xmldir       = $(metadatadir)
 xml_in_files =		  \
-	compiz.xml.in	  \
+	core.xml.in	  \
 	annotate.xml.in   \
 	blur.xml.in	  \
 	clone.xml.in	  \
@@ -10,10 +10,12 @@ xml_in_files =		  \
 	fade.xml.in	  \
 	fs.xml.in	  \
 	gconf.xml.in	  \
+	ini.xml.in	  \
 	inotify.xml.in	  \
 	minimize.xml.in	  \
 	move.xml.in	  \
 	place.xml.in	  \
+	plane.xml.in	  \
 	png.xml.in	  \
 	regex.xml.in	  \
 	resize.xml.in	  \
@@ -32,11 +34,16 @@ xml_DATA     = $(xml_files)
 @INTLTOOL_XML_RULE@
 
 if USE_GCONF
-schemadir   = $(GCONF_SCHEMA_FILE_DIR)
-schema_DATA = $(xml_in_files:.xml.in=.schemas)
+schemadir    = $(GCONF_SCHEMA_FILE_DIR)
+schema_files = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
+schema_DATA  = $(schema_files)
 
-.xml.schemas:
-	xsltproc -o $@ schemas.xslt $*.xml;
+%.schemas: $(xml_files)
+	xsltproc -o $@ schemas.xslt $(subst compiz-,,$*).xml;
+
+xsltdir    = $(stylesheetdir)
+xslt_files = schemas.xslt
+xslt_DATA  = $(xslt_files)
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
@@ -49,4 +56,5 @@ endif
 EXTRA_DIST =		\
 	$(xml_files)    \
 	$(xml_in_files) \
-	schemas.xslt
+	$(xslt_files)	\
+	$(schema_files)

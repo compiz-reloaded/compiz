@@ -53,6 +53,8 @@
 
 static int displayPrivateIndex;
 
+static CompMetadata iniMetadata;
+
 /*
  * IniFileData
  */
@@ -1428,9 +1430,18 @@ iniFiniScreen (CompPlugin *p, CompScreen *s)
 static Bool
 iniInit (CompPlugin *p)
 {
+    if (!compInitPluginMetadataFromInfo (&iniMetadata, p->vTable->name,
+					 0, 0, 0, 0))
+	return FALSE;
+
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
+    {
+	compFiniMetadata (&iniMetadata);
         return FALSE;
+    }
+
+    compAddMetadataFromFile (&iniMetadata, p->vTable->name);
 
     return TRUE;
 }
@@ -1448,10 +1459,16 @@ iniGetVersion (CompPlugin *plugin, int	version)
     return ABIVERSION;
 }
 
+static CompMetadata *
+iniGetMetadata (CompPlugin *plugin)
+{
+    return &iniMetadata;
+}
+
 CompPluginVTable iniVTable = {
     "ini",
     iniGetVersion,
-    0, /* GetMetadata */
+    iniGetMetadata,
     iniInit,
     iniFini,
     iniInitDisplay,

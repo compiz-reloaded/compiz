@@ -142,6 +142,9 @@ if test "$use_gconf" = yes; then
   AC_DEFINE(USE_GCONF, 1, [Build gconf plugin])
 fi
 
+stylesheetdir=$datadir/compiz
+AC_SUBST(stylesheetdir)
+
 AC_ARG_ENABLE(place,
   [  --disable-place         Disable window placement plugin],
   [use_place=$enableval], [use_place=yes])
@@ -426,6 +429,7 @@ fi
 
 AC_OUTPUT([
 compiz.pc
+compiz-gconf.pc
 Makefile
 src/Makefile
 libdecoration/Makefile
