@@ -11,7 +11,6 @@ libcompiz_module     = libcompiz.la
 desktopfilesdir	      = $(DESTDIR)$(windowsettingsdatadir)/gnome/wm-properties
 desktopfiles_in_files = compiz.desktop.in
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
-desktopfiles_DATA     = $(desktopfiles_files)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -20,7 +19,6 @@ if USE_GNOME_KEYBINDINGS
 xmldir       = $(DESTDIR)$(keybindingsdir)
 xml_in_files = 50-compiz-desktop-key.xml.in 50-compiz-key.xml.in
 xml_files    = $(xml_in_files:.xml.in=.xml)
-xml_DATA     = $(xml_files)
 
 @INTLTOOL_XML_NOMERGE_RULE@
 
@@ -69,6 +67,10 @@ INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
 
 noinst_LTLIBRARIES = \
 	$(libcompiz_module)
+
+noinst_DATA =		      \
+	$(desktopfiles_files) \
+	$(xml_files)
 
 EXTRA_DIST =			 \
 	$(desktopfiles_files) 	 \
