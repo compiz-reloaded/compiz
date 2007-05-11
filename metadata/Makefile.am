@@ -39,7 +39,7 @@ schema_files = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
 schema_DATA  = $(schema_files)
 
 %.schemas: $(xml_files)
-	xsltproc -o $@ schemas.xslt $(subst compiz-,,$*).xml;
+	xsltproc -o $@ $(srcdir)/schemas.xslt $(subst compiz-,,$*).xml;
 
 xsltdir    = $(stylesheetdir)
 xslt_files = schemas.xslt
