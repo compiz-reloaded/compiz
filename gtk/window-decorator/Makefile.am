@@ -38,3 +38,6 @@ bin_PROGRAMS = $(gtk_window_decorator_program)
 EXTRA_DIST =		\
 	$(schema_files) \
 	$(schema_in_files)
+
+DISTCLEANFILES = \
+	$(schema_files)

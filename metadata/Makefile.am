@@ -58,3 +58,7 @@ EXTRA_DIST =		\
 	$(xml_in_files) \
 	$(xslt_files)	\
 	$(schema_files)
+
+DISTCLEANFILES =	\
+	$(xml_files)    \
+	$(schema_files)

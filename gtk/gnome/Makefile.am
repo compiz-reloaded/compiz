@@ -77,3 +77,6 @@ EXTRA_DIST =			 \
 	$(desktopfiles_in_files) \
 	$(xml_files)		 \
 	$(xml_in_files)
+
+DISTCLEANFILES = \
+	$(noinst_DATA)
