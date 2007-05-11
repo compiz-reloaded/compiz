@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070503
+#define ABIVERSION 20070506
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2677,10 +2677,6 @@ activateWindow (CompWindow *w);
 void
 closeWindow (CompWindow *w,
 	     Time	serverTime);
-
-void
-getOuterRectOfWindow (CompWindow *w,
-		      XRectangle *r);
 
 Bool
 constrainNewWindowSize (CompWindow *w,
