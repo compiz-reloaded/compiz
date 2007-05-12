@@ -1507,6 +1507,7 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 	    char	   *type;
 	    char	   *shortDesc = NULL;
 	    char	   *longDesc = NULL;
+	    const char     *blankStr = "";
 
 	    reply = dbus_message_new_method_return (message);
 
@@ -1527,9 +1528,25 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 		}
 	    }
 
+	    if (shortDesc)
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &shortDesc,
+					  DBUS_TYPE_INVALID);
+	    else
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &blankStr,
+					  DBUS_TYPE_INVALID);
+
+	    if (longDesc)
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &longDesc,
+					  DBUS_TYPE_INVALID);
+	    else
+		dbus_message_append_args (reply,
+					  DBUS_TYPE_STRING, &blankStr,
+					  DBUS_TYPE_INVALID);
+
 	    dbus_message_append_args (reply,
-				      DBUS_TYPE_STRING, &shortDesc,
-				      DBUS_TYPE_STRING, &longDesc,
 				      DBUS_TYPE_STRING, &type,
 				      DBUS_TYPE_INVALID);
 
@@ -1713,6 +1730,7 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	char		  sig[2];
 	char		  *shortDesc = NULL;
 	char		  *longDesc = NULL;
+	const char	  *blankStr = "";
 
 	reply = dbus_message_new_method_return (message);
 
@@ -1730,9 +1748,25 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
 	dbus_message_append_args (reply,
 				  DBUS_TYPE_STRING, &p->vTable->name,
-				  DBUS_TYPE_STRING, &shortDesc,
-				  DBUS_TYPE_STRING, &longDesc,
 				  DBUS_TYPE_INVALID);
+
+	if (shortDesc)
+	    dbus_message_append_args (reply,
+				      DBUS_TYPE_STRING, &shortDesc,
+				      DBUS_TYPE_INVALID);
+	else
+	    dbus_message_append_args (reply,
+				      DBUS_TYPE_STRING, &blankStr,
+				      DBUS_TYPE_INVALID);
+
+	if (longDesc)
+	    dbus_message_append_args (reply,
+				      DBUS_TYPE_STRING, &longDesc,
+				      DBUS_TYPE_INVALID);
+	else
+	    dbus_message_append_args (reply,
+				      DBUS_TYPE_STRING, &blankStr,
+				      DBUS_TYPE_INVALID);
 
 	if (shortDesc)
 	    free (shortDesc);
