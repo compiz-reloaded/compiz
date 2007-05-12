@@ -305,8 +305,7 @@ getBumpMapFragmentFunction (CompScreen  *s,
 		  "MOV offset, normal;"
 
 		  /* remove scale and bias from normal */
-		  "SUB normal, normal, 0.5;"
-		  "MUL normal, normal, 2.0;"
+		  "MAD normal, normal, 2.0, -1.0;"
 
 		  /* normalize the normal map */
 		  "DP3 temp, normal, normal;"
