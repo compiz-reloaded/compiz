@@ -415,6 +415,8 @@ allocTexture (CompScreen *s,
 #endif
 
 		  ws->t0);
+
+    glBindTexture (ws->target, 0);
 }
 
 static int
@@ -547,13 +549,15 @@ fboUpdate (CompScreen *s,
 
     glDisable (GL_FRAGMENT_PROGRAM_ARB);
 
-    glBindTexture (ws->target, 0);
     glTexParameteri (ws->target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri (ws->target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture (ws->target, 0);
     (*s->activeTexture) (GL_TEXTURE0_ARB);
     glTexParameteri (ws->target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri (ws->target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture (ws->target, 0);
+
+    glDisable (ws->target);
 
     fboEpilogue (s);
 
