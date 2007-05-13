@@ -1396,7 +1396,7 @@ waterTitleWave (CompDisplay     *d,
 	XPoint p[2];
 
 	p[0].x = w->attrib.x - w->input.left;
-	p[0].y = w->attrib.y - (w->input.top >> 2);
+	p[0].y = w->attrib.y - w->input.top / 2;
 
 	p[1].x = w->attrib.x + w->width + w->input.right;
 	p[1].y = p[0].y;
