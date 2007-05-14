@@ -89,6 +89,7 @@ COMPIZ_REQUIRES="libpng	    \
 		 ice	    \
 		 sm	    \
 		 libxml-2.0 \
+		 libxslt    \
 		 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
