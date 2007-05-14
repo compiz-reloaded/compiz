@@ -1329,10 +1329,18 @@ dbusAppendOptionValue (CompDisplay     *d,
 	int	   edgeButton = 0;
 
 	if (a->type & CompBindingTypeKey)
-	    key = keyValue = keyBindingToString (d, &a->key);
+	{
+	    keyValue = keyBindingToString (d, &a->key);
+	    if (keyValue)
+		key = keyValue;
+	}
 
 	if (a->type & CompBindingTypeButton)
-	    button = buttonValue = buttonBindingToString (d, &a->button);
+	{
+	    buttonValue = buttonBindingToString (d, &a->button);
+	    if (buttonValue)
+		button = buttonValue;
+	}
 
 	for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	{
