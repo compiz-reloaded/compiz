@@ -123,6 +123,11 @@ AC_MSG_RESULT($GL_LIBS)
 AC_SUBST(GL_CFLAGS)
 AC_SUBST(GL_LIBS)
 
+AC_CHECK_PROGS(XSLTPROC, xsltproc)
+if test -z "$XSLTPROC"; then
+  AC_MSG_ERROR([Couldn't find xsltproc])
+fi
+
 AC_ARG_ENABLE(gconf,
   [  --disable-gconf         Disable gconf plugin],
   [use_gconf=$enableval], [use_gconf=yes])
