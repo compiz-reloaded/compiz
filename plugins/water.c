@@ -1582,7 +1582,7 @@ static const CompMetadataOptionInfo waterDisplayOptionInfo[] = {
     { "toggle_rain", "action", 0, waterToggleRain, 0 },
     { "toggle_wiper", "action", 0, waterToggleWiper, 0 },
     { "offset_scale", "float", "<min>0</min>", 0, 0 },
-    { "rain_delay", "int", "<min>0</min>", 0, 0 },
+    { "rain_delay", "int", "<min>1</min>", 0, 0 },
     { "title_wave", "action", 0, waterTitleWave, 0 },
     { "point", "action", 0, waterPoint, 0 },
     { "line", "action", 0, waterLine, 0 }
