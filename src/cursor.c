@@ -53,7 +53,7 @@ addCursor (CompScreen *s)
 
 	updateCursor (c, 0, 0, 0);
 
-	XFixesHideCursor (s->display->display, s->root);
+	/* XFixesHideCursor (s->display->display, s->root); */
     }
 }
 
