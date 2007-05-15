@@ -89,6 +89,7 @@ COMPIZ_REQUIRES="libpng	    \
 		 ice	    \
 		 sm	    \
 		 libxml-2.0 \
+		 libxslt    \
 		 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
@@ -121,6 +122,11 @@ AC_MSG_RESULT($GL_LIBS)
 
 AC_SUBST(GL_CFLAGS)
 AC_SUBST(GL_LIBS)
+
+AC_CHECK_PROGS(XSLTPROC, xsltproc)
+if test -z "$XSLTPROC"; then
+  AC_MSG_ERROR([Couldn't find xsltproc])
+fi
 
 AC_ARG_ENABLE(gconf,
   [  --disable-gconf         Disable gconf plugin],
