@@ -794,7 +794,7 @@ rotateLeftWithWindow (CompDisplay     *d,
 
     o[4].type	 = CompOptionTypeInt;
     o[4].name	 = "window";
-    o[4].value.i = getIntOptionNamed (option, nOption, "window", 0);
+    o[4].value.i = d->activeWindow;
 
     rotateWithWindow (d, NULL, 0, o, 5);
 
@@ -828,7 +828,7 @@ rotateRightWithWindow (CompDisplay     *d,
 
     o[4].type	 = CompOptionTypeInt;
     o[4].name	 = "window";
-    o[4].value.i = getIntOptionNamed (option, nOption, "window", 0);
+    o[4].value.i = d->activeWindow;
 
     rotateWithWindow (d, NULL, 0, o, 5);
 
@@ -1292,7 +1292,7 @@ rotateToWithWindow (CompDisplay     *d,
 
 	o[4].type    = CompOptionTypeInt;
 	o[4].name    = "window";
-	o[4].value.i = getIntOptionNamed (option, nOption, "window", 0);
+	o[4].value.i = d->activeWindow;
 
 	rotateWithWindow (d, NULL, 0, o, 5);
     }
