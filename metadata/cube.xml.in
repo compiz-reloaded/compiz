@@ -14,6 +14,7 @@
 	    <option name="next_slide" type="action">
 		<_short>Next Slide</_short>
 		<_long>Advance to next slide</_long>
+		<allowed key="true" button="true"/>
 		<default>
 		    <key>space</key>
 		</default>
@@ -21,6 +22,7 @@
 	    <option name="prev_slide" type="action">
 		<_short>Prev Slide</_short>
 		<_long>Go back to previous slide</_long>
+		<allowed key="true" button="true"/>
 		<default>
 		    <key>Backspace</key>
 		</default>

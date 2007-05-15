@@ -1744,9 +1744,9 @@ cubeSetDisplayOption (CompPlugin      *plugin,
 static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
     { "unfold", "action", 0, cubeUnfold, cubeFold },
     { "next_slide", "action", "<passive_grab>false</passive_grab>",
-      cubePrevImage, 0 },
+      cubeNextImage, 0 },
     { "prev_slide", "action", "<passive_grab>false</passive_grab>",
-      cubeNextImage, 0 }
+      cubePrevImage, 0 }
 };
 
 static Bool
