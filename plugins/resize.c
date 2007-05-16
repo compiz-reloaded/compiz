@@ -307,8 +307,6 @@ resizeTerminate (CompDisplay	 *d,
 static void
 resizeUpdateWindowSize (CompDisplay *d)
 {
-    int width, height;
-
     RESIZE_DISPLAY (d);
 
     if (!rd->w)
@@ -317,23 +315,17 @@ resizeUpdateWindowSize (CompDisplay *d)
     if (rd->w->syncWait)
 	return;
 
-    width  = rd->geometry.width;
-    height = rd->geometry.height;
-
-    if (rd->w->serverWidth != width || rd->w->serverHeight != height)
+    if (rd->w->serverX      != rd->geometry.x     ||
+	rd->w->serverY      != rd->geometry.y     ||
+	rd->w->serverWidth  != rd->geometry.width ||
+	rd->w->serverHeight != rd->geometry.height)
     {
 	XWindowChanges xwc;
 
-	xwc.x = rd->w->serverX;
-	if (rd->mask & ResizeLeftMask)
-	    xwc.x -= width - rd->w->serverWidth;
-
-	xwc.y = rd->w->serverY;
-	if (rd->mask & ResizeUpMask)
-	    xwc.y -= height - rd->w->serverHeight;
-
-	xwc.width  = width;
-	xwc.height = height;
+	xwc.x	   = rd->geometry.x;
+	xwc.y	   = rd->geometry.y;
+	xwc.width  = rd->geometry.width;
+	xwc.height = rd->geometry.height;
 
 	sendSyncRequest (rd->w);
 
@@ -436,6 +428,12 @@ resizeHandleMotionEvent (CompScreen *s,
 		w = rd->w->serverWidth;
 
 	    constrainNewWindowSize (rd->w, w, h, &w, &h);
+
+	    if (rd->mask & ResizeLeftMask)
+		rd->geometry.x -= w - rd->geometry.width;
+
+	    if (rd->mask & ResizeUpMask)
+		rd->geometry.y -= h - rd->geometry.height;
 
 	    rd->geometry.width  = w;
 	    rd->geometry.height = h;
