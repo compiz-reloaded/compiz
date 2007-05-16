@@ -137,9 +137,9 @@ resizeInitiate (CompDisplay     *d,
 	mods = getIntOptionNamed (option, nOption, "modifiers", 0);
 
 	x = getIntOptionNamed (option, nOption, "x",
-			       w->attrib.x + (w->width / 2));
+			       w->serverX + (w->serverWidth / 2));
 	y = getIntOptionNamed (option, nOption, "y",
-			       w->attrib.y + (w->height / 2));
+			       w->serverY + (w->serverHeight / 2));
 
 	button = getIntOptionNamed (option, nOption, "button", -1);
 
@@ -156,10 +156,10 @@ resizeInitiate (CompDisplay     *d,
 	}
 	else if (!mask)
 	{
-	    mask |= ((x - w->attrib.x) < (w->width / 2)) ?
+	    mask |= ((x - w->serverX) < (w->serverWidth / 2)) ?
 		ResizeLeftMask : ResizeRightMask;
 
-	    mask |= ((y - w->attrib.y) < (w->height / 2)) ?
+	    mask |= ((y - w->serverY) < (w->serverHeight / 2)) ?
 		ResizeUpMask : ResizeDownMask;
 	}
 
@@ -185,15 +185,15 @@ resizeInitiate (CompDisplay     *d,
 
 	rd->w	        = w;
 	rd->mask        = mask;
-	rd->ucWidth     = w->attrib.width;
-	rd->ucHeight    = w->attrib.height;
-	rd->width       = w->attrib.width;
-	rd->height      = w->attrib.height;
+	rd->ucWidth     = w->serverWidth;
+	rd->ucHeight    = w->serverHeight;
+	rd->width       = w->serverWidth;
+	rd->height      = w->serverHeight;
 
-	rd->savedGeometry.x	 = w->attrib.x;
-	rd->savedGeometry.y	 = w->attrib.y;
-	rd->savedGeometry.width  = w->attrib.width;
-	rd->savedGeometry.height = w->attrib.height;
+	rd->savedGeometry.x	 = w->serverX;
+	rd->savedGeometry.y	 = w->serverY;
+	rd->savedGeometry.width  = w->serverWidth;
+	rd->savedGeometry.height = w->serverHeight;
 
 	rd->pointerDx = x - lastPointerX;
 	rd->pointerDy = y - lastPointerY;
@@ -248,8 +248,8 @@ resizeInitiate (CompDisplay     *d,
 	    {
 		int xRoot, yRoot;
 
-		xRoot = w->attrib.x + (w->width  / 2);
-		yRoot = w->attrib.y + (w->height / 2);
+		xRoot = w->serverX + (w->serverWidth  / 2);
+		yRoot = w->serverY + (w->serverHeight / 2);
 
 		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
 	    }
@@ -446,10 +446,10 @@ resizeHandleKeyEvent (CompScreen *s,
 	    {
 		int x, y, left, top, width, height;
 
-		left   = w->attrib.x - w->input.left;
-		top    = w->attrib.y - w->input.top;
-		width  = w->input.left + w->attrib.width  + w->input.right;
-		height = w->input.top  + w->attrib.height + w->input.bottom;
+		left   = w->serverX - w->input.left;
+		top    = w->serverY - w->input.top;
+		width  = w->input.left + w->serverWidth  + w->input.right;
+		height = w->input.top  + w->serverHeight + w->input.bottom;
 
 		x = left + width  * (rKeys[i].dx + 1) / 2;
 		y = top  + height * (rKeys[i].dy + 1) / 2;
