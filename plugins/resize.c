@@ -68,17 +68,17 @@ typedef struct _ResizeDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
-    CompWindow	      *w;
-    XWindowAttributes savedAttrib;
-    int		      releaseButton;
-    unsigned int      mask;
-    int		      width;
-    int		      height;
-    int		      ucWidth;	/* unconstrained width */
-    int		      ucHeight;	/* unconstrained height */
-    int		      pointerDx;
-    int		      pointerDy;
-    KeyCode	      key[NUM_KEYS];
+    CompWindow	 *w;
+    XRectangle	 savedGeometry;
+    int		 releaseButton;
+    unsigned int mask;
+    int		 width;
+    int		 height;
+    int		 ucWidth;	/* unconstrained width */
+    int		 ucHeight;	/* unconstrained height */
+    int		 pointerDx;
+    int		 pointerDy;
+    KeyCode	 key[NUM_KEYS];
 } ResizeDisplay;
 
 typedef struct _ResizeScreen {
@@ -189,7 +189,11 @@ resizeInitiate (CompDisplay     *d,
 	rd->ucHeight    = w->attrib.height;
 	rd->width       = w->attrib.width;
 	rd->height      = w->attrib.height;
-	rd->savedAttrib = w->attrib;
+
+	rd->savedGeometry.x	 = w->attrib.x;
+	rd->savedGeometry.y	 = w->attrib.y;
+	rd->savedGeometry.width  = w->attrib.width;
+	rd->savedGeometry.height = w->attrib.height;
 
 	rd->pointerDx = x - lastPointerX;
 	rd->pointerDy = y - lastPointerY;
@@ -276,10 +280,10 @@ resizeTerminate (CompDisplay	 *d,
 
 	    sendSyncRequest (rd->w);
 
-	    xwc.x      = rd->savedAttrib.x;
-	    xwc.y      = rd->savedAttrib.y;
-	    xwc.width  = rd->savedAttrib.width;
-	    xwc.height = rd->savedAttrib.height;
+	    xwc.x      = rd->savedGeometry.x;
+	    xwc.y      = rd->savedGeometry.y;
+	    xwc.width  = rd->savedGeometry.width;
+	    xwc.height = rd->savedGeometry.height;
 
 	    configureXWindow (rd->w,
 			      CWX | CWY | CWWidth | CWHeight,
