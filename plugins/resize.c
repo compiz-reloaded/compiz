@@ -326,9 +326,12 @@ resizeUpdateWindowSize (CompDisplay *d)
     if (rd->w->syncWait)
 	return;
 
-    if (constrainNewWindowSize (rd->w,
-				rd->width, rd->height,
-				&width, &height))
+    width  = rd->width;
+    height = rd->height;
+
+    constrainNewWindowSize (rd->w, width, height, &width, &height);
+
+    if (rd->w->serverWidth != width || rd->w->serverHeight != height)
     {
 	XWindowChanges xwc;
 
