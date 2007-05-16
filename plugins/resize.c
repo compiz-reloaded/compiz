@@ -399,47 +399,44 @@ resizeHandleMotionEvent (CompScreen *s,
 
     if (rs->grabIndex)
     {
+	int w, h;
+
 	RESIZE_DISPLAY (s->display);
 
 	rd->pointerDx += xRoot - lastPointerX;
 	rd->pointerDy += yRoot - lastPointerY;
 
-	if (rd->pointerDx || rd->pointerDy)
-	{
-	    int w, h;
+	w = rd->savedGeometry.width;
+	h = rd->savedGeometry.height;
 
-	    w = rd->savedGeometry.width;
-	    h = rd->savedGeometry.height;
+	if (rd->mask & ResizeLeftMask)
+	    w -= rd->pointerDx;
+	else if (rd->mask & ResizeRightMask)
+	    w += rd->pointerDx;
 
-	    if (rd->mask & ResizeLeftMask)
-		w -= rd->pointerDx;
-	    else if (rd->mask & ResizeRightMask)
-		w += rd->pointerDx;
+	if (rd->mask & ResizeUpMask)
+	    h -= rd->pointerDy;
+	else if (rd->mask & ResizeDownMask)
+	    h += rd->pointerDy;
 
-	    if (rd->mask & ResizeUpMask)
-		h -= rd->pointerDy;
-	    else if (rd->mask & ResizeDownMask)
-		h += rd->pointerDy;
+	if (rd->w->state & CompWindowStateMaximizedVertMask)
+	    h = rd->w->serverHeight;
 
-	    if (rd->w->state & CompWindowStateMaximizedVertMask)
-		h = rd->w->serverHeight;
+	if (rd->w->state & CompWindowStateMaximizedHorzMask)
+	    w = rd->w->serverWidth;
 
-	    if (rd->w->state & CompWindowStateMaximizedHorzMask)
-		w = rd->w->serverWidth;
+	constrainNewWindowSize (rd->w, w, h, &w, &h);
 
-	    constrainNewWindowSize (rd->w, w, h, &w, &h);
+	if (rd->mask & ResizeLeftMask)
+	    rd->geometry.x -= w - rd->geometry.width;
 
-	    if (rd->mask & ResizeLeftMask)
-		rd->geometry.x -= w - rd->geometry.width;
+	if (rd->mask & ResizeUpMask)
+	    rd->geometry.y -= h - rd->geometry.height;
 
-	    if (rd->mask & ResizeUpMask)
-		rd->geometry.y -= h - rd->geometry.height;
+	rd->geometry.width  = w;
+	rd->geometry.height = h;
 
-	    rd->geometry.width  = w;
-	    rd->geometry.height = h;
-
-	    resizeUpdateWindowSize (s->display);
-	}
+	resizeUpdateWindowSize (s->display);
     }
 }
 
