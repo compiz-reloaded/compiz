@@ -2,6 +2,12 @@
     <plugin name="blur">
 	<_short>Blur Windows</_short>
 	<_long>Blur windows</_long>
+	<feature>blur</feature>
+	<deps>
+		<relation type="before">
+			<plugin>video</plugin>
+		</relation>
+	</deps>
 	<display>
 	    <option name="pulse" type="action">
 		<_short>Pulse</_short>
