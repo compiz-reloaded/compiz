@@ -305,8 +305,7 @@ getBumpMapFragmentFunction (CompScreen  *s,
 		  "MOV offset, normal;"
 
 		  /* remove scale and bias from normal */
-		  "SUB normal, normal, 0.5;"
-		  "MUL normal, normal, 2.0;"
+		  "MAD normal, normal, 2.0, -1.0;"
 
 		  /* normalize the normal map */
 		  "DP3 temp, normal, normal;"
@@ -416,6 +415,8 @@ allocTexture (CompScreen *s,
 #endif
 
 		  ws->t0);
+
+    glBindTexture (ws->target, 0);
 }
 
 static int
@@ -548,13 +549,15 @@ fboUpdate (CompScreen *s,
 
     glDisable (GL_FRAGMENT_PROGRAM_ARB);
 
-    glBindTexture (ws->target, 0);
     glTexParameteri (ws->target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri (ws->target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture (ws->target, 0);
     (*s->activeTexture) (GL_TEXTURE0_ARB);
     glTexParameteri (ws->target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri (ws->target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture (ws->target, 0);
+
+    glDisable (ws->target);
 
     fboEpilogue (s);
 
@@ -1393,7 +1396,7 @@ waterTitleWave (CompDisplay     *d,
 	XPoint p[2];
 
 	p[0].x = w->attrib.x - w->input.left;
-	p[0].y = w->attrib.y - (w->input.top >> 2);
+	p[0].y = w->attrib.y - w->input.top / 2;
 
 	p[1].x = w->attrib.x + w->width + w->input.right;
 	p[1].y = p[0].y;
@@ -1579,7 +1582,7 @@ static const CompMetadataOptionInfo waterDisplayOptionInfo[] = {
     { "toggle_rain", "action", 0, waterToggleRain, 0 },
     { "toggle_wiper", "action", 0, waterToggleWiper, 0 },
     { "offset_scale", "float", "<min>0</min>", 0, 0 },
-    { "rain_delay", "int", "<min>0</min>", 0, 0 },
+    { "rain_delay", "int", "<min>1</min>", 0, 0 },
     { "title_wave", "action", 0, waterTitleWave, 0 },
     { "point", "action", 0, waterPoint, 0 },
     { "line", "action", 0, waterLine, 0 }

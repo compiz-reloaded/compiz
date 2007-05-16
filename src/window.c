@@ -117,30 +117,28 @@ recalcNormalHints (CompWindow *window)
     window->sizeHints.width  = window->serverWidth;
     window->sizeHints.height = window->serverHeight;
 
-    if (window->sizeHints.flags & PMinSize)
+    if (!(window->sizeHints.flags & PBaseSize))
     {
-	window->sizeHints.base_width  = window->sizeHints.min_width;
-	window->sizeHints.base_height = window->sizeHints.min_height;
-    }
-    else
-    {
-	window->sizeHints.base_width  = 0;
-	window->sizeHints.base_height = 0;
+	if (window->sizeHints.flags & PMinSize)
+	{
+	    window->sizeHints.base_width  = window->sizeHints.min_width;
+	    window->sizeHints.base_height = window->sizeHints.min_height;
+	}
+	else
+	{
+	    window->sizeHints.base_width  = 0;
+	    window->sizeHints.base_height = 0;
+	}
+
+	window->sizeHints.flags |= PBaseSize;
     }
 
-    window->sizeHints.flags |= PBaseSize;
-
-    if (window->sizeHints.flags & PBaseSize)
+    if (!(window->sizeHints.flags & PMinSize))
     {
 	window->sizeHints.min_width  = window->sizeHints.base_width;
 	window->sizeHints.min_height = window->sizeHints.base_height;
+	window->sizeHints.flags |= PMinSize;
     }
-    else
-    {
-	window->sizeHints.min_width  = 0;
-	window->sizeHints.min_height = 0;
-    }
-    window->sizeHints.flags |= PMinSize;
 
     if (!(window->sizeHints.flags & PMaxSize))
     {

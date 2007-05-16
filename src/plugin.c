@@ -186,15 +186,26 @@ initPluginForDisplay (CompPlugin  *p,
     CompScreen *s, *failedScreen = d->screens;
     Bool       status = TRUE;
 
-    if (!(*p->vTable->initDisplay) (p, d))
-	return FALSE;
-
     for (s = d->screens; s; s = s->next)
     {
+	if (p->vTable->initScreen)
+	{
+	    if (!(*p->vTable->initScreen) (p, s))
+	    {
+		failedScreen = s;
+		status = FALSE;
+		break;
+	    }
+	}
+
 	if (!(*s->initPluginForScreen) (p, s))
 	{
 	    fprintf (stderr, "%s: Plugin '%s':initScreen failed\n",
 		     programName, p->vTable->name);
+
+	    if (p->vTable->finiScreen)
+		(*p->vTable->finiScreen) (p, s);
+
 	    failedScreen = s;
 	    status = FALSE;
 	    break;
@@ -202,7 +213,12 @@ initPluginForDisplay (CompPlugin  *p,
     }
 
     for (s = d->screens; s != failedScreen; s = s->next)
+    {
 	(*s->finiPluginForScreen) (p, s);
+
+	if (p->vTable->finiScreen)
+	    (*p->vTable->finiScreen) (p, s);
+    }
 
     return status;
 }
@@ -214,9 +230,12 @@ finiPluginForDisplay (CompPlugin  *p,
     CompScreen  *s;
 
     for (s = d->screens; s; s = s->next)
+    {
 	(*s->finiPluginForScreen) (p, s);
 
-    (*p->vTable->finiDisplay) (p, d);
+	if (p->vTable->finiScreen)
+	    (*p->vTable->finiScreen) (p, s);
+    }
 }
 
 Bool
@@ -224,12 +243,6 @@ initPluginForScreen (CompPlugin *p,
 		     CompScreen *s)
 {
     Bool status = TRUE;
-
-    if (p->vTable->initScreen)
-    {
-	if (!(*p->vTable->initScreen) (p, s))
-	    return FALSE;
-    }
 
     if (p->vTable->initWindow)
     {
@@ -268,9 +281,6 @@ finiPluginForScreen (CompPlugin *p,
 	for (w = s->windows; w; w = w->next)
 	    (*p->vTable->finiWindow) (p, w);
     }
-
-    if (p->vTable->finiScreen)
-	(*p->vTable->finiScreen) (p, s);
 }
 
 static Bool
@@ -297,6 +307,17 @@ initPlugin (CompPlugin *p)
 
     if (d)
     {
+	if (p->vTable->initDisplay)
+	{
+	    if (!(*p->vTable->initDisplay) (p, d))
+	    {
+		(*p->vTable->fini) (p);
+
+		return FALSE;
+
+	    }
+	}
+
 	if (!(*d->initPluginForDisplay) (p, d))
 	{
 	    fprintf (stderr, "%s: Plugin '%s':initDisplay failed\n",
@@ -317,7 +338,12 @@ finiPlugin (CompPlugin *p)
     CompDisplay *d = compDisplays;
 
     if (d)
+    {
 	(*d->finiPluginForDisplay) (p, d);
+
+	if (p->vTable->finiDisplay)
+	    (*p->vTable->finiDisplay) (p, d);
+    }
 
     (*p->vTable->fini) (p);
 }
