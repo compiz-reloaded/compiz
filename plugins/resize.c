@@ -81,6 +81,8 @@ typedef struct _ResizeDisplay {
 typedef struct _ResizeScreen {
     int grabIndex;
 
+    WindowResizeNotifyProc windowResizeNotify;
+
     Cursor leftCursor;
     Cursor rightCursor;
     Cursor upCursor;
@@ -265,9 +267,11 @@ resizeTerminate (CompDisplay	 *d,
 
     if (rd->w)
     {
-	RESIZE_SCREEN (rd->w->screen);
+	CompScreen *s = rd->w->screen;
 
-	(rd->w->screen->windowUngrabNotify) (rd->w);
+	RESIZE_SCREEN (s);
+
+	(s->windowUngrabNotify) (rd->w);
 
 	if (state & CompActionStateCancel)
 	{
@@ -286,16 +290,15 @@ resizeTerminate (CompDisplay	 *d,
 	}
 	else
 	{
-	    syncWindowPosition (rd->w);
+	    rd->w = NULL;
 	}
 
 	if (rs->grabIndex)
 	{
-	    removeScreenGrab (rd->w->screen, rs->grabIndex, NULL);
+	    removeScreenGrab (s, rs->grabIndex, NULL);
 	    rs->grabIndex = 0;
 	}
 
-	rd->w		  = 0;
 	rd->releaseButton = 0;
     }
 
@@ -607,6 +610,24 @@ resizeHandleEvent (CompDisplay *d,
     }
 }
 
+static void
+resizeWindowResizeNotify (CompWindow *w,
+			  int	     dx,
+			  int        dy,
+			  int	     dwidth,
+			  int	     dheight)
+{
+    RESIZE_DISPLAY (w->screen->display);
+    RESIZE_SCREEN (w->screen);
+
+    if (rd->w == w && !rs->grabIndex)
+	rd->w = NULL;
+
+    UNWRAP (rs, w->screen, windowResizeNotify);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
+    WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
+}
+
 static CompOption *
 resizeGetDisplayOptions (CompPlugin  *plugin,
 			 CompDisplay *display,
@@ -734,6 +755,8 @@ resizeInitScreen (CompPlugin *p,
     rs->cursor[2] = rs->upCursor;
     rs->cursor[3] = rs->downCursor;
 
+    WRAP (rs, s, windowResizeNotify, resizeWindowResizeNotify);
+
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
     return TRUE;
@@ -763,6 +786,8 @@ resizeFiniScreen (CompPlugin *p,
 	XFreeCursor (s->display->display, rs->downLeftCursor);
     if (rs->downRightCursor)
 	XFreeCursor (s->display->display, rs->downRightCursor);
+
+    UNWRAP (rs, s, windowResizeNotify);
 
     free (rs);
 }
