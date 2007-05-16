@@ -70,10 +70,9 @@ typedef struct _ResizeDisplay {
 
     CompWindow	 *w;
     XRectangle	 savedGeometry;
+    XRectangle	 geometry;
     int		 releaseButton;
     unsigned int mask;
-    int		 width;
-    int		 height;
     int		 pointerDx;
     int		 pointerDy;
     KeyCode	 key[NUM_KEYS];
@@ -184,13 +183,12 @@ resizeInitiate (CompDisplay     *d,
 	rd->w	 = w;
 	rd->mask = mask;
 
-	rd->width  = w->serverWidth;
-	rd->height = w->serverHeight;
-
 	rd->savedGeometry.x	 = w->serverX;
 	rd->savedGeometry.y	 = w->serverY;
 	rd->savedGeometry.width  = w->serverWidth;
 	rd->savedGeometry.height = w->serverHeight;
+
+	rd->geometry = rd->savedGeometry;
 
 	rd->pointerDx = x - lastPointerX;
 	rd->pointerDy = y - lastPointerY;
@@ -316,23 +314,11 @@ resizeUpdateWindowSize (CompDisplay *d)
     if (!rd->w)
 	return;
 
-    if (rd->w->state & CompWindowStateMaximizedVertMask)
-	rd->height = rd->w->serverHeight;
-
-    if (rd->w->state & CompWindowStateMaximizedHorzMask)
-	rd->width = rd->w->serverWidth;
-
-    if (rd->width  == rd->w->serverWidth &&
-	rd->height == rd->w->serverHeight)
-	return;
-
     if (rd->w->syncWait)
 	return;
 
-    width  = rd->width;
-    height = rd->height;
-
-    constrainNewWindowSize (rd->w, width, height, &width, &height);
+    width  = rd->geometry.width;
+    height = rd->geometry.height;
 
     if (rd->w->serverWidth != width || rd->w->serverHeight != height)
     {
@@ -356,54 +342,6 @@ resizeUpdateWindowSize (CompDisplay *d)
 			  &xwc);
     }
 }
-
-static void
-resizeConstrainMinMax (CompWindow *w,
-		       int        width,
-		       int        height,
-		       int        *newWidth,
-		       int        *newHeight)
-{
-    const XSizeHints *hints = &w->sizeHints;
-    int		     min_width = 0;
-    int		     min_height = 0;
-    int		     max_width = MAXSHORT;
-    int		     max_height = MAXSHORT;
-
-    if ((hints->flags & PBaseSize) && (hints->flags & PMinSize))
-    {
-	min_width = hints->min_width;
-	min_height = hints->min_height;
-    }
-    else if (hints->flags & PBaseSize)
-    {
-	min_width = hints->base_width;
-	min_height = hints->base_height;
-    }
-    else if (hints->flags & PMinSize)
-    {
-	min_width = hints->min_width;
-	min_height = hints->min_height;
-    }
-
-    if (hints->flags & PMaxSize)
-    {
-	max_width = hints->max_width;
-	max_height = hints->max_height;
-    }
-
-#define CLAMP(v, min, max) ((v) <= (min) ? (min) : (v) >= (max) ? (max) : (v))
-
-    /* clamp width and height to min and max values */
-    width  = CLAMP (width, min_width, max_width);
-    height = CLAMP (height, min_height, max_height);
-
-#undef CLAMP
-
-    *newWidth  = width;
-    *newHeight = height;
-}
-
 
 static void
 resizeHandleKeyEvent (CompScreen *s,
@@ -491,10 +429,16 @@ resizeHandleMotionEvent (CompScreen *s,
 	    else if (rd->mask & ResizeDownMask)
 		h += rd->pointerDy;
 
-	    resizeConstrainMinMax (rd->w, w, h, &w, &h);
+	    if (rd->w->state & CompWindowStateMaximizedVertMask)
+		h = rd->w->serverHeight;
 
-	    rd->width  = w;
-	    rd->height = h;
+	    if (rd->w->state & CompWindowStateMaximizedHorzMask)
+		w = rd->w->serverWidth;
+
+	    constrainNewWindowSize (rd->w, w, h, &w, &h);
+
+	    rd->geometry.width  = w;
+	    rd->geometry.height = h;
 
 	    resizeUpdateWindowSize (s->display);
 	}
