@@ -315,9 +315,7 @@ resizeUpdateWindowSize (CompDisplay *d)
     if (rd->w->syncWait)
 	return;
 
-    if (rd->w->serverX      != rd->geometry.x     ||
-	rd->w->serverY      != rd->geometry.y     ||
-	rd->w->serverWidth  != rd->geometry.width ||
+    if (rd->w->serverWidth  != rd->geometry.width ||
 	rd->w->serverHeight != rd->geometry.height)
     {
 	XWindowChanges xwc;
