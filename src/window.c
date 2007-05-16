@@ -3537,8 +3537,8 @@ moveResizeWindow (CompWindow     *w,
 	int width, height;
 
 	if (!constrainNewWindowSize (w,
-	     			     xwc->width, xwc->height,
-	     			     &width, &height))
+				     xwc->width, xwc->height,
+				     &width, &height))
 	{
 	    width  = xwc->width;
 	    height = xwc->height;
@@ -3549,7 +3549,7 @@ moveResizeWindow (CompWindow     *w,
 	    xwcm |= CWWidth;
 	    xwc->width = width;
 	}
-     	else
+	else
 	    xwcm &= ~CWWidth;
 
 	if (height != w->serverHeight)
