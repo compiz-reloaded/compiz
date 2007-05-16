@@ -312,9 +312,6 @@ resizeUpdateWindowSize (CompDisplay *d)
 {
     RESIZE_DISPLAY (d);
 
-    if (!rd->w)
-	return;
-
     if (rd->w->syncWait)
 	return;
 
