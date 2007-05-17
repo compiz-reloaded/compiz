@@ -648,7 +648,7 @@ shade (CompDisplay     *d,
 
 const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "active_plugins", "list", "<type>string</type>", 0, 0 },
-    { "texture_filter", "string", 0, 0, 0 },
+    { "texture_filter", "int", RESTOSTRING (0, 2), 0, 0 },
     { "click_to_focus", "bool", 0, 0, 0 },
     { "autoraise", "bool", 0, 0, 0 },
     { "autoraise_delay", "int", 0, 0, 0 },
@@ -823,14 +823,14 @@ setDisplayOption (CompDisplay     *display,
 	}
 	break;
     case COMP_DISPLAY_OPTION_TEXTURE_FILTER:
-	if (compSetStringOption (o, value))
+	if (compSetIntOption (o, value))
 	{
 	    CompScreen *s;
 
 	    for (s = display->screens; s; s = s->next)
 		damageScreen (s);
 
-	    if (strcmp (o->value.s, "Fast") == 0)
+	    if (!o->value.i)
 		display->textureFilter = GL_NEAREST;
 	    else
 		display->textureFilter = GL_LINEAR;

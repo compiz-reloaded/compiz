@@ -8,15 +8,24 @@
 		<_long>List of currently active plugins</_long>
 		<type>string</type>
 	    </option>
-	    <option name="texture_filter" type="string">
+	    <option name="texture_filter" type="int">
 		<_short>Texture Filter</_short>
 		<_long>Texture filtering</_long>
-		<default>Good</default>
-		<allowed>
-		    <value>Fast</value>
-		    <value>Good</value>
-		    <value>Best</value>
-		</allowed>
+		<default>1</default>
+		<min>0</min>
+		<max>2</max>
+		<desc>
+		    <value>0</value>
+		    <_name>Fast</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Good</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>Best</_name>
+		</desc>
 	    </option>
 	    <option name="click_to_focus" type="bool">
 		<_short>Click To Focus</_short>
