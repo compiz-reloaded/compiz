@@ -83,6 +83,8 @@ typedef struct _ResizeScreen {
 
     WindowResizeNotifyProc windowResizeNotify;
     PaintScreenProc	   paintScreen;
+    PaintWindowProc	   paintWindow;
+    DamageWindowRectProc   damageWindowRect;
 
     Cursor leftCursor;
     Cursor rightCursor;
@@ -114,6 +116,7 @@ static void
 resizeGetPaintRectangle (CompDisplay *d,
 			 BoxPtr      pBox)
 {
+
     RESIZE_DISPLAY (d);
 
     pBox->x1 = rd->geometry.x - rd->w->input.left;
@@ -135,14 +138,48 @@ resizeGetPaintRectangle (CompDisplay *d,
 }
 
 static void
-resizeDamagePaintRectangle (CompScreen *s)
+resizeGetStretchScale (CompWindow *w,
+		       BoxPtr     pBox,
+		       float	  *xScale,
+		       float	  *yScale)
+{
+    int width, height;
+
+    width  = w->width  + w->input.left + w->input.right;
+    height = w->height + w->input.top  + w->input.bottom;
+
+    *xScale = (width)  ? (pBox->x2 - pBox->x1) / (float) width  : 1.0f;
+    *yScale = (height) ? (pBox->y2 - pBox->y1) / (float) height : 1.0f;
+}
+
+static void
+resizeGetStretchRectangle (CompDisplay *d,
+			   BoxPtr      pBox)
+{
+    BoxRec box;
+    float xScale, yScale;
+
+    RESIZE_DISPLAY (d);
+
+    resizeGetPaintRectangle (d, &box);
+    resizeGetStretchScale (rd->w, &box, &xScale, &yScale);
+
+    pBox->x1 = box.x1 - (rd->w->output.left - rd->w->input.left) * xScale;
+    pBox->y1 = box.y1 - (rd->w->output.top - rd->w->input.top) * yScale;
+    pBox->x2 = box.x2 + rd->w->output.right * xScale;
+    pBox->y2 = box.y2 + rd->w->output.bottom * yScale;
+}
+
+static void
+resizeDamageRectangle (CompScreen *s,
+		       BoxPtr     pBox)
 {
     REGION reg;
 
     reg.rects    = &reg.extents;
     reg.numRects = 1;
 
-    resizeGetPaintRectangle (s->display, &reg.extents);
+    reg.extents = *pBox;
 
     reg.extents.x1 -= 1;
     reg.extents.y1 -= 1;
@@ -318,12 +355,30 @@ resizeTerminate (CompDisplay	 *d,
 
 	(w->screen->windowUngrabNotify) (w);
 
-	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
-	case 'O':
-	case 'R':
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'N')
+	{
 	    if (state & CompActionStateCancel)
 	    {
-		resizeDamagePaintRectangle (w->screen);
+		xwc.x      = rd->savedGeometry.x;
+		xwc.y      = rd->savedGeometry.y;
+		xwc.width  = rd->savedGeometry.width;
+		xwc.height = rd->savedGeometry.height;
+
+		mask = CWX | CWY | CWWidth | CWHeight;
+	    }
+	}
+	else
+	{
+	    if (state & CompActionStateCancel)
+	    {
+		BoxRec box;
+
+		if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+		    resizeGetStretchRectangle (d, &box);
+		else
+		    resizeGetPaintRectangle (d, &box);
+
+		resizeDamageRectangle (w->screen, &box);
 	    }
 	    else
 	    {
@@ -334,18 +389,6 @@ resizeTerminate (CompDisplay	 *d,
 
 		mask = CWX | CWY | CWWidth | CWHeight;
 	    }
-	    break;
-	default:
-	    if (state & CompActionStateCancel)
-	    {
-		xwc.x      = rd->savedGeometry.x;
-		xwc.y      = rd->savedGeometry.y;
-		xwc.width  = rd->savedGeometry.width;
-		xwc.height = rd->savedGeometry.height;
-
-		mask = CWX | CWY | CWWidth | CWHeight;
-	    }
-	    break;
 	}
 
 	if ((mask & CWWidth) && xwc.width == w->serverWidth)
@@ -469,7 +512,8 @@ resizeHandleMotionEvent (CompScreen *s,
 
     if (rs->grabIndex)
     {
-	int w, h;
+	BoxRec box;
+	int    w, h;
 
 	RESIZE_DISPLAY (s->display);
 
@@ -497,12 +541,14 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	constrainNewWindowSize (rd->w, w, h, &w, &h);
 
-	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
-	case 'O':
-	case 'R':
-	    resizeDamagePaintRectangle (s);
-	default:
-	    break;
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s != 'N')
+	{
+	    if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+		resizeGetStretchRectangle (s->display, &box);
+	    else
+		resizeGetPaintRectangle (s->display, &box);
+
+	    resizeDamageRectangle (s, &box);
 	}
 
 	if (rd->mask & ResizeLeftMask)
@@ -514,14 +560,18 @@ resizeHandleMotionEvent (CompScreen *s,
 	rd->geometry.width  = w;
 	rd->geometry.height = h;
 
-	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
-	case 'O':
-	case 'R':
-	    resizeDamagePaintRectangle (s);
-	    break;
-	default:
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s != 'N')
+	{
+	    if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+		resizeGetStretchRectangle (s->display, &box);
+	    else
+		resizeGetPaintRectangle (s->display, &box);
+
+	    resizeDamageRectangle (s, &box);
+	}
+	else
+	{
 	    resizeUpdateWindowSize (s->display);
-	    break;
 	}
     }
 }
@@ -766,28 +816,122 @@ resizePaintScreen (CompScreen              *s,
     Bool status;
 
     RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
+
+    if (rd->w)
+    {
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
+    }
 
     UNWRAP (rs, s, paintScreen);
     status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (rs, s, paintScreen, resizePaintScreen);
 
-    if (status)
+    if (status && rd->w)
     {
-	RESIZE_DISPLAY (s->display);
-
-	if (rd->w)
-	{
-	    switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
-	    case 'O':
-		resizePaintRectangle (s, sAttrib, transform, output, FALSE);
-		break;
-	    case 'R':
-		resizePaintRectangle (s, sAttrib, transform, output, TRUE);
-	    default:
-		break;
-	    }
+	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
+	case 'O':
+	    resizePaintRectangle (s, sAttrib, transform, output, FALSE);
+	    break;
+	case 'R':
+	    resizePaintRectangle (s, sAttrib, transform, output, TRUE);
+	default:
+	    break;
 	}
     }
+
+    return status;
+}
+
+static Bool
+resizePaintWindow (CompWindow              *w,
+		   const WindowPaintAttrib *attrib,
+		   const CompTransform     *transform,
+		   Region                  region,
+		   unsigned int            mask)
+{
+    CompScreen *s = w->screen;
+    Bool       status;
+
+    RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
+
+    if (w == rd->w && *rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+    {
+	FragmentAttrib fragment;
+	CompTransform  wTransform = *transform;
+	BoxRec	       box;
+	float	       xOrigin, yOrigin;
+	float	       xScale, yScale;
+
+	if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
+	    return FALSE;
+
+	UNWRAP (rs, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, transform, region,
+				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);
+	WRAP (rs, s, paintWindow, resizePaintWindow);
+
+	initFragmentAttrib (&fragment, &w->lastPaint);
+
+	if (w->alpha || fragment.opacity != OPAQUE)
+	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
+	resizeGetPaintRectangle (s->display, &box);
+	resizeGetStretchScale (w, &box, &xScale, &yScale);
+
+	xOrigin = w->attrib.x - w->input.left;
+	yOrigin = w->attrib.y - w->input.top;
+
+	matrixTranslate (&wTransform, xOrigin, yOrigin, 0.0f);
+	matrixScale (&wTransform, xScale, yScale, 0.0f);
+	matrixTranslate (&wTransform,
+			 (rd->geometry.x - w->attrib.x) / xScale - xOrigin,
+			 (rd->geometry.y - w->attrib.y) / yScale - yOrigin,
+			 0.0f);
+
+	glPushMatrix ();
+	glLoadMatrixf (wTransform.m);
+
+	(*s->drawWindow) (w, &wTransform, &fragment, region,
+			  mask | PAINT_WINDOW_TRANSFORMED_MASK);
+
+	glPopMatrix ();
+    }
+    else
+    {
+	UNWRAP (rs, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
+	WRAP (rs, s, paintWindow, resizePaintWindow);
+    }
+
+    return status;
+}
+
+static Bool
+resizeDamageWindowRect (CompWindow *w,
+			Bool	   initial,
+			BoxPtr     rect)
+{
+    Bool status = FALSE;
+
+    RESIZE_SCREEN (w->screen);
+    RESIZE_DISPLAY (w->screen->display);
+
+    if (w == rd->w && *rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+    {
+	BoxRec box;
+
+	resizeGetStretchRectangle (w->screen->display, &box);
+	resizeDamageRectangle (w->screen, &box);
+
+	status = TRUE;
+    }
+
+    UNWRAP (rs, w->screen, damageWindowRect);
+    status |= (*w->screen->damageWindowRect) (w, initial, rect);
+    WRAP (rs, w->screen, damageWindowRect, resizeDamageWindowRect);
 
     return status;
 }
@@ -921,6 +1065,8 @@ resizeInitScreen (CompPlugin *p,
 
     WRAP (rs, s, windowResizeNotify, resizeWindowResizeNotify);
     WRAP (rs, s, paintScreen, resizePaintScreen);
+    WRAP (rs, s, paintWindow, resizePaintWindow);
+    WRAP (rs, s, damageWindowRect, resizeDamageWindowRect);
 
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
@@ -954,6 +1100,8 @@ resizeFiniScreen (CompPlugin *p,
 
     UNWRAP (rs, s, windowResizeNotify);
     UNWRAP (rs, s, paintScreen);
+    UNWRAP (rs, s, paintWindow);
+    UNWRAP (rs, s, damageWindowRect);
 
     free (rs);
 }
