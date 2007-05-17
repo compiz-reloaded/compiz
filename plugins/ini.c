@@ -348,7 +348,7 @@ static Bool
 iniParseLine (char *line, char **optionName, char **optionValue)
 {
     char *splitPos;
-    int  length;
+    int  length, optionLength;
 
     if (line[0] == '\0' || line[0] == '\n')
 	return FALSE;
@@ -360,7 +360,10 @@ iniParseLine (char *line, char **optionName, char **optionValue)
     length = strlen (line) - strlen (splitPos);
     *optionName = strndup (line, length);
     splitPos++;
-    *optionValue = strndup (splitPos, strlen (splitPos)-1);
+    optionLength = strlen (splitPos);
+    if (splitPos[optionLength-1] == '\n')
+	optionLength--;
+    *optionValue = strndup (splitPos, optionLength);
 
     return TRUE;
 }
