@@ -156,7 +156,7 @@ resizeGetStretchRectangle (CompDisplay *d,
 			   BoxPtr      pBox)
 {
     BoxRec box;
-    float xScale, yScale;
+    float  xScale, yScale;
 
     RESIZE_DISPLAY (d);
 
