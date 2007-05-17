@@ -116,7 +116,6 @@ static void
 resizeGetPaintRectangle (CompDisplay *d,
 			 BoxPtr      pBox)
 {
-
     RESIZE_DISPLAY (d);
 
     pBox->x1 = rd->geometry.x - rd->w->input.left;
