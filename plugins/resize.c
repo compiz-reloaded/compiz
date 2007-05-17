@@ -82,6 +82,7 @@ typedef struct _ResizeScreen {
     int grabIndex;
 
     WindowResizeNotifyProc windowResizeNotify;
+    PaintScreenProc	   paintScreen;
 
     Cursor leftCursor;
     Cursor rightCursor;
@@ -108,6 +109,48 @@ typedef struct _ResizeScreen {
     ResizeScreen *rs = GET_RESIZE_SCREEN (s, GET_RESIZE_DISPLAY (s->display))
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
+
+static void
+resizeGetPaintRectangle (CompDisplay *d,
+			 BoxPtr      pBox)
+{
+    RESIZE_DISPLAY (d);
+
+    pBox->x1 = rd->geometry.x - rd->w->input.left;
+    pBox->y1 = rd->geometry.y - rd->w->input.top;
+    pBox->x2 = rd->geometry.x +
+	rd->geometry.width + rd->w->serverBorderWidth * 2 +
+	rd->w->input.right;
+
+    if (rd->w->shaded)
+    {
+	pBox->y2 = rd->geometry.y + rd->w->height + rd->w->input.bottom;
+    }
+    else
+    {
+	pBox->y2 = rd->geometry.y +
+	    rd->geometry.height + rd->w->serverBorderWidth * 2 +
+	    rd->w->input.bottom;
+    }
+}
+
+static void
+resizeDamagePaintRectangle (CompScreen *s)
+{
+    REGION reg;
+
+    reg.rects    = &reg.extents;
+    reg.numRects = 1;
+
+    resizeGetPaintRectangle (s->display, &reg.extents);
+
+    reg.extents.x1 -= 1;
+    reg.extents.y1 -= 1;
+    reg.extents.x2 += 1;
+    reg.extents.y2 += 1;
+
+    damageScreenRegion (s, &reg);
+}
 
 static Bool
 resizeInitiate (CompDisplay     *d,
@@ -267,35 +310,63 @@ resizeTerminate (CompDisplay	 *d,
 
     if (rd->w)
     {
-	CompScreen *s = rd->w->screen;
+	CompWindow     *w = rd->w;
+	XWindowChanges xwc;
+	unsigned int   mask = 0;
 
-	RESIZE_SCREEN (s);
+	RESIZE_SCREEN (w->screen);
 
-	(s->windowUngrabNotify) (rd->w);
+	(w->screen->windowUngrabNotify) (w);
 
-	if (state & CompActionStateCancel)
-	{
-	    XWindowChanges xwc;
+	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
+	case 'O':
+	    if (state & CompActionStateCancel)
+	    {
+		resizeDamagePaintRectangle (w->screen);
+	    }
+	    else
+	    {
+		xwc.x      = rd->geometry.x;
+		xwc.y      = rd->geometry.y;
+		xwc.width  = rd->geometry.width;
+		xwc.height = rd->geometry.height;
 
-	    sendSyncRequest (rd->w);
+		mask = CWX | CWY | CWWidth | CWHeight;
+	    }
+	    break;
+	default:
+	    if (state & CompActionStateCancel)
+	    {
+		xwc.x      = rd->savedGeometry.x;
+		xwc.y      = rd->savedGeometry.y;
+		xwc.width  = rd->savedGeometry.width;
+		xwc.height = rd->savedGeometry.height;
 
-	    xwc.x      = rd->savedGeometry.x;
-	    xwc.y      = rd->savedGeometry.y;
-	    xwc.width  = rd->savedGeometry.width;
-	    xwc.height = rd->savedGeometry.height;
-
-	    configureXWindow (rd->w,
-			      CWX | CWY | CWWidth | CWHeight,
-			      &xwc);
+		mask = CWX | CWY | CWWidth | CWHeight;
+	    }
+	    break;
 	}
-	else
+
+	if ((mask & CWWidth) && xwc.width == w->serverWidth)
+	    mask &= ~CWWidth;
+
+	if ((mask & CWHeight) && xwc.height == w->serverHeight)
+	    mask &= ~CWHeight;
+
+	if (mask)
 	{
+	    if (mask & (CWWidth | CWHeight))
+		sendSyncRequest (w);
+
+	    configureXWindow (w, mask, &xwc);
+	}
+
+	if (!(mask & (CWWidth | CWHeight)))
 	    rd->w = NULL;
-	}
 
 	if (rs->grabIndex)
 	{
-	    removeScreenGrab (s, rs->grabIndex, NULL);
+	    removeScreenGrab (w->screen, rs->grabIndex, NULL);
 	    rs->grabIndex = 0;
 	}
 
@@ -425,6 +496,13 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	constrainNewWindowSize (rd->w, w, h, &w, &h);
 
+	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
+	case 'O':
+	    resizeDamagePaintRectangle (s);
+	default:
+	    break;
+	}
+
 	if (rd->mask & ResizeLeftMask)
 	    rd->geometry.x -= w - rd->geometry.width;
 
@@ -434,7 +512,14 @@ resizeHandleMotionEvent (CompScreen *s,
 	rd->geometry.width  = w;
 	rd->geometry.height = h;
 
-	resizeUpdateWindowSize (s->display);
+	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
+	case 'O':
+	    resizeDamagePaintRectangle (s);
+	    break;
+	default:
+	    resizeUpdateWindowSize (s->display);
+	    break;
+	}
     }
 }
 
@@ -625,6 +710,78 @@ resizeWindowResizeNotify (CompWindow *w,
     WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
 }
 
+static void
+resizePaintOutline (CompScreen              *s,
+		    const ScreenPaintAttrib *sa,
+		    const CompTransform     *transform,
+		    int                     output)
+{
+    BoxRec box;
+
+    resizeGetPaintRectangle (s->display, &box);
+
+    glPushMatrix ();
+
+    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
+
+    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+    glEnable (GL_BLEND);
+
+    /* fill rectangle */
+    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
+    glRecti (box.x1, box.y2, box.x2, box.y1);
+
+    /* draw outline */
+    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x9fff);
+    glLineWidth (2.0);
+    glBegin (GL_LINE_LOOP);
+    glVertex2i (box.x1, box.y1);
+    glVertex2i (box.x2, box.y1);
+    glVertex2i (box.x2, box.y2);
+    glVertex2i (box.x1, box.y2);
+    glEnd ();
+
+    /* clean up */
+    glColor4usv (defaultColor);
+    glDisable (GL_BLEND);
+    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+    glPopMatrix ();
+}
+
+static Bool
+resizePaintScreen (CompScreen              *s,
+		   const ScreenPaintAttrib *sAttrib,
+		   const CompTransform     *transform,
+		   Region                  region,
+		   int                     output,
+		   unsigned int            mask)
+{
+    Bool status;
+
+    RESIZE_SCREEN (s);
+
+    UNWRAP (rs, s, paintScreen);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
+    WRAP (rs, s, paintScreen, resizePaintScreen);
+
+    if (status)
+    {
+	RESIZE_DISPLAY (s->display);
+
+	if (rd->w)
+	{
+	    switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
+	    case 'O':
+		resizePaintOutline (s, sAttrib, transform, output);
+	    default:
+		break;
+	    }
+	}
+    }
+
+    return status;
+}
+
 static CompOption *
 resizeGetDisplayOptions (CompPlugin  *plugin,
 			 CompDisplay *display,
@@ -753,6 +910,7 @@ resizeInitScreen (CompPlugin *p,
     rs->cursor[3] = rs->downCursor;
 
     WRAP (rs, s, windowResizeNotify, resizeWindowResizeNotify);
+    WRAP (rs, s, paintScreen, resizePaintScreen);
 
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
@@ -785,6 +943,7 @@ resizeFiniScreen (CompPlugin *p,
 	XFreeCursor (s->display->display, rs->downRightCursor);
 
     UNWRAP (rs, s, windowResizeNotify);
+    UNWRAP (rs, s, paintScreen);
 
     free (rs);
 }
