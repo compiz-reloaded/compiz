@@ -2,6 +2,12 @@
     <plugin name="fade">
 	<_short>Fading Windows</_short>
 	<_long>Fade in windows when mapped and fade out windows when unmapped</_long>
+	<deps>
+		<relation type="before">
+			<plugin>cube</plugin>
+			<plugin>scale</plugin>
+		</relation>
+	</deps>
 	<screen>
 	    <option name="fade_speed" type="float">
 		<_short>Fade Speed</_short>

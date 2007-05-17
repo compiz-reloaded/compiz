@@ -2,6 +2,13 @@
     <plugin name="cube">
 	<_short>Desktop Cube</_short>
 	<_long>Place windows on cube</_long>
+	<feature>largedesktop</feature>
+	<deps>
+		<relation type="before">
+			<plugin>switcher</plugin>
+			<plugin>scale</plugin>
+		</relation>
+	</deps>
 	<display>
 	    <option name="unfold" type="action">
 		<_short>Unfold</_short>

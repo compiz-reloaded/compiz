@@ -2,6 +2,12 @@
     <plugin name="minimize">
 	<_short>Minimize Effect</_short>
 	<_long>Transform windows when they are minimized and unminimized</_long>
+	<deps>
+		<relation type="before">
+			<plugin>cube</plugin>
+			<plugin>scale</plugin>
+		</relation>
+	</deps>
 	<screen>
 	    <option name="speed" type="float">
 		<_short>Speed</_short>
