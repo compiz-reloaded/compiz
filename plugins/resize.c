@@ -56,9 +56,11 @@ struct _ResizeKeys {
 #define MIN_KEY_WIDTH_INC  24
 #define MIN_KEY_HEIGHT_INC 24
 
-#define RESIZE_DISPLAY_OPTION_INITIATE 0
-#define RESIZE_DISPLAY_OPTION_MODE     1
-#define RESIZE_DISPLAY_OPTION_NUM      2
+#define RESIZE_DISPLAY_OPTION_INITIATE	   0
+#define RESIZE_DISPLAY_OPTION_MODE	   1
+#define RESIZE_DISPLAY_OPTION_BORDER_COLOR 2
+#define RESIZE_DISPLAY_OPTION_FILL_COLOR   3
+#define RESIZE_DISPLAY_OPTION_NUM	   4
 
 static int displayPrivateIndex;
 
@@ -767,7 +769,8 @@ resizePaintRectangle (CompScreen              *s,
 		      const ScreenPaintAttrib *sa,
 		      const CompTransform     *transform,
 		      int                     output,
-		      Bool		      fill)
+		      unsigned short	      *borderColor,
+		      unsigned short	      *fillColor)
 {
     BoxRec box;
 
@@ -781,14 +784,14 @@ resizePaintRectangle (CompScreen              *s,
     glEnable (GL_BLEND);
 
     /* fill rectangle */
-    if (fill)
+    if (fillColor)
     {
-	glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
+	glColor4usv (fillColor);
 	glRecti (box.x1, box.y2, box.x2, box.y1);
     }
 
     /* draw outline */
-    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x9fff);
+    glColor4usv (borderColor);
     glLineWidth (2.0);
     glBegin (GL_LINE_LOOP);
     glVertex2i (box.x1, box.y1);
@@ -829,12 +832,17 @@ resizePaintScreen (CompScreen              *s,
 
     if (status && rd->w)
     {
+	unsigned short *border, *fill;
+
+	border = rd->opt[RESIZE_DISPLAY_OPTION_BORDER_COLOR].value.c;
+	fill   = rd->opt[RESIZE_DISPLAY_OPTION_FILL_COLOR].value.c;
+
 	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
 	case 'O':
-	    resizePaintRectangle (s, sAttrib, transform, output, FALSE);
+	    resizePaintRectangle (s, sAttrib, transform, output, border, NULL);
 	    break;
 	case 'R':
-	    resizePaintRectangle (s, sAttrib, transform, output, TRUE);
+	    resizePaintRectangle (s, sAttrib, transform, output, border, fill);
 	default:
 	    break;
 	}
@@ -965,7 +973,9 @@ resizeSetDisplayOption (CompPlugin      *plugin,
 
 static const CompMetadataOptionInfo resizeDisplayOptionInfo[] = {
     { "initiate", "action", 0, resizeInitiate, resizeTerminate },
-    { "mode", "string", 0, 0, 0 }
+    { "mode", "string", 0, 0, 0 },
+    { "border_color", "color", 0, 0, 0 },
+    { "fill_color", "color", 0, 0, 0 }
 };
 
 static Bool

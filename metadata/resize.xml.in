@@ -23,6 +23,26 @@
 		    <value>Stretch</value>
 		</allowed>
 	    </option>
+	    <option name="border_color" type="color">
+		<_short>Border Color</_short>
+		<_long>Border color used for outline and rectangle resize modes</_long>
+		<default>
+		    <red>0x2fff</red>
+		    <green>0x2fff</green>
+		    <blue>0x4fff</blue>
+		    <alpha>0x9fff</alpha>
+		</default>
+	    </option>
+	    <option name="fill_color" type="color">
+		<_short>Fill Color</_short>
+		<_long>Fill color used for rectangle resize mode</_long>
+		<default>
+		    <red>0x2fff</red>
+		    <green>0x2fff</green>
+		    <blue>0x4fff</blue>
+		    <alpha>0x4fff</alpha>
+		</default>
+	    </option>
 	</display>
     </plugin>
 </compiz>
