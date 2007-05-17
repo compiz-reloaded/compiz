@@ -44,15 +44,24 @@
 		<_long>Blur behind translucent parts of windows</_long>
 		<default>true</default>
 	    </option>
-	    <option name="filter" type="string">
+	    <option name="filter" type="int">
 		<_short>Blur Filter</_short>
 		<_long>Filter method used for blurring</_long>
-		<default>4xBilinear</default>
-		<allowed>
-		    <value>4xBilinear</value>
-		    <value>Gaussian</value>
-		    <value>Mipmap</value>
-		</allowed>
+		<default>0</default>
+		<min>0</min>
+		<max>2</max>
+		<desc>
+		    <value>0</value>
+		    <_name>4xBilinear</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Gaussian</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>Mipmap</_name>
+		</desc>
 	    </option>
 	    <option name="gaussian_radius" type="int">
 		<_short>Gaussian Radius</_short>
