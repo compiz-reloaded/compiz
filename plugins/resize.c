@@ -320,6 +320,7 @@ resizeTerminate (CompDisplay	 *d,
 
 	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
 	case 'O':
+	case 'R':
 	    if (state & CompActionStateCancel)
 	    {
 		resizeDamagePaintRectangle (w->screen);
@@ -498,6 +499,7 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
 	case 'O':
+	case 'R':
 	    resizeDamagePaintRectangle (s);
 	default:
 	    break;
@@ -514,6 +516,7 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
 	case 'O':
+	case 'R':
 	    resizeDamagePaintRectangle (s);
 	    break;
 	default:
@@ -711,10 +714,11 @@ resizeWindowResizeNotify (CompWindow *w,
 }
 
 static void
-resizePaintOutline (CompScreen              *s,
-		    const ScreenPaintAttrib *sa,
-		    const CompTransform     *transform,
-		    int                     output)
+resizePaintRectangle (CompScreen              *s,
+		      const ScreenPaintAttrib *sa,
+		      const CompTransform     *transform,
+		      int                     output,
+		      Bool		      fill)
 {
     BoxRec box;
 
@@ -728,8 +732,11 @@ resizePaintOutline (CompScreen              *s,
     glEnable (GL_BLEND);
 
     /* fill rectangle */
-    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
-    glRecti (box.x1, box.y2, box.x2, box.y1);
+    if (fill)
+    {
+	glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
+	glRecti (box.x1, box.y2, box.x2, box.y1);
+    }
 
     /* draw outline */
     glColor4us (0x2fff, 0x2fff, 0x4fff, 0x9fff);
@@ -772,7 +779,10 @@ resizePaintScreen (CompScreen              *s,
 	{
 	    switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
 	    case 'O':
-		resizePaintOutline (s, sAttrib, transform, output);
+		resizePaintRectangle (s, sAttrib, transform, output, FALSE);
+		break;
+	    case 'R':
+		resizePaintRectangle (s, sAttrib, transform, output, TRUE);
 	    default:
 		break;
 	    }
