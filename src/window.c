@@ -3433,13 +3433,23 @@ addWindowSizeChanges (CompWindow     *w,
 	    xwc->width  = oldWidth;
 	    xwc->height = oldHeight;
 
-	    if (constrainNewWindowSize (w, width, height, &width, &height))
+	    constrainNewWindowSize (w, width, height, &width, &height);
+
+	    if (width != w->serverWidth)
 	    {
-		xwc->width  = width;
+		mask |= CWWidth;
+		xwc->width = width;
+	    }
+	    else
+		mask &= ~CWWidth;
+
+	    if (height != w->serverHeight)
+	    {
+		mask |= CWHeight;
 		xwc->height = height;
 	    }
 	    else
-		mask &= ~(CWWidth | CWHeight);
+		mask &= ~CWHeight;
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
@@ -3526,17 +3536,29 @@ moveResizeWindow (CompWindow     *w,
     {
 	int width, height;
 
-	if (constrainNewWindowSize (w,
-				    xwc->width, xwc->height,
-				    &width, &height))
+	if (!constrainNewWindowSize (w,
+				     xwc->width, xwc->height,
+				     &width, &height))
 	{
-	    xwcm |= (CWWidth | CWHeight);
+	    width  = xwc->width;
+	    height = xwc->height;
+	}
 
+	if (width != w->serverWidth)
+	{
+	    xwcm |= CWWidth;
 	    xwc->width = width;
+	}
+	else
+	    xwcm &= ~CWWidth;
+
+	if (height != w->serverHeight)
+	{
+	    xwcm |= CWHeight;
 	    xwc->height = height;
 	}
 	else
-	    xwcm &= ~(CWWidth | CWHeight);
+	    xwcm &= ~CWHeight;
     }
 
     if (xwcm & (CWX | CWWidth))
@@ -4021,6 +4043,8 @@ constrainNewWindowSize (CompWindow *w,
 {
     CompDisplay      *d = w->screen->display;
     const XSizeHints *hints = &w->sizeHints;
+    int              oldWidth = width;
+    int              oldHeight = height;
     int		     min_width = 0;
     int		     min_height = 0;
     int		     base_width = 0;
@@ -4152,7 +4176,7 @@ constrainNewWindowSize (CompWindow *w,
 #undef FLOOR64
 #undef FLOOR
 
-    if (width != w->serverWidth || height != w->serverHeight)
+    if (width != oldWidth || height != oldHeight)
     {
 	*newWidth  = width;
 	*newHeight = height;

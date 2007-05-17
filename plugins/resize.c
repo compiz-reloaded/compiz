@@ -56,9 +56,11 @@ struct _ResizeKeys {
 #define MIN_KEY_WIDTH_INC  24
 #define MIN_KEY_HEIGHT_INC 24
 
-#define RESIZE_DISPLAY_OPTION_INITIATE 0
-#define RESIZE_DISPLAY_OPTION_MODE     1
-#define RESIZE_DISPLAY_OPTION_NUM      2
+#define RESIZE_DISPLAY_OPTION_INITIATE	   0
+#define RESIZE_DISPLAY_OPTION_MODE	   1
+#define RESIZE_DISPLAY_OPTION_BORDER_COLOR 2
+#define RESIZE_DISPLAY_OPTION_FILL_COLOR   3
+#define RESIZE_DISPLAY_OPTION_NUM	   4
 
 static int displayPrivateIndex;
 
@@ -68,19 +70,23 @@ typedef struct _ResizeDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
-    CompWindow	      *w;
-    XWindowAttributes savedAttrib;
-    int		      releaseButton;
-    unsigned int      mask;
-    int		      width;
-    int		      height;
-    int		      ucWidth;	/* unconstrained width */
-    int		      ucHeight;	/* unconstrained height */
-    KeyCode	      key[NUM_KEYS];
+    CompWindow	 *w;
+    XRectangle	 savedGeometry;
+    XRectangle	 geometry;
+    int		 releaseButton;
+    unsigned int mask;
+    int		 pointerDx;
+    int		 pointerDy;
+    KeyCode	 key[NUM_KEYS];
 } ResizeDisplay;
 
 typedef struct _ResizeScreen {
     int grabIndex;
+
+    WindowResizeNotifyProc windowResizeNotify;
+    PaintScreenProc	   paintScreen;
+    PaintWindowProc	   paintWindow;
+    DamageWindowRectProc   damageWindowRect;
 
     Cursor leftCursor;
     Cursor rightCursor;
@@ -107,6 +113,82 @@ typedef struct _ResizeScreen {
     ResizeScreen *rs = GET_RESIZE_SCREEN (s, GET_RESIZE_DISPLAY (s->display))
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
+
+static void
+resizeGetPaintRectangle (CompDisplay *d,
+			 BoxPtr      pBox)
+{
+    RESIZE_DISPLAY (d);
+
+    pBox->x1 = rd->geometry.x - rd->w->input.left;
+    pBox->y1 = rd->geometry.y - rd->w->input.top;
+    pBox->x2 = rd->geometry.x +
+	rd->geometry.width + rd->w->serverBorderWidth * 2 +
+	rd->w->input.right;
+
+    if (rd->w->shaded)
+    {
+	pBox->y2 = rd->geometry.y + rd->w->height + rd->w->input.bottom;
+    }
+    else
+    {
+	pBox->y2 = rd->geometry.y +
+	    rd->geometry.height + rd->w->serverBorderWidth * 2 +
+	    rd->w->input.bottom;
+    }
+}
+
+static void
+resizeGetStretchScale (CompWindow *w,
+		       BoxPtr     pBox,
+		       float	  *xScale,
+		       float	  *yScale)
+{
+    int width, height;
+
+    width  = w->width  + w->input.left + w->input.right;
+    height = w->height + w->input.top  + w->input.bottom;
+
+    *xScale = (width)  ? (pBox->x2 - pBox->x1) / (float) width  : 1.0f;
+    *yScale = (height) ? (pBox->y2 - pBox->y1) / (float) height : 1.0f;
+}
+
+static void
+resizeGetStretchRectangle (CompDisplay *d,
+			   BoxPtr      pBox)
+{
+    BoxRec box;
+    float  xScale, yScale;
+
+    RESIZE_DISPLAY (d);
+
+    resizeGetPaintRectangle (d, &box);
+    resizeGetStretchScale (rd->w, &box, &xScale, &yScale);
+
+    pBox->x1 = box.x1 - (rd->w->output.left - rd->w->input.left) * xScale;
+    pBox->y1 = box.y1 - (rd->w->output.top - rd->w->input.top) * yScale;
+    pBox->x2 = box.x2 + rd->w->output.right * xScale;
+    pBox->y2 = box.y2 + rd->w->output.bottom * yScale;
+}
+
+static void
+resizeDamageRectangle (CompScreen *s,
+		       BoxPtr     pBox)
+{
+    REGION reg;
+
+    reg.rects    = &reg.extents;
+    reg.numRects = 1;
+
+    reg.extents = *pBox;
+
+    reg.extents.x1 -= 1;
+    reg.extents.y1 -= 1;
+    reg.extents.x2 += 1;
+    reg.extents.y2 += 1;
+
+    damageScreenRegion (s, &reg);
+}
 
 static Bool
 resizeInitiate (CompDisplay     *d,
@@ -135,9 +217,9 @@ resizeInitiate (CompDisplay     *d,
 	mods = getIntOptionNamed (option, nOption, "modifiers", 0);
 
 	x = getIntOptionNamed (option, nOption, "x",
-			       w->attrib.x + (w->width / 2));
+			       w->serverX + (w->serverWidth / 2));
 	y = getIntOptionNamed (option, nOption, "y",
-			       w->attrib.y + (w->height / 2));
+			       w->serverY + (w->serverHeight / 2));
 
 	button = getIntOptionNamed (option, nOption, "button", -1);
 
@@ -154,10 +236,10 @@ resizeInitiate (CompDisplay     *d,
 	}
 	else if (!mask)
 	{
-	    mask |= ((x - w->attrib.x) < (w->width / 2)) ?
+	    mask |= ((x - w->serverX) < (w->serverWidth / 2)) ?
 		ResizeLeftMask : ResizeRightMask;
 
-	    mask |= ((y - w->attrib.y) < (w->height / 2)) ?
+	    mask |= ((y - w->serverY) < (w->serverHeight / 2)) ?
 		ResizeUpMask : ResizeDownMask;
 	}
 
@@ -181,16 +263,18 @@ resizeInitiate (CompDisplay     *d,
 	if (w->shaded)
 	    mask &= ~(ResizeUpMask | ResizeDownMask);
 
-	rd->w	        = w;
-	rd->mask        = mask;
-	rd->ucWidth     = w->attrib.width;
-	rd->ucHeight    = w->attrib.height;
-	rd->width       = w->attrib.width;
-	rd->height      = w->attrib.height;
-	rd->savedAttrib = w->attrib;
+	rd->w	 = w;
+	rd->mask = mask;
 
-	lastPointerX = x;
-	lastPointerY = y;
+	rd->savedGeometry.x	 = w->serverX;
+	rd->savedGeometry.y	 = w->serverY;
+	rd->savedGeometry.width  = w->serverWidth;
+	rd->savedGeometry.height = w->serverHeight;
+
+	rd->geometry = rd->savedGeometry;
+
+	rd->pointerDx = x - lastPointerX;
+	rd->pointerDy = y - lastPointerY;
 
 	if (!rs->grabIndex)
 	{
@@ -242,8 +326,8 @@ resizeInitiate (CompDisplay     *d,
 	    {
 		int xRoot, yRoot;
 
-		xRoot = w->attrib.x + (w->width  / 2);
-		yRoot = w->attrib.y + (w->height / 2);
+		xRoot = w->serverX + (w->serverWidth  / 2);
+		yRoot = w->serverY + (w->serverHeight / 2);
 
 		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
 	    }
@@ -264,37 +348,73 @@ resizeTerminate (CompDisplay	 *d,
 
     if (rd->w)
     {
-	RESIZE_SCREEN (rd->w->screen);
+	CompWindow     *w = rd->w;
+	XWindowChanges xwc;
+	unsigned int   mask = 0;
 
-	(rd->w->screen->windowUngrabNotify) (rd->w);
+	RESIZE_SCREEN (w->screen);
 
-	if (state & CompActionStateCancel)
+	(w->screen->windowUngrabNotify) (w);
+
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'N')
 	{
-	    XWindowChanges xwc;
+	    if (state & CompActionStateCancel)
+	    {
+		xwc.x      = rd->savedGeometry.x;
+		xwc.y      = rd->savedGeometry.y;
+		xwc.width  = rd->savedGeometry.width;
+		xwc.height = rd->savedGeometry.height;
 
-	    sendSyncRequest (rd->w);
-
-	    xwc.x      = rd->savedAttrib.x;
-	    xwc.y      = rd->savedAttrib.y;
-	    xwc.width  = rd->savedAttrib.width;
-	    xwc.height = rd->savedAttrib.height;
-
-	    configureXWindow (rd->w,
-			      CWX | CWY | CWWidth | CWHeight,
-			      &xwc);
+		mask = CWX | CWY | CWWidth | CWHeight;
+	    }
 	}
 	else
 	{
-	    syncWindowPosition (rd->w);
+	    if (state & CompActionStateCancel)
+	    {
+		BoxRec box;
+
+		if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+		    resizeGetStretchRectangle (d, &box);
+		else
+		    resizeGetPaintRectangle (d, &box);
+
+		resizeDamageRectangle (w->screen, &box);
+	    }
+	    else
+	    {
+		xwc.x      = rd->geometry.x;
+		xwc.y      = rd->geometry.y;
+		xwc.width  = rd->geometry.width;
+		xwc.height = rd->geometry.height;
+
+		mask = CWX | CWY | CWWidth | CWHeight;
+	    }
 	}
+
+	if ((mask & CWWidth) && xwc.width == w->serverWidth)
+	    mask &= ~CWWidth;
+
+	if ((mask & CWHeight) && xwc.height == w->serverHeight)
+	    mask &= ~CWHeight;
+
+	if (mask)
+	{
+	    if (mask & (CWWidth | CWHeight))
+		sendSyncRequest (w);
+
+	    configureXWindow (w, mask, &xwc);
+	}
+
+	if (!(mask & (CWWidth | CWHeight)))
+	    rd->w = NULL;
 
 	if (rs->grabIndex)
 	{
-	    removeScreenGrab (rd->w->screen, rs->grabIndex, NULL);
+	    removeScreenGrab (w->screen, rs->grabIndex, NULL);
 	    rs->grabIndex = 0;
 	}
 
-	rd->w		  = 0;
 	rd->releaseButton = 0;
     }
 
@@ -306,42 +426,20 @@ resizeTerminate (CompDisplay	 *d,
 static void
 resizeUpdateWindowSize (CompDisplay *d)
 {
-    int width, height;
-
     RESIZE_DISPLAY (d);
-
-    if (!rd->w)
-	return;
-
-    if (rd->w->state & CompWindowStateMaximizedVertMask)
-	rd->height = rd->w->serverHeight;
-
-    if (rd->w->state & CompWindowStateMaximizedHorzMask)
-	rd->width = rd->w->serverWidth;
-
-    if (rd->width  == rd->w->serverWidth &&
-	rd->height == rd->w->serverHeight)
-	return;
 
     if (rd->w->syncWait)
 	return;
 
-    if (constrainNewWindowSize (rd->w,
-				rd->width, rd->height,
-				&width, &height))
+    if (rd->w->serverWidth  != rd->geometry.width ||
+	rd->w->serverHeight != rd->geometry.height)
     {
 	XWindowChanges xwc;
 
-	xwc.x = rd->w->serverX;
-	if (rd->mask & ResizeLeftMask)
-	    xwc.x -= width - rd->w->serverWidth;
-
-	xwc.y = rd->w->serverY;
-	if (rd->mask & ResizeUpMask)
-	    xwc.y -= height - rd->w->serverHeight;
-
-	xwc.width  = width;
-	xwc.height = height;
+	xwc.x	   = rd->geometry.x;
+	xwc.y	   = rd->geometry.y;
+	xwc.width  = rd->geometry.width;
+	xwc.height = rd->geometry.height;
 
 	sendSyncRequest (rd->w);
 
@@ -352,54 +450,6 @@ resizeUpdateWindowSize (CompDisplay *d)
 }
 
 static void
-resizeConstrainMinMax (CompWindow *w,
-		       int        width,
-		       int        height,
-		       int        *newWidth,
-		       int        *newHeight)
-{
-    const XSizeHints *hints = &w->sizeHints;
-    int		     min_width = 0;
-    int		     min_height = 0;
-    int		     max_width = MAXSHORT;
-    int		     max_height = MAXSHORT;
-
-    if ((hints->flags & PBaseSize) && (hints->flags & PMinSize))
-    {
-	min_width = hints->min_width;
-	min_height = hints->min_height;
-    }
-    else if (hints->flags & PBaseSize)
-    {
-	min_width = hints->base_width;
-	min_height = hints->base_height;
-    }
-    else if (hints->flags & PMinSize)
-    {
-	min_width = hints->min_width;
-	min_height = hints->min_height;
-    }
-
-    if (hints->flags & PMaxSize)
-    {
-	max_width = hints->max_width;
-	max_height = hints->max_height;
-    }
-
-#define CLAMP(v, min, max) ((v) <= (min) ? (min) : (v) >= (max) ? (max) : (v))
-
-    /* clamp width and height to min and max values */
-    width  = CLAMP (width, min_width, max_width);
-    height = CLAMP (height, min_height, max_height);
-
-#undef CLAMP
-
-    *newWidth  = width;
-    *newHeight = height;
-}
-
-
-static void
 resizeHandleKeyEvent (CompScreen *s,
 		      KeyCode	 keycode)
 {
@@ -408,10 +458,8 @@ resizeHandleKeyEvent (CompScreen *s,
 
     if (rs->grabIndex && rd->w)
     {
-	CompWindow *w;
-	int i, widthInc, heightInc;
-
-	w = rd->w;
+	CompWindow *w = rd->w;
+	int	   widthInc, heightInc, i;
 
 	widthInc  = w->sizeHints.width_inc;
 	heightInc = w->sizeHints.height_inc;
@@ -425,7 +473,7 @@ resizeHandleKeyEvent (CompScreen *s,
 	for (i = 0; i < NUM_KEYS; i++)
 	{
 	    if (keycode != rd->key[i])
-	      continue;
+		continue;
 
 	    if (rd->mask & rKeys[i].warpMask)
 	    {
@@ -437,16 +485,18 @@ resizeHandleKeyEvent (CompScreen *s,
 	    {
 		int x, y, left, top, width, height;
 
-		left   = w->attrib.x - w->input.left;
-		top    = w->attrib.y - w->input.top;
-		width  = w->input.left + w->attrib.width  + w->input.right;
-		height = w->input.top  + w->attrib.height + w->input.bottom;
+		left   = w->serverX - w->input.left;
+		top    = w->serverY - w->input.top;
+		width  = w->input.left + w->serverWidth  + w->input.right;
+		height = w->input.top  + w->serverHeight + w->input.bottom;
 
 		x = left + width  * (rKeys[i].dx + 1) / 2;
 		y = top  + height * (rKeys[i].dy + 1) / 2;
 
 		warpPointer (s, x - pointerX, y - pointerY);
+
 		rd->mask = rKeys[i].resizeMask;
+
 		updateScreenGrab (s, rs->grabIndex, rs->cursor[i]);
 	    }
 	    break;
@@ -463,38 +513,65 @@ resizeHandleMotionEvent (CompScreen *s,
 
     if (rs->grabIndex)
     {
-	int pointerDx, pointerDy;
+	BoxRec box;
+	int    w, h;
 
 	RESIZE_DISPLAY (s->display);
 
-	pointerDx = xRoot - lastPointerX;
-	pointerDy = yRoot - lastPointerY;
+	rd->pointerDx += xRoot - lastPointerX;
+	rd->pointerDy += yRoot - lastPointerY;
 
-	if (pointerDx || pointerDy)
+	w = rd->savedGeometry.width;
+	h = rd->savedGeometry.height;
+
+	if (rd->mask & ResizeLeftMask)
+	    w -= rd->pointerDx;
+	else if (rd->mask & ResizeRightMask)
+	    w += rd->pointerDx;
+
+	if (rd->mask & ResizeUpMask)
+	    h -= rd->pointerDy;
+	else if (rd->mask & ResizeDownMask)
+	    h += rd->pointerDy;
+
+	if (rd->w->state & CompWindowStateMaximizedVertMask)
+	    h = rd->w->serverHeight;
+
+	if (rd->w->state & CompWindowStateMaximizedHorzMask)
+	    w = rd->w->serverWidth;
+
+	constrainNewWindowSize (rd->w, w, h, &w, &h);
+
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s != 'N')
 	{
-	    int w, h;
+	    if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+		resizeGetStretchRectangle (s->display, &box);
+	    else
+		resizeGetPaintRectangle (s->display, &box);
 
-	    w = rd->ucWidth;
-	    h = rd->ucHeight;
+	    resizeDamageRectangle (s, &box);
+	}
 
-	    if (rd->mask & ResizeLeftMask)
-		w -= pointerDx;
-	    else if (rd->mask & ResizeRightMask)
-		w += pointerDx;
+	if (rd->mask & ResizeLeftMask)
+	    rd->geometry.x -= w - rd->geometry.width;
 
-	    if (rd->mask & ResizeUpMask)
-		h -= pointerDy;
-	    else if (rd->mask & ResizeDownMask)
-		h += pointerDy;
+	if (rd->mask & ResizeUpMask)
+	    rd->geometry.y -= h - rd->geometry.height;
 
-	    rd->ucWidth  = w;
-	    rd->ucHeight = h;
+	rd->geometry.width  = w;
+	rd->geometry.height = h;
 
-	    resizeConstrainMinMax (rd->w, w, h, &w, &h);
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s != 'N')
+	{
+	    if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+		resizeGetStretchRectangle (s->display, &box);
+	    else
+		resizeGetPaintRectangle (s->display, &box);
 
-	    rd->width  = w;
-	    rd->height = h;
-
+	    resizeDamageRectangle (s, &box);
+	}
+	else
+	{
 	    resizeUpdateWindowSize (s->display);
 	}
     }
@@ -669,6 +746,203 @@ resizeHandleEvent (CompDisplay *d,
     }
 }
 
+static void
+resizeWindowResizeNotify (CompWindow *w,
+			  int	     dx,
+			  int        dy,
+			  int	     dwidth,
+			  int	     dheight)
+{
+    RESIZE_DISPLAY (w->screen->display);
+    RESIZE_SCREEN (w->screen);
+
+    if (rd->w == w && !rs->grabIndex)
+	rd->w = NULL;
+
+    UNWRAP (rs, w->screen, windowResizeNotify);
+    (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
+    WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
+}
+
+static void
+resizePaintRectangle (CompScreen              *s,
+		      const ScreenPaintAttrib *sa,
+		      const CompTransform     *transform,
+		      int                     output,
+		      unsigned short	      *borderColor,
+		      unsigned short	      *fillColor)
+{
+    BoxRec box;
+
+    resizeGetPaintRectangle (s->display, &box);
+
+    glPushMatrix ();
+
+    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
+
+    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+    glEnable (GL_BLEND);
+
+    /* fill rectangle */
+    if (fillColor)
+    {
+	glColor4usv (fillColor);
+	glRecti (box.x1, box.y2, box.x2, box.y1);
+    }
+
+    /* draw outline */
+    glColor4usv (borderColor);
+    glLineWidth (2.0);
+    glBegin (GL_LINE_LOOP);
+    glVertex2i (box.x1, box.y1);
+    glVertex2i (box.x2, box.y1);
+    glVertex2i (box.x2, box.y2);
+    glVertex2i (box.x1, box.y2);
+    glEnd ();
+
+    /* clean up */
+    glColor4usv (defaultColor);
+    glDisable (GL_BLEND);
+    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+    glPopMatrix ();
+}
+
+static Bool
+resizePaintScreen (CompScreen              *s,
+		   const ScreenPaintAttrib *sAttrib,
+		   const CompTransform     *transform,
+		   Region                  region,
+		   int                     output,
+		   unsigned int            mask)
+{
+    Bool status;
+
+    RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
+
+    if (rd->w)
+    {
+	if (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
+    }
+
+    UNWRAP (rs, s, paintScreen);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
+    WRAP (rs, s, paintScreen, resizePaintScreen);
+
+    if (status && rd->w)
+    {
+	unsigned short *border, *fill;
+
+	border = rd->opt[RESIZE_DISPLAY_OPTION_BORDER_COLOR].value.c;
+	fill   = rd->opt[RESIZE_DISPLAY_OPTION_FILL_COLOR].value.c;
+
+	switch (*rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s) {
+	case 'O':
+	    resizePaintRectangle (s, sAttrib, transform, output, border, NULL);
+	    break;
+	case 'R':
+	    resizePaintRectangle (s, sAttrib, transform, output, border, fill);
+	default:
+	    break;
+	}
+    }
+
+    return status;
+}
+
+static Bool
+resizePaintWindow (CompWindow              *w,
+		   const WindowPaintAttrib *attrib,
+		   const CompTransform     *transform,
+		   Region                  region,
+		   unsigned int            mask)
+{
+    CompScreen *s = w->screen;
+    Bool       status;
+
+    RESIZE_SCREEN (s);
+    RESIZE_DISPLAY (s->display);
+
+    if (w == rd->w && *rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+    {
+	FragmentAttrib fragment;
+	CompTransform  wTransform = *transform;
+	BoxRec	       box;
+	float	       xOrigin, yOrigin;
+	float	       xScale, yScale;
+
+	if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
+	    return FALSE;
+
+	UNWRAP (rs, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, transform, region,
+				    mask | PAINT_WINDOW_NO_CORE_INSTANCE_MASK);
+	WRAP (rs, s, paintWindow, resizePaintWindow);
+
+	initFragmentAttrib (&fragment, &w->lastPaint);
+
+	if (w->alpha || fragment.opacity != OPAQUE)
+	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+
+	resizeGetPaintRectangle (s->display, &box);
+	resizeGetStretchScale (w, &box, &xScale, &yScale);
+
+	xOrigin = w->attrib.x - w->input.left;
+	yOrigin = w->attrib.y - w->input.top;
+
+	matrixTranslate (&wTransform, xOrigin, yOrigin, 0.0f);
+	matrixScale (&wTransform, xScale, yScale, 0.0f);
+	matrixTranslate (&wTransform,
+			 (rd->geometry.x - w->attrib.x) / xScale - xOrigin,
+			 (rd->geometry.y - w->attrib.y) / yScale - yOrigin,
+			 0.0f);
+
+	glPushMatrix ();
+	glLoadMatrixf (wTransform.m);
+
+	(*s->drawWindow) (w, &wTransform, &fragment, region,
+			  mask | PAINT_WINDOW_TRANSFORMED_MASK);
+
+	glPopMatrix ();
+    }
+    else
+    {
+	UNWRAP (rs, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
+	WRAP (rs, s, paintWindow, resizePaintWindow);
+    }
+
+    return status;
+}
+
+static Bool
+resizeDamageWindowRect (CompWindow *w,
+			Bool	   initial,
+			BoxPtr     rect)
+{
+    Bool status = FALSE;
+
+    RESIZE_SCREEN (w->screen);
+    RESIZE_DISPLAY (w->screen->display);
+
+    if (w == rd->w && *rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.s == 'S')
+    {
+	BoxRec box;
+
+	resizeGetStretchRectangle (w->screen->display, &box);
+	resizeDamageRectangle (w->screen, &box);
+
+	status = TRUE;
+    }
+
+    UNWRAP (rs, w->screen, damageWindowRect);
+    status |= (*w->screen->damageWindowRect) (w, initial, rect);
+    WRAP (rs, w->screen, damageWindowRect, resizeDamageWindowRect);
+
+    return status;
+}
+
 static CompOption *
 resizeGetDisplayOptions (CompPlugin  *plugin,
 			 CompDisplay *display,
@@ -699,7 +973,9 @@ resizeSetDisplayOption (CompPlugin      *plugin,
 
 static const CompMetadataOptionInfo resizeDisplayOptionInfo[] = {
     { "initiate", "action", 0, resizeInitiate, resizeTerminate },
-    { "mode", "string", 0, 0, 0 }
+    { "mode", "string", 0, 0, 0 },
+    { "border_color", "color", 0, 0, 0 },
+    { "fill_color", "color", 0, 0, 0 }
 };
 
 static Bool
@@ -796,6 +1072,11 @@ resizeInitScreen (CompPlugin *p,
     rs->cursor[2] = rs->upCursor;
     rs->cursor[3] = rs->downCursor;
 
+    WRAP (rs, s, windowResizeNotify, resizeWindowResizeNotify);
+    WRAP (rs, s, paintScreen, resizePaintScreen);
+    WRAP (rs, s, paintWindow, resizePaintWindow);
+    WRAP (rs, s, damageWindowRect, resizeDamageWindowRect);
+
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
     return TRUE;
@@ -825,6 +1106,11 @@ resizeFiniScreen (CompPlugin *p,
 	XFreeCursor (s->display->display, rs->downLeftCursor);
     if (rs->downRightCursor)
 	XFreeCursor (s->display->display, rs->downRightCursor);
+
+    UNWRAP (rs, s, windowResizeNotify);
+    UNWRAP (rs, s, paintScreen);
+    UNWRAP (rs, s, paintWindow);
+    UNWRAP (rs, s, damageWindowRect);
 
     free (rs);
 }
