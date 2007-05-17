@@ -12,16 +12,28 @@
 		    <button>&lt;Alt&gt;Button2</button>
 		</default>
 	    </option>
-	    <option name="mode" type="string">
+	    <option name="mode" type="int">
 		<_short>Default Resize Mode</_short>
 		<_long>Default mode used for window resizing</_long>
-		<default>Normal</default>
-		<allowed>
-		    <value>Normal</value>
-		    <value>Outline</value>
-		    <value>Rectangle</value>
-		    <value>Stretch</value>
-		</allowed>
+		<default>0</default>
+		<min>0</min>
+		<max>3</max>
+		<desc>
+		    <value>0</value>
+		    <_name>Normal</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Outline</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>Rectangle</_name>
+		</desc>
+		<desc>
+		    <value>3</value>
+		    <_name>Stretch</_name>
+		</desc>
 	    </option>
 	    <option name="border_color" type="color">
 		<_short>Border Color</_short>
