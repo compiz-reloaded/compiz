@@ -457,10 +457,8 @@ resizeHandleKeyEvent (CompScreen *s,
 
     if (rs->grabIndex && rd->w)
     {
-	CompWindow *w;
-	int i, widthInc, heightInc;
-
-	w = rd->w;
+	CompWindow *w = rd->w;
+	int	   widthInc, heightInc, i;
 
 	widthInc  = w->sizeHints.width_inc;
 	heightInc = w->sizeHints.height_inc;
@@ -474,7 +472,7 @@ resizeHandleKeyEvent (CompScreen *s,
 	for (i = 0; i < NUM_KEYS; i++)
 	{
 	    if (keycode != rd->key[i])
-	      continue;
+		continue;
 
 	    if (rd->mask & rKeys[i].warpMask)
 	    {
@@ -495,7 +493,9 @@ resizeHandleKeyEvent (CompScreen *s,
 		y = top  + height * (rKeys[i].dy + 1) / 2;
 
 		warpPointer (s, x - pointerX, y - pointerY);
+
 		rd->mask = rKeys[i].resizeMask;
+
 		updateScreenGrab (s, rs->grabIndex, rs->cursor[i]);
 	    }
 	    break;
