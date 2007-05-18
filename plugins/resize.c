@@ -361,8 +361,6 @@ resizeTerminate (CompDisplay	 *d,
 
 	RESIZE_SCREEN (w->screen);
 
-	(w->screen->windowUngrabNotify) (w);
-
 	if (resizeMode == RESIZE_MODE_NORMAL)
 	{
 	    if (state & CompActionStateCancel)
@@ -414,7 +412,10 @@ resizeTerminate (CompDisplay	 *d,
 	}
 
 	if (!(mask & (CWWidth | CWHeight)))
+	{
+	    (w->screen->windowUngrabNotify) (w);
 	    rd->w = NULL;
+	}
 
 	if (rs->grabIndex)
 	{
@@ -765,12 +766,15 @@ resizeWindowResizeNotify (CompWindow *w,
     RESIZE_DISPLAY (w->screen->display);
     RESIZE_SCREEN (w->screen);
 
-    if (rd->w == w && !rs->grabIndex)
-	rd->w = NULL;
-
     UNWRAP (rs, w->screen, windowResizeNotify);
     (*w->screen->windowResizeNotify) (w, dx, dy, dwidth, dheight);
     WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
+
+    if (rd->w == w && !rs->grabIndex)
+    {	
+	(w->screen->windowUngrabNotify) (w);
+	rd->w = NULL;
+    }
 }
 
 static void
