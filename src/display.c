@@ -1120,6 +1120,19 @@ compRemoveWatchFd (CompWatchFdHandle handle)
     }
 }
 
+short int
+compWatchFdEvents (CompWatchFdHandle handle)
+{
+    CompWatchFd *w;
+    int		i;
+
+    for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+	if (w->handle == handle)
+	    return watchPollFds[i].revents;
+
+    return 0;   
+}
+
 #define TIMEVALDIFF(tv1, tv2)						   \
     ((tv1)->tv_sec == (tv2)->tv_sec || (tv1)->tv_usec >= (tv2)->tv_usec) ? \
     ((((tv1)->tv_sec - (tv2)->tv_sec) * 1000000) +			   \

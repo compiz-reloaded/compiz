@@ -957,6 +957,9 @@ compAddWatchFd (int	     fd,
 void
 compRemoveWatchFd (CompWatchFdHandle handle);
 
+short int
+compWatchFdEvents (CompWatchFdHandle handle);
+
 CompFileWatchHandle
 addFileWatch (CompDisplay	    *display,
 	      const char	    *path,
