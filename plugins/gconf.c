@@ -43,15 +43,12 @@ static CompMetadata gconfMetadata;
 int gconf_value_compare (const GConfValue *value_a,
 			 const GConfValue *value_b);
 
-#define KEY_CHANGE_TIMEOUT 250
-
 static int displayPrivateIndex;
 
 typedef struct _GConfDisplay {
     int screenPrivateIndex;
 
-    GConfClient       *client;
-    CompTimeoutHandle timeoutHandle;
+    GConfClient *client;
 
     InitPluginForDisplayProc      initPluginForDisplay;
     SetDisplayOptionProc	  setDisplayOption;
@@ -1026,14 +1023,6 @@ gconfKeyChanged (GConfClient *client,
 }
 
 static Bool
-gconfTimeout (void *closure)
-{
-    while (g_main_pending ()) g_main_iteration (FALSE);
-
-    return TRUE;
-}
-
-static Bool
 gconfInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
@@ -1072,8 +1061,6 @@ gconfInitDisplay (CompPlugin  *p,
     gconf_client_notify_add (gd->client, APP_NAME, gconfKeyChanged, d,
 			     NULL, NULL);
 
-    gd->timeoutHandle = compAddTimeout (KEY_CHANGE_TIMEOUT, gconfTimeout, 0);
-
     return TRUE;
 }
 
@@ -1082,8 +1069,6 @@ gconfFiniDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     GCONF_DISPLAY (d);
-
-    compRemoveTimeout (gd->timeoutHandle);
 
     g_object_unref (gd->client);
 
@@ -1181,6 +1166,7 @@ gconfGetMetadata (CompPlugin *plugin)
 }
 
 CompPluginDep gconfDeps[] = {
+    { CompPluginRuleAfter,  "glib" },
     { CompPluginRuleBefore, "decoration" },
     { CompPluginRuleBefore, "wobbly" },
     { CompPluginRuleBefore, "fade" },

@@ -3,13 +3,16 @@
 	<_short>GConf</_short>
 	<_long>GConf Control Backend</_long>
 	<deps>
-		<relation type="before">
-			<plugin>decoration</plugin>
-			<plugin>wobbly</plugin>
-			<plugin>fade</plugin>
-			<plugin>cube</plugin>
-			<plugin>scale</plugin>
-		</relation>
+	    <relation type="after">
+		<plugin>glib</plugin>
+	    </relation>
+	    <relation type="before">
+		<plugin>decoration</plugin>
+		<plugin>wobbly</plugin>
+		<plugin>fade</plugin>
+		<plugin>cube</plugin>
+		<plugin>scale</plugin>
+	    </relation>
 	</deps>
     </plugin>
 </compiz>
