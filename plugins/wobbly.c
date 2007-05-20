@@ -2489,8 +2489,11 @@ wobblyWindowGrabNotify (CompWindow   *w,
 
     mIndex = WOBBLY_SCREEN_OPTION_MOVE_WINDOW_MATCH;
 
-    ws->grabMask   = mask;
-    ws->grabWindow = w;
+    if (!ws->grabWindow)
+    {
+    	ws->grabMask   = mask;
+	ws->grabWindow = w;
+    }
     ws->moveWindow = FALSE;
 
     if ((mask & CompWindowGrabButtonMask)	    &&
@@ -2583,8 +2586,11 @@ wobblyWindowUngrabNotify (CompWindow *w)
     WOBBLY_SCREEN (w->screen);
     WOBBLY_WINDOW (w);
 
-    ws->grabMask   = 0;
-    ws->grabWindow = NULL;
+    if (w == ws->grabWindow)
+    {
+    	ws->grabMask   = 0;
+	ws->grabWindow = NULL;
+    }
 
     if (ww->grabbed)
     {
