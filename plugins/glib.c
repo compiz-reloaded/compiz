@@ -37,12 +37,14 @@ typedef struct _GLibWatch {
 } GLibWatch;
 
 typedef struct _GConfDisplay {
+    HandleEventProc   handleEvent;
     CompTimeoutHandle timeoutHandle;
     gint	      maxPriority;
     GPollFD	      *fds;
     gint	      fdsSize;
     gint	      nFds;
     GLibWatch	      *watch;
+    Atom	      notifyAtom;
 } GLibDisplay;
 
 #define GET_GLIB_DISPLAY(d)				     \
@@ -82,6 +84,20 @@ glibDispatchAndPrepare (void *closure)
     return FALSE;
 }
 
+static void
+glibWakeup (CompDisplay *display)
+{
+    GLIB_DISPLAY (display);
+
+    if (gd->timeoutHandle)
+    {
+	compRemoveTimeout (gd->timeoutHandle);
+	compAddTimeout (0, glibDispatchAndPrepare, (void *) display);
+
+	gd->timeoutHandle = 0;
+    }
+}
+
 static Bool
 glibCollectEvents (void *closure)
 {
@@ -92,13 +108,7 @@ glibCollectEvents (void *closure)
 
     gd->fds[watch->index].revents |= compWatchFdEvents (watch->handle);
 
-    if (gd->timeoutHandle)
-    {
-	compRemoveTimeout (gd->timeoutHandle);
-	compAddTimeout (0, glibDispatchAndPrepare, (void *) display);
-
-	gd->timeoutHandle = 0;
-    }
+    glibWakeup (display);
 
     return TRUE;
 }
@@ -158,6 +168,23 @@ glibPrepare (CompDisplay  *display,
 	compAddTimeout (timeout, glibDispatchAndPrepare, display);
 }
 
+static void
+glibHandleEvent (CompDisplay *d,
+		 XEvent      *event)
+{
+    GLIB_DISPLAY (d);
+
+    if (event->type == ClientMessage)
+    {
+	if (event->xclient.message_type == gd->notifyAtom)
+	    glibWakeup (d);
+    }
+
+    UNWRAP (gd, d, handleEvent);
+    (*d->handleEvent) (d, event);
+    WRAP (gd, d, handleEvent, glibHandleEvent);
+}
+
 static Bool
 glibInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
@@ -171,6 +198,9 @@ glibInitDisplay (CompPlugin  *p,
     gd->fds	      = NULL;
     gd->fdsSize	      = 0;
     gd->timeoutHandle = 0;
+    gd->notifyAtom    = XInternAtom (d->display, "_COMPIZ_GLIB_NOTIFY", 0);
+
+    WRAP (gd, d, handleEvent, glibHandleEvent);
 
     d->privates[displayPrivateIndex].ptr = gd;
 
@@ -189,6 +219,8 @@ glibFiniDisplay (CompPlugin  *p,
 	compRemoveTimeout (gd->timeoutHandle);
 
     glibDispatch (d, g_main_context_default ());
+
+    UNWRAP (gd, d, handleEvent);
 
     if (gd->fds)
 	free (gd->fds);
