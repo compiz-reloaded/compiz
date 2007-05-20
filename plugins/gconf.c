@@ -1022,6 +1022,28 @@ gconfKeyChanged (GConfClient *client,
 	g_free (key);
 }
 
+static void
+gconfSendGLibNotify (CompDisplay *d)
+{
+    Display *dpy = d->display;
+    XEvent  xev;
+
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = dpy;
+    xev.xclient.format  = 32;
+
+    xev.xclient.message_type = XInternAtom (dpy, "_COMPIZ_GLIB_NOTIFY", 0);
+    xev.xclient.window	     = d->screens->root;
+
+    memset (xev.xclient.data.l, 0, sizeof (xev.xclient.data.l));
+
+    XSendEvent (dpy,
+		d->screens->root,
+		FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask,
+		&xev);
+}
+
 static Bool
 gconfInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
@@ -1060,6 +1082,8 @@ gconfInitDisplay (CompPlugin  *p,
 
     gconf_client_notify_add (gd->client, APP_NAME, gconfKeyChanged, d,
 			     NULL, NULL);
+
+    gconfSendGLibNotify (d);
 
     return TRUE;
 }
