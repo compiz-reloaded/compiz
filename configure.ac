@@ -128,6 +128,19 @@ if test -z "$XSLTPROC"; then
   AC_MSG_ERROR([Couldn't find xsltproc])
 fi
 
+AC_ARG_ENABLE(glib,
+  [  --disable-glib          Disable glib plugin],
+  [use_glib=$enableval], [use_glib=yes])
+
+if test "x$use_glib" = "xyes"; then
+  PKG_CHECK_MODULES(GLIB, glib-2.0)
+fi
+
+AM_CONDITIONAL(USE_GLIB, test "x$use_glib" = "xyes")
+if test "$use_glib" = yes; then
+  AC_DEFINE(USE_GLIB, 1, [Build glib plugin])
+fi
+
 AC_ARG_ENABLE(gconf,
   [  --disable-gconf         Disable gconf plugin],
   [use_gconf=$enableval], [use_gconf=yes])
@@ -454,6 +467,7 @@ metadata/Makefile
 
 echo ""
 echo "the following optional plugins will be compiled:"
+echo "  glib:     $use_glib"
 echo "  gconf:    $use_gconf"
 echo "  place:    $use_place"
 echo "  dbus:     $use_dbus"
