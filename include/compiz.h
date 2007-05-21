@@ -957,6 +957,9 @@ compAddWatchFd (int	     fd,
 void
 compRemoveWatchFd (CompWatchFdHandle handle);
 
+short int
+compWatchFdEvents (CompWatchFdHandle handle);
+
 CompFileWatchHandle
 addFileWatch (CompDisplay	    *display,
 	      const char	    *path,
@@ -3086,6 +3089,12 @@ matchPropertyChanged (CompDisplay *display,
 
 
 /* metadata.c */
+
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY (x)
+#define MINTOSTRING(x) "<min>" TOSTRING (x) "</min>"
+#define MAXTOSTRING(x) "<max>" TOSTRING (x) "</max>"
+#define RESTOSTRING(min, max) MINTOSTRING (min) MAXTOSTRING (max)
 
 typedef struct _CompMetadataOptionInfo {
     char		   *name;

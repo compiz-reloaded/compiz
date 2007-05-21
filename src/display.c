@@ -146,13 +146,11 @@ closeWin (CompDisplay     *d,
 	  int		  nOption)
 {
     CompWindow   *w;
-    Window       xid;
     unsigned int time;
 
-    xid  = getIntOptionNamed (option, nOption, "window", 0);
     time = getIntOptionNamed (option, nOption, "time", CurrentTime);
 
-    w = findTopLevelWindowAtDisplay (d, xid);
+    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
     if (w)
 	closeWindow (w, time);
 
@@ -211,11 +209,8 @@ unmaximize (CompDisplay     *d,
 	    int		    nOption)
 {
     CompWindow *w;
-    Window     xid;
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
+    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
     if (w)
 	maximizeWindow (w, 0);
 
@@ -230,11 +225,8 @@ minimize (CompDisplay     *d,
 	  int		  nOption)
 {
     CompWindow *w;
-    Window     xid;
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
+    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
     if (w)
 	minimizeWindow (w);
 
@@ -249,11 +241,8 @@ maximize (CompDisplay     *d,
 	  int		  nOption)
 {
     CompWindow *w;
-    Window     xid;
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
+    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
     if (w)
 	maximizeWindow (w, MAXIMIZE_STATE);
 
@@ -268,11 +257,8 @@ maximizeHorizontally (CompDisplay     *d,
 		      int	      nOption)
 {
     CompWindow *w;
-    Window     xid;
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
+    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
     if (w)
 	maximizeWindow (w, w->state | CompWindowStateMaximizedHorzMask);
 
@@ -287,11 +273,8 @@ maximizeVertically (CompDisplay     *d,
 		    int		    nOption)
 {
     CompWindow *w;
-    Window     xid;
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
+    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
     if (w)
 	maximizeWindow (w, w->state | CompWindowStateMaximizedVertMask);
 
@@ -665,7 +648,7 @@ shade (CompDisplay     *d,
 
 const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "active_plugins", "list", "<type>string</type>", 0, 0 },
-    { "texture_filter", "string", 0, 0, 0 },
+    { "texture_filter", "int", RESTOSTRING (0, 2), 0, 0 },
     { "click_to_focus", "bool", 0, 0, 0 },
     { "autoraise", "bool", 0, 0, 0 },
     { "autoraise_delay", "int", 0, 0, 0 },
@@ -840,14 +823,14 @@ setDisplayOption (CompDisplay     *display,
 	}
 	break;
     case COMP_DISPLAY_OPTION_TEXTURE_FILTER:
-	if (compSetStringOption (o, value))
+	if (compSetIntOption (o, value))
 	{
 	    CompScreen *s;
 
 	    for (s = display->screens; s; s = s->next)
 		damageScreen (s);
 
-	    if (strcmp (o->value.s, "Fast") == 0)
+	    if (!o->value.i)
 		display->textureFilter = GL_NEAREST;
 	    else
 		display->textureFilter = GL_LINEAR;
@@ -1135,6 +1118,19 @@ compRemoveWatchFd (CompWatchFdHandle handle)
 
 	free (w);
     }
+}
+
+short int
+compWatchFdEvents (CompWatchFdHandle handle)
+{
+    CompWatchFd *w;
+    int		i;
+
+    for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+	if (w->handle == handle)
+	    return watchPollFds[i].revents;
+
+    return 0;   
 }
 
 #define TIMEVALDIFF(tv1, tv2)						   \

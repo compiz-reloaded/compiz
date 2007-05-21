@@ -43,15 +43,12 @@ static CompMetadata gconfMetadata;
 int gconf_value_compare (const GConfValue *value_a,
 			 const GConfValue *value_b);
 
-#define KEY_CHANGE_TIMEOUT 250
-
 static int displayPrivateIndex;
 
 typedef struct _GConfDisplay {
     int screenPrivateIndex;
 
-    GConfClient       *client;
-    CompTimeoutHandle timeoutHandle;
+    GConfClient *client;
 
     InitPluginForDisplayProc      initPluginForDisplay;
     SetDisplayOptionProc	  setDisplayOption;
@@ -1025,12 +1022,26 @@ gconfKeyChanged (GConfClient *client,
 	g_free (key);
 }
 
-static Bool
-gconfTimeout (void *closure)
+static void
+gconfSendGLibNotify (CompDisplay *d)
 {
-    while (g_main_pending ()) g_main_iteration (FALSE);
+    Display *dpy = d->display;
+    XEvent  xev;
 
-    return TRUE;
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = dpy;
+    xev.xclient.format  = 32;
+
+    xev.xclient.message_type = XInternAtom (dpy, "_COMPIZ_GLIB_NOTIFY", 0);
+    xev.xclient.window	     = d->screens->root;
+
+    memset (xev.xclient.data.l, 0, sizeof (xev.xclient.data.l));
+
+    XSendEvent (dpy,
+		d->screens->root,
+		FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask,
+		&xev);
 }
 
 static Bool
@@ -1072,7 +1083,7 @@ gconfInitDisplay (CompPlugin  *p,
     gconf_client_notify_add (gd->client, APP_NAME, gconfKeyChanged, d,
 			     NULL, NULL);
 
-    gd->timeoutHandle = compAddTimeout (KEY_CHANGE_TIMEOUT, gconfTimeout, 0);
+    gconfSendGLibNotify (d);
 
     return TRUE;
 }
@@ -1082,8 +1093,6 @@ gconfFiniDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     GCONF_DISPLAY (d);
-
-    compRemoveTimeout (gd->timeoutHandle);
 
     g_object_unref (gd->client);
 
@@ -1181,6 +1190,7 @@ gconfGetMetadata (CompPlugin *plugin)
 }
 
 CompPluginDep gconfDeps[] = {
+    { CompPluginRuleAfter,  "glib" },
     { CompPluginRuleBefore, "decoration" },
     { CompPluginRuleBefore, "wobbly" },
     { CompPluginRuleBefore, "fade" },

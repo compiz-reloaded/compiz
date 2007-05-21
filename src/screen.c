@@ -3176,16 +3176,23 @@ moveWindowToViewportPosition (CompWindow *w,
     int	tx, vWidth = w->screen->width * w->screen->hsize;
     int ty, vHeight = w->screen->height * w->screen->vsize;
 
-    x += w->screen->x * w->screen->width;
-    x = MOD (x, vWidth);
-    x -= w->screen->x * w->screen->width;
+    if (w->screen->hsize != 1)
+    {
+	x += w->screen->x * w->screen->width;
+	x = MOD (x, vWidth);
+	x -= w->screen->x * w->screen->width;
+    }
 
-    y += w->screen->y * w->screen->height;
-    y = MOD (y, vHeight);
-    y -= w->screen->y * w->screen->height;
+    if (w->screen->vsize != 1)
+    {
+	y += w->screen->y * w->screen->height;
+	y = MOD (y, vHeight);
+	y -= w->screen->y * w->screen->height;
+    }
 
     tx = x - w->attrib.x;
     ty = y - w->attrib.y;
+
     if (tx || ty)
     {
 	int m, wx, wy;
@@ -3202,17 +3209,17 @@ moveWindowToViewportPosition (CompWindow *w,
 	wx = tx;
 	wy = ty;
 
-	if (vWidth > w->screen->width)
+	if (w->screen->hsize != 1)
 	{
 	    m = w->attrib.x + tx;
-	
+
 	    if (m - w->output.left < w->screen->width - vWidth)
 		wx = tx + vWidth;
 	    else if (m + w->width + w->output.right > vWidth)
 		wx = tx - vWidth;
 	}
 
-	if (vHeight > w->screen->height)
+	if (w->screen->vsize != 1)
 	{
 	    m = w->attrib.y + ty;
 

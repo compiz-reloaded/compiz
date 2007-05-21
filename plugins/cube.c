@@ -99,6 +99,8 @@ typedef struct _CubeScreen {
 
     int grabIndex;
 
+    int srcOutput;
+
     Bool    unfolded;
     GLfloat unfold, unfoldVelocity;
 
@@ -853,8 +855,16 @@ cubeLoadBackground (CompScreen *s,
 	if (readImageToTexture (s, &cs->bg[n], value->list.value[n].s,
 				&width, &height))
 	{
-	    cs->bg[n].matrix.xx *= (float) width  / s->width;
-	    cs->bg[n].matrix.yy *= (float) height / s->height;
+	    if (cs->fullscreenOutput)
+	    {
+		cs->bg[n].matrix.xx *= (float) width  / s->outputDev[0].width;
+		cs->bg[n].matrix.yy *= (float) height / s->outputDev[0].height;
+	    }
+	    else
+	    {
+		cs->bg[n].matrix.xx *= (float) width  / s->width;
+		cs->bg[n].matrix.yy *= (float) height / s->height;
+	    }
 	}
 	else
 	{
@@ -1061,6 +1071,8 @@ cubePaintScreen (CompScreen		 *s,
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
     }
 
+    cs->srcOutput = output;
+
     UNWRAP (cs, s, paintScreen);
     status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
     WRAP (cs, s, paintScreen, cubePaintScreen);
@@ -1113,7 +1125,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	}
 
 	/* translate back to compiz output */
-	output = cs->output[cubeOutput];
+	output = cs->srcOutput = cs->output[cubeOutput];
 
 	moveScreenViewport (s, -dView, 0, FALSE);
 	(*s->paintTransformedScreen) (s, sAttrib, transform,
@@ -1438,6 +1450,7 @@ cubePaintBackground (CompScreen   *s,
     if (n)
     {
 	CompTexture *bg;
+	CompMatrix  matrix;
 	BoxPtr      pBox = region->rects;
 	int	    nBox = region->numRects;
 	GLfloat     *d, *data;
@@ -1445,7 +1458,7 @@ cubePaintBackground (CompScreen   *s,
 	if (!nBox)
 	    return;
 
-	n = s->x % n;
+	n = (s->x * cs->nOutput + cs->srcOutput) % n;
 
 	if (s->desktopWindowCount)
 	{
@@ -1460,6 +1473,9 @@ cubePaintBackground (CompScreen   *s,
 
 	bg = &cs->bg[n];
 
+	matrix = bg->matrix;
+	matrix.x0 -= (cs->srcOutput * s->outputDev[0].width) * matrix.xx;
+
 	data = malloc (sizeof (GLfloat) * nBox * 16);
 	if (!data)
 	    return;
@@ -1468,26 +1484,26 @@ cubePaintBackground (CompScreen   *s,
 	n = nBox;
 	while (n--)
 	{
-	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
-	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
+	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x1);
+	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y2);
 
 	    *d++ = pBox->x1;
 	    *d++ = pBox->y2;
 
-	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
-	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
+	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x2);
+	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y2);
 
 	    *d++ = pBox->x2;
 	    *d++ = pBox->y2;
 
-	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
-	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
+	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x2);
+	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y1);
 
 	    *d++ = pBox->x2;
 	    *d++ = pBox->y1;
 
-	    *d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
-	    *d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
+	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x1);
+	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y1);
 
 	    *d++ = pBox->x1;
 	    *d++ = pBox->y1;
@@ -1744,9 +1760,9 @@ cubeSetDisplayOption (CompPlugin      *plugin,
 static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
     { "unfold", "action", 0, cubeUnfold, cubeFold },
     { "next_slide", "action", "<passive_grab>false</passive_grab>",
-      cubePrevImage, 0 },
+      cubeNextImage, 0 },
     { "prev_slide", "action", "<passive_grab>false</passive_grab>",
-      cubeNextImage, 0 }
+      cubePrevImage, 0 }
 };
 
 static Bool
@@ -1847,6 +1863,8 @@ cubeInitScreen (CompPlugin *p,
     cs->vertices  = NULL;
 
     cs->grabIndex = 0;
+
+    cs->srcOutput = 0;
 
     cs->skyListId = 0;
 

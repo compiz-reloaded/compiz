@@ -2,8 +2,12 @@
     <plugin name="water">
 	<_short>Water Effect</_short>
 	<_long>Adds water effects to different desktop actions</_long>
-	<rule type="before">blur</rule>
-	<rule type="before">video</rule>
+	<deps>
+		<relation type="before">
+			<plugin>blur</plugin>
+			<plugin>video</plugin>
+		</relation>
+	</deps>
 	<display>
 	    <option name="initiate" type="action">
 		<_short>Initiate</_short>

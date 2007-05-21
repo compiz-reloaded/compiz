@@ -79,6 +79,13 @@ libannotate_la_SOURCES = annotate.c
 libannotate_module = libannotate.la
 endif
 
+if USE_GLIB
+libglib_la_LDFLAGS = -module -avoid-version -no-undefined
+libglib_la_LIBADD = @GLIB_LIBS@
+libglib_la_SOURCES = glib.c
+libglib_module = libglib.la
+endif
+
 if USE_GCONF
 libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
 libgconf_la_LIBADD = @GCONF_LIBS@
@@ -132,6 +139,7 @@ INCLUDES =					\
 moduledir = $(plugindir)
 
 module_LTLIBRARIES =		\
+	$(libglib_module)	\
 	$(libgconf_module)	\
 	libdecoration.la	\
 	libwobbly.la		\

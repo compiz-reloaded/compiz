@@ -2,6 +2,14 @@
     <plugin name="rotate">
 	<_short>Rotate Cube</_short>
 	<_long>Rotate desktop cube</_long>
+	<deps>
+		<relation type="after">
+			<plugin>cube</plugin>
+		</relation>
+		<requirement>
+			<plugin>cube</plugin>
+		</requirement>
+	</deps>
 	<display>
 	    <option name="initiate" type="action">
 		<_short>Initiate</_short>
@@ -48,7 +56,7 @@
 		<_long>Flip to next viewport when moving pointer to screen edge</_long>
 		<default>false</default>
 	    </option>
-	    <option name="edge_flip_move" type="bool">
+	    <option name="edge_flip_window" type="bool">
 		<_short>Edge Flip Move</_short>
 		<_long>Flip to next viewport when moving window to screen edge</_long>
 		<default>true</default>
