@@ -146,11 +146,13 @@ closeWin (CompDisplay     *d,
 	  int		  nOption)
 {
     CompWindow   *w;
+    Window       xid;
     unsigned int time;
 
+    xid  = getIntOptionNamed (option, nOption, "window", 0);
     time = getIntOptionNamed (option, nOption, "time", CurrentTime);
 
-    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
+    w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
 	closeWindow (w, time);
 
@@ -209,8 +211,11 @@ unmaximize (CompDisplay     *d,
 	    int		    nOption)
 {
     CompWindow *w;
+    Window     xid;
 
-    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
 	maximizeWindow (w, 0);
 
@@ -225,8 +230,11 @@ minimize (CompDisplay     *d,
 	  int		  nOption)
 {
     CompWindow *w;
+    Window     xid;
 
-    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
 	minimizeWindow (w);
 
@@ -241,8 +249,11 @@ maximize (CompDisplay     *d,
 	  int		  nOption)
 {
     CompWindow *w;
+    Window     xid;
 
-    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
 	maximizeWindow (w, MAXIMIZE_STATE);
 
@@ -257,8 +268,11 @@ maximizeHorizontally (CompDisplay     *d,
 		      int	      nOption)
 {
     CompWindow *w;
+    Window     xid;
 
-    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
 	maximizeWindow (w, w->state | CompWindowStateMaximizedHorzMask);
 
@@ -273,8 +287,11 @@ maximizeVertically (CompDisplay     *d,
 		    int		    nOption)
 {
     CompWindow *w;
+    Window     xid;
 
-    w = findTopLevelWindowAtDisplay (d, d->activeWindow);
+    xid = getIntOptionNamed (option, nOption, "window", 0);
+
+    w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
 	maximizeWindow (w, w->state | CompWindowStateMaximizedVertMask);
 
