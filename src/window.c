@@ -1811,6 +1811,7 @@ addWindow (CompScreen *screen,
     w->shaded		 = FALSE;
     w->hidden		 = FALSE;
     w->grabbed		 = FALSE;
+    w->added		 = FALSE;
 
     w->desktop = screen->currentDesktop;
 
@@ -2130,6 +2131,8 @@ addWindow (CompScreen *screen,
     }
 
     windowInitPlugins (w);
+
+    (*w->screen->windowAddNotify) (w);
 
     recalcWindowActions (w);
     updateWindowOpacity (w);
@@ -4788,3 +4791,10 @@ compareWindowActiveness (CompWindow *w1,
 
     return w1->activeNum - w2->activeNum;
 }
+
+void
+windowAddNotify (CompWindow *w)
+{
+    w->added = TRUE;
+}
+

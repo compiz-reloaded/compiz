@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070506
+#define ABIVERSION 20070507
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1661,6 +1661,8 @@ typedef void (*WindowUngrabNotifyProc) (CompWindow *window);
 
 typedef void (*WindowStateChangeNotifyProc) (CompWindow *window);
 
+typedef void (*WindowAddNotifyProc) (CompWindow *window);
+
 typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 
 #define COMP_SCREEN_DAMAGE_PENDING_MASK (1 << 0)
@@ -1957,6 +1959,7 @@ struct _CompScreen {
     PaintCursorProc      paintCursor;
     DamageCursorRectProc damageCursorRect;
 
+    WindowAddNotifyProc    windowAddNotify;
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
     WindowGrabNotifyProc   windowGrabNotify;
@@ -2303,6 +2306,7 @@ struct _CompWindow {
     Bool	      redirected;
     Bool	      managed;
     Bool	      bindFailed;
+    Bool	      added;
     int		      destroyRefCnt;
     int		      unmapRefCnt;
 
@@ -2747,6 +2751,9 @@ setDesktopForWindow (CompWindow   *w,
 int
 compareWindowActiveness (CompWindow *w1,
 			 CompWindow *w2);
+
+void
+windowAddNotify (CompWindow *w);
 
 
 /* plugin.c */
