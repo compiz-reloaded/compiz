@@ -1250,7 +1250,8 @@ scaleInitiateGroup (CompDisplay     *d,
 	{
 	    CompWindow *w;
 
-	    w = findWindowAtDisplay (d, d->activeWindow);
+	    w = findWindowAtDisplay (d, getIntOptionNamed (option, nOption,
+							   "window", 0));
 	    if (w)
 	    {
 		ss->type	 = ScaleTypeGroup;
