@@ -110,6 +110,7 @@ typedef struct _BlurScreen {
     DrawWindowProc	         drawWindow;
     DrawWindowTextureProc        drawWindowTexture;
 
+    WindowAddNotifyProc    windowAddNotify;
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
 
@@ -2388,6 +2389,29 @@ blurMatchPropertyChanged (CompDisplay *d,
     WRAP (bd, d, matchPropertyChanged, blurMatchPropertyChanged);
 }
 
+static void
+blurWindowAdd (CompWindow *w)
+{
+    BLUR_SCREEN (w->screen);
+
+    blurWindowUpdate (w, BLUR_STATE_CLIENT);
+    blurWindowUpdate (w, BLUR_STATE_DECOR);
+
+    blurUpdateWindowMatch (bs, w);
+}
+
+static void
+blurWindowAddNotify (CompWindow *w)
+{
+    BLUR_SCREEN (w->screen);
+
+    blurWindowAdd (w);
+
+    UNWRAP (bs, w->screen, windowAddNotify);
+    (*w->screen->windowAddNotify) (w);
+    WRAP (bs, w->screen, windowAddNotify, blurWindowAddNotify);
+}
+
 static const CompMetadataOptionInfo blurDisplayOptionInfo[] = {
     { "pulse", "action", 0, blurPulse, 0 }
 };
@@ -2590,6 +2614,7 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, paintWindow, blurPaintWindow);
     WRAP (bs, s, drawWindow, blurDrawWindow);
     WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
+    WRAP (bs, s, windowAddNotify, blurWindowAddNotify);
     WRAP (bs, s, windowResizeNotify, blurWindowResizeNotify);
     WRAP (bs, s, windowMoveNotify, blurWindowMoveNotify);
 
@@ -2635,6 +2660,7 @@ blurFiniScreen (CompPlugin *p,
     UNWRAP (bs, s, paintWindow);
     UNWRAP (bs, s, drawWindow);
     UNWRAP (bs, s, drawWindowTexture);
+    UNWRAP (bs, s, windowAddNotify);
     UNWRAP (bs, s, windowResizeNotify);
     UNWRAP (bs, s, windowMoveNotify);
 
@@ -2679,10 +2705,8 @@ blurInitWindow (CompPlugin *p,
 
     w->privates[bs->windowPrivateIndex].ptr = bw;
 
-    blurWindowUpdate (w, BLUR_STATE_CLIENT);
-    blurWindowUpdate (w, BLUR_STATE_DECOR);
-
-    blurUpdateWindowMatch (bs, w);
+    if (w->added)
+	blurWindowAdd (w);
 
     return TRUE;
 }

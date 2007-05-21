@@ -122,6 +122,7 @@ typedef struct _DecorScreen {
     DamageWindowRectProc	  damageWindowRect;
     GetOutputExtentsForWindowProc getOutputExtentsForWindow;
 
+    WindowAddNotifyProc    windowAddNotify;
     WindowMoveNotifyProc   windowMoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
 
@@ -1184,6 +1185,19 @@ decorMatchPropertyChanged (CompDisplay *d,
     WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);
 }
 
+static void
+decorWindowAddNotify (CompWindow *w)
+{
+    DECOR_SCREEN (w->screen);
+
+    if (w->shaded || w->attrib.map_state == IsViewable)
+	decorWindowUpdate (w, FALSE);
+
+    UNWRAP (ds, w->screen, windowAddNotify);
+    (*w->screen->windowAddNotify) (w);
+    WRAP (ds, w->screen, windowAddNotify, decorWindowAddNotify);
+}
+
 static const CompMetadataOptionInfo decorDisplayOptionInfo[] = {
     { "shadow_radius", "float", "<min>0.0</min><max>48.0</max>", 0, 0 },
     { "shadow_opacity", "float", "<min>0.0</min>", 0, 0 },
@@ -1286,6 +1300,7 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, drawWindow, decorDrawWindow);
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
     WRAP (ds, s, getOutputExtentsForWindow, decorGetOutputExtentsForWindow);
+    WRAP (ds, s, windowAddNotify, decorWindowAddNotify);
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
@@ -1312,6 +1327,7 @@ decorFiniScreen (CompPlugin *p,
     UNWRAP (ds, s, drawWindow);
     UNWRAP (ds, s, damageWindowRect);
     UNWRAP (ds, s, getOutputExtentsForWindow);
+    UNWRAP (ds, s, windowAddNotify);
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
     UNWRAP (ds, s, windowStateChangeNotify);
@@ -1339,7 +1355,7 @@ decorInitWindow (CompPlugin *p,
     if (!w->attrib.override_redirect)
 	decorWindowUpdateDecoration (w);
 
-    if (w->shaded || w->attrib.map_state == IsViewable)
+    if (w->added && (w->shaded || w->attrib.map_state == IsViewable))
 	decorWindowUpdate (w, FALSE);
 
     return TRUE;
