@@ -532,7 +532,10 @@ initColorValue (CompOptionValue *v,
 {
     xmlNodePtr child;
 
-    memset (v->c, 0, sizeof (v->c));
+    v->c[0] = 0x0000;
+    v->c[1] = 0x0000;
+    v->c[2] = 0x0000;
+    v->c[3] = 0xffff;
 
     if (!doc)
 	return;
