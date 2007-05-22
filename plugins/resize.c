@@ -771,7 +771,7 @@ resizeWindowResizeNotify (CompWindow *w,
     WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
 
     if (rd->w == w && !rs->grabIndex)
-    {	
+    {
 	(w->screen->windowUngrabNotify) (w);
 	rd->w = NULL;
     }
