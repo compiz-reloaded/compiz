@@ -79,6 +79,26 @@
 		    <alpha>0x4fff</alpha>
 		</default>
 	    </option>
+	    <option name="normal_match" type="match">
+		<_short>Normal Resize Windows</_short>
+		<_long>Windows that normal resize should be used for</_long>
+		<default/>
+	    </option>
+	    <option name="outline_match" type="match">
+		<_short>Outline Resize Windows</_short>
+		<_long>Windows that outline resize should be used for</_long>
+		<default/>
+	    </option>
+	    <option name="rectangle_match" type="match">
+		<_short>Rectangle Resize Windows</_short>
+		<_long>Windows that rectangle resize should be used for</_long>
+		<default/>
+	    </option>
+	    <option name="stretch_match" type="match">
+		<_short>Stretch Resize Windows</_short>
+		<_long>Windows that stretch resize should be used for</_long>
+		<default/>
+	    </option>
 	</display>
     </plugin>
 </compiz>

@@ -70,7 +70,11 @@ struct _ResizeKeys {
 #define RESIZE_DISPLAY_OPTION_MODE	         5
 #define RESIZE_DISPLAY_OPTION_BORDER_COLOR       6
 #define RESIZE_DISPLAY_OPTION_FILL_COLOR         7
-#define RESIZE_DISPLAY_OPTION_NUM	         8
+#define RESIZE_DISPLAY_OPTION_NORMAL_MATCH	 8
+#define RESIZE_DISPLAY_OPTION_OUTLINE_MATCH	 9
+#define RESIZE_DISPLAY_OPTION_RECTANGLE_MATCH	 10
+#define RESIZE_DISPLAY_OPTION_STRETCH_MATCH	 11
+#define RESIZE_DISPLAY_OPTION_NUM		 12
 
 static int displayPrivateIndex;
 
@@ -295,6 +299,21 @@ resizeInitiate (CompDisplay     *d,
 	    {
 		rd->mode = i;
 		break;
+	    }
+	}
+
+	if (i > RESIZE_MODE_LAST)
+	{
+	    int index;
+
+	    for (i = 0; i <= RESIZE_MODE_LAST; i++)
+	    {
+		index = RESIZE_DISPLAY_OPTION_NORMAL_MATCH + i;
+		if (matchEval (&rd->opt[index].value.match, w))
+		{
+		    rd->mode = i;
+		    break;
+		}
 	    }
 	}
 
@@ -1005,7 +1024,11 @@ static const CompMetadataOptionInfo resizeDisplayOptionInfo[] = {
     { "initiate", "action", 0, resizeInitiate, resizeTerminate },
     { "mode", "int", RESTOSTRING (0, RESIZE_MODE_LAST), 0, 0 },
     { "border_color", "color", 0, 0, 0 },
-    { "fill_color", "color", 0, 0, 0 }
+    { "fill_color", "color", 0, 0, 0 },
+    { "normal_match", "match", 0, 0, 0 },
+    { "outline_match", "match", 0, 0, 0 },
+    { "rectangle_match", "match", 0, 0, 0 },
+    { "stretch_match", "match", 0, 0, 0 }
 };
 
 static Bool
