@@ -3,6 +3,30 @@
 	<_short>Resize Window</_short>
 	<_long>Resize window</_long>
 	<display>
+	    <option name="initiate_normal" type="action">
+		<_short>Initiate Normal Window Resize</_short>
+		<_long>Start resizing window normally</_long>
+		<allowed key="true" button="true"/>
+		<default/>
+	    </option>
+	    <option name="initiate_outline" type="action">
+		<_short>Initiate Outline Window Resize</_short>
+		<_long>Start resizing window with outline</_long>
+		<allowed key="true" button="true"/>
+		<default/>
+	    </option>
+	    <option name="initiate_rectangle" type="action">
+		<_short>Initiate Rectangle Window Resize</_short>
+		<_long>Start resizing window with rectangle</_long>
+		<allowed key="true" button="true"/>
+		<default/>
+	    </option>
+	    <option name="initiate_stretch" type="action">
+		<_short>Initiate Stretch Window Resize</_short>
+		<_long>Start resizing window by stretching it</_long>
+		<allowed key="true" button="true"/>
+		<default/>
+	    </option>
 	    <option name="initiate" type="action">
 		<_short>Initiate Window Resize</_short>
 		<_long>Start resizing window</_long>
