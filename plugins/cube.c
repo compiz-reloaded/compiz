@@ -24,22 +24,10 @@
  *         Mirco Müller <macslow@bangang.de> (Skydome support)
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#define _GNU_SOURCE
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <sys/time.h>
-
-#ifdef USE_LIBRSVG
-#include <cairo/cairo.h>
-#include <cairo/cairo-xlib.h>
-#include <librsvg/rsvg.h>
-#include <librsvg/rsvg-cairo.h>
-#endif
 
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
@@ -109,9 +97,8 @@ typedef struct _CubeScreen {
 
     GLuint skyListId;
 
-    Pixmap	    pixmap;
-    int		    pw, ph;
-    CompTexture     texture, sky;
+    int		pw, ph;
+    CompTexture texture, sky;
 
     int	imgCurFile;
 
@@ -130,11 +117,6 @@ typedef struct _CubeScreen {
 
     CompTexture *bg;
     int		nBg;
-
-#ifdef USE_LIBRSVG
-    cairo_t	    *cr;
-#endif
-
 } CubeScreen;
 
 #define GET_CUBE_DISPLAY(d)				     \
@@ -150,144 +132,6 @@ typedef struct _CubeScreen {
     CubeScreen *cs = GET_CUBE_SCREEN (s, GET_CUBE_DISPLAY (s->display))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
-
-static void
-cubeInitSvg (CompScreen *s)
-
-{
-    CUBE_SCREEN (s);
-
-    cs->pixmap = None;
-    cs->pw = cs->ph = 0;
-
-#ifdef USE_LIBRSVG
-    cs->cr = NULL;
-#endif
-
-}
-
-static void
-cubeFiniSvg (CompScreen *s)
-
-{
-    CUBE_SCREEN (s);
-
-#ifdef USE_LIBRSVG
-    if (cs->cr)
-	cairo_destroy (cs->cr);
-#endif
-
-    if (cs->pixmap)
-	XFreePixmap (s->display->display, cs->pixmap);
-}
-
-static Bool
-readSvgToTexture (CompScreen   *s,
-		  CompTexture  *texture,
-		  const char   *svgFileName,
-		  unsigned int *returnWidth,
-		  unsigned int *returnHeight)
-{
-
-#ifdef USE_LIBRSVG
-    unsigned int      width, height, pw, ph;
-    char	      *name;
-    GError	      *error = NULL;
-    RsvgHandle	      *svgHandle;
-    RsvgDimensionData svgDimension;
-
-    CUBE_SCREEN (s);
-
-    name = strdup (svgFileName);
-
-    svgHandle = rsvg_handle_new_from_file (name, &error);
-
-    free (name);
-
-    if (!svgHandle)
-	return FALSE;
-
-    rsvg_handle_get_dimensions (svgHandle, &svgDimension);
-
-    width  = svgDimension.width;
-    height = svgDimension.height;
-
-    if (cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE].value.b)
-    {
-	pw = (cs->nOutput > 1) ? s->outputDev[0].width  : s->width;
-	ph = (cs->nOutput > 1) ? s->outputDev[0].height : s->height;
-    }
-    else
-    {
-	pw = width;
-	ph = height;
-    }
-
-    if (!cs->pixmap || cs->pw != pw || cs->ph != ph)
-    {
-	cairo_surface_t *surface;
-	Visual		*visual;
-	int		depth;
-
-	if (cs->cr)
-	{
-	    cairo_destroy (cs->cr);
-	    cs->cr = NULL;
-	}
-
-	if (cs->pixmap)
-	    XFreePixmap (s->display->display, cs->pixmap);
-
-	cs->pw = pw;
-	cs->ph = ph;
-
-	depth = DefaultDepth (s->display->display, s->screenNum);
-	cs->pixmap = XCreatePixmap (s->display->display, s->root,
-				    cs->pw, cs->ph,
-				    depth);
-
-	if (!bindPixmapToTexture (s, texture, cs->pixmap,
-				  cs->pw, cs->ph, depth))
-	{
-	    fprintf (stderr, "%s: Couldn't bind slide pixmap 0x%x to "
-		     "texture\n", programName, (int) cs->pixmap);
-
-	    return FALSE;
-	}
-
-	visual = DefaultVisual (s->display->display, s->screenNum);
-	surface = cairo_xlib_surface_create (s->display->display,
-					     cs->pixmap, visual,
-					     cs->pw, cs->ph);
-	cs->cr = cairo_create (surface);
-	cairo_surface_destroy (surface);
-    }
-
-    cairo_save (cs->cr);
-    cairo_set_source_rgb (cs->cr,
-			  (double) cs->color[0] / 0xffff,
-			  (double) cs->color[1] / 0xffff,
-			  (double) cs->color[2] / 0xffff);
-    cairo_rectangle (cs->cr, 0, 0, cs->pw, cs->ph);
-    cairo_fill (cs->cr);
-
-    cairo_scale (cs->cr, (double) cs->pw / width, (double) cs->ph / height);
-
-    rsvg_handle_render_cairo (svgHandle, cs->cr);
-
-    rsvg_handle_free (svgHandle);
-
-    cairo_restore (cs->cr);
-
-    *returnWidth  = cs->pw;
-    *returnHeight = cs->ph;
-
-    return TRUE;
-#else
-    return FALSE;
-#endif
-
-}
 
 static void
 cubeLoadImg (CompScreen *s,
@@ -318,8 +162,6 @@ cubeLoadImg (CompScreen *s,
     {
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
 
 	if (!imgNFile)
 	    return;
@@ -327,24 +169,15 @@ cubeLoadImg (CompScreen *s,
 
     cs->imgCurFile = n % imgNFile;
 
-    if (readImageToTexture (s, &cs->texture,
+    if (!readImageToTexture (s, &cs->texture,
 			    imgFiles[cs->imgCurFile].s,
 			    &width, &height))
-    {
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
-    }
-    else if (!readSvgToTexture (s, &cs->texture,
-				imgFiles[cs->imgCurFile].s,
-				&width, &height))
     {
 	fprintf (stderr, "%s: Failed to load slide: %s\n",
 		 programName, imgFiles[cs->imgCurFile].s);
 
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
 
 	return;
     }
@@ -1875,8 +1708,6 @@ cubeInitScreen (CompPlugin *p,
     initTexture (s, &cs->texture);
     initTexture (s, &cs->sky);
 
-    cubeInitSvg (s);
-
     cs->imgCurFile = 0;
 
     cs->unfolded = FALSE;
@@ -1939,8 +1770,6 @@ cubeFiniScreen (CompPlugin *p,
     finiTexture (s, &cs->texture);
     finiTexture (s, &cs->sky);
 
-    cubeFiniSvg (s);
-
     cubeUnloadBackgrounds (s);
 
     compFiniScreenOptions (s, cs->opt, CUBE_SCREEN_OPTION_NUM);
@@ -1968,21 +1797,12 @@ cubeInit (CompPlugin *p)
 
     compAddMetadataFromFile (&cubeMetadata, p->vTable->name);
 
-#ifdef USE_LIBRSVG
-    rsvg_init ();
-#endif
-
     return TRUE;
 }
 
 static void
 cubeFini (CompPlugin *p)
 {
-
-#ifdef USE_LIBRSVG
-    rsvg_term ();
-#endif
-
     freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&cubeMetadata);
 }

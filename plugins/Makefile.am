@@ -2,7 +2,6 @@ libfade_la_LDFLAGS = -module -avoid-version -no-undefined
 libfade_la_SOURCES = fade.c
 
 libcube_la_LDFLAGS = -module -avoid-version -no-undefined
-libcube_la_LIBADD = @LIBRSVG_LIBS@
 libcube_la_SOURCES = cube.c
 
 librotate_la_LDFLAGS = -module -avoid-version -no-undefined
