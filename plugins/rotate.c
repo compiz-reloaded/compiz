@@ -1491,7 +1491,7 @@ rotateWindowGrabNotify (CompWindow   *w,
 
     if (!rs->grabWindow)
     {
-    	rs->grabMask   = mask;
+	rs->grabMask   = mask;
 	rs->grabWindow = w;
     }
 
@@ -1508,7 +1508,7 @@ rotateWindowUngrabNotify (CompWindow *w)
     if (w == rs->grabWindow)
     {
 	rs->grabMask   = 0;
-    	rs->grabWindow = NULL;
+	rs->grabWindow = NULL;
     }
 
     UNWRAP (rs, w->screen, windowUngrabNotify);
