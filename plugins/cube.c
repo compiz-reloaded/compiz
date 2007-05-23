@@ -1485,17 +1485,28 @@ cubeSetDisplayOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     CompOption *o;
+    int	       index;
 
     CUBE_DISPLAY (display);
 
-    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, NULL);
+    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, &index);
     if (!o)
 	return FALSE;
 
-    return compSetDisplayOption (display, o, value);
+    switch (index) {
+    case CUBE_DISPLAY_OPTION_ABI:
+    case CUBE_DISPLAY_OPTION_INDEX:
+	break;
+    default:
+	return compSetDisplayOption (display, o, value);
+    }
+
+    return FALSE;
 }
 
 static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
+    { "abi", "int", 0, 0, 0 },
+    { "index", "int", 0, 0, 0 },
     { "unfold", "action", 0, cubeUnfold, cubeFold },
     { "next_slide", "action", "<passive_grab>false</passive_grab>",
       cubeNextImage, 0 },
@@ -1522,6 +1533,9 @@ cubeInitDisplay (CompPlugin  *p,
 	free (cd);
 	return FALSE;
     }
+
+    cd->opt[CUBE_DISPLAY_OPTION_ABI].value.i   = CUBE_ABIVERSION;
+    cd->opt[CUBE_DISPLAY_OPTION_INDEX].value.i = cubeDisplayPrivateIndex;
 
     cd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (cd->screenPrivateIndex < 0)

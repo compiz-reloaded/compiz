@@ -25,10 +25,14 @@
 
 #include <compiz.h>
 
-#define CUBE_DISPLAY_OPTION_UNFOLD 0
-#define CUBE_DISPLAY_OPTION_NEXT   1
-#define CUBE_DISPLAY_OPTION_PREV   2
-#define CUBE_DISPLAY_OPTION_NUM    3
+#define CUBE_ABIVERSION 20070523
+
+#define CUBE_DISPLAY_OPTION_ABI    0
+#define CUBE_DISPLAY_OPTION_INDEX  1
+#define CUBE_DISPLAY_OPTION_UNFOLD 2
+#define CUBE_DISPLAY_OPTION_NEXT   3
+#define CUBE_DISPLAY_OPTION_PREV   4
+#define CUBE_DISPLAY_OPTION_NUM    5
 
 typedef struct _CubeDisplay {
     int	screenPrivateIndex;
