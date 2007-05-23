@@ -589,7 +589,7 @@ rotate (CompDisplay     *d,
 	if (s->hsize < 2)
 	    return FALSE;
 
-	if (otherScreenGrabExist (s, "rotate", "move", "switcher", 
+	if (otherScreenGrabExist (s, "rotate", "move", "switcher",
 				  "group-drag", "cube", 0))
 	    return FALSE;
 
