@@ -974,7 +974,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     clear = cs->cleared[output];
     if (!clear)
     {
-	cubeClearTargetOutput (s, xRotate, vRotate);
+	(*cs->clearTargetOutput) (s, xRotate, vRotate);
 	cs->cleared[output] = TRUE;
     }
 
@@ -1644,7 +1644,8 @@ cubeInitScreen (CompPlugin *p,
 
     cs->skyListId = 0;
 
-    cs->getRotation = cubeGetRotation;
+    cs->getRotation	  = cubeGetRotation;
+    cs->clearTargetOutput = cubeClearTargetOutput;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 

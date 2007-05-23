@@ -61,6 +61,10 @@ typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
 				     float      *v);
 
+typedef void (*CubeClearTargetOutputProc) (CompScreen *s,
+					   float      xRotate,
+					   float      vRotate);
+
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
@@ -71,7 +75,8 @@ typedef struct _CubeScreen {
     SetScreenOptionProc	       setScreenOption;
     OutputChangeNotifyProc     outputChangeNotify;
 
-    CubeGetRotationProc getRotation;
+    CubeGetRotationProc	      getRotation;
+    CubeClearTargetOutputProc clearTargetOutput;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
