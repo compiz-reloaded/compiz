@@ -448,6 +448,7 @@ fi
 
 AC_OUTPUT([
 compiz.pc
+compiz-cube.pc
 compiz-gconf.pc
 Makefile
 src/Makefile
