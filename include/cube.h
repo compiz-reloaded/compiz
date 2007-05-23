@@ -57,6 +57,10 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_ADJUST_IMAGE	      14
 #define CUBE_SCREEN_OPTION_NUM                15
 
+typedef void (*CubeGetRotationProc) (CompScreen *s,
+				     float      *x,
+				     float      *v);
+
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
@@ -66,6 +70,8 @@ typedef struct _CubeScreen {
     ApplyScreenTransformProc   applyScreenTransform;
     SetScreenOptionProc	       setScreenOption;
     OutputChangeNotifyProc     outputChangeNotify;
+
+    CubeGetRotationProc getRotation;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 

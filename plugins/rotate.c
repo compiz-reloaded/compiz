@@ -104,6 +104,8 @@ typedef struct _RotateScreen {
     WindowGrabNotifyProc	 windowGrabNotify;
     WindowUngrabNotifyProc	 windowUngrabNotify;
 
+    CubeGetRotationProc getRotation;
+
     CompOption opt[ROTATE_SCREEN_OPTION_NUM];
 
     float pointerSensitivity;
@@ -423,6 +425,22 @@ rotateDonePaintScreen (CompScreen *s)
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
 }
 
+static void
+rotateGetRotation (CompScreen *s,
+		   float      *x,
+		   float      *v)
+{
+    CUBE_SCREEN (s);
+    ROTATE_SCREEN (s);
+
+    UNWRAP (rs, cs, getRotation);
+    (*cs->getRotation) (s, x, v);
+    WRAP (rs, cs, getRotation, rotateGetRotation);
+
+    *x += rs->baseXrot + rs->xrot;
+    *v += rs->yrot;
+}
+
 static Bool
 rotatePaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
@@ -437,25 +455,13 @@ rotatePaintScreen (CompScreen		   *s,
 
     if (rs->grabIndex || rs->moving)
     {
-	ScreenPaintAttrib sa = *sAttrib;
-
-	sa.xRotate += rs->baseXrot + rs->xrot;
-	sa.vRotate += rs->yrot;
-
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
+    }
 
-	UNWRAP (rs, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, transform, region, output, mask);
-	WRAP (rs, s, paintScreen, rotatePaintScreen);
-    }
-    else
-    {
-	UNWRAP (rs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
-				    mask);
-	WRAP (rs, s, paintScreen, rotatePaintScreen);
-    }
+    UNWRAP (rs, s, paintScreen);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
+    WRAP (rs, s, paintScreen, rotatePaintScreen);
 
     return status;
 }
@@ -1704,6 +1710,7 @@ rotateInitScreen (CompPlugin *p,
     RotateScreen *rs;
 
     ROTATE_DISPLAY (s->display);
+    CUBE_SCREEN (s);
 
     rs = malloc (sizeof (RotateScreen));
     if (!rs)
@@ -1756,6 +1763,8 @@ rotateInitScreen (CompPlugin *p,
     WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
     WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
 
+    WRAP (rs, cs, getRotation, rotateGetRotation);
+
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
     rotateUpdateCubeOptions (s);
@@ -1767,7 +1776,10 @@ static void
 rotateFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
+    CUBE_SCREEN (s);
     ROTATE_SCREEN (s);
+
+    UNWRAP (rs, cs, getRotation);
 
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);

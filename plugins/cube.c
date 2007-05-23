@@ -881,6 +881,15 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 }
 
 static void
+cubeGetRotation (CompScreen *s,
+		 float	    *x,
+		 float	    *v)
+{
+    *x = 0.0f;
+    *v = 0.0f;
+}
+
+static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
@@ -889,6 +898,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
+    float	      xRotate, vRotate;
     int		      hsize, xMove = 0;
     float	      size;
     Bool	      clear;
@@ -923,6 +933,11 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	cs->outputYOffset = 0.0f;
     }
 
+    (*cs->getRotation) (s, &xRotate, &vRotate);
+
+    sa.xRotate += xRotate;
+    sa.vRotate += vRotate;
+
     clear = cs->cleared[output];
     if (!clear)
     {
@@ -935,8 +950,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b &&
 		cs->grabIndex == 0)
 	    {
-		glRotatef (sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
-		glRotatef (sAttrib->vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
+		glRotatef (xRotate, 0.0f, 1.0f, 0.0f);
+		glRotatef (vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
 	    }
 	    else
 	    {
@@ -975,7 +990,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	   currently hardcoded to 1.5 but it should probably be optional. */
 	sa.zCamera -= cs->unfold * 1.5f;
 
-	sa.xRotate = sAttrib->xRotate * cs->invert;
+	sa.xRotate = xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
 	    cs->xrotations = (int) (hsize * sa.xRotate) / 360;
@@ -993,15 +1008,15 @@ cubePaintTransformedScreen (CompScreen		    *s,
     }
     else
     {
-	if (sAttrib->vRotate > 100.0f)
+	if (vRotate > 100.0f)
 	    sa.vRotate = 100.0f;
-	else if (sAttrib->vRotate < -100.0f)
+	else if (vRotate < -100.0f)
 	    sa.vRotate = -100.0f;
 	else
-	    sa.vRotate = sAttrib->vRotate;
+	    sa.vRotate = vRotate;
 
 	sa.zTranslate = -cs->invert * cs->distance;
-	sa.xRotate = sAttrib->xRotate * cs->invert;
+	sa.xRotate = xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
 	    cs->xrotations = (int) (size * sa.xRotate) / 360;
@@ -1099,7 +1114,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
 	else
 	{
-	    if (sAttrib->xRotate != 0.0f)
+	    if (xRotate != 0.0f)
 	    {
 		xMove = cs->xrotations;
 
@@ -1619,6 +1634,8 @@ cubeInitScreen (CompPlugin *p,
     cs->srcOutput = 0;
 
     cs->skyListId = 0;
+
+    cs->getRotation = cubeGetRotation;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
