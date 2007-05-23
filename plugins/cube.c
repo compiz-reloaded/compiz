@@ -923,6 +923,64 @@ cubeClearTargetOutput (CompScreen *s,
 }
 
 static void
+cubePaintTopBottom (CompScreen		    *s,
+		    const ScreenPaintAttrib *sAttrib,
+		    const CompTransform	    *transform,
+		    int			    output,
+		    int			    size)
+{
+    ScreenPaintAttrib sa = *sAttrib;
+    CompTransform     sTransform = *transform;
+
+    CUBE_SCREEN (s);
+
+    screenLighting (s, TRUE);
+
+    glColor3usv (cs->color);
+
+    glPushMatrix ();
+
+    sa.yRotate += (360.0f / size) * (cs->xrotations + 1);
+    if (!cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
+	sa.yRotate -= (360.0f / size) * s->x;
+
+    (*s->applyScreenTransform) (s, &sa, output, &sTransform);
+
+    glLoadMatrixf (sTransform.m);
+    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
+    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
+
+    glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
+
+    glNormal3f (0.0f, -1.0f, 0.0f);
+
+    if (cs->invert == 1 && size == 4 && cs->texture.name)
+    {
+	enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
+	glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
+	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
+	disableTexture (s, &cs->texture);
+	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+    }
+    else
+    {
+	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
+    }
+
+    glNormal3f (0.0f, 1.0f, 0.0f);
+
+    glDrawArrays (GL_TRIANGLE_FAN, cs->nvertices >> 1, cs->nvertices >> 1);
+
+    glNormal3f (0.0f, 0.0f, -1.0f);
+
+    glPopMatrix ();
+
+    glColor4usv (defaultColor);
+    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+}
+
+static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
@@ -1043,56 +1101,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     if (!clear && cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	CompTransform sTransform = *transform;
-	float	      yRotate = (360.0f / size) * (cs->xrotations + 1);
-
-	screenLighting (s, TRUE);
-
-	glColor3usv (cs->color);
-
-	glPushMatrix ();
-
-	if (!cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
-	    yRotate -= (360.0f / size) * s->x;
-
-	sa.yRotate += yRotate;
-
-	(*s->applyScreenTransform) (s, &sa, output, &sTransform);
-	glLoadMatrixf (sTransform.m);
-	glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
-	glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
-
-	sa.yRotate -= yRotate;
-
-	glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
-
-	glNormal3f (0.0f, -1.0f, 0.0f);
-
-	if (cs->invert == 1 && hsize == 4 && cs->texture.name)
-	{
-	    enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
-	    glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
-	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
-	    disableTexture (s, &cs->texture);
-	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	}
-	else
-	{
-	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	    glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
-	}
-
-	glNormal3f (0.0f, 1.0f, 0.0f);
-
-	glDrawArrays (GL_TRIANGLE_FAN, cs->nvertices >> 1,
-		      cs->nvertices >> 1);
-
-	glNormal3f (0.0f, 0.0f, -1.0f);
-
-	glPopMatrix ();
-
-	glColor4usv (defaultColor);
-	glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+	cubePaintTopBottom (s, &sa, transform, output, hsize);
     }
 
     /* outside cube */
