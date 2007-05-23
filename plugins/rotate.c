@@ -32,7 +32,9 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 
-#include <compiz.h>
+#include <cube.h>
+
+static int cubeDisplayPrivateIndex;
 
 #define ROTATE_POINTER_SENSITIVITY_FACTOR 0.05f
 
@@ -1623,6 +1625,24 @@ rotateInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
 {
     RotateDisplay *rd;
+    CompPlugin	  *cube = findActivePlugin ("cube");
+    CompOption	  *option;
+    int		  nOption;
+
+    if (!cube || !cube->vTable->getDisplayOptions)
+	return FALSE;
+
+    option = (*cube->vTable->getDisplayOptions) (cube, d, &nOption);
+
+    if (getIntOptionNamed (option, nOption, "abi", 0) != CUBE_ABIVERSION)
+    {
+	fprintf (stderr, "%s: cube ABI version mismatch\n", programName);
+	return FALSE;
+    }
+
+    cubeDisplayPrivateIndex = getIntOptionNamed (option, nOption, "index", -1);
+    if (cubeDisplayPrivateIndex < 0)
+	return FALSE;
 
     rd = malloc (sizeof (RotateDisplay));
     if (!rd)
