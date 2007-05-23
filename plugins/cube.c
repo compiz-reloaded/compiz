@@ -890,6 +890,39 @@ cubeGetRotation (CompScreen *s,
 }
 
 static void
+cubeClearTargetOutput (CompScreen *s,
+		       float	  xRotate,
+		       float	  vRotate)
+{
+    CUBE_SCREEN (s);
+
+    if (cs->sky.name)
+    {
+	screenLighting (s, FALSE);
+
+	glPushMatrix ();
+
+	if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b &&
+	    cs->grabIndex == 0)
+	{
+	    glRotatef (xRotate, 0.0f, 1.0f, 0.0f);
+	    glRotatef (vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
+	}
+	else
+	{
+	    glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
+	}
+
+	glCallList (cs->skyListId);
+	glPopMatrix ();
+    }
+    else
+    {
+	clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
+    }
+}
+
+static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
@@ -941,31 +974,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     clear = cs->cleared[output];
     if (!clear)
     {
-	if (cs->sky.name)
-	{
-	    screenLighting (s, FALSE);
-
-	    glPushMatrix ();
-
-	    if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b &&
-		cs->grabIndex == 0)
-	    {
-		glRotatef (xRotate, 0.0f, 1.0f, 0.0f);
-		glRotatef (vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
-	    }
-	    else
-	    {
-		glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
-	    }
-
-	    glCallList (cs->skyListId);
-	    glPopMatrix ();
-	}
-	else
-	{
-	    clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
-	}
-
+	cubeClearTargetOutput (s, xRotate, vRotate);
 	cs->cleared[output] = TRUE;
     }
 
