@@ -39,7 +39,7 @@ static CompMetadata cubeMetadata;
 #define CUBE_DISPLAY_OPTION_PREV   2
 #define CUBE_DISPLAY_OPTION_NUM    3
 
-static int displayPrivateIndex;
+static int cubeDisplayPrivateIndex;
 
 typedef struct _CubeDisplay {
     int	screenPrivateIndex;
@@ -118,7 +118,7 @@ typedef struct _CubeScreen {
 } CubeScreen;
 
 #define GET_CUBE_DISPLAY(d)				     \
-    ((CubeDisplay *) (d)->privates[displayPrivateIndex].ptr)
+    ((CubeDisplay *) (d)->privates[cubeDisplayPrivateIndex].ptr)
 
 #define CUBE_DISPLAY(d)			   \
     CubeDisplay *cd = GET_CUBE_DISPLAY (d)
@@ -1624,7 +1624,7 @@ cubeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    d->privates[displayPrivateIndex].ptr = cd;
+    d->privates[cubeDisplayPrivateIndex].ptr = cd;
 
     return TRUE;
 }
@@ -1786,8 +1786,8 @@ cubeInit (CompPlugin *p)
 					 CUBE_SCREEN_OPTION_NUM))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    cubeDisplayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (cubeDisplayPrivateIndex < 0)
     {
 	compFiniMetadata (&cubeMetadata);
 	return FALSE;
@@ -1801,7 +1801,7 @@ cubeInit (CompPlugin *p)
 static void
 cubeFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeDisplayPrivateIndex (cubeDisplayPrivateIndex);
     compFiniMetadata (&cubeMetadata);
 }
 
