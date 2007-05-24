@@ -110,8 +110,8 @@ static DBusObjectPathVTable dbusMessagesVTable = {
 static CompOption *
 dbusGetOptionsFromPath (CompDisplay  *d,
 			char	     **path,
-			CompScreen   **return_screen,
-			CompMetadata **return_metadata,
+			CompScreen   **returnScreen,
+			CompMetadata **returnMetadata,
 			int	     *nOption)
 {
     CompScreen *s = NULL;
@@ -131,13 +131,13 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 	    return NULL;
     }
 
-    if (return_screen)
-	*return_screen = s;
+    if (returnScreen)
+	*returnScreen = s;
 
     if (strcmp (path[0], "core") == 0)
     {
-	if (return_metadata)
-	    *return_metadata = &coreMetadata;
+	if (returnMetadata)
+	    *returnMetadata = &coreMetadata;
 
 	if (s)
 	    return compGetScreenOptions (s, nOption);
@@ -152,12 +152,12 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 	    if (strcmp (p->vTable->name, path[0]) == 0)
 		break;
 
-	if (return_metadata)
+	if (returnMetadata)
 	{
 	    if (p && p->vTable->getMetadata)
-		*return_metadata = (*p->vTable->getMetadata) (p);
+		*returnMetadata = (*p->vTable->getMetadata) (p);
 	    else
-		*return_metadata = NULL;
+		*returnMetadata = NULL;
 	}
 
 	if (!p)
