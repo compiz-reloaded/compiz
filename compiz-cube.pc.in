@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: compiz-cube
+Description: Cube plugin for compiz
+Version: @VERSION@
+
+Requires: @COMPIZ_REQUIRES@
+Libs:
+Cflags: @COMPIZ_CFLAGS@ @GL_CFLAGS@ -I${includedir}/compiz
+

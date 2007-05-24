@@ -10,6 +10,8 @@
 		</relation>
 	</deps>
 	<display>
+	    <option name="abi" type="int" read_only="true"/>
+	    <option name="index" type="int" read_only="true"/>
 	    <option name="unfold" type="action">
 		<_short>Unfold</_short>
 		<_long>Unfold cube</_long>

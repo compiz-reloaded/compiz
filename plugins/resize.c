@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 
 #include <compiz.h>
@@ -62,11 +63,19 @@ struct _ResizeKeys {
 #define MIN_KEY_WIDTH_INC  24
 #define MIN_KEY_HEIGHT_INC 24
 
-#define RESIZE_DISPLAY_OPTION_INITIATE	   0
-#define RESIZE_DISPLAY_OPTION_MODE	   1
-#define RESIZE_DISPLAY_OPTION_BORDER_COLOR 2
-#define RESIZE_DISPLAY_OPTION_FILL_COLOR   3
-#define RESIZE_DISPLAY_OPTION_NUM	   4
+#define RESIZE_DISPLAY_OPTION_INITIATE_NORMAL    0
+#define RESIZE_DISPLAY_OPTION_INITIATE_OUTLINE   1
+#define RESIZE_DISPLAY_OPTION_INITIATE_RECTANGLE 2
+#define RESIZE_DISPLAY_OPTION_INITIATE_STRETCH   3
+#define RESIZE_DISPLAY_OPTION_INITIATE	         4
+#define RESIZE_DISPLAY_OPTION_MODE	         5
+#define RESIZE_DISPLAY_OPTION_BORDER_COLOR       6
+#define RESIZE_DISPLAY_OPTION_FILL_COLOR         7
+#define RESIZE_DISPLAY_OPTION_NORMAL_MATCH	 8
+#define RESIZE_DISPLAY_OPTION_OUTLINE_MATCH	 9
+#define RESIZE_DISPLAY_OPTION_RECTANGLE_MATCH	 10
+#define RESIZE_DISPLAY_OPTION_STRETCH_MATCH	 11
+#define RESIZE_DISPLAY_OPTION_NUM		 12
 
 static int displayPrivateIndex;
 
@@ -76,7 +85,11 @@ typedef struct _ResizeDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
 
+    Atom resizeNotifyAtom;
+    Atom resizeInformationAtom;
+
     CompWindow	 *w;
+    int		 mode;
     XRectangle	 savedGeometry;
     XRectangle	 geometry;
     int		 releaseButton;
@@ -196,6 +209,64 @@ resizeDamageRectangle (CompScreen *s,
     damageScreenRegion (s, &reg);
 }
 
+static void
+resizeSendResizeNotify (CompDisplay *d)
+{
+    XEvent xev;
+
+    RESIZE_DISPLAY (d);
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = d->display;
+    xev.xclient.format  = 32;
+    
+    xev.xclient.message_type = rd->resizeNotifyAtom;
+    xev.xclient.window	     = rd->w->id;
+
+    xev.xclient.data.l[0] = rd->geometry.x;
+    xev.xclient.data.l[1] = rd->geometry.y;
+    xev.xclient.data.l[2] = rd->geometry.width;
+    xev.xclient.data.l[3] = rd->geometry.height;
+    xev.xclient.data.l[4] = 0;
+
+    XSendEvent (d->display,
+		rd->w->screen->root,
+		FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask,
+		&xev);
+}
+
+static void
+resizeUpdateWindowProperty (CompDisplay *d)
+{
+    unsigned long data[4];
+
+    RESIZE_DISPLAY (d);
+
+    data[0] = rd->geometry.x;
+    data[1] = rd->geometry.y;
+    data[2] = rd->geometry.width;
+    data[3] = rd->geometry.height;
+
+    XChangeProperty (d->display, rd->w->id, 
+		     rd->resizeInformationAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char*) data, 4);
+}
+
+static void
+resizeFinishResizing (CompDisplay *d)
+{
+    RESIZE_DISPLAY (d);
+
+    (*rd->w->screen->windowUngrabNotify) (rd->w);
+
+    XDeleteProperty (d->display,
+		     rd->w->id,
+		     rd->resizeInformationAtom);
+
+    rd->w = NULL;
+}
+
 static Bool
 resizeInitiate (CompDisplay     *d,
 		CompAction      *action,
@@ -217,6 +288,7 @@ resizeInitiate (CompDisplay     *d,
 	unsigned int mask;
 	int          x, y;
 	int	     button;
+	int	     i;
 
 	RESIZE_SCREEN (w->screen);
 
@@ -281,6 +353,31 @@ resizeInitiate (CompDisplay     *d,
 
 	rd->pointerDx = x - lastPointerX;
 	rd->pointerDy = y - lastPointerY;
+
+	rd->mode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
+	for (i = 0; i <= RESIZE_MODE_LAST; i++)
+	{
+	    if (action == &rd->opt[i].value.action)
+	    {
+		rd->mode = i;
+		break;
+	    }
+	}
+
+	if (i > RESIZE_MODE_LAST)
+	{
+	    int index;
+
+	    for (i = 0; i <= RESIZE_MODE_LAST; i++)
+	    {
+		index = RESIZE_DISPLAY_OPTION_NORMAL_MATCH + i;
+		if (matchEval (&rd->opt[index].value.match, w))
+		{
+		    rd->mode = i;
+		    break;
+		}
+	    }
+	}
 
 	if (!rs->grabIndex)
 	{
@@ -357,11 +454,10 @@ resizeTerminate (CompDisplay	 *d,
 	CompWindow     *w = rd->w;
 	XWindowChanges xwc;
 	unsigned int   mask = 0;
-	int	       resizeMode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
 
 	RESIZE_SCREEN (w->screen);
 
-	if (resizeMode == RESIZE_MODE_NORMAL)
+	if (rd->mode == RESIZE_MODE_NORMAL)
 	{
 	    if (state & CompActionStateCancel)
 	    {
@@ -379,7 +475,7 @@ resizeTerminate (CompDisplay	 *d,
 	    {
 		BoxRec box;
 
-		if (resizeMode == RESIZE_MODE_STRETCH)
+		if (rd->mode == RESIZE_MODE_STRETCH)
 		    resizeGetStretchRectangle (d, &box);
 		else
 		    resizeGetPaintRectangle (d, &box);
@@ -412,10 +508,7 @@ resizeTerminate (CompDisplay	 *d,
 	}
 
 	if (!(mask & (CWWidth | CWHeight)))
-	{
-	    (w->screen->windowUngrabNotify) (w);
-	    rd->w = NULL;
-	}
+	    resizeFinishResizing (d);
 
 	if (rs->grabIndex)
 	{
@@ -523,7 +616,6 @@ resizeHandleMotionEvent (CompScreen *s,
     {
 	BoxRec box;
 	int    w, h;
-	int    resizeMode;
 
 	RESIZE_DISPLAY (s->display);
 
@@ -551,10 +643,9 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	constrainNewWindowSize (rd->w, w, h, &w, &h);
 
-	resizeMode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
-	if (resizeMode != RESIZE_MODE_NORMAL)
+	if (rd->mode != RESIZE_MODE_NORMAL)
 	{
-	    if (resizeMode == RESIZE_MODE_STRETCH)
+	    if (rd->mode == RESIZE_MODE_STRETCH)
 		resizeGetStretchRectangle (s->display, &box);
 	    else
 		resizeGetPaintRectangle (s->display, &box);
@@ -571,9 +662,9 @@ resizeHandleMotionEvent (CompScreen *s,
 	rd->geometry.width  = w;
 	rd->geometry.height = h;
 
-	if (resizeMode != RESIZE_MODE_NORMAL)
+	if (rd->mode != RESIZE_MODE_NORMAL)
 	{
-	    if (resizeMode == RESIZE_MODE_STRETCH)
+	    if (rd->mode == RESIZE_MODE_STRETCH)
 		resizeGetStretchRectangle (s->display, &box);
 	    else
 		resizeGetPaintRectangle (s->display, &box);
@@ -584,6 +675,9 @@ resizeHandleMotionEvent (CompScreen *s,
 	{
 	    resizeUpdateWindowSize (s->display);
 	}
+
+	resizeUpdateWindowProperty (s->display);
+	resizeSendResizeNotify (s->display);
     }
 }
 
@@ -771,10 +865,7 @@ resizeWindowResizeNotify (CompWindow *w,
     WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
 
     if (rd->w == w && !rs->grabIndex)
-    {	
-	(w->screen->windowUngrabNotify) (w);
-	rd->w = NULL;
-    }
+	resizeFinishResizing (w->screen->display);
 }
 
 static void
@@ -835,7 +926,7 @@ resizePaintScreen (CompScreen              *s,
 
     if (rd->w)
     {
-	if (rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i == RESIZE_MODE_STRETCH)
+	if (rd->mode == RESIZE_MODE_STRETCH)
 	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
     }
 
@@ -850,7 +941,7 @@ resizePaintScreen (CompScreen              *s,
 	border = rd->opt[RESIZE_DISPLAY_OPTION_BORDER_COLOR].value.c;
 	fill   = rd->opt[RESIZE_DISPLAY_OPTION_FILL_COLOR].value.c;
 
-	switch (rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i) {
+	switch (rd->mode) {
 	case RESIZE_MODE_OUTLINE:
 	    resizePaintRectangle (s, sAttrib, transform, output, border, NULL);
 	    break;
@@ -872,14 +963,12 @@ resizePaintWindow (CompWindow              *w,
 		   unsigned int            mask)
 {
     CompScreen *s = w->screen;
-    int	       resizeMode;
     Bool       status;
 
     RESIZE_SCREEN (s);
     RESIZE_DISPLAY (s->display);
 
-    resizeMode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
-    if (w == rd->w && resizeMode == RESIZE_MODE_STRETCH)
+    if (w == rd->w && rd->mode == RESIZE_MODE_STRETCH)
     {
 	FragmentAttrib fragment;
 	CompTransform  wTransform = *transform;
@@ -937,13 +1026,11 @@ resizeDamageWindowRect (CompWindow *w,
 			BoxPtr     rect)
 {
     Bool status = FALSE;
-    int	 resizeMode;
 
     RESIZE_SCREEN (w->screen);
     RESIZE_DISPLAY (w->screen->display);
 
-    resizeMode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
-    if (w == rd->w && resizeMode == RESIZE_MODE_STRETCH)
+    if (w == rd->w && rd->mode == RESIZE_MODE_STRETCH)
     {
 	BoxRec box;
 
@@ -989,10 +1076,18 @@ resizeSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo resizeDisplayOptionInfo[] = {
+    { "initiate_normal", "action", 0, resizeInitiate, resizeTerminate },
+    { "initiate_outline", "action", 0, resizeInitiate, resizeTerminate },
+    { "initiate_rectangle", "action", 0, resizeInitiate, resizeTerminate },
+    { "initiate_stretch", "action", 0, resizeInitiate, resizeTerminate },
     { "initiate", "action", 0, resizeInitiate, resizeTerminate },
     { "mode", "int", RESTOSTRING (0, RESIZE_MODE_LAST), 0, 0 },
     { "border_color", "color", 0, 0, 0 },
-    { "fill_color", "color", 0, 0, 0 }
+    { "fill_color", "color", 0, 0, 0 },
+    { "normal_match", "match", 0, 0, 0 },
+    { "outline_match", "match", 0, 0, 0 },
+    { "rectangle_match", "match", 0, 0, 0 },
+    { "stretch_match", "match", 0, 0, 0 }
 };
 
 static Bool
@@ -1027,6 +1122,11 @@ resizeInitDisplay (CompPlugin  *p,
     rd->w = 0;
 
     rd->releaseButton = 0;
+
+    rd->resizeNotifyAtom      = XInternAtom (d->display, 
+					     "_COMPIZ_RESIZE_NOTIFY", 0);
+    rd->resizeInformationAtom = XInternAtom (d->display, 
+					     "_COMPIZ_RESIZE_INFORMATION", 0);
 
     for (i = 0; i < NUM_KEYS; i++)
 	rd->key[i] = XKeysymToKeycode (d->display,

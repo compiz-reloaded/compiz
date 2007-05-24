@@ -32,7 +32,9 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 
-#include <compiz.h>
+#include <cube.h>
+
+static int cubeDisplayPrivateIndex;
 
 #define ROTATE_POINTER_SENSITIVITY_FACTOR 0.05f
 
@@ -101,6 +103,8 @@ typedef struct _RotateScreen {
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
     WindowGrabNotifyProc	 windowGrabNotify;
     WindowUngrabNotifyProc	 windowUngrabNotify;
+
+    CubeGetRotationProc getRotation;
 
     CompOption opt[ROTATE_SCREEN_OPTION_NUM];
 
@@ -421,6 +425,22 @@ rotateDonePaintScreen (CompScreen *s)
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
 }
 
+static void
+rotateGetRotation (CompScreen *s,
+		   float      *x,
+		   float      *v)
+{
+    CUBE_SCREEN (s);
+    ROTATE_SCREEN (s);
+
+    UNWRAP (rs, cs, getRotation);
+    (*cs->getRotation) (s, x, v);
+    WRAP (rs, cs, getRotation, rotateGetRotation);
+
+    *x += rs->baseXrot + rs->xrot;
+    *v += rs->yrot;
+}
+
 static Bool
 rotatePaintScreen (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
@@ -435,25 +455,13 @@ rotatePaintScreen (CompScreen		   *s,
 
     if (rs->grabIndex || rs->moving)
     {
-	ScreenPaintAttrib sa = *sAttrib;
-
-	sa.xRotate += rs->baseXrot + rs->xrot;
-	sa.vRotate += rs->yrot;
-
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
+    }
 
-	UNWRAP (rs, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, transform, region, output, mask);
-	WRAP (rs, s, paintScreen, rotatePaintScreen);
-    }
-    else
-    {
-	UNWRAP (rs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
-				    mask);
-	WRAP (rs, s, paintScreen, rotatePaintScreen);
-    }
+    UNWRAP (rs, s, paintScreen);
+    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
+    WRAP (rs, s, paintScreen, rotatePaintScreen);
 
     return status;
 }
@@ -581,7 +589,7 @@ rotate (CompDisplay     *d,
 	if (s->hsize < 2)
 	    return FALSE;
 
-	if (otherScreenGrabExist (s, "rotate", "move", "switcher", 
+	if (otherScreenGrabExist (s, "rotate", "move", "switcher",
 				  "group-drag", "cube", 0))
 	    return FALSE;
 
@@ -1483,7 +1491,7 @@ rotateWindowGrabNotify (CompWindow   *w,
 
     if (!rs->grabWindow)
     {
-    	rs->grabMask   = mask;
+	rs->grabMask   = mask;
 	rs->grabWindow = w;
     }
 
@@ -1500,7 +1508,7 @@ rotateWindowUngrabNotify (CompWindow *w)
     if (w == rs->grabWindow)
     {
 	rs->grabMask   = 0;
-    	rs->grabWindow = NULL;
+	rs->grabWindow = NULL;
     }
 
     UNWRAP (rs, w->screen, windowUngrabNotify);
@@ -1623,6 +1631,24 @@ rotateInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
 {
     RotateDisplay *rd;
+    CompPlugin	  *cube = findActivePlugin ("cube");
+    CompOption	  *option;
+    int		  nOption;
+
+    if (!cube || !cube->vTable->getDisplayOptions)
+	return FALSE;
+
+    option = (*cube->vTable->getDisplayOptions) (cube, d, &nOption);
+
+    if (getIntOptionNamed (option, nOption, "abi", 0) != CUBE_ABIVERSION)
+    {
+	fprintf (stderr, "%s: cube ABI version mismatch\n", programName);
+	return FALSE;
+    }
+
+    cubeDisplayPrivateIndex = getIntOptionNamed (option, nOption, "index", -1);
+    if (cubeDisplayPrivateIndex < 0)
+	return FALSE;
 
     rd = malloc (sizeof (RotateDisplay));
     if (!rd)
@@ -1684,6 +1710,7 @@ rotateInitScreen (CompPlugin *p,
     RotateScreen *rs;
 
     ROTATE_DISPLAY (s->display);
+    CUBE_SCREEN (s);
 
     rs = malloc (sizeof (RotateScreen));
     if (!rs)
@@ -1736,6 +1763,8 @@ rotateInitScreen (CompPlugin *p,
     WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
     WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
 
+    WRAP (rs, cs, getRotation, rotateGetRotation);
+
     s->privates[rd->screenPrivateIndex].ptr = rs;
 
     rotateUpdateCubeOptions (s);
@@ -1747,7 +1776,10 @@ static void
 rotateFiniScreen (CompPlugin *p,
 		  CompScreen *s)
 {
+    CUBE_SCREEN (s);
     ROTATE_SCREEN (s);
+
+    UNWRAP (rs, cs, getRotation);
 
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);

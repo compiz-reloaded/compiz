@@ -448,6 +448,7 @@ fi
 
 AC_OUTPUT([
 compiz.pc
+compiz-cube.pc
 compiz-gconf.pc
 Makefile
 src/Makefile
@@ -477,7 +478,6 @@ echo "  inotify:  $use_inotify"
 echo "  fuse:     $use_fuse"
 echo ""
 echo "and the following optional features will be compiled:"
-echo "  svg:      $use_librsvg"
 echo "  gtk:      $use_gtk"
 echo "  metacity: $use_metacity"
 echo "  gnome:    $use_gnome"

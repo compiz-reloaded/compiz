@@ -24,270 +24,19 @@
  *         Mirco Müller <macslow@bangang.de> (Skydome support)
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#define _GNU_SOURCE
 #include <string.h>
-#include <stdlib.h>
 #include <math.h>
-#include <sys/time.h>
-
-#ifdef USE_LIBRSVG
-#include <cairo/cairo.h>
-#include <cairo/cairo-xlib.h>
-#include <librsvg/rsvg.h>
-#include <librsvg/rsvg-cairo.h>
-#endif
 
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 
-#include <compiz.h>
+#include <cube.h>
 
 static CompMetadata cubeMetadata;
 
-#define CUBE_DISPLAY_OPTION_UNFOLD 0
-#define CUBE_DISPLAY_OPTION_NEXT   1
-#define CUBE_DISPLAY_OPTION_PREV   2
-#define CUBE_DISPLAY_OPTION_NUM    3
-
-static int displayPrivateIndex;
-
-typedef struct _CubeDisplay {
-    int	screenPrivateIndex;
-
-    CompOption opt[CUBE_DISPLAY_OPTION_NUM];
-} CubeDisplay;
-
-#define CUBE_SCREEN_OPTION_COLOR	      0
-#define CUBE_SCREEN_OPTION_IN		      1
-#define CUBE_SCREEN_OPTION_SCALE_IMAGE	      2
-#define CUBE_SCREEN_OPTION_IMAGES	      3
-#define CUBE_SCREEN_OPTION_SKYDOME	      4
-#define CUBE_SCREEN_OPTION_SKYDOME_IMG	      5
-#define CUBE_SCREEN_OPTION_SKYDOME_ANIM	      6
-#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_START 7
-#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_END   8
-#define CUBE_SCREEN_OPTION_ACCELERATION	      9
-#define CUBE_SCREEN_OPTION_SPEED	      10
-#define CUBE_SCREEN_OPTION_TIMESTEP	      11
-#define CUBE_SCREEN_OPTION_MIPMAP	      12
-#define CUBE_SCREEN_OPTION_BACKGROUNDS	      13
-#define CUBE_SCREEN_OPTION_ADJUST_IMAGE	      14
-#define CUBE_SCREEN_OPTION_NUM                15
-
-typedef struct _CubeScreen {
-    PreparePaintScreenProc     preparePaintScreen;
-    DonePaintScreenProc	       donePaintScreen;
-    PaintScreenProc	       paintScreen;
-    PaintTransformedScreenProc paintTransformedScreen;
-    PaintBackgroundProc        paintBackground;
-    ApplyScreenTransformProc   applyScreenTransform;
-    SetScreenOptionProc	       setScreenOption;
-    OutputChangeNotifyProc     outputChangeNotify;
-
-    CompOption opt[CUBE_SCREEN_OPTION_NUM];
-
-    int      invert;
-    int      xrotations;
-    GLfloat  distance;
-    Bool     paintTopBottom;
-    GLushort color[3];
-    GLfloat  tc[12];
-
-    int grabIndex;
-
-    int srcOutput;
-
-    Bool    unfolded;
-    GLfloat unfold, unfoldVelocity;
-
-    GLfloat  *vertices;
-    int      nvertices;
-
-    GLuint skyListId;
-
-    Pixmap	    pixmap;
-    int		    pw, ph;
-    CompTexture     texture, sky;
-
-    int	imgCurFile;
-
-    int nOutput;
-    int output[64];
-    int outputMask[64];
-
-    Bool cleared[64];
-
-    Bool fullscreenOutput;
-
-    float outputXScale;
-    float outputYScale;
-    float outputXOffset;
-    float outputYOffset;
-
-    CompTexture *bg;
-    int		nBg;
-
-#ifdef USE_LIBRSVG
-    cairo_t	    *cr;
-#endif
-
-} CubeScreen;
-
-#define GET_CUBE_DISPLAY(d)				     \
-    ((CubeDisplay *) (d)->privates[displayPrivateIndex].ptr)
-
-#define CUBE_DISPLAY(d)			   \
-    CubeDisplay *cd = GET_CUBE_DISPLAY (d)
-
-#define GET_CUBE_SCREEN(s, cd)					 \
-    ((CubeScreen *) (s)->privates[(cd)->screenPrivateIndex].ptr)
-
-#define CUBE_SCREEN(s)							\
-    CubeScreen *cs = GET_CUBE_SCREEN (s, GET_CUBE_DISPLAY (s->display))
+static int cubeDisplayPrivateIndex;
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
-
-static void
-cubeInitSvg (CompScreen *s)
-
-{
-    CUBE_SCREEN (s);
-
-    cs->pixmap = None;
-    cs->pw = cs->ph = 0;
-
-#ifdef USE_LIBRSVG
-    cs->cr = NULL;
-#endif
-
-}
-
-static void
-cubeFiniSvg (CompScreen *s)
-
-{
-    CUBE_SCREEN (s);
-
-#ifdef USE_LIBRSVG
-    if (cs->cr)
-	cairo_destroy (cs->cr);
-#endif
-
-    if (cs->pixmap)
-	XFreePixmap (s->display->display, cs->pixmap);
-}
-
-static Bool
-readSvgToTexture (CompScreen   *s,
-		  CompTexture  *texture,
-		  const char   *svgFileName,
-		  unsigned int *returnWidth,
-		  unsigned int *returnHeight)
-{
-
-#ifdef USE_LIBRSVG
-    unsigned int      width, height, pw, ph;
-    char	      *name;
-    GError	      *error = NULL;
-    RsvgHandle	      *svgHandle;
-    RsvgDimensionData svgDimension;
-
-    CUBE_SCREEN (s);
-
-    name = strdup (svgFileName);
-
-    svgHandle = rsvg_handle_new_from_file (name, &error);
-
-    free (name);
-
-    if (!svgHandle)
-	return FALSE;
-
-    rsvg_handle_get_dimensions (svgHandle, &svgDimension);
-
-    width  = svgDimension.width;
-    height = svgDimension.height;
-
-    if (cs->opt[CUBE_SCREEN_OPTION_SCALE_IMAGE].value.b)
-    {
-	pw = (cs->nOutput > 1) ? s->outputDev[0].width  : s->width;
-	ph = (cs->nOutput > 1) ? s->outputDev[0].height : s->height;
-    }
-    else
-    {
-	pw = width;
-	ph = height;
-    }
-
-    if (!cs->pixmap || cs->pw != pw || cs->ph != ph)
-    {
-	cairo_surface_t *surface;
-	Visual		*visual;
-	int		depth;
-
-	if (cs->cr)
-	{
-	    cairo_destroy (cs->cr);
-	    cs->cr = NULL;
-	}
-
-	if (cs->pixmap)
-	    XFreePixmap (s->display->display, cs->pixmap);
-
-	cs->pw = pw;
-	cs->ph = ph;
-
-	depth = DefaultDepth (s->display->display, s->screenNum);
-	cs->pixmap = XCreatePixmap (s->display->display, s->root,
-				    cs->pw, cs->ph,
-				    depth);
-
-	if (!bindPixmapToTexture (s, texture, cs->pixmap,
-				  cs->pw, cs->ph, depth))
-	{
-	    fprintf (stderr, "%s: Couldn't bind slide pixmap 0x%x to "
-		     "texture\n", programName, (int) cs->pixmap);
-
-	    return FALSE;
-	}
-
-	visual = DefaultVisual (s->display->display, s->screenNum);
-	surface = cairo_xlib_surface_create (s->display->display,
-					     cs->pixmap, visual,
-					     cs->pw, cs->ph);
-	cs->cr = cairo_create (surface);
-	cairo_surface_destroy (surface);
-    }
-
-    cairo_save (cs->cr);
-    cairo_set_source_rgb (cs->cr,
-			  (double) cs->color[0] / 0xffff,
-			  (double) cs->color[1] / 0xffff,
-			  (double) cs->color[2] / 0xffff);
-    cairo_rectangle (cs->cr, 0, 0, cs->pw, cs->ph);
-    cairo_fill (cs->cr);
-
-    cairo_scale (cs->cr, (double) cs->pw / width, (double) cs->ph / height);
-
-    rsvg_handle_render_cairo (svgHandle, cs->cr);
-
-    rsvg_handle_free (svgHandle);
-
-    cairo_restore (cs->cr);
-
-    *returnWidth  = cs->pw;
-    *returnHeight = cs->ph;
-
-    return TRUE;
-#else
-    return FALSE;
-#endif
-
-}
 
 static void
 cubeLoadImg (CompScreen *s,
@@ -318,8 +67,6 @@ cubeLoadImg (CompScreen *s,
     {
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
 
 	if (!imgNFile)
 	    return;
@@ -327,24 +74,15 @@ cubeLoadImg (CompScreen *s,
 
     cs->imgCurFile = n % imgNFile;
 
-    if (readImageToTexture (s, &cs->texture,
+    if (!readImageToTexture (s, &cs->texture,
 			    imgFiles[cs->imgCurFile].s,
 			    &width, &height))
-    {
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
-    }
-    else if (!readSvgToTexture (s, &cs->texture,
-				imgFiles[cs->imgCurFile].s,
-				&width, &height))
     {
 	fprintf (stderr, "%s: Failed to load slide: %s\n",
 		 programName, imgFiles[cs->imgCurFile].s);
 
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);
-	cubeFiniSvg (s);
-	cubeInitSvg (s);
 
 	return;
     }
@@ -1143,6 +881,48 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 }
 
 static void
+cubeGetRotation (CompScreen *s,
+		 float	    *x,
+		 float	    *v)
+{
+    *x = 0.0f;
+    *v = 0.0f;
+}
+
+static void
+cubeClearTargetOutput (CompScreen *s,
+		       float	  xRotate,
+		       float	  vRotate)
+{
+    CUBE_SCREEN (s);
+
+    if (cs->sky.name)
+    {
+	screenLighting (s, FALSE);
+
+	glPushMatrix ();
+
+	if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b &&
+	    cs->grabIndex == 0)
+	{
+	    glRotatef (xRotate, 0.0f, 1.0f, 0.0f);
+	    glRotatef (vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
+	}
+	else
+	{
+	    glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
+	}
+
+	glCallList (cs->skyListId);
+	glPopMatrix ();
+    }
+    else
+    {
+	clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
+    }
+}
+
+static void
 cubePaintTransformedScreen (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
@@ -1151,6 +931,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
+    float	      xRotate, vRotate;
     int		      hsize, xMove = 0;
     float	      size;
     Bool	      clear;
@@ -1185,34 +966,15 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	cs->outputYOffset = 0.0f;
     }
 
+    (*cs->getRotation) (s, &xRotate, &vRotate);
+
+    sa.xRotate += xRotate;
+    sa.vRotate += vRotate;
+
     clear = cs->cleared[output];
     if (!clear)
     {
-	if (cs->sky.name)
-	{
-	    screenLighting (s, FALSE);
-
-	    glPushMatrix ();
-
-	    if (cs->opt[CUBE_SCREEN_OPTION_SKYDOME_ANIM].value.b &&
-		cs->grabIndex == 0)
-	    {
-		glRotatef (sAttrib->xRotate, 0.0f, 1.0f, 0.0f);
-		glRotatef (sAttrib->vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
-	    }
-	    else
-	    {
-		glRotatef (90.0f, 1.0f, 0.0f, 0.0f);
-	    }
-
-	    glCallList (cs->skyListId);
-	    glPopMatrix ();
-	}
-	else
-	{
-	    clearTargetOutput (s->display, GL_COLOR_BUFFER_BIT);
-	}
-
+	(*cs->clearTargetOutput) (s, xRotate, vRotate);
 	cs->cleared[output] = TRUE;
     }
 
@@ -1237,7 +999,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	   currently hardcoded to 1.5 but it should probably be optional. */
 	sa.zCamera -= cs->unfold * 1.5f;
 
-	sa.xRotate = sAttrib->xRotate * cs->invert;
+	sa.xRotate = xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
 	    cs->xrotations = (int) (hsize * sa.xRotate) / 360;
@@ -1255,15 +1017,15 @@ cubePaintTransformedScreen (CompScreen		    *s,
     }
     else
     {
-	if (sAttrib->vRotate > 100.0f)
+	if (vRotate > 100.0f)
 	    sa.vRotate = 100.0f;
-	else if (sAttrib->vRotate < -100.0f)
+	else if (vRotate < -100.0f)
 	    sa.vRotate = -100.0f;
 	else
-	    sa.vRotate = sAttrib->vRotate;
+	    sa.vRotate = vRotate;
 
 	sa.zTranslate = -cs->invert * cs->distance;
-	sa.xRotate = sAttrib->xRotate * cs->invert;
+	sa.xRotate = xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
 	    cs->xrotations = (int) (size * sa.xRotate) / 360;
@@ -1361,7 +1123,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
 	else
 	{
-	    if (sAttrib->xRotate != 0.0f)
+	    if (xRotate != 0.0f)
 	    {
 		xMove = cs->xrotations;
 
@@ -1747,17 +1509,28 @@ cubeSetDisplayOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     CompOption *o;
+    int	       index;
 
     CUBE_DISPLAY (display);
 
-    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, NULL);
+    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, &index);
     if (!o)
 	return FALSE;
 
-    return compSetDisplayOption (display, o, value);
+    switch (index) {
+    case CUBE_DISPLAY_OPTION_ABI:
+    case CUBE_DISPLAY_OPTION_INDEX:
+	break;
+    default:
+	return compSetDisplayOption (display, o, value);
+    }
+
+    return FALSE;
 }
 
 static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
+    { "abi", "int", 0, 0, 0 },
+    { "index", "int", 0, 0, 0 },
     { "unfold", "action", 0, cubeUnfold, cubeFold },
     { "next_slide", "action", "<passive_grab>false</passive_grab>",
       cubeNextImage, 0 },
@@ -1785,6 +1558,9 @@ cubeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
+    cd->opt[CUBE_DISPLAY_OPTION_ABI].value.i   = CUBE_ABIVERSION;
+    cd->opt[CUBE_DISPLAY_OPTION_INDEX].value.i = cubeDisplayPrivateIndex;
+
     cd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (cd->screenPrivateIndex < 0)
     {
@@ -1793,7 +1569,7 @@ cubeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    d->privates[displayPrivateIndex].ptr = cd;
+    d->privates[cubeDisplayPrivateIndex].ptr = cd;
 
     return TRUE;
 }
@@ -1868,14 +1644,15 @@ cubeInitScreen (CompPlugin *p,
 
     cs->skyListId = 0;
 
+    cs->getRotation	  = cubeGetRotation;
+    cs->clearTargetOutput = cubeClearTargetOutput;
+
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
     cs->paintTopBottom = FALSE;
 
     initTexture (s, &cs->texture);
     initTexture (s, &cs->sky);
-
-    cubeInitSvg (s);
 
     cs->imgCurFile = 0;
 
@@ -1939,8 +1716,6 @@ cubeFiniScreen (CompPlugin *p,
     finiTexture (s, &cs->texture);
     finiTexture (s, &cs->sky);
 
-    cubeFiniSvg (s);
-
     cubeUnloadBackgrounds (s);
 
     compFiniScreenOptions (s, cs->opt, CUBE_SCREEN_OPTION_NUM);
@@ -1959,8 +1734,8 @@ cubeInit (CompPlugin *p)
 					 CUBE_SCREEN_OPTION_NUM))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    cubeDisplayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (cubeDisplayPrivateIndex < 0)
     {
 	compFiniMetadata (&cubeMetadata);
 	return FALSE;
@@ -1968,22 +1743,13 @@ cubeInit (CompPlugin *p)
 
     compAddMetadataFromFile (&cubeMetadata, p->vTable->name);
 
-#ifdef USE_LIBRSVG
-    rsvg_init ();
-#endif
-
     return TRUE;
 }
 
 static void
 cubeFini (CompPlugin *p)
 {
-
-#ifdef USE_LIBRSVG
-    rsvg_term ();
-#endif
-
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeDisplayPrivateIndex (cubeDisplayPrivateIndex);
     compFiniMetadata (&cubeMetadata);
 }
 
