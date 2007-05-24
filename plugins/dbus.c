@@ -1742,7 +1742,10 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
 	reply = dbus_message_new_method_return (message);
 
-	if (!loadedPlugin && p->vTable->getMetadata)
+	if (loadedPlugin)
+	    (*p->vTable->init) (p);
+
+	if (p->vTable->getMetadata)
 	{
 	    CompMetadata *m;
 
@@ -1847,6 +1850,9 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	}
 
 	dbus_message_iter_close_container (&iter, &listIter);
+
+	if (loadedPlugin)
+	    (*p->vTable->fini) (p);
     }
     else
     {
