@@ -1101,7 +1101,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     if (!clear && cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	cubePaintTopBottom (s, &sa, transform, output, hsize);
+	(*cs->paintTopBottom) (s, &sa, transform, output, hsize);
     }
 
     /* outside cube */
@@ -1655,10 +1655,9 @@ cubeInitScreen (CompPlugin *p,
 
     cs->getRotation	  = cubeGetRotation;
     cs->clearTargetOutput = cubeClearTargetOutput;
+    cs->paintTopBottom    = cubePaintTopBottom;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
-
-    cs->paintTopBottom = FALSE;
 
     initTexture (s, &cs->texture);
     initTexture (s, &cs->sky);

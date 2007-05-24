@@ -65,6 +65,12 @@ typedef void (*CubeClearTargetOutputProc) (CompScreen *s,
 					   float      xRotate,
 					   float      vRotate);
 
+typedef void (*CubePaintTopBottomProc) (CompScreen		*s,
+					const ScreenPaintAttrib *sAttrib,
+					const CompTransform	*transform,
+					int			output,
+					int			size);
+
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
@@ -77,13 +83,13 @@ typedef struct _CubeScreen {
 
     CubeGetRotationProc	      getRotation;
     CubeClearTargetOutputProc clearTargetOutput;
+    CubePaintTopBottomProc    paintTopBottom;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
     int      invert;
     int      xrotations;
     GLfloat  distance;
-    Bool     paintTopBottom;
     GLushort color[3];
     GLfloat  tc[12];
 
