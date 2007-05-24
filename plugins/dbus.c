@@ -110,8 +110,8 @@ static DBusObjectPathVTable dbusMessagesVTable = {
 static CompOption *
 dbusGetOptionsFromPath (CompDisplay  *d,
 			char	     **path,
-			CompScreen   **return_screen,
-			CompMetadata **return_metadata,
+			CompScreen   **returnScreen,
+			CompMetadata **returnMetadata,
 			int	     *nOption)
 {
     CompScreen *s = NULL;
@@ -131,13 +131,13 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 	    return NULL;
     }
 
-    if (return_screen)
-	*return_screen = s;
+    if (returnScreen)
+	*returnScreen = s;
 
     if (strcmp (path[0], "core") == 0)
     {
-	if (return_metadata)
-	    *return_metadata = &coreMetadata;
+	if (returnMetadata)
+	    *returnMetadata = &coreMetadata;
 
 	if (s)
 	    return compGetScreenOptions (s, nOption);
@@ -152,12 +152,12 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 	    if (strcmp (p->vTable->name, path[0]) == 0)
 		break;
 
-	if (return_metadata)
+	if (returnMetadata)
 	{
 	    if (p && p->vTable->getMetadata)
-		*return_metadata = (*p->vTable->getMetadata) (p);
+		*returnMetadata = (*p->vTable->getMetadata) (p);
 	    else
-		*return_metadata = NULL;
+		*returnMetadata = NULL;
 	}
 
 	if (!p)
@@ -1740,9 +1740,15 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	char		  *longDesc = NULL;
 	const char	  *blankStr = "";
 
+	version = (*p->vTable->getVersion) (p, ABIVERSION);
+	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
+
 	reply = dbus_message_new_method_return (message);
 
-	if (!loadedPlugin && p->vTable->getMetadata)
+	if (supportedABI && loadedPlugin)
+	    (*p->vTable->init) (p);
+
+	if (supportedABI && p->vTable->getMetadata)
 	{
 	    CompMetadata *m;
 
@@ -1781,9 +1787,6 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	if (longDesc)
 	    free (longDesc);
 
-	version = (*p->vTable->getVersion) (p, ABIVERSION);
-	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
-
 	dbus_message_append_args (reply,
 				  DBUS_TYPE_BOOLEAN, &supportedABI,
 				  DBUS_TYPE_INVALID);
@@ -1795,58 +1798,65 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
 					  sig, &listIter);
 
-	deps  = p->vTable->deps;
-	nDeps = p->vTable->nDeps;
-
-	while (nDeps--)
+	if (supportedABI)
 	{
-	    char *str;
+	    deps  = p->vTable->deps;
+	    nDeps = p->vTable->nDeps;
 
-	    str = malloc ((strlen (deps->name) + 10) * sizeof (char));
-	    if (str)
+	    while (nDeps--)
 	    {
-		switch (deps->rule) {
-		case CompPluginRuleBefore:
-		    sprintf (str, "before:%s", deps->name);
-		    break;
-		case CompPluginRuleAfter:
-		    sprintf (str, "after:%s", deps->name);
-		    break;
-		case CompPluginRuleRequire:
-		default:
-		    sprintf (str, "required:%s", deps->name);
-		    break;
-		}
+		char *str;
 
-		dbus_message_iter_append_basic (&listIter,
+		str = malloc ((strlen (deps->name) + 10) * sizeof (char));
+		if (str)
+		{
+		    switch (deps->rule) {
+		    case CompPluginRuleBefore:
+			sprintf (str, "before:%s", deps->name);
+			break;
+		    case CompPluginRuleAfter:
+			sprintf (str, "after:%s", deps->name);
+			break;
+		    case CompPluginRuleRequire:
+		    default:
+			sprintf (str, "required:%s", deps->name);
+			break;
+		    }
+
+		    dbus_message_iter_append_basic (&listIter,
 						DBUS_TYPE_STRING,
 						&str);
 
-		free (str);
+		    free (str);
+		}
+
+		deps++;
 	    }
 
-	    deps++;
+	    dbus_message_iter_close_container (&iter, &listIter);
+
+	    dbus_message_iter_init_append (reply, &iter);
+	    dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+					      sig, &listIter);
+
+	    features  = p->vTable->features;
+	    nFeatures = p->vTable->nFeatures;
+
+	    while (nFeatures--)
+	    {
+		dbus_message_iter_append_basic (&listIter,
+						DBUS_TYPE_STRING,
+						&features->name);
+
+		features++;
+	    }
+
+	    dbus_message_iter_close_container (&iter, &listIter);
+
+	    if (loadedPlugin)
+		(*p->vTable->fini) (p);
+
 	}
-
-	dbus_message_iter_close_container (&iter, &listIter);
-
-	dbus_message_iter_init_append (reply, &iter);
-	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
-					  sig, &listIter);
-
-	features  = p->vTable->features;
-	nFeatures = p->vTable->nFeatures;
-
-	while (nFeatures--)
-	{
-	    dbus_message_iter_append_basic (&listIter,
-					    DBUS_TYPE_STRING,
-					    &features->name);
-
-	    features++;
-	}
-
-	dbus_message_iter_close_container (&iter, &listIter);
     }
     else
     {
