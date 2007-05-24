@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 
 #include <compiz.h>
@@ -83,6 +84,9 @@ typedef struct _ResizeDisplay {
 
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
+
+    Atom resizeNotifyAtom;
+    Atom resizeInformationAtom;
 
     CompWindow	 *w;
     int		 mode;
@@ -203,6 +207,64 @@ resizeDamageRectangle (CompScreen *s,
     reg.extents.y2 += 1;
 
     damageScreenRegion (s, &reg);
+}
+
+static void
+resizeSendResizeNotify (CompDisplay *d)
+{
+    XEvent xev;
+
+    RESIZE_DISPLAY (d);
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = d->display;
+    xev.xclient.format  = 32;
+    
+    xev.xclient.message_type = rd->resizeNotifyAtom;
+    xev.xclient.window	     = rd->w->id;
+
+    xev.xclient.data.l[0] = rd->geometry.x;
+    xev.xclient.data.l[1] = rd->geometry.y;
+    xev.xclient.data.l[2] = rd->geometry.width;
+    xev.xclient.data.l[3] = rd->geometry.height;
+    xev.xclient.data.l[4] = 0;
+
+    XSendEvent (d->display,
+		rd->w->screen->root,
+		FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask,
+		&xev);
+}
+
+static void
+resizeUpdateWindowProperty (CompDisplay *d)
+{
+    unsigned long data[4];
+
+    RESIZE_DISPLAY (d);
+
+    data[0] = rd->geometry.x;
+    data[1] = rd->geometry.y;
+    data[2] = rd->geometry.width;
+    data[3] = rd->geometry.height;
+
+    XChangeProperty (d->display, rd->w->id, 
+		     rd->resizeInformationAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char*) data, 4);
+}
+
+static void
+resizeFinishResizing (CompDisplay *d)
+{
+    RESIZE_DISPLAY (d);
+
+    (*rd->w->screen->windowUngrabNotify) (rd->w);
+
+    XDeleteProperty (d->display,
+		     rd->w->id,
+		     rd->resizeInformationAtom);
+
+    rd->w = NULL;
 }
 
 static Bool
@@ -446,10 +508,7 @@ resizeTerminate (CompDisplay	 *d,
 	}
 
 	if (!(mask & (CWWidth | CWHeight)))
-	{
-	    (w->screen->windowUngrabNotify) (w);
-	    rd->w = NULL;
-	}
+	    resizeFinishResizing (d);
 
 	if (rs->grabIndex)
 	{
@@ -616,6 +675,9 @@ resizeHandleMotionEvent (CompScreen *s,
 	{
 	    resizeUpdateWindowSize (s->display);
 	}
+
+	resizeUpdateWindowProperty (s->display);
+	resizeSendResizeNotify (s->display);
     }
 }
 
@@ -803,10 +865,7 @@ resizeWindowResizeNotify (CompWindow *w,
     WRAP (rs, w->screen, windowResizeNotify, resizeWindowResizeNotify);
 
     if (rd->w == w && !rs->grabIndex)
-    {
-	(w->screen->windowUngrabNotify) (w);
-	rd->w = NULL;
-    }
+	resizeFinishResizing (w->screen->display);
 }
 
 static void
@@ -1063,6 +1122,11 @@ resizeInitDisplay (CompPlugin  *p,
     rd->w = 0;
 
     rd->releaseButton = 0;
+
+    rd->resizeNotifyAtom      = XInternAtom (d->display, 
+					     "_COMPIZ_RESIZE_NOTIFY", 0);
+    rd->resizeInformationAtom = XInternAtom (d->display, 
+					     "_COMPIZ_RESIZE_INFORMATION", 0);
 
     for (i = 0; i < NUM_KEYS; i++)
 	rd->key[i] = XKeysymToKeycode (d->display,
