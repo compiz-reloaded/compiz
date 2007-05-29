@@ -31,8 +31,6 @@
 
 #include <compiz.h>
 
-#define ZOOM_POINTER_SENSITIVITY_FACTOR 0.001f
-
 static CompMetadata zoomMetadata;
 
 static int displayPrivateIndex;
@@ -56,13 +54,11 @@ typedef struct _ZoomBox {
     float y2;
 } ZoomBox;
 
-#define ZOOM_SCREEN_OPTION_POINTER_INVERT_Y    0
-#define ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY 1
-#define ZOOM_SCREEN_OPTION_SPEED	       2
-#define ZOOM_SCREEN_OPTION_TIMESTEP	       3
-#define ZOOM_SCREEN_OPTION_ZOOM_FACTOR         4
-#define ZOOM_SCREEN_OPTION_FILTER_LINEAR       5
-#define ZOOM_SCREEN_OPTION_NUM		       6
+#define ZOOM_SCREEN_OPTION_SPEED	 0
+#define ZOOM_SCREEN_OPTION_TIMESTEP	 1
+#define ZOOM_SCREEN_OPTION_ZOOM_FACTOR   2
+#define ZOOM_SCREEN_OPTION_FILTER_LINEAR 3
+#define ZOOM_SCREEN_OPTION_NUM		 4
 
 typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -126,28 +122,14 @@ zoomSetScreenOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     ZOOM_SCREEN (screen);
 
-    o = compFindOption (zs->opt, NUM_OPTIONS (zs), name, &index);
+    o = compFindOption (zs->opt, NUM_OPTIONS (zs), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY:
-	if (compSetFloatOption (o, value))
-	{
-	    zs->pointerSensitivity = o->value.f *
-		ZOOM_POINTER_SENSITIVITY_FACTOR;
-	    return TRUE;
-	}
-	break;
-    default:
-	return compSetScreenOption (screen, o, value);
-    }
-
-    return FALSE;
+    return compSetScreenOption (screen, o, value);
 }
 
 static int
@@ -857,8 +839,6 @@ zoomFiniDisplay (CompPlugin  *p,
 }
 
 static const CompMetadataOptionInfo zoomScreenOptionInfo[] = {
-    { "invert_y", "bool", 0, 0, 0 },
-    { "sensitivity", "float", "<min>0.01</min>", 0, 0 },
     { "speed", "float", "<min>0.1</min>", 0, 0 },
     { "timestep", "float", "<min>0.1</min>", 0, 0 },
     { "zoom_factor", "float", "<min>1.01</min>", 0, 0 },
@@ -902,10 +882,6 @@ zoomInitScreen (CompPlugin *p,
 
     memset (&zs->current, 0, sizeof (zs->current));
     memset (&zs->last, 0, sizeof (zs->last));
-
-    zs->pointerSensitivity =
-	zs->opt[ZOOM_SCREEN_OPTION_POINTER_SENSITIVITY].value.f *
-	ZOOM_POINTER_SENSITIVITY_FACTOR;
 
     WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
     WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);

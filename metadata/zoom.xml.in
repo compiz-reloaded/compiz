@@ -29,19 +29,6 @@
 	    </option>
 	</display>
 	<screen>
-	    <option name="invert_y" type="bool">
-		<_short>Pointer Invert Y</_short>
-		<_long>Invert Y axis for pointer movement</_long>
-		<default>false</default>
-	    </option>
-	    <option name="sensitivity" type="float">
-		<_short>Pointer Sensitivity</_short>
-		<_long>Sensitivity of pointer movement</_long>
-		<default>1</default>
-		<min>0.01</min>
-		<max>100</max>
-		<precision>0.01</precision>
-	    </option>
 	    <option name="speed" type="float">
 		<_short>Speed</_short>
 		<_long>Zoom Speed</_long>
