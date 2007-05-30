@@ -560,6 +560,7 @@ cubeUnloadBackgrounds (CompScreen *s)
 
 	free (cs->bg);
 
+	cs->bg  = NULL;
 	cs->nBg = 0;
     }
 }
