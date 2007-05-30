@@ -1636,6 +1636,9 @@ cubeInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
+    cs->pw = 0;
+    cs->ph = 0;
+
     cs->invert = 1;
 
     cs->tc[0] = cs->tc[1] = cs->tc[2] = cs->tc[3] = 0.0f;
