@@ -67,7 +67,6 @@ typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
     PaintScreenProc		 paintScreen;
-    SetScreenOptionForPluginProc setScreenOptionForPlugin;
 
     CompOption opt[ZOOM_SCREEN_OPTION_NUM];
 
@@ -1027,7 +1026,6 @@ zoomFiniScreen (CompPlugin *p,
     UNWRAP (zs, s, preparePaintScreen);
     UNWRAP (zs, s, donePaintScreen);
     UNWRAP (zs, s, paintScreen);
-    UNWRAP (zs, s, setScreenOptionForPlugin);
 
     compFiniScreenOptions (s, zs->opt, ZOOM_SCREEN_OPTION_NUM);
 
