@@ -218,7 +218,7 @@ resizeSendResizeNotify (CompDisplay *d)
     xev.xclient.type    = ClientMessage;
     xev.xclient.display = d->display;
     xev.xclient.format  = 32;
-    
+
     xev.xclient.message_type = rd->resizeNotifyAtom;
     xev.xclient.window	     = rd->w->id;
 
@@ -247,7 +247,7 @@ resizeUpdateWindowProperty (CompDisplay *d)
     data[2] = rd->geometry.width;
     data[3] = rd->geometry.height;
 
-    XChangeProperty (d->display, rd->w->id, 
+    XChangeProperty (d->display, rd->w->id,
 		     rd->resizeInformationAtom,
 		     XA_CARDINAL, 32, PropModeReplace,
 		     (unsigned char*) data, 4);
@@ -872,7 +872,7 @@ static void
 resizePaintRectangle (CompScreen              *s,
 		      const ScreenPaintAttrib *sa,
 		      const CompTransform     *transform,
-		      int                     output,
+		      CompOutput              *output,
 		      unsigned short	      *borderColor,
 		      unsigned short	      *fillColor)
 {
@@ -916,7 +916,7 @@ resizePaintOutput (CompScreen              *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   const CompTransform     *transform,
 		   Region                  region,
-		   int                     output,
+		   CompOutput              *output,
 		   unsigned int            mask)
 {
     Bool status;
@@ -1123,9 +1123,9 @@ resizeInitDisplay (CompPlugin  *p,
 
     rd->releaseButton = 0;
 
-    rd->resizeNotifyAtom      = XInternAtom (d->display, 
+    rd->resizeNotifyAtom      = XInternAtom (d->display,
 					     "_COMPIZ_RESIZE_NOTIFY", 0);
-    rd->resizeInformationAtom = XInternAtom (d->display, 
+    rd->resizeInformationAtom = XInternAtom (d->display,
 					     "_COMPIZ_RESIZE_INFORMATION", 0);
 
     for (i = 0; i < NUM_KEYS; i++)

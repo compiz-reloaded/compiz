@@ -182,7 +182,7 @@ shotPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region			 region,
-		 int			 output,
+		 CompOutput		 *output,
 		 unsigned int		 mask)
 {
     Bool status;
@@ -224,7 +224,7 @@ shotPaintOutput (CompScreen		 *s,
 	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 	    glPopMatrix ();
 	}
-	else if (output == (s->nOutputDev - 1))
+	else if (output == &s->outputDev[s->nOutputDev - 1])
 	{
 	    int w = x2 - x1;
 	    int h = y2 - y1;

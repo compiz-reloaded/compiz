@@ -201,7 +201,7 @@ planePaintTransformedOutput (CompScreen		     *screen,
 			     const ScreenPaintAttrib *sAttrib,
 			     const CompTransform     *transform,
 			     Region		     region,
-			     int                     output,
+			     CompOutput              *output,
 			     unsigned int	     mask)
 {
     PLANE_SCREEN (screen);
@@ -341,7 +341,7 @@ planePaintOutput (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
 		  const CompTransform	  *transform,
 		  Region		  region,
-		  int			  output,
+		  CompOutput		  *output,
 		  unsigned int		  mask)
 {
     Bool status;
