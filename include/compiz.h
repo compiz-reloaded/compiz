@@ -89,6 +89,7 @@ typedef struct _FragmentAttrib    FragmentAttrib;
 typedef struct _CompCursor	  CompCursor;
 typedef struct _CompMatch	  CompMatch;
 typedef struct _CompMetadata      CompMetadata;
+typedef struct _CompOutput        CompOutput;
 
 /* virtual modifiers */
 
@@ -1176,24 +1177,29 @@ typedef void (*DonePaintScreenProc) (CompScreen *screen);
 #define PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK (1 << 3)
 #define PAINT_SCREEN_CLEAR_MASK			   (1 << 4)
 
+typedef void (*PaintScreenProc) (CompScreen   *screen,
+				 CompOutput   *outputs,
+				 int          numOutput,
+				 unsigned int mask);
+
 typedef Bool (*PaintOutputProc) (CompScreen		 *screen,
 				 const ScreenPaintAttrib *sAttrib,
 				 const CompTransform	 *transform,
 				 Region			 region,
-				 int		         output,
+				 CompOutput		 *output,
 				 unsigned int		 mask);
 
 typedef void (*PaintTransformedOutputProc) (CompScreen		    *screen,
 					    const ScreenPaintAttrib *sAttrib,
 					    const CompTransform	    *transform,
 					    Region		    region,
-					    int			    output,
+					    CompOutput		    *output,
 					    unsigned int	    mask);
 
 /* XXX: ApplyScreenTransformProc will be removed */
 typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 					  const ScreenPaintAttrib *sAttrib,
-					  int			  output,
+					  CompOutput		  *output,
 					  CompTransform	          *transform);
 
 /*
@@ -1286,14 +1292,14 @@ donePaintScreen (CompScreen *screen);
 
 void
 transformToScreenSpace (CompScreen    *screen,
-			int	      output,
+			CompOutput    *output,
 			float         z,
 			CompTransform *transform);
 
 /* XXX: prepareXCoords will be removed */
 void
 prepareXCoords (CompScreen *screen,
-		int	   output,
+		CompOutput *output,
 		float      z);
 
 void
@@ -1301,22 +1307,28 @@ paintTransformedOutput (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			const CompTransform	*transform,
 			Region			region,
-			int			output,
+			CompOutput		*output,
 			unsigned int	        mask);
 
 /* XXX: applyScreenTransform will be removed */
 void
 applyScreenTransform (CompScreen	      *screen,
 		      const ScreenPaintAttrib *sAttrib,
-		      int		      output,
+		      CompOutput	      *output,
 		      CompTransform	      *transform);
+
+void
+paintScreen (CompScreen   *screen,
+	     CompOutput   *outputs,
+	     int          numOutput,
+	     unsigned int mask);
 
 Bool
 paintOutput (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
 	     const CompTransform     *transform,
 	     Region		     region,
-	     int		     output,
+	     CompOutput		     *output,
 	     unsigned int	     mask);
 
 Bool
@@ -1733,13 +1745,13 @@ struct _CompIcon {
     int		height;
 };
 
-typedef struct _CompOutput {
+struct _CompOutput {
     char       *name;
     REGION     region;
     int        width;
     int        height;
     XRectangle workArea;
-} CompOutput;
+};
 
 typedef struct _CompCursorImage {
     struct _CompCursorImage *next;
@@ -1942,6 +1954,7 @@ struct _CompScreen {
 
     PreparePaintScreenProc	   preparePaintScreen;
     DonePaintScreenProc		   donePaintScreen;
+    PaintScreenProc		   paintScreen;
     PaintOutputProc		   paintOutput;
     PaintTransformedOutputProc	   paintTransformedOutput;
     ApplyScreenTransformProc	   applyScreenTransform;
@@ -2187,7 +2200,7 @@ outputChangeNotify (CompScreen *s);
 
 void
 clearScreenOutput (CompScreen   *s,
-		   int	        output,
+		   CompOutput	*output,
 		   unsigned int mask);
 
 void

@@ -49,7 +49,7 @@ donePaintScreen (CompScreen *screen) {}
 void
 applyScreenTransform (CompScreen	      *screen,
 		      const ScreenPaintAttrib *sAttrib,
-		      int		      output,
+		      CompOutput	      *output,
 		      CompTransform	      *transform)
 {
     matrixTranslate (transform,
@@ -69,32 +69,32 @@ applyScreenTransform (CompScreen	      *screen,
 
 void
 transformToScreenSpace (CompScreen    *screen,
-			int	      output,
+			CompOutput    *output,
 			float         z,
 			CompTransform *transform)
 {
     matrixTranslate (transform, -0.5f, -0.5f, z);
     matrixScale (transform,
-		 1.0f  / screen->outputDev[output].width,
-		 -1.0f / screen->outputDev[output].height,
+		 1.0f  / output->width,
+		 -1.0f / output->height,
 		 1.0f);
     matrixTranslate (transform,
-		     -screen->outputDev[output].region.extents.x1,
-		     -screen->outputDev[output].region.extents.y2,
+		     -output->region.extents.x1,
+		     -output->region.extents.y2,
 		     0.0f);
 }
 
 void
 prepareXCoords (CompScreen *screen,
-		int	   output,
+		CompOutput *output,
 		float      z)
 {
     glTranslatef (-0.5f, -0.5f, z);
-    glScalef (1.0f  / screen->outputDev[output].width,
-	      -1.0f / screen->outputDev[output].height,
+    glScalef (1.0f  / output->width,
+	      -1.0f / output->height,
 	      1.0f);
-    glTranslatef (-screen->outputDev[output].region.extents.x1,
-		  -screen->outputDev[output].region.extents.y2,
+    glTranslatef (-output->region.extents.x1,
+		  -output->region.extents.y2,
 		  0.0f);
 }
 
@@ -153,7 +153,7 @@ static void
 paintOutputRegion (CompScreen	       *screen,
 		   const CompTransform *transform,
 		   Region	       region,
-		   int		       output,
+		   CompOutput	       *output,
 		   unsigned int	       mask)
 {
     static Region tmpRegion = NULL;
@@ -252,7 +252,7 @@ paintTransformedOutput (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			const CompTransform	*transform,
 			Region			region,
-			int			output,
+			CompOutput		*output,
 			unsigned int		mask)
 {
     CompTransform sTransform = *transform;
@@ -271,11 +271,11 @@ paintTransformedOutput (CompScreen		*screen,
 	GLdouble p1[2] = { region->extents.x1, h - region->extents.y2 };
 	GLdouble p2[2] = { region->extents.x2, h - region->extents.y1 };
 
-	GLdouble halfW = screen->outputDev[output].width / 2.0;
-	GLdouble halfH = screen->outputDev[output].height / 2.0;
+	GLdouble halfW = output->width / 2.0;
+	GLdouble halfH = output->height / 2.0;
 
-	GLdouble cx = screen->outputDev[output].region.extents.x1 + halfW;
-	GLdouble cy = (h - screen->outputDev[output].region.extents.y2) + halfH;
+	GLdouble cx = output->region.extents.x1 + halfW;
+	GLdouble cy = (h - output->region.extents.y2) + halfH;
 
 	GLdouble top[4]    = { 0.0, halfH / (cy - p1[1]), 0.0, 0.5 };
 	GLdouble bottom[4] = { 0.0, halfH / (cy - p2[1]), 0.0, 0.5 };
@@ -328,7 +328,7 @@ paintOutput (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
 	     const CompTransform     *transform,
 	     Region		     region,
-	     int		     output,
+	     CompOutput		     *output,
 	     unsigned int	     mask)
 {
     CompTransform sTransform = *transform;
@@ -339,7 +339,7 @@ paintOutput (CompScreen		     *screen,
 	{
 	    if (mask & PAINT_SCREEN_FULL_MASK)
 	    {
-		region = &screen->outputDev[output].region;
+		region = &output->region;
 
 		(*screen->paintTransformedOutput) (screen, sAttrib,
 						   &sTransform, region,
@@ -356,7 +356,7 @@ paintOutput (CompScreen		     *screen,
     else if (mask & PAINT_SCREEN_FULL_MASK)
     {
 	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
-					   &screen->outputDev[output].region,
+					   &output->region,
 					   output, mask);
 
 	return TRUE;

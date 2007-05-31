@@ -1512,6 +1512,7 @@ addScreen (CompDisplay *display,
 
     s->preparePaintScreen	  = preparePaintScreen;
     s->donePaintScreen		  = donePaintScreen;
+    s->paintScreen		  = paintScreen;
     s->paintOutput		  = paintOutput;
     s->paintTransformedOutput	  = paintTransformedOutput;
     s->applyScreenTransform	  = applyScreenTransform;
@@ -3597,10 +3598,10 @@ outputChangeNotify (CompScreen *s)
 
 void
 clearScreenOutput (CompScreen	*s,
-		   int		output,
+		   CompOutput	*output,
 		   unsigned int mask)
 {
-    BoxPtr pBox = &s->outputDev[output].region.extents;
+    BoxPtr pBox = &output->region.extents;
 
     if (pBox->x1 != 0	     ||
 	pBox->y1 != 0	     ||
