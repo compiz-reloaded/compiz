@@ -47,6 +47,7 @@ typedef struct _ShotDisplay {
 
 typedef struct _ShotScreen {
     PaintOutputProc paintOutput;
+    PaintScreenProc paintScreen;
     int		    grabIndex;
 
     int  x1, y1, x2, y2;
@@ -177,23 +178,19 @@ shotSort (const void *_a,
 	return al - bl;
 }
 
-static Bool
-shotPaintOutput (CompScreen		 *s,
-		 const ScreenPaintAttrib *sAttrib,
-		 const CompTransform	 *transform,
-		 Region			 region,
-		 CompOutput		 *output,
-		 unsigned int		 mask)
+static void
+shotPaintScreen (CompScreen   *s,
+		 CompOutput   *outputs,
+		 int          numOutput,  
+		 unsigned int mask)
 {
-    Bool status;
-
     SHOT_SCREEN (s);
 
-    UNWRAP (ss, s, paintOutput);
-    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
-    WRAP (ss, s, paintOutput, shotPaintOutput);
+    UNWRAP (ss, s, paintScreen);
+    (*s->paintScreen) (s, outputs, numOutput, mask);
+    WRAP (ss, s, paintScreen, shotPaintScreen);
 
-    if (status && ss->grab)
+    if (ss->grab)
     {
 	int x1, x2, y1, y2;
 
@@ -201,30 +198,8 @@ shotPaintOutput (CompScreen		 *s,
 	y1 = MIN (ss->y1, ss->y2);
 	x2 = MAX (ss->x1, ss->x2);
 	y2 = MAX (ss->y1, ss->y2);
-
-	if (ss->grabIndex)
-	{
-	    glPushMatrix ();
-
-	    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
-
-	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	    glEnable (GL_BLEND);
-	    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
-	    glRecti (x1, y2, x2, y1);
-	    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x9fff);
-	    glBegin (GL_LINE_LOOP);
-	    glVertex2i (x1, y1);
-	    glVertex2i (x2, y1);
-	    glVertex2i (x2, y2);
-	    glVertex2i (x1, y2);
-	    glEnd ();
-	    glColor4usv (defaultColor);
-	    glDisable (GL_BLEND);
-	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
-	    glPopMatrix ();
-	}
-	else if (output == &s->outputDev[s->nOutputDev - 1])
+	
+	if (!ss->grabIndex)
 	{
 	    int w = x2 - x1;
 	    int h = y2 - y1;
@@ -300,6 +275,56 @@ shotPaintOutput (CompScreen		 *s,
 	    }
 
 	    ss->grab = FALSE;
+	}
+    }
+}
+
+static Bool
+shotPaintOutput (CompScreen		 *s,
+		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
+		 Region			 region,
+		 CompOutput		 *output,
+		 unsigned int		 mask)
+{
+    Bool status;
+
+    SHOT_SCREEN (s);
+
+    UNWRAP (ss, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (ss, s, paintOutput, shotPaintOutput);
+
+    if (status && ss->grab)
+    {
+	int x1, x2, y1, y2;
+
+	x1 = MIN (ss->x1, ss->x2);
+	y1 = MIN (ss->y1, ss->y2);
+	x2 = MAX (ss->x1, ss->x2);
+	y2 = MAX (ss->y1, ss->y2);
+
+	if (ss->grabIndex)
+	{
+	    glPushMatrix ();
+
+	    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
+
+	    glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	    glEnable (GL_BLEND);
+	    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x4fff);
+	    glRecti (x1, y2, x2, y1);
+	    glColor4us (0x2fff, 0x2fff, 0x4fff, 0x9fff);
+	    glBegin (GL_LINE_LOOP);
+	    glVertex2i (x1, y1);
+	    glVertex2i (x2, y1);
+	    glVertex2i (x2, y2);
+	    glVertex2i (x1, y2);
+	    glEnd ();
+	    glColor4usv (defaultColor);
+	    glDisable (GL_BLEND);
+	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+	    glPopMatrix ();
 	}
     }
 
@@ -470,6 +495,7 @@ shotInitScreen (CompPlugin *p,
     ss->grabIndex = 0;
     ss->grab	  = FALSE;
 
+    WRAP (ss, s, paintScreen, shotPaintScreen);
     WRAP (ss, s, paintOutput, shotPaintOutput);
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
@@ -483,6 +509,7 @@ shotFiniScreen (CompPlugin *p,
 {
     SHOT_SCREEN (s);
 
+    UNWRAP (ss, s, paintScreen);
     UNWRAP (ss, s, paintOutput);
 
     free (ss);
