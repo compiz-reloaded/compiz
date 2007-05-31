@@ -135,7 +135,7 @@ typedef struct _BlurScreen {
     BoxRec stencilBox;
     GLint  stencilBits;
 
-    int output;
+    CompOutput *output;
     int count;
 
     GLuint texture[2];
@@ -853,7 +853,7 @@ blurPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region			 region,
-		 int			 output,
+		 CompOutput		 *output,
 		 unsigned int		 mask)
 {
     Bool status;
@@ -905,7 +905,7 @@ blurPaintTransformedOutput (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
 			    Region		    region,
-			    int			    output,
+			    CompOutput		    *output,
 			    unsigned int	    mask)
 {
     BLUR_SCREEN (s);
@@ -1266,7 +1266,7 @@ getDstBlurFragmentFunction (CompScreen  *s,
 
 static Bool
 projectVertices (CompScreen	     *s,
-		 int		     output,
+		 CompOutput	     *output,
 		 const CompTransform *transform,
 		 const float	     *object,
 		 float		     *screen,
@@ -1278,10 +1278,10 @@ projectVertices (CompScreen	     *s,
     double   x, y, z;
     int	     i;
 
-    viewport[0] = s->outputDev[output].region.extents.x1;
-    viewport[1] = s->height - s->outputDev[output].region.extents.y2;
-    viewport[2] = s->outputDev[output].width;
-    viewport[3] = s->outputDev[output].height;
+    viewport[0] = output->region.extents.x1;
+    viewport[1] = s->height - output->region.extents.y2;
+    viewport[2] = output->width;
+    viewport[3] = output->height;
 
     for (i = 0; i < 16; i++)
     {
@@ -1532,7 +1532,7 @@ fboUpdate (CompScreen *s,
 
 static void
 blurProjectRegion (CompWindow	       *w,
-		   int		       output,
+		   CompOutput	       *output,
 		   const CompTransform *transform)
 {
     CompScreen *s = w->screen;
@@ -2576,7 +2576,7 @@ blurInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
-    bs->output = 0;
+    bs->output = NULL;
     bs->count  = 0;
 
     bs->filterRadius = 0;
