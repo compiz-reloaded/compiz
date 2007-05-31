@@ -2455,7 +2455,9 @@ grabUngrabOneKey (CompScreen   *s,
 		  TRUE,
 		  GrabModeAsync,
 		  GrabModeAsync);
-    } else {
+    }
+    else
+    {
 	XUngrabKey (s->display->display,
 		    keycode,
 		    modifiers,
