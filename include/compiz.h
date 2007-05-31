@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070507
+#define ABIVERSION 20070524
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -308,6 +308,15 @@ typedef enum {
     CompActionStateCancel      = 1 << 10,
     CompActionStateAutoGrab    = 1 << 11
 } CompActionState;
+
+typedef enum {
+    CompLogLevelFatal = 0,
+    CompLogLevelError,
+    CompLogLevelWarn,
+    CompLogLevelInfo,
+    CompLogLevelDebug
+
+} CompLogLevel;
 
 typedef struct _CompKeyBinding {
     int		 keycode;
@@ -728,6 +737,11 @@ typedef void (*MatchExpHandlerChangedProc) (CompDisplay *display);
 typedef void (*MatchPropertyChangedProc) (CompDisplay *display,
 					  CompWindow  *window);
 
+typedef void (*LogMessageProc) (CompDisplay  *d,
+				char         *componentName,
+				CompLogLevel level,
+				char         *message);
+
 struct _CompDisplay {
     Display    *display;
     CompScreen *screens;
@@ -925,8 +939,11 @@ struct _CompDisplay {
     MatchExpHandlerChangedProc matchExpHandlerChanged;
     MatchPropertyChangedProc   matchPropertyChanged;
 
+    LogMessageProc logMessage;
+
     CompPrivate *privates;
 };
+
 
 extern CompDisplay *compDisplays;
 
@@ -978,6 +995,15 @@ fileWatchAdded (CompDisplay   *display,
 void
 fileWatchRemoved (CompDisplay   *display,
 		  CompFileWatch *fileWatch);
+
+void
+compLogMessage (CompDisplay *d, char *componentName, CompLogLevel level, char *format, ...);
+
+void
+logMessage (CompDisplay *d, char *componentName, CompLogLevel level, char *message);
+
+char *
+logLevelToString (CompLogLevel level);
 
 int
 compCheckForError (Display *dpy);

@@ -404,10 +404,10 @@ decorCreateDecoration (CompScreen *screen,
 
     if (decor_property_get_version (prop) != decor_version ())
     {
-	fprintf (stderr, "%s: decoration: property ignored because "
-		 "version is %d and decoration plugin version is %d\n",
-		 programName, decor_property_get_version (prop),
-		 decor_version ());
+	compLogMessage (screen->display, "decoration", CompLogLevelWarn,
+			"Property ignored because "
+			"version is %d and decoration plugin version is %d\n",
+			decor_property_get_version (prop), decor_version ());
 
 	XFree (data);
 	return NULL;

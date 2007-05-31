@@ -121,8 +121,9 @@ annoCairoContext (CompScreen *s)
 
 	if (!bindPixmapToTexture (s, &as->texture, as->pixmap, w, h, 32))
 	{
-	    fprintf (stderr, "%s: Couldn't bind annotate pixmap 0x%x to "
-		     "texture\n", programName, (int) as->pixmap);
+	    compLogMessage (s->display, "annotate", CompLogLevelError,
+			    "Couldn't bind pixmap 0x%x to texture",
+			    (int) as->pixmap);
 
 	    XFreePixmap (s->display->display, as->pixmap);
 

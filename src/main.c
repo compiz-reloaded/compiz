@@ -120,6 +120,76 @@ usage (void)
 	    programName);
 }
 
+void
+compLogMessage (CompDisplay *d,
+		char *componentName,
+		CompLogLevel level,
+		char *format,
+		...)
+{
+    va_list args;
+    char    message[2048];
+
+    if (!d)
+	d = compDisplays;
+
+    va_start (args, format);
+
+    vsnprintf (message, 2048, format, args);
+
+    if (!d)
+	logMessage (d, componentName, level, message);
+    else
+	(*d->logMessage) (d, componentName, level, message);
+
+    va_end (args);
+}
+
+void
+logMessage (CompDisplay *d,
+	    char *componentName,
+	    CompLogLevel level,
+	    char *message)
+{
+    char defaultMessage[2048];
+
+    snprintf (defaultMessage, 2048, "%s (%s): %s",
+	      programName, componentName, message);
+
+    fprintf (stderr, defaultMessage);
+    fprintf (stderr, "\n");
+}
+
+char *
+logLevelToString (CompLogLevel level)
+{
+    char *logStr;
+
+    switch (level)
+    {
+    case CompLogLevelFatal:
+	logStr = strdup ("Fatal");
+	break;
+    case CompLogLevelError:
+	logStr = strdup ("Error");
+	break;
+    case CompLogLevelWarn:
+	logStr = strdup ("Warn");
+	break;
+    case CompLogLevelInfo:
+	logStr = strdup ("Info");
+	break;
+    case CompLogLevelDebug:
+	logStr = strdup ("Debug");
+	break;
+    default:
+	logStr = strdup ("Unknown");
+	break;
+    }
+
+    return logStr;
+}
+
 static void
 signalHandler (int sig)
 {
@@ -227,6 +297,8 @@ main (int argc, char **argv)
     programArgc = argc;
     programArgv = argv;
 
+    compDisplays = NULL;
+
     signal (SIGHUP, signalHandler);
     signal (SIGCHLD, signalHandler);
     signal (SIGINT, signalHandler);
@@ -329,7 +401,8 @@ main (int argc, char **argv)
 	}
 	else if (*argv[i] == '-')
 	{
-	    fprintf (stderr, "%s: Unknown option '%s'\n", programName, argv[i]);
+	    compLogMessage (NULL, "core", CompLogLevelWarn,
+			    "Unknown option '%s'\n", argv[i]);
 	}
 	else
 	{
@@ -374,8 +447,8 @@ main (int argc, char **argv)
 
     if (!compInitMetadata (&coreMetadata))
     {
-	fprintf (stderr, "%s: Couldn't initialize core metadata\n",
-		 programName);
+	compLogMessage (NULL, "core", CompLogLevelFatal,
+			"Couldn't initialize core metadata");
 	return 1;
     }
 
