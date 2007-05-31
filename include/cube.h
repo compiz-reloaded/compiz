@@ -68,7 +68,7 @@ typedef void (*CubeClearTargetOutputProc) (CompScreen *s,
 typedef void (*CubePaintTopBottomProc) (CompScreen		*s,
 					const ScreenPaintAttrib *sAttrib,
 					const CompTransform	*transform,
-					int			output,
+					CompOutput		*output,
 					int			size);
 
 typedef struct _CubeScreen {
