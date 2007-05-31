@@ -597,9 +597,8 @@ initActionValue (CompDisplay	 *d,
 
 		if (strcasecmp (binding, "disabled") && *binding)
 		{
-		    v->action.type |= CompBindingTypeKey;
-		    if (!stringToKeyBinding (d, binding, &v->action.key))
-			v->action.type &= ~CompBindingTypeKey;
+		    if (stringToKeyBinding (d, binding, &v->action.key))
+			v->action.type |= CompBindingTypeKey;
 		}
 
 		xmlFree (value);
@@ -615,9 +614,8 @@ initActionValue (CompDisplay	 *d,
 
 		if (strcasecmp (binding, "disabled") && *binding)
 		{
-		    v->action.type |= CompBindingTypeButton;
-		    if (!stringToButtonBinding (d, binding, &v->action.button))
-			v->action.type &= ~CompBindingTypeButton;
+		    if (stringToButtonBinding (d, binding, &v->action.button))
+			v->action.type |= CompBindingTypeButton;
 		}
 
 		xmlFree (value);
