@@ -168,10 +168,10 @@ imageBufferToTexture (CompScreen   *screen,
 {
 #if IMAGE_BYTE_ORDER == MSBFirst
     return imageToTexture (screen, texture, image, width, height,
-			   GL_BGRA, GL_UNSIGNED_BYTE);
+			   GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV);
 #else
     return imageToTexture (screen, texture, image, width, height,
-			   GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV);
+			   GL_BGRA, GL_UNSIGNED_BYTE);
 #endif
 }
 
