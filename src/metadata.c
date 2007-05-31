@@ -165,9 +165,9 @@ compAddMetadataFromFile (CompMetadata *metadata,
     status |= addMetadataFromFilename (metadata, METADATADIR, file);
     if (!status)
     {
-	fprintf (stderr,
-		 "%s: Unable to parse XML metadata from file \"%s%s\"\n",
-		 programName, file, EXTENSION);
+	compLogMessage (NULL, "core", CompLogLevelWarn,
+			"Unable to parse XML metadata from file \"%s%s\"",
+			file, EXTENSION);
 
 	return FALSE;
     }
@@ -184,7 +184,8 @@ compAddMetadataFromString (CompMetadata *metadata,
     doc = xmlReadMemory (string, strlen (string), NULL, NULL, 0);
     if (!doc)
     {
-	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
+	compLogMessage (NULL, "core", CompLogLevelWarn,
+			"Unable to parse XML metadata");
 
 	return FALSE;
     }
@@ -213,7 +214,8 @@ compAddMetadataFromIO (CompMetadata	     *metadata,
     doc = xmlReadIO (ioread, ioclose, ioctx, NULL, NULL, 0);
     if (!doc)
     {
-	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
+	compLogMessage (NULL, "core", CompLogLevelWarn,
+			"Unable to parse XML metadata");
 
 	return FALSE;
     }

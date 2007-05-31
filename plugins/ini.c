@@ -307,8 +307,9 @@ iniGetFilename (CompDisplay *d,
 
 	if (!s)
 	{
-	    fprintf (stderr, "Invalid screen number passed " \
-			     "to iniGetFilename %d\n", screen);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Invalid screen number passed " \
+			     "to iniGetFilename %d", screen);
 	    return FALSE;
 	}
 	snprintf (screenStr, 12, "screen%d", screen);
@@ -459,7 +460,8 @@ iniMakeDirectories (void)
     }
     else
     {
-	fprintf(stderr, "Could not get HOME environmental variable\n");
+	compLogMessage (NULL, "ini", CompLogLevelWarn,
+			"Could not get HOME environmental variable");
 	return FALSE;
     }
 }
@@ -620,8 +622,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	p = findActivePlugin (plugin);
 	if (!p)
 	{
-	    fprintf(stderr, "Could not find running plugin " \
-			    "%s (iniLoadOptionsFromFile)\n", plugin);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Could not find running plugin " \
+			    "%s (iniLoadOptionsFromFile)", plugin);
 	    return FALSE;
 	}
     }
@@ -634,8 +637,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
 	if (!s)
 	{
-	    fprintf (stderr, "Invalid screen number passed to " \
-			     "iniLoadOptionsFromFile %d\n", screen);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Invalid screen number passed to " \
+			    "iniLoadOptionsFromFile %d", screen);
 	    return FALSE;
 	}
     }
@@ -669,8 +673,8 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
 	if (!iniParseLine (tmp, &optionName, &optionValue))
 	{
-	    fprintf(stderr,
-		    "Ignoring line '%s' in %s %i\n", tmp, plugin, screen);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Ignoring line '%s' in %s %i", tmp, plugin, screen);
 	    continue;
 	}
 
@@ -823,8 +827,9 @@ iniSaveOptions (CompDisplay *d,
 
 	if (!s)
 	{
-	    fprintf (stderr, "Invalid screen number passed to " \
-			     "iniSaveOptions %d\n", screen);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Invalid screen number passed to " \
+			    "iniSaveOptions %d", screen);
 	    return FALSE;
 	}
     }
@@ -885,8 +890,9 @@ iniSaveOptions (CompDisplay *d,
 
     if (!optionFile)
     {
-	fprintf (stderr, "Failed to write to %s, check you " \
-			 "have the correct permissions\n", fullPath);
+	compLogMessage (d, "ini", CompLogLevelError,
+			"Failed to write to %s, check you " \
+			"have the correct permissions", fullPath);
 	free (filename);
 	free (directory);
 	free (fullPath);
@@ -1004,9 +1010,10 @@ iniSaveOptions (CompDisplay *d,
 		break;
 	    }
 	    default:
-		fprintf (stderr, "Unknown list option type %d, %s\n",
-				  option->value.list.type,
-				  optionTypeToString (option->value.list.type));
+		compLogMessage (d, "ini", CompLogLevelWarn,
+				"Unknown list option type %d, %s\n",
+				option->value.list.type,
+				optionTypeToString (option->value.list.type));
 		break;
 	    }
 		break;
@@ -1099,8 +1106,10 @@ iniLoadOptions (CompDisplay *d,
 
 	    value.list.type = CompOptionTypeString;
 
-	    fprintf(stderr, "Could not open main display config file %s\n", fullPath);
-	    fprintf(stderr, "Loading default plugins (%s)\n", DEFAULT_PLUGINS);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Could not open main display config file %s", fullPath);
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Loading default plugins (%s)", DEFAULT_PLUGINS);
 
 	    (*d->setDisplayOption) (d, "active_plugins", &value);
 
@@ -1124,8 +1133,9 @@ iniLoadOptions (CompDisplay *d,
 	}
 	else
 	{
-	    fprintf(stderr, "Could not open config file %s - using " \
-			    "defaults for %s\n", fullPath, (plugin)?plugin:"core");
+	    compLogMessage (d, "ini", CompLogLevelWarn,
+			    "Could not open config file %s - using " \
+			    "defaults for %s", fullPath, (plugin)?plugin:"core");
 
 	    fileData->blockWrites = FALSE;
 
@@ -1214,8 +1224,9 @@ iniInitPluginForDisplay (CompPlugin  *p,
     }
     else if (!status)
     {
-	fprintf(stderr, "Plugin %s failed to initialize " \
-			"display settings\n", p->vTable->name);
+	compLogMessage (d, "ini", CompLogLevelWarn,
+			"Plugin '%s' failed to initialize " \
+			"display settings", p->vTable->name);
     }
 
     return status;
@@ -1239,8 +1250,9 @@ iniInitPluginForScreen (CompPlugin *p,
     }
     else if (!status)
     {
-	fprintf(stderr, "Plugin %s failed to initialize " \
-			"screen %d settings\n", p->vTable->name, s->screenNum);
+	compLogMessage (s->display, "ini", CompLogLevelWarn,
+			"Plugin '%s' failed to initialize " \
+			"screen %d settings", p->vTable->name, s->screenNum);
     }
 
     return status;

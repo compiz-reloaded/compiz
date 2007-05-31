@@ -270,8 +270,8 @@ shotPaintScreen (CompScreen		 *s,
 			if (!writeImageToFile (s->display, dir, name, "png",
 					       w, h, buffer))
 			{
-			    fprintf (stderr, "%s: failed to write "
-				     "screenshot image", programName);
+			    compLogMessage (s->display, "screenshot", CompLogLevelError,
+					    "failed to write screenshot image");
 			}
 			else if (*app != '\0')
 			{
