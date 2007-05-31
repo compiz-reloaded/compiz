@@ -138,7 +138,7 @@ imageToTexture (CompScreen   *screen,
 
     glBindTexture (texture->target, texture->name);
 
-    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0, 
+    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0,
 		  format, type, data);
 
     texture->filter = GL_NEAREST;
