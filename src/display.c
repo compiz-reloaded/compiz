@@ -79,6 +79,10 @@ static CompFileWatchHandle lastFileWatchHandle = 1;
 static CompScreen *targetScreen = NULL;
 static CompOutput *targetOutput;
 static Region	  tmpRegion, outputRegion;
+static int        curViewportX = 0;
+static int        curViewportY = 0;
+static int        curViewportW = 0;
+static int        curViewportH = 0;
 
 static Bool inHandleEvent = FALSE;
 
@@ -1459,12 +1463,21 @@ paintScreen (CompScreen   *s,
 	targetScreen = s;
 	targetOutput = &outputs[i];
 
-	if (numOutput > 1)
+	if (curViewportX != outputs[i].region.extents.x1 ||
+	    curViewportY != s->height - outputs[i].region.extents.x2 ||
+	    curViewportW != outputs[i].width ||
+	    curViewportH != outputs[i].height)
+	{
 	    glViewport (outputs[i].region.extents.x1,
 			s->height -
 			outputs[i].region.extents.y2,
 			outputs[i].width,
 			outputs[i].height);
+	    curViewportX = outputs[i].region.extents.x1;
+	    curViewportY = s->height - outputs[i].region.extents.x2;
+	    curViewportW = outputs[i].width;
+	    curViewportH = outputs[i].height;
+	}
 
 	if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
 	{
