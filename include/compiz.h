@@ -1838,6 +1838,7 @@ struct _CompScreen {
     CompOutput *outputDev;
     int	       nOutputDev;
     int	       currentOutputDev;
+    CompOutput fullscreenOutput;
 
     CompActiveWindowHistory history[ACTIVE_WINDOW_HISTORY_NUM];
     int			    currentHistory;

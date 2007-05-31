@@ -821,6 +821,15 @@ reshape (CompScreen *s,
     s->width  = w;
     s->height = h;
 
+    s->fullscreenOutput.name             = "fullscreen";
+    s->fullscreenOutput.width            = w;
+    s->fullscreenOutput.height           = h;
+    s->fullscreenOutput.region           = s->region;
+    s->fullscreenOutput.workArea.x       = 0;
+    s->fullscreenOutput.workArea.y       = 0;
+    s->fullscreenOutput.workArea.width   = w;
+    s->fullscreenOutput.workArea.height  = h;
+ 
     updateScreenEdges (s);
 }
 
