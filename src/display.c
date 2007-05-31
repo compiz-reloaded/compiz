@@ -1654,7 +1654,7 @@ eventLoop (void)
 
 			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
 			{
-			    (*s->paintScreen) (s,
+			    (*s->paintOutput) (s,
 					       &defaultScreenPaintAttrib,
 					       &identity,
 					       &s->outputDev[i].region, i,
@@ -1667,13 +1667,13 @@ eventLoop (void)
 					      &s->outputDev[i].region,
 					      outputRegion);
 
-			    if (!(*s->paintScreen) (s,
+			    if (!(*s->paintOutput) (s,
 						    &defaultScreenPaintAttrib,
 						    &identity,
 						    outputRegion, i,
 						    PAINT_SCREEN_REGION_MASK))
 			    {
-				(*s->paintScreen) (s,
+				(*s->paintOutput) (s,
 						   &defaultScreenPaintAttrib,
 						   &identity,
 						   &s->outputDev[i].region, i,

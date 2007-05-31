@@ -55,7 +55,7 @@ typedef struct _AnnoDisplay {
 } AnnoDisplay;
 
 typedef struct _AnnoScreen {
-    PaintScreenProc paintScreen;
+    PaintOutputProc paintOutput;
     int		    grabIndex;
 
     Pixmap	    pixmap;
@@ -582,7 +582,7 @@ annoClear (CompDisplay     *d,
 }
 
 static Bool
-annoPaintScreen (CompScreen		 *s,
+annoPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region			 region,
@@ -593,9 +593,9 @@ annoPaintScreen (CompScreen		 *s,
 
     ANNO_SCREEN (s);
 
-    UNWRAP (as, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (as, s, paintScreen, annoPaintScreen);
+    UNWRAP (as, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (as, s, paintOutput, annoPaintOutput);
 
     if (status && as->content && region->numRects)
     {
@@ -818,7 +818,7 @@ annoInitScreen (CompPlugin *p,
 
     initTexture (s, &as->texture);
 
-    WRAP (as, s, paintScreen, annoPaintScreen);
+    WRAP (as, s, paintOutput, annoPaintOutput);
 
     s->privates[ad->screenPrivateIndex].ptr = as;
 
@@ -842,7 +842,7 @@ annoFiniScreen (CompPlugin *p,
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
 
-    UNWRAP (as, s, paintScreen);
+    UNWRAP (as, s, paintOutput);
 
     free (as);
 }

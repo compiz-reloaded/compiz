@@ -150,7 +150,7 @@ paintCursor (CompCursor		 *c,
    transformed screen case should be made optional for those who do
    see a difference. */
 static void
-paintScreenRegion (CompScreen	       *screen,
+paintOutputRegion (CompScreen	       *screen,
 		   const CompTransform *transform,
 		   Region	       region,
 		   int		       output,
@@ -248,7 +248,7 @@ paintScreenRegion (CompScreen	       *screen,
 			 PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
 
 void
-paintTransformedScreen (CompScreen		*screen,
+paintTransformedOutput (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			const CompTransform	*transform,
 			Region			region,
@@ -300,7 +300,7 @@ paintTransformedScreen (CompScreen		*screen,
 
 	glLoadMatrixf (sTransform.m);
 
-	paintScreenRegion (screen, &sTransform, region, output, mask);
+	paintOutputRegion (screen, &sTransform, region, output, mask);
 
 	glDisable (GL_CLIP_PLANE0);
 	glDisable (GL_CLIP_PLANE1);
@@ -317,14 +317,14 @@ paintTransformedScreen (CompScreen		*screen,
 	glPushMatrix ();
 	glLoadMatrixf (sTransform.m);
 
-	paintScreenRegion (screen, &sTransform, region, output, mask);
+	paintOutputRegion (screen, &sTransform, region, output, mask);
 
 	glPopMatrix ();
     }
 }
 
 Bool
-paintScreen (CompScreen		     *screen,
+paintOutput (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
 	     const CompTransform     *transform,
 	     Region		     region,
@@ -341,7 +341,7 @@ paintScreen (CompScreen		     *screen,
 	    {
 		region = &screen->outputDev[output].region;
 
-		(*screen->paintTransformedScreen) (screen, sAttrib,
+		(*screen->paintTransformedOutput) (screen, sAttrib,
 						   &sTransform, region,
 						   output, mask);
 
@@ -355,7 +355,7 @@ paintScreen (CompScreen		     *screen,
     }
     else if (mask & PAINT_SCREEN_FULL_MASK)
     {
-	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   &screen->outputDev[output].region,
 					   output, mask);
 
@@ -371,7 +371,7 @@ paintScreen (CompScreen		     *screen,
     glPushMatrix ();
     glLoadMatrixf (sTransform.m);
 
-    paintScreenRegion (screen, &sTransform, region, output, mask);
+    paintOutputRegion (screen, &sTransform, region, output, mask);
 
     glPopMatrix ();
 

@@ -76,7 +76,7 @@ typedef struct _SwitchDisplay {
 typedef struct _SwitchScreen {
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc    donePaintScreen;
-    PaintScreenProc	   paintScreen;
+    PaintOutputProc	   paintOutput;
     PaintWindowProc        paintWindow;
     PaintBackgroundProc    paintBackground;
     DamageWindowRectProc   damageWindowRect;
@@ -1288,7 +1288,7 @@ switchPreparePaintScreen (CompScreen *s,
 }
 
 static Bool
-switchPaintScreen (CompScreen		   *s,
+switchPaintOutput (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   const CompTransform	   *transform,
 		   Region		   region,
@@ -1345,9 +1345,9 @@ switchPaintScreen (CompScreen		   *s,
 	    zoomed = NULL;
 	}
 
-	UNWRAP (ss, s, paintScreen);
-	status = (*s->paintScreen) (s, &sa, transform, region, output, mask);
-	WRAP (ss, s, paintScreen, switchPaintScreen);
+	UNWRAP (ss, s, paintOutput);
+	status = (*s->paintOutput) (s, &sa, transform, region, output, mask);
+	WRAP (ss, s, paintOutput, switchPaintOutput);
 
 	if (ss->zooming)
 	{
@@ -1357,10 +1357,10 @@ switchPaintScreen (CompScreen		   *s,
 
 	    sa.zCamera += MIN (ss->sTranslate, ss->translate);
 
-	    UNWRAP (ss, s, paintScreen);
-	    status = (*s->paintScreen) (s, &sa, transform, region, output,
+	    UNWRAP (ss, s, paintOutput);
+	    status = (*s->paintOutput) (s, &sa, transform, region, output,
 					mask);
-	    WRAP (ss, s, paintScreen, switchPaintScreen);
+	    WRAP (ss, s, paintOutput, switchPaintOutput);
 	}
 
 	if (zoomed)
@@ -1393,10 +1393,10 @@ switchPaintScreen (CompScreen		   *s,
     }
     else
     {
-	UNWRAP (ss, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
+	UNWRAP (ss, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, transform, region, output,
 				    mask);
-	WRAP (ss, s, paintScreen, switchPaintScreen);
+	WRAP (ss, s, paintOutput, switchPaintOutput);
     }
 
     return status;
@@ -1973,7 +1973,7 @@ switchInitScreen (CompPlugin *p,
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
-    WRAP (ss, s, paintScreen, switchPaintScreen);
+    WRAP (ss, s, paintOutput, switchPaintOutput);
     WRAP (ss, s, paintWindow, switchPaintWindow);
     WRAP (ss, s, paintBackground, switchPaintBackground);
     WRAP (ss, s, damageWindowRect, switchDamageWindowRect);
@@ -1991,7 +1991,7 @@ switchFiniScreen (CompPlugin *p,
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
-    UNWRAP (ss, s, paintScreen);
+    UNWRAP (ss, s, paintOutput);
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, paintBackground);
     UNWRAP (ss, s, damageWindowRect);

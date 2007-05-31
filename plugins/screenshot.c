@@ -46,7 +46,7 @@ typedef struct _ShotDisplay {
 } ShotDisplay;
 
 typedef struct _ShotScreen {
-    PaintScreenProc paintScreen;
+    PaintOutputProc paintOutput;
     int		    grabIndex;
 
     int  x1, y1, x2, y2;
@@ -178,7 +178,7 @@ shotSort (const void *_a,
 }
 
 static Bool
-shotPaintScreen (CompScreen		 *s,
+shotPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region			 region,
@@ -189,9 +189,9 @@ shotPaintScreen (CompScreen		 *s,
 
     SHOT_SCREEN (s);
 
-    UNWRAP (ss, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (ss, s, paintScreen, shotPaintScreen);
+    UNWRAP (ss, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (ss, s, paintOutput, shotPaintOutput);
 
     if (status && ss->grab)
     {
@@ -470,7 +470,7 @@ shotInitScreen (CompPlugin *p,
     ss->grabIndex = 0;
     ss->grab	  = FALSE;
 
-    WRAP (ss, s, paintScreen, shotPaintScreen);
+    WRAP (ss, s, paintOutput, shotPaintOutput);
 
     s->privates[sd->screenPrivateIndex].ptr = ss;
 
@@ -483,7 +483,7 @@ shotFiniScreen (CompPlugin *p,
 {
     SHOT_SCREEN (s);
 
-    UNWRAP (ss, s, paintScreen);
+    UNWRAP (ss, s, paintOutput);
 
     free (ss);
 }

@@ -103,7 +103,7 @@ typedef struct _ResizeScreen {
     int grabIndex;
 
     WindowResizeNotifyProc windowResizeNotify;
-    PaintScreenProc	   paintScreen;
+    PaintOutputProc	   paintOutput;
     PaintWindowProc	   paintWindow;
     DamageWindowRectProc   damageWindowRect;
 
@@ -912,7 +912,7 @@ resizePaintRectangle (CompScreen              *s,
 }
 
 static Bool
-resizePaintScreen (CompScreen              *s,
+resizePaintOutput (CompScreen              *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   const CompTransform     *transform,
 		   Region                  region,
@@ -930,9 +930,9 @@ resizePaintScreen (CompScreen              *s,
 	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
     }
 
-    UNWRAP (rs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (rs, s, paintScreen, resizePaintScreen);
+    UNWRAP (rs, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (rs, s, paintOutput, resizePaintOutput);
 
     if (status && rd->w)
     {
@@ -1190,7 +1190,7 @@ resizeInitScreen (CompPlugin *p,
     rs->cursor[3] = rs->downCursor;
 
     WRAP (rs, s, windowResizeNotify, resizeWindowResizeNotify);
-    WRAP (rs, s, paintScreen, resizePaintScreen);
+    WRAP (rs, s, paintOutput, resizePaintOutput);
     WRAP (rs, s, paintWindow, resizePaintWindow);
     WRAP (rs, s, damageWindowRect, resizeDamageWindowRect);
 
@@ -1225,7 +1225,7 @@ resizeFiniScreen (CompPlugin *p,
 	XFreeCursor (s->display->display, rs->downRightCursor);
 
     UNWRAP (rs, s, windowResizeNotify);
-    UNWRAP (rs, s, paintScreen);
+    UNWRAP (rs, s, paintOutput);
     UNWRAP (rs, s, paintWindow);
     UNWRAP (rs, s, damageWindowRect);
 

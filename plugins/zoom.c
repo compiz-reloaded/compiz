@@ -66,7 +66,7 @@ typedef struct _ZoomBox {
 typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
-    PaintScreenProc		 paintScreen;
+    PaintOutputProc		 paintOutput;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 
     CompOption opt[ZOOM_SCREEN_OPTION_NUM];
@@ -247,7 +247,7 @@ zoomDonePaintScreen (CompScreen *s)
 }
 
 static Bool
-zoomPaintScreen (CompScreen		 *s,
+zoomPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region		         region,
@@ -292,19 +292,19 @@ zoomPaintScreen (CompScreen		 *s,
 	if ((zs->zoomOutput != output || !zs->adjust) && scale > 3.9f)
 	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
 
-	UNWRAP (zs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, &zTransform, region, output,
+	UNWRAP (zs, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, &zTransform, region, output,
 				    mask);
-	WRAP (zs, s, paintScreen, zoomPaintScreen);
+	WRAP (zs, s, paintOutput, zoomPaintOutput);
 
 	s->filter[SCREEN_TRANS_FILTER] = saveFilter;
     }
     else
     {
-	UNWRAP (zs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
+	UNWRAP (zs, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, transform, region, output,
 				    mask);
-	WRAP (zs, s, paintScreen, zoomPaintScreen);
+	WRAP (zs, s, paintOutput, zoomPaintOutput);
     }
 
     if (status && zs->grab)
@@ -1008,7 +1008,7 @@ zoomInitScreen (CompPlugin *p,
 
     WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
     WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);
-    WRAP (zs, s, paintScreen, zoomPaintScreen);
+    WRAP (zs, s, paintOutput, zoomPaintOutput);
 
     s->privates[zd->screenPrivateIndex].ptr = zs;
 
@@ -1026,7 +1026,7 @@ zoomFiniScreen (CompPlugin *p,
 
     UNWRAP (zs, s, preparePaintScreen);
     UNWRAP (zs, s, donePaintScreen);
-    UNWRAP (zs, s, paintScreen);
+    UNWRAP (zs, s, paintOutput);
     UNWRAP (zs, s, setScreenOptionForPlugin);
 
     compFiniScreenOptions (s, zs->opt, ZOOM_SCREEN_OPTION_NUM);

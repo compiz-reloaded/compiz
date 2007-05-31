@@ -55,7 +55,7 @@ typedef struct _MinScreen {
 
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc    donePaintScreen;
-    PaintScreenProc        paintScreen;
+    PaintOutputProc        paintOutput;
     PaintWindowProc        paintWindow;
     DamageWindowRectProc   damageWindowRect;
     FocusWindowProc	   focusWindow;
@@ -495,7 +495,7 @@ minDonePaintScreen (CompScreen *s)
 }
 
 static Bool
-minPaintScreen (CompScreen		*s,
+minPaintOutput (CompScreen		*s,
 		const ScreenPaintAttrib *sAttrib,
 		const CompTransform	*transform,
 		Region		        region,
@@ -509,9 +509,9 @@ minPaintScreen (CompScreen		*s,
     if (ms->moreAdjust)
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
-    UNWRAP (ms, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (ms, s, paintScreen, minPaintScreen);
+    UNWRAP (ms, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (ms, s, paintOutput, minPaintOutput);
 
     return status;
 }
@@ -881,7 +881,7 @@ minInitScreen (CompPlugin *p,
 
     WRAP (ms, s, preparePaintScreen, minPreparePaintScreen);
     WRAP (ms, s, donePaintScreen, minDonePaintScreen);
-    WRAP (ms, s, paintScreen, minPaintScreen);
+    WRAP (ms, s, paintOutput, minPaintOutput);
     WRAP (ms, s, paintWindow, minPaintWindow);
     WRAP (ms, s, damageWindowRect, minDamageWindowRect);
     WRAP (ms, s, focusWindow, minFocusWindow);
@@ -901,7 +901,7 @@ minFiniScreen (CompPlugin *p,
 
     UNWRAP (ms, s, preparePaintScreen);
     UNWRAP (ms, s, donePaintScreen);
-    UNWRAP (ms, s, paintScreen);
+    UNWRAP (ms, s, paintOutput);
     UNWRAP (ms, s, paintWindow);
     UNWRAP (ms, s, damageWindowRect);
     UNWRAP (ms, s, focusWindow);

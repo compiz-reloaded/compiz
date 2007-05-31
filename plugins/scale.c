@@ -100,7 +100,7 @@ typedef struct _ScaleScreen {
 
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc    donePaintScreen;
-    PaintScreenProc        paintScreen;
+    PaintOutputProc        paintOutput;
     PaintWindowProc        paintWindow;
     DamageWindowRectProc   damageWindowRect;
 
@@ -819,7 +819,7 @@ adjustScaleVelocity (CompWindow *w)
 }
 
 static Bool
-scalePaintScreen (CompScreen		  *s,
+scalePaintOutput (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
 		  const CompTransform	  *transform,
 		  Region		  region,
@@ -833,9 +833,9 @@ scalePaintScreen (CompScreen		  *s,
     if (ss->state != SCALE_STATE_NONE)
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
-    UNWRAP (ss, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (ss, s, paintScreen, scalePaintScreen);
+    UNWRAP (ss, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (ss, s, paintOutput, scalePaintOutput);
 
     return status;
 }
@@ -1886,7 +1886,7 @@ scaleInitScreen (CompPlugin *p,
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
-    WRAP (ss, s, paintScreen, scalePaintScreen);
+    WRAP (ss, s, paintOutput, scalePaintOutput);
     WRAP (ss, s, paintWindow, scalePaintWindow);
     WRAP (ss, s, damageWindowRect, scaleDamageWindowRect);
 
@@ -1905,7 +1905,7 @@ scaleFiniScreen (CompPlugin *p,
 
     UNWRAP (ss, s, preparePaintScreen);
     UNWRAP (ss, s, donePaintScreen);
-    UNWRAP (ss, s, paintScreen);
+    UNWRAP (ss, s, paintOutput);
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, damageWindowRect);
 

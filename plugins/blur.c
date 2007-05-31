@@ -104,8 +104,8 @@ typedef struct _BlurScreen {
 
     PreparePaintScreenProc       preparePaintScreen;
     DonePaintScreenProc          donePaintScreen;
-    PaintScreenProc	         paintScreen;
-    PaintTransformedScreenProc	 paintTransformedScreen;
+    PaintOutputProc	         paintOutput;
+    PaintTransformedOutputProc	 paintTransformedOutput;
     PaintWindowProc	         paintWindow;
     DrawWindowProc	         drawWindow;
     DrawWindowTextureProc        drawWindowTexture;
@@ -849,7 +849,7 @@ blurPreparePaintScreen (CompScreen *s,
 }
 
 static Bool
-blurPaintScreen (CompScreen		 *s,
+blurPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region			 region,
@@ -893,15 +893,15 @@ blurPaintScreen (CompScreen		 *s,
 
     bs->output = output;
 
-    UNWRAP (bs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (bs, s, paintScreen, blurPaintScreen);
+    UNWRAP (bs, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (bs, s, paintOutput, blurPaintOutput);
 
     return status;
 }
 
 static void
-blurPaintTransformedScreen (CompScreen		    *s,
+blurPaintTransformedOutput (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
 			    Region		    region,
@@ -921,10 +921,10 @@ blurPaintTransformedScreen (CompScreen		    *s,
 			     GET_BLUR_WINDOW (w, bs)->clip);
     }
 
-    UNWRAP (bs, s, paintTransformedScreen);
-    (*s->paintTransformedScreen) (s, sAttrib, transform,
+    UNWRAP (bs, s, paintTransformedOutput);
+    (*s->paintTransformedOutput) (s, sAttrib, transform,
 				   region, output, mask);
-    WRAP (bs, s, paintTransformedScreen, blurPaintTransformedScreen);
+    WRAP (bs, s, paintTransformedOutput, blurPaintTransformedOutput);
 }
 
 static void
@@ -2609,8 +2609,8 @@ blurInitScreen (CompPlugin *p,
 
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
-    WRAP (bs, s, paintScreen, blurPaintScreen);
-    WRAP (bs, s, paintTransformedScreen, blurPaintTransformedScreen);
+    WRAP (bs, s, paintOutput, blurPaintOutput);
+    WRAP (bs, s, paintTransformedOutput, blurPaintTransformedOutput);
     WRAP (bs, s, paintWindow, blurPaintWindow);
     WRAP (bs, s, drawWindow, blurDrawWindow);
     WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
@@ -2655,8 +2655,8 @@ blurFiniScreen (CompPlugin *p,
 
     UNWRAP (bs, s, preparePaintScreen);
     UNWRAP (bs, s, donePaintScreen);
-    UNWRAP (bs, s, paintScreen);
-    UNWRAP (bs, s, paintTransformedScreen);
+    UNWRAP (bs, s, paintOutput);
+    UNWRAP (bs, s, paintTransformedOutput);
     UNWRAP (bs, s, paintWindow);
     UNWRAP (bs, s, drawWindow);
     UNWRAP (bs, s, drawWindowTexture);

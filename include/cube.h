@@ -74,8 +74,8 @@ typedef void (*CubePaintTopBottomProc) (CompScreen		*s,
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
-    PaintScreenProc	       paintScreen;
-    PaintTransformedScreenProc paintTransformedScreen;
+    PaintOutputProc	       paintOutput;
+    PaintTransformedOutputProc paintTransformedOutput;
     PaintBackgroundProc        paintBackground;
     ApplyScreenTransformProc   applyScreenTransform;
     SetScreenOptionProc	       setScreenOption;

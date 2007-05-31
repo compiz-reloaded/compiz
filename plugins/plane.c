@@ -67,10 +67,10 @@ typedef struct _PlaneDisplay {
 } PlaneDisplay;
 
 typedef struct _PlaneScreen {
-    PaintTransformedScreenProc		paintTransformedScreen;
+    PaintTransformedOutputProc		paintTransformedOutput;
     PreparePaintScreenProc		preparePaintScreen;
     DonePaintScreenProc			donePaintScreen;
-    PaintScreenProc			paintScreen;
+    PaintOutputProc			paintOutput;
 
     WindowGrabNotifyProc		windowGrabNotify;
     WindowUngrabNotifyProc		windowUngrabNotify;
@@ -197,7 +197,7 @@ planePreparePaintScreen (CompScreen *s,
 }
 
 static void
-planePaintTransformedScreen (CompScreen		     *screen,
+planePaintTransformedOutput (CompScreen		     *screen,
 			     const ScreenPaintAttrib *sAttrib,
 			     const CompTransform     *transform,
 			     Region		     region,
@@ -206,7 +206,7 @@ planePaintTransformedScreen (CompScreen		     *screen,
 {
     PLANE_SCREEN (screen);
 
-    UNWRAP (ps, screen, paintTransformedScreen);
+    UNWRAP (ps, screen, paintTransformedOutput);
 
     if (ps->timeoutHandle)
     {
@@ -256,7 +256,7 @@ planePaintTransformedScreen (CompScreen		     *screen,
 
 	matrixTranslate (&sTransform, dx, -dy, 0.0);
 
-	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
 	if (dx > 0)
@@ -270,7 +270,7 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    moveScreenViewport (screen, -1, 0, FALSE);
 	}
 
-	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
 	if (dy > 0)
@@ -284,7 +284,7 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    moveScreenViewport (screen, 0, -1, FALSE);
 	}
 
-	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
 	if (dx > 0)
@@ -298,7 +298,7 @@ planePaintTransformedScreen (CompScreen		     *screen,
 	    moveScreenViewport (screen, 1, 0, FALSE);
 	}
 
-	(*screen->paintTransformedScreen) (screen, sAttrib, &sTransform,
+	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
 	if (dy > 0)
@@ -314,11 +314,11 @@ planePaintTransformedScreen (CompScreen		     *screen,
     }
     else
     {
-	(*screen->paintTransformedScreen) (screen, sAttrib, transform,
+	(*screen->paintTransformedOutput) (screen, sAttrib, transform,
 					   region, output, mask);
     }
 
-    WRAP (ps, screen, paintTransformedScreen, planePaintTransformedScreen);
+    WRAP (ps, screen, paintTransformedOutput, planePaintTransformedOutput);
 }
 
 static void
@@ -337,7 +337,7 @@ planeDonePaintScreen (CompScreen *s)
 }
 
 static Bool
-planePaintScreen (CompScreen		  *s,
+planePaintOutput (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
 		  const CompTransform	  *transform,
 		  Region		  region,
@@ -354,9 +354,9 @@ planePaintScreen (CompScreen		  *s,
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
     }
 
-    UNWRAP (ps, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (ps, s, paintScreen, planePaintScreen);
+    UNWRAP (ps, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (ps, s, paintOutput, planePaintOutput);
 
     return status;
 }
@@ -659,10 +659,10 @@ planeInitScreen (CompPlugin *p,
 
     ps->timeoutHandle = 0;
 
-    WRAP (ps, s, paintTransformedScreen, planePaintTransformedScreen);
+    WRAP (ps, s, paintTransformedOutput, planePaintTransformedOutput);
     WRAP (ps, s, preparePaintScreen, planePreparePaintScreen);
     WRAP (ps, s, donePaintScreen, planeDonePaintScreen);
-    WRAP (ps, s, paintScreen, planePaintScreen);
+    WRAP (ps, s, paintOutput, planePaintOutput);
     WRAP (ps, s, windowGrabNotify, planeWindowGrabNotify);
     WRAP (ps, s, windowUngrabNotify, planeWindowUngrabNotify);
 
@@ -677,10 +677,10 @@ planeFiniScreen (CompPlugin *p,
 {
     PLANE_SCREEN (s);
 
-    UNWRAP (ps, s, paintTransformedScreen);
+    UNWRAP (ps, s, paintTransformedOutput);
     UNWRAP (ps, s, preparePaintScreen);
     UNWRAP (ps, s, donePaintScreen);
-    UNWRAP (ps, s, paintScreen);
+    UNWRAP (ps, s, paintOutput);
     UNWRAP (ps, s, windowGrabNotify);
     UNWRAP (ps, s, windowUngrabNotify);
 

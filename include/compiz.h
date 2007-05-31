@@ -1176,14 +1176,14 @@ typedef void (*DonePaintScreenProc) (CompScreen *screen);
 #define PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK (1 << 3)
 #define PAINT_SCREEN_CLEAR_MASK			   (1 << 4)
 
-typedef Bool (*PaintScreenProc) (CompScreen		 *screen,
+typedef Bool (*PaintOutputProc) (CompScreen		 *screen,
 				 const ScreenPaintAttrib *sAttrib,
 				 const CompTransform	 *transform,
 				 Region			 region,
 				 int		         output,
 				 unsigned int		 mask);
 
-typedef void (*PaintTransformedScreenProc) (CompScreen		    *screen,
+typedef void (*PaintTransformedOutputProc) (CompScreen		    *screen,
 					    const ScreenPaintAttrib *sAttrib,
 					    const CompTransform	    *transform,
 					    Region		    region,
@@ -1297,7 +1297,7 @@ prepareXCoords (CompScreen *screen,
 		float      z);
 
 void
-paintTransformedScreen (CompScreen		*screen,
+paintTransformedOutput (CompScreen		*screen,
 			const ScreenPaintAttrib *sAttrib,
 			const CompTransform	*transform,
 			Region			region,
@@ -1312,7 +1312,7 @@ applyScreenTransform (CompScreen	      *screen,
 		      CompTransform	      *transform);
 
 Bool
-paintScreen (CompScreen		     *screen,
+paintOutput (CompScreen		     *screen,
 	     const ScreenPaintAttrib *sAttrib,
 	     const CompTransform     *transform,
 	     Region		     region,
@@ -1942,8 +1942,8 @@ struct _CompScreen {
 
     PreparePaintScreenProc	   preparePaintScreen;
     DonePaintScreenProc		   donePaintScreen;
-    PaintScreenProc		   paintScreen;
-    PaintTransformedScreenProc	   paintTransformedScreen;
+    PaintOutputProc		   paintOutput;
+    PaintTransformedOutputProc	   paintTransformedOutput;
     ApplyScreenTransformProc	   applyScreenTransform;
     PaintBackgroundProc		   paintBackground;
     PaintWindowProc		   paintWindow;
