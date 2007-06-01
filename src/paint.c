@@ -161,6 +161,7 @@ paintOutputRegion (CompScreen	       *screen,
     CompCursor	  *c;
     int		  count, windowMask, backgroundMask;
     CompWindow	  *fullscreenWindow = NULL;
+    CompWalker    walk;
 
     if (!tmpRegion)
     {
@@ -184,8 +185,10 @@ paintOutputRegion (CompScreen	       *screen,
 
     XSubtractRegion (region, &emptyRegion, tmpRegion);
 
+    (*screen->initWindowWalker) (screen, &walk);
+
     /* detect occlusions */
-    for (w = screen->reverseWindows; w; w = w->prev)
+    for (w = (*walk.last) (screen); w; w = (*walk.prev) (w))
     {
 	if (w->destroyed)
 	    continue;
@@ -221,7 +224,7 @@ paintOutputRegion (CompScreen	       *screen,
     (*screen->paintBackground) (screen, tmpRegion, backgroundMask);
 
     /* paint all windows from bottom to top */
-    for (w = screen->windows; w; w = w->next)
+    for (w = (*walk.first) (screen); w; w = (*walk.next) (w))
     {
 	if (w->destroyed)
 	    continue;
@@ -237,6 +240,9 @@ paintOutputRegion (CompScreen	       *screen,
 
 	(*screen->paintWindow) (w, &w->paint, transform, w->clip, windowMask);
     }
+
+    if (walk.fini)
+	(*walk.fini) (screen, &walk);
 
     /* paint cursors */
     for (c = screen->cursors; c; c = c->next)
