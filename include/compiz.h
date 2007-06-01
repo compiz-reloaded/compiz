@@ -997,10 +997,17 @@ fileWatchRemoved (CompDisplay   *display,
 		  CompFileWatch *fileWatch);
 
 void
-compLogMessage (CompDisplay *d, char *componentName, CompLogLevel level, char *format, ...);
+compLogMessage (CompDisplay  *d,
+		char         *componentName,
+		CompLogLevel level,
+		char         *format,
+		...);
 
 void
-logMessage (CompDisplay *d, char *componentName, CompLogLevel level, char *message);
+logMessage (CompDisplay  *d,
+	    char         *componentName,
+	    CompLogLevel level,
+	    char         *message);
 
 char *
 logLevelToString (CompLogLevel level);
