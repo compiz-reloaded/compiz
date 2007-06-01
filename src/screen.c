@@ -821,6 +821,15 @@ reshape (CompScreen *s,
     s->width  = w;
     s->height = h;
 
+    s->fullscreenOutput.name             = "fullscreen";
+    s->fullscreenOutput.width            = w;
+    s->fullscreenOutput.height           = h;
+    s->fullscreenOutput.region           = s->region;
+    s->fullscreenOutput.workArea.x       = 0;
+    s->fullscreenOutput.workArea.y       = 0;
+    s->fullscreenOutput.workArea.width   = w;
+    s->fullscreenOutput.workArea.height  = h;
+ 
     updateScreenEdges (s);
 }
 
@@ -1514,7 +1523,8 @@ addScreen (CompDisplay *display,
     s->preparePaintScreen	  = preparePaintScreen;
     s->donePaintScreen		  = donePaintScreen;
     s->paintScreen		  = paintScreen;
-    s->paintTransformedScreen	  = paintTransformedScreen;
+    s->paintOutput		  = paintOutput;
+    s->paintTransformedOutput	  = paintTransformedOutput;
     s->applyScreenTransform	  = applyScreenTransform;
     s->paintBackground		  = paintBackground;
     s->paintWindow		  = paintWindow;
@@ -3604,10 +3614,10 @@ outputChangeNotify (CompScreen *s)
 
 void
 clearScreenOutput (CompScreen	*s,
-		   int		output,
+		   CompOutput	*output,
 		   unsigned int mask)
 {
-    BoxPtr pBox = &s->outputDev[output].region.extents;
+    BoxPtr pBox = &output->region.extents;
 
     if (pBox->x1 != 0	     ||
 	pBox->y1 != 0	     ||

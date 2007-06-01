@@ -794,14 +794,15 @@ cubePreparePaintScreen (CompScreen *s,
 }
 
 static Bool
-cubePaintScreen (CompScreen		 *s,
+cubePaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	*transform,
 		 Region			 region,
-		 int			 output,
+		 CompOutput		 *output,
 		 unsigned int		 mask)
 {
     Bool status;
+    int i;
 
     CUBE_SCREEN (s);
 
@@ -811,11 +812,14 @@ cubePaintScreen (CompScreen		 *s,
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
     }
 
-    cs->srcOutput = output;
+    cs->srcOutput = 0;
+    for (i = 0; i < s->nOutputDev; i++)
+	if (!memcmp (output, &s->outputDev[i], sizeof (CompOutput)))
+	    cs->srcOutput = i;
 
-    UNWRAP (cs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (cs, s, paintScreen, cubePaintScreen);
+    UNWRAP (cs, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (cs, s, paintOutput, cubePaintOutput);
 
     return status;
 }
@@ -837,12 +841,18 @@ static void
 cubeMoveViewportAndPaint (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
 			  const CompTransform	  *transform,
-			  int			  output,
+			  CompOutput		  *outputPtr,
 			  unsigned int		  mask,
 			  int			  dx)
 {
+    int i, output = 0;
+    
     CUBE_SCREEN (s);
 
+    for (i = 0; i < s->nOutputDev; i++)
+	if (!memcmp (outputPtr, &s->outputDev[i], sizeof (CompOutput)))
+	    output = i;
+    
     if (cs->nOutput > 1)
     {
 	int cubeOutput, dView;
@@ -868,16 +878,16 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	output = cs->srcOutput = cs->output[cubeOutput];
 
 	moveScreenViewport (s, -dView, 0, FALSE);
-	(*s->paintTransformedScreen) (s, sAttrib, transform,
+	(*s->paintTransformedOutput) (s, sAttrib, transform,
 				      &s->outputDev[output].region,
-				      output, mask);
+				      &s->outputDev[output], mask);
 	moveScreenViewport (s, dView, 0, FALSE);
     }
     else
     {
 	moveScreenViewport (s, dx, 0, FALSE);
-	(*s->paintTransformedScreen) (s, sAttrib, transform, &s->region,
-				      output, mask);
+	(*s->paintTransformedOutput) (s, sAttrib, transform, &s->region,
+				      outputPtr, mask);
 	moveScreenViewport (s, -dx, 0, FALSE);
     }
 }
@@ -928,7 +938,7 @@ static void
 cubePaintTopBottom (CompScreen		    *s,
 		    const ScreenPaintAttrib *sAttrib,
 		    const CompTransform	    *transform,
-		    int			    output,
+		    CompOutput		    *output,
 		    int			    size)
 {
     ScreenPaintAttrib sa = *sAttrib;
@@ -983,11 +993,11 @@ cubePaintTopBottom (CompScreen		    *s,
 }
 
 static void
-cubePaintTransformedScreen (CompScreen		    *s,
+cubePaintTransformedOutput (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
 			    Region		    region,
-			    int			    output,
+			    CompOutput		    *outputPtr,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
@@ -995,8 +1005,13 @@ cubePaintTransformedScreen (CompScreen		    *s,
     int		      hsize, xMove = 0;
     float	      size;
     Bool	      clear;
+    int i, output = 0;
 
     CUBE_SCREEN (s);
+
+    for (i = 0; i < s->nOutputDev; i++)
+	if (!memcmp (outputPtr, &s->outputDev[i], sizeof (CompOutput)))
+	    output = i;
 
     hsize = s->hsize * cs->nOutput;
     size  = hsize;
@@ -1040,7 +1055,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
     mask &= ~PAINT_SCREEN_CLEAR_MASK;
 
-    UNWRAP (cs, s, paintTransformedScreen);
+    UNWRAP (cs, s, paintTransformedOutput);
 
     sa.xTranslate = sAttrib->xTranslate;
     sa.yTranslate = sAttrib->yTranslate;
@@ -1103,7 +1118,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
     if (!clear && cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	(*cs->paintTopBottom) (s, &sa, transform, output, hsize);
+	(*cs->paintTopBottom) (s, &sa, transform, outputPtr, hsize);
     }
 
     /* outside cube */
@@ -1123,7 +1138,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    for (i = 0; i < hsize; i++)
 	    {
-		cubeMoveViewportAndPaint (s, &sa, transform, output, mask,
+		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
 					  xMove);
 
 		sa.yRotate -= 360.0f / size;
@@ -1138,7 +1153,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	    {
 		xMove = cs->xrotations;
 
-		cubeMoveViewportAndPaint (s, &sa, transform, output, mask,
+		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
 					  xMove);
 
 		xMove++;
@@ -1146,7 +1161,8 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    sa.yRotate -= 360.0f / size;
 
-	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
+				      xMove);
 	}
     }
     else
@@ -1182,7 +1198,7 @@ cubePaintTransformedScreen (CompScreen		    *s,
 
 	    for (i = 0; i < hsize; i++)
 	    {
-		cubeMoveViewportAndPaint (s, &sa, transform, output, mask,
+		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
 					  xMove);
 
 		sa.yRotate += 360.0f / size;
@@ -1193,21 +1209,24 @@ cubePaintTransformedScreen (CompScreen		    *s,
 	}
 	else
 	{
-	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
+				      xMove);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = -cs->xrotations;
 
-	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
+				      xMove);
 
 	    sa.yRotate += 360.0f / size;
 	    xMove = 1 - cs->xrotations;
 
-	    cubeMoveViewportAndPaint (s, &sa, transform, output, mask, xMove);
+	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
+				      xMove);
 	}
     }
 
-    WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
+    WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
 }
 
 static void
@@ -1313,7 +1332,7 @@ cubePaintBackground (CompScreen   *s,
 static void
 cubeApplyScreenTransform (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
-			  int			  output,
+			  CompOutput		  *output,
 			  CompTransform	          *transform)
 {
     CUBE_SCREEN (s);
@@ -1698,8 +1717,8 @@ cubeInitScreen (CompPlugin *p,
 
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
-    WRAP (cs, s, paintScreen, cubePaintScreen);
-    WRAP (cs, s, paintTransformedScreen, cubePaintTransformedScreen);
+    WRAP (cs, s, paintOutput, cubePaintOutput);
+    WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
@@ -1719,8 +1738,8 @@ cubeFiniScreen (CompPlugin *p,
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);
-    UNWRAP (cs, s, paintScreen);
-    UNWRAP (cs, s, paintTransformedScreen);
+    UNWRAP (cs, s, paintOutput);
+    UNWRAP (cs, s, paintTransformedOutput);
     UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, applyScreenTransform);
     UNWRAP (cs, s, setScreenOption);
