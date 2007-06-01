@@ -671,6 +671,19 @@ stringToKeyBinding (CompDisplay    *d,
     while (*binding && !isalnum (*binding))
 	binding++;
 
+    if (!*binding)
+    {
+	if (mods)
+	{
+	    key->keycode   = 0;
+	    key->modifiers = mods;
+
+	    return TRUE;
+	}
+
+	return FALSE;
+    }
+
     keysym = XStringToKeysym (binding);
     if (keysym != NoSymbol)
     {

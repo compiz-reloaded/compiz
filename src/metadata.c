@@ -165,9 +165,9 @@ compAddMetadataFromFile (CompMetadata *metadata,
     status |= addMetadataFromFilename (metadata, METADATADIR, file);
     if (!status)
     {
-	fprintf (stderr,
-		 "%s: Unable to parse XML metadata from file \"%s%s\"\n",
-		 programName, file, EXTENSION);
+	compLogMessage (NULL, "core", CompLogLevelWarn,
+			"Unable to parse XML metadata from file \"%s%s\"",
+			file, EXTENSION);
 
 	return FALSE;
     }
@@ -184,7 +184,8 @@ compAddMetadataFromString (CompMetadata *metadata,
     doc = xmlReadMemory (string, strlen (string), NULL, NULL, 0);
     if (!doc)
     {
-	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
+	compLogMessage (NULL, "core", CompLogLevelWarn,
+			"Unable to parse XML metadata");
 
 	return FALSE;
     }
@@ -213,7 +214,8 @@ compAddMetadataFromIO (CompMetadata	     *metadata,
     doc = xmlReadIO (ioread, ioclose, ioctx, NULL, NULL, 0);
     if (!doc)
     {
-	fprintf (stderr, "%s: Unable to parse XML metadata\n", programName);
+	compLogMessage (NULL, "core", CompLogLevelWarn,
+			"Unable to parse XML metadata");
 
 	return FALSE;
     }
@@ -597,9 +599,8 @@ initActionValue (CompDisplay	 *d,
 
 		if (strcasecmp (binding, "disabled") && *binding)
 		{
-		    v->action.type |= CompBindingTypeKey;
-		    if (!stringToKeyBinding (d, binding, &v->action.key))
-			v->action.type &= ~CompBindingTypeKey;
+		    if (stringToKeyBinding (d, binding, &v->action.key))
+			v->action.type |= CompBindingTypeKey;
 		}
 
 		xmlFree (value);
@@ -615,9 +616,8 @@ initActionValue (CompDisplay	 *d,
 
 		if (strcasecmp (binding, "disabled") && *binding)
 		{
-		    v->action.type |= CompBindingTypeButton;
-		    if (!stringToButtonBinding (d, binding, &v->action.button))
-			v->action.type &= ~CompBindingTypeButton;
+		    if (stringToButtonBinding (d, binding, &v->action.button))
+			v->action.type |= CompBindingTypeButton;
 		}
 
 		xmlFree (value);

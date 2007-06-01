@@ -78,8 +78,9 @@ cubeLoadImg (CompScreen *s,
 			    imgFiles[cs->imgCurFile].s,
 			    &width, &height))
     {
-	fprintf (stderr, "%s: Failed to load slide: %s\n",
-		 programName, imgFiles[cs->imgCurFile].s);
+	compLogMessage (s->display, "cube", CompLogLevelWarn,
+			"Failed to load slide: %s",
+			imgFiles[cs->imgCurFile].s);
 
 	finiTexture (s, &cs->texture);
 	initTexture (s, &cs->texture);

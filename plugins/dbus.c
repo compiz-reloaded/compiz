@@ -2564,8 +2564,8 @@ dbusInitDisplay (CompPlugin  *p,
     dd->connection = dbus_bus_get (DBUS_BUS_SESSION, &error);
     if (dbus_error_is_set (&error))
     {
-	fprintf (stderr, "%s: dbus_bus_get error: %s\n",
-		 programName, error.message);
+	compLogMessage (d, "dbus", CompLogLevelError,
+			"dbus_bus_get error: %s", error.message);
 
 	dbus_error_free (&error);
 	free (dd);
@@ -2581,8 +2581,8 @@ dbusInitDisplay (CompPlugin  *p,
 
     if (dbus_error_is_set (&error))
     {
-	fprintf (stderr, "%s: dbus_bus_request_name error: %s\n",
-		 programName, error.message);
+	compLogMessage (d, "dbus", CompLogLevelError,
+			"dbus_bus_request_name error: %s", error.message);
 
 	/* dbus_connection_unref (dd->connection); */
 	dbus_error_free (&error);
@@ -2595,8 +2595,8 @@ dbusInitDisplay (CompPlugin  *p,
 
     if (ret != DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER)
     {
-	fprintf (stderr, "%s: dbus_bus_request_name reply is not "
-		 "primary owner\n", programName);
+	compLogMessage (d, "dbus", CompLogLevelError,
+			"dbus_bus_request_name reply is not primary owner");
 
 	/* dbus_connection_unref (dd->connection); */
 	free (dd);
@@ -2607,8 +2607,8 @@ dbusInitDisplay (CompPlugin  *p,
     status = dbus_connection_get_unix_fd (dd->connection, &fd);
     if (!status)
     {
-	fprintf (stderr, "%s: dbus_connection_get_unix_fd failed\n",
-		 programName);
+	compLogMessage (d, "dbus", CompLogLevelError,
+			"dbus_connection_get_unix_fd failed");
 
 	/* dbus_connection_unref (dd->connection); */
 	free (dd);

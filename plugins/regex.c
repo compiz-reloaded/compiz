@@ -200,8 +200,8 @@ regexMatchInitExp (CompDisplay  *d,
 
 		regerror (status, preg, errMsg, sizeof (errMsg));
 
-		fprintf (stderr, "%s: regex: %s = %s\n",
-			 programName, errMsg, value);
+		compLogMessage (d, "regex", CompLogLevelWarn,
+				"%s = %s", errMsg, value);
 
 		regfree (preg);
 		free (preg);

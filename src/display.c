@@ -1531,8 +1531,8 @@ eventLoop (void)
     outputRegion = XCreateRegion ();
     if (!tmpRegion || !outputRegion)
     {
-	fprintf (stderr, "%s: Couldn't create temporary regions\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Couldn't create temporary regions");
 	return;
     }
 
@@ -1987,8 +1987,8 @@ addDisplay (char *name)
     d->display = dpy = XOpenDisplay (name);
     if (!d->display)
     {
-	fprintf (stderr, "%s: Couldn't open display %s\n",
-		 programName, XDisplayName (name));
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"Couldn't open display %s", XDisplayName (name));
 	return FALSE;
     }
 
@@ -2029,6 +2029,8 @@ addDisplay (char *name)
     d->matchInitExp	      = matchInitExp;
     d->matchExpHandlerChanged = matchExpHandlerChanged;
     d->matchPropertyChanged   = matchPropertyChanged;
+
+    d->logMessage = logMessage;
 
     d->supportedAtom	     = XInternAtom (dpy, "_NET_SUPPORTED", 0);
     d->supportingWmCheckAtom = XInternAtom (dpy, "_NET_SUPPORTING_WM_CHECK", 0);
@@ -2210,38 +2212,44 @@ addDisplay (char *name)
 			  &d->compositeEvent,
 			  &d->compositeError))
     {
-	fprintf (stderr, "%s: No composite extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No composite extension");
 	return FALSE;
     }
 
     XCompositeQueryVersion (dpy, &compositeMajor, &compositeMinor);
     if (compositeMajor == 0 && compositeMinor < 2)
     {
-	fprintf (stderr, "%s: Old composite extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"Old composite extension");
 	return FALSE;
     }
 
     if (!XDamageQueryExtension (dpy, &d->damageEvent, &d->damageError))
     {
-	fprintf (stderr, "%s: No damage extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No damage extension");
 	return FALSE;
     }
 
     if (!XRRQueryExtension (dpy, &d->randrEvent, &d->randrError))
     {
-	fprintf (stderr, "%s: No RandR extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No RandR extension");
 	return FALSE;
     }
 
     if (!XSyncQueryExtension (dpy, &d->syncEvent, &d->syncError))
     {
-	fprintf (stderr, "%s: No sync extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No sync extension");
 	return FALSE;
     }
 
     if (!XFixesQueryExtension (dpy, &d->fixesEvent, &d->fixesError))
     {
-	fprintf (stderr, "%s: No fixes extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No fixes extension");
 	return FALSE;
     }
 
@@ -2272,7 +2280,8 @@ addDisplay (char *name)
     }
     else
     {
-	fprintf (stderr, "%s: No XKB extension\n", programName);
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No XKB extension");
 
 	d->xkbEvent = d->xkbError = -1;
     }
@@ -2328,12 +2337,12 @@ addDisplay (char *name)
 	{
 	    if (!replaceCurrentWm)
 	    {
-		fprintf (stderr,
-			 "%s: Screen %d on display \"%s\" already "
-			 "has a window manager; try using the "
-			 "--replace option to replace the current "
-			 "window manager.\n",
-			 programName, i, DisplayString (dpy));
+		compLogMessage (d, "core", CompLogLevelError,
+				"Screen %d on display \"%s\" already "
+				"has a window manager; try using the "
+				"--replace option to replace the current "
+				"window manager.",
+				i, DisplayString (dpy));
 
 		continue;
 	    }
@@ -2351,12 +2360,12 @@ addDisplay (char *name)
 	{
 	    if (!replaceCurrentWm)
 	    {
-		fprintf (stderr,
-			 "%s: Screen %d on display \"%s\" already "
-			 "has a compositing manager; try using the "
-			 "--replace option to replace the current "
-			 "compositing manager .\n",
-			 programName, i, DisplayString (dpy));
+		compLogMessage (d, "core", CompLogLevelError,
+				"Screen %d on display \"%s\" already "
+				"has a compositing manager; try using the "
+				"--replace option to replace the current "
+				"compositing manager.",
+				i, DisplayString (dpy));
 
 		continue;
 	    }
@@ -2392,10 +2401,10 @@ addDisplay (char *name)
 
 	if (XGetSelectionOwner (dpy, wmSnAtom) != newWmSnOwner)
 	{
-	    fprintf (stderr,
-		     "%s: Could not acquire window manager "
-		     "selection on screen %d display \"%s\"\n",
-		     programName, i, DisplayString (dpy));
+	    compLogMessage (d, "core", CompLogLevelError,
+			    "Could not acquire window manager "
+			    "selection on screen %d display \"%s\"",
+			    i, DisplayString (dpy));
 
 	    XDestroyWindow (dpy, newWmSnOwner);
 
@@ -2432,8 +2441,9 @@ addDisplay (char *name)
 
 	if (compCheckForError (dpy))
 	{
-	    fprintf (stderr, "%s: Another composite manager is already "
-		     "running on screen: %d\n", programName, i);
+	    compLogMessage (d, "core", CompLogLevelError,
+			    "Another composite manager is already "
+			    "running on screen: %d", i);
 
 	    continue;
 	}
@@ -2442,10 +2452,10 @@ addDisplay (char *name)
 
 	if (XGetSelectionOwner (dpy, cmSnAtom) != newCmSnOwner)
 	{
-	    fprintf (stderr,
-		     "%s: Could not acquire compositing manager "
-		     "selection on screen %d display \"%s\"\n",
-		     programName, i, DisplayString (dpy));
+	    compLogMessage (d, "core", CompLogLevelError,
+			    "Could not acquire compositing manager "
+			    "selection on screen %d display \"%s\"",
+			    i, DisplayString (dpy));
 
 	    continue;
 	}
@@ -2468,9 +2478,9 @@ addDisplay (char *name)
 
 	if (compCheckForError (dpy))
 	{
-	    fprintf (stderr, "%s: Another window manager is "
-		     "already running on screen: %d\n",
-		     programName, i);
+	    compLogMessage (d, "core", CompLogLevelError,
+			    "Another window manager is "
+			    "already running on screen: %d", i);
 
 	    XUngrabServer (dpy);
 	    continue;
@@ -2478,8 +2488,8 @@ addDisplay (char *name)
 
 	if (!addScreen (d, i, newWmSnOwner, wmSnAtom, wmSnTimestamp))
 	{
-	    fprintf (stderr, "%s: Failed to manage screen: %d\n",
-		     programName, i);
+	    compLogMessage (d, "core", CompLogLevelError,
+			    "Failed to manage screen: %d", i);
 	}
 
 	if (XQueryPointer (dpy, XRootWindow (dpy, i),
@@ -2495,8 +2505,9 @@ addDisplay (char *name)
 
     if (!d->screens)
     {
-	fprintf (stderr, "%s: No manageable screens found on display %s\n",
-		 programName, XDisplayName (name));
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"No manageable screens found on display %s",
+			XDisplayName (name));
 	return FALSE;
     }
 

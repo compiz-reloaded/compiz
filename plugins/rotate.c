@@ -1642,7 +1642,8 @@ rotateInitDisplay (CompPlugin  *p,
 
     if (getIntOptionNamed (option, nOption, "abi", 0) != CUBE_ABIVERSION)
     {
-	fprintf (stderr, "%s: cube ABI version mismatch\n", programName);
+	compLogMessage (d, "rotate", CompLogLevelError,
+			"cube ABI version mismatch");
 	return FALSE;
     }
 

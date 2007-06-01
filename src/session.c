@@ -214,8 +214,9 @@ initSession (char *smPrevClientId)
 					   sizeof (errorBuffer),
 					   errorBuffer);
 	if (!smcConnection)
-	    fprintf (stderr, "%s: SmcOpenConnection failed: %s\n",
-		     programName, errorBuffer);
+	    compLogMessage (NULL, "core", CompLogLevelWarn,
+			    "SmcOpenConnection failed: %s",
+			    errorBuffer);
 	else
 	    connected = TRUE;
     }

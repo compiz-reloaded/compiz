@@ -941,8 +941,9 @@ updateScreenBackground (CompScreen  *screen,
 	if (!bindPixmapToTexture (screen, texture, pixmap,
 				  width, height, depth))
 	{
-	    fprintf (stderr, "%s: Couldn't bind background pixmap 0x%x to "
-		     "texture\n", programName, (int) pixmap);
+	    compLogMessage (NULL, "core", CompLogLevelWarn,
+			    "Couldn't bind background pixmap 0x%x to "
+			    "texture", (int) pixmap);
 	}
     }
     else
@@ -1571,8 +1572,8 @@ addScreen (CompDisplay *display,
     visinfo = XGetVisualInfo (dpy, VisualIDMask, &templ, &nvisinfo);
     if (!nvisinfo)
     {
-	fprintf (stderr, "%s: Couldn't get visual info for default visual\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Couldn't get visual info for default visual");
 	return FALSE;
     }
 
@@ -1582,14 +1583,16 @@ addScreen (CompDisplay *display,
 
     if (!XAllocColor (dpy, s->colormap, &black))
     {
-	fprintf (stderr, "%s: Couldn't allocate color\n", programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Couldn't allocate color");
 	return FALSE;
     }
 
     bitmap = XCreateBitmapFromData (dpy, s->root, &data, 1, 1);
     if (!bitmap)
     {
-	fprintf (stderr, "%s: Couldn't create bitmap\n", programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Couldn't create bitmap");
 	return FALSE;
     }
 
@@ -1597,8 +1600,8 @@ addScreen (CompDisplay *display,
 					      &black, &black, 0, 0);
     if (!s->invisibleCursor)
     {
-	fprintf (stderr, "%s: Couldn't create invisible cursor\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Couldn't create invisible cursor");
 	return FALSE;
     }
 
@@ -1608,24 +1611,24 @@ addScreen (CompDisplay *display,
     glXGetConfig (dpy, visinfo, GLX_USE_GL, &value);
     if (!value)
     {
-	fprintf (stderr, "%s: Root visual is not a GL visual\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Root visual is not a GL visual");
 	return FALSE;
     }
 
     glXGetConfig (dpy, visinfo, GLX_DOUBLEBUFFER, &value);
     if (!value)
     {
-	fprintf (stderr,
-		 "%s: Root visual is not a double buffered GL visual\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Root visual is not a double buffered GL visual");
 	return FALSE;
     }
 
     s->ctx = glXCreateContext (dpy, visinfo, NULL, !indirectRendering);
     if (!s->ctx)
     {
-	fprintf (stderr, "%s: glXCreateContext failed\n", programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"glXCreateContext failed");
 	XFree (visinfo);
 
 	return FALSE;
@@ -1634,8 +1637,8 @@ addScreen (CompDisplay *display,
     glxExtensions = glXQueryExtensionsString (dpy, screenNum);
     if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
     {
-	fprintf (stderr, "%s: GLX_EXT_texture_from_pixmap is missing\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"GLX_EXT_texture_from_pixmap is missing");
 	XFree (visinfo);
 
 	return FALSE;
@@ -1645,8 +1648,8 @@ addScreen (CompDisplay *display,
 
     if (!strstr (glxExtensions, "GLX_SGIX_fbconfig"))
     {
-	fprintf (stderr, "%s: GLX_SGIX_fbconfig is missing\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"GLX_SGIX_fbconfig is missing");
 	return FALSE;
     }
 
@@ -1667,14 +1670,15 @@ addScreen (CompDisplay *display,
 
     if (!s->bindTexImage)
     {
-	fprintf (stderr, "%s: glXBindTexImageEXT is missing\n", programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"glXBindTexImageEXT is missing");
 	return FALSE;
     }
 
     if (!s->releaseTexImage)
     {
-	fprintf (stderr, "%s: glXReleaseTexImageEXT is missing\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"glXReleaseTexImageEXT is missing");
 	return FALSE;
     }
 
@@ -1683,7 +1687,8 @@ addScreen (CompDisplay *display,
 	!s->getFBConfigAttrib ||
 	!s->createPixmap)
     {
-	fprintf (stderr, "%s: fbconfig functions missing\n", programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"fbconfig functions missing");
 	return FALSE;
     }
 
@@ -1733,8 +1738,8 @@ addScreen (CompDisplay *display,
 
     if (!(s->textureRectangle || s->textureNonPowerOfTwo))
     {
-	fprintf (stderr, "%s: Support for non power of two textures missing\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Support for non power of two textures missing");
 	return FALSE;
     }
 
@@ -1960,9 +1965,9 @@ addScreen (CompDisplay *display,
 
     if (!s->glxPixmapFBConfigs[defaultDepth].fbConfig)
     {
-	fprintf (stderr, "%s: No GLXFBConfig for default depth, "
-		 "this isn't going to work.\n",
-		 programName);
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"No GLXFBConfig for default depth, "
+			"this isn't going to work.");
 	return FALSE;
     }
 
@@ -2465,7 +2470,9 @@ grabUngrabOneKey (CompScreen   *s,
 		  TRUE,
 		  GrabModeAsync,
 		  GrabModeAsync);
-    } else {
+    }
+    else
+    {
 	XUngrabKey (s->display->display,
 		    keycode,
 		    modifiers,
