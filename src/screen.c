@@ -3602,10 +3602,15 @@ getWorkareaForOutput (CompScreen *s,
 void
 setDefaultViewport (CompScreen *s)
 {
-    glViewport (s->outputDev->region.extents.x1,
-		s->height - s->outputDev->region.extents.y2,
-		s->outputDev->width,
-		s->outputDev->height);
+    s->lastViewport.x	   = s->outputDev->region.extents.x1;
+    s->lastViewport.y	   = s->height - s->outputDev->region.extents.y2;
+    s->lastViewport.width  = s->outputDev->width;
+    s->lastViewport.height = s->outputDev->height;
+
+    glViewport (s->lastViewport.x,
+		s->lastViewport.y,
+		s->lastViewport.width,
+		s->lastViewport.height);
 }
 
 void

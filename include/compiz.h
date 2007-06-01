@@ -1867,6 +1867,8 @@ struct _CompScreen {
     int	       currentOutputDev;
     CompOutput fullscreenOutput;
 
+    XRectangle lastViewport;
+
     CompActiveWindowHistory history[ACTIVE_WINDOW_HISTORY_NUM];
     int			    currentHistory;
 

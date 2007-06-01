@@ -79,7 +79,6 @@ static CompFileWatchHandle lastFileWatchHandle = 1;
 static CompScreen *targetScreen = NULL;
 static CompOutput *targetOutput;
 static Region	  tmpRegion, outputRegion;
-static XRectangle lastViewport = { 0, 0, 0, 0 };
 
 static Bool inHandleEvent = FALSE;
 
@@ -1466,13 +1465,13 @@ paintScreen (CompScreen   *s,
 	r.width  = outputs[i].width;
 	r.height = outputs[i].height;
 
-	if (lastViewport.x	!= r.x	   ||
-	    lastViewport.y	!= r.y	   ||
-	    lastViewport.width  != r.width ||
-	    lastViewport.height != r.height)
+	if (s->lastViewport.x	   != r.x     ||
+	    s->lastViewport.y	   != r.y     ||
+	    s->lastViewport.width  != r.width ||
+	    s->lastViewport.height != r.height)
 	{
 	    glViewport (r.x, r.y, r.width, r.height);
-	    lastViewport = r;
+	    s->lastViewport = r;
 	}
 
 	if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
