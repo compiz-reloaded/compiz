@@ -138,7 +138,7 @@ imageToTexture (CompScreen   *screen,
 
     glBindTexture (texture->target, texture->name);
 
-    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0, 
+    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0,
 		  format, type, data);
 
     texture->filter = GL_NEAREST;
@@ -168,10 +168,10 @@ imageBufferToTexture (CompScreen   *screen,
 {
 #if IMAGE_BYTE_ORDER == MSBFirst
     return imageToTexture (screen, texture, image, width, height,
-			   GL_BGRA, GL_UNSIGNED_BYTE);
+			   GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV);
 #else
     return imageToTexture (screen, texture, image, width, height,
-			   GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV);
+			   GL_BGRA, GL_UNSIGNED_BYTE);
 #endif
 }
 

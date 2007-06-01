@@ -55,7 +55,7 @@ typedef struct _CloneClone {
 typedef struct _CloneScreen {
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc	   donePaintScreen;
-    PaintScreenProc	   paintScreen;
+    PaintOutputProc	   paintOutput;
     PaintWindowProc	   paintWindow;
     OutputChangeNotifyProc outputChangeNotify;
 
@@ -288,13 +288,19 @@ clonePaintScreen (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
 		  const CompTransform	  *transform,
 		  Region		  region,
-		  int			  output,
+		  CompOutput		  *outputPtr,
 		  unsigned int		  mask)
 {
     Bool status;
-    int  i, dst = output;
+    int  i, dst, output = 0;
 
     CLONE_SCREEN (s);
+
+    for (i = 0; i < s->nOutputDev; i++)
+	if (!memcmp (outputPtr, &s->outputDev[i], sizeof (CompOutput)))
+	    output = i;
+
+    dst = output;
 
     if (!cs->grab || cs->grabbedOutput != output)
     {
@@ -316,9 +322,10 @@ clonePaintScreen (CompScreen		  *s,
 	}
     }
 
-    UNWRAP (cs, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, dst, mask);
-    WRAP (cs, s, paintScreen, clonePaintScreen);
+    UNWRAP (cs, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region,
+				&s->outputDev[dst], mask);
+    WRAP (cs, s, paintOutput, clonePaintScreen);
 
     if (cs->grab)
     {
@@ -787,7 +794,7 @@ cloneInitScreen (CompPlugin *p,
 
     WRAP (cs, s, preparePaintScreen, clonePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cloneDonePaintScreen);
-    WRAP (cs, s, paintScreen, clonePaintScreen);
+    WRAP (cs, s, paintOutput, clonePaintScreen);
     WRAP (cs, s, paintWindow, clonePaintWindow);
     WRAP (cs, s, outputChangeNotify, cloneOutputChangeNotify);
 
@@ -804,7 +811,7 @@ cloneFiniScreen (CompPlugin *p,
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);
-    UNWRAP (cs, s, paintScreen);
+    UNWRAP (cs, s, paintOutput);
     UNWRAP (cs, s, paintWindow);
     UNWRAP (cs, s, outputChangeNotify);
 

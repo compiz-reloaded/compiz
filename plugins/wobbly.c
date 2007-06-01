@@ -145,7 +145,7 @@ typedef struct _WobblyScreen {
 
     PreparePaintScreenProc preparePaintScreen;
     DonePaintScreenProc	   donePaintScreen;
-    PaintScreenProc	   paintScreen;
+    PaintOutputProc	   paintOutput;
     PaintWindowProc	   paintWindow;
     DamageWindowRectProc   damageWindowRect;
     AddWindowGeometryProc  addWindowGeometry;
@@ -2625,11 +2625,11 @@ wobblyWindowUngrabNotify (CompWindow *w)
 
 
 static Bool
-wobblyPaintScreen (CompScreen		   *s,
+wobblyPaintOutput (CompScreen		   *s,
 		   const ScreenPaintAttrib *sAttrib,
 		   const CompTransform	   *transform,
 		   Region		   region,
-		   int			   output,
+		   CompOutput		   *output,
 		   unsigned int		   mask)
 {
     Bool status;
@@ -2639,9 +2639,9 @@ wobblyPaintScreen (CompScreen		   *s,
     if (ws->wobblyWindows)
 	mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
 
-    UNWRAP (ws, s, paintScreen);
-    status = (*s->paintScreen) (s, sAttrib, transform, region, output, mask);
-    WRAP (ws, s, paintScreen, wobblyPaintScreen);
+    UNWRAP (ws, s, paintOutput);
+    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    WRAP (ws, s, paintOutput, wobblyPaintOutput);
 
     return status;
 }
@@ -2789,7 +2789,7 @@ wobblyInitScreen (CompPlugin *p,
 
     WRAP (ws, s, preparePaintScreen, wobblyPreparePaintScreen);
     WRAP (ws, s, donePaintScreen, wobblyDonePaintScreen);
-    WRAP (ws, s, paintScreen, wobblyPaintScreen);
+    WRAP (ws, s, paintOutput, wobblyPaintOutput);
     WRAP (ws, s, paintWindow, wobblyPaintWindow);
     WRAP (ws, s, damageWindowRect, wobblyDamageWindowRect);
     WRAP (ws, s, addWindowGeometry, wobblyAddWindowGeometry);
@@ -2813,7 +2813,7 @@ wobblyFiniScreen (CompPlugin *p,
 
     UNWRAP (ws, s, preparePaintScreen);
     UNWRAP (ws, s, donePaintScreen);
-    UNWRAP (ws, s, paintScreen);
+    UNWRAP (ws, s, paintOutput);
     UNWRAP (ws, s, paintWindow);
     UNWRAP (ws, s, damageWindowRect);
     UNWRAP (ws, s, addWindowGeometry);

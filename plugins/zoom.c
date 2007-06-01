@@ -66,7 +66,7 @@ typedef struct _ZoomBox {
 typedef struct _ZoomScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
-    PaintScreenProc		 paintScreen;
+    PaintOutputProc		 paintOutput;
 
     CompOption opt[ZOOM_SCREEN_OPTION_NUM];
 
@@ -246,11 +246,11 @@ zoomDonePaintScreen (CompScreen *s)
 }
 
 static Bool
-zoomPaintScreen (CompScreen		 *s,
+zoomPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region		         region,
-		 int			 output,
+		 CompOutput		 *output,
 		 unsigned int		 mask)
 {
     CompTransform zTransform = *transform;
@@ -258,20 +258,20 @@ zoomPaintScreen (CompScreen		 *s,
 
     ZOOM_SCREEN (s);
 
-    if (zs->zoomed & (1 << output))
+    if (output->id != ~0 && (zs->zoomed & (1 << output->id)))
     {
 	int	saveFilter;
 	ZoomBox	box;
 	float	scale, x, y, x1, y1;
-	float	oWidth = s->outputDev[output].width;
-	float	oHeight = s->outputDev[output].height;
+	float	oWidth = output->width;
+	float	oHeight = output->height;
 
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 
-	zoomGetCurrentZoom (s, output, &box);
+	zoomGetCurrentZoom (s, output->id, &box);
 
-	x1 = box.x1 - s->outputDev[output].region.extents.x1;
-	y1 = box.y1 - s->outputDev[output].region.extents.y1;
+	x1 = box.x1 - output->region.extents.x1;
+	y1 = box.y1 - output->region.extents.y1;
 
 	scale = oWidth / (box.x2 - box.x1);
 
@@ -288,22 +288,22 @@ zoomPaintScreen (CompScreen		 *s,
 
 	saveFilter = s->filter[SCREEN_TRANS_FILTER];
 
-	if ((zs->zoomOutput != output || !zs->adjust) && scale > 3.9f)
+	if ((zs->zoomOutput != output->id || !zs->adjust) && scale > 3.9f)
 	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
 
-	UNWRAP (zs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, &zTransform, region, output,
+	UNWRAP (zs, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, &zTransform, region, output,
 				    mask);
-	WRAP (zs, s, paintScreen, zoomPaintScreen);
+	WRAP (zs, s, paintOutput, zoomPaintOutput);
 
 	s->filter[SCREEN_TRANS_FILTER] = saveFilter;
     }
     else
     {
-	UNWRAP (zs, s, paintScreen);
-	status = (*s->paintScreen) (s, sAttrib, transform, region, output,
+	UNWRAP (zs, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, transform, region, output,
 				    mask);
-	WRAP (zs, s, paintScreen, zoomPaintScreen);
+	WRAP (zs, s, paintOutput, zoomPaintOutput);
     }
 
     if (status && zs->grab)
@@ -1007,7 +1007,7 @@ zoomInitScreen (CompPlugin *p,
 
     WRAP (zs, s, preparePaintScreen, zoomPreparePaintScreen);
     WRAP (zs, s, donePaintScreen, zoomDonePaintScreen);
-    WRAP (zs, s, paintScreen, zoomPaintScreen);
+    WRAP (zs, s, paintOutput, zoomPaintOutput);
 
     s->privates[zd->screenPrivateIndex].ptr = zs;
 
@@ -1025,7 +1025,7 @@ zoomFiniScreen (CompPlugin *p,
 
     UNWRAP (zs, s, preparePaintScreen);
     UNWRAP (zs, s, donePaintScreen);
-    UNWRAP (zs, s, paintScreen);
+    UNWRAP (zs, s, paintOutput);
 
     compFiniScreenOptions (s, zs->opt, ZOOM_SCREEN_OPTION_NUM);
 

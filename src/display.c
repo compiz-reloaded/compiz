@@ -77,7 +77,8 @@ static int               nWatchFds = 0;
 static CompFileWatchHandle lastFileWatchHandle = 1;
 
 static CompScreen *targetScreen = NULL;
-static int        targetOutput = 0;
+static CompOutput *targetOutput;
+static Region	  tmpRegion, outputRegion;
 
 static Bool inHandleEvent = FALSE;
 
@@ -1444,13 +1445,77 @@ waitForVideoSync (CompScreen *s)
     }
 }
 
+
+void
+paintScreen (CompScreen   *s,
+	     CompOutput   *outputs,
+	     int          numOutput,
+	     unsigned int mask)
+{
+    XRectangle r;
+    int	       i;
+
+    for (i = 0; i < numOutput; i++)
+    {
+	targetScreen = s;
+	targetOutput = &outputs[i];
+
+	r.x	 = outputs[i].region.extents.x1;
+	r.y	 = s->height - outputs[i].region.extents.y2;
+	r.width  = outputs[i].width;
+	r.height = outputs[i].height;
+
+	if (s->lastViewport.x	   != r.x     ||
+	    s->lastViewport.y	   != r.y     ||
+	    s->lastViewport.width  != r.width ||
+	    s->lastViewport.height != r.height)
+	{
+	    glViewport (r.x, r.y, r.width, r.height);
+	    s->lastViewport = r;
+	}
+
+	if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
+	{
+	    (*s->paintOutput) (s,
+			       &defaultScreenPaintAttrib,
+			       &identity,
+			       &outputs[i].region, &outputs[i],
+			       PAINT_SCREEN_REGION_MASK |
+			       PAINT_SCREEN_FULL_MASK);
+	}
+	else if (mask & COMP_SCREEN_DAMAGE_REGION_MASK)
+	{
+	    XIntersectRegion (tmpRegion,
+			      &outputs[i].region,
+			      outputRegion);
+
+	    if (!(*s->paintOutput) (s,
+				    &defaultScreenPaintAttrib,
+				    &identity,
+				    outputRegion, &outputs[i],
+				    PAINT_SCREEN_REGION_MASK))
+	    {
+		(*s->paintOutput) (s,
+				   &defaultScreenPaintAttrib,
+				   &identity,
+				   &outputs[i].region, &outputs[i],
+				   PAINT_SCREEN_FULL_MASK);
+
+		XUnionRegion (tmpRegion,
+			      &outputs[i].region,
+			      tmpRegion);
+
+	    }
+	}
+    }
+}
+
 void
 eventLoop (void)
 {
     XEvent	   event;
-    int		   timeDiff, i;
+    int		   timeDiff;
     struct timeval tv;
-    Region	   tmpRegion, outputRegion;
     CompDisplay    *display = compDisplays;
     CompScreen	   *s;
     int		   time, timeToNextRedraw = 0;
@@ -1640,55 +1705,12 @@ eventLoop (void)
 			    glClear (GL_COLOR_BUFFER_BIT);
 		    }
 
-		    for (i = 0; i < s->nOutputDev; i++)
-		    {
-			targetScreen = s;
-			targetOutput = i;
-
-			if (s->nOutputDev > 1)
-			    glViewport (s->outputDev[i].region.extents.x1,
-					s->height -
-					s->outputDev[i].region.extents.y2,
-					s->outputDev[i].width,
-					s->outputDev[i].height);
-
-			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
-			{
-			    (*s->paintScreen) (s,
-					       &defaultScreenPaintAttrib,
-					       &identity,
-					       &s->outputDev[i].region, i,
-					       PAINT_SCREEN_REGION_MASK |
-					       PAINT_SCREEN_FULL_MASK);
-			}
-			else if (mask & COMP_SCREEN_DAMAGE_REGION_MASK)
-			{
-			    XIntersectRegion (tmpRegion,
-					      &s->outputDev[i].region,
-					      outputRegion);
-
-			    if (!(*s->paintScreen) (s,
-						    &defaultScreenPaintAttrib,
-						    &identity,
-						    outputRegion, i,
-						    PAINT_SCREEN_REGION_MASK))
-			    {
-				(*s->paintScreen) (s,
-						   &defaultScreenPaintAttrib,
-						   &identity,
-						   &s->outputDev[i].region, i,
-						   PAINT_SCREEN_FULL_MASK);
-
-				XUnionRegion (tmpRegion,
-					      &s->outputDev[i].region,
-					      tmpRegion);
-
-			    }
-			}
-		    }
+		    (*s->paintScreen) (s, s->outputDev,
+				       s->nOutputDev,
+				       mask);
 
 		    targetScreen = NULL;
-		    targetOutput = 0;
+		    targetOutput = &s->outputDev[0];
 
 		    waitForVideoSync (s);
 
