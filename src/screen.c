@@ -1359,6 +1359,41 @@ leaveShowDesktopMode (CompScreen *s,
 		     (unsigned char *) &data, 1);
 }
 
+static CompWindow *
+walkFirst (CompScreen *s)
+{
+    return s->windows;
+}
+
+static CompWindow *
+walkLast (CompScreen *s)
+{
+    return s->reverseWindows;
+}
+
+static CompWindow *
+walkNext (CompWindow *w)
+{
+    return w->next;
+}
+
+static CompWindow *
+walkPrev (CompWindow *w)
+{
+    return w->prev;
+}
+
+static void
+initWindowWalker (CompScreen *screen,
+		  CompWalker *walker)
+{
+    walker->fini  = NULL;
+    walker->first = walkFirst;
+    walker->last  = walkLast;
+    walker->next  = walkNext;
+    walker->prev  = walkPrev;
+}
+
 Bool
 addScreen (CompDisplay *display,
 	   int	       screenNum,
@@ -1553,6 +1588,8 @@ addScreen (CompDisplay *display,
     s->windowStateChangeNotify = windowStateChangeNotify;
 
     s->outputChangeNotify = outputChangeNotify;
+
+    s->initWindowWalker = initWindowWalker;
 
     s->getProcAddress = 0;
 

@@ -90,6 +90,7 @@ typedef struct _CompCursor	  CompCursor;
 typedef struct _CompMatch	  CompMatch;
 typedef struct _CompMetadata      CompMetadata;
 typedef struct _CompOutput        CompOutput;
+typedef struct _CompWalker        CompWalker;
 
 /* virtual modifiers */
 
@@ -1228,6 +1229,22 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 					  CompOutput		  *output,
 					  CompTransform	          *transform);
 
+typedef void (*WalkerFiniProc) (CompScreen *screen,
+				CompWalker *walker);
+
+typedef CompWindow *(*WalkInitProc) (CompScreen *screen);
+typedef CompWindow *(*WalkStepProc) (CompWindow *window);
+
+struct _CompWalker {
+    WalkerFiniProc fini;
+    CompPrivate	   priv;
+
+    WalkInitProc first;
+    WalkInitProc last;
+    WalkStepProc next;
+    WalkStepProc prev;
+};
+
 /*
   window paint flags
 
@@ -1703,6 +1720,9 @@ typedef void (*WindowAddNotifyProc) (CompWindow *window);
 
 typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 
+typedef void (*InitWindowWalkerProc) (CompScreen *screen,
+				      CompWalker *walker);
+
 #define COMP_SCREEN_DAMAGE_PENDING_MASK (1 << 0)
 #define COMP_SCREEN_DAMAGE_REGION_MASK  (1 << 1)
 #define COMP_SCREEN_DAMAGE_ALL_MASK     (1 << 2)
@@ -2014,6 +2034,8 @@ struct _CompScreen {
     WindowStateChangeNotifyProc windowStateChangeNotify;
 
     OutputChangeNotifyProc outputChangeNotify;
+
+    InitWindowWalkerProc initWindowWalker;
 
     CompPrivate *privates;
 };
