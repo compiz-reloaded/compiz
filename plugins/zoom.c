@@ -250,28 +250,33 @@ zoomPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 Region		         region,
-		 int			 output,
+		 CompOutput		 *output,
 		 unsigned int		 mask)
 {
     CompTransform zTransform = *transform;
     Bool	  status;
+    int		  i, outputNum = -1;
 
     ZOOM_SCREEN (s);
 
-    if (zs->zoomed & (1 << output))
+    for (i = 0; i < s->nOutputDev; i++)
+	if (output == &s->outputDev[i])
+	    outputNum = i;
+
+    if (outputNum >= 0 && (zs->zoomed & (1 << outputNum)))
     {
 	int	saveFilter;
 	ZoomBox	box;
 	float	scale, x, y, x1, y1;
-	float	oWidth = s->outputDev[output].width;
-	float	oHeight = s->outputDev[output].height;
+	float	oWidth = output->width;
+	float	oHeight = output->height;
 
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 
-	zoomGetCurrentZoom (s, output, &box);
+	zoomGetCurrentZoom (s, outputNum, &box);
 
-	x1 = box.x1 - s->outputDev[output].region.extents.x1;
-	y1 = box.y1 - s->outputDev[output].region.extents.y1;
+	x1 = box.x1 - output->region.extents.x1;
+	y1 = box.y1 - output->region.extents.y1;
 
 	scale = oWidth / (box.x2 - box.x1);
 
@@ -288,7 +293,7 @@ zoomPaintOutput (CompScreen		 *s,
 
 	saveFilter = s->filter[SCREEN_TRANS_FILTER];
 
-	if ((zs->zoomOutput != output || !zs->adjust) && scale > 3.9f)
+	if ((zs->zoomOutput != outputNum || !zs->adjust) && scale > 3.9f)
 	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
 
 	UNWRAP (zs, s, paintOutput);
