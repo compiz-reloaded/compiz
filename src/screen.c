@@ -281,6 +281,7 @@ updateOutputDevices (CompScreen	*s)
 	output[i].workArea.width  = output[i].width;
 	output[i].workArea.height = output[i].height;
 
+	output[i].id = i;
     }
 
     if (s->outputDev)

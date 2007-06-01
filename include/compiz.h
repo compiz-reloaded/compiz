@@ -1773,6 +1773,7 @@ struct _CompIcon {
 
 struct _CompOutput {
     char       *name;
+    int        id;
     REGION     region;
     int        width;
     int        height;
