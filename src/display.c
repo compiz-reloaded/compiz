@@ -79,10 +79,7 @@ static CompFileWatchHandle lastFileWatchHandle = 1;
 static CompScreen *targetScreen = NULL;
 static CompOutput *targetOutput;
 static Region	  tmpRegion, outputRegion;
-static int        curViewportX = 0;
-static int        curViewportY = 0;
-static int        curViewportW = 0;
-static int        curViewportH = 0;
+static XRectangle lastViewport = { 0, 0, 0, 0 };
 
 static Bool inHandleEvent = FALSE;
 
@@ -1456,27 +1453,26 @@ paintScreen (CompScreen   *s,
 	     int          numOutput,
 	     unsigned int mask)
 {
-    int i;
+    XRectangle r;
+    int	       i;
 
     for (i = 0; i < numOutput; i++)
     {
 	targetScreen = s;
 	targetOutput = &outputs[i];
 
-	if (curViewportX != outputs[i].region.extents.x1 ||
-	    curViewportY != s->height - outputs[i].region.extents.x2 ||
-	    curViewportW != outputs[i].width ||
-	    curViewportH != outputs[i].height)
+	r.x	 = outputs[i].region.extents.x1;
+	r.y	 = s->height - outputs[i].region.extents.y2;
+	r.width  = outputs[i].width;
+	r.height = outputs[i].height;
+
+	if (lastViewport.x	!= r.x	   ||
+	    lastViewport.y	!= r.y	   ||
+	    lastViewport.width  != r.width ||
+	    lastViewport.height != r.height)
 	{
-	    glViewport (outputs[i].region.extents.x1,
-			s->height -
-			outputs[i].region.extents.y2,
-			outputs[i].width,
-			outputs[i].height);
-	    curViewportX = outputs[i].region.extents.x1;
-	    curViewportY = s->height - outputs[i].region.extents.x2;
-	    curViewportW = outputs[i].width;
-	    curViewportH = outputs[i].height;
+	    glViewport (r.x, r.y, r.width, r.height);
+	    lastViewport = r;
 	}
 
 	if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
