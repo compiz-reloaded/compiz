@@ -255,15 +255,10 @@ zoomPaintOutput (CompScreen		 *s,
 {
     CompTransform zTransform = *transform;
     Bool	  status;
-    int		  i, outputNum = -1;
 
     ZOOM_SCREEN (s);
 
-    for (i = 0; i < s->nOutputDev; i++)
-	if (output == &s->outputDev[i])
-	    outputNum = i;
-
-    if (outputNum >= 0 && (zs->zoomed & (1 << outputNum)))
+    if (output->id != ~0 && (zs->zoomed & (1 << output->id)))
     {
 	int	saveFilter;
 	ZoomBox	box;
@@ -273,7 +268,7 @@ zoomPaintOutput (CompScreen		 *s,
 
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 
-	zoomGetCurrentZoom (s, outputNum, &box);
+	zoomGetCurrentZoom (s, output->id, &box);
 
 	x1 = box.x1 - output->region.extents.x1;
 	y1 = box.y1 - output->region.extents.y1;
@@ -293,7 +288,7 @@ zoomPaintOutput (CompScreen		 *s,
 
 	saveFilter = s->filter[SCREEN_TRANS_FILTER];
 
-	if ((zs->zoomOutput != outputNum || !zs->adjust) && scale > 3.9f)
+	if ((zs->zoomOutput != output->id || !zs->adjust) && scale > 3.9f)
 	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
 
 	UNWRAP (zs, s, paintOutput);
