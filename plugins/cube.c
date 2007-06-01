@@ -802,7 +802,6 @@ cubePaintOutput (CompScreen		 *s,
 		 unsigned int		 mask)
 {
     Bool status;
-    int i;
 
     CUBE_SCREEN (s);
 
@@ -812,10 +811,7 @@ cubePaintOutput (CompScreen		 *s,
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
     }
 
-    cs->srcOutput = 0;
-    for (i = 0; i < s->nOutputDev; i++)
-	if (!memcmp (output, &s->outputDev[i], sizeof (CompOutput)))
-	    cs->srcOutput = i;
+    cs->srcOutput = (output->id != ~0) ? output->id : 0;
 
     UNWRAP (cs, s, paintOutput);
     status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
@@ -845,14 +841,10 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 			  unsigned int		  mask,
 			  int			  dx)
 {
-    int i, output = 0;
-    
+    int output = (outputPtr->id != ~0) ? outputPtr->id : 0;
+
     CUBE_SCREEN (s);
 
-    for (i = 0; i < s->nOutputDev; i++)
-	if (!memcmp (outputPtr, &s->outputDev[i], sizeof (CompOutput)))
-	    output = i;
-    
     if (cs->nOutput > 1)
     {
 	int cubeOutput, dView;
