@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070601
+#define ABIVERSION 20070602
 
 #include <stdio.h>
 #include <sys/time.h>
