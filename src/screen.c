@@ -823,6 +823,7 @@ reshape (CompScreen *s,
     s->height = h;
 
     s->fullscreenOutput.name             = "fullscreen";
+    s->fullscreenOutput.id               = ~0;
     s->fullscreenOutput.width            = w;
     s->fullscreenOutput.height           = h;
     s->fullscreenOutput.region           = s->region;
