@@ -33,6 +33,11 @@
 		<default>
 		</default>
 	    </option>
+	    <option type="bool" name="show_desktop">
+		<_short>Click Desktop to Show Desktop</_short>
+		<_long>Enter Show Desktop mode when Desktop is clicked during Scale</_long>
+		<default>true</default>
+	    </option>
 	</display>
 	<screen>
 	    <option name="spacing" type="int">

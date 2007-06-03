@@ -63,7 +63,8 @@ typedef struct _ScaleSlot {
 #define SCALE_DISPLAY_OPTION_INITIATE_ALL    1
 #define SCALE_DISPLAY_OPTION_INITIATE_GROUP  2
 #define SCALE_DISPLAY_OPTION_INITIATE_OUTPUT 3
-#define SCALE_DISPLAY_OPTION_NUM             4
+#define SCALE_DISPLAY_OPTION_SHOW_DESKTOP	 4
+#define SCALE_DISPLAY_OPTION_NUM             5
 
 typedef struct _ScaleDisplay {
     int		    screenPrivateIndex;
@@ -1528,7 +1529,8 @@ scaleHandleEvent (CompDisplay *d,
 		    {
 			scaleTerminate (d, action, 0, &o, 1);
 		    }
-		    else if (event->xbutton.x_root > s->workArea.x &&
+		    else if (sd->opt[SCALE_DISPLAY_OPTION_SHOW_DESKTOP].value.b &&
+					event->xbutton.x_root > s->workArea.x &&
 			     event->xbutton.x_root < (s->workArea.x +
 						      s->workArea.width) &&
 			     event->xbutton.y_root > s->workArea.y &&
@@ -1743,7 +1745,8 @@ static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
     { "initiate", "action", 0, scaleInitiate, scaleTerminate },
     { "initiate_all", "action", 0, scaleInitiateAll, scaleTerminate },
     { "initiate_group", "action", 0, scaleInitiateGroup, scaleTerminate },
-    { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate }
+    { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate },
+	{ "show_desktop", "bool", 0, 0, 0 }
 };
 
 static Bool
