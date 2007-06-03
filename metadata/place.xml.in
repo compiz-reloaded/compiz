@@ -8,17 +8,32 @@
 		<_long>Window placement workarounds</_long>
 		<default>true</default>
 	    </option>
-	    <option name="mode" type="string">
+	    <option name="mode" type="int">
 		<_short>Placement Mode</_short>
 		<_long>Algorithm to use for window placement</_long>
-		<default>Cascade</default>
-		<allowed>
-		    <value>Cascade</value>
-		    <value>Centered</value>
-		    <value>Smart</value>
-		    <value>Maximize</value>
-		    <value>Random</value>
-		</allowed>
+		<default>0</default>
+		<min>0</min>
+		<max>4</max>
+		<desc>
+		    <value>0</value>
+		    <_name>Cascade</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Centered</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>Smart</_name>
+		</desc>
+		<desc>
+		    <value>3</value>
+		    <_name>Maximize</_name>
+		</desc>
+		<desc>
+		    <value>4</value>
+		    <_name>Random</_name>
+		</desc>
 	    </option>
 	    <option name="position_matches" type="list">
 		<_short>Positioned windows</_short>

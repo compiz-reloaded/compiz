@@ -35,16 +35,9 @@ typedef enum {
     PlaceModeCentered = 1,
     PlaceModeSmart    = 2,
     PlaceModeMaximize = 3,
-    PlaceModeRandom   = 4
+    PlaceModeRandom   = 4,
+    PlaceModeNum
 } PlaceMode;
-
-static char *modeString[] = {
-    N_("Cascade"),
-    N_("Centered"),
-    N_("Smart"),
-    N_("Maximize"),
-    N_("Random")
-};
 
 /* overlap types */
 #define NONE    0
@@ -149,26 +142,6 @@ placeMatchViewport (CompWindow *w,
 			      y);
 }
 
-static void
-placeUpdateMode (CompScreen *screen)
-{
-    char *mode;
-    int  i;
-
-    PLACE_SCREEN (screen);
-
-    mode = ps->opt[PLACE_SCREEN_OPTION_MODE].value.s;
-
-    for (i = 0; i < sizeof (modeString) / sizeof (modeString[0]); i++)
-    {
-	if (strcmp (modeString[i], mode) == 0)
-	{
-	    ps->placeMode = i;
-	    break;
-	}
-    }
-}
-
 static CompOption *
 placeGetScreenOptions (CompPlugin *plugin,
 		       CompScreen *screen,
@@ -197,9 +170,9 @@ placeSetScreenOption (CompPlugin      *plugin,
 
     switch (index) {
     case PLACE_SCREEN_OPTION_MODE:
-	if (compSetStringOption (o, value))
+	if (compSetIntOption (o, value))
 	{
-	    placeUpdateMode (screen);
+	    ps->placeMode = value->i;
 	    return TRUE;
 	}
 	break;
@@ -1285,6 +1258,8 @@ placeWin (CompWindow *window,
 	case PlaceModeMaximize:
 	    maximizeWindow (window, MAXIMIZE_STATE);
 	    break;
+	default:
+	    break;
 	}
     }
 
@@ -1447,7 +1422,7 @@ placeFiniDisplay (CompPlugin  *p,
 
 static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
     { "workarounds", "bool", 0, 0, 0 },
-    { "mode", "string", 0, 0, 0 },
+    { "mode", "int", RESTOSTRING (0, PlaceModeNum - 1), 0, 0 },
     { "position_matches", "list", "<type>match</type>", 0, 0 },
     { "position_x_values", "list", "<type>int</type>", 0, 0 },
     { "position_y_values", "list", "<type>int</type>", 0, 0 },
@@ -1482,7 +1457,7 @@ placeInitScreen (CompPlugin *p,
 
     WRAP (ps, s, placeWindow, placePlaceWindow);
 
-    placeUpdateMode (s);
+    ps->placeMode = 0;
 
     return TRUE;
 }
