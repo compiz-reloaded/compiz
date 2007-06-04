@@ -1001,7 +1001,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     CUBE_SCREEN (s);
 
-	output = (outputPtr->id != ~0) ? outputPtr->id : 0;
+    output = (outputPtr->id != ~0) ? outputPtr->id : 0;
 
     hsize = s->hsize * cs->nOutput;
     size  = hsize;
