@@ -143,6 +143,150 @@ isScaleWin (CompWindow *w)
     return TRUE;
 }
 
+static void
+scalePaintDecoration (CompWindow	      *w,
+		      const WindowPaintAttrib *attrib,
+		      const CompTransform     *transform,
+		      Region		      region,
+		      unsigned int	      mask)
+{
+    CompScreen *s = w->screen;
+
+    SCALE_SCREEN (s);
+
+    if (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i != SCALE_ICON_NONE)
+    {
+	WindowPaintAttrib sAttrib = *attrib;
+	CompIcon	  *icon;
+
+	SCALE_WINDOW (w);
+
+	icon = getWindowIcon (w, 96, 96);
+	if (!icon)
+	    icon = w->screen->defaultIcon;
+
+	if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
+	{
+	    REGION iconReg;
+	    float  scale;
+	    float  x, y;
+	    int    width, height;
+	    int    scaledWinWidth, scaledWinHeight;
+	    float  ds;
+
+	    scaledWinWidth  = w->width  * sw->scale;
+	    scaledWinHeight = w->height * sw->scale;
+
+	    switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
+	    case SCALE_ICON_NONE:
+	    case SCALE_ICON_EMBLEM:
+		scale = 1.0f;
+		break;
+	    case SCALE_ICON_BIG:
+	    default:
+		sAttrib.opacity /= 3;
+		scale = MIN (((float) scaledWinWidth / icon->width),
+			     ((float) scaledWinHeight / icon->height));
+		break;
+	    }
+
+	    width  = icon->width  * scale;
+	    height = icon->height * scale;
+
+	    switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
+	    case SCALE_ICON_NONE:
+	    case SCALE_ICON_EMBLEM:
+		x = w->attrib.x + scaledWinWidth - icon->width;
+		y = w->attrib.y + scaledWinHeight - icon->height;
+		break;
+	    case SCALE_ICON_BIG:
+	    default:
+		x = w->attrib.x + scaledWinWidth / 2 - width / 2;
+		y = w->attrib.y + scaledWinHeight / 2 - height / 2;
+		break;
+	    }
+
+	    x += sw->tx;
+	    y += sw->ty;
+
+	    if (sw->slot)
+	    {
+		sw->delta =
+		    fabs (sw->slot->x1 - w->attrib.x) +
+		    fabs (sw->slot->y1 - w->attrib.y) +
+		    fabs (1.0f - sw->slot->scale) * 500.0f;
+	    }
+
+	    if (sw->delta)
+	    {
+		float o;
+
+		ds =
+		    fabs (sw->tx) +
+		    fabs (sw->ty) +
+		    fabs (1.0f - sw->scale) * 500.0f;
+
+		if (ds > sw->delta)
+		    ds = sw->delta;
+
+		o = ds / sw->delta;
+
+		if (sw->slot)
+		{
+		    if (o < sw->lastThumbOpacity)
+			o = sw->lastThumbOpacity;
+		}
+		else
+		{
+		    if (o > sw->lastThumbOpacity)
+			o = 0.0f;
+		}
+
+		sw->lastThumbOpacity = o;
+
+		sAttrib.opacity = sAttrib.opacity * o;
+	    }
+
+	    mask |= PAINT_WINDOW_BLEND_MASK;
+
+	    iconReg.rects    = &iconReg.extents;
+	    iconReg.numRects = 1;
+
+	    iconReg.extents.x1 = 0;
+	    iconReg.extents.y1 = 0;
+	    iconReg.extents.x2 = iconReg.extents.x1 + width;
+	    iconReg.extents.y2 = iconReg.extents.y1 + height;
+
+	    w->vCount = w->indexCount = 0;
+	    if (iconReg.extents.x1 < iconReg.extents.x2 &&
+		iconReg.extents.y1 < iconReg.extents.y2)
+		(*w->screen->addWindowGeometry) (w,
+						 &icon->texture.matrix, 1,
+						 &iconReg, &iconReg);
+
+	    if (w->vCount)
+	    {
+		FragmentAttrib fragment;
+		CompTransform  wTransform = *transform;
+
+		initFragmentAttrib (&fragment, &sAttrib);
+
+		matrixScale (&wTransform, scale, scale, 1.0f);
+		matrixTranslate (&wTransform, x / scale, y / scale, 0.0f);
+
+		glPushMatrix ();
+		glLoadMatrixf (wTransform.m);
+
+		(*w->screen->drawWindowTexture) (w,
+						 &icon->texture, &fragment,
+						 mask);
+
+		glPopMatrix ();
+	    }
+	}
+    }
+}
+
 static Bool
 scalePaintWindow (CompWindow		  *w,
 		  const WindowPaintAttrib *attrib,
@@ -225,136 +369,8 @@ scalePaintWindow (CompWindow		  *w,
 			      mask | PAINT_WINDOW_TRANSFORMED_MASK);
 
 	    glPopMatrix ();
-	}
 
-	if (scaled &&
-	    (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i != SCALE_ICON_NONE))
-	{
-	    CompIcon *icon;
-
-	    icon = getWindowIcon (w, 96, 96);
-	    if (!icon)
-		icon = w->screen->defaultIcon;
-
-	    if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
-	    {
-		REGION iconReg;
-		float  scale;
-		float  x, y;
-		int    width, height;
-		int    scaledWinWidth, scaledWinHeight;
-		float  ds;
-
-		scaledWinWidth  = w->width  * sw->scale;
-		scaledWinHeight = w->height * sw->scale;
-
-		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
-		case SCALE_ICON_NONE:
-		case SCALE_ICON_EMBLEM:
-		    scale = 1.0f;
-		    break;
-		case SCALE_ICON_BIG:
-		default:
-		    sAttrib.opacity /= 3;
-		    scale = MIN (((float) scaledWinWidth / icon->width),
-				 ((float) scaledWinHeight / icon->height));
-		    break;
-		}
-
-		width  = icon->width  * scale;
-		height = icon->height * scale;
-
-		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
-		case SCALE_ICON_NONE:
-		case SCALE_ICON_EMBLEM:
-		    x = w->attrib.x + scaledWinWidth - icon->width;
-		    y = w->attrib.y + scaledWinHeight - icon->height;
-		    break;
-		case SCALE_ICON_BIG:
-		default:
-		    x = w->attrib.x + scaledWinWidth / 2 - width / 2;
-		    y = w->attrib.y + scaledWinHeight / 2 - height / 2;
-		    break;
-		}
-
-		x += sw->tx;
-		y += sw->ty;
-
-		if (sw->slot)
-		{
-		    sw->delta =
-			fabs (sw->slot->x1 - w->attrib.x) +
-			fabs (sw->slot->y1 - w->attrib.y) +
-			fabs (1.0f - sw->slot->scale) * 500.0f;
-		}
-
-		if (sw->delta)
-		{
-		    float o;
-
-		    ds =
-			fabs (sw->tx) +
-			fabs (sw->ty) +
-			fabs (1.0f - sw->scale) * 500.0f;
-
-		    if (ds > sw->delta)
-			ds = sw->delta;
-
-		    o = ds / sw->delta;
-
-		    if (sw->slot)
-		    {
-			if (o < sw->lastThumbOpacity)
-			    o = sw->lastThumbOpacity;
-		    }
-		    else
-		    {
-			if (o > sw->lastThumbOpacity)
-			    o = 0.0f;
-		    }
-
-		    sw->lastThumbOpacity = o;
-
-		    sAttrib.opacity = sAttrib.opacity * o;
-		}
-
-		mask |= PAINT_WINDOW_BLEND_MASK;
-
-		iconReg.rects    = &iconReg.extents;
-		iconReg.numRects = 1;
-
-		iconReg.extents.x1 = 0;
-		iconReg.extents.y1 = 0;
-		iconReg.extents.x2 = iconReg.extents.x1 + width;
-		iconReg.extents.y2 = iconReg.extents.y1 + height;
-
-		w->vCount = w->indexCount = 0;
-		if (iconReg.extents.x1 < iconReg.extents.x2 &&
-		    iconReg.extents.y1 < iconReg.extents.y2)
-		    (*w->screen->addWindowGeometry) (w,
-						     &icon->texture.matrix, 1,
-						     &iconReg, &iconReg);
-
-		if (w->vCount)
-		{
-		    FragmentAttrib fragment;
-		    CompTransform  wTransform = *transform;
-
-		    initFragmentAttrib (&fragment, &sAttrib);
-
-		    matrixScale (&wTransform, scale, scale, 1.0f);
-		    matrixTranslate (&wTransform, x / scale, y / scale, 0.0f);
-
-		    glPushMatrix ();
-		    glLoadMatrixf (wTransform.m);
-
-		    (*w->screen->drawWindowTexture) (w,
-						     &icon->texture, &fragment,
-						     mask);
-
-		    glPopMatrix ();
-		}
-	    }
+	    scalePaintDecoration (w, &sAttrib, transform, region, mask);
 	}
     }
     else
