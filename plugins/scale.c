@@ -608,7 +608,7 @@ layoutThumbs (CompScreen *s)
 	ss->slotsSize = ss->nWindows;
     }
 
-    return layoutSlotsAndAssignWindows (s);
+    return (*ss->layoutSlotsAndAssignWindows) (s);
 }
 
 static int
@@ -1781,6 +1781,8 @@ scaleInitScreen (CompPlugin *p,
 
     ss->opacity  =
 	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
+
+    ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);

@@ -81,6 +81,8 @@ typedef enum {
     ScaleTypeAll
 } ScaleType;
 
+typedef Bool (*ScaleLayoutSlotsAndAssignWindowsProc) (CompScreen *s);
+
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
 
@@ -89,6 +91,8 @@ typedef struct _ScaleScreen {
     PaintOutputProc        paintOutput;
     PaintWindowProc        paintWindow;
     DamageWindowRectProc   damageWindowRect;
+
+    ScaleLayoutSlotsAndAssignWindowsProc layoutSlotsAndAssignWindows;
 
     CompOption opt[SCALE_SCREEN_OPTION_NUM];
 
