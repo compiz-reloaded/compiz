@@ -248,8 +248,7 @@ scalePaintWindow (CompWindow		  *w,
 		scaledWinWidth  = w->width  * sw->scale;
 		scaledWinHeight = w->height * sw->scale;
 
-		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) 
-		{
+		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
 		case SCALE_ICON_NONE:
 		case SCALE_ICON_EMBLEM:
 		    scale = 1.0f;
@@ -265,8 +264,7 @@ scalePaintWindow (CompWindow		  *w,
 		width  = icon->width  * scale;
 		height = icon->height * scale;
 
-		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) 
-		{
+		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
 		case SCALE_ICON_NONE:
 		case SCALE_ICON_EMBLEM:
 		    x = w->attrib.x + scaledWinWidth - icon->width;
