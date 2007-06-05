@@ -59,7 +59,7 @@ scaleGetScreenOptions (CompPlugin  *plugin,
 }
 
 static Bool
-scaleSetScreenOption (CompPlugin  *plugin,
+scaleSetScreenOption (CompPlugin      *plugin,
 		      CompScreen      *screen,
 		      char	      *name,
 		      CompOptionValue *value)
