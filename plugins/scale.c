@@ -32,7 +32,7 @@
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 
-#include <compiz.h>
+#include <scale.h>
 
 #define EDGE_STATE (CompActionStateInitEdge)
 
@@ -41,139 +41,9 @@
 #define WIN_W(w) ((w)->width + (w)->input.left + (w)->input.right)
 #define WIN_H(w) ((w)->height + (w)->input.top + (w)->input.bottom)
 
-#define SCALE_STATE_NONE 0
-#define SCALE_STATE_OUT  1
-#define SCALE_STATE_WAIT 2
-#define SCALE_STATE_IN   3
-
-#define SCALE_ICON_NONE   0
-#define SCALE_ICON_EMBLEM 1
-#define SCALE_ICON_BIG    2
-#define SCALE_ICON_LAST   SCALE_ICON_BIG
-
 static CompMetadata scaleMetadata;
 
 static int displayPrivateIndex;
-
-typedef struct _ScaleSlot {
-    int   x1, y1, x2, y2;
-    int   filled;
-    float scale;
-} ScaleSlot;
-
-#define SCALE_DISPLAY_OPTION_INITIATE        0
-#define SCALE_DISPLAY_OPTION_INITIATE_ALL    1
-#define SCALE_DISPLAY_OPTION_INITIATE_GROUP  2
-#define SCALE_DISPLAY_OPTION_INITIATE_OUTPUT 3
-#define SCALE_DISPLAY_OPTION_SHOW_DESKTOP    4
-#define SCALE_DISPLAY_OPTION_NUM             5
-
-typedef struct _ScaleDisplay {
-    int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
-
-    CompOption opt[SCALE_DISPLAY_OPTION_NUM];
-
-    unsigned int lastActiveNum;
-    Window       lastActiveWindow;
-    Window       selectedWindow;
-    KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
-} ScaleDisplay;
-
-#define SCALE_SCREEN_OPTION_SPACING      0
-#define SCALE_SCREEN_OPTION_SPEED	 1
-#define SCALE_SCREEN_OPTION_TIMESTEP	 2
-#define SCALE_SCREEN_OPTION_WINDOW_MATCH 3
-#define SCALE_SCREEN_OPTION_DARKEN_BACK  4
-#define SCALE_SCREEN_OPTION_OPACITY      5
-#define SCALE_SCREEN_OPTION_ICON         6
-#define SCALE_SCREEN_OPTION_HOVER_TIME   7
-#define SCALE_SCREEN_OPTION_NUM          8
-
-typedef enum {
-    ScaleTypeNormal = 0,
-    ScaleTypeOutput,
-    ScaleTypeGroup,
-    ScaleTypeAll
-} ScaleType;
-
-typedef struct _ScaleScreen {
-    int windowPrivateIndex;
-
-    PreparePaintScreenProc preparePaintScreen;
-    DonePaintScreenProc    donePaintScreen;
-    PaintOutputProc        paintOutput;
-    PaintWindowProc        paintWindow;
-    DamageWindowRectProc   damageWindowRect;
-
-    CompOption opt[SCALE_SCREEN_OPTION_NUM];
-
-    Bool grab;
-    int  grabIndex;
-
-    Window dndTarget;
-
-    CompTimeoutHandle hoverHandle;
-
-    int state;
-    int moreAdjust;
-
-    Cursor cursor;
-
-    ScaleSlot *slots;
-    int        slotsSize;
-    int        nSlots;
-
-    /* only used for sorting */
-    CompWindow **windows;
-    int        windowsSize;
-    int        nWindows;
-
-    GLushort opacity;
-
-    ScaleType type;
-
-    Window clientLeader;
-
-    CompMatch match;
-    CompMatch *currentMatch;
-} ScaleScreen;
-
-typedef struct _ScaleWindow {
-    ScaleSlot *slot;
-
-    int sid;
-    int distance;
-
-    GLfloat xVelocity, yVelocity, scaleVelocity;
-    GLfloat scale;
-    GLfloat tx, ty;
-    float   delta;
-    Bool    adjust;
-
-    float lastThumbOpacity;
-} ScaleWindow;
-
-
-#define GET_SCALE_DISPLAY(d)				      \
-    ((ScaleDisplay *) (d)->privates[displayPrivateIndex].ptr)
-
-#define SCALE_DISPLAY(d)		     \
-    ScaleDisplay *sd = GET_SCALE_DISPLAY (d)
-
-#define GET_SCALE_SCREEN(s, sd)					  \
-    ((ScaleScreen *) (s)->privates[(sd)->screenPrivateIndex].ptr)
-
-#define SCALE_SCREEN(s)							   \
-    ScaleScreen *ss = GET_SCALE_SCREEN (s, GET_SCALE_DISPLAY (s->display))
-
-#define GET_SCALE_WINDOW(w, ss)					  \
-    ((ScaleWindow *) (w)->privates[(ss)->windowPrivateIndex].ptr)
-
-#define SCALE_WINDOW(w)					       \
-    ScaleWindow *sw = GET_SCALE_WINDOW  (w,		       \
-		      GET_SCALE_SCREEN  (w->screen,	       \
-		      GET_SCALE_DISPLAY (w->screen->display)))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
