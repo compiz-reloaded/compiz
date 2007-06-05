@@ -34,6 +34,8 @@
 
 #include <compiz.h>
 
+#define EDGE_STATE (CompActionStateInitEdge)
+
 #define WIN_X(w) ((w)->attrib.x - (w)->input.left)
 #define WIN_Y(w) ((w)->attrib.y - (w)->input.top)
 #define WIN_W(w) ((w)->width + (w)->input.left + (w)->input.right)
@@ -1180,6 +1182,11 @@ scaleInitiate (CompDisplay     *d,
 	    ss->type = ScaleTypeNormal;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeNormal)
+		return scaleTerminate (s->display, action, 0, option, nOption);
+	}
     }
 
     return FALSE;
@@ -1206,6 +1213,11 @@ scaleInitiateAll (CompDisplay     *d,
 	{
 	    ss->type = ScaleTypeAll;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
+	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeAll)
+		return scaleTerminate (s->display, action, 0, option, nOption);
 	}
     }
 
@@ -1243,6 +1255,11 @@ scaleInitiateGroup (CompDisplay     *d,
 		return scaleInitiateCommon (s, action, state, option, nOption);
 	    }
 	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeGroup)
+		return scaleTerminate (s->display, action, 0, option, nOption);
+	}
     }
 
     return FALSE;
@@ -1269,6 +1286,11 @@ scaleInitiateOutput (CompDisplay     *d,
 	{
 	    ss->type = ScaleTypeOutput;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
+	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeOutput)
+		return scaleTerminate (s->display, action, 0, option, nOption);
 	}
     }
 
