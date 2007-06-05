@@ -75,15 +75,24 @@
 		<min>0</min>
 		<max>100</max>
 	    </option>
-	    <option name="overlay_icon" type="string">
+	    <option name="overlay_icon" type="int">
 		<_short>Overlay Icon</_short>
-		<_long>Overlay an icon on windows once they are scaled</_long>
-		<default>Emblem</default>
-		<allowed>
-		    <value>None</value>
-		    <value>Emblem</value>
-		    <value>Big</value>
-		</allowed>
+	        <_long>Overlay an icon on windows once they are scaled</_long>
+		<min>0</min>
+		<max>2</max>
+		<default>1</default>
+		<desc>
+		    <value>0</value>
+		    <_name>None</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Emblem</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>Big</_name>
+		</desc>
 	    </option>
 	    <option name="hover_time" type="int">
 		<_short>Hover Time</_short>

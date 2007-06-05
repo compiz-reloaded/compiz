@@ -44,11 +44,10 @@
 #define SCALE_STATE_WAIT 2
 #define SCALE_STATE_IN   3
 
-typedef enum {
-    ScaleIconNone = 0,
-    ScaleIconEmblem,
-    ScaleIconBig
-} IconOverlay;
+#define SCALE_ICON_NONE   0
+#define SCALE_ICON_EMBLEM 1
+#define SCALE_ICON_BIG    2
+#define SCALE_ICON_LAST   SCALE_ICON_BIG
 
 static CompMetadata scaleMetadata;
 
@@ -129,8 +128,6 @@ typedef struct _ScaleScreen {
 
     GLushort opacity;
 
-    IconOverlay iconOverlay;
-
     ScaleType type;
 
     Window clientLeader;
@@ -177,17 +174,6 @@ typedef struct _ScaleWindow {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-static IconOverlay
-scaleIconOverlayFromString (CompOptionValue *value)
-{
-    if (strcasecmp (value->s, "emblem") == 0)
-	return ScaleIconEmblem;
-    else if (strcasecmp (value->s, "big") == 0)
-	return ScaleIconBig;
-    else
-	return ScaleIconNone;
-}
-
 static CompOption *
 scaleGetScreenOptions (CompPlugin  *plugin,
 		       CompScreen *screen,
@@ -220,13 +206,6 @@ scaleSetScreenOption (CompPlugin  *plugin,
 	if (compSetIntOption (o, value))
 	{
 	    ss->opacity = (OPAQUE * o->value.i) / 100;
-	    return TRUE;
-	}
-	break;
-    case SCALE_SCREEN_OPTION_ICON:
-	if (compSetStringOption (o, value))
-	{
-	    ss->iconOverlay = scaleIconOverlayFromString (&o->value);
 	    return TRUE;
 	}
 	break;
@@ -375,7 +354,8 @@ scalePaintWindow (CompWindow		  *w,
 	    glPopMatrix ();
 	}
 
-	if ((ss->iconOverlay != ScaleIconNone) && scaled)
+	if (scaled &&
+	    (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i != SCALE_ICON_NONE))
 	{
 	    CompIcon *icon;
 
@@ -395,12 +375,13 @@ scalePaintWindow (CompWindow		  *w,
 		scaledWinWidth  = w->width  * sw->scale;
 		scaledWinHeight = w->height * sw->scale;
 
-		switch (ss->iconOverlay) {
-		case ScaleIconNone:
-		case ScaleIconEmblem:
+		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) 
+		{
+		case SCALE_ICON_NONE:
+		case SCALE_ICON_EMBLEM:
 		    scale = 1.0f;
 		    break;
-		case ScaleIconBig:
+		case SCALE_ICON_BIG:
 		default:
 		    sAttrib.opacity /= 3;
 		    scale = MIN (((float) scaledWinWidth / icon->width),
@@ -411,13 +392,14 @@ scalePaintWindow (CompWindow		  *w,
 		width  = icon->width  * scale;
 		height = icon->height * scale;
 
-		switch (ss->iconOverlay) {
-		case ScaleIconNone:
-		case ScaleIconEmblem:
+		switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) 
+		{
+		case SCALE_ICON_NONE:
+		case SCALE_ICON_EMBLEM:
 		    x = w->attrib.x + scaledWinWidth - icon->width;
 		    y = w->attrib.y + scaledWinHeight - icon->height;
 		    break;
-		case ScaleIconBig:
+		case SCALE_ICON_BIG:
 		default:
 		    x = w->attrib.x + scaledWinWidth / 2 - width / 2;
 		    y = w->attrib.y + scaledWinHeight / 2 - height / 2;
@@ -1829,7 +1811,7 @@ static const CompMetadataOptionInfo scaleScreenOptionInfo[] = {
     { "window_match", "match", 0, 0, 0 },
     { "darken_back", "bool", 0, 0, 0 },
     { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
-    { "overlay_icon", "string", 0, 0, 0 },
+    { "overlay_icon", "int", RESTOSTRING (0, SCALE_ICON_LAST), 0, 0 },
     { "hover_time", "int", "<min>50</min>", 0, 0 }
 };
 
@@ -1880,9 +1862,6 @@ scaleInitScreen (CompPlugin *p,
 
     ss->opacity  =
 	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
-
-    ss->iconOverlay =
-	scaleIconOverlayFromString (&ss->opt[SCALE_SCREEN_OPTION_ICON].value);
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
