@@ -1625,17 +1625,28 @@ scaleSetDisplayOption (CompPlugin  *plugin,
 		       CompOptionValue *value)
 {
     CompOption *o;
+    int	       index;
 
     SCALE_DISPLAY (display);
 
-    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, NULL);
+    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, &index);
     if (!o)
 	return FALSE;
 
-    return compSetDisplayOption (display, o, value);
+    switch (index) {
+    case SCALE_DISPLAY_OPTION_ABI:
+    case SCALE_DISPLAY_OPTION_INDEX:
+	break;
+    default:
+	return compSetDisplayOption (display, o, value);
+    }
+
+    return FALSE;
 }
 
 static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
+    { "abi", "int", 0, 0, 0 },
+    { "index", "int", 0, 0, 0 },
     { "initiate", "action", 0, scaleInitiate, scaleTerminate },
     { "initiate_all", "action", 0, scaleInitiateAll, scaleTerminate },
     { "initiate_group", "action", 0, scaleInitiateGroup, scaleTerminate },
@@ -1662,6 +1673,9 @@ scaleInitDisplay (CompPlugin  *p,
 	free (sd);
 	return FALSE;
     }
+
+    sd->opt[SCALE_DISPLAY_OPTION_ABI].value.i   = SCALE_ABIVERSION;
+    sd->opt[SCALE_DISPLAY_OPTION_INDEX].value.i = displayPrivateIndex;
 
     sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (sd->screenPrivateIndex < 0)

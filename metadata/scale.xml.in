@@ -3,6 +3,8 @@
 	<_short>Scale</_short>
 	<_long>Scale windows</_long>
 	<display>
+	    <option name="abi" type="int" read_only="true"/>
+	    <option name="index" type="int" read_only="true"/>
 	    <option name="initiate" type="action">
 		<_short>Initiate Window Picker</_short>
 		<_long>Layout and start transforming windows</_long>
