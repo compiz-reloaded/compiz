@@ -104,10 +104,9 @@ typedef struct _Model {
     unsigned int snapCnt[4];
 } Model;
 
-typedef enum {
-    WobblyEffectNone = 0,
-    WobblyEffectShiver
-} WobblyEffect;
+#define WOBBLY_EFFECT_NONE   0
+#define WOBBLY_EFFECT_SHIVER 1
+#define WOBBLY_EFFECT_LAST   WOBBLY_EFFECT_SHIVER
 
 static CompMetadata wobblyMetadata;
 
@@ -159,9 +158,6 @@ typedef struct _WobblyScreen {
 
     Bool wobblyWindows;
 
-    WobblyEffect mapEffect;
-    WobblyEffect focusEffect;
-
     unsigned int grabMask;
     CompWindow	 *grabWindow;
     Bool         moveWindow;
@@ -201,15 +197,6 @@ typedef struct _WobblyWindow {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
-static WobblyEffect
-wobblyEffectFromString (CompOptionValue *value)
-{
-    if (strcasecmp (value->s, "shiver") == 0)
-	return WobblyEffectShiver;
-    else
-	return WobblyEffectNone;
-}
-
 static CompOption *
 wobblyGetScreenOptions (CompPlugin *plugin,
 			CompScreen *screen,
@@ -228,36 +215,14 @@ wobblySetScreenOption (CompPlugin      *plugin,
 		       CompOptionValue *value)
 {
     CompOption *o;
-    int	       index;
 
     WOBBLY_SCREEN (screen);
 
-    o = compFindOption (ws->opt, NUM_OPTIONS (ws), name, &index);
+    o = compFindOption (ws->opt, NUM_OPTIONS (ws), name, NULL);
     if (!o)
 	return FALSE;
 
-    switch (index) {
-    case WOBBLY_SCREEN_OPTION_MAP_EFFECT:
-	if (compSetStringOption (o, value))
-	{
-	    ws->mapEffect = wobblyEffectFromString (&o->value);
-	    return TRUE;
-	}
-	break;
-    case WOBBLY_SCREEN_OPTION_FOCUS_EFFECT:
-	if (compSetStringOption (o, value))
-	{
-	    ws->focusEffect = wobblyEffectFromString (&o->value);
-	    return TRUE;
-	}
-	break;
-    default:
-	if (compSetOption (o, value))
-	    return TRUE;
-	break;
-    }
-
-    return FALSE;
+    return compSetScreenOption (screen, o, value);
 }
 
 static const CompMetadataOptionInfo wobblyScreenOptionInfo[] = {
@@ -2238,18 +2203,20 @@ wobblyHandleEvent (CompDisplay *d,
 	if (w && isWobblyWin (w))
 	{
 	    int mIndex;
+	    int focusEffect;
 
 	    WOBBLY_WINDOW (w);
 	    WOBBLY_SCREEN (w->screen);
 
-	    mIndex = WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_MATCH;
+	    mIndex      = WOBBLY_SCREEN_OPTION_FOCUS_WINDOW_MATCH;
+	    focusEffect = ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_EFFECT].value.i;
 
-	    if (ws->focusEffect				    &&
+	    if ((focusEffect != WOBBLY_EFFECT_NONE)         &&
 		matchEval (&ws->opt[mIndex].value.match, w) &&
 		wobblyEnsureModel (w))
 	    {
-		switch (ws->focusEffect) {
-		case WobblyEffectShiver:
+		switch (focusEffect) {
+		case WOBBLY_EFFECT_SHIVER:
 		    modelAdjustObjectsForShiver (ww->model,
 						 WIN_X (w),
 						 WIN_Y (w),
@@ -2308,21 +2275,23 @@ wobblyDamageWindowRect (CompWindow *w,
 	if (isWobblyWin (w))
 	{
 	    int mIndex;
+	    int mapEffect;
 
 	    WOBBLY_WINDOW (w);
 	    WOBBLY_SCREEN (w->screen);
 
-	    mIndex = WOBBLY_SCREEN_OPTION_MAP_WINDOW_MATCH;
+	    mIndex    = WOBBLY_SCREEN_OPTION_MAP_WINDOW_MATCH;
+	    mapEffect = ws->opt[WOBBLY_SCREEN_OPTION_MAP_EFFECT].value.i;
 
 	    if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
 		wobblyEnsureModel (w);
 
-	    if (ws->mapEffect				    &&
+	    if ((mapEffect != WOBBLY_EFFECT_NONE)           &&
 		matchEval (&ws->opt[mIndex].value.match, w) &&
 		wobblyEnsureModel (w))
 	    {
-		switch (ws->mapEffect) {
-		case WobblyEffectShiver:
+		switch (mapEffect) {
+		case WOBBLY_EFFECT_SHIVER:
 		    modelAdjustObjectsForShiver (ww->model,
 						 WIN_X (w), WIN_Y (w),
 						 WIN_W (w), WIN_H (w));
@@ -2777,11 +2746,6 @@ wobblyInitScreen (CompPlugin *p,
     }
 
     ws->wobblyWindows = FALSE;
-
-    ws->mapEffect   =
-	wobblyEffectFromString (&ws->opt[WOBBLY_SCREEN_OPTION_MAP_EFFECT].value);
-    ws->focusEffect =
-	wobblyEffectFromString (&ws->opt[WOBBLY_SCREEN_OPTION_FOCUS_EFFECT].value);
 
     ws->grabMask   = 0;
     ws->grabWindow = NULL;
