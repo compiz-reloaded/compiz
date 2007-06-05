@@ -370,7 +370,7 @@ scalePaintWindow (CompWindow		  *w,
 
 	    glPopMatrix ();
 
-	    scalePaintDecoration (w, &sAttrib, transform, region, mask);
+	    (*ss->scalePaintDecoration) (w, &sAttrib, transform, region, mask);
 	}
     }
     else
@@ -1797,6 +1797,7 @@ scaleInitScreen (CompPlugin *p,
 	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
 
     ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
+    ss->scalePaintDecoration	    = scalePaintDecoration;
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);

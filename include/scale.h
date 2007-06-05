@@ -83,6 +83,12 @@ typedef enum {
 
 typedef Bool (*ScaleLayoutSlotsAndAssignWindowsProc) (CompScreen *s);
 
+typedef void (*ScalePaintDecorationProc) (CompWindow		  *w,
+					  const WindowPaintAttrib *attrib,
+					  const CompTransform     *transform,
+					  Region		  region,
+					  unsigned int		  mask);
+
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
 
@@ -93,6 +99,7 @@ typedef struct _ScaleScreen {
     DamageWindowRectProc   damageWindowRect;
 
     ScaleLayoutSlotsAndAssignWindowsProc layoutSlotsAndAssignWindows;
+    ScalePaintDecorationProc		 scalePaintDecoration;
 
     CompOption opt[SCALE_SCREEN_OPTION_NUM];
 
