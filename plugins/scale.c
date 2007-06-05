@@ -540,6 +540,28 @@ fillInWindows (CompScreen *s)
 }
 
 static Bool
+layoutSlotsAndAssignWindows (CompScreen *s)
+{
+    SCALE_SCREEN (s);
+
+    /* create a grid of slots */
+    layoutSlots (s);
+
+    do
+    {
+	/* find most appropriate slots for windows */
+	findBestSlots (s);
+
+	/* sort windows, window with closest distance to a slot first */
+	qsort (ss->windows, ss->nWindows, sizeof (CompWindow *),
+	       compareWindowsDistance);
+
+    } while (fillInWindows (s));
+
+    return TRUE;
+}
+
+static Bool
 layoutThumbs (CompScreen *s)
 {
     CompWindow *w;
@@ -586,21 +608,7 @@ layoutThumbs (CompScreen *s)
 	ss->slotsSize = ss->nWindows;
     }
 
-    /* create a grid of slots */
-    layoutSlots (s);
-
-    do
-    {
-	/* find most appropriate slots for windows */
-	findBestSlots (s);
-
-	/* sort windows, window with closest distance to a slot first */
-	qsort (ss->windows, ss->nWindows, sizeof (CompWindow *),
-	       compareWindowsDistance);
-
-    } while (fillInWindows (s));
-
-    return TRUE;
+    return layoutSlotsAndAssignWindows (s);
 }
 
 static int
