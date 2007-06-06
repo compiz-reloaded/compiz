@@ -3,6 +3,8 @@
 	<_short>Scale</_short>
 	<_long>Scale windows</_long>
 	<display>
+	    <option name="abi" type="int" read_only="true"/>
+	    <option name="index" type="int" read_only="true"/>
 	    <option name="initiate" type="action">
 		<_short>Initiate Window Picker</_short>
 		<_long>Layout and start transforming windows</_long>
@@ -32,6 +34,11 @@
 		<allowed key="true" button="true" edge="true" edgednd="true"/>
 		<default>
 		</default>
+	    </option>
+	    <option name="show_desktop" type="bool">
+		<_short>Click Desktop to Show Desktop</_short>
+		<_long>Enter Show Desktop mode when Desktop is clicked during Scale</_long>
+		<default>true</default>
 	    </option>
 	</display>
 	<screen>
@@ -75,15 +82,24 @@
 		<min>0</min>
 		<max>100</max>
 	    </option>
-	    <option name="overlay_icon" type="string">
+	    <option name="overlay_icon" type="int">
 		<_short>Overlay Icon</_short>
 		<_long>Overlay an icon on windows once they are scaled</_long>
-		<default>Emblem</default>
-		<allowed>
-		    <value>None</value>
-		    <value>Emblem</value>
-		    <value>Big</value>
-		</allowed>
+		<min>0</min>
+		<max>2</max>
+		<default>1</default>
+		<desc>
+		    <value>0</value>
+		    <_name>None</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Emblem</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>Big</_name>
+		</desc>
 	    </option>
 	    <option name="hover_time" type="int">
 		<_short>Hover Time</_short>

@@ -63,23 +63,35 @@
 		<min>4</min>
 		<max>128</max>
 	    </option>
-	    <option name="map_effect" type="string">
+	    <option name="map_effect" type="int">
 		<_short>Map Effect</_short>
 		<_long>Map Window Effect</_long>
-		<default>None</default>
-		<allowed>
-		    <value>None</value>
-		    <value>Shiver</value>
-		</allowed>
+		<min>0</min>
+		<max>1</max>
+		<default>0</default>
+		<desc>
+		    <value>0</value>
+		    <_name>None</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Shiver</_name>
+		</desc>
 	    </option>
-	    <option name="focus_effect" type="string">
+	    <option name="focus_effect" type="int">
 		<_short>Focus Effect</_short>
 		<_long>Focus Window Effect</_long>
-		<default>None</default>
-		<allowed>
-		    <value>None</value>
-		    <value>Shiver</value>
-		</allowed>
+		<min>0</min>
+		<max>1</max>
+		<default>0</default>
+		<desc>
+		    <value>0</value>
+		    <_name>None</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Shiver</_name>
+		</desc>
 	    </option>
 	    <option name="map_window_match" type="match">
 		<_short>Map Windows</_short>

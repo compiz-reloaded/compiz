@@ -7,6 +7,7 @@ EXTRA_DIST =		    \
 	COPYING.MIT	    \
 	compiz.pc.in	    \
 	compiz-cube.pc.in   \
+	compiz-scale.pc.in  \
 	compiz-gconf.pc.in  \
 	intltool-extract.in \
 	intltool-merge.in   \
@@ -22,4 +23,4 @@ gconfdata = compiz-gconf.pc
 endif
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = compiz.pc compiz-cube.pc $(gconfdata)
+pkgconfig_DATA = compiz.pc compiz-cube.pc compiz-scale.pc $(gconfdata)

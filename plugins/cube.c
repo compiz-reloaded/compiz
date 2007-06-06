@@ -997,13 +997,11 @@ cubePaintTransformedOutput (CompScreen		    *s,
     int		      hsize, xMove = 0;
     float	      size;
     Bool	      clear;
-    int i, output = 0;
+    int output = 0;
 
     CUBE_SCREEN (s);
 
-    for (i = 0; i < s->nOutputDev; i++)
-	if (!memcmp (outputPtr, &s->outputDev[i], sizeof (CompOutput)))
-	    output = i;
+    output = (outputPtr->id != ~0) ? outputPtr->id : 0;
 
     hsize = s->hsize * cs->nOutput;
     size  = hsize;

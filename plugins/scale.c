@@ -32,161 +32,20 @@
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 
-#include <compiz.h>
+#include <scale.h>
+
+#define EDGE_STATE (CompActionStateInitEdge)
 
 #define WIN_X(w) ((w)->attrib.x - (w)->input.left)
 #define WIN_Y(w) ((w)->attrib.y - (w)->input.top)
 #define WIN_W(w) ((w)->width + (w)->input.left + (w)->input.right)
 #define WIN_H(w) ((w)->height + (w)->input.top + (w)->input.bottom)
 
-#define SCALE_STATE_NONE 0
-#define SCALE_STATE_OUT  1
-#define SCALE_STATE_WAIT 2
-#define SCALE_STATE_IN   3
-
-typedef enum {
-    ScaleIconNone = 0,
-    ScaleIconEmblem,
-    ScaleIconBig
-} IconOverlay;
-
 static CompMetadata scaleMetadata;
 
-static int displayPrivateIndex;
-
-typedef struct _ScaleSlot {
-    int   x1, y1, x2, y2;
-    int   filled;
-    float scale;
-} ScaleSlot;
-
-#define SCALE_DISPLAY_OPTION_INITIATE        0
-#define SCALE_DISPLAY_OPTION_INITIATE_ALL    1
-#define SCALE_DISPLAY_OPTION_INITIATE_GROUP  2
-#define SCALE_DISPLAY_OPTION_INITIATE_OUTPUT 3
-#define SCALE_DISPLAY_OPTION_NUM             4
-
-typedef struct _ScaleDisplay {
-    int		    screenPrivateIndex;
-    HandleEventProc handleEvent;
-
-    CompOption opt[SCALE_DISPLAY_OPTION_NUM];
-
-    unsigned int lastActiveNum;
-    Window       lastActiveWindow;
-    Window       selectedWindow;
-    KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
-} ScaleDisplay;
-
-#define SCALE_SCREEN_OPTION_SPACING      0
-#define SCALE_SCREEN_OPTION_SPEED	 1
-#define SCALE_SCREEN_OPTION_TIMESTEP	 2
-#define SCALE_SCREEN_OPTION_WINDOW_MATCH 3
-#define SCALE_SCREEN_OPTION_DARKEN_BACK  4
-#define SCALE_SCREEN_OPTION_OPACITY      5
-#define SCALE_SCREEN_OPTION_ICON         6
-#define SCALE_SCREEN_OPTION_HOVER_TIME   7
-#define SCALE_SCREEN_OPTION_NUM          8
-
-typedef enum {
-    ScaleTypeNormal = 0,
-    ScaleTypeOutput,
-    ScaleTypeGroup,
-    ScaleTypeAll
-} ScaleType;
-
-typedef struct _ScaleScreen {
-    int windowPrivateIndex;
-
-    PreparePaintScreenProc preparePaintScreen;
-    DonePaintScreenProc    donePaintScreen;
-    PaintOutputProc        paintOutput;
-    PaintWindowProc        paintWindow;
-    DamageWindowRectProc   damageWindowRect;
-
-    CompOption opt[SCALE_SCREEN_OPTION_NUM];
-
-    Bool grab;
-    int  grabIndex;
-
-    Window dndTarget;
-
-    CompTimeoutHandle hoverHandle;
-
-    int state;
-    int moreAdjust;
-
-    Cursor cursor;
-
-    ScaleSlot *slots;
-    int        slotsSize;
-    int        nSlots;
-
-    /* only used for sorting */
-    CompWindow **windows;
-    int        windowsSize;
-    int        nWindows;
-
-    GLushort opacity;
-
-    IconOverlay iconOverlay;
-
-    ScaleType type;
-
-    Window clientLeader;
-
-    CompMatch match;
-    CompMatch *currentMatch;
-} ScaleScreen;
-
-typedef struct _ScaleWindow {
-    ScaleSlot *slot;
-
-    int sid;
-    int distance;
-
-    GLfloat xVelocity, yVelocity, scaleVelocity;
-    GLfloat scale;
-    GLfloat tx, ty;
-    float   delta;
-    Bool    adjust;
-
-    float lastThumbOpacity;
-} ScaleWindow;
-
-
-#define GET_SCALE_DISPLAY(d)				      \
-    ((ScaleDisplay *) (d)->privates[displayPrivateIndex].ptr)
-
-#define SCALE_DISPLAY(d)		     \
-    ScaleDisplay *sd = GET_SCALE_DISPLAY (d)
-
-#define GET_SCALE_SCREEN(s, sd)					  \
-    ((ScaleScreen *) (s)->privates[(sd)->screenPrivateIndex].ptr)
-
-#define SCALE_SCREEN(s)							   \
-    ScaleScreen *ss = GET_SCALE_SCREEN (s, GET_SCALE_DISPLAY (s->display))
-
-#define GET_SCALE_WINDOW(w, ss)					  \
-    ((ScaleWindow *) (w)->privates[(ss)->windowPrivateIndex].ptr)
-
-#define SCALE_WINDOW(w)					       \
-    ScaleWindow *sw = GET_SCALE_WINDOW  (w,		       \
-		      GET_SCALE_SCREEN  (w->screen,	       \
-		      GET_SCALE_DISPLAY (w->screen->display)))
+static int scaleDisplayPrivateIndex;
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
-
-static IconOverlay
-scaleIconOverlayFromString (CompOptionValue *value)
-{
-    if (strcasecmp (value->s, "emblem") == 0)
-	return ScaleIconEmblem;
-    else if (strcasecmp (value->s, "big") == 0)
-	return ScaleIconBig;
-    else
-	return ScaleIconNone;
-}
 
 static CompOption *
 scaleGetScreenOptions (CompPlugin  *plugin,
@@ -200,7 +59,7 @@ scaleGetScreenOptions (CompPlugin  *plugin,
 }
 
 static Bool
-scaleSetScreenOption (CompPlugin  *plugin,
+scaleSetScreenOption (CompPlugin      *plugin,
 		      CompScreen      *screen,
 		      char	      *name,
 		      CompOptionValue *value)
@@ -220,13 +79,6 @@ scaleSetScreenOption (CompPlugin  *plugin,
 	if (compSetIntOption (o, value))
 	{
 	    ss->opacity = (OPAQUE * o->value.i) / 100;
-	    return TRUE;
-	}
-	break;
-    case SCALE_SCREEN_OPTION_ICON:
-	if (compSetStringOption (o, value))
-	{
-	    ss->iconOverlay = scaleIconOverlayFromString (&o->value);
 	    return TRUE;
 	}
 	break;
@@ -289,6 +141,150 @@ isScaleWin (CompWindow *w)
 	return FALSE;
 
     return TRUE;
+}
+
+static void
+scalePaintDecoration (CompWindow	      *w,
+		      const WindowPaintAttrib *attrib,
+		      const CompTransform     *transform,
+		      Region		      region,
+		      unsigned int	      mask)
+{
+    CompScreen *s = w->screen;
+
+    SCALE_SCREEN (s);
+
+    if (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i != SCALE_ICON_NONE)
+    {
+	WindowPaintAttrib sAttrib = *attrib;
+	CompIcon	  *icon;
+
+	SCALE_WINDOW (w);
+
+	icon = getWindowIcon (w, 96, 96);
+	if (!icon)
+	    icon = w->screen->defaultIcon;
+
+	if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
+	{
+	    REGION iconReg;
+	    float  scale;
+	    float  x, y;
+	    int    width, height;
+	    int    scaledWinWidth, scaledWinHeight;
+	    float  ds;
+
+	    scaledWinWidth  = w->width  * sw->scale;
+	    scaledWinHeight = w->height * sw->scale;
+
+	    switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
+	    case SCALE_ICON_NONE:
+	    case SCALE_ICON_EMBLEM:
+		scale = 1.0f;
+		break;
+	    case SCALE_ICON_BIG:
+	    default:
+		sAttrib.opacity /= 3;
+		scale = MIN (((float) scaledWinWidth / icon->width),
+			     ((float) scaledWinHeight / icon->height));
+		break;
+	    }
+
+	    width  = icon->width  * scale;
+	    height = icon->height * scale;
+
+	    switch (ss->opt[SCALE_SCREEN_OPTION_ICON].value.i) {
+	    case SCALE_ICON_NONE:
+	    case SCALE_ICON_EMBLEM:
+		x = w->attrib.x + scaledWinWidth - icon->width;
+		y = w->attrib.y + scaledWinHeight - icon->height;
+		break;
+	    case SCALE_ICON_BIG:
+	    default:
+		x = w->attrib.x + scaledWinWidth / 2 - width / 2;
+		y = w->attrib.y + scaledWinHeight / 2 - height / 2;
+		break;
+	    }
+
+	    x += sw->tx;
+	    y += sw->ty;
+
+	    if (sw->slot)
+	    {
+		sw->delta =
+		    fabs (sw->slot->x1 - w->attrib.x) +
+		    fabs (sw->slot->y1 - w->attrib.y) +
+		    fabs (1.0f - sw->slot->scale) * 500.0f;
+	    }
+
+	    if (sw->delta)
+	    {
+		float o;
+
+		ds =
+		    fabs (sw->tx) +
+		    fabs (sw->ty) +
+		    fabs (1.0f - sw->scale) * 500.0f;
+
+		if (ds > sw->delta)
+		    ds = sw->delta;
+
+		o = ds / sw->delta;
+
+		if (sw->slot)
+		{
+		    if (o < sw->lastThumbOpacity)
+			o = sw->lastThumbOpacity;
+		}
+		else
+		{
+		    if (o > sw->lastThumbOpacity)
+			o = 0.0f;
+		}
+
+		sw->lastThumbOpacity = o;
+
+		sAttrib.opacity = sAttrib.opacity * o;
+	    }
+
+	    mask |= PAINT_WINDOW_BLEND_MASK;
+
+	    iconReg.rects    = &iconReg.extents;
+	    iconReg.numRects = 1;
+
+	    iconReg.extents.x1 = 0;
+	    iconReg.extents.y1 = 0;
+	    iconReg.extents.x2 = iconReg.extents.x1 + width;
+	    iconReg.extents.y2 = iconReg.extents.y1 + height;
+
+	    w->vCount = w->indexCount = 0;
+	    if (iconReg.extents.x1 < iconReg.extents.x2 &&
+		iconReg.extents.y1 < iconReg.extents.y2)
+		(*w->screen->addWindowGeometry) (w,
+						 &icon->texture.matrix, 1,
+						 &iconReg, &iconReg);
+
+	    if (w->vCount)
+	    {
+		FragmentAttrib fragment;
+		CompTransform  wTransform = *transform;
+
+		initFragmentAttrib (&fragment, &sAttrib);
+
+		matrixScale (&wTransform, scale, scale, 1.0f);
+		matrixTranslate (&wTransform, x / scale, y / scale, 0.0f);
+
+		glPushMatrix ();
+		glLoadMatrixf (wTransform.m);
+
+		(*w->screen->drawWindowTexture) (w,
+						 &icon->texture, &fragment,
+						 mask);
+
+		glPopMatrix ();
+	    }
+	}
+    }
 }
 
 static Bool
@@ -373,135 +369,8 @@ scalePaintWindow (CompWindow		  *w,
 			      mask | PAINT_WINDOW_TRANSFORMED_MASK);
 
 	    glPopMatrix ();
-	}
 
-	if ((ss->iconOverlay != ScaleIconNone) && scaled)
-	{
-	    CompIcon *icon;
-
-	    icon = getWindowIcon (w, 96, 96);
-	    if (!icon)
-		icon = w->screen->defaultIcon;
-
-	    if (icon && (icon->texture.name || iconToTexture (w->screen, icon)))
-	    {
-		REGION iconReg;
-		float  scale;
-		float  x, y;
-		int    width, height;
-		int    scaledWinWidth, scaledWinHeight;
-		float  ds;
-
-		scaledWinWidth  = w->width  * sw->scale;
-		scaledWinHeight = w->height * sw->scale;
-
-		switch (ss->iconOverlay) {
-		case ScaleIconNone:
-		case ScaleIconEmblem:
-		    scale = 1.0f;
-		    break;
-		case ScaleIconBig:
-		default:
-		    sAttrib.opacity /= 3;
-		    scale = MIN (((float) scaledWinWidth / icon->width),
-				 ((float) scaledWinHeight / icon->height));
-		    break;
-		}
-
-		width  = icon->width  * scale;
-		height = icon->height * scale;
-
-		switch (ss->iconOverlay) {
-		case ScaleIconNone:
-		case ScaleIconEmblem:
-		    x = w->attrib.x + scaledWinWidth - icon->width;
-		    y = w->attrib.y + scaledWinHeight - icon->height;
-		    break;
-		case ScaleIconBig:
-		default:
-		    x = w->attrib.x + scaledWinWidth / 2 - width / 2;
-		    y = w->attrib.y + scaledWinHeight / 2 - height / 2;
-		    break;
-		}
-
-		x += sw->tx;
-		y += sw->ty;
-
-		if (sw->slot)
-		{
-		    sw->delta =
-			fabs (sw->slot->x1 - w->attrib.x) +
-			fabs (sw->slot->y1 - w->attrib.y) +
-			fabs (1.0f - sw->slot->scale) * 500.0f;
-		}
-
-		if (sw->delta)
-		{
-		    float o;
-
-		    ds =
-			fabs (sw->tx) +
-			fabs (sw->ty) +
-			fabs (1.0f - sw->scale) * 500.0f;
-
-		    if (ds > sw->delta)
-			ds = sw->delta;
-
-		    o = ds / sw->delta;
-
-		    if (sw->slot)
-		    {
-			if (o < sw->lastThumbOpacity)
-			    o = sw->lastThumbOpacity;
-		    }
-		    else
-		    {
-			if (o > sw->lastThumbOpacity)
-			    o = 0.0f;
-		    }
-
-		    sw->lastThumbOpacity = o;
-
-		    sAttrib.opacity = sAttrib.opacity * o;
-		}
-
-		mask |= PAINT_WINDOW_BLEND_MASK;
-
-		iconReg.rects    = &iconReg.extents;
-		iconReg.numRects = 1;
-
-		iconReg.extents.x1 = 0;
-		iconReg.extents.y1 = 0;
-		iconReg.extents.x2 = iconReg.extents.x1 + width;
-		iconReg.extents.y2 = iconReg.extents.y1 + height;
-
-		w->vCount = w->indexCount = 0;
-		if (iconReg.extents.x1 < iconReg.extents.x2 &&
-		    iconReg.extents.y1 < iconReg.extents.y2)
-		    (*w->screen->addWindowGeometry) (w,
-						     &icon->texture.matrix, 1,
-						     &iconReg, &iconReg);
-
-		if (w->vCount)
-		{
-		    FragmentAttrib fragment;
-		    CompTransform  wTransform = *transform;
-
-		    initFragmentAttrib (&fragment, &sAttrib);
-
-		    matrixScale (&wTransform, scale, scale, 1.0f);
-		    matrixTranslate (&wTransform, x / scale, y / scale, 0.0f);
-
-		    glPushMatrix ();
-		    glLoadMatrixf (wTransform.m);
-
-		    (*w->screen->drawWindowTexture) (w,
-						     &icon->texture, &fragment,
-						     mask);
-
-		    glPopMatrix ();
-		}
-	    }
+	    (*ss->scalePaintDecoration) (w, &sAttrib, transform, region, mask);
 	}
     }
     else
@@ -685,6 +554,28 @@ fillInWindows (CompScreen *s)
 }
 
 static Bool
+layoutSlotsAndAssignWindows (CompScreen *s)
+{
+    SCALE_SCREEN (s);
+
+    /* create a grid of slots */
+    layoutSlots (s);
+
+    do
+    {
+	/* find most appropriate slots for windows */
+	findBestSlots (s);
+
+	/* sort windows, window with closest distance to a slot first */
+	qsort (ss->windows, ss->nWindows, sizeof (CompWindow *),
+	       compareWindowsDistance);
+
+    } while (fillInWindows (s));
+
+    return TRUE;
+}
+
+static Bool
 layoutThumbs (CompScreen *s)
 {
     CompWindow *w;
@@ -731,21 +622,7 @@ layoutThumbs (CompScreen *s)
 	ss->slotsSize = ss->nWindows;
     }
 
-    /* create a grid of slots */
-    layoutSlots (s);
-
-    do
-    {
-	/* find most appropriate slots for windows */
-	findBestSlots (s);
-
-	/* sort windows, window with closest distance to a slot first */
-	qsort (ss->windows, ss->nWindows, sizeof (CompWindow *),
-	       compareWindowsDistance);
-
-    } while (fillInWindows (s));
-
-    return TRUE;
+    return (*ss->layoutSlotsAndAssignWindows) (s);
 }
 
 static int
@@ -1197,6 +1074,11 @@ scaleInitiate (CompDisplay     *d,
 	    ss->type = ScaleTypeNormal;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeNormal)
+		return scaleTerminate (s->display, action, 0, option, nOption);
+	}
     }
 
     return FALSE;
@@ -1223,6 +1105,11 @@ scaleInitiateAll (CompDisplay     *d,
 	{
 	    ss->type = ScaleTypeAll;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
+	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeAll)
+		return scaleTerminate (s->display, action, 0, option, nOption);
 	}
     }
 
@@ -1260,6 +1147,11 @@ scaleInitiateGroup (CompDisplay     *d,
 		return scaleInitiateCommon (s, action, state, option, nOption);
 	    }
 	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeGroup)
+		return scaleTerminate (s->display, action, 0, option, nOption);
+	}
     }
 
     return FALSE;
@@ -1286,6 +1178,11 @@ scaleInitiateOutput (CompDisplay     *d,
 	{
 	    ss->type = ScaleTypeOutput;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
+	}
+	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	{
+	    if (ss->type == ScaleTypeOutput)
+		return scaleTerminate (s->display, action, 0, option, nOption);
 	}
     }
 
@@ -1553,8 +1450,11 @@ scaleHandleEvent (CompDisplay *d,
 			     event->xbutton.y_root < (s->workArea.y +
 						      s->workArea.height))
 		    {
-			scaleTerminate (d, action, 0, &o, 1);
-			(*s->enterShowDesktopMode) (s);
+			if (sd->opt[SCALE_DISPLAY_OPTION_SHOW_DESKTOP].value.b)
+			{
+			    scaleTerminate (d, action, 0, &o, 1);
+			    (*s->enterShowDesktopMode) (s);
+			}
 		    }
 		}
 	    }
@@ -1747,21 +1647,33 @@ scaleSetDisplayOption (CompPlugin  *plugin,
 		       CompOptionValue *value)
 {
     CompOption *o;
+    int	       index;
 
     SCALE_DISPLAY (display);
 
-    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, NULL);
+    o = compFindOption (sd->opt, NUM_OPTIONS (sd), name, &index);
     if (!o)
 	return FALSE;
 
-    return compSetDisplayOption (display, o, value);
+    switch (index) {
+    case SCALE_DISPLAY_OPTION_ABI:
+    case SCALE_DISPLAY_OPTION_INDEX:
+	break;
+    default:
+	return compSetDisplayOption (display, o, value);
+    }
+
+    return FALSE;
 }
 
 static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
+    { "abi", "int", 0, 0, 0 },
+    { "index", "int", 0, 0, 0 },
     { "initiate", "action", 0, scaleInitiate, scaleTerminate },
     { "initiate_all", "action", 0, scaleInitiateAll, scaleTerminate },
     { "initiate_group", "action", 0, scaleInitiateGroup, scaleTerminate },
-    { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate }
+    { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate },
+    { "show_desktop", "bool", 0, 0, 0 }
 };
 
 static Bool
@@ -1784,6 +1696,9 @@ scaleInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
+    sd->opt[SCALE_DISPLAY_OPTION_ABI].value.i   = SCALE_ABIVERSION;
+    sd->opt[SCALE_DISPLAY_OPTION_INDEX].value.i = scaleDisplayPrivateIndex;
+
     sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (sd->screenPrivateIndex < 0)
     {
@@ -1802,7 +1717,7 @@ scaleInitDisplay (CompPlugin  *p,
 
     WRAP (sd, d, handleEvent, scaleHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = sd;
+    d->privates[scaleDisplayPrivateIndex].ptr = sd;
 
     return TRUE;
 }
@@ -1829,7 +1744,7 @@ static const CompMetadataOptionInfo scaleScreenOptionInfo[] = {
     { "window_match", "match", 0, 0, 0 },
     { "darken_back", "bool", 0, 0, 0 },
     { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
-    { "overlay_icon", "string", 0, 0, 0 },
+    { "overlay_icon", "int", RESTOSTRING (0, SCALE_ICON_LAST), 0, 0 },
     { "hover_time", "int", "<min>50</min>", 0, 0 }
 };
 
@@ -1881,8 +1796,8 @@ scaleInitScreen (CompPlugin *p,
     ss->opacity  =
 	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
 
-    ss->iconOverlay =
-	scaleIconOverlayFromString (&ss->opt[SCALE_SCREEN_OPTION_ICON].value);
+    ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
+    ss->scalePaintDecoration	    = scalePaintDecoration;
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
@@ -1969,8 +1884,8 @@ scaleInit (CompPlugin *p)
 					 SCALE_SCREEN_OPTION_NUM))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    scaleDisplayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (scaleDisplayPrivateIndex < 0)
     {
 	compFiniMetadata (&scaleMetadata);
 	return FALSE;
@@ -1984,7 +1899,7 @@ scaleInit (CompPlugin *p)
 static void
 scaleFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeDisplayPrivateIndex (scaleDisplayPrivateIndex);
     compFiniMetadata (&scaleMetadata);
 }
 

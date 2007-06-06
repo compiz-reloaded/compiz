@@ -7,6 +7,9 @@
 		<relation type="before">
 			<plugin>video</plugin>
 		</relation>
+		<relation type="after">
+			<plugin>decoration</plugin>
+		</relation>
 	</deps>
 	<display>
 	    <option name="pulse" type="action">
