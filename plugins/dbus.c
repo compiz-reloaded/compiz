@@ -1593,35 +1593,6 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 					  DBUS_TYPE_DOUBLE, &precision,
 					  DBUS_TYPE_INVALID);
 	    } break;
-	    case CompOptionTypeString: {
-		DBusMessageIter iter;
-		DBusMessageIter listIter;
-		char		sig[2];
-
-		sig[0] = DBUS_TYPE_STRING;
-		sig[1] = '\0';
-
-		dbus_message_iter_init_append (reply, &iter);
-		dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
-						  sig, &listIter);
-
-		if (option->rest.s.nString)
-		{
-		    char *possible;
-		    int  i;
-
-		    for (i = 0; i < option->rest.s.nString; i++)
-		    {
-			possible = option->rest.s.string[i];
-
-			dbus_message_iter_append_basic (&listIter,
-							DBUS_TYPE_STRING,
-							&possible);
-		    }
-		}
-
-		dbus_message_iter_close_container (&iter, &listIter);
-	    }
 	    default:
 		break;
 	    }

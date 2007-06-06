@@ -388,15 +388,9 @@ typedef struct _CompOptionFloatRestriction {
     float precision;
 } CompOptionFloatRestriction;
 
-typedef struct _CompOptionStringRestriction {
-    char **string;
-    int  nString;
-} CompOptionStringRestriction;
-
 typedef union {
     CompOptionIntRestriction    i;
     CompOptionFloatRestriction  f;
-    CompOptionStringRestriction s;
 } CompOptionRestriction;
 
 struct _CompOption {

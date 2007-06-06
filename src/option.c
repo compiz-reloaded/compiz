@@ -86,26 +86,6 @@ finiOptionValue (CompOptionValue *v,
     }
 }
 
-static void
-finiOptionRestriction (CompOptionRestriction *r,
-		       CompOptionType	     type)
-{
-    int i;
-
-    switch (type) {
-    case CompOptionTypeString:
-	if (r->s.nString)
-	{
-	    for (i = 0; i < r->s.nString; i++)
-		free (r->s.string[i]);
-
-	    free (r->s.string);
-	}
-    default:
-	break;
-    }
-}
-
 void
 compInitOption (CompOption *o)
 {
@@ -115,13 +95,6 @@ compInitOption (CompOption *o)
 void
 compFiniOption (CompOption *o)
 {
-    switch (o->type) {
-    case CompOptionTypeList:
-	finiOptionRestriction (&o->rest, o->value.list.type);
-    default:
-	break;
-    }
-
     finiOptionValue (&o->value, o->type);
 }
 
@@ -206,20 +179,6 @@ compSetStringOption (CompOption	     *option,
     s = value->s;
     if (!s)
 	s = "";
-
-    if (option->rest.s.nString)
-    {
-	int i;
-
-	for (i = 0; i < option->rest.s.nString; i++)
-	{
-	    if (strcmp (option->rest.s.string[i], s) == 0)
-		break;
-	}
-
-	if (i == option->rest.s.nString)
-	    s = option->rest.s.string[0];
-    }
 
     if (option->value.s == s)
 	return FALSE;

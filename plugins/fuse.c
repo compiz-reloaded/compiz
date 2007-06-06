@@ -56,8 +56,6 @@ static CompMetadata fuseMetadata;
 #define FUSE_INODE_TYPE_MIN         (1 << 17)
 #define FUSE_INODE_TYPE_MAX         (1 << 18)
 #define FUSE_INODE_TYPE_PRECISION   (1 << 19)
-#define FUSE_INODE_TYPE_SELECTION   (1 << 20)
-#define FUSE_INODE_TYPE_ALTERNATIVE (1 << 21)
 
 #define DIR_MASK (FUSE_INODE_TYPE_ROOT    | \
 		  FUSE_INODE_TYPE_CORE    | \
@@ -65,15 +63,13 @@ static CompMetadata fuseMetadata;
 		  FUSE_INODE_TYPE_SCREEN  | \
 		  FUSE_INODE_TYPE_DISPLAY | \
 		  FUSE_INODE_TYPE_OPTION  | \
-		  FUSE_INODE_TYPE_ITEMS   | \
-		  FUSE_INODE_TYPE_SELECTION)
+		  FUSE_INODE_TYPE_ITEMS)
 
 #define CONST_DIR_MASK (FUSE_INODE_TYPE_CORE    | \
 			FUSE_INODE_TYPE_PLUGIN  | \
 			FUSE_INODE_TYPE_SCREEN  | \
 			FUSE_INODE_TYPE_DISPLAY | \
-			FUSE_INODE_TYPE_OPTION  | \
-			FUSE_INODE_TYPE_SELECTION)
+			FUSE_INODE_TYPE_OPTION)
 
 #define ACTION_MASK (FUSE_INODE_TYPE_KEY	 | \
 		     FUSE_INODE_TYPE_BUTTON	 | \
@@ -328,13 +324,12 @@ fuseGetOptionFromInode (CompDisplay *d,
 			FuseInode   *inode)
 {
     if (inode->type & (FUSE_INODE_TYPE_OPTION |
-		       FUSE_INODE_TYPE_ITEMS  |
-		       FUSE_INODE_TYPE_SELECTION))
+		       FUSE_INODE_TYPE_ITEMS))
     {
 	CompOption *option;
 	int	   nOption;
 
-	if (inode->type & (FUSE_INODE_TYPE_ITEMS | FUSE_INODE_TYPE_SELECTION))
+	if (inode->type & FUSE_INODE_TYPE_ITEMS)
 	    inode = inode->parent;
 
 	option = fuseGetOptionsFromInode (d, inode->parent, &nOption);
@@ -497,16 +492,6 @@ fuseGetStringFromInode (CompDisplay *d,
     {
 	return strdup (option->value.action.bell ? "true" : "false");
     }
-    else if (inode->type & FUSE_INODE_TYPE_ALTERNATIVE)
-    {
-	int i;
-
-	if (sscanf (inode->name, "alternative%d", &i))
-	{
-	    if (i < option->rest.s.nString)
-		return strdup (option->rest.s.string[i]);
-	}
-    }
 
     return NULL;
 }
@@ -596,9 +581,6 @@ fuseUpdateInode (CompDisplay *d,
 		break;
 	    case CompOptionTypeString:
 		fuseAddInode (inode, FUSE_INODE_TYPE_VALUE, "value");
-		if (option->rest.s.nString)
-		    fuseAddInode (inode, FUSE_INODE_TYPE_SELECTION,
-				  "selection");
 		break;
 	    case CompOptionTypeAction:
 		fuseAddInode (inode, FUSE_INODE_TYPE_KEY, "key");
@@ -616,13 +598,6 @@ fuseUpdateInode (CompDisplay *d,
 		fuseAddInode (inode, FUSE_INODE_TYPE_ITEM_COUNT,
 			      "number_of_items");
 		fuseAddInode (inode, FUSE_INODE_TYPE_ITEM_TYPE, "item_type");
-
-		if (option->value.list.type == CompOptionTypeString)
-		{
-		    if (option->rest.s.nString)
-			fuseAddInode (inode, FUSE_INODE_TYPE_SELECTION,
-				      "selection");
-		}
 	    default:
 		break;
 	    }
@@ -649,20 +624,6 @@ fuseUpdateInode (CompDisplay *d,
 
 		if (sscanf (c->name, "value%d", &i) == 0 || i >= nValue)
 		    fuseRemoveInode (inode, c);
-	    }
-	}
-    }
-    else if (inode->type & FUSE_INODE_TYPE_SELECTION)
-    {
-	option = fuseGetOptionFromInode (d, inode->parent);
-	if (option)
-	{
-	    int i;
-
-	    for (i = 0; i < option->rest.s.nString; i++)
-	    {
-		sprintf (str, "alternative%d", i);
-		fuseAddInode (inode, FUSE_INODE_TYPE_ALTERNATIVE, str);
 	    }
 	}
     }
