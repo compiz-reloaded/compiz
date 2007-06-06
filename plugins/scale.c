@@ -43,7 +43,7 @@
 
 static CompMetadata scaleMetadata;
 
-static int displayPrivateIndex;
+static int scaleDisplayPrivateIndex;
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
@@ -1697,7 +1697,7 @@ scaleInitDisplay (CompPlugin  *p,
     }
 
     sd->opt[SCALE_DISPLAY_OPTION_ABI].value.i   = SCALE_ABIVERSION;
-    sd->opt[SCALE_DISPLAY_OPTION_INDEX].value.i = displayPrivateIndex;
+    sd->opt[SCALE_DISPLAY_OPTION_INDEX].value.i = scaleDisplayPrivateIndex;
 
     sd->screenPrivateIndex = allocateScreenPrivateIndex (d);
     if (sd->screenPrivateIndex < 0)
@@ -1717,7 +1717,7 @@ scaleInitDisplay (CompPlugin  *p,
 
     WRAP (sd, d, handleEvent, scaleHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = sd;
+    d->privates[scaleDisplayPrivateIndex].ptr = sd;
 
     return TRUE;
 }
@@ -1884,8 +1884,8 @@ scaleInit (CompPlugin *p)
 					 SCALE_SCREEN_OPTION_NUM))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    scaleDisplayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (scaleDisplayPrivateIndex < 0)
     {
 	compFiniMetadata (&scaleMetadata);
 	return FALSE;
@@ -1899,7 +1899,7 @@ scaleInit (CompPlugin *p)
 static void
 scaleFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeDisplayPrivateIndex (scaleDisplayPrivateIndex);
     compFiniMetadata (&scaleMetadata);
 }
 
