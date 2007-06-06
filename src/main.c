@@ -50,28 +50,6 @@ Window   currentRoot = 0;
 int  defaultRefreshRate = 50;
 char *defaultTextureFilter = "Good";
 
-char *windowTypeString[] = {
-    N_("Desktop"),
-    N_("Dock"),
-    N_("Toolbar"),
-    N_("Menu"),
-    N_("Utility"),
-    N_("Splash"),
-    N_("Dialog"),
-    N_("Normal"),
-    N_("DropdownMenu"),
-    N_("PopupMenu"),
-    N_("Tooltip"),
-    N_("Notification"),
-    N_("Combo"),
-    N_("Dnd"),
-    N_("ModalDialog"),
-    N_("Fullscreen"),
-    N_("Unknown")
-};
-int  nWindowTypeString =
-    sizeof (windowTypeString) / sizeof (windowTypeString[0]);
-
 Bool shutDown = FALSE;
 Bool restartSignal = FALSE;
 

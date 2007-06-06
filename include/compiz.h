@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070603
+#define ABIVERSION 20070606
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -70,10 +70,6 @@ extern "C" {
 #  define IMAGE_BYTE_ORDER LSBFirst
 #  define BITMAP_BIT_ORDER LSBFirst
 #endif
-
-/* For now, we never actually translate strings inside compiz */
-#define  _(x) x
-#define N_(x) x
 
 typedef struct _CompPlugin	  CompPlugin;
 typedef struct _CompDisplay	  CompDisplay;
@@ -229,9 +225,6 @@ extern Bool       onlyCurrentScreen;
 
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
-
-extern char *windowTypeString[];
-extern int  nWindowTypeString;
 
 extern int lastPointerX;
 extern int lastPointerY;
