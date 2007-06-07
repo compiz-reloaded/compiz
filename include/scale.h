@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define SCALE_ABIVERSION 20070605
+#define SCALE_ABIVERSION 20070607
 
 #define SCALE_STATE_NONE 0
 #define SCALE_STATE_OUT  1
@@ -37,11 +37,20 @@
 #define SCALE_ICON_BIG    2
 #define SCALE_ICON_LAST   SCALE_ICON_BIG
 
+#define SCALE_MOMODE_CURRENT 0
+#define SCALE_MOMODE_ALL     1
+#define SCALE_MOMODE_LAST    SCALE_MOMODE_ALL
+
 typedef struct _ScaleSlot {
     int   x1, y1, x2, y2;
     int   filled;
     float scale;
 } ScaleSlot;
+
+typedef struct _SlotArea {
+    int        nWindows;
+    XRectangle workArea;
+} SlotArea;
 
 #define SCALE_DISPLAY_OPTION_ABI	     0
 #define SCALE_DISPLAY_OPTION_INDEX	     1
@@ -61,18 +70,20 @@ typedef struct _ScaleDisplay {
     unsigned int lastActiveNum;
     Window       lastActiveWindow;
     Window       selectedWindow;
+    Window       hoveredWindow;
     KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
 } ScaleDisplay;
 
-#define SCALE_SCREEN_OPTION_SPACING      0
-#define SCALE_SCREEN_OPTION_SPEED	 1
-#define SCALE_SCREEN_OPTION_TIMESTEP	 2
-#define SCALE_SCREEN_OPTION_WINDOW_MATCH 3
-#define SCALE_SCREEN_OPTION_DARKEN_BACK  4
-#define SCALE_SCREEN_OPTION_OPACITY      5
-#define SCALE_SCREEN_OPTION_ICON         6
-#define SCALE_SCREEN_OPTION_HOVER_TIME   7
-#define SCALE_SCREEN_OPTION_NUM          8
+#define SCALE_SCREEN_OPTION_SPACING          0
+#define SCALE_SCREEN_OPTION_SPEED	     1
+#define SCALE_SCREEN_OPTION_TIMESTEP	     2
+#define SCALE_SCREEN_OPTION_WINDOW_MATCH     3
+#define SCALE_SCREEN_OPTION_DARKEN_BACK      4
+#define SCALE_SCREEN_OPTION_OPACITY          5
+#define SCALE_SCREEN_OPTION_ICON             6
+#define SCALE_SCREEN_OPTION_HOVER_TIME       7
+#define SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE 8
+#define SCALE_SCREEN_OPTION_NUM              9
 
 typedef enum {
     ScaleTypeNormal = 0,

@@ -397,42 +397,35 @@ compareWindowsDistance (const void *elem1,
 	GET_SCALE_WINDOW (w2, ss)->distance;
 }
 
-static void
-layoutSlots (CompScreen *s)
+static void 
+layoutSlotsForArea (CompScreen * s, 
+		    XRectangle workArea, 
+		    int        nWindows)
 {
-    int i, j, x, y, width, height, lines, n;
-    int x1, y1, x2, y2;
+    int i, j;
+    int x, y, width, height;
+    int lines, n, nSlots;
     int spacing;
 
     SCALE_SCREEN (s);
 
+    if (!nWindows)
+	return;
+
+    lines   = sqrt (nWindows + 1);
     spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
+    nSlots  = 0;
 
-    ss->nSlots = 0;
-
-    lines = sqrt (ss->nWindows + 1);
-
-    getCurrentOutputExtents (s, &x1, &y1, &x2, &y2);
-
-    if (s->workArea.x > x1)
-	x1 = s->workArea.x;
-    if (s->workArea.x + s->workArea.width < x2)
-	x2 = s->workArea.x + s->workArea.width;
-    if (s->workArea.y > y1)
-	y1 = s->workArea.y;
-    if (s->workArea.y + s->workArea.height < y2)
-	y2 = s->workArea.y + s->workArea.height;
-
-    y      = y1 + spacing;
-    height = ((y2 - y1) - (lines + 1) * spacing) / lines;
+    y      = workArea.y + spacing;
+    height = (workArea.height - (lines + 1) * spacing) / lines;
 
     for (i = 0; i < lines; i++)
     {
-	n = MIN (ss->nWindows - ss->nSlots,
-		 ceilf ((float) ss->nWindows / lines));
+	n = MIN (nWindows - nSlots,
+		 ceilf ((float)nWindows / lines));
 
-	x     = x1 + spacing;
-	width = ((x2 - x1) - (n + 1) * spacing) / n;
+	x     = workArea.x + spacing;
+	width = (workArea.width - (n + 1) * spacing) / n;
 
 	for (j = 0; j < n; j++)
 	{
@@ -446,9 +439,121 @@ layoutSlots (CompScreen *s)
 	    x += width + spacing;
 
 	    ss->nSlots++;
+	    nSlots++;
 	}
 
 	y += height + spacing;
+    }
+}
+
+static SlotArea* 
+getSlotAreas (CompScreen *s)
+{
+    int        i;
+    XRectangle workArea;
+    float      *size;
+    float      sizePerWindow, sum = 0.0f;
+    int        left;
+    SlotArea   *slotAreas;
+
+    SCALE_SCREEN(s);
+
+    size      = malloc (s->nOutputDev * sizeof (int));
+    slotAreas = malloc (s->nOutputDev * sizeof (SlotArea));
+
+    left = ss->nWindows;
+
+    for (i = 0; i < s->nOutputDev; i++)
+    {
+	/* determine the size of the workarea for each output device */
+	workArea = s->outputDev[i].workArea;
+
+	size[i] = workArea.width * workArea.height;
+	sum     += size[i];
+
+	slotAreas[i].nWindows = 0;
+	slotAreas[i].workArea = workArea;
+    }
+
+    /* calculate size available for each window */
+    sizePerWindow = sum / ss->nWindows;
+
+    for (i = 0; i < s->nOutputDev && left; i++)
+    {
+	/* fill the areas with windows */
+	int nw = floor(size[i] / sizePerWindow);
+	nw = MIN (nw,left);
+
+	size[i] -= nw * sizePerWindow;
+	slotAreas[i].nWindows = nw;
+	left -= nw;
+    }
+
+    /* add left windows to output devices with the biggest free space */
+    while (left > 0)
+    {
+	int num = 0;
+	float big = 0;
+
+	for (i = 0; i < s->nOutputDev; i++)
+	    if (size[i] > big)
+	    {
+		num = i;
+		big = size[i];
+	    }
+
+	size[num] -= sizePerWindow;
+	slotAreas[num].nWindows++;
+	left--;
+    }
+
+    free(size);
+    return slotAreas;
+}
+
+static void
+layoutSlots (CompScreen *s)
+{
+    int i;
+    int spacing;
+    int moMode;
+
+    SCALE_SCREEN (s);
+
+    spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
+    moMode  = ss->opt[SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
+
+    /* if we have only one head, we don't need the 
+       additional effort of the all outputs mode */
+    if (s->nOutputDev == 1)
+	moMode = SCALE_MOMODE_CURRENT;
+
+    ss->nSlots = 0;
+
+    switch (moMode)
+    {
+    case SCALE_MOMODE_ALL:
+	{
+	    SlotArea *slotAreas;
+	    slotAreas = getSlotAreas (s);
+	    if (slotAreas)
+	    {
+		for (i = 0; i < s->nOutputDev; i++)
+		    layoutSlotsForArea (s, 
+					slotAreas[i].workArea, 
+					slotAreas[i].nWindows);
+		free (slotAreas);
+	    }
+	}
+	break;
+    case SCALE_MOMODE_CURRENT:
+    default:
+	{
+	    XRectangle workArea;
+	    workArea = s->outputDev[s->currentOutputDev].workArea;
+	    layoutSlotsForArea (s, workArea, ss->nWindows);
+	}
+	break;
     }
 }
 
@@ -1195,6 +1300,8 @@ scaleSelectWindow (CompWindow *w)
 {
     SCALE_DISPLAY (w->screen->display);
 
+    sd->hoveredWindow = w->id;
+
     if (sd->selectedWindow != w->id)
     {
 	CompWindow *old, *new;
@@ -1220,11 +1327,11 @@ scaleSelectWindowAt (CompScreen *s,
 {
     CompWindow *w;
 
+    SCALE_DISPLAY (s->display);
+
     w = scaleCheckForWindowAt (s, x, y);
     if (w && isScaleWin (w))
     {
-	SCALE_DISPLAY (s->display);
-
 	scaleSelectWindow (w);
 
 	if (moveInputFocus)
@@ -1237,6 +1344,8 @@ scaleSelectWindowAt (CompScreen *s,
 
 	return TRUE;
     }
+
+    sd->hoveredWindow = None;
 
     return FALSE;
 }
@@ -1709,6 +1818,7 @@ scaleInitDisplay (CompPlugin  *p,
 
     sd->lastActiveNum = None;
     sd->selectedWindow = None;
+    sd->hoveredWindow = None;
 
     sd->leftKeyCode  = XKeysymToKeycode (d->display, XStringToKeysym ("Left"));
     sd->rightKeyCode = XKeysymToKeycode (d->display, XStringToKeysym ("Right"));
@@ -1745,7 +1855,8 @@ static const CompMetadataOptionInfo scaleScreenOptionInfo[] = {
     { "darken_back", "bool", 0, 0, 0 },
     { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
     { "overlay_icon", "int", RESTOSTRING (0, SCALE_ICON_LAST), 0, 0 },
-    { "hover_time", "int", "<min>50</min>", 0, 0 }
+    { "hover_time", "int", "<min>50</min>", 0, 0 },
+    { "multioutput_mode", "int", RESTOSTRING (0, SCALE_MOMODE_LAST), 0, 0 }
 };
 
 static Bool
