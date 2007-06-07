@@ -1299,6 +1299,8 @@ scaleSelectWindow (CompWindow *w)
 {
     SCALE_DISPLAY (w->screen->display);
 
+    sd->hoveredWindow = w->id;
+
     if (sd->selectedWindow != w->id)
     {
 	CompWindow *old, *new;
@@ -1324,11 +1326,11 @@ scaleSelectWindowAt (CompScreen *s,
 {
     CompWindow *w;
 
+    SCALE_DISPLAY (s->display);
+
     w = scaleCheckForWindowAt (s, x, y);
     if (w && isScaleWin (w))
     {
-	SCALE_DISPLAY (s->display);
-
 	scaleSelectWindow (w);
 
 	if (moveInputFocus)
@@ -1341,6 +1343,8 @@ scaleSelectWindowAt (CompScreen *s,
 
 	return TRUE;
     }
+
+    sd->hoveredWindow = None;
 
     return FALSE;
 }
@@ -1813,6 +1817,7 @@ scaleInitDisplay (CompPlugin  *p,
 
     sd->lastActiveNum = None;
     sd->selectedWindow = None;
+    sd->hoveredWindow = None;
 
     sd->leftKeyCode  = XKeysymToKeycode (d->display, XStringToKeysym ("Left"));
     sd->rightKeyCode = XKeysymToKeycode (d->display, XStringToKeysym ("Right"));

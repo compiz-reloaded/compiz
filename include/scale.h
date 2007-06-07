@@ -70,6 +70,7 @@ typedef struct _ScaleDisplay {
     unsigned int lastActiveNum;
     Window       lastActiveWindow;
     Window       selectedWindow;
+    Window       hoveredWindow;
     KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
 } ScaleDisplay;
 
