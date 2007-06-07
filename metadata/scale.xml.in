@@ -108,6 +108,21 @@
 		<min>50</min>
 		<max>10000</max>
 	    </option>
+	    <option name="multioutput_mode" type="int">
+		<_short>Multi Output Mode</_short>
+		<_long>Selects where windows are scaled if multiple output devices are used.</_long>
+		<min>0</min>
+		<max>1</max>
+		<default>0</default>
+		<desc>
+		    <value>0</value>
+		    <_name>On current output device</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>On all output devices</_name>
+		</desc>
+	    </option>
 	</screen>
     </plugin>
 </compiz>
