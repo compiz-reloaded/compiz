@@ -414,9 +414,9 @@ layoutSlotsForArea (CompScreen * s,
 
     lines   = sqrt (nWindows + 1);
     spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
+    nSlots  = 0;
 
-    nSlots = 0;
-    y = workArea.y + spacing;
+    y      = workArea.y + spacing;
     height = (workArea.height - (lines + 1) * spacing) / lines;
 
     for (i = 0; i < lines; i++)
@@ -424,7 +424,7 @@ layoutSlotsForArea (CompScreen * s,
 	n = MIN (nWindows - nSlots,
 		 ceilf ((float)nWindows / lines));
 
-	x = workArea.x + spacing;
+	x     = workArea.x + spacing;
 	width = (workArea.width - (n + 1) * spacing) / n;
 
 	for (j = 0; j < n; j++)
@@ -483,6 +483,7 @@ getSlotAreas (CompScreen *s)
 	/* fill the areas with windows */
 	int nw = floor(size[i] / sizePerWindow);
 	nw = MIN (nw,left);
+
 	size[i] -= nw * sizePerWindow;
 	slotAreas[i].nWindows = nw;
 	left -= nw;
