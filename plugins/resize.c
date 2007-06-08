@@ -351,8 +351,8 @@ resizeInitiate (CompDisplay     *d,
 
 	rd->geometry = rd->savedGeometry;
 
-	rd->pointerDx = x - lastPointerX;
-	rd->pointerDy = y - lastPointerY;
+	rd->pointerDx = x - pointerX;
+	rd->pointerDy = y - pointerY;
 
 	rd->mode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
 	for (i = 0; i <= RESIZE_MODE_LAST; i++)
