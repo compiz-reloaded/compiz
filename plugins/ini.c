@@ -55,6 +55,10 @@ static int displayPrivateIndex;
 
 static CompMetadata iniMetadata;
 
+static Bool iniSaveOptions (CompDisplay *d,
+			    int         screen,
+			    char        *plugin);
+
 /*
  * IniFileData
  */
@@ -604,13 +608,14 @@ static Bool
 iniLoadOptionsFromFile (CompDisplay *d,
 			FILE *optionFile,
 			char *plugin,
-			int screen)
+			int screen,
+			Bool *reSave)
 {
     char *optionName = NULL;
     char *optionValue = NULL;
     char tmp[MAX_OPTION_LENGTH];
     CompOption *option = NULL, *o;
-    int nOption;
+    int nOption, nOptionRead = 0;
     CompScreen *s = NULL;
     CompPlugin *p = NULL;
     Bool status = FALSE;
@@ -731,9 +736,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			    status = (*d->setDisplayOptionForPlugin) (d, plugin,
 								      optionName,
 								      &value);
-			}
-			else
-			{
+		    }
+		    else
+		    {
 			if (s)
 			    status = (*s->setScreenOption)
 						(s, optionName, &value);
@@ -746,6 +751,8 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			matchFini (&value.match);
 		    }
 		}
+
+		nOptionRead++;
 	    }
 	    else
 	    {
@@ -795,6 +802,8 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		       trouble. ;-) */
 		    if (!o && action.valueMasks != ACTION_VALUES_ALL)
 		        parseAction(d, optionName, optionValue, &action);
+
+		    nOptionRead++;
 		}
 	    }
 	}
@@ -805,6 +814,11 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	if (optionValue)
 	    free (optionValue);
     } 
+
+    if (nOption != nOptionRead)
+    {
+	*reSave = TRUE;
+    }
 
     return TRUE;
 }
@@ -1042,7 +1056,7 @@ iniLoadOptions (CompDisplay *d,
 {
     char         *filename, *directory, *fullPath;
     FILE         *optionFile;
-    Bool         loadRes;
+    Bool         loadRes, reSave = FALSE;
     IniFileData *fileData;
 
     filename = directory = fullPath = NULL;
@@ -1156,11 +1170,18 @@ iniLoadOptions (CompDisplay *d,
 
     fileData->blockWrites = TRUE;
 
-    loadRes = iniLoadOptionsFromFile (d, optionFile, plugin, screen);
+    loadRes = iniLoadOptionsFromFile (d, optionFile, plugin, screen, &reSave);
 
     fileData->blockWrites = FALSE;
 
     fclose (optionFile);
+
+    if (loadRes && reSave)
+    {
+	fileData->blockReads = TRUE;
+	iniSaveOptions (d, screen, plugin);
+	fileData->blockReads = FALSE;
+    }
 
     free (filename);
     free (directory);
