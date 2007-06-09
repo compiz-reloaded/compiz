@@ -88,7 +88,7 @@ typedef struct _CubeScreen {
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
     int      invert;
-    int      xrotations;
+    int      xRotations;
     GLfloat  distance;
     GLushort color[3];
     GLfloat  tc[12];
@@ -101,7 +101,7 @@ typedef struct _CubeScreen {
     GLfloat unfold, unfoldVelocity;
 
     GLfloat  *vertices;
-    int      nvertices;
+    int      nVertices;
 
     GLuint skyListId;
 
