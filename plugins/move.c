@@ -832,7 +832,7 @@ moveInitScreen (CompPlugin *p,
 
     ms->grabIndex = 0;
 
-    ms->moveCursor = XCreateFontCursor (s->display->display, XC_plus);
+    ms->moveCursor = XCreateFontCursor (s->display->display, XC_fleur);
 
     WRAP (ms, s, paintWindow, movePaintWindow);
 
