@@ -150,13 +150,13 @@ cubeUpdateGeometry (CompScreen *s,
 
     n = (sides + 2) * 2;
 
-    if (cs->nvertices != n)
+    if (cs->nVertices != n)
     {
 	v = realloc (cs->vertices, sizeof (GLfloat) * n * 3);
 	if (!v)
 	    return FALSE;
 
-	cs->nvertices = n;
+	cs->nVertices = n;
 	cs->vertices  = v;
     }
     else
@@ -944,7 +944,7 @@ cubePaintTopBottom (CompScreen		    *s,
 
     glPushMatrix ();
 
-    sa.yRotate += (360.0f / size) * (cs->xrotations + 1);
+    sa.yRotate += (360.0f / size) * (cs->xRotations + 1);
     if (!cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
 	sa.yRotate -= (360.0f / size) * s->x;
 
@@ -962,19 +962,19 @@ cubePaintTopBottom (CompScreen		    *s,
     {
 	enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
 	glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
-	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
+	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
 	disableTexture (s, &cs->texture);
 	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
     }
     else
     {
 	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nvertices >> 1);
+	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
     }
 
     glNormal3f (0.0f, 1.0f, 0.0f);
 
-    glDrawArrays (GL_TRIANGLE_FAN, cs->nvertices >> 1, cs->nvertices >> 1);
+    glDrawArrays (GL_TRIANGLE_FAN, cs->nVertices >> 1, cs->nVertices >> 1);
 
     glNormal3f (0.0f, 0.0f, -1.0f);
 
@@ -1067,15 +1067,15 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	sa.xRotate = xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
-	    cs->xrotations = (int) (hsize * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / hsize;
+	    cs->xRotations = (int) (hsize * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate - (360.0f * cs->xRotations) / hsize;
 	}
 	else
 	{
-	    cs->xrotations = (int) (hsize * sa.xRotate) / 360;
+	    cs->xRotations = (int) (hsize * sa.xRotate) / 360;
 	    sa.xRotate = sa.xRotate -
-		(360.0f * cs->xrotations) / hsize + 360.0f / hsize;
-	    cs->xrotations--;
+		(360.0f * cs->xRotations) / hsize + 360.0f / hsize;
+	    cs->xRotations--;
 	}
 
 	sa.xRotate = sa.xRotate / size * hsize;
@@ -1093,15 +1093,15 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	sa.xRotate = xRotate * cs->invert;
 	if (sa.xRotate > 0.0f)
 	{
-	    cs->xrotations = (int) (size * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate - (360.0f * cs->xrotations) / size;
+	    cs->xRotations = (int) (size * sa.xRotate) / 360;
+	    sa.xRotate = sa.xRotate - (360.0f * cs->xRotations) / size;
 	}
 	else
 	{
-	    cs->xrotations = (int) (size * sa.xRotate) / 360;
+	    cs->xRotations = (int) (size * sa.xRotate) / 360;
 	    sa.xRotate = sa.xRotate -
-		(360.0f * cs->xrotations) / size + 360.0f / size;
-	    cs->xrotations--;
+		(360.0f * cs->xRotations) / size + 360.0f / size;
+	    cs->xRotations--;
 	}
     }
 
@@ -1119,7 +1119,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	    GLenum filter;
 	    int    i;
 
-	    xMove = cs->xrotations - ((hsize >> 1) - 1);
+	    xMove = cs->xRotations - ((hsize >> 1) - 1);
 	    sa.yRotate += (360.0f / size) * ((hsize >> 1) - 1);
 
 	    filter = s->display->textureFilter;
@@ -1141,7 +1141,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	{
 	    if (xRotate != 0.0f)
 	    {
-		xMove = cs->xrotations;
+		xMove = cs->xRotations;
 
 		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
 					  xMove);
@@ -1160,11 +1160,11 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	if (sa.xRotate > 180.0f / size)
 	{
 	    sa.yRotate -= 360.0f / size;
-	    cs->xrotations++;
+	    cs->xRotations++;
 	}
 
 	sa.yRotate -= 360.0f / size;
-	xMove = -1 - cs->xrotations;
+	xMove = -1 - cs->xRotations;
 
 	if (cs->grabIndex)
 	{
@@ -1203,13 +1203,13 @@ cubePaintTransformedOutput (CompScreen		    *s,
 				      xMove);
 
 	    sa.yRotate += 360.0f / size;
-	    xMove = -cs->xrotations;
+	    xMove = -cs->xRotations;
 
 	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
 				      xMove);
 
 	    sa.yRotate += 360.0f / size;
-	    xMove = 1 - cs->xrotations;
+	    xMove = 1 - cs->xRotations;
 
 	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
 				      xMove);
@@ -1658,7 +1658,7 @@ cubeInitScreen (CompPlugin *p,
     memcpy (cs->color, cs->opt[CUBE_SCREEN_OPTION_COLOR].value.c,
 	    sizeof (cs->color));
 
-    cs->nvertices = 0;
+    cs->nVertices = 0;
     cs->vertices  = NULL;
 
     cs->grabIndex = 0;
