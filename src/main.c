@@ -131,8 +131,9 @@ logMessage (CompDisplay *d,
 {
     char defaultMessage[2048];
 
-    snprintf (defaultMessage, 2048, "%s (%s): %s",
-	      programName, componentName, message);
+    snprintf (defaultMessage, 2048, "%s (%s) - %s: %s",
+	      programName, componentName, 
+	      logLevelToString (level), message);
 
     fprintf (stderr, defaultMessage);
     fprintf (stderr, "\n");
