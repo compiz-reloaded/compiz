@@ -269,8 +269,11 @@
     <xsl:variable name="info">
       <xsl:text> (</xsl:text>
       <xsl:choose>
-        <xsl:when test="contains('int,float',@type)">
+        <xsl:when test="contains('int,float',@type) and not(desc/value/text())">
           <xsl:value-of select="min/text()"/> - <xsl:value-of select="max/text()"/>
+        </xsl:when>
+	<xsl:when test="@type='int' and desc/value/text()">
+          <xsl:call-template name="printIntDescList"/>
         </xsl:when>
         <xsl:when test="@type = 'match'">
           <xsl:text>match</xsl:text>
@@ -281,6 +284,19 @@
     <xsl:if test="not(contains($info,' ()'))">
       <xsl:value-of select="$info"/>
     </xsl:if>
+  </xsl:template>
+  
+  <!-- generates a list of int descriptions -->
+  <xsl:template name="printIntDescList">
+    <xsl:variable name="list">
+      <xsl:for-each select="desc">
+          <xsl:value-of select="value/text()"/>
+	  <xsl:text> = </xsl:text>
+	  <xsl:value-of select="name/text()"/>
+          <xsl:text>, </xsl:text>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:value-of select="substring($list,1,string-length($list) - 2)"/>
   </xsl:template>
 
   <!-- generates a default number out of the min and max values -->
