@@ -347,6 +347,13 @@ cubeUpdateSkyDomeTexture (CompScreen *screen)
 	cs->sky.filter = GL_LINEAR;
 	cs->sky.wrap   = GL_CLAMP_TO_EDGE;
 
+	cs->sky.matrix.xx = 1.0 / 128.0;
+	cs->sky.matrix.yy = -1.0 / 128.0;
+	cs->sky.matrix.xy = 0;
+	cs->sky.matrix.yx = 0;
+	cs->sky.matrix.x0 = 0;
+	cs->sky.matrix.y0 = 1.0;
+
 	glGenTextures (1, &cs->sky.name);
 	glBindTexture (cs->sky.target, cs->sky.name);
 
