@@ -101,7 +101,6 @@ typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
     PaintOutputProc		 paintOutput;
-    SetScreenOptionForPluginProc setScreenOptionForPlugin;
     WindowGrabNotifyProc	 windowGrabNotify;
     WindowUngrabNotifyProc	 windowUngrabNotify;
 
@@ -122,8 +121,6 @@ typedef struct _RotateScreen {
 
     Bool    moving;
     GLfloat moveTo;
-
-    int invert;
 
     Window moveWindow;
     int    moveWindowX;
@@ -264,6 +261,7 @@ rotatePreparePaintScreen (CompScreen *s,
 			  int	     msSinceLastPaint)
 {
     ROTATE_SCREEN (s);
+    CUBE_SCREEN (s);
 
     float oldXrot = rs->xrot + rs->baseXrot;
 
@@ -295,7 +293,7 @@ rotatePreparePaintScreen (CompScreen *s,
 		rs->xrot += 360.0f / s->hsize;
 	    }
 
-	    if (rs->invert == -1)
+	    if (cs->invert == -1)
 	    {
 		if (rs->yrot > 45.0f)
 		{
@@ -410,7 +408,7 @@ rotatePreparePaintScreen (CompScreen *s,
 	}
     }
 
-    if (rs->moving && rs->invert == 1)
+    if (rs->moving && cs->invert == 1)
     {
 	if (fabs(rs->xrot + rs->baseXrot + rs->moveTo) <=
 	    (360.0 / (s->hsize * 2.0)))
@@ -430,7 +428,7 @@ rotatePreparePaintScreen (CompScreen *s,
 		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
 	}
     }
-    else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && rs->invert == 1)
+    else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && cs->invert == 1)
     {
 	int steps, stepsCount;
 	float amount, chunk;
@@ -1400,6 +1398,7 @@ rotateHandleEvent (CompDisplay *d,
 	if (s)
 	{
 	    ROTATE_SCREEN (s);
+	    CUBE_SCREEN (s);
 
 	    if (rs->grabIndex)
 	    {
@@ -1424,7 +1423,7 @@ rotateHandleEvent (CompDisplay *d,
 			pointerDy = -pointerDy;
 
 		    rs->xVelocity += pointerDx * rs->pointerSensitivity *
-			rs->invert;
+			cs->invert;
 		    rs->yVelocity += pointerDy * rs->pointerSensitivity;
 
 		    damageScreen (s);
@@ -1592,46 +1591,6 @@ rotateWindowUngrabNotify (CompWindow *w)
     UNWRAP (rs, w->screen, windowUngrabNotify);
     (*w->screen->windowUngrabNotify) (w);
     WRAP (rs, w->screen, windowUngrabNotify, rotateWindowUngrabNotify);
-}
-
-static void
-rotateUpdateCubeOptions (CompScreen *s)
-{
-    CompPlugin *p;
-
-    ROTATE_SCREEN (s);
-
-    p = findActivePlugin ("cube");
-    if (p && p->vTable->getScreenOptions)
-    {
-	CompOption *options, *option;
-	int	   nOptions;
-
-	options = (*p->vTable->getScreenOptions) (p, s, &nOptions);
-	option = compFindOption (options, nOptions, "in", 0);
-	if (option)
-	    rs->invert = option->value.b ? -1 : 1;
-    }
-}
-
-static Bool
-rotateSetScreenOptionForPlugin (CompScreen      *s,
-				char	        *plugin,
-				char	        *name,
-				CompOptionValue *value)
-{
-    Bool status;
-
-    ROTATE_SCREEN (s);
-
-    UNWRAP (rs, s, setScreenOptionForPlugin);
-    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
-    WRAP (rs, s, setScreenOptionForPlugin, rotateSetScreenOptionForPlugin);
-
-    if (status && strcmp (plugin, "cube") == 0 && strcmp (name, "in") == 0)
-	rotateUpdateCubeOptions (s);
-
-    return status;
 }
 
 static CompOption *
@@ -1842,15 +1801,12 @@ rotateInitScreen (CompPlugin *p,
     WRAP (rs, s, preparePaintScreen, rotatePreparePaintScreen);
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
     WRAP (rs, s, paintOutput, rotatePaintOutput);
-    WRAP (rs, s, setScreenOptionForPlugin, rotateSetScreenOptionForPlugin);
     WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
     WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
 
     WRAP (rs, cs, getRotation, rotateGetRotation);
 
     s->privates[rd->screenPrivateIndex].ptr = rs;
-
-    rotateUpdateCubeOptions (s);
 
     return TRUE;
 }
@@ -1867,7 +1823,6 @@ rotateFiniScreen (CompPlugin *p,
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);
     UNWRAP (rs, s, paintOutput);
-    UNWRAP (rs, s, setScreenOptionForPlugin);
     UNWRAP (rs, s, windowGrabNotify);
     UNWRAP (rs, s, windowUngrabNotify);
 
