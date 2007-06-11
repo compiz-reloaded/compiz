@@ -1105,7 +1105,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	}
     }
 
-    if (!clear && cs->grabIndex == 0 && hsize > 2 &&
+    if (cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
 	(*cs->paintTopBottom) (s, &sa, transform, outputPtr, hsize);
