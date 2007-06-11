@@ -31,7 +31,7 @@
   <xsl:template  match="/compiz">
     <gconfschemafile>
       <schemalist>
-        <xsl:for-each select="/compiz//option">
+        <xsl:for-each select="/compiz//option[not(@read_only='true')]">
           <xsl:call-template name="dumpOption"/>
         </xsl:for-each>
       </schemalist>
