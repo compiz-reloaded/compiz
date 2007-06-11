@@ -94,7 +94,8 @@ typedef struct _RotateDisplay {
 #define ROTATE_SCREEN_OPTION_SNAP_TOP		 3
 #define ROTATE_SCREEN_OPTION_SPEED		 4
 #define ROTATE_SCREEN_OPTION_TIMESTEP		 5
-#define ROTATE_SCREEN_OPTION_NUM		 6
+#define ROTATE_SCREEN_OPTION_ZOOM		 6
+#define ROTATE_SCREEN_OPTION_NUM		 7
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -134,6 +135,9 @@ typedef struct _RotateScreen {
     Bool	      slow;
     unsigned int      grabMask;
     CompWindow	      *grabWindow;
+
+    GLfloat zoomTranslate;
+    GLfloat zoomVelocity
 } RotateScreen;
 
 #define GET_ROTATE_DISPLAY(d)				       \
@@ -420,6 +424,10 @@ rotateDonePaintScreen (CompScreen *s)
 	    damageScreen (s);
     }
 
+    if (rs->zoomTranslate > 0.0f &&
+	rs->zoomTranslate < rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f)
+	damageScreen (s);
+
     UNWRAP (rs, s, donePaintScreen);
     (*s->donePaintScreen) (s);
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
@@ -450,17 +458,19 @@ rotatePaintOutput (CompScreen		   *s,
 		   unsigned int		   mask)
 {
     Bool status;
+    ScreenPaintAttrib sA = *sAttrib;
 
     ROTATE_SCREEN (s);
 
-    if (rs->grabIndex || rs->moving)
+    if (rs->grabIndex || rs->moving || rs->zoomTranslate != 0.0f)
     {
+	sA.zCamera -= rs->zoomTranslate;
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
     }
 
     UNWRAP (rs, s, paintOutput);
-    status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
+    status = (*s->paintOutput) (s, &sA, transform, region, output, mask);
     WRAP (rs, s, paintOutput, rotatePaintOutput);
 
     return status;
@@ -1701,7 +1711,8 @@ static const CompMetadataOptionInfo rotateScreenOptionInfo[] = {
     { "acceleration", "float", "<min>1.0</min>", 0, 0 },
     { "snap_top", "bool", 0, 0, 0 },
     { "speed", "float", "<min>0.1</min>", 0, 0 },
-    { "timestep", "float", "<min>0.1</min>", 0, 0 }
+    { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "zoom", "float", 0, 0, 0 }
 };
 
 static Bool
@@ -1756,6 +1767,9 @@ rotateInitScreen (CompPlugin *p,
 	ROTATE_POINTER_SENSITIVITY_FACTOR;
 
     rs->rotateHandle = 0;
+
+    rs->zoomTranslate = 0.0;
+    rs->zoomVelocity  = 0.0;
 
     WRAP (rs, s, preparePaintScreen, rotatePreparePaintScreen);
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
