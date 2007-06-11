@@ -430,6 +430,51 @@ rotatePreparePaintScreen (CompScreen *s,
 		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
 	}
     }
+    else if (rs->zoomTranslate != 0.0f || rs->grabbed)
+    {
+	int steps, stepsCount;
+	float amount, chunk;
+	
+	amount = msSinceLastPaint * 0.05f *
+		 rs->opt[ROTATE_SCREEN_OPTION_SPEED].value.f;
+	steps = stepsCount = amount / (0.5f *
+		rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP].value.f);
+	if (!steps)
+		steps = stepsCount = 1;
+	chunk = amount / (float)steps;
+
+	while (steps--)
+	{
+	    float dt, adjust, tamount;
+
+	    if (rs->grabbed)
+		dt = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f -
+		     rs->zoomTranslate;
+	    else
+		dt = 0.0f - rs->zoomTranslate;
+
+	    adjust = dt * 0.15f;
+	    tamount = fabs(dt) * 1.5f;
+	    if (tamount < 0.2f)
+		tamount = 0.2f;
+	    else if (tamount > 2.0f)
+		tamount = 2.0f;
+
+	    rs->zoomVelocity = (tamount * rs->zoomVelocity + adjust) /
+			       (tamount + 1.0f);
+
+	    if (fabs(dt) < 0.1f && fabs(rs->zoomVelocity) < 0.0005f)
+	    {
+		if (rs->grabbed)
+		    rs->zoomTranslate =
+			rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f;
+		else
+		    rs->zoomTranslate = 0.0f;
+		break;
+	    }
+	    rs->zoomTranslate += rs->zoomVelocity * chunk;
+	}
+    }
 
     UNWRAP (rs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
