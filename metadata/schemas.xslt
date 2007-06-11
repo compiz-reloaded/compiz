@@ -275,29 +275,12 @@
         <xsl:when test="@type = 'match'">
           <xsl:text>match</xsl:text>
         </xsl:when>
-        <xsl:when test="@type = 'string' and allowed/value">
-          <xsl:call-template name="printAllowedList"/>
-        </xsl:when>
-        <xsl:when test="@type = 'list' and type/text() = 'string' and allowed/value">
-          <xsl:call-template name="printAllowedList"/>
-        </xsl:when>
       </xsl:choose>
       <xsl:text>)</xsl:text>
     </xsl:variable>
     <xsl:if test="not(contains($info,' ()'))">
       <xsl:value-of select="$info"/>
     </xsl:if>
-  </xsl:template>
-
-  <!-- generates a list of allowed string values -->
-  <xsl:template name="printAllowedList">
-    <xsl:variable name="list">
-      <xsl:for-each select="allowed/value">
-          <xsl:value-of select="text()"/>
-          <xsl:text>, </xsl:text>
-      </xsl:for-each>
-    </xsl:variable>
-    <xsl:value-of select="substring($list,1,string-length($list) - 2)"/>
   </xsl:template>
 
   <!-- generates a default number out of the min and max values -->
