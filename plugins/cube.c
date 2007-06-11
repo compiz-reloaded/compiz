@@ -304,8 +304,8 @@ cubeUpdateSkyDomeTexture (CompScreen *screen)
 	!readImageToTexture (screen,
 			     &cs->sky,
 			     cs->opt[CUBE_SCREEN_OPTION_SKYDOME_IMG].value.s,
-			     NULL,
-			     NULL))
+			     &cs->skyW,
+			     &cs->skyH))
     {
 	GLfloat aaafTextureData[128][128][3];
 	GLfloat fRStart = (GLfloat)
@@ -353,6 +353,9 @@ cubeUpdateSkyDomeTexture (CompScreen *screen)
 	cs->sky.matrix.yx = 0;
 	cs->sky.matrix.x0 = 0;
 	cs->sky.matrix.y0 = 1.0;
+
+	cs->skyW = 128;
+	cs->skyH = 128;
 
 	glGenTextures (1, &cs->sky.name);
 	glBindTexture (cs->sky.target, cs->sky.name);
@@ -468,13 +471,13 @@ cubeUpdateSkyDomeList (CompScreen *s,
     }
 
     afTexCoordX[0] = 1.0f;
-    afTexCoordY[0] = fStepY;
+    afTexCoordY[0] = 1.0f - fStepY;
     afTexCoordX[1] = 1.0f - fStepX;
-    afTexCoordY[1] = fStepY;
+    afTexCoordY[1] = 1.0f - fStepY;
     afTexCoordX[2] = 1.0f - fStepX;
-    afTexCoordY[2] = 0.0f;
+    afTexCoordY[2] = 1.0f;
     afTexCoordX[3] = 1.0f;
-    afTexCoordY[3] = 0.0f;
+    afTexCoordY[3] = 1.0f;
 
     if (!cs->skyListId)
 	cs->skyListId = glGenLists (1);
@@ -500,7 +503,9 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    x = cost1[j];
 	    y = sint1[j];
 
-	    glTexCoord2f (afTexCoordX[3], afTexCoordY[3]);
+	    glTexCoord2f (
+		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[3] * cs->skyW),
+		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[3] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    /* top-right */
@@ -509,7 +514,9 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    x = cost1[j];
 	    y = sint1[j];
 
-	    glTexCoord2f (afTexCoordX[0], afTexCoordY[0]);
+	    glTexCoord2f (
+		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[0] * cs->skyW),
+		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[0] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    /* top-left */
@@ -518,7 +525,9 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    x = cost1[j + 1];
 	    y = sint1[j + 1];
 
-	    glTexCoord2f (afTexCoordX[1], afTexCoordY[1]);
+	    glTexCoord2f (
+		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[1] * cs->skyW),
+		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[1] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    /* bottom-left */
@@ -527,7 +536,9 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    x = cost1[j + 1];
 	    y = sint1[j + 1];
 
-	    glTexCoord2f (afTexCoordX[2], afTexCoordY[2]);
+	    glTexCoord2f (
+		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[2] * cs->skyW),
+		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[2] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    afTexCoordX[0] -= fStepX;
@@ -536,10 +547,10 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    afTexCoordX[3] -= fStepX;
 	}
 
-	afTexCoordY[0] += fStepY;
-	afTexCoordY[1] += fStepY;
-	afTexCoordY[2] += fStepY;
-	afTexCoordY[3] += fStepY;
+	afTexCoordY[0] -= fStepY;
+	afTexCoordY[1] -= fStepY;
+	afTexCoordY[2] -= fStepY;
+	afTexCoordY[3] -= fStepY;
     }
 
     glEnd ();

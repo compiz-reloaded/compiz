@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define CUBE_ABIVERSION 20070523
+#define CUBE_ABIVERSION 20070611
 
 #define CUBE_DISPLAY_OPTION_ABI    0
 #define CUBE_DISPLAY_OPTION_INDEX  1
@@ -105,8 +105,9 @@ typedef struct _CubeScreen {
 
     GLuint skyListId;
 
-    int		pw, ph;
-    CompTexture texture, sky;
+    int		 pw, ph;
+    unsigned int skyW, skyH;
+    CompTexture  texture, sky;
 
     int	imgCurFile;
 
