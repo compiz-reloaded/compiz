@@ -137,7 +137,7 @@ typedef struct _RotateScreen {
     CompWindow	      *grabWindow;
 
     GLfloat zoomTranslate;
-    GLfloat zoomVelocity
+    GLfloat zoomVelocity;
 } RotateScreen;
 
 #define GET_ROTATE_DISPLAY(d)				       \
@@ -264,6 +264,8 @@ rotatePreparePaintScreen (CompScreen *s,
 			  int	     msSinceLastPaint)
 {
     ROTATE_SCREEN (s);
+
+    float oldXrot = rs->xrot + rs->baseXrot;
 
     if (rs->grabIndex || rs->moving)
     {
@@ -405,6 +407,27 @@ rotatePreparePaintScreen (CompScreen *s,
 					      w->attrib.y,
 					      FALSE);
 	    }
+	}
+    }
+
+    if (rs->moving)
+    {
+	if (fabs(rs->xrot + rs->baseXrot + rs->moveTo) <=
+	    (360.0 / (s->hsize * 2.0)))
+	    rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
+		fabs(rs->xrot + rs->baseXrot + rs->moveTo) /
+		(360.0 / (s->hsize * 2.0));
+	else if (fabs(rs->xrot + rs->baseXrot) <= (360.0 / (s->hsize * 2.0)))
+	    rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
+		fabs(rs->xrot + rs->baseXrot) /
+		(360.0 / (s->hsize * 2.0));
+	else
+	{
+	    rs->zoomTranslate += fabs (rs->xrot + rs->baseXrot - oldXrot) /
+		(360.0 / (s->hsize * 2.0)) *
+		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f;
+	    rs->zoomTranslate = MIN (rs->zoomTranslate,
+		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
 	}
     }
 
