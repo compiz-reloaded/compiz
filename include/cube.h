@@ -40,22 +40,25 @@ typedef struct _CubeDisplay {
     CompOption opt[CUBE_DISPLAY_OPTION_NUM];
 } CubeDisplay;
 
-#define CUBE_SCREEN_OPTION_COLOR	      0
-#define CUBE_SCREEN_OPTION_IN		      1
-#define CUBE_SCREEN_OPTION_SCALE_IMAGE	      2
-#define CUBE_SCREEN_OPTION_IMAGES	      3
-#define CUBE_SCREEN_OPTION_SKYDOME	      4
-#define CUBE_SCREEN_OPTION_SKYDOME_IMG	      5
-#define CUBE_SCREEN_OPTION_SKYDOME_ANIM	      6
-#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_START 7
-#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_END   8
-#define CUBE_SCREEN_OPTION_ACCELERATION	      9
-#define CUBE_SCREEN_OPTION_SPEED	      10
-#define CUBE_SCREEN_OPTION_TIMESTEP	      11
-#define CUBE_SCREEN_OPTION_MIPMAP	      12
-#define CUBE_SCREEN_OPTION_BACKGROUNDS	      13
-#define CUBE_SCREEN_OPTION_ADJUST_IMAGE	      14
-#define CUBE_SCREEN_OPTION_NUM                15
+#define CUBE_SCREEN_OPTION_COLOR	           0
+#define CUBE_SCREEN_OPTION_IN		           1
+#define CUBE_SCREEN_OPTION_SCALE_IMAGE	           2
+#define CUBE_SCREEN_OPTION_IMAGES	           3
+#define CUBE_SCREEN_OPTION_SKYDOME	           4
+#define CUBE_SCREEN_OPTION_SKYDOME_IMG	           5
+#define CUBE_SCREEN_OPTION_SKYDOME_ANIM	           6
+#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_START      7
+#define CUBE_SCREEN_OPTION_SKYDOME_GRAD_END        8
+#define CUBE_SCREEN_OPTION_ACCELERATION	           9
+#define CUBE_SCREEN_OPTION_SPEED	           10
+#define CUBE_SCREEN_OPTION_TIMESTEP	           11
+#define CUBE_SCREEN_OPTION_MIPMAP	           12
+#define CUBE_SCREEN_OPTION_BACKGROUNDS	           13
+#define CUBE_SCREEN_OPTION_ADJUST_IMAGE	           14
+#define CUBE_SCREEN_OPTION_ACTIVE_OPACITY          15
+#define CUBE_SCREEN_OPTION_INACTIVE_OPACITY        16
+#define CUBE_SCREEN_OPTION_FADE_TIME               17
+#define CUBE_SCREEN_OPTION_NUM                     18
 
 typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
@@ -90,6 +93,7 @@ typedef struct _CubeScreen {
     PaintOutputProc	       paintOutput;
     PaintTransformedOutputProc paintTransformedOutput;
     PaintBackgroundProc        paintBackground;
+    PaintWindowProc            paintWindow;
     ApplyScreenTransformProc   applyScreenTransform;
     SetScreenOptionProc	       setScreenOption;
     OutputChangeNotifyProc     outputChangeNotify;
@@ -141,6 +145,9 @@ typedef struct _CubeScreen {
     float outputYScale;
     float outputXOffset;
     float outputYOffset;
+
+    float desktopOpacity;
+    float toOpacity;
 
     CompTexture *bg;
     int		nBg;

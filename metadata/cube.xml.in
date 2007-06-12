@@ -134,6 +134,30 @@
 		<_long>Adjust top face image to rotation</_long>
 		<default>false</default>
 	    </option>
+	    <option name="active_opacity" type="float">
+		<_short>Opacity During Rotation</_short>
+		<_long>Opacity of desktop window during rotation.</_long>
+		<default>30.0</default>
+		<min>0.0</min>
+		<max>100.0</max>
+		<precision>1.0</precision>
+	    </option>
+	    <option name="inactive_opacity" type="float">
+		<_short>Opacity When Not Rotating</_short>
+		<_long>Opacity of desktop window when not rotating.</_long>
+		<default>100.0</default>
+		<min>0.0</min>
+		<max>100.0</max>
+		<precision>1.0</precision>
+	    </option>
+	    <option name="fade_time" type="float">
+		<_short>Fade Time</_short>
+		<_long>Desktop Window Opacity Fade Time.</_long>
+		<default>1.0</default>
+		<min>0.0</min>
+		<max>10.0</max>
+		<precision>0.1</precision>
+	    </option>
 	</screen>
     </plugin>
 </compiz>
