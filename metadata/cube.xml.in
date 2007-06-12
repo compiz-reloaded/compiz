@@ -158,6 +158,11 @@
 		<max>10.0</max>
 		<precision>0.1</precision>
 	    </option>
+	    <option name="transparent_manual_only" type="bool">
+		<_short>Transparency Only on Mouse Rotate</_short>
+		<_long>Initiates Cube transparency only if rotation is mouse driven.</_long>
+		<default>true</default>
+	    </option>
 	</screen>
     </plugin>
 </compiz>

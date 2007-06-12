@@ -839,10 +839,16 @@ cubePreparePaintScreen (CompScreen *s,
     memset (cs->cleared, 0, sizeof (Bool) * s->nOutputDev);
 
     /* Transparency handling */
-    if (cs->rotationState != RotationNone)
+    if (cs->rotationState == RotationManual ||
+	(cs->rotationState == RotationChange &&
+	 cs->opt[CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY].value.b))
+    {
 	opt = CUBE_SCREEN_OPTION_ACTIVE_OPACITY;
+    }
     else
+    {
 	opt = CUBE_SCREEN_OPTION_INACTIVE_OPACITY;
+    }
 
     cs->toOpacity = (cs->opt[opt].value.f / 100.0f) * OPAQUE;
 
@@ -1928,7 +1934,8 @@ static const CompMetadataOptionInfo cubeScreenOptionInfo[] = {
     { "adjust_image", "bool", 0, 0, 0 },
     { "active_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
     { "inactive_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
-    { "fade_time", "float", "<min>0.0</min>", 0, 0 }
+    { "fade_time", "float", "<min>0.0</min>", 0, 0 },
+    { "transparent_manual_only", "bool", 0, 0, 0 }
 };
 
 static Bool

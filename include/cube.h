@@ -58,7 +58,8 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_ACTIVE_OPACITY          15
 #define CUBE_SCREEN_OPTION_INACTIVE_OPACITY        16
 #define CUBE_SCREEN_OPTION_FADE_TIME               17
-#define CUBE_SCREEN_OPTION_NUM                     18
+#define CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY 18
+#define CUBE_SCREEN_OPTION_NUM                     19
 
 typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
