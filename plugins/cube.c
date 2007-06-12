@@ -1706,6 +1706,11 @@ cubeInitScreen (CompPlugin *p,
     cs->bg  = NULL;
     cs->nBg = 0;
 
+    cs->outputXScale  = 1.0f;
+    cs->outputYScale  = 1.0f;
+    cs->outputXOffset = 0.0f;
+    cs->outputYOffset = 0.0f;
+
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
     cubeUpdateOutputs (s);
