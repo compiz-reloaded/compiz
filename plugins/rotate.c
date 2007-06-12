@@ -408,7 +408,7 @@ rotatePreparePaintScreen (CompScreen *s,
 	}
     }
 
-    if (rs->moving && cs->invert == 1)
+    if (rs->moving && cs->invert == 1 && !cs->unfolded)
     {
 	if (fabs(rs->xrot + rs->baseXrot + rs->moveTo) <=
 	    (360.0 / (s->hsize * 2.0)))
@@ -428,7 +428,8 @@ rotatePreparePaintScreen (CompScreen *s,
 		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
 	}
     }
-    else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && cs->invert == 1)
+    else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && cs->invert == 1 &&
+	     !cs->unfolded)
     {
 	int steps, stepsCount;
 	float amount, chunk;
