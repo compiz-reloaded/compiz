@@ -32,6 +32,37 @@
 
 #include <cube.h>
 
+#define MULTM(x, y, z) \
+z[0] = x[0] * y[0] + x[4] * y[1] + x[8] * y[2] + x[12] * y[3]; \
+z[1] = x[1] * y[0] + x[5] * y[1] + x[9] * y[2] + x[13] * y[3]; \
+z[2] = x[2] * y[0] + x[6] * y[1] + x[10] * y[2] + x[14] * y[3]; \
+z[3] = x[3] * y[0] + x[7] * y[1] + x[11] * y[2] + x[15] * y[3]; \
+z[4] = x[0] * y[4] + x[4] * y[5] + x[8] * y[6] + x[12] * y[7]; \
+z[5] = x[1] * y[4] + x[5] * y[5] + x[9] * y[6] + x[13] * y[7]; \
+z[6] = x[2] * y[4] + x[6] * y[5] + x[10] * y[6] + x[14] * y[7]; \
+z[7] = x[3] * y[4] + x[7] * y[5] + x[11] * y[6] + x[15] * y[7]; \
+z[8] = x[0] * y[8] + x[4] * y[9] + x[8] * y[10] + x[12] * y[11]; \
+z[9] = x[1] * y[8] + x[5] * y[9] + x[9] * y[10] + x[13] * y[11]; \
+z[10] = x[2] * y[8] + x[6] * y[9] + x[10] * y[10] + x[14] * y[11]; \
+z[11] = x[3] * y[8] + x[7] * y[9] + x[11] * y[10] + x[15] * y[11]; \
+z[12] = x[0] * y[12] + x[4] * y[13] + x[8] * y[14] + x[12] * y[15]; \
+z[13] = x[1] * y[12] + x[5] * y[13] + x[9] * y[14] + x[13] * y[15]; \
+z[14] = x[2] * y[12] + x[6] * y[13] + x[10] * y[14] + x[14] * y[15]; \
+z[15] = x[3] * y[12] + x[7] * y[13] + x[11] * y[14] + x[15] * y[15];
+
+#define MULTMV(m, v) { \
+float v0 = m[0]*v[0] + m[4]*v[1] + m[8]*v[2] + m[12]*v[3]; \
+float v1 = m[1]*v[0] + m[5]*v[1] + m[9]*v[2] + m[13]*v[3]; \
+float v2 = m[2]*v[0] + m[6]*v[1] + m[10]*v[2] + m[14]*v[3]; \
+float v3 = m[3]*v[0] + m[7]*v[1] + m[11]*v[2] + m[15]*v[3]; \
+v[0] = v0; v[1] = v1; v[2] = v2; v[3] = v3; }
+
+#define DIVV(v) \
+v[0] /= v[3]; \
+v[1] /= v[3]; \
+v[2] /= v[3]; \
+v[3] /= v[3];
+
 static CompMetadata cubeMetadata;
 
 static int cubeDisplayPrivateIndex;
@@ -808,7 +839,6 @@ cubePreparePaintScreen (CompScreen *s,
     UNWRAP (cs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
-
 }
 
 static Bool
@@ -830,6 +860,8 @@ cubePaintOutput (CompScreen		 *s,
     }
 
     cs->srcOutput = (output->id != ~0) ? output->id : 0;
+    /* Always use BTF painting on non-transformed screen */
+    cs->paintOrder = BTF;
 
     UNWRAP (cs, s, paintOutput);
     status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
@@ -851,17 +883,91 @@ cubeDonePaintScreen (CompScreen *s)
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
 }
 
+static Bool
+cubeCheckFTB (CompScreen              *s,
+              const ScreenPaintAttrib *sAttrib,
+              const CompTransform     *transform,
+              CompOutput              *outputPtr)
+{
+    CompTransform sTransform = *transform;
+    float         mvp[16];
+    float         pntA[4], pntB[4], pntC[4];
+    float         vecA[3], vecB[3];
+    float         ortho[3];
+
+    (*s->applyScreenTransform) (s, sAttrib, outputPtr, &sTransform);
+    transformToScreenSpace (s, outputPtr, -sAttrib->zTranslate, &sTransform);
+
+    MULTM (s->projection, sTransform.m, mvp);
+
+    pntA[0] = outputPtr->region.extents.x1;
+    pntA[1] = outputPtr->region.extents.y1,
+    pntA[2] = 0.0f;
+    pntA[3] = 1.0f;
+
+    pntB[0] = outputPtr->region.extents.x2;
+    pntB[1] = outputPtr->region.extents.y1;
+    pntB[2] = 0.0f;
+    pntB[3] = 1.0f;
+
+    pntC[0] = outputPtr->region.extents.x1 + outputPtr->width / 2.0f;
+    pntC[1] = outputPtr->region.extents.y1 + outputPtr->height / 2.0f;
+    pntC[2] = 0.0f;
+    pntC[3] = 1.0f;
+
+    MULTMV (mvp, pntA);
+    DIVV (pntA);
+
+    MULTMV (mvp, pntB);
+    DIVV (pntB);
+
+    MULTMV (mvp, pntC);
+    DIVV (pntC);
+
+    vecA[0] = pntC[0] - pntA[0];
+    vecA[1] = pntC[1] - pntA[1];
+    vecA[2] = pntC[2] - pntA[2];
+
+    vecB[0] = pntC[0] - pntB[0];
+    vecB[1] = pntC[1] - pntB[1];
+    vecB[2] = pntC[2] - pntB[2];
+
+    ortho[0] = vecA[1] * vecB[2] - vecA[2] * vecB[1];
+    ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
+    ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
+
+    if (ortho[2] > 0.0f)
+    {
+	/* The viewport is reversed, should be painted front to back. */
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
 static void
 cubeMoveViewportAndPaint (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
 			  const CompTransform	  *transform,
 			  CompOutput		  *outputPtr,
 			  unsigned int		  mask,
+			  PaintOrder              paintOrder,
 			  int			  dx)
 {
-    int output = (outputPtr->id != ~0) ? outputPtr->id : 0;
+    Bool ftb;
+    int  output;
 
     CUBE_SCREEN (s);
+
+    ftb = cubeCheckFTB (s, sAttrib, transform, outputPtr);
+
+    if ((paintOrder == FTB && !ftb) ||
+        (paintOrder == BTF && ftb))
+	return;
+
+    output = (outputPtr->id != ~0) ? outputPtr->id : 0;
+
+    cs->paintOrder = paintOrder;
 
     if (cs->nOutput > 1)
     {
@@ -899,6 +1005,108 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	(*s->paintTransformedOutput) (s, sAttrib, transform, &s->region,
 				      outputPtr, mask);
 	moveScreenViewport (s, -dx, 0, FALSE);
+    }
+}
+
+static void
+cubePaintAllViewports (CompScreen          *s,
+                       ScreenPaintAttrib   *sAttrib,
+	               const CompTransform *transform,
+                       Region              region,
+                       CompOutput          *outputPtr,
+                       unsigned int        mask,
+                       int                 xMove,
+                       float               size,
+                       int                 hsize,
+                       PaintOrder          paintOrder)
+{
+    CUBE_SCREEN(s);
+
+    ScreenPaintAttrib sa = *sAttrib;
+
+    int i;
+    int xMoveAdd;
+    int origXMoveAdd = 0; /* dx for the viewport we start 
+			     painting with (back-most). */
+    int iFirstSign;       /* 1 if we do xMove += i first and 
+			     -1 if we do xMove -= i first. */
+    
+    if (cs->invert == 1)
+    {
+	/* xMove ==> dx for the viewport which is the
+	   nearest to the viewer in z axis.
+	   xMove +/- hsize / 2 ==> dx for the viewport
+	   which is the farthest to the viewer in z axis. */
+
+	if ((sa.xRotate < 0.0f && hsize % 2 == 1) ||
+	    (sa.xRotate > 0.0f && hsize % 2 == 0))
+	{
+	    origXMoveAdd = hsize / 2;
+	    iFirstSign = 1;
+	}
+	else
+	{
+	    origXMoveAdd = -hsize / 2;
+	    iFirstSign = -1;
+	}
+    }
+    else
+    {
+	/* xMove is already the dx for farthest viewport. */
+	if (sa.xRotate > 0.0f)
+	    iFirstSign = -1;
+	else
+	    iFirstSign = 1;
+    }
+
+    for (i = 0; i <= hsize / 2; i++)
+    {
+	/* move to the correct viewport (back to front). */
+	xMoveAdd = origXMoveAdd;	/* move to farthest viewport. */
+	xMoveAdd += iFirstSign * i;	/* move i more viewports to
+					   the right / left. */
+
+	/* Needed especially for unfold.
+	   We paint the viewports around xMove viewport.
+	   Adding or subtracting hsize from xMove has no effect on
+	   what viewport we paint, but can make shorter paths. */
+	if (xMoveAdd < -hsize / 2)
+	    xMoveAdd += hsize;
+	else if (xMoveAdd > hsize / 2)
+	    xMoveAdd -= hsize;
+
+	/* Paint the viewport. */
+	xMove += xMoveAdd;
+
+	sa.yRotate -= cs->invert * xMoveAdd * 360.0f / size;
+	cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
+	                          paintOrder, xMove);
+	sa.yRotate += cs->invert * xMoveAdd * 360.0f / size;
+
+	xMove -= xMoveAdd;
+
+	/* do the same for an equally far viewport. */
+	if (i == 0 || i * 2 == hsize)
+	    continue;
+
+	xMoveAdd = origXMoveAdd;	/* move to farthest viewport. */
+	xMoveAdd -= iFirstSign * i;	/* move i more viewports to the 
+					   left / right (opposite side
+					   from the one chosen first) */
+
+	if (xMoveAdd < -hsize / 2)
+	    xMoveAdd += hsize;
+	else if (xMoveAdd > hsize / 2)
+	    xMoveAdd -= hsize;
+
+	xMove += xMoveAdd;
+
+	sa.yRotate -= cs->invert * xMoveAdd * 360.0f / size;
+	cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
+	                          paintOrder, xMove);
+	sa.yRotate += cs->invert * xMoveAdd * 360.0f / size;
+
+	xMove -= xMoveAdd;
     }
 }
 
@@ -953,6 +1161,7 @@ cubePaintTopBottom (CompScreen		    *s,
 {
     ScreenPaintAttrib sa = *sAttrib;
     CompTransform     sTransform = *transform;
+    int               i;
 
     CUBE_SCREEN (s);
 
@@ -974,25 +1183,33 @@ cubePaintTopBottom (CompScreen		    *s,
 
     glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
 
-    glNormal3f (0.0f, -1.0f, 0.0f);
-
-    if (cs->invert == 1 && size == 4 && cs->texture.name)
+    for (i = 0; i < 2; i++)
     {
-	enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
-	glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
-	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
-	disableTexture (s, &cs->texture);
-	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	if ((i == 0 && sAttrib->vRotate <= 0.0f) ||
+	    (i == 1 && sAttrib->vRotate > 0.0f))
+	{
+	    glNormal3f (0.0f, -1.0f, 0.0f);
+	    if (cs->invert == 1 && size == 4 && cs->texture.name)
+	    {
+		enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
+		glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
+		glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
+		disableTexture (s, &cs->texture);
+		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	    }
+	    else
+	    {
+		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+		glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
+	    }
+	}
+	else
+	{
+	    glNormal3f (0.0f, 1.0f, 0.0f);
+	    glDrawArrays (GL_TRIANGLE_FAN, cs->nVertices >> 1,
+			  cs->nVertices >> 1);
+	}
     }
-    else
-    {
-	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
-    }
-
-    glNormal3f (0.0f, 1.0f, 0.0f);
-
-    glDrawArrays (GL_TRIANGLE_FAN, cs->nVertices >> 1, cs->nVertices >> 1);
 
     glNormal3f (0.0f, 0.0f, -1.0f);
 
@@ -1014,6 +1231,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     float	      xRotate, vRotate;
     int		      hsize, xMove = 0;
     float	      size;
+    GLenum            filter = s->display->textureFilter;
+    PaintOrder        paintOrder;
     Bool	      clear;
     int output = 0;
 
@@ -1065,9 +1284,6 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     UNWRAP (cs, s, paintTransformedOutput);
 
-    sa.xTranslate = sAttrib->xTranslate;
-    sa.yTranslate = sAttrib->yTranslate;
-
     if (cs->grabIndex)
     {
 	sa.vRotate = 0.0f;
@@ -1081,22 +1297,6 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	/* distance we move the camera back when unfolding the cube.
 	   currently hardcoded to 1.5 but it should probably be optional. */
 	sa.zCamera -= cs->unfold * 1.5f;
-
-	sa.xRotate = xRotate * cs->invert;
-	if (sa.xRotate > 0.0f)
-	{
-	    cs->xRotations = (int) (hsize * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate - (360.0f * cs->xRotations) / hsize;
-	}
-	else
-	{
-	    cs->xRotations = (int) (hsize * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate -
-		(360.0f * cs->xRotations) / hsize + 360.0f / hsize;
-	    cs->xRotations--;
-	}
-
-	sa.xRotate = sa.xRotate / size * hsize;
     }
     else
     {
@@ -1108,20 +1308,38 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	    sa.vRotate = vRotate;
 
 	sa.zTranslate = -cs->invert * cs->distance;
-	sa.xRotate = xRotate * cs->invert;
-	if (sa.xRotate > 0.0f)
-	{
-	    cs->xRotations = (int) (size * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate - (360.0f * cs->xRotations) / size;
-	}
-	else
-	{
-	    cs->xRotations = (int) (size * sa.xRotate) / 360;
-	    sa.xRotate = sa.xRotate -
-		(360.0f * cs->xRotations) / size + 360.0f / size;
-	    cs->xRotations--;
-	}
     }
+
+    if (sa.xRotate > 0.0f)
+	cs->xRotations = (int) (hsize * sa.xRotate + 180.0f) / 360.0f;
+    else
+	cs->xRotations = (int) (hsize * sa.xRotate - 180.0f) / 360.0f;
+
+    sa.xRotate -= (360.0f * cs->xRotations) / hsize;
+    sa.xRotate *= cs->invert;
+
+    sa.xRotate = sa.xRotate / size * hsize;
+
+    xMove = cs->xRotations;
+
+    if (cs->grabIndex && cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
+	s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
+
+    if (cs->invert == 1)
+    {
+	/* Outside cube - start with FTB faces */
+	paintOrder = FTB;
+    }
+    else
+    {
+	/* Inside cube - start with BTF faces */
+	paintOrder = BTF;
+    }
+
+    if (cs->invert == -1)
+	cubePaintAllViewports (s, &sa,transform, region,
+			       outputPtr, mask, xMove,
+			       size, hsize, paintOrder);
 
     if (cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
@@ -1129,110 +1347,23 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	(*cs->paintTopBottom) (s, &sa, transform, outputPtr, hsize);
     }
 
-    /* outside cube */
     if (cs->invert == 1)
     {
-	if (cs->grabIndex || hsize > 4)
-	{
-	    GLenum filter;
-	    int    i;
-
-	    xMove = cs->xRotations - ((hsize >> 1) - 1);
-	    sa.yRotate += (360.0f / size) * ((hsize >> 1) - 1);
-
-	    filter = s->display->textureFilter;
-	    if (cs->grabIndex && cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
-		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
-
-	    for (i = 0; i < hsize; i++)
-	    {
-		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-					  xMove);
-
-		sa.yRotate -= 360.0f / size;
-		xMove++;
-	    }
-
-	    s->display->textureFilter = filter;
-	}
-	else
-	{
-	    if (xRotate != 0.0f)
-	    {
-		xMove = cs->xRotations;
-
-		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-					  xMove);
-
-		xMove++;
-	    }
-
-	    sa.yRotate -= 360.0f / size;
-
-	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-				      xMove);
-	}
+	/* Outside cube - continue with BTF faces */
+	paintOrder = BTF;
     }
     else
     {
-	if (sa.xRotate > 180.0f / size)
-	{
-	    sa.yRotate -= 360.0f / size;
-	    cs->xRotations++;
-	}
-
-	sa.yRotate -= 360.0f / size;
-	xMove = -1 - cs->xRotations;
-
-	if (cs->grabIndex)
-	{
-	    GLenum filter;
-	    int    i;
-
-	    filter = s->display->textureFilter;
-	    if (cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
-		s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
-
-	    if (sa.xRotate > 180.0f / size)
-	    {
-		xMove -= ((hsize >> 1) - 2);
-		sa.yRotate -= (360.0f / size) * ((hsize >> 1) - 2);
-	    }
-	    else
-	    {
-		xMove -= ((hsize >> 1) - 1);
-		sa.yRotate -= (360.0f / size) * ((hsize >> 1) - 1);
-	    }
-
-	    for (i = 0; i < hsize; i++)
-	    {
-		cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-					  xMove);
-
-		sa.yRotate += 360.0f / size;
-		xMove++;
-	    }
-
-	    s->display->textureFilter = filter;
-	}
-	else
-	{
-	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-				      xMove);
-
-	    sa.yRotate += 360.0f / size;
-	    xMove = -cs->xRotations;
-
-	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-				      xMove);
-
-	    sa.yRotate += 360.0f / size;
-	    xMove = 1 - cs->xRotations;
-
-	    cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-				      xMove);
-	}
+	/* Inside cube - continue with FTB faces */
+	paintOrder = FTB;
     }
+
+    if (cs->invert == 1)
+	cubePaintAllViewports (s, &sa, transform, region,
+			       outputPtr, mask, xMove,
+			       size, hsize, paintOrder);
+ 
+    s->display->textureFilter = filter;
 
     WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
 }
@@ -1334,6 +1465,28 @@ cubePaintBackground (CompScreen   *s,
 	UNWRAP (cs, s, paintBackground);
 	(*s->paintBackground) (s, region, mask);
 	WRAP (cs, s, paintBackground, cubePaintBackground);
+    }
+}
+
+static void
+cubeInitWindowWalker (CompScreen *s, CompWalker* walker)
+{
+    CUBE_SCREEN (s);
+
+    UNWRAP (cs, s, initWindowWalker);
+    (*s->initWindowWalker) (s, walker);
+    WRAP (cs, s, initWindowWalker, cubeInitWindowWalker);
+
+    if (cs->paintOrder == FTB)
+    {
+	WalkInitProc tmpInit = walker->first;
+	WalkStepProc tmpStep = walker->next;
+
+	walker->first = walker->last;
+	walker->last = tmpInit;
+
+	walker->next = walker->prev;
+	walker->prev = tmpStep;
     }
 }
 
@@ -1736,6 +1889,7 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
     WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
+    WRAP (cs, s, initWindowWalker, cubeInitWindowWalker);
 
     return TRUE;
 }
@@ -1757,6 +1911,7 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, applyScreenTransform);
     UNWRAP (cs, s, setScreenOption);
     UNWRAP (cs, s, outputChangeNotify);
+    UNWRAP (cs, s, initWindowWalker);
 
     finiTexture (s, &cs->texture);
     finiTexture (s, &cs->sky);

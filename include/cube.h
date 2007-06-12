@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define CUBE_ABIVERSION 20070611
+#define CUBE_ABIVERSION 20070612
 
 #define CUBE_DISPLAY_OPTION_ABI    0
 #define CUBE_DISPLAY_OPTION_INDEX  1
@@ -71,6 +71,12 @@ typedef void (*CubePaintTopBottomProc) (CompScreen		*s,
 					CompOutput		*output,
 					int			size);
 
+typedef enum _PaintOrder
+{
+    BTF = 0,
+    FTB
+} PaintOrder;
+
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
@@ -80,6 +86,7 @@ typedef struct _CubeScreen {
     ApplyScreenTransformProc   applyScreenTransform;
     SetScreenOptionProc	       setScreenOption;
     OutputChangeNotifyProc     outputChangeNotify;
+    InitWindowWalkerProc       initWindowWalker;
 
     CubeGetRotationProc	      getRotation;
     CubeClearTargetOutputProc clearTargetOutput;
@@ -87,8 +94,10 @@ typedef struct _CubeScreen {
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
-    int      invert;
-    int      xRotations;
+    int       invert;
+    int       xRotations;
+    PaintOrder paintOrder;
+
     GLfloat  distance;
     GLushort color[3];
     GLfloat  tc[12];
