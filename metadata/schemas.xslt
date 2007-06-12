@@ -31,7 +31,7 @@
   <xsl:template  match="/compiz">
     <gconfschemafile>
       <schemalist>
-        <xsl:for-each select="/compiz//option">
+        <xsl:for-each select="/compiz//option[not(@read_only='true')]">
           <xsl:call-template name="dumpOption"/>
         </xsl:for-each>
       </schemalist>
@@ -269,17 +269,14 @@
     <xsl:variable name="info">
       <xsl:text> (</xsl:text>
       <xsl:choose>
-        <xsl:when test="contains('int,float',@type)">
+        <xsl:when test="contains('int,float',@type) and not(desc/value/text())">
           <xsl:value-of select="min/text()"/> - <xsl:value-of select="max/text()"/>
+        </xsl:when>
+	<xsl:when test="@type='int' and desc/value/text()">
+          <xsl:call-template name="printIntDescList"/>
         </xsl:when>
         <xsl:when test="@type = 'match'">
           <xsl:text>match</xsl:text>
-        </xsl:when>
-        <xsl:when test="@type = 'string' and allowed/value">
-          <xsl:call-template name="printAllowedList"/>
-        </xsl:when>
-        <xsl:when test="@type = 'list' and type/text() = 'string' and allowed/value">
-          <xsl:call-template name="printAllowedList"/>
         </xsl:when>
       </xsl:choose>
       <xsl:text>)</xsl:text>
@@ -288,12 +285,14 @@
       <xsl:value-of select="$info"/>
     </xsl:if>
   </xsl:template>
-
-  <!-- generates a list of allowed string values -->
-  <xsl:template name="printAllowedList">
+  
+  <!-- generates a list of int descriptions -->
+  <xsl:template name="printIntDescList">
     <xsl:variable name="list">
-      <xsl:for-each select="allowed/value">
-          <xsl:value-of select="text()"/>
+      <xsl:for-each select="desc">
+          <xsl:value-of select="value/text()"/>
+	  <xsl:text> = </xsl:text>
+	  <xsl:value-of select="name/text()"/>
           <xsl:text>, </xsl:text>
       </xsl:for-each>
     </xsl:variable>

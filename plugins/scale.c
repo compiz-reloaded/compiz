@@ -1477,6 +1477,27 @@ scaleWindowRemove (CompDisplay *d,
 			damageScreen (w->screen);
 			break;
 		    }
+		    else
+		    {
+			CompOption o;
+			CompAction *action;
+			int        opt;
+
+			SCALE_DISPLAY (d);
+
+			/* terminate scale mode if the recently closed
+			 * window was the last scaled window */
+
+			opt = SCALE_DISPLAY_OPTION_INITIATE;
+			action = &sd->opt[opt].value.action;
+
+			o.type    = CompOptionTypeInt;
+			o.name    = "root";
+			o.value.i = w->screen->root;
+			
+			scaleTerminate (d, action, 0, &o, 1);
+			break;
+		    }
 		}
 	    }
 	}
