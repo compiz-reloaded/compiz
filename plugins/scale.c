@@ -144,6 +144,23 @@ isScaleWin (CompWindow *w)
 }
 
 static void
+scaleActivateEvent (CompScreen *s,
+		    Bool       activating)
+{
+    CompOption o[2];
+
+    o[0].type = CompOptionTypeInt;
+    o[0].name = "root";
+    o[0].value.i = s->root;
+
+    o[1].type = CompOptionTypeBool;
+    o[1].name = "active";
+    o[1].value.b = activating;
+
+    (*s->display->handleCompizEvent) (s->display, "scale", "activate", o, 2);
+}
+
+static void
 scalePaintDecoration (CompWindow	      *w,
 		      const WindowPaintAttrib *attrib,
 		      const CompTransform     *transform,
@@ -1008,6 +1025,8 @@ scaleTerminate (CompDisplay     *d,
 		ss->grabIndex = 0;
 	    }
 
+	    scaleActivateEvent (s, FALSE);
+
 	    if (ss->dndTarget)
 		XUnmapWindow (d->display, ss->dndTarget);
 
@@ -1144,6 +1163,8 @@ scaleInitiateCommon (CompScreen      *s,
 	sd->selectedWindow   = s->display->activeWindow;
 
 	ss->state = SCALE_STATE_OUT;
+
+	scaleActivateEvent (s, TRUE);
 
 	damageScreen (s);
     }
@@ -1454,6 +1475,27 @@ scaleWindowRemove (CompDisplay *d,
 		    {
 			ss->state = SCALE_STATE_OUT;
 			damageScreen (w->screen);
+			break;
+		    }
+		    else
+		    {
+			CompOption o;
+			CompAction *action;
+			int        opt;
+
+			SCALE_DISPLAY (d);
+
+			/* terminate scale mode if the recently closed
+			 * window was the last scaled window */
+
+			opt = SCALE_DISPLAY_OPTION_INITIATE;
+			action = &sd->opt[opt].value.action;
+
+			o.type    = CompOptionTypeInt;
+			o.name    = "root";
+			o.value.i = w->screen->root;
+			
+			scaleTerminate (d, action, 0, &o, 1);
 			break;
 		    }
 		}

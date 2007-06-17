@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define CUBE_ABIVERSION 20070523
+#define CUBE_ABIVERSION 20070611
 
 #define CUBE_DISPLAY_OPTION_ABI    0
 #define CUBE_DISPLAY_OPTION_INDEX  1
@@ -88,7 +88,7 @@ typedef struct _CubeScreen {
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
     int      invert;
-    int      xrotations;
+    int      xRotations;
     GLfloat  distance;
     GLushort color[3];
     GLfloat  tc[12];
@@ -101,12 +101,13 @@ typedef struct _CubeScreen {
     GLfloat unfold, unfoldVelocity;
 
     GLfloat  *vertices;
-    int      nvertices;
+    int      nVertices;
 
     GLuint skyListId;
 
-    int		pw, ph;
-    CompTexture texture, sky;
+    int		 pw, ph;
+    unsigned int skyW, skyH;
+    CompTexture  texture, sky;
 
     int	imgCurFile;
 
