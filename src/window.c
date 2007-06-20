@@ -2888,7 +2888,7 @@ stackLayerCheck (CompWindow *w,
 		 Window	    clientLeader,
 		 CompWindow *below)
 {
-    if (w->transientFor == below->id)
+    if (isAncestorTo (w, below))
 	return TRUE;
 
     if (isAncestorTo (below, w))
@@ -2964,10 +2964,6 @@ findSiblingBelow (CompWindow *w,
 	if (below->type & CompWindowTypeDesktopMask)
 	    return below;
 
-	/* always above ancestor */
-	if (isAncestorTo (w, below))
-	    return below;
-
 	switch (type) {
 	case CompWindowTypeDesktopMask:
 	    /* desktop window layer */
@@ -3026,10 +3022,6 @@ findLowestSiblingBelow (CompWindow *w)
 	if (below->type & CompWindowTypeDesktopMask)
 	    return below;
 
-	/* always above ancestor */
-	if (isAncestorTo (w, below))
-	    return below;
-
 	switch (type) {
 	case CompWindowTypeDesktopMask:
 	    /* desktop window layer */
@@ -3085,10 +3077,6 @@ validSiblingBelow (CompWindow *w,
     /* always above desktop windows */
     if (sibling->type & CompWindowTypeDesktopMask)
 	return TRUE;
-
-    /* always above ancestor */
-    if (isAncestorTo (w, sibling))
-	return FALSE;
 
     switch (type) {
     case CompWindowTypeDesktopMask:
@@ -3246,6 +3234,10 @@ stackTransients (CompWindow	*w,
 
 	if (t->transientFor == w->id || isGroupTransient (t, clientLeader))
 	{
+	    if (w->type & CompWindowTypeDockMask)
+		if (!(t->type & CompWindowTypeDockMask))
+		    return FALSE;
+
 	    if (!stackTransients (t, avoid, xwc))
 		return FALSE;
 
@@ -3277,6 +3269,10 @@ stackAncestors (CompWindow     *w,
 	    if (ancestor->type & CompWindowTypeDesktopMask)
 		return;
 
+	    if (ancestor->type & CompWindowTypeDockMask)
+		if (!(w->type & CompWindowTypeDockMask))
+		    return;
+
 	    if (ancestor->mapNum || ancestor->pendingMaps)
 		configureXWindow (ancestor,
 				  CWSibling | CWStackMode,
@@ -3303,6 +3299,10 @@ stackAncestors (CompWindow     *w,
 
 		if (a->type & CompWindowTypeDesktopMask)
 		    continue;
+
+		if (a->type & CompWindowTypeDockMask)
+		    if (!(w->type & CompWindowTypeDockMask))
+			break;
 
 		if (a->mapNum || a->pendingMaps)
 		    configureXWindow (a,
