@@ -65,8 +65,11 @@ libini_la_LDFLAGS = -module -avoid-version -no-undefined
 libini_la_SOURCES = ini.c
 
 if USE_LIBRSVG
+libsvg_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
-libsvg_la_LIBADD = @LIBRSVG_LIBS@
+libsvg_la_LIBADD =				       \
+	$(top_builddir)/libdecoration/libdecoration.la \
+	@LIBRSVG_LIBS@
 libsvg_la_SOURCES = svg.c
 libsvg_module = libsvg.la
 endif
