@@ -1905,6 +1905,9 @@ dbusHandleMessage (DBusConnection *connection,
 		return DBUS_HANDLER_RESULT_HANDLED;
 	    }
 	}
+
+	dbus_free_string_array (path);
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
     }
     /* plugin message */
     else if (!path[4])
@@ -1919,6 +1922,9 @@ dbusHandleMessage (DBusConnection *connection,
 		return DBUS_HANDLER_RESULT_HANDLED;
 	    }
 	}
+
+	dbus_free_string_array (path);
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
     }
     /* screen message */
     else if (!path[5])
@@ -1942,6 +1948,9 @@ dbusHandleMessage (DBusConnection *connection,
 		return DBUS_HANDLER_RESULT_HANDLED;
 	    }
 	}
+
+	dbus_free_string_array (path);
+	return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
     }
     /* option message */
     if (dbus_message_is_method_call (message, DBUS_INTERFACE_INTROSPECTABLE,
