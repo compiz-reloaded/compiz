@@ -347,7 +347,8 @@ zoomPaintOutput (CompScreen		 *s,
 
 	saveFilter = s->filter[SCREEN_TRANS_FILTER];
 
-	if ((zs->zoomOutput != output->id || !zs->adjust) && scale > 3.9f)
+	if ((zs->zoomOutput != output->id || !zs->adjust) && scale > 3.9f &&
+	    !zs->opt[ZOOM_SCREEN_OPTION_FILTER_LINEAR].value.b)
 	    s->filter[SCREEN_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
 
 	UNWRAP (zs, s, paintOutput);
