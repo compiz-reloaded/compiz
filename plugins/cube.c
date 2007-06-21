@@ -996,7 +996,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
     CUBE_SCREEN (s);
 
-    ftb = cubeCheckFTB (s, sAttrib, transform, outputPtr);
+    ftb = cs->checkFTB (s, sAttrib, transform, outputPtr);
 
     if ((paintOrder == FTB && !ftb) ||
         (paintOrder == BTF && ftb))
@@ -1983,6 +1983,7 @@ cubeInitScreen (CompPlugin *p,
     cs->getRotation	  = cubeGetRotation;
     cs->clearTargetOutput = cubeClearTargetOutput;
     cs->paintTopBottom    = cubePaintTopBottom;
+    cs->checkFTB          = cubeCheckFTB;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 

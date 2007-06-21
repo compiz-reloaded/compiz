@@ -75,6 +75,11 @@ typedef void (*CubePaintTopBottomProc) (CompScreen		*s,
 					CompOutput		*output,
 					int			size);
 
+typedef Bool (*CubeCheckFTBProc) (CompScreen              *s,
+				  const ScreenPaintAttrib *sAttrib,
+				  const CompTransform     *transform,
+				  CompOutput              *output);
+
 typedef enum _PaintOrder
 {
     BTF = 0,
@@ -103,6 +108,7 @@ typedef struct _CubeScreen {
     CubeGetRotationProc	      getRotation;
     CubeClearTargetOutputProc clearTargetOutput;
     CubePaintTopBottomProc    paintTopBottom;
+    CubeCheckFTBProc          checkFTB;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
