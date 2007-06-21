@@ -2698,7 +2698,10 @@ blurInitWindow (CompPlugin *p,
 
     bw->clip = XCreateRegion ();
     if (!bw->clip)
+    {
+	free (bw);
 	return FALSE;
+    }
 
     w->privates[bs->windowPrivateIndex].ptr = bw;
 
