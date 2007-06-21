@@ -4494,7 +4494,11 @@ action_menu_map (WnckWindow *win,
 	return;
     case WNCK_WINDOW_NORMAL:
     case WNCK_WINDOW_DIALOG:
+
+#ifndef HAVE_LIBWNCK_2_19_4
     case WNCK_WINDOW_MODAL_DIALOG:
+#endif
+
     case WNCK_WINDOW_TOOLBAR:
     case WNCK_WINDOW_MENU:
     case WNCK_WINDOW_UTILITY:
