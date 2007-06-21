@@ -1063,11 +1063,11 @@ cubePaintAllViewports (CompScreen          *s,
 
     int i;
     int xMoveAdd;
-    int origXMoveAdd = 0; /* dx for the viewport we start 
+    int origXMoveAdd = 0; /* dx for the viewport we start
 			     painting with (back-most). */
-    int iFirstSign;       /* 1 if we do xMove += i first and 
+    int iFirstSign;       /* 1 if we do xMove += i first and
 			     -1 if we do xMove -= i first. */
-    
+
     if (cs->invert == 1)
     {
 	/* xMove ==> dx for the viewport which is the
@@ -1127,7 +1127,7 @@ cubePaintAllViewports (CompScreen          *s,
 	    continue;
 
 	xMoveAdd = origXMoveAdd;	/* move to farthest viewport. */
-	xMoveAdd -= iFirstSign * i;	/* move i more viewports to the 
+	xMoveAdd -= iFirstSign * i;	/* move i more viewports to the
 					   left / right (opposite side
 					   from the one chosen first) */
 
@@ -1419,7 +1419,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	cubePaintAllViewports (s, &sa, transform, region,
 			       outputPtr, mask, xMove,
 			       size, hsize, paintOrder);
- 
+
     s->display->textureFilter = filter;
 
     if (wasCulled)
@@ -1432,7 +1432,7 @@ static void
 cubeSetBackgroundOpacity (CompScreen* s)
 {
     CUBE_SCREEN (s);
-    
+
     if (cs->desktopOpacity != OPAQUE)
     {
 	if (s->desktopWindowCount)
