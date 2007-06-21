@@ -1864,6 +1864,8 @@ cubeInitScreen (CompPlugin *p,
     cs->outputXOffset = 0.0f;
     cs->outputYOffset = 0.0f;
 
+    cs->rotationState = RotationNone;
+
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
     cubeUpdateOutputs (s);

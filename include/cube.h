@@ -77,6 +77,13 @@ typedef enum _PaintOrder
     FTB
 } PaintOrder;
 
+typedef enum _RotationState
+{
+    RotationNone = 0,
+    RotationChange,
+    RotationManual
+} RotationState;
+
 typedef struct _CubeScreen {
     PreparePaintScreenProc     preparePaintScreen;
     DonePaintScreenProc	       donePaintScreen;
@@ -97,6 +104,8 @@ typedef struct _CubeScreen {
     int       invert;
     int       xRotations;
     PaintOrder paintOrder;
+
+    RotationState rotationState;
 
     GLfloat  distance;
     GLushort color[3];

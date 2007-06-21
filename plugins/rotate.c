@@ -346,6 +346,9 @@ rotatePreparePaintScreen (CompScreen *s,
 		    else
 			tx = (s->hsize * xrot / 360.0f) + 0.5f;
 
+		    /* flag end of rotation */
+		    cs->rotationState = RotationNone;
+
 		    moveScreenViewport (s, tx, 0, TRUE);
 
 		    rs->xrot = 0.0f;
@@ -559,6 +562,7 @@ rotateInitiate (CompDisplay     *d,
     if (s)
     {
 	ROTATE_SCREEN (s);
+	CUBE_SCREEN (s);
 
 	if (s->hsize < 2)
 	    return FALSE;
@@ -576,6 +580,14 @@ rotateInitiate (CompDisplay     *d,
 
 	rs->moving = FALSE;
 	rs->slow   = FALSE;
+
+	/* Set the rotation state for cube - if action is non-NULL,
+	   we set it to manual (as we were called from the 'Initiate
+	   Rotation' binding. Otherwise, we set to to Change. */
+	if (action)
+	    cs->rotationState = RotationManual;
+	else
+	    cs->rotationState = RotationChange;
 
 	if (!rs->grabIndex)
 	{
