@@ -56,7 +56,7 @@
 #include <libwnck/libwnck.h>
 #include <libwnck/window-action-menu.h>
 
-#if defined (HAVE_LIBWNCK_2_19_4)
+#ifdef HAVE_LIBWNCK_2_19_4
 #define wnck_window_get_geometry wnck_window_get_client_window_geometry
 #endif
 
@@ -3110,7 +3110,7 @@ update_event_windows (WnckWindow *win)
     gdk_error_trap_pop ();
 }
 
-#if HAVE_WNCK_WINDOW_HAS_NAME
+#ifdef HAVE_WNCK_WINDOW_HAS_NAME
 static const char *
 wnck_window_get_real_name (WnckWindow *win)
 {
