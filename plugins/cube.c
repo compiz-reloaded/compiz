@@ -841,7 +841,7 @@ cubePreparePaintScreen (CompScreen *s,
     /* Transparency handling */
     if (cs->rotationState == RotationManual ||
 	(cs->rotationState == RotationChange &&
-	 cs->opt[CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY].value.b))
+	 !cs->opt[CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY].value.b))
     {
 	opt = CUBE_SCREEN_OPTION_ACTIVE_OPACITY;
     }
