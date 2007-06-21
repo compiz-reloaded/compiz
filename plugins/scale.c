@@ -1332,8 +1332,6 @@ scaleSelectWindow (CompWindow *w)
 {
     SCALE_DISPLAY (w->screen->display);
 
-    sd->hoveredWindow = w->id;
-
     if (sd->selectedWindow != w->id)
     {
 	CompWindow *old, *new;
@@ -1373,6 +1371,8 @@ scaleSelectWindowAt (CompScreen *s,
 
 	    moveInputFocusToWindow (w);
 	}
+
+	sd->hoveredWindow = w->id;
 
 	return TRUE;
     }

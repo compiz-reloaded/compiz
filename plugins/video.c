@@ -1158,6 +1158,8 @@ videoFiniScreen (CompPlugin *p,
     VIDEO_DISPLAY (s->display);
     VIDEO_SCREEN (s);
 
+    freeWindowPrivateIndex (s, vs->windowPrivateIndex);
+
     XDeleteProperty (s->display->display, s->root, vd->videoSupportedAtom);
 
     videoDestroyFragmentFunctions (s, &vs->yv12Functions);

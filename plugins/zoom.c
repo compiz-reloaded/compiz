@@ -155,6 +155,58 @@ adjustZoomVelocity (ZoomScreen *zs)
 }
 
 static void
+zoomInEvent (CompScreen *s)
+{
+    CompOption o[6];
+
+    ZOOM_SCREEN (s);
+
+    o[0].type    = CompOptionTypeInt;
+    o[0].name    = "root";
+    o[0].value.i = s->root;
+
+    o[1].type    = CompOptionTypeInt;
+    o[1].name    = "output";
+    o[1].value.i = zs->zoomOutput;
+
+    o[2].type    = CompOptionTypeInt;
+    o[2].name    = "x1";
+    o[2].value.i = zs->current[zs->zoomOutput].x1;
+
+    o[3].type    = CompOptionTypeInt;
+    o[3].name    = "y1";
+    o[3].value.i = zs->current[zs->zoomOutput].y1;
+
+    o[4].type    = CompOptionTypeInt;
+    o[4].name    = "x2";
+    o[4].value.i = zs->current[zs->zoomOutput].x2;
+
+    o[5].type    = CompOptionTypeInt;
+    o[5].name    = "y2";
+    o[5].value.i = zs->current[zs->zoomOutput].y2;
+
+    (*s->display->handleCompizEvent) (s->display, "zoom", "in", o, 6);
+}
+
+static void
+zoomOutEvent (CompScreen *s)
+{
+    CompOption o[2];
+
+    ZOOM_SCREEN (s);
+
+    o[0].type    = CompOptionTypeInt;
+    o[0].name    = "root";
+    o[0].value.i = s->root;
+
+    o[1].type    = CompOptionTypeInt;
+    o[1].name    = "output";
+    o[1].value.i = zs->zoomOutput;
+
+    (*s->display->handleCompizEvent) (s->display, "zoom", "out", o, 2);
+}
+
+static void
 zoomPreparePaintScreen (CompScreen *s,
 			int	   msSinceLastPaint)
 {
@@ -187,7 +239,14 @@ zoomPreparePaintScreen (CompScreen *s,
 		    zs->current[zs->zoomOutput].y2 == pBox->y2)
 		{
 		    zs->zoomed &= ~(1 << zs->zoomOutput);
+		    zoomOutEvent (s);
 		}
+		else
+		{
+		    zoomInEvent (s);
+		}
+
+		break;
 	    }
 	    else
 	    {
@@ -741,6 +800,8 @@ zoomTerminatePan (CompDisplay     *d,
 	{
 	    removeScreenGrab (s, zs->panGrabIndex, NULL);
 	    zs->panGrabIndex = 0;
+
+	    zoomInEvent (s);
 	}
 
 	return TRUE;
