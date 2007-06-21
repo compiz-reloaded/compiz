@@ -197,10 +197,11 @@ iniGetFileDataFromFilename (CompDisplay *d,
     if (!newFd)
 	return NULL;
 
-    /* fd now contains 'prev' or NULL */
-    if (fd)
+    /* fd is NULL here, see condition "fd" in first for-loop */
+    /* if (fd)
 	fd->next = newFd;
     else
+    */
 	id->fileData = newFd;
 
     newFd->prev = fd;
@@ -209,10 +210,14 @@ iniGetFileDataFromFilename (CompDisplay *d,
     newFd->filename = strdup (filename);
 
     pluginStr = calloc (1, sizeof (char) * pluginSep + 2);
-    screenStr = calloc (1, sizeof (char) * (screenSep - pluginSep));
-
-    if (!pluginStr || !screenStr)
+    if (!pluginStr)
 	return NULL;
+
+    screenStr = calloc (1, sizeof (char) * (screenSep - pluginSep));
+    if (!screenStr) {
+	free(pluginStr);
+	return NULL;
+    }
 
     strncpy (pluginStr, filename, pluginSep + 1);
     strncpy (screenStr, &filename[pluginSep+2], (screenSep - pluginSep) - 1);
@@ -258,7 +263,11 @@ iniOptionValueToString (CompOptionValue *value, CompOptionType type)
 	snprintf (tmp, 10, "%s", colorToString (value->c));
 	break;
     case CompOptionTypeMatch:
-	snprintf (tmp, MAX_OPTION_LENGTH, "%s", matchToString (&value->match));
+        {
+	    char *s = matchToString (&value->match);
+	    snprintf (tmp, MAX_OPTION_LENGTH, "%s", s);
+	    free(s);
+	}
 	break;
     default:
 	break;
@@ -314,6 +323,7 @@ iniGetFilename (CompDisplay *d,
 	    compLogMessage (d, "ini", CompLogLevelWarn,
 			    "Invalid screen number passed " \
 			     "to iniGetFilename %d", screen);
+	    free(screenStr);
 	    return FALSE;
 	}
 	snprintf (screenStr, 12, "screen%d", screen);
@@ -999,8 +1009,11 @@ iniSaveOptions (CompDisplay *d,
 		char *itemVal;
 
 		strVal = malloc (sizeof(char) * stringLen);
-		if (!strVal)
+		if (!strVal) {
+		    fclose(optionFile);
+		    free(fullPath);
 		    return FALSE;
+		}
 		strcpy (strVal, "");
 		firstInList = TRUE;
 
