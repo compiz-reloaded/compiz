@@ -2150,16 +2150,16 @@ blurDrawWindowTexture (CompWindow	    *w,
 		glEnable (GL_STENCIL_TEST);
 
 		glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
-		glStencilFunc (GL_EQUAL, 0, ~0);
-
-		/* draw region without destination blur */
-		UNWRAP (bs, s, drawWindowTexture);
-		(*s->drawWindowTexture) (w, texture, &fa, mask);
-
 		glStencilFunc (GL_EQUAL, 0x1, ~0);
 
 		/* draw region with destination blur */
+		UNWRAP (bs, s, drawWindowTexture);
 		(*s->drawWindowTexture) (w, texture, &dstFa, mask);
+
+		glStencilFunc (GL_EQUAL, 0, ~0);
+
+		/* draw region without destination blur */
+		(*s->drawWindowTexture) (w, texture, &fa, mask);
 		WRAP (bs, s, drawWindowTexture, blurDrawWindowTexture);
 
 		glDisable (GL_STENCIL_TEST);
