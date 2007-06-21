@@ -982,6 +982,72 @@ cubeCheckFTB (CompScreen              *s,
     return FALSE;
 }
 
+static Bool
+cubeCapDirection (CompScreen              *s,
+        	  const ScreenPaintAttrib *sAttrib,
+        	  const CompTransform     *transform,
+        	  CompOutput              *outputPtr,
+		  float                   y)
+{
+    CompTransform sTransform = *transform;
+    float         mvp[16];
+    float         pntA[4], pntB[4], pntC[4];
+    float         vecA[3], vecB[3];
+    float         ortho[3];
+
+    CUBE_SCREEN (s);
+    
+    (*s->applyScreenTransform) (s, sAttrib, outputPtr, &sTransform);
+    matrixTranslate (&sTransform, cs->outputXOffset, -cs->outputYOffset, 0.0f);
+    matrixScale (&sTransform, cs->outputXScale, cs->outputYScale, 1.0f);
+
+    MULTM (s->projection, sTransform.m, mvp);
+
+    pntA[0] = -0.5f;
+    pntA[1] = y,
+    pntA[2] = 0.0f;
+    pntA[3] = 1.0f;
+
+    pntB[0] = 0.0f;
+    pntB[1] = y;
+    pntB[2] = 0.5f;
+    pntB[3] = 1.0f;
+
+    pntC[0] = 0.0f;
+    pntC[1] = y;
+    pntC[2] = 0.0f;
+    pntC[3] = 1.0f;
+
+    MULTMV (mvp, pntA);
+    DIVV (pntA);
+
+    MULTMV (mvp, pntB);
+    DIVV (pntB);
+
+    MULTMV (mvp, pntC);
+    DIVV (pntC);
+
+    vecA[0] = pntC[0] - pntA[0];
+    vecA[1] = pntC[1] - pntA[1];
+    vecA[2] = pntC[2] - pntA[2];
+
+    vecB[0] = pntC[0] - pntB[0];
+    vecB[1] = pntC[1] - pntB[1];
+    vecB[2] = pntC[2] - pntB[2];
+
+    ortho[0] = vecA[1] * vecB[2] - vecA[2] * vecB[1];
+    ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
+    ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
+
+    if (ortho[2] > 0.0f)
+    {
+	/* We see the top face of the cap */
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
 static void
 cubeMoveViewportAndPaint (CompScreen		  *s,
 			  const ScreenPaintAttrib *sAttrib,
@@ -1190,15 +1256,14 @@ cubeClearTargetOutput (CompScreen *s,
 }
 
 static void
-cubePaintTopBottom (CompScreen		    *s,
-		    const ScreenPaintAttrib *sAttrib,
-		    const CompTransform	    *transform,
-		    CompOutput		    *output,
-		    int			    size)
+cubePaintTop (CompScreen	      *s,
+	      const ScreenPaintAttrib *sAttrib,
+	      const CompTransform     *transform,
+	      CompOutput	      *output,
+	      int		      size)
 {
     ScreenPaintAttrib sa = *sAttrib;
     CompTransform     sTransform = *transform;
-    int               i;
 
     CUBE_SCREEN (s);
 
@@ -1227,35 +1292,69 @@ cubePaintTopBottom (CompScreen		    *s,
 
     glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
 
-    for (i = 0; i < 2; i++)
+    if (cs->invert == 1 && size == 4 && cs->texture.name)
     {
-	if ((i == 0 && sAttrib->vRotate <= 0.0f) ||
-	    (i == 1 && sAttrib->vRotate > 0.0f))
-	{
-	    glNormal3f (0.0f, -1.0f, 0.0f);
-	    if (cs->invert == 1 && size == 4 && cs->texture.name)
-	    {
-		enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
-		glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
-		glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
-		disableTexture (s, &cs->texture);
-		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-	    }
-	    else
-	    {
-		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
-		glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
-	    }
-	}
-	else
-	{
-	    glNormal3f (0.0f, 1.0f, 0.0f);
-	    glDrawArrays (GL_TRIANGLE_FAN, cs->nVertices >> 1,
-			  cs->nVertices >> 1);
-	}
+	enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
+	glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
+	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
+	disableTexture (s, &cs->texture);
+	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+    }
+    else
+    {
+	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
     }
 
-    glNormal3f (0.0f, 0.0f, -1.0f);
+    glPopMatrix ();
+
+    glColor4usv (defaultColor);
+    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+
+    screenTexEnvMode (s, GL_REPLACE);
+    glDisable (GL_BLEND);
+    glBlendFunc (GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+static void
+cubePaintBottom (CompScreen		 *s,
+		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
+		 CompOutput		 *output,
+		 int			 size)
+{
+    ScreenPaintAttrib sa = *sAttrib;
+    CompTransform     sTransform = *transform;
+
+    CUBE_SCREEN (s);
+
+    screenLighting (s, TRUE);
+
+    glColor4us (cs->color[0], cs->color[1], cs->color[2], cs->desktopOpacity);
+
+    glPushMatrix ();
+
+    sa.yRotate += (360.0f / size) * (cs->xRotations + 1);
+    if (!cs->opt[CUBE_SCREEN_OPTION_ADJUST_IMAGE].value.b)
+	sa.yRotate -= (360.0f / size) * s->x;
+
+    (*s->applyScreenTransform) (s, &sa, output, &sTransform);
+
+    glLoadMatrixf (sTransform.m);
+    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
+    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
+
+    if (cs->desktopOpacity != OPAQUE)
+    {
+	screenTexEnvMode (s, GL_MODULATE);
+	glEnable (GL_BLEND);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
+
+    glVertexPointer (3, GL_FLOAT, 0, cs->vertices);
+
+    glDrawArrays (GL_TRIANGLE_FAN, cs->nVertices >> 1,
+		  cs->nVertices >> 1);
 
     glPopMatrix ();
 
@@ -1283,6 +1382,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     PaintOrder        paintOrder;
     Bool	      clear;
     Bool              wasCulled = FALSE;
+    Bool              topDir, bottomDir;
     int output = 0;
 
     CUBE_SCREEN (s);
@@ -1401,7 +1501,31 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
 	 sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	(*cs->paintTopBottom) (s, &sa, transform, outputPtr, hsize);
+	topDir    = cs->capDirection(s, &sa, transform, outputPtr, 0.5f);
+	bottomDir = cs->capDirection(s, &sa, transform, outputPtr, -0.5f);
+
+	if (topDir && bottomDir)
+	{
+	    glNormal3f (0.0f, -1.0f, 0.0f);
+	    if (cs->desktopOpacity != OPAQUE)
+	    	(*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
+	    (*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
+	}
+	else if (!topDir && !bottomDir)
+	{
+	    glNormal3f (0.0f, 1.0f, 0.0f);
+	    if (cs->desktopOpacity != OPAQUE)
+	    	(*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
+	    (*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
+	}
+	else if (cs->desktopOpacity != OPAQUE)
+	{
+	    glNormal3f (0.0f, 1.0f, 0.0f);
+	    (*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
+	    glNormal3f (0.0f, -1.0f, 0.0f);
+	    (*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
+	}
+	glNormal3f (0.0f, 0.0f, -1.0f);
     }
 
     if (cs->invert == 1)
@@ -1982,8 +2106,10 @@ cubeInitScreen (CompPlugin *p,
 
     cs->getRotation	  = cubeGetRotation;
     cs->clearTargetOutput = cubeClearTargetOutput;
-    cs->paintTopBottom    = cubePaintTopBottom;
+    cs->paintTop          = cubePaintTop;
+    cs->paintBottom       = cubePaintBottom;
     cs->checkFTB          = cubeCheckFTB;
+    cs->capDirection      = cubeCapDirection;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 
