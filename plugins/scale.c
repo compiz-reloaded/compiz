@@ -347,11 +347,22 @@ scalePaintWindow (CompWindow		  *w,
 		sAttrib.brightness = sAttrib.brightness / 2;
 	    }
 
-	    /* hide windows on this output that are not in scale mode */
-	    if (!isNeverScaleWin (w) &&
-		outputDeviceForWindow (w) == s->currentOutputDev)
+	    /* hide windows on the outputs used for scaling 
+	       that are not in scale mode */
+	    if (!isNeverScaleWin (w))
 	    {
-		sAttrib.opacity = 0;
+		int moMode;
+		moMode = ss->opt[SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
+
+		switch (moMode) {
+		case SCALE_MOMODE_CURRENT:
+		    if (outputDeviceForWindow (w) == s->currentOutputDev)
+			sAttrib.opacity = 0;
+		    break;
+		default:
+		    sAttrib.opacity = 0;
+		    break;
+		}
 	    }
 	}
 
@@ -1949,6 +1960,8 @@ scaleInitScreen (CompPlugin *p,
     ss->opacity  =
 	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
 
+    matchInit (&ss->match);
+
     ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
     ss->scalePaintDecoration	    = scalePaintDecoration;
 
@@ -1976,6 +1989,8 @@ scaleFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, paintOutput);
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, damageWindowRect);
+
+    matchFini (&ss->match);
 
     if (ss->cursor)
 	XFreeCursor (s->display->display, ss->cursor);

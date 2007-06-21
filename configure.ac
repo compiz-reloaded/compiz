@@ -288,6 +288,9 @@ if test "x$use_gtk" = "xyes"; then
     PKG_CHECK_EXISTS(libwnck-1.0 >= 2.18.1,
 		     [have_libwnck_2_18_1=yes], [have_libwnck_2_18_1=no])
 
+	PKG_CHECK_EXISTS(libwnck-1.0 >= 2.19.4,
+		     [have_libwnck_2_19_4=yes], [have_libwnck_2_19_4=no])
+
     if test "x$use_metacity" = "xyes"; then
       PKG_CHECK_MODULES(METACITY, libmetacity-private,
 			[use_metacity=yes], [use_metacity=no])
@@ -330,6 +333,10 @@ if test "$use_gtk" = yes; then
   if test "$have_libwnck_2_18_1" = yes; then
     AC_DEFINE(HAVE_LIBWNCK_2_18_1, 1,
 	      [Define to 1 if libwnck version >= 2_18_1])
+  fi
+  if test "$have_libwnck_2_19_4" = yes; then
+    AC_DEFINE(HAVE_LIBWNCK_2_19_4, 1,
+	      [Define to 1 if libwnck version >= 2_19_4])
   fi
 fi
 
