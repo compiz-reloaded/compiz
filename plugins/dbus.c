@@ -2162,6 +2162,8 @@ dbusUnregisterOptions (DBusConnection *connection,
 
     option = dbusGetOptionsFromPath (d, &path[3], NULL, NULL, &nOptions);
 
+    free (path);
+
     if (!option)
 	return FALSE;
 
