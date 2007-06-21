@@ -973,7 +973,7 @@ cubeCheckFTB (CompScreen              *s,
     ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
     ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
 
-    if (ortho[2] > 0.0f)
+    if (ortho[2] > 0.0f && pntC[2] > DEFAULT_Z_CAMERA)
     {
 	/* The viewport is reversed, should be painted front to back. */
 	return TRUE;
