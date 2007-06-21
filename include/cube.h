@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define CUBE_ABIVERSION 20070612
+#define CUBE_ABIVERSION 20070621
 
 #define CUBE_DISPLAY_OPTION_ABI    0
 #define CUBE_DISPLAY_OPTION_INDEX  1
