@@ -1949,6 +1949,8 @@ scaleInitScreen (CompPlugin *p,
     ss->opacity  =
 	(OPAQUE * ss->opt[SCALE_SCREEN_OPTION_OPACITY].value.i) / 100;
 
+    matchInit (&ss->match);
+
     ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
     ss->scalePaintDecoration	    = scalePaintDecoration;
 
@@ -1976,6 +1978,8 @@ scaleFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, paintOutput);
     UNWRAP (ss, s, paintWindow);
     UNWRAP (ss, s, damageWindowRect);
+
+    matchFini (&ss->match);
 
     if (ss->cursor)
 	XFreeCursor (s->display->display, ss->cursor);
