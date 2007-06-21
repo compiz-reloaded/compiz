@@ -56,8 +56,8 @@
 #include <libwnck/libwnck.h>
 #include <libwnck/window-action-menu.h>
 
-#ifdef HAVE_LIBWNCK_2_19_4
-#define wnck_window_get_geometry wnck_window_get_client_window_geometry
+#ifndef HAVE_LIBWNCK_2_19_4
+#define wnck_window_get_client_window_geometry wnck_window_get_geometry
 #endif
 
 #include <cairo.h>
@@ -3009,7 +3009,7 @@ update_event_windows (WnckWindow *win)
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-    wnck_window_get_geometry (win, &x0, &y0, &width, &height);
+    wnck_window_get_client_window_geometry (win, &x0, &y0, &width, &height);
 
     if (d->state & WNCK_WINDOW_STATE_SHADED)
     {
@@ -3176,7 +3176,8 @@ update_window_decoration_name (WnckWindow *win)
 	{
 	    gint width;
 
-	    wnck_window_get_geometry (win, NULL, NULL, &width, NULL);
+	    wnck_window_get_client_window_geometry (win, NULL, NULL, &width,
+						    NULL);
 
 	    w = width - ICON_SPACE - 2 - d->button_width;
 	    if (w < 1)
@@ -3415,7 +3416,7 @@ update_window_decoration_size (WnckWindow *win)
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-    wnck_window_get_geometry (win, NULL, NULL, &w, &h);
+    wnck_window_get_client_window_geometry (win, NULL, NULL, &w, &h);
 
     name_width = max_window_name_width (win);
 
@@ -3559,7 +3560,7 @@ update_switcher_window (WnckWindow *win,
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-    wnck_window_get_geometry (win, NULL, NULL, &width, NULL);
+    wnck_window_get_client_window_geometry (win, NULL, NULL, &width, NULL);
 
     decor_get_default_layout (&switcher_context, width, 1, &d->border_layout);
 
@@ -3828,7 +3829,8 @@ window_geometry_changed (WnckWindow *win)
     {
 	int width, height;
 
-	wnck_window_get_geometry (win, NULL, NULL, &width, &height);
+	wnck_window_get_client_window_geometry (win, NULL, NULL, &width,
+						&height);
 
 	if (width != d->client_width || height != d->client_height)
 	{
@@ -3944,9 +3946,9 @@ window_opened (WnckScreen *screen,
     if (!d)
 	return;
 
-    wnck_window_get_geometry (win, NULL, NULL,
-			      &d->client_width,
-			      &d->client_height);
+    wnck_window_get_client_window_geometry (win, NULL, NULL,
+					    &d->client_width,
+					    &d->client_height);
 
     d->active = wnck_window_is_active (win);
 
@@ -4454,7 +4456,7 @@ position_action_menu (GtkMenu  *menu,
     decor_t    *d = g_object_get_data (G_OBJECT (win), "decor");
     gint	bx, by, width, height;
 
-    wnck_window_get_geometry (win, x, y, &width, &height);
+    wnck_window_get_client_window_geometry (win, x, y, &width, &height);
 
     if ((*theme_get_button_position) (d, BUTTON_MENU, width, height,
 				      &bx, &by, &width, &height))
