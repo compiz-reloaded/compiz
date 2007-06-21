@@ -583,7 +583,7 @@ rotateInitiate (CompDisplay     *d,
 
 	/* Set the rotation state for cube - if action is non-NULL,
 	   we set it to manual (as we were called from the 'Initiate
-	   Rotation' binding. Otherwise, we set to to Change. */
+	   Rotation' binding. Otherwise, we set it to Change. */
 	if (action)
 	    cs->rotationState = RotationManual;
 	else
