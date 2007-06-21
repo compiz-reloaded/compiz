@@ -81,6 +81,12 @@ typedef void (*CubePaintBottomProc) (CompScreen			*s,
 				     CompOutput			*output,
 				     int			size);
 
+typedef void (*CubePaintInsideProc) (CompScreen			*s,
+				     const ScreenPaintAttrib 	*sAttrib,
+				     const CompTransform	*transform,
+				     CompOutput			*output,
+				     int			size);
+
 typedef Bool (*CubeCheckFTBProc) (CompScreen              *s,
 				  const ScreenPaintAttrib *sAttrib,
 				  const CompTransform     *transform,
@@ -121,6 +127,7 @@ typedef struct _CubeScreen {
     CubeClearTargetOutputProc clearTargetOutput;
     CubePaintTopProc          paintTop;
     CubePaintBottomProc       paintBottom;
+    CubePaintInsideProc       paintInside;
     CubeCheckFTBProc          checkFTB;
     CubeCapDirectionProc      capDirection;
 

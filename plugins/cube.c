@@ -1367,6 +1367,13 @@ cubePaintBottom (CompScreen		 *s,
 }
 
 static void
+cubePaintInside (CompScreen		 *s,
+		 const ScreenPaintAttrib *sAttrib,
+		 const CompTransform	 *transform,
+		 CompOutput		 *output,
+		 int			 size) {}
+
+static void
 cubePaintTransformedOutput (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
@@ -1508,14 +1515,24 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	{
 	    glNormal3f (0.0f, -1.0f, 0.0f);
 	    if (cs->desktopOpacity != OPAQUE)
+	    {
 	    	(*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
+		glNormal3f (0.0f, 0.0f, -1.0f);
+		(*cs->paintInside) (s, &sa, transform, outputPtr, hsize);
+		glNormal3f (0.0f, -1.0f, 0.0f);
+	    }
 	    (*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
 	}
 	else if (!topDir && !bottomDir)
 	{
 	    glNormal3f (0.0f, 1.0f, 0.0f);
 	    if (cs->desktopOpacity != OPAQUE)
+	    {
 	    	(*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
+		glNormal3f (0.0f, 0.0f, -1.0f);
+		(*cs->paintInside) (s, &sa, transform, outputPtr, hsize);
+		glNormal3f (0.0f, 1.0f, 0.0f);
+	    }
 	    (*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
 	}
 	else if (cs->desktopOpacity != OPAQUE)
@@ -1524,6 +1541,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	    (*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
 	    glNormal3f (0.0f, -1.0f, 0.0f);
 	    (*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
+	    glNormal3f (0.0f, 0.0f, -1.0f);
+	    (*cs->paintInside) (s, &sa, transform, outputPtr, hsize);
 	}
 	glNormal3f (0.0f, 0.0f, -1.0f);
     }
@@ -2108,6 +2127,7 @@ cubeInitScreen (CompPlugin *p,
     cs->clearTargetOutput = cubeClearTargetOutput;
     cs->paintTop          = cubePaintTop;
     cs->paintBottom       = cubePaintBottom;
+    cs->paintInside       = cubePaintInside;
     cs->checkFTB          = cubeCheckFTB;
     cs->capDirection      = cubeCapDirection;
 
