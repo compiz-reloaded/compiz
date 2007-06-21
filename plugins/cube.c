@@ -921,73 +921,11 @@ cubeDonePaintScreen (CompScreen *s)
 }
 
 static Bool
-cubeCheckFTB (CompScreen              *s,
-              const ScreenPaintAttrib *sAttrib,
-              const CompTransform     *transform,
-              CompOutput              *outputPtr)
-{
-    CompTransform sTransform = *transform;
-    float         mvp[16];
-    float         pntA[4], pntB[4], pntC[4];
-    float         vecA[3], vecB[3];
-    float         ortho[3];
-
-    (*s->applyScreenTransform) (s, sAttrib, outputPtr, &sTransform);
-    transformToScreenSpace (s, outputPtr, -sAttrib->zTranslate, &sTransform);
-
-    MULTM (s->projection, sTransform.m, mvp);
-
-    pntA[0] = outputPtr->region.extents.x1;
-    pntA[1] = outputPtr->region.extents.y1,
-    pntA[2] = 0.0f;
-    pntA[3] = 1.0f;
-
-    pntB[0] = outputPtr->region.extents.x2;
-    pntB[1] = outputPtr->region.extents.y1;
-    pntB[2] = 0.0f;
-    pntB[3] = 1.0f;
-
-    pntC[0] = outputPtr->region.extents.x1 + outputPtr->width / 2.0f;
-    pntC[1] = outputPtr->region.extents.y1 + outputPtr->height / 2.0f;
-    pntC[2] = 0.0f;
-    pntC[3] = 1.0f;
-
-    MULTMV (mvp, pntA);
-    DIVV (pntA);
-
-    MULTMV (mvp, pntB);
-    DIVV (pntB);
-
-    MULTMV (mvp, pntC);
-    DIVV (pntC);
-
-    vecA[0] = pntC[0] - pntA[0];
-    vecA[1] = pntC[1] - pntA[1];
-    vecA[2] = pntC[2] - pntA[2];
-
-    vecB[0] = pntC[0] - pntB[0];
-    vecB[1] = pntC[1] - pntB[1];
-    vecB[2] = pntC[2] - pntB[2];
-
-    ortho[0] = vecA[1] * vecB[2] - vecA[2] * vecB[1];
-    ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
-    ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
-
-    if (ortho[2] > 0.0f && pntC[2] > DEFAULT_Z_CAMERA)
-    {
-	/* The viewport is reversed, should be painted front to back. */
-	return TRUE;
-    }
-
-    return FALSE;
-}
-
-static Bool
-cubeCapDirection (CompScreen              *s,
-        	  const ScreenPaintAttrib *sAttrib,
-        	  const CompTransform     *transform,
-        	  CompOutput              *outputPtr,
-		  float                   y)
+cubeCheckOrientation (CompScreen              *s,
+        	      const ScreenPaintAttrib *sAttrib,
+        	      const CompTransform     *transform,
+		      CompOutput              *outputPtr,
+		      float                   points[3][3])
 {
     CompTransform sTransform = *transform;
     float         mvp[16];
@@ -996,26 +934,26 @@ cubeCapDirection (CompScreen              *s,
     float         ortho[3];
 
     CUBE_SCREEN (s);
-    
+
     (*s->applyScreenTransform) (s, sAttrib, outputPtr, &sTransform);
     matrixTranslate (&sTransform, cs->outputXOffset, -cs->outputYOffset, 0.0f);
     matrixScale (&sTransform, cs->outputXScale, cs->outputYScale, 1.0f);
 
     MULTM (s->projection, sTransform.m, mvp);
 
-    pntA[0] = -0.5f;
-    pntA[1] = y,
-    pntA[2] = 0.0f;
+    pntA[0] = points[0][0];
+    pntA[1] = points[0][1];
+    pntA[2] = points[0][2];
     pntA[3] = 1.0f;
 
-    pntB[0] = 0.0f;
-    pntB[1] = y;
-    pntB[2] = 0.5f;
+    pntB[0] = points[1][0];
+    pntB[1] = points[1][1];
+    pntB[2] = points[1][2];
     pntB[3] = 1.0f;
 
-    pntC[0] = 0.0f;
-    pntC[1] = y;
-    pntC[2] = 0.0f;
+    pntC[0] = points[2][0];
+    pntC[1] = points[2][1];
+    pntC[2] = points[2][2];
     pntC[3] = 1.0f;
 
     MULTMV (mvp, pntA);
@@ -1039,9 +977,10 @@ cubeCapDirection (CompScreen              *s,
     ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
     ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
 
+	
     if (ortho[2] > 0.0f)
     {
-	/* We see the top face of the cap */
+	/* The viewport is reversed, should be painted front to back. */
 	return TRUE;
     }
 
@@ -1062,7 +1001,17 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
     CUBE_SCREEN (s);
 
-    ftb = cs->checkFTB (s, sAttrib, transform, outputPtr);
+    float vPoints[3][3] = { { -0.5, 0.0, cs->distance},
+			    { 0.0, 0.5, cs->distance},
+			    { 0.0, 0.0, cs->distance}};
+			    
+    /* Special handling for inside cube mode. Orientation calculation
+       doesn't work right because some points are transformed outside
+       the visible range. */
+    if (cs->invert == 1)
+	ftb = cs->checkOrientation (s, sAttrib, transform, outputPtr, vPoints);
+    else
+	ftb = FALSE;
 
     if ((paintOrder == FTB && !ftb) ||
         (paintOrder == BTF && ftb))
@@ -1508,8 +1457,14 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
 	 sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	topDir    = cs->capDirection(s, &sa, transform, outputPtr, 0.5f);
-	bottomDir = cs->capDirection(s, &sa, transform, outputPtr, -0.5f);
+	static float top[3][3] = { { 0.5, 0.5, 0.0},
+				   { 0.0, 0.5, -0.5},
+				   { 0.0, 0.5, 0.0}};
+	static float bottom[3][3] = { { 0.5, -0.5, 0.0},
+				      { 0.0, -0.5, -0.5},
+				      { 0.0, -0.5, 0.0}};
+	topDir    = cs->checkOrientation(s, &sa, transform, outputPtr, top);
+	bottomDir = cs->checkOrientation(s, &sa, transform, outputPtr, bottom);
 
 	if (topDir && bottomDir)
 	{
@@ -2128,8 +2083,7 @@ cubeInitScreen (CompPlugin *p,
     cs->paintTop          = cubePaintTop;
     cs->paintBottom       = cubePaintBottom;
     cs->paintInside       = cubePaintInside;
-    cs->checkFTB          = cubeCheckFTB;
-    cs->capDirection      = cubeCapDirection;
+    cs->checkOrientation  = cubeCheckOrientation;
 
     s->privates[cd->screenPrivateIndex].ptr = cs;
 

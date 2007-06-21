@@ -87,16 +87,11 @@ typedef void (*CubePaintInsideProc) (CompScreen			*s,
 				     CompOutput			*output,
 				     int			size);
 
-typedef Bool (*CubeCheckFTBProc) (CompScreen              *s,
-				  const ScreenPaintAttrib *sAttrib,
-				  const CompTransform     *transform,
-				  CompOutput              *output);
-
-typedef Bool (*CubeCapDirectionProc) (CompScreen              *s,
-				      const ScreenPaintAttrib *sAttrib,
-				      const CompTransform     *transform,
-				      CompOutput              *output,
-				      float                   y);
+typedef Bool (*CubeCheckOrientationProc) (CompScreen              *s,
+					  const ScreenPaintAttrib *sAttrib,
+					  const CompTransform     *transform,
+					  CompOutput              *output,
+					  float                   points[3][3]);
 
 typedef enum _PaintOrder
 {
@@ -128,8 +123,7 @@ typedef struct _CubeScreen {
     CubePaintTopProc          paintTop;
     CubePaintBottomProc       paintBottom;
     CubePaintInsideProc       paintInside;
-    CubeCheckFTBProc          checkFTB;
-    CubeCapDirectionProc      capDirection;
+    CubeCheckOrientationProc  checkOrientation;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
