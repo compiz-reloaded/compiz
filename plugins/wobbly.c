@@ -1135,7 +1135,10 @@ createModel (int	  x,
     model->numObjects = GRID_WIDTH * GRID_HEIGHT;
     model->objects = malloc (sizeof (Object) * model->numObjects);
     if (!model->objects)
+    {
+	free (model);
 	return 0;
+    }
 
     model->anchorObject = 0;
     model->numSprings = 0;
