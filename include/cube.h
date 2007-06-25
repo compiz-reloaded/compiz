@@ -27,6 +27,11 @@
 
 #define CUBE_ABIVERSION 20070621
 
+#define CUBE_MOMODE_AUTO  0
+#define CUBE_MOMODE_MULTI 1
+#define CUBE_MOMODE_ONE   2
+#define CUBE_MOMODE_LAST  CUBE_MOMODE_ONE
+
 #define CUBE_DISPLAY_OPTION_ABI    0
 #define CUBE_DISPLAY_OPTION_INDEX  1
 #define CUBE_DISPLAY_OPTION_UNFOLD 2
@@ -59,7 +64,8 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_INACTIVE_OPACITY        16
 #define CUBE_SCREEN_OPTION_FADE_TIME               17
 #define CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY 18
-#define CUBE_SCREEN_OPTION_NUM                     19
+#define CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE        19
+#define CUBE_SCREEN_OPTION_NUM                     20
 
 typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
@@ -173,6 +179,8 @@ typedef struct _CubeScreen {
 
     CompTexture *bg;
     int		nBg;
+
+    int moMode;
 } CubeScreen;
 
 #define GET_CUBE_DISPLAY(d)					 \

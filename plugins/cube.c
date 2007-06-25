@@ -264,6 +264,20 @@ cubeUpdateOutputs (CompScreen *s)
 	}
     }
 
+    if (cs->moMode == CUBE_MOMODE_ONE)
+    {
+	cs->fullscreenOutput = FALSE;
+	cs->nOutput = 1;
+	return;
+    }
+
+    if (cs->moMode == CUBE_MOMODE_MULTI)
+    {
+	cs->fullscreenOutput = TRUE;
+	cs->nOutput = 1;
+	return;
+    }
+    
     if (k != s->nOutputDev)
     {
 	cs->fullscreenOutput = FALSE;
@@ -764,6 +778,16 @@ cubeSetScreenOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
+    case CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE:
+	if (compSetIntOption (o, value))
+	{
+	    cs->moMode = o->value.i;
+	    cubeUpdateOutputs (screen);
+	    cubeUpdateGeometry (screen, screen->hsize, cs->invert);
+	    damageScreen (screen);
+	    return TRUE;
+	}
+	break;
     default:
 	return compSetScreenOption (screen, o, value);
     }
@@ -1054,8 +1078,13 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
     else
     {
 	moveScreenViewport (s, dx, 0, FALSE);
-	(*s->paintTransformedOutput) (s, sAttrib, transform, &s->region,
-				      outputPtr, mask);
+	if (cs->moMode == CUBE_MOMODE_MULTI)
+		(*s->paintTransformedOutput) (s, sAttrib, transform,
+					      &outputPtr->region, outputPtr,
+					      mask);
+	else
+		(*s->paintTransformedOutput) (s, sAttrib, transform, &s->region,
+					      outputPtr, mask);
 	moveScreenViewport (s, -dx, 0, FALSE);
     }
 }
@@ -1357,20 +1386,20 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     if (!cs->fullscreenOutput)
     {
-	cs->outputXScale = (float) s->width / s->outputDev[output].width;
-	cs->outputYScale = (float) s->height / s->outputDev[output].height;
+	cs->outputXScale = (float) s->width / outputPtr->width;
+	cs->outputYScale = (float) s->height / outputPtr->height;
 
 	cs->outputXOffset =
 	    (s->width / 2.0f -
-	     (s->outputDev[output].region.extents.x1 +
-	      s->outputDev[output].region.extents.x2) / 2.0f) /
-	    (float) s->outputDev[output].width;
+	     (outputPtr->region.extents.x1 +
+	      outputPtr->region.extents.x2) / 2.0f) /
+	    (float) outputPtr->width;
 
 	cs->outputYOffset =
 	    (s->height / 2.0f -
-	     (s->outputDev[output].region.extents.y1 +
-	      s->outputDev[output].region.extents.y2) / 2.0f) /
-	    (float) s->outputDev[output].height;
+	     (outputPtr->region.extents.y1 +
+	      outputPtr->region.extents.y2) / 2.0f) /
+	    (float) outputPtr->height;
     }
     else
     {
@@ -2033,7 +2062,8 @@ static const CompMetadataOptionInfo cubeScreenOptionInfo[] = {
     { "active_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
     { "inactive_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
     { "fade_time", "float", "<min>0.0</min>", 0, 0 },
-    { "transparent_manual_only", "bool", 0, 0, 0 }
+    { "transparent_manual_only", "bool", 0, 0, 0 },
+    { "multioutput_mode", "int", "<min>0</min><max>2</max>", 0, 0 }
 };
 
 static Bool
@@ -2110,6 +2140,8 @@ cubeInitScreen (CompPlugin *p,
     cs->rotationState = RotationNone;
 
     cs->desktopOpacity = OPAQUE;
+
+    cs->moMode = cs->opt[CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
 
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
