@@ -531,7 +531,7 @@ rotatePaintScreen (CompScreen   *s,
 
     UNWRAP (rs, s, paintScreen);
     if ((rs->grabIndex || rs->moving || rs->zoomTranslate) &&
-	cs->moMode == CUBE_MOMODE_ONE)
+	cs->moMode == CUBE_MOMODE_ONE && s->nOutputDev)
 	(*s->paintScreen) (s, &s->fullscreenOutput, 1, mask);
     else
 	(*s->paintScreen) (s, outputs, numOutputs, mask);
