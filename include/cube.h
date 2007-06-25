@@ -180,7 +180,8 @@ typedef struct _CubeScreen {
     CompTexture *bg;
     int		nBg;
 
-    int moMode;
+    int  moMode;
+    Bool recalcOutput;
 } CubeScreen;
 
 #define GET_CUBE_DISPLAY(d)					 \

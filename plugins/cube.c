@@ -1374,6 +1374,14 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     output = (outputPtr->id != ~0) ? outputPtr->id : 0;
 
+    if (((outputPtr->id != ~0) && cs->recalcOutput) ||
+	((outputPtr->id == ~0) && !cs->recalcOutput && cs->nOutput > 1))
+    {
+	cs->recalcOutput = (outputPtr->id == ~0);
+	cs->nOutput      = 1;
+	cubeUpdateGeometry (s, s->hsize, cs->invert);
+    }
+
     hsize = s->hsize * cs->nOutput;
     size  = hsize;
 
@@ -2142,6 +2150,8 @@ cubeInitScreen (CompPlugin *p,
     cs->desktopOpacity = OPAQUE;
 
     cs->moMode = cs->opt[CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
+
+    cs->recalcOutput = FALSE;
 
     memset (cs->cleared, 0, sizeof (cs->cleared));
 
