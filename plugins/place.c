@@ -30,14 +30,12 @@
 
 static CompMetadata placeMetadata;
 
-typedef enum {
-    PlaceModeCascade  = 0,
-    PlaceModeCentered = 1,
-    PlaceModeSmart    = 2,
-    PlaceModeMaximize = 3,
-    PlaceModeRandom   = 4,
-    PlaceModeNum
-} PlaceMode;
+#define PLACE_MODE_CASCADE  0
+#define PLACE_MODE_CENTERED 1
+#define PLACE_MODE_SMART    2
+#define PLACE_MODE_MAXIMIZE 3
+#define PLACE_MODE_RANDOM   4
+#define PLACE_MODE_LAST     PLACE_MODE_RANDOM
 
 /* overlap types */
 #define NONE    0
@@ -65,7 +63,6 @@ typedef struct _PlaceScreen {
 
     PlaceWindowProc placeWindow;
 
-    PlaceMode placeMode;
 } PlaceScreen;
 
 #define GET_PLACE_DISPLAY(d)				      \
@@ -171,10 +168,7 @@ placeSetScreenOption (CompPlugin      *plugin,
     switch (index) {
     case PLACE_SCREEN_OPTION_MODE:
 	if (compSetIntOption (o, value))
-	{
-	    ps->placeMode = value->i;
 	    return TRUE;
-	}
 	break;
     case PLACE_SCREEN_OPTION_POSITION_MATCHES:
     case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
@@ -1236,8 +1230,8 @@ placeWin (CompWindow *window,
 
     if (!placeMatchPosition (window, &x, &y))
     {
-	switch (ps->placeMode) {
-	case PlaceModeCascade:
+	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
+	case PLACE_MODE_CASCADE:
 	    if (find_first_fit (window, windows, x, y, &x, &y))
 		goto done_check_denied_focus;
 
@@ -1246,16 +1240,16 @@ placeWin (CompWindow *window,
 	     */
 	    find_next_cascade (window, windows, x, y, &x, &y);
 	    break;
-	case PlaceModeCentered:
+	case PLACE_MODE_CENTERED:
 	    placeCentered (window, &work_area, &x, &y);
 	    break;
-	case PlaceModeRandom:
+	case PLACE_MODE_RANDOM:
 	    placeRandom (window, &work_area, &x, &y);
 	    break;
-	case PlaceModeSmart:
+	case PLACE_MODE_SMART:
 	    placeSmart (window, &work_area, &x, &y);
 	    break;
-	case PlaceModeMaximize:
+	case PLACE_MODE_MAXIMIZE:
 	    maximizeWindow (window, MAXIMIZE_STATE);
 	    break;
 	default:
@@ -1422,7 +1416,7 @@ placeFiniDisplay (CompPlugin  *p,
 
 static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
     { "workarounds", "bool", 0, 0, 0 },
-    { "mode", "int", RESTOSTRING (0, PlaceModeNum - 1), 0, 0 },
+    { "mode", "int", RESTOSTRING (0, PLACE_MODE_LAST), 0, 0 },
     { "position_matches", "list", "<type>match</type>", 0, 0 },
     { "position_x_values", "list", "<type>int</type>", 0, 0 },
     { "position_y_values", "list", "<type>int</type>", 0, 0 },
@@ -1456,8 +1450,6 @@ placeInitScreen (CompPlugin *p,
     s->privates[pd->screenPrivateIndex].ptr = ps;
 
     WRAP (ps, s, placeWindow, placePlaceWindow);
-
-    ps->placeMode = 0;
 
     return TRUE;
 }
