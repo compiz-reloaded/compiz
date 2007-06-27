@@ -457,6 +457,17 @@ resizeTerminate (CompDisplay	 *d,
 
 	RESIZE_SCREEN (w->screen);
 
+	if (rd->geometry.x      == rd->savedGeometry.x     &&
+	    rd->geometry.y      == rd->savedGeometry.y     &&
+	    rd->geometry.width  == rd->savedGeometry.width &&
+	    rd->geometry.height == rd->savedGeometry.height)
+	{
+	    /* If the geometry at termination matches the
+	       geometry at initiation, resizing basically
+	       was cancelled, so reflect that in the state. */
+	    state |= CompActionStateCancel;
+	}
+
 	if (rd->mode == RESIZE_MODE_NORMAL)
 	{
 	    if (state & CompActionStateCancel)
