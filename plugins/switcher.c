@@ -1496,7 +1496,7 @@ switchPaintThumb (CompWindow		  *w,
 	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
 	matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
-	matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 0.0f);
+	matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 1.0f);
 	matrixTranslate (&wTransform,
 			 sAttrib.xTranslate / sAttrib.xScale - w->attrib.x,
 			 sAttrib.yTranslate / sAttrib.yScale - w->attrib.y,
@@ -1599,7 +1599,7 @@ switchPaintThumb (CompWindow		  *w,
 	    initFragmentAttrib (&fragment, &sAttrib);
 
 	    matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
-	    matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 0.0f);
+	    matrixScale (&wTransform, sAttrib.xScale, sAttrib.yScale, 1.0f);
 	    matrixTranslate (&wTransform,
 			     sAttrib.xTranslate / sAttrib.xScale - w->attrib.x,
 			     sAttrib.yTranslate / sAttrib.yScale - w->attrib.y,

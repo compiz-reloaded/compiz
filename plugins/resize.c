@@ -996,7 +996,7 @@ resizePaintWindow (CompWindow              *w,
 	yOrigin = w->attrib.y - w->input.top;
 
 	matrixTranslate (&wTransform, xOrigin, yOrigin, 0.0f);
-	matrixScale (&wTransform, xScale, yScale, 0.0f);
+	matrixScale (&wTransform, xScale, yScale, 1.0f);
 	matrixTranslate (&wTransform,
 			 (rd->geometry.x - w->attrib.x) / xScale - xOrigin,
 			 (rd->geometry.y - w->attrib.y) / yScale - yOrigin,
