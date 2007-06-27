@@ -384,7 +384,7 @@ scalePaintWindow (CompWindow		  *w,
 		mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
 	    matrixTranslate (&wTransform, w->attrib.x, w->attrib.y, 0.0f);
-	    matrixScale (&wTransform, sw->scale, sw->scale, 0.0f);
+	    matrixScale (&wTransform, sw->scale, sw->scale, 1.0f);
 	    matrixTranslate (&wTransform,
 			     sw->tx / sw->scale - w->attrib.x,
 			     sw->ty / sw->scale - w->attrib.y,

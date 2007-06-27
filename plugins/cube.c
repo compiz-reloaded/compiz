@@ -932,6 +932,7 @@ cubeCheckOrientation (CompScreen              *s,
     float         pntA[4], pntB[4], pntC[4];
     float         vecA[3], vecB[3];
     float         ortho[3];
+    Bool          rv = FALSE;
 
     CUBE_SCREEN (s);
 
@@ -957,9 +958,17 @@ cubeCheckOrientation (CompScreen              *s,
     pntC[3] = 1.0f;
 
     MULTMV (mvp, pntA);
+
+    if (pntA[3] < 0.0f)
+	rv = !rv;
+
     DIVV (pntA);
 
     MULTMV (mvp, pntB);
+
+    if (pntB[3] < 0.0f)
+	rv = !rv;
+
     DIVV (pntB);
 
     MULTMV (mvp, pntC);
@@ -979,12 +988,9 @@ cubeCheckOrientation (CompScreen              *s,
 
 	
     if (ortho[2] > 0.0f)
-    {
-	/* The viewport is reversed, should be painted front to back. */
-	return TRUE;
-    }
+	rv = !rv;
 
-    return FALSE;
+    return rv;
 }
 
 static void
@@ -1001,17 +1007,11 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
     CUBE_SCREEN (s);
 
-    float vPoints[3][3] = { { -0.5, 0.0, cs->distance},
-			    { 0.0, 0.5, cs->distance},
-			    { 0.0, 0.0, cs->distance}};
-			    
-    /* Special handling for inside cube mode. Orientation calculation
-       doesn't work right because some points are transformed outside
-       the visible range. */
-    if (cs->invert == 1)
-	ftb = cs->checkOrientation (s, sAttrib, transform, outputPtr, vPoints);
-    else
-	ftb = FALSE;
+    float vPoints[3][3] = { { -0.5, 0.0, cs->invert * cs->distance},
+			    { 0.0, 0.5, cs->invert * cs->distance},
+			    { 0.0, 0.0, cs->invert * cs->distance}};
+
+    ftb = cs->checkOrientation (s, sAttrib, transform, outputPtr, vPoints);
 
     if ((paintOrder == FTB && !ftb) ||
         (paintOrder == BTF && ftb))
