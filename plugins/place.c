@@ -919,7 +919,7 @@ placeSmart (CompWindow *window,
 	/* really need to loop? test if there's any overlap */
 	if (overlap > NONE)
 	{
-	    possible = workarea->width;
+	    possible = workarea->x + workarea->width;
 
 	    if (possible - cw > xTmp) possible -= cw;
 
