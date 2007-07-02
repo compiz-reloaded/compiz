@@ -1953,6 +1953,18 @@ blurDrawWindow (CompWindow	     *w,
 	    else
 		XSubtractRegion (bw->region, &emptyRegion, bs->tmpRegion);
 
+	    if (!clientThreshold)
+	    {
+		REGION wRegion;
+		wRegion.numRects   = 1;
+		wRegion.rects      = &wRegion.extents;
+		wRegion.extents.x1 = w->attrib.x;
+		wRegion.extents.y1 = w->attrib.y;
+		wRegion.extents.x2 = w->attrib.x + w->width;
+		wRegion.extents.y2 = w->attrib.y + w->height;
+		XSubtractRegion (bs->tmpRegion, &wRegion, bs->tmpRegion);
+	    }
+
 	    if (clipped)
 	    {
 		w->vCount = w->indexCount = 0;
