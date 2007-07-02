@@ -871,8 +871,8 @@ placeSmart (CompWindow *window,
 				    CompWindowTypeDesktopMask)))
 		{
 
-		    xl = wi->attrib.x;
-		    yt = wi->attrib.y;
+		    xl = wi->attrib.x - window->input.left;
+		    yt = wi->attrib.y - window->input.top;
 		    xr = xl + get_window_width (wi) + window->input.left
 			+ window->input.right;
 		    yb = yt + get_window_height (wi) + window->input.top
@@ -933,8 +933,8 @@ placeSmart (CompWindow *window,
 				    CompWindowTypeDesktopMask)))
 		{
 
-		    xl = wi->attrib.x;
-		    yt = wi->attrib.y;
+		    xl = wi->attrib.x - window->input.left;
+		    yt = wi->attrib.y - window->input.top;
 		    xr = xl + get_window_width (wi) + window->input.left
 			+ window->input.right;
 		    yb = yt + get_window_height (wi) + window->input.top
@@ -972,8 +972,8 @@ placeSmart (CompWindow *window,
 		    !(wi->wmType & (CompWindowTypeDockMask |
 				    CompWindowTypeDesktopMask)))
 		{
-		    xl = wi->attrib.x;
-		    yt = wi->attrib.y;
+		    xl = wi->attrib.x - window->input.left;
+		    yt = wi->attrib.y - window->input.top;
 		    xr = xl + get_window_width (wi) + window->input.left
 			+ window->input.right;
 		    yb = yt + get_window_height (wi) + window->input.top
