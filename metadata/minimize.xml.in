@@ -2,6 +2,7 @@
     <plugin name="minimize">
 	<_short>Minimize Effect</_short>
 	<_long>Transform windows when they are minimized and unminimized</_long>
+	<feature>windowanimations</feature>
 	<deps>
 		<relation type="before">
 			<plugin>cube</plugin>
