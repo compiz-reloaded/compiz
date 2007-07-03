@@ -842,8 +842,10 @@ placeSmart (CompWindow *window,
     xOptimal = xTmp; yOptimal = yTmp;
 
     /* client gabarit */
-    int ch = get_window_height (window) - 1;
-    int cw = get_window_width (window) - 1;
+    int ch = get_window_height (window) + window->input.left +
+	     window->input.right - 1;
+    int cw = get_window_width (window) + window->input.top +
+	     window->input.bottom - 1;
 
     /* loop over possible positions */
     do
