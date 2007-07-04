@@ -219,8 +219,6 @@ moveTerminate (CompDisplay     *d,
     {
 	MOVE_SCREEN (md->w->screen);
 
-	(md->w->screen->windowUngrabNotify) (md->w);
-
 	if (state & CompActionStateCancel)
 	    moveWindow (md->w,
 			md->savedX - md->w->attrib.x,
@@ -228,6 +226,13 @@ moveTerminate (CompDisplay     *d,
 			TRUE, FALSE);
 
 	syncWindowPosition (md->w);
+
+	/* update window attributes as window constraints may have
+	   changed - needed e.g. if a maximized window was moved
+	   to another output device */
+	updateWindowAttributes (md->w, CompStackingUpdateModeNone);
+
+	(md->w->screen->windowUngrabNotify) (md->w);
 
 	if (ms->grabIndex)
 	{
