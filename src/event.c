@@ -309,8 +309,8 @@ triggerButtonPressBindings (CompDisplay *d,
 
 	if (edge)
 	{
-	    if (isInitiateBinding (option, CompBindingTypeEdgeButton, state,
-				   &action))
+	    if (isInitiateBinding (option, CompBindingTypeEdgeButton,
+				   CompActionStateInitEdge, &action))
 	    {
 		if (action->edgeMask & edge)
 		{
