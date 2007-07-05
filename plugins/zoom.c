@@ -514,8 +514,7 @@ zoomIn (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	float   x, y, w, h;
-	float   scale = 1.0f;
+	float   w, h, x0, y0;
 	int     output;
 	ZoomBox box;
 
@@ -528,34 +527,30 @@ zoomIn (CompDisplay     *d,
 
 	if (zs->zoomed & (1 << output))
 	{
-	    float oWidth;
-
 	    zoomGetCurrentZoom (s, output, &box);
-
-	    oWidth = s->outputDev[output].width;
-	    scale = oWidth / (box.x2 - box.x1);
-
-	    x = box.x1;
-	    y = box.y1;
 	}
 	else
 	{
-	    box.x1 = x = s->outputDev[output].region.extents.x1;
-	    box.y1 = y = s->outputDev[output].region.extents.y1;
+	    box.x1 = s->outputDev[output].region.extents.x1;
+	    box.y1 = s->outputDev[output].region.extents.y1;
 	    box.x2 = s->outputDev[output].region.extents.x2;
 	    box.y2 = s->outputDev[output].region.extents.y2;
 	}
 
-	w = (box.x2 - box.x1) / zs->opt[ZOOM_SCREEN_OPTION_ZOOM_FACTOR].value.f;
-	h = (box.y2 - box.y1) / zs->opt[ZOOM_SCREEN_OPTION_ZOOM_FACTOR].value.f;
+	w = (box.x2 - box.x1) /
+	    zs->opt[ZOOM_SCREEN_OPTION_ZOOM_FACTOR].value.f;
+	h = (box.y2 - box.y1) /
+	    zs->opt[ZOOM_SCREEN_OPTION_ZOOM_FACTOR].value.f;
 
-	x += (pointerX - s->outputDev[output].region.extents.x1) / scale;
-	y += (pointerY - s->outputDev[output].region.extents.y1) / scale;
+	x0 = (pointerX - s->outputDev[output].region.extents.x1) / (float)
+	    s->outputDev[output].width;
+	y0 = (pointerY - s->outputDev[output].region.extents.y1) / (float)
+	    s->outputDev[output].height;
 
-	zs->x1 = x - w / 2.0f;
-	zs->y1 = y - h / 2.0f;
-	zs->x2 = x + w / 2.0f;
-	zs->y2 = y + h / 2.0f;
+	zs->x1 = box.x1 + (x0 * (box.x2 - box.x1) - x0 * w + 0.5f);
+	zs->y1 = box.y1 + (y0 * (box.y2 - box.y1) - y0 * h + 0.5f);
+	zs->x2 = zs->x1 + w;
+	zs->y2 = zs->y1 + h;
 
 	zoomInitiateForSelection (s, output);
 
