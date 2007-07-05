@@ -196,13 +196,10 @@ fuseRemoveInode (FuseInode *parent,
 	    parent->child = NULL;
     }
 
-    if (inode)
-    {
-	if (inode->name)
-	    free (inode->name);
+    if (inode->name)
+	free (inode->name);
 
-	free (inode);
-    }
+    free (inode);
 }
 
 static FuseInode *
