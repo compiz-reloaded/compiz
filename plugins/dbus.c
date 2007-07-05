@@ -2133,8 +2133,10 @@ dbusRegisterOptions (DBusConnection *connection,
 
     option = dbusGetOptionsFromPath (d, &path[3], NULL, NULL, &nOptions);
 
-    if (!option)
+    if (!option) {
+        free(path);
 	return FALSE;
+    }
 
     while (nOptions--)
     {
@@ -2144,6 +2146,8 @@ dbusRegisterOptions (DBusConnection *connection,
 					      &dbusMessagesVTable, d);
 	option++;
     }
+
+    free(path);
 
     return TRUE;
 }
