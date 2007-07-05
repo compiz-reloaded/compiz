@@ -3606,7 +3606,7 @@ setCurrentDesktop (CompScreen   *s,
     unsigned long data;
     CompWindow    *w;
 
-    if (desktop < 0 || desktop >= s->nDesktop)
+    if (desktop >= s->nDesktop)
 	return;
 
     if (desktop == s->currentDesktop)
