@@ -633,6 +633,8 @@ initActionValue (CompDisplay	 *d,
 	    if (value)
 	    {
 		v->action.edgeButton = strtol ((char *) value, NULL, 0);
+		if (v->action.edgeButton > 0)
+		    v->action.type |= CompBindingTypeEdgeButton;
 		xmlFree (value);
 	    }
 	}
