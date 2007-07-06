@@ -59,7 +59,8 @@ typedef struct _SlotArea {
 #define SCALE_DISPLAY_OPTION_INITIATE_GROUP  4
 #define SCALE_DISPLAY_OPTION_INITIATE_OUTPUT 5
 #define SCALE_DISPLAY_OPTION_SHOW_DESKTOP    6
-#define SCALE_DISPLAY_OPTION_NUM             7
+#define SCALE_DISPLAY_OPTION_RELAYOUT        7
+#define SCALE_DISPLAY_OPTION_NUM             8
 
 typedef struct _ScaleDisplay {
     int		    screenPrivateIndex;

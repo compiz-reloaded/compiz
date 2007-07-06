@@ -5,6 +5,7 @@
 	<display>
 	    <option name="abi" type="int" read_only="true"/>
 	    <option name="index" type="int" read_only="true"/>
+	    <option name="relayout_slots" type="action" read_only="true"/>
 	    <option name="initiate" type="action">
 		<_short>Initiate Window Picker</_short>
 		<_long>Layout and start transforming windows</_long>

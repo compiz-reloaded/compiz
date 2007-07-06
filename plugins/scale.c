@@ -1341,6 +1341,38 @@ scaleInitiateOutput (CompDisplay     *d,
     return FALSE;
 }
 
+static Bool
+scaleRelayoutSlots (CompDisplay     *d,
+		    CompAction      *action,
+		    CompActionState state,
+		    CompOption      *option,
+		    int	            nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SCALE_SCREEN (s);
+
+	if (ss->state != SCALE_STATE_NONE && ss->state != SCALE_STATE_IN)
+	{
+	    if (layoutThumbs (s))
+	    {
+		ss->state = SCALE_STATE_OUT;
+		damageScreen (s);
+	    }
+	}
+
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
 static void
 scaleSelectWindow (CompWindow *w)
 
@@ -1850,7 +1882,8 @@ static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
     { "initiate_all", "action", 0, scaleInitiateAll, scaleTerminate },
     { "initiate_group", "action", 0, scaleInitiateGroup, scaleTerminate },
     { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate },
-    { "show_desktop", "bool", 0, 0, 0 }
+    { "show_desktop", "bool", 0, 0, 0 },
+    { "relayout_slots", "action", 0, scaleRelayoutSlots, 0 }
 };
 
 static Bool
