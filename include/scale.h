@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define SCALE_ABIVERSION 20070607
+#define SCALE_ABIVERSION 20070706
 
 #define SCALE_STATE_NONE 0
 #define SCALE_STATE_OUT  1
@@ -94,6 +94,9 @@ typedef enum {
 
 typedef Bool (*ScaleLayoutSlotsAndAssignWindowsProc) (CompScreen *s);
 
+typedef Bool (*ScaleSetScaledPaintAttributesProc) (CompWindow        *w,
+						   WindowPaintAttrib *attrib);
+
 typedef void (*ScalePaintDecorationProc) (CompWindow		  *w,
 					  const WindowPaintAttrib *attrib,
 					  const CompTransform     *transform,
@@ -110,6 +113,7 @@ typedef struct _ScaleScreen {
     DamageWindowRectProc   damageWindowRect;
 
     ScaleLayoutSlotsAndAssignWindowsProc layoutSlotsAndAssignWindows;
+    ScaleSetScaledPaintAttributesProc    setScaledPaintAttributes;
     ScalePaintDecorationProc		 scalePaintDecoration;
 
     CompOption opt[SCALE_SCREEN_OPTION_NUM];

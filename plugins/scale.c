@@ -305,6 +305,59 @@ scalePaintDecoration (CompWindow	      *w,
 }
 
 static Bool
+setScaledPaintAttributes (CompWindow        *w,
+			  WindowPaintAttrib *attrib)
+{
+    Bool drawScaled = FALSE;
+
+    SCALE_SCREEN (w->screen);
+    SCALE_WINDOW (w);
+
+    if (sw->adjust || sw->slot)
+    {
+	SCALE_DISPLAY (w->screen->display);
+
+	if (w->id	    != sd->selectedWindow &&
+	    ss->opacity != OPAQUE		  &&
+	    ss->state   != SCALE_STATE_IN)
+	{
+    	    /* modify opacity of windows that are not active */
+	    attrib->opacity = (attrib->opacity * ss->opacity) >> 16;
+	}
+
+     	drawScaled = TRUE;
+    }
+    else if (ss->state != SCALE_STATE_IN)
+    {
+	if (ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK].value.b)
+	{
+	    /* modify brightness of the other windows */
+	    attrib->brightness = attrib->brightness / 2;
+	}
+
+     	/* hide windows on the outputs used for scaling 
+	   that are not in scale mode */
+	if (!isNeverScaleWin (w))
+	{
+	    int moMode;
+	    moMode = ss->opt[SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
+
+	    switch (moMode) {
+	    case SCALE_MOMODE_CURRENT:
+    		if (outputDeviceForWindow (w) == w->screen->currentOutputDev)
+		    attrib->opacity = 0;
+		break;
+	    default:
+	      	attrib->opacity = 0;
+		break;
+	    }
+	}
+    }
+
+    return drawScaled;
+}
+
+static Bool
 scalePaintWindow (CompWindow		  *w,
 		  const WindowPaintAttrib *attrib,
 		  const CompTransform	  *transform,
@@ -319,52 +372,14 @@ scalePaintWindow (CompWindow		  *w,
     if (ss->state != SCALE_STATE_NONE)
     {
 	WindowPaintAttrib sAttrib = *attrib;
-	Bool		  scaled = FALSE;
+	Bool		  scaled;
 
 	SCALE_WINDOW (w);
 
+	scaled = (*ss->setScaledPaintAttributes) (w, &sAttrib);
+
 	if (sw->adjust || sw->slot)
-	{
-	    SCALE_DISPLAY (s->display);
-
-	    if (w->id	    != sd->selectedWindow &&
-		ss->opacity != OPAQUE		  &&
-		ss->state   != SCALE_STATE_IN)
-	    {
-		/* modify opacity of windows that are not active */
-		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
-	    }
-
-	    scaled = TRUE;
-
 	    mask |= PAINT_WINDOW_NO_CORE_INSTANCE_MASK;
-	}
-	else if (ss->state != SCALE_STATE_IN)
-	{
-	    if (ss->opt[SCALE_SCREEN_OPTION_DARKEN_BACK].value.b)
-	    {
-		/* modify brightness of the other windows */
-		sAttrib.brightness = sAttrib.brightness / 2;
-	    }
-
-	    /* hide windows on the outputs used for scaling 
-	       that are not in scale mode */
-	    if (!isNeverScaleWin (w))
-	    {
-		int moMode;
-		moMode = ss->opt[SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
-
-		switch (moMode) {
-		case SCALE_MOMODE_CURRENT:
-		    if (outputDeviceForWindow (w) == s->currentOutputDev)
-			sAttrib.opacity = 0;
-		    break;
-		default:
-		    sAttrib.opacity = 0;
-		    break;
-		}
-	    }
-	}
 
 	UNWRAP (ss, s, paintWindow);
 	status = (*s->paintWindow) (w, &sAttrib, transform, region, mask);
@@ -1963,6 +1978,7 @@ scaleInitScreen (CompPlugin *p,
     matchInit (&ss->match);
 
     ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
+    ss->setScaledPaintAttributes    = setScaledPaintAttributes;
     ss->scalePaintDecoration	    = scalePaintDecoration;
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
