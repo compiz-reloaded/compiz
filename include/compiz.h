@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070606
+#define ABIVERSION 20070706
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -3008,11 +3008,13 @@ addColorOpToFunctionData (CompFunctionData *data,
 
 Bool
 addDataOpToFunctionData (CompFunctionData *data,
-			 char		  *str);
+			 char		  *str,
+			 ...);
 
 Bool
 addBlendOpToFunctionData (CompFunctionData *data,
-			  char		   *str);
+			  char		   *str,
+			  ...);
 
 int
 createFragmentFunction (CompScreen	 *s,
