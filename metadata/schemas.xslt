@@ -243,11 +243,16 @@
       </long>
     </locale>
     <xsl:for-each select="short[@xml:lang]">
+      <xsl:variable name="language" select="@xml:lang"/>
+      <xsl:param name="infoTrans">
+        <xsl:call-template name="printInfoTrans">
+          <xsl:with-param name="language" select="$language"/>
+        </xsl:call-template>
+      </xsl:param>
       <locale>
         <xsl:attribute name='name'>
           <xsl:value-of select="@xml:lang"/>
         </xsl:attribute>
-        <xsl:variable name="language" select="@xml:lang"/>
         <short><xsl:value-of select="text()"/></short>
         <long>
           <xsl:choose>
@@ -258,7 +263,7 @@
               <xsl:value-of select="parent::option/long[not(@xml:lang)]/text()"/>
             </xsl:otherwise>
           </xsl:choose>
-          <xsl:value-of select="$info"/>
+          <xsl:value-of select="$infoTrans"/>
         </long>
       </locale>
     </xsl:for-each>
@@ -285,7 +290,7 @@
       <xsl:value-of select="$info"/>
     </xsl:if>
   </xsl:template>
-  
+
   <!-- generates a list of int descriptions -->
   <xsl:template name="printIntDescList">
     <xsl:variable name="list">
@@ -293,6 +298,50 @@
           <xsl:value-of select="value/text()"/>
 	  <xsl:text> = </xsl:text>
 	  <xsl:value-of select="name/text()"/>
+          <xsl:text>, </xsl:text>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:value-of select="substring($list,1,string-length($list) - 2)"/>
+  </xsl:template>
+
+   <!-- generates the additional info for the long option description -->
+  <xsl:template name="printInfoTrans">
+    <xsl:variable name="info">
+      <xsl:text> (</xsl:text>
+      <xsl:choose>
+        <xsl:when test="contains('int,float',parent::option/@type) and not(parent::option/desc/value/text())">
+          <xsl:value-of select="parent::option/min/text()"/> - <xsl:value-of select="parent::option/max/text()"/>
+        </xsl:when>
+	<xsl:when test="parent::option/@type='int' and parent::option/desc/value/text()">
+          <xsl:call-template name="printIntDescListTrans">
+            <xsl:with-param name="language" select="$language"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="parent::option/@type = 'match'">
+          <xsl:text>match</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:text>)</xsl:text>
+    </xsl:variable>
+    <xsl:if test="not(contains($info,' ()'))">
+      <xsl:value-of select="$info"/>
+    </xsl:if>
+  </xsl:template>
+  
+  <!-- generates a list of int descriptions -->
+  <xsl:template name="printIntDescListTrans">
+    <xsl:variable name="list">
+      <xsl:for-each select="parent::option/desc">
+          <xsl:value-of select="value/text()"/>
+          <xsl:text> = </xsl:text>
+          <xsl:choose>
+            <xsl:when test="name[lang($language)]/text()">
+              <xsl:value-of select="name[lang($language)]/text()"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="name[not(@xml:lang)]/text()"/>
+            </xsl:otherwise>
+          </xsl:choose>
           <xsl:text>, </xsl:text>
       </xsl:for-each>
     </xsl:variable>
