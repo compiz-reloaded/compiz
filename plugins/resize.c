@@ -419,11 +419,18 @@ resizeInitiate (CompDisplay     *d,
 
 	if (rs->grabIndex)
 	{
+	    BoxRec box;
+
 	    rd->releaseButton = button;
 
 	    (w->screen->windowGrabNotify) (w, x, y, state,
 					   CompWindowGrabResizeMask |
 					   CompWindowGrabButtonMask);
+
+	    /* using the paint rectangle is enough here
+	       as we don't have any stretch yet */
+	    resizeGetPaintRectangle (d, &box);
+	    resizeDamageRectangle (w->screen, &box);
 
 	    if (state & CompActionStateInitKey)
 	    {
