@@ -306,6 +306,7 @@
 
    <!-- generates the additional info for the long option description -->
   <xsl:template name="printInfoTrans">
+    <xsl:param name="language"/>
     <xsl:variable name="info">
       <xsl:text> (</xsl:text>
       <xsl:choose>
@@ -330,6 +331,7 @@
   
   <!-- generates a list of int descriptions -->
   <xsl:template name="printIntDescListTrans">
+    <xsl:param name="language"/>
     <xsl:variable name="list">
       <xsl:for-each select="parent::option/desc">
           <xsl:value-of select="value/text()"/>
