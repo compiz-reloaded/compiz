@@ -244,11 +244,11 @@
     </locale>
     <xsl:for-each select="short[@xml:lang]">
       <xsl:variable name="language" select="@xml:lang"/>
-      <xsl:param name="infoTrans">
+      <xsl:variable name="infoTrans">
         <xsl:call-template name="printInfoTrans">
           <xsl:with-param name="language" select="$language"/>
         </xsl:call-template>
-      </xsl:param>
+      </xsl:variable>
       <locale>
         <xsl:attribute name='name'>
           <xsl:value-of select="@xml:lang"/>
