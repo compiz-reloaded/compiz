@@ -277,7 +277,7 @@ cubeUpdateOutputs (CompScreen *s)
 	cs->nOutput = 1;
 	return;
     }
-    
+
     if (k != s->nOutputDev)
     {
 	cs->fullscreenOutput = FALSE;
@@ -881,7 +881,8 @@ cubePreparePaintScreen (CompScreen *s,
     else if (cs->desktopOpacity != cs->toOpacity)
     {
 	float steps = (msSinceLastPaint * OPAQUE / 1000.0) /
-	              cs->opt[CUBE_SCREEN_OPTION_FADE_TIME].value.f;
+	    cs->opt[CUBE_SCREEN_OPTION_FADE_TIME].value.f;
+
 	if (steps < 12)
 	    steps = 12;
 
@@ -946,8 +947,8 @@ cubeDonePaintScreen (CompScreen *s)
 
 static Bool
 cubeCheckOrientation (CompScreen              *s,
-        	      const ScreenPaintAttrib *sAttrib,
-        	      const CompTransform     *transform,
+		      const ScreenPaintAttrib *sAttrib,
+		      const CompTransform     *transform,
 		      CompOutput              *outputPtr,
 		      float                   points[3][3])
 {
@@ -1010,7 +1011,6 @@ cubeCheckOrientation (CompScreen              *s,
     ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
     ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
 
-	
     if (ortho[2] > 0.0f)
 	rv = !rv;
 
@@ -1038,7 +1038,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
     ftb = cs->checkOrientation (s, sAttrib, transform, outputPtr, vPoints);
 
     if ((paintOrder == FTB && !ftb) ||
-        (paintOrder == BTF && ftb))
+	(paintOrder == BTF && ftb))
 	return;
 
     output = (outputPtr->id != ~0) ? outputPtr->id : 0;
@@ -1091,18 +1091,16 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
 static void
 cubePaintAllViewports (CompScreen          *s,
-                       ScreenPaintAttrib   *sAttrib,
-	               const CompTransform *transform,
-                       Region              region,
-                       CompOutput          *outputPtr,
-                       unsigned int        mask,
-                       int                 xMove,
-                       float               size,
-                       int                 hsize,
-                       PaintOrder          paintOrder)
+		       ScreenPaintAttrib   *sAttrib,
+		       const CompTransform *transform,
+		       Region              region,
+		       CompOutput          *outputPtr,
+		       unsigned int        mask,
+		       int                 xMove,
+		       float               size,
+		       int                 hsize,
+		       PaintOrder          paintOrder)
 {
-    CUBE_SCREEN(s);
-
     ScreenPaintAttrib sa = *sAttrib;
 
     int i;
@@ -1111,6 +1109,8 @@ cubePaintAllViewports (CompScreen          *s,
 			     painting with (back-most). */
     int iFirstSign;       /* 1 if we do xMove += i first and
 			     -1 if we do xMove -= i first. */
+
+    CUBE_SCREEN (s);
 
     if (cs->invert == 1)
     {
@@ -1161,7 +1161,7 @@ cubePaintAllViewports (CompScreen          *s,
 
 	sa.yRotate -= cs->invert * xMoveAdd * 360.0f / size;
 	cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-	                          paintOrder, xMove);
+				  paintOrder, xMove);
 	sa.yRotate += cs->invert * xMoveAdd * 360.0f / size;
 
 	xMove -= xMoveAdd;
@@ -1184,7 +1184,7 @@ cubePaintAllViewports (CompScreen          *s,
 
 	sa.yRotate -= cs->invert * xMoveAdd * 360.0f / size;
 	cubeMoveViewportAndPaint (s, &sa, transform, outputPtr, mask,
-	                          paintOrder, xMove);
+				  paintOrder, xMove);
 	sa.yRotate += cs->invert * xMoveAdd * 360.0f / size;
 
 	xMove -= xMoveAdd;
@@ -1349,7 +1349,9 @@ cubePaintInside (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
 		 CompOutput		 *output,
-		 int			 size) {}
+		 int			 size)
+{
+}
 
 static void
 cubePaintTransformedOutput (CompScreen		    *s,
@@ -1508,7 +1510,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	    glNormal3f (0.0f, -1.0f, 0.0f);
 	    if (cs->desktopOpacity != OPAQUE)
 	    {
-	    	(*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
+		(*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
 		glNormal3f (0.0f, 0.0f, -1.0f);
 		(*cs->paintInside) (s, &sa, transform, outputPtr, hsize);
 		glNormal3f (0.0f, -1.0f, 0.0f);
@@ -1520,7 +1522,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	    glNormal3f (0.0f, 1.0f, 0.0f);
 	    if (cs->desktopOpacity != OPAQUE)
 	    {
-	    	(*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
+		(*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
 		glNormal3f (0.0f, 0.0f, -1.0f);
 		(*cs->paintInside) (s, &sa, transform, outputPtr, hsize);
 		glNormal3f (0.0f, 1.0f, 0.0f);
