@@ -873,12 +873,12 @@ placeSmart (CompWindow *window,
 				    CompWindowTypeDesktopMask)))
 		{
 
-		    xl = wi->attrib.x - window->input.left;
-		    yt = wi->attrib.y - window->input.top;
+		    xl = wi->attrib.x - wi->input.left;
+		    yt = wi->attrib.y - wi->input.top;
 		    xr = xl + get_window_width (wi) + window->input.left
-			+ window->input.right;
+			+ wi->input.right;
 		    yb = yt + get_window_height (wi) + window->input.top
-			+ window->input.bottom;
+			+ wi->input.bottom;
 
 		    /* if windows overlap, calc the overall overlapping */
 		    if ((cxl < xr) && (cxr > xl) &&
@@ -935,12 +935,12 @@ placeSmart (CompWindow *window,
 				    CompWindowTypeDesktopMask)))
 		{
 
-		    xl = wi->attrib.x - window->input.left;
-		    yt = wi->attrib.y - window->input.top;
-		    xr = xl + get_window_width (wi) + window->input.left
-			+ window->input.right;
-		    yb = yt + get_window_height (wi) + window->input.top
-			+ window->input.bottom;
+		    xl = wi->attrib.x - wi->input.left;
+		    yt = wi->attrib.y - wi->input.top;
+		    xr = xl + get_window_width (wi) + wi->input.left
+			+ wi->input.right;
+		    yb = yt + get_window_height (wi) + wi->input.top
+			+ wi->input.bottom;
 
 		    /* if not enough room above or under the current
 		     * client determine the first non-overlapped x position
@@ -974,12 +974,12 @@ placeSmart (CompWindow *window,
 		    !(wi->wmType & (CompWindowTypeDockMask |
 				    CompWindowTypeDesktopMask)))
 		{
-		    xl = wi->attrib.x - window->input.left;
-		    yt = wi->attrib.y - window->input.top;
-		    xr = xl + get_window_width (wi) + window->input.left
-			+ window->input.right;
-		    yb = yt + get_window_height (wi) + window->input.top
-			+ window->input.bottom;
+		    xl = wi->attrib.x - wi->input.left;
+		    yt = wi->attrib.y - wi->input.top;
+		    xr = xl + get_window_width (wi) + wi->input.left
+			+ wi->input.right;
+		    yb = yt + get_window_height (wi) + wi->input.top
+			+ wi->input.bottom;
 
 		    /* if not enough room to the left or right of the current
 		     * client determine the first non-overlapped y position
