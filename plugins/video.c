@@ -791,6 +791,8 @@ videoWindowUpdate (CompWindow *w)
     int		  aspectX = 0;
     int		  aspectY = 0;
     int		  panScan = 0;
+    int		  width = 0;
+    int		  height = 0;
 
     VIDEO_DISPLAY (w->screen->display);
     VIDEO_SCREEN (w->screen);
@@ -799,18 +801,21 @@ videoWindowUpdate (CompWindow *w)
     memset (p, 0, sizeof (p));
 
     result = XGetWindowProperty (w->screen->display->display, w->id,
-				 vd->videoAtom, 0L, 11L, FALSE,
+				 vd->videoAtom, 0L, 13L, FALSE,
 				 XA_INTEGER, &actual, &format,
 				 &n, &left, &propData);
 
     if (result == Success && n && propData)
     {
-	if (n == 11)
+	if (n == 13)
 	{
 	    long *data = (long *) propData;
 
 	    pixmap	= *data++;
 	    imageFormat = *data++;
+
+	    width  = *data++;
+	    height = *data++;
 
 	    aspectX = *data++;
 	    aspectY = *data++;
@@ -867,16 +872,13 @@ videoWindowUpdate (CompWindow *w)
 	vw->source->format  = i;
 	vw->source->p1	    = p[0];
 	vw->source->p2	    = p[1];
-	vw->source->width   = texture->width;
-	vw->source->height  = texture->height;
+	vw->source->width   = width;
+	vw->source->height  = height;
 	vw->source->aspect  = aspectX && aspectY;
 	vw->source->panScan = panScan / 65536.0f;
 
 	if (vw->source->aspect)
 	    vw->source->aspectRatio = (float) aspectX / aspectY;
-
-	if (i == IMAGE_FORMAT_YV12)
-	    vw->source->height -= texture->height / 3;
 
 	updateWindowVideoContext (w, vw->source);
     }
