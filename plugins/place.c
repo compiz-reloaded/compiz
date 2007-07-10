@@ -1001,8 +1001,8 @@ placeSmart (CompWindow *window,
     if (ch >= workarea->height)
 	yOptimal = workarea->y;
 
-    *x = xOptimal;
-    *y = yOptimal;
+    *x = xOptimal + window->input.left;
+    *y = yOptimal + window->input.top;
 }
 
 static void
