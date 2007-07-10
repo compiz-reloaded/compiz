@@ -1269,6 +1269,8 @@ makeOutputWindow (CompScreen *s)
     {
 	s->overlay = XCompositeGetOverlayWindow (s->display->display, s->root);
 	s->output  = s->overlay;
+
+	XSelectInput (s->display->display, s->output, ExposureMask);
     }
     else
 #endif

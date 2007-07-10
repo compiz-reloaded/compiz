@@ -1183,7 +1183,10 @@ handleEvent (CompDisplay *d,
 
     switch (event->type) {
     case Expose:
-	s = findScreenAtDisplay (d, event->xexpose.window);
+	for (s = d->screens; s; s = s->next)
+	    if (s->output == event->xexpose.window)
+		break;
+
 	if (s)
 	{
 	    int more = event->xexpose.count + 1;
