@@ -414,37 +414,43 @@ rotatePreparePaintScreen (CompScreen *s,
 
     if (rs->moving && cs->invert == 1 && !cs->unfolded)
     {
-	if (fabs(rs->xrot + rs->baseXrot + rs->moveTo) <=
+	if (fabs (rs->xrot + rs->baseXrot + rs->moveTo) <=
 	    (360.0 / (s->hsize * 2.0)))
+	{
 	    rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
-		fabs(rs->xrot + rs->baseXrot + rs->moveTo) /
+		fabs (rs->xrot + rs->baseXrot + rs->moveTo) /
 		(360.0 / (s->hsize * 2.0));
-	else if (fabs(rs->xrot + rs->baseXrot) <= (360.0 / (s->hsize * 2.0)))
+	}
+	else if (fabs (rs->xrot + rs->baseXrot) <= (360.0 / (s->hsize * 2.0)))
+	{
 	    rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
-		fabs(rs->xrot + rs->baseXrot) /
+		fabs (rs->xrot + rs->baseXrot) /
 		(360.0 / (s->hsize * 2.0));
+	}
 	else
 	{
 	    rs->zoomTranslate += fabs (rs->xrot + rs->baseXrot - oldXrot) /
 		(360.0 / (s->hsize * 2.0)) *
 		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f;
-	    rs->zoomTranslate = MIN (rs->zoomTranslate,
-		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
+	    rs->zoomTranslate =
+		MIN (rs->zoomTranslate,
+		     rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
 	}
     }
     else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && cs->invert == 1 &&
 	     !cs->unfolded)
     {
-	int steps, stepsCount;
+	int   steps, stepsCount;
 	float amount, chunk;
-	
+
 	amount = msSinceLastPaint * 0.05f *
-		 rs->opt[ROTATE_SCREEN_OPTION_SPEED].value.f;
-	steps = stepsCount = amount / (0.5f *
-		rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP].value.f);
+	    rs->opt[ROTATE_SCREEN_OPTION_SPEED].value.f;
+	steps = stepsCount = amount /
+	    (0.5f * rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps)
-		steps = stepsCount = 1;
-	chunk = amount / (float)steps;
+	    steps = stepsCount = 1;
+
+	chunk = amount / (float) steps;
 
 	while (steps--)
 	{
@@ -457,7 +463,7 @@ rotatePreparePaintScreen (CompScreen *s,
 		dt = 0.0f - rs->zoomTranslate;
 
 	    adjust = dt * 0.15f;
-	    tamount = fabs(dt) * 1.5f;
+	    tamount = fabs (dt) * 1.5f;
 	    if (tamount < 0.2f)
 		tamount = 0.2f;
 	    else if (tamount > 2.0f)
@@ -466,13 +472,14 @@ rotatePreparePaintScreen (CompScreen *s,
 	    rs->zoomVelocity = (tamount * rs->zoomVelocity + adjust) /
 			       (tamount + 1.0f);
 
-	    if (fabs(dt) < 0.1f && fabs(rs->zoomVelocity) < 0.0005f)
+	    if (fabs (dt) < 0.1f && fabs (rs->zoomVelocity) < 0.0005f)
 	    {
 		if (rs->grabbed)
 		    rs->zoomTranslate =
 			rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f;
 		else
 		    rs->zoomTranslate = 0.0f;
+
 		break;
 	    }
 	    rs->zoomTranslate += rs->zoomVelocity * chunk;
