@@ -225,7 +225,7 @@ adjustVelocity (RotateScreen *rs,
 
     rs->xVelocity = (amount * rs->xVelocity + adjust) / (amount + 2.0f);
 
-    if (rs->opt[ROTATE_SCREEN_OPTION_SNAP_TOP].value.b && rs->yrot > 50.0f)
+    if (rs->snapTop && rs->yrot > 50.0f)
 	yrot = -(90.f - rs->yrot);
     else
 	yrot = rs->yrot;
