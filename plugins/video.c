@@ -440,7 +440,7 @@ videoDrawWindowTexture (CompWindow	     *w,
 		(*s->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB, param,
 					     minX, minY, maxX, maxY);
 
-		/* need tp provide plane offsets when texture coordinates
+		/* need to provide plane offsets when texture coordinates
 		   are not normalized */
 		if (texture->target != GL_TEXTURE_2D)
 		{
