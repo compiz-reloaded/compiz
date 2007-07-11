@@ -42,6 +42,7 @@ typedef struct _RegexDisplay {
     HandleEventProc  handleEvent;
     MatchInitExpProc matchInitExp;
     Atom	     roleAtom;
+    Atom             visibleNameAtom;
 } RegexDisplay;
 
 typedef struct _RegexScreen {
@@ -223,26 +224,33 @@ regexMatchInitExp (CompDisplay  *d,
 }
 
 static char *
-regexGetStringPropertyLatin1 (CompWindow *w,
-			      Atom       atom)
+regexGetStringProperty (CompWindow *w,
+	  		Atom       atom,
+			Bool       getUtf8)
 {
     Atom	  type;
+    Atom          stringFormat;
     unsigned long nItems;
     unsigned long bytesAfter;
     unsigned char *str = NULL;
     int		  format, result;
     char	  *retval;
 
+    if (getUtf8)
+	stringFormat = w->screen->display->utf8StringAtom;
+    else
+	stringFormat = XA_STRING;
+
     result = XGetWindowProperty (w->screen->display->display,
 				 w->id, atom,
 				 0, LONG_MAX,
-				 FALSE, XA_STRING, &type, &format, &nItems,
+				 FALSE, stringFormat, &type, &format, &nItems,
 				 &bytesAfter, (unsigned char **) &str);
 
     if (result != Success)
 	return NULL;
 
-    if (type != XA_STRING)
+    if (type != stringFormat)
     {
 	XFree (str);
 	return NULL;
@@ -253,6 +261,24 @@ regexGetStringPropertyLatin1 (CompWindow *w,
     XFree (str);
 
     return retval;
+}
+
+static char *
+regexGetWindowTitle (CompWindow *w)
+{
+    char *title;
+
+    REGEX_DISPLAY (w->screen->display);
+
+    title = regexGetStringProperty (w, rd->visibleNameAtom, TRUE);
+    if (title)
+	return title;
+
+    title = regexGetStringProperty (w, w->screen->display->wmNameAtom, TRUE);
+    if (title)
+	return title;
+
+    return regexGetStringProperty (w, XA_WM_NAME, FALSE);
 }
 
 static void
@@ -279,7 +305,7 @@ regexHandleEvent (CompDisplay *d,
 		if (rw->title)
 		    free (rw->title);
 
-		rw->title = regexGetStringPropertyLatin1 (w, XA_WM_NAME);
+		rw->title = regexGetWindowTitle (w);
 
 		(*d->matchPropertyChanged) (d, w);
 	    }
@@ -294,7 +320,7 @@ regexHandleEvent (CompDisplay *d,
 		if (rw->role)
 		    free (rw->role);
 
-		rw->role = regexGetStringPropertyLatin1 (w, rd->roleAtom);
+		rw->role = regexGetStringProperty (w, rd->roleAtom, FALSE);
 
 		(*d->matchPropertyChanged) (d, w);
 	    }
@@ -335,7 +361,8 @@ regexInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    rd->roleAtom = XInternAtom (d->display, "WM_WINDOW_ROLE", 0);
+    rd->roleAtom        = XInternAtom (d->display, "WM_WINDOW_ROLE", 0);
+    rd->visibleNameAtom = XInternAtom (d->display, "_NET_WM_VISIBLE_NAME", 0);
 
     WRAP (rd, d, handleEvent, regexHandleEvent);
     WRAP (rd, d, matchInitExp, regexMatchInitExp);
@@ -413,8 +440,8 @@ regexInitWindow (CompPlugin *p,
     if (!rw)
 	return FALSE;
 
-    rw->title = regexGetStringPropertyLatin1 (w, XA_WM_NAME);
-    rw->role  = regexGetStringPropertyLatin1 (w, rd->roleAtom);
+    rw->title = regexGetWindowTitle (w);
+    rw->role  = regexGetStringProperty (w, rd->roleAtom, FALSE);
 
     w->privates[rs->windowPrivateIndex].ptr = rw;
 
