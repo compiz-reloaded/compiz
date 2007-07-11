@@ -108,17 +108,14 @@ compLogMessage (CompDisplay *d,
     va_list args;
     char    message[2048];
 
-    if (!d)
-	d = compDisplays;
-
     va_start (args, format);
 
     vsnprintf (message, 2048, format, args);
 
-    if (!d)
-	logMessage (d, componentName, level, message);
-    else
+    if (d)
 	(*d->logMessage) (d, componentName, level, message);
+    else
+	logMessage (d, componentName, level, message);
 
     va_end (args);
 }
