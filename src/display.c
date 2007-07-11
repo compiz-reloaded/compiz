@@ -1979,6 +1979,8 @@ addDisplay (char *name)
     d->autoRaiseHandle = 0;
     d->autoRaiseWindow = None;
 
+    d->logMessage = logMessage;
+
     d->display = dpy = XOpenDisplay (name);
     if (!d->display)
     {
@@ -2024,8 +2026,6 @@ addDisplay (char *name)
     d->matchInitExp	      = matchInitExp;
     d->matchExpHandlerChanged = matchExpHandlerChanged;
     d->matchPropertyChanged   = matchPropertyChanged;
-
-    d->logMessage = logMessage;
 
     d->supportedAtom	     = XInternAtom (dpy, "_NET_SUPPORTED", 0);
     d->supportingWmCheckAtom = XInternAtom (dpy, "_NET_SUPPORTING_WM_CHECK", 0);
