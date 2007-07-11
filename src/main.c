@@ -100,9 +100,9 @@ usage (void)
 
 void
 compLogMessage (CompDisplay *d,
-		char *componentName,
+		char	     *componentName,
 		CompLogLevel level,
-		char *format,
+		char	     *format,
 		...)
 {
     va_list args;
@@ -124,15 +124,15 @@ compLogMessage (CompDisplay *d,
 }
 
 void
-logMessage (CompDisplay *d,
-	    char *componentName,
+logMessage (CompDisplay	 *d,
+	    char	 *componentName,
 	    CompLogLevel level,
-	    char *message)
+	    char	 *message)
 {
     char defaultMessage[2048];
 
     snprintf (defaultMessage, 2048, "%s (%s) - %s: %s",
-	      programName, componentName, 
+	      programName, componentName,
 	      logLevelToString (level), message);
 
     fprintf (stderr, defaultMessage);
