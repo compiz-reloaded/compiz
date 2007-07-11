@@ -998,7 +998,7 @@ logMessage (CompDisplay  *d,
 	    CompLogLevel level,
 	    char         *message);
 
-char *
+const char *
 logLevelToString (CompLogLevel level);
 
 int

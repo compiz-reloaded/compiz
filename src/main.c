@@ -139,34 +139,25 @@ logMessage (CompDisplay *d,
     fprintf (stderr, "\n");
 }
 
-char *
+const char *
 logLevelToString (CompLogLevel level)
 {
-    char *logStr;
-
-    switch (level)
-    {
+    switch (level) {
     case CompLogLevelFatal:
-	logStr = strdup ("Fatal");
-	break;
+	return "Fatal";
     case CompLogLevelError:
-	logStr = strdup ("Error");
-	break;
+	return "Error";
     case CompLogLevelWarn:
-	logStr = strdup ("Warn");
-	break;
+	return "Warn";
     case CompLogLevelInfo:
-	logStr = strdup ("Info");
-	break;
+	return "Info";
     case CompLogLevelDebug:
-	logStr = strdup ("Debug");
-	break;
+	return "Debug";
     default:
-	logStr = strdup ("Unknown");
 	break;
     }
 
-    return logStr;
+    return "Unknown";
 }
 
 static void
