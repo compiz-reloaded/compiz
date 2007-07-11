@@ -1228,12 +1228,12 @@ iniFreeFileData (CompDisplay *d)
     INI_DISPLAY (d);
 
     fd = id->fileData;
-    tmp = fd;
 
-    while (tmp && fd)
+    while (fd)
     {
-	free (tmp);
-	tmp = fd->next;
+        tmp = fd;
+        fd = fd->next;
+        free (tmp);
     }
 }
 
