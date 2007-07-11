@@ -92,6 +92,7 @@ typedef struct _ResizeDisplay {
     int		 mode;
     XRectangle	 savedGeometry;
     XRectangle	 geometry;
+
     int		 releaseButton;
     unsigned int mask;
     int		 pointerDx;
@@ -207,6 +208,44 @@ resizeDamageRectangle (CompScreen *s,
     reg.extents.y2 += 1;
 
     damageScreenRegion (s, &reg);
+}
+
+static Cursor
+resizeCursorFromResizeMask (CompScreen   *s,
+			    unsigned int mask)
+{
+    Cursor cursor;
+
+    RESIZE_SCREEN (s);
+
+    if (mask & ResizeLeftMask)
+    {
+	if (mask & ResizeDownMask)
+	    cursor = rs->downLeftCursor;
+	else if (mask & ResizeUpMask)
+	    cursor = rs->upLeftCursor;
+	else
+	    cursor = rs->leftCursor;
+    }
+    else if (mask & ResizeRightMask)
+    {
+	if (mask & ResizeDownMask)
+	    cursor = rs->downRightCursor;
+	else if (mask & ResizeUpMask)
+	    cursor = rs->upRightCursor;
+	else
+	    cursor = rs->rightCursor;
+    }
+    else if (mask & ResizeUpMask)
+    {
+	cursor = rs->upCursor;
+    }
+    else
+    {
+	cursor = rs->downCursor;
+    }
+
+    return cursor;
 }
 
 static void
@@ -387,31 +426,9 @@ resizeInitiate (CompDisplay     *d,
 	    {
 		cursor = rs->middleCursor;
 	    }
-	    else if (mask & ResizeLeftMask)
-	    {
-		if (mask & ResizeDownMask)
-		    cursor = rs->downLeftCursor;
-		else if (mask & ResizeUpMask)
-		    cursor = rs->upLeftCursor;
-		else
-		    cursor = rs->leftCursor;
-	    }
-	    else if (mask & ResizeRightMask)
-	    {
-		if (mask & ResizeDownMask)
-		    cursor = rs->downRightCursor;
-		else if (mask & ResizeUpMask)
-		    cursor = rs->upRightCursor;
-		else
-		    cursor = rs->rightCursor;
-	    }
-	    else if (mask & ResizeUpMask)
-	    {
-		cursor = rs->upCursor;
-	    }
 	    else
 	    {
-		cursor = rs->downCursor;
+		cursor = resizeCursorFromResizeMask (w->screen, mask);
 	    }
 
 	    rs->grabIndex = pushScreenGrab (w->screen, cursor, "resize");
@@ -637,11 +654,89 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	RESIZE_DISPLAY (s->display);
 
-	rd->pointerDx += xRoot - lastPointerX;
-	rd->pointerDy += yRoot - lastPointerY;
-
 	w = rd->savedGeometry.width;
 	h = rd->savedGeometry.height;
+
+	if (!rd->mask)
+	{
+	    CompWindow *w = rd->w;
+	    int        xDist, yDist;
+	    int        minPointerOffsetX, minPointerOffsetY;
+
+	    xDist = xRoot - (w->serverX + (w->serverWidth / 2));
+	    yDist = yRoot - (w->serverY + (w->serverHeight / 2));
+
+	    /* decision threshold is 10% of window size */
+	    minPointerOffsetX = MIN (20, w->serverWidth / 10);
+	    minPointerOffsetY = MIN (20, w->serverHeight / 10);
+
+	    /* if we reached the threshold in one direction,
+	       make the threshold in the other direction smaller
+	       so there is a chance that this threshold also can
+	       be reached (by diagonal movement) */
+	    if (abs (xDist) > minPointerOffsetX)
+		minPointerOffsetY /= 2;
+	    else if (abs (yDist) > minPointerOffsetY)
+		minPointerOffsetX /= 2;
+
+	    if (abs (xDist) > minPointerOffsetX)
+	    {
+		if (xDist > 0)
+		    rd->mask |= ResizeRightMask;
+		else
+		    rd->mask |= ResizeLeftMask;
+	    }
+
+	    if (abs (yDist) > minPointerOffsetY)
+	    {
+		if (yDist > 0)
+		    rd->mask |= ResizeDownMask;
+		else
+		    rd->mask |= ResizeUpMask;
+	    }
+
+	    /* if the pointer movement was enough to determine a
+	       direction, warp the pointer to the appropriate edge
+	       and set the right cursor */
+	    if (rd->mask)
+	    {
+		Cursor     cursor;
+		CompScreen *s = rd->w->screen;
+		CompAction *action;
+		int        pointerAdjustX = 0;
+		int        pointerAdjustY = 0;
+
+		RESIZE_SCREEN (s);
+
+		action = &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE].value.action;
+		action->state |= CompActionStateTermButton;
+	
+		if (rd->mask & ResizeRightMask)
+			pointerAdjustX = w->serverX + w->serverWidth +
+					 w->input.right - xRoot;
+		else if (rd->mask & ResizeLeftMask)
+			pointerAdjustX = w->serverX - w->input.left - xRoot;
+
+		if (rd->mask & ResizeDownMask)
+			pointerAdjustY = w->serverY + w->serverHeight +
+					 w->input.bottom - yRoot;
+		else if (rd->mask & ResizeUpMask)
+			pointerAdjustY = w->serverY - w->input.top - yRoot;
+
+		warpPointer (s, pointerAdjustX, pointerAdjustY);
+
+		cursor = resizeCursorFromResizeMask (s, rd->mask);
+		updateScreenGrab (s, rs->grabIndex, cursor);
+	    }
+	}
+	else
+	{
+	    /* only accumulate pointer movement if a mask is
+	       already set as we don't have a use for the 
+	       difference information otherwise */
+	    rd->pointerDx += xRoot - lastPointerX;
+	    rd->pointerDy += yRoot - lastPointerY;
+	}
 
 	if (rd->mask & ResizeLeftMask)
 	    w -= rd->pointerDx;
