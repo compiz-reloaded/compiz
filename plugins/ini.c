@@ -1228,7 +1228,6 @@ iniFreeFileData (CompDisplay *d)
     INI_DISPLAY (d);
 
     fd = id->fileData;
-    tmp = fd;
 
     while (fd)
     {
