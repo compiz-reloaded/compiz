@@ -928,7 +928,13 @@ scaleDonePaintScreen (CompScreen *s)
 	else
 	{
 	    if (ss->state == SCALE_STATE_IN)
+	    {
+		/* The FALSE activate event is sent when scale state
+		   goes back to normal, to avoid animation conflicts
+		   with other plugins. */
+		scaleActivateEvent (s, FALSE);
 		ss->state = SCALE_STATE_NONE;
+	    }
 	    else if (ss->state == SCALE_STATE_OUT)
 		ss->state = SCALE_STATE_WAIT;
 	}
@@ -1050,8 +1056,6 @@ scaleTerminate (CompDisplay     *d,
 		removeScreenGrab (s, ss->grabIndex, 0);
 		ss->grabIndex = 0;
 	    }
-
-	    scaleActivateEvent (s, FALSE);
 
 	    if (ss->dndTarget)
 		XUnmapWindow (d->display, ss->dndTarget);
