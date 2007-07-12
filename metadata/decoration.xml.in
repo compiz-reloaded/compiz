@@ -4,12 +4,12 @@
 	<_long>Window decorations</_long>
 	<feature>decorations</feature>
 	<deps>
-		<relation type="before">
-			<plugin>fade</plugin>
-			<plugin>cube</plugin>
-			<plugin>scale</plugin>
-			<plugin>wobbly</plugin>
-		</relation>
+	    <relation type="before">
+		<plugin>fade</plugin>
+		<plugin>cube</plugin>
+		<plugin>scale</plugin>
+		<plugin>wobbly</plugin>
+	    </relation>
 	</deps>
 	<display>
 	    <option name="shadow_radius" type="float">

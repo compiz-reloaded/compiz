@@ -3,11 +3,11 @@
 	<_short>Wobbly Windows</_short>
 	<_long>Use spring model for wobbly window effect</_long>
 	<deps>
-		<relation type="before">
-			<plugin>fade</plugin>
-			<plugin>cube</plugin>
-			<plugin>scale</plugin>
-		</relation>
+	    <relation type="before">
+		<plugin>fade</plugin>
+		<plugin>cube</plugin>
+		<plugin>scale</plugin>
+	    </relation>
 	</deps>
 	<display>
 	    <option name="snap" type="action">

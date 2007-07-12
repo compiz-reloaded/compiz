@@ -4,10 +4,10 @@
 	<_long>Transform windows when they are minimized and unminimized</_long>
 	<feature>windowanimations</feature>
 	<deps>
-		<relation type="before">
-			<plugin>cube</plugin>
-			<plugin>scale</plugin>
-		</relation>
+	    <relation type="before">
+		<plugin>cube</plugin>
+		<plugin>scale</plugin>
+	    </relation>
 	</deps>
 	<screen>
 	    <option name="speed" type="float">

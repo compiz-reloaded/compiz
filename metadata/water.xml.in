@@ -3,10 +3,10 @@
 	<_short>Water Effect</_short>
 	<_long>Adds water effects to different desktop actions</_long>
 	<deps>
-		<relation type="before">
-			<plugin>blur</plugin>
-			<plugin>video</plugin>
-		</relation>
+	    <relation type="before">
+		<plugin>blur</plugin>
+		<plugin>video</plugin>
+	    </relation>
 	</deps>
 	<display>
 	    <option name="initiate" type="action">
