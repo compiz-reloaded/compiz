@@ -169,11 +169,16 @@ regexMatchInitExp (CompDisplay  *d,
 	char		     *s;
 	int		     len;
 	CompMatchExpEvalProc eval;
+	unsigned int         flags;
     } prefix[] = {
-	{ "title=", 6, regexMatchExpEvalTitle },
-	{ "role=",  5, regexMatchExpEvalRole  },
-	{ "class=", 6, regexMatchExpEvalClass },
-	{ "name=",  5, regexMatchExpEvalName  }
+	{ "title=", 6, regexMatchExpEvalTitle, 0 },
+	{ "role=",  5, regexMatchExpEvalRole, 0  },
+	{ "class=", 6, regexMatchExpEvalClass, 0 },
+	{ "name=",  5, regexMatchExpEvalName, 0  },
+	{ "ititle=", 7, regexMatchExpEvalTitle, REG_ICASE },
+	{ "irole=",  6, regexMatchExpEvalRole, REG_ICASE  },
+	{ "iclass=", 7, regexMatchExpEvalClass, REG_ICASE },
+	{ "iname=",  6, regexMatchExpEvalName, REG_ICASE  },
     };
     int	i;
 
@@ -194,7 +199,7 @@ regexMatchInitExp (CompDisplay  *d,
 
 	    value += prefix[i].len;
 
-	    status = regcomp (preg, value, REG_NOSUB);
+	    status = regcomp (preg, value, REG_NOSUB | prefix[i].flags);
 	    if (status)
 	    {
 		char errMsg[1024];
