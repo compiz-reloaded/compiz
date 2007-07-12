@@ -511,54 +511,6 @@ loadPlugin (char *name)
     return 0;
 }
 
-static Bool
-checkPluginDeps (CompPlugin *p)
-{
-    CompPluginDep *deps = p->vTable->deps;
-    int	          nDeps = p->vTable->nDeps;
-
-    while (nDeps--)
-    {
-	switch (deps->rule) {
-	case CompPluginRuleBefore:
-	    if (findActivePlugin (deps->name))
-	    {
-		compLogMessage (NULL, "core", CompLogLevelError,
-				"'%s' plugin must be loaded before '%s' "
-				"plugin", p->vTable->name, deps->name);
-
-		return FALSE;
-	    }
-	    break;
-	case CompPluginRuleAfter:
-	    if (!findActivePlugin (deps->name))
-	    {
-		compLogMessage (NULL, "core", CompLogLevelError,
-				"'%s' plugin must be loaded after '%s' "
-				"plugin", p->vTable->name, deps->name);
-
-		return FALSE;
-	    }
-	    break;
-	case CompPluginRuleRequire:
-	    if (!findActiveFeature (deps->name))
-	    {
-		compLogMessage (NULL, "core", CompLogLevelError,
-				"'%s' plugin needs feature '%s' which "
-				"is currently not provided by any plugin",
-				p->vTable->name, deps->name);
-
-		return FALSE;
-	    }
-	    break;
-	}
-
-	deps++;
-    }
-
-    return TRUE;
-}
-
 Bool
 pushPlugin (CompPlugin *p)
 {
@@ -587,15 +539,6 @@ pushPlugin (CompPlugin *p)
 
 	    return FALSE;
 	}
-    }
-
-    if (!checkPluginDeps (p))
-    {
-	compLogMessage (NULL, "core", CompLogLevelError,
-			"Can't activate '%s' plugin due to dependency "
-			"problems", p->vTable->name);
-
-	return FALSE;
     }
 
     p->next = plugins;
