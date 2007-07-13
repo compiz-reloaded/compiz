@@ -1754,11 +1754,6 @@ waterGetMetadata (CompPlugin *plugin)
     return &waterMetadata;
 }
 
-CompPluginDep waterDeps[] = {
-    { CompPluginRuleBefore, "blur" },
-    { CompPluginRuleBefore, "video" }
-};
-
 static CompPluginVTable waterVTable = {
     "water",
     waterGetVersion,
@@ -1774,11 +1769,7 @@ static CompPluginVTable waterVTable = {
     waterGetDisplayOptions,
     waterSetDisplayOption,
     0, /* GetScreenOptions */
-    0, /* SetScreenOption */
-    waterDeps,
-    sizeof (waterDeps) / sizeof (waterDeps[0]),
-    0, /* Features */
-    0  /* nFeatures */
+    0  /* SetScreenOption */
 };
 
 CompPluginVTable *

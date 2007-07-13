@@ -2880,12 +2880,6 @@ wobblyGetMetadata (CompPlugin *plugin)
     return &wobblyMetadata;
 }
 
-CompPluginDep wobblyDeps[] = {
-    { CompPluginRuleBefore, "fade" },
-    { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "scale" }
-};
-
 CompPluginVTable wobblyVTable = {
     "wobbly",
     wobblyGetVersion,
@@ -2901,11 +2895,7 @@ CompPluginVTable wobblyVTable = {
     wobblyGetDisplayOptions,
     wobblySetDisplayOption,
     wobblyGetScreenOptions,
-    wobblySetScreenOption,
-    wobblyDeps,
-    sizeof (wobblyDeps) / sizeof (wobblyDeps[0]),
-    0, /* Features */
-    0  /* nFeatures */
+    wobblySetScreenOption
 };
 
 CompPluginVTable *

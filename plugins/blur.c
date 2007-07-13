@@ -2786,14 +2786,6 @@ blurGetMetadata (CompPlugin *plugin)
     return &blurMetadata;
 }
 
-CompPluginDep blurDeps[] = {
-    { CompPluginRuleBefore, "video" }
-};
-
-CompPluginFeature blurFeatures[] = {
-    { "blur" }
-};
-
 static CompPluginVTable blurVTable = {
     "blur",
     blurGetVersion,
@@ -2809,11 +2801,7 @@ static CompPluginVTable blurVTable = {
     blurGetDisplayOptions,
     blurSetDisplayOption,
     blurGetScreenOptions,
-    blurSetScreenOption,
-    blurDeps,
-    sizeof (blurDeps) / sizeof (blurDeps[0]),
-    blurFeatures,
-    sizeof (blurFeatures) / sizeof (blurFeatures[0])
+    blurSetScreenOption
 };
 
 CompPluginVTable *

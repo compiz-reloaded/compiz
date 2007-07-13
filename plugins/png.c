@@ -552,11 +552,7 @@ CompPluginVTable pngVTable = {
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
-    0, /* SetScreenOption */
-    0, /* Deps */
-    0, /* nDeps */
-    0, /* Features */
-    0  /* nFeatures */
+    0  /* SetScreenOption */
 };
 
 CompPluginVTable *

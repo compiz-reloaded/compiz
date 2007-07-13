@@ -1258,10 +1258,6 @@ videoGetMetadata (CompPlugin *plugin)
     return &videoMetadata;
 }
 
-CompPluginFeature videoFeatures[] = {
-    { "video" }
-};
-
 static CompPluginVTable videoVTable = {
     "video",
     videoGetVersion,
@@ -1277,11 +1273,7 @@ static CompPluginVTable videoVTable = {
     videoGetDisplayOptions,
     videoSetDisplayOption,
     0, /* GetScreenOptions */
-    0, /* SetScreenOption */
-    0, /* Deps */
-    0, /* nDeps */
-    videoFeatures,
-    sizeof (videoFeatures) / sizeof (videoFeatures[0])
+    0  /* SetScreenOption */
 };
 
 CompPluginVTable *

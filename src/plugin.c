@@ -425,41 +425,6 @@ findActivePlugin (char *name)
     return 0;
 }
 
-static CompPlugin *
-findActivePluginWithFeature (char	       *name,
-			     CompPluginFeature **feature)
-{
-    CompPlugin *p;
-    int	       i;
-
-    for (p = plugins; p; p = p->next)
-    {
-	for (i = 0; i < p->vTable->nFeatures; i++)
-	{
-	    if (strcmp (p->vTable->features[i].name, name) == 0)
-	    {
-		if (feature)
-		    *feature = &p->vTable->features[i];
-
-		return p;
-	    }
-	}
-    }
-
-    return 0;
-}
-
-CompPluginFeature *
-findActiveFeature (char *name)
-{
-    CompPluginFeature *feature;
-
-    if (findActivePluginWithFeature (name, &feature))
-	return feature;
-
-    return 0;
-}
-
 void
 unloadPlugin (CompPlugin *p)
 {
@@ -514,9 +479,6 @@ loadPlugin (char *name)
 Bool
 pushPlugin (CompPlugin *p)
 {
-    CompPlugin *plugin;
-    int	       i;
-
     if (findActivePlugin (p->vTable->name))
     {
 	compLogMessage (NULL, "core", CompLogLevelWarn,
@@ -524,21 +486,6 @@ pushPlugin (CompPlugin *p)
 			p->vTable->name);
 
 	return FALSE;
-    }
-
-    for (i = 0; i < p->vTable->nFeatures; i++)
-    {
-	plugin = findActivePluginWithFeature (p->vTable->features[i].name, 0);
-	if (plugin)
-	{
-	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "Plugin '%s' can't be activated because "
-			    "plugin '%s' is already providing feature '%s'",
-			    p->vTable->name, plugin->vTable->name,
-			    p->vTable->features[i].name);
-
-	    return FALSE;
-	}
     }
 
     p->next = plugins;

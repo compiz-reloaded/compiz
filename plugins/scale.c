@@ -2152,11 +2152,7 @@ CompPluginVTable scaleVTable = {
     scaleGetDisplayOptions,
     scaleSetDisplayOption,
     scaleGetScreenOptions,
-    scaleSetScreenOption,
-    0, /* Deps */
-    0, /* nDeps */
-    0, /* Features */
-    0  /* nFeatures */
+    scaleSetScreenOption
 };
 
 CompPluginVTable *

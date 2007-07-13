@@ -2259,15 +2259,6 @@ cubeGetMetadata (CompPlugin *plugin)
     return &cubeMetadata;
 }
 
-CompPluginDep cubeDeps[] = {
-    { CompPluginRuleBefore, "scale" },
-    { CompPluginRuleBefore, "switcher" }
-};
-
-CompPluginFeature cubeFeatures[] = {
-    { "largedesktop" }
-};
-
 CompPluginVTable cubeVTable = {
     "cube",
     cubeGetVersion,
@@ -2283,11 +2274,7 @@ CompPluginVTable cubeVTable = {
     cubeGetDisplayOptions,
     cubeSetDisplayOption,
     cubeGetScreenOptions,
-    cubeSetScreenOption,
-    cubeDeps,
-    sizeof (cubeDeps) / sizeof (cubeDeps[0]),
-    cubeFeatures,
-    sizeof (cubeFeatures) / sizeof (cubeFeatures[0])
+    cubeSetScreenOption
 };
 
 CompPluginVTable *

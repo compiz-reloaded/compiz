@@ -729,15 +729,6 @@ planeGetMetadata (CompPlugin *plugin)
     return &planeMetadata;
 }
 
-CompPluginDep planeDeps[] = {
-    { CompPluginRuleBefore, "scale" },
-    { CompPluginRuleBefore, "switcher" }
-};
-
-CompPluginFeature planeFeatures[] = {
-    { "largedesktop" }
-};
-
 CompPluginVTable planeVTable = {
     "plane",
     planeGetVersion,
@@ -753,11 +744,7 @@ CompPluginVTable planeVTable = {
     planeGetDisplayOptions,
     planeSetDisplayOption,
     NULL, /* planeGetScreenOptions, */
-    NULL, /* planeSetScreenOption, */
-    planeDeps,
-    sizeof (planeDeps) / sizeof (planeDeps[0]),
-    planeFeatures,
-    sizeof (planeFeatures) / sizeof (planeFeatures[0])
+    NULL  /* planeSetScreenOption, */
 };
 
 CompPluginVTable *

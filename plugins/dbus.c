@@ -1698,18 +1698,11 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
     if (p)
     {
-	CompPluginDep	  *deps;
-	int		  nDeps;
-	CompPluginFeature *features;
-	int		  nFeatures;
-	dbus_bool_t	  supportedABI;
-	int		  version;
-	DBusMessageIter   iter;
-	DBusMessageIter   listIter;
-	char		  sig[2];
-	char		  *shortDesc = NULL;
-	char		  *longDesc = NULL;
-	const char	  *blankStr = "";
+	dbus_bool_t supportedABI;
+	int	    version;
+	char	    *shortDesc = NULL;
+	char	    *longDesc = NULL;
+	const char  *blankStr = "";
 
 	version = (*p->vTable->getVersion) (p, ABIVERSION);
 	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
@@ -1762,72 +1755,8 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 				  DBUS_TYPE_BOOLEAN, &supportedABI,
 				  DBUS_TYPE_INVALID);
 
-	sig[0] = DBUS_TYPE_STRING;
-	sig[1] = '\0';
-
-	dbus_message_iter_init_append (reply, &iter);
-	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
-					  sig, &listIter);
-
-	if (supportedABI)
-	{
-	    deps  = p->vTable->deps;
-	    nDeps = p->vTable->nDeps;
-
-	    while (nDeps--)
-	    {
-		char *str;
-
-		str = malloc ((strlen (deps->name) + 10) * sizeof (char));
-		if (str)
-		{
-		    switch (deps->rule) {
-		    case CompPluginRuleBefore:
-			sprintf (str, "before:%s", deps->name);
-			break;
-		    case CompPluginRuleAfter:
-			sprintf (str, "after:%s", deps->name);
-			break;
-		    case CompPluginRuleRequire:
-		    default:
-			sprintf (str, "required:%s", deps->name);
-			break;
-		    }
-
-		    dbus_message_iter_append_basic (&listIter,
-						DBUS_TYPE_STRING,
-						&str);
-
-		    free (str);
-		}
-
-		deps++;
-	    }
-
-	    dbus_message_iter_close_container (&iter, &listIter);
-
-	    dbus_message_iter_init_append (reply, &iter);
-	    dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
-					      sig, &listIter);
-
-	    features  = p->vTable->features;
-	    nFeatures = p->vTable->nFeatures;
-
-	    while (nFeatures--)
-	    {
-		dbus_message_iter_append_basic (&listIter,
-						DBUS_TYPE_STRING,
-						&features->name);
-
-		features++;
-	    }
-
-	    dbus_message_iter_close_container (&iter, &listIter);
-
-	    if (loadedPlugin)
-		(*p->vTable->fini) (p);
-
-	}
+	if (supportedABI && loadedPlugin)
+	    (*p->vTable->fini) (p);
     }
     else
     {
@@ -2799,11 +2728,7 @@ CompPluginVTable dbusVTable = {
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
-    0, /* SetScreenOption */
-    0, /* Deps */
-    0, /* nDeps */
-    0, /* Features */
-    0  /* nFeatures */
+    0  /* SetScreenOption */
 };
 
 CompPluginVTable *

@@ -1189,15 +1189,6 @@ gconfGetMetadata (CompPlugin *plugin)
     return &gconfMetadata;
 }
 
-CompPluginDep gconfDeps[] = {
-    { CompPluginRuleAfter,  "glib" },
-    { CompPluginRuleBefore, "decoration" },
-    { CompPluginRuleBefore, "wobbly" },
-    { CompPluginRuleBefore, "fade" },
-    { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "scale" }
-};
-
 CompPluginVTable gconfVTable = {
     "gconf",
     gconfGetVersion,
@@ -1213,11 +1204,7 @@ CompPluginVTable gconfVTable = {
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     0, /* GetScreenOptions */
-    0, /* SetScreenOption */
-    gconfDeps,
-    sizeof (gconfDeps) / sizeof (gconfDeps[0]),
-    0, /* Features */
-    0  /* nFeatures */
+    0  /* SetScreenOption */
 };
 
 CompPluginVTable *

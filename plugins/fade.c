@@ -848,11 +848,6 @@ fadeGetMetadata (CompPlugin *plugin)
     return &fadeMetadata;
 }
 
-CompPluginDep fadeDeps[] = {
-    { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "scale" }
-};
-
 static CompPluginVTable fadeVTable = {
     "fade",
     fadeGetVersion,
@@ -868,11 +863,7 @@ static CompPluginVTable fadeVTable = {
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     fadeGetScreenOptions,
-    fadeSetScreenOption,
-    fadeDeps,
-    sizeof (fadeDeps) / sizeof (fadeDeps[0]),
-    0, /* Features */
-    0  /* nFeatures */
+    fadeSetScreenOption
 };
 
 CompPluginVTable *

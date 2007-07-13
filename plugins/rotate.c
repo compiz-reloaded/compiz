@@ -1915,10 +1915,6 @@ rotateGetMetadata (CompPlugin *plugin)
     return &rotateMetadata;
 }
 
-CompPluginDep rotateDeps[] = {
-    { CompPluginRuleAfter, "cube" }
-};
-
 CompPluginVTable rotateVTable = {
     "rotate",
     rotateGetVersion,
@@ -1934,11 +1930,7 @@ CompPluginVTable rotateVTable = {
     rotateGetDisplayOptions,
     rotateSetDisplayOption,
     rotateGetScreenOptions,
-    rotateSetScreenOption,
-    rotateDeps,
-    sizeof (rotateDeps) / sizeof (rotateDeps[0]),
-    0, /* Features */
-    0  /* nFeatures */
+    rotateSetScreenOption
 };
 
 CompPluginVTable *

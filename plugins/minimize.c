@@ -1014,11 +1014,6 @@ minGetMetadata (CompPlugin *plugin)
     return &minMetadata;
 }
 
-CompPluginDep minDeps[] = {
-    { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "scale" }
-};
-
 static CompPluginVTable minVTable = {
     "minimize",
     minGetVersion,
@@ -1034,11 +1029,7 @@ static CompPluginVTable minVTable = {
     0, /* GetDisplayOptions */
     0, /* SetDisplayOption */
     minGetScreenOptions,
-    minSetScreenOption,
-    minDeps,
-    sizeof (minDeps) / sizeof (minDeps[0]),
-    0, /* Features */
-    0  /* nFeatures */
+    minSetScreenOption
 };
 
 CompPluginVTable *

@@ -1418,17 +1418,6 @@ decorGetMetadata (CompPlugin *plugin)
     return &decorMetadata;
 }
 
-CompPluginDep decorDeps[] = {
-    { CompPluginRuleBefore, "wobbly" },
-    { CompPluginRuleBefore, "fade" },
-    { CompPluginRuleBefore, "cube" },
-    { CompPluginRuleBefore, "scale" }
-};
-
-CompPluginFeature decorFeatures[] = {
-    { "decorations" }
-};
-
 static CompPluginVTable decorVTable = {
     "decoration",
     decorGetVersion,
@@ -1444,11 +1433,7 @@ static CompPluginVTable decorVTable = {
     decorGetDisplayOptions,
     decorSetDisplayOption,
     0, /* GetScreenOptions */
-    0, /* SetScreenOption */
-    decorDeps,
-    sizeof (decorDeps) / sizeof (decorDeps[0]),
-    decorFeatures,
-    sizeof (decorFeatures) / sizeof (decorFeatures[0])
+    0  /* SetScreenOption */
 };
 
 CompPluginVTable *

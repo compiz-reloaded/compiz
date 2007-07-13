@@ -1528,10 +1528,6 @@ CompPluginVTable iniVTable = {
     0,
     0,
     0,
-    0,
-    0,
-    0,
-    0,
     0
 };
 

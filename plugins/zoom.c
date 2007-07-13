@@ -1147,11 +1147,7 @@ CompPluginVTable zoomVTable = {
     zoomGetDisplayOptions,
     zoomSetDisplayOption,
     zoomGetScreenOptions,
-    zoomSetScreenOption,
-    0, /* Deps */
-    0, /* nDeps */
-    0, /* Features */
-    0  /* nFeatures */
+    zoomSetScreenOption
 };
 
 CompPluginVTable *
