@@ -6,6 +6,9 @@
 	    <requirement>
 		<plugin>cube</plugin>
 	    </requirement>
+	    <relation type="after">
+                <plugin>cube</plugin>
+            </relation>
 	</deps>
 	<display>
 	    <option name="initiate" type="action">
