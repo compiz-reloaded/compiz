@@ -619,7 +619,7 @@ initActionValue (CompDisplay	 *d,
 
 	    for (i = 0; i < sizeof (edge) / sizeof (edge[0]); i++)
 	    {
-		value = xmlGetProp (child, BAD_CAST edge);
+		value = xmlGetProp (child, BAD_CAST edge[i]);
 		if (value)
 		{
 		    if (strcasecmp ((char *) value, "true") == 0)
