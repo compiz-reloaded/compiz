@@ -215,13 +215,12 @@ zoomPreparePaintScreen (CompScreen *s,
     if (zs->adjust)
     {
 	int   steps;
-	float amount, chunk;
+	float amount;
 
 	amount = msSinceLastPaint * 0.35f *
 	    zs->opt[ZOOM_SCREEN_OPTION_SPEED].value.f;
 	steps  = amount / (0.5f * zs->opt[ZOOM_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps) steps = 1;
-	chunk  = amount / (float) steps;
 
 	while (steps--)
 	{

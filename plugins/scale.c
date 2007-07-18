@@ -558,12 +558,10 @@ static void
 layoutSlots (CompScreen *s)
 {
     int i;
-    int spacing;
     int moMode;
 
     SCALE_SCREEN (s);
 
-    spacing = ss->opt[SCALE_SCREEN_OPTION_SPACING].value.i;
     moMode  = ss->opt[SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
 
     /* if we have only one head, we don't need the 
