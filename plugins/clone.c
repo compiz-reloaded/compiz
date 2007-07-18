@@ -284,7 +284,7 @@ cloneDonePaintScreen (CompScreen *s)
 }
 
 static Bool
-clonePaintScreen (CompScreen		  *s,
+clonePaintOutput (CompScreen		  *s,
 		  const ScreenPaintAttrib *sAttrib,
 		  const CompTransform	  *transform,
 		  Region		  region,
@@ -325,7 +325,7 @@ clonePaintScreen (CompScreen		  *s,
     else
 	status = (*s->paintOutput) (s, sAttrib, transform, region,
 				    outputPtr, mask);
-    WRAP (cs, s, paintOutput, clonePaintScreen);
+    WRAP (cs, s, paintOutput, clonePaintOutput);
 
     if (cs->grab)
     {
@@ -794,7 +794,7 @@ cloneInitScreen (CompPlugin *p,
 
     WRAP (cs, s, preparePaintScreen, clonePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cloneDonePaintScreen);
-    WRAP (cs, s, paintOutput, clonePaintScreen);
+    WRAP (cs, s, paintOutput, clonePaintOutput);
     WRAP (cs, s, paintWindow, clonePaintWindow);
     WRAP (cs, s, outputChangeNotify, cloneOutputChangeNotify);
 
