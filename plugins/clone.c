@@ -296,11 +296,7 @@ clonePaintScreen (CompScreen		  *s,
 
     CLONE_SCREEN (s);
 
-    for (i = 0; i < s->nOutputDev; i++)
-	if (!memcmp (outputPtr, &s->outputDev[i], sizeof (CompOutput)))
-	    output = i;
-
-    dst = output;
+    dst = output = (outputPtr->id != ~0) ? outputPtr->id : 0;
 
     if (!cs->grab || cs->grabbedOutput != output)
     {
@@ -323,8 +319,12 @@ clonePaintScreen (CompScreen		  *s,
     }
 
     UNWRAP (cs, s, paintOutput);
-    status = (*s->paintOutput) (s, sAttrib, transform, region,
-				&s->outputDev[dst], mask);
+    if (outputPtr->id != ~0)
+	status = (*s->paintOutput) (s, sAttrib, transform, region,
+				    &s->outputDev[dst], mask);
+    else
+	status = (*s->paintOutput) (s, sAttrib, transform, region,
+				    outputPtr, mask);
     WRAP (cs, s, paintOutput, clonePaintScreen);
 
     if (cs->grab)
