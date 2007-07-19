@@ -465,6 +465,9 @@ setScreenOption (CompScreen      *screen,
 	    vsize = compFindOption (screen->opt, NUM_OPTIONS (screen),
 				    "vsize", NULL);
 
+	    if (!vsize)
+		return FALSE;
+
 	    if (o->value.i * screen->width > MAXSHORT)
 		return FALSE;
 
@@ -479,6 +482,9 @@ setScreenOption (CompScreen      *screen,
 
 	    hsize = compFindOption (screen->opt, NUM_OPTIONS (screen),
 				    "hsize", NULL);
+
+	    if (!hsize)
+		return FALSE;
 
 	    if (o->value.i * screen->height > MAXSHORT)
 		return FALSE;
