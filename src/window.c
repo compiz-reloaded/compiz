@@ -2048,7 +2048,7 @@ addWindow (CompScreen *screen,
 					w->desktop);
 	    if (w->desktop != 0xffffffff)
 	    {
-		if (w->desktop < 0 || w->desktop >= screen->nDesktop)
+		if (w->desktop >= screen->nDesktop)
 		    w->desktop = screen->currentDesktop;
 	    }
 
@@ -4745,7 +4745,7 @@ setDesktopForWindow (CompWindow   *w,
 	if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
 	    return;
 
-	if (desktop < 0 || desktop >= w->screen->nDesktop)
+	if (desktop >= w->screen->nDesktop)
 	    return;
     }
 
