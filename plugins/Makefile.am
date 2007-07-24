@@ -46,6 +46,7 @@ libclone_la_LDFLAGS = -module -avoid-version -no-undefined
 libclone_la_SOURCES = clone.c
 
 libpng_la_LDFLAGS = -module -avoid-version -no-undefined
+libpng_la_LIBADD = @LIBPNG_LIBS@
 libpng_la_SOURCES = png.c
 
 libblur_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
@@ -124,6 +125,7 @@ endif
 
 INCLUDES =					\
 	@COMPIZ_CFLAGS@				\
+	@LIBPNG_CFLAGS@				\
 	@LIBRSVG_CFLAGS@			\
 	@ANNOTATE_CFLAGS@			\
 	@GCONF_CFLAGS@				\

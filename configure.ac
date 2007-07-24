@@ -80,8 +80,7 @@ AC_SUBST(imagedir)
 metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
 
-COMPIZ_REQUIRES="libpng	    \
-		 xcomposite \
+COMPIZ_REQUIRES="xcomposite \
 		 xfixes	    \
 		 xdamage    \
 		 xrandr	    \
@@ -127,6 +126,8 @@ AC_CHECK_PROGS(XSLTPROC, xsltproc)
 if test -z "$XSLTPROC"; then
   AC_MSG_ERROR([Couldn't find xsltproc])
 fi
+
+PKG_CHECK_MODULES(LIBPNG, libpng)
 
 AC_ARG_ENABLE(glib,
   [  --disable-glib          Disable glib plugin],
