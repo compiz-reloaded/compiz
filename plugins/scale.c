@@ -501,8 +501,16 @@ getSlotAreas (CompScreen *s)
 
     SCALE_SCREEN (s);
 
-    size      = malloc (s->nOutputDev * sizeof (int));
+    size = malloc (s->nOutputDev * sizeof (int));
+    if (!size)
+	return NULL;
+
     slotAreas = malloc (s->nOutputDev * sizeof (SlotArea));
+    if (!slotAreas)
+    {
+	free (size);
+        return NULL;
+    }
 
     left = ss->nWindows;
 
