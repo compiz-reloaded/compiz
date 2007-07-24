@@ -1,51 +1,45 @@
-# Swedish message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2001 SuSE GmbH.
-# Mattias Newzella <newzella@linux.nu>, 2001.
-# Gudmund Areskoug <fta@algonet.se>, 2001.
+# Swedish translation of compiz.
+# Copyright (C) 2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the compiz package.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-07 20:13-0400\n"
-"PO-Revision-Date: 2002-01-04 13:30+0100\n"
-"Last-Translator: Mattias Newzella <newzella@linux.nu>\n"
-"Language-Team: Swedish <i18n@suse.de>\n"
-"MIME-Version: 1\n"
+"POT-Creation-Date: 2007-02-03 00:57+0100\n"
+"PO-Revision-Date: 2007-06-25 20:38-0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1 ../src/main.c:54
-#, fuzzy
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "Skrivbord"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
 msgid "Window Management"
-msgstr "Fönsterhanterare"
+msgstr "Fönsterhantering"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
-#, fuzzy
 msgid "Blur type"
-msgstr "Vald"
+msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 #, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "Ta bort Win&dows helt"
+msgstr "Minska fönstret opakhet"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 #, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "Ta bort Win&dows helt"
+msgstr "Maximera aktivt fönster horisontellt"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme opacity"
@@ -64,14 +58,11 @@ msgid "Opacity to use for metacity theme decorations"
 msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid ""
-"Shade active windows with metacity theme decorations from opaque to "
-"translucent"
+msgid "Shade active windows with metacity theme decorations from opaque to translucent"
 msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade windows with metacity theme decorations from opaque to translucent"
+msgid "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
@@ -80,932 +71,858 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Använd metacity-tema"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 
-# Libris vill ha det så.
 #: ../metadata/annotate.xml.in.h:1
-#, fuzzy
 msgid "Annotate"
-msgstr "Hettitiska språk"
+msgstr "Anteckning"
 
-# KM
 #: ../metadata/annotate.xml.in.h:2
-#, fuzzy
 msgid "Annotate Fill Color"
-msgstr "Färger"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:3
 msgid "Annotate Stroke Color"
 msgstr ""
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "Aktiv profil"
+msgstr "Insticksmodul för anteckningar"
 
 #: ../metadata/annotate.xml.in.h:5
-#, fuzzy
 msgid "Clear"
-msgstr "R_ensa"
+msgstr "Töm"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Rita"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "Rita med verktyg"
 
 #: ../metadata/annotate.xml.in.h:8
-#, fuzzy
 msgid "Fill color for annotations"
-msgstr "Lär dig mer med hjälp av dokumentation"
+msgstr ""
 
-# Libris vill ha det så.
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
-#, fuzzy
+#: ../metadata/annotate.xml.in.h:9
+#: ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11
+#: ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6
+#: ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
-msgstr "Hettitiska språk"
+msgstr "Initiera"
 
-# Libris vill ha det så.
 #: ../metadata/annotate.xml.in.h:10
-#, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "Hettitiska språk"
+msgstr ""
 
-# Libris vill ha det så.
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Hettitiska språk"
+msgstr "Initiera radering av anteckning"
 
-# Libris vill ha det så.
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "Hettitiska språk"
+msgstr "Initiera radering"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "Radbredd"
 
 #: ../metadata/annotate.xml.in.h:14
-#, fuzzy
 msgid "Line width for annotations"
-msgstr "Lär dig mer med hjälp av dokumentation"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:15
-#, fuzzy
 msgid "Stroke color for annotations"
-msgstr "Lär dig mer med hjälp av dokumentation"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:16
 msgid "Stroke width"
 msgstr ""
 
 #: ../metadata/annotate.xml.in.h:17
-#, fuzzy
 msgid "Stroke width for annotations"
-msgstr "Lär dig mer med hjälp av dokumentation"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
-msgid "Alpha Blur"
-msgstr "Ta bort Win&dows"
+msgid "4xBilinear"
+msgstr "4xBilinjär"
 
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
-msgid "Alpha blur windows"
-msgstr "Ta bort Win&dows"
+msgid "Alpha Blur"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:3
 #, fuzzy
-msgid "Blur Filter"
-msgstr "Ange &filter"
+msgid "Alpha blur windows"
+msgstr "Skala fönster"
 
 #: ../metadata/blur.xml.in.h:4
 #, fuzzy
-msgid "Blur Occlusion"
-msgstr "Varaktighet"
+msgid "Blur Filter"
+msgstr "Texturfilter"
 
 #: ../metadata/blur.xml.in.h:5
-#, fuzzy
-msgid "Blur Saturation"
-msgstr "Varaktighet"
+msgid "Blur Occlusion"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:6
 #, fuzzy
-msgid "Blur Speed"
-msgstr "Vald"
+msgid "Blur Saturation"
+msgstr "Färgmättnad"
 
 #: ../metadata/blur.xml.in.h:7
-#, fuzzy
-msgid "Blur Windows"
-msgstr "Ta bort Win&dows"
+msgid "Blur Speed"
+msgstr "Suddighetshastighet"
 
 #: ../metadata/blur.xml.in.h:8
+#, fuzzy
+msgid "Blur Windows"
+msgstr "Placera fönster"
+
+#: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:9
-#, fuzzy
-msgid "Blur saturation"
-msgstr "Varaktighet"
-
 #: ../metadata/blur.xml.in.h:10
 #, fuzzy
-msgid "Blur windows"
-msgstr "Ta bort Win&dows"
+msgid "Blur saturation"
+msgstr "Färgmättnad"
 
 #: ../metadata/blur.xml.in.h:11
+#, fuzzy
+msgid "Blur windows"
+msgstr "Skala fönster"
+
+#: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:12
+#: ../metadata/blur.xml.in.h:13
 msgid "Filter method used for blurring"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:13
-#, fuzzy
-msgid "Focus Blur"
-msgstr "Ta bort Win&dows"
-
 #: ../metadata/blur.xml.in.h:14
-#, fuzzy
-msgid "Focus blur windows"
-msgstr "Ta bort Win&dows"
+msgid "Focus Blur"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:15
 #, fuzzy
-msgid "Gaussian Radius"
-msgstr "Ryska federationen"
+msgid "Focus blur windows"
+msgstr "Skala fönster"
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
-msgid "Gaussian Strength"
-msgstr "Rysk"
+msgid "Gaussian"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:17
-#, fuzzy
-msgid "Gaussian radius"
-msgstr "Ryska federationen"
+msgid "Gaussian Radius"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:18
-#, fuzzy
-msgid "Gaussian strength"
-msgstr "Rysk"
+msgid "Gaussian Strength"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:19
-#, fuzzy
-msgid "Mipmap LOD"
-msgstr "Mic-mac"
+msgid "Gaussian radius"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:20
-msgid "Mipmap level-of-detail"
+msgid "Gaussian strength"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:21
-msgid "Pulse"
-msgstr ""
+#: ../metadata/cube.xml.in.h:27
+#: ../metadata/decoration.xml.in.h:10
+#: ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:22
-msgid "Pulse effect"
-msgstr ""
+#, fuzzy
+msgid "Mipmap LOD"
+msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:23
-#, fuzzy
-msgid "Window blur speed"
-msgstr "Windows ledigt (%1)"
+msgid "Mipmap level-of-detail"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:24
+msgid "Pulse"
+msgstr "Puls"
+
+#: ../metadata/blur.xml.in.h:25
+msgid "Pulse effect"
+msgstr "Pulseffekt"
+
+#: ../metadata/blur.xml.in.h:26
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Fönstertoningshastighet (0.1-10.0)"
+
+#: ../metadata/blur.xml.in.h:27
 msgid "Windows that should be affected by focus blur"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:25
+#: ../metadata/blur.xml.in.h:28
 msgid "Windows that should be use alpha blur by default"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:26
+#: ../metadata/blur.xml.in.h:29
 msgid "blur occlusion"
 msgstr ""
 
 #: ../metadata/clone.xml.in.h:1
-#, fuzzy
 msgid "Clone Output"
-msgstr "Utmatningen var"
+msgstr "Klona utmatning"
 
 #: ../metadata/clone.xml.in.h:3
-#, fuzzy
 msgid "Initiate clone selection"
-msgstr "Val av videoläge"
+msgstr ""
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:1
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
+#, fuzzy
+msgid "A keybinding that when invoked, will run the shell command identified by command0"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando10"
 
 #: ../metadata/core.xml.in.h:2
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command1"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando1"
 
 #: ../metadata/core.xml.in.h:3
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command10"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando10"
 
 #: ../metadata/core.xml.in.h:4
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command11"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando11"
 
 #: ../metadata/core.xml.in.h:5
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command2"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando2"
 
 #: ../metadata/core.xml.in.h:6
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command3"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando3"
 
 #: ../metadata/core.xml.in.h:7
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command4"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando4"
 
 #: ../metadata/core.xml.in.h:8
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command5"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando5"
 
 #: ../metadata/core.xml.in.h:9
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command6"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando6"
 
 #: ../metadata/core.xml.in.h:10
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command7"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando7"
 
 #: ../metadata/core.xml.in.h:11
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command8"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando8"
 
 #: ../metadata/core.xml.in.h:12
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
+msgid "A keybinding that when invoked, will run the shell command identified by command9"
+msgstr "En tangentgenväg som när anropas kommer att köra skalkommandot identifierat som kommando9"
 
 #: ../metadata/core.xml.in.h:13
-#, fuzzy
 msgid "Active Plugins"
-msgstr "Aktiv profil"
+msgstr "Aktiva insticksmoduler"
 
 #: ../metadata/core.xml.in.h:14
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
+msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr "Tillåt att inte utritning av helskärmsfönster omdirigeras till bilder utanför skärmen"
 
 #: ../metadata/core.xml.in.h:15
 msgid "Audible Bell"
-msgstr ""
+msgstr "Ljudklocka"
 
 #: ../metadata/core.xml.in.h:16
-#, fuzzy
 msgid "Audible system beep"
-msgstr "Filsystem"
+msgstr "Systemljudklocka"
 
 #: ../metadata/core.xml.in.h:17
-#, fuzzy
 msgid "Auto-Raise"
-msgstr "Automatiskt"
+msgstr "Automatisk höjning"
 
 #: ../metadata/core.xml.in.h:18
 msgid "Auto-Raise Delay"
-msgstr ""
+msgstr "Fördröjning för automatisk höjning"
 
 #: ../metadata/core.xml.in.h:19
 #, fuzzy
 msgid "Automatic detection of output devices"
-msgstr "Automatisk identifiering"
+msgstr "Automatisk identifiering av uppdateringsfrekvens"
 
 #: ../metadata/core.xml.in.h:20
 msgid "Automatic detection of refresh rate"
-msgstr ""
+msgstr "Automatisk identifiering av uppdateringsfrekvens"
 
 #: ../metadata/core.xml.in.h:21
-msgid "Click To Focus"
-msgstr ""
+msgid "Best"
+msgstr "Bästa"
 
 #: ../metadata/core.xml.in.h:22
-msgid "Click on window moves input focus to it"
-msgstr ""
+msgid "Click To Focus"
+msgstr "Klicka för fokus"
 
 #: ../metadata/core.xml.in.h:23
-#, fuzzy
-msgid "Close Window"
-msgstr "Ta bort Win&dows"
+msgid "Click on window moves input focus to it"
+msgstr "Klicka på fönstret flyttar inmatningsfokus till det"
 
 #: ../metadata/core.xml.in.h:24
-msgid "Close active window"
-msgstr ""
+msgid "Close Window"
+msgstr "Stäng fönster"
 
 #: ../metadata/core.xml.in.h:25
-#, fuzzy
-msgid "Command line 0"
-msgstr "Kommando: "
+msgid "Close active window"
+msgstr "Stäng aktivt fönster"
 
 #: ../metadata/core.xml.in.h:26
-#, fuzzy
-msgid "Command line 1"
-msgstr "Kommando: "
+msgid "Command line 0"
+msgstr "Kommandorad 0"
 
 #: ../metadata/core.xml.in.h:27
-#, fuzzy
-msgid "Command line 10"
-msgstr "Kommando: "
+msgid "Command line 1"
+msgstr "Kommandorad 1"
 
 #: ../metadata/core.xml.in.h:28
-#, fuzzy
-msgid "Command line 11"
-msgstr "Kommando: "
+msgid "Command line 10"
+msgstr "Kommandorad 10"
 
 #: ../metadata/core.xml.in.h:29
-#, fuzzy
-msgid "Command line 2"
-msgstr "Kommando: "
+msgid "Command line 11"
+msgstr "Kommandorad 11"
 
 #: ../metadata/core.xml.in.h:30
-#, fuzzy
-msgid "Command line 3"
-msgstr "Kommando: "
+msgid "Command line 2"
+msgstr "Kommandorad 2"
 
 #: ../metadata/core.xml.in.h:31
-#, fuzzy
-msgid "Command line 4"
-msgstr "Kommando: "
+msgid "Command line 3"
+msgstr "Kommandorad 3"
 
 #: ../metadata/core.xml.in.h:32
-#, fuzzy
-msgid "Command line 5"
-msgstr "Kommando: "
+msgid "Command line 4"
+msgstr "Kommandorad 4"
 
 #: ../metadata/core.xml.in.h:33
-#, fuzzy
-msgid "Command line 6"
-msgstr "Kommando: "
+msgid "Command line 5"
+msgstr "Kommandorad 5"
 
 #: ../metadata/core.xml.in.h:34
-#, fuzzy
-msgid "Command line 7"
-msgstr "Kommando: "
+msgid "Command line 6"
+msgstr "Kommandorad 6"
 
 #: ../metadata/core.xml.in.h:35
-#, fuzzy
-msgid "Command line 8"
-msgstr "Kommando: "
+msgid "Command line 7"
+msgstr "Kommandorad 7"
 
 #: ../metadata/core.xml.in.h:36
-#, fuzzy
-msgid "Command line 9"
-msgstr "Kommando: "
+msgid "Command line 8"
+msgstr "Kommandorad 8"
 
 #: ../metadata/core.xml.in.h:37
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
+msgid "Command line 9"
+msgstr "Kommandorad 9"
 
 #: ../metadata/core.xml.in.h:38
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
+#, fuzzy
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command10 anropas"
 
 #: ../metadata/core.xml.in.h:39
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command1 anropas"
 
 #: ../metadata/core.xml.in.h:40
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command10 anropas"
 
 #: ../metadata/core.xml.in.h:41
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command11 anropas"
 
 #: ../metadata/core.xml.in.h:42
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command2 anropas"
 
 #: ../metadata/core.xml.in.h:43
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command3 anropas"
 
 #: ../metadata/core.xml.in.h:44
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command4 anropas"
 
 #: ../metadata/core.xml.in.h:45
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command5 anropas"
 
 #: ../metadata/core.xml.in.h:46
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command6 anropas"
 
 #: ../metadata/core.xml.in.h:47
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command7 anropas"
 
 #: ../metadata/core.xml.in.h:48
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command8 anropas"
 
 #: ../metadata/core.xml.in.h:49
-msgid "Decrease Opacity"
-msgstr ""
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "Kommandorad som ska köras i ett skal när run_command9 anropas"
 
 #: ../metadata/core.xml.in.h:50
-#, fuzzy
-msgid "Decrease window opacity"
-msgstr "Ta bort Win&dows helt"
+msgid "Decrease Opacity"
+msgstr "Minska opakhet"
 
 #: ../metadata/core.xml.in.h:51
-#, fuzzy
-msgid "Default Icon"
-msgstr "Förvald sektion"
+msgid "Decrease window opacity"
+msgstr "Minska fönstret opakhet"
 
 #: ../metadata/core.xml.in.h:52
-#, fuzzy
-msgid "Default window icon image"
-msgstr "Förvald domän"
+msgid "Default Icon"
+msgstr "Standardikon"
 
 #: ../metadata/core.xml.in.h:53
+msgid "Default window icon image"
+msgstr "Standardikonbild för fönster"
+
+#: ../metadata/core.xml.in.h:54
 msgid "Detect Outputs"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:54
-#, fuzzy
-msgid "Detect Refresh Rate"
-msgstr "Välj för uppdatering"
-
 #: ../metadata/core.xml.in.h:55
-msgid "Focus Prevention Windows"
-msgstr ""
+msgid "Detect Refresh Rate"
+msgstr "Detektera uppdateringsfrekvens"
 
 #: ../metadata/core.xml.in.h:56
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Startar demon."
+msgid "Fast"
+msgstr "Snabb"
 
 #: ../metadata/core.xml.in.h:57
-msgid "General Options"
-msgstr ""
+#, fuzzy
+msgid "Focus Prevention Windows"
+msgstr "Förhindra fokus"
 
 #: ../metadata/core.xml.in.h:58
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Förhindra fokus"
+
+#: ../metadata/core.xml.in.h:59
+msgid "General Options"
+msgstr "Allmänna alternativ"
+
+#: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:59
-msgid "Hide Skip Taskbar Windows"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:60
-msgid "Hide all windows and focus desktop"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:61
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
+msgid "Good"
+msgstr "Bra"
 
 #: ../metadata/core.xml.in.h:62
-#, fuzzy
-msgid "Horizontal Virtual Size"
-msgstr "Virtuell enhet"
+msgid "Hide Skip Taskbar Windows"
+msgstr "Dölj fönster inte i verktygsrad"
 
 #: ../metadata/core.xml.in.h:63
-msgid "Ignore Hints When Maximized"
-msgstr ""
+msgid "Hide all windows and focus desktop"
+msgstr "Dölj alla fönster och fokusera på skrivbord"
 
 #: ../metadata/core.xml.in.h:64
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr "Dölj fönster som inte är i verktygsraden vid visa skrivbordsläget"
 
 #: ../metadata/core.xml.in.h:65
-msgid "Increase Opacity"
-msgstr ""
+msgid "Horizontal Virtual Size"
+msgstr "Virtuell horisontell storlek"
 
 #: ../metadata/core.xml.in.h:66
-msgid "Increase window opacity"
-msgstr ""
+#, fuzzy
+msgid "Ignore Hints When Maximized"
+msgstr "Växla fönstermaximering"
 
 #: ../metadata/core.xml.in.h:67
-msgid "Interval before raising selected windows"
-msgstr ""
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr "Ignorera storleksinkrement och aspekthintning när fönster maximeras"
 
 #: ../metadata/core.xml.in.h:68
-msgid "Interval between ping messages"
-msgstr ""
+msgid "Increase Opacity"
+msgstr "Öka opakhet"
 
 #: ../metadata/core.xml.in.h:69
-#, fuzzy
-msgid "Lighting"
-msgstr "Loggning"
+msgid "Increase window opacity"
+msgstr "Öka fönsteropakhet"
 
 #: ../metadata/core.xml.in.h:70
 #, fuzzy
-msgid "List of currently active plugins"
-msgstr "Visa endast identifierade skrivare"
+msgid "Interval before raising selected windows"
+msgstr "Intervall innan markerade fönster höjs (0-10000)"
 
 #: ../metadata/core.xml.in.h:71
-msgid "List of strings describing output devices"
-msgstr ""
+msgid "Interval between ping messages"
+msgstr "Intervall mellan ping-meddelanden"
 
 #: ../metadata/core.xml.in.h:72
-#, fuzzy
-msgid "Lower Window"
-msgstr "Lågsorbiska"
+msgid "Lighting"
+msgstr "Ljussättning"
 
 #: ../metadata/core.xml.in.h:73
-msgid "Lower window beneath other windows"
-msgstr ""
+msgid "List of currently active plugins"
+msgstr "Lista över för närvarande aktiva insticksmoduler"
 
 #: ../metadata/core.xml.in.h:74
-msgid "Maximize Window"
-msgstr ""
+msgid "List of strings describing output devices"
+msgstr "Lista över strängar som beskriver utmatningsenheter"
 
 #: ../metadata/core.xml.in.h:75
-#, fuzzy
-msgid "Maximize Window Horizontally"
-msgstr "Krymp Window&s"
+msgid "Lower Window"
+msgstr "Sänk fönster"
 
 #: ../metadata/core.xml.in.h:76
-#, fuzzy
-msgid "Maximize Window Vertically"
-msgstr "Krymp Window&s"
+msgid "Lower window beneath other windows"
+msgstr "Sänk fönstret under andra fönster"
 
 #: ../metadata/core.xml.in.h:77
-msgid "Maximize active window"
-msgstr ""
+msgid "Maximize Window"
+msgstr "Maximera fönster"
 
 #: ../metadata/core.xml.in.h:78
-msgid "Maximize active window horizontally"
-msgstr ""
+msgid "Maximize Window Horizontally"
+msgstr "Maximera fönster horisontellt"
 
 #: ../metadata/core.xml.in.h:79
-msgid "Maximize active window vertically"
-msgstr ""
+msgid "Maximize Window Vertically"
+msgstr "Maximera fönster vertikalt"
 
 #: ../metadata/core.xml.in.h:80
-#, fuzzy
-msgid "Minimize Window"
-msgstr "Krymp Window&s"
+msgid "Maximize active window"
+msgstr "Maximera aktivt fönster"
 
 #: ../metadata/core.xml.in.h:81
-msgid "Minimize active window"
-msgstr ""
+msgid "Maximize active window horizontally"
+msgstr "Maximera aktivt fönster horisontellt"
 
 #: ../metadata/core.xml.in.h:82
-#, fuzzy
-msgid "Number of Desktops"
-msgstr "Fjärrskrivbord"
+msgid "Maximize active window vertically"
+msgstr "Maximera aktivt fönster vertikalt"
 
 #: ../metadata/core.xml.in.h:83
-#, fuzzy
-msgid "Number of virtual desktops"
-msgstr "Fjärrskrivbord"
+msgid "Minimize Window"
+msgstr "Minimera fönster"
 
 #: ../metadata/core.xml.in.h:84
+msgid "Minimize active window"
+msgstr "Minimera aktivt fönster"
+
+#: ../metadata/core.xml.in.h:85
+msgid "Number of Desktops"
+msgstr "Antal skrivbord"
+
+#: ../metadata/core.xml.in.h:86
+msgid "Number of virtual desktops"
+msgstr "Antal virtuella skrivbord"
+
+#: ../metadata/core.xml.in.h:87
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:85
-msgid "Opacity Step"
-msgstr ""
-
-# Libris vill ha det så.
-#: ../metadata/core.xml.in.h:86
-#, fuzzy
-msgid "Opacity change step"
-msgstr "Langue d'oc (1500-)"
-
-#: ../metadata/core.xml.in.h:87
-msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:88
-msgid "Opacity window values"
-msgstr ""
+msgid "Opacity Step"
+msgstr "Intervall för opakhet"
 
 #: ../metadata/core.xml.in.h:89
 #, fuzzy
-msgid "Opacity windows"
-msgstr "Ta bort Win&dows"
+msgid "Opacity change step"
+msgstr "Ändringsintervall för opakhet (1-50)"
 
 #: ../metadata/core.xml.in.h:90
-#, fuzzy
-msgid "Open a terminal"
-msgstr "Kör i terminal"
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:91
-msgid "Open window menu"
+msgid "Opacity window values"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:92
 #, fuzzy
-msgid "Outputs"
-msgstr "Utmatningen var"
+msgid "Opacity windows"
+msgstr "Fäst fönster"
 
 #: ../metadata/core.xml.in.h:93
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Fördröjning"
+msgid "Open a terminal"
+msgstr "Öppna en terminal"
 
 #: ../metadata/core.xml.in.h:94
-#, fuzzy
-msgid "Raise On Click"
-msgstr "&Radioklocka"
+msgid "Open window menu"
+msgstr "Öppna fönstermeny"
 
 #: ../metadata/core.xml.in.h:95
-#, fuzzy
-msgid "Raise Window"
-msgstr "Misslyckades med att ändra storlek."
+msgid "Outputs"
+msgstr "Utmatningar"
 
 #: ../metadata/core.xml.in.h:96
-msgid "Raise selected windows after interval"
-msgstr ""
+msgid "Ping Delay"
+msgstr "Fördröjning för ping"
 
 #: ../metadata/core.xml.in.h:97
-msgid "Raise window above other windows"
-msgstr ""
+msgid "Raise On Click"
+msgstr "Höj vid klick"
 
 #: ../metadata/core.xml.in.h:98
-msgid "Raise windows when clicked"
-msgstr ""
+msgid "Raise Window"
+msgstr "Höj fönster"
 
 #: ../metadata/core.xml.in.h:99
-#, fuzzy
-msgid "Refresh Rate"
-msgstr "Uppdatera"
+msgid "Raise selected windows after interval"
+msgstr "Höj markerade fönster efter intervall"
 
 #: ../metadata/core.xml.in.h:100
 #, fuzzy
-msgid "Run Dialog"
-msgstr "&Tonval"
+msgid "Raise window above other windows"
+msgstr "Sänk fönstret under andra fönster"
 
 #: ../metadata/core.xml.in.h:101
-#, fuzzy
-msgid "Run command 0"
-msgstr "Kommando \"%1\""
+msgid "Raise windows when clicked"
+msgstr "Höj fönster när de klickas på"
 
 #: ../metadata/core.xml.in.h:102
-#, fuzzy
-msgid "Run command 1"
-msgstr "Kommando \"%1\""
+msgid "Refresh Rate"
+msgstr "Uppdateringsfrekvens"
 
 #: ../metadata/core.xml.in.h:103
-#, fuzzy
-msgid "Run command 10"
-msgstr "Kommando \"%1\""
+msgid "Run Dialog"
+msgstr "Kördialog"
 
 #: ../metadata/core.xml.in.h:104
-#, fuzzy
-msgid "Run command 11"
-msgstr "Kommando \"%1\""
+msgid "Run command 0"
+msgstr "Kör kommando 0"
 
 #: ../metadata/core.xml.in.h:105
-#, fuzzy
-msgid "Run command 2"
-msgstr "Kommando: "
+msgid "Run command 1"
+msgstr "Kör kommando 1"
 
 #: ../metadata/core.xml.in.h:106
-#, fuzzy
-msgid "Run command 3"
-msgstr "Kommando: "
+msgid "Run command 10"
+msgstr "Kör kommando 10"
 
 #: ../metadata/core.xml.in.h:107
-#, fuzzy
-msgid "Run command 4"
-msgstr "Kommando: "
+msgid "Run command 11"
+msgstr "Kör kommando 11"
 
 #: ../metadata/core.xml.in.h:108
-#, fuzzy
-msgid "Run command 5"
-msgstr "Kommando: "
+msgid "Run command 2"
+msgstr "Kör kommando 2"
 
 #: ../metadata/core.xml.in.h:109
-#, fuzzy
-msgid "Run command 6"
-msgstr "Kommando: "
+msgid "Run command 3"
+msgstr "Kör kommando 3"
 
 #: ../metadata/core.xml.in.h:110
-#, fuzzy
-msgid "Run command 7"
-msgstr "Kommando: "
+msgid "Run command 4"
+msgstr "Kör kommando 4"
 
 #: ../metadata/core.xml.in.h:111
-#, fuzzy
-msgid "Run command 8"
-msgstr "Kommando: "
+msgid "Run command 5"
+msgstr "Kör kommando 5"
 
 #: ../metadata/core.xml.in.h:112
-#, fuzzy
-msgid "Run command 9"
-msgstr "Kommando: "
+msgid "Run command 6"
+msgstr "Kör kommando 6"
 
 #: ../metadata/core.xml.in.h:113
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr ""
+msgid "Run command 7"
+msgstr "Kör kommando 7"
 
 #: ../metadata/core.xml.in.h:114
-msgid "Screen size multiplier for vertical virtual size"
-msgstr ""
+msgid "Run command 8"
+msgstr "Kör kommando 8"
 
 #: ../metadata/core.xml.in.h:115
-#, fuzzy
-msgid "Screenshot command line"
-msgstr "Fel uppstod kommandoraden skulle tydas."
+msgid "Run command 9"
+msgstr "Kör kommando 9"
 
 #: ../metadata/core.xml.in.h:116
 #, fuzzy
-msgid "Show Main Menu"
-msgstr "Vi&sa startmeny"
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
 
 #: ../metadata/core.xml.in.h:117
-msgid "Show Run Application dialog"
-msgstr ""
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Skärmstorleksfaktor för virtuell storlek (4-32)"
 
 #: ../metadata/core.xml.in.h:118
-#, fuzzy
-msgid "Show the main menu"
-msgstr "Vi&sa startmeny"
+msgid "Screenshot command line"
+msgstr "Kommandorad för skärmbild"
 
 #: ../metadata/core.xml.in.h:119
-#, fuzzy
-msgid "Slow Animations"
-msgstr "Visa alla partitioner"
+msgid "Show Main Menu"
+msgstr "Visa huvudmeny"
 
 #: ../metadata/core.xml.in.h:120
-msgid "Sync To VBlank"
-msgstr ""
+msgid "Show Run Application dialog"
+msgstr "Visa dialogen Kör program"
 
 #: ../metadata/core.xml.in.h:121
-msgid "Take a screenshot"
-msgstr ""
+msgid "Show the main menu"
+msgstr "Visa huvudmenyn"
 
 #: ../metadata/core.xml.in.h:122
-msgid "Take a screenshot of a window"
-msgstr ""
+msgid "Slow Animations"
+msgstr "Långsamma animeringar"
 
 #: ../metadata/core.xml.in.h:123
-#, fuzzy
-msgid "Terminal command line"
-msgstr "Fel uppstod kommandoraden skulle tydas."
+msgid "Sync To VBlank"
+msgstr "Synkronisera till VBlank"
 
 #: ../metadata/core.xml.in.h:124
-#, fuzzy
-msgid "Texture Filter"
-msgstr "Ange &filter"
+msgid "Take a screenshot"
+msgstr "Ta en skärmbild"
 
 #: ../metadata/core.xml.in.h:125
-#, fuzzy
-msgid "Texture filtering"
-msgstr "Ange &filter"
+msgid "Take a screenshot of a window"
+msgstr "Ta en skärmbild av ett fönster"
 
 #: ../metadata/core.xml.in.h:126
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
+msgid "Terminal command line"
+msgstr "Kommandorad för terminal"
 
 #: ../metadata/core.xml.in.h:127
-msgid "Toggle Window Maximized"
-msgstr ""
+msgid "Texture Filter"
+msgstr "Texturfilter"
 
 #: ../metadata/core.xml.in.h:128
-msgid "Toggle Window Maximized Horizontally"
-msgstr ""
+msgid "Texture filtering"
+msgstr "Texturfiltrering"
 
 #: ../metadata/core.xml.in.h:129
-msgid "Toggle Window Maximized Vertically"
-msgstr ""
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Frekvensen för uppritning av skärmen (gånger/sekund) (1-200)"
 
 #: ../metadata/core.xml.in.h:130
-msgid "Toggle Window Shaded"
-msgstr ""
+msgid "Toggle Window Maximized"
+msgstr "Växla fönstermaximering"
 
 #: ../metadata/core.xml.in.h:131
-msgid "Toggle active window maximized"
-msgstr ""
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Växla fönstermaximering horisontellt"
 
 #: ../metadata/core.xml.in.h:132
-msgid "Toggle active window maximized horizontally"
-msgstr ""
+msgid "Toggle Window Maximized Vertically"
+msgstr "Växla fönstermaximering vertikalt"
 
 #: ../metadata/core.xml.in.h:133
-msgid "Toggle active window maximized vertically"
-msgstr ""
+msgid "Toggle Window Shaded"
+msgstr "Växla fönsterskuggning"
 
 #: ../metadata/core.xml.in.h:134
-msgid "Toggle active window shaded"
-msgstr ""
+msgid "Toggle active window maximized"
+msgstr "Växla maximering av aktivt fönster"
 
 #: ../metadata/core.xml.in.h:135
-msgid "Toggle use of slow animations"
-msgstr ""
+msgid "Toggle active window maximized horizontally"
+msgstr "Växla horisontell maximering av aktivt fönster"
 
 #: ../metadata/core.xml.in.h:136
-msgid "Unmaximize Window"
-msgstr ""
+msgid "Toggle active window maximized vertically"
+msgstr "Växla vertikal maximering av aktivt fönster"
 
 #: ../metadata/core.xml.in.h:137
-msgid "Unmaximize active window"
-msgstr ""
+msgid "Toggle active window shaded"
+msgstr "Växla skuggning av aktivt fönster"
 
 #: ../metadata/core.xml.in.h:138
-msgid "Unredirect Fullscreen Windows"
-msgstr ""
+msgid "Toggle use of slow animations"
+msgstr "Växla användning av långsamma animeringar"
 
 #: ../metadata/core.xml.in.h:139
-msgid "Use diffuse light when screen is transformed"
-msgstr ""
+msgid "Unmaximize Window"
+msgstr "Avmaximera fönster"
 
 #: ../metadata/core.xml.in.h:140
-#, fuzzy
-msgid "Vertical Virtual Size"
-msgstr "Virtuell enhet"
+msgid "Unmaximize active window"
+msgstr "Avmaximera aktivt fönster"
 
 #: ../metadata/core.xml.in.h:141
-#, fuzzy
-msgid "Window Menu"
-msgstr "Fönsterhanterare"
+msgid "Unredirect Fullscreen Windows"
+msgstr "Omdirigera tillbaka helskärmsfönster"
 
 #: ../metadata/core.xml.in.h:142
-msgid "Window screenshot command line"
-msgstr ""
+msgid "Use diffuse light when screen is transformed"
+msgstr "Använd diffus belysning när skärmen transformeras"
 
 #: ../metadata/core.xml.in.h:143
+msgid "Vertical Virtual Size"
+msgstr "Vertikal virtuell storlek"
+
+#: ../metadata/core.xml.in.h:144
+msgid "Window Menu"
+msgstr "Fönstermeny"
+
+#: ../metadata/core.xml.in.h:145
+msgid "Window screenshot command line"
+msgstr "Kommandorad för fönsterskärmbild"
+
+#: ../metadata/core.xml.in.h:146
 msgid "Windows that should be translucent by default"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
-#, fuzzy
+#: ../metadata/cube.xml.in.h:1
+#: ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
-msgstr "3D-acceleration:"
+msgstr "Accelerering"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr ""
+msgstr "Justera bild"
 
 #: ../metadata/cube.xml.in.h:3
 msgid "Adjust top face image to rotation"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:4
-#, fuzzy
 msgid "Advance to next slide"
-msgstr "Avancerade alternativ"
+msgstr "Fortsätt till nästa bild"
 
 #: ../metadata/cube.xml.in.h:5
-#, fuzzy
 msgid "Animate Skydome"
-msgstr "Sydney"
+msgstr "Animera Skydome"
 
 #: ../metadata/cube.xml.in.h:6
 msgid "Animate skydome when rotating cube"
-msgstr ""
+msgstr "Animera skydome när kub roterar"
 
 #: ../metadata/cube.xml.in.h:7
 msgid "Background Images"
-msgstr ""
+msgstr "Bakgrundsbilder"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background images"
-msgstr ""
+msgstr "Bakgrundsbilder"
 
 #: ../metadata/cube.xml.in.h:9
 msgid "Color of top and bottom sides of the cube"
-msgstr ""
+msgstr "Färg på över- och undersidorna av kuben"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
@@ -1015,141 +932,156 @@ msgstr ""
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 
-# KM
 #: ../metadata/cube.xml.in.h:12
-#, fuzzy
 msgid "Cube Color"
-msgstr "Färger"
+msgstr "Kubfärg"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Desktop Cube"
-msgstr "Kontorsdator"
+msgstr "Skrivbordskub"
 
 #: ../metadata/cube.xml.in.h:14
-#, fuzzy
-msgid "Fold Acceleration"
-msgstr "3D-acceleration:"
+msgid "Desktop Window Opacity Fade Time."
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:15
-#, fuzzy
-msgid "Fold Speed"
-msgstr "Vald"
+msgid "Fade Time"
+msgstr "Toningstid"
 
-# TL
 #: ../metadata/cube.xml.in.h:16
-#, fuzzy
-msgid "Fold Timestep"
-msgstr "Östtimor"
+msgid "Fold Acceleration"
+msgstr "Vikningsaccelerering"
 
-#: ../metadata/cube.xml.in.h:17 ../metadata/switcher.xml.in.h:10
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
+#: ../metadata/cube.xml.in.h:17
+msgid "Fold Speed"
+msgstr "Vikningshastighet"
 
 #: ../metadata/cube.xml.in.h:18
-#, fuzzy
-msgid "Go back to previous slide"
-msgstr "Föregående kärna"
+msgid "Fold Timestep"
+msgstr "Tidsintervall för vikning"
 
 #: ../metadata/cube.xml.in.h:19
-#, fuzzy
-msgid "Image files"
-msgstr "Misslyckade filer"
+#: ../metadata/switcher.xml.in.h:10
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "Generera mipmappar när det är möjligt för skalning av högre kvalitet"
 
 #: ../metadata/cube.xml.in.h:20
-msgid "Image to use as texture for the skydome"
-msgstr ""
+msgid "Go back to previous slide"
+msgstr "Gå tillbaka till föregående diabild"
 
 #: ../metadata/cube.xml.in.h:21
-msgid "Inside Cube"
-msgstr ""
+msgid "Image files"
+msgstr "Bildfiler"
 
 #: ../metadata/cube.xml.in.h:22
-msgid "Inside cube"
-msgstr ""
+msgid "Image to use as texture for the skydome"
+msgstr "Bild att använda som textur för skydome"
 
 #: ../metadata/cube.xml.in.h:23
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:24 ../metadata/decoration.xml.in.h:10
-#: ../metadata/switcher.xml.in.h:13
-#, fuzzy
-msgid "Mipmap"
-msgstr "Mic-mac"
+#: ../metadata/cube.xml.in.h:24
+msgid "Inside Cube"
+msgstr "I kuben"
 
 #: ../metadata/cube.xml.in.h:25
-#, fuzzy
-msgid "Next Slide"
-msgstr "Ny storlek"
+msgid "Inside cube"
+msgstr "I kuben"
 
 #: ../metadata/cube.xml.in.h:26
-#, fuzzy
-msgid "Place windows on cube"
-msgstr "Ta bort Win&dows"
-
-#: ../metadata/cube.xml.in.h:27
-#, fuzzy
-msgid "Prev Slide"
-msgstr "Föregående kärna"
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "Lista över PNG- och SVG-filer som ska ritas ut på översta ytan av kuben"
 
 #: ../metadata/cube.xml.in.h:28
-msgid "Render skydome"
-msgstr ""
+msgid "Next Slide"
+msgstr "Nästa diabild"
 
 #: ../metadata/cube.xml.in.h:29
-#, fuzzy
-msgid "Scale image"
-msgstr "Lokal tid"
+msgid "Opacity During Rotation"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:30
-msgid "Scale images to cover top face of cube"
+msgid "Opacity When Not Rotating"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:31
-#, fuzzy
-msgid "Skydome"
-msgstr "Sydney"
+msgid "Opacity of desktop window during rotation."
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:32
-msgid "Skydome Gradient End Color"
+msgid "Opacity of desktop window when not rotating."
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:33
+msgid "Place windows on cube"
+msgstr "Placera fönster på kuben"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Prev Slide"
+msgstr "Föregående diabild"
+
+#: ../metadata/cube.xml.in.h:35
+msgid "Render skydome"
+msgstr "Rita ut skydome"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Scale image"
+msgstr "Skala bild"
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Scale images to cover top face of cube"
+msgstr "Skala bilder för att täcka övre ytan på kuben"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Skydome"
+msgstr "Skydome"
+
+#: ../metadata/cube.xml.in.h:39
+msgid "Skydome Gradient End Color"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:40
 msgid "Skydome Gradient Start Color"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:34
-#, fuzzy
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome Image"
-msgstr "Sydney"
+msgstr "Skydome-bild"
 
-#: ../metadata/cube.xml.in.h:35 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:85 ../metadata/scale.xml.in.h:23
-#: ../metadata/switcher.xml.in.h:27 ../metadata/zoom.xml.in.h:7
-#, fuzzy
+#: ../metadata/cube.xml.in.h:42
+#: ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:86
+#: ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:27
+#: ../metadata/zoom.xml.in.h:3
 msgid "Speed"
-msgstr "Vald"
+msgstr "Hastighet"
 
-# TL
-#: ../metadata/cube.xml.in.h:36 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:25
-#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:8
-#, fuzzy
+#: ../metadata/cube.xml.in.h:43
+#: ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:89
+#: ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:31
+#: ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
-msgstr "Östtimor"
+msgstr "Tidsintervall"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:44
+msgid "Transparency Only on Mouse Rotate"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:45
 msgid "Unfold"
-msgstr ""
+msgstr "Vik ut"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:46
 msgid "Unfold cube"
-msgstr ""
+msgstr "Vik ut kub"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr ""
+msgstr "Dbus"
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
@@ -1160,156 +1092,133 @@ msgid "Allow mipmaps to be generated for decoration textures"
 msgstr ""
 
 #: ../metadata/decoration.xml.in.h:2
-#, fuzzy
 msgid "Command"
-msgstr "Kommando: "
+msgstr "Kommando"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "Ta bort Win&dows"
+msgstr "Dekorationsfönster"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
+msgid "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 
 #: ../metadata/decoration.xml.in.h:5
-#, fuzzy
 msgid "Drop shadow X offset"
-msgstr "&Låg kapacitet"
+msgstr "Skuggkastning X-position"
 
 #: ../metadata/decoration.xml.in.h:6
-#, fuzzy
 msgid "Drop shadow Y offset"
-msgstr "&Låg kapacitet"
+msgstr "Skuggkastning Y-position"
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "Radius"
+msgstr "Färg för skuggkastning"
 
 #: ../metadata/decoration.xml.in.h:8
-#, fuzzy
 msgid "Drop shadow opacity"
-msgstr "&Låg kapacitet"
+msgstr "Opakhet för skuggkastning"
 
 #: ../metadata/decoration.xml.in.h:9
-#, fuzzy
 msgid "Drop shadow radius"
-msgstr "Radius"
+msgstr "Radie för skuggkastning"
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "Krymp Window&s"
+msgstr "Skuggfärg"
 
 #: ../metadata/decoration.xml.in.h:12
-#, fuzzy
 msgid "Shadow Offset X"
-msgstr "&Låg kapacitet"
+msgstr "Skuggposition X"
 
 #: ../metadata/decoration.xml.in.h:13
-#, fuzzy
 msgid "Shadow Offset Y"
-msgstr "&Låg kapacitet"
+msgstr "Skuggposition Y"
 
 #: ../metadata/decoration.xml.in.h:14
-#, fuzzy
 msgid "Shadow Opacity"
-msgstr "&Låg kapacitet"
+msgstr "Skuggopakhet"
 
 #: ../metadata/decoration.xml.in.h:15
-#, fuzzy
 msgid "Shadow Radius"
-msgstr "Radius"
+msgstr "Skuggradie"
 
 #: ../metadata/decoration.xml.in.h:16
-#, fuzzy
 msgid "Shadow windows"
-msgstr "Krymp Window&s"
+msgstr "Skuggfönster"
 
 #: ../metadata/decoration.xml.in.h:17
-#, fuzzy
 msgid "Window Decoration"
-msgstr "Ingen beskrivning"
+msgstr "Fönsterdekoration"
 
 #: ../metadata/decoration.xml.in.h:18
-#, fuzzy
 msgid "Window decorations"
-msgstr "ypbind-alternativ"
+msgstr "Fönsterdekorationer"
 
 #: ../metadata/decoration.xml.in.h:19
 msgid "Windows that should be decorated"
-msgstr ""
+msgstr "Fönster som ska dekoreras"
 
 #: ../metadata/decoration.xml.in.h:20
 msgid "Windows that should have a shadow"
-msgstr ""
+msgstr "Fönster som ska ha en skugga"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
-msgstr ""
+msgstr "Tona vid minimering/öppna/stäng"
 
 #: ../metadata/fade.xml.in.h:2
-#, fuzzy
 msgid "Fade Speed"
-msgstr "Vald"
+msgstr "Toningshastighet"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Fade effect on system beep"
-msgstr "Filsystem"
+msgstr "Toningseffekt vid systemsignal"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr ""
+msgstr "Tona in fönster när de kopplas och tona ut fönster när de kopplas loss"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "Ta bort Win&dows"
+msgstr "Tona fönster"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fading Windows"
-msgstr "Krymp Window&s"
+msgstr "Tonande fönster"
 
 #: ../metadata/fade.xml.in.h:8
-#, fuzzy
 msgid "Fullscreen Visual Bell"
-msgstr "Pekskärm"
+msgstr "Visuell helskärmssignal"
 
 #: ../metadata/fade.xml.in.h:9
 msgid "Fullscreen fade effect on system beep"
-msgstr ""
+msgstr "Helskärmstoningseffekt vid systemsignal"
 
 #: ../metadata/fade.xml.in.h:10
 msgid "Visual Bell"
-msgstr ""
+msgstr "Visuell signal"
 
 #: ../metadata/fade.xml.in.h:11
 #, fuzzy
 msgid "Window fade speed"
-msgstr "Windows ledigt (%1)"
+msgstr "Fönstertoningshastighet (0.1-10.0)"
 
 #: ../metadata/fade.xml.in.h:12
 msgid "Windows that should be fading"
-msgstr ""
+msgstr "Fönster som ska tonas"
 
 #: ../metadata/fs.xml.in.h:1
-#, fuzzy
 msgid "Mount Point"
-msgstr "L&ägg till länk"
+msgstr "Monteringspunkt"
 
 #: ../metadata/fs.xml.in.h:2
-#, fuzzy
 msgid "Mount point"
-msgstr "L&ägg till länk"
+msgstr "Monteringspunkt"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
@@ -1321,16 +1230,23 @@ msgstr ""
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr ""
+msgstr "GConf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
 msgstr ""
 
+#: ../metadata/glib.xml.in.h:1
+msgid "GLib"
+msgstr "GLib"
+
+#: ../metadata/glib.xml.in.h:2
+msgid "GLib main loop support"
+msgstr ""
+
 #: ../metadata/ini.xml.in.h:1
-#, fuzzy
 msgid "Ini"
-msgstr "Logga inget"
+msgstr "Ini"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
@@ -1341,996 +1257,1023 @@ msgid "File change notification plugin"
 msgstr ""
 
 #: ../metadata/inotify.xml.in.h:2
-#, fuzzy
 msgid "Inotify"
-msgstr "Logga inget"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:1
-#, fuzzy
 msgid "Minimize Effect"
-msgstr "Krymp Window&s"
+msgstr "Minimeringseffekt"
 
 #: ../metadata/minimize.xml.in.h:2
-#, fuzzy
 msgid "Minimize Windows"
-msgstr "Krymp Window&s"
+msgstr "Minimera fönster"
 
 #: ../metadata/minimize.xml.in.h:3
-#, fuzzy
 msgid "Minimize speed"
-msgstr "Krymp Window&s"
+msgstr "Minimeringshastighet"
 
 #: ../metadata/minimize.xml.in.h:4
-#, fuzzy
 msgid "Minimize timestep"
-msgstr "Krymp Window&s"
+msgstr "Tidsintervall för minimering"
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
-msgstr ""
+msgstr "Skuggmotstånd"
 
 #: ../metadata/minimize.xml.in.h:6
 msgid "Shade resistance"
-msgstr ""
+msgstr "Skuggmotstånd"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr ""
+msgstr "Transformera fönster när de minimeras och avminimeras"
 
 #: ../metadata/minimize.xml.in.h:10
 msgid "Windows that should be transformed when minimized"
 msgstr ""
 
 #: ../metadata/move.xml.in.h:1
-#, fuzzy
 msgid "Constrain Y"
-msgstr "Innehåller"
+msgstr "Begränsa Y"
 
 #: ../metadata/move.xml.in.h:2
 msgid "Constrain Y coordinate to workspace area"
-msgstr ""
+msgstr "Begränsa Y-koordinat till arbetsyta"
 
 #: ../metadata/move.xml.in.h:3
-#, fuzzy
 msgid "Initiate Window Move"
-msgstr "Fl&ytta ner"
+msgstr "Initiera fönsterflyttning"
 
 #: ../metadata/move.xml.in.h:4
-#, fuzzy
 msgid "Move Window"
-msgstr "Fl&ytta ner"
+msgstr "Flytta fönster"
 
 #: ../metadata/move.xml.in.h:5
-#, fuzzy
 msgid "Move window"
-msgstr "Fl&ytta ner"
+msgstr "Flytta fönster"
 
-#: ../metadata/move.xml.in.h:6 ../metadata/scale.xml.in.h:13
+#: ../metadata/move.xml.in.h:6
+#: ../metadata/scale.xml.in.h:21
 #: ../metadata/switcher.xml.in.h:15
-#, fuzzy
 msgid "Opacity"
-msgstr "&Låg kapacitet"
+msgstr "Opakhet"
 
 #: ../metadata/move.xml.in.h:7
-#, fuzzy
 msgid "Opacity level of moving windows"
-msgstr "Startar demon."
+msgstr "Opaknivå för flyttande fönster"
 
 #: ../metadata/move.xml.in.h:8
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
+msgstr "Koppla loss och automatiskt avmaximera maximerade fönster när de dras"
 
 #: ../metadata/move.xml.in.h:9
-#, fuzzy
 msgid "Snapoff maximized windows"
-msgstr "Krymp Window&s"
+msgstr "Koppla loss maximerade fönster"
 
 #: ../metadata/move.xml.in.h:10
-#, fuzzy
 msgid "Start moving window"
-msgstr "Startar demon."
+msgstr "Börja flytta fönster"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "Algoritm att använda för fönsterplacering"
 
 #: ../metadata/place.xml.in.h:2
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Virtuell enhet"
+msgid "Cascade"
+msgstr "Kaskad"
 
 #: ../metadata/place.xml.in.h:3
-#, fuzzy
-msgid "Place Windows"
-msgstr "Ta bort Win&dows"
+msgid "Centered"
+msgstr "Centrerad"
 
 #: ../metadata/place.xml.in.h:4
-msgid "Place windows at appropriate positions when mapped"
-msgstr ""
+msgid "Horizontal viewport positions"
+msgstr "Horisontella skivbordsvypositioner"
 
 #: ../metadata/place.xml.in.h:5
-msgid "Placement Mode"
-msgstr ""
+msgid "Maximize"
+msgstr "Maximera"
 
 #: ../metadata/place.xml.in.h:6
-#, fuzzy
-msgid "Positioned windows"
-msgstr "Misslyckades med att ändra storlek."
+msgid "Place Windows"
+msgstr "Placera fönster"
 
 #: ../metadata/place.xml.in.h:7
-#, fuzzy
-msgid "Vertical viewport positions"
-msgstr "Virtuell enhet"
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Placera fönster på lämpliga positioner när de kopplas"
 
 #: ../metadata/place.xml.in.h:8
-#, fuzzy
-msgid "Viewport positioned windows"
-msgstr "Misslyckades med att ändra storlek."
+msgid "Placement Mode"
+msgstr "Placeringsläge"
 
 #: ../metadata/place.xml.in.h:9
-#, fuzzy
-msgid "Window placement workarounds"
-msgstr "ypbind-alternativ"
+msgid "Positioned windows"
+msgstr "Positionerade fönster"
 
 #: ../metadata/place.xml.in.h:10
+msgid "Random"
+msgstr "Slumpmässigt"
+
+#: ../metadata/place.xml.in.h:11
+msgid "Smart"
+msgstr "Smart"
+
+#: ../metadata/place.xml.in.h:12
+msgid "Vertical viewport positions"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:13
+msgid "Viewport positioned windows"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:14
+msgid "Window placement workarounds"
+msgstr "Problemlösning för fönsterplacering"
+
+#: ../metadata/place.xml.in.h:15
 msgid "Windows that should be positioned by default"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:16
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:12
-#, fuzzy
-msgid "Workarounds"
-msgstr "Ar&betsgrupp"
-
-#: ../metadata/place.xml.in.h:13
-#, fuzzy
-msgid "X Positions"
-msgstr "Misslyckades med att ändra storlek."
-
-#: ../metadata/place.xml.in.h:14
-#, fuzzy
-msgid "X Viewport Positions"
-msgstr "Virtuell enhet"
-
-#: ../metadata/place.xml.in.h:15
-msgid "X position values"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:16
-#, fuzzy
-msgid "Y Positions"
-msgstr "Misslyckades med att ändra storlek."
-
 #: ../metadata/place.xml.in.h:17
-#, fuzzy
-msgid "Y Viewport Positions"
-msgstr "Virtuell enhet"
+msgid "Workarounds"
+msgstr "Problemlösningar"
 
 #: ../metadata/place.xml.in.h:18
-msgid "Y position values"
+msgid "X Positions"
+msgstr "X-positioner"
+
+#: ../metadata/place.xml.in.h:19
+msgid "X Viewport Positions"
 msgstr ""
 
+#: ../metadata/place.xml.in.h:20
+msgid "X position values"
+msgstr "X-positionsvärden"
+
+#: ../metadata/place.xml.in.h:21
+msgid "Y Positions"
+msgstr "Y-positioner"
+
+#: ../metadata/place.xml.in.h:22
+msgid "Y Viewport Positions"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:23
+msgid "Y position values"
+msgstr "Y-positionsvärden"
+
 #: ../metadata/plane.xml.in.h:1
-#, fuzzy
 msgid "Desktop Plane"
-msgstr "Kontorsdator"
+msgstr "Skrivbordsplan"
 
 #: ../metadata/plane.xml.in.h:2
-#, fuzzy
 msgid "Place windows on a plane"
-msgstr "Ta bort Win&dows"
+msgstr "Placera fönster på ett plan"
 
 #: ../metadata/plane.xml.in.h:3
-#, fuzzy
 msgid "Plane Down"
-msgstr "Page Down"
+msgstr "Plana nedåt"
 
 #: ../metadata/plane.xml.in.h:4
-#, fuzzy
 msgid "Plane Left"
-msgstr "Fjärrdelnät"
+msgstr "Plana åt vänster"
 
 #: ../metadata/plane.xml.in.h:5
-#, fuzzy
 msgid "Plane Right"
-msgstr "Åt höger"
+msgstr "Plana åt höger"
 
 #: ../metadata/plane.xml.in.h:6
-#, fuzzy
 msgid "Plane To Face 1"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 1"
 
 #: ../metadata/plane.xml.in.h:7
-#, fuzzy
 msgid "Plane To Face 10"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 10"
 
 #: ../metadata/plane.xml.in.h:8
-#, fuzzy
 msgid "Plane To Face 11"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 11"
 
 #: ../metadata/plane.xml.in.h:9
-#, fuzzy
 msgid "Plane To Face 12"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 12"
 
 #: ../metadata/plane.xml.in.h:10
-#, fuzzy
 msgid "Plane To Face 2"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 2"
 
 #: ../metadata/plane.xml.in.h:11
-#, fuzzy
 msgid "Plane To Face 3"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 3"
 
 #: ../metadata/plane.xml.in.h:12
-#, fuzzy
 msgid "Plane To Face 4"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 4"
 
 #: ../metadata/plane.xml.in.h:13
-#, fuzzy
 msgid "Plane To Face 5"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 5"
 
 #: ../metadata/plane.xml.in.h:14
-#, fuzzy
 msgid "Plane To Face 6"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 6"
 
 #: ../metadata/plane.xml.in.h:15
-#, fuzzy
 msgid "Plane To Face 7"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 7"
 
 #: ../metadata/plane.xml.in.h:16
-#, fuzzy
 msgid "Plane To Face 8"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 8"
 
 #: ../metadata/plane.xml.in.h:17
-#, fuzzy
 msgid "Plane To Face 9"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 9"
 
 #: ../metadata/plane.xml.in.h:18
-#, fuzzy
 msgid "Plane Up"
-msgstr "Page Up"
+msgstr "Plana uppåt"
 
 #: ../metadata/plane.xml.in.h:19
-#, fuzzy
 msgid "Plane down"
-msgstr "Ta bort Win&dows"
+msgstr "Plana nedåt"
 
 #: ../metadata/plane.xml.in.h:20
-#, fuzzy
 msgid "Plane left"
-msgstr "Fjärrdelnät"
+msgstr "Plana åt vänster"
 
 #: ../metadata/plane.xml.in.h:21
-#, fuzzy
 msgid "Plane right"
-msgstr "Åt höger"
+msgstr "Plana åt höger"
 
 #: ../metadata/plane.xml.in.h:22
-#, fuzzy
 msgid "Plane to face 1"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 1"
 
 #: ../metadata/plane.xml.in.h:23
-#, fuzzy
 msgid "Plane to face 10"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 10"
 
 #: ../metadata/plane.xml.in.h:24
-#, fuzzy
 msgid "Plane to face 11"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 11"
 
 #: ../metadata/plane.xml.in.h:25
-#, fuzzy
 msgid "Plane to face 12"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 12"
 
 #: ../metadata/plane.xml.in.h:26
-#, fuzzy
 msgid "Plane to face 2"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 2"
 
 #: ../metadata/plane.xml.in.h:27
-#, fuzzy
 msgid "Plane to face 3"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 3"
 
 #: ../metadata/plane.xml.in.h:28
-#, fuzzy
 msgid "Plane to face 4"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 4"
 
 #: ../metadata/plane.xml.in.h:29
-#, fuzzy
 msgid "Plane to face 5"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 5"
 
 #: ../metadata/plane.xml.in.h:30
-#, fuzzy
 msgid "Plane to face 6"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 6"
 
 #: ../metadata/plane.xml.in.h:31
-#, fuzzy
 msgid "Plane to face 7"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 7"
 
 #: ../metadata/plane.xml.in.h:32
-#, fuzzy
 msgid "Plane to face 8"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 8"
 
 #: ../metadata/plane.xml.in.h:33
-#, fuzzy
 msgid "Plane to face 9"
-msgstr "Rotera skärm"
+msgstr "Plana till yta 9"
 
 #: ../metadata/plane.xml.in.h:34
-#, fuzzy
 msgid "Plane up"
-msgstr "Page Up"
+msgstr "Plana uppåt"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
-msgstr ""
+msgstr "Png"
 
 #: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
-msgstr ""
+msgstr "Png-bildläsare"
 
 #: ../metadata/regex.xml.in.h:1
 msgid "Regex Matching"
-msgstr ""
+msgstr "Reguljär uttrycksmatchning"
 
 #: ../metadata/regex.xml.in.h:2
+#, fuzzy
 msgid "Regex window matching"
-msgstr ""
+msgstr "Växla fönsterfästning"
 
 #: ../metadata/resize.xml.in.h:1
-msgid "Default Resize Mode"
-msgstr ""
+msgid "Border Color"
+msgstr "Ramfärg"
 
 #: ../metadata/resize.xml.in.h:2
-msgid "Default mode used for window resizing"
+msgid "Border color used for outline and rectangle resize modes"
 msgstr ""
 
 #: ../metadata/resize.xml.in.h:3
-#, fuzzy
-msgid "Initiate Window Resize"
-msgstr "Initial RAM-disk"
+msgid "Default Resize Mode"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:4
-#, fuzzy
-msgid "Resize Window"
-msgstr "Misslyckades med att ändra storlek."
+msgid "Default mode used for window resizing"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:5
-#, fuzzy
-msgid "Resize window"
-msgstr "Misslyckades med att ändra storlek."
+msgid "Fill Color"
+msgstr "Fyllnadsfärg"
 
 #: ../metadata/resize.xml.in.h:6
+msgid "Fill color used for rectangle resize mode"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:7
 #, fuzzy
+msgid "Initiate Normal Window Resize"
+msgstr "Initiera fönsterskalning"
+
+#: ../metadata/resize.xml.in.h:8
+#, fuzzy
+msgid "Initiate Outline Window Resize"
+msgstr "Initiera fönsterskalning"
+
+#: ../metadata/resize.xml.in.h:9
+#, fuzzy
+msgid "Initiate Rectangle Window Resize"
+msgstr "Initiera fönsterskalning"
+
+#: ../metadata/resize.xml.in.h:10
+msgid "Initiate Stretch Window Resize"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:11
+msgid "Initiate Window Resize"
+msgstr "Initiera fönsterskalning"
+
+#: ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normal"
+
+#: ../metadata/resize.xml.in.h:13
+msgid "Normal Resize Windows"
+msgstr "Ändra fönstrets storlek normalt"
+
+#: ../metadata/resize.xml.in.h:14
+msgid "Outline"
+msgstr "Kontur"
+
+#: ../metadata/resize.xml.in.h:15
+msgid "Outline Resize Windows"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:16
+msgid "Rectangle"
+msgstr "Rektangel"
+
+#: ../metadata/resize.xml.in.h:17
+msgid "Rectangle Resize Windows"
+msgstr "Ändra fönstrets storlek rektangulärt"
+
+#: ../metadata/resize.xml.in.h:18
+msgid "Resize Window"
+msgstr "Skala fönster"
+
+#: ../metadata/resize.xml.in.h:19
+msgid "Resize window"
+msgstr "Skala fönster"
+
+#: ../metadata/resize.xml.in.h:20
 msgid "Start resizing window"
-msgstr "Startar demon."
+msgstr "Börja skala fönster"
+
+#: ../metadata/resize.xml.in.h:21
+msgid "Start resizing window by stretching it"
+msgstr "Börja storleksändra fönstret genom att sträcka det"
+
+#: ../metadata/resize.xml.in.h:22
+msgid "Start resizing window normally"
+msgstr "Börja storleksändra fönstret normalt"
+
+#: ../metadata/resize.xml.in.h:23
+msgid "Start resizing window with outline"
+msgstr "Börja storleksändra fönstret med kontur"
+
+#: ../metadata/resize.xml.in.h:24
+msgid "Start resizing window with rectangle"
+msgstr "Börja storleksändra fönstret rektangulärt"
+
+#: ../metadata/resize.xml.in.h:25
+msgid "Stretch"
+msgstr "Sträck"
+
+#: ../metadata/resize.xml.in.h:26
+msgid "Stretch Resize Windows"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:27
+msgid "Windows that normal resize should be used for"
+msgstr "Fönster som normal storleksändring ska användas för"
+
+#: ../metadata/resize.xml.in.h:28
+msgid "Windows that outline resize should be used for"
+msgstr "Fönster som storleksändring med kontur ska användas för"
+
+#: ../metadata/resize.xml.in.h:29
+msgid "Windows that rectangle resize should be used for"
+msgstr "Fönster som rektangulär storleksändring ska användas för"
+
+#: ../metadata/resize.xml.in.h:30
+msgid "Windows that stretch resize should be used for"
+msgstr "Fönster som storleksändring med sträckning ska användas för"
 
 #: ../metadata/rotate.xml.in.h:2
 msgid "Edge Flip DnD"
-msgstr ""
+msgstr "Kantvänd DnD"
 
 #: ../metadata/rotate.xml.in.h:3
 msgid "Edge Flip Move"
-msgstr ""
+msgstr "Kantvänd flyttning"
 
 #: ../metadata/rotate.xml.in.h:4
 msgid "Edge Flip Pointer"
-msgstr ""
+msgstr "Kantvänd pekare"
 
 #: ../metadata/rotate.xml.in.h:5
-#, fuzzy
 msgid "Flip Time"
-msgstr "Realtid"
+msgstr "Vändtid"
 
 #: ../metadata/rotate.xml.in.h:6
+#, fuzzy
 msgid "Flip to left viewport and warp pointer"
-msgstr ""
+msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
 
 #: ../metadata/rotate.xml.in.h:7
 msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
+msgstr "Vänd till nästa skrivbordsvy när objekt dras till skärmens kant"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
+msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
+msgstr "Vänd till nästa skrivbordsvy när fönster flyttas till skärmens kant"
 
 #: ../metadata/rotate.xml.in.h:10
+#, fuzzy
 msgid "Flip to right viewport and warp pointer"
-msgstr ""
+msgstr "Vänd till nästa skrivbordsvy när muspekaren flyttas till skärmens kant"
 
-#: ../metadata/rotate.xml.in.h:12 ../metadata/zoom.xml.in.h:3
+#: ../metadata/rotate.xml.in.h:12
 msgid "Invert Y axis for pointer movement"
-msgstr ""
+msgstr "Invertera Y-axeln för pekarens rörelser"
 
-#: ../metadata/rotate.xml.in.h:13 ../metadata/zoom.xml.in.h:4
-#, fuzzy
+#: ../metadata/rotate.xml.in.h:13
 msgid "Pointer Invert Y"
-msgstr "Pekare till %1"
+msgstr "Invertera pekarens Y-axel"
 
-#: ../metadata/rotate.xml.in.h:14 ../metadata/zoom.xml.in.h:5
-#, fuzzy
+#: ../metadata/rotate.xml.in.h:14
 msgid "Pointer Sensitivity"
-msgstr "Skrivarbeskrivnin&g"
+msgstr "Muspekarkänslighet"
 
 #: ../metadata/rotate.xml.in.h:15
-#, fuzzy
 msgid "Rotate Cube"
-msgstr "Fjärrdelnät"
+msgstr "Rotera kub"
 
 #: ../metadata/rotate.xml.in.h:16
 #, fuzzy
 msgid "Rotate Flip Left"
-msgstr "Åt höger"
+msgstr "Rotera åt vänster"
 
 #: ../metadata/rotate.xml.in.h:17
 #, fuzzy
 msgid "Rotate Flip Right"
-msgstr "Åt höger"
+msgstr "Rotera åt höger"
 
 #: ../metadata/rotate.xml.in.h:18
-#, fuzzy
 msgid "Rotate Left"
-msgstr "Fjärrdelnät"
+msgstr "Rotera åt vänster"
 
 #: ../metadata/rotate.xml.in.h:19
-#, fuzzy
 msgid "Rotate Left with Window"
-msgstr "Startar demon."
+msgstr "Rotera åt vänster med fönster"
 
 #: ../metadata/rotate.xml.in.h:20
-#, fuzzy
 msgid "Rotate Right"
-msgstr "Åt höger"
+msgstr "Rotera åt höger"
 
 #: ../metadata/rotate.xml.in.h:21
-#, fuzzy
 msgid "Rotate Right with Window"
-msgstr "Startar demon."
+msgstr "Rotera åt höger med fönster"
 
 #: ../metadata/rotate.xml.in.h:22
-#, fuzzy
 msgid "Rotate To"
-msgstr "Fjärrdelnät"
+msgstr "Rotera till"
 
 #: ../metadata/rotate.xml.in.h:23
-#, fuzzy
 msgid "Rotate To Face 1"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 1"
 
 #: ../metadata/rotate.xml.in.h:24
-#, fuzzy
 msgid "Rotate To Face 1 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 1 med fönster"
 
 #: ../metadata/rotate.xml.in.h:25
-#, fuzzy
 msgid "Rotate To Face 10"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 10"
 
 #: ../metadata/rotate.xml.in.h:26
-#, fuzzy
 msgid "Rotate To Face 10 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 10 med fönster"
 
 #: ../metadata/rotate.xml.in.h:27
-#, fuzzy
 msgid "Rotate To Face 11"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 11"
 
 #: ../metadata/rotate.xml.in.h:28
-#, fuzzy
 msgid "Rotate To Face 11 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 11 med fönster"
 
 #: ../metadata/rotate.xml.in.h:29
-#, fuzzy
 msgid "Rotate To Face 12"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 12"
 
 #: ../metadata/rotate.xml.in.h:30
-#, fuzzy
 msgid "Rotate To Face 12 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 12 med fönster"
 
 #: ../metadata/rotate.xml.in.h:31
-#, fuzzy
 msgid "Rotate To Face 2"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 2"
 
 #: ../metadata/rotate.xml.in.h:32
-#, fuzzy
 msgid "Rotate To Face 2 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 2 med fönster"
 
 #: ../metadata/rotate.xml.in.h:33
-#, fuzzy
 msgid "Rotate To Face 3"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 3"
 
 #: ../metadata/rotate.xml.in.h:34
-#, fuzzy
 msgid "Rotate To Face 3 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 3 med fönster"
 
 #: ../metadata/rotate.xml.in.h:35
-#, fuzzy
 msgid "Rotate To Face 4"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 4"
 
 #: ../metadata/rotate.xml.in.h:36
-#, fuzzy
 msgid "Rotate To Face 4 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 4 med fönster"
 
 #: ../metadata/rotate.xml.in.h:37
-#, fuzzy
 msgid "Rotate To Face 5"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 5"
 
 #: ../metadata/rotate.xml.in.h:38
-#, fuzzy
 msgid "Rotate To Face 5 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 5 med fönster"
 
 #: ../metadata/rotate.xml.in.h:39
-#, fuzzy
 msgid "Rotate To Face 6"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 6"
 
 #: ../metadata/rotate.xml.in.h:40
-#, fuzzy
 msgid "Rotate To Face 6 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 6 med fönster"
 
 #: ../metadata/rotate.xml.in.h:41
-#, fuzzy
 msgid "Rotate To Face 7"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 7"
 
 #: ../metadata/rotate.xml.in.h:42
-#, fuzzy
 msgid "Rotate To Face 7 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 7 med fönster"
 
 #: ../metadata/rotate.xml.in.h:43
-#, fuzzy
 msgid "Rotate To Face 8"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 8"
 
 #: ../metadata/rotate.xml.in.h:44
-#, fuzzy
 msgid "Rotate To Face 8 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 8 med fönster"
 
 #: ../metadata/rotate.xml.in.h:45
-#, fuzzy
 msgid "Rotate To Face 9"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 9"
 
 #: ../metadata/rotate.xml.in.h:46
-#, fuzzy
 msgid "Rotate To Face 9 with Window"
-msgstr "Startar demon."
+msgstr "Rotera till yta 9 med fönster"
 
 #: ../metadata/rotate.xml.in.h:47
-#, fuzzy
 msgid "Rotate desktop cube"
-msgstr "Rotera skärm"
+msgstr "Rotera skrivbordskub"
 
 #: ../metadata/rotate.xml.in.h:48
-#, fuzzy
 msgid "Rotate left"
-msgstr "Fjärrdelnät"
+msgstr "Rotera åt vänster"
 
 #: ../metadata/rotate.xml.in.h:49
+#, fuzzy
 msgid "Rotate left and brind active window along"
-msgstr ""
+msgstr "Rotera åt vänster och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate right"
-msgstr "Åt höger"
+msgstr "Rotera åt höger"
 
 #: ../metadata/rotate.xml.in.h:51
+#, fuzzy
 msgid "Rotate right and brind active window along"
-msgstr ""
+msgstr "Rotera åt höger och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:52
-#, fuzzy
 msgid "Rotate to face 1"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 1"
 
 #: ../metadata/rotate.xml.in.h:53
-#, fuzzy
 msgid "Rotate to face 1 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 1 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:54
-#, fuzzy
 msgid "Rotate to face 10"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 10"
 
 #: ../metadata/rotate.xml.in.h:55
-#, fuzzy
 msgid "Rotate to face 10 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 10 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to face 11"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 11"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to face 11 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 11 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:58
-#, fuzzy
 msgid "Rotate to face 12"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 12"
 
 #: ../metadata/rotate.xml.in.h:59
-#, fuzzy
 msgid "Rotate to face 12 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 12 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:60
-#, fuzzy
 msgid "Rotate to face 2"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 2"
 
 #: ../metadata/rotate.xml.in.h:61
-#, fuzzy
 msgid "Rotate to face 2 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 2 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:62
-#, fuzzy
 msgid "Rotate to face 3"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 3"
 
 #: ../metadata/rotate.xml.in.h:63
-#, fuzzy
 msgid "Rotate to face 3 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 3 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:64
-#, fuzzy
 msgid "Rotate to face 4"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 4"
 
 #: ../metadata/rotate.xml.in.h:65
-#, fuzzy
 msgid "Rotate to face 4 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 4 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:66
-#, fuzzy
 msgid "Rotate to face 5"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 5"
 
 #: ../metadata/rotate.xml.in.h:67
-#, fuzzy
 msgid "Rotate to face 5 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 5 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:68
-#, fuzzy
 msgid "Rotate to face 6"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 6"
 
 #: ../metadata/rotate.xml.in.h:69
-#, fuzzy
 msgid "Rotate to face 6 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 6 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:70
-#, fuzzy
 msgid "Rotate to face 7"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 7"
 
 #: ../metadata/rotate.xml.in.h:71
-#, fuzzy
 msgid "Rotate to face 7 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 7 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:72
-#, fuzzy
 msgid "Rotate to face 8"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 8"
 
 #: ../metadata/rotate.xml.in.h:73
-#, fuzzy
 msgid "Rotate to face 8 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 8 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:74
-#, fuzzy
 msgid "Rotate to face 9"
-msgstr "Rotera skärm"
+msgstr "Rotera till yta 9"
 
 #: ../metadata/rotate.xml.in.h:75
-#, fuzzy
 msgid "Rotate to face 9 and bring active window along"
-msgstr "Startar demon."
+msgstr "Rotera till yta 9 och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:76
-#, fuzzy
 msgid "Rotate to viewport"
-msgstr "Rotera skärm"
+msgstr "Rotera till skrivbordsvy"
 
 #: ../metadata/rotate.xml.in.h:77
-#, fuzzy
 msgid "Rotate window"
-msgstr "Fl&ytta ner"
+msgstr "Rotera fönster"
 
 #: ../metadata/rotate.xml.in.h:78
-#, fuzzy
 msgid "Rotate with window"
-msgstr "Startar demon."
+msgstr "Rotera med fönster"
 
 #: ../metadata/rotate.xml.in.h:79
-#, fuzzy
 msgid "Rotation Acceleration"
-msgstr "3D-acceleration:"
+msgstr "Roteringsacceleration"
 
-# TL
 #: ../metadata/rotate.xml.in.h:80
-#, fuzzy
 msgid "Rotation Speed"
-msgstr "Östtimor"
+msgstr "Roteringshastighet"
 
-# TL
 #: ../metadata/rotate.xml.in.h:81
-#, fuzzy
 msgid "Rotation Timestep"
-msgstr "Östtimor"
+msgstr "Tidsintervall för rotering"
 
-#: ../metadata/rotate.xml.in.h:82 ../metadata/zoom.xml.in.h:6
-msgid "Sensitivity of pointer movement"
-msgstr ""
+#: ../metadata/rotate.xml.in.h:82
+msgid "Rotation Zoom"
+msgstr "Roteringszoom"
 
 #: ../metadata/rotate.xml.in.h:83
-msgid "Snap Cube Rotation to Top Face"
-msgstr ""
+#, fuzzy
+msgid "Sensitivity of pointer movement"
+msgstr "Känslighet för flyttning av muspekare (0.01-100.00)"
 
 #: ../metadata/rotate.xml.in.h:84
-msgid "Snap To Top Face"
-msgstr ""
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Fäst kubroteringen mot översta ytan"
 
-#: ../metadata/rotate.xml.in.h:86
-#, fuzzy
-msgid "Start Rotation"
-msgstr "Starta identifiering"
+#: ../metadata/rotate.xml.in.h:85
+msgid "Snap To Top Face"
+msgstr "Fäst mot översta ytan"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Timeout before flipping viewport"
-msgstr ""
+msgid "Start Rotation"
+msgstr "Starta rotering"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:88
+msgid "Timeout before flipping viewport"
+msgstr "Tidsgräns innan vändning av skrivbordsvy"
+
+#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/switcher.xml.in.h:33
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../metadata/scale.xml.in.h:1
+#: ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
-msgstr ""
+msgstr "Mängden opakhet i procent"
 
 #: ../metadata/scale.xml.in.h:2
-#, fuzzy
-msgid "Darken Background"
-msgstr "Bakgrund"
+msgid "Big"
+msgstr "Stor"
 
 #: ../metadata/scale.xml.in.h:3
-msgid "Darken background when scaling windows"
-msgstr ""
+msgid "Click Desktop to Show Desktop"
+msgstr "Klicka på Skrivbord för att visa skrivbordet"
 
 #: ../metadata/scale.xml.in.h:4
-msgid "Hover Time"
-msgstr ""
+msgid "Darken Background"
+msgstr "Mörka bakgrunden"
 
 #: ../metadata/scale.xml.in.h:5
-#, fuzzy
-msgid "Initiate Window Picker"
-msgstr "Initial RAM-disk"
+msgid "Darken background when scaling windows"
+msgstr "Mörka bakgrunden vid fönsterskalning"
 
 #: ../metadata/scale.xml.in.h:6
-#, fuzzy
-msgid "Initiate Window Picker For All Windows"
-msgstr "Initial RAM-disk"
+msgid "Emblem"
+msgstr "Emblem"
 
 #: ../metadata/scale.xml.in.h:7
-#, fuzzy
-msgid "Initiate Window Picker For Window Group"
-msgstr "Initial RAM-disk"
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:8
-#, fuzzy
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Initial RAM-disk"
+msgid "Hover Time"
+msgstr "Pekartid"
 
 #: ../metadata/scale.xml.in.h:9
-msgid "Layout and start transforming all windows"
-msgstr ""
+msgid "Initiate Window Picker"
+msgstr "Initiera fönsterväljare"
 
 #: ../metadata/scale.xml.in.h:10
-msgid "Layout and start transforming window group"
-msgstr ""
+#, fuzzy
+msgid "Initiate Window Picker For All Windows"
+msgstr "Initiera fönsterväljare"
 
 #: ../metadata/scale.xml.in.h:11
-msgid "Layout and start transforming windows"
-msgstr ""
+#, fuzzy
+msgid "Initiate Window Picker For Window Group"
+msgstr "Initiera fönsterväljare"
 
 #: ../metadata/scale.xml.in.h:12
-msgid "Layout and start transforming windows on current output"
-msgstr ""
+#, fuzzy
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Initiera fönsterväljare"
+
+#: ../metadata/scale.xml.in.h:13
+#, fuzzy
+msgid "Layout and start transforming all windows"
+msgstr "Lägg ut och påbörja fönstertransformering"
 
 #: ../metadata/scale.xml.in.h:14
-msgid "Overlay Icon"
-msgstr ""
+#, fuzzy
+msgid "Layout and start transforming window group"
+msgstr "Lägg ut och påbörja fönstertransformering"
 
 #: ../metadata/scale.xml.in.h:15
-msgid "Overlay an icon on windows once they are scaled"
-msgstr ""
+msgid "Layout and start transforming windows"
+msgstr "Lägg ut och påbörja fönstertransformering"
 
 #: ../metadata/scale.xml.in.h:16
 #, fuzzy
-msgid "Scale"
-msgstr "Bildläsare"
+msgid "Layout and start transforming windows on current output"
+msgstr "Lägg ut och påbörja fönstertransformering"
 
 #: ../metadata/scale.xml.in.h:17
-#, fuzzy
-msgid "Scale Windows"
-msgstr "Ta bort Win&dows"
+msgid "Multi Output Mode"
+msgstr "Läge för multipla utmatningar"
 
 #: ../metadata/scale.xml.in.h:18
-#, fuzzy
-msgid "Scale speed"
-msgstr "Lokal tid"
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Ingen"
 
 #: ../metadata/scale.xml.in.h:19
-#, fuzzy
-msgid "Scale timestep"
-msgstr "Lokal tid"
+msgid "On all output devices"
+msgstr "På alla utmatningsenheter"
 
 #: ../metadata/scale.xml.in.h:20
-#, fuzzy
-msgid "Scale windows"
-msgstr "Ta bort Win&dows"
-
-#: ../metadata/scale.xml.in.h:21
-#, fuzzy
-msgid "Space between windows"
-msgstr "Ta bort Win&dows"
+msgid "On current output device"
+msgstr "På aktuell utmatningsenhet"
 
 #: ../metadata/scale.xml.in.h:22
+msgid "Overlay Icon"
+msgstr "Lägg ikoner över"
+
+#: ../metadata/scale.xml.in.h:23
 #, fuzzy
-msgid "Spacing"
-msgstr "Spanien"
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Lägg en ikon över fönster när de är skalade (Ingen, Emblem, Stor)"
 
 #: ../metadata/scale.xml.in.h:24
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr ""
+msgid "Scale"
+msgstr "Skala"
+
+#: ../metadata/scale.xml.in.h:25
+msgid "Scale Windows"
+msgstr "Skala fönster"
 
 #: ../metadata/scale.xml.in.h:26
-msgid "Windows that should be scaled in scale mode"
+msgid "Scale speed"
+msgstr "Skalningshastighet"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Scale timestep"
+msgstr "Tidsintervall för skalning"
+
+#: ../metadata/scale.xml.in.h:28
+msgid "Scale windows"
+msgstr "Skala fönster"
+
+#: ../metadata/scale.xml.in.h:29
+msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 
+#: ../metadata/scale.xml.in.h:30
+msgid "Space between windows"
+msgstr "Mellanrum mellan fönster"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Spacing"
+msgstr "Mellanrum"
+
+#: ../metadata/scale.xml.in.h:33
+msgid "Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Windows that should be scaled in scale mode"
+msgstr "Fönster som ska skalas i skalningsläget"
+
 #: ../metadata/screenshot.xml.in.h:1
-#, fuzzy
 msgid "Automatically open screenshot in this application"
-msgstr "Starta uppdateraren automatiskt vid inloggning"
+msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:2
-#, fuzzy
 msgid "Directory"
-msgstr "Katalog\n"
+msgstr "Katalog"
 
 #: ../metadata/screenshot.xml.in.h:4
 #, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "Val av videoläge"
+msgstr "Ta en skärmbild"
 
 #: ../metadata/screenshot.xml.in.h:5
-#, fuzzy
 msgid "Launch Application"
-msgstr "Starta ett program"
+msgstr "Kör program"
 
 #: ../metadata/screenshot.xml.in.h:6
 msgid "Put screenshot images in this directory"
-msgstr ""
+msgstr "Lägg skärmbilder i den här katalogen"
 
 #: ../metadata/screenshot.xml.in.h:7
-#, fuzzy
 msgid "Screenshot"
-msgstr "Skärm"
+msgstr "Skärmbild"
 
 #: ../metadata/screenshot.xml.in.h:8
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "Fel uppstod kommandoraden skulle tydas."
+msgstr "Insticksmodul för skärmbild"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
-msgstr ""
+msgstr "Svg"
 
 #: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
-msgstr ""
+msgstr "Svg-bildläsare"
 
 #: ../metadata/switcher.xml.in.h:1
+#, fuzzy
 msgid "Amount of brightness in percent"
-msgstr ""
+msgstr "Ljusstyrka i procent (0-100)"
 
 #: ../metadata/switcher.xml.in.h:3
+#, fuzzy
 msgid "Amount of saturation in percent"
-msgstr ""
+msgstr "Färgmättnad i procent (0-100)"
 
 #: ../metadata/switcher.xml.in.h:4
-#, fuzzy
 msgid "Application Switcher"
-msgstr "Programordning"
+msgstr "Programväxlare"
 
 #: ../metadata/switcher.xml.in.h:5
-#, fuzzy
 msgid "Auto Rotate"
-msgstr "Automatiskt"
+msgstr "Automatisk rotering"
 
 #: ../metadata/switcher.xml.in.h:6
-#, fuzzy
 msgid "Brightness"
-msgstr "Brygga"
+msgstr "Ljusstyrka"
 
 #: ../metadata/switcher.xml.in.h:7
-#, fuzzy
 msgid "Bring To Front"
-msgstr "Under start"
+msgstr "Lägg överst"
 
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring selected window to front"
-msgstr ""
+msgstr "Lägg markerat fönster överst"
 
 #: ../metadata/switcher.xml.in.h:9
+#, fuzzy
 msgid "Distance desktop should be zoom out while switching windows"
-msgstr ""
+msgstr "Avstånd som skrivbordet ska zoomas ut till vid växling av fönster (0.0-5.0)"
 
 #: ../metadata/switcher.xml.in.h:11
-#, fuzzy
 msgid "Icon"
-msgstr "Ikoner"
+msgstr "Ikon"
 
 #: ../metadata/switcher.xml.in.h:12
-#, fuzzy
 msgid "Minimized"
-msgstr "Krymp Window&s"
+msgstr "Minimerat"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next window"
-msgstr "Ta bort Win&dows"
+msgstr "Nästa fönster"
 
 #: ../metadata/switcher.xml.in.h:16
 msgid "Popup switcher if not visible and select next window"
@@ -2341,70 +2284,60 @@ msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 
 #: ../metadata/switcher.xml.in.h:18
+#, fuzzy
 msgid "Popup switcher if not visible and select previous window"
-msgstr ""
+msgstr "Snabbtangent för att välja föregående fönster"
 
 #: ../metadata/switcher.xml.in.h:19
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
+msgid "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 
 #: ../metadata/switcher.xml.in.h:20
-#, fuzzy
 msgid "Prev window"
-msgstr "Windows"
+msgstr "Föreg fönster"
 
 #: ../metadata/switcher.xml.in.h:21
 msgid "Rotate to the selected window while switching"
 msgstr ""
 
 #: ../metadata/switcher.xml.in.h:22
-#, fuzzy
 msgid "Saturation"
-msgstr "Varaktighet"
+msgstr "Färgmättnad"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Select next window"
-msgstr "Ta bort Win&dows"
+msgstr "Välj nästa fönster"
 
 #: ../metadata/switcher.xml.in.h:24
-#, fuzzy
 msgid "Select previous window"
-msgstr "Startar demon."
+msgstr "Välj föregående fönster"
 
 #: ../metadata/switcher.xml.in.h:25
 msgid "Show icon next to thumbnail"
-msgstr ""
+msgstr "Visa ikon bredvid miniatyrbild"
 
 #: ../metadata/switcher.xml.in.h:26
-#, fuzzy
 msgid "Show minimized windows"
-msgstr "Krymp Window&s"
+msgstr "Visa minimerade fönster"
 
 #: ../metadata/switcher.xml.in.h:28
 #, fuzzy
 msgid "Switcher speed"
-msgstr "Byt skript"
+msgstr "Växlingshastighet (0.1-50.0)"
 
 #: ../metadata/switcher.xml.in.h:29
 #, fuzzy
 msgid "Switcher timestep"
-msgstr "Lokal tid"
+msgstr "Tidsintervall för växlare (0.1-50.0)"
 
 #: ../metadata/switcher.xml.in.h:30
 #, fuzzy
 msgid "Switcher windows"
-msgstr "Ta bort Win&dows"
+msgstr "Skala fönster"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Windows that should be shown in switcher"
 msgstr ""
-
-#: ../metadata/switcher.xml.in.h:33
-#, fuzzy
-msgid "Zoom"
-msgstr "Logga ut"
 
 #: ../metadata/video.xml.in.h:1
 msgid "Provide YV12 colorspace support"
@@ -2412,571 +2345,253 @@ msgstr ""
 
 #: ../metadata/video.xml.in.h:2
 msgid "Video Playback"
-msgstr ""
+msgstr "Videouppspelning"
 
 #: ../metadata/video.xml.in.h:3
 msgid "Video playback"
-msgstr ""
+msgstr "Video uppspelning"
 
 #: ../metadata/video.xml.in.h:4
 msgid "YV12 colorspace"
 msgstr ""
 
 #: ../metadata/water.xml.in.h:1
-#, fuzzy
 msgid "Add line"
-msgstr "L&ägg till länk"
+msgstr "Lägg till rad"
 
 #: ../metadata/water.xml.in.h:2
-#, fuzzy
 msgid "Add point"
-msgstr "L&ägg till länk"
+msgstr "Lägg till punkt"
 
 #: ../metadata/water.xml.in.h:3
 msgid "Adds water effects to different desktop actions"
-msgstr ""
+msgstr "Lägger till vatteneffekter till olika skrivbordsåtgärder"
 
 #: ../metadata/water.xml.in.h:4
+#, fuzzy
 msgid "Delay (in ms) between each rain-drop"
-msgstr ""
+msgstr "Fördröjning (i ms) mellan varje regndroppe (0-3600000)"
 
 #: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
-msgstr ""
+msgstr "Aktivera vatteneffekt för muspekare"
 
+# Rad eller linje?
 #: ../metadata/water.xml.in.h:7
 msgid "Line"
-msgstr ""
+msgstr "Rad"
 
 #: ../metadata/water.xml.in.h:8
 msgid "Offset Scale"
-msgstr ""
+msgstr "Positionsskala"
 
 #: ../metadata/water.xml.in.h:9
 msgid "Point"
-msgstr ""
+msgstr "Punkt"
 
 #: ../metadata/water.xml.in.h:10
-#, fuzzy
 msgid "Rain Delay"
-msgstr "Fördröjning"
+msgstr "Regnfördröjning"
 
 #: ../metadata/water.xml.in.h:11
-#, fuzzy
 msgid "Title wave"
-msgstr "Rubrik: %1"
+msgstr "Titelvåg"
 
 #: ../metadata/water.xml.in.h:12
-#, fuzzy
 msgid "Toggle rain"
-msgstr "Token ring"
+msgstr "Växla regn"
 
 #: ../metadata/water.xml.in.h:13
-#, fuzzy
 msgid "Toggle rain effect"
-msgstr "Token ring"
+msgstr "Växla regneffekt"
 
 #: ../metadata/water.xml.in.h:14
-#, fuzzy
 msgid "Toggle wiper"
-msgstr "Token ring"
+msgstr "Växla vindrutetorkare"
 
 #: ../metadata/water.xml.in.h:15
-#, fuzzy
 msgid "Toggle wiper effect"
-msgstr "Token ring"
+msgstr "Växla torkareffekt"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
-msgstr ""
+msgstr "Vatteneffekt"
 
 #: ../metadata/water.xml.in.h:17
+#, fuzzy
 msgid "Water offset scale"
-msgstr ""
+msgstr "Vattenpositionsskala (0.0-10.0)"
 
 #: ../metadata/water.xml.in.h:18
 msgid "Wave effect from window title"
-msgstr ""
+msgstr "Vågeffekt från fönstrets titellist"
 
 #: ../metadata/wobbly.xml.in.h:1
 msgid "Focus Effect"
-msgstr ""
+msgstr "Fokuseffekt"
 
 #: ../metadata/wobbly.xml.in.h:2
-#, fuzzy
 msgid "Focus Window Effect"
-msgstr "Windows"
+msgstr "Fokuseffekt för fönster"
 
 #: ../metadata/wobbly.xml.in.h:3
-#, fuzzy
 msgid "Focus Windows"
-msgstr "Ta bort Win&dows"
+msgstr "Fokusera fönster"
 
 #: ../metadata/wobbly.xml.in.h:4
-#, fuzzy
 msgid "Friction"
-msgstr "Åtgärd"
+msgstr "Friktion"
 
 #: ../metadata/wobbly.xml.in.h:5
-#, fuzzy
 msgid "Grab Windows"
-msgstr "Ta bort Win&dows"
+msgstr "Fånga fönster"
 
 #: ../metadata/wobbly.xml.in.h:6
-#, fuzzy
 msgid "Grid Resolution"
-msgstr "Upplösning"
+msgstr "Rutnätsupplösning"
 
 #: ../metadata/wobbly.xml.in.h:7
+#, fuzzy
 msgid "Inverted window snapping"
-msgstr ""
+msgstr "Växla fönsterfästning"
 
 #: ../metadata/wobbly.xml.in.h:8
-#, fuzzy
 msgid "Make window shiver"
-msgstr "Ta bort Win&dows"
+msgstr "Skaka fönster"
 
 #: ../metadata/wobbly.xml.in.h:9
-#, fuzzy
 msgid "Map Effect"
-msgstr "Windows"
+msgstr "Kopplingseffekt"
 
 #: ../metadata/wobbly.xml.in.h:10
-#, fuzzy
 msgid "Map Window Effect"
-msgstr "Windows"
+msgstr "Kopplingseffekt för fönster"
 
 #: ../metadata/wobbly.xml.in.h:11
-#, fuzzy
 msgid "Map Windows"
-msgstr "Windows"
+msgstr "Koppla fönster"
 
 #: ../metadata/wobbly.xml.in.h:12
-#, fuzzy
 msgid "Maximize Effect"
-msgstr "Windows"
+msgstr "Maximeringseffekt"
 
 #: ../metadata/wobbly.xml.in.h:13
-#, fuzzy
 msgid "Minimum Grid Size"
-msgstr "Maximal storlek"
+msgstr "Maximal rutnätsstorlek"
 
 #: ../metadata/wobbly.xml.in.h:14
 #, fuzzy
 msgid "Minimum Vertex Grid Size"
-msgstr "Maximal storlek"
+msgstr "Minimal vertexrutnätsstorlek (4-128)"
 
 #: ../metadata/wobbly.xml.in.h:15
-#, fuzzy
 msgid "Move Windows"
-msgstr "Fl&ytta ner"
-
-# 'driver' as in '(hardware) driver update'
-#: ../metadata/wobbly.xml.in.h:16
-#, fuzzy
-msgid "Shiver"
-msgstr "Drivrutin"
+msgstr "Flytta fönster"
 
 #: ../metadata/wobbly.xml.in.h:17
+msgid "Shiver"
+msgstr "Skaka"
+
+#: ../metadata/wobbly.xml.in.h:18
 msgid "Snap Inverted"
 msgstr ""
 
-#: ../metadata/wobbly.xml.in.h:18
-#, fuzzy
-msgid "Snap windows"
-msgstr "Krymp Window&s"
-
 #: ../metadata/wobbly.xml.in.h:19
-#, fuzzy
-msgid "Spring Friction"
-msgstr "Åtgärd"
+msgid "Snap windows"
+msgstr "Fäst fönster"
 
 #: ../metadata/wobbly.xml.in.h:20
-#, fuzzy
-msgid "Spring K"
-msgstr "Stegning"
+msgid "Spring Friction"
+msgstr "Fjäderfriktion"
 
 #: ../metadata/wobbly.xml.in.h:21
-#, fuzzy
-msgid "Spring Konstant"
-msgstr "Stegning"
+msgid "Spring K"
+msgstr "Fjäder K"
 
 #: ../metadata/wobbly.xml.in.h:22
-#, fuzzy
-msgid "Toggle window snapping"
-msgstr "Ta bort Win&dows"
+msgid "Spring Konstant"
+msgstr "Fjäderkonstant"
 
 #: ../metadata/wobbly.xml.in.h:23
-msgid "Use spring model for wobbly window effect"
-msgstr ""
+msgid "Toggle window snapping"
+msgstr "Växla fönsterfästning"
 
 #: ../metadata/wobbly.xml.in.h:24
-#, fuzzy
-msgid "Vertex Grid Resolution"
-msgstr "Serverupplösning"
+msgid "Use spring model for wobbly window effect"
+msgstr "Använd fjädereffekt för fönstergeléeffekt"
 
 #: ../metadata/wobbly.xml.in.h:25
-msgid "Windows that should wobble when focused"
-msgstr ""
+#, fuzzy
+msgid "Vertex Grid Resolution"
+msgstr "Upplösning för vertexrutnät (1-64)"
 
 #: ../metadata/wobbly.xml.in.h:26
-msgid "Windows that should wobble when grabbed"
-msgstr ""
+msgid "Windows that should wobble when focused"
+msgstr "Fönster som ska dallra när de fokuseras"
 
 #: ../metadata/wobbly.xml.in.h:27
-msgid "Windows that should wobble when mapped"
-msgstr ""
+msgid "Windows that should wobble when grabbed"
+msgstr "Fönster som ska dallra när de fångas"
 
 #: ../metadata/wobbly.xml.in.h:28
-msgid "Windows that should wobble when moved"
-msgstr ""
+msgid "Windows that should wobble when mapped"
+msgstr "Fönster som ska dallra när de binds"
 
 #: ../metadata/wobbly.xml.in.h:29
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
+msgid "Windows that should wobble when moved"
+msgstr "Fönster som ska dallra när de flyttas"
 
 #: ../metadata/wobbly.xml.in.h:30
-#, fuzzy
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Geléeffekt vid maximering och avmaximering av fönster"
+
+#: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
-msgstr "Windows"
+msgstr "Geléaktiga fönster"
 
 #: ../metadata/zoom.xml.in.h:1
-#, fuzzy
 msgid "Filter Linear"
-msgstr "Filter: "
+msgstr "Filtrera linjärt"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "Använd linjärt filter när inzoomad"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Zooma skrivbord"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Zooma in"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Zooma ut"
 
 #: ../metadata/zoom.xml.in.h:9
-msgid "Use linear filter when zoomed in"
-msgstr ""
+#, fuzzy
+msgid "Zoom Pan"
+msgstr "Zooma in"
 
 #: ../metadata/zoom.xml.in.h:10
-#, fuzzy
-msgid "Zoom Desktop"
-msgstr "Kontorsdator"
+msgid "Zoom Speed"
+msgstr "Zoomhastighet"
 
 #: ../metadata/zoom.xml.in.h:11
-#, fuzzy
-msgid "Zoom In"
-msgstr "Logga ut"
+msgid "Zoom Timestep"
+msgstr "Tidsintervall för zoom"
 
 #: ../metadata/zoom.xml.in.h:12
-#, fuzzy
-msgid "Zoom Out"
-msgstr "Logga ut"
+msgid "Zoom and pan desktop cube"
+msgstr "Zooma och panorera skrivbordskub"
 
 #: ../metadata/zoom.xml.in.h:13
-#, fuzzy
-msgid "Zoom Speed"
-msgstr "Vald"
+msgid "Zoom factor"
+msgstr "Zoomfaktor"
 
-# TL
 #: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom Timestep"
-msgstr "Östtimor"
+msgid "Zoom pan"
+msgstr "Zooma in"
 
-#: ../metadata/zoom.xml.in.h:15
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:16
-#, fuzzy
-msgid "Zoom factor"
-msgstr "Logga ut"
-
-#: ../src/main.c:55
-msgid "Dock"
-msgstr ""
-
-#: ../src/main.c:56
-#, fuzzy
-msgid "Toolbar"
-msgstr "Verktyg"
-
-#: ../src/main.c:57
-msgid "Menu"
-msgstr "Meny"
-
-#: ../src/main.c:58
-#, fuzzy
-msgid "Utility"
-msgstr "Drivrutinsdisk..."
-
-#: ../src/main.c:59
-#, fuzzy
-msgid "Splash"
-msgstr "startskärm"
-
-#: ../src/main.c:60
-#, fuzzy
-msgid "Dialog"
-msgstr "&Tonval"
-
-#: ../src/main.c:61
-msgid "Normal"
-msgstr "Normal"
-
-#: ../src/main.c:62
-#, fuzzy
-msgid "DropdownMenu"
-msgstr "Fönsterhanterare"
-
-#: ../src/main.c:63
-#, fuzzy
-msgid "PopupMenu"
-msgstr "Meny"
-
-#: ../src/main.c:64
-#, fuzzy
-msgid "Tooltip"
-msgstr "Verktyg"
-
-#: ../src/main.c:65
-#, fuzzy
-msgid "Notification"
-msgstr "Åtgärd"
-
-#: ../src/main.c:66
-msgid "Combo"
-msgstr ""
-
-#: ../src/main.c:67
-#, fuzzy
-msgid "Dnd"
-msgstr "End"
-
-#: ../src/main.c:68
-msgid "ModalDialog"
-msgstr ""
-
-#: ../src/main.c:69
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Pekskärm"
-
-#: ../src/main.c:70
-msgid "Unknown"
-msgstr "Okänd"
-
-#, fuzzy
-#~ msgid "4xBilinear"
-#~ msgstr "Filter: "
-
-#, fuzzy
-#~ msgid "Gaussian"
-#~ msgstr "Rysk"
-
-#, fuzzy
-#~ msgid "Blur saturation (0-100)"
-#~ msgstr "Varaktighet"
-
-#, fuzzy
-#~ msgid "Do not modify"
-#~ msgstr "Logga inget"
-
-#, fuzzy
-#~ msgid "Drop shadow opacity (0.01-6.00)"
-#~ msgstr "&Låg kapacitet"
-
-#, fuzzy
-#~ msgid "Drop shadow radius (0.0-48.0)"
-#~ msgstr "Radius"
-
-#, fuzzy
-#~ msgid "Focus prevention windows (match)"
-#~ msgstr "Startar demon."
-
-#, fuzzy
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "3D-acceleration: "
-
-#, fuzzy
-#~ msgid "Fold Speed (0.0-50.0)"
-#~ msgstr "3D-acceleration: "
-
-# TL
-#, fuzzy
-#~ msgid "Fold Timestep (0.0-50.0)"
-#~ msgstr "Östtimor"
-
-#, fuzzy
-#~ msgid "Gaussian radius (1-15)"
-#~ msgstr "Ryska federationen"
-
-#, fuzzy
-#~ msgid "Gaussian strength (0.00-1.00)"
-#~ msgstr "Rysk"
-
-#, fuzzy
-#~ msgid "Line width for annotations (0.0-100.0)"
-#~ msgstr "Lär dig mer med hjälp av dokumentation"
-
-#, fuzzy
-#~ msgid "Map Window Effect (None, Shiver)"
-#~ msgstr "Windows"
-
-#, fuzzy
-#~ msgid "Minimize speed (0.0-50.0)"
-#~ msgstr "Krymp Window&s"
-
-#, fuzzy
-#~ msgid "Minimize timestep (0.0-50.0)"
-#~ msgstr "Krymp Window&s"
-
-#, fuzzy
-#~ msgid "Minimum Vertex Grid Size (4-128)"
-#~ msgstr "Maximal storlek"
-
-#, fuzzy
-#~ msgid "Number of virtual desktops (1-36)"
-#~ msgstr "Fjärrskrivbord"
-
-# Libris vill ha det så.
-#, fuzzy
-#~ msgid "Opacity change step (1-50)"
-#~ msgstr "Langue d'oc (1500-)"
-
-#, fuzzy
-#~ msgid "Opacity level of moving windows (1-100)"
-#~ msgstr "Startar demon."
-
-#, fuzzy
-#~ msgid "Opacity level of resizing windows (1-100)"
-#~ msgstr "Startar demon."
-
-# KM
-#, fuzzy
-#~ msgid "Outline Color"
-#~ msgstr "Färger"
-
-#, fuzzy
-#~ msgid "Rotation Acceleration (1.0-20.0)"
-#~ msgstr "3D-acceleration: "
-
-# TL
-#, fuzzy
-#~ msgid "Rotation Timestep (0.0-50.0)"
-#~ msgstr "Östtimor"
-
-#, fuzzy
-#~ msgid "Scale speed (0.0-50.0)"
-#~ msgstr "Lokal tid"
-
-#, fuzzy
-#~ msgid "Scale timestep (0.0-50.0)"
-#~ msgstr "Lokal tid"
-
-#, fuzzy
-#~ msgid "Space between windows (0-250)"
-#~ msgstr "Ta bort Win&dows"
-
-#, fuzzy
-#~ msgid "Spring Friction (0.0-10.0)"
-#~ msgstr "Åtgärd"
-
-#, fuzzy
-#~ msgid "Spring Konstant (0.0-10.0)"
-#~ msgstr "Stegning"
-
-#, fuzzy
-#~ msgid "Switcher speed (0.0-50.0)"
-#~ msgstr "Byt skript"
-
-#, fuzzy
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "Ange &filter"
-
-#, fuzzy
-#~ msgid "Vertex Grid Resolution (1-64)"
-#~ msgstr "Serverupplösning"
-
-#, fuzzy
-#~ msgid "Window blur speed (0.0-10.0)"
-#~ msgstr "Windows ledigt (%1)"
-
-#, fuzzy
-#~ msgid "Window fade speed (0.0-25.0)"
-#~ msgstr "Windows ledigt (%1)"
-
-#, fuzzy
-#~ msgid "Zoom Speed (0.0-50.0)"
-#~ msgstr "Vald"
-
-# TL
-#, fuzzy
-#~ msgid "Zoom Timestep (0.0-50.0)"
-#~ msgstr "Östtimor"
-
-#, fuzzy
-#~ msgid "Zoom factor (1.01-3.00)"
-#~ msgstr "Logga ut"
-
-#, fuzzy
-#~ msgid "Plane To Face %d"
-#~ msgstr "Rotera skärm"
-
-#, fuzzy
-#~ msgid "Plane to face %d"
-#~ msgstr "Rotera skärm"
-
-#, fuzzy
-#~ msgid "Plane To Face %d with Window"
-#~ msgstr "Startar demon."
-
-#, fuzzy
-#~ msgid "Rotate To Face %d"
-#~ msgstr "Rotera skärm"
-
-#, fuzzy
-#~ msgid "Rotate to face %d"
-#~ msgstr "Rotera skärm"
-
-#~ msgid "None"
-#~ msgstr "Ingen"
-
-#, fuzzy
-#~ msgid "Emblem"
-#~ msgstr "Emblem"
-
-#~ msgid "Big"
-#~ msgstr "Stor"
-
-#, fuzzy
-#~ msgid "Command line %d"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command %d"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Window Types"
-#~ msgstr "Windows"
-
-#, fuzzy
-#~ msgid "Move Window Types"
-#~ msgstr "Leverantörstyp"
-
-#, fuzzy
-#~ msgid "Enable focus prevention"
-#~ msgstr "Aktivera ZEN-partition"
-
-#, fuzzy
-#~ msgid "Corners"
-#~ msgstr "Korniska"
-
-#, fuzzy
-#~ msgid "Show switcher"
-#~ msgstr "Visa ändrin&gar"
-
-#, fuzzy
-#~ msgid "Sloppy Focus"
-#~ msgstr "Diskett"
-
-#, fuzzy
-#~ msgid "Start moving window using keyboard"
-#~ msgstr "Startar demon."
-
-#, fuzzy
-#~ msgid "Terminate"
-#~ msgstr "Terminaler"
