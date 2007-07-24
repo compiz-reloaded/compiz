@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070707
+#define ABIVERSION 20070708
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -740,9 +740,11 @@ struct _CompDisplay {
 
     int compositeEvent, compositeError, compositeOpcode;
     int damageEvent, damageError;
-    int randrEvent, randrError;
     int syncEvent, syncError;
     int fixesEvent, fixesError, fixesVersion;
+
+    Bool randrExtension;
+    int randrEvent, randrError;
 
     Bool shapeExtension;
     int  shapeEvent, shapeError;

@@ -2125,7 +2125,8 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 	}
-	else if (event->type == d->randrEvent + RRScreenChangeNotify)
+	else if (d->randrExtension &&
+		 event->type == d->randrEvent + RRScreenChangeNotify)
 	{
 	    XRRScreenChangeNotifyEvent *rre;
 

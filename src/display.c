@@ -2227,13 +2227,6 @@ addDisplay (char *name)
 	return FALSE;
     }
 
-    if (!XRRQueryExtension (dpy, &d->randrEvent, &d->randrError))
-    {
-	compLogMessage (d, "core", CompLogLevelFatal,
-			"No RandR extension");
-	return FALSE;
-    }
-
     if (!XSyncQueryExtension (dpy, &d->syncEvent, &d->syncError))
     {
 	compLogMessage (d, "core", CompLogLevelFatal,
@@ -2256,6 +2249,10 @@ addDisplay (char *name)
 		 "for client-side cursor\n", programName);
     }
     */
+
+    d->randrExtension = XRRQueryExtension (dpy,
+					   &d->randrEvent,
+					   &d->randrError);
 
     d->shapeExtension = XShapeQueryExtension (dpy,
 					      &d->shapeEvent,

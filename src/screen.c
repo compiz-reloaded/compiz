@@ -977,17 +977,23 @@ detectRefreshRateOfScreen (CompScreen *s)
 {
     if (!noDetection && s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b)
     {
-	XRRScreenConfiguration *config;
-	char		       *name;
-	CompOptionValue	       value;
+	char		*name;
+	CompOptionValue	value;
 
-	config  = XRRGetScreenInfo (s->display->display, s->root);
-	value.i = (int) XRRConfigCurrentRate (config);
+	value.i = 0;
+
+	if (s->display->randrExtension)
+	{
+	    XRRScreenConfiguration *config;
+
+	    config  = XRRGetScreenInfo (s->display->display, s->root);
+	    value.i = (int) XRRConfigCurrentRate (config);
+
+	    XRRFreeScreenConfigInfo (config);
+	}
 
 	if (value.i == 0)
 	    value.i = defaultRefreshRate;
-
-	XRRFreeScreenConfigInfo (config);
 
 	name = s->opt[COMP_SCREEN_OPTION_REFRESH_RATE].name;
 
