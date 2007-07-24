@@ -489,7 +489,7 @@ layoutSlotsForArea (CompScreen * s,
     }
 }
 
-static SlotArea* 
+static SlotArea *
 getSlotAreas (CompScreen *s)
 {
     int        i;
@@ -499,7 +499,7 @@ getSlotAreas (CompScreen *s)
     int        left;
     SlotArea   *slotAreas;
 
-    SCALE_SCREEN(s);
+    SCALE_SCREEN (s);
 
     size      = malloc (s->nOutputDev * sizeof (int));
     slotAreas = malloc (s->nOutputDev * sizeof (SlotArea));
@@ -512,7 +512,7 @@ getSlotAreas (CompScreen *s)
 	workArea = s->outputDev[i].workArea;
 
 	size[i] = workArea.width * workArea.height;
-	sum     += size[i];
+	sum += size[i];
 
 	slotAreas[i].nWindows = 0;
 	slotAreas[i].workArea = workArea;
@@ -524,9 +524,9 @@ getSlotAreas (CompScreen *s)
     for (i = 0; i < s->nOutputDev && left; i++)
     {
 	/* fill the areas with windows */
-	int nw = floor(size[i] / sizePerWindow);
-	nw = MIN (nw,left);
+	int nw = floor (size[i] / sizePerWindow);
 
+	nw = MIN (nw, left);
 	size[i] -= nw * sizePerWindow;
 	slotAreas[i].nWindows = nw;
 	left -= nw;
@@ -535,22 +535,25 @@ getSlotAreas (CompScreen *s)
     /* add left windows to output devices with the biggest free space */
     while (left > 0)
     {
-	int num = 0;
+	int   num = 0;
 	float big = 0;
 
 	for (i = 0; i < s->nOutputDev; i++)
+	{
 	    if (size[i] > big)
 	    {
 		num = i;
 		big = size[i];
 	    }
+	}
 
 	size[num] -= sizePerWindow;
 	slotAreas[num].nWindows++;
 	left--;
     }
 
-    free(size);
+    free (size);
+
     return slotAreas;
 }
 
