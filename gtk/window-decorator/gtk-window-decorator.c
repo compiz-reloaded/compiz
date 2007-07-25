@@ -2358,9 +2358,9 @@ draw_switcher_background (decor_t *d)
 		       d->width,
 		       d->height);
 
-    pixel = ((((a * style->bg[GTK_STATE_NORMAL].red  ) >> 24) & 0x0000ff) |
+    pixel = ((((a * style->bg[GTK_STATE_NORMAL].blue ) >> 24) & 0x0000ff) |
 	     (((a * style->bg[GTK_STATE_NORMAL].green) >> 16) & 0x00ff00) |
-	     (((a * style->bg[GTK_STATE_NORMAL].blue ) >>  8) & 0xff0000) |
+	     (((a * style->bg[GTK_STATE_NORMAL].red  ) >>  8) & 0xff0000) |
 	     (((a & 0xff00) << 16)));
 
     decor_update_switcher_property (d);
