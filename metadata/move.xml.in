@@ -29,6 +29,11 @@
 		<_long>Snapoff and auto unmaximized maximized windows when dragging</_long>
 		<default>true</default>
 	    </option>
+	    <option name="lazy_positioning" type="bool">
+		<_short>Lazy Positioning</_short>
+		<_long>Do not update the server-side position of windows until finished moving</_long>
+		<default>true</default>
+	    </option>
 	</display>
     </plugin>
 </compiz>

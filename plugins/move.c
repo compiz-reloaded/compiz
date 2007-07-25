@@ -57,7 +57,8 @@ static int displayPrivateIndex;
 #define MOVE_DISPLAY_OPTION_OPACITY	      1
 #define MOVE_DISPLAY_OPTION_CONSTRAIN_Y	      2
 #define MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED 3
-#define MOVE_DISPLAY_OPTION_NUM		      4
+#define MOVE_DISPLAY_OPTION_LAZY_POSITIONING  4
+#define MOVE_DISPLAY_OPTION_NUM		      5
 
 typedef struct _MoveDisplay {
     int		    screenPrivateIndex;
@@ -530,7 +531,18 @@ moveHandleMotionEvent (CompScreen *s,
 			wY + dy - w->attrib.y,
 			TRUE, FALSE);
 
-	    syncWindowPosition (w);
+	    if (md->opt[MOVE_DISPLAY_OPTION_LAZY_POSITIONING].value.b)
+	    {
+		/* FIXME: This form of lazy positioning is broken and should
+		   be replaced asap. Current code exists just to avoid a
+		   major performance regression in the 0.5.2 release. */
+		w->serverX = w->attrib.x;
+		w->serverY = w->attrib.y;
+	    }
+	    else
+	    {
+		syncWindowPosition (w);
+	    }
 
 	    md->x -= dx;
 	    md->y -= dy;
@@ -758,7 +770,8 @@ static const CompMetadataOptionInfo moveDisplayOptionInfo[] = {
     { "initiate", "action", 0, moveInitiate, moveTerminate },
     { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
     { "constrain_y", "bool", 0, 0, 0 },
-    { "snapoff_maximized", "bool", 0, 0, 0 }
+    { "snapoff_maximized", "bool", 0, 0, 0 },
+    { "lazy_positioning", "bool", 0, 0, 0 }
 };
 
 static Bool
