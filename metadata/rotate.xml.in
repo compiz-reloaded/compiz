@@ -217,6 +217,11 @@
 		    <edges right="true"/>
 		</default>
 	    </option>
+	    <option name="raise_on_rotate" type="bool">
+		<_short>Raise on rotate</_short>
+		<_long>Raise window when rotating</_long>
+		<default>false</default>
+	    </option>
 	</display>
 	<screen>
 	    <option name="invert_y" type="bool">

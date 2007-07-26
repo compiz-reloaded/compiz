@@ -79,7 +79,8 @@ static int displayPrivateIndex;
 #define ROTATE_DISPLAY_OPTION_WINDOW		  34
 #define ROTATE_DISPLAY_OPTION_FLIP_LEFT		  35
 #define ROTATE_DISPLAY_OPTION_FLIP_RIGHT	  36
-#define ROTATE_DISPLAY_OPTION_NUM		  37
+#define ROTATE_DISPLAY_OPTION_RAISE_ON_ROTATE	  37
+#define ROTATE_DISPLAY_OPTION_NUM		  38
 
 typedef struct _RotateDisplay {
     int		    screenPrivateIndex;
@@ -756,12 +757,15 @@ rotateWithWindow (CompDisplay     *d,
     CompScreen *s;
     Window     xid;
 
+    ROTATE_DISPLAY (d);
+
     xid = getIntOptionNamed (option, nOption, "root", 0);
 
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	int direction;
+	Bool raise = rd->opt[ROTATE_DISPLAY_OPTION_RAISE_ON_ROTATE].value.b;
+	int  direction;
 
 	ROTATE_SCREEN (s);
 
@@ -792,6 +796,9 @@ rotateWithWindow (CompDisplay     *d,
 			{
 			    rs->moveWindow  = w->id;
 			    rs->moveWindowX = w->attrib.x;
+
+			    if (raise)
+				raiseWindow (w);
 			}
 		    }
 		}
@@ -1699,7 +1706,8 @@ static const CompMetadataOptionInfo rotateDisplayOptionInfo[] = {
     { "rotate_flip_left", "action", 0, rotateEdgeFlipLeft,
       rotateFlipTerminate },
     { "rotate_flip_right", "action", 0, rotateEdgeFlipRight,
-      rotateFlipTerminate }
+      rotateFlipTerminate },
+    { "raise_on_rotate", "bool", 0, 0, 0 }
 };
 
 static Bool
