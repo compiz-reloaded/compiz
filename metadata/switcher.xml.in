@@ -20,7 +20,7 @@
 		</default>
 	    </option>
 	    <option name="next_all" type="action">
-		<_short>Next window</_short>
+		<_short>Next window (All windows)</_short>
 		<_long>Popup switcher if not visible and select next window out of all windows</_long>
 		<allowed key="true" button="true"/>
 		<default>
@@ -28,7 +28,7 @@
 		</default>
 	    </option>
 	    <option name="prev_all" type="action">
-		<_short>Prev window</_short>
+		<_short>Prev window (All windows)</_short>
 		<_long>Popup switcher if not visible and select previous window out of all windows</_long>
 		<allowed key="true" button="true"/>
 		<default>
@@ -36,15 +36,15 @@
 		</default>
 	    </option>
 	    <option name="next_no_popup" type="action">
-		<_short>Next window</_short>
-		<_long>Select next window</_long>
+		<_short>Next window (No popup)</_short>
+		<_long>Select next window without showing the popup window.</_long>
 		<allowed key="true" button="true"/>
 		<default>
 		</default>
 	    </option>
 	    <option name="prev_no_popup" type="action">
-		<_short>Prev window</_short>
-		<_long>Select previous window</_long>
+		<_short>Prev window (No popup)</_short>
+		<_long>Select previous window without showing the popup window.</_long>
 		<allowed key="true" button="true"/>
 		<default>
 		</default>
