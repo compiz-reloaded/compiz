@@ -2537,11 +2537,11 @@ decor_blend_right_border_picture (Display	  *xdisplay,
 }
 
 int
-decor_acquire_dm_session (Display *xdisplay,
-			  int	   screen,
-			  char     *name,
-			  int	   replace_current_dm,
-			  Time	   *timestamp)
+decor_acquire_dm_session (Display    *xdisplay,
+			  int	     screen,
+			  const char *name,
+			  int	     replace_current_dm,
+			  Time	     *timestamp)
 {
     XEvent		 event;
     XSetWindowAttributes attr;

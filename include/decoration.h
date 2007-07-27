@@ -389,11 +389,11 @@ decor_blend_right_border_picture (Display	  *xdisplay,
 #define DECOR_ACQUIRE_STATUS_OTHER_DM_RUNNING 2
 
 int
-decor_acquire_dm_session (Display *xdisplay,
-			  int	   screen,
-			  char     *name,
-			  int	   replace_current_dm,
-			  Time	   *timestamp);
+decor_acquire_dm_session (Display    *xdisplay,
+			  int	     screen,
+			  const char *name,
+			  int	     replace_current_dm,
+			  Time	     *timestamp);
 
 void
 decor_set_dm_check_hint (Display *xdisplay,
