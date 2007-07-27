@@ -506,7 +506,14 @@ resizeTerminate (CompDisplay	 *d,
 	}
 	else
 	{
+	    XRectangle geometry;
+
 	    if (state & CompActionStateCancel)
+		geometry = rd->savedGeometry;
+	    else
+		geometry = rd->geometry;
+
+	    if (memcmp (&geometry, &rd->savedGeometry, sizeof (geometry)) == 0)
 	    {
 		BoxRec box;
 
@@ -519,10 +526,10 @@ resizeTerminate (CompDisplay	 *d,
 	    }
 	    else
 	    {
-		xwc.x      = rd->geometry.x;
-		xwc.y      = rd->geometry.y;
-		xwc.width  = rd->geometry.width;
-		xwc.height = rd->geometry.height;
+		xwc.x      = geometry.x;
+		xwc.y      = geometry.y;
+		xwc.width  = geometry.width;
+		xwc.height = geometry.height;
 
 		mask = CWX | CWY | CWWidth | CWHeight;
 	    }
