@@ -3813,10 +3813,10 @@ void
 restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling)
 {
-    CompWindow *lowest, *p;
+    CompWindow *lowest, *last, *p;
 
     /* get lowest sibling we're allowed to stack above */
-    lowest = findLowestSiblingBelow (w);
+    lowest = last = findLowestSiblingBelow (w);
 
     /* walk from bottom up */
     for (p = w->screen->windows; p; p = p->next)
@@ -3835,14 +3835,22 @@ restackWindowBelow (CompWindow *w,
 	    return;
 	}
 
+	/* skip windows that we should avoid */
+	if (avoidStackingRelativeTo (p))
+	    continue;
+
 	if (validSiblingBelow (w, p))
 	{
 	    /* update lowest as we find windows below sibling that we're
-	       allowed to stack above but also make sure that we were allowed
-	       to stack above the previous window */
-	    if (p->prev == lowest)
+	       allowed to stack above. last window must be equal to the
+	       lowest as we shouldn't update lowest if we passed an
+	       invalid window */
+	    if (last == lowest)
 		lowest = p;
 	}
+
+	/* update last pointer */
+	last = p;
     }
 }
 
