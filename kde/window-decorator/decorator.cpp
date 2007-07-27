@@ -357,7 +357,7 @@ KWD::Decorator::updateDefaultShadow (KWD::Window *w)
 }
 
 DBusMessage *
-KWD::Decorator::sendAndBlockForShadowOptionReply (char *path)
+KWD::Decorator::sendAndBlockForShadowOptionReply (const char *path)
 {
     DBusMessage *message;
 

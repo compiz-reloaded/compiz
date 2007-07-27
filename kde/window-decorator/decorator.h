@@ -136,7 +136,7 @@ class Decorator:public KApplication, public KWinInterface {
 	void reconfigure (void);
 
     private:
-	DBusMessage *sendAndBlockForShadowOptionReply (char *path);
+	DBusMessage *sendAndBlockForShadowOptionReply (const char *path);
 	WId fetchFrame (WId window);
 	void updateShadow (void);
 	void updateAllShadowOptions (void);
