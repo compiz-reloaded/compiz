@@ -3836,7 +3836,7 @@ restackWindowBelow (CompWindow *w,
 	}
 
 	/* skip windows that we should avoid */
-	if (avoidStackingRelativeTo (p))
+	if (w == p || avoidStackingRelativeTo (p))
 	    continue;
 
 	if (validSiblingBelow (w, p))
