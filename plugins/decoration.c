@@ -661,6 +661,40 @@ decorCheckSize (CompWindow *w,
     return (decor->minWidth <= w->width && decor->minHeight <= w->height);
 }
 
+static int
+decorWindowShiftX (CompWindow *w)
+{
+    switch (w->sizeHints.win_gravity) {
+    case WestGravity:
+    case NorthWestGravity:
+    case SouthWestGravity:
+	return w->input.left;
+    case EastGravity:
+    case NorthEastGravity:
+    case SouthEastGravity:
+	return -w->input.right;
+    }
+
+    return 0;
+}
+
+static int
+decorWindowShiftY (CompWindow *w)
+{
+    switch (w->sizeHints.win_gravity) {
+    case NorthGravity:
+    case NorthWestGravity:
+    case NorthEastGravity:
+	return w->input.top;
+    case SouthGravity:
+    case SouthWestGravity:
+    case SouthEastGravity:
+	return -w->input.bottom;
+    }
+
+    return 0;
+}
+
 static Bool
 decorWindowUpdate (CompWindow *w,
 		   Bool	      move)
@@ -669,6 +703,9 @@ decorWindowUpdate (CompWindow *w,
     Decoration	     *old, *decor = NULL;
     Bool	     decorate = FALSE;
     CompMatch	     *match;
+    int		     moveDx, moveDy;
+    int		     oldShiftX = 0;
+    int		     oldShiftY  = 0;
 
     DECOR_DISPLAY (w->screen->display);
     DECOR_SCREEN (w->screen);
@@ -689,7 +726,7 @@ decorWindowUpdate (CompWindow *w,
     }
 
     if (w->attrib.override_redirect)
-	decorate = FALSE;
+	decorate = move = FALSE;
 
     if (decorate)
     {
@@ -732,7 +769,7 @@ decorWindowUpdate (CompWindow *w,
 	}
     }
 
-    if (!ds->dmWin)
+    if (!ds->dmWin || restartSignal || shutDown)
 	decor = NULL;
 
     if (decor == old)
@@ -741,7 +778,12 @@ decorWindowUpdate (CompWindow *w,
     damageWindowOutputExtents (w);
 
     if (old)
+    {
+	oldShiftX = decorWindowShiftX (w);
+	oldShiftY = decorWindowShiftY (w);
+
 	destroyWindowDecoration (w->screen, wd);
+    }
 
     if (decor)
     {
@@ -754,6 +796,9 @@ decorWindowUpdate (CompWindow *w,
 	else
 	    setWindowFrameExtents (w, &decor->input);
 
+	moveDx = decorWindowShiftX (w) - oldShiftX;
+	moveDy = decorWindowShiftY (w) - oldShiftY;
+
 	updateWindowOutputExtents (w);
 	damageWindowOutputExtents (w);
 	updateWindowDecorationScale (w);
@@ -761,6 +806,15 @@ decorWindowUpdate (CompWindow *w,
     else
     {
 	dw->wd = NULL;
+
+	moveDx = -oldShiftX;
+	moveDy = -oldShiftY;
+    }
+
+    if (move && (moveDx || moveDy))
+    {
+	moveWindow (w, moveDx, moveDy, TRUE, TRUE);
+	syncWindowPosition (w);
     }
 
     return TRUE;
@@ -996,7 +1050,7 @@ decorDamageWindowRect (CompWindow *w,
     DECOR_SCREEN (w->screen);
 
     if (initial)
-	decorWindowUpdate (w, FALSE);
+	decorWindowUpdate (w, TRUE);
 
     UNWRAP (ds, w->screen, damageWindowRect);
     status = (*w->screen->damageWindowRect) (w, initial, rect);
@@ -1142,7 +1196,7 @@ decorWindowResizeNotify (CompWindow *w,
 {
     DECOR_SCREEN (w->screen);
 
-    if (!decorWindowUpdate (w, FALSE))
+    if (!decorWindowUpdate (w, TRUE))
 	updateWindowDecorationScale (w);
 
     UNWRAP (ds, w->screen, windowResizeNotify);
@@ -1156,7 +1210,7 @@ decorWindowStateChangeNotify (CompWindow *w)
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
 
-    if (!decorWindowUpdate (w, FALSE))
+    if (!decorWindowUpdate (w, TRUE))
     {
 	if (dw->decor)
 	{
@@ -1178,7 +1232,7 @@ decorMatchPropertyChanged (CompDisplay *d,
 {
     DECOR_DISPLAY (d);
 
-    decorWindowUpdate (w, FALSE);
+    decorWindowUpdate (w, TRUE);
 
     UNWRAP (dd, d, matchPropertyChanged);
     (*d->matchPropertyChanged) (d, w);
@@ -1191,7 +1245,7 @@ decorWindowAddNotify (CompWindow *w)
     DECOR_SCREEN (w->screen);
 
     if (w->shaded || w->attrib.map_state == IsViewable)
-	decorWindowUpdate (w, FALSE);
+	decorWindowUpdate (w, TRUE);
 
     UNWRAP (ds, w->screen, windowAddNotify);
     (*w->screen->windowAddNotify) (w);
@@ -1356,7 +1410,7 @@ decorInitWindow (CompPlugin *p,
 	decorWindowUpdateDecoration (w);
 
     if (w->added && (w->shaded || w->attrib.map_state == IsViewable))
-	decorWindowUpdate (w, FALSE);
+	decorWindowUpdate (w, TRUE);
 
     return TRUE;
 }
@@ -1366,6 +1420,9 @@ decorFiniWindow (CompPlugin *p,
 		 CompWindow *w)
 {
     DECOR_WINDOW (w);
+
+    if (!w->destroyed)
+	decorWindowUpdate (w, TRUE);
 
     if (dw->wd)
 	destroyWindowDecoration (w->screen, dw->wd);
