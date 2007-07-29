@@ -1242,7 +1242,6 @@ bindWindow (CompWindow *w)
 	{
 	    XUngrabServer (w->screen->display->display);
 	    finiTexture (w->screen, w->texture);
-	    w->damaged = FALSE;
 	    w->bindFailed = TRUE;
 	    return FALSE;
 	}
