@@ -1234,6 +1234,10 @@ bindWindow (CompWindow *w)
     {
 	XWindowAttributes attr;
 
+	/* don't try to bind window again if it failed previously */
+	if (w->bindFailed)
+	    return FALSE;
+
 	/* We have to grab the server here to make sure that window
 	   is mapped when getting the window pixmap */
 	XGrabServer (w->screen->display->display);
