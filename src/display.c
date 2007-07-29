@@ -1510,6 +1510,17 @@ paintScreen (CompScreen   *s,
     }
 }
 
+static void
+mapWindowIfHidden (CompWindow *w,
+		   void       *closure)
+{
+    if (w->attrib.override_redirect || w->hidden)
+	return;
+
+    if (w->state & CompWindowStateHiddenMask)
+	XMapWindow (w->screen->display->display, w->id);
+}
+
 void
 eventLoop (void)
 {
@@ -1541,6 +1552,8 @@ eventLoop (void)
 	if (restartSignal || shutDown)
 	{
 	    while (popPlugin ());
+	    forEachWindowOnDisplay (display, mapWindowIfHidden, NULL);
+	    XSync (display->display, False);
 	    return;
 	}
 
