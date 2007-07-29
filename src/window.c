@@ -2087,8 +2087,6 @@ addWindow (CompScreen *screen,
 
     if (w->attrib.map_state == IsViewable)
     {
-	Bool shouldBeMapped = TRUE;
-
 	if (!w->attrib.override_redirect)
 	{
 	    w->managed = TRUE;
@@ -2099,8 +2097,6 @@ addWindow (CompScreen *screen,
 		    w->shaded = TRUE;
 		else
 		    w->minimized = TRUE;
-
-		shouldBeMapped = FALSE;
 	    }
 	    else
 	    {
@@ -2121,18 +2117,22 @@ addWindow (CompScreen *screen,
 	    }
 	}
 
-	if (shouldBeMapped)
-	{
-	    w->attrib.map_state = IsUnmapped;
-	    w->pendingMaps++;
+	w->attrib.map_state = IsUnmapped;
+	w->pendingMaps++;
 
-	    mapWindow (w);
+	mapWindow (w);
 
-	    updateWindowAttributes (w, CompStackingUpdateModeNormal);
-	}
-	else
+	updateWindowAttributes (w, CompStackingUpdateModeNormal);
+
+	if (w->minimized || w->inShowDesktopMode || w->hidden || w->shaded)
 	{
-	    hideWindow (w);
+	    w->state |= CompWindowStateHiddenMask;
+
+	    w->pendingUnmaps++;
+
+	    XUnmapWindow (screen->display->display, w->id);
+
+	    changeWindowState (w, w->state);
 	}
     }
     else if (!w->attrib.override_redirect)
