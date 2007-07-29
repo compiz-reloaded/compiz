@@ -2087,33 +2087,53 @@ addWindow (CompScreen *screen,
 
     if (w->attrib.map_state == IsViewable)
     {
-	w->attrib.map_state = IsUnmapped;
+	Bool shouldBeMapped = TRUE;
 
 	if (!w->attrib.override_redirect)
 	{
 	    w->managed = TRUE;
 
-	    if (w->wmType & (CompWindowTypeDockMask |
-			     CompWindowTypeDesktopMask))
+	    if (getWmState (screen->display, w->id) == IconicState)
 	    {
-		setDesktopForWindow (w, 0xffffffff);
+		if (w->state & CompWindowStateShadedMask)
+		    w->shaded = TRUE;
+		else
+		    w->minimized = TRUE;
+
+		shouldBeMapped = FALSE;
 	    }
 	    else
 	    {
-		if (w->desktop != 0xffffffff)
-		    w->desktop = screen->currentDesktop;
+		if (w->wmType & (CompWindowTypeDockMask |
+				 CompWindowTypeDesktopMask))
+		{
+		    setDesktopForWindow (w, 0xffffffff);
+		}
+		else
+		{
+		    if (w->desktop != 0xffffffff)
+			w->desktop = screen->currentDesktop;
 
-		setWindowProp (screen->display, w->id,
-			       screen->display->winDesktopAtom,
-			       w->desktop);
+		    setWindowProp (screen->display, w->id,
+				   screen->display->winDesktopAtom,
+				   w->desktop);
+		}
 	    }
 	}
 
-	w->pendingMaps++;
+	if (shouldBeMapped)
+	{
+	    w->attrib.map_state = IsUnmapped;
+	    w->pendingMaps++;
 
-	mapWindow (w);
+	    mapWindow (w);
 
-	updateWindowAttributes (w, CompStackingUpdateModeNormal);
+	    updateWindowAttributes (w, CompStackingUpdateModeNormal);
+	}
+	else
+	{
+	    hideWindow (w);
+	}
     }
     else if (!w->attrib.override_redirect)
     {
