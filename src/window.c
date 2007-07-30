@@ -2090,6 +2090,8 @@ addWindow (CompScreen *screen,
 
     if (w->attrib.map_state == IsViewable)
     {
+	w->placed = TRUE;
+
 	if (!w->attrib.override_redirect)
 	{
 	    w->managed = TRUE;
@@ -2143,6 +2145,7 @@ addWindow (CompScreen *screen,
 	if (getWmState (screen->display, w->id) == IconicState)
 	{
 	    w->managed = TRUE;
+	    w->placed  = TRUE;
 
 	    if (w->state & CompWindowStateHiddenMask)
 	    {

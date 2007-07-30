@@ -2094,12 +2094,7 @@ addScreen (CompDisplay *display,
 	{
 	    w->activeNum = s->activeNum++;
 	    w->damaged   = TRUE;
-	    w->placed    = TRUE;
 	    w->invisible = WINDOW_INVISIBLE (w);
-	}
-	else if (w->state & CompWindowStateHiddenMask)
-	{
-	    w->placed = TRUE;
 	}
     }
 
