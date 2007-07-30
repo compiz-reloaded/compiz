@@ -2042,8 +2042,12 @@ handleEvent (CompDisplay *d,
 				    compAddTimeout (delay, autoRaiseTimeout, d);
 			    }
 			    else
-				updateWindowAttributes (w, 
-					CompStackingUpdateModeNormal);
+			    {
+				CompStackingUpdateMode mode =
+				    CompStackingUpdateModeNormal;
+
+				updateWindowAttributes (w, mode);
+			    }
 			}
 		    }
 		}
