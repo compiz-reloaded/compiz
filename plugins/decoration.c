@@ -697,7 +697,7 @@ decorWindowShiftY (CompWindow *w)
 
 static Bool
 decorWindowUpdate (CompWindow *w,
-		   Bool	      move)
+		   Bool	      allowDecoration)
 {
     WindowDecoration *wd;
     Decoration	     *old, *decor = NULL;
@@ -726,7 +726,7 @@ decorWindowUpdate (CompWindow *w,
     }
 
     if (w->attrib.override_redirect)
-	decorate = move = FALSE;
+	decorate = FALSE;
 
     if (decorate)
     {
@@ -769,7 +769,7 @@ decorWindowUpdate (CompWindow *w,
 	}
     }
 
-    if (!ds->dmWin || restartSignal || shutDown)
+    if (!ds->dmWin || !allowDecoration)
 	decor = NULL;
 
     if (decor == old)
@@ -811,7 +811,7 @@ decorWindowUpdate (CompWindow *w,
 	moveDy = -oldShiftY;
     }
 
-    if (move && (moveDx || moveDy))
+    if (!w->attrib.override_redirect && (moveDx || moveDy))
     {
 	XWindowChanges xwc;
 	unsigned int   mask = CWX | CWY;
@@ -1437,7 +1437,7 @@ decorFiniWindow (CompPlugin *p,
     DECOR_WINDOW (w);
 
     if (!w->destroyed)
-	decorWindowUpdate (w, TRUE);
+	decorWindowUpdate (w, FALSE);
 
     if (dw->wd)
 	destroyWindowDecoration (w->screen, dw->wd);
