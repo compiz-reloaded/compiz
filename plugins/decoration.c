@@ -984,11 +984,11 @@ decorHandleEvent (CompDisplay *d,
     {
 	w = findWindowAtDisplay (d, activeWindow);
 	if (w)
-	    decorWindowUpdate (w, FALSE);
+	    decorWindowUpdate (w, TRUE);
 
 	w = findWindowAtDisplay (d, d->activeWindow);
 	if (w)
-	    decorWindowUpdate (w, FALSE);
+	    decorWindowUpdate (w, TRUE);
     }
 
     switch (event->type) {
