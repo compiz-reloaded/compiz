@@ -813,8 +813,23 @@ decorWindowUpdate (CompWindow *w,
 
     if (move && (moveDx || moveDy))
     {
-	moveWindow (w, moveDx, moveDy, TRUE, TRUE);
-	syncWindowPosition (w);
+	XWindowChanges xwc;
+	unsigned int   mask = CWX | CWY;
+
+	xwc.x = w->serverX + moveDx;
+	xwc.y = w->serverY + moveDy;
+
+	if (w->state & CompWindowStateFullscreenMask)
+	    mask &= ~(CWX | CWY);
+
+	if (w->state & CompWindowStateMaximizedHorzMask)
+	    mask &= ~CWX;
+
+	if (w->state & CompWindowStateMaximizedVertMask)
+	    mask &= ~CWY;
+
+	if (mask)
+	    configureXWindow (w, mask, &xwc);
     }
 
     return TRUE;
