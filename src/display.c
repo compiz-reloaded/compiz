@@ -2583,27 +2583,41 @@ focusDefaultWindow (CompDisplay *d)
     CompWindow *w;
     CompWindow *focus = NULL;
 
-    for (s = d->screens; s; s = s->next)
+    if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
     {
-	for (w = s->reverseWindows; w; w = w->prev)
+	w = findTopLevelWindowAtDisplay (d, d->below);
+	if (w && !(w->type & (CompWindowTypeDesktopMask |
+			      CompWindowTypeDockMask)))
 	{
-	    if (w->type & CompWindowTypeDockMask)
-		continue;
+	    if ((*w->screen->focusWindow) (w))
+		focus = w;
+	}
+    }
 
-	    if ((*s->focusWindow) (w))
+    if (!focus)
+    {
+	for (s = d->screens; s; s = s->next)
+	{
+	    for (w = s->reverseWindows; w; w = w->prev)
 	    {
-		if (focus)
+		if (w->type & CompWindowTypeDockMask)
+		    continue;
+
+		if ((*s->focusWindow) (w))
 		{
-		    if (w->type & (CompWindowTypeNormalMask |
-				   CompWindowTypeDialogMask |
-				   CompWindowTypeModalDialogMask))
+		    if (focus)
 		    {
-			if (compareWindowActiveness (focus, w) < 0)
-			    focus = w;
+			if (w->type & (CompWindowTypeNormalMask |
+				       CompWindowTypeDialogMask |
+				       CompWindowTypeModalDialogMask))
+			{
+			    if (compareWindowActiveness (focus, w) < 0)
+				focus = w;
+			}
 		    }
+		    else
+			focus = w;
 		}
-		else
-		    focus = w;
 	    }
 	}
     }
