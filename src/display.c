@@ -2533,6 +2533,10 @@ addDisplay (char *name)
 
     XGetInputFocus (dpy, &focus, &revertTo);
 
+    /* move input focus to root window so that we get a FocusIn event when
+       moving it to the default window */
+    XSetInputFocus (dpy, d->screens->root, RevertToPointerRoot, CurrentTime);
+
     if (focus == None || focus == PointerRoot)
     {
 	focusDefaultWindow (d);
