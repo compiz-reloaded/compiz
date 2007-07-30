@@ -3969,8 +3969,12 @@ ensureWindowVisibility (CompWindow *w)
 
     if (dx || dy)
     {
-	moveWindow (w, dx, dy, TRUE, FALSE);
-	syncWindowPosition (w);
+	XWindowChanges xwc;
+
+	xwc.x = w->serverX + dx;
+	xwc.y = w->serverY + dy;
+
+	configureXWindow (w, CWX | CWY, &xwc);
     }
 }
 
