@@ -19,7 +19,9 @@ EXTRA_DIST =		    \
 DISTCLEANFILES =	 \
 	intltool-extract \
 	intltool-merge   \
-	intltool-update
+	intltool-update	 \
+	po/stamp-it	 \
+	po/.intltool-merge-cache
 
 if USE_GCONF
 gconfdata = compiz-gconf.pc
