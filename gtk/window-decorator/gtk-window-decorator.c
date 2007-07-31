@@ -4588,12 +4588,14 @@ above_button_event (WnckWindow *win,
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+	    {
 
 #ifdef HAVE_LIBWNCK_2_18_1
-	    if (state == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_make_above (win);
 #endif
 
+	    }
 	}
 	break;
     }
@@ -4652,12 +4654,14 @@ unabove_button_event (WnckWindow *win,
     case ButtonRelease:
 	if (xevent->xbutton.button == 1)
 	{
+	    if (state == BUTTON_EVENT_ACTION_STATE)
+	    {
 
 #ifdef HAVE_LIBWNCK_2_18_1
-	    if (state == BUTTON_EVENT_ACTION_STATE)
 		wnck_window_unmake_above (win);
 #endif
 
+	    }
 	}
 	break;
     }
