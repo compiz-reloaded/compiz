@@ -243,8 +243,8 @@ if test "$use_annotate" = yes; then
 fi
 
 AC_ARG_ENABLE(librsvg,
-  [  --enable-librsvg        Enable svg support],
-  [use_librsvg=$enableval], [use_librsvg=no])
+  [  --disable-librsvg       Disable svg support],
+  [use_librsvg=$enableval], [use_librsvg=yes])
 
 if test "x$use_librsvg" = "xyes"; then
   PKG_CHECK_MODULES(LIBRSVG, [cairo >= 1.0 librsvg-2.0 >= 2.14.0], [use_librsvg=yes], [use_librsvg=no])
