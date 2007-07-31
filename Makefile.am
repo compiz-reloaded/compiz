@@ -11,7 +11,10 @@ EXTRA_DIST =		    \
 	compiz-gconf.pc.in  \
 	intltool-extract.in \
 	intltool-merge.in   \
-	intltool-update.in
+	intltool-update.in  \
+	intltool-extract    \
+	intltool-merge	    \
+	intltool-update
 
 DISTCLEANFILES =	 \
 	intltool-extract \
