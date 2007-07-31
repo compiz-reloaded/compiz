@@ -1746,7 +1746,11 @@ updateWindowStruts (CompWindow *w)
 	if (hasNew)
 	{
 	    if (!w->struts)
+	    {
 		w->struts = malloc (sizeof (CompStruts));
+		if (!w->struts)
+		    return FALSE;
+	    }
 
 	    *w->struts = new;
 	}
