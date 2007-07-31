@@ -1189,7 +1189,7 @@ getDesktopHints (CompScreen *s)
 	memcpy (data, propData, sizeof (unsigned long));
 	XFree (propData);
 
-	if (data[0] >= 0 && data[0] < s->nDesktop)
+	if (data[0] < s->nDesktop)
 	    s->currentDesktop = data[0];
     }
 
