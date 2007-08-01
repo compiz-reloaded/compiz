@@ -1665,7 +1665,7 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 					Picture	        picture,
 					decor_layout_t  *layout)
 {
-    int w, h, x2, y2, left, right, top, bottom, width, height;
+    int w, h, left, right, top, bottom, width, height;
 
     if (!shadow->picture)
 	return;
@@ -1697,9 +1697,6 @@ decor_fill_picture_extents_with_shadow (Display	        *xdisplay,
 
     w = width - left - right;
     h = height - top - bottom;
-
-    x2 = width - right;
-    y2 = height - bottom;
 
     /* top left */
     XRenderComposite (xdisplay, PictOpSrc, shadow->picture, 0, picture,
