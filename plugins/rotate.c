@@ -441,15 +441,15 @@ rotatePreparePaintScreen (CompScreen *s,
     else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && cs->invert == 1 &&
 	     !cs->unfolded)
     {
-	int   steps, stepsCount;
+	int   steps;
 	float amount, chunk;
 
 	amount = msSinceLastPaint * 0.05f *
 	    rs->opt[ROTATE_SCREEN_OPTION_SPEED].value.f;
-	steps = stepsCount = amount /
+	steps = amount /
 	    (0.5f * rs->opt[ROTATE_SCREEN_OPTION_TIMESTEP].value.f);
 	if (!steps)
-	    steps = stepsCount = 1;
+	    steps = 1;
 
 	chunk = amount / (float) steps;
 
