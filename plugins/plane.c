@@ -211,7 +211,7 @@ planePaintTransformedOutput (CompScreen		     *screen,
     if (ps->timeoutHandle)
     {
 	CompTransform sTransform = *transform;
-	double dx, dy, tx, ty;
+	double dx, dy;
 	int vx, vy;
 
 	clearTargetOutput (screen->display, GL_COLOR_BUFFER_BIT);
@@ -221,8 +221,6 @@ planePaintTransformedOutput (CompScreen		     *screen,
 	dx *= -1;
 	dy *= -1;
 
-	tx = dy;
-	ty = dy;
 	vx = 0;
 	vy = 0;
 
