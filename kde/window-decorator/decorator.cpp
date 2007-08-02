@@ -735,7 +735,7 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
     case ClientMessage:
 	if (xevent->xclient.message_type == Atoms::toolkitActionAtom)
 	{
-	    long action;
+	    unsigned long action;
 
 	    action = xevent->xclient.data.l[0];
 	    if (action == Atoms::toolkitActionWindowMenuAtom)
