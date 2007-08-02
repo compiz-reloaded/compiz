@@ -3915,7 +3915,7 @@ active_window_changed (WnckScreen *screen)
     if (win)
     {
 	d = g_object_get_data (G_OBJECT (win), "decor");
-	if (d->pixmap)
+	if (d && d->pixmap)
 	{
 	    d->active = wnck_window_is_active (win);
 	    queue_decor_draw (d);
@@ -3926,7 +3926,7 @@ active_window_changed (WnckScreen *screen)
     if (win)
     {
 	d = g_object_get_data (G_OBJECT (win), "decor");
-	if (d->pixmap)
+	if (d && d->pixmap)
 	{
 	    d->active = wnck_window_is_active (win);
 	    queue_decor_draw (d);
@@ -3979,6 +3979,8 @@ window_closed (WnckScreen *screen,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
 
     remove_frame_window (win);
+
+    g_object_set_data (G_OBJECT (win), "decor", NULL);
 
     gdk_error_trap_push ();
     XDeleteProperty (xdisplay, wnck_window_get_xid (win), win_decor_atom);
