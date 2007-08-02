@@ -968,9 +968,8 @@ iniSaveOptions (CompDisplay *d,
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "button", strVal);
 	    free (strVal);
 
-	    asprintf(&strVal, "%i", (int)option->value.action.bell);
-	    fprintf (optionFile, "%s_%s=%s\n", option->name, "bell", strVal);
-	    free (strVal);
+	    fprintf (optionFile, "%s_%s=%i\n", option->name, "bell",
+		     option->value.action.bell);
 
 	    strVal = malloc (sizeof(char) * MAX_OPTION_LENGTH);
 	    strcpy (strVal, "");
@@ -989,13 +988,9 @@ iniSaveOptions (CompDisplay *d,
 	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edge", strVal);
 	    free (strVal);
 
-	    if (option->value.action.type & CompBindingTypeEdgeButton)
-		asprintf (&strVal, "%i", option->value.action.edgeButton);
-	    else
-		asprintf (&strVal, "%i", 0);
-
-	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edgebutton", strVal);
-	    free (strVal);
+	    fprintf (optionFile, "%s_%s=%i\n", option->name, "edgebutton",
+		     (option->value.action.type & CompBindingTypeEdgeButton) ?
+		     option->value.action.edgeButton : 0);
   	    break;
 	case CompOptionTypeList:
 	    firstInList = TRUE;
