@@ -56,6 +56,11 @@ if test "x$GCC" = "xyes"; then
   *) CFLAGS="$CFLAGS -Wnested-externs" ;;
   esac
 
+  case " $CFLAGS " in
+  *[[\ \	]]-D_FORTIFY_SOURCE=2[[\ \	]]*) ;;
+  *) CFLAGS="$CFLAGS -D_FORTIFY_SOURCE=2" ;;
+  esac
+
   if test "x$enable_ansi" = "xyes"; then
     case " $CFLAGS " in
     *[[\ \	]]-ansi[[\ \	]]*) ;;
@@ -67,6 +72,18 @@ if test "x$GCC" = "xyes"; then
     *) CFLAGS="$CFLAGS -pedantic" ;;
     esac
   fi
+fi
+
+if test "x$GCC" = "xyes"; then
+  case " $CXXFLAGS " in
+  *[[\ \	]]-Wall[[\ \	]]*) ;;
+  *) CXXFLAGS="$CXXFLAGS -Wall" ;;
+  esac
+
+  case " $CXXFLAGS " in
+  *[[\ \	]]-D_FORTIFY_SOURCE=2[[\ \	]]*) ;;
+  *) CXXFLAGS="$CXXFLAGS -D_FORTIFY_SOURCE=2" ;;
+  esac
 fi
 
 AC_C_BIGENDIAN
