@@ -522,6 +522,9 @@ parseAction (CompDisplay *d,
 	int len = strlen (optionName) - strlen (optionType);
 	
 	action->realOptionName = malloc (sizeof (char) * (len+1));
+	if (!action->realOptionName)
+	    return FALSE;
+
 	strncpy (action->realOptionName, optionName, len);
 	action->realOptionName[len] = '\0';
 

@@ -1404,7 +1404,8 @@ scaleSelectWindow (CompWindow *w)
 	if (old)
 	    addWindowDamage (old);
 
-	addWindowDamage (new);
+	if (new)
+	    addWindowDamage (new);
     }
 }
 
