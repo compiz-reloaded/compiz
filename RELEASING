@@ -1,0 +1,75 @@
+Here are the steps to follow to create a new compiz release:
+
+1) Ensure that there are no local, uncommitted modifications.
+   It's probably good enough if "git diff HEAD" doesn't output
+   anything and your "master" and "origin" branches are at the
+   current revision.
+
+2) Verify that the code passes "make distcheck"
+
+	Running "make distcheck" should result in no warnings or
+	errors and end with a message of the form:
+
+	==============================================
+	compiz-X.Y.Z archives ready for distribution:
+	compiz-X.Y.Z.tar.gz
+	==============================================
+
+	(But the tar file isn't actually ready yet, as we still have
+	some more steps to follow).
+
+3) Fill out an entry in the NEWS file
+
+	Shift through the logs since the last release. This is most
+	easily done with a comand such as:
+
+		git log --stat compiz-X.Y.Z..
+
+	where X.Y.Z is the previous release version.
+
+	Summarize major changes briefly in a style similar to other
+	entries in NEWS.
+
+4) Increment version number in configure.ac:
+
+	Increment to the micro version number to the next larger
+	(even) number.
+
+5) Commit the changes to NEWS and configure.ac
+
+	It's especially important to mention the new version number in your
+	commit log.
+
+6) Run "make release-publish" which will perform the following steps
+   for you:
+
+	* Check that the version number ends with an even micro component
+	* Check that no release exists with the current version
+	* Verify that make distcheck completes successfully
+	* Generate the final tar file
+	* Generate an sha1sum file
+	* Sign the sha1sum using your GPG setup (asks for your GPG password)
+	* scp the three files to appear on
+	  http://xorg.freedesktop.org/archive/individual/app
+	* Place local copies of the three files in the releases directory
+	* Tag the entire source tree with a tag of the form compiz-X.Y.Z, and
+	  sign the tag with your GPG key (asks for your GPG password, and you
+	  may need to set GIT_COMMITTER_NAME and GIT_COMMITTER_EMAIL to match
+	  your public-key's setting or this fails.)
+	* Provide some text for the release announcement (see below).
+	  If for some reason you lost this message,
+	  "make release-publish-message" prints it for you.
+
+7) Increment compiz_version_micro to the next larger (odd) number in
+   configure, commit, and push.
+
+8) Push the newly created tag out to the central tree with a command
+   something like:
+
+	git push compiz-X.Y.Z
+
+9) Send a message to compiz@list.freedesktop.org to announce the
+   new release using the text provided from "make release-publish",
+   adding the excerpt from NEWS, your signature, followed by
+   tacking on the detailed changelog-ish thing that gets mailed
+   out when you push the tag (but not the diffstat thing).

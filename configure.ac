@@ -1,8 +1,24 @@
 AC_PREREQ(2.57)
 
-AC_INIT([compiz], [0.5.1], [davidr@novell.com])
+dnl compiz package version number
+dnl An odd micro number indicates in-progress development.
+dnl An even micro number indicates a released version.
+m4_define(compiz_version_major, 0)
+m4_define(compiz_version_minor, 5)
+m4_define(compiz_version_micro, 1)
 
-AM_INIT_AUTOMAKE([dist-bzip2])
+AC_INIT([compiz],
+	[compiz_version_major().compiz_version_minor().compiz_version_micro()],
+	[davidr@novell.com])
+
+COMPIZ_VERSION_MAJOR=compiz_version_major()
+COMPIZ_VERSION_MINOR=compiz_version_minor()
+COMPIZ_VERSION_MICRO=compiz_version_micro()
+AC_SUBST(COMPIZ_VERSION_MAJOR)
+AC_SUBST(COMPIZ_VERSION_MINOR)
+AC_SUBST(COMPIZ_VERSION_MICRO)
+
+AM_INIT_AUTOMAKE([1.7])
 AC_CONFIG_HEADER([config.h])
 AC_PROG_INTLTOOL([0.23])
 AM_MAINTAINER_MODE
