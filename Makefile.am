@@ -104,7 +104,7 @@ release-publish-message: releases/$(sha1_file)
 	@echo ""
 	@echo "	git clone git://git.freedesktop.org/git/xorg/app/compiz"
 	@echo ""
-	@echo "    will include a signed $(VERSION) tag which points to a commit named:"
+	@echo "    will include a signed compiz-$(VERSION) tag which points to a commit named:"
 	@echo "	`git cat-file tag compiz-$(VERSION) | grep ^object | sed -e 's,object ,,'`"
 	@echo ""
 	@echo "    which can be verified with:"
