@@ -1,3 +1,38 @@
+Release 0.5.2 (2007-08-03 David Reveman <davidr@novell.com>)
+============================================================
+Development release.
+
+Better support for multiple X-screens.
+
+XML-based meta-data system for handling of various kinds
+for meta-data like plugin descriptions, default option
+values, etc.
+
+Major improvements to option initialization based on the
+new meta-data system.
+
+Logging framework.
+
+Support for configurable button layout in metacity themes
+has been added to gtk-window-decorator.
+
+Glib plugin that allows plugins that use the glib main
+loop to integrate properly with the compiz main loop
+without waking up periodically to check for pending
+events.
+
+Plugin plugins that make it possible to adjust and extend
+the behavior of existing plugins through new plugins.
+
+More dynamic handling of output devices, which allows the
+output device configuration used when rendering to be
+changed between frames.
+
+Transparency support in cube plugin.
+
+Introspection support in dbus plugin.
+
+
 Release 0.5.0 (2007-04-02 David Reveman <davidr@novell.com>)
 ============================================================
 Development release.
