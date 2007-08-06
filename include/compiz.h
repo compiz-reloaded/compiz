@@ -26,12 +26,12 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070708
+#define ABIVERSION 20070806
 
 #include <stdio.h>
 #include <sys/time.h>
 
-#include <X11/Xlib.h>
+#include <X11/Xlib-xcb.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/Xdamage.h>
 #include <X11/extensions/Xcomposite.h>
@@ -732,6 +732,8 @@ typedef void (*LogMessageProc) (CompDisplay  *d,
 				char         *message);
 
 struct _CompDisplay {
+    xcb_connection_t *connection;
+
     Display    *display;
     CompScreen *screens;
 

@@ -2015,6 +2015,8 @@ addDisplay (char *name)
 	return FALSE;
     }
 
+    d->connection = XGetXCBConnection (dpy);
+
     if (!compInitDisplayOptionsFromMetadata (d,
 					     &coreMetadata,
 					     coreDisplayOptionInfo,
