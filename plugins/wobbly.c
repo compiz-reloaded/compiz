@@ -2463,7 +2463,7 @@ wobblyWindowGrabNotify (CompWindow   *w,
 
     if (!ws->grabWindow)
     {
-    	ws->grabMask   = mask;
+	ws->grabMask   = mask;
 	ws->grabWindow = w;
     }
     ws->moveWindow = FALSE;
@@ -2560,7 +2560,7 @@ wobblyWindowUngrabNotify (CompWindow *w)
 
     if (w == ws->grabWindow)
     {
-    	ws->grabMask   = 0;
+	ws->grabMask   = 0;
 	ws->grabWindow = NULL;
     }
 
