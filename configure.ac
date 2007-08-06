@@ -113,7 +113,8 @@ AC_SUBST(imagedir)
 metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
 
-COMPIZ_REQUIRES="xcomposite \
+COMPIZ_REQUIRES="x11-xcb    \
+		 xcomposite \
 		 xfixes	    \
 		 xdamage    \
 		 xrandr	    \
