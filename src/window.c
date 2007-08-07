@@ -1083,7 +1083,7 @@ updateFrameWindow (CompWindow *w)
 	    XSetWindowAttributes attr;
 	    XWindowChanges	 xwc;
 
-	    attr.event_mask	   = FocusChangeMask;
+	    attr.event_mask	   = 0;
 	    attr.override_redirect = TRUE;
 
 	    w->frame = XCreateWindow (w->screen->display->display,
