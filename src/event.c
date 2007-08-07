@@ -198,8 +198,8 @@ autoRaiseTimeout (void *closure)
     return FALSE;
 }
 
-#define REAL_MOD_MASK (ShiftMask | ControlMask | Mod1Mask | \
-		       Mod2Mask | Mod3Mask | Mod4Mask | Mod5Mask)
+#define REAL_MOD_MASK (ShiftMask | ControlMask | Mod1Mask | Mod2Mask | \
+		       Mod3Mask | Mod4Mask | Mod5Mask | CompNoMask)
 
 static Bool
 isCallBackBinding (CompOption	   *option,
