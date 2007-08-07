@@ -2206,38 +2206,19 @@ findWindowAtScreen (CompScreen *s,
 
 CompWindow *
 findTopLevelWindowAtScreen (CompScreen *s,
-			    Window      id)
+			    Window     id)
 {
-    CompWindow *found = NULL;
+    CompWindow *w;
 
-    if (lastFoundWindow && lastFoundWindow->id == id)
-    {
-	found = lastFoundWindow;
-    }
-    else
-    {
-	CompWindow *w;
-
-	for (w = s->windows; w; w = w->next)
-	{
-	    if (w->id == id)
-	    {
-		found = (lastFoundWindow = w);
-		break;
-	    }
-	}
-    }
-
-    if (!found)
+    w = findWindowAtScreen (s, id);
+    if (!w)
 	return NULL;
 
-    if (found->attrib.override_redirect)
+    if (w->attrib.override_redirect)
     {
 	/* likely a frame window */
-	if (found->attrib.class == InputOnly)
+	if (w->attrib.class == InputOnly)
 	{
-	    CompWindow *w;
-
 	    for (w = s->windows; w; w = w->next)
 		if (w->frame == id)
 		    return w;
@@ -2246,7 +2227,7 @@ findTopLevelWindowAtScreen (CompScreen *s,
 	return NULL;
     }
 
-    return found;
+    return w;
 }
 
 void
