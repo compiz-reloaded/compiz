@@ -2690,21 +2690,14 @@ CompWindow *
 findTopLevelWindowAtDisplay (CompDisplay *d,
 			     Window      id)
 {
-    if (lastFoundWindow && lastFoundWindow->id == id)
-    {
-	return lastFoundWindow;
-    }
-    else
-    {
-	CompScreen *s;
-	CompWindow *w;
+    CompScreen *s;
+    CompWindow *w;
 
-	for (s = d->screens; s; s = s->next)
-	{
-	    w = findTopLevelWindowAtScreen (s, id);
-	    if (w)
-		return w;
-	}
+    for (s = d->screens; s; s = s->next)
+    {
+	w = findTopLevelWindowAtScreen (s, id);
+	if (w)
+	    return w;
     }
 
     return 0;
