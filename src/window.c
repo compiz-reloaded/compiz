@@ -1325,12 +1325,6 @@ freeWindow (CompWindow *w)
     if (w->indices)
 	free (w->indices);
 
-    if (lastFoundWindow == w)
-	lastFoundWindow = 0;
-
-    if (lastDamagedWindow == w)
-	lastDamagedWindow = 0;
-
     if (w->struts)
 	free (w->struts);
 
