@@ -29,11 +29,11 @@
 #include <math.h>
 #include <unistd.h>
 
-#include <X11/Xatom.h>
-#include <X11/extensions/shape.h>
-
 #include <compiz.h>
 #include <decoration.h>
+
+#include <X11/Xatom.h>
+#include <X11/extensions/shape.h>
 
 /*
  * compiz composited video
