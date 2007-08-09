@@ -724,7 +724,7 @@ annoGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 annoSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

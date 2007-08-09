@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070806
+#define ABIVERSION 20070807
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -412,7 +412,7 @@ compFiniOption (CompOption *option);
 CompOption *
 compFindOption (CompOption *option,
 		int	    nOption,
-		char	    *name,
+		const char  *name,
 		int	    *index);
 
 Bool
@@ -457,37 +457,37 @@ compWindowTypeMaskFromStringList (CompOptionValue *value);
 Bool
 getBoolOptionNamed (CompOption *option,
 		    int	       nOption,
-		    char       *name,
+		    const char *name,
 		    Bool       defaultValue);
 
 int
 getIntOptionNamed (CompOption *option,
 		   int	      nOption,
-		   char	      *name,
+		   const char *name,
 		   int	      defaultValue);
 
 float
 getFloatOptionNamed (CompOption *option,
 		     int	nOption,
-		     char	*name,
+		     const char *name,
 		     float	defaultValue);
 
 char *
 getStringOptionNamed (CompOption *option,
 		      int	 nOption,
-		      char	 *name,
+		      const char *name,
 		      char	 *defaultValue);
 
 unsigned short *
 getColorOptionNamed (CompOption	    *option,
 		     int	    nOption,
-		     char	    *name,
+		     const char     *name,
 		     unsigned short *defaultValue);
 
 CompMatch *
 getMatchOptionNamed (CompOption	*option,
 		     int	nOption,
-		     char	*name,
+		     const char *name,
 		     CompMatch  *defaultValue);
 
 char *
@@ -593,7 +593,7 @@ typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
 					      int	  *count);
 
 typedef Bool (*SetDisplayOptionProc) (CompDisplay     *display,
-				      char	      *name,
+				      const char      *name,
 				      CompOptionValue *value);
 
 typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
@@ -602,12 +602,12 @@ typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
 
 typedef Bool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
 					    CompDisplay     *display,
-					    char	    *name,
+					    const char	    *name,
 					    CompOptionValue *value);
 
 typedef Bool (*SetDisplayOptionForPluginProc) (CompDisplay     *display,
-					       char	       *plugin,
-					       char	       *name,
+					       const char      *plugin,
+					       const char	*name,
 					       CompOptionValue *value);
 
 typedef Bool (*InitPluginForDisplayProc) (CompPlugin  *plugin,
@@ -620,8 +620,8 @@ typedef void (*HandleEventProc) (CompDisplay *display,
 				 XEvent	     *event);
 
 typedef void (*HandleCompizEventProc) (CompDisplay *display,
-				       char        *pluginName,
-				       char        *eventName,
+				       const char  *pluginName,
+				       const char  *eventName,
 				       CompOption  *option,
 				       int         nOption);
 
@@ -727,9 +727,9 @@ typedef void (*MatchPropertyChangedProc) (CompDisplay *display,
 					  CompWindow  *window);
 
 typedef void (*LogMessageProc) (CompDisplay  *d,
-				char         *componentName,
+				const char   *componentName,
 				CompLogLevel level,
-				char         *message);
+				const char   *message);
 
 struct _CompDisplay {
     xcb_connection_t *connection;
@@ -991,16 +991,16 @@ fileWatchRemoved (CompDisplay   *display,
 
 void
 compLogMessage (CompDisplay  *d,
-		char         *componentName,
+		const char   *componentName,
 		CompLogLevel level,
-		char         *format,
+		const char   *format,
 		...);
 
 void
 logMessage (CompDisplay  *d,
-	    char         *componentName,
+	    const char   *componentName,
 	    CompLogLevel level,
-	    char         *message);
+	    const char   *message);
 
 const char *
 logLevelToString (CompLogLevel level);
@@ -1013,7 +1013,7 @@ addScreenToDisplay (CompDisplay *display,
 		    CompScreen *s);
 
 Bool
-addDisplay (char *name);
+addDisplay (const char *name);
 
 Time
 getCurrentTimeFromDisplay (CompDisplay *d);
@@ -1117,8 +1117,8 @@ handleEvent (CompDisplay *display,
 
 void
 handleCompizEvent (CompDisplay *display,
-		   char        *pluginName,
-		   char        *eventName,
+		   const char  *pluginName,
+		   const char  *eventName,
 		   CompOption  *option,
 		   int         nOption);
 
@@ -1459,14 +1459,14 @@ destroyTexture (CompScreen  *screen,
 Bool
 imageBufferToTexture (CompScreen   *screen,
 		      CompTexture  *texture,
-		      char	   *image,
+		      const char   *image,
 		      unsigned int width,
 		      unsigned int height);
 
 Bool
 imageDataToTexture (CompScreen   *screen,
 		    CompTexture  *texture,
-		    char	 *image,
+		    const char	 *image,
 		    unsigned int width,
 		    unsigned int height,
 		    GLenum       format,
@@ -1638,18 +1638,18 @@ typedef void (*GLGenerateMipmapProc) (GLenum target);
 typedef CompOption *(*GetScreenOptionsProc) (CompScreen *screen,
 					     int	*count);
 typedef Bool (*SetScreenOptionProc) (CompScreen      *screen,
-				     char	     *name,
+				     const char	     *name,
 				     CompOptionValue *value);
 typedef CompOption *(*GetPluginScreenOptionsProc) (CompPlugin *plugin,
 						   CompScreen *screen,
 						   int	      *count);
 typedef Bool (*SetPluginScreenOptionProc) (CompPlugin      *plugin,
 					   CompScreen      *screen,
-					   char	           *name,
+					   const char	   *name,
 					   CompOptionValue *value);
 typedef Bool (*SetScreenOptionForPluginProc) (CompScreen      *screen,
-					      char	      *plugin,
-					      char	      *name,
+					      const char      *plugin,
+					      const char      *name,
 					      CompOptionValue *value);
 
 typedef Bool (*InitPluginForScreenProc) (CompPlugin *plugin,
@@ -2832,7 +2832,7 @@ typedef void (*FiniPluginProc) (CompPlugin *plugin);
 typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
 
 typedef struct _CompPluginVTable {
-    char *name;
+    const char *name;
 
     GetVersionProc  getVersion;
     GetMetadataProc getMetadata;
@@ -2858,13 +2858,13 @@ typedef struct _CompPluginVTable {
 typedef CompPluginVTable *(*PluginGetInfoProc) (void);
 
 typedef Bool (*LoadPluginProc) (CompPlugin *p,
-				char	   *path,
-				char	   *name);
+				const char *path,
+				const char *name);
 
 typedef void (*UnloadPluginProc) (CompPlugin *p);
 
-typedef char **(*ListPluginsProc) (char *path,
-				   int	*n);
+typedef char **(*ListPluginsProc) (const char *path,
+				   int	      *n);
 
 extern LoadPluginProc   loaderLoadPlugin;
 extern UnloadPluginProc loaderUnloadPlugin;
@@ -2909,10 +2909,10 @@ void
 windowFiniPlugins (CompWindow *w);
 
 CompPlugin *
-findActivePlugin (char *name);
+findActivePlugin (const char *name);
 
 CompPlugin *
-loadPlugin (char *plugin);
+loadPlugin (const char *plugin);
 
 void
 unloadPlugin (CompPlugin *p);
@@ -2961,15 +2961,15 @@ destroyFunctionData (CompFunctionData *data);
 
 Bool
 addTempHeaderOpToFunctionData (CompFunctionData *data,
-			       char		*name);
+			       const char	*name);
 
 Bool
 addParamHeaderOpToFunctionData (CompFunctionData *data,
-				char		 *name);
+				const char	 *name);
 
 Bool
 addAttribHeaderOpToFunctionData (CompFunctionData *data,
-				 char		  *name);
+				 const char	  *name);
 
 #define COMP_FETCH_TARGET_2D   0
 #define COMP_FETCH_TARGET_RECT 1
@@ -2977,28 +2977,28 @@ addAttribHeaderOpToFunctionData (CompFunctionData *data,
 
 Bool
 addFetchOpToFunctionData (CompFunctionData *data,
-			  char		   *dst,
-			  char		   *offset,
+			  const char	   *dst,
+			  const char	   *offset,
 			  int		   target);
 
 Bool
 addColorOpToFunctionData (CompFunctionData *data,
-			  char		   *dst,
-			  char		   *src);
+			  const char	   *dst,
+			  const char	   *src);
 
 Bool
 addDataOpToFunctionData (CompFunctionData *data,
-			 char		  *str,
+			 const char	  *str,
 			 ...);
 
 Bool
 addBlendOpToFunctionData (CompFunctionData *data,
-			  char		   *str,
+			  const char	   *str,
 			  ...);
 
 int
 createFragmentFunction (CompScreen	 *s,
-			char		 *name,
+			const char	 *name,
 			CompFunctionData *data);
 
 void

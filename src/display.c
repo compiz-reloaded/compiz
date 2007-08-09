@@ -822,7 +822,7 @@ pingTimeout (void *closure)
 
 static Bool
 setDisplayOption (CompDisplay     *display,
-		  char	          *name,
+		  const char	  *name,
 		  CompOptionValue *value)
 {
     CompOption *o;
@@ -885,8 +885,8 @@ setDisplayOption (CompDisplay     *display,
 
 static Bool
 setDisplayOptionForPlugin (CompDisplay     *display,
-			   char	           *plugin,
-			   char	           *name,
+			   const char	   *plugin,
+			   const char	   *name,
 			   CompOptionValue *value)
 {
     CompPlugin *p;
@@ -1957,7 +1957,7 @@ addScreenToDisplay (CompDisplay *display,
 }
 
 Bool
-addDisplay (char *name)
+addDisplay (const char *name)
 {
     CompDisplay *d;
     Display     *dpy;

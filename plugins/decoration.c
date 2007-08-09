@@ -1115,7 +1115,7 @@ decorGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 decorSetDisplayOption (CompPlugin      *plugin,
 		       CompDisplay     *display,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;

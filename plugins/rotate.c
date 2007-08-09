@@ -167,7 +167,7 @@ rotateGetScreenOptions (CompPlugin *plugin,
 static Bool
 rotateSetScreenOption (CompPlugin      *plugin,
 		       CompScreen      *screen,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;
@@ -1653,7 +1653,7 @@ rotateGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 rotateSetDisplayOption (CompPlugin      *plugin,
 			CompDisplay     *display,
-			char	        *name,
+			const char	*name,
 			CompOptionValue *value)
 {
     CompOption *o;

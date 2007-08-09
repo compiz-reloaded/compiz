@@ -35,8 +35,8 @@ CompPlugin *plugins = 0;
 
 static Bool
 dlloaderLoadPlugin (CompPlugin *p,
-		    char       *path,
-		    char       *name)
+		    const char *path,
+		    const char *name)
 {
     char *file;
     void *dlhand;
@@ -133,8 +133,8 @@ dlloaderFilter (const struct dirent *name)
 }
 
 static char **
-dlloaderListPlugins (char *path,
-		     int  *n)
+dlloaderListPlugins (const char *path,
+		     int	*n)
 {
     struct dirent **nameList;
     char	  **list;
@@ -412,7 +412,7 @@ windowFiniPlugins (CompWindow *w)
 }
 
 CompPlugin *
-findActivePlugin (char *name)
+findActivePlugin (const char *name)
 {
     CompPlugin *p;
 
@@ -433,7 +433,7 @@ unloadPlugin (CompPlugin *p)
 }
 
 CompPlugin *
-loadPlugin (char *name)
+loadPlugin (const char *name)
 {
     CompPlugin *p;
     char       *home, *plugindir;

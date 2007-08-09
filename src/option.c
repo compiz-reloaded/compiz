@@ -99,7 +99,7 @@ compFiniOption (CompOption *o)
 CompOption *
 compFindOption (CompOption *option,
 		int	    nOption,
-		char	    *name,
+		const char  *name,
 		int	    *index)
 {
     int i;
@@ -399,7 +399,7 @@ compWindowTypeMaskFromStringList (CompOptionValue *value)
 Bool
 getBoolOptionNamed (CompOption *option,
 		    int	       nOption,
-		    char       *name,
+		    const char *name,
 		    Bool       defaultValue)
 {
     while (nOption--)
@@ -417,7 +417,7 @@ getBoolOptionNamed (CompOption *option,
 int
 getIntOptionNamed (CompOption *option,
 		   int	      nOption,
-		   char	      *name,
+		   const char *name,
 		   int	      defaultValue)
 {
     while (nOption--)
@@ -435,7 +435,7 @@ getIntOptionNamed (CompOption *option,
 float
 getFloatOptionNamed (CompOption *option,
 		     int	nOption,
-		     char	*name,
+		     const char *name,
 		     float	defaultValue)
 {
     while (nOption--)
@@ -453,7 +453,7 @@ getFloatOptionNamed (CompOption *option,
 char *
 getStringOptionNamed (CompOption *option,
 		      int	 nOption,
-		      char	 *name,
+		      const char *name,
 		      char	 *defaultValue)
 {
     while (nOption--)
@@ -471,7 +471,7 @@ getStringOptionNamed (CompOption *option,
 unsigned short *
 getColorOptionNamed (CompOption	    *option,
 		     int	    nOption,
-		     char	    *name,
+		     const char     *name,
 		     unsigned short *defaultValue)
 {
     while (nOption--)
@@ -489,7 +489,7 @@ getColorOptionNamed (CompOption	    *option,
 CompMatch *
 getMatchOptionNamed (CompOption	*option,
 		     int	nOption,
-		     char	*name,
+		     const char *name,
 		     CompMatch  *defaultValue)
 {
     while (nOption--)

@@ -153,7 +153,7 @@ placeGetScreenOptions (CompPlugin *plugin,
 static Bool
 placeSetScreenOption (CompPlugin      *plugin,
 		      CompScreen      *screen,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

@@ -679,7 +679,7 @@ cubeLoadBackground (CompScreen *s,
 static Bool
 cubeSetScreenOption (CompPlugin      *plugin,
 		     CompScreen      *screen,
-		     char	     *name,
+		     const char	     *name,
 		     CompOptionValue *value)
 {
     CompOption *o;
@@ -1937,7 +1937,7 @@ cubeOutputChangeNotify (CompScreen *s)
 
 static Bool
 cubeSetGlobalScreenOption (CompScreen      *s,
-			   char		   *name,
+			   const char	   *name,
 			   CompOptionValue *value)
 {
     Bool status;
@@ -1971,7 +1971,7 @@ cubeGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 cubeSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

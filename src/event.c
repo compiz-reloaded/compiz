@@ -1136,8 +1136,8 @@ handleActionEvent (CompDisplay *d,
 
 void
 handleCompizEvent (CompDisplay *d,
-		   char        *pluginName,
-		   char        *eventName,
+		   const char  *pluginName,
+		   const char  *eventName,
 		   CompOption  *option,
 		   int         nOption)
 {

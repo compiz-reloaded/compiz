@@ -1395,7 +1395,7 @@ fuseGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 fuseSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

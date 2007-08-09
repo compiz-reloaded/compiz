@@ -192,9 +192,9 @@ switchGetScreenOptions (CompPlugin *plugin,
 }
 
 static Bool
-switchSetScreenOption (CompPlugin *plugin,
+switchSetScreenOption (CompPlugin      *plugin,
 		       CompScreen      *screen,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption  *o;
@@ -1816,9 +1816,9 @@ switchGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-switchSetDisplayOption (CompPlugin  *plugin,
+switchSetDisplayOption (CompPlugin      *plugin,
 			CompDisplay     *display,
-			char	        *name,
+			const char	*name,
 			CompOptionValue *value)
 {
     CompOption *o;

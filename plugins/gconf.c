@@ -185,8 +185,8 @@ gconfSetActionValue (CompDisplay     *d,
 static void
 gconfSetOption (CompDisplay *d,
 		CompOption  *o,
-		gchar	    *screen,
-		gchar	    *plugin)
+		const gchar *screen,
+		const gchar *plugin)
 {
     GConfValue *gvalue, *existingValue = NULL;
     gchar      *key;
@@ -792,8 +792,8 @@ gconfGetOptionValue (CompDisplay *d,
 static void
 gconfInitOption (CompDisplay *d,
 		 CompOption  *o,
-		 gchar       *screen,
-		 gchar       *plugin)
+		 const gchar *screen,
+		 const gchar *plugin)
 {
     gchar *key;
 
@@ -815,7 +815,7 @@ gconfInitOption (CompDisplay *d,
 
 static Bool
 gconfSetDisplayOption (CompDisplay     *d,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     Bool status;
@@ -841,8 +841,8 @@ gconfSetDisplayOption (CompDisplay     *d,
 
 static Bool
 gconfSetDisplayOptionForPlugin (CompDisplay     *d,
-				char	        *plugin,
-				char	        *name,
+				const char	*plugin,
+				const char	*name,
 				CompOptionValue *value)
 {
     Bool status;
@@ -874,7 +874,7 @@ gconfSetDisplayOptionForPlugin (CompDisplay     *d,
 
 static Bool
 gconfSetScreenOption (CompScreen      *s,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     Bool status;
@@ -905,8 +905,8 @@ gconfSetScreenOption (CompScreen      *s,
 
 static Bool
 gconfSetScreenOptionForPlugin (CompScreen      *s,
-			       char	       *plugin,
-			       char	       *name,
+			       const char      *plugin,
+			       const char      *name,
 			       CompOptionValue *value)
 {
     Bool status;

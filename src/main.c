@@ -100,9 +100,9 @@ usage (void)
 
 void
 compLogMessage (CompDisplay *d,
-		char	     *componentName,
+		const char   *componentName,
 		CompLogLevel level,
-		char	     *format,
+		const char   *format,
 		...)
 {
     va_list args;
@@ -122,9 +122,9 @@ compLogMessage (CompDisplay *d,
 
 void
 logMessage (CompDisplay	 *d,
-	    char	 *componentName,
+	    const char	 *componentName,
 	    CompLogLevel level,
-	    char	 *message)
+	    const char	 *message)
 {
     char defaultMessage[2048];
 

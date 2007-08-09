@@ -57,7 +57,7 @@ static CompMetadata iniMetadata;
 
 static Bool iniSaveOptions (CompDisplay *d,
 			    int         screen,
-			    char        *plugin);
+			    const char  *plugin);
 
 /*
  * IniFileData
@@ -301,7 +301,7 @@ iniGetHomeDir (char **homeDir)
 static Bool
 iniGetFilename (CompDisplay *d,
 		int screen,
-		char *plugin,
+		const char *plugin,
 		char **filename)
 {
     CompScreen *s;
@@ -623,7 +623,7 @@ parseAction (CompDisplay *d,
 static Bool
 iniLoadOptionsFromFile (CompDisplay *d,
 			FILE        *optionFile,
-			char        *plugin,
+			const char  *plugin,
 			int         screen,
 			Bool        *reSave)
 {
@@ -840,7 +840,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
 static Bool
 iniSaveOptions (CompDisplay *d,
 	        int         screen,
-	        char        *plugin)
+		const char  *plugin)
 {
     CompScreen *s = NULL;
     CompOption *option;
@@ -1064,7 +1064,7 @@ iniSaveOptions (CompDisplay *d,
 static Bool
 iniLoadOptions (CompDisplay *d,
 	        int         screen,
-	        char        *plugin)
+	        const char  *plugin)
 {
     char         *filename, *directory, *fullPath;
     FILE         *optionFile;
@@ -1292,7 +1292,7 @@ iniInitPluginForScreen (CompPlugin *p,
 }
 
 static Bool
-iniSetScreenOption (CompScreen *s, char *name, CompOptionValue *value)
+iniSetScreenOption (CompScreen *s, const char *name, CompOptionValue *value)
 {
     Bool status;
 
@@ -1311,7 +1311,7 @@ iniSetScreenOption (CompScreen *s, char *name, CompOptionValue *value)
 }
 
 static Bool
-iniSetDisplayOption (CompDisplay *d, char *name, CompOptionValue *value)
+iniSetDisplayOption (CompDisplay *d, const char *name, CompOptionValue *value)
 {
     Bool status;
 
@@ -1331,8 +1331,8 @@ iniSetDisplayOption (CompDisplay *d, char *name, CompOptionValue *value)
 
 static Bool
 iniSetDisplayOptionForPlugin (CompDisplay     *d,
-			      char	      *plugin,
-			      char	      *name,
+			      const char      *plugin,
+			      const char      *name,
 			      CompOptionValue *value)
 {
     Bool status;
@@ -1357,8 +1357,8 @@ iniSetDisplayOptionForPlugin (CompDisplay     *d,
 
 static Bool
 iniSetScreenOptionForPlugin (CompScreen      *s,
-			     char	     *plugin,
-			     char	     *name,
+			     const char	     *plugin,
+			     const char	     *name,
 			     CompOptionValue *value)
 {
     Bool status;

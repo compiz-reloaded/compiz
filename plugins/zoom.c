@@ -121,7 +121,7 @@ zoomGetScreenOptions (CompPlugin *plugin,
 static Bool
 zoomSetScreenOption (CompPlugin      *plugin,
 		     CompScreen      *screen,
-		     char	     *name,
+		     const char	     *name,
 		     CompOptionValue *value)
 {
     CompOption *o;
@@ -933,7 +933,7 @@ zoomGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 zoomSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

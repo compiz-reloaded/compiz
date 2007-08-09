@@ -408,9 +408,9 @@ shotGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-shotSetDisplayOption (CompPlugin  *plugin,
-		      CompDisplay    *display,
-		      char	     *name,
+shotSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

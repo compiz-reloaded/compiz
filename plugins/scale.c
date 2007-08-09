@@ -61,7 +61,7 @@ scaleGetScreenOptions (CompPlugin  *plugin,
 static Bool
 scaleSetScreenOption (CompPlugin      *plugin,
 		      CompScreen      *screen,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;
@@ -1864,9 +1864,9 @@ scaleGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-scaleSetDisplayOption (CompPlugin  *plugin,
+scaleSetDisplayOption (CompPlugin      *plugin,
 		       CompDisplay     *display,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;

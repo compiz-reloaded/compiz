@@ -117,7 +117,7 @@ minGetScreenOptions (CompPlugin *plugin,
 static Bool
 minSetScreenOption (CompPlugin      *plugin,
 		    CompScreen      *screen,
-		    char	    *name,
+		    const char	    *name,
 		    CompOptionValue *value)
 {
     CompOption *o;

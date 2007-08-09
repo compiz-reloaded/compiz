@@ -96,7 +96,7 @@ destroyTexture (CompScreen  *screen,
 static Bool
 imageToTexture (CompScreen   *screen,
 		CompTexture  *texture,
-		char	     *image,
+		const char   *image,
 		unsigned int width,
 		unsigned int height,
 		GLenum       format,
@@ -162,7 +162,7 @@ imageToTexture (CompScreen   *screen,
 Bool
 imageBufferToTexture (CompScreen   *screen,
 		      CompTexture  *texture,
-		      char	   *image,
+		      const char   *image,
 		      unsigned int width,
 		      unsigned int height)
 {
@@ -178,7 +178,7 @@ imageBufferToTexture (CompScreen   *screen,
 Bool
 imageDataToTexture (CompScreen   *screen,
 		    CompTexture  *texture,
-		    char	   *image,
+		    const char	   *image,
 		    unsigned int width,
 		    unsigned int height,
 		    GLenum       format,

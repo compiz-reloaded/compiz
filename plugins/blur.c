@@ -545,7 +545,7 @@ blurGetScreenOptions (CompPlugin *plugin,
 static Bool
 blurSetScreenOption (CompPlugin      *plugin,
 		     CompScreen      *screen,
-		     char	     *name,
+		     const char	     *name,
 		     CompOptionValue *value)
 {
     CompOption *o;
@@ -2319,9 +2319,9 @@ blurGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-blurSetDisplayOption (CompPlugin  *plugin,
+blurSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

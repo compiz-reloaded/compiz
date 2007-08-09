@@ -211,7 +211,7 @@ wobblyGetScreenOptions (CompPlugin *plugin,
 static Bool
 wobblySetScreenOption (CompPlugin      *plugin,
 		       CompScreen      *screen,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;
@@ -2630,9 +2630,9 @@ wobblyGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-wobblySetDisplayOption (CompPlugin  *plugin,
+wobblySetDisplayOption (CompPlugin      *plugin,
 			CompDisplay     *display,
-			char	        *name,
+			const char	*name,
 			CompOptionValue *value)
 {
     CompOption *o;

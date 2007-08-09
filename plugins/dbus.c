@@ -1947,7 +1947,7 @@ static void
 dbusSendChangeSignalForOption (CompDisplay     *d,
 			       CompOptionType  type,
 			       CompOptionValue *value,
-			       char	       *path)
+			       const char      *path)
 {
     DBusMessage *signal;
 
@@ -1968,7 +1968,7 @@ dbusSendChangeSignalForOption (CompDisplay     *d,
 static void
 dbusSendChangeSignalForDisplayOption (CompDisplay *d,
 				      CompOption  *o,
-				      char	  *plugin)
+				      const char  *plugin)
 {
     char path[256];
 
@@ -1983,7 +1983,7 @@ dbusSendChangeSignalForDisplayOption (CompDisplay *d,
 static void
 dbusSendChangeSignalForScreenOption (CompScreen *s,
 				     CompOption *o,
-				     char	*plugin)
+				     const char	*plugin)
 {
     char path[256];
 
@@ -2295,7 +2295,7 @@ dbusInitPluginForScreen (CompPlugin *p,
 
 static Bool
 dbusSetDisplayOption (CompDisplay     *d,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompScreen *s;
@@ -2335,8 +2335,8 @@ dbusSetDisplayOption (CompDisplay     *d,
 
 static Bool
 dbusSetDisplayOptionForPlugin (CompDisplay     *d,
-			       char	       *plugin,
-			       char	       *name,
+			       const char      *plugin,
+			       const char      *name,
 			       CompOptionValue *value)
 {
     Bool status;
@@ -2371,7 +2371,7 @@ dbusSetDisplayOptionForPlugin (CompDisplay     *d,
 
 static Bool
 dbusSetScreenOption (CompScreen      *s,
-		     char	     *name,
+		     const char	     *name,
 		     CompOptionValue *value)
 {
     Bool status;
@@ -2400,8 +2400,8 @@ dbusSetScreenOption (CompScreen      *s,
 
 static Bool
 dbusSetScreenOptionForPlugin (CompScreen      *s,
-			      char	      *plugin,
-			      char	      *name,
+			      const char      *plugin,
+			      const char      *name,
 			      CompOptionValue *value)
 {
     Bool status;

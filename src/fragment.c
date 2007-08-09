@@ -171,7 +171,7 @@ findFragmentFunction (CompScreen *s,
 
 static CompFunction *
 findFragmentFunctionWithName (CompScreen *s,
-			      char	 *name)
+			      const char *name)
 {
     CompFunction *function;
 
@@ -757,7 +757,7 @@ destroyFunctionData (CompFunctionData *data)
 static char *
 copyData (CompHeaderOp *header,
 	  int	       nHeader,
-	  char	       *prefix,
+	  const char   *prefix,
 	  char	       *data)
 {
     char *copy, *needle, *haystack, *dst, *first;
@@ -836,7 +836,7 @@ copyData (CompHeaderOp *header,
 static Bool
 copyFunctionData (CompFunctionData	 *dst,
 		  const CompFunctionData *src,
-		  char			 *dstPrefix)
+		  const char		 *dstPrefix)
 {
     int i;
 
@@ -914,7 +914,7 @@ copyFunctionData (CompFunctionData	 *dst,
 
 static Bool
 addHeaderOpToFunctionData (CompFunctionData *data,
-			   char		    *name,
+			   const char	    *name,
 			   CompOpType	    type)
 {
     static char  *reserved[] = {
@@ -955,21 +955,21 @@ addHeaderOpToFunctionData (CompFunctionData *data,
 
 Bool
 addTempHeaderOpToFunctionData (CompFunctionData *data,
-			       char		*name)
+			       const char	*name)
 {
     return addHeaderOpToFunctionData (data, name, CompOpTypeHeaderTemp);
 }
 
 Bool
 addParamHeaderOpToFunctionData (CompFunctionData *data,
-				char		 *name)
+				const char	 *name)
 {
     return addHeaderOpToFunctionData (data, name, CompOpTypeHeaderParam);
 }
 
 Bool
 addAttribHeaderOpToFunctionData (CompFunctionData *data,
-				 char		  *name)
+				 const char	  *name)
 {
     return addHeaderOpToFunctionData (data, name, CompOpTypeHeaderAttrib);
 }
@@ -991,8 +991,8 @@ allocBodyOpInFunctionData (CompFunctionData *data)
 
 Bool
 addFetchOpToFunctionData (CompFunctionData *data,
-			  char		   *dst,
-			  char		   *offset,
+			  const char	   *dst,
+			  const char	   *offset,
 			  int		   target)
 {
     int index = data->nBody;
@@ -1014,8 +1014,8 @@ addFetchOpToFunctionData (CompFunctionData *data,
 
 Bool
 addColorOpToFunctionData (CompFunctionData *data,
-			  char		   *dst,
-			  char		   *src)
+			  const char	   *dst,
+			  const char	   *src)
 {
     int index = data->nBody;
 
@@ -1031,7 +1031,7 @@ addColorOpToFunctionData (CompFunctionData *data,
 
 Bool
 addDataOpToFunctionData (CompFunctionData *data,
-			 char		  *str,
+			 const char	  *str,
 			 ...)
 {
     int     index = data->nBody;
@@ -1085,7 +1085,7 @@ addDataOpToFunctionData (CompFunctionData *data,
 
 Bool
 addBlendOpToFunctionData (CompFunctionData *data,
-			  char		   *str,
+			  const char	   *str,
 			  ...)
 {
     int     index = data->nBody;
@@ -1145,11 +1145,11 @@ allocFunctionId (CompScreen *s)
 
 int
 createFragmentFunction (CompScreen	 *s,
-			char		 *name,
+			const char	 *name,
 			CompFunctionData *data)
 {
     CompFunction *function;
-    char	 *validName = name;
+    const char	 *validName = name;
     char	 *nameBuffer = NULL;
     int		 i = 0;
 

@@ -207,9 +207,9 @@ videoGetDisplayOptions (CompPlugin  *plugin,
 }
 
 static Bool
-videoSetDisplayOption (CompPlugin  *plugin,
+videoSetDisplayOption (CompPlugin      *plugin,
 		       CompDisplay     *display,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;

@@ -739,7 +739,7 @@ moveGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 moveSetDisplayOption (CompPlugin      *plugin,
 		      CompDisplay     *display,
-		      char	      *name,
+		      const char      *name,
 		      CompOptionValue *value)
 {
     CompOption *o;

@@ -417,7 +417,7 @@ compGetScreenOptions (CompScreen *screen,
 
 static Bool
 setScreenOption (CompScreen      *screen,
-		 char	         *name,
+		 const char	 *name,
 		 CompOptionValue *value)
 {
     CompOption *o;
@@ -552,8 +552,8 @@ setScreenOption (CompScreen      *screen,
 
 static Bool
 setScreenOptionForPlugin (CompScreen      *screen,
-			  char	          *plugin,
-			  char	          *name,
+			  const char	  *plugin,
+			  const char	  *name,
 			  CompOptionValue *value)
 {
     CompPlugin *p;

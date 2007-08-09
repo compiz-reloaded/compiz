@@ -699,7 +699,7 @@ cloneGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 cloneSetDisplayOption (CompPlugin      *plugin,
 		       CompDisplay     *display,
-		       char	       *name,
+		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;

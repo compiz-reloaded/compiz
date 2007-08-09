@@ -604,8 +604,8 @@ svgWindowResizeNotify (CompWindow *w,
 
 static void
 svgHandleCompizEvent (CompDisplay *d,
-		      char	  *pluginName,
-		      char	  *eventName,
+		      const char  *pluginName,
+		      const char  *eventName,
 		      CompOption  *option,
 		      int	  nOption)
 {
@@ -772,7 +772,7 @@ svgGetDisplayOptions (CompPlugin  *plugin,
 static Bool
 svgSetDisplayOption (CompPlugin      *plugin,
 		     CompDisplay     *display,
-		     char	     *name,
+		     const char	     *name,
 		     CompOptionValue *value)
 {
     CompOption *o;
