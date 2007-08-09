@@ -471,7 +471,8 @@ loadPlugin (char *name)
     if (status)
 	return p;
 
-    compLogMessage (NULL, "core", CompLogLevelError, "Couldn't load plugin '%s'", name);
+    compLogMessage (NULL, "core", CompLogLevelError,
+		    "Couldn't load plugin '%s'", name);
 
     return 0;
 }
