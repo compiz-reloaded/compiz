@@ -837,8 +837,7 @@ gconfSetDisplayOption (CompDisplay     *d,
 	if (!o)
 	    return FALSE;
 
-	gconfSetOption (d, o,
-			"allscreens", 0);
+	gconfSetOption (d, o, "allscreens", 0);
     }
 
     return status;
@@ -874,8 +873,7 @@ gconfSetDisplayOptionForPlugin (CompDisplay     *d,
 	    if (!o)
 	        return FALSE;
 
-	    gconfSetOption (d, o,
-			    "allscreens", plugin);
+	    gconfSetOption (d, o, "allscreens", plugin);
 	}
     }
 
@@ -909,8 +907,7 @@ gconfSetScreenOption (CompScreen      *s,
 	if (!o)
 	    return FALSE;
 
-	gconfSetOption (s->display, o,
-			screen, 0);
+	gconfSetOption (s->display, o, screen, 0);
 
 	g_free (screen);
     }
@@ -951,8 +948,7 @@ gconfSetScreenOptionForPlugin (CompScreen      *s,
 	    if (!o)
 	      return FALSE;
 
-	    gconfSetOption (s->display,o,
-			    screen, plugin);
+	    gconfSetOption (s->display,o, screen, plugin);
 
 	    g_free (screen);
 	}
