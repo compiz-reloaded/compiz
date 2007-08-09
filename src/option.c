@@ -23,8 +23,6 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
-#define _GNU_SOURCE
-
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
@@ -609,7 +607,7 @@ stringToModifiers (CompDisplay *d,
 
     for (i = 0; i < N_MODIFIERS; i++)
     {
-	if (strcasestr (binding, modifiers[i].name))
+	if (strstr (binding, modifiers[i].name))
 	    mods |= modifiers[i].modifier;
     }
 
