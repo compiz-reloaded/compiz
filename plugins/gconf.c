@@ -834,7 +834,7 @@ gconfSetDisplayOption (CompDisplay     *d,
 	option = compGetDisplayOptions (d, &nOption);
 	o = compFindOption (option, nOption, name, 0);
 
-	if (!o) 
+	if (!o)
 	    return FALSE;
 
 	gconfSetOption (d, o,
@@ -871,7 +871,7 @@ gconfSetDisplayOptionForPlugin (CompDisplay     *d,
 	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
 	    o = compFindOption (option, nOption, name, 0);
 
-	    if (!o) 
+	    if (!o)
 	        return FALSE;
 
 	    gconfSetOption (d, o,
@@ -906,7 +906,7 @@ gconfSetScreenOption (CompScreen      *s,
 	option = compGetScreenOptions (s, &nOption);
 	o = compFindOption (option, nOption, name, 0);
 
-	if (!o) 
+	if (!o)
 	    return FALSE;
 
 	gconfSetOption (s->display, o,
@@ -948,7 +948,7 @@ gconfSetScreenOptionForPlugin (CompScreen      *s,
 	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
 	    o = compFindOption (option, nOption, name, 0);
 
-	    if (!o) 
+	    if (!o)
 	      return FALSE;
 
 	    gconfSetOption (s->display,o,
