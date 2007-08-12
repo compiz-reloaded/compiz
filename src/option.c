@@ -159,7 +159,7 @@ compSetFloatOption (CompOption	    *option,
 		    CompOptionValue *value)
 {
     float v, p;
-    
+
     /* Workaround for float rounding errors */
     static float equalRange = 1e-5;
 
@@ -168,9 +168,12 @@ compSetFloatOption (CompOption	    *option,
     p = 1.0f / option->rest.f.precision;
     v = ((int) (value->f * p + sign * 0.5f)) / p;
 
-    if (v < option->rest.f.min - equalRange ||
-	v > option->rest.f.max + equalRange ||
-	v == option->value.f)
+    if (v < (option->rest.f.min - equalRange) ||
+	v > (option->rest.f.max + equalRange))
+	return FALSE;
+
+    if (v > (option->value.f - equalRange) &&
+	v < (option->value.f + equalRange))
 	return FALSE;
 
     option->value.f = v;
