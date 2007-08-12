@@ -62,9 +62,15 @@ static char *edgeName[] = {
     "BottomRight"
 };
 
-static void
-finiOptionValue (CompOptionValue *v,
-		 CompOptionType  type)
+void
+compInitOptionValue (CompOptionValue *v)
+{
+    memset (v, 0, sizeof (CompOptionValue));
+}
+
+void
+compFiniOptionValue (CompOptionValue *v,
+		     CompOptionType  type)
 {
     int i;
 
@@ -78,7 +84,7 @@ finiOptionValue (CompOptionValue *v,
 	break;
     case CompOptionTypeList:
 	for (i = 0; i < v->list.nValue; i++)
-	    finiOptionValue (&v->list.value[i], v->list.type);
+	    compFiniOptionValue (&v->list.value[i], v->list.type);
     default:
 	break;
     }
@@ -93,7 +99,7 @@ compInitOption (CompOption *o)
 void
 compFiniOption (CompOption *o)
 {
-    finiOptionValue (&o->value, o->type);
+    compFiniOptionValue (&o->value, o->type);
 }
 
 CompOption *

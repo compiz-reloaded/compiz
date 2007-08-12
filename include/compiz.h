@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070807
+#define ABIVERSION 20070808
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -402,6 +402,13 @@ struct _CompOption {
 
 typedef CompOption *(*DisplayOptionsProc) (CompDisplay *display, int *count);
 typedef CompOption *(*ScreenOptionsProc) (CompScreen *screen, int *count);
+
+void
+compInitOptionValue (CompOptionValue *v);
+
+void
+compFiniOptionValue (CompOptionValue *v,
+		     CompOptionType  type);
 
 void
 compInitOption (CompOption *option);
