@@ -10,26 +10,20 @@
 	    </relation>
 	</deps>
 	<display>
-	    <option name="snap" type="action">
+	    <option name="snap_key" type="key">
 		<_short>Snap windows</_short>
 		<_long>Toggle window snapping</_long>
-		<allowed key="true"/>
-		<default>
-		    <key>&lt;Shift&gt;</key>
-		</default>
+		<default>&lt;Shift&gt;</default>
 	    </option>
 	    <option name="snap_inverted" type="bool">
 		<_short>Snap Inverted</_short>
 		<_long>Inverted window snapping</_long>
 		<default>false</default>
 	    </option>
-	    <option name="shiver" type="action">
+	    <option name="shiver" type="bell">
 		<_short>Shiver</_short>
 		<_long>Make window shiver</_long>
-		<allowed key="true" button="true" bell="true"/>
-		<default>
-		    <bell>false</bell>
-		</default>
+		<default>false</default>
 	    </option>
 	</display>
 	<screen>

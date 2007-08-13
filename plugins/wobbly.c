@@ -112,7 +112,7 @@ static CompMetadata wobblyMetadata;
 
 static int displayPrivateIndex;
 
-#define WOBBLY_DISPLAY_OPTION_SNAP          0
+#define WOBBLY_DISPLAY_OPTION_SNAP_KEY      0
 #define WOBBLY_DISPLAY_OPTION_SNAP_INVERTED 1
 #define WOBBLY_DISPLAY_OPTION_SHIVER        2
 #define WOBBLY_DISPLAY_OPTION_NUM           3
@@ -2125,7 +2125,8 @@ wobblyHandleEvent (CompDisplay *d,
 		Bool		    inverted;
 		unsigned int	    mods = 0xffffffff;
 
-		action   = &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP].value.action;
+		action   =
+		    &wd->opt[WOBBLY_DISPLAY_OPTION_SNAP_KEY].value.action;
 		inverted = wd->opt[WOBBLY_DISPLAY_OPTION_SNAP_INVERTED].value.b;
 
 		if (action->type & CompBindingTypeKey)
@@ -2645,7 +2646,7 @@ wobblySetDisplayOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case WOBBLY_DISPLAY_OPTION_SNAP:
+    case WOBBLY_DISPLAY_OPTION_SNAP_KEY:
 	/* ignore the key */
 	value->action.key.keycode = 0;
 
@@ -2660,10 +2661,10 @@ wobblySetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo wobblyDisplayOptionInfo[] = {
-    { "snap", "action", "<passive_grab>false</passive_grab>",
+    { "snap_key", "key", "<passive_grab>false</passive_grab>",
       wobblyEnableSnapping, wobblyDisableSnapping },
     { "snap_inverted", "bool", 0, 0, 0 },
-    { "shiver", "action", 0, wobblyShiver, 0 }
+    { "shiver", "bell", 0, wobblyShiver, 0 }
 };
 
 static Bool
