@@ -3,13 +3,10 @@
 	<_short>Screenshot</_short>
 	<_long>Screenshot plugin</_long>
 	<display>
-	    <option name="initiate" type="action">
+	    <option name="initiate_button" type="button">
 		<_short>Initiate</_short>
 		<_long>Initiate rectangle screenshot</_long>
-		<allowed button="true"/>
-		<default>
-		    <button>&lt;Super&gt;Button1</button>
-		</default>
+		<default>&lt;Super&gt;Button1</default>
 	    </option>
 	    <option name="directory" type="string">
 		<_short>Directory</_short>

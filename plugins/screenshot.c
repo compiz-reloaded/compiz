@@ -33,10 +33,10 @@ static CompMetadata shotMetadata;
 
 static int displayPrivateIndex;
 
-#define SHOT_DISPLAY_OPTION_INITIATE   0
-#define SHOT_DISPLAY_OPTION_DIR        1
-#define SHOT_DISPLAY_OPTION_LAUNCH_APP 2
-#define SHOT_DISPLAY_OPTION_NUM        3
+#define SHOT_DISPLAY_OPTION_INITIATE_BUTTON 0
+#define SHOT_DISPLAY_OPTION_DIR             1
+#define SHOT_DISPLAY_OPTION_LAUNCH_APP      2
+#define SHOT_DISPLAY_OPTION_NUM             3
 
 typedef struct _ShotDisplay {
     int		    screenPrivateIndex;
@@ -425,7 +425,7 @@ shotSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo shotDisplayOptionInfo[] = {
-    { "initiate", "action", 0, shotInitiate, shotTerminate },
+    { "initiate_button", "button", 0, shotInitiate, shotTerminate },
     { "directory", "string", 0, 0, 0 },
     { "launch_app", "string", 0, 0, 0 }
 };
