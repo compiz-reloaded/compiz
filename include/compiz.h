@@ -556,6 +556,9 @@ colorToString (unsigned short *rgba);
 char *
 optionTypeToString (CompOptionType type);
 
+Bool
+isActionOption (CompOption *option);
+
 
 /* display.c */
 

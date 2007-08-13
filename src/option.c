@@ -929,3 +929,20 @@ optionTypeToString (CompOptionType type)
 
     return "unknown";
 }
+
+Bool
+isActionOption (CompOption *option)
+{
+    switch (option->type) {
+    case CompOptionTypeAction:
+    case CompOptionTypeKey:
+    case CompOptionTypeButton:
+    case CompOptionTypeEdge:
+    case CompOptionTypeBell:
+	return TRUE;
+    default:
+	break;
+    }
+
+    return FALSE;
+}
