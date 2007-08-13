@@ -387,6 +387,7 @@ compSetOption (CompOption      *option,
     case CompOptionTypeAction:
     case CompOptionTypeKey:
     case CompOptionTypeButton:
+    case CompOptionTypeEdge:
 	return compSetActionOption (option, value);
     case CompOptionTypeList:
 	return compSetOptionList (option, value);
@@ -721,6 +722,51 @@ edgeToString (unsigned int edge)
     return edgeName[edge];
 }
 
+unsigned int
+stringToEdgeMask (const char *edge)
+{
+    unsigned int edgeMask = 0;
+    int		 i;
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	if (strstr (edge, edgeToString (i)))
+	    edgeMask |= 1 << i;
+
+    return edgeMask;
+}
+
+char *
+edgeMaskToString (unsigned int edgeMask)
+{
+    char *edge = NULL;
+    int	 i;
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+    {
+	if (edgeMask & (1 << i))
+	{
+	    if (!edge)
+	    {
+		edge = strdup (edgeToString (i));
+	    }
+	    else
+	    {
+		char *s;
+
+		s = malloc (strlen (edge) + strlen (edgeToString (i)) + 1);
+		if (s)
+		{
+		    sprintf (s, "%s | %s", edge, edgeToString (i));
+		    free (edge);
+		    edge = s;
+		}
+	    }
+	}
+    }
+
+    return edge;
+}
+
 Bool
 stringToColor (const char     *color,
 	       unsigned short *rgba)
@@ -761,6 +807,8 @@ optionTypeToString (CompOptionType type)
 	return "key";
     case CompOptionTypeButton:
 	return "button";
+    case CompOptionTypeEdge:
+	return "edge";
     case CompOptionTypeMatch:
 	return "match";
     case CompOptionTypeBool:

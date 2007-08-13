@@ -107,6 +107,8 @@ gconfTypeFromCompType (CompOptionType type)
 	return GCONF_VALUE_STRING;
     case CompOptionTypeButton:
 	return GCONF_VALUE_STRING;
+    case CompOptionTypeEdge:
+	return GCONF_VALUE_STRING;
     case CompOptionTypeMatch:
 	return GCONF_VALUE_STRING;
     case CompOptionTypeList:
@@ -166,6 +168,14 @@ gconfSetValue (CompDisplay     *d,
 	gconf_value_set_string (gvalue, binding);
 
 	free (binding);
+    } break;
+    case CompOptionTypeEdge: {
+	gchar *edge;
+
+	edge = edgeMaskToString (value->action.edgeMask);
+	gconf_value_set_string (gvalue, edge);
+
+	free (edge);
     } break;
     case CompOptionTypeMatch: {
 	gchar *match;
@@ -238,6 +248,7 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeColor:
     case CompOptionTypeKey:
     case CompOptionTypeButton:
+    case CompOptionTypeEdge:
     case CompOptionTypeMatch:
 	existingValue = gconf_client_get (gd->client, key, NULL);
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
@@ -437,6 +448,17 @@ gconfGetValue (CompDisplay     *d,
 	binding = gconf_value_get_string (gvalue);
 
 	return stringToButtonBinding (d, binding, &value->action.button);
+    }
+    else if (type         == CompOptionTypeEdge &&
+	     gvalue->type == GCONF_VALUE_STRING)
+    {
+	const gchar *edge;
+
+	edge = gconf_value_get_string (gvalue);
+
+	value->action.edgeMask = stringToEdgeMask (edge);
+
+	return TRUE;
     }
     else if (type         == CompOptionTypeMatch &&
 	     gvalue->type == GCONF_VALUE_STRING)

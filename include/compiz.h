@@ -280,6 +280,7 @@ typedef enum {
     CompOptionTypeAction,
     CompOptionTypeKey,
     CompOptionTypeButton,
+    CompOptionTypeEdge,
     CompOptionTypeMatch,
     CompOptionTypeList
 } CompOptionType;
@@ -519,6 +520,12 @@ stringToButtonBinding (CompDisplay	 *d,
 
 char *
 edgeToString (unsigned int edge);
+
+unsigned int
+stringToEdgeMask (const char *edge);
+
+char *
+edgeMaskToString (unsigned int edgeMask);
 
 Bool
 stringToColor (const char     *color,
