@@ -103,6 +103,8 @@ gconfTypeFromCompType (CompOptionType type)
 	return GCONF_VALUE_STRING;
     case CompOptionTypeAction:
 	return GCONF_VALUE_STRING;
+    case CompOptionTypeKey:
+	return GCONF_VALUE_STRING;
     case CompOptionTypeMatch:
 	return GCONF_VALUE_STRING;
     case CompOptionTypeList:
@@ -140,6 +142,17 @@ gconfSetValue (CompDisplay     *d,
 	gconf_value_set_string (gvalue, color);
 
 	free (color);
+    } break;
+    case CompOptionTypeKey: {
+	gchar *binding;
+
+	binding = keyBindingToString (d, &value->action.key);
+	if (!binding)
+	    binding = strdup ("Disabled");
+
+	gconf_value_set_string (gvalue, binding);
+
+	free (binding);
     } break;
     case CompOptionTypeMatch: {
 	gchar *match;
@@ -210,6 +223,7 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeFloat:
     case CompOptionTypeString:
     case CompOptionTypeColor:
+    case CompOptionTypeKey:
     case CompOptionTypeMatch:
 	existingValue = gconf_client_get (gd->client, key, NULL);
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
@@ -391,6 +405,15 @@ gconfGetValue (CompDisplay     *d,
 
 	if (stringToColor (color, value->c))
 	    return TRUE;
+    }
+    else if (type         == CompOptionTypeKey &&
+	     gvalue->type == GCONF_VALUE_STRING)
+    {
+	const gchar *binding;
+
+	binding = gconf_value_get_string (gvalue);
+
+	return stringToKeyBinding (d, binding, &value->action.key);
     }
     else if (type         == CompOptionTypeMatch &&
 	     gvalue->type == GCONF_VALUE_STRING)
