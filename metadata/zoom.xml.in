@@ -3,37 +3,25 @@
 	<_short>Zoom Desktop</_short>
 	<_long>Zoom and pan desktop cube</_long>
 	<display>
-	    <option name="initiate" type="action">
+	    <option name="initiate_button" type="button">
 		<_short>Initiate</_short>
 		<_long>Zoom In</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <button>&lt;Super&gt;Button3</button>
-		</default>
+		<default>&lt;Super&gt;Button3</default>
 	    </option>
-	    <option name="zoom_in" type="action">
+	    <option name="zoom_in_button" type="button">
 		<_short>Zoom In</_short>
 		<_long>Zoom In</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <button>&lt;Super&gt;Button4</button>
-		</default>
+		<default>&lt;Super&gt;Button4</default>
 	    </option>
-	    <option name="zoom_out" type="action">
+	    <option name="zoom_out_button" type="button">
 		<_short>Zoom Out</_short>
 		<_long>Zoom Out</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <button>&lt;Super&gt;Button5</button>
-		</default>
+		<default>&lt;Super&gt;Button5</default>
 	    </option>
-	    <option name="zoom_pan" type="action">
+	    <option name="zoom_pan_button" type="button">
 		<_short>Zoom Pan</_short>
 		<_long>Zoom pan</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <button>&lt;Super&gt;Button2</button>
-		</default>
+		<default>&lt;Super&gt;Button2</default>
 	    </option>
 	</display>
 	<screen>

@@ -37,11 +37,11 @@ static CompMetadata zoomMetadata;
 
 static int displayPrivateIndex;
 
-#define ZOOM_DISPLAY_OPTION_INITIATE 0
-#define ZOOM_DISPLAY_OPTION_IN	     1
-#define ZOOM_DISPLAY_OPTION_OUT	     2
-#define ZOOM_DISPLAY_OPTION_PAN	     3
-#define ZOOM_DISPLAY_OPTION_NUM	     4
+#define ZOOM_DISPLAY_OPTION_INITIATE_BUTTON 0
+#define ZOOM_DISPLAY_OPTION_IN_BUTTON	    1
+#define ZOOM_DISPLAY_OPTION_OUT_BUTTON	    2
+#define ZOOM_DISPLAY_OPTION_PAN_BUTTON	    3
+#define ZOOM_DISPLAY_OPTION_NUM	            4
 
 typedef struct _ZoomDisplay {
     int		    screenPrivateIndex;
@@ -946,7 +946,7 @@ zoomSetDisplayOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case ZOOM_DISPLAY_OPTION_OUT:
+    case ZOOM_DISPLAY_OPTION_OUT_BUTTON:
 	if (compSetActionOption (o, value))
 	    return TRUE;
 	break;
@@ -958,10 +958,10 @@ zoomSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo zoomDisplayOptionInfo[] = {
-    { "initiate", "action", 0, zoomInitiate, zoomTerminate },
-    { "zoom_in", "action", 0, zoomIn, 0 },
-    { "zoom_out", "action", 0, zoomOut, 0 },
-    { "zoom_pan", "action", 0, zoomInitiatePan, zoomTerminatePan }
+    { "initiate_button", "button", 0, zoomInitiate, zoomTerminate },
+    { "zoom_in_button", "button", 0, zoomIn, 0 },
+    { "zoom_out_button", "button", 0, zoomOut, 0 },
+    { "zoom_pan_button", "button", 0, zoomInitiatePan, zoomTerminatePan }
 };
 
 static Bool
