@@ -37,15 +37,15 @@ static int displayPrivateIndex;
 static int annoLastPointerX = 0;
 static int annoLastPointerY = 0;
 
-#define ANNO_DISPLAY_OPTION_INITIATE     0
-#define ANNO_DISPLAY_OPTION_DRAW	 1
-#define ANNO_DISPLAY_OPTION_ERASE        2
-#define ANNO_DISPLAY_OPTION_CLEAR        3
-#define ANNO_DISPLAY_OPTION_FILL_COLOR   4
-#define ANNO_DISPLAY_OPTION_STROKE_COLOR 5
-#define ANNO_DISPLAY_OPTION_LINE_WIDTH   6
-#define ANNO_DISPLAY_OPTION_STROKE_WIDTH 7
-#define ANNO_DISPLAY_OPTION_NUM	         8
+#define ANNO_DISPLAY_OPTION_INITIATE_BUTTON 0
+#define ANNO_DISPLAY_OPTION_DRAW_BUTTON	    1
+#define ANNO_DISPLAY_OPTION_ERASE_BUTTON    2
+#define ANNO_DISPLAY_OPTION_CLEAR_KEY       3
+#define ANNO_DISPLAY_OPTION_FILL_COLOR      4
+#define ANNO_DISPLAY_OPTION_STROKE_COLOR    5
+#define ANNO_DISPLAY_OPTION_LINE_WIDTH      6
+#define ANNO_DISPLAY_OPTION_STROKE_WIDTH    7
+#define ANNO_DISPLAY_OPTION_NUM	            8
 
 typedef struct _AnnoDisplay {
     int		    screenPrivateIndex;
@@ -739,10 +739,10 @@ annoSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
-    { "initiate", "action", 0, annoInitiate, annoTerminate },
-    { "draw", "action", 0, annoDraw, 0 },
-    { "erase", "action", 0, annoEraseInitiate, 0 },
-    { "clear", "action", 0, annoClear, 0 },
+    { "initiate_button", "button", 0, annoInitiate, annoTerminate },
+    { "draw_button", "button", 0, annoDraw, 0 },
+    { "erase_button", "button", 0, annoEraseInitiate, 0 },
+    { "clear_key", "key", 0, annoClear, 0 },
     { "fill_color", "color", 0, 0, 0 },
     { "stroke_color", "color", 0, 0, 0 },
     { "line_width", "float", 0, 0, 0 },

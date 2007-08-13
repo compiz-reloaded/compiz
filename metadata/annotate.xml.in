@@ -3,33 +3,24 @@
 	<_short>Annotate</_short>
 	<_long>Annotate plugin</_long>
 	<display>
-	    <option name="initiate" type="action">
+	    <option name="initiate_button" type="button">
 		<_short>Initiate</_short>
 		<_long>Initiate annotate drawing</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <button>&lt;Super&gt;&lt;Alt&gt;Button1</button>
-		</default>
+		<default>&lt;Super&gt;&lt;Alt&gt;Button1</default>
 	    </option>
-	    <option name="draw" type="action">
+	    <option name="draw_button" type="button">
 		<_short>Draw</_short>
 		<_long>Draw using tool</_long>
 	    </option>
-	    <option name="erase" type="action">
+	    <option name="erase" type="button">
 		<_short>Initiate erase</_short>
 		<_long>Initiate annotate erasing</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <button>&lt;Super&gt;&lt;Alt&gt;Button3</button>
-		</default>
+		<default>&lt;Super&gt;&lt;Alt&gt;Button3</default>
 	    </option>
-	    <option name="clear" type="action">
+	    <option name="clear_key" type="key">
 		<_short>Clear</_short>
 		<_long>Clear</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Super&gt;&lt;Alt&gt;k</key>
-		</default>
+		<default>&lt;Super&gt;&lt;Alt&gt;k</default>
 	    </option>
 	    <option name="fill_color" type="color">
 		<_short>Annotate Fill Color</_short>
