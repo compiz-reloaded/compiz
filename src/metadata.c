@@ -1368,7 +1368,7 @@ compSetDisplayOption (CompDisplay     *d,
 		      CompOption      *o,
 		      CompOptionValue *value)
 {
-    if (o->type == CompOptionTypeAction)
+    if (isActionOption (o))
     {
 	if (o->value.action.state & CompActionStateAutoGrab)
 	{

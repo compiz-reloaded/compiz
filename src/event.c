@@ -206,7 +206,7 @@ isCallBackBinding (CompOption	   *option,
 		   CompBindingType type,
 		   CompActionState state)
 {
-    if (option->type != CompOptionTypeAction)
+    if (!isActionOption (option))
 	return FALSE;
 
     if (!(option->value.action.type & type))
@@ -383,7 +383,7 @@ triggerKeyPressBindings (CompDisplay *d,
 
 	while (n--)
 	{
-	    if (o->type == CompOptionTypeAction)
+	    if (isActionOption (o))
 	    {
 		if (o->value.action.terminate)
 		    (*o->value.action.terminate) (d, &o->value.action,
@@ -534,7 +534,8 @@ isBellAction (CompOption      *option,
 	      CompActionState state,
 	      CompAction      **action)
 {
-    if (option->type != CompOptionTypeAction)
+    if (option->type != CompOptionTypeAction &&
+	option->type != CompOptionTypeBell)
 	return FALSE;
 
     if (!option->value.action.bell)
@@ -580,7 +581,9 @@ isEdgeAction (CompOption      *option,
 	      CompActionState state,
 	      unsigned int    edge)
 {
-    if (option->type != CompOptionTypeAction)
+    if (option->type != CompOptionTypeAction &&
+	option->type != CompOptionTypeButton &&
+	option->type != CompOptionTypeEdge)
 	return FALSE;
 
     if (!(option->value.action.edgeMask & edge))

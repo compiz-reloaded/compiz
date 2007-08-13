@@ -1932,11 +1932,11 @@ addScreenActions (CompScreen *s)
 
     for (i = 0; i < COMP_DISPLAY_OPTION_NUM; i++)
     {
-	if (s->display->opt[i].type == CompOptionTypeAction)
-	{
-	    if (s->display->opt[i].value.action.state & CompActionStateAutoGrab)
-		addScreenAction (s, &s->display->opt[i].value.action);
-	}
+	if (!isActionOption (&s->display->opt[i]))
+	    continue;
+
+	if (s->display->opt[i].value.action.state & CompActionStateAutoGrab)
+	    addScreenAction (s, &s->display->opt[i].value.action);
     }
 }
 
