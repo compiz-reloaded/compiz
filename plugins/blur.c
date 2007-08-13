@@ -2422,7 +2422,7 @@ blurWindowAddNotify (CompWindow *w)
 }
 
 static const CompMetadataOptionInfo blurDisplayOptionInfo[] = {
-    { "pulse", "action", 0, blurPulse, 0 }
+    { "pulse", "bell", 0, blurPulse, 0 }
 };
 
 static Bool
