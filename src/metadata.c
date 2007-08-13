@@ -403,6 +403,7 @@ getOptionType (char *name)
 	{ "key",    CompOptionTypeKey    },
 	{ "button", CompOptionTypeButton },
 	{ "edge",   CompOptionTypeEdge   },
+	{ "bell",   CompOptionTypeBell   },
 	{ "match",  CompOptionTypeMatch  },
 	{ "list",   CompOptionTypeList   }
     };
@@ -794,6 +795,32 @@ initEdgeValue (CompDisplay     *d,
 }
 
 static void
+initBellValue (CompDisplay     *d,
+	       CompOptionValue *v,
+	       CompActionState state,
+	       xmlDocPtr       doc,
+	       xmlNodePtr      node)
+{
+    xmlChar *value;
+
+    memset (&v->action, 0, sizeof (v->action));
+
+    v->action.state = state | CompActionStateInitBell;
+
+    if (!doc)
+	return;
+
+    value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
+    if (value)
+    {
+	if (strcasecmp ((char *) value, "true") == 0)
+	    v->action.bell = TRUE;
+
+	xmlFree (value);
+    }
+}
+
+static void
 initMatchValue (CompDisplay     *d,
 		CompOptionValue *v,
 		Bool		helper,
@@ -873,6 +900,9 @@ initListValue (CompDisplay	     *d,
 		break;
 	    case CompOptionTypeEdge:
 		initEdgeValue (d, &value[v->list.nValue], state, doc, child);
+		break;
+	    case CompOptionTypeBell:
+		initBellValue (d, &value[v->list.nValue], state, doc, child);
 		break;
 	    case CompOptionTypeMatch:
 		initMatchValue (d, &value[v->list.nValue], helper, doc, child);
@@ -1105,6 +1135,10 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initActionState (metadata, &state, (char *) path);
 	initEdgeValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
+    case CompOptionTypeBell:
+	initActionState (metadata, &state, (char *) path);
+	initBellValue (d, &option->value, state, defaultDoc, defaultNode);
+	break;
     case CompOptionTypeMatch:
 	helper = boolFromMetadataPathElement (metadata, (char *) path, "helper",
 					      FALSE);
@@ -1133,6 +1167,7 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	case CompOptionTypeKey:
 	case CompOptionTypeButton:
 	case CompOptionTypeEdge:
+	case CompOptionTypeBell:
 	    initActionState (metadata, &state, (char *) path);
 	    break;
 	case CompOptionTypeMatch:
@@ -1180,6 +1215,7 @@ finiScreenOptionValue (CompScreen      *s,
     case CompOptionTypeKey:
     case CompOptionTypeButton:
     case CompOptionTypeEdge:
+    case CompOptionTypeBell:
 	if (v->action.state & CompActionStateAutoGrab)
 	    removeScreenAction (s, &v->action);
 	break;
@@ -1274,6 +1310,7 @@ finiDisplayOptionValue (CompDisplay	*d,
     case CompOptionTypeKey:
     case CompOptionTypeButton:
     case CompOptionTypeEdge:
+    case CompOptionTypeBell:
 	if (v->action.state & CompActionStateAutoGrab)
 	    for (s = d->screens; s; s = s->next)
 		removeScreenAction (s, &v->action);

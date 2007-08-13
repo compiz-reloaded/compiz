@@ -92,23 +92,18 @@ gconfTypeFromCompType (CompOptionType type)
 {
     switch (type) {
     case CompOptionTypeBool:
+    case CompOptionTypeBell:
 	return GCONF_VALUE_BOOL;
     case CompOptionTypeInt:
 	return GCONF_VALUE_INT;
     case CompOptionTypeFloat:
 	return GCONF_VALUE_FLOAT;
     case CompOptionTypeString:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeColor:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeAction:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeKey:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeButton:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeEdge:
-	return GCONF_VALUE_STRING;
     case CompOptionTypeMatch:
 	return GCONF_VALUE_STRING;
     case CompOptionTypeList:
@@ -177,6 +172,9 @@ gconfSetValue (CompDisplay     *d,
 
 	free (edge);
     } break;
+    case CompOptionTypeBell:
+	gconf_value_set_bool (gvalue, value->action.bell);
+	break;
     case CompOptionTypeMatch: {
 	gchar *match;
 
@@ -249,6 +247,7 @@ gconfSetOption (CompDisplay *d,
     case CompOptionTypeKey:
     case CompOptionTypeButton:
     case CompOptionTypeEdge:
+    case CompOptionTypeBell:
     case CompOptionTypeMatch:
 	existingValue = gconf_client_get (gd->client, key, NULL);
 	gvalue = gconf_value_new (gconfTypeFromCompType (o->type));
@@ -458,6 +457,12 @@ gconfGetValue (CompDisplay     *d,
 
 	value->action.edgeMask = stringToEdgeMask (edge);
 
+	return TRUE;
+    }
+    else if (type         == CompOptionTypeBell &&
+	     gvalue->type == GCONF_VALUE_BOOL)
+    {
+	value->action.bell = gconf_value_get_bool (gvalue);
 	return TRUE;
     }
     else if (type         == CompOptionTypeMatch &&
