@@ -40,22 +40,22 @@ static int displayPrivateIndex;
 
 enum
 {
-    PLANE_DISPLAY_OPTION_LEFT,
-    PLANE_DISPLAY_OPTION_RIGHT,
-    PLANE_DISPLAY_OPTION_DOWN,
-    PLANE_DISPLAY_OPTION_UP,
-    PLANE_DISPLAY_OPTION_TO_1,
-    PLANE_DISPLAY_OPTION_TO_2,
-    PLANE_DISPLAY_OPTION_TO_3,
-    PLANE_DISPLAY_OPTION_TO_4,
-    PLANE_DISPLAY_OPTION_TO_5,
-    PLANE_DISPLAY_OPTION_TO_6,
-    PLANE_DISPLAY_OPTION_TO_7,
-    PLANE_DISPLAY_OPTION_TO_8,
-    PLANE_DISPLAY_OPTION_TO_9,
-    PLANE_DISPLAY_OPTION_TO_10,
-    PLANE_DISPLAY_OPTION_TO_11,
-    PLANE_DISPLAY_OPTION_TO_12,
+    PLANE_DISPLAY_OPTION_LEFT_KEY,
+    PLANE_DISPLAY_OPTION_RIGHT_KEY,
+    PLANE_DISPLAY_OPTION_DOWN_KEY,
+    PLANE_DISPLAY_OPTION_UP_KEY,
+    PLANE_DISPLAY_OPTION_TO_1_KEY,
+    PLANE_DISPLAY_OPTION_TO_2_KEY,
+    PLANE_DISPLAY_OPTION_TO_3_KEY,
+    PLANE_DISPLAY_OPTION_TO_4_KEY,
+    PLANE_DISPLAY_OPTION_TO_5_KEY,
+    PLANE_DISPLAY_OPTION_TO_6_KEY,
+    PLANE_DISPLAY_OPTION_TO_7_KEY,
+    PLANE_DISPLAY_OPTION_TO_8_KEY,
+    PLANE_DISPLAY_OPTION_TO_9_KEY,
+    PLANE_DISPLAY_OPTION_TO_10_KEY,
+    PLANE_DISPLAY_OPTION_TO_11_KEY,
+    PLANE_DISPLAY_OPTION_TO_12_KEY,
     PLANE_N_DISPLAY_OPTIONS
 };
 
@@ -550,11 +550,13 @@ planeTo (CompDisplay     *d,
     PLANE_DISPLAY (d);
 
     new_x = new_y = -1;
-    for (i = PLANE_DISPLAY_OPTION_TO_1; i <= PLANE_DISPLAY_OPTION_TO_12; ++i)
+    for (i = PLANE_DISPLAY_OPTION_TO_1_KEY;
+	 i <= PLANE_DISPLAY_OPTION_TO_12_KEY;
+	 ++i)
     {
 	if (action == &pd->opt[i].value.action)
 	{
-	    int viewport_no = i - PLANE_DISPLAY_OPTION_TO_1;
+	    int viewport_no = i - PLANE_DISPLAY_OPTION_TO_1_KEY;
 
 	    new_x = viewport_no % screen->hsize;
 	    new_y = viewport_no / screen->hsize;
@@ -575,22 +577,22 @@ planeTo (CompDisplay     *d,
 }
 
 static const CompMetadataOptionInfo planeDisplayOptionInfo[] = {
-    { "plane_left", "action", 0, planeLeft, 0 },
-    { "plane_right", "action", 0, planeRight, 0 },
-    { "plane_down", "action", 0, planeDown, 0 },
-    { "plane_up", "action", 0, planeUp, 0 },
-    { "plane_to_1", "action", 0, planeTo, 0 },
-    { "plane_to_2", "action", 0, planeTo, 0 },
-    { "plane_to_3", "action", 0, planeTo, 0 },
-    { "plane_to_4", "action", 0, planeTo, 0 },
-    { "plane_to_5", "action", 0, planeTo, 0 },
-    { "plane_to_6", "action", 0, planeTo, 0 },
-    { "plane_to_7", "action", 0, planeTo, 0 },
-    { "plane_to_8", "action", 0, planeTo, 0 },
-    { "plane_to_9", "action", 0, planeTo, 0 },
-    { "plane_to_10", "action", 0, planeTo, 0 },
-    { "plane_to_11", "action", 0, planeTo, 0 },
-    { "plane_to_12", "action", 0, planeTo, 0 }
+    { "plane_left_key", "key", 0, planeLeft, 0 },
+    { "plane_right_key", "key", 0, planeRight, 0 },
+    { "plane_down_key", "key", 0, planeDown, 0 },
+    { "plane_up_key", "key", 0, planeUp, 0 },
+    { "plane_to_1_key", "key", 0, planeTo, 0 },
+    { "plane_to_2_key", "key", 0, planeTo, 0 },
+    { "plane_to_3_key", "key", 0, planeTo, 0 },
+    { "plane_to_4_key", "key", 0, planeTo, 0 },
+    { "plane_to_5_key", "key", 0, planeTo, 0 },
+    { "plane_to_6_key", "key", 0, planeTo, 0 },
+    { "plane_to_7_key", "key", 0, planeTo, 0 },
+    { "plane_to_8_key", "key", 0, planeTo, 0 },
+    { "plane_to_9_key", "key", 0, planeTo, 0 },
+    { "plane_to_10_key", "key", 0, planeTo, 0 },
+    { "plane_to_11_key", "key", 0, planeTo, 0 },
+    { "plane_to_12_key", "key", 0, planeTo, 0 }
 };
 
 static Bool
