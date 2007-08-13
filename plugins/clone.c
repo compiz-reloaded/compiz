@@ -35,8 +35,8 @@ static CompMetadata cloneMetadata;
 
 static int displayPrivateIndex;
 
-#define CLONE_DISPLAY_OPTION_INITIATE 0
-#define CLONE_DISPLAY_OPTION_NUM      1
+#define CLONE_DISPLAY_OPTION_INITIATE_BUTTON 0
+#define CLONE_DISPLAY_OPTION_NUM             1
 
 typedef struct _CloneDisplay {
     int		    screenPrivateIndex;
@@ -714,8 +714,7 @@ cloneSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo cloneDisplayOptionInfo[] = {
-    { "initiate", "action", "<allowed button=\"true\"/>", cloneInitiate,
-      cloneTerminate }
+    { "initiate_button", "button", 0, cloneInitiate, cloneTerminate }
 };
 
 static Bool

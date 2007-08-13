@@ -3,13 +3,10 @@
 	<_short>Clone Output</_short>
 	<_long>Output clone handler</_long>
 	<display>
-	    <option name="initiate" type="action">
+	    <option name="initiate_button" type="button">
 		<_short>Initiate</_short>
 		<_long>Initiate clone selection</_long>
-		<allowed button="true"/>
-		<default>
-		    <button>&lt;Super&gt;&lt;Shift&gt;Button1</button>
-		</default>
+		<default>&lt;Super&gt;&lt;Shift&gt;Button1</default>
 	    </option>
 	</display>
     </plugin>
