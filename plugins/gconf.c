@@ -143,26 +143,20 @@ gconfSetValue (CompDisplay     *d,
 	free (color);
     } break;
     case CompOptionTypeKey: {
-	gchar *binding;
+	gchar *action;
 
-	binding = keyBindingToString (d, &value->action.key);
-	if (!binding)
-	    binding = strdup ("Disabled");
+	action = keyActionToString (d, &value->action);
+	gconf_value_set_string (gvalue, action);
 
-	gconf_value_set_string (gvalue, binding);
-
-	free (binding);
+	free (action);
     } break;
     case CompOptionTypeButton: {
-	gchar *binding;
+	gchar *action;
 
-	binding = buttonBindingToString (d, &value->action.button);
-	if (!binding)
-	    binding = strdup ("Disabled");
+	action = buttonActionToString (d, &value->action);
+	gconf_value_set_string (gvalue, action);
 
-	gconf_value_set_string (gvalue, binding);
-
-	free (binding);
+	free (action);
     } break;
     case CompOptionTypeEdge: {
 	gchar *edge;
@@ -433,20 +427,22 @@ gconfGetValue (CompDisplay     *d,
     else if (type         == CompOptionTypeKey &&
 	     gvalue->type == GCONF_VALUE_STRING)
     {
-	const gchar *binding;
+	const gchar *action;
 
-	binding = gconf_value_get_string (gvalue);
+	action = gconf_value_get_string (gvalue);
 
-	return stringToKeyBinding (d, binding, &value->action.key);
+	stringToKeyAction (d, action, &value->action);
+	return TRUE;
     }
     else if (type         == CompOptionTypeButton &&
 	     gvalue->type == GCONF_VALUE_STRING)
     {
-	const gchar *binding;
+	const gchar *action;
 
-	binding = gconf_value_get_string (gvalue);
+	action = gconf_value_get_string (gvalue);
 
-	return stringToButtonBinding (d, binding, &value->action.button);
+	stringToButtonAction (d, action, &value->action);
+	return TRUE;
     }
     else if (type         == CompOptionTypeEdge &&
 	     gvalue->type == GCONF_VALUE_STRING)

@@ -46,20 +46,23 @@ struct _Modifier {
     { "<Meta>",	      CompMetaMask       },
     { "<Super>",      CompSuperMask      },
     { "<Hyper>",      CompHyperMask	 },
-    { "<ModeSwitch>", CompModeSwitchMask },
+    { "<ModeSwitch>", CompModeSwitchMask }
 };
 
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _Modifier))
 
-static char *edgeName[] = {
-    "Left",
-    "Right",
-    "Top",
-    "Bottom",
-    "TopLeft",
-    "TopRight",
-    "BottomLeft",
-    "BottomRight"
+struct _Edge {
+    char *name;
+    char *modifierName;
+} edges[] = {
+    { "Left",	     "<LeftEdge>"	 },
+    { "Right",	     "<RightEdge>"	 },
+    { "Top",	     "<TopEdge>"	 },
+    { "Bottom",	     "<BottomEdge>"	 },
+    { "TopLeft",     "<TopLeftEdge>"	 },
+    { "TopRight",    "<TopRightEdge>"	 },
+    { "BottomLeft",  "<BottomLeftEdge>"	 },
+    { "BottomRight", "<BottomRightEdge>" }
 };
 
 void
@@ -564,6 +567,20 @@ modifiersToString (CompDisplay  *d,
     return binding;
 }
 
+static char *
+edgeMaskToBindingString (CompDisplay  *d,
+			 unsigned int edgeMask)
+{
+    char *binding = NULL;
+    int  i;
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	if (edgeMask & (1 << i))
+	    binding = stringAppend (binding, edges[i].modifierName);
+
+    return binding;
+}
+
 char *
 keyBindingToString (CompDisplay    *d,
 		    CompKeyBinding *key)
@@ -611,6 +628,44 @@ buttonBindingToString (CompDisplay       *d,
     return binding;
 }
 
+char *
+keyActionToString (CompDisplay *d,
+		   CompAction  *action)
+{
+    char *binding;
+
+    binding = keyBindingToString (d, &action->key);
+    if (!binding)
+	return strdup ("Disabled");
+
+    return binding;
+}
+
+char *
+buttonActionToString (CompDisplay *d,
+		      CompAction  *action)
+{
+    char *binding, *edge;
+    char buttonStr[256];
+
+    binding = modifiersToString (d, action->button.modifiers);
+    edge    = edgeMaskToBindingString (d, action->edgeMask);
+
+    if (edge)
+    {
+	binding = stringAppend (binding, edge);
+	free (edge);
+    }
+
+    snprintf (buttonStr, 256, "Button%d", action->button.button);
+    binding = stringAppend (binding, buttonStr);
+
+    if (!binding)
+	return strdup ("Disabled");
+
+    return binding;
+}
+
 static unsigned int
 stringToModifiers (CompDisplay *d,
 		   const char  *binding)
@@ -625,6 +680,20 @@ stringToModifiers (CompDisplay *d,
     }
 
     return mods;
+}
+
+static unsigned int
+bindingStringToEdgeMask (CompDisplay *d,
+			 const char  *binding)
+{
+    unsigned int edgeMask = 0;
+    int		 i;
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	if (strstr (binding, edges[i].modifierName))
+	    edgeMask |= 1 << i;
+
+    return edgeMask;
 }
 
 Bool
@@ -717,10 +786,40 @@ stringToButtonBinding (CompDisplay	 *d,
     return FALSE;
 }
 
-char *
+void
+stringToKeyAction (CompDisplay *d,
+		   const char  *binding,
+		   CompAction  *action)
+{
+    if (stringToKeyBinding (d, binding, &action->key))
+	action->type = CompBindingTypeKey;
+    else
+	action->type = CompBindingTypeNone;
+}
+
+void
+stringToButtonAction (CompDisplay *d,
+		      const char  *binding,
+		      CompAction  *action)
+{
+    if (stringToButtonBinding (d, binding, &action->button))
+    {
+	action->edgeMask = bindingStringToEdgeMask (d, binding);
+	if (action->edgeMask)
+	    action->type = CompBindingTypeEdgeButton;
+	else
+	    action->type = CompBindingTypeButton;
+    }
+    else
+    {
+	action->type = CompBindingTypeNone;
+    }
+}
+
+const char *
 edgeToString (unsigned int edge)
 {
-    return edgeName[edge];
+    return edges[edge].name;
 }
 
 unsigned int

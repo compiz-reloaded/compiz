@@ -509,6 +509,14 @@ char *
 buttonBindingToString (CompDisplay       *d,
 		       CompButtonBinding *button);
 
+char *
+keyActionToString (CompDisplay *d,
+		   CompAction  *action);
+
+char *
+buttonActionToString (CompDisplay *d,
+		      CompAction  *action);
+
 Bool
 stringToKeyBinding (CompDisplay    *d,
 		    const char     *binding,
@@ -519,7 +527,17 @@ stringToButtonBinding (CompDisplay	 *d,
 		       const char	 *binding,
 		       CompButtonBinding *button);
 
-char *
+void
+stringToKeyAction (CompDisplay *d,
+		   const char  *binding,
+		   CompAction  *action);
+
+void
+stringToButtonAction (CompDisplay *d,
+		      const char  *binding,
+		      CompAction  *action);
+
+const char *
 edgeToString (unsigned int edge);
 
 unsigned int

@@ -685,10 +685,7 @@ initKeyValue (CompDisplay     *d,
 	char *binding = (char *) value;
 
 	if (strcasecmp (binding, "disabled") && *binding)
-	{
-	    if (stringToKeyBinding (d, binding, &v->action.key))
-		v->action.type |= CompBindingTypeKey;
-	}
+	    stringToKeyAction (d, binding, &v->action);
 
 	xmlFree (value);
     }
@@ -724,10 +721,7 @@ initButtonValue (CompDisplay     *d,
 	char *binding = (char *) value;
 
 	if (strcasecmp (binding, "disabled") && *binding)
-	{
-	    if (stringToButtonBinding (d, binding, &v->action.button))
-		v->action.type |= CompBindingTypeButton;
-	}
+	    stringToButtonAction (d, binding, &v->action);
 
 	xmlFree (value);
     }
