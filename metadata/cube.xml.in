@@ -12,29 +12,20 @@
 	<display>
 	    <option name="abi" type="int" read_only="true"/>
 	    <option name="index" type="int" read_only="true"/>
-	    <option name="unfold" type="action">
+	    <option name="unfold_key" type="key">
 		<_short>Unfold</_short>
 		<_long>Unfold cube</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Control&gt;&lt;Alt&gt;Down</key>
-		</default>
+		<default>&lt;Control&gt;&lt;Alt&gt;Down</default>
 	    </option>
-	    <option name="next_slide" type="action">
+	    <option name="next_slide_key" type="key">
 		<_short>Next Slide</_short>
 		<_long>Advance to next slide</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>space</key>
-		</default>
+		<default>space</default>
 	    </option>
-	    <option name="prev_slide" type="action">
+	    <option name="prev_slide_key" type="key">
 		<_short>Prev Slide</_short>
 		<_long>Go back to previous slide</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>Backspace</key>
-		</default>
+		<default>Backspace</default>
 	    </option>
 	</display>
 	<screen>

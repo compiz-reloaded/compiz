@@ -1997,10 +1997,10 @@ cubeSetDisplayOption (CompPlugin      *plugin,
 static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
     { "abi", "int", 0, 0, 0 },
     { "index", "int", 0, 0, 0 },
-    { "unfold", "action", 0, cubeUnfold, cubeFold },
-    { "next_slide", "action", "<passive_grab>false</passive_grab>",
+    { "unfold_key", "key", 0, cubeUnfold, cubeFold },
+    { "next_slide_key", "key", "<passive_grab>false</passive_grab>",
       cubeNextImage, 0 },
-    { "prev_slide", "action", "<passive_grab>false</passive_grab>",
+    { "prev_slide_key", "key", "<passive_grab>false</passive_grab>",
       cubePrevImage, 0 }
 };
 
