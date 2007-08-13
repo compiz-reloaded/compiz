@@ -1560,13 +1560,16 @@ scaleWindowRemove (CompDisplay *d,
 			/* terminate scale mode if the recently closed
 			 * window was the last scaled window */
 
-			opt = SCALE_DISPLAY_OPTION_INITIATE;
-			action = &sd->opt[opt].value.action;
-
 			o.type    = CompOptionTypeInt;
 			o.name    = "root";
 			o.value.i = w->screen->root;
-			
+
+			opt = SCALE_DISPLAY_OPTION_INITIATE_EDGE;
+			action = &sd->opt[opt].value.action;
+			scaleTerminate (d, action, 0, &o, 1);
+
+			opt = SCALE_DISPLAY_OPTION_INITIATE_KEY;
+			action = &sd->opt[opt].value.action;
 			scaleTerminate (d, action, 0, &o, 1);
 			break;
 		    }
@@ -1588,8 +1591,7 @@ scaleHoverTimeout (void *closure)
     {
 	CompWindow *w;
 	CompOption o;
-	CompAction *action =
-	    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
+	int	   option;
 
 	w = findWindowAtDisplay (s->display, sd->selectedWindow);
 	if (w)
@@ -1604,7 +1606,10 @@ scaleHoverTimeout (void *closure)
 	o.name    = "root";
 	o.value.i = s->root;
 
-	scaleTerminate (s->display, action, 0, &o, 1);
+	option = SCALE_DISPLAY_OPTION_INITIATE_EDGE;
+	scaleTerminate (s->display, &sd->opt[option].value.action, 0, &o, 1);
+	option = SCALE_DISPLAY_OPTION_INITIATE_KEY;
+	scaleTerminate (s->display, &sd->opt[option].value.action, 0, &o, 1);
     }
 
     ss->hoverHandle = 0;
@@ -1646,8 +1651,7 @@ scaleHandleEvent (CompDisplay *d,
 	    s = findScreenAtDisplay (d, event->xbutton.root);
 	    if (s)
 	    {
-		CompAction *action =
-		    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
+		int option;
 
 		SCALE_SCREEN (s);
 
@@ -1664,7 +1668,14 @@ scaleHandleEvent (CompDisplay *d,
 					     event->xbutton.y_root,
 					     TRUE))
 		    {
-			scaleTerminate (d, action, 0, &o, 1);
+			option = SCALE_DISPLAY_OPTION_INITIATE_EDGE;
+			scaleTerminate (s->display,
+					&sd->opt[option].value.action,
+					0, &o, 1);
+			option = SCALE_DISPLAY_OPTION_INITIATE_KEY;
+			scaleTerminate (s->display,
+					&sd->opt[option].value.action,
+					0, &o, 1);
 		    }
 		    else if (event->xbutton.x_root > s->workArea.x &&
 			     event->xbutton.x_root < (s->workArea.x +
@@ -1675,7 +1686,14 @@ scaleHandleEvent (CompDisplay *d,
 		    {
 			if (sd->opt[SCALE_DISPLAY_OPTION_SHOW_DESKTOP].value.b)
 			{
-			    scaleTerminate (d, action, 0, &o, 1);
+			    option = SCALE_DISPLAY_OPTION_INITIATE_EDGE;
+			    scaleTerminate (s->display,
+					    &sd->opt[option].value.action,
+					    0, &o, 1);
+			    option = SCALE_DISPLAY_OPTION_INITIATE_KEY;
+			    scaleTerminate (s->display,
+					    &sd->opt[option].value.action,
+					    0, &o, 1);
 			    (*s->enterShowDesktopMode) (s);
 			}
 		    }
@@ -1770,8 +1788,7 @@ scaleHandleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
-		CompAction *action =
-		    &sd->opt[SCALE_DISPLAY_OPTION_INITIATE].value.action;
+		int option;
 
 		SCALE_SCREEN (w->screen);
 
@@ -1785,7 +1802,12 @@ scaleHandleEvent (CompDisplay *d,
 		    o.name    = "root";
 		    o.value.i = w->screen->root;
 
-		    scaleTerminate (d, action, 0, &o, 1);
+		    option = SCALE_DISPLAY_OPTION_INITIATE_EDGE;
+		    scaleTerminate (d, &sd->opt[option].value.action,
+				    0, &o, 1);
+		    option = SCALE_DISPLAY_OPTION_INITIATE_KEY;
+		    scaleTerminate (d, &sd->opt[option].value.action,
+				    0, &o, 1);
 		}
 	    }
 	}
@@ -1892,10 +1914,14 @@ scaleSetDisplayOption (CompPlugin      *plugin,
 static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
     { "abi", "int", 0, 0, 0 },
     { "index", "int", 0, 0, 0 },
-    { "initiate", "action", 0, scaleInitiate, scaleTerminate },
-    { "initiate_all", "action", 0, scaleInitiateAll, scaleTerminate },
-    { "initiate_group", "action", 0, scaleInitiateGroup, scaleTerminate },
-    { "initiate_output", "action", 0, scaleInitiateOutput, scaleTerminate },
+    { "initiate_edge", "edge", 0, scaleInitiate, scaleTerminate },
+    { "initiate_key", "key", 0, scaleInitiate, scaleTerminate },
+    { "initiate_all_edge", "edge", 0, scaleInitiateAll, scaleTerminate },
+    { "initiate_all_key", "key", 0, scaleInitiateAll, scaleTerminate },
+    { "initiate_group_edge", "edge", 0, scaleInitiateGroup, scaleTerminate },
+    { "initiate_group_key", "key", 0, scaleInitiateGroup, scaleTerminate },
+    { "initiate_output_edge", "edge", 0, scaleInitiateOutput, scaleTerminate },
+    { "initiate_output_key", "key", 0, scaleInitiateOutput, scaleTerminate },
     { "show_desktop", "bool", 0, 0, 0 },
     { "relayout_slots", "action", 0, scaleRelayoutSlots, 0 }
 };
