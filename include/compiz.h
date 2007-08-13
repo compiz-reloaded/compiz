@@ -279,6 +279,7 @@ typedef enum {
     CompOptionTypeColor,
     CompOptionTypeAction,
     CompOptionTypeKey,
+    CompOptionTypeButton,
     CompOptionTypeMatch,
     CompOptionTypeList
 } CompOptionType;

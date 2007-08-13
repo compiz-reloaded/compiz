@@ -386,6 +386,7 @@ compSetOption (CompOption      *option,
 	return compSetMatchOption (option, value);
     case CompOptionTypeAction:
     case CompOptionTypeKey:
+    case CompOptionTypeButton:
 	return compSetActionOption (option, value);
     case CompOptionTypeList:
 	return compSetOptionList (option, value);
@@ -758,6 +759,8 @@ optionTypeToString (CompOptionType type)
 	return "action";
     case CompOptionTypeKey:
 	return "key";
+    case CompOptionTypeButton:
+	return "button";
     case CompOptionTypeMatch:
 	return "match";
     case CompOptionTypeBool:
