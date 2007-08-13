@@ -42,13 +42,13 @@ static CompMetadata switchMetadata;
 
 static int displayPrivateIndex;
 
-#define SWITCH_DISPLAY_OPTION_NEXT	     0
-#define SWITCH_DISPLAY_OPTION_PREV	     1
-#define SWITCH_DISPLAY_OPTION_NEXT_ALL	     2
-#define SWITCH_DISPLAY_OPTION_PREV_ALL	     3
-#define SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP  4
-#define SWITCH_DISPLAY_OPTION_PREV_NO_POPUP  5
-#define SWITCH_DISPLAY_OPTION_NUM	     6
+#define SWITCH_DISPLAY_OPTION_NEXT_KEY	        0
+#define SWITCH_DISPLAY_OPTION_PREV_KEY	        1
+#define SWITCH_DISPLAY_OPTION_NEXT_ALL_KEY	2
+#define SWITCH_DISPLAY_OPTION_PREV_ALL_KEY	3
+#define SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP_KEY 4
+#define SWITCH_DISPLAY_OPTION_PREV_NO_POPUP_KEY 5
+#define SWITCH_DISPLAY_OPTION_NUM	        6
 
 typedef struct _SwitchDisplay {
     int		    screenPrivateIndex;
@@ -1833,12 +1833,12 @@ switchSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo switchDisplayOptionInfo[] = {
-    { "next", "action", 0, switchNext, switchTerminate },
-    { "prev", "action", 0, switchPrev, switchTerminate },
-    { "next_all", "action", 0, switchNextAll, switchTerminate },
-    { "prev_all", "action", 0, switchPrevAll, switchTerminate },
-    { "next_no_popup", "action", 0, switchNextNoPopup, switchTerminate },
-    { "prev_no_popup", "action", 0, switchPrevNoPopup, switchTerminate }
+    { "next_key", "key", 0, switchNext, switchTerminate },
+    { "prev_key", "key", 0, switchPrev, switchTerminate },
+    { "next_all_key", "key", 0, switchNextAll, switchTerminate },
+    { "prev_all_key", "key", 0, switchPrevAll, switchTerminate },
+    { "next_no_popup_key", "key", 0, switchNextNoPopup, switchTerminate },
+    { "prev_no_popup_key", "key", 0, switchPrevNoPopup, switchTerminate }
 };
 
 static Bool

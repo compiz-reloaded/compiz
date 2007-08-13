@@ -3,51 +3,33 @@
 	<_short>Application Switcher</_short>
 	<_long>Application Switcher</_long>
 	<display>
-	    <option name="next" type="action">
+	    <option name="next_key" type="key">
 		<_short>Next window</_short>
 		<_long>Popup switcher if not visible and select next window</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Alt&gt;Tab</key>
-		</default>
+		<default>&lt;Alt&gt;Tab</default>
 	    </option>
-	    <option name="prev" type="action">
+	    <option name="prev_key" type="key">
 		<_short>Prev window</_short>
 		<_long>Popup switcher if not visible and select previous window</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Shift&gt;&lt;Alt&gt;Tab</key>
-		</default>
+		<default>&lt;Shift&gt;&lt;Alt&gt;Tab</default>
 	    </option>
-	    <option name="next_all" type="action">
+	    <option name="next_all_key" type="key">
 		<_short>Next window (All windows)</_short>
 		<_long>Popup switcher if not visible and select next window out of all windows</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Control&gt;&lt;Alt&gt;Tab</key>
-		</default>
+		<default>&lt;Control&gt;&lt;Alt&gt;Tab</default>
 	    </option>
-	    <option name="prev_all" type="action">
+	    <option name="prev_all_key" type="key">
 		<_short>Prev window (All windows)</_short>
 		<_long>Popup switcher if not visible and select previous window out of all windows</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Shift&gt;&lt;Control&gt;&lt;Alt&gt;Tab</key>
-		</default>
+		<default>&lt;Shift&gt;&lt;Control&gt;&lt;Alt&gt;Tab</default>
 	    </option>
-	    <option name="next_no_popup" type="action">
+	    <option name="next_no_popup_key" type="key">
 		<_short>Next window (No popup)</_short>
 		<_long>Select next window without showing the popup window.</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		</default>
 	    </option>
-	    <option name="prev_no_popup" type="action">
+	    <option name="prev_no_popup_key" type="key">
 		<_short>Prev window (No popup)</_short>
 		<_long>Select previous window without showing the popup window.</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		</default>
 	    </option>
 	</display>
 	<screen>
