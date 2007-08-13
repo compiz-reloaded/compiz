@@ -82,7 +82,7 @@ inotifyProcessEvents (void *data)
 	    event = (struct inotify_event *) &buf[i];
 
 	    for (iw = id->watch; iw; iw = iw->next)
-		if (iw->handle == event->wd)
+		if (iw->wd == event->wd)
 		    break;
 
 	    if (iw)
