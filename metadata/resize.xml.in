@@ -3,38 +3,35 @@
 	<_short>Resize Window</_short>
 	<_long>Resize window</_long>
 	<display>
-	    <option name="initiate_normal" type="action">
+	    <option name="initiate_normal_key" type="key">
 		<_short>Initiate Normal Window Resize</_short>
 		<_long>Start resizing window normally</_long>
-		<allowed key="true" button="true"/>
 		<default/>
 	    </option>
-	    <option name="initiate_outline" type="action">
+	    <option name="initiate_outline_key" type="key">
 		<_short>Initiate Outline Window Resize</_short>
 		<_long>Start resizing window with outline</_long>
-		<allowed key="true" button="true"/>
 		<default/>
 	    </option>
-	    <option name="initiate_rectangle" type="action">
+	    <option name="initiate_rectangle_key" type="key">
 		<_short>Initiate Rectangle Window Resize</_short>
 		<_long>Start resizing window with rectangle</_long>
-		<allowed key="true" button="true"/>
 		<default/>
 	    </option>
-	    <option name="initiate_stretch" type="action">
+	    <option name="initiate_stretch_key" type="key">
 		<_short>Initiate Stretch Window Resize</_short>
 		<_long>Start resizing window by stretching it</_long>
-		<allowed key="true" button="true"/>
 		<default/>
 	    </option>
-	    <option name="initiate" type="action">
+	    <option name="initiate_button" type="button">
 		<_short>Initiate Window Resize</_short>
 		<_long>Start resizing window</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Alt&gt;F8</key>
-		    <button>&lt;Alt&gt;Button2</button>
-		</default>
+		<default>&lt;Alt&gt;Button2</default>
+	    </option>
+	    <option name="initiate_key" type="key">
+		<_short>Initiate Window Resize</_short>
+		<_long>Start resizing window</_long>
+		<default>&lt;Alt&gt;F8</default>
 	    </option>
 	    <option name="mode" type="int">
 		<_short>Default Resize Mode</_short>
