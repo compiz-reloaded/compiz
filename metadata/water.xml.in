@@ -9,29 +9,20 @@
 	    </relation>
 	</deps>
 	<display>
-	    <option name="initiate" type="action">
+	    <option name="initiate_key" type="key">
 		<_short>Initiate</_short>
 		<_long>Enable pointer water effects</_long>
-		<allowed key="true"/>
-		<default>
-		    <key>&lt;Control&gt;&lt;Super&gt;</key>
-		</default>
+		<default>&lt;Control&gt;&lt;Super&gt;</default>
 	    </option>
-	    <option name="toggle_rain" type="action">
+	    <option name="toggle_rain_key" type="key">
 		<_short>Toggle rain</_short>
 		<_long>Toggle rain effect</_long>
-		<allowed key="true"/>
-		<default>
-		    <key>&lt;Shift&gt;F9</key>
-		</default>
+		<default>&lt;Shift&gt;F9</default>
 	    </option>
-	    <option name="toggle_wiper" type="action">
+	    <option name="toggle_wiper_key" type="key">
 		<_short>Toggle wiper</_short>
 		<_long>Toggle wiper effect</_long>
-		<allowed key="true"/>
-		<default>
-		    <key>&lt;Shift&gt;F8</key>
-		</default>
+		<default>&lt;Shift&gt;F8</default>
 	    </option>
 	    <option name="offset_scale" type="float">
 		<_short>Offset Scale</_short>
@@ -48,27 +39,18 @@
 		<min>1</min>
 		<max>3600000</max>
 	    </option>
-	    <option name="title_wave" type="action">
+	    <option name="title_wave" type="bell">
 		<_short>Title wave</_short>
 		<_long>Wave effect from window title</_long>
-		<allowed bell="true"/>
-		<default>
-		    <bell>false</bell>
-		</default>
+		<default>false</default>
 	    </option>
 	    <option name="point" type="action">
 		<_short>Point</_short>
 		<_long>Add point</_long>
-		<allowed/>
-		<default>
-		</default>
 	    </option>
 	    <option name="line" type="action">
 		<_short>Line</_short>
 		<_long>Add line</_long>
-		<allowed/>
-		<default>
-		</default>
 	    </option>
 	</display>
     </plugin>

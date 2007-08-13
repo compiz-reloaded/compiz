@@ -66,15 +66,15 @@ static int displayPrivateIndex;
 static int waterLastPointerX = 0;
 static int waterLastPointerY = 0;
 
-#define WATER_DISPLAY_OPTION_INITIATE     0
-#define WATER_DISPLAY_OPTION_TOGGLE_RAIN  1
-#define WATER_DISPLAY_OPTION_TOGGLE_WIPER 2
-#define WATER_DISPLAY_OPTION_OFFSET_SCALE 3
-#define WATER_DISPLAY_OPTION_RAIN_DELAY	  4
-#define WATER_DISPLAY_OPTION_TITLE_WAVE   5
-#define WATER_DISPLAY_OPTION_POINT        6
-#define WATER_DISPLAY_OPTION_LINE         7
-#define WATER_DISPLAY_OPTION_NUM          8
+#define WATER_DISPLAY_OPTION_INITIATE_KEY     0
+#define WATER_DISPLAY_OPTION_TOGGLE_RAIN_KEY  1
+#define WATER_DISPLAY_OPTION_TOGGLE_WIPER_KEY 2
+#define WATER_DISPLAY_OPTION_OFFSET_SCALE     3
+#define WATER_DISPLAY_OPTION_RAIN_DELAY	      4
+#define WATER_DISPLAY_OPTION_TITLE_WAVE       5
+#define WATER_DISPLAY_OPTION_POINT            6
+#define WATER_DISPLAY_OPTION_LINE             7
+#define WATER_DISPLAY_OPTION_NUM              8
 
 typedef struct _WaterDisplay {
     int		    screenPrivateIndex;
@@ -1578,12 +1578,12 @@ waterSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo waterDisplayOptionInfo[] = {
-    { "initiate", "action", 0, waterInitiate, waterTerminate },
-    { "toggle_rain", "action", 0, waterToggleRain, 0 },
-    { "toggle_wiper", "action", 0, waterToggleWiper, 0 },
+    { "initiate_key", "key", 0, waterInitiate, waterTerminate },
+    { "toggle_rain_key", "key", 0, waterToggleRain, 0 },
+    { "toggle_wiper_key", "key", 0, waterToggleWiper, 0 },
     { "offset_scale", "float", "<min>0</min>", 0, 0 },
     { "rain_delay", "int", "<min>1</min>", 0, 0 },
-    { "title_wave", "action", 0, waterTitleWave, 0 },
+    { "title_wave", "bell", 0, waterTitleWave, 0 },
     { "point", "action", 0, waterPoint, 0 },
     { "line", "action", 0, waterLine, 0 }
 };
