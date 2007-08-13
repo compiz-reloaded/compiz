@@ -141,33 +141,6 @@
           <owner>compiz</owner>
           <type><xsl:call-template name="printType"/></type>
           <xsl:choose>
-            <!-- for most option types we can use the default value directly -->
-            <xsl:when test="contains('bool,int,float,string,match', @type)">
-              <default>
-                <xsl:choose>
-                  <xsl:when test="default/text()">
-                    <xsl:value-of select="default/text()"/>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <!-- if no default value was specified we need to generate one -->
-                    <xsl:choose>
-                      <xsl:when test="@type = 'bool'">
-                        <xsl:text>false</xsl:text>
-                      </xsl:when>
-                      <xsl:when test="@type = 'int'">
-                        <xsl:variable name="num">
-                          <xsl:call-template name="printNumFallback"/>
-                        </xsl:variable>
-                        <xsl:value-of select="floor($num)"/>
-                      </xsl:when>
-                      <xsl:when test="@type = 'float'">
-                        <xsl:call-template name="printNumFallback"/>
-                      </xsl:when>
-                    </xsl:choose>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </default>
-            </xsl:when>
             <!-- color values need a special handling -->
             <xsl:when test="@type = 'color'">
               <default>
@@ -198,6 +171,36 @@
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:when>
+            <!-- for most option types we can use the default value directly -->
+            <xsl:otherwise>
+              <default>
+                <xsl:choose>
+                  <xsl:when test="default/text()">
+                    <xsl:value-of select="default/text()"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <!-- if no default value was specified we need to generate one -->
+                    <xsl:choose>
+		      <xsl:when test="contains('bool,bell',@type)">
+                        <xsl:text>false</xsl:text>
+                      </xsl:when>
+                      <xsl:when test="@type = 'int'">
+                        <xsl:variable name="num">
+                          <xsl:call-template name="printNumFallback"/>
+                        </xsl:variable>
+                        <xsl:value-of select="floor($num)"/>
+                      </xsl:when>
+                      <xsl:when test="@type = 'float'">
+                        <xsl:call-template name="printNumFallback"/>
+                      </xsl:when>
+		      <xsl:when test="contains('key,button',@type)">
+			<xsl:text>Disabled</xsl:text>
+                      </xsl:when>
+                    </xsl:choose>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </default>
+	    </xsl:otherwise>
           </xsl:choose>
           <!-- add the short and long descriptions -->
           <xsl:call-template name="printDescription"/>
