@@ -3,14 +3,15 @@
 	<_short>Move Window</_short>
 	<_long>Move window</_long>
 	<display>
-	    <option name="initiate" type="action">
+	    <option name="initiate_button" type="button">
 		<_short>Initiate Window Move</_short>
 		<_long>Start moving window</_long>
-		<allowed key="true" button="true"/>
-		<default>
-		    <key>&lt;Alt&gt;F7</key>
-		    <button>&lt;Alt&gt;Button1</button>
-		</default>
+		<default>&lt;Alt&gt;Button1</default>
+	    </option>
+	    <option name="initiate_key" type="key">
+		<_short>Initiate Window Move</_short>
+		<_long>Start moving window</_long>
+		<default>&lt;Alt&gt;F7</default>
 	    </option>
 	    <option name="opacity" type="int">
 		<_short>Opacity</_short>

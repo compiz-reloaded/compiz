@@ -53,12 +53,13 @@ struct _MoveKeys {
 
 static int displayPrivateIndex;
 
-#define MOVE_DISPLAY_OPTION_INITIATE	      0
-#define MOVE_DISPLAY_OPTION_OPACITY	      1
-#define MOVE_DISPLAY_OPTION_CONSTRAIN_Y	      2
-#define MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED 3
-#define MOVE_DISPLAY_OPTION_LAZY_POSITIONING  4
-#define MOVE_DISPLAY_OPTION_NUM		      5
+#define MOVE_DISPLAY_OPTION_INITIATE_BUTTON   0
+#define MOVE_DISPLAY_OPTION_INITIATE_KEY      1
+#define MOVE_DISPLAY_OPTION_OPACITY	      2
+#define MOVE_DISPLAY_OPTION_CONSTRAIN_Y	      3
+#define MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED 4
+#define MOVE_DISPLAY_OPTION_LAZY_POSITIONING  5
+#define MOVE_DISPLAY_OPTION_NUM		      6
 
 typedef struct _MoveDisplay {
     int		    screenPrivateIndex;
@@ -567,8 +568,10 @@ moveHandleEvent (CompDisplay *d,
 
 	    if (ms->grabIndex)
 	    {
+		int initiateButtonOption = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
+
 		moveTerminate (d,
-			       &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action,
+			       &md->opt[initiateButtonOption].value.action,
 			       0, NULL, 0);
 	    }
 	}
@@ -621,8 +624,7 @@ moveHandleEvent (CompDisplay *d,
 		{
 		    CompOption o[4];
 		    int	       xRoot, yRoot;
-		    CompAction *action =
-			&md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action;
+		    int	       option;
 
 		    o[0].type    = CompOptionTypeInt;
 		    o[0].name    = "window";
@@ -630,7 +632,9 @@ moveHandleEvent (CompDisplay *d,
 
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
-			moveInitiate (d, action,
+			option = MOVE_DISPLAY_OPTION_INITIATE_KEY;
+
+			moveInitiate (d, &md->opt[option].value.action,
 				      CompActionStateInitKey,
 				      o, 1);
 		    }
@@ -639,6 +643,8 @@ moveHandleEvent (CompDisplay *d,
 			unsigned int mods;
 			Window	     root, child;
 			int	     i;
+
+			option = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
 
 			XQueryPointer (d->display, w->screen->root,
 				       &root, &child, &xRoot, &yRoot,
@@ -660,7 +666,7 @@ moveHandleEvent (CompDisplay *d,
 			    o[3].value.i = event->xclient.data.l[1];
 
 			    moveInitiate (d,
-					  action,
+					  &md->opt[option].value.action,
 					  CompActionStateInitButton,
 					  o, 4);
 
@@ -673,15 +679,33 @@ moveHandleEvent (CompDisplay *d,
 	break;
     case DestroyNotify:
 	if (md->w && md->w->id == event->xdestroywindow.window)
+	{
+	    int option;
+
+	    option = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
 	    moveTerminate (d,
-			   &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action,
+			   &md->opt[option].value.action,
 			   0, NULL, 0);
+	    option = MOVE_DISPLAY_OPTION_INITIATE_KEY;
+	    moveTerminate (d,
+			   &md->opt[option].value.action,
+			   0, NULL, 0);
+	}
 	break;
     case UnmapNotify:
 	if (md->w && md->w->id == event->xunmap.window)
+	{
+	    int option;
+
+	    option = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
 	    moveTerminate (d,
-			   &md->opt[MOVE_DISPLAY_OPTION_INITIATE].value.action,
+			   &md->opt[option].value.action,
 			   0, NULL, 0);
+	    option = MOVE_DISPLAY_OPTION_INITIATE_KEY;
+	    moveTerminate (d,
+			   &md->opt[option].value.action,
+			   0, NULL, 0);
+	}
     default:
 	break;
     }
@@ -767,7 +791,8 @@ moveSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo moveDisplayOptionInfo[] = {
-    { "initiate", "action", 0, moveInitiate, moveTerminate },
+    { "initiate_button", "button", 0, moveInitiate, moveTerminate },
+    { "initiate_key", "key", 0, moveInitiate, moveTerminate },
     { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
     { "constrain_y", "bool", 0, 0, 0 },
     { "snapoff_maximized", "bool", 0, 0, 0 },
