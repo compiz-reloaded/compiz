@@ -42,43 +42,43 @@ static CompMetadata rotateMetadata;
 
 static int displayPrivateIndex;
 
-#define ROTATE_DISPLAY_OPTION_INITIATE		  0
-#define ROTATE_DISPLAY_OPTION_LEFT		  1
-#define ROTATE_DISPLAY_OPTION_RIGHT		  2
-#define ROTATE_DISPLAY_OPTION_LEFT_WINDOW	  3
-#define ROTATE_DISPLAY_OPTION_RIGHT_WINDOW	  4
+#define ROTATE_DISPLAY_OPTION_INITIATE_BUTTON	  0
+#define ROTATE_DISPLAY_OPTION_LEFT_KEY		  1
+#define ROTATE_DISPLAY_OPTION_RIGHT_KEY		  2
+#define ROTATE_DISPLAY_OPTION_LEFT_WINDOW_KEY	  3
+#define ROTATE_DISPLAY_OPTION_RIGHT_WINDOW_KEY	  4
 #define ROTATE_DISPLAY_OPTION_EDGEFLIP_POINTER	  5
 #define ROTATE_DISPLAY_OPTION_EDGEFLIP_WINDOW	  6
 #define ROTATE_DISPLAY_OPTION_EDGEFLIP_DND	  7
 #define ROTATE_DISPLAY_OPTION_FLIPTIME		  8
-#define ROTATE_DISPLAY_OPTION_TO_1		  9
-#define ROTATE_DISPLAY_OPTION_TO_2		  10
-#define ROTATE_DISPLAY_OPTION_TO_3		  11
-#define ROTATE_DISPLAY_OPTION_TO_4		  12
-#define ROTATE_DISPLAY_OPTION_TO_5		  13
-#define ROTATE_DISPLAY_OPTION_TO_6		  14
-#define ROTATE_DISPLAY_OPTION_TO_7		  15
-#define ROTATE_DISPLAY_OPTION_TO_8		  16
-#define ROTATE_DISPLAY_OPTION_TO_9		  17
-#define ROTATE_DISPLAY_OPTION_TO_10		  18
-#define ROTATE_DISPLAY_OPTION_TO_11		  19
-#define ROTATE_DISPLAY_OPTION_TO_12		  20
-#define ROTATE_DISPLAY_OPTION_TO_1_WINDOW	  21
-#define ROTATE_DISPLAY_OPTION_TO_2_WINDOW	  22
-#define ROTATE_DISPLAY_OPTION_TO_3_WINDOW	  23
-#define ROTATE_DISPLAY_OPTION_TO_4_WINDOW	  24
-#define ROTATE_DISPLAY_OPTION_TO_5_WINDOW	  25
-#define ROTATE_DISPLAY_OPTION_TO_6_WINDOW	  26
-#define ROTATE_DISPLAY_OPTION_TO_7_WINDOW	  27
-#define ROTATE_DISPLAY_OPTION_TO_8_WINDOW	  28
-#define ROTATE_DISPLAY_OPTION_TO_9_WINDOW	  29
-#define ROTATE_DISPLAY_OPTION_TO_10_WINDOW	  30
-#define ROTATE_DISPLAY_OPTION_TO_11_WINDOW	  31
-#define ROTATE_DISPLAY_OPTION_TO_12_WINDOW	  32
-#define ROTATE_DISPLAY_OPTION_TO		  33
-#define ROTATE_DISPLAY_OPTION_WINDOW		  34
-#define ROTATE_DISPLAY_OPTION_FLIP_LEFT		  35
-#define ROTATE_DISPLAY_OPTION_FLIP_RIGHT	  36
+#define ROTATE_DISPLAY_OPTION_TO_1_KEY		  9
+#define ROTATE_DISPLAY_OPTION_TO_2_KEY		  10
+#define ROTATE_DISPLAY_OPTION_TO_3_KEY		  11
+#define ROTATE_DISPLAY_OPTION_TO_4_KEY		  12
+#define ROTATE_DISPLAY_OPTION_TO_5_KEY		  13
+#define ROTATE_DISPLAY_OPTION_TO_6_KEY		  14
+#define ROTATE_DISPLAY_OPTION_TO_7_KEY		  15
+#define ROTATE_DISPLAY_OPTION_TO_8_KEY		  16
+#define ROTATE_DISPLAY_OPTION_TO_9_KEY		  17
+#define ROTATE_DISPLAY_OPTION_TO_10_KEY		  18
+#define ROTATE_DISPLAY_OPTION_TO_11_KEY		  19
+#define ROTATE_DISPLAY_OPTION_TO_12_KEY		  20
+#define ROTATE_DISPLAY_OPTION_TO_1_WINDOW_KEY	  21
+#define ROTATE_DISPLAY_OPTION_TO_2_WINDOW_KEY	  22
+#define ROTATE_DISPLAY_OPTION_TO_3_WINDOW_KEY	  23
+#define ROTATE_DISPLAY_OPTION_TO_4_WINDOW_KEY	  24
+#define ROTATE_DISPLAY_OPTION_TO_5_WINDOW_KEY	  25
+#define ROTATE_DISPLAY_OPTION_TO_6_WINDOW_KEY	  26
+#define ROTATE_DISPLAY_OPTION_TO_7_WINDOW_KEY	  27
+#define ROTATE_DISPLAY_OPTION_TO_8_WINDOW_KEY	  28
+#define ROTATE_DISPLAY_OPTION_TO_9_WINDOW_KEY	  29
+#define ROTATE_DISPLAY_OPTION_TO_10_WINDOW_KEY	  30
+#define ROTATE_DISPLAY_OPTION_TO_11_WINDOW_KEY	  31
+#define ROTATE_DISPLAY_OPTION_TO_12_WINDOW_KEY	  32
+#define ROTATE_DISPLAY_OPTION_TO_KEY		  33
+#define ROTATE_DISPLAY_OPTION_WINDOW_KEY	  34
+#define ROTATE_DISPLAY_OPTION_FLIP_LEFT_EDGE	  35
+#define ROTATE_DISPLAY_OPTION_FLIP_RIGHT_EDGE	  36
 #define ROTATE_DISPLAY_OPTION_RAISE_ON_ROTATE	  37
 #define ROTATE_DISPLAY_OPTION_NUM		  38
 
@@ -1329,15 +1329,15 @@ rotateTo (CompDisplay     *d,
     {
 	CompOption o[4];
 	int	   face = -1;
-	int	   i = ROTATE_DISPLAY_OPTION_TO_1;
+	int	   i = ROTATE_DISPLAY_OPTION_TO_1_KEY;
 
 	ROTATE_DISPLAY (s->display);
 
-	while (i <= ROTATE_DISPLAY_OPTION_TO_12)
+	while (i <= ROTATE_DISPLAY_OPTION_TO_12_KEY)
 	{
 	    if (action == &rd->opt[i].value.action)
 	    {
-		face = i - ROTATE_DISPLAY_OPTION_TO_1;
+		face = i - ROTATE_DISPLAY_OPTION_TO_1_KEY;
 		break;
 	    }
 
@@ -1386,15 +1386,15 @@ rotateToWithWindow (CompDisplay     *d,
     {
 	CompOption o[5];
 	int	   face = -1;
-	int	   i = ROTATE_DISPLAY_OPTION_TO_1_WINDOW;
+	int	   i = ROTATE_DISPLAY_OPTION_TO_1_WINDOW_KEY;
 
 	ROTATE_DISPLAY (s->display);
 
-	while (i <= ROTATE_DISPLAY_OPTION_TO_12_WINDOW)
+	while (i <= ROTATE_DISPLAY_OPTION_TO_12_WINDOW_KEY)
 	{
 	    if (action == &rd->opt[i].value.action)
 	    {
-		face = i - ROTATE_DISPLAY_OPTION_TO_1_WINDOW;
+		face = i - ROTATE_DISPLAY_OPTION_TO_1_WINDOW_KEY;
 		break;
 	    }
 
@@ -1668,44 +1668,44 @@ rotateSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo rotateDisplayOptionInfo[] = {
-    { "initiate", "action", 0, rotateInitiate, rotateTerminate },
-    { "rotate_left", "action", 0, rotateLeft, 0 },
-    { "rotate_right", "action", 0, rotateRight, 0 },
-    { "rotate_left_window", "action", 0, rotateLeftWithWindow, 0 },
-    { "rotate_right_window", "action", 0, rotateRightWithWindow, 0 },
+    { "initiate_button", "button", 0, rotateInitiate, rotateTerminate },
+    { "rotate_left_key", "key", 0, rotateLeft, 0 },
+    { "rotate_right_key", "key", 0, rotateRight, 0 },
+    { "rotate_left_window_key", "key", 0, rotateLeftWithWindow, 0 },
+    { "rotate_right_window_key", "key", 0, rotateRightWithWindow, 0 },
     { "edge_flip_pointer", "bool", 0, 0, 0 },
     { "edge_flip_window", "bool", 0, 0, 0 },
     { "edge_flip_dnd", "bool", 0, 0, 0 },
     { "flip_time", "int", "<min>0</min><max>1000</max>", 0, 0 },
-    { "rotate_to_1", "action", 0, rotateTo, 0 },
-    { "rotate_to_2", "action", 0, rotateTo, 0 },
-    { "rotate_to_3", "action", 0, rotateTo, 0 },
-    { "rotate_to_4", "action", 0, rotateTo, 0 },
-    { "rotate_to_5", "action", 0, rotateTo, 0 },
-    { "rotate_to_6", "action", 0, rotateTo, 0 },
-    { "rotate_to_7", "action", 0, rotateTo, 0 },
-    { "rotate_to_8", "action", 0, rotateTo, 0 },
-    { "rotate_to_9", "action", 0, rotateTo, 0 },
-    { "rotate_to_10", "action", 0, rotateTo, 0 },
-    { "rotate_to_11", "action", 0, rotateTo, 0 },
-    { "rotate_to_12", "action", 0, rotateTo, 0 },
-    { "rotate_to_1_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_2_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_3_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_4_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_5_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_6_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_7_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_8_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_9_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_10_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_11_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to_12_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_to", "action", 0, rotateTo, 0 },
-    { "rotate_window", "action", 0, rotateToWithWindow, 0 },
-    { "rotate_flip_left", "action", 0, rotateEdgeFlipLeft,
+    { "rotate_to_1_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_2_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_3_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_4_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_5_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_6_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_7_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_8_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_9_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_10_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_11_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_12_key", "key", 0, rotateTo, 0 },
+    { "rotate_to_1_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_2_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_3_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_4_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_5_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_6_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_7_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_8_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_9_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_10_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_11_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_12_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_to_key", "key", 0, rotateTo, 0 },
+    { "rotate_window_key", "key", 0, rotateToWithWindow, 0 },
+    { "rotate_flip_left_edge", "edge", 0, rotateEdgeFlipLeft,
       rotateFlipTerminate },
-    { "rotate_flip_right", "action", 0, rotateEdgeFlipRight,
+    { "rotate_flip_right_edge", "edge", 0, rotateEdgeFlipRight,
       rotateFlipTerminate },
     { "raise_on_rotate", "bool", 0, 0, 0 }
 };
