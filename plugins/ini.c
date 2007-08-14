@@ -99,52 +99,6 @@ typedef struct _IniScreen {
     SetScreenOptionForPluginProc   setScreenOptionForPlugin;
 } IniScreen;
 
-/*
- * IniAction
- */
-static char * validActionTypes[] = {
-	"key",
-	"button",
-	"bell",
-	"edge",
-	"edgebutton"};
-
-#define ACTION_VALUE_KEY	    (1 << 0)
-#define ACTION_VALUE_BUTTON	    (1 << 1)
-#define ACTION_VALUE_BELL	    (1 << 2)
-#define ACTION_VALUE_EDGE	    (1 << 3)
-#define ACTION_VALUE_EDGEBUTTON	    (1 << 4)
-#define ACTION_VALUES_ALL \
-	( ACTION_VALUE_KEY \
-	| ACTION_VALUE_BUTTON \
-	| ACTION_VALUE_BELL \
-	| ACTION_VALUE_EDGE \
-	| ACTION_VALUE_EDGEBUTTON )
-
-static int actionValueMasks[] = {
-    ACTION_VALUE_KEY,
-    ACTION_VALUE_BUTTON,
-    ACTION_VALUE_BELL,
-    ACTION_VALUE_EDGE,
-    ACTION_VALUE_EDGEBUTTON
-};
-
-enum {
-    ACTION_TYPE_KEY = 0,
-    ACTION_TYPE_BUTTON,
-    ACTION_TYPE_BELL,
-    ACTION_TYPE_EDGE,
-    ACTION_TYPE_EDGEBUTTON,
-    ACTION_TYPES_NUM
-};
-
-typedef struct _IniAction {
-    char *realOptionName;
-    unsigned int valueMasks;
-    CompAction a;
-} IniAction;
-
-
 static IniFileData *
 iniGetFileDataFromFilename (CompDisplay *d,
 			    const char *filename)
@@ -242,7 +196,7 @@ iniGetFileDataFromFilename (CompDisplay *d,
 }
 
 static char *
-iniOptionValueToString (CompOptionValue *value, CompOptionType type)
+iniOptionValueToString (CompDisplay *d, CompOptionValue *value, CompOptionType type)
 {
     char tmp[MAX_OPTION_LENGTH];
     tmp[0] = '\0';
@@ -261,6 +215,18 @@ iniOptionValueToString (CompOptionValue *value, CompOptionType type)
 	break;
     case CompOptionTypeColor:
 	snprintf (tmp, 10, "%s", colorToString (value->c));
+	break;
+    case CompOptionTypeKey:
+	return keyActionToString (d, &value->action);
+	break;
+    case CompOptionTypeButton:
+	return buttonActionToString (d, &value->action);
+	break;
+    case CompOptionTypeEdge:
+	return edgeMaskToString (value->action.edgeMask);
+	break;
+    case CompOptionTypeBell:
+	snprintf (tmp, 256, "%i", (int) value->action.bell);
 	break;
     case CompOptionTypeMatch:
         {
@@ -384,7 +350,7 @@ iniParseLine (char *line, char **optionName, char **optionValue)
 }
 
 static Bool
-csvToList (char *csv, CompListValue *list, CompOptionType type)
+csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 {
     char *splitStart = NULL;
     char *splitEnd = NULL;
@@ -439,6 +405,18 @@ csvToList (char *csv, CompListValue *list, CompOptionType type)
 		    if (item[0] != '\0')
 			list->value[i].f = atof (item);
 		    break;
+		case CompOptionTypeKey:
+		    stringToKeyAction (d, item, &list->value[i].action);
+		    break;
+		case CompOptionTypeButton:
+		    stringToButtonAction (d, item, &list->value[i].action);
+		    break;
+		case CompOptionTypeEdge:
+		    list->value[i].action.edgeMask = stringToEdgeMask (item);
+		    break;
+		case CompOptionTypeBell:
+		    list->value[i].action.bell = (Bool) atoi (item);
+		    break;
 		case CompOptionTypeMatch:
 		    matchInit (&list->value[i].match);
 		    matchAddFromString (&list->value[i].match, item);
@@ -478,146 +456,6 @@ iniMakeDirectories (void)
 			"Could not get HOME environmental variable");
 	return FALSE;
     }
-}
-
-static Bool
-findActionType (char *optionName, int *type)
-{
-    char * optionType = strrchr (optionName, '_');
-    if (!optionType)
-	return FALSE;
-
-    optionType++; /* skip the '_' */
-
-    int i;
-    for (i = 0; i < ACTION_TYPES_NUM; i++)
-    {
-	if (strcmp (optionType, validActionTypes[i]) == 0)
-	{
-	    if (type)
-		*type = i;
-	    return TRUE;
-	}
-    }
-
-    return FALSE;
-}
-
-static Bool
-parseAction (CompDisplay *d,
-	     char        *optionName,
-	     char        *optionValue,
-	     IniAction   *action)
-{
-    int type;
-
-    if (!findActionType (optionName, &type))
-	return FALSE; /* no action, exit the loop */
-
-    /* we have a new action */
-    if (!action->realOptionName)
-    {
-	char *optionType = strrchr (optionName, '_');
-	/* chars until the last "_" */
-	int len = strlen (optionName) - strlen (optionType);
-	
-	action->realOptionName = malloc (sizeof (char) * (len+1));
-	if (!action->realOptionName)
-	    return FALSE;
-
-	strncpy (action->realOptionName, optionName, len);
-	action->realOptionName[len] = '\0';
-
-	/* make sure all defaults are set */
-	action->a.type = 0;
-	action->a.key.keycode = 0;
-	action->a.key.modifiers = 0;
-	action->a.button.button = 0;
-	action->a.button.modifiers = 0;
-	action->a.bell = FALSE;
-	action->a.edgeMask = 0;
-	action->a.edgeButton = 0;
-	action->valueMasks = 0;
-    }
-    /* detect a new option (might happen when the options are incomplete) */
-    else if (action->valueMasks != ACTION_VALUES_ALL)
-    {
-	char *optionType = strrchr (optionName, '_');
-	/* chars until the last "_" */
-	int len = strlen (optionName) - strlen (optionType);
-	
-	char *realOptionName = malloc (sizeof (char) * (len+1));
-	strncpy (realOptionName, optionName, len);
-	realOptionName[len] = '\0';
-
-	if (strcmp (action->realOptionName, realOptionName) != 0)
-	{
-	    free (realOptionName);
-	    return FALSE;
-	}
-	
-	free (realOptionName);
-    }
-
-    int i, j;
-    CompListValue edges;
-    switch (type)
-    {
-	case ACTION_TYPE_KEY: 
-	    if (optionValue[0] != '\0' &&
-		strcasecmp (optionValue, "disabled") != 0 &&
-		stringToKeyBinding (d, optionValue, &action->a.key))
-		action->a.type |= CompBindingTypeKey;
-	    break;
-
-	case ACTION_TYPE_BUTTON:
-	    if (optionValue[0] != '\0' &&
-		strcasecmp (optionValue, "disabled") != 0 &&
-		stringToButtonBinding (d, optionValue, &action->a.button))
-		action->a.type |= CompBindingTypeButton;
-	    break;
-
-	case ACTION_TYPE_BELL:
-	    action->a.bell  = (Bool) atoi (optionValue);
-	    break;
-
-	case ACTION_TYPE_EDGE:
-	    if (optionValue[0] != '\0' &&
-		csvToList (optionValue, &edges, CompOptionTypeString))
-	    {
-		for (i = 0; i < edges.nValue; i++)
-		{
-		    for (j = 0; j < SCREEN_EDGE_NUM; j++)
-		    {
-			if (strcasecmp (edges.value[i].s, edgeToString(j)) == 0)
-			{
-			    action->a.edgeMask |= (1 << j);
-
-			    /* found corresponding mask, next value */
-			    break;
-			}
-		    }
-		}
-	    }
-	    break;
-
-	case ACTION_TYPE_EDGEBUTTON:
-	    action->a.edgeButton = atoi (optionValue);
-	    if (action->a.edgeButton != 0)
-		action->a.type |= CompBindingTypeEdgeButton;
-	    break;
-
-	default:
-	    break;
-    }
-
-    action->valueMasks |= actionValueMasks[type];
-
-    /* no need to read any further since all value are set */
-    if (action->valueMasks == ACTION_VALUES_ALL)
-	return FALSE;
-
-    return TRUE; /* continue loop, not finished parsing yet */
 }
 
 static Bool
@@ -682,13 +520,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    option = compGetDisplayOptions (d, &nOption);
     }
 
-    IniAction action;
-    action.realOptionName = NULL;
-    Bool continueReading;
     while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
     {
 	status = FALSE;
-	continueReading = FALSE;
 
 	if (!iniParseLine (tmp, &optionName, &optionValue))
 	{
@@ -725,8 +559,24 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		case CompOptionTypeColor:
 		    hasValue = stringToColor (optionValue, value.c);
 			break;
+		case CompOptionTypeKey:
+		    hasValue = TRUE;
+		    stringToKeyAction (d, optionValue, &value.action);
+		    break;
+		case CompOptionTypeButton:
+		    hasValue = TRUE;
+		    stringToButtonAction (d, optionValue, &value.action);
+		    break;
+		case CompOptionTypeEdge:
+		    hasValue = TRUE;
+		    value.action.edgeMask = stringToEdgeMask (optionValue);
+		    break;
+		case CompOptionTypeBell:
+		    hasValue = TRUE;
+		    value.action.bell = (Bool) atoi (optionValue);
+		    break;
 		case CompOptionTypeList:
-		    hasValue = csvToList (optionValue, &value.list, value.list.type);
+		    hasValue = csvToList (d, optionValue, &value.list, value.list.type);
 			break;
 		case CompOptionTypeMatch:
 		    hasValue = TRUE;
@@ -767,58 +617,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		}
 
 		nOptionRead++;
-	    }
-	    else
-	    {
-		/* an action has several values, so we need
-		   to read more then one line into our buffer */
-		continueReading = parseAction (d, optionName, optionValue, &action);
-	    }
-
-	    /* parsing action finished, write it */
-	    if (action.realOptionName &&
-		!continueReading)
-	    {
-		CompOption *realOption = compFindOption (option, nOption, action.realOptionName, 0);
-		if (realOption)
-		{
-		    value = realOption->value;
-
-		    value.action.type = action.a.type;
-		    value.action.key = action.a.key;
-		    value.action.button = action.a.button;
-		    value.action.bell = action.a.bell;
-		    value.action.edgeMask = action.a.edgeMask;
-		    value.action.edgeButton = action.a.edgeButton;
-
-		    if (plugin)
-		    {
-			if (s)
-			    status = (*s->setScreenOptionForPlugin) (s, plugin, action.realOptionName, &value);
-			else
-			    status = (*d->setDisplayOptionForPlugin) (d, plugin, action.realOptionName, &value);
-		    }
-		    else
-		    {
-			if (s)
-			    status = (*s->setScreenOption) (s, action.realOptionName, &value);
-			else
-			    status = (*d->setDisplayOption) (d, action.realOptionName, &value);
-		    }
-
-		    /* clear the buffer */
-		    free(action.realOptionName);
-		    action.realOptionName = NULL;
-
-		    /* we missed the current line because we exited it in the first call.
-		       we also need to check wether we have a incomplete options here,
-		       because otherwise parsing the last line again, would cause real
-		       trouble. ;-) */
-		    if (!o && action.valueMasks != ACTION_VALUES_ALL)
-		        parseAction (d, optionName, optionValue, &action);
-
-		    nOptionRead++;
-		}
 	    }
 	}
 
@@ -942,8 +740,12 @@ iniSaveOptions (CompDisplay *d,
 	case CompOptionTypeFloat:
 	case CompOptionTypeString:
 	case CompOptionTypeColor:
+	case CompOptionTypeKey:
+	case CompOptionTypeButton:
+	case CompOptionTypeEdge:
+	case CompOptionTypeBell:
 	case CompOptionTypeMatch:
-		strVal = iniOptionValueToString (&option->value, option->type);
+		strVal = iniOptionValueToString (d, &option->value, option->type);
 		if (strVal)
 		{
 		    fprintf (optionFile, "%s=%s\n", option->name, strVal);
@@ -952,46 +754,6 @@ iniSaveOptions (CompDisplay *d,
 		else
 		    fprintf (optionFile, "%s=\n", option->name);
 		break;
-	case CompOptionTypeAction:
-	    firstInList = TRUE;
-	    if (option->value.action.type & CompBindingTypeKey)
-		strVal = keyBindingToString (d, &option->value.action.key);
-	    else
-		strVal = strdup ("");
-	    fprintf (optionFile, "%s_%s=%s\n", option->name, "key", strVal);
-	    free (strVal);
-
-	    if (option->value.action.type & CompBindingTypeButton)
-		strVal = buttonBindingToString (d, &option->value.action.button);
-	    else
-		strVal = strdup ("");
-	    fprintf (optionFile, "%s_%s=%s\n", option->name, "button", strVal);
-	    free (strVal);
-
-	    fprintf (optionFile, "%s_%s=%i\n", option->name, "bell",
-		     option->value.action.bell);
-
-	    strVal = malloc (sizeof(char) * MAX_OPTION_LENGTH);
-	    strcpy (strVal, "");
-	    firstInList = TRUE;
-	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
-	    {
-		if (option->value.action.edgeMask & (1 << i))
-		{
-		    if (!firstInList)
-		    	strncat (strVal, ",", MAX_OPTION_LENGTH);
-		    firstInList = FALSE;
-
-		    strncat (strVal, edgeToString (i), MAX_OPTION_LENGTH);
-		}
-	    }
-	    fprintf (optionFile, "%s_%s=%s\n", option->name, "edge", strVal);
-	    free (strVal);
-
-	    fprintf (optionFile, "%s_%s=%i\n", option->name, "edgebutton",
-		     (option->value.action.type & CompBindingTypeEdgeButton) ?
-		     option->value.action.edgeButton : 0);
-  	    break;
 	case CompOptionTypeList:
 	    firstInList = TRUE;
 	    switch (option->value.list.type)
@@ -1017,7 +779,7 @@ iniSaveOptions (CompDisplay *d,
 
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
-		    itemVal = iniOptionValueToString (
+		    itemVal = iniOptionValueToString (d,
 						&option->value.list.value[i],
 						option->value.list.type);
 		    if (!firstInList)
@@ -1120,7 +882,7 @@ iniLoadOptions (CompDisplay *d,
 		return FALSE;
 	    }
 
-	    if (!csvToList (DEFAULT_PLUGINS,
+	    if (!csvToList (d, DEFAULT_PLUGINS,
 		            &value.list,
 		            CompOptionTypeString))
 	    {
