@@ -240,28 +240,47 @@ compSetActionOption (CompOption      *option,
     v.action.terminate = action->terminate;
     v.action.state     = action->state;
 
-    switch (option->type) {
-    case CompOptionTypeKey:
-	if (action->key.keycode   == v.action.key.keycode &&
-	    action->key.modifiers == v.action.key.modifiers)
+    if (action->type == v.action.type)
+    {
+	switch (option->type) {
+	case CompOptionTypeKey:
+	    if (!(action->type & CompBindingTypeKey))
+		return FALSE;
+
+	    if (action->key.keycode   == v.action.key.keycode &&
+		action->key.modifiers == v.action.key.modifiers)
+		return FALSE;
+	    break;
+	case CompOptionTypeButton:
+	    if (!(action->type & (CompBindingTypeButton |
+				  CompBindingTypeEdgeButton)))
+		return FALSE;
+
+	    if (action->type & CompBindingTypeEdgeButton)
+	    {
+		if (action->button.button    == v.action.button.button    &&
+		    action->button.modifiers == v.action.button.modifiers &&
+		    action->edgeMask         == v.action.edgeMask)
+		    return FALSE;
+	    }
+	    else if (action->type & CompBindingTypeButton)
+	    {
+		if (action->button.button    == v.action.button.button &&
+		    action->button.modifiers == v.action.button.modifiers)
+		    return FALSE;
+	    }
+	    break;
+	case CompOptionTypeEdge:
+	    if (v.action.edgeMask == action->edgeMask)
+		return FALSE;
+	    break;
+	case CompOptionTypeBell:
+	    if (v.action.bell == action->bell)
+		return FALSE;
+	    break;
+	default:
 	    return FALSE;
-	break;
-    case CompOptionTypeButton:
-	if (action->button.button    == v.action.button.button    &&
-	    action->button.modifiers == v.action.button.modifiers &&
-	    action->edgeMask         == v.action.edgeMask)
-	    return FALSE;
-	break;
-    case CompOptionTypeEdge:
-	if (v.action.edgeMask == action->edgeMask)
-	    return FALSE;
-	break;
-    case CompOptionTypeBell:
-	if (v.action.bell == action->bell)
-	    return FALSE;
-	break;
-    default:
-	return FALSE;
+	}
     }
 
     *action = v.action;
