@@ -312,9 +312,14 @@ triggerButtonPressBindings (CompDisplay *d,
 	    if (isInitiateBinding (option, CompBindingTypeEdgeButton,
 				   CompActionStateInitEdge, &action))
 	    {
-		if (action->edgeMask & edge)
+		if ((action->button.button == event->xbutton.button) &&
+		    (action->edgeMask & edge))
 		{
-		    if (action->edgeButton == event->xbutton.button)
+		    bindMods = virtualToRealModMask (d,
+						     action->button.modifiers);
+
+		    if ((bindMods & modMask) ==
+			(event->xbutton.state & modMask))
 			if ((*action->initiate) (d, action,
 						 CompActionStateInitEdge,
 						 argument, nArgument))
