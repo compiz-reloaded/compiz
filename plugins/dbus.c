@@ -1198,117 +1198,123 @@ dbusAppendSimpleOptionValue (CompDisplay     *display,
 }
 
 static void
-dbusAppendOptionValue (CompDisplay     *d,
-		       DBusMessage     *message,
-		       CompOptionType  type,
-		       CompOptionValue *value)
+dbusAppendListOptionValue (CompDisplay     *display,
+			   DBusMessage     *message,
+			   CompOptionType  type,
+			   CompOptionValue *value)
 {
-    int  i;
-    char *s;
+    DBusMessageIter iter;
+    DBusMessageIter listIter;
+    char	    sig[2];
+    char	    *s;
+    int		    i;
 
-    if (type == CompOptionTypeList)
+    switch (value->list.type) {
+    case CompOptionTypeInt:
+	sig[0] = DBUS_TYPE_INT32;
+	break;
+    case CompOptionTypeFloat:
+	sig[0] = DBUS_TYPE_DOUBLE;
+	break;
+    case CompOptionTypeBool:
+    case CompOptionTypeBell:
+	sig[0] = DBUS_TYPE_BOOLEAN;
+	break;
+    default:
+	sig[0] = DBUS_TYPE_STRING;
+	break;
+    }
+    sig[1] = '\0';
+
+    dbus_message_iter_init_append (message, &iter);
+    dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+				      sig, &listIter);
+
+    for (i = 0; i < value->list.nValue; i++)
     {
-	DBusMessageIter iter;
-	DBusMessageIter listIter;
-	char		sig[2];
-
-	switch (value->list.type)
-	{
+	switch (value->list.type) {
 	case CompOptionTypeInt:
-	    sig[0] = DBUS_TYPE_INT32;
-	    break;
-	case CompOptionTypeFloat:
-	    sig[0] = DBUS_TYPE_DOUBLE;
-	    break;
-	case CompOptionTypeBool:
-	case CompOptionTypeBell:
-	    sig[0] = DBUS_TYPE_BOOLEAN;
-	    break;
-	default:
-	    sig[0] = DBUS_TYPE_STRING;
-	    break;
-	}
-	sig[1] = '\0';
-
-	dbus_message_iter_init_append (message, &iter);
-	dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
-					  sig, &listIter);
-
-	for (i = 0; i < value->list.nValue; i++)
-	{
-	    switch (value->list.type)
-	    {
-	    case CompOptionTypeInt:
 	    dbus_message_iter_append_basic (&listIter,
 					    sig[0],
 					    &value->list.value[i].i);
-		break;
-	    case CompOptionTypeFloat:
+	    break;
+	case CompOptionTypeFloat:
 	    dbus_message_iter_append_basic (&listIter,
 					    sig[0],
 					    &value->list.value[i].f);
-		break;
-	    case CompOptionTypeBool:
+	    break;
+	case CompOptionTypeBool:
 	    dbus_message_iter_append_basic (&listIter,
 					    sig[0],
 					    &value->list.value[i].b);
-		break;
-	    case CompOptionTypeString:
+	    break;
+	case CompOptionTypeString:
 	    dbus_message_iter_append_basic (&listIter,
 					    sig[0],
 					    &value->list.value[i].s);
-		break;
-	    case CompOptionTypeKey:
-		s = keyActionToString (d, &value->list.value[i].action);
-		if (s)
-		{
-		    dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		    free (s);
-		}
-		break;
-	    case CompOptionTypeButton:
-		s = buttonActionToString (d, &value->list.value[i].action);
-		if (s)
-		{
-		    dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		    free (s);
-		}
-		break;
-	    case CompOptionTypeEdge:
-		s = edgeMaskToString (value->list.value[i].action.edgeMask);
-		if (s)
-		{
-		    dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		    free (s);
-		}
-		break;
-	    case CompOptionTypeBell:
-		dbus_message_iter_append_basic (&listIter,
-						sig[0],
-						&value->list.value[i].action.bell);
-		break;
-	    case CompOptionTypeMatch:
+	    break;
+	case CompOptionTypeKey:
+	    s = keyActionToString (display, &value->list.value[i].action);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+	    break;
+	case CompOptionTypeButton:
+	    s = buttonActionToString (display, &value->list.value[i].action);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+	    break;
+	case CompOptionTypeEdge:
+	    s = edgeMaskToString (value->list.value[i].action.edgeMask);
+	    if (s)
+	    {
+		dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		free (s);
+	    }
+	    break;
+	case CompOptionTypeBell:
+	    dbus_message_iter_append_basic (&listIter,
+					    sig[0],
+					    &value->list.value[i].action.bell);
+	    break;
+	case CompOptionTypeMatch:
 	    s = matchToString (&value->list.value[i].match);
 	    if (s)
 	    {
 		dbus_message_iter_append_basic (&listIter, sig[0], &s);
 		free (s);
 	    }
-		break;
-	    case CompOptionTypeColor:
+	    break;
+	case CompOptionTypeColor:
 	    s = colorToString (value->list.value[i].c);
 	    if (s)
 	    {
 		dbus_message_iter_append_basic (&listIter, sig[0], &s);
 		free (s);
 	    }
-		break;
-	    default:
-		break;
-	    }
+	    break;
+	default:
+	    break;
 	}
+    }
 
-	dbus_message_iter_close_container (&iter, &listIter);
+    dbus_message_iter_close_container (&iter, &listIter);
+}
+
+static void
+dbusAppendOptionValue (CompDisplay     *d,
+		       DBusMessage     *message,
+		       CompOptionType  type,
+		       CompOptionValue *value)
+{
+    if (type == CompOptionTypeList)
+    {
+	dbusAppendListOptionValue (d, message, type, value);
     }
     else
     {
