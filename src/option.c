@@ -232,33 +232,39 @@ Bool
 compSetActionOption (CompOption      *option,
 		     CompOptionValue *value)
 {
-    CompAction *action = &option->value.action;
+    CompAction	    *action = &option->value.action;
+    CompOptionValue v = *value;
+
+    /* initiate, terminate and state should never be changed */
+    v.action.initiate  = action->initiate;
+    v.action.terminate = action->terminate;
+    v.action.state     = action->state;
 
     switch (option->type) {
     case CompOptionTypeKey:
-	if (action->key.keycode   == value->action.key.keycode &&
-	    action->key.modifiers == value->action.key.modifiers)
+	if (action->key.keycode   == v.action.key.keycode &&
+	    action->key.modifiers == v.action.key.modifiers)
 	    return FALSE;
 	break;
     case CompOptionTypeButton:
-	if (action->button.button    == value->action.button.button    &&
-	    action->button.modifiers == value->action.button.modifiers &&
-	    action->edgeMask         == value->action.edgeMask)
+	if (action->button.button    == v.action.button.button    &&
+	    action->button.modifiers == v.action.button.modifiers &&
+	    action->edgeMask         == v.action.edgeMask)
 	    return FALSE;
 	break;
     case CompOptionTypeEdge:
-	if (value->action.edgeMask == action->edgeMask)
+	if (v.action.edgeMask == action->edgeMask)
 	    return FALSE;
 	break;
     case CompOptionTypeBell:
-	if (value->action.bell == action->bell)
+	if (v.action.bell == action->bell)
 	    return FALSE;
 	break;
     default:
 	return FALSE;
     }
 
-    *action = value->action;
+    *action = v.action;
 
     return TRUE;
 }
