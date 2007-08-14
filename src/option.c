@@ -521,8 +521,8 @@ getMatchOptionNamed (CompOption	*option,
 }
 
 static char *
-stringAppend (char *s,
-	      char *a)
+stringAppend (char	 *s,
+	      const char *a)
 {
     char *r;
     int  len;
@@ -826,11 +826,25 @@ unsigned int
 stringToEdgeMask (const char *edge)
 {
     unsigned int edgeMask = 0;
+    char	 *needle;
     int		 i;
 
     for (i = 0; i < SCREEN_EDGE_NUM; i++)
-	if (strstr (edge, edgeToString (i)))
+    {
+	needle = strstr (edge, edgeToString (i));
+	if (needle)
+	{
+	    if (needle != edge && isalnum (*(needle - 1)))
+		continue;
+
+	    needle += strlen (edgeToString (i));
+
+	    if (*needle && isalnum (*needle))
+		continue;
+
 	    edgeMask |= 1 << i;
+	}
+    }
 
     return edgeMask;
 }
@@ -845,22 +859,10 @@ edgeMaskToString (unsigned int edgeMask)
     {
 	if (edgeMask & (1 << i))
 	{
-	    if (!edge)
-	    {
-		edge = strdup (edgeToString (i));
-	    }
-	    else
-	    {
-		char *s;
+	    if (edge)
+		edge = stringAppend (edge, " | ");
 
-		s = malloc (strlen (edge) + strlen (edgeToString (i)) + 1);
-		if (s)
-		{
-		    sprintf (s, "%s | %s", edge, edgeToString (i));
-		    free (edge);
-		    edge = s;
-		}
-	    }
+	    edge = stringAppend (edge, edgeToString (i));
 	}
     }
 
