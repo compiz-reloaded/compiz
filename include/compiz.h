@@ -351,7 +351,6 @@ struct _CompAction {
     Bool bell;
 
     unsigned int edgeMask;
-    int		 edgeButton;
 
     CompPrivate priv;
 };
