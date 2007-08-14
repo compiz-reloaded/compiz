@@ -613,7 +613,8 @@ initButtonValue (CompDisplay     *d,
 
     memset (&v->action, 0, sizeof (v->action));
 
-    v->action.state = state | CompActionStateInitButton;
+    v->action.state = state | CompActionStateInitButton |
+	CompActionStateInitEdge;
 
     if (!doc)
 	return;
