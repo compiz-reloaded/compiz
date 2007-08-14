@@ -468,9 +468,6 @@ gconfGetOptionValue (CompDisplay *d,
 	    {
 		GConfValueType type;
 
-		value.list.value  = 0;
-		value.list.nValue = 0;
-
 		type = gconf_value_get_list_type (gvalue);
 		if (type == gconfTypeFromCompType (o->value.list.type))
 		{
