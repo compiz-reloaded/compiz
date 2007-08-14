@@ -927,6 +927,16 @@ char *
 optionTypeToString (CompOptionType type)
 {
     switch (type) {
+    case CompOptionTypeBool:
+	return "bool";
+    case CompOptionTypeInt:
+	return "int";
+    case CompOptionTypeFloat:
+	return "float";
+    case CompOptionTypeString:
+	return "string";
+    case CompOptionTypeColor:
+	return "color";
     case CompOptionTypeAction:
 	return "action";
     case CompOptionTypeKey:
@@ -939,16 +949,6 @@ optionTypeToString (CompOptionType type)
 	return "bell";
     case CompOptionTypeMatch:
 	return "match";
-    case CompOptionTypeBool:
-	return "bool";
-    case CompOptionTypeInt:
-	return "int";
-    case CompOptionTypeFloat:
-	return "float";
-    case CompOptionTypeString:
-	return "string";
-    case CompOptionTypeColor:
-	return "color";
     case CompOptionTypeList:
 	return "list";
     }
