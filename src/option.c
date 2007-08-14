@@ -229,34 +229,28 @@ compSetActionOption (CompOption      *option,
 {
     CompAction *action = &option->value.action;
 
-    if (value->action.type     == action->type &&
-	value->action.bell     == action->bell &&
-	value->action.edgeMask == action->edgeMask)
-    {
-	Bool equal = TRUE;
-
-	if (value->action.type & CompBindingTypeButton)
-	{
-	    if (action->button.button    != value->action.button.button ||
-		action->button.modifiers != value->action.button.modifiers)
-		equal = FALSE;
-	}
-
-	if (value->action.type & CompBindingTypeKey)
-	{
-	    if (action->key.keycode   != value->action.key.keycode ||
-		action->key.modifiers != value->action.key.modifiers)
-		equal = FALSE;
-	}
-
-	if (value->action.type & CompBindingTypeEdgeButton)
-	{
-	    if (action->edgeButton != value->action.edgeButton)
-		equal = FALSE;
-	}
-
-	if (equal)
+    switch (option->type) {
+    case CompOptionTypeKey:
+	if (action->key.keycode   == value->action.key.keycode &&
+	    action->key.modifiers == value->action.key.modifiers)
 	    return FALSE;
+	break;
+    case CompOptionTypeButton:
+	if (action->button.button    == value->action.button.button    &&
+	    action->button.modifiers == value->action.button.modifiers &&
+	    action->edgeMask         == value->action.edgeMask)
+	    return FALSE;
+	break;
+    case CompOptionTypeEdge:
+	if (value->action.edgeMask == action->edgeMask)
+	    return FALSE;
+	break;
+    case CompOptionTypeBell:
+	if (value->action.bell == action->bell)
+	    return FALSE;
+	break;
+    default:
+	return FALSE;
     }
 
     *action = value->action;
