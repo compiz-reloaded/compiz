@@ -56,14 +56,6 @@ static CompMetadata dbusMetadata;
 #define DBUS_FILE_WATCH_HOME    2
 #define DBUS_FILE_WATCH_NUM     3
 
-typedef enum {
-    DbusActionIndexKeyBinding    = 0,
-    DbusActionIndexButtonBinding = 1,
-    DbusActionIndexBell          = 2,
-    DbusActionIndexEdge          = 3,
-    DbusActionIndexEdgeButton    = 4
-} DbusActionIndex;
-
 static int displayPrivateIndex;
 
 typedef struct _DbusDisplay {
@@ -504,7 +496,7 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
     CompOption       *option;
     int              nOptions;
     CompOptionType   restrictionType;
-    Bool             getHandled, metadataHandled;
+    Bool             metadataHandled;
     char             type[3];
     xmlTextWriterPtr writer;
     xmlBufferPtr     buf;
@@ -535,7 +527,7 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
 		isList = TRUE;
 	    }
 
-	    getHandled = metadataHandled = FALSE;
+	    metadataHandled = FALSE;
 	    switch (restrictionType)
 	    {
 	    case CompOptionTypeInt:
@@ -579,26 +571,17 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
 		metadataHandled = TRUE;
 		break;
 	    case CompOptionTypeBool:
+	    case CompOptionTypeBell:
 		if (isList)
 		    strcpy (type, "ab");
 		else
 		    strcpy (type, "b");
 
 		break;
-	    case CompOptionTypeAction:
-		dbusIntrospectAddMethod (writer, COMPIZ_DBUS_GET_MEMBER_NAME,
-					    5, "s", "out", "s", "out",
-					    "b", "out", "s", "out", "i", "out");
-		dbusIntrospectAddMethod (writer, COMPIZ_DBUS_SET_MEMBER_NAME,
-					    5, "s", "in", "s", "in",
-					    "b", "in", "s", "in", "i", "in");
-		dbusIntrospectAddSignal (writer,
-					 COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 5,
-					 "s", "out", "s", "out", "b", "out",
-					 "s", "out", "i", "out");
-		getHandled = TRUE;
-		break;
 	    case CompOptionTypeColor:
+	    case CompOptionTypeKey:
+	    case CompOptionTypeButton:
+	    case CompOptionTypeEdge:
 	    case CompOptionTypeMatch:
 		if (isList)
 		    strcpy (type, "as");
@@ -609,18 +592,15 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
 		break;
 	    }
 
-	    if (!getHandled)
-	    {
-		dbusIntrospectAddMethod (writer,
-					 COMPIZ_DBUS_GET_MEMBER_NAME, 1,
-					 type, "out");
-		dbusIntrospectAddMethod (writer,
-					 COMPIZ_DBUS_SET_MEMBER_NAME, 1,
-					 type, "in");
-		dbusIntrospectAddSignal (writer,
-					 COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 1,
-					 type, "out");
-	    }
+	    dbusIntrospectAddMethod (writer,
+				     COMPIZ_DBUS_GET_MEMBER_NAME, 1,
+				     type, "out");
+	    dbusIntrospectAddMethod (writer,
+				     COMPIZ_DBUS_SET_MEMBER_NAME, 1,
+				     type, "in");
+	    dbusIntrospectAddSignal (writer,
+				     COMPIZ_DBUS_CHANGED_SIGNAL_NAME, 1,
+				     type, "out");
 
 	    if (!metadataHandled)
 		dbusIntrospectAddMethod (writer,
@@ -721,7 +701,7 @@ dbusHandleActionMessage (DBusConnection *connection,
 	    int		    i, nArgument = 0;
 	    DBusMessageIter iter;
 
-	    if (option->type != CompOptionTypeAction)
+	    if (!isActionOption (option))
 		return FALSE;
 
 	    if (activate)
@@ -893,7 +873,8 @@ dbusTryGetValueWithType (DBusMessageIter *iter,
 }
 
 static Bool
-dbusGetOptionValue (DBusMessageIter *iter,
+dbusGetOptionValue (CompDisplay	    *display,
+		    DBusMessageIter *iter,
 		    CompOptionType  type,
 		    CompOptionValue *value)
 {
@@ -933,6 +914,38 @@ dbusGetOptionValue (DBusMessageIter *iter,
 	    if (stringToColor (s, value->c))
 		return TRUE;
 	}
+	break;
+    case CompOptionTypeKey:
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_STRING,
+				     &s))
+	{
+	    stringToKeyAction (display, s, &value->action);
+	    return TRUE;
+	}
+	break;
+    case CompOptionTypeButton:
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_STRING,
+				     &s))
+	{
+	    stringToButtonAction (display, s, &value->action);
+	    return TRUE;
+	}
+	break;
+    case CompOptionTypeEdge:
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_STRING,
+				     &s))
+	{
+	    value->action.edgeMask = stringToEdgeMask (s);
+	    return TRUE;
+	}
+	break;
+    case CompOptionTypeBell:
+	return dbusTryGetValueWithType (iter,
+					DBUS_TYPE_BOOLEAN,
+					&value->action.bell);
 	break;
     case CompOptionTypeMatch:
 	if (dbusTryGetValueWithType (iter,
@@ -1018,7 +1031,8 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 
 		    do
 		    {
-			if (dbusGetOptionValue (&aiter,
+			if (dbusGetOptionValue (d,
+						&aiter,
 						option->value.list.type,
 						&tmpValue))
 			{
@@ -1040,94 +1054,7 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 	    }
 	    else if (dbus_message_iter_init (message, &iter))
 	    {
-		DbusActionIndex	actionIndex = DbusActionIndexKeyBinding;
-
-		do
-		{
-		    if (option->type == CompOptionTypeAction)
-		    {
-			CompAction *a = &value.action;
-			char	   *str;
-
-			status = TRUE;
-
-			switch (actionIndex) {
-			case DbusActionIndexKeyBinding:
-			    if (dbusTryGetValueWithType (&iter,
-							 DBUS_TYPE_STRING,
-							 &str))
-			    {
-				if (stringToKeyBinding (d, str, &a->key))
-				    a->type |= CompBindingTypeKey;
-			    }
-			    break;
-			case DbusActionIndexButtonBinding:
-			    if (dbusTryGetValueWithType (&iter,
-							 DBUS_TYPE_STRING,
-							 &str))
-			    {
-				if (stringToButtonBinding (d, str, &a->button))
-				    a->type |= CompBindingTypeButton;
-			    }
-			    break;
-			case DbusActionIndexBell:
-			    dbusTryGetValueWithType (&iter,
-						     DBUS_TYPE_BOOLEAN,
-						     &a->bell);
-			    break;
-			case DbusActionIndexEdge:
-			    if (dbusTryGetValueWithType (&iter,
-							 DBUS_TYPE_STRING,
-							 &str))
-			    {
-				status |= TRUE;
-
-				while (strlen (str))
-				{
-				    char *edge;
-				    int  len, i = SCREEN_EDGE_NUM;
-
-				    for (;;)
-				    {
-					edge = edgeToString (--i);
-					len  = strlen (edge);
-
-					if (strncasecmp (str, edge, len) == 0)
-					{
-					    a->edgeMask |= 1 << i;
-
-					    str += len;
-					    break;
-					}
-
-					if (!i)
-					{
-					    str++;
-					    break;
-					}
-				    }
-				}
-			    }
-			    break;
-			case DbusActionIndexEdgeButton:
-			    if (dbusTryGetValueWithType (&iter,
-							 DBUS_TYPE_INT32,
-							 &a->edgeButton))
-			    {
-				if (a->edgeButton)
-				    a->type |= CompBindingTypeEdgeButton;
-			    }
-			default:
-			    break;
-			}
-
-			actionIndex++;
-		    }
-		    else if (dbusGetOptionValue (&iter, option->type, &value))
-		    {
-			status |= TRUE;
-		    }
-		} while (dbus_message_iter_next (&iter));
+		status = dbusGetOptionValue (d, &iter, option->type, &value);
 	    }
 
 	    if (status)
@@ -1180,7 +1107,8 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 }
 
 static void
-dbusAppendSimpleOptionValue (DBusMessage     *message,
+dbusAppendSimpleOptionValue (CompDisplay     *display,
+			     DBusMessage     *message,
 			     CompOptionType  type,
 			     CompOptionValue *value)
 {
@@ -1220,6 +1148,41 @@ dbusAppendSimpleOptionValue (DBusMessage     *message,
 	    free (s);
 	}
 	break;
+    case CompOptionTypeKey:
+	s = keyActionToString (display, &value->action);
+	if (s)
+	{
+	    dbus_message_append_args (message,
+				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_INVALID);
+	    free (s);
+	}
+	break;
+    case CompOptionTypeButton:
+	s = buttonActionToString (display, &value->action);
+	if (s)
+	{
+	    dbus_message_append_args (message,
+				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_INVALID);
+	    free (s);
+	}
+	break;
+    case CompOptionTypeEdge:
+	s = edgeMaskToString (value->action.edgeMask);
+	if (s)
+	{
+	    dbus_message_append_args (message,
+				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_INVALID);
+	    free (s);
+	}
+	break;
+    case CompOptionTypeBell:
+	dbus_message_append_args (message,
+				  DBUS_TYPE_BOOLEAN, &value->action.bell,
+				  DBUS_TYPE_INVALID);
+	break;
     case CompOptionTypeMatch:
 	s = matchToString (&value->match);
 	if (s)
@@ -1258,6 +1221,7 @@ dbusAppendOptionValue (CompDisplay     *d,
 	    sig[0] = DBUS_TYPE_DOUBLE;
 	    break;
 	case CompOptionTypeBool:
+	case CompOptionTypeBell:
 	    sig[0] = DBUS_TYPE_BOOLEAN;
 	    break;
 	default:
@@ -1294,6 +1258,35 @@ dbusAppendOptionValue (CompDisplay     *d,
 					    sig[0],
 					    &value->list.value[i].s);
 		break;
+	    case CompOptionTypeKey:
+		s = keyActionToString (d, &value->list.value[i].action);
+		if (s)
+		{
+		    dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		    free (s);
+		}
+		break;
+	    case CompOptionTypeButton:
+		s = buttonActionToString (d, &value->list.value[i].action);
+		if (s)
+		{
+		    dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		    free (s);
+		}
+		break;
+	    case CompOptionTypeEdge:
+		s = edgeMaskToString (value->list.value[i].action.edgeMask);
+		if (s)
+		{
+		    dbus_message_iter_append_basic (&listIter, sig[0], &s);
+		    free (s);
+		}
+		break;
+	    case CompOptionTypeBell:
+		dbus_message_iter_append_basic (&listIter,
+						sig[0],
+						&value->list.value[i].action.bell);
+		break;
 	    case CompOptionTypeMatch:
 	    s = matchToString (&value->list.value[i].match);
 	    if (s)
@@ -1317,81 +1310,10 @@ dbusAppendOptionValue (CompDisplay     *d,
 
 	dbus_message_iter_close_container (&iter, &listIter);
     }
-    else if (type == CompOptionTypeAction)
-    {
-	CompAction *a = &value->action;
-	char	   *key = "Disabled";
-	char	   *button = "Disabled";
-	char	   *edge = "";
-	char	   *keyValue = NULL;
-	char	   *buttonValue = NULL;
-	char	   *edgeValue = NULL;
-	int	   edgeButton = 0;
-
-	if (a->type & CompBindingTypeKey)
-	{
-	    keyValue = keyBindingToString (d, &a->key);
-	    if (keyValue)
-		key = keyValue;
-	}
-
-	if (a->type & CompBindingTypeButton)
-	{
-	    buttonValue = buttonBindingToString (d, &a->button);
-	    if (buttonValue)
-		button = buttonValue;
-	}
-
-	for (i = 0; i < SCREEN_EDGE_NUM; i++)
-	{
-	    if (a->edgeMask & (1 << i))
-	    {
-		if (strlen (edge))
-		{
-		    char *e;
-
-		    e = malloc (strlen (edge) + strlen (edgeToString (i)) + 2);
-		    if (e)
-		    {
-			sprintf (e, "%s,%s", edge, edgeToString (i));
-			if (edgeValue)
-			    free (edgeValue);
-
-			edge = edgeValue = e;
-		    }
-		}
-		else
-		{
-		    edge = edgeToString (i);
-		}
-	    }
-	}
-
-	if (a->type & CompBindingTypeEdgeButton)
-	    edgeButton = a->edgeButton;
-
-	dbus_message_append_args (message,
-				  DBUS_TYPE_STRING, &key,
-				  DBUS_TYPE_STRING, &button,
-				  DBUS_TYPE_BOOLEAN, &a->bell,
-				  DBUS_TYPE_STRING, &edge,
-				  DBUS_TYPE_INT32, &edgeButton,
-				  DBUS_TYPE_INVALID);
-
-	if (keyValue)
-	    free (keyValue);
-
-	if (buttonValue)
-	    free (buttonValue);
-
-	if (edgeValue)
-	    free (edgeValue);
-    }
     else
     {
-	dbusAppendSimpleOptionValue (message, type, value);
+	dbusAppendSimpleOptionValue (d, message, type, value);
     }
-
 }
 
 /*
