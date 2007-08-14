@@ -165,12 +165,16 @@
 	    <option name="rotate_flip_left_edge" type="edge">
 		<_short>Rotate Flip Left</_short>
 		<_long>Flip to left viewport and warp pointer</_long>
-		<default>Left</default>
+		<default>
+		  <edge name="Left"/>
+		</default>
 	    </option>
 	    <option name="rotate_flip_right_edge" type="edge">
 		<_short>Rotate Flip Right</_short>
 		<_long>Flip to right viewport and warp pointer</_long>
-		<default>Right</default>
+		<default>
+		  <edge name="Right"/>
+		</default>
 	    </option>
 	    <option name="raise_on_rotate" type="bool">
 		<_short>Raise on rotate</_short>

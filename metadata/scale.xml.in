@@ -9,7 +9,9 @@
 	    <option name="initiate_edge" type="edge">
 		<_short>Initiate Window Picker</_short>
 		<_long>Layout and start transforming windows</_long>
-		<default>TopRight</default>
+		<default>
+		  <edge name="TopRight"/>
+		</default>
 	    </option>
 	    <option name="initiate_key" type="key">
 		<_short>Initiate Window Picker</_short>

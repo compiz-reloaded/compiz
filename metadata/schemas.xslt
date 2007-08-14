@@ -61,6 +61,11 @@
             </xsl:choose>
           </default>
         </xsl:when>
+        <xsl:when test="@type = 'edge'">
+          <default>
+            <xsl:call-template name="printEdgeList"/>
+          </default>
+        </xsl:when>
         <xsl:when test="@type = 'list'">
           <list_type>
             <xsl:call-template name="printType">
@@ -362,18 +367,14 @@
   </xsl:template>
 
   <!-- generates a list of selected edges -->
-  <xsl:template name="getEdgeList">
+  <xsl:template name="printEdgeList">
     <xsl:variable name="list">
-      <xsl:if test="default/edges[@left = 'true']">Left,</xsl:if>
-      <xsl:if test="default/edges[@right = 'true']">Right,</xsl:if>
-      <xsl:if test="default/edges[@top = 'true']">Top,</xsl:if>
-      <xsl:if test="default/edges[@bottom = 'true']">Bottom,</xsl:if>
-      <xsl:if test="default/edges[@top_left = 'true']">TopLeft,</xsl:if>
-      <xsl:if test="default/edges[@top_right = 'true']">TopRight,</xsl:if>
-      <xsl:if test="default/edges[@bottom_left = 'true']">BottomLeft,</xsl:if>
-      <xsl:if test="default/edges[@bottom_right = 'true']">BottomRight,</xsl:if>
+      <xsl:for-each select="default/edge">
+        <xsl:value-of select="@name"/>
+        <xsl:text> | </xsl:text>
+      </xsl:for-each>
     </xsl:variable>
-    <xsl:value-of select="substring($list,1,string-length($list) - 1)"/>
+    <xsl:value-of select="substring($list,1,string-length($list) - 3)"/>
   </xsl:template>
 
   <!-- prints the key path for an option -->
