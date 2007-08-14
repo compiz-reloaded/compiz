@@ -31,7 +31,7 @@
   <xsl:template  match="/compiz">
     <gconfschemafile>
       <schemalist>
-        <xsl:for-each select="/compiz//option[not(@read_only='true')]">
+        <xsl:for-each select="/compiz//option[not(@read_only='true') and not(@type='action')]">
           <xsl:call-template name="dumpOption"/>
         </xsl:for-each>
       </schemalist>
@@ -40,173 +40,76 @@
 
   <!-- generates the schema for an option -->
   <xsl:template name="dumpOption">
-    <xsl:choose>
-      <!-- for action types we need to generate _key,_button,_edge,
-          _edgebutton and _bell option types (if needed) -->
-      <xsl:when test="@type = 'action'">
-        <xsl:if test="allowed/@key = 'true'">
-          <schema>
-            <key>/schemas<xsl:call-template name="printKey"/>_key</key>
-            <applyto><xsl:call-template name="printKey"/>_key</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
+    <schema>
+      <key>/schemas<xsl:call-template name="printKey"/></key>
+      <applyto><xsl:call-template name="printKey"/></applyto>
+      <owner>compiz</owner>
+      <type><xsl:call-template name="printType"/></type>
+      <xsl:choose>
+        <!-- color values need a special handling -->
+        <xsl:when test="@type = 'color'">
+          <default>
             <xsl:choose>
-              <xsl:when test="default/key/text()">
-                <default><xsl:value-of select="default/key/text()"/></default>
+              <xsl:when test="default">
+                <xsl:for-each select="default[1]">
+                  <xsl:call-template name="printColor"/>
+                </xsl:for-each>
               </xsl:when>
               <xsl:otherwise>
-                <default>Disabled</default>
+                <xsl:text>#000000ff</xsl:text>
               </xsl:otherwise>
             </xsl:choose>
-            <xsl:call-template name="printDescription"/>
-          </schema>
-        </xsl:if>
-        <xsl:if test="allowed/@button = 'true'">
-          <schema>
-            <key>/schemas<xsl:call-template name="printKey"/>_button</key>
-            <applyto><xsl:call-template name="printKey"/>_button</applyto>
-            <owner>compiz</owner>
-            <type>string</type>
-            <xsl:choose>
-              <xsl:when test="default/button/text()">
-                <default><xsl:value-of select="default/button/text()"/></default>
-              </xsl:when>
-              <xsl:otherwise>
-                <default>Disabled</default>
-              </xsl:otherwise>
-            </xsl:choose>
-            <xsl:call-template name="printDescription"/>
-          </schema>
-        </xsl:if>
-        <xsl:if test="allowed/@edge = 'true'">
-          <schema>
-            <key>/schemas<xsl:call-template name="printKey"/>_edge</key>
-            <applyto><xsl:call-template name="printKey"/>_edge</applyto>
-            <owner>compiz</owner>
-            <type>list</type>
-            <list_type>string</list_type>
-            <xsl:choose>
-              <xsl:when test="default/edges">
-                <default>[<xsl:call-template name="getEdgeList"/>]</default>
-              </xsl:when>
-              <xsl:otherwise>
-                <default>[]</default>
-              </xsl:otherwise>
-            </xsl:choose>
-            <xsl:call-template name="printDescription">
-              <xsl:with-param name="info">
-                <xsl:text> (Top, Bottom, Left, Right, TopLeft, </xsl:text>
-                <xsl:text>TopRight, BottomLeft, BottomRight)</xsl:text>
-              </xsl:with-param>
+          </default>
+        </xsl:when>
+        <xsl:when test="@type = 'list'">
+          <list_type>
+            <xsl:call-template name="printType">
+              <xsl:with-param name="type" select="type/text()"/>
             </xsl:call-template>
-          </schema>
-          <schema>
-            <key>/schemas<xsl:call-template name="printKey"/>_edgebutton</key>
-            <applyto><xsl:call-template name="printKey"/>_edgebutton</applyto>
-            <owner>compiz</owner>
-            <type>int</type>
-            <xsl:choose>
-              <xsl:when test="default/edges/@button">
-                <default><xsl:value-of select="default/edges/@button"/></default>
-              </xsl:when>
-              <xsl:otherwise>
-                <default>0</default>
-              </xsl:otherwise>
-            </xsl:choose>
-            <xsl:call-template name="printDescription"/>
-          </schema>
-        </xsl:if>
-        <xsl:if test="allowed/@bell = 'true'">
-          <schema>
-            <key>/schemas<xsl:call-template name="printKey"/>_bell</key>
-            <applyto><xsl:call-template name="printKey"/>_bell</applyto>
-            <owner>compiz</owner>
-            <type>bool</type>
-            <xsl:choose>
-              <xsl:when test="default/bell/text()">
-                <default><xsl:value-of select="default/bell/text()"/></default>
-              </xsl:when>
-              <xsl:otherwise>
-                <default>false</default>
-              </xsl:otherwise>
-            </xsl:choose>
-            <xsl:call-template name="printDescription"/>
-          </schema>
-        </xsl:if>
-      </xsl:when>
-      <xsl:otherwise>
-        <schema>
-          <key>/schemas<xsl:call-template name="printKey"/></key>
-          <applyto><xsl:call-template name="printKey"/></applyto>
-          <owner>compiz</owner>
-          <type><xsl:call-template name="printType"/></type>
+          </list_type>
           <xsl:choose>
-            <!-- color values need a special handling -->
-            <xsl:when test="@type = 'color'">
-              <default>
-                <xsl:choose>
-                  <xsl:when test="default">
-                    <xsl:for-each select="default[1]">
-                      <xsl:call-template name="printColor"/>
-                    </xsl:for-each>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:text>#000000ff</xsl:text>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </default>
+            <xsl:when test="type/text() = 'color'">
+              <default>[<xsl:call-template name="printColorList"/>]</default>
             </xsl:when>
-            <xsl:when test="@type = 'list'">
-              <list_type>
-                <xsl:call-template name="printType">
-                  <xsl:with-param name="type" select="type/text()"/>
-                </xsl:call-template>
-              </list_type>
-              <xsl:choose>
-                <xsl:when test="type/text() = 'color'">
-                  <default>[<xsl:call-template name="printColorList"/>]</default>
-                </xsl:when>
-                <xsl:otherwise>
-                  <default>[<xsl:call-template name="printValueList"/>]</default>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:when>
-            <!-- for most option types we can use the default value directly -->
             <xsl:otherwise>
-              <default>
-                <xsl:choose>
-                  <xsl:when test="default/text()">
-                    <xsl:value-of select="default/text()"/>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <!-- if no default value was specified we need to generate one -->
-                    <xsl:choose>
-		      <xsl:when test="contains('bool,bell',@type)">
-                        <xsl:text>false</xsl:text>
-                      </xsl:when>
-                      <xsl:when test="@type = 'int'">
-                        <xsl:variable name="num">
-                          <xsl:call-template name="printNumFallback"/>
-                        </xsl:variable>
-                        <xsl:value-of select="floor($num)"/>
-                      </xsl:when>
-                      <xsl:when test="@type = 'float'">
-                        <xsl:call-template name="printNumFallback"/>
-                      </xsl:when>
-		      <xsl:when test="contains('key,button',@type)">
-			<xsl:text>Disabled</xsl:text>
-                      </xsl:when>
-                    </xsl:choose>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </default>
-	    </xsl:otherwise>
+              <default>[<xsl:call-template name="printValueList"/>]</default>
+            </xsl:otherwise>
           </xsl:choose>
-          <!-- add the short and long descriptions -->
-          <xsl:call-template name="printDescription"/>
-        </schema>
-      </xsl:otherwise>
-    </xsl:choose>
+        </xsl:when>
+        <!-- for most option types we can use the default value directly -->
+        <xsl:otherwise>
+          <default>
+            <xsl:choose>
+              <xsl:when test="default/text()">
+                <xsl:value-of select="default/text()"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <!-- if no default value was specified we need to generate one -->
+                <xsl:choose>
+		  <xsl:when test="contains('bool,bell',@type)">
+                    <xsl:text>false</xsl:text>
+                  </xsl:when>
+                  <xsl:when test="@type = 'int'">
+                    <xsl:variable name="num">
+                      <xsl:call-template name="printNumFallback"/>
+                    </xsl:variable>
+                    <xsl:value-of select="floor($num)"/>
+                  </xsl:when>
+                  <xsl:when test="@type = 'float'">
+                    <xsl:call-template name="printNumFallback"/>
+                  </xsl:when>
+		  <xsl:when test="contains('key,button',@type)">
+		    <xsl:text>Disabled</xsl:text>
+                  </xsl:when>
+                </xsl:choose>
+              </xsl:otherwise>
+            </xsl:choose>
+          </default>
+	</xsl:otherwise>
+      </xsl:choose>
+      <!-- add the short and long descriptions -->
+      <xsl:call-template name="printDescription"/>
+    </schema>
   </xsl:template>
 
   <!-- converts a compiz type to a gconf type -->
