@@ -42,13 +42,19 @@ static CompMetadata switchMetadata;
 
 static int displayPrivateIndex;
 
-#define SWITCH_DISPLAY_OPTION_NEXT_KEY	        0
-#define SWITCH_DISPLAY_OPTION_PREV_KEY	        1
-#define SWITCH_DISPLAY_OPTION_NEXT_ALL_KEY	2
-#define SWITCH_DISPLAY_OPTION_PREV_ALL_KEY	3
-#define SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP_KEY 4
-#define SWITCH_DISPLAY_OPTION_PREV_NO_POPUP_KEY 5
-#define SWITCH_DISPLAY_OPTION_NUM	        6
+#define SWITCH_DISPLAY_OPTION_NEXT_BUTTON          0
+#define SWITCH_DISPLAY_OPTION_NEXT_KEY	           1
+#define SWITCH_DISPLAY_OPTION_PREV_BUTTON	   2
+#define SWITCH_DISPLAY_OPTION_PREV_KEY	           3
+#define SWITCH_DISPLAY_OPTION_NEXT_ALL_BUTTON	   4
+#define SWITCH_DISPLAY_OPTION_NEXT_ALL_KEY	   5
+#define SWITCH_DISPLAY_OPTION_PREV_ALL_BUTTON	   6
+#define SWITCH_DISPLAY_OPTION_PREV_ALL_KEY	   7
+#define SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP_BUTTON 8
+#define SWITCH_DISPLAY_OPTION_NEXT_NO_POPUP_KEY    9
+#define SWITCH_DISPLAY_OPTION_PREV_NO_POPUP_BUTTON 10
+#define SWITCH_DISPLAY_OPTION_PREV_NO_POPUP_KEY    11
+#define SWITCH_DISPLAY_OPTION_NUM	           12
 
 typedef struct _SwitchDisplay {
     int		    screenPrivateIndex;
@@ -1833,11 +1839,19 @@ switchSetDisplayOption (CompPlugin      *plugin,
 }
 
 static const CompMetadataOptionInfo switchDisplayOptionInfo[] = {
+    { "next_button", "button", 0, switchNext, switchTerminate },
     { "next_key", "key", 0, switchNext, switchTerminate },
+    { "prev_button", "button", 0, switchPrev, switchTerminate },
     { "prev_key", "key", 0, switchPrev, switchTerminate },
+    { "next_all_button", "button", 0, switchNextAll, switchTerminate },
     { "next_all_key", "key", 0, switchNextAll, switchTerminate },
+    { "prev_all_button", "button", 0, switchPrevAll, switchTerminate },
     { "prev_all_key", "key", 0, switchPrevAll, switchTerminate },
+    { "next_no_popup_button", "button", 0, switchNextNoPopup,
+      switchTerminate },
     { "next_no_popup_key", "key", 0, switchNextNoPopup, switchTerminate },
+    { "prev_no_popup_button", "button", 0, switchPrevNoPopup,
+      switchTerminate },
     { "prev_no_popup_key", "key", 0, switchPrevNoPopup, switchTerminate }
 };
 
