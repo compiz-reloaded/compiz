@@ -130,6 +130,9 @@
       <xsl:when test="$type = 'list'">
         <xsl:text>list</xsl:text>
       </xsl:when>
+      <xsl:when test="$type = 'bell'">
+        <xsl:text>bool</xsl:text>
+      </xsl:when>
       <xsl:otherwise>
         <xsl:text>string</xsl:text>
       </xsl:otherwise>
