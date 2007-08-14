@@ -669,33 +669,6 @@ fuseInitValueFromString (CompDisplay	 *display,
 }
 
 static void
-fuseFiniValue (CompOptionValue *value,
-	       CompOptionType  type)
-{
-    int i;
-
-    switch (type) {
-    case CompOptionTypeString:
-	if (value->s)
-	    free (value->s);
-	break;
-    case CompOptionTypeMatch:
-	matchFini (&value->match);
-	break;
-    case CompOptionTypeList:
-	if (value->list.nValue)
-	{
-	    for (i = 0; i < value->list.nValue; i++)
-		fuseFiniValue (&value->list.value[i], value->list.type);
-
-	    free (value->list.value);
-	}
-    default:
-	break;
-    }
-}
-
-static void
 fuseSetInodeOptionUsingString (CompDisplay *d,
 			       FuseInode   *inode,
 			       char	   *str)
@@ -758,7 +731,7 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	    /* failed */
 	    if (value.list.nValue < nValue)
 	    {
-		fuseFiniValue (&value, option->type);
+		compFiniOptionValue (&value, option->type);
 		return;
 	    }
 
