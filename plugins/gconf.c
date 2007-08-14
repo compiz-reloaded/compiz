@@ -100,7 +100,6 @@ gconfTypeFromCompType (CompOptionType type)
 	return GCONF_VALUE_FLOAT;
     case CompOptionTypeString:
     case CompOptionTypeColor:
-    case CompOptionTypeAction:
     case CompOptionTypeKey:
     case CompOptionTypeButton:
     case CompOptionTypeEdge:
@@ -183,34 +182,6 @@ gconfSetValue (CompDisplay     *d,
 }
 
 static void
-gconfSetActionValue (CompDisplay     *d,
-		     CompOptionValue *value,
-		     CompOptionType  type,
-		     GConfValue      *gvalue,
-		     CompBindingType bindingType)
-{
-    char *binding = NULL;
-
-    if (bindingType == CompBindingTypeKey)
-    {
-	if (value->action.type & CompBindingTypeKey)
-	    binding = keyBindingToString (d, &value->action.key);
-    }
-    else
-    {
-	if (value->action.type & CompBindingTypeButton)
-	    binding = buttonBindingToString (d, &value->action.button);
-    }
-
-    if (!binding)
-	binding = strdup ("Disabled");
-
-    gconf_value_set_string (gvalue, binding);
-
-    free (binding);
-}
-
-static void
 gconfSetOption (CompDisplay *d,
 		CompOption  *o,
 		const gchar *screen,
@@ -250,99 +221,6 @@ gconfSetOption (CompDisplay *d,
 	    gconf_client_set (gd->client, key, gvalue, NULL);
 	gconf_value_free (gvalue);
 	break;
-    case CompOptionTypeAction: {
-	gchar	   *key1, *key2, *key3, *key4, *key5;
-	GSList     *node, *list = NULL;
-	GConfValue *gv;
-	int	   i;
-
-	key1 = g_strdup_printf ("%s_%s", key, "key");
-	key2 = g_strdup_printf ("%s_%s", key, "button");
-	key3 = g_strdup_printf ("%s_%s", key, "bell");
-	key4 = g_strdup_printf ("%s_%s", key, "edge");
-	key5 = g_strdup_printf ("%s_%s", key, "edgebutton");
-
-	gvalue = gconf_value_new (GCONF_VALUE_STRING);
-
-	gconfSetActionValue (d, &o->value, o->type, gvalue,
-			     CompBindingTypeKey);
-
-	existingValue = gconf_client_get (gd->client, key1, NULL);
-	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key1, gvalue, NULL);
-
-	if (existingValue)
-	    gconf_value_free (existingValue);
-
-	gconfSetActionValue (d, &o->value, o->type, gvalue,
-			     CompBindingTypeButton);
-
-	existingValue = gconf_client_get (gd->client, key2, NULL);
-	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key2, gvalue, NULL);
-
-	if (existingValue)
-	    gconf_value_free (existingValue);
-
-	gconf_value_free (gvalue);
-
-	gvalue = gconf_value_new (GCONF_VALUE_BOOL);
-	gconf_value_set_bool (gvalue, o->value.action.bell);
-	existingValue = gconf_client_get (gd->client, key3, NULL);
-	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key3, gvalue, NULL);
-
-	if (existingValue)
-	    gconf_value_free (existingValue);
-
-	gconf_value_free (gvalue);
-
-	existingValue = gconf_client_get (gd->client, key4, NULL);
-
-	gvalue = gconf_value_new (GCONF_VALUE_LIST);
-
-	for (i = 0; i < SCREEN_EDGE_NUM; i++)
-	{
-	    if (o->value.action.edgeMask & (1 << i))
-	    {
-		gv = gconf_value_new (GCONF_VALUE_STRING);
-		gconf_value_set_string (gv, edgeToString (i));
-		list = g_slist_append (list, gv);
-	    }
-	}
-
-	gconf_value_set_list_type (gvalue, GCONF_VALUE_STRING);
-	gconf_value_set_list (gvalue, list);
-	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key4, gvalue, NULL);
-
-	for (node = list; node; node = node->next)
-	    gconf_value_free ((GConfValue *) node->data);
-
-	if (existingValue)
-	    gconf_value_free (existingValue);
-
-	g_slist_free (list);
-	gconf_value_free (gvalue);
-
-	gvalue = gconf_value_new (GCONF_VALUE_INT);
-	if (o->value.action.type & CompBindingTypeEdgeButton)
-	    gconf_value_set_int (gvalue, o->value.action.edgeButton);
-	else
-	    gconf_value_set_int (gvalue, 0);
-
-	existingValue = gconf_client_get (gd->client, key5, NULL);
-	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key5, gvalue, NULL);
-
-	gconf_value_free (gvalue);
-
-	g_free (key1);
-	g_free (key2);
-	g_free (key3);
-	g_free (key4);
-	g_free (key5);
-    } break;
     case CompOptionTypeList: {
 	GConfValueType type;
 	GSList         *node, *list = NULL;
@@ -411,8 +289,15 @@ gconfGetValue (CompDisplay     *d,
     else if (type         == CompOptionTypeString &&
 	     gvalue->type == GCONF_VALUE_STRING)
     {
-	value->s = (char *) gconf_value_get_string (gvalue);
-	return TRUE;
+	const char *str;
+
+	str = gconf_value_get_string (gvalue);
+	if (str)
+	{
+	    value->s = strdup (str);
+	    if (value->s)
+		return TRUE;
+	}
     }
     else if (type         == CompOptionTypeColor &&
 	     gvalue->type == GCONF_VALUE_STRING)
@@ -452,7 +337,6 @@ gconfGetValue (CompDisplay     *d,
 	edge = gconf_value_get_string (gvalue);
 
 	value->action.edgeMask = stringToEdgeMask (edge);
-
 	return TRUE;
     }
     else if (type         == CompOptionTypeBell &&
@@ -470,7 +354,6 @@ gconfGetValue (CompDisplay     *d,
 
 	matchInit (&value->match);
 	matchAddFromString (&value->match, match);
-
 	return TRUE;
     }
 
@@ -572,284 +455,95 @@ gconfGetOptionValue (CompDisplay *d,
 	return FALSE;
     }
 
-    if (o->type == CompOptionTypeAction)
+    entry = gconf_client_get_entry (gd->client, key, NULL, TRUE, NULL);
+    if (entry)
     {
-	gchar *key1, *key2, *key3, *key4, *key5;
-
-	key1 = g_strdup_printf ("%s_%s", key, "key");
-	key2 = g_strdup_printf ("%s_%s", key, "button");
-	key3 = g_strdup_printf ("%s_%s", key, "bell");
-	key4 = g_strdup_printf ("%s_%s", key, "edge");
-	key5 = g_strdup_printf ("%s_%s", key, "edgebutton");
-
-	value = o->value;
-
-	entry = gconf_client_get_entry (gd->client, key1, NULL, TRUE, NULL);
-	if (entry)
+	gvalue = gconf_entry_get_value (entry);
+	if (gvalue)
 	{
-	    gvalue = gconf_entry_get_value (entry);
-	    if (gvalue && gvalue->type == GCONF_VALUE_STRING)
+	    compInitOptionValue (&value);
+
+	    if (o->type      == CompOptionTypeList &&
+		gvalue->type == GCONF_VALUE_LIST)
 	    {
-		const char *binding;
+		GConfValueType type;
 
-		binding = gconf_value_get_string (gvalue);
-		if (!binding)
-		    binding = "";
+		value.list.value  = 0;
+		value.list.nValue = 0;
 
-		if (strcasecmp (binding, "disabled") == 0 || !*binding)
-		{
-		    value.action.type &= ~CompBindingTypeKey;
-		    status = TRUE;
-		}
-		else
-		{
-		    value.action.type |= CompBindingTypeKey;
-		    status = stringToKeyBinding (d, binding,
-						 &value.action.key);
-		}
-	    }
-
-	    gconf_entry_free (entry);
-	}
-
-	entry = gconf_client_get_entry (gd->client, key2, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gvalue = gconf_entry_get_value (entry);
-	    if (gvalue && gvalue->type == GCONF_VALUE_STRING)
-	    {
-		const char *binding;
-
-		binding = gconf_value_get_string (gvalue);
-		if (!binding)
-		    binding = "";
-
-		if (strcasecmp (binding, "disabled") == 0 || !*binding)
-		{
-		    value.action.type &= ~CompBindingTypeButton;
-		    status = TRUE;
-		}
-		else
-		{
-		    value.action.type |= CompBindingTypeButton;
-		    status = stringToButtonBinding (d, binding,
-						    &value.action.button);
-		}
-	    }
-
-	    gconf_entry_free (entry);
-	}
-
-	entry = gconf_client_get_entry (gd->client, key3, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gvalue = gconf_entry_get_value (entry);
-	    if (gvalue && gvalue->type == GCONF_VALUE_BOOL)
-	    {
-		value.action.bell = gconf_value_get_bool (gvalue);
-		status = TRUE;
-	    }
-
-	    gconf_entry_free (entry);
-	}
-
-	entry = gconf_client_get_entry (gd->client, key4, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gvalue = gconf_entry_get_value (entry);
-	    if (gvalue && gvalue->type == GCONF_VALUE_LIST)
-	    {
-		if (gconf_value_get_list_type (gvalue) == GCONF_VALUE_STRING)
+		type = gconf_value_get_list_type (gvalue);
+		if (type == gconfTypeFromCompType (o->value.list.type))
 		{
 		    GSList *list;
-		    gchar  *edge;
-		    int    i;
-
-		    value.action.edgeMask = 0;
+		    int    i, length;
 
 		    status = TRUE;
 
 		    list = gconf_value_get_list (gvalue);
-		    while (list)
+
+		    length = g_slist_length (list);
+
+		    if (length)
 		    {
-			GConfValue *gv;
-
-			gv = (GConfValue *) list->data;
-			edge = (gchar *) gconf_value_get_string (gv);
-
-			for (i = 0; i < SCREEN_EDGE_NUM; i++)
+			value.list.value =
+			    malloc (sizeof (CompOptionValue) * length);
+			if (value.list.value)
 			{
-			    if (strcasecmp (edge, edgeToString (i)) == 0)
-				value.action.edgeMask |= 1 << i;
-			}
+			    for (i = 0; i < length; i++)
+			    {
+				if (!gconfGetValue (d,
+						    &value.list.value[i],
+						    o->value.list.type,
+						    (GConfValue *)
+						    list->data))
+				{
+				    status = FALSE;
+				    break;
+				}
 
-			list = g_slist_next (list);
+				value.list.nValue++;
+
+				list = g_slist_next (list);
+			    }
+			}
+			else
+			    status = FALSE;
 		    }
 		}
-	    }
-
-	    gconf_entry_free (entry);
-	}
-
-	entry = gconf_client_get_entry (gd->client, key5, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gvalue = gconf_entry_get_value (entry);
-	    if (gvalue && gvalue->type == GCONF_VALUE_INT)
-	    {
-		value.action.edgeButton = gconf_value_get_int (gvalue);
-
-		if (value.action.edgeButton)
-		    value.action.type |= CompBindingTypeEdgeButton;
-		else
-		    value.action.type &= ~CompBindingTypeEdgeButton;
-
-		status = TRUE;
-	    }
-
-	    gconf_entry_free (entry);
-	}
-
-	if (status)
-	{
-	    if (s)
-	    {
-		if (pluginPtr)
-		    status = (*s->setScreenOptionForPlugin) (s,
-							     pluginPtr,
-							     ptr,
-							     &value);
-		else
-		    status = (*s->setScreenOption) (s, ptr, &value);
 	    }
 	    else
 	    {
-		if (pluginPtr)
-		    status = (*d->setDisplayOptionForPlugin) (d,
-							      pluginPtr,
-							      ptr,
-							      &value);
-		else
-		    status = (*d->setDisplayOption) (d, ptr, &value);
+		status = gconfGetValue (d, &value, o->type, gvalue);
 	    }
-	}
 
-	g_free (key1);
-	g_free (key2);
-	g_free (key3);
-	g_free (key4);
-	g_free (key5);
-    }
-    else
-    {
-	entry = gconf_client_get_entry (gd->client, key, NULL, TRUE, NULL);
-	if (entry)
-	{
-	    gvalue = gconf_entry_get_value (entry);
-	    if (gvalue)
+	    if (status)
 	    {
-		if (o->type      == CompOptionTypeList &&
-		    gvalue->type == GCONF_VALUE_LIST)
+		if (s)
 		{
-		    GConfValueType type;
-
-		    value.list.value  = 0;
-		    value.list.nValue = 0;
-
-		    type = gconf_value_get_list_type (gvalue);
-		    if (type == gconfTypeFromCompType (o->value.list.type))
-		    {
-			GSList *list;
-			int    i, length;
-
-			status = TRUE;
-
-			list = gconf_value_get_list (gvalue);
-
-			length = g_slist_length (list);
-
-			if (length)
-			{
-			    value.list.value =
-				malloc (sizeof (CompOptionValue) * length);
-			    if (value.list.value)
-			    {
-				for (i = 0; i < length; i++)
-				{
-				    if (!gconfGetValue (d, &value.list.value[i],
-							o->value.list.type,
-							(GConfValue *)
-							list->data))
-				    {
-					status = FALSE;
-					break;
-				    }
-
-				    value.list.nValue++;
-
-				    list = g_slist_next (list);
-				}
-			    }
-			    else
-				status = FALSE;
-
-			    if (!status)
-			    {
-				free (value.list.value);
-			    }
-			}
-		    }
+		    if (pluginPtr)
+			status = (*s->setScreenOptionForPlugin) (s,
+								 pluginPtr,
+								 ptr,
+								 &value);
+		    else
+			status = (*s->setScreenOption) (s, ptr, &value);
 		}
 		else
 		{
-		    status = gconfGetValue (d, &value, o->type, gvalue);
-		}
-
-		if (status)
-		{
-		    if (s)
-		    {
-			if (pluginPtr)
-			    status = (*s->setScreenOptionForPlugin) (s,
-								     pluginPtr,
-								     ptr,
-								     &value);
-			else
-			    status = (*s->setScreenOption) (s, ptr, &value);
-		    }
+		    if (pluginPtr)
+			status = (*d->setDisplayOptionForPlugin) (d,
+								  pluginPtr,
+								  ptr,
+								  &value);
 		    else
-		    {
-			if (pluginPtr)
-			    status = (*d->setDisplayOptionForPlugin) (d,
-								      pluginPtr,
-								      ptr,
-								      &value);
-			else
-			    status = (*d->setDisplayOption) (d, ptr, &value);
-		    }
-
-		    if (o->type == CompOptionTypeList)
-		    {
-			if (o->value.list.type == CompOptionTypeMatch)
-			{
-			    int i;
-
-			    for (i = 0; i < value.list.nValue; i++)
-				matchFini (&value.list.value[i].match);
-			}
-
-			if (value.list.value)
-			    free (value.list.value);
-		    }
-		    else if (o->type == CompOptionTypeMatch)
-		    {
-			matchFini (&value.match);
-		    }
+			status = (*d->setDisplayOption) (d, ptr, &value);
 		}
 	    }
 
-	    gconf_entry_free (entry);
+	    compFiniOptionValue (&value, o->type);
 	}
+
+	gconf_entry_free (entry);
     }
 
     if (pluginPtr)
@@ -1072,23 +766,9 @@ gconfKeyChanged (GConfClient *client,
 		 GConfEntry  *entry,
 		 gpointer    user_data)
 {
-    static int  tail[] = { 0, 4, 5, 7, 11 };
     CompDisplay *display = (CompDisplay *) user_data;
-    gchar	*key = g_strdup (entry->key);
-    int		i;
 
-    for (i = 0; i < sizeof (tail) / sizeof (tail[0]); i++)
-    {
-	if (strlen (entry->key) > tail[i])
-	{
-	    key[strlen (entry->key) - tail[i]] = '\0';
-	    if (gconfGetOptionValue (display, key))
-		break;
-	}
-    }
-
-    if (key)
-	g_free (key);
+    gconfGetOptionValue (display, entry->key);
 }
 
 static void
