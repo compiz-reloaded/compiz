@@ -479,6 +479,33 @@ AC_SUBST(QT_MOC)
 AC_SUBST(DCOPIDL)
 AC_SUBST(DCOPIDL2CPP)
 
+AC_ARG_ENABLE(kconfig,
+  [  --disable-kconfig       Disable kconfig plugin],
+  [use_kconfig=$enableval], [use_kconfig=yes])
+
+if test "x$use_kde" != "xyes"; then
+  $use_kconfig=no;
+fi
+
+if test "x$use_kconfig" = "xyes"; then
+  KCONFIG_CFLAGS=$KDE_CFLAGS
+  KCONFIG_LIBS=$KDE_LIBS
+fi
+
+AM_CONDITIONAL(USE_KCONFIG, test "x$use_kconfig" = "xyes")
+if test "$use_kconfig" = yes; then
+  AC_DEFINE(USE_KCONFIG, 1, [Build kconfig plugin])
+fi
+
+AC_SUBST(KCONFIG_CFLAGS)
+AC_SUBST(KCONFIG_LIBS)
+
+KDE_KCFG_DIR=$datadir/config.kcfg
+AC_SUBST(KDE_KCFG_DIR)
+
+KDE_KCONFIG_DIR=$datadir/config
+AC_SUBST(KDE_KCONFIG_DIR)
+
 AC_ARG_WITH(max-desktops,
   [  --with-max-desktops     Max reasonable desktops],
   [MAX_DESKTOPS=$withval],
@@ -493,6 +520,7 @@ compiz.pc
 compiz-cube.pc
 compiz-scale.pc
 compiz-gconf.pc
+compiz-kconfig.pc
 Makefile
 src/Makefile
 libdecoration/Makefile
@@ -513,6 +541,7 @@ echo ""
 echo "the following optional plugins will be compiled:"
 echo "  glib:     $use_glib"
 echo "  gconf:    $use_gconf"
+echo "  kconfig:  $use_kconfig"
 echo "  place:    $use_place"
 echo "  dbus:     $use_dbus"
 echo "  annotate: $use_annotate"

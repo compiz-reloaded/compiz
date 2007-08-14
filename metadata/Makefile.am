@@ -13,6 +13,7 @@ xml_in_files =		  \
 	glib.xml.in	  \
 	ini.xml.in	  \
 	inotify.xml.in	  \
+	kconfig.xml.in	  \
 	minimize.xml.in	  \
 	move.xml.in	  \
 	place.xml.in	  \
@@ -42,9 +43,7 @@ schema_DATA  = $(schema_files)
 %.schemas: $(xml_files)
 	xsltproc -o $@ $(srcdir)/schemas.xslt $(subst compiz-,,$*).xml;
 
-xsltdir    = $(stylesheetdir)
-xslt_files = schemas.xslt
-xslt_DATA  = $(xslt_files)
+schemas_stylesheets = schemas.xslt
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
@@ -54,12 +53,44 @@ install-data-local:
 endif
 endif
 
-EXTRA_DIST =		\
-	$(xml_files)    \
-	$(xml_in_files) \
-	$(xslt_files)	\
-	$(schema_files)
+if USE_KCONFIG
+kde_kcfgdir    = $(KDE_KCFG_DIR)
+kde_kcfg_files = $(patsubst %.xml.in,compiz-%.kcfg,$(xml_in_files))
+kde_kcfg_DATA  = $(kde_kcfg_files)
 
-DISTCLEANFILES =	\
-	$(xml_files)    \
-	$(schema_files)
+kde_kcfg_stylesheets = kcfg.xslt
+
+%.kcfg: $(xml_files)
+	xsltproc -o $@ $(srcdir)/kcfg.xslt $(subst compiz-,,$*).xml;
+
+kde_configdir    = $(KDE_KCONFIG_DIR)
+kde_config_files = compizrc
+kde_config_DATA  = $(kde_config_files)
+
+kde_config_stylesheets = kconfig.xslt
+
+compizrc: $(kde_kcfg_files)
+	xsltproc $(srcdir)/kconfig.xslt $(kde_kcfg_files) > $@;
+
+endif
+
+xsltdir    = $(stylesheetdir)
+xslt_files =		       	  \
+	$(schemas_stylesheets)	  \
+	$(kde_kcfg_stylesheets)	  \
+	$(kde_config_stylesheets)
+xslt_DATA  = $(xslt_files)
+
+EXTRA_DIST =		    \
+	$(xml_files)        \
+	$(xml_in_files)     \
+	$(xslt_files)	    \
+	$(schemas_files)    \
+	$(kde_kcfg_files)   \
+	$(kde_config_files)
+
+DISTCLEANFILES =	    \
+	$(xml_files)        \
+	$(schemas_files)    \
+	$(kde_kcfg_files)   \
+	$(kde_config_files)
