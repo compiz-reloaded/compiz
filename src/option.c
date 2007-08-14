@@ -86,8 +86,13 @@ compFiniOptionValue (CompOptionValue *v,
 	matchFini (&v->match);
 	break;
     case CompOptionTypeList:
-	for (i = 0; i < v->list.nValue; i++)
-	    compFiniOptionValue (&v->list.value[i], v->list.type);
+	if (v->list.nValue)
+	{
+	    for (i = 0; i < v->list.nValue; i++)
+		compFiniOptionValue (&v->list.value[i], v->list.type);
+
+	    free (v->list.value);
+	}
     default:
 	break;
     }
