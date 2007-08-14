@@ -41,7 +41,8 @@ schema_files = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
 schema_DATA  = $(schema_files)
 
 %.schemas: $(xml_files)
-	xsltproc -o $@ $(srcdir)/schemas.xslt $(subst compiz-,,$*).xml;
+	xsltproc -o $@ --param defaultPlugins "'$(default_plugins)'" \
+		$(srcdir)/schemas.xslt $(subst compiz-,,$*).xml
 
 schemas_stylesheets = schemas.xslt
 

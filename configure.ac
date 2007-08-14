@@ -107,6 +107,11 @@ AC_C_BIGENDIAN
 plugindir=$libdir/compiz
 AC_SUBST(plugindir)
 
+AC_ARG_WITH(default-plugins, [  --with-default-plugins=PLUGINS ],
+		       [default_plugins="$withval"],
+		       [default_plugins=""])
+AC_SUBST(default_plugins)
+
 imagedir=$datadir/compiz
 AC_SUBST(imagedir)
 
