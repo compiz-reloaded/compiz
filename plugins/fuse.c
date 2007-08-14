@@ -48,14 +48,9 @@ static CompMetadata fuseMetadata;
 #define FUSE_INODE_TYPE_ITEM_TYPE   (1 << 9)
 #define FUSE_INODE_TYPE_ITEMS       (1 << 10)
 #define FUSE_INODE_TYPE_ITEM_VALUE  (1 << 11)
-#define FUSE_INODE_TYPE_KEY         (1 << 12)
-#define FUSE_INODE_TYPE_BUTTON      (1 << 13)
-#define FUSE_INODE_TYPE_EDGE        (1 << 14)
-#define FUSE_INODE_TYPE_EDGE_BUTTON (1 << 15)
-#define FUSE_INODE_TYPE_BELL        (1 << 16)
-#define FUSE_INODE_TYPE_MIN         (1 << 17)
-#define FUSE_INODE_TYPE_MAX         (1 << 18)
-#define FUSE_INODE_TYPE_PRECISION   (1 << 19)
+#define FUSE_INODE_TYPE_MIN         (1 << 12)
+#define FUSE_INODE_TYPE_MAX         (1 << 13)
+#define FUSE_INODE_TYPE_PRECISION   (1 << 14)
 
 #define DIR_MASK (FUSE_INODE_TYPE_ROOT    | \
 		  FUSE_INODE_TYPE_CORE    | \
@@ -71,19 +66,8 @@ static CompMetadata fuseMetadata;
 			FUSE_INODE_TYPE_DISPLAY | \
 			FUSE_INODE_TYPE_OPTION)
 
-#define ACTION_MASK (FUSE_INODE_TYPE_KEY	 | \
-		     FUSE_INODE_TYPE_BUTTON	 | \
-		     FUSE_INODE_TYPE_EDGE	 | \
-		     FUSE_INODE_TYPE_EDGE_BUTTON | \
-		     FUSE_INODE_TYPE_BELL)
-
-#define WRITE_MASK (FUSE_INODE_TYPE_VALUE	| \
-		    FUSE_INODE_TYPE_ITEM_VALUE	| \
-		    FUSE_INODE_TYPE_KEY		| \
-		    FUSE_INODE_TYPE_BUTTON	| \
-		    FUSE_INODE_TYPE_EDGE	| \
-		    FUSE_INODE_TYPE_EDGE_BUTTON | \
-		    FUSE_INODE_TYPE_BELL)
+#define WRITE_MASK (FUSE_INODE_TYPE_VALUE | \
+		    FUSE_INODE_TYPE_ITEM_VALUE)
 
 #define FUSE_INODE_FLAG_TRUNC (1 << 0)
 
@@ -126,17 +110,6 @@ typedef struct _FuseDisplay {
     FuseDisplay *fd = GET_FUSE_DISPLAY (d)
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
-
-static const char *edgeName[] = {
-    "edge_left",
-    "edge_right",
-    "edge_top",
-    "edge_bottom",
-    "edge_top_left",
-    "edge_top_right",
-    "edge_bottom_left",
-    "edge_bottom_right"
-};
 
 static fuse_ino_t nextIno = 1;
 static FuseInode  *inodes = NULL;
@@ -405,6 +378,14 @@ fuseGetStringFromInode (CompDisplay *d,
 		return strdup (value->s);
 	    case CompOptionTypeColor:
 		return colorToString (value->c);
+	    case CompOptionTypeKey:
+		return keyActionToString (d, &value->action);
+	    case CompOptionTypeButton:
+		return buttonActionToString (d, &value->action);
+	    case CompOptionTypeEdge:
+		return edgeMaskToString (value->action.edgeMask);
+	    case CompOptionTypeBell:
+		return strdup (value->action.bell ? "true" : "false");
 	    case CompOptionTypeMatch:
 		return matchToString (&value->match);
 	    default:
@@ -443,51 +424,6 @@ fuseGetStringFromInode (CompDisplay *d,
     else if (inode->type & FUSE_INODE_TYPE_ITEM_TYPE)
     {
 	return strdup (optionTypeToString (option->value.list.type));
-    }
-    else if (inode->type & FUSE_INODE_TYPE_KEY)
-    {
-	if (option->value.action.type & CompBindingTypeKey)
-	    return keyBindingToString (d, &option->value.action.key);
-	else
-	    return strdup ("Disabled");
-    }
-    else if (inode->type & FUSE_INODE_TYPE_BUTTON)
-    {
-	if (option->value.action.type & CompBindingTypeButton)
-	    return buttonBindingToString (d, &option->value.action.button);
-	else
-	    return strdup ("Disabled");
-    }
-    else if (inode->type & FUSE_INODE_TYPE_EDGE)
-    {
-	int i;
-
-	for (i = 0; i < sizeof (edgeName) / sizeof (edgeName[0]); i++)
-	{
-	    if (strcmp (inode->name, edgeName[i]) == 0)
-	    {
-		if (option->value.action.edgeMask & (1 << i))
-		    return strdup ("true");
-		else
-		    return strdup ("false");
-	    }
-	}
-    }
-    else if (inode->type & FUSE_INODE_TYPE_EDGE_BUTTON)
-    {
-	if (option->value.action.type & CompBindingTypeEdgeButton)
-	{
-	    snprintf (str, 256, "Button%d", option->value.action.edgeButton);
-	    return strdup (str);
-	}
-	else
-	{
-	    return strdup ("Disabled");
-	}
-    }
-    else if (inode->type & FUSE_INODE_TYPE_BELL)
-    {
-	return strdup (option->value.action.bell ? "true" : "false");
     }
 
     return NULL;
@@ -559,8 +495,6 @@ fuseUpdateInode (CompDisplay *d,
 	option = fuseGetOptionFromInode (d, inode);
 	if (option)
 	{
-	    int i;
-
 	    fuseAddInode (inode, FUSE_INODE_TYPE_TYPE, "type");
 
 	    switch (option->type) {
@@ -572,23 +506,14 @@ fuseUpdateInode (CompDisplay *d,
 		fuseAddInode (inode, FUSE_INODE_TYPE_MAX, "max");
 		/* fall-through */
 	    case CompOptionTypeBool:
+	    case CompOptionTypeString:
 	    case CompOptionTypeColor:
+	    case CompOptionTypeKey:
+	    case CompOptionTypeButton:
+	    case CompOptionTypeEdge:
+	    case CompOptionTypeBell:
 	    case CompOptionTypeMatch:
 		fuseAddInode (inode, FUSE_INODE_TYPE_VALUE, "value");
-		break;
-	    case CompOptionTypeString:
-		fuseAddInode (inode, FUSE_INODE_TYPE_VALUE, "value");
-		break;
-	    case CompOptionTypeAction:
-		fuseAddInode (inode, FUSE_INODE_TYPE_KEY, "key");
-		fuseAddInode (inode, FUSE_INODE_TYPE_BUTTON, "button");
-
-		for (i = 0; i < sizeof (edgeName) / sizeof (edgeName[0]); i++)
-		    fuseAddInode (inode, FUSE_INODE_TYPE_EDGE, edgeName[i]);
-
-		fuseAddInode (inode, FUSE_INODE_TYPE_EDGE_BUTTON,
-			      "edge_button");
-		fuseAddInode (inode, FUSE_INODE_TYPE_BELL, "bell");
 		break;
 	    case CompOptionTypeList:
 		fuseAddInode (inode, FUSE_INODE_TYPE_ITEMS, "items");
@@ -680,6 +605,12 @@ fuseInitValue (CompOptionValue *value,
     case CompOptionTypeColor:
 	memcpy (value->c, src->c, sizeof (*src->c));
 	break;
+    case CompOptionTypeKey:
+    case CompOptionTypeButton:
+    case CompOptionTypeEdge:
+    case CompOptionTypeBell:
+	value->action = src->action;
+	break;
     case CompOptionTypeMatch:
 	matchInit (&value->match);
 	matchCopy (&value->match, &src->match);
@@ -692,7 +623,8 @@ fuseInitValue (CompOptionValue *value,
 }
 
 static Bool
-fuseInitValueFromString (CompOptionValue *value,
+fuseInitValueFromString (CompDisplay	 *display,
+			 CompOptionValue *value,
 			 CompOptionType  type,
 			 char		 *str)
 {
@@ -712,6 +644,18 @@ fuseInitValueFromString (CompOptionValue *value,
     case CompOptionTypeColor:
 	if (!stringToColor (str, value->c))
 	    return FALSE;
+	break;
+    case CompOptionTypeKey:
+	stringToKeyAction (display, str, &value->action);
+	break;
+    case CompOptionTypeButton:
+	stringToButtonAction (display, str, &value->action);
+	break;
+    case CompOptionTypeEdge:
+	value->action.edgeMask = stringToEdgeMask (str);
+	break;
+    case CompOptionTypeBell:
+	value->action.bell = strcmp (str, "true") ? FALSE : TRUE;
 	break;
     case CompOptionTypeMatch:
 	matchInit (&value->match);
@@ -768,50 +712,8 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 
 	if (inode->type & FUSE_INODE_TYPE_VALUE)
 	{
-	    if (!fuseInitValueFromString (&value, option->type, str))
+	    if (!fuseInitValueFromString (d, &value, option->type, str))
 		return;
-
-	    screenInode = inode->parent->parent;
-	}
-	else if (inode->type & ACTION_MASK)
-	{
-	    value.action = option->value.action;
-
-	    if (inode->type & FUSE_INODE_TYPE_KEY)
-	    {
-		if (!stringToKeyBinding (d, str, &value.action.key))
-		    return;
-	    }
-	    else if (inode->type & FUSE_INODE_TYPE_BUTTON)
-	    {
-		if (!stringToButtonBinding (d, str, &value.action.button))
-		    return;
-	    }
-	    else if (inode->type & FUSE_INODE_TYPE_BELL)
-	    {
-		value.action.bell = strcmp (str, "true") ? FALSE : TRUE;
-	    }
-	    else if (inode->type & FUSE_INODE_TYPE_EDGE)
-	    {
-		int i;
-
-		for (i = 0; i < sizeof (edgeName) / sizeof (edgeName[0]); i++)
-		{
-		    if (strcmp (inode->name, edgeName[i]) == 0)
-		    {
-			if (strcmp (str, "true") == 0)
-			    value.action.edgeMask |= (1 << i);
-			else
-			    value.action.edgeMask &= ~(1 << i);
-
-			break;
-		    }
-		}
-	    }
-	    else if (inode->type & FUSE_INODE_TYPE_EDGE_BUTTON)
-	    {
-		value.action.edgeButton = atoi (str);
-	    }
 
 	    screenInode = inode->parent->parent;
 	}
@@ -836,7 +738,8 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	    {
 		if (i == item)
 		{
-		    if (!fuseInitValueFromString (&value.list.value[i],
+		    if (!fuseInitValueFromString (d,
+						  &value.list.value[i],
 						  value.list.type,
 						  str))
 			break;
