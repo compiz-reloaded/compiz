@@ -657,28 +657,16 @@ initEdgeValue (CompDisplay     *d,
 
     for (child = node->xmlChildrenNode; child; child = child->next)
     {
-	static char *edge[] = {
-	    "left",
-	    "right",
-	    "top",
-	    "bottom",
-	    "top_left",
-	    "top_right",
-	    "bottom_left",
-	    "bottom_right"
-	};
-	int i;
-
-	for (i = 0; i < sizeof (edge) / sizeof (edge[0]); i++)
+	value = xmlGetProp (child, BAD_CAST "name");
+	if (value)
 	{
-	    value = xmlGetProp (child, BAD_CAST edge[i]);
-	    if (value)
-	    {
-		if (strcasecmp ((char *) value, "true") == 0)
+	    int i;
+
+	    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+		if (strcasecmp ((char *) value, edgeToString (i)) == 0)
 		    v->action.edgeMask |= (1 << i);
 
-		xmlFree (value);
-	    }
+	    xmlFree (value);
 	}
     }
 
