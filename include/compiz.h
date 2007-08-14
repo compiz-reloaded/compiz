@@ -314,7 +314,6 @@ typedef enum {
     CompLogLevelWarn,
     CompLogLevelInfo,
     CompLogLevelDebug
-
 } CompLogLevel;
 
 typedef struct _CompKeyBinding {
