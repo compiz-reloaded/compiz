@@ -890,6 +890,9 @@ edgeMaskToString (unsigned int edgeMask)
 	}
     }
 
+    if (!edge)
+	return strdup ("");
+
     return edge;
 }
 
