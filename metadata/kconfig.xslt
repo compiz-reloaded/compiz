@@ -35,21 +35,7 @@
     <xsl:for-each select="entry">
       <xsl:value-of select="@name"/>
       <xsl:text>=</xsl:text>
-      <xsl:choose>
-	<xsl:when test="@type = 'Enum'">
-	  <xsl:variable name="value">
-	    <xsl:value-of select="default/text()"/>
-	  </xsl:variable>
-	  <xsl:for-each select="choices/choice">
-            <xsl:if test="@name = $value">
-	      <xsl:value-of select="position() - 1"/>
-            </xsl:if>
-	  </xsl:for-each>
-	</xsl:when>
-	<xsl:otherwise>
-	  <xsl:value-of select="default/text()"/>
-	</xsl:otherwise>
-      </xsl:choose>
+      <xsl:value-of select="default/text()"/>
       <xsl:text>&#10;</xsl:text>
     </xsl:for-each>
     <xsl:text>&#10;</xsl:text>

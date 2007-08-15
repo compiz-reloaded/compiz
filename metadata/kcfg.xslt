@@ -46,7 +46,7 @@
 	    <xsl:text>_</xsl:text>
 	    <xsl:value-of select="name()"/>
 	    <xsl:if test="name() = 'screen'">
-	      <xsl:text>0</xsl:text>
+	      <xsl:text>screen</xsl:text>
 	    </xsl:if>
 	  </xsl:attribute>
 	  <xsl:for-each select="option[not(@read_only='true') and not(@type='action')]">
@@ -76,18 +76,6 @@
         </xsl:if>
       </whatsthis>
       <xsl:choose>
-        <xsl:when test="$ktype = 'Enum'">
-	  <xsl:variable name="index">
-	    <xsl:value-of select="default/text()"/>
-	  </xsl:variable>
-          <default>
-	    <xsl:for-each select="desc">
-              <xsl:if test="value/text() = $index">
-		<xsl:value-of select="name/text()"/>
-              </xsl:if>
-	    </xsl:for-each>
-          </default>
-        </xsl:when>
 	<xsl:when test="@type = 'color'">
           <default>
             <xsl:choose>
@@ -141,18 +129,6 @@
           <max><xsl:value-of select="max/text()"/></max>
 	</xsl:if>
       </xsl:if>
-      <xsl:if test="$ktype = 'Enum'">
-	<choices>
-	  <xsl:for-each select="desc">
-	    <xsl:sort select="value/text()" data-type="number"/>
-	    <choice>
-	    <xsl:attribute name='name'>
-	      <xsl:value-of select="name/text()"/>
-	    </xsl:attribute>
-	    </choice>
-	  </xsl:for-each>
-	</choices>
-      </xsl:if>
     </entry>
   </xsl:template>
 
@@ -165,14 +141,7 @@
         <xsl:text>Bool</xsl:text>
       </xsl:when>
       <xsl:when test="$type = 'int'">
-	<xsl:choose>
-	  <xsl:when test="min/text() = '0' and count(desc/name) - 1 = max/text()">
-            <xsl:text>Enum</xsl:text>
-	  </xsl:when>
-	  <xsl:otherwise>
-            <xsl:text>Int</xsl:text>
-	  </xsl:otherwise>
-	</xsl:choose>
+        <xsl:text>Int</xsl:text>
       </xsl:when>
       <xsl:when test="$type = 'float'">
         <xsl:text>Double</xsl:text>
