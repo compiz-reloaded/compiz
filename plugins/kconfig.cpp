@@ -573,8 +573,9 @@ kconfigSetDisplayOption (CompDisplay     *d,
 	int	   nOption;
 
 	option = compGetDisplayOptions (d, &nOption);
-	kconfigSetOption (d, compFindOption (option, nOption, name, 0),
-			  "core", "display");
+	option = compFindOption (option, nOption, name, 0);
+	if (option)
+	    kconfigSetOption (d, option, "core", "display");
     }
 
     return status;
@@ -605,9 +606,9 @@ kconfigSetDisplayOptionForPlugin (CompDisplay     *d,
 	    int	       nOption;
 
 	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-	    kconfigSetOption (d,
-			      compFindOption (option, nOption, name, 0),
-			      p->vTable->name, "display");
+	    option = compFindOption (option, nOption, name, 0);
+	    if (option)
+		kconfigSetOption (d, option, p->vTable->name, "display");
 	}
     }
 
@@ -640,9 +641,9 @@ kconfigSetScreenOption (CompScreen      *s,
 	    screen += QString::number (s->screenNum);
 
 	    option = compGetScreenOptions (s, &nOption);
-	    kconfigSetOption (s->display,
-			      compFindOption (option, nOption, name, 0),
-			      "core", screen.ascii ());
+	    option = compFindOption (option, nOption, name, 0);
+	    if (option)
+		kconfigSetOption (s->display, option, "core", screen.ascii ());
 	}
     }
 
@@ -681,9 +682,10 @@ kconfigSetScreenOptionForPlugin (CompScreen      *s,
 		screen += QString::number (s->screenNum);
 
 		option = (*p->vTable->getScreenOptions) (p, s, &nOption);
-		kconfigSetOption (s->display,
-				  compFindOption (option, nOption, name, 0),
-				  plugin, screen.ascii ());
+		option = compFindOption (option, nOption, name, 0);
+		if (option)
+		    kconfigSetOption (s->display, option, plugin,
+				      screen.ascii ());
 	    }
 	}
     }
