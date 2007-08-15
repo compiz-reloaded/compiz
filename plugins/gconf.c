@@ -588,12 +588,16 @@ gconfSetDisplayOption (CompDisplay     *d,
 
     if (status)
     {
-	CompOption *option;
+        CompOption *option, *o;
 	int	   nOption;
 
 	option = compGetDisplayOptions (d, &nOption);
-	gconfSetOption (d, compFindOption (option, nOption, name, 0),
-			"allscreens", 0);
+	o = compFindOption (option, nOption, name, 0);
+
+	if (!o)
+	    return FALSE;
+
+	gconfSetOption (d, o, "allscreens", 0);
     }
 
     return status;
@@ -620,12 +624,16 @@ gconfSetDisplayOptionForPlugin (CompDisplay     *d,
 	p = findActivePlugin (plugin);
 	if (p && p->vTable->getDisplayOptions)
 	{
-	    CompOption *option;
+	    CompOption *option, *o;
 	    int	       nOption;
 
 	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-	    gconfSetOption (d, compFindOption (option, nOption, name, 0),
-			    "allscreens", plugin);
+	    o = compFindOption (option, nOption, name, 0);
+
+	    if (!o)
+	        return FALSE;
+
+	    gconfSetOption (d, o, "allscreens", plugin);
 	}
     }
 
@@ -647,15 +655,17 @@ gconfSetScreenOption (CompScreen      *s,
 
     if (status)
     {
-	CompOption *option;
+	CompOption *option, *o;
 	int	   nOption;
 	gchar      *screen;
 
 	screen = g_strdup_printf ("screen%d", s->screenNum);
 
 	option = compGetScreenOptions (s, &nOption);
-	gconfSetOption (s->display, compFindOption (option, nOption, name, 0),
-			screen, 0);
+	o = compFindOption (option, nOption, name, 0);
+
+	if (o)
+    	    gconfSetOption (s->display, o, screen, 0);
 
 	g_free (screen);
     }
@@ -684,16 +694,17 @@ gconfSetScreenOptionForPlugin (CompScreen      *s,
 	p = findActivePlugin (plugin);
 	if (p && p->vTable->getScreenOptions)
 	{
-	    CompOption *option;
+	    CompOption *option, *o;
 	    int	       nOption;
 	    gchar      *screen;
 
 	    screen = g_strdup_printf ("screen%d", s->screenNum);
 
 	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
-	    gconfSetOption (s->display,
-			    compFindOption (option, nOption, name, 0),
-			    screen, plugin);
+	    o = compFindOption (option, nOption, name, 0);
+
+	    if (o)
+    		gconfSetOption (s->display,o, screen, plugin);
 
 	    g_free (screen);
 	}
