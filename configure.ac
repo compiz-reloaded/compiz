@@ -490,6 +490,8 @@ fi
 if test "x$use_kconfig" = "xyes"; then
   KCONFIG_CFLAGS=$KDE_CFLAGS
   KCONFIG_LIBS=$KDE_LIBS
+  KDE_KCFG_DIR=`kde-config --install kcfg --expandvars 2>/dev/null`
+  KDE_KCONFIG_DIR=`kde-config --install config --expandvars 2>/dev/null`
 fi
 
 AM_CONDITIONAL(USE_KCONFIG, test "x$use_kconfig" = "xyes")
@@ -499,11 +501,7 @@ fi
 
 AC_SUBST(KCONFIG_CFLAGS)
 AC_SUBST(KCONFIG_LIBS)
-
-KDE_KCFG_DIR=$datadir/config.kcfg
 AC_SUBST(KDE_KCFG_DIR)
-
-KDE_KCONFIG_DIR=$datadir/config
 AC_SUBST(KDE_KCONFIG_DIR)
 
 AC_ARG_WITH(max-desktops,
