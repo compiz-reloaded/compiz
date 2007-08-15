@@ -773,7 +773,7 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 		(*d->setDisplayOption) (d, option->name, &value);
 	}
 
-	fuseFiniValue (&value, option->type);
+	compFiniOptionValue (&value, option->type);
     }
 }
 
