@@ -551,7 +551,7 @@ stringToColor (const char     *color,
 char *
 colorToString (unsigned short *rgba);
 
-char *
+const char *
 optionTypeToString (CompOptionType type);
 
 Bool

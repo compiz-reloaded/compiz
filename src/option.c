@@ -926,7 +926,7 @@ colorToString (unsigned short *rgba)
     return strdup (tmp);
 }
 
-char *
+const char *
 optionTypeToString (CompOptionType type)
 {
     switch (type) {
