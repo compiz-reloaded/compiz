@@ -70,7 +70,8 @@ kde_config_DATA  = $(kde_config_files)
 kde_config_stylesheets = kconfig.xslt
 
 compizrc: $(kde_kcfg_files)
-	xsltproc $(srcdir)/kconfig.xslt $(kde_kcfg_files) > $@;
+	xsltproc --stringparam screen 0 $(srcdir)/kconfig.xslt \
+	$(kde_kcfg_files) > $@;
 
 endif
 

@@ -31,7 +31,9 @@
 
   <xsl:template match="/compiz">
     <kcfg>
-      <kcfgfile name="compizrc"/>
+      <kcfgfile name="compizrc">
+	<parameter name="screen"/>
+      </kcfgfile>
       <xsl:for-each select="/compiz/*/display | /compiz/*/screen">
 	<group>
 	  <xsl:attribute name='name'>
@@ -46,7 +48,7 @@
 	    <xsl:text>_</xsl:text>
 	    <xsl:value-of select="name()"/>
 	    <xsl:if test="name() = 'screen'">
-	      <xsl:text>screen</xsl:text>
+	      <xsl:text>$(screen)</xsl:text>
 	    </xsl:if>
 	  </xsl:attribute>
 	  <xsl:for-each select="option[not(@read_only='true') and not(@type='action')]">

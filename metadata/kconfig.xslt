@@ -29,8 +29,22 @@
 
 <xsl:template match="/kcfg">
   <xsl:for-each select="/kcfg/group">
+    <xsl:variable name="prefix">
+      <xsl:value-of select="substring(@name,1,string-length(@name) - 9)"/>
+    </xsl:variable>
+    <xsl:variable name="suffix">
+      <xsl:value-of select="substring(@name,string-length(@name) - 8,string-length(@name))"/>
+    </xsl:variable>
     <xsl:text>[</xsl:text>
-    <xsl:value-of select="@name"/>
+    <xsl:choose>
+      <xsl:when test="$suffix = '$(screen)'">
+	<xsl:value-of select="$prefix"/>
+	<xsl:value-of select="$screen"/>
+      </xsl:when>
+      <xsl:otherwise>
+	<xsl:value-of select="@name"/>
+      </xsl:otherwise>
+    </xsl:choose>
     <xsl:text>]&#10;</xsl:text>
     <xsl:for-each select="entry">
       <xsl:value-of select="@name"/>
