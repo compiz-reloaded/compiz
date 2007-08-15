@@ -1440,7 +1440,7 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 	if (strcmp (option->name, path[2]) == 0)
 	{
 	    CompOptionType restrictionType = option->type;
-	    char	   *type;
+	    const char	   *type;
 	    char	   *shortDesc = NULL;
 	    char	   *longDesc = NULL;
 	    const char     *blankStr = "";
