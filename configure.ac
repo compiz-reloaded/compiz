@@ -504,6 +504,9 @@ AC_SUBST(KCONFIG_LIBS)
 AC_SUBST(KDE_KCFG_DIR)
 AC_SUBST(KDE_KCONFIG_DIR)
 
+kcfgdir=$KDE_KCFG_DIR
+AC_SUBST(kcfgdir)
+
 AC_ARG_WITH(max-desktops,
   [  --with-max-desktops     Max reasonable desktops],
   [MAX_DESKTOPS=$withval],
