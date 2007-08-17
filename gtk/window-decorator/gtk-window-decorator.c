@@ -2379,17 +2379,12 @@ draw_switcher_foreground (decor_t *d)
 {
     cairo_t	  *cr;
     GtkStyle	  *style;
-    decor_color_t color;
     double	  alpha = SWITCHER_ALPHA / 65535.0;
 
     if (!d->pixmap || !d->buffer_pixmap)
 	return;
 
     style = gtk_widget_get_style (style_window);
-
-    color.r = style->bg[GTK_STATE_NORMAL].red   / 65535.0;
-    color.g = style->bg[GTK_STATE_NORMAL].green / 65535.0;
-    color.b = style->bg[GTK_STATE_NORMAL].blue  / 65535.0;
 
     cr = gdk_cairo_create (GDK_DRAWABLE (d->buffer_pixmap));
 
@@ -3166,7 +3161,7 @@ update_window_decoration_name (WnckWindow *win)
     name = wnck_window_get_name (win);
     if (name && (name_length = strlen (name)))
     {
-	gint w, n_line;
+	gint w;
 
 	if (theme_draw_window_decoration != draw_window_decoration)
 	{
@@ -3186,8 +3181,6 @@ update_window_decoration_name (WnckWindow *win)
 
 	pango_layout_set_width (d->layout, w * PANGO_SCALE);
 	pango_layout_set_text (d->layout, name, name_length);
-
-	n_line = pango_layout_get_line_count (d->layout);
 
 	line = pango_layout_get_line (d->layout, 0);
 
@@ -3604,8 +3597,6 @@ update_switcher_window (WnckWindow *win,
 	name = wnck_window_get_name (selected_win);
 	if (name && (name_length = strlen (name)))
 	{
-	    gint n_line;
-
 	    if (!d->layout)
 	    {
 		d->layout = pango_layout_new (pango_context);
@@ -3621,8 +3612,6 @@ update_switcher_window (WnckWindow *win,
 		    switcher_context.right_space - 64;
 		pango_layout_set_width (d->layout, tw * PANGO_SCALE);
 		pango_layout_set_text (d->layout, name, name_length);
-
-		n_line = pango_layout_get_line_count (d->layout);
 
 		line = pango_layout_get_line (d->layout, 0);
 
