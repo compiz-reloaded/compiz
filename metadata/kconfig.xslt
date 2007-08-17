@@ -47,7 +47,7 @@
     </xsl:choose>
     <xsl:text>]&#10;</xsl:text>
     <xsl:for-each select="entry">
-      <xsl:value-of select="@name"/>
+      <xsl:value-of select="@key"/>
       <xsl:text>=</xsl:text>
       <xsl:value-of select="default/text()"/>
       <xsl:text>&#10;</xsl:text>

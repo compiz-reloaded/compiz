@@ -36,7 +36,7 @@
       </kcfgfile>
       <xsl:for-each select="/compiz/*/display | /compiz/*/screen">
 	<group>
-	  <xsl:attribute name='name'>
+	  <xsl:variable name="group">
 	    <xsl:choose>
 	      <xsl:when test="ancestor::plugin">
 		<xsl:value-of select="ancestor::plugin/@name"/>
@@ -47,12 +47,17 @@
 	    </xsl:choose>
 	    <xsl:text>_</xsl:text>
 	    <xsl:value-of select="name()"/>
+	  </xsl:variable>
+	  <xsl:attribute name='name'>
+	    <xsl:value-of select="$group"/>
 	    <xsl:if test="name() = 'screen'">
 	      <xsl:text>$(screen)</xsl:text>
 	    </xsl:if>
 	  </xsl:attribute>
 	  <xsl:for-each select="option[not(@read_only='true') and not(@type='action')]">
-	    <xsl:call-template name="print_option"/>
+	    <xsl:call-template name="print_option">
+              <xsl:with-param name="group" select="$group"/>
+	    </xsl:call-template>
 	  </xsl:for-each>
 	</group>
       </xsl:for-each>
@@ -60,11 +65,17 @@
   </xsl:template>
 
   <xsl:template name="print_option">
+    <xsl:param name="group"/>
     <entry>
       <xsl:variable name="ktype">
 	<xsl:call-template name="print_type"/>
       </xsl:variable>
       <xsl:attribute name='name'>
+	<xsl:value-of select="$group"/>
+	<xsl:text>_</xsl:text>
+	<xsl:value-of select="@name"/>
+      </xsl:attribute>
+      <xsl:attribute name='key'>
 	<xsl:value-of select="@name"/>
       </xsl:attribute>
       <xsl:attribute name='type'>
