@@ -1240,13 +1240,14 @@ updateModifierMappings (CompDisplay *d)
 {
     unsigned int    modMask[CompModNum];
     int		    i, minKeycode, maxKeycode, keysymsPerKeycode = 0;
+    KeySym*         key;
 
     for (i = 0; i < CompModNum; i++)
 	modMask[i] = 0;
 
     XDisplayKeycodes (d->display, &minKeycode, &maxKeycode);
-    XGetKeyboardMapping (d->display, minKeycode, (maxKeycode - minKeycode + 1),
-			 &keysymsPerKeycode);
+    key = XGetKeyboardMapping (d->display, minKeycode, (maxKeycode - minKeycode + 1),
+				  &keysymsPerKeycode);
 
     if (d->modMap)
 	XFreeModifiermap (d->modMap);
@@ -1330,6 +1331,10 @@ updateModifierMappings (CompDisplay *d)
 	    for (s = d->screens; s; s = s->next)
 		updatePassiveGrabs (s);
 	}
+    }
+
+    if (key) {
+        XFree(key);
     }
 }
 
