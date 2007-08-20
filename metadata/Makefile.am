@@ -45,18 +45,11 @@ schema_DATA  = $(schema_files)
 
 schemas_stylesheets = schemas.xslt
 
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	if test -z "$(DESTDIR)" ; then \
-		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
-        fi
-endif
 endif
 
 if USE_KCONFIG
 kde_kcfgdir    = $(KDE_KCFG_DIR)
 kde_kcfg_files = $(patsubst %.xml.in,compiz-%.kcfg,$(xml_in_files))
-kde_kcfg_DATA  = $(kde_kcfg_files)
 
 kde_kcfg_stylesheets = kcfg.xslt
 
@@ -65,14 +58,52 @@ kde_kcfg_stylesheets = kcfg.xslt
 
 kde_configdir    = $(KDE_KCONFIG_DIR)
 kde_config_files = compizrc
-kde_config_DATA  = $(kde_config_files)
-
-kde_config_stylesheets = kconfig.xslt
 
 compizrc: $(kde_kcfg_files)
 	xsltproc --stringparam screen 0 $(srcdir)/kconfig.xslt \
 	$(kde_kcfg_files) > $@;
 
+kde_config_stylesheets = kconfig.xslt
+
+endif
+
+noinst_DATA =		  \
+	$(kde_kcfg_files) \
+	$(kde_config_files)
+
+install-data-local:
+if USE_GCONF
+if GCONF_SCHEMAS_INSTALL
+	if test -z "$(DESTDIR)" ; then \
+		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
+        fi
+endif
+endif
+if USE_KCONFIG
+	if mkdir -p $(kde_kcfgdir) && test -w $(kde_kcfgdir); then ( \
+		$(INSTALL) -m 644 $(kde_kcfg_files) $(kde_kcfgdir) \
+		); \
+	fi
+	if mkdir -p $(kde_configdir) && test -w $(kde_configdir); then ( \
+		$(INSTALL) -m 644 $(kde_config_files) $(kde_configdir) \
+		); \
+	fi
+endif
+
+uninstall-local:
+if USE_KCONFIG
+	if test -w $(kde_kcfgdir); then ( \
+		for file in $(kde_kcfg_files); do \
+			rm -f $(kde_kcfgdir)/$(file); \
+		done \
+		); \
+	fi
+	if test -w $(kde_kcfgdir); then ( \
+		for file in $(kde_kcfg_files); do \
+			rm -f $(kde_kcfgdir)/$(file); \
+		done \
+		); \
+	fi
 endif
 
 xsltdir    = $(stylesheetdir)
