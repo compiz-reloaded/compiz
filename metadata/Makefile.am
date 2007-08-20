@@ -117,12 +117,12 @@ EXTRA_DIST =		    \
 	$(xml_files)        \
 	$(xml_in_files)     \
 	$(xslt_files)	    \
-	$(schemas_files)    \
+	$(schema_files)     \
 	$(kde_kcfg_files)   \
 	$(kde_config_files)
 
 DISTCLEANFILES =	    \
 	$(xml_files)        \
-	$(schemas_files)    \
+	$(schema_files)     \
 	$(kde_kcfg_files)   \
 	$(kde_config_files)
