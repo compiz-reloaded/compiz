@@ -484,7 +484,7 @@ AC_ARG_ENABLE(kconfig,
   [use_kconfig=$enableval], [use_kconfig=yes])
 
 if test "x$use_kde" != "xyes"; then
-  $use_kconfig=no;
+  use_kconfig=no;
 fi
 
 if test "x$use_kconfig" = "xyes"; then
