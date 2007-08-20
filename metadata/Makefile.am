@@ -94,13 +94,13 @@ uninstall-local:
 if USE_KCONFIG
 	if test -w $(kde_kcfgdir); then ( \
 		for file in $(kde_kcfg_files); do \
-			rm -f $(kde_kcfgdir)/$(file); \
+			rm -f $(kde_kcfgdir)/$$file; \
 		done \
 		); \
 	fi
-	if test -w $(kde_kcfgdir); then ( \
-		for file in $(kde_kcfg_files); do \
-			rm -f $(kde_kcfgdir)/$(file); \
+	if test -w $(kde_configdir); then ( \
+		for file in $(kde_config_files); do \
+			rm -f $(kde_configdir)/$$file; \
 		done \
 		); \
 	fi
