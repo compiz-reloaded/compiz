@@ -1,3 +1,21 @@
+Release 0.5.4 (2007-08-20 David Reveman <davidr@novell.com>)
+============================================================
+Development release.
+
+XCB is now required.
+
+Major improvements to option system that makes
+configuration backend integration much less complex.
+
+Kconfig plugin that provides proper KDE configuration
+support.
+
+Kcfg files are generated from the meta-data and they can
+be used to generate C++ source code that will provide an
+API for applications to access all compiz configuration
+data used by the kconfig plugin.
+
+
 Release 0.5.2 (2007-08-03 David Reveman <davidr@novell.com>)
 ============================================================
 Development release.
