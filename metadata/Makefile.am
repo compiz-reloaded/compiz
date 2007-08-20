@@ -48,7 +48,7 @@ schemas_stylesheets = schemas.xslt
 endif
 
 if USE_KCONFIG
-kde_kcfgdir    = $(KDE_KCFG_DIR)
+kde_kcfgdir    = $(DESTDIR)$(KDE_KCFG_DIR)
 kde_kcfg_files = $(patsubst %.xml.in,compiz-%.kcfg,$(xml_in_files))
 
 kde_kcfg_stylesheets = kcfg.xslt
@@ -56,7 +56,7 @@ kde_kcfg_stylesheets = kcfg.xslt
 %.kcfg: $(xml_files)
 	xsltproc -o $@ $(srcdir)/kcfg.xslt $(subst compiz-,,$*).xml;
 
-kde_configdir    = $(KDE_KCONFIG_DIR)
+kde_configdir    = $(DESTDIR)$(KDE_KCONFIG_DIR)
 kde_config_files = compizrc
 
 compizrc: $(kde_kcfg_files)
