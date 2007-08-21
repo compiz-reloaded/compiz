@@ -89,11 +89,10 @@ setCloneRestartCommands (SmcConn connection)
 }
 
 static void
-setRestartStyle (SmcConn connection)
+setRestartStyle (SmcConn connection, char hint)
 {
     SmProp	prop, *pProp;
     SmPropValue propVal;
-    char        hint = SmRestartImmediately;
 
     prop.name = SmRestartStyleHint;
     prop.type = SmCARD8;
@@ -139,7 +138,7 @@ saveYourselfGotProps (SmcConn   connection,
     }
 
 out:
-    setRestartStyle (connection);
+    setRestartStyle (connection, SmRestartImmediately);
     setCloneRestartCommands (connection);
 
     SmcSaveYourselfDone (connection, 1);
@@ -227,6 +226,8 @@ closeSession (void)
 {
     if (connected)
     {
+	setRestartStyle (smcConnection, SmRestartIfRunning);
+
 	if (SmcCloseConnection (smcConnection, 0, NULL) != SmcConnectionInUse)
 	    connected = FALSE;
 	if (smClientId) {
