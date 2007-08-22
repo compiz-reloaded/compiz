@@ -609,3 +609,18 @@ availablePlugins (int *n)
 
     return list;
 }
+
+int
+getPluginABI (const char *name)
+{
+    CompPlugin *p = findActivePlugin (name);
+    CompOption	*option;
+    int		nOption;
+
+    if (!p || !p->vTable->getDisplayOptions)
+	return 0;
+
+    option = (*p->vTable->getDisplayOptions) (p, compDisplays, &nOption);
+
+    return getIntOptionNamed (option, nOption, "abi", 0);
+}

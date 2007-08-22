@@ -2966,6 +2966,9 @@ getPlugins (void);
 char **
 availablePlugins (int *n);
 
+int
+getPluginABI (const char *name);
+
 
 /* session.c */
 
