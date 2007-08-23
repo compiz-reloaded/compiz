@@ -624,3 +624,18 @@ getPluginABI (const char *name)
 
     return getIntOptionNamed (option, nOption, "abi", 0);
 }
+
+Bool
+checkPluginABI (const char *name,
+		int	   abi)
+{
+    if (getPluginABI (name) != abi)
+    {
+	compLogMessage (NULL, "core", CompLogLevelError,
+			"no '%s' plugin with ABI version '%d' loaded\n",
+			name, abi);
+	return FALSE;
+    }
+
+    return TRUE;
+}

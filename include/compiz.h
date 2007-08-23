@@ -2969,6 +2969,10 @@ availablePlugins (int *n);
 int
 getPluginABI (const char *name);
 
+Bool
+checkPluginABI (const char *name,
+		int	   abi);
+
 
 /* session.c */
 
