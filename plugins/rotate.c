@@ -1715,24 +1715,11 @@ rotateInitDisplay (CompPlugin  *p,
 		   CompDisplay *d)
 {
     RotateDisplay *rd;
-    CompPlugin	  *cube = findActivePlugin ("cube");
-    CompOption	  *option;
-    int		  nOption;
 
-    if (!cube || !cube->vTable->getDisplayOptions)
+    if (!checkPluginABI ("cube", CUBE_ABIVERSION))
 	return FALSE;
 
-    option = (*cube->vTable->getDisplayOptions) (cube, d, &nOption);
-
-    if (getIntOptionNamed (option, nOption, "abi", 0) != CUBE_ABIVERSION)
-    {
-	compLogMessage (d, "rotate", CompLogLevelError,
-			"cube ABI version mismatch");
-	return FALSE;
-    }
-
-    cubeDisplayPrivateIndex = getIntOptionNamed (option, nOption, "index", -1);
-    if (cubeDisplayPrivateIndex < 0)
+    if (!getPluginDisplayIndex (d, "cube", &cubeDisplayPrivateIndex))
 	return FALSE;
 
     rd = malloc (sizeof (RotateDisplay));
