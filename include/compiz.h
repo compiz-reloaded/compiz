@@ -2973,6 +2973,11 @@ Bool
 checkPluginABI (const char *name,
 		int	   abi);
 
+Bool
+getPluginDisplayIndex (CompDisplay *d,
+		       const char  *name,
+		       int	   *index);
+
 
 /* session.c */
 

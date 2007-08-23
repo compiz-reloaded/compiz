@@ -639,3 +639,26 @@ checkPluginABI (const char *name,
 
     return TRUE;
 }
+
+Bool
+getPluginDisplayIndex (CompDisplay *d,
+		       const char  *name,
+		       int	   *index)
+{
+    CompPlugin *p = findActivePlugin (name);
+    CompOption	*option;
+    int		nOption, value;
+
+    if (!p || !p->vTable->getDisplayOptions)
+	return FALSE;
+
+    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+
+    value = getIntOptionNamed (option, nOption, "index", -1);
+    if (value < 0)
+	return FALSE;
+
+    *index = value;
+
+    return TRUE;
+}
