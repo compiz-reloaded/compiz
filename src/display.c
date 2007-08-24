@@ -715,6 +715,7 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "window_menu_button", "button", 0, windowMenu, 0 },
     { "window_menu_key", "key", 0, windowMenu, 0 },
     { "show_desktop_key", "key", 0, showDesktop, 0 },
+    { "show_desktop_edge", "edge", 0, showDesktop, 0 },
     { "raise_on_click", "bool", 0, 0, 0 },
     { "audible_bell", "bool", 0, 0, 0 },
     { "toggle_window_maximized_key", "key", 0, toggleMaximized, 0 },
