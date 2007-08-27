@@ -57,6 +57,42 @@ coreGetMetadata (CompPlugin *plugin)
     return &coreMetadata;
 }
 
+static CompOption *
+coreGetDisplayOptions (CompPlugin  *plugin,
+		       CompDisplay *display,
+		       int	   *count)
+{
+    *count = COMP_DISPLAY_OPTION_NUM;
+    return display->opt;
+}
+
+static Bool
+coreSetDisplayOption (CompPlugin      *plugin,
+		      CompDisplay     *display,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    return (*display->setDisplayOption) (display, name, value);
+}
+
+static CompOption *
+coreGetScreenOptions (CompPlugin *plugin,
+		      CompScreen *screen,
+		      int	 *count)
+{
+    *count = COMP_SCREEN_OPTION_NUM;
+    return screen->opt;
+}
+
+static Bool
+coreSetScreenOption (CompPlugin      *plugin,
+		     CompScreen      *screen,
+		     const char	     *name,
+		     CompOptionValue *value)
+{
+    return (*screen->setScreenOption) (screen, name, value);
+}
+
 static CompPluginVTable coreVTable = {
     "core",
     coreGetVersion,
@@ -69,10 +105,10 @@ static CompPluginVTable coreVTable = {
     0, /* FiniScreen */
     0, /* InitWindow */
     0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    0, /* GetScreenOptions */
-    0, /* SetScreenOption */
+    coreGetDisplayOptions,
+    coreSetDisplayOption,
+    coreGetScreenOptions,
+    coreSetScreenOption
 };
 
 static Bool
