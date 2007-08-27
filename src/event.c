@@ -1312,9 +1312,9 @@ handleEvent (CompDisplay *d,
 		if (w->state & CompWindowStateHiddenMask)
 		{
 		    w->minimized = FALSE;
-		    w->state &= ~CompWindowStateHiddenMask;
 
-		    changeWindowState (w, w->state);
+		    changeWindowState (w,
+				       w->state & ~CompWindowStateHiddenMask);
 
 		    updateClientListForScreen (w->screen);
 		}
@@ -1682,12 +1682,10 @@ handleEvent (CompDisplay *d,
 				  CompWindowStateMaximizedVertMask))
 			stackingUpdateMode = CompStackingUpdateModeNormal;
 
-		    w->state = wState;
+		    changeWindowState (w, wState);
 
 		    recalcWindowType (w);
 		    recalcWindowActions (w);
-
-		    changeWindowState (w, w->state);
 
 		    updateWindowAttributes (w, stackingUpdateMode);
 		}
