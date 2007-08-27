@@ -109,7 +109,7 @@ cloaderListPlugins (const char *path,
 	return 0;
 
     *list = strdup (coreVTable.name);
-    if (*list)
+    if (!*list)
     {
 	free (list);
 	return 0;
