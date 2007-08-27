@@ -654,7 +654,7 @@ availablePlugins (int *n)
     }
 
     pluginList  = (*loaderListPlugins) (PLUGINDIR, &nPluginList);
-    currentList = (*loaderListPlugins) (".", &nCurrentList);
+    currentList = (*loaderListPlugins) (NULL, &nCurrentList);
 
     count = 0;
     if (homeList)
