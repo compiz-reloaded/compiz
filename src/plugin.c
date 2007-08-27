@@ -34,6 +34,93 @@
 CompPlugin *plugins = 0;
 
 static Bool
+coreInit (CompPlugin *p)
+{
+    return TRUE;
+}
+
+static void
+coreFini (CompPlugin *p)
+{
+}
+
+static int
+coreGetVersion (CompPlugin *plugin,
+		int	   version)
+{
+    return ABIVERSION;
+}
+
+static CompMetadata *
+coreGetMetadata (CompPlugin *plugin)
+{
+    return &coreMetadata;
+}
+
+static CompPluginVTable coreVTable = {
+    "core",
+    coreGetVersion,
+    coreGetMetadata,
+    coreInit,
+    coreFini,
+    0, /* InitDisplay */
+    0, /* FiniDisplay */
+    0, /* InitScreen */
+    0, /* FiniScreen */
+    0, /* InitWindow */
+    0, /* FiniWindow */
+    0, /* GetDisplayOptions */
+    0, /* SetDisplayOption */
+    0, /* GetScreenOptions */
+    0, /* SetScreenOption */
+};
+
+static Bool
+cloaderLoadPlugin (CompPlugin *p,
+		   const char *path,
+		   const char *name)
+{
+    if (strcmp (name, coreVTable.name))
+	return FALSE;
+
+    p->vTable	      = &coreVTable;
+    p->devPrivate.ptr = NULL;
+    p->devType	      = "cloader";
+
+    return TRUE;
+}
+
+static void
+cloaderUnloadPlugin (CompPlugin *p)
+{
+}
+
+static char **
+cloaderListPlugins (const char *path,
+		    int	       *n)
+{
+    char **list;
+
+    if (path)
+	return 0;
+
+    list = malloc (sizeof (char *));
+    if (!list)
+	return 0;
+
+    *list = strdup (coreVTable.name);
+    if (*list)
+    {
+	free (list);
+	return 0;
+    }
+
+    *n = 1;
+
+    return list;
+}
+
+static Bool
 dlloaderLoadPlugin (CompPlugin *p,
 		    const char *path,
 		    const char *name)
