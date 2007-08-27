@@ -1387,12 +1387,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     hsize = s->hsize * cs->nOutput;
     size  = hsize;
 
-    if (cs->desktopOpacity != OPAQUE)
-    {
-	wasCulled = glIsEnabled (GL_CULL_FACE);
-	if (wasCulled)
-	    glDisable (GL_CULL_FACE);
-    }
+    wasCulled = glIsEnabled (GL_CULL_FACE);
 
     if (!cs->fullscreenOutput)
     {
@@ -1480,6 +1475,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     {
 	/* Outside cube - start with FTB faces */
 	paintOrder = FTB;
+	if (wasCulled && cs->desktopOpacity != OPAQUE)
+	    glDisable (GL_CULL_FACE);
     }
     else
     {
@@ -1491,6 +1488,9 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	cubePaintAllViewports (s, &sa,transform, region,
 			       outputPtr, mask, xMove,
 			       size, hsize, paintOrder);
+
+    if (wasCulled && cs->desktopOpacity != OPAQUE)
+	glDisable (GL_CULL_FACE);
 
     if (cs->grabIndex == 0 && hsize > 2 &&
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
@@ -1545,6 +1545,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     {
 	/* Outside cube - continue with BTF faces */
 	paintOrder = BTF;
+	if (wasCulled && cs->desktopOpacity != OPAQUE)
+	    glEnable (GL_CULL_FACE);
     }
     else
     {
