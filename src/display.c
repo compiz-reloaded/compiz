@@ -1246,8 +1246,9 @@ updateModifierMappings (CompDisplay *d)
 	modMask[i] = 0;
 
     XDisplayKeycodes (d->display, &minKeycode, &maxKeycode);
-    key = XGetKeyboardMapping (d->display, minKeycode, (maxKeycode - minKeycode + 1),
-				  &keysymsPerKeycode);
+    key = XGetKeyboardMapping (d->display,
+			       minKeycode, (maxKeycode - minKeycode + 1),
+		     	       &keysymsPerKeycode);
 
     if (d->modMap)
 	XFreeModifiermap (d->modMap);
@@ -1333,9 +1334,8 @@ updateModifierMappings (CompDisplay *d)
 	}
     }
 
-    if (key) {
-        XFree(key);
-    }
+    if (key)
+	XFree (key);
 }
 
 unsigned int
