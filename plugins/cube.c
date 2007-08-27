@@ -861,6 +861,7 @@ cubePreparePaintScreen (CompScreen *s,
     }
 
     memset (cs->cleared, 0, sizeof (Bool) * s->nOutputDev);
+    memset (cs->capsPainted, 0, sizeof (Bool) * s->nOutputDev);
 
     /* Transparency handling */
     if (cs->rotationState == RotationManual ||
@@ -1367,7 +1368,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     float	      size;
     GLenum            filter = s->display->textureFilter;
     PaintOrder        paintOrder;
-    Bool	      clear;
+    Bool	      capsPainted;
     Bool              wasCulled = FALSE;
     Bool              topDir, bottomDir;
     int output = 0;
@@ -1419,8 +1420,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     sa.xRotate += xRotate;
     sa.vRotate += vRotate;
 
-    clear = cs->cleared[output];
-    if (!clear)
+    if (!cs->cleared[output])
     {
 	(*cs->clearTargetOutput) (s, xRotate, vRotate);
 	cs->cleared[output] = TRUE;
@@ -1492,7 +1492,9 @@ cubePaintTransformedOutput (CompScreen		    *s,
     if (wasCulled && cs->desktopOpacity != OPAQUE)
 	glDisable (GL_CULL_FACE);
 
-    if (cs->grabIndex == 0 && hsize > 2 &&
+    capsPainted = cs->capsPainted[output];
+
+    if (cs->grabIndex == 0 && hsize > 2 && !capsPainted &&
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
 	 sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
@@ -1504,6 +1506,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
 				      { 0.0, -0.5, 0.0}};
 	topDir    = cs->checkOrientation(s, &sa, transform, outputPtr, top);
 	bottomDir = cs->checkOrientation(s, &sa, transform, outputPtr, bottom);
+
+	cs->capsPainted[output] = TRUE;
 
 	if (topDir && bottomDir)
 	{
