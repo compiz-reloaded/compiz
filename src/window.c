@@ -563,13 +563,14 @@ void
 changeWindowState (CompWindow   *w,
 		   unsigned int newState)
 {
-    CompDisplay *d = w->screen->display;
+    CompDisplay  *d = w->screen->display;
+    unsigned int oldState = w->state;
 
     w->state = newState;
 
     setWindowState (d, w->state, w->id);
 
-    (*w->screen->windowStateChangeNotify) (w);
+    (*w->screen->windowStateChangeNotify) (w, oldState);
 
     (*d->matchPropertyChanged) (d, w);
 }
@@ -1981,7 +1982,6 @@ addWindow (CompScreen *screen,
     w->alpha     = (w->attrib.depth == 32);
     w->wmType    = 0;
     w->state     = 0;
-    w->lastState = 0;
     w->actions   = 0;
     w->protocols = 0;
     w->type      = CompWindowTypeUnknownMask;
@@ -2765,9 +2765,9 @@ windowUngrabNotify (CompWindow *w)
 }
 
 void
-windowStateChangeNotify (CompWindow *w)
+windowStateChangeNotify (CompWindow   *w,
+			 unsigned int lastState)
 {
-    w->lastState = w->state;
 }
 
 static Bool
