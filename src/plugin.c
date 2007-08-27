@@ -187,7 +187,7 @@ dlloaderLoadPlugin (CompPlugin *p,
     {
 	free (file);
 
-	return FALSE;
+	return cloaderLoadPlugin (p, path, name);
     }
 
     free (file);
@@ -201,7 +201,10 @@ dlloaderLoadPlugin (CompPlugin *p,
 static void
 dlloaderUnloadPlugin (CompPlugin *p)
 {
-    dlclose (p->devPrivate.ptr);
+    if (strcmp (p->devType, "dlloader") == 0)
+	dlclose (p->devPrivate.ptr);
+    else
+	cloaderUnloadPlugin (p);
 }
 
 static int
@@ -224,20 +227,24 @@ dlloaderListPlugins (const char *path,
 		     int	*n)
 {
     struct dirent **nameList;
-    char	  **list;
+    char	  **list, **cList;
     char	  *name;
     int		  length, nFile, i, j = 0;
+
+    cList = cloaderListPlugins (path, n);
+    if (cList)
+	j = *n;
 
     if (!path)
 	path = ".";
 
     nFile = scandir (path, &nameList, dlloaderFilter, alphasort);
     if (!nFile)
-	return 0;
+	return cList;
 
-    list = malloc (nFile * sizeof (char *));
+    list = realloc (cList, (j + nFile) * sizeof (char *));
     if (!list)
-	return 0;
+	return cList;
 
     for (i = 0; i < nFile; i++)
     {
