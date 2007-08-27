@@ -80,6 +80,9 @@ cloaderLoadPlugin (CompPlugin *p,
 		   const char *path,
 		   const char *name)
 {
+    if (path)
+	return FALSE;
+
     if (strcmp (name, coreVTable.name))
 	return FALSE;
 
