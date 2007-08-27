@@ -49,7 +49,6 @@ typedef struct _GConfDisplay {
     int screenPrivateIndex;
 
     InitPluginForDisplayProc      initPluginForDisplay;
-    SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     GConfClient *client;
@@ -424,11 +423,7 @@ gconfGetDisplayOption (CompDisplay *d,
 
 	if (gconfReadOptionValue (d, entry, o, &value))
 	{
-	    if (strcmp (plugin, "core") == 0)
-		(*d->setDisplayOption) (d, o->name, &value);
-	    else
-		(*d->setDisplayOptionForPlugin) (d, plugin, o->name, &value);
-
+	    (*d->setDisplayOptionForPlugin) (d, plugin, o->name, &value);
 	    compFiniOptionValue (&value, o->type);
 	}
 	else
@@ -492,10 +487,6 @@ gconfReload (void *closure)
 
     GCONF_DISPLAY (d);
 
-    option = compGetDisplayOptions (d, &nOption);
-    while (nOption--)
-	gconfGetDisplayOption (d, option++, "core");
-
     for (p = getPlugins (); p; p = p->next)
     {
 	if (!p->vTable->getDisplayOptions)
@@ -530,33 +521,6 @@ gconfReload (void *closure)
     gd->reloadHandle = 0;
 
     return FALSE;
-}
-
-static Bool
-gconfSetDisplayOption (CompDisplay     *d,
-		       const char      *name,
-		       CompOptionValue *value)
-{
-    Bool status;
-
-    GCONF_DISPLAY (d);
-
-    UNWRAP (gd, d, setDisplayOption);
-    status = (*d->setDisplayOption) (d, name, value);
-    WRAP (gd, d, setDisplayOption, gconfSetDisplayOption);
-
-    if (status && !gd->reloadHandle)
-    {
-	CompOption *option;
-	int	   nOption;
-
-	option = compGetDisplayOptions (d, &nOption);
-	option = compFindOption (option, nOption, name, 0);
-	if (option)
-	    gconfSetOption (d, option, "core", "allscreens");
-    }
-
-    return status;
 }
 
 static Bool
@@ -838,16 +802,9 @@ gconfKeyChanged (GConfClient *client,
     }
     else
     {
-	if (plugin)
-	{
-	    if (plugin->vTable->getDisplayOptions)
-		option = (*plugin->vTable->getDisplayOptions) (plugin, display,
-							       &nOption);
-	}
-	else
-	{
-	    option = compGetDisplayOptions (display, &nOption);
-	}
+	if (plugin && plugin->vTable->getDisplayOptions)
+	    option = (*plugin->vTable->getDisplayOptions) (plugin, display,
+							   &nOption);
 
 	option = compFindOption (option, nOption, token[object + 2], 0);
 	if (option)
@@ -861,10 +818,6 @@ gconfKeyChanged (GConfClient *client,
 							   token[4],
 							   option->name,
 							   &value);
-		else
-		    (*display->setDisplayOption) (display,
-						  option->name,
-						  &value);
 
 		compFiniOptionValue (&value, option->type);
 	    }
@@ -923,7 +876,6 @@ gconfInitDisplay (CompPlugin  *p,
     gd->reloadHandle = compAddTimeout (0, gconfReload, (void *) d);
 
     WRAP (gd, d, initPluginForDisplay, gconfInitPluginForDisplay);
-    WRAP (gd, d, setDisplayOption, gconfSetDisplayOption);
     WRAP (gd, d, setDisplayOptionForPlugin, gconfSetDisplayOptionForPlugin);
 
     d->privates[displayPrivateIndex].ptr = gd;
@@ -948,7 +900,6 @@ gconfFiniDisplay (CompPlugin  *p,
     g_object_unref (gd->client);
 
     UNWRAP (gd, d, initPluginForDisplay);
-    UNWRAP (gd, d, setDisplayOption);
     UNWRAP (gd, d, setDisplayOptionForPlugin);
 
     freeScreenPrivateIndex (d, gd->screenPrivateIndex);

@@ -731,8 +731,8 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
 };
 
 CompOption *
-compGetDisplayOptions (CompDisplay *display,
-		       int	   *count)
+getDisplayOptions (CompDisplay *display,
+		   int	       *count)
 {
     *count = NUM_OPTIONS (display);
     return display->opt;
@@ -821,9 +821,9 @@ pingTimeout (void *closure)
     return TRUE;
 }
 
-static Bool
+Bool
 setDisplayOption (CompDisplay     *display,
-		  const char	  *name,
+		  const char      *name,
 		  CompOptionValue *value)
 {
     CompOption *o;
@@ -922,7 +922,7 @@ updatePlugins (CompDisplay *d)
 	pop = malloc (sizeof (CompPlugin *) * nPop);
 	if (!pop)
 	{
-	    (*d->setDisplayOption) (d, o->name, &d->plugin);
+	    (*d->setDisplayOptionForPlugin) (d, "core", o->name, &d->plugin);
 	    return;
 	}
     }
@@ -994,7 +994,7 @@ updatePlugins (CompDisplay *d)
     if (nPop)
 	free (pop);
 
-    (*d->setDisplayOption) (d, o->name, &d->plugin);
+    (*d->setDisplayOptionForPlugin) (d, "core", o->name, &d->plugin);
 }
 
 static void
@@ -2030,7 +2030,6 @@ addDisplay (const char *name)
 
     updateModifierMappings (d);
 
-    d->setDisplayOption		 = setDisplayOption;
     d->setDisplayOptionForPlugin = setDisplayOptionForPlugin;
 
     d->initPluginForDisplay = initPluginForDisplay;

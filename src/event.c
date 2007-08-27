@@ -741,11 +741,6 @@ handleActionEvent (CompDisplay *d,
 		    return TRUE;
 	    }
 	}
-
-	option = compGetDisplayOptions (d, &nOption);
-	if (triggerButtonPressBindings (d, option, nOption, event, o, 8))
-	    return TRUE;
-
 	break;
     case ButtonRelease:
 	o[0].value.i = event->xbutton.window;
@@ -773,11 +768,6 @@ handleActionEvent (CompDisplay *d,
 		    return TRUE;
 	    }
 	}
-
-	option = compGetDisplayOptions (d, &nOption);
-	if (triggerButtonReleaseBindings (d, option, nOption, event, o, 8))
-	    return TRUE;
-
 	break;
     case KeyPress:
 	o[0].value.i = event->xkey.window;
@@ -804,11 +794,6 @@ handleActionEvent (CompDisplay *d,
 		    return TRUE;
 	    }
 	}
-
-	option = compGetDisplayOptions (d, &nOption);
-	if (triggerKeyPressBindings (d, option, nOption, event, o, 8))
-	    return TRUE;
-
 	break;
     case KeyRelease:
 	o[0].value.i = event->xkey.window;
@@ -835,11 +820,6 @@ handleActionEvent (CompDisplay *d,
 		    return TRUE;
 	    }
 	}
-
-	option = compGetDisplayOptions (d, &nOption);
-	if (triggerKeyReleaseBindings (d, option, nOption, event, o, 8))
-	    return TRUE;
-
 	break;
     case EnterNotify:
 	if (event->xcrossing.mode   != NotifyGrab   &&
@@ -891,11 +871,6 @@ handleActionEvent (CompDisplay *d,
 			    return TRUE;
 		    }
 		}
-
-		option = compGetDisplayOptions (d, &nOption);
-		if (triggerEdgeLeaveBindings (d, option, nOption, state,
-					      edge, o, 7))
-		    return TRUE;
 	    }
 
 	    edge = 0;
@@ -936,11 +911,6 @@ handleActionEvent (CompDisplay *d,
 			    return TRUE;
 		    }
 		}
-
-		option = compGetDisplayOptions (d, &nOption);
-		if (triggerEdgeEnterBindings (d, option, nOption, state,
-					      edge, o, 7))
-		    return TRUE;
 	    }
 	} break;
     case ClientMessage:
@@ -997,11 +967,6 @@ handleActionEvent (CompDisplay *d,
 			    return TRUE;
 		    }
 		}
-
-		option = compGetDisplayOptions (d, &nOption);
-		if (triggerEdgeLeaveBindings (d, option, nOption, state,
-					      edge, o, 6))
-		    return TRUE;
 	    }
 	}
 	else if (event->xclient.message_type == d->xdndPositionAtom)
@@ -1053,11 +1018,6 @@ handleActionEvent (CompDisplay *d,
 			    return TRUE;
 		    }
 		}
-
-		option = compGetDisplayOptions (d, &nOption);
-		if (triggerEdgeEnterBindings (d, option, nOption, state,
-					      edge, o, 6))
-		    return TRUE;
 	    }
 
 	    xdndWindow = None;
@@ -1083,8 +1043,6 @@ handleActionEvent (CompDisplay *d,
 	    {
 		XkbStateNotifyEvent *stateEvent = (XkbStateNotifyEvent *) event;
 
-		option = compGetDisplayOptions (d, &nOption);
-
 		o[0].value.i = d->activeWindow;
 		o[1].value.i = d->activeWindow;
 		o[2].value.i = stateEvent->mods;
@@ -1103,16 +1061,9 @@ handleActionEvent (CompDisplay *d,
 			    return TRUE;
 		    }
 		}
-
-		option = compGetDisplayOptions (d, &nOption);
-		if (triggerStateNotifyBindings (d, option, nOption, stateEvent,
-						o, 4))
-		    return TRUE;
 	    }
 	    else if (xkbEvent->xkb_type == XkbBellNotify)
 	    {
-		option = compGetDisplayOptions (d, &nOption);
-
 		o[0].value.i = d->activeWindow;
 		o[1].value.i = d->activeWindow;
 
@@ -1130,10 +1081,6 @@ handleActionEvent (CompDisplay *d,
 			    return TRUE;
 		    }
 		}
-
-		option = compGetDisplayOptions (d, &nOption);
-		if (triggerBellNotifyBindings (d, option, nOption, o, 3))
-		    return TRUE;
 	    }
 	}
 	break;

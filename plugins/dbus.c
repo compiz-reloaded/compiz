@@ -66,7 +66,6 @@ typedef struct _DbusDisplay {
 
     CompFileWatchHandle fileWatch[DBUS_FILE_WATCH_NUM];
 
-    SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
     InitPluginForDisplayProc      initPluginForDisplay;
 } DbusDisplay;
@@ -133,8 +132,6 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 
 	if (s)
 	    return compGetScreenOptions (s, nOption);
-	else
-	    return compGetDisplayOptions (d, nOption);
     }
     else
     {
@@ -1076,8 +1073,6 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 							 path[0],
 							 option->name,
 							 &value);
-		    else
-			(*d->setDisplayOption) (d, option->name, &value);
 		}
 
 		if (!dbus_message_get_no_reply (message))
@@ -2222,46 +2217,6 @@ dbusInitPluginForScreen (CompPlugin *p,
 }
 
 static Bool
-dbusSetDisplayOption (CompDisplay     *d,
-		      const char      *name,
-		      CompOptionValue *value)
-{
-    CompScreen *s;
-    Bool       status;
-
-    DBUS_DISPLAY (d);
-
-    UNWRAP (dd, d, setDisplayOption);
-    status = (*d->setDisplayOption) (d, name, value);
-    WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
-
-    if (status)
-    {
-	CompOption *option;
-	int	   nOption;
-
-	option = compGetDisplayOptions (d, &nOption);
-	dbusSendChangeSignalForDisplayOption (d,
-					      compFindOption (option, nOption,
-							      name, 0),
-					      "core");
-
-	if (strcmp (name, "active_plugins") == 0)
-	{
-	    dbusUnregisterPluginsForDisplay (dd->connection, d);
-	    dbusRegisterPluginsForDisplay (dd->connection, d);
-	    for (s = d->screens; s; s = s->next)
-	    {
-		dbusUnregisterPluginsForScreen (dd->connection, s);
-		dbusRegisterPluginsForScreen (dd->connection, s);
-	    }
-	}
-    }
-
-    return status;
-}
-
-static Bool
 dbusSetDisplayOptionForPlugin (CompDisplay     *d,
 			       const char      *plugin,
 			       const char      *name,
@@ -2291,6 +2246,21 @@ dbusSetDisplayOptionForPlugin (CompDisplay     *d,
 								  nOption,
 								  name, 0),
 						  p->vTable->name);
+
+	    if (strcmp (p->vTable->name, "core") == 0 &&
+		strcmp (name, "active_plugins") == 0)
+	    {
+		CompScreen *s;
+
+		dbusUnregisterPluginsForDisplay (dd->connection, d);
+		dbusRegisterPluginsForDisplay (dd->connection, d);
+
+		for (s = d->screens; s; s = s->next)
+		{
+		    dbusUnregisterPluginsForScreen (dd->connection, s);
+		    dbusRegisterPluginsForScreen (dd->connection, s);
+		}
+	    }
 	}
     }
 
@@ -2499,7 +2469,6 @@ dbusInitDisplay (CompPlugin  *p,
 	}
     }
 
-    WRAP (dd, d, setDisplayOption, dbusSetDisplayOption);
     WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
     WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
 
@@ -2556,7 +2525,6 @@ dbusFiniDisplay (CompPlugin  *p,
       dbus_connection_unref (dd->connection);
     */
 
-    UNWRAP (dd, d, setDisplayOption);
     UNWRAP (dd, d, setDisplayOptionForPlugin);
     UNWRAP (dd, d, initPluginForDisplay);
 

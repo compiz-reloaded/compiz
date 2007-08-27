@@ -37,7 +37,6 @@ typedef struct _KconfigDisplay {
     int screenPrivateIndex;
 
     InitPluginForDisplayProc      initPluginForDisplay;
-    SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     KConfig *config;
@@ -440,11 +439,7 @@ kconfigGetDisplayOption (CompDisplay *d,
 
 	if (kconfigReadOptionValue (d, kd->config, o, &value))
 	{
-	    if (strcmp (plugin, "core") == 0)
-		(*d->setDisplayOption) (d, o->name, &value);
-	    else
-		(*d->setDisplayOptionForPlugin) (d, plugin, o->name, &value);
-
+	    (*d->setDisplayOptionForPlugin) (d, plugin, o->name, &value);
 	    compFiniOptionValue (&value, o->type);
 	}
     }
@@ -500,10 +495,6 @@ kconfigRcReload (void *closure)
 
     kd->config->reparseConfiguration ();
 
-    option = compGetDisplayOptions (d, &nOption);
-    while (nOption--)
-	kconfigGetDisplayOption (d, option++, "core");
-
     for (p = getPlugins (); p; p = p->next)
     {
 	if (!p->vTable->getDisplayOptions)
@@ -552,33 +543,6 @@ kconfigRcChanged (const char *name,
 	if (!kd->reloadHandle)
 	    kd->reloadHandle = compAddTimeout (0, kconfigRcReload, closure);
     }
-}
-
-static Bool
-kconfigSetDisplayOption (CompDisplay     *d,
-			 const char	 *name,
-			 CompOptionValue *value)
-{
-    Bool status;
-
-    KCONFIG_DISPLAY (d);
-
-    UNWRAP (kd, d, setDisplayOption);
-    status = (*d->setDisplayOption) (d, name, value);
-    WRAP (kd, d, setDisplayOption, kconfigSetDisplayOption);
-
-    if (status && !kd->reloadHandle)
-    {
-	CompOption *option;
-	int	   nOption;
-
-	option = compGetDisplayOptions (d, &nOption);
-	option = compFindOption (option, nOption, name, 0);
-	if (option)
-	    kconfigSetOption (d, option, "core", "display");
-    }
-
-    return status;
 }
 
 static Bool
@@ -791,7 +755,6 @@ kconfigInitDisplay (CompPlugin  *p,
     }
 
     WRAP (kd, d, initPluginForDisplay, kconfigInitPluginForDisplay);
-    WRAP (kd, d, setDisplayOption, kconfigSetDisplayOption);
     WRAP (kd, d, setDisplayOptionForPlugin, kconfigSetDisplayOptionForPlugin);
 
     d->privates[displayPrivateIndex].ptr = kd;
@@ -806,7 +769,6 @@ kconfigFiniDisplay (CompPlugin  *p,
     KCONFIG_DISPLAY (d);
 
     UNWRAP (kd, d, initPluginForDisplay);
-    UNWRAP (kd, d, setDisplayOption);
     UNWRAP (kd, d, setDisplayOptionForPlugin);
 
     if (kd->reloadHandle)

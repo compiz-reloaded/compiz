@@ -749,7 +749,7 @@ matchExpHandlerChanged (CompDisplay *display)
 	}
     }
 
-    option = compGetDisplayOptions (display, &nOption);
+    option = getDisplayOptions (display, &nOption);
     matchUpdateMatchOptions (option, nOption);
 
     for (s = display->screens; s; s = s->next)

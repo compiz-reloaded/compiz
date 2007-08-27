@@ -626,13 +626,6 @@ typedef int CompFileWatchHandle;
 #define COMP_DISPLAY_OPTION_PING_DELAY			     59
 #define COMP_DISPLAY_OPTION_NUM				     60
 
-typedef CompOption *(*GetDisplayOptionsProc) (CompDisplay *display,
-					      int	  *count);
-
-typedef Bool (*SetDisplayOptionProc) (CompDisplay     *display,
-				      const char      *name,
-				      CompOptionValue *value);
-
 typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
 						    CompDisplay *display,
 						    int	        *count);
@@ -950,7 +943,6 @@ struct _CompDisplay {
 
     CompFileWatch *fileWatch;
 
-    SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     InitPluginForDisplayProc initPluginForDisplay;
@@ -984,8 +976,13 @@ void
 freeDisplayPrivateIndex (int index);
 
 CompOption *
-compGetDisplayOptions (CompDisplay *display,
-		       int	   *count);
+getDisplayOptions (CompDisplay *display,
+		   int	   *count);
+
+Bool
+setDisplayOption (CompDisplay     *display,
+		  const char      *name,
+		  CompOptionValue *value);
 
 CompTimeoutHandle
 compAddTimeout (int	     time,

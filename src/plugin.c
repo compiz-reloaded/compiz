@@ -62,8 +62,7 @@ coreGetDisplayOptions (CompPlugin  *plugin,
 		       CompDisplay *display,
 		       int	   *count)
 {
-    *count = COMP_DISPLAY_OPTION_NUM;
-    return display->opt;
+    return getDisplayOptions (display, count);
 }
 
 static Bool
@@ -72,7 +71,7 @@ coreSetDisplayOption (CompPlugin      *plugin,
 		      const char      *name,
 		      CompOptionValue *value)
 {
-    return (*display->setDisplayOption) (display, name, value);
+    return setDisplayOption (display, name, value);
 }
 
 static CompOption *

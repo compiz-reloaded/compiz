@@ -84,7 +84,6 @@ typedef struct _IniDisplay {
     CompFileWatchHandle		  directoryWatch;
 
     InitPluginForDisplayProc      initPluginForDisplay;
-    SetDisplayOptionProc	  setDisplayOption;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     IniFileData			*fileData;
@@ -516,8 +515,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
     {
 	if (s)
 	    option = compGetScreenOptions (s, &nOption);
-	else
-	    option = compGetDisplayOptions (d, &nOption);
     }
 
     while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
@@ -606,9 +603,6 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			if (s)
 			    status = (*s->setScreenOption)
 						(s, optionName, &value);
-			else
-			    status = (*d->setDisplayOption)
-						(d, optionName, &value);
 		    }
 		    if (o->type == CompOptionTypeMatch)
 		    {
@@ -641,7 +635,7 @@ iniSaveOptions (CompDisplay *d,
 		const char  *plugin)
 {
     CompScreen *s = NULL;
-    CompOption *option;
+    CompOption *option = NULL;
     int	       nOption = 0;
     char       *filename, *directory, *fullPath, *strVal = NULL;
 
@@ -677,8 +671,6 @@ iniSaveOptions (CompDisplay *d,
 	/* core (general) setting */
 	if (s)
 	    option = compGetScreenOptions (s, &nOption);
-	else
-	    option = compGetDisplayOptions (d, &nOption);
     }
 
     if (!option)
@@ -899,7 +891,8 @@ iniLoadOptions (CompDisplay *d,
 	    compLogMessage (d, "ini", CompLogLevelWarn,
 			    "Loading default plugins (%s)", DEFAULT_PLUGINS);
 
-	    (*d->setDisplayOption) (d, "active_plugins", &value);
+	    (*d->setDisplayOptionForPlugin) (d, "core", "active_plugins",
+					     &value);
 
 	    free (value.list.value);
 
@@ -1073,25 +1066,6 @@ iniSetScreenOption (CompScreen *s, const char *name, CompOptionValue *value)
 }
 
 static Bool
-iniSetDisplayOption (CompDisplay *d, const char *name, CompOptionValue *value)
-{
-    Bool status;
-
-    INI_DISPLAY (d);
-
-    UNWRAP (id, d, setDisplayOption);
-    status = (*d->setDisplayOption) (d, name, value);
-    WRAP (id, d, setDisplayOption, iniSetDisplayOption);
-
-    if (status)
-    {
-	iniSaveOptions (d, -1, NULL);
-    }
-
-    return status;
-}
-
-static Bool
 iniSetDisplayOptionForPlugin (CompDisplay     *d,
 			      const char      *plugin,
 			      const char      *name,
@@ -1164,7 +1138,6 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
     id->directoryWatch = 0;
 
     WRAP (id, d, initPluginForDisplay, iniInitPluginForDisplay);
-    WRAP (id, d, setDisplayOption, iniSetDisplayOption);
     WRAP (id, d, setDisplayOptionForPlugin, iniSetDisplayOptionForPlugin);
 
     d->privates[displayPrivateIndex].ptr = id;
@@ -1197,7 +1170,6 @@ iniFiniDisplay (CompPlugin *p, CompDisplay *d)
     freeScreenPrivateIndex (d, id->screenPrivateIndex);
 
     UNWRAP (id, d, initPluginForDisplay);
-    UNWRAP (id, d, setDisplayOption);
     UNWRAP (id, d, setDisplayOptionForPlugin);
 
     free (id);

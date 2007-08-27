@@ -221,11 +221,7 @@ fuseGetDisplayOptionsFromInode (CompDisplay *d,
 {
     CompOption *option = NULL;
 
-    if (inode->type & FUSE_INODE_TYPE_CORE)
-    {
-	option = compGetDisplayOptions (d, nOption);
-    }
-    else if (inode->type & FUSE_INODE_TYPE_PLUGIN)
+    if (inode->type & FUSE_INODE_TYPE_PLUGIN)
     {
 	CompPlugin *p;
 
@@ -769,8 +765,6 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 						 plugin,
 						 option->name,
 						 &value);
-	    else
-		(*d->setDisplayOption) (d, option->name, &value);
 	}
 
 	compFiniOptionValue (&value, option->type);
