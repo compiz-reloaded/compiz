@@ -663,14 +663,14 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
     {
 	CompOptionValue value;
 	CompScreen	*s = NULL;
-	FuseInode	*screenInode;
+	FuseInode	*objectInode;
 
 	if (inode->type & FUSE_INODE_TYPE_VALUE)
 	{
 	    if (!fuseInitValueFromString (d, &value, option->type, str))
 		return;
 
-	    screenInode = inode->parent->parent;
+	    objectInode = inode->parent->parent;
 	}
 	else if (inode->type & FUSE_INODE_TYPE_ITEM_VALUE)
 	{
@@ -717,18 +717,18 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 		return;
 	    }
 
-	    screenInode = inode->parent->parent->parent;
+	    objectInode = inode->parent->parent->parent;
 	}
 	else
 	{
 	    return;
 	}
 
-	if (screenInode->type & FUSE_INODE_TYPE_SCREEN)
+	if (objectInode->type & FUSE_INODE_TYPE_SCREEN)
 	{
 	    int screenNum = -1;
 
-	    sscanf (screenInode->name, "screen%d", &screenNum);
+	    sscanf (objectInode->name, "screen%d", &screenNum);
 
 	    for (s = d->screens; s; s = s->next)
 		if (s->screenNum == screenNum)
@@ -738,14 +738,14 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	if (s)
 	{
 	    (*s->setScreenOptionForPlugin) (s,
-					    screenInode->parent->name,
+					    objectInode->parent->name,
 					    option->name,
 					    &value);
 	}
 	else
 	{
 	    (*d->setDisplayOptionForPlugin) (d,
-					     screenInode->parent->name,
+					     objectInode->parent->name,
 					     option->name,
 					     &value);
 	}
