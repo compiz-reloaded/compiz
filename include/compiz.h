@@ -26,6 +26,8 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
+#include <compiz-common.h>
+
 #define ABIVERSION 20070828
 
 #include <stdio.h>
@@ -48,9 +50,7 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 
-#ifdef  __cplusplus
-extern "C" {
-#endif
+COMPIZ_BEGIN_DECLS
 
 #if COMPOSITE_MAJOR > 0 || COMPOSITE_MINOR > 2
 #define USE_COW
@@ -2859,33 +2859,7 @@ windowAddNotify (CompWindow *w);
 
 #define HOME_PLUGINDIR ".compiz/plugins"
 
-typedef Bool (*InitPluginProc) (CompPlugin *plugin);
-typedef void (*FiniPluginProc) (CompPlugin *plugin);
-
-typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
-
-typedef struct _CompPluginVTable {
-    const char *name;
-
-    GetMetadataProc getMetadata;
-
-    InitPluginProc init;
-    FiniPluginProc fini;
-
-    InitPluginForDisplayProc initDisplay;
-    FiniPluginForDisplayProc finiDisplay;
-
-    InitPluginForScreenProc initScreen;
-    FiniPluginForScreenProc finiScreen;
-
-    InitPluginForWindowProc initWindow;
-    FiniPluginForWindowProc finiWindow;
-
-    GetPluginDisplayOptionsProc getDisplayOptions;
-    SetPluginDisplayOptionProc  setDisplayOption;
-    GetPluginScreenOptionsProc  getScreenOptions;
-    SetPluginScreenOptionProc   setScreenOption;
-} CompPluginVTable;
+typedef struct _CompPluginVTable CompPluginVTable;
 
 typedef CompPluginVTable *(*PluginGetInfoProc) (void);
 
@@ -3333,8 +3307,6 @@ compReadXmlChunkFromMetadataOptionInfo (const CompMetadataOptionInfo *info,
 					int			     length);
 
 
-#ifdef  __cplusplus
-}
-#endif
+COMPIZ_END_DECLS
 
 #endif

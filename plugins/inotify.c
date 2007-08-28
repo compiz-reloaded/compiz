@@ -28,7 +28,7 @@
 #include <poll.h>
 #include <sys/inotify.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 static CompMetadata inotifyMetadata;
 

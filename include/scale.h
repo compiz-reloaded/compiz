@@ -23,7 +23,7 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 #define SCALE_ABIVERSION 20070706
 

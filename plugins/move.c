@@ -29,7 +29,7 @@
 
 #include <X11/cursorfont.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 static CompMetadata moveMetadata;
 

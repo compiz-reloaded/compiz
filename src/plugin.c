@@ -29,7 +29,7 @@
 #include <dlfcn.h>
 #include <dirent.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 CompPlugin *plugins = 0;
 

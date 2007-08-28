@@ -27,7 +27,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 #include <decoration.h>
 
 #include <X11/Xatom.h>

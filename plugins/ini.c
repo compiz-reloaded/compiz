@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 #define DEFAULT_PLUGINS     "ini,inotify,png,decoration,move,resize,switcher"
 #define NUM_DEFAULT_PLUGINS 7

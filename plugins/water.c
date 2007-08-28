@@ -32,7 +32,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 #define TEXTURE_SIZE 256
 

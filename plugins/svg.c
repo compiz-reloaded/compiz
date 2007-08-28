@@ -33,7 +33,7 @@
 #include <X11/Xatom.h>
 #include <X11/extensions/shape.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 #include <decoration.h>
 
 static CompMetadata svgMetadata;

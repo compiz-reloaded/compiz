@@ -31,7 +31,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 #define WIN_X(w) ((w)->attrib.x - (w)->output.left)
 #define WIN_Y(w) ((w)->attrib.y - (w)->output.top)

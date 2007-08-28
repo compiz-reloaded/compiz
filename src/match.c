@@ -23,10 +23,10 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
-#include <compiz.h>
-
 #include <stdlib.h>
 #include <string.h>
+
+#include <compiz-plugin.h>
 
 static void
 matchResetOps (CompDisplay *display,

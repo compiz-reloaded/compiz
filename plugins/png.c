@@ -29,7 +29,7 @@
 #include <png.h>
 #include <setjmp.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 static CompMetadata pngMetadata;
 

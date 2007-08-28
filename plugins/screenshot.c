@@ -27,7 +27,7 @@
 #include <string.h>
 #include <dirent.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 static CompMetadata shotMetadata;
 

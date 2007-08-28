@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 #include <glib.h>
 

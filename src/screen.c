@@ -43,7 +43,7 @@
 #include <X11/extensions/shape.h>
 #include <X11/cursorfont.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 

@@ -28,7 +28,7 @@
 #include <string.h>
 #include <cairo-xlib-xrender.h>
 
-#include <compiz.h>
+#include <compiz-plugin.h>
 
 static CompMetadata annoMetadata;
 
