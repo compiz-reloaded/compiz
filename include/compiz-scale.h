@@ -23,6 +23,9 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#ifndef _COMPIZ_SCALE_H
+#define _COMPIZ_SCALE_H
+
 #include <compiz-plugin.h>
 
 #define SCALE_ABIVERSION 20070706
@@ -189,3 +192,4 @@ typedef struct _ScaleWindow {
 		      GET_SCALE_SCREEN  (w->screen,	       \
 		      GET_SCALE_DISPLAY (w->screen->display)))
 
+#endif
