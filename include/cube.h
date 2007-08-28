@@ -25,7 +25,7 @@
 
 #include <compiz.h>
 
-#define CUBE_ABIVERSION 20070827
+#define CUBE_ABIVERSION 20070828
 
 #define CUBE_MOMODE_AUTO  0
 #define CUBE_MOMODE_MULTI 1
