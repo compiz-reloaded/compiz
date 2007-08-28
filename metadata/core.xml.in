@@ -7,6 +7,9 @@
 		<_short>Active Plugins</_short>
 		<_long>List of currently active plugins</_long>
 		<type>string</type>
+		<default>
+		    <value>core</value>
+		</default>
 	    </option>
 	    <option name="texture_filter" type="int">
 		<_short>Texture Filter</_short>
