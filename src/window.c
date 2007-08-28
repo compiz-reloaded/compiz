@@ -2135,7 +2135,7 @@ addWindow (CompScreen *screen,
 
 	    XUnmapWindow (screen->display->display, w->id);
 
-	    setWindowState (screen->display, w->state, w->id); 
+	    setWindowState (screen->display, w->state, w->id);
 	}
     }
     else if (!w->attrib.override_redirect)

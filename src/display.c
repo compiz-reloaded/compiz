@@ -1255,7 +1255,7 @@ updateModifierMappings (CompDisplay *d)
     XDisplayKeycodes (d->display, &minKeycode, &maxKeycode);
     key = XGetKeyboardMapping (d->display,
 			       minKeycode, (maxKeycode - minKeycode + 1),
-		     	       &keysymsPerKeycode);
+			       &keysymsPerKeycode);
 
     if (d->modMap)
 	XFreeModifiermap (d->modMap);
