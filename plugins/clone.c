@@ -849,13 +849,6 @@ cloneFini (CompPlugin *p)
     compFiniMetadata (&cloneMetadata);
 }
 
-static int
-cloneGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 cloneGetMetadata (CompPlugin *plugin)
 {
@@ -864,7 +857,6 @@ cloneGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable cloneVTable = {
     "clone",
-    cloneGetVersion,
     cloneGetMetadata,
     cloneInit,
     cloneFini,

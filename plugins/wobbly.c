@@ -2871,13 +2871,6 @@ wobblyFini (CompPlugin *p)
     compFiniMetadata (&wobblyMetadata);
 }
 
-static int
-wobblyGetVersion (CompPlugin *plugin,
-		  int	     version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 wobblyGetMetadata (CompPlugin *plugin)
 {
@@ -2886,7 +2879,6 @@ wobblyGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable wobblyVTable = {
     "wobbly",
-    wobblyGetVersion,
     wobblyGetMetadata,
     wobblyInit,
     wobblyFini,

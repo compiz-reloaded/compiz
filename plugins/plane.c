@@ -719,13 +719,6 @@ planeFini (CompPlugin *p)
     compFiniMetadata (&planeMetadata);
 }
 
-static int
-planeGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 planeGetMetadata (CompPlugin *plugin)
 {
@@ -734,7 +727,6 @@ planeGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable planeVTable = {
     "plane",
-    planeGetVersion,
     planeGetMetadata,
     planeInit,
     planeFini,

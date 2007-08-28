@@ -1121,13 +1121,6 @@ zoomFini (CompPlugin *p)
     compFiniMetadata (&zoomMetadata);
 }
 
-static int
-zoomGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 zoomGetMetadata (CompPlugin *plugin)
 {
@@ -1136,7 +1129,6 @@ zoomGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable zoomVTable = {
     "zoom",
-    zoomGetVersion,
     zoomGetMetadata,
     zoomInit,
     zoomFini,

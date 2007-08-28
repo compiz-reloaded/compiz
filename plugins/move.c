@@ -930,13 +930,6 @@ moveFini (CompPlugin *p)
     compFiniMetadata (&moveMetadata);
 }
 
-static int
-moveGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 moveGetMetadata (CompPlugin *plugin)
 {
@@ -945,7 +938,6 @@ moveGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable moveVTable = {
     "move",
-    moveGetVersion,
     moveGetMetadata,
     moveInit,
     moveFini,

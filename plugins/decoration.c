@@ -1481,13 +1481,6 @@ decorFini (CompPlugin *p)
     compFiniMetadata (&decorMetadata);
 }
 
-static int
-decorGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 decorGetMetadata (CompPlugin *plugin)
 {
@@ -1496,7 +1489,6 @@ decorGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable decorVTable = {
     "decoration",
-    decorGetVersion,
     decorGetMetadata,
     decorInit,
     decorFini,

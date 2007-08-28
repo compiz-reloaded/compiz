@@ -2776,13 +2776,6 @@ blurFini (CompPlugin *p)
     compFiniMetadata (&blurMetadata);
 }
 
-static int
-blurGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 blurGetMetadata (CompPlugin *plugin)
 {
@@ -2791,7 +2784,6 @@ blurGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable blurVTable = {
     "blur",
-    blurGetVersion,
     blurGetMetadata,
     blurInit,
     blurFini,

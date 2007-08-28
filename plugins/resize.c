@@ -1383,13 +1383,6 @@ resizeFini (CompPlugin *p)
     compFiniMetadata (&resizeMetadata);
 }
 
-static int
-resizeGetVersion (CompPlugin *plugin,
-		  int	     version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 resizeGetMetadata (CompPlugin *plugin)
 {
@@ -1398,7 +1391,6 @@ resizeGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable resizeVTable = {
     "resize",
-    resizeGetVersion,
     resizeGetMetadata,
     resizeInit,
     resizeFini,

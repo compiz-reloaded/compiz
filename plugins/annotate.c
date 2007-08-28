@@ -880,13 +880,6 @@ annoFini (CompPlugin *p)
     compFiniMetadata (&annoMetadata);
 }
 
-static int
-annoGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 annoGetMetadata (CompPlugin *plugin)
 {
@@ -895,7 +888,6 @@ annoGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable annoVTable = {
     "annotate",
-    annoGetVersion,
     annoGetMetadata,
     annoInit,
     annoFini,

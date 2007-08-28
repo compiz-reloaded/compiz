@@ -1744,13 +1744,6 @@ waterFini (CompPlugin *p)
     compFiniMetadata (&waterMetadata);
 }
 
-static int
-waterGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 waterGetMetadata (CompPlugin *plugin)
 {
@@ -1759,7 +1752,6 @@ waterGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable waterVTable = {
     "water",
-    waterGetVersion,
     waterGetMetadata,
     waterInit,
     waterFini,

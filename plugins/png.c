@@ -527,13 +527,6 @@ pngFini (CompPlugin *p)
     compFiniMetadata (&pngMetadata);
 }
 
-static int
-pngGetVersion (CompPlugin *plugin,
-	       int	  version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 pngGetMetadata (CompPlugin *plugin)
 {
@@ -542,7 +535,6 @@ pngGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable pngVTable = {
     "png",
-    pngGetVersion,
     pngGetMetadata,
     pngInit,
     pngFini,

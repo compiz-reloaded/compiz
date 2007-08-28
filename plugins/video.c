@@ -1248,13 +1248,6 @@ videoFini (CompPlugin *p)
     compFiniMetadata (&videoMetadata);
 }
 
-static int
-videoGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 videoGetMetadata (CompPlugin *plugin)
 {
@@ -1263,7 +1256,6 @@ videoGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable videoVTable = {
     "video",
-    videoGetVersion,
     videoGetMetadata,
     videoInit,
     videoFini,

@@ -2163,13 +2163,6 @@ scaleFini (CompPlugin *p)
     compFiniMetadata (&scaleMetadata);
 }
 
-static int
-scaleGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 scaleGetMetadata (CompPlugin *plugin)
 {
@@ -2178,7 +2171,6 @@ scaleGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable scaleVTable = {
     "scale",
-    scaleGetVersion,
     scaleGetMetadata,
     scaleInit,
     scaleFini,

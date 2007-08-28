@@ -1604,21 +1604,20 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
     if (p)
     {
-	dbus_bool_t supportedABI;
-	int	    version;
-	char	    *shortDesc = NULL;
-	char	    *longDesc = NULL;
-	const char  *blankStr = "";
-
-	version = (*p->vTable->getVersion) (p, ABIVERSION);
-	supportedABI = (version == ABIVERSION) ? TRUE : FALSE;
+	Bool	   initializedPlugin = TRUE;
+	char	   *shortDesc = NULL;
+	char	   *longDesc = NULL;
+	const char *blankStr = "";
 
 	reply = dbus_message_new_method_return (message);
 
-	if (supportedABI && loadedPlugin)
-	    (*p->vTable->init) (p);
+	if (loadedPlugin)
+	{
+	    if (!(*p->vTable->init) (p))
+		initializedPlugin = FALSE;
+	}
 
-	if (supportedABI && p->vTable->getMetadata)
+	if (initializedPlugin && p->vTable->getMetadata)
 	{
 	    CompMetadata *m;
 
@@ -1652,16 +1651,16 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 				      DBUS_TYPE_STRING, &blankStr,
 				      DBUS_TYPE_INVALID);
 
+	dbus_message_append_args (reply,
+				  DBUS_TYPE_BOOLEAN, &initializedPlugin,
+				  DBUS_TYPE_INVALID);
+
 	if (shortDesc)
 	    free (shortDesc);
 	if (longDesc)
 	    free (longDesc);
 
-	dbus_message_append_args (reply,
-				  DBUS_TYPE_BOOLEAN, &supportedABI,
-				  DBUS_TYPE_INVALID);
-
-	if (supportedABI && loadedPlugin)
+	if (loadedPlugin && initializedPlugin)
 	    (*p->vTable->fini) (p);
     }
     else
@@ -2551,13 +2550,6 @@ dbusFini (CompPlugin *p)
     compFiniMetadata (&dbusMetadata);
 }
 
-static int
-dbusGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 dbusGetMetadata (CompPlugin *plugin)
 {
@@ -2566,7 +2558,6 @@ dbusGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable dbusVTable = {
     "dbus",
-    dbusGetVersion,
     dbusGetMetadata,
     dbusInit,
     dbusFini,

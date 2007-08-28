@@ -1201,12 +1201,6 @@ iniFini (CompPlugin *p)
         freeDisplayPrivateIndex (displayPrivateIndex);
 }
 
-static int
-iniGetVersion (CompPlugin *plugin, int	version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 iniGetMetadata (CompPlugin *plugin)
 {
@@ -1215,7 +1209,6 @@ iniGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable iniVTable = {
     "ini",
-    iniGetVersion,
     iniGetMetadata,
     iniInit,
     iniFini,

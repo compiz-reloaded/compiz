@@ -1004,13 +1004,6 @@ minFini (CompPlugin *p)
     compFiniMetadata (&minMetadata);
 }
 
-static int
-minGetVersion (CompPlugin *plugin,
-	       int	  version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 minGetMetadata (CompPlugin *plugin)
 {
@@ -1019,7 +1012,6 @@ minGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable minVTable = {
     "minimize",
-    minGetVersion,
     minGetMetadata,
     minInit,
     minFini,

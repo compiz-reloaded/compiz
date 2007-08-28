@@ -2256,13 +2256,6 @@ cubeFini (CompPlugin *p)
     compFiniMetadata (&cubeMetadata);
 }
 
-static int
-cubeGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 cubeGetMetadata (CompPlugin *plugin)
 {
@@ -2271,7 +2264,6 @@ cubeGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable cubeVTable = {
     "cube",
-    cubeGetVersion,
     cubeGetMetadata,
     cubeInit,
     cubeFini,

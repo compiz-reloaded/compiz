@@ -547,13 +547,6 @@ shotFini (CompPlugin *p)
     compFiniMetadata (&shotMetadata);
 }
 
-static int
-shotGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 shotGetMetadata (CompPlugin *plugin)
 {
@@ -562,7 +555,6 @@ shotGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable shotVTable = {
     "screenshot",
-    shotGetVersion,
     shotGetMetadata,
     shotInit,
     shotFini,

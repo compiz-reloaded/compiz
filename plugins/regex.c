@@ -491,13 +491,6 @@ regexFini (CompPlugin *p)
     compFiniMetadata (&regexMetadata);
 }
 
-static int
-regexGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 regexGetMetadata (CompPlugin *plugin)
 {
@@ -506,7 +499,6 @@ regexGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable regexVTable = {
     "regex",
-    regexGetVersion,
     regexGetMetadata,
     regexInit,
     regexFini,

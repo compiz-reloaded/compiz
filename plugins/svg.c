@@ -969,13 +969,6 @@ svgFini (CompPlugin *p)
     compFiniMetadata (&svgMetadata);
 }
 
-static int
-svgGetVersion (CompPlugin *plugin,
-	       int	  version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 svgGetMetadata (CompPlugin *plugin)
 {
@@ -984,7 +977,6 @@ svgGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable svgVTable = {
     "svg",
-    svgGetVersion,
     svgGetMetadata,
     svgInit,
     svgFini,

@@ -838,13 +838,6 @@ fadeFini (CompPlugin *p)
     compFiniMetadata (&fadeMetadata);
 }
 
-static int
-fadeGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 fadeGetMetadata (CompPlugin *plugin)
 {
@@ -853,7 +846,6 @@ fadeGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable fadeVTable = {
     "fade",
-    fadeGetVersion,
     fadeGetMetadata,
     fadeInit,
     fadeFini,

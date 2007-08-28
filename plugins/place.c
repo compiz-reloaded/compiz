@@ -1500,13 +1500,6 @@ placeFini (CompPlugin *p)
     compFiniMetadata (&placeMetadata);
 }
 
-static int
-placeGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 placeGetMetadata (CompPlugin *plugin)
 {
@@ -1515,7 +1508,6 @@ placeGetMetadata (CompPlugin *plugin)
 
 static CompPluginVTable placeVTable = {
     "place",
-    placeGetVersion,
     placeGetMetadata,
     placeInit,
     placeFini,

@@ -1898,13 +1898,6 @@ rotateFini (CompPlugin *p)
     compFiniMetadata (&rotateMetadata);
 }
 
-static int
-rotateGetVersion (CompPlugin *plugin,
-		  int	     version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 rotateGetMetadata (CompPlugin *plugin)
 {
@@ -1913,7 +1906,6 @@ rotateGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable rotateVTable = {
     "rotate",
-    rotateGetVersion,
     rotateGetMetadata,
     rotateInit,
     rotateFini,

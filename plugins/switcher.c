@@ -2051,13 +2051,6 @@ switchFini (CompPlugin *p)
     compFiniMetadata (&switchMetadata);
 }
 
-static int
-switchGetVersion (CompPlugin *plugin,
-		  int	     version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 switchGetMetadata (CompPlugin *plugin)
 {
@@ -2066,7 +2059,6 @@ switchGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable switchVTable = {
     "switcher",
-    switchGetVersion,
     switchGetMetadata,
     switchInit,
     switchFini,

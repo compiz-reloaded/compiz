@@ -257,13 +257,6 @@ glibFini (CompPlugin *p)
     compFiniMetadata (&glibMetadata);
 }
 
-static int
-glibGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 glibGetMetadata (CompPlugin *plugin)
 {
@@ -272,7 +265,6 @@ glibGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable glibVTable = {
     "glib",
-    glibGetVersion,
     glibGetMetadata,
     glibInit,
     glibFini,

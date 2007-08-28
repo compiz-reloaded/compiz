@@ -1387,13 +1387,6 @@ fuseFini (CompPlugin *p)
     compFiniMetadata (&fuseMetadata);
 }
 
-static int
-fuseGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 fuseGetMetadata (CompPlugin *plugin)
 {
@@ -1402,7 +1395,6 @@ fuseGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable fuseVTable = {
     "fs",
-    fuseGetVersion,
     fuseGetMetadata,
     fuseInit,
     fuseFini,

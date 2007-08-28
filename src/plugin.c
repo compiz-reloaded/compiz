@@ -44,13 +44,6 @@ coreFini (CompPlugin *p)
 {
 }
 
-static int
-coreGetVersion (CompPlugin *plugin,
-		int	   version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 coreGetMetadata (CompPlugin *plugin)
 {
@@ -93,7 +86,6 @@ coreSetScreenOption (CompPlugin      *plugin,
 
 static CompPluginVTable coreVTable = {
     "core",
-    coreGetVersion,
     coreGetMetadata,
     coreInit,
     coreFini,
@@ -423,17 +415,6 @@ static Bool
 initPlugin (CompPlugin *p)
 {
     CompDisplay *d = compDisplays;
-    int		version;
-
-    version = (*p->vTable->getVersion) (p, ABIVERSION);
-    if (version != ABIVERSION)
-    {
-	compLogMessage (NULL, "core", CompLogLevelError,
-			"Can't load plugin '%s' because it is built for "
-			"ABI version %d and actual version is %d",
-			p->vTable->name, version, ABIVERSION);
-	return FALSE;
-    }
 
     if (!(*p->vTable->init) (p))
     {

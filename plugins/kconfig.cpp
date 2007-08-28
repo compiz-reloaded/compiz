@@ -817,13 +817,6 @@ kconfigFini (CompPlugin *p)
     compFiniMetadata (&kconfigMetadata);
 }
 
-static int
-kconfigGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 kconfigGetMetadata (CompPlugin *plugin)
 {
@@ -832,7 +825,6 @@ kconfigGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable kconfigVTable = {
     "kconfig",
-    kconfigGetVersion,
     kconfigGetMetadata,
     kconfigInit,
     kconfigFini,

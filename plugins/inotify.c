@@ -266,13 +266,6 @@ inotifyFini (CompPlugin *p)
     compFiniMetadata (&inotifyMetadata);
 }
 
-static int
-inotifyGetVersion (CompPlugin *plugin,
-		   int	      version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 inotifyGetMetadata (CompPlugin *plugin)
 {
@@ -281,7 +274,6 @@ inotifyGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable inotifyVTable = {
     "inotify",
-    inotifyGetVersion,
     inotifyGetMetadata,
     inotifyInit,
     inotifyFini,

@@ -2859,9 +2859,6 @@ windowAddNotify (CompWindow *w);
 
 #define HOME_PLUGINDIR ".compiz/plugins"
 
-typedef int (*GetVersionProc) (CompPlugin *plugin,
-			       int	  version);
-
 typedef Bool (*InitPluginProc) (CompPlugin *plugin);
 typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
@@ -2870,7 +2867,6 @@ typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
 typedef struct _CompPluginVTable {
     const char *name;
 
-    GetVersionProc  getVersion;
     GetMetadataProc getMetadata;
 
     InitPluginProc init;

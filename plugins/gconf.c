@@ -916,13 +916,6 @@ gconfFini (CompPlugin *p)
     compFiniMetadata (&gconfMetadata);
 }
 
-static int
-gconfGetVersion (CompPlugin *plugin,
-		 int	    version)
-{
-    return ABIVERSION;
-}
-
 static CompMetadata *
 gconfGetMetadata (CompPlugin *plugin)
 {
@@ -931,7 +924,6 @@ gconfGetMetadata (CompPlugin *plugin)
 
 CompPluginVTable gconfVTable = {
     "gconf",
-    gconfGetVersion,
     gconfGetMetadata,
     gconfInit,
     gconfFini,
