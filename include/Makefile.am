@@ -4,3 +4,6 @@ compizinclude_HEADERS = \
 	decoration.h	\
 	cube.h		\
 	scale.h
+
+nodist_compizinclude_HEADERS = \
+	compiz-common.h
