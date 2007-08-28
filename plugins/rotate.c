@@ -32,7 +32,7 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 
-#include <cube.h>
+#include <compiz-cube.h>
 
 static int cubeDisplayPrivateIndex;
 

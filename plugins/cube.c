@@ -30,7 +30,7 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 
-#include <cube.h>
+#include <compiz-cube.h>
 
 #define MULTM(x, y, z) \
 z[0] = x[0] * y[0] + x[4] * y[1] + x[8] * y[2] + x[12] * y[3]; \
