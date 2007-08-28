@@ -3,6 +3,7 @@
 	<_short>General Options</_short>
 	<_long>General compiz options</_long>
 	<display>
+	    <option name="abi" type="int" read_only="true"/>
 	    <option name="active_plugins" type="list">
 		<_short>Active Plugins</_short>
 		<_long>List of currently active plugins</_long>

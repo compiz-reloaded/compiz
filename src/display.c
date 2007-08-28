@@ -665,6 +665,7 @@ shade (CompDisplay     *d,
 }
 
 const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
+    { "abi", "int", 0, 0, 0 },
     { "active_plugins", "list", "<type>string</type>", 0, 0 },
     { "texture_filter", "int", RESTOSTRING (0, 2), 0, 0 },
     { "click_to_focus", "bool", 0, 0, 0 },
@@ -834,6 +835,8 @@ setDisplayOption (CompDisplay     *display,
 	return FALSE;
 
     switch (index) {
+    case COMP_DISPLAY_OPTION_ABI:
+	break;
     case COMP_DISPLAY_OPTION_ACTIVE_PLUGINS:
 	if (compSetOptionList (o, value))
 	{
@@ -2046,6 +2049,8 @@ addDisplay (const char *name)
 					     d->opt,
 					     COMP_DISPLAY_OPTION_NUM))
 	return FALSE;
+
+    d->opt[COMP_DISPLAY_OPTION_ABI].value.i = ABIVERSION;
 
     snprintf (d->displayString, 255, "DISPLAY=%s", DisplayString (dpy));
 
