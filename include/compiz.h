@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_H
 #define _COMPIZ_H
 
-#define ABIVERSION 20070815
+#define ABIVERSION 20070827
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -614,18 +614,19 @@ typedef int CompFileWatchHandle;
 #define COMP_DISPLAY_OPTION_WINDOW_MENU_BUTTON               47
 #define COMP_DISPLAY_OPTION_WINDOW_MENU_KEY                  48
 #define COMP_DISPLAY_OPTION_SHOW_DESKTOP_KEY                 49
-#define COMP_DISPLAY_OPTION_RAISE_ON_CLICK                   50
-#define COMP_DISPLAY_OPTION_AUDIBLE_BELL                     51
-#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_KEY      52
-#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ_KEY 53
-#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT_KEY 54
-#define COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS        55
-#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED_KEY         56
-#define COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED      57
-#define COMP_DISPLAY_OPTION_TERMINAL			     58
-#define COMP_DISPLAY_OPTION_RUN_TERMINAL_KEY		     59
-#define COMP_DISPLAY_OPTION_PING_DELAY			     60
-#define COMP_DISPLAY_OPTION_NUM				     61
+#define COMP_DISPLAY_OPTION_SHOW_DESKTOP_EDGE                50
+#define COMP_DISPLAY_OPTION_RAISE_ON_CLICK                   51
+#define COMP_DISPLAY_OPTION_AUDIBLE_BELL                     52
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_KEY      53
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_HORZ_KEY 54
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_MAXIMIZED_VERT_KEY 55
+#define COMP_DISPLAY_OPTION_HIDE_SKIP_TASKBAR_WINDOWS        56
+#define COMP_DISPLAY_OPTION_TOGGLE_WINDOW_SHADED_KEY         57
+#define COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED      58
+#define COMP_DISPLAY_OPTION_TERMINAL			     59
+#define COMP_DISPLAY_OPTION_RUN_TERMINAL_KEY		     60
+#define COMP_DISPLAY_OPTION_PING_DELAY			     61
+#define COMP_DISPLAY_OPTION_NUM				     62
 
 typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
 						    CompDisplay *display,
@@ -1742,7 +1743,8 @@ typedef void (*WindowGrabNotifyProc) (CompWindow   *window,
 
 typedef void (*WindowUngrabNotifyProc) (CompWindow *window);
 
-typedef void (*WindowStateChangeNotifyProc) (CompWindow *window);
+typedef void (*WindowStateChangeNotifyProc) (CompWindow   *window,
+					     unsigned int lastState);
 
 typedef void (*WindowAddNotifyProc) (CompWindow *window);
 
@@ -2392,7 +2394,6 @@ struct _CompWindow {
     unsigned int      wmType;
     unsigned int      type;
     unsigned int      state;
-    unsigned int      lastState;
     unsigned int      actions;
     unsigned int      protocols;
     unsigned int      mwmDecor;
@@ -2749,7 +2750,8 @@ void
 windowUngrabNotify (CompWindow *w);
 
 void
-windowStateChangeNotify (CompWindow *w);
+windowStateChangeNotify (CompWindow   *w,
+			 unsigned int lastState);
 
 void
 moveInputFocusToWindow (CompWindow *w);

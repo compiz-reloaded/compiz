@@ -91,6 +91,10 @@
               <xsl:otherwise>
                 <!-- if no default value was specified we need to generate one -->
                 <xsl:choose>
+                  <xsl:when test="@name = 'active_plugins'">
+                    <list_type>string</list_type>
+                    <default>[<xsl:value-of select="$defaultPlugins"/>]</default>
+	          </xsl:when>
 		  <xsl:when test="contains('bool,bell',@type)">
                     <xsl:text>false</xsl:text>
                   </xsl:when>

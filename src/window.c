@@ -563,13 +563,14 @@ void
 changeWindowState (CompWindow   *w,
 		   unsigned int newState)
 {
-    CompDisplay *d = w->screen->display;
+    CompDisplay  *d = w->screen->display;
+    unsigned int oldState = w->state;
 
     w->state = newState;
 
     setWindowState (d, w->state, w->id);
 
-    (*w->screen->windowStateChangeNotify) (w);
+    (*w->screen->windowStateChangeNotify) (w, oldState);
 
     (*d->matchPropertyChanged) (d, w);
 }
@@ -1981,7 +1982,6 @@ addWindow (CompScreen *screen,
     w->alpha     = (w->attrib.depth == 32);
     w->wmType    = 0;
     w->state     = 0;
-    w->lastState = 0;
     w->actions   = 0;
     w->protocols = 0;
     w->type      = CompWindowTypeUnknownMask;
@@ -2135,7 +2135,7 @@ addWindow (CompScreen *screen,
 
 	    XUnmapWindow (screen->display->display, w->id);
 
-	    changeWindowState (w, w->state);
+	    setWindowState (screen->display, w->state, w->id); 
 	}
     }
     else if (!w->attrib.override_redirect)
@@ -2765,9 +2765,9 @@ windowUngrabNotify (CompWindow *w)
 }
 
 void
-windowStateChangeNotify (CompWindow *w)
+windowStateChangeNotify (CompWindow   *w,
+			 unsigned int lastState)
 {
-    w->lastState = w->state;
 }
 
 static Bool
@@ -4260,9 +4260,6 @@ hideWindow (CompWindow *w)
     if (!w->pendingMaps && w->attrib.map_state != IsViewable)
 	return;
 
-    if (w->minimized || w->inShowDesktopMode || w->hidden || w->shaded)
-	w->state |= CompWindowStateHiddenMask;
-
     w->pendingUnmaps++;
 
     if (w->shaded && w->id == w->screen->display->activeWindow)
@@ -4270,7 +4267,8 @@ hideWindow (CompWindow *w)
 
     XUnmapWindow (w->screen->display->display, w->id);
 
-    changeWindowState (w, w->state);
+    if (w->minimized || w->inShowDesktopMode || w->hidden || w->shaded)
+	changeWindowState (w, w->state | CompWindowStateHiddenMask);
 }
 
 void
@@ -4287,11 +4285,7 @@ showWindow (CompWindow *w)
 	if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
 	{
 	    if (w->state & CompWindowStateHiddenMask)
-	    {
-		w->state &= ~CompWindowStateHiddenMask;
-
-		changeWindowState (w, w->state);
-	    }
+		changeWindowState (w, w->state & ~CompWindowStateHiddenMask);
 	}
 
 	return;
@@ -4320,13 +4314,11 @@ showWindow (CompWindow *w)
 	w->shaded = FALSE;
     }
 
-    w->state &= ~CompWindowStateHiddenMask;
-
     w->pendingMaps++;
 
     XMapWindow (w->screen->display->display, w->id);
 
-    changeWindowState (w, w->state);
+    changeWindowState (w, w->state & ~CompWindowStateHiddenMask);
 }
 
 static void
@@ -4403,13 +4395,12 @@ maximizeWindow (CompWindow *w,
     if (state == (w->state & MAXIMIZE_STATE))
 	return;
 
-    w->state &= ~MAXIMIZE_STATE;
-    w->state |= state;
+    state |= (w->state & ~MAXIMIZE_STATE);
 
     recalcWindowType (w);
     recalcWindowActions (w);
 
-    changeWindowState (w, w->state);
+    changeWindowState (w, state);
 
     updateWindowAttributes (w, CompStackingUpdateModeNone);
 }

@@ -1641,6 +1641,7 @@ addScreen (CompDisplay *display,
     {
 	compLogMessage (display, "core", CompLogLevelFatal,
 			"Couldn't allocate color");
+	XFree (visinfo);
 	return FALSE;
     }
 
@@ -1649,6 +1650,7 @@ addScreen (CompDisplay *display,
     {
 	compLogMessage (display, "core", CompLogLevelFatal,
 			"Couldn't create bitmap");
+	XFree (visinfo);
 	return FALSE;
     }
 
@@ -1658,6 +1660,7 @@ addScreen (CompDisplay *display,
     {
 	compLogMessage (display, "core", CompLogLevelFatal,
 			"Couldn't create invisible cursor");
+	XFree (visinfo);
 	return FALSE;
     }
 
@@ -1669,6 +1672,7 @@ addScreen (CompDisplay *display,
     {
 	compLogMessage (display, "core", CompLogLevelFatal,
 			"Root visual is not a GL visual");
+	XFree (visinfo);
 	return FALSE;
     }
 
@@ -1677,6 +1681,7 @@ addScreen (CompDisplay *display,
     {
 	compLogMessage (display, "core", CompLogLevelFatal,
 			"Root visual is not a double buffered GL visual");
+	XFree (visinfo);
 	return FALSE;
     }
 

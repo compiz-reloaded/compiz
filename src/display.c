@@ -716,6 +716,7 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "window_menu_button", "button", 0, windowMenu, 0 },
     { "window_menu_key", "key", 0, windowMenu, 0 },
     { "show_desktop_key", "key", 0, showDesktop, 0 },
+    { "show_desktop_edge", "edge", 0, showDesktop, 0 },
     { "raise_on_click", "bool", 0, 0, 0 },
     { "audible_bell", "bool", 0, 0, 0 },
     { "toggle_window_maximized_key", "key", 0, toggleMaximized, 0 },
@@ -975,7 +976,7 @@ updatePlugins (CompDisplay *d)
 	{
 	    CompOptionValue *value;
 
-	    value = realloc (d->plugin.list.value, sizeof (CompOption) *
+	    value = realloc (d->plugin.list.value, sizeof (CompOptionValue) *
 			     (d->plugin.list.nValue + 1));
 	    if (value)
 	    {
@@ -1246,13 +1247,15 @@ updateModifierMappings (CompDisplay *d)
 {
     unsigned int    modMask[CompModNum];
     int		    i, minKeycode, maxKeycode, keysymsPerKeycode = 0;
+    KeySym*         key;
 
     for (i = 0; i < CompModNum; i++)
 	modMask[i] = 0;
 
     XDisplayKeycodes (d->display, &minKeycode, &maxKeycode);
-    XGetKeyboardMapping (d->display, minKeycode, (maxKeycode - minKeycode + 1),
-			 &keysymsPerKeycode);
+    key = XGetKeyboardMapping (d->display,
+			       minKeycode, (maxKeycode - minKeycode + 1),
+		     	       &keysymsPerKeycode);
 
     if (d->modMap)
 	XFreeModifiermap (d->modMap);
@@ -1337,6 +1340,9 @@ updateModifierMappings (CompDisplay *d)
 		updatePassiveGrabs (s);
 	}
     }
+
+    if (key)
+	XFree (key);
 }
 
 unsigned int

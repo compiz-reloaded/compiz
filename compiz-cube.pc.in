@@ -7,7 +7,7 @@ Name: compiz-cube
 Description: Cube plugin for compiz
 Version: @VERSION@
 
-Requires: @COMPIZ_REQUIRES@
+Requires: compiz
 Libs:
 Cflags: @COMPIZ_CFLAGS@ @GL_CFLAGS@ -I${includedir}/compiz
 

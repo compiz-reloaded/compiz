@@ -720,6 +720,9 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	    screenInode = inode->parent->parent->parent;
 	}
 
+	if (!screenInode)
+	    return;
+
 	if (screenInode->type & FUSE_INODE_TYPE_SCREEN)
 	{
 	    int screenNum = -1;

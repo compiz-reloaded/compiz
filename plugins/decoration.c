@@ -1220,7 +1220,8 @@ decorWindowResizeNotify (CompWindow *w,
 }
 
 static void
-decorWindowStateChangeNotify (CompWindow *w)
+decorWindowStateChangeNotify (CompWindow   *w,
+			      unsigned int lastState)
 {
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
@@ -1237,7 +1238,7 @@ decorWindowStateChangeNotify (CompWindow *w)
     }
 
     UNWRAP (ds, w->screen, windowStateChangeNotify);
-    (*w->screen->windowStateChangeNotify) (w);
+    (*w->screen->windowStateChangeNotify) (w, lastState);
     WRAP (ds, w->screen, windowStateChangeNotify, decorWindowStateChangeNotify);
 }
 
