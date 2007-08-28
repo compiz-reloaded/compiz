@@ -969,7 +969,7 @@ updatePlugins (CompDisplay *d)
 	{
 	    CompOptionValue *value;
 
-	    value = realloc (d->plugin.list.value, sizeof (CompOption) *
+	    value = realloc (d->plugin.list.value, sizeof (CompOptionValue) *
 			     (d->plugin.list.nValue + 1));
 	    if (value)
 	    {
