@@ -915,7 +915,11 @@ updatePlugins (CompDisplay *d)
 	    break;
     }
 
-    nPop = d->plugin.list.nValue - i;
+    /* never pop the core plugin */
+    if (i)
+	nPop = d->plugin.list.nValue - i;
+    else
+	nPop = d->plugin.list.nValue - 1;
 
     if (nPop)
     {
