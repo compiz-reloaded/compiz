@@ -23,6 +23,9 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#ifndef _COMPIZ_CUBE_H
+#define _COMPIZ_CUBE_H
+
 #include <compiz-plugin.h>
 
 #define CUBE_ABIVERSION 20070828
@@ -195,3 +198,5 @@ typedef struct _CubeScreen {
 
 #define CUBE_SCREEN(s)							\
     CubeScreen *cs = GET_CUBE_SCREEN (s, GET_CUBE_DISPLAY (s->display))
+
+#endif
