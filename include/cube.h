@@ -32,7 +32,7 @@
 #define CUBE_MOMODE_ONE   2
 #define CUBE_MOMODE_LAST  CUBE_MOMODE_ONE
 
-#define CUBE_DISPLAY_OPTION_ABI    0
+#define CUBE_DISPLAY_OPTION_ABI        0
 #define CUBE_DISPLAY_OPTION_INDEX      1
 #define CUBE_DISPLAY_OPTION_UNFOLD_KEY 2
 #define CUBE_DISPLAY_OPTION_NEXT_KEY   3
@@ -76,19 +76,19 @@ typedef void (*CubeClearTargetOutputProc) (CompScreen *s,
 					   float      vRotate);
 
 typedef void (*CubePaintTopProc) (CompScreen			*s,
-				  const ScreenPaintAttrib 	*sAttrib,
+				  const ScreenPaintAttrib	*sAttrib,
 				  const CompTransform		*transform,
 				  CompOutput			*output,
 				  int				size);
 
 typedef void (*CubePaintBottomProc) (CompScreen			*s,
-				     const ScreenPaintAttrib 	*sAttrib,
+				     const ScreenPaintAttrib	*sAttrib,
 				     const CompTransform	*transform,
 				     CompOutput			*output,
 				     int			size);
 
 typedef void (*CubePaintInsideProc) (CompScreen			*s,
-				     const ScreenPaintAttrib 	*sAttrib,
+				     const ScreenPaintAttrib	*sAttrib,
 				     const CompTransform	*transform,
 				     CompOutput			*output,
 				     int			size);
@@ -99,14 +99,12 @@ typedef Bool (*CubeCheckOrientationProc) (CompScreen              *s,
 					  CompOutput              *output,
 					  float                   points[3][3]);
 
-typedef enum _PaintOrder
-{
+typedef enum _PaintOrder {
     BTF = 0,
     FTB
 } PaintOrder;
 
-typedef enum _RotationState
-{
+typedef enum _RotationState {
     RotationNone = 0,
     RotationChange,
     RotationManual
