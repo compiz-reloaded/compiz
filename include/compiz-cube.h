@@ -28,6 +28,8 @@
 
 #include <compiz-plugin.h>
 
+COMPIZ_BEGIN_DECLS
+
 #define CUBE_ABIVERSION 20070828
 
 #define CUBE_MOMODE_AUTO  0
@@ -198,5 +200,7 @@ typedef struct _CubeScreen {
 
 #define CUBE_SCREEN(s)							\
     CubeScreen *cs = GET_CUBE_SCREEN (s, GET_CUBE_DISPLAY (s->display))
+
+COMPIZ_END_DECLS
 
 #endif
