@@ -48,7 +48,6 @@ typedef struct _KconfigDisplay {
 
 typedef struct _KconfigScreen {
     InitPluginForScreenProc      initPluginForScreen;
-    SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 } KconfigScreen;
 
@@ -468,10 +467,7 @@ kconfigGetScreenOption (CompScreen *s,
 
 	if (kconfigReadOptionValue (s->display, kd->config, o, &value))
 	{
-	    if (strcmp (plugin, "core") == 0)
-		(*s->setScreenOption) (s, o->name, &value);
-	    else
-		(*s->setScreenOptionForPlugin) (s, plugin, o->name, &value);
+	    (*s->setScreenOptionForPlugin) (s, plugin, o->name, &value);
 
 	    compFiniOptionValue (&value, o->type);
 	}
@@ -508,10 +504,6 @@ kconfigRcReload (void *closure)
     for (s = d->screens; s; s = s->next)
     {
 	QString screen ("screen" + QString::number (s->screenNum));
-
-	option = compGetScreenOptions (s, &nOption);
-	while (nOption--)
-	    kconfigGetScreenOption (s, option++, "core", screen.ascii ());
 
 	for (p = getPlugins (); p; p = p->next)
 	{
@@ -573,41 +565,6 @@ kconfigSetDisplayOptionForPlugin (CompDisplay     *d,
 	    option = compFindOption (option, nOption, name, 0);
 	    if (option)
 		kconfigSetOption (d, option, p->vTable->name, "display");
-	}
-    }
-
-    return status;
-}
-
-static Bool
-kconfigSetScreenOption (CompScreen      *s,
-			const char	*name,
-			CompOptionValue *value)
-{
-    Bool status;
-
-    KCONFIG_SCREEN (s);
-
-    UNWRAP (ks, s, setScreenOption);
-    status = (*s->setScreenOption) (s, name, value);
-    WRAP (ks, s, setScreenOption, kconfigSetScreenOption);
-
-    if (status)
-    {
-	KCONFIG_DISPLAY (s->display);
-
-	if (!kd->reloadHandle)
-	{
-	    CompOption *option;
-	    int	       nOption;
-	    QString    screen ("screen");
-
-	    screen += QString::number (s->screenNum);
-
-	    option = compGetScreenOptions (s, &nOption);
-	    option = compFindOption (option, nOption, name, 0);
-	    if (option)
-		kconfigSetOption (s->display, option, "core", screen.ascii ());
 	}
     }
 
@@ -802,7 +759,6 @@ kconfigInitScreen (CompPlugin *p,
 	return FALSE;
 
     WRAP (ks, s, initPluginForScreen, kconfigInitPluginForScreen);
-    WRAP (ks, s, setScreenOption, kconfigSetScreenOption);
     WRAP (ks, s, setScreenOptionForPlugin, kconfigSetScreenOptionForPlugin);
 
     s->privates[kd->screenPrivateIndex].ptr = ks;
@@ -817,7 +773,6 @@ kconfigFiniScreen (CompPlugin *p,
     KCONFIG_SCREEN (s);
 
     UNWRAP (ks, s, initPluginForScreen);
-    UNWRAP (ks, s, setScreenOption);
     UNWRAP (ks, s, setScreenOptionForPlugin);
 
     delete ks;

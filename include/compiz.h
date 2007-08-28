@@ -1669,11 +1669,6 @@ typedef void (*GLGenerateMipmapProc) (GLenum target);
 
 #define MAX_DEPTH 32
 
-typedef CompOption *(*GetScreenOptionsProc) (CompScreen *screen,
-					     int	*count);
-typedef Bool (*SetScreenOptionProc) (CompScreen      *screen,
-				     const char	     *name,
-				     CompOptionValue *value);
 typedef CompOption *(*GetPluginScreenOptionsProc) (CompPlugin *plugin,
 						   CompScreen *screen,
 						   int	      *count);
@@ -2028,7 +2023,6 @@ struct _CompScreen {
 
     CompOption opt[COMP_SCREEN_OPTION_NUM];
 
-    SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 
     InitPluginForScreenProc initPluginForScreen;
@@ -2080,8 +2074,13 @@ freeScreenPrivateIndex (CompDisplay *display,
 			int	    index);
 
 CompOption *
-compGetScreenOptions (CompScreen *screen,
-		      int	 *count);
+getScreenOptions (CompScreen *screen,
+		  int	     *count);
+
+Bool
+setScreenOption (CompScreen      *screen,
+		 const char      *name,
+		 CompOptionValue *value);
 
 void
 configureScreen (CompScreen	 *s,

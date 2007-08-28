@@ -94,7 +94,6 @@ typedef struct _IniDisplay {
  */
 typedef struct _IniScreen {
     InitPluginForScreenProc        initPluginForScreen;
-    SetScreenOptionProc		   setScreenOption;
     SetScreenOptionForPluginProc   setScreenOptionForPlugin;
 } IniScreen;
 
@@ -484,6 +483,10 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	    return FALSE;
 	}
     }
+    else
+    {
+	return FALSE;
+    }
 
     if (screen > -1)
     {
@@ -500,21 +503,13 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	}
     }
 
-    if (plugin && p)
+    if (s && p->vTable->getScreenOptions)
     {
-	if (s && p->vTable->getScreenOptions)
-	{
-	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
-	}
-	else if (p->vTable->getDisplayOptions)
-	{
-	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-	}
+	option = (*p->vTable->getScreenOptions) (p, s, &nOption);
     }
-    else
+    else if (p->vTable->getDisplayOptions)
     {
-	if (s)
-	    option = compGetScreenOptions (s, &nOption);
+	option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
     }
 
     while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
@@ -586,24 +581,15 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
 		if (hasValue)
 		{
-		    if (plugin && p)
-		    {
-			if (s)
-			    status = (*s->setScreenOptionForPlugin) (s,
-								     plugin,
-								     optionName,
-								     &value);
-			else
-			    status = (*d->setDisplayOptionForPlugin) (d, plugin,
-								      optionName,
-								      &value);
-		    }
+		    if (s)
+			status = (*s->setScreenOptionForPlugin) (s,
+								 plugin,
+								 optionName,
+								 &value);
 		    else
-		    {
-			if (s)
-			    status = (*s->setScreenOption)
-						(s, optionName, &value);
-		    }
+			status = (*d->setDisplayOptionForPlugin) (d, plugin,
+								  optionName,
+								  &value);
 		    if (o->type == CompOptionTypeMatch)
 		    {
 			matchFini (&value.match);
@@ -668,9 +654,7 @@ iniSaveOptions (CompDisplay *d,
     }
     else
     {
-	/* core (general) setting */
-	if (s)
-	    option = compGetScreenOptions (s, &nOption);
+	return FALSE;
     }
 
     if (!option)
@@ -1047,25 +1031,6 @@ iniInitPluginForScreen (CompPlugin *p,
 }
 
 static Bool
-iniSetScreenOption (CompScreen *s, const char *name, CompOptionValue *value)
-{
-    Bool status;
-
-    INI_SCREEN (s);
-
-    UNWRAP (is, s, setScreenOption);
-    status = (*s->setScreenOption) (s, name, value);
-    WRAP (is, s, setScreenOption, iniSetScreenOption);
-
-    if (status)
-    {
-	iniSaveOptions (s->display, s->screenNum, NULL);
-    }
-
-    return status;
-}
-
-static Bool
 iniSetDisplayOptionForPlugin (CompDisplay     *d,
 			      const char      *plugin,
 			      const char      *name,
@@ -1189,7 +1154,6 @@ iniInitScreen (CompPlugin *p, CompScreen *s)
     s->privates[id->screenPrivateIndex].ptr = is;
 
     WRAP (is, s, initPluginForScreen, iniInitPluginForScreen);
-    WRAP (is, s, setScreenOption, iniSetScreenOption);
     WRAP (is, s, setScreenOptionForPlugin, iniSetScreenOptionForPlugin);
 
     iniLoadOptions (s->display, s->screenNum, NULL);
@@ -1203,7 +1167,6 @@ iniFiniScreen (CompPlugin *p, CompScreen *s)
     INI_SCREEN (s);
 
     UNWRAP (is, s, initPluginForScreen);
-    UNWRAP (is, s, setScreenOption);
     UNWRAP (is, s, setScreenOptionForPlugin);
 
     free (is);

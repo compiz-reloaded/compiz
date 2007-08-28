@@ -79,8 +79,7 @@ coreGetScreenOptions (CompPlugin *plugin,
 		      CompScreen *screen,
 		      int	 *count)
 {
-    *count = COMP_SCREEN_OPTION_NUM;
-    return screen->opt;
+    return getScreenOptions (screen, count);
 }
 
 static Bool
@@ -89,7 +88,7 @@ coreSetScreenOption (CompPlugin      *plugin,
 		     const char	     *name,
 		     CompOptionValue *value)
 {
-    return (*screen->setScreenOption) (screen, name, value);
+    return setScreenOption (screen, name, value);
 }
 
 static CompPluginVTable coreVTable = {

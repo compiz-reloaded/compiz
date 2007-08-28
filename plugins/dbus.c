@@ -71,7 +71,6 @@ typedef struct _DbusDisplay {
 } DbusDisplay;
 
 typedef struct _DbusScreen {
-    SetScreenOptionProc		 setScreenOption;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
     InitPluginForScreenProc      initPluginForScreen;
 } DbusScreen;
@@ -106,6 +105,7 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 			int	     *nOption)
 {
     CompScreen *s = NULL;
+    CompPlugin *p;
 
     if (strcmp (path[1], "allscreens"))
     {
@@ -125,43 +125,30 @@ dbusGetOptionsFromPath (CompDisplay  *d,
     if (returnScreen)
 	*returnScreen = s;
 
-    if (strcmp (path[0], "core") == 0)
-    {
-	if (returnMetadata)
-	    *returnMetadata = &coreMetadata;
+    for (p = getPlugins (); p; p = p->next)
+	if (strcmp (p->vTable->name, path[0]) == 0)
+	    break;
 
-	if (s)
-	    return compGetScreenOptions (s, nOption);
+    if (returnMetadata)
+    {
+	if (p && p->vTable->getMetadata)
+	    *returnMetadata = (*p->vTable->getMetadata) (p);
+	else
+	    *returnMetadata = NULL;
+    }
+
+    if (!p)
+	return NULL;
+
+    if (s)
+    {
+	if (p->vTable->getScreenOptions)
+	    return (*p->vTable->getScreenOptions) (p, s, nOption);
     }
     else
     {
-	CompPlugin *p;
-
-	for (p = getPlugins (); p; p = p->next)
-	    if (strcmp (p->vTable->name, path[0]) == 0)
-		break;
-
-	if (returnMetadata)
-	{
-	    if (p && p->vTable->getMetadata)
-		*returnMetadata = (*p->vTable->getMetadata) (p);
-	    else
-		*returnMetadata = NULL;
-	}
-
-	if (!p)
-	    return NULL;
-
-	if (s)
-	{
-	    if (p->vTable->getScreenOptions)
-		return (*p->vTable->getScreenOptions) (p, s, nOption);
-	}
-	else
-	{
-	    if (p->vTable->getDisplayOptions)
-		return (*p->vTable->getDisplayOptions) (p, d, nOption);
-	}
+	if (p->vTable->getDisplayOptions)
+	    return (*p->vTable->getDisplayOptions) (p, d, nOption);
     }
 
     return NULL;
@@ -1058,21 +1045,17 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 	    {
 		if (s)
 		{
-		    if (strcmp (path[0], "core"))
-			(*s->setScreenOptionForPlugin) (s,
-							path[0],
-							option->name,
-							&value);
-		    else
-			(*s->setScreenOption) (s, option->name, &value);
+		    (*s->setScreenOptionForPlugin) (s,
+						    path[0],
+						    option->name,
+						    &value);
 		}
 		else
 		{
-		    if (strcmp (path[0], "core"))
-			(*d->setDisplayOptionForPlugin) (d,
-							 path[0],
-							 option->name,
-							 &value);
+		    (*d->setDisplayOptionForPlugin) (d,
+						     path[0],
+						     option->name,
+						     &value);
 		}
 
 		if (!dbus_message_get_no_reply (message))
@@ -2268,35 +2251,6 @@ dbusSetDisplayOptionForPlugin (CompDisplay     *d,
 }
 
 static Bool
-dbusSetScreenOption (CompScreen      *s,
-		     const char	     *name,
-		     CompOptionValue *value)
-{
-    Bool status;
-
-    DBUS_SCREEN (s);
-
-    UNWRAP (ds, s, setScreenOption);
-    status = (*s->setScreenOption) (s, name, value);
-    WRAP (ds, s, setScreenOption, dbusSetScreenOption);
-
-    if (status)
-    {
-	CompOption *option;
-	int	   nOption;
-
-	option = compGetScreenOptions (s, &nOption);
-	dbusSendChangeSignalForScreenOption (s,
-					     compFindOption (option,
-							     nOption,
-							     name, 0),
-					     "core");
-    }
-
-    return status;
-}
-
-static Bool
 dbusSetScreenOptionForPlugin (CompScreen      *s,
 			      const char      *plugin,
 			      const char      *name,
@@ -2544,7 +2498,6 @@ dbusInitScreen (CompPlugin *p,
     if (!ds)
 	return FALSE;
 
-    WRAP (ds, s, setScreenOption, dbusSetScreenOption);
     WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
     WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
 
@@ -2565,7 +2518,6 @@ dbusFiniScreen (CompPlugin *p,
 {
     DBUS_SCREEN (s);
 
-    UNWRAP (ds, s, setScreenOption);
     UNWRAP (ds, s, setScreenOptionForPlugin);
     UNWRAP (ds, s, initPluginForScreen);
 

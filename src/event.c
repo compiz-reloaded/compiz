@@ -1687,11 +1687,11 @@ handleEvent (CompDisplay *d,
 
 		value.i = event->xclient.data.l[0] / s->width;
 
-		(*s->setScreenOption) (s, "hsize", &value);
+		(*s->setScreenOptionForPlugin) (s, "core", "hsize", &value);
 
 		value.i = event->xclient.data.l[1] / s->height;
 
-		(*s->setScreenOption) (s, "vsize", &value);
+		(*s->setScreenOptionForPlugin) (s, "core", "vsize", &value);
 	    }
 	}
 	else if (event->xclient.message_type == d->moveResizeWindowAtom)
@@ -1796,7 +1796,9 @@ handleEvent (CompDisplay *d,
 
 		value.i = event->xclient.data.l[0];
 
-		(*s->setScreenOption) (s, "number_of_desktops", &value);
+		(*s->setScreenOptionForPlugin) (s,
+						"core", "number_of_desktops",
+						&value);
 	    }
 	}
 	else if (event->xclient.message_type == d->currentDesktopAtom)

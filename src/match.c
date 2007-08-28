@@ -749,9 +749,6 @@ matchExpHandlerChanged (CompDisplay *display)
 	}
     }
 
-    option = getDisplayOptions (display, &nOption);
-    matchUpdateMatchOptions (option, nOption);
-
     for (s = display->screens; s; s = s->next)
     {
 	for (p = getPlugins (); p; p = p->next)
@@ -762,9 +759,6 @@ matchExpHandlerChanged (CompDisplay *display)
 		matchUpdateMatchOptions (option, nOption);
 	    }
 	}
-
-	option = compGetScreenOptions (s, &nOption);
-	matchUpdateMatchOptions (option, nOption);
 
 	for (w = s->windows; w; w = w->next)
 	    updateWindowOpacity (w);

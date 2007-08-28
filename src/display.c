@@ -1956,6 +1956,7 @@ Bool
 addDisplay (const char *name)
 {
     CompDisplay *d;
+    CompPlugin  *core;
     Display     *dpy;
     Window	focus;
     int		revertTo, i;
@@ -1980,6 +1981,8 @@ addDisplay (const char *name)
     d->screenPrivateIndices = 0;
     d->screenPrivateLen     = 0;
 
+    d->logMessage = logMessage;
+
     d->modMap = 0;
 
     for (i = 0; i < CompModNum; i++)
@@ -1988,8 +1991,30 @@ addDisplay (const char *name)
     d->ignoredModMask = LockMask;
 
     d->plugin.list.type   = CompOptionTypeString;
-    d->plugin.list.nValue = 0;
-    d->plugin.list.value  = 0;
+    d->plugin.list.nValue = 1;
+    d->plugin.list.value  = malloc (sizeof (CompOptionValue));
+
+    if (!d->plugin.list.value)
+	return FALSE;
+
+    d->plugin.list.value->s = strdup ("core");
+    if (!d->plugin.list.value->s)
+	return FALSE;
+
+    core = loadPlugin (d->plugin.list.value->s);
+    if (!core)
+    {
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"Couldn't load core plugin");
+	return FALSE;
+    }
+
+    if (!pushPlugin (core))
+    {
+	compLogMessage (d, "core", CompLogLevelFatal,
+			"Couldn't activate core plugin");
+	return FALSE;
+    }
 
     d->dirtyPluginList = TRUE;
 
@@ -2000,8 +2025,6 @@ addDisplay (const char *name)
 
     d->autoRaiseHandle = 0;
     d->autoRaiseWindow = None;
-
-    d->logMessage = logMessage;
 
     d->display = dpy = XOpenDisplay (name);
     if (!d->display)

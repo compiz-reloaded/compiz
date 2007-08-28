@@ -113,16 +113,16 @@ typedef enum _RotationState
 } RotationState;
 
 typedef struct _CubeScreen {
-    PreparePaintScreenProc     preparePaintScreen;
-    DonePaintScreenProc	       donePaintScreen;
-    PaintOutputProc	       paintOutput;
-    PaintTransformedOutputProc paintTransformedOutput;
-    PaintBackgroundProc        paintBackground;
-    PaintWindowProc            paintWindow;
-    ApplyScreenTransformProc   applyScreenTransform;
-    SetScreenOptionProc	       setScreenOption;
-    OutputChangeNotifyProc     outputChangeNotify;
-    InitWindowWalkerProc       initWindowWalker;
+    PreparePaintScreenProc       preparePaintScreen;
+    DonePaintScreenProc	         donePaintScreen;
+    PaintOutputProc	         paintOutput;
+    PaintTransformedOutputProc   paintTransformedOutput;
+    PaintBackgroundProc          paintBackground;
+    PaintWindowProc              paintWindow;
+    ApplyScreenTransformProc     applyScreenTransform;
+    SetScreenOptionForPluginProc setScreenOptionForPlugin;
+    OutputChangeNotifyProc       outputChangeNotify;
+    InitWindowWalkerProc         initWindowWalker;
 
     CubeGetRotationProc	      getRotation;
     CubeClearTargetOutputProc clearTargetOutput;

@@ -1936,19 +1936,20 @@ cubeOutputChangeNotify (CompScreen *s)
 }
 
 static Bool
-cubeSetGlobalScreenOption (CompScreen      *s,
-			   const char	   *name,
-			   CompOptionValue *value)
+cubeSetScreenOptionForPlugin (CompScreen      *s,
+			      const char      *plugin,
+			      const char      *name,
+			      CompOptionValue *value)
 {
     Bool status;
 
     CUBE_SCREEN (s);
 
-    UNWRAP (cs, s, setScreenOption);
-    status = (*s->setScreenOption) (s, name, value);
-    WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
+    UNWRAP (cs, s, setScreenOptionForPlugin);
+    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
+    WRAP (cs, s, setScreenOptionForPlugin, cubeSetScreenOptionForPlugin);
 
-    if (status && strcmp (name, "hsize") == 0)
+    if (status && strcmp (plugin, "core") == 0 && strcmp (name, "hsize") == 0)
     {
 	cubeUpdateGeometry (s, s->hsize, cs->invert);
 	cubeUnloadBackgrounds (s);
@@ -2179,7 +2180,7 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, paintWindow, cubePaintWindow);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
-    WRAP (cs, s, setScreenOption, cubeSetGlobalScreenOption);
+    WRAP (cs, s, setScreenOptionForPlugin, cubeSetScreenOptionForPlugin);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
     WRAP (cs, s, initWindowWalker, cubeInitWindowWalker);
 
@@ -2202,7 +2203,7 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, paintWindow);
     UNWRAP (cs, s, applyScreenTransform);
-    UNWRAP (cs, s, setScreenOption);
+    UNWRAP (cs, s, setScreenOptionForPlugin);
     UNWRAP (cs, s, outputChangeNotify);
     UNWRAP (cs, s, initWindowWalker);
 
