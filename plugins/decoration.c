@@ -1286,6 +1286,9 @@ decorInitDisplay (CompPlugin  *p,
 {
     DecorDisplay *dd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     dd = malloc (sizeof (DecorDisplay));
     if (!dd)
 	return FALSE;

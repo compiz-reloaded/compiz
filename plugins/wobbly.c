@@ -2673,6 +2673,9 @@ wobblyInitDisplay (CompPlugin  *p,
 {
     WobblyDisplay *wd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     wd = malloc (sizeof (WobblyDisplay));
     if (!wd)
 	return FALSE;

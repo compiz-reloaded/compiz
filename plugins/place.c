@@ -1389,6 +1389,9 @@ placeInitDisplay (CompPlugin  *p,
 {
     PlaceDisplay *pd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     pd = malloc (sizeof (PlaceDisplay));
     if (!pd)
 	return FALSE;

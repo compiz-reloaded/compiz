@@ -645,6 +645,9 @@ fadeInitDisplay (CompPlugin  *p,
 {
     FadeDisplay *fd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     fd = malloc (sizeof (FadeDisplay));
     if (!fd)
 	return FALSE;

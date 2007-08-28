@@ -349,6 +349,9 @@ regexInitDisplay (CompPlugin  *p,
 {
     RegexDisplay *rd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     rd = malloc (sizeof (RegexDisplay));
     if (!rd)
 	return FALSE;

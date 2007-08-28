@@ -191,6 +191,9 @@ glibInitDisplay (CompPlugin  *p,
 {
     GLibDisplay *gd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     gd = malloc (sizeof (GLibDisplay));
     if (!gd)
 	return FALSE;

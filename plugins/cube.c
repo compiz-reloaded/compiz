@@ -2017,6 +2017,9 @@ cubeInitDisplay (CompPlugin  *p,
 {
     CubeDisplay *cd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     cd = malloc (sizeof (CubeDisplay));
     if (!cd)
 	return FALSE;

@@ -2431,6 +2431,9 @@ blurInitDisplay (CompPlugin  *p,
 {
     BlurDisplay *bd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     bd = malloc (sizeof (BlurDisplay));
     if (!bd)
 	return FALSE;

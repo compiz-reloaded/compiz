@@ -723,6 +723,9 @@ cloneInitDisplay (CompPlugin  *p,
 {
     CloneDisplay *cd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     cd = malloc (sizeof (CloneDisplay));
     if (!cd)
 	return FALSE;

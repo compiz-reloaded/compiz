@@ -675,6 +675,9 @@ kconfigInitDisplay (CompPlugin  *p,
     KconfigDisplay *kd;
     QString	   dir;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     kd = new KconfigDisplay;
     if (!kd)
 	return FALSE;

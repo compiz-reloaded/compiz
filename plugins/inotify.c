@@ -191,6 +191,9 @@ inotifyInitDisplay (CompPlugin  *p,
     InotifyDisplay *id;
     CompFileWatch  *fw;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     id = malloc (sizeof (InotifyDisplay));
     if (!id)
 	return FALSE;

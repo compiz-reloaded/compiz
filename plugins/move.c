@@ -806,6 +806,9 @@ moveInitDisplay (CompPlugin  *p,
     MoveDisplay *md;
     int	        i;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     md = malloc (sizeof (MoveDisplay));
     if (!md)
 	return FALSE;

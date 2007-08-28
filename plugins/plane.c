@@ -601,6 +601,9 @@ planeInitDisplay (CompPlugin  *p,
 {
     PlaneDisplay *pd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     pd = malloc (sizeof (PlaneDisplay));
     if (!pd)
 	return FALSE;

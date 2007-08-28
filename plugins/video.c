@@ -1046,6 +1046,9 @@ videoInitDisplay (CompPlugin  *p,
 {
     VideoDisplay *vd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     vd = malloc (sizeof (VideoDisplay));
     if (!vd)
 	return FALSE;

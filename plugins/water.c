@@ -1594,6 +1594,9 @@ waterInitDisplay (CompPlugin  *p,
 {
     WaterDisplay *wd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     wd = malloc (sizeof (WaterDisplay));
     if (!wd)
 	return FALSE;

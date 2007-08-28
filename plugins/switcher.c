@@ -1861,6 +1861,9 @@ switchInitDisplay (CompPlugin  *p,
 {
     SwitchDisplay *sd;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     sd = malloc (sizeof (SwitchDisplay));
     if (!sd)
 	return FALSE;

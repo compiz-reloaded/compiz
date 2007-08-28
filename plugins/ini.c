@@ -1088,6 +1088,9 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
     IniDisplay *id;
     char *homeDir;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     id = malloc (sizeof (IniDisplay));
     if (!id)
         return FALSE;

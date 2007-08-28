@@ -797,6 +797,9 @@ svgInitDisplay (CompPlugin  *p,
     SvgDisplay *sd;
     CompScreen *s;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     sd = malloc (sizeof (SvgDisplay));
     if (!sd)
 	return FALSE;

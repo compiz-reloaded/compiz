@@ -2315,6 +2315,9 @@ dbusInitDisplay (CompPlugin  *p,
     int		fd, ret, mask;
     char        *home, *plugindir, objectPath[256];
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     dd = malloc (sizeof (DbusDisplay));
     if (!dd)
 	return FALSE;

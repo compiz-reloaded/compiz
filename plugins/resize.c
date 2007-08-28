@@ -1216,6 +1216,9 @@ resizeInitDisplay (CompPlugin  *p,
     ResizeDisplay *rd;
     int	          i;
 
+    if (!checkPluginABI ("core", ABIVERSION))
+	return FALSE;
+
     rd = malloc (sizeof (ResizeDisplay));
     if (!rd)
 	return FALSE;
