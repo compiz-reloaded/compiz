@@ -28,6 +28,8 @@
 
 #include <compiz-plugin.h>
 
+COMPIZ_BEGIN_DECLS
+
 #define SCALE_ABIVERSION 20070706
 
 #define SCALE_STATE_NONE 0
@@ -191,5 +193,7 @@ typedef struct _ScaleWindow {
     ScaleWindow *sw = GET_SCALE_WINDOW  (w,		       \
 		      GET_SCALE_SCREEN  (w->screen,	       \
 		      GET_SCALE_DISPLAY (w->screen->display)))
+
+COMPIZ_END_DECLS
 
 #endif
