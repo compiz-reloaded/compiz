@@ -663,7 +663,7 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
     {
 	CompOptionValue value;
 	CompScreen	*s = NULL;
-	FuseInode	*screenInode = NULL;
+	FuseInode	*screenInode;
 
 	if (inode->type & FUSE_INODE_TYPE_VALUE)
 	{
@@ -719,9 +719,10 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 
 	    screenInode = inode->parent->parent->parent;
 	}
-
-	if (!screenInode)
+	else
+	{
 	    return;
+	}
 
 	if (screenInode->type & FUSE_INODE_TYPE_SCREEN)
 	{
