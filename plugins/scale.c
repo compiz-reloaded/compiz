@@ -32,7 +32,7 @@
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 
-#include <scale.h>
+#include <compiz-scale.h>
 
 #define EDGE_STATE (CompActionStateInitEdge)
 

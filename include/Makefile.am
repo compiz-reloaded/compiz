@@ -3,7 +3,7 @@ compizinclude_HEADERS = \
 	compiz.h	\
 	compiz-plugin.h	\
 	compiz-cube.h   \
-	scale.h		\
+	compiz-scale.h	\
 	decoration.h
 
 nodist_compizinclude_HEADERS = \
