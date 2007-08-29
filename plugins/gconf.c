@@ -803,7 +803,7 @@ gconfInitDisplay (CompPlugin  *p,
 {
     GConfDisplay *gd;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     gd = malloc (sizeof (GConfDisplay));

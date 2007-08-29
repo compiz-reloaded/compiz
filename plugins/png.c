@@ -466,7 +466,7 @@ pngInitDisplay (CompPlugin  *p,
     PngDisplay *pd;
     CompScreen *s;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     pd = malloc (sizeof (PngDisplay));

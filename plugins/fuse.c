@@ -1286,7 +1286,7 @@ fuseInitDisplay (CompPlugin  *p,
     FuseDisplay	     *fd;
     struct sigaction sa;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     memset (&sa, 0, sizeof (struct sigaction));

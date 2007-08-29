@@ -1932,7 +1932,7 @@ scaleInitDisplay (CompPlugin  *p,
 {
     ScaleDisplay *sd;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     sd = malloc (sizeof (ScaleDisplay));

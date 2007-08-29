@@ -349,7 +349,7 @@ regexInitDisplay (CompPlugin  *p,
 {
     RegexDisplay *rd;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     rd = malloc (sizeof (RegexDisplay));

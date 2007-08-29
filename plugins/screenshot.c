@@ -436,7 +436,7 @@ shotInitDisplay (CompPlugin  *p,
 {
     ShotDisplay *sd;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     sd = malloc (sizeof (ShotDisplay));

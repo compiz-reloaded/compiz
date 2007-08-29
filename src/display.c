@@ -2056,7 +2056,7 @@ addDisplay (const char *name)
 					     COMP_DISPLAY_OPTION_NUM))
 	return FALSE;
 
-    d->opt[COMP_DISPLAY_OPTION_ABI].value.i = ABIVERSION;
+    d->opt[COMP_DISPLAY_OPTION_ABI].value.i = CORE_ABIVERSION;
 
     snprintf (d->displayString, 255, "DISPLAY=%s", DisplayString (dpy));
 

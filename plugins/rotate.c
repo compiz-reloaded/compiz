@@ -1716,7 +1716,7 @@ rotateInitDisplay (CompPlugin  *p,
 {
     RotateDisplay *rd;
 
-    if (!checkPluginABI ("core", ABIVERSION) ||
+    if (!checkPluginABI ("core", CORE_ABIVERSION) ||
 	!checkPluginABI ("cube", CUBE_ABIVERSION))
 	return FALSE;
 

@@ -970,7 +970,7 @@ zoomInitDisplay (CompPlugin  *p,
 {
     ZoomDisplay *zd;
 
-    if (!checkPluginABI ("core", ABIVERSION))
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
     zd = malloc (sizeof (ZoomDisplay));
