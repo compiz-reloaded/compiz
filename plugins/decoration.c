@@ -33,7 +33,7 @@
 #include <math.h>
 #include <unistd.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 #include <decoration.h>
 
 #include <X11/Xatom.h>

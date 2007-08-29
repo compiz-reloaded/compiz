@@ -31,7 +31,7 @@
 #include <dbus/dbus.h>
 #include <libxml/xmlwriter.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static CompMetadata dbusMetadata;
 

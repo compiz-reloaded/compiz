@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 #define MwmHintsFunctions   (1L << 0)
 #define MwmHintsDecorations (1L << 1)

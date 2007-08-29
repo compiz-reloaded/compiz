@@ -23,7 +23,7 @@
 #include <ksimpleconfig.h>
 #include <qfile.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 #define COMPIZ_KCONFIG_RC "compizrc"
 

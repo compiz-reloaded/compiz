@@ -32,7 +32,7 @@
 #include <fuse.h>
 #include <fuse_lowlevel.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static CompMetadata fuseMetadata;
 

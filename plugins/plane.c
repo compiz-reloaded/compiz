@@ -32,7 +32,7 @@
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static CompMetadata planeMetadata;
 

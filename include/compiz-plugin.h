@@ -30,12 +30,43 @@
 
 COMPIZ_BEGIN_DECLS
 
-typedef Bool (*InitPluginProc) (CompPlugin *plugin);
+typedef CompBool (*InitPluginProc) (CompPlugin *plugin);
 typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
 typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
 
-struct _CompPluginVTable {
+typedef CompBool (*InitPluginForDisplayProc) (CompPlugin  *plugin,
+					      CompDisplay *display);
+typedef void (*FiniPluginForDisplayProc) (CompPlugin  *plugin,
+					  CompDisplay *display);
+
+typedef CompBool (*InitPluginForScreenProc) (CompPlugin *plugin,
+					     CompScreen *screen);
+typedef void (*FiniPluginForScreenProc) (CompPlugin *plugin,
+					 CompScreen *screen);
+
+typedef CompBool (*InitPluginForWindowProc) (CompPlugin *plugin,
+					     CompWindow *window);
+typedef void (*FiniPluginForWindowProc) (CompPlugin *plugin,
+					 CompWindow *window);
+
+typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
+						    CompDisplay *display,
+						    int	        *count);
+typedef CompBool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
+						CompDisplay     *display,
+						const char	*name,
+						CompOptionValue *value);
+
+typedef CompOption *(*GetPluginScreenOptionsProc) (CompPlugin *plugin,
+						   CompScreen *screen,
+						   int	      *count);
+typedef CompBool (*SetPluginScreenOptionProc) (CompPlugin      *plugin,
+					       CompScreen      *screen,
+					       const char      *name,
+					       CompOptionValue *value);
+
+typedef struct _CompPluginVTable {
     const char *name;
 
     GetMetadataProc getMetadata;
@@ -56,7 +87,10 @@ struct _CompPluginVTable {
     SetPluginDisplayOptionProc  setDisplayOption;
     GetPluginScreenOptionsProc  getScreenOptions;
     SetPluginScreenOptionProc   setScreenOption;
-};
+} CompPluginVTable;
+
+CompPluginVTable *
+getCompPluginInfo (void);
 
 COMPIZ_END_DECLS
 

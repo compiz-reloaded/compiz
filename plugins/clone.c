@@ -29,7 +29,7 @@
 #include <math.h>
 #include <sys/time.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static CompMetadata cloneMetadata;
 

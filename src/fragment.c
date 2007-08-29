@@ -23,7 +23,7 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 #include <string.h>
 #include <stdlib.h>

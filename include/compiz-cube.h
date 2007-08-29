@@ -26,7 +26,7 @@
 #ifndef _COMPIZ_CUBE_H
 #define _COMPIZ_CUBE_H
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 COMPIZ_BEGIN_DECLS
 

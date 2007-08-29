@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 static CompMatrix _identity_matrix = {
     1.0f, 0.0f,

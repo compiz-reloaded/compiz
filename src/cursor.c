@@ -23,9 +23,9 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
-#include <compiz.h>
-
 #include <stdlib.h>
+
+#include <compiz-core.h>
 
 static void
 setCursorMatrix (CompCursor *c)

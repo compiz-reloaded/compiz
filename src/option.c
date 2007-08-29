@@ -29,7 +29,7 @@
 #include <ctype.h>
 #include <math.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 struct _Modifier {
     char *name;
@@ -422,18 +422,6 @@ compSetOption (CompOption      *option,
     }
 
     return FALSE;
-}
-
-unsigned int
-compWindowTypeMaskFromStringList (CompOptionValue *value)
-{
-    int		 i;
-    unsigned int mask = 0;
-
-    for (i = 0; i < value->list.nValue; i++)
-	mask |= windowTypeFromString (value->list.value[i].s);
-
-    return mask;
 }
 
 Bool

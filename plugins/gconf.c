@@ -33,7 +33,7 @@
 #include <glib/gprintf.h>
 #include <gconf/gconf-client.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static CompMetadata gconfMetadata;
 

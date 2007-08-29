@@ -32,7 +32,7 @@
 #include <X11/extensions/Xrandr.h>
 #include <X11/extensions/Xfixes.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static Window xdndWindow = None;
 static Window edgeWindow = None;

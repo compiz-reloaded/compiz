@@ -25,7 +25,7 @@
 
 #include <stdlib.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 int
 allocatePrivateIndex (int		  *len,

@@ -24,7 +24,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 /**
  * Identity matrix.

@@ -29,7 +29,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <compiz-plugin.h>
+#include <compiz-core.h>
 
 static CompMetadata minMetadata;
 

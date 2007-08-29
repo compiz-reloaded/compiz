@@ -34,7 +34,7 @@
 #include <string.h>
 #include <sys/wait.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 char *programName;
 char **programArgv;

@@ -36,7 +36,7 @@
 #include <X11/SM/SMlib.h>
 #include <X11/ICE/ICElib.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 #define SM_DEBUG(x)
 

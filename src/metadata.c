@@ -30,7 +30,7 @@
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
 
-#include <compiz.h>
+#include <compiz-core.h>
 
 #define HOME_METADATADIR ".compiz/metadata"
 #define EXTENSION ".xml"
