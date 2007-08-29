@@ -509,7 +509,7 @@ getSlotAreas (CompScreen *s)
     if (!slotAreas)
     {
 	free (size);
-        return NULL;
+	return NULL;
     }
 
     left = ss->nWindows;
