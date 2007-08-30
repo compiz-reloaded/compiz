@@ -58,19 +58,21 @@ reallocWindowPrivates (int  size,
 
     for (w = s->windows; w; w = w->next)
     {
-	privates = realloc (w->privates, size * sizeof (CompPrivate));
+	privates = realloc (w->object.privates, size * sizeof (CompPrivate));
 	if (!privates)
 	    return FALSE;
 
-	w->privates = (CompPrivate *) privates;
+	w->object.privates = (CompPrivate *) privates;
     }
 
     return TRUE;
 }
 
 int
-allocateWindowPrivateIndex (CompScreen *screen)
+allocWindowObjectPrivateIndex (CompObject *parent)
 {
+    CompScreen *screen = (CompScreen *) parent;
+
     return allocatePrivateIndex (&screen->windowPrivateLen,
 				 &screen->windowPrivateIndices,
 				 reallocWindowPrivates,
@@ -78,12 +80,31 @@ allocateWindowPrivateIndex (CompScreen *screen)
 }
 
 void
-freeWindowPrivateIndex (CompScreen *screen,
-			int	   index)
+freeWindowObjectPrivateIndex (CompObject *parent,
+			      int	 index)
 {
+    CompScreen *screen = (CompScreen *) parent;
+
     freePrivateIndex (screen->windowPrivateLen,
 		      screen->windowPrivateIndices,
 		      index);
+}
+
+
+int
+allocateWindowPrivateIndex (CompScreen *screen)
+{
+    return compObjectAllocatePrivateIndex (&screen->object,
+					   COMP_OBJECT_TYPE_WINDOW);
+}
+
+void
+freeWindowPrivateIndex (CompScreen *screen,
+			int	   index)
+{
+    compObjectFreePrivateIndex (&screen->object,
+				COMP_OBJECT_TYPE_WINDOW,
+				index);
 }
 
 static Bool
@@ -1314,8 +1335,8 @@ freeWindow (CompWindow *w)
     if (w->region)
 	XDestroyRegion (w->region);
 
-    if (w->privates)
-	free (w->privates);
+    if (w->object.privates)
+	free (w->object.privates);
 
     if (w->sizeDamage)
 	free (w->damageRects);
@@ -1794,7 +1815,8 @@ addWindow (CompScreen *screen,
 	   Window     id,
 	   Window     aboveId)
 {
-    CompWindow *w;
+    CompWindow  *w;
+    CompPrivate	*privates;
 
     w = (CompWindow *) malloc (sizeof (CompWindow));
     if (!w)
@@ -1908,8 +1930,8 @@ addWindow (CompScreen *screen,
 
     if (screen->windowPrivateLen)
     {
-	w->privates = malloc (screen->windowPrivateLen * sizeof (CompPrivate));
-	if (!w->privates)
+	privates = malloc (screen->windowPrivateLen * sizeof (CompPrivate));
+	if (!privates)
 	{
 	    destroyTexture (screen, w->texture);
 	    free (w);
@@ -1917,7 +1939,9 @@ addWindow (CompScreen *screen,
 	}
     }
     else
-	w->privates = 0;
+	privates = 0;
+
+    compObjectInit (&w->object, privates, COMP_OBJECT_TYPE_WINDOW);
 
     w->region = XCreateRegion ();
     if (!w->region)

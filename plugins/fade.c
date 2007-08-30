@@ -77,20 +77,20 @@ typedef struct _FadeWindow {
     int steps;
 } FadeWindow;
 
-#define GET_FADE_DISPLAY(d)				     \
-    ((FadeDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_FADE_DISPLAY(d)					    \
+    ((FadeDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define FADE_DISPLAY(d)			   \
     FadeDisplay *fd = GET_FADE_DISPLAY (d)
 
-#define GET_FADE_SCREEN(s, fd)					 \
-    ((FadeScreen *) (s)->privates[(fd)->screenPrivateIndex].ptr)
+#define GET_FADE_SCREEN(s, fd)						\
+    ((FadeScreen *) (s)->object.privates[(fd)->screenPrivateIndex].ptr)
 
 #define FADE_SCREEN(s)							\
     FadeScreen *fs = GET_FADE_SCREEN (s, GET_FADE_DISPLAY (s->display))
 
-#define GET_FADE_WINDOW(w, fs)				         \
-    ((FadeWindow *) (w)->privates[(fs)->windowPrivateIndex].ptr)
+#define GET_FADE_WINDOW(w, fs)						\
+    ((FadeWindow *) (w)->object.privates[(fs)->windowPrivateIndex].ptr)
 
 #define FADE_WINDOW(w)					     \
     FadeWindow *fw = GET_FADE_WINDOW  (w,		     \
@@ -664,13 +664,13 @@ fadeInitDisplay (CompPlugin  *p,
     WRAP (fd, d, handleEvent, fadeHandleEvent);
     WRAP (fd, d, matchExpHandlerChanged, fadeMatchExpHandlerChanged);
 
-    d->privates[displayPrivateIndex].ptr = fd;
+    d->object.privates[displayPrivateIndex].ptr = fd;
 
     return TRUE;
 }
 
 static void
-fadeFiniDisplay (CompPlugin *p,
+fadeFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
     FADE_DISPLAY (d);
@@ -735,7 +735,7 @@ fadeInitScreen (CompPlugin *p,
     WRAP (fs, s, focusWindow, fadeFocusWindow);
     WRAP (fs, s, windowResizeNotify, fadeWindowResizeNotify);
 
-    s->privates[fd->screenPrivateIndex].ptr = fs;
+    s->object.privates[fd->screenPrivateIndex].ptr = fs;
 
     return TRUE;
 }
@@ -784,7 +784,7 @@ fadeInitWindow (CompPlugin *p,
     fw->shaded     = w->shaded;
     fw->fadeOut    = FALSE;
 
-    w->privates[fs->windowPrivateIndex].ptr = fw;
+    w->object.privates[fs->windowPrivateIndex].ptr = fw;
 
     if (w->attrib.map_state == IsViewable)
     {
@@ -809,6 +809,61 @@ fadeFiniWindow (CompPlugin *p,
     w->paint.saturation = w->saturation;
 
     free (fw);
+}
+
+static CompBool
+fadeInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) fadeInitDisplay,
+	(InitPluginObjectProc) fadeInitScreen,
+	(InitPluginObjectProc) fadeInitWindow
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+fadeFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) fadeFiniDisplay,
+	(FiniPluginObjectProc) fadeFiniScreen,
+	(FiniPluginObjectProc) fadeFiniWindow
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+fadeGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetDisplayOptions */
+	(GetPluginObjectOptionsProc) fadeGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+fadeSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetDisplayOption */
+	(SetPluginObjectOptionProc) fadeSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -849,16 +904,10 @@ static CompPluginVTable fadeVTable = {
     fadeGetMetadata,
     fadeInit,
     fadeFini,
-    fadeInitDisplay,
-    fadeFiniDisplay,
-    fadeInitScreen,
-    fadeFiniScreen,
-    fadeInitWindow,
-    fadeFiniWindow,
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    fadeGetScreenOptions,
-    fadeSetScreenOption
+    fadeInitObject,
+    fadeFiniObject,
+    fadeGetObjectOptions,
+    fadeSetObjectOption
 };
 
 CompPluginVTable *

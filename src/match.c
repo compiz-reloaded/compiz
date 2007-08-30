@@ -742,22 +742,23 @@ matchExpHandlerChanged (CompDisplay *display)
 
     for (p = getPlugins (); p; p = p->next)
     {
-	if (p->vTable->getDisplayOptions)
-	{
-	    option = (*p->vTable->getDisplayOptions) (p, display, &nOption);
-	    matchUpdateMatchOptions (option, nOption);
-	}
+	if (!p->vTable->getObjectOptions)
+	    continue;
+
+	option = (*p->vTable->getObjectOptions) (p, &display->object,
+						 &nOption);
+	matchUpdateMatchOptions (option, nOption);
     }
 
     for (s = display->screens; s; s = s->next)
     {
 	for (p = getPlugins (); p; p = p->next)
 	{
-	    if (p->vTable->getScreenOptions)
-	    {
-		option = (*p->vTable->getScreenOptions) (p, s, &nOption);
-		matchUpdateMatchOptions (option, nOption);
-	    }
+	    if (!p->vTable->getObjectOptions)
+		continue;
+
+	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
+	    matchUpdateMatchOptions (option, nOption);
 	}
 
 	for (w = s->windows; w; w = w->next)

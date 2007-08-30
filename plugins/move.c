@@ -92,14 +92,14 @@ typedef struct _MoveScreen {
     int	snapBackY;
 } MoveScreen;
 
-#define GET_MOVE_DISPLAY(d)				     \
-    ((MoveDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_MOVE_DISPLAY(d)					    \
+    ((MoveDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define MOVE_DISPLAY(d)		           \
     MoveDisplay *md = GET_MOVE_DISPLAY (d)
 
-#define GET_MOVE_SCREEN(s, md)				         \
-    ((MoveScreen *) (s)->privates[(md)->screenPrivateIndex].ptr)
+#define GET_MOVE_SCREEN(s, md)						\
+    ((MoveScreen *) (s)->object.privates[(md)->screenPrivateIndex].ptr)
 
 #define MOVE_SCREEN(s)						        \
     MoveScreen *ms = GET_MOVE_SCREEN (s, GET_MOVE_DISPLAY (s->display))
@@ -844,7 +844,7 @@ moveInitDisplay (CompPlugin  *p,
 
     WRAP (md, d, handleEvent, moveHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = md;
+    d->object.privates[displayPrivateIndex].ptr = md;
 
     return TRUE;
 }
@@ -882,7 +882,7 @@ moveInitScreen (CompPlugin *p,
 
     WRAP (ms, s, paintWindow, movePaintWindow);
 
-    s->privates[md->screenPrivateIndex].ptr = ms;
+    s->object.privates[md->screenPrivateIndex].ptr = ms;
 
     return TRUE;
 }
@@ -899,6 +899,57 @@ moveFiniScreen (CompPlugin *p,
 	XFreeCursor (s->display->display, ms->moveCursor);
 
     free (ms);
+}
+
+static CompBool
+moveInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) moveInitDisplay,
+	(InitPluginObjectProc) moveInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+moveFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) moveFiniDisplay,
+	(FiniPluginObjectProc) moveFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+moveGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) moveGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+moveSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) moveSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -941,16 +992,10 @@ CompPluginVTable moveVTable = {
     moveGetMetadata,
     moveInit,
     moveFini,
-    moveInitDisplay,
-    moveFiniDisplay,
-    moveInitScreen,
-    moveFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    moveGetDisplayOptions,
-    moveSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    moveInitObject,
+    moveFiniObject,
+    moveGetObjectOptions,
+    moveSetObjectOption
 };
 
 CompPluginVTable *

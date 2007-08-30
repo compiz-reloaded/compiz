@@ -691,6 +691,7 @@ static Bool
 handleActionEvent (CompDisplay *d,
 		   XEvent      *event)
 {
+    CompObject *obj = &d->object;
     CompOption *option;
     int	       nOption;
     CompPlugin *p;
@@ -733,13 +734,12 @@ handleActionEvent (CompDisplay *d,
 
 	for (p = getPlugins (); p; p = p->next)
 	{
-	    if (p->vTable->getDisplayOptions)
-	    {
-		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-		if (triggerButtonPressBindings (d, option, nOption, event,
-						o, 8))
-		    return TRUE;
-	    }
+	    if (!p->vTable->getObjectOptions)
+		continue;
+
+	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+	    if (triggerButtonPressBindings (d, option, nOption, event, o, 8))
+		return TRUE;
 	}
 	break;
     case ButtonRelease:
@@ -760,13 +760,12 @@ handleActionEvent (CompDisplay *d,
 
 	for (p = getPlugins (); p; p = p->next)
 	{
-	    if (p->vTable->getDisplayOptions)
-	    {
-		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-		if (triggerButtonReleaseBindings (d, option, nOption, event,
-						  o, 8))
-		    return TRUE;
-	    }
+	    if (!p->vTable->getObjectOptions)
+		continue;
+
+	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+	    if (triggerButtonReleaseBindings (d, option, nOption, event, o, 8))
+		return TRUE;
 	}
 	break;
     case KeyPress:
@@ -787,12 +786,12 @@ handleActionEvent (CompDisplay *d,
 
 	for (p = getPlugins (); p; p = p->next)
 	{
-	    if (p->vTable->getDisplayOptions)
-	    {
-		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-		if (triggerKeyPressBindings (d, option, nOption, event, o, 8))
-		    return TRUE;
-	    }
+	    if (!p->vTable->getObjectOptions)
+		continue;
+
+	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+	    if (triggerKeyPressBindings (d, option, nOption, event, o, 8))
+		return TRUE;
 	}
 	break;
     case KeyRelease:
@@ -813,12 +812,11 @@ handleActionEvent (CompDisplay *d,
 
 	for (p = getPlugins (); p; p = p->next)
 	{
-	    if (p->vTable->getDisplayOptions)
-	    {
-		option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-		if (triggerKeyReleaseBindings (d, option, nOption, event, o, 8))
-		    return TRUE;
-	    }
+	    if (!p->vTable->getObjectOptions)
+		continue;
+	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+	    if (triggerKeyReleaseBindings (d, option, nOption, event, o, 8))
+		return TRUE;
 	}
 	break;
     case EnterNotify:
@@ -863,13 +861,13 @@ handleActionEvent (CompDisplay *d,
 
 		for (p = getPlugins (); p; p = p->next)
 		{
-		    if (p->vTable->getDisplayOptions)
-		    {
-			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-			if (triggerEdgeLeaveBindings (d, option, nOption, state,
-						      edge, o, 7))
-			    return TRUE;
-		    }
+		    if (!p->vTable->getObjectOptions)
+			continue;
+
+		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+		    if (triggerEdgeLeaveBindings (d, option, nOption, state,
+						  edge, o, 7))
+			return TRUE;
 		}
 	    }
 
@@ -903,13 +901,13 @@ handleActionEvent (CompDisplay *d,
 
 		for (p = getPlugins (); p; p = p->next)
 		{
-		    if (p->vTable->getDisplayOptions)
-		    {
-			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-			if (triggerEdgeEnterBindings (d, option, nOption, state,
-						      edge, o, 7))
-			    return TRUE;
-		    }
+		    if (!p->vTable->getObjectOptions)
+			continue;
+
+		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+		    if (triggerEdgeEnterBindings (d, option, nOption, state,
+						  edge, o, 7))
+			return TRUE;
 		}
 	    }
 	} break;
@@ -959,13 +957,13 @@ handleActionEvent (CompDisplay *d,
 
 		for (p = getPlugins (); p; p = p->next)
 		{
-		    if (p->vTable->getDisplayOptions)
-		    {
-			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-			if (triggerEdgeLeaveBindings (d, option, nOption, state,
-						      edge, o, 6))
-			    return TRUE;
-		    }
+		    if (!p->vTable->getObjectOptions)
+			continue;
+
+		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+		    if (triggerEdgeLeaveBindings (d, option, nOption, state,
+						  edge, o, 6))
+			return TRUE;
 		}
 	    }
 	}
@@ -1010,13 +1008,13 @@ handleActionEvent (CompDisplay *d,
 
 		for (p = getPlugins (); p; p = p->next)
 		{
-		    if (p->vTable->getDisplayOptions)
-		    {
-			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-			if (triggerEdgeEnterBindings (d, option, nOption, state,
-						      edge, o, 6))
-			    return TRUE;
-		    }
+		    if (!p->vTable->getObjectOptions)
+			continue;
+
+		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+		    if (triggerEdgeEnterBindings (d, option, nOption, state,
+						  edge, o, 6))
+			return TRUE;
 		}
 	    }
 
@@ -1053,13 +1051,13 @@ handleActionEvent (CompDisplay *d,
 
 		for (p = getPlugins (); p; p = p->next)
 		{
-		    if (p->vTable->getDisplayOptions)
-		    {
-			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-			if (triggerStateNotifyBindings (d, option, nOption,
-							stateEvent, o, 4))
-			    return TRUE;
-		    }
+		    if (!p->vTable->getObjectOptions)
+			continue;
+
+		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+		    if (triggerStateNotifyBindings (d, option, nOption,
+						    stateEvent, o, 4))
+			return TRUE;
 		}
 	    }
 	    else if (xkbEvent->xkb_type == XkbBellNotify)
@@ -1073,13 +1071,12 @@ handleActionEvent (CompDisplay *d,
 
 		for (p = getPlugins (); p; p = p->next)
 		{
-		    if (p->vTable->getDisplayOptions)
-		    {
-			option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
-			if (triggerBellNotifyBindings (d, option, nOption,
-						       o, 3))
-			    return TRUE;
-		    }
+		    if (!p->vTable->getObjectOptions)
+			continue;
+
+		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
+		    if (triggerBellNotifyBindings (d, option, nOption, o, 3))
+			return TRUE;
 		}
 	    }
 	}

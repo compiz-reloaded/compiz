@@ -41,11 +41,11 @@
 #define FILE_SUFFIX         ".conf"
 
 #define GET_INI_DISPLAY(d) \
-	((IniDisplay *) (d)->privates[displayPrivateIndex].ptr)
+	((IniDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 #define INI_DISPLAY(d) \
 	IniDisplay *id = GET_INI_DISPLAY (d)
 #define GET_INI_SCREEN(s, id) \
-	((IniScreen *) (s)->privates[(id)->screenPrivateIndex].ptr)
+	((IniScreen *) (s)->object.privates[(id)->screenPrivateIndex].ptr)
 #define INI_SCREEN(s) \
 	IniScreen *is = GET_INI_SCREEN (s, GET_INI_DISPLAY (s->display))
 
@@ -503,13 +503,12 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	}
     }
 
-    if (s && p->vTable->getScreenOptions)
+    if (p->vTable->getObjectOptions)
     {
-	option = (*p->vTable->getScreenOptions) (p, s, &nOption);
-    }
-    else if (p->vTable->getDisplayOptions)
-    {
-	option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+	if (s)
+	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
+	else
+	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
     }
 
     while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
@@ -648,9 +647,9 @@ iniSaveOptions (CompDisplay *d,
 	    return FALSE;
 
 	if (s)
-	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
 	else
-	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
     }
     else
     {
@@ -990,7 +989,7 @@ iniInitPluginForDisplay (CompPlugin  *p,
     status = (*d->initPluginForDisplay) (p, d);
     WRAP (id, d, initPluginForDisplay, iniInitPluginForDisplay);
 
-    if (status && p->vTable->getDisplayOptions)
+    if (status && p->vTable->getObjectOptions)
     {
 	iniLoadOptions (d, -1, p->vTable->name);
     }
@@ -1016,7 +1015,7 @@ iniInitPluginForScreen (CompPlugin *p,
     status = (*s->initPluginForScreen) (p, s);
     WRAP (is, s, initPluginForScreen, iniInitPluginForScreen);
 
-    if (status && p->vTable->getScreenOptions)
+    if (status && p->vTable->getObjectOptions)
     {
 	iniLoadOptions (s->display, s->screenNum, p->vTable->name);
     }
@@ -1049,7 +1048,7 @@ iniSetDisplayOptionForPlugin (CompDisplay     *d,
 	CompPlugin *p;
 
 	p = findActivePlugin (plugin);
-	if (p && p->vTable->getDisplayOptions)
+	if (p && p->vTable->getObjectOptions)
 	    iniSaveOptions (d, -1, plugin);
     }
 
@@ -1075,7 +1074,7 @@ iniSetScreenOptionForPlugin (CompScreen      *s,
 	CompPlugin *p;
 
 	p = findActivePlugin (plugin);
-	if (p && p->vTable->getScreenOptions)
+	if (p && p->vTable->getObjectOptions)
 	    iniSaveOptions (s->display, s->screenNum, plugin);
     }
 
@@ -1108,7 +1107,7 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
     WRAP (id, d, initPluginForDisplay, iniInitPluginForDisplay);
     WRAP (id, d, setDisplayOptionForPlugin, iniSetDisplayOptionForPlugin);
 
-    d->privates[displayPrivateIndex].ptr = id;
+    d->object.privates[displayPrivateIndex].ptr = id;
 
     iniLoadOptions (d, -1, NULL);
 
@@ -1154,7 +1153,7 @@ iniInitScreen (CompPlugin *p, CompScreen *s)
     if (!is)
         return FALSE;
 
-    s->privates[id->screenPrivateIndex].ptr = is;
+    s->object.privates[id->screenPrivateIndex].ptr = is;
 
     WRAP (is, s, initPluginForScreen, iniInitPluginForScreen);
     WRAP (is, s, setScreenOptionForPlugin, iniSetScreenOptionForPlugin);
@@ -1173,6 +1172,30 @@ iniFiniScreen (CompPlugin *p, CompScreen *s)
     UNWRAP (is, s, setScreenOptionForPlugin);
 
     free (is);
+}
+
+static CompBool
+iniInitObject (CompPlugin *p,
+	       CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) iniInitDisplay,
+	(InitPluginObjectProc) iniInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+iniFiniObject (CompPlugin *p,
+	       CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) iniFiniDisplay,
+	(FiniPluginObjectProc) iniFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static Bool
@@ -1212,14 +1235,10 @@ CompPluginVTable iniVTable = {
     iniGetMetadata,
     iniInit,
     iniFini,
-    iniInitDisplay,
-    iniFiniDisplay,
-    iniInitScreen,
-    iniFiniScreen,
-    0,
-    0,
-    0,
-    0
+    iniInitObject,
+    iniFiniObject,
+    0, /* GetObjectOptions */
+    0  /* SetObjectOption */
 };
 
 CompPluginVTable *

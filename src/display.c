@@ -114,18 +114,18 @@ reallocDisplayPrivate (int  size,
 
     if (d)
     {
-	privates = realloc (d->privates, size * sizeof (CompPrivate));
+	privates = realloc (d->object.privates, size * sizeof (CompPrivate));
 	if (!privates)
 	    return FALSE;
 
-	d->privates = (CompPrivate *) privates;
+	d->object.privates = (CompPrivate *) privates;
     }
 
     return TRUE;
 }
 
 int
-allocateDisplayPrivateIndex (void)
+allocDisplayObjectPrivateIndex (CompObject *parent)
 {
     return allocatePrivateIndex (&displayPrivateLen,
 				 &displayPrivateIndices,
@@ -134,9 +134,22 @@ allocateDisplayPrivateIndex (void)
 }
 
 void
-freeDisplayPrivateIndex (int index)
+freeDisplayObjectPrivateIndex (CompObject *parent,
+			       int	  index)
 {
     freePrivateIndex (displayPrivateLen, displayPrivateIndices, index);
+}
+
+int
+allocateDisplayPrivateIndex (void)
+{
+    return compObjectAllocatePrivateIndex (NULL, COMP_OBJECT_TYPE_DISPLAY);
+}
+
+void
+freeDisplayPrivateIndex (int index)
+{
+    compObjectFreePrivateIndex (NULL, COMP_OBJECT_TYPE_DISPLAY, index);
 }
 
 static Bool
@@ -897,8 +910,9 @@ setDisplayOptionForPlugin (CompDisplay     *display,
     CompPlugin *p;
 
     p = findActivePlugin (plugin);
-    if (p && p->vTable->setDisplayOption)
-	return (*p->vTable->setDisplayOption) (p, display, name, value);
+    if (p && p->vTable->setObjectOption)
+	return (*p->vTable->setObjectOption) (p, &display->object,
+					      name, value);
 
     return FALSE;
 }
@@ -1970,6 +1984,7 @@ addDisplay (const char *name)
 {
     CompDisplay *d;
     CompPlugin  *core;
+    CompPrivate	*privates;
     Display     *dpy;
     Window	focus;
     int		revertTo, i;
@@ -1982,12 +1997,14 @@ addDisplay (const char *name)
 
     if (displayPrivateLen)
     {
-	d->privates = malloc (displayPrivateLen * sizeof (CompPrivate));
-	if (!d->privates)
+	privates = malloc (displayPrivateLen * sizeof (CompPrivate));
+	if (!privates)
 	    return FALSE;
     }
     else
-	d->privates = 0;
+	privates = 0;
+
+    compObjectInit (&d->object, privates, COMP_OBJECT_TYPE_DISPLAY);
 
     d->screens = NULL;
 

@@ -13,6 +13,7 @@ compiz_LDFLAGS = -export-dynamic
 compiz_SOURCES =   \
 	main.c	   \
 	privates.c \
+	object.c   \
 	texture.c  \
 	display.c  \
 	screen.c   \

@@ -38,6 +38,7 @@ typedef int CompWatchFdHandle;
 
 typedef union _CompOptionValue CompOptionValue;
 
+typedef struct _CompObject   CompObject;
 typedef struct _CompDisplay  CompDisplay;
 typedef struct _CompMetadata CompMetadata;
 typedef struct _CompOption   CompOption;

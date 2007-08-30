@@ -94,20 +94,20 @@ typedef struct _SvgWindow {
     SvgContext *context;
 } SvgWindow;
 
-#define GET_SVG_DISPLAY(d)				    \
-    ((SvgDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_SVG_DISPLAY(d)					   \
+    ((SvgDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define SVG_DISPLAY(d)			 \
     SvgDisplay *sd = GET_SVG_DISPLAY (d)
 
-#define GET_SVG_SCREEN(s, sd)					\
-    ((SvgScreen *) (s)->privates[(sd)->screenPrivateIndex].ptr)
+#define GET_SVG_SCREEN(s, sd)					       \
+    ((SvgScreen *) (s)->object.privates[(sd)->screenPrivateIndex].ptr)
 
 #define SVG_SCREEN(s)						     \
     SvgScreen *ss = GET_SVG_SCREEN (s, GET_SVG_DISPLAY (s->display))
 
-#define GET_SVG_WINDOW(w, ss)					\
-    ((SvgWindow *) (w)->privates[(ss)->windowPrivateIndex].ptr)
+#define GET_SVG_WINDOW(w, ss)					       \
+    ((SvgWindow *) (w)->object.privates[(ss)->windowPrivateIndex].ptr)
 
 #define SVG_WINDOW(w)					   \
     SvgWindow *sw = GET_SVG_WINDOW  (w,			   \
@@ -825,7 +825,7 @@ svgInitDisplay (CompPlugin  *p,
     WRAP (sd, d, handleCompizEvent, svgHandleCompizEvent);
     WRAP (sd, d, fileToImage, svgFileToImage);
 
-    d->privates[displayPrivateIndex].ptr = sd;
+    d->object.privates[displayPrivateIndex].ptr = sd;
 
     for (s = d->screens; s; s = s->next)
 	updateDefaultIcon (s);
@@ -879,7 +879,7 @@ svgInitScreen (CompPlugin *p,
     WRAP (ss, s, windowMoveNotify, svgWindowMoveNotify);
     WRAP (ss, s, windowResizeNotify, svgWindowResizeNotify);
 
-    s->privates[sd->screenPrivateIndex].ptr = ss;
+    s->object.privates[sd->screenPrivateIndex].ptr = ss;
 
     return TRUE;
 }
@@ -914,7 +914,7 @@ svgInitWindow (CompPlugin *p,
     sw->source  = NULL;
     sw->context = NULL;
 
-    w->privates[ss->windowPrivateIndex].ptr = sw;
+    w->object.privates[ss->windowPrivateIndex].ptr = sw;
 
     return TRUE;
 }
@@ -938,6 +938,59 @@ svgFiniWindow (CompPlugin *p,
     }
 
     free (sw);
+}
+
+static CompBool
+svgInitObject (CompPlugin *p,
+	       CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) svgInitDisplay,
+	(InitPluginObjectProc) svgInitScreen,
+	(InitPluginObjectProc) svgInitWindow
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+svgFiniObject (CompPlugin *p,
+	       CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) svgFiniDisplay,
+	(FiniPluginObjectProc) svgFiniScreen,
+	(FiniPluginObjectProc) svgFiniWindow
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+svgGetObjectOptions (CompPlugin *plugin,
+		     CompObject *object,
+		     int	*count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) svgGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+svgSetObjectOption (CompPlugin      *plugin,
+		    CompObject      *object,
+		    const char      *name,
+		    CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) svgSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -980,16 +1033,10 @@ CompPluginVTable svgVTable = {
     svgGetMetadata,
     svgInit,
     svgFini,
-    svgInitDisplay,
-    svgFiniDisplay,
-    svgInitScreen,
-    svgFiniScreen,
-    svgInitWindow,
-    svgFiniWindow,
-    svgGetDisplayOptions,
-    svgSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    svgInitObject,
+    svgFiniObject,
+    svgGetObjectOptions,
+    svgSetObjectOption
 };
 
 CompPluginVTable *

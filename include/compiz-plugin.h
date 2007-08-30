@@ -35,34 +35,16 @@ typedef void (*FiniPluginProc) (CompPlugin *plugin);
 
 typedef CompMetadata *(*GetMetadataProc) (CompPlugin *plugin);
 
-typedef CompBool (*InitPluginForDisplayProc) (CompPlugin  *plugin,
-					      CompDisplay *display);
-typedef void (*FiniPluginForDisplayProc) (CompPlugin  *plugin,
-					  CompDisplay *display);
+typedef CompBool (*InitPluginObjectProc) (CompPlugin *plugin,
+					  CompObject *object);
+typedef void (*FiniPluginObjectProc) (CompPlugin  *plugin,
+				      CompObject *object);
 
-typedef CompBool (*InitPluginForScreenProc) (CompPlugin *plugin,
-					     CompScreen *screen);
-typedef void (*FiniPluginForScreenProc) (CompPlugin *plugin,
-					 CompScreen *screen);
-
-typedef CompBool (*InitPluginForWindowProc) (CompPlugin *plugin,
-					     CompWindow *window);
-typedef void (*FiniPluginForWindowProc) (CompPlugin *plugin,
-					 CompWindow *window);
-
-typedef CompOption *(*GetPluginDisplayOptionsProc) (CompPlugin  *plugin,
-						    CompDisplay *display,
-						    int	        *count);
-typedef CompBool (*SetPluginDisplayOptionProc) (CompPlugin      *plugin,
-						CompDisplay     *display,
-						const char	*name,
-						CompOptionValue *value);
-
-typedef CompOption *(*GetPluginScreenOptionsProc) (CompPlugin *plugin,
-						   CompScreen *screen,
+typedef CompOption *(*GetPluginObjectOptionsProc) (CompPlugin *plugin,
+						   CompObject *object,
 						   int	      *count);
-typedef CompBool (*SetPluginScreenOptionProc) (CompPlugin      *plugin,
-					       CompScreen      *screen,
+typedef CompBool (*SetPluginObjectOptionProc) (CompPlugin      *plugin,
+					       CompObject      *object,
 					       const char      *name,
 					       CompOptionValue *value);
 
@@ -74,19 +56,11 @@ typedef struct _CompPluginVTable {
     InitPluginProc init;
     FiniPluginProc fini;
 
-    InitPluginForDisplayProc initDisplay;
-    FiniPluginForDisplayProc finiDisplay;
+    InitPluginObjectProc initObject;
+    FiniPluginObjectProc finiObject;
 
-    InitPluginForScreenProc initScreen;
-    FiniPluginForScreenProc finiScreen;
-
-    InitPluginForWindowProc initWindow;
-    FiniPluginForWindowProc finiWindow;
-
-    GetPluginDisplayOptionsProc getDisplayOptions;
-    SetPluginDisplayOptionProc  setDisplayOption;
-    GetPluginScreenOptionsProc  getScreenOptions;
-    SetPluginScreenOptionProc   setScreenOption;
+    GetPluginObjectOptionsProc getObjectOptions;
+    SetPluginObjectOptionProc  setObjectOption;
 } CompPluginVTable;
 
 CompPluginVTable *

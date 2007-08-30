@@ -139,14 +139,14 @@ typedef struct _RotateScreen {
     GLfloat zoomVelocity;
 } RotateScreen;
 
-#define GET_ROTATE_DISPLAY(d)				       \
-    ((RotateDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_ROTATE_DISPLAY(d)					      \
+    ((RotateDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define ROTATE_DISPLAY(d)		       \
     RotateDisplay *rd = GET_ROTATE_DISPLAY (d)
 
-#define GET_ROTATE_SCREEN(s, rd)				   \
-    ((RotateScreen *) (s)->privates[(rd)->screenPrivateIndex].ptr)
+#define GET_ROTATE_SCREEN(s, rd)					  \
+    ((RotateScreen *) (s)->object.privates[(rd)->screenPrivateIndex].ptr)
 
 #define ROTATE_SCREEN(s)						      \
     RotateScreen *rs = GET_ROTATE_SCREEN (s, GET_ROTATE_DISPLAY (s->display))
@@ -1747,7 +1747,7 @@ rotateInitDisplay (CompPlugin  *p,
 
     WRAP (rd, d, handleEvent, rotateHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = rd;
+    d->object.privates[displayPrivateIndex].ptr = rd;
 
     return TRUE;
 }
@@ -1842,7 +1842,7 @@ rotateInitScreen (CompPlugin *p,
 
     WRAP (rs, cs, getRotation, rotateGetRotation);
 
-    s->privates[rd->screenPrivateIndex].ptr = rs;
+    s->object.privates[rd->screenPrivateIndex].ptr = rs;
 
     return TRUE;
 }
@@ -1866,6 +1866,58 @@ rotateFiniScreen (CompPlugin *p,
     compFiniScreenOptions (s, rs->opt, ROTATE_SCREEN_OPTION_NUM);
 
     free (rs);
+}
+static CompBool
+rotateInitObject (CompPlugin *p,
+		  CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) rotateInitDisplay,
+	(InitPluginObjectProc) rotateInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+rotateFiniObject (CompPlugin *p,
+		  CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) rotateFiniDisplay,
+	(FiniPluginObjectProc) rotateFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+rotateGetObjectOptions (CompPlugin *plugin,
+			CompObject *object,
+			int	   *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) rotateGetDisplayOptions,
+	(GetPluginObjectOptionsProc) rotateGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+rotateSetObjectOption (CompPlugin      *plugin,
+		       CompObject      *object,
+		       const char      *name,
+		       CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) rotateSetDisplayOption,
+	(SetPluginObjectOptionProc) rotateSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -1909,16 +1961,10 @@ CompPluginVTable rotateVTable = {
     rotateGetMetadata,
     rotateInit,
     rotateFini,
-    rotateInitDisplay,
-    rotateFiniDisplay,
-    rotateInitScreen,
-    rotateFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    rotateGetDisplayOptions,
-    rotateSetDisplayOption,
-    rotateGetScreenOptions,
-    rotateSetScreenOption
+    rotateInitObject,
+    rotateFiniObject,
+    rotateGetObjectOptions,
+    rotateSetObjectOption
 };
 
 CompPluginVTable *

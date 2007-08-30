@@ -51,14 +51,14 @@ typedef struct _KconfigScreen {
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 } KconfigScreen;
 
-#define GET_KCONFIG_DISPLAY(d)				        \
-    ((KconfigDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_KCONFIG_DISPLAY(d)					       \
+    ((KconfigDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define KCONFIG_DISPLAY(d)		         \
     KconfigDisplay *kd = GET_KCONFIG_DISPLAY (d)
 
-#define GET_KCONFIG_SCREEN(s, kd)				    \
-    ((KconfigScreen *) (s)->privates[(kd)->screenPrivateIndex].ptr)
+#define GET_KCONFIG_SCREEN(s, kd)					   \
+    ((KconfigScreen *) (s)->object.privates[(kd)->screenPrivateIndex].ptr)
 
 #define KCONFIG_SCREEN(s)					              \
     KconfigScreen *ks = GET_KCONFIG_SCREEN (s,				      \
@@ -493,10 +493,10 @@ kconfigRcReload (void *closure)
 
     for (p = getPlugins (); p; p = p->next)
     {
-	if (!p->vTable->getDisplayOptions)
+	if (!p->vTable->getObjectOptions)
 	    continue;
 
-	option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 	while (nOption--)
 	    kconfigGetDisplayOption (d, option++, p->vTable->name);
     }
@@ -507,10 +507,10 @@ kconfigRcReload (void *closure)
 
 	for (p = getPlugins (); p; p = p->next)
 	{
-	    if (!p->vTable->getScreenOptions)
+	    if (!p->vTable->getObjectOptions)
 		continue;
 
-	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
 	    while (nOption--)
 		kconfigGetScreenOption (s, option++, p->vTable->name,
 					screen.ascii ());
@@ -556,12 +556,12 @@ kconfigSetDisplayOptionForPlugin (CompDisplay     *d,
 	CompPlugin *p;
 
 	p = findActivePlugin (plugin);
-	if (p && p->vTable->getDisplayOptions)
+	if (p && p->vTable->getObjectOptions)
 	{
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 	    option = compFindOption (option, nOption, name, 0);
 	    if (option)
 		kconfigSetOption (d, option, p->vTable->name, "display");
@@ -594,7 +594,7 @@ kconfigSetScreenOptionForPlugin (CompScreen      *s,
 	    CompPlugin *p;
 
 	    p = findActivePlugin (plugin);
-	    if (p && p->vTable->getScreenOptions)
+	    if (p && p->vTable->getObjectOptions)
 	    {
 		CompOption *option;
 		int	   nOption;
@@ -602,7 +602,8 @@ kconfigSetScreenOptionForPlugin (CompScreen      *s,
 
 		screen += QString::number (s->screenNum);
 
-		option = (*p->vTable->getScreenOptions) (p, s, &nOption);
+		option = (*p->vTable->getObjectOptions) (p, &s->object,
+							 &nOption);
 		option = compFindOption (option, nOption, name, 0);
 		if (option)
 		    kconfigSetOption (s->display, option, plugin,
@@ -626,12 +627,12 @@ kconfigInitPluginForDisplay (CompPlugin  *p,
     status = (*d->initPluginForDisplay) (p, d);
     WRAP (kd, d, initPluginForDisplay, kconfigInitPluginForDisplay);
 
-    if (status && p->vTable->getDisplayOptions)
+    if (status && p->vTable->getObjectOptions)
     {
 	CompOption *option;
 	int	   nOption;
 
-	option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 	while (nOption--)
 	    kconfigGetDisplayOption (d, option++, p->vTable->name);
     }
@@ -651,7 +652,7 @@ kconfigInitPluginForScreen (CompPlugin *p,
     status = (*s->initPluginForScreen) (p, s);
     WRAP (ks, s, initPluginForScreen, kconfigInitPluginForScreen);
 
-    if (status && p->vTable->getScreenOptions)
+    if (status && p->vTable->getObjectOptions)
     {
 	CompOption *option;
 	int	   nOption;
@@ -659,7 +660,7 @@ kconfigInitPluginForScreen (CompPlugin *p,
 
 	screen += QString::number (s->screenNum);
 
-	option = (*p->vTable->getScreenOptions) (p, s, &nOption);
+	option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
 	while (nOption--)
 	    kconfigGetScreenOption (s, option++, p->vTable->name,
 				    screen.ascii ());
@@ -717,7 +718,7 @@ kconfigInitDisplay (CompPlugin  *p,
     WRAP (kd, d, initPluginForDisplay, kconfigInitPluginForDisplay);
     WRAP (kd, d, setDisplayOptionForPlugin, kconfigSetDisplayOptionForPlugin);
 
-    d->privates[displayPrivateIndex].ptr = kd;
+    d->object.privates[displayPrivateIndex].ptr = kd;
 
     return TRUE;
 }
@@ -764,7 +765,7 @@ kconfigInitScreen (CompPlugin *p,
     WRAP (ks, s, initPluginForScreen, kconfigInitPluginForScreen);
     WRAP (ks, s, setScreenOptionForPlugin, kconfigSetScreenOptionForPlugin);
 
-    s->privates[kd->screenPrivateIndex].ptr = ks;
+    s->object.privates[kd->screenPrivateIndex].ptr = ks;
 
     return TRUE;
 }
@@ -779,6 +780,30 @@ kconfigFiniScreen (CompPlugin *p,
     UNWRAP (ks, s, setScreenOptionForPlugin);
 
     delete ks;
+}
+
+static CompBool
+kconfigInitObject (CompPlugin *p,
+		   CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) kconfigInitDisplay,
+	(InitPluginObjectProc) kconfigInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+kconfigFiniObject (CompPlugin *p,
+		   CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) kconfigFiniDisplay,
+	(FiniPluginObjectProc) kconfigFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static Bool
@@ -828,16 +853,10 @@ CompPluginVTable kconfigVTable = {
     kconfigGetMetadata,
     kconfigInit,
     kconfigFini,
-    kconfigInitDisplay,
-    kconfigFiniDisplay,
-    kconfigInitScreen,
-    kconfigFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    kconfigInitObject,
+    kconfigFiniObject,
+    0, /* GetObjectOptions */
+    0  /* SetObjectOption */
 };
 
 CompPluginVTable *

@@ -48,8 +48,8 @@ typedef struct _GConfDisplay {
     Atom	      notifyAtom;
 } GLibDisplay;
 
-#define GET_GLIB_DISPLAY(d)				     \
-    ((GLibDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_GLIB_DISPLAY(d)					    \
+    ((GLibDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define GLIB_DISPLAY(d)			   \
     GLibDisplay *gd = GET_GLIB_DISPLAY (d)
@@ -206,7 +206,7 @@ glibInitDisplay (CompPlugin  *p,
 
     WRAP (gd, d, handleEvent, glibHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = gd;
+    d->object.privates[displayPrivateIndex].ptr = gd;
 
     glibPrepare (d, g_main_context_default ());
 
@@ -230,6 +230,28 @@ glibFiniDisplay (CompPlugin  *p,
 	free (gd->fds);
 
     free (gd);
+}
+
+static CompBool
+glibInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) glibInitDisplay
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+glibFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) glibFiniDisplay
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static Bool
@@ -269,16 +291,10 @@ CompPluginVTable glibVTable = {
     glibGetMetadata,
     glibInit,
     glibFini,
-    glibInitDisplay,
-    glibFiniDisplay,
-    0, /* InitScreen */
-    0, /* FiniScreen */
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    glibInitObject,
+    glibFiniObject,
+    0, /* GetObjectOptions */
+    0  /* SetObjectOption */
 };
 
 CompPluginVTable *

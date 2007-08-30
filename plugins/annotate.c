@@ -67,14 +67,14 @@ typedef struct _AnnoScreen {
     Bool eraseMode;
 } AnnoScreen;
 
-#define GET_ANNO_DISPLAY(d)				     \
-    ((AnnoDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_ANNO_DISPLAY(d)					    \
+    ((AnnoDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define ANNO_DISPLAY(d)			   \
     AnnoDisplay *ad = GET_ANNO_DISPLAY (d)
 
-#define GET_ANNO_SCREEN(s, ad)					 \
-    ((AnnoScreen *) (s)->privates[(ad)->screenPrivateIndex].ptr)
+#define GET_ANNO_SCREEN(s, ad)						\
+    ((AnnoScreen *) (s)->object.privates[(ad)->screenPrivateIndex].ptr)
 
 #define ANNO_SCREEN(s)							\
     AnnoScreen *as = GET_ANNO_SCREEN (s, GET_ANNO_DISPLAY (s->display))
@@ -782,7 +782,7 @@ annoInitDisplay (CompPlugin  *p,
 
     WRAP (ad, d, handleEvent, annoHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = ad;
+    d->object.privates[displayPrivateIndex].ptr = ad;
 
     return TRUE;
 }
@@ -824,7 +824,7 @@ annoInitScreen (CompPlugin *p,
 
     WRAP (as, s, paintOutput, annoPaintOutput);
 
-    s->privates[ad->screenPrivateIndex].ptr = as;
+    s->object.privates[ad->screenPrivateIndex].ptr = as;
 
     return TRUE;
 }
@@ -849,6 +849,57 @@ annoFiniScreen (CompPlugin *p,
     UNWRAP (as, s, paintOutput);
 
     free (as);
+}
+
+static CompBool
+annoInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) annoInitDisplay,
+	(InitPluginObjectProc) annoInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+annoFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) annoFiniDisplay,
+	(FiniPluginObjectProc) annoFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+annoGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) annoGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+annoSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) annoSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -891,16 +942,10 @@ static CompPluginVTable annoVTable = {
     annoGetMetadata,
     annoInit,
     annoFini,
-    annoInitDisplay,
-    annoFiniDisplay,
-    annoInitScreen,
-    annoFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    annoGetDisplayOptions,
-    annoSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    annoInitObject,
+    annoFiniObject,
+    annoGetObjectOptions,
+    annoSetObjectOption
 };
 
 CompPluginVTable *

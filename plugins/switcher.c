@@ -172,14 +172,14 @@ static float _boxVertices[] =
 #define WINDOW_WIDTH(count) (WIDTH * (count) + (SPACE << 1))
 #define WINDOW_HEIGHT (HEIGHT + (SPACE << 1))
 
-#define GET_SWITCH_DISPLAY(d)				       \
-    ((SwitchDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_SWITCH_DISPLAY(d)					      \
+    ((SwitchDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define SWITCH_DISPLAY(d)		       \
     SwitchDisplay *sd = GET_SWITCH_DISPLAY (d)
 
-#define GET_SWITCH_SCREEN(s, sd)				   \
-    ((SwitchScreen *) (s)->privates[(sd)->screenPrivateIndex].ptr)
+#define GET_SWITCH_SCREEN(s, sd)					  \
+    ((SwitchScreen *) (s)->object.privates[(sd)->screenPrivateIndex].ptr)
 
 #define SWITCH_SCREEN(s)						      \
     SwitchScreen *ss = GET_SWITCH_SCREEN (s, GET_SWITCH_DISPLAY (s->display))
@@ -1890,7 +1890,7 @@ switchInitDisplay (CompPlugin  *p,
 
     WRAP (sd, d, handleEvent, switchHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = sd;
+    d->object.privates[displayPrivateIndex].ptr = sd;
 
     return TRUE;
 }
@@ -1995,7 +1995,7 @@ switchInitScreen (CompPlugin *p,
     WRAP (ss, s, paintBackground, switchPaintBackground);
     WRAP (ss, s, damageWindowRect, switchDamageWindowRect);
 
-    s->privates[sd->screenPrivateIndex].ptr = ss;
+    s->object.privates[sd->screenPrivateIndex].ptr = ss;
 
     return TRUE;
 }
@@ -2019,6 +2019,59 @@ switchFiniScreen (CompPlugin *p,
     compFiniScreenOptions (s, ss->opt, SWITCH_SCREEN_OPTION_NUM);
 
     free (ss);
+}
+
+static CompBool
+switchInitObject (CompPlugin *p,
+		  CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) switchInitDisplay,
+	(InitPluginObjectProc) switchInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+switchFiniObject (CompPlugin *p,
+		  CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) switchFiniDisplay,
+	(FiniPluginObjectProc) switchFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+switchGetObjectOptions (CompPlugin *plugin,
+			CompObject *object,
+			int	   *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) switchGetDisplayOptions,
+	(GetPluginObjectOptionsProc) switchGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+switchSetObjectOption (CompPlugin      *plugin,
+		       CompObject      *object,
+		       const char      *name,
+		       CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) switchSetDisplayOption,
+	(SetPluginObjectOptionProc) switchSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -2062,16 +2115,10 @@ CompPluginVTable switchVTable = {
     switchGetMetadata,
     switchInit,
     switchFini,
-    switchInitDisplay,
-    switchFiniDisplay,
-    switchInitScreen,
-    switchFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    switchGetDisplayOptions,
-    switchSetDisplayOption,
-    switchGetScreenOptions,
-    switchSetScreenOption
+    switchInitObject,
+    switchFiniObject,
+    switchGetObjectOptions,
+    switchSetObjectOption
 };
 
 CompPluginVTable *

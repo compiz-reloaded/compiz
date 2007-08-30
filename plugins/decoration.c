@@ -134,20 +134,20 @@ typedef struct _DecorWindow {
     Decoration	     *decor;
 } DecorWindow;
 
-#define GET_DECOR_DISPLAY(d)				      \
-    ((DecorDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_DECOR_DISPLAY(d)					     \
+    ((DecorDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define DECOR_DISPLAY(d)		     \
     DecorDisplay *dd = GET_DECOR_DISPLAY (d)
 
-#define GET_DECOR_SCREEN(s, dd)				          \
-    ((DecorScreen *) (s)->privates[(dd)->screenPrivateIndex].ptr)
+#define GET_DECOR_SCREEN(s, dd)						 \
+    ((DecorScreen *) (s)->object.privates[(dd)->screenPrivateIndex].ptr)
 
 #define DECOR_SCREEN(s)							   \
     DecorScreen *ds = GET_DECOR_SCREEN (s, GET_DECOR_DISPLAY (s->display))
 
-#define GET_DECOR_WINDOW(w, ds)					  \
-    ((DecorWindow *) (w)->privates[(ds)->windowPrivateIndex].ptr)
+#define GET_DECOR_WINDOW(w, ds)						 \
+    ((DecorWindow *) (w)->object.privates[(ds)->windowPrivateIndex].ptr)
 
 #define DECOR_WINDOW(w)					       \
     DecorWindow *dw = GET_DECOR_WINDOW  (w,		       \
@@ -1326,7 +1326,7 @@ decorInitDisplay (CompPlugin  *p,
     WRAP (dd, d, handleEvent, decorHandleEvent);
     WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);
 
-    d->privates[displayPrivateIndex].ptr = dd;
+    d->object.privates[displayPrivateIndex].ptr = dd;
 
     return TRUE;
 }
@@ -1378,7 +1378,7 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
 
-    s->privates[dd->screenPrivateIndex].ptr = ds;
+    s->object.privates[dd->screenPrivateIndex].ptr = ds;
 
     decorCheckForDmOnScreen (s, FALSE);
 
@@ -1389,13 +1389,15 @@ static void
 decorFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
-    int i;
+    int	i;
 
     DECOR_SCREEN (s);
 
     for (i = 0; i < DECOR_NUM; i++)
 	if (ds->decor[i])
 	    decorReleaseDecoration (s, ds->decor[i]);
+
+    freeWindowPrivateIndex (s, ds->windowPrivateIndex);
 
     UNWRAP (ds, s, drawWindow);
     UNWRAP (ds, s, damageWindowRect);
@@ -1423,7 +1425,7 @@ decorInitWindow (CompPlugin *p,
     dw->wd    = NULL;
     dw->decor = NULL;
 
-    w->privates[ds->windowPrivateIndex].ptr = dw;
+    w->object.privates[ds->windowPrivateIndex].ptr = dw;
 
     if (!w->attrib.override_redirect)
 	decorWindowUpdateDecoration (w);
@@ -1450,6 +1452,59 @@ decorFiniWindow (CompPlugin *p,
 	decorReleaseDecoration (w->screen, dw->decor);
 
     free (dw);
+}
+
+static CompBool
+decorInitObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) decorInitDisplay,
+	(InitPluginObjectProc) decorInitScreen,
+	(InitPluginObjectProc) decorInitWindow
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+decorFiniObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) decorFiniDisplay,
+	(FiniPluginObjectProc) decorFiniScreen,
+	(FiniPluginObjectProc) decorFiniWindow
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+decorGetObjectOptions (CompPlugin *plugin,
+		       CompObject *object,
+		       int	  *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) decorGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+decorSetObjectOption (CompPlugin      *plugin,
+		      CompObject      *object,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) decorSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -1492,16 +1547,10 @@ static CompPluginVTable decorVTable = {
     decorGetMetadata,
     decorInit,
     decorFini,
-    decorInitDisplay,
-    decorFiniDisplay,
-    decorInitScreen,
-    decorFiniScreen,
-    decorInitWindow,
-    decorFiniWindow,
-    decorGetDisplayOptions,
-    decorSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    decorInitObject,
+    decorFiniObject,
+    decorGetObjectOptions,
+    decorSetObjectOption
 };
 
 CompPluginVTable *

@@ -42,8 +42,8 @@ typedef struct _PngDisplay {
     ImageToFileProc imageToFile;
 } PngDisplay;
 
-#define GET_PNG_DISPLAY(d)				    \
-    ((PngDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_PNG_DISPLAY(d)					   \
+    ((PngDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define PNG_DISPLAY(d)			 \
     PngDisplay *pd = GET_PNG_DISPLAY (d)
@@ -476,7 +476,7 @@ pngInitDisplay (CompPlugin  *p,
     WRAP (pd, d, fileToImage, pngFileToImage);
     WRAP (pd, d, imageToFile, pngImageToFile);
 
-    d->privates[displayPrivateIndex].ptr = pd;
+    d->object.privates[displayPrivateIndex].ptr = pd;
 
     for (s = d->screens; s; s = s->next)
 	updateDefaultIcon (s);
@@ -499,6 +499,28 @@ pngFiniDisplay (CompPlugin  *p,
 	updateDefaultIcon (s);
 
     free (pd);
+}
+
+static CompBool
+pngInitObject (CompPlugin *p,
+	       CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) pngInitDisplay
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+pngFiniObject (CompPlugin *p,
+	       CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) pngFiniDisplay
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static Bool
@@ -538,16 +560,10 @@ CompPluginVTable pngVTable = {
     pngGetMetadata,
     pngInit,
     pngFini,
-    pngInitDisplay,
-    pngFiniDisplay,
-    0, /* InitScreen */
-    0, /* FiniScreen */
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    pngInitObject,
+    pngFiniObject,
+    0, /* GetObjectOptions */
+    0  /* SetObjectOption */
 };
 
 CompPluginVTable *

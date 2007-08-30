@@ -2045,7 +2045,7 @@ cubeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    d->privates[cubeDisplayPrivateIndex].ptr = cd;
+    d->object.privates[cubeDisplayPrivateIndex].ptr = cd;
 
     return TRUE;
 }
@@ -2135,7 +2135,7 @@ cubeInitScreen (CompPlugin *p,
     cs->paintInside       = cubePaintInside;
     cs->checkOrientation  = cubeCheckOrientation;
 
-    s->privates[cd->screenPrivateIndex].ptr = cs;
+    s->object.privates[cd->screenPrivateIndex].ptr = cs;
 
     initTexture (s, &cs->texture);
     initTexture (s, &cs->sky);
@@ -2226,6 +2226,59 @@ cubeFiniScreen (CompPlugin *p,
     free (cs);
 }
 
+static CompBool
+cubeInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) cubeInitDisplay,
+	(InitPluginObjectProc) cubeInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+cubeFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) cubeFiniDisplay,
+	(FiniPluginObjectProc) cubeFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+cubeGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) cubeGetDisplayOptions,
+	(GetPluginObjectOptionsProc) cubeGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+cubeSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) cubeSetDisplayOption,
+	(SetPluginObjectOptionProc) cubeSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
+}
+
 static Bool
 cubeInit (CompPlugin *p)
 {
@@ -2267,16 +2320,10 @@ CompPluginVTable cubeVTable = {
     cubeGetMetadata,
     cubeInit,
     cubeFini,
-    cubeInitDisplay,
-    cubeFiniDisplay,
-    cubeInitScreen,
-    cubeFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    cubeGetDisplayOptions,
-    cubeSetDisplayOption,
-    cubeGetScreenOptions,
-    cubeSetScreenOption
+    cubeInitObject,
+    cubeFiniObject,
+    cubeGetObjectOptions,
+    cubeSetObjectOption
 };
 
 CompPluginVTable *

@@ -84,14 +84,14 @@ typedef struct _PlaneScreen {
     double				dest_y;
 } PlaneScreen;
 
-#define GET_PLANE_DISPLAY(d)				       \
-    ((PlaneDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_PLANE_DISPLAY(d)					     \
+    ((PlaneDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define PLANE_DISPLAY(d)		       \
     PlaneDisplay *pd = GET_PLANE_DISPLAY (d)
 
-#define GET_PLANE_SCREEN(s, pd)				   \
-    ((PlaneScreen *) (s)->privates[(pd)->screenPrivateIndex].ptr)
+#define GET_PLANE_SCREEN(s, pd)						 \
+    ((PlaneScreen *) (s)->object.privates[(pd)->screenPrivateIndex].ptr)
 
 #define PLANE_SCREEN(s)						      \
     PlaneScreen *ps = GET_PLANE_SCREEN (s, GET_PLANE_DISPLAY (s->display))
@@ -628,7 +628,7 @@ planeInitDisplay (CompPlugin  *p,
 
     WRAP (pd, d, handleEvent, planeHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = pd;
+    d->object.privates[displayPrivateIndex].ptr = pd;
 
     return TRUE;
 }
@@ -669,7 +669,7 @@ planeInitScreen (CompPlugin *p,
     WRAP (ps, s, windowGrabNotify, planeWindowGrabNotify);
     WRAP (ps, s, windowUngrabNotify, planeWindowUngrabNotify);
 
-    s->privates[pd->screenPrivateIndex].ptr = ps;
+    s->object.privates[pd->screenPrivateIndex].ptr = ps;
 
     return TRUE;
 }
@@ -688,6 +688,57 @@ planeFiniScreen (CompPlugin *p,
     UNWRAP (ps, s, windowUngrabNotify);
 
     free (ps);
+}
+
+static CompBool
+planeInitObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) planeInitDisplay,
+	(InitPluginObjectProc) planeInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+planeFiniObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) planeFiniDisplay,
+	(FiniPluginObjectProc) planeFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+planeGetObjectOptions (CompPlugin *plugin,
+		       CompObject *object,
+		       int	  *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) planeGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+planeSetObjectOption (CompPlugin      *plugin,
+		      CompObject      *object,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) planeSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -730,16 +781,10 @@ CompPluginVTable planeVTable = {
     planeGetMetadata,
     planeInit,
     planeFini,
-    planeInitDisplay,
-    planeFiniDisplay,
-    planeInitScreen,
-    planeFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    planeGetDisplayOptions,
-    planeSetDisplayOption,
-    NULL, /* planeGetScreenOptions, */
-    NULL  /* planeSetScreenOption, */
+    planeInitObject,
+    planeFiniObject,
+    planeGetObjectOptions,
+    planeSetObjectOption,
 };
 
 CompPluginVTable *

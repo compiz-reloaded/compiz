@@ -167,20 +167,20 @@ typedef struct _BlurWindow {
     Region clip;
 } BlurWindow;
 
-#define GET_BLUR_DISPLAY(d)				     \
-    ((BlurDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_BLUR_DISPLAY(d)					    \
+    ((BlurDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define BLUR_DISPLAY(d)			   \
     BlurDisplay *bd = GET_BLUR_DISPLAY (d)
 
-#define GET_BLUR_SCREEN(s, bd)					 \
-    ((BlurScreen *) (s)->privates[(bd)->screenPrivateIndex].ptr)
+#define GET_BLUR_SCREEN(s, bd)						\
+    ((BlurScreen *) (s)->object.privates[(bd)->screenPrivateIndex].ptr)
 
 #define BLUR_SCREEN(s)							\
     BlurScreen *bs = GET_BLUR_SCREEN (s, GET_BLUR_DISPLAY (s->display))
 
-#define GET_BLUR_WINDOW(w, bs)					 \
-    ((BlurWindow *) (w)->privates[(bs)->windowPrivateIndex].ptr)
+#define GET_BLUR_WINDOW(w, bs)						\
+    ((BlurWindow *) (w)->object.privates[(bs)->windowPrivateIndex].ptr)
 
 #define BLUR_WINDOW(w)					     \
     BlurWindow *bw = GET_BLUR_WINDOW  (w,		     \
@@ -2465,7 +2465,7 @@ blurInitDisplay (CompPlugin  *p,
     WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);
     WRAP (bd, d, matchPropertyChanged, blurMatchPropertyChanged);
 
-    d->privates[displayPrivateIndex].ptr = bd;
+    d->object.privates[displayPrivateIndex].ptr = bd;
 
     return TRUE;
 }
@@ -2630,7 +2630,7 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, windowResizeNotify, blurWindowResizeNotify);
     WRAP (bs, s, windowMoveNotify, blurWindowMoveNotify);
 
-    s->privates[bd->screenPrivateIndex].ptr = bs;
+    s->object.privates[bd->screenPrivateIndex].ptr = bs;
 
     blurUpdateFilterRadius (s);
 
@@ -2718,7 +2718,7 @@ blurInitWindow (CompPlugin *p,
 	return FALSE;
     }
 
-    w->privates[bs->windowPrivateIndex].ptr = bw;
+    w->object.privates[bs->windowPrivateIndex].ptr = bw;
 
     if (w->added)
 	blurWindowAdd (w);
@@ -2744,6 +2744,61 @@ blurFiniWindow (CompPlugin *p,
     XDestroyRegion (bw->clip);
 
     free (bw);
+}
+
+static CompBool
+blurInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) blurInitDisplay,
+	(InitPluginObjectProc) blurInitScreen,
+	(InitPluginObjectProc) blurInitWindow
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+blurFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) blurFiniDisplay,
+	(FiniPluginObjectProc) blurFiniScreen,
+	(FiniPluginObjectProc) blurFiniWindow
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+blurGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) blurGetDisplayOptions,
+	(GetPluginObjectOptionsProc) blurGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+blurSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) blurSetDisplayOption,
+	(SetPluginObjectOptionProc) blurSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -2787,16 +2842,10 @@ static CompPluginVTable blurVTable = {
     blurGetMetadata,
     blurInit,
     blurFini,
-    blurInitDisplay,
-    blurFiniDisplay,
-    blurInitScreen,
-    blurFiniScreen,
-    blurInitWindow,
-    blurFiniWindow,
-    blurGetDisplayOptions,
-    blurSetDisplayOption,
-    blurGetScreenOptions,
-    blurSetScreenOption
+    blurInitObject,
+    blurFiniObject,
+    blurGetObjectOptions,
+    blurSetObjectOption
 };
 
 CompPluginVTable *

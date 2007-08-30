@@ -51,37 +51,39 @@ coreGetMetadata (CompPlugin *plugin)
 }
 
 static CompOption *
-coreGetDisplayOptions (CompPlugin  *plugin,
-		       CompDisplay *display,
-		       int	   *count)
-{
-    return getDisplayOptions (display, count);
-}
-
-static Bool
-coreSetDisplayOption (CompPlugin      *plugin,
-		      CompDisplay     *display,
-		      const char      *name,
-		      CompOptionValue *value)
-{
-    return setDisplayOption (display, name, value);
-}
-
-static CompOption *
-coreGetScreenOptions (CompPlugin *plugin,
-		      CompScreen *screen,
+coreGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
 		      int	 *count)
 {
-    return getScreenOptions (screen, count);
+    switch (object->type) {
+    case COMP_OBJECT_TYPE_DISPLAY:
+	return getDisplayOptions ((CompDisplay *) object, count);
+    case COMP_OBJECT_TYPE_SCREEN:
+	return getScreenOptions ((CompScreen *) object, count);
+    default:
+	break;
+    }
+
+    *count = 0;
+    return NULL;
 }
 
 static Bool
-coreSetScreenOption (CompPlugin      *plugin,
-		     CompScreen      *screen,
-		     const char	     *name,
+coreSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
 		     CompOptionValue *value)
 {
-    return setScreenOption (screen, name, value);
+    switch (object->type) {
+    case COMP_OBJECT_TYPE_DISPLAY:
+	return setDisplayOption ((CompDisplay *) object, name, value);
+    case COMP_OBJECT_TYPE_SCREEN:
+	return setScreenOption ((CompScreen *) object, name, value);
+    default:
+	break;
+    }
+
+    return FALSE;
 }
 
 static CompPluginVTable coreVTable = {
@@ -89,16 +91,10 @@ static CompPluginVTable coreVTable = {
     coreGetMetadata,
     coreInit,
     coreFini,
-    0, /* InitDisplay */
-    0, /* FiniDisplay */
-    0, /* InitScreen */
-    0, /* FiniScreen */
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    coreGetDisplayOptions,
-    coreSetDisplayOption,
-    coreGetScreenOptions,
-    coreSetScreenOption
+    0, /* InitObject */
+    0, /* FiniObject */
+    coreGetObjectOptions,
+    coreSetObjectOption
 };
 
 static Bool
@@ -305,7 +301,7 @@ LoadPluginProc   loaderLoadPlugin   = dlloaderLoadPlugin;
 UnloadPluginProc loaderUnloadPlugin = dlloaderUnloadPlugin;
 ListPluginsProc  loaderListPlugins  = dlloaderListPlugins;
 
-Bool
+CompBool
 initPluginForDisplay (CompPlugin  *p,
 		      CompDisplay *d)
 {
@@ -314,9 +310,9 @@ initPluginForDisplay (CompPlugin  *p,
 
     for (s = d->screens; s; s = s->next)
     {
-	if (p->vTable->initScreen)
+	if (p->vTable->initObject)
 	{
-	    if (!(*p->vTable->initScreen) (p, s))
+	    if (!(*p->vTable->initObject) (p, &s->object))
 	    {
 		failedScreen = s;
 		status = FALSE;
@@ -327,11 +323,11 @@ initPluginForDisplay (CompPlugin  *p,
 	if (!(*s->initPluginForScreen) (p, s))
 	{
 	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "Plugin '%s':initScreen failed",
+			    "InitScreenObject '%s' failed",
 			    p->vTable->name);
 
-	    if (p->vTable->finiScreen)
-		(*p->vTable->finiScreen) (p, s);
+	    if (p->vTable->finiObject)
+		(*p->vTable->finiObject) (p, &s->object);
 
 	    failedScreen = s;
 	    status = FALSE;
@@ -343,8 +339,8 @@ initPluginForDisplay (CompPlugin  *p,
     {
 	(*s->finiPluginForScreen) (p, s);
 
-	if (p->vTable->finiScreen)
-	    (*p->vTable->finiScreen) (p, s);
+	if (p->vTable->finiObject)
+	    (*p->vTable->finiObject) (p, &s->object);
     }
 
     return status;
@@ -360,8 +356,8 @@ finiPluginForDisplay (CompPlugin  *p,
     {
 	(*s->finiPluginForScreen) (p, s);
 
-	if (p->vTable->finiScreen)
-	    (*p->vTable->finiScreen) (p, s);
+	if (p->vTable->finiObject)
+	    (*p->vTable->finiObject) (p, &s->object);
     }
 }
 
@@ -371,28 +367,25 @@ initPluginForScreen (CompPlugin *p,
 {
     Bool status = TRUE;
 
-    if (p->vTable->initWindow)
+    if (p->vTable->initObject)
     {
 	CompWindow *w, *failedWindow = s->windows;
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    if (!(*p->vTable->initWindow) (p, w))
+	    if (!(*p->vTable->initObject) (p, &w->object))
 	    {
 		compLogMessage (NULL, "core", CompLogLevelError,
-				"Plugin '%s':initWindow "
-				"failed", p->vTable->name);
+				"InitWindowObject '%s' failed",
+				p->vTable->name);
 		failedWindow = w;
 		status = FALSE;
 		break;
 	    }
 	}
 
-	if (p->vTable->finiWindow)
-	{
-	    for (w = s->windows; w != failedWindow; w = w->next)
-		(*p->vTable->finiWindow) (p, w);
-	}
+	for (w = s->windows; w != failedWindow; w = w->next)
+	    (*p->vTable->finiObject) (p, &w->object);
     }
 
     return status;
@@ -402,12 +395,12 @@ void
 finiPluginForScreen (CompPlugin *p,
 		     CompScreen *s)
 {
-    if (p->vTable->finiWindow)
+    if (p->vTable->finiObject)
     {
 	CompWindow *w = s->windows;
 
 	for (w = s->windows; w; w = w->next)
-	    (*p->vTable->finiWindow) (p, w);
+	    (*p->vTable->finiObject) (p, &w->object);
     }
 }
 
@@ -425,9 +418,9 @@ initPlugin (CompPlugin *p)
 
     if (d)
     {
-	if (p->vTable->initDisplay)
+	if (p->vTable->initObject)
 	{
-	    if (!(*p->vTable->initDisplay) (p, d))
+	    if (!(*p->vTable->initObject) (p, &d->object))
 	    {
 		(*p->vTable->fini) (p);
 
@@ -439,7 +432,7 @@ initPlugin (CompPlugin *p)
 	if (!(*d->initPluginForDisplay) (p, d))
 	{
 	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "Plugin '%s':initDisplay failed",
+			    "InitDisplayObject '%s' failed",
 			    p->vTable->name);
 
 	    (*p->vTable->fini) (p);
@@ -460,8 +453,8 @@ finiPlugin (CompPlugin *p)
     {
 	(*d->finiPluginForDisplay) (p, d);
 
-	if (p->vTable->finiDisplay)
-	    (*p->vTable->finiDisplay) (p, d);
+	if (p->vTable->finiObject)
+	    (*p->vTable->finiObject) (p, &d->object);
     }
 
     (*p->vTable->fini) (p);
@@ -482,7 +475,7 @@ screenInitPlugins (CompScreen *s)
 	for (p = plugins; i < j; p = p->next)
 	    i++;
 
-	if (p->vTable->initScreen)
+	if (p->vTable->initObject)
 	    (*s->initPluginForScreen) (p, s);
     }
 }
@@ -494,7 +487,7 @@ screenFiniPlugins (CompScreen *s)
 
     for (p = plugins; p; p = p->next)
     {
-	if (p->vTable->finiScreen)
+	if (p->vTable->finiObject)
 	    (*s->finiPluginForScreen) (p, s);
     }
 }
@@ -506,8 +499,8 @@ windowInitPlugins (CompWindow *w)
 
     for (p = plugins; p; p = p->next)
     {
-	if (p->vTable->initWindow)
-	    (*p->vTable->initWindow) (p, w);
+	if (p->vTable->initObject)
+	    (*p->vTable->initObject) (p, &w->object);
     }
 }
 
@@ -518,8 +511,8 @@ windowFiniPlugins (CompWindow *w)
 
     for (p = plugins; p; p = p->next)
     {
-	if (p->vTable->finiWindow)
-	    (*p->vTable->finiWindow) (p, w);
+	if (p->vTable->finiObject)
+	    (*p->vTable->finiObject) (p, &w->object);
     }
 }
 
@@ -729,10 +722,11 @@ getPluginABI (const char *name)
     CompOption	*option;
     int		nOption;
 
-    if (!p || !p->vTable->getDisplayOptions)
+    if (!p || !p->vTable->getObjectOptions)
 	return 0;
 
-    option = (*p->vTable->getDisplayOptions) (p, compDisplays, &nOption);
+    option = (*p->vTable->getObjectOptions) (p, &compDisplays->object,
+					     &nOption);
 
     return getIntOptionNamed (option, nOption, "abi", 0);
 }
@@ -761,10 +755,10 @@ getPluginDisplayIndex (CompDisplay *d,
     CompOption	*option;
     int		nOption, value;
 
-    if (!p || !p->vTable->getDisplayOptions)
+    if (!p || !p->vTable->getObjectOptions)
 	return FALSE;
 
-    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 
     value = getIntOptionNamed (option, nOption, "index", -1);
     if (value < 0)

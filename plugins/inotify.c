@@ -49,8 +49,8 @@ typedef struct _InotifyDisplay {
     FileWatchRemovedProc fileWatchRemoved;
 } InotifyDisplay;
 
-#define GET_INOTIFY_DISPLAY(d)				        \
-    ((InotifyDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_INOTIFY_DISPLAY(d)					       \
+    ((InotifyDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define INOTIFY_DISPLAY(d)		         \
     InotifyDisplay *id = GET_INOTIFY_DISPLAY (d)
@@ -216,7 +216,7 @@ inotifyInitDisplay (CompPlugin  *p,
     WRAP (id, d, fileWatchAdded, inotifyFileWatchAdded);
     WRAP (id, d, fileWatchRemoved, inotifyFileWatchRemoved);
 
-    d->privates[displayPrivateIndex].ptr = id;
+    d->object.privates[displayPrivateIndex].ptr = id;
 
     for (fw = d->fileWatch; fw; fw = fw->next)
 	inotifyFileWatchAdded (d, fw);
@@ -238,6 +238,28 @@ inotifyFiniDisplay (CompPlugin  *p,
     UNWRAP (id, d, fileWatchRemoved);
 
     free (id);
+}
+
+static CompBool
+inotifyInitObject (CompPlugin *p,
+		   CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) inotifyInitDisplay
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+inotifyFiniObject (CompPlugin *p,
+		   CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) inotifyFiniDisplay
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static Bool
@@ -277,16 +299,10 @@ CompPluginVTable inotifyVTable = {
     inotifyGetMetadata,
     inotifyInit,
     inotifyFini,
-    inotifyInitDisplay,
-    inotifyFiniDisplay,
-    0, /* InitScreen */
-    0, /* FiniScreen */
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    inotifyInitObject,
+    inotifyFiniObject,
+    0, /* GetObjectOptions */
+    0  /* SetObjectOption */
 };
 
 CompPluginVTable *

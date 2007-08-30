@@ -84,14 +84,14 @@ static DBusObjectPathVTable dbusMessagesVTable = {
     NULL, NULL, NULL, NULL
 };
 
-#define GET_DBUS_DISPLAY(d)				     \
-    ((DbusDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_DBUS_DISPLAY(d)					    \
+    ((DbusDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define DBUS_DISPLAY(d)			   \
     DbusDisplay *dd = GET_DBUS_DISPLAY (d)
 
-#define GET_DBUS_SCREEN(s, dd)				         \
-    ((DbusScreen *) (s)->privates[(dd)->screenPrivateIndex].ptr)
+#define GET_DBUS_SCREEN(s, dd)						\
+    ((DbusScreen *) (s)->object.privates[(dd)->screenPrivateIndex].ptr)
 
 #define DBUS_SCREEN(s)						        \
     DbusScreen *ds = GET_DBUS_SCREEN (s, GET_DBUS_DISPLAY (s->display))
@@ -104,12 +104,13 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 			CompMetadata **returnMetadata,
 			int	     *nOption)
 {
-    CompScreen *s = NULL;
+    CompObject *object = &d->object;
     CompPlugin *p;
 
     if (strcmp (path[1], "allscreens"))
     {
-	int screenNum;
+	CompScreen *s;
+	int	   screenNum;
 
 	if (sscanf (path[1], "screen%d", &screenNum) != 1)
 	    return FALSE;
@@ -120,10 +121,17 @@ dbusGetOptionsFromPath (CompDisplay  *d,
 
 	if (!s)
 	    return NULL;
-    }
 
-    if (returnScreen)
-	*returnScreen = s;
+	object = &s->object;
+
+	if (returnScreen)
+	    *returnScreen = s;
+    }
+    else
+    {
+	if (returnScreen)
+	    *returnScreen = NULL;
+    }
 
     for (p = getPlugins (); p; p = p->next)
 	if (strcmp (p->vTable->name, path[0]) == 0)
@@ -140,18 +148,10 @@ dbusGetOptionsFromPath (CompDisplay  *d,
     if (!p)
 	return NULL;
 
-    if (s)
-    {
-	if (p->vTable->getScreenOptions)
-	    return (*p->vTable->getScreenOptions) (p, s, nOption);
-    }
-    else
-    {
-	if (p->vTable->getDisplayOptions)
-	    return (*p->vTable->getDisplayOptions) (p, d, nOption);
-    }
+    if (!p->vTable->getObjectOptions)
+	return NULL;
 
-    return NULL;
+    return (*p->vTable->getObjectOptions) (p, object, nOption);
 }
 
 /* functions to create introspection XML */
@@ -2217,12 +2217,12 @@ dbusSetDisplayOptionForPlugin (CompDisplay     *d,
 	CompPlugin *p;
 
 	p = findActivePlugin (plugin);
-	if (p && p->vTable->getDisplayOptions)
+	if (p && p->vTable->getObjectOptions)
 	{
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getDisplayOptions) (p, d, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 	    dbusSendChangeSignalForDisplayOption (d,
 						  compFindOption (option,
 								  nOption,
@@ -2268,12 +2268,12 @@ dbusSetScreenOptionForPlugin (CompScreen      *s,
 	CompPlugin *p;
 
 	p = findActivePlugin (plugin);
-	if (p && p->vTable->getScreenOptions)
+	if (p && p->vTable->getObjectOptions)
 	{
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getScreenOptions) (p, s, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
 	    dbusSendChangeSignalForScreenOption (s,
 						 compFindOption (option,
 								 nOption,
@@ -2428,7 +2428,7 @@ dbusInitDisplay (CompPlugin  *p,
     WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
     WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
 
-    d->privates[displayPrivateIndex].ptr = dd;
+    d->object.privates[displayPrivateIndex].ptr = dd;
 
     /* register the objects */
     dbus_connection_register_object_path (dd->connection,
@@ -2503,9 +2503,10 @@ dbusInitScreen (CompPlugin *p,
     WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
     WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
 
-    s->privates[dd->screenPrivateIndex].ptr = ds;
+    s->object.privates[dd->screenPrivateIndex].ptr = ds;
 
-    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, "core", s->screenNum);
+    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
+	      "core", s->screenNum);
 
     dbusRegisterPluginForScreen (dd->connection, s, "core");
     dbusRegisterPluginsForScreen (dd->connection, s);
@@ -2524,6 +2525,30 @@ dbusFiniScreen (CompPlugin *p,
     UNWRAP (ds, s, initPluginForScreen);
 
     free (ds);
+}
+
+static CompBool
+dbusInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) dbusInitDisplay,
+	(InitPluginObjectProc) dbusInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+dbusFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) dbusFiniDisplay,
+	(FiniPluginObjectProc) dbusFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static Bool
@@ -2561,16 +2586,10 @@ CompPluginVTable dbusVTable = {
     dbusGetMetadata,
     dbusInit,
     dbusFini,
-    dbusInitDisplay,
-    dbusFiniDisplay,
-    dbusInitScreen,
-    dbusFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    dbusInitObject,
+    dbusFiniObject,
+    0, /* GetObjectOptions */
+    0  /* SetObjectOption */
 };
 
 CompPluginVTable *

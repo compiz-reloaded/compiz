@@ -100,8 +100,8 @@ typedef struct _FuseDisplay {
     char		*buffer;
 } FuseDisplay;
 
-#define GET_FUSE_DISPLAY(d)				     \
-    ((FuseDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_FUSE_DISPLAY(d)					    \
+    ((FuseDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define FUSE_DISPLAY(d)			   \
     FuseDisplay *fd = GET_FUSE_DISPLAY (d)
@@ -223,8 +223,8 @@ fuseGetDisplayOptionsFromInode (CompDisplay *d,
 	CompPlugin *p;
 
 	p = findActivePlugin (inode->name);
-	if (p && p->vTable->getDisplayOptions)
-	    option = (*p->vTable->getDisplayOptions) (p, d, nOption);
+	if (p && p->vTable->getObjectOptions)
+	    option = (*p->vTable->getObjectOptions) (p, &d->object, nOption);
     }
 
     return option;
@@ -242,8 +242,8 @@ fuseGetScreenOptionsFromInode (CompScreen *s,
 	CompPlugin *p;
 
 	p = findActivePlugin (inode->name);
-	if (p && p->vTable->getScreenOptions)
-	    option = (*p->vTable->getScreenOptions) (p, s, nOption);
+	if (p && p->vTable->getObjectOptions)
+	    option = (*p->vTable->getObjectOptions) (p, &s->object, nOption);
     }
 
     return option;
@@ -1327,7 +1327,7 @@ fuseInitDisplay (CompPlugin  *p,
     fd->buffer	      = NULL;
     fd->mountPoint    = NULL;
 
-    d->privates[displayPrivateIndex].ptr = fd;
+    d->object.privates[displayPrivateIndex].ptr = fd;
 
     fuseMount (d);
 
@@ -1379,6 +1379,55 @@ fuseInit (CompPlugin *p)
     return TRUE;
 }
 
+static CompBool
+fuseInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) fuseInitDisplay
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+fuseFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) fuseFiniDisplay
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+fuseGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) fuseGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+fuseSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) fuseSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
+}
+
 static void
 fuseFini (CompPlugin *p)
 {
@@ -1398,16 +1447,10 @@ CompPluginVTable fuseVTable = {
     fuseGetMetadata,
     fuseInit,
     fuseFini,
-    fuseInitDisplay,
-    fuseFiniDisplay,
-    0, /* InitScreen */
-    0, /* FiniScreen */
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    fuseGetDisplayOptions,
-    fuseSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    fuseInitObject,
+    fuseFiniObject,
+    fuseGetObjectOptions,
+    fuseSetObjectOption
 };
 
 CompPluginVTable *

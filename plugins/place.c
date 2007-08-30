@@ -65,14 +65,14 @@ typedef struct _PlaceScreen {
 
 } PlaceScreen;
 
-#define GET_PLACE_DISPLAY(d)				      \
-    ((PlaceDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_PLACE_DISPLAY(d)					     \
+    ((PlaceDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define PLACE_DISPLAY(d)		     \
     PlaceDisplay *pd = GET_PLACE_DISPLAY (d)
 
-#define GET_PLACE_SCREEN(s, pd)					  \
-    ((PlaceScreen *) (s)->privates[(pd)->screenPrivateIndex].ptr)
+#define GET_PLACE_SCREEN(s, pd)						 \
+    ((PlaceScreen *) (s)->object.privates[(pd)->screenPrivateIndex].ptr)
 
 #define PLACE_SCREEN(s)							   \
     PlaceScreen *ps = GET_PLACE_SCREEN (s, GET_PLACE_DISPLAY (s->display))
@@ -1403,7 +1403,7 @@ placeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    d->privates[displayPrivateIndex].ptr = pd;
+    d->object.privates[displayPrivateIndex].ptr = pd;
 
     return TRUE;
 }
@@ -1452,7 +1452,7 @@ placeInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
-    s->privates[pd->screenPrivateIndex].ptr = ps;
+    s->object.privates[pd->screenPrivateIndex].ptr = ps;
 
     WRAP (ps, s, placeWindow, placePlaceWindow);
 
@@ -1470,6 +1470,59 @@ placeFiniScreen (CompPlugin *p,
     compFiniScreenOptions (s, ps->opt, PLACE_SCREEN_OPTION_NUM);
 
     free (ps);
+}
+
+static CompBool
+placeInitObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) placeInitDisplay,
+	(InitPluginObjectProc) placeInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+placeFiniObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) placeFiniDisplay,
+	(FiniPluginObjectProc) placeFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+placeGetObjectOptions (CompPlugin *plugin,
+		       CompObject *object,
+		       int	  *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetDisplayOptions */
+	(GetPluginObjectOptionsProc) placeGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+placeSetObjectOption (CompPlugin      *plugin,
+		      CompObject      *object,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetDisplayOption */
+	(SetPluginObjectOptionProc) placeSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -1511,16 +1564,10 @@ static CompPluginVTable placeVTable = {
     placeGetMetadata,
     placeInit,
     placeFini,
-    placeInitDisplay,
-    placeFiniDisplay,
-    placeInitScreen,
-    placeFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    0, /* GetDisplayOptions */
-    0, /* SetDisplayOption */
-    placeGetScreenOptions,
-    placeSetScreenOption
+    placeInitObject,
+    placeFiniObject,
+    placeGetObjectOptions,
+    placeSetObjectOption
 };
 
 CompPluginVTable *

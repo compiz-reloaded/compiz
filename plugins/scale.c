@@ -48,7 +48,7 @@ static int scaleDisplayPrivateIndex;
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static CompOption *
-scaleGetScreenOptions (CompPlugin  *plugin,
+scaleGetScreenOptions (CompPlugin *plugin,
 		       CompScreen *screen,
 		       int	  *count)
 {
@@ -1971,7 +1971,7 @@ scaleInitDisplay (CompPlugin  *p,
 
     WRAP (sd, d, handleEvent, scaleHandleEvent);
 
-    d->privates[scaleDisplayPrivateIndex].ptr = sd;
+    d->object.privates[scaleDisplayPrivateIndex].ptr = sd;
 
     return TRUE;
 }
@@ -2065,7 +2065,7 @@ scaleInitScreen (CompPlugin *p,
 
     ss->cursor = XCreateFontCursor (s->display->display, XC_left_ptr);
 
-    s->privates[sd->screenPrivateIndex].ptr = ss;
+    s->object.privates[sd->screenPrivateIndex].ptr = ss;
 
     return TRUE;
 }
@@ -2119,7 +2119,7 @@ scaleInitWindow (CompPlugin *p,
     sw->delta = 1.0f;
     sw->lastThumbOpacity = 0.0f;
 
-    w->privates[ss->windowPrivateIndex].ptr = sw;
+    w->object.privates[ss->windowPrivateIndex].ptr = sw;
 
     return TRUE;
 }
@@ -2131,6 +2131,61 @@ scaleFiniWindow (CompPlugin *p,
     SCALE_WINDOW (w);
 
     free (sw);
+}
+
+static CompBool
+scaleInitObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) scaleInitDisplay,
+	(InitPluginObjectProc) scaleInitScreen,
+	(InitPluginObjectProc) scaleInitWindow
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+scaleFiniObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) scaleFiniDisplay,
+	(FiniPluginObjectProc) scaleFiniScreen,
+	(FiniPluginObjectProc) scaleFiniWindow
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+scaleGetObjectOptions (CompPlugin *plugin,
+		       CompObject *object,
+		       int	  *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) scaleGetDisplayOptions,
+	(GetPluginObjectOptionsProc) scaleGetScreenOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+scaleSetObjectOption (CompPlugin      *plugin,
+		      CompObject      *object,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) scaleSetDisplayOption,
+	(SetPluginObjectOptionProc) scaleSetScreenOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -2174,16 +2229,10 @@ CompPluginVTable scaleVTable = {
     scaleGetMetadata,
     scaleInit,
     scaleFini,
-    scaleInitDisplay,
-    scaleFiniDisplay,
-    scaleInitScreen,
-    scaleFiniScreen,
-    scaleInitWindow,
-    scaleFiniWindow,
-    scaleGetDisplayOptions,
-    scaleSetDisplayOption,
-    scaleGetScreenOptions,
-    scaleSetScreenOption
+    scaleInitObject,
+    scaleFiniObject,
+    scaleGetObjectOptions,
+    scaleSetObjectOption
 };
 
 CompPluginVTable *

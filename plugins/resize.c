@@ -121,14 +121,14 @@ typedef struct _ResizeScreen {
     Cursor cursor[NUM_KEYS];
 } ResizeScreen;
 
-#define GET_RESIZE_DISPLAY(d)				       \
-    ((ResizeDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_RESIZE_DISPLAY(d)					      \
+    ((ResizeDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define RESIZE_DISPLAY(d)		       \
     ResizeDisplay *rd = GET_RESIZE_DISPLAY (d)
 
-#define GET_RESIZE_SCREEN(s, rd)				   \
-    ((ResizeScreen *) (s)->privates[(rd)->screenPrivateIndex].ptr)
+#define GET_RESIZE_SCREEN(s, rd)					  \
+    ((ResizeScreen *) (s)->object.privates[(rd)->screenPrivateIndex].ptr)
 
 #define RESIZE_SCREEN(s)						      \
     ResizeScreen *rs = GET_RESIZE_SCREEN (s, GET_RESIZE_DISPLAY (s->display))
@@ -1256,7 +1256,7 @@ resizeInitDisplay (CompPlugin  *p,
 
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = rd;
+    d->object.privates[displayPrivateIndex].ptr = rd;
 
     return TRUE;
 }
@@ -1316,7 +1316,7 @@ resizeInitScreen (CompPlugin *p,
     WRAP (rs, s, paintWindow, resizePaintWindow);
     WRAP (rs, s, damageWindowRect, resizeDamageWindowRect);
 
-    s->privates[rd->screenPrivateIndex].ptr = rs;
+    s->object.privates[rd->screenPrivateIndex].ptr = rs;
 
     return TRUE;
 }
@@ -1352,6 +1352,57 @@ resizeFiniScreen (CompPlugin *p,
     UNWRAP (rs, s, damageWindowRect);
 
     free (rs);
+}
+
+static CompBool
+resizeInitObject (CompPlugin *p,
+		  CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) resizeInitDisplay,
+	(InitPluginObjectProc) resizeInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+resizeFiniObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) resizeFiniDisplay,
+	(FiniPluginObjectProc) resizeFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+resizeGetObjectOptions (CompPlugin *plugin,
+			CompObject *object,
+			int	   *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) resizeGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+resizeSetObjectOption (CompPlugin      *plugin,
+		       CompObject      *object,
+		       const char      *name,
+		       CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) resizeSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -1394,16 +1445,10 @@ CompPluginVTable resizeVTable = {
     resizeGetMetadata,
     resizeInit,
     resizeFini,
-    resizeInitDisplay,
-    resizeFiniDisplay,
-    resizeInitScreen,
-    resizeFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    resizeGetDisplayOptions,
-    resizeSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    resizeInitObject,
+    resizeFiniObject,
+    resizeGetObjectOptions,
+    resizeSetObjectOption
 };
 
 CompPluginVTable *

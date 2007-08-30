@@ -54,14 +54,14 @@ typedef struct _ShotScreen {
     Bool grab;
 } ShotScreen;
 
-#define GET_SHOT_DISPLAY(d)				     \
-    ((ShotDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_SHOT_DISPLAY(d)					    \
+    ((ShotDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define SHOT_DISPLAY(d)			   \
     ShotDisplay *sd = GET_SHOT_DISPLAY (d)
 
-#define GET_SHOT_SCREEN(s, sd)					 \
-    ((ShotScreen *) (s)->privates[(sd)->screenPrivateIndex].ptr)
+#define GET_SHOT_SCREEN(s, sd)						\
+    ((ShotScreen *) (s)->object.privates[(sd)->screenPrivateIndex].ptr)
 
 #define SHOT_SCREEN(s)							\
     ShotScreen *ss = GET_SHOT_SCREEN (s, GET_SHOT_DISPLAY (s->display))
@@ -463,7 +463,7 @@ shotInitDisplay (CompPlugin  *p,
 
     WRAP (sd, d, handleEvent, shotHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = sd;
+    d->object.privates[displayPrivateIndex].ptr = sd;
 
     return TRUE;
 }
@@ -501,7 +501,7 @@ shotInitScreen (CompPlugin *p,
     WRAP (ss, s, paintScreen, shotPaintScreen);
     WRAP (ss, s, paintOutput, shotPaintOutput);
 
-    s->privates[sd->screenPrivateIndex].ptr = ss;
+    s->object.privates[sd->screenPrivateIndex].ptr = ss;
 
     return TRUE;
 }
@@ -516,6 +516,57 @@ shotFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, paintOutput);
 
     free (ss);
+}
+
+static CompBool
+shotInitObject (CompPlugin *p,
+		CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) shotInitDisplay,
+	(InitPluginObjectProc) shotInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+shotFiniObject (CompPlugin *p,
+		CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) shotFiniDisplay,
+	(FiniPluginObjectProc) shotFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+shotGetObjectOptions (CompPlugin *plugin,
+		      CompObject *object,
+		      int	 *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) shotGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+shotSetObjectOption (CompPlugin      *plugin,
+		     CompObject      *object,
+		     const char      *name,
+		     CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) shotSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static Bool
@@ -558,16 +609,10 @@ static CompPluginVTable shotVTable = {
     shotGetMetadata,
     shotInit,
     shotFini,
-    shotInitDisplay,
-    shotFiniDisplay,
-    shotInitScreen,
-    shotFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    shotGetDisplayOptions,
-    shotSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    shotInitObject,
+    shotFiniObject,
+    shotGetObjectOptions,
+    shotSetObjectOption
 };
 
 CompPluginVTable *

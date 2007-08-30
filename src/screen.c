@@ -57,19 +57,21 @@ reallocScreenPrivate (int  size,
 
     for (s = d->screens; s; s = s->next)
     {
-	privates = realloc (s->privates, size * sizeof (CompPrivate));
+	privates = realloc (s->object.privates, size * sizeof (CompPrivate));
 	if (!privates)
 	    return FALSE;
 
-	s->privates = (CompPrivate *) privates;
+	s->object.privates = (CompPrivate *) privates;
     }
 
     return TRUE;
 }
 
 int
-allocateScreenPrivateIndex (CompDisplay *display)
+allocScreenObjectPrivateIndex (CompObject *parent)
 {
+    CompDisplay *display = (CompDisplay *) parent;
+
     return allocatePrivateIndex (&display->screenPrivateLen,
 				 &display->screenPrivateIndices,
 				 reallocScreenPrivate,
@@ -77,12 +79,30 @@ allocateScreenPrivateIndex (CompDisplay *display)
 }
 
 void
-freeScreenPrivateIndex (CompDisplay *display,
-			int	    index)
+freeScreenObjectPrivateIndex (CompObject *parent,
+			      int	 index)
 {
+    CompDisplay *display = (CompDisplay *) parent;
+
     freePrivateIndex (display->screenPrivateLen,
 		      display->screenPrivateIndices,
 		      index);
+}
+
+int
+allocateScreenPrivateIndex (CompDisplay *display)
+{
+    return compObjectAllocatePrivateIndex (&display->object,
+					   COMP_OBJECT_TYPE_SCREEN);
+}
+
+void
+freeScreenPrivateIndex (CompDisplay *display,
+			int	    index)
+{
+    compObjectFreePrivateIndex (&display->object,
+				COMP_OBJECT_TYPE_SCREEN,
+				index);
 }
 
 static Bool
@@ -559,8 +579,8 @@ setScreenOptionForPlugin (CompScreen      *screen,
     CompPlugin *p;
 
     p = findActivePlugin (plugin);
-    if (p && p->vTable->setScreenOption)
-	return (*p->vTable->setScreenOption) (p, screen, name, value);
+    if (p && p->vTable->setObjectOption)
+	return (*p->vTable->setObjectOption) (p, &screen->object, name, value);
 
     return FALSE;
 }
@@ -1421,6 +1441,7 @@ addScreen (CompDisplay *display,
 	   Time	       wmSnTimestamp)
 {
     CompScreen		 *s;
+    CompPrivate		 *privates;
     Display		 *dpy = display->display;
     static char		 data = 0;
     XColor		 black;
@@ -1449,16 +1470,17 @@ addScreen (CompDisplay *display,
 
     if (display->screenPrivateLen)
     {
-	s->privates = malloc (display->screenPrivateLen *
-			      sizeof (CompPrivate));
-	if (!s->privates)
+	privates = malloc (display->screenPrivateLen * sizeof (CompPrivate));
+	if (!privates)
 	{
 	    free (s);
 	    return FALSE;
 	}
     }
     else
-	s->privates = 0;
+	privates = 0;
+
+    compObjectInit (&s->object, privates, COMP_OBJECT_TYPE_SCREEN);
 
     s->display = display;
 

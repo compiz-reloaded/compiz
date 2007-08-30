@@ -120,14 +120,14 @@ typedef struct _WaterScreen {
     WaterFunction *bumpMapFunctions;
 } WaterScreen;
 
-#define GET_WATER_DISPLAY(d)				      \
-    ((WaterDisplay *) (d)->privates[displayPrivateIndex].ptr)
+#define GET_WATER_DISPLAY(d)					     \
+    ((WaterDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
 #define WATER_DISPLAY(d)		     \
     WaterDisplay *wd = GET_WATER_DISPLAY (d)
 
-#define GET_WATER_SCREEN(s, wd)					  \
-    ((WaterScreen *) (s)->privates[(wd)->screenPrivateIndex].ptr)
+#define GET_WATER_SCREEN(s, wd)						 \
+    ((WaterScreen *) (s)->object.privates[(wd)->screenPrivateIndex].ptr)
 
 #define WATER_SCREEN(s)							   \
     WaterScreen *ws = GET_WATER_SCREEN (s, GET_WATER_DISPLAY (s->display))
@@ -1623,7 +1623,7 @@ waterInitDisplay (CompPlugin  *p,
 
     WRAP (wd, d, handleEvent, waterHandleEvent);
 
-    d->privates[displayPrivateIndex].ptr = wd;
+    d->object.privates[displayPrivateIndex].ptr = wd;
 
     return TRUE;
 }
@@ -1661,7 +1661,7 @@ waterInitScreen (CompPlugin *p,
     WRAP (ws, s, donePaintScreen, waterDonePaintScreen);
     WRAP (ws, s, drawWindowTexture, waterDrawWindowTexture);
 
-    s->privates[wd->screenPrivateIndex].ptr = ws;
+    s->object.privates[wd->screenPrivateIndex].ptr = ws;
 
     waterReset (s);
 
@@ -1715,6 +1715,57 @@ waterFiniScreen (CompPlugin *p,
     free (ws);
 }
 
+static CompBool
+waterInitObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) waterInitDisplay,
+	(InitPluginObjectProc) waterInitScreen
+    };
+
+    RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+}
+
+static void
+waterFiniObject (CompPlugin *p,
+		 CompObject *o)
+{
+    static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) waterFiniDisplay,
+	(FiniPluginObjectProc) waterFiniScreen
+    };
+
+    DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
+}
+
+static CompOption *
+waterGetObjectOptions (CompPlugin *plugin,
+		       CompObject *object,
+		       int	  *count)
+{
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) waterGetDisplayOptions
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
+}
+
+static CompBool
+waterSetObjectOption (CompPlugin      *plugin,
+		      CompObject      *object,
+		      const char      *name,
+		      CompOptionValue *value)
+{
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) waterSetDisplayOption
+    };
+
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
+}
+
 static Bool
 waterInit (CompPlugin *p)
 {
@@ -1755,16 +1806,10 @@ static CompPluginVTable waterVTable = {
     waterGetMetadata,
     waterInit,
     waterFini,
-    waterInitDisplay,
-    waterFiniDisplay,
-    waterInitScreen,
-    waterFiniScreen,
-    0, /* InitWindow */
-    0, /* FiniWindow */
-    waterGetDisplayOptions,
-    waterSetDisplayOption,
-    0, /* GetScreenOptions */
-    0  /* SetScreenOption */
+    waterInitObject,
+    waterFiniObject,
+    waterGetObjectOptions,
+    waterSetObjectOption
 };
 
 CompPluginVTable *

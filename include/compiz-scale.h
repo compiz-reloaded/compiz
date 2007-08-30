@@ -174,20 +174,20 @@ typedef struct _ScaleWindow {
     float lastThumbOpacity;
 } ScaleWindow;
 
-#define GET_SCALE_DISPLAY(d)				      \
-    ((ScaleDisplay *) (d)->privates[scaleDisplayPrivateIndex].ptr)
+#define GET_SCALE_DISPLAY(d)						  \
+    ((ScaleDisplay *) (d)->object.privates[scaleDisplayPrivateIndex].ptr)
 
 #define SCALE_DISPLAY(d)		     \
     ScaleDisplay *sd = GET_SCALE_DISPLAY (d)
 
-#define GET_SCALE_SCREEN(s, sd)					  \
-    ((ScaleScreen *) (s)->privates[(sd)->screenPrivateIndex].ptr)
+#define GET_SCALE_SCREEN(s, sd)						 \
+    ((ScaleScreen *) (s)->object.privates[(sd)->screenPrivateIndex].ptr)
 
 #define SCALE_SCREEN(s)							   \
     ScaleScreen *ss = GET_SCALE_SCREEN (s, GET_SCALE_DISPLAY (s->display))
 
-#define GET_SCALE_WINDOW(w, ss)					  \
-    ((ScaleWindow *) (w)->privates[(ss)->windowPrivateIndex].ptr)
+#define GET_SCALE_WINDOW(w, ss)						 \
+    ((ScaleWindow *) (w)->object.privates[(ss)->windowPrivateIndex].ptr)
 
 #define SCALE_WINDOW(w)					       \
     ScaleWindow *sw = GET_SCALE_WINDOW  (w,		       \

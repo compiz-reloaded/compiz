@@ -232,7 +232,7 @@ extern CompMetadata coreMetadata;
 #define MOD(a,b) ((a) < 0 ? ((b) - ((-(a) - 1) % (b))) - 1 : (a) % (b))
 
 
-/* privates.h */
+/* privates.c */
 
 #define WRAP(priv, real, func, wrapFunc) \
     (priv)->func = (real)->func;	 \
@@ -260,6 +260,53 @@ void
 freePrivateIndex (int  len,
 		  char *indices,
 		  int  index);
+
+
+/* object.c */
+
+typedef unsigned int CompObjectType;
+
+#define COMP_OBJECT_TYPE_DISPLAY 0
+#define COMP_OBJECT_TYPE_SCREEN  1
+#define COMP_OBJECT_TYPE_WINDOW  2
+
+struct _CompObject {
+    CompObjectType type;
+    CompPrivate	   *privates;
+};
+
+void
+compObjectInit (CompObject     *object,
+		CompPrivate    *privates,
+		CompObjectType type);
+
+void
+compObjectFini (CompObject *object);
+
+int
+compObjectAllocatePrivateIndex (CompObject     *parent,
+				CompObjectType type);
+
+void
+compObjectFreePrivateIndex (CompObject     *parent,
+			    CompObjectType type,
+			    int	           index);
+
+#define ARRAY_SIZE(array)		 \
+    (sizeof (array) / sizeof (array[0]))
+
+#define DISPATCH_CHECK(object, dispTab, tabSize)	      \
+    ((object)->type < (tabSize) && (dispTab)[(object)->type])
+
+#define DISPATCH(object, dispTab, tabSize, args)   \
+    if (DISPATCH_CHECK (object, dispTab, tabSize)) \
+	(*(dispTab)[(object)->type]) args
+
+#define RETURN_DISPATCH(object, dispTab, tabSize, def, args) \
+    if (DISPATCH_CHECK (object, dispTab, tabSize))	     \
+	return (*(dispTab)[(object)->type]) args;	     \
+    else						     \
+	return (def)
 
 
 /* option.c */
@@ -661,7 +708,14 @@ typedef void (*LogMessageProc) (CompDisplay  *d,
 				CompLogLevel level,
 				const char   *message);
 
+typedef Bool (*InitPluginForDisplayProc) (CompPlugin  *plugin,
+					  CompDisplay *display);
+typedef void (*FiniPluginForDisplayProc) (CompPlugin  *plugin,
+					  CompDisplay *display);
+
 struct _CompDisplay {
+    CompObject object;
+
     xcb_connection_t *connection;
 
     Display    *display;
@@ -862,12 +916,23 @@ struct _CompDisplay {
     MatchPropertyChangedProc   matchPropertyChanged;
 
     LogMessageProc logMessage;
-
-    CompPrivate *privates;
 };
 
-
 extern CompDisplay *compDisplays;
+
+#define GET_CORE_DISPLAY(object) ((CompDisplay *) (object))
+#define CORE_DISPLAY(object) CompDisplay *d = GET_CORE_DISPLAY (object)
+
+CompBool
+allocDisplayObjectPrivates (CompObject *object,
+			    CompObject *parent);
+
+int
+allocDisplayObjectPrivateIndex (CompObject *parent);
+
+void
+freeDisplayObjectPrivateIndex (CompObject *parent,
+			       int	  index);
 
 int
 allocateDisplayPrivateIndex (void);
@@ -1618,6 +1683,11 @@ typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 typedef void (*InitWindowWalkerProc) (CompScreen *screen,
 				      CompWalker *walker);
 
+typedef Bool (*InitPluginForScreenProc) (CompPlugin *plugin,
+					 CompScreen *screen);
+typedef void (*FiniPluginForScreenProc) (CompPlugin *plugin,
+					 CompScreen *screen);
+
 #define COMP_SCREEN_DAMAGE_PENDING_MASK (1 << 0)
 #define COMP_SCREEN_DAMAGE_REGION_MASK  (1 << 1)
 #define COMP_SCREEN_DAMAGE_ALL_MASK     (1 << 2)
@@ -1730,6 +1800,8 @@ typedef struct _CompActiveWindowHistory {
 } CompActiveWindowHistory;
 
 struct _CompScreen {
+    CompObject object;
+
     CompScreen  *next;
     CompDisplay *display;
     CompWindow	*windows;
@@ -1930,9 +2002,21 @@ struct _CompScreen {
     OutputChangeNotifyProc outputChangeNotify;
 
     InitWindowWalkerProc initWindowWalker;
-
-    CompPrivate *privates;
 };
+
+#define GET_CORE_SCREEN(object) ((CompScreen *) (object))
+#define CORE_SCREEN(object) CompScreen *s = GET_CORE_SCREEN (object)
+
+CompBool
+allocScreenObjectPrivates (CompObject *object,
+			   CompObject *parent);
+
+int
+allocScreenObjectPrivateIndex (CompObject *parent);
+
+void
+freeScreenObjectPrivateIndex (CompObject *parent,
+			      int	 index);
 
 int
 allocateScreenPrivateIndex (CompDisplay *display);
@@ -2223,6 +2307,8 @@ typedef struct _CompStruts {
 } CompStruts;
 
 struct _CompWindow {
+    CompObject object;
+
     CompScreen *screen;
     CompWindow *next;
     CompWindow *prev;
@@ -2349,9 +2435,21 @@ struct _CompWindow {
 
     /* must be set by addWindowGeometry */
     DrawWindowGeometryProc drawWindowGeometry;
-
-    CompPrivate *privates;
 };
+
+#define GET_CORE_WINDOW(object) ((CompWindow *) (object))
+#define CORE_WINDOW(object) CompWindow *w = GET_CORE_WINDOW (object)
+
+CompBool
+allocWindowObjectPrivates (CompObject *object,
+			   CompObject *parent);
+
+int
+allocWindowObjectPrivateIndex (CompObject *parent);
+
+void
+freeWindowObjectPrivateIndex (CompObject *parent,
+			      int	 index);
 
 int
 allocateWindowPrivateIndex (CompScreen *screen);
