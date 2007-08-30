@@ -1242,7 +1242,7 @@ CompPluginVTable iniVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &iniVTable;
 }

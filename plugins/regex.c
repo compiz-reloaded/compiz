@@ -535,7 +535,7 @@ static CompPluginVTable regexVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &regexVTable;
 }

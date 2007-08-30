@@ -2849,7 +2849,7 @@ static CompPluginVTable blurVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &blurVTable;
 }

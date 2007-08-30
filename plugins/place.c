@@ -1571,7 +1571,7 @@ static CompPluginVTable placeVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &placeVTable;
 }

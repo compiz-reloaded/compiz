@@ -1040,7 +1040,7 @@ CompPluginVTable svgVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &svgVTable;
 }

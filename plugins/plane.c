@@ -788,7 +788,7 @@ CompPluginVTable planeVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &planeVTable;
 }

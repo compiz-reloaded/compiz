@@ -1077,7 +1077,7 @@ static CompPluginVTable minVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &minVTable;
 }

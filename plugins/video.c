@@ -1319,7 +1319,7 @@ static CompPluginVTable videoVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &videoVTable;
 }

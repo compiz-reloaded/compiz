@@ -64,7 +64,7 @@ typedef struct _CompPluginVTable {
 } CompPluginVTable;
 
 CompPluginVTable *
-getCompPluginInfo (void);
+getCompPluginInfo20070830 (void);
 
 COMPIZ_END_DECLS
 

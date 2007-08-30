@@ -2593,7 +2593,7 @@ CompPluginVTable dbusVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &dbusVTable;
 }

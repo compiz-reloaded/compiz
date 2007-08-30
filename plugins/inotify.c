@@ -306,7 +306,7 @@ CompPluginVTable inotifyVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &inotifyVTable;
 }

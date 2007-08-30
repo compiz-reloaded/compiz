@@ -298,7 +298,7 @@ CompPluginVTable glibVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &glibVTable;
 }

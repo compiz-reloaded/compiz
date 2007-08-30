@@ -2122,7 +2122,7 @@ CompPluginVTable switchVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &switchVTable;
 }

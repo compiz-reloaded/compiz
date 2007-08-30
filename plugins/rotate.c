@@ -1968,7 +1968,7 @@ CompPluginVTable rotateVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &rotateVTable;
 }

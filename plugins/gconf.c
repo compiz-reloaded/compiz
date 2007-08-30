@@ -962,7 +962,7 @@ CompPluginVTable gconfVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &gconfVTable;
 }

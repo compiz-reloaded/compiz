@@ -170,7 +170,8 @@ dlloaderLoadPlugin (CompPlugin *p,
 
 	dlerror ();
 
-	getInfo = (PluginGetInfoProc) dlsym (dlhand, "getCompPluginInfo");
+	getInfo = (PluginGetInfoProc)
+	    dlsym (dlhand, "getCompPluginInfo20070830");
 
 	error = dlerror ();
 	if (error)

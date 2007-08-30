@@ -1192,7 +1192,7 @@ CompPluginVTable zoomVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &zoomVTable;
 }

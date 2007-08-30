@@ -949,7 +949,7 @@ static CompPluginVTable annoVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &annoVTable;
 }

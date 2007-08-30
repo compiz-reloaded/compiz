@@ -616,7 +616,7 @@ static CompPluginVTable shotVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &shotVTable;
 }

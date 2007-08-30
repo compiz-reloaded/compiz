@@ -1813,7 +1813,7 @@ static CompPluginVTable waterVTable = {
 };
 
 CompPluginVTable *
-getCompPluginInfo (void)
+getCompPluginInfo20070830 (void)
 {
     return &waterVTable;
 }
