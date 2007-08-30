@@ -198,10 +198,6 @@ dlloaderLoadPlugin (CompPlugin *p,
 	}
 	else
 	{
-	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "Failed to lookup getCompPluginInfo in '%s' "
-			    "plugin\n", file);
-
 	    dlclose (dlhand);
 	    free (file);
 
