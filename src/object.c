@@ -30,14 +30,32 @@ typedef CompBool (*AllocObjectPrivateIndexProc) (CompObject *parent);
 typedef void (*FreeObjectPrivateIndexProc) (CompObject *parent,
 					    int	       index);
 
+typedef void (*ForEachObjectProc) (CompObject	      *parent,
+				   ObjectCallbackProc proc,
+				   void		      *closure);
+
 struct _CompObjectInfo {
     AllocObjectPrivateIndexProc allocPrivateIndex;
     FreeObjectPrivateIndexProc  freePrivateIndex;
+    ForEachObjectProc		forEachObject;
 } objectInfo[] = {
-    { allocCoreObjectPrivateIndex,    freeCoreObjectPrivateIndex    },
-    { allocDisplayObjectPrivateIndex, freeDisplayObjectPrivateIndex },
-    { allocScreenObjectPrivateIndex,  freeScreenObjectPrivateIndex  },
-    { allocWindowObjectPrivateIndex,  freeWindowObjectPrivateIndex  }
+    {
+	allocCoreObjectPrivateIndex,
+	freeCoreObjectPrivateIndex,
+	forEachCoreObject
+    }, {
+	allocDisplayObjectPrivateIndex,
+	freeDisplayObjectPrivateIndex,
+	forEachDisplayObject
+    }, {
+	allocScreenObjectPrivateIndex,
+	freeScreenObjectPrivateIndex,
+	forEachScreenObject
+    }, {
+	allocWindowObjectPrivateIndex,
+	freeWindowObjectPrivateIndex,
+	forEachWindowObject
+    }
 };
 
 void

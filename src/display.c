@@ -140,6 +140,15 @@ freeDisplayObjectPrivateIndex (CompObject *parent,
     freePrivateIndex (displayPrivateLen, displayPrivateIndices, index);
 }
 
+void
+forEachDisplayObject (CompObject         *parent,
+		      ObjectCallbackProc proc,
+		      void	         *closure)
+{
+    if (parent->type == COMP_OBJECT_TYPE_CORE)
+	(*proc) (&compDisplays->object, closure);
+}
+
 int
 allocateDisplayPrivateIndex (void)
 {

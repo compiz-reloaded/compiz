@@ -89,6 +89,22 @@ freeScreenObjectPrivateIndex (CompObject *parent,
 		      index);
 }
 
+void
+forEachScreenObject (CompObject	        *parent,
+		     ObjectCallbackProc proc,
+		     void	        *closure)
+{
+    if (parent->type == COMP_OBJECT_TYPE_DISPLAY)
+    {
+	CompScreen *s;
+
+	CORE_DISPLAY (parent);
+
+	for (s = d->screens; s; s = s->next)
+	    (*proc) (&s->object, closure);
+    }
+}
+
 int
 allocateScreenPrivateIndex (CompDisplay *display)
 {

@@ -90,6 +90,21 @@ freeWindowObjectPrivateIndex (CompObject *parent,
 		      index);
 }
 
+void
+forEachWindowObject (CompObject	        *parent,
+		     ObjectCallbackProc proc,
+		     void	        *closure)
+{
+    if (parent->type == COMP_OBJECT_TYPE_SCREEN)
+    {
+	CompWindow *w;
+
+	CORE_SCREEN (parent);
+
+	for (w = s->windows; w; w = w->next)
+	    (*proc) (&w->object, closure);
+    }
+}
 
 int
 allocateWindowPrivateIndex (CompScreen *screen)
