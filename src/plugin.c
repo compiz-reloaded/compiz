@@ -293,6 +293,11 @@ LoadPluginProc   loaderLoadPlugin   = dlloaderLoadPlugin;
 UnloadPluginProc loaderUnloadPlugin = dlloaderUnloadPlugin;
 ListPluginsProc  loaderListPlugins  = dlloaderListPlugins;
 
+typedef struct _InitObjectContext {
+    CompPlugin *plugin;
+    CompObject *last;
+} InitObjectContext;
+
 CompBool
 initPluginForDisplay (CompPlugin  *p,
 		      CompDisplay *d)
@@ -353,34 +358,61 @@ finiPluginForDisplay (CompPlugin  *p,
     }
 }
 
+static CompBool
+initPluginForObject (CompObject *object,
+		     void       *closure)
+{
+    InitObjectContext *ctx = (InitObjectContext *) closure;
+
+    ctx->last = object;
+
+    return (*ctx->plugin->vTable->initObject) (ctx->plugin, object);
+}
+
+static CompBool
+finiPluginForObject (CompObject *object,
+		     void       *closure)
+{
+    InitObjectContext *ctx = (InitObjectContext *) closure;
+
+    if (ctx->last == object)
+	return FALSE;
+
+    (*ctx->plugin->vTable->finiObject) (ctx->plugin, object);
+
+    return TRUE;
+}
+
 Bool
 initPluginForScreen (CompPlugin *p,
 		     CompScreen *s)
 {
-    Bool status = TRUE;
+    InitObjectContext ctx;
 
-    if (p->vTable->initObject)
+    if (!p->vTable->initObject)
+	return TRUE;
+
+    ctx.plugin = p;
+    ctx.last   = NULL;
+
+    if (!compObjectForEach (&s->object,
+			    COMP_OBJECT_TYPE_WINDOW,
+			    initPluginForObject,
+			    (void *) &ctx))
     {
-	CompWindow *w, *failedWindow = s->windows;
+	compLogMessage (NULL, "core", CompLogLevelError,
+			"InitWindowObject '%s' failed",
+			p->vTable->name);
 
-	for (w = s->windows; w; w = w->next)
-	{
-	    if (!(*p->vTable->initObject) (p, &w->object))
-	    {
-		compLogMessage (NULL, "core", CompLogLevelError,
-				"InitWindowObject '%s' failed",
-				p->vTable->name);
-		failedWindow = w;
-		status = FALSE;
-		break;
-	    }
-	}
+	compObjectForEach (&s->object,
+			   COMP_OBJECT_TYPE_WINDOW,
+			   finiPluginForObject,
+			   (void *) &ctx);
 
-	for (w = s->windows; w != failedWindow; w = w->next)
-	    (*p->vTable->finiObject) (p, &w->object);
+	return FALSE;
     }
 
-    return status;
+    return TRUE;
 }
 
 void
