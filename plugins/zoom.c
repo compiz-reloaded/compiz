@@ -1096,6 +1096,7 @@ zoomInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) zoomInitDisplay,
 	(InitPluginObjectProc) zoomInitScreen
     };
@@ -1108,6 +1109,7 @@ zoomFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) zoomFiniDisplay,
 	(FiniPluginObjectProc) zoomFiniScreen
     };
@@ -1121,6 +1123,7 @@ zoomGetObjectOptions (CompPlugin *plugin,
 		      int	 *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) zoomGetDisplayOptions,
 	(GetPluginObjectOptionsProc) zoomGetScreenOptions
     };
@@ -1136,6 +1139,7 @@ zoomSetObjectOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) zoomSetDisplayOption,
 	(SetPluginObjectOptionProc) zoomSetScreenOption
     };

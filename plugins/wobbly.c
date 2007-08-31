@@ -2846,6 +2846,7 @@ wobblyInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) wobblyInitDisplay,
 	(InitPluginObjectProc) wobblyInitScreen,
 	(InitPluginObjectProc) wobblyInitWindow
@@ -2859,6 +2860,7 @@ wobblyFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) wobblyFiniDisplay,
 	(FiniPluginObjectProc) wobblyFiniScreen,
 	(FiniPluginObjectProc) wobblyFiniWindow
@@ -2873,6 +2875,7 @@ wobblyGetObjectOptions (CompPlugin *plugin,
 		       int	  *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) wobblyGetDisplayOptions,
 	(GetPluginObjectOptionsProc) wobblyGetScreenOptions
     };
@@ -2888,6 +2891,7 @@ wobblySetObjectOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) wobblySetDisplayOption,
 	(SetPluginObjectOptionProc) wobblySetScreenOption
     };

@@ -2026,6 +2026,7 @@ switchInitObject (CompPlugin *p,
 		  CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) switchInitDisplay,
 	(InitPluginObjectProc) switchInitScreen
     };
@@ -2038,6 +2039,7 @@ switchFiniObject (CompPlugin *p,
 		  CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) switchFiniDisplay,
 	(FiniPluginObjectProc) switchFiniScreen
     };
@@ -2051,6 +2053,7 @@ switchGetObjectOptions (CompPlugin *plugin,
 			int	   *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) switchGetDisplayOptions,
 	(GetPluginObjectOptionsProc) switchGetScreenOptions
     };
@@ -2066,6 +2069,7 @@ switchSetObjectOption (CompPlugin      *plugin,
 		       CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) switchSetDisplayOption,
 	(SetPluginObjectOptionProc) switchSetScreenOption
     };

@@ -856,6 +856,7 @@ annoInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) annoInitDisplay,
 	(InitPluginObjectProc) annoInitScreen
     };
@@ -868,6 +869,7 @@ annoFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) annoFiniDisplay,
 	(FiniPluginObjectProc) annoFiniScreen
     };
@@ -881,6 +883,7 @@ annoGetObjectOptions (CompPlugin *plugin,
 		      int	 *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) annoGetDisplayOptions
     };
 
@@ -895,6 +898,7 @@ annoSetObjectOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) annoSetDisplayOption
     };
 

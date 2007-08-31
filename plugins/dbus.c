@@ -2532,6 +2532,7 @@ dbusInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) dbusInitDisplay,
 	(InitPluginObjectProc) dbusInitScreen
     };
@@ -2544,6 +2545,7 @@ dbusFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) dbusFiniDisplay,
 	(FiniPluginObjectProc) dbusFiniScreen
     };

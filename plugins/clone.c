@@ -825,6 +825,7 @@ cloneInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) cloneInitDisplay,
 	(InitPluginObjectProc) cloneInitScreen
     };
@@ -837,6 +838,7 @@ cloneFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) cloneFiniDisplay,
 	(FiniPluginObjectProc) cloneFiniScreen
     };
@@ -850,6 +852,7 @@ cloneGetObjectOptions (CompPlugin *plugin,
 		       int	  *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) cloneGetDisplayOptions
     };
 
@@ -864,6 +867,7 @@ cloneSetObjectOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) cloneSetDisplayOption
     };
 

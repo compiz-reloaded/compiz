@@ -695,6 +695,7 @@ planeInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) planeInitDisplay,
 	(InitPluginObjectProc) planeInitScreen
     };
@@ -707,6 +708,7 @@ planeFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) planeFiniDisplay,
 	(FiniPluginObjectProc) planeFiniScreen
     };
@@ -720,6 +722,7 @@ planeGetObjectOptions (CompPlugin *plugin,
 		       int	  *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) planeGetDisplayOptions
     };
 
@@ -734,6 +737,7 @@ planeSetObjectOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) planeSetDisplayOption
     };
 

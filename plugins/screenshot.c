@@ -523,6 +523,7 @@ shotInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) shotInitDisplay,
 	(InitPluginObjectProc) shotInitScreen
     };
@@ -535,6 +536,7 @@ shotFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) shotFiniDisplay,
 	(FiniPluginObjectProc) shotFiniScreen
     };
@@ -548,6 +550,7 @@ shotGetObjectOptions (CompPlugin *plugin,
 		      int	 *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) shotGetDisplayOptions
     };
 
@@ -562,6 +565,7 @@ shotSetObjectOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) shotSetDisplayOption
     };
 

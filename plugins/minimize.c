@@ -981,6 +981,7 @@ minInitObject (CompPlugin *p,
 	       CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) minInitDisplay,
 	(InitPluginObjectProc) minInitScreen,
 	(InitPluginObjectProc) minInitWindow
@@ -994,6 +995,7 @@ minFiniObject (CompPlugin *p,
 	       CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) minFiniDisplay,
 	(FiniPluginObjectProc) minFiniScreen,
 	(FiniPluginObjectProc) minFiniWindow
@@ -1008,6 +1010,7 @@ minGetObjectOptions (CompPlugin *plugin,
 		     int	*count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) 0, /* GetDisplayOptions */
 	(GetPluginObjectOptionsProc) minGetScreenOptions
     };
@@ -1023,6 +1026,7 @@ minSetObjectOption (CompPlugin      *plugin,
 		    CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) 0, /* SetDisplayOption */
 	(SetPluginObjectOptionProc) minSetScreenOption
     };

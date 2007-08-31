@@ -27,10 +27,44 @@
 
 static CompCore core;
 
+static char *corePrivateIndices = 0;
+static int  corePrivateLen = 0;
+
+static int
+reallocCorePrivate (int  size,
+		    void *closure)
+{
+    void *privates;
+
+    privates = realloc (core.object.privates, size * sizeof (CompPrivate));
+    if (!privates)
+	return FALSE;
+
+    core.object.privates = (CompPrivate *) privates;
+
+    return TRUE;
+}
+
+int
+allocCoreObjectPrivateIndex (CompObject *parent)
+{
+    return allocatePrivateIndex (&corePrivateLen,
+				 &corePrivateIndices,
+				 reallocCorePrivate,
+				 0);
+}
+
+void
+freeCoreObjectPrivateIndex (CompObject *parent,
+			    int	       index)
+{
+    freePrivateIndex (corePrivateLen, corePrivateIndices, index);
+}
+
 CompBool
 initCore (void)
 {
-    (void) core;
+    compObjectInit (&core.object, 0, COMP_OBJECT_TYPE_CORE);
 
     return TRUE;
 }

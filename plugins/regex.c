@@ -470,6 +470,7 @@ regexInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) regexInitDisplay,
 	(InitPluginObjectProc) regexInitScreen,
 	(InitPluginObjectProc) regexInitWindow
@@ -483,6 +484,7 @@ regexFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) regexFiniDisplay,
 	(FiniPluginObjectProc) regexFiniScreen,
 	(FiniPluginObjectProc) regexFiniWindow

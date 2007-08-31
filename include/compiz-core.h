@@ -266,9 +266,10 @@ freePrivateIndex (int  len,
 
 typedef unsigned int CompObjectType;
 
-#define COMP_OBJECT_TYPE_DISPLAY 0
-#define COMP_OBJECT_TYPE_SCREEN  1
-#define COMP_OBJECT_TYPE_WINDOW  2
+#define COMP_OBJECT_TYPE_CORE    0
+#define COMP_OBJECT_TYPE_DISPLAY 1
+#define COMP_OBJECT_TYPE_SCREEN  2
+#define COMP_OBJECT_TYPE_WINDOW  3
 
 struct _CompObject {
     CompObjectType type;
@@ -527,6 +528,13 @@ isActionOption (CompOption *option);
 struct _CompCore {
     CompObject object;
 };
+
+int
+allocCoreObjectPrivateIndex (CompObject *parent);
+
+void
+freeCoreObjectPrivateIndex (CompObject *parent,
+			    int	       index);
 
 CompBool
 initCore (void);

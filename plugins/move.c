@@ -906,6 +906,7 @@ moveInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) moveInitDisplay,
 	(InitPluginObjectProc) moveInitScreen
     };
@@ -918,6 +919,7 @@ moveFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) moveFiniDisplay,
 	(FiniPluginObjectProc) moveFiniScreen
     };
@@ -931,6 +933,7 @@ moveGetObjectOptions (CompPlugin *plugin,
 		      int	 *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) moveGetDisplayOptions
     };
 
@@ -945,6 +948,7 @@ moveSetObjectOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) moveSetDisplayOption
     };
 

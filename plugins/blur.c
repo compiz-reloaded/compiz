@@ -2751,6 +2751,7 @@ blurInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) blurInitDisplay,
 	(InitPluginObjectProc) blurInitScreen,
 	(InitPluginObjectProc) blurInitWindow
@@ -2764,6 +2765,7 @@ blurFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) blurFiniDisplay,
 	(FiniPluginObjectProc) blurFiniScreen,
 	(FiniPluginObjectProc) blurFiniWindow
@@ -2778,6 +2780,7 @@ blurGetObjectOptions (CompPlugin *plugin,
 		      int	 *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) blurGetDisplayOptions,
 	(GetPluginObjectOptionsProc) blurGetScreenOptions
     };
@@ -2793,6 +2796,7 @@ blurSetObjectOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) blurSetDisplayOption,
 	(SetPluginObjectOptionProc) blurSetScreenOption
     };

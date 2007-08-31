@@ -2138,6 +2138,7 @@ scaleInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) scaleInitDisplay,
 	(InitPluginObjectProc) scaleInitScreen,
 	(InitPluginObjectProc) scaleInitWindow
@@ -2151,6 +2152,7 @@ scaleFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) scaleFiniDisplay,
 	(FiniPluginObjectProc) scaleFiniScreen,
 	(FiniPluginObjectProc) scaleFiniWindow
@@ -2165,6 +2167,7 @@ scaleGetObjectOptions (CompPlugin *plugin,
 		       int	  *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) scaleGetDisplayOptions,
 	(GetPluginObjectOptionsProc) scaleGetScreenOptions
     };
@@ -2180,6 +2183,7 @@ scaleSetObjectOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) scaleSetDisplayOption,
 	(SetPluginObjectOptionProc) scaleSetScreenOption
     };

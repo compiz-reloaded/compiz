@@ -945,6 +945,7 @@ svgInitObject (CompPlugin *p,
 	       CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) svgInitDisplay,
 	(InitPluginObjectProc) svgInitScreen,
 	(InitPluginObjectProc) svgInitWindow
@@ -958,6 +959,7 @@ svgFiniObject (CompPlugin *p,
 	       CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) svgFiniDisplay,
 	(FiniPluginObjectProc) svgFiniScreen,
 	(FiniPluginObjectProc) svgFiniWindow
@@ -972,6 +974,7 @@ svgGetObjectOptions (CompPlugin *plugin,
 		     int	*count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) svgGetDisplayOptions
     };
 
@@ -986,6 +989,7 @@ svgSetObjectOption (CompPlugin      *plugin,
 		    CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) svgSetDisplayOption
     };
 

@@ -34,6 +34,7 @@ struct _CompObjectInfo {
     AllocObjectPrivateIndexProc allocPrivateIndex;
     FreeObjectPrivateIndexProc  freePrivateIndex;
 } objectInfo[] = {
+    { allocCoreObjectPrivateIndex,    freeCoreObjectPrivateIndex    },
     { allocDisplayObjectPrivateIndex, freeDisplayObjectPrivateIndex },
     { allocScreenObjectPrivateIndex,  freeScreenObjectPrivateIndex  },
     { allocWindowObjectPrivateIndex,  freeWindowObjectPrivateIndex  }

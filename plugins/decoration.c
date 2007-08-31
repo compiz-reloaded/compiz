@@ -1459,6 +1459,7 @@ decorInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) decorInitDisplay,
 	(InitPluginObjectProc) decorInitScreen,
 	(InitPluginObjectProc) decorInitWindow
@@ -1472,6 +1473,7 @@ decorFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) decorFiniDisplay,
 	(FiniPluginObjectProc) decorFiniScreen,
 	(FiniPluginObjectProc) decorFiniWindow
@@ -1486,6 +1488,7 @@ decorGetObjectOptions (CompPlugin *plugin,
 		       int	  *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) decorGetDisplayOptions
     };
 
@@ -1500,6 +1503,7 @@ decorSetObjectOption (CompPlugin      *plugin,
 		      CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) decorSetDisplayOption
     };
 

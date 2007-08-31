@@ -506,6 +506,7 @@ pngInitObject (CompPlugin *p,
 	       CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) pngInitDisplay
     };
 
@@ -517,6 +518,7 @@ pngFiniObject (CompPlugin *p,
 	       CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) pngFiniDisplay
     };
 

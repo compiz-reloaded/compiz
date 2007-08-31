@@ -56,6 +56,7 @@ coreGetObjectOptions (CompPlugin *plugin,
 		      int	 *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
 	(GetPluginObjectOptionsProc) getDisplayOptions,
 	(GetPluginObjectOptionsProc) getScreenOptions
     };
@@ -71,6 +72,7 @@ coreSetObjectOption (CompPlugin      *plugin,
 		     CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
 	(SetPluginObjectOptionProc) setDisplayOption,
 	(SetPluginObjectOptionProc) setScreenOption
     };

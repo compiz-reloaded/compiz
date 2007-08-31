@@ -245,6 +245,7 @@ inotifyInitObject (CompPlugin *p,
 		   CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) inotifyInitDisplay
     };
 
@@ -256,6 +257,7 @@ inotifyFiniObject (CompPlugin *p,
 		   CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) inotifyFiniDisplay
     };
 

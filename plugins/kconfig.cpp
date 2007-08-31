@@ -787,6 +787,7 @@ kconfigInitObject (CompPlugin *p,
 		   CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) kconfigInitDisplay,
 	(InitPluginObjectProc) kconfigInitScreen
     };
@@ -799,6 +800,7 @@ kconfigFiniObject (CompPlugin *p,
 		   CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) kconfigFiniDisplay,
 	(FiniPluginObjectProc) kconfigFiniScreen
     };

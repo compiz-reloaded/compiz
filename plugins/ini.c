@@ -1179,6 +1179,7 @@ iniInitObject (CompPlugin *p,
 	       CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) iniInitDisplay,
 	(InitPluginObjectProc) iniInitScreen
     };
@@ -1191,6 +1192,7 @@ iniFiniObject (CompPlugin *p,
 	       CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) iniFiniDisplay,
 	(FiniPluginObjectProc) iniFiniScreen
     };

@@ -899,6 +899,7 @@ gconfInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
+	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) gconfInitDisplay,
 	(InitPluginObjectProc) gconfInitScreen
     };
@@ -911,6 +912,7 @@ gconfFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
+	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) gconfFiniDisplay,
 	(FiniPluginObjectProc) gconfFiniScreen
     };
