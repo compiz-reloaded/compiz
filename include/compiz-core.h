@@ -296,6 +296,12 @@ compObjectFreePrivateIndex (CompObject     *parent,
 			    CompObjectType type,
 			    int	           index);
 
+CompBool
+compObjectForEach (CompObject	      *parent,
+		   CompObjectType     type,
+		   ObjectCallBackProc proc,
+		   void		      *closure);
+
 #define ARRAY_SIZE(array)		 \
     (sizeof (array) / sizeof (array[0]))
 

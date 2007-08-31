@@ -81,3 +81,12 @@ compObjectFreePrivateIndex (CompObject     *parent,
 {
     (*objectInfo[type].freePrivateIndex) (parent, index);
 }
+
+CompBool
+compObjectForEach (CompObject	      *parent,
+		   CompObjectType     type,
+		   ObjectCallBackProc proc,
+		   void		      *closure)
+{
+    return (*objectInfo[type].forEachObject) (parent, proc, closure);
+}
