@@ -61,11 +61,12 @@ freeCoreObjectPrivateIndex (CompObject *parent,
     freePrivateIndex (corePrivateLen, corePrivateIndices, index);
 }
 
-void
+CompBool
 forEachCoreObject (CompObject         *parent,
-		   ObjectCallbackProc proc,
+		   ObjectCallBackProc proc,
 		   void		      *closure)
 {
+    return TRUE;
 }
 
 CompBool

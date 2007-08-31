@@ -90,9 +90,9 @@ freeWindowObjectPrivateIndex (CompObject *parent,
 		      index);
 }
 
-void
+CompBool
 forEachWindowObject (CompObject	        *parent,
-		     ObjectCallbackProc proc,
+		     ObjectCallBackProc proc,
 		     void	        *closure)
 {
     if (parent->type == COMP_OBJECT_TYPE_SCREEN)
@@ -102,8 +102,13 @@ forEachWindowObject (CompObject	        *parent,
 	CORE_SCREEN (parent);
 
 	for (w = s->windows; w; w = w->next)
-	    (*proc) (&w->object, closure);
+	{
+	    if (!(*proc) (&w->object, closure))
+		return FALSE;
+	}
     }
+
+    return TRUE;
 }
 
 int

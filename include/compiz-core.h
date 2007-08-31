@@ -276,8 +276,8 @@ struct _CompObject {
     CompPrivate	   *privates;
 };
 
-typedef void (*ObjectCallbackProc) (CompObject *object,
-				    void       *closure);
+typedef CompBool (*ObjectCallBackProc) (CompObject *object,
+					void       *closure);
 
 void
 compObjectInit (CompObject     *object,
@@ -539,9 +539,9 @@ void
 freeCoreObjectPrivateIndex (CompObject *parent,
 			    int	       index);
 
-void
+CompBool
 forEachCoreObject (CompObject	     *parent,
-		   ObjectCallbackProc proc,
+		   ObjectCallBackProc proc,
 		   void		     *closure);
 
 CompBool
@@ -963,9 +963,9 @@ void
 freeDisplayObjectPrivateIndex (CompObject *parent,
 			       int	  index);
 
-void
+CompBool
 forEachDisplayObject (CompObject	 *parent,
-		      ObjectCallbackProc proc,
+		      ObjectCallBackProc proc,
 		      void		 *closure);
 
 int
@@ -2054,9 +2054,9 @@ void
 freeScreenObjectPrivateIndex (CompObject *parent,
 			      int	 index);
 
-void
+CompBool
 forEachScreenObject (CompObject	        *parent,
-		     ObjectCallbackProc proc,
+		     ObjectCallBackProc proc,
 		     void	        *closure);
 
 int
@@ -2494,9 +2494,9 @@ void
 freeWindowObjectPrivateIndex (CompObject *parent,
 			      int	 index);
 
-void
+CompBool
 forEachWindowObject (CompObject	        *parent,
-		     ObjectCallbackProc proc,
+		     ObjectCallBackProc proc,
 		     void	        *closure);
 
 int

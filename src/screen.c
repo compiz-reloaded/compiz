@@ -89,9 +89,9 @@ freeScreenObjectPrivateIndex (CompObject *parent,
 		      index);
 }
 
-void
+CompBool
 forEachScreenObject (CompObject	        *parent,
-		     ObjectCallbackProc proc,
+		     ObjectCallBackProc proc,
 		     void	        *closure)
 {
     if (parent->type == COMP_OBJECT_TYPE_DISPLAY)
@@ -101,8 +101,13 @@ forEachScreenObject (CompObject	        *parent,
 	CORE_DISPLAY (parent);
 
 	for (s = d->screens; s; s = s->next)
-	    (*proc) (&s->object, closure);
+	{
+	    if (!(*proc) (&s->object, closure))
+		return FALSE;
+	}
     }
+
+    return TRUE;
 }
 
 int

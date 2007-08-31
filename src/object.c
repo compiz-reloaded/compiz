@@ -30,9 +30,9 @@ typedef CompBool (*AllocObjectPrivateIndexProc) (CompObject *parent);
 typedef void (*FreeObjectPrivateIndexProc) (CompObject *parent,
 					    int	       index);
 
-typedef void (*ForEachObjectProc) (CompObject	      *parent,
-				   ObjectCallbackProc proc,
-				   void		      *closure);
+typedef CompBool (*ForEachObjectProc) (CompObject	  *parent,
+				       ObjectCallBackProc proc,
+				       void		  *closure);
 
 struct _CompObjectInfo {
     AllocObjectPrivateIndexProc allocPrivateIndex;
