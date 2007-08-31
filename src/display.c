@@ -746,7 +746,8 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
 };
 
 CompOption *
-getDisplayOptions (CompDisplay *display,
+getDisplayOptions (CompPlugin  *plugin,
+		   CompDisplay *display,
 		   int	       *count)
 {
     *count = NUM_OPTIONS (display);
@@ -837,7 +838,8 @@ pingTimeout (void *closure)
 }
 
 Bool
-setDisplayOption (CompDisplay     *display,
+setDisplayOption (CompPlugin	  *plugin,
+		  CompDisplay     *display,
 		  const char      *name,
 		  CompOptionValue *value)
 {

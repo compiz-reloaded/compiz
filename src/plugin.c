@@ -55,17 +55,13 @@ coreGetObjectOptions (CompPlugin *plugin,
 		      CompObject *object,
 		      int	 *count)
 {
-    switch (object->type) {
-    case COMP_OBJECT_TYPE_DISPLAY:
-	return getDisplayOptions ((CompDisplay *) object, count);
-    case COMP_OBJECT_TYPE_SCREEN:
-	return getScreenOptions ((CompScreen *) object, count);
-    default:
-	break;
-    }
+    static GetPluginObjectOptionsProc dispTab[] = {
+	(GetPluginObjectOptionsProc) getDisplayOptions,
+	(GetPluginObjectOptionsProc) getScreenOptions
+    };
 
-    *count = 0;
-    return NULL;
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
+		     (void *) (*count = 0), (plugin, object, count));
 }
 
 static Bool
@@ -74,16 +70,13 @@ coreSetObjectOption (CompPlugin      *plugin,
 		     const char      *name,
 		     CompOptionValue *value)
 {
-    switch (object->type) {
-    case COMP_OBJECT_TYPE_DISPLAY:
-	return setDisplayOption ((CompDisplay *) object, name, value);
-    case COMP_OBJECT_TYPE_SCREEN:
-	return setScreenOption ((CompScreen *) object, name, value);
-    default:
-	break;
-    }
+    static SetPluginObjectOptionProc dispTab[] = {
+	(SetPluginObjectOptionProc) setDisplayOption,
+	(SetPluginObjectOptionProc) setScreenOption
+    };
 
-    return FALSE;
+    RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), FALSE,
+		     (plugin, object, name, value));
 }
 
 static CompPluginVTable coreVTable = {

@@ -428,7 +428,8 @@ detectOutputDevices (CompScreen *s)
 }
 
 CompOption *
-getScreenOptions (CompScreen *screen,
+getScreenOptions (CompPlugin *plugin,
+		  CompScreen *screen,
 		  int	     *count)
 {
     *count = NUM_OPTIONS (screen);
@@ -436,7 +437,8 @@ getScreenOptions (CompScreen *screen,
 }
 
 Bool
-setScreenOption (CompScreen      *screen,
+setScreenOption (CompPlugin	 *plugin,
+		 CompScreen      *screen,
 		 const char	 *name,
 		 CompOptionValue *value)
 {

@@ -941,11 +941,13 @@ void
 freeDisplayPrivateIndex (int index);
 
 CompOption *
-getDisplayOptions (CompDisplay *display,
-		   int	   *count);
+getDisplayOptions (CompPlugin  *plugin,
+		   CompDisplay *display,
+		   int	       *count);
 
 Bool
-setDisplayOption (CompDisplay     *display,
+setDisplayOption (CompPlugin	  *plugin,
+		  CompDisplay     *display,
 		  const char      *name,
 		  CompOptionValue *value);
 
@@ -2026,11 +2028,13 @@ freeScreenPrivateIndex (CompDisplay *display,
 			int	    index);
 
 CompOption *
-getScreenOptions (CompScreen *screen,
+getScreenOptions (CompPlugin *plugin,
+		  CompScreen *screen,
 		  int	     *count);
 
 Bool
-setScreenOption (CompScreen      *screen,
+setScreenOption (CompPlugin	 *plugin,
+		 CompScreen      *screen,
 		 const char      *name,
 		 CompOptionValue *value);
 
