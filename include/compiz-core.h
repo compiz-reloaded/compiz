@@ -522,6 +522,19 @@ Bool
 isActionOption (CompOption *option);
 
 
+/* core.c */
+
+struct _CompCore {
+    CompObject object;
+};
+
+CompBool
+initCore (void);
+
+void
+finiCore (void);
+
+
 /* display.c */
 
 typedef int CompFileWatchHandle;

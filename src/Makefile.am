@@ -14,6 +14,7 @@ compiz_SOURCES =   \
 	main.c	   \
 	privates.c \
 	object.c   \
+	core.c	   \
 	texture.c  \
 	display.c  \
 	screen.c   \
