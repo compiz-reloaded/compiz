@@ -756,7 +756,7 @@ kconfigInitDisplay (CompPlugin  *p,
 
     if (QFile::exists (dir))
     {
-	kd->fileWatch = addFileWatch (d, dir.ascii (), ~0, kconfigRcChanged,
+	kd->fileWatch = addFileWatch (dir.ascii (), ~0, kconfigRcChanged,
 				      (void *) d);
     }
     else
@@ -790,7 +790,7 @@ kconfigFiniDisplay (CompPlugin  *p,
     }
 
     if (kd->fileWatch)
-	removeFileWatch (d, kd->fileWatch);
+	removeFileWatch (kd->fileWatch);
 
     freeScreenPrivateIndex (d, kd->screenPrivateIndex);
 

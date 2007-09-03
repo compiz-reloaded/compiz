@@ -2453,14 +2453,12 @@ dbusInitDisplay (CompPlugin  *p,
     mask = NOTIFY_CREATE_MASK | NOTIFY_DELETE_MASK | NOTIFY_MOVE_MASK;
 
     dd->fileWatch[DBUS_FILE_WATCH_CURRENT] =
-	addFileWatch (d,
-		      ".",
+	addFileWatch (".",
 		      mask,
 		      dbusSendPluginsChangedSignal,
 		      (void *) d);
     dd->fileWatch[DBUS_FILE_WATCH_PLUGIN]  =
-	addFileWatch (d,
-		      PLUGINDIR,
+	addFileWatch (PLUGINDIR,
 		      mask,
 		      dbusSendPluginsChangedSignal,
 		      (void *) d);
@@ -2475,8 +2473,7 @@ dbusInitDisplay (CompPlugin  *p,
 	    sprintf (plugindir, "%s/%s", home, HOME_PLUGINDIR);
 
 	    dd->fileWatch[DBUS_FILE_WATCH_HOME]  =
-		addFileWatch (d,
-			      plugindir,
+		addFileWatch (plugindir,
 			      mask,
 			      dbusSendPluginsChangedSignal,
 			      (void *) d);
@@ -2527,7 +2524,7 @@ dbusFiniDisplay (CompPlugin  *p,
     }
 
     for (i = 0; i < DBUS_FILE_WATCH_NUM; i++)
-	removeFileWatch (d, dd->fileWatch[i]);
+	removeFileWatch (dd->fileWatch[i]);
 
     compRemoveWatchFd (dd->watchFdHandle);
 

@@ -548,6 +548,31 @@ isActionOption (CompOption *option);
 
 /* core.c */
 
+#define NOTIFY_CREATE_MASK (1 << 0)
+#define NOTIFY_DELETE_MASK (1 << 1)
+#define NOTIFY_MOVE_MASK   (1 << 2)
+#define NOTIFY_MODIFY_MASK (1 << 3)
+
+typedef void (*FileWatchCallBackProc) (const char *name,
+				       void	  *closure);
+
+typedef int CompFileWatchHandle;
+
+typedef struct _CompFileWatch {
+    struct _CompFileWatch *next;
+    char		  *path;
+    int			  mask;
+    FileWatchCallBackProc callBack;
+    void		  *closure;
+    CompFileWatchHandle   handle;
+} CompFileWatch;
+
+typedef void (*FileWatchAddedProc) (CompCore	  *core,
+				    CompFileWatch *fileWatch);
+
+typedef void (*FileWatchRemovedProc) (CompCore      *core,
+				      CompFileWatch *fileWatch);
+
 typedef CompBool (*InitPluginForObjectProc) (CompPlugin *plugin,
 					     CompObject *object);
 typedef void (*FiniPluginForObjectProc) (CompPlugin *plugin,
@@ -558,6 +583,12 @@ struct _CompCore {
 
     InitPluginForObjectProc initPluginForObject;
     FiniPluginForObjectProc finiPluginForObject;
+
+    FileWatchAddedProc   fileWatchAdded;
+    FileWatchRemovedProc fileWatchRemoved;
+
+    CompFileWatch	*fileWatch;
+    CompFileWatchHandle lastFileWatchHandle;
 };
 
 int
@@ -587,10 +618,17 @@ allocateCorePrivateIndex (void);
 void
 freeCorePrivateIndex (int index);
 
+CompFileWatchHandle
+addFileWatch (const char	    *path,
+	      int		    mask,
+	      FileWatchCallBackProc callBack,
+	      void		    *closure);
+
+void
+removeFileWatch (CompFileWatchHandle handle);
+
 
 /* display.c */
-
-typedef int CompFileWatchHandle;
 
 #define COMP_DISPLAY_OPTION_ABI                              0
 #define COMP_DISPLAY_OPTION_ACTIVE_PLUGINS                   1
@@ -689,29 +727,6 @@ typedef Bool (*ImageToFileProc) (CompDisplay *display,
 				 int	     height,
 				 int	     stride,
 				 void	     *data);
-
-#define NOTIFY_CREATE_MASK (1 << 0)
-#define NOTIFY_DELETE_MASK (1 << 1)
-#define NOTIFY_MOVE_MASK   (1 << 2)
-#define NOTIFY_MODIFY_MASK (1 << 3)
-
-typedef void (*FileWatchCallBackProc) (const char *name,
-				       void	  *closure);
-
-typedef struct _CompFileWatch {
-    struct _CompFileWatch *next;
-    char		  *path;
-    int			  mask;
-    FileWatchCallBackProc callBack;
-    void		  *closure;
-    CompFileWatchHandle   handle;
-} CompFileWatch;
-
-typedef void (*FileWatchAddedProc) (CompDisplay	  *display,
-				    CompFileWatch *fileWatch);
-
-typedef void (*FileWatchRemovedProc) (CompDisplay   *display,
-				      CompFileWatch *fileWatch);
 
 #define MATCH_OP_AND_MASK (1 << 0)
 #define MATCH_OP_NOT_MASK (1 << 1)
@@ -961,8 +976,6 @@ struct _CompDisplay {
     CompOptionValue plugin;
     Bool	    dirtyPluginList;
 
-    CompFileWatch *fileWatch;
-
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     HandleEventProc       handleEvent;
@@ -970,9 +983,6 @@ struct _CompDisplay {
 
     FileToImageProc fileToImage;
     ImageToFileProc imageToFile;
-
-    FileWatchAddedProc   fileWatchAdded;
-    FileWatchRemovedProc fileWatchRemoved;
 
     MatchInitExpProc	       matchInitExp;
     MatchExpHandlerChangedProc matchExpHandlerChanged;
@@ -1021,25 +1031,6 @@ setDisplayOption (CompPlugin	  *plugin,
 		  CompDisplay     *display,
 		  const char      *name,
 		  CompOptionValue *value);
-
-CompFileWatchHandle
-addFileWatch (CompDisplay	    *display,
-	      const char	    *path,
-	      int		    mask,
-	      FileWatchCallBackProc callBack,
-	      void		    *closure);
-
-void
-removeFileWatch (CompDisplay	     *display,
-		 CompFileWatchHandle handle);
-
-void
-fileWatchAdded (CompDisplay   *display,
-		CompFileWatch *fileWatch);
-
-void
-fileWatchRemoved (CompDisplay   *display,
-		  CompFileWatch *fileWatch);
 
 void
 compLogMessage (CompDisplay  *d,

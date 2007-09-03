@@ -1154,7 +1154,7 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
 
     if (iniGetHomeDir (&homeDir))
     {
-	id->directoryWatch = addFileWatch (d, homeDir,
+	id->directoryWatch = addFileWatch (homeDir,
 					   NOTIFY_DELETE_MASK |
 					   NOTIFY_CREATE_MASK |
 					   NOTIFY_MODIFY_MASK,
@@ -1171,7 +1171,7 @@ iniFiniDisplay (CompPlugin *p, CompDisplay *d)
     INI_DISPLAY (d);
 
     if (id->directoryWatch)
-	removeFileWatch (d, id->directoryWatch);
+	removeFileWatch (id->directoryWatch);
 
     iniFreeFileData (d);
 

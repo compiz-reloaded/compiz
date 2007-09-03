@@ -23,6 +23,8 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#include <string.h>
+
 #include <compiz-core.h>
 
 CompCore core;
@@ -100,6 +102,18 @@ finiCorePluginForObject (CompPlugin *p,
 {
 }
 
+static void
+fileWatchAdded (CompCore      *core,
+		CompFileWatch *fileWatch)
+{
+}
+
+static void
+fileWatchRemoved (CompCore      *core,
+		  CompFileWatch *fileWatch)
+{
+}
+
 CompBool
 initCore (void)
 {
@@ -108,10 +122,74 @@ initCore (void)
     core.initPluginForObject = initCorePluginForObject;
     core.finiPluginForObject = finiCorePluginForObject;
 
+    core.fileWatchAdded   = fileWatchAdded;
+    core.fileWatchRemoved = fileWatchRemoved;
+
+    core.fileWatch	     = NULL;
+    core.lastFileWatchHandle = 1;
+
     return TRUE;
 }
 
 void
 finiCore (void)
 {
+}
+
+CompFileWatchHandle
+addFileWatch (const char	    *path,
+	      int		    mask,
+	      FileWatchCallBackProc callBack,
+	      void		    *closure)
+{
+    CompFileWatch *fileWatch;
+
+    fileWatch = malloc (sizeof (CompFileWatch));
+    if (!fileWatch)
+	return 0;
+
+    fileWatch->path	= strdup (path);
+    fileWatch->mask	= mask;
+    fileWatch->callBack = callBack;
+    fileWatch->closure  = closure;
+    fileWatch->handle   = core.lastFileWatchHandle++;
+
+    if (core.lastFileWatchHandle == MAXSHORT)
+	core.lastFileWatchHandle = 1;
+
+    fileWatch->next = core.fileWatch;
+    core.fileWatch = fileWatch;
+
+    (*core.fileWatchAdded) (&core, fileWatch);
+
+    return fileWatch->handle;
+}
+
+void
+removeFileWatch (CompFileWatchHandle handle)
+{
+    CompFileWatch *p = 0, *w;
+
+    for (w = core.fileWatch; w; w = w->next)
+    {
+	if (w->handle == handle)
+	    break;
+
+	p = w;
+    }
+
+    if (w)
+    {
+	if (p)
+	    p->next = w->next;
+	else
+	    core.fileWatch = w->next;
+
+	(*core.fileWatchRemoved) (&core, w);
+
+	if (w->path)
+	    free (w->path);
+
+	free (w);
+    }
 }
