@@ -310,6 +310,9 @@ CompBool
 compObjectForEachType (ObjectTypeCallBackProc proc,
 		       void		      *closure);
 
+const char *
+compObjectTypeName (CompObjectType type);
+
 #define ARRAY_SIZE(array)		 \
     (sizeof (array) / sizeof (array[0]))
 

@@ -108,3 +108,9 @@ compObjectForEachType (ObjectTypeCallBackProc proc,
 
     return TRUE;
 }
+
+const char *
+compObjectTypeName (CompObjectType type)
+{
+    return objectInfo[type].name;
+}
