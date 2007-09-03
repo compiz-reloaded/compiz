@@ -146,7 +146,7 @@ forEachDisplayObject (CompObject         *parent,
 		      void	         *closure)
 {
     if (parent->type == COMP_OBJECT_TYPE_CORE)
-	return (*proc) (&compDisplays->object, closure);
+	return (*proc) (&compDisplay.object, closure);
 
     return TRUE;
 }
@@ -2099,9 +2099,6 @@ addDisplay (const char *name)
     updateModifierMappings (d);
 
     d->setDisplayOptionForPlugin = setDisplayOptionForPlugin;
-
-    d->initPluginForDisplay = initPluginForDisplay;
-    d->finiPluginForDisplay = finiPluginForDisplay;
 
     d->handleEvent	 = handleEvent;
     d->handleCompizEvent = handleCompizEvent;

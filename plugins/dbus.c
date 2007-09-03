@@ -56,6 +56,12 @@ static CompMetadata dbusMetadata;
 #define DBUS_FILE_WATCH_HOME    2
 #define DBUS_FILE_WATCH_NUM     3
 
+static int corePrivateIndex;
+
+typedef struct _DbusCore {
+    InitPluginForObjectProc initPluginForObject;
+} DbusCore;
+
 static int displayPrivateIndex;
 
 typedef struct _DbusDisplay {
@@ -83,6 +89,12 @@ static DBusObjectPathVTable dbusMessagesVTable = {
     NULL, dbusHandleMessage, /* handler function */
     NULL, NULL, NULL, NULL
 };
+
+#define GET_DBUS_CORE(c)				      \
+    ((DbusCore *) (c)->object.privates[corePrivateIndex].ptr)
+
+#define DBUS_CORE(c)		     \
+    DbusCore *dc = GET_DBUS_CORE (c)
 
 #define GET_DBUS_DISPLAY(d)					    \
     ((DbusDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
@@ -2153,46 +2165,57 @@ dbusUnregisterPluginsForScreen (DBusConnection *connection,
 	dbusUnregisterPluginForScreen (connection, s, pl->value[nPlugins].s);
 }
 
-static Bool
+static CompBool
 dbusInitPluginForDisplay (CompPlugin  *p,
 			  CompDisplay *d)
 {
-    Bool status;
     char objectPath[256];
 
     DBUS_DISPLAY (d);
 
-    UNWRAP (dd, d, initPluginForDisplay);
-    status = (*d->initPluginForDisplay) (p, d);
-    WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
+    snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH,
+	      p->vTable->name, "allscreens");
+    dbusRegisterOptions (dd->connection, d, objectPath);
 
-    if (status)
-    {
-	snprintf (objectPath, 256, "%s/%s/%s", COMPIZ_DBUS_ROOT_PATH, p->vTable->name, "allscreens");
-	dbusRegisterOptions (dd->connection, d, objectPath);
-    }
-
-    return status;
+    return TRUE;
 }
 
 static Bool
 dbusInitPluginForScreen (CompPlugin *p,
 			 CompScreen *s)
 {
-    Bool status;
     char objectPath[256];
 
-    DBUS_SCREEN (s);
     DBUS_DISPLAY (s->display);
 
-    UNWRAP (ds, s, initPluginForScreen);
-    status = (*s->initPluginForScreen) (p, s);
-    WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
+    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
+	      p->vTable->name, s->screenNum);
+    dbusRegisterOptions (dd->connection, s->display, objectPath);
 
-    if (status)
+    return TRUE;
+}
+
+static CompBool
+dbusInitPluginForObject (CompPlugin *p,
+			 CompObject *o)
+{
+    CompBool status;
+
+    DBUS_CORE (&core);
+
+    UNWRAP (dc, &core, initPluginForObject);
+    status = (*core.initPluginForObject) (p, o);
+    WRAP (dc, &core, initPluginForObject, dbusInitPluginForObject);
+
+    if (status && p->vTable->getObjectOptions)
     {
-	snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH, p->vTable->name, s->screenNum);
-	dbusRegisterOptions (dd->connection, s->display, objectPath);
+	static InitPluginForObjectProc dispTab[] = {
+	    (InitPluginForObjectProc) 0, /* InitPluginForCore */
+	    (InitPluginForObjectProc) dbusInitPluginForDisplay,
+	    (InitPluginForObjectProc) dbusInitPluginForScreen
+	};
+
+	RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
     }
 
     return status;
@@ -2305,6 +2328,46 @@ dbusSendPluginsChangedSignal (const char *name,
 }
 
 static Bool
+dbusInitCore (CompPlugin *p,
+	      CompCore   *c)
+{
+    DbusCore *dc;
+
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
+	return FALSE;
+
+    dc = malloc (sizeof (DbusCore));
+    if (!dc)
+	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	free (dc);
+	return FALSE;
+    }
+
+    WRAP (dc, c, initPluginForObject, dbusInitPluginForObject);
+
+    c->object.privates[corePrivateIndex].ptr = dc;
+
+    return TRUE;
+}
+
+static void
+dbusFiniCore (CompPlugin *p,
+	      CompCore   *c)
+{
+    DBUS_CORE (c);
+
+    UNWRAP (dc, c, initPluginForObject);
+
+    freeDisplayPrivateIndex (displayPrivateIndex);
+
+    free (dc);
+}
+
+static Bool
 dbusInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
@@ -2313,9 +2376,6 @@ dbusInitDisplay (CompPlugin  *p,
     dbus_bool_t status;
     int		fd, ret, mask;
     char        *home, *plugindir, objectPath[256];
-
-    if (!checkPluginABI ("core", CORE_ABIVERSION))
-	return FALSE;
 
     dd = malloc (sizeof (DbusDisplay));
     if (!dd)
@@ -2426,7 +2486,6 @@ dbusInitDisplay (CompPlugin  *p,
     }
 
     WRAP (dd, d, setDisplayOptionForPlugin, dbusSetDisplayOptionForPlugin);
-    WRAP (dd, d, initPluginForDisplay, dbusInitPluginForDisplay);
 
     d->object.privates[displayPrivateIndex].ptr = dd;
 
@@ -2482,7 +2541,6 @@ dbusFiniDisplay (CompPlugin  *p,
     */
 
     UNWRAP (dd, d, setDisplayOptionForPlugin);
-    UNWRAP (dd, d, initPluginForDisplay);
 
     free (dd);
 }
@@ -2501,7 +2559,6 @@ dbusInitScreen (CompPlugin *p,
 	return FALSE;
 
     WRAP (ds, s, setScreenOptionForPlugin, dbusSetScreenOptionForPlugin);
-    WRAP (ds, s, initPluginForScreen, dbusInitPluginForScreen);
 
     s->object.privates[dd->screenPrivateIndex].ptr = ds;
 
@@ -2522,7 +2579,6 @@ dbusFiniScreen (CompPlugin *p,
     DBUS_SCREEN (s);
 
     UNWRAP (ds, s, setScreenOptionForPlugin);
-    UNWRAP (ds, s, initPluginForScreen);
 
     free (ds);
 }
@@ -2532,7 +2588,7 @@ dbusInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
-	(InitPluginObjectProc) 0, /* InitCore */
+	(InitPluginObjectProc) dbusInitCore,
 	(InitPluginObjectProc) dbusInitDisplay,
 	(InitPluginObjectProc) dbusInitScreen
     };
@@ -2545,7 +2601,7 @@ dbusFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) 0, /* FiniCore */
+	(FiniPluginObjectProc) dbusFiniCore,
 	(FiniPluginObjectProc) dbusFiniDisplay,
 	(FiniPluginObjectProc) dbusFiniScreen
     };
@@ -2560,8 +2616,8 @@ dbusInit (CompPlugin *p)
 					 0, 0, 0, 0))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    corePrivateIndex = allocateCorePrivateIndex ();
+    if (corePrivateIndex < 0)
     {
 	compFiniMetadata (&dbusMetadata);
 	return FALSE;
@@ -2573,7 +2629,7 @@ dbusInit (CompPlugin *p)
 static void
 dbusFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeCorePrivateIndex (displayPrivateIndex);
     compFiniMetadata (&dbusMetadata);
 }
 

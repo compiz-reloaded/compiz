@@ -432,6 +432,9 @@ main (int argc, char **argv)
 
     compAddMetadataFromFile (&coreMetadata, "core");
 
+    if (!initCore ())
+	return 1;
+
     if (!disableSm)
 	initSession (clientId);
 

@@ -35,6 +35,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <assert.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -1616,9 +1617,6 @@ addScreen (CompDisplay *display,
 
     s->setScreenOptionForPlugin = setScreenOptionForPlugin;
 
-    s->initPluginForScreen = initPluginForScreen;
-    s->finiPluginForScreen = finiPluginForScreen;
-
     s->preparePaintScreen	  = preparePaintScreen;
     s->donePaintScreen		  = donePaintScreen;
     s->paintScreen		  = paintScreen;
@@ -2128,7 +2126,8 @@ addScreen (CompDisplay *display,
 
     getDesktopHints (s);
 
-    screenInitPlugins (s);
+    /* TODO: bailout properly when objectInitPlugins fails */
+    assert (objectInitPlugins (&s->object));
 
     XQueryTree (dpy, s->root,
 		&rootReturn, &parentReturn,

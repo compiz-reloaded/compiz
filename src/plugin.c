@@ -295,119 +295,38 @@ ListPluginsProc  loaderListPlugins  = dlloaderListPlugins;
 
 typedef struct _InitObjectContext {
     CompPlugin *plugin;
-    CompObject *last;
+    CompObject *object;
 } InitObjectContext;
 
-CompBool
-initPluginForDisplay (CompPlugin  *p,
-		      CompDisplay *d)
-{
-    CompScreen *s, *failedScreen = d->screens;
-    Bool       status = TRUE;
-
-    for (s = d->screens; s; s = s->next)
-    {
-	if (p->vTable->initObject)
-	{
-	    if (!(*p->vTable->initObject) (p, &s->object))
-	    {
-		failedScreen = s;
-		status = FALSE;
-		break;
-	    }
-	}
-
-	if (!(*s->initPluginForScreen) (p, s))
-	{
-	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "InitScreenObject '%s' failed",
-			    p->vTable->name);
-
-	    if (p->vTable->finiObject)
-		(*p->vTable->finiObject) (p, &s->object);
-
-	    failedScreen = s;
-	    status = FALSE;
-	    break;
-	}
-    }
-
-    for (s = d->screens; s != failedScreen; s = s->next)
-    {
-	(*s->finiPluginForScreen) (p, s);
-
-	if (p->vTable->finiObject)
-	    (*p->vTable->finiObject) (p, &s->object);
-    }
-
-    return status;
-}
-
-void
-finiPluginForDisplay (CompPlugin  *p,
-		      CompDisplay *d)
-{
-    CompScreen  *s;
-
-    for (s = d->screens; s; s = s->next)
-    {
-	(*s->finiPluginForScreen) (p, s);
-
-	if (p->vTable->finiObject)
-	    (*p->vTable->finiObject) (p, &s->object);
-    }
-}
+typedef struct _InitObjectTypeContext {
+    InitObjectContext base;
+    CompObjectType    type;
+} InitObjectTypeContext;
 
 static CompBool
-initPluginForObject (CompObject *object,
-		     void       *closure)
-{
-    InitObjectContext *ctx = (InitObjectContext *) closure;
-
-    ctx->last = object;
-
-    return (*ctx->plugin->vTable->initObject) (ctx->plugin, object);
-}
+initObjectTree (CompObject *object,
+		void       *closure);
 
 static CompBool
-finiPluginForObject (CompObject *object,
-		     void       *closure)
+finiObjectTree (CompObject *object,
+		void       *closure);
+
+static CompBool
+initObjectsWithType (CompObjectType type,
+		     void	    *closure)
 {
-    InitObjectContext *ctx = (InitObjectContext *) closure;
+    InitObjectTypeContext *pCtx = (InitObjectTypeContext *) closure;
+    CompObject		  *object = pCtx->base.object;
+    InitObjectContext	  ctx;
 
-    if (ctx->last == object)
-	return FALSE;
+    pCtx->type = type;
 
-    (*ctx->plugin->vTable->finiObject) (ctx->plugin, object);
+    ctx.plugin = pCtx->base.plugin;
+    ctx.object = NULL;
 
-    return TRUE;
-}
-
-Bool
-initPluginForScreen (CompPlugin *p,
-		     CompScreen *s)
-{
-    InitObjectContext ctx;
-
-    if (!p->vTable->initObject)
-	return TRUE;
-
-    ctx.plugin = p;
-    ctx.last   = NULL;
-
-    if (!compObjectForEach (&s->object,
-			    COMP_OBJECT_TYPE_WINDOW,
-			    initPluginForObject,
-			    (void *) &ctx))
+    if (!compObjectForEach (object, type, initObjectTree, (void *) &ctx))
     {
-	compLogMessage (NULL, "core", CompLogLevelError,
-			"InitWindowObject '%s' failed",
-			p->vTable->name);
-
-	compObjectForEach (&s->object,
-			   COMP_OBJECT_TYPE_WINDOW,
-			   finiPluginForObject,
-			   (void *) &ctx);
+	compObjectForEach (object, type, finiObjectTree, (void *) &ctx);
 
 	return FALSE;
     }
@@ -415,23 +334,104 @@ initPluginForScreen (CompPlugin *p,
     return TRUE;
 }
 
-void
-finiPluginForScreen (CompPlugin *p,
-		     CompScreen *s)
+static CompBool
+finiObjectsWithType (CompObjectType type,
+		     void	    *closure)
 {
-    if (p->vTable->finiObject)
-    {
-	CompWindow *w = s->windows;
+    InitObjectTypeContext *pCtx = (InitObjectTypeContext *) closure;
+    CompObject		  *object = pCtx->base.object;
+    InitObjectContext	  ctx;
 
-	for (w = s->windows; w; w = w->next)
-	    (*p->vTable->finiObject) (p, &w->object);
+    /* pCtx->type is set to the object type that failed to be initialized */
+    if (pCtx->type == type)
+	return FALSE;
+
+    ctx.plugin = pCtx->base.plugin;
+    ctx.object = NULL;
+
+    compObjectForEach (object, type, finiObjectTree, (void *) &ctx);
+
+    return TRUE;
+}
+
+static CompBool
+initObjectTree (CompObject *object,
+		void       *closure)
+{
+    InitObjectContext     *pCtx = (InitObjectContext *) closure;
+    CompPlugin		  *p = pCtx->plugin;
+    InitObjectTypeContext ctx;
+
+    pCtx->object = object;
+
+    if (p->vTable->initObject)
+    {
+	if (!(*p->vTable->initObject) (p, object))
+	{
+	    compLogMessage (NULL, p->vTable->name, CompLogLevelError,
+			    "InitObject failed");
+	    return FALSE;
+	}
     }
+
+    ctx.base.plugin = p;
+    ctx.base.object = object;
+    ctx.type        = 0;
+
+    /* initialize children */
+    if (!compObjectForEachType (initObjectsWithType, (void *) &ctx))
+    {
+	compObjectForEachType (finiObjectsWithType, (void *) &ctx);
+
+	if (p->vTable->initObject && p->vTable->finiObject)
+	    (*p->vTable->finiObject) (p, object);
+
+	return FALSE;
+    }
+
+    if (!(*core.initPluginForObject) (p, object))
+    {
+	compObjectForEachType (finiObjectsWithType, (void *) &ctx);
+
+	if (p->vTable->initObject && p->vTable->finiObject)
+	    (*p->vTable->finiObject) (p, object);
+
+	return FALSE;
+    }
+
+    return TRUE;
+}
+
+static CompBool
+finiObjectTree (CompObject *object,
+		void       *closure)
+{
+    InitObjectContext     *pCtx = (InitObjectContext *) closure;
+    CompPlugin		  *p = pCtx->plugin;
+    InitObjectTypeContext ctx;
+
+    /* pCtx->object is set to the object that failed to be initialized */
+    if (pCtx->object == object)
+	return FALSE;
+
+    ctx.base.plugin = p;
+    ctx.base.object = object;
+    ctx.type        = ~0;
+
+    compObjectForEachType (finiObjectsWithType, (void *) &ctx);
+
+    if (p->vTable->initObject && p->vTable->finiObject)
+	(*p->vTable->finiObject) (p, object);
+
+    (*core.finiPluginForObject) (p, object);
+
+    return TRUE;
 }
 
 static Bool
 initPlugin (CompPlugin *p)
 {
-    CompDisplay *d = compDisplays;
+    InitObjectContext ctx;
 
     if (!(*p->vTable->init) (p))
     {
@@ -440,29 +440,13 @@ initPlugin (CompPlugin *p)
 	return FALSE;
     }
 
-    if (d)
+    ctx.plugin = p;
+    ctx.object = NULL;
+
+    if (!initObjectTree (&core.object, (void *) &ctx))
     {
-	if (p->vTable->initObject)
-	{
-	    if (!(*p->vTable->initObject) (p, &d->object))
-	    {
-		(*p->vTable->fini) (p);
-
-		return FALSE;
-
-	    }
-	}
-
-	if (!(*d->initPluginForDisplay) (p, d))
-	{
-	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "InitDisplayObject '%s' failed",
-			    p->vTable->name);
-
-	    (*p->vTable->fini) (p);
-
-	    return FALSE;
-	}
+	(*p->vTable->fini) (p);
+	return FALSE;
     }
 
     return TRUE;
@@ -471,24 +455,24 @@ initPlugin (CompPlugin *p)
 static void
 finiPlugin (CompPlugin *p)
 {
-    CompDisplay *d = compDisplays;
+    InitObjectContext ctx;
 
-    if (d)
-    {
-	(*d->finiPluginForDisplay) (p, d);
+    ctx.plugin = p;
+    ctx.object = NULL;
 
-	if (p->vTable->finiObject)
-	    (*p->vTable->finiObject) (p, &d->object);
-    }
+    finiObjectTree (&core.object, (void *) &ctx);
 
     (*p->vTable->fini) (p);
 }
 
-void
-screenInitPlugins (CompScreen *s)
+CompBool
+objectInitPlugins (CompObject *o)
 {
-    CompPlugin *p;
-    int	       i, j = 0;
+    InitObjectContext ctx;
+    CompPlugin	      *p;
+    int		      i, j = 0;
+
+    ctx.object = NULL;
 
     for (p = plugins; p; p = p->next)
 	j++;
@@ -499,44 +483,37 @@ screenInitPlugins (CompScreen *s)
 	for (p = plugins; i < j; p = p->next)
 	    i++;
 
-	if (p->vTable->initObject)
-	    (*s->initPluginForScreen) (p, s);
+	ctx.plugin = p;
+
+	if (!initObjectTree (o, (void *) &ctx))
+	{
+	    for (p = p->next; p; p = p->next)
+	    {
+		ctx.plugin = p;
+
+		finiObjectTree (o, (void *) &ctx);
+	    }
+
+	    return FALSE;
+	}
     }
+
+    return TRUE;
 }
 
 void
-screenFiniPlugins (CompScreen *s)
+objectFiniPlugins (CompObject *o)
 {
-    CompPlugin *p;
+    InitObjectContext ctx;
+    CompPlugin	      *p;
+
+    ctx.object = NULL;
 
     for (p = plugins; p; p = p->next)
     {
-	if (p->vTable->finiObject)
-	    (*s->finiPluginForScreen) (p, s);
-    }
-}
+	ctx.plugin = p;
 
-void
-windowInitPlugins (CompWindow *w)
-{
-    CompPlugin *p;
-
-    for (p = plugins; p; p = p->next)
-    {
-	if (p->vTable->initObject)
-	    (*p->vTable->initObject) (p, &w->object);
-    }
-}
-
-void
-windowFiniPlugins (CompWindow *w)
-{
-    CompPlugin *p;
-
-    for (p = plugins; p; p = p->next)
-    {
-	if (p->vTable->finiObject)
-	    (*p->vTable->finiObject) (p, &w->object);
+	finiObjectTree (o, (void *) &ctx);
     }
 }
 

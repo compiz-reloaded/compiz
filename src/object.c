@@ -90,3 +90,16 @@ compObjectForEach (CompObject	      *parent,
 {
     return (*objectInfo[type].forEachObject) (parent, proc, closure);
 }
+
+CompBool
+compObjectForEachType (ObjectTypeCallBackProc proc,
+		       void		      *closure)
+{
+    int i;
+
+    for (i = 0; i < sizeof (objectInfo) / sizeof (objectInfo[0]); i++)
+	if (!(*proc) (i, closure))
+	    return FALSE;
+
+    return TRUE;
+}

@@ -43,6 +43,12 @@ static CompMetadata gconfMetadata;
 int gconf_value_compare (const GConfValue *value_a,
 			 const GConfValue *value_b);
 
+static int corePrivateIndex;
+
+typedef struct _GConfCore {
+    InitPluginForObjectProc initPluginForObject;
+} GConfCore;
+
 static int displayPrivateIndex;
 
 typedef struct _GConfDisplay {
@@ -60,6 +66,12 @@ typedef struct _GConfScreen {
     InitPluginForScreenProc      initPluginForScreen;
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 } GConfScreen;
+
+#define GET_GCONF_CORE(c)				       \
+    ((GConfCore *) (c)->object.privates[corePrivateIndex].ptr)
+
+#define GCONF_CORE(c)		       \
+    GConfCore *gc = GET_GCONF_CORE (c)
 
 #define GET_GCONF_DISPLAY(d)					     \
     ((GConfDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
@@ -595,56 +607,58 @@ gconfSetScreenOptionForPlugin (CompScreen      *s,
     return status;
 }
 
-static Bool
+static CompBool
 gconfInitPluginForDisplay (CompPlugin  *p,
 			   CompDisplay *d)
 {
-    Bool status;
+    CompOption *option;
+    int	       nOption;
 
-    GCONF_DISPLAY (d);
+    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+    while (nOption--)
+	gconfGetDisplayOption (d, option++, p->vTable->name);
 
-    UNWRAP (gd, d, initPluginForDisplay);
-    status = (*d->initPluginForDisplay) (p, d);
-    WRAP (gd, d, initPluginForDisplay, gconfInitPluginForDisplay);
-
-    if (status && p->vTable->getObjectOptions)
-    {
-	CompOption *option;
-	int	   nOption;
-
-	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
-	while (nOption--)
-	    gconfGetDisplayOption (d, option++, p->vTable->name);
-    }
-
-    return status;
+    return TRUE;
 }
 
-static Bool
+static CompBool
 gconfInitPluginForScreen (CompPlugin *p,
 			  CompScreen *s)
 {
-    Bool status;
+    CompOption *option;
+    int	       nOption;
+    gchar      *screen = g_strdup_printf ("screen%d", s->screenNum);
 
-    GCONF_SCREEN (s);
+    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
+    while (nOption--)
+	gconfGetScreenOption (s, option++, p->vTable->name, screen);
 
-    UNWRAP (gs, s, initPluginForScreen);
-    status = (*s->initPluginForScreen) (p, s);
-    WRAP (gs, s, initPluginForScreen, gconfInitPluginForScreen);
+    g_free (screen);
+
+    return TRUE;
+}
+
+static CompBool
+gconfInitPluginForObject (CompPlugin *p,
+			  CompObject *o)
+{
+    CompBool status;
+
+    GCONF_CORE (&core);
+
+    UNWRAP (gc, &core, initPluginForObject);
+    status = (*core.initPluginForObject) (p, o);
+    WRAP (gc, &core, initPluginForObject, gconfInitPluginForObject);
 
     if (status && p->vTable->getObjectOptions)
     {
-	CompOption *option;
-	int	   nOption;
-	gchar      *screen;
+	static InitPluginForObjectProc dispTab[] = {
+	    (InitPluginForObjectProc) 0, /* InitPluginForCore */
+	    (InitPluginForObjectProc) gconfInitPluginForDisplay,
+	    (InitPluginForObjectProc) gconfInitPluginForScreen
+	};
 
-	screen = g_strdup_printf ("screen%d", s->screenNum);
-
-	option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
-	while (nOption--)
-	    gconfGetScreenOption (s, option++, p->vTable->name, screen);
-
-	g_free (screen);
+	RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
     }
 
     return status;
@@ -802,13 +816,50 @@ gconfSendGLibNotify (CompDisplay *d)
 }
 
 static Bool
+gconfInitCore (CompPlugin *p,
+	       CompCore   *c)
+{
+    GConfCore *gc;
+
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
+	return FALSE;
+
+    gc = malloc (sizeof (GConfCore));
+    if (!gc)
+	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	free (gc);
+	return FALSE;
+    }
+
+    WRAP (gc, c, initPluginForObject, gconfInitPluginForObject);
+
+    c->object.privates[corePrivateIndex].ptr = gc;
+
+    return TRUE;
+}
+
+static void
+gconfFiniCore (CompPlugin *p,
+	       CompCore   *c)
+{
+    GCONF_CORE (c);
+
+    UNWRAP (gc, c, initPluginForObject);
+
+    freeDisplayPrivateIndex (displayPrivateIndex);
+
+    free (gc);
+}
+
+static Bool
 gconfInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     GConfDisplay *gd;
-
-    if (!checkPluginABI ("core", CORE_ABIVERSION))
-	return FALSE;
 
     gd = malloc (sizeof (GConfDisplay));
     if (!gd)
@@ -830,7 +881,6 @@ gconfInitDisplay (CompPlugin  *p,
 
     gd->reloadHandle = compAddTimeout (0, gconfReload, (void *) d);
 
-    WRAP (gd, d, initPluginForDisplay, gconfInitPluginForDisplay);
     WRAP (gd, d, setDisplayOptionForPlugin, gconfSetDisplayOptionForPlugin);
 
     d->object.privates[displayPrivateIndex].ptr = gd;
@@ -854,7 +904,6 @@ gconfFiniDisplay (CompPlugin  *p,
 
     g_object_unref (gd->client);
 
-    UNWRAP (gd, d, initPluginForDisplay);
     UNWRAP (gd, d, setDisplayOptionForPlugin);
 
     freeScreenPrivateIndex (d, gd->screenPrivateIndex);
@@ -874,7 +923,6 @@ gconfInitScreen (CompPlugin *p,
     if (!gs)
 	return FALSE;
 
-    WRAP (gs, s, initPluginForScreen, gconfInitPluginForScreen);
     WRAP (gs, s, setScreenOptionForPlugin, gconfSetScreenOptionForPlugin);
 
     s->object.privates[gd->screenPrivateIndex].ptr = gs;
@@ -888,7 +936,6 @@ gconfFiniScreen (CompPlugin *p,
 {
     GCONF_SCREEN (s);
 
-    UNWRAP (gs, s, initPluginForScreen);
     UNWRAP (gs, s, setScreenOptionForPlugin);
 
     free (gs);
@@ -899,7 +946,7 @@ gconfInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
-	(InitPluginObjectProc) 0, /* InitCore */
+	(InitPluginObjectProc) gconfInitCore,
 	(InitPluginObjectProc) gconfInitDisplay,
 	(InitPluginObjectProc) gconfInitScreen
     };
@@ -912,7 +959,7 @@ gconfFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) 0, /* FiniCore */
+	(FiniPluginObjectProc) gconfFiniCore,
 	(FiniPluginObjectProc) gconfFiniDisplay,
 	(FiniPluginObjectProc) gconfFiniScreen
     };
@@ -927,8 +974,8 @@ gconfInit (CompPlugin *p)
 					 0, 0, 0, 0))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    corePrivateIndex = allocateCorePrivateIndex ();
+    if (corePrivateIndex < 0)
     {
 	compFiniMetadata (&gconfMetadata);
 	return FALSE;
@@ -942,7 +989,7 @@ gconfInit (CompPlugin *p)
 static void
 gconfFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeCorePrivateIndex (corePrivateIndex);
     compFiniMetadata (&gconfMetadata);
 }
 

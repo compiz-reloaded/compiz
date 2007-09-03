@@ -40,6 +40,10 @@
 #define CORE_NAME           "general"
 #define FILE_SUFFIX         ".conf"
 
+#define GET_INI_CORE(c) \
+	((IniCore *) (c)->object.privates[corePrivateIndex].ptr)
+#define INI_CORE(c) \
+	IniCore *ic = GET_INI_CORE (c)
 #define GET_INI_DISPLAY(d) \
 	((IniDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 #define INI_DISPLAY(d) \
@@ -51,6 +55,7 @@
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+static int corePrivateIndex;
 static int displayPrivateIndex;
 
 static CompMetadata iniMetadata;
@@ -76,6 +81,13 @@ struct _IniFileData {
 };
 
 /*
+ * IniCore
+ */
+typedef struct _IniCore {
+    InitPluginForObjectProc initPluginForObject;
+} IniCore;
+
+/*
  * IniDisplay
  */
 typedef struct _IniDisplay {
@@ -83,7 +95,6 @@ typedef struct _IniDisplay {
 
     CompFileWatchHandle		  directoryWatch;
 
-    InitPluginForDisplayProc      initPluginForDisplay;
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     IniFileData			*fileData;
@@ -93,8 +104,7 @@ typedef struct _IniDisplay {
  * IniScreeen
  */
 typedef struct _IniScreen {
-    InitPluginForScreenProc        initPluginForScreen;
-    SetScreenOptionForPluginProc   setScreenOptionForPlugin;
+    SetScreenOptionForPluginProc setScreenOptionForPlugin;
 } IniScreen;
 
 static IniFileData *
@@ -981,49 +991,41 @@ static Bool
 iniInitPluginForDisplay (CompPlugin  *p,
 			 CompDisplay *d)
 {
-    Bool status;
+    iniLoadOptions (d, -1, p->vTable->name);
 
-    INI_DISPLAY (d);
-
-    UNWRAP (id, d, initPluginForDisplay);
-    status = (*d->initPluginForDisplay) (p, d);
-    WRAP (id, d, initPluginForDisplay, iniInitPluginForDisplay);
-
-    if (status && p->vTable->getObjectOptions)
-    {
-	iniLoadOptions (d, -1, p->vTable->name);
-    }
-    else if (!status)
-    {
-	compLogMessage (d, "ini", CompLogLevelWarn,
-			"Plugin '%s' failed to initialize " \
-			"display settings", p->vTable->name);
-    }
-
-    return status;
+    return TRUE;
 }
 
 static Bool
 iniInitPluginForScreen (CompPlugin *p,
 			CompScreen *s)
 {
-    Bool status;
+    iniLoadOptions (s->display, s->screenNum, p->vTable->name);
 
-    INI_SCREEN (s);
+    return TRUE;
+}
 
-    UNWRAP (is, s, initPluginForScreen);
-    status = (*s->initPluginForScreen) (p, s);
-    WRAP (is, s, initPluginForScreen, iniInitPluginForScreen);
+static CompBool
+iniInitPluginForObject (CompPlugin *p,
+			CompObject *o)
+{
+    CompBool status;
+
+    INI_CORE (&core);
+
+    UNWRAP (ic, &core, initPluginForObject);
+    status = (*core.initPluginForObject) (p, o);
+    WRAP (ic, &core, initPluginForObject, iniInitPluginForObject);
 
     if (status && p->vTable->getObjectOptions)
     {
-	iniLoadOptions (s->display, s->screenNum, p->vTable->name);
-    }
-    else if (!status)
-    {
-	compLogMessage (s->display, "ini", CompLogLevelWarn,
-			"Plugin '%s' failed to initialize " \
-			"screen %d settings", p->vTable->name, s->screenNum);
+	static InitPluginForObjectProc dispTab[] = {
+	    (InitPluginForObjectProc) 0, /* InitPluginForCore */
+	    (InitPluginForObjectProc) iniInitPluginForDisplay,
+	    (InitPluginForObjectProc) iniInitPluginForScreen
+	};
+
+	RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
     }
 
     return status;
@@ -1082,6 +1084,46 @@ iniSetScreenOptionForPlugin (CompScreen      *s,
 }
 
 static Bool
+iniInitCore (CompPlugin *p,
+	     CompCore   *c)
+{
+    IniCore *ic;
+
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
+	return FALSE;
+
+    ic = malloc (sizeof (IniCore));
+    if (!ic)
+	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	free (ic);
+	return FALSE;
+    }
+
+    WRAP (ic, c, initPluginForObject, iniInitPluginForObject);
+
+    c->object.privates[corePrivateIndex].ptr = ic;
+
+    return TRUE;
+}
+
+static void
+iniFiniCore (CompPlugin *p,
+	     CompCore   *c)
+{
+    INI_CORE (c);
+
+    UNWRAP (ic, c, initPluginForObject);
+
+    freeDisplayPrivateIndex (displayPrivateIndex);
+
+    free (ic);
+}
+
+static Bool
 iniInitDisplay (CompPlugin *p, CompDisplay *d)
 {
     IniDisplay *id;
@@ -1104,7 +1146,6 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
     id->fileData = NULL;
     id->directoryWatch = 0;
 
-    WRAP (id, d, initPluginForDisplay, iniInitPluginForDisplay);
     WRAP (id, d, setDisplayOptionForPlugin, iniSetDisplayOptionForPlugin);
 
     d->object.privates[displayPrivateIndex].ptr = id;
@@ -1136,7 +1177,6 @@ iniFiniDisplay (CompPlugin *p, CompDisplay *d)
 
     freeScreenPrivateIndex (d, id->screenPrivateIndex);
 
-    UNWRAP (id, d, initPluginForDisplay);
     UNWRAP (id, d, setDisplayOptionForPlugin);
 
     free (id);
@@ -1155,7 +1195,6 @@ iniInitScreen (CompPlugin *p, CompScreen *s)
 
     s->object.privates[id->screenPrivateIndex].ptr = is;
 
-    WRAP (is, s, initPluginForScreen, iniInitPluginForScreen);
     WRAP (is, s, setScreenOptionForPlugin, iniSetScreenOptionForPlugin);
 
     iniLoadOptions (s->display, s->screenNum, NULL);
@@ -1168,7 +1207,6 @@ iniFiniScreen (CompPlugin *p, CompScreen *s)
 {
     INI_SCREEN (s);
 
-    UNWRAP (is, s, initPluginForScreen);
     UNWRAP (is, s, setScreenOptionForPlugin);
 
     free (is);
@@ -1179,7 +1217,7 @@ iniInitObject (CompPlugin *p,
 	       CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
-	(InitPluginObjectProc) 0, /* InitCore */
+	(InitPluginObjectProc) iniInitCore,
 	(InitPluginObjectProc) iniInitDisplay,
 	(InitPluginObjectProc) iniInitScreen
     };
@@ -1192,7 +1230,7 @@ iniFiniObject (CompPlugin *p,
 	       CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) 0, /* FiniCore */
+	(FiniPluginObjectProc) iniFiniCore,
 	(FiniPluginObjectProc) iniFiniDisplay,
 	(FiniPluginObjectProc) iniFiniScreen
     };

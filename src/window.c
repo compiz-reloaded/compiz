@@ -34,6 +34,7 @@
 #include <strings.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <assert.h>
 
 #include <compiz-core.h>
 
@@ -2199,7 +2200,8 @@ addWindow (CompScreen *screen,
 	}
     }
 
-    windowInitPlugins (w);
+    /* TODO: bailout properly when objectInitPlugins fails */
+    assert (objectInitPlugins (&w->object));
 
     (*w->screen->windowAddNotify) (w);
 
@@ -2237,7 +2239,7 @@ removeWindow (CompWindow *w)
 	    showOutputWindow (w->screen);
     }
 
-    windowFiniPlugins (w);
+    objectInitPlugins (&w->object);
 
     freeWindow (w);
 }

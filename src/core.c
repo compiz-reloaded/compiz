@@ -25,7 +25,7 @@
 
 #include <compiz-core.h>
 
-static CompCore core;
+CompCore core;
 
 static char *corePrivateIndices = 0;
 static int  corePrivateLen = 0;
@@ -69,10 +69,38 @@ forEachCoreObject (CompObject         *parent,
     return TRUE;
 }
 
+int
+allocateCorePrivateIndex (void)
+{
+    return compObjectAllocatePrivateIndex (NULL, COMP_OBJECT_TYPE_CORE);
+}
+
+void
+freeCorePrivateIndex (int index)
+{
+    compObjectFreePrivateIndex (NULL, COMP_OBJECT_TYPE_CORE, index);
+}
+
+static CompBool
+initCorePluginForObject (CompPlugin *p,
+			 CompObject *o)
+{
+    return TRUE;
+}
+
+static void
+finiCorePluginForObject (CompPlugin *p,
+			 CompObject *o)
+{
+}
+
 CompBool
 initCore (void)
 {
     compObjectInit (&core.object, 0, COMP_OBJECT_TYPE_CORE);
+
+    core.initPluginForObject = initCorePluginForObject;
+    core.finiPluginForObject = finiCorePluginForObject;
 
     return TRUE;
 }

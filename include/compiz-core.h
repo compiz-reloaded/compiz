@@ -224,6 +224,7 @@ extern int lastPointerY;
 extern int pointerX;
 extern int pointerY;
 
+extern CompCore     core;
 extern CompMetadata coreMetadata;
 
 #define RESTRICT_VALUE(value, min, max)				     \
@@ -279,6 +280,9 @@ struct _CompObject {
 typedef CompBool (*ObjectCallBackProc) (CompObject *object,
 					void       *closure);
 
+typedef CompBool (*ObjectTypeCallBackProc) (CompObjectType type,
+					    void	   *closure);
+
 void
 compObjectInit (CompObject     *object,
 		CompPrivate    *privates,
@@ -301,6 +305,10 @@ compObjectForEach (CompObject	      *parent,
 		   CompObjectType     type,
 		   ObjectCallBackProc proc,
 		   void		      *closure);
+
+CompBool
+compObjectForEachType (ObjectTypeCallBackProc proc,
+		       void		      *closure);
 
 #define ARRAY_SIZE(array)		 \
     (sizeof (array) / sizeof (array[0]))
@@ -534,8 +542,16 @@ isActionOption (CompOption *option);
 
 /* core.c */
 
+typedef CompBool (*InitPluginForObjectProc) (CompPlugin *plugin,
+					     CompObject *object);
+typedef void (*FiniPluginForObjectProc) (CompPlugin *plugin,
+					 CompObject *object);
+
 struct _CompCore {
     CompObject object;
+
+    InitPluginForObjectProc initPluginForObject;
+    FiniPluginForObjectProc finiPluginForObject;
 };
 
 int
@@ -555,6 +571,12 @@ initCore (void);
 
 void
 finiCore (void);
+
+int
+allocateCorePrivateIndex (void);
+
+void
+freeCorePrivateIndex (int index);
 
 
 /* display.c */
@@ -933,9 +955,6 @@ struct _CompDisplay {
     CompFileWatch *fileWatch;
 
     SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
-
-    InitPluginForDisplayProc initPluginForDisplay;
-    FiniPluginForDisplayProc finiPluginForDisplay;
 
     HandleEventProc       handleEvent;
     HandleCompizEventProc handleCompizEvent;
@@ -2007,9 +2026,6 @@ struct _CompScreen {
 
     SetScreenOptionForPluginProc setScreenOptionForPlugin;
 
-    InitPluginForScreenProc initPluginForScreen;
-    FiniPluginForScreenProc finiPluginForScreen;
-
     PreparePaintScreenProc	   preparePaintScreen;
     DonePaintScreenProc		   donePaintScreen;
     PaintScreenProc		   paintScreen;
@@ -2893,33 +2909,11 @@ struct _CompPlugin {
     CompPluginVTable *vTable;
 };
 
-Bool
-initPluginForDisplay (CompPlugin  *p,
-		      CompDisplay *d);
+CompBool
+objectInitPlugins (CompObject *o);
 
 void
-finiPluginForDisplay (CompPlugin  *p,
-		      CompDisplay *d);
-
-Bool
-initPluginForScreen (CompPlugin *p,
-		     CompScreen *s);
-
-void
-finiPluginForScreen (CompPlugin *p,
-		     CompScreen *s);
-
-void
-screenInitPlugins (CompScreen *s);
-
-void
-screenFiniPlugins (CompScreen *s);
-
-void
-windowInitPlugins (CompWindow *w);
-
-void
-windowFiniPlugins (CompWindow *w);
+objectFiniPlugins (CompObject *o);
 
 CompPlugin *
 findActivePlugin (const char *name);
