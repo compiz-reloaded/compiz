@@ -111,6 +111,18 @@ forEachScreenObject (CompObject	        *parent,
     return TRUE;
 }
 
+char *
+nameScreenObject (CompObject *object)
+{
+    char tmp[256];
+
+    CORE_SCREEN (object);
+
+    snprintf (tmp, 256, "%d", s->screenNum);
+
+    return strdup (tmp);
+}
+
 int
 allocateScreenPrivateIndex (CompDisplay *display)
 {

@@ -313,6 +313,9 @@ compObjectForEachType (ObjectTypeCallBackProc proc,
 const char *
 compObjectTypeName (CompObjectType type);
 
+char *
+compObjectName (CompObject *object);
+
 #define ARRAY_SIZE(array)		 \
     (sizeof (array) / sizeof (array[0]))
 
@@ -568,6 +571,9 @@ CompBool
 forEachCoreObject (CompObject	     *parent,
 		   ObjectCallBackProc proc,
 		   void		     *closure);
+
+char *
+nameCoreObject (CompObject *object);
 
 CompBool
 initCore (void);
@@ -995,6 +1001,9 @@ CompBool
 forEachDisplayObject (CompObject	 *parent,
 		      ObjectCallBackProc proc,
 		      void		 *closure);
+
+char *
+nameDisplayObject (CompObject *object);
 
 int
 allocateDisplayPrivateIndex (void);
@@ -2084,6 +2093,9 @@ forEachScreenObject (CompObject	        *parent,
 		     ObjectCallBackProc proc,
 		     void	        *closure);
 
+char *
+nameScreenObject (CompObject *object);
+
 int
 allocateScreenPrivateIndex (CompDisplay *display);
 
@@ -2523,6 +2535,9 @@ CompBool
 forEachWindowObject (CompObject	        *parent,
 		     ObjectCallBackProc proc,
 		     void	        *closure);
+
+char *
+nameWindowObject (CompObject *object);
 
 int
 allocateWindowPrivateIndex (CompScreen *screen);

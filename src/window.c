@@ -112,6 +112,18 @@ forEachWindowObject (CompObject	        *parent,
     return TRUE;
 }
 
+char *
+nameWindowObject (CompObject *object)
+{
+    char tmp[256];
+
+    CORE_WINDOW (object);
+
+    snprintf (tmp, 256, "0x%lu", w->id);
+
+    return strdup (tmp);
+}
+
 int
 allocateWindowPrivateIndex (CompScreen *screen)
 {

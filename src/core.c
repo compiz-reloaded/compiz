@@ -69,6 +69,12 @@ forEachCoreObject (CompObject         *parent,
     return TRUE;
 }
 
+char *
+nameCoreObject (CompObject *object)
+{
+    return NULL;
+}
+
 int
 allocateCorePrivateIndex (void)
 {

@@ -151,6 +151,12 @@ forEachDisplayObject (CompObject         *parent,
     return TRUE;
 }
 
+char *
+nameDisplayObject (CompObject *object)
+{
+    return NULL;
+}
+
 int
 allocateDisplayPrivateIndex (void)
 {
