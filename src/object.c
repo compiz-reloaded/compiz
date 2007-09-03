@@ -35,23 +35,28 @@ typedef CompBool (*ForEachObjectProc) (CompObject	  *parent,
 				       void		  *closure);
 
 struct _CompObjectInfo {
+    const char			*name;
     AllocObjectPrivateIndexProc allocPrivateIndex;
     FreeObjectPrivateIndexProc  freePrivateIndex;
     ForEachObjectProc		forEachObject;
 } objectInfo[] = {
     {
+	"core",
 	allocCoreObjectPrivateIndex,
 	freeCoreObjectPrivateIndex,
 	forEachCoreObject
     }, {
+	"display",
 	allocDisplayObjectPrivateIndex,
 	freeDisplayObjectPrivateIndex,
 	forEachDisplayObject
     }, {
+	"screen",
 	allocScreenObjectPrivateIndex,
 	freeScreenObjectPrivateIndex,
 	forEachScreenObject
     }, {
+	"window",
 	allocWindowObjectPrivateIndex,
 	freeWindowObjectPrivateIndex,
 	forEachWindowObject
