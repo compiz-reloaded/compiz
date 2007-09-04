@@ -21,20 +21,31 @@
 		<_long>Rotate left</_long>
 		<default>&lt;Control&gt;&lt;Alt&gt;Left</default>
 	    </option>
-	    <option name="rotate_right_key" type="key">
+	    <option name="rotate_left_button" type="button">
+		<_short>Rotate Left</_short>
+		<_long>Rotate left</_long>
+	    </option>
+	    <option name="rotate_right_button" type="button">
 		<_short>Rotate Right</_short>
 		<_long>Rotate right</_long>
-		<default>&lt;Control&gt;&lt;Alt&gt;Right</default>
 	    </option>
 	    <option name="rotate_left_window_key" type="key">
 		<_short>Rotate Left with Window</_short>
 		<_long>Rotate left and bring active window along</_long>
 		<default>&lt;Control&gt;&lt;Alt&gt;&lt;Shift&gt;Left</default>
 	    </option>
+	    <option name="rotate_left_window_button" type="button">
+		<_short>Rotate Left with Window</_short>
+		<_long>Rotate left and bring active window along</_long>
+	    </option>
 	    <option name="rotate_right_window_key" type="key">
 		<_short>Rotate Right with Window</_short>
 		<_long>Rotate right and bring active window along</_long>
 		<default>&lt;Control&gt;&lt;Alt&gt;&lt;Shift&gt;Right</default>
+	    </option>
+	    <option name="rotate_right_window_button" type="button">
+		<_short>Rotate Right with Window</_short>
+		<_long>Rotate right and bring active window along</_long>
 	    </option>
 	    <option name="edge_flip_pointer" type="bool">
 		<_short>Edge Flip Pointer</_short>
