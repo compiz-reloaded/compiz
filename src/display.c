@@ -98,8 +98,6 @@ int pointerY     = 0;
 
 CompDisplay *compDisplays = 0;
 
-static CompDisplay compDisplay;
-
 static char *displayPrivateIndices = 0;
 static int  displayPrivateLen = 0;
 
@@ -144,7 +142,15 @@ forEachDisplayObject (CompObject         *parent,
 		      void	         *closure)
 {
     if (parent->type == COMP_OBJECT_TYPE_CORE)
-	return (*proc) (&compDisplay.base, closure);
+    {
+	CompDisplay *d;
+
+	for (d = core.displays; d; d = d->next)
+	{
+	    if (!(*proc) (&d->base, closure))
+		return FALSE;
+	}
+    }
 
     return TRUE;
 }
@@ -162,7 +168,7 @@ findDisplayObject (CompObject *parent,
     if (parent->type == COMP_OBJECT_TYPE_CORE)
     {
 	if (!name || !name[0])
-	    return &compDisplay.base;
+	    return &core.displays->base;
     }
 
     return NULL;
@@ -1986,7 +1992,9 @@ addDisplay (const char *name)
     int		xkbOpcode;
     int		firstScreen, lastScreen;
 
-    d = &compDisplay;
+    d = malloc (sizeof (CompDisplay));
+    if (!d)
+	return FALSE;
 
     if (displayPrivateLen)
     {
