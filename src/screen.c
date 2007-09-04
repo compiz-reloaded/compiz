@@ -1473,6 +1473,15 @@ initWindowWalker (CompScreen *screen,
     walker->prev  = walkPrev;
 }
 
+static void
+freeScreen (CompScreen *s)
+{
+    if (s->base.privates)
+	free (s->base.privates);
+
+    free (s);
+}
+
 Bool
 addScreen (CompDisplay *display,
 	   int	       screenNum,
@@ -2209,6 +2218,26 @@ addScreen (CompDisplay *display,
     s->filter[WINDOW_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;
 
     return TRUE;
+}
+
+void
+removeScreen (CompScreen *s)
+{
+    CompDisplay *d = s->display;
+    CompScreen  *p;
+
+    for (p = d->screens; p; p = p->next)
+	if (p->next == s)
+	    break;
+
+    if (p)
+	p->next = s->next;
+    else
+	d->screens = NULL;
+
+    objectFiniPlugins (&s->base);
+
+    freeScreen (s);
 }
 
 void

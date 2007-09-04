@@ -2138,6 +2138,9 @@ addScreen (CompDisplay *display,
 	   Time	       wmSnTimestamp);
 
 void
+removeScreen (CompScreen *s);
+
+void
 damageScreenRegion (CompScreen *screen,
 		    Region     region);
 
