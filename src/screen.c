@@ -2248,6 +2248,8 @@ removeScreen (CompScreen *s)
 
     finiTexture (s, &s->backgroundTexture);
 
+    glXDestroyContext (d->display, s->ctx);
+
     freeScreen (s);
 }
 
