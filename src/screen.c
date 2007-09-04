@@ -2246,6 +2246,8 @@ removeScreen (CompScreen *s)
 
     XDestroyWindow (d->display, s->grabWindow);
 
+    finiTexture (s, &s->backgroundTexture);
+
     freeScreen (s);
 }
 
