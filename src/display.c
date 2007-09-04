@@ -1547,29 +1547,6 @@ paintScreen (CompScreen   *s,
     }
 }
 
-static void
-mapWindowIfHidden (CompWindow *w,
-		   void       *closure)
-{
-    if (w->attrib.override_redirect || w->hidden)
-	return;
-
-    if (w->state & CompWindowStateHiddenMask)
-	XMapWindow (w->screen->display->display, w->id);
-}
-
-static void
-restoreWindowGeometryIfSaved (CompWindow *w,
-			      void       *closure)
-{
-    if (w->attrib.override_redirect)
-	return;
-
-    if (w->saveMask)
-	XConfigureWindow (w->screen->display->display, w->id, w->saveMask,
-			  &w->saveWc);
-}
-
 void
 eventLoop (void)
 {
@@ -1601,8 +1578,6 @@ eventLoop (void)
 	if (restartSignal || shutDown)
 	{
 	    while (popPlugin ());
-	    forEachWindowOnDisplay (display, restoreWindowGeometryIfSaved, 0);
-	    forEachWindowOnDisplay (display, mapWindowIfHidden, 0);
 
 	    while (display->screens)
 		removeScreen (display->screens);

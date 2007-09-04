@@ -2220,6 +2220,29 @@ addScreen (CompDisplay *display,
     return TRUE;
 }
 
+static void
+mapWindowIfHidden (CompWindow *w,
+		   void       *closure)
+{
+    if (w->attrib.override_redirect || w->hidden)
+	return;
+
+    if (w->state & CompWindowStateHiddenMask)
+	XMapWindow (w->screen->display->display, w->id);
+}
+
+static void
+restoreWindowGeometryIfSaved (CompWindow *w,
+			      void       *closure)
+{
+    if (w->attrib.override_redirect)
+	return;
+
+    if (w->saveMask)
+	XConfigureWindow (w->screen->display->display, w->id, w->saveMask,
+			  &w->saveWc);
+}
+
 void
 removeScreen (CompScreen *s)
 {
@@ -2234,6 +2257,9 @@ removeScreen (CompScreen *s)
 	p->next = s->next;
     else
 	d->screens = NULL;
+
+    forEachWindowOnScreen (s, restoreWindowGeometryIfSaved, 0);
+    forEachWindowOnScreen (s, mapWindowIfHidden, 0);
 
     objectFiniPlugins (&s->base);
 
