@@ -466,14 +466,41 @@ kconfigGetOption (CompObject *object,
     }
 }
 
+static CompBool
+kconfigReloadObjectTree (CompObject *object,
+			 void       *closure);
+
+static CompBool
+kconfigReloadObjectsWithType (CompObjectType type,
+			      CompObject     *parent,
+			      void	     *closure)
+{
+    compObjectForEach (parent, type, kconfigReloadObjectTree, closure);
+
+    return TRUE;
+}
+
+static CompBool
+kconfigReloadObjectTree (CompObject *object,
+			 void       *closure)
+{
+    CompPlugin *p = (CompPlugin *) closure;
+    CompOption  *option;
+    int		nOption;
+
+    option = (*p->vTable->getObjectOptions) (p, object, &nOption);
+    while (nOption--)
+	kconfigGetOption (object, option++, p->vTable->name);
+
+    compObjectForEachType (object, kconfigReloadObjectsWithType, closure);
+
+    return TRUE;
+}
+
 static Bool
 kconfigRcReload (void *closure)
 {
-    CompDisplay *d = compDisplays;
-    CompScreen  *s;
     CompPlugin  *p;
-    CompOption  *option;
-    int		nOption;
 
     KCONFIG_CORE (&core);
 
@@ -484,16 +511,7 @@ kconfigRcReload (void *closure)
 	if (!p->vTable->getObjectOptions)
 	    continue;
 
-	option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
-	while (nOption--)
-	    kconfigGetOption (&d->base, option++, p->vTable->name);
-
-	for (s = d->screens; s; s = s->next)
-	{
-	    option = (*p->vTable->getObjectOptions) (p, &s->base, &nOption);
-	    while (nOption--)
-		kconfigGetOption (&s->base, option++, p->vTable->name);
-	}
+	kconfigReloadObjectTree (&core.base, (void *) p);
     }
 
     kc->reloadHandle = 0;
@@ -559,11 +577,6 @@ kconfigInitPluginForObject (CompPlugin *p,
     UNWRAP (kc, &core, initPluginForObject);
     status = (*core.initPluginForObject) (p, o);
     WRAP (kc, &core, initPluginForObject, kconfigInitPluginForObject);
-
-    /* display and screen options are only supported yet */
-    if (o->type != COMP_OBJECT_TYPE_DISPLAY &&
-	o->type != COMP_OBJECT_TYPE_SCREEN)
-	return status;
 
     if (status && p->vTable->getObjectOptions)
     {
