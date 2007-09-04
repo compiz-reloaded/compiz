@@ -460,14 +460,41 @@ gconfGetOption (CompObject *object,
     g_free (key);
 }
 
+static CompBool
+gconfReloadObjectTree (CompObject *object,
+			 void       *closure);
+
+static CompBool
+gconfReloadObjectsWithType (CompObjectType type,
+			      CompObject     *parent,
+			      void	     *closure)
+{
+    compObjectForEach (parent, type, gconfReloadObjectTree, closure);
+
+    return TRUE;
+}
+
+static CompBool
+gconfReloadObjectTree (CompObject *object,
+		       void       *closure)
+{
+    CompPlugin *p = (CompPlugin *) closure;
+    CompOption  *option;
+    int		nOption;
+
+    option = (*p->vTable->getObjectOptions) (p, object, &nOption);
+    while (nOption--)
+	gconfGetOption (object, option++, p->vTable->name);
+
+    compObjectForEachType (object, gconfReloadObjectsWithType, closure);
+
+    return TRUE;
+}
+
 static Bool
 gconfReload (void *closure)
 {
-    CompDisplay *d = compDisplays;
-    CompScreen  *s;
     CompPlugin  *p;
-    CompOption  *option;
-    int		nOption;
 
     GCONF_CORE (&core);
 
@@ -476,16 +503,7 @@ gconfReload (void *closure)
 	if (!p->vTable->getObjectOptions)
 	    continue;
 
-	option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
-	while (nOption--)
-	    gconfGetOption (&d->base, option++, p->vTable->name);
-
-	for (s = d->screens; s; s = s->next)
-	{
-	    option = (*p->vTable->getObjectOptions) (p, &s->base, &nOption);
-	    while (nOption--)
-		gconfGetOption (&s->base, option++, p->vTable->name);
-	}
+	gconfReloadObjectTree (&core.base, (void *) p);
     }
 
     gc->reloadHandle = 0;
@@ -539,11 +557,6 @@ gconfInitPluginForObject (CompPlugin *p,
     status = (*core.initPluginForObject) (p, o);
     WRAP (gc, &core, initPluginForObject, gconfInitPluginForObject);
 
-    /* display and screen options are only supported yet */
-    if (o->type != COMP_OBJECT_TYPE_DISPLAY &&
-	o->type != COMP_OBJECT_TYPE_SCREEN)
-	return status;
-
     if (status && p->vTable->getObjectOptions)
     {
 	CompOption *option;
@@ -557,19 +570,19 @@ gconfInitPluginForObject (CompPlugin *p,
     return status;
 }
 
+/* TODO: support for more than display and screen objects */
 static void
 gconfKeyChanged (GConfClient *client,
 		 guint	     cnxn_id,
 		 GConfEntry  *entry,
 		 gpointer    user_data)
 {
-    CompDisplay *display = compDisplays;
-    CompScreen  *screen = NULL;
-    CompPlugin  *plugin = NULL;
-    CompOption  *option = NULL;
-    int		nOption = 0;
-    gchar	**token;
-    int		object = 4;
+    CompPlugin *plugin;
+    CompObject *object;
+    CompOption *option = NULL;
+    int	       nOption = 0;
+    gchar      **token;
+    int	       objectIndex = 4;
 
     token = g_strsplit (entry->key, "/", 8);
 
@@ -599,7 +612,7 @@ gconfKeyChanged (GConfClient *client,
 	    return;
 	}
 
-	object = 5;
+	objectIndex = 5;
 	plugin = findActivePlugin (token[4]);
     }
 
@@ -609,77 +622,52 @@ gconfKeyChanged (GConfClient *client,
 	return;
     }
 
-    if (strcmp (token[object], "allscreens") != 0)
-    {
-	int screenNum;
-
-	if (sscanf (token[object], "screen%d", &screenNum) != 1)
-	{
-	    g_strfreev (token);
-	    return;
-	}
-
-	for (screen = display->screens; screen; screen = screen->next)
-	    if (screen->screenNum == screenNum)
-		break;
-
-	if (!screen)
-	{
-	    g_strfreev (token);
-	    return;
-	}
-    }
-
-    if (strcmp (token[object + 1], "options") != 0)
+    object = compObjectFind (&core.base, COMP_OBJECT_TYPE_DISPLAY, NULL);
+    if (!object)
     {
 	g_strfreev (token);
 	return;
     }
 
-    if (screen)
+    if (strncmp (token[objectIndex], "screen", 6) == 0)
     {
-	if (plugin->vTable->getObjectOptions)
-	    option = (*plugin->vTable->getObjectOptions) (plugin,
-							  &screen->base,
-							  &nOption);
-
-	option = compFindOption (option, nOption, token[object + 2], 0);
-	if (option)
+	object = compObjectFind (object, COMP_OBJECT_TYPE_SCREEN,
+				 token[objectIndex] + 6);
+	if (!object)
 	{
-	    CompOptionValue value;
-
-	    if (gconfReadOptionValue (&screen->base, entry, option, &value))
-	    {
-		(*core.setOptionForPlugin) (&screen->base,
-					    plugin->vTable->name,
-					    option->name,
-					    &value);
-
-		compFiniOptionValue (&value, option->type);
-	    }
+	    g_strfreev (token);
+	    return;
 	}
     }
-    else
+    else if (strcmp (token[objectIndex], "allscreens") != 0)
     {
-	if (plugin->vTable->getObjectOptions)
-	    option = (*plugin->vTable->getObjectOptions) (plugin,
-							  &display->base,
-							  &nOption);
+	g_strfreev (token);
+	return;
+    }
 
-	option = compFindOption (option, nOption, token[object + 2], 0);
-	if (option)
+    if (strcmp (token[objectIndex + 1], "options") != 0)
+    {
+	g_strfreev (token);
+	return;
+    }
+
+    if (plugin->vTable->getObjectOptions)
+	option = (*plugin->vTable->getObjectOptions) (plugin, object,
+						      &nOption);
+
+    option = compFindOption (option, nOption, token[objectIndex + 2], 0);
+    if (option)
+    {
+	CompOptionValue value;
+
+	if (gconfReadOptionValue (object, entry, option, &value))
 	{
-	    CompOptionValue value;
+	    (*core.setOptionForPlugin) (object,
+					plugin->vTable->name,
+					option->name,
+					&value);
 
-	    if (gconfReadOptionValue (&display->base, entry, option, &value))
-	    {
-		(*core.setOptionForPlugin) (&display->base,
-					    plugin->vTable->name,
-					    option->name,
-					    &value);
-
-		compFiniOptionValue (&value, option->type);
-	    }
+	    compFiniOptionValue (&value, option->type);
 	}
     }
 
