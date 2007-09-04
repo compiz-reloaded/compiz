@@ -299,8 +299,8 @@ typedef struct _InitObjectContext {
 } InitObjectContext;
 
 typedef struct _InitObjectTypeContext {
-    InitObjectContext base;
-    CompObjectType    type;
+    CompPlugin     *plugin;
+    CompObjectType type;
 } InitObjectTypeContext;
 
 static CompBool
@@ -313,20 +313,20 @@ finiObjectTree (CompObject *object,
 
 static CompBool
 initObjectsWithType (CompObjectType type,
+		     CompObject	    *parent,
 		     void	    *closure)
 {
     InitObjectTypeContext *pCtx = (InitObjectTypeContext *) closure;
-    CompObject		  *object = pCtx->base.object;
     InitObjectContext	  ctx;
 
     pCtx->type = type;
 
-    ctx.plugin = pCtx->base.plugin;
+    ctx.plugin = pCtx->plugin;
     ctx.object = NULL;
 
-    if (!compObjectForEach (object, type, initObjectTree, (void *) &ctx))
+    if (!compObjectForEach (parent, type, initObjectTree, (void *) &ctx))
     {
-	compObjectForEach (object, type, finiObjectTree, (void *) &ctx);
+	compObjectForEach (parent, type, finiObjectTree, (void *) &ctx);
 
 	return FALSE;
     }
@@ -336,20 +336,20 @@ initObjectsWithType (CompObjectType type,
 
 static CompBool
 finiObjectsWithType (CompObjectType type,
+		     CompObject	    *parent,
 		     void	    *closure)
 {
     InitObjectTypeContext *pCtx = (InitObjectTypeContext *) closure;
-    CompObject		  *object = pCtx->base.object;
     InitObjectContext	  ctx;
 
     /* pCtx->type is set to the object type that failed to be initialized */
     if (pCtx->type == type)
 	return FALSE;
 
-    ctx.plugin = pCtx->base.plugin;
+    ctx.plugin = pCtx->plugin;
     ctx.object = NULL;
 
-    compObjectForEach (object, type, finiObjectTree, (void *) &ctx);
+    compObjectForEach (parent, type, finiObjectTree, (void *) &ctx);
 
     return TRUE;
 }
@@ -374,14 +374,13 @@ initObjectTree (CompObject *object,
 	}
     }
 
-    ctx.base.plugin = p;
-    ctx.base.object = object;
-    ctx.type        = 0;
+    ctx.plugin = p;
+    ctx.type   = 0;
 
     /* initialize children */
-    if (!compObjectForEachType (initObjectsWithType, (void *) &ctx))
+    if (!compObjectForEachType (object, initObjectsWithType, (void *) &ctx))
     {
-	compObjectForEachType (finiObjectsWithType, (void *) &ctx);
+	compObjectForEachType (object, finiObjectsWithType, (void *) &ctx);
 
 	if (p->vTable->initObject && p->vTable->finiObject)
 	    (*p->vTable->finiObject) (p, object);
@@ -391,7 +390,7 @@ initObjectTree (CompObject *object,
 
     if (!(*core.initPluginForObject) (p, object))
     {
-	compObjectForEachType (finiObjectsWithType, (void *) &ctx);
+	compObjectForEachType (object, finiObjectsWithType, (void *) &ctx);
 
 	if (p->vTable->initObject && p->vTable->finiObject)
 	    (*p->vTable->finiObject) (p, object);
@@ -414,11 +413,10 @@ finiObjectTree (CompObject *object,
     if (pCtx->object == object)
 	return FALSE;
 
-    ctx.base.plugin = p;
-    ctx.base.object = object;
-    ctx.type        = ~0;
+    ctx.plugin = p;
+    ctx.type   = ~0;
 
-    compObjectForEachType (finiObjectsWithType, (void *) &ctx);
+    compObjectForEachType (object, finiObjectsWithType, (void *) &ctx);
 
     if (p->vTable->initObject && p->vTable->finiObject)
 	(*p->vTable->finiObject) (p, object);

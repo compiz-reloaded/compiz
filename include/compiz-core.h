@@ -282,6 +282,7 @@ typedef CompBool (*ObjectCallBackProc) (CompObject *object,
 					void       *closure);
 
 typedef CompBool (*ObjectTypeCallBackProc) (CompObjectType type,
+					    CompObject     *parent,
 					    void	   *closure);
 
 void
@@ -309,7 +310,8 @@ compObjectForEach (CompObject	      *parent,
 		   void		      *closure);
 
 CompBool
-compObjectForEachType (ObjectTypeCallBackProc proc,
+compObjectForEachType (CompObject	      *parent,
+		       ObjectTypeCallBackProc proc,
 		       void		      *closure);
 
 const char *

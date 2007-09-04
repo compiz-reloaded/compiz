@@ -114,13 +114,14 @@ compObjectForEach (CompObject	      *parent,
 }
 
 CompBool
-compObjectForEachType (ObjectTypeCallBackProc proc,
+compObjectForEachType (CompObject	      *parent,
+		       ObjectTypeCallBackProc proc,
 		       void		      *closure)
 {
     int i;
 
     for (i = 0; i < sizeof (objectInfo) / sizeof (objectInfo[0]); i++)
-	if (!(*proc) (i, closure))
+	if (!(*proc) (i, parent, closure))
 	    return FALSE;
 
     return TRUE;
