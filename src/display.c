@@ -1603,6 +1603,10 @@ eventLoop (void)
 	    while (popPlugin ());
 	    forEachWindowOnDisplay (display, restoreWindowGeometryIfSaved, 0);
 	    forEachWindowOnDisplay (display, mapWindowIfHidden, 0);
+
+	    while (display->screens)
+		removeScreen (display->screens);
+
 	    XSync (display->display, False);
 	    return;
 	}
