@@ -123,6 +123,25 @@ nameScreenObject (CompObject *object)
     return strdup (tmp);
 }
 
+CompObject *
+findScreenObject (CompObject *parent,
+		  const char *name)
+{
+    if (parent->type == COMP_OBJECT_TYPE_DISPLAY)
+    {
+	CompScreen *s;
+	int	   screenNum = atoi (name);
+
+	CORE_DISPLAY (parent);
+
+	for (s = d->screens; s; s = s->next)
+	    if (s->screenNum == screenNum)
+		return &s->object;
+    }
+
+    return NULL;
+}
+
 int
 allocateScreenPrivateIndex (CompDisplay *display)
 {

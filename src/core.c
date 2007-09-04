@@ -77,6 +77,13 @@ nameCoreObject (CompObject *object)
     return NULL;
 }
 
+CompObject *
+findCoreObject (CompObject *parent,
+		const char *name)
+{
+    return NULL;
+}
+
 int
 allocateCorePrivateIndex (void)
 {

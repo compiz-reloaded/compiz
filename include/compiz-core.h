@@ -316,6 +316,11 @@ compObjectTypeName (CompObjectType type);
 char *
 compObjectName (CompObject *object);
 
+CompObject *
+compObjectFind (CompObject     *parent,
+		CompObjectType type,
+		const char     *name);
+
 #define ARRAY_SIZE(array)		 \
     (sizeof (array) / sizeof (array[0]))
 
@@ -612,6 +617,10 @@ forEachCoreObject (CompObject	     *parent,
 
 char *
 nameCoreObject (CompObject *object);
+
+CompObject *
+findCoreObject (CompObject *parent,
+		const char *name);
 
 CompBool
 initCore (void);
@@ -1009,6 +1018,10 @@ forEachDisplayObject (CompObject	 *parent,
 
 char *
 nameDisplayObject (CompObject *object);
+
+CompObject *
+findDisplayObject (CompObject *parent,
+		   const char *name);
 
 int
 allocateDisplayPrivateIndex (void);
@@ -2070,6 +2083,10 @@ forEachScreenObject (CompObject	        *parent,
 char *
 nameScreenObject (CompObject *object);
 
+CompObject *
+findScreenObject (CompObject *parent,
+		  const char *name);
+
 int
 allocateScreenPrivateIndex (CompDisplay *display);
 
@@ -2512,6 +2529,10 @@ forEachWindowObject (CompObject	        *parent,
 
 char *
 nameWindowObject (CompObject *object);
+
+CompObject *
+findWindowObject (CompObject *parent,
+		  const char *name);
 
 int
 allocateWindowPrivateIndex (CompScreen *screen);

@@ -124,6 +124,25 @@ nameWindowObject (CompObject *object)
     return strdup (tmp);
 }
 
+CompObject *
+findWindowObject (CompObject *parent,
+		  const char *name)
+{
+    if (parent->type == COMP_OBJECT_TYPE_SCREEN)
+    {
+	CompWindow *w;
+	Window	   id = atoi (name);
+
+	CORE_SCREEN (parent);
+
+	for (w = s->windows; w; w = w->next)
+	    if (w->id == id)
+		return &w->object;
+    }
+
+    return NULL;
+}
+
 int
 allocateWindowPrivateIndex (CompScreen *screen)
 {

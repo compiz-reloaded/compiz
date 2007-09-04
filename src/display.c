@@ -155,6 +155,19 @@ nameDisplayObject (CompObject *object)
     return NULL;
 }
 
+CompObject *
+findDisplayObject (CompObject *parent,
+		   const char *name)
+{
+    if (parent->type == COMP_OBJECT_TYPE_CORE)
+    {
+	if (!name || !name[0])
+	    return &compDisplay.object;
+    }
+
+    return NULL;
+}
+
 int
 allocateDisplayPrivateIndex (void)
 {

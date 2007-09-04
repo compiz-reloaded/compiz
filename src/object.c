@@ -36,37 +36,45 @@ typedef CompBool (*ForEachObjectProc) (CompObject	  *parent,
 
 typedef char *(*NameObjectProc) (CompObject *object);
 
+typedef CompObject *(*FindObjectProc) (CompObject *parent,
+				       const char *name);
+
 struct _CompObjectInfo {
     const char			*name;
     AllocObjectPrivateIndexProc allocPrivateIndex;
     FreeObjectPrivateIndexProc  freePrivateIndex;
     ForEachObjectProc		forEachObject;
     NameObjectProc		nameObject;
+    FindObjectProc		findObject;
 } objectInfo[] = {
     {
 	"core",
 	allocCoreObjectPrivateIndex,
 	freeCoreObjectPrivateIndex,
 	forEachCoreObject,
-	nameCoreObject
+	nameCoreObject,
+	findCoreObject
     }, {
 	"display",
 	allocDisplayObjectPrivateIndex,
 	freeDisplayObjectPrivateIndex,
 	forEachDisplayObject,
-	nameDisplayObject
+	nameDisplayObject,
+	findDisplayObject
     }, {
 	"screen",
 	allocScreenObjectPrivateIndex,
 	freeScreenObjectPrivateIndex,
 	forEachScreenObject,
-	nameScreenObject
+	nameScreenObject,
+	findScreenObject
     }, {
 	"window",
 	allocWindowObjectPrivateIndex,
 	freeWindowObjectPrivateIndex,
 	forEachWindowObject,
-	nameWindowObject
+	nameWindowObject,
+	findWindowObject
     }
 };
 
@@ -126,4 +134,12 @@ char *
 compObjectName (CompObject *object)
 {
     return (*objectInfo[object->type].nameObject) (object);
+}
+
+CompObject *
+compObjectFind (CompObject     *parent,
+		CompObjectType type,
+		const char     *name)
+{
+    return (*objectInfo[type].findObject) (parent, name);
 }
