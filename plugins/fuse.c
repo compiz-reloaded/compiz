@@ -615,9 +615,15 @@ fuseInitValueFromString (CompObject	 *object,
 	    return FALSE;
 	break;
     case CompOptionTypeKey:
+	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
+	    object = object->parent;
+
 	stringToKeyAction (GET_CORE_DISPLAY (object), str, &value->action);
 	break;
     case CompOptionTypeButton:
+	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
+	    object = object->parent;
+
 	stringToButtonAction (GET_CORE_DISPLAY (object), str, &value->action);
 	break;
     case CompOptionTypeEdge:
