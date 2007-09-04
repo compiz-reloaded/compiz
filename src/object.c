@@ -80,11 +80,13 @@ struct _CompObjectInfo {
 
 void
 compObjectInit (CompObject     *object,
+		CompObject     *parent,
 		CompPrivate    *privates,
 		CompObjectType type)
 {
     object->type     = type;
     object->privates = privates;
+    object->parent   = parent;
 }
 
 int

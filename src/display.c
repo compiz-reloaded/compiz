@@ -1998,7 +1998,7 @@ Bool
 addDisplay (const char *name)
 {
     CompDisplay *d;
-    CompPlugin  *core;
+    CompPlugin  *corePlugin;
     CompPrivate	*privates;
     Display     *dpy;
     Window	focus;
@@ -2019,7 +2019,8 @@ addDisplay (const char *name)
     else
 	privates = 0;
 
-    compObjectInit (&d->object, privates, COMP_OBJECT_TYPE_DISPLAY);
+    compObjectInit (&d->object, &core.object, privates,
+		    COMP_OBJECT_TYPE_DISPLAY);
 
     d->screens = NULL;
 
@@ -2046,15 +2047,15 @@ addDisplay (const char *name)
     if (!d->plugin.list.value->s)
 	return FALSE;
 
-    core = loadPlugin (d->plugin.list.value->s);
-    if (!core)
+    corePlugin = loadPlugin (d->plugin.list.value->s);
+    if (!corePlugin)
     {
 	compLogMessage (d, "core", CompLogLevelFatal,
 			"Couldn't load core plugin");
 	return FALSE;
     }
 
-    if (!pushPlugin (core))
+    if (!pushPlugin (corePlugin))
     {
 	compLogMessage (d, "core", CompLogLevelFatal,
 			"Couldn't activate core plugin");

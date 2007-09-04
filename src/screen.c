@@ -1520,7 +1520,8 @@ addScreen (CompDisplay *display,
     else
 	privates = 0;
 
-    compObjectInit (&s->object, privates, COMP_OBJECT_TYPE_SCREEN);
+    compObjectInit (&s->object, &display->object, privates,
+		    COMP_OBJECT_TYPE_SCREEN);
 
     s->display = display;
 

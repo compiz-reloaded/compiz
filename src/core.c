@@ -139,7 +139,7 @@ setOptionForPlugin (CompObject      *object,
 CompBool
 initCore (void)
 {
-    compObjectInit (&core.object, 0, COMP_OBJECT_TYPE_CORE);
+    compObjectInit (&core.object, 0, 0, COMP_OBJECT_TYPE_CORE);
 
     core.initPluginForObject = initCorePluginForObject;
     core.finiPluginForObject = finiCorePluginForObject;

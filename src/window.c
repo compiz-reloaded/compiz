@@ -1993,7 +1993,8 @@ addWindow (CompScreen *screen,
     else
 	privates = 0;
 
-    compObjectInit (&w->object, privates, COMP_OBJECT_TYPE_WINDOW);
+    compObjectInit (&w->object, &screen->object, privates,
+		    COMP_OBJECT_TYPE_WINDOW);
 
     w->region = XCreateRegion ();
     if (!w->region)
