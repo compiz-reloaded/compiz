@@ -2225,6 +2225,7 @@ removeScreen (CompScreen *s)
 {
     CompDisplay *d = s->display;
     CompScreen  *p;
+    int		i;
 
     for (p = d->screens; p; p = p->next)
 	if (p->next == s)
@@ -2239,6 +2240,11 @@ removeScreen (CompScreen *s)
 	removeWindow (s->windows);
 
     objectFiniPlugins (&s->base);
+
+    for (i = 0; i < SCREEN_EDGE_NUM; i++)
+	XDestroyWindow (d->display, s->screenEdge[i].id);
+
+    XDestroyWindow (d->display, s->grabWindow);
 
     freeScreen (s);
 }
