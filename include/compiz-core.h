@@ -548,6 +548,11 @@ isActionOption (CompOption *option);
 
 /* core.c */
 
+typedef CompBool (*InitPluginForObjectProc) (CompPlugin *plugin,
+					     CompObject *object);
+typedef void (*FiniPluginForObjectProc) (CompPlugin *plugin,
+					 CompObject *object);
+
 #define NOTIFY_CREATE_MASK (1 << 0)
 #define NOTIFY_DELETE_MASK (1 << 1)
 #define NOTIFY_MOVE_MASK   (1 << 2)
@@ -573,10 +578,10 @@ typedef void (*FileWatchAddedProc) (CompCore	  *core,
 typedef void (*FileWatchRemovedProc) (CompCore      *core,
 				      CompFileWatch *fileWatch);
 
-typedef CompBool (*InitPluginForObjectProc) (CompPlugin *plugin,
-					     CompObject *object);
-typedef void (*FiniPluginForObjectProc) (CompPlugin *plugin,
-					 CompObject *object);
+typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
+					    const char      *plugin,
+					    const char	    *name,
+					    CompOptionValue *value);
 
 struct _CompCore {
     CompObject object;
@@ -589,6 +594,8 @@ struct _CompCore {
 
     CompFileWatch	*fileWatch;
     CompFileWatchHandle lastFileWatchHandle;
+
+    SetOptionForPluginProc setOptionForPlugin;
 };
 
 int
@@ -694,11 +701,6 @@ removeFileWatch (CompFileWatchHandle handle);
 #define COMP_DISPLAY_OPTION_PING_DELAY			     61
 #define COMP_DISPLAY_OPTION_NUM				     62
 
-typedef Bool (*SetDisplayOptionForPluginProc) (CompDisplay     *display,
-					       const char      *plugin,
-					       const char	*name,
-					       CompOptionValue *value);
-
 typedef void (*HandleEventProc) (CompDisplay *display,
 				 XEvent	     *event);
 
@@ -788,11 +790,6 @@ typedef void (*LogMessageProc) (CompDisplay  *d,
 				const char   *componentName,
 				CompLogLevel level,
 				const char   *message);
-
-typedef Bool (*InitPluginForDisplayProc) (CompPlugin  *plugin,
-					  CompDisplay *display);
-typedef void (*FiniPluginForDisplayProc) (CompPlugin  *plugin,
-					  CompDisplay *display);
 
 struct _CompDisplay {
     CompObject object;
@@ -975,8 +972,6 @@ struct _CompDisplay {
 
     CompOptionValue plugin;
     Bool	    dirtyPluginList;
-
-    SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
 
     HandleEventProc       handleEvent;
     HandleCompizEventProc handleCompizEvent;
@@ -1678,11 +1673,6 @@ typedef void (*GLGenerateMipmapProc) (GLenum target);
 
 #define MAX_DEPTH 32
 
-typedef Bool (*SetScreenOptionForPluginProc) (CompScreen      *screen,
-					      const char      *plugin,
-					      const char      *name,
-					      CompOptionValue *value);
-
 typedef void (*EnterShowDesktopModeProc) (CompScreen *screen);
 
 typedef void (*LeaveShowDesktopModeProc) (CompScreen *screen,
@@ -1746,11 +1736,6 @@ typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 
 typedef void (*InitWindowWalkerProc) (CompScreen *screen,
 				      CompWalker *walker);
-
-typedef Bool (*InitPluginForScreenProc) (CompPlugin *plugin,
-					 CompScreen *screen);
-typedef void (*FiniPluginForScreenProc) (CompPlugin *plugin,
-					 CompScreen *screen);
 
 #define COMP_SCREEN_DAMAGE_PENDING_MASK (1 << 0)
 #define COMP_SCREEN_DAMAGE_REGION_MASK  (1 << 1)
@@ -2026,8 +2011,6 @@ struct _CompScreen {
     GLXContext ctx;
 
     CompOption opt[COMP_SCREEN_OPTION_NUM];
-
-    SetScreenOptionForPluginProc setScreenOptionForPlugin;
 
     PreparePaintScreenProc	   preparePaintScreen;
     DonePaintScreenProc		   donePaintScreen;

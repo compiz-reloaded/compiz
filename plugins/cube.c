@@ -65,6 +65,7 @@ v[3] /= v[3];
 
 static CompMetadata cubeMetadata;
 
+static int cubeCorePrivateIndex;
 static int cubeDisplayPrivateIndex;
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
@@ -1942,23 +1943,30 @@ cubeOutputChangeNotify (CompScreen *s)
 }
 
 static Bool
-cubeSetScreenOptionForPlugin (CompScreen      *s,
-			      const char      *plugin,
-			      const char      *name,
-			      CompOptionValue *value)
+cubeSetOptionForPlugin (CompObject      *o,
+			const char      *plugin,
+			const char      *name,
+			CompOptionValue *value)
 {
     Bool status;
 
-    CUBE_SCREEN (s);
+    CUBE_CORE (&core);
 
-    UNWRAP (cs, s, setScreenOptionForPlugin);
-    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
-    WRAP (cs, s, setScreenOptionForPlugin, cubeSetScreenOptionForPlugin);
+    UNWRAP (cc, &core, setOptionForPlugin);
+    status = (*core.setOptionForPlugin) (o, plugin, name, value);
+    WRAP (cc, &core, setOptionForPlugin, cubeSetOptionForPlugin);
 
-    if (status && strcmp (plugin, "core") == 0 && strcmp (name, "hsize") == 0)
+    if (status && o->type == COMP_OBJECT_TYPE_SCREEN)
     {
-	cubeUpdateGeometry (s, s->hsize, cs->invert);
-	cubeUnloadBackgrounds (s);
+	if (strcmp (plugin, "core") == 0 && strcmp (name, "hsize") == 0)
+	{
+	    CompScreen *s = (CompScreen *) o;
+
+	    CUBE_SCREEN (s);
+
+	    cubeUpdateGeometry (s, s->hsize, cs->invert);
+	    cubeUnloadBackgrounds (s);
+	}
     }
 
     return status;
@@ -2001,6 +2009,46 @@ cubeSetDisplayOption (CompPlugin      *plugin,
     return FALSE;
 }
 
+static Bool
+cubeInitCore (CompPlugin *p,
+	      CompCore   *c)
+{
+    CubeCore *cc;
+
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
+	return FALSE;
+
+    cc = malloc (sizeof (CubeCore));
+    if (!cc)
+	return FALSE;
+
+    cubeDisplayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (cubeDisplayPrivateIndex < 0)
+    {
+	free (cc);
+	return FALSE;
+    }
+
+    WRAP (cc, &core, setOptionForPlugin, cubeSetOptionForPlugin);
+
+    c->object.privates[cubeCorePrivateIndex].ptr = cc;
+
+    return TRUE;
+}
+
+static void
+cubeFiniCore (CompPlugin *p,
+	      CompCore   *c)
+{
+    CUBE_CORE (c);
+
+    UNWRAP (cc, &core, setOptionForPlugin);
+
+    freeDisplayPrivateIndex (cubeDisplayPrivateIndex);
+
+    free (cc);
+}
+
 static const CompMetadataOptionInfo cubeDisplayOptionInfo[] = {
     { "abi", "int", 0, 0, 0 },
     { "index", "int", 0, 0, 0 },
@@ -2016,9 +2064,6 @@ cubeInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
     CubeDisplay *cd;
-
-    if (!checkPluginABI ("core", CORE_ABIVERSION))
-	return FALSE;
 
     cd = malloc (sizeof (CubeDisplay));
     if (!cd)
@@ -2189,7 +2234,6 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, paintWindow, cubePaintWindow);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
-    WRAP (cs, s, setScreenOptionForPlugin, cubeSetScreenOptionForPlugin);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
     WRAP (cs, s, initWindowWalker, cubeInitWindowWalker);
 
@@ -2212,7 +2256,6 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, paintWindow);
     UNWRAP (cs, s, applyScreenTransform);
-    UNWRAP (cs, s, setScreenOptionForPlugin);
     UNWRAP (cs, s, outputChangeNotify);
     UNWRAP (cs, s, initWindowWalker);
 
@@ -2231,7 +2274,7 @@ cubeInitObject (CompPlugin *p,
 		CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
-	(InitPluginObjectProc) 0, /* InitCore */
+	(InitPluginObjectProc) cubeInitCore,
 	(InitPluginObjectProc) cubeInitDisplay,
 	(InitPluginObjectProc) cubeInitScreen
     };
@@ -2244,7 +2287,7 @@ cubeFiniObject (CompPlugin *p,
 		CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) 0, /* FiniCore */
+	(FiniPluginObjectProc) cubeFiniCore,
 	(FiniPluginObjectProc) cubeFiniDisplay,
 	(FiniPluginObjectProc) cubeFiniScreen
     };
@@ -2294,8 +2337,8 @@ cubeInit (CompPlugin *p)
 					 CUBE_SCREEN_OPTION_NUM))
 	return FALSE;
 
-    cubeDisplayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (cubeDisplayPrivateIndex < 0)
+    cubeCorePrivateIndex = allocateCorePrivateIndex ();
+    if (cubeCorePrivateIndex < 0)
     {
 	compFiniMetadata (&cubeMetadata);
 	return FALSE;
@@ -2309,7 +2352,7 @@ cubeInit (CompPlugin *p)
 static void
 cubeFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (cubeDisplayPrivateIndex);
+    freeCorePrivateIndex (cubeCorePrivateIndex);
     compFiniMetadata (&cubeMetadata);
 }
 

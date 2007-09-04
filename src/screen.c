@@ -446,7 +446,7 @@ detectOutputDevices (CompScreen *s)
 	name = s->opt[COMP_SCREEN_OPTION_OUTPUTS].name;
 
 	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = FALSE;
-	(*s->setScreenOptionForPlugin) (s, "core", name, &value);
+	(*core.setOptionForPlugin) (&s->object, "core", name, &value);
 	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = TRUE;
 
 	for (i = 0; i < value.list.nValue; i++)
@@ -602,21 +602,6 @@ setScreenOption (CompPlugin	 *plugin,
 	    return TRUE;
 	break;
     }
-
-    return FALSE;
-}
-
-static Bool
-setScreenOptionForPlugin (CompScreen      *screen,
-			  const char	  *plugin,
-			  const char	  *name,
-			  CompOptionValue *value)
-{
-    CompPlugin *p;
-
-    p = findActivePlugin (plugin);
-    if (p && p->vTable->setObjectOption)
-	return (*p->vTable->setObjectOption) (p, &screen->object, name, value);
 
     return FALSE;
 }
@@ -1054,7 +1039,7 @@ detectRefreshRateOfScreen (CompScreen *s)
 	name = s->opt[COMP_SCREEN_OPTION_REFRESH_RATE].name;
 
 	s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b = FALSE;
-	(*s->setScreenOptionForPlugin) (s, "core", name, &value);
+	(*core.setOptionForPlugin) (&s->object, "core", name, &value);
 	s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b = TRUE;
     }
     else
@@ -1626,8 +1611,6 @@ addScreen (CompDisplay *display,
     s->clearBuffers = TRUE;
 
     gettimeofday (&s->lastRedraw, 0);
-
-    s->setScreenOptionForPlugin = setScreenOptionForPlugin;
 
     s->preparePaintScreen	  = preparePaintScreen;
     s->donePaintScreen		  = donePaintScreen;

@@ -211,51 +211,9 @@ fuseLookupChild (FuseInode  *inode,
     return NULL;
 }
 
-static CompOption *
-fuseGetDisplayOptionsFromInode (CompDisplay *d,
-				FuseInode   *inode,
-				int	    *nOption)
+static CompObject *
+fuseGetObjectFromInode (FuseInode *inode)
 {
-    CompOption *option = NULL;
-
-    if (inode->type & FUSE_INODE_TYPE_PLUGIN)
-    {
-	CompPlugin *p;
-
-	p = findActivePlugin (inode->name);
-	if (p && p->vTable->getObjectOptions)
-	    option = (*p->vTable->getObjectOptions) (p, &d->object, nOption);
-    }
-
-    return option;
-}
-
-static CompOption *
-fuseGetScreenOptionsFromInode (CompScreen *s,
-			       FuseInode  *inode,
-			       int	  *nOption)
-{
-    CompOption *option = NULL;
-
-    if (inode->type & FUSE_INODE_TYPE_PLUGIN)
-    {
-	CompPlugin *p;
-
-	p = findActivePlugin (inode->name);
-	if (p && p->vTable->getObjectOptions)
-	    option = (*p->vTable->getObjectOptions) (p, &s->object, nOption);
-    }
-
-    return option;
-}
-
-static CompOption *
-fuseGetOptionsFromInode (CompDisplay *d,
-			 FuseInode   *inode,
-			 int	     *nOption)
-{
-    CompOption *option = NULL;
-
     if (inode->type & FUSE_INODE_TYPE_SCREEN)
     {
 	CompScreen *s;
@@ -263,35 +221,58 @@ fuseGetOptionsFromInode (CompDisplay *d,
 
 	sscanf (inode->name, "screen%d", &screenNum);
 
-	for (s = d->screens; s; s = s->next)
+	for (s = compDisplays->screens; s; s = s->next)
 	    if (s->screenNum == screenNum)
 		break;
 
 	if (s)
-	    option = fuseGetScreenOptionsFromInode (s, inode->parent, nOption);
+	    return &s->object;
     }
     else if (inode->type & FUSE_INODE_TYPE_DISPLAY)
     {
-	option = fuseGetDisplayOptionsFromInode (d, inode->parent, nOption);
+	return &compDisplays->object;
+    }
+
+    return NULL;
+}
+
+static CompOption *
+fuseGetOptionsFromInode (CompObject *object,
+			 FuseInode  *inode,
+			 int	    *nOption)
+{
+    CompOption *option = NULL;
+
+    if (inode->type & FUSE_INODE_TYPE_PLUGIN)
+    {
+	CompPlugin *p;
+
+	p = findActivePlugin (inode->name);
+	if (p && p->vTable->getObjectOptions)
+	    option = (*p->vTable->getObjectOptions) (p, object, nOption);
     }
 
     return option;
 }
 
 static CompOption *
-fuseGetOptionFromInode (CompDisplay *d,
-			FuseInode   *inode)
+fuseGetOptionFromInode (FuseInode *inode)
 {
     if (inode->type & (FUSE_INODE_TYPE_OPTION |
 		       FUSE_INODE_TYPE_ITEMS))
     {
+	CompObject *object;
 	CompOption *option;
 	int	   nOption;
 
 	if (inode->type & FUSE_INODE_TYPE_ITEMS)
 	    inode = inode->parent;
 
-	option = fuseGetOptionsFromInode (d, inode->parent, &nOption);
+	object = fuseGetObjectFromInode (inode);
+	if (!object)
+	    return NULL;
+
+	option = fuseGetOptionsFromInode (object, inode->parent, &nOption);
 	if (option)
 	{
 	    while (nOption--)
@@ -308,8 +289,7 @@ fuseGetOptionFromInode (CompDisplay *d,
 }
 
 static char *
-fuseGetStringFromInode (CompDisplay *d,
-			FuseInode   *inode)
+fuseGetStringFromInode (FuseInode *inode)
 {
     CompOption *option;
     char       str[256];
@@ -317,7 +297,7 @@ fuseGetStringFromInode (CompDisplay *d,
     if (!inode->parent)
 	return NULL;
 
-    option = fuseGetOptionFromInode (d, inode->parent);
+    option = fuseGetOptionFromInode (inode->parent);
     if (!option)
 	return NULL;
 
@@ -368,9 +348,9 @@ fuseGetStringFromInode (CompDisplay *d,
 	    case CompOptionTypeColor:
 		return colorToString (value->c);
 	    case CompOptionTypeKey:
-		return keyActionToString (d, &value->action);
+		return keyActionToString (compDisplays, &value->action);
 	    case CompOptionTypeButton:
-		return buttonActionToString (d, &value->action);
+		return buttonActionToString (compDisplays, &value->action);
 	    case CompOptionTypeEdge:
 		return edgeMaskToString (value->action.edgeMask);
 	    case CompOptionTypeBell:
@@ -446,12 +426,12 @@ fuseUpdateInode (CompDisplay *d,
     {
 	int n;
 
-	if (fuseGetDisplayOptionsFromInode (d, inode, &n))
-	    fuseAddInode (inode, FUSE_INODE_TYPE_DISPLAY, "allscreen");
+	if (fuseGetOptionsFromInode (&d->object, inode, &n))
+	    fuseAddInode (inode, FUSE_INODE_TYPE_DISPLAY, "allscreens");
 
 	for (s = d->screens; s; s = s->next)
 	{
-	    if (fuseGetScreenOptionsFromInode (s, inode, &n))
+	    if (fuseGetOptionsFromInode (&s->object, inode, &n))
 	    {
 		sprintf (str, "screen%d", s->screenNum);
 		fuseAddInode (inode, FUSE_INODE_TYPE_SCREEN, str);
@@ -460,22 +440,28 @@ fuseUpdateInode (CompDisplay *d,
     }
     else if (inode->type & (FUSE_INODE_TYPE_DISPLAY | FUSE_INODE_TYPE_SCREEN))
     {
-	int nOption;
+	CompObject *object;
 
-	option = fuseGetOptionsFromInode (d, inode, &nOption);
-	if (option)
+	object = fuseGetObjectFromInode (inode);
+	if (object)
 	{
-	    while (nOption--)
-	    {
-		fuseAddInode (inode, FUSE_INODE_TYPE_OPTION, option->name);
+	    int nOption;
 
-		option++;
+	    option = fuseGetOptionsFromInode (object, inode->parent, &nOption);
+	    if (option)
+	    {
+		while (nOption--)
+		{
+		    fuseAddInode (inode, FUSE_INODE_TYPE_OPTION, option->name);
+
+		    option++;
+		}
 	    }
 	}
     }
     else if (inode->type & FUSE_INODE_TYPE_OPTION)
     {
-	option = fuseGetOptionFromInode (d, inode);
+	option = fuseGetOptionFromInode (inode);
 	if (option)
 	{
 	    fuseAddInode (inode, FUSE_INODE_TYPE_TYPE, "type");
@@ -510,7 +496,7 @@ fuseUpdateInode (CompDisplay *d,
     }
     else if (inode->type & FUSE_INODE_TYPE_ITEMS)
     {
-	option = fuseGetOptionFromInode (d, inode->parent);
+	option = fuseGetOptionFromInode (inode->parent);
 	if (option && option->type == CompOptionTypeList)
 	{
 	    FuseInode *c, *next;
@@ -558,7 +544,7 @@ fuseInodeStat (CompDisplay *d,
 	stbuf->st_nlink = 1;
 	stbuf->st_size  = 0;
 
-	str = fuseGetStringFromInode (d, inode);
+	str = fuseGetStringFromInode (inode);
 	if (str)
 	{
 	    stbuf->st_size = strlen (str);
@@ -606,7 +592,7 @@ fuseInitValue (CompOptionValue *value,
 }
 
 static Bool
-fuseInitValueFromString (CompDisplay	 *display,
+fuseInitValueFromString (CompObject	 *object,
 			 CompOptionValue *value,
 			 CompOptionType  type,
 			 char		 *str)
@@ -629,10 +615,10 @@ fuseInitValueFromString (CompDisplay	 *display,
 	    return FALSE;
 	break;
     case CompOptionTypeKey:
-	stringToKeyAction (display, str, &value->action);
+	stringToKeyAction (GET_CORE_DISPLAY (object), str, &value->action);
 	break;
     case CompOptionTypeButton:
-	stringToButtonAction (display, str, &value->action);
+	stringToButtonAction (GET_CORE_DISPLAY (object), str, &value->action);
 	break;
     case CompOptionTypeEdge:
 	value->action.edgeMask = stringToEdgeMask (str);
@@ -652,25 +638,28 @@ fuseInitValueFromString (CompDisplay	 *display,
 }
 
 static void
-fuseSetInodeOptionUsingString (CompDisplay *d,
-			       FuseInode   *inode,
-			       char	   *str)
+fuseSetInodeOptionUsingString (FuseInode *inode,
+			       char	 *str)
 {
     CompOption *option;
 
-    option = fuseGetOptionFromInode (d, inode->parent);
+    option = fuseGetOptionFromInode (inode->parent);
     if (option)
     {
 	CompOptionValue value;
-	CompScreen	*s = NULL;
-	FuseInode	*objectInode;
+	CompObject	*object;
+	const char	*pluginName;
 
 	if (inode->type & FUSE_INODE_TYPE_VALUE)
 	{
-	    if (!fuseInitValueFromString (d, &value, option->type, str))
+	    object = fuseGetObjectFromInode (inode->parent->parent);
+	    if (!object)
 		return;
 
-	    objectInode = inode->parent->parent;
+	    if (!fuseInitValueFromString (object, &value, option->type, str))
+		return;
+
+	    pluginName = inode->parent->parent->parent->name;
 	}
 	else if (inode->type & FUSE_INODE_TYPE_ITEM_VALUE)
 	{
@@ -680,6 +669,10 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 		return;
 
 	    if (item >= nValue)
+		return;
+
+	    object = fuseGetObjectFromInode (inode->parent->parent->parent);
+	    if (!object)
 		return;
 
 	    value.list.value = malloc (sizeof (CompOptionValue) * nValue);
@@ -693,7 +686,7 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 	    {
 		if (i == item)
 		{
-		    if (!fuseInitValueFromString (d,
+		    if (!fuseInitValueFromString (object,
 						  &value.list.value[i],
 						  value.list.type,
 						  str))
@@ -717,38 +710,14 @@ fuseSetInodeOptionUsingString (CompDisplay *d,
 		return;
 	    }
 
-	    objectInode = inode->parent->parent->parent;
+	    pluginName = inode->parent->parent->parent->parent->name;
 	}
 	else
 	{
 	    return;
 	}
 
-	if (objectInode->type & FUSE_INODE_TYPE_SCREEN)
-	{
-	    int screenNum = -1;
-
-	    sscanf (objectInode->name, "screen%d", &screenNum);
-
-	    for (s = d->screens; s; s = s->next)
-		if (s->screenNum == screenNum)
-		    break;
-	}
-
-	if (s)
-	{
-	    (*s->setScreenOptionForPlugin) (s,
-					    objectInode->parent->name,
-					    option->name,
-					    &value);
-	}
-	else
-	{
-	    (*d->setDisplayOptionForPlugin) (d,
-					     objectInode->parent->name,
-					     option->name,
-					     &value);
-	}
+	(*core.setOptionForPlugin) (object, pluginName, option->name, &value);
 
 	compFiniOptionValue (&value, option->type);
     }
@@ -934,8 +903,7 @@ compiz_open (fuse_req_t		   req,
 	     fuse_ino_t		   ino,
 	     struct fuse_file_info *fi)
 {
-    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
-    FuseInode   *inode;
+    FuseInode *inode;
 
     inode = fuseFindInode (inodes, ino, ~0);
     if (!inode)
@@ -959,7 +927,7 @@ compiz_open (fuse_req_t		   req,
 	    if (fi->flags & O_TRUNC)
 		data = strdup ("");
 	    else
-		data = fuseGetStringFromInode (d, inode);
+		data = fuseGetStringFromInode (inode);
 
 	    if (data)
 	    {
@@ -1000,13 +968,12 @@ compiz_read (fuse_req_t		   req,
 	     off_t		   off,
 	     struct fuse_file_info *fi)
 {
-    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
-    FuseInode   *inode;
-    char	*str = NULL;
+    FuseInode *inode;
+    char      *str = NULL;
 
     inode = fuseFindInode (inodes, ino, ~0);
     if (inode)
-	str = fuseGetStringFromInode (d, inode);
+	str = fuseGetStringFromInode (inode);
 
     if (str)
     {
@@ -1068,8 +1035,6 @@ compiz_release (fuse_req_t	      req,
 		fuse_ino_t	      ino,
 		struct fuse_file_info *fi)
 {
-    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
-
     if (fi->fh)
     {
 	FuseWriteBuffer *wb = (FuseWriteBuffer *) (uintptr_t) fi->fh;
@@ -1078,7 +1043,7 @@ compiz_release (fuse_req_t	      req,
 	inode = fuseFindInode (inodes, ino, WRITE_MASK);
 	if (inode && wb->dirty)
 	{
-	    fuseSetInodeOptionUsingString (d, inode, wb->data);
+	    fuseSetInodeOptionUsingString (inode, wb->data);
 
 	    inode->flags &= ~FUSE_INODE_FLAG_TRUNC;
 	}
@@ -1096,8 +1061,6 @@ compiz_fsync (fuse_req_t	    req,
 	      int		    datasync,
 	      struct fuse_file_info *fi)
 {
-    CompDisplay *d = (CompDisplay *) fuse_req_userdata (req);
-
     if (fi->fh)
     {
 	FuseWriteBuffer *wb = (FuseWriteBuffer *) (uintptr_t) fi->fh;
@@ -1106,7 +1069,7 @@ compiz_fsync (fuse_req_t	    req,
 	inode = fuseFindInode (inodes, ino, WRITE_MASK);
 	if (inode && wb->dirty)
 	{
-	    fuseSetInodeOptionUsingString (d, inode, wb->data);
+	    fuseSetInodeOptionUsingString (inode, wb->data);
 
 	    inode->flags &= ~FUSE_INODE_FLAG_TRUNC;
 

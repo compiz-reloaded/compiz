@@ -46,26 +46,13 @@ int gconf_value_compare (const GConfValue *value_a,
 static int corePrivateIndex;
 
 typedef struct _GConfCore {
-    InitPluginForObjectProc initPluginForObject;
-} GConfCore;
-
-static int displayPrivateIndex;
-
-typedef struct _GConfDisplay {
-    int screenPrivateIndex;
-
-    InitPluginForDisplayProc      initPluginForDisplay;
-    SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
-
     GConfClient *client;
 
     CompTimeoutHandle reloadHandle;
-} GConfDisplay;
 
-typedef struct _GConfScreen {
-    InitPluginForScreenProc      initPluginForScreen;
-    SetScreenOptionForPluginProc setScreenOptionForPlugin;
-} GConfScreen;
+    InitPluginForObjectProc initPluginForObject;
+    SetOptionForPluginProc  setOptionForPlugin;
+} GConfCore;
 
 #define GET_GCONF_CORE(c)				       \
     ((GConfCore *) (c)->object.privates[corePrivateIndex].ptr)
@@ -73,18 +60,39 @@ typedef struct _GConfScreen {
 #define GCONF_CORE(c)		       \
     GConfCore *gc = GET_GCONF_CORE (c)
 
-#define GET_GCONF_DISPLAY(d)					     \
-    ((GConfDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
 
-#define GCONF_DISPLAY(d)		     \
-    GConfDisplay *gd = GET_GCONF_DISPLAY (d)
+static gchar *
+gconfGetKey (CompObject  *object,
+	     const gchar *plugin,
+	     const gchar *option)
+{
+    const gchar *type;
+    gchar	*key, *name, *objectName;
 
-#define GET_GCONF_SCREEN(s, gd)						 \
-    ((GConfScreen *) (s)->object.privates[(gd)->screenPrivateIndex].ptr)
+    type = compObjectTypeName (object->type);
+    if (strcmp (type, "display") == 0)
+	type = "allscreens";
 
-#define GCONF_SCREEN(s)							\
-    GConfScreen *gs = GET_GCONF_SCREEN (s,				\
-					GET_GCONF_DISPLAY (s->display))
+    name = compObjectName (object);
+    if (name)
+    {
+	objectName = g_strdup_printf ("%s%s", type, name);
+	free (name);
+    }
+    else
+	objectName = g_strdup (type);
+
+    if (strcmp (plugin, "core") == 0)
+	key = g_strjoin ("/", "/apps", APP_NAME, "general", objectName,
+			 "options", option, NULL);
+    else
+	key = g_strjoin ("/", "/apps", APP_NAME, "plugins", plugin, objectName,
+			 "options", option, NULL);
+
+    g_free (objectName);
+
+    return key;
+}
 
 static GConfValueType
 gconfTypeFromCompType (CompOptionType type)
@@ -114,7 +122,7 @@ gconfTypeFromCompType (CompOptionType type)
 }
 
 static void
-gconfSetValue (CompDisplay     *d,
+gconfSetValue (CompObject      *object,
 	       CompOptionValue *value,
 	       CompOptionType  type,
 	       GConfValue      *gvalue)
@@ -143,7 +151,7 @@ gconfSetValue (CompDisplay     *d,
     case CompOptionTypeKey: {
 	gchar *action;
 
-	action = keyActionToString (d, &value->action);
+	action = keyActionToString (GET_CORE_DISPLAY (object), &value->action);
 	gconf_value_set_string (gvalue, action);
 
 	free (action);
@@ -151,7 +159,8 @@ gconfSetValue (CompDisplay     *d,
     case CompOptionTypeButton: {
 	gchar *action;
 
-	action = buttonActionToString (d, &value->action);
+	action = buttonActionToString (GET_CORE_DISPLAY (object),
+				       &value->action);
 	gconf_value_set_string (gvalue, action);
 
 	free (action);
@@ -181,28 +190,22 @@ gconfSetValue (CompDisplay     *d,
 }
 
 static void
-gconfSetOption (CompDisplay *d,
+gconfSetOption (CompObject  *object,
 		CompOption  *o,
-		const gchar *plugin,
-		const gchar *object)
+		const gchar *plugin)
 {
     GConfValueType type = gconfTypeFromCompType (o->type);
     GConfValue     *gvalue, *existingValue = NULL;
     gchar          *key;
 
-    GCONF_DISPLAY (d);
+    GCONF_CORE (&core);
 
     if (type == GCONF_VALUE_INVALID)
 	return;
 
-    if (strcmp (plugin, "core") == 0)
-	key = g_strjoin ("/", "/apps", APP_NAME, "general", object, "options",
-			 o->name, NULL);
-    else
-	key = g_strjoin ("/", "/apps", APP_NAME, "plugins", plugin, object,
-			 "options", o->name, NULL);
+    key = gconfGetKey (object, plugin, o->name);
 
-    existingValue = gconf_client_get (gd->client, key, NULL);
+    existingValue = gconf_client_get (gc->client, key, NULL);
     gvalue = gconf_value_new (type);
 
     if (o->type == CompOptionTypeList)
@@ -216,7 +219,8 @@ gconfSetOption (CompDisplay *d,
 	for (i = 0; i < o->value.list.nValue; i++)
 	{
 	    gv = gconf_value_new (type);
-	    gconfSetValue (d, &o->value.list.value[i], o->value.list.type, gv);
+	    gconfSetValue (object, &o->value.list.value[i],
+			   o->value.list.type, gv);
 	    list = g_slist_append (list, gv);
 	}
 
@@ -224,7 +228,7 @@ gconfSetOption (CompDisplay *d,
 	gconf_value_set_list (gvalue, list);
 
 	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key, gvalue, NULL);
+	    gconf_client_set (gc->client, key, gvalue, NULL);
 
 	for (node = list; node; node = node->next)
 	    gconf_value_free ((GConfValue *) node->data);
@@ -233,10 +237,10 @@ gconfSetOption (CompDisplay *d,
     }
     else
     {
-	gconfSetValue (d, &o->value, o->type, gvalue);
+	gconfSetValue (object, &o->value, o->type, gvalue);
 
 	if (!existingValue || gconf_value_compare (existingValue, gvalue))
-	    gconf_client_set (gd->client, key, gvalue, NULL);
+	    gconf_client_set (gc->client, key, gvalue, NULL);
     }
 
     gconf_value_free (gvalue);
@@ -248,7 +252,7 @@ gconfSetOption (CompDisplay *d,
 }
 
 static Bool
-gconfGetValue (CompDisplay     *d,
+gconfGetValue (CompObject      *object,
 	       CompOptionValue *value,
 	       CompOptionType  type,
 	       GConfValue      *gvalue)
@@ -302,7 +306,7 @@ gconfGetValue (CompDisplay     *d,
 
 	action = gconf_value_get_string (gvalue);
 
-	stringToKeyAction (d, action, &value->action);
+	stringToKeyAction (GET_CORE_DISPLAY (object), action, &value->action);
 	return TRUE;
     }
     else if (type         == CompOptionTypeButton &&
@@ -312,7 +316,8 @@ gconfGetValue (CompDisplay     *d,
 
 	action = gconf_value_get_string (gvalue);
 
-	stringToButtonAction (d, action, &value->action);
+	stringToButtonAction (GET_CORE_DISPLAY (object), action,
+			      &value->action);
 	return TRUE;
     }
     else if (type         == CompOptionTypeEdge &&
@@ -347,7 +352,7 @@ gconfGetValue (CompDisplay     *d,
 }
 
 static Bool
-gconfReadOptionValue (CompDisplay     *d,
+gconfReadOptionValue (CompObject      *object,
 		      GConfEntry      *entry,
 		      CompOption      *o,
 		      CompOptionValue *value)
@@ -381,7 +386,7 @@ gconfReadOptionValue (CompDisplay     *d,
 	    {
 		for (i = 0; i < n; i++)
 		{
-		    if (!gconfGetValue (d,
+		    if (!gconfGetValue (object,
 					&value->list.value[i],
 					o->value.list.type,
 					(GConfValue *) list->data))
@@ -402,7 +407,7 @@ gconfReadOptionValue (CompDisplay     *d,
     }
     else
     {
-	if (!gconfGetValue (d, value, o->type, gvalue))
+	if (!gconfGetValue (object, value, o->type, gvalue))
 	    return FALSE;
     }
 
@@ -412,73 +417,31 @@ gconfReadOptionValue (CompDisplay     *d,
 }
 
 static void
-gconfGetDisplayOption (CompDisplay *d,
-		       CompOption  *o,
-		       const char  *plugin)
+gconfGetOption (CompObject *object,
+		CompOption *o,
+		const char *plugin)
 {
     GConfEntry *entry;
     gchar      *key;
 
-    GCONF_DISPLAY (d);
+    GCONF_CORE (&core);
 
-    if (strcmp (plugin, "core") == 0)
-	key = g_strjoin ("/", "/apps", APP_NAME, "general", "allscreens",
-			 "options", o->name, NULL);
-    else
-	key = g_strjoin ("/", "/apps", APP_NAME, "plugins", plugin,
-			 "allscreens", "options", o->name, NULL);
+    key = gconfGetKey (object, plugin, o->name);
 
-    entry = gconf_client_get_entry (gd->client, key, NULL, TRUE, NULL);
+    entry = gconf_client_get_entry (gc->client, key, NULL, TRUE, NULL);
     if (entry)
     {
 	CompOptionValue value;
 
-	if (gconfReadOptionValue (d, entry, o, &value))
+	if (gconfReadOptionValue (object, entry, o, &value))
 	{
-	    (*d->setDisplayOptionForPlugin) (d, plugin, o->name, &value);
+	    (*core.setOptionForPlugin) (object, plugin, o->name, &value);
 
 	    compFiniOptionValue (&value, o->type);
 	}
 	else
 	{
-	    gconfSetOption (d, o, plugin, "allscreens");
-	}
-    }
-
-    g_free (key);
-}
-
-static void
-gconfGetScreenOption (CompScreen *s,
-		      CompOption *o,
-		      const char *plugin,
-		      const char *screen)
-{
-    GConfEntry *entry;
-    gchar      *key;
-
-    GCONF_DISPLAY (s->display);
-
-    if (strcmp (plugin, "core") == 0)
-	key = g_strjoin ("/", "/apps", APP_NAME, "general", screen, "options",
-			 o->name, NULL);
-    else
-	key = g_strjoin ("/", "/apps", APP_NAME, "plugins", plugin, screen,
-			 "options", o->name, NULL);
-
-    entry = gconf_client_get_entry (gd->client, key, NULL, TRUE, NULL);
-    if (entry)
-    {
-	CompOptionValue value;
-
-	if (gconfReadOptionValue (s->display, entry, o, &value))
-	{
-	    (*s->setScreenOptionForPlugin) (s, plugin, o->name, &value);
-	    compFiniOptionValue (&value, o->type);
-	}
-	else
-	{
-	    gconfSetOption (s->display, o, plugin, screen);
+	    gconfSetOption (object, o, plugin);
 	}
     }
 
@@ -488,13 +451,13 @@ gconfGetScreenOption (CompScreen *s,
 static Bool
 gconfReload (void *closure)
 {
-    CompDisplay *d = (CompDisplay *) closure;
+    CompDisplay *d = compDisplays;
     CompScreen  *s;
     CompPlugin  *p;
     CompOption  *option;
     int		nOption;
 
-    GCONF_DISPLAY (d);
+    GCONF_CORE (&core);
 
     for (p = getPlugins (); p; p = p->next)
     {
@@ -503,46 +466,36 @@ gconfReload (void *closure)
 
 	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 	while (nOption--)
-	    gconfGetDisplayOption (d, option++, p->vTable->name);
-    }
+	    gconfGetOption (&d->object, option++, p->vTable->name);
 
-    for (s = d->screens; s; s = s->next)
-    {
-	gchar *screen = g_strdup_printf ("screen%d", s->screenNum);
-
-	for (p = getPlugins (); p; p = p->next)
+	for (s = d->screens; s; s = s->next)
 	{
-	    if (!p->vTable->getObjectOptions)
-		continue;
-
 	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
 	    while (nOption--)
-		gconfGetScreenOption (s, option++, p->vTable->name, screen);
+		gconfGetOption (&s->object, option++, p->vTable->name);
 	}
-
-	g_free (screen);
     }
 
-    gd->reloadHandle = 0;
+    gc->reloadHandle = 0;
 
     return FALSE;
 }
 
 static Bool
-gconfSetDisplayOptionForPlugin (CompDisplay     *d,
-				const char	*plugin,
-				const char	*name,
-				CompOptionValue *value)
+gconfSetOptionForPlugin (CompObject      *object,
+			 const char	 *plugin,
+			 const char	 *name,
+			 CompOptionValue *value)
 {
-    Bool status;
+    CompBool status;
 
-    GCONF_DISPLAY (d);
+    GCONF_CORE (&core);
 
-    UNWRAP (gd, d, setDisplayOptionForPlugin);
-    status = (*d->setDisplayOptionForPlugin) (d, plugin, name, value);
-    WRAP (gd, d, setDisplayOptionForPlugin, gconfSetDisplayOptionForPlugin);
+    UNWRAP (gc, &core, setOptionForPlugin);
+    status = (*core.setOptionForPlugin) (object, plugin, name, value);
+    WRAP (gc, &core, setOptionForPlugin, gconfSetOptionForPlugin);
 
-    if (status && !gd->reloadHandle)
+    if (status && !gc->reloadHandle)
     {
 	CompPlugin *p;
 
@@ -552,90 +505,14 @@ gconfSetDisplayOptionForPlugin (CompDisplay     *d,
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, object, &nOption);
 	    option = compFindOption (option, nOption, name, 0);
 	    if (option)
-		gconfSetOption (d, option, p->vTable->name, "allscreens");
+		gconfSetOption (object, option, p->vTable->name);
 	}
     }
 
     return status;
-}
-
-static Bool
-gconfSetScreenOptionForPlugin (CompScreen      *s,
-			       const char      *plugin,
-			       const char      *name,
-			       CompOptionValue *value)
-{
-    Bool status;
-
-    GCONF_SCREEN (s);
-
-    UNWRAP (gs, s, setScreenOptionForPlugin);
-    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
-    WRAP (gs, s, setScreenOptionForPlugin, gconfSetScreenOptionForPlugin);
-
-    if (status)
-    {
-	GCONF_DISPLAY (s->display);
-
-	if (!gd->reloadHandle)
-	{
-	    CompPlugin *p;
-
-	    p = findActivePlugin (plugin);
-	    if (p && p->vTable->getObjectOptions)
-	    {
-		CompOption *option;
-		int	   nOption;
-		gchar      *screen;
-
-		screen = g_strdup_printf ("screen%d", s->screenNum);
-
-		option = (*p->vTable->getObjectOptions) (p, &s->object,
-							 &nOption);
-		option = compFindOption (option, nOption, name, 0);
-		if (option)
-		    gconfSetOption (s->display, option, plugin, screen);
-
-		g_free (screen);
-	    }
-	}
-    }
-
-    return status;
-}
-
-static CompBool
-gconfInitPluginForDisplay (CompPlugin  *p,
-			   CompDisplay *d)
-{
-    CompOption *option;
-    int	       nOption;
-
-    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
-    while (nOption--)
-	gconfGetDisplayOption (d, option++, p->vTable->name);
-
-    return TRUE;
-}
-
-static CompBool
-gconfInitPluginForScreen (CompPlugin *p,
-			  CompScreen *s)
-{
-    CompOption *option;
-    int	       nOption;
-    gchar      *screen = g_strdup_printf ("screen%d", s->screenNum);
-
-    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
-    while (nOption--)
-	gconfGetScreenOption (s, option++, p->vTable->name, screen);
-
-    g_free (screen);
-
-    return TRUE;
 }
 
 static CompBool
@@ -650,15 +527,19 @@ gconfInitPluginForObject (CompPlugin *p,
     status = (*core.initPluginForObject) (p, o);
     WRAP (gc, &core, initPluginForObject, gconfInitPluginForObject);
 
+    /* display and screen options are only supported yet */
+    if (o->type != COMP_OBJECT_TYPE_DISPLAY &&
+	o->type != COMP_OBJECT_TYPE_SCREEN)
+	return status;
+
     if (status && p->vTable->getObjectOptions)
     {
-	static InitPluginForObjectProc dispTab[] = {
-	    (InitPluginForObjectProc) 0, /* InitPluginForCore */
-	    (InitPluginForObjectProc) gconfInitPluginForDisplay,
-	    (InitPluginForObjectProc) gconfInitPluginForScreen
-	};
+	CompOption *option;
+	int	   nOption;
 
-	RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+	option = (*p->vTable->getObjectOptions) (p, o, &nOption);
+	while (nOption--)
+	    gconfGetOption (o, option++, p->vTable->name);
     }
 
     return status;
@@ -670,7 +551,7 @@ gconfKeyChanged (GConfClient *client,
 		 GConfEntry  *entry,
 		 gpointer    user_data)
 {
-    CompDisplay *display = (CompDisplay *) user_data;
+    CompDisplay *display = compDisplays;
     CompScreen  *screen = NULL;
     CompPlugin  *plugin = NULL;
     CompOption  *option = NULL;
@@ -755,12 +636,12 @@ gconfKeyChanged (GConfClient *client,
 	{
 	    CompOptionValue value;
 
-	    if (gconfReadOptionValue (display, entry, option, &value))
+	    if (gconfReadOptionValue (&screen->object, entry, option, &value))
 	    {
-		(*screen->setScreenOptionForPlugin) (screen,
-						     plugin->vTable->name,
-						     option->name,
-						     &value);
+		(*core.setOptionForPlugin) (&screen->object,
+					    plugin->vTable->name,
+					    option->name,
+					    &value);
 
 		compFiniOptionValue (&value, option->type);
 	    }
@@ -778,12 +659,12 @@ gconfKeyChanged (GConfClient *client,
 	{
 	    CompOptionValue value;
 
-	    if (gconfReadOptionValue (display, entry, option, &value))
+	    if (gconfReadOptionValue (&display->object, entry, option, &value))
 	    {
-		(*display->setDisplayOptionForPlugin) (display,
-						       plugin->vTable->name,
-						       option->name,
-						       &value);
+		(*core.setOptionForPlugin) (&display->object,
+					    plugin->vTable->name,
+					    option->name,
+					    &value);
 
 		compFiniOptionValue (&value, option->type);
 	    }
@@ -828,14 +709,20 @@ gconfInitCore (CompPlugin *p,
     if (!gc)
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
-    {
-	free (gc);
-	return FALSE;
-    }
+    g_type_init ();
+
+    gc->client = gconf_client_get_default ();
+
+    gconf_client_add_dir (gc->client, "/apps/" APP_NAME,
+			  GCONF_CLIENT_PRELOAD_NONE, NULL);
+
+    gc->reloadHandle = compAddTimeout (0, gconfReload, 0);
+
+    gconf_client_notify_add (gc->client, "/apps/" APP_NAME, gconfKeyChanged,
+			     c, NULL, NULL);
 
     WRAP (gc, c, initPluginForObject, gconfInitPluginForObject);
+    WRAP (gc, c, setOptionForPlugin, gconfSetOptionForPlugin);
 
     c->object.privates[corePrivateIndex].ptr = gc;
 
@@ -850,8 +737,6 @@ gconfFiniCore (CompPlugin *p,
 
     UNWRAP (gc, c, initPluginForObject);
 
-    freeDisplayPrivateIndex (displayPrivateIndex);
-
     free (gc);
 }
 
@@ -859,86 +744,9 @@ static Bool
 gconfInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
-    GConfDisplay *gd;
-
-    gd = malloc (sizeof (GConfDisplay));
-    if (!gd)
-	return FALSE;
-
-    gd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (gd->screenPrivateIndex < 0)
-    {
-	free (gd);
-	return FALSE;
-    }
-
-    g_type_init ();
-
-    gd->client = gconf_client_get_default ();
-
-    gconf_client_add_dir (gd->client, "/apps/" APP_NAME,
-			  GCONF_CLIENT_PRELOAD_NONE, NULL);
-
-    gd->reloadHandle = compAddTimeout (0, gconfReload, (void *) d);
-
-    WRAP (gd, d, setDisplayOptionForPlugin, gconfSetDisplayOptionForPlugin);
-
-    d->object.privates[displayPrivateIndex].ptr = gd;
-
-    gconf_client_notify_add (gd->client, "/apps/" APP_NAME, gconfKeyChanged,
-			     d, NULL, NULL);
-
     gconfSendGLibNotify (d);
 
     return TRUE;
-}
-
-static void
-gconfFiniDisplay (CompPlugin  *p,
-		  CompDisplay *d)
-{
-    GCONF_DISPLAY (d);
-
-    if (gd->reloadHandle)
-	compRemoveTimeout (gd->reloadHandle);
-
-    g_object_unref (gd->client);
-
-    UNWRAP (gd, d, setDisplayOptionForPlugin);
-
-    freeScreenPrivateIndex (d, gd->screenPrivateIndex);
-
-    free (gd);
-}
-
-static Bool
-gconfInitScreen (CompPlugin *p,
-		 CompScreen *s)
-{
-    GConfScreen *gs;
-
-    GCONF_DISPLAY (s->display);
-
-    gs = malloc (sizeof (GConfScreen));
-    if (!gs)
-	return FALSE;
-
-    WRAP (gs, s, setScreenOptionForPlugin, gconfSetScreenOptionForPlugin);
-
-    s->object.privates[gd->screenPrivateIndex].ptr = gs;
-
-    return TRUE;
-}
-
-static void
-gconfFiniScreen (CompPlugin *p,
-		 CompScreen *s)
-{
-    GCONF_SCREEN (s);
-
-    UNWRAP (gs, s, setScreenOptionForPlugin);
-
-    free (gs);
 }
 
 static CompBool
@@ -947,8 +755,7 @@ gconfInitObject (CompPlugin *p,
 {
     static InitPluginObjectProc dispTab[] = {
 	(InitPluginObjectProc) gconfInitCore,
-	(InitPluginObjectProc) gconfInitDisplay,
-	(InitPluginObjectProc) gconfInitScreen
+	(InitPluginObjectProc) gconfInitDisplay
     };
 
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
@@ -959,9 +766,7 @@ gconfFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) gconfFiniCore,
-	(FiniPluginObjectProc) gconfFiniDisplay,
-	(FiniPluginObjectProc) gconfFiniScreen
+	(FiniPluginObjectProc) gconfFiniCore
     };
 
     DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));

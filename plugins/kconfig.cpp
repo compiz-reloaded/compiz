@@ -34,26 +34,15 @@ static CompMetadata kconfigMetadata;
 static int corePrivateIndex;
 
 typedef struct _KconfigCore {
-    InitPluginForObjectProc initPluginForObject;
-} KconfigCore;
-
-static int displayPrivateIndex;
-
-typedef struct _KconfigDisplay {
-    int screenPrivateIndex;
-
-    SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
-
     KConfig *config;
 
     CompTimeoutHandle   syncHandle;
     CompTimeoutHandle   reloadHandle;
     CompFileWatchHandle fileWatch;
-} KconfigDisplay;
 
-typedef struct _KconfigScreen {
-    SetScreenOptionForPluginProc setScreenOptionForPlugin;
-} KconfigScreen;
+    InitPluginForObjectProc initPluginForObject;
+    SetOptionForPluginProc  setOptionForPlugin;
+} KconfigCore;
 
 #define GET_KCONFIG_CORE(c)					 \
     ((KconfigCore *) (c)->object.privates[corePrivateIndex].ptr)
@@ -61,18 +50,6 @@ typedef struct _KconfigScreen {
 #define KCONFIG_CORE(c)			   \
     KconfigCore *kc = GET_KCONFIG_CORE (c)
 
-#define GET_KCONFIG_DISPLAY(d)					       \
-    ((KconfigDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
-
-#define KCONFIG_DISPLAY(d)		         \
-    KconfigDisplay *kd = GET_KCONFIG_DISPLAY (d)
-
-#define GET_KCONFIG_SCREEN(s, kd)					   \
-    ((KconfigScreen *) (s)->object.privates[(kd)->screenPrivateIndex].ptr)
-
-#define KCONFIG_SCREEN(s)					              \
-    KconfigScreen *ks = GET_KCONFIG_SCREEN (s,				      \
-					    GET_KCONFIG_DISPLAY (s->display))
 
 static void
 kconfigRcChanged (const char *name,
@@ -81,13 +58,11 @@ kconfigRcChanged (const char *name,
 static Bool
 kconfigRcSync (void *closure)
 {
-    CompDisplay *d = (CompDisplay *) closure;
+    KCONFIG_CORE (&core);
 
-    KCONFIG_DISPLAY (d);
+    kc->config->sync ();
 
-    kd->config->sync ();
-
-    kd->syncHandle = 0;
+    kc->syncHandle = 0;
 
     return FALSE;
 }
@@ -109,7 +84,7 @@ kconfigValueToBool (CompOptionType  type,
 }
 
 static QString
-kconfigValueToString (CompDisplay     *d,
+kconfigValueToString (CompObject      *object,
 		      CompOptionType  type,
 		      CompOptionValue *value)
 {
@@ -138,7 +113,7 @@ kconfigValueToString (CompDisplay     *d,
     case CompOptionTypeKey: {
 	char *action;
 
-	action = keyActionToString (d, &value->action);
+	action = keyActionToString (GET_CORE_DISPLAY (object), &value->action);
 	if (action)
 	{
 	    str = QString (action);
@@ -148,7 +123,8 @@ kconfigValueToString (CompDisplay     *d,
     case CompOptionTypeButton: {
 	char *action;
 
-	action = buttonActionToString (d, &value->action);
+	action = buttonActionToString (GET_CORE_DISPLAY (object),
+				       &value->action);
 	if (action)
 	{
 	    str = QString (action);
@@ -185,29 +161,44 @@ kconfigValueToString (CompDisplay     *d,
     return str;
 }
 
-static void
-kconfigSetOption (CompDisplay *d,
-		  CompOption  *o,
-		  const char  *plugin,
-		  const char  *object)
+static QString
+kconfigObjectString (CompObject *object)
 {
-    QString group (QString (plugin) + "_" + QString (object));
+    QString objectName (QString (compObjectTypeName (object->type)));
+    char    *name;
 
-    KCONFIG_DISPLAY (d);
+    name = compObjectName (object);
+    if (name)
+    {
+	objectName += name;
+	free (name);
+    }
 
-    kd->config->setGroup (group);
+    return objectName;
+}
+
+static void
+kconfigSetOption (CompObject  *object,
+		  CompOption  *o,
+		  const char  *plugin)
+{
+    QString group (QString (plugin) + "_" + kconfigObjectString (object));
+
+    KCONFIG_CORE (&core);
+
+    kc->config->setGroup (group);
 
     switch (o->type) {
     case CompOptionTypeBool:
     case CompOptionTypeBell:
-	kd->config->writeEntry (o->name,
+	kc->config->writeEntry (o->name,
 				kconfigValueToBool (o->type, &o->value));
 	break;
     case CompOptionTypeInt:
-	kd->config->writeEntry (o->name, o->value.i);
+	kc->config->writeEntry (o->name, o->value.i);
 	break;
     case CompOptionTypeFloat:
-	kd->config->writeEntry (o->name, (double) o->value.f);
+	kc->config->writeEntry (o->name, (double) o->value.f);
 	break;
     case CompOptionTypeString:
     case CompOptionTypeColor:
@@ -215,8 +206,9 @@ kconfigSetOption (CompDisplay *d,
     case CompOptionTypeButton:
     case CompOptionTypeEdge:
     case CompOptionTypeMatch:
-	kd->config->writeEntry (o->name,
-				kconfigValueToString (d, o->type, &o->value));
+	kc->config->writeEntry (o->name,
+				kconfigValueToString (object, o->type,
+						      &o->value));
 	break;
     case CompOptionTypeList: {
 	int i;
@@ -228,7 +220,7 @@ kconfigSetOption (CompDisplay *d,
 	    for (i = 0; i < o->value.list.nValue; i++)
 		list += o->value.list.value[i].i;
 
-	    kd->config->writeEntry (o->name, list);
+	    kc->config->writeEntry (o->name, list);
 	} break;
 	case CompOptionTypeBool:
 	case CompOptionTypeFloat:
@@ -242,11 +234,11 @@ kconfigSetOption (CompDisplay *d,
 	    QStringList list;
 
 	    for (i = 0; i < o->value.list.nValue; i++)
-		list += kconfigValueToString (d,
+		list += kconfigValueToString (object,
 					      o->value.list.type,
 					      &o->value.list.value[i]);
 
-	    kd->config->writeEntry (o->name, list);
+	    kc->config->writeEntry (o->name, list);
 	} break;
 	case CompOptionTypeAction:
 	case CompOptionTypeList:
@@ -257,12 +249,12 @@ kconfigSetOption (CompDisplay *d,
 	return;
     }
 
-    if (!kd->syncHandle)
-	kd->syncHandle = compAddTimeout (0, kconfigRcSync, (void *) d);
+    if (!kc->syncHandle)
+	kc->syncHandle = compAddTimeout (0, kconfigRcSync, 0);
 }
 
 static Bool
-kconfigStringToValue (CompDisplay     *d,
+kconfigStringToValue (CompObject      *object,
 		      QString	      str,
 		      CompOptionType  type,
 		      CompOptionValue *value)
@@ -284,10 +276,12 @@ kconfigStringToValue (CompDisplay     *d,
 	    return FALSE;
 	break;
     case CompOptionTypeKey:
-	stringToKeyAction (d, str.ascii (), &value->action);
+	stringToKeyAction (GET_CORE_DISPLAY (object), str.ascii (),
+			   &value->action);
 	break;
     case CompOptionTypeButton:
-	stringToButtonAction (d, str.ascii (), &value->action);
+	stringToButtonAction (GET_CORE_DISPLAY (object), str.ascii (),
+			      &value->action);
 	break;
     case CompOptionTypeEdge:
 	value->action.edgeMask = stringToEdgeMask (str.ascii ());
@@ -323,7 +317,7 @@ kconfigBoolToValue (bool	    b,
 }
 
 static Bool
-kconfigReadOptionValue (CompDisplay	*d,
+kconfigReadOptionValue (CompObject	*object,
 			KConfig		*config,
 			CompOption	*o,
 			CompOptionValue *value)
@@ -347,7 +341,8 @@ kconfigReadOptionValue (CompDisplay	*d,
     case CompOptionTypeButton:
     case CompOptionTypeEdge:
     case CompOptionTypeMatch:
-	if (!kconfigStringToValue (d, config->readEntry (o->name), o->type,
+	if (!kconfigStringToValue (object,
+				   config->readEntry (o->name), o->type,
 				   value))
 	    return FALSE;
 	break;
@@ -400,7 +395,7 @@ kconfigReadOptionValue (CompDisplay	*d,
 		{
 		    for (i = 0; i < n; i++)
 		    {
-			if (!kconfigStringToValue (d,
+			if (!kconfigStringToValue (object,
 						   list[i],
 						   value->list.type,
 						   &value->list.value[i]))
@@ -431,75 +426,46 @@ kconfigReadOptionValue (CompDisplay	*d,
 }
 
 static void
-kconfigGetDisplayOption (CompDisplay *d,
-			 CompOption  *o,
-			 const char  *plugin)
+kconfigGetOption (CompObject *object,
+		  CompOption *o,
+		  const char *plugin)
 {
-    QString       group (QString (plugin) + "_display");
+    QString	  group (QString (plugin) + "_" +
+			 kconfigObjectString (object));
     const QString name (o->name);
 
-    KCONFIG_DISPLAY (d);
+    KCONFIG_CORE (&core);
 
-    kd->config->setGroup (group);
+    kc->config->setGroup (group);
 
-    if (kd->config->hasKey (name))
+    if (kc->config->hasKey (name))
     {
 	CompOptionValue value;
 
-	if (kconfigReadOptionValue (d, kd->config, o, &value))
+	if (kconfigReadOptionValue (object, kc->config, o, &value))
 	{
-	    (*d->setDisplayOptionForPlugin) (d, plugin, o->name, &value);
+	    (*core.setOptionForPlugin) (object, plugin, o->name, &value);
 	    compFiniOptionValue (&value, o->type);
 	}
     }
     else
     {
-	kconfigSetOption (d, o, plugin, "display");
-    }
-}
-
-static void
-kconfigGetScreenOption (CompScreen *s,
-			CompOption *o,
-			const char *plugin,
-			const char *screen)
-{
-    QString       group (QString (plugin) + "_" + QString (screen));
-    const QString name (o->name);
-
-    KCONFIG_DISPLAY (s->display);
-
-    kd->config->setGroup (group);
-
-    if (kd->config->hasKey (name))
-    {
-	CompOptionValue value;
-
-	if (kconfigReadOptionValue (s->display, kd->config, o, &value))
-	{
-	    (*s->setScreenOptionForPlugin) (s, plugin, o->name, &value);
-
-	    compFiniOptionValue (&value, o->type);
-	}
-    }
-    else
-    {
-	kconfigSetOption (s->display, o, plugin, screen);
+	kconfigSetOption (object, o, plugin);
     }
 }
 
 static Bool
 kconfigRcReload (void *closure)
 {
-    CompDisplay *d = (CompDisplay *) closure;
+    CompDisplay *d = compDisplays;
     CompScreen  *s;
     CompPlugin  *p;
     CompOption  *option;
     int		nOption;
 
-    KCONFIG_DISPLAY (d);
+    KCONFIG_CORE (&core);
 
-    kd->config->reparseConfiguration ();
+    kc->config->reparseConfiguration ();
 
     for (p = getPlugins (); p; p = p->next)
     {
@@ -508,26 +474,17 @@ kconfigRcReload (void *closure)
 
 	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
 	while (nOption--)
-	    kconfigGetDisplayOption (d, option++, p->vTable->name);
-    }
+	    kconfigGetOption (&d->object, option++, p->vTable->name);
 
-    for (s = d->screens; s; s = s->next)
-    {
-	QString screen ("screen" + QString::number (s->screenNum));
-
-	for (p = getPlugins (); p; p = p->next)
+	for (s = d->screens; s; s = s->next)
 	{
-	    if (!p->vTable->getObjectOptions)
-		continue;
-
 	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
 	    while (nOption--)
-		kconfigGetScreenOption (s, option++, p->vTable->name,
-					screen.ascii ());
+		kconfigGetOption (&s->object, option++, p->vTable->name);
 	}
     }
 
-    kd->reloadHandle = 0;
+    kc->reloadHandle = 0;
 
     return FALSE;
 }
@@ -536,32 +493,30 @@ static void
 kconfigRcChanged (const char *name,
 		  void	     *closure)
 {
-    CompDisplay *d = (CompDisplay *) closure;
-
-    KCONFIG_DISPLAY (d);
-
     if (strcmp (name, COMPIZ_KCONFIG_RC) == 0)
     {
-	if (!kd->reloadHandle)
-	    kd->reloadHandle = compAddTimeout (0, kconfigRcReload, closure);
+	KCONFIG_CORE (&core);
+
+	if (!kc->reloadHandle)
+	    kc->reloadHandle = compAddTimeout (0, kconfigRcReload, closure);
     }
 }
 
-static Bool
-kconfigSetDisplayOptionForPlugin (CompDisplay     *d,
-				  const char	  *plugin,
-				  const char	  *name,
-				  CompOptionValue *value)
+static CompBool
+kconfigSetOptionForPlugin (CompObject      *object,
+			   const char	   *plugin,
+			   const char	   *name,
+			   CompOptionValue *value)
 {
-    Bool status;
+    CompBool status;
 
-    KCONFIG_DISPLAY (d);
+    KCONFIG_CORE (&core);
 
-    UNWRAP (kd, d, setDisplayOptionForPlugin);
-    status = (*d->setDisplayOptionForPlugin) (d, plugin, name, value);
-    WRAP (kd, d, setDisplayOptionForPlugin, kconfigSetDisplayOptionForPlugin);
+    UNWRAP (kc, &core, setOptionForPlugin);
+    status = (*core.setOptionForPlugin) (object, plugin, name, value);
+    WRAP (kc, &core, setOptionForPlugin, kconfigSetOptionForPlugin);
 
-    if (status && !kd->reloadHandle)
+    if (status && !kc->reloadHandle)
     {
 	CompPlugin *p;
 
@@ -571,89 +526,14 @@ kconfigSetDisplayOptionForPlugin (CompDisplay     *d,
 	    CompOption *option;
 	    int	       nOption;
 
-	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, object, &nOption);
 	    option = compFindOption (option, nOption, name, 0);
 	    if (option)
-		kconfigSetOption (d, option, p->vTable->name, "display");
+		kconfigSetOption (object, option, p->vTable->name);
 	}
     }
 
     return status;
-}
-
-static Bool
-kconfigSetScreenOptionForPlugin (CompScreen      *s,
-				 const char	 *plugin,
-				 const char	 *name,
-				 CompOptionValue *value)
-{
-    Bool status;
-
-    KCONFIG_SCREEN (s);
-
-    UNWRAP (ks, s, setScreenOptionForPlugin);
-    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
-    WRAP (ks, s, setScreenOptionForPlugin, kconfigSetScreenOptionForPlugin);
-
-    if (status)
-    {
-	KCONFIG_DISPLAY (s->display);
-
-	if (!kd->reloadHandle)
-	{
-	    CompPlugin *p;
-
-	    p = findActivePlugin (plugin);
-	    if (p && p->vTable->getObjectOptions)
-	    {
-		CompOption *option;
-		int	   nOption;
-		QString    screen ("screen");
-
-		screen += QString::number (s->screenNum);
-
-		option = (*p->vTable->getObjectOptions) (p, &s->object,
-							 &nOption);
-		option = compFindOption (option, nOption, name, 0);
-		if (option)
-		    kconfigSetOption (s->display, option, plugin,
-				      screen.ascii ());
-	    }
-	}
-    }
-
-    return status;
-}
-
-static CompBool
-kconfigInitPluginForDisplay (CompPlugin  *p,
-			     CompDisplay *d)
-{
-    CompOption *option;
-    int	       nOption;
-
-    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
-    while (nOption--)
-	kconfigGetDisplayOption (d, option++, p->vTable->name);
-
-    return TRUE;
-}
-
-static CompBool
-kconfigInitPluginForScreen (CompPlugin *p,
-			    CompScreen *s)
-{
-    CompOption *option;
-    int	       nOption;
-    QString    screen ("screen");
-
-    screen += QString::number (s->screenNum);
-
-    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
-    while (nOption--)
-	kconfigGetScreenOption (s, option++, p->vTable->name, screen.ascii ());
-
-    return TRUE;
 }
 
 static CompBool
@@ -668,15 +548,19 @@ kconfigInitPluginForObject (CompPlugin *p,
     status = (*core.initPluginForObject) (p, o);
     WRAP (kc, &core, initPluginForObject, kconfigInitPluginForObject);
 
+    /* display and screen options are only supported yet */
+    if (o->type != COMP_OBJECT_TYPE_DISPLAY &&
+	o->type != COMP_OBJECT_TYPE_SCREEN)
+	return status;
+
     if (status && p->vTable->getObjectOptions)
     {
-	static InitPluginForObjectProc dispTab[] = {
-	    (InitPluginForObjectProc) 0, /* InitPluginForCore */
-	    (InitPluginForObjectProc) kconfigInitPluginForDisplay,
-	    (InitPluginForObjectProc) kconfigInitPluginForScreen
-	};
+	CompOption *option;
+	int	   nOption;
 
-	RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
+	option = (*p->vTable->getObjectOptions) (p, o, &nOption);
+	while (nOption--)
+	    kconfigGetOption (o, option++, p->vTable->name);
     }
 
     return status;
@@ -687,6 +571,7 @@ kconfigInitCore (CompPlugin *p,
 		 CompCore   *c)
 {
     KconfigCore *kc;
+    QString	dir;
 
     if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
@@ -695,14 +580,31 @@ kconfigInitCore (CompPlugin *p,
     if (!kc)
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    kc->config = new KConfig (COMPIZ_KCONFIG_RC);
+    if (!kc->config)
     {
 	delete kc;
 	return FALSE;
     }
 
+    kc->reloadHandle = compAddTimeout (0, kconfigRcReload, 0);
+    kc->syncHandle   = 0;
+    kc->fileWatch    = 0;
+
+    dir = KGlobal::dirs ()->saveLocation ("config", QString::null, false);
+
+    if (QFile::exists (dir))
+    {
+	kc->fileWatch = addFileWatch (dir.ascii (), ~0, kconfigRcChanged, 0);
+    }
+    else
+    {
+	compLogMessage (0, "kconfig", CompLogLevelWarn, "Bad access \"%s\"",
+			dir.ascii ());
+    }
+
     WRAP (kc, c, initPluginForObject, kconfigInitPluginForObject);
+    WRAP (kc, c, setOptionForPlugin, kconfigSetOptionForPlugin);
 
     c->object.privates[corePrivateIndex].ptr = kc;
 
@@ -717,115 +619,20 @@ kconfigFiniCore (CompPlugin *p,
 
     UNWRAP (kc, c, initPluginForObject);
 
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    if (kc->reloadHandle)
+	compRemoveTimeout (kc->reloadHandle);
 
+    if (kc->syncHandle)
+    {
+	compRemoveTimeout (kc->syncHandle);
+	kconfigRcSync (0);
+    }
+
+    if (kc->fileWatch)
+	removeFileWatch (kc->fileWatch);
+
+    delete kc->config;
     delete kc;
-}
-
-static Bool
-kconfigInitDisplay (CompPlugin  *p,
-		    CompDisplay *d)
-{
-    KconfigDisplay *kd;
-    QString	   dir;
-
-    kd = new KconfigDisplay;
-    if (!kd)
-	return FALSE;
-
-    kd->config = new KConfig (COMPIZ_KCONFIG_RC);
-    if (!kd->config)
-    {
-	delete kd;
-	return FALSE;
-    }
-
-    kd->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (kd->screenPrivateIndex < 0)
-    {
-	delete kd->config;
-	delete kd;
-	return FALSE;
-    }
-
-    kd->reloadHandle = compAddTimeout (0, kconfigRcReload, (void *) d);
-    kd->syncHandle   = 0;
-    kd->fileWatch    = 0;
-
-    dir = KGlobal::dirs ()->saveLocation ("config", QString::null, false);
-
-    if (QFile::exists (dir))
-    {
-	kd->fileWatch = addFileWatch (dir.ascii (), ~0, kconfigRcChanged,
-				      (void *) d);
-    }
-    else
-    {
-	compLogMessage (d, "kconfig", CompLogLevelWarn, "Bad access \"%s\"",
-			dir.ascii ());
-    }
-
-    WRAP (kd, d, setDisplayOptionForPlugin, kconfigSetDisplayOptionForPlugin);
-
-    d->object.privates[displayPrivateIndex].ptr = kd;
-
-    return TRUE;
-}
-
-static void
-kconfigFiniDisplay (CompPlugin  *p,
-		    CompDisplay *d)
-{
-    KCONFIG_DISPLAY (d);
-
-    UNWRAP (kd, d, setDisplayOptionForPlugin);
-
-    if (kd->reloadHandle)
-	compRemoveTimeout (kd->reloadHandle);
-
-    if (kd->syncHandle)
-    {
-	compRemoveTimeout (kd->syncHandle);
-	kconfigRcSync (d);
-    }
-
-    if (kd->fileWatch)
-	removeFileWatch (kd->fileWatch);
-
-    freeScreenPrivateIndex (d, kd->screenPrivateIndex);
-
-    delete kd->config;
-    delete kd;
-}
-
-static Bool
-kconfigInitScreen (CompPlugin *p,
-		   CompScreen *s)
-{
-    KconfigScreen *ks;
-
-    KCONFIG_DISPLAY (s->display);
-
-    ks = new KconfigScreen;
-    if (!ks)
-	return FALSE;
-
-    WRAP (ks, s, setScreenOptionForPlugin, kconfigSetScreenOptionForPlugin);
-
-    s->object.privates[kd->screenPrivateIndex].ptr = ks;
-
-    return TRUE;
-}
-
-static void
-kconfigFiniScreen (CompPlugin *p,
-		   CompScreen *s)
-{
-    KCONFIG_SCREEN (s);
-
-    UNWRAP (ks, s, setScreenOptionForPlugin);
-
-    delete ks;
 }
 
 static CompBool
@@ -833,9 +640,7 @@ kconfigInitObject (CompPlugin *p,
 		   CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
-	(InitPluginObjectProc) kconfigInitCore,
-	(InitPluginObjectProc) kconfigInitDisplay,
-	(InitPluginObjectProc) kconfigInitScreen
+	(InitPluginObjectProc) kconfigInitCore
     };
 
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
@@ -846,9 +651,7 @@ kconfigFiniObject (CompPlugin *p,
 		   CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) kconfigFiniCore,
-	(FiniPluginObjectProc) kconfigFiniDisplay,
-	(FiniPluginObjectProc) kconfigFiniScreen
+	(FiniPluginObjectProc) kconfigFiniCore
     };
 
     DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));

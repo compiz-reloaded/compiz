@@ -114,6 +114,21 @@ fileWatchRemoved (CompCore      *core,
 {
 }
 
+static CompBool
+setOptionForPlugin (CompObject      *object,
+		    const char	    *plugin,
+		    const char	    *name,
+		    CompOptionValue *value)
+{
+    CompPlugin *p;
+
+    p = findActivePlugin (plugin);
+    if (p && p->vTable->setObjectOption)
+	return (*p->vTable->setObjectOption) (p, object, name, value);
+
+    return FALSE;
+}
+
 CompBool
 initCore (void)
 {
@@ -127,6 +142,8 @@ initCore (void)
 
     core.fileWatch	     = NULL;
     core.lastFileWatchHandle = 1;
+
+    core.setOptionForPlugin = setOptionForPlugin;
 
     return TRUE;
 }

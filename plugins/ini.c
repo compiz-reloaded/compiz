@@ -44,24 +44,14 @@
 	((IniCore *) (c)->object.privates[corePrivateIndex].ptr)
 #define INI_CORE(c) \
 	IniCore *ic = GET_INI_CORE (c)
-#define GET_INI_DISPLAY(d) \
-	((IniDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
-#define INI_DISPLAY(d) \
-	IniDisplay *id = GET_INI_DISPLAY (d)
-#define GET_INI_SCREEN(s, id) \
-	((IniScreen *) (s)->object.privates[(id)->screenPrivateIndex].ptr)
-#define INI_SCREEN(s) \
-	IniScreen *is = GET_INI_SCREEN (s, GET_INI_DISPLAY (s->display))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
 static int corePrivateIndex;
-static int displayPrivateIndex;
 
 static CompMetadata iniMetadata;
 
-static Bool iniSaveOptions (CompDisplay *d,
-			    int         screen,
+static Bool iniSaveOptions (CompObject  *object,
 			    const char  *plugin);
 
 /*
@@ -84,39 +74,23 @@ struct _IniFileData {
  * IniCore
  */
 typedef struct _IniCore {
+    CompFileWatchHandle	directoryWatch;
+
+    IniFileData	*fileData;
+
     InitPluginForObjectProc initPluginForObject;
+    SetOptionForPluginProc  setOptionForPlugin;
 } IniCore;
 
-/*
- * IniDisplay
- */
-typedef struct _IniDisplay {
-    int		                  screenPrivateIndex;
-
-    CompFileWatchHandle		  directoryWatch;
-
-    SetDisplayOptionForPluginProc setDisplayOptionForPlugin;
-
-    IniFileData			*fileData;
-} IniDisplay;
-
-/*
- * IniScreeen
- */
-typedef struct _IniScreen {
-    SetScreenOptionForPluginProc setScreenOptionForPlugin;
-} IniScreen;
-
 static IniFileData *
-iniGetFileDataFromFilename (CompDisplay *d,
-			    const char *filename)
+iniGetFileDataFromFilename (const char *filename)
 {
     int len, i;
     int pluginSep = 0, screenSep = 0;
     char *pluginStr, *screenStr;
     IniFileData *fd;
 
-    INI_DISPLAY (d);
+    INI_CORE (&core);
 
     if (!filename)
 	return NULL;
@@ -129,7 +103,7 @@ iniGetFileDataFromFilename (CompDisplay *d,
     if ((filename[0]=='.') || (filename[len-1]=='~'))
 	return NULL;
 
-    for (fd = id->fileData; fd; fd = fd->next)
+    for (fd = ic->fileData; fd; fd = fd->next)
 	if (strcmp (fd->filename, filename) == 0)
 	    return fd;
 
@@ -164,7 +138,7 @@ iniGetFileDataFromFilename (CompDisplay *d,
 	fd->next = newFd;
     else
     */
-	id->fileData = newFd;
+	ic->fileData = newFd;
 
     newFd->prev = fd;
     newFd->next = NULL;
@@ -192,7 +166,7 @@ iniGetFileDataFromFilename (CompDisplay *d,
     if (strcmp (screenStr, "allscreens") == 0)
 	newFd->screen = -1;
     else
-	newFd->screen = atoi(&screenStr[6]);
+	newFd->screen = atoi (&screenStr[6]);
 
     newFd->blockReads  = FALSE;
     newFd->blockWrites = FALSE;
@@ -273,8 +247,7 @@ iniGetHomeDir (char **homeDir)
 }
 
 static Bool
-iniGetFilename (CompDisplay *d,
-		int screen,
+iniGetFilename (CompObject *object,
 		const char *plugin,
 		char **filename)
 {
@@ -286,21 +259,19 @@ iniGetFilename (CompDisplay *d,
     if (!screenStr)
 	return FALSE;
 
-    if (screen > -1)
+    if (object->type == COMP_OBJECT_TYPE_SCREEN)
     {
-	for (s = d->screens; s ; s = s->next)
-	    if (s && (s->screenNum == screen))
+	for (s = compDisplays->screens; s; s = s->next)
+	    if (&s->object == object)
 		break;
 
 	if (!s)
 	{
-	    compLogMessage (d, "ini", CompLogLevelWarn,
-			    "Invalid screen number passed " \
-			     "to iniGetFilename %d", screen);
 	    free(screenStr);
 	    return FALSE;
 	}
-	snprintf (screenStr, 12, "screen%d", screen);
+
+	snprintf (screenStr, 12, "screen%d", s->screenNum);
     }
     else
     {
@@ -467,14 +438,12 @@ iniMakeDirectories (void)
 }
 
 static Bool
-iniLoadOptionsFromFile (CompDisplay *d,
-			FILE        *optionFile,
-			const char  *plugin,
-			int         screen,
-			Bool        *reSave)
+iniLoadOptionsFromFile (FILE       *optionFile,
+			CompObject *object,
+			const char *plugin,
+			Bool       *reSave)
 {
     CompOption      *option = NULL, *o;
-    CompScreen      *s = NULL;
     CompPlugin      *p = NULL;
     CompOptionValue value;
     char            *optionName = NULL, *optionValue = NULL;
@@ -487,7 +456,7 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	p = findActivePlugin (plugin);
 	if (!p)
 	{
-	    compLogMessage (d, "ini", CompLogLevelWarn,
+	    compLogMessage (NULL, "ini", CompLogLevelWarn,
 			    "Could not find running plugin " \
 			    "%s (iniLoadOptionsFromFile)", plugin);
 	    return FALSE;
@@ -498,28 +467,8 @@ iniLoadOptionsFromFile (CompDisplay *d,
 	return FALSE;
     }
 
-    if (screen > -1)
-    {
-	for (s = d->screens; s; s = s->next)
-	    if (s && s->screenNum == screen)
-		break;
-
-	if (!s)
-	{
-	    compLogMessage (d, "ini", CompLogLevelWarn,
-			    "Invalid screen number passed to " \
-			    "iniLoadOptionsFromFile %d", screen);
-	    return FALSE;
-	}
-    }
-
     if (p->vTable->getObjectOptions)
-    {
-	if (s)
-	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
-	else
-	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
-    }
+	option = (*p->vTable->getObjectOptions) (p, object, &nOption);
 
     while (fgets (tmp, MAX_OPTION_LENGTH, optionFile) != NULL)
     {
@@ -527,8 +476,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
 	if (!iniParseLine (tmp, &optionName, &optionValue))
 	{
-	    compLogMessage (d, "ini", CompLogLevelWarn,
-			    "Ignoring line '%s' in %s %i", tmp, plugin, screen);
+	    compLogMessage (NULL, "ini", CompLogLevelWarn,
+			    "Ignoring line '%s' in %s",
+			    tmp, plugin);
 	    continue;
 	}
 
@@ -562,11 +512,13 @@ iniLoadOptionsFromFile (CompDisplay *d,
 			break;
 		case CompOptionTypeKey:
 		    hasValue = TRUE;
-		    stringToKeyAction (d, optionValue, &value.action);
+		    stringToKeyAction (GET_CORE_DISPLAY (object),
+				       optionValue, &value.action);
 		    break;
 		case CompOptionTypeButton:
 		    hasValue = TRUE;
-		    stringToButtonAction (d, optionValue, &value.action);
+		    stringToButtonAction (GET_CORE_DISPLAY (object),
+					  optionValue, &value.action);
 		    break;
 		case CompOptionTypeEdge:
 		    hasValue = TRUE;
@@ -577,7 +529,9 @@ iniLoadOptionsFromFile (CompDisplay *d,
 		    value.action.bell = (Bool) atoi (optionValue);
 		    break;
 		case CompOptionTypeList:
-		    hasValue = csvToList (d, optionValue, &value.list, value.list.type);
+		    hasValue = csvToList (GET_CORE_DISPLAY (object),
+					  optionValue,
+					  &value.list, value.list.type);
 			break;
 		case CompOptionTypeMatch:
 		    hasValue = TRUE;
@@ -590,15 +544,11 @@ iniLoadOptionsFromFile (CompDisplay *d,
 
 		if (hasValue)
 		{
-		    if (s)
-			status = (*s->setScreenOptionForPlugin) (s,
-								 plugin,
-								 optionName,
-								 &value);
-		    else
-			status = (*d->setDisplayOptionForPlugin) (d, plugin,
-								  optionName,
-								  &value);
+		    status = (*core.setOptionForPlugin) (object,
+							 plugin,
+							 optionName,
+							 &value);
+
 		    if (o->type == CompOptionTypeMatch)
 		    {
 			matchFini (&value.match);
@@ -625,28 +575,22 @@ iniLoadOptionsFromFile (CompDisplay *d,
 }
 
 static Bool
-iniSaveOptions (CompDisplay *d,
-	        int         screen,
-		const char  *plugin)
+iniSaveOptions (CompObject *object,
+		const char *plugin)
 {
     CompScreen *s = NULL;
     CompOption *option = NULL;
     int	       nOption = 0;
     char       *filename, *directory, *fullPath, *strVal = NULL;
 
-    if (screen > -1)
+    if (object->type == COMP_OBJECT_TYPE_SCREEN)
     {
-	for (s = d->screens; s; s = s->next)
-	    if (s && s->screenNum == screen)
+	for (s = compDisplays->screens; s; s = s->next)
+	    if (&s->object == object)
 		break;
 
 	if (!s)
-	{
-	    compLogMessage (d, "ini", CompLogLevelWarn,
-			    "Invalid screen number passed to " \
-			    "iniSaveOptions %d", screen);
 	    return FALSE;
-	}
     }
 
     if (plugin)
@@ -656,10 +600,7 @@ iniSaveOptions (CompDisplay *d,
 	if (!p)
 	    return FALSE;
 
-	if (s)
-	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
-	else
-	    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+	option = (*p->vTable->getObjectOptions) (p, object, &nOption);
     }
     else
     {
@@ -669,12 +610,12 @@ iniSaveOptions (CompDisplay *d,
     if (!option)
 	return FALSE;
 
-    if (!iniGetFilename (d, screen, plugin, &filename))
+    if (!iniGetFilename (object, plugin, &filename))
 	return FALSE;
 
     IniFileData *fileData;
 
-    fileData = iniGetFileDataFromFilename (d, filename);
+    fileData = iniGetFileDataFromFilename (filename);
     if (!fileData || (fileData && fileData->blockWrites))
     {
 	free (filename);
@@ -701,7 +642,7 @@ iniSaveOptions (CompDisplay *d,
 
     if (!optionFile)
     {
-	compLogMessage (d, "ini", CompLogLevelError,
+	compLogMessage (NULL, "ini", CompLogLevelError,
 			"Failed to write to %s, check you " \
 			"have the correct permissions", fullPath);
 	free (filename);
@@ -730,7 +671,8 @@ iniSaveOptions (CompDisplay *d,
 	case CompOptionTypeEdge:
 	case CompOptionTypeBell:
 	case CompOptionTypeMatch:
-		strVal = iniOptionValueToString (d, &option->value, option->type);
+	    strVal = iniOptionValueToString (GET_CORE_DISPLAY (object),
+					     &option->value, option->type);
 		if (strVal)
 		{
 		    fprintf (optionFile, "%s=%s\n", option->name, strVal);
@@ -764,7 +706,8 @@ iniSaveOptions (CompDisplay *d,
 
 		for (i = 0; i < option->value.list.nValue; i++)
 		{
-		    itemVal = iniOptionValueToString (d,
+		    itemVal =
+			iniOptionValueToString (GET_CORE_DISPLAY (object),
 						&option->value.list.value[i],
 						option->value.list.type);
 		    if (!firstInList)
@@ -783,7 +726,7 @@ iniSaveOptions (CompDisplay *d,
 		break;
 	    }
 	    default:
-		compLogMessage (d, "ini", CompLogLevelWarn,
+		compLogMessage (NULL, "ini", CompLogLevelWarn,
 				"Unknown list option type %d, %s\n",
 				option->value.list.type,
 				optionTypeToString (option->value.list.type));
@@ -809,9 +752,8 @@ iniSaveOptions (CompDisplay *d,
 }
 
 static Bool
-iniLoadOptions (CompDisplay *d,
-	        int         screen,
-	        const char  *plugin)
+iniLoadOptions (CompObject *object,
+		const char *plugin)
 {
     char         *filename, *directory, *fullPath;
     FILE         *optionFile;
@@ -822,10 +764,10 @@ iniLoadOptions (CompDisplay *d,
     optionFile = NULL;
     fileData = NULL;
 
-    if (!iniGetFilename (d, screen, plugin, &filename))
+    if (!iniGetFilename (object, plugin, &filename))
 	return FALSE;
 
-    fileData = iniGetFileDataFromFilename (d, filename);
+    fileData = iniGetFileDataFromFilename (filename);
     if (!fileData || (fileData && fileData->blockReads))
     {
 	free(filename);
@@ -855,7 +797,7 @@ iniLoadOptions (CompDisplay *d,
 
     if (!optionFile)
     {
-	if (!plugin && (screen == -1))
+	if (!plugin && object->type == COMP_OBJECT_TYPE_DISPLAY)
 	{
 	    CompOptionValue value;
 	    value.list.value = malloc (NUM_DEFAULT_PLUGINS * sizeof (CompListValue));
@@ -867,7 +809,7 @@ iniLoadOptions (CompDisplay *d,
 		return FALSE;
 	    }
 
-	    if (!csvToList (d, DEFAULT_PLUGINS,
+	    if (!csvToList (GET_CORE_DISPLAY (object), DEFAULT_PLUGINS,
 		            &value.list,
 		            CompOptionTypeString))
 	    {
@@ -879,19 +821,20 @@ iniLoadOptions (CompDisplay *d,
 
 	    value.list.type = CompOptionTypeString;
 
-	    compLogMessage (d, "ini", CompLogLevelWarn,
+	    compLogMessage (NULL, "ini", CompLogLevelWarn,
 			    "Could not open main display config file %s", fullPath);
-	    compLogMessage (d, "ini", CompLogLevelWarn,
+	    compLogMessage (NULL, "ini", CompLogLevelWarn,
 			    "Loading default plugins (%s)", DEFAULT_PLUGINS);
 
-	    (*d->setDisplayOptionForPlugin) (d, "core", "active_plugins",
-					     &value);
+	    (*core.setOptionForPlugin) (&compDisplays->object,
+					"core", "active_plugins",
+					&value);
 
 	    free (value.list.value);
 
 	    fileData->blockWrites = FALSE;
 
-	    iniSaveOptions (d, screen, plugin);
+	    iniSaveOptions (object, plugin);
 
 	    fileData->blockWrites = TRUE;
 
@@ -907,13 +850,13 @@ iniLoadOptions (CompDisplay *d,
 	}
 	else
 	{
-	    compLogMessage (d, "ini", CompLogLevelWarn,
+	    compLogMessage (NULL, "ini", CompLogLevelWarn,
 			    "Could not open config file %s - using " \
 			    "defaults for %s", fullPath, (plugin)?plugin:"core");
 
 	    fileData->blockWrites = FALSE;
 
-	    iniSaveOptions (d, screen, plugin);
+	    iniSaveOptions (object, plugin);
 
 	    fileData->blockWrites = TRUE;
 
@@ -930,7 +873,7 @@ iniLoadOptions (CompDisplay *d,
 
     fileData->blockWrites = TRUE;
 
-    loadRes = iniLoadOptionsFromFile (d, optionFile, plugin, screen, &reSave);
+    loadRes = iniLoadOptionsFromFile (optionFile, object, plugin, &reSave);
 
     fileData->blockWrites = FALSE;
 
@@ -939,7 +882,7 @@ iniLoadOptions (CompDisplay *d,
     if (loadRes && reSave)
     {
 	fileData->blockReads = TRUE;
-	iniSaveOptions (d, screen, plugin);
+	iniSaveOptions (object, plugin);
 	fileData->blockReads = FALSE;
     }
 
@@ -954,26 +897,37 @@ static void
 iniFileModified (const char *name,
 		 void       *closure)
 {
-    CompDisplay *d;
     IniFileData *fd;
 
-    d = (CompDisplay *) closure;
-
-    fd = iniGetFileDataFromFilename (d, name);
+    fd = iniGetFileDataFromFilename (name);
     if (fd)
     {
-	iniLoadOptions (d, fd->screen, fd->plugin);
+	if (fd->screen < 0)
+	{
+	    iniLoadOptions (&compDisplays->object, fd->plugin);
+	}
+	else
+	{
+	    CompScreen *s;
+
+	    for (s = compDisplays->screens; s; s = s->next)
+		if (s->screenNum == fd->screen)
+		    break;
+
+	    if (s)
+		iniLoadOptions (&s->object, fd->plugin);
+	}
     }
 }
 
 static void
-iniFreeFileData (CompDisplay *d)
+iniFreeFileData (void)
 {
     IniFileData *fd, *tmp;
 
-    INI_DISPLAY (d);
+    INI_CORE (&core);
 
-    fd = id->fileData;
+    fd = ic->fileData;
 
     while (fd)
     {
@@ -991,7 +945,7 @@ static Bool
 iniInitPluginForDisplay (CompPlugin  *p,
 			 CompDisplay *d)
 {
-    iniLoadOptions (d, -1, p->vTable->name);
+    iniLoadOptions (&d->object, p->vTable->name);
 
     return TRUE;
 }
@@ -1000,7 +954,7 @@ static Bool
 iniInitPluginForScreen (CompPlugin *p,
 			CompScreen *s)
 {
-    iniLoadOptions (s->display, s->screenNum, p->vTable->name);
+    iniLoadOptions (&s->object, p->vTable->name);
 
     return TRUE;
 }
@@ -1031,19 +985,19 @@ iniInitPluginForObject (CompPlugin *p,
     return status;
 }
 
-static Bool
-iniSetDisplayOptionForPlugin (CompDisplay     *d,
-			      const char      *plugin,
-			      const char      *name,
-			      CompOptionValue *value)
+static CompBool
+iniSetOptionForPlugin (CompObject      *object,
+		       const char      *plugin,
+		       const char      *name,
+		       CompOptionValue *value)
 {
-    Bool status;
+    CompBool status;
 
-    INI_DISPLAY (d);
+    INI_CORE (&core);
 
-    UNWRAP (id, d, setDisplayOptionForPlugin);
-    status = (*d->setDisplayOptionForPlugin) (d, plugin, name, value);
-    WRAP (id, d, setDisplayOptionForPlugin, iniSetDisplayOptionForPlugin);
+    UNWRAP (ic, &core, setOptionForPlugin);
+    status = (*core.setOptionForPlugin) (object, plugin, name, value);
+    WRAP (ic, &core, setOptionForPlugin, iniSetOptionForPlugin);
 
     if (status)
     {
@@ -1051,33 +1005,7 @@ iniSetDisplayOptionForPlugin (CompDisplay     *d,
 
 	p = findActivePlugin (plugin);
 	if (p && p->vTable->getObjectOptions)
-	    iniSaveOptions (d, -1, plugin);
-    }
-
-    return status;
-}
-
-static Bool
-iniSetScreenOptionForPlugin (CompScreen      *s,
-			     const char	     *plugin,
-			     const char	     *name,
-			     CompOptionValue *value)
-{
-    Bool status;
-
-    INI_SCREEN (s);
-
-    UNWRAP (is, s, setScreenOptionForPlugin);
-    status = (*s->setScreenOptionForPlugin) (s, plugin, name, value);
-    WRAP (is, s, setScreenOptionForPlugin, iniSetScreenOptionForPlugin);
-
-    if (status)
-    {
-	CompPlugin *p;
-
-	p = findActivePlugin (plugin);
-	if (p && p->vTable->getObjectOptions)
-	    iniSaveOptions (s->display, s->screenNum, plugin);
+	    iniSaveOptions (object, plugin);
     }
 
     return status;
@@ -1088,6 +1016,7 @@ iniInitCore (CompPlugin *p,
 	     CompCore   *c)
 {
     IniCore *ic;
+    char    *homeDir;
 
     if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
@@ -1096,14 +1025,21 @@ iniInitCore (CompPlugin *p,
     if (!ic)
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    ic->fileData = NULL;
+    ic->directoryWatch = 0;
+
+    if (iniGetHomeDir (&homeDir))
     {
-	free (ic);
-	return FALSE;
+	ic->directoryWatch = addFileWatch (homeDir,
+					   NOTIFY_DELETE_MASK |
+					   NOTIFY_CREATE_MASK |
+					   NOTIFY_MODIFY_MASK,
+					   iniFileModified, 0);
+	free (homeDir);
     }
 
     WRAP (ic, c, initPluginForObject, iniInitPluginForObject);
+    WRAP (ic, c, setOptionForPlugin, iniSetOptionForPlugin);
 
     c->object.privates[corePrivateIndex].ptr = ic;
 
@@ -1118,7 +1054,10 @@ iniFiniCore (CompPlugin *p,
 
     UNWRAP (ic, c, initPluginForObject);
 
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    if (ic->directoryWatch)
+	removeFileWatch (ic->directoryWatch);
+
+    iniFreeFileData ();
 
     free (ic);
 }
@@ -1126,90 +1065,17 @@ iniFiniCore (CompPlugin *p,
 static Bool
 iniInitDisplay (CompPlugin *p, CompDisplay *d)
 {
-    IniDisplay *id;
-    char *homeDir;
-
-    if (!checkPluginABI ("core", CORE_ABIVERSION))
-	return FALSE;
-
-    id = malloc (sizeof (IniDisplay));
-    if (!id)
-        return FALSE;
-
-    id->screenPrivateIndex = allocateScreenPrivateIndex (d);
-    if (id->screenPrivateIndex < 0)
-    {
-        free (id);
-        return FALSE;
-    }
-
-    id->fileData = NULL;
-    id->directoryWatch = 0;
-
-    WRAP (id, d, setDisplayOptionForPlugin, iniSetDisplayOptionForPlugin);
-
-    d->object.privates[displayPrivateIndex].ptr = id;
-
-    iniLoadOptions (d, -1, NULL);
-
-    if (iniGetHomeDir (&homeDir))
-    {
-	id->directoryWatch = addFileWatch (homeDir,
-					   NOTIFY_DELETE_MASK |
-					   NOTIFY_CREATE_MASK |
-					   NOTIFY_MODIFY_MASK,
-					   iniFileModified, (void *) d);
-	free (homeDir);
-    }
+    iniLoadOptions (&d->object, NULL);
 
     return TRUE;
-}
-
-static void
-iniFiniDisplay (CompPlugin *p, CompDisplay *d)
-{
-    INI_DISPLAY (d);
-
-    if (id->directoryWatch)
-	removeFileWatch (id->directoryWatch);
-
-    iniFreeFileData (d);
-
-    freeScreenPrivateIndex (d, id->screenPrivateIndex);
-
-    UNWRAP (id, d, setDisplayOptionForPlugin);
-
-    free (id);
 }
 
 static Bool
 iniInitScreen (CompPlugin *p, CompScreen *s)
 {
-    IniScreen *is;
-
-    INI_DISPLAY (s->display);
-
-    is = malloc (sizeof (IniScreen));
-    if (!is)
-        return FALSE;
-
-    s->object.privates[id->screenPrivateIndex].ptr = is;
-
-    WRAP (is, s, setScreenOptionForPlugin, iniSetScreenOptionForPlugin);
-
-    iniLoadOptions (s->display, s->screenNum, NULL);
+    iniLoadOptions (&s->object, NULL);
 
     return TRUE;
-}
-
-static void
-iniFiniScreen (CompPlugin *p, CompScreen *s)
-{
-    INI_SCREEN (s);
-
-    UNWRAP (is, s, setScreenOptionForPlugin);
-
-    free (is);
 }
 
 static CompBool
@@ -1230,9 +1096,7 @@ iniFiniObject (CompPlugin *p,
 	       CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) iniFiniCore,
-	(FiniPluginObjectProc) iniFiniDisplay,
-	(FiniPluginObjectProc) iniFiniScreen
+	(FiniPluginObjectProc) iniFiniCore
     };
 
     DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
@@ -1245,11 +1109,11 @@ iniInit (CompPlugin *p)
 					 0, 0, 0, 0))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    corePrivateIndex = allocateCorePrivateIndex ();
+    if (corePrivateIndex < 0)
     {
 	compFiniMetadata (&iniMetadata);
-        return FALSE;
+	return FALSE;
     }
 
     compAddMetadataFromFile (&iniMetadata, p->vTable->name);
@@ -1260,8 +1124,7 @@ iniInit (CompPlugin *p)
 static void
 iniFini (CompPlugin *p)
 {
-    if (displayPrivateIndex >= 0)
-        freeDisplayPrivateIndex (displayPrivateIndex);
+    freeCorePrivateIndex (corePrivateIndex);
 }
 
 static CompMetadata *

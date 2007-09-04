@@ -918,22 +918,6 @@ setDisplayOption (CompPlugin	  *plugin,
     return FALSE;
 }
 
-static Bool
-setDisplayOptionForPlugin (CompDisplay     *display,
-			   const char	   *plugin,
-			   const char	   *name,
-			   CompOptionValue *value)
-{
-    CompPlugin *p;
-
-    p = findActivePlugin (plugin);
-    if (p && p->vTable->setObjectOption)
-	return (*p->vTable->setObjectOption) (p, &display->object,
-					      name, value);
-
-    return FALSE;
-}
-
 static void
 updatePlugins (CompDisplay *d)
 {
@@ -961,7 +945,8 @@ updatePlugins (CompDisplay *d)
 	pop = malloc (sizeof (CompPlugin *) * nPop);
 	if (!pop)
 	{
-	    (*d->setDisplayOptionForPlugin) (d, "core", o->name, &d->plugin);
+	    (*core.setOptionForPlugin) (&d->object, "core", o->name,
+					&d->plugin);
 	    return;
 	}
     }
@@ -1033,7 +1018,7 @@ updatePlugins (CompDisplay *d)
     if (nPop)
 	free (pop);
 
-    (*d->setDisplayOptionForPlugin) (d, "core", o->name, &d->plugin);
+    (*core.setOptionForPlugin) (&d->object, "core", o->name, &d->plugin);
 }
 
 static void
@@ -2101,8 +2086,6 @@ addDisplay (const char *name)
     XSetErrorHandler (errorHandler);
 
     updateModifierMappings (d);
-
-    d->setDisplayOptionForPlugin = setDisplayOptionForPlugin;
 
     d->handleEvent	 = handleEvent;
     d->handleCompizEvent = handleCompizEvent;
