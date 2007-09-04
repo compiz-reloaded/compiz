@@ -2250,6 +2250,8 @@ removeScreen (CompScreen *s)
 
     glXDestroyContext (d->display, s->ctx);
 
+    XFreeCursor (d->display, s->invisibleCursor);
+
     freeScreen (s);
 }
 
