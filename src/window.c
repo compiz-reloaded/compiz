@@ -2257,11 +2257,12 @@ removeWindow (CompWindow *w)
 	if (w->type == CompWindowTypeDesktopMask)
 	    w->screen->desktopWindowCount--;
 
-	if (w->struts)
+	if (w->destroyed && w->struts)
 	    updateWorkareaForScreen (w->screen);
     }
 
-    updateClientListForScreen (w->screen);
+    if (w->destroyed)
+	updateClientListForScreen (w->screen);
 
     if (!w->redirected)
     {
