@@ -1999,6 +1999,7 @@ addDisplay (const char *name)
 
     compObjectInit (&d->base, &core.base, privates, COMP_OBJECT_TYPE_DISPLAY);
 
+    d->next    = NULL;
     d->screens = NULL;
 
     d->screenPrivateIndices = 0;
@@ -2352,6 +2353,7 @@ addDisplay (const char *name)
 	d->nScreenInfo = 0;
     }
 
+    addDisplayToCore (d);
     compDisplays = d;
 
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));

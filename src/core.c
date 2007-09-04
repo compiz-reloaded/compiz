@@ -141,6 +141,8 @@ initCore (void)
 {
     compObjectInit (&core.base, 0, 0, COMP_OBJECT_TYPE_CORE);
 
+    core.displays = NULL;
+
     core.initPluginForObject = initCorePluginForObject;
     core.finiPluginForObject = finiCorePluginForObject;
 
@@ -158,6 +160,19 @@ initCore (void)
 void
 finiCore (void)
 {
+}
+
+void
+addDisplayToCore (CompDisplay *d)
+{
+    CompDisplay *prev;
+
+    for (prev = core.displays; prev && prev->next; prev = prev->next);
+
+    if (prev)
+	prev->next = d;
+    else
+	core.displays = d;
 }
 
 CompFileWatchHandle

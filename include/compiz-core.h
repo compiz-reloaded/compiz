@@ -595,6 +595,8 @@ typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
 struct _CompCore {
     CompObject base;
 
+    CompDisplay *displays;
+
     InitPluginForObjectProc initPluginForObject;
     FiniPluginForObjectProc finiPluginForObject;
 
@@ -637,6 +639,9 @@ allocateCorePrivateIndex (void);
 
 void
 freeCorePrivateIndex (int index);
+
+void
+addDisplayToCore (CompDisplay *d);
 
 CompFileWatchHandle
 addFileWatch (const char	    *path,
@@ -806,6 +811,8 @@ typedef void (*LogMessageProc) (CompDisplay  *d,
 
 struct _CompDisplay {
     CompObject base;
+
+    CompDisplay *next;
 
     xcb_connection_t *connection;
 
