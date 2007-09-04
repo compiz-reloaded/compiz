@@ -2252,6 +2252,20 @@ removeWindow (CompWindow *w)
 {
     unhookWindowFromScreen (w->screen, w);
 
+    /* restore saved geometry and map if hidden */
+    if (!w->destroyed && !w->attrib.override_redirect)
+    {
+	if (w->saveMask)
+	    XConfigureWindow (w->screen->display->display, w->id, w->saveMask,
+			      &w->saveWc);
+
+	if (!w->hidden)
+	{
+	    if (w->state & CompWindowStateHiddenMask)
+		XMapWindow (w->screen->display->display, w->id);
+	}
+    }
+
     if (w->attrib.map_state == IsViewable && w->damaged)
     {
 	if (w->type == CompWindowTypeDesktopMask)
