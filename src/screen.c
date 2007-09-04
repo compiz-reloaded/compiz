@@ -1476,6 +1476,14 @@ initWindowWalker (CompScreen *screen,
 static void
 freeScreen (CompScreen *s)
 {
+    if (s->snContext)
+	sn_monitor_context_unref (s->snContext);
+
+    if (s->damage)
+	XDestroyRegion (s->damage);
+
+    compFiniScreenOptions (s, s->opt, COMP_SCREEN_OPTION_NUM);
+
     if (s->base.privates)
 	free (s->base.privates);
 
@@ -1540,6 +1548,8 @@ addScreen (CompDisplay *display,
 					    s->opt,
 					    COMP_SCREEN_OPTION_NUM))
 	return FALSE;
+
+    s->snContext = NULL;
 
     s->damage = XCreateRegion ();
     if (!s->damage)
