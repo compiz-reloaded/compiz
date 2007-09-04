@@ -2353,8 +2353,6 @@ dbusInitCore (CompPlugin *p,
 
     WRAP (dc, c, initPluginForObject, dbusInitPluginForObject);
 
-    printf ("init dbus core\n");
-
     c->base.privates[corePrivateIndex].ptr = dc;
 
     /* register the objects */
@@ -2387,8 +2385,6 @@ dbusFiniCore (CompPlugin *p,
       dbus_connection_unref (dc->connection);
     */
 
-    printf ("fini dbus core\n");
-
     UNWRAP (dc, c, initPluginForObject);
 
     free (dc);
@@ -2410,8 +2406,6 @@ dbusInitDisplay (CompPlugin  *p,
 
     dbusRegisterOptions (dc->connection, objectPath);
 
-    printf ("init dbus display\n");
-
     return TRUE;
 }
 
@@ -2419,23 +2413,10 @@ static void
 dbusFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
-    CompScreen *s;
-
     DBUS_CORE (&core);
 
     dbusUnregisterPluginForDisplay (dc->connection, d, "core");
     dbusUnregisterPluginsForDisplay (dc->connection, d);
-
-    /* we must unregister the screens here not in finiScreen
-       because when finiScreen is called the connection has
-       been dropped */
-    for (s = d->screens; s; s = s->next)
-    {
-	dbusUnregisterPluginForScreen (dc->connection, s, "core");
-	dbusUnregisterPluginsForScreen (dc->connection, s);
-    }
-
-    printf ("fini dbus display\n");
 }
 
 static Bool
@@ -2453,8 +2434,6 @@ dbusInitScreen (CompPlugin *p,
     dbusRegisterPluginsForScreen (dc->connection, s);
     dbusRegisterOptions (dc->connection, objectPath);
 
-    printf ("init dbus screen\n");
-
     return TRUE;
 }
 
@@ -2462,7 +2441,10 @@ static void
 dbusFiniScreen (CompPlugin *p,
 		CompScreen *s)
 {
-    printf ("fini dbus screen\n");
+    DBUS_CORE (&core);
+
+    dbusUnregisterPluginForScreen (dc->connection, s, "core");
+    dbusUnregisterPluginsForScreen (dc->connection, s);
 }
 
 static CompBool
