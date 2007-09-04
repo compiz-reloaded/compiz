@@ -2261,6 +2261,9 @@ removeScreen (CompScreen *s)
     forEachWindowOnScreen (s, restoreWindowGeometryIfSaved, 0);
     forEachWindowOnScreen (s, mapWindowIfHidden, 0);
 
+    while (s->windows)
+	removeWindow (s->windows);
+
     objectFiniPlugins (&s->base);
 
     freeScreen (s);
