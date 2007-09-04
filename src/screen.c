@@ -2262,6 +2262,11 @@ removeScreen (CompScreen *s)
 
     XFreeCursor (d->display, s->invisibleCursor);
 
+#ifdef USE_COW
+    if (useCow)
+	XCompositeReleaseOverlayWindow (s->display->display, s->root);
+#endif
+
     freeScreen (s);
 }
 
