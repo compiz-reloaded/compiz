@@ -2271,7 +2271,7 @@ removeWindow (CompWindow *w)
 	    showOutputWindow (w->screen);
     }
 
-    objectInitPlugins (&w->base);
+    objectFiniPlugins (&w->base);
 
     freeWindow (w);
 }
