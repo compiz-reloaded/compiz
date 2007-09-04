@@ -1042,7 +1042,7 @@ resizePaintOutput (CompScreen              *s,
     RESIZE_SCREEN (s);
     RESIZE_DISPLAY (s->display);
 
-    if (rd->w)
+    if (rd->w && (s == rd->w->screen))
     {
 	if (rd->mode == RESIZE_MODE_STRETCH)
 	    mask |= PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK;
@@ -1052,7 +1052,7 @@ resizePaintOutput (CompScreen              *s,
     status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
     WRAP (rs, s, paintOutput, resizePaintOutput);
 
-    if (status && rd->w)
+    if (status && rd->w && (s == rd->w->screen))
     {
 	unsigned short *border, *fill;
 
