@@ -150,20 +150,20 @@ typedef struct _VideoWindow {
     VideoContext *context;
 } VideoWindow;
 
-#define GET_VIDEO_DISPLAY(d)					     \
-    ((VideoDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_VIDEO_DISPLAY(d)					   \
+    ((VideoDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define VIDEO_DISPLAY(d)		     \
     VideoDisplay *vd = GET_VIDEO_DISPLAY (d)
 
-#define GET_VIDEO_SCREEN(s, vd)						 \
-    ((VideoScreen *) (s)->object.privates[(vd)->screenPrivateIndex].ptr)
+#define GET_VIDEO_SCREEN(s, vd)					       \
+    ((VideoScreen *) (s)->base.privates[(vd)->screenPrivateIndex].ptr)
 
 #define VIDEO_SCREEN(s)							   \
     VideoScreen *vs = GET_VIDEO_SCREEN (s, GET_VIDEO_DISPLAY (s->display))
 
-#define GET_VIDEO_WINDOW(w, vs)						 \
-    ((VideoWindow *) (w)->object.privates[(vs)->windowPrivateIndex].ptr)
+#define GET_VIDEO_WINDOW(w, vs)					       \
+    ((VideoWindow *) (w)->base.privates[(vs)->windowPrivateIndex].ptr)
 
 #define VIDEO_WINDOW(w)					       \
     VideoWindow *vw = GET_VIDEO_WINDOW  (w,		       \
@@ -1085,7 +1085,7 @@ videoInitDisplay (CompPlugin  *p,
 
     WRAP (vd, d, handleEvent, videoHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = vd;
+    d->base.privates[displayPrivateIndex].ptr = vd;
 
     return TRUE;
 }
@@ -1149,7 +1149,7 @@ videoInitScreen (CompPlugin *p,
     WRAP (vs, s, windowMoveNotify, videoWindowMoveNotify);
     WRAP (vs, s, windowResizeNotify, videoWindowResizeNotify);
 
-    s->object.privates[vd->screenPrivateIndex].ptr = vs;
+    s->base.privates[vd->screenPrivateIndex].ptr = vs;
 
     videoSetSupportedHint (s);
 
@@ -1193,7 +1193,7 @@ videoInitWindow (CompPlugin *p,
     vw->source  = NULL;
     vw->context = NULL;
 
-    w->object.privates[vs->windowPrivateIndex].ptr = vw;
+    w->base.privates[vs->windowPrivateIndex].ptr = vw;
 
     if (w->shaded || w->attrib.map_state == IsViewable)
 	videoWindowUpdate (w);

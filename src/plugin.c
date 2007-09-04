@@ -443,7 +443,7 @@ initPlugin (CompPlugin *p)
     ctx.plugin = p;
     ctx.object = NULL;
 
-    if (!initObjectTree (&core.object, (void *) &ctx))
+    if (!initObjectTree (&core.base, (void *) &ctx))
     {
 	(*p->vTable->fini) (p);
 	return FALSE;
@@ -460,7 +460,7 @@ finiPlugin (CompPlugin *p)
     ctx.plugin = p;
     ctx.object = NULL;
 
-    finiObjectTree (&core.object, (void *) &ctx);
+    finiObjectTree (&core.base, (void *) &ctx);
 
     (*p->vTable->fini) (p);
 }
@@ -726,7 +726,7 @@ getPluginABI (const char *name)
     if (!p || !p->vTable->getObjectOptions)
 	return 0;
 
-    option = (*p->vTable->getObjectOptions) (p, &compDisplays->object,
+    option = (*p->vTable->getObjectOptions) (p, &compDisplays->base,
 					     &nOption);
 
     return getIntOptionNamed (option, nOption, "abi", 0);
@@ -759,7 +759,7 @@ getPluginDisplayIndex (CompDisplay *d,
     if (!p || !p->vTable->getObjectOptions)
 	return FALSE;
 
-    option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+    option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
 
     value = getIntOptionNamed (option, nOption, "index", -1);
     if (value < 0)

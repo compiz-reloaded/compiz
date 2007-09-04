@@ -38,11 +38,11 @@ reallocCorePrivate (int  size,
 {
     void *privates;
 
-    privates = realloc (core.object.privates, size * sizeof (CompPrivate));
+    privates = realloc (core.base.privates, size * sizeof (CompPrivate));
     if (!privates)
 	return FALSE;
 
-    core.object.privates = (CompPrivate *) privates;
+    core.base.privates = (CompPrivate *) privates;
 
     return TRUE;
 }
@@ -139,7 +139,7 @@ setOptionForPlugin (CompObject      *object,
 CompBool
 initCore (void)
 {
-    compObjectInit (&core.object, 0, 0, COMP_OBJECT_TYPE_CORE);
+    compObjectInit (&core.base, 0, 0, COMP_OBJECT_TYPE_CORE);
 
     core.initPluginForObject = initCorePluginForObject;
     core.finiPluginForObject = finiCorePluginForObject;

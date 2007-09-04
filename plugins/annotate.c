@@ -67,14 +67,14 @@ typedef struct _AnnoScreen {
     Bool eraseMode;
 } AnnoScreen;
 
-#define GET_ANNO_DISPLAY(d)					    \
-    ((AnnoDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_ANNO_DISPLAY(d)					  \
+    ((AnnoDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define ANNO_DISPLAY(d)			   \
     AnnoDisplay *ad = GET_ANNO_DISPLAY (d)
 
-#define GET_ANNO_SCREEN(s, ad)						\
-    ((AnnoScreen *) (s)->object.privates[(ad)->screenPrivateIndex].ptr)
+#define GET_ANNO_SCREEN(s, ad)					      \
+    ((AnnoScreen *) (s)->base.privates[(ad)->screenPrivateIndex].ptr)
 
 #define ANNO_SCREEN(s)							\
     AnnoScreen *as = GET_ANNO_SCREEN (s, GET_ANNO_DISPLAY (s->display))
@@ -782,7 +782,7 @@ annoInitDisplay (CompPlugin  *p,
 
     WRAP (ad, d, handleEvent, annoHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = ad;
+    d->base.privates[displayPrivateIndex].ptr = ad;
 
     return TRUE;
 }
@@ -824,7 +824,7 @@ annoInitScreen (CompPlugin *p,
 
     WRAP (as, s, paintOutput, annoPaintOutput);
 
-    s->object.privates[ad->screenPrivateIndex].ptr = as;
+    s->base.privates[ad->screenPrivateIndex].ptr = as;
 
     return TRUE;
 }

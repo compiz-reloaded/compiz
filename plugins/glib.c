@@ -48,8 +48,8 @@ typedef struct _GConfDisplay {
     Atom	      notifyAtom;
 } GLibDisplay;
 
-#define GET_GLIB_DISPLAY(d)					    \
-    ((GLibDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_GLIB_DISPLAY(d)					  \
+    ((GLibDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define GLIB_DISPLAY(d)			   \
     GLibDisplay *gd = GET_GLIB_DISPLAY (d)
@@ -206,7 +206,7 @@ glibInitDisplay (CompPlugin  *p,
 
     WRAP (gd, d, handleEvent, glibHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = gd;
+    d->base.privates[displayPrivateIndex].ptr = gd;
 
     glibPrepare (d, g_main_context_default ());
 

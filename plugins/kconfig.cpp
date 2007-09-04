@@ -44,8 +44,8 @@ typedef struct _KconfigCore {
     SetOptionForPluginProc  setOptionForPlugin;
 } KconfigCore;
 
-#define GET_KCONFIG_CORE(c)					 \
-    ((KconfigCore *) (c)->object.privates[corePrivateIndex].ptr)
+#define GET_KCONFIG_CORE(c)				       \
+    ((KconfigCore *) (c)->base.privates[corePrivateIndex].ptr)
 
 #define KCONFIG_CORE(c)			   \
     KconfigCore *kc = GET_KCONFIG_CORE (c)
@@ -472,15 +472,15 @@ kconfigRcReload (void *closure)
 	if (!p->vTable->getObjectOptions)
 	    continue;
 
-	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+	option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
 	while (nOption--)
-	    kconfigGetOption (&d->object, option++, p->vTable->name);
+	    kconfigGetOption (&d->base, option++, p->vTable->name);
 
 	for (s = d->screens; s; s = s->next)
 	{
-	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &s->base, &nOption);
 	    while (nOption--)
-		kconfigGetOption (&s->object, option++, p->vTable->name);
+		kconfigGetOption (&s->base, option++, p->vTable->name);
 	}
     }
 
@@ -606,7 +606,7 @@ kconfigInitCore (CompPlugin *p,
     WRAP (kc, c, initPluginForObject, kconfigInitPluginForObject);
     WRAP (kc, c, setOptionForPlugin, kconfigSetOptionForPlugin);
 
-    c->object.privates[corePrivateIndex].ptr = kc;
+    c->base.privates[corePrivateIndex].ptr = kc;
 
     return TRUE;
 }

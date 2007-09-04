@@ -58,11 +58,11 @@ reallocScreenPrivate (int  size,
 
     for (s = d->screens; s; s = s->next)
     {
-	privates = realloc (s->object.privates, size * sizeof (CompPrivate));
+	privates = realloc (s->base.privates, size * sizeof (CompPrivate));
 	if (!privates)
 	    return FALSE;
 
-	s->object.privates = (CompPrivate *) privates;
+	s->base.privates = (CompPrivate *) privates;
     }
 
     return TRUE;
@@ -103,7 +103,7 @@ forEachScreenObject (CompObject	        *parent,
 
 	for (s = d->screens; s; s = s->next)
 	{
-	    if (!(*proc) (&s->object, closure))
+	    if (!(*proc) (&s->base, closure))
 		return FALSE;
 	}
     }
@@ -136,7 +136,7 @@ findScreenObject (CompObject *parent,
 
 	for (s = d->screens; s; s = s->next)
 	    if (s->screenNum == screenNum)
-		return &s->object;
+		return &s->base;
     }
 
     return NULL;
@@ -145,7 +145,7 @@ findScreenObject (CompObject *parent,
 int
 allocateScreenPrivateIndex (CompDisplay *display)
 {
-    return compObjectAllocatePrivateIndex (&display->object,
+    return compObjectAllocatePrivateIndex (&display->base,
 					   COMP_OBJECT_TYPE_SCREEN);
 }
 
@@ -153,7 +153,7 @@ void
 freeScreenPrivateIndex (CompDisplay *display,
 			int	    index)
 {
-    compObjectFreePrivateIndex (&display->object,
+    compObjectFreePrivateIndex (&display->base,
 				COMP_OBJECT_TYPE_SCREEN,
 				index);
 }
@@ -465,7 +465,7 @@ detectOutputDevices (CompScreen *s)
 	name = s->opt[COMP_SCREEN_OPTION_OUTPUTS].name;
 
 	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = FALSE;
-	(*core.setOptionForPlugin) (&s->object, "core", name, &value);
+	(*core.setOptionForPlugin) (&s->base, "core", name, &value);
 	s->opt[COMP_SCREEN_OPTION_DETECT_OUTPUTS].value.b = TRUE;
 
 	for (i = 0; i < value.list.nValue; i++)
@@ -1058,7 +1058,7 @@ detectRefreshRateOfScreen (CompScreen *s)
 	name = s->opt[COMP_SCREEN_OPTION_REFRESH_RATE].name;
 
 	s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b = FALSE;
-	(*core.setOptionForPlugin) (&s->object, "core", name, &value);
+	(*core.setOptionForPlugin) (&s->base, "core", name, &value);
 	s->opt[COMP_SCREEN_OPTION_DETECT_REFRESH_RATE].value.b = TRUE;
     }
     else
@@ -1520,7 +1520,7 @@ addScreen (CompDisplay *display,
     else
 	privates = 0;
 
-    compObjectInit (&s->object, &display->object, privates,
+    compObjectInit (&s->base, &display->base, privates,
 		    COMP_OBJECT_TYPE_SCREEN);
 
     s->display = display;
@@ -2142,7 +2142,7 @@ addScreen (CompDisplay *display,
     getDesktopHints (s);
 
     /* TODO: bailout properly when objectInitPlugins fails */
-    assert (objectInitPlugins (&s->object));
+    assert (objectInitPlugins (&s->base));
 
     XQueryTree (dpy, s->root,
 		&rootReturn, &parentReturn,

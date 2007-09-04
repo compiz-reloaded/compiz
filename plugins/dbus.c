@@ -77,8 +77,8 @@ static DBusObjectPathVTable dbusMessagesVTable = {
     NULL, NULL, NULL, NULL
 };
 
-#define GET_DBUS_CORE(c)				      \
-    ((DbusCore *) (c)->object.privates[corePrivateIndex].ptr)
+#define GET_DBUS_CORE(c)				    \
+    ((DbusCore *) (c)->base.privates[corePrivateIndex].ptr)
 
 #define DBUS_CORE(c)		     \
     DbusCore *dc = GET_DBUS_CORE (c)
@@ -108,11 +108,11 @@ dbusGetOptionsFromPath (char	     **path,
 	if (!s)
 	    return NULL;
 
-	object = &s->object;
+	object = &s->base;
     }
     else
     {
-	object = &compDisplays->object;
+	object = &compDisplays->base;
     }
 
     if (returnObject)
@@ -2349,7 +2349,7 @@ dbusInitCore (CompPlugin *p,
 
     printf ("init dbus core\n");
 
-    c->object.privates[corePrivateIndex].ptr = dc;
+    c->base.privates[corePrivateIndex].ptr = dc;
 
     /* register the objects */
     dbus_connection_register_object_path (dc->connection,

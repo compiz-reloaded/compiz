@@ -134,20 +134,20 @@ typedef struct _DecorWindow {
     Decoration	     *decor;
 } DecorWindow;
 
-#define GET_DECOR_DISPLAY(d)					     \
-    ((DecorDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_DECOR_DISPLAY(d)					   \
+    ((DecorDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define DECOR_DISPLAY(d)		     \
     DecorDisplay *dd = GET_DECOR_DISPLAY (d)
 
-#define GET_DECOR_SCREEN(s, dd)						 \
-    ((DecorScreen *) (s)->object.privates[(dd)->screenPrivateIndex].ptr)
+#define GET_DECOR_SCREEN(s, dd)					       \
+    ((DecorScreen *) (s)->base.privates[(dd)->screenPrivateIndex].ptr)
 
 #define DECOR_SCREEN(s)							   \
     DecorScreen *ds = GET_DECOR_SCREEN (s, GET_DECOR_DISPLAY (s->display))
 
-#define GET_DECOR_WINDOW(w, ds)						 \
-    ((DecorWindow *) (w)->object.privates[(ds)->windowPrivateIndex].ptr)
+#define GET_DECOR_WINDOW(w, ds)					       \
+    ((DecorWindow *) (w)->base.privates[(ds)->windowPrivateIndex].ptr)
 
 #define DECOR_WINDOW(w)					       \
     DecorWindow *dw = GET_DECOR_WINDOW  (w,		       \
@@ -1326,7 +1326,7 @@ decorInitDisplay (CompPlugin  *p,
     WRAP (dd, d, handleEvent, decorHandleEvent);
     WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);
 
-    d->object.privates[displayPrivateIndex].ptr = dd;
+    d->base.privates[displayPrivateIndex].ptr = dd;
 
     return TRUE;
 }
@@ -1378,7 +1378,7 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
 
-    s->object.privates[dd->screenPrivateIndex].ptr = ds;
+    s->base.privates[dd->screenPrivateIndex].ptr = ds;
 
     decorCheckForDmOnScreen (s, FALSE);
 
@@ -1425,7 +1425,7 @@ decorInitWindow (CompPlugin *p,
     dw->wd    = NULL;
     dw->decor = NULL;
 
-    w->object.privates[ds->windowPrivateIndex].ptr = dw;
+    w->base.privates[ds->windowPrivateIndex].ptr = dw;
 
     if (!w->attrib.override_redirect)
 	decorWindowUpdateDecoration (w);

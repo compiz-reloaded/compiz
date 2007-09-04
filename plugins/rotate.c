@@ -139,14 +139,14 @@ typedef struct _RotateScreen {
     GLfloat zoomVelocity;
 } RotateScreen;
 
-#define GET_ROTATE_DISPLAY(d)					      \
-    ((RotateDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_ROTATE_DISPLAY(d)					    \
+    ((RotateDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define ROTATE_DISPLAY(d)		       \
     RotateDisplay *rd = GET_ROTATE_DISPLAY (d)
 
-#define GET_ROTATE_SCREEN(s, rd)					  \
-    ((RotateScreen *) (s)->object.privates[(rd)->screenPrivateIndex].ptr)
+#define GET_ROTATE_SCREEN(s, rd)					\
+    ((RotateScreen *) (s)->base.privates[(rd)->screenPrivateIndex].ptr)
 
 #define ROTATE_SCREEN(s)						      \
     RotateScreen *rs = GET_ROTATE_SCREEN (s, GET_ROTATE_DISPLAY (s->display))
@@ -1747,7 +1747,7 @@ rotateInitDisplay (CompPlugin  *p,
 
     WRAP (rd, d, handleEvent, rotateHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = rd;
+    d->base.privates[displayPrivateIndex].ptr = rd;
 
     return TRUE;
 }
@@ -1842,7 +1842,7 @@ rotateInitScreen (CompPlugin *p,
 
     WRAP (rs, cs, getRotation, rotateGetRotation);
 
-    s->object.privates[rd->screenPrivateIndex].ptr = rs;
+    s->base.privates[rd->screenPrivateIndex].ptr = rs;
 
     return TRUE;
 }

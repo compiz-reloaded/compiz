@@ -54,14 +54,14 @@ typedef struct _ShotScreen {
     Bool grab;
 } ShotScreen;
 
-#define GET_SHOT_DISPLAY(d)					    \
-    ((ShotDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_SHOT_DISPLAY(d)					  \
+    ((ShotDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define SHOT_DISPLAY(d)			   \
     ShotDisplay *sd = GET_SHOT_DISPLAY (d)
 
-#define GET_SHOT_SCREEN(s, sd)						\
-    ((ShotScreen *) (s)->object.privates[(sd)->screenPrivateIndex].ptr)
+#define GET_SHOT_SCREEN(s, sd)					      \
+    ((ShotScreen *) (s)->base.privates[(sd)->screenPrivateIndex].ptr)
 
 #define SHOT_SCREEN(s)							\
     ShotScreen *ss = GET_SHOT_SCREEN (s, GET_SHOT_DISPLAY (s->display))
@@ -463,7 +463,7 @@ shotInitDisplay (CompPlugin  *p,
 
     WRAP (sd, d, handleEvent, shotHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = sd;
+    d->base.privates[displayPrivateIndex].ptr = sd;
 
     return TRUE;
 }
@@ -501,7 +501,7 @@ shotInitScreen (CompPlugin *p,
     WRAP (ss, s, paintScreen, shotPaintScreen);
     WRAP (ss, s, paintOutput, shotPaintOutput);
 
-    s->object.privates[sd->screenPrivateIndex].ptr = ss;
+    s->base.privates[sd->screenPrivateIndex].ptr = ss;
 
     return TRUE;
 }

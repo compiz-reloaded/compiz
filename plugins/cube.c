@@ -2031,7 +2031,7 @@ cubeInitCore (CompPlugin *p,
 
     WRAP (cc, &core, setOptionForPlugin, cubeSetOptionForPlugin);
 
-    c->object.privates[cubeCorePrivateIndex].ptr = cc;
+    c->base.privates[cubeCorePrivateIndex].ptr = cc;
 
     return TRUE;
 }
@@ -2090,7 +2090,7 @@ cubeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    d->object.privates[cubeDisplayPrivateIndex].ptr = cd;
+    d->base.privates[cubeDisplayPrivateIndex].ptr = cd;
 
     return TRUE;
 }
@@ -2180,7 +2180,7 @@ cubeInitScreen (CompPlugin *p,
     cs->paintInside       = cubePaintInside;
     cs->checkOrientation  = cubeCheckOrientation;
 
-    s->object.privates[cd->screenPrivateIndex].ptr = cs;
+    s->base.privates[cd->screenPrivateIndex].ptr = cs;
 
     initTexture (s, &cs->texture);
     initTexture (s, &cs->sky);

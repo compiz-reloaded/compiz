@@ -591,7 +591,7 @@ typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
 					    CompOptionValue *value);
 
 struct _CompCore {
-    CompObject object;
+    CompObject base;
 
     InitPluginForObjectProc initPluginForObject;
     FiniPluginForObjectProc finiPluginForObject;
@@ -803,7 +803,7 @@ typedef void (*LogMessageProc) (CompDisplay  *d,
 				const char   *message);
 
 struct _CompDisplay {
-    CompObject object;
+    CompObject base;
 
     xcb_connection_t *connection;
 
@@ -1864,7 +1864,7 @@ typedef struct _CompActiveWindowHistory {
 } CompActiveWindowHistory;
 
 struct _CompScreen {
-    CompObject object;
+    CompObject base;
 
     CompScreen  *next;
     CompDisplay *display;
@@ -2380,7 +2380,7 @@ typedef struct _CompStruts {
 } CompStruts;
 
 struct _CompWindow {
-    CompObject object;
+    CompObject base;
 
     CompScreen *screen;
     CompWindow *next;

@@ -59,11 +59,11 @@ reallocWindowPrivates (int  size,
 
     for (w = s->windows; w; w = w->next)
     {
-	privates = realloc (w->object.privates, size * sizeof (CompPrivate));
+	privates = realloc (w->base.privates, size * sizeof (CompPrivate));
 	if (!privates)
 	    return FALSE;
 
-	w->object.privates = (CompPrivate *) privates;
+	w->base.privates = (CompPrivate *) privates;
     }
 
     return TRUE;
@@ -104,7 +104,7 @@ forEachWindowObject (CompObject	        *parent,
 
 	for (w = s->windows; w; w = w->next)
 	{
-	    if (!(*proc) (&w->object, closure))
+	    if (!(*proc) (&w->base, closure))
 		return FALSE;
 	}
     }
@@ -137,7 +137,7 @@ findWindowObject (CompObject *parent,
 
 	for (w = s->windows; w; w = w->next)
 	    if (w->id == id)
-		return &w->object;
+		return &w->base;
     }
 
     return NULL;
@@ -146,7 +146,7 @@ findWindowObject (CompObject *parent,
 int
 allocateWindowPrivateIndex (CompScreen *screen)
 {
-    return compObjectAllocatePrivateIndex (&screen->object,
+    return compObjectAllocatePrivateIndex (&screen->base,
 					   COMP_OBJECT_TYPE_WINDOW);
 }
 
@@ -154,7 +154,7 @@ void
 freeWindowPrivateIndex (CompScreen *screen,
 			int	   index)
 {
-    compObjectFreePrivateIndex (&screen->object,
+    compObjectFreePrivateIndex (&screen->base,
 				COMP_OBJECT_TYPE_WINDOW,
 				index);
 }
@@ -1387,8 +1387,8 @@ freeWindow (CompWindow *w)
     if (w->region)
 	XDestroyRegion (w->region);
 
-    if (w->object.privates)
-	free (w->object.privates);
+    if (w->base.privates)
+	free (w->base.privates);
 
     if (w->sizeDamage)
 	free (w->damageRects);
@@ -1993,7 +1993,7 @@ addWindow (CompScreen *screen,
     else
 	privates = 0;
 
-    compObjectInit (&w->object, &screen->object, privates,
+    compObjectInit (&w->base, &screen->base, privates,
 		    COMP_OBJECT_TYPE_WINDOW);
 
     w->region = XCreateRegion ();
@@ -2233,7 +2233,7 @@ addWindow (CompScreen *screen,
     }
 
     /* TODO: bailout properly when objectInitPlugins fails */
-    assert (objectInitPlugins (&w->object));
+    assert (objectInitPlugins (&w->base));
 
     (*w->screen->windowAddNotify) (w);
 
@@ -2271,7 +2271,7 @@ removeWindow (CompWindow *w)
 	    showOutputWindow (w->screen);
     }
 
-    objectInitPlugins (&w->object);
+    objectInitPlugins (&w->base);
 
     freeWindow (w);
 }

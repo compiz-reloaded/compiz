@@ -120,14 +120,14 @@ typedef struct _WaterScreen {
     WaterFunction *bumpMapFunctions;
 } WaterScreen;
 
-#define GET_WATER_DISPLAY(d)					     \
-    ((WaterDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_WATER_DISPLAY(d)					   \
+    ((WaterDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define WATER_DISPLAY(d)		     \
     WaterDisplay *wd = GET_WATER_DISPLAY (d)
 
-#define GET_WATER_SCREEN(s, wd)						 \
-    ((WaterScreen *) (s)->object.privates[(wd)->screenPrivateIndex].ptr)
+#define GET_WATER_SCREEN(s, wd)					       \
+    ((WaterScreen *) (s)->base.privates[(wd)->screenPrivateIndex].ptr)
 
 #define WATER_SCREEN(s)							   \
     WaterScreen *ws = GET_WATER_SCREEN (s, GET_WATER_DISPLAY (s->display))
@@ -1623,7 +1623,7 @@ waterInitDisplay (CompPlugin  *p,
 
     WRAP (wd, d, handleEvent, waterHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = wd;
+    d->base.privates[displayPrivateIndex].ptr = wd;
 
     return TRUE;
 }
@@ -1661,7 +1661,7 @@ waterInitScreen (CompPlugin *p,
     WRAP (ws, s, donePaintScreen, waterDonePaintScreen);
     WRAP (ws, s, drawWindowTexture, waterDrawWindowTexture);
 
-    s->object.privates[wd->screenPrivateIndex].ptr = ws;
+    s->base.privates[wd->screenPrivateIndex].ptr = ws;
 
     waterReset (s);
 

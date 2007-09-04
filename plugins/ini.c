@@ -41,7 +41,7 @@
 #define FILE_SUFFIX         ".conf"
 
 #define GET_INI_CORE(c) \
-	((IniCore *) (c)->object.privates[corePrivateIndex].ptr)
+	((IniCore *) (c)->base.privates[corePrivateIndex].ptr)
 #define INI_CORE(c) \
 	IniCore *ic = GET_INI_CORE (c)
 
@@ -262,7 +262,7 @@ iniGetFilename (CompObject *object,
     if (object->type == COMP_OBJECT_TYPE_SCREEN)
     {
 	for (s = compDisplays->screens; s; s = s->next)
-	    if (&s->object == object)
+	    if (&s->base == object)
 		break;
 
 	if (!s)
@@ -586,7 +586,7 @@ iniSaveOptions (CompObject *object,
     if (object->type == COMP_OBJECT_TYPE_SCREEN)
     {
 	for (s = compDisplays->screens; s; s = s->next)
-	    if (&s->object == object)
+	    if (&s->base == object)
 		break;
 
 	if (!s)
@@ -826,7 +826,7 @@ iniLoadOptions (CompObject *object,
 	    compLogMessage (NULL, "ini", CompLogLevelWarn,
 			    "Loading default plugins (%s)", DEFAULT_PLUGINS);
 
-	    (*core.setOptionForPlugin) (&compDisplays->object,
+	    (*core.setOptionForPlugin) (&compDisplays->base,
 					"core", "active_plugins",
 					&value);
 
@@ -904,7 +904,7 @@ iniFileModified (const char *name,
     {
 	if (fd->screen < 0)
 	{
-	    iniLoadOptions (&compDisplays->object, fd->plugin);
+	    iniLoadOptions (&compDisplays->base, fd->plugin);
 	}
 	else
 	{
@@ -915,7 +915,7 @@ iniFileModified (const char *name,
 		    break;
 
 	    if (s)
-		iniLoadOptions (&s->object, fd->plugin);
+		iniLoadOptions (&s->base, fd->plugin);
 	}
     }
 }
@@ -945,7 +945,7 @@ static Bool
 iniInitPluginForDisplay (CompPlugin  *p,
 			 CompDisplay *d)
 {
-    iniLoadOptions (&d->object, p->vTable->name);
+    iniLoadOptions (&d->base, p->vTable->name);
 
     return TRUE;
 }
@@ -954,7 +954,7 @@ static Bool
 iniInitPluginForScreen (CompPlugin *p,
 			CompScreen *s)
 {
-    iniLoadOptions (&s->object, p->vTable->name);
+    iniLoadOptions (&s->base, p->vTable->name);
 
     return TRUE;
 }
@@ -1041,7 +1041,7 @@ iniInitCore (CompPlugin *p,
     WRAP (ic, c, initPluginForObject, iniInitPluginForObject);
     WRAP (ic, c, setOptionForPlugin, iniSetOptionForPlugin);
 
-    c->object.privates[corePrivateIndex].ptr = ic;
+    c->base.privates[corePrivateIndex].ptr = ic;
 
     return TRUE;
 }
@@ -1065,7 +1065,7 @@ iniFiniCore (CompPlugin *p,
 static Bool
 iniInitDisplay (CompPlugin *p, CompDisplay *d)
 {
-    iniLoadOptions (&d->object, NULL);
+    iniLoadOptions (&d->base, NULL);
 
     return TRUE;
 }
@@ -1073,7 +1073,7 @@ iniInitDisplay (CompPlugin *p, CompDisplay *d)
 static Bool
 iniInitScreen (CompPlugin *p, CompScreen *s)
 {
-    iniLoadOptions (&s->object, NULL);
+    iniLoadOptions (&s->base, NULL);
 
     return TRUE;
 }

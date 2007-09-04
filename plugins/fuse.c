@@ -100,8 +100,8 @@ typedef struct _FuseDisplay {
     char		*buffer;
 } FuseDisplay;
 
-#define GET_FUSE_DISPLAY(d)					    \
-    ((FuseDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_FUSE_DISPLAY(d)					  \
+    ((FuseDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define FUSE_DISPLAY(d)			   \
     FuseDisplay *fd = GET_FUSE_DISPLAY (d)
@@ -226,11 +226,11 @@ fuseGetObjectFromInode (FuseInode *inode)
 		break;
 
 	if (s)
-	    return &s->object;
+	    return &s->base;
     }
     else if (inode->type & FUSE_INODE_TYPE_DISPLAY)
     {
-	return &compDisplays->object;
+	return &compDisplays->base;
     }
 
     return NULL;
@@ -426,12 +426,12 @@ fuseUpdateInode (CompDisplay *d,
     {
 	int n;
 
-	if (fuseGetOptionsFromInode (&d->object, inode, &n))
+	if (fuseGetOptionsFromInode (&d->base, inode, &n))
 	    fuseAddInode (inode, FUSE_INODE_TYPE_DISPLAY, "allscreens");
 
 	for (s = d->screens; s; s = s->next)
 	{
-	    if (fuseGetOptionsFromInode (&s->object, inode, &n))
+	    if (fuseGetOptionsFromInode (&s->base, inode, &n))
 	    {
 		sprintf (str, "screen%d", s->screenNum);
 		fuseAddInode (inode, FUSE_INODE_TYPE_SCREEN, str);
@@ -1290,7 +1290,7 @@ fuseInitDisplay (CompPlugin  *p,
     fd->buffer	      = NULL;
     fd->mountPoint    = NULL;
 
-    d->object.privates[displayPrivateIndex].ptr = fd;
+    d->base.privates[displayPrivateIndex].ptr = fd;
 
     fuseMount (d);
 

@@ -112,11 +112,11 @@ reallocDisplayPrivate (int  size,
 
     if (d)
     {
-	privates = realloc (d->object.privates, size * sizeof (CompPrivate));
+	privates = realloc (d->base.privates, size * sizeof (CompPrivate));
 	if (!privates)
 	    return FALSE;
 
-	d->object.privates = (CompPrivate *) privates;
+	d->base.privates = (CompPrivate *) privates;
     }
 
     return TRUE;
@@ -144,7 +144,7 @@ forEachDisplayObject (CompObject         *parent,
 		      void	         *closure)
 {
     if (parent->type == COMP_OBJECT_TYPE_CORE)
-	return (*proc) (&compDisplay.object, closure);
+	return (*proc) (&compDisplay.base, closure);
 
     return TRUE;
 }
@@ -162,7 +162,7 @@ findDisplayObject (CompObject *parent,
     if (parent->type == COMP_OBJECT_TYPE_CORE)
     {
 	if (!name || !name[0])
-	    return &compDisplay.object;
+	    return &compDisplay.base;
     }
 
     return NULL;
@@ -958,8 +958,7 @@ updatePlugins (CompDisplay *d)
 	pop = malloc (sizeof (CompPlugin *) * nPop);
 	if (!pop)
 	{
-	    (*core.setOptionForPlugin) (&d->object, "core", o->name,
-					&d->plugin);
+	    (*core.setOptionForPlugin) (&d->base, "core", o->name, &d->plugin);
 	    return;
 	}
     }
@@ -1031,7 +1030,7 @@ updatePlugins (CompDisplay *d)
     if (nPop)
 	free (pop);
 
-    (*core.setOptionForPlugin) (&d->object, "core", o->name, &d->plugin);
+    (*core.setOptionForPlugin) (&d->base, "core", o->name, &d->plugin);
 }
 
 static void
@@ -2019,8 +2018,7 @@ addDisplay (const char *name)
     else
 	privates = 0;
 
-    compObjectInit (&d->object, &core.object, privates,
-		    COMP_OBJECT_TYPE_DISPLAY);
+    compObjectInit (&d->base, &core.base, privates, COMP_OBJECT_TYPE_DISPLAY);
 
     d->screens = NULL;
 

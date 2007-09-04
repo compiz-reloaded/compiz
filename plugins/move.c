@@ -92,14 +92,14 @@ typedef struct _MoveScreen {
     int	snapBackY;
 } MoveScreen;
 
-#define GET_MOVE_DISPLAY(d)					    \
-    ((MoveDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_MOVE_DISPLAY(d)					  \
+    ((MoveDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define MOVE_DISPLAY(d)		           \
     MoveDisplay *md = GET_MOVE_DISPLAY (d)
 
-#define GET_MOVE_SCREEN(s, md)						\
-    ((MoveScreen *) (s)->object.privates[(md)->screenPrivateIndex].ptr)
+#define GET_MOVE_SCREEN(s, md)					      \
+    ((MoveScreen *) (s)->base.privates[(md)->screenPrivateIndex].ptr)
 
 #define MOVE_SCREEN(s)						        \
     MoveScreen *ms = GET_MOVE_SCREEN (s, GET_MOVE_DISPLAY (s->display))
@@ -844,7 +844,7 @@ moveInitDisplay (CompPlugin  *p,
 
     WRAP (md, d, handleEvent, moveHandleEvent);
 
-    d->object.privates[displayPrivateIndex].ptr = md;
+    d->base.privates[displayPrivateIndex].ptr = md;
 
     return TRUE;
 }
@@ -882,7 +882,7 @@ moveInitScreen (CompPlugin *p,
 
     WRAP (ms, s, paintWindow, movePaintWindow);
 
-    s->object.privates[md->screenPrivateIndex].ptr = ms;
+    s->base.privates[md->screenPrivateIndex].ptr = ms;
 
     return TRUE;
 }

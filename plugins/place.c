@@ -62,17 +62,16 @@ typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
 
     PlaceWindowProc placeWindow;
-
 } PlaceScreen;
 
-#define GET_PLACE_DISPLAY(d)					     \
-    ((PlaceDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_PLACE_DISPLAY(d)					   \
+    ((PlaceDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define PLACE_DISPLAY(d)		     \
     PlaceDisplay *pd = GET_PLACE_DISPLAY (d)
 
-#define GET_PLACE_SCREEN(s, pd)						 \
-    ((PlaceScreen *) (s)->object.privates[(pd)->screenPrivateIndex].ptr)
+#define GET_PLACE_SCREEN(s, pd)					       \
+    ((PlaceScreen *) (s)->base.privates[(pd)->screenPrivateIndex].ptr)
 
 #define PLACE_SCREEN(s)							   \
     PlaceScreen *ps = GET_PLACE_SCREEN (s, GET_PLACE_DISPLAY (s->display))
@@ -1403,7 +1402,7 @@ placeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    d->object.privates[displayPrivateIndex].ptr = pd;
+    d->base.privates[displayPrivateIndex].ptr = pd;
 
     return TRUE;
 }
@@ -1452,9 +1451,9 @@ placeInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
-    s->object.privates[pd->screenPrivateIndex].ptr = ps;
-
     WRAP (ps, s, placeWindow, placePlaceWindow);
+
+    s->base.privates[pd->screenPrivateIndex].ptr = ps;
 
     return TRUE;
 }

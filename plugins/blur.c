@@ -167,20 +167,20 @@ typedef struct _BlurWindow {
     Region clip;
 } BlurWindow;
 
-#define GET_BLUR_DISPLAY(d)					    \
-    ((BlurDisplay *) (d)->object.privates[displayPrivateIndex].ptr)
+#define GET_BLUR_DISPLAY(d)					  \
+    ((BlurDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
 
 #define BLUR_DISPLAY(d)			   \
     BlurDisplay *bd = GET_BLUR_DISPLAY (d)
 
-#define GET_BLUR_SCREEN(s, bd)						\
-    ((BlurScreen *) (s)->object.privates[(bd)->screenPrivateIndex].ptr)
+#define GET_BLUR_SCREEN(s, bd)					      \
+    ((BlurScreen *) (s)->base.privates[(bd)->screenPrivateIndex].ptr)
 
 #define BLUR_SCREEN(s)							\
     BlurScreen *bs = GET_BLUR_SCREEN (s, GET_BLUR_DISPLAY (s->display))
 
-#define GET_BLUR_WINDOW(w, bs)						\
-    ((BlurWindow *) (w)->object.privates[(bs)->windowPrivateIndex].ptr)
+#define GET_BLUR_WINDOW(w, bs)					      \
+    ((BlurWindow *) (w)->base.privates[(bs)->windowPrivateIndex].ptr)
 
 #define BLUR_WINDOW(w)					     \
     BlurWindow *bw = GET_BLUR_WINDOW  (w,		     \
@@ -2465,7 +2465,7 @@ blurInitDisplay (CompPlugin  *p,
     WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);
     WRAP (bd, d, matchPropertyChanged, blurMatchPropertyChanged);
 
-    d->object.privates[displayPrivateIndex].ptr = bd;
+    d->base.privates[displayPrivateIndex].ptr = bd;
 
     return TRUE;
 }
@@ -2630,7 +2630,7 @@ blurInitScreen (CompPlugin *p,
     WRAP (bs, s, windowResizeNotify, blurWindowResizeNotify);
     WRAP (bs, s, windowMoveNotify, blurWindowMoveNotify);
 
-    s->object.privates[bd->screenPrivateIndex].ptr = bs;
+    s->base.privates[bd->screenPrivateIndex].ptr = bs;
 
     blurUpdateFilterRadius (s);
 
@@ -2718,7 +2718,7 @@ blurInitWindow (CompPlugin *p,
 	return FALSE;
     }
 
-    w->object.privates[bs->windowPrivateIndex].ptr = bw;
+    w->base.privates[bs->windowPrivateIndex].ptr = bw;
 
     if (w->added)
 	blurWindowAdd (w);

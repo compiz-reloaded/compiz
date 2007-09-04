@@ -54,8 +54,8 @@ typedef struct _GConfCore {
     SetOptionForPluginProc  setOptionForPlugin;
 } GConfCore;
 
-#define GET_GCONF_CORE(c)				       \
-    ((GConfCore *) (c)->object.privates[corePrivateIndex].ptr)
+#define GET_GCONF_CORE(c)				     \
+    ((GConfCore *) (c)->base.privates[corePrivateIndex].ptr)
 
 #define GCONF_CORE(c)		       \
     GConfCore *gc = GET_GCONF_CORE (c)
@@ -464,15 +464,15 @@ gconfReload (void *closure)
 	if (!p->vTable->getObjectOptions)
 	    continue;
 
-	option = (*p->vTable->getObjectOptions) (p, &d->object, &nOption);
+	option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
 	while (nOption--)
-	    gconfGetOption (&d->object, option++, p->vTable->name);
+	    gconfGetOption (&d->base, option++, p->vTable->name);
 
 	for (s = d->screens; s; s = s->next)
 	{
-	    option = (*p->vTable->getObjectOptions) (p, &s->object, &nOption);
+	    option = (*p->vTable->getObjectOptions) (p, &s->base, &nOption);
 	    while (nOption--)
-		gconfGetOption (&s->object, option++, p->vTable->name);
+		gconfGetOption (&s->base, option++, p->vTable->name);
 	}
     }
 
@@ -628,7 +628,7 @@ gconfKeyChanged (GConfClient *client,
     {
 	if (plugin->vTable->getObjectOptions)
 	    option = (*plugin->vTable->getObjectOptions) (plugin,
-							  &screen->object,
+							  &screen->base,
 							  &nOption);
 
 	option = compFindOption (option, nOption, token[object + 2], 0);
@@ -636,9 +636,9 @@ gconfKeyChanged (GConfClient *client,
 	{
 	    CompOptionValue value;
 
-	    if (gconfReadOptionValue (&screen->object, entry, option, &value))
+	    if (gconfReadOptionValue (&screen->base, entry, option, &value))
 	    {
-		(*core.setOptionForPlugin) (&screen->object,
+		(*core.setOptionForPlugin) (&screen->base,
 					    plugin->vTable->name,
 					    option->name,
 					    &value);
@@ -651,7 +651,7 @@ gconfKeyChanged (GConfClient *client,
     {
 	if (plugin->vTable->getObjectOptions)
 	    option = (*plugin->vTable->getObjectOptions) (plugin,
-							  &display->object,
+							  &display->base,
 							  &nOption);
 
 	option = compFindOption (option, nOption, token[object + 2], 0);
@@ -659,9 +659,9 @@ gconfKeyChanged (GConfClient *client,
 	{
 	    CompOptionValue value;
 
-	    if (gconfReadOptionValue (&display->object, entry, option, &value))
+	    if (gconfReadOptionValue (&display->base, entry, option, &value))
 	    {
-		(*core.setOptionForPlugin) (&display->object,
+		(*core.setOptionForPlugin) (&display->base,
 					    plugin->vTable->name,
 					    option->name,
 					    &value);
@@ -724,7 +724,7 @@ gconfInitCore (CompPlugin *p,
     WRAP (gc, c, initPluginForObject, gconfInitPluginForObject);
     WRAP (gc, c, setOptionForPlugin, gconfSetOptionForPlugin);
 
-    c->object.privates[corePrivateIndex].ptr = gc;
+    c->base.privates[corePrivateIndex].ptr = gc;
 
     return TRUE;
 }
