@@ -2578,6 +2578,8 @@ removeDisplay (CompDisplay *d)
 
     objectFiniPlugins (&d->base);
 
+    compRemoveTimeout (d->pingHandle);
+
     XSync (d->display, False);
     XCloseDisplay (d->display);
 
