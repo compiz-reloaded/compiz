@@ -2300,6 +2300,8 @@ removeWindow (CompWindow *w)
 	    showOutputWindow (w->screen);
     }
 
+    (*w->screen->windowRemoveNotify) (w);
+
     objectFiniPlugins (&w->base);
 
     freeWindow (w);
@@ -4934,3 +4936,7 @@ windowAddNotify (CompWindow *w)
     w->added = TRUE;
 }
 
+void
+windowRemoveNotify (CompWindow *w)
+{
+}

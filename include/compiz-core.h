@@ -1788,6 +1788,8 @@ typedef void (*WindowStateChangeNotifyProc) (CompWindow   *window,
 
 typedef void (*WindowAddNotifyProc) (CompWindow *window);
 
+typedef void (*WindowRemoveNotifyProc) (CompWindow *window);
+
 typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 
 typedef void (*InitWindowWalkerProc) (CompScreen *screen,
@@ -2089,6 +2091,7 @@ struct _CompScreen {
     DamageCursorRectProc damageCursorRect;
 
     WindowAddNotifyProc    windowAddNotify;
+    WindowRemoveNotifyProc windowRemoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
     WindowGrabNotifyProc   windowGrabNotify;
@@ -2940,6 +2943,9 @@ compareWindowActiveness (CompWindow *w1,
 
 void
 windowAddNotify (CompWindow *w);
+
+void
+windowRemoveNotify (CompWindow *w);
 
 
 /* plugin.c */
