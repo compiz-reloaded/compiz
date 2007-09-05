@@ -1876,10 +1876,6 @@ eventLoop (void)
 
     XDestroyRegion (outputRegion);
     XDestroyRegion (tmpRegion);
-
-    while (popPlugin ());
-    while (core.displays)
-	removeDisplay (core.displays);
 }
 
 static int errors = 0;

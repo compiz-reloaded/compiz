@@ -160,6 +160,9 @@ initCore (void)
 void
 finiCore (void)
 {
+    while (popPlugin ());
+    while (core.displays)
+	removeDisplay (core.displays);
 }
 
 void

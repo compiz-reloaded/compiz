@@ -446,6 +446,8 @@ main (int argc, char **argv)
     if (!disableSm)
 	closeSession ();
 
+    finiCore ();
+
     xmlCleanupParser ();
 
     if (restartSignal)
