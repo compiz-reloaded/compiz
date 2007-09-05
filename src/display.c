@@ -1584,11 +1584,9 @@ eventLoop (void)
 	if (restartSignal || shutDown)
 	{
 	    while (popPlugin ());
+	    while (core.displays)
+		removeDisplay (core.displays);
 
-	    while (display->screens)
-		removeScreen (display->screens);
-
-	    XSync (display->display, False);
 	    return;
 	}
 
@@ -1976,6 +1974,17 @@ addScreenToDisplay (CompDisplay *display,
 	display->screens = s;
 
     addScreenActions (s);
+}
+
+static void
+freeDisplay (CompDisplay *d)
+{
+    compFiniDisplayOptions (d, d->opt, COMP_DISPLAY_OPTION_NUM);
+
+    if (d->base.privates)
+	free (d->base.privates);
+
+    free (d);
 }
 
 Bool
@@ -2604,6 +2613,30 @@ addDisplay (const char *name)
 			pingTimeout, d);
 
     return TRUE;
+}
+
+void
+removeDisplay (CompDisplay *d)
+{
+    CompDisplay *p;
+
+    for (p = core.displays; p; p = p->next)
+	if (p->next == d)
+	    break;
+
+    if (p)
+	p->next = d->next;
+    else
+	core.displays = NULL;
+
+    while (d->screens)
+	removeScreen (d->screens);
+
+    objectFiniPlugins (&d->base);
+
+    XSync (d->display, False);
+
+    freeDisplay (d);
 }
 
 Time

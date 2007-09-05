@@ -1077,6 +1077,9 @@ addScreenToDisplay (CompDisplay *display,
 Bool
 addDisplay (const char *name);
 
+void
+removeDisplay (CompDisplay *d);
+
 Time
 getCurrentTimeFromDisplay (CompDisplay *d);
 
