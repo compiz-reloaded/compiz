@@ -932,7 +932,7 @@ KWD::Window::updateShadow (void)
     /* use default shadow if such exist */
     if (!mUniqueHorzShape && !mUniqueVertShape)
     {
-	mShadow = Decorator::defaultWindowShadow (&mContext);
+	mShadow = Decorator::defaultWindowShadow (&mContext, &mBorder);
 	if (mShadow)
 	    decor_shadow_reference (mShadow);
     }
