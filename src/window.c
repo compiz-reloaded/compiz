@@ -2252,18 +2252,32 @@ removeWindow (CompWindow *w)
 {
     unhookWindowFromScreen (w->screen, w);
 
-    /* restore saved geometry and map if hidden */
-    if (!w->destroyed && !w->attrib.override_redirect)
+    if (!w->destroyed)
     {
-	if (w->saveMask)
-	    XConfigureWindow (w->screen->display->display, w->id, w->saveMask,
-			      &w->saveWc);
+	CompDisplay *d = w->screen->display;
 
-	if (!w->hidden)
+	/* restore saved geometry and map if hidden */
+	if (!w->attrib.override_redirect)
 	{
-	    if (w->state & CompWindowStateHiddenMask)
-		XMapWindow (w->screen->display->display, w->id);
+	    if (w->saveMask)
+		XConfigureWindow (d->display, w->id, w->saveMask, &w->saveWc);
+
+	    if (!w->hidden)
+	    {
+		if (w->state & CompWindowStateHiddenMask)
+		    XMapWindow (d->display, w->id);
+	    }
 	}
+
+	if (w->damage)
+	    XDamageDestroy (d->display, w->damage);
+
+	if (d->shapeExtension)
+	    XShapeSelectInput (d->display, w->id, NoEventMask);
+
+	XSelectInput (d->display, w->id, NoEventMask);
+
+	XUngrabButton (d->display, AnyButton, AnyModifier, w->id);
     }
 
     if (w->attrib.map_state == IsViewable && w->damaged)
