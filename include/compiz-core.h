@@ -848,6 +848,8 @@ struct _CompDisplay {
     Display    *display;
     CompScreen *screens;
 
+    CompWatchFdHandle watchFdHandle;
+
     char *screenPrivateIndices;
     int  screenPrivateLen;
 

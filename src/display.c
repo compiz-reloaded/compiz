@@ -1522,106 +1522,115 @@ paintScreen (CompScreen   *s,
     }
 }
 
-/* MULTIDPYERROR: only works with one display present */
 void
 eventLoop (void)
 {
-    XEvent	      event;
-    int		      timeDiff;
-    struct timeval    tv;
-    CompDisplay       *display = core.displays;
-    CompScreen	      *s;
-    int		      time, timeToNextRedraw = 0;
-    CompWindow	      *w;
-    unsigned int      damageMask, mask;
-    CompWatchFdHandle watchFdHandle;
+    XEvent	   event;
+    int		   timeDiff;
+    struct timeval tv;
+    CompDisplay    *d;
+    CompScreen	   *s;
+    CompWindow	   *w;
+    int		   time, timeToNextRedraw = 0;
+    unsigned int   damageMask, mask;
 
-    watchFdHandle = compAddWatchFd (ConnectionNumber (display->display),
-				    POLLIN, NULL, NULL);
+    for (d = core.displays; d; d = d->next)
+	d->watchFdHandle =
+	    compAddWatchFd (ConnectionNumber (d->display), POLLIN, NULL, NULL);
 
     for (;;)
     {
-	if (display->dirtyPluginList)
-	    updatePlugins (display);
-
 	if (restartSignal || shutDown)
 	    break;
 
-	while (XPending (display->display))
+	for (d = core.displays; d; d = d->next)
 	{
-	    XNextEvent (display->display, &event);
+	    if (d->dirtyPluginList)
+		updatePlugins (d);
 
-	    switch (event.type) {
-	    case ButtonPress:
-	    case ButtonRelease:
-		pointerX = event.xbutton.x_root;
-		pointerY = event.xbutton.y_root;
-		break;
-	    case KeyPress:
-	    case KeyRelease:
-		pointerX = event.xkey.x_root;
-		pointerY = event.xkey.y_root;
-		break;
-	    case MotionNotify:
-		pointerX = event.xmotion.x_root;
-		pointerY = event.xmotion.y_root;
-		break;
-	    case EnterNotify:
-	    case LeaveNotify:
-		pointerX = event.xcrossing.x_root;
-		pointerY = event.xcrossing.y_root;
-		break;
-	    case ClientMessage:
-		if (event.xclient.message_type == display->xdndPositionAtom)
-		{
-		    pointerX = event.xclient.data.l[2] >> 16;
-		    pointerY = event.xclient.data.l[2] & 0xffff;
+	    while (XPending (d->display))
+	    {
+		XNextEvent (d->display, &event);
+
+		switch (event.type) {
+		case ButtonPress:
+		case ButtonRelease:
+		    pointerX = event.xbutton.x_root;
+		    pointerY = event.xbutton.y_root;
+		    break;
+		case KeyPress:
+		case KeyRelease:
+		    pointerX = event.xkey.x_root;
+		    pointerY = event.xkey.y_root;
+		    break;
+		case MotionNotify:
+		    pointerX = event.xmotion.x_root;
+		    pointerY = event.xmotion.y_root;
+		    break;
+		case EnterNotify:
+		case LeaveNotify:
+		    pointerX = event.xcrossing.x_root;
+		    pointerY = event.xcrossing.y_root;
+		    break;
+		case ClientMessage:
+		    if (event.xclient.message_type == d->xdndPositionAtom)
+		    {
+			pointerX = event.xclient.data.l[2] >> 16;
+			pointerY = event.xclient.data.l[2] & 0xffff;
+		    }
+		default:
+		    break;
 		}
-	    default:
-		break;
+
+		sn_display_process_event (d->snDisplay, &event);
+
+		inHandleEvent = TRUE;
+
+		(*d->handleEvent) (d, &event);
+
+		inHandleEvent = FALSE;
+
+		lastPointerX = pointerX;
+		lastPointerY = pointerY;
 	    }
-
-	    sn_display_process_event (display->snDisplay, &event);
-
-	    inHandleEvent = TRUE;
-
-	    (*display->handleEvent) (display, &event);
-
-	    inHandleEvent = FALSE;
-
-	    lastPointerX = pointerX;
-	    lastPointerY = pointerY;
 	}
 
-	for (s = display->screens; s; s = s->next)
+	for (d = core.displays; d; d = d->next)
 	{
-	    if (s->damageMask)
+	    for (s = d->screens; s; s = s->next)
 	    {
-		finishScreenDrawing (s);
-	    }
-	    else
-	    {
-		s->idle = TRUE;
+		if (s->damageMask)
+		{
+		    finishScreenDrawing (s);
+		}
+		else
+		{
+		    s->idle = TRUE;
+		}
 	    }
 	}
 
 	damageMask	 = 0;
 	timeToNextRedraw = MAXSHORT;
 
-	for (s = display->screens; s; s = s->next)
+	for (d = core.displays; d; d = d->next)
 	{
-	    if (!s->damageMask)
-		continue;
-
-	    if (!damageMask)
+	    for (s = d->screens; s; s = s->next)
 	    {
-		gettimeofday (&tv, 0);
-		damageMask |= s->damageMask;
-	    }
+		if (!s->damageMask)
+		    continue;
 
-	    s->timeLeft = getTimeToNextRedraw (s, &tv, &s->lastRedraw, s->idle);
-	    if (s->timeLeft < timeToNextRedraw)
-		timeToNextRedraw = s->timeLeft;
+		if (!damageMask)
+		{
+		    gettimeofday (&tv, 0);
+		    damageMask |= s->damageMask;
+		}
+
+		s->timeLeft = getTimeToNextRedraw (s, &tv, &s->lastRedraw,
+						   s->idle);
+		if (s->timeLeft < timeToNextRedraw)
+		    timeToNextRedraw = s->timeLeft;
+	    }
 	}
 
 	if (damageMask)
@@ -1637,174 +1646,177 @@ eventLoop (void)
 		if (core.timeouts)
 		    handleTimeouts (&tv);
 
-		for (s = display->screens; s; s = s->next)
+		for (d = core.displays; d; d = d->next)
 		{
-		    if (!s->damageMask || s->timeLeft > timeToNextRedraw)
-			continue;
-
-		    targetScreen = s;
-
-		    timeDiff = TIMEVALDIFF (&tv, &s->lastRedraw);
-
-		    /* handle clock rollback */
-		    if (timeDiff < 0)
-			timeDiff = 0;
-
-		    makeScreenCurrent (s);
-
-		    if (s->slowAnimations)
+		    for (s = d->screens; s; s = s->next)
 		    {
-			(*s->preparePaintScreen) (s,
-						  s->idle ? 2 : (timeDiff * 2) /
-						  s->redrawTime);
-		    }
-		    else
-			(*s->preparePaintScreen) (s,
-						  s->idle ? s->redrawTime :
-						  timeDiff);
+			if (!s->damageMask || s->timeLeft > timeToNextRedraw)
+			    continue;
 
-		    /* substract top most overlay window region */
-		    if (s->overlayWindowCount)
-		    {
-			for (w = s->reverseWindows; w; w = w->prev)
+			targetScreen = s;
+
+			timeDiff = TIMEVALDIFF (&tv, &s->lastRedraw);
+
+			/* handle clock rollback */
+			if (timeDiff < 0)
+			    timeDiff = 0;
+
+			makeScreenCurrent (s);
+
+			if (s->slowAnimations)
 			{
-			    if (w->destroyed || w->invisible)
-				continue;
-
-			    if (!w->redirected)
-				XSubtractRegion (s->damage, w->region,
-						 s->damage);
-
-			    break;
+			    (*s->preparePaintScreen) (s,
+						      s->idle ? 2 :
+						      (timeDiff * 2) /
+						      s->redrawTime);
 			}
+			else
+			    (*s->preparePaintScreen) (s,
+						      s->idle ? s->redrawTime :
+						      timeDiff);
 
-			if (s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
+			/* substract top most overlay window region */
+			if (s->overlayWindowCount)
 			{
-			    s->damageMask &= ~COMP_SCREEN_DAMAGE_ALL_MASK;
-			    s->damageMask |= COMP_SCREEN_DAMAGE_REGION_MASK;
-			}
-		    }
-
-		    if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
-		    {
-			XIntersectRegion (s->damage, &s->region,
-					  core.tmpRegion);
-
-			if (core.tmpRegion->numRects  == 1	  &&
-			    core.tmpRegion->rects->x1 == 0	  &&
-			    core.tmpRegion->rects->y1 == 0	  &&
-			    core.tmpRegion->rects->x2 == s->width &&
-			    core.tmpRegion->rects->y2 == s->height)
-			    damageScreen (s);
-		    }
-
-		    EMPTY_REGION (s->damage);
-
-		    mask = s->damageMask;
-		    s->damageMask = 0;
-
-		    if (s->clearBuffers)
-		    {
-			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
-			    glClear (GL_COLOR_BUFFER_BIT);
-		    }
-
-		    (*s->paintScreen) (s, s->outputDev,
-				       s->nOutputDev,
-				       mask);
-
-		    targetScreen = NULL;
-		    targetOutput = &s->outputDev[0];
-
-		    waitForVideoSync (s);
-
-		    if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
-		    {
-			glXSwapBuffers (display->display, s->output);
-		    }
-		    else
-		    {
-			BoxPtr pBox;
-			int    nBox, y;
-
-			pBox = core.tmpRegion->rects;
-			nBox = core.tmpRegion->numRects;
-
-			if (s->copySubBuffer)
-			{
-			    while (nBox--)
+			    for (w = s->reverseWindows; w; w = w->prev)
 			    {
-				y = s->height - pBox->y2;
+				if (w->destroyed || w->invisible)
+				    continue;
 
-				(*s->copySubBuffer) (display->display,
-						     s->output,
-						     pBox->x1, y,
-						     pBox->x2 -
-						     pBox->x1,
-						     pBox->y2 -
-						     pBox->y1);
+				if (!w->redirected)
+				    XSubtractRegion (s->damage, w->region,
+						     s->damage);
 
-				pBox++;
+				break;
 			    }
+
+			    if (s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
+			    {
+				s->damageMask &= ~COMP_SCREEN_DAMAGE_ALL_MASK;
+				s->damageMask |=
+				    COMP_SCREEN_DAMAGE_REGION_MASK;
+			    }
+			}
+
+			if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
+			{
+			    XIntersectRegion (s->damage, &s->region,
+					      core.tmpRegion);
+
+			    if (core.tmpRegion->numRects  == 1	  &&
+				core.tmpRegion->rects->x1 == 0	  &&
+				core.tmpRegion->rects->y1 == 0	  &&
+				core.tmpRegion->rects->x2 == s->width &&
+				core.tmpRegion->rects->y2 == s->height)
+				damageScreen (s);
+			}
+
+			EMPTY_REGION (s->damage);
+
+			mask = s->damageMask;
+			s->damageMask = 0;
+
+			if (s->clearBuffers)
+			{
+			    if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
+				glClear (GL_COLOR_BUFFER_BIT);
+			}
+
+			(*s->paintScreen) (s, s->outputDev,
+					   s->nOutputDev,
+					   mask);
+
+			targetScreen = NULL;
+			targetOutput = &s->outputDev[0];
+
+			waitForVideoSync (s);
+
+			if (mask & COMP_SCREEN_DAMAGE_ALL_MASK)
+			{
+			    glXSwapBuffers (d->display, s->output);
 			}
 			else
 			{
-			    glEnable (GL_SCISSOR_TEST);
-			    glDrawBuffer (GL_FRONT);
+			    BoxPtr pBox;
+			    int    nBox, y;
 
-			    while (nBox--)
+			    pBox = core.tmpRegion->rects;
+			    nBox = core.tmpRegion->numRects;
+
+			    if (s->copySubBuffer)
 			    {
-				y = s->height - pBox->y2;
+				while (nBox--)
+				{
+				    y = s->height - pBox->y2;
 
-				glBitmap (0, 0, 0, 0,
-					  pBox->x1 - s->rasterX,
-					  y - s->rasterY,
-					  NULL);
+				    (*s->copySubBuffer) (d->display,
+							 s->output,
+							 pBox->x1, y,
+							 pBox->x2 - pBox->x1,
+							 pBox->y2 - pBox->y1);
 
-				s->rasterX = pBox->x1;
-				s->rasterY = y;
-
-				glScissor (pBox->x1, y,
-					   pBox->x2 - pBox->x1,
-					   pBox->y2 - pBox->y1);
-
-				glCopyPixels (pBox->x1, y,
-					      pBox->x2 - pBox->x1,
-					      pBox->y2 - pBox->y1,
-					      GL_COLOR);
-
-				pBox++;
+				    pBox++;
+				}
 			    }
+			    else
+			    {
+				glEnable (GL_SCISSOR_TEST);
+				glDrawBuffer (GL_FRONT);
 
-			    glDrawBuffer (GL_BACK);
-			    glDisable (GL_SCISSOR_TEST);
-			    glFlush ();
+				while (nBox--)
+				{
+				    y = s->height - pBox->y2;
+
+				    glBitmap (0, 0, 0, 0,
+					      pBox->x1 - s->rasterX,
+					      y - s->rasterY,
+					      NULL);
+
+				    s->rasterX = pBox->x1;
+				    s->rasterY = y;
+
+				    glScissor (pBox->x1, y,
+					       pBox->x2 - pBox->x1,
+					       pBox->y2 - pBox->y1);
+
+				    glCopyPixels (pBox->x1, y,
+						  pBox->x2 - pBox->x1,
+						  pBox->y2 - pBox->y1,
+						  GL_COLOR);
+
+				    pBox++;
+				}
+
+				glDrawBuffer (GL_BACK);
+				glDisable (GL_SCISSOR_TEST);
+				glFlush ();
+			    }
 			}
-		    }
 
-		    s->lastRedraw = tv;
+			s->lastRedraw = tv;
 
-		    (*s->donePaintScreen) (s);
+			(*s->donePaintScreen) (s);
 
-		    /* remove destroyed windows */
-		    while (s->pendingDestroys)
-		    {
-			CompWindow *w;
-
-			for (w = s->windows; w; w = w->next)
+			/* remove destroyed windows */
+			while (s->pendingDestroys)
 			{
-			    if (w->destroyed)
+			    CompWindow *w;
+
+			    for (w = s->windows; w; w = w->next)
 			    {
-				addWindowDamage (w);
-				removeWindow (w);
-				break;
+				if (w->destroyed)
+				{
+				    addWindowDamage (w);
+				    removeWindow (w);
+				    break;
+				}
 			    }
+
+			    s->pendingDestroys--;
 			}
 
-			s->pendingDestroys--;
+			s->idle = FALSE;
 		    }
-
-		    s->idle = FALSE;
 		}
 	    }
 	}
@@ -1826,7 +1838,8 @@ eventLoop (void)
 	}
     }
 
-    compRemoveWatchFd (watchFdHandle);
+    for (d = core.displays; d; d = d->next)
+	compRemoveWatchFd (d->watchFdHandle);
 }
 
 static int errors = 0;
@@ -1960,6 +1973,8 @@ addDisplay (const char *name)
 
     d->next    = NULL;
     d->screens = NULL;
+
+    d->watchFdHandle = 0;
 
     d->screenPrivateIndices = 0;
     d->screenPrivateLen     = 0;
