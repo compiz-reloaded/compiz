@@ -2743,7 +2743,7 @@ removePassiveKeyGrab (CompScreen     *s,
 	    if (s->keyGrab[i].count)
 		return;
 
-	    memmove (s->keyGrab + i, s->keyGrab + i + 1, 
+	    memmove (s->keyGrab + i, s->keyGrab + i + 1,
 		     (s->nKeyGrab - (i + 1)) * sizeof (CompKeyGrab));
 
 	    s->nKeyGrab--;
