@@ -1556,14 +1556,15 @@ paintScreen (CompScreen   *s,
 void
 eventLoop (void)
 {
-    XEvent	   event;
-    int		   timeDiff;
-    struct timeval tv;
-    CompDisplay    *display = compDisplays;
-    CompScreen	   *s;
-    int		   time, timeToNextRedraw = 0;
-    CompWindow	   *w;
-    unsigned int   damageMask, mask;
+    XEvent	      event;
+    int		      timeDiff;
+    struct timeval    tv;
+    CompDisplay       *display = compDisplays;
+    CompScreen	      *s;
+    int		      time, timeToNextRedraw = 0;
+    CompWindow	      *w;
+    unsigned int      damageMask, mask;
+    CompWatchFdHandle watchFdHandle;
 
     tmpRegion = XCreateRegion ();
     if (!tmpRegion)
@@ -1582,7 +1583,8 @@ eventLoop (void)
 	return;
     }
 
-    compAddWatchFd (ConnectionNumber (display->display), POLLIN, NULL, NULL);
+    watchFdHandle = compAddWatchFd (ConnectionNumber (display->display),
+				    POLLIN, NULL, NULL);
 
     for (;;)
     {
@@ -1869,6 +1871,8 @@ eventLoop (void)
 	    }
 	}
     }
+
+    compRemoveWatchFd (watchFdHandle);
 
     XDestroyRegion (outputRegion);
     XDestroyRegion (tmpRegion);
