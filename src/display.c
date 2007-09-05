@@ -1582,13 +1582,7 @@ eventLoop (void)
 	    updatePlugins (display);
 
 	if (restartSignal || shutDown)
-	{
-	    while (popPlugin ());
-	    while (core.displays)
-		removeDisplay (core.displays);
-
-	    return;
-	}
+	    break;
 
 	while (XPending (display->display))
 	{
@@ -1867,6 +1861,10 @@ eventLoop (void)
 	    }
 	}
     }
+
+    while (popPlugin ());
+    while (core.displays)
+	removeDisplay (core.displays);
 }
 
 static int errors = 0;
