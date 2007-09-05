@@ -1866,7 +1866,7 @@ eventLoop (void)
 	    }
 	    else
 	    {
-		doPoll (1000);
+		doPoll (-1);
 	    }
 	}
     }
