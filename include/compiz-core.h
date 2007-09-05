@@ -615,6 +615,10 @@ struct _CompCore {
     CompFileWatch	*fileWatch;
     CompFileWatchHandle lastFileWatchHandle;
 
+    CompTimeout       *timeouts;
+    struct timeval    lastTimeout;
+    CompTimeoutHandle lastTimeoutHandle;
+
     SetOptionForPluginProc setOptionForPlugin;
 };
 

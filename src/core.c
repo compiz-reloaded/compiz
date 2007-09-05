@@ -152,6 +152,11 @@ initCore (void)
     core.fileWatch	     = NULL;
     core.lastFileWatchHandle = 1;
 
+    core.timeouts	   = NULL;
+    core.lastTimeoutHandle = 1;
+
+    gettimeofday (&core.lastTimeout, 0);
+
     core.setOptionForPlugin = setOptionForPlugin;
 
     return TRUE;

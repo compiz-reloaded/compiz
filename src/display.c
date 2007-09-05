@@ -48,10 +48,6 @@ static unsigned int virtualModMask[] = {
     CompModeSwitchMask, CompNumLockMask, CompScrollLockMask
 };
 
-static CompTimeout       *timeouts = 0;
-static struct timeval    lastTimeout;
-static CompTimeoutHandle lastTimeoutHandle = 1;
-
 typedef struct _CompWatchFd {
     struct _CompWatchFd *next;
     int			fd;
@@ -1033,7 +1029,7 @@ addTimeout (CompTimeout *timeout)
 {
     CompTimeout *p = 0, *t;
 
-    for (t = timeouts; t; t = t->next)
+    for (t = core.timeouts; t; t = t->next)
     {
 	if (timeout->time < t->left)
 	    break;
@@ -1047,7 +1043,7 @@ addTimeout (CompTimeout *timeout)
     if (p)
 	p->next = timeout;
     else
-	timeouts = timeout;
+	core.timeouts = timeout;
 }
 
 CompTimeoutHandle
@@ -1064,13 +1060,10 @@ compAddTimeout (int	     time,
     timeout->time     = time;
     timeout->callBack = callBack;
     timeout->closure  = closure;
-    timeout->handle   = lastTimeoutHandle++;
+    timeout->handle   = core.lastTimeoutHandle++;
 
-    if (lastTimeoutHandle == MAXSHORT)
-	lastTimeoutHandle = 1;
-
-    if (!timeouts)
-	gettimeofday (&lastTimeout, 0);
+    if (core.lastTimeoutHandle == MAXSHORT)
+	core.lastTimeoutHandle = 1;
 
     addTimeout (timeout);
 
@@ -1083,7 +1076,7 @@ compRemoveTimeout (CompTimeoutHandle handle)
     CompTimeout *p = 0, *t;
     void        *closure = NULL;
 
-    for (t = timeouts; t; t = t->next)
+    for (t = core.timeouts; t; t = t->next)
     {
 	if (t->handle == handle)
 	    break;
@@ -1096,7 +1089,7 @@ compRemoveTimeout (CompTimeoutHandle handle)
 	if (p)
 	    p->next = t->next;
 	else
-	    timeouts = t->next;
+	    core.timeouts = t->next;
 
 	closure = t->closure;
 
@@ -1433,31 +1426,31 @@ handleTimeouts (struct timeval *tv)
     CompTimeout *t;
     int		timeDiff;
 
-    timeDiff = TIMEVALDIFF (tv, &lastTimeout);
+    timeDiff = TIMEVALDIFF (tv, &core.lastTimeout);
 
     /* handle clock rollback */
     if (timeDiff < 0)
 	timeDiff = 0;
 
-    for (t = timeouts; t; t = t->next)
+    for (t = core.timeouts; t; t = t->next)
 	t->left -= timeDiff;
 
-    while (timeouts && timeouts->left <= 0)
+    while (core.timeouts && core.timeouts->left <= 0)
     {
-	t = timeouts;
+	t = core.timeouts;
 	if ((*t->callBack) (t->closure))
 	{
-	    timeouts = t->next;
+	    core.timeouts = t->next;
 	    addTimeout (t);
 	}
 	else
 	{
-	    timeouts = t->next;
+	    core.timeouts = t->next;
 	    free (t);
 	}
     }
 
-    lastTimeout = *tv;
+    core.lastTimeout = *tv;
 }
 
 static void
@@ -1671,7 +1664,7 @@ eventLoop (void)
 	    {
 		gettimeofday (&tv, 0);
 
-		if (timeouts)
+		if (core.timeouts)
 		    handleTimeouts (&tv);
 
 		for (s = display->screens; s; s = s->next)
@@ -1846,10 +1839,10 @@ eventLoop (void)
 	}
 	else
 	{
-	    if (timeouts)
+	    if (core.timeouts)
 	    {
-		if (timeouts->left > 0)
-		    doPoll (timeouts->left);
+		if (core.timeouts->left > 0)
+		    doPoll (core.timeouts->left);
 
 		gettimeofday (&tv, 0);
 
