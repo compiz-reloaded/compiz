@@ -139,6 +139,8 @@ setOptionForPlugin (CompObject      *object,
 CompBool
 initCore (void)
 {
+    CompPlugin *corePlugin;
+
     compObjectInit (&core.base, 0, 0, COMP_OBJECT_TYPE_CORE);
 
     core.displays = NULL;
@@ -174,6 +176,21 @@ initCore (void)
 
     core.fileWatchAdded   = fileWatchAdded;
     core.fileWatchRemoved = fileWatchRemoved;
+
+    corePlugin = loadPlugin ("core");
+    if (!corePlugin)
+    {
+	compLogMessage (0, "core", CompLogLevelFatal,
+			"Couldn't load core plugin");
+	return FALSE;
+    }
+
+    if (!pushPlugin (corePlugin))
+    {
+	compLogMessage (0, "core", CompLogLevelFatal,
+			"Couldn't activate core plugin");
+	return FALSE;
+    }
 
     return TRUE;
 }

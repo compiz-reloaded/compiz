@@ -1946,7 +1946,6 @@ Bool
 addDisplay (const char *name)
 {
     CompDisplay *d;
-    CompPlugin  *corePlugin;
     CompPrivate	*privates;
     Display     *dpy;
     Window	focus;
@@ -1998,21 +1997,6 @@ addDisplay (const char *name)
     d->plugin.list.value->s = strdup ("core");
     if (!d->plugin.list.value->s)
 	return FALSE;
-
-    corePlugin = loadPlugin (d->plugin.list.value->s);
-    if (!corePlugin)
-    {
-	compLogMessage (d, "core", CompLogLevelFatal,
-			"Couldn't load core plugin");
-	return FALSE;
-    }
-
-    if (!pushPlugin (corePlugin))
-    {
-	compLogMessage (d, "core", CompLogLevelFatal,
-			"Couldn't activate core plugin");
-	return FALSE;
-    }
 
     d->dirtyPluginList = TRUE;
 
