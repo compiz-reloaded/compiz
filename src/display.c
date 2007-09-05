@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/poll.h>
+#include <assert.h>
 
 #define XK_MISCELLANY
 #include <X11/keysymdef.h>
@@ -2311,10 +2312,13 @@ addDisplay (const char *name)
 	d->nScreenInfo = 0;
     }
 
-    addDisplayToCore (d);
-
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));
     d->returnKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Return"));
+
+    addDisplayToCore (d);
+
+    /* TODO: bailout properly when objectInitPlugins fails */
+    assert (objectInitPlugins (&d->base));
 
     if (onlyCurrentScreen)
     {
