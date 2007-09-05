@@ -1566,11 +1566,19 @@ eventLoop (void)
     unsigned int   damageMask, mask;
 
     tmpRegion = XCreateRegion ();
-    outputRegion = XCreateRegion ();
-    if (!tmpRegion || !outputRegion)
+    if (!tmpRegion)
     {
 	compLogMessage (display, "core", CompLogLevelFatal,
-			"Couldn't create temporary regions");
+			"Couldn't create temporary region");
+	return;
+    }
+
+    outputRegion = XCreateRegion ();
+    if (!outputRegion)
+    {
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"Couldn't create temporary region");
+	XDestroyRegion (tmpRegion);
 	return;
     }
 
@@ -1861,6 +1869,9 @@ eventLoop (void)
 	    }
 	}
     }
+
+    XDestroyRegion (outputRegion);
+    XDestroyRegion (tmpRegion);
 
     while (popPlugin ());
     while (core.displays)
