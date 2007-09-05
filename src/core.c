@@ -143,6 +143,17 @@ initCore (void)
 
     core.displays = NULL;
 
+    core.tmpRegion = XCreateRegion ();
+    if (!core.tmpRegion)
+	return FALSE;
+
+    core.outputRegion = XCreateRegion ();
+    if (!core.outputRegion)
+    {
+	XDestroyRegion (core.tmpRegion);
+	return FALSE;
+    }
+
     core.initPluginForObject = initCorePluginForObject;
     core.finiPluginForObject = finiCorePluginForObject;
 
@@ -168,6 +179,9 @@ finiCore (void)
     while (popPlugin ());
     while (core.displays)
 	removeDisplay (core.displays);
+
+    XDestroyRegion (core.outputRegion);
+    XDestroyRegion (core.tmpRegion);
 }
 
 void

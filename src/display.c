@@ -63,7 +63,6 @@ static int               nWatchFds = 0;
 
 static CompScreen *targetScreen = NULL;
 static CompOutput *targetOutput;
-static Region	  tmpRegion, outputRegion;
 
 static Bool inHandleEvent = FALSE;
 
@@ -1510,14 +1509,14 @@ paintScreen (CompScreen   *s,
 	}
 	else if (mask & COMP_SCREEN_DAMAGE_REGION_MASK)
 	{
-	    XIntersectRegion (tmpRegion,
+	    XIntersectRegion (core.tmpRegion,
 			      &outputs[i].region,
-			      outputRegion);
+			      core.outputRegion);
 
 	    if (!(*s->paintOutput) (s,
 				    &defaultScreenPaintAttrib,
 				    &identity,
-				    outputRegion, &outputs[i],
+				    core.outputRegion, &outputs[i],
 				    PAINT_SCREEN_REGION_MASK))
 	    {
 		(*s->paintOutput) (s,
@@ -1526,9 +1525,9 @@ paintScreen (CompScreen   *s,
 				   &outputs[i].region, &outputs[i],
 				   PAINT_SCREEN_FULL_MASK);
 
-		XUnionRegion (tmpRegion,
+		XUnionRegion (core.tmpRegion,
 			      &outputs[i].region,
-			      tmpRegion);
+			      core.tmpRegion);
 
 	    }
 	}
@@ -1548,23 +1547,6 @@ eventLoop (void)
     CompWindow	      *w;
     unsigned int      damageMask, mask;
     CompWatchFdHandle watchFdHandle;
-
-    tmpRegion = XCreateRegion ();
-    if (!tmpRegion)
-    {
-	compLogMessage (display, "core", CompLogLevelFatal,
-			"Couldn't create temporary region");
-	return;
-    }
-
-    outputRegion = XCreateRegion ();
-    if (!outputRegion)
-    {
-	compLogMessage (display, "core", CompLogLevelFatal,
-			"Couldn't create temporary region");
-	XDestroyRegion (tmpRegion);
-	return;
-    }
 
     watchFdHandle = compAddWatchFd (ConnectionNumber (display->display),
 				    POLLIN, NULL, NULL);
@@ -1717,13 +1699,14 @@ eventLoop (void)
 
 		    if (s->damageMask & COMP_SCREEN_DAMAGE_REGION_MASK)
 		    {
-			XIntersectRegion (s->damage, &s->region, tmpRegion);
+			XIntersectRegion (s->damage, &s->region,
+					  core.tmpRegion);
 
-			if (tmpRegion->numRects  == 1	     &&
-			    tmpRegion->rects->x1 == 0	     &&
-			    tmpRegion->rects->y1 == 0	     &&
-			    tmpRegion->rects->x2 == s->width &&
-			    tmpRegion->rects->y2 == s->height)
+			if (core.tmpRegion->numRects  == 1	  &&
+			    core.tmpRegion->rects->x1 == 0	  &&
+			    core.tmpRegion->rects->y1 == 0	  &&
+			    core.tmpRegion->rects->x2 == s->width &&
+			    core.tmpRegion->rects->y2 == s->height)
 			    damageScreen (s);
 		    }
 
@@ -1756,8 +1739,8 @@ eventLoop (void)
 			BoxPtr pBox;
 			int    nBox, y;
 
-			pBox = tmpRegion->rects;
-			nBox = tmpRegion->numRects;
+			pBox = core.tmpRegion->rects;
+			nBox = core.tmpRegion->numRects;
 
 			if (s->copySubBuffer)
 			{
@@ -1856,9 +1839,6 @@ eventLoop (void)
     }
 
     compRemoveWatchFd (watchFdHandle);
-
-    XDestroyRegion (outputRegion);
-    XDestroyRegion (tmpRegion);
 }
 
 static int errors = 0;

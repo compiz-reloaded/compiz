@@ -606,6 +606,9 @@ struct _CompCore {
 
     CompDisplay *displays;
 
+    Region tmpRegion;
+    Region outputRegion;
+
     InitPluginForObjectProc initPluginForObject;
     FiniPluginForObjectProc finiPluginForObject;
 
