@@ -587,6 +587,15 @@ typedef void (*FileWatchAddedProc) (CompCore	  *core,
 typedef void (*FileWatchRemovedProc) (CompCore      *core,
 				      CompFileWatch *fileWatch);
 
+typedef struct _CompTimeout {
+    struct _CompTimeout *next;
+    int			time;
+    int			left;
+    CallBackProc	callBack;
+    void		*closure;
+    CompTimeoutHandle   handle;
+} CompTimeout;
+
 typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
 					    const char      *plugin,
 					    const char	    *name,

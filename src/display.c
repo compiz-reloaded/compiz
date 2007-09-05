@@ -48,15 +48,6 @@ static unsigned int virtualModMask[] = {
     CompModeSwitchMask, CompNumLockMask, CompScrollLockMask
 };
 
-typedef struct _CompTimeout {
-    struct _CompTimeout *next;
-    int			time;
-    int			left;
-    CallBackProc	callBack;
-    void		*closure;
-    CompTimeoutHandle   handle;
-} CompTimeout;
-
 static CompTimeout       *timeouts = 0;
 static struct timeval    lastTimeout;
 static CompTimeoutHandle lastTimeoutHandle = 1;
