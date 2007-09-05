@@ -96,8 +96,6 @@ int pointerY     = 0;
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
-CompDisplay *compDisplays = 0;
-
 static char *displayPrivateIndices = 0;
 static int  displayPrivateLen = 0;
 
@@ -105,10 +103,10 @@ static int
 reallocDisplayPrivate (int  size,
 		       void *closure)
 {
-    CompDisplay *d = compDisplays;
+    CompDisplay *d;
     void        *privates;
 
-    if (d)
+    for (d = core.displays; d; d = d->next)
     {
 	privates = realloc (d->base.privates, size * sizeof (CompPrivate));
 	if (!privates)
@@ -1553,13 +1551,14 @@ paintScreen (CompScreen   *s,
     }
 }
 
+/* MULTIDPYERROR: only works with one display present */
 void
 eventLoop (void)
 {
     XEvent	      event;
     int		      timeDiff;
     struct timeval    tv;
-    CompDisplay       *display = compDisplays;
+    CompDisplay       *display = core.displays;
     CompScreen	      *s;
     int		      time, timeToNextRedraw = 0;
     CompWindow	      *w;
@@ -1887,8 +1886,6 @@ errorHandler (Display     *dpy,
 
 #ifdef DEBUG
     char str[128];
-    char *name = 0;
-    int  o;
 #endif
 
     errors++;
@@ -1897,24 +1894,8 @@ errorHandler (Display     *dpy,
     XGetErrorDatabaseText (dpy, "XlibMessage", "XError", "", str, 128);
     fprintf (stderr, "%s", str);
 
-    o = e->error_code - compDisplays->damageError;
-    switch (o) {
-    case BadDamage:
-	name = "BadDamage";
-	break;
-    default:
-	break;
-    }
-
-    if (name)
-    {
-	fprintf (stderr, ": %s\n  ", name);
-    }
-    else
-    {
-	XGetErrorText (dpy, e->error_code, str, 128);
-	fprintf (stderr, ": %s\n  ", str);
-    }
+    XGetErrorText (dpy, e->error_code, str, 128);
+    fprintf (stderr, ": %s\n  ", str);
 
     XGetErrorDatabaseText (dpy, "XlibMessage", "MajorCode", "%d", str, 128);
     fprintf (stderr, str, e->request_code);
@@ -2380,7 +2361,6 @@ addDisplay (const char *name)
     }
 
     addDisplayToCore (d);
-    compDisplays = d;
 
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));
     d->returnKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Return"));

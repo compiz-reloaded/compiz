@@ -724,7 +724,8 @@ getPluginABI (const char *name)
     if (!p || !p->vTable->getObjectOptions)
 	return 0;
 
-    option = (*p->vTable->getObjectOptions) (p, &compDisplays->base,
+    /* MULTIDPYERROR: ABI options should be moved into core */
+    option = (*p->vTable->getObjectOptions) (p, &core.displays->base,
 					     &nOption);
 
     return getIntOptionNamed (option, nOption, "abi", 0);

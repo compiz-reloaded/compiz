@@ -1006,8 +1006,6 @@ struct _CompDisplay {
     LogMessageProc logMessage;
 };
 
-extern CompDisplay *compDisplays;
-
 #define GET_CORE_DISPLAY(object) ((CompDisplay *) (object))
 #define CORE_DISPLAY(object) CompDisplay *d = GET_CORE_DISPLAY (object)
 

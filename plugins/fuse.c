@@ -211,26 +211,25 @@ fuseLookupChild (FuseInode  *inode,
     return NULL;
 }
 
+/* MULTIDPYERROR: only works with one or less displays present */
+/* OBJECTOPTION: only display and screen options are supported */
 static CompObject *
 fuseGetObjectFromInode (FuseInode *inode)
 {
+    CompObject *object;
+
+    object = compObjectFind (&core.base, COMP_OBJECT_TYPE_DISPLAY, NULL);
+    if (!object)
+	return NULL;
+
     if (inode->type & FUSE_INODE_TYPE_SCREEN)
     {
-	CompScreen *s;
-	int	   screenNum = -1;
-
-	sscanf (inode->name, "screen%d", &screenNum);
-
-	for (s = compDisplays->screens; s; s = s->next)
-	    if (s->screenNum == screenNum)
-		break;
-
-	if (s)
-	    return &s->base;
+	return compObjectFind (object, COMP_OBJECT_TYPE_SCREEN,
+			       inode->name + 6);
     }
     else if (inode->type & FUSE_INODE_TYPE_DISPLAY)
     {
-	return &compDisplays->base;
+	return object;
     }
 
     return NULL;
@@ -288,6 +287,7 @@ fuseGetOptionFromInode (FuseInode *inode)
     return NULL;
 }
 
+/* MULTIDPYERROR: only works with one or less displays present */
 static char *
 fuseGetStringFromInode (FuseInode *inode)
 {
@@ -348,9 +348,12 @@ fuseGetStringFromInode (FuseInode *inode)
 	    case CompOptionTypeColor:
 		return colorToString (value->c);
 	    case CompOptionTypeKey:
-		return keyActionToString (compDisplays, &value->action);
+		if (core.displays)
+		    return keyActionToString (core.displays, &value->action);
 	    case CompOptionTypeButton:
-		return buttonActionToString (compDisplays, &value->action);
+		if (core.displays)
+		    return buttonActionToString (core.displays,
+						 &value->action);
 	    case CompOptionTypeEdge:
 		return edgeMaskToString (value->action.edgeMask);
 	    case CompOptionTypeBell:

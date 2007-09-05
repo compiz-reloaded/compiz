@@ -93,26 +93,20 @@ dbusGetOptionsFromPath (char	     **path,
     CompPlugin *p;
     CompObject *object;
 
-    if (strcmp (path[1], "allscreens"))
+    object = compObjectFind (&core.base, COMP_OBJECT_TYPE_DISPLAY, NULL);
+    if (!object)
+	return NULL;
+
+    if (strncmp (path[1], "screen", 6) == 0)
     {
-	CompScreen *s;
-	int	   screenNum;
-
-	if (sscanf (path[1], "screen%d", &screenNum) != 1)
-	    return FALSE;
-
-	for (s = compDisplays->screens; s; s = s->next)
-	    if (s->screenNum == screenNum)
-		break;
-
-	if (!s)
+	object = compObjectFind (object, COMP_OBJECT_TYPE_SCREEN,
+				 path[1] + 6);
+	if (!object)
 	    return NULL;
-
-	object = &s->base;
     }
-    else
+    else if (strcmp (path[1], "allscreens") != 0)
     {
-	object = &compDisplays->base;
+	return NULL;
     }
 
     if (returnObject)
@@ -329,11 +323,13 @@ dbusHandleRootIntrospectMessage (DBusConnection *connection,
     return TRUE;
 }
 
+/* MULTIDPYERROR: only works with one or less displays present */
 static Bool
 dbusHandlePluginIntrospectMessage (DBusConnection *connection,
 				   DBusMessage    *message,
 				   char           **path)
 {
+    CompDisplay *d;
     CompScreen *s;
     char screenName[256];
 
@@ -345,12 +341,15 @@ dbusHandlePluginIntrospectMessage (DBusConnection *connection,
 
     dbusIntrospectStartRoot (writer);
 
-    dbusIntrospectAddNode (writer, "allscreens");
-
-    for (s = compDisplays->screens; s; s = s->next)
+    for (d = core.displays; d; d = d->next)
     {
-	sprintf (screenName, "screen%d", s->screenNum);
-	dbusIntrospectAddNode (writer, screenName);
+	dbusIntrospectAddNode (writer, "allscreens");
+
+	for (s = d->screens; s; s = s->next)
+	{
+	    sprintf (screenName, "screen%d", s->screenNum);
+	    dbusIntrospectAddNode (writer, screenName);
+	}
     }
 
     dbusIntrospectEndRoot (writer);
@@ -2207,10 +2206,12 @@ dbusSetOptionForPlugin (CompObject      *object,
 	    {
 		CompScreen *s;
 
-		dbusUnregisterPluginsForDisplay (dc->connection, compDisplays);
-		dbusRegisterPluginsForDisplay (dc->connection, compDisplays);
+		CORE_DISPLAY (object);
 
-		for (s = compDisplays->screens; s; s = s->next)
+		dbusUnregisterPluginsForDisplay (dc->connection, d);
+		dbusRegisterPluginsForDisplay (dc->connection, d);
+
+		for (s = d->screens; s; s = s->next)
 		{
 		    dbusUnregisterPluginsForScreen (dc->connection, s);
 		    dbusRegisterPluginsForScreen (dc->connection, s);

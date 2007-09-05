@@ -264,8 +264,6 @@ main (int argc, char **argv)
     programArgc = argc;
     programArgv = argv;
 
-    compDisplays = NULL;
-
     signal (SIGHUP, signalHandler);
     signal (SIGCHLD, signalHandler);
     signal (SIGINT, signalHandler);

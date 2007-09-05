@@ -251,9 +251,8 @@ iniGetFilename (CompObject *object,
 		const char *plugin,
 		char **filename)
 {
-    CompScreen *s;
-    int	       len;
-    char       *fn = NULL, *screenStr;
+    int	 len;
+    char *fn = NULL, *screenStr;
 
     screenStr = malloc (sizeof(char) * 12);
     if (!screenStr)
@@ -261,15 +260,7 @@ iniGetFilename (CompObject *object,
 
     if (object->type == COMP_OBJECT_TYPE_SCREEN)
     {
-	for (s = compDisplays->screens; s; s = s->next)
-	    if (&s->base == object)
-		break;
-
-	if (!s)
-	{
-	    free(screenStr);
-	    return FALSE;
-	}
+	CORE_SCREEN (object);
 
 	snprintf (screenStr, 12, "screen%d", s->screenNum);
     }
@@ -578,20 +569,9 @@ static Bool
 iniSaveOptions (CompObject *object,
 		const char *plugin)
 {
-    CompScreen *s = NULL;
     CompOption *option = NULL;
     int	       nOption = 0;
     char       *filename, *directory, *fullPath, *strVal = NULL;
-
-    if (object->type == COMP_OBJECT_TYPE_SCREEN)
-    {
-	for (s = compDisplays->screens; s; s = s->next)
-	    if (&s->base == object)
-		break;
-
-	if (!s)
-	    return FALSE;
-    }
 
     if (plugin)
     {
@@ -826,7 +806,7 @@ iniLoadOptions (CompObject *object,
 	    compLogMessage (NULL, "ini", CompLogLevelWarn,
 			    "Loading default plugins (%s)", DEFAULT_PLUGINS);
 
-	    (*core.setOptionForPlugin) (&compDisplays->base,
+	    (*core.setOptionForPlugin) (object,
 					"core", "active_plugins",
 					&value);
 
@@ -893,6 +873,8 @@ iniLoadOptions (CompObject *object,
     return TRUE;
 }
 
+/* MULTIDPYERROR: only works with one or less displays present */
+/* OBJECTOPTION: only display and screen options are supported */
 static void
 iniFileModified (const char *name,
 		 void       *closure)
@@ -900,17 +882,17 @@ iniFileModified (const char *name,
     IniFileData *fd;
 
     fd = iniGetFileDataFromFilename (name);
-    if (fd)
+    if (fd && core.displays)
     {
 	if (fd->screen < 0)
 	{
-	    iniLoadOptions (&compDisplays->base, fd->plugin);
+	    iniLoadOptions (&core.displays->base, fd->plugin);
 	}
 	else
 	{
 	    CompScreen *s;
 
-	    for (s = compDisplays->screens; s; s = s->next)
+	    for (s = core.displays->screens; s; s = s->next)
 		if (s->screenNum == fd->screen)
 		    break;
 

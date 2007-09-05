@@ -570,7 +570,7 @@ gconfInitPluginForObject (CompPlugin *p,
     return status;
 }
 
-/* TODO: support for more than display and screen objects */
+/* MULTIDPYERROR: only works with one or less displays present */
 static void
 gconfKeyChanged (GConfClient *client,
 		 guint	     cnxn_id,
