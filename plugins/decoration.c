@@ -123,6 +123,7 @@ typedef struct _DecorScreen {
     GetOutputExtentsForWindowProc getOutputExtentsForWindow;
 
     WindowAddNotifyProc    windowAddNotify;
+    WindowRemoveNotifyProc windowRemoveNotify;
     WindowMoveNotifyProc   windowMoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
 
@@ -1268,6 +1269,19 @@ decorWindowAddNotify (CompWindow *w)
     WRAP (ds, w->screen, windowAddNotify, decorWindowAddNotify);
 }
 
+static void
+decorWindowRemoveNotify (CompWindow *w)
+{
+    DECOR_SCREEN (w->screen);
+
+    if (!w->destroyed)
+	decorWindowUpdate (w, FALSE);
+
+    UNWRAP (ds, w->screen, windowRemoveNotify);
+    (*w->screen->windowRemoveNotify) (w);
+    WRAP (ds, w->screen, windowRemoveNotify, decorWindowRemoveNotify);
+}
+
 static const CompMetadataOptionInfo decorDisplayOptionInfo[] = {
     { "shadow_radius", "float", "<min>0.0</min><max>48.0</max>", 0, 0 },
     { "shadow_opacity", "float", "<min>0.0</min>", 0, 0 },
@@ -1374,6 +1388,7 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
     WRAP (ds, s, getOutputExtentsForWindow, decorGetOutputExtentsForWindow);
     WRAP (ds, s, windowAddNotify, decorWindowAddNotify);
+    WRAP (ds, s, windowRemoveNotify, decorWindowRemoveNotify);
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
@@ -1403,6 +1418,7 @@ decorFiniScreen (CompPlugin *p,
     UNWRAP (ds, s, damageWindowRect);
     UNWRAP (ds, s, getOutputExtentsForWindow);
     UNWRAP (ds, s, windowAddNotify);
+    UNWRAP (ds, s, windowRemoveNotify);
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
     UNWRAP (ds, s, windowStateChangeNotify);
@@ -1441,9 +1457,6 @@ decorFiniWindow (CompPlugin *p,
 		 CompWindow *w)
 {
     DECOR_WINDOW (w);
-
-    if (!w->destroyed)
-	decorWindowUpdate (w, FALSE);
 
     if (dw->wd)
 	destroyWindowDecoration (w->screen, dw->wd);
