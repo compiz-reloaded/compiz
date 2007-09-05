@@ -181,9 +181,10 @@ initCore (void)
 void
 finiCore (void)
 {
-    while (popPlugin ());
     while (core.displays)
 	removeDisplay (core.displays);
+
+    while (popPlugin ());
 
     XDestroyRegion (core.outputRegion);
     XDestroyRegion (core.tmpRegion);
