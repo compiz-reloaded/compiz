@@ -2591,6 +2591,7 @@ removeDisplay (CompDisplay *d)
     objectFiniPlugins (&d->base);
 
     XSync (d->display, False);
+    XCloseDisplay (d->display);
 
     freeDisplay (d);
 }
