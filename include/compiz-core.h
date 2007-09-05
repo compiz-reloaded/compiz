@@ -596,6 +596,14 @@ typedef struct _CompTimeout {
     CompTimeoutHandle   handle;
 } CompTimeout;
 
+typedef struct _CompWatchFd {
+    struct _CompWatchFd *next;
+    int			fd;
+    CallBackProc	callBack;
+    void		*closure;
+    CompWatchFdHandle   handle;
+} CompWatchFd;
+
 typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
 					    const char      *plugin,
 					    const char	    *name,

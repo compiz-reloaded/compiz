@@ -48,14 +48,6 @@ static unsigned int virtualModMask[] = {
     CompModeSwitchMask, CompNumLockMask, CompScrollLockMask
 };
 
-typedef struct _CompWatchFd {
-    struct _CompWatchFd *next;
-    int			fd;
-    CallBackProc	callBack;
-    void		*closure;
-    CompWatchFdHandle   handle;
-} CompWatchFd;
-
 static CompWatchFd       *watchFds = 0;
 static CompWatchFdHandle lastWatchFdHandle = 1;
 static struct pollfd     *watchPollFds = 0;
