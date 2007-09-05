@@ -1476,6 +1476,12 @@ initWindowWalker (CompScreen *screen,
 static void
 freeScreen (CompScreen *s)
 {
+    if (s->buttonGrab)
+	free (s->buttonGrab);
+
+    if (s->keyGrab)
+	free (s->keyGrab);
+
     if (s->snContext)
 	sn_monitor_context_unref (s->snContext);
 
@@ -2250,6 +2256,8 @@ removeScreen (CompScreen *s)
 	removeWindow (s->windows);
 
     objectFiniPlugins (&s->base);
+
+    XUngrabKey (d->display, AnyKey, AnyModifier, s->root);
 
     for (i = 0; i < SCREEN_EDGE_NUM; i++)
 	XDestroyWindow (d->display, s->screenEdge[i].id);
