@@ -154,21 +154,26 @@ initCore (void)
 	return FALSE;
     }
 
-    core.initPluginForObject = initCorePluginForObject;
-    core.finiPluginForObject = finiCorePluginForObject;
-
-    core.fileWatchAdded   = fileWatchAdded;
-    core.fileWatchRemoved = fileWatchRemoved;
-
     core.fileWatch	     = NULL;
     core.lastFileWatchHandle = 1;
 
     core.timeouts	   = NULL;
     core.lastTimeoutHandle = 1;
 
+    core.watchFds	   = NULL;
+    core.lastWatchFdHandle = 1;
+    core.watchPollFds	   = NULL;
+    core.nWatchFds	   = 0;
+
     gettimeofday (&core.lastTimeout, 0);
 
+    core.initPluginForObject = initCorePluginForObject;
+    core.finiPluginForObject = finiCorePluginForObject;
+
     core.setOptionForPlugin = setOptionForPlugin;
+
+    core.fileWatchAdded   = fileWatchAdded;
+    core.fileWatchRemoved = fileWatchRemoved;
 
     return TRUE;
 }

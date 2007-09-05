@@ -48,11 +48,6 @@ static unsigned int virtualModMask[] = {
     CompModeSwitchMask, CompNumLockMask, CompScrollLockMask
 };
 
-static CompWatchFd       *watchFds = 0;
-static CompWatchFdHandle lastWatchFdHandle = 1;
-static struct pollfd     *watchPollFds = 0;
-static int               nWatchFds = 0;
-
 static CompScreen *targetScreen = NULL;
 static CompOutput *targetOutput;
 
@@ -1105,20 +1100,21 @@ compAddWatchFd (int	     fd,
     watchFd->fd	      = fd;
     watchFd->callBack = callBack;
     watchFd->closure  = closure;
-    watchFd->handle   = lastWatchFdHandle++;
+    watchFd->handle   = core.lastWatchFdHandle++;
 
-    if (lastWatchFdHandle == MAXSHORT)
-	lastWatchFdHandle = 1;
+    if (core.lastWatchFdHandle == MAXSHORT)
+	core.lastWatchFdHandle = 1;
 
-    watchFd->next = watchFds;
-    watchFds = watchFd;
+    watchFd->next = core.watchFds;
+    core.watchFds = watchFd;
 
-    nWatchFds++;
+    core.nWatchFds++;
 
-    watchPollFds = realloc (watchPollFds, nWatchFds * sizeof (struct pollfd));
+    core.watchPollFds = realloc (core.watchPollFds,
+				 core.nWatchFds * sizeof (struct pollfd));
 
-    watchPollFds[nWatchFds - 1].fd     = fd;
-    watchPollFds[nWatchFds - 1].events = events;
+    core.watchPollFds[core.nWatchFds - 1].fd     = fd;
+    core.watchPollFds[core.nWatchFds - 1].events = events;
 
     return watchFd->handle;
 }
@@ -1129,7 +1125,7 @@ compRemoveWatchFd (CompWatchFdHandle handle)
     CompWatchFd *p = 0, *w;
     int i;
 
-    for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+    for (i = core.nWatchFds - 1, w = core.watchFds; w; i--, w = w->next)
     {
 	if (w->handle == handle)
 	    break;
@@ -1142,13 +1138,13 @@ compRemoveWatchFd (CompWatchFdHandle handle)
 	if (p)
 	    p->next = w->next;
 	else
-	    watchFds = w->next;
+	    core.watchFds = w->next;
 
-	nWatchFds--;
+	core.nWatchFds--;
 
-	if (i < nWatchFds)
-	    memmove (&watchPollFds[i], &watchPollFds[i + 1],
-		     (nWatchFds - i) * sizeof (struct pollfd));
+	if (i < core.nWatchFds)
+	    memmove (&core.watchPollFds[i], &core.watchPollFds[i + 1],
+		     (core.nWatchFds - i) * sizeof (struct pollfd));
 
 	free (w);
     }
@@ -1160,9 +1156,9 @@ compWatchFdEvents (CompWatchFdHandle handle)
     CompWatchFd *w;
     int		i;
 
-    for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+    for (i = core.nWatchFds - 1, w = core.watchFds; w; i--, w = w->next)
 	if (w->handle == handle)
-	    return watchPollFds[i].revents;
+	    return core.watchPollFds[i].revents;
 
     return 0;
 }
@@ -1395,16 +1391,16 @@ doPoll (int timeout)
 {
     int rv;
 
-    rv = poll (watchPollFds, nWatchFds, timeout);
+    rv = poll (core.watchPollFds, core.nWatchFds, timeout);
     if (rv)
     {
 	CompWatchFd *w;
 	int	    i;
 
-	for (i = nWatchFds - 1, w = watchFds; w; i--, w = w->next)
+	for (i = core.nWatchFds - 1, w = core.watchFds; w; i--, w = w->next)
 	{
-	    if (watchPollFds[i].revents != 0 && w->callBack)
-		w->callBack (w->closure);
+	    if (core.watchPollFds[i].revents != 0 && w->callBack)
+		(*w->callBack) (w->closure);
 	}
     }
 

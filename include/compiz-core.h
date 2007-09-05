@@ -617,12 +617,6 @@ struct _CompCore {
     Region tmpRegion;
     Region outputRegion;
 
-    InitPluginForObjectProc initPluginForObject;
-    FiniPluginForObjectProc finiPluginForObject;
-
-    FileWatchAddedProc   fileWatchAdded;
-    FileWatchRemovedProc fileWatchRemoved;
-
     CompFileWatch	*fileWatch;
     CompFileWatchHandle lastFileWatchHandle;
 
@@ -630,7 +624,18 @@ struct _CompCore {
     struct timeval    lastTimeout;
     CompTimeoutHandle lastTimeoutHandle;
 
+    CompWatchFd       *watchFds;
+    CompWatchFdHandle lastWatchFdHandle;
+    struct pollfd     *watchPollFds;
+    int               nWatchFds;
+
+    InitPluginForObjectProc initPluginForObject;
+    FiniPluginForObjectProc finiPluginForObject;
+
     SetOptionForPluginProc setOptionForPlugin;
+
+    FileWatchAddedProc   fileWatchAdded;
+    FileWatchRemovedProc fileWatchRemoved;
 };
 
 int
