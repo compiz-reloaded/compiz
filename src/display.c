@@ -1189,7 +1189,7 @@ compWatchFdEvents (CompWatchFdHandle handle)
 	if (w->handle == handle)
 	    return watchPollFds[i].revents;
 
-    return 0;   
+    return 0;
 }
 
 #define TIMEVALDIFF(tv1, tv2)						   \
