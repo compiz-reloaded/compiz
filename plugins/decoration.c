@@ -1522,8 +1522,8 @@ decorInitWindow (CompPlugin *p,
     if (!w->attrib.override_redirect)
 	decorWindowUpdateDecoration (w);
 
-    if (w->base.parent && (w->shaded || w->attrib.map_state == IsViewable))
-	decorWindowUpdate (w, TRUE);
+    if (w->base.parent)
+	decorWindowAdd (w->screen, w);
 
     return TRUE;
 }
