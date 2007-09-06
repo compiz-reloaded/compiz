@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define CUBE_ABIVERSION 20070830
+#define CUBE_ABIVERSION 20070906
 
 typedef struct _CubeCore {
     SetOptionForPluginProc setOptionForPlugin;
