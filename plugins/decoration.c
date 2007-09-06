@@ -86,6 +86,13 @@ typedef struct _WindowDecoration {
     int	       nQuad;
 } WindowDecoration;
 
+static int corePrivateIndex;
+
+typedef struct _CoreDisplay {
+    ObjectAddProc    objectAdd;
+    ObjectRemoveProc objectRemove;
+} DecorCore;
+
 #define DECOR_DISPLAY_OPTION_SHADOW_RADIUS   0
 #define DECOR_DISPLAY_OPTION_SHADOW_OPACITY  1
 #define DECOR_DISPLAY_OPTION_SHADOW_COLOR    2
@@ -134,6 +141,12 @@ typedef struct _DecorWindow {
     WindowDecoration *wd;
     Decoration	     *decor;
 } DecorWindow;
+
+#define GET_DECOR_CORE(c)				     \
+    ((DecorCore *) (c)->base.privates[corePrivateIndex].ptr)
+
+#define DECOR_CORE(c)		       \
+    DecorCore *dc = GET_DECOR_CORE (c)
 
 #define GET_DECOR_DISPLAY(d)					   \
     ((DecorDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
@@ -1282,6 +1295,70 @@ decorWindowRemoveNotify (CompWindow *w)
     WRAP (ds, w->screen, windowRemoveNotify, decorWindowRemoveNotify);
 }
 
+static void
+decorObjectAdd (CompObject *parent,
+		CompObject *object)
+{
+    DECOR_CORE (&core);
+
+    UNWRAP (dc, &core, objectAdd);
+    (*core.objectAdd) (parent, object);
+    WRAP (dc, &core, objectAdd, decorObjectAdd);
+}
+
+static void
+decorObjectRemove (CompObject *parent,
+		   CompObject *object)
+{
+    DECOR_CORE (&core);
+
+    UNWRAP (dc, &core, objectRemove);
+    (*core.objectRemove) (parent, object);
+    WRAP (dc, &core, objectRemove, decorObjectRemove);
+}
+
+static Bool
+decorInitCore (CompPlugin *p,
+	       CompCore   *c)
+{
+    DecorCore *dc;
+
+    if (!checkPluginABI ("core", CORE_ABIVERSION))
+	return FALSE;
+
+    dc = malloc (sizeof (DecorCore));
+    if (!dc)
+	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	free (dc);
+	return FALSE;
+    }
+
+    WRAP (dc, c, objectAdd, decorObjectAdd);
+    WRAP (dc, c, objectRemove, decorObjectRemove);
+
+    c->base.privates[corePrivateIndex].ptr = dc;
+
+    return TRUE;
+}
+
+static void
+decorFiniCore (CompPlugin *p,
+	       CompCore   *c)
+{
+    DECOR_CORE (c);
+
+    freeDisplayPrivateIndex (displayPrivateIndex);
+
+    UNWRAP (dc, c, objectAdd);
+    UNWRAP (dc, c, objectRemove);
+
+    free (dc);
+}
+
 static const CompMetadataOptionInfo decorDisplayOptionInfo[] = {
     { "shadow_radius", "float", "<min>0.0</min><max>48.0</max>", 0, 0 },
     { "shadow_opacity", "float", "<min>0.0</min>", 0, 0 },
@@ -1299,9 +1376,6 @@ decorInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     DecorDisplay *dd;
-
-    if (!checkPluginABI ("core", CORE_ABIVERSION))
-	return FALSE;
 
     dd = malloc (sizeof (DecorDisplay));
     if (!dd)
@@ -1472,7 +1546,7 @@ decorInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
-	(InitPluginObjectProc) 0, /* InitCore */
+	(InitPluginObjectProc) decorInitCore,
 	(InitPluginObjectProc) decorInitDisplay,
 	(InitPluginObjectProc) decorInitScreen,
 	(InitPluginObjectProc) decorInitWindow
@@ -1486,7 +1560,7 @@ decorFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
-	(FiniPluginObjectProc) 0, /* FiniCore */
+	(FiniPluginObjectProc) decorFiniCore,
 	(FiniPluginObjectProc) decorFiniDisplay,
 	(FiniPluginObjectProc) decorFiniScreen,
 	(FiniPluginObjectProc) decorFiniWindow
@@ -1534,8 +1608,8 @@ decorInit (CompPlugin *p)
 					 0, 0))
 	return FALSE;
 
-    displayPrivateIndex = allocateDisplayPrivateIndex ();
-    if (displayPrivateIndex < 0)
+    corePrivateIndex = allocateCorePrivateIndex ();
+    if (corePrivateIndex < 0)
     {
 	compFiniMetadata (&decorMetadata);
 	return FALSE;
