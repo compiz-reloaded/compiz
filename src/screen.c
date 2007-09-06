@@ -1543,8 +1543,7 @@ addScreen (CompDisplay *display,
     else
 	privates = 0;
 
-    compObjectInit (&s->base, &display->base, privates,
-		    COMP_OBJECT_TYPE_SCREEN);
+    compObjectInit (&s->base, privates, COMP_OBJECT_TYPE_SCREEN);
 
     s->display = display;
 
@@ -2170,6 +2169,8 @@ addScreen (CompDisplay *display,
     /* TODO: bailout properly when objectInitPlugins fails */
     assert (objectInitPlugins (&s->base));
 
+    (*core.objectAdd) (&display->base, &s->base);
+
     XQueryTree (dpy, s->root,
 		&rootReturn, &parentReturn,
 		&children, &nchildren);
@@ -2255,6 +2256,8 @@ removeScreen (CompScreen *s)
 
     while (s->windows)
 	removeWindow (s->windows);
+
+    (*core.objectRemove) (&d->base, &s->base);
 
     objectFiniPlugins (&s->base);
 

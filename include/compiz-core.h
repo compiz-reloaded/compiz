@@ -287,7 +287,6 @@ typedef CompBool (*ObjectTypeCallBackProc) (CompObjectType type,
 
 void
 compObjectInit (CompObject     *object,
-		CompObject     *parent,
 		CompPrivate    *privates,
 		CompObjectType type);
 
@@ -562,6 +561,16 @@ typedef CompBool (*InitPluginForObjectProc) (CompPlugin *plugin,
 typedef void (*FiniPluginForObjectProc) (CompPlugin *plugin,
 					 CompObject *object);
 
+typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
+					    const char      *plugin,
+					    const char	    *name,
+					    CompOptionValue *value);
+
+typedef void (*ObjectAddProc) (CompObject *parent,
+			       CompObject *object);
+typedef void (*ObjectRemoveProc) (CompObject *parent,
+				  CompObject *object);
+
 #define NOTIFY_CREATE_MASK (1 << 0)
 #define NOTIFY_DELETE_MASK (1 << 1)
 #define NOTIFY_MOVE_MASK   (1 << 2)
@@ -604,11 +613,6 @@ typedef struct _CompWatchFd {
     CompWatchFdHandle   handle;
 } CompWatchFd;
 
-typedef CompBool (*SetOptionForPluginProc) (CompObject      *object,
-					    const char      *plugin,
-					    const char	    *name,
-					    CompOptionValue *value);
-
 struct _CompCore {
     CompObject base;
 
@@ -633,6 +637,9 @@ struct _CompCore {
     FiniPluginForObjectProc finiPluginForObject;
 
     SetOptionForPluginProc setOptionForPlugin;
+
+    ObjectAddProc    objectAdd;
+    ObjectRemoveProc objectRemove;
 
     FileWatchAddedProc   fileWatchAdded;
     FileWatchRemovedProc fileWatchRemoved;

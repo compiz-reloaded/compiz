@@ -1969,7 +1969,7 @@ addDisplay (const char *name)
     else
 	privates = 0;
 
-    compObjectInit (&d->base, &core.base, privates, COMP_OBJECT_TYPE_DISPLAY);
+    compObjectInit (&d->base, privates, COMP_OBJECT_TYPE_DISPLAY);
 
     d->next    = NULL;
     d->screens = NULL;
@@ -2320,6 +2320,8 @@ addDisplay (const char *name)
     /* TODO: bailout properly when objectInitPlugins fails */
     assert (objectInitPlugins (&d->base));
 
+    (*core.objectAdd) (&core.base, &d->base);
+
     if (onlyCurrentScreen)
     {
 	firstScreen = DefaultScreen (dpy);
@@ -2575,6 +2577,8 @@ removeDisplay (CompDisplay *d)
 
     while (d->screens)
 	removeScreen (d->screens);
+
+    (*core.objectRemove) (&core.base, &d->base);
 
     objectFiniPlugins (&d->base);
 

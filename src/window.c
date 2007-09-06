@@ -1993,8 +1993,7 @@ addWindow (CompScreen *screen,
     else
 	privates = 0;
 
-    compObjectInit (&w->base, &screen->base, privates,
-		    COMP_OBJECT_TYPE_WINDOW);
+    compObjectInit (&w->base, privates, COMP_OBJECT_TYPE_WINDOW);
 
     w->region = XCreateRegion ();
     if (!w->region)
@@ -2235,6 +2234,7 @@ addWindow (CompScreen *screen,
     /* TODO: bailout properly when objectInitPlugins fails */
     assert (objectInitPlugins (&w->base));
 
+    (*core.objectAdd) (&screen->base, &w->base);
     (*w->screen->windowAddNotify) (w);
 
     recalcWindowActions (w);
@@ -2301,6 +2301,7 @@ removeWindow (CompWindow *w)
     }
 
     (*w->screen->windowRemoveNotify) (w);
+    (*core.objectRemove) (&w->screen->base, &w->base);
 
     objectFiniPlugins (&w->base);
 

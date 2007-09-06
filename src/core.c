@@ -109,18 +109,6 @@ finiCorePluginForObject (CompPlugin *p,
 {
 }
 
-static void
-fileWatchAdded (CompCore      *core,
-		CompFileWatch *fileWatch)
-{
-}
-
-static void
-fileWatchRemoved (CompCore      *core,
-		  CompFileWatch *fileWatch)
-{
-}
-
 static CompBool
 setOptionForPlugin (CompObject      *object,
 		    const char	    *plugin,
@@ -136,12 +124,38 @@ setOptionForPlugin (CompObject      *object,
     return FALSE;
 }
 
+static void
+coreObjectAdd (CompObject *parent,
+	       CompObject *object)
+{
+    object->parent = parent;
+}
+
+static void
+coreObjectRemove (CompObject *parent,
+		  CompObject *object)
+{
+    object->parent = NULL;
+}
+
+static void
+fileWatchAdded (CompCore      *core,
+		CompFileWatch *fileWatch)
+{
+}
+
+static void
+fileWatchRemoved (CompCore      *core,
+		  CompFileWatch *fileWatch)
+{
+}
+
 CompBool
 initCore (void)
 {
     CompPlugin *corePlugin;
 
-    compObjectInit (&core.base, 0, 0, COMP_OBJECT_TYPE_CORE);
+    compObjectInit (&core.base, 0, COMP_OBJECT_TYPE_CORE);
 
     core.displays = NULL;
 
@@ -173,6 +187,9 @@ initCore (void)
     core.finiPluginForObject = finiCorePluginForObject;
 
     core.setOptionForPlugin = setOptionForPlugin;
+
+    core.objectAdd    = coreObjectAdd;
+    core.objectRemove = coreObjectRemove;
 
     core.fileWatchAdded   = fileWatchAdded;
     core.fileWatchRemoved = fileWatchRemoved;
