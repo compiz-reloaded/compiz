@@ -47,6 +47,7 @@ static int corePrivateIndex;
 
 typedef struct _GConfCore {
     GConfClient *client;
+    guint	cnxn;
 
     CompTimeoutHandle reloadHandle;
 
@@ -391,6 +392,10 @@ gconfReadOptionValue (CompObject      *object,
 	list = gconf_value_get_list (gvalue);
 	n    = g_slist_length (list);
 
+	value->list.value  = NULL;
+	value->list.nValue = 0;
+	value->list.type   = o->value.list.type;
+
 	if (n)
 	{
 	    value->list.value = malloc (sizeof (CompOptionValue) * n);
@@ -423,8 +428,6 @@ gconfReadOptionValue (CompObject      *object,
 	    return FALSE;
     }
 
-    gconf_entry_free (entry);
-
     return TRUE;
 }
 
@@ -448,13 +451,14 @@ gconfGetOption (CompObject *object,
 	if (gconfReadOptionValue (object, entry, o, &value))
 	{
 	    (*core.setOptionForPlugin) (object, plugin, o->name, &value);
-
 	    compFiniOptionValue (&value, o->type);
 	}
 	else
 	{
 	    gconfSetOption (object, o, plugin);
 	}
+
+	gconf_entry_free (entry);
     }
 
     g_free (key);
@@ -718,8 +722,8 @@ gconfInitCore (CompPlugin *p,
 
     gc->reloadHandle = compAddTimeout (0, gconfReload, 0);
 
-    gconf_client_notify_add (gc->client, "/apps/" APP_NAME, gconfKeyChanged,
-			     c, NULL, NULL);
+    gc->cnxn = gconf_client_notify_add (gc->client, "/apps/" APP_NAME,
+					gconfKeyChanged, c, NULL, NULL);
 
     WRAP (gc, c, initPluginForObject, gconfInitPluginForObject);
     WRAP (gc, c, setOptionForPlugin, gconfSetOptionForPlugin);
@@ -736,6 +740,16 @@ gconfFiniCore (CompPlugin *p,
     GCONF_CORE (c);
 
     UNWRAP (gc, c, initPluginForObject);
+    UNWRAP (gc, c, setOptionForPlugin);
+
+    if (gc->reloadHandle)
+	compRemoveTimeout (gc->reloadHandle);
+
+    if (gc->cnxn)
+	gconf_client_notify_remove (gc->client, gc->cnxn);
+
+    gconf_client_remove_dir (gc->client, "/apps/" APP_NAME, NULL);
+    gconf_client_clear_cache (gc->client);
 
     free (gc);
 }
