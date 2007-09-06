@@ -324,15 +324,12 @@ resizeInitiate (CompDisplay     *d,
     w = findWindowAtDisplay (d, xid);
     if (w && (w->actions & CompWindowActionResizeMask))
     {
-	unsigned int mods;
 	unsigned int mask;
 	int          x, y;
 	int	     button;
 	int	     i;
 
 	RESIZE_SCREEN (w->screen);
-
-	mods = getIntOptionNamed (option, nOption, "modifiers", 0);
 
 	x = getIntOptionNamed (option, nOption, "x",
 			       w->serverX + (w->serverWidth / 2));
