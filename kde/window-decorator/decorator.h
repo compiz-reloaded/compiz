@@ -111,9 +111,13 @@ class Decorator:public KApplication, public KWinInterface {
 	{
 	    return &mShadowOptions;
 	}
-	static decor_shadow_t *defaultWindowShadow (decor_context_t *context)
+	static decor_shadow_t *defaultWindowShadow (decor_context_t *context,
+						    decor_extents_t *border)
 	{
 	    if (!mDefaultShadow)
+		return NULL;
+
+	    if (memcmp (border, &mDefaultBorder, sizeof (decor_extents_t)) != 0)
 		return NULL;
 
 	    *context = mDefaultContext;
@@ -152,6 +156,7 @@ class Decorator:public KApplication, public KWinInterface {
     private:
 	static PluginManager *mPlugins;
 	static KWD::Options *mOptions;
+	static decor_extents_t mDefaultBorder;
 	static decor_context_t mDefaultContext;
 	static decor_shadow_t *mDefaultShadow;
 	static decor_shadow_t *mNoBorderShadow;

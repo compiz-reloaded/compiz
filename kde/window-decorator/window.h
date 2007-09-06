@@ -166,6 +166,10 @@ class Window:public QWidget, public KDecorationBridge {
 	{
 	    return mShadow;
 	}
+	decor_extents_t *border (void)
+	{
+	    return &mBorder;
+	}
 	QRect clientGeometry (void);
 	void showKillProcessDialog (Time timestamp);
 	void hideKillProcessDialog (void);

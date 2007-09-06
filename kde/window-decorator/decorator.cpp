@@ -64,6 +64,7 @@ bool   activeDecorationOpacityShade = false;
 int    blurType = BLUR_TYPE_NONE;
 
 decor_context_t KWD::Decorator::mDefaultContext;
+decor_extents_t KWD::Decorator::mDefaultBorder;
 decor_shadow_t *KWD::Decorator::mNoBorderShadow = 0;
 decor_shadow_t *KWD::Decorator::mDefaultShadow  = 0;
 KWD::PluginManager *KWD::Decorator::mPlugins = 0;
@@ -350,6 +351,7 @@ KWD::Decorator::updateDefaultShadow (KWD::Window *w)
 	return;
 
     mDefaultContext = *w->context ();
+    mDefaultBorder  = *w->border ();
     mDefaultShadow  = w->shadow ();
 
     if (mDefaultShadow)
