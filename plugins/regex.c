@@ -389,7 +389,8 @@ regexFiniDisplay (CompPlugin  *p,
     UNWRAP (rd, d, handleEvent);
     UNWRAP (rd, d, matchInitExp);
 
-    (*d->matchExpHandlerChanged) (d);
+    if (d->base.parent)
+	(*d->matchExpHandlerChanged) (d);
 
     free (rd);
 }
