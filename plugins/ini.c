@@ -1035,6 +1035,7 @@ iniFiniCore (CompPlugin *p,
     INI_CORE (c);
 
     UNWRAP (ic, c, initPluginForObject);
+    UNWRAP (ic, c, setOptionForPlugin);
 
     if (ic->directoryWatch)
 	removeFileWatch (ic->directoryWatch);
