@@ -1119,6 +1119,7 @@ compFiniScreenOption (CompScreen *s,
 {
     finiScreenOptionValue (s, &o->value, o->type);
     compFiniOption (o);
+    free (o->name);
 }
 
 Bool
@@ -1215,6 +1216,7 @@ compFiniDisplayOption (CompDisplay *d,
 {
     finiDisplayOptionValue (d, &o->value, o->type);
     compFiniOption (o);
+    free (o->name);
 }
 
 Bool

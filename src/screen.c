@@ -1476,6 +1476,23 @@ initWindowWalker (CompScreen *screen,
 static void
 freeScreen (CompScreen *s)
 {
+    if (s->outputDev)
+    {
+	int i;
+
+	for (i = 0; i < s->nOutputDev; i++)
+	    if (s->outputDev[i].name)
+		free (s->outputDev[i].name);
+
+	free (s->outputDev);
+    }
+
+    if (s->clientList)
+	free (s->clientList);
+
+    if (s->desktopHintData)
+	free (s->desktopHintData);
+
     if (s->buttonGrab)
 	free (s->buttonGrab);
 
@@ -1489,6 +1506,9 @@ freeScreen (CompScreen *s)
 	XDestroyRegion (s->damage);
 
     compFiniScreenOptions (s, s->opt, COMP_SCREEN_OPTION_NUM);
+
+    if (s->windowPrivateIndices)
+	free (s->windowPrivateIndices);
 
     if (s->base.privates)
 	free (s->base.privates);
@@ -2267,6 +2287,12 @@ removeScreen (CompScreen *s)
     XDestroyWindow (d->display, s->grabWindow);
 
     finiTexture (s, &s->backgroundTexture);
+
+    if (s->defaultIcon)
+    {
+	finiTexture (s, &s->defaultIcon->texture);
+	free (s->defaultIcon);
+    }
 
     glXDestroyContext (d->display, s->ctx);
 

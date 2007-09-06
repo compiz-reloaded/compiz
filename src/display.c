@@ -1937,6 +1937,14 @@ freeDisplay (CompDisplay *d)
 {
     compFiniDisplayOptions (d, d->opt, COMP_DISPLAY_OPTION_NUM);
 
+    compFiniOptionValue (&d->plugin, CompOptionTypeList);
+
+    if (d->screenInfo)
+	XFree (d->screenInfo);
+
+    if (d->screenPrivateIndices)
+	free (d->screenPrivateIndices);
+
     if (d->base.privates)
 	free (d->base.privates);
 
@@ -1987,6 +1995,8 @@ addDisplay (const char *name)
 	d->modMask[i] = CompNoMask;
 
     d->ignoredModMask = LockMask;
+
+    compInitOptionValue (&d->plugin);
 
     d->plugin.list.type   = CompOptionTypeString;
     d->plugin.list.nValue = 1;
@@ -2583,6 +2593,9 @@ removeDisplay (CompDisplay *d)
     objectFiniPlugins (&d->base);
 
     compRemoveTimeout (d->pingHandle);
+
+    if (d->snDisplay)
+	sn_display_unref (d->snDisplay);
 
     XSync (d->display, False);
     XCloseDisplay (d->display);
