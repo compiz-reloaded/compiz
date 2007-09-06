@@ -2246,6 +2246,9 @@ cubeFiniScreen (CompPlugin *p,
 {
     CUBE_SCREEN (s);
 
+    if (cs->vertices)
+	free (cs->vertices);
+
     if (cs->skyListId)
 	glDeleteLists (cs->skyListId, 1);
 
