@@ -643,6 +643,7 @@ kconfigFiniCore (CompPlugin *p,
     KCONFIG_CORE (c);
 
     UNWRAP (kc, c, initPluginForObject);
+    UNWRAP (kc, c, setOptionForPlugin);
 
     if (kc->reloadHandle)
 	compRemoveTimeout (kc->reloadHandle);
