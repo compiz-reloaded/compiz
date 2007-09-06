@@ -1888,7 +1888,6 @@ addWindow (CompScreen *screen,
     w->shaded		 = FALSE;
     w->hidden		 = FALSE;
     w->grabbed		 = FALSE;
-    w->added		 = FALSE;
 
     w->desktop = screen->currentDesktop;
 
@@ -2235,7 +2234,6 @@ addWindow (CompScreen *screen,
     assert (objectInitPlugins (&w->base));
 
     (*core.objectAdd) (&screen->base, &w->base);
-    (*w->screen->windowAddNotify) (w);
 
     recalcWindowActions (w);
     updateWindowOpacity (w);
@@ -2300,7 +2298,6 @@ removeWindow (CompWindow *w)
 	    showOutputWindow (w->screen);
     }
 
-    (*w->screen->windowRemoveNotify) (w);
     (*core.objectRemove) (&w->screen->base, &w->base);
 
     objectFiniPlugins (&w->base);
@@ -4929,15 +4926,4 @@ compareWindowActiveness (CompWindow *w1,
     }
 
     return w1->activeNum - w2->activeNum;
-}
-
-void
-windowAddNotify (CompWindow *w)
-{
-    w->added = TRUE;
-}
-
-void
-windowRemoveNotify (CompWindow *w)
-{
 }

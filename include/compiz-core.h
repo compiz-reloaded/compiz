@@ -1793,10 +1793,6 @@ typedef void (*WindowUngrabNotifyProc) (CompWindow *window);
 typedef void (*WindowStateChangeNotifyProc) (CompWindow   *window,
 					     unsigned int lastState);
 
-typedef void (*WindowAddNotifyProc) (CompWindow *window);
-
-typedef void (*WindowRemoveNotifyProc) (CompWindow *window);
-
 typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 
 typedef void (*InitWindowWalkerProc) (CompScreen *screen,
@@ -2097,8 +2093,6 @@ struct _CompScreen {
     PaintCursorProc      paintCursor;
     DamageCursorRectProc damageCursorRect;
 
-    WindowAddNotifyProc    windowAddNotify;
-    WindowRemoveNotifyProc windowRemoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
     WindowMoveNotifyProc   windowMoveNotify;
     WindowGrabNotifyProc   windowGrabNotify;
@@ -2477,7 +2471,6 @@ struct _CompWindow {
     Bool	      redirected;
     Bool	      managed;
     Bool	      bindFailed;
-    Bool	      added;
     int		      destroyRefCnt;
     int		      unmapRefCnt;
 
@@ -2947,12 +2940,6 @@ setDesktopForWindow (CompWindow   *w,
 int
 compareWindowActiveness (CompWindow *w1,
 			 CompWindow *w2);
-
-void
-windowAddNotify (CompWindow *w);
-
-void
-windowRemoveNotify (CompWindow *w);
 
 
 /* plugin.c */

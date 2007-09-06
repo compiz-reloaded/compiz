@@ -1676,8 +1676,6 @@ addScreen (CompDisplay *display,
     s->paintCursor      = paintCursor;
     s->damageCursorRect	= damageCursorRect;
 
-    s->windowAddNotify    = windowAddNotify;
-    s->windowRemoveNotify = windowRemoveNotify;
     s->windowResizeNotify = windowResizeNotify;
     s->windowMoveNotify	  = windowMoveNotify;
     s->windowGrabNotify   = windowGrabNotify;
