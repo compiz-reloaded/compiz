@@ -1185,8 +1185,10 @@ dbusAppendListOptionValue (CompObject      *object,
     sig[1] = '\0';
 
     dbus_message_iter_init_append (message, &iter);
-    dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
-				      sig, &listIter);
+
+    if (!dbus_message_iter_open_container (&iter, DBUS_TYPE_ARRAY,
+					   sig, &listIter))
+	return;
 
     for (i = 0; i < value->list.nValue; i++)
     {
