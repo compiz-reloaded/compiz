@@ -334,16 +334,6 @@ regexHandleEvent (CompDisplay *d,
 }
 
 static Bool
-regexRegisterExpHandler (void *closure)
-{
-    CompDisplay *display = (CompDisplay *) closure;
-
-    (*display->matchExpHandlerChanged) (display);
-
-    return FALSE;
-}
-
-static Bool
 regexInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
@@ -371,9 +361,8 @@ regexInitDisplay (CompPlugin  *p,
 
     d->base.privates[displayPrivateIndex].ptr = rd;
 
-    /* one shot timeout to which will register the expression handler
-       after all screens and windows have been initialized */
-    compAddTimeout (0, regexRegisterExpHandler, (void *) d);
+    if (d->base.parent)
+	(*d->matchExpHandlerChanged) (d);
 
     return TRUE;
 }
