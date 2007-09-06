@@ -227,9 +227,14 @@ static void
 inotifyFiniCore (CompPlugin *p,
 		 CompCore   *c)
 {
+    CompFileWatch *fw;
+
     INOTIFY_CORE (c);
 
     compRemoveWatchFd (ic->watchFdHandle);
+
+    for (fw = c->fileWatch; fw; fw = fw->next)
+	inotifyFileWatchRemoved (c, fw);
 
     close (ic->fd);
 
