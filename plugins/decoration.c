@@ -1625,7 +1625,7 @@ decorInit (CompPlugin *p)
 static void
 decorFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (displayPrivateIndex);
+    freeCorePrivateIndex (corePrivateIndex);
     compFiniMetadata (&decorMetadata);
 }
 
