@@ -88,7 +88,7 @@ typedef struct _WindowDecoration {
 
 static int corePrivateIndex;
 
-typedef struct _CoreDisplay {
+typedef struct _DecorCore {
     ObjectAddProc    objectAdd;
     ObjectRemoveProc objectRemove;
 } DecorCore;
@@ -129,8 +129,6 @@ typedef struct _DecorScreen {
     DamageWindowRectProc	  damageWindowRect;
     GetOutputExtentsForWindowProc getOutputExtentsForWindow;
 
-    WindowAddNotifyProc    windowAddNotify;
-    WindowRemoveNotifyProc windowRemoveNotify;
     WindowMoveNotifyProc   windowMoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
 
@@ -1270,47 +1268,55 @@ decorMatchPropertyChanged (CompDisplay *d,
 }
 
 static void
-decorWindowAddNotify (CompWindow *w)
+decorWindowAdd (CompScreen *s,
+		CompWindow *w)
 {
-    DECOR_SCREEN (w->screen);
-
     if (w->shaded || w->attrib.map_state == IsViewable)
 	decorWindowUpdate (w, TRUE);
-
-    UNWRAP (ds, w->screen, windowAddNotify);
-    (*w->screen->windowAddNotify) (w);
-    WRAP (ds, w->screen, windowAddNotify, decorWindowAddNotify);
 }
 
 static void
-decorWindowRemoveNotify (CompWindow *w)
+decorWindowRemove (CompScreen *s,
+		   CompWindow *w)
 {
-    DECOR_SCREEN (w->screen);
-
     if (!w->destroyed)
 	decorWindowUpdate (w, FALSE);
-
-    UNWRAP (ds, w->screen, windowRemoveNotify);
-    (*w->screen->windowRemoveNotify) (w);
-    WRAP (ds, w->screen, windowRemoveNotify, decorWindowRemoveNotify);
 }
 
 static void
 decorObjectAdd (CompObject *parent,
 		CompObject *object)
 {
+    static ObjectAddProc dispTab[] = {
+	(ObjectAddProc) 0, /* CoreAdd */
+	(ObjectAddProc) 0, /* DisplayAdd */
+	(ObjectAddProc) 0, /* ScreenAdd */
+	(ObjectAddProc) decorWindowAdd
+    };
+
     DECOR_CORE (&core);
 
     UNWRAP (dc, &core, objectAdd);
     (*core.objectAdd) (parent, object);
     WRAP (dc, &core, objectAdd, decorObjectAdd);
+
+    DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), (parent, object));
 }
 
 static void
 decorObjectRemove (CompObject *parent,
 		   CompObject *object)
 {
+    static ObjectRemoveProc dispTab[] = {
+	(ObjectRemoveProc) 0, /* CoreRemove */
+	(ObjectRemoveProc) 0, /* DisplayRemove */
+	(ObjectRemoveProc) 0, /* ScreenRemove */
+	(ObjectRemoveProc) decorWindowRemove
+    };
+
     DECOR_CORE (&core);
+
+    DISPATCH (object, dispTab, ARRAY_SIZE (dispTab), (parent, object));
 
     UNWRAP (dc, &core, objectRemove);
     (*core.objectRemove) (parent, object);
@@ -1461,8 +1467,6 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, drawWindow, decorDrawWindow);
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
     WRAP (ds, s, getOutputExtentsForWindow, decorGetOutputExtentsForWindow);
-    WRAP (ds, s, windowAddNotify, decorWindowAddNotify);
-    WRAP (ds, s, windowRemoveNotify, decorWindowRemoveNotify);
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
@@ -1491,8 +1495,6 @@ decorFiniScreen (CompPlugin *p,
     UNWRAP (ds, s, drawWindow);
     UNWRAP (ds, s, damageWindowRect);
     UNWRAP (ds, s, getOutputExtentsForWindow);
-    UNWRAP (ds, s, windowAddNotify);
-    UNWRAP (ds, s, windowRemoveNotify);
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
     UNWRAP (ds, s, windowStateChangeNotify);
@@ -1520,7 +1522,7 @@ decorInitWindow (CompPlugin *p,
     if (!w->attrib.override_redirect)
 	decorWindowUpdateDecoration (w);
 
-    if (w->added && (w->shaded || w->attrib.map_state == IsViewable))
+    if (w->base.parent && (w->shaded || w->attrib.map_state == IsViewable))
 	decorWindowUpdate (w, TRUE);
 
     return TRUE;
