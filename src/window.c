@@ -1137,6 +1137,8 @@ updateWindowOpacity (CompWindow *w)
 static void
 updateFrameWindow (CompWindow *w)
 {
+    CompDisplay *d = w->screen->display;
+
     if (w->input.left || w->input.right || w->input.top || w->input.bottom)
     {
 	XRectangle rects[4];
@@ -1160,36 +1162,32 @@ updateFrameWindow (CompWindow *w)
 	    attr.event_mask	   = 0;
 	    attr.override_redirect = TRUE;
 
-	    w->frame = XCreateWindow (w->screen->display->display,
-				      w->screen->root,
+	    w->frame = XCreateWindow (d->display, w->screen->root,
 				      x, y, width, height, 0,
 				      CopyFromParent,
 				      InputOnly,
 				      CopyFromParent,
 				      CWOverrideRedirect | CWEventMask, &attr);
 
-	    XGrabButton (w->screen->display->display, AnyButton,
-			 AnyModifier, w->frame, TRUE, ButtonPressMask |
-			 ButtonReleaseMask | ButtonMotionMask,
+	    XGrabButton (d->display, AnyButton, AnyModifier, w->frame, TRUE,
+			 ButtonPressMask | ButtonReleaseMask | ButtonMotionMask,
 			 GrabModeSync, GrabModeSync, None, None);
 
 	    xwc.stack_mode = Below;
 	    xwc.sibling    = w->id;
 
-	    XConfigureWindow (w->screen->display->display, w->frame,
+	    XConfigureWindow (d->display, w->frame,
 			      CWSibling | CWStackMode, &xwc);
 
 	    if (w->mapNum || w->shaded)
-		XMapWindow (w->screen->display->display, w->frame);
+		XMapWindow (d->display, w->frame);
 
-	    XChangeProperty (w->screen->display->display, w->id,
-			     w->screen->display->frameWindowAtom,
+	    XChangeProperty (d->display, w->id, d->frameWindowAtom,
 			     XA_WINDOW, 32, PropModeReplace,
 			     (unsigned char *) &w->frame, 1);
 	}
 
-	XMoveResizeWindow (w->screen->display->display, w->frame,
-			   x, y, width, height);
+	XMoveResizeWindow (d->display, w->frame, x, y, width, height);
 
 	rects[i].x	= 0;
 	rects[i].y	= 0;
@@ -1223,7 +1221,7 @@ updateFrameWindow (CompWindow *w)
 	if (rects[i].width && rects[i].height)
 	    i++;
 
-	XShapeCombineRectangles (w->screen->display->display,
+	XShapeCombineRectangles (d->display,
 				 w->frame,
 				 ShapeInput,
 				 0,
@@ -1237,9 +1235,8 @@ updateFrameWindow (CompWindow *w)
     {
 	if (w->frame)
 	{
-	    XDestroyWindow (w->screen->display->display, w->frame);
-	    XDeleteProperty (w->screen->display->display, w->id,
-			     w->screen->display->frameWindowAtom);
+	    XDestroyWindow (d->display, w->frame);
+	    XDeleteProperty (d->display, w->id, d->frameWindowAtom);
 	    w->frame = None;
 	}
     }
