@@ -2886,7 +2886,7 @@ blurInit (CompPlugin *p)
 static void
 blurFini (CompPlugin *p)
 {
-    freeDisplayPrivateIndex (corePrivateIndex);
+    freeCorePrivateIndex (corePrivateIndex);
     compFiniMetadata (&blurMetadata);
 }
 
