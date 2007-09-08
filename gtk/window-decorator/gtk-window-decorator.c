@@ -110,33 +110,11 @@
 #define COMPIZ_SHADOW_OFFSET_Y_KEY \
     COMPIZ_GCONF_DIR1 "/shadow_offset_y"
 
-#define META_AUDIBLE_BELL_KEY	       \
-    METACITY_GCONF_DIR "/audible_bell"
-
-#define META_VISUAL_BELL_KEY	      \
-    METACITY_GCONF_DIR "/visual_bell"
-
-#define META_VISUAL_BELL_TYPE_KEY	   \
-    METACITY_GCONF_DIR "/visual_bell_type"
-
 #define META_THEME_KEY		\
     METACITY_GCONF_DIR "/theme"
 
 #define META_BUTTON_LAYOUT_KEY		\
     METACITY_GCONF_DIR "/button_layout"
-
-#define COMPIZ_GCONF_DIR2 "/apps/compiz/general/allscreens/options"
-
-#define COMPIZ_AUDIBLE_BELL_KEY	      \
-    COMPIZ_GCONF_DIR2 "/audible_bell"
-
-#define COMPIZ_GCONF_DIR3 "/apps/compiz/plugins/fade/screen0/options"
-
-#define COMPIZ_VISUAL_BELL_KEY	     \
-    COMPIZ_GCONF_DIR3 "/visual_bell"
-
-#define COMPIZ_FULLSCREEN_VISUAL_BELL_KEY	\
-    COMPIZ_GCONF_DIR3 "/fullscreen_visual_bell"
 
 #define GCONF_DIR "/apps/gwd"
 
@@ -6010,47 +5988,6 @@ shadow_settings_changed (GConfClient *client)
     return changed;
 }
 
-static void
-bell_settings_changed (GConfClient *client)
-{
-    gboolean audible, visual, fullscreen;
-    gchar    *type;
-
-    audible = gconf_client_get_bool (client,
-				     META_AUDIBLE_BELL_KEY,
-				     NULL);
-
-    visual = gconf_client_get_bool (client,
-				    META_VISUAL_BELL_KEY,
-				    NULL);
-
-    type = gconf_client_get_string (client,
-				    META_VISUAL_BELL_TYPE_KEY,
-				    NULL);
-
-    if (type && strcmp (type, "fullscreen") == 0)
-	fullscreen = TRUE;
-    else
-	fullscreen = FALSE;
-
-    g_free (type);
-
-    gconf_client_set_bool (client,
-			   COMPIZ_AUDIBLE_BELL_KEY,
-			   audible,
-			   NULL);
-
-    gconf_client_set_bool (client,
-			   COMPIZ_VISUAL_BELL_KEY,
-			   visual,
-			   NULL);
-
-    gconf_client_set_bool (client,
-			   COMPIZ_FULLSCREEN_VISUAL_BELL_KEY,
-			   fullscreen,
-			   NULL);
-}
-
 static gboolean
 blur_settings_changed (GConfClient *client)
 {
@@ -6280,12 +6217,6 @@ value_changed (GConfClient *client,
 	if (blur_settings_changed (client))
 	    changed = TRUE;
     }
-    else if (strcmp (key, META_AUDIBLE_BELL_KEY)     == 0 ||
-	     strcmp (key, META_VISUAL_BELL_KEY)      == 0 ||
-	     strcmp (key, META_VISUAL_BELL_TYPE_KEY) == 0)
-    {
-	bell_settings_changed (client);
-    }
     else if (strcmp (key, USE_META_THEME_KEY) == 0 ||
 	     strcmp (key, META_THEME_KEY) == 0)
     {
@@ -6471,16 +6402,6 @@ init_settings (WnckScreen *screen)
 			  GCONF_CLIENT_PRELOAD_ONELEVEL,
 			  NULL);
 
-    gconf_client_add_dir (gconf,
-			  COMPIZ_GCONF_DIR2,
-			  GCONF_CLIENT_PRELOAD_ONELEVEL,
-			  NULL);
-
-    gconf_client_add_dir (gconf,
-			  COMPIZ_GCONF_DIR3,
-			  GCONF_CLIENT_PRELOAD_ONELEVEL,
-			  NULL);
-
     g_signal_connect (G_OBJECT (gconf),
 		      "value_changed",
 		      G_CALLBACK (value_changed),
@@ -6616,7 +6537,6 @@ init_settings (WnckScreen *screen)
 #ifdef USE_GCONF
     double_click_titlebar_changed (gconf);
     shadow_settings_changed (gconf);
-    bell_settings_changed (gconf);
     blur_settings_changed (gconf);
 #endif
 
