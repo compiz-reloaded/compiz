@@ -5761,6 +5761,12 @@ titlebar_click_action_changed (GConfClient *client,
 	    *action_value = CLICK_ACTION_MAXIMIZE;
 	else if (strcmp (action, "minimize") == 0)
 	    *action_value = CLICK_ACTION_MINIMIZE;
+	else if (strcmp (action, "raise") == 0)
+	    *action_value = CLICK_ACTION_RAISE;
+	else if (strcmp (action, "lower") == 0)
+	    *action_value = CLICK_ACTION_LOWER;
+	else if (strcmp (action, "menu") == 0)
+	    *action_value = CLICK_ACTION_MENU;
 	else if (strcmp (action, "none") == 0)
 	    *action_value = CLICK_ACTION_NONE;
 
