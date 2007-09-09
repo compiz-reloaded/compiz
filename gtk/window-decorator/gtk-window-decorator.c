@@ -204,6 +204,7 @@ enum {
     CLICK_ACTION_SHADE,
     CLICK_ACTION_MAXIMIZE,
     CLICK_ACTION_RAISE,
+    CLICK_ACTION_LOWER,
     CLICK_ACTION_MENU
 };
 
@@ -213,7 +214,7 @@ enum {
 };
 
 #define DOUBLE_CLICK_ACTION_DEFAULT CLICK_ACTION_MAXIMIZE
-#define MIDDLE_CLICK_ACTION_DEFAULT CLICK_ACTION_RAISE
+#define MIDDLE_CLICK_ACTION_DEFAULT CLICK_ACTION_LOWER
 #define RIGHT_CLICK_ACTION_DEFAULT  CLICK_ACTION_MENU
 #define WHEEL_ACTION_DEFAULT        WHEEL_ACTION_NONE
 
@@ -4701,6 +4702,9 @@ handle_title_button_event (WnckWindow   *win,
 	break;
     case CLICK_ACTION_RAISE:
 	restack_window (win, Above);
+	break;
+    case CLICK_ACTION_LOWER:
+	restack_window (win, Below);
 	break;
     case CLICK_ACTION_MENU:
 	action_menu_map (win, event->button, event->time);
