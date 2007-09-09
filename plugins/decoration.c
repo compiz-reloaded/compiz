@@ -1534,6 +1534,9 @@ decorFiniWindow (CompPlugin *p,
 {
     DECOR_WINDOW (w);
 
+    if (w->base.parent)
+	decorWindowRemove (w->screen, w);
+
     if (dw->wd)
 	destroyWindowDecoration (w->screen, dw->wd);
 
