@@ -93,6 +93,12 @@
 #define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY	       \
     METACITY_GCONF_DIR "/action_double_click_titlebar"
 
+#define COMPIZ_MIDDLE_CLICK_TITLEBAR_KEY	       \
+    METACITY_GCONF_DIR "/action_middle_click_titlebar"
+
+#define COMPIZ_RIGHT_CLICK_TITLEBAR_KEY	       \
+    METACITY_GCONF_DIR "/action_right_click_titlebar"
+
 #define COMPIZ_GCONF_DIR1 "/apps/compiz/plugins/decoration/allscreens/options"
 
 #define COMPIZ_SHADOW_RADIUS_KEY \
@@ -194,8 +200,11 @@ typedef struct {
 } MwmHints;
 
 enum {
-    DOUBLE_CLICK_SHADE,
-    DOUBLE_CLICK_MAXIMIZE
+    CLICK_ACTION_NONE,
+    CLICK_ACTION_SHADE,
+    CLICK_ACTION_MAXIMIZE,
+    CLICK_ACTION_RAISE,
+    CLICK_ACTION_MENU
 };
 
 enum {
@@ -203,8 +212,15 @@ enum {
     WHEEL_ACTION_SHADE
 };
 
-int double_click_action = DOUBLE_CLICK_SHADE;
-int wheel_action = WHEEL_ACTION_NONE;
+#define DOUBLE_CLICK_ACTION_DEFAULT CLICK_ACTION_MAXIMIZE
+#define MIDDLE_CLICK_ACTION_DEFAULT CLICK_ACTION_RAISE
+#define RIGHT_CLICK_ACTION_DEFAULT  CLICK_ACTION_MENU
+#define WHEEL_ACTION_DEFAULT        WHEEL_ACTION_NONE
+
+int double_click_action = DOUBLE_CLICK_ACTION_DEFAULT;
+int middle_click_action = MIDDLE_CLICK_ACTION_DEFAULT;
+int right_click_action  = RIGHT_CLICK_ACTION_DEFAULT;
+int wheel_action        = WHEEL_ACTION_DEFAULT;
 
 static gboolean minimal = FALSE;
 
@@ -4666,6 +4682,33 @@ unstick_button_event (WnckWindow *win,
 }
 
 static void
+handle_title_button_event (WnckWindow   *win,
+			   int          action,
+			   XButtonEvent *event)
+{
+    switch (action) {
+    case CLICK_ACTION_SHADE:
+	if (wnck_window_is_shaded (win))
+	    wnck_window_unshade (win);
+	else
+	    wnck_window_shade (win);
+	break;
+    case CLICK_ACTION_MAXIMIZE:
+	if (wnck_window_is_maximized (win))
+	    wnck_window_unmaximize (win);
+	else
+	    wnck_window_maximize (win);
+	break;
+    case CLICK_ACTION_RAISE:
+	restack_window (win, Above);
+	break;
+    case CLICK_ACTION_MENU:
+	action_menu_map (win, event->button, event->time);
+	break;
+    }
+}
+
+static void
 handle_mouse_wheel_title_event (WnckWindow   *win,
 				unsigned int button)
 {
@@ -4721,21 +4764,8 @@ title_event (WnckWindow *win,
 	    dist (xevent->xbutton.x, xevent->xbutton.y,
 		  last_button_x, last_button_y) < DOUBLE_CLICK_DISTANCE)
 	{
-	    switch (double_click_action) {
-	    case DOUBLE_CLICK_SHADE:
-		if (wnck_window_is_shaded (win))
-		    wnck_window_unshade (win);
-		else
-		    wnck_window_shade (win);
-		break;
-	    case DOUBLE_CLICK_MAXIMIZE:
-		if (wnck_window_is_maximized (win))
-		    wnck_window_unmaximize (win);
-		else
-		    wnck_window_maximize (win);
-	    default:
-		break;
-	    }
+	    handle_title_button_event (win, double_click_action,
+				       &xevent->xbutton);
 
 	    last_button_num	= 0;
 	    last_button_xwindow = None;
@@ -4758,13 +4788,13 @@ title_event (WnckWindow *win,
     }
     else if (xevent->xbutton.button == 2)
     {
-	restack_window (win, Below);
+	handle_title_button_event (win, middle_click_action,
+				   &xevent->xbutton);
     }
     else if (xevent->xbutton.button == 3)
     {
-	action_menu_map (win,
-			 xevent->xbutton.button,
-			 xevent->xbutton.time);
+	handle_title_button_event (win, right_click_action,
+				   &xevent->xbutton);
     }
     else if (xevent->xbutton.button == 4 ||
 	     xevent->xbutton.button == 5)
@@ -5704,21 +5734,24 @@ titlebar_font_changed (GConfClient *client)
 }
 
 static void
-double_click_titlebar_changed (GConfClient *client)
+titlebar_click_action_changed (GConfClient *client,
+			       const gchar *key,
+			       int         *action_value,
+			       int          default_value)
 {
     gchar *action;
 
-    double_click_action = DOUBLE_CLICK_MAXIMIZE;
+    *action_value = default_value;
 
-    action = gconf_client_get_string (client,
-				      COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY,
-				      NULL);
+    action = gconf_client_get_string (client, key, NULL);
     if (action)
     {
 	if (strcmp (action, "toggle_shade") == 0)
-	    double_click_action = DOUBLE_CLICK_SHADE;
+	    *action_value = CLICK_ACTION_SHADE;
 	else if (strcmp (action, "toggle_maximize") == 0)
-	    double_click_action = DOUBLE_CLICK_MAXIMIZE;
+	    *action_value = CLICK_ACTION_MAXIMIZE;
+	else if (strcmp (action, "none") == 0)
+	    *action_value = CLICK_ACTION_NONE;
 
 	g_free (action);
     }
@@ -5729,13 +5762,15 @@ wheel_action_changed (GConfClient *client)
 {
     gchar *action;
 
-    wheel_action = WHEEL_ACTION_NONE;
+    wheel_action = WHEEL_ACTION_DEFAULT;
 
     action = gconf_client_get_string (client, WHEEL_ACTION_KEY, NULL);
     if (action)
     {
 	if (strcmp (action, "shade") == 0)
 	    wheel_action = WHEEL_ACTION_SHADE;
+	else if (strcmp (action, "none") == 0)
+	    wheel_action = WHEEL_ACTION_NONE;
 
 	g_free (action);
     }
@@ -6254,7 +6289,21 @@ value_changed (GConfClient *client,
     }
     else if (strcmp (key, COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY) == 0)
     {
-	double_click_titlebar_changed (client);
+	titlebar_click_action_changed (client, key,
+				       &double_click_action,
+				       DOUBLE_CLICK_ACTION_DEFAULT);
+    }
+    else if (strcmp (key, COMPIZ_MIDDLE_CLICK_TITLEBAR_KEY) == 0)
+    {
+	titlebar_click_action_changed (client, key,
+				       &middle_click_action,
+				       MIDDLE_CLICK_ACTION_DEFAULT);
+    }
+    else if (strcmp (key, COMPIZ_RIGHT_CLICK_TITLEBAR_KEY) == 0)
+    {
+	titlebar_click_action_changed (client, key,
+				       &right_click_action,
+				       RIGHT_CLICK_ACTION_DEFAULT);
     }
     else if (strcmp (key, WHEEL_ACTION_KEY) == 0)
     {
@@ -6592,7 +6641,18 @@ init_settings (WnckScreen *screen)
     update_titlebar_font ();
 
 #ifdef USE_GCONF
-    double_click_titlebar_changed (gconf);
+    titlebar_click_action_changed (gconf,
+				   COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY,
+				   &double_click_action,
+				   DOUBLE_CLICK_ACTION_DEFAULT);
+    titlebar_click_action_changed (gconf,
+				   COMPIZ_MIDDLE_CLICK_TITLEBAR_KEY,
+				   &middle_click_action,
+				   MIDDLE_CLICK_ACTION_DEFAULT);
+    titlebar_click_action_changed (gconf,
+				   COMPIZ_RIGHT_CLICK_TITLEBAR_KEY,
+				   &right_click_action,
+				   RIGHT_CLICK_ACTION_DEFAULT);
     wheel_action_changed (gconf);
     shadow_settings_changed (gconf);
     blur_settings_changed (gconf);
