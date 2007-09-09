@@ -136,6 +136,9 @@
 #define BLUR_TYPE_KEY	   \
     GCONF_DIR "/blur_type"
 
+#define WHEEL_ACTION_KEY   \
+    GCONF_DIR "/mouse_wheel_action"
+
 #define DBUS_DEST       "org.freedesktop.compiz"
 #define DBUS_PATH       "/org/freedesktop/compiz/decoration/allscreens"
 #define DBUS_INTERFACE  "org.freedesktop.compiz"
@@ -195,7 +198,13 @@ enum {
     DOUBLE_CLICK_MAXIMIZE
 };
 
+enum {
+    WHEEL_ACTION_NONE,
+    WHEEL_ACTION_SHADE
+};
+
 int double_click_action = DOUBLE_CLICK_SHADE;
+int wheel_action = WHEEL_ACTION_NONE;
 
 static gboolean minimal = FALSE;
 
@@ -4656,6 +4665,28 @@ unstick_button_event (WnckWindow *win,
     }
 }
 
+static void
+handle_mouse_wheel_title_event (WnckWindow   *win,
+				unsigned int button)
+{
+    switch (wheel_action) {
+    case WHEEL_ACTION_SHADE:
+	if (button == 4)
+	{
+	    if (!wnck_window_is_shaded (win))
+		wnck_window_shade (win);
+	}
+	else if (button == 5)
+	{
+	    if (wnck_window_is_shaded (win))
+		wnck_window_unshade (win);
+	}
+	break;
+    default:
+	break;
+    }
+}
+
 static double
 square (double x)
 {
@@ -4734,6 +4765,11 @@ title_event (WnckWindow *win,
 	action_menu_map (win,
 			 xevent->xbutton.button,
 			 xevent->xbutton.time);
+    }
+    else if (xevent->xbutton.button == 4 ||
+	     xevent->xbutton.button == 5)
+    {
+	handle_mouse_wheel_title_event (win, xevent->xbutton.button);
     }
 }
 
@@ -5687,6 +5723,23 @@ double_click_titlebar_changed (GConfClient *client)
 	g_free (action);
     }
 }
+
+static void
+wheel_action_changed (GConfClient *client)
+{
+    gchar *action;
+
+    wheel_action = WHEEL_ACTION_NONE;
+
+    action = gconf_client_get_string (client, WHEEL_ACTION_KEY, NULL);
+    if (action)
+    {
+	if (strcmp (action, "shade") == 0)
+	    wheel_action = WHEEL_ACTION_SHADE;
+
+	g_free (action);
+    }
+}
 #endif
 
 #ifdef USE_METACITY
@@ -6203,6 +6256,10 @@ value_changed (GConfClient *client,
     {
 	double_click_titlebar_changed (client);
     }
+    else if (strcmp (key, WHEEL_ACTION_KEY) == 0)
+    {
+	wheel_action_changed (client);
+    }
     else if (strcmp (key, COMPIZ_SHADOW_RADIUS_KEY)   == 0 ||
 	     strcmp (key, COMPIZ_SHADOW_OPACITY_KEY)  == 0 ||
 	     strcmp (key, COMPIZ_SHADOW_OFFSET_X_KEY) == 0 ||
@@ -6536,6 +6593,7 @@ init_settings (WnckScreen *screen)
 
 #ifdef USE_GCONF
     double_click_titlebar_changed (gconf);
+    wheel_action_changed (gconf);
     shadow_settings_changed (gconf);
     blur_settings_changed (gconf);
 #endif

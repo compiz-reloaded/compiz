@@ -23,6 +23,17 @@
             </locale>
         </schema>
         <schema>
+            <key>/schemas/apps/gwd/mouse_wheel_action</key>
+            <applyto>/apps/gwd/mouse_wheel_action</applyto>
+            <owner>gwd</owner>
+            <type>string</type>
+            <default>none</default>
+            <locale name="C">
+                <short>Title bar mouse wheel action</short>
+                <long>Action to take when scrolling the mouse wheel on a window title bar.</long>
+            </locale>
+        </schema>
+        <schema>
             <key>/schemas/apps/gwd/metacity_theme_opacity</key>
             <applyto>/apps/gwd/metacity_theme_opacity</applyto>
             <owner>gwd</owner>
