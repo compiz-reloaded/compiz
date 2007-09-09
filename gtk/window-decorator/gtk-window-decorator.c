@@ -203,6 +203,7 @@ enum {
     CLICK_ACTION_NONE,
     CLICK_ACTION_SHADE,
     CLICK_ACTION_MAXIMIZE,
+    CLICK_ACTION_MINIMIZE,
     CLICK_ACTION_RAISE,
     CLICK_ACTION_LOWER,
     CLICK_ACTION_MENU
@@ -4700,6 +4701,10 @@ handle_title_button_event (WnckWindow   *win,
 	else
 	    wnck_window_maximize (win);
 	break;
+    case CLICK_ACTION_MINIMIZE:
+	if (!wnck_window_is_minimized (win))
+	    wnck_window_minimize (win);
+	break;
     case CLICK_ACTION_RAISE:
 	restack_window (win, Above);
 	break;
@@ -5754,6 +5759,8 @@ titlebar_click_action_changed (GConfClient *client,
 	    *action_value = CLICK_ACTION_SHADE;
 	else if (strcmp (action, "toggle_maximize") == 0)
 	    *action_value = CLICK_ACTION_MAXIMIZE;
+	else if (strcmp (action, "minimize") == 0)
+	    *action_value = CLICK_ACTION_MINIMIZE;
 	else if (strcmp (action, "none") == 0)
 	    *action_value = CLICK_ACTION_NONE;
 
