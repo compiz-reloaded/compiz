@@ -391,27 +391,37 @@ resizeInitiate (CompDisplay     *d,
 	rd->pointerDx = x - pointerX;
 	rd->pointerDy = y - pointerY;
 
-	rd->mode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
-	for (i = 0; i <= RESIZE_MODE_LAST; i++)
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
 	{
-	    if (action == &rd->opt[i].value.action)
-	    {
-		rd->mode = i;
-		break;
-	    }
+	    /* if the window is fully maximized, showing the outline or
+	       rectangle would be visually distracting as the window can't
+	       be resized anyway; so we better don't use them in this case */
+	    rd->mode = RESIZE_MODE_NORMAL;
 	}
-
-	if (i > RESIZE_MODE_LAST)
+	else
 	{
-	    int index;
-
+	    rd->mode = rd->opt[RESIZE_DISPLAY_OPTION_MODE].value.i;
 	    for (i = 0; i <= RESIZE_MODE_LAST; i++)
 	    {
-		index = RESIZE_DISPLAY_OPTION_NORMAL_MATCH + i;
-		if (matchEval (&rd->opt[index].value.match, w))
+		if (action == &rd->opt[i].value.action)
 		{
 		    rd->mode = i;
 		    break;
+		}
+	    }
+
+	    if (i > RESIZE_MODE_LAST)
+	    {
+		int index;
+
+		for (i = 0; i <= RESIZE_MODE_LAST; i++)
+		{
+		    index = RESIZE_DISPLAY_OPTION_NORMAL_MATCH + i;
+		    if (matchEval (&rd->opt[index].value.match, w))
+		    {
+			rd->mode = i;
+			break;
+		    }
 		}
 	    }
 	}
