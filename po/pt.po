@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-04 00:02+0200\n"
+"POT-Creation-Date: 2007-09-10 16:52+0200\n"
 "PO-Revision-Date: 2007-09-10 16:50+0200\n"
 "Last-Translator: Nicolau Gonçalves <excentriko@gmail.com>\n"
 "Language-Team: \n"
@@ -62,12 +62,18 @@ msgid "Opacity to use for metacity theme decorations"
 msgstr "Opacidade a usar para decorações metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid "Shade active windows with metacity theme decorations from opaque to translucent"
-msgstr "Sombrear decoração de janelas activas com temas metacity de opaco para transparente"
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+"Sombrear decoração de janelas activas com temas metacity de opaco para "
+"transparente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "Sombrear decoração de janelas com temas metacity de opaco para transparente"
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+"Sombrear decoração de janelas com temas metacity de opaco para transparente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -117,12 +123,9 @@ msgstr "Desenhar usando uma ferramenta"
 msgid "Fill color for annotations"
 msgstr "Cor de preenchimento para anotações"
 
-#: ../metadata/annotate.xml.in.h:9
-#: ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:11
-#: ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
-#: ../metadata/zoom.xml.in.h:2
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Iniciar"
 
@@ -208,7 +211,8 @@ msgstr "Desfocar janelas que não tenham foco"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr "Desactivar desfocagem de regiões de ecrã obscurecidas por outras janelas."
+msgstr ""
+"Desactivar desfocagem de regiões de ecrã obscurecidas por outras janelas."
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
@@ -244,10 +248,8 @@ msgstr "Raio gaussiano"
 msgid "Gaussian strength"
 msgstr "Força gaussiana"
 
-#: ../metadata/blur.xml.in.h:22
-#: ../metadata/cube.xml.in.h:28
-#: ../metadata/decoration.xml.in.h:10
-#: ../metadata/switcher.xml.in.h:13
+#: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "MipMap"
 
@@ -292,60 +294,111 @@ msgid "Output clone handler"
 msgstr "Gestor de clonagem de saídas"
 
 #: ../metadata/core.xml.in.h:1
-msgid "A keybinding that when invoked, will run the shell command identified by command0"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando0"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando0"
 
 #: ../metadata/core.xml.in.h:2
-msgid "A keybinding that when invoked, will run the shell command identified by command1"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando1"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando1"
 
 #: ../metadata/core.xml.in.h:3
-msgid "A keybinding that when invoked, will run the shell command identified by command10"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando10"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando10"
 
 #: ../metadata/core.xml.in.h:4
-msgid "A keybinding that when invoked, will run the shell command identified by command11"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando11"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando11"
 
 #: ../metadata/core.xml.in.h:5
-msgid "A keybinding that when invoked, will run the shell command identified by command2"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando2"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando2"
 
 #: ../metadata/core.xml.in.h:6
-msgid "A keybinding that when invoked, will run the shell command identified by command3"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando3"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando3"
 
 #: ../metadata/core.xml.in.h:7
-msgid "A keybinding that when invoked, will run the shell command identified by command4"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando4"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando4"
 
 #: ../metadata/core.xml.in.h:8
-msgid "A keybinding that when invoked, will run the shell command identified by command5"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando5"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando5"
 
 #: ../metadata/core.xml.in.h:9
-msgid "A keybinding that when invoked, will run the shell command identified by command6"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando6"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando6"
 
 #: ../metadata/core.xml.in.h:10
-msgid "A keybinding that when invoked, will run the shell command identified by command7"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando7"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando7"
 
 #: ../metadata/core.xml.in.h:11
-msgid "A keybinding that when invoked, will run the shell command identified by command8"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando8"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando8"
 
 #: ../metadata/core.xml.in.h:12
-msgid "A keybinding that when invoked, will run the shell command identified by command9"
-msgstr "Um atalho de teclado que, quando acionado, executa o comando shell identificado pelo comando9"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Um atalho de teclado que, quando acionado, executa o comando shell "
+"identificado pelo comando9"
 
 #: ../metadata/core.xml.in.h:13
 msgid "Active Plugins"
 msgstr "Plug-ins Ativos"
 
 #: ../metadata/core.xml.in.h:14
-msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr "Permitir que o desenho das janelas em tela inteira não seja redirecionado para pixmaps fora da tela"
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Permitir que o desenho das janelas em tela inteira não seja redirecionado "
+"para pixmaps fora da tela"
 
 #: ../metadata/core.xml.in.h:15
 msgid "Audible Bell"
@@ -441,51 +494,63 @@ msgstr "Linha de comando 9"
 
 #: ../metadata/core.xml.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command0 for accionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command0 for accionado"
 
 #: ../metadata/core.xml.in.h:39
 msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command1 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command1 for acionado"
 
 #: ../metadata/core.xml.in.h:40
 msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command10 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command10 for acionado"
 
 #: ../metadata/core.xml.in.h:41
 msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command11 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command11 for acionado"
 
 #: ../metadata/core.xml.in.h:42
 msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command2 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command2 for acionado"
 
 #: ../metadata/core.xml.in.h:43
 msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command3 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command3 for acionado"
 
 #: ../metadata/core.xml.in.h:44
 msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command4 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command4 for acionado"
 
 #: ../metadata/core.xml.in.h:45
 msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command5 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command5 for acionado"
 
 #: ../metadata/core.xml.in.h:46
 msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command6 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command6 for acionado"
 
 #: ../metadata/core.xml.in.h:47
 msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command7 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command7 for acionado"
 
 #: ../metadata/core.xml.in.h:48
 msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command8 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command8 for acionado"
 
 #: ../metadata/core.xml.in.h:49
 msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "Linha de comando a ser executada no shell quando run_command9 for acionado"
+msgstr ""
+"Linha de comando a ser executada no shell quando run_command9 for acionado"
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
@@ -512,379 +577,392 @@ msgid "Detect Refresh Rate"
 msgstr "Detectar Taxa de Atualização"
 
 #: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must reset in a screen edge before an edge action is "
+"taken."
+msgstr ""
+
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "Rápido"
 
-#: ../metadata/core.xml.in.h:57
+#: ../metadata/core.xml.in.h:59
 msgid "Focus Prevention Windows"
 msgstr "Janelas em Prevenção de Destaque"
 
-#: ../metadata/core.xml.in.h:58
+#: ../metadata/core.xml.in.h:60
 msgid "Focus prevention windows"
 msgstr "Janelas em prevenção de destaque"
 
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.h:61
 msgid "General Options"
 msgstr "Opções Gerais"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.h:62
 msgid "General compiz options"
 msgstr "Opções gerais do compiz"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.h:63
 msgid "Good"
 msgstr "Bom"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:64
 msgid "Hide Skip Taskbar Windows"
 msgstr "Ocultar Janelas Ignorar Barra de Tarefas"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:65
 msgid "Hide all windows and focus desktop"
 msgstr "Ocultar todas as janelas e enfocar área de trabalho"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:66
 msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "Ocultar as janelas que não estão na barra de tarefas ao entrar no modo mostrar área de trabalho"
+msgstr ""
+"Ocultar as janelas que não estão na barra de tarefas ao entrar no modo "
+"mostrar área de trabalho"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:67
 msgid "Horizontal Virtual Size"
 msgstr "Tamanho Virtual Horizontal"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:68
 msgid "Ignore Hints When Maximized"
 msgstr "Ignorar dicas quando maximizada"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:69
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Ignorar incremento de tamanho e aspecto quando a janela é maximizada"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:70
 msgid "Increase Opacity"
 msgstr "Aumentar Opacidade"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:71
 msgid "Increase window opacity"
 msgstr "Aumentar opacidade da janela"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:72
 msgid "Interval before raising selected windows"
 msgstr "Intervalo antes da elevação das janelas selecionadas"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:73
 msgid "Interval between ping messages"
 msgstr "Intervalo entre mensagens ping"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:74
 msgid "Lighting"
 msgstr "Iluminação"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:75
 msgid "List of currently active plugins"
 msgstr "Lista de plug-ins atualmente ativos"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:76
 msgid "List of strings describing output devices"
 msgstr "Lista de strings descrevendo os dispositivos de saída"
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:77
 msgid "Lower Window"
 msgstr "Janela Mais Baixa"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:78
 msgid "Lower window beneath other windows"
 msgstr "Janela mais baixa sob as demais janelas"
 
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:79
 msgid "Maximize Window"
 msgstr "Maximizar Janela"
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:80
 msgid "Maximize Window Horizontally"
 msgstr "Maximizar Janela Horizontalmente"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:81
 msgid "Maximize Window Vertically"
 msgstr "Maximizar Janela Verticalmente"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:82
 msgid "Maximize active window"
 msgstr "Maximizar janela ativa"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:83
 msgid "Maximize active window horizontally"
 msgstr "Maximizar janela ativa horizontalmente"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize active window vertically"
 msgstr "Maximizar janela ativa verticalmente"
 
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:85
 msgid "Minimize Window"
 msgstr "Minimizar Janela"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:86
 msgid "Minimize active window"
 msgstr "Minimizar janela ativa"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:87
 msgid "Number of Desktops"
 msgstr "Número de áreas de trabalho"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:88
 msgid "Number of virtual desktops"
 msgstr "Número de ambientes virtuais"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:89
 msgid "Only perform screen updates during vertical blanking period"
-msgstr "Apenas efectuar actualizações de ecrã durante o período de limpeza vertical"
+msgstr ""
+"Apenas efectuar actualizações de ecrã durante o período de limpeza vertical"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:90
 msgid "Opacity Step"
 msgstr "Etapa de Opacidade"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:91
 msgid "Opacity change step"
 msgstr "Etapa de mudança de opacidade"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:92
 msgid "Opacity values for windows that should be translucent by default"
-msgstr "Valores de opacidade para janelas que devem ser translúcidas por omissão"
+msgstr ""
+"Valores de opacidade para janelas que devem ser translúcidas por omissão"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:93
 msgid "Opacity window values"
 msgstr "Valores de opacidade da janela"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:94
 msgid "Opacity windows"
 msgstr "Opacidade de janelas"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:95
 msgid "Open a terminal"
 msgstr "Abrir um terminal"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:96
 msgid "Outputs"
 msgstr "Saídas"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:97
 msgid "Ping Delay"
 msgstr "Atraso de ping"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:98
 msgid "Raise On Click"
 msgstr "Elevar com um Clique"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:99
 msgid "Raise Window"
 msgstr "Elevar janela"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:100
 msgid "Raise selected windows after interval"
 msgstr "Elevar janelas selecionadas após intervalo"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:101
 msgid "Raise window above other windows"
 msgstr "Elevar janela acima das restantes"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:102
 msgid "Raise windows when clicked"
 msgstr "Elevar janelas quando clicadas"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:103
 msgid "Refresh Rate"
 msgstr "Taxa de Atualização"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:104
 msgid "Run Dialog"
 msgstr "Caixa de Diálogo Executar"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:105
 msgid "Run command 0"
 msgstr "Executar comando 0"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 1"
 msgstr "Executar comando 1"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 10"
 msgstr "Executar comando 10"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 11"
 msgstr "Executar comando 11"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 2"
 msgstr "Executar comando 2"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 3"
 msgstr "Executar comando 3"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 4"
 msgstr "Executar comando 4"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 5"
 msgstr "Executar comando 5"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 6"
 msgstr "Executar comando 6"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 7"
 msgstr "Executar comando 7"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 8"
 msgstr "Executar comando 8"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 9"
 msgstr "Executar comando 9"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:117
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplicador de tamanho horizontal de ecrã para tamanho virtual"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicador de tamanho vertical de ecrã para tamanho virtual"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:119
 msgid "Screenshot command line"
 msgstr "Capturar tela da linha de comando"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:120
 msgid "Show Desktop"
 msgstr "Mostrar Área de Trabalho"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:121
 msgid "Show Main Menu"
 msgstr "Mostrar Menu Principal"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:122
 msgid "Show Run Application dialog"
 msgstr "Mostrar caixa de diálogo Executar Aplicativo"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:123
 msgid "Show the main menu"
 msgstr "Mostrar o menu principal"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:124
 msgid "Slow Animations"
 msgstr "Animações Lentas"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:125
 msgid "Sync To VBlank"
 msgstr "Sincronizar a VBlank"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:126
 msgid "Take a screenshot"
 msgstr "Efetuar uma captura de tela"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:127
 msgid "Take a screenshot of a window"
 msgstr "Efetuar captura de tela de uma janela"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:128
 msgid "Terminal command line"
 msgstr "Linha de comando do terminal"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:129
 msgid "Texture Filter"
 msgstr "Filtro de Textura"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:130
 msgid "Texture filtering"
 msgstr "Filtro de Texturas"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:131
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Taxa em que o ecrã é redesenhado (vezes/segundo)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:132
 msgid "Toggle Window Maximized"
 msgstr "Alternar Janela Maximizada"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:133
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Alternar Janela Maximizada Horizontalmente"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized Vertically"
 msgstr "Alternar Janela Maximizada Verticalmente"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Shaded"
 msgstr "Alternar Janela Sombreada"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle active window maximized"
 msgstr "Alternar janela ativa maximizada"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle active window maximized horizontally"
 msgstr "Alternar janela ativa maximizada horizontalmente"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized vertically"
 msgstr "Alternar janela ativa maximizada verticalmente"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window shaded"
 msgstr "Alternar janela ativa sombreada"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle use of slow animations"
 msgstr "Alternar uso de animações lentas"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:141
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Janela"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:142
 msgid "Unmaximize active window"
 msgstr "Desmaximizar janela ativa"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:143
 msgid "Unredirect Fullscreen Windows"
 msgstr "Anular redirecionamento de janelas de tela inteira"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:144
 msgid "Use diffuse light when screen is transformed"
 msgstr "Usar luz difusa quando a tela for transformada"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:145
 msgid "Vertical Virtual Size"
 msgstr "Tamanho Vertical Virtual"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:146
 msgid "Window Menu"
 msgstr "Menu da Janela"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:147
 msgid "Window menu button binding"
 msgstr "Botão de atalho para menu da Janela"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:148
 msgid "Window menu key binding"
 msgstr "Tecla de atalho para menu da Janela"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:149
 msgid "Window screenshot command line"
 msgstr "Linha de comando para captura de tela de janelas"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:150
 msgid "Windows that should be translucent by default"
 msgstr "Janelas que devem ser translúcidas por omissão"
 
-#: ../metadata/cube.xml.in.h:1
-#: ../metadata/rotate.xml.in.h:1
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
 msgstr "Aceleração"
 
@@ -960,8 +1038,7 @@ msgstr "Velocidade de dobragem"
 msgid "Fold Timestep"
 msgstr "Timestep de dobragem"
 
-#: ../metadata/cube.xml.in.h:20
-#: ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Gerar mapas quando possível para dimensionamento de melhor qualidade"
 
@@ -979,7 +1056,8 @@ msgstr "Imagem a usar como textura no skydome"
 
 #: ../metadata/cube.xml.in.h:24
 msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr "Iniciar transparência do cubo apenas se a rotação por conduzida pelo rato."
+msgstr ""
+"Iniciar transparência do cubo apenas se a rotação por conduzida pelo rato."
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
@@ -991,10 +1069,11 @@ msgstr "Dentro do cubo"
 
 #: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "Lista de arquivos PNG e SVG que devem ser renderizados na face superior do cubo"
+msgstr ""
+"Lista de arquivos PNG e SVG que devem ser renderizados na face superior do "
+"cubo"
 
-#: ../metadata/cube.xml.in.h:29
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "Modo de Multi Saída"
 
@@ -1048,7 +1127,9 @@ msgstr "Dimensionar imagens para cobertura da face superior do cubo"
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "Selecciona como o cubo é desenhado se existirem múltiplos dispositivos de saída."
+msgstr ""
+"Selecciona como o cubo é desenhado se existirem múltiplos dispositivos de "
+"saída."
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome"
@@ -1066,21 +1147,15 @@ msgstr "Cor Inicial do gradiente Skydome"
 msgid "Skydome Image"
 msgstr "Imagem do Skydome"
 
-#: ../metadata/cube.xml.in.h:47
-#: ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88
-#: ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:31
-#: ../metadata/zoom.xml.in.h:3
+#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Velocidade"
 
-#: ../metadata/cube.xml.in.h:48
-#: ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91
-#: ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:35
-#: ../metadata/zoom.xml.in.h:4
+#: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Timestep"
 
@@ -1117,7 +1192,8 @@ msgid "Decoration windows"
 msgstr "Janelas a decorar"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid "Decorator command line that is executed if no decorator is already running"
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
 msgstr "Linha de comando a executar se não estiver nenhum decorador a correr"
 
 #: ../metadata/decoration.xml.in.h:5
@@ -1198,7 +1274,9 @@ msgstr "Efeito de esmaecimento no bip do sistema"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "Avivar janelas quando houver mapeamento e esmaecê-las quando não houver mapeamento"
+msgstr ""
+"Avivar janelas quando houver mapeamento e esmaecê-las quando não houver "
+"mapeamento"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Fade windows"
@@ -1326,7 +1404,8 @@ msgstr "Restringir a coordenada Y conforme a área de trabalho"
 
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Não actualizar a posição das janelas no lado do servidor até acabar de mover"
+msgstr ""
+"Não actualizar a posição das janelas no lado do servidor até acabar de mover"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -1344,8 +1423,7 @@ msgstr "Mover Janela"
 msgid "Move window"
 msgstr "Mover janela"
 
-#: ../metadata/move.xml.in.h:8
-#: ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
 #: ../metadata/switcher.xml.in.h:17
 msgid "Opacity"
 msgstr "Opacidade"
@@ -1356,7 +1434,8 @@ msgstr "Nível de opacidade das janelas em movimento"
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "Janelas maximizadas quebradas e automaticamente desmaximizadas ao arrastar"
+msgstr ""
+"Janelas maximizadas quebradas e automaticamente desmaximizadas ao arrastar"
 
 #: ../metadata/move.xml.in.h:11
 msgid "Snapoff maximized windows"
@@ -1428,7 +1507,8 @@ msgstr "Janelas que devem ser posicionadas por omissão"
 
 #: ../metadata/place.xml.in.h:16
 msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Janelas que devem ser posicionadas em viewports específicos por omissão"
+msgstr ""
+"Janelas que devem ser posicionadas em viewports específicos por omissão"
 
 #: ../metadata/place.xml.in.h:17
 msgid "Workarounds"
@@ -1616,7 +1696,8 @@ msgstr "Cor da borda"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
-msgstr "Cor do contorno usado para o modo contorno e rectangular de redimensionameto"
+msgstr ""
+"Cor do contorno usado para o modo contorno e rectangular de redimensionameto"
 
 #: ../metadata/resize.xml.in.h:3
 msgid "Default Resize Mode"
@@ -1632,7 +1713,8 @@ msgstr "Cor de preenchimento"
 
 #: ../metadata/resize.xml.in.h:6
 msgid "Fill color used for rectangle resize mode"
-msgstr "Cor de preenchimento usada para o modo rectangular de redimensionamento"
+msgstr ""
+"Cor de preenchimento usada para o modo rectangular de redimensionamento"
 
 #: ../metadata/resize.xml.in.h:7
 msgid "Initiate Normal Window Resize"
@@ -1752,15 +1834,18 @@ msgstr "Rodar para o viewport da esquerda e manter ponteiro"
 
 #: ../metadata/rotate.xml.in.h:7
 msgid "Flip to next viewport when dragging object to screen edge"
-msgstr "Inverter para o viewport seguinte ao arrastar o objeto para a borda da tela"
+msgstr ""
+"Inverter para o viewport seguinte ao arrastar o objeto para a borda da tela"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "Inverter para o viewport seguinte ao mover o ponteiro para a borda da tela"
+msgstr ""
+"Inverter para o viewport seguinte ao mover o ponteiro para a borda da tela"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving window to screen edge"
-msgstr "Inverter para o viewport seguinte ao mover a janela para a borda da tela"
+msgstr ""
+"Inverter para o viewport seguinte ao mover a janela para a borda da tela"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to right viewport and warp pointer"
@@ -2078,13 +2163,11 @@ msgstr "Iniciar Rotação"
 msgid "Timeout before flipping viewport"
 msgstr "Tempo de espera até a rodar o viewport"
 
-#: ../metadata/rotate.xml.in.h:92
-#: ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../metadata/scale.xml.in.h:1
-#: ../metadata/switcher.xml.in.h:2
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr "Volume de opacidade em percentagem"
 
@@ -2110,7 +2193,9 @@ msgstr "Emblema"
 
 #: ../metadata/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "Entrar no modo Mostrar Área de Trabalho quando o ambiente é clicado durante o dimensionamento"
+msgstr ""
+"Entrar no modo Mostrar Área de Trabalho quando o ambiente é clicado durante "
+"o dimensionamento"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
@@ -2148,8 +2233,7 @@ msgstr "Criar layout das janelas e iniciar sua transformação"
 msgid "Layout and start transforming windows on current output"
 msgstr "Criar layout de janelas na saída actual e iniciar sua transformação"
 
-#: ../metadata/scale.xml.in.h:18
-#: ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Nenhum"
 
@@ -2191,7 +2275,9 @@ msgstr "Dimensionar janelas"
 
 #: ../metadata/scale.xml.in.h:29
 msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr "Selecciona onde as janelas são dimensionadas se existirem múltiplos dispositivos de saída."
+msgstr ""
+"Selecciona onde as janelas são dimensionadas se existirem múltiplos "
+"dispositivos de saída."
 
 #: ../metadata/scale.xml.in.h:30
 msgid "Space between windows"
@@ -2202,8 +2288,11 @@ msgid "Spacing"
 msgstr "Espaçamento"
 
 #: ../metadata/scale.xml.in.h:33
-msgid "Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr "Tempo (em ms) antes que o modo de dimensionar seja terminado ao pairar sobre uma janela"
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Tempo (em ms) antes que o modo de dimensionar seja terminado ao pairar sobre "
+"uma janela"
 
 #: ../metadata/scale.xml.in.h:35
 msgid "Windows that should be scaled in scale mode"
@@ -2303,15 +2392,21 @@ msgstr "Mostrar alternador se não estiver visível e seleccionar próxima janel
 
 #: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "Mostrar alternador se não estiver visível e seleccionar próxima janela de todas"
+msgstr ""
+"Mostrar alternador se não estiver visível e seleccionar próxima janela de "
+"todas"
 
 #: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select previous window"
-msgstr "Mostrar alternador se não estiver visível e seleccionar  janela anterior"
+msgstr ""
+"Mostrar alternador se não estiver visível e seleccionar  janela anterior"
 
 #: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select previous window out of all windows"
-msgstr "Mostrar alternador se não estiver visível e seleccionar  janela anterior de todas"
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Mostrar alternador se não estiver visível e seleccionar  janela anterior de "
+"todas"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Prev window"
@@ -2612,4 +2707,3 @@ msgstr "Fator de magnificação"
 #: ../metadata/zoom.xml.in.h:14
 msgid "Zoom pan"
 msgstr "Deslocar zoom"
-
