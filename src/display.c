@@ -2309,15 +2309,15 @@ addDisplay (const char *name)
 	d->xkbEvent = d->xkbError = -1;
     }
 
+    d->screenInfo  = NULL;
+    d->nScreenInfo = 0;
+
     d->xineramaExtension = XineramaQueryExtension (dpy,
 						   &d->xineramaEvent,
 						   &d->xineramaError);
 
-    d->nScreenInfo = 0;
     if (d->xineramaExtension)
-	d->screenInfo  = XineramaQueryScreens (dpy, &d->nScreenInfo);
-    else
-	d->screenInfo  = NULL;
+	d->screenInfo = XineramaQueryScreens (dpy, &d->nScreenInfo);
 
     d->escapeKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Escape"));
     d->returnKeyCode = XKeysymToKeycode (dpy, XStringToKeysym ("Return"));
