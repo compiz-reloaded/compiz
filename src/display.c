@@ -1972,7 +1972,10 @@ addDisplay (const char *name)
     {
 	privates = malloc (displayPrivateLen * sizeof (CompPrivate));
 	if (!privates)
+	{
+	    free (d);
 	    return FALSE;
+	}
     }
     else
 	privates = 0;
