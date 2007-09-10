@@ -2312,7 +2312,7 @@ addDisplay (const char *name)
     d->xineramaExtension = XineramaQueryExtension (dpy,
 						   &d->xineramaEvent,
 						   &d->xineramaError);
-    
+
     d->nScreenInfo = 0;
     if (d->xineramaExtension)
 	d->screenInfo  = XineramaQueryScreens (dpy, &d->nScreenInfo);
