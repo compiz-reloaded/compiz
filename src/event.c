@@ -1826,7 +1826,14 @@ handleEvent (CompDisplay *d,
 	    /* We should check the override_redirect flag here, because the
 	       client might have changed it while being unmapped. */
 	    if (XGetWindowAttributes (d->display, w->id, &attr))
-		w->attrib.override_redirect = attr.override_redirect;
+	    {
+		if (w->attrib.override_redirect != attr.override_redirect)
+		{
+		    w->attrib.override_redirect = attr.override_redirect;
+		    recalcWindowType (w);
+		    recalcWindowActions (w);
+		}
+	    }
 
 	    w->managed = TRUE;
 
