@@ -1816,10 +1816,17 @@ handleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmaprequest.window);
 	if (w)
 	{
+	    XWindowAttributes attr;
+
 	    if (w->minimized)
 		unminimizeWindow (w);
 
 	    (*w->screen->leaveShowDesktopMode) (w->screen, w);
+
+	    /* We should check the override_redirect flag here, because the
+	       client might have changed it while being unmapped. */
+	    if (XGetWindowAttributes (d->display, w->id, &attr))
+		w->attrib.override_redirect = attr.override_redirect;
 
 	    w->managed = TRUE;
 
