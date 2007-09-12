@@ -860,6 +860,17 @@ reshape (CompScreen *s,
 	XMoveResizeWindow (s->display->display, s->overlay, 0, 0, w, h);
 #endif
 
+    if (s->display->xineramaExtension)
+    {
+	CompDisplay *d = s->display;
+
+	if (d->screenInfo)
+	    XFree (d->screenInfo);
+
+	d->nScreenInfo = 0;
+	d->screenInfo = XineramaQueryScreens (d->display, &d->nScreenInfo);
+    }
+
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     glMatrixMode (GL_MODELVIEW);
