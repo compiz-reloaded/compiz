@@ -690,6 +690,7 @@ void
 recalcWindowActions (CompWindow *w)
 {
     unsigned int actions = 0;
+    unsigned int setActions, clearActions;
 
     switch (w->type) {
     case CompWindowTypeFullscreenMask:
@@ -769,7 +770,9 @@ recalcWindowActions (CompWindow *w)
 	    actions &= ~CompWindowActionCloseMask;
     }
 
-    actions &= (*w->screen->getAllowedActionsForWindow) (w);
+    (*w->screen->getAllowedActionsForWindow) (w, &setActions, &clearActions);
+    actions &= ~clearActions;
+    actions |= setActions;
 
     if (actions != w->actions)
     {
@@ -778,10 +781,13 @@ recalcWindowActions (CompWindow *w)
     }
 }
 
-unsigned int
-getAllowedActionsForWindow (CompWindow *w)
+void
+getAllowedActionsForWindow (CompWindow   *w,
+			    unsigned int *setActions,
+			    unsigned int *clearActions)
 {
-    return ~0;
+    *setActions   = 0;
+    *clearActions = 0;
 }
 
 unsigned int
