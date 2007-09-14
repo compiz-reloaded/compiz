@@ -1832,6 +1832,8 @@ handleEvent (CompDisplay *d,
 		    w->attrib.override_redirect = attr.override_redirect;
 		    recalcWindowType (w);
 		    recalcWindowActions (w);
+
+		    (*d->matchPropertyChanged) (d, w);
 		}
 	    }
 
