@@ -550,8 +550,8 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    y = sint1[j];
 
 	    glTexCoord2f (
-		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[3] * cs->skyW),
-		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[3] * cs->skyH));
+		COMP_TEX_COORD_X (&cs->sky.matrix, afTexCoordX[3] * cs->skyW),
+		COMP_TEX_COORD_Y (&cs->sky.matrix, afTexCoordY[3] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    /* top-right */
@@ -561,8 +561,8 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    y = sint1[j];
 
 	    glTexCoord2f (
-		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[0] * cs->skyW),
-		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[0] * cs->skyH));
+		COMP_TEX_COORD_X (&cs->sky.matrix, afTexCoordX[0] * cs->skyW),
+		COMP_TEX_COORD_Y (&cs->sky.matrix, afTexCoordY[0] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    /* top-left */
@@ -572,8 +572,8 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    y = sint1[j + 1];
 
 	    glTexCoord2f (
-		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[1] * cs->skyW),
-		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[1] * cs->skyH));
+		COMP_TEX_COORD_X (&cs->sky.matrix, afTexCoordX[1] * cs->skyW),
+		COMP_TEX_COORD_Y (&cs->sky.matrix, afTexCoordY[1] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    /* bottom-left */
@@ -583,8 +583,8 @@ cubeUpdateSkyDomeList (CompScreen *s,
 	    y = sint1[j + 1];
 
 	    glTexCoord2f (
-		COMP_TEX_COORD_X( &cs->sky.matrix, afTexCoordX[2] * cs->skyW),
-		COMP_TEX_COORD_Y( &cs->sky.matrix, afTexCoordY[2] * cs->skyH));
+		COMP_TEX_COORD_X (&cs->sky.matrix, afTexCoordX[2] * cs->skyW),
+		COMP_TEX_COORD_Y (&cs->sky.matrix, afTexCoordY[2] * cs->skyH));
 	    glVertex3f (x * r * fRadius, y * r * fRadius, z * fRadius);
 
 	    afTexCoordX[0] -= fStepX;
@@ -1039,8 +1039,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
     ftb = cs->checkOrientation (s, sAttrib, transform, outputPtr, vPoints);
 
-    if ((paintOrder == FTB && !ftb) ||
-	(paintOrder == BTF && ftb))
+    if ((paintOrder == FTB && !ftb) || (paintOrder == BTF && ftb))
 	return;
 
     output = (outputPtr->id != ~0) ? outputPtr->id : 0;
@@ -1505,8 +1504,9 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	static float bottom[3][3] = { { 0.5, -0.5, 0.0},
 				      { 0.0, -0.5, -0.5},
 				      { 0.0, -0.5, 0.0}};
-	topDir    = cs->checkOrientation(s, &sa, transform, outputPtr, top);
-	bottomDir = cs->checkOrientation(s, &sa, transform, outputPtr, bottom);
+	topDir    = (*cs->checkOrientation) (s, &sa, transform, outputPtr, top);
+	bottomDir = (*cs->checkOrientation) (s, &sa, transform,
+					     outputPtr, bottom);
 
 	cs->capsPainted[output] = TRUE;
 
@@ -1611,7 +1611,7 @@ cubeUnSetBackgroundOpacity (CompScreen* s)
 	    glColor3usv (defaultColor);
 	    glDisable (GL_BLEND);
 	    glBlendFunc (GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	    screenTexEnvMode(s, GL_REPLACE);
+	    screenTexEnvMode (s, GL_REPLACE);
 	}
     }
 }
@@ -1625,7 +1625,7 @@ cubePaintBackground (CompScreen   *s,
 
     CUBE_SCREEN (s);
 
-    cubeSetBackgroundOpacity(s);
+    cubeSetBackgroundOpacity (s);
 
     n = cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value.list.nValue;
     if (n)
@@ -1638,7 +1638,7 @@ cubePaintBackground (CompScreen   *s,
 
 	if (!nBox)
 	{
-	    cubeUnSetBackgroundOpacity(s);
+	    cubeUnSetBackgroundOpacity (s);
 	    return;
 	}
 
@@ -1647,7 +1647,7 @@ cubePaintBackground (CompScreen   *s,
 	if (s->desktopWindowCount)
 	{
 	    cubeUnloadBackgrounds (s);
-	    cubeUnSetBackgroundOpacity(s);
+	    cubeUnSetBackgroundOpacity (s);
 	    return;
 	}
 	else
@@ -1664,7 +1664,7 @@ cubePaintBackground (CompScreen   *s,
 	data = malloc (sizeof (GLfloat) * nBox * 16);
 	if (!data)
 	{
-	    cubeUnSetBackgroundOpacity(s);
+	    cubeUnSetBackgroundOpacity (s);
 	    return;
 	}
 
@@ -1724,7 +1724,7 @@ cubePaintBackground (CompScreen   *s,
 	WRAP (cs, s, paintBackground, cubePaintBackground);
     }
 
-    cubeUnSetBackgroundOpacity(s);
+    cubeUnSetBackgroundOpacity (s);
 }
 
 static Bool
@@ -1734,9 +1734,9 @@ cubePaintWindow (CompWindow		  *w,
 		 Region			  region,
 		 unsigned int		  mask)
 {
-    Bool status;
-    CompScreen* s = w->screen;
-    CUBE_SCREEN(s);
+    Bool       status;
+    CompScreen *s = w->screen;
+    CUBE_SCREEN (s);
 
     WindowPaintAttrib wa = *attrib;
 
