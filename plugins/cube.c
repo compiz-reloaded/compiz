@@ -1485,9 +1485,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     }
 
     if (cs->invert == -1 || cs->desktopOpacity != OPAQUE)
-	cubePaintAllViewports (s, &sa,transform, region,
-			       outputPtr, mask, xMove,
-			       size, hsize, paintOrder);
+	cubePaintAllViewports (s, &sa, transform, region, outputPtr,
+			       mask, xMove, size, hsize, paintOrder);
 
     if (wasCulled && cs->desktopOpacity != OPAQUE)
 	glDisable (GL_CULL_FACE);
