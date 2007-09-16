@@ -1738,14 +1738,23 @@ cubePaintWindow (CompWindow		  *w,
     CompScreen *s = w->screen;
     CUBE_SCREEN (s);
 
-    WindowPaintAttrib wa = *attrib;
+    if ((w->type & CompWindowTypeDesktopMask) &&
+	(attrib->opacity != cs->desktopOpacity))
+    {
+	WindowPaintAttrib wAttrib = *attrib;
 
-    if (w->type & CompWindowTypeDesktopMask)
-	wa.opacity = cs->desktopOpacity;
+	wAttrib.opacity = cs->desktopOpacity;
 
-    UNWRAP (cs, s, paintWindow);
-    status = (*s->paintWindow) (w, &wa, transform, region, mask);
-    WRAP (cs, s, paintWindow, cubePaintWindow);
+	UNWRAP (cs, s, paintWindow);
+	status = (*s->paintWindow) (w, &wAttrib, transform, region, mask);
+	WRAP (cs, s, paintWindow, cubePaintWindow);
+    }
+    else
+    {
+	UNWRAP (cs, s, paintWindow);
+	status = (*s->paintWindow) (w, attrib, transform, region, mask);
+	WRAP (cs, s, paintWindow, cubePaintWindow);
+    }
 
     return status;
 }
