@@ -30,10 +30,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <compiz-core.h>
+
 #include <X11/Xatom.h>
 #include <X11/extensions/Xrender.h>
-
-#include <compiz-core.h>
 
 #define ZOOMED_WINDOW_MASK (1 << 0)
 #define NORMAL_WINDOW_MASK (1 << 1)
