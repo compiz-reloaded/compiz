@@ -1692,6 +1692,8 @@ addScreen (CompDisplay *display,
     s->paintScreen		  = paintScreen;
     s->paintOutput		  = paintOutput;
     s->paintTransformedOutput	  = paintTransformedOutput;
+    s->enableOutputClipping	  = enableOutputClipping;
+    s->disableOutputClipping	  = disableOutputClipping;
     s->applyScreenTransform	  = applyScreenTransform;
     s->paintBackground		  = paintBackground;
     s->paintWindow		  = paintWindow;

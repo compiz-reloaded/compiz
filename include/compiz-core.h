@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20070914
+#define CORE_ABIVERSION 20070917
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1328,6 +1328,13 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 					  CompOutput		  *output,
 					  CompTransform	          *transform);
 
+typedef void (*EnableOutputClippingProc) (CompScreen 	      *screen,
+					  const CompTransform *transform,
+					  Region	      region,
+					  CompOutput 	      *output);
+
+typedef void (*DisableOutputClippingProc) (CompScreen *screen);
+
 typedef void (*WalkerFiniProc) (CompScreen *screen,
 				CompWalker *walker);
 
@@ -1458,6 +1465,15 @@ applyScreenTransform (CompScreen	      *screen,
 		      const ScreenPaintAttrib *sAttrib,
 		      CompOutput	      *output,
 		      CompTransform	      *transform);
+
+void
+enableOutputClipping (CompScreen	  *screen,
+		      const CompTransform *transform,
+		      Region		  region,
+		      CompOutput 	  *output);
+
+void
+disableOutputClipping (CompScreen *screen);
 
 void
 paintScreen (CompScreen   *screen,
@@ -2080,6 +2096,8 @@ struct _CompScreen {
     PaintScreenProc		   paintScreen;
     PaintOutputProc		   paintOutput;
     PaintTransformedOutputProc	   paintTransformedOutput;
+    EnableOutputClippingProc	   enableOutputClipping;
+    DisableOutputClippingProc	   disableOutputClipping;
     ApplyScreenTransformProc	   applyScreenTransform;
     PaintBackgroundProc		   paintBackground;
     PaintWindowProc		   paintWindow;

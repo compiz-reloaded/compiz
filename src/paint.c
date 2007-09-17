@@ -249,6 +249,52 @@ paintOutputRegion (CompScreen	       *screen,
 	(*screen->paintCursor) (c, transform, tmpRegion, 0);
 }
 
+void
+enableOutputClipping (CompScreen 	  *screen,
+		      const CompTransform *transform,
+		      Region		  region,
+		      CompOutput 	  *output)
+{
+    GLdouble h = screen->height;
+
+    GLdouble p1[2] = { region->extents.x1, h - region->extents.y2 };
+    GLdouble p2[2] = { region->extents.x2, h - region->extents.y1 };
+
+    GLdouble halfW = output->width / 2.0;
+    GLdouble halfH = output->height / 2.0;
+
+    GLdouble cx = output->region.extents.x1 + halfW;
+    GLdouble cy = (h - output->region.extents.y2) + halfH;
+
+    GLdouble top[4]    = { 0.0, halfH / (cy - p1[1]), 0.0, 0.5 };
+    GLdouble bottom[4] = { 0.0, halfH / (cy - p2[1]), 0.0, 0.5 };
+    GLdouble left[4]   = { halfW / (cx - p1[0]), 0.0, 0.0, 0.5 };
+    GLdouble right[4]  = { halfW / (cx - p2[0]), 0.0, 0.0, 0.5 };
+
+    glPushMatrix ();
+    glLoadMatrixf (transform->m);
+
+    glClipPlane (GL_CLIP_PLANE0, top);
+    glClipPlane (GL_CLIP_PLANE1, bottom);
+    glClipPlane (GL_CLIP_PLANE2, left);
+    glClipPlane (GL_CLIP_PLANE3, right);
+
+    glEnable (GL_CLIP_PLANE0);
+    glEnable (GL_CLIP_PLANE1);
+    glEnable (GL_CLIP_PLANE2);
+    glEnable (GL_CLIP_PLANE3);
+
+    glPopMatrix ();
+}
+
+void
+disableOutputClipping (CompScreen *screen)
+{
+    glDisable (GL_CLIP_PLANE0);
+    glDisable (GL_CLIP_PLANE1);
+    glDisable (GL_CLIP_PLANE2);
+    glDisable (GL_CLIP_PLANE3);
+}
 
 #define CLIP_PLANE_MASK (PAINT_SCREEN_TRANSFORMED_MASK | \
 			 PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK)
@@ -272,48 +318,19 @@ paintTransformedOutput (CompScreen		*screen,
 
     if ((mask & CLIP_PLANE_MASK) == CLIP_PLANE_MASK)
     {
-	GLdouble h = screen->height;
-
-	GLdouble p1[2] = { region->extents.x1, h - region->extents.y2 };
-	GLdouble p2[2] = { region->extents.x2, h - region->extents.y1 };
-
-	GLdouble halfW = output->width / 2.0;
-	GLdouble halfH = output->height / 2.0;
-
-	GLdouble cx = output->region.extents.x1 + halfW;
-	GLdouble cy = (h - output->region.extents.y2) + halfH;
-
-	GLdouble top[4]    = { 0.0, halfH / (cy - p1[1]), 0.0, 0.5 };
-	GLdouble bottom[4] = { 0.0, halfH / (cy - p2[1]), 0.0, 0.5 };
-	GLdouble left[4]   = { halfW / (cx - p1[0]), 0.0, 0.0, 0.5 };
-	GLdouble right[4]  = { halfW / (cx - p2[0]), 0.0, 0.0, 0.5 };
-
-	glPushMatrix ();
-	glLoadMatrixf (sTransform.m);
-
-	glClipPlane (GL_CLIP_PLANE0, top);
-	glClipPlane (GL_CLIP_PLANE1, bottom);
-	glClipPlane (GL_CLIP_PLANE2, left);
-	glClipPlane (GL_CLIP_PLANE3, right);
-
-	glEnable (GL_CLIP_PLANE0);
-	glEnable (GL_CLIP_PLANE1);
-	glEnable (GL_CLIP_PLANE2);
-	glEnable (GL_CLIP_PLANE3);
+	screen->enableOutputClipping (screen, &sTransform, region, output);
 
 	transformToScreenSpace (screen, output, -sAttrib->zTranslate,
 				&sTransform);
 
+	glPushMatrix ();
 	glLoadMatrixf (sTransform.m);
 
 	paintOutputRegion (screen, &sTransform, region, output, mask);
 
-	glDisable (GL_CLIP_PLANE0);
-	glDisable (GL_CLIP_PLANE1);
-	glDisable (GL_CLIP_PLANE2);
-	glDisable (GL_CLIP_PLANE3);
-
 	glPopMatrix ();
+
+	screen->disableOutputClipping (screen);
     }
     else
     {
