@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define CUBE_ABIVERSION 20070906
+#define CUBE_ABIVERSION 20070917
 
 typedef struct _CubeCore {
     SetOptionForPluginProc setOptionForPlugin;
@@ -124,6 +124,7 @@ typedef struct _CubeScreen {
     DonePaintScreenProc	         donePaintScreen;
     PaintOutputProc	         paintOutput;
     PaintTransformedOutputProc   paintTransformedOutput;
+    EnableOutputClippingProc     enableOutputClipping;
     PaintBackgroundProc          paintBackground;
     PaintWindowProc              paintWindow;
     ApplyScreenTransformProc     applyScreenTransform;

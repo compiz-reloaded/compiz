@@ -1355,6 +1355,51 @@ cubePaintInside (CompScreen		 *s,
 }
 
 static void
+cubeEnableOutputClipping (CompScreen 	      *s,
+			  const CompTransform *transform,
+			  Region	      region,
+			  CompOutput 	      *output)
+{
+    CUBE_SCREEN (s);
+
+    glPushMatrix ();
+    glLoadMatrixf (transform->m);
+    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
+    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
+
+    if (cs->invert == 1)
+    {
+	GLdouble clipPlane0[] = {  1.0, 0.0, 0.5 / cs->distance, 0.0 };
+	GLdouble clipPlane1[] = {  -1.0,  0.0, 0.5 / cs->distance, 0.0 };
+	GLdouble clipPlane2[] = {  0.0,  -1.0, 0.5 / cs->distance, 0.0 };
+	GLdouble clipPlane3[] = { 0.0,  1.0, 0.5 / cs->distance, 0.0 };
+	glClipPlane (GL_CLIP_PLANE0, clipPlane0);
+	glClipPlane (GL_CLIP_PLANE1, clipPlane1);
+	glClipPlane (GL_CLIP_PLANE2, clipPlane2);
+	glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+    }
+    else
+    {
+	GLdouble clipPlane0[] = {  -1.0, 0.0, -0.5 / cs->distance, 0.0 };
+	GLdouble clipPlane1[] = {  1.0,  0.0, -0.5 / cs->distance, 0.0 };
+	GLdouble clipPlane2[] = {  0.0,  1.0, -0.5 / cs->distance, 0.0 };
+	GLdouble clipPlane3[] = { 0.0,  -1.0, -0.5 / cs->distance, 0.0 };
+	glClipPlane (GL_CLIP_PLANE0, clipPlane0);
+	glClipPlane (GL_CLIP_PLANE1, clipPlane1);
+	glClipPlane (GL_CLIP_PLANE2, clipPlane2);
+	glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+    }
+
+    glEnable (GL_CLIP_PLANE0);
+    glEnable (GL_CLIP_PLANE1);
+    glEnable (GL_CLIP_PLANE2);
+    glEnable (GL_CLIP_PLANE3);
+
+    glPopMatrix ();
+
+}
+
+static void
 cubePaintTransformedOutput (CompScreen		    *s,
 			    const ScreenPaintAttrib *sAttrib,
 			    const CompTransform	    *transform,
@@ -2239,6 +2284,7 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
     WRAP (cs, s, paintOutput, cubePaintOutput);
     WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
+    WRAP (cs, s, enableOutputClipping, cubeEnableOutputClipping);
     WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, paintWindow, cubePaintWindow);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
@@ -2264,6 +2310,7 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, donePaintScreen);
     UNWRAP (cs, s, paintOutput);
     UNWRAP (cs, s, paintTransformedOutput);
+    UNWRAP (cs, s, enableOutputClipping);
     UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, paintWindow);
     UNWRAP (cs, s, applyScreenTransform);
