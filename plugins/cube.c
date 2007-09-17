@@ -1408,7 +1408,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
-    float	      xRotate, vRotate;
+    float	      xRotate, vRotate, rRotate;
     int		      hsize, xMove = 0;
     float	      size;
     GLenum            filter = s->display->textureFilter;
@@ -1467,7 +1467,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     if (!cs->cleared[output])
     {
-	(*cs->clearTargetOutput) (s, xRotate, vRotate);
+	rRotate = xRotate - ((360.0f / hsize) * (s->x * cs->nOutput));
+	(*cs->clearTargetOutput) (s, rRotate, vRotate);
 	cs->cleared[output] = TRUE;
     }
 
