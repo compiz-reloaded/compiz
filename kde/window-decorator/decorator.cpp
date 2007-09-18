@@ -1021,6 +1021,8 @@ KWD::Decorator::handleWindowChanged (WId		 id,
 
     if (properties[0] & NET::WMName)
 	client->updateName ();
+    if (properties[0] & NET::WMVisibleName)
+	client->updateName ();
     if (properties[0] & NET::WMState)
 	client->updateState ();
     if (properties[0] & NET::WMIcon)

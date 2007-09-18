@@ -89,13 +89,18 @@ KWD::Window::Window (QWidget *parent,
 
     if (mType == Normal || mType == Switcher)
     {
-	KWin::WindowInfo wInfo = KWin::windowInfo (mClientId, NET::WMState, 0);
+	KWin::WindowInfo wInfo = KWin::windowInfo (mClientId, NET::WMState |
+			                           NET::WMVisibleName, 0);
 
 	mState = wInfo.state ();
 
 	if (mType == Normal)
 	{
-	    mName = KWin::readNameProperty (mClientId, XA_WM_NAME);
+	    if (wInfo.visibleName () && wInfo.visibleName ()[0] != '\0')
+        	mName = QString::fromUtf8 (wInfo.visibleName ());
+	    else
+        	mName = KWin::readNameProperty (mClientId, XA_WM_NAME);
+
 	    mIcons = QIconSet (KWin::icon (mClientId, 16, 16, TRUE),
 			       KWin::icon (mClientId, 32, 32, TRUE));
 	    mOpacity = readPropertyShort (mClientId, Atoms::netWmWindowOpacity,
@@ -1689,17 +1694,24 @@ KWD::Window::updateState (void)
 void
 KWD::Window::updateName (void)
 {
+    KWin::WindowInfo wInfo;
+    WId              window;
+
     if (mType == Switcher)
     {
 	if (!mSelectedId)
 	    return;
-
-	mName = KWin::readNameProperty (mSelectedId, XA_WM_NAME);
+	window = mSelectedId;
     }
     else
-    {
-	mName = KWin::readNameProperty (mClientId, XA_WM_NAME);
-    }
+	window = mClientId;
+
+    wInfo = KWin::windowInfo (window, NET::WMVisibleName, 0);
+
+    if (wInfo.visibleName () && wInfo.visibleName ()[0] != '\0')
+	mName = QString::fromUtf8 (wInfo.visibleName());
+    else
+	mName = KWin::readNameProperty (window, XA_WM_NAME);
 
     mDecor->captionChange ();
 }
