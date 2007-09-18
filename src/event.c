@@ -185,8 +185,10 @@ static Bool
 autoRaiseTimeout (void *closure)
 {
     CompDisplay *display = closure;
+    CompWindow *w = findWindowAtDisplay (display, display->activeWindow);
 
-    if (display->autoRaiseWindow == display->activeWindow)
+    if (display->autoRaiseWindow == display->activeWindow ||
+	display->autoRaiseWindow == w->transientFor)
     {
 	CompWindow *w;
 
