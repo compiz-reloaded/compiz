@@ -1875,7 +1875,8 @@ handleEvent (CompDisplay *d,
 		{
 		    moveInputFocusToWindow (w);
 		}
-		else if (w->type & ~CompWindowTypeSplashMask)
+		else if (w->type & ~CompWindowTypeSplashMask &&
+			 w->type & ~CompWindowTypeDockMask)
 		{
 		    CompWindow *p;
 
