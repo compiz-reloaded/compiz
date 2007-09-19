@@ -309,13 +309,22 @@ iniParseLine (char *line, char **optionName, char **optionValue)
 	return FALSE;
 
     length = strlen (line) - strlen (splitPos);
-    *optionName = strndup (line, length);
+    *optionName = malloc (sizeof (char) * (length + 1));
+    if (*optionName)
+    {
+       strncpy (*optionName, line, length);
+       *optionName[length] = 0;
+    }
     splitPos++;
     optionLength = strlen (splitPos);
     if (splitPos[optionLength-1] == '\n')
 	optionLength--;
-    *optionValue = strndup (splitPos, optionLength);
-
+    *optionValue = malloc (sizeof (char) * (optionLength +1));
+    if (*optionValue)
+    {
+      strncpy (*optionValue, splitPos, optionLength);
+      *optionValue[optionLength] = 0;
+    }
     return TRUE;
 }
 
@@ -350,7 +359,12 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 	    if (splitEnd)
 	    {
 		itemLength = strlen (splitStart) - strlen (splitEnd);
-		item = strndup (splitStart, itemLength);
+		item = malloc (sizeof (char) * (itemLength + 1));
+  		if (item)
+		{
+		   strncpy (item, splitStart, itemLength);
+		   item[itemLength] = 0;
+		}
 	    }
 	    else // last value
 	    {
