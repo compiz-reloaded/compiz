@@ -185,7 +185,7 @@ static Bool
 autoRaiseTimeout (void *closure)
 {
     CompDisplay *display = closure;
-    CompWindow *w = findWindowAtDisplay (display, display->activeWindow);
+    CompWindow  *w = findWindowAtDisplay (display, display->activeWindow);
 
     if (display->autoRaiseWindow == display->activeWindow ||
 	display->autoRaiseWindow == w->transientFor)
@@ -1316,7 +1316,7 @@ handleEvent (CompDisplay *d,
 		if (w)
 		{
 		    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
-			updateWindowAttributes (w, 
+			updateWindowAttributes (w,
 					CompStackingUpdateModeAboveFullscreen);
 
 		    if (!(w->type & CompWindowTypeDockMask))
