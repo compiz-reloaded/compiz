@@ -2010,12 +2010,17 @@ addDisplay (const char *name)
     d->plugin.list.nValue = 1;
     d->plugin.list.value  = malloc (sizeof (CompOptionValue));
 
-    if (!d->plugin.list.value)
+    if (!d->plugin.list.value) {
+	free (d);
 	return FALSE;
+    }
 
     d->plugin.list.value->s = strdup ("core");
-    if (!d->plugin.list.value->s)
+    if (!d->plugin.list.value->s) {
+        free (d->plugin.list.value);
+	free (d);
 	return FALSE;
+    }
 
     d->dirtyPluginList = TRUE;
 
