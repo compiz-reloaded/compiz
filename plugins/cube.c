@@ -1362,41 +1362,49 @@ cubeEnableOutputClipping (CompScreen 	      *s,
 {
     CUBE_SCREEN (s);
 
-    glPushMatrix ();
-    glLoadMatrixf (transform->m);
-    glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
-    glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
-
-    if (cs->invert == 1)
+    if (cs->rotationState != RotationNone)
     {
-	GLdouble clipPlane0[] = {  1.0, 0.0, 0.5 / cs->distance, 0.0 };
-	GLdouble clipPlane1[] = {  -1.0,  0.0, 0.5 / cs->distance, 0.0 };
-	GLdouble clipPlane2[] = {  0.0,  -1.0, 0.5 / cs->distance, 0.0 };
-	GLdouble clipPlane3[] = { 0.0,  1.0, 0.5 / cs->distance, 0.0 };
-	glClipPlane (GL_CLIP_PLANE0, clipPlane0);
-	glClipPlane (GL_CLIP_PLANE1, clipPlane1);
-	glClipPlane (GL_CLIP_PLANE2, clipPlane2);
-	glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+	glPushMatrix ();
+	glLoadMatrixf (transform->m);
+	glTranslatef (cs->outputXOffset, -cs->outputYOffset, 0.0f);
+	glScalef (cs->outputXScale, cs->outputYScale, 1.0f);
+
+	if (cs->invert == 1)
+	{
+	    GLdouble clipPlane0[] = {  1.0, 0.0, 0.5 / cs->distance, 0.0 };
+	    GLdouble clipPlane1[] = {  -1.0,  0.0, 0.5 / cs->distance, 0.0 };
+	    GLdouble clipPlane2[] = {  0.0,  -1.0, 0.5 / cs->distance, 0.0 };
+	    GLdouble clipPlane3[] = { 0.0,  1.0, 0.5 / cs->distance, 0.0 };
+	    glClipPlane (GL_CLIP_PLANE0, clipPlane0);
+	    glClipPlane (GL_CLIP_PLANE1, clipPlane1);
+	    glClipPlane (GL_CLIP_PLANE2, clipPlane2);
+	    glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+	}
+	else
+	{
+	    GLdouble clipPlane0[] = {  -1.0, 0.0, -0.5 / cs->distance, 0.0 };
+	    GLdouble clipPlane1[] = {  1.0,  0.0, -0.5 / cs->distance, 0.0 };
+	    GLdouble clipPlane2[] = {  0.0,  1.0, -0.5 / cs->distance, 0.0 };
+	    GLdouble clipPlane3[] = { 0.0,  -1.0, -0.5 / cs->distance, 0.0 };
+	    glClipPlane (GL_CLIP_PLANE0, clipPlane0);
+	    glClipPlane (GL_CLIP_PLANE1, clipPlane1);
+	    glClipPlane (GL_CLIP_PLANE2, clipPlane2);
+	    glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+	}
+
+	glEnable (GL_CLIP_PLANE0);
+	glEnable (GL_CLIP_PLANE1);
+	glEnable (GL_CLIP_PLANE2);
+	glEnable (GL_CLIP_PLANE3);
+
+	glPopMatrix ();
     }
     else
     {
-	GLdouble clipPlane0[] = {  -1.0, 0.0, -0.5 / cs->distance, 0.0 };
-	GLdouble clipPlane1[] = {  1.0,  0.0, -0.5 / cs->distance, 0.0 };
-	GLdouble clipPlane2[] = {  0.0,  1.0, -0.5 / cs->distance, 0.0 };
-	GLdouble clipPlane3[] = { 0.0,  -1.0, -0.5 / cs->distance, 0.0 };
-	glClipPlane (GL_CLIP_PLANE0, clipPlane0);
-	glClipPlane (GL_CLIP_PLANE1, clipPlane1);
-	glClipPlane (GL_CLIP_PLANE2, clipPlane2);
-	glClipPlane (GL_CLIP_PLANE3, clipPlane3);
+	UNWRAP (cs, s, enableOutputClipping);
+	(*s->enableOutputClipping) (s, transform, region, output);
+	WRAP (cs, s, enableOutputClipping, cubeEnableOutputClipping);
     }
-
-    glEnable (GL_CLIP_PLANE0);
-    glEnable (GL_CLIP_PLANE1);
-    glEnable (GL_CLIP_PLANE2);
-    glEnable (GL_CLIP_PLANE3);
-
-    glPopMatrix ();
-
 }
 
 static void
