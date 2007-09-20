@@ -401,6 +401,8 @@
 		<_short>Opacity window values</_short>
 		<_long>Opacity values for windows that should be translucent by default</_long>
 		<type>int</type>
+		<min>0</min>
+		<max>100</max>
 	    </option>
 	</screen>
     </core>
