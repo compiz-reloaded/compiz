@@ -21,7 +21,7 @@
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  * Author: Mike Dransfield <mike@blueroot.co.uk>
- * 
+ *
  * Some code taken from gconf.c by :
  *                       David Reveman <davidr@novell.com>
  */
@@ -341,7 +341,7 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 	list->nValue = 0;
 	return FALSE;
     }
- 
+
     int length = strlen (csv);
     count = 1;
     for (i = 0; csv[i] != '\0'; i++)
@@ -360,7 +360,7 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 	    {
 		itemLength = strlen (splitStart) - strlen (splitEnd);
 		item = malloc (sizeof (char) * (itemLength + 1));
-  		if (item)
+		if (item)
 		{
 		   strncpy (item, splitStart, itemLength);
 		   item[itemLength] = 0;
