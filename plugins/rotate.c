@@ -559,20 +559,30 @@ rotatePaintOutput (CompScreen		   *s,
 		   unsigned int		   mask)
 {
     Bool status;
-    ScreenPaintAttrib sA = *sAttrib;
 
     ROTATE_SCREEN (s);
 
     if (rs->grabIndex || rs->moving || rs->zoomTranslate != 0.0f)
     {
-	sA.zCamera -= rs->zoomTranslate;
+	CompTransform sTransform = *transform;
+
+	matrixTranslate (&sTransform, 0.0f, 0.0f, -rs->zoomTranslate);
+
 	mask &= ~PAINT_SCREEN_REGION_MASK;
 	mask |= PAINT_SCREEN_TRANSFORMED_MASK;
-    }
 
-    UNWRAP (rs, s, paintOutput);
-    status = (*s->paintOutput) (s, &sA, transform, region, output, mask);
-    WRAP (rs, s, paintOutput, rotatePaintOutput);
+	UNWRAP (rs, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, &sTransform, region,
+				    output, mask);
+	WRAP (rs, s, paintOutput, rotatePaintOutput);
+    }
+    else
+    {
+	UNWRAP (rs, s, paintOutput);
+	status = (*s->paintOutput) (s, sAttrib, transform, region,
+				    output, mask);
+	WRAP (rs, s, paintOutput, rotatePaintOutput);
+    }
 
     return status;
 }
