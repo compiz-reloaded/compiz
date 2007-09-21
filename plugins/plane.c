@@ -72,9 +72,6 @@ typedef struct _PlaneScreen {
     DonePaintScreenProc			donePaintScreen;
     PaintOutputProc			paintOutput;
 
-    WindowGrabNotifyProc		windowGrabNotify;
-    WindowUngrabNotifyProc		windowUngrabNotify;
-
     CompTimeoutHandle			timeoutHandle;
     int					timer;
 
@@ -424,30 +421,6 @@ planeHandleEvent (CompDisplay *d,
     WRAP (pd, d, handleEvent, planeHandleEvent);
 }
 
-static void
-planeWindowGrabNotify (CompWindow   *w,
-		       int	    x,
-		       int	    y,
-		       unsigned int state,
-		       unsigned int mask)
-{
-    PLANE_SCREEN (w->screen);
-
-    UNWRAP (ps, w->screen, windowGrabNotify);
-    (*w->screen->windowGrabNotify) (w, x, y, state, mask);
-    WRAP (ps, w->screen, windowGrabNotify, planeWindowGrabNotify);
-}
-
-static void
-planeWindowUngrabNotify (CompWindow *w)
-{
-    PLANE_SCREEN (w->screen);
-
-    UNWRAP (ps, w->screen, windowUngrabNotify);
-    (*w->screen->windowUngrabNotify) (w);
-    WRAP (ps, w->screen, windowUngrabNotify, planeWindowUngrabNotify);
-}
-
 static CompOption *
 planeGetDisplayOptions (CompPlugin  *plugin,
 			CompDisplay *display,
@@ -666,8 +639,6 @@ planeInitScreen (CompPlugin *p,
     WRAP (ps, s, preparePaintScreen, planePreparePaintScreen);
     WRAP (ps, s, donePaintScreen, planeDonePaintScreen);
     WRAP (ps, s, paintOutput, planePaintOutput);
-    WRAP (ps, s, windowGrabNotify, planeWindowGrabNotify);
-    WRAP (ps, s, windowUngrabNotify, planeWindowUngrabNotify);
 
     s->base.privates[pd->screenPrivateIndex].ptr = ps;
 
@@ -684,8 +655,6 @@ planeFiniScreen (CompPlugin *p,
     UNWRAP (ps, s, preparePaintScreen);
     UNWRAP (ps, s, donePaintScreen);
     UNWRAP (ps, s, paintOutput);
-    UNWRAP (ps, s, windowGrabNotify);
-    UNWRAP (ps, s, windowUngrabNotify);
 
     free (ps);
 }
