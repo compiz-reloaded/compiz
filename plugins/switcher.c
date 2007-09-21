@@ -1309,18 +1309,18 @@ switchPaintOutput (CompScreen		   *s,
 
     if (ss->grabIndex || (ss->zooming && ss->translate > 0.001f))
     {
-	ScreenPaintAttrib sa = *sAttrib;
-	CompWindow	  *zoomed;
-	CompWindow	  *switcher;
-	Window		  zoomedAbove = None;
-	Bool		  saveDestroyed = FALSE;
+	CompTransform sTransform = *transform;
+	CompWindow    *zoomed;
+	CompWindow    *switcher;
+	Window	      zoomedAbove = None;
+	Bool	      saveDestroyed = FALSE;
 
 	if (ss->zooming)
 	{
 	    mask &= ~PAINT_SCREEN_REGION_MASK;
 	    mask |= PAINT_SCREEN_TRANSFORMED_MASK | PAINT_SCREEN_CLEAR_MASK;
 
-	    sa.zCamera -= ss->translate;
+	    matrixTranslate (&sTransform, 0.0f, 0.0f, -ss->translate);
 
 	    ss->zoomMask = NORMAL_WINDOW_MASK;
 	}
@@ -1352,20 +1352,24 @@ switchPaintOutput (CompScreen		   *s,
 	}
 
 	UNWRAP (ss, s, paintOutput);
-	status = (*s->paintOutput) (s, &sa, transform, region, output, mask);
+	status = (*s->paintOutput) (s, sAttrib, &sTransform,
+				    region, output, mask);
 	WRAP (ss, s, paintOutput, switchPaintOutput);
 
 	if (ss->zooming)
 	{
+	    float zTranslate;
+
 	    mask &= ~PAINT_SCREEN_CLEAR_MASK;
 
 	    ss->zoomMask = ZOOMED_WINDOW_MASK;
 
-	    sa.zCamera += MIN (ss->sTranslate, ss->translate);
+	    zTranslate = MIN (ss->sTranslate, ss->translate);
+	    matrixTranslate (&sTransform, 0.0f, 0.0f, zTranslate);
 
 	    UNWRAP (ss, s, paintOutput);
-	    status = (*s->paintOutput) (s, &sa, transform, region, output,
-					mask);
+	    status = (*s->paintOutput) (s, sAttrib, &sTransform, region,
+					output, mask);
 	    WRAP (ss, s, paintOutput, switchPaintOutput);
 	}
 
@@ -1377,7 +1381,7 @@ switchPaintOutput (CompScreen		   *s,
 
 	if (switcher)
 	{
-	    CompTransform sTransform = *transform;
+	    sTransform = *transform;
 
 	    switcher->destroyed = saveDestroyed;
 
