@@ -1074,18 +1074,26 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	(*s->paintTransformedOutput) (s, sAttrib, transform,
 				      &s->outputDev[output].region,
 				      &s->outputDev[output], mask);
+	(*cs->postPaintViewport) (s, sAttrib, transform,
+				  &s->outputDev[output],
+				  &s->outputDev[output].region);
 	moveScreenViewport (s, dView, 0, FALSE);
     }
     else
     {
+	Region region;
+
 	moveScreenViewport (s, dx, 0, FALSE);
+
 	if (cs->moMode == CUBE_MOMODE_MULTI)
-		(*s->paintTransformedOutput) (s, sAttrib, transform,
-					      &outputPtr->region, outputPtr,
-					      mask);
+	    region = &outputPtr->region;
 	else
-		(*s->paintTransformedOutput) (s, sAttrib, transform, &s->region,
-					      outputPtr, mask);
+	    region = &s->region;
+
+	(*s->paintTransformedOutput) (s, sAttrib, transform, region,
+				      outputPtr, mask);
+	(*cs->postPaintViewport) (s, sAttrib, transform, outputPtr, region);
+
 	moveScreenViewport (s, -dx, 0, FALSE);
     }
 }
@@ -1405,6 +1413,15 @@ cubeEnableOutputClipping (CompScreen 	      *s,
 	(*s->enableOutputClipping) (s, transform, region, output);
 	WRAP (cs, s, enableOutputClipping, cubeEnableOutputClipping);
     }
+}
+
+static void
+cubePostPaintViewport (CompScreen              *s,
+		       const ScreenPaintAttrib *sAttrib,
+		       const CompTransform     *transform,
+		       CompOutput              *output,
+		       Region                  region)
+{
 }
 
 static void
@@ -2241,6 +2258,7 @@ cubeInitScreen (CompPlugin *p,
     cs->paintBottom       = cubePaintBottom;
     cs->paintInside       = cubePaintInside;
     cs->checkOrientation  = cubeCheckOrientation;
+    cs->postPaintViewport = cubePostPaintViewport;
 
     s->base.privates[cd->screenPrivateIndex].ptr = cs;
 

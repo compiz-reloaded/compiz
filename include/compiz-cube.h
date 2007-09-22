@@ -108,6 +108,12 @@ typedef Bool (*CubeCheckOrientationProc) (CompScreen              *s,
 					  CompOutput              *output,
 					  float                   points[3][3]);
 
+typedef void (*CubePostPaintViewportProc) (CompScreen              *s,
+					   const ScreenPaintAttrib *sAttrib,
+					   const CompTransform     *transform,
+					   CompOutput              *output,
+					   Region                  region);
+
 typedef enum _PaintOrder {
     BTF = 0,
     FTB
@@ -137,6 +143,7 @@ typedef struct _CubeScreen {
     CubePaintBottomProc       paintBottom;
     CubePaintInsideProc       paintInside;
     CubeCheckOrientationProc  checkOrientation;
+    CubePostPaintViewportProc postPaintViewport;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
