@@ -1039,7 +1039,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 			    { 0.0, 0.5, cs->invert * cs->distance},
 			    { 0.0, 0.0, cs->invert * cs->distance}};
 
-    ftb = cs->checkOrientation (s, sAttrib, transform, outputPtr, vPoints);
+    ftb = (*cs->checkOrientation) (s, sAttrib, transform, outputPtr, vPoints);
 
     if ((paintOrder == FTB && !ftb) || (paintOrder == BTF && ftb))
 	return;
