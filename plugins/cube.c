@@ -900,6 +900,8 @@ cubePreparePaintScreen (CompScreen *s,
 	}
     }
 
+    cs->paintAllViewports = (cs->desktopOpacity != OPAQUE);
+
     UNWRAP (cs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
@@ -1555,7 +1557,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	paintOrder = BTF;
     }
 
-    if (cs->invert == -1 || cs->desktopOpacity != OPAQUE)
+    if (cs->invert == -1 || cs->paintAllViewports)
 	cubePaintAllViewports (s, &sa, transform, region, outputPtr,
 			       mask, xMove, size, hsize, paintOrder);
 
@@ -1629,7 +1631,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	paintOrder = FTB;
     }
 
-    if (cs->invert == 1 || cs->desktopOpacity != OPAQUE)
+    if (cs->invert == 1 || cs->paintAllViewports)
 	cubePaintAllViewports (s, &sa, transform, region,
 			       outputPtr, mask, xMove,
 			       size, hsize, paintOrder);
@@ -2272,7 +2274,8 @@ cubeInitScreen (CompPlugin *p,
 
     cs->unfoldVelocity = 0.0f;
 
-    cs->fullscreenOutput = TRUE;
+    cs->paintAllViewports = FALSE;
+    cs->fullscreenOutput  = TRUE;
 
     cs->bg  = NULL;
     cs->nBg = 0;

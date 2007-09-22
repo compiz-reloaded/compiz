@@ -153,6 +153,8 @@ typedef struct _CubeScreen {
 
     RotationState rotationState;
 
+    Bool paintAllViewports;
+
     GLfloat  distance;
     GLushort color[3];
     GLfloat  tc[12];
