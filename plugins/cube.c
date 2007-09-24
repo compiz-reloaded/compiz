@@ -1548,7 +1548,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     {
 	/* Outside cube - start with FTB faces */
 	paintOrder = FTB;
-	if (wasCulled && cs->desktopOpacity != OPAQUE)
+	if (wasCulled && cs->paintAllViewports)
 	    glDisable (GL_CULL_FACE);
     }
     else
@@ -1561,7 +1561,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	cubePaintAllViewports (s, &sa, transform, region, outputPtr,
 			       mask, xMove, size, hsize, paintOrder);
 
-    if (wasCulled && cs->desktopOpacity != OPAQUE)
+    if (wasCulled && cs->paintAllViewports)
 	glDisable (GL_CULL_FACE);
 
     capsPainted = cs->capsPainted[output];
@@ -1585,7 +1585,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	if (topDir && bottomDir)
 	{
 	    glNormal3f (0.0f, -1.0f, 0.0f);
-	    if (cs->desktopOpacity != OPAQUE)
+	    if (cs->paintAllViewports)
 	    {
 		(*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
 		glNormal3f (0.0f, 0.0f, -1.0f);
@@ -1597,7 +1597,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	else if (!topDir && !bottomDir)
 	{
 	    glNormal3f (0.0f, 1.0f, 0.0f);
-	    if (cs->desktopOpacity != OPAQUE)
+	    if (cs->paintAllViewports)
 	    {
 		(*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
 		glNormal3f (0.0f, 0.0f, -1.0f);
@@ -1606,7 +1606,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	    }
 	    (*cs->paintBottom) (s, &sa, transform, outputPtr, hsize);
 	}
-	else if (cs->desktopOpacity != OPAQUE)
+	else if (cs->paintAllViewports)
 	{
 	    glNormal3f (0.0f, 1.0f, 0.0f);
 	    (*cs->paintTop) (s, &sa, transform, outputPtr, hsize);
@@ -1622,7 +1622,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     {
 	/* Outside cube - continue with BTF faces */
 	paintOrder = BTF;
-	if (wasCulled && cs->desktopOpacity != OPAQUE)
+	if (wasCulled && cs->paintAllViewports)
 	    glEnable (GL_CULL_FACE);
     }
     else
