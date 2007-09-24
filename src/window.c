@@ -2477,6 +2477,9 @@ unmapWindow (CompWindow *w)
 		      w->attrib.border_width);
 
     updateClientListForScreen (w->screen);
+
+    if (!w->redirected)
+	redirectWindow (w);
 }
 
 static int
