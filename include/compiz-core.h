@@ -2964,6 +2964,8 @@ int
 compareWindowActiveness (CompWindow *w1,
 			 CompWindow *w2);
 
+Bool
+windowOnAllViewports (CompWindow *w);
 
 /* plugin.c */
 

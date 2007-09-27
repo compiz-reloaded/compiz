@@ -4980,3 +4980,21 @@ compareWindowActiveness (CompWindow *w1,
 
     return w1->activeNum - w2->activeNum;
 }
+
+Bool
+windowOnAllViewports (CompWindow *w)
+{
+    if (w->attrib.override_redirect)
+	return TRUE;
+
+    if (!w->managed && w->attrib.map_state != IsViewable)
+	return TRUE;
+
+    if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
+	return TRUE;
+
+    if (w->state & CompWindowStateStickyMask)
+	return TRUE;
+
+    return FALSE;
+}
