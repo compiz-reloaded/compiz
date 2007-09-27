@@ -1375,6 +1375,12 @@ struct _CompWalker {
 #define PAINT_WINDOW_OCCLUSION_DETECTION_MASK   (1 << 1)
 
 /*
+  this flag indicates that the window ist painted with
+  an offset
+*/
+#define PAINT_WINDOW_WITH_OFFSET_MASK           (1 << 2)
+
+/*
   flag indicate that window is translucent.
 */
 #define PAINT_WINDOW_TRANSLUCENT_MASK           (1 << 16)
