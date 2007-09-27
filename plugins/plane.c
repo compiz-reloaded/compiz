@@ -225,30 +225,29 @@ planePaintTransformedOutput (CompScreen		     *screen,
 	while (dx > 1)
 	{
 	    dx -= 1.0;
-	    moveScreenViewport (screen, 1, 0, FALSE);
 	    vx++;
 	}
 
 	while (dx < -1)
 	{
 	    dx += 1.0;
-	    moveScreenViewport (screen, -1, 0, FALSE);
 	    vx--;
 	}
 
 	while (dy > 1)
 	{
 	    dy -= 1.0;
-	    moveScreenViewport (screen, 0, 1, FALSE);
 	    vy++;
 	}
 
 	while (dy < -1)
 	{
 	    dy += 1.0;
-	    moveScreenViewport (screen, 0, -1, FALSE);
 	    vy--;
 	}
+
+	setWindowPaintOffset (screen, vx * screen->width,
+			      vy * screen->height);
 
 	matrixTranslate (&sTransform, dx, -dy, 0.0);
 
@@ -258,55 +257,52 @@ planePaintTransformedOutput (CompScreen		     *screen,
 	if (dx > 0)
 	{
 	    matrixTranslate (&sTransform, -1.0, 0.0, 0.0);
-	    moveScreenViewport (screen, 1, 0, FALSE);
+	    vx++;
 	}
 	else
 	{
 	    matrixTranslate (&sTransform, 1.0, 0.0, 0.0);
-	    moveScreenViewport (screen, -1, 0, FALSE);
+	    vx--;
 	}
 
+	setWindowPaintOffset (screen, vx * screen->width,
+			      vy * screen->height);
 	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
 	if (dy > 0)
 	{
 	    matrixTranslate (&sTransform, 0.0, 1.0, 0.0);
-	    moveScreenViewport (screen, 0, 1, FALSE);
+	    vy++;
 	}
 	else
 	{
 	    matrixTranslate (&sTransform, 0.0, -1.0, 0.0);
-	    moveScreenViewport (screen, 0, -1, FALSE);
+	    vy--;
 	}
 
+	setWindowPaintOffset (screen, vx * screen->width,
+			      vy * screen->height);
 	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
 	if (dx > 0)
 	{
 	    matrixTranslate (&sTransform, 1.0, 0.0, 0.0);
-	    moveScreenViewport (screen, -1, 0, FALSE);
+	    vx--;
 	}
 	else
 	{
 	    matrixTranslate (&sTransform, -1.0, 0.0, 0.0);
-	    moveScreenViewport (screen, 1, 0, FALSE);
+	    vx++;
 	}
 
+	setWindowPaintOffset (screen, vx * screen->width,
+			      vy * screen->height);
 	(*screen->paintTransformedOutput) (screen, sAttrib, &sTransform,
 					   region, output, mask);
 
-	if (dy > 0)
-	{
-	    moveScreenViewport (screen, 0, -1, FALSE);
-	}
-	else
-	{
-	    moveScreenViewport (screen, 0, 1, FALSE);
-	}
-
-	moveScreenViewport (screen, -vx, -vy, FALSE);
+	setWindowPaintOffset (screen, 0, 0);
     }
     else
     {
