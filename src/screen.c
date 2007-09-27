@@ -3296,7 +3296,7 @@ moveScreenViewport (CompScreen *s,
 		    Bool       sync)
 {
     CompWindow *w;
-    int         m, wx, wy, vWidth, vHeight;
+    int         wx, wy;
 
     tx = s->x - tx;
     tx = MOD (tx, s->hsize);
@@ -3315,48 +3315,12 @@ moveScreenViewport (CompScreen *s,
     tx *= -s->width;
     ty *= -s->height;
 
-    vWidth = s->width * s->hsize;
-    vHeight = s->height * s->vsize;
-
     for (w = s->windows; w; w = w->next)
     {
 	if (windowOnAllViewports (w))
 	    continue;
 
-	/* x */
-	if (s->hsize == 1)
-	{
-	    wx = tx;
-	}
-	else
-	{
-	    m = w->attrib.x + tx;
-	    if (m - w->input.left < s->width - vWidth)
-		wx = tx + vWidth;
-	    else if (m + w->width + w->input.right > vWidth)
-		wx = tx - vWidth;
-	    else
-		wx = tx;
-	}
-
-	if (w->saveMask & CWX)
-	    w->saveWc.x += wx;
-
-	/* y */
-	if (s->vsize == 1)
-	{
-	    wy = ty;
-	}
-	else
-	{
-	    m = w->attrib.y + ty;
-	    if (m - w->input.top < s->height - vHeight)
-		wy = ty + vHeight;
-	    else if (m + w->height + w->input.bottom > vHeight)
-		wy = ty - vHeight;
-	    else
-		wy = ty;
-	}
+	getWindowMovementForOffset (w, tx, ty, &wx, &wy);
 
 	if (w->saveMask & CWY)
 	    w->saveWc.y += wy;
