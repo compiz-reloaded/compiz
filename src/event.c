@@ -1914,6 +1914,40 @@ handleEvent (CompDisplay *d,
 	    xwc.border_width = event->xconfigurerequest.border_width;
 
 	    moveResizeWindow (w, &xwc, event->xconfigurerequest.value_mask, 0);
+
+	    if (event->xconfigurerequest.value_mask & CWStackMode)
+	    {
+		Window     above = event->xconfigure.above;
+		CompWindow *sibling = findWindowAtDisplay (d, above);
+
+		switch (event->xconfigurerequest.detail) {
+		case Above:
+		    if (allowWindowFocus (w))
+		    {
+			if (above)
+			{
+			    if (sibling)
+				restackWindowAbove (w, sibling);
+			}
+			else
+			    raiseWindow (w);
+		    }
+		    break;
+		case Below:
+		    if (above)
+		    {
+			if (sibling)
+			    restackWindowBelow (w, sibling);
+		    }
+		    else
+			lowerWindow (w);
+		    break;
+		default:
+		    /* no handling of the TopIf, BottomIf, Opposite cases -
+		       there will hardly be any client using that */
+		    break;
+		}
+	    }
 	}
 	else
 	{
