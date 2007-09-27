@@ -1819,11 +1819,7 @@ handleEvent (CompDisplay *d,
 	if (w)
 	{
 	    XWindowAttributes attr;
-
-	    if (w->minimized)
-		unminimizeWindow (w);
-
-	    (*w->screen->leaveShowDesktopMode) (w->screen, w);
+	    Bool              doMapProcessing = TRUE;
 
 	    /* We should check the override_redirect flag here, because the
 	       client might have changed it while being unmapped. */
@@ -1841,7 +1837,11 @@ handleEvent (CompDisplay *d,
 
 	    w->managed = TRUE;
 
-	    if (!(w->state & CompWindowStateHiddenMask))
+	    if (w->state & CompWindowStateHiddenMask)
+		if (!w->minimized && !w->inShowDesktopMode)
+		    doMapProcessing = FALSE;
+
+	    if (doMapProcessing)
 	    {
 		Bool allowFocus;
 
@@ -1869,10 +1869,6 @@ handleEvent (CompDisplay *d,
 		    w->placed   = TRUE;
 		}
 
-		w->pendingMaps++;
-
-		XMapWindow (d->display, event->xmaprequest.window);
-
 		allowFocus = allowWindowFocus (w);
 
 		if (allowFocus)
@@ -1896,6 +1892,17 @@ handleEvent (CompDisplay *d,
 		    /* window is above active window so we should lower it */
 		    if (p)
 			restackWindowBelow (w, p);
+		}
+
+		if (w->minimized)
+		    unminimizeWindow (w);
+
+		(*w->screen->leaveShowDesktopMode) (w->screen, w);
+
+		if (!(w->state & CompWindowStateHiddenMask))
+		{
+		    w->pendingMaps++;
+		    XMapWindow (d->display, w->id);
 		}
 	    }
 
