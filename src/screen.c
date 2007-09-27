@@ -1596,6 +1596,9 @@ addScreen (CompDisplay *display,
     s->hsize = s->opt[COMP_SCREEN_OPTION_HSIZE].value.i;
     s->vsize = s->opt[COMP_SCREEN_OPTION_VSIZE].value.i;
 
+    s->windowOffsetX = 0;
+    s->windowOffsetY = 0;
+
     s->nDesktop	      = 1;
     s->currentDesktop = 0;
 
