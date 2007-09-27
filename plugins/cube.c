@@ -1072,20 +1072,20 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	/* translate back to compiz output */
 	output = cs->srcOutput = cs->output[cubeOutput];
 
-	moveScreenViewport (s, -dView, 0, FALSE);
+	setWindowPaintOffset (s, dView * s->width, 0);
 	(*s->paintTransformedOutput) (s, sAttrib, transform,
 				      &s->outputDev[output].region,
 				      &s->outputDev[output], mask);
 	(*cs->postPaintViewport) (s, sAttrib, transform,
 				  &s->outputDev[output],
 				  &s->outputDev[output].region);
-	moveScreenViewport (s, dView, 0, FALSE);
+	setWindowPaintOffset (s, 0, 0);
     }
     else
     {
 	Region region;
 
-	moveScreenViewport (s, dx, 0, FALSE);
+	setWindowPaintOffset (s, dx * s->width, 0);
 
 	if (cs->moMode == CUBE_MOMODE_MULTI)
 	    region = &outputPtr->region;
@@ -1096,7 +1096,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 				      outputPtr, mask);
 	(*cs->postPaintViewport) (s, sAttrib, transform, outputPtr, region);
 
-	moveScreenViewport (s, -dx, 0, FALSE);
+	setWindowPaintOffset (s, 0, 0);
     }
 }
 
