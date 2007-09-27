@@ -1843,6 +1843,8 @@ handleEvent (CompDisplay *d,
 
 	    if (!(w->state & CompWindowStateHiddenMask))
 	    {
+		Bool allowFocus;
+
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
 
@@ -1871,9 +1873,14 @@ handleEvent (CompDisplay *d,
 
 		XMapWindow (d->display, event->xmaprequest.window);
 
-		updateWindowAttributes (w, CompStackingUpdateModeNormal);
+		allowFocus = allowWindowFocus (w);
 
-		if (allowWindowFocus (w))
+		if (allowFocus)
+		    updateWindowAttributes (w, CompStackingUpdateModeNormal);
+		else
+		    updateWindowAttributes (w, CompStackingUpdateModeNone);
+
+		if (allowFocus)
 		{
 		    moveInputFocusToWindow (w);
 		}
