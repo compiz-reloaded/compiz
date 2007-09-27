@@ -1982,6 +1982,9 @@ struct _CompScreen {
     int	       currentOutputDev;
     CompOutput fullscreenOutput;
 
+    int windowOffsetX;
+    int windowOffsetY;
+
     XRectangle lastViewport;
 
     CompActiveWindowHistory history[ACTIVE_WINDOW_HISTORY_NUM];
@@ -2415,6 +2418,11 @@ setCurrentActiveWindowHistory (CompScreen *s,
 void
 addToCurrentActiveWindowHistory (CompScreen *s,
 				 Window	    id);
+
+void
+setWindowPaintOffset (CompScreen *s,
+		      int        x,
+		      int        y);
 
 
 /* window.c */

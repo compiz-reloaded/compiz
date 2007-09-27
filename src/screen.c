@@ -4039,3 +4039,12 @@ addToCurrentActiveWindowHistory (CompScreen *s,
 
     history->activeNum = s->activeNum;
 }
+
+void
+setWindowPaintOffset (CompScreen *s,
+		      int        x,
+		      int        y)
+{
+    s->windowOffsetX = x;
+    s->windowOffsetY = y;
+}
