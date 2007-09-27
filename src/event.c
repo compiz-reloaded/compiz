@@ -1873,7 +1873,7 @@ handleEvent (CompDisplay *d,
 
 		updateWindowAttributes (w, CompStackingUpdateModeNormal);
 
-		if (focusWindowOnMap (w))
+		if (allowWindowFocus (w))
 		{
 		    moveInputFocusToWindow (w);
 		}

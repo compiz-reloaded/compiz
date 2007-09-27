@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20070917
+#define CORE_ABIVERSION 20070927
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2928,7 +2928,7 @@ setWindowUserTime (CompWindow *w,
 		   Time       time);
 
 Bool
-focusWindowOnMap (CompWindow *w);
+allowWindowFocus (CompWindow *w);
 
 void
 unredirectWindow (CompWindow *w);

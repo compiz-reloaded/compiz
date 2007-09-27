@@ -4589,13 +4589,14 @@ setWindowUserTime (CompWindow *w,
 	)
 
 Bool
-focusWindowOnMap (CompWindow *w)
+allowWindowFocus (CompWindow *w)
 {
-    CompDisplay *d = w->screen->display;
-    CompScreen  *s = w->screen;
-    CompWindow  *active;
-    Time	wUserTime, aUserTime;
-    CompMatch   *match;
+    CompDisplay  *d = w->screen->display;
+    CompScreen   *s = w->screen;
+    CompWindow   *active;
+    Time	 wUserTime, aUserTime;
+    CompMatch    *match;
+    unsigned int vx, vy;
 
     /* do not focus windows of these types */
     if (w->type & (CompWindowTypeDesktopMask |
@@ -4608,8 +4609,8 @@ focusWindowOnMap (CompWindow *w)
 	return FALSE;
 
     /* not in current viewport */
-    if (w->initialViewportX != w->screen->x ||
-	w->initialViewportY != w->screen->y)
+    defaultViewportForWindow (w, &vx, &vy);
+    if (vx != w->screen->x || vy != w->screen->y)
 	return FALSE;
 
     if (!getWindowUserTime (w, &wUserTime))
