@@ -4998,3 +4998,49 @@ windowOnAllViewports (CompWindow *w)
 
     return FALSE;
 }
+
+void
+getWindowMovementForOffset (CompWindow *w,
+			    int        offX,
+			    int        offY,
+			    int        *retX,
+			    int        *retY)
+{
+    CompScreen *s = w->screen;
+    int         m, vWidth, vHeight;
+
+    vWidth = s->width * s->hsize;
+    vHeight = s->height * s->vsize;
+
+    /* x */
+    if (s->hsize == 1)
+    {
+	(*retX) = offX;
+    }
+    else
+    {
+	m = w->attrib.x + offX;
+	if (m - w->input.left < s->width - vWidth)
+	    *retX = offX + vWidth;
+	else if (m + w->width + w->input.right > vWidth)
+	    *retX = offX - vWidth;
+	else
+	    *retX = offX;
+    }
+
+    if (s->vsize == 1)
+    {
+	*retY = offY;
+    }
+    else
+    {
+	m = w->attrib.y + offY;
+	if (m - w->input.top < s->height - vHeight)
+	    *retY = offY + vHeight;
+	else if (m + w->height + w->input.bottom > vHeight)
+	    *retY = offY - vHeight;
+	else
+	    *retY = offY;
+    }
+
+}

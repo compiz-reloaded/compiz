@@ -2981,6 +2981,13 @@ compareWindowActiveness (CompWindow *w1,
 Bool
 windowOnAllViewports (CompWindow *w);
 
+void
+getWindowMovementForOffset (CompWindow *w,
+			    int        offX,
+			    int        offY,
+			    int        *retX,
+			    int        *retY);
+
 /* plugin.c */
 
 #define HOME_PLUGINDIR ".compiz/plugins"
