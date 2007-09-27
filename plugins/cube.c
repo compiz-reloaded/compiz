@@ -1072,7 +1072,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	/* translate back to compiz output */
 	output = cs->srcOutput = cs->output[cubeOutput];
 
-	setWindowPaintOffset (s, dView * s->width, 0);
+	setWindowPaintOffset (s, -dView * s->width, 0);
 	(*s->paintTransformedOutput) (s, sAttrib, transform,
 				      &s->outputDev[output].region,
 				      &s->outputDev[output], mask);
