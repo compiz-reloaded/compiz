@@ -3317,16 +3317,7 @@ moveScreenViewport (CompScreen *s,
 
     for (w = s->windows; w; w = w->next)
     {
-	if (w->attrib.override_redirect)
-	    continue;
-
-	if (!w->managed && w->attrib.map_state != IsViewable)
-	    continue;
-
-	if (w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask))
-	    continue;
-
-	if (w->state & CompWindowStateStickyMask)
+	if (windowOnAllViewports (w))
 	    continue;
 
 	/* x */
