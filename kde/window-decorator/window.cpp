@@ -96,10 +96,7 @@ KWD::Window::Window (QWidget *parent,
 
 	if (mType == Normal)
 	{
-	    if (wInfo.visibleName () && wInfo.visibleName ()[0] != '\0')
-        	mName = QString::fromUtf8 (wInfo.visibleName ());
-	    else
-        	mName = KWin::readNameProperty (mClientId, XA_WM_NAME);
+	    mName = wInfo.visibleName ();
 
 	    mIcons = QIconSet (KWin::icon (mClientId, 16, 16, TRUE),
 			       KWin::icon (mClientId, 32, 32, TRUE));
@@ -1708,10 +1705,7 @@ KWD::Window::updateName (void)
 
     wInfo = KWin::windowInfo (window, NET::WMVisibleName, 0);
 
-    if (wInfo.visibleName () && wInfo.visibleName ()[0] != '\0')
-	mName = QString::fromUtf8 (wInfo.visibleName());
-    else
-	mName = KWin::readNameProperty (window, XA_WM_NAME);
+    mName = wInfo.visibleName ();
 
     mDecor->captionChange ();
 }
