@@ -1544,7 +1544,12 @@ handleEvent (CompDisplay *d,
 	{
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
-		activateWindow (w);
+	    {
+		/* use focus stealing prevention if request came from an
+		   application (which means data.l[0] is 1 */
+		if (event->xclient.data.l[0] != 1 || allowWindowFocus (w))
+		    activateWindow (w);
+	    }
 	}
 	else if (event->xclient.message_type == d->winOpacityAtom)
 	{
