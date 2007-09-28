@@ -1881,12 +1881,9 @@ handleEvent (CompDisplay *d,
 		else
 		    updateWindowAttributes (w, CompStackingUpdateModeNone);
 
-		if (allowFocus)
-		{
-		    moveInputFocusToWindow (w);
-		}
-		else if (w->type & ~(CompWindowTypeSplashMask |
-				     CompWindowTypeDockMask))
+		if (!allowFocus &&
+		    (w->type & ~(CompWindowTypeSplashMask |
+				 CompWindowTypeDockMask)))
 		{
 		    CompWindow *p;
 
@@ -1909,6 +1906,9 @@ handleEvent (CompDisplay *d,
 		    w->pendingMaps++;
 		    XMapWindow (d->display, w->id);
 		}
+
+		if (allowFocus)
+		    moveInputFocusToWindow (w);
 	    }
 
 	    setWindowProp (d, w->id, d->winDesktopAtom, w->desktop);
