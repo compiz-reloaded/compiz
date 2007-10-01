@@ -102,6 +102,7 @@ endMove (void *data)
     PLANE_SCREEN (screen);
 
     moveScreenViewport (screen, -ps->dest_x, -ps->dest_y, TRUE);
+    focusDefaultWindow (screen->display);
 
     ps->dest_x = 0;
     ps->dest_y = 0;
