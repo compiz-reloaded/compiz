@@ -1527,6 +1527,103 @@ freeScreen (CompScreen *s)
     free (s);
 }
 
+static int
+layerForWindow (CompWindow *w)
+{
+    unsigned int type = w->type;
+
+    /* Windows are classified into layers by their type and state.
+       The layer numbering is as follows:
+       1 - fullscreen window layer
+       2 - above window layer
+       3 - dock window layer
+       4 - normal window layer
+       5 - below window layer
+       6 - desktop window layer
+    */
+
+    /* normal stacking fullscreen windows with below state */
+    if ((type & CompWindowTypeFullscreenMask) &&
+	(w->state & CompWindowStateBelowMask))
+	type = CompWindowTypeNormalMask;
+
+    switch (type) {
+    case CompWindowTypeFullscreenMask:
+	return 1;
+    case CompWindowTypeDockMask:
+	return 3;
+    case CompWindowTypeDesktopMask:
+	return 6;
+    default:
+	if (w->state & CompWindowStateAboveMask)
+	    return 2;
+	else if (w->state & CompWindowStateBelowMask)
+	    return 5;
+	else
+	    return 4;
+    }
+
+    return -1; /* should never happen */
+}
+
+static int
+sortInitialWindows (const void *item1,
+		    const void *item2)
+{
+    CompWindow *win1, *win2;
+    int        win1Layer, win2Layer;
+
+    win1 = *((CompWindow **) item1);
+    win2 = *((CompWindow **) item2);
+
+    win1Layer = layerForWindow (win1);
+    win2Layer = layerForWindow (win2);
+
+    return (win1Layer > win2Layer) - (win1Layer < win2Layer);
+}
+
+static void
+sanitizeInitialStacking (CompScreen *s)
+{
+    int        i, count = 0;
+    CompWindow **windowList;
+    CompWindow *w;
+    Window     *windows;
+
+    /* count number of present windows */
+    for (w = s->windows; w; w = w->next)
+	count++;
+
+    /* create list of CompWindow pointers to pass to qsort */
+    windowList = malloc (count * sizeof (CompWindow *));
+    if (!windowList)
+	return;
+
+    windows = malloc (count * sizeof (Window));
+    if (!windows)
+    {
+	free (windowList);
+	return;
+    }
+
+    for (i = 0, w = s->windows; i < count; i++, w = w->next)
+	cws[i] = w;
+
+    /* sort list - windows with lowest layer number (which means highest
+       in stacking order) will come first */
+    qsort (cws, count, sizeof (CompWindow *), sortInitialWindows);
+
+    /* copy sorted list for XRestackWindows */
+    for (i = 0; i < count; i++)
+	windows[i] = cws[i]->id;
+
+    /* restack windows according to list */
+    XRestackWindows (s->display->display, windows, count);
+
+    free (windows);
+    free (cws);
+}
+
 Bool
 addScreen (CompDisplay *display,
 	   int	       screenNum,
@@ -2208,6 +2305,8 @@ addScreen (CompDisplay *display,
 
     for (i = 0; i < nchildren; i++)
 	addWindow (s, children[i], i ? children[i - 1] : 0);
+
+    sanitizeInitialStacking (s);
 
     for (w = s->windows; w; w = w->next)
     {
