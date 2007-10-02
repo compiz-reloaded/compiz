@@ -1592,7 +1592,8 @@ sanitizeInitialStacking (CompScreen *s)
 
     /* count number of present windows */
     for (w = s->windows; w; w = w->next)
-	count++;
+	if (!w->attrib.override_redirect)
+	    count++;
 
     /* create list of CompWindow pointers to pass to qsort */
     windowList = malloc (count * sizeof (CompWindow *));
@@ -1606,8 +1607,9 @@ sanitizeInitialStacking (CompScreen *s)
 	return;
     }
 
-    for (i = 0, w = s->windows; i < count; i++, w = w->next)
-	windowList[i] = w;
+    for (i = 0, w = s->windows; i < count; w = w->next)
+	if (!w->attrib.override_redirect)
+	    windowList[i++] = w;
 
     /* sort list - windows with lowest layer number (which means highest
        in stacking order) will come first */
