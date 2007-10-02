@@ -2805,6 +2805,8 @@ syncWindowPosition (CompWindow *w)
     w->serverY = w->attrib.y;
 
     XMoveWindow (w->screen->display->display, w->id, w->attrib.x, w->attrib.y);
+    /* we moved without resizing, so we have to send a configure notify */
+    sendConfigureNotify (w);
 
     if (w->frame)
 	XMoveWindow (w->screen->display->display, w->frame,
@@ -3347,8 +3349,16 @@ configureXWindow (CompWindow	 *w,
     if (valueMask & CWBorderWidth)
 	w->serverBorderWidth = xwc->border_width;
 
-    XConfigureWindow (w->screen->display->display, w->id,
-		      valueMask, xwc);
+    if (valueMask)
+    {
+	XConfigureWindow (w->screen->display->display, w->id, valueMask, xwc);
+    	if (!(valueMask & (CWWidth | CWHeight)))
+	{
+	    /* we have to send a configure notify event if we move or restack
+	       a window without resizing it according to ICCCM 4.1.5 */
+    	    sendConfigureNotify (w);
+	}
+    }
 
     if (w->frame && (valueMask & (CWSibling | CWStackMode)))
 	XConfigureWindow (w->screen->display->display, w->frame,
@@ -3795,6 +3805,18 @@ moveResizeWindow (CompWindow     *w,
 	}
     }
 
+    if (xwcm & CWX)
+    {
+	if (xwc->x == w->serverX)
+	    xwcm &= ~CWX;
+    }
+
+    if (xwcm & CWY)
+    {
+	if (xwc->y == w->serverY)
+	    xwcm &= ~CWY;
+    }
+
     if (xwcm & CWBorderWidth)
     {
 	if (xwc->border_width == w->serverBorderWidth)
@@ -3820,6 +3842,12 @@ moveResizeWindow (CompWindow     *w,
 	sendSyncRequest (w);
 
     configureXWindow (w, xwcm, xwc);
+    if (!xwcm)
+    {
+	/* we have to send a configure notify on ConfigureRequest events if
+	   we decide not to do anything according to ICCCM 4.1.5 */
+	sendConfigureNotify (w);
+    }
 
     if (placed)
 	w->placed = TRUE;
