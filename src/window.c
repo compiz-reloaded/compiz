@@ -2491,7 +2491,7 @@ restackWindow (CompWindow *w,
 	if (aboveId && aboveId == w->prev->id)
 	    return 0;
     }
-    else if (aboveId == None)
+    else if (aboveId == None && !w->next)
 	return 0;
 
     unhookWindowFromScreen (w->screen, w);
