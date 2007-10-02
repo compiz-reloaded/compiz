@@ -1607,21 +1607,21 @@ sanitizeInitialStacking (CompScreen *s)
     }
 
     for (i = 0, w = s->windows; i < count; i++, w = w->next)
-	cws[i] = w;
+	windowList[i] = w;
 
     /* sort list - windows with lowest layer number (which means highest
        in stacking order) will come first */
-    qsort (cws, count, sizeof (CompWindow *), sortInitialWindows);
+    qsort (windowList, count, sizeof (CompWindow *), sortInitialWindows);
 
     /* copy sorted list for XRestackWindows */
     for (i = 0; i < count; i++)
-	windows[i] = cws[i]->id;
+	windows[i] = windowList[i]->id;
 
     /* restack windows according to list */
     XRestackWindows (s->display->display, windows, count);
 
     free (windows);
-    free (cws);
+    free (windowList);
 }
 
 Bool
