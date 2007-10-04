@@ -1887,6 +1887,12 @@ addScreen (CompDisplay *display,
     currentRoot = s->root;
 
     glExtensions = (const char *) glGetString (GL_EXTENSIONS);
+    if (!glExtensions)
+    {
+	compLogMessage (display, "core", CompLogLevelFatal,
+			"No valid GL extensions string found.");
+	return FALSE;
+    }
 
     s->textureNonPowerOfTwo = 0;
     if (strstr (glExtensions, "GL_ARB_texture_non_power_of_two"))
