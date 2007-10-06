@@ -3165,7 +3165,9 @@ findLowestSiblingBelow (CompWindow *w)
 
 	switch (type) {
 	case CompWindowTypeDesktopMask:
-	    /* desktop window layer */
+	    /* desktop window layer - desktop windows always should be
+	       stacked at the bottom; no other window should be below them */
+	    return NULL;
 	    break;
 	case CompWindowTypeFullscreenMask:
 	case CompWindowTypeDockMask:
