@@ -3588,7 +3588,7 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    constrainNewWindowSize (w, width, height, &width, &height);
 
-	    if (width != w->serverWidth)
+	    if (width != oldWidth)
 	    {
 		mask |= CWWidth;
 		xwc->width = width;
@@ -3596,7 +3596,7 @@ addWindowSizeChanges (CompWindow     *w,
 	    else
 		mask &= ~CWWidth;
 
-	    if (height != w->serverHeight)
+	    if (height != oldHeight)
 	    {
 		mask |= CWHeight;
 		xwc->height = height;
