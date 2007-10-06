@@ -1934,8 +1934,14 @@ handleEvent (CompDisplay *d,
 
 	    if (event->xconfigurerequest.value_mask & CWStackMode)
 	    {
-		Window     above = event->xconfigure.above;
-		CompWindow *sibling = findWindowAtDisplay (d, above);
+		Window     above    = None;
+		CompWindow *sibling = NULL;
+
+		if (event->xconfigurerequest.value_mask & CWSibling)
+		{
+		    above   = event->xconfigurerequest.above;
+		    sibling = findTopLevelWindowAtDisplay (d, above);
+		}
 
 		switch (event->xconfigurerequest.detail) {
 		case Above:
