@@ -2170,8 +2170,6 @@ wobblyHandleEvent (CompDisplay *d,
 
 		if (ww->state & MAXIMIZE_STATE)
 		{
-		    WOBBLY_WINDOW (ws->grabWindow);
-
 		    if (ww->model && ww->grabbed)
 		    {
 			int dx, dy;
@@ -2831,6 +2829,13 @@ wobblyFiniWindow (CompPlugin *p,
 		  CompWindow *w)
 {
     WOBBLY_WINDOW (w);
+    WOBBLY_SCREEN (w->screen);
+
+    if (ws->grabWindow == w)
+    {
+	ws->grabWindow = NULL;
+	ws->grabMask   = 0;
+    }
 
     if (ww->model)
     {
