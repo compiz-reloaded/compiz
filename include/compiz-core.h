@@ -2430,7 +2430,8 @@ addToCurrentActiveWindowHistory (CompScreen *s,
 typedef enum {
     CompStackingUpdateModeNone = 0,
     CompStackingUpdateModeNormal,
-    CompStackingUpdateModeAboveFullscreen
+    CompStackingUpdateModeAboveFullscreen,
+    CompStackingUpdateModeInitialMap
 } CompStackingUpdateMode;
 
 struct _CompWindowExtents {

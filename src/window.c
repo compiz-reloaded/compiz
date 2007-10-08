@@ -4050,6 +4050,20 @@ updateWindowAttributes (CompWindow             *w,
 	mask |= addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
     }
 
+    if (stackingMode == CompStackingUpdateModeInitialMap)
+    {
+	/* If we are called from the MapRequest handler, we have to
+	   immediately update the internal stack. If we don't do that,
+	   the internal stacking order is invalid until the ConfigureNotify
+	   arrives because we put the window at the top of the stack when
+	   it was created */
+	if (mask & CWStackMode)
+	{
+	    Window above = (mask & CWSibling) ? xwc.above : 0;
+	    restackWindow (w, above);
+	}
+    }
+
     mask |= addWindowSizeChanges (w, &xwc,
 				  w->serverX, w->serverY,
 				  w->serverWidth, w->serverHeight,
