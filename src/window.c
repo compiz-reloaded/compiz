@@ -4059,7 +4059,7 @@ updateWindowAttributes (CompWindow             *w,
 	   it was created */
 	if (mask & CWStackMode)
 	{
-	    Window above = (mask & CWSibling) ? xwc.above : 0;
+	    Window above = (mask & CWSibling) ? xwc.sibling : 0;
 	    restackWindow (w, above);
 	}
     }
