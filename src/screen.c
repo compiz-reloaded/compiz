@@ -3322,6 +3322,9 @@ moveScreenViewport (CompScreen *s,
 
 	getWindowMovementForOffset (w, tx, ty, &wx, &wy);
 
+	if (w->saveMask & CWX)
+	    w->saveWc.x += wx;
+
 	if (w->saveMask & CWY)
 	    w->saveWc.y += wy;
 
