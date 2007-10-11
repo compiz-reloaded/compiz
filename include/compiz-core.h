@@ -125,6 +125,10 @@ typedef struct _CompWalker        CompWalker;
 #define CompWindowTypeFullscreenMask   (1 << 15)
 #define CompWindowTypeUnknownMask      (1 << 16)
 
+#define NO_FOCUS_MASK (CompWindowTypeDesktopMask | \
+		       CompWindowTypeDockMask    | \
+		       CompWindowTypeSplashMask)
+
 #define CompWindowStateModalMask	    (1 <<  0)
 #define CompWindowStateStickyMask	    (1 <<  1)
 #define CompWindowStateMaximizedVertMask    (1 <<  2)
@@ -2943,7 +2947,8 @@ setWindowUserTime (CompWindow *w,
 		   Time       time);
 
 Bool
-allowWindowFocus (CompWindow *w);
+allowWindowFocus (CompWindow   *w,
+		  unsigned int noFocusMask);
 
 void
 unredirectWindow (CompWindow *w);

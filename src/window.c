@@ -4633,7 +4633,8 @@ setWindowUserTime (CompWindow *w,
 	)
 
 Bool
-allowWindowFocus (CompWindow *w)
+allowWindowFocus (CompWindow   *w,
+		  unsigned int noFocusMask)
 {
     CompDisplay *d = w->screen->display;
     CompScreen  *s = w->screen;
@@ -4643,9 +4644,7 @@ allowWindowFocus (CompWindow *w)
     int         vx, vy;
 
     /* do not focus windows of these types */
-    if (w->type & (CompWindowTypeDesktopMask |
-		   CompWindowTypeDockMask    |
-		   CompWindowTypeSplashMask))
+    if (w->type & noFocusMask)
 	return FALSE;
 
     /* window doesn't take focus */
