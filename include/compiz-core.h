@@ -2948,7 +2948,8 @@ setWindowUserTime (CompWindow *w,
 
 Bool
 allowWindowFocus (CompWindow   *w,
-		  unsigned int noFocusMask);
+		  unsigned int noFocusMask,
+		  Time         timestamp);
 
 void
 unredirectWindow (CompWindow *w);
