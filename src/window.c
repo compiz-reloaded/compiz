@@ -4654,7 +4654,7 @@ allowWindowFocus (CompWindow   *w,
 
     /* not in current viewport */
     defaultViewportForWindow (w, &vx, &vy);
-    if (vx != w->screen->x || vy != w->screen->y)
+    if (vx != s->x || vy != s->y)
 	return FALSE;
 
     if (timestamp)
