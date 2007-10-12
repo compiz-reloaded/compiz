@@ -3840,6 +3840,16 @@ moveResizeWindow (CompWindow     *w,
 				  xwc->width, xwc->height,
 				  xwc->border_width);
 
+    /* update saved window coordinates - if CWX or CWY is set for fullscreen
+       or maximized windows after addWindowSizeChanges, it should be pretty
+       safe to assume that the saved coordinates should be updated too, e.g.
+       because the window was moved to another viewport by some client */
+    if ((xwcm & CWX) && (w->saveMask & CWX))
+    	w->saveWc.x += (xwc->x - w->serverX);
+
+    if ((xwcm & CWY) && (w->saveMask & CWY))
+	w->saveWc.y += (xwc->y - w->serverY);
+
     if (w->mapNum && (xwcm & (CWWidth | CWHeight)))
 	sendSyncRequest (w);
 

@@ -1881,10 +1881,7 @@ handleEvent (CompDisplay *d,
 
 		updateWindowAttributes (w, CompStackingUpdateModeInitialMap);
 
-		if (!allowFocus &&
-		    (w->type & ~(CompWindowTypeSplashMask |
-				 CompWindowTypeDockMask   |
-				 CompWindowTypeDesktopMask)))
+		if (!allowFocus && (w->type & ~NO_FOCUS_MASK))
 		{
 		    CompWindow *p;
 
