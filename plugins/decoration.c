@@ -1145,21 +1145,14 @@ decorSetDisplayOption (CompPlugin      *plugin,
     case DECOR_DISPLAY_OPTION_COMMAND:
 	if (compSetStringOption (o, value))
 	{
-	    if (display->screens && *o->value.s != '\0')
+	    CompScreen *s;
+
+	    for (s = display->screens; s; s = s->next)
 	    {
 		DECOR_SCREEN (display->screens);
 
-		/* run decorator command if no decorator is present on
-		   first screen */
 		if (!ds->dmWin)
-		{
-		    if (fork () == 0)
-		    {
-			putenv (display->displayString);
-			execl ("/bin/sh", "/bin/sh", "-c", o->value.s, NULL);
-			exit (0);
-		    }
-		}
+		    runCommand (s, o->value.s);
 	    }
 
 	    return TRUE;
