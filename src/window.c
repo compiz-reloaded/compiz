@@ -3704,16 +3704,12 @@ moveResizeWindow (CompWindow     *w,
 	    xwcm |= CWWidth;
 	    xwc->width = width;
 	}
-	else
-	    xwcm &= ~CWWidth;
 
 	if (height != w->serverHeight)
 	{
 	    xwcm |= CWHeight;
 	    xwc->height = height;
 	}
-	else
-	    xwcm &= ~CWHeight;
     }
 
     if (xwcm & (CWX | CWWidth))
@@ -3807,24 +3803,6 @@ moveResizeWindow (CompWindow     *w,
 	}
     }
 
-    if (xwcm & CWX)
-    {
-	if (xwc->x == w->serverX)
-	    xwcm &= ~CWX;
-    }
-
-    if (xwcm & CWY)
-    {
-	if (xwc->y == w->serverY)
-	    xwcm &= ~CWY;
-    }
-
-    if (xwcm & CWBorderWidth)
-    {
-	if (xwc->border_width == w->serverBorderWidth)
-	    xwcm &= ~CWBorderWidth;
-    }
-
     /* when horizontally maximized only allow width changes added by
        addWindowSizeChanges */
     if (w->state & CompWindowStateMaximizedHorzMask)
@@ -3839,6 +3817,25 @@ moveResizeWindow (CompWindow     *w,
 				  xwc->x, xwc->y,
 				  xwc->width, xwc->height,
 				  xwc->border_width);
+
+    /* check if the new coordinates are useful and valid (different
+       to current size); if not, we have to clear them to make sure
+       we send a synthetic ConfigureNotify event if all coordinates
+       match the server coordinates */
+    if ((xwcm & CWX) && (xwc->x == w->serverX))
+	xwcm &= ~CWX;
+
+    if ((xwcm & CWY) && (xwc->y == w->serverY))
+	xwcm &= ~CWY;
+
+    if ((xwcm & CWWidth) && (xwc->width == w->serverWidth))
+	xwcm &= ~CWWidth;
+
+    if ((xwcm & CWHeight) && (xwc->height == w->serverHeight))
+	xwcm &= ~CWHeight;
+
+    if ((xwcm & CWBorderWidth) && (xwc->border_width == w->serverBorderWidth))
+	xwcm &= ~CWBorderWidth;
 
     /* update saved window coordinates - if CWX or CWY is set for fullscreen
        or maximized windows after addWindowSizeChanges, it should be pretty
