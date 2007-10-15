@@ -5035,6 +5035,9 @@ getWindowMovementForOffset (CompWindow *w,
     vWidth = s->width * s->hsize;
     vHeight = s->height * s->vsize;
 
+    offX %= s->width * s->hsize;
+    offY %= s->height * s->vsize;
+
     /* x */
     if (s->hsize == 1)
     {
