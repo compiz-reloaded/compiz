@@ -3698,23 +3698,17 @@ moveResizeWindow (CompWindow     *w,
     {
 	int width, height;
 
-	if (!constrainNewWindowSize (w,
-				     xwc->width, xwc->height,
-				     &width, &height))
+	if (constrainNewWindowSize (w,
+				    xwc->width, xwc->height,
+				    &width, &height))
 	{
-	    width  = xwc->width;
-	    height = xwc->height;
-	}
+	    if (width != xwc->width)
+		xwcm |= CWWidth;
 
-	if (width != w->serverWidth)
-	{
-	    xwcm |= CWWidth;
+	    if (height != xwc->height)
+		xwcm |= CWHeight;
+
 	    xwc->width = width;
-	}
-
-	if (height != w->serverHeight)
-	{
-	    xwcm |= CWHeight;
 	    xwc->height = height;
 	}
     }
@@ -3829,19 +3823,19 @@ moveResizeWindow (CompWindow     *w,
        to current size); if not, we have to clear them to make sure
        we send a synthetic ConfigureNotify event if all coordinates
        match the server coordinates */
-    if ((xwcm & CWX) && (xwc->x == w->serverX))
+    if (xwc->x == w->serverX)
 	xwcm &= ~CWX;
 
-    if ((xwcm & CWY) && (xwc->y == w->serverY))
+    if (xwc->y == w->serverY)
 	xwcm &= ~CWY;
 
-    if ((xwcm & CWWidth) && (xwc->width == w->serverWidth))
+    if (xwc->width == w->serverWidth)
 	xwcm &= ~CWWidth;
 
-    if ((xwcm & CWHeight) && (xwc->height == w->serverHeight))
+    if (xwc->height == w->serverHeight)
 	xwcm &= ~CWHeight;
 
-    if ((xwcm & CWBorderWidth) && (xwc->border_width == w->serverBorderWidth))
+    if (xwc->border_width == w->serverBorderWidth)
 	xwcm &= ~CWBorderWidth;
 
     /* update saved window coordinates - if CWX or CWY is set for fullscreen
@@ -3857,8 +3851,9 @@ moveResizeWindow (CompWindow     *w,
     if (w->mapNum && (xwcm & (CWWidth | CWHeight)))
 	sendSyncRequest (w);
 
-    configureXWindow (w, xwcm, xwc);
-    if (!xwcm)
+    if (xwcm)
+	configureXWindow (w, xwcm, xwc);
+    else
     {
 	/* we have to send a configure notify on ConfigureRequest events if
 	   we decide not to do anything according to ICCCM 4.1.5 */
