@@ -6823,8 +6823,9 @@ main (int argc, char *argv[])
     panel_action_run_dialog_atom =
 	XInternAtom (xdisplay, "_GNOME_PANEL_ACTION_RUN_DIALOG", FALSE);
 
-    status = decor_acquire_dm_session (xdisplay, 0, "gwd", replace,
-				       &dm_sn_timestamp);
+    status = decor_acquire_dm_session (xdisplay,
+				       gdk_screen_get_number (gdkscreen),
+				       "gwd", replace, &dm_sn_timestamp);
     if (status != DECOR_ACQUIRE_STATUS_SUCCESS)
     {
 	if (status == DECOR_ACQUIRE_STATUS_FAILED)
@@ -6832,7 +6833,8 @@ main (int argc, char *argv[])
 	    fprintf (stderr,
 		     "%s: Could not acquire decoration manager "
 		     "selection on screen %d display \"%s\"\n",
-		     program_name, 0, DisplayString (xdisplay));
+		     program_name, gdk_screen_get_number (gdkscreen),
+		     DisplayString (xdisplay));
 	}
 	else if (status == DECOR_ACQUIRE_STATUS_OTHER_DM_RUNNING)
 	{
@@ -6841,7 +6843,8 @@ main (int argc, char *argv[])
 		     "has a decoration manager; try using the "
 		     "--replace option to replace the current "
 		     "decoration manager.\n",
-		     program_name, 0, DisplayString (xdisplay));
+		     program_name, gdk_screen_get_number (gdkscreen),
+		     DisplayString (xdisplay));
 	}
 
 	return 1;
@@ -6888,7 +6891,7 @@ main (int argc, char *argv[])
 	return 1;
     }
 
-    decor_set_dm_check_hint (xdisplay, 0);
+    decor_set_dm_check_hint (xdisplay, gdk_screen_get_number (gdkscreen));
 
     update_default_decorations (gdkscreen);
 
