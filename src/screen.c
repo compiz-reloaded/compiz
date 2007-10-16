@@ -3283,14 +3283,12 @@ runCommand (CompScreen *s,
     if (fork () == 0)
     {
 	/* build a display string that uses the right screen number */
-	int  stringLen;
-	char *pos, *delimiter, *screenString, *colon;
+	/* 5 extra chars should be enough for pretty much every situation */
+	int  stringLen = strlen (s->display->displayString) + 5;
+	char screenString[stringLen];
+	char *pos, *delimiter, *colon;
 	
 	setsid ();
-
-	/* 5 extra chars should be enough for pretty much every situation */
-	stringLen    = strlen (s->display->displayString) + 5;
-	screenString = malloc (sizeof (char) * (stringLen + 1));
 
 	if (screenString)
 	{
@@ -3314,7 +3312,6 @@ runCommand (CompScreen *s,
 		      "%s.%d", colon, s->screenNum);
 
 	    putenv (screenString);
-	    free (screenString);
 	}
 	else
 	{
