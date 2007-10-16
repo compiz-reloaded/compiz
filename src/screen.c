@@ -3282,8 +3282,45 @@ runCommand (CompScreen *s,
 
     if (fork () == 0)
     {
+	/* build a display string that uses the right screen number */
+	int  stringLen;
+	char *pos, *delimiter, *screenString, *colon;
+	
 	setsid ();
-	putenv (s->display->displayString);
+
+	/* 5 extra chars should be enough for pretty much every situation */
+	stringLen    = strlen (s->display->displayString) + 5;
+	screenString = malloc (sizeof (char) * (stringLen + 1));
+
+	if (screenString)
+	{
+	    strcpy (screenString, s->display->displayString);
+	    delimiter = strrchr (screenString, ':');
+	    if (delimiter)
+	    {
+		colon = "";
+		delimiter = strchr (delimiter, '.');
+		if (delimiter)
+		    *delimiter = '\0';
+	    }
+	    else
+	    {
+		/* insert :0 to keep the syntax correct */
+		colon = ":0";
+	    }
+	    pos = screenString + strlen (screenString);
+
+	    snprintf (pos, stringLen - (pos - screenString),
+		      "%s.%d", colon, s->screenNum);
+
+	    putenv (screenString);
+	    free (screenString);
+	}
+	else
+	{
+	    putenv (s->display->displayString);
+	}
+
 	execl ("/bin/sh", "/bin/sh", "-c", command, NULL);
 	exit (0);
     }
