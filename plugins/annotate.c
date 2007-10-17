@@ -41,11 +41,12 @@ static int annoLastPointerY = 0;
 #define ANNO_DISPLAY_OPTION_DRAW_BUTTON	    1
 #define ANNO_DISPLAY_OPTION_ERASE_BUTTON    2
 #define ANNO_DISPLAY_OPTION_CLEAR_KEY       3
-#define ANNO_DISPLAY_OPTION_FILL_COLOR      4
-#define ANNO_DISPLAY_OPTION_STROKE_COLOR    5
-#define ANNO_DISPLAY_OPTION_LINE_WIDTH      6
-#define ANNO_DISPLAY_OPTION_STROKE_WIDTH    7
-#define ANNO_DISPLAY_OPTION_NUM	            8
+#define ANNO_DISPLAY_OPTION_CLEAR_BUTTON    4
+#define ANNO_DISPLAY_OPTION_FILL_COLOR      5
+#define ANNO_DISPLAY_OPTION_STROKE_COLOR    6
+#define ANNO_DISPLAY_OPTION_LINE_WIDTH      7
+#define ANNO_DISPLAY_OPTION_STROKE_WIDTH    8
+#define ANNO_DISPLAY_OPTION_NUM	            9
 
 typedef struct _AnnoDisplay {
     int		    screenPrivateIndex;
@@ -743,6 +744,7 @@ static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
     { "draw_button", "button", 0, annoDraw, 0 },
     { "erase_button", "button", 0, annoEraseInitiate, 0 },
     { "clear_key", "key", 0, annoClear, 0 },
+    { "clear_button", "button", 0, annoClear, 0 },
     { "fill_color", "color", 0, 0, 0 },
     { "stroke_color", "color", 0, 0, 0 },
     { "line_width", "float", 0, 0, 0 },
