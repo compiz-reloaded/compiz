@@ -208,6 +208,10 @@
 		<_long>Minimize active window</_long>
 		<default>&lt;Alt&gt;F9</default>
 	    </option>
+	    <option name="minimize_window_button" type="button">
+		<_short>Minimize Window</_short>
+		<_long>Minimize active window</_long>
+	    </option>
 	    <option name="maximize_window_key" type="key">
 		<_short>Maximize Window</_short>
 		<_long>Maximize active window</_long>
@@ -282,6 +286,10 @@
 		<default>true</default>
 	    </option>
 	    <option name="toggle_window_maximized_key" type="key">
+		<_short>Toggle Window Maximized</_short>
+		<_long>Toggle active window maximized</_long>
+	    </option>
+	    <option name="toggle_window_maximized_button" type="button">
 		<_short>Toggle Window Maximized</_short>
 		<_long>Toggle active window maximized</_long>
 	    </option>
