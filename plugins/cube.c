@@ -1715,9 +1715,9 @@ cubePaintBackground (CompScreen   *s,
 	    return;
 	}
 
-	n = s->x - (s->windowOffsetX / s->width);
-	n %= s->hsize;
-	if (n < 0) n += s->hsize;
+	n = (s->x - (s->windowOffsetX / s->width)) % s->hsize;
+	if (n < 0)
+	    n += s->hsize;
 	n = (n * cs->nOutput + cs->srcOutput) % numBg;
 
 	if (s->desktopWindowCount)
