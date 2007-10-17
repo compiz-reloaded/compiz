@@ -1167,7 +1167,7 @@ placeWin (CompWindow *window,
 
 	    /* clip to screen if parent is visible in current viewport */
 	    if (parent->serverX < parent->screen->width &&
-		parent->serverX + parent->screen->width > 0)
+		parent->serverX + parent->serverWidth > 0)
 	    {
 		XRectangle area;
 
