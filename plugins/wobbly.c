@@ -2324,6 +2324,10 @@ wobblyWindowResizeNotify (CompWindow *w,
 
     if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b &&
 	isWobblyWin (w)					      &&
+	/* prevent wobbling when shading maximized windows - assuming that
+	   the height difference shaded - non-shaded will hardly be -1 and
+	   a lack of wobbly animation in that corner case is tolerable */
+	(dheight != -1)                                       &&
 	((w->state | ww->state) & MAXIMIZE_STATE))
     {
 	ww->state &= ~MAXIMIZE_STATE;
