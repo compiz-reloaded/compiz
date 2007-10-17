@@ -53,6 +53,10 @@
 		<_long>Close active window</_long>
 		<default>&lt;Alt&gt;F4</default>
 	    </option>
+	    <option name="close_window_button" type="button">
+		<_short>Close Window</_short>
+		<_long>Close active window</_long>
+	    </option>
 	    <option name="main_menu_key" type="key">
 		<_short>Show Main Menu</_short>
 		<_long>Show the main menu</_long>
@@ -176,10 +180,18 @@
 		<_long>Toggle use of slow animations</_long>
 		<default>&lt;Shift&gt;F10</default>
 	    </option>
+	    <option name="raise_window_key" type="key">
+		<_short>Raise Window</_short>
+		<_long>Raise window above other windows</_long>
+	    </option>
 	    <option name="raise_window_button" type="button">
 		<_short>Raise Window</_short>
 		<_long>Raise window above other windows</_long>
 		<default>&lt;Control&gt;Button6</default>
+	    </option>
+	    <option name="lower_window_key" type="key">
+		<_short>Lower Window</_short>
+		<_long>Lower window beneath other windows</_long>
 	    </option>
 	    <option name="lower_window_button" type="button">
 		<_short>Lower Window</_short>
