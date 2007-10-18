@@ -1693,20 +1693,21 @@ cubePaintBackground (CompScreen   *s,
 		     Region	  region,
 		     unsigned int mask)
 {
-    int n;
+    int numBg;
 
     CUBE_SCREEN (s);
 
     cubeSetBackgroundOpacity (s);
 
-    n = cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value.list.nValue;
-    if (n)
+    numBg = cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value.list.nValue;
+    if (numBg)
     {
 	CompTexture *bg;
 	CompMatrix  matrix;
 	BoxPtr      pBox = region->rects;
 	int	    nBox = region->numRects;
 	GLfloat     *d, *data;
+	int         n;
 
 	if (!nBox)
 	{
@@ -1714,7 +1715,10 @@ cubePaintBackground (CompScreen   *s,
 	    return;
 	}
 
-	n = (s->x * cs->nOutput + cs->srcOutput) % n;
+	n = (s->x - (s->windowOffsetX / s->width)) % s->hsize;
+	if (n < 0)
+	    n += s->hsize;
+	n = (n * cs->nOutput + cs->srcOutput) % numBg;
 
 	if (s->desktopWindowCount)
 	{
