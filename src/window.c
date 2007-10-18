@@ -4655,7 +4655,10 @@ allowWindowFocus (CompWindow   *w,
     /* not in current viewport */
     defaultViewportForWindow (w, &vx, &vy);
     if (vx != s->x || vy != s->y)
+    {
+	changeWindowState (w, w->state | CompWindowStateDemandsAttentionMask);
 	return FALSE;
+    }
 
     if (timestamp)
     {
@@ -4674,7 +4677,7 @@ allowWindowFocus (CompWindow   *w,
 	    wUserTime = w->initialTimestamp;
 	}
 
-    	/* window explicitly requested no focus */
+	/* window explicitly requested no focus */
 	if (!wUserTime)
 	    return FALSE;
     }
@@ -4691,11 +4694,9 @@ allowWindowFocus (CompWindow   *w,
     {
 	if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
 	{
-	    unsigned int state = w->state;
-
 	    /* add demands attention state if focus was prevented */
-	    state |= CompWindowStateDemandsAttentionMask;
-		changeWindowState (w, state);
+	    changeWindowState (w,
+			       w->state | CompWindowStateDemandsAttentionMask);
 
 	    return FALSE;
 	}
