@@ -636,16 +636,18 @@ void
 changeWindowState (CompWindow   *w,
 		   unsigned int newState)
 {
-    CompDisplay  *d = w->screen->display;
-    unsigned int oldState = w->state;
+    if (w->state != newState)
+    {
+	CompDisplay  *d = w->screen->display;
+	unsigned int oldState = w->state;
 
-    w->state = newState;
+	w->state = newState;
 
-    setWindowState (d, w->state, w->id);
+	setWindowState (d, w->state, w->id);
 
-    (*w->screen->windowStateChangeNotify) (w, oldState);
-
-    (*d->matchPropertyChanged) (d, w);
+	(*w->screen->windowStateChangeNotify) (w, oldState);
+	(*d->matchPropertyChanged) (d, w);
+    }
 }
 
 static void
@@ -4440,10 +4442,7 @@ showWindow (CompWindow *w)
     {
 	/* no longer hidden but not on current desktop */
 	if (!w->minimized && !w->inShowDesktopMode && !w->hidden)
-	{
-	    if (w->state & CompWindowStateHiddenMask)
-		changeWindowState (w, w->state & ~CompWindowStateHiddenMask);
-	}
+	    changeWindowState (w, w->state & ~CompWindowStateHiddenMask);
 
 	return;
     }
@@ -4696,8 +4695,6 @@ allowWindowFocus (CompWindow   *w,
 
 	    /* add demands attention state if focus was prevented */
 	    state |= CompWindowStateDemandsAttentionMask;
-
-	    if (w->state != state)
 		changeWindowState (w, state);
 
 	    return FALSE;

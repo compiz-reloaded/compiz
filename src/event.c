@@ -2017,9 +2017,7 @@ handleEvent (CompDisplay *d,
 		}
 
 		state &= ~CompWindowStateDemandsAttentionMask;
-
-		if (w->state != state)
-		    changeWindowState (w, state);
+		changeWindowState (w, state);
 	    }
 	}
 	break;
