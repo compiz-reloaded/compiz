@@ -1183,7 +1183,7 @@ placeWin (CompWindow *window,
 
 	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
 
-	    goto done_no_x_constraints;
+	    goto done_no_constraints;
 	}
     }
 
@@ -1343,7 +1343,6 @@ done:
     if (x - window->input.left < work_area.x)
 	x = work_area.x + window->input.left;
 
-done_no_x_constraints:
     if (y + window_height + window->input.bottom >
 	work_area.y + work_area.height)
 	y = work_area.y + work_area.height
