@@ -4710,7 +4710,7 @@ allowWindowFocus (CompWindow   *w,
 	changeWindowState (w, w->state | CompWindowStateDemandsAttentionMask);
     }
 
-    return FALSE;
+    return retval;
 }
 
 void
