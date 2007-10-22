@@ -1808,6 +1808,10 @@ typedef Bool (*PlaceWindowProc) (CompWindow *window,
 				 int        *newX,
 				 int        *newY);
 
+typedef void (*ValidateWindowResizeRequestProc) (CompWindow     *window,
+						 unsigned int   *mask,
+						 XWindowChanges *xwc);
+
 typedef void (*WindowResizeNotifyProc) (CompWindow *window,
 					int        dx,
 					int        dy,
@@ -2118,24 +2122,25 @@ struct _CompScreen {
 
     CompOption opt[COMP_SCREEN_OPTION_NUM];
 
-    PreparePaintScreenProc	   preparePaintScreen;
-    DonePaintScreenProc		   donePaintScreen;
-    PaintScreenProc		   paintScreen;
-    PaintOutputProc		   paintOutput;
-    PaintTransformedOutputProc	   paintTransformedOutput;
-    EnableOutputClippingProc	   enableOutputClipping;
-    DisableOutputClippingProc	   disableOutputClipping;
-    ApplyScreenTransformProc	   applyScreenTransform;
-    PaintBackgroundProc		   paintBackground;
-    PaintWindowProc		   paintWindow;
-    DrawWindowProc		   drawWindow;
-    AddWindowGeometryProc	   addWindowGeometry;
-    DrawWindowTextureProc	   drawWindowTexture;
-    DamageWindowRectProc	   damageWindowRect;
-    GetOutputExtentsForWindowProc  getOutputExtentsForWindow;
-    GetAllowedActionsForWindowProc getAllowedActionsForWindow;
-    FocusWindowProc		   focusWindow;
-    PlaceWindowProc                placeWindow;
+    PreparePaintScreenProc	    preparePaintScreen;
+    DonePaintScreenProc		    donePaintScreen;
+    PaintScreenProc		    paintScreen;
+    PaintOutputProc		    paintOutput;
+    PaintTransformedOutputProc	    paintTransformedOutput;
+    EnableOutputClippingProc	    enableOutputClipping;
+    DisableOutputClippingProc	    disableOutputClipping;
+    ApplyScreenTransformProc	    applyScreenTransform;
+    PaintBackgroundProc		    paintBackground;
+    PaintWindowProc		    paintWindow;
+    DrawWindowProc		    drawWindow;
+    AddWindowGeometryProc	    addWindowGeometry;
+    DrawWindowTextureProc	    drawWindowTexture;
+    DamageWindowRectProc	    damageWindowRect;
+    GetOutputExtentsForWindowProc   getOutputExtentsForWindow;
+    GetAllowedActionsForWindowProc  getAllowedActionsForWindow;
+    FocusWindowProc		    focusWindow;
+    PlaceWindowProc                 placeWindow;
+    ValidateWindowResizeRequestProc validateWindowResizeRequest;
 
     PaintCursorProc      paintCursor;
     DamageCursorRectProc damageCursorRect;
@@ -2873,6 +2878,11 @@ placeWindow (CompWindow *w,
 	     int        y,
 	     int        *newX,
 	     int        *newY);
+
+void
+validateWindowResizeRequest (CompWindow     *w,
+			     unsigned int   *mask,
+			     XWindowChanges *xwc);
 
 void
 windowResizeNotify (CompWindow *w,

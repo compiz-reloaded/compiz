@@ -2849,6 +2849,13 @@ placeWindow (CompWindow *w,
 }
 
 void
+validateWindowResizeRequest (CompWindow     *w,
+			     unsigned int   *mask,
+			     XWindowChanges *xwc)
+{
+}
+
+void
 windowResizeNotify (CompWindow *w,
 		    int        dx,
 		    int	       dy,
@@ -3794,6 +3801,8 @@ moveResizeWindow (CompWindow     *w,
 		xwc->x = max;
 	}
     }
+
+    (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc);
 
     /* when horizontally maximized only allow width changes added by
        addWindowSizeChanges */

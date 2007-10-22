@@ -1690,24 +1690,25 @@ addScreen (CompDisplay *display,
 
     gettimeofday (&s->lastRedraw, 0);
 
-    s->preparePaintScreen	  = preparePaintScreen;
-    s->donePaintScreen		  = donePaintScreen;
-    s->paintScreen		  = paintScreen;
-    s->paintOutput		  = paintOutput;
-    s->paintTransformedOutput	  = paintTransformedOutput;
-    s->enableOutputClipping	  = enableOutputClipping;
-    s->disableOutputClipping	  = disableOutputClipping;
-    s->applyScreenTransform	  = applyScreenTransform;
-    s->paintBackground		  = paintBackground;
-    s->paintWindow		  = paintWindow;
-    s->drawWindow		  = drawWindow;
-    s->addWindowGeometry	  = addWindowGeometry;
-    s->drawWindowTexture	  = drawWindowTexture;
-    s->damageWindowRect		  = damageWindowRect;
-    s->getOutputExtentsForWindow  = getOutputExtentsForWindow;
-    s->getAllowedActionsForWindow = getAllowedActionsForWindow;
-    s->focusWindow		  = focusWindow;
-    s->placeWindow                = placeWindow;
+    s->preparePaintScreen	   = preparePaintScreen;
+    s->donePaintScreen		   = donePaintScreen;
+    s->paintScreen		   = paintScreen;
+    s->paintOutput		   = paintOutput;
+    s->paintTransformedOutput	   = paintTransformedOutput;
+    s->enableOutputClipping	   = enableOutputClipping;
+    s->disableOutputClipping	   = disableOutputClipping;
+    s->applyScreenTransform	   = applyScreenTransform;
+    s->paintBackground		   = paintBackground;
+    s->paintWindow		   = paintWindow;
+    s->drawWindow		   = drawWindow;
+    s->addWindowGeometry	   = addWindowGeometry;
+    s->drawWindowTexture	   = drawWindowTexture;
+    s->damageWindowRect		   = damageWindowRect;
+    s->getOutputExtentsForWindow   = getOutputExtentsForWindow;
+    s->getAllowedActionsForWindow  = getAllowedActionsForWindow;
+    s->focusWindow		   = focusWindow;
+    s->placeWindow                 = placeWindow;
+    s->validateWindowResizeRequest = validateWindowResizeRequest;
 
     s->paintCursor      = paintCursor;
     s->damageCursorRect	= damageCursorRect;

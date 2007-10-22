@@ -61,7 +61,8 @@ typedef struct _PlaceDisplay {
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
 
-    PlaceWindowProc placeWindow;
+    PlaceWindowProc                 placeWindow;
+    ValidateWindowResizeRequestProc validateWindowResizeRequest;
 } PlaceScreen;
 
 #define GET_PLACE_DISPLAY(d)					   \
@@ -1358,6 +1359,92 @@ done_no_constraints:
     *new_y = y;
 }
 
+static void
+placeValidateWindowResizeRequest (CompWindow     *w,
+				  unsigned int   *mask,
+				  XWindowChanges *xwc)
+{
+    Bool       checkPlacement = FALSE;
+    CompScreen *s = w->screen;
+
+    PLACE_SCREEN (s);
+
+    UNWRAP (ps, s, validateWindowResizeRequest);
+    (*s->validateWindowResizeRequest) (w, mask, xwc);
+    WRAP (ps, s, validateWindowResizeRequest,
+	  placeValidateWindowResizeRequest);
+    
+    if (w->type & (CompWindowTypeSplashMask      |
+		   CompWindowTypeDialogMask      |
+		   CompWindowTypeModalDialogMask |
+		   CompWindowTypeNormalMask))
+    {
+	if (!(w->state & CompWindowStateFullscreenMask))
+	{
+	    if (!(w->sizeHints.flags & USPosition))
+		checkPlacement = TRUE;
+	}
+    }
+
+    if (checkPlacement)
+    {
+    	XRectangle workArea;
+	int        x, y, left, right, top, bottom;
+	int        output;
+
+	/* left, right, top, bottom target coordinates, clamped to viewport
+	   sizes as we don't need to validate movements to other viewports;
+	   we are only interested in inner-viewport movements */
+	x = xwc->x % s->width;
+	if (x < 0)
+	    x += s->width;
+
+	y = xwc->y % s->height;
+	if (y < 0)
+	    y += s->height;
+
+	left   = x - w->input.left;
+	right  = x + xwc->width + w->input.right;
+	top    = y - w->input.top;
+	bottom = y + xwc->height + w->input.bottom;
+
+	output = outputDeviceForGeometry (s,
+					  xwc->x, xwc->y,
+					  xwc->width, xwc->height,
+					  w->serverBorderWidth);
+
+	getWorkareaForOutput (s, output, &workArea);
+
+	if (left < workArea.x)
+	{
+	    xwc->x += workArea.x - left;
+	    right += workArea.x - left;
+	    *mask |= CWX;
+	}
+
+	if (top < workArea.y)
+	{
+	    xwc->y += workArea.y - top;
+	    bottom += workArea.y - top;
+	    *mask |= CWY;
+	}
+
+	if (right > (workArea.x + workArea.width))
+	{
+	    xwc->width = workArea.width - (xwc->x - workArea.x) -
+		         w->input.right;
+	    *mask |= CWWidth;
+	}
+
+	if (bottom > (workArea.y + workArea.height))
+	{
+	    xwc->height = workArea.height - (xwc->y - workArea.y) -
+		          w->input.bottom;
+	    *mask |= CWHeight;
+	}
+    }
+}
+
 static Bool
 placePlaceWindow (CompWindow *w,
 		  int        x,
@@ -1462,6 +1549,8 @@ placeInitScreen (CompPlugin *p,
     }
 
     WRAP (ps, s, placeWindow, placePlaceWindow);
+    WRAP (ps, s, validateWindowResizeRequest,
+	  placeValidateWindowResizeRequest);
 
     s->base.privates[pd->screenPrivateIndex].ptr = ps;
 
@@ -1475,6 +1564,7 @@ placeFiniScreen (CompPlugin *p,
     PLACE_SCREEN (s);
 
     UNWRAP (ps, s, placeWindow);
+    UNWRAP (ps, s, validateWindowResizeRequest);
 
     compFiniScreenOptions (s, ps->opt, PLACE_SCREEN_OPTION_NUM);
 
