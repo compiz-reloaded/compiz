@@ -1015,6 +1015,30 @@ placeSmart (CompWindow *window,
 }
 
 static void
+placeSendWindowMaximizationRequest (CompWindow *w)
+{
+    XEvent      xev;
+    CompDisplay *d = w->screen->display;
+
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = d->display;
+    xev.xclient.format  = 32;
+
+    xev.xclient.message_type = d->winStateAtom;
+    xev.xclient.window	     = w->id;
+
+    xev.xclient.data.l[0] = 1;
+    xev.xclient.data.l[1] = d->winStateMaximizedHorzAtom;
+    xev.xclient.data.l[2] = d->winStateMaximizedVertAtom;
+    xev.xclient.data.l[3] = 0;
+    xev.xclient.data.l[4] = 0;
+
+    XSendEvent (d->display, w->screen->root, FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask, &xev);
+}
+
+
+static void
 placeWin (CompWindow *window,
      	  int        x,
 	  int        y,
@@ -1414,6 +1438,12 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 					  w->serverBorderWidth);
 
 	getWorkareaForOutput (s, output, &workArea);
+
+	if (xwc->width >= workArea.width ||
+	    xwc->height >= workArea.height)
+	{
+	    placeSendWindowMaximizationRequest (w);
+	}
 
 	left   = MAX (left, workArea.x);
 	right  = MIN (right, workArea.x + workArea.width);
