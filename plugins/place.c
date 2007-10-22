@@ -1415,32 +1415,39 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 
 	getWorkareaForOutput (s, output, &workArea);
 
-	if (left < workArea.x)
+	left   = MAX (left, workArea.x);
+	right  = MIN (right, workArea.x + workArea.width);
+	top    = MAX (top, workArea.y);
+	bottom = MIN (bottom, workArea.y + workArea.height);
+
+	/* bring left/right/top/bottom to actual window coordinates */
+	left   += w->input.left;
+	right  -= w->input.right;
+	top    += w->input.top;
+	bottom -= w->input.bottom;
+
+	if (left != x)
 	{
-	    xwc->x += workArea.x - left;
-	    right += workArea.x - left;
-	    *mask |= CWX;
+	    xwc->x += left - x;
+	    *mask  |= CWX;
 	}
 
-	if (top < workArea.y)
+	if (top != y)
 	{
-	    xwc->y += workArea.y - top;
-	    bottom += workArea.y - top;
-	    *mask |= CWY;
+	    xwc->y += top - y;
+	    *mask  |= CWY;
 	}
 
-	if (right > (workArea.x + workArea.width))
+	if ((right - left) != xwc->width)
 	{
-	    xwc->width = workArea.width - (xwc->x - workArea.x) -
-		         w->input.right;
-	    *mask |= CWWidth;
+	    xwc->width = right - left;
+	    *mask      |= CWWidth;
 	}
 
-	if (bottom > (workArea.y + workArea.height))
+	if ((bottom - top) != xwc->height)
 	{
-	    xwc->height = workArea.height - (xwc->y - workArea.y) -
-		          w->input.bottom;
-	    *mask |= CWHeight;
+	    xwc->height = bottom - top;
+	    *mask       |= CWHeight;
 	}
     }
 }
