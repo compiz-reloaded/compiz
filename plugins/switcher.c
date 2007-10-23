@@ -119,10 +119,6 @@ typedef struct _SwitchScreen {
     float translate;
     float sTranslate;
 
-    GLushort saturation;
-    GLushort brightness;
-    GLushort opacity;
-
     Bool allWindows;
 } SwitchScreen;
 
@@ -213,27 +209,6 @@ switchSetScreenOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case SWITCH_SCREEN_OPTION_SATURATION:
-	if (compSetIntOption (o, value))
-	{
-	    ss->saturation = (COLOR * o->value.i) / 100;
-	    return TRUE;
-	}
-	break;
-    case SWITCH_SCREEN_OPTION_BRIGHTNESS:
-	if (compSetIntOption (o, value))
-	{
-	    ss->brightness = (0xffff * o->value.i) / 100;
-	    return TRUE;
-	}
-	break;
-    case SWITCH_SCREEN_OPTION_OPACITY:
-	if (compSetIntOption (o, value))
-	{
-	    ss->opacity = (OPAQUE * o->value.i) / 100;
-	    return TRUE;
-	}
-	break;
     case SWITCH_SCREEN_OPTION_ZOOM:
 	if (compSetFloatOption (o, value))
 	{
@@ -1732,17 +1707,21 @@ switchPaintWindow (CompWindow		   *w,
     else if (ss->switching)
     {
 	WindowPaintAttrib sAttrib = *attrib;
+	GLuint            value;
 
-	if (ss->saturation != COLOR)
-	    sAttrib.saturation = (sAttrib.saturation * ss->saturation) >> 16;
+	value = ss->opt[SWITCH_SCREEN_OPTION_SATURATION].value.i;
+	if (value != 100)
+	    sAttrib.saturation = sAttrib.saturation * value / 100;
 
-	if (ss->brightness != 0xffff)
-	    sAttrib.brightness = (sAttrib.brightness * ss->brightness) >> 16;
+	value = ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS].value.i;
+	if (value != 100)
+	    sAttrib.brightness = sAttrib.brightness * value / 100;
 
 	if (w->wmType & ~(CompWindowTypeDockMask | CompWindowTypeDesktopMask))
 	{
-	    if (ss->opacity != OPAQUE)
-		sAttrib.opacity = (sAttrib.opacity * ss->opacity) >> 16;
+	    value = ss->opt[SWITCH_SCREEN_OPTION_OPACITY].value.i;
+	    if (value != 100)
+		sAttrib.opacity = sAttrib.opacity * value / 100;
 	}
 
 	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b &&
@@ -1988,13 +1967,6 @@ switchInitScreen (CompPlugin *p,
 
     ss->translate  = 0.0f;
     ss->sTranslate = 0.0f;
-
-    ss->saturation =
-	(COLOR  * ss->opt[SWITCH_SCREEN_OPTION_SATURATION].value.i) / 100;
-    ss->brightness =
-	(0xffff * ss->opt[SWITCH_SCREEN_OPTION_BRIGHTNESS].value.i) / 100;
-    ss->opacity    =
-	(OPAQUE * ss->opt[SWITCH_SCREEN_OPTION_OPACITY].value.i)    / 100;
 
     ss->allWindows = FALSE;
 
