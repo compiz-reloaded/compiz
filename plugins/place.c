@@ -1445,10 +1445,45 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 	    placeSendWindowMaximizationRequest (w);
 	}
 
-	left   = MAX (left, workArea.x);
-	right  = MIN (right, workArea.x + workArea.width);
-	top    = MAX (top, workArea.y);
-	bottom = MIN (bottom, workArea.y + workArea.height);
+	if ((right - left) > workArea.width)
+	{
+	    left  = workArea.x;
+	    right = left + workArea.width;
+	}
+	else
+	{
+	    if (left < workArea.x)
+	    {
+		right += workArea.x - left;
+		left  = workArea.x;
+	    }
+
+	    if (right > (workArea.x + workArea.width))
+	    {
+		left -= right - (workArea.x + workArea.width);
+		right = workArea.x + workArea.width;
+	    }
+	}
+
+	if ((bottom - top) > workArea.height)
+	{
+	    top    = workArea.y;
+	    bottom = top + workArea.height;
+	}
+	else
+	{
+	    if (top < workArea.y)
+	    {
+		bottom += workArea.y - top;
+		top    = workArea.y;
+	    }
+
+	    if (bottom > (workArea.y + workArea.height))
+	    {
+		top   -= bottom - (workArea.y + workArea.height);
+		bottom = workArea.y + workArea.height;
+	    }
+	}
 
 	/* bring left/right/top/bottom to actual window coordinates */
 	left   += w->input.left;
