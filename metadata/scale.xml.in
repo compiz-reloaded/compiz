@@ -12,6 +12,7 @@
 		<default>
 		  <edge name="TopRight"/>
 		</default>
+		<allowed edgednd="true"/>
 	    </option>
 	    <option name="initiate_key" type="key">
 		<_short>Initiate Window Picker</_short>
@@ -25,6 +26,7 @@
 	    <option name="initiate_all_edge" type="edge">
 		<_short>Initiate Window Picker For All Windows</_short>
 		<_long>Layout and start transforming all windows</_long>
+		<allowed edgednd="true"/>
 	    </option>
 	    <option name="initiate_all_button" type="button">
 		<_short>Initiate Window Picker For All Windows</_short>
@@ -37,6 +39,7 @@
 	    <option name="initiate_group_edge" type="edge">
 		<_short>Initiate Window Picker For Window Group</_short>
 		<_long>Layout and start transforming window group</_long>
+		<allowed edgednd="true"/>
 	    </option>
 	    <option name="initiate_group_button" type="button">
 		<_short>Initiate Window Picker For Window Group</_short>
@@ -49,6 +52,7 @@
 	    <option name="initiate_output_edge" type="edge">
 		<_short>Initiate Window Picker For Windows on Current Output</_short>
 		<_long>Layout and start transforming windows on current output</_long>
+		<allowed edgednd="true"/>
 	    </option>
 	    <option name="initiate_output_button" type="button">
 		<_short>Initiate Window Picker For Windows on Current Output</_short>
