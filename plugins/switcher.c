@@ -742,6 +742,12 @@ switchTerminate (CompDisplay     *d,
 
 	    ss->switching = FALSE;
 
+	    if (state & CompActionStateCancel)
+	    {
+		ss->selectedWindow = None;
+		ss->zoomedWindow   = None;
+	    }
+
 	    if (state && ss->selectedWindow)
 	    {
 		w = findWindowAtScreen (s, ss->selectedWindow);
