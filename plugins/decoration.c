@@ -1233,12 +1233,13 @@ decorWindowResizeNotify (CompWindow *w,
     DECOR_SCREEN (w->screen);
     DECOR_WINDOW (w);
 
-    /* FIXME: we should not need a timer for calling decorWindowUpdate, and only call
-       updateWindowDecorationScale if decorWindowUpdate returns FALSE. Unfortunately,
-       decorWindowUpdate may call updateWindowOutputExtents, which may call
-       WindowResizeNotify. As we never should call a wrapped function that's currently
-       processed, we need the timer for the moment. updateWindowOutputExtents should be
-       fixed so that it does not emit a resize notification. */
+    /* FIXME: we should not need a timer for calling decorWindowUpdate,
+       and only call updateWindowDecorationScale if decorWindowUpdate
+       returns FALSE. Unfortunately, decorWindowUpdate may call
+       updateWindowOutputExtents, which may call WindowResizeNotify. As
+       we never should call a wrapped function that's currently
+       processed, we need the timer for the moment. updateWindowOutputExtents
+       should be fixed so that it does not emit a resize notification. */
     dw->resizeUpdateHandle = compAddTimeout (0, decorResizeUpdateTimeout, w);
     updateWindowDecorationScale (w);
 
