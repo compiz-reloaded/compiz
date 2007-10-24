@@ -77,6 +77,7 @@ matrixMult4 (float       *product,
  *
  * \param a matrix.
  * \param v vector.
+ * \param product will receive the product of \p a and \p v.
  *
  */
 void
