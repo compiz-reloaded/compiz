@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define CUBE_ABIVERSION 20070922
+#define CUBE_ABIVERSION 20071024
 
 typedef struct _CubeCore {
     SetOptionForPluginProc setOptionForPlugin;
@@ -106,7 +106,7 @@ typedef Bool (*CubeCheckOrientationProc) (CompScreen              *s,
 					  const ScreenPaintAttrib *sAttrib,
 					  const CompTransform     *transform,
 					  CompOutput              *output,
-					  float                   points[3][3]);
+					  CompVector              *points);
 
 typedef void (*CubePostPaintViewportProc) (CompScreen              *s,
 					   const ScreenPaintAttrib *sAttrib,

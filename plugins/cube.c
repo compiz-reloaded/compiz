@@ -923,7 +923,7 @@ cubeCheckOrientation (CompScreen              *s,
 		      const ScreenPaintAttrib *sAttrib,
 		      const CompTransform     *transform,
 		      CompOutput              *outputPtr,
-		      float                   points[3][3])
+		      CompVector              *points)
 {
     CompTransform sTransform = *transform;
     CompTransform mvp, pm;
@@ -940,35 +940,20 @@ cubeCheckOrientation (CompScreen              *s,
     memcpy (pm.m, s->projection, sizeof (pm.m));
     matrixMultiply (&mvp, &pm, &sTransform);
 
-    pntA.x = points[0][0];
-    pntA.y = points[0][1];
-    pntA.z = points[0][2];
-    pntA.w = 1.0f;
-
-    pntB.x = points[1][0];
-    pntB.y = points[1][1];
-    pntB.z = points[1][2];
-    pntB.w = 1.0f;
-
-    pntC.x = points[2][0];
-    pntC.y = points[2][1];
-    pntC.z = points[2][2];
-    pntC.w = 1.0f;
-
-    matrixMultiplyVector (&pntA, &pntA, &mvp);
+    matrixMultiplyVector (&pntA, &points[0], &mvp);
 
     if (pntA.w < 0.0f)
 	rv = !rv;
 
     matrixVectorDiv (&pntA);
 
-    matrixMultiplyVector (&pntB, &pntB, &mvp);
+    matrixMultiplyVector (&pntB, &points[1], &mvp);
 
     if (pntB.w < 0.0f)
 	rv = !rv;
 
     matrixVectorDiv (&pntB);
-    matrixMultiplyVector (&pntC, &pntC, &mvp);
+    matrixMultiplyVector (&pntC, &points[2], &mvp);
     matrixVectorDiv (&pntC);
 
     vecA.x = pntC.x - pntA.x;
@@ -998,14 +983,16 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 			  PaintOrder              paintOrder,
 			  int			  dx)
 {
-    Bool ftb;
-    int  output;
+    Bool  ftb;
+    int   output;
+    float pointZ;
 
     CUBE_SCREEN (s);
 
-    float vPoints[3][3] = { { -0.5, 0.0, cs->invert * cs->distance},
-			    { 0.0, 0.5, cs->invert * cs->distance},
-			    { 0.0, 0.0, cs->invert * cs->distance}};
+    pointZ = cs->invert * cs->distance;
+    CompVector vPoints[3] = { {.v = { -0.5, 0.0, pointZ, 1.0 } },
+			      {.v = {  0.0, 0.5, pointZ, 1.0 } },
+			      {.v = {  0.0, 0.0, pointZ, 1.0 } } };
 
     ftb = (*cs->checkOrientation) (s, sAttrib, transform, outputPtr, vPoints);
 
@@ -1538,12 +1525,12 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
 	 sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	static float top[3][3] = { { 0.5, 0.5, 0.0},
-				   { 0.0, 0.5, -0.5},
-				   { 0.0, 0.5, 0.0}};
-	static float bottom[3][3] = { { 0.5, -0.5, 0.0},
-				      { 0.0, -0.5, -0.5},
-				      { 0.0, -0.5, 0.0}};
+	static CompVector top[3] = { { .v = { 0.5, 0.5,  0.0, 1.0} },
+				     { .v = { 0.0, 0.5, -0.5, 1.0} },
+				     { .v = { 0.0, 0.5,  0.0, 1.0} } };
+	static CompVector bottom[3] = { { .v = { 0.5, -0.5,  0.0, 1.0} },
+			                { .v = { 0.0, -0.5, -0.5, 1.0} },
+					{ .v = { 0.0, -0.5,  0.0, 1.0} } };
 	topDir    = (*cs->checkOrientation) (s, &sa, transform, outputPtr, top);
 	bottomDir = (*cs->checkOrientation) (s, &sa, transform,
 					     outputPtr, bottom);
