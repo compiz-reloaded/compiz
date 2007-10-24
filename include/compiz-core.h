@@ -1257,6 +1257,8 @@ clearTargetOutput (CompDisplay	*display,
 /* camera distance from screen, 0.5 * tan (FOV) */
 #define DEFAULT_Z_CAMERA 0.866025404f
 
+#define DEG2RAD (M_PI / 180.0f)
+
 typedef struct _CompTransform {
     float m[16];
 } CompTransform;

@@ -75,9 +75,6 @@ matmul4 (float       *product,
 #undef B
 #undef P
 
-/* Degrees to radians conversion: */
-#define DEG2RAD (M_PI / 180.0f)
-
 /**
  * Generate a 4x4 transformation matrix from glRotate parameters, and
  * post-multiply the input matrix by it.
