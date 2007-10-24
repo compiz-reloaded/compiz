@@ -39,10 +39,14 @@ WindowPaintAttrib defaultWindowPaintAttrib = {
 
 void
 preparePaintScreen (CompScreen *screen,
-		    int	       msSinceLastPaint) {}
+		    int	       msSinceLastPaint)
+{
+}
 
 void
-donePaintScreen (CompScreen *screen) {}
+donePaintScreen (CompScreen *screen)
+{
+}
 
 void
 applyScreenTransform (CompScreen	      *screen,
