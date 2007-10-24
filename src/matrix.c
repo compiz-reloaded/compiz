@@ -88,8 +88,8 @@ matrixMultiply (CompTransform       *product,
  *
  */
 void
-matrixMultiplyVector (CompVector       *product,
-		      const CompVector *vector,
+matrixMultiplyVector (CompVector          *product,
+		      const CompVector    *vector,
 		      const CompTransform *transform)
 {
     float       vec[4];
