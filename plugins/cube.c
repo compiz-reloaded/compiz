@@ -32,37 +32,6 @@
 
 #include <compiz-cube.h>
 
-#define MULTM(x, y, z) \
-z[0] = x[0] * y[0] + x[4] * y[1] + x[8] * y[2] + x[12] * y[3]; \
-z[1] = x[1] * y[0] + x[5] * y[1] + x[9] * y[2] + x[13] * y[3]; \
-z[2] = x[2] * y[0] + x[6] * y[1] + x[10] * y[2] + x[14] * y[3]; \
-z[3] = x[3] * y[0] + x[7] * y[1] + x[11] * y[2] + x[15] * y[3]; \
-z[4] = x[0] * y[4] + x[4] * y[5] + x[8] * y[6] + x[12] * y[7]; \
-z[5] = x[1] * y[4] + x[5] * y[5] + x[9] * y[6] + x[13] * y[7]; \
-z[6] = x[2] * y[4] + x[6] * y[5] + x[10] * y[6] + x[14] * y[7]; \
-z[7] = x[3] * y[4] + x[7] * y[5] + x[11] * y[6] + x[15] * y[7]; \
-z[8] = x[0] * y[8] + x[4] * y[9] + x[8] * y[10] + x[12] * y[11]; \
-z[9] = x[1] * y[8] + x[5] * y[9] + x[9] * y[10] + x[13] * y[11]; \
-z[10] = x[2] * y[8] + x[6] * y[9] + x[10] * y[10] + x[14] * y[11]; \
-z[11] = x[3] * y[8] + x[7] * y[9] + x[11] * y[10] + x[15] * y[11]; \
-z[12] = x[0] * y[12] + x[4] * y[13] + x[8] * y[14] + x[12] * y[15]; \
-z[13] = x[1] * y[12] + x[5] * y[13] + x[9] * y[14] + x[13] * y[15]; \
-z[14] = x[2] * y[12] + x[6] * y[13] + x[10] * y[14] + x[14] * y[15]; \
-z[15] = x[3] * y[12] + x[7] * y[13] + x[11] * y[14] + x[15] * y[15];
-
-#define MULTMV(m, v) { \
-float v0 = m[0]*v[0] + m[4]*v[1] + m[8]*v[2] + m[12]*v[3]; \
-float v1 = m[1]*v[0] + m[5]*v[1] + m[9]*v[2] + m[13]*v[3]; \
-float v2 = m[2]*v[0] + m[6]*v[1] + m[10]*v[2] + m[14]*v[3]; \
-float v3 = m[3]*v[0] + m[7]*v[1] + m[11]*v[2] + m[15]*v[3]; \
-v[0] = v0; v[1] = v1; v[2] = v2; v[3] = v3; }
-
-#define DIVV(v) \
-v[0] /= v[3]; \
-v[1] /= v[3]; \
-v[2] /= v[3]; \
-v[3] /= v[3];
-
 static CompMetadata cubeMetadata;
 
 static int cubeCorePrivateIndex;
@@ -969,7 +938,7 @@ cubeCheckOrientation (CompScreen              *s,
     matrixTranslate (&sTransform, cs->outputXOffset, -cs->outputYOffset, 0.0f);
     matrixScale (&sTransform, cs->outputXScale, cs->outputYScale, 1.0f);
 
-    MULTM (s->projection, sTransform.m, mvp);
+    matrixMult4 (mvp, s->projection, sTransform.m);
 
     pntA[0] = points[0][0];
     pntA[1] = points[0][1];
@@ -986,22 +955,21 @@ cubeCheckOrientation (CompScreen              *s,
     pntC[2] = points[2][2];
     pntC[3] = 1.0f;
 
-    MULTMV (mvp, pntA);
+    matrixMultVector (pntA, pntA, mvp);
 
     if (pntA[3] < 0.0f)
 	rv = !rv;
 
-    DIVV (pntA);
+    matrixDiv (pntA);
 
-    MULTMV (mvp, pntB);
+    matrixMultVector (pntB, pntB, mvp);
 
     if (pntB[3] < 0.0f)
 	rv = !rv;
 
-    DIVV (pntB);
-
-    MULTMV (mvp, pntC);
-    DIVV (pntC);
+    matrixDiv (pntB);
+    matrixMultVector (pntC, pntC, mvp);
+    matrixDiv (pntC);
 
     vecA[0] = pntC[0] - pntA[0];
     vecA[1] = pntC[1] - pntA[1];

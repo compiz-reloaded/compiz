@@ -3176,6 +3176,19 @@ disableFragmentAttrib (CompScreen     *s,
 /* matrix.c */
 
 void
+matrixMult4 (float       *product,
+	     const float *a,
+	     const float *b);
+
+void
+matrixMultVector (float       *product,
+		  const float *v,
+		  const float *a);
+
+void
+matrixDiv (float *v);
+
+void
 matrixRotate (CompTransform *transform,
 	      float	    angle,
 	      float	    x,
@@ -3194,6 +3207,8 @@ matrixTranslate (CompTransform *transform,
 		 float	       y,
 		 float	       z);
 
+void
+matrixGetIdentity (CompTransform *m);
 
 /* cursor.c */
 

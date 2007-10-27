@@ -39,6 +39,7 @@ static float identity[16] = {
 #define A(row, col) a[(col << 2) + row]
 #define B(row, col) b[(col << 2) + row]
 #define P(row, col) product[(col << 2) + row]
+#define V(row, col) v[(col << 2) + row]
 
 /**
  * Perform a full 4x4 matrix multiplication.
@@ -53,10 +54,10 @@ static float identity[16] = {
  *
  * \author This \c matmul was contributed by Thomas Malik
  */
-static void
-matmul4 (float       *product,
-	 const float *a,
-	 const float *b)
+void
+matrixMult4 (float       *product,
+	     const float *a,
+	     const float *b)
 {
     int i;
 
@@ -71,9 +72,44 @@ matmul4 (float       *product,
     }
 }
 
+/**
+ * Multiply the 1x4 vector v with the 4x4 matrix a.
+ *
+ * \param a matrix.
+ * \param v vector.
+ *
+ */
+void
+matrixMultVector (float       *product,
+		  const float *v,
+		  const float *a)
+{
+    float vec[4];
+    int   i;
+
+    for (i = 0; i < 4; i++)
+    {
+	vec[i] = A(i,0) * V(0,0) + A(i,1) * V(1,0) +
+	         A(i,2) * V(2,0) + A(i,3) * V(3,0);
+    }
+
+    for (i = 0; i < 4; i++)
+	P(i,0) = vec[i];
+}
+
+void
+matrixDiv (float *v)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+	v[i] /= v[3];
+}
+
 #undef A
 #undef B
 #undef P
+#undef V
 
 /**
  * Generate a 4x4 transformation matrix from glRotate parameters, and
@@ -267,7 +303,7 @@ matrixRotate (CompTransform *transform,
     }
 #undef M
 
-    matmul4 (transform->m, transform->m, m);
+    matrixMult4 (transform->m, transform->m, m);
 }
 
 /**
@@ -316,4 +352,10 @@ matrixTranslate (CompTransform *transform,
     m[13] = m[1] * x + m[5] * y + m[9]  * z + m[13];
     m[14] = m[2] * x + m[6] * y + m[10] * z + m[14];
     m[15] = m[3] * x + m[7] * y + m[11] * z + m[15];
+}
+
+void
+matrixGetIdentity (CompTransform *transform)
+{
+    memcpy (transform->m, identity, sizeof (float) * 16);
 }
