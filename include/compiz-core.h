@@ -1263,6 +1263,16 @@ typedef struct _CompTransform {
     float m[16];
 } CompTransform;
 
+typedef union _CompVector {
+    float v[4];
+    struct {
+	float x;
+	float y;
+	float z;
+	float w;
+    };
+} CompVector;
+
 /* XXX: ScreenPaintAttrib will be removed */
 typedef struct _ScreenPaintAttrib {
     GLfloat xRotate;
@@ -3176,17 +3186,17 @@ disableFragmentAttrib (CompScreen     *s,
 /* matrix.c */
 
 void
-matrixMult4 (float       *product,
-	     const float *a,
-	     const float *b);
+matrixMultiply (CompTransform       *product,
+		const CompTransform *transformA,
+		const CompTransform *transformB);
 
 void
-matrixMultVector (float       *product,
-		  const float *v,
-		  const float *a);
+matrixMultiplyVector (CompVector          *product,
+		      const CompVector    *vector,
+		      const CompTransform *transform);
 
 void
-matrixDiv (float *v);
+matrixVectorDiv (CompVector *v);
 
 void
 matrixRotate (CompTransform *transform,

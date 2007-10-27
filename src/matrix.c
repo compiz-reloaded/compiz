@@ -39,7 +39,6 @@ static float identity[16] = {
 #define A(row, col) a[(col << 2) + row]
 #define B(row, col) b[(col << 2) + row]
 #define P(row, col) product[(col << 2) + row]
-#define V(row, col) v[(col << 2) + row]
 
 /**
  * Perform a full 4x4 matrix multiplication.
@@ -54,10 +53,10 @@ static float identity[16] = {
  *
  * \author This \c matmul was contributed by Thomas Malik
  */
-void
-matrixMult4 (float       *product,
-	     const float *a,
-	     const float *b)
+static void
+matmul4 (float       *product,
+	 const float *a,
+	 const float *b)
 {
     int i;
 
@@ -72,6 +71,14 @@ matrixMult4 (float       *product,
     }
 }
 
+void
+matrixMultiply (CompTransform       *product,
+		const CompTransform *transformA,
+		const CompTransform *transformB)
+{
+    matmul4 (product->m, transformA->m, transformB->m);
+}
+
 /**
  * Multiply the 1x4 vector v with the 4x4 matrix a.
  *
@@ -81,36 +88,36 @@ matrixMult4 (float       *product,
  *
  */
 void
-matrixMultVector (float       *product,
-		  const float *v,
-		  const float *a)
+matrixMultiplyVector (CompVector       *product,
+		      const CompVector *vector,
+		      const CompTransform *transform)
 {
-    float vec[4];
-    int   i;
+    float       vec[4];
+    const float *a = transform->m;
+    const float *b = vector->v;
+    int         i;
 
     for (i = 0; i < 4; i++)
     {
-	vec[i] = A(i,0) * V(0,0) + A(i,1) * V(1,0) +
-	         A(i,2) * V(2,0) + A(i,3) * V(3,0);
+	vec[i] = A(i,0) * B(0,0) + A(i,1) * B(1,0) +
+	         A(i,2) * B(2,0) + A(i,3) * B(3,0);
     }
 
-    for (i = 0; i < 4; i++)
-	P(i,0) = vec[i];
+    memcpy (product->v, vec, sizeof (vec));
 }
 
 void
-matrixDiv (float *v)
+matrixVectorDiv (CompVector *vector)
 {
     int i;
 
     for (i = 0; i < 4; i++)
-	v[i] /= v[3];
+	vector->v[i] /= vector->v[3];
 }
 
 #undef A
 #undef B
 #undef P
-#undef V
 
 /**
  * Generate a 4x4 transformation matrix from glRotate parameters, and
@@ -304,7 +311,7 @@ matrixRotate (CompTransform *transform,
     }
 #undef M
 
-    matrixMult4 (transform->m, transform->m, m);
+    matmul4 (transform->m, transform->m, m);
 }
 
 /**

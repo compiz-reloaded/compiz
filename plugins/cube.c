@@ -926,10 +926,9 @@ cubeCheckOrientation (CompScreen              *s,
 		      float                   points[3][3])
 {
     CompTransform sTransform = *transform;
-    float         mvp[16];
-    float         pntA[4], pntB[4], pntC[4];
-    float         vecA[3], vecB[3];
-    float         ortho[3];
+    CompTransform mvp, pm;
+    CompVector    pntA, pntB, pntC;
+    CompVector    vecA, vecB, ortho;
     Bool          rv = FALSE;
 
     CUBE_SCREEN (s);
@@ -938,52 +937,53 @@ cubeCheckOrientation (CompScreen              *s,
     matrixTranslate (&sTransform, cs->outputXOffset, -cs->outputYOffset, 0.0f);
     matrixScale (&sTransform, cs->outputXScale, cs->outputYScale, 1.0f);
 
-    matrixMult4 (mvp, s->projection, sTransform.m);
+    memcpy (pm.m, s->projection, sizeof (pm.m));
+    matrixMultiply (&mvp, &pm, &sTransform);
 
-    pntA[0] = points[0][0];
-    pntA[1] = points[0][1];
-    pntA[2] = points[0][2];
-    pntA[3] = 1.0f;
+    pntA.x = points[0][0];
+    pntA.y = points[0][1];
+    pntA.z = points[0][2];
+    pntA.w = 1.0f;
 
-    pntB[0] = points[1][0];
-    pntB[1] = points[1][1];
-    pntB[2] = points[1][2];
-    pntB[3] = 1.0f;
+    pntB.x = points[1][0];
+    pntB.y = points[1][1];
+    pntB.z = points[1][2];
+    pntB.w = 1.0f;
 
-    pntC[0] = points[2][0];
-    pntC[1] = points[2][1];
-    pntC[2] = points[2][2];
-    pntC[3] = 1.0f;
+    pntC.x = points[2][0];
+    pntC.y = points[2][1];
+    pntC.z = points[2][2];
+    pntC.w = 1.0f;
 
-    matrixMultVector (pntA, pntA, mvp);
+    matrixMultiplyVector (&pntA, &pntA, &mvp);
 
-    if (pntA[3] < 0.0f)
+    if (pntA.w < 0.0f)
 	rv = !rv;
 
-    matrixDiv (pntA);
+    matrixVectorDiv (&pntA);
 
-    matrixMultVector (pntB, pntB, mvp);
+    matrixMultiplyVector (&pntB, &pntB, &mvp);
 
-    if (pntB[3] < 0.0f)
+    if (pntB.w < 0.0f)
 	rv = !rv;
 
-    matrixDiv (pntB);
-    matrixMultVector (pntC, pntC, mvp);
-    matrixDiv (pntC);
+    matrixVectorDiv (&pntB);
+    matrixMultiplyVector (&pntC, &pntC, &mvp);
+    matrixVectorDiv (&pntC);
 
-    vecA[0] = pntC[0] - pntA[0];
-    vecA[1] = pntC[1] - pntA[1];
-    vecA[2] = pntC[2] - pntA[2];
+    vecA.x = pntC.x - pntA.x;
+    vecA.y = pntC.y - pntA.y;
+    vecA.z = pntC.z - pntA.z;
 
-    vecB[0] = pntC[0] - pntB[0];
-    vecB[1] = pntC[1] - pntB[1];
-    vecB[2] = pntC[2] - pntB[2];
+    vecB.x = pntC.x - pntB.x;
+    vecB.y = pntC.y - pntB.y;
+    vecB.z = pntC.z - pntB.z;
 
-    ortho[0] = vecA[1] * vecB[2] - vecA[2] * vecB[1];
-    ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
-    ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
+    ortho.x = vecA.y * vecB.z - vecA.z * vecB.y;
+    ortho.y = vecA.z * vecB.x - vecA.x * vecB.z;
+    ortho.z = vecA.x * vecB.y - vecA.y * vecB.x;
 
-    if (ortho[2] > 0.0f)
+    if (ortho.z > 0.0f)
 	rv = !rv;
 
     return rv;
