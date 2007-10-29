@@ -1,122 +1,127 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# translation of fr-compiz.po
+# Copyright (C) 2007 compiz-fusion.org
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 1999, 2000, 2001 SuSE GmbH.
+# This file is distributed under the same license as the Compiz package.
 #
+# Tristan RABLAT <tristan.rablat@gmail.com>, 2007.
+# Bruno Patri <bruno.patri@gmail.com>, 2007.
+
 msgid ""
 msgstr ""
-"Project-Id-Version: Compiz\n"
+"Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-11 13:02-0400\n"
-"PO-Revision-Date: 2006-06-21 12:04\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"POT-Creation-Date: 2007-10-05 00:01+0200\n"
+"PO-Revision-Date: 2007-10-22 16:03+0200\n"
+"Last-Translator: Tristan RABLAT <tristan.rablat@gmail.com>\n"
+"Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1 ../src/main.c:54
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "Bureau"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
 msgid "Window Management"
-msgstr "Menu de la fenêtre"
+msgstr "Gestion des Fenêtres"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
-#, fuzzy
-msgid "Blur type"
-msgstr "Vitesse de pliage"
+msgid "Action to take when scrolling the mouse wheel on a window title bar."
+msgstr "Action à accomplir en tournant la molette de la souris sur la barre de titre d'une fenêtre"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
-msgid "Metacity theme active window opacity"
-msgstr "Réduire l'opacité de la fenêtre"
+msgid "Blur type"
+msgstr "Type de flou"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
-#, fuzzy
-msgid "Metacity theme active window opacity shade"
-msgstr "Optimiser la fenêtre active horizontalement"
+msgid "Metacity theme active window opacity"
+msgstr "Opacité de la fenêtre active du thème Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
-msgid "Metacity theme opacity"
-msgstr ""
+msgid "Metacity theme active window opacity shade"
+msgstr "Nuance de l'opacité de la fenêtre active du thème Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
-msgid "Metacity theme opacity shade"
-msgstr ""
+msgid "Metacity theme opacity"
+msgstr "Opacité du thème Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
-msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr ""
+msgid "Metacity theme opacity shade"
+msgstr "Nuance de l'opacité du thème Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
-msgid "Opacity to use for metacity theme decorations"
-msgstr ""
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr "Opacité à utiliser pour les fenêtres actives avec les décorations des thèmes Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid ""
-"Shade active windows with metacity theme decorations from opaque to "
-"translucent"
-msgstr ""
+msgid "Opacity to use for metacity theme decorations"
+msgstr "Opacité à utiliser pour les décorations des thèmes Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
-"Shade windows with metacity theme decorations from opaque to translucent"
-msgstr ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr "Nuancer les fenêtres actives avec les décorations du thème Metacity, d'opaque à transparent"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid "Type of blur used for window decorations"
-msgstr ""
+msgid "Shade windows with metacity theme decorations from opaque to translucent"
+msgstr "Nuancer les fenêtres avec les décorations du thème Metacity, d'opaque à transparent"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
-msgid "Use metacity theme"
-msgstr ""
+msgid "Title bar mouse wheel action"
+msgstr "Action de la molette de souris sur la barre de titre"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Type of blur used for window decorations"
+msgstr "Type de flou utilisé pour les décorations des fenêtres"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:13
+msgid "Use metacity theme"
+msgstr "Utiliser le thème Metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Utiliser le thème Metacity pour dessiner les décorations de fenêtres"
 
 #: ../metadata/annotate.xml.in.h:1
-#, fuzzy
 msgid "Annotate"
-msgstr "Lancer"
+msgstr "Annoter"
 
 #: ../metadata/annotate.xml.in.h:2
-#, fuzzy
 msgid "Annotate Fill Color"
-msgstr "Couleur du cube"
+msgstr "Couleur de remplissage des annotations"
 
 #: ../metadata/annotate.xml.in.h:3
 msgid "Annotate Stroke Color"
-msgstr ""
+msgstr "Couleur du contour des annotations"
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "Plug-ins actifs"
+msgstr "Extension \"Annotation\""
 
 #: ../metadata/annotate.xml.in.h:5
-#, fuzzy
 msgid "Clear"
-msgstr "E_ffacer"
+msgstr "Effacer"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Dessiner"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "Dessiner avec un outil"
 
 #: ../metadata/annotate.xml.in.h:8
 msgid "Fill color for annotations"
-msgstr ""
+msgstr "Couleur de remplissage des annotations"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
@@ -125,187 +130,173 @@ msgid "Initiate"
 msgstr "Lancer"
 
 #: ../metadata/annotate.xml.in.h:10
-#, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "Lancer le redimensionnement de fenêtre"
+msgstr "Lancer le dessin d'annotations"
 
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Lancer le redimensionnement de fenêtre"
+msgstr "Lancer l'effacement des annotations"
 
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "Lancer"
+msgstr "Lancer l'effacement"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "Largeur de ligne"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
-msgstr ""
+msgstr "Largeur de ligne des annotations"
 
 #: ../metadata/annotate.xml.in.h:15
 msgid "Stroke color for annotations"
-msgstr ""
+msgstr "Couleur du contour des annotations"
 
 #: ../metadata/annotate.xml.in.h:16
 msgid "Stroke width"
-msgstr ""
+msgstr "Largeur du contour"
 
 #: ../metadata/annotate.xml.in.h:17
 msgid "Stroke width for annotations"
-msgstr ""
+msgstr "Largeur du contour des annotations"
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
-msgid "Alpha Blur"
-msgstr "Mettre les fenêtres à l'échelle"
+msgid "4xBilinear"
+msgstr "Bilinéaire 4x"
 
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
-msgid "Alpha blur windows"
-msgstr "Mettre les fenêtres à l'échelle"
+msgid "Alpha Blur"
+msgstr "Flou Alpha"
 
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
-msgid "Blur Filter"
-msgstr "Filtre de texture"
+msgid "Alpha blur windows"
+msgstr "Flou Alpha Fenêtres"
 
 #: ../metadata/blur.xml.in.h:4
-#, fuzzy
-msgid "Blur Occlusion"
-msgstr "Saturation"
+msgid "Blur Filter"
+msgstr "Filtre flou"
 
 #: ../metadata/blur.xml.in.h:5
-#, fuzzy
-msgid "Blur Saturation"
-msgstr "Saturation"
+msgid "Blur Occlusion"
+msgstr "Occlusion Floue"
 
 #: ../metadata/blur.xml.in.h:6
-#, fuzzy
-msgid "Blur Speed"
-msgstr "Vitesse de pliage"
+msgid "Blur Saturation"
+msgstr "Saturation du flou"
 
 #: ../metadata/blur.xml.in.h:7
-#, fuzzy
-msgid "Blur Windows"
-msgstr "Placer des fenêtres"
+msgid "Blur Speed"
+msgstr "Vitesse de flou"
 
 #: ../metadata/blur.xml.in.h:8
-msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgid "Blur Windows"
+msgstr "Flouter les fenêtres"
 
 #: ../metadata/blur.xml.in.h:9
-#, fuzzy
-msgid "Blur saturation"
-msgstr "Saturation"
+msgid "Blur behind translucent parts of windows"
+msgstr "Flou derrière les parties transparentes des fenêtres"
 
 #: ../metadata/blur.xml.in.h:10
-#, fuzzy
-msgid "Blur windows"
-msgstr "Mettre les fenêtres à l'échelle"
+msgid "Blur saturation"
+msgstr "Saturation du flou"
 
 #: ../metadata/blur.xml.in.h:11
-#, fuzzy
-msgid "Blur windows that doesn't have focus"
-msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
+msgid "Blur windows"
+msgstr "Flouter les fenêtres"
 
 #: ../metadata/blur.xml.in.h:12
-msgid "Filter method used for blurring"
-msgstr ""
+msgid "Blur windows that doesn't have focus"
+msgstr "Flouter les fenêtres qui n'ont pas le focus"
 
 #: ../metadata/blur.xml.in.h:13
-#, fuzzy
-msgid "Focus Blur"
-msgstr "Mettre les fenêtres à l'échelle"
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr "Désactiver le flou des régions de l'écran obscurcies par d'autres fenêtres"
 
 #: ../metadata/blur.xml.in.h:14
-#, fuzzy
-msgid "Focus blur windows"
-msgstr "Mettre les fenêtres à l'échelle"
+msgid "Filter method used for blurring"
+msgstr "Méthode de filtrage utilisée pour le flou"
 
 #: ../metadata/blur.xml.in.h:15
-#, fuzzy
-msgid "Gaussian Radius"
-msgstr "Fédération de Russie"
+msgid "Focus Blur"
+msgstr "Flou du focus"
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
-msgid "Gaussian Strength"
-msgstr "Russe"
+msgid "Focus blur windows"
+msgstr "Le focus floute les fenêtres"
 
 #: ../metadata/blur.xml.in.h:17
-#, fuzzy
-msgid "Gaussian radius"
-msgstr "Fédération de Russie"
+msgid "Gaussian"
+msgstr "Gaussien"
 
 #: ../metadata/blur.xml.in.h:18
-#, fuzzy
-msgid "Gaussian strength"
-msgstr "Russe"
+msgid "Gaussian Radius"
+msgstr "Rayon Gaussien"
 
 #: ../metadata/blur.xml.in.h:19
-#, fuzzy
-msgid "Mipmap LOD"
-msgstr "Mipmap"
+msgid "Gaussian Strength"
+msgstr "Puissance Gaussienne"
 
 #: ../metadata/blur.xml.in.h:20
-msgid "Mipmap level-of-detail"
-msgstr ""
+msgid "Gaussian radius"
+msgstr "Rayon Gaussien"
 
 #: ../metadata/blur.xml.in.h:21
-msgid "Pulse"
-msgstr ""
+msgid "Gaussian strength"
+msgstr "Puissance Gaussienne"
 
-#: ../metadata/blur.xml.in.h:22
-#, fuzzy
-msgid "Pulse effect"
-msgstr "Effet de focus"
+#: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:23
-#, fuzzy
-msgid "Window blur speed"
-msgstr "Vitesse de fondu de la fenêtre"
+msgid "Mipmap LOD"
+msgstr "Mipmap LOD"
 
 #: ../metadata/blur.xml.in.h:24
-#, fuzzy
-msgid "Windows that should be affected by focus blur"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgid "Mipmap level-of-detail"
+msgstr "Niveau de détail des Mipmap"
 
 #: ../metadata/blur.xml.in.h:25
-#, fuzzy
-msgid "Windows that should be use alpha blur by default"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgid "Pulse"
+msgstr "Pulsation"
 
 #: ../metadata/blur.xml.in.h:26
-msgid "blur occlusion"
-msgstr ""
+msgid "Pulse effect"
+msgstr "Effet de pulsation"
+
+#: ../metadata/blur.xml.in.h:27
+msgid "Window blur speed"
+msgstr "Vitesse de floutage de la fenêtre"
+
+#: ../metadata/blur.xml.in.h:28
+msgid "Windows that should be affected by focus blur"
+msgstr "Types de fenêtres devant utiliser le flou du focus"
+
+#: ../metadata/blur.xml.in.h:29
+msgid "Windows that should be use alpha blur by default"
+msgstr "Types de fenêtres devant utiliser le fondu par défaut"
 
 #: ../metadata/clone.xml.in.h:1
-#, fuzzy
 msgid "Clone Output"
-msgstr "Produit"
+msgstr "Cloner la sortie"
 
 #: ../metadata/clone.xml.in.h:3
-#, fuzzy
 msgid "Initiate clone selection"
-msgstr "Sélection du mode vidéo"
+msgstr "Sélection du mode vidéo (clône)"
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
-msgstr ""
+msgstr "Manipulateur de clône de sortie"
 
 #: ../metadata/core.xml.in.h:1
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
 "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
-"par command10"
+"par command0"
 
 #: ../metadata/core.xml.in.h:2
 msgid ""
@@ -397,11 +388,10 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:13
 msgid "Active Plugins"
-msgstr "Plug-ins actifs"
+msgstr "Extensions actives"
 
 #: ../metadata/core.xml.in.h:14
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Empêcher la redirection vers des pixmaps hors de l'écran lors de l'affichage "
 "des fenêtres plein écran"
@@ -431,530 +421,522 @@ msgid "Automatic detection of refresh rate"
 msgstr "Détection automatique de la fréquence de rafraîchissement"
 
 #: ../metadata/core.xml.in.h:21
+msgid "Best"
+msgstr "Meilleur"
+
+#: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
 msgstr "Cliquer pour obtenir le focus"
 
-#: ../metadata/core.xml.in.h:22
+#: ../metadata/core.xml.in.h:23
 msgid "Click on window moves input focus to it"
 msgstr "Si vous cliquez sur la fenêtre, vous déplacez le focus dessus"
 
-#: ../metadata/core.xml.in.h:23
+#: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Fermer la fenêtre"
 
-#: ../metadata/core.xml.in.h:24
+#: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "Fermer la fenêtre active"
 
-#: ../metadata/core.xml.in.h:25
-#, fuzzy
-msgid "Command line 0"
-msgstr "Ligne de commande 10"
-
 #: ../metadata/core.xml.in.h:26
+msgid "Command line 0"
+msgstr "Ligne de commande 0"
+
+#: ../metadata/core.xml.in.h:27
 msgid "Command line 1"
 msgstr "Ligne de commande 1"
 
-#: ../metadata/core.xml.in.h:27
+#: ../metadata/core.xml.in.h:28
 msgid "Command line 10"
 msgstr "Ligne de commande 10"
 
-#: ../metadata/core.xml.in.h:28
+#: ../metadata/core.xml.in.h:29
 msgid "Command line 11"
 msgstr "Ligne de commande 11"
 
-#: ../metadata/core.xml.in.h:29
+#: ../metadata/core.xml.in.h:30
 msgid "Command line 2"
 msgstr "Ligne de commande 2"
 
-#: ../metadata/core.xml.in.h:30
+#: ../metadata/core.xml.in.h:31
 msgid "Command line 3"
 msgstr "Ligne de commande 3"
 
-#: ../metadata/core.xml.in.h:31
+#: ../metadata/core.xml.in.h:32
 msgid "Command line 4"
 msgstr "Ligne de commande 4"
 
-#: ../metadata/core.xml.in.h:32
+#: ../metadata/core.xml.in.h:33
 msgid "Command line 5"
 msgstr "Ligne de commande 5"
 
-#: ../metadata/core.xml.in.h:33
+#: ../metadata/core.xml.in.h:34
 msgid "Command line 6"
 msgstr "Ligne de commande 6"
 
-#: ../metadata/core.xml.in.h:34
+#: ../metadata/core.xml.in.h:35
 msgid "Command line 7"
 msgstr "Ligne de commande 7"
 
-#: ../metadata/core.xml.in.h:35
+#: ../metadata/core.xml.in.h:36
 msgid "Command line 8"
 msgstr "Ligne de commande 8"
 
-#: ../metadata/core.xml.in.h:36
+#: ../metadata/core.xml.in.h:37
 msgid "Command line 9"
 msgstr "Ligne de commande 9"
 
-#: ../metadata/core.xml.in.h:37
-#, fuzzy
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
-
 #: ../metadata/core.xml.in.h:38
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command1 est appelé"
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command0 est appelé"
 
 #: ../metadata/core.xml.in.h:39
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command1 est appelé"
 
 #: ../metadata/core.xml.in.h:40
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command11 est appelé"
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
 
 #: ../metadata/core.xml.in.h:41
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command2 est appelé"
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command11 est appelé"
 
 #: ../metadata/core.xml.in.h:42
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command3 est appelé"
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command2 est appelé"
 
 #: ../metadata/core.xml.in.h:43
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command4 est appelé"
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command3 est appelé"
 
 #: ../metadata/core.xml.in.h:44
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command5 est appelé"
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command4 est appelé"
 
 #: ../metadata/core.xml.in.h:45
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command6 est appelé"
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command5 est appelé"
 
 #: ../metadata/core.xml.in.h:46
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command7 est appelé"
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command6 est appelé"
 
 #: ../metadata/core.xml.in.h:47
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command8 est appelé"
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command7 est appelé"
 
 #: ../metadata/core.xml.in.h:48
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-"Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command8 est appelé"
 
 #: ../metadata/core.xml.in.h:49
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
+
+#: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
 msgstr "Réduire l'opacité"
 
-#: ../metadata/core.xml.in.h:50
+#: ../metadata/core.xml.in.h:51
 msgid "Decrease window opacity"
 msgstr "Réduire l'opacité de la fenêtre"
 
-#: ../metadata/core.xml.in.h:51
+#: ../metadata/core.xml.in.h:52
 msgid "Default Icon"
 msgstr "Icône par défaut"
 
-#: ../metadata/core.xml.in.h:52
+#: ../metadata/core.xml.in.h:53
 msgid "Default window icon image"
 msgstr "Image de l'icône de la fenêtre par défaut"
 
-#: ../metadata/core.xml.in.h:53
+#: ../metadata/core.xml.in.h:54
 msgid "Detect Outputs"
 msgstr "Détection des sorties"
 
-#: ../metadata/core.xml.in.h:54
+#: ../metadata/core.xml.in.h:55
 msgid "Detect Refresh Rate"
 msgstr "Détecter la fréquence de rafraîchissement"
 
-#: ../metadata/core.xml.in.h:55
-#, fuzzy
-msgid "Focus Prevention Windows"
-msgstr "Focus des types de fenêtres"
-
 #: ../metadata/core.xml.in.h:56
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Focus des types de fenêtres"
+msgid "Fast"
+msgstr "Rapide"
 
 #: ../metadata/core.xml.in.h:57
-msgid "General Options"
-msgstr ""
+msgid "Focus Prevention Windows"
+msgstr "Fenêtres de Prévention du Focus"
 
 #: ../metadata/core.xml.in.h:58
-msgid "General compiz options"
-msgstr ""
+msgid "Focus prevention windows"
+msgstr "fenêtres de prévention du focus"
 
 #: ../metadata/core.xml.in.h:59
-msgid "Hide Skip Taskbar Windows"
-msgstr "Masquer les fenêtres de la barre des tâches Ignorer"
+msgid "General Options"
+msgstr "Options Générales"
 
 #: ../metadata/core.xml.in.h:60
-msgid "Hide all windows and focus desktop"
-msgstr "Masquer toutes les fenêtres et focus du bureau"
+msgid "General compiz options"
+msgstr "Options Générales de Compiz"
 
 #: ../metadata/core.xml.in.h:61
+msgid "Good"
+msgstr "Bon"
+
+#: ../metadata/core.xml.in.h:62
+msgid "Hide Skip Taskbar Windows"
+msgstr "Masquer les fenêtres de la barre des tâches"
+
+#: ../metadata/core.xml.in.h:63
+msgid "Hide all windows and focus desktop"
+msgstr "Masquer toutes les fenêtres et afficher le bureau"
+
+#: ../metadata/core.xml.in.h:64
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Masquer les fenêtres qui ne se trouvent pas dans la barre des tâches lorsque "
 "vous passez en mode d'affichage du bureau"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:65
 msgid "Horizontal Virtual Size"
 msgstr "Taille virtuelle horizontale"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:66
 msgid "Ignore Hints When Maximized"
 msgstr "Ignorer les conseils lorsque la fenêtre est agrandie"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:67
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 "Ignorer l'incrément de taille et les conseils d'aspect lorsque la fenêtre "
 "est agrandie"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:68
 msgid "Increase Opacity"
 msgstr "Augmenter l'opacité"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:69
 msgid "Increase window opacity"
 msgstr "Augmenter l'opacité de la fenêtre"
 
-#: ../metadata/core.xml.in.h:67
-#, fuzzy
+#: ../metadata/core.xml.in.h:70
 msgid "Interval before raising selected windows"
 msgstr "Intervalle avant de remonter les fenêtres sélectionnées"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:71
 msgid "Interval between ping messages"
-msgstr ""
+msgstr "Intervalle entre les messages ping"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:72
 msgid "Lighting"
 msgstr "Éclairage"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:73
 msgid "List of currently active plugins"
-msgstr "Liste des plug-ins actuellement actifs"
+msgstr "Liste des extensions (plugins) actuellement actives"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:74
 msgid "List of strings describing output devices"
 msgstr "Liste des chaînes décrivant les périphériques de sortie"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:75
 msgid "Lower Window"
 msgstr "Abaisser la fenêtre"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:76
 msgid "Lower window beneath other windows"
 msgstr "Abaisser la fenêtre sous d'autres fenêtres"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:77
 msgid "Maximize Window"
 msgstr "Optimiser la fenêtre"
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "Optimiser la fenêtre horizontalement"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:79
 msgid "Maximize Window Vertically"
 msgstr "Optimiser la fenêtre verticalement"
 
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:80
 msgid "Maximize active window"
 msgstr "Optimiser la fenêtre active"
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:81
 msgid "Maximize active window horizontally"
 msgstr "Optimiser la fenêtre active horizontalement"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "Optimiser la fenêtre active verticalement"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:83
 msgid "Minimize Window"
-msgstr "Minimiser la fenêtre"
+msgstr "Réduire la fenêtre"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
-msgstr "Minimiser la fenêtre active"
+msgstr "Réduire la fenêtre active"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:85
 msgid "Number of Desktops"
 msgstr "Nombre de bureaux"
 
-#: ../metadata/core.xml.in.h:83
-#, fuzzy
+#: ../metadata/core.xml.in.h:86
 msgid "Number of virtual desktops"
 msgstr "Nombre de bureaux virtuels"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:87
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "N'effectuer les mises à jour de l'écran que lors de la période de vidage "
 "vertical"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:88
 msgid "Opacity Step"
 msgstr "Incrément d'opacité"
 
-#: ../metadata/core.xml.in.h:86
-#, fuzzy
+#: ../metadata/core.xml.in.h:89
 msgid "Opacity change step"
 msgstr "Incrément de changement d'opacité"
 
-#: ../metadata/core.xml.in.h:87
-msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:88
-msgid "Opacity window values"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:89
-#, fuzzy
-msgid "Opacity windows"
-msgstr "Espace entre les fenêtres"
-
 #: ../metadata/core.xml.in.h:90
-#, fuzzy
-msgid "Open a terminal"
-msgstr "Exécuter en terminal"
+msgid "Opacity values for windows that should be translucent by default"
+msgstr "Valeurs de l'opacité pour les fenêtres qui devraient être transparentes par défaut"
 
 #: ../metadata/core.xml.in.h:91
-msgid "Open window menu"
-msgstr "Ouvrir le menu de la fenêtre"
+msgid "Opacity window values"
+msgstr "Valeur de l'opacité des fenêtres"
 
 #: ../metadata/core.xml.in.h:92
-msgid "Outputs"
-msgstr "Produit"
+msgid "Opacity windows"
+msgstr "Transparence des fenêtres"
 
 #: ../metadata/core.xml.in.h:93
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Délai de pluie"
+msgid "Open a terminal"
+msgstr "Ouvrir un terminal"
 
 #: ../metadata/core.xml.in.h:94
+msgid "Outputs"
+msgstr "Sorties"
+
+#: ../metadata/core.xml.in.h:95
+msgid "Ping Delay"
+msgstr "Délai du Ping"
+
+#: ../metadata/core.xml.in.h:96
 msgid "Raise On Click"
 msgstr "Remonter au clic"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:97
 msgid "Raise Window"
 msgstr "Remonter la fenêtre"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:98
 msgid "Raise selected windows after interval"
 msgstr "Remonter les fenêtres sélectionnées après l'intervalle"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:99
 msgid "Raise window above other windows"
 msgstr "Remonter la fenêtre au-dessus des autres"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:100
 msgid "Raise windows when clicked"
 msgstr "Remonter les fenêtres lorsque vous cliquez dessus"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:101
 msgid "Refresh Rate"
 msgstr "Fréquence de rafraîchissement"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:102
 msgid "Run Dialog"
 msgstr "Boîte de dialogue d'exécution"
 
-#: ../metadata/core.xml.in.h:101
-#, fuzzy
+#: ../metadata/core.xml.in.h:103
 msgid "Run command 0"
-msgstr "Exécuter la commande 10"
+msgstr "Exécuter la commande 0"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:104
 msgid "Run command 1"
 msgstr "Exécuter la commande 1"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:105
 msgid "Run command 10"
 msgstr "Exécuter la commande 10"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 11"
 msgstr "Exécuter la commande 11"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 2"
 msgstr "Exécuter la commande 2"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 3"
 msgstr "Exécuter la commande 3"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 4"
 msgstr "Exécuter la commande 4"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 5"
 msgstr "Exécuter la commande 5"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 6"
 msgstr "Exécuter la commande 6"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 7"
 msgstr "Exécuter la commande 7"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 8"
 msgstr "Exécuter la commande 8"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 9"
 msgstr "Exécuter la commande 9"
 
-#: ../metadata/core.xml.in.h:113
-#, fuzzy
+#: ../metadata/core.xml.in.h:115
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplicateur de taille d'écran pour taille virtuelle horizontale"
 
-#: ../metadata/core.xml.in.h:114
-#, fuzzy
+#: ../metadata/core.xml.in.h:116
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicateur de taille d'écran pour taille virtuelle verticale"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:117
 msgid "Screenshot command line"
 msgstr "Ligne de commande de capture d'écran"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:118
+msgid "Show Desktop"
+msgstr "Afficher le Bureau"
+
+#: ../metadata/core.xml.in.h:119
 msgid "Show Main Menu"
 msgstr "Afficher le menu principal"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Show Run Application dialog"
 msgstr "Afficher la boîte de dialogue d'exécution de l'application"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show the main menu"
 msgstr "Afficher le menu principal"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Slow Animations"
 msgstr "Ralentir les animations"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Sync To VBlank"
 msgstr "Sync vers VBlank"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Take a screenshot"
 msgstr "Faire une capture d'écran"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Take a screenshot of a window"
 msgstr "Faire une capture d'écran d'une fenêtre"
 
-#: ../metadata/core.xml.in.h:123
-#, fuzzy
+#: ../metadata/core.xml.in.h:126
 msgid "Terminal command line"
-msgstr "Ligne de commande de capture d'écran"
+msgstr "Ligne de commande de Terminal"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:127
 msgid "Texture Filter"
 msgstr "Filtre de texture"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:128
 msgid "Texture filtering"
 msgstr "Filtrage de texture"
 
-#: ../metadata/core.xml.in.h:126
-#, fuzzy
+#: ../metadata/core.xml.in.h:129
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Vitesse à laquelle l'écran est redessiné (fois/seconde)"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:130
 msgid "Toggle Window Maximized"
 msgstr "Basculer la fenêtre agrandie"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:131
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Basculer la fenêtre agrandie horizontalement"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:132
 msgid "Toggle Window Maximized Vertically"
 msgstr "Basculer la fenêtre agrandie verticalement"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:133
 msgid "Toggle Window Shaded"
 msgstr "Basculer la fenêtre ombrée"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle active window maximized"
 msgstr "Basculer la fenêtre active agrandie"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle active window maximized horizontally"
 msgstr "Basculer la fenêtre active agrandie horizontalement"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle active window maximized vertically"
 msgstr "Basculer la fenêtre active agrandie verticalement"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle active window shaded"
 msgstr "Basculer la fenêtre active ombrée"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle use of slow animations"
 msgstr "Basculer l'utilisation d'animations lentes"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:139
 msgid "Unmaximize Window"
-msgstr "Agrandir la fenêtre"
+msgstr "Restaurer la fenêtre"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:140
 msgid "Unmaximize active window"
-msgstr "Agrandir la fenêtre active"
+msgstr "Restaurer la fenêtre active"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:141
 msgid "Unredirect Fullscreen Windows"
 msgstr "Ne pas rediriger les fenêtres plein écran"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:142
 msgid "Use diffuse light when screen is transformed"
 msgstr "Utiliser la lumière diffuse lorsque l'écran est transformé"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:143
 msgid "Vertical Virtual Size"
 msgstr "Taille virtuelle verticale"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:144
 msgid "Window Menu"
 msgstr "Menu de la fenêtre"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:145
+msgid "Window menu button binding"
+msgstr "Bouton de racourci du menu de la fenêtre"
+
+#: ../metadata/core.xml.in.h:146
+msgid "Window menu key binding"
+msgstr "Touche de racourci du menu de la fenêtre"
+
+#: ../metadata/core.xml.in.h:147
 msgid "Window screenshot command line"
 msgstr "Ligne de commande de capture de fenêtre"
 
-#: ../metadata/core.xml.in.h:143
-#, fuzzy
+#: ../metadata/core.xml.in.h:148
 msgid "Windows that should be translucent by default"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgstr "Fenêtres devant être transparentes par défaut"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -962,11 +944,11 @@ msgstr "Accélération"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr ""
+msgstr "Ajuster l'Image"
 
 #: ../metadata/cube.xml.in.h:3
 msgid "Adjust top face image to rotation"
-msgstr ""
+msgstr "Ajuster l'image de la face supérieure à la rotation"
 
 #: ../metadata/cube.xml.in.h:4
 msgid "Advance to next slide"
@@ -981,169 +963,213 @@ msgid "Animate skydome when rotating cube"
 msgstr "Animer le skydome lors de la rotation de cube"
 
 #: ../metadata/cube.xml.in.h:7
-msgid "Background Images"
-msgstr ""
+msgid "Automatic"
+msgstr "Automatique"
 
 #: ../metadata/cube.xml.in.h:8
-msgid "Background images"
-msgstr ""
+msgid "Background Images"
+msgstr "Images de Fond"
 
 #: ../metadata/cube.xml.in.h:9
+msgid "Background images"
+msgstr "Images de fond"
+
+#: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
 msgstr "Couleur des côtés supérieur et inférieur du cube"
 
-#: ../metadata/cube.xml.in.h:10
+#: ../metadata/cube.xml.in.h:11
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
 "Couleur à utiliser pour l'arrêt de couleur inférieure du gradient de rappel "
 "de skydome"
 
-#: ../metadata/cube.xml.in.h:11
+#: ../metadata/cube.xml.in.h:12
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 "Couleur à utiliser pour l'arrêt de couleur supérieure du gradient de rappel "
 "de skydome"
 
-#: ../metadata/cube.xml.in.h:12
+#: ../metadata/cube.xml.in.h:13
 msgid "Cube Color"
 msgstr "Couleur du cube"
 
-#: ../metadata/cube.xml.in.h:13
-msgid "Desktop Cube"
-msgstr "Cube du bureau"
-
 #: ../metadata/cube.xml.in.h:14
+msgid "Desktop Cube"
+msgstr "Cube du Bureau"
+
+#: ../metadata/cube.xml.in.h:15
+msgid "Desktop Window Opacity Fade Time."
+msgstr "Temps de fondu de l'opacité de la fenêtre du bureau"
+
+#: ../metadata/cube.xml.in.h:16
+msgid "Fade Time"
+msgstr "Temps de Fondu"
+
+#: ../metadata/cube.xml.in.h:17
 msgid "Fold Acceleration"
 msgstr "Accélération de pliage"
 
-#: ../metadata/cube.xml.in.h:15
+#: ../metadata/cube.xml.in.h:18
 msgid "Fold Speed"
 msgstr "Vitesse de pliage"
 
-#: ../metadata/cube.xml.in.h:16
+#: ../metadata/cube.xml.in.h:19
 msgid "Fold Timestep"
 msgstr "Intervalle de pliage"
 
-#: ../metadata/cube.xml.in.h:17 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 "Générer des mipmaps dans la mesure du possible pour une mise à l'échelle de "
 "meilleure qualité"
 
-#: ../metadata/cube.xml.in.h:18
+#: ../metadata/cube.xml.in.h:21
 msgid "Go back to previous slide"
 msgstr "Revenir à la diapositive précédente"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:22
 msgid "Image files"
 msgstr "Fichiers image"
 
-#: ../metadata/cube.xml.in.h:20
+#: ../metadata/cube.xml.in.h:23
 msgid "Image to use as texture for the skydome"
 msgstr "Image à utiliser comme texture pour le skydome"
 
-#: ../metadata/cube.xml.in.h:21
-msgid "Inside Cube"
-msgstr "À l'intérieur du cube"
+#: ../metadata/cube.xml.in.h:24
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr "Rendre le Cube transparent seulement si la rotation est contrôlée par la souris"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:25
+msgid "Inside Cube"
+msgstr "À l'intérieur du Cube"
+
+#: ../metadata/cube.xml.in.h:26
 msgid "Inside cube"
 msgstr "À l'intérieur du cube"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "Liste de fichiers PNG et SVG à afficher sur la face supérieure du cube"
 
-#: ../metadata/cube.xml.in.h:24 ../metadata/decoration.xml.in.h:10
-#: ../metadata/switcher.xml.in.h:13
-msgid "Mipmap"
-msgstr "Mipmap"
+#: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
+msgid "Multi Output Mode"
+msgstr "Mode de sorties multiples"
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:30
+msgid "Multiple cubes"
+msgstr "Cubes multiples"
+
+#: ../metadata/cube.xml.in.h:31
 msgid "Next Slide"
 msgstr "Diapositive suivante"
 
-#: ../metadata/cube.xml.in.h:26
+#: ../metadata/cube.xml.in.h:32
+msgid "On big cube"
+msgstr "Sur un grand cube"
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Opacity During Rotation"
+msgstr "Opacité pendant la rotation"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Opacity When Not Rotating"
+msgstr "Opacité à l'arrêt"
+
+#: ../metadata/cube.xml.in.h:35
+msgid "Opacity of desktop window during rotation."
+msgstr "Opacité de la fenêtre du bureau pendant la rotation"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Opacity of desktop window when not rotating."
+msgstr "Opacité de la fenêtre du bureau à l'arrêt"
+
+#: ../metadata/cube.xml.in.h:37
 msgid "Place windows on cube"
 msgstr "Placer des fenêtres sur le cube"
 
-#: ../metadata/cube.xml.in.h:27
-#, fuzzy
+#: ../metadata/cube.xml.in.h:38
 msgid "Prev Slide"
 msgstr "Diapositive précédente"
 
-#: ../metadata/cube.xml.in.h:28
+#: ../metadata/cube.xml.in.h:39
 msgid "Render skydome"
 msgstr "Afficher le skydome"
 
-#: ../metadata/cube.xml.in.h:29
+#: ../metadata/cube.xml.in.h:40
 msgid "Scale image"
 msgstr "Mettre l'image à l'échelle"
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:41
 msgid "Scale images to cover top face of cube"
 msgstr "Mettre les images à l'échelle pour couvrir la face supérieure du cube"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:42
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr "Choisir comment le cube est affiché si plusieurs périphériques de sortie sont utilisés"
+
+#: ../metadata/cube.xml.in.h:43
 msgid "Skydome"
 msgstr "Skydome"
 
-#: ../metadata/cube.xml.in.h:32
+#: ../metadata/cube.xml.in.h:44
 msgid "Skydome Gradient End Color"
-msgstr "Couleur de fin du gradient de skydome"
+msgstr "Couleur de fin du gradient du skydome"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:45
 msgid "Skydome Gradient Start Color"
-msgstr "Couleur de début du gradient de skydome"
+msgstr "Couleur de début du gradient du skydome"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:46
 msgid "Skydome Image"
 msgstr "Image du skydome"
 
-#: ../metadata/cube.xml.in.h:35 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:85 ../metadata/scale.xml.in.h:23
-#: ../metadata/switcher.xml.in.h:27 ../metadata/zoom.xml.in.h:7
+#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Vitesse"
 
-#: ../metadata/cube.xml.in.h:36 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:25
-#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:8
+#: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Intervalle"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:49
+msgid "Transparency Only on Mouse Rotate"
+msgstr "Transparence seulement si la souris contrôle la rotation"
+
+#: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
 msgstr "Déplier"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:51
 msgid "Unfold cube"
 msgstr "Déplier le cube"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr ""
+msgstr "DBus"
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
-msgstr ""
+msgstr "Backend de contrôle DBus"
 
 #: ../metadata/decoration.xml.in.h:1
 msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgstr "Permettre la génération de mipmaps pour les textures de décoration"
 
 #: ../metadata/decoration.xml.in.h:2
 msgid "Command"
 msgstr "Commande"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "Mettre les fenêtres à l'échelle"
+msgstr "Décoration des fenêtres"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
+msgid "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Ligne de commande du décorateur qui est exécutée si aucun décorateur ne "
 "fonctionne"
@@ -1157,9 +1183,8 @@ msgid "Drop shadow Y offset"
 msgstr "Décalage Y de l'ombre des gouttes"
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "Rayon de l'ombre des gouttes"
+msgstr "Couleur de l'ombre des gouttes"
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
@@ -1170,9 +1195,8 @@ msgid "Drop shadow radius"
 msgstr "Rayon de l'ombre des gouttes"
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "Aligner les fenêtres"
+msgstr "Couleur de l'ombre"
 
 #: ../metadata/decoration.xml.in.h:12
 msgid "Shadow Offset X"
@@ -1191,9 +1215,8 @@ msgid "Shadow Radius"
 msgstr "Rayon de l'ombre"
 
 #: ../metadata/decoration.xml.in.h:16
-#, fuzzy
 msgid "Shadow windows"
-msgstr "Aligner les fenêtres"
+msgstr "Ombrer les fenêtres"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
@@ -1201,21 +1224,19 @@ msgstr "Décoration de la fenêtre"
 
 #: ../metadata/decoration.xml.in.h:18
 msgid "Window decorations"
-msgstr "Décoration des fenêtres"
+msgstr "Décorations des fenêtres"
 
 #: ../metadata/decoration.xml.in.h:19
-#, fuzzy
 msgid "Windows that should be decorated"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgstr "Types de fenêtres devant être décorées"
 
 #: ../metadata/decoration.xml.in.h:20
-#, fuzzy
 msgid "Windows that should have a shadow"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgstr "Types de fenêtres devant avoir une ombre"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
-msgstr ""
+msgstr "Fondu quand une fenêtre est Minimisée/ouverte/fermée"
 
 #: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
@@ -1223,7 +1244,7 @@ msgstr "Vitesse de fondu"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
-msgstr ""
+msgstr "Effet de fondu lors des événements Minimiser/Ouvrir/Fermer la fenêtre"
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
@@ -1236,9 +1257,8 @@ msgstr ""
 "fenêtres en mode unmapped"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "Mettre les fenêtres à l'échelle"
+msgstr "Fondu des fenêtres"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
@@ -1254,92 +1274,101 @@ msgstr "Effet de fondu plein écran au signal sonore du système"
 
 #: ../metadata/fade.xml.in.h:10
 msgid "Visual Bell"
-msgstr "Cloche virtuelle"
+msgstr "Cloche visuelle"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Window fade speed"
 msgstr "Vitesse de fondu de la fenêtre"
 
 #: ../metadata/fade.xml.in.h:12
-#, fuzzy
 msgid "Windows that should be fading"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgstr "Types de Fenêtres devant utiliser le fondu"
 
 #: ../metadata/fs.xml.in.h:1
-#, fuzzy
 msgid "Mount Point"
-msgstr "Point"
+msgstr "Point de montage"
 
 #: ../metadata/fs.xml.in.h:2
-#, fuzzy
 msgid "Mount point"
-msgstr "Ajouter un point"
+msgstr "Point de montage"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
-msgstr ""
+msgstr "Système de fichier de l'Espace Utilisateur"
 
 #: ../metadata/fs.xml.in.h:4
 msgid "Userspace file system"
-msgstr ""
+msgstr "Système de fichier de l'espace utilisateur"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr ""
+msgstr "GConf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
-msgstr ""
+msgstr "Backend de contrôle GConf"
+
+#: ../metadata/glib.xml.in.h:1
+msgid "GLib"
+msgstr "GLib"
+
+#: ../metadata/glib.xml.in.h:2
+msgid "GLib main loop support"
+msgstr "Support de la boucle principale GLib"
 
 #: ../metadata/ini.xml.in.h:1
-#, fuzzy
 msgid "Ini"
-msgstr "Ne pas modifier"
+msgstr "Ini (Ne pas modifier)"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
-msgstr ""
+msgstr "Ini Flat File Backend"
 
 #: ../metadata/inotify.xml.in.h:1
 msgid "File change notification plugin"
-msgstr ""
+msgstr "Extension pour la notification de modification de fichier"
 
 #: ../metadata/inotify.xml.in.h:2
-#, fuzzy
 msgid "Inotify"
-msgstr "Ne pas modifier"
+msgstr "Inotify (Ne pas modifier)"
+
+#: ../metadata/kconfig.xml.in.h:1
+msgid "Kconfig"
+msgstr "Kconfig"
+
+#: ../metadata/kconfig.xml.in.h:2
+msgid "Kconfig Control Backend"
+msgstr "Backend de contrôle Kconfig"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
-msgstr "Minimiser l'effet"
+msgstr "Effet de réduction"
 
 #: ../metadata/minimize.xml.in.h:2
-#, fuzzy
 msgid "Minimize Windows"
-msgstr "Minimiser la fenêtre"
+msgstr "Réduire la fenêtre"
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
-msgstr "Minimiser la vitesse"
+msgstr "Vitesse de réduction"
 
 #: ../metadata/minimize.xml.in.h:4
 msgid "Minimize timestep"
-msgstr "Minimiser l'intervalle"
+msgstr "Intervalle de réduction"
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
-msgstr "Ombrer la résistance"
+msgstr "Résistance de l'Ombre"
 
 #: ../metadata/minimize.xml.in.h:6
 msgid "Shade resistance"
-msgstr "Ombrer la résistance"
+msgstr "Résistance de l'ombre"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Transformer les fenêtres lorsqu'elles sont réduites ou agrandies"
 
 #: ../metadata/minimize.xml.in.h:10
-#, fuzzy
 msgid "Windows that should be transformed when minimized"
 msgstr "Types de fenêtres à transformer lorsqu'elles sont réduites"
 
@@ -1352,333 +1381,411 @@ msgid "Constrain Y coordinate to workspace area"
 msgstr "Contraindre la coordonnée Y à être dans la zone de l'espace de travail"
 
 #: ../metadata/move.xml.in.h:3
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr "Ne pas mettre à jour la position de la fenêtre coté serveur, tant que son mouvement n'est pas fini"
+
+#: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
 msgstr "Lancer le déplacement de fenêtre"
 
-#: ../metadata/move.xml.in.h:4
+#: ../metadata/move.xml.in.h:5
+msgid "Lazy Positioning"
+msgstr "Positionnement souple"
+
+#: ../metadata/move.xml.in.h:6
 msgid "Move Window"
 msgstr "Déplacer la fenêtre"
 
-#: ../metadata/move.xml.in.h:5
+#: ../metadata/move.xml.in.h:7
 msgid "Move window"
 msgstr "Déplacer la fenêtre"
 
-#: ../metadata/move.xml.in.h:6 ../metadata/scale.xml.in.h:13
-#: ../metadata/switcher.xml.in.h:15
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:17
 msgid "Opacity"
 msgstr "Opacité"
 
-#: ../metadata/move.xml.in.h:7
+#: ../metadata/move.xml.in.h:9
 msgid "Opacity level of moving windows"
 msgstr "Niveau d'opacité pour déplacer des fenêtres"
 
-#: ../metadata/move.xml.in.h:8
+#: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
 "Désactiver l'alignement et la réduction automatique des fenêtres lorsque "
 "vous les faites glisser"
 
-#: ../metadata/move.xml.in.h:9
+#: ../metadata/move.xml.in.h:11
 msgid "Snapoff maximized windows"
 msgstr "Désactiver l'alignement des fenêtres agrandies"
 
-#: ../metadata/move.xml.in.h:10
+#: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
 msgstr "Démarrer le déplacement de la fenêtre"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "Algorithme à utiliser pour le déplacement des fenêtres"
 
 #: ../metadata/place.xml.in.h:2
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Taille virtuelle horizontale"
+msgid "Cascade"
+msgstr "Cascade"
 
 #: ../metadata/place.xml.in.h:3
+msgid "Centered"
+msgstr "Centré"
+
+#: ../metadata/place.xml.in.h:4
+msgid "Horizontal viewport positions"
+msgstr "Positions du viewport horizontal"
+
+#: ../metadata/place.xml.in.h:5
+msgid "Maximize"
+msgstr "Maximiser"
+
+#: ../metadata/place.xml.in.h:6
 msgid "Place Windows"
 msgstr "Placer des fenêtres"
 
-#: ../metadata/place.xml.in.h:4
+#: ../metadata/place.xml.in.h:7
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Placer des fenêtres aux positions correctes lorsqu'elles sont mappées"
 
-#: ../metadata/place.xml.in.h:5
-msgid "Placement Mode"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:6
-#, fuzzy
-msgid "Positioned windows"
-msgstr "Afficher des fenêtres réduites"
-
-#: ../metadata/place.xml.in.h:7
-#, fuzzy
-msgid "Vertical viewport positions"
-msgstr "Taille virtuelle horizontale"
-
 #: ../metadata/place.xml.in.h:8
-#, fuzzy
-msgid "Viewport positioned windows"
-msgstr "Afficher des fenêtres réduites"
+msgid "Placement Mode"
+msgstr "Mode de placement"
 
 #: ../metadata/place.xml.in.h:9
-msgid "Window placement workarounds"
-msgstr "Solution de placement de fenêtre"
+msgid "Positioned windows"
+msgstr "Fenêtres positionnées"
 
 #: ../metadata/place.xml.in.h:10
-#, fuzzy
-msgid "Windows that should be positioned by default"
-msgstr "Types de fenêtres devant utiliser le fondu"
+msgid "Random"
+msgstr "Aléatoire"
 
 #: ../metadata/place.xml.in.h:11
-#, fuzzy
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
+msgid "Smart"
+msgstr "Intelligent"
 
 #: ../metadata/place.xml.in.h:12
+msgid "Vertical viewport positions"
+msgstr "Positions du viewport vertical"
+
+#: ../metadata/place.xml.in.h:13
+msgid "Viewport positioned windows"
+msgstr "Fenêtres positionnées sur un bureau"
+
+#: ../metadata/place.xml.in.h:14
+msgid "Window placement workarounds"
+msgstr "Solutions de placement de fenêtre"
+
+#: ../metadata/place.xml.in.h:15
+msgid "Windows that should be positioned by default"
+msgstr "Fenêtres devant être positionnées par défaut"
+
+#: ../metadata/place.xml.in.h:16
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr "Types de fenêtres qui devraient être positionnées sur un bureau spécifique par défaut"
+
+#: ../metadata/place.xml.in.h:17
 msgid "Workarounds"
 msgstr "Solutions"
 
-#: ../metadata/place.xml.in.h:13
-#, fuzzy
-msgid "X Positions"
-msgstr "Afficher des fenêtres réduites"
-
-#: ../metadata/place.xml.in.h:14
-#, fuzzy
-msgid "X Viewport Positions"
-msgstr "Taille virtuelle horizontale"
-
-#: ../metadata/place.xml.in.h:15
-msgid "X position values"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:16
-#, fuzzy
-msgid "Y Positions"
-msgstr "Afficher des fenêtres réduites"
-
-#: ../metadata/place.xml.in.h:17
-#, fuzzy
-msgid "Y Viewport Positions"
-msgstr "Taille virtuelle horizontale"
-
 #: ../metadata/place.xml.in.h:18
+msgid "X Positions"
+msgstr "Positions en X"
+
+#: ../metadata/place.xml.in.h:19
+msgid "X Viewport Positions"
+msgstr "Positions du viewport en X"
+
+#: ../metadata/place.xml.in.h:20
+msgid "X position values"
+msgstr "Valeurs de la position en X"
+
+#: ../metadata/place.xml.in.h:21
+msgid "Y Positions"
+msgstr "Positions en Y"
+
+#: ../metadata/place.xml.in.h:22
+msgid "Y Viewport Positions"
+msgstr "Positions du viewport en Y"
+
+#: ../metadata/place.xml.in.h:23
 msgid "Y position values"
-msgstr ""
+msgstr "Valeurs de la position en Y"
 
 #: ../metadata/plane.xml.in.h:1
-#, fuzzy
 msgid "Desktop Plane"
-msgstr "Cube du bureau"
+msgstr "Bureau à Plat"
 
 #: ../metadata/plane.xml.in.h:2
-#, fuzzy
 msgid "Place windows on a plane"
-msgstr "Placer des fenêtres sur le cube"
+msgstr "Placer tous les Bureaux sur un Plan"
 
 #: ../metadata/plane.xml.in.h:3
-#, fuzzy
 msgid "Plane Down"
-msgstr "Page bas"
+msgstr "Planer vers le Bas"
 
 #: ../metadata/plane.xml.in.h:4
-#, fuzzy
 msgid "Plane Left"
-msgstr "Rotation à gauche"
+msgstr "Planer à Gauche"
 
 #: ../metadata/plane.xml.in.h:5
-#, fuzzy
 msgid "Plane Right"
-msgstr "Rotation à droite"
+msgstr "Planer à Droite"
 
 #: ../metadata/plane.xml.in.h:6
-#, fuzzy
 msgid "Plane To Face 1"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 1"
 
 #: ../metadata/plane.xml.in.h:7
-#, fuzzy
 msgid "Plane To Face 10"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 10"
 
 #: ../metadata/plane.xml.in.h:8
-#, fuzzy
 msgid "Plane To Face 11"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 11"
 
 #: ../metadata/plane.xml.in.h:9
-#, fuzzy
 msgid "Plane To Face 12"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 12"
 
 #: ../metadata/plane.xml.in.h:10
-#, fuzzy
 msgid "Plane To Face 2"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 2"
 
 #: ../metadata/plane.xml.in.h:11
-#, fuzzy
 msgid "Plane To Face 3"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 3"
 
 #: ../metadata/plane.xml.in.h:12
-#, fuzzy
 msgid "Plane To Face 4"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 4"
 
 #: ../metadata/plane.xml.in.h:13
-#, fuzzy
 msgid "Plane To Face 5"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 5"
 
 #: ../metadata/plane.xml.in.h:14
-#, fuzzy
 msgid "Plane To Face 6"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 6"
 
 #: ../metadata/plane.xml.in.h:15
-#, fuzzy
 msgid "Plane To Face 7"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 7"
 
 #: ../metadata/plane.xml.in.h:16
-#, fuzzy
 msgid "Plane To Face 8"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 8"
 
 #: ../metadata/plane.xml.in.h:17
-#, fuzzy
 msgid "Plane To Face 9"
-msgstr "Rotation vers la face %d"
+msgstr "Planer vers la Face 9"
 
 #: ../metadata/plane.xml.in.h:18
-#, fuzzy
 msgid "Plane Up"
-msgstr "Page haut"
+msgstr "Planer vers le Haut"
 
 #: ../metadata/plane.xml.in.h:19
-#, fuzzy
 msgid "Plane down"
-msgstr "Placer des fenêtres"
+msgstr "Faire glisser la vue vers le bureau inférieur"
 
 #: ../metadata/plane.xml.in.h:20
-#, fuzzy
 msgid "Plane left"
-msgstr "Rotation à gauche"
+msgstr "Faire glisser la vue vers le bureau de gauche"
 
 #: ../metadata/plane.xml.in.h:21
-#, fuzzy
 msgid "Plane right"
-msgstr "Rotation à droite"
+msgstr "Faire glisser la vue vers le bureau de droite"
 
 #: ../metadata/plane.xml.in.h:22
-#, fuzzy
 msgid "Plane to face 1"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 1"
 
 #: ../metadata/plane.xml.in.h:23
-#, fuzzy
 msgid "Plane to face 10"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 10"
 
 #: ../metadata/plane.xml.in.h:24
-#, fuzzy
 msgid "Plane to face 11"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 11"
 
 #: ../metadata/plane.xml.in.h:25
-#, fuzzy
 msgid "Plane to face 12"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 12"
 
 #: ../metadata/plane.xml.in.h:26
-#, fuzzy
 msgid "Plane to face 2"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 2"
 
 #: ../metadata/plane.xml.in.h:27
-#, fuzzy
 msgid "Plane to face 3"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 3"
 
 #: ../metadata/plane.xml.in.h:28
-#, fuzzy
 msgid "Plane to face 4"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 4"
 
 #: ../metadata/plane.xml.in.h:29
-#, fuzzy
 msgid "Plane to face 5"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 5"
 
 #: ../metadata/plane.xml.in.h:30
-#, fuzzy
 msgid "Plane to face 6"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 6"
 
 #: ../metadata/plane.xml.in.h:31
-#, fuzzy
 msgid "Plane to face 7"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 7"
 
 #: ../metadata/plane.xml.in.h:32
-#, fuzzy
 msgid "Plane to face 8"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 8"
 
 #: ../metadata/plane.xml.in.h:33
-#, fuzzy
 msgid "Plane to face 9"
-msgstr "Rotation vers la face %d"
+msgstr "Faire glisser la vue vers la face 9"
 
 #: ../metadata/plane.xml.in.h:34
-#, fuzzy
 msgid "Plane up"
-msgstr "Page haut"
+msgstr "Faire glisser la vue vers le bureau supérieur"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
-msgstr ""
+msgstr "Png"
 
 #: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
-msgstr ""
+msgstr "Chargeur d'Images png"
 
 #: ../metadata/regex.xml.in.h:1
-#, fuzzy
 msgid "Regex Matching"
-msgstr "Basculer l'alignement des fenêtres"
+msgstr "Correspondance Regex"
 
 #: ../metadata/regex.xml.in.h:2
-#, fuzzy
 msgid "Regex window matching"
-msgstr "Basculer l'alignement des fenêtres"
+msgstr "Correspondance Regex"
 
 #: ../metadata/resize.xml.in.h:1
-msgid "Default Resize Mode"
-msgstr ""
+msgid "Border Color"
+msgstr "Couleur de Bordure"
 
 #: ../metadata/resize.xml.in.h:2
-msgid "Default mode used for window resizing"
-msgstr ""
+msgid "Border color used for outline and rectangle resize modes"
+msgstr "Couleur de la bordure utilisée pour les modes de redimensionnement Rectangulaire et Contour"
 
 #: ../metadata/resize.xml.in.h:3
+msgid "Default Resize Mode"
+msgstr "Mode de redimensionnement par défaut"
+
+#: ../metadata/resize.xml.in.h:4
+msgid "Default mode used for window resizing"
+msgstr "Mode utilisé par défaut pour le redimentionnement de fenêtre"
+
+#: ../metadata/resize.xml.in.h:5
+msgid "Fill Color"
+msgstr "Couleur de Remplissage"
+
+#: ../metadata/resize.xml.in.h:6
+msgid "Fill color used for rectangle resize mode"
+msgstr "Couleur de remplissage pour le mode de redimensionnement rectangulaire"
+
+#: ../metadata/resize.xml.in.h:7
+msgid "Initiate Normal Window Resize"
+msgstr "Lancer le redimensionnement de fenêtre Normal"
+
+#: ../metadata/resize.xml.in.h:8
+msgid "Initiate Outline Window Resize"
+msgstr "Lancer le redimensionnement de fenêtre Contour"
+
+#: ../metadata/resize.xml.in.h:9
+msgid "Initiate Rectangle Window Resize"
+msgstr "Lancer le redimensionnement de fenêtre Rectangle"
+
+#: ../metadata/resize.xml.in.h:10
+msgid "Initiate Stretch Window Resize"
+msgstr "Lancer le redimensionnement de fenêtre Étiré"
+
+#: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
 msgstr "Lancer le redimensionnement de fenêtre"
 
-#: ../metadata/resize.xml.in.h:4
-msgid "Resize Window"
-msgstr "Redimensionner la fenêtre"
+#: ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normal"
 
-#: ../metadata/resize.xml.in.h:5
+#: ../metadata/resize.xml.in.h:13
+msgid "Normal Resize Windows"
+msgstr "Redimensionne les fenêtres en mode Normal"
+
+#: ../metadata/resize.xml.in.h:14
+msgid "Outline"
+msgstr "Contour"
+
+#: ../metadata/resize.xml.in.h:15
+msgid "Outline Resize Windows"
+msgstr "Redimensionne les fenêtres en mode Contour"
+
+#: ../metadata/resize.xml.in.h:16
+msgid "Rectangle"
+msgstr "Rectangle"
+
+#: ../metadata/resize.xml.in.h:17
+msgid "Rectangle Resize Windows"
+msgstr "Redimensionne les fenêtres en mode Rectangle"
+
+#: ../metadata/resize.xml.in.h:18
+msgid "Resize Window"
+msgstr "Redimensionner la Fenêtre"
+
+#: ../metadata/resize.xml.in.h:19
 msgid "Resize window"
 msgstr "Redimensionner la fenêtre"
 
-#: ../metadata/resize.xml.in.h:6
+#: ../metadata/resize.xml.in.h:20
 msgid "Start resizing window"
 msgstr "Commencer à redimensionner la fenêtre"
+
+#: ../metadata/resize.xml.in.h:21
+msgid "Start resizing window by stretching it"
+msgstr "Commencer à redimensionner la fenêtre en l'étirant"
+
+#: ../metadata/resize.xml.in.h:22
+msgid "Start resizing window normally"
+msgstr "Commencer à redimensionner la fenêtre normalement"
+
+#: ../metadata/resize.xml.in.h:23
+msgid "Start resizing window with outline"
+msgstr "Commencer à redimensionner la fenêtre avec le contour"
+
+#: ../metadata/resize.xml.in.h:24
+msgid "Start resizing window with rectangle"
+msgstr "Commencer à redimensionner la fenêtre avec un rectangle"
+
+#: ../metadata/resize.xml.in.h:25
+msgid "Stretch"
+msgstr "Étirer"
+
+#: ../metadata/resize.xml.in.h:26
+msgid "Stretch Resize Windows"
+msgstr "Redimensionne les fenêtres en mode Étiré"
+
+#: ../metadata/resize.xml.in.h:27
+msgid "Windows that normal resize should be used for"
+msgstr "Types de fenêtres qui devraient utiliser le redimensionnement Normal"
+
+#: ../metadata/resize.xml.in.h:28
+msgid "Windows that outline resize should be used for"
+msgstr "Types de fenêtres qui devraient utiliser le redimensionnement Contour"
+
+#: ../metadata/resize.xml.in.h:29
+msgid "Windows that rectangle resize should be used for"
+msgstr "Types de fenêtres qui devraient utiliser le redimensionnement Rectangle"
+
+#: ../metadata/resize.xml.in.h:30
+msgid "Windows that stretch resize should be used for"
+msgstr "Types de fenêtres qui devraient utiliser le redimensionnement Étiré"
 
 #: ../metadata/rotate.xml.in.h:2
 msgid "Edge Flip DnD"
@@ -1703,474 +1810,502 @@ msgstr "Rotation sur le coté gauche avec le pointeur"
 #: ../metadata/rotate.xml.in.h:7
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
-"Rotation vers la fenêtre suivante - Glissement d'un objet vers le côté de "
+"Rotation vers la face suivante - Glissement d'un objet vers le côté de "
 "l'écran"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
-"Rotation vers la fenêtre suivante - Déplacement du pointeur vers le côté de "
+"Rotation vers la face suivante - Déplacement du pointeur vers le côté de "
 "l'écran"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Rotation vers la fenêtre suivante - Déplacement de la fenêtre vers le côté "
+"Rotation vers la face suivante - Déplacement de la fenêtre vers le côté "
 "de l'écran"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to right viewport and warp pointer"
 msgstr "Rotation sur le coté droit avec le pointeur"
 
-#: ../metadata/rotate.xml.in.h:12 ../metadata/zoom.xml.in.h:3
+#: ../metadata/rotate.xml.in.h:12
 msgid "Invert Y axis for pointer movement"
 msgstr "Insérer l'axe Y pour le mouvement du pointeur"
 
-#: ../metadata/rotate.xml.in.h:13 ../metadata/zoom.xml.in.h:4
+#: ../metadata/rotate.xml.in.h:13
 msgid "Pointer Invert Y"
 msgstr "Inversion Y du pointeur"
 
-#: ../metadata/rotate.xml.in.h:14 ../metadata/zoom.xml.in.h:5
+#: ../metadata/rotate.xml.in.h:14
 msgid "Pointer Sensitivity"
 msgstr "Sensibilité du pointeur"
 
 #: ../metadata/rotate.xml.in.h:15
-msgid "Rotate Cube"
-msgstr "Rotation du cube"
+msgid "Raise on rotate"
+msgstr "Remonter lors de la rotation"
 
 #: ../metadata/rotate.xml.in.h:16
+msgid "Raise window when rotating"
+msgstr "Remonter la fenêtre lors de la rotation"
+
+#: ../metadata/rotate.xml.in.h:17
+msgid "Rotate Cube"
+msgstr "Rotation du Cube"
+
+#: ../metadata/rotate.xml.in.h:18
 msgid "Rotate Flip Left"
 msgstr "Rotation sur le côté gauche"
 
-#: ../metadata/rotate.xml.in.h:17
+#: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Flip Right"
 msgstr "Rotation sur le côté droit"
 
-#: ../metadata/rotate.xml.in.h:18
+#: ../metadata/rotate.xml.in.h:20
 msgid "Rotate Left"
 msgstr "Rotation à gauche"
 
-#: ../metadata/rotate.xml.in.h:19
+#: ../metadata/rotate.xml.in.h:21
 msgid "Rotate Left with Window"
 msgstr "Rotation à gauche avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:20
+#: ../metadata/rotate.xml.in.h:22
 msgid "Rotate Right"
 msgstr "Rotation à droite"
 
-#: ../metadata/rotate.xml.in.h:21
+#: ../metadata/rotate.xml.in.h:23
 msgid "Rotate Right with Window"
 msgstr "Rotation à droite avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:22
+#: ../metadata/rotate.xml.in.h:24
 msgid "Rotate To"
 msgstr "Rotation vers"
 
-#: ../metadata/rotate.xml.in.h:23
-#, fuzzy
-msgid "Rotate To Face 1"
-msgstr "Rotation vers la face 10"
-
-#: ../metadata/rotate.xml.in.h:24
-#, fuzzy
-msgid "Rotate To Face 1 with Window"
-msgstr "Rotation vers la face 10 avec la fenêtre"
-
 #: ../metadata/rotate.xml.in.h:25
+msgid "Rotate To Face 1"
+msgstr "Rotation vers la face 1"
+
+#: ../metadata/rotate.xml.in.h:26
+msgid "Rotate To Face 1 with Window"
+msgstr "Rotation vers la face 1 avec la fenêtre"
+
+#: ../metadata/rotate.xml.in.h:27
 msgid "Rotate To Face 10"
 msgstr "Rotation vers la face 10"
 
-#: ../metadata/rotate.xml.in.h:26
+#: ../metadata/rotate.xml.in.h:28
 msgid "Rotate To Face 10 with Window"
 msgstr "Rotation vers la face 10 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:27
+#: ../metadata/rotate.xml.in.h:29
 msgid "Rotate To Face 11"
 msgstr "Rotation vers la face 11"
 
-#: ../metadata/rotate.xml.in.h:28
+#: ../metadata/rotate.xml.in.h:30
 msgid "Rotate To Face 11 with Window"
 msgstr "Rotation vers la face 11 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:29
+#: ../metadata/rotate.xml.in.h:31
 msgid "Rotate To Face 12"
 msgstr "Rotation vers la face 12"
 
-#: ../metadata/rotate.xml.in.h:30
+#: ../metadata/rotate.xml.in.h:32
 msgid "Rotate To Face 12 with Window"
 msgstr "Rotation vers la face 12 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:31
+#: ../metadata/rotate.xml.in.h:33
 msgid "Rotate To Face 2"
 msgstr "Rotation vers la face 2"
 
-#: ../metadata/rotate.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:34
 msgid "Rotate To Face 2 with Window"
 msgstr "Rotation vers la face 2 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:33
+#: ../metadata/rotate.xml.in.h:35
 msgid "Rotate To Face 3"
 msgstr "Rotation vers la face 3"
 
-#: ../metadata/rotate.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:36
 msgid "Rotate To Face 3 with Window"
 msgstr "Rotation vers la face 3 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:35
+#: ../metadata/rotate.xml.in.h:37
 msgid "Rotate To Face 4"
 msgstr "Rotation vers la face 4"
 
-#: ../metadata/rotate.xml.in.h:36
+#: ../metadata/rotate.xml.in.h:38
 msgid "Rotate To Face 4 with Window"
 msgstr "Rotation vers la face 4 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:39
 msgid "Rotate To Face 5"
 msgstr "Rotation vers la face 5"
 
-#: ../metadata/rotate.xml.in.h:38
+#: ../metadata/rotate.xml.in.h:40
 msgid "Rotate To Face 5 with Window"
 msgstr "Rotation vers la face 5 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:39
+#: ../metadata/rotate.xml.in.h:41
 msgid "Rotate To Face 6"
 msgstr "Rotation vers la face 6"
 
-#: ../metadata/rotate.xml.in.h:40
+#: ../metadata/rotate.xml.in.h:42
 msgid "Rotate To Face 6 with Window"
 msgstr "Rotation vers la face 6 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:41
+#: ../metadata/rotate.xml.in.h:43
 msgid "Rotate To Face 7"
 msgstr "Rotation vers la face 7"
 
-#: ../metadata/rotate.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:44
 msgid "Rotate To Face 7 with Window"
 msgstr "Rotation vers la face 7 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:43
+#: ../metadata/rotate.xml.in.h:45
 msgid "Rotate To Face 8"
 msgstr "Rotation vers la face 8"
 
-#: ../metadata/rotate.xml.in.h:44
+#: ../metadata/rotate.xml.in.h:46
 msgid "Rotate To Face 8 with Window"
 msgstr "Rotation vers la face 8 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:45
+#: ../metadata/rotate.xml.in.h:47
 msgid "Rotate To Face 9"
 msgstr "Rotation vers la face 9"
 
-#: ../metadata/rotate.xml.in.h:46
+#: ../metadata/rotate.xml.in.h:48
 msgid "Rotate To Face 9 with Window"
 msgstr "Rotation vers la face 9 avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:47
+#: ../metadata/rotate.xml.in.h:49
 msgid "Rotate desktop cube"
 msgstr "Rotation du cube de bureau"
 
-#: ../metadata/rotate.xml.in.h:48
+#: ../metadata/rotate.xml.in.h:50
 msgid "Rotate left"
 msgstr "Rotation à gauche"
 
-#: ../metadata/rotate.xml.in.h:49
-#, fuzzy
-msgid "Rotate left and brind active window along"
+#: ../metadata/rotate.xml.in.h:51
+msgid "Rotate left and bring active window along"
 msgstr "Rotation à gauche avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:50
+#: ../metadata/rotate.xml.in.h:52
 msgid "Rotate right"
 msgstr "Rotation à droite"
 
-#: ../metadata/rotate.xml.in.h:51
-#, fuzzy
-msgid "Rotate right and brind active window along"
+#: ../metadata/rotate.xml.in.h:53
+msgid "Rotate right and bring active window along"
 msgstr "Rotation à droite avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:52
-#, fuzzy
-msgid "Rotate to face 1"
-msgstr "Rotation vers la face 10"
-
-#: ../metadata/rotate.xml.in.h:53
-#, fuzzy
-msgid "Rotate to face 1 and bring active window along"
-msgstr "Rotation vers la face 10 avec la fenêtre active"
-
 #: ../metadata/rotate.xml.in.h:54
+msgid "Rotate to face 1"
+msgstr "Rotation vers la face 1"
+
+#: ../metadata/rotate.xml.in.h:55
+msgid "Rotate to face 1 and bring active window along"
+msgstr "Rotation vers la face 1 avec la fenêtre active"
+
+#: ../metadata/rotate.xml.in.h:56
 msgid "Rotate to face 10"
 msgstr "Rotation vers la face 10"
 
-#: ../metadata/rotate.xml.in.h:55
+#: ../metadata/rotate.xml.in.h:57
 msgid "Rotate to face 10 and bring active window along"
 msgstr "Rotation vers la face 10 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:56
+#: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 11"
 msgstr "Rotation vers la face 11"
 
-#: ../metadata/rotate.xml.in.h:57
+#: ../metadata/rotate.xml.in.h:59
 msgid "Rotate to face 11 and bring active window along"
 msgstr "Rotation vers la face 11 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:58
+#: ../metadata/rotate.xml.in.h:60
 msgid "Rotate to face 12"
 msgstr "Rotation vers la face 12"
 
-#: ../metadata/rotate.xml.in.h:59
+#: ../metadata/rotate.xml.in.h:61
 msgid "Rotate to face 12 and bring active window along"
 msgstr "Rotation vers la face 12 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:60
+#: ../metadata/rotate.xml.in.h:62
 msgid "Rotate to face 2"
 msgstr "Rotation vers la face 2"
 
-#: ../metadata/rotate.xml.in.h:61
+#: ../metadata/rotate.xml.in.h:63
 msgid "Rotate to face 2 and bring active window along"
 msgstr "Rotation vers la face 2 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:62
+#: ../metadata/rotate.xml.in.h:64
 msgid "Rotate to face 3"
 msgstr "Rotation vers la face 3"
 
-#: ../metadata/rotate.xml.in.h:63
+#: ../metadata/rotate.xml.in.h:65
 msgid "Rotate to face 3 and bring active window along"
 msgstr "Rotation vers la face 3 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:64
+#: ../metadata/rotate.xml.in.h:66
 msgid "Rotate to face 4"
 msgstr "Rotation vers la face 4"
 
-#: ../metadata/rotate.xml.in.h:65
+#: ../metadata/rotate.xml.in.h:67
 msgid "Rotate to face 4 and bring active window along"
 msgstr "Rotation vers la face 4 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:66
+#: ../metadata/rotate.xml.in.h:68
 msgid "Rotate to face 5"
 msgstr "Rotation vers la face 5"
 
-#: ../metadata/rotate.xml.in.h:67
+#: ../metadata/rotate.xml.in.h:69
 msgid "Rotate to face 5 and bring active window along"
 msgstr "Rotation vers la face 5 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:68
+#: ../metadata/rotate.xml.in.h:70
 msgid "Rotate to face 6"
 msgstr "Rotation vers la face 6"
 
-#: ../metadata/rotate.xml.in.h:69
+#: ../metadata/rotate.xml.in.h:71
 msgid "Rotate to face 6 and bring active window along"
 msgstr "Rotation vers la face 6 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:70
+#: ../metadata/rotate.xml.in.h:72
 msgid "Rotate to face 7"
 msgstr "Rotation vers la face 7"
 
-#: ../metadata/rotate.xml.in.h:71
+#: ../metadata/rotate.xml.in.h:73
 msgid "Rotate to face 7 and bring active window along"
 msgstr "Rotation vers la face 7 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:72
+#: ../metadata/rotate.xml.in.h:74
 msgid "Rotate to face 8"
 msgstr "Rotation vers la face 8"
 
-#: ../metadata/rotate.xml.in.h:73
+#: ../metadata/rotate.xml.in.h:75
 msgid "Rotate to face 8 and bring active window along"
 msgstr "Rotation vers la face 8 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:74
+#: ../metadata/rotate.xml.in.h:76
 msgid "Rotate to face 9"
 msgstr "Rotation vers la face 9"
 
-#: ../metadata/rotate.xml.in.h:75
+#: ../metadata/rotate.xml.in.h:77
 msgid "Rotate to face 9 and bring active window along"
 msgstr "Rotation vers la face 9 avec la fenêtre active"
 
-#: ../metadata/rotate.xml.in.h:76
+#: ../metadata/rotate.xml.in.h:78
 msgid "Rotate to viewport"
-msgstr "Rotation vers un bureau"
+msgstr "Rotation vers un bureau (une face)"
 
-#: ../metadata/rotate.xml.in.h:77
-#, fuzzy
+#: ../metadata/rotate.xml.in.h:79
 msgid "Rotate window"
 msgstr "Rotation de la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:78
+#: ../metadata/rotate.xml.in.h:80
 msgid "Rotate with window"
 msgstr "Rotation avec la fenêtre"
 
-#: ../metadata/rotate.xml.in.h:79
+#: ../metadata/rotate.xml.in.h:81
 msgid "Rotation Acceleration"
 msgstr "Accélération de la rotation"
 
-#: ../metadata/rotate.xml.in.h:80
+#: ../metadata/rotate.xml.in.h:82
 msgid "Rotation Speed"
 msgstr "Vitesse de la rotation"
 
-#: ../metadata/rotate.xml.in.h:81
+#: ../metadata/rotate.xml.in.h:83
 msgid "Rotation Timestep"
 msgstr "Intervalle de la rotation"
 
-#: ../metadata/rotate.xml.in.h:82 ../metadata/zoom.xml.in.h:6
+#: ../metadata/rotate.xml.in.h:84
+msgid "Rotation Zoom"
+msgstr "Zoom de la rotation"
+
+#: ../metadata/rotate.xml.in.h:85
 msgid "Sensitivity of pointer movement"
 msgstr "Sensibilité du mouvement du pointeur"
 
-#: ../metadata/rotate.xml.in.h:83
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Aligner la rotation du cube sur la face supérieure"
-
-#: ../metadata/rotate.xml.in.h:84
-msgid "Snap To Top Face"
-msgstr "Aligner sur la face supérieure"
-
 #: ../metadata/rotate.xml.in.h:86
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Aligner la rotation du cube avec la face supérieure"
+
+#: ../metadata/rotate.xml.in.h:87
+msgid "Snap To Top Face"
+msgstr "Aligner avec la face supérieure"
+
+#: ../metadata/rotate.xml.in.h:89
 msgid "Start Rotation"
 msgstr "Démarrer la rotation"
 
-#: ../metadata/rotate.xml.in.h:87
+#: ../metadata/rotate.xml.in.h:90
 msgid "Timeout before flipping viewport"
-msgstr "Timeout avant la rotation du bureau"
+msgstr "Délai avant la rotation du bureau"
+
+#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+msgid "Zoom"
+msgstr "Zoom"
 
 #: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr "Quantité d'opacité en pourcentage"
 
 #: ../metadata/scale.xml.in.h:2
+msgid "Big"
+msgstr "Grand"
+
+#: ../metadata/scale.xml.in.h:3
+msgid "Click Desktop to Show Desktop"
+msgstr "Cliquez sur le Bureau pour l'afficher"
+
+#: ../metadata/scale.xml.in.h:4
 msgid "Darken Background"
 msgstr "Assombrir l'arrière-plan"
 
-#: ../metadata/scale.xml.in.h:3
+#: ../metadata/scale.xml.in.h:5
 msgid "Darken background when scaling windows"
-msgstr "Assombrir l'arrière-plan lors de la mise à l'échelle des fenêtres"
+msgstr "Assombrir l'arrière-plan lors de la Mise à l'Échelle des fenêtres"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
+msgid "Emblem"
+msgstr "Emblème"
+
+#: ../metadata/scale.xml.in.h:7
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr "Entrer en mode Affichage Du Bureau quand celui-ci est cliqué pendant la Mise à l'Échelle"
+
+#: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
 msgstr "Temps de survol"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:9
 msgid "Initiate Window Picker"
 msgstr "Lancer le sélecteur de fenêtre"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:10
 msgid "Initiate Window Picker For All Windows"
 msgstr "Lancer le sélecteur de fenêtre pour toutes les fenêtres"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker For Window Group"
 msgstr "Lancer le sélecteur de fenêtre pour un groupe de fenêtres"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For Windows on Current Output"
-msgstr ""
-"Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
+msgstr "Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:13
 msgid "Layout and start transforming all windows"
-msgstr "Disposer et commencer à transformer les fenêtres"
+msgstr "Disposer et commencer à transformer toutes les fenêtres"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:14
 msgid "Layout and start transforming window group"
 msgstr "Disposer et commencer à transformer un groupe de fenêtres"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:15
 msgid "Layout and start transforming windows"
 msgstr "Disposer et commencer à transformer les fenêtres"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:16
 msgid "Layout and start transforming windows on current output"
-msgstr ""
-"Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
+msgstr "Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Aucun"
+
+#: ../metadata/scale.xml.in.h:19
+msgid "On all output devices"
+msgstr "Sur tous les périphériques de sortie"
+
+#: ../metadata/scale.xml.in.h:20
+msgid "On current output device"
+msgstr "Sur le périphérique de sortie courant"
+
+#: ../metadata/scale.xml.in.h:22
 msgid "Overlay Icon"
 msgstr "Superposer l'icône"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:23
 msgid "Overlay an icon on windows once they are scaled"
-msgstr ""
-"Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
+msgstr "Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:24
 msgid "Scale"
 msgstr "Échelle"
 
-#: ../metadata/scale.xml.in.h:17
-#, fuzzy
+#: ../metadata/scale.xml.in.h:25
 msgid "Scale Windows"
 msgstr "Mettre les fenêtres à l'échelle"
 
-#: ../metadata/scale.xml.in.h:18
+#: ../metadata/scale.xml.in.h:26
 msgid "Scale speed"
-msgstr "Vitesse d'échelle"
+msgstr "Vitesse de mise à l'échelle"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:27
 msgid "Scale timestep"
-msgstr "Intervalle d'échelle"
+msgstr "Intervalle de mise à l'échelle"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale windows"
-msgstr "Mettre les fenêtres à l'échelle"
+msgstr "Mettre toutes les fenêtres à la même échelle"
 
-#: ../metadata/scale.xml.in.h:21
+#: ../metadata/scale.xml.in.h:29
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr "Choisir où les fenêtres sont mises à l'échelle si plusieurs périphériques de sortie sont utilisés."
+
+#: ../metadata/scale.xml.in.h:30
 msgid "Space between windows"
 msgstr "Espace entre les fenêtres"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:31
 msgid "Spacing"
 msgstr "Espacement"
 
-#: ../metadata/scale.xml.in.h:24
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
+#: ../metadata/scale.xml.in.h:33
+msgid "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
-"Temps (en ms) avant que le mode échelle soit terminé lors du survol au-"
+"Temps (en ms) avant que le mode Échelle soit terminé lors du survol au-"
 "dessus d'une fenêtre"
 
-#: ../metadata/scale.xml.in.h:26
-#, fuzzy
+#: ../metadata/scale.xml.in.h:35
 msgid "Windows that should be scaled in scale mode"
-msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
+msgstr "Types de fenêtres à mettre à l'échelle en mode Échelle"
 
 #: ../metadata/screenshot.xml.in.h:1
-#, fuzzy
 msgid "Automatically open screenshot in this application"
-msgstr "Démarrer automatiquement l'applet lors du login"
+msgstr "Ouvrir automatiquement la capture d'écran dans cette application"
 
 #: ../metadata/screenshot.xml.in.h:2
-#, fuzzy
 msgid "Directory"
-msgstr "Répertoire\n"
+msgstr "Répertoire"
 
 #: ../metadata/screenshot.xml.in.h:4
-#, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "Faire une capture d'écran"
+msgstr "Lancer une capture d'écran"
 
 #: ../metadata/screenshot.xml.in.h:5
-#, fuzzy
 msgid "Launch Application"
 msgstr "Lancer une Application"
 
 #: ../metadata/screenshot.xml.in.h:6
-#, fuzzy
 msgid "Put screenshot images in this directory"
-msgstr "Traitement récursif dans le répertoire"
+msgstr "Mettre les captures d'écran dans ce répertoire"
 
 #: ../metadata/screenshot.xml.in.h:7
-#, fuzzy
 msgid "Screenshot"
-msgstr "Écran"
+msgstr "Capture d'écran"
 
 #: ../metadata/screenshot.xml.in.h:8
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "Ligne de commande de capture d'écran"
+msgstr "Extension de capture d'écran"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
-msgstr ""
+msgstr "Svg"
 
 #: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
-msgstr ""
+msgstr "Chargeur d'images Svg"
 
 #: ../metadata/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
@@ -2182,12 +2317,11 @@ msgstr "Quantité de saturation en pourcentage"
 
 #: ../metadata/switcher.xml.in.h:4
 msgid "Application Switcher"
-msgstr "Commutateur d'application"
+msgstr "Sélecteur d'application"
 
 #: ../metadata/switcher.xml.in.h:5
-#, fuzzy
 msgid "Auto Rotate"
-msgstr "Remontée automatique"
+msgstr "Rotation automatique"
 
 #: ../metadata/switcher.xml.in.h:6
 msgid "Brightness"
@@ -2219,96 +2353,105 @@ msgstr "Minimisé"
 msgid "Next window"
 msgstr "Fenêtre suivante"
 
-#: ../metadata/switcher.xml.in.h:16
-msgid "Popup switcher if not visible and select next window"
-msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre suivante"
+#: ../metadata/switcher.xml.in.h:15
+msgid "Next window (All windows)"
+msgstr "Fenêtre suivante (toutes les fenêtres)"
 
-#: ../metadata/switcher.xml.in.h:17
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre suivante parmi toutes les fenêtres"
+#: ../metadata/switcher.xml.in.h:16
+msgid "Next window (No popup)"
+msgstr "Fenêtre suivante (pas de sélecteur)"
 
 #: ../metadata/switcher.xml.in.h:18
-msgid "Popup switcher if not visible and select previous window"
+msgid "Popup switcher if not visible and select next window"
 msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre précédente"
+"Afficher le sélecteur s'il n'est pas visible et sélectionner "
+"la fenêtre suivante"
 
 #: ../metadata/switcher.xml.in.h:19
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
+msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
-"Afficher la touche de modification si elle n'est pas visible et sélectionner "
-"la fenêtre précédente parmi toutes les fenêtres"
+"Afficher le sélecteur s'il n'est pas visible et sélectionner "
+"la fenêtre suivante parmi toutes les fenêtres"
 
 #: ../metadata/switcher.xml.in.h:20
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+"Afficher le sélecteur s'il n'est pas visible et sélectionner "
+"la fenêtre précédente"
+
+#: ../metadata/switcher.xml.in.h:21
+msgid "Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Afficher le sélecteur s'il n'est pas visible et sélectionner "
+"la fenêtre précédente parmi toutes les fenêtres"
+
+#: ../metadata/switcher.xml.in.h:22
 msgid "Prev window"
 msgstr "Fenêtre précédente"
 
-#: ../metadata/switcher.xml.in.h:21
-msgid "Rotate to the selected window while switching"
-msgstr ""
+#: ../metadata/switcher.xml.in.h:23
+msgid "Prev window (All windows)"
+msgstr "Fenêtre précédente (toutes les fenêtres)"
 
-#: ../metadata/switcher.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:24
+msgid "Prev window (No popup)"
+msgstr "Fenêtre précédente (pas de sélecteur)"
+
+#: ../metadata/switcher.xml.in.h:25
+msgid "Rotate to the selected window while switching"
+msgstr "Tourner vers la fenêtre sélectionnée pendant la commutation"
+
+#: ../metadata/switcher.xml.in.h:26
 msgid "Saturation"
 msgstr "Saturation"
 
-#: ../metadata/switcher.xml.in.h:23
-msgid "Select next window"
-msgstr "Sélectionner la fenêtre suivante"
+#: ../metadata/switcher.xml.in.h:27
+msgid "Select next window without showing the popup window."
+msgstr "Sélectionner la fenêtre suivante sans montrer le sélecteur"
 
-#: ../metadata/switcher.xml.in.h:24
-msgid "Select previous window"
-msgstr "Sélectionner la fenêtre précédente"
+#: ../metadata/switcher.xml.in.h:28
+msgid "Select previous window without showing the popup window."
+msgstr "Sélectionner la fenêtre précédente sans montrer le sélecteur"
 
-#: ../metadata/switcher.xml.in.h:25
+#: ../metadata/switcher.xml.in.h:29
 msgid "Show icon next to thumbnail"
 msgstr "Afficher l'icône à côté de la miniature"
 
-#: ../metadata/switcher.xml.in.h:26
+#: ../metadata/switcher.xml.in.h:30
 msgid "Show minimized windows"
 msgstr "Afficher des fenêtres réduites"
 
-#: ../metadata/switcher.xml.in.h:28
-msgid "Switcher speed"
-msgstr "Vitesse du commutateur"
-
-#: ../metadata/switcher.xml.in.h:29
-msgid "Switcher timestep"
-msgstr "Intervalle du commutateur"
-
-#: ../metadata/switcher.xml.in.h:30
-#, fuzzy
-msgid "Switcher windows"
-msgstr "Mettre les fenêtres à l'échelle"
-
 #: ../metadata/switcher.xml.in.h:32
-#, fuzzy
-msgid "Windows that should be shown in switcher"
-msgstr "Types de fenêtres à afficher dans le commutateur"
+msgid "Switcher speed"
+msgstr "Vitesse du sélecteur"
 
 #: ../metadata/switcher.xml.in.h:33
-msgid "Zoom"
-msgstr "Zoom"
+msgid "Switcher timestep"
+msgstr "Intervalle du sélecteur"
+
+#: ../metadata/switcher.xml.in.h:34
+msgid "Switcher windows"
+msgstr "Fenêtre du sélecteur"
+
+#: ../metadata/switcher.xml.in.h:36
+msgid "Windows that should be shown in switcher"
+msgstr "Types de fenêtres à afficher dans le sélecteur"
 
 #: ../metadata/video.xml.in.h:1
 msgid "Provide YV12 colorspace support"
-msgstr ""
+msgstr "Fournir le support de l'espace colorimétrique YV12"
 
 #: ../metadata/video.xml.in.h:2
 msgid "Video Playback"
-msgstr ""
+msgstr "Lecture Vidéo"
 
 #: ../metadata/video.xml.in.h:3
 msgid "Video playback"
-msgstr ""
+msgstr "Lecture vidéo"
 
 #: ../metadata/video.xml.in.h:4
 msgid "YV12 colorspace"
-msgstr ""
+msgstr "Espace colorimétrique YV12"
 
 #: ../metadata/water.xml.in.h:1
 msgid "Add line"
@@ -2324,7 +2467,7 @@ msgstr "Ajoute des effets d'eau à différentes opérations du bureau"
 
 #: ../metadata/water.xml.in.h:4
 msgid "Delay (in ms) between each rain-drop"
-msgstr "Délai (en ms) en chaque goutte de pluie"
+msgstr "Délai (en ms) entre chaque goutte de pluie"
 
 #: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
@@ -2352,11 +2495,11 @@ msgstr "Vague sur le titre"
 
 #: ../metadata/water.xml.in.h:12
 msgid "Toggle rain"
-msgstr "Basculer la pluie"
+msgstr "Activer/désactiver la pluie"
 
 #: ../metadata/water.xml.in.h:13
 msgid "Toggle rain effect"
-msgstr "Basculer l'effet de pluie"
+msgstr "Activer/désactiver l'effet de pluie"
 
 #: ../metadata/water.xml.in.h:14
 msgid "Toggle wiper"
@@ -2387,18 +2530,16 @@ msgid "Focus Window Effect"
 msgstr "Effet de focus de la fenêtre"
 
 #: ../metadata/wobbly.xml.in.h:3
-#, fuzzy
 msgid "Focus Windows"
-msgstr "Focus des types de fenêtres"
+msgstr "Focus sur les Fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:4
 msgid "Friction"
 msgstr "Friction"
 
 #: ../metadata/wobbly.xml.in.h:5
-#, fuzzy
 msgid "Grab Windows"
-msgstr "Saisir les types de fenêtres"
+msgstr "Saisir les Fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:6
 msgid "Grid Resolution"
@@ -2421,7 +2562,6 @@ msgid "Map Window Effect"
 msgstr "Mapper l'effet de la fenêtre"
 
 #: ../metadata/wobbly.xml.in.h:11
-#, fuzzy
 msgid "Map Windows"
 msgstr "Mapper les types de fenêtres"
 
@@ -2438,73 +2578,67 @@ msgid "Minimum Vertex Grid Size"
 msgstr "Taille de grille de sommet minimale"
 
 #: ../metadata/wobbly.xml.in.h:15
-#, fuzzy
 msgid "Move Windows"
-msgstr "Déplacer la fenêtre"
+msgstr "Déplacer les fenêtres"
 
 # 'driver' as in '(hardware) driver update'
-#: ../metadata/wobbly.xml.in.h:16
+#: ../metadata/wobbly.xml.in.h:17
 msgid "Shiver"
 msgstr "Déformation"
 
-#: ../metadata/wobbly.xml.in.h:17
+#: ../metadata/wobbly.xml.in.h:18
 msgid "Snap Inverted"
 msgstr "Alignement inversé"
 
-#: ../metadata/wobbly.xml.in.h:18
+#: ../metadata/wobbly.xml.in.h:19
 msgid "Snap windows"
 msgstr "Aligner les fenêtres"
 
-#: ../metadata/wobbly.xml.in.h:19
-msgid "Spring Friction"
-msgstr "Friction de ressort"
-
 #: ../metadata/wobbly.xml.in.h:20
+msgid "Spring Friction"
+msgstr "Friction ressort"
+
+#: ../metadata/wobbly.xml.in.h:21
 msgid "Spring K"
 msgstr "Ressort K"
 
-#: ../metadata/wobbly.xml.in.h:21
+#: ../metadata/wobbly.xml.in.h:22
 msgid "Spring Konstant"
 msgstr "Constante de ressort"
 
-#: ../metadata/wobbly.xml.in.h:22
+#: ../metadata/wobbly.xml.in.h:23
 msgid "Toggle window snapping"
 msgstr "Basculer l'alignement des fenêtres"
 
-#: ../metadata/wobbly.xml.in.h:23
+#: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
 msgstr "Utiliser le modèle de ressort pour l'effet de tremblement de fenêtre"
 
-#: ../metadata/wobbly.xml.in.h:24
-msgid "Vertex Grid Resolution"
-msgstr "Résolution de la grille de sommet"
-
 #: ../metadata/wobbly.xml.in.h:25
-#, fuzzy
-msgid "Windows that should wobble when focused"
-msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
+msgid "Vertex Grid Resolution"
+msgstr "Résolution de la grille de sommets"
 
 #: ../metadata/wobbly.xml.in.h:26
-#, fuzzy
+msgid "Windows that should wobble when focused"
+msgstr "Types de fenêtres à déformer lorsque le focus est sur celles-ci"
+
+#: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
 msgstr "Types de fenêtres à déformer lorsqu'elles sont saisies"
 
-#: ../metadata/wobbly.xml.in.h:27
-#, fuzzy
+#: ../metadata/wobbly.xml.in.h:28
 msgid "Windows that should wobble when mapped"
 msgstr "Types de fenêtres à déformer lorsqu'elles sont mappées"
 
-#: ../metadata/wobbly.xml.in.h:28
-#, fuzzy
+#: ../metadata/wobbly.xml.in.h:29
 msgid "Windows that should wobble when moved"
 msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
 
-#: ../metadata/wobbly.xml.in.h:29
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
-"Effet de déformation lors de la réduction et de l'agrandissement des fenêtres"
-
 #: ../metadata/wobbly.xml.in.h:30
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Effet de déformation lors de la réduction et de l'agrandissement des fenêtres"
+
+#: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
 msgstr "Fenêtres déformées"
 
@@ -2512,1508 +2646,42 @@ msgstr "Fenêtres déformées"
 msgid "Filter Linear"
 msgstr "Filtre linéaire"
 
-#: ../metadata/zoom.xml.in.h:9
-#, fuzzy
+#: ../metadata/zoom.xml.in.h:5
 msgid "Use linear filter when zoomed in"
 msgstr "Utiliser le filtre linéaire pour le zoom avant"
 
-#: ../metadata/zoom.xml.in.h:10
+#: ../metadata/zoom.xml.in.h:6
 msgid "Zoom Desktop"
 msgstr "Zoom - Bureau"
 
-#: ../metadata/zoom.xml.in.h:11
+#: ../metadata/zoom.xml.in.h:7
 msgid "Zoom In"
 msgstr "Zoom avant"
 
-#: ../metadata/zoom.xml.in.h:12
+#: ../metadata/zoom.xml.in.h:8
 msgid "Zoom Out"
 msgstr "Zoom arrière"
 
-#: ../metadata/zoom.xml.in.h:13
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "Zoom Panoramique"
+
+#: ../metadata/zoom.xml.in.h:10
 msgid "Zoom Speed"
 msgstr "Vitesse du zoom"
 
-#: ../metadata/zoom.xml.in.h:14
+#: ../metadata/zoom.xml.in.h:11
 msgid "Zoom Timestep"
 msgstr "Intervalle du zoom"
 
-#: ../metadata/zoom.xml.in.h:15
+#: ../metadata/zoom.xml.in.h:12
 msgid "Zoom and pan desktop cube"
 msgstr "Zoom et panoramique du cube du bureau"
 
-#: ../metadata/zoom.xml.in.h:16
+#: ../metadata/zoom.xml.in.h:13
 msgid "Zoom factor"
-msgstr "Facteur du zoom"
-
-#: ../src/main.c:55
-msgid "Dock"
-msgstr "Accueil"
-
-#: ../src/main.c:56
-msgid "Toolbar"
-msgstr "Barre d'outils"
-
-#: ../src/main.c:57
-msgid "Menu"
-msgstr "Menu"
-
-#: ../src/main.c:58
-msgid "Utility"
-msgstr "Utilitaire"
-
-#: ../src/main.c:59
-msgid "Splash"
-msgstr "Splash"
-
-#: ../src/main.c:60
-msgid "Dialog"
-msgstr "Dialog"
-
-#: ../src/main.c:61
-msgid "Normal"
-msgstr "Normal"
-
-#: ../src/main.c:62
-msgid "DropdownMenu"
-msgstr "Menu déroulant"
-
-#: ../src/main.c:63
-msgid "PopupMenu"
-msgstr "Menu contextuel"
-
-#: ../src/main.c:64
-msgid "Tooltip"
-msgstr "Info-bulle"
-
-#: ../src/main.c:65
-msgid "Notification"
-msgstr "Notification"
-
-#: ../src/main.c:66
-msgid "Combo"
-msgstr "Zone de liste"
-
-#: ../src/main.c:67
-msgid "Dnd"
-msgstr "Dnd"
-
-#: ../src/main.c:68
-msgid "ModalDialog"
-msgstr "Boîte de dialogue modale"
-
-#: ../src/main.c:69
-msgid "Fullscreen"
-msgstr "Fullscreen (Plein écran)"
-
-# TLABEL autoinst_2002_08_07_0216__168
-#: ../src/main.c:70
-msgid "Unknown"
-msgstr "Inconnu"
-
-#, fuzzy
-#~ msgid "4xBilinear"
-#~ msgstr "Filtre linéaire"
-
-#, fuzzy
-#~ msgid "Gaussian"
-#~ msgstr "Russe"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command10"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command1"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command10"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command11"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command2"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command3"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command4"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command5"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command6"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command7"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command8"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par command9"
-
-#, fuzzy
-#~ msgid ""
-#~ "Add line (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Add point (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Advance to next slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Amount of brightness in percent (0-100)"
-#~ msgstr "Quantité de luminosité en pourcentage"
-
-#, fuzzy
-#~ msgid "Amount of opacity in percent (0-100)"
-#~ msgstr "Quantité d'opacité en pourcentage"
-
-#, fuzzy
-#~ msgid "Amount of saturation in percent (0-100)"
-#~ msgstr "Quantité de saturation en pourcentage"
-
-#, fuzzy
-#~ msgid "Blur saturation (0-100)"
-#~ msgstr "Saturation"
-
-#, fuzzy
-#~ msgid ""
-#~ "Clear (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Close active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Decrease window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Delay (in ms) between each rain-drop (0-3600000)"
-#~ msgstr "Délai (en ms) en chaque goutte de pluie"
-
-#, fuzzy
-#~ msgid ""
-#~ "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-#~ msgstr ""
-#~ "Le bureau à distance doit être en zoom arrière lors du passage d'une "
-#~ "fenêtre à une autre"
-
-#~ msgid "Do not modify"
-#~ msgstr "Ne pas modifier"
-
-#, fuzzy
-#~ msgid ""
-#~ "Draw using tool (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Drop shadow X offset (-16-16)"
-#~ msgstr "Décalage X de l'ombre des gouttes"
-
-#, fuzzy
-#~ msgid "Drop shadow Y offset (-16-16)"
-#~ msgstr "Décalage Y de l'ombre des gouttes"
-
-#, fuzzy
-#~ msgid "Drop shadow opacity (0.01-6.00)"
-#~ msgstr "Opacité de l'ombre des gouttes"
-
-#, fuzzy
-#~ msgid "Drop shadow radius (0.0-48.0)"
-#~ msgstr "Rayon de l'ombre des gouttes"
-
-#, fuzzy
-#~ msgid ""
-#~ "Enable pointer water effects (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Flip to left viewport and warp pointer (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Flip to right viewport and warp pointer (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#~ msgid "Focus Window Effect (None, Shiver)"
-#~ msgstr "Effet de focus de la fenêtre (aucun effet ou effet de déformation)"
-
-#, fuzzy
-#~ msgid "Focus prevention windows (match)"
-#~ msgstr "Sélectionner la fenêtre précédente"
-
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "Accélération de pliage (1,0-20,0)"
-
-#, fuzzy
-#~ msgid "Fold Speed (0.0-50.0)"
-#~ msgstr "Vitesse de pliage (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Fold Timestep (0.0-50.0)"
-#~ msgstr "Intervalle de pliage (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Gaussian radius (1-15)"
-#~ msgstr "Fédération de Russie"
-
-#, fuzzy
-#~ msgid "Gaussian strength (0.00-1.00)"
-#~ msgstr "Russe"
-
-#, fuzzy
-#~ msgid ""
-#~ "Go back to previous slide (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Hide all windows and focus desktop (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Increase window opacity (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Initiate annotate drawing (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Initiate annotate erasing (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Initiate clone selection (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Initiate rectangle screenshot (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Interval before raising selected windows (0-10000)"
-#~ msgstr "Intervalle avant de remonter les fenêtres sélectionnées"
-
-#, fuzzy
-#~ msgid ""
-#~ "Layout and start transforming all windows (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Layout and start transforming window group (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Layout and start transforming windows (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Layout and start transforming windows on current output (Left, Right, "
-#~ "Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
-
-#, fuzzy
-#~ msgid ""
-#~ "Lower window beneath other windows (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Make window shiver (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#~ msgid "Map Window Effect (None, Shiver)"
-#~ msgstr "Mapper l'effet de la fenêtre (aucun effet ou effet de déformation)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Maximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Maximize active window horizontally (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Maximize active window vertically (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Minimize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Minimize speed (0.0-50.0)"
-#~ msgstr "Minimiser la vitesse (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Minimize timestep (0.0-50.0)"
-#~ msgstr "Minimiser la vitesse (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Minimum Vertex Grid Size (4-128)"
-#~ msgstr "Taille de grille de sommet minimale"
-
-#, fuzzy
-#~ msgid "Number of virtual desktops (1-36)"
-#~ msgstr "Nombre de bureaux virtuels"
-
-#, fuzzy
-#~ msgid "Opacity change step (1-50)"
-#~ msgstr "Incrément de changement d'opacité"
-
-#, fuzzy
-#~ msgid "Opacity level of moving windows (1-100)"
-#~ msgstr "Niveau d'opacité pour déplacer des fenêtres"
-
-#, fuzzy
-#~ msgid "Opacity level of resizing windows (1-100)"
-#~ msgstr "Niveau d'opacité pour déplacer des fenêtres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Open a terminal (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Open window menu (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Outline Color"
-#~ msgstr "Couleur du cube"
-
-#, fuzzy
-#~ msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
-#~ msgstr ""
-#~ "Superposer une icône sur les fenêtres lorsqu'elles ont été mises à "
-#~ "l'échelle"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane down (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Plane up (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#~ msgid "Plugins that this must load before"
-#~ msgstr "Plug-ins à charger avant"
-
-#~ msgid "Plugins that this requires"
-#~ msgstr "Plug-ins requis"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window (Left, Right, Top, "
-#~ "Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Afficher la touche de modification si elle n'est pas visible et "
-#~ "sélectionner la fenêtre suivante parmi toutes les fenêtres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window out of all windows "
-#~ "(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Afficher la touche de modification si elle n'est pas visible et "
-#~ "sélectionner la fenêtre suivante parmi toutes les fenêtres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window (Left, Right, "
-#~ "Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Afficher la touche de modification si elle n'est pas visible et "
-#~ "sélectionner la fenêtre précédente parmi toutes les fenêtres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window out of all "
-#~ "windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Afficher la touche de modification si elle n'est pas visible et "
-#~ "sélectionner la fenêtre précédente parmi toutes les fenêtres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Pulse effect (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Raise window above other windows (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate left (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate left and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate right (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate right and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 1 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 1 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 10 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 10 and bring active window along (Left, Right, Top, "
-#~ "Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 11 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 11 and bring active window along (Left, Right, Top, "
-#~ "Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 12 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 12 and bring active window along (Left, Right, Top, "
-#~ "Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 2 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 2 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 3 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 3 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 4 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 4 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 5 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 5 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 6 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 6 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 7 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 7 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 8 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 8 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 9 (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to face 9 and bring active window along (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate to viewport (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Rotate with window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Rotation Acceleration (1.0-20.0)"
-#~ msgstr "Accélération de pliage (1,0-20,0)"
-
-#, fuzzy
-#~ msgid "Rotation Speed (0.0-50.0)"
-#~ msgstr "Vitesse du zoom (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Rotation Timestep (0.0-50.0)"
-#~ msgstr "Intervalle du zoom (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Scale speed (0.0-50.0)"
-#~ msgstr "Vitesse d'échelle (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Scale timestep (0.0-50.0)"
-#~ msgstr "Intervalle d'échelle (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Screen size multiplier for horizontal virtual size (1-32)"
-#~ msgstr "Multiplicateur de taille d'écran pour taille virtuelle horizontale"
-
-#, fuzzy
-#~ msgid "Screen size multiplier for vertical virtual size (1-32)"
-#~ msgstr "Multiplicateur de taille d'écran pour taille virtuelle verticale"
-
-#, fuzzy
-#~ msgid ""
-#~ "Select next window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Select previous window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Sensitivity of pointer movement (0.01-100.00)"
-#~ msgstr "Sensibilité du mouvement du pointeur"
-
-#~ msgid "Shade resistance (0-100)"
-#~ msgstr "Ombrer la résistance (0-100)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Show Run Application dialog (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Show the main menu (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Space between windows (0-250)"
-#~ msgstr "Espace entre les fenêtres"
-
-#, fuzzy
-#~ msgid "Spring Friction (0.0-10.0)"
-#~ msgstr "Friction de ressort"
-
-#, fuzzy
-#~ msgid "Spring Konstant (0.0-10.0)"
-#~ msgstr "Constante de ressort"
-
-#, fuzzy
-#~ msgid ""
-#~ "Start Rotation (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Start moving window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Start resizing window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Switcher speed (0.0-50.0)"
-#~ msgstr "Vitesse d'échelle (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Switcher timestep (0.0-50.0)"
-#~ msgstr "Intervalle d'échelle (0,1-50,0)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Take a screenshot (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Take a screenshot of a window (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "Filtrage de texture (rapide, bon ou supérieur)"
-
-#, fuzzy
-#~ msgid "The rate at which the screen is redrawn (times/second) (1-200)"
-#~ msgstr "Vitesse à laquelle l'écran est redessiné (fois/seconde)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Time (in ms) before scale mode is terminated when hovering over a window "
-#~ "(50-10000)"
-#~ msgstr ""
-#~ "Temps (en ms) avant que le mode échelle soit terminé lors du survol au-"
-#~ "dessus d'une fenêtre"
-
-#, fuzzy
-#~ msgid "Timeout before flipping viewport (0-1000)"
-#~ msgstr "Timeout avant la rotation du bureau"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle active window maximized (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle active window maximized horizontally (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle active window maximized vertically (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle active window shaded (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle rain effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle use of slow animations (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle window snapping (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#~ msgid "USe linear filter when zoomed in"
-#~ msgstr "Utiliser le filtre linéaire pour le zoom avant"
-
-#, fuzzy
-#~ msgid ""
-#~ "Unfold cube (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Unmaximize active window (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Vertex Grid Resolution (1-64)"
-#~ msgstr "Résolution de la grille de sommet"
-
-#, fuzzy
-#~ msgid "Water offset scale (0.0-10.0)"
-#~ msgstr "Échelle de décalage d'eau"
-
-#, fuzzy
-#~ msgid ""
-#~ "Wave effect from window title (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Window blur speed (0.0-10.0)"
-#~ msgstr "Vitesse de fondu de la fenêtre"
-
-#, fuzzy
-#~ msgid "Window fade speed (0.0-25.0)"
-#~ msgstr "Vitesse de fondu de la fenêtre"
-
-#, fuzzy
-#~ msgid "Windows that should be affected by focus blur (match)"
-#~ msgstr "Types de fenêtres devant utiliser le fondu"
-
-#, fuzzy
-#~ msgid "Windows that should be decorated (match)"
-#~ msgstr "Types de fenêtres devant utiliser le fondu"
-
-#, fuzzy
-#~ msgid "Windows that should be fading (match)"
-#~ msgstr "Types de fenêtres devant utiliser le fondu"
-
-#, fuzzy
-#~ msgid "Windows that should be have a shadow (match)"
-#~ msgstr "Types de fenêtres devant utiliser le fondu"
-
-#, fuzzy
-#~ msgid "Windows that should be scaled in scale mode (match)"
-#~ msgstr "Types de fenêtres à mettre à l'échelle en mode échelle"
-
-#, fuzzy
-#~ msgid "Windows that should be shown in switcher (match)"
-#~ msgstr "Types de fenêtres à afficher dans le commutateur"
-
-#, fuzzy
-#~ msgid "Windows that should be transformed when minimized (match)"
-#~ msgstr "Types de fenêtres à transformer lorsqu'elles sont réduites"
-
-#, fuzzy
-#~ msgid "Windows that should use alpha blur by default (match)"
-#~ msgstr "Types de fenêtres devant utiliser le fondu"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when focused (match)"
-#~ msgstr "Types de fenêtres à déformer lorsque le focus est sur elles"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when grabbed (match)"
-#~ msgstr "Types de fenêtres à déformer lorsqu'elles sont saisies"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when mapped (match)"
-#~ msgstr "Types de fenêtres à déformer lorsqu'elles sont mappées"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when moved (match)"
-#~ msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
-
-#, fuzzy
-#~ msgid ""
-#~ "Zoom In (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Zoom Out (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Hot corners devant lancer le mode échelle (haut à gauche, haut à droite, "
-#~ "bas à gauche et bas à droite)"
-
-#, fuzzy
-#~ msgid "Zoom Speed (0.0-50.0)"
-#~ msgstr "Vitesse du zoom (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Zoom Timestep (0.0-50.0)"
-#~ msgstr "Intervalle du zoom (0,1-50,0)"
-
-#, fuzzy
-#~ msgid "Zoom factor (1.01-3.00)"
-#~ msgstr "Facteur du zoom"
-
-#~ msgid "."
-#~ msgstr "."
-
-#, fuzzy
-#~ msgid "Maximize"
-#~ msgstr "Minimisé"
-
-#, fuzzy
-#~ msgid "Plane To Face %d"
-#~ msgstr "Rotation vers la face %d"
-
-#, fuzzy
-#~ msgid "Plane to face %d"
-#~ msgstr "Rotation vers la face %d"
-
-#, fuzzy
-#~ msgid "Plane To Face %d with Window"
-#~ msgstr "Rotation vers la face %d avec la fenêtre"
-
-#, fuzzy
-#~ msgid "Plane to face %d and bring active window along"
-#~ msgstr "Rotation vers la face %d avec la fenêtre active"
-
-#~ msgid "Rotate To Face %d"
-#~ msgstr "Rotation vers la face %d"
-
-#~ msgid "Rotate to face %d"
-#~ msgstr "Rotation vers la face %d"
-
-#~ msgid "Rotate To Face %d with Window"
-#~ msgstr "Rotation vers la face %d avec la fenêtre"
-
-#~ msgid "Rotate to face %d and bring active window along"
-#~ msgstr "Rotation vers la face %d avec la fenêtre active"
-
-#~ msgid "None"
-#~ msgstr "Aucun"
-
-#~ msgid "Emblem"
-#~ msgstr "Emblème"
-
-#~ msgid "Big"
-#~ msgstr "Grand"
-
-#~ msgid "Fast"
-#~ msgstr "Rapide"
-
-#~ msgid "Good"
-#~ msgstr "Bon"
-
-#~ msgid "Best"
-#~ msgstr "Meilleur"
-
-#~ msgid "Command line %d"
-#~ msgstr "Ligne de commande %d"
-
-#~ msgid "Command line to be executed in shell when run_command%d is invoked"
-#~ msgstr ""
-#~ "Ligne de commande à exécuter dans le shell lorsque run_command%d est "
-#~ "appelé"
-
-#~ msgid "Run command %d"
-#~ msgstr "Exécuter une commande %d"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command%d"
-#~ msgstr ""
-#~ "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell "
-#~ "identifiée par la commande %d"
-
-#~ msgid "Window Types"
-#~ msgstr "Types de fenêtres"
-
-#~ msgid "Move Window Types"
-#~ msgstr "Déplacer les types de fenêtres"
-
-#, fuzzy
-#~ msgid "Enable focus prevention"
-#~ msgstr "Activer la partition ZEN"
-
-#~ msgid "Corners"
-#~ msgstr "Angles"
-
-#~ msgid "Focus window when mouse moves over them"
-#~ msgstr "Focus de la fenêtre lorsque la souris se déplace sur elle"
-
-#~ msgid "Initiate All Windows"
-#~ msgstr "Lancer toutes les fenêtres"
-
-#~ msgid "Initiate Keyboard Window Move"
-#~ msgstr "Lancer le déplacement de la fenêtre au clavier"
-
-#~ msgid "Initiate Keyboard Window Resize"
-#~ msgstr "Lancer le redimensionnement de la fenêtre au clavier"
-
-#~ msgid "Initiate Window Switcher"
-#~ msgstr "Lancer le commutateur de fenêtre"
-
-#~ msgid "Modifier to show switcher for all windows"
-#~ msgstr ""
-#~ "Touche de modification pour afficher le commutateur de toutes les fenêtres"
-
-#~ msgid "Return from scale view"
-#~ msgstr "Revenir de la vue d'échelle"
-
-#~ msgid "Show switcher"
-#~ msgstr "Afficher le commutateur"
-
-#~ msgid "Sloppy Focus"
-#~ msgstr "Focus flou"
-
-#~ msgid "Start moving window using keyboard"
-#~ msgstr "Commencer à déplacer la fenêtre avec le clavier"
-
-#~ msgid "Start resizing window using keyboard"
-#~ msgstr "Commencer à redimensionner la fenêtre avec le clavier"
-
-#~ msgid "Terminate"
-#~ msgstr "Fermer"
-
-#~ msgid "Water effect on system beep"
-#~ msgstr "Effet d'eau au signal sonore du système"
-
-#~ msgid ""
-#~ "Window types that should be fading (Desktop, Dock, Toolbar, Menu, "
-#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres devant utiliser le fondu (bureau, accueil, barre "
-#~ "d'outils, menu, utilitaire, démarrage, boîte de dialogue, boîte de "
-#~ "dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should be transformed when minimized (Desktop, Dock, "
-#~ "Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, "
-#~ "Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à transformer lorsqu'elles sont réduites (bureau, "
-#~ "accueil, barre d'outils, menu, utilitaire, démarrage, boîte de dialogue, "
-#~ "boîte de dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should scaled in scale mode (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à mettre à l'échelle en mode échelle (bureau, accueil, "
-#~ "barre d'outils, menu, utilitaire, démarrage, boîte de dialogue, boîte de "
-#~ "dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, "
-#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à afficher dans le commutateur (bureau, accueil, barre "
-#~ "d'outils, menu, utilitaire, démarrage, boîte de dialogue, boîte de "
-#~ "dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should wobble when focused (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à déformer lorsque le focus est sur elles (bureau, "
-#~ "accueil, barre d'outils, menu, utilitaire, démarrage, boîte de dialogue, "
-#~ "boîte de dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should wobble when grabbed (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à déformer lorsqu'elles sont saisies (bureau, accueil, "
-#~ "barre d'outils, menu, utilitaire, démarrage, boîte de dialogue, boîte de "
-#~ "dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should wobble when mapped (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à déformer lorsqu'elles sont mappées (bureau, accueil, "
-#~ "barre d'outils, menu, utilitaire, démarrage, boîte de dialogue, boîte de "
-#~ "dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid ""
-#~ "Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, "
-#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "Types de fenêtres à déformer lorsqu'elles sont déplacées (bureau, "
-#~ "accueil, barre d'outils, menu, utilitaire, démarrage, boîte de dialogue, "
-#~ "boîte de dialogue modale, normal, plein écran et inconnu)"
-
-#~ msgid "Wobble effect on system beep"
-#~ msgstr "Effet de déformation au signal sonore du système"
+msgstr "Facteur de zoom"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "Zoom panoramique"
