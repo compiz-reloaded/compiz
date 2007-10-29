@@ -1129,9 +1129,6 @@ Time
 getCurrentTimeFromDisplay (CompDisplay *d);
 
 void
-focusDefaultWindow (CompScreen *s);
-
-void
 forEachWindowOnDisplay (CompDisplay	  *display,
 			ForEachWindowProc proc,
 			void		  *closure);
@@ -2264,6 +2261,9 @@ findWindowAtScreen (CompScreen *s,
 CompWindow *
 findTopLevelWindowAtScreen (CompScreen *s,
 			    Window      id);
+
+void
+focusDefaultWindow (CompScreen *s);
 
 int
 pushScreenGrab (CompScreen *s,
