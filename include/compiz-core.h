@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20071017
+#define CORE_ABIVERSION 20071029
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1129,7 +1129,7 @@ Time
 getCurrentTimeFromDisplay (CompDisplay *d);
 
 void
-focusDefaultWindow (CompDisplay *d);
+focusDefaultWindow (CompScreen *s);
 
 void
 forEachWindowOnDisplay (CompDisplay	  *display,

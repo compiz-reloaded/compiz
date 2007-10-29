@@ -391,7 +391,7 @@ rotatePreparePaintScreen (CompScreen *s,
 
 			/* only focus default window if switcher isn't active */
 			if (i == s->maxGrab)
-			    focusDefaultWindow (s->display);
+			    focusDefaultWindow (s);
 		    }
 
 		    rs->moveWindow = 0;

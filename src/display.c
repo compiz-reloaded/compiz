@@ -2554,7 +2554,7 @@ addDisplay (const char *name)
 
     if (focus == None || focus == PointerRoot)
     {
-	focusDefaultWindow (d);
+	focusDefaultWindow (d->screens);
     }
     else
     {
@@ -2566,7 +2566,7 @@ addDisplay (const char *name)
 	    moveInputFocusToWindow (w);
 	}
 	else
-	    focusDefaultWindow (d);
+	    focusDefaultWindow (d->screens);
     }
 
     d->pingHandle =
@@ -2624,11 +2624,11 @@ getCurrentTimeFromDisplay (CompDisplay *d)
 }
 
 void
-focusDefaultWindow (CompDisplay *d)
+focusDefaultWindow (CompScreen *s)
 {
-    CompScreen *s;
-    CompWindow *w;
-    CompWindow *focus = NULL;
+    CompDisplay *d = s->display;
+    CompWindow  *w;
+    CompWindow  *focus = NULL;
 
     if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
     {
@@ -2643,28 +2643,25 @@ focusDefaultWindow (CompDisplay *d)
 
     if (!focus)
     {
-	for (s = d->screens; s; s = s->next)
+	for (w = s->reverseWindows; w; w = w->prev)
 	{
-	    for (w = s->reverseWindows; w; w = w->prev)
-	    {
-		if (w->type & CompWindowTypeDockMask)
-		    continue;
+	    if (w->type & CompWindowTypeDockMask)
+		continue;
 
-		if ((*s->focusWindow) (w))
+	    if ((*s->focusWindow) (w))
+	    {
+		if (focus)
 		{
-		    if (focus)
+		    if (w->type & (CompWindowTypeNormalMask |
+				   CompWindowTypeDialogMask |
+				   CompWindowTypeModalDialogMask))
 		    {
-			if (w->type & (CompWindowTypeNormalMask |
-				       CompWindowTypeDialogMask |
-				       CompWindowTypeModalDialogMask))
-			{
-			    if (compareWindowActiveness (focus, w) < 0)
-				focus = w;
-			}
+			if (compareWindowActiveness (focus, w) < 0)
+			    focus = w;
 		    }
-		    else
-			focus = w;
 		}
+		else
+		    focus = w;
 	    }
 	}
     }
@@ -2676,7 +2673,7 @@ focusDefaultWindow (CompDisplay *d)
     }
     else
     {
-	XSetInputFocus (d->display, d->screens->root, RevertToPointerRoot,
+	XSetInputFocus (d->display, s->root, RevertToPointerRoot,
 			CurrentTime);
     }
 }
