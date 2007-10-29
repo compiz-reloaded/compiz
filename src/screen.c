@@ -1440,7 +1440,7 @@ leaveShowDesktopMode (CompScreen *s,
 
 	/* focus default window - most likely this will be the window
 	   which had focus before entering showdesktop mode */
-	focusDefaultWindow (s->display);
+	focusDefaultWindow (s);
     }
 
     XChangeProperty (s->display->display, s->root,
