@@ -90,7 +90,7 @@ KWD::Window::Window (WId  parentId,
     if (mType == Normal || mType == Switcher)
     {
 	KWin::WindowInfo wInfo = KWin::windowInfo (mClientId, NET::WMState |
-			                           NET::WMVisibleName, 0);
+						   NET::WMVisibleName, 0);
 
 	mState = wInfo.state ();
 
