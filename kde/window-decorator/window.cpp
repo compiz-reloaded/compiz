@@ -1497,7 +1497,6 @@ KWD::Window::reloadDecoration (void)
     delete mDecor;
     mDecor = 0;
 
-    setWFlags (getWFlags () & ~WType_TopLevel);
     hide ();
 
     mMapped   = false;
