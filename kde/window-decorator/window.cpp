@@ -54,14 +54,14 @@
 #include <qcursor.h>
 #include <qpopupmenu.h>
 
-KWD::Window::Window (QWidget *parent,
-		     WId     clientId,
-		     WId     frame,
-		     Type    type,
-		     int     x,
-		     int     y,
-		     int     w,
-		     int     h): QWidget (parent, 0),
+KWD::Window::Window (WId  parentId,
+		     WId  clientId,
+		     WId  frame,
+		     Type type,
+		     int  x,
+		     int  y,
+		     int  w,
+		     int  h): QWidget (0, 0),
     mType (type),
     mFrame (0),
     mClientId (clientId),
@@ -121,6 +121,8 @@ KWD::Window::Window (QWidget *parent,
 	mName = QString ("");
 	mGeometry = QRect (50, 50, 30, 1);
     }
+
+    XReparentWindow (qt_xdisplay (), winId (), parentId, 0, 0);
 
     setGeometry (QRect (mGeometry.x () + ROOT_OFF_X,
 			mGeometry.y () + ROOT_OFF_Y,
@@ -1158,11 +1160,6 @@ KWD::Window::resizeDecoration (bool force)
 	show ();
 
 	mMapped = true;
-
-	/* XXX: is there a more appropriate way to achieve this?
-	   add WType_TopLevel flag so that visualRect isn't clipped
-	   to parent. */
-	setWFlags (getWFlags () | WType_TopLevel);
 
 	if (mDamageId != winId ())
 	{

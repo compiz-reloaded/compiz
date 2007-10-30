@@ -299,9 +299,9 @@ KWD::Decorator::enableDecorations (Time timestamp,
 
     updateShadow ();
 
-    mDecorNormal = new KWD::Window (mCompositeWindow, qt_xrootwin (),
+    mDecorNormal = new KWD::Window (mCompositeWindow->winId (), qt_xrootwin (),
 				    0, Window::Default);
-    mDecorActive = new KWD::Window (mCompositeWindow, qt_xrootwin (),
+    mDecorActive = new KWD::Window (mCompositeWindow->winId (), qt_xrootwin (),
 				    0, Window::DefaultActive);
 
     connect (mKWinModule, SIGNAL (windowAdded (WId)),
@@ -918,7 +918,8 @@ KWD::Decorator::handleWindowAdded (WId id)
     {
 	if (!mClients.contains (id))
 	{
-	    client = new KWD::Window (mCompositeWindow, id, frame, type,
+	    client = new KWD::Window (mCompositeWindow->winId (),
+				      id, frame, type,
 				      x, y,
 				      width + border * 2,
 				      height + border * 2);
@@ -940,7 +941,7 @@ KWD::Decorator::handleWindowAdded (WId id)
     {
 	if (!mClients.contains (id))
 	{
-	    client = new KWD::Window (mCompositeWindow, id, 0, type,
+	    client = new KWD::Window (mCompositeWindow->winId (), id, 0, type,
 				      x, y,
 				      width + border * 2,
 				      height + border * 2);
