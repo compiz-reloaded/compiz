@@ -63,6 +63,7 @@ KWD::Window::Window (WId  parentId,
 		     int  w,
 		     int  h): QWidget (0, 0),
     mType (type),
+    mParentId (parentId),
     mFrame (0),
     mClientId (clientId),
     mSelectedId (0),
@@ -121,8 +122,6 @@ KWD::Window::Window (WId  parentId,
 	mName = QString ("");
 	mGeometry = QRect (50, 50, 30, 1);
     }
-
-    XReparentWindow (qt_xdisplay (), winId (), parentId, 0, 0);
 
     setGeometry (QRect (mGeometry.x () + ROOT_OFF_X,
 			mGeometry.y () + ROOT_OFF_Y,
@@ -1157,6 +1156,8 @@ KWD::Window::resizeDecoration (bool force)
     {
 	mPendingMap = 1;
 
+	XReparentWindow (qt_xdisplay (), winId (), mParentId, 0, 0);
+
 	show ();
 
 	mMapped = true;
@@ -1496,8 +1497,6 @@ KWD::Window::reloadDecoration (void)
 {
     delete mDecor;
     mDecor = 0;
-
-    hide ();
 
     mMapped   = false;
     mShapeSet = false;
