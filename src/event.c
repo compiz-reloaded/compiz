@@ -139,7 +139,7 @@ moveInputFocusToOtherWindow (CompWindow *w)
 		moveInputFocusToWindow (ancestor);
 	    }
 	    else
-		focusDefaultWindow (display);
+		focusDefaultWindow (w->screen);
 	}
 	else if (w->type & (CompWindowTypeDialogMask |
 			    CompWindowTypeModalDialogMask))
@@ -174,10 +174,10 @@ moveInputFocusToOtherWindow (CompWindow *w)
 		moveInputFocusToWindow (focus);
 	    }
 	    else
-		focusDefaultWindow (display);
+		focusDefaultWindow (w->screen);
 	}
 	else
-	    focusDefaultWindow (display);
+	    focusDefaultWindow (w->screen);
     }
 }
 

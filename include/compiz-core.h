@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20071017
+#define CORE_ABIVERSION 20071029
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1129,9 +1129,6 @@ Time
 getCurrentTimeFromDisplay (CompDisplay *d);
 
 void
-focusDefaultWindow (CompDisplay *d);
-
-void
 forEachWindowOnDisplay (CompDisplay	  *display,
 			ForEachWindowProc proc,
 			void		  *closure);
@@ -1257,9 +1254,21 @@ clearTargetOutput (CompDisplay	*display,
 /* camera distance from screen, 0.5 * tan (FOV) */
 #define DEFAULT_Z_CAMERA 0.866025404f
 
+#define DEG2RAD (M_PI / 180.0f)
+
 typedef struct _CompTransform {
     float m[16];
 } CompTransform;
+
+typedef union _CompVector {
+    float v[4];
+    struct {
+	float x;
+	float y;
+	float z;
+	float w;
+    };
+} CompVector;
 
 /* XXX: ScreenPaintAttrib will be removed */
 typedef struct _ScreenPaintAttrib {
@@ -2253,6 +2262,9 @@ CompWindow *
 findTopLevelWindowAtScreen (CompScreen *s,
 			    Window      id);
 
+void
+focusDefaultWindow (CompScreen *s);
+
 int
 pushScreenGrab (CompScreen *s,
 		Cursor     cursor,
@@ -3174,6 +3186,19 @@ disableFragmentAttrib (CompScreen     *s,
 /* matrix.c */
 
 void
+matrixMultiply (CompTransform       *product,
+		const CompTransform *transformA,
+		const CompTransform *transformB);
+
+void
+matrixMultiplyVector (CompVector          *product,
+		      const CompVector    *vector,
+		      const CompTransform *transform);
+
+void
+matrixVectorDiv (CompVector *v);
+
+void
 matrixRotate (CompTransform *transform,
 	      float	    angle,
 	      float	    x,
@@ -3192,6 +3217,8 @@ matrixTranslate (CompTransform *transform,
 		 float	       y,
 		 float	       z);
 
+void
+matrixGetIdentity (CompTransform *m);
 
 /* cursor.c */
 

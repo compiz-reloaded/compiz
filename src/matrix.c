@@ -71,12 +71,53 @@ matmul4 (float       *product,
     }
 }
 
+void
+matrixMultiply (CompTransform       *product,
+		const CompTransform *transformA,
+		const CompTransform *transformB)
+{
+    matmul4 (product->m, transformA->m, transformB->m);
+}
+
+/**
+ * Multiply the 1x4 vector v with the 4x4 matrix a.
+ *
+ * \param a matrix.
+ * \param v vector.
+ * \param product will receive the product of \p a and \p v.
+ *
+ */
+void
+matrixMultiplyVector (CompVector          *product,
+		      const CompVector    *vector,
+		      const CompTransform *transform)
+{
+    float       vec[4];
+    const float *a = transform->m;
+    const float *b = vector->v;
+    int         i;
+
+    for (i = 0; i < 4; i++)
+    {
+	vec[i] = A(i,0) * B(0,0) + A(i,1) * B(1,0) +
+	         A(i,2) * B(2,0) + A(i,3) * B(3,0);
+    }
+
+    memcpy (product->v, vec, sizeof (vec));
+}
+
+void
+matrixVectorDiv (CompVector *vector)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+	vector->v[i] /= vector->v[3];
+}
+
 #undef A
 #undef B
 #undef P
-
-/* Degrees to radians conversion: */
-#define DEG2RAD (M_PI / 180.0f)
 
 /**
  * Generate a 4x4 transformation matrix from glRotate parameters, and
@@ -319,4 +360,10 @@ matrixTranslate (CompTransform *transform,
     m[13] = m[1] * x + m[5] * y + m[9]  * z + m[13];
     m[14] = m[2] * x + m[6] * y + m[10] * z + m[14];
     m[15] = m[3] * x + m[7] * y + m[11] * z + m[15];
+}
+
+void
+matrixGetIdentity (CompTransform *transform)
+{
+    memcpy (transform->m, identity, sizeof (float) * 16);
 }

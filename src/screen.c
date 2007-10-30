@@ -1440,7 +1440,7 @@ leaveShowDesktopMode (CompScreen *s,
 
 	/* focus default window - most likely this will be the window
 	   which had focus before entering showdesktop mode */
-	focusDefaultWindow (s->display);
+	focusDefaultWindow (s);
     }
 
     XChangeProperty (s->display->display, s->root,
@@ -2362,6 +2362,61 @@ forEachWindowOnScreen (CompScreen	 *screen,
 
     for (w = screen->windows; w; w = w->next)
 	(*proc) (w, closure);
+}
+
+void
+focusDefaultWindow (CompScreen *s)
+{
+    CompDisplay *d = s->display;
+    CompWindow  *w;
+    CompWindow  *focus = NULL;
+
+    if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
+    {
+	w = findTopLevelWindowAtDisplay (d, d->below);
+	if (w && !(w->type & (CompWindowTypeDesktopMask |
+			      CompWindowTypeDockMask)))
+	{
+	    if ((*w->screen->focusWindow) (w))
+		focus = w;
+	}
+    }
+
+    if (!focus)
+    {
+	for (w = s->reverseWindows; w; w = w->prev)
+	{
+	    if (w->type & CompWindowTypeDockMask)
+		continue;
+
+	    if ((*s->focusWindow) (w))
+	    {
+		if (focus)
+		{
+		    if (w->type & (CompWindowTypeNormalMask |
+				   CompWindowTypeDialogMask |
+				   CompWindowTypeModalDialogMask))
+		    {
+			if (compareWindowActiveness (focus, w) < 0)
+			    focus = w;
+		    }
+		}
+		else
+		    focus = w;
+	    }
+	}
+    }
+
+    if (focus)
+    {
+	if (focus->id != d->activeWindow)
+	    moveInputFocusToWindow (focus);
+    }
+    else
+    {
+	XSetInputFocus (d->display, s->root, RevertToPointerRoot,
+			CurrentTime);
+    }
 }
 
 CompWindow *

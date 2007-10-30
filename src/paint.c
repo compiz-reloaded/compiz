@@ -29,8 +29,6 @@
 
 #include <compiz-core.h>
 
-#define DEG2RAD (M_PI / 180.0f)
-
 ScreenPaintAttrib defaultScreenPaintAttrib = {
     0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -DEFAULT_Z_CAMERA
 };
@@ -41,10 +39,14 @@ WindowPaintAttrib defaultWindowPaintAttrib = {
 
 void
 preparePaintScreen (CompScreen *screen,
-		    int	       msSinceLastPaint) {}
+		    int	       msSinceLastPaint)
+{
+}
 
 void
-donePaintScreen (CompScreen *screen) {}
+donePaintScreen (CompScreen *screen)
+{
+}
 
 void
 applyScreenTransform (CompScreen	      *screen,

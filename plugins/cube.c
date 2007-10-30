@@ -32,37 +32,6 @@
 
 #include <compiz-cube.h>
 
-#define MULTM(x, y, z) \
-z[0] = x[0] * y[0] + x[4] * y[1] + x[8] * y[2] + x[12] * y[3]; \
-z[1] = x[1] * y[0] + x[5] * y[1] + x[9] * y[2] + x[13] * y[3]; \
-z[2] = x[2] * y[0] + x[6] * y[1] + x[10] * y[2] + x[14] * y[3]; \
-z[3] = x[3] * y[0] + x[7] * y[1] + x[11] * y[2] + x[15] * y[3]; \
-z[4] = x[0] * y[4] + x[4] * y[5] + x[8] * y[6] + x[12] * y[7]; \
-z[5] = x[1] * y[4] + x[5] * y[5] + x[9] * y[6] + x[13] * y[7]; \
-z[6] = x[2] * y[4] + x[6] * y[5] + x[10] * y[6] + x[14] * y[7]; \
-z[7] = x[3] * y[4] + x[7] * y[5] + x[11] * y[6] + x[15] * y[7]; \
-z[8] = x[0] * y[8] + x[4] * y[9] + x[8] * y[10] + x[12] * y[11]; \
-z[9] = x[1] * y[8] + x[5] * y[9] + x[9] * y[10] + x[13] * y[11]; \
-z[10] = x[2] * y[8] + x[6] * y[9] + x[10] * y[10] + x[14] * y[11]; \
-z[11] = x[3] * y[8] + x[7] * y[9] + x[11] * y[10] + x[15] * y[11]; \
-z[12] = x[0] * y[12] + x[4] * y[13] + x[8] * y[14] + x[12] * y[15]; \
-z[13] = x[1] * y[12] + x[5] * y[13] + x[9] * y[14] + x[13] * y[15]; \
-z[14] = x[2] * y[12] + x[6] * y[13] + x[10] * y[14] + x[14] * y[15]; \
-z[15] = x[3] * y[12] + x[7] * y[13] + x[11] * y[14] + x[15] * y[15];
-
-#define MULTMV(m, v) { \
-float v0 = m[0]*v[0] + m[4]*v[1] + m[8]*v[2] + m[12]*v[3]; \
-float v1 = m[1]*v[0] + m[5]*v[1] + m[9]*v[2] + m[13]*v[3]; \
-float v2 = m[2]*v[0] + m[6]*v[1] + m[10]*v[2] + m[14]*v[3]; \
-float v3 = m[3]*v[0] + m[7]*v[1] + m[11]*v[2] + m[15]*v[3]; \
-v[0] = v0; v[1] = v1; v[2] = v2; v[3] = v3; }
-
-#define DIVV(v) \
-v[0] /= v[3]; \
-v[1] /= v[3]; \
-v[2] /= v[3]; \
-v[3] /= v[3];
-
 static CompMetadata cubeMetadata;
 
 static int cubeCorePrivateIndex;
@@ -954,13 +923,12 @@ cubeCheckOrientation (CompScreen              *s,
 		      const ScreenPaintAttrib *sAttrib,
 		      const CompTransform     *transform,
 		      CompOutput              *outputPtr,
-		      float                   points[3][3])
+		      CompVector              *points)
 {
     CompTransform sTransform = *transform;
-    float         mvp[16];
-    float         pntA[4], pntB[4], pntC[4];
-    float         vecA[3], vecB[3];
-    float         ortho[3];
+    CompTransform mvp, pm;
+    CompVector    pntA, pntB, pntC;
+    CompVector    vecA, vecB, ortho;
     Bool          rv = FALSE;
 
     CUBE_SCREEN (s);
@@ -969,53 +937,38 @@ cubeCheckOrientation (CompScreen              *s,
     matrixTranslate (&sTransform, cs->outputXOffset, -cs->outputYOffset, 0.0f);
     matrixScale (&sTransform, cs->outputXScale, cs->outputYScale, 1.0f);
 
-    MULTM (s->projection, sTransform.m, mvp);
+    memcpy (pm.m, s->projection, sizeof (pm.m));
+    matrixMultiply (&mvp, &pm, &sTransform);
 
-    pntA[0] = points[0][0];
-    pntA[1] = points[0][1];
-    pntA[2] = points[0][2];
-    pntA[3] = 1.0f;
+    matrixMultiplyVector (&pntA, &points[0], &mvp);
 
-    pntB[0] = points[1][0];
-    pntB[1] = points[1][1];
-    pntB[2] = points[1][2];
-    pntB[3] = 1.0f;
-
-    pntC[0] = points[2][0];
-    pntC[1] = points[2][1];
-    pntC[2] = points[2][2];
-    pntC[3] = 1.0f;
-
-    MULTMV (mvp, pntA);
-
-    if (pntA[3] < 0.0f)
+    if (pntA.w < 0.0f)
 	rv = !rv;
 
-    DIVV (pntA);
+    matrixVectorDiv (&pntA);
 
-    MULTMV (mvp, pntB);
+    matrixMultiplyVector (&pntB, &points[1], &mvp);
 
-    if (pntB[3] < 0.0f)
+    if (pntB.w < 0.0f)
 	rv = !rv;
 
-    DIVV (pntB);
+    matrixVectorDiv (&pntB);
+    matrixMultiplyVector (&pntC, &points[2], &mvp);
+    matrixVectorDiv (&pntC);
 
-    MULTMV (mvp, pntC);
-    DIVV (pntC);
+    vecA.x = pntC.x - pntA.x;
+    vecA.y = pntC.y - pntA.y;
+    vecA.z = pntC.z - pntA.z;
 
-    vecA[0] = pntC[0] - pntA[0];
-    vecA[1] = pntC[1] - pntA[1];
-    vecA[2] = pntC[2] - pntA[2];
+    vecB.x = pntC.x - pntB.x;
+    vecB.y = pntC.y - pntB.y;
+    vecB.z = pntC.z - pntB.z;
 
-    vecB[0] = pntC[0] - pntB[0];
-    vecB[1] = pntC[1] - pntB[1];
-    vecB[2] = pntC[2] - pntB[2];
+    ortho.x = vecA.y * vecB.z - vecA.z * vecB.y;
+    ortho.y = vecA.z * vecB.x - vecA.x * vecB.z;
+    ortho.z = vecA.x * vecB.y - vecA.y * vecB.x;
 
-    ortho[0] = vecA[1] * vecB[2] - vecA[2] * vecB[1];
-    ortho[1] = vecA[2] * vecB[0] - vecA[0] * vecB[2];
-    ortho[2] = vecA[0] * vecB[1] - vecA[1] * vecB[0];
-
-    if (ortho[2] > 0.0f)
+    if (ortho.z > 0.0f)
 	rv = !rv;
 
     return rv;
@@ -1030,14 +983,16 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 			  PaintOrder              paintOrder,
 			  int			  dx)
 {
-    Bool ftb;
-    int  output;
+    Bool  ftb;
+    int   output;
+    float pointZ;
 
     CUBE_SCREEN (s);
 
-    float vPoints[3][3] = { { -0.5, 0.0, cs->invert * cs->distance},
-			    { 0.0, 0.5, cs->invert * cs->distance},
-			    { 0.0, 0.0, cs->invert * cs->distance}};
+    pointZ = cs->invert * cs->distance;
+    CompVector vPoints[3] = { {.v = { -0.5, 0.0, pointZ, 1.0 } },
+			      {.v = {  0.0, 0.5, pointZ, 1.0 } },
+			      {.v = {  0.0, 0.0, pointZ, 1.0 } } };
 
     ftb = (*cs->checkOrientation) (s, sAttrib, transform, outputPtr, vPoints);
 
@@ -1570,12 +1525,12 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
 	 sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
-	static float top[3][3] = { { 0.5, 0.5, 0.0},
-				   { 0.0, 0.5, -0.5},
-				   { 0.0, 0.5, 0.0}};
-	static float bottom[3][3] = { { 0.5, -0.5, 0.0},
-				      { 0.0, -0.5, -0.5},
-				      { 0.0, -0.5, 0.0}};
+	static CompVector top[3] = { { .v = { 0.5, 0.5,  0.0, 1.0} },
+				     { .v = { 0.0, 0.5, -0.5, 1.0} },
+				     { .v = { 0.0, 0.5,  0.0, 1.0} } };
+	static CompVector bottom[3] = { { .v = { 0.5, -0.5,  0.0, 1.0} },
+			                { .v = { 0.0, -0.5, -0.5, 1.0} },
+					{ .v = { 0.0, -0.5,  0.0, 1.0} } };
 	topDir    = (*cs->checkOrientation) (s, &sa, transform, outputPtr, top);
 	bottomDir = (*cs->checkOrientation) (s, &sa, transform,
 					     outputPtr, bottom);
