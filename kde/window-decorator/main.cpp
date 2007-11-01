@@ -32,6 +32,7 @@
 
 static const KCmdLineOptions options[] = {
     { "replace", "Replace existing window decorator", 0 },
+    { "sm-disable", "Disable connection to session manager", 0 },
     { "opacity <value>", "Decoration opacity", "0.75" },
     { "no-opacity-shade", "No decoration opacity shading", 0 },
     { "active-opacity <value>", "Active decoration opacity", "1.0" },
@@ -82,6 +83,9 @@ main (int argc, char **argv)
     }
 
     app = new KWD::Decorator ();
+
+    if (args->isSet ("sm-disable"))
+	app->disableSessionManagement ();
 
     if (!XDamageQueryExtension (qt_xdisplay (), &event, &error))
     {

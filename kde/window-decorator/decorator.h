@@ -176,7 +176,7 @@ class Decorator:public KApplication, public KWinInterface {
 	KWinModule *mKWinModule;
 	DBusConnection *mDBusConnection;
 	DBusQt::Connection mDBusQtConnection;
-	QWidget *mCompositeWindow;
+	WId mCompositeWindow;
     };
 }
 

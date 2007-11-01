@@ -199,6 +199,7 @@ class Window:public QWidget, public KDecorationBridge {
 
     private:
 	Type mType;
+	WId mParentId;
 	WId mFrame;
 	WId mClientId;
 	WId mSelectedId;

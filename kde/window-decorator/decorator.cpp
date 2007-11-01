@@ -195,8 +195,9 @@ KWD::Decorator::Decorator (void) : DCOPObject ("KWinInterface"),
     mDBusQtConnection (this),
     mCompositeWindow (0)
 {
-    DCOPClient *client;
-    int	       i, j;
+    XSetWindowAttributes attr;
+    DCOPClient		 *client;
+    int			 i, j;
 
     mRootInfo = new NETRootInfo (qt_xdisplay (), 0);
 
@@ -232,15 +233,19 @@ KWD::Decorator::Decorator (void) : DCOPObject ("KWinInterface"),
     mShadowOptions.shadow_color[1] = SHADOW_COLOR_GREEN;
     mShadowOptions.shadow_color[2] = SHADOW_COLOR_BLUE;
 
-    mCompositeWindow = new QWidget (0, "KWDCompositeWidget",
-				    Qt::WType_TopLevel | Qt::WStyle_NoBorder |
-				    Qt::WX11BypassWM);
+    attr.override_redirect = True;
 
-    mCompositeWindow->setGeometry (QRect (-ROOT_OFF_X, -ROOT_OFF_Y, 1, 1));
-    mCompositeWindow->show ();
+    mCompositeWindow = XCreateWindow (qt_xdisplay (), qt_xrootwin (),
+				      -ROOT_OFF_X, -ROOT_OFF_Y, 1, 1, 0,
+				      CopyFromParent,
+				      CopyFromParent,
+				      CopyFromParent,
+				      CWOverrideRedirect, &attr);
 
-    XCompositeRedirectSubwindows (qt_xdisplay (), mCompositeWindow->winId (),
+    XCompositeRedirectSubwindows (qt_xdisplay (), mCompositeWindow,
 				  CompositeRedirectManual);
+
+    XMapWindow (qt_xdisplay (), mCompositeWindow);
 }
 
 KWD::Decorator::~Decorator (void)
@@ -256,8 +261,7 @@ KWD::Decorator::~Decorator (void)
     if (mDecorActive)
 	delete mDecorActive;
 
-    /* XXX: mCompositeWindow is not deleted, some plugins seem to rely on
-       it not being deleted... not sure what to do about this. */
+    XDestroyWindow (qt_xdisplay (), mCompositeWindow);
 
     delete mOptions;
     delete mPlugins;
@@ -299,9 +303,9 @@ KWD::Decorator::enableDecorations (Time timestamp,
 
     updateShadow ();
 
-    mDecorNormal = new KWD::Window (mCompositeWindow->winId (), qt_xrootwin (),
+    mDecorNormal = new KWD::Window (mCompositeWindow, qt_xrootwin (),
 				    0, Window::Default);
-    mDecorActive = new KWD::Window (mCompositeWindow->winId (), qt_xrootwin (),
+    mDecorActive = new KWD::Window (mCompositeWindow, qt_xrootwin (),
 				    0, Window::DefaultActive);
 
     connect (mKWinModule, SIGNAL (windowAdded (WId)),
@@ -918,8 +922,7 @@ KWD::Decorator::handleWindowAdded (WId id)
     {
 	if (!mClients.contains (id))
 	{
-	    client = new KWD::Window (mCompositeWindow->winId (),
-				      id, frame, type,
+	    client = new KWD::Window (mCompositeWindow, id, frame, type,
 				      x, y,
 				      width + border * 2,
 				      height + border * 2);
@@ -941,7 +944,7 @@ KWD::Decorator::handleWindowAdded (WId id)
     {
 	if (!mClients.contains (id))
 	{
-	    client = new KWD::Window (mCompositeWindow->winId (), id, 0, type,
+	    client = new KWD::Window (mCompositeWindow, id, 0, type,
 				      x, y,
 				      width + border * 2,
 				      height + border * 2);
