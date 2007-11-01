@@ -1377,7 +1377,7 @@ enterShowDesktopMode (CompScreen *s)
 
     for (w = s->windows; w; w = w->next)
     {
-	if ((s->showingDesktopMask & w->type) &&
+	if ((s->showingDesktopMask & w->wmType) &&
 	    (!(w->state & CompWindowStateSkipTaskbarMask) || st->value.b))
 	{
 	    if (!w->inShowDesktopMode && (*s->focusWindow) (w))
