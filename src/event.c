@@ -1903,6 +1903,7 @@ handleEvent (CompDisplay *d,
 			}
 			else
 			    restackWindowBelow (w, p);
+		    }
 		}
 
 		if (w->minimized)
