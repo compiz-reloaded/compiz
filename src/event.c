@@ -1891,7 +1891,18 @@ handleEvent (CompDisplay *d,
 
 		    /* window is above active window so we should lower it */
 		    if (p)
-			restackWindowBelow (w, p);
+		    {
+			/* restack window right above its transient parent
+			   if it has one; restack right under active window
+			   otherwise */
+			if (w->transientFor)
+			{
+			    p = findWindowAtDisplay (d, w->transientFor);
+			    if (p)
+				restackWindowAbove (w, p);
+			}
+			else
+			    restackWindowBelow (w, p);
 		}
 
 		if (w->minimized)
