@@ -1397,7 +1397,7 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     (*s->validateWindowResizeRequest) (w, mask, xwc);
     WRAP (ps, s, validateWindowResizeRequest,
 	  placeValidateWindowResizeRequest);
-    
+
     if (w->type & (CompWindowTypeSplashMask      |
 		   CompWindowTypeDialogMask      |
 		   CompWindowTypeModalDialogMask |
@@ -1412,7 +1412,7 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 
     if (checkPlacement)
     {
-    	XRectangle workArea;
+	XRectangle workArea;
 	int        x, y, left, right, top, bottom;
 	int        output;
 
