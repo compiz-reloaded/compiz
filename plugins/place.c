@@ -1157,9 +1157,9 @@ placeWin (CompWindow *window,
 	}
     }
 
-    if ((window->type == CompWindowTypeDialogMask ||
-	 window->type == CompWindowTypeModalDialogMask) &&
-	window->transientFor != None)
+    if (window->transientFor &&
+	(window->type & (CompWindowTypeDialogMask |
+			 CompWindowTypeModalDialogMask)))
     {
 	/* Center horizontally, at top of parent vertically */
 
