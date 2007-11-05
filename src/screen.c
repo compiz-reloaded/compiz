@@ -3346,11 +3346,9 @@ runCommand (CompScreen *s,
 	
 	setsid ();
 
-	if (screenString)
-	{
-	    strcpy (screenString, s->display->displayString);
-	    delimiter = strrchr (screenString, ':');
-	    if (delimiter)
+	strcpy (screenString, s->display->displayString);
+	delimiter = strrchr (screenString, ':');
+	if (delimiter)
 	    {
 		colon = "";
 		delimiter = strchr (delimiter, '.');
@@ -3362,20 +3360,14 @@ runCommand (CompScreen *s,
 		/* insert :0 to keep the syntax correct */
 		colon = ":0";
 	    }
-	    pos = screenString + strlen (screenString);
+	pos = screenString + strlen (screenString);
 
-	    snprintf (pos, stringLen - (pos - screenString),
-		      "%s.%d", colon, s->screenNum);
+	snprintf (pos, stringLen - (pos - screenString),
+		  "%s.%d", colon, s->screenNum);
 
-	    putenv (screenString);
-	}
-	else
-	{
-	    putenv (s->display->displayString);
-	}
+	putenv (screenString);
 
-	execl ("/bin/sh", "/bin/sh", "-c", command, NULL);
-	exit (0);
+	exit (execl ("/bin/sh", "/bin/sh", "-c", command, NULL));
     }
 }
 
