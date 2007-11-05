@@ -3349,17 +3349,17 @@ runCommand (CompScreen *s,
 	strcpy (screenString, s->display->displayString);
 	delimiter = strrchr (screenString, ':');
 	if (delimiter)
-	    {
-		colon = "";
-		delimiter = strchr (delimiter, '.');
-		if (delimiter)
-		    *delimiter = '\0';
-	    }
-	    else
-	    {
-		/* insert :0 to keep the syntax correct */
-		colon = ":0";
-	    }
+	{
+	    colon = "";
+	    delimiter = strchr (delimiter, '.');
+	    if (delimiter)
+		*delimiter = '\0';
+	}
+	else
+	{
+	    /* insert :0 to keep the syntax correct */
+	    colon = ":0";
+	}
 	pos = screenString + strlen (screenString);
 
 	snprintf (pos, stringLen - (pos - screenString),
