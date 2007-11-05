@@ -1197,8 +1197,10 @@ placeWin (CompWindow *window,
 		parent->serverY + parent->serverHeight > 0)
 	    {
 		XRectangle area;
+		int        output;
 
-		get_workarea_of_current_output_device (window->screen, &area);
+		output = outputDeviceForWindow (parent);
+		getWorkareaForOutput (window->screen, output, &area);
 
 		if (x + window_width > area.x + area.width)
 		    x = area.x + area.width - window_width;
