@@ -4091,8 +4091,11 @@ updateWindowAttributes (CompWindow             *w,
 	{
 	    configureXWindow (w, mask, &xwc);
 
-	    /* ancestors, sibilings and sibiling transients below */
-	    stackAncestors (w, &xwc);
+	    /* ancestors, sibilings and sibiling transients below, but not on
+	       the initial map, as we don't want the ancestors to raise in that
+	       case (this may break focus stealing prevention) */
+	    if (stackingMode != CompStackingUpdateModeInitialMap)
+		stackAncestors (w, &xwc);
 	}
     }
     else
