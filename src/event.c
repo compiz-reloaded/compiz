@@ -1851,7 +1851,8 @@ handleEvent (CompDisplay *d,
 
 	    if (doMapProcessing)
 	    {
-		Bool allowFocus;
+		Bool                   allowFocus;
+		CompStackingUpdateMode stackingMode;
 
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
@@ -1879,32 +1880,12 @@ handleEvent (CompDisplay *d,
 
 		allowFocus = allowWindowFocus (w, NO_FOCUS_MASK, 0);
 
-		updateWindowAttributes (w, CompStackingUpdateModeInitialMap);
-
 		if (!allowFocus && (w->type & ~NO_FOCUS_MASK))
-		{
-		    CompWindow *p;
+		    stackingMode = CompStackingUpdateModeInitialMapDeniedFocus;
+		else
+		    stackingMode = CompStackingUpdateModeInitialMap;
 
-		    for (p = w->prev; p; p = p->prev)
-			if (p->id == d->activeWindow)
-			    break;
-
-		    /* window is above active window so we should lower it */
-		    if (p)
-		    {
-			/* restack window right above its transient parent
-			   if it has one; restack right under active window
-			   otherwise */
-			if (w->transientFor)
-			{
-			    p = findWindowAtDisplay (d, w->transientFor);
-			    if (p)
-				restackWindowAbove (w, p);
-			}
-			else
-			    restackWindowBelow (w, p);
-		    }
-		}
+		updateWindowAttributes (w, stackingMode);
 
 		if (w->minimized)
 		    unminimizeWindow (w);

@@ -4064,13 +4064,36 @@ updateWindowAttributes (CompWindow             *w,
 
     if (stackingMode != CompStackingUpdateModeNone)
     {
-	Bool aboveFs;
+	Bool       aboveFs;
+	CompWindow *sibling;
 
 	aboveFs = (stackingMode == CompStackingUpdateModeAboveFullscreen);
-	mask |= addWindowStackChanges (w, &xwc, findSiblingBelow (w, aboveFs));
+	sibling = findSiblingBelow (w, aboveFs);
+
+	if (sibling &&
+	    (stackingMode == CompStackingUpdateModeInitialMapDeniedFocus))
+	{
+	    CompWindow *p;
+
+	    for (p = sibling->prev; p; p = p->prev)
+		if (p->id == w->screen->display->activeWindow)
+		    break;
+
+	    /* window is above active window so we should lower it */
+	    if (p)
+		p = findValidStackSiblingBelow (sibling, p);
+
+	    /* if we found a valid sibling under the active window, it's
+	       our new sibling we want to stack above */
+	    if (p)
+		sibling = p;
+	}
+
+	mask |= addWindowStackChanges (w, &xwc, sibling);
     }
 
-    if (stackingMode == CompStackingUpdateModeInitialMap)
+    if ((stackingMode == CompStackingUpdateModeInitialMap) ||
+	(stackingMode == CompStackingUpdateModeInitialMapDeniedFocus))
     {
 	/* If we are called from the MapRequest handler, we have to
 	   immediately update the internal stack. If we don't do that,
@@ -4102,11 +4125,7 @@ updateWindowAttributes (CompWindow             *w,
 	{
 	    configureXWindow (w, mask, &xwc);
 
-	    /* ancestors, sibilings and sibiling transients below, but not on
-	       the initial map, as we don't want the ancestors to raise in that
-	       case (this may break focus stealing prevention) */
-	    if (stackingMode != CompStackingUpdateModeInitialMap)
-		stackAncestors (w, &xwc);
+	    stackAncestors (w, &xwc);
 	}
     }
     else

@@ -2471,7 +2471,8 @@ typedef enum {
     CompStackingUpdateModeNone = 0,
     CompStackingUpdateModeNormal,
     CompStackingUpdateModeAboveFullscreen,
-    CompStackingUpdateModeInitialMap
+    CompStackingUpdateModeInitialMap,
+    CompStackingUpdateModeInitialMapDeniedFocus
 } CompStackingUpdateMode;
 
 struct _CompWindowExtents {
