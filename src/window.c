@@ -3987,9 +3987,10 @@ restackWindowAbove (CompWindow *w,
     }
 }
 
-void
-restackWindowBelow (CompWindow *w,
-		    CompWindow *sibling)
+/* finds the highest window under sibling we can stack above */
+static CompWindow *
+findValidStackSiblingBelow (CompWindow *w,
+			    CompWindow *sibling)
 {
     CompWindow *lowest, *last, *p;
 
@@ -4002,16 +4003,7 @@ restackWindowBelow (CompWindow *w,
 	/* stop walking when we reach the sibling we should try to stack
 	   below */
 	if (p == sibling)
-	{
-	    XWindowChanges xwc;
-	    int		   mask;
-
-	    mask = addWindowStackChanges (w, &xwc, lowest);
-	    if (mask)
-		configureXWindow (w, mask, &xwc);
-
-	    return;
-	}
+	    return lowest;
 
 	/* skip windows that we should avoid */
 	if (w == p || avoidStackingRelativeTo (p))
@@ -4029,6 +4021,25 @@ restackWindowBelow (CompWindow *w,
 
 	/* update last pointer */
 	last = p;
+    }
+
+    return NULL;
+}
+
+void
+restackWindowBelow (CompWindow *w,
+		    CompWindow *sibling)
+{
+    sibling = findValidStackSiblingBelow (w, sibling);
+
+    if (sibling)
+    {
+	XWindowChanges xwc;
+	int	       mask;
+
+	mask = addWindowStackChanges (w, &xwc, sibling);
+	if (mask)
+	    configureXWindow (w, mask, &xwc);
     }
 }
 
