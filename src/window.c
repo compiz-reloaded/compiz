@@ -4075,7 +4075,7 @@ updateWindowAttributes (CompWindow             *w,
 	{
 	    CompWindow *p;
 
-	    for (p = sibling->prev; p; p = p->prev)
+	    for (p = sibling; p; p = p->prev)
 		if (p->id == w->screen->display->activeWindow)
 		    break;
 
