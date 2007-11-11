@@ -53,7 +53,7 @@
 #define SHADOW_COLOR_BLUE  0x0000
 
 #define DBUS_DEST       "org.freedesktop.compiz"
-#define DBUS_PATH       "/org/freedesktop/compiz/decoration/allscreens"
+#define DBUS_PATH       "/org/freedesktop/compiz/decoration/display"
 #define DBUS_INTERFACE  "org.freedesktop.compiz"
 #define DBUS_METHOD_GET "get"
 
@@ -123,7 +123,7 @@ dbusHandleMessage (DBusConnection *connection,
 	!strcmp (path[1], "freedesktop") &&
 	!strcmp (path[2], "compiz")      &&
 	!strcmp (path[3], "decoration")  &&
-	!strcmp (path[4], "allscreens"))
+	!strcmp (path[4], "display"))
     {
 	decor_shadow_options_t opt = *d->shadowOptions ();
 
