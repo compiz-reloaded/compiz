@@ -446,7 +446,7 @@ moveHandleMotionEvent (CompScreen *s,
 	    {
 		if (w->state & CompWindowStateMaximizedVertMask)
 		{
-		    if ((yRoot - workArea.y) - ms->snapOffY >= SNAP_OFF)
+		    if (abs ((yRoot - workArea.y) - ms->snapOffY) >= SNAP_OFF)
 		    {
 			if (!otherScreenGrabExist (s, "move", 0))
 			{
@@ -472,7 +472,7 @@ moveHandleMotionEvent (CompScreen *s,
 		}
 		else if (ms->origState & CompWindowStateMaximizedVertMask)
 		{
-		    if ((yRoot - workArea.y) - ms->snapBackY < SNAP_BACK)
+		    if (abs ((yRoot - workArea.y) - ms->snapBackY) < SNAP_BACK)
 		    {
 			if (!otherScreenGrabExist (s, "move", 0))
 			{
