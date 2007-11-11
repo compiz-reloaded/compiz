@@ -167,13 +167,13 @@ dbusHandleMessage (DBusConnection *connection,
 
 	    dbus_error_free (&error);
 	}
-	else if (strcmp (path[5], "shadow_offset_x") == 0)
+	else if (strcmp (path[5], "shadow_x_offset") == 0)
 	{
 	    dbus_message_get_args (message, NULL,
 				   DBUS_TYPE_INT32, &opt.shadow_offset_x,
 				   DBUS_TYPE_INVALID);
 	}
-	else if (strcmp (path[5], "shadow_offset_y") == 0)
+	else if (strcmp (path[5], "shadow_y_offset") == 0)
 	{
 	    dbus_message_get_args (message, NULL,
 				   DBUS_TYPE_INT32, &opt.shadow_offset_y,
