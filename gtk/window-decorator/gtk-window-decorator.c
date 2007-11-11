@@ -111,10 +111,10 @@
     COMPIZ_GCONF_DIR1 "/shadow_color"
 
 #define COMPIZ_SHADOW_OFFSET_X_KEY \
-    COMPIZ_GCONF_DIR1 "/shadow_offset_x"
+    COMPIZ_GCONF_DIR1 "/shadow_x_offset"
 
 #define COMPIZ_SHADOW_OFFSET_Y_KEY \
-    COMPIZ_GCONF_DIR1 "/shadow_offset_y"
+    COMPIZ_GCONF_DIR1 "/shadow_y_offset"
 
 #define META_THEME_KEY		\
     METACITY_GCONF_DIR "/theme"
@@ -6445,13 +6445,13 @@ dbus_handle_message (DBusConnection *connection,
 
 	    dbus_error_free (&error);
 	}
-	else if (strcmp (path[5], "shadow_offset_x") == 0)
+	else if (strcmp (path[5], "shadow_x_offset") == 0)
 	{
 	    dbus_message_get_args (message, NULL,
 				   DBUS_TYPE_INT32, &shadow_offset_x,
 				   DBUS_TYPE_INVALID);
 	}
-	else if (strcmp (path[5], "shadow_offset_y") == 0)
+	else if (strcmp (path[5], "shadow_y_offset") == 0)
 	{
 	    dbus_message_get_args (message, NULL,
 				   DBUS_TYPE_INT32, &shadow_offset_y,
@@ -6600,7 +6600,7 @@ init_settings (WnckScreen *screen)
     }
 
     reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_offset_x");
+						    "/shadow_x_offset");
     if (reply)
     {
 	dbus_message_get_args (reply, NULL,
@@ -6610,7 +6610,7 @@ init_settings (WnckScreen *screen)
     }
 
     reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_offset_y");
+						    "/shadow_y_offset");
     if (reply)
     {
 	dbus_message_get_args (reply, NULL,

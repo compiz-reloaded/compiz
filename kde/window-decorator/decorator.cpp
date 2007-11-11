@@ -444,7 +444,7 @@ KWD::Decorator::updateAllShadowOptions (void)
 	dbus_message_unref (reply);
     }
 
-    reply = sendAndBlockForShadowOptionReply (DBUS_PATH "/shadow_offset_x");
+    reply = sendAndBlockForShadowOptionReply (DBUS_PATH "/shadow_x_offset");
     if (reply)
     {
 	dbus_message_get_args (reply, NULL,
@@ -453,7 +453,7 @@ KWD::Decorator::updateAllShadowOptions (void)
 	dbus_message_unref (reply);
     }
 
-    reply = sendAndBlockForShadowOptionReply (DBUS_PATH "/shadow_offset_y");
+    reply = sendAndBlockForShadowOptionReply (DBUS_PATH "/shadow_y_offset");
     if (reply)
     {
 	dbus_message_get_args (reply, NULL,
