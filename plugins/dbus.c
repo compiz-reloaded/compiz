@@ -2355,6 +2355,7 @@ dbusInitCore (CompPlugin *p,
     }
 
     WRAP (dc, c, initPluginForObject, dbusInitPluginForObject);
+    WRAP (dc, c, setOptionForPlugin, dbusSetOptionForPlugin);
 
     c->base.privates[corePrivateIndex].ptr = dc;
 
@@ -2389,6 +2390,7 @@ dbusFiniCore (CompPlugin *p,
     */
 
     UNWRAP (dc, c, initPluginForObject);
+    UNWRAP (dc, c, setOptionForPlugin);
 
     free (dc);
 }

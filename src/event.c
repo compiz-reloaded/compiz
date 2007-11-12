@@ -188,10 +188,8 @@ autoRaiseTimeout (void *closure)
     CompWindow  *w = findWindowAtDisplay (display, display->activeWindow);
 
     if (display->autoRaiseWindow == display->activeWindow ||
-	display->autoRaiseWindow == w->transientFor)
+	(w && (display->autoRaiseWindow == w->transientFor)))
     {
-	CompWindow *w;
-
 	w = findWindowAtDisplay (display, display->autoRaiseWindow);
 	if (w)
 	    updateWindowAttributes (w, CompStackingUpdateModeNormal);

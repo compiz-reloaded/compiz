@@ -111,10 +111,10 @@
     COMPIZ_GCONF_DIR1 "/shadow_color"
 
 #define COMPIZ_SHADOW_OFFSET_X_KEY \
-    COMPIZ_GCONF_DIR1 "/shadow_offset_x"
+    COMPIZ_GCONF_DIR1 "/shadow_x_offset"
 
 #define COMPIZ_SHADOW_OFFSET_Y_KEY \
-    COMPIZ_GCONF_DIR1 "/shadow_offset_y"
+    COMPIZ_GCONF_DIR1 "/shadow_y_offset"
 
 #define META_THEME_KEY		\
     METACITY_GCONF_DIR "/theme"
@@ -180,6 +180,13 @@
 #define META_SHADE_OPACITY        TRUE
 #define META_ACTIVE_OPACITY       1.0
 #define META_ACTIVE_SHADE_OPACITY TRUE
+
+#define CMDLINE_OPACITY              (1 << 0)
+#define CMDLINE_OPACITY_SHADE        (1 << 1)
+#define CMDLINE_ACTIVE_OPACITY       (1 << 2)
+#define CMDLINE_ACTIVE_OPACITY_SHADE (1 << 3)
+#define CMDLINE_BLUR                 (1 << 4)
+#define CMDLINE_THEME                (1 << 5)
 
 #define MWM_HINTS_DECORATIONS (1L << 1)
 
@@ -282,6 +289,8 @@ static gboolean meta_active_shade_opacity = META_ACTIVE_SHADE_OPACITY;
 static gboolean         meta_button_layout_set = FALSE;
 static MetaButtonLayout meta_button_layout;
 #endif
+
+static guint cmdline_options = 0;
 
 static decor_shadow_t *no_border_shadow = NULL;
 static decor_shadow_t *border_shadow = NULL;
@@ -6099,6 +6108,9 @@ blur_settings_changed (GConfClient *client)
     gchar *type;
     int   new_type = blur_type;
 
+    if (cmdline_options & CMDLINE_BLUR)
+	return FALSE;
+
     type = gconf_client_get_string (client,
 				    BLUR_TYPE_KEY,
 				    NULL);
@@ -6130,6 +6142,9 @@ theme_changed (GConfClient *client)
 
 #ifdef USE_METACITY
     gboolean use_meta_theme;
+
+    if (cmdline_options & CMDLINE_THEME)
+	return FALSE;
 
     use_meta_theme = gconf_client_get_bool (client,
 					    USE_META_THEME_KEY,
@@ -6199,7 +6214,8 @@ theme_opacity_changed (GConfClient *client)
 				      META_THEME_OPACITY_KEY,
 				      NULL);
 
-    if (opacity != meta_opacity)
+    if (!(cmdline_options & CMDLINE_OPACITY) &&
+	opacity != meta_opacity)
     {
 	meta_opacity = opacity;
 	changed = TRUE;
@@ -6211,7 +6227,8 @@ theme_opacity_changed (GConfClient *client)
 					       META_THEME_SHADE_OPACITY_KEY,
 					       NULL);
 
-	if (shade_opacity != meta_shade_opacity)
+	if (!(cmdline_options & CMDLINE_OPACITY_SHADE) &&
+	    shade_opacity != meta_shade_opacity)
 	{
 	    meta_shade_opacity = shade_opacity;
 	    changed = TRUE;
@@ -6222,7 +6239,8 @@ theme_opacity_changed (GConfClient *client)
 				      META_THEME_ACTIVE_OPACITY_KEY,
 				      NULL);
 
-    if (opacity != meta_active_opacity)
+    if (!(cmdline_options & CMDLINE_ACTIVE_OPACITY) &&
+	opacity != meta_active_opacity)
     {
 	meta_active_opacity = opacity;
 	changed = TRUE;
@@ -6235,7 +6253,8 @@ theme_opacity_changed (GConfClient *client)
 				   META_THEME_ACTIVE_SHADE_OPACITY_KEY,
 				   NULL);
 
-	if (shade_opacity != meta_active_shade_opacity)
+	if (!(cmdline_options & CMDLINE_ACTIVE_OPACITY_SHADE) &&
+	    shade_opacity != meta_active_shade_opacity)
 	{
 	    meta_active_shade_opacity = shade_opacity;
 	    changed = TRUE;
@@ -6445,13 +6464,13 @@ dbus_handle_message (DBusConnection *connection,
 
 	    dbus_error_free (&error);
 	}
-	else if (strcmp (path[5], "shadow_offset_x") == 0)
+	else if (strcmp (path[5], "shadow_x_offset") == 0)
 	{
 	    dbus_message_get_args (message, NULL,
 				   DBUS_TYPE_INT32, &shadow_offset_x,
 				   DBUS_TYPE_INVALID);
 	}
-	else if (strcmp (path[5], "shadow_offset_y") == 0)
+	else if (strcmp (path[5], "shadow_y_offset") == 0)
 	{
 	    dbus_message_get_args (message, NULL,
 				   DBUS_TYPE_INT32, &shadow_offset_y,
@@ -6600,7 +6619,7 @@ init_settings (WnckScreen *screen)
     }
 
     reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_offset_x");
+						    "/shadow_x_offset");
     if (reply)
     {
 	dbus_message_get_args (reply, NULL,
@@ -6610,7 +6629,7 @@ init_settings (WnckScreen *screen)
     }
 
     reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_offset_y");
+						    "/shadow_y_offset");
     if (reply)
     {
 	dbus_message_get_args (reply, NULL,
@@ -6719,6 +6738,7 @@ main (int argc, char *argv[])
 		else if (strcmp (argv[i], "all") == 0)
 		    blur_type = BLUR_TYPE_ALL;
 	    }
+	    cmdline_options |= CMDLINE_BLUR;
 	}
 
 #ifdef USE_METACITY
@@ -6726,24 +6746,29 @@ main (int argc, char *argv[])
 	{
 	    if (argc > ++i)
 		meta_opacity = atof (argv[i]);
+	    cmdline_options |= CMDLINE_OPACITY;
 	}
 	else if (strcmp (argv[i], "--no-opacity-shade") == 0)
 	{
 	    meta_shade_opacity = FALSE;
+	    cmdline_options |= CMDLINE_OPACITY_SHADE;
 	}
 	else if (strcmp (argv[i], "--active-opacity") == 0)
 	{
 	    if (argc > ++i)
 		meta_active_opacity = atof (argv[i]);
+	    cmdline_options |= CMDLINE_ACTIVE_OPACITY;
 	}
 	else if (strcmp (argv[i], "--no-active-opacity-shade") == 0)
 	{
 	    meta_active_shade_opacity = FALSE;
+	    cmdline_options |= CMDLINE_ACTIVE_OPACITY_SHADE;
 	}
 	else if (strcmp (argv[i], "--metacity-theme") == 0)
 	{
 	    if (argc > ++i)
 		meta_theme = argv[i];
+	    cmdline_options |= CMDLINE_THEME;
 	}
 #endif
 

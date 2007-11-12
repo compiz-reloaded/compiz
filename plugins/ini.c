@@ -371,6 +371,14 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 		item = strdup (splitStart);
 	    }
 
+	    if (!item) {
+	        compLogMessage (NULL, "ini", CompLogLevelError,
+			      "Not enough memory");
+	        list->nValue = 0;
+	        return FALSE;
+	    }
+
+
 	    switch (type)
 	    {
 		case CompOptionTypeString:
