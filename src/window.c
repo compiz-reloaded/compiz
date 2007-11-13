@@ -4023,24 +4023,21 @@ findValidStackSiblingBelow (CompWindow *w,
 	last = p;
     }
 
-    return NULL;
+    return lowest;
 }
 
 void
 restackWindowBelow (CompWindow *w,
 		    CompWindow *sibling)
 {
-    sibling = findValidStackSiblingBelow (w, sibling);
+    XWindowChanges xwc;
+    unsigned int   mask;
 
-    if (sibling)
-    {
-	XWindowChanges xwc;
-	int	       mask;
+    mask = addWindowStackChanges (w, &xwc,
+				  findValidStackSiblingBelow (w, sibling));
 
-	mask = addWindowStackChanges (w, &xwc, sibling);
-	if (mask)
-	    configureXWindow (w, mask, &xwc);
-    }
+    if (mask)
+	configureXWindow (w, mask, &xwc);
 }
 
 void
