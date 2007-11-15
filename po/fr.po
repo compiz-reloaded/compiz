@@ -1,4 +1,4 @@
-# translation of fr-compiz.po
+# translation of compiz.po to fr-compiz.po
 # Copyright (C) 2007 compiz-fusion.org
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
@@ -7,13 +7,12 @@
 #
 # Tristan RABLAT <tristan.rablat@gmail.com>, 2007.
 # Bruno Patri <bruno.patri@gmail.com>, 2007.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-05 00:01+0200\n"
-"PO-Revision-Date: 2007-10-22 16:03+0200\n"
+"POT-Creation-Date: 2007-11-15 16:05+0530\n"
+"PO-Revision-Date: 2007-11-07 19:01+0100\n"
 "Last-Translator: Tristan RABLAT <tristan.rablat@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +34,9 @@ msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "Action à accomplir en tournant la molette de la souris sur la barre de titre d'une fenêtre"
+msgstr ""
+"Action à accomplir en tournant la molette de la souris sur la barre de titre "
+"d'une fenêtre"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -59,7 +60,9 @@ msgstr "Nuance de l'opacité du thème Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "Opacité à utiliser pour les fenêtres actives avec les décorations des thèmes Metacity"
+msgstr ""
+"Opacité à utiliser pour les fenêtres actives avec les décorations des thèmes "
+"Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
@@ -69,11 +72,16 @@ msgstr "Opacité à utiliser pour les décorations des thèmes Metacity"
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
-msgstr "Nuancer les fenêtres actives avec les décorations du thème Metacity, d'opaque à transparent"
+msgstr ""
+"Nuancer les fenêtres actives avec les décorations du thème Metacity, "
+"d'opaque à transparent"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "Nuancer les fenêtres avec les décorations du thème Metacity, d'opaque à transparent"
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+"Nuancer les fenêtres avec les décorations du thème Metacity, d'opaque à "
+"transparent"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -211,7 +219,8 @@ msgstr "Flouter les fenêtres qui n'ont pas le focus"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr "Désactiver le flou des régions de l'écran obscurcies par d'autres fenêtres"
+msgstr ""
+"Désactiver le flou des régions de l'écran obscurcies par d'autres fenêtres"
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
@@ -391,7 +400,8 @@ msgid "Active Plugins"
 msgstr "Extensions actives"
 
 #: ../metadata/core.xml.in.h:14
-msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Empêcher la redirection vers des pixmaps hors de l'écran lors de l'affichage "
 "des fenêtres plein écran"
@@ -490,51 +500,63 @@ msgstr "Ligne de commande 9"
 
 #: ../metadata/core.xml.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command0 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command0 est appelé"
 
 #: ../metadata/core.xml.in.h:39
 msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command1 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command1 est appelé"
 
 #: ../metadata/core.xml.in.h:40
 msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command10 est appelé"
 
 #: ../metadata/core.xml.in.h:41
 msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command11 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command11 est appelé"
 
 #: ../metadata/core.xml.in.h:42
 msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command2 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command2 est appelé"
 
 #: ../metadata/core.xml.in.h:43
 msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command3 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command3 est appelé"
 
 #: ../metadata/core.xml.in.h:44
 msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command4 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command4 est appelé"
 
 #: ../metadata/core.xml.in.h:45
 msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command5 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command5 est appelé"
 
 #: ../metadata/core.xml.in.h:46
 msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command6 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command6 est appelé"
 
 #: ../metadata/core.xml.in.h:47
 msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command7 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command7 est appelé"
 
 #: ../metadata/core.xml.in.h:48
 msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command8 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command8 est appelé"
 
 #: ../metadata/core.xml.in.h:49
 msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
+msgstr ""
+"Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
@@ -566,11 +588,11 @@ msgstr "Rapide"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Focus Prevention Windows"
-msgstr "Fenêtres de Prévention du Focus"
+msgstr "Fenêtres prévenues du Focus"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Focus prevention windows"
-msgstr "fenêtres de prévention du focus"
+msgstr "fenêtres prévenues du focus"
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
@@ -674,11 +696,11 @@ msgstr "Optimiser la fenêtre active verticalement"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Minimize Window"
-msgstr "Réduire la fenêtre"
+msgstr "Minimiser la fenêtre"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
-msgstr "Réduire la fenêtre active"
+msgstr "Minimiser la fenêtre active"
 
 #: ../metadata/core.xml.in.h:85
 msgid "Number of Desktops"
@@ -704,7 +726,9 @@ msgstr "Incrément de changement d'opacité"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"
-msgstr "Valeurs de l'opacité pour les fenêtres qui devraient être transparentes par défaut"
+msgstr ""
+"Valeurs de l'opacité pour les fenêtres qui devraient être transparentes par "
+"défaut"
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
@@ -848,7 +872,7 @@ msgstr "Faire une capture d'écran d'une fenêtre"
 
 #: ../metadata/core.xml.in.h:126
 msgid "Terminal command line"
-msgstr "Ligne de commande de Terminal"
+msgstr "Commande à lancer pour le Terminal"
 
 #: ../metadata/core.xml.in.h:127
 msgid "Texture Filter"
@@ -956,11 +980,11 @@ msgstr "Passer à la diapositive suivante"
 
 #: ../metadata/cube.xml.in.h:5
 msgid "Animate Skydome"
-msgstr "Animer le skydome"
+msgstr "Animer le Skydome"
 
 #: ../metadata/cube.xml.in.h:6
 msgid "Animate skydome when rotating cube"
-msgstr "Animer le skydome lors de la rotation de cube"
+msgstr "Animer le Skydome lors de la rotation de cube"
 
 #: ../metadata/cube.xml.in.h:7
 msgid "Automatic"
@@ -982,13 +1006,13 @@ msgstr "Couleur des côtés supérieur et inférieur du cube"
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
 "Couleur à utiliser pour l'arrêt de couleur inférieure du gradient de rappel "
-"de skydome"
+"de Skydome"
 
 #: ../metadata/cube.xml.in.h:12
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 "Couleur à utiliser pour l'arrêt de couleur supérieure du gradient de rappel "
-"de skydome"
+"de Skydome"
 
 #: ../metadata/cube.xml.in.h:13
 msgid "Cube Color"
@@ -1034,15 +1058,17 @@ msgstr "Fichiers image"
 
 #: ../metadata/cube.xml.in.h:23
 msgid "Image to use as texture for the skydome"
-msgstr "Image à utiliser comme texture pour le skydome"
+msgstr "Image à utiliser comme texture pour le Skydome"
 
 #: ../metadata/cube.xml.in.h:24
 msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr "Rendre le Cube transparent seulement si la rotation est contrôlée par la souris"
+msgstr ""
+"Rendre le Cube transparent seulement si la rotation est contrôlée par la "
+"souris"
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
-msgstr "À l'intérieur du Cube"
+msgstr "Vue de l'intérieur du Cube"
 
 #: ../metadata/cube.xml.in.h:26
 msgid "Inside cube"
@@ -1094,7 +1120,7 @@ msgstr "Diapositive précédente"
 
 #: ../metadata/cube.xml.in.h:39
 msgid "Render skydome"
-msgstr "Afficher le skydome"
+msgstr "Afficher le Skydome"
 
 #: ../metadata/cube.xml.in.h:40
 msgid "Scale image"
@@ -1106,7 +1132,9 @@ msgstr "Mettre les images à l'échelle pour couvrir la face supérieure du cube
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "Choisir comment le cube est affiché si plusieurs périphériques de sortie sont utilisés"
+msgstr ""
+"Choisir comment le cube est affiché si plusieurs périphériques de sortie "
+"sont utilisés"
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome"
@@ -1114,15 +1142,15 @@ msgstr "Skydome"
 
 #: ../metadata/cube.xml.in.h:44
 msgid "Skydome Gradient End Color"
-msgstr "Couleur de fin du gradient du skydome"
+msgstr "Couleur de fin du gradient du Skydome"
 
 #: ../metadata/cube.xml.in.h:45
 msgid "Skydome Gradient Start Color"
-msgstr "Couleur de début du gradient du skydome"
+msgstr "Couleur de début du gradient du Skydome"
 
 #: ../metadata/cube.xml.in.h:46
 msgid "Skydome Image"
-msgstr "Image du skydome"
+msgstr "Image du Skydome"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
@@ -1169,7 +1197,8 @@ msgid "Decoration windows"
 msgstr "Décoration des fenêtres"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid "Decorator command line that is executed if no decorator is already running"
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Ligne de commande du décorateur qui est exécutée si aucun décorateur ne "
 "fonctionne"
@@ -1252,17 +1281,15 @@ msgstr "Effet de fondu au signal sonore du système"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr ""
-"Apparition en fondu des fenêtres en mode mapped et disparition en fondu des "
-"fenêtres en mode unmapped"
+msgstr "Apparition/disparition en fondu des fenêtres à l'ouverture/fermeture"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Fade windows"
-msgstr "Fondu des fenêtres"
+msgstr "Fondu des Fenêtres"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
-msgstr "Fondu des fenêtres"
+msgstr "Types de fenêtres à animer"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fullscreen Visual Bell"
@@ -1330,7 +1357,7 @@ msgstr "Extension pour la notification de modification de fichier"
 
 #: ../metadata/inotify.xml.in.h:2
 msgid "Inotify"
-msgstr "Inotify (Ne pas modifier)"
+msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
@@ -1342,19 +1369,19 @@ msgstr "Backend de contrôle Kconfig"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
-msgstr "Effet de réduction"
+msgstr "Effet de Minimisation"
 
 #: ../metadata/minimize.xml.in.h:2
 msgid "Minimize Windows"
-msgstr "Réduire la fenêtre"
+msgstr "Minimiser la fenêtre"
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
-msgstr "Vitesse de réduction"
+msgstr "Vitesse de minimisation"
 
 #: ../metadata/minimize.xml.in.h:4
 msgid "Minimize timestep"
-msgstr "Intervalle de réduction"
+msgstr "Intervalle de minimisation"
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
@@ -1382,7 +1409,9 @@ msgstr "Contraindre la coordonnée Y à être dans la zone de l'espace de travai
 
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Ne pas mettre à jour la position de la fenêtre coté serveur, tant que son mouvement n'est pas fini"
+msgstr ""
+"Ne pas mettre à jour la position de la fenêtre coté serveur, tant que son "
+"mouvement n'est pas fini"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -1412,8 +1441,8 @@ msgstr "Niveau d'opacité pour déplacer des fenêtres"
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
-"Désactiver l'alignement et la réduction automatique des fenêtres lorsque "
-"vous les faites glisser"
+"Désactiver l'alignement et la démaximisation automatique des fenêtres "
+"lorsque vous les faites glisser"
 
 #: ../metadata/move.xml.in.h:11
 msgid "Snapoff maximized windows"
@@ -1485,7 +1514,9 @@ msgstr "Fenêtres devant être positionnées par défaut"
 
 #: ../metadata/place.xml.in.h:16
 msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Types de fenêtres qui devraient être positionnées sur un bureau spécifique par défaut"
+msgstr ""
+"Types de fenêtres qui devraient être positionnées sur un bureau spécifique "
+"par défaut"
 
 #: ../metadata/place.xml.in.h:17
 msgid "Workarounds"
@@ -1517,11 +1548,11 @@ msgstr "Valeurs de la position en Y"
 
 #: ../metadata/plane.xml.in.h:1
 msgid "Desktop Plane"
-msgstr "Bureau à Plat"
+msgstr "Bureaux sur un Plan"
 
 #: ../metadata/plane.xml.in.h:2
 msgid "Place windows on a plane"
-msgstr "Placer tous les Bureaux sur un Plan"
+msgstr "Placer tous les bureaux sur un plan"
 
 #: ../metadata/plane.xml.in.h:3
 msgid "Plane Down"
@@ -1673,7 +1704,9 @@ msgstr "Couleur de Bordure"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
-msgstr "Couleur de la bordure utilisée pour les modes de redimensionnement Rectangulaire et Contour"
+msgstr ""
+"Couleur de la bordure utilisée pour les modes de redimensionnement "
+"Rectangulaire et Contour"
 
 #: ../metadata/resize.xml.in.h:3
 msgid "Default Resize Mode"
@@ -1781,7 +1814,8 @@ msgstr "Types de fenêtres qui devraient utiliser le redimensionnement Contour"
 
 #: ../metadata/resize.xml.in.h:29
 msgid "Windows that rectangle resize should be used for"
-msgstr "Types de fenêtres qui devraient utiliser le redimensionnement Rectangle"
+msgstr ""
+"Types de fenêtres qui devraient utiliser le redimensionnement Rectangle"
 
 #: ../metadata/resize.xml.in.h:30
 msgid "Windows that stretch resize should be used for"
@@ -1822,8 +1856,8 @@ msgstr ""
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Rotation vers la face suivante - Déplacement de la fenêtre vers le côté "
-"de l'écran"
+"Rotation vers la face suivante - Déplacement de la fenêtre vers le côté de "
+"l'écran"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to right viewport and warp pointer"
@@ -2171,7 +2205,9 @@ msgstr "Emblème"
 
 #: ../metadata/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "Entrer en mode Affichage Du Bureau quand celui-ci est cliqué pendant la Mise à l'Échelle"
+msgstr ""
+"Entrer en mode Affichage Du Bureau quand celui-ci est cliqué pendant la Mise "
+"à l'Échelle"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
@@ -2191,7 +2227,8 @@ msgstr "Lancer le sélecteur de fenêtre pour un groupe de fenêtres"
 
 #: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
+msgstr ""
+"Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
 
 #: ../metadata/scale.xml.in.h:13
 msgid "Layout and start transforming all windows"
@@ -2207,7 +2244,8 @@ msgstr "Disposer et commencer à transformer les fenêtres"
 
 #: ../metadata/scale.xml.in.h:16
 msgid "Layout and start transforming windows on current output"
-msgstr "Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
+msgstr ""
+"Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
 
 #: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
 msgid "None"
@@ -2227,7 +2265,8 @@ msgstr "Superposer l'icône"
 
 #: ../metadata/scale.xml.in.h:23
 msgid "Overlay an icon on windows once they are scaled"
-msgstr "Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
+msgstr ""
+"Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
 
 #: ../metadata/scale.xml.in.h:24
 msgid "Scale"
@@ -2251,7 +2290,9 @@ msgstr "Mettre toutes les fenêtres à la même échelle"
 
 #: ../metadata/scale.xml.in.h:29
 msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr "Choisir où les fenêtres sont mises à l'échelle si plusieurs périphériques de sortie sont utilisés."
+msgstr ""
+"Choisir où les fenêtres sont mises à l'échelle si plusieurs périphériques de "
+"sortie sont utilisés."
 
 #: ../metadata/scale.xml.in.h:30
 msgid "Space between windows"
@@ -2262,7 +2303,8 @@ msgid "Spacing"
 msgstr "Espacement"
 
 #: ../metadata/scale.xml.in.h:33
-msgid "Time (in ms) before scale mode is terminated when hovering over a window"
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Temps (en ms) avant que le mode Échelle soit terminé lors du survol au-"
 "dessus d'une fenêtre"
@@ -2317,7 +2359,7 @@ msgstr "Quantité de saturation en pourcentage"
 
 #: ../metadata/switcher.xml.in.h:4
 msgid "Application Switcher"
-msgstr "Sélecteur d'application"
+msgstr "Sélecteur d'Application"
 
 #: ../metadata/switcher.xml.in.h:5
 msgid "Auto Rotate"
@@ -2364,26 +2406,27 @@ msgstr "Fenêtre suivante (pas de sélecteur)"
 #: ../metadata/switcher.xml.in.h:18
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
-"Afficher le sélecteur s'il n'est pas visible et sélectionner "
-"la fenêtre suivante"
+"Afficher le sélecteur s'il n'est pas visible et sélectionner la fenêtre "
+"suivante"
 
 #: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
-"Afficher le sélecteur s'il n'est pas visible et sélectionner "
-"la fenêtre suivante parmi toutes les fenêtres"
+"Afficher le sélecteur s'il n'est pas visible et sélectionner la fenêtre "
+"suivante parmi toutes les fenêtres"
 
 #: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select previous window"
 msgstr ""
-"Afficher le sélecteur s'il n'est pas visible et sélectionner "
-"la fenêtre précédente"
+"Afficher le sélecteur s'il n'est pas visible et sélectionner la fenêtre "
+"précédente"
 
 #: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select previous window out of all windows"
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
-"Afficher le sélecteur s'il n'est pas visible et sélectionner "
-"la fenêtre précédente parmi toutes les fenêtres"
+"Afficher le sélecteur s'il n'est pas visible et sélectionner la fenêtre "
+"précédente parmi toutes les fenêtres"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Prev window"
@@ -2431,7 +2474,7 @@ msgstr "Intervalle du sélecteur"
 
 #: ../metadata/switcher.xml.in.h:34
 msgid "Switcher windows"
-msgstr "Fenêtre du sélecteur"
+msgstr "Types de fenêtres du sélecteur"
 
 #: ../metadata/switcher.xml.in.h:36
 msgid "Windows that should be shown in switcher"
@@ -2612,7 +2655,9 @@ msgstr "Basculer l'alignement des fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
-msgstr "Utiliser le modèle de ressort pour l'effet de tremblement de fenêtre"
+msgstr ""
+"Utiliser le modèle physique du ressort pour créer un effet de déformation "
+"des fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:25
 msgid "Vertex Grid Resolution"
@@ -2636,11 +2681,13 @@ msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
 
 #: ../metadata/wobbly.xml.in.h:30
 msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Effet de déformation lors de la réduction et de l'agrandissement des fenêtres"
+msgstr ""
+"Effet de déformation lors de la maximisation et de la démaximisation des "
+"fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
-msgstr "Fenêtres déformées"
+msgstr "Déformer les Fenêtres"
 
 #: ../metadata/zoom.xml.in.h:1
 msgid "Filter Linear"
@@ -2652,7 +2699,7 @@ msgstr "Utiliser le filtre linéaire pour le zoom avant"
 
 #: ../metadata/zoom.xml.in.h:6
 msgid "Zoom Desktop"
-msgstr "Zoom - Bureau"
+msgstr "Zoom du Bureau"
 
 #: ../metadata/zoom.xml.in.h:7
 msgid "Zoom In"
