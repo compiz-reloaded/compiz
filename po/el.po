@@ -1,17 +1,20 @@
 # Compiz Core Greek Translation.
 # Copyright (C) 2007 compiz-fusion.org
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 1999, 2000, 2001 SuSE GmbH.
 # This file is distributed under the same license as the Compiz package.
 # Δημήτρης (djdoo) <jimdusis@yahoo.gr>, 2007.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Compiz 0.5.2\n"
-"Report-Msgid-Bugs-To: http://bugs.opencompositing.org\n"
-"POT-Creation-Date: 2007-08-31 00:03+0200\n"
-"PO-Revision-Date: 2007-09-27 07:00+0200\n"
+"Project-Id-Version: Compiz 0.6.0\n"
+"Report-Msgid-Bugs-To:http://bugs.opencompositing.org \n"
+"POT-Creation-Date: 2007-09-30 00:01+0200\n"
+"PO-Revision-Date: 2007-09-30 05:00+0200\n"
 "Last-Translator: Δημήτρης (DjDoo) <jimdusis@yahoo.gr>\n"
-"Language-Team: Compiz Fusion translators <i18n@lists.compiz-fusion.org>\n"
+"Language-Team: Greek <jimdusis@yahoo.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,61 +32,70 @@ msgid "Compiz"
 msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
+msgid "Action to take when scrolling the mouse wheel on a window title bar."
+msgstr ""
+"Ενέργεια που θα λάβει χώρα όταν περιστρέφετε τη ρόδα του ποντικιού πάνω σε μια"
+" μπάρα τίτλου ενός παραθύρου."
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
 msgstr "Είδος θολώματος"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:2
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
 msgstr "Αδιαφάνεια θέματος ενεργού παραθύρου του Metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:3
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme active window opacity shade"
 msgstr "Σκίαση αδιαφάνειας θέματος ενεργού παραθύρου του Metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:4
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
 msgstr "Αδιαφάνεια θέματος του Metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:5
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
 msgstr "Σκίαση αδιαφάνειας θέματος του Metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:6
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
 msgstr ""
-"Αδιαφάνεια για χρήση στα ενεργά παράθυρα με θέματα διακοσμήσεων του "
-"metacity"
+"Αδιαφάνεια για χρήση στα ενεργά παράθυρα με θέματα διακοσμήσεων του metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:7
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
 msgstr "Αδιαφάνεια για χρήση στα θέματα διακοσμήσεων του metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:8
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
 msgstr ""
-"Σκίαση ενεργών παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές σε "
-"διάφανο"
+"Σκίαση ενεργών παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές "
+"σε διάφανο"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:9
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
-"Σκίαση παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές σε "
-"διάφανο"
+"Σκίαση παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές σε διάφανο"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:10
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Title bar mouse wheel action"
+msgstr "Ενέργεια ρόδας ποντικιού στην μπάρα τίτλου"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
 msgstr "Είδος θολώματος για χρήση στις διακοσμήσεις παραθύρων"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:11
+#: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
 msgstr "Χρήση θέματος του metacity"
 
-#: ../gtk/window-decorator/gwd.schemas.in.h:12
+#: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr "Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
+msgstr ""
+"Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -699,8 +711,8 @@ msgstr "Αριθμός ψεύτικων επιφανειών εργασίας"
 #: ../metadata/core.xml.in.h:87
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
-"Πραγματοποίηση ανανεώσεων οθόνης μόνο κατα τη διάρκεια της κάθετης περιοδικής "
-"ανανέωσης"
+"Πραγματοποίηση ανανεώσεων οθόνης μόνο κατα τη διάρκεια της κάθετης "
+"περιοδικής ανανέωσης"
 
 #: ../metadata/core.xml.in.h:88
 msgid "Opacity Step"
@@ -995,8 +1007,8 @@ msgstr ""
 #: ../metadata/cube.xml.in.h:12
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
-"Χρώμα για χρήση με το κορυφαίο στοπ-χρώματος της διαβάθμισης του "
-"skydome-fallback"
+"Χρώμα για χρήση με το κορυφαίο στοπ-χρώματος της διαβάθμισης του skydome-"
+"fallback"
 
 #: ../metadata/cube.xml.in.h:13
 msgid "Cube Color"
@@ -1045,7 +1057,8 @@ msgstr "Εικόνα για χρήση ως υφή για το skydome"
 #: ../metadata/cube.xml.in.h:24
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr ""
-"Εκκινεί την διαφάνεια του Κύβου μόνο όταν η περιστροφή οδηγηθεί από το ποντίκι"
+"Εκκινεί την διαφάνεια του Κύβου μόνο όταν η περιστροφή οδηγηθεί από το "
+"ποντίκι"
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
@@ -1183,8 +1196,8 @@ msgstr "Διακοσμήσεις παραθύρων"
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
-"Γραμμή εντολών διακοσμητή που θα εκτελείται αν κανένας διακοσμητής δεν τρέχει "
-"ήδη"
+"Γραμμή εντολών διακοσμητή που θα εκτελείται αν κανένας διακοσμητής δεν "
+"τρέχει ήδη"
 
 #: ../metadata/decoration.xml.in.h:5
 msgid "Drop shadow X offset"
@@ -1378,7 +1391,8 @@ msgstr "Αντίσταση στη σκίαση"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr "Μετατροπή παραθύρων όταν είναι ελαχιστοποιημένα και μή-ελαχιστοποιημένα"
+msgstr ""
+"Μετατροπή παραθύρων όταν είναι ελαχιστοποιημένα και μή-ελαχιστοποιημένα"
 
 #: ../metadata/minimize.xml.in.h:10
 msgid "Windows that should be transformed when minimized"
@@ -1837,8 +1851,8 @@ msgstr ""
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν μετακινείται παράθυρο"
-"στην άκρη της οθόνης"
+"Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν μετακινείται "
+"παράθυροστην άκρη της οθόνης"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to right viewport and warp pointer"
@@ -2389,8 +2403,8 @@ msgstr ""
 #: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
-"Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το επόμενο παράθυρο "
-"απο όλα τα παράθυρα"
+"Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το επόμενο "
+"παράθυρο απο όλα τα παράθυρα"
 
 #: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select previous window"
@@ -2547,7 +2561,7 @@ msgstr "Εφέ Εστίασης"
 
 #: ../metadata/wobbly.xml.in.h:2
 msgid "Focus Window Effect"
-msgstr "Εφλε Εστίασης Παραθύρου"
+msgstr "Εφέ Εστίασης Παραθύρου"
 
 #: ../metadata/wobbly.xml.in.h:3
 msgid "Focus Windows"
