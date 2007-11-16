@@ -5611,7 +5611,6 @@ update_shadow (void)
 					 _win_extents.top + titlebar_height,
 					 _win_extents.bottom,
 					 _win_extents.left -
-					 _win_extents.left -
 					 TRANSLUCENT_CORNER_SIZE,
 					 _win_extents.right -
 					 TRANSLUCENT_CORNER_SIZE,
@@ -5638,7 +5637,6 @@ update_shadow (void)
 			     _max_win_extents.right,
 			     _max_win_extents.top + max_titlebar_height,
 			     _max_win_extents.bottom,
-			     _max_win_extents.left -
 			     _max_win_extents.left - TRANSLUCENT_CORNER_SIZE,
 			     _max_win_extents.right - TRANSLUCENT_CORNER_SIZE,
 			     _max_win_extents.top + max_titlebar_height -
