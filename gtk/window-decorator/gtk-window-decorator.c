@@ -4413,38 +4413,6 @@ min_button_event (WnckWindow *win,
 }
 
 static void
-top_left_event (WnckWindow *win,
-		XEvent     *xevent)
-{
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_TOPLEFT, xevent);
-}
-
-static void
-top_event (WnckWindow *win,
-	   XEvent     *xevent)
-{
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_TOP, xevent);
-}
-
-static void
-top_right_event (WnckWindow *win,
-		 XEvent     *xevent)
-{
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_TOPRIGHT, xevent);
-}
-
-static void
-left_event (WnckWindow *win,
-	    XEvent     *xevent)
-{
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_LEFT, xevent);
-}
-
-static void
 action_menu_unmap (GObject *object)
 {
     action_menu_mapped = FALSE;
@@ -4822,35 +4790,83 @@ title_event (WnckWindow *win,
 }
 
 static void
+frame_common_event (WnckWindow *win,
+		    int        direction,
+		    XEvent     *xevent)
+{
+    if (xevent->type != ButtonPress)
+	return;
+
+    switch (xevent->xbutton.button) {
+    case 1:
+	move_resize_window (win, direction, xevent);
+	restack_window (win, Above);
+	break;
+    case 2:
+	handle_title_button_event (win, middle_click_action,
+				   &xevent->xbutton);
+	break;
+    case 3:
+	handle_title_button_event (win, right_click_action,
+				   &xevent->xbutton);
+	break;
+    }
+}
+
+static void
+top_left_event (WnckWindow *win,
+		XEvent     *xevent)
+{
+    frame_common_event (win, WM_MOVERESIZE_SIZE_TOPLEFT, xevent);
+}
+
+static void
+top_event (WnckWindow *win,
+	   XEvent     *xevent)
+{
+    frame_common_event (win, WM_MOVERESIZE_SIZE_TOP, xevent);
+}
+
+static void
+top_right_event (WnckWindow *win,
+		 XEvent     *xevent)
+{
+    frame_common_event (win, WM_MOVERESIZE_SIZE_TOPRIGHT, xevent);
+}
+
+static void
+left_event (WnckWindow *win,
+	    XEvent     *xevent)
+{
+    frame_common_event (win, WM_MOVERESIZE_SIZE_LEFT, xevent);
+}
+
+static void
 right_event (WnckWindow *win,
 	     XEvent     *xevent)
 {
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_RIGHT, xevent);
+    frame_common_event (win, WM_MOVERESIZE_SIZE_RIGHT, xevent);
 }
 
 static void
 bottom_left_event (WnckWindow *win,
 		   XEvent     *xevent)
 {
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_BOTTOMLEFT, xevent);
+    frame_common_event (win, WM_MOVERESIZE_SIZE_BOTTOMLEFT, xevent);
 }
 
 static void
 bottom_event (WnckWindow *win,
 	      XEvent     *xevent)
 {
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_BOTTOM, xevent);
+    frame_common_event (win, WM_MOVERESIZE_SIZE_BOTTOM, xevent);
 }
 
 static void
 bottom_right_event (WnckWindow *win,
 		    XEvent     *xevent)
 {
-    if (xevent->xbutton.button == 1)
-	move_resize_window (win, WM_MOVERESIZE_SIZE_BOTTOMRIGHT, xevent);
+    frame_common_event (win, WM_MOVERESIZE_SIZE_BOTTOMRIGHT, xevent);
 }
 
 static void
