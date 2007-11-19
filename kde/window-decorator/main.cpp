@@ -27,6 +27,7 @@
 #include <fixx11h.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
+#include <klocale.h>
 
 #include "decorator.h"
 
@@ -50,6 +51,8 @@ main (int argc, char **argv)
     int		   status;
     int		   event, error;
     Time	   timestamp;
+
+    KLocale::setMainCatalogue("kwin");
 
     KCmdLineArgs::init (argc, argv,
 			"kde-window-decorator",
