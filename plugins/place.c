@@ -1202,12 +1202,14 @@ placeWin (CompWindow *window,
 		output = outputDeviceForWindow (parent);
 		getWorkareaForOutput (window->screen, output, &area);
 
-		if (x + window_width > area.x + area.width)
-		    x = area.x + area.width - window_width;
-		if (y + window_height > area.y + area.height)
-		    y = area.y + area.height - window_height;
-		if (x < area.x) x = area.x;
-		if (y < area.y) y = area.y;
+		if (x + window_width + window->input.right > area.x + area.width)
+		    x = area.x + area.width - window_width - window->input.right;
+		if (y + window_height + window->input.bottom > area.y + area.height)
+		    y = area.y + area.height - window_height - window->input.bottom;
+		if (x - window->input.left < area.x)
+		    x = area.x + window->input.left;
+		if (y - window->input.top < area.y)
+		    y = area.y + window->input.top;
 	    }
 
 	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
