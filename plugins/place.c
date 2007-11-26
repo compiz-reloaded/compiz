@@ -1196,20 +1196,27 @@ placeWin (CompWindow *window,
 		parent->serverY < parent->screen->height  &&
 		parent->serverY + parent->serverHeight > 0)
 	    {
-		XRectangle area;
-		int        output;
+		XRectangle        area;
+		int               output;
+		CompWindowExtents extents;
 
 		output = outputDeviceForWindow (parent);
 		getWorkareaForOutput (window->screen, output, &area);
 
-		if (x + window_width + window->input.right > area.x + area.width)
-		    x = area.x + area.width - window_width - window->input.right;
-		if (y + window_height + window->input.bottom > area.y + area.height)
-		    y = area.y + area.height - window_height - window->input.bottom;
-		if (x - window->input.left < area.x)
-		    x = area.x + window->input.left;
-		if (y - window->input.top < area.y)
-		    y = area.y + window->input.top;
+		extents.left   = x - window->input.left;
+		extents.top    = y - window->input.top;
+		extents.right  = x + window_width + window->input.right;
+		extents.bottom = y + window_height + window->input.bottom;
+
+		if (extents.left < area.x)
+		    x = area.x + extents.left - x;
+		else if (extents.right > area.x + area.width)
+		    x = area.x + area.width + x - extents.right;
+
+		if (extents.top < area.y)
+		    y = area.y + extents.top - y;
+		else if (extents.bottom > area.y + area.height)
+		    y = area.y + area.height + y - extents.bottom;
 	    }
 
 	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
