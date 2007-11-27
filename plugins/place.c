@@ -1209,14 +1209,14 @@ placeWin (CompWindow *window,
 		extents.bottom = y + window_height + window->input.bottom;
 
 		if (extents.left < area.x)
-		    x = area.x + extents.left - x;
+		    x += area.x - extents.left;
 		else if (extents.right > area.x + area.width)
-		    x = area.x + area.width + x - extents.right;
+		    x += area.x + area.width - extents.right;
 
 		if (extents.top < area.y)
-		    y = area.y + extents.top - y;
+		    y += area.y - extents.top;
 		else if (extents.bottom > area.y + area.height)
-		    y = area.y + area.height + y - extents.bottom;
+		    y += area.y + area.height - extents.bottom;
 	    }
 
 	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
