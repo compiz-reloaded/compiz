@@ -1450,7 +1450,7 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 
 	getWorkareaForOutput (s, output, &workArea);
 
-	if (xwc->width >= workArea.width ||
+	if (xwc->width >= workArea.width &&
 	    xwc->height >= workArea.height)
 	{
 	    placeSendWindowMaximizationRequest (w);
