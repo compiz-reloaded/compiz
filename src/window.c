@@ -3345,10 +3345,10 @@ restoreWindowGeometry (CompWindow     *w,
     return m;
 }
 
-void
-configureXWindow (CompWindow	 *w,
-		  unsigned int	 valueMask,
-		  XWindowChanges *xwc)
+static void
+reconfigureXWindow (CompWindow	   *w,
+		    unsigned int   valueMask,
+		    XWindowChanges *xwc)
 {
     if (valueMask & CWX)
 	w->serverX = xwc->x;
@@ -3364,6 +3364,9 @@ configureXWindow (CompWindow	 *w,
 
     if (valueMask & CWBorderWidth)
 	w->serverBorderWidth = xwc->border_width;
+
+    if (w->mapNum && (valueMask & (CWWidth | CWHeight)))
+	sendSyncRequest (w);
 
     XConfigureWindow (w->screen->display->display, w->id, valueMask, xwc);
 
@@ -3401,7 +3404,7 @@ stackTransients (CompWindow	*w,
 		return FALSE;
 
 	    if (t->mapNum || t->pendingMaps)
-		configureXWindow (t, CWSibling | CWStackMode, xwc);
+		reconfigureXWindow (t, CWSibling | CWStackMode, xwc);
 	}
     }
 
@@ -3430,9 +3433,9 @@ stackAncestors (CompWindow     *w,
 		    return;
 
 	    if (ancestor->mapNum || ancestor->pendingMaps)
-		configureXWindow (ancestor,
-				  CWSibling | CWStackMode,
-				  xwc);
+		reconfigureXWindow (ancestor,
+				    CWSibling | CWStackMode,
+				    xwc);
 
 	    stackAncestors (ancestor, xwc);
 	}
@@ -3461,11 +3464,33 @@ stackAncestors (CompWindow     *w,
 			break;
 
 		if (a->mapNum || a->pendingMaps)
-		    configureXWindow (a,
-				      CWSibling | CWStackMode,
-				      xwc);
+		    reconfigureXWindow (a,
+					CWSibling | CWStackMode,
+					xwc);
 	    }
 	}
+    }
+}
+
+void
+configureXWindow (CompWindow *w,
+		  unsigned int valueMask,
+		  XWindowChanges *xwc)
+{
+    if (w->managed && (valueMask & (CWSibling | CWStackMode)))
+    {
+	/* transient children above */
+	if (stackTransients (w, NULL, xwc))
+	{
+	    reconfigureXWindow (w, valueMask, xwc);
+
+	    /* ancestors, siblings and sibling transients below */
+	    stackAncestors (w, xwc);
+	}
+    }
+    else
+    {
+	reconfigureXWindow (w, valueMask, xwc);
     }
 }
 
@@ -4109,26 +4134,8 @@ updateWindowAttributes (CompWindow             *w,
 				  w->serverWidth, w->serverHeight,
 				  w->serverBorderWidth);
 
-    if (!mask)
-	return;
-
-    if (w->mapNum && (mask & (CWWidth | CWHeight)))
-	sendSyncRequest (w);
-
-    if (mask & (CWSibling | CWStackMode))
-    {
-	/* transient children above */
-	if (stackTransients (w, NULL, &xwc))
-	{
-	    configureXWindow (w, mask, &xwc);
-
-	    stackAncestors (w, &xwc);
-	}
-    }
-    else
-    {
+    if (mask)
 	configureXWindow (w, mask, &xwc);
-    }
 }
 
 static void
