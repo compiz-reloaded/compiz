@@ -1147,6 +1147,7 @@ setSupported (CompScreen *s)
     data[i++] = d->frameExtentsAtom;
     data[i++] = d->frameWindowAtom;
 
+    data[i++] = d->winStateAtom;
     data[i++] = d->winStateModalAtom;
     data[i++] = d->winStateStickyAtom;
     data[i++] = d->winStateMaximizedVertAtom;
