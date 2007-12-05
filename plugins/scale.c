@@ -1200,6 +1200,7 @@ scaleInitiateCommon (CompScreen      *s,
 
 	sd->lastActiveWindow = s->display->activeWindow;
 	sd->selectedWindow   = s->display->activeWindow;
+	sd->hoveredWindow    = None;
 
 	ss->state = SCALE_STATE_OUT;
 
