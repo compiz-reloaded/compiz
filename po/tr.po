@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz-new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-30 00:03+0100\n"
+"POT-Creation-Date: 2007-12-12 14:19+0530\n"
 "PO-Revision-Date: 2007-11-03 17:48+0200\n"
 "Last-Translator: Serdar Soytetir <tulliana@gmail.com>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -39,7 +39,8 @@ msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "Bir pencerenin başlık çubuğu üzerinde fare tekeri ile yaptırılacak davranış."
+msgstr ""
+"Bir pencerenin başlık çubuğu üzerinde fare tekeri ile yaptırılacak davranış."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -65,7 +66,8 @@ msgstr "Metacity teması matlık gölgesi"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "Etkin pencereler ve Metacity tema dekorasyonları için kullanılacak matlık"
+msgstr ""
+"Etkin pencereler ve Metacity tema dekorasyonları için kullanılacak matlık"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
@@ -75,11 +77,14 @@ msgstr "Metacity dekorasyonları için kullanılacak matlık"
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
-msgstr "Etkin pencereleri metacity dekorasyonu ile matlıktan şeffaflığa doğru gölgele"
+msgstr ""
+"Etkin pencereleri metacity dekorasyonu ile matlıktan şeffaflığa doğru gölgele"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "Pencereleri metacity dekorasyonu ile matlıktan şeffaflığa doğru gölgele"
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+"Pencereleri metacity dekorasyonu ile matlıktan şeffaflığa doğru gölgele"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -411,7 +416,8 @@ msgid "Active Plugins"
 msgstr "Etkin Eklentiler"
 
 #: ../metadata/core.xml.in.h:14
-msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:15
@@ -630,7 +636,8 @@ msgstr "Tüm pencereleri gizle ve masaüstünü odakla"
 
 #: ../metadata/core.xml.in.h:64
 msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "Masaüstünü Göster Kipine geçerken görev çubuğunda olmayan pencereleri gizle"
+msgstr ""
+"Masaüstünü Göster Kipine geçerken görev çubuğunda olmayan pencereleri gizle"
 
 #: ../metadata/core.xml.in.h:65
 msgid "Horizontal Virtual Size"
@@ -741,7 +748,8 @@ msgstr "Matlık değiştirme adımı"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"
-msgstr "Öntanımlı olarak saydam olması gereken, pencereler için matlık değerleri"
+msgstr ""
+"Öntanımlı olarak saydam olması gereken, pencereler için matlık değerleri"
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
@@ -1101,7 +1109,8 @@ msgstr "Küpün içerisine gir"
 
 #: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "Küpün üst kapağı için hazırlanması gereken PNG ve SVG dosyalarının listesi"
+msgstr ""
+"Küpün üst kapağı için hazırlanması gereken PNG ve SVG dosyalarının listesi"
 
 #: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
@@ -1226,7 +1235,8 @@ msgid "Decoration windows"
 msgstr "Pencere dekorasyonu"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid "Decorator command line that is executed if no decorator is already running"
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Eğer hiçbir pencere dekorasyonu çalışmıyorsa çalıştırılacak dekoratör komut "
 "satırı"
@@ -1312,7 +1322,8 @@ msgstr "Sistem bip sesinde solma efekti açık"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "Haritalandıklarında pencereler belirsin, haritalanmadıklarında kaybolsun"
+msgstr ""
+"Haritalandıklarında pencereler belirsin, haritalanmadıklarında kaybolsun"
 
 # clients/inst_target_part.ycp:404
 #: ../metadata/fade.xml.in.h:6
@@ -1450,7 +1461,8 @@ msgstr "Y eksenini çalışma alanı ile sınırla"
 
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Taşıma işi bitirilene kadar pencerenin konumunu sunucu tarafında güncelleme"
+msgstr ""
+"Taşıma işi bitirilene kadar pencerenin konumunu sunucu tarafında güncelleme"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -2311,7 +2323,8 @@ msgstr "Simge"
 
 #: ../metadata/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "Boyutlandırma sırasında masaüstüne tıklanırsa Masaüstünü Göster kipine geç"
+msgstr ""
+"Boyutlandırma sırasında masaüstüne tıklanırsa Masaüstünü Göster kipine geç"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
@@ -2409,7 +2422,8 @@ msgid "Spacing"
 msgstr "Aralık"
 
 #: ../metadata/scale.xml.in.h:33
-msgid "Time (in ms) before scale mode is terminated when hovering over a window"
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Bir pencerenin üzerindeyken boyutlandırma kipi bitirilmeden önce geçmesi "
 "gereken süre (ms olarak)"
@@ -2524,7 +2538,8 @@ msgid "Popup switcher if not visible and select previous window"
 msgstr ""
 
 #: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select previous window out of all windows"
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 
 # clients/inst_resize_ui.ycp:688
@@ -2853,4 +2868,3 @@ msgstr "Büyütme aralığı"
 #: ../metadata/zoom.xml.in.h:14
 msgid "Zoom pan"
 msgstr "Büyüt ve görüntüyü bindir"
-

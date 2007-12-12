@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-15 16:04+0530\n"
-"PO-Revision-Date: 2007-11-08 20:29+0100\n"
+"POT-Creation-Date: 2007-12-12 14:18+0530\n"
+"PO-Revision-Date: 2007-11-30 19:50+0100\n"
 "Last-Translator: Maciej Warnecki <maciekw5@gmail.com>\n"
-"Language-Team:  <pl@li.org>\n"
+"Language-Team: <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 1.0.2\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -76,14 +76,16 @@ msgstr ""
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
+"Cieniuj okna z dekoracjami motywu metacity od nieprzezroczystych do "
+"przejrzystych"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Akcja podjęta przy naciśnięciu kółka myszy na pasku tytulowym"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Typ rozmycia używany dla dekoracji okien"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
@@ -217,7 +219,7 @@ msgstr "Rozmywaj nieaktywne okna"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "Wyłącz rozmywanie fragmentów ekranu zajmowanych przez inne okna."
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
@@ -619,9 +621,12 @@ msgstr "Interwał przed podnoszeniem wskazanych okien"
 msgid "Interval between ping messages"
 msgstr "Czas pomiędzy wiadomościami ping"
 
+# Zmieniłem z "Błyskawica" na "Oświetlenie":
+# lightNing=Błyskawica
+# lighting=Oświetlenie, cieniowanie
 #: ../metadata/core.xml.in.h:72
 msgid "Lighting"
-msgstr "Błyskawica"
+msgstr "Oświetlenie"
 
 #: ../metadata/core.xml.in.h:73
 msgid "List of currently active plugins"
@@ -956,11 +961,11 @@ msgstr "Akceleracja"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr ""
+msgstr "Dostosuj obraz"
 
 #: ../metadata/cube.xml.in.h:3
 msgid "Adjust top face image to rotation"
-msgstr ""
+msgstr "Dostosuj obrazek górnej ściany kostki do obrotu"
 
 #: ../metadata/cube.xml.in.h:4
 msgid "Advance to next slide"
@@ -981,11 +986,11 @@ msgstr "Automatyczne wysuwanie okien"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background Images"
-msgstr ""
+msgstr "Obrazki tła"
 
 #: ../metadata/cube.xml.in.h:9
 msgid "Background images"
-msgstr ""
+msgstr "Obrazki tła"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1009,7 +1014,7 @@ msgstr "Kostka pulpitu"
 
 #: ../metadata/cube.xml.in.h:15
 msgid "Desktop Window Opacity Fade Time."
-msgstr ""
+msgstr "Czas zanikania nieprzezroczystości okna pulpitu"
 
 #: ../metadata/cube.xml.in.h:16
 #, fuzzy
@@ -1047,6 +1052,7 @@ msgstr "Obrazek, który ma być używany jako tekstura tła dla kostki"
 #: ../metadata/cube.xml.in.h:24
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr ""
+"Kostka będzie przezroczysta tylko jeśli jest obracana za pomocą kursora"
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
@@ -1063,11 +1069,11 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
-msgstr ""
+msgstr "Tryb wielu urządzeń wyjściowych"
 
 #: ../metadata/cube.xml.in.h:30
 msgid "Multiple cubes"
-msgstr ""
+msgstr "Wiele kostek"
 
 #: ../metadata/cube.xml.in.h:31
 msgid "Next Slide"
@@ -1080,19 +1086,19 @@ msgstr "Wewnątrz kostki"
 
 #: ../metadata/cube.xml.in.h:33
 msgid "Opacity During Rotation"
-msgstr ""
+msgstr "Nieprzezroczystość kostki podczas obracania "
 
 #: ../metadata/cube.xml.in.h:34
 msgid "Opacity When Not Rotating"
-msgstr ""
+msgstr "Nieprzezroczystość kostki kiedy nie jest obracana"
 
 #: ../metadata/cube.xml.in.h:35
 msgid "Opacity of desktop window during rotation."
-msgstr ""
+msgstr "Nieprzezroczystość pulpitu podczas obracania kostki"
 
 #: ../metadata/cube.xml.in.h:36
 msgid "Opacity of desktop window when not rotating."
-msgstr ""
+msgstr "Nieprzezroczystość pulpitu kiedy kostka nie jest obracana"
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Place windows on cube"
@@ -1118,6 +1124,8 @@ msgstr "Skaluj obrazki przykrywające górną ścianę kostki"
 #: ../metadata/cube.xml.in.h:42
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
+"Decyduje jak kostka jest wyświetlana jeśli używanych jest kilka uzrądzeń "
+"wyjściowych"
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome"
@@ -1149,7 +1157,7 @@ msgstr "Opóźnienie"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparency Only on Mouse Rotate"
-msgstr ""
+msgstr "Przezroczystość tylko podczas obracania kursora"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1169,7 +1177,7 @@ msgstr ""
 
 #: ../metadata/decoration.xml.in.h:1
 msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgstr "Pozwól tworzyć mipmapy dla tekstur dekoracji"
 
 #: ../metadata/decoration.xml.in.h:2
 msgid "Command"
@@ -1252,7 +1260,7 @@ msgstr "Typy okien, które mają zanikać"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
-msgstr ""
+msgstr "Zanikanie podczas minimalizacji/otwierania/zamykania"
 
 #: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
@@ -1260,7 +1268,7 @@ msgstr "Szybkość pojawiania się/zanikania"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
-msgstr ""
+msgstr "Efekt zanikania podczas minimalizacji/otwarcia/zamknięcia"
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
@@ -1314,11 +1322,11 @@ msgstr "Dodaj punkt"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
-msgstr ""
+msgstr "System plików użytkownika"
 
 #: ../metadata/fs.xml.in.h:4
 msgid "Userspace file system"
-msgstr ""
+msgstr "System plików użytkownika"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
@@ -1347,7 +1355,7 @@ msgstr ""
 
 #: ../metadata/inotify.xml.in.h:1
 msgid "File change notification plugin"
-msgstr ""
+msgstr "Wtyczka powiadamiania o zmianie pliku"
 
 #: ../metadata/inotify.xml.in.h:2
 #, fuzzy
@@ -1407,6 +1415,7 @@ msgstr "Ogranicz współrzędną Y do obszaru roboczego"
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
+"Nie aktualizuj strony okien serwera dopóki nie przestanie się ich poruszać"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -1449,15 +1458,15 @@ msgstr "Rozpocznij przenoszenie okna"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "Algorytm używany do rozmieszczenia okien"
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
-msgstr ""
+msgstr "Kaskada"
 
 #: ../metadata/place.xml.in.h:3
 msgid "Centered"
-msgstr ""
+msgstr "Wyśrodkowany"
 
 #: ../metadata/place.xml.in.h:4
 #, fuzzy
@@ -1479,7 +1488,7 @@ msgstr "Podczas mapowania umieszczaj okna we właściwych miejscach"
 
 #: ../metadata/place.xml.in.h:8
 msgid "Placement Mode"
-msgstr ""
+msgstr "Try rozmieszczenia"
 
 #: ../metadata/place.xml.in.h:9
 #, fuzzy
@@ -1488,7 +1497,7 @@ msgstr "Wyświetl zminimalizowan okna"
 
 #: ../metadata/place.xml.in.h:10
 msgid "Random"
-msgstr ""
+msgstr "Losowy"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Smart"
@@ -1534,7 +1543,7 @@ msgstr "Poziomy rozmiar wirtualny"
 
 #: ../metadata/place.xml.in.h:20
 msgid "X position values"
-msgstr ""
+msgstr "Wartości dla pozycji X"
 
 #: ../metadata/place.xml.in.h:21
 #, fuzzy
@@ -1548,7 +1557,7 @@ msgstr "Poziomy rozmiar wirtualny"
 
 #: ../metadata/place.xml.in.h:23
 msgid "Y position values"
-msgstr ""
+msgstr "Wartości dla pozycji Y"
 
 #: ../metadata/plane.xml.in.h:1
 msgid "Desktop Plane"
@@ -1712,11 +1721,11 @@ msgstr "Płaszczyzna u góry"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
-msgstr ""
+msgstr "Png"
 
 #: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
-msgstr ""
+msgstr "Wtyczka ładująca obrazki .png"
 
 #: ../metadata/regex.xml.in.h:1
 #, fuzzy
@@ -1736,14 +1745,16 @@ msgstr "Kolor kostki"
 #: ../metadata/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
 msgstr ""
+"Kolor brzegów używany dla trybow zmiany rozmiarów z obrysem oraz z obrysem i "
+"wypenieniem"
 
 #: ../metadata/resize.xml.in.h:3
 msgid "Default Resize Mode"
-msgstr ""
+msgstr "Domyślny ryb zmiany zmiaru"
 
 #: ../metadata/resize.xml.in.h:4
 msgid "Default mode used for window resizing"
-msgstr ""
+msgstr "Domyślny tryb używany podczas zmiany rozmiaru okna"
 
 #: ../metadata/resize.xml.in.h:5
 #, fuzzy
@@ -1800,7 +1811,7 @@ msgstr "Zmień rozmiar okna"
 
 #: ../metadata/resize.xml.in.h:16
 msgid "Rectangle"
-msgstr ""
+msgstr "Obrys i wypełnienie"
 
 #: ../metadata/resize.xml.in.h:17
 #, fuzzy
@@ -1922,7 +1933,7 @@ msgstr "Czułość wskaźnika"
 
 #: ../metadata/rotate.xml.in.h:15
 msgid "Raise on rotate"
-msgstr ""
+msgstr "Podnoś podczas obracania "
 
 #: ../metadata/rotate.xml.in.h:16
 #, fuzzy
@@ -2236,7 +2247,7 @@ msgstr "Duży"
 
 #: ../metadata/scale.xml.in.h:3
 msgid "Click Desktop to Show Desktop"
-msgstr ""
+msgstr "Naciśnij na Pulpit by pokazać Pulpit"
 
 #: ../metadata/scale.xml.in.h:4
 msgid "Darken Background"
@@ -2252,7 +2263,7 @@ msgstr "Emblemat"
 
 #: ../metadata/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr ""
+msgstr "Pokaż Pulpit kiedy kliknie się na Pulpit podczas Skalowania"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
@@ -2296,11 +2307,11 @@ msgstr "Brak"
 
 #: ../metadata/scale.xml.in.h:19
 msgid "On all output devices"
-msgstr ""
+msgstr "Na wszystkich urządzeniach wyjściowych"
 
 #: ../metadata/scale.xml.in.h:20
 msgid "On current output device"
-msgstr ""
+msgstr "Na aktualnym urządzeniu wyjściowym"
 
 #: ../metadata/scale.xml.in.h:22
 msgid "Overlay Icon"
@@ -2333,6 +2344,7 @@ msgstr "Skaluj okna"
 #: ../metadata/scale.xml.in.h:29
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
+"Decyduje gdzie okna są Skalowane jeśli jest używanych wiele urządzeń wyjścia."
 
 #: ../metadata/scale.xml.in.h:30
 msgid "Space between windows"
@@ -2383,11 +2395,11 @@ msgstr "Wtyczka zrzutów ekranu"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
-msgstr ""
+msgstr "Svg"
 
 #: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
-msgstr ""
+msgstr "Wtyczka ładująca obrazki .svg"
 
 #: ../metadata/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
@@ -2516,19 +2528,19 @@ msgstr "Typy okien, które mają być pokazywane w zmieniaczu"
 
 #: ../metadata/video.xml.in.h:1
 msgid "Provide YV12 colorspace support"
-msgstr ""
+msgstr "Zapewnij wsparcie dla przestrzeni kolorów YV12"
 
 #: ../metadata/video.xml.in.h:2
 msgid "Video Playback"
-msgstr ""
+msgstr "Odtwarzanie video"
 
 #: ../metadata/video.xml.in.h:3
 msgid "Video playback"
-msgstr ""
+msgstr "Odtwarzanie video"
 
 #: ../metadata/video.xml.in.h:4
 msgid "YV12 colorspace"
-msgstr ""
+msgstr "Przestrzeń kolorów YV12"
 
 #: ../metadata/water.xml.in.h:1
 msgid "Add line"
@@ -3278,5 +3290,6 @@ msgstr "Powiększ"
 #~ msgid "Move Window Types"
 #~ msgstr "Rodzaje przenoszonych okien"
 
+#, fuzzy
 #~ msgid "Enable focus prevention"
 #~ msgstr "Włącza zapobieganie uaktywnianiu"
