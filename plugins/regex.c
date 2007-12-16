@@ -80,8 +80,11 @@ regexMatchExpFini (CompDisplay *d,
 {
     regex_t *preg = (regex_t *) private.ptr;
 
-    regfree (preg);
-    free (preg);
+    if (preg)
+    {
+	regfree (preg);
+	free (preg);
+    }
 }
 
 static Bool
@@ -93,6 +96,9 @@ regexMatchExpEvalTitle (CompDisplay *d,
     int	    status;
 
     REGEX_WINDOW (w);
+
+    if (!preg)
+	return FALSE;
 
     if (!rw->title)
 	return FALSE;
@@ -114,6 +120,9 @@ regexMatchExpEvalRole (CompDisplay *d,
 
     REGEX_WINDOW (w);
 
+    if (!preg)
+	return FALSE;
+
     if (!rw->role)
 	return FALSE;
 
@@ -132,6 +141,9 @@ regexMatchExpEvalClass (CompDisplay *d,
     regex_t *preg = (regex_t *) private.ptr;
     int	    status;
 
+    if (!preg)
+	return FALSE;
+
     if (!w->resClass)
 	return FALSE;
 
@@ -149,6 +161,9 @@ regexMatchExpEvalName (CompDisplay *d,
 {
     regex_t *preg = (regex_t *) private.ptr;
     int	    status;
+
+    if (!preg)
+	return FALSE;
 
     if (!w->resName)
 	return FALSE;
@@ -211,14 +226,13 @@ regexMatchInitExp (CompDisplay  *d,
 
 		regfree (preg);
 		free (preg);
-	    }
-	    else
-	    {
-		exp->fini     = regexMatchExpFini;
-		exp->eval     = prefix[i].eval;
-		exp->priv.ptr = preg;
+		preg = NULL;
 	    }
 	}
+
+	exp->fini     = regexMatchExpFini;
+	exp->eval     = prefix[i].eval;
+	exp->priv.ptr = preg;
     }
     else
     {
