@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-20 00:02+0200\n"
+"POT-Creation-Date: 2007-12-12 14:19+0530\n"
 "PO-Revision-Date: 2007-06-25 20:38-0000\n"
 "Last-Translator: Sebastian Parborg <zedDB@hotmail.com>\n"
 "Language-Team: Compiz Fusion Translators <i18n@lists.compiz-fusion.org>\n"
@@ -30,8 +30,8 @@ msgstr "Fönsterhantering"
 msgid "Compiz"
 msgstr "Compiz"
 
+# fuzzy
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
-#fuzzy
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr "Ågärd när man scollar med mushjulet på en fönstertitel."
 
@@ -70,13 +70,14 @@ msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
 msgstr ""
-"Skugga aktiva fönster med metacity tema dekorationer från opact till"
-"genomskinlig"
+"Skugga aktiva fönster med metacity tema dekorationer från opact "
+"tillgenomskinlig"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "Skugga fönster med metacity tema dekorationer fårn opact till genomskinlig"
+msgstr ""
+"Skugga fönster med metacity tema dekorationer fårn opact till genomskinlig"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 #, fuzzy
@@ -1008,12 +1009,14 @@ msgstr "Färg på över- och undersidorna av kuben"
 #: ../metadata/cube.xml.in.h:11
 #, fuzzy
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "Färg som används till bottenfärg-stoppet av skydome-tillbakagångs-gradient"
+msgstr ""
+"Färg som används till bottenfärg-stoppet av skydome-tillbakagångs-gradient"
 
 #: ../metadata/cube.xml.in.h:12
 #, fuzzy
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "Färg som används till toppenfärg-stoppet av skydome-tillbakagångs-gradient"
+msgstr ""
+"Färg som används till toppenfärg-stoppet av skydome-tillbakagångs-gradient"
 
 #: ../metadata/cube.xml.in.h:13
 msgid "Cube Color"
@@ -1140,7 +1143,7 @@ msgid "Skydome"
 msgstr "Skydome"
 
 #: ../metadata/cube.xml.in.h:44
-#,fuzzy
+#, fuzzy
 msgid "Skydome Gradient End Color"
 msgstr "Skydome gradient slut färg"
 
@@ -1202,8 +1205,7 @@ msgstr "Dekorationsfönster"
 #, fuzzy
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
-msgstr ""
-"Dekorerar kommadot är excluderat om inte någon dekorerare redan körs"
+msgstr "Dekorerar kommadot är excluderat om inte någon dekorerare redan körs"
 
 #: ../metadata/decoration.xml.in.h:5
 msgid "Drop shadow X offset"
@@ -1419,8 +1421,9 @@ msgstr "Begränsa Y-koordinat till arbetsyta"
 #: ../metadata/move.xml.in.h:3
 #, fuzzy
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Uppdatera inte positonen på fönsterna till servern innan de har slutat"
-"röra sig"
+msgstr ""
+"Uppdatera inte positonen på fönsterna till servern innan de har slutatröra "
+"sig"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -2221,7 +2224,9 @@ msgstr "Emblem"
 #: ../metadata/scale.xml.in.h:7
 #, fuzzy
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "Gå till \"Visa skrivbords läge\" när skrivbordet blir klickat på under skalning"
+msgstr ""
+"Gå till \"Visa skrivbords läge\" när skrivbordet blir klickat på under "
+"skalning"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
@@ -2390,7 +2395,6 @@ msgid "Bring selected window to front"
 msgstr "Lägg markerat fönster överst"
 
 #: ../metadata/switcher.xml.in.h:9
-
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr "Avstånd som skrivbordet ska zoomas ut till vid växling av fönster"
 
@@ -2422,20 +2426,23 @@ msgstr "Poppa upp fönsterväxlare om den inte är synlig och välj nästa föns
 #: ../metadata/switcher.xml.in.h:19
 #, fuzzy
 msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "Poppa upp fönsterväxaler om den inte är synlig och välj nästa fönster"
-"utav alla fönster"
+msgstr ""
+"Poppa upp fönsterväxaler om den inte är synlig och välj nästa fönsterutav "
+"alla fönster"
 
 #: ../metadata/switcher.xml.in.h:20
 #, fuzzy
 msgid "Popup switcher if not visible and select previous window"
-msgstr "Poppa upp fönsterväxlare om den inte är synlig och välj föregående fönster"
+msgstr ""
+"Poppa upp fönsterväxlare om den inte är synlig och välj föregående fönster"
 
 #: ../metadata/switcher.xml.in.h:21
 #, fuzzy
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
-msgstr "Poppa upp fönsterväxlare om den inte är synlig och välj föregående fönster"
-"utav alla fönster"
+msgstr ""
+"Poppa upp fönsterväxlare om den inte är synlig och välj föregående "
+"fönsterutav alla fönster"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Prev window"
@@ -2741,4 +2748,3 @@ msgstr "Zoomfaktor"
 #: ../metadata/zoom.xml.in.h:14
 msgid "Zoom pan"
 msgstr "Zooma panorering"
-
