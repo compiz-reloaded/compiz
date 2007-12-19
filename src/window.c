@@ -1469,33 +1469,33 @@ damageWindowOutputExtents (CompWindow *w)
 	BoxRec box;
 
 	/* top */
-	box.x1 = -w->output.left;
-	box.y1 = -w->output.top;
-	box.x2 = w->width + w->output.right;
-	box.y2 = 0;
+	box.x1 = -w->output.left - w->attrib.border_width;
+	box.y1 = -w->output.top - w->attrib.border_width;
+	box.x2 = w->width + w->output.right - w->attrib.border_width;
+	box.y2 = -w->attrib.border_width;
 
 	if (box.x1 < box.x2 && box.y1 < box.y2)
 	    addWindowDamageRect (w, &box);
 
 	/* bottom */
-	box.y1 = w->height;
-	box.y2 = box.y1 + w->output.bottom;
+	box.y1 = w->height - w->attrib.border_width;
+	box.y2 = box.y1 + w->output.bottom - w->attrib.border_width;
 
 	if (box.x1 < box.x2 && box.y1 < box.y2)
 	    addWindowDamageRect (w, &box);
 
 	/* left */
-	box.x1 = -w->output.left;
-	box.y1 = 0;
-	box.x2 = 0;
-	box.y2 = w->height;
+	box.x1 = -w->output.left - w->attrib.border_width;
+	box.y1 = -w->attrib.border_width;
+	box.x2 = -w->attrib.border_width;
+	box.y2 = w->height - w->attrib.border_width;
 
 	if (box.x1 < box.x2 && box.y1 < box.y2)
 	    addWindowDamageRect (w, &box);
 
 	/* right */
-	box.x1 = w->width;
-	box.x2 = box.x1 + w->output.right;
+	box.x1 = w->width - w->attrib.border_width;
+	box.x2 = box.x1 + w->output.right - w->attrib.border_width;
 
 	if (box.x1 < box.x2 && box.y1 < box.y2)
 	    addWindowDamageRect (w, &box);
