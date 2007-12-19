@@ -712,6 +712,7 @@ recalcWindowActions (CompWindow *w)
 	    actions |= CompWindowActionShadeMask;
 	break;
     case CompWindowTypeUtilMask:
+    case CompWindowTypeMenuMask:
     case CompWindowTypeToolbarMask:
 	actions =
 	    CompWindowActionMoveMask   |
