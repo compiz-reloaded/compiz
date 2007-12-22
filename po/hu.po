@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_compiz-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 14:18+0530\n"
-"PO-Revision-Date: 2007-12-08 08:51+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2007-12-22 15:40+0530\n"
+"PO-Revision-Date: 2007-12-17 13:17+0100\n"
+"Last-Translator: KAMI <kamihir@freemail.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Pootle 1.0.2\n"
 "X-Launchpad-Export-Date: 2007-12-04 10:00+0000\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,-1,490,-1\n"
 
@@ -36,7 +36,7 @@ msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr ""
+msgstr "Az ablak címsorán történő egérgörgő-használat hatása."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -79,7 +79,7 @@ msgstr "Felgördített ablak átlátszatlansága a díszítő elemeknél"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Egérgörgő esemény a címsoron"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
@@ -795,9 +795,8 @@ msgid "Screenshot command line"
 msgstr "Képernyőkép parancssor"
 
 #: ../metadata/core.xml.in.h:118
-#, fuzzy
 msgid "Show Desktop"
-msgstr "Munkaasztal nagyítása"
+msgstr "Munkaasztal megjelenítése"
 
 #: ../metadata/core.xml.in.h:119
 msgid "Show Main Menu"
@@ -905,11 +904,11 @@ msgstr "Ablak menü"
 
 #: ../metadata/core.xml.in.h:145
 msgid "Window menu button binding"
-msgstr ""
+msgstr "Window menü billentyűzetkombinációi"
 
 #: ../metadata/core.xml.in.h:146
 msgid "Window menu key binding"
-msgstr ""
+msgstr "Window menü billentyűzetkombinációi"
 
 #: ../metadata/core.xml.in.h:147
 msgid "Window screenshot command line"
@@ -1212,7 +1211,7 @@ msgstr "Árnyékolandó ablakok"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
-msgstr ""
+msgstr "Ablakelhalványítás minimalizáláskor, megnyitáskor és bezáráskor"
 
 #: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
@@ -1221,6 +1220,8 @@ msgstr "Elhalványulás sebessége"
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
+"Ablakelhalványítási effekt alkalmazása minimalizáláskor, megnyitáskor és "
+"bezáráskor"
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
@@ -1308,12 +1309,11 @@ msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr ""
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
-#, fuzzy
 msgid "Kconfig Control Backend"
-msgstr "GConf vezérlés kiszolgálója"
+msgstr "Kconfig vezérlés kiszolgálója"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"

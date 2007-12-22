@@ -1,4 +1,4 @@
-# Hindi message file for YaST2 (@memory@).
+# Compiz translations 
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Prasanth Kurian <prasanth.kurian@agreeya.com>
 #
@@ -13,7 +13,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: bengali\n"
+"X-Poedit-Country: INDIA\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -32,9 +34,8 @@ msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr "উইন্ডো শীর্ষবারে মাউস হুইল স্ক্রল করার সময় কার্য করা হবে "
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
 msgid "Blur type"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "অস্বচ্ছতার ধরণ"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
@@ -88,9 +89,8 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "উইন্ডো অলঙ্করণ করার সময় মেটাসিটি বিষয় ব্যবহার করুন"
 
 #: ../metadata/annotate.xml.in.h:1
-#, fuzzy
 msgid "Annotate"
-msgstr "ভারত"
+msgstr "অ্যানোটেট"
 
 #: ../metadata/annotate.xml.in.h:2
 msgid "Annotate Fill Color"
@@ -101,9 +101,8 @@ msgid "Annotate Stroke Color"
 msgstr "অ্যানোটেশনের স্ট্রোকের রঙ"
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "ভারত"
+msgstr "অ্যানোটেট প্লাগইন"
 
 #: ../metadata/annotate.xml.in.h:5
 msgid "Clear"
@@ -124,24 +123,20 @@ msgstr "অ্যানোটেশন পূর্ণ করার রঙ"
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
-#, fuzzy
 msgid "Initiate"
-msgstr "ভারত"
+msgstr "আরম্ভ করা"
 
 #: ../metadata/annotate.xml.in.h:10
-#, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "ভারত"
+msgstr "অ্যানোটেট অঙ্কন শুরু করা"
 
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "ভারত"
+msgstr "অ্যানোটেট মোছা শুরু করা"
 
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "ভারত"
+msgstr "মোছা শুরু করা"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
@@ -164,38 +159,32 @@ msgid "Stroke width for annotations"
 msgstr "অ্যানোটেশনের স্ট্রোকের প্রস্থ"
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
 msgid "4xBilinear"
-msgstr "ফিল্টার:"
+msgstr "4xদ্বিরৈখিক"
 
 #: ../metadata/blur.xml.in.h:2
 msgid "Alpha Blur"
 msgstr "আলফা অস্পষ্ট"
 
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "আলফা অস্পষ্ট উইন্ডো"
 
 #: ../metadata/blur.xml.in.h:4
-#, fuzzy
 msgid "Blur Filter"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "অস্পষ্টতার ফিল্টার"
 
 #: ../metadata/blur.xml.in.h:5
-#, fuzzy
 msgid "Blur Occlusion"
-msgstr "অবস্থা সম্পর্কিত তথ্য (&t)"
+msgstr "অস্পষ্টতা রোধ"
 
 #: ../metadata/blur.xml.in.h:6
-#, fuzzy
 msgid "Blur Saturation"
-msgstr "অবস্থা সম্পর্কিত তথ্য (&t)"
+msgstr "অস্পষ্টতা সম্পৃক্তি"
 
 #: ../metadata/blur.xml.in.h:7
-#, fuzzy
 msgid "Blur Speed"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "অস্পষ্টতা "
 
 #: ../metadata/blur.xml.in.h:8
 msgid "Blur Windows"
@@ -206,14 +195,12 @@ msgid "Blur behind translucent parts of windows"
 msgstr "উইন্ডোর অর্ধস্বচ্ছ অংশের পিছনের অস্পষ্টতা"
 
 #: ../metadata/blur.xml.in.h:10
-#, fuzzy
 msgid "Blur saturation"
-msgstr "অবস্থা সম্পর্কিত তথ্য (&t)"
+msgstr "অস্পষ্টতা সম্পৃক্তি"
 
 #: ../metadata/blur.xml.in.h:11
-#, fuzzy
 msgid "Blur windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "অস্পষ্ট উইন্ডো"
 
 #: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
@@ -236,29 +223,24 @@ msgid "Focus blur windows"
 msgstr "ফোকাস অস্পষ্ট করার উইন্ডো"
 
 #: ../metadata/blur.xml.in.h:17
-#, fuzzy
 msgid "Gaussian"
-msgstr "রাশিয়ান"
+msgstr "গসিয়ান"
 
 #: ../metadata/blur.xml.in.h:18
-#, fuzzy
 msgid "Gaussian Radius"
-msgstr "রাশিয়ান"
+msgstr "গসিয়ানের ব্যাসার্ধ"
 
 #: ../metadata/blur.xml.in.h:19
-#, fuzzy
 msgid "Gaussian Strength"
-msgstr "রাশিয়ান"
+msgstr "গসিয়ানের প্রাবল্য"
 
 #: ../metadata/blur.xml.in.h:20
-#, fuzzy
 msgid "Gaussian radius"
-msgstr "রাশিয়ান"
+msgstr "গসিয়ান ব্যাসার্ধ"
 
 #: ../metadata/blur.xml.in.h:21
-#, fuzzy
 msgid "Gaussian strength"
-msgstr "রাশিয়ান"
+msgstr "গসিয়ানের প্রাবল্য"
 
 #: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
@@ -298,9 +280,8 @@ msgid "Clone Output"
 msgstr "সমরূপ আউটপুট"
 
 #: ../metadata/clone.xml.in.h:3
-#, fuzzy
 msgid "Initiate clone selection"
-msgstr "ভারত"
+msgstr "সমরূপ নির্বাচন শুরু করা"
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
@@ -411,11 +392,9 @@ msgstr "শ্রবণযোগ্য বেল"
 msgid "Audible system beep"
 msgstr "শ্রবণযোগ্য সিস্টেম বিপ"
 
-# স্বয়ংক্রীয়
 #: ../metadata/core.xml.in.h:17
-#, fuzzy
 msgid "Auto-Raise"
-msgstr "স্বয়ংক্রীয় আপডেট"
+msgstr "স্বয়ং-বৃদ্ধি"
 
 #: ../metadata/core.xml.in.h:18
 msgid "Auto-Raise Delay"
@@ -450,64 +429,52 @@ msgid "Close active window"
 msgstr "সক্রিয় উইন্ডোটি বন্ধ করুন"
 
 #: ../metadata/core.xml.in.h:26
-#, fuzzy
 msgid "Command line 0"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 0"
 
 #: ../metadata/core.xml.in.h:27
-#, fuzzy
 msgid "Command line 1"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 1"
 
 #: ../metadata/core.xml.in.h:28
-#, fuzzy
 msgid "Command line 10"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 10"
 
 #: ../metadata/core.xml.in.h:29
-#, fuzzy
 msgid "Command line 11"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 11"
 
 #: ../metadata/core.xml.in.h:30
-#, fuzzy
 msgid "Command line 2"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 2"
 
 #: ../metadata/core.xml.in.h:31
-#, fuzzy
 msgid "Command line 3"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 3"
 
 #: ../metadata/core.xml.in.h:32
-#, fuzzy
 msgid "Command line 4"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 4"
 
 #: ../metadata/core.xml.in.h:33
-#, fuzzy
 msgid "Command line 5"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 5"
 
 #: ../metadata/core.xml.in.h:34
-#, fuzzy
 msgid "Command line 6"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 6"
 
 #: ../metadata/core.xml.in.h:35
-#, fuzzy
 msgid "Command line 7"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 7"
 
 #: ../metadata/core.xml.in.h:36
-#, fuzzy
 msgid "Command line 8"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 8"
 
 #: ../metadata/core.xml.in.h:37
-#, fuzzy
 msgid "Command line 9"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ লাইন 9"
 
 #: ../metadata/core.xml.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
@@ -565,27 +532,21 @@ msgstr "অস্বচ্ছতা হ্রাস করুন"
 msgid "Decrease window opacity"
 msgstr "উইন্ডোর অস্বচ্ছতা হ্রাস করুন"
 
-#  button label
 #: ../metadata/core.xml.in.h:52
-#, fuzzy
 msgid "Default Icon"
-msgstr "ডিফল্ট (&e)"
+msgstr "প্রথাস্বরূপ চিত্রসংকেত"
 
-#  progress stage title
 #: ../metadata/core.xml.in.h:53
-#, fuzzy
 msgid "Default window icon image"
-msgstr "ডিফল্ট উইন্ডো ম্যানেজার আরাম্ভ করা হচ্ছে"
+msgstr "উইন্ডোর প্রথাস্বরূপ চিত্রসংকেত চিত্র"
 
 #: ../metadata/core.xml.in.h:54
 msgid "Detect Outputs"
 msgstr "আউটপুট সন্ধান"
 
-#  headline for dialog "Select for update"
 #: ../metadata/core.xml.in.h:55
-#, fuzzy
 msgid "Detect Refresh Rate"
-msgstr "পরিবর্ধনের জন্য নির্বাচন করুন"
+msgstr "পুনঃসজীবের হার সন্ধান করা"
 
 #: ../metadata/core.xml.in.h:56
 msgid "Fast"
@@ -769,73 +730,60 @@ msgid "Raise windows when clicked"
 msgstr "ক্লিক করা হলে উইন্ডোটি তুলে ধরা"
 
 #: ../metadata/core.xml.in.h:101
-#, fuzzy
 msgid "Refresh Rate"
-msgstr "পুনরায় তালিকা প্রদর্শন করো (&R)"
+msgstr "পুনঃসজীবের মাত্রা"
 
 #: ../metadata/core.xml.in.h:102
 msgid "Run Dialog"
 msgstr "ডায়ালগ চালনা করা"
 
 #: ../metadata/core.xml.in.h:103
-#, fuzzy
 msgid "Run command 0"
-msgstr "কমান্ড '%1'"
+msgstr "0 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:104
-#, fuzzy
 msgid "Run command 1"
-msgstr "কমান্ড '%1'"
+msgstr "1 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:105
-#, fuzzy
 msgid "Run command 10"
-msgstr "কমান্ড '%1'"
+msgstr "10 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:106
-#, fuzzy
 msgid "Run command 11"
-msgstr "কমান্ড '%1'"
+msgstr "11 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:107
-#, fuzzy
 msgid "Run command 2"
-msgstr "কমান্ড '%1'"
+msgstr "2 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:108
-#, fuzzy
 msgid "Run command 3"
-msgstr "কমান্ড '%1'"
+msgstr "3 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:109
-#, fuzzy
 msgid "Run command 4"
-msgstr "কমান্ড '%1'"
+msgstr "4 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:110
-#, fuzzy
 msgid "Run command 5"
-msgstr "কমান্ড '%1'"
+msgstr "5 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:111
-#, fuzzy
 msgid "Run command 6"
-msgstr "কমান্ড '%1'"
+msgstr "6 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:112
-#, fuzzy
 msgid "Run command 7"
-msgstr "কমান্ড '%1'"
+msgstr "7 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:113
-#, fuzzy
 msgid "Run command 8"
-msgstr "কমান্ড '%1'"
+msgstr "8 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:114
-#, fuzzy
 msgid "Run command 9"
-msgstr "কমান্ড '%1'"
+msgstr "9 নির্দেশটি চালনা করুন"
 
 #: ../metadata/core.xml.in.h:115
 msgid "Screen size multiplier for horizontal virtual size"
@@ -846,15 +794,12 @@ msgid "Screen size multiplier for vertical virtual size"
 msgstr "উল্লম্ব ভার্চুয়াল আকারের জন্য স্ক্রিন আকারের গুণিতক"
 
 #: ../metadata/core.xml.in.h:117
-#, fuzzy
 msgid "Screenshot command line"
-msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
+msgstr "স্ক্রিনশট নির্দেশ লাইন"
 
-#  label text
 #: ../metadata/core.xml.in.h:118
-#, fuzzy
 msgid "Show Desktop"
-msgstr "সময়"
+msgstr "ডেস্কটপ প্রদর্শন করা"
 
 #: ../metadata/core.xml.in.h:119
 msgid "Show Main Menu"
@@ -869,9 +814,8 @@ msgid "Show the main menu"
 msgstr "প্রধান তালিকা প্রদর্শন"
 
 #: ../metadata/core.xml.in.h:122
-#, fuzzy
 msgid "Slow Animations"
-msgstr "সবগুলো পার্টিশন প্রদর্শন করো"
+msgstr "অ্যানিমেশনগুলি প্রদর্শন করা"
 
 #: ../metadata/core.xml.in.h:123
 msgid "Sync To VBlank"
@@ -886,9 +830,8 @@ msgid "Take a screenshot of a window"
 msgstr "উইন্ডোর একটি স্ক্রিনশট নিন"
 
 #: ../metadata/core.xml.in.h:126
-#, fuzzy
 msgid "Terminal command line"
-msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
+msgstr "প্রান্তীয় নির্দেশ লাইন"
 
 #: ../metadata/core.xml.in.h:127
 msgid "Texture Filter"
@@ -978,11 +921,9 @@ msgstr "উইন্ডো স্ক্রিনশট নির্দেশ ল
 msgid "Windows that should be translucent by default"
 msgstr "প্রথাস্বরূপভাবে যে উইন্ডোগুলি অর্ধস্বচ্ছ করা হবে"
 
-# নির্বাচন 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
-#, fuzzy
 msgid "Acceleration"
-msgstr "নির্বাচন "
+msgstr "গতিবৃদ্ধি"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
@@ -1004,11 +945,9 @@ msgstr "স্কাইডোম অ্যানিমেট করা"
 msgid "Animate skydome when rotating cube"
 msgstr "ঘনক ঘোরানোর সময় স্কাইডোম অ্যানিমেট করা"
 
-# স্বয়ংক্রীয়
 #: ../metadata/cube.xml.in.h:7
-#, fuzzy
 msgid "Automatic"
-msgstr "স্বয়ংক্রীয় আপডেট"
+msgstr "স্বয়ংক্রিয়"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background Images"
@@ -1042,29 +981,21 @@ msgstr "ডেস্কটপ ঘনক"
 msgid "Desktop Window Opacity Fade Time."
 msgstr "ডেস্কটপের উইন্ডো অস্বচ্ছতা মলিন হওয়ার সময়."
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/cube.xml.in.h:16
-#, fuzzy
 msgid "Fade Time"
-msgstr "স্থানীয় সময়"
+msgstr "মলিন হওয়ার সময়"
 
-# নির্বাচন 
 #: ../metadata/cube.xml.in.h:17
-#, fuzzy
 msgid "Fold Acceleration"
-msgstr "নির্বাচন "
+msgstr "ফোল্ডের গতিবৃদ্ধি"
 
 #: ../metadata/cube.xml.in.h:18
-#, fuzzy
 msgid "Fold Speed"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "ফোল্ডের গতি"
 
-#  label text
 #: ../metadata/cube.xml.in.h:19
-#, fuzzy
 msgid "Fold Timestep"
-msgstr "সময়"
+msgstr "ফোল্ডের সময়ধাপ"
 
 #: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
@@ -1075,9 +1006,8 @@ msgid "Go back to previous slide"
 msgstr "পূর্ববর্তী স্লাইডে ফিরে যান"
 
 #: ../metadata/cube.xml.in.h:22
-#, fuzzy
 msgid "Image files"
-msgstr "ইমেজ ফাইল তৈরী করো"
+msgstr "চিত্রের ফাইলগুলি"
 
 #: ../metadata/cube.xml.in.h:23
 msgid "Image to use as texture for the skydome"
@@ -1143,12 +1073,9 @@ msgstr "পূর্ববর্তী স্লাইড"
 msgid "Render skydome"
 msgstr "Skydome প্রয়োগ করা"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/cube.xml.in.h:40
-#, fuzzy
 msgid "Scale image"
-msgstr "স্হানীয় সময়"
+msgstr "চিত্র স্কেল করা"
 
 #: ../metadata/cube.xml.in.h:41
 msgid "Scale images to cover top face of cube"
@@ -1179,17 +1106,14 @@ msgstr "স্কাইডোম চিত্র"
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
-#, fuzzy
 msgid "Speed"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "গতি"
 
-#  label text
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
-#, fuzzy
 msgid "Timestep"
-msgstr "সময়"
+msgstr "সময়ধাপ"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparency Only on Mouse Rotate"
@@ -1216,14 +1140,12 @@ msgid "Allow mipmaps to be generated for decoration textures"
 msgstr "অলঙ্করণ টেক্সচারে মিপম্যাপ তৈরী করতে দিন"
 
 #: ../metadata/decoration.xml.in.h:2
-#, fuzzy
 msgid "Command"
-msgstr "কমান্ড '%1'"
+msgstr "নির্দেশ"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "অলঙ্করণের উইন্ডো"
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
@@ -1233,34 +1155,28 @@ msgstr ""
 "হবে"
 
 #: ../metadata/decoration.xml.in.h:5
-#, fuzzy
 msgid "Drop shadow X offset"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়া X অফসেট ফেলা"
 
 #: ../metadata/decoration.xml.in.h:6
-#, fuzzy
 msgid "Drop shadow Y offset"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়া Y অফসেট ফেলা"
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার রঙ ফেলা"
 
 #: ../metadata/decoration.xml.in.h:8
-#, fuzzy
 msgid "Drop shadow opacity"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার অস্বচ্ছতা ফেলা"
 
 #: ../metadata/decoration.xml.in.h:9
-#, fuzzy
 msgid "Drop shadow radius"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার ব্যাসার্ধ ফেলা"
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার রঙ"
 
 #: ../metadata/decoration.xml.in.h:12
 msgid "Shadow Offset X"
@@ -1271,19 +1187,16 @@ msgid "Shadow Offset Y"
 msgstr "প্রচ্ছায়া অফসেট Y"
 
 #: ../metadata/decoration.xml.in.h:14
-#, fuzzy
 msgid "Shadow Opacity"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার অস্বচ্ছতা"
 
 #: ../metadata/decoration.xml.in.h:15
-#, fuzzy
 msgid "Shadow Radius"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার ব্যাসার্ধ"
 
 #: ../metadata/decoration.xml.in.h:16
-#, fuzzy
 msgid "Shadow windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছায়ার উইন্ডো"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
@@ -1306,9 +1219,8 @@ msgid "Fade On Minimize/Open/Close"
 msgstr "ছোট করা/খোলা/বন্ধ করার ওপর মলিনতার প্রভাব"
 
 #: ../metadata/fade.xml.in.h:2
-#, fuzzy
 msgid "Fade Speed"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "মলিনতার গতি"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
@@ -1323,14 +1235,12 @@ msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "ম্যাপ করার সময় উইন্ডো ফেড ইন করা এবং আনম্যাপ করার সময় উইন্ডো ফেড আউট করা"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "মলিন উইন্ডো"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fading Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডো মলিনকরণ"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fullscreen Visual Bell"
@@ -1420,12 +1330,9 @@ msgstr "উইন্ডোগুলি ছোট করা"
 msgid "Minimize speed"
 msgstr "সর্বনিম্ন করার গতি"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/minimize.xml.in.h:4
-#, fuzzy
 msgid "Minimize timestep"
-msgstr "স্হানীয় সময়"
+msgstr "সময়ধাপ সর্বনিম্ন করা"
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
@@ -1444,9 +1351,8 @@ msgid "Windows that should be transformed when minimized"
 msgstr "উইন্ডো ছোট করার সময় যে উইন্ডোগুলি স্থানান্তরিত করা হবে"
 
 #: ../metadata/move.xml.in.h:1
-#, fuzzy
 msgid "Constrain Y"
-msgstr "ধারন করে"
+msgstr "Y সীমাবদ্ধতা"
 
 #: ../metadata/move.xml.in.h:2
 msgid "Constrain Y coordinate to workspace area"
@@ -1471,9 +1377,8 @@ msgid "Move Window"
 msgstr "উইন্ডো সরানো"
 
 #: ../metadata/move.xml.in.h:7
-#, fuzzy
 msgid "Move window"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডো সরানো"
 
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
 #: ../metadata/switcher.xml.in.h:17
@@ -1493,9 +1398,8 @@ msgid "Snapoff maximized windows"
 msgstr "স্ন্যাপঅফ সর্বাধিক উইন্ডো"
 
 #: ../metadata/move.xml.in.h:12
-#, fuzzy
 msgid "Start moving window"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডো সরানো আরম্ভ করা"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1593,11 +1497,9 @@ msgstr "Y অবস্থানের মূল্য"
 msgid "Desktop Plane"
 msgstr "ডেস্কটপ তল"
 
-# why not "token ring"?
 #: ../metadata/plane.xml.in.h:2
-#, fuzzy
 msgid "Place windows on a plane"
-msgstr "টোকেন রিং"
+msgstr "তলে উইন্ডোটি স্থাপন করা"
 
 #: ../metadata/plane.xml.in.h:3
 msgid "Plane Down"
@@ -1768,38 +1670,32 @@ msgid "Fill color used for rectangle resize mode"
 msgstr "আয়তাকার পুনরাকৃতি প্রণালীর জন্য ব্যবহৃত পূর্ণকরণ রঙ"
 
 #: ../metadata/resize.xml.in.h:7
-#, fuzzy
 msgid "Initiate Normal Window Resize"
-msgstr "ভারত"
+msgstr "স্বাভাবিক উইন্ডো পুনরাকার আরম্ভ করা"
 
 #: ../metadata/resize.xml.in.h:8
-#, fuzzy
 msgid "Initiate Outline Window Resize"
-msgstr "ভারত"
+msgstr "বহির্রেখা উইন্ডোর পুনরাকার আরম্ভ করা"
 
 #: ../metadata/resize.xml.in.h:9
-#, fuzzy
 msgid "Initiate Rectangle Window Resize"
-msgstr "ভারত"
+msgstr "আয়তক্ষেত্র উইন্ডো পুনরাকার আরম্ভ করা"
 
 #: ../metadata/resize.xml.in.h:10
-#, fuzzy
 msgid "Initiate Stretch Window Resize"
-msgstr "ভারত"
+msgstr "বিস্তৃতি উইন্ডো পুনরাকৃতি আরম্ভ করা"
 
 #: ../metadata/resize.xml.in.h:11
-#, fuzzy
 msgid "Initiate Window Resize"
-msgstr "ভারত"
+msgstr "উইন্ডোর আকার পরিবর্তন আরম্ভ করা"
 
 #: ../metadata/resize.xml.in.h:12
 msgid "Normal"
 msgstr "স্বাভাবিক"
 
 #: ../metadata/resize.xml.in.h:13
-#, fuzzy
 msgid "Normal Resize Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডোর স্বাভাবিক আকার পরিবর্তন"
 
 #: ../metadata/resize.xml.in.h:14
 msgid "Outline"
@@ -1814,9 +1710,8 @@ msgid "Rectangle"
 msgstr "আয়তক্ষেত্র"
 
 #: ../metadata/resize.xml.in.h:17
-#, fuzzy
 msgid "Rectangle Resize Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "আয়তক্ষেত্র পুনরাকার উইন্ডো"
 
 #: ../metadata/resize.xml.in.h:18
 msgid "Resize Window"
@@ -1835,14 +1730,12 @@ msgid "Start resizing window by stretching it"
 msgstr "উইন্ডোটি বিস্তৃত করে উইন্ডোর আকার পরিবর্তন শুরু করুন"
 
 #: ../metadata/resize.xml.in.h:22
-#, fuzzy
 msgid "Start resizing window normally"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "স্বাভাবিকভাবে উইন্ডোর আকার পরিবর্তন শুরু করুন"
 
 #: ../metadata/resize.xml.in.h:23
-#, fuzzy
 msgid "Start resizing window with outline"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "বহির্রেখা দিয়ে উইন্ডোর আকার পরিবর্তন শুরু করুন"
 
 #: ../metadata/resize.xml.in.h:24
 msgid "Start resizing window with rectangle"
@@ -1853,9 +1746,8 @@ msgid "Stretch"
 msgstr "প্রসারিত করা"
 
 #: ../metadata/resize.xml.in.h:26
-#, fuzzy
 msgid "Stretch Resize Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "পুনরাকারের উইন্ডো বিস্তৃত করা"
 
 #: ../metadata/resize.xml.in.h:27
 msgid "Windows that normal resize should be used for"
@@ -1885,12 +1777,9 @@ msgstr "প্রান্তের ফ্লিপ সরানো"
 msgid "Edge Flip Pointer"
 msgstr "প্রান্তের ফ্লিপ নির্দেশক"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/rotate.xml.in.h:5
-#, fuzzy
 msgid "Flip Time"
-msgstr "স্থানীয় সময়"
+msgstr "ফ্লিপ করার সময়"
 
 #: ../metadata/rotate.xml.in.h:6
 msgid "Flip to left viewport and warp pointer"
@@ -1960,11 +1849,9 @@ msgstr "ডানদিকে ঘোরানো"
 msgid "Rotate Right with Window"
 msgstr "উইন্ডো সহ ডানদিকে ঘোরানো"
 
-# স্বয়ংক্রীয়
 #: ../metadata/rotate.xml.in.h:24
-#, fuzzy
 msgid "Rotate To"
-msgstr "স্বয়ংক্রীয় আপডেট"
+msgstr "এতে ঘোরানো"
 
 #: ../metadata/rotate.xml.in.h:25
 msgid "Rotate To Face 1"
@@ -2190,29 +2077,21 @@ msgstr "উইন্ডো ঘোরানো"
 msgid "Rotate with window"
 msgstr "উইন্ডো দিয়ে ঘোরানো"
 
-# নির্বাচন 
 #: ../metadata/rotate.xml.in.h:81
-#, fuzzy
 msgid "Rotation Acceleration"
-msgstr "নির্বাচন "
+msgstr "ঘূর্ণন গতিবৃদ্ধি"
 
-#  label text
 #: ../metadata/rotate.xml.in.h:82
-#, fuzzy
 msgid "Rotation Speed"
-msgstr "সময়"
+msgstr "ঘূর্ণন গতি"
 
-#  label text
 #: ../metadata/rotate.xml.in.h:83
-#, fuzzy
 msgid "Rotation Timestep"
-msgstr "সময়"
+msgstr "ঘূর্ণন সময়ধাপ"
 
-#  label text
 #: ../metadata/rotate.xml.in.h:84
-#, fuzzy
 msgid "Rotation Zoom"
-msgstr "সময়"
+msgstr "ঘূর্ণন জুম"
 
 #: ../metadata/rotate.xml.in.h:85
 msgid "Sensitivity of pointer movement"
@@ -2227,9 +2106,8 @@ msgid "Snap To Top Face"
 msgstr "ওপরের ফেসে স্ন্যাপ করুন"
 
 #: ../metadata/rotate.xml.in.h:89
-#, fuzzy
 msgid "Start Rotation"
-msgstr "অবস্থা সম্পর্কিত তথ্য (&t)"
+msgstr "ঘোরানো আরম্ভ করা"
 
 #: ../metadata/rotate.xml.in.h:90
 msgid "Timeout before flipping viewport"
@@ -2273,9 +2151,8 @@ msgid "Hover Time"
 msgstr "ঘুরে বেড়ানোর সময়"
 
 #: ../metadata/scale.xml.in.h:9
-#, fuzzy
 msgid "Initiate Window Picker"
-msgstr "ভারত"
+msgstr "উইন্ডো চয়নকারী আরম্ভ করা"
 
 #: ../metadata/scale.xml.in.h:10
 msgid "Initiate Window Picker For All Windows"
@@ -2326,33 +2203,24 @@ msgid "Overlay an icon on windows once they are scaled"
 msgstr "উইন্ডোগুলিকে স্কেল করার পর সেগুলির ওপর চিত্রসংকেত স্থাপন করুন"
 
 #: ../metadata/scale.xml.in.h:24
-#, fuzzy
 msgid "Scale"
-msgstr "স্ক্যানার"
+msgstr "স্কেল করা"
 
 #: ../metadata/scale.xml.in.h:25
-#, fuzzy
 msgid "Scale Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডোগুলি স্কেল করা"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/scale.xml.in.h:26
-#, fuzzy
 msgid "Scale speed"
-msgstr "স্হানীয় সময়"
+msgstr "স্কেল করার গতি"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/scale.xml.in.h:27
-#, fuzzy
 msgid "Scale timestep"
-msgstr "স্হানীয় সময়"
+msgstr "স্কেল সময়ধাপ"
 
 #: ../metadata/scale.xml.in.h:28
-#, fuzzy
 msgid "Scale windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডোগুলি স্কেল করা"
 
 #: ../metadata/scale.xml.in.h:29
 msgid "Selects where windows are scaled if multiple output devices are used."
@@ -2361,14 +2229,12 @@ msgstr ""
 "নির্বাচন করে"
 
 #: ../metadata/scale.xml.in.h:30
-#, fuzzy
 msgid "Space between windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডোগুলির মধ্যে ব্যবধান"
 
 #: ../metadata/scale.xml.in.h:31
-#, fuzzy
 msgid "Spacing"
-msgstr "স্পেন"
+msgstr "ব্যবধান"
 
 #: ../metadata/scale.xml.in.h:33
 msgid ""
@@ -2388,9 +2254,8 @@ msgid "Directory"
 msgstr "ডিরেক্টরী"
 
 #: ../metadata/screenshot.xml.in.h:4
-#, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "ভারত"
+msgstr "আয়তাকার স্ক্রিনশট আরম্ভ করা"
 
 #: ../metadata/screenshot.xml.in.h:5
 msgid "Launch Application"
@@ -2401,14 +2266,12 @@ msgid "Put screenshot images in this directory"
 msgstr "এই ডিরেক্টরীর স্ক্রিনশট চিত্রগুলি স্থাপন করা"
 
 #: ../metadata/screenshot.xml.in.h:7
-#, fuzzy
 msgid "Screenshot"
-msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
+msgstr "স্ক্রিনশট"
 
 #: ../metadata/screenshot.xml.in.h:8
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
+msgstr "স্ক্রিনশট প্লাগইন"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
@@ -2430,21 +2293,17 @@ msgstr "সম্পৃক্তির শতকরা পরিমাণ"
 msgid "Application Switcher"
 msgstr "অনুপ্রয়োগ পরিবর্তনকারী"
 
-# স্বয়ংক্রীয়
 #: ../metadata/switcher.xml.in.h:5
-#, fuzzy
 msgid "Auto Rotate"
-msgstr "স্বয়ংক্রীয় আপডেট"
+msgstr "স্বয়ংক্রিয় ঘূর্ণন"
 
 #: ../metadata/switcher.xml.in.h:6
-#, fuzzy
 msgid "Brightness"
-msgstr "ব্রিজ"
+msgstr "উজ্জ্বলতা"
 
 #: ../metadata/switcher.xml.in.h:7
-#, fuzzy
 msgid "Bring To Front"
-msgstr "বুটের সময়"
+msgstr "সামনে আনা"
 
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring selected window to front"
@@ -2510,9 +2369,8 @@ msgid "Rotate to the selected window while switching"
 msgstr "পরিবর্তন করার সময় নির্বাচিত উইন্ডোটি  ঘোরান"
 
 #: ../metadata/switcher.xml.in.h:26
-#, fuzzy
 msgid "Saturation"
-msgstr "অবস্থা সম্পর্কিত তথ্য (&t)"
+msgstr "সম্পৃক্তি"
 
 #: ../metadata/switcher.xml.in.h:27
 msgid "Select next window without showing the popup window."
@@ -2527,28 +2385,20 @@ msgid "Show icon next to thumbnail"
 msgstr "থাম্বনেলের পরবর্তী চিত্রসংকেত প্রদর্শন করা"
 
 #: ../metadata/switcher.xml.in.h:30
-#, fuzzy
 msgid "Show minimized windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ছোট করে রাখা উইন্ডোগুলি প্রদর্শন করা"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/switcher.xml.in.h:32
-#, fuzzy
 msgid "Switcher speed"
-msgstr "স্হানীয় সময়"
+msgstr "পরিবর্তনকারীর সময়"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #: ../metadata/switcher.xml.in.h:33
-#, fuzzy
 msgid "Switcher timestep"
-msgstr "স্হানীয় সময়"
+msgstr "পরিবর্তনকারীর সময়ধাপ"
 
 #: ../metadata/switcher.xml.in.h:34
-#, fuzzy
 msgid "Switcher windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "পরিবর্তনকারী উইন্ডো"
 
 #: ../metadata/switcher.xml.in.h:36
 msgid "Windows that should be shown in switcher"
@@ -2610,29 +2460,21 @@ msgstr "বৃষ্টির বিলম্ব"
 msgid "Title wave"
 msgstr "শীর্ষ তরঙ্গ"
 
-# why not "token ring"?
 #: ../metadata/water.xml.in.h:12
-#, fuzzy
 msgid "Toggle rain"
-msgstr "টোকেন রিং"
+msgstr "বৃষ্টি টগল করা"
 
-# why not "token ring"?
 #: ../metadata/water.xml.in.h:13
-#, fuzzy
 msgid "Toggle rain effect"
-msgstr "টোকেন রিং"
+msgstr "বৃষ্টির প্রভাব টগল করা"
 
-# why not "token ring"?
 #: ../metadata/water.xml.in.h:14
-#, fuzzy
 msgid "Toggle wiper"
-msgstr "টোকেন রিং"
+msgstr "পরিষ্কারকারী টগল করা"
 
-# why not "token ring"?
 #: ../metadata/water.xml.in.h:15
-#, fuzzy
 msgid "Toggle wiper effect"
-msgstr "টোকেন রিং"
+msgstr "পরিষ্কারকারী প্রভাব টগল করা"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
@@ -2659,20 +2501,16 @@ msgid "Focus Windows"
 msgstr "ফোকাস উইন্ডো "
 
 #: ../metadata/wobbly.xml.in.h:4
-#, fuzzy
 msgid "Friction"
-msgstr "পার্টিশন"
+msgstr "ফ্রিকশন "
 
 #: ../metadata/wobbly.xml.in.h:5
-#, fuzzy
 msgid "Grab Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডো ধরে রাখা"
 
-# দ্বন্দ্ব
 #: ../metadata/wobbly.xml.in.h:6
-#, fuzzy
 msgid "Grid Resolution"
-msgstr "দ্বন্দ্ব মীমাংসা:"
+msgstr "গ্রিড রিজোলিউশন"
 
 #: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
@@ -2691,9 +2529,8 @@ msgid "Map Window Effect"
 msgstr "ম্যাপ উইন্ডো প্রভাব"
 
 #: ../metadata/wobbly.xml.in.h:11
-#, fuzzy
 msgid "Map Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "ম্যাপ উইন্ডো"
 
 #: ../metadata/wobbly.xml.in.h:12
 msgid "Maximize Effect"
@@ -2708,9 +2545,8 @@ msgid "Minimum Vertex Grid Size"
 msgstr "সর্বনিম্ন শীর্ষ গ্রিডের আকার"
 
 #: ../metadata/wobbly.xml.in.h:15
-#, fuzzy
 msgid "Move Windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "উইন্ডো সরানো"
 
 #: ../metadata/wobbly.xml.in.h:17
 msgid "Shiver"
@@ -2721,40 +2557,32 @@ msgid "Snap Inverted"
 msgstr "স্ন্যাপ উল্টানো"
 
 #: ../metadata/wobbly.xml.in.h:19
-#, fuzzy
 msgid "Snap windows"
-msgstr "বিস্তারিত দেখাও (&d)"
+msgstr "স্ন্যাপ উইন্ডো"
 
 #: ../metadata/wobbly.xml.in.h:20
-#, fuzzy
 msgid "Spring Friction"
-msgstr "পার্টিশন"
+msgstr "স্প্রিং ফ্রিকশন"
 
 #: ../metadata/wobbly.xml.in.h:21
-#, fuzzy
 msgid "Spring K"
-msgstr "ধাপে ধাপে আগানো"
+msgstr "স্প্রিং K"
 
 #: ../metadata/wobbly.xml.in.h:22
-#, fuzzy
 msgid "Spring Konstant"
-msgstr "ধাপে ধাপে আগানো"
+msgstr "স্প্রিং কনস্ট্যান্ট"
 
-# why not "token ring"?
 #: ../metadata/wobbly.xml.in.h:23
-#, fuzzy
 msgid "Toggle window snapping"
-msgstr "টোকেন রিং"
+msgstr "টগল উইন্ডো স্ন্যাপিং"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
 msgstr "টলমল উইন্ডো প্রভাবের ক্ষেত্রে স্প্রিং ব্যবহার করুন"
 
-# দ্বন্দ্ব
 #: ../metadata/wobbly.xml.in.h:25
-#, fuzzy
 msgid "Vertex Grid Resolution"
-msgstr "দ্বন্দ্ব মীমাংসা:"
+msgstr "শীর্ষ গ্রিড রিজোলিউশন"
 
 #: ../metadata/wobbly.xml.in.h:26
 msgid "Windows that should wobble when focused"
@@ -2781,19 +2609,16 @@ msgid "Wobbly Windows"
 msgstr "টলমলে উইন্ডো"
 
 #: ../metadata/zoom.xml.in.h:1
-#, fuzzy
 msgid "Filter Linear"
-msgstr "ফিল্টার:"
+msgstr "রৈখিক ফিল্টার:"
 
 #: ../metadata/zoom.xml.in.h:5
 msgid "Use linear filter when zoomed in"
 msgstr "জুম ইন করার সময় রৈখিক ফিল্টার ব্যবহার করুন"
 
-#  label text
 #: ../metadata/zoom.xml.in.h:6
-#, fuzzy
 msgid "Zoom Desktop"
-msgstr "সময়"
+msgstr "জুম ডেস্কটপ"
 
 #: ../metadata/zoom.xml.in.h:7
 msgid "Zoom In"
@@ -2808,15 +2633,12 @@ msgid "Zoom Pan"
 msgstr "জুম প্যান"
 
 #: ../metadata/zoom.xml.in.h:10
-#, fuzzy
 msgid "Zoom Speed"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "জুমের গতি"
 
-#  label text
 #: ../metadata/zoom.xml.in.h:11
-#, fuzzy
 msgid "Zoom Timestep"
-msgstr "সময়"
+msgstr "জুম টাইমস্ট্যাম্প"
 
 #: ../metadata/zoom.xml.in.h:12
 msgid "Zoom and pan desktop cube"
@@ -2827,97 +2649,168 @@ msgid "Zoom factor"
 msgstr "জুম ফ্যাক্টর"
 
 #: ../metadata/zoom.xml.in.h:14
-#, fuzzy
 msgid "Zoom pan"
-msgstr "বাদ দেয়া হয়েছে\n"
+msgstr "জুম প্যান "
+
+#, fuzzy
+#~ msgid "Select next window"
+#~ msgstr "windows"
+
+#, fuzzy
+#~ msgid "Select previous window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
+
+#, fuzzy
+#~ msgid "Dialog"
+#~ msgstr "टोण डायलिन्क (&T)"
+
+#, fuzzy
+#~ msgid "DropdownMenu"
+#~ msgstr "विन्डो मैनेजर"
 
 #, fuzzy
 #~ msgid "Notification"
-#~ msgstr "পার্টিশন"
+#~ msgstr "क्रिया"
 
-#  label for an unknown installed system
-# try to use simple words
 #~ msgid "Unknown"
-#~ msgstr "অজানা"
+#~ msgstr "अनंजान"
 
 #, fuzzy
 #~ msgid "Blur saturation (0-100)"
-#~ msgstr "অবস্থা সম্পর্কিত তথ্য (&t)"
+#~ msgstr "अवधि"
+
+#, fuzzy
+#~ msgid "Do not modify"
+#~ msgstr "किसी को लोग न करें"
 
 #, fuzzy
 #~ msgid "Drop shadow radius (0.0-48.0)"
-#~ msgstr "বিস্তারিত দেখাও (&d)"
+#~ msgstr "त्रिज्या"
 
-# নির্বাচন 
+#, fuzzy
+#~ msgid "Focus prevention windows (match)"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
+
 #, fuzzy
 #~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "নির্বাচন "
+#~ msgstr "3D "
 
 #, fuzzy
 #~ msgid "Fold Speed (0.0-50.0)"
-#~ msgstr "বাদ দেয়া হয়েছে\n"
+#~ msgstr "3D "
 
-#  label text
 #, fuzzy
 #~ msgid "Fold Timestep (0.0-50.0)"
-#~ msgstr "সময়"
+#~ msgstr "टाइम"
 
 #, fuzzy
-#~ msgid "Gaussian strength (0.00-1.00)"
-#~ msgstr "রাশিয়ান"
+#~ msgid "Map Window Effect (None, Shiver)"
+#~ msgstr "windows"
 
-# নির্বাচন 
+#, fuzzy
+#~ msgid "Minimum Vertex Grid Size (4-128)"
+#~ msgstr "निम्नतम &GID"
+
+#, fuzzy
+#~ msgid "Number of virtual desktops (1-36)"
+#~ msgstr "डेसक्टाप"
+
+#, fuzzy
+#~ msgid "Opacity level of moving windows (1-100)"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
+
+#, fuzzy
+#~ msgid "Opacity level of resizing windows (1-100)"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
+
 #, fuzzy
 #~ msgid "Rotation Acceleration (1.0-20.0)"
-#~ msgstr "নির্বাচন "
+#~ msgstr "3D "
 
-#  label text
 #, fuzzy
 #~ msgid "Rotation Timestep (0.0-50.0)"
-#~ msgstr "সময়"
+#~ msgstr "टाइम"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #, fuzzy
 #~ msgid "Scale speed (0.0-50.0)"
-#~ msgstr "স্হানীয় সময়"
+#~ msgstr "लोकल टाइम"
 
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
 #, fuzzy
 #~ msgid "Scale timestep (0.0-50.0)"
-#~ msgstr "স্হানীয় সময়"
+#~ msgstr "लोकल टाइम"
+
+#, fuzzy
+#~ msgid "Space between windows (0-250)"
+#~ msgstr "windows"
 
 #, fuzzy
 #~ msgid "Spring Friction (0.0-10.0)"
-#~ msgstr "পার্টিশন"
+#~ msgstr "क्रिया"
 
 #, fuzzy
 #~ msgid "Spring Konstant (0.0-10.0)"
-#~ msgstr "ধাপে ধাপে আগানো"
+#~ msgstr "स्टेपिगं"
 
-# দ্বন্দ্ব
+#, fuzzy
+#~ msgid "Texture filtering (Fast, Good, Best)"
+#~ msgstr "फिल्टर सैट करें"
+
 #, fuzzy
 #~ msgid "Vertex Grid Resolution (1-64)"
-#~ msgstr "দ্বন্দ্ব মীমাংসা:"
+#~ msgstr "सेर्वर सार"
+
+#, fuzzy
+#~ msgid "Window blur speed (0.0-10.0)"
+#~ msgstr "windows"
+
+#, fuzzy
+#~ msgid "Window fade speed (0.0-25.0)"
+#~ msgstr "windows"
 
 #, fuzzy
 #~ msgid "Zoom Speed (0.0-50.0)"
-#~ msgstr "বাদ দেয়া হয়েছে\n"
+#~ msgstr "छोडं दिया \n"
 
-#  label text
 #, fuzzy
 #~ msgid "Zoom Timestep (0.0-50.0)"
-#~ msgstr "সময়"
+#~ msgstr "टाइम"
+
+#, fuzzy
+#~ msgid "Zoom factor (1.01-3.00)"
+#~ msgstr "डेसक्टाप"
+
+#, fuzzy
+#~ msgid "Plane To Face %d with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
 #, fuzzy
 #~ msgid "Command line %d"
-#~ msgstr "কমান্ড '%1'"
+#~ msgstr "कमांड:"
+
+#, fuzzy
+#~ msgid "Run command %d"
+#~ msgstr "कमांड:"
+
+#, fuzzy
+#~ msgid "Window Types"
+#~ msgstr "windows"
+
+#, fuzzy
+#~ msgid "Move Window Types"
+#~ msgstr "संभरक"
+
+#, fuzzy
+#~ msgid "Corners"
+#~ msgstr "कोर्निश"
 
 #, fuzzy
 #~ msgid "Sloppy Focus"
-#~ msgstr "ফ্লপি ডিস্ক"
+#~ msgstr "फ्लोपी डिस्क"
+
+#, fuzzy
+#~ msgid "Start moving window using keyboard"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
 #, fuzzy
 #~ msgid "Terminate"
-#~ msgstr "প্রিন্টার"
+#~ msgstr "टर्मिनल"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 14:18+0530\n"
-"PO-Revision-Date: 2007-12-11 11:08+0100\n"
+"POT-Creation-Date: 2007-12-22 15:40+0530\n"
+"PO-Revision-Date: 2007-12-19 15:15+0100\n"
 "Last-Translator: jiro kawada <jiro.kawada@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -39,11 +39,11 @@ msgstr "ブラーの種類"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
-msgstr "Metacity テーマのアクティブウィンドウの非透過率"
+msgstr "Metacity テーマのアクティブ・ウィンドウの非透過率"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme active window opacity shade"
-msgstr "Metacity テーマのアクティブウィンドウの半透明シェード"
+msgstr "Metacity テーマのアクティブ・ウィンドウの半透明シェード"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
@@ -55,7 +55,7 @@ msgstr "Metacity テーマの半透明シェード"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "Metacity テーマ装飾のアクティブウィンドウに使用する非透過率"
+msgstr "Metacity テーマ装飾のアクティブ・ウィンドウに使用する非透過率"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
@@ -66,7 +66,7 @@ msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
 msgstr ""
-"Metacity テーマ装飾のアクティブウィンドウを不透明から透明にシェードさせる"
+"Metacity テーマ装飾のアクティブ・ウィンドウを不透明から透明にシェードさせる"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
@@ -292,84 +292,96 @@ msgstr "複製出力ハンドラ"
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
-msgstr "呼び出し時にコマンド 0 で指定したシェルコマンドを実行するキー割り当て"
+msgstr ""
+"呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/core.xml.in.h:2
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"呼び出し時に コマンド 1 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:3
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"呼び出し時に コマンド 10 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:4
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"呼び出し時に コマンド 11 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:5
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"呼び出し時に コマンド 2 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:6
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"呼び出し時に コマンド 3 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:7
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"呼び出し時に コマンド 4 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:8
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"呼び出し時に コマンド 5 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:9
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"呼び出し時に コマンド 6 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:10
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"呼び出し時に コマンド 7 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:11
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"呼び出し時に コマンド 8 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:12
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"呼び出し時に コマンド 9 で指定されたシェルコマンドを実行するキー割り当て"
+"呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り当"
+"て"
 
 #: ../metadata/core.xml.in.h:13
 msgid "Active Plugins"
@@ -548,7 +560,7 @@ msgstr "更新レートの検出"
 
 #: ../metadata/core.xml.in.h:56
 msgid "Fast"
-msgstr "高速"
+msgstr "速さ重視"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Focus Prevention Windows"
@@ -560,11 +572,11 @@ msgstr "フォーカスを奪われないようにするウィンドウ"
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
-msgstr "基本オプション"
+msgstr "一般オプション"
 
 #: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
-msgstr "Compiz の基本オプション"
+msgstr "Compiz の一般オプション"
 
 #: ../metadata/core.xml.in.h:61
 msgid "Good"
@@ -590,11 +602,11 @@ msgstr "水平仮想サイズ"
 
 #: ../metadata/core.xml.in.h:66
 msgid "Ignore Hints When Maximized"
-msgstr "最大化時にジオメトリ・ヒントを無視"
+msgstr "最大化時にヒントを無視"
 
 #: ../metadata/core.xml.in.h:67
 msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "ウィンドウ最大化時に、サイズ増分と縦横比のジオメトリ・ヒントを無視"
+msgstr "ウィンドウ最大化時に、サイズ加算分と縦横比のジオメトリ・ヒントを無視"
 
 #: ../metadata/core.xml.in.h:68
 msgid "Increase Opacity"
@@ -862,19 +874,19 @@ msgstr "ウィンドウのシェード/解除の切り替え"
 
 #: ../metadata/core.xml.in.h:134
 msgid "Toggle active window maximized"
-msgstr "アクティブウィンドウの最大化/解除の切り替え"
+msgstr "アクティブ・ウィンドウの最大化/解除の切り替え"
 
 #: ../metadata/core.xml.in.h:135
 msgid "Toggle active window maximized horizontally"
-msgstr "アクティブウィンドウの水平方向最大化/解除の切り替え"
+msgstr "アクティブ・ウィンドウの水平方向最大化/解除の切り替え"
 
 #: ../metadata/core.xml.in.h:136
 msgid "Toggle active window maximized vertically"
-msgstr "アクティブウィンドウの垂直方向最大化/解除の切り替え"
+msgstr "アクティブ・ウィンドウの垂直方向最大化/解除の切り替え"
 
 #: ../metadata/core.xml.in.h:137
 msgid "Toggle active window shaded"
-msgstr "アクティブウィンドウのシェード/解除の切り替え"
+msgstr "アクティブ・ウィンドウのシェード/解除の切り替え"
 
 #: ../metadata/core.xml.in.h:138
 msgid "Toggle use of slow animations"
@@ -886,7 +898,7 @@ msgstr "ウィンドウの最大化解除"
 
 #: ../metadata/core.xml.in.h:140
 msgid "Unmaximize active window"
-msgstr "アクティブウィンドウの最大化解除"
+msgstr "アクティブ・ウィンドウの最大化解除"
 
 #: ../metadata/core.xml.in.h:141
 msgid "Unredirect Fullscreen Windows"
@@ -1028,7 +1040,7 @@ msgstr "キューブ内部"
 
 #: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "キューブの上面にレンダリングするPNGおよびSVGファイルのリスト"
+msgstr "キューブの上面に描画するPNGおよびSVGファイルのリスト"
 
 #: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
@@ -1072,7 +1084,7 @@ msgstr "前のスライド"
 
 #: ../metadata/cube.xml.in.h:39
 msgid "Render skydome"
-msgstr "スカイドームのレンダリング"
+msgstr "スカイドームの描画"
 
 #: ../metadata/cube.xml.in.h:40
 msgid "Scale image"
@@ -1144,7 +1156,7 @@ msgstr "コマンド"
 
 #: ../metadata/decoration.xml.in.h:3
 msgid "Decoration windows"
-msgstr "ウィンドウの装飾"
+msgstr "装飾適用ウィンドウ"
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
@@ -1197,15 +1209,15 @@ msgstr "影付けウィンドウ"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
-msgstr "ウィンドウ装飾"
+msgstr "ウィンドウの装飾"
 
 #: ../metadata/decoration.xml.in.h:18
 msgid "Window decorations"
-msgstr "装飾ウィンドウ"
+msgstr "ウィンドウを装飾"
 
 #: ../metadata/decoration.xml.in.h:19
 msgid "Windows that should be decorated"
-msgstr "装飾する対象ウィンドウ"
+msgstr "装飾の適用対象ウィンドウ"
 
 #: ../metadata/decoration.xml.in.h:20
 msgid "Windows that should have a shadow"
@@ -1322,7 +1334,7 @@ msgstr "最小化時の効果"
 
 #: ../metadata/minimize.xml.in.h:2
 msgid "Minimize Windows"
-msgstr "最小化効果ウィンドウ"
+msgstr "最小化時効果ウィンドウ"
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
@@ -1707,7 +1719,7 @@ msgstr "矩形"
 
 #: ../metadata/resize.xml.in.h:17
 msgid "Rectangle Resize Windows"
-msgstr "矩形形式サイズ変更ウィンドウ"
+msgstr "矩形サイズ変更ウィンドウ"
 
 #: ../metadata/resize.xml.in.h:18
 msgid "Resize Window"
@@ -1743,7 +1755,7 @@ msgstr "伸縮"
 
 #: ../metadata/resize.xml.in.h:26
 msgid "Stretch Resize Windows"
-msgstr "伸縮形式サイズ変更ウィンドウ"
+msgstr "伸縮サイズ変更ウィンドウ"
 
 #: ../metadata/resize.xml.in.h:27
 msgid "Windows that normal resize should be used for"
@@ -1763,7 +1775,7 @@ msgstr "サイズ変更描画に伸縮形式を使用するウィンドウ"
 
 #: ../metadata/rotate.xml.in.h:2
 msgid "Edge Flip DnD"
-msgstr "エッジへの DnD でめくる"
+msgstr "エッジへのドラッグ＆ドロップでめくる"
 
 #: ../metadata/rotate.xml.in.h:3
 msgid "Edge Flip Move"
@@ -1771,11 +1783,11 @@ msgstr "エッジへの移動でめくる"
 
 #: ../metadata/rotate.xml.in.h:4
 msgid "Edge Flip Pointer"
-msgstr "エッジをポインタでめくる"
+msgstr "エッジへのポインタ移動でめくる"
 
 #: ../metadata/rotate.xml.in.h:5
 msgid "Flip Time"
-msgstr "めくる時間"
+msgstr "めくり開始時間"
 
 #: ../metadata/rotate.xml.in.h:6
 msgid "Flip to left viewport and warp pointer"
