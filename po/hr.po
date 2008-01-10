@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-22 15:40+0530\n"
-"PO-Revision-Date: 2007-11-25 19:08+0100\n"
+"POT-Creation-Date: 2008-01-10 16:25+0530\n"
+"PO-Revision-Date: 2007-12-22 13:42+0100\n"
 "Last-Translator: Matija Folnovic <matijafolnovic@gmail.com>\n"
 "Language-Team: Croatian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,7 @@ msgstr "Compiz"
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr ""
+"Akcija koja ce se napraviti kada se scroll-a misem preko naslovne trake"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 #, fuzzy
@@ -42,7 +43,7 @@ msgstr "Brzina:"
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 #, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "&Obriši Windows kompletno"
+msgstr "Transparentnost Metacity teme prozora"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 #, fuzzy
@@ -112,15 +113,15 @@ msgstr "Postavke arhiva"
 
 #: ../metadata/annotate.xml.in.h:5
 msgid "Clear"
-msgstr ""
+msgstr "Izbrisi"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Nacrtaj"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "Crtaj koristeci alat"
 
 #: ../metadata/annotate.xml.in.h:8
 #, fuzzy
@@ -132,7 +133,7 @@ msgstr "Naučite više iz dokumenatcije"
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 #, fuzzy
 msgid "Initiate"
-msgstr "Indija"
+msgstr "Aktiviraj"
 
 #: ../metadata/annotate.xml.in.h:10
 #, fuzzy
@@ -151,7 +152,7 @@ msgstr "Indija"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "Debljina linije"
 
 #: ../metadata/annotate.xml.in.h:14
 #, fuzzy
@@ -175,12 +176,11 @@ msgstr "Naučite više iz dokumenatcije"
 #: ../metadata/blur.xml.in.h:1
 #, fuzzy
 msgid "4xBilinear"
-msgstr "Ime datoteke"
+msgstr "4xBilinear"
 
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
 msgid "Alpha Blur"
-msgstr "&Obriši Windowse"
+msgstr "Alpha mutnost"
 
 #: ../metadata/blur.xml.in.h:3
 #, fuzzy
@@ -205,7 +205,7 @@ msgstr "Trajanje"
 #: ../metadata/blur.xml.in.h:7
 #, fuzzy
 msgid "Blur Speed"
-msgstr "Brzina:"
+msgstr "Trajanje mutnosti"
 
 #: ../metadata/blur.xml.in.h:8
 #, fuzzy
@@ -398,7 +398,7 @@ msgstr ""
 #: ../metadata/core.xml.in.h:13
 #, fuzzy
 msgid "Active Plugins"
-msgstr "Postavke arhiva"
+msgstr "Aktivni dodaci"
 
 #: ../metadata/core.xml.in.h:14
 msgid ""
@@ -410,14 +410,13 @@ msgid "Audible Bell"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:16
-#, fuzzy
 msgid "Audible system beep"
-msgstr "Datotečni Sustav"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:17
 #, fuzzy
 msgid "Auto-Raise"
-msgstr "Automatski"
+msgstr "Automatsko prikazivanje"
 
 #: ../metadata/core.xml.in.h:18
 msgid "Auto-Raise Delay"
@@ -425,19 +424,19 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:19
 msgid "Automatic detection of output devices"
-msgstr ""
+msgstr "Automatska detekcija output uredaja"
 
 #: ../metadata/core.xml.in.h:20
 msgid "Automatic detection of refresh rate"
-msgstr ""
+msgstr "Automatska detekcija osvjezavanja"
 
 #: ../metadata/core.xml.in.h:21
 msgid "Best"
-msgstr ""
+msgstr "Najbolji"
 
 #: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
-msgstr ""
+msgstr "Klikni za fokusiranje"
 
 #: ../metadata/core.xml.in.h:23
 msgid "Click on window moves input focus to it"
@@ -446,71 +445,71 @@ msgstr ""
 #: ../metadata/core.xml.in.h:24
 #, fuzzy
 msgid "Close Window"
-msgstr "&Obriši Windowse"
+msgstr "Zatvori prozor"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
-msgstr ""
+msgstr "Zatvori aktivni prozor"
 
 #: ../metadata/core.xml.in.h:26
 #, fuzzy
 msgid "Command line 0"
-msgstr "Naredba: "
+msgstr "Naredba 0"
 
 #: ../metadata/core.xml.in.h:27
 #, fuzzy
 msgid "Command line 1"
-msgstr "Naredba: "
+msgstr "Naredba 1 "
 
 #: ../metadata/core.xml.in.h:28
 #, fuzzy
 msgid "Command line 10"
-msgstr "Naredba: "
+msgstr "Naredba 10 "
 
 #: ../metadata/core.xml.in.h:29
 #, fuzzy
 msgid "Command line 11"
-msgstr "Naredba: "
+msgstr "Naredba 11 "
 
 #: ../metadata/core.xml.in.h:30
 #, fuzzy
 msgid "Command line 2"
-msgstr "Naredba: "
+msgstr "Naredba 2 "
 
 #: ../metadata/core.xml.in.h:31
 #, fuzzy
 msgid "Command line 3"
-msgstr "Naredba: "
+msgstr "Naredba 3 "
 
 #: ../metadata/core.xml.in.h:32
 #, fuzzy
 msgid "Command line 4"
-msgstr "Naredba: "
+msgstr "Naredba 4 "
 
 #: ../metadata/core.xml.in.h:33
 #, fuzzy
 msgid "Command line 5"
-msgstr "Naredba: "
+msgstr "Naredba 5"
 
 #: ../metadata/core.xml.in.h:34
 #, fuzzy
 msgid "Command line 6"
-msgstr "Naredba: "
+msgstr "Naredba 6"
 
 #: ../metadata/core.xml.in.h:35
 #, fuzzy
 msgid "Command line 7"
-msgstr "Naredba: "
+msgstr "Naredba 7 "
 
 #: ../metadata/core.xml.in.h:36
 #, fuzzy
 msgid "Command line 8"
-msgstr "Naredba: "
+msgstr "Naredba 8 "
 
 #: ../metadata/core.xml.in.h:37
 #, fuzzy
 msgid "Command line 9"
-msgstr "Naredba: "
+msgstr "Naredba 9 "
 
 #: ../metadata/core.xml.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
@@ -562,17 +561,17 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
-msgstr ""
+msgstr "Smanji transparentnost"
 
 #: ../metadata/core.xml.in.h:51
 #, fuzzy
 msgid "Decrease window opacity"
-msgstr "&Obriši Windows kompletno"
+msgstr "Smanji transparentnost prozora"
 
 #: ../metadata/core.xml.in.h:52
 #, fuzzy
 msgid "Default Icon"
-msgstr "Osnovni odabir"
+msgstr "Osnovna ikona"
 
 #: ../metadata/core.xml.in.h:53
 msgid "Default window icon image"
@@ -581,36 +580,35 @@ msgstr ""
 #: ../metadata/core.xml.in.h:54
 #, fuzzy
 msgid "Detect Outputs"
-msgstr "Sažmi izlaz"
+msgstr "Detektiraj izlaz"
 
 #: ../metadata/core.xml.in.h:55
 msgid "Detect Refresh Rate"
-msgstr ""
+msgstr "Detektiraj osvjezavanje"
 
 #: ../metadata/core.xml.in.h:56
 msgid "Fast"
-msgstr ""
+msgstr "Brzina"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Focus Prevention Windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:58
-#, fuzzy
 msgid "Focus prevention windows"
-msgstr "Pokrećem servis."
+msgstr ""
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
-msgstr ""
+msgstr "Generalne opcije"
 
 #: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
-msgstr ""
+msgstr "Generalne compiz opcije"
 
 #: ../metadata/core.xml.in.h:61
 msgid "Good"
-msgstr ""
+msgstr "Dobro"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Hide Skip Taskbar Windows"
@@ -618,7 +616,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:63
 msgid "Hide all windows and focus desktop"
-msgstr ""
+msgstr "Sakrij sve prozore i fokusiraj radnu povrsinu"
 
 #: ../metadata/core.xml.in.h:64
 msgid "Hide windows not in taskbar when entering show desktop mode"
@@ -627,7 +625,7 @@ msgstr ""
 #: ../metadata/core.xml.in.h:65
 #, fuzzy
 msgid "Horizontal Virtual Size"
-msgstr "Virtualni Diskovi"
+msgstr "Velicina virtualne horizontale"
 
 #: ../metadata/core.xml.in.h:66
 msgid "Ignore Hints When Maximized"
@@ -639,28 +637,27 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:68
 msgid "Increase Opacity"
-msgstr ""
+msgstr "Povecaj transparentnost"
 
 #: ../metadata/core.xml.in.h:69
 msgid "Increase window opacity"
-msgstr ""
+msgstr "Povecaj transparentnost prozora"
 
 #: ../metadata/core.xml.in.h:70
 msgid "Interval before raising selected windows"
-msgstr ""
+msgstr "Vrijeme prije pojavljivanja selektiranog prozora"
 
 #: ../metadata/core.xml.in.h:71
 msgid "Interval between ping messages"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:72
-#, fuzzy
 msgid "Lighting"
-msgstr "Prijava"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:73
 msgid "List of currently active plugins"
-msgstr ""
+msgstr "Lista trenutno aktivnih prozora"
 
 #: ../metadata/core.xml.in.h:74
 msgid "List of strings describing output devices"
@@ -668,7 +665,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:75
 msgid "Lower Window"
-msgstr ""
+msgstr "Spusti prozor"
 
 #: ../metadata/core.xml.in.h:76
 msgid "Lower window beneath other windows"
@@ -676,43 +673,40 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:77
 msgid "Maximize Window"
-msgstr ""
+msgstr "Maksimiziraj prozor"
 
 #: ../metadata/core.xml.in.h:78
-#, fuzzy
 msgid "Maximize Window Horizontally"
-msgstr "&Smanji Windowse"
+msgstr "Maksimiziraj prozor horizontalno"
 
 #: ../metadata/core.xml.in.h:79
-#, fuzzy
 msgid "Maximize Window Vertically"
-msgstr "&Smanji Windowse"
+msgstr "Maksimiziraj prozor vertikalno"
 
 #: ../metadata/core.xml.in.h:80
 msgid "Maximize active window"
-msgstr ""
+msgstr "Maksimiziraj aktivni prozor"
 
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize active window horizontally"
-msgstr ""
+msgstr "Maksimiziraj aktivni prozor horizontalno"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
-msgstr ""
+msgstr "Maksimiziraj prozor vertikalno"
 
 #: ../metadata/core.xml.in.h:83
-#, fuzzy
 msgid "Minimize Window"
-msgstr "&Smanji Windowse"
+msgstr "Minimiziraj prozor"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
-msgstr ""
+msgstr "Minimiziraj aktivni prozor"
 
 #: ../metadata/core.xml.in.h:85
 #, fuzzy
 msgid "Number of Desktops"
-msgstr "Radne površine"
+msgstr "Broj radnih povrsina"
 
 #: ../metadata/core.xml.in.h:86
 #, fuzzy
@@ -725,11 +719,11 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:88
 msgid "Opacity Step"
-msgstr ""
+msgstr "Broj virtualnih radnih povrsina"
 
 #: ../metadata/core.xml.in.h:89
 msgid "Opacity change step"
-msgstr ""
+msgstr "Step mijenjanja transparentnosti"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"

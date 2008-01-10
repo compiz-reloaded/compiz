@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-22 15:40+0530\n"
-"PO-Revision-Date: 2007-12-19 15:15+0100\n"
-"Last-Translator: jiro kawada <jiro.kawada@gmail.com>\n"
+"POT-Creation-Date: 2008-01-10 16:25+0530\n"
+"PO-Revision-Date: 2008-01-05 08:15+0100\n"
+"Last-Translator: Masaaki KANEMOTO <masaaki.kanemoto@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgstr "ブラーの種類"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
-msgstr "Metacity テーマのアクティブ・ウィンドウの非透過率"
+msgstr "Metacity テーマのアクティブ・ウィンドウの不透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme active window opacity shade"
@@ -47,7 +47,7 @@ msgstr "Metacity テーマのアクティブ・ウィンドウの半透明シェ
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr "Metacity テーマの非透過率"
+msgstr "Metacity テーマの不透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
@@ -55,11 +55,11 @@ msgstr "Metacity テーマの半透明シェード"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "Metacity テーマ装飾のアクティブ・ウィンドウに使用する非透過率"
+msgstr "Metacity テーマ装飾のアクティブ・ウィンドウに使用する不透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
-msgstr "Metacity テーマ装飾に使用する非透過率"
+msgstr "Metacity テーマ装飾に使用する不透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
@@ -278,7 +278,7 @@ msgstr "デフォルトでアルファ・ブラー使用対象にするウィン
 
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
-msgstr "複製出力"
+msgstr "クローン出力"
 
 #: ../metadata/clone.xml.in.h:3
 msgid "Initiate clone selection"
@@ -286,7 +286,7 @@ msgstr "複製選択の開始"
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
-msgstr "複製出力ハンドラ"
+msgstr "クローン出力ハンドラ"
 
 #: ../metadata/core.xml.in.h:1
 msgid ""
@@ -536,11 +536,11 @@ msgstr "コマンド 9 を実行 の呼び出し時にシェルで実行され�
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
-msgstr "非透過率を下げる"
+msgstr "不透明度を下げる"
 
 #: ../metadata/core.xml.in.h:51
 msgid "Decrease window opacity"
-msgstr "ウィンドウの非透過率を下げる"
+msgstr "ウィンドウの不透明度を下げる"
 
 #: ../metadata/core.xml.in.h:52
 msgid "Default Icon"
@@ -610,11 +610,11 @@ msgstr "ウィンドウ最大化時に、サイズ加算分と縦横比のジオ
 
 #: ../metadata/core.xml.in.h:68
 msgid "Increase Opacity"
-msgstr "非透過率を上げる"
+msgstr "不透明度を上げる"
 
 #: ../metadata/core.xml.in.h:69
 msgid "Increase window opacity"
-msgstr "ウィンドウの非透過率を上げる"
+msgstr "ウィンドウの不透明度を上げる"
 
 #: ../metadata/core.xml.in.h:70
 msgid "Interval before raising selected windows"
@@ -690,23 +690,23 @@ msgstr "垂直帰線期間にのみ画面を更新する"
 
 #: ../metadata/core.xml.in.h:88
 msgid "Opacity Step"
-msgstr "非透過率の変化刻み"
+msgstr "不透明度の変化刻み"
 
 #: ../metadata/core.xml.in.h:89
 msgid "Opacity change step"
-msgstr "非透過率の変化刻み"
+msgstr "不透明度の変化刻み"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"
-msgstr "デフォルトで半透明化の対象にするウィンドウの非透過率"
+msgstr "デフォルトで半透明化の対象にするウィンドウの不透明度"
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
-msgstr "ウィンドウの非透過率"
+msgstr "ウィンドウの不透明度"
 
 #: ../metadata/core.xml.in.h:92
 msgid "Opacity windows"
-msgstr "透過対象ウィンドウ"
+msgstr "半透明対象ウィンドウ"
 
 #: ../metadata/core.xml.in.h:93
 msgid "Open a terminal"
@@ -1060,19 +1060,19 @@ msgstr "大きなキューブ上"
 
 #: ../metadata/cube.xml.in.h:33
 msgid "Opacity During Rotation"
-msgstr "回転時の非透過率"
+msgstr "回転時の不透明度"
 
 #: ../metadata/cube.xml.in.h:34
 msgid "Opacity When Not Rotating"
-msgstr "非回転時の非透過率"
+msgstr "非回転時の不透明度"
 
 #: ../metadata/cube.xml.in.h:35
 msgid "Opacity of desktop window during rotation."
-msgstr "回転時のデスクトップ・ウィンドウの非透過率"
+msgstr "回転時のデスクトップ・ウィンドウの不透明度"
 
 #: ../metadata/cube.xml.in.h:36
 msgid "Opacity of desktop window when not rotating."
-msgstr "非回転時のデスクトップ・ウィンドウの非透過率"
+msgstr "非回転時のデスクトップ・ウィンドウの不透明度"
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Place windows on cube"
@@ -1177,7 +1177,7 @@ msgstr "落とす影の色"
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
-msgstr "落とす影の非透過率"
+msgstr "落とす影の不透明度"
 
 #: ../metadata/decoration.xml.in.h:9
 msgid "Drop shadow radius"
@@ -1197,7 +1197,7 @@ msgstr "影オフセット Y 座標"
 
 #: ../metadata/decoration.xml.in.h:14
 msgid "Shadow Opacity"
-msgstr "影の非透過率"
+msgstr "影の不透明度"
 
 #: ../metadata/decoration.xml.in.h:15
 msgid "Shadow Radius"
@@ -1391,11 +1391,11 @@ msgstr "ウィンドウの移動"
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
 #: ../metadata/switcher.xml.in.h:17
 msgid "Opacity"
-msgstr "非透過率"
+msgstr "不透明度"
 
 #: ../metadata/move.xml.in.h:9
 msgid "Opacity level of moving windows"
-msgstr "移動ウィンドウの非透過レベル"
+msgstr "移動ウィンドウの不透明度"
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
@@ -1503,7 +1503,7 @@ msgstr "Y 位置の値"
 
 #: ../metadata/plane.xml.in.h:1
 msgid "Desktop Plane"
-msgstr "デスクトップの平面"
+msgstr "デスクトップ・プレーン"
 
 #: ../metadata/plane.xml.in.h:2
 msgid "Place windows on a plane"
@@ -1511,131 +1511,131 @@ msgstr "ウィンドウを平面上に配置"
 
 #: ../metadata/plane.xml.in.h:3
 msgid "Plane Down"
-msgstr "下面に滑走"
+msgstr "下面に移動"
 
 #: ../metadata/plane.xml.in.h:4
 msgid "Plane Left"
-msgstr "左面に滑走"
+msgstr "左面に移動"
 
 #: ../metadata/plane.xml.in.h:5
 msgid "Plane Right"
-msgstr "右面に滑走"
+msgstr "右面に移動"
 
 #: ../metadata/plane.xml.in.h:6
 msgid "Plane To Face 1"
-msgstr "面 1 に滑走"
+msgstr "面 1 に移動"
 
 #: ../metadata/plane.xml.in.h:7
 msgid "Plane To Face 10"
-msgstr "面 10 に滑走"
+msgstr "面 10 に移動"
 
 #: ../metadata/plane.xml.in.h:8
 msgid "Plane To Face 11"
-msgstr "面 11 に滑走"
+msgstr "面 11 に移動"
 
 #: ../metadata/plane.xml.in.h:9
 msgid "Plane To Face 12"
-msgstr "面 12 に滑走"
+msgstr "面 12 に移動"
 
 #: ../metadata/plane.xml.in.h:10
 msgid "Plane To Face 2"
-msgstr "面 2 に滑走"
+msgstr "面 2 に移動"
 
 #: ../metadata/plane.xml.in.h:11
 msgid "Plane To Face 3"
-msgstr "面 3 に滑走"
+msgstr "面 3 に移動"
 
 #: ../metadata/plane.xml.in.h:12
 msgid "Plane To Face 4"
-msgstr "面 4 に滑走"
+msgstr "面 4 に移動"
 
 #: ../metadata/plane.xml.in.h:13
 msgid "Plane To Face 5"
-msgstr "面 5 に滑走"
+msgstr "面 5 に移動"
 
 #: ../metadata/plane.xml.in.h:14
 msgid "Plane To Face 6"
-msgstr "面 6 に滑走"
+msgstr "面 6 に移動"
 
 #: ../metadata/plane.xml.in.h:15
 msgid "Plane To Face 7"
-msgstr "面 7 に滑走"
+msgstr "面 7 に移動"
 
 #: ../metadata/plane.xml.in.h:16
 msgid "Plane To Face 8"
-msgstr "面 8 に滑走"
+msgstr "面 8 に移動"
 
 #: ../metadata/plane.xml.in.h:17
 msgid "Plane To Face 9"
-msgstr "面 9 に滑走"
+msgstr "面 9 に移動"
 
 #: ../metadata/plane.xml.in.h:18
 msgid "Plane Up"
-msgstr "上面に滑走"
+msgstr "上面に移動"
 
 #: ../metadata/plane.xml.in.h:19
 msgid "Plane down"
-msgstr "下面に滑走"
+msgstr "下面に移動"
 
 #: ../metadata/plane.xml.in.h:20
 msgid "Plane left"
-msgstr "左面に滑走"
+msgstr "左面に移動"
 
 #: ../metadata/plane.xml.in.h:21
 msgid "Plane right"
-msgstr "右面に滑走"
+msgstr "右面に移動"
 
 #: ../metadata/plane.xml.in.h:22
 msgid "Plane to face 1"
-msgstr "面 1 に滑走"
+msgstr "面 1 に移動"
 
 #: ../metadata/plane.xml.in.h:23
 msgid "Plane to face 10"
-msgstr "面 10 に滑走"
+msgstr "面 10 に移動"
 
 #: ../metadata/plane.xml.in.h:24
 msgid "Plane to face 11"
-msgstr "面 11 に滑走"
+msgstr "面 11 に移動"
 
 #: ../metadata/plane.xml.in.h:25
 msgid "Plane to face 12"
-msgstr "面 12 に滑走"
+msgstr "面 12 に移動"
 
 #: ../metadata/plane.xml.in.h:26
 msgid "Plane to face 2"
-msgstr "面 2 に滑走"
+msgstr "面 2 に移動"
 
 #: ../metadata/plane.xml.in.h:27
 msgid "Plane to face 3"
-msgstr "面 3 に滑走"
+msgstr "面 3 に移動"
 
 #: ../metadata/plane.xml.in.h:28
 msgid "Plane to face 4"
-msgstr "面 4 に滑走"
+msgstr "面 4 に移動"
 
 #: ../metadata/plane.xml.in.h:29
 msgid "Plane to face 5"
-msgstr "面 5 に滑走"
+msgstr "面 5 に移動"
 
 #: ../metadata/plane.xml.in.h:30
 msgid "Plane to face 6"
-msgstr "面 6 に滑走"
+msgstr "面 6 に移動"
 
 #: ../metadata/plane.xml.in.h:31
 msgid "Plane to face 7"
-msgstr "面 7 に滑走"
+msgstr "面 7 に移動"
 
 #: ../metadata/plane.xml.in.h:32
 msgid "Plane to face 8"
-msgstr "面 8 に滑走"
+msgstr "面 8 に移動"
 
 #: ../metadata/plane.xml.in.h:33
 msgid "Plane to face 9"
-msgstr "面 9 に滑走"
+msgstr "面 9 に移動"
 
 #: ../metadata/plane.xml.in.h:34
 msgid "Plane up"
-msgstr "上面に滑走"
+msgstr "上面に移動"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -1647,11 +1647,11 @@ msgstr "Png 画像読み込み"
 
 #: ../metadata/regex.xml.in.h:1
 msgid "Regex Matching"
-msgstr "正規表現照合"
+msgstr "正規表現マッチング"
 
 #: ../metadata/regex.xml.in.h:2
 msgid "Regex window matching"
-msgstr "正規表現による対象ウィンドウの照合"
+msgstr "正規表現による対象ウィンドウのマッチング"
 
 #: ../metadata/resize.xml.in.h:1
 msgid "Border Color"
@@ -2129,7 +2129,7 @@ msgstr "ズーム"
 
 #: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
-msgstr "非透過率(%)"
+msgstr "不透明度(%)"
 
 #: ../metadata/scale.xml.in.h:2
 msgid "Big"
@@ -2511,7 +2511,7 @@ msgstr "ウィンドウがフォーカスされた時の効果"
 
 #: ../metadata/wobbly.xml.in.h:3
 msgid "Focus Windows"
-msgstr "フォーカス・ウィンドウ"
+msgstr "フォーカス時効果ウィンドウ"
 
 #: ../metadata/wobbly.xml.in.h:4
 msgid "Friction"
@@ -2519,7 +2519,7 @@ msgstr "摩擦"
 
 #: ../metadata/wobbly.xml.in.h:5
 msgid "Grab Windows"
-msgstr "つかまれたウィンドウ"
+msgstr "つかみ時効果ウィンドウ"
 
 #: ../metadata/wobbly.xml.in.h:6
 msgid "Grid Resolution"
@@ -2543,7 +2543,7 @@ msgstr "ウィンドウが開かれた時の効果"
 
 #: ../metadata/wobbly.xml.in.h:11
 msgid "Map Windows"
-msgstr "開くウィンドウ"
+msgstr "開く時効果ウィンドウ"
 
 #: ../metadata/wobbly.xml.in.h:12
 msgid "Maximize Effect"
@@ -2559,7 +2559,7 @@ msgstr "最小頂点グリッドサイズ"
 
 #: ../metadata/wobbly.xml.in.h:15
 msgid "Move Windows"
-msgstr "移動ウィンドウ"
+msgstr "移動時効果ウィンドウ"
 
 # 'driver' as in '(hardware) driver update'
 #: ../metadata/wobbly.xml.in.h:17

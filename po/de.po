@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-22 15:39+0530\n"
-"PO-Revision-Date: 2007-12-07 18:39+0100\n"
+"POT-Creation-Date: 2008-01-10 16:25+0530\n"
+"PO-Revision-Date: 2008-01-05 11:56+0100\n"
 "Last-Translator: david luttropp <david@linuxreaktor.de>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Desktop"
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
 #, fuzzy
 msgid "Window Management"
-msgstr "Menü Fenster"
+msgstr "Fensterverwaltung"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
@@ -40,7 +40,7 @@ msgstr ""
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 #, fuzzy
 msgid "Blur type"
-msgstr "Faltgeschwindigkeit"
+msgstr "Unschärfetyp"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 #, fuzzy
@@ -61,49 +61,57 @@ msgid "Metacity theme opacity shade"
 msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
+#, fuzzy
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr ""
+msgstr "Opazität für aktive Fenster mit Metacity-Dekoration"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
+#, fuzzy
 msgid "Opacity to use for metacity theme decorations"
-msgstr ""
+msgstr "Opazität für Metacity-Dekorationen"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
+#, fuzzy
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
 msgstr ""
+"Abstufung aktiver Fenster mit Metacity-Dekoration von undurchsichtig nach "
+"durchsichtig"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
+#, fuzzy
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
+"Abstufung Fenster mit Metacity-Dekoration von undurchsichtig nach "
+"durchsichtig"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
+#, fuzzy
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Mausrad-auf-Titelleiste-Aktion"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
+#, fuzzy
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Ünschärfetyp für Fensterdekoration"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Metacity-Thema verwenden"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Metacity-Thema für das Zeichnen der Fensterdekoration verwenden"
 
 #: ../metadata/annotate.xml.in.h:1
-#, fuzzy
 msgid "Annotate"
-msgstr "Kommentieren"
+msgstr "Auf den Bildschirm zeichnen"
 
 #: ../metadata/annotate.xml.in.h:2
-#, fuzzy
 msgid "Annotate Fill Color"
-msgstr "Kommentar Füllfarbe"
+msgstr "Füllfarbe"
 
 #: ../metadata/annotate.xml.in.h:3
 msgid "Annotate Stroke Color"
@@ -112,7 +120,7 @@ msgstr "Kommentar Rahmenfarbe"
 #: ../metadata/annotate.xml.in.h:4
 #, fuzzy
 msgid "Annotate plugin"
-msgstr "Aktive Plugins"
+msgstr "Bildschirmnotiz-Plugin"
 
 #: ../metadata/annotate.xml.in.h:5
 msgid "Clear"
@@ -137,195 +145,174 @@ msgid "Initiate"
 msgstr "Initiieren"
 
 #: ../metadata/annotate.xml.in.h:10
-#, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "Fensterskalierung initiieren"
+msgstr "Zeichnen initiieren"
 
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Fensterskalierung initiieren"
+msgstr "Zeichnung löschen initiieren"
 
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "Initiieren"
+msgstr "Löschen initiieren"
 
 #: ../metadata/annotate.xml.in.h:13
-#, fuzzy
 msgid "Line width"
-msgstr "Fensterbreite"
+msgstr "Linienstärke"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
-msgstr ""
+msgstr "Linienstärke für Notizen"
 
 #: ../metadata/annotate.xml.in.h:15
+#, fuzzy
 msgid "Stroke color for annotations"
-msgstr ""
+msgstr "Strichfarbe für Notizen"
 
 #: ../metadata/annotate.xml.in.h:16
 #, fuzzy
 msgid "Stroke width"
-msgstr "Breite der Quellansicht"
+msgstr "Strichstärke"
 
 #: ../metadata/annotate.xml.in.h:17
 #, fuzzy
 msgid "Stroke width for annotations"
-msgstr "Breite der Quellansicht"
+msgstr "Strichstärke für Notizen"
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
 msgid "4xBilinear"
-msgstr "Linearer Filter"
+msgstr "4x-bilinear"
 
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
 msgid "Alpha Blur"
-msgstr "Fenster skalieren"
+msgstr "Alphakanalunschärfe"
 
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "Fenster skalieren"
+msgstr "Alphakanalunschärfe für Fenster"
 
 #: ../metadata/blur.xml.in.h:4
-#, fuzzy
 msgid "Blur Filter"
-msgstr "Strukturfilter"
+msgstr "Unschärfefilter"
 
 #: ../metadata/blur.xml.in.h:5
 #, fuzzy
 msgid "Blur Occlusion"
-msgstr "Sättigung"
+msgstr "Unschärfe für verdeckte Bereiche"
 
 #: ../metadata/blur.xml.in.h:6
-#, fuzzy
 msgid "Blur Saturation"
 msgstr "Sättigung"
 
 #: ../metadata/blur.xml.in.h:7
-#, fuzzy
 msgid "Blur Speed"
-msgstr "Faltgeschwindigkeit"
+msgstr "Geschwindigkeit"
 
 #: ../metadata/blur.xml.in.h:8
-#, fuzzy
 msgid "Blur Windows"
-msgstr "Fenster platzieren"
+msgstr "Fensterunschärfe"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Unschärfe hinter transparenten Fensterbereichen"
 
 #: ../metadata/blur.xml.in.h:10
-#, fuzzy
 msgid "Blur saturation"
 msgstr "Sättigung"
 
 #: ../metadata/blur.xml.in.h:11
-#, fuzzy
 msgid "Blur windows"
-msgstr "Fenster skalieren"
+msgstr "Fensterunschärfe"
 
 #: ../metadata/blur.xml.in.h:12
-#, fuzzy
 msgid "Blur windows that doesn't have focus"
-msgstr "Fenstertypen, die beim Erhalt des Fokus wackeln sollen"
+msgstr "Unschärfe für Fenster im Hintergrund"
 
 #: ../metadata/blur.xml.in.h:13
+#, fuzzy
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "Unschärfe für verdeckte Bildbereiche ausschalten"
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
-msgstr ""
+msgstr "Methode des Unschärfefilters"
 
 #: ../metadata/blur.xml.in.h:15
-#, fuzzy
 msgid "Focus Blur"
-msgstr "Fenster skalieren"
+msgstr "Fokusunschärfe"
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "Fenster skalieren"
+msgstr "Fokusunschärfe für Fenster"
 
 #: ../metadata/blur.xml.in.h:17
-#, fuzzy
 msgid "Gaussian"
-msgstr "Russisch"
+msgstr "Gaußsch"
 
 #: ../metadata/blur.xml.in.h:18
-#, fuzzy
 msgid "Gaussian Radius"
-msgstr "Russische Föderation"
+msgstr "Radius"
 
 #: ../metadata/blur.xml.in.h:19
-#, fuzzy
 msgid "Gaussian Strength"
-msgstr "Russisch"
+msgstr "Stärke"
 
 #: ../metadata/blur.xml.in.h:20
-#, fuzzy
 msgid "Gaussian radius"
-msgstr "Russische Föderation"
+msgstr "Radius des Gaußfilters"
 
 #: ../metadata/blur.xml.in.h:21
-#, fuzzy
 msgid "Gaussian strength"
-msgstr "Russisch"
+msgstr "Stärke des Gaußfilters"
 
 #: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
-msgstr "Mipmap"
+msgstr "Mipmaps"
 
 #: ../metadata/blur.xml.in.h:23
-#, fuzzy
 msgid "Mipmap LOD"
-msgstr "Mipmap"
+msgstr "Mipmap-LOD"
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap level-of-detail"
-msgstr ""
+msgstr "Mipmap-Detailniveau"
 
 #: ../metadata/blur.xml.in.h:25
+#, fuzzy
 msgid "Pulse"
-msgstr ""
+msgstr "Pulsieren"
 
 #: ../metadata/blur.xml.in.h:26
 #, fuzzy
 msgid "Pulse effect"
-msgstr "Effekt fokussieren"
+msgstr "Puls-Effekt"
 
 #: ../metadata/blur.xml.in.h:27
 #, fuzzy
 msgid "Window blur speed"
-msgstr "Fensterausblendgeschwindigkeit"
+msgstr "Geschwindigkeit des Unschärfeeffekts"
 
 #: ../metadata/blur.xml.in.h:28
-#, fuzzy
 msgid "Windows that should be affected by focus blur"
-msgstr "Fenstertypen, die ausgeblendet werden sollen"
+msgstr "Fenstertypen, auf die die Fokusunschärfe angewendet werden soll"
 
 #: ../metadata/blur.xml.in.h:29
-#, fuzzy
 msgid "Windows that should be use alpha blur by default"
-msgstr "Fenstertypen, die ausgeblendet werden sollen"
+msgstr "Fenstertypen, auf die die Alphakanalunschärfe angewendet werden soll"
 
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
 msgstr "Ausgabe klonen"
 
 #: ../metadata/clone.xml.in.h:3
-#, fuzzy
 msgid "Initiate clone selection"
-msgstr "Auswahl für Klonen aktivieren"
+msgstr "Auswahl klonen initiieren"
 
 #: ../metadata/clone.xml.in.h:4
+#, fuzzy
 msgid "Output clone handler"
-msgstr ""
+msgstr "Eine Bilsschirmausgabe klonen"
 
 #: ../metadata/core.xml.in.h:1
 msgid ""
@@ -628,12 +615,12 @@ msgstr "Schnell"
 #: ../metadata/core.xml.in.h:57
 #, fuzzy
 msgid "Focus Prevention Windows"
-msgstr "Fenstertypen fokussieren"
+msgstr "Fokus verwalten für Fenster"
 
 #: ../metadata/core.xml.in.h:58
 #, fuzzy
 msgid "Focus prevention windows"
-msgstr "Fenstertypen fokussieren"
+msgstr "Für diese Fenster die „focus stealing prevention“ verwenden"
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
@@ -682,13 +669,14 @@ msgid "Increase window opacity"
 msgstr "Fensterdeckkraft erhöhen"
 
 #: ../metadata/core.xml.in.h:70
-#, fuzzy
 msgid "Interval before raising selected windows"
-msgstr "Zeitintervall vor Verlagern der ausgewählten Fenster"
+msgstr ""
+"Zeit, die vergehen soll, bevor das ausgewählte Fenster in den Vordergrund "
+"gehoben wird"
 
 #: ../metadata/core.xml.in.h:71
 msgid "Interval between ping messages"
-msgstr "Intervall zwischen Ping Meldungen"
+msgstr "Intervall zwischen Ping-Meldungen"
 
 #: ../metadata/core.xml.in.h:72
 msgid "Lighting"
@@ -751,39 +739,35 @@ msgid "Number of virtual desktops"
 msgstr "Anzahl der virtuellen Desktops"
 
 #: ../metadata/core.xml.in.h:87
-#, fuzzy
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
-"Bildschirmaktualisierungen nur während Deaktivierung der vertikalen Anzeige "
+"Bildschirmaktualisierungen nur während inaktiver vertikaler Anzeige "
 "durchführen"
 
 #: ../metadata/core.xml.in.h:88
-#, fuzzy
 msgid "Opacity Step"
-msgstr "Durchlässigkeits-Schritt"
+msgstr "Schrittweite für Opazität"
 
 #: ../metadata/core.xml.in.h:89
-#, fuzzy
 msgid "Opacity change step"
-msgstr "Änderungsschritt für Durchlässigkeit"
+msgstr ""
+"Die Schrittweite für Einstellungen der Opazität/Durchsichtigkeit ändern"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
+msgstr "Wert der Opazität für grundsätzlich transluzente Fenster"
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
-msgstr ""
+msgstr "Opazitätswert"
 
 #: ../metadata/core.xml.in.h:92
-#, fuzzy
 msgid "Opacity windows"
-msgstr "Abstand zwischen Fenstern"
+msgstr "Transluzente Fenster"
 
 #: ../metadata/core.xml.in.h:93
-#, fuzzy
 msgid "Open a terminal"
-msgstr "In Terminal ausführen"
+msgstr "Einen Terminalemulator öffnen"
 
 #: ../metadata/core.xml.in.h:94
 msgid "Outputs"
@@ -870,14 +854,14 @@ msgid "Run command 9"
 msgstr "Befehl 9 ausführen"
 
 #: ../metadata/core.xml.in.h:115
-#, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Bildschirmgrößenmultiplikator für virtuelle horizontale Größe"
+msgstr ""
+"Anzahl der virtuellen Darstellungsfelder in horizontaler Richtung (z. B. 4 "
+"für einen Würfel)"
 
 #: ../metadata/core.xml.in.h:116
-#, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
-msgstr "Bildschirmgrößenmultiplikator für virtuelle vertikale Größe"
+msgstr "Anzahl der virtuellen Darstellungsfelder in vertikaler Richtung"
 
 #: ../metadata/core.xml.in.h:117
 msgid "Screenshot command line"
@@ -928,9 +912,8 @@ msgid "Texture filtering"
 msgstr "Texturfilter"
 
 #: ../metadata/core.xml.in.h:129
-#, fuzzy
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "Rate des Bildschirmneuaufbaus (Häufigkeit/Sekunde)"
+msgstr "Bildwiederholungsrate (Häufigkeit/Sekunde)"
 
 #: ../metadata/core.xml.in.h:130
 msgid "Toggle Window Maximized"
@@ -990,15 +973,15 @@ msgstr "Vertikale virtuelle Größe"
 
 #: ../metadata/core.xml.in.h:144
 msgid "Window Menu"
-msgstr "Menü Fenster"
+msgstr "Fenstermenü"
 
 #: ../metadata/core.xml.in.h:145
 msgid "Window menu button binding"
-msgstr ""
+msgstr "Maustastenkombination für Fenstermenü"
 
 #: ../metadata/core.xml.in.h:146
 msgid "Window menu key binding"
-msgstr ""
+msgstr "Tastenkombination für Fenstermenü"
 
 #: ../metadata/core.xml.in.h:147
 msgid "Window screenshot command line"
@@ -1014,11 +997,12 @@ msgstr "Beschleunigung"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr "Bild einstellen"
+msgstr "Bild ausrichten"
 
 #: ../metadata/cube.xml.in.h:3
+#, fuzzy
 msgid "Adjust top face image to rotation"
-msgstr ""
+msgstr "Würfeloberseite entsprechend der Orientierung drehen"
 
 #: ../metadata/cube.xml.in.h:4
 msgid "Advance to next slide"
@@ -1033,9 +1017,8 @@ msgid "Animate skydome when rotating cube"
 msgstr "Beim Drehen von Würfel Skydome animieren"
 
 #: ../metadata/cube.xml.in.h:7
-#, fuzzy
 msgid "Automatic"
-msgstr "Automatisch in den Vordergrund"
+msgstr "Automatisch"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background Images"
@@ -1067,12 +1050,11 @@ msgstr "Desktop-Würfel"
 
 #: ../metadata/cube.xml.in.h:15
 msgid "Desktop Window Opacity Fade Time."
-msgstr ""
+msgstr "Dauer der Fensterausblendung"
 
 #: ../metadata/cube.xml.in.h:16
-#, fuzzy
 msgid "Fade Time"
-msgstr "Wechselzeit"
+msgstr "Ausblendungszeit"
 
 #: ../metadata/cube.xml.in.h:17
 msgid "Fold Acceleration"
@@ -1104,7 +1086,7 @@ msgstr "Bild für die Struktur des Skydome"
 
 #: ../metadata/cube.xml.in.h:24
 msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr ""
+msgstr "Würfel nur transparent, wenn er mit der Maus rotiert wird"
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
@@ -1112,7 +1094,7 @@ msgstr "In Würfel"
 
 #: ../metadata/cube.xml.in.h:26
 msgid "Inside cube"
-msgstr "In Würfel"
+msgstr "Virtueller Standpunkt befindet sich innerhalb des Würfels"
 
 #: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
@@ -1122,11 +1104,11 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
-msgstr ""
+msgstr "Modus für Mehrfachausgabe"
 
 #: ../metadata/cube.xml.in.h:30
 msgid "Multiple cubes"
-msgstr "Mehrfache Würfel"
+msgstr "Mehrere Würfel"
 
 #: ../metadata/cube.xml.in.h:31
 msgid "Next Slide"
@@ -1138,28 +1120,26 @@ msgstr "Auf großem Würfel"
 
 #: ../metadata/cube.xml.in.h:33
 msgid "Opacity During Rotation"
-msgstr "Deckkraft während Rotation"
+msgstr "Opazität bei Rotation"
 
 #: ../metadata/cube.xml.in.h:34
-#, fuzzy
 msgid "Opacity When Not Rotating"
-msgstr "Deckkraft während Stillstand"
+msgstr "Opazität bei Stillstand"
 
 #: ../metadata/cube.xml.in.h:35
 msgid "Opacity of desktop window during rotation."
-msgstr "Deckkraft des Desktop-Fensters während Rotation"
+msgstr ""
+"Durchsichtigkeit des Desktop-Hintergrundes während der Rotation des Würfels"
 
 #: ../metadata/cube.xml.in.h:36
-#, fuzzy
 msgid "Opacity of desktop window when not rotating."
-msgstr "Deckkraft des Desktop-Fensters während Stillstand"
+msgstr "Durchsichtigkeit des Desktop-Hintergrundes bei Stillstand des Würfels"
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Place windows on cube"
 msgstr "Fenster auf Würfel platzieren"
 
 #: ../metadata/cube.xml.in.h:38
-#, fuzzy
 msgid "Prev Slide"
 msgstr "Vorheriges Dia"
 
@@ -1223,24 +1203,23 @@ msgstr "Würfel auffalten"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr ""
+msgstr "Dbus"
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
-msgstr ""
+msgstr "Dbus-Backend"
 
 #: ../metadata/decoration.xml.in.h:1
 msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgstr "Mipmaps für Fensterdekorations-Texturen generieren"
 
 #: ../metadata/decoration.xml.in.h:2
 msgid "Command"
 msgstr "Kommando"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "Fenster skalieren"
+msgstr "Dekoration für Fenster"
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
@@ -1251,29 +1230,27 @@ msgstr ""
 
 #: ../metadata/decoration.xml.in.h:5
 msgid "Drop shadow X offset"
-msgstr "Drop-Shadow-X-Offset"
+msgstr "X-Versatz des Schlagschattens"
 
 #: ../metadata/decoration.xml.in.h:6
 msgid "Drop shadow Y offset"
-msgstr "Drop-Shadow-Y-Offset"
+msgstr "Y-Versatz des Schlagschattens"
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "Drop-Shadow-Radius"
+msgstr "Farbe des Schlagschattens"
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
-msgstr "Drop-Shadow-Durchlässigkeit"
+msgstr "Opazität des Schlagschattens"
 
 #: ../metadata/decoration.xml.in.h:9
 msgid "Drop shadow radius"
-msgstr "Drop-Shadow-Radius"
+msgstr "Radius des Schlagschattens"
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "Fenster einrasten"
+msgstr "Schattenfarbe"
 
 #: ../metadata/decoration.xml.in.h:12
 msgid "Shadow Offset X"
@@ -1285,7 +1262,7 @@ msgstr "Schattenversatz Y"
 
 #: ../metadata/decoration.xml.in.h:14
 msgid "Shadow Opacity"
-msgstr "Schattendurchlässigkeit"
+msgstr "Schattenopazität"
 
 #: ../metadata/decoration.xml.in.h:15
 msgid "Shadow Radius"
@@ -1293,7 +1270,7 @@ msgstr "Schattenradius"
 
 #: ../metadata/decoration.xml.in.h:16
 msgid "Shadow windows"
-msgstr "Fenster schattieren"
+msgstr "Schatten für Fenster"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
@@ -1305,11 +1282,11 @@ msgstr "Fensterdekorationen"
 
 #: ../metadata/decoration.xml.in.h:19
 msgid "Windows that should be decorated"
-msgstr "Fenstertypen, die dekoriert werden sollen"
+msgstr "Fenster, die dekoriert werden sollen"
 
 #: ../metadata/decoration.xml.in.h:20
 msgid "Windows that should have a shadow"
-msgstr "Fenstertypen, die schattiert werden sollen"
+msgstr "Fenster, um die ein Schatten gezeichnet werden soll"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
@@ -1325,7 +1302,7 @@ msgstr "Ausblendeffekt bei Minimieren/Öffnen/Schliessen"
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
-msgstr "Ausblendeffekt für System-Warnton"
+msgstr "Ausblendeffekt für visuelle Glocke"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
@@ -1333,9 +1310,8 @@ msgstr ""
 "Fenster beim Zuordnen einblenden, beim Aufheben der Zuordnung ausblenden"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "Fenster ein-/ausblenden"
+msgstr "Ein-/Ausblenden für Fenster"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
@@ -1347,7 +1323,7 @@ msgstr "Visuelle Glocke in Vollbild"
 
 #: ../metadata/fade.xml.in.h:9
 msgid "Fullscreen fade effect on system beep"
-msgstr "Ausblendeffekt für System-Warnton in Vollbild"
+msgstr "Ausblendeffekt für visuelle Glocke im Vollbildmodus"
 
 #: ../metadata/fade.xml.in.h:10
 msgid "Visual Bell"
@@ -1358,43 +1334,40 @@ msgid "Window fade speed"
 msgstr "Fensterausblendgeschwindigkeit"
 
 #: ../metadata/fade.xml.in.h:12
-#, fuzzy
 msgid "Windows that should be fading"
-msgstr "Fenstertypen, die ausgeblendet werden sollen"
+msgstr "Fenster, die ein- und ausgeblendet werden sollen"
 
 #: ../metadata/fs.xml.in.h:1
-#, fuzzy
 msgid "Mount Point"
-msgstr "Punkt"
+msgstr "Einhängepunkt"
 
 #: ../metadata/fs.xml.in.h:2
-#, fuzzy
 msgid "Mount point"
-msgstr "Punkt hinzufügen"
+msgstr "„Mount point“"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
-msgstr ""
+msgstr "Benutzerbereichs-Dateisystem"
 
 #: ../metadata/fs.xml.in.h:4
 msgid "Userspace file system"
-msgstr ""
+msgstr "Benutzerbereichs-Dateisystem"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr ""
+msgstr "GConf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
-msgstr ""
+msgstr "GConf-Backend"
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr ""
+msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
-msgstr ""
+msgstr "GLib-Mainloop-Unterstützung"
 
 #: ../metadata/ini.xml.in.h:1
 #, fuzzy
@@ -1407,7 +1380,7 @@ msgstr ""
 
 #: ../metadata/inotify.xml.in.h:1
 msgid "File change notification plugin"
-msgstr ""
+msgstr "Überwachung von Änderungen an Dateien"
 
 #: ../metadata/inotify.xml.in.h:2
 #, fuzzy
@@ -1416,19 +1389,19 @@ msgstr "Nicht ändern"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr ""
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
-msgstr ""
+msgstr "Kconfig-Backend"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
-msgstr "Effekt minimieren"
+msgstr "Minimierungseffekt"
 
 #: ../metadata/minimize.xml.in.h:2
 msgid "Minimize Windows"
-msgstr "Fenster minimieren"
+msgstr "Minimierungseffekt für Fenster"
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
@@ -1448,12 +1421,11 @@ msgstr "Schattenwiderstand"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr "Fenster beim Minimieren und beim Aufheben der Minimierung umformen"
+msgstr "Fenster beim Minimieren und beim Aufheben der Minimierung verformen"
 
 #: ../metadata/minimize.xml.in.h:10
-#, fuzzy
 msgid "Windows that should be transformed when minimized"
-msgstr "Fenstertypen, die beim Minimieren umgeformt werden sollen"
+msgstr "Fenster, die beim Minimieren verformt werden sollen"
 
 #: ../metadata/move.xml.in.h:1
 msgid "Constrain Y"
@@ -1466,15 +1438,16 @@ msgstr "Y-Koordinate auf Arbeitsoberfläche einschränken"
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
+"Serverseitige Fensterposition bis zum Ende des Verschiebevorgangs nicht "
+"aktualisieren"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
 msgstr "Fensterverschiebung initiieren"
 
 #: ../metadata/move.xml.in.h:5
-#, fuzzy
 msgid "Lazy Positioning"
-msgstr "Minimierte Fenster anzeigen"
+msgstr "Ökonomisch positionieren"
 
 #: ../metadata/move.xml.in.h:6
 msgid "Move Window"
@@ -1487,11 +1460,11 @@ msgstr "Fenster verschieben"
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
 #: ../metadata/switcher.xml.in.h:17
 msgid "Opacity"
-msgstr "Durchlässigkeit"
+msgstr "Opazität"
 
 #: ../metadata/move.xml.in.h:9
 msgid "Opacity level of moving windows"
-msgstr "Durchlässigkeitsgrad beweglicher Fenster"
+msgstr "Durchsichtigkeit der Fenster beim Verschieben"
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
@@ -1507,15 +1480,15 @@ msgstr "Fensterverschiebung starten"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "Algorithmus für die Fensterpositionierung"
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
-msgstr ""
+msgstr "Kaskadenförmig"
 
 #: ../metadata/place.xml.in.h:3
 msgid "Centered"
-msgstr ""
+msgstr "Zentriert"
 
 #: ../metadata/place.xml.in.h:4
 #, fuzzy
