@@ -1014,6 +1014,8 @@ svgInit (CompPlugin *p)
 	return FALSE;
     }
 
+    rsvg_init ();
+
     compAddMetadataFromFile (&svgMetadata, p->vTable->name);
 
     return TRUE;
@@ -1024,6 +1026,8 @@ svgFini (CompPlugin *p)
 {
     freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&svgMetadata);
+
+    rsvg_term ();
 }
 
 static CompMetadata *
