@@ -589,7 +589,7 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 	else
 	    break;
 
-	if (client->handleConfigure ())
+	if (client->handleConfigure (QSize (xce->width, xce->height)))
 	{
 	    if (!mIdleTimer.isActive ())
 		mIdleTimer.start (0, TRUE);

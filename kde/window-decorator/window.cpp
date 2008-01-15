@@ -1144,15 +1144,18 @@ KWD::Window::resizeDecoration (bool force)
 	mPicture = 0;
     }
 
+    if (w != width() || h != height())
+    {
+	mPendingConfigure = 1;
+    }
+
     setGeometry (QRect (mGeometry.x () + ROOT_OFF_X - mBorder.left,
 			mGeometry.y () + ROOT_OFF_Y - mBorder.top,
 			w, h));
 
-    if (mMapped)
-    {
-	mPendingConfigure++;
-    }
-    else
+    mSize = QSize (w, h);
+
+    if (!mMapped)
     {
 	mPendingMap = 1;
 
@@ -1219,12 +1222,15 @@ KWD::Window::handleMap (void)
 }
 
 bool
-KWD::Window::handleConfigure (void)
+KWD::Window::handleConfigure (QSize size)
 {
     if (!mPendingConfigure)
 	return FALSE;
 
-    mPendingConfigure--;
+    if (size != mSize)
+	return FALSE;
+
+    mPendingConfigure = 0;
     if (mPendingConfigure || mPendingMap)
 	return FALSE;
 

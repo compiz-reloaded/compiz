@@ -156,7 +156,7 @@ class Window:public QWidget, public KDecorationBridge {
 	    mDamage += QRegion (x, y, w, h);
 	}
 	bool handleMap (void);
-	bool handleConfigure (void);
+	bool handleConfigure (QSize size);
 	void processDamage (void);
 	decor_context_t *context (void)
 	{
@@ -235,6 +235,7 @@ class Window:public QWidget, public KDecorationBridge {
 	bool mMapped;
 	int mPendingMap;
 	int mPendingConfigure;
+	QSize mSize;
 	KProcess *mProcessKiller;
     };
 }
