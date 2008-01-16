@@ -4468,13 +4468,13 @@ hideWindow (CompWindow *w)
 
     w->pendingUnmaps++;
 
-    if (w->shaded && w->id == w->screen->display->activeWindow)
-	moveInputFocusToWindow (w);
-
     XUnmapWindow (w->screen->display->display, w->id);
 
     if (w->minimized || w->inShowDesktopMode || w->hidden || w->shaded)
 	changeWindowState (w, w->state | CompWindowStateHiddenMask);
+
+    if (w->shaded && w->id == w->screen->display->activeWindow)
+	moveInputFocusToWindow (w);
 }
 
 void
