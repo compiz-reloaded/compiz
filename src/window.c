@@ -727,10 +727,12 @@ recalcWindowActions (CompWindow *w)
     case CompWindowTypeDialogMask:
     case CompWindowTypeModalDialogMask:
 	actions =
-	    CompWindowActionMoveMask   |
-	    CompWindowActionResizeMask |
-	    CompWindowActionStickMask  |
-	    CompWindowActionCloseMask  |
+	    CompWindowActionMaximizeHorzMask |
+	    CompWindowActionMaximizeVertMask |
+	    CompWindowActionMoveMask         |
+	    CompWindowActionResizeMask       |
+	    CompWindowActionStickMask        |
+	    CompWindowActionCloseMask        |
 	    CompWindowActionChangeDesktopMask;
     default:
 	break;
