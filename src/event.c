@@ -1768,7 +1768,7 @@ handleEvent (CompDisplay *d,
 	else if (event->xclient.message_type == d->wmChangeStateAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xclient.window);
-	    if (w && w->type & CompWindowTypeNormalMask)
+	    if (w)
 	    {
 		if (event->xclient.data.l[0] == IconicState)
 		    minimizeWindow (w);

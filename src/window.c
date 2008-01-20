@@ -734,6 +734,9 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionStickMask        |
 	    CompWindowActionCloseMask        |
 	    CompWindowActionChangeDesktopMask;
+
+	if (!w->transientFor)
+	    actions |= CompWindowActionMinimizeMask;
     default:
 	break;
     }
