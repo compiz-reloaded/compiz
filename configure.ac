@@ -484,6 +484,66 @@ AC_SUBST(QT_MOC)
 AC_SUBST(DCOPIDL)
 AC_SUBST(DCOPIDL2CPP)
 
+AC_ARG_ENABLE(kde4,
+  [  --disable-kde4          Disable kde4 window decorator],
+  [use_kde4=$enableval], [use_kde4=yes])
+
+if test "x$use_kde4" = "xyes"; then
+  
+  kde4dir=`kde4-config --prefix --expandvars 2>/dev/null`
+  kde4libs=`kde4-config --install lib --expandvars 2>/dev/null`
+  kde4incs=`kde4-config --install include --expandvars 2>/dev/null`
+
+  kde4_test_includes="kdecoration_plugins_p.h kdecoration_p.h kdecoration.h kcommondecoration.h"
+
+  dnl Check for KWin headers
+  AC_MSG_CHECKING([for KWin headers])
+
+  kde4_notfound=""
+  for file in $kde4_test_includes ; do
+    status=" $file"
+    for it in $kde4incs ; do
+      if test -r "$it/$file" ; then
+        status=""
+        break;
+      fi
+    done
+    kde4_notfound="$kde4_notfound$status"
+  done
+  if test -z "$kde4_notfound" ; then
+      kde4_notfound="yes"
+  else
+      kde4_notfound="$kde4_notfound not found"
+      kde4libs=""
+  fi
+
+  AC_MSG_RESULT([$kde4_notfound])
+
+  if test -d $kde4libs; then
+    PKG_CHECK_MODULES(KDE4_WINDOW_DECORATOR,
+		      dbus-1 xdamage xcomposite QtCore >= 4.0.0 QtGui QtDBus,
+			[use_kde4=yes], [use_kde4=no])
+
+    KDE4_CFLAGS="-I$kde4incs"
+    KDE4_LIBS="-L$kde4libs -lkdecore -lkdecorations"
+
+    QT4_MOC=`pkg-config QtGui --variable=moc_location`
+    QDBUSXML2CPP=`pkg-config QtGui --variable=exec_prefix`"/bin/qdbusxml2cpp"
+  else
+    use_kde=no;
+  fi
+fi
+
+AM_CONDITIONAL(USE_KDE4, test "x$use_kde4" = "xyes")
+if test "$use_kde4" = yes; then
+  AC_DEFINE(USE_KDE4, 1, [Build kde4 window decorator])
+fi
+
+AC_SUBST(KDE4_CFLAGS)
+AC_SUBST(KDE4_LIBS)
+AC_SUBST(QT4_MOC)
+AC_SUBST(QDBUSXML2CPP)
+
 AC_ARG_ENABLE(kconfig,
   [  --disable-kconfig       Disable kconfig plugin],
   [use_kconfig=$enableval], [use_kconfig=yes])
@@ -577,6 +637,7 @@ gtk/window-decorator/Makefile
 gtk/gnome/Makefile
 kde/Makefile
 kde/window-decorator/Makefile
+kde/window-decorator-kde4/Makefile
 po/Makefile.in
 metadata/Makefile
 ])
@@ -598,4 +659,5 @@ echo "  gtk:      $use_gtk"
 echo "  metacity: $use_metacity"
 echo "  gnome:    $use_gnome"
 echo "  kde:      $use_kde"
+echo "  kde4:     $use_kde4"
 echo ""
