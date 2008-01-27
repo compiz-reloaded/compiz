@@ -494,7 +494,7 @@ if test "x$use_kde4" = "xyes"; then
   kde4libs=`kde4-config --install lib --expandvars 2>/dev/null`
   kde4incs=`kde4-config --install include --expandvars 2>/dev/null`
 
-  kde4_test_includes="kdecoration_plugins_p.h kdecoration_p.h kdecoration.h kcommondecoration.h"
+  kde4_test_includes="kdecoration.h kcommondecoration.h kdecorationbridge.h"
 
   dnl Check for KWin headers
   AC_MSG_CHECKING([for KWin headers])
