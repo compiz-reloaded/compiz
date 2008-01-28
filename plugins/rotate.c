@@ -515,7 +515,9 @@ rotateDonePaintScreen (CompScreen *s)
     {
 	if ((!rs->grabbed && !rs->snapTop && !rs->snapBottom) ||
 	    rs->xVelocity || rs->yVelocity)
+	{
 	    damageScreen (s);
+	}
     }
 
     if (rs->zoomTranslate > 0.0f &&
