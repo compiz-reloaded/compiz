@@ -97,10 +97,11 @@ typedef struct _RotateDisplay {
 #define ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY 1
 #define ROTATE_SCREEN_OPTION_ACCELERATION        2
 #define ROTATE_SCREEN_OPTION_SNAP_TOP		 3
-#define ROTATE_SCREEN_OPTION_SPEED		 4
-#define ROTATE_SCREEN_OPTION_TIMESTEP		 5
-#define ROTATE_SCREEN_OPTION_ZOOM		 6
-#define ROTATE_SCREEN_OPTION_NUM		 7
+#define ROTATE_SCREEN_OPTION_SNAP_BOTTOM	 4
+#define ROTATE_SCREEN_OPTION_SPEED		 5
+#define ROTATE_SCREEN_OPTION_TIMESTEP		 6
+#define ROTATE_SCREEN_OPTION_ZOOM		 7
+#define ROTATE_SCREEN_OPTION_NUM		 8
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -117,6 +118,7 @@ typedef struct _RotateScreen {
     float pointerSensitivity;
 
     Bool snapTop;
+    Bool snapBottom;
 
     int grabIndex;
 
@@ -201,7 +203,8 @@ rotateSetScreenOption (CompPlugin      *plugin,
 
 static int
 adjustVelocity (RotateScreen *rs,
-		int	     size)
+		int	     size,
+		int	     invert)
 {
     float xrot, yrot, adjust, amount;
 
@@ -230,10 +233,17 @@ adjustVelocity (RotateScreen *rs,
 
     rs->xVelocity = (amount * rs->xVelocity + adjust) / (amount + 2.0f);
 
-    if (rs->snapTop && rs->yrot > 50.0f)
-	yrot = -(90.f - rs->yrot);
-    else
-	yrot = rs->yrot;
+    yrot = rs->yrot;
+    /* Only snap if more than 2 viewports */
+    if (size > 2)
+    {
+	if (rs->yrot > 50.0f && ((rs->snapTop && invert == 1) ||
+				 (rs->snapBottom && invert != 1)))
+	    yrot -= 90.f;
+	else if (rs->yrot < -50.0f && ((rs->snapTop && invert != 1) ||
+				       (rs->snapBottom && invert == 1)))
+	    yrot += 90.f;
+    }
 
     adjust = -yrot * 0.05f * rs->opt[ROTATE_SCREEN_OPTION_ACCELERATION].value.f;
     amount = fabs (rs->yrot);
@@ -336,7 +346,7 @@ rotatePreparePaintScreen (CompScreen *s,
 		if (fabs (rs->yVelocity) < 0.01f)
 		    rs->yVelocity = 0.0f;
 	    }
-	    else if (adjustVelocity (rs, s->hsize))
+	    else if (adjustVelocity (rs, s->hsize, cs->invert))
 	    {
 		rs->xVelocity = 0.0f;
 		rs->yVelocity = 0.0f;
@@ -503,8 +513,11 @@ rotateDonePaintScreen (CompScreen *s)
 
     if (rs->grabIndex || rs->moving)
     {
-	if ((!rs->grabbed && !rs->snapTop) || rs->xVelocity || rs->yVelocity)
+	if ((!rs->grabbed && !rs->snapTop && !rs->snapBottom) ||
+	    rs->xVelocity || rs->yVelocity)
+	{
 	    damageScreen (s);
+	}
     }
 
     if (rs->zoomTranslate > 0.0f &&
@@ -651,6 +664,7 @@ rotateInitiate (CompDisplay     *d,
 
 	    rs->grabbed = TRUE;
 	    rs->snapTop = rs->opt[ROTATE_SCREEN_OPTION_SNAP_TOP].value.b;
+	    rs->snapBottom = rs->opt[ROTATE_SCREEN_OPTION_SNAP_BOTTOM].value.b;
 
 	    if (state & CompActionStateInitButton)
 		action->state |= CompActionStateTermButton;
@@ -685,7 +699,10 @@ rotateTerminate (CompDisplay     *d,
 	if (rs->grabIndex)
 	{
 	    if (!xid)
+	    {
 		rs->snapTop = FALSE;
+		rs->snapBottom = FALSE;
+	    }
 
 	    rs->grabbed = FALSE;
 	    damageScreen (s);
@@ -1790,6 +1807,7 @@ static const CompMetadataOptionInfo rotateScreenOptionInfo[] = {
     { "sensitivity", "float", 0, 0, 0 },
     { "acceleration", "float", "<min>1.0</min>", 0, 0 },
     { "snap_top", "bool", 0, 0, 0 },
+    { "snap_bottom", "bool", 0, 0, 0 },
     { "speed", "float", "<min>0.1</min>", 0, 0 },
     { "timestep", "float", "<min>0.1</min>", 0, 0 },
     { "zoom", "float", 0, 0, 0 }
@@ -1835,8 +1853,9 @@ rotateInitScreen (CompPlugin *p,
     rs->savedPointer.x = 0;
     rs->savedPointer.y = 0;
 
-    rs->grabbed = FALSE;
-    rs->snapTop = FALSE;
+    rs->grabbed	   = FALSE;
+    rs->snapTop	   = FALSE;
+    rs->snapBottom = FALSE;
 
     rs->slow       = FALSE;
     rs->grabMask   = FALSE;
