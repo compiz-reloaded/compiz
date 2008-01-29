@@ -1,19 +1,17 @@
-# translation of po_compiz-hu.po to Hungarian
-# translation of compiz.po to
-# translation of hu.po to
-# translation of compiz.hu.po to
+# translation of compiz.po to Hungarian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
 # Kalman Kemenczy <kkemenczy@novell.com>, 2006, 2007.
 # Gabor Kelemen <kelemeng@gnome.hu>, 2007.
+# KAMI911 <kami911@gmail.com>, 2007-2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: po_compiz-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:25+0530\n"
-"PO-Revision-Date: 2007-12-17 13:17+0100\n"
-"Last-Translator: KAMI <kamihir@freemail.hu>\n"
+"POT-Creation-Date: 2008-01-29 17:30+0530\n"
+"PO-Revision-Date: 2008-01-16 12:26+0100\n"
+"Last-Translator: KAMI911 <kami911@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -816,7 +814,7 @@ msgstr "Lassú animációk"
 
 #: ../metadata/core.xml.in.h:123
 msgid "Sync To VBlank"
-msgstr "Szinkronizálás VBlank-ra"
+msgstr "Szinkronizálás VBlank jelre"
 
 #: ../metadata/core.xml.in.h:124
 msgid "Take a screenshot"
@@ -1100,13 +1098,13 @@ msgid "Skydome Image"
 msgstr "Kupola képe"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Sebesség"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Időköz"
@@ -1220,7 +1218,7 @@ msgstr "Elhalványulás sebessége"
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
-"Ablakelhalványítási effekt alkalmazása minimalizáláskor, megnyitáskor és "
+"Ablakelhalványítási effektus alkalmazása minimalizáláskor, megnyitáskor és "
 "bezáráskor"
 
 #: ../metadata/fade.xml.in.h:4
@@ -2094,22 +2092,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "Mutatómozgatás érzékenysége"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "Hirtelen kockaforgatás a felső oldalra"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Hirtelen kockaforgatás a felső oldalra"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "Felső oldalhoz ugrás"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Felső oldalhoz ugrás"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "Forgatás indítása"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "A nézőpont váltása előtti időkorlát"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Nagyítás"
 

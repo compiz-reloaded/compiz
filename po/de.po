@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:25+0530\n"
-"PO-Revision-Date: 2008-01-05 11:56+0100\n"
-"Last-Translator: david luttropp <david@linuxreaktor.de>\n"
+"POT-Creation-Date: 2008-01-29 17:29+0530\n"
+"PO-Revision-Date: 2008-01-11 10:18+0100\n"
+"Last-Translator: Danny Baumann <dannybaumann@web.de>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,6 @@ msgid "Desktop"
 msgstr "Desktop"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
 msgid "Window Management"
 msgstr "Fensterverwaltung"
 
@@ -38,7 +37,6 @@ msgstr ""
 "betätigt wird."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
 msgid "Blur type"
 msgstr "Unschärfetyp"
 
@@ -88,12 +86,10 @@ msgstr ""
 "durchsichtig"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
-#, fuzzy
 msgid "Title bar mouse wheel action"
 msgstr "Mausrad-auf-Titelleiste-Aktion"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
-#, fuzzy
 msgid "Type of blur used for window decorations"
 msgstr "Ünschärfetyp für Fensterdekoration"
 
@@ -118,7 +114,6 @@ msgid "Annotate Stroke Color"
 msgstr "Kommentar Rahmenfarbe"
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
 msgstr "Bildschirmnotiz-Plugin"
 
@@ -165,19 +160,16 @@ msgid "Line width for annotations"
 msgstr "Linienstärke für Notizen"
 
 #: ../metadata/annotate.xml.in.h:15
-#, fuzzy
 msgid "Stroke color for annotations"
 msgstr "Strichfarbe für Notizen"
 
 #: ../metadata/annotate.xml.in.h:16
-#, fuzzy
 msgid "Stroke width"
-msgstr "Strichstärke"
+msgstr "Strichbreite"
 
 #: ../metadata/annotate.xml.in.h:17
-#, fuzzy
 msgid "Stroke width for annotations"
-msgstr "Strichstärke für Notizen"
+msgstr "Strichbreite für Notizen"
 
 #: ../metadata/blur.xml.in.h:1
 msgid "4xBilinear"
@@ -196,7 +188,6 @@ msgid "Blur Filter"
 msgstr "Unschärfefilter"
 
 #: ../metadata/blur.xml.in.h:5
-#, fuzzy
 msgid "Blur Occlusion"
 msgstr "Unschärfe für verdeckte Bereiche"
 
@@ -229,7 +220,6 @@ msgid "Blur windows that doesn't have focus"
 msgstr "Unschärfe für Fenster im Hintergrund"
 
 #: ../metadata/blur.xml.in.h:13
-#, fuzzy
 msgid "Disable blurring of screen regions obscured by other windows."
 msgstr "Unschärfe für verdeckte Bildbereiche ausschalten"
 
@@ -279,17 +269,14 @@ msgid "Mipmap level-of-detail"
 msgstr "Mipmap-Detailniveau"
 
 #: ../metadata/blur.xml.in.h:25
-#, fuzzy
 msgid "Pulse"
 msgstr "Pulsieren"
 
 #: ../metadata/blur.xml.in.h:26
-#, fuzzy
 msgid "Pulse effect"
 msgstr "Puls-Effekt"
 
 #: ../metadata/blur.xml.in.h:27
-#, fuzzy
 msgid "Window blur speed"
 msgstr "Geschwindigkeit des Unschärfeeffekts"
 
@@ -310,9 +297,8 @@ msgid "Initiate clone selection"
 msgstr "Auswahl klonen initiieren"
 
 #: ../metadata/clone.xml.in.h:4
-#, fuzzy
 msgid "Output clone handler"
-msgstr "Eine Bilsschirmausgabe klonen"
+msgstr "Bildschirmausgabe klonen"
 
 #: ../metadata/core.xml.in.h:1
 msgid ""
@@ -612,15 +598,16 @@ msgstr "Aktualisierungsrate erkennen"
 msgid "Fast"
 msgstr "Schnell"
 
+# Sinnvoller Ersatz für "Focus Stealing Prevention"?
 #: ../metadata/core.xml.in.h:57
-#, fuzzy
 msgid "Focus Prevention Windows"
-msgstr "Fokus verwalten für Fenster"
+msgstr "Fenster mit \"Focus Stealing Prevention\""
 
 #: ../metadata/core.xml.in.h:58
-#, fuzzy
 msgid "Focus prevention windows"
-msgstr "Für diese Fenster die „focus stealing prevention“ verwenden"
+msgstr ""
+"Auswahl an Fenstern, die beim Öffnen nicht automatisch Fokus bekommen, falls "
+"zu diesem Zeitpunkt mit anderen Fenstern gearbeitet wird."
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
@@ -1000,7 +987,6 @@ msgid "Adjust Image"
 msgstr "Bild ausrichten"
 
 #: ../metadata/cube.xml.in.h:3
-#, fuzzy
 msgid "Adjust top face image to rotation"
 msgstr "Würfeloberseite entsprechend der Orientierung drehen"
 
@@ -1178,20 +1164,20 @@ msgid "Skydome Image"
 msgstr "Skydome-Bild"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Geschwindigkeit"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Zeitintervall"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparency Only on Mouse Rotate"
-msgstr ""
+msgstr "Transparenz nur bei Maus-Rotation"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1370,22 +1356,20 @@ msgid "GLib main loop support"
 msgstr "GLib-Mainloop-Unterstützung"
 
 #: ../metadata/ini.xml.in.h:1
-#, fuzzy
 msgid "Ini"
-msgstr "Nicht ändern"
+msgstr "Ini"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
-msgstr ""
+msgstr "Backend, das einfache Text-Konfigurationsdateien verwendet"
 
 #: ../metadata/inotify.xml.in.h:1
 msgid "File change notification plugin"
 msgstr "Überwachung von Änderungen an Dateien"
 
 #: ../metadata/inotify.xml.in.h:2
-#, fuzzy
 msgid "Inotify"
-msgstr "Nicht ändern"
+msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
@@ -1491,9 +1475,8 @@ msgid "Centered"
 msgstr "Zentriert"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Horizontal viewport positions"
-msgstr "Horizontale virtuelle Größe"
+msgstr "Horizontale Viewport-Position"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Maximize"
@@ -1516,69 +1499,61 @@ msgid "Positioned windows"
 msgstr "Positionierte Fenster"
 
 #: ../metadata/place.xml.in.h:10
-#, fuzzy
 msgid "Random"
-msgstr "Zufall"
+msgstr "Zufällig"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Smart"
-msgstr ""
+msgstr "Intelligent"
 
 #: ../metadata/place.xml.in.h:12
-#, fuzzy
 msgid "Vertical viewport positions"
-msgstr "Horizontale virtuelle Größe"
+msgstr "Vertikale Viewport-Position"
 
 #: ../metadata/place.xml.in.h:13
-#, fuzzy
 msgid "Viewport positioned windows"
-msgstr "Minimierte Fenster anzeigen"
+msgstr "Auf Viewport platzierte Fenster"
 
 #: ../metadata/place.xml.in.h:14
 msgid "Window placement workarounds"
 msgstr "Fensterplatzierungs-Workarounds"
 
 #: ../metadata/place.xml.in.h:15
-#, fuzzy
 msgid "Windows that should be positioned by default"
-msgstr "Fenstertypen, die ausgeblendet werden sollen"
+msgstr "Fenstertypen, die an eine bestimmte Position platziert werden sollen"
 
 #: ../metadata/place.xml.in.h:16
-#, fuzzy
 msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Fenstertypen, die im Skaliermodus skaliert werden sollen"
+msgstr ""
+"Fenstertypen, die auf einen bestimmten Viewport platziert werden sollen"
 
 #: ../metadata/place.xml.in.h:17
 msgid "Workarounds"
 msgstr "Workarounds"
 
 #: ../metadata/place.xml.in.h:18
-#, fuzzy
 msgid "X Positions"
-msgstr "Minimierte Fenster anzeigen"
+msgstr "X-Position"
 
 #: ../metadata/place.xml.in.h:19
-#, fuzzy
 msgid "X Viewport Positions"
-msgstr "Horizontale virtuelle Größe"
+msgstr "Viewport-X-Position"
 
 #: ../metadata/place.xml.in.h:20
 msgid "X position values"
-msgstr ""
+msgstr "Horizontale Position"
 
 #: ../metadata/place.xml.in.h:21
-#, fuzzy
 msgid "Y Positions"
-msgstr "Minimierte Fenster anzeigen"
+msgstr "Y-Position"
 
 #: ../metadata/place.xml.in.h:22
-#, fuzzy
 msgid "Y Viewport Positions"
-msgstr "Horizontale virtuelle Größe"
+msgstr "Viewport-Y-Position"
 
 #: ../metadata/place.xml.in.h:23
 msgid "Y position values"
-msgstr ""
+msgstr "Vertikale Position"
 
 #: ../metadata/plane.xml.in.h:1
 #, fuzzy
@@ -2252,22 +2227,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "Empfindlichkeit bei Zeigerbewegung"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "Würfeldrehung an Oberseite einrasten"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Würfeldrehung an Oberseite einrasten"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "An Oberseite einrasten"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "An Oberseite einrasten"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "Drehung starten"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "Zeitüberschreitung vor Viewport-Wechsel"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -2755,7 +2740,7 @@ msgstr "Einrasten von Fenstern ein/aus"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
-msgstr "Spring-Modell für Fenster-Wackeleffekt verwenden"
+msgstr "Federmodell für Fenster-Wackeleffekt verwenden"
 
 #: ../metadata/wobbly.xml.in.h:25
 msgid "Vertex Grid Resolution"

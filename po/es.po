@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:25+0530\n"
-"PO-Revision-Date: 2007-12-21 15:59+0100\n"
-"Last-Translator: Leonard Camacho <leonard.camacho@gmail.com>\n"
+"POT-Creation-Date: 2008-01-29 17:29+0530\n"
+"PO-Revision-Date: 2008-01-28 01:39+0100\n"
+"Last-Translator: Luciano Bordón <lucianobordon@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr "Menú de ventanas"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -50,7 +50,7 @@ msgstr "Maximiza la ventana activa horizontalmente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "Opacidad del tema de Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
@@ -85,11 +85,12 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Usar tema de Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
+#, fuzzy
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Usar tema de Metacity al dibujar la decoración de ventanas"
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
@@ -151,8 +152,9 @@ msgid "Line width"
 msgstr "Ancho de linea"
 
 #: ../metadata/annotate.xml.in.h:14
+#, fuzzy
 msgid "Line width for annotations"
-msgstr ""
+msgstr "Ancho de linea para anotaciones"
 
 #: ../metadata/annotate.xml.in.h:15
 msgid "Stroke color for annotations"
@@ -626,7 +628,7 @@ msgstr "Opciones Generales"
 
 #: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
-msgstr ""
+msgstr "Opciones generales de Compiz"
 
 #: ../metadata/core.xml.in.h:61
 msgid "Good"
@@ -756,6 +758,7 @@ msgstr "Paso de cambio de opacidad"
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"
 msgstr ""
+"Valores de opacidad para ventanas que deberían ser translúcidas por defecto"
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
@@ -1043,6 +1046,7 @@ msgstr ""
 "atrás de la cúpula"
 
 #: ../metadata/cube.xml.in.h:12
+#, fuzzy
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
 "Color utilizado para la parada de color superior del degradado de vuelta "
@@ -1188,13 +1192,13 @@ msgid "Skydome Image"
 msgstr "Imagen de cúpula"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Velocidad"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "PAso"
@@ -2271,22 +2275,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "Sensibilidad de movimiento del puntero"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "Solapa el giro del cubo hacia la cara superior"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Solapa el giro del cubo hacia la cara superior"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "Solapar hacia la cara superior"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Solapar hacia la cara superior"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "Iniciar giro"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "Tiempo límite antes de invertir viewport"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Ampliar/reducir"
 

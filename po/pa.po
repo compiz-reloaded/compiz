@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:26+0530\n"
+"POT-Creation-Date: 2008-01-29 17:31+0530\n"
 "PO-Revision-Date: 2007-12-15 09:26+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@users.sf.net>\n"
 "Language-Team: American English <punjabi-users@llist.sf.net>\n"
@@ -1209,14 +1209,14 @@ msgid "Skydome Image"
 msgstr "ਸਕਾਈਡੋਮ ਚਿੱਤਰ"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "ਚੁਣੇ"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
@@ -2375,23 +2375,33 @@ msgid "Sensitivity of pointer movement"
 msgstr "ਪੁਆਇੰਟਰ ਚਾਲ ਲਈ ਸੰਵੇਦਨਸ਼ੀਲਤਾ"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "ਘਣ ਘੁੰਮਾਉਣ ਟਾਪ ਫੇਸ ਲਈ ਸਨੈਪ"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "ਘਣ ਘੁੰਮਾਉਣ ਟਾਪ ਫੇਸ ਲਈ ਸਨੈਪ"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "ਟਾਪ ਫੇਸ ਲਈ ਸਨੈਪ"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "ਟਾਪ ਫੇਸ ਲਈ ਸਨੈਪ"
+
+#: ../metadata/rotate.xml.in.h:91
 #, fuzzy
 msgid "Start Rotation"
 msgstr "ਖੋਜ ਸ਼ੁਰੂ"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "ਫਲਿਪਿਗ ਵੇਖਣ-ਪੋਰਟ ਤੋਂ ਪਹਿਲਾਂ ਟਾਈਮਆਉਟ"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 #, fuzzy
 msgid "Zoom"
 msgstr "ਲਾਗਆਉਟ"
