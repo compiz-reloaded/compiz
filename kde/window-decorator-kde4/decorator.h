@@ -34,13 +34,12 @@
 
 #include <fixx11h.h>
 #include <KDE/KConfig>
-#include <kdecoration_plugins_p.h>
-#include <kdecoration_p.h>
 #include <netwm.h>
 
 #include <decoration.h>
 
 #include "window.h"
+#include "kdecoration_plugins.h"
 
 #define ROOT_OFF_X 8192
 #define ROOT_OFF_Y 8192

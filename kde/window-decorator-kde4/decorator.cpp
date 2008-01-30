@@ -82,7 +82,7 @@ struct _cursor cursors[3][3] = {
 };
 
 KWD::PluginManager::PluginManager (KSharedConfigPtr config):
-    KDecorationPlugins (config)
+    KWD::KDecorationPlugins (config)
 {
     defaultPlugin = (QPixmap::defaultDepth() > 8) ?
             "kwin3_oxygen" : "kwin3_plastik";

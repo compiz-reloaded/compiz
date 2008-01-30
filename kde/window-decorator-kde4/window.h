@@ -24,7 +24,7 @@
 #ifndef _WINDOW_H
 #define _WINDOW_H
 
-#include <kdecoration_p.h>
+#include <kdecorationbridge.h>
 #include <KDE/KActionCollection>
 
 #include <qpixmap.h>

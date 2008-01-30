@@ -25,11 +25,10 @@
 
 #include <KDE/KConfig>
 #include <KDE/KConfigGroup>
-#include <kdecoration_p.h>
+#include <kdecoration.h>
 
 KWD::Options::Options (KConfig *config): KDecorationOptions (), mConfig (config)
 {
-    d = new KDecorationOptionsPrivate;
     updateSettings ();
 }
 
@@ -39,21 +38,21 @@ KWD::Options::updateSettings (void)
     unsigned long changed = 0;
     KConfigGroup config = mConfig->group("Windows");
 
-    changed |= d->updateKWinSettings (mConfig);
+    changed |= KDecorationOptions::updateSettings (mConfig);
 
     OpTitlebarDblClick =
 	windowOperation (config.readEntry ("TitlebarDoubleClickCommand",
 					     "Shade"), true);
-    d->OpMaxButtonLeftClick =
-      windowOperation (config.readEntry ("MaximizeButtonLeftClickCommand",
-					   "Maximize"), true);
-    d->OpMaxButtonMiddleClick =
+    setOpMaxButtonLeftClick (
+	windowOperation (config.readEntry ("MaximizeButtonLeftClickCommand",
+					   "Maximize"), true));
+    setOpMaxButtonMiddleClick (
 	windowOperation (config.readEntry ("MaximizeButtonMiddleClickCommand",
-					     "Maximize (vertical only)"), true);
-    d->OpMaxButtonRightClick =
+					   "Maximize (vertical only)"), true));
+    setOpMaxButtonRightClick (
 	windowOperation (config.readEntry ("MaximizeButtonRightClickCommand",
-					     "Maximize (horizontal only)"),
-			 true);
+					   "Maximize (horizontal only)"),
+			 true));
 
     config = mConfig->group("MouseBindings");
 

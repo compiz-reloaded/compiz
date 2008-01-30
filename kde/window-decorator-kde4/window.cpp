@@ -382,7 +382,7 @@ KWD::Window::showWindowMenu (const QPoint &pos)
         if (kaction != 0)
             mKeepAboveOpAction->setShortcut (kaction->globalShortcut ().primary ());
         mKeepAboveOpAction->setCheckable (true);
-        mKeepAboveOpAction->setData (Options::KeepAboveOp);
+        mKeepAboveOpAction->setData (KDecorationDefines::KeepAboveOp);
 
         mKeepBelowOpAction = mAdvancedMenu->addAction (i18n ("Keep &Below Others"));
         mKeepBelowOpAction->setIcon (KIcon ("go-down"));
@@ -391,7 +391,7 @@ KWD::Window::showWindowMenu (const QPoint &pos)
         if (kaction != 0)
             mKeepBelowOpAction->setShortcut (kaction->globalShortcut ().primary ());
         mKeepBelowOpAction->setCheckable (true);
-        mKeepBelowOpAction->setData (Options::KeepBelowOp);
+        mKeepBelowOpAction->setData (KDecorationDefines::KeepBelowOp);
 
         mFullScreenOpAction = mAdvancedMenu->addAction (i18n ("&Fullscreen"));
         mFullScreenOpAction->setIcon (KIcon ("view-fullscreen"));
@@ -399,7 +399,7 @@ KWD::Window::showWindowMenu (const QPoint &pos)
         if (kaction != 0)
             mFullScreenOpAction->setShortcut (kaction->globalShortcut ().primary ());
         mFullScreenOpAction->setCheckable (true);
-        mFullScreenOpAction->setData (Options::FullScreenOp);
+        mFullScreenOpAction->setData (KDecorationDefines::FullScreenOp);
 
 	action = mPopup->addMenu (mAdvancedMenu);
 	action->setText (i18n ("Ad&vanced"));
@@ -436,33 +436,33 @@ KWD::Window::showWindowMenu (const QPoint &pos)
         kaction = qobject_cast<KAction*> (mKeys.action ("Window Move"));
         if (kaction != 0)
             mMoveOpAction->setShortcut (kaction->globalShortcut ().primary ());
-        mMoveOpAction->setData (Options::MoveOp);
+        mMoveOpAction->setData (KDecorationDefines::MoveOp);
 
         mResizeOpAction = mPopup->addAction (i18n ("Re&size"));
         kaction = qobject_cast<KAction*> (mKeys.action("Window Resize"));
         if (kaction != 0)
             mResizeOpAction->setShortcut (kaction->globalShortcut ().primary ());
-        mResizeOpAction->setData (Options::ResizeOp);
+        mResizeOpAction->setData (KDecorationDefines::ResizeOp);
 
         mMinimizeOpAction = mPopup->addAction (i18n ("Mi&nimize"));
         kaction = qobject_cast<KAction*> (mKeys.action ("Window Minimize"));
         if (kaction != 0)
             mMinimizeOpAction->setShortcut (kaction->globalShortcut ().primary ());
-        mMinimizeOpAction->setData (Options::MinimizeOp);
+        mMinimizeOpAction->setData (KDecorationDefines::MinimizeOp);
 
         mMaximizeOpAction = mPopup->addAction (i18n ("Ma&ximize"));
         kaction = qobject_cast<KAction*> (mKeys.action ("Window Maximize"));
         if (kaction != 0)
             mMaximizeOpAction->setShortcut (kaction->globalShortcut ().primary ());
         mMaximizeOpAction->setCheckable (true);
-        mMaximizeOpAction->setData (Options::MaximizeOp);
+        mMaximizeOpAction->setData (KDecorationDefines::MaximizeOp);
 
         mShadeOpAction = mPopup->addAction (i18n ("Sh&ade"));
         kaction = qobject_cast<KAction*> (mKeys.action ("Window Shade"));
         if (kaction != 0)
             mShadeOpAction->setShortcut (kaction->globalShortcut ().primary ());
         mShadeOpAction->setCheckable (true);
-        mShadeOpAction->setData (Options::ShadeOp);
+        mShadeOpAction->setData (KDecorationDefines::ShadeOp);
 
 	mPopup->addSeparator ();
 
@@ -471,7 +471,7 @@ KWD::Window::showWindowMenu (const QPoint &pos)
         kaction = qobject_cast<KAction*> (mKeys.action("Window Close"));
         if (kaction != 0)
             mCloseOpAction->setShortcut (kaction->globalShortcut ().primary ());
-        mCloseOpAction->setData (Options::CloseOp);
+        mCloseOpAction->setData (KDecorationDefines::CloseOp);
     }
 
     pnt = mapFromGlobal (pos);
