@@ -130,7 +130,7 @@ typedef struct {
     unsigned long decorations;
 } MwmHints;
 
-#define SELECT_WIN_PROP "_SWITCH_SELECT_WINDOW"
+#define SELECT_WIN_PROP "_COMPIZ_SWITCH_SELECT_WINDOW"
 
 #define WIDTH  212
 #define HEIGHT 192
