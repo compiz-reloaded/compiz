@@ -179,14 +179,15 @@ KWD::Atoms::init (void)
     Display *xdisplay = QX11Info::display();
 
     netFrameWindow = XInternAtom (xdisplay, "_NET_FRAME_WINDOW", false);
-    netWindowDecor = XInternAtom (xdisplay, "_NET_WINDOW_DECOR", false);
+    netWindowDecor = XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR", false);
     netWindowDecorNormal =
-	XInternAtom (xdisplay, "_NET_WINDOW_DECOR_NORMAL", false);
+	XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_NORMAL", false);
     netWindowDecorActive =
-	XInternAtom (xdisplay, "_NET_WINDOW_DECOR_ACTIVE", false);
+	XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_ACTIVE", false);
     netWindowDecorBare =
-	XInternAtom (xdisplay, "_NET_WINDOW_DECOR_BARE", false);
-    switchSelectWindow = XInternAtom (xdisplay, "_SWITCH_SELECT_WINDOW", false);
+	XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_BARE", false);
+    switchSelectWindow =
+	XInternAtom (xdisplay, "_COMPIZ_SWITCH_SELECT_WINDOW", false);
     wmTakeFocus = XInternAtom (xdisplay, "WM_TAKE_FOCUS", false);
     netWmContextHelp =
 	XInternAtom (xdisplay, "_NET_WM_CONTEXT_HELP", false);
