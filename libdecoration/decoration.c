@@ -2551,11 +2551,11 @@ decor_acquire_dm_session (Display    *xdisplay,
     char		 buf[128];
 
     manager_atom = XInternAtom (xdisplay, "MANAGER", FALSE);
-    dm_name_atom = XInternAtom (xdisplay, "_NET_DM_NAME", 0);
+    dm_name_atom = XInternAtom (xdisplay, "_COMPIZ_DM_NAME", 0);
 
     utf8_string_atom = XInternAtom (xdisplay, "UTF8_STRING", 0);
 
-    sprintf (buf, "DM_S%d", screen);
+    sprintf (buf, "_COMPIZ_DM_S%d", screen);
     dm_sn_atom = XInternAtom (xdisplay, buf, 0);
 
     current_dm_sn_owner = XGetSelectionOwner (xdisplay, dm_sn_atom);
@@ -2656,7 +2656,7 @@ decor_set_dm_check_hint (Display *xdisplay,
 			  CWOverrideRedirect | CWEventMask,
 			  &attrs);
 
-    atom = XInternAtom (xdisplay, "_NET_SUPPORTING_DM_CHECK", 0);
+    atom = XInternAtom (xdisplay, "_COMPIZ_SUPPORTING_DM_CHECK", 0);
 
     XChangeProperty (xdisplay, xroot,
 		     atom,
@@ -2794,7 +2794,7 @@ decor_handle_selection_clear (Display *xdisplay,
     Atom dm_sn_atom;
     char buf[128];
 
-    sprintf (buf, "DM_S%d", screen);
+    sprintf (buf, "_COMPIZ_DM_S%d", screen);
     dm_sn_atom = XInternAtom (xdisplay, buf, 0);
 
     if (xevent->xselectionclear.selection == dm_sn_atom)
