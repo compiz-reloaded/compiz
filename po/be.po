@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:24+0530\n"
+"POT-Creation-Date: 2008-01-29 17:28+0530\n"
 "PO-Revision-Date: 2007-12-18 09:12+0530\n"
 "Last-Translator: \n"
 "Language-Team: gist bengali  team <info.gist@cdac.in>\n"
@@ -1104,13 +1104,13 @@ msgid "Skydome Image"
 msgstr "স্কাইডোম চিত্র"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "গতি"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "সময়ধাপ"
@@ -2098,22 +2098,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "নির্দেশকের চলাচলের সংবেদনশীলতা "
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "ওপরের ফেসে ঘনক ঘোরানোকে স্ন্যাপ করা "
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "ওপরের ফেসে ঘনক ঘোরানোকে স্ন্যাপ করা "
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "ওপরের ফেসে স্ন্যাপ করুন"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "ওপরের ফেসে স্ন্যাপ করুন"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "ঘোরানো আরম্ভ করা"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "ফ্লিপিং ভিউপোর্টের আগে সময়অতিক্রান্ত হয়েছে"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "জুম"
 

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:24+0530\n"
+"POT-Creation-Date: 2008-01-29 17:29+0530\n"
 "PO-Revision-Date: 2007-12-26 21:09+0100\n"
 "Last-Translator: Jan Kriho <Erbureth@seznam.cz>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -1140,13 +1140,13 @@ msgid "Skydome Image"
 msgstr "Obrázek nebeské báně"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Rychlost"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Časový krok"
@@ -2223,22 +2223,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "Citlivost pohybu ukazatele"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "Přichytávat otáčející se kostku za horní stranu"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Přichytávat otáčející se kostku za horní stranu"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "Přichytávat k horní straně"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Přichytávat k horní straně"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "Zahájit otáčení"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "Časový limit před překlopením zorného pole"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Zvětšení"
 

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:26+0530\n"
-"PO-Revision-Date: 2007-12-22 13:48+0100\n"
-"Last-Translator: Alex Zin <mdk82@mail.ru>\n"
+"POT-Creation-Date: 2008-01-29 17:31+0530\n"
+"PO-Revision-Date: 2008-01-15 19:35+0100\n"
+"Last-Translator: Semenov Egor <semenoveg@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1165,13 +1165,13 @@ msgstr "Изображение для фона"
 
 #  combo box item
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Скорость"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Шаг времени"
@@ -2281,22 +2281,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "Чувствительность к перемещениям курсора"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "Привязка вращения куба к верхней грани"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Привязка вращения куба к верхней грани"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "Привязать к верхней грани"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Привязать к верхней грани"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "Запуск вращения"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "Задержка во времени до отражения кадрового окна"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Изменить масштаб"
 
@@ -2756,7 +2766,7 @@ msgstr "Минимальный размер решетки на вершинах
 #: ../metadata/wobbly.xml.in.h:15
 #, fuzzy
 msgid "Move Windows"
-msgstr "Переместить окно"
+msgstr "Переместить окна"
 
 # 'driver' as in '(hardware) driver update'
 #: ../metadata/wobbly.xml.in.h:17

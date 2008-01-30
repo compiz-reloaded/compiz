@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:26+0530\n"
-"PO-Revision-Date: 2005-01-31 19:01+0100\n"
-"Last-Translator: xxx\n"
+"POT-Creation-Date: 2008-01-29 17:31+0530\n"
+"PO-Revision-Date: 2008-01-19 11:48+0100\n"
+"Last-Translator: Kornyeyev Oleksandr <o.kornyeyev@kmgas.com.ua>\n"
 "Language-Team: Ukrainian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 1.0.2\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 #, fuzzy
@@ -29,145 +30,149 @@ msgstr "Віконний менеджер"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr ""
+msgstr "Дія коли крутять колесо миші"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 #, fuzzy
 msgid "Blur type"
-msgstr "Вибрано"
+msgstr "Розмивання"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
-msgstr ""
+msgstr "Прозорість активного вікна теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme active window opacity shade"
-msgstr ""
+msgstr "Затьмарення прозорості активного вікна теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "Прозорість теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
-msgstr ""
+msgstr "Затьмарення прозорості теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr ""
+msgstr "Прозорість активних вікон у вигляді теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
-msgstr ""
+msgstr "Прозорість при  використанні декорацій теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
 msgstr ""
+"Затьмарювати активні вікна з темою metacity від непрозорого до прозорого"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
+"Затьмарювати активні вікна з темою metacity від непрозорого до прозорого"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Дія, коли скроллер миші на заголовку вікна"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Тип розмивання, що використовується для декорації вікна"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Використовувати теми metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Використовувати теми metacity для малювання декорації вікна "
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
 msgid "Annotate"
-msgstr "Init"
+msgstr "Анотація"
 
 #: ../metadata/annotate.xml.in.h:2
 #, fuzzy
 msgid "Annotate Fill Color"
-msgstr "Кольори"
+msgstr "Колір анотації"
 
 #: ../metadata/annotate.xml.in.h:3
 msgid "Annotate Stroke Color"
-msgstr ""
+msgstr "Колір лінії анотації"
 
 #: ../metadata/annotate.xml.in.h:4
 #, fuzzy
 msgid "Annotate plugin"
-msgstr "Параметри архіву"
+msgstr "Модуль анотації"
 
 #: ../metadata/annotate.xml.in.h:5
 #, fuzzy
 msgid "Clear"
-msgstr "О_чистити"
+msgstr "Очистити"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Малювати"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "Малювати з використання інструменту"
 
 #: ../metadata/annotate.xml.in.h:8
 msgid "Fill color for annotations"
-msgstr ""
+msgstr "Колір заповнення для анотації"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 #, fuzzy
 msgid "Initiate"
-msgstr "Init"
+msgstr "Початок"
 
 #: ../metadata/annotate.xml.in.h:10
 #, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "Init"
+msgstr "Початок малювання анотації"
 
 #: ../metadata/annotate.xml.in.h:11
 #, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Init"
+msgstr "Ініціювати видалення підказки"
 
 #: ../metadata/annotate.xml.in.h:12
 #, fuzzy
 msgid "Initiate erase"
-msgstr "Init"
+msgstr "Початок видалення"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "Ширина лінії"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
-msgstr ""
+msgstr "Ширина лінії анотації"
 
 #: ../metadata/annotate.xml.in.h:15
 msgid "Stroke color for annotations"
-msgstr ""
+msgstr "Насиченість кольору анотації"
 
+# треба уточнити
 #: ../metadata/annotate.xml.in.h:16
 msgid "Stroke width"
-msgstr ""
+msgstr "Ширина межі"
 
+# треба уточнити
 #: ../metadata/annotate.xml.in.h:17
 msgid "Stroke width for annotations"
-msgstr ""
+msgstr "Ширина межі анотації"
 
 #: ../metadata/blur.xml.in.h:1
 #, fuzzy
@@ -177,134 +182,134 @@ msgstr "Фільтр: "
 #: ../metadata/blur.xml.in.h:2
 #, fuzzy
 msgid "Alpha Blur"
-msgstr "Windows"
+msgstr "Розмивання по альфа каналу"
 
 #: ../metadata/blur.xml.in.h:3
 #, fuzzy
 msgid "Alpha blur windows"
-msgstr "Windows"
+msgstr "Розмивання вікна по альфа каналу"
 
 #: ../metadata/blur.xml.in.h:4
 #, fuzzy
 msgid "Blur Filter"
-msgstr "&Вказати фільтр"
+msgstr "Фільтр розмивання"
 
 #: ../metadata/blur.xml.in.h:5
 #, fuzzy
 msgid "Blur Occlusion"
-msgstr "Тривалість"
+msgstr "Залишити не розмитим"
 
 #: ../metadata/blur.xml.in.h:6
 #, fuzzy
 msgid "Blur Saturation"
-msgstr "Тривалість"
+msgstr "Тривалість розмивання"
 
 #: ../metadata/blur.xml.in.h:7
 #, fuzzy
 msgid "Blur Speed"
-msgstr "Вибрано"
+msgstr "Швидкість розмивання"
 
 #: ../metadata/blur.xml.in.h:8
 #, fuzzy
 msgid "Blur Windows"
-msgstr "Windows"
+msgstr "Розмивання вікон"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Розмивання за прозорими частинами вікон"
 
 #: ../metadata/blur.xml.in.h:10
 #, fuzzy
 msgid "Blur saturation"
-msgstr "Тривалість"
+msgstr "Тривалість розмивання"
 
 #: ../metadata/blur.xml.in.h:11
 #, fuzzy
 msgid "Blur windows"
-msgstr "Windows"
+msgstr "Розмивання вікон"
 
 #: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
-msgstr ""
+msgstr "Розмивання вікон, які не мають фокусу"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "Вимкнути розмивання на тьмяних ділянках екрану інших вікон"
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
-msgstr ""
+msgstr "Фільтр методу, який використовується для розмивання"
 
 #: ../metadata/blur.xml.in.h:15
 #, fuzzy
 msgid "Focus Blur"
-msgstr "Windows"
+msgstr "Центр розмивання"
 
 #: ../metadata/blur.xml.in.h:16
 #, fuzzy
 msgid "Focus blur windows"
-msgstr "Windows"
+msgstr "Центр розмивання вікон"
 
 #: ../metadata/blur.xml.in.h:17
 #, fuzzy
 msgid "Gaussian"
-msgstr "Російська"
+msgstr "Gaussian"
 
 #: ../metadata/blur.xml.in.h:18
 #, fuzzy
 msgid "Gaussian Radius"
-msgstr "Російська Федерація"
+msgstr "Радіуси розмивання"
 
 #: ../metadata/blur.xml.in.h:19
 #, fuzzy
 msgid "Gaussian Strength"
-msgstr "Російська"
+msgstr "Сила розмивання"
 
 #: ../metadata/blur.xml.in.h:20
 #, fuzzy
 msgid "Gaussian radius"
-msgstr "Російська Федерація"
+msgstr "Гаусові радіуси"
 
 #: ../metadata/blur.xml.in.h:21
 #, fuzzy
 msgid "Gaussian strength"
-msgstr "Російська"
+msgstr "Gaussian Strength"
 
 #: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 #, fuzzy
 msgid "Mipmap"
-msgstr "Ліма"
+msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:23
 #, fuzzy
 msgid "Mipmap LOD"
-msgstr "Ліма"
+msgstr "Рівень деталізації Mipmap"
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap level-of-detail"
-msgstr ""
+msgstr "Деталізація Mipmap"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Pulse"
-msgstr ""
+msgstr "Пульс"
 
 #: ../metadata/blur.xml.in.h:26
 msgid "Pulse effect"
-msgstr ""
+msgstr "Ефект пульсації"
 
 #: ../metadata/blur.xml.in.h:27
 #, fuzzy
 msgid "Window blur speed"
-msgstr "Windows"
+msgstr "Швидкість розмивання вікна"
 
 #: ../metadata/blur.xml.in.h:28
 msgid "Windows that should be affected by focus blur"
-msgstr ""
+msgstr "Вікна, на які впливає ефект розмивання"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Windows that should be use alpha blur by default"
-msgstr ""
+msgstr "Вікна, для який використовується альфа розмивання за замовчуванням "
 
 #: ../metadata/clone.xml.in.h:1
 #, fuzzy
@@ -318,7 +323,7 @@ msgstr "Вибір відеорежиму"
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
-msgstr ""
+msgstr "Output clone handler"
 
 #: ../metadata/core.xml.in.h:1
 msgid ""
@@ -395,12 +400,14 @@ msgstr ""
 #: ../metadata/core.xml.in.h:13
 #, fuzzy
 msgid "Active Plugins"
-msgstr "Параметри архіву"
+msgstr "Активні додатки"
 
 #: ../metadata/core.xml.in.h:14
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
+"Дозволити використання повного вікна, яби не бути перенаправленим у "
+"offscreen pixmaps"
 
 #: ../metadata/core.xml.in.h:15
 msgid "Audible Bell"
@@ -414,7 +421,7 @@ msgstr "Файлова система"
 #: ../metadata/core.xml.in.h:17
 #, fuzzy
 msgid "Auto-Raise"
-msgstr "Автоматично"
+msgstr "Автоматична зміна розміру"
 
 #: ../metadata/core.xml.in.h:18
 msgid "Auto-Raise Delay"
@@ -431,7 +438,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:21
 msgid "Best"
-msgstr ""
+msgstr "Кращій"
 
 #: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
@@ -444,11 +451,11 @@ msgstr ""
 #: ../metadata/core.xml.in.h:24
 #, fuzzy
 msgid "Close Window"
-msgstr "Windows"
+msgstr "Закрити вікно"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
-msgstr ""
+msgstr "Закрити активне вікно"
 
 #: ../metadata/core.xml.in.h:26
 #, fuzzy
@@ -458,7 +465,7 @@ msgstr "Команда: "
 #: ../metadata/core.xml.in.h:27
 #, fuzzy
 msgid "Command line 1"
-msgstr "Команда: "
+msgstr "Команда 1: "
 
 #: ../metadata/core.xml.in.h:28
 #, fuzzy
@@ -588,7 +595,7 @@ msgstr "Вибрати для оновлення"
 
 #: ../metadata/core.xml.in.h:56
 msgid "Fast"
-msgstr ""
+msgstr "Швидко"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Focus Prevention Windows"
@@ -601,15 +608,15 @@ msgstr "Увімкнути автоперехід в режим сну"
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
-msgstr ""
+msgstr "Головні налаштунки"
 
 #: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
-msgstr ""
+msgstr "Головні налаштунки Compiz"
 
 #: ../metadata/core.xml.in.h:61
 msgid "Good"
-msgstr ""
+msgstr "Добре"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Hide Skip Taskbar Windows"
@@ -626,7 +633,7 @@ msgstr ""
 #: ../metadata/core.xml.in.h:65
 #, fuzzy
 msgid "Horizontal Virtual Size"
-msgstr "Віртуальні користувачі"
+msgstr "Уявний розмір за горизонталлю"
 
 #: ../metadata/core.xml.in.h:66
 msgid "Ignore Hints When Maximized"
@@ -689,28 +696,28 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:80
 msgid "Maximize active window"
-msgstr ""
+msgstr "Розгорнути активне вікно"
 
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize active window horizontally"
-msgstr ""
+msgstr "Розгорнути активне вікно за горизонталлю"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
-msgstr ""
+msgstr "Розгорнути активне вікно за вертикаллю"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Minimize Window"
-msgstr ""
+msgstr "Згорнути вікно"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
-msgstr ""
+msgstr "Згорнути активне вікно"
 
 #: ../metadata/core.xml.in.h:85
 #, fuzzy
 msgid "Number of Desktops"
-msgstr "Віддалена стільниця"
+msgstr "Номер стільниці"
 
 #: ../metadata/core.xml.in.h:86
 #, fuzzy
@@ -772,7 +779,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:99
 msgid "Raise window above other windows"
-msgstr ""
+msgstr "Викликати вікно зверху інших вікон"
 
 #: ../metadata/core.xml.in.h:100
 msgid "Raise windows when clicked"
@@ -873,7 +880,7 @@ msgstr "&Показувати меню завантаження"
 
 #: ../metadata/core.xml.in.h:120
 msgid "Show Run Application dialog"
-msgstr ""
+msgstr "Показати діалог запуску додатків"
 
 #: ../metadata/core.xml.in.h:121
 #, fuzzy
@@ -895,7 +902,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:125
 msgid "Take a screenshot of a window"
-msgstr ""
+msgstr "Взяти відбиток екрану з вікна"
 
 #: ../metadata/core.xml.in.h:126
 #, fuzzy
@@ -1103,11 +1110,11 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
-msgstr ""
+msgstr "Всередині куба"
 
 #: ../metadata/cube.xml.in.h:26
 msgid "Inside cube"
-msgstr ""
+msgstr "Всередині куба"
 
 #: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
@@ -1192,14 +1199,14 @@ msgid "Skydome Image"
 msgstr "ISO-штамп"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "Вибрано"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
@@ -1397,7 +1404,7 @@ msgstr ""
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr ""
+msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
@@ -1423,7 +1430,7 @@ msgstr "Нічого не записувати в журнал"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr ""
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
@@ -1529,11 +1536,11 @@ msgstr ""
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
-msgstr ""
+msgstr "Каскад"
 
 #: ../metadata/place.xml.in.h:3
 msgid "Centered"
-msgstr ""
+msgstr "У центрі"
 
 #: ../metadata/place.xml.in.h:4
 #, fuzzy
@@ -1565,11 +1572,11 @@ msgstr "Пересунути в&низ"
 
 #: ../metadata/place.xml.in.h:10
 msgid "Random"
-msgstr ""
+msgstr "Випадковий"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Smart"
-msgstr ""
+msgstr "Розумний"
 
 #: ../metadata/place.xml.in.h:12
 #, fuzzy
@@ -2356,23 +2363,31 @@ msgid "Sensitivity of pointer movement"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr ""
+
+#: ../metadata/rotate.xml.in.h:88
+msgid "Snap To Bottom Face"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr ""
+
+#: ../metadata/rotate.xml.in.h:91
 #, fuzzy
 msgid "Start Rotation"
 msgstr "Дата початку"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr ""
 
@@ -2734,7 +2749,7 @@ msgstr ""
 
 #: ../metadata/water.xml.in.h:7
 msgid "Line"
-msgstr ""
+msgstr "Лінія"
 
 #: ../metadata/water.xml.in.h:8
 msgid "Offset Scale"
@@ -2742,7 +2757,7 @@ msgstr ""
 
 #: ../metadata/water.xml.in.h:9
 msgid "Point"
-msgstr ""
+msgstr "Крапка"
 
 #: ../metadata/water.xml.in.h:10
 #, fuzzy
@@ -2776,7 +2791,7 @@ msgstr "Token ring"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
-msgstr ""
+msgstr "Ефект води"
 
 #: ../metadata/water.xml.in.h:17
 msgid "Water offset scale"
@@ -2943,7 +2958,7 @@ msgstr "Робоча станція"
 
 #: ../metadata/zoom.xml.in.h:7
 msgid "Zoom In"
-msgstr ""
+msgstr "Збільшити"
 
 #: ../metadata/zoom.xml.in.h:8
 #, fuzzy

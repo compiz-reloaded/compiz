@@ -1,17 +1,16 @@
-# Catalan message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2000, 2001 SuSE GmbH.
-# Jaume Badiella <myotis@drac.com>, 2001.
+# translation of eu-compiz.po to Basque
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
+# Ander Elortondo <ander.elor@gmail.com>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: eu-compiz\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-29 17:29+0530\n"
-"PO-Revision-Date: 2007-12-29 13:04+0100\n"
-"Last-Translator: Siegfried-Angel Gevatter Pujals <siggi.gevatter@gmail.com>\n"
-"Language-Team: Catalan\n"
+"PO-Revision-Date: 2008-01-27 09:38+0100\n"
+"Last-Translator: Ander Elortondo <ander.elor@gmail.com>\n"
+"Language-Team: Basque <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,12 +19,11 @@ msgstr ""
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
-msgstr "Escriptori"
+msgstr "Mahaigaina"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
 msgid "Window Management"
-msgstr "Menú de la finestra"
+msgstr "Leiho kudeatzailea"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
@@ -36,35 +34,34 @@ msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
 msgid "Blur type"
-msgstr "Velocitat de plegament"
+msgstr "Lausotze mota"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
-#, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "Redueix l'opacitat de la finestra"
+msgstr "Metacity gaian leiho aktiboko opakutasuna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
-#, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "Maximitza la finestra activa horitzontalment"
+msgstr "Metacity gaian leiho aktiboko opakotasun itzala"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "Metacity gaiaren opakutasuna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
-msgstr ""
+msgstr "Metacity gaiaren opakotasun itzala"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
 msgstr ""
+"Metacity gaiaren dekorazioaetan erabili beharreko opakutasuna leiho "
+"aktiborako"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
-msgstr ""
+msgstr "Metacity gaiaren dekorazioaetan erabili beharreko opakutasuna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
@@ -79,50 +76,47 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Xagu gurpil ekintza titulu-barran"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Leiho dekorazioarako lausotze mota"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Erabili metacity gaia"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Erabili metacity gaia leiho dekorazioa marraztean"
 
 #: ../metadata/annotate.xml.in.h:1
-#, fuzzy
 msgid "Annotate"
-msgstr "Inicia"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:2
-#, fuzzy
 msgid "Annotate Fill Color"
-msgstr "Color del cub"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:3
 msgid "Annotate Stroke Color"
 msgstr ""
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "Connectors actius"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:5
 msgid "Clear"
-msgstr ""
+msgstr "Garbitu"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Marraztu"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "Marraztu tresna erabiliz"
 
 #: ../metadata/annotate.xml.in.h:8
 msgid "Fill color for annotations"
@@ -132,26 +126,23 @@ msgstr ""
 #: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
-msgstr "Inicia"
+msgstr "Hasi"
 
 #: ../metadata/annotate.xml.in.h:10
-#, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "Inicia"
+msgstr "Hasi ezabatzea"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "Lerro zabalera"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
@@ -170,111 +161,98 @@ msgid "Stroke width for annotations"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
 msgid "4xBilinear"
-msgstr "Filtre lineal"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
 msgid "Alpha Blur"
-msgstr "Canvia la mida de les finestres"
+msgstr "Alfa lausotzea"
 
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "Canvia la mida de les finestres"
+msgstr "Alfa lausotze leihoak"
 
 #: ../metadata/blur.xml.in.h:4
-#, fuzzy
 msgid "Blur Filter"
-msgstr "Filtre de textura"
+msgstr "Lausotze iragazkia"
 
 #: ../metadata/blur.xml.in.h:5
 #, fuzzy
 msgid "Blur Occlusion"
-msgstr "Saturació"
+msgstr "Lausotze oklusioa"
 
 #: ../metadata/blur.xml.in.h:6
-#, fuzzy
 msgid "Blur Saturation"
-msgstr "Saturació"
+msgstr "Lausotze saturazioa"
 
 #: ../metadata/blur.xml.in.h:7
-#, fuzzy
 msgid "Blur Speed"
-msgstr "Velocitat de plegament"
+msgstr "Lausotze abiadura"
 
 #: ../metadata/blur.xml.in.h:8
-#, fuzzy
 msgid "Blur Windows"
-msgstr "Situa les finestres"
+msgstr "Lausotze leihoak"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Leiho atal transluzidoen atzeko lausotzea"
 
 #: ../metadata/blur.xml.in.h:10
-#, fuzzy
 msgid "Blur saturation"
-msgstr "Saturació"
+msgstr "Lausotze saturazioa"
 
 #: ../metadata/blur.xml.in.h:11
-#, fuzzy
 msgid "Blur windows"
-msgstr "Canvia la mida de les finestres"
+msgstr "Lausotze leihoak"
 
 #: ../metadata/blur.xml.in.h:12
-#, fuzzy
 msgid "Blur windows that doesn't have focus"
-msgstr "Tipus de finestres que hauran de tremolar quan rebin el focus"
+msgstr "Fokua ez duten leihoen lausotzea"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "Beste leiho batek ilundutako pantaila eremuen lausotzea ezgaitu"
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
-msgstr ""
+msgstr "Lausotzerako erabilitako iragazki metodoa"
 
 #: ../metadata/blur.xml.in.h:15
-#, fuzzy
 msgid "Focus Blur"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:17
 msgid "Gaussian"
-msgstr ""
+msgstr "Gaussiar"
 
 #: ../metadata/blur.xml.in.h:18
 msgid "Gaussian Radius"
-msgstr ""
+msgstr "Gauss Erradioa"
 
 #: ../metadata/blur.xml.in.h:19
 msgid "Gaussian Strength"
-msgstr ""
+msgstr "Gaussiar Indarra"
 
 #: ../metadata/blur.xml.in.h:20
 msgid "Gaussian radius"
-msgstr ""
+msgstr "Gauss erradioa"
 
 #: ../metadata/blur.xml.in.h:21
 msgid "Gaussian strength"
-msgstr ""
+msgstr "Gaussiar indarra"
 
 #: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
-msgstr "Mipmap"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:23
-#, fuzzy
 msgid "Mipmap LOD"
-msgstr "Mipmap"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap level-of-detail"
@@ -285,437 +263,349 @@ msgid "Pulse"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:26
-#, fuzzy
 msgid "Pulse effect"
-msgstr "Passa el focus a l'efecte"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:27
-#, fuzzy
 msgid "Window blur speed"
-msgstr "Velocitat d'esvaïment de la finestra"
+msgstr "Leiho lausotze abiadura"
 
 #: ../metadata/blur.xml.in.h:28
-#, fuzzy
 msgid "Windows that should be affected by focus blur"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:29
-#, fuzzy
 msgid "Windows that should be use alpha blur by default"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/clone.xml.in.h:1
-#, fuzzy
 msgid "Clone Output"
-msgstr "Sortides"
+msgstr "Klonatu irteera"
 
 #: ../metadata/clone.xml.in.h:3
-#, fuzzy
 msgid "Initiate clone selection"
-msgstr "Fes una captura de pantalla"
+msgstr "Hasi klonatze hautapena"
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
-msgstr ""
+msgstr "Irteera klonatze kudeatzailea"
 
 #: ../metadata/core.xml.in.h:1
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:2
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:3
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:4
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:5
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:6
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:7
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:8
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:9
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:10
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:11
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:12
-#, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-"identificada amb l'ordre %d"
 
 #: ../metadata/core.xml.in.h:13
 msgid "Active Plugins"
-msgstr "Connectors actius"
+msgstr "Plugin aktiboak"
 
 #: ../metadata/core.xml.in.h:14
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
-"Permet que la representació de finestres a pantalla completa no es "
-"redirigeixi cap a mapes de píxels fora de la pantalla"
 
 #: ../metadata/core.xml.in.h:15
 msgid "Audible Bell"
-msgstr "Avís sonor"
+msgstr "Kanpai entzugarri"
 
 #: ../metadata/core.xml.in.h:16
 msgid "Audible system beep"
-msgstr "Avís sonor del sistema"
+msgstr "Sistemako beep entzungarri"
 
 #: ../metadata/core.xml.in.h:17
 msgid "Auto-Raise"
-msgstr "Elevació automàtica"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:18
 msgid "Auto-Raise Delay"
-msgstr "Retard de l'elevació automàtica"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:19
 msgid "Automatic detection of output devices"
-msgstr "Detecció automàtica dels dispositius de sortida"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:20
 msgid "Automatic detection of refresh rate"
-msgstr "Detecció automàtica de la freqüència d'actualització"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:21
 msgid "Best"
-msgstr "Millor"
+msgstr "Onena"
 
 #: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
-msgstr "Feu clic per a passar el focus"
+msgstr "Klik enfokatzeko"
 
 #: ../metadata/core.xml.in.h:23
 msgid "Click on window moves input focus to it"
-msgstr "En fer clic a la finestra, aquesta rep el focus d'entrada"
+msgstr "Leihoan klik egitean mugi sarrera fokua berari"
 
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
-msgstr "Tanca la finestra"
+msgstr "Itxi leihoa"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
-msgstr "Tanca la finestra activa"
+msgstr "Itxi leiho aktiboa"
 
 #: ../metadata/core.xml.in.h:26
-#, fuzzy
 msgid "Command line 0"
-msgstr "Línia d'ordres %d"
+msgstr "0 komando lerroa"
 
 #: ../metadata/core.xml.in.h:27
-#, fuzzy
 msgid "Command line 1"
-msgstr "Línia d'ordres %d"
+msgstr "1 komando lerroa"
 
 #: ../metadata/core.xml.in.h:28
-#, fuzzy
 msgid "Command line 10"
-msgstr "Línia d'ordres %d"
+msgstr "10 komando lerroa"
 
 #: ../metadata/core.xml.in.h:29
-#, fuzzy
 msgid "Command line 11"
-msgstr "Línia d'ordres %d"
+msgstr "11 komando lerroa"
 
 #: ../metadata/core.xml.in.h:30
-#, fuzzy
 msgid "Command line 2"
-msgstr "Línia d'ordres %d"
+msgstr "2 komando lerroa"
 
 #: ../metadata/core.xml.in.h:31
-#, fuzzy
 msgid "Command line 3"
-msgstr "Línia d'ordres %d"
+msgstr "3 komando lerroa"
 
 #: ../metadata/core.xml.in.h:32
-#, fuzzy
 msgid "Command line 4"
-msgstr "Línia d'ordres %d"
+msgstr "4 komando lerroa"
 
 #: ../metadata/core.xml.in.h:33
-#, fuzzy
 msgid "Command line 5"
-msgstr "Línia d'ordres %d"
+msgstr "5 komando lerroa"
 
 #: ../metadata/core.xml.in.h:34
-#, fuzzy
 msgid "Command line 6"
-msgstr "Línia d'ordres %d"
+msgstr "6 komando lerroa"
 
 #: ../metadata/core.xml.in.h:35
-#, fuzzy
 msgid "Command line 7"
-msgstr "Línia d'ordres %d"
+msgstr "7 komando lerroa"
 
 #: ../metadata/core.xml.in.h:36
-#, fuzzy
 msgid "Command line 8"
-msgstr "Línia d'ordres %d"
+msgstr "8 komando lerroa"
 
 #: ../metadata/core.xml.in.h:37
-#, fuzzy
 msgid "Command line 9"
-msgstr "Línia d'ordres %d"
+msgstr "9 komando lerroa"
 
 #: ../metadata/core.xml.in.h:38
-#, fuzzy
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_0komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:39
-#, fuzzy
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_1komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:40
-#, fuzzy
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_10komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:41
-#, fuzzy
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_11komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:42
-#, fuzzy
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_2komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:43
-#, fuzzy
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_3komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:44
-#, fuzzy
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_4komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:45
-#, fuzzy
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_5komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:46
-#, fuzzy
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_6komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:47
-#, fuzzy
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_7komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:48
-#, fuzzy
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_8komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:49
-#, fuzzy
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr ""
-"Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
-"d"
+"Shellean exekutatu beharreko komando lerroa exekutatu_9komandoa abiaraztean"
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
-msgstr "Redueix l'opacitat"
+msgstr "Txikitu opakutasuna"
 
 #: ../metadata/core.xml.in.h:51
 msgid "Decrease window opacity"
-msgstr "Redueix l'opacitat de la finestra"
+msgstr "Txikitu leiho opakutasuna"
 
 #: ../metadata/core.xml.in.h:52
 msgid "Default Icon"
-msgstr "Icona per defecte"
+msgstr "Lehenetsitako ikonoa"
 
 #: ../metadata/core.xml.in.h:53
 msgid "Default window icon image"
-msgstr "Imatge d'icona de finestra per defecte"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:54
 msgid "Detect Outputs"
-msgstr "Detecta les sortides"
+msgstr "Irteerak detektatu"
 
 #: ../metadata/core.xml.in.h:55
 msgid "Detect Refresh Rate"
-msgstr "Detecta la freqüència d'actualització"
+msgstr "Freskatze-tasa detektatu"
 
 #: ../metadata/core.xml.in.h:56
 msgid "Fast"
-msgstr "Ràpid"
+msgstr "Azkarra"
 
 #: ../metadata/core.xml.in.h:57
-#, fuzzy
 msgid "Focus Prevention Windows"
-msgstr "Tipus de finestres de focus"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:58
-#, fuzzy
 msgid "Focus prevention windows"
-msgstr "Tipus de finestres de focus"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
-msgstr ""
+msgstr "Aukera orokorrak"
 
 #: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
-msgstr ""
+msgstr "Compiz aukera orokorrak"
 
 #: ../metadata/core.xml.in.h:61
 msgid "Good"
-msgstr "Bo"
+msgstr "Ona"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Hide Skip Taskbar Windows"
-msgstr "Oculta les finestres ignorades de la barra de tasques"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:63
 msgid "Hide all windows and focus desktop"
-msgstr "Oculta totes les finestres i passa el focus a l'escriptori"
+msgstr "Ezkutatu leiho guztiak eta mahaigaina enfokatu"
 
 #: ../metadata/core.xml.in.h:64
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
-"Oculta les finestres que no es troben a la barra de tasques en accedir al "
-"mode d'escriptori de visualització"
 
 #: ../metadata/core.xml.in.h:65
 msgid "Horizontal Virtual Size"
-msgstr "Mida virtual horitzontal"
+msgstr "Horizontal tamaina birtuala"
 
 #: ../metadata/core.xml.in.h:66
 msgid "Ignore Hints When Maximized"
-msgstr "Ignora els suggeriments quan està maximitzada"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:67
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
-"Ignora els suggeriments d'increment de mida i aspecte quan la finestra es "
-"troba maximitzada"
 
 #: ../metadata/core.xml.in.h:68
 msgid "Increase Opacity"
-msgstr "Augmenta l'opacitat"
+msgstr "Handitu opakutasuna"
 
 #: ../metadata/core.xml.in.h:69
 msgid "Increase window opacity"
-msgstr "Augmenta l'opacitat de la finestra"
+msgstr "Handitu leiho opakutasuna"
 
 #: ../metadata/core.xml.in.h:70
-#, fuzzy
 msgid "Interval before raising selected windows"
 msgstr ""
-"Interval que ha de transcórrer abans d'elevar les finestres seleccionades"
 
 #: ../metadata/core.xml.in.h:71
 msgid "Interval between ping messages"
@@ -723,78 +613,75 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:72
 msgid "Lighting"
-msgstr "Il·luminació"
+msgstr "Argitasuna"
 
 #: ../metadata/core.xml.in.h:73
 msgid "List of currently active plugins"
-msgstr "Llista dels connectors actius actualment"
+msgstr "Orain aktibo dauden plugin zerrenda"
 
 #: ../metadata/core.xml.in.h:74
 msgid "List of strings describing output devices"
-msgstr "Llista de cadenes que descriuen els dispositius de sortida"
+msgstr "Irteera gailuak deskribatzeko kateen zerrenda"
 
 #: ../metadata/core.xml.in.h:75
 msgid "Lower Window"
-msgstr "Abaixa la finestra"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:76
 msgid "Lower window beneath other windows"
-msgstr "Abaixa la finestra per sota de les altres"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:77
 msgid "Maximize Window"
-msgstr "Maximitza la finestra"
+msgstr "Maximizatu leihoa"
 
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
-msgstr "Maximitza la finestra horitzontalment"
+msgstr "Horizontalki maximizatu leihoa"
 
 #: ../metadata/core.xml.in.h:79
 msgid "Maximize Window Vertically"
-msgstr "Maximitza la finestra verticalment"
+msgstr "Bertikalki maximizatu leihoa"
 
 #: ../metadata/core.xml.in.h:80
 msgid "Maximize active window"
-msgstr "Maximitza la finestra activa"
+msgstr "Leiho aktiboa maximizatu"
 
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize active window horizontally"
-msgstr "Maximitza la finestra activa horitzontalment"
+msgstr "Leiho aktiboa horizontalki maximizatu"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
-msgstr "Maximitza la finestra activa verticalment"
+msgstr "Leiho aktiboa bertikalki maximizatu"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Minimize Window"
-msgstr "Minimitza la finestra"
+msgstr "Leihoa Minimizatu"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
-msgstr "Minimitza la finestra activa"
+msgstr "Leiho aktiboa minimizatu"
 
 #: ../metadata/core.xml.in.h:85
 msgid "Number of Desktops"
-msgstr "Nombre d'escriptoris"
+msgstr "Mahaigain kopurua"
 
 #: ../metadata/core.xml.in.h:86
-#, fuzzy
 msgid "Number of virtual desktops"
-msgstr "Nombre d'escriptoris virtuals"
+msgstr "Mahaigain birtualen kopurua"
 
 #: ../metadata/core.xml.in.h:87
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
-"Només actualitza la pantalla durant els períodes d'enfosquiment vertical"
 
 #: ../metadata/core.xml.in.h:88
 msgid "Opacity Step"
-msgstr "Etapa d'opacitat"
+msgstr "Opakotasun pausoa"
 
 #: ../metadata/core.xml.in.h:89
-#, fuzzy
 msgid "Opacity change step"
-msgstr "Etapa de canvi d'opacitat"
+msgstr "Opakutasun aldatze pausoa"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Opacity values for windows that should be translucent by default"
@@ -802,359 +689,327 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
-msgstr ""
+msgstr "Leihoaren opakutasun balioak"
 
 #: ../metadata/core.xml.in.h:92
-#, fuzzy
 msgid "Opacity windows"
-msgstr "Espai entre finestres"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:93
 msgid "Open a terminal"
-msgstr ""
+msgstr "Terminala zabaldu"
 
 #: ../metadata/core.xml.in.h:94
 msgid "Outputs"
-msgstr "Sortides"
+msgstr "Irteerak"
 
-# SH
 #: ../metadata/core.xml.in.h:95
-#, fuzzy
 msgid "Ping Delay"
-msgstr "Retard de pluja"
+msgstr "Ping atzerapena"
 
 #: ../metadata/core.xml.in.h:96
 msgid "Raise On Click"
-msgstr "Eleva en fer clic"
+msgstr "Goratu klikatzean"
 
 #: ../metadata/core.xml.in.h:97
 msgid "Raise Window"
-msgstr "Eleva la finestra"
+msgstr "Goratu leihoa"
 
 #: ../metadata/core.xml.in.h:98
 msgid "Raise selected windows after interval"
-msgstr "Eleva les finestres seleccionades un cop transcorregut l'interval"
+msgstr "Goratu aukeratutako leihoa denbora tarte baten ondoren"
 
 #: ../metadata/core.xml.in.h:99
 msgid "Raise window above other windows"
-msgstr "Eleva la finestra per damunt de les altres"
+msgstr "Goratu leihoa beste leihoen gainetik"
 
 #: ../metadata/core.xml.in.h:100
 msgid "Raise windows when clicked"
-msgstr "Eleva les finestres en fer clic"
+msgstr "Goratu leihoak klikatzean"
 
 #: ../metadata/core.xml.in.h:101
 msgid "Refresh Rate"
-msgstr "Freqüència d'actualització"
+msgstr "Freskatze-tasa"
 
 #: ../metadata/core.xml.in.h:102
 msgid "Run Dialog"
-msgstr "Diàleg d'execució"
+msgstr "Exekuzio elkarrizketa"
 
 #: ../metadata/core.xml.in.h:103
-#, fuzzy
 msgid "Run command 0"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 0 komandoa"
 
 #: ../metadata/core.xml.in.h:104
-#, fuzzy
 msgid "Run command 1"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 1 komandoa"
 
 #: ../metadata/core.xml.in.h:105
-#, fuzzy
 msgid "Run command 10"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 10 komandoa"
 
 #: ../metadata/core.xml.in.h:106
-#, fuzzy
 msgid "Run command 11"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 11 komandoa"
 
 #: ../metadata/core.xml.in.h:107
-#, fuzzy
 msgid "Run command 2"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 2 komandoa"
 
 #: ../metadata/core.xml.in.h:108
-#, fuzzy
 msgid "Run command 3"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 3 komandoa"
 
 #: ../metadata/core.xml.in.h:109
-#, fuzzy
 msgid "Run command 4"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 4 komandoa"
 
 #: ../metadata/core.xml.in.h:110
-#, fuzzy
 msgid "Run command 5"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 5 komandoa"
 
 #: ../metadata/core.xml.in.h:111
-#, fuzzy
 msgid "Run command 6"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 6 komandoa"
 
 #: ../metadata/core.xml.in.h:112
-#, fuzzy
 msgid "Run command 7"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 7 komandoa"
 
 #: ../metadata/core.xml.in.h:113
-#, fuzzy
 msgid "Run command 8"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 8 komandoa"
 
 #: ../metadata/core.xml.in.h:114
-#, fuzzy
 msgid "Run command 9"
-msgstr "Executa l'ordre %d"
+msgstr "Exekutatu 9 komandoa"
 
 #: ../metadata/core.xml.in.h:115
-#, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
-msgstr ""
-"Multiplicador de la mida de la pantalla per a la mida virtual horitzontal"
+msgstr "Pantaila tamaina biderkatzailea tamaina horizontal birtualerako"
 
 #: ../metadata/core.xml.in.h:116
-#, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
-msgstr "Multiplicador de la mida de la pantalla per a la mida virtual vertical"
+msgstr "Pantaila tamaina biderkatzailea tamaina bertikal birtualerako"
 
 #: ../metadata/core.xml.in.h:117
 msgid "Screenshot command line"
-msgstr "Línia d'ordres de captura de pantalla"
+msgstr "Pantaila-argazkia komando lerroa"
 
 #: ../metadata/core.xml.in.h:118
-#, fuzzy
 msgid "Show Desktop"
-msgstr "Fes zoom a l'escriptori"
+msgstr "Ikus mahaigaina"
 
 #: ../metadata/core.xml.in.h:119
 msgid "Show Main Menu"
-msgstr "Mostra el menú principal"
+msgstr "Ikus Menu Nagusia"
 
 #: ../metadata/core.xml.in.h:120
 msgid "Show Run Application dialog"
-msgstr "Mostra el diàleg d'execució de l'aplicació"
+msgstr "Ikus aplikazio exekuzio elkarrizketa"
 
 #: ../metadata/core.xml.in.h:121
 msgid "Show the main menu"
-msgstr "Mostra el menú principal"
+msgstr "Ikus menu nagusia"
 
 #: ../metadata/core.xml.in.h:122
 msgid "Slow Animations"
-msgstr "Animacions lentes"
+msgstr "Animazioak motel"
 
 #: ../metadata/core.xml.in.h:123
 msgid "Sync To VBlank"
-msgstr "Sincronitza amb enfosquiment vertical"
+msgstr "VBlank-era sinkronizatu"
 
 #: ../metadata/core.xml.in.h:124
 msgid "Take a screenshot"
-msgstr "Fes una captura de pantalla"
+msgstr "Egin pantaila-argazkia"
 
 #: ../metadata/core.xml.in.h:125
 msgid "Take a screenshot of a window"
-msgstr "Fes una captura de pantalla d'una finestra"
+msgstr "Egin pantaila-argazkia leiho batena"
 
 #: ../metadata/core.xml.in.h:126
-#, fuzzy
 msgid "Terminal command line"
-msgstr "Línia d'ordres de captura de pantalla"
+msgstr "Terminal komando lerroa"
 
 #: ../metadata/core.xml.in.h:127
 msgid "Texture Filter"
-msgstr "Filtre de textura"
+msgstr "Testura iragazkia"
 
 #: ../metadata/core.xml.in.h:128
-#, fuzzy
 msgid "Texture filtering"
-msgstr "Filtre de textura"
+msgstr "Testura iragazten"
 
 #: ../metadata/core.xml.in.h:129
-#, fuzzy
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
-"Freqüència amb la qual es torna a representar la pantalla (vegades/segon)"
+msgstr "Pantaila marrazteko maiztasuna (aldiz/segunduko) "
 
 #: ../metadata/core.xml.in.h:130
 msgid "Toggle Window Maximized"
-msgstr "Commuta la finestra maximitzada"
+msgstr "Aldatu leihoa maximizatua"
 
 #: ../metadata/core.xml.in.h:131
 msgid "Toggle Window Maximized Horizontally"
-msgstr "Commuta la finestra maximitzada horitzontalment"
+msgstr "Aldatu leihoa maximizatua horizontalki"
 
 #: ../metadata/core.xml.in.h:132
 msgid "Toggle Window Maximized Vertically"
-msgstr "Commuta la finestra maximitzada verticalment"
+msgstr "Aldatu leihoa maximizatua bertikalki"
 
 #: ../metadata/core.xml.in.h:133
 msgid "Toggle Window Shaded"
-msgstr "Commuta la finestra ombrejada"
+msgstr "Aldatu leihoa itzalduta"
 
 #: ../metadata/core.xml.in.h:134
 msgid "Toggle active window maximized"
-msgstr "Commuta la finestra activa maximitzada"
+msgstr "Aldatu leiho aktiboa maximizatua"
 
 #: ../metadata/core.xml.in.h:135
 msgid "Toggle active window maximized horizontally"
-msgstr "Commuta la finestra activa maximitzada horitzontalment"
+msgstr "Aldatu leiho aktiboa maximizatua horizontalki"
 
 #: ../metadata/core.xml.in.h:136
 msgid "Toggle active window maximized vertically"
-msgstr "Commuta la finestra activa maximitzada verticalment"
+msgstr "Aldatu leiho aktiboa maximizatua bertikalki"
 
 #: ../metadata/core.xml.in.h:137
 msgid "Toggle active window shaded"
-msgstr "Commuta la finestra activa ombrejada"
+msgstr "Aldatu leiho aktiboa itzaldua"
 
 #: ../metadata/core.xml.in.h:138
 msgid "Toggle use of slow animations"
-msgstr "Commuta l'ús d'animacions lentes"
+msgstr "Aldatu animazio motelen erabilpena"
 
 #: ../metadata/core.xml.in.h:139
 msgid "Unmaximize Window"
-msgstr "Desmaximitza la finestra"
+msgstr "Leheneratu leihoa"
 
 #: ../metadata/core.xml.in.h:140
 msgid "Unmaximize active window"
-msgstr "Desmaximitza la finestra activa"
+msgstr "Leheneratu leiho aktiboa"
 
 #: ../metadata/core.xml.in.h:141
 msgid "Unredirect Fullscreen Windows"
-msgstr "No redirigeixis les finestres a pantalla completa"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:142
 msgid "Use diffuse light when screen is transformed"
-msgstr "Utilitza llum de difusió en transformar la pantalla"
+msgstr "Erabili argi barreiatua pantaila transformatzean"
 
 #: ../metadata/core.xml.in.h:143
 msgid "Vertical Virtual Size"
-msgstr "Mida virtual vertical"
+msgstr "Tamaina Birtual Bertikala"
 
 #: ../metadata/core.xml.in.h:144
 msgid "Window Menu"
-msgstr "Menú de la finestra"
+msgstr "Leiho Menua"
 
 #: ../metadata/core.xml.in.h:145
 msgid "Window menu button binding"
-msgstr ""
+msgstr "Leiho menu tekla konbinazioa"
 
 #: ../metadata/core.xml.in.h:146
 msgid "Window menu key binding"
-msgstr ""
+msgstr "Leiho menu laster-tekla"
 
 #: ../metadata/core.xml.in.h:147
 msgid "Window screenshot command line"
-msgstr "Línia d'ordres de captura de pantalla de finestra"
+msgstr "Leiho pantaila -argazki komando lerroa"
 
 #: ../metadata/core.xml.in.h:148
-#, fuzzy
 msgid "Windows that should be translucent by default"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr "Lehenetsita transluzidoa izan behar duten leihoak"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
-msgstr "Acceleració"
+msgstr "Azelerazioa"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr ""
+msgstr "Irudia doitu"
 
 #: ../metadata/cube.xml.in.h:3
 msgid "Adjust top face image to rotation"
-msgstr ""
+msgstr "Goiko aurpegiko irudia doitu biratzeko"
 
 #: ../metadata/cube.xml.in.h:4
 msgid "Advance to next slide"
-msgstr "Avança cap a la diapositiva següent"
+msgstr "Aurreratu hurrengo diapositibara"
 
 #: ../metadata/cube.xml.in.h:5
 msgid "Animate Skydome"
-msgstr "Cúpula animada"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:6
 msgid "Animate skydome when rotating cube"
-msgstr "Representació animada de la cúpula en girar el cub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:7
-#, fuzzy
 msgid "Automatic"
-msgstr "Elevació automàtica"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background Images"
-msgstr ""
+msgstr "Atzeko plano Irudiak"
 
 #: ../metadata/cube.xml.in.h:9
 msgid "Background images"
-msgstr ""
+msgstr "Atzeko plano irudiak"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
-msgstr "Color de les cares superior i inferior del cub"
+msgstr "Kuboaren goiko eta azpiko aurpegien kolorea"
 
 #: ../metadata/cube.xml.in.h:11
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr ""
-"Color que s'utilitzarà com a color inferior del degradat alternatiu de la "
-"cúpula"
 
 #: ../metadata/cube.xml.in.h:12
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr ""
-"Color que s'utilitzarà com color superior del degradat alternatiu de la "
-"cúpula"
 
 #: ../metadata/cube.xml.in.h:13
 msgid "Cube Color"
-msgstr "Color del cub"
+msgstr "Kubo kolorea"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Desktop Cube"
-msgstr "Cub de l'escriptori"
+msgstr "Mahaigain Kuboa"
 
 #: ../metadata/cube.xml.in.h:15
 msgid "Desktop Window Opacity Fade Time."
-msgstr ""
+msgstr "Mahaigain leiho opakotasun iraungitze denbora."
 
 #: ../metadata/cube.xml.in.h:16
-#, fuzzy
 msgid "Fade Time"
-msgstr "Temps d'inversió"
+msgstr "Iraungitze denbora"
 
 #: ../metadata/cube.xml.in.h:17
 msgid "Fold Acceleration"
-msgstr "Acceleració de plegament"
+msgstr "Bueltatze azelerazioa"
 
 #: ../metadata/cube.xml.in.h:18
 msgid "Fold Speed"
-msgstr "Velocitat de plegament"
+msgstr "Bueltatze abiadura"
 
 #: ../metadata/cube.xml.in.h:19
 msgid "Fold Timestep"
-msgstr "Etapa de plegament"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
-"Genera mipmaps sempre que sigui possible per a un canvi de mida de millor "
-"qualitat"
 
 #: ../metadata/cube.xml.in.h:21
 msgid "Go back to previous slide"
-msgstr "Torna a la diapositiva anterior"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:22
 msgid "Image files"
-msgstr "Fitxers d'imatge"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:23
 msgid "Image to use as texture for the skydome"
-msgstr "Imatge que s'utilitzarà com a textura per a la cúpula"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:24
 msgid "Initiates Cube transparency only if rotation is mouse driven."
@@ -1162,17 +1017,15 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:25
 msgid "Inside Cube"
-msgstr "Interior del cub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:26
 msgid "Inside cube"
-msgstr "Interior del cub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:27
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
-"Llista de fitxers PNG i SVG que s'hauran de representar a la cara superior "
-"del cub"
 
 #: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
@@ -1184,12 +1037,11 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:31
 msgid "Next Slide"
-msgstr "Diapositiva següent"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:32
-#, fuzzy
 msgid "On big cube"
-msgstr "Interior del cub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:33
 msgid "Opacity During Rotation"
@@ -1209,24 +1061,23 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Place windows on cube"
-msgstr "Situa les finestres al cub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:38
-#, fuzzy
 msgid "Prev Slide"
-msgstr "Diapositiva anterior"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:39
 msgid "Render skydome"
-msgstr "Renderitza la cúpula"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:40
 msgid "Scale image"
-msgstr "Canvia la mida de la imatge"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:41
 msgid "Scale images to cover top face of cube"
-msgstr "Canvia la mida de les imatges per a cobrir la cara superior del cub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Selects how the cube is displayed if multiple output devices are used."
@@ -1234,31 +1085,31 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome"
-msgstr "Cúpula"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:44
 msgid "Skydome Gradient End Color"
-msgstr "Color final del degradat de la cúpula"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:45
 msgid "Skydome Gradient Start Color"
-msgstr "Color inicial del degradat de la cúpula"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:46
 msgid "Skydome Image"
-msgstr "Imatge de la cúpula"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
-msgstr "Velocitat"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
-msgstr "Etapa"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparency Only on Mouse Rotate"
@@ -1266,11 +1117,11 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
-msgstr "Desplega"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:51
 msgid "Unfold cube"
-msgstr "Desplega el cub"
+msgstr ""
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
@@ -1286,85 +1137,76 @@ msgstr ""
 
 #: ../metadata/decoration.xml.in.h:2
 msgid "Command"
-msgstr "Ordre"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
-"Línia d'ordres del decorador que s'executa si no s'està executant cap "
-"decorador"
 
 #: ../metadata/decoration.xml.in.h:5
 msgid "Drop shadow X offset"
-msgstr "Desplaçament en X de l'ombra descendent"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:6
 msgid "Drop shadow Y offset"
-msgstr "Desplaçament en Y de l'ombra descendent"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "Radi de l'ombra descendent"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
-msgstr "Opacitat de l'ombra descendent"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:9
 msgid "Drop shadow radius"
-msgstr "Radi de l'ombra descendent"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "Ajusta les finestres"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:12
 msgid "Shadow Offset X"
-msgstr "Desplaçament en X de l'ombra"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:13
 msgid "Shadow Offset Y"
-msgstr "Desplaçament en Y de l'ombra"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:14
 msgid "Shadow Opacity"
-msgstr "Opacitat de l'ombra"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:15
 msgid "Shadow Radius"
-msgstr "Radi de l'ombra"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:16
-#, fuzzy
 msgid "Shadow windows"
-msgstr "Ajusta les finestres"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
-msgstr "Decoració de la finestra"
+msgstr ""
 
-# RU
 #: ../metadata/decoration.xml.in.h:18
 msgid "Window decorations"
-msgstr "Decoracions de finestres"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:19
-#, fuzzy
 msgid "Windows that should be decorated"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:20
-#, fuzzy
 msgid "Windows that should have a shadow"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
@@ -1372,7 +1214,7 @@ msgstr ""
 
 #: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
-msgstr "Velocitat d'esvaïment"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
@@ -1380,53 +1222,47 @@ msgstr ""
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
-msgstr "Efecte d'esvaïment amb avís sonor del sistema"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
-"Es fan aparèixer progressivament les finestres quan s'assignen i s'esvaeixen "
-"quan no estan assignades"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
-msgstr "Esvaïment de finestres"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fullscreen Visual Bell"
-msgstr "Campana visual a pantalla completa"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:9
 msgid "Fullscreen fade effect on system beep"
-msgstr "Efecte d'esvaïment a pantalla completa amb avís sonor del sistema"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:10
 msgid "Visual Bell"
-msgstr "Campana visual"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Window fade speed"
-msgstr "Velocitat d'esvaïment de la finestra"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:12
-#, fuzzy
 msgid "Windows that should be fading"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/fs.xml.in.h:1
-#, fuzzy
 msgid "Mount Point"
-msgstr "Punt"
+msgstr ""
 
 #: ../metadata/fs.xml.in.h:2
-#, fuzzy
 msgid "Mount point"
-msgstr "Afegeix un punt"
+msgstr ""
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
@@ -1453,9 +1289,8 @@ msgid "GLib main loop support"
 msgstr ""
 
 #: ../metadata/ini.xml.in.h:1
-#, fuzzy
 msgid "Ini"
-msgstr "No modifiquis"
+msgstr ""
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
@@ -1466,9 +1301,8 @@ msgid "File change notification plugin"
 msgstr ""
 
 #: ../metadata/inotify.xml.in.h:2
-#, fuzzy
 msgid "Inotify"
-msgstr "No modifiquis"
+msgstr ""
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
@@ -1480,45 +1314,43 @@ msgstr ""
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
-msgstr "Minimitza l'efecte"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:2
-#, fuzzy
 msgid "Minimize Windows"
-msgstr "Minimitza la finestra"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
-msgstr "Minimitza la velocitat"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:4
 msgid "Minimize timestep"
-msgstr "Minimitza l'etapa"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
-msgstr "Resistència a l'ombra"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:6
 msgid "Shade resistance"
-msgstr "Resistència a l'ombra"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr "Transforma les finestres quan es minimitzen i es maximitzen"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:10
-#, fuzzy
 msgid "Windows that should be transformed when minimized"
-msgstr "Tipus de finestres que s'hauran de transformar en minimitzar-se"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:1
 msgid "Constrain Y"
-msgstr "Restringeix Y"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:2
 msgid "Constrain Y coordinate to workspace area"
-msgstr "Restringeix la coordenada Y a l'àrea de l'espai de treball"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
@@ -1526,41 +1358,40 @@ msgstr ""
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
-msgstr "Inicia el moviment de la finestra"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:5
-#, fuzzy
 msgid "Lazy Positioning"
-msgstr "Mostra les finestres minimitzades"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:6
 msgid "Move Window"
-msgstr "Mou la finestra"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:7
 msgid "Move window"
-msgstr "Mou la finestra"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
 #: ../metadata/switcher.xml.in.h:17
 msgid "Opacity"
-msgstr "Opacitat"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:9
 msgid "Opacity level of moving windows"
-msgstr "Nivell d'opacitat de les finestres en moviment"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "Separa i desmaximitza les finestres maximitzades en arrossegar"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:11
 msgid "Snapoff maximized windows"
-msgstr "Separa les finestres maximitzades"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
-msgstr "Comença el moviment de la finestra"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1575,31 +1406,28 @@ msgid "Centered"
 msgstr ""
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Horizontal viewport positions"
-msgstr "Mida virtual horitzontal"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:5
-#, fuzzy
 msgid "Maximize"
-msgstr "Minimitzades"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:6
 msgid "Place Windows"
-msgstr "Situa les finestres"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:7
 msgid "Place windows at appropriate positions when mapped"
-msgstr "Situa les finestres en les posicions adequades quan s'assignin"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:8
 msgid "Placement Mode"
 msgstr ""
 
 #: ../metadata/place.xml.in.h:9
-#, fuzzy
 msgid "Positioned windows"
-msgstr "Mostra les finestres minimitzades"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:10
 msgid "Random"
@@ -1610,230 +1438,188 @@ msgid "Smart"
 msgstr ""
 
 #: ../metadata/place.xml.in.h:12
-#, fuzzy
 msgid "Vertical viewport positions"
-msgstr "Mida virtual horitzontal"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:13
-#, fuzzy
 msgid "Viewport positioned windows"
-msgstr "Mostra les finestres minimitzades"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:14
 msgid "Window placement workarounds"
-msgstr "Solucions alternatives de disposició de finestres"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:15
-#, fuzzy
 msgid "Windows that should be positioned by default"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:16
-#, fuzzy
 msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Tipus de finestres que s'hauran de canviar de mida en el mode d'escala"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:17
 msgid "Workarounds"
-msgstr "Solucions alternatives"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:18
-#, fuzzy
 msgid "X Positions"
-msgstr "Mostra les finestres minimitzades"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:19
-#, fuzzy
 msgid "X Viewport Positions"
-msgstr "Mida virtual horitzontal"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:20
 msgid "X position values"
 msgstr ""
 
 #: ../metadata/place.xml.in.h:21
-#, fuzzy
 msgid "Y Positions"
-msgstr "Mostra les finestres minimitzades"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:22
-#, fuzzy
 msgid "Y Viewport Positions"
-msgstr "Mida virtual horitzontal"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:23
 msgid "Y position values"
 msgstr ""
 
 #: ../metadata/plane.xml.in.h:1
-#, fuzzy
 msgid "Desktop Plane"
-msgstr "Cub de l'escriptori"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:2
-#, fuzzy
 msgid "Place windows on a plane"
-msgstr "Situa les finestres al cub"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:3
-#, fuzzy
 msgid "Plane Down"
-msgstr "Situa les finestres"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:4
-#, fuzzy
 msgid "Plane Left"
-msgstr "Gira cap a l'esquerra"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:5
-#, fuzzy
 msgid "Plane Right"
-msgstr "Gira cap a la dreta"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:6
-#, fuzzy
 msgid "Plane To Face 1"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:7
-#, fuzzy
 msgid "Plane To Face 10"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:8
-#, fuzzy
 msgid "Plane To Face 11"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:9
-#, fuzzy
 msgid "Plane To Face 12"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:10
-#, fuzzy
 msgid "Plane To Face 2"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:11
-#, fuzzy
 msgid "Plane To Face 3"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:12
-#, fuzzy
 msgid "Plane To Face 4"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:13
-#, fuzzy
 msgid "Plane To Face 5"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:14
-#, fuzzy
 msgid "Plane To Face 6"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:15
-#, fuzzy
 msgid "Plane To Face 7"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:16
-#, fuzzy
 msgid "Plane To Face 8"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:17
-#, fuzzy
 msgid "Plane To Face 9"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:18
-#, fuzzy
 msgid "Plane Up"
-msgstr "Situa les finestres"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:19
-#, fuzzy
 msgid "Plane down"
-msgstr "Situa les finestres"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:20
-#, fuzzy
 msgid "Plane left"
-msgstr "Gira cap a l'esquerra"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:21
-#, fuzzy
 msgid "Plane right"
-msgstr "Gira cap a la dreta"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:22
-#, fuzzy
 msgid "Plane to face 1"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:23
-#, fuzzy
 msgid "Plane to face 10"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:24
-#, fuzzy
 msgid "Plane to face 11"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:25
-#, fuzzy
 msgid "Plane to face 12"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:26
-#, fuzzy
 msgid "Plane to face 2"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:27
-#, fuzzy
 msgid "Plane to face 3"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:28
-#, fuzzy
 msgid "Plane to face 4"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:29
-#, fuzzy
 msgid "Plane to face 5"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:30
-#, fuzzy
 msgid "Plane to face 6"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:31
-#, fuzzy
 msgid "Plane to face 7"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:32
-#, fuzzy
 msgid "Plane to face 8"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:33
-#, fuzzy
 msgid "Plane to face 9"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/plane.xml.in.h:34
-#, fuzzy
 msgid "Plane up"
-msgstr "Situa les finestres"
+msgstr ""
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -1844,19 +1630,16 @@ msgid "Png image loader"
 msgstr ""
 
 #: ../metadata/regex.xml.in.h:1
-#, fuzzy
 msgid "Regex Matching"
-msgstr "Commuta l'ajustament de finestres"
+msgstr ""
 
 #: ../metadata/regex.xml.in.h:2
-#, fuzzy
 msgid "Regex window matching"
-msgstr "Commuta l'ajustament de finestres"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:1
-#, fuzzy
 msgid "Border Color"
-msgstr "Color del cub"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
@@ -1871,556 +1654,476 @@ msgid "Default mode used for window resizing"
 msgstr ""
 
 #: ../metadata/resize.xml.in.h:5
-#, fuzzy
 msgid "Fill Color"
-msgstr "Color del cub"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:6
 msgid "Fill color used for rectangle resize mode"
 msgstr ""
 
 #: ../metadata/resize.xml.in.h:7
-#, fuzzy
 msgid "Initiate Normal Window Resize"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:8
-#, fuzzy
 msgid "Initiate Outline Window Resize"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:9
-#, fuzzy
 msgid "Initiate Rectangle Window Resize"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:10
-#, fuzzy
 msgid "Initiate Stretch Window Resize"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
-msgstr "Inicia el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:12
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:13
-#, fuzzy
 msgid "Normal Resize Windows"
-msgstr "Canvia la mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:14
-#, fuzzy
 msgid "Outline"
-msgstr "Color del cub"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:15
-#, fuzzy
 msgid "Outline Resize Windows"
-msgstr "Canvia la mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:16
 msgid "Rectangle"
 msgstr ""
 
 #: ../metadata/resize.xml.in.h:17
-#, fuzzy
 msgid "Rectangle Resize Windows"
-msgstr "Canvia la mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:18
 msgid "Resize Window"
-msgstr "Canvia la mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:19
 msgid "Resize window"
-msgstr "Canvia la mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:20
 msgid "Start resizing window"
-msgstr "Comença el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:21
-#, fuzzy
 msgid "Start resizing window by stretching it"
-msgstr "Comença el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:22
-#, fuzzy
 msgid "Start resizing window normally"
-msgstr "Comença el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:23
-#, fuzzy
 msgid "Start resizing window with outline"
-msgstr "Comença el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:24
-#, fuzzy
 msgid "Start resizing window with rectangle"
-msgstr "Comença el canvi de mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:25
 msgid "Stretch"
 msgstr ""
 
 #: ../metadata/resize.xml.in.h:26
-#, fuzzy
 msgid "Stretch Resize Windows"
-msgstr "Canvia la mida de la finestra"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:27
-#, fuzzy
 msgid "Windows that normal resize should be used for"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:28
-#, fuzzy
 msgid "Windows that outline resize should be used for"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:29
-#, fuzzy
 msgid "Windows that rectangle resize should be used for"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:30
-#, fuzzy
 msgid "Windows that stretch resize should be used for"
-msgstr "Tipus de finestres que s'hauran d'esvair"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:2
 msgid "Edge Flip DnD"
-msgstr "DnD d'inversió de vora"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:3
 msgid "Edge Flip Move"
-msgstr "Moviment d'inversió de vora"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:4
 msgid "Edge Flip Pointer"
-msgstr "Punter d'inversió de vora"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:5
 msgid "Flip Time"
-msgstr "Temps d'inversió"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:6
 msgid "Flip to left viewport and warp pointer"
-msgstr "Inverteix cap a l'àrea de visualització esquerra i deforma el punter"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:7
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
-"Inverteix cap a la propera àrea de visualització en arrossegar l'objecte cap "
-"a la vora de la pantalla"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
-"Inverteix cap a la propera àrea de visualització en moure el punter cap a la "
-"vora de la pantalla"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Inverteix cap a la propera àrea de visualització en moure la finestra cap a "
-"la vora de la pantalla"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to right viewport and warp pointer"
-msgstr "Inverteix cap a l'àrea de visualització dreta i deforma el punter"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:12
 msgid "Invert Y axis for pointer movement"
-msgstr "Inverteix l'eix Y per al moviment del punter"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:13
 msgid "Pointer Invert Y"
-msgstr "Punter inverteix Y"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:14
 msgid "Pointer Sensitivity"
-msgstr "Sensibilitat del punter"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:15
 msgid "Raise on rotate"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:16
-#, fuzzy
 msgid "Raise window when rotating"
-msgstr "Eleva les finestres en fer clic"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:17
 msgid "Rotate Cube"
-msgstr "Gira el cub"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:18
 msgid "Rotate Flip Left"
-msgstr "Gira i inverteix cap a l'esquerra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Flip Right"
-msgstr "Gira i inverteix cap a la dreta"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:20
 msgid "Rotate Left"
-msgstr "Gira cap a l'esquerra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:21
 msgid "Rotate Left with Window"
-msgstr "Gira cap a l'esquerra amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:22
 msgid "Rotate Right"
-msgstr "Gira cap a la dreta"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:23
 msgid "Rotate Right with Window"
-msgstr "Gira cap a la dreta amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:24
 msgid "Rotate To"
-msgstr "Gira cap a"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:25
-#, fuzzy
 msgid "Rotate To Face 1"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:26
-#, fuzzy
 msgid "Rotate To Face 1 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:27
-#, fuzzy
 msgid "Rotate To Face 10"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:28
-#, fuzzy
 msgid "Rotate To Face 10 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:29
-#, fuzzy
 msgid "Rotate To Face 11"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:30
-#, fuzzy
 msgid "Rotate To Face 11 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:31
-#, fuzzy
 msgid "Rotate To Face 12"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:32
-#, fuzzy
 msgid "Rotate To Face 12 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:33
-#, fuzzy
 msgid "Rotate To Face 2"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:34
-#, fuzzy
 msgid "Rotate To Face 2 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:35
-#, fuzzy
 msgid "Rotate To Face 3"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:36
-#, fuzzy
 msgid "Rotate To Face 3 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:37
-#, fuzzy
 msgid "Rotate To Face 4"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:38
-#, fuzzy
 msgid "Rotate To Face 4 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:39
-#, fuzzy
 msgid "Rotate To Face 5"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:40
-#, fuzzy
 msgid "Rotate To Face 5 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:41
-#, fuzzy
 msgid "Rotate To Face 6"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:42
-#, fuzzy
 msgid "Rotate To Face 6 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:43
-#, fuzzy
 msgid "Rotate To Face 7"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:44
-#, fuzzy
 msgid "Rotate To Face 7 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:45
-#, fuzzy
 msgid "Rotate To Face 8"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:46
-#, fuzzy
 msgid "Rotate To Face 8 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:47
-#, fuzzy
 msgid "Rotate To Face 9"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:48
-#, fuzzy
 msgid "Rotate To Face 9 with Window"
-msgstr "Gira cap a la cara %d amb la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:49
 msgid "Rotate desktop cube"
-msgstr "Gira el cub de l'escriptori"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:50
 msgid "Rotate left"
-msgstr "Gira cap a l'esquerra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:51
-#, fuzzy
 msgid "Rotate left and bring active window along"
-msgstr "Gira cap a l'esquerra i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:52
 msgid "Rotate right"
-msgstr "Gira cap a la dreta"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:53
-#, fuzzy
 msgid "Rotate right and bring active window along"
-msgstr "Gira cap a la dreta i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:54
-#, fuzzy
 msgid "Rotate to face 1"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:55
-#, fuzzy
 msgid "Rotate to face 1 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to face 10"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to face 10 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:58
-#, fuzzy
 msgid "Rotate to face 11"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:59
-#, fuzzy
 msgid "Rotate to face 11 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:60
-#, fuzzy
 msgid "Rotate to face 12"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:61
-#, fuzzy
 msgid "Rotate to face 12 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:62
-#, fuzzy
 msgid "Rotate to face 2"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:63
-#, fuzzy
 msgid "Rotate to face 2 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:64
-#, fuzzy
 msgid "Rotate to face 3"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:65
-#, fuzzy
 msgid "Rotate to face 3 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:66
-#, fuzzy
 msgid "Rotate to face 4"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:67
-#, fuzzy
 msgid "Rotate to face 4 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:68
-#, fuzzy
 msgid "Rotate to face 5"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:69
-#, fuzzy
 msgid "Rotate to face 5 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:70
-#, fuzzy
 msgid "Rotate to face 6"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:71
-#, fuzzy
 msgid "Rotate to face 6 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:72
-#, fuzzy
 msgid "Rotate to face 7"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:73
-#, fuzzy
 msgid "Rotate to face 7 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:74
-#, fuzzy
 msgid "Rotate to face 8"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:75
-#, fuzzy
 msgid "Rotate to face 8 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:76
-#, fuzzy
 msgid "Rotate to face 9"
-msgstr "Gira cap a la cara %d"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:77
-#, fuzzy
 msgid "Rotate to face 9 and bring active window along"
-msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:78
 msgid "Rotate to viewport"
-msgstr "Gira cap a l'àrea de visualització"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:79
-#, fuzzy
 msgid "Rotate window"
-msgstr "Gira la finestra"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:80
 msgid "Rotate with window"
-msgstr "Gira amb la finestra"
+msgstr ""
 
-# RU
 #: ../metadata/rotate.xml.in.h:81
 msgid "Rotation Acceleration"
-msgstr "Acceleració de gir"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:82
 msgid "Rotation Speed"
-msgstr "Velocitat del gir"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:83
 msgid "Rotation Timestep"
-msgstr "Etapa del gir"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:84
-#, fuzzy
 msgid "Rotation Zoom"
-msgstr "Velocitat del gir"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:85
 msgid "Sensitivity of pointer movement"
-msgstr "Sensibilitat del moviment del punter"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:86
-#, fuzzy
 msgid "Snap Cube Rotation to Bottom Face"
-msgstr "Desplaça el gir del cub a la cara superior"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:87
 msgid "Snap Cube Rotation to Top Face"
-msgstr "Desplaça el gir del cub a la cara superior"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:88
-#, fuzzy
 msgid "Snap To Bottom Face"
-msgstr "Desplaça a la cara superior"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:89
 msgid "Snap To Top Face"
-msgstr "Desplaça a la cara superior"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
-msgstr "Inicia el gir"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
-msgstr "Temps d'espera abans d'invertir l'àrea de visualització"
+msgstr ""
 
 #: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
-msgstr "Zoom"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
-msgstr "Quantitat d'opacitat en percentatge"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:2
 msgid "Big"
-msgstr "Gran"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:3
 msgid "Click Desktop to Show Desktop"
@@ -2428,15 +2131,15 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:4
 msgid "Darken Background"
-msgstr "Enfosqueix el fons"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:5
 msgid "Darken background when scaling windows"
-msgstr "Enfosqueix el fons en canviar la mida de les finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Emblem"
-msgstr "Distintiu"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
@@ -2444,44 +2147,43 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
-msgstr "Temps de passar per sobre"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:9
 msgid "Initiate Window Picker"
-msgstr "Inicia el seleccionador de finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:10
 msgid "Initiate Window Picker For All Windows"
-msgstr "Inicia el seleccionador per a totes les finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker For Window Group"
-msgstr "Inicia el seleccionador per a un grup de finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Inicia el seleccionador per a les finestres de la sortida actual"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:13
 msgid "Layout and start transforming all windows"
-msgstr "Dissenya i inicia la transformació de totes les finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:14
 msgid "Layout and start transforming window group"
-msgstr "Dissenya i inicia la transformació del grup de finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:15
 msgid "Layout and start transforming windows"
-msgstr "Dissenya i inicia la transformació de les finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:16
 msgid "Layout and start transforming windows on current output"
 msgstr ""
-"Dissenya i inicia la transformació de les finestres de la sortida actual"
 
 #: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
 msgid "None"
-msgstr "Cap"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:19
 msgid "On all output devices"
@@ -2493,32 +2195,31 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:22
 msgid "Overlay Icon"
-msgstr "Superposa la icona"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:23
 msgid "Overlay an icon on windows once they are scaled"
-msgstr "Superposa una icona a les finestres un cop se n'ha canviat la mida"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:24
 msgid "Scale"
-msgstr "Canvia la mida"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:25
-#, fuzzy
 msgid "Scale Windows"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:26
 msgid "Scale speed"
-msgstr "Canvia la velocitat"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:27
 msgid "Scale timestep"
-msgstr "Canvia la mida de l'etapa"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:28
 msgid "Scale windows"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:29
 msgid "Selects where windows are scaled if multiple output devices are used."
@@ -2526,24 +2227,20 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:30
 msgid "Space between windows"
-msgstr "Espai entre finestres"
+msgstr ""
 
-# ES
 #: ../metadata/scale.xml.in.h:31
 msgid "Spacing"
-msgstr "Espaiat"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:33
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
-"Temps (en ms) abans de finalitzar el mode d'escala en passar el punter per "
-"sobre una finestra"
 
 #: ../metadata/scale.xml.in.h:35
-#, fuzzy
 msgid "Windows that should be scaled in scale mode"
-msgstr "Tipus de finestres que s'hauran de canviar de mida en el mode d'escala"
+msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:1
 msgid "Automatically open screenshot in this application"
@@ -2554,28 +2251,24 @@ msgid "Directory"
 msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:4
-#, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "Fes una captura de pantalla"
+msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:5
-#, fuzzy
 msgid "Launch Application"
-msgstr "Mostra el diàleg d'execució de l'aplicació"
+msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:6
 msgid "Put screenshot images in this directory"
 msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:7
-#, fuzzy
 msgid "Screenshot"
-msgstr "Fes una captura de pantalla"
+msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:8
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "Línia d'ordres de captura de pantalla"
+msgstr ""
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
@@ -2587,97 +2280,84 @@ msgstr ""
 
 #: ../metadata/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
-msgstr "Quantitat de brillantor en percentatge"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:3
 msgid "Amount of saturation in percent"
-msgstr "Quantitat de saturació en percentatge"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:4
 msgid "Application Switcher"
-msgstr "Canviador d'aplicacions"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:5
-#, fuzzy
 msgid "Auto Rotate"
-msgstr "Elevació automàtica"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:6
 msgid "Brightness"
-msgstr "Brillantor"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:7
 msgid "Bring To Front"
-msgstr "Porta endavant"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring selected window to front"
-msgstr "Porta la finestra seleccionada endavant"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:9
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr ""
-"Distància a la qual s'haurà d'allunyar el zoom de l'escriptori mentre es "
-"canvia de finestra"
 
 #: ../metadata/switcher.xml.in.h:11
 msgid "Icon"
-msgstr "Icona"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:12
 msgid "Minimized"
-msgstr "Minimitzades"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:14
 msgid "Next window"
-msgstr "Finestra següent"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:15
-#, fuzzy
 msgid "Next window (All windows)"
-msgstr "Finestra següent"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:16
-#, fuzzy
 msgid "Next window (No popup)"
-msgstr "Finestra següent"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:18
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
-"Fa sortir el canviador si no està visible i selecciona la finestra següent"
 
 #: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
-"Fes sortir el canviador si no està visible i selecciona la següent de totes "
-"les finestres"
 
 #: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select previous window"
 msgstr ""
-"Fes sortir el canviador si no està visible i selecciona la finestra anterior"
 
 #: ../metadata/switcher.xml.in.h:21
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
-"Fes sortir el canviador si no està visible i selecciona l'anterior de totes "
-"les finestres"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Prev window"
-msgstr "Finestra anterior"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev window (All windows)"
-msgstr "Finestra anterior"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:24
-#, fuzzy
 msgid "Prev window (No popup)"
-msgstr "Finestra anterior"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:25
 msgid "Rotate to the selected window while switching"
@@ -2685,7 +2365,7 @@ msgstr ""
 
 #: ../metadata/switcher.xml.in.h:26
 msgid "Saturation"
-msgstr "Saturació"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:27
 msgid "Select next window without showing the popup window."
@@ -2697,29 +2377,27 @@ msgstr ""
 
 #: ../metadata/switcher.xml.in.h:29
 msgid "Show icon next to thumbnail"
-msgstr "Mostra la icona al costat de la miniatura"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Show minimized windows"
-msgstr "Mostra les finestres minimitzades"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Switcher speed"
-msgstr "Velocitat del canviador"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:33
 msgid "Switcher timestep"
-msgstr "Etapa del canviador"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:34
-#, fuzzy
 msgid "Switcher windows"
-msgstr "Canvia la mida de les finestres"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:36
-#, fuzzy
 msgid "Windows that should be shown in switcher"
-msgstr "Tipus de finestres que s'hauran de mostrar al canviador"
+msgstr ""
 
 #: ../metadata/video.xml.in.h:1
 msgid "Provide YV12 colorspace support"
@@ -2739,768 +2417,232 @@ msgstr ""
 
 #: ../metadata/water.xml.in.h:1
 msgid "Add line"
-msgstr "Afegeix una línia"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:2
 msgid "Add point"
-msgstr "Afegeix un punt"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:3
 msgid "Adds water effects to different desktop actions"
-msgstr "Afegeix efectes d'aigua a diferents accions de l'escriptori"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:4
 msgid "Delay (in ms) between each rain-drop"
-msgstr "Retard (en ms) entre cada gota de pluja"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
-msgstr "Habilita els efectes d'aigua del punter"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:7
 msgid "Line"
-msgstr "Línia"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:8
 msgid "Offset Scale"
-msgstr "Escala de desplaçament"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:9
 msgid "Point"
-msgstr "Punt"
+msgstr ""
 
-# SH
 #: ../metadata/water.xml.in.h:10
 msgid "Rain Delay"
-msgstr "Retard de pluja"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:11
 msgid "Title wave"
-msgstr "Títol en onada"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:12
 msgid "Toggle rain"
-msgstr "Commuta la pluja"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:13
 msgid "Toggle rain effect"
-msgstr "Commuta l'efecte de pluja"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:14
 msgid "Toggle wiper"
-msgstr "Commuta l'eixugaparabrises"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:15
 msgid "Toggle wiper effect"
-msgstr "Commuta l'efecte de l'eixugaparabrises"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
-msgstr "Efecte d'aigua"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:17
 msgid "Water offset scale"
-msgstr "Escala de desplaçament d'aigua"
+msgstr ""
 
 #: ../metadata/water.xml.in.h:18
 msgid "Wave effect from window title"
-msgstr "Efecte d'onada del títol de la finestra"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:1
 msgid "Focus Effect"
-msgstr "Passa el focus a l'efecte"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:2
 msgid "Focus Window Effect"
-msgstr "Passa el focus a l'efecte de finestra"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:3
-#, fuzzy
 msgid "Focus Windows"
-msgstr "Tipus de finestres de focus"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:4
 msgid "Friction"
-msgstr "Fricció"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:5
-#, fuzzy
 msgid "Grab Windows"
-msgstr "Tipus de finestres de captura"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:6
 msgid "Grid Resolution"
-msgstr "Resolució de la graella"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
-msgstr "Ajustament de finestres invertit"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:8
 msgid "Make window shiver"
-msgstr "Fes estremir la finestra"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:9
 msgid "Map Effect"
-msgstr "Assigna l'efecte"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:10
 msgid "Map Window Effect"
-msgstr "Assigna l'efecte de la finestra"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:11
-#, fuzzy
 msgid "Map Windows"
-msgstr "Assigna tipus de finestres"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:12
 msgid "Maximize Effect"
-msgstr "Efecte de maximitzar"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:13
 msgid "Minimum Grid Size"
-msgstr "Mida mínima de la graella"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:14
 msgid "Minimum Vertex Grid Size"
-msgstr "Mida mínima de la graella del vèrtex"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:15
-#, fuzzy
 msgid "Move Windows"
-msgstr "Mou la finestra"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:17
 msgid "Shiver"
-msgstr "Estremeix"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:18
 msgid "Snap Inverted"
-msgstr "Ajustament invertit"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:19
 msgid "Snap windows"
-msgstr "Ajusta les finestres"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:20
 msgid "Spring Friction"
-msgstr "Fricció d'elasticitat"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:21
 msgid "Spring K"
-msgstr "Constant elàstica"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:22
 msgid "Spring Konstant"
-msgstr "Constant elàstica"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:23
 msgid "Toggle window snapping"
-msgstr "Commuta l'ajustament de finestres"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
-msgstr "Utilitza el model d'elàstic per a l'efecte de finestra tremolosa"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:25
 msgid "Vertex Grid Resolution"
-msgstr "Resolució de la graella del vèrtex"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:26
-#, fuzzy
 msgid "Windows that should wobble when focused"
-msgstr "Tipus de finestres que hauran de tremolar quan rebin el focus"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:27
-#, fuzzy
 msgid "Windows that should wobble when grabbed"
-msgstr "Tipus de finestres que hauran de tremolar quan s'agafin"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:28
-#, fuzzy
 msgid "Windows that should wobble when mapped"
-msgstr "Tipus de finestres que hauran de tremolar quan s'assignin"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:29
-#, fuzzy
 msgid "Windows that should wobble when moved"
-msgstr "Tipus de finestres que hauran de tremolar quan es moguin"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:30
 msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Efecte de tremolor en maximitzar i desmaximitzar finestres"
+msgstr ""
 
 #: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
-msgstr "Finestres tremoloses"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:1
 msgid "Filter Linear"
-msgstr "Filtre lineal"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:5
-#, fuzzy
 msgid "Use linear filter when zoomed in"
-msgstr "Utilitza el filtre lineal en ampliar el zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:6
 msgid "Zoom Desktop"
-msgstr "Fes zoom a l'escriptori"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:7
 msgid "Zoom In"
-msgstr "Amplia el zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:8
 msgid "Zoom Out"
-msgstr "Allunya el zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:9
-#, fuzzy
 msgid "Zoom Pan"
-msgstr "Amplia el zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:10
 msgid "Zoom Speed"
-msgstr "Velocitat del zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:11
 msgid "Zoom Timestep"
-msgstr "Etapa del zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:12
 msgid "Zoom and pan desktop cube"
-msgstr "Fes zoom i gira el cub de l'escriptori"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:13
 msgid "Zoom factor"
-msgstr "Factor del zoom"
+msgstr ""
 
 #: ../metadata/zoom.xml.in.h:14
-#, fuzzy
 msgid "Zoom pan"
-msgstr "Amplia el zoom"
-
-#~ msgid "Open window menu"
-#~ msgstr "Obre el menú de la finestra"
-
-#~ msgid "Select next window"
-#~ msgstr "Selecciona la finestra següent"
-
-#~ msgid "Select previous window"
-#~ msgstr "Selecciona la finestra anterior"
-
-#~ msgid "Dock"
-#~ msgstr "Acoblament"
-
-#~ msgid "Toolbar"
-#~ msgstr "Barra d'eines"
-
-#~ msgid "Menu"
-#~ msgstr "Menú"
-
-#~ msgid "Utility"
-#~ msgstr "Utilitat"
-
-#~ msgid "Splash"
-#~ msgstr "Pantalla de presentació"
-
-#~ msgid "Dialog"
-#~ msgstr "Diàleg"
-
-#~ msgid "DropdownMenu"
-#~ msgstr "Menú desplegable"
-
-#~ msgid "PopupMenu"
-#~ msgstr "Menú emergent"
-
-#~ msgid "Tooltip"
-#~ msgstr "Indicador de funció"
-
-#~ msgid "Notification"
-#~ msgstr "Notificació"
-
-#~ msgid "Combo"
-#~ msgstr "Quadre combinat"
-
-#~ msgid "Dnd"
-#~ msgstr "Dnd"
-
-#~ msgid "ModalDialog"
-#~ msgstr "Diàleg de mode"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Pantalla completa"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconeguda"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command0 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9 (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Assignació de tecles que, en invocar-se, executa l'ordre de l'intèrpret "
-#~ "identificada amb l'ordre %d"
-
-#, fuzzy
-#~ msgid "Amount of brightness in percent (0-100)"
-#~ msgstr "Quantitat de brillantor en percentatge"
-
-#, fuzzy
-#~ msgid "Amount of opacity in percent (0-100)"
-#~ msgstr "Quantitat d'opacitat en percentatge"
-
-#, fuzzy
-#~ msgid "Amount of saturation in percent (0-100)"
-#~ msgstr "Quantitat de saturació en percentatge"
-
-#, fuzzy
-#~ msgid "Blur saturation (0-100)"
-#~ msgstr "Saturació"
-
-#, fuzzy
-#~ msgid "Delay (in ms) between each rain-drop (0-3600000)"
-#~ msgstr "Retard (en ms) entre cada gota de pluja"
-
-#, fuzzy
-#~ msgid ""
-#~ "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-#~ msgstr ""
-#~ "Distància a la qual s'haurà d'allunyar el zoom de l'escriptori mentre es "
-#~ "canvia de finestra"
-
-#~ msgid "Do not modify"
-#~ msgstr "No modifiquis"
-
-#, fuzzy
-#~ msgid "Drop shadow X offset (-16-16)"
-#~ msgstr "Desplaçament en X de l'ombra descendent"
-
-#, fuzzy
-#~ msgid "Drop shadow Y offset (-16-16)"
-#~ msgstr "Desplaçament en Y de l'ombra descendent"
-
-#, fuzzy
-#~ msgid "Drop shadow opacity (0.01-6.00)"
-#~ msgstr "Opacitat de l'ombra descendent"
-
-#, fuzzy
-#~ msgid "Drop shadow radius (0.0-48.0)"
-#~ msgstr "Radi de l'ombra descendent"
-
-#, fuzzy
-#~ msgid "Focus Window Effect (None, Shiver)"
-#~ msgstr "Passa el focus a l'efecte de finestra"
-
-#, fuzzy
-#~ msgid "Focus prevention windows (match)"
-#~ msgstr "Selecciona la finestra anterior"
-
-#, fuzzy
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "Acceleració de plegament"
-
-#, fuzzy
-#~ msgid "Fold Speed (0.0-50.0)"
-#~ msgstr "Velocitat de plegament"
-
-#, fuzzy
-#~ msgid "Fold Timestep (0.0-50.0)"
-#~ msgstr "Etapa de plegament"
-
-#, fuzzy
-#~ msgid "Interval before raising selected windows (0-10000)"
-#~ msgstr ""
-#~ "Interval que ha de transcórrer abans d'elevar les finestres seleccionades"
-
-#, fuzzy
-#~ msgid ""
-#~ "Layout and start transforming windows on current output (Left, Right, "
-#~ "Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Dissenya i inicia la transformació de les finestres de la sortida actual"
-
-#, fuzzy
-#~ msgid "Map Window Effect (None, Shiver)"
-#~ msgstr "Assigna l'efecte de la finestra"
-
-#, fuzzy
-#~ msgid "Minimize speed (0.0-50.0)"
-#~ msgstr "Minimitza la velocitat"
-
-#, fuzzy
-#~ msgid "Minimize timestep (0.0-50.0)"
-#~ msgstr "Minimitza l'etapa"
-
-#, fuzzy
-#~ msgid "Minimum Vertex Grid Size (4-128)"
-#~ msgstr "Mida mínima de la graella del vèrtex"
-
-#, fuzzy
-#~ msgid "Number of virtual desktops (1-36)"
-#~ msgstr "Nombre d'escriptoris virtuals"
-
-#, fuzzy
-#~ msgid "Opacity change step (1-50)"
-#~ msgstr "Etapa de canvi d'opacitat"
-
-#, fuzzy
-#~ msgid "Opacity level of moving windows (1-100)"
-#~ msgstr "Nivell d'opacitat de les finestres en moviment"
-
-#, fuzzy
-#~ msgid "Opacity level of resizing windows (1-100)"
-#~ msgstr "Nivell d'opacitat de les finestres en moviment"
-
-#, fuzzy
-#~ msgid "Overlay an icon on windows once they are scaled (None, Emblem, Big)"
-#~ msgstr "Superposa una icona a les finestres un cop se n'ha canviat la mida"
-
-#~ msgid "Plugins that this must load before"
-#~ msgstr "Connectors que ha de carregar prèviament"
-
-#~ msgid "Plugins that this requires"
-#~ msgstr "Connectors que necessita"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window (Left, Right, Top, "
-#~ "Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Fes sortir el canviador si no està visible i selecciona la següent de "
-#~ "totes les finestres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window out of all windows "
-#~ "(Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Fes sortir el canviador si no està visible i selecciona la següent de "
-#~ "totes les finestres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window (Left, Right, "
-#~ "Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight)"
-#~ msgstr ""
-#~ "Fes sortir el canviador si no està visible i selecciona l'anterior de "
-#~ "totes les finestres"
-
-#, fuzzy
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window out of all "
-#~ "windows (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
-#~ msgstr ""
-#~ "Fes sortir el canviador si no està visible i selecciona l'anterior de "
-#~ "totes les finestres"
-
-# RU
-#, fuzzy
-#~ msgid "Rotation Acceleration (1.0-20.0)"
-#~ msgstr "Acceleració de gir"
-
-#, fuzzy
-#~ msgid "Rotation Speed (0.0-50.0)"
-#~ msgstr "Velocitat del gir"
-
-#, fuzzy
-#~ msgid "Rotation Timestep (0.0-50.0)"
-#~ msgstr "Etapa del gir"
-
-#, fuzzy
-#~ msgid "Scale speed (0.0-50.0)"
-#~ msgstr "Canvia la velocitat"
-
-#, fuzzy
-#~ msgid "Scale timestep (0.0-50.0)"
-#~ msgstr "Canvia la mida de l'etapa"
-
-#, fuzzy
-#~ msgid "Screen size multiplier for horizontal virtual size (1-32)"
-#~ msgstr ""
-#~ "Multiplicador de la mida de la pantalla per a la mida virtual horitzontal"
-
-#, fuzzy
-#~ msgid "Screen size multiplier for vertical virtual size (1-32)"
-#~ msgstr ""
-#~ "Multiplicador de la mida de la pantalla per a la mida virtual vertical"
-
-#, fuzzy
-#~ msgid "Sensitivity of pointer movement (0.01-100.00)"
-#~ msgstr "Sensibilitat del moviment del punter"
-
-#, fuzzy
-#~ msgid "Shade resistance (0-100)"
-#~ msgstr "Resistència a l'ombra"
-
-#, fuzzy
-#~ msgid "Space between windows (0-250)"
-#~ msgstr "Espai entre finestres"
-
-#, fuzzy
-#~ msgid "Spring Friction (0.0-10.0)"
-#~ msgstr "Fricció d'elasticitat"
-
-#, fuzzy
-#~ msgid "Spring Konstant (0.0-10.0)"
-#~ msgstr "Constant elàstica"
-
-#, fuzzy
-#~ msgid "Switcher speed (0.0-50.0)"
-#~ msgstr "Velocitat del canviador"
-
-#, fuzzy
-#~ msgid "Switcher timestep (0.0-50.0)"
-#~ msgstr "Etapa del canviador"
-
-#, fuzzy
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "Aplicació del filtre de textura"
-
-#, fuzzy
-#~ msgid "The rate at which the screen is redrawn (times/second) (1-200)"
-#~ msgstr ""
-#~ "Freqüència amb la qual es torna a representar la pantalla (vegades/segon)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Time (in ms) before scale mode is terminated when hovering over a window "
-#~ "(50-10000)"
-#~ msgstr ""
-#~ "Temps (en ms) abans de finalitzar el mode d'escala en passar el punter "
-#~ "per sobre una finestra"
-
-#, fuzzy
-#~ msgid "Timeout before flipping viewport (0-1000)"
-#~ msgstr "Temps d'espera abans d'invertir l'àrea de visualització"
-
-#~ msgid "USe linear filter when zoomed in"
-#~ msgstr "Utilitza el filtre lineal en ampliar el zoom"
-
-#, fuzzy
-#~ msgid "Vertex Grid Resolution (1-64)"
-#~ msgstr "Resolució de la graella del vèrtex"
-
-#, fuzzy
-#~ msgid "Water offset scale (0.0-10.0)"
-#~ msgstr "Escala de desplaçament d'aigua"
-
-#, fuzzy
-#~ msgid "Window blur speed (0.0-10.0)"
-#~ msgstr "Velocitat d'esvaïment de la finestra"
-
-#, fuzzy
-#~ msgid "Window fade speed (0.0-25.0)"
-#~ msgstr "Velocitat d'esvaïment de la finestra"
-
-#, fuzzy
-#~ msgid "Windows that should be affected by focus blur (match)"
-#~ msgstr "Tipus de finestres que s'hauran d'esvair"
-
-#, fuzzy
-#~ msgid "Windows that should be decorated (match)"
-#~ msgstr "Tipus de finestres que s'hauran d'esvair"
-
-#, fuzzy
-#~ msgid "Windows that should be fading (match)"
-#~ msgstr "Tipus de finestres que s'hauran d'esvair"
-
-#, fuzzy
-#~ msgid "Windows that should be have a shadow (match)"
-#~ msgstr "Tipus de finestres que s'hauran d'esvair"
-
-#, fuzzy
-#~ msgid "Windows that should be scaled in scale mode (match)"
-#~ msgstr ""
-#~ "Tipus de finestres que s'hauran de canviar de mida en el mode d'escala"
-
-#, fuzzy
-#~ msgid "Windows that should be shown in switcher (match)"
-#~ msgstr "Tipus de finestres que s'hauran de mostrar al canviador"
-
-#, fuzzy
-#~ msgid "Windows that should be transformed when minimized (match)"
-#~ msgstr "Tipus de finestres que s'hauran de transformar en minimitzar-se"
-
-#, fuzzy
-#~ msgid "Windows that should use alpha blur by default (match)"
-#~ msgstr "Tipus de finestres que s'hauran d'esvair"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when focused (match)"
-#~ msgstr "Tipus de finestres que hauran de tremolar quan rebin el focus"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when grabbed (match)"
-#~ msgstr "Tipus de finestres que hauran de tremolar quan s'agafin"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when mapped (match)"
-#~ msgstr "Tipus de finestres que hauran de tremolar quan s'assignin"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when moved (match)"
-#~ msgstr "Tipus de finestres que hauran de tremolar quan es moguin"
-
-#, fuzzy
-#~ msgid "Zoom Speed (0.0-50.0)"
-#~ msgstr "Velocitat del zoom"
-
-#, fuzzy
-#~ msgid "Zoom Timestep (0.0-50.0)"
-#~ msgstr "Etapa del zoom"
-
-#, fuzzy
-#~ msgid "Zoom factor (1.01-3.00)"
-#~ msgstr "Factor del zoom"
-
-#~ msgid "."
-#~ msgstr ","
-
-#, fuzzy
-#~ msgid "Plane To Face %d"
-#~ msgstr "Gira cap a la cara %d"
-
-#, fuzzy
-#~ msgid "Plane to face %d"
-#~ msgstr "Gira cap a la cara %d"
-
-#, fuzzy
-#~ msgid "Plane To Face %d with Window"
-#~ msgstr "Gira cap a la cara %d amb la finestra"
-
-#, fuzzy
-#~ msgid "Plane to face %d and bring active window along"
-#~ msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
-
-#~ msgid "Rotate To Face %d"
-#~ msgstr "Gira cap a la cara %d"
-
-#~ msgid "Rotate to face %d"
-#~ msgstr "Gira cap a la cara %d"
-
-#~ msgid "Rotate To Face %d with Window"
-#~ msgstr "Gira cap a la cara %d amb la finestra"
-
-#~ msgid "Rotate to face %d and bring active window along"
-#~ msgstr "Gira cap a la cara %d i s'emporta la finestra activa"
-
-#~ msgid "Window Types"
-#~ msgstr "Tipus de finestres"
-
-#~ msgid "Move Window Types"
-#~ msgstr "Tipus de finestres de moviment"
-
-#, fuzzy
-#~ msgid "Sloppy Focus"
-#~ msgstr "Disquetera"
-
-#, fuzzy
-#~ msgid "Start moving window using keyboard"
-#~ msgstr "Iniciant el dimoni."
-
-#, fuzzy
-#~ msgid "Terminate"
-#~ msgstr "Terminals"
+msgstr ""

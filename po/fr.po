@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:25+0530\n"
+"POT-Creation-Date: 2008-01-29 17:29+0530\n"
 "PO-Revision-Date: 2007-11-07 19:01+0100\n"
 "Last-Translator: Tristan RABLAT <tristan.rablat@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -1153,13 +1153,13 @@ msgid "Skydome Image"
 msgstr "Image du Skydome"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Vitesse"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Intervalle"
@@ -2160,22 +2160,32 @@ msgid "Sensitivity of pointer movement"
 msgstr "Sensibilité du mouvement du pointeur"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr "Aligner la rotation du cube avec la face supérieure"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Aligner la rotation du cube avec la face supérieure"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
 msgstr "Aligner avec la face supérieure"
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Aligner avec la face supérieure"
+
+#: ../metadata/rotate.xml.in.h:91
 msgid "Start Rotation"
 msgstr "Démarrer la rotation"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr "Délai avant la rotation du bureau"
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 msgid "Zoom"
 msgstr "Zoom"
 

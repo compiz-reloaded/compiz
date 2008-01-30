@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 16:24+0530\n"
+"POT-Creation-Date: 2008-01-29 17:28+0530\n"
 "PO-Revision-Date: 2003-02-27 11:59+0100\n"
 "Last-Translator: Y Gonch <gonch@mail.bulgaria.com>\n"
 "Language-Team: Bulgarian <i18n@suse.de>\n"
@@ -1211,14 +1211,14 @@ msgid "Skydome Image"
 msgstr "Дисков образ"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:88 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "Избрано"
 
 #: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:91 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
@@ -2380,23 +2380,31 @@ msgid "Sensitivity of pointer movement"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Top Face"
+msgid "Snap Cube Rotation to Bottom Face"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Snap To Top Face"
+msgid "Snap Cube Rotation to Top Face"
+msgstr ""
+
+#: ../metadata/rotate.xml.in.h:88
+msgid "Snap To Bottom Face"
 msgstr ""
 
 #: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr ""
+
+#: ../metadata/rotate.xml.in.h:91
 #, fuzzy
 msgid "Start Rotation"
 msgstr "Начало на откриването"
 
-#: ../metadata/rotate.xml.in.h:90
+#: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:92 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
 #, fuzzy
 msgid "Zoom"
 msgstr "Излизане"
