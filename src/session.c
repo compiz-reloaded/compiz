@@ -152,6 +152,9 @@ saveYourselfCallback (SmcConn	connection,
 		      int	interact_Style,
 		      Bool	fast)
 {
+    (*core.sessionSaveYourself) (&core, saveType, interact_Style,
+				 shutdown, fast);
+
     if (!SmcGetProperties (connection, saveYourselfGotProps, NULL))
 	SmcSaveYourselfDone (connection, 1);
 }
@@ -160,6 +163,8 @@ static void
 dieCallback (SmcConn   connection,
 	     SmPointer clientData)
 {
+    (*core.sessionDie) (&core);
+
     closeSession ();
     exit (0);
 }
@@ -168,12 +173,14 @@ static void
 saveCompleteCallback (SmcConn	connection,
 		      SmPointer clientData)
 {
+    (*core.sessionSaveComplete) (&core);
 }
 
 static void
 shutdownCancelledCallback (SmcConn   connection,
 			   SmPointer clientData)
 {
+    (*core.sessionShutdownCancelled) (&core);
 }
 
 void
@@ -235,6 +242,30 @@ closeSession (void)
 	    smClientId = NULL;
 	}
     }
+}
+
+void
+sessionSaveYourself (CompCore *c,
+		     int      saveType,
+		     int      interactStyle,
+		     Bool     shutdown,
+		     Bool     fast)
+{
+}
+
+void
+sessionDie (CompCore *c)
+{
+}
+
+void
+sessionSaveComplete (CompCore *c)
+{
+}
+
+void
+sessionShutdownCancelled (CompCore *c)
+{
 }
 
 /* ice connection handling taken and updated from gnome-ice.c

@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20071103
+#define CORE_ABIVERSION 20080130
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -344,6 +344,41 @@ compObjectFind (CompObject     *parent,
     else						     \
 	return (def)
 
+/* session.c */
+
+typedef void (*SessionSaveYourselfProc) (CompCore *c,
+					 int      saveType,
+					 int      interactStyle,
+					 Bool     shutdown,
+					 Bool     fast);
+
+typedef void (*SessionDieProc) (CompCore *c);
+
+typedef void (*SessionSaveCompleteProc) (CompCore *c);
+
+typedef void (*SessionShutdownCancelledProc) (CompCore *c);
+
+void
+initSession (char *smPrevClientId);
+
+void
+closeSession (void);
+
+void
+sessionSaveYourself (CompCore *c,
+		     int      saveType,
+		     int      interactStyle,
+		     Bool     shutdown,
+		     Bool     fast);
+
+void
+sessionDie (CompCore *c);
+
+void
+sessionSaveComplete (CompCore *c);
+
+void
+sessionShutdownCancelled (CompCore *c);
 
 /* option.c */
 
@@ -647,6 +682,11 @@ struct _CompCore {
 
     FileWatchAddedProc   fileWatchAdded;
     FileWatchRemovedProc fileWatchRemoved;
+
+    SessionSaveYourselfProc      sessionSaveYourself;
+    SessionDieProc               sessionDie;
+    SessionSaveCompleteProc      sessionSaveComplete;
+    SessionShutdownCancelledProc sessionShutdownCancelled;
 };
 
 int
@@ -3086,15 +3126,6 @@ Bool
 getPluginDisplayIndex (CompDisplay *d,
 		       const char  *name,
 		       int	   *index);
-
-
-/* session.c */
-
-void
-initSession (char *smPrevClientId);
-
-void
-closeSession (void);
 
 
 /* fragment.c */
