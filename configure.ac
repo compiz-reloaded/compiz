@@ -525,7 +525,7 @@ if test "x$use_kde4" = "xyes"; then
 			[use_kde4=yes], [use_kde4=no])
 
     KDE4_CFLAGS="-I$kde4incs"
-    KDE4_LIBS="-L$kde4libs -lkdecore -lkdecorations"
+    KDE4_LIBS="-L$kde4libs -lkdecore -lkdecorations -lplasma"
 
     QT4_MOC=`pkg-config QtGui --variable=moc_location`
     QDBUSXML2CPP=`pkg-config QtGui --variable=exec_prefix`"/bin/qdbusxml2cpp"
