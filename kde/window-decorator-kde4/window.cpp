@@ -102,7 +102,7 @@ KWD::Window::Window (WId  parentId,
 {
     memset (&mBorder, 0, sizeof (mBorder));
 
-    if (mType == Normal || mType == Switcher)
+    if (mType == Normal)
     {
 	KWindowInfo wInfo = KWindowSystem::windowInfo (mClientId, NET::WMState |
 						       NET::WMVisibleName, 0);
@@ -185,7 +185,7 @@ KWD::Window::~Window (void)
 bool
 KWD::Window::isActive (void) const
 {
-    if (mType == DefaultActive || mType == Switcher)
+    if (mType == DefaultActive)
 	return true;
 
     return Decorator::activeId () == mClientId;
@@ -1060,7 +1060,7 @@ KWD::Window::updateShadow (void)
     }
 
     /* create new layout */
-    if (mType == Normal || mType == Switcher)
+    if (mType == Normal)
 	decor_get_best_layout (&mContext,
 			       mGeometry.width (),
 			       mGeometry.height (),
@@ -1178,7 +1178,7 @@ KWD::Window::resizeDecoration (bool force)
     mUniqueHorzShape = false;
     mUniqueVertShape = false;
 
-    if (mType != Normal && mType != Switcher)
+    if (mType != Normal)
     {
 	Display		*xdisplay = QX11Info::display();
 	Screen		*xscreen;
@@ -1471,7 +1471,7 @@ KWD::Window::updateProperty (void)
     w = mLayout.top.x2 - mLayout.top.x1 - mContext.left_space -
 	mContext.right_space;
 
-    if (mType == Normal || mType == Switcher)
+    if (mType == Normal)
     {
 	int	topXOffset = w / 2;
 	QWidget *widget = mDecor->widget ();
@@ -1818,18 +1818,8 @@ void
 KWD::Window::updateName (void)
 {
     KWindowInfo wInfo;
-    WId         window;
 
-    if (mType == Switcher)
-    {
-	if (!mSelectedId)
-	    return;
-	window = mSelectedId;
-    }
-    else
-	window = mClientId;
-
-    wInfo = KWindowSystem::windowInfo (window, NET::WMVisibleName, 0);
+    wInfo = KWindowSystem::windowInfo (mClientId, NET::WMVisibleName, 0);
 
     mName = wInfo.visibleName ();
 
@@ -2006,7 +1996,7 @@ KWD::Window::processDamage (void)
     double  alpha;
     int     shade_alpha;
 
-    if (isActive () && !mType == Switcher)
+    if (isActive ())
     {
 	alpha	    = activeDecorationOpacity;
 	shade_alpha = activeDecorationOpacityShade;
@@ -2027,9 +2017,6 @@ KWD::Window::processDamage (void)
 	mDamage = mShape.intersect (mDamage);
 
     w = mGeometry.width () + mContext.extents.left + mContext.extents.right;
-
-    if (mType == Switcher)
-	shade_alpha = 0;
 
     xOff = 0;
     yOff = 0;
@@ -2129,26 +2116,7 @@ KWD::Window::processDamage (void)
 		      mTexturePixmap.height ());
 
     if (mUpdateProperty)
-    {
-	if (mType == Switcher)
-	{
-	    unsigned long pixel;
-	    QColor        bg =
-		this->style()->standardPalette ().color (QPalette::Background);
-
-	    pixel = (((int) (alpha * 0xff)        << 24) |
-		     ((int) (alpha * bg.red ())   << 16) |
-		     ((int) (alpha * bg.green ()) <<  8) |
-		     ((int) (alpha * bg.blue ())  <<  0));
-
-	    KWD::trapXError ();
-	    XSetWindowBackground (QX11Info::display(), mClientId, pixel);
-	    XClearWindow (QX11Info::display(), mClientId);
-	    KWD::popXError ();
-	}
-
 	updateProperty ();
-    }
 }
 
 void
