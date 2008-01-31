@@ -20,14 +20,12 @@
  */
 
 #include "switcher.h"
-#include "decorator.h"
-#include "options.h"
 #include "utils.h"
+#include "decorator.h"
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/extensions/Xcomposite.h>
-#include <X11/extensions/shape.h>
 #include <X11/Xregion.h>
 
 #include <fixx11h.h>
@@ -35,21 +33,11 @@
 #include <KDE/Plasma/Dialog>
 #include <KDE/Plasma/Theme>
 
-#include <kdebug.h>
-#include <kglobal.h>
-#include <kiconloader.h>
-#include <kdecoration.h>
 #include <kwindowsystem.h>
 
 #include <QLabel>
-#include <qapplication.h>
-#include <qlayout.h>
-#include <qevent.h>
-#include <qpainter.h>
-#include <qwidget.h>
-#include <qstring.h>
-#include <qtimer.h>
-#include <qcursor.h>
+#include <QLayout>
+#include <QString>
 
 KWD::Switcher::Switcher (WId parentId, WId id):
 mId (id)

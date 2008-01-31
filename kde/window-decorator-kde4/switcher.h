@@ -22,10 +22,9 @@
 #ifndef _SWITCHER_H
 #define _SWITCHER_H
 
-#include <qpixmap.h>
-#include <qwidget.h>
-#include <qstring.h>
-
+#include <QWidget>
+#include <QRect>
+#include <QX11Info>
 #include <decoration.h>
 #include <fixx11h.h>
 
