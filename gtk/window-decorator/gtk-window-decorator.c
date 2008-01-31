@@ -2526,9 +2526,9 @@ update_default_decorations (GdkScreen *screen)
 
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
-    bareAtom   = XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_BARE", FALSE);
-    normalAtom = XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_NORMAL", FALSE);
-    activeAtom = XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_ACTIVE", FALSE);
+    bareAtom   = XInternAtom (xdisplay, DECOR_BARE_ATOM_NAME, FALSE);
+    normalAtom = XInternAtom (xdisplay, DECOR_NORMAL_ATOM_NAME, FALSE);
+    activeAtom = XInternAtom (xdisplay, DECOR_ACTIVE_ATOM_NAME, FALSE);
 
     if (no_border_shadow)
     {
@@ -6834,12 +6834,11 @@ main (int argc, char *argv[])
     gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
 
     frame_window_atom	= XInternAtom (xdisplay, "_NET_FRAME_WINDOW", FALSE);
-    win_decor_atom	= XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR", FALSE);
-    win_blur_decor_atom	= XInternAtom (xdisplay, "_COMPIZ_WM_WINDOW_BLUR_DECOR",
-				       FALSE);
+    win_decor_atom	= XInternAtom (xdisplay, DECOR_WINDOW_ATOM_NAME, FALSE);
+    win_blur_decor_atom	= XInternAtom (xdisplay, DECOR_BLUR_ATOM_NAME, FALSE);
     wm_move_resize_atom = XInternAtom (xdisplay, "_NET_WM_MOVERESIZE", FALSE);
     restack_window_atom = XInternAtom (xdisplay, "_NET_RESTACK_WINDOW", FALSE);
-    select_window_atom	= XInternAtom (xdisplay, "_COMPIZ_SWITCH_SELECT_WINDOW",
+    select_window_atom	= XInternAtom (xdisplay, DECOR_SWITCH_WINDOW_ATOM_NAME,
 				       FALSE);
     mwm_hints_atom	= XInternAtom (xdisplay, "_MOTIF_WM_HINTS", FALSE);
 

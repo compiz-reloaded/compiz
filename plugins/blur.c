@@ -2516,7 +2516,7 @@ blurInitDisplay (CompPlugin  *p,
     bd->blurAtom[BLUR_STATE_CLIENT] =
 	XInternAtom (d->display, "_COMPIZ_WM_WINDOW_BLUR", 0);
     bd->blurAtom[BLUR_STATE_DECOR] =
-	XInternAtom (d->display, "_COMPIZ_WM_WINDOW_BLUR_DECOR", 0);
+	XInternAtom (d->display, DECOR_BLUR_ATOM_NAME, 0);
 
     WRAP (bd, d, handleEvent, blurHandleEvent);
     WRAP (bd, d, matchExpHandlerChanged, blurMatchExpHandlerChanged);

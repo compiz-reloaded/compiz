@@ -31,6 +31,7 @@
 #include <unistd.h>
 
 #include <compiz-core.h>
+#include <decoration.h>
 
 #include <X11/Xatom.h>
 #include <X11/extensions/Xrender.h>
@@ -129,8 +130,6 @@ typedef struct {
     unsigned long functions;
     unsigned long decorations;
 } MwmHints;
-
-#define SELECT_WIN_PROP "_COMPIZ_SWITCH_SELECT_WINDOW"
 
 #define WIDTH  212
 #define HEIGHT 192
@@ -1875,7 +1874,8 @@ switchInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    sd->selectWinAtom = XInternAtom (d->display, SELECT_WIN_PROP, 0);
+    sd->selectWinAtom = XInternAtom (d->display,
+				     DECOR_SWITCH_WINDOW_ATOM_NAME, 0);
 
     WRAP (sd, d, handleEvent, switchHandleEvent);
 

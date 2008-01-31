@@ -1426,14 +1426,15 @@ decorInitDisplay (CompPlugin  *p,
     dd->textures = 0;
 
     dd->supportingDmCheckAtom =
-	XInternAtom (d->display, "_COMPIZ_SUPPORTING_DM_CHECK", 0);
-    dd->winDecorAtom = XInternAtom (d->display, "_COMPIZ_WINDOW_DECOR", 0);
+	XInternAtom (d->display, DECOR_SUPPORTING_DM_CHECK_ATOM_NAME, 0);
+    dd->winDecorAtom =
+	XInternAtom (d->display, DECOR_WINDOW_ATOM_NAME, 0);
     dd->decorAtom[DECOR_BARE] =
-	XInternAtom (d->display, "_COMPIZ_WINDOW_DECOR_BARE", 0);
+	XInternAtom (d->display, DECOR_BARE_ATOM_NAME, 0);
     dd->decorAtom[DECOR_NORMAL] =
-	XInternAtom (d->display, "_COMPIZ_WINDOW_DECOR_NORMAL", 0);
+	XInternAtom (d->display, DECOR_NORMAL_ATOM_NAME, 0);
     dd->decorAtom[DECOR_ACTIVE] =
-	XInternAtom (d->display, "_COMPIZ_WINDOW_DECOR_ACTIVE", 0);
+	XInternAtom (d->display, DECOR_ACTIVE_ATOM_NAME, 0);
 
     WRAP (dd, d, handleEvent, decorHandleEvent);
     WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);

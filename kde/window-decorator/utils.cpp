@@ -25,6 +25,7 @@
 
 #include <qt.h>
 
+#include <decoration.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
@@ -180,15 +181,15 @@ KWD::Atoms::init (void)
     Display *xdisplay = qt_xdisplay ();
 
     netFrameWindow = XInternAtom (xdisplay, "_NET_FRAME_WINDOW", false);
-    netWindowDecor = XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR", false);
+    netWindowDecor = XInternAtom (xdisplay, DECOR_WINDOW_ATOM_NAME, false);
     netWindowDecorNormal =
-	XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_NORMAL", false);
+	XInternAtom (xdisplay, DECOR_NORMAL_ATOM_NAME, false);
     netWindowDecorActive =
-	XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_ACTIVE", false);
+	XInternAtom (xdisplay, DECOR_ACTIVE_ATOM_NAME, false);
     netWindowDecorBare =
-	XInternAtom (xdisplay, "_COMPIZ_WINDOW_DECOR_BARE", false);
+	XInternAtom (xdisplay, DECOR_BARE_ATOM_NAME, false);
     switchSelectWindow =
-	XInternAtom (xdisplay, "_COMPIZ_SWITCH_SELECT_WINDOW", false);
+	XInternAtom (xdisplay, DECOR_SWITCH_WINDOW_ATOM_NAME, false);
     wmTakeFocus = XInternAtom (xdisplay, "WM_TAKE_FOCUS", false);
     netWmContextHelp =
 	XInternAtom (xdisplay, "_NET_WM_CONTEXT_HELP", false);
@@ -206,5 +207,5 @@ KWD::Atoms::init (void)
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_FORCE_QUIT_DIALOG",
 		     false);
     compizWindowBlurDecor =
-	XInternAtom (xdisplay, "_COMPIZ_WM_WINDOW_BLUR_DECOR", false);
+	XInternAtom (xdisplay, DECOR_BLUR_ATOM_NAME, false);
 }

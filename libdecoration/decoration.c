@@ -2656,7 +2656,7 @@ decor_set_dm_check_hint (Display *xdisplay,
 			  CWOverrideRedirect | CWEventMask,
 			  &attrs);
 
-    atom = XInternAtom (xdisplay, "_COMPIZ_SUPPORTING_DM_CHECK", 0);
+    atom = XInternAtom (xdisplay, DECOR_SUPPORTING_DM_CHECK_ATOM_NAME, 0);
 
     XChangeProperty (xdisplay, xroot,
 		     atom,
