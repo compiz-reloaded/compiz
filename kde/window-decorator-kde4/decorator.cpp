@@ -94,7 +94,8 @@ KWD::Decorator::Decorator (Display* display,
 			   Qt::HANDLE colormap) :
     KApplication (display, visual, colormap),
     mConfig (0),
-    mCompositeWindow (0)
+    mCompositeWindow (0),
+    mSwitcher (0)
 {
     XSetWindowAttributes attr;
     int			 i, j;
@@ -181,6 +182,9 @@ KWD::Decorator::~Decorator (void)
 
     if (mDecorActive)
 	delete mDecorActive;
+
+    if (mSwitcher)
+	delete mSwitcher;
 
     XDestroyWindow (QX11Info::display(), mCompositeWindow);
 
@@ -420,6 +424,9 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
     case MapNotify: {
 	XMapEvent *xme = reinterpret_cast <XMapEvent *> (xevent);
 
+	if (mSwitcher && mSwitcher->dialogId () == xme->window)
+	    mSwitcher->handleMap ();
+
 	if (mWindows.contains (xme->window))
 	    client = mWindows[xme->window];
 	else if (mDecorNormal->winId () == xme->window)
@@ -441,6 +448,9 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
     case ConfigureNotify: {
 	XConfigureEvent *xce = reinterpret_cast <XConfigureEvent *> (xevent);
 
+	if (mSwitcher && mSwitcher->dialogId () == xce->window)
+	    mSwitcher->handleConfigure (QSize (xce->width, xce->height));
+	
 	if (mFrames.contains (xce->window))
 	    mFrames[xce->window]->updateFrame (xce->window);
 
@@ -479,19 +489,11 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 	}
 	else if (xevent->xproperty.atom == Atoms::switchSelectWindow)
 	{
-	    if (!mClients.contains (xevent->xproperty.window))
-	    {
-		handleWindowAdded (xevent->xproperty.window);
-	    }
-	    else
-	    {
-		WId id;
+	    WId id = xevent->xproperty.window;
 
-		if (KWD::readWindowProperty (xevent->xproperty.window,
-					     Atoms::switchSelectWindow,
-					     (long *) &id))
-		    mClients[xevent->xproperty.window]->updateSelected (id);
-	    }
+	    if (!mSwitcher || mSwitcher->xid () != id)
+		handleWindowAdded (id);
+	    mSwitcher->update ();
 	}
 	else if (xevent->xproperty.atom == Atoms::netWmWindowOpacity)
 	{
@@ -723,7 +725,7 @@ KWD::Decorator::handleWindowAdded (WId id)
     QMap <WId, KWD::Window *>::ConstIterator it;
     KWD::Window				     *client = 0;
     WId					     select, frame = 0;
-    KWD::Window::Type			     type;
+    KWD::Window::Type			     type = KWD::Window::Normal;
     unsigned int			     width, height, border, depth;
     int					     x, y;
     XID					     root;
@@ -742,10 +744,18 @@ KWD::Decorator::handleWindowAdded (WId id)
 	return;
 
     KWD::readWindowProperty (id, Atoms::netFrameWindow, (long *) &frame);
+
     if (KWD::readWindowProperty (id, Atoms::switchSelectWindow,
 				 (long *) &select))
     {
-	type = KWD::Window::Switcher;
+	if (!mSwitcher)
+            mSwitcher = new Switcher (mCompositeWindow, id);
+        if (mSwitcher->xid () != id)
+        {
+            delete mSwitcher;
+            mSwitcher = new Switcher (mCompositeWindow, id);
+        }
+	frame = None;
     }
     else
     {
@@ -794,18 +804,6 @@ KWD::Decorator::handleWindowAdded (WId id)
 	    client->updateFrame (frame);
 	}
     }
-    else if (type == KWD::Window::Switcher)
-    {
-	if (!mClients.contains (id))
-	{
-	    client = new KWD::Window (mCompositeWindow, id, 0, type,
-				      x, y,
-				      width + border * 2,
-				      height + border * 2);
-	    mClients.insert (id, client);
-	    mWindows.insert (client->winId (), client);
-	}
-    }
     else
     {
 	if (mClients.contains (id))
@@ -839,6 +837,12 @@ KWD::Decorator::handleWindowRemoved (WId id)
 	mFrames.remove (window->frameId ());
 	delete window;
     }
+
+    if (mSwitcher && mSwitcher->xid () == id)
+    {
+	delete mSwitcher;
+	mSwitcher = NULL;
+    }
 }
 
 void
@@ -871,6 +875,12 @@ KWD::Decorator::handleWindowChanged (WId		 id,
 {
     KWD::Window *client;
 
+    if (mSwitcher && mSwitcher->xid () == id)
+    {
+	mSwitcher->updateGeometry ();
+	return;
+    }
+
     if (!mClients.contains (id))
 	return;
 
@@ -886,6 +896,7 @@ KWD::Decorator::handleWindowChanged (WId		 id,
 	client->updateIcons ();
     if (properties[0] & NET::WMGeometry)
 	client->updateWindowGeometry ();
+	
 }
 
 void

@@ -39,6 +39,7 @@
 #include <decoration.h>
 
 #include "window.h"
+#include "switcher.h"
 #include "kdecoration_plugins.h"
 
 #define ROOT_OFF_X 8192
@@ -174,6 +175,8 @@ class Decorator:public KApplication {
 	QTimer mIdleTimer;
 
 	WId mCompositeWindow;
+
+	Switcher *mSwitcher;
     };
 }
 
