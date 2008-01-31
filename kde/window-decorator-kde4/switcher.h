@@ -63,6 +63,10 @@ class Switcher
 
     private:
 	void updateWindowProperties ();
+	void updateBlurProperty (int topOffset,
+				 int bottomOffset,
+				 int leftOffset,
+				 int rightOffset);
  	void rebindPixmap ();
 
     private:

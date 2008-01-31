@@ -28,6 +28,7 @@
 #include <X11/Xatom.h>
 #include <X11/extensions/Xcomposite.h>
 #include <X11/extensions/shape.h>
+#include <X11/Xregion.h>
 
 #include <fixx11h.h>
 
@@ -91,9 +92,6 @@ mId (id)
 
 KWD::Switcher::~Switcher ()
 {
-    delete mLabel;
-    delete mSpacer;
-    delete mLayout;
     delete mDialog;
 }
 
@@ -239,6 +237,7 @@ KWD::Switcher::updateWindowProperties ()
 
     nQuad = decor_set_lXrXtXbX_window_quads (quads, &mContext, &mDecorLayout,
 					     lh / 2, rh / 2, w, w / 2);
+
     decor_quads_to_property (data, mPixmap,
 			     &mBorder, &mBorder,
 			     0, 0,
@@ -249,7 +248,84 @@ KWD::Switcher::updateWindowProperties ()
 		     XA_INTEGER, 32, PropModeReplace, (unsigned char *) data,
 		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
     KWD::popXError ();
+
+    updateBlurProperty (lh / 2, rh / 2, w / 2, w / 2);
 }
+
+void
+KWD::Switcher::updateBlurProperty (int topOffset,
+				   int bottomOffset,
+				   int leftOffset,
+				   int rightOffset)
+{
+    Atom    atom = Atoms::compizWindowBlurDecor;
+    QRegion topQRegion, bottomQRegion, leftQRegion, rightQRegion;
+    Region  topRegion = NULL;
+    Region  bottomRegion = NULL;
+    Region  leftRegion = NULL;
+    Region  rightRegion = NULL;
+    int     size = 0;
+    int     w, h;
+
+    w = mGeometry.width () + mContext.extents.left + mContext.extents.right;
+    h = mGeometry.height () + mContext.extents.top + mContext.extents.bottom;
+
+    if (blurType != BLUR_TYPE_NONE)
+    {
+	QRegion r;
+	
+	topQRegion    = QRegion (-mContext.extents.left, -mContext.extents.top,
+				 w, mContext.extents.top);
+	topRegion     = topQRegion.handle ();
+
+	bottomQRegion = QRegion (-mContext.extents.left, 0,
+				 w, mContext.extents.bottom);
+	bottomRegion  = bottomQRegion.handle ();
+
+	leftQRegion   = QRegion (-mContext.extents.left, 0,
+				 mContext.extents.left, mGeometry.height ());
+	leftRegion    = leftQRegion.handle ();
+
+	rightQRegion  = QRegion (0, 0, mContext.extents.right,
+				 mGeometry.height ());
+	rightRegion   = rightQRegion.handle ();
+    }
+
+    if (topRegion)
+	size += topRegion->numRects;
+    if (bottomRegion)
+	size += bottomRegion->numRects;
+    if (leftRegion)
+	size += leftRegion->numRects;
+    if (rightRegion)
+	size += rightRegion->numRects;
+
+    if (size)
+    {
+	long data[size * 6 + 2];
+
+	decor_region_to_blur_property (data, 4, 0,
+				       mGeometry.width (),
+				       mGeometry.height (),
+				       topRegion, topOffset,
+				       bottomRegion, bottomOffset,
+				       leftRegion, leftOffset,
+				       rightRegion, rightOffset);
+
+	KWD::trapXError ();
+	XChangeProperty (QX11Info::display (), mId, atom, XA_INTEGER,
+			 32, PropModeReplace, (unsigned char *) data,
+			 2 + size * 6);
+	KWD::popXError ();
+    }
+    else
+    {
+	KWD::trapXError ();
+	XDeleteProperty (QX11Info::display (), mId, atom);
+	KWD::popXError ();
+    }
+}
+
 
 WId
 KWD::Switcher::dialogId ()
