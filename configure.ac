@@ -24,7 +24,7 @@ AC_PROG_INTLTOOL([0.23])
 AM_MAINTAINER_MODE
 
 dnl decorator interface version
-AC_DEFINE(DECOR_INTERFACE_VERSION, 20070319, [Decorator interface version])
+AC_DEFINE(DECOR_INTERFACE_VERSION, 20080131, [Decorator interface version])
 
 AC_ISC_POSIX
 AC_PROG_CC
