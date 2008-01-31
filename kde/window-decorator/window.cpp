@@ -165,6 +165,9 @@ KWD::Window::isActive (void) const
     if (mType == DefaultActive)
 	return true;
 
+    if (mType == Switcher)
+	return true;
+
     return Decorator::activeId () == mClientId;
 }
 
