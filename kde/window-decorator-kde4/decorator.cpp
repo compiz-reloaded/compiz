@@ -26,6 +26,7 @@
 #include <KDE/KGlobal>
 #include <kwindowsystem.h>
 #include <KDE/KLocale>
+#include <KDE/Plasma/Theme>
 #include <kcommondecoration.h>
 #include <kwindowsystem.h>
 
@@ -236,6 +237,9 @@ KWD::Decorator::enableDecorations (Time timestamp,
 
     connect (&mIdleTimer, SIGNAL (timeout ()), SLOT (processDamage ()));
 
+    connect (Plasma::Theme::self (), SIGNAL (changed ()),
+	     SLOT (plasmaThemeChanged ()));
+    
     // select for client messages
     XSelectInput (QX11Info::display(), QX11Info::appRootWindow(),
 		  StructureNotifyMask | PropertyChangeMask);
@@ -982,4 +986,15 @@ KWD::Decorator::shadowColorChanged (QString value)
     }
 
     changeShadowOptions (&opt);
+}
+
+void
+KWD::Decorator::plasmaThemeChanged ()
+{
+    if (mSwitcher)
+    {
+	WId win = mSwitcher->xid();
+	delete mSwitcher;
+	mSwitcher = new Switcher (mCompositeWindow, win);
+    }
 }

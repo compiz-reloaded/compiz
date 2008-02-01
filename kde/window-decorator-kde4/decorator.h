@@ -153,6 +153,8 @@ class Decorator:public KApplication {
 	void shadowYOffsetChanged (int value);
 	void shadowColorChanged (QString value);
 
+	void plasmaThemeChanged ();
+
     private:
 	static PluginManager *mPlugins;
 	static KWD::Options *mOptions;
