@@ -64,6 +64,7 @@ typedef struct _SwitchDisplay {
     CompOption opt[SWITCH_DISPLAY_OPTION_NUM];
 
     Atom selectWinAtom;
+    Atom selectFgColorAtom;
 } SwitchDisplay;
 
 #define SWITCH_SCREEN_OPTION_SPEED	  0
@@ -121,6 +122,8 @@ typedef struct _SwitchScreen {
     float sTranslate;
 
     Bool allWindows;
+
+    unsigned int fgColor[4];
 } SwitchScreen;
 
 #define MwmHintsDecorations (1L << 1)
@@ -1097,9 +1100,55 @@ switchWindowRemove (CompDisplay *d,
 }
 
 static void
+updateForegroundColor (CompScreen *s)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *propData;
+
+    SWITCH_SCREEN (s);
+    SWITCH_DISPLAY (s->display);
+
+    if (!ss->popupWindow)
+	return;
+
+
+    result = XGetWindowProperty (s->display->display, ss->popupWindow,
+				 sd->selectFgColorAtom, 0L, 4L, FALSE,
+				 XA_INTEGER, &actual, &format,
+				 &n, &left, &propData);
+
+    if (result == Success && n && propData)
+    {
+	if (n == 3 || n == 4)
+	{
+	    long *data = (long *) propData;
+
+	    ss->fgColor[0] = MIN (0xffff, data[0]);
+	    ss->fgColor[1] = MIN (0xffff, data[1]);
+	    ss->fgColor[2] = MIN (0xffff, data[2]);
+
+	    if (n == 4)
+		ss->fgColor[3] = MIN (0xffff, data[3]);
+	}
+
+	XFree (propData);
+    }
+    else
+    {
+	ss->fgColor[0] = 0;
+	ss->fgColor[1] = 0;
+	ss->fgColor[2] = 0;
+	ss->fgColor[3] = 0xffff;
+    }
+}
+
+static void
 switchHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
+    CompWindow *w;
     SWITCH_DISPLAY (d);
 
     UNWRAP (sd, d, handleEvent);
@@ -1112,6 +1161,20 @@ switchHandleEvent (CompDisplay *d,
 	break;
     case DestroyNotify:
 	switchWindowRemove (d, event->xdestroywindow.window);
+	break;
+    case PropertyNotify:
+	if (event->xproperty.atom == sd->selectFgColorAtom)
+        {
+            w = findWindowAtDisplay (d, event->xproperty.window);
+            if (w)
+            {
+		SWITCH_SCREEN (w->screen);
+
+		if (event->xproperty.window == ss->popupWindow)
+		    updateForegroundColor (w->screen);
+            }
+        }
+
     default:
 	break;
     }
@@ -1622,8 +1685,9 @@ switchPaintWindow (CompWindow		   *w,
 
     if (w->id == ss->popupWindow)
     {
-	GLenum filter;
-	int    x, y, x1, x2, cx, i;
+	GLenum         filter;
+	int            x, y, x1, x2, cx, i;
+	unsigned short color[4];
 
 	if (mask & PAINT_WINDOW_OCCLUSION_DETECTION_MASK)
 	    return FALSE;
@@ -1679,7 +1743,10 @@ switchPaintWindow (CompWindow		   *w,
 
 	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 	glEnable (GL_BLEND);
-	glColor4us (0, 0, 0, w->lastPaint.opacity);
+	for (i = 0; i < 4; i++)
+	    color[i] = (unsigned int)ss->fgColor[i] * w->lastPaint.opacity /
+		       0xffff;
+	glColor4usv (color);
 	glPushMatrix ();
 	glTranslatef (cx, y, 0.0f);
 	glVertexPointer (2, GL_FLOAT, 0, _boxVertices);
@@ -1874,8 +1941,10 @@ switchInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    sd->selectWinAtom = XInternAtom (d->display,
-				     DECOR_SWITCH_WINDOW_ATOM_NAME, 0);
+    sd->selectWinAtom     = XInternAtom (d->display,
+					 DECOR_SWITCH_WINDOW_ATOM_NAME, 0);
+    sd->selectFgColorAtom =
+	XInternAtom (d->display, DECOR_SWITCH_FOREGROUND_COLOR_ATOM_NAME, 0);
 
     WRAP (sd, d, handleEvent, switchHandleEvent);
 
@@ -1969,6 +2038,11 @@ switchInitScreen (CompPlugin *p,
     ss->sTranslate = 0.0f;
 
     ss->allWindows = FALSE;
+
+    ss->fgColor[0] = 0;
+    ss->fgColor[1] = 0;
+    ss->fgColor[2] = 0;
+    ss->fgColor[3] = 0xffff;
 
     WRAP (ss, s, preparePaintScreen, switchPreparePaintScreen);
     WRAP (ss, s, donePaintScreen, switchDonePaintScreen);
