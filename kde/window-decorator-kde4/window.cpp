@@ -144,12 +144,6 @@ KWD::Window::Window (WId  parentId,
 	mGeometry = QRect (50, 50, 30, 1);
     }
 
-    
-
-    setGeometry (QRect (mGeometry.x () + ROOT_OFF_X,
-			mGeometry.y () + ROOT_OFF_Y,
-			mGeometry.width (), mGeometry.height ()));
-
     createDecoration ();
 
     mActiveChild = NULL;
@@ -1238,6 +1232,10 @@ KWD::Window::resizeDecoration (bool force)
     {
 	mPendingConfigure = 1;
     }
+
+    setGeometry (QRect (mGeometry.x () + ROOT_OFF_X - mBorder.left,
+			mGeometry.y () + ROOT_OFF_Y - mBorder.top,
+			w, h));
     XMoveResizeWindow (QX11Info::display(), winId(),
 		       mGeometry.x () + ROOT_OFF_X - mBorder.left,
 		       mGeometry.y () + ROOT_OFF_Y - mBorder.top,
@@ -1301,6 +1299,7 @@ KWD::Window::handleMap (void)
 	return FALSE;
 
     mPendingMap = 0;
+
     if (mPendingConfigure)
 	return FALSE;
 
@@ -1312,8 +1311,6 @@ KWD::Window::handleMap (void)
 bool
 KWD::Window::handleConfigure (QSize size)
 {
-    //fprintf(stderr,"conf %d / %d (%d/%d) -> (%d/%d) %s\n",mPendingConfigure,mPendingMap,
-	//    mSize.width(),mSize.height(),size.width(),size.height(),mName.toAscii().data());
     if (!mPendingConfigure)
 	return FALSE;
 
