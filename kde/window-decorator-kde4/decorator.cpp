@@ -424,9 +424,6 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
     case MapNotify: {
 	XMapEvent *xme = reinterpret_cast <XMapEvent *> (xevent);
 
-	if (mSwitcher && mSwitcher->dialogId () == xme->window)
-	    mSwitcher->handleMap ();
-
 	if (mWindows.contains (xme->window))
 	    client = mWindows[xme->window];
 	else if (mDecorNormal->winId () == xme->window)
@@ -448,9 +445,6 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
     case ConfigureNotify: {
 	XConfigureEvent *xce = reinterpret_cast <XConfigureEvent *> (xevent);
 
-	if (mSwitcher && mSwitcher->dialogId () == xce->window)
-	    mSwitcher->handleConfigure (QSize (xce->width, xce->height));
-	
 	if (mFrames.contains (xce->window))
 	    mFrames[xce->window]->updateFrame (xce->window);
 

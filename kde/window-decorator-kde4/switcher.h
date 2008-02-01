@@ -22,7 +22,7 @@
 #ifndef _SWITCHER_H
 #define _SWITCHER_H
 
-#include <QWidget>
+#include <QPixmap>
 #include <QRect>
 #include <QX11Info>
 #include <decoration.h>
@@ -30,7 +30,7 @@
 
 namespace Plasma
 {
-class Dialog;
+class Svg;
 }
 
 class QSpacerItem;
@@ -55,18 +55,13 @@ class Switcher
 	    return mId;
 	}
 
-	WId dialogId ();
-
-	bool handleMap (void);
-	bool handleConfigure (QSize size);
-
     private:
 	void updateWindowProperties ();
 	void updateBlurProperty (int topOffset,
 				 int bottomOffset,
 				 int leftOffset,
 				 int rightOffset);
- 	void rebindPixmap ();
+ 	void redrawPixmap ();
 
     private:
 
@@ -75,14 +70,8 @@ class Switcher
 
 	QRect mGeometry;
 
-	int mPendingMap;
-	int mPendingConfigure;
-	Pixmap mPixmap;
-
-	Plasma::Dialog *mDialog;
-	QSpacerItem *mSpacer;
-	QLabel *mLabel;
-	QVBoxLayout *mLayout;
+	Plasma::Svg *mBackground;
+	QPixmap mPixmap;
 
 	decor_layout_t mDecorLayout;
 	decor_context_t mContext;

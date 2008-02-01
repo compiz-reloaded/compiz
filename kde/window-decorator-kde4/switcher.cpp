@@ -30,14 +30,13 @@
 
 #include <fixx11h.h>
 
-#include <KDE/Plasma/Dialog>
+#include <KDE/Plasma/Svg>
 #include <KDE/Plasma/Theme>
 
 #include <kwindowsystem.h>
 
-#include <QLabel>
-#include <QLayout>
 #include <QString>
+#include <QPainter>
 
 KWD::Switcher::Switcher (WId parentId, WId id):
 mId (id)
@@ -46,42 +45,35 @@ mId (id)
     long     prop[4];
     QColor   color = Plasma::Theme::self ()->textColor ();
 
-    mDialog = new Plasma::Dialog ();
+    mBackground = new Plasma::Svg("widgets/background");
 
-    mLayout = new QVBoxLayout ();
-    mLayout->setSpacing (0);
-    mLayout->setMargin (0);
+    mBorder.left   = mBackground->elementSize ("left").width ();
+    mBorder.right  = mBackground->elementSize ("right").width ();
+    mBorder.top    = mBackground->elementSize ("top").height ();
+    mBorder.bottom = mBackground->elementSize ("bottom").height () +
+		     Plasma::Theme::self ()->fontMetrics ().height () + 10;
 
-    mSpacer = new QSpacerItem (0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mContext.extents.left   = mBorder.left;
+    mContext.extents.right  = mBorder.right;
+    mContext.extents.top    = mBorder.top;
+    mContext.extents.bottom = mBorder.bottom;
 
-    mLabel = new QLabel ();
-    mLabel->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
-    palette = mLabel->palette();
-    palette.setBrush (QPalette::WindowText, QBrush(color));
-    mLabel->setPalette (palette);
-    mLabel->setAlignment (Qt::AlignHCenter);
-    mLabel->setFixedHeight (Plasma::Theme::self ()->fontMetrics ().height ());
+    mContext.left_space   = mBorder.left;
+    mContext.right_space  = mBorder.right;
+    mContext.top_space    = mBorder.top;
+    mContext.bottom_space = mBorder.bottom;
 
-    mLayout->addItem (mSpacer);
-    mLayout->addWidget (mLabel);
-
-    mDialog->setLayout (mLayout);
-
-    mDialog->setWindowFlags(Qt::FramelessWindowHint |
-			    Qt::X11BypassWindowManagerHint);
-    mDialog->adjustSize();
-
-    XReparentWindow (QX11Info::display (), mDialog->winId (), parentId, 0, 0);
-    mDialog->show ();
-
-    mPendingMap = 1;
+    mContext.left_corner_space   = 0;
+    mContext.right_corner_space  = 0;
+    mContext.top_corner_space    = 0;
+    mContext.bottom_corner_space = 0;
 
     updateGeometry ();
 
-    prop[0] = (color.red() * 256) + color.red();
-    prop[1] = (color.green() * 256) + color.green();
-    prop[2] = (color.blue() * 256) + color.blue();
-    prop[3] = (color.alpha() * 256) + color.alpha();
+    prop[0] = (color.red () * 256) + color.red ();
+    prop[1] = (color.green () * 256) + color.green ();
+    prop[2] = (color.blue () * 256) + color.blue ();
+    prop[3] = (color.alpha () * 256) + color.alpha ();
 
     KWD::trapXError ();
     XChangeProperty (QX11Info::display (), id, Atoms::switchFgColor, XA_INTEGER,
@@ -91,7 +83,7 @@ mId (id)
 
 KWD::Switcher::~Switcher ()
 {
-    delete mDialog;
+    delete mBackground;
 }
 
 void
@@ -110,55 +102,19 @@ KWD::Switcher::updateGeometry ()
     KWD::readWindowProperty (mId, Atoms::switchSelectWindow,
 			     (long *)&mSelected);
 
-    bg = Plasma::Theme::self()->backgroundColor();
+    
+    bg = Plasma::Theme::self ()->backgroundColor ();
     bgColor = (bg.alpha () << 24) + (bg.red () << 24) + (bg.green () << 16) +
 	      bg.blue ();
     XSetWindowBackground (QX11Info::display (), mId, bgColor);
     XClearWindow (QX11Info::display (), mId);
     XSync (QX11Info::display (), FALSE);
 
-    mSpacer->changeSize (mGeometry.width (), mGeometry.height (),
-			 QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mLabel->setFixedWidth (mGeometry.width ());
+    mPixmap = QPixmap (width + mBorder.left + mBorder.right,
+		       height + mBorder.top + mBorder.bottom);
 
-    mDialog->adjustSize ();
-    mPendingConfigure = 1;
-
+    redrawPixmap ();
     update ();
-}
-
-void
-KWD::Switcher::rebindPixmap (void)
-{
-    if (mPixmap)
-	XFreePixmap (QX11Info::display (), mPixmap);
-
-    mPixmap = XCompositeNameWindowPixmap (QX11Info::display (),
-					  mDialog->winId ());
-
-    mDialog->update ();
-
-    mContext.extents.left   = mLayout->geometry ().y ();
-    mContext.extents.right  = mDialog->width () - mLayout->geometry ().x () -
-			      mGeometry.width ();
-    mContext.extents.top    = mLayout->geometry ().y ();
-    mContext.extents.bottom = mDialog->height () - mLayout->geometry ().y () -
-			      mGeometry.height ();
-
-    mContext.left_space   = mContext.extents.left;
-    mContext.right_space  = mContext.extents.right;
-    mContext.top_space    = mContext.extents.top;
-    mContext.bottom_space = mContext.extents.bottom;
-
-    mContext.left_corner_space   = 0;
-    mContext.right_corner_space  = 0;
-    mContext.top_corner_space    = 0;
-    mContext.bottom_corner_space = 0;
-
-    mBorder.left   = mContext.extents.left;
-    mBorder.right  = mContext.extents.right;
-    mBorder.top    = mContext.extents.top;
-    mBorder.bottom = mContext.extents.bottom;
 
     decor_get_default_layout (&mContext,
 			      mGeometry.width (),
@@ -168,41 +124,118 @@ KWD::Switcher::rebindPixmap (void)
     updateWindowProperties ();
 }
 
-bool
-KWD::Switcher::handleMap (void)
+/*
+ * This code is taken from KDE/kdebase/workspace/libs/plasma/dialog.cpp
+ *
+ *   Copyright (C) 2007 by Alexis Ménard <darktears31@gmail.com>
+ *   Copyright (C) 2007 Sebastian Kuegler <sebas@kde.org>
+ *   Copyright (C) 2006 Aaron Seigo <aseigo@kde.org>
+ */
+
+void
+KWD::Switcher::redrawPixmap ()
 {
-    if (!mPendingMap)
-	return FALSE;
+    QPainter p (&mPixmap);
 
-    mPendingMap = 0;
-    if (mPendingConfigure)
-	return FALSE;
+    const int contentWidth  = mPixmap.width ();
+    const int contentHeight = mPixmap.height ();
 
-    rebindPixmap ();
+    const int topHeight    = mBackground->elementSize ("top").height ();
+    const int topWidth     = mBackground->elementSize ("top").width ();
+    const int leftWidth    = mBackground->elementSize ("left").width ();
+    const int leftHeight   = mBackground->elementSize ("left").height ();
+    const int rightHeight  = mBackground->elementSize ("right").height ();
+    const int rightWidth   = mBackground->elementSize ("right").width ();
+    const int bottomHeight = mBackground->elementSize ("bottom").height ();
+    const int bottomWidth  = mBackground->elementSize ("bottom").width ();
 
-    return TRUE;
+    const int topOffset    = 0;
+    const int leftOffset   = 0;
+    const int rightOffset  = contentWidth - rightWidth;
+    const int bottomOffset = contentHeight - bottomHeight;
+    const int contentTop   = topHeight;
+    const int contentLeft  = leftWidth;
+
+    mPixmap.fill (Qt::transparent);
+
+    p.setCompositionMode (QPainter::CompositionMode_Source);
+    p.setRenderHint (QPainter::SmoothPixmapTransform);
+
+    mBackground->resize (contentWidth, contentHeight);
+    mBackground->paint (&p, QRect (contentLeft, contentTop, contentWidth,
+			contentHeight), "center");
+    mBackground->resize ();
+
+    mBackground->paint (&p, QRect (leftOffset, topOffset,
+			leftWidth, topHeight), "topleft");
+    mBackground->paint (&p, QRect (rightOffset, topOffset,
+			rightWidth, topHeight), "topright");
+    mBackground->paint (&p, QRect (leftOffset, bottomOffset,
+			leftWidth, bottomHeight), "bottomleft");
+    mBackground->paint (&p, QRect (rightOffset, bottomOffset,
+			rightWidth, bottomHeight), "bottomright");
+
+    if (mBackground->elementExists ("hint-stretch-borders")) {
+	mBackground->paint (&p, QRect (leftOffset, contentTop,
+			    leftWidth, contentHeight), "left");
+	mBackground->paint (&p, QRect (rightOffset, contentTop,
+			    rightWidth, contentHeight), "right");
+	mBackground->paint (&p, QRect (contentLeft, topOffset,
+			    contentWidth, topHeight), "top");
+	mBackground->paint (&p, QRect (contentLeft, bottomOffset,
+			    contentWidth, bottomHeight), "bottom");
+    } else {
+	QPixmap left (leftWidth, leftHeight);
+	QPixmap right (rightWidth, rightHeight);
+	QPixmap top (topWidth, topHeight);
+	QPixmap bottom (bottomWidth, bottomHeight);
+	
+	left.fill (Qt::transparent);
+	{
+	    QPainter sidePainter (&left);
+	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
+	    mBackground->paint (&sidePainter, QPoint (0, 0), "left");
+	}
+	p.drawTiledPixmap (QRect (leftOffset, contentTop, leftWidth,
+			   contentHeight - topHeight - bottomHeight), left);
+
+	right.fill (Qt::transparent);
+	{
+	    QPainter sidePainter (&right);
+	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
+	    mBackground->paint (&sidePainter, QPoint (0, 0), "right");
+	}
+	p.drawTiledPixmap (QRect (rightOffset, contentTop, rightWidth,
+			   contentHeight - topHeight - bottomHeight), right);
+
+	top.fill (Qt::transparent);
+	{
+	    QPainter sidePainter (&top);
+	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
+	    mBackground->paint (&sidePainter, QPoint (0, 0), "top");
+	}
+	p.drawTiledPixmap (QRect (contentLeft, topOffset, contentWidth -
+			   rightWidth - leftWidth, topHeight), top);
+
+	bottom.fill (Qt::transparent);
+	{
+	    QPainter sidePainter (&bottom);
+	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
+	    mBackground->paint (&sidePainter, QPoint (0, 0), "bottom");
+	}
+	p.drawTiledPixmap (QRect (contentLeft, bottomOffset, contentWidth -
+			   rightWidth - leftWidth, bottomHeight), bottom);
+    }
 }
 
-bool
-KWD::Switcher::handleConfigure (QSize size)
-{
-    if (!mPendingConfigure)
-	return FALSE;
-
-    mPendingConfigure = 0;
-    if (mPendingConfigure || mPendingMap)
-	return FALSE;
-
-    rebindPixmap ();
-
-    return TRUE;
-}
 
 void
 KWD::Switcher::update ()
 {
     QFontMetrics fm = Plasma::Theme::self ()->fontMetrics ();
+    QFont font (Plasma::Theme::self ()->font ());
     QString name;
+    QPainter p (&mPixmap);
 
     KWD::readWindowProperty (mId, Atoms::switchSelectWindow,
 			     (long *)&mSelected);
@@ -216,7 +249,20 @@ KWD::Switcher::update ()
         name += "...";
     }
 
-    mLabel->setText (name);
+    p.setCompositionMode (QPainter::CompositionMode_Source);
+
+    mBackground->resize (mPixmap.width (), mPixmap.height ());
+    mBackground->paint (&p, QRect (mBorder.left, mBorder.top +
+			mGeometry.height () + 5, mGeometry.width (),
+			fm.height ()), "center");
+    mBackground->resize ();
+
+
+    p.setFont (font);
+    p.setBrush (QBrush (Plasma::Theme::self()->backgroundColor()));
+
+    p.drawText ((mPixmap.width () - fm.width (name)) / 2,
+                mBorder.top + mGeometry.height () + 5 + fm.ascent (), name);
 }
 
 void
@@ -237,7 +283,7 @@ KWD::Switcher::updateWindowProperties ()
     nQuad = decor_set_lXrXtXbX_window_quads (quads, &mContext, &mDecorLayout,
 					     lh / 2, rh / 2, w, w / 2);
 
-    decor_quads_to_property (data, mPixmap,
+    decor_quads_to_property (data, mPixmap.handle (),
 			     &mBorder, &mBorder,
 			     0, 0,
 			     quads, nQuad);
@@ -323,11 +369,4 @@ KWD::Switcher::updateBlurProperty (int topOffset,
 	XDeleteProperty (QX11Info::display (), mId, atom);
 	KWD::popXError ();
     }
-}
-
-
-WId
-KWD::Switcher::dialogId ()
-{
-    return mDialog->winId ();
 }
