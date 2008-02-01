@@ -90,9 +90,8 @@ void
 KWD::Switcher::updateGeometry ()
 {
     int x, y;
-    unsigned int width, height, border, depth, bgColor;
+    unsigned int width, height, border, depth;
     XID root;
-    QColor bg;
 
     XGetGeometry (QX11Info::display (), mId, &root, &x, &y, &width, &height,
 		  &border, &depth);
@@ -101,14 +100,6 @@ KWD::Switcher::updateGeometry ()
 
     KWD::readWindowProperty (mId, Atoms::switchSelectWindow,
 			     (long *)&mSelected);
-
-    
-    bg = Plasma::Theme::self ()->backgroundColor ();
-    bgColor = (bg.alpha () << 24) + (bg.red () << 24) + (bg.green () << 16) +
-	      bg.blue ();
-    XSetWindowBackground (QX11Info::display (), mId, bgColor);
-    XClearWindow (QX11Info::display (), mId);
-    XSync (QX11Info::display (), FALSE);
 
     mPixmap = QPixmap (width + mBorder.left + mBorder.right,
 		       height + mBorder.top + mBorder.bottom);
@@ -226,8 +217,14 @@ KWD::Switcher::redrawPixmap ()
 	p.drawTiledPixmap (QRect (contentLeft, bottomOffset, contentWidth -
 			   rightWidth - leftWidth, bottomHeight), bottom);
     }
-}
 
+    mBackgroundPixmap = mPixmap.copy (mBorder.left, mBorder.top,
+				      mGeometry.width (),
+				      mGeometry.height ());
+
+    XSetWindowBackgroundPixmap (QX11Info::display (), mId,
+				mBackgroundPixmap.handle ());
+}
 
 void
 KWD::Switcher::update ()
