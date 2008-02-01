@@ -43,6 +43,8 @@ KWD::Switcher::Switcher (WId parentId, WId id):
 mId (id)
 {
     QPalette palette;
+    long     prop[4];
+    QColor   color = Plasma::Theme::self ()->textColor ();
 
     mDialog = new Plasma::Dialog ();
 
@@ -55,8 +57,7 @@ mId (id)
     mLabel = new QLabel ();
     mLabel->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
     palette = mLabel->palette();
-    palette.setBrush (QPalette::WindowText,
-		      QBrush (Plasma::Theme::self ()->textColor ()));
+    palette.setBrush (QPalette::WindowText, QBrush(color));
     mLabel->setPalette (palette);
     mLabel->setAlignment (Qt::AlignHCenter);
     mLabel->setFixedHeight (Plasma::Theme::self ()->fontMetrics ().height ());
@@ -76,6 +77,16 @@ mId (id)
     mPendingMap = 1;
 
     updateGeometry ();
+
+    prop[0] = (color.red() * 256) + color.red();
+    prop[1] = (color.green() * 256) + color.green();
+    prop[2] = (color.blue() * 256) + color.blue();
+    prop[3] = (color.alpha() * 256) + color.alpha();
+
+    KWD::trapXError ();
+    XChangeProperty (QX11Info::display (), id, Atoms::switchFgColor, XA_INTEGER,
+		     32, PropModeReplace, (unsigned char *) prop, 4);
+    KWD::popXError ();
 }
 
 KWD::Switcher::~Switcher ()

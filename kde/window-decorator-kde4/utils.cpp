@@ -37,6 +37,7 @@ namespace KWD
     namespace Atoms
     {
 	Atom switchSelectWindow;
+	Atom switchFgColor;
 	Atom netWmWindowOpacity;
 	Atom netFrameWindow;
 	Atom netWindowDecor;
@@ -189,6 +190,8 @@ KWD::Atoms::init (void)
 	XInternAtom (xdisplay, DECOR_BARE_ATOM_NAME, false);
     switchSelectWindow =
 	XInternAtom (xdisplay, DECOR_SWITCH_WINDOW_ATOM_NAME, false);
+    switchFgColor =
+	XInternAtom (xdisplay, DECOR_SWITCH_FOREGROUND_COLOR_ATOM_NAME, false);
     wmTakeFocus = XInternAtom (xdisplay, "WM_TAKE_FOCUS", false);
     netWmContextHelp =
 	XInternAtom (xdisplay, "_NET_WM_CONTEXT_HELP", false);
