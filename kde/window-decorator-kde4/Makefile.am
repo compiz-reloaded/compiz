@@ -24,7 +24,9 @@ kde4_window_decorator_SOURCES = \
 	options.cpp	       \
 	options.h              \
 	kdecoration_plugins.cpp \
-	kdecoration_plugins.h
+	kdecoration_plugins.h   \
+	switcher.cpp            \
+	switcher.h
 
 kde4_window_decorator_program = kde4-window-decorator
 

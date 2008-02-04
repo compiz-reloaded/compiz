@@ -50,7 +50,6 @@ class Window:public QWidget, public KDecorationBridge {
 	enum Type
 	{
 	    Normal,
-	    Switcher,
 	    Default,
 	    DefaultActive
 	};

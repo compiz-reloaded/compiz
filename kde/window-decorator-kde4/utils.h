@@ -33,6 +33,7 @@ namespace KWD
     namespace Atoms
     {
 	extern Atom switchSelectWindow;
+	extern Atom switchFgColor;
 	extern Atom netWmWindowOpacity;
 	extern Atom netFrameWindow;
 	extern Atom netWindowDecor;
