@@ -350,6 +350,8 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 
     splitStart = csv;
     list->value = malloc (sizeof (CompOptionValue) * count);
+    list->nValue = count;
+
     if (list->value)
     {
 	for (i = 0; i < count; i++)
@@ -378,24 +380,19 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 	        return FALSE;
 	    }
 
-
 	    switch (type)
 	    {
 		case CompOptionTypeString:
-		    if (item[0] != '\0')
-			list->value[i].s = strdup (item);
+		    list->value[i].s = strdup (item);
 		    break;
 		case CompOptionTypeBool:
-		    if (item[0] != '\0')
-			list->value[i].b = (Bool) atoi (item);
+		    list->value[i].b = item[0] ? (Bool) atoi (item) : FALSE;
 		    break;
 		case CompOptionTypeInt:
-		    if (item[0] != '\0')
-			list->value[i].i = atoi (item);
+		    list->value[i].i = item[0] ? atoi (item) : 0;
 		    break;
 		case CompOptionTypeFloat:
-		    if (item[0] != '\0')
-			list->value[i].f = atof (item);
+		    list->value[i].f = item[0] ? atof (item) : 0.0f;
 		    break;
 		case CompOptionTypeKey:
 		    stringToKeyAction (d, item, &list->value[i].action);
@@ -424,7 +421,6 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 		item = NULL;
 	    }
 	}
-	list->nValue = count;
     }
 
     return TRUE;
