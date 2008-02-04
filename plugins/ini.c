@@ -313,7 +313,7 @@ iniParseLine (char *line, char **optionName, char **optionValue)
     if (*optionName)
     {
        strncpy (*optionName, line, length);
-       *optionName[length] = 0;
+       (*optionName)[length] = 0;
     }
     splitPos++;
     optionLength = strlen (splitPos);
@@ -323,7 +323,7 @@ iniParseLine (char *line, char **optionName, char **optionValue)
     if (*optionValue)
     {
       strncpy (*optionValue, splitPos, optionLength);
-      *optionValue[optionLength] = 0;
+      (*optionValue)[optionLength] = 0;
     }
     return TRUE;
 }
