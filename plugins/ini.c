@@ -319,7 +319,7 @@ iniParseLine (char *line, char **optionName, char **optionValue)
     optionLength = strlen (splitPos);
     if (splitPos[optionLength-1] == '\n')
 	optionLength--;
-    *optionValue = malloc (sizeof (char) * (optionLength +1));
+    *optionValue = malloc (sizeof (char) * (optionLength + 1));
     if (*optionValue)
     {
       strncpy (*optionValue, splitPos, optionLength);
