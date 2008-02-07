@@ -4960,27 +4960,10 @@ freeWindowIcons (CompWindow *w)
 int
 outputDeviceForWindow (CompWindow *w)
 {
-    int output = w->screen->currentOutputDev;
-    int	width = w->serverWidth + w->serverBorderWidth * 2;
-    int	height = w->serverHeight + w->serverBorderWidth * 2;
-    int x1, y1, x2, y2;
-
-    x1 = w->screen->outputDev[output].region.extents.x1;
-    y1 = w->screen->outputDev[output].region.extents.y1;
-    x2 = w->screen->outputDev[output].region.extents.x2;
-    y2 = w->screen->outputDev[output].region.extents.y2;
-
-    if (x1 > w->serverX + width  ||
-	y1 > w->serverY + height ||
-	x2 < w->serverX		 ||
-	y2 < w->serverY)
-    {
-	output = outputDeviceForPoint (w->screen,
-				       w->serverX + width  / 2,
-				       w->serverY + height / 2);
-    }
-
-    return output;
+    return outputDeviceForGeometry (w->screen,
+				    w->serverX, w->serverY,
+				    w->serverWidth, w->serverHeight,
+				    w->serverBorderWidth);
 }
 
 Bool
