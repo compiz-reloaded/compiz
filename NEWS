@@ -1,3 +1,35 @@
+Release 0.7.0 (2008-02-07 Dennis Kasprzyk <onestone@opencompositing.org>)
+=========================================================================
+Development release.
+
+A core plugin has been added that allows handling certain core APIs, such as
+querying the ABI version, similarly to plugin APIs, allowing sharing more
+code.
+
+Added a simple object system, which generalize the privates mechanism and the plugin system. It allows to share more code between display, screen and window objects. It also makes it possible to properly introduce new object types without changing the plugin interface or breaking the API.
+
+Multi-display support.
+
+Various fixes in ICCCM compliance, window stacking and focus handling.
+
+Validity checking of ConfigureRequest events.
+
+Fixes to transient children placement in place plugin.
+
+Hooks have been added to the cube plugin which allow better control of
+viewport drawing.
+
+Middle and right click actions have been made configurable in
+gtk-window-decorator.
+
+Gtk-window-decorator now optionally allows mouse wheel title bar actions, such
+as shading.
+
+A KDE4 port of the kde-window-decorator has been added.
+
+Frequent crashes of kde-window-decorator for some people have been fixed.
+
+
 Release 0.5.4 (2007-08-20 David Reveman <davidr@novell.com>)
 ============================================================
 Development release.
