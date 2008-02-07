@@ -2,6 +2,7 @@ INCLUDES =			     \
 	@COMPIZ_CFLAGS@		     \
 	@GL_CFLAGS@		     \
 	-I$(top_srcdir)/include	     \
+	-I$(top_builddir)/include    \
 	-DPLUGINDIR=\"$(plugindir)\" \
 	-DIMAGEDIR=\"$(imagedir)\"   \
 	-DMETADATADIR=\"$(metadatadir)\"
