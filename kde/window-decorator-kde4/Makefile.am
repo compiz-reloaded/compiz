@@ -26,11 +26,12 @@ kde4_window_decorator_SOURCES = \
 	kdecoration_plugins.cpp \
 	kdecoration_plugins.h   \
 	switcher.cpp            \
-	switcher.h
+	switcher.h              \
+	org.kde.KWin.xml
 
 kde4_window_decorator_program = kde4-window-decorator
 
-INCLUDES = -I$(top_srcdir)/include @KDE4_WINDOW_DECORATOR_CFLAGS@ @KDE4_CFLAGS@
+INCLUDES = -I$(top_srcdir)/include -I$(top_builddir)/include @KDE4_WINDOW_DECORATOR_CFLAGS@ @KDE4_CFLAGS@
 
 bin_PROGRAMS = $(kde4_window_decorator_program)
 

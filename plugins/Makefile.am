@@ -146,6 +146,7 @@ INCLUDES =					\
 	-DPLUGINDIR=\"$(plugindir)\"		\
 	-DIMAGEDIR=\"$(imagedir)\"		\
 	-I$(top_srcdir)/include                 \
+	-I$(top_builddir)/include               \
 	-DMETADATADIR=\"$(metadatadir)\"
 
 moduledir = $(plugindir)

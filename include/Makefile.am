@@ -9,3 +9,5 @@ compizinclude_HEADERS = \
 
 nodist_compizinclude_HEADERS = \
 	compiz-common.h
+
+DISTCLEANFILES = compiz-common.h
