@@ -456,7 +456,7 @@ if test "x$use_kde" = "xyes"; then
     kdedir=`kde-config --prefix --expandvars 2>/dev/null`
     kdelibs=`kde-config --install lib --expandvars 2>/dev/null`
     kdeincs=`kde-config --install include --expandvars 2>/dev/null`
-    if test -d $kdelibs; then
+    if test -d "$kdelibs"; then
       PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
 			dbus-1 xdamage xcomposite,
 			[use_kde=yes], [use_kde=no])
@@ -519,7 +519,7 @@ if test "x$use_kde4" = "xyes"; then
 
   AC_MSG_RESULT([$kde4_notfound])
 
-  if test -d $kde4libs; then
+  if test -d "$kde4libs"; then
     PKG_CHECK_MODULES(KDE4_WINDOW_DECORATOR,
 		      dbus-1 xdamage xcomposite QtCore >= 4.0.0 QtGui QtDBus,
 			[use_kde4=yes], [use_kde4=no])
@@ -530,7 +530,7 @@ if test "x$use_kde4" = "xyes"; then
     QT4_MOC=`pkg-config QtGui --variable=moc_location`
     QDBUSXML2CPP=`pkg-config QtGui --variable=exec_prefix`"/bin/qdbusxml2cpp"
   else
-    use_kde=no;
+    use_kde4=no;
   fi
 fi
 
