@@ -551,9 +551,9 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
 		    strcpy (type, "as");
 		else
 		    strcpy (type, "s");
-
-	    default:
 		break;
+	    default:
+		continue;
 	    }
 
 	    dbusIntrospectAddMethod (writer,
