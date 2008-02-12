@@ -287,8 +287,6 @@ dbusHandleRootIntrospectMessage (DBusConnection *connection,
 	return FALSE;
     }
 
-    dbusIntrospectAddNode (writer, "core");
-
     dbusIntrospectEndRoot (writer);
 
     xmlFreeTextWriter (writer);
