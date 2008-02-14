@@ -152,7 +152,8 @@ saveYourselfCallback (SmcConn	connection,
 		      int	interact_Style,
 		      Bool	fast)
 {
-    (*core.sessionSaveYourself) (&core, saveType, interact_Style,
+    (*core.sessionSaveYourself) (&core, smClientId,
+				 saveType, interact_Style,
 				 shutdown, fast);
 
     if (!SmcGetProperties (connection, saveYourselfGotProps, NULL))
@@ -245,11 +246,12 @@ closeSession (void)
 }
 
 void
-sessionSaveYourself (CompCore *c,
-		     int      saveType,
-		     int      interactStyle,
-		     Bool     shutdown,
-		     Bool     fast)
+sessionSaveYourself (CompCore   *c,
+		     const char *clientId,
+		     int        saveType,
+		     int        interactStyle,
+		     Bool       shutdown,
+		     Bool       fast)
 {
 }
 

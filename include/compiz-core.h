@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080130
+#define CORE_ABIVERSION 20080214
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -346,11 +346,12 @@ compObjectFind (CompObject     *parent,
 
 /* session.c */
 
-typedef void (*SessionSaveYourselfProc) (CompCore *c,
-					 int      saveType,
-					 int      interactStyle,
-					 Bool     shutdown,
-					 Bool     fast);
+typedef void (*SessionSaveYourselfProc) (CompCore   *c,
+					 const char *clientId,
+					 int        saveType,
+					 int        interactStyle,
+					 Bool       shutdown,
+					 Bool       fast);
 
 typedef void (*SessionDieProc) (CompCore *c);
 
@@ -365,11 +366,12 @@ void
 closeSession (void);
 
 void
-sessionSaveYourself (CompCore *c,
-		     int      saveType,
-		     int      interactStyle,
-		     Bool     shutdown,
-		     Bool     fast);
+sessionSaveYourself (CompCore   *c,
+		     const char *clientId,
+		     int        saveType,
+		     int        interactStyle,
+		     Bool       shutdown,
+		     Bool       fast);
 
 void
 sessionDie (CompCore *c);
