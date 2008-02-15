@@ -114,9 +114,12 @@ saveYourselfGotProps (SmcConn   connection,
 {
     int p, i;
 
+    setCloneRestartCommands (connection);
+
     for (p = 0; p < num_props; p++)
     {
-	if (!strcmp (props[p]->name, SmRestartCommand))
+	if (!strcmp (props[p]->name, SmRestartCommand) ||
+	    !strcmp (props[p]->name, SmCloneCommand))
 	{
 	    for (i = 0; i < props[p]->num_vals - 1; i++)
 	    {
@@ -130,16 +133,12 @@ saveYourselfGotProps (SmcConn   connection,
 		    props[p]->vals[i + 1].length = strlen (smClientId);
 		    SmcSetProperties (connection, 1, &props[p]);
 		    props[p]->vals[i + 1] = oldVal;
-
-		    goto out;
 		}
 	    }
 	}
     }
 
-out:
     setRestartStyle (connection, SmRestartImmediately);
-    setCloneRestartCommands (connection);
 
     SmcSaveYourselfDone (connection, 1);
 }
