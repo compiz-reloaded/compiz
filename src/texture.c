@@ -282,10 +282,7 @@ bindPixmapToTexture (CompScreen  *screen,
 
     texture->mipmap = config->mipmap;
 
-    /* GLX may still use GL_TEXTURE_2D for power of two textures
-       even if the fbconfig only has GLX_TEXTURE_2D_BIT_EXT set */
-    if (!target || (POWER_OF_TWO (width) && POWER_OF_TWO (height) &&
-	target == GLX_TEXTURE_RECTANGLE_EXT))
+    if (!target)
 	(*screen->queryDrawable) (screen->display->display,
 				  texture->pixmap,
 				  GLX_TEXTURE_TARGET_EXT,
