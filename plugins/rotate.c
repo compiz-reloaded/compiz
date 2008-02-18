@@ -1378,6 +1378,9 @@ rotateTo (CompDisplay     *d,
 	if (face < 0)
 	    face = getIntOptionNamed (option, nOption, "face", s->x);
 
+	if (face > s->hsize)
+	    return FALSE;
+
 	o[0].type    = CompOptionTypeInt;
 	o[0].name    = "x";
 	o[0].value.i = getIntOptionNamed (option, nOption, "x", pointerX);
@@ -1434,6 +1437,9 @@ rotateToWithWindow (CompDisplay     *d,
 
 	if (face < 0)
 	    face = getIntOptionNamed (option, nOption, "face", s->x);
+
+	if (face > s->hsize)
+	    return FALSE;
 
 	o[0].type    = CompOptionTypeInt;
 	o[0].name    = "x";
