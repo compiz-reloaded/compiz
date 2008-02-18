@@ -82,10 +82,36 @@ setStringListProperty (SmcConn	  connection,
 static void
 setCloneRestartCommands (SmcConn connection)
 {
-    setStringListProperty (connection, SmCloneCommand,
-			   (const char **) programArgv, programArgc);
-    setStringListProperty (connection, SmRestartCommand,
-			   (const char **) programArgv, programArgc);
+    const char **args;
+    int        i, count = 0;
+
+    /* at maximum, we pass our old arguments + our new client id
+       to the SM, so allocate for that case */
+    args = malloc ((programArgc + 2) * sizeof (char *));
+    if (!args)
+	return;
+
+    for (i = 0; i < programArgc; i++)
+    {
+	if (strcmp (programArgv[i], "--sm-client-id") == 0)
+	    i++; /* skip old client id, we'll add the new one later */
+	else
+	    args[count++] = programArgv[i];
+    }
+
+    setStringListProperty (connection, SmCloneCommand, args, count);
+
+    /* insert new client id at position 1 and 2;
+       position 0 is the executable name */
+    for (i = count - 1; i >= 1; i--)
+	args[i + 2] = args[i];
+    args[1] = "--sm-client-id";
+    args[2] = smClientId;
+    count += 2;
+
+    setStringListProperty (connection, SmRestartCommand, args, count);
+
+    free (args);
 }
 
 static void
@@ -107,43 +133,6 @@ setRestartStyle (SmcConn connection, char hint)
 }
 
 static void
-saveYourselfGotProps (SmcConn   connection,
-		      SmPointer client_data,
-		      int       num_props,
-		      SmProp    **props)
-{
-    int p, i;
-
-    setCloneRestartCommands (connection);
-
-    for (p = 0; p < num_props; p++)
-    {
-	if (!strcmp (props[p]->name, SmRestartCommand) ||
-	    !strcmp (props[p]->name, SmCloneCommand))
-	{
-	    for (i = 0; i < props[p]->num_vals - 1; i++)
-	    {
-		if (!strncmp (props[p]->vals[i].value,
-			      "--sm-client-id",
-			      props[p]->vals[i].length))
-		{
-		    SmPropValue oldVal = props[p]->vals[i + 1];
-
-		    props[p]->vals[i + 1].value = smClientId;
-		    props[p]->vals[i + 1].length = strlen (smClientId);
-		    SmcSetProperties (connection, 1, &props[p]);
-		    props[p]->vals[i + 1] = oldVal;
-		}
-	    }
-	}
-    }
-
-    setRestartStyle (connection, SmRestartImmediately);
-
-    SmcSaveYourselfDone (connection, 1);
-}
-
-static void
 saveYourselfCallback (SmcConn	connection,
 		      SmPointer client_data,
 		      int	saveType,
@@ -155,8 +144,9 @@ saveYourselfCallback (SmcConn	connection,
 				 saveType, interact_Style,
 				 shutdown, fast);
 
-    if (!SmcGetProperties (connection, saveYourselfGotProps, NULL))
-	SmcSaveYourselfDone (connection, 1);
+    setCloneRestartCommands (connection);
+    setRestartStyle (connection, SmRestartImmediately);
+    SmcSaveYourselfDone (connection, 1);
 }
 
 static void
