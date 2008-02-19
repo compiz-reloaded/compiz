@@ -1113,6 +1113,8 @@ scaleTerminate (CompDisplay     *d,
 	}
     }
 
+    action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
+
     return FALSE;
 }
 
