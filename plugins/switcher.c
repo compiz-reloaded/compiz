@@ -595,9 +595,10 @@ switchInitiate (CompScreen *s,
 		count = 3;
 	}
 
-	xsh.flags  = PSize | PPosition;
-	xsh.width  = WINDOW_WIDTH (count);
-	xsh.height = WINDOW_HEIGHT;
+	xsh.flags       = PSize | PPosition | PWinGravity;
+	xsh.width       = WINDOW_WIDTH (count);
+	xsh.height      = WINDOW_HEIGHT;
+	xsh.win_gravity = StaticGravity;
 
 	xwmh.flags = InputHint;
 	xwmh.input = 0;
