@@ -3137,7 +3137,7 @@ updateWorkareaForScreen (CompScreen *s)
 	/* as work area changed, update all maximized windows on this
 	   screen to snap to the new work area */
 	for (w = s->windows; w; w = w->next)
-	    updateWindowAttributes (w, CompStackingUpdateModeNone);
+	    updateWindowSize (w);
     }
 }
 
