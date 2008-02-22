@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define SCALE_ABIVERSION 20070906
+#define SCALE_ABIVERSION 20080222
 
 #define SCALE_STATE_NONE 0
 #define SCALE_STATE_OUT  1
@@ -83,8 +83,11 @@ typedef struct _ScaleDisplay {
 
     unsigned int lastActiveNum;
     Window       lastActiveWindow;
+
     Window       selectedWindow;
     Window       hoveredWindow;
+    Window       previousActiveWindow;
+
     KeyCode	 leftKeyCode, rightKeyCode, upKeyCode, downKeyCode;
 } ScaleDisplay;
 

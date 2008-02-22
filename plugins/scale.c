@@ -1086,7 +1086,16 @@ scaleTerminate (CompDisplay     *d,
 		    }
 		}
 
-		if (ss->state != SCALE_STATE_IN)
+		if (state & CompActionStateCancel)
+		{
+		    if (d->activeWindow != sd->previousActiveWindow)
+		    {
+			w = findWindowAtScreen (s, sd->previousActiveWindow);
+			if (w)
+			    moveInputFocusToWindow (w);
+		    }
+		}
+		else if (ss->state != SCALE_STATE_IN)
 		{
 		    w = findWindowAtScreen (s, sd->lastActiveWindow);
 		    if (w)
@@ -1200,9 +1209,10 @@ scaleInitiateCommon (CompScreen      *s,
 	if (!sd->lastActiveNum)
 	    sd->lastActiveNum = s->activeNum - 1;
 
-	sd->lastActiveWindow = s->display->activeWindow;
-	sd->selectedWindow   = s->display->activeWindow;
-	sd->hoveredWindow    = None;
+	sd->previousActiveWindow = s->display->activeWindow;
+	sd->lastActiveWindow     = s->display->activeWindow;
+	sd->selectedWindow       = s->display->activeWindow;
+	sd->hoveredWindow        = None;
 
 	ss->state = SCALE_STATE_OUT;
 
