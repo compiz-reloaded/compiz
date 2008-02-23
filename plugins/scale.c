@@ -782,6 +782,95 @@ layoutThumbs (CompScreen *s)
     return (*ss->layoutSlotsAndAssignWindows) (s);
 }
 
+static CompWindow *
+scaleCheckForWindowAt (CompScreen *s,
+		       int        x,
+		       int        y)
+{
+    int        x1, y1, x2, y2;
+    CompWindow *w;
+
+    for (w = s->reverseWindows; w; w = w->prev)
+    {
+	SCALE_WINDOW (w);
+
+	if (sw->slot)
+	{
+	    x1 = w->attrib.x - w->input.left * sw->scale;
+	    y1 = w->attrib.y - w->input.top  * sw->scale;
+	    x2 = w->attrib.x + (w->width  + w->input.right)  * sw->scale;
+	    y2 = w->attrib.y + (w->height + w->input.bottom) * sw->scale;
+
+	    x1 += sw->tx;
+	    y1 += sw->ty;
+	    x2 += sw->tx;
+	    y2 += sw->ty;
+
+	    if (x1 <= x && y1 <= y && x2 > x && y2 > y)
+		return w;
+	}
+    }
+
+    return 0;
+}
+
+static void
+scaleSelectWindow (CompWindow *w)
+
+{
+    SCALE_DISPLAY (w->screen->display);
+
+    if (sd->selectedWindow != w->id)
+    {
+	CompWindow *old, *new;
+
+	old = findWindowAtScreen (w->screen, sd->selectedWindow);
+	new = findWindowAtScreen (w->screen, w->id);
+
+	sd->selectedWindow = w->id;
+
+	if (old)
+	    addWindowDamage (old);
+
+	if (new)
+	    addWindowDamage (new);
+    }
+}
+
+static Bool
+scaleSelectWindowAt (CompScreen *s,
+		     int	 x,
+		     int	 y,
+		     Bool	 moveInputFocus)
+
+{
+    CompWindow *w;
+
+    SCALE_DISPLAY (s->display);
+
+    w = scaleCheckForWindowAt (s, x, y);
+    if (w && isScaleWin (w))
+    {
+	scaleSelectWindow (w);
+
+	if (moveInputFocus)
+	{
+	    sd->lastActiveNum    = w->activeNum;
+	    sd->lastActiveWindow = w->id;
+
+	    moveInputFocusToWindow (w);
+	}
+
+	sd->hoveredWindow = w->id;
+
+	return TRUE;
+    }
+
+    sd->hoveredWindow = None;
+
+    return FALSE;
+}
+
 static int
 adjustScaleVelocity (CompWindow *w)
 {
@@ -945,45 +1034,19 @@ scaleDonePaintScreen (CompScreen *s)
 		ss->state = SCALE_STATE_NONE;
 	    }
 	    else if (ss->state == SCALE_STATE_OUT)
+	    {
+		int opt = COMP_DISPLAY_OPTION_CLICK_TO_FOCUS;
+
+		scaleSelectWindowAt (s, pointerX, pointerY,
+				     !s->display->opt[opt].value.b);
 		ss->state = SCALE_STATE_WAIT;
+	    }
 	}
     }
 
     UNWRAP (ss, s, donePaintScreen);
     (*s->donePaintScreen) (s);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
-}
-
-static CompWindow *
-scaleCheckForWindowAt (CompScreen *s,
-		       int        x,
-		       int        y)
-{
-    int        x1, y1, x2, y2;
-    CompWindow *w;
-
-    for (w = s->reverseWindows; w; w = w->prev)
-    {
-	SCALE_WINDOW (w);
-
-	if (sw->slot)
-	{
-	    x1 = w->attrib.x - w->input.left * sw->scale;
-	    y1 = w->attrib.y - w->input.top  * sw->scale;
-	    x2 = w->attrib.x + (w->width  + w->input.right)  * sw->scale;
-	    y2 = w->attrib.y + (w->height + w->input.bottom) * sw->scale;
-
-	    x1 += sw->tx;
-	    y1 += sw->ty;
-	    x2 += sw->tx;
-	    y2 += sw->ty;
-
-	    if (x1 <= x && y1 <= y && x2 > x && y2 > y)
-		return w;
-	}
-    }
-
-    return 0;
 }
 
 static void
@@ -1395,63 +1458,6 @@ scaleRelayoutSlots (CompDisplay     *d,
 
 	return TRUE;
     }
-
-    return FALSE;
-}
-
-static void
-scaleSelectWindow (CompWindow *w)
-
-{
-    SCALE_DISPLAY (w->screen->display);
-
-    if (sd->selectedWindow != w->id)
-    {
-	CompWindow *old, *new;
-
-	old = findWindowAtScreen (w->screen, sd->selectedWindow);
-	new = findWindowAtScreen (w->screen, w->id);
-
-	sd->selectedWindow = w->id;
-
-	if (old)
-	    addWindowDamage (old);
-
-	if (new)
-	    addWindowDamage (new);
-    }
-}
-
-static Bool
-scaleSelectWindowAt (CompScreen *s,
-		     int	 x,
-		     int	 y,
-		     Bool	 moveInputFocus)
-
-{
-    CompWindow *w;
-
-    SCALE_DISPLAY (s->display);
-
-    w = scaleCheckForWindowAt (s, x, y);
-    if (w && isScaleWin (w))
-    {
-	scaleSelectWindow (w);
-
-	if (moveInputFocus)
-	{
-	    sd->lastActiveNum    = w->activeNum;
-	    sd->lastActiveWindow = w->id;
-
-	    moveInputFocusToWindow (w);
-	}
-
-	sd->hoveredWindow = w->id;
-
-	return TRUE;
-    }
-
-    sd->hoveredWindow = None;
 
     return FALSE;
 }
