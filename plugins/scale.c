@@ -1367,38 +1367,6 @@ scaleInitiateOutput (CompDisplay     *d,
     return FALSE;
 }
 
-static Bool
-scaleRelayoutSlots (CompDisplay     *d,
-		    CompAction      *action,
-		    CompActionState state,
-		    CompOption      *option,
-		    int	            nOption)
-{
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SCALE_SCREEN (s);
-
-	if (ss->state != SCALE_STATE_NONE && ss->state != SCALE_STATE_IN)
-	{
-	    if (layoutThumbs (s))
-	    {
-		ss->state = SCALE_STATE_OUT;
-		damageScreen (s);
-	    }
-	}
-
-	return TRUE;
-    }
-
-    return FALSE;
-}
-
 static void
 scaleSelectWindow (CompWindow *w)
 
@@ -1535,6 +1503,39 @@ scaleMoveFocusWindow (CompScreen *s,
 
 	moveInputFocusToWindow (focus);
     }
+}
+
+static Bool
+scaleRelayoutSlots (CompDisplay     *d,
+		    CompAction      *action,
+		    CompActionState state,
+		    CompOption      *option,
+		    int	            nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+	SCALE_SCREEN (s);
+
+	if (ss->state != SCALE_STATE_NONE && ss->state != SCALE_STATE_IN)
+	{
+	    if (layoutThumbs (s))
+	    {
+		ss->state = SCALE_STATE_OUT;
+		scaleMoveFocusWindow (s, 0, 0);
+		damageScreen (s);
+	    }
+	}
+
+	return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void
