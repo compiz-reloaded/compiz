@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-29 17:31+0530\n"
-"PO-Revision-Date: 2007-11-30 19:50+0100\n"
-"Last-Translator: Maciej Warnecki <maciekw5@gmail.com>\n"
+"POT-Creation-Date: 2008-02-23 23:26+0530\n"
+"PO-Revision-Date: 2008-02-16 15:39+0100\n"
+"Last-Translator: lukasz deren <lukaszderen@gmail.com>\n"
 "Language-Team: <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,10 @@ msgstr "Zarządzanie oknem"
 msgid "Compiz"
 msgstr "Compiz"
 
+# I find my translation easier to understand
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr ""
-"Akcja jaką należy podjąć kiedy obraca się kółko myszki na pasku z tytułem "
-"okna."
+msgstr "Akcja przy obrocie kółka myszy nad paskiem tytułowym okna."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -190,7 +189,7 @@ msgstr "Nasycenie"
 #: ../metadata/blur.xml.in.h:6
 #, fuzzy
 msgid "Blur Saturation"
-msgstr "Nasycenie"
+msgstr "Nasycenie rozmycia"
 
 #: ../metadata/blur.xml.in.h:7
 msgid "Blur Speed"
@@ -681,7 +680,6 @@ msgid "Number of Desktops"
 msgstr "Ilość pulpitów"
 
 #: ../metadata/core.xml.in.h:86
-#, fuzzy
 msgid "Number of virtual desktops"
 msgstr "Ilość wirtualnych pulpitów"
 
@@ -694,7 +692,6 @@ msgid "Opacity Step"
 msgstr "Krok nieprzezroczystości"
 
 #: ../metadata/core.xml.in.h:89
-#, fuzzy
 msgid "Opacity change step"
 msgstr "Krok zmiany nieprzezroczystości"
 
@@ -830,7 +827,7 @@ msgstr "Polecenie zrzutu ekranu"
 #: ../metadata/core.xml.in.h:118
 #, fuzzy
 msgid "Show Desktop"
-msgstr "Powiększ biurko"
+msgstr "Pokaż pulpit"
 
 #: ../metadata/core.xml.in.h:119
 msgid "Show Main Menu"
@@ -869,9 +866,8 @@ msgid "Texture Filter"
 msgstr "Filtr tekstury"
 
 #: ../metadata/core.xml.in.h:128
-#, fuzzy
 msgid "Texture filtering"
-msgstr "Filtr tekstury"
+msgstr "Filtrowanie tekstur"
 
 #: ../metadata/core.xml.in.h:129
 #, fuzzy
@@ -980,9 +976,8 @@ msgid "Animate skydome when rotating cube"
 msgstr "Animacja tła dla kostki podczas jej obracania"
 
 #: ../metadata/cube.xml.in.h:7
-#, fuzzy
 msgid "Automatic"
-msgstr "Automatyczne wysuwanie okien"
+msgstr "Automatycznie"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background Images"
@@ -1169,7 +1164,7 @@ msgstr "Odsłoń kostkę"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr ""
+msgstr "Dbus"
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
@@ -1184,9 +1179,8 @@ msgid "Command"
 msgstr "Polecenie"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "Skaluj okna"
+msgstr "Dekoracje okien"
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
@@ -1215,9 +1209,8 @@ msgid "Drop shadow radius"
 msgstr "Promień cienia"
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "Przypnij okna"
+msgstr "Kolor cienia"
 
 #: ../metadata/decoration.xml.in.h:12
 msgid "Shadow Offset X"
@@ -1236,9 +1229,8 @@ msgid "Shadow Radius"
 msgstr "Promień cienia"
 
 #: ../metadata/decoration.xml.in.h:16
-#, fuzzy
 msgid "Shadow windows"
-msgstr "Przypnij okna"
+msgstr "Cienie okien"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
@@ -1313,12 +1305,12 @@ msgstr "Typy okien, które mają zanikać"
 #: ../metadata/fs.xml.in.h:1
 #, fuzzy
 msgid "Mount Point"
-msgstr "Punkt"
+msgstr "Punkt mountowania"
 
 #: ../metadata/fs.xml.in.h:2
 #, fuzzy
 msgid "Mount point"
-msgstr "Dodaj punkt"
+msgstr "Punkt mountowania"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
@@ -1330,7 +1322,7 @@ msgstr "System plików użytkownika"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr ""
+msgstr "Gconf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
@@ -1338,7 +1330,7 @@ msgstr ""
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr ""
+msgstr "Glib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
@@ -1364,7 +1356,7 @@ msgstr "Bez zmian"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr ""
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
@@ -1375,9 +1367,8 @@ msgid "Minimize Effect"
 msgstr "Efekt minimalizacji"
 
 #: ../metadata/minimize.xml.in.h:2
-#, fuzzy
 msgid "Minimize Windows"
-msgstr "Zminimalizuj okno"
+msgstr "Minimalizuj okna"
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
@@ -1474,9 +1465,8 @@ msgid "Horizontal viewport positions"
 msgstr "Poziomy rozmiar wirtualny"
 
 #: ../metadata/place.xml.in.h:5
-#, fuzzy
 msgid "Maximize"
-msgstr "Zminimalizowane"
+msgstr "Maksymalizuj"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Place Windows"
@@ -1534,7 +1524,7 @@ msgstr "Obejścia problemów"
 #: ../metadata/place.xml.in.h:18
 #, fuzzy
 msgid "X Positions"
-msgstr "Wyświetl zminimalizowan okna"
+msgstr "Pozycje X"
 
 #: ../metadata/place.xml.in.h:19
 #, fuzzy
@@ -1548,7 +1538,7 @@ msgstr "Wartości dla pozycji X"
 #: ../metadata/place.xml.in.h:21
 #, fuzzy
 msgid "Y Positions"
-msgstr "Wyświetl zminimalizowan okna"
+msgstr "Pozycje Y"
 
 #: ../metadata/place.xml.in.h:22
 #, fuzzy
@@ -1573,7 +1563,7 @@ msgstr "Płaszczyzna dolna"
 
 #: ../metadata/plane.xml.in.h:4
 msgid "Plane Left"
-msgstr "Lewa płaszczyzna "
+msgstr "Lewa płaszczyzna"
 
 #: ../metadata/plane.xml.in.h:5
 msgid "Plane Right"
@@ -1757,9 +1747,8 @@ msgid "Default mode used for window resizing"
 msgstr "Domyślny tryb używany podczas zmiany rozmiaru okna"
 
 #: ../metadata/resize.xml.in.h:5
-#, fuzzy
 msgid "Fill Color"
-msgstr "Kolor wypełnienia"
+msgstr "Kolor wypełniania"
 
 #: ../metadata/resize.xml.in.h:6
 #, fuzzy

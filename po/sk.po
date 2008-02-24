@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-29 17:31+0530\n"
-"PO-Revision-Date: 2003-05-27 16:53+0200\n"
-"Last-Translator:  Stanislav Visnovsky <visnovsky@kde.org>\n"
+"POT-Creation-Date: 2008-02-23 23:26+0530\n"
+"PO-Revision-Date: 2008-02-14 21:05+0100\n"
+"Last-Translator: michal <ceecko@gmail.com>\n"
 "Language-Team: Slovak <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: Pootle 1.0.2\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 #, fuzzy
@@ -30,42 +31,45 @@ msgstr "Správca okien"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr ""
+"Akcia, ktorá ma nastať pri točení kolieska na myši na časti okna s nadpisom."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 #, fuzzy
 msgid "Blur type"
-msgstr "Preskočené\n"
+msgstr "Typ neostrosti"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 #, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "&Odstrániť Windows úplne"
+msgstr "Metacity téma priehľadnosť aktívneho okna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 #, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "&Odstrániť Windows úplne"
+msgstr "Metacity téma priehľadnosť tieňa aktívneho okna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "Metacity téma priehľadnosť"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
-msgstr ""
+msgstr "Metacity téma priehladnosť tieňa"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
 msgstr ""
+"Priehľadnosť, ktorá ma byť použitá pre aktívne okna pri dekoráciach v "
+"metacity téme"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
-msgstr ""
+msgstr "Priehladnosť použitá pri dekoráciach v metacity téme"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
@@ -80,24 +84,24 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Akcia kolieska na myši pre lištu s nadpisom"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Typ neostrosti použitý pre dekorácie okna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Použi metacity tému"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Použi metacity tému pri kreslení dekorácií okna"
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
 msgid "Annotate"
-msgstr "Init"
+msgstr "Komentovať"
 
 # KM
 #: ../metadata/annotate.xml.in.h:2
@@ -110,17 +114,17 @@ msgid "Annotate Stroke Color"
 msgstr ""
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "Aktívny profil"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:5
+#, fuzzy
 msgid "Clear"
-msgstr ""
+msgstr "Zmaž"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Nakresli"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
@@ -282,29 +286,29 @@ msgstr "Ruská"
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 #, fuzzy
 msgid "Mipmap"
-msgstr "Lima"
+msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:23
 #, fuzzy
 msgid "Mipmap LOD"
-msgstr "Lima"
+msgstr "Mipmap úroveň detailu"
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap level-of-detail"
-msgstr ""
+msgstr "Mipmap úroveň detailu"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Pulse"
-msgstr ""
+msgstr "Pulz"
 
 #: ../metadata/blur.xml.in.h:26
 msgid "Pulse effect"
-msgstr ""
+msgstr "Pulz efekt"
 
 #: ../metadata/blur.xml.in.h:27
 #, fuzzy
 msgid "Window blur speed"
-msgstr "Windows voľných (%1)"
+msgstr "Rýchlosť neostrosti okna"
 
 #: ../metadata/blur.xml.in.h:28
 msgid "Windows that should be affected by focus blur"
@@ -332,78 +336,78 @@ msgstr ""
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz0"
 
 #: ../metadata/core.xml.in.h:2
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz1"
 
 #: ../metadata/core.xml.in.h:3
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz10"
 
 #: ../metadata/core.xml.in.h:4
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz11"
 
 #: ../metadata/core.xml.in.h:5
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz2"
 
 #: ../metadata/core.xml.in.h:6
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz3"
 
 #: ../metadata/core.xml.in.h:7
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz4"
 
 #: ../metadata/core.xml.in.h:8
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz5"
 
 #: ../metadata/core.xml.in.h:9
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz6"
 
 #: ../metadata/core.xml.in.h:10
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz7"
 
 #: ../metadata/core.xml.in.h:11
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz8"
 
 #: ../metadata/core.xml.in.h:12
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
-msgstr ""
+msgstr "Klávesová skratka, ktorá spustí shell príkaz označený ako Príkaz9"
 
 #: ../metadata/core.xml.in.h:13
 #, fuzzy
 msgid "Active Plugins"
-msgstr "Aktívny profil"
+msgstr "Aktívne pluginy"
 
 #: ../metadata/core.xml.in.h:14
 msgid ""
@@ -438,7 +442,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:21
 msgid "Best"
-msgstr ""
+msgstr "Najlepší"
 
 #: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
@@ -451,75 +455,75 @@ msgstr ""
 #: ../metadata/core.xml.in.h:24
 #, fuzzy
 msgid "Close Window"
-msgstr "&Odstrániť Windows"
+msgstr "Zavrieť Okno"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
-msgstr ""
+msgstr "Zavrieť Aktívne Okno"
 
 #: ../metadata/core.xml.in.h:26
 #, fuzzy
 msgid "Command line 0"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 0"
 
 #: ../metadata/core.xml.in.h:27
 #, fuzzy
 msgid "Command line 1"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 1"
 
 #: ../metadata/core.xml.in.h:28
 #, fuzzy
 msgid "Command line 10"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 10"
 
 #: ../metadata/core.xml.in.h:29
 #, fuzzy
 msgid "Command line 11"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 11"
 
 #: ../metadata/core.xml.in.h:30
 #, fuzzy
 msgid "Command line 2"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 2"
 
 #: ../metadata/core.xml.in.h:31
 #, fuzzy
 msgid "Command line 3"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 3"
 
 #: ../metadata/core.xml.in.h:32
 #, fuzzy
 msgid "Command line 4"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 4"
 
 #: ../metadata/core.xml.in.h:33
 #, fuzzy
 msgid "Command line 5"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 5"
 
 #: ../metadata/core.xml.in.h:34
 #, fuzzy
 msgid "Command line 6"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 6"
 
 #: ../metadata/core.xml.in.h:35
 #, fuzzy
 msgid "Command line 7"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 7"
 
 #: ../metadata/core.xml.in.h:36
 #, fuzzy
 msgid "Command line 8"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 8"
 
 #: ../metadata/core.xml.in.h:37
 #, fuzzy
 msgid "Command line 9"
-msgstr "Príkaz: "
+msgstr "Príkazový riadok 9"
 
 #: ../metadata/core.xml.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
+msgstr "Príkaz, ktorý sa vykoná v shelli ked spusti_príkaz0 je vyvolaný"
 
 #: ../metadata/core.xml.in.h:39
 msgid "Command line to be executed in shell when run_command1 is invoked"
@@ -567,56 +571,56 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
-msgstr ""
+msgstr "Znížiť Priehladnosť"
 
 #: ../metadata/core.xml.in.h:51
 #, fuzzy
 msgid "Decrease window opacity"
-msgstr "&Odstrániť Windows úplne"
+msgstr "Znížiť priehladnosť okna"
 
 #: ../metadata/core.xml.in.h:52
 #, fuzzy
 msgid "Default Icon"
-msgstr "Štandardná sekcia"
+msgstr "Východzia ikona"
 
 #: ../metadata/core.xml.in.h:53
 #, fuzzy
 msgid "Default window icon image"
-msgstr "Štandardný &dátum vypršania platnosti"
+msgstr "Východzí obrázok ikony okna"
 
 #: ../metadata/core.xml.in.h:54
 msgid "Detect Outputs"
-msgstr ""
+msgstr "Deteguj Výstupy"
 
 #: ../metadata/core.xml.in.h:55
-#, fuzzy
 msgid "Detect Refresh Rate"
-msgstr "Výber aktualizovaného systému"
+msgstr "Deteguj Obnovovaciu Frekvenciu"
 
 #: ../metadata/core.xml.in.h:56
+#, fuzzy
 msgid "Fast"
-msgstr ""
+msgstr "Rýchlo"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Focus Prevention Windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:58
-#, fuzzy
 msgid "Focus prevention windows"
-msgstr "Spúšťam démona."
+msgstr ""
 
 #: ../metadata/core.xml.in.h:59
 msgid "General Options"
-msgstr ""
+msgstr "Všeobecné nastavenie"
 
 #: ../metadata/core.xml.in.h:60
 msgid "General compiz options"
-msgstr ""
+msgstr "Všeobecné nastavenie compizu"
 
 #: ../metadata/core.xml.in.h:61
+#, fuzzy
 msgid "Good"
-msgstr ""
+msgstr "Dobré"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Hide Skip Taskbar Windows"
@@ -645,11 +649,11 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:68
 msgid "Increase Opacity"
-msgstr ""
+msgstr "Zvýšiť Priehladnosť"
 
 #: ../metadata/core.xml.in.h:69
 msgid "Increase window opacity"
-msgstr ""
+msgstr "Zvýšiť priehladnosť okna"
 
 #: ../metadata/core.xml.in.h:70
 msgid "Interval before raising selected windows"
@@ -662,7 +666,7 @@ msgstr ""
 #: ../metadata/core.xml.in.h:72
 #, fuzzy
 msgid "Lighting"
-msgstr "Záznam"
+msgstr "Osvetlenie"
 
 #  command line help text for the 'list detected only' option
 #: ../metadata/core.xml.in.h:73
@@ -685,48 +689,43 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:77
 msgid "Maximize Window"
-msgstr ""
+msgstr "Maximalizuj Okno"
 
 #: ../metadata/core.xml.in.h:78
-#, fuzzy
 msgid "Maximize Window Horizontally"
-msgstr "&Zmenšiť Windows"
+msgstr "Maximalizuj Okno Horizontálne"
 
 #: ../metadata/core.xml.in.h:79
-#, fuzzy
 msgid "Maximize Window Vertically"
-msgstr "&Zmenšiť Windows"
+msgstr "Maximalizuj Okno Vertikálne"
 
 #: ../metadata/core.xml.in.h:80
 msgid "Maximize active window"
-msgstr ""
+msgstr "Maximalizuj aktívne okno"
 
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize active window horizontally"
-msgstr ""
+msgstr "Maximalizuj aktívne okno horizontálne"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
-msgstr ""
+msgstr "Maximalizuj aktívne okno vertikálne"
 
 #: ../metadata/core.xml.in.h:83
-#, fuzzy
 msgid "Minimize Window"
-msgstr "&Zmenšiť Windows"
+msgstr "Minimalizuj Okno"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
-msgstr ""
+msgstr "Minimalizuj aktívne okno"
 
 #: ../metadata/core.xml.in.h:85
-#, fuzzy
 msgid "Number of Desktops"
-msgstr "Pracovné plochy"
+msgstr "Počet Pracovných Plôch"
 
 #: ../metadata/core.xml.in.h:86
-#, fuzzy
 msgid "Number of virtual desktops"
-msgstr "Pracovné plochy"
+msgstr "Počet virtuálnych pracovných plôch"
 
 #: ../metadata/core.xml.in.h:87
 msgid "Only perform screen updates during vertical blanking period"
@@ -734,7 +733,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:88
 msgid "Opacity Step"
-msgstr ""
+msgstr "Krok Priehladnosti"
 
 #: ../metadata/core.xml.in.h:89
 #, fuzzy
@@ -747,37 +746,32 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:91
 msgid "Opacity window values"
-msgstr ""
+msgstr "Hodnoty priehladnosti okna"
 
 #: ../metadata/core.xml.in.h:92
-#, fuzzy
 msgid "Opacity windows"
-msgstr "&Odstrániť Windows"
+msgstr "Priehladné okná"
 
 #: ../metadata/core.xml.in.h:93
 msgid "Open a terminal"
-msgstr ""
+msgstr "Otvor terminál"
 
 #: ../metadata/core.xml.in.h:94
-#, fuzzy
 msgid "Outputs"
-msgstr "Výstup bol"
+msgstr "Výstupy"
 
 #  Table header 3/5
 #: ../metadata/core.xml.in.h:95
-#, fuzzy
 msgid "Ping Delay"
-msgstr "Čakanie"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:96
-#, fuzzy
 msgid "Raise On Click"
-msgstr "&Rádiové hodiny"
+msgstr ""
 
 #: ../metadata/core.xml.in.h:97
-#, fuzzy
 msgid "Raise Window"
-msgstr "Zmena veľkosti zlyhala."
+msgstr ""
 
 #: ../metadata/core.xml.in.h:98
 msgid "Raise selected windows after interval"
@@ -792,9 +786,8 @@ msgid "Raise windows when clicked"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:101
-#, fuzzy
 msgid "Refresh Rate"
-msgstr "&Aktualizovať zoznam"
+msgstr "Obnovovacia frekvencia"
 
 #: ../metadata/core.xml.in.h:102
 #, fuzzy
@@ -802,64 +795,52 @@ msgid "Run Dialog"
 msgstr "&Tónové"
 
 #: ../metadata/core.xml.in.h:103
-#, fuzzy
 msgid "Run command 0"
-msgstr "Príkaz '%1'"
+msgstr "Spusti príkaz 0"
 
 #: ../metadata/core.xml.in.h:104
-#, fuzzy
 msgid "Run command 1"
-msgstr "Príkaz '%1'"
+msgstr "Spusti príkaz 1"
 
 #: ../metadata/core.xml.in.h:105
-#, fuzzy
 msgid "Run command 10"
-msgstr "Príkaz '%1'"
+msgstr "Spusti príkaz 10"
 
 #: ../metadata/core.xml.in.h:106
-#, fuzzy
 msgid "Run command 11"
-msgstr "Príkaz '%1'"
+msgstr "Spusti príkaz 11"
 
 #: ../metadata/core.xml.in.h:107
-#, fuzzy
 msgid "Run command 2"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 2"
 
 #: ../metadata/core.xml.in.h:108
-#, fuzzy
 msgid "Run command 3"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 3"
 
 #: ../metadata/core.xml.in.h:109
-#, fuzzy
 msgid "Run command 4"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 4"
 
 #: ../metadata/core.xml.in.h:110
-#, fuzzy
 msgid "Run command 5"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 5"
 
 #: ../metadata/core.xml.in.h:111
-#, fuzzy
 msgid "Run command 6"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 6"
 
 #: ../metadata/core.xml.in.h:112
-#, fuzzy
 msgid "Run command 7"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 7"
 
 #: ../metadata/core.xml.in.h:113
-#, fuzzy
 msgid "Run command 8"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 8"
 
 #: ../metadata/core.xml.in.h:114
-#, fuzzy
 msgid "Run command 9"
-msgstr "Príkaz: "
+msgstr "Spusti príkaz 9"
 
 #: ../metadata/core.xml.in.h:115
 msgid "Screen size multiplier for horizontal virtual size"
@@ -870,33 +851,29 @@ msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:117
-#, fuzzy
 msgid "Screenshot command line"
-msgstr "Chyba pri čítaní príkazového riadku."
+msgstr "Príkaz pre screenshot"
 
 #: ../metadata/core.xml.in.h:118
-#, fuzzy
 msgid "Show Desktop"
-msgstr "Plocha"
+msgstr "Zobraziť Plochu"
 
 #: ../metadata/core.xml.in.h:119
-#, fuzzy
 msgid "Show Main Menu"
-msgstr "Zobraziť ponuku štartu systému"
+msgstr "Zobraziť Hlavné Menu"
 
 #: ../metadata/core.xml.in.h:120
 msgid "Show Run Application dialog"
-msgstr ""
+msgstr "Zobraziť Spusti Aplikáciu"
 
 #: ../metadata/core.xml.in.h:121
-#, fuzzy
 msgid "Show the main menu"
-msgstr "Zobraziť ponuku štartu systému"
+msgstr "Zobraziť hlavné menu"
 
 #: ../metadata/core.xml.in.h:122
 #, fuzzy
 msgid "Slow Animations"
-msgstr "Zobraziť všetky oddiely"
+msgstr "Spomal Animácie"
 
 #: ../metadata/core.xml.in.h:123
 msgid "Sync To VBlank"
@@ -904,30 +881,27 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:124
 msgid "Take a screenshot"
-msgstr ""
+msgstr "Urob screenshot"
 
 #: ../metadata/core.xml.in.h:125
 msgid "Take a screenshot of a window"
-msgstr ""
+msgstr "Urob screenshot okna"
 
 #: ../metadata/core.xml.in.h:126
-#, fuzzy
 msgid "Terminal command line"
-msgstr "Chyba pri čítaní príkazového riadku."
+msgstr "Príkaz pre terminál"
 
 #: ../metadata/core.xml.in.h:127
-#, fuzzy
 msgid "Texture Filter"
-msgstr "Nastaviť &filter"
+msgstr "Filter textúr"
 
 #: ../metadata/core.xml.in.h:128
-#, fuzzy
 msgid "Texture filtering"
-msgstr "Nastaviť &filter"
+msgstr "Filtrovanie textúr"
 
 #: ../metadata/core.xml.in.h:129
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
+msgstr "Rýchlosť akou sa prekresluje obrazovka (počet/sekunda)"
 
 #: ../metadata/core.xml.in.h:130
 msgid "Toggle Window Maximized"
@@ -982,14 +956,12 @@ msgid "Use diffuse light when screen is transformed"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:143
-#, fuzzy
 msgid "Vertical Virtual Size"
-msgstr "Virtuálne aliasy"
+msgstr "Vertikálna Virtuálna Veľkosť"
 
 #: ../metadata/core.xml.in.h:144
-#, fuzzy
 msgid "Window Menu"
-msgstr "Správca okien"
+msgstr "Menu Okna"
 
 #: ../metadata/core.xml.in.h:145
 msgid "Window menu button binding"
@@ -1048,11 +1020,11 @@ msgstr "Automaticky"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Background Images"
-msgstr ""
+msgstr "Obrázky Pozadia"
 
 #: ../metadata/cube.xml.in.h:9
 msgid "Background images"
-msgstr ""
+msgstr "Obrázky pozadia"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1068,9 +1040,8 @@ msgstr ""
 
 # KM
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Color"
-msgstr "Farby"
+msgstr "Farba Kocky"
 
 #: ../metadata/cube.xml.in.h:14
 #, fuzzy
@@ -1158,7 +1129,7 @@ msgstr "Ďalšia aktualizácia"
 
 #: ../metadata/cube.xml.in.h:32
 msgid "On big cube"
-msgstr ""
+msgstr "Na veľkej kocke"
 
 #: ../metadata/cube.xml.in.h:33
 msgid "Opacity During Rotation"
@@ -1166,7 +1137,7 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:34
 msgid "Opacity When Not Rotating"
-msgstr ""
+msgstr "Priehľadnosť keď nerotuje"
 
 #: ../metadata/cube.xml.in.h:35
 msgid "Opacity of desktop window during rotation."
@@ -1182,9 +1153,8 @@ msgid "Place windows on cube"
 msgstr "&Odstrániť Windows"
 
 #: ../metadata/cube.xml.in.h:38
-#, fuzzy
 msgid "Prev Slide"
-msgstr "Predošlý kernel"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:39
 msgid "Render skydome"
