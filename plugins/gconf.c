@@ -155,6 +155,9 @@ gconfSetValue (CompObject      *object,
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
 
+	if (!object)
+	    return;
+
 	action = keyActionToString (GET_CORE_DISPLAY (object), &value->action);
 	gconf_value_set_string (gvalue, action);
 
@@ -165,6 +168,9 @@ gconfSetValue (CompObject      *object,
 
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
+
+	if (!object)
+	    return;
 
 	action = buttonActionToString (GET_CORE_DISPLAY (object),
 				       &value->action);
@@ -316,6 +322,9 @@ gconfGetValue (CompObject      *object,
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
 
+	if (!object)
+	    return FALSE;
+
 	stringToKeyAction (GET_CORE_DISPLAY (object), action, &value->action);
 	return TRUE;
     }
@@ -328,6 +337,9 @@ gconfGetValue (CompObject      *object,
 
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
+
+	if (!object)
+	    return FALSE;
 
 	stringToButtonAction (GET_CORE_DISPLAY (object), action,
 			      &value->action);

@@ -111,12 +111,14 @@ kconfigValueToString (CompObject      *object,
 	}
     } break;
     case CompOptionTypeKey: {
-	char *action;
+	char *action = NULL;
 
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
 
-	action = keyActionToString (GET_CORE_DISPLAY (object), &value->action);
+	if (object)
+	    action = keyActionToString (GET_CORE_DISPLAY (object),
+					&value->action);
 	if (action)
 	{
 	    str = QString (action);
@@ -124,13 +126,14 @@ kconfigValueToString (CompObject      *object,
 	}
     } break;
     case CompOptionTypeButton: {
-	char *action;
+	char *action = NULL;
 
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
 
-	action = buttonActionToString (GET_CORE_DISPLAY (object),
-				       &value->action);
+	if (object)
+	    action = buttonActionToString (GET_CORE_DISPLAY (object),
+					   &value->action);
 	if (action)
 	{
 	    str = QString (action);
@@ -285,12 +288,18 @@ kconfigStringToValue (CompObject      *object,
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
 
+	if (!object)
+	    return FALSE;
+
 	stringToKeyAction (GET_CORE_DISPLAY (object), str.ascii (),
 			   &value->action);
 	break;
     case CompOptionTypeButton:
 	while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 	    object = object->parent;
+
+	if (!object)
+	    return FALSE;
 
 	stringToButtonAction (GET_CORE_DISPLAY (object), str.ascii (),
 			      &value->action);
