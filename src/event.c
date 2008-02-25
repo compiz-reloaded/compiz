@@ -740,9 +740,64 @@ delayedEdgeTimeout (void *closure)
 				 settings->state,
 				 ~CompActionStateNoEdgeDelay,
 				 settings->edge,
-				 settings->option, 7);
+				 settings->option,
+				 settings->nOption);
 
     free (settings);
+
+    return FALSE;
+}
+
+static Bool
+triggerEdgeEnter (CompDisplay     *d,
+		  unsigned int    edge,
+		  CompActionState state,
+		  CompOption      *argument,
+		  unsigned int    nArgument)
+{
+    int                     delay;
+    CompDelayedEdgeSettings *delayedSettings = NULL;
+
+    delay = d->opt[COMP_DISPLAY_OPTION_EDGE_DELAY].value.i;
+
+    if (nArgument > 7)
+	nArgument = 7;
+
+    if (delay > 0)
+    {
+	delayedSettings = malloc (sizeof (CompDelayedEdgeSettings));
+	if (delayedSettings)
+	{
+	    delayedSettings->d       = d;
+	    delayedSettings->edge    = edge;
+	    delayedSettings->state   = state;
+	    delayedSettings->nOption = nArgument;
+	}
+    }
+
+    if (delayedSettings)
+    {
+	CompActionState ignoreState;
+	int             i;
+
+	for (i = 0; i < nArgument; i++)
+	    delayedSettings->option[i] = argument[i];
+
+	d->edgeDelayHandle = compAddTimeout (delay,
+					     delayedEdgeTimeout,
+					     delayedSettings);
+
+	ignoreState = CompActionStateNoEdgeDelay;
+	if (triggerAllEdgeEnterBindings (d, state, ignoreState,
+					 edge, argument, nArgument))
+	    return TRUE;
+    }
+    else
+    {
+	if (triggerAllEdgeEnterBindings (d, state, 0, edge,
+					 argument, nArgument))
+	    return TRUE;
+    }
 
     return FALSE;
 }
@@ -954,24 +1009,9 @@ handleActionEvent (CompDisplay *d,
 
 	    if (edge)
 	    {
-		int                     delay;
-		CompDelayedEdgeSettings *delayedSettings = NULL;
-
-		delay = d->opt[COMP_DISPLAY_OPTION_EDGE_DELAY].value.i;
 		state = CompActionStateInitEdge;
 
 		edgeWindow = event->xcrossing.window;
-
-		if (delay > 0)
-		{
-		    delayedSettings = malloc (sizeof (CompDelayedEdgeSettings));
-		    if (delayedSettings)
-		    {
-			delayedSettings->d     = d;
-			delayedSettings->edge  = edge;
-			delayedSettings->state = state;
-		    }
-		}
 
 		o[0].value.i = event->xcrossing.window;
 		o[1].value.i = d->activeWindow;
@@ -984,29 +1024,11 @@ handleActionEvent (CompDisplay *d,
 		o[6].name    = "time";
 		o[6].value.i = event->xcrossing.time;
 
-		if (delayedSettings)
-		{
-		    CompActionState ignoreState;
-
-		    for (i = 0; i < 7; i++)
-			delayedSettings->option[i] = o[i];
-
-		    d->edgeDelayHandle = compAddTimeout (delay,
-							 delayedEdgeTimeout,
-							 delayedSettings);
-
-		    ignoreState = CompActionStateNoEdgeDelay;
-		    if (triggerAllEdgeEnterBindings (d, state, ignoreState,
-						     edge, o, 7))
-			return TRUE;
-		}
-		else
-		{
-		    if (triggerAllEdgeEnterBindings (d, state, 0, edge, o, 7))
-			return TRUE;
-		}
+		if (triggerEdgeEnter (d, edge, state, o, 7))
+		    return TRUE;
 	    }
-	} break;
+	}
+	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->xdndEnterAtom)
 	{
@@ -1102,16 +1124,8 @@ handleActionEvent (CompDisplay *d,
 		o[4].value.i = event->xclient.data.l[2] & 0xffff;
 		o[5].value.i = root;
 
-		for (p = getPlugins (); p; p = p->next)
-		{
-		    if (!p->vTable->getObjectOptions)
-			continue;
-
-		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
-		    if (triggerEdgeEnterBindings (d, option, nOption, state,
-						  0, edge, o, 6))
-			return TRUE;
-		}
+		if (triggerEdgeEnter (d, edge, state, o, 6))
+		    return TRUE;
 	    }
 
 	    xdndWindow = None;

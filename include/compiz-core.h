@@ -1264,7 +1264,8 @@ typedef struct _CompDelayedEdgeSettings
     unsigned int edge;
     unsigned int state;
 
-    CompOption option[7];
+    CompOption   option[7];
+    unsigned int nOption;
 } CompDelayedEdgeSettings;
 
 void
