@@ -12,6 +12,7 @@ gtk_window_decorator_LDADD	  =		       \
 	@GCONF_LIBS@				       \
 	@DBUS_GLIB_LIBS@			       \
 	$(metacitylibs)
+
 gtk_window_decorator_SOURCES	  = \
 	gtk-window-decorator.c
 gtk_window_decorator_program = gtk-window-decorator
@@ -31,7 +32,14 @@ install-data-local:
 	fi
 endif
 
-INCLUDES = -I$(top_srcdir)/include @GTK_WINDOW_DECORATOR_CFLAGS@ @METACITY_CFLAGS@ @GCONF_CFLAGS@ @DBUS_GLIB_CFLAGS@
+INCLUDES = \
+	-I$(top_srcdir)/include            \
+	@GTK_WINDOW_DECORATOR_CFLAGS@      \
+	@METACITY_CFLAGS@                  \
+	@GCONF_CFLAGS@                     \
+	@DBUS_GLIB_CFLAGS@                 \
+	-DALL_LINGUAS="\"@ALL_LINGUAS@\""  \
+	-DLOCALEDIR="\"@datadir@/locale"\"
 
 bin_PROGRAMS = $(gtk_window_decorator_program)
 

@@ -78,6 +78,10 @@
 #include <sys/types.h>
 #include <signal.h>
 
+#include <libintl.h>
+#define _(x)  gettext (x)
+#define N_(x) x
+
 #ifdef USE_METACITY
 #include <metacity-private/theme.h>
 #endif
@@ -4334,7 +4338,7 @@ close_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_CLOSE];
 
-    common_button_event (win, xevent, BUTTON_CLOSE, 1, "Close Window");
+    common_button_event (win, xevent, BUTTON_CLOSE, 1, _("Close Window"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4355,9 +4359,11 @@ max_button_event (WnckWindow *win,
     guint   state = d->button_states[BUTTON_MAX];
 
     if (wnck_window_is_maximized (win))
-	common_button_event (win, xevent, BUTTON_MAX, 3, "Unmaximize Window");
+	common_button_event (win, xevent, BUTTON_MAX,
+			     3, _("Unmaximize Window"));
     else
-	common_button_event (win, xevent, BUTTON_MAX, 3, "Maximize Window");
+	common_button_event (win, xevent, BUTTON_MAX,
+			     3, _("Maximize Window"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4399,7 +4405,7 @@ min_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_MIN];
 
-    common_button_event (win, xevent, BUTTON_MIN, 1, "Minimize Window");
+    common_button_event (win, xevent, BUTTON_MIN, 1, _("Minimize Window"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4516,7 +4522,7 @@ static void
 menu_button_event (WnckWindow *win,
 		   XEvent     *xevent)
 {
-    common_button_event (win, xevent, BUTTON_MENU, 1, "Window Menu");
+    common_button_event (win, xevent, BUTTON_MENU, 1, _("Window Menu"));
 
     switch (xevent->type) {
     case ButtonPress:
@@ -4535,7 +4541,7 @@ shade_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_SHADE];
 
-    common_button_event (win, xevent, BUTTON_SHADE, 1, "Shade");
+    common_button_event (win, xevent, BUTTON_SHADE, 1, _("Shade"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4555,7 +4561,7 @@ above_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_ABOVE];
 
-    common_button_event (win, xevent, BUTTON_ABOVE, 1, "Make Above");
+    common_button_event (win, xevent, BUTTON_ABOVE, 1, _("Make Above"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4581,7 +4587,7 @@ stick_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_STICK];
 
-    common_button_event (win, xevent, BUTTON_STICK, 1, "Stick");
+    common_button_event (win, xevent, BUTTON_STICK, 1, _("Stick"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4601,7 +4607,7 @@ unshade_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_UNSHADE];
 
-    common_button_event (win, xevent, BUTTON_UNSHADE, 1, "Unshade");
+    common_button_event (win, xevent, BUTTON_UNSHADE, 1, _("Unshade"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4621,7 +4627,7 @@ unabove_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_UNABOVE];
 
-    common_button_event (win, xevent, BUTTON_UNABOVE, 1, "Unmake Above");
+    common_button_event (win, xevent, BUTTON_UNABOVE, 1, _("Unmake Above"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -4647,7 +4653,7 @@ unstick_button_event (WnckWindow *win,
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
     guint   state = d->button_states[BUTTON_UNSTICK];
 
-    common_button_event (win, xevent, BUTTON_UNSTICK, 1, "Unstick");
+    common_button_event (win, xevent, BUTTON_UNSTICK, 1, _("Unstick"));
 
     switch (xevent->type) {
     case ButtonRelease:
@@ -5004,7 +5010,7 @@ show_force_quit_dialog (WnckWindow *win,
 	return;
 
     tmp = g_markup_escape_text (wnck_window_get_name (win), -1);
-    str = g_strdup_printf ("The window \"%s\" is not responding.", tmp);
+    str = g_strdup_printf (_("The window \"%s\" is not responding."), tmp);
 
     g_free (tmp);
 
@@ -5013,9 +5019,9 @@ show_force_quit_dialog (WnckWindow *win,
 				     GTK_BUTTONS_NONE,
 				     "<b>%s</b>\n\n%s",
 				     str,
-				     "Forcing this application to "
+				     _("Forcing this application to "
 				     "quit will cause you to lose any "
-				     "unsaved changes.");
+				     "unsaved changes."));
     g_free (str);
 
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "force-quit");
@@ -5028,7 +5034,7 @@ show_force_quit_dialog (WnckWindow *win,
     gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 			    GTK_STOCK_CANCEL,
 			    GTK_RESPONSE_REJECT,
-			    "_Force Quit",
+			    _("_Force Quit"),
 			    GTK_RESPONSE_ACCEPT,
 			    NULL);
 
@@ -6732,6 +6738,10 @@ main (int argc, char *argv[])
     program_name = argv[0];
 
     gtk_init (&argc, &argv);
+
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
 
     for (i = 0; i < argc; i++)
     {
