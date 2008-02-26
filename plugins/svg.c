@@ -133,7 +133,7 @@ renderSvg (CompScreen *s,
     cairo_save (texture->cr);
 
     cairo_set_operator (texture->cr, CAIRO_OPERATOR_SOURCE);
-    cairo_set_source_rgb (texture->cr, 1.0, 1.0, 1.0);
+    cairo_set_source_rgba (texture->cr, 1.0, 1.0, 1.0, 0.0);
     cairo_paint (texture->cr);
     cairo_set_operator (texture->cr, CAIRO_OPERATOR_OVER);
 
@@ -153,13 +153,14 @@ renderSvg (CompScreen *s,
 }
 
 static Bool
-initSvgTexture (CompScreen *s,
+initSvgTexture (CompWindow *w,
 		SvgSource  *source,
 		SvgTexture *texture,
 		int	   width,
 		int	   height)
 {
     cairo_surface_t *surface;
+    CompScreen      *s = w->screen;
     Visual	    *visual;
     int		    depth;
 
@@ -173,7 +174,10 @@ initSvgTexture (CompScreen *s,
 
     if (width && height)
     {
-	depth = DefaultDepth (s->display->display, s->screenNum);
+	XWindowAttributes attr;
+	XGetWindowAttributes (s->display->display, w->id, &attr);
+
+	depth = attr.depth;
 	texture->pixmap = XCreatePixmap (s->display->display, s->root,
 					 width, height, depth);
 
@@ -190,8 +194,7 @@ initSvgTexture (CompScreen *s,
 	    return FALSE;
 	}
 
-	visual = DefaultVisual (s->display->display, s->screenNum);
-
+	visual = attr.visual;
 	surface = cairo_xlib_surface_create (s->display->display,
 					     texture->pixmap, visual,
 					     width, height);
@@ -351,7 +354,7 @@ svgDrawWindow (CompWindow	      *w,
 
 		    finiSvgTexture (w->screen, &sw->context->texture[1]);
 
-		    if (initSvgTexture (w->screen, sw->context->source,
+		    if (initSvgTexture (w, sw->context->source,
 					&sw->context->texture[1],
 					width, height))
 		    {
@@ -381,9 +384,7 @@ svgDrawWindow (CompWindow	      *w,
 	    else if (sw->context->texture[1].width)
 	    {
 		finiSvgTexture (w->screen, &sw->context->texture[1]);
-		initSvgTexture (w->screen, sw->source,
-				&sw->context->texture[1],
-				0, 0);
+		initSvgTexture (w, sw->source, &sw->context->texture[1], 0, 0);
 
 		memset (&sw->context->rect, 0, sizeof (BoxRec));
 
@@ -421,9 +422,7 @@ updateWindowSvgContext (CompWindow *w,
     sw->context->width  = 0;
     sw->context->height = 0;
 
-    initSvgTexture (w->screen, source,
-		    &sw->context->texture[1],
-		    0, 0);
+    initSvgTexture (w, source, &sw->context->texture[1], 0, 0);
 
     sw->context->source = source;
 
@@ -445,8 +444,7 @@ updateWindowSvgContext (CompWindow *w,
     x2 = MIN (x2, w->width);
     y2 = MIN (y2, w->height);
 
-    if (!initSvgTexture (w->screen, source,
-			 &sw->context->texture[0],
+    if (!initSvgTexture (w, source, &sw->context->texture[0],
 			 w->width, w->height))
     {
 	free (sw->context);
@@ -457,7 +455,7 @@ updateWindowSvgContext (CompWindow *w,
 	renderSvg (w->screen, source, &sw->context->texture[0],
 		   0.0f, 0.0f, 1.0f, 1.0f, w->width, w->height);
 
-	initSvgTexture (w->screen, source, &sw->context->texture[1], 0, 0);
+	initSvgTexture (w, source, &sw->context->texture[1], 0, 0);
 
 	sw->context->box.extents.x1 = x1;
 	sw->context->box.extents.y1 = y1;
