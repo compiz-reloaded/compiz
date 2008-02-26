@@ -5713,33 +5713,6 @@ update_window_decoration (WnckWindow *win)
     }
 }
 
-static void
-style_changed (GtkWidget *widget)
-{
-    GdkDisplay *gdkdisplay;
-    GdkScreen  *gdkscreen;
-    WnckScreen *screen;
-    GList      *windows;
-
-    gdkdisplay = gdk_display_get_default ();
-    gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
-    screen     = wnck_screen_get_default ();
-
-    update_style (widget);
-
-    update_default_decorations (gdkscreen);
-
-    if (minimal)
-	return;
-
-    windows = wnck_screen_get_windows (screen);
-    while (windows != NULL)
-    {
-	update_window_decoration (WNCK_WINDOW (windows->data));
-	windows = windows->next;
-    }
-}
-
 static const PangoFontDescription *
 get_titlebar_font (void)
 {
@@ -6050,6 +6023,26 @@ decorations_changed (WnckScreen *screen)
 	update_window_decoration (WNCK_WINDOW (windows->data));
 	windows = windows->next;
     }
+}
+
+static void
+style_changed (GtkWidget *widget)
+{
+    GdkDisplay *gdkdisplay;
+    GdkScreen  *gdkscreen;
+    WnckScreen *screen;
+    GList      *windows;
+
+    gdkdisplay = gdk_display_get_default ();
+    gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
+    screen     = wnck_screen_get_default ();
+
+    update_style (widget);
+
+    pango_cairo_context_set_resolution (pango_context,
+					gdk_screen_get_resolution (gdkscreen));
+
+    decorations_changed (screen);
 }
 
 #ifdef USE_GCONF
