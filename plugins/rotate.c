@@ -1606,9 +1606,9 @@ rotateHandleEvent (CompDisplay *d,
 		    XQueryPointer (d->display, s->root,
 				   &win, &win, &x, &y, &i, &i, &ui);
 
-		    if (dx > (s->hsize + 1) / 2)
+		    if (dx * 2 > s->hsize)
 			dx -= s->hsize;
-		    else if (dx < -(s->hsize + 1) / 2)
+		    else if (dx * 2 < -s->hsize)
 			dx += s->hsize;
 
 		    o[0].type    = CompOptionTypeInt;
