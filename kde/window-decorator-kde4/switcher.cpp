@@ -224,6 +224,7 @@ KWD::Switcher::redrawPixmap ()
 
     XSetWindowBackgroundPixmap (QX11Info::display (), mId,
 				mBackgroundPixmap.handle ());
+    XClearWindow (QX11Info::display (), mId);
 }
 
 void
