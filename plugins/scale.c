@@ -1255,7 +1255,8 @@ scaleInitiate (CompDisplay     *d,
 	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
 	{
 	    if (ss->type == ScaleTypeNormal)
-		return scaleTerminate (s->display, action, 0, option, nOption);
+		return scaleTerminate (s->display, action,
+				       CompActionStateCancel, option, nOption);
 	}
     }
 
@@ -1287,7 +1288,8 @@ scaleInitiateAll (CompDisplay     *d,
 	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
 	{
 	    if (ss->type == ScaleTypeAll)
-		return scaleTerminate (s->display, action, 0, option, nOption);
+		return scaleTerminate (s->display, action,
+				       CompActionStateCancel, option, nOption);
 	}
     }
 
@@ -1328,7 +1330,8 @@ scaleInitiateGroup (CompDisplay     *d,
 	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
 	{
 	    if (ss->type == ScaleTypeGroup)
-		return scaleTerminate (s->display, action, 0, option, nOption);
+		return scaleTerminate (s->display, action,
+				       CompActionStateCancel, option, nOption);
 	}
     }
 
@@ -1360,7 +1363,8 @@ scaleInitiateOutput (CompDisplay     *d,
 	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
 	{
 	    if (ss->type == ScaleTypeOutput)
-		return scaleTerminate (s->display, action, 0, option, nOption);
+		return scaleTerminate (s->display, action,
+				       CompActionStateCancel, option, nOption);
 	}
     }
 
@@ -1580,11 +1584,13 @@ scaleWindowRemove (CompDisplay *d,
 
 			opt = SCALE_DISPLAY_OPTION_INITIATE_EDGE;
 			action = &sd->opt[opt].value.action;
-			scaleTerminate (d, action, 0, &o, 1);
+			scaleTerminate (d, action,
+					CompActionStateCancel, &o, 1);
 
 			opt = SCALE_DISPLAY_OPTION_INITIATE_KEY;
 			action = &sd->opt[opt].value.action;
-			scaleTerminate (d, action, 0, &o, 1);
+			scaleTerminate (d, action,
+					CompActionStateCancel, &o, 1);
 			break;
 		    }
 		}
