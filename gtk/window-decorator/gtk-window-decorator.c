@@ -6031,7 +6031,6 @@ style_changed (GtkWidget *widget)
     GdkDisplay *gdkdisplay;
     GdkScreen  *gdkscreen;
     WnckScreen *screen;
-    GList      *windows;
 
     gdkdisplay = gdk_display_get_default ();
     gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
