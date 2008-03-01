@@ -2918,6 +2918,12 @@ meta_get_button_position (decor_t *d,
     GdkRectangle      *space;
 #endif
 
+    if (!d->context)
+    {
+	/* undecorated windows implicitly have no buttons */
+	return FALSE;
+    }
+
     theme = meta_theme_get_current ();
 
     meta_get_decoration_geometry (d, theme, &flags, &fgeom, &button_layout,
