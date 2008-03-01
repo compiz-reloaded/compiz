@@ -561,6 +561,7 @@ moveHandleEvent (CompDisplay *d,
 
     switch (event->type) {
     case ButtonPress:
+    case ButtonRelease:
 	s = findScreenAtDisplay (d, event->xbutton.root);
 	if (s)
 	{
@@ -568,11 +569,12 @@ moveHandleEvent (CompDisplay *d,
 
 	    if (ms->grabIndex)
 	    {
-		int initiateButtonOption = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
+		CompAction *action;
+		int        opt = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
 
-		moveTerminate (d,
-			       &md->opt[initiateButtonOption].value.action,
-			       0, NULL, 0);
+		action = &md->opt[opt].value.action;
+		if (action->state & CompActionStateTermButton)
+		    moveTerminate (d, action, 0, NULL, 0);
 	    }
 	}
 	break;
