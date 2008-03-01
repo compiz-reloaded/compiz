@@ -820,6 +820,11 @@ decorWindowUpdate (CompWindow *w,
     }
     else
     {
+	CompWindowExtents emptyInput;
+
+	memset (&emptyInput, 0, sizeof (emptyInput));
+	setWindowFrameExtents (w, &emptyInput);
+
 	dw->wd = NULL;
 
 	moveDx = -oldShiftX;
