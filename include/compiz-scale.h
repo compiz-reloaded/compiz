@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define SCALE_ABIVERSION 20080222
+#define SCALE_ABIVERSION 20080301
 
 #define SCALE_STATE_NONE 0
 #define SCALE_STATE_OUT  1
@@ -120,6 +120,8 @@ typedef void (*ScalePaintDecorationProc) (CompWindow		  *w,
 					  Region		  region,
 					  unsigned int		  mask);
 
+typedef void (*ScaleSelectWindowProc) (CompWindow *w);
+
 typedef struct _ScaleScreen {
     int windowPrivateIndex;
 
@@ -132,6 +134,7 @@ typedef struct _ScaleScreen {
     ScaleLayoutSlotsAndAssignWindowsProc layoutSlotsAndAssignWindows;
     ScaleSetScaledPaintAttributesProc    setScaledPaintAttributes;
     ScalePaintDecorationProc		 scalePaintDecoration;
+    ScaleSelectWindowProc                selectWindow;
 
     CompOption opt[SCALE_SCREEN_OPTION_NUM];
 

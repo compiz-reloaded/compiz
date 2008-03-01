@@ -1408,7 +1408,9 @@ scaleSelectWindowAt (CompScreen *s,
     w = scaleCheckForWindowAt (s, x, y);
     if (w && isScaleWin (w))
     {
-	scaleSelectWindow (w);
+	SCALE_SCREEN (s);
+
+	(*ss->selectWindow) (w);
 
 	if (moveInputFocus)
 	{
@@ -1499,8 +1501,9 @@ scaleMoveFocusWindow (CompScreen *s,
     if (focus)
     {
 	SCALE_DISPLAY (s->display);
+	SCALE_SCREEN (s);
 
-	scaleSelectWindow (focus);
+	(*ss->selectWindow) (focus);
 
 	sd->lastActiveNum    = focus->activeNum;
 	sd->lastActiveWindow = focus->id;
@@ -2082,6 +2085,7 @@ scaleInitScreen (CompPlugin *p,
     ss->layoutSlotsAndAssignWindows = layoutSlotsAndAssignWindows;
     ss->setScaledPaintAttributes    = setScaledPaintAttributes;
     ss->scalePaintDecoration	    = scalePaintDecoration;
+    ss->selectWindow                = scaleSelectWindow;
 
     WRAP (ss, s, preparePaintScreen, scalePreparePaintScreen);
     WRAP (ss, s, donePaintScreen, scaleDonePaintScreen);
