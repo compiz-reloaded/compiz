@@ -259,6 +259,7 @@ annoDrawLine (CompScreen     *s,
 	cairo_move_to (cr, x1, y1);
 	cairo_line_to (cr, x2, y2);
 	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
+	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 	annoSetSourceColor (cr, color);
 	cairo_stroke (cr);
 
