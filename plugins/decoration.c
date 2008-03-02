@@ -1263,12 +1263,12 @@ decorWindowStateChangeNotify (CompWindow   *w,
 
     if (!decorWindowUpdate (w, TRUE))
     {
-	if (dw->decor)
+	if (dw->wd && dw->wd->decor)
 	{
 	    if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-		setWindowFrameExtents (w, &dw->decor->maxInput);
+		setWindowFrameExtents (w, &dw->wd->decor->maxInput);
 	    else
-		setWindowFrameExtents (w, &dw->decor->input);
+		setWindowFrameExtents (w, &dw->wd->decor->input);
 	}
     }
 
