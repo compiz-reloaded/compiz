@@ -259,13 +259,8 @@ annoDrawLine (CompScreen     *s,
 	cairo_move_to (cr, x1, y1);
 	cairo_line_to (cr, x2, y2);
 	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
-
-	cairo_save (cr);
 	annoSetSourceColor (cr, color);
-	if (as->eraseMode)
-	    cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
 	cairo_stroke (cr);
-	cairo_restore (cr);
 
 	reg.rects    = &reg.extents;
 	reg.numRects = 1;
@@ -663,18 +658,25 @@ annoHandleMotionEvent (CompScreen *s,
 
     if (as->grabIndex)
     {
-	float width;
-
-	ANNO_DISPLAY (s->display);
-
 	if (as->eraseMode)
-	    width = 20.0f;
-	else
-	    width = ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH].value.f;
+	{
+	    static unsigned short color[] = { 0, 0, 0, 0 };
 
-	annoDrawLine (s,
-		      annoLastPointerX, annoLastPointerY, xRoot, yRoot,
-		      width, ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c);
+	    annoDrawLine (s,
+			  annoLastPointerX, annoLastPointerY,
+			  xRoot, yRoot,
+			  20.0, color);
+	}
+	else
+	{
+	    ANNO_DISPLAY(s->display);
+
+	    annoDrawLine (s,
+			  annoLastPointerX, annoLastPointerY,
+			  xRoot, yRoot,
+			  ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH].value.f,
+			  ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c);
+	}
 
 	annoLastPointerX = xRoot;
 	annoLastPointerY = yRoot;
