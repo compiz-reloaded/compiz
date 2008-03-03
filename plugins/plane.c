@@ -358,37 +358,13 @@ planeHandleEvent (CompDisplay *d,
 		  XEvent      *event)
 {
     CompScreen *s;
+    Window     activeWindow = d->activeWindow;
 
     PLANE_DISPLAY (d);
 
     switch (event->type) {
     case ClientMessage:
-	if (event->xclient.message_type == d->winActiveAtom)
-	{
-	    CompWindow *w;
-
-	    w = findWindowAtDisplay (d, event->xclient.window);
-	    if (w)
-	    {
-		int dx, dy;
-
-		s = w->screen;
-
-		/* window must be placed */
-		if (!w->placed)
-		    break;
-
-		if (otherScreenGrabExist (s, "plane", "switcher", "cube", 0))
-		    break;
-
-		defaultViewportForWindow (w, &dx, &dy);
-		dx -= s->x;
-		dy -= s->y;
-
-		moveViewport (s, dx, dy);
-	    }
-	}
-	else if (event->xclient.message_type == d->desktopViewportAtom)
+	if (event->xclient.message_type == d->desktopViewportAtom)
 	{
 	    int dx, dy;
 
@@ -416,6 +392,28 @@ planeHandleEvent (CompDisplay *d,
     UNWRAP (pd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (pd, d, handleEvent, planeHandleEvent);
+
+    if (activeWindow != d->activeWindow)
+    {
+	CompWindow *w;
+
+	w = findWindowAtDisplay (d, d->activeWindow);
+	if (w && w->placed)
+	{
+	    s = w->screen;
+
+	    if (!otherScreenGrabExist (s, "plane", "switcher", "cube", 0))
+	    {
+		int dx, dy;
+
+		defaultViewportForWindow (w, &dx, &dy);
+		dx -= s->x;
+		dy -= s->y;
+
+		moveViewport (s, dx, dy);
+	    }
+	}
+    }
 }
 
 static CompOption *

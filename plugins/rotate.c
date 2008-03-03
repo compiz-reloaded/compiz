@@ -1472,6 +1472,7 @@ rotateHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
     CompScreen *s;
+    Window     activeWindow = d->activeWindow;
 
     ROTATE_DISPLAY (d);
 
@@ -1520,67 +1521,7 @@ rotateHandleEvent (CompDisplay *d,
 	}
 	break;
     case ClientMessage:
-	if (event->xclient.message_type == d->winActiveAtom)
-	{
-	    CompWindow *w;
-
-	    w = findWindowAtDisplay (d, event->xclient.window);
-	    if (w)
-	    {
-		int dx;
-
-		ROTATE_SCREEN (w->screen);
-
-		s = w->screen;
-
-		/* window must be placed */
-		if (!w->placed)
-		    break;
-
-		if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
-		    break;
-
-		/* reset movement */
-		rs->moveTo = 0.0f;
-
-		defaultViewportForWindow (w, &dx, NULL);
-		dx -= s->x;
-		if (dx)
-		{
-		    Window	 win;
-		    int		 i, x, y;
-		    unsigned int ui;
-		    CompOption   o[4];
-
-		    XQueryPointer (d->display, s->root,
-				   &win, &win, &x, &y, &i, &i, &ui);
-
-		    if (dx > (s->hsize + 1) / 2)
-			dx -= s->hsize;
-		    else if (dx < -(s->hsize + 1) / 2)
-			dx += s->hsize;
-
-		    o[0].type    = CompOptionTypeInt;
-		    o[0].name    = "x";
-		    o[0].value.i = x;
-
-		    o[1].type    = CompOptionTypeInt;
-		    o[1].name    = "y";
-		    o[1].value.i = y;
-
-		    o[2].type	 = CompOptionTypeInt;
-		    o[2].name	 = "root";
-		    o[2].value.i = s->root;
-
-		    o[3].type	 = CompOptionTypeInt;
-		    o[3].name	 = "direction";
-		    o[3].value.i = dx;
-
-		    rotate (d, NULL, 0, o, 4);
-		}
-	    }
-	}
-	else if (event->xclient.message_type == d->desktopViewportAtom)
+	if (event->xclient.message_type == d->desktopViewportAtom)
 	{
 	    s = findScreenAtDisplay (d, event->xclient.window);
 	    if (s)
@@ -1638,6 +1579,63 @@ rotateHandleEvent (CompDisplay *d,
     UNWRAP (rd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (rd, d, handleEvent, rotateHandleEvent);
+
+    if (activeWindow != d->activeWindow)
+    {
+	CompWindow *w;
+
+	w = findWindowAtDisplay (d, d->activeWindow);
+	if (w && w->placed)
+	{
+	    s = w->screen;
+
+	    if (!otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
+	    {
+		int dx;
+
+		ROTATE_SCREEN (s);
+
+		/* reset movement */
+		rs->moveTo = 0.0f;
+
+		defaultViewportForWindow (w, &dx, NULL);
+		dx -= s->x;
+		if (dx)
+		{
+		    Window	 win;
+		    int		 i, x, y;
+		    unsigned int ui;
+		    CompOption   o[4];
+
+		    XQueryPointer (d->display, s->root,
+				   &win, &win, &x, &y, &i, &i, &ui);
+
+		    if (dx * 2 > s->hsize)
+			dx -= s->hsize;
+		    else if (dx * 2 < -s->hsize)
+			dx += s->hsize;
+
+		    o[0].type    = CompOptionTypeInt;
+		    o[0].name    = "x";
+		    o[0].value.i = x;
+
+		    o[1].type    = CompOptionTypeInt;
+		    o[1].name    = "y";
+		    o[1].value.i = y;
+
+		    o[2].type	 = CompOptionTypeInt;
+		    o[2].name	 = "root";
+		    o[2].value.i = s->root;
+
+		    o[3].type	 = CompOptionTypeInt;
+		    o[3].name	 = "direction";
+		    o[3].value.i = dx;
+
+		    rotate (d, NULL, 0, o, 4);
+		}
+	    }
+	}
+    }
 }
 
 static void
