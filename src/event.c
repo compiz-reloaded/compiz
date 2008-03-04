@@ -310,7 +310,7 @@ triggerButtonPressBindings (CompDisplay *d,
 	if (edge)
 	{
 	    if (isInitiateBinding (option, CompBindingTypeEdgeButton,
-				   CompActionStateInitEdge, &action))
+				   state | CompActionStateInitEdge, &action))
 	    {
 		if ((action->button.button == event->xbutton.button) &&
 		    (action->edgeMask & edge))
@@ -320,7 +320,7 @@ triggerButtonPressBindings (CompDisplay *d,
 
 		    if ((bindMods & modMask) ==
 			(event->xbutton.state & modMask))
-			if ((*action->initiate) (d, action,
+			if ((*action->initiate) (d, action, state |
 						 CompActionStateInitEdge,
 						 argument, nArgument))
 			    return TRUE;
@@ -343,11 +343,12 @@ triggerButtonReleaseBindings (CompDisplay *d,
 			      int	  nArgument)
 {
     CompActionState state = CompActionStateTermButton;
+    CompBindingType type  = CompBindingTypeButton | CompBindingTypeEdgeButton;
     CompAction	    *action;
 
     while (nOption--)
     {
-	if (isTerminateBinding (option, CompBindingTypeButton, state, &action))
+	if (isTerminateBinding (option, type, state, &action))
 	{
 	    if (action->button.button == event->xbutton.button)
 	    {
