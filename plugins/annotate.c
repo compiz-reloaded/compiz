@@ -742,7 +742,7 @@ annoSetDisplayOption (CompPlugin      *plugin,
 
 static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
     { "initiate_button", "button", 0, annoInitiate, annoTerminate },
-    { "draw_button", "button", 0, annoDraw, 0 },
+    { "draw", "action", 0, annoDraw, 0 },
     { "erase_button", "button", 0, annoEraseInitiate, annoTerminate },
     { "clear_key", "key", 0, annoClear, 0 },
     { "clear_button", "button", 0, annoClear, 0 },

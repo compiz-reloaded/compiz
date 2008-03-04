@@ -8,9 +8,10 @@
 		<_long>Initiate annotate drawing</_long>
 		<default>&lt;Super&gt;&lt;Alt&gt;Button1</default>
 	    </option>
-	    <option name="draw_button" type="button">
+	    <option name="draw" type="action">
 		<_short>Draw</_short>
 		<_long>Draw using tool</_long>
+		<allowed/>
 	    </option>
 	    <option name="erase_button" type="button">
 		<_short>Initiate erase</_short>
