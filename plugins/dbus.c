@@ -669,6 +669,9 @@ dbusHandleActionMessage (DBusConnection *connection,
 	    while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 		object = object->parent;
 
+	    if (!object)
+		return FALSE;
+
 	    if (activate)
 	    {
 		if (!option->value.action.initiate)
@@ -888,6 +891,9 @@ dbusGetOptionValue (CompObject	    *object,
 	    while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 		object = object->parent;
 
+	    if (!object)
+		return FALSE;
+
 	    stringToKeyAction (GET_CORE_DISPLAY (object), s, &value->action);
 	    return TRUE;
 	}
@@ -899,6 +905,9 @@ dbusGetOptionValue (CompObject	    *object,
 	{
 	    while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 		object = object->parent;
+
+	    if (!object)
+		return FALSE;
 
 	    stringToButtonAction (GET_CORE_DISPLAY (object),
 				  s, &value->action);
