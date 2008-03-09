@@ -140,29 +140,25 @@ saveYourselfCallback (SmcConn	connection,
 		      int	interact_Style,
 		      Bool	fast)
 {
-    CompOption args[5];
+    CompOption args[4];
 
-    args[0].type    = CompOptionTypeString;
-    args[0].name    = "client_id";
-    args[0].value.s = smClientId; 
+    args[0].type    = CompOptionTypeInt;
+    args[0].name    = "save_type";
+    args[0].value.i = saveType;
 
-    args[1].type    = CompOptionTypeInt;
-    args[1].name    = "save_type";
-    args[1].value.i = saveType;
+    args[1].type    = CompOptionTypeBool;
+    args[1].name    = "shutdown";
+    args[1].value.b = shutdown;
 
-    args[2].type    = CompOptionTypeBool;
-    args[2].name    = "shutdown";
-    args[2].value.b = shutdown;
+    args[2].type    = CompOptionTypeInt;
+    args[2].name    = "interact_style";
+    args[2].value.i = interact_Style;
 
-    args[3].type    = CompOptionTypeInt;
-    args[3].name    = "interact_style";
-    args[3].value.i = interact_Style;
+    args[3].type    = CompOptionTypeBool;
+    args[3].name    = "fast";
+    args[3].value.b = fast;
 
-    args[4].type    = CompOptionTypeBool;
-    args[4].name    = "fast";
-    args[4].value.b = fast;
-
-    (*core.sessionEvent) (&core, CompSessionEventSaveYourself, args, 5);
+    (*core.sessionEvent) (&core, CompSessionEventSaveYourself, args, 4);
 
     setCloneRestartCommands (connection);
     setRestartStyle (connection, SmRestartImmediately);
@@ -235,6 +231,9 @@ initSession (char *smPrevClientId)
 			    errorBuffer);
 	else
 	    connected = TRUE;
+
+	if (connected)
+	    (*core.sessionInit) (&core, smPrevClientId, smClientId);
     }
 }
 
@@ -243,6 +242,8 @@ closeSession (void)
 {
     if (connected)
     {
+    	(*core.sessionFini) (&core);
+
 	setRestartStyle (smcConnection, SmRestartIfRunning);
 
 	if (SmcCloseConnection (smcConnection, 0, NULL) != SmcConnectionInUse)
@@ -252,6 +253,18 @@ closeSession (void)
 	    smClientId = NULL;
 	}
     }
+}
+
+void
+sessionInit (CompCore   *c,
+	     const char *previousClientId,
+	     const char *clientId)
+{
+}
+
+void
+sessionFini (CompCore *c)
+{
 }
 
 void

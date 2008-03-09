@@ -353,6 +353,12 @@ typedef enum {
     CompSessionEventShutdownCancelled
 } CompSessionEvent;
 
+typedef void (*SessionInitProc) (CompCore   *c,
+				 const char *previousClientId,
+				 const char *clientId);
+
+typedef void (*SessionFiniProc) (CompCore *c);
+
 typedef void (*SessionEventProc) (CompCore         *c,
 				  CompSessionEvent event,
 				  CompOption       *arguments,
@@ -363,6 +369,14 @@ initSession (char *smPrevClientId);
 
 void
 closeSession (void);
+
+void
+sessionInit (CompCore   *c,
+	     const char *previousClientId,
+	     const char *clientId);
+
+void
+sessionFini (CompCore *c);
 
 void
 sessionEvent (CompCore         *c,
@@ -673,6 +687,8 @@ struct _CompCore {
     FileWatchAddedProc   fileWatchAdded;
     FileWatchRemovedProc fileWatchRemoved;
 
+    SessionInitProc  sessionInit;
+    SessionFiniProc  sessionFini;
     SessionEventProc sessionEvent;
 };
 

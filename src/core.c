@@ -194,6 +194,8 @@ initCore (void)
     core.fileWatchAdded   = fileWatchAdded;
     core.fileWatchRemoved = fileWatchRemoved;
 
+    core.sessionInit  = sessionInit;
+    core.sessionFini  = sessionFini;
     core.sessionEvent = sessionEvent;
 
     corePlugin = loadPlugin ("core");
