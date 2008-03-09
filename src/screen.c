@@ -3763,12 +3763,10 @@ outputDeviceForPoint (CompScreen *s,
 
     curr = s->currentOutputDev;
 
-    x1 = s->outputDev[curr].region.extents.x1;
-    y1 = s->outputDev[curr].region.extents.y1;
-    x2 = s->outputDev[curr].region.extents.x2;
-    y2 = s->outputDev[curr].region.extents.y2;
-
-    size = (x2 - x1) * (y2 - y1);
+    if (opt == OVERLAPPING_OUTPUT_MODE_BIGGEST)
+	size = 0;
+    else
+	size = s->width * s->height;
 
     i = s->nOutputDev;
     while (i--)
