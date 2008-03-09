@@ -248,7 +248,8 @@ closeSession (void)
 
 	if (SmcCloseConnection (smcConnection, 0, NULL) != SmcConnectionInUse)
 	    connected = FALSE;
-	if (smClientId) {
+	if (smClientId)
+	{
 	    free (smClientId);
 	    smClientId = NULL;
 	}
