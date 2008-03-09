@@ -638,6 +638,7 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "number_of_desktops", "int", "<min>1</min>", 0, 0 },
     { "detect_outputs", "bool", 0, 0, 0 },
     { "outputs", "list", "<type>string</type>", 0, 0 },
+    { "overlapping_outputs", "int", "<type>int</type>", 0, 0 },
     { "focus_prevention_match", "match", 0, 0, 0 },
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
     { "opacity_values", "list", "<type>int</type>", 0, 0 }
@@ -3746,12 +3747,28 @@ finishScreenDrawing (CompScreen *s)
     }
 }
 
+#define OVERLAPPING_OUTPUT_MODE_BIGGEST  0
+#define OVERLAPPING_OUTPUT_MODE_SMALLEST 1
+#define OVERLAPPING_OUTPUT_MODE_FIRST    2
+#define OVERLAPPING_OUTPUT_MODE_LAST     3
+
 int
 outputDeviceForPoint (CompScreen *s,
 		      int	 x,
 		      int	 y)
 {
-    int i, x1, y1, x2, y2;
+    int i, x1, y1, x2, y2, curr, size, opt;
+
+    opt = s->opt[COMP_SCREEN_OPTION_OVERLAPPING_OUTPUTS].value.i;
+
+    curr = s->currentOutputDev;
+
+    x1 = s->outputDev[curr].region.extents.x1;
+    y1 = s->outputDev[curr].region.extents.y1;
+    x2 = s->outputDev[curr].region.extents.x2;
+    y2 = s->outputDev[curr].region.extents.y2;
+
+    size = (x2 - x1) * (y2 - y1);
 
     i = s->nOutputDev;
     while (i--)
@@ -3762,10 +3779,30 @@ outputDeviceForPoint (CompScreen *s,
 	y2 = s->outputDev[i].region.extents.y2;
 
 	if (x1 <= x && x2 > x && y1 <= y && y2 > y)
-	    return i;
+	{
+	    if (opt == OVERLAPPING_OUTPUT_MODE_LAST)
+	        return i;
+
+	    if (opt == OVERLAPPING_OUTPUT_MODE_BIGGEST &&
+		(x2 - x1) * (y2 - y1) > size)
+	    {
+		curr = i;
+		size = (x2 - x1) * (y2 - y1);
+	    }
+
+	    if (opt == OVERLAPPING_OUTPUT_MODE_SMALLEST &&
+		(x2 - x1) * (y2 - y1) < size)
+	    {
+		curr = i;
+		size = (x2 - x1) * (y2 - y1);
+	    }
+
+	    if (opt == OVERLAPPING_OUTPUT_MODE_FIRST)
+		curr = i;
+	}
     }
 
-    return s->currentOutputDev;
+    return curr;
 }
 
 void
