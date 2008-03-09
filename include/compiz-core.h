@@ -346,18 +346,17 @@ compObjectFind (CompObject     *parent,
 
 /* session.c */
 
-typedef void (*SessionSaveYourselfProc) (CompCore   *c,
-					 const char *clientId,
-					 int        saveType,
-					 int        interactStyle,
-					 Bool       shutdown,
-					 Bool       fast);
+typedef enum {
+    CompSessionEventSaveYourself = 0,
+    CompSessionEventSaveComplete,
+    CompSessionEventDie,
+    CompSessionEventShutdownCancelled
+} CompSessionEvent;
 
-typedef void (*SessionDieProc) (CompCore *c);
-
-typedef void (*SessionSaveCompleteProc) (CompCore *c);
-
-typedef void (*SessionShutdownCancelledProc) (CompCore *c);
+typedef void (*SessionEventProc) (CompCore         *c,
+				  CompSessionEvent event,
+				  CompOption       *arguments,
+				  unsigned int     nArguments);
 
 void
 initSession (char *smPrevClientId);
@@ -366,21 +365,10 @@ void
 closeSession (void);
 
 void
-sessionSaveYourself (CompCore   *c,
-		     const char *clientId,
-		     int        saveType,
-		     int        interactStyle,
-		     Bool       shutdown,
-		     Bool       fast);
-
-void
-sessionDie (CompCore *c);
-
-void
-sessionSaveComplete (CompCore *c);
-
-void
-sessionShutdownCancelled (CompCore *c);
+sessionEvent (CompCore         *c,
+	      CompSessionEvent event,
+	      CompOption       *arguments,
+	      unsigned int     nArguments);
 
 /* option.c */
 
@@ -685,10 +673,7 @@ struct _CompCore {
     FileWatchAddedProc   fileWatchAdded;
     FileWatchRemovedProc fileWatchRemoved;
 
-    SessionSaveYourselfProc      sessionSaveYourself;
-    SessionDieProc               sessionDie;
-    SessionSaveCompleteProc      sessionSaveComplete;
-    SessionShutdownCancelledProc sessionShutdownCancelled;
+    SessionEventProc sessionEvent;
 };
 
 int

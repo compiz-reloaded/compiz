@@ -194,10 +194,7 @@ initCore (void)
     core.fileWatchAdded   = fileWatchAdded;
     core.fileWatchRemoved = fileWatchRemoved;
 
-    core.sessionSaveYourself      = sessionSaveYourself;
-    core.sessionDie               = sessionDie;
-    core.sessionSaveComplete      = sessionSaveComplete;
-    core.sessionShutdownCancelled = sessionShutdownCancelled;
+    core.sessionEvent = sessionEvent;
 
     corePlugin = loadPlugin ("core");
     if (!corePlugin)

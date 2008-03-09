@@ -140,9 +140,29 @@ saveYourselfCallback (SmcConn	connection,
 		      int	interact_Style,
 		      Bool	fast)
 {
-    (*core.sessionSaveYourself) (&core, smClientId,
-				 saveType, interact_Style,
-				 shutdown, fast);
+    CompOption args[5];
+
+    args[0].type    = CompOptionTypeString;
+    args[0].name    = "client_id";
+    args[0].value.s = smClientId; 
+
+    args[1].type    = CompOptionTypeInt;
+    args[1].name    = "save_type";
+    args[1].value.i = saveType;
+
+    args[2].type    = CompOptionTypeBool;
+    args[2].name    = "shutdown";
+    args[2].value.b = shutdown;
+
+    args[3].type    = CompOptionTypeInt;
+    args[3].name    = "interact_style";
+    args[3].value.i = interact_Style;
+
+    args[4].type    = CompOptionTypeBool;
+    args[4].name    = "fast";
+    args[4].value.b = fast;
+
+    (*core.sessionEvent) (&core, CompSessionEventSaveYourself, args, 5);
 
     setCloneRestartCommands (connection);
     setRestartStyle (connection, SmRestartImmediately);
@@ -153,7 +173,7 @@ static void
 dieCallback (SmcConn   connection,
 	     SmPointer clientData)
 {
-    (*core.sessionDie) (&core);
+    (*core.sessionEvent) (&core, CompSessionEventDie, NULL, 0);
 
     closeSession ();
     exit (0);
@@ -163,14 +183,14 @@ static void
 saveCompleteCallback (SmcConn	connection,
 		      SmPointer clientData)
 {
-    (*core.sessionSaveComplete) (&core);
+    (*core.sessionEvent) (&core, CompSessionEventSaveComplete, NULL, 0);
 }
 
 static void
 shutdownCancelledCallback (SmcConn   connection,
 			   SmPointer clientData)
 {
-    (*core.sessionShutdownCancelled) (&core);
+    (*core.sessionEvent) (&core, CompSessionEventShutdownCancelled, NULL, 0);
 }
 
 void
@@ -235,27 +255,10 @@ closeSession (void)
 }
 
 void
-sessionSaveYourself (CompCore   *c,
-		     const char *clientId,
-		     int        saveType,
-		     int        interactStyle,
-		     Bool       shutdown,
-		     Bool       fast)
-{
-}
-
-void
-sessionDie (CompCore *c)
-{
-}
-
-void
-sessionSaveComplete (CompCore *c)
-{
-}
-
-void
-sessionShutdownCancelled (CompCore *c)
+sessionEvent (CompCore         *c,
+	      CompSessionEvent event,
+	      CompOption       *arguments,
+	      unsigned int     nArguments)
 {
 }
 
