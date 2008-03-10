@@ -3754,28 +3754,7 @@ outputDeviceForPoint (CompScreen *s,
 		      int	 x,
 		      int	 y)
 {
-    int i, x1, y1, x2, y2;
-
-    x %= s->width;
-    if (x < 0)
-	x += s->width;
-    y %= s->height;
-    if (y < 0)
-	y += s->height;
-
-    i = s->nOutputDev;
-    while (i--)
-    {
-	x1 = s->outputDev[i].region.extents.x1;
-	y1 = s->outputDev[i].region.extents.y1;
-	x2 = s->outputDev[i].region.extents.x2;
-	y2 = s->outputDev[i].region.extents.y2;
-
-	if (x1 <= x && x2 > x && y1 <= y && y2 > y)
-	    return i;
-    }
-
-    return s->currentOutputDev;
+    return outputDeviceForGeometry (s, x, y, 1, 1, 0);
 }
 
 void
