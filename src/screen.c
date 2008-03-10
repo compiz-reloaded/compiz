@@ -3756,6 +3756,13 @@ outputDeviceForPoint (CompScreen *s,
 {
     int i, x1, y1, x2, y2;
 
+    x %= s->width;
+    if (x < 0)
+	x += s->width;
+    y %= s->height;
+    if (y < 0)
+	y += s->height;
+
     i = s->nOutputDev;
     while (i--)
     {
@@ -3999,10 +4006,18 @@ outputDeviceForGeometry (CompScreen *s,
     if (s->nOutputDev == 1)
 	return 0;
 
-    geomRect.x1 = x;
-    geomRect.y1 = y;
-    geomRect.x2 = x + width + 2 * borderWidth;
-    geomRect.y2 = y + height + 2 * borderWidth;
+    geomRect.x2 = width + 2 * borderWidth;
+    geomRect.y2 = height + 2 * borderWidth;
+
+    geomRect.x1 = x % s->width;
+    if ((geomRect.x1 + geomRect.x2 / 2) < 0)
+	geomRect.x1 += s->width;
+    geomRect.y1 = y % s->height;
+    if ((geomRect.y1 + geomRect.y2 / 2) < 0)
+	geomRect.y1 += s->height;
+
+    geomRect.x2 += geomRect.x1;
+    geomRect.y2 += geomRect.y1;
 
     /* get amount of overlap on all output devices */
     for (i = 0; i < s->nOutputDev; i++)
