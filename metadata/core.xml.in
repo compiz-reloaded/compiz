@@ -411,13 +411,17 @@
 		<_long>Which one of overlapping output devices should be preferred</_long>
 		<default>0</default>
 		<min>0</min>
-		<max>1</max>
+		<max>2</max>
 		<desc>
 		    <value>0</value>
-		    <_name>Prefer larger output</_name>
+		    <_name>Smart mode</_name>
 		</desc>
 		<desc>
 		    <value>1</value>
+		    <_name>Prefer larger output</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
 		    <_name>Prefer smaller output</_name>
 		</desc>
 	    </option>

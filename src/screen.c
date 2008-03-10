@@ -3978,25 +3978,47 @@ outputDeviceForGeometry (CompScreen *s,
 			 int	    height,
 			 int	    borderWidth)
 {
-    int        overlapAreas[s->nOutputDev];
-    int        i, highest, seen, highestScore;
-    BOX        geomRect;
+    int overlapAreas[s->nOutputDev];
+    int i, highest, seen, highestScore;
+    int strategy;
+    BOX geomRect;
 
     if (s->nOutputDev == 1)
 	return 0;
 
-    geomRect.x2 = width + 2 * borderWidth;
-    geomRect.y2 = height + 2 * borderWidth;
+    strategy = s->opt[COMP_SCREEN_OPTION_OVERLAPPING_OUTPUTS].value.i;
 
-    geomRect.x1 = x % s->width;
-    if ((geomRect.x1 + geomRect.x2 / 2) < 0)
-	geomRect.x1 += s->width;
-    geomRect.y1 = y % s->height;
-    if ((geomRect.y1 + geomRect.y2 / 2) < 0)
-	geomRect.y1 += s->height;
+    if (strategy == OUTPUT_OVERLAP_MODE_SMART)
+    {
+	/* for smart mode, calculate the overlap of the whole rectangle
+	   with the output device rectangle */
+	geomRect.x2 = width + 2 * borderWidth;
+	geomRect.y2 = height + 2 * borderWidth;
 
-    geomRect.x2 += geomRect.x1;
-    geomRect.y2 += geomRect.y1;
+	geomRect.x1 = x % s->width;
+	if ((geomRect.x1 + geomRect.x2 / 2) < 0)
+	    geomRect.x1 += s->width;
+	geomRect.y1 = y % s->height;
+	if ((geomRect.y1 + geomRect.y2 / 2) < 0)
+	    geomRect.y1 += s->height;
+
+	geomRect.x2 += geomRect.x1;
+	geomRect.y2 += geomRect.y1;
+    }
+    else
+    {
+	/* for biggest/smallest modes, only use the window center to determine
+	   the correct output device */
+	geomRect.x1 = (x + (width / 2) + borderWidth) % s->width;
+	if (geomRect.x1 < 0)
+	    geomRect.x1 += s->width;
+	geomRect.y1 = (y + (height / 2) + borderWidth) % s->height;
+	if (geomRect.y1 < 0)
+	    geomRect.y1 += s->height;
+
+	geomRect.x2 = geomRect.x1 + 1;
+	geomRect.y2 = geomRect.y1 + 1;
+    }
 
     /* get amount of overlap on all output devices */
     for (i = 0; i < s->nOutputDev; i++)
@@ -4021,13 +4043,13 @@ outputDeviceForGeometry (CompScreen *s,
 	/* it's not unique, select one output of the matching ones and use the
 	   user preferred strategy for that */
 	unsigned int currentSize, bestOutputSize;
-	int          strategy;
+	Bool         searchLargest;
 	
-	strategy = s->opt[COMP_SCREEN_OPTION_OVERLAPPING_OUTPUTS].value.i;
-	if (strategy == OUTPUT_OVERLAP_MODE_PREFER_SMALLER)
-	    bestOutputSize = UINT_MAX;
-	else
+	searchLargest = (strategy != OUTPUT_OVERLAP_MODE_PREFER_SMALLER);
+	if (searchLargest)
 	    bestOutputSize = 0;
+	else
+	    bestOutputSize = UINT_MAX;
 
 	for (i = 0, highest = 0; i < s->nOutputDev; i++)
 	    if (overlapAreas[i] == highestScore)
@@ -4037,10 +4059,10 @@ outputDeviceForGeometry (CompScreen *s,
 
 		currentSize = (box->x2 - box->x1) * (box->y2 - box->y1);
 
-		if (strategy == OUTPUT_OVERLAP_MODE_PREFER_SMALLER)
-		    bestFit = (currentSize < bestOutputSize);
-		else
+		if (searchLargest)
 		    bestFit = (currentSize > bestOutputSize);
+		else
+		    bestFit = (currentSize < bestOutputSize);
 
 		if (bestFit)
 		{
