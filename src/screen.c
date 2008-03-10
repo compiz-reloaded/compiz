@@ -36,6 +36,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <assert.h>
+#include <limits.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -638,7 +639,8 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "number_of_desktops", "int", "<min>1</min>", 0, 0 },
     { "detect_outputs", "bool", 0, 0, 0 },
     { "outputs", "list", "<type>string</type>", 0, 0 },
-    { "overlapping_outputs", "int", "<type>int</type>", 0, 0 },
+    { "overlapping_outputs", "int",
+      RESTOSTRING (0, OUTPUT_OVERLAP_MODE_LAST), 0, 0 },
     { "focus_prevention_match", "match", 0, 0, 0 },
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
     { "opacity_values", "list", "<type>int</type>", 0, 0 }
@@ -3747,26 +3749,12 @@ finishScreenDrawing (CompScreen *s)
     }
 }
 
-#define OVERLAPPING_OUTPUT_MODE_BIGGEST  0
-#define OVERLAPPING_OUTPUT_MODE_SMALLEST 1
-#define OVERLAPPING_OUTPUT_MODE_FIRST    2
-#define OVERLAPPING_OUTPUT_MODE_LAST     3
-
 int
 outputDeviceForPoint (CompScreen *s,
 		      int	 x,
 		      int	 y)
 {
-    int i, x1, y1, x2, y2, curr, size, opt;
-
-    opt = s->opt[COMP_SCREEN_OPTION_OVERLAPPING_OUTPUTS].value.i;
-
-    curr = s->currentOutputDev;
-
-    if (opt == OVERLAPPING_OUTPUT_MODE_BIGGEST)
-	size = 0;
-    else
-	size = s->width * s->height;
+    int i, x1, y1, x2, y2;
 
     i = s->nOutputDev;
     while (i--)
@@ -3777,30 +3765,10 @@ outputDeviceForPoint (CompScreen *s,
 	y2 = s->outputDev[i].region.extents.y2;
 
 	if (x1 <= x && x2 > x && y1 <= y && y2 > y)
-	{
-	    if (opt == OVERLAPPING_OUTPUT_MODE_LAST)
-	        return i;
-
-	    if (opt == OVERLAPPING_OUTPUT_MODE_BIGGEST &&
-		(x2 - x1) * (y2 - y1) > size)
-	    {
-		curr = i;
-		size = (x2 - x1) * (y2 - y1);
-	    }
-
-	    if (opt == OVERLAPPING_OUTPUT_MODE_SMALLEST &&
-		(x2 - x1) * (y2 - y1) < size)
-	    {
-		curr = i;
-		size = (x2 - x1) * (y2 - y1);
-	    }
-
-	    if (opt == OVERLAPPING_OUTPUT_MODE_FIRST)
-		curr = i;
-	}
+	    return i;
     }
 
-    return curr;
+    return s->currentOutputDev;
 }
 
 void
@@ -3995,6 +3963,27 @@ viewportForGeometry (CompScreen *s,
     }
 }
 
+static int
+rectangleOverlapArea (BOX *rect1,
+		      BOX *rect2)
+{
+    int left, right, top, bottom;
+
+    /* extents of overlapping rectangle */
+    left = MAX (rect1->x1, rect2->x1);
+    right = MIN (rect1->x2, rect2->x2);
+    top = MAX (rect1->y1, rect2->y1);
+    bottom = MIN (rect1->y2, rect2->y2);
+
+    if (left > right || top > bottom)
+    {
+	/* no overlap */
+	return 0;
+    }
+
+    return (right - left) * (bottom - top);
+}
+
 int
 outputDeviceForGeometry (CompScreen *s,
 			 int	    x,
@@ -4003,26 +3992,71 @@ outputDeviceForGeometry (CompScreen *s,
 			 int	    height,
 			 int	    borderWidth)
 {
-    int output = s->currentOutputDev;
-    int x1, y1, x2, y2;
+    int        overlapAreas[s->nOutputDev];
+    int        i, highest, seen, highestScore;
+    BOX        geomRect;
 
-    width  += borderWidth * 2;
-    height += borderWidth * 2;
+    if (s->nOutputDev == 1)
+	return 0;
 
-    x1 = s->outputDev[output].region.extents.x1;
-    y1 = s->outputDev[output].region.extents.y1;
-    x2 = s->outputDev[output].region.extents.x2;
-    y2 = s->outputDev[output].region.extents.y2;
+    geomRect.x1 = x;
+    geomRect.y1 = y;
+    geomRect.x2 = x + width + 2 * borderWidth;
+    geomRect.y2 = y + height + 2 * borderWidth;
 
-    if (x1 >= x + width  ||
-	y1 >= y + height ||
-	x2 <= x		 ||
-	y2 <= y)
+    /* get amount of overlap on all output devices */
+    for (i = 0; i < s->nOutputDev; i++)
+	overlapAreas[i] = rectangleOverlapArea (&s->outputDev[i].region.extents,
+						&geomRect);
+
+    /* find output with largest overlap */
+    for (i = 0, highest = 0, highestScore = 0; i < s->nOutputDev; i++)
+	if (overlapAreas[i] > highestScore)
+	{
+	    highest = i;
+	    highestScore = overlapAreas[i];
+	}
+
+    /* look if the highest score is unique */
+    for (i = 0, seen = 0; i < s->nOutputDev; i++)
+	if (overlapAreas[i] == highestScore)
+	    seen++;
+
+    if (seen > 1)
     {
-	output = outputDeviceForPoint (s, x + width  / 2, y + height / 2);
-    }
+	/* it's not unique, select one output of the matching ones and use the
+	   user preferred strategy for that */
+	unsigned int currentSize, bestOutputSize;
+	int          strategy;
+	
+	strategy = s->opt[COMP_SCREEN_OPTION_OVERLAPPING_OUTPUTS].value.i;
+	if (strategy == OUTPUT_OVERLAP_MODE_PREFER_SMALLER)
+	    bestOutputSize = UINT_MAX;
+	else
+	    bestOutputSize = 0;
 
-    return output;
+	for (i = 0, highest = 0; i < s->nOutputDev; i++)
+	    if (overlapAreas[i] == highestScore)
+	    {
+		BOX  *box = &s->outputDev[i].region.extents;
+		Bool bestFit;
+
+		currentSize = (box->x2 - box->x1) * (box->y2 - box->y1);
+
+		if (strategy == OUTPUT_OVERLAP_MODE_PREFER_SMALLER)
+		    bestFit = (currentSize < bestOutputSize);
+		else
+		    bestFit = (currentSize > bestOutputSize);
+
+		if (bestFit)
+		{
+		    highest = i;
+		    bestOutputSize = currentSize;
+		}
+	    }
+    }
+    
+    return highest;
 }
 
 Bool

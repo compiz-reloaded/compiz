@@ -1741,6 +1741,10 @@ disableTexture (CompScreen  *screen,
 #define GLX_FRONT_LEFT_EXT                 0x20DE
 #endif
 
+#define OUTPUT_OVERLAP_MODE_PREFER_LARGER  0
+#define OUTPUT_OVERLAP_MODE_PREFER_SMALLER 1
+#define OUTPUT_OVERLAP_MODE_LAST           OUTPUT_OVERLAP_MODE_PREFER_SMALLER
+
 typedef void (*FuncPtr) (void);
 typedef FuncPtr (*GLXGetProcAddressProc) (const GLubyte *procName);
 
