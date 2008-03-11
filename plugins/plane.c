@@ -71,6 +71,7 @@ typedef struct _PlaneScreen {
     PreparePaintScreenProc		preparePaintScreen;
     DonePaintScreenProc			donePaintScreen;
     PaintOutputProc			paintOutput;
+    ActivateWindowProc                  activateWindow;
 
     CompTimeoutHandle			timeoutHandle;
     int					timer;
@@ -358,7 +359,6 @@ planeHandleEvent (CompDisplay *d,
 		  XEvent      *event)
 {
     CompScreen *s;
-    Window     activeWindow = d->activeWindow;
 
     PLANE_DISPLAY (d);
 
@@ -392,28 +392,30 @@ planeHandleEvent (CompDisplay *d,
     UNWRAP (pd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (pd, d, handleEvent, planeHandleEvent);
+}
 
-    if (activeWindow != d->activeWindow)
+static void
+planeActivateWindow (CompWindow *w)
+{
+    CompScreen *s = w->screen;
+
+    PLANE_SCREEN (s);
+
+    if (w->placed &&
+	!otherScreenGrabExist (s, "plane", "switcher", "cube", 0))
     {
-	CompWindow *w;
+	int dx, dy;
 
-	w = findWindowAtDisplay (d, d->activeWindow);
-	if (w && w->placed)
-	{
-	    s = w->screen;
+	defaultViewportForWindow (w, &dx, &dy);
+	dx -= s->x;
+	dy -= s->y;
 
-	    if (!otherScreenGrabExist (s, "plane", "switcher", "cube", 0))
-	    {
-		int dx, dy;
-
-		defaultViewportForWindow (w, &dx, &dy);
-		dx -= s->x;
-		dy -= s->y;
-
-		moveViewport (s, dx, dy);
-	    }
-	}
+	moveViewport (s, dx, dy);
     }
+
+    UNWRAP (ps, s, activateWindow);
+    (*s->activateWindow) (w);
+    WRAP (ps, s, activateWindow, planeActivateWindow);
 }
 
 static CompOption *
@@ -634,6 +636,7 @@ planeInitScreen (CompPlugin *p,
     WRAP (ps, s, preparePaintScreen, planePreparePaintScreen);
     WRAP (ps, s, donePaintScreen, planeDonePaintScreen);
     WRAP (ps, s, paintOutput, planePaintOutput);
+    WRAP (ps, s, activateWindow, planeActivateWindow);
 
     s->base.privates[pd->screenPrivateIndex].ptr = ps;
 
@@ -650,6 +653,7 @@ planeFiniScreen (CompPlugin *p,
     UNWRAP (ps, s, preparePaintScreen);
     UNWRAP (ps, s, donePaintScreen);
     UNWRAP (ps, s, paintOutput);
+    UNWRAP (ps, s, activateWindow);
 
     free (ps);
 }

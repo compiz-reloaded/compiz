@@ -110,6 +110,7 @@ typedef struct _RotateScreen {
     PaintOutputProc		 paintOutput;
     WindowGrabNotifyProc	 windowGrabNotify;
     WindowUngrabNotifyProc	 windowUngrabNotify;
+    ActivateWindowProc           activateWindow;
 
     CubeGetRotationProc getRotation;
 
@@ -1472,7 +1473,6 @@ rotateHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
     CompScreen *s;
-    Window     activeWindow = d->activeWindow;
 
     ROTATE_DISPLAY (d);
 
@@ -1579,63 +1579,63 @@ rotateHandleEvent (CompDisplay *d,
     UNWRAP (rd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (rd, d, handleEvent, rotateHandleEvent);
+}
 
-    if (activeWindow != d->activeWindow)
+static void
+rotateActivateWindow (CompWindow *w)
+{
+    CompScreen *s = w->screen;
+
+    ROTATE_SCREEN (s);
+
+    if (w->placed &&
+	!otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
     {
-	CompWindow *w;
+	int dx;
 
-	w = findWindowAtDisplay (d, d->activeWindow);
-	if (w && w->placed)
+	/* reset movement */
+	rs->moveTo = 0.0f;
+
+	defaultViewportForWindow (w, &dx, NULL);
+	dx -= s->x;
+	if (dx)
 	{
-	    s = w->screen;
+	    Window	 win;
+	    int		 i, x, y;
+	    unsigned int ui;
+	    CompOption   o[4];
 
-	    if (!otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
-	    {
-		int dx;
+	    XQueryPointer (s->display->display, s->root,
+			   &win, &win, &x, &y, &i, &i, &ui);
 
-		ROTATE_SCREEN (s);
+	    if (dx * 2 > s->hsize)
+		dx -= s->hsize;
+	    else if (dx * 2 < -s->hsize)
+		dx += s->hsize;
 
-		/* reset movement */
-		rs->moveTo = 0.0f;
+	    o[0].type    = CompOptionTypeInt;
+	    o[0].name    = "x";
+	    o[0].value.i = x;
 
-		defaultViewportForWindow (w, &dx, NULL);
-		dx -= s->x;
-		if (dx)
-		{
-		    Window	 win;
-		    int		 i, x, y;
-		    unsigned int ui;
-		    CompOption   o[4];
+	    o[1].type    = CompOptionTypeInt;
+	    o[1].name    = "y";
+	    o[1].value.i = y;
 
-		    XQueryPointer (d->display, s->root,
-				   &win, &win, &x, &y, &i, &i, &ui);
+	    o[2].type    = CompOptionTypeInt;
+	    o[2].name    = "root";
+	    o[2].value.i = s->root;
 
-		    if (dx * 2 > s->hsize)
-			dx -= s->hsize;
-		    else if (dx * 2 < -s->hsize)
-			dx += s->hsize;
+	    o[3].type    = CompOptionTypeInt;
+	    o[3].name    = "direction";
+	    o[3].value.i = dx;
 
-		    o[0].type    = CompOptionTypeInt;
-		    o[0].name    = "x";
-		    o[0].value.i = x;
-
-		    o[1].type    = CompOptionTypeInt;
-		    o[1].name    = "y";
-		    o[1].value.i = y;
-
-		    o[2].type	 = CompOptionTypeInt;
-		    o[2].name	 = "root";
-		    o[2].value.i = s->root;
-
-		    o[3].type	 = CompOptionTypeInt;
-		    o[3].name	 = "direction";
-		    o[3].value.i = dx;
-
-		    rotate (d, NULL, 0, o, 4);
-		}
-	    }
+	    rotate (s->display, NULL, 0, o, 4);
 	}
     }
+
+    UNWRAP (rs, s, activateWindow);
+    (*s->activateWindow) (w);
+    WRAP (rs, s, activateWindow, rotateActivateWindow);
 }
 
 static void
@@ -1880,6 +1880,7 @@ rotateInitScreen (CompPlugin *p,
     WRAP (rs, s, paintOutput, rotatePaintOutput);
     WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
     WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
+    WRAP (rs, s, activateWindow, rotateActivateWindow);
 
     WRAP (rs, cs, getRotation, rotateGetRotation);
 
