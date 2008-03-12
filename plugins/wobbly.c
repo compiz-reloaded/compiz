@@ -1764,12 +1764,12 @@ wobblyDrawWindowGeometry (CompWindow *w)
 {
     int     texUnit = w->texUnits;
     int     currentTexUnit = 0;
-    int     stride = (1 + texUnit) * 2;
-    GLfloat *vertices = w->vertices + (stride - 2);
+    int     stride = w->vertexStride;
+    GLfloat *vertices = w->vertices + (stride - 3);
 
     stride *= sizeof (GLfloat);
 
-    glVertexPointer (2, GL_FLOAT, stride, vertices);
+    glVertexPointer (3, GL_FLOAT, stride, vertices);
 
     while (texUnit--)
     {
@@ -1779,8 +1779,8 @@ wobblyDrawWindowGeometry (CompWindow *w)
 	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 	    currentTexUnit = texUnit;
 	}
-	vertices -= 2;
-	glTexCoordPointer (2, GL_FLOAT, stride, vertices);
+	vertices -= w->texCoordSize;
+	glTexCoordPointer (w->texCoordSize, GL_FLOAT, stride, vertices);
     }
 
     glDrawElements (GL_QUADS, w->indexCount, GL_UNSIGNED_SHORT, w->indices);
@@ -1850,7 +1850,7 @@ wobblyAddWindowGeometry (CompWindow *w,
 
 	w->texUnits = nMatrix;
 
-	vSize = 2 + nMatrix * 2;
+	vSize = 3 + nMatrix * 2;
 
 	nVertices = w->vCount;
 	nIndices  = w->indexCount;
@@ -1935,6 +1935,7 @@ wobblyAddWindowGeometry (CompWindow *w,
 
 		    *v++ = deformedX;
 		    *v++ = deformedY;
+		    *v++ = 0.0;
 
 		    nVertices++;
 
@@ -1950,6 +1951,8 @@ wobblyAddWindowGeometry (CompWindow *w,
 	}
 
 	w->vCount	      = nVertices;
+	w->vertexStride       = vSize;
+	w->texCoordSize       = 2;
 	w->indexCount	      = nIndices;
 	w->drawWindowGeometry = wobblyDrawWindowGeometry;
     }
