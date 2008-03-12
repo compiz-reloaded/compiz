@@ -569,7 +569,7 @@ drawWindowGeometry (CompWindow *w)
 {
     int     texUnit = w->texUnits;
     int     currentTexUnit = 0;
-    int     stride = (texUnit * w->texCoordSize) + 2;
+    int     stride = w->vertexStride;
     GLfloat *vertices = w->vertices + (stride - 2);
 
     stride *= sizeof (GLfloat);
@@ -744,6 +744,7 @@ addWindowGeometry (CompWindow *w,
 	}
 
 	w->vCount	      = n * 4;
+	w->vertexStride       = vSize;
 	w->texCoordSize       = 2;
 	w->drawWindowGeometry = drawWindowGeometry;
     }

@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080313
+#define CORE_ABIVERSION 20080314
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2653,6 +2653,7 @@ struct _CompWindow {
 
     GLfloat  *vertices;
     int      vertexSize;
+    int      vertexStride;
     GLushort *indices;
     int      indexSize;
     int      vCount;

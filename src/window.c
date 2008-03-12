@@ -1952,6 +1952,7 @@ addWindow (CompScreen *screen,
 
     w->vertices     = 0;
     w->vertexSize   = 0;
+    w->vertexStride = 0;
     w->indices      = 0;
     w->indexSize    = 0;
     w->vCount	    = 0;
