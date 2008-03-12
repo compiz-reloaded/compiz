@@ -1499,6 +1499,9 @@ decorInitScreen (CompPlugin *p,
 
     decorCheckForDmOnScreen (s, FALSE);
 
+    if (!ds->dmWin)
+	runCommand (s, dd->opt[DECOR_DISPLAY_OPTION_COMMAND].value.s);
+
     return TRUE;
 }
 
