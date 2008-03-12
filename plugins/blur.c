@@ -1552,7 +1552,7 @@ blurProjectRegion (CompWindow	       *w,
     int	       nVertices;
     int        i, j, stride;
     float      *v, *vert;
-    float      minX, maxX, minY, maxY;
+    float      minX, maxX, minY, maxY, minZ, maxZ;
     float      *scr;
     REGION     region;
 
@@ -1595,6 +1595,8 @@ blurProjectRegion (CompWindow	       *w,
 	maxX = 0;
 	minY = s->height;
 	maxY = 0;
+	minZ = 1000000;
+	maxZ = -1000000;
 
 	for (i = 0; i < w->vCount; i++)
 	{
@@ -1611,15 +1613,35 @@ blurProjectRegion (CompWindow	       *w,
 
 	    if (v[1] > maxY)
 		maxY = v[1];
+
+	    if (v[2] < minZ)
+		minZ = v[2];
+
+	    if (v[2] > maxZ)
+		maxZ = v[2];
 	}
 
 	vertices[0] = vertices[9]  = minX;
 	vertices[1] = vertices[4]  = minY;
 	vertices[3] = vertices[6]  = maxX;
 	vertices[7] = vertices[10] = maxY;
-	vertices[2] = vertices[5]  = 0.0;
-	vertices[8] = vertices[11] = 0.0;
-	nVertices = 4;
+	vertices[2] = vertices[5]  = maxZ;
+	vertices[8] = vertices[11] = maxZ;
+
+	if (maxZ == minZ)
+	{
+	    nVertices = 4;
+	}
+	else
+	{
+	    vertices[12] = vertices[21] = minX;
+	    vertices[13] = vertices[16] = minY;
+	    vertices[15] = vertices[18] = maxX;
+	    vertices[19] = vertices[22] = maxY;
+	    vertices[14] = vertices[17] = minZ;
+	    vertices[20] = vertices[23] = minZ;
+	    nVertices = 8;
+	}
     }
 
     if (!projectVertices (w->screen, output, transform, vertices, screen,
