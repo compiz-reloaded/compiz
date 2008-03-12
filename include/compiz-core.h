@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080310
+#define CORE_ABIVERSION 20080312
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -353,11 +353,10 @@ typedef enum {
     CompSessionEventShutdownCancelled
 } CompSessionEvent;
 
-typedef void (*SessionInitProc) (CompCore   *c,
-				 const char *previousClientId,
-				 const char *clientId);
-
-typedef void (*SessionFiniProc) (CompCore *c);
+typedef enum {
+    CompSessionClientId = 0,
+    CompSessionPrevClientId
+} CompSessionClientIdType;
 
 typedef void (*SessionEventProc) (CompCore         *c,
 				  CompSessionEvent event,
@@ -371,18 +370,13 @@ void
 closeSession (void);
 
 void
-sessionInit (CompCore   *c,
-	     const char *previousClientId,
-	     const char *clientId);
-
-void
-sessionFini (CompCore *c);
-
-void
 sessionEvent (CompCore         *c,
 	      CompSessionEvent event,
 	      CompOption       *arguments,
 	      unsigned int     nArguments);
+
+char *
+getSessionClientId (CompSessionClientIdType type);
 
 /* option.c */
 
@@ -687,8 +681,6 @@ struct _CompCore {
     FileWatchAddedProc   fileWatchAdded;
     FileWatchRemovedProc fileWatchRemoved;
 
-    SessionInitProc  sessionInit;
-    SessionFiniProc  sessionFini;
     SessionEventProc sessionEvent;
 };
 

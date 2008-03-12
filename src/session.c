@@ -44,7 +44,7 @@ static SmcConn		 smcConnection;
 static CompWatchFdHandle iceWatchFdHandle;
 static Bool		 connected = 0;
 static Bool		 iceConnected = 0;
-static char		 *smClientId;
+static char		 *smClientId, *smPrevClientId;
 
 static void iceInit (void);
 
@@ -190,7 +190,7 @@ shutdownCancelledCallback (SmcConn   connection,
 }
 
 void
-initSession (char *smPrevClientId)
+initSession (char *prevClientId)
 {
     static SmcCallbacks callbacks;
 
@@ -221,7 +221,7 @@ initSession (char *smPrevClientId)
 					   SmcSaveCompleteProcMask |
 					   SmcShutdownCancelledProcMask,
 					   &callbacks,
-					   smPrevClientId,
+					   prevClientId,
 					   &smClientId,
 					   sizeof (errorBuffer),
 					   errorBuffer);
@@ -230,10 +230,11 @@ initSession (char *smPrevClientId)
 			    "SmcOpenConnection failed: %s",
 			    errorBuffer);
 	else
+	{
 	    connected = TRUE;
-
-	if (connected)
-	    (*core.sessionInit) (&core, smPrevClientId, smClientId);
+	    if (prevClientId)
+		smPrevClientId = strdup (prevClientId);
+	}
     }
 }
 
@@ -242,8 +243,6 @@ closeSession (void)
 {
     if (connected)
     {
-    	(*core.sessionFini) (&core);
-
 	setRestartStyle (smcConnection, SmRestartIfRunning);
 
 	if (SmcCloseConnection (smcConnection, 0, NULL) != SmcConnectionInUse)
@@ -253,19 +252,12 @@ closeSession (void)
 	    free (smClientId);
 	    smClientId = NULL;
 	}
+	if (smPrevClientId)
+	{
+	    free (smPrevClientId);
+	    smPrevClientId = NULL;
+	}
     }
-}
-
-void
-sessionInit (CompCore   *c,
-	     const char *previousClientId,
-	     const char *clientId)
-{
-}
-
-void
-sessionFini (CompCore *c)
-{
 }
 
 void
@@ -276,6 +268,26 @@ sessionEvent (CompCore         *c,
 {
 }
 
+char *
+getSessionClientId (CompSessionClientIdType type)
+{
+    if (!connected)
+	return NULL;
+
+    switch (type) {
+    case CompSessionClientId:
+	if (smClientId)
+	    return strdup (smClientId);
+	break;
+
+    case CompSessionPrevClientId:
+	if (smPrevClientId)
+	    return strdup (smPrevClientId);
+	break;
+    }
+
+    return NULL;
+}
 /* ice connection handling taken and updated from gnome-ice.c
  * original gnome-ice.c code written by Tom Tromey <tromey@cygnus.com>
  */
