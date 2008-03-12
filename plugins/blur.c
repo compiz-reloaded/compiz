@@ -1302,7 +1302,7 @@ projectVertices (CompScreen	     *s,
 
     while (n--)
     {
-	if (!gluProject (object[0], object[1], 0.0,
+	if (!gluProject (object[0], object[1], object[2],
 			 dModel, dProjection, viewport,
 			 &x, &y, &z))
 	    return FALSE;
@@ -1310,7 +1310,7 @@ projectVertices (CompScreen	     *s,
 	screen[0] = x;
 	screen[1] = y;
 
-	object += 2;
+	object += 3;
 	screen += 2;
     }
 
@@ -1548,7 +1548,7 @@ blurProjectRegion (CompWindow	       *w,
 {
     CompScreen *s = w->screen;
     float      screen[MAX_VERTEX_PROJECT_COUNT * 2];
-    float      vertices[MAX_VERTEX_PROJECT_COUNT * 2];
+    float      vertices[MAX_VERTEX_PROJECT_COUNT * 3];
     int	       nVertices;
     int        i, j, stride;
     float      *v, *vert;
@@ -1567,8 +1567,8 @@ blurProjectRegion (CompWindow	       *w,
 
     nVertices = (w->indexCount) ? w->indexCount: w->vCount;
 
-    stride = (1 + w->texUnits) * 2;
-    vert = w->vertices + (stride - 2);
+    stride = w->vertexStride;
+    vert = w->vertices + (stride - 3);
 
     /* we need to find the best value here */
     if (nVertices <= MAX_VERTEX_PROJECT_COUNT)
@@ -1584,8 +1584,9 @@ blurProjectRegion (CompWindow	       *w,
 		v = vert + (stride * i);
 	    }
 
-	    vertices[i * 2] = v[0];
-	    vertices[(i * 2) + 1] = v[1];
+	    vertices[i * 3] = v[0];
+	    vertices[(i * 3) + 1] = v[1];
+	    vertices[(i * 3) + 2] = v[2];
 	}
     }
     else
@@ -1612,11 +1613,12 @@ blurProjectRegion (CompWindow	       *w,
 		maxY = v[1];
 	}
 
-	vertices[0] = vertices[6] = minX;
-	vertices[1] = vertices[3] = minY;
-	vertices[2] = vertices[4] = maxX;
-	vertices[5] = vertices[7] = maxY;
-
+	vertices[0] = vertices[9]  = minX;
+	vertices[1] = vertices[4]  = minY;
+	vertices[3] = vertices[6]  = maxX;
+	vertices[7] = vertices[10] = maxY;
+	vertices[2] = vertices[5]  = 0.0;
+	vertices[8] = vertices[11] = 0.0;
 	nVertices = 4;
     }
 
