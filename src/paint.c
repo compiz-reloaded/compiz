@@ -473,6 +473,7 @@ paintOutput (CompScreen		     *screen,
     }						   \
     *(data)++ = (x1);				   \
     *(data)++ = (y2);				   \
+    *(data)++ = 0.0;				   \
     for (it = 0; it < n; it++)			   \
     {						   \
 	*(data)++ = COMP_TEX_COORD_X (&m[it], x2); \
@@ -480,6 +481,7 @@ paintOutput (CompScreen		     *screen,
     }						   \
     *(data)++ = (x2);				   \
     *(data)++ = (y2);				   \
+    *(data)++ = 0.0;				   \
     for (it = 0; it < n; it++)			   \
     {						   \
 	*(data)++ = COMP_TEX_COORD_X (&m[it], x2); \
@@ -487,13 +489,15 @@ paintOutput (CompScreen		     *screen,
     }						   \
     *(data)++ = (x2);				   \
     *(data)++ = (y1);				   \
+    *(data)++ = 0.0;				   \
     for (it = 0; it < n; it++)			   \
     {						   \
 	*(data)++ = COMP_TEX_COORD_X (&m[it], x1); \
 	*(data)++ = COMP_TEX_COORD_Y (&m[it], y1); \
     }						   \
     *(data)++ = (x1);				   \
-    *(data)++ = (y1)
+    *(data)++ = (y1);				   \
+    *(data)++ = 0.0
 
 #define ADD_QUAD(data, m, n, x1, y1, x2, y2)		\
     for (it = 0; it < n; it++)				\
@@ -503,6 +507,7 @@ paintOutput (CompScreen		     *screen,
     }							\
     *(data)++ = (x1);					\
     *(data)++ = (y2);					\
+    *(data)++ = 0.0;					\
     for (it = 0; it < n; it++)				\
     {							\
 	*(data)++ = COMP_TEX_COORD_XY (&m[it], x2, y2);	\
@@ -510,6 +515,7 @@ paintOutput (CompScreen		     *screen,
     }							\
     *(data)++ = (x2);					\
     *(data)++ = (y2);					\
+    *(data)++ = 0.0;					\
     for (it = 0; it < n; it++)				\
     {							\
 	*(data)++ = COMP_TEX_COORD_XY (&m[it], x2, y1);	\
@@ -517,13 +523,15 @@ paintOutput (CompScreen		     *screen,
     }							\
     *(data)++ = (x2);					\
     *(data)++ = (y1);					\
+    *(data)++ = 0.0;					\
     for (it = 0; it < n; it++)				\
     {							\
 	*(data)++ = COMP_TEX_COORD_XY (&m[it], x1, y1);	\
 	*(data)++ = COMP_TEX_COORD_YX (&m[it], x1, y1);	\
     }							\
     *(data)++ = (x1);					\
-    *(data)++ = (y1)
+    *(data)++ = (y1);					\
+    *(data)++ = 0.0;
 
 
 Bool
@@ -570,11 +578,11 @@ drawWindowGeometry (CompWindow *w)
     int     texUnit = w->texUnits;
     int     currentTexUnit = 0;
     int     stride = w->vertexStride;
-    GLfloat *vertices = w->vertices + (stride - 2);
+    GLfloat *vertices = w->vertices + (stride - 3);
 
     stride *= sizeof (GLfloat);
 
-    glVertexPointer (2, GL_FLOAT, stride, vertices);
+    glVertexPointer (3, GL_FLOAT, stride, vertices);
 
     while (texUnit--)
     {
@@ -649,7 +657,7 @@ addWindowGeometry (CompWindow *w,
 	pBox = region->rects;
 	nBox = region->numRects;
 
-	vSize = 2 + nMatrix * 2;
+	vSize = 3 + nMatrix * 2;
 
 	n = w->vCount / 4;
 
