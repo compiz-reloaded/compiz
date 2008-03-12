@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080312
+#define CORE_ABIVERSION 20080313
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2266,6 +2266,9 @@ showOutputWindow (CompScreen *s);
 void
 hideOutputWindow (CompScreen *s);
 
+void
+updateOutputWindow (CompScreen *s);
+
 Bool
 addScreen (CompDisplay *display,
 	   int	       screenNum,
@@ -2574,6 +2577,7 @@ struct _CompWindow {
     Bool	      redirected;
     Bool	      managed;
     Bool	      bindFailed;
+    Bool	      overlayWindow;
     int		      destroyRefCnt;
     int		      unmapRefCnt;
 

@@ -161,7 +161,7 @@ paintOutputRegion (CompScreen	       *screen,
     static Region tmpRegion = NULL;
     CompWindow    *w;
     CompCursor	  *c;
-    int		  count, windowMask, backgroundMask, odMask;
+    int		  count, windowMask, backgroundMask, odMask, i;
     CompWindow	  *fullscreenWindow = NULL;
     CompWalker    walk;
     Bool          status;
@@ -246,18 +246,29 @@ paintOutputRegion (CompScreen	       *screen,
 		XSubtractRegion (tmpRegion, w->region, tmpRegion);
 
 	    /* unredirect top most fullscreen windows. */
-	    if (count == 0					      &&
-		!REGION_NOT_EMPTY (tmpRegion)			      &&
-		screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b &&
-		XEqualRegion (w->region, &screen->region))
+	    if (count == 0 &&
+		screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b)
 	    {
-		unredirectWindow (w);
-		fullscreenWindow = w;
+		if (XEqualRegion (w->region, &screen->region) &&
+		    !REGION_NOT_EMPTY (tmpRegion))
+		{
+		    fullscreenWindow = w;
+		}
+		else
+		{
+		    for (i = 0; i < screen->nOutputDev; i++)
+			if (XEqualRegion (w->region,
+					  &screen->outputDev[i].region))
+			    fullscreenWindow = w;
+		}
 	    }
 	}
 
 	count++;
     }
+
+    if (fullscreenWindow)
+	unredirectWindow (fullscreenWindow);
 
     (*screen->paintBackground) (screen, tmpRegion, backgroundMask);
 

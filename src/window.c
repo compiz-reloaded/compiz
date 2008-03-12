@@ -2001,6 +2001,8 @@ addWindow (CompScreen *screen,
     w->closeRequests	    = 0;
     w->lastCloseRequestTime = 0;
 
+    w->overlayWindow = FALSE;
+
     if (screen->windowPrivateLen)
     {
 	privates = malloc (screen->windowPrivateLen * sizeof (CompPrivate));
@@ -4785,11 +4787,12 @@ unredirectWindow (CompWindow *w)
     XCompositeUnredirectWindow (w->screen->display->display, w->id,
 				CompositeRedirectManual);
 
-    w->redirected = FALSE;
+    w->redirected   = FALSE;
+    w->overlayWindow = TRUE;
     w->screen->overlayWindowCount++;
 
     if (w->screen->overlayWindowCount > 0)
-	hideOutputWindow (w->screen);
+	updateOutputWindow (w->screen);
 }
 
 void
@@ -4802,10 +4805,17 @@ redirectWindow (CompWindow *w)
 			      CompositeRedirectManual);
 
     w->redirected = TRUE;
-    w->screen->overlayWindowCount--;
+
+    if (w->overlayWindow)
+    {
+	w->screen->overlayWindowCount--;
+	w->overlayWindow = FALSE;
+    }
 
     if (w->screen->overlayWindowCount < 1)
 	showOutputWindow (w->screen);
+    else
+	updateOutputWindow (w->screen);
 }
 
 void

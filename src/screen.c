@@ -1347,6 +1347,50 @@ hideOutputWindow (CompScreen *s)
 
 }
 
+void
+updateOutputWindow (CompScreen *s)
+{
+
+#ifdef USE_COW
+    if (useCow)
+    {
+	Display       *dpy = s->display->display;
+	XserverRegion region;
+	static Region tmpRegion = NULL;
+	CompWindow    *w;
+
+	if (!tmpRegion)
+	{
+	    tmpRegion = XCreateRegion ();
+	    if (!tmpRegion)
+		return;
+	}
+
+	XSubtractRegion (&s->region, &emptyRegion, tmpRegion);
+
+	for (w = s->reverseWindows; w; w = w->prev)
+	    if (w->overlayWindow)
+	    {
+		XSubtractRegion (tmpRegion, w->region, tmpRegion);
+	    }
+	
+	XShapeCombineRegion (dpy, s->output, ShapeBounding,
+			     0, 0, tmpRegion, ShapeSet);
+
+
+	region = XFixesCreateRegion (dpy, NULL, 0);
+
+	XFixesSetWindowShapeRegion (dpy,
+				    s->output,
+				    ShapeInput,
+				    0, 0, region);
+
+	XFixesDestroyRegion (dpy, region);
+    }
+#endif
+
+}
+
 static void
 makeOutputWindow (CompScreen *s)
 {
