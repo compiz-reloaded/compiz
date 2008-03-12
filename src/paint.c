@@ -569,7 +569,7 @@ drawWindowGeometry (CompWindow *w)
 {
     int     texUnit = w->texUnits;
     int     currentTexUnit = 0;
-    int     stride = (1 + texUnit) * 2;
+    int     stride = (texUnit * w->texCoordSize) + 2;
     GLfloat *vertices = w->vertices + (stride - 2);
 
     stride *= sizeof (GLfloat);
@@ -584,8 +584,8 @@ drawWindowGeometry (CompWindow *w)
 	    glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 	    currentTexUnit = texUnit;
 	}
-	vertices -= 2;
-	glTexCoordPointer (2, GL_FLOAT, stride, vertices);
+	vertices -= w->texCoordSize;
+	glTexCoordPointer (w->texCoordSize, GL_FLOAT, stride, vertices);
     }
 
     glDrawArrays (GL_QUADS, 0, w->vCount);
@@ -744,6 +744,7 @@ addWindowGeometry (CompWindow *w,
 	}
 
 	w->vCount	      = n * 4;
+	w->texCoordSize       = 2;
 	w->drawWindowGeometry = drawWindowGeometry;
     }
 }
