@@ -1097,7 +1097,7 @@ scaleTerminate (CompDisplay     *d,
 		}
 		else if (ss->state != SCALE_STATE_IN)
 		{
-		    w = findWindowAtScreen (s, sd->lastActiveWindow);
+		    w = findWindowAtScreen (s, sd->selectedWindow);
 		    if (w)
 		    {
 			int x, y;
