@@ -1276,7 +1276,20 @@ placeWin (CompWindow *window,
     x = x0;
     y = y0;
 
-    if (!placeMatchPosition (window, &x, &y))
+    if (placeMatchPosition (window, &x, &y))
+    {
+	int output;
+
+	output = outputDeviceForGeometry (window->screen, x, y,
+					  window_width, window_height,
+					  window->serverBorderWidth);
+
+	getWorkareaForOutput (window->screen, output, &work_area);
+
+	work_area.x += x0;
+	work_area.y += y0;
+    }
+    else
     {
 	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
 	case PLACE_MODE_CASCADE:
