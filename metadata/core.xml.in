@@ -48,6 +48,13 @@
 		<min>0</min>
 		<max>10000</max>
 	    </option>
+	    <option name="edge_delay" type="int">
+		<_short>Edge Trigger Delay</_short>
+		<_long>Duration the pointer must rest in a screen edge before an edge action is taken.</_long>
+		<default>0</default>
+		<min>0</min>
+		<max>10000</max>
+	    </option>
 	    <option name="close_window_key" type="key">
 		<_short>Close Window</_short>
 		<_long>Close active window</_long>

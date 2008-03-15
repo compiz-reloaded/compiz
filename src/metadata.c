@@ -895,6 +895,7 @@ initFloatRestriction (CompMetadata	    *metadata,
 
 static void
 initActionState (CompMetadata    *metadata,
+		 CompOptionType  type,
 		 CompActionState *state,
 		 const char      *path)
 {
@@ -921,6 +922,20 @@ initActionState (CompMetadata    *metadata,
 	    *state = 0;
 
 	free (grab);
+    }
+
+    if (type == CompOptionTypeEdge)
+    {
+	char *noEdgeDelay;
+
+	noEdgeDelay = stringFromMetadataPathElement (metadata, path, "nodelay");
+	if (noEdgeDelay)
+	{
+	    if (strcmp (noEdgeDelay, "true") == 0)
+		*state |= CompActionStateNoEdgeDelay;
+
+	    free (noEdgeDelay);
+	}
     }
 
     if (!initXPathFromMetadataPathElement (&xPath, metadata, BAD_CAST path,
@@ -1006,23 +1021,23 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	initColorValue (&option->value, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeAction:
-	initActionState (metadata, &state, (char *) path);
+	initActionState (metadata, option->type, &state, (char *) path);
 	initActionValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeKey:
-	initActionState (metadata, &state, (char *) path);
+	initActionState (metadata, option->type, &state, (char *) path);
 	initKeyValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeButton:
-	initActionState (metadata, &state, (char *) path);
+	initActionState (metadata, option->type, &state, (char *) path);
 	initButtonValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeEdge:
-	initActionState (metadata, &state, (char *) path);
+	initActionState (metadata, option->type, &state, (char *) path);
 	initEdgeValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeBell:
-	initActionState (metadata, &state, (char *) path);
+	initActionState (metadata, option->type, &state, (char *) path);
 	initBellValue (d, &option->value, state, defaultDoc, defaultNode);
 	break;
     case CompOptionTypeMatch:
@@ -1054,7 +1069,8 @@ initOptionFromMetadataPath (CompDisplay   *d,
 	case CompOptionTypeButton:
 	case CompOptionTypeEdge:
 	case CompOptionTypeBell:
-	    initActionState (metadata, &state, (char *) path);
+	    initActionState (metadata, option->value.list.type,
+			     &state, (char *) path);
 	    break;
 	case CompOptionTypeMatch:
 	    helper = boolFromMetadataPathElement (metadata, (char *) path,

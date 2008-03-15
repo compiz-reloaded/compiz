@@ -604,6 +604,7 @@ isEdgeAction (CompOption      *option,
 static Bool
 isEdgeEnterAction (CompOption      *option,
 		   CompActionState state,
+		   CompActionState ignoreState,
 		   unsigned int    edge,
 		   CompAction      **action)
 {
@@ -615,6 +616,18 @@ isEdgeEnterAction (CompOption      *option,
 
     if (!option->value.action.initiate)
 	return FALSE;
+
+    if (ignoreState)
+    {
+	if ((option->value.action.state & CompActionStateNoEdgeDelay) !=
+	    (ignoreState & CompActionStateNoEdgeDelay))
+	{
+	    /* ignore edge actions which shouldn't be delayed when invoking
+	       undelayed edges */
+	    return FALSE;
+	}
+    }
+
 
     *action = &option->value.action;
 
@@ -643,6 +656,7 @@ triggerEdgeEnterBindings (CompDisplay	  *d,
 			  CompOption	  *option,
 			  int		  nOption,
 			  CompActionState state,
+			  CompActionState ignoreState,
 			  unsigned int	  edge,
 			  CompOption	  *argument,
 			  int		  nArgument)
@@ -651,7 +665,7 @@ triggerEdgeEnterBindings (CompDisplay	  *d,
 
     while (nOption--)
     {
-	if (isEdgeEnterAction (option, state, edge, &action))
+	if (isEdgeEnterAction (option, state, ignoreState, edge, &action))
 	{
 	    if ((*action->initiate) (d, action, state, argument, nArgument))
 		return TRUE;
@@ -684,6 +698,51 @@ triggerEdgeLeaveBindings (CompDisplay	  *d,
 
 	option++;
     }
+
+    return FALSE;
+}
+
+static Bool
+triggerAllEdgeEnterBindings (CompDisplay     *d,
+			     CompActionState state,
+			     CompActionState ignoreState,
+			     unsigned int    edge,
+			     CompOption	     *argument,
+			     int	     nArgument)
+{
+    CompOption *option;
+    int        nOption;
+    CompPlugin *p;
+
+    for (p = getPlugins (); p; p = p->next)
+    {
+	if (p->vTable->getObjectOptions)
+	{
+	    option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
+	    if (triggerEdgeEnterBindings (d,
+					  option, nOption,
+					  state, ignoreState, edge,
+					  argument, nArgument))
+	    {
+		return TRUE;
+	    }
+	}
+    }
+    return FALSE;
+}
+
+static Bool
+delayedEdgeTimeout (void *closure)
+{
+    CompDelayedEdgeSettings *settings = (CompDelayedEdgeSettings *) closure;
+
+    triggerAllEdgeEnterBindings (settings->d,
+				 settings->state,
+				 ~CompActionStateNoEdgeDelay,
+				 settings->edge,
+				 settings->option, 7);
+
+    free (settings);
 
     return FALSE;
 }
@@ -833,6 +892,16 @@ handleActionEvent (CompDisplay *d,
 	    if (!s)
 		return FALSE;
 
+	    if (d->edgeDelayHandle)
+	    {
+		void *closure;
+
+		closure = compRemoveTimeout (d->edgeDelayHandle);
+		if (closure)
+		    free (closure);
+		d->edgeDelayHandle = 0;
+	    }
+
 	    if (edgeWindow && edgeWindow != event->xcrossing.window)
 	    {
 		state = CompActionStateTermEdge;
@@ -885,9 +954,24 @@ handleActionEvent (CompDisplay *d,
 
 	    if (edge)
 	    {
+		int                     delay;
+		CompDelayedEdgeSettings *delayedSettings = NULL;
+
+		delay = d->opt[COMP_DISPLAY_OPTION_EDGE_DELAY].value.i;
 		state = CompActionStateInitEdge;
 
 		edgeWindow = event->xcrossing.window;
+
+		if (delay > 0)
+		{
+		    delayedSettings = malloc (sizeof (CompDelayedEdgeSettings));
+		    if (delayedSettings)
+		    {
+			delayedSettings->d     = d;
+			delayedSettings->edge  = edge;
+			delayedSettings->state = state;
+		    }
+		}
 
 		o[0].value.i = event->xcrossing.window;
 		o[1].value.i = d->activeWindow;
@@ -900,14 +984,25 @@ handleActionEvent (CompDisplay *d,
 		o[6].name    = "time";
 		o[6].value.i = event->xcrossing.time;
 
-		for (p = getPlugins (); p; p = p->next)
+		if (delayedSettings)
 		{
-		    if (!p->vTable->getObjectOptions)
-			continue;
+		    CompActionState ignoreState;
 
-		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
-		    if (triggerEdgeEnterBindings (d, option, nOption, state,
-						  edge, o, 7))
+		    for (i = 0; i < 7; i++)
+			delayedSettings->option[i] = o[i];
+
+		    d->edgeDelayHandle = compAddTimeout (delay,
+							 delayedEdgeTimeout,
+							 delayedSettings);
+
+		    ignoreState = CompActionStateNoEdgeDelay;
+		    if (triggerAllEdgeEnterBindings (d, state, ignoreState,
+						     edge, o, 7))
+			return TRUE;
+		}
+		else
+		{
+		    if (triggerAllEdgeEnterBindings (d, state, 0, edge, o, 7))
 			return TRUE;
 		}
 	    }
@@ -1014,7 +1109,7 @@ handleActionEvent (CompDisplay *d,
 
 		    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
 		    if (triggerEdgeEnterBindings (d, option, nOption, state,
-						  edge, o, 6))
+						  0, edge, o, 6))
 			return TRUE;
 		}
 	    }

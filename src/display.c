@@ -753,7 +753,8 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "ignore_hints_when_maximized", "bool", 0, 0, 0 },
     { "command_terminal", "string", 0, 0, 0 },
     { "run_command_terminal_key", "key", 0, runCommandTerminal, 0 },
-    { "ping_delay", "int", "<min>1000</min>", 0, 0 }
+    { "ping_delay", "int", "<min>1000</min>", 0, 0 },
+    { "edge_delay", "int", "<min>0</min>", 0, 0 }
 };
 
 CompOption *
@@ -1994,6 +1995,8 @@ addDisplay (const char *name)
 
     d->screenPrivateIndices = 0;
     d->screenPrivateLen     = 0;
+
+    d->edgeDelayHandle = 0;
 
     d->logMessage = logMessage;
 

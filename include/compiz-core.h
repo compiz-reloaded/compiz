@@ -399,7 +399,8 @@ typedef enum {
     CompActionStateTermEdgeDnd = 1 <<  8,
     CompActionStateCommit      = 1 <<  9,
     CompActionStateCancel      = 1 << 10,
-    CompActionStateAutoGrab    = 1 << 11
+    CompActionStateAutoGrab    = 1 << 11,
+    CompActionStateNoEdgeDelay = 1 << 12
 } CompActionState;
 
 typedef enum {
@@ -797,7 +798,8 @@ removeFileWatch (CompFileWatchHandle handle);
 #define COMP_DISPLAY_OPTION_TERMINAL			     64
 #define COMP_DISPLAY_OPTION_RUN_TERMINAL_KEY		     65
 #define COMP_DISPLAY_OPTION_PING_DELAY			     66
-#define COMP_DISPLAY_OPTION_NUM				     67
+#define COMP_DISPLAY_OPTION_EDGE_DELAY                       67
+#define COMP_DISPLAY_OPTION_NUM				     68
 
 typedef void (*HandleEventProc) (CompDisplay *display,
 				 XEvent	     *event);
@@ -1072,6 +1074,8 @@ struct _CompDisplay {
     CompTimeoutHandle autoRaiseHandle;
     Window	      autoRaiseWindow;
 
+    CompTimeoutHandle edgeDelayHandle;
+
     CompOptionValue plugin;
     Bool	    dirtyPluginList;
 
@@ -1252,6 +1256,16 @@ findCursorAtDisplay (CompDisplay *display);
 
 
 /* event.c */
+
+typedef struct _CompDelayedEdgeSettings
+{
+    CompDisplay *d;
+
+    unsigned int edge;
+    unsigned int state;
+
+    CompOption option[7];
+} CompDelayedEdgeSettings;
 
 void
 handleEvent (CompDisplay *display,
