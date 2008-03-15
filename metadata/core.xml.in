@@ -425,6 +425,29 @@
 		    <_name>Prefer smaller output</_name>
 		</desc>
 	    </option>
+	    <option name="focus_prevention_level" type="int">
+		<_short>Focus Prevention Level</_short>
+		<_long>Level of focus stealing prevention</_long>
+		<min>0</min>
+		<max>3</max>
+		<default>1</default>
+		<desc>
+		    <value>0</value>
+		    <_name>Off</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Low</_name>
+		</desc>
+		<desc>
+		    <value>2</value>
+		    <_name>High</_name>
+		</desc>
+		<desc>
+		    <value>3</value>
+		    <_name>Very High</_name>
+		</desc>
+	    </option>
 	    <option name="focus_prevention_match" type="match">
 		<_short>Focus Prevention Windows</_short>
 		<_long>Focus prevention windows</_long>

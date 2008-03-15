@@ -4697,14 +4697,17 @@ static Bool
 isWindowFocusAllowed (CompWindow *w,
 		      Time       timestamp)
 {
-    CompDisplay *d = w->screen->display;
-    CompScreen  *s = w->screen;
-    CompWindow  *active;
-    Time	wUserTime, aUserTime;
-    CompMatch   *match;
-    int         vx, vy;
+    CompDisplay  *d = w->screen->display;
+    CompScreen   *s = w->screen;
+    CompWindow   *active;
+    Time	 wUserTime, aUserTime;
+    Bool         gotTimestamp = FALSE;
+    CompMatch    *match;
+    int          level, vx, vy;
 
-    if (w->id == d->activeWindow)
+    level = s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_LEVEL].value.i;
+
+    if (level == FOCUS_PREVENTION_LEVEL_NONE)
 	return TRUE;
 
     /* not in current viewport */
@@ -4717,21 +4720,43 @@ isWindowFocusAllowed (CompWindow *w,
 	/* the caller passed a timestamp, so use that
 	   instead of the window's user time */
 	wUserTime = timestamp;
+	gotTimestamp = TRUE;
     }
     else
     {
-	if (!getWindowUserTime (w, &wUserTime))
+	if (getWindowUserTime (w, &wUserTime))
 	{
-	    /* no user time or initial timestamp */
-	    if (!w->initialTimestampSet)
-		return TRUE;
-
-	    wUserTime = w->initialTimestamp;
+	    gotTimestamp = TRUE;
 	}
+	else if (w->initialTimestampSet)
+	{
+	    wUserTime = w->initialTimestamp;
+	    gotTimestamp = TRUE;
+	}
+    }
 
+    if (gotTimestamp && !wUserTime)
+    {
 	/* window explicitly requested no focus */
-	if (!wUserTime)
+	return FALSE;
+    }
+
+    /* allow focus for excluded windows */
+    match = &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match;
+    if (!matchEval (match, w))
+	return TRUE;
+
+    if (level == FOCUS_PREVENTION_LEVEL_VERYHIGH)
+	return FALSE;
+
+    if (!gotTimestamp)
+    {
+	/* unsure as we have nothing to compare - allow focus in low level,
+	   don't allow in high level */
+	if (level == FOCUS_PREVENTION_LEVEL_HIGH)
 	    return FALSE;
+
+	return TRUE;
     }
 
     /* can't get user time for active window */
@@ -4739,14 +4764,8 @@ isWindowFocusAllowed (CompWindow *w,
     if (!active || !getWindowUserTime (active, &aUserTime))
 	return TRUE;
 
-    match = &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match;
-
-    /* focus prevention */
-    if (matchEval (match, w))
-    {
-	if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
-	    return FALSE;
-    }
+    if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
+	return FALSE;
 
     return TRUE;
 }
@@ -4757,6 +4776,9 @@ allowWindowFocus (CompWindow   *w,
 		  Time         timestamp)
 {
     Bool retval;
+
+    if (w->id == w->screen->display->activeWindow)
+	return TRUE;
 
     /* do not focus windows of these types */
     if (w->type & noFocusMask)

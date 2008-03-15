@@ -641,6 +641,8 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "outputs", "list", "<type>string</type>", 0, 0 },
     { "overlapping_outputs", "int",
       RESTOSTRING (0, OUTPUT_OVERLAP_MODE_LAST), 0, 0 },
+    { "focus_prevention_level", "int",
+      RESTOSTRING (0, FOCUS_PREVENTION_LEVEL_LAST), 0, 0 },
     { "focus_prevention_match", "match", 0, 0, 0 },
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
     { "opacity_values", "list", "<type>int</type>", 0, 0 }
