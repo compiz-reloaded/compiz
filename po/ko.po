@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:25+0530\n"
+"POT-Creation-Date: 2008-03-15 20:19+0530\n"
 "PO-Revision-Date: 2008-01-31 12:14+0100\n"
 "Last-Translator: Jeong Seungwon <jeongseungwon@hanmail.net>\n"
 "Language-Team: Korean <i18n@suse.de>\n"
@@ -89,6 +89,70 @@ msgstr "메타시티 테마를 사용합니다."
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "창 장식을 그릴 때 메타시티 테마를 사용합니다."
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr "창 닫기"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "창 최대화 취소"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "창 최대화"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "창 최소화"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "창 메뉴"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "스케일"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -407,10 +471,6 @@ msgstr "클릭하면 초점을 이동"
 msgid "Click on window moves input focus to it"
 msgstr "창을 클릭하면 초점을 변경함"
 
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr "창 닫기"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "활성화된 창을 닫습니다."
@@ -619,10 +679,6 @@ msgstr "창을 내리기"
 msgid "Lower window beneath other windows"
 msgstr "다른 창들 밑으로 창을 내림"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "창 최대화"
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "가로로 창 최대화"
@@ -642,10 +698,6 @@ msgstr "활성화된 창 가로로 최대화"
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "활성화된 창 세로로 최대화"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "창 최소화"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -692,218 +744,231 @@ msgid "Outputs"
 msgstr "출력"
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr "Ping 지연"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 msgid "Raise On Click"
 msgstr "클릭으로 띄우기"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 msgid "Raise Window"
 msgstr "창 띄우기"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "선택된 창을 일정 시간 후에 띄우기"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "다른 창 위에 창을 띄우기"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "클릭했을때 창 띄우기"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "갱신 주기"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr "프로그램 실행창"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "명령 0 실행"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "명령 1 실행"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "명령 10 실행"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "명령 11 실행"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "명령 2 실행"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "명령 3 실행"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "명령 4 실행"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "명령 5 실행"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "명령 6 실행"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "명령 7 실행"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "명령 8 실행"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "명령 9 실행"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "가로 화면 크기 배수"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "세로 화면 크기 배수"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "스크린샷 명령행"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "바탕 화면 보기"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "주 메뉴 보기"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "프로그램 실행창을 보임"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "주 메뉴 보기"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Slow Animations"
 msgstr "느린 애니메이션"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "똑똑하게"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "VBlank에 동기화"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "스크린샷 찍기"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "창 스크린샷 찍기"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "터미널 명령행"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "텍스쳐 필터"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "텍스쳐 필터링"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "화면이 다시 그려지는 비율(횟수/초)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "창 최대화"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "가로로 창 최대화"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "세로로 창 최대화"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "창 말아올리기"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "활성 창을 최대화 하기"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "가로로 활성 창 최대화"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "세로로 활성 창 최대화"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "활성 창 말아올리기"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "느린 애니메이션 사용"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "창 최대화 취소"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "활성 창 최대화 취소"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr "전체 화면 창의 초점 변경 방지"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "화면이 전환될 때 빛이 퍼지는 사용"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "세로 가상 크기"
 
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "창 메뉴"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "창 메뉴 마우스 버튼"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "창 메뉴 단축키"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "창 스크린샷 명령행"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "기본적으로 투명한 창들"
 

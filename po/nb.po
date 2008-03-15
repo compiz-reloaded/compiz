@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:26+0530\n"
+"POT-Creation-Date: 2008-03-15 20:19+0530\n"
 "PO-Revision-Date: 2008-01-29 23:18+0100\n"
 "Last-Translator: Ketil Wendelbo Aanensen <ketil.w.aanensen@gmail.com>\n"
 "Language-Team: Norwegian Bokmaal <ketil.w.aanensen@gmail.com>\n"
@@ -93,6 +93,72 @@ msgstr "Bruk Metacity-tema"
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Bruk Metacity-tema når vindusdekorasjoner tegnes"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr "Lukk vindu"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "Avmaksimer vindu"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "Maksimer vindu"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "Minimer vindu"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "Vindusmeny"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+msgid "Shade"
+msgstr "Skyggelegg"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr "Hold over"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr "Klistre"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr "Av-skyggelegg"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr "Ikke hold over"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr "Avklistre"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr "Vinduet \"%s\" svarer ikke."
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+"Å tvinge denne applikasjonen til å avslutte vil gjøre at du mister alle ikke-"
+"lagrede endringer."
+
+# How do we decide which letter is used for this shortcut?
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr "_Tving til å avslutte"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -436,10 +502,6 @@ msgstr "Klikk for fokus"
 msgid "Click on window moves input focus to it"
 msgstr "Klikk på vindu flytter inndatafokus til det"
 
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr "Lukk vindu"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "Lukk aktivt vindu"
@@ -661,10 +723,6 @@ msgstr "Senk vindu"
 msgid "Lower window beneath other windows"
 msgstr "Senk vindu under andre vinduer"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "Maksimer vindu"
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "Maksimer vindu horisontalt"
@@ -684,10 +742,6 @@ msgstr "Maksimer aktivt vindu horisontalt"
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "Maksimer aktivt vindu vertikalt"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "Minimer vindu"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -735,218 +789,231 @@ msgid "Outputs"
 msgstr "Utdata"
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr "Ping-forsinkelse"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 msgid "Raise On Click"
 msgstr "Hev ved klikk"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 msgid "Raise Window"
 msgstr "Hev vindu"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "Hev valgt vindu etter intervall"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "Hev vindu over andre vinduer"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "Hev vinduer når de klikkes"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "Oppfriskingsrate"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr "Kjør-dialog"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "Kjør kommando 0"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "Kjør kommando 1"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "Kjør kommando 10"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "Kjør kommando 11"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "Kjør kommando 2"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "Kjør kommando 3"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "Kjør kommando 4"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "Kjør kommando 5"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "Kjør kommando 6"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "Kjør kommando 7"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "Kjør kommando 8"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "Kjør kommando 9"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplikator for skjermstørrelse for horisontal virtuell størrelse"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplikator for skjermstørrelse for vertikal virtuell størrelse"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "Kommandolinje for skjermbilde"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "Vis hovedmeny"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "Vis \"Kjør program\"-dialog"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "Vis hovedmenyen"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Slow Animations"
 msgstr "Trege animasjoner"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "Smart"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "Synkroniser til VBlank"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "Ta et skjermbilde"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "Ta et skjermbilde av et vindu"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "Kommandolinje for terminal"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "Teksturfilter"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "Teksturfiltrering"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Hastigheten for omtegning av skjermen (ganger/sekund)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "Skru av/på maksimert vindu"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Skru av/på horisontalt maksimert vindu"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "Skru av/på vertikalt maksimert vindu"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "Skru av/på rull opp/ ned vindu"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "Skru av/på maksimert aktivt vindu"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "Skru av/på horisontalt maksimert aktivt vindu"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "Skru av/på vertikalt maksimert aktivt vindu"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "Skru av/på rull opp/ned vindu"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "Skru av/på bruk av trege animasjoner"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "Avmaksimer vindu"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "Avmaksimer aktivt vindu"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr "Ikke-videresend vinduer i fullskjerm"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "Bruk diffust lys når skjermen omdannes"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "Vertikal virtuell størrelse"
 
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "Vindusmeny"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "Snarvei for vindusmeny"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "Hurtigtast for vindusmeny"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "Kommandolinje for skjermbilde av vindu"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "Vinduer som skal være gjennomsiktige som standard"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:24+0530\n"
+"POT-Creation-Date: 2008-03-15 20:18+0530\n"
 "PO-Revision-Date: 2008-02-16 08:49+0100\n"
 "Last-Translator: Ander Elortondo <ander.elor@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
@@ -93,6 +93,70 @@ msgstr "Erabili metacity gaia"
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Erabili metacity gaia leiho dekorazioa marraztean"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr "Itxi leihoa"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "Leheneratu leihoa"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "Maximizatu leihoa"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "Leihoa Minimizatu"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "Leiho Menua"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "Eskala"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -410,10 +474,6 @@ msgstr "Klik enfokatzeko"
 msgid "Click on window moves input focus to it"
 msgstr "Leihoan klik egitean mugi sarrera fokua berari"
 
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr "Itxi leihoa"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "Itxi leiho aktiboa"
@@ -635,10 +695,6 @@ msgstr ""
 msgid "Lower window beneath other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "Maximizatu leihoa"
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "Horizontalki maximizatu leihoa"
@@ -658,10 +714,6 @@ msgstr "Leiho aktiboa horizontalki maximizatu"
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "Leiho aktiboa bertikalki maximizatu"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "Leihoa Minimizatu"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -708,218 +760,231 @@ msgid "Outputs"
 msgstr "Irteerak"
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr "Ping atzerapena"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 msgid "Raise On Click"
 msgstr "Goratu klikatzean"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 msgid "Raise Window"
 msgstr "Goratu leihoa"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "Goratu aukeratutako leihoa denbora tarte baten ondoren"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "Goratu leihoa beste leihoen gainetik"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "Goratu leihoak klikatzean"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "Freskatze-tasa"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr "Exekuzio elkarrizketa"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "Exekutatu 0 komandoa"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "Exekutatu 1 komandoa"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "Exekutatu 10 komandoa"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "Exekutatu 11 komandoa"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "Exekutatu 2 komandoa"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "Exekutatu 3 komandoa"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "Exekutatu 4 komandoa"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "Exekutatu 5 komandoa"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "Exekutatu 6 komandoa"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "Exekutatu 7 komandoa"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "Exekutatu 8 komandoa"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "Exekutatu 9 komandoa"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Pantaila tamaina biderkatzailea tamaina horizontal birtualerako"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Pantaila tamaina biderkatzailea tamaina bertikal birtualerako"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "Pantaila-argazkia komando lerroa"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "Ikus mahaigaina"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "Ikus Menu Nagusia"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "Ikus aplikazio exekuzio elkarrizketa"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "Ikus menu nagusia"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Slow Animations"
 msgstr "Animazioak motel"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "Azkarra"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "VBlank-era sinkronizatu"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "Egin pantaila-argazkia"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "Egin pantaila-argazkia leiho batena"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "Terminal komando lerroa"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "Testura iragazkia"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "Testura iragazten"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Pantaila marrazteko maiztasuna (aldiz/segunduko) "
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "Aldatu leihoa maximizatua"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Aldatu leihoa maximizatua horizontalki"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "Aldatu leihoa maximizatua bertikalki"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "Aldatu leihoa itzalduta"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "Aldatu leiho aktiboa maximizatua"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "Aldatu leiho aktiboa maximizatua horizontalki"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "Aldatu leiho aktiboa maximizatua bertikalki"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "Aldatu leiho aktiboa itzaldua"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "Aldatu animazio motelen erabilpena"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "Leheneratu leihoa"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "Leheneratu leiho aktiboa"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "Erabili argi barreiatua pantaila transformatzean"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "Tamaina Birtual Bertikala"
 
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "Leiho Menua"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "Leiho menu tekla konbinazioa"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "Leiho menu laster-tekla"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "Leiho pantaila -argazki komando lerroa"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "Lehenetsita transluzidoa izan behar duten leihoak"
 

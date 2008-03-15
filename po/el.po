@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:24+0530\n"
-"PO-Revision-Date: 2008-02-18 10:25+0100\n"
-"Last-Translator: Jim Dusis <jimdusis@yahoo.gr>\n"
+"POT-Creation-Date: 2008-03-15 20:18+0530\n"
+"PO-Revision-Date: 2008-02-29 15:44+0100\n"
+"Last-Translator: Koufakis Emmanouel <koufakis@csd.uoc.gr>\n"
 "Language-Team: Greek <jimdusis@yahoo.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,6 +96,70 @@ msgstr "Χρήση θέματος του metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 "Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr "Κλείσιμο Παραθύρου"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "Απομεγιστοποίηση Παραθύρου"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "Μεγιστοποίηση Παραθύρου"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "Ελαχιστοποίηση Παραθύρου"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "Μενού Παραθύρου"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "Κλιμάκωση"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -440,10 +504,6 @@ msgstr "Κλικ Για Εστίαση"
 msgid "Click on window moves input focus to it"
 msgstr "Κλικ σε παράθυρο μεταφέρει την εστίαση εισόδου σε αυτό"
 
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr "Κλείσιμο Παραθύρου"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "Κλείσιμο ενεργού παραθύρου"
@@ -668,10 +728,6 @@ msgstr "Κατέβασμα Παραθύρου"
 msgid "Lower window beneath other windows"
 msgstr "Κατέβασμα παραθύρου κάτω απ τα άλλα παράθυρα"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "Μεγιστοποίηση Παραθύρου"
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "Μεγιστοποίηση Παραθύρου Οριζόντια"
@@ -691,10 +747,6 @@ msgstr "Μεγιστοποίηση ενεργού παραθύρου οριζό�
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "Μεγιστοποίηση ενεργού παραθύρου κάθετα"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "Ελαχιστοποίηση Παραθύρου"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -744,218 +796,231 @@ msgid "Outputs"
 msgstr "Αποτελέσματα-Εξοδοι"
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr "Καθυστέρηση Ping"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 msgid "Raise On Click"
 msgstr "Ανύψωση Με Κλικ"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 msgid "Raise Window"
 msgstr "Ανύψωση Παραθύρου"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "Ανύψωση επιλεγμένων παραθύρων μετα απ το διάστημα"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "Ανύψωση παραθύρου πάνω απ τα άλλα παράθυρα"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "Ανύψωση παραθύρων όταν κλικαριστούν"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "Ρυθμός Ανανέωσης"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr "Τρέξιμο Διαλόγου"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "Τρέξιμο εντολής 0"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "Τρέξιμο εντολής 1"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "Τρέξιμο εντολής 10"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "Τρέξιμο εντολής 11"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "Τρέξιμο εντολής 2"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "Τρέξιμο εντολής 3"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "Τρέξιμο εντολής 4"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "Τρέξιμο εντολής 5"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "Τρέξιμο εντολής 6"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "Τρέξιμο εντολής 7"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "Τρέξιμο εντολής 8"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "Τρέξιμο εντολής 9"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Πολλαπλασιαστής μεγέθους οθόνης για οριζόντιο εικονικό μέγεθος"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Πολλαπλασιαστής μεγέθους οθόνης για κάθετο εικονικό μέγεθος"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "Γραμμή εντολών αρπαγής οθόνης"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "Εμφάνιση Επιφάνειας Εργασίας"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "Εμφάνιση Κύριου Μενού"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "Εμφάνιση διαλόγου Τρεξίματος Εφαρμογής"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "Εμφάνιση του κύριου μενού"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Slow Animations"
 msgstr "Αργές Γραφικές Απεικονίσεις"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "Έξυπνο"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "Συγχρονισμός Στην Καθετη Ανανέωση"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "Τράβα μια αρπαγή οθόνης"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "Τράβα μια αρπαγή οθόνης ενός παραθύρου"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "Γραμμή εντολών τερματικού"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "Φίλτρο Υφών"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "Φιλτράρισμα υφών"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Ο ρυθμός κατα τον οποίο η οθόνη επανασχεδιάζεται (φορές/δευτερόλεπτο)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Οριζόντια"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Κάθετα"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "Εκκίνηση Σκίασης Παραθύρου"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου οριζόντια"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου κάθετα"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "Εκκίνηση σκίασης ενεργού παραθύρου"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "Εκκίνηση της χρήσης των αργών γραφικών απεικονίσεων"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "Απομεγιστοποίηση Παραθύρου"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "Απομεγιστοποίηση ενεργού παραθύρου"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr "Μη-επανακατεύθυνση Παραθύρων Πλήρους Οθόνης"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "Χρήση διάχυτου φωτός όταν η οθόνη μεταμορφώνεται"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "Κάθετο Εικονικό Μέγεθος"
 
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "Μενού Παραθύρου"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "Συνδυασμός κουμπιών μενού παραθύρου"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "Συνδυασμός πλήκτρων μενού παραθύρου"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "Γραμμή εντολών αρπαγής οθόνης παραθύρου"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "Παράθυρα που πρέπει να είναι διάφανα εξ' ορισμού"
 
@@ -1278,8 +1343,8 @@ msgstr "Εφέ ξεθωριάσματος στο μπίπ συστήματος"
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
-"Ξεθώριασμα μέσα παραθύρων όταν χαρτογραφούνται και ξεθώριασμα έξω όταν τα "
-"παράθυρα αποχαρτογραφούνται"
+"Σταδιακή εμφάνιση παραθύρων όταν χαρτογραφούνται και σταδιακή εξαφάνιση όταν "
+"τα παράθυρα αποχαρτογραφούνται"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Fade windows"

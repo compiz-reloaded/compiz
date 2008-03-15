@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:26+0530\n"
+"POT-Creation-Date: 2008-03-15 20:19+0530\n"
 "PO-Revision-Date: 2007-12-15 09:26+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@users.sf.net>\n"
 "Language-Team: American English <punjabi-users@llist.sf.net>\n"
@@ -94,6 +94,73 @@ msgstr "ਮੇਟਾਸਿਟੀ ਥੀਮ ਵਰਤੋਂ"
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "ਵਿੰਡੋ ਸਜਾਵਟ ਡਰਾਇੰਗ ਦੌਰਾਨ ਮੇਟਾਸਿਟੀ ਥੀਮ ਵਰਤੋਂ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+#, fuzzy
+msgid "Close Window"
+msgstr "Win&dows ਹਟਾਓ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "ਵਿੰਡੋ ਅਧਿਕਤਮ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+#, fuzzy
+msgid "Minimize Window"
+msgstr "Window&s ਸਮੇਟੋ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+#, fuzzy
+msgid "Window Menu"
+msgstr "ਝਰੋਖਾ ਪਰਬੰਧਕ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "ਸੰਭਾਲੋ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
@@ -457,11 +524,6 @@ msgstr "ਫੋਕਸ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 msgid "Click on window moves input focus to it"
 msgstr "ਵਿੰਡੋ ਲਈ ਇੰਪੁੱਟ ਫੋਕਸ ਲੈਣ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../metadata/core.xml.in.h:24
-#, fuzzy
-msgid "Close Window"
-msgstr "Win&dows ਹਟਾਓ"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
@@ -691,10 +753,6 @@ msgstr "Windows"
 msgid "Lower window beneath other windows"
 msgstr "ਵਿੰਡੋ ਨੂੰ ਹੋਰ ਵਿੰਡੋ ਦੇ ਹੇਠਾਂ ਭੇਜੋ"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "ਵਿੰਡੋ ਅਧਿਕਤਮ"
-
 #: ../metadata/core.xml.in.h:78
 #, fuzzy
 msgid "Maximize Window Horizontally"
@@ -716,11 +774,6 @@ msgstr "ਵੱਧੋ-ਵੱਧ ਐਕਟਿਵ ਵਿੰਡੋ ਹਰੀਜ਼�
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "ਵੱਧੋ-ਵੱਧ ਐਕਟਿਵ ਵਿੰਡੋ ਵਰਟੀਕਲ"
-
-#: ../metadata/core.xml.in.h:83
-#, fuzzy
-msgid "Minimize Window"
-msgstr "Window&s ਸਮੇਟੋ"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -771,245 +824,257 @@ msgid "Outputs"
 msgstr "ਆਉਟਪੁੱਟ"
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 #, fuzzy
 msgid "Ping Delay"
 msgstr "ਵਕਫਾ"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 #, fuzzy
 msgid "Raise On Click"
 msgstr "ਰੇਡੀਓ ਘੜੀ(&R)"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 #, fuzzy
 msgid "Raise Window"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "ਚੁਣੇ ਵਿੰਡੋ ਅੰਤਰਾਲ ਬਾਅਦ ਉਭਾਰੋ"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "ਵਿੰਡੋ ਨੂੰ ਹੋਰ ਵਿੰਡੋਜ਼ ਉੱਤੇ ਉਭਾਰੋ"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "ਵਿੰਡੋ ਉਭਾਰੋ, ਜਦੋਂ ਕਲਿੱਕ ਕੀਤਾ ਜਾਵੇ"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 #, fuzzy
 msgid "Refresh Rate"
 msgstr "ਤਾਜ਼ਾ"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 #, fuzzy
 msgid "Run Dialog"
 msgstr "ਟੋਨ ਡਾਇਲ(&T)"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 #, fuzzy
 msgid "Run command 0"
 msgstr "ਕਮਾਂਡ '%1'"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 #, fuzzy
 msgid "Run command 1"
 msgstr "ਕਮਾਂਡ '%1'"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 #, fuzzy
 msgid "Run command 10"
 msgstr "ਕਮਾਂਡ '%1'"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 #, fuzzy
 msgid "Run command 11"
 msgstr "ਕਮਾਂਡ '%1'"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 #, fuzzy
 msgid "Run command 2"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 #, fuzzy
 msgid "Run command 3"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 #, fuzzy
 msgid "Run command 4"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 #, fuzzy
 msgid "Run command 5"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 #, fuzzy
 msgid "Run command 6"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 #, fuzzy
 msgid "Run command 7"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 #, fuzzy
 msgid "Run command 8"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 #, fuzzy
 msgid "Run command 9"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "ਹਰੀਜੱਟਲ ਵੁਰਚੁਅਲ ਸਾਈਜ਼ ਲਈ ਸਕਰੀਨ ਸਾਈਜ਼ ਮਲਟੀਪਲਾਇਰ"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "ਵਰਟੀਕਲ ਵੁਰਚੁਅਲ ਸਾਈਜ਼ ਲਈ ਸਕਰੀਨ ਸਾਈਜ਼ ਮਲਟੀਪਲਾਇਰ"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 #, fuzzy
 msgid "Show Desktop"
 msgstr "ਵੇਹੜਾ"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 #, fuzzy
 msgid "Show Main Menu"
 msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਓ ਡਾਈਲਾਗ ਵੇਖੋ"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 #, fuzzy
 msgid "Show the main menu"
 msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 #, fuzzy
 msgid "Slow Animations"
 msgstr "ਸਾਰੇ ਭਾਗ ਵਿਖਾਓ"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "ਸਮਾਰਟ"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "VBlank ਨਾਲ ਸੈਕਰੋਨਾਈਜ਼"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "ਇੱਕ ਵਿੰਡੋ ਦਾ ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 #, fuzzy
 msgid "Terminal command line"
 msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 #, fuzzy
 msgid "Texture Filter"
 msgstr "ਫਿਲਟਰ ਸੈਟ(&S)"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 #, fuzzy
 msgid "Texture filtering"
 msgstr "ਫਿਲਟਰ ਸੈਟ(&S)"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "ਰੇਟ, ਜਿਸ ਮੁਤਾਬਕ ਸਕਰੀਨ ਨੂੰ ਰੀ-ਡਰਾਅ ਕੀਤਾ ਜਾਵੇ (ਟਾਈਮ/ਸਕਿੰਟ)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਹਰੀਜ਼ਟਲ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਵਰਟੀਕਲ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "ਵਿੰਡੋ ਸ਼ੇਡ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਹਰੀਜੱਟਲ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਵਰਟੀਕਲ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "ਸਰਗਰਮ ਵਿੰਡੋ ਸ਼ੇਡ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "ਹੌਲੀ ਐਨੀਮੇਸ਼ਨ ਲਈ ਟਾਗਲ ਵਰਤੋਂ"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr "ਪੂਰੀ-ਸਕਰੀਨ ਵਿੰਡੋ ਗ਼ੈਰ-ਡਿਰੈਕਸ਼ਨ"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "ਜਦੋਂ ਸਕਰੀਨ ਟਰਾਂਸਫਰਮ ਕੀਤੀ ਜਾਵੇ ਤਾਂ ਹਲਕੀ ਲਾਈਟ ਵਰਤੋਂ"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "ਫ਼ਰਜ਼ੀ ਜੰਤਰ"
 
-#: ../metadata/core.xml.in.h:144
-#, fuzzy
-msgid "Window Menu"
-msgstr "ਝਰੋਖਾ ਪਰਬੰਧਕ"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "ਵਿੰਡੋ ਮੇਨੂ ਬਟਨ ਬਾਈਡਿੰਗ"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "ਵਿੰਡੋ ਮੇਨੂ ਕੀ ਬਾਈਡਿੰਗ"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "ਵਿੰਡੋ ਸਕਰੀਨ-ਸ਼ਾਟ ਕਮਾਂਡ ਲਾਈਨ"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "ਵਿੰਡੋ,. ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਪਾਰਦਰਸ਼ੀ ਹੋਵੇ"
 

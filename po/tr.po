@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz-new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:26+0530\n"
+"POT-Creation-Date: 2008-03-15 20:20+0530\n"
 "PO-Revision-Date: 2007-11-03 17:48+0200\n"
 "Last-Translator: Serdar Soytetir <tulliana@gmail.com>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -101,6 +101,74 @@ msgstr "Metacity teması kullan"
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Pencere dekorasyonlarını oluştururken metacity temasını kullan"
+
+# clients/inst_target_part.ycp:404
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr "Pencereyi Kapat"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "Pencereyi Büyütme"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "Pencereyi Büyüt"
+
+# clients/inst_target_part.ycp:387
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "Pencereyi Küçült"
+
+# clients/inst_sw_single.ycp:188
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "Pencere Menüsü"
+
+# menuentries/menuentry_scanner.ycp:36
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "Boyutlandır"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -457,11 +525,6 @@ msgstr "Odaklamak için Tıkla"
 msgid "Click on window moves input focus to it"
 msgstr "Pencereyi odaklamaya almak için tıkla"
 
-# clients/inst_target_part.ycp:404
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr "Pencereyi Kapat"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "Etkin pencereyi kapat"
@@ -689,10 +752,6 @@ msgstr "Pencereyi Alta Gönder"
 msgid "Lower window beneath other windows"
 msgstr "Pencereyi diğer pencerelerin altına gönder"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "Pencereyi Büyüt"
-
 # clients/inst_target_part.ycp:387
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
@@ -714,11 +773,6 @@ msgstr "Etkin pencereyi yatay olarak büyüt"
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "Etkin pencereyi dikey olarak büyüt"
-
-# clients/inst_target_part.ycp:387
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "Pencereyi Küçült"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -768,232 +822,244 @@ msgstr "Bir konsol aç"
 msgid "Outputs"
 msgstr "Çıktılar"
 
-# clients/hwinfo.ycp:71
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+# clients/hwinfo.ycp:71
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr "Ping Gecikmesi"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 msgid "Raise On Click"
 msgstr "Tıklayınca Yükselt"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 msgid "Raise Window"
 msgstr "Pencereyi Yükselt"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "Süre bittiğinde seçilen pencereleri yükselt"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "Pencereyi diğer pencerelerin üzerine yükselt"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "Tıklayınca pencereleri yükselt"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "Tazeleme Oranı"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr "Çalıştırma Penceresi"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "0. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "1. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "10. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "11. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "2. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "3. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "4. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "5. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "6. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "7. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "8. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "9. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Yatay sanal boyut için ekran boyutu çoklayıcı"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Dikey sanal boyut için ekran boyutu çoklayıcı"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "Ekran görüntüsü komut satırı"
 
 # clients/inst_sw_single.ycp:146
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "Ana Menüyü Göster"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "Uygulama Çalıştırma Penceresini Göster"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "Ana menüyü göster"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Slow Animations"
 msgstr "Yavaş Animasyonlar"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "Akıllı"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "Dikey Boşaltma ile Eşzamanla"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "Ekran görüntüsü al"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "Bir pencerenin ekran görüntüsünü al"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "Uçbirim komut satırı"
 
 # include/tv/ui.ycp:493
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "Doku Filtresi"
 
 # include/tv/ui.ycp:493
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "Doku filtreleme"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Ekranın yeniden çizilmesinde kullanılacak oran (tekrar sayısı/saniye)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "Pencereyi Büyüt / Küçült"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Pencereyi Yatay Olarak Büyüt / Küçült"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "Pencereyi Dikey Olarak Büyüt / Küçült"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "Pencereyi Gölgele / Geri Yükle"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "Etkin pencereyi büyüt / geri yükle"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "Etkin pencereyi yatay olarak büyüt / geri yükle"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "Etkin pencereyi dikey olarak büyüt / geri yükle"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "Etkin pencereyi gölgele / geri yükle"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "Yavaş canlandırmaları aç / kapat"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "Pencereyi Büyütme"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "Etkin pencereyi büyütme"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr "Tam Ekran Pencerelerin Yönlendirmesini Geri Al"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "Ekran boyutu değiştirildiğinde geçirgenlik ışığı kullan"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "Dikey Sanal Boyut"
 
-# clients/inst_sw_single.ycp:188
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "Pencere Menüsü"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "Pencere menüsü düğme bağlayıcısı"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "Pencere menüsü kısayol bağlayıcısı"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "Pencere ekran görüntüsü alma komutu"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "Öntanımlı olarak saydam olması gereken pencereler"
 

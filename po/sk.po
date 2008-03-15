@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:26+0530\n"
+"POT-Creation-Date: 2008-03-15 20:20+0530\n"
 "PO-Revision-Date: 2008-02-14 21:05+0100\n"
 "Last-Translator: michal <ceecko@gmail.com>\n"
 "Language-Team: Slovak <i18n@suse.de>\n"
@@ -97,6 +97,71 @@ msgstr "Použi metacity tému"
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Použi metacity tému pri kreslení dekorácií okna"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+#, fuzzy
+msgid "Close Window"
+msgstr "Zavrieť Okno"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "Maximalizuj Okno"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "Minimalizuj Okno"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "Menu Okna"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "Skener"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
@@ -452,11 +517,6 @@ msgstr ""
 msgid "Click on window moves input focus to it"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:24
-#, fuzzy
-msgid "Close Window"
-msgstr "Zavrieť Okno"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "Zavrieť Aktívne Okno"
@@ -687,10 +747,6 @@ msgstr "Windows"
 msgid "Lower window beneath other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "Maximalizuj Okno"
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "Maximalizuj Okno Horizontálne"
@@ -710,10 +766,6 @@ msgstr "Maximalizuj aktívne okno horizontálne"
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "Maximalizuj aktívne okno vertikálne"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "Minimalizuj Okno"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -760,222 +812,234 @@ msgstr "Otvor terminál"
 msgid "Outputs"
 msgstr "Výstupy"
 
-#  Table header 3/5
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#  Table header 3/5
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
-msgid "Raise On Click"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:97
-msgid "Raise Window"
+msgid "Prefer larger output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:98
-msgid "Raise selected windows after interval"
+msgid "Prefer smaller output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:99
-msgid "Raise window above other windows"
+msgid "Raise On Click"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:100
-msgid "Raise windows when clicked"
+msgid "Raise Window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:101
+msgid "Raise selected windows after interval"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:102
+msgid "Raise window above other windows"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:103
+msgid "Raise windows when clicked"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "Obnovovacia frekvencia"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 #, fuzzy
 msgid "Run Dialog"
 msgstr "&Tónové"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "Spusti príkaz 0"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "Spusti príkaz 1"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "Spusti príkaz 10"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "Spusti príkaz 11"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "Spusti príkaz 2"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "Spusti príkaz 3"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "Spusti príkaz 4"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "Spusti príkaz 5"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "Spusti príkaz 6"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "Spusti príkaz 7"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "Spusti príkaz 8"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "Spusti príkaz 9"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "Príkaz pre screenshot"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "Zobraziť Plochu"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "Zobraziť Hlavné Menu"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "Zobraziť Spusti Aplikáciu"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "Zobraziť hlavné menu"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 #, fuzzy
 msgid "Slow Animations"
 msgstr "Spomal Animácie"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+msgid "Smart mode"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "Urob screenshot"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "Urob screenshot okna"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "Príkaz pre terminál"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "Filter textúr"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "Filtrovanie textúr"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Rýchlosť akou sa prekresluje obrazovka (počet/sekunda)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "Vertikálna Virtuálna Veľkosť"
 
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "Menu Okna"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr ""
 
