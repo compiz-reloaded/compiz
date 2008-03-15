@@ -1340,6 +1340,9 @@ handleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
+	    if (!w->attrib.override_redirect)
+		w->managed = TRUE;
+
 	    /* been shaded */
 	    if (w->height == 0)
 	    {
