@@ -987,33 +987,6 @@ scaleCheckForWindowAt (CompScreen *s,
 }
 
 static void
-sendViewportMoveRequest (CompScreen *s,
-			 int	    x,
-			 int	    y)
-{
-    XEvent xev;
-
-    xev.xclient.type    = ClientMessage;
-    xev.xclient.display = s->display->display;
-    xev.xclient.format  = 32;
-
-    xev.xclient.message_type = s->display->desktopViewportAtom;
-    xev.xclient.window	     = s->root;
-
-    xev.xclient.data.l[0] = x;
-    xev.xclient.data.l[1] = y;
-    xev.xclient.data.l[2] = 0;
-    xev.xclient.data.l[3] = 0;
-    xev.xclient.data.l[4] = 0;
-
-    XSendEvent (s->display->display,
-		s->root,
-		FALSE,
-		SubstructureRedirectMask | SubstructureNotifyMask,
-		&xev);
-}
-
-static void
 sendDndStatusMessage (CompScreen *s,
 		      Window	 source)
 {
@@ -1099,18 +1072,7 @@ scaleTerminate (CompDisplay     *d,
 		{
 		    w = findWindowAtScreen (s, sd->selectedWindow);
 		    if (w)
-		    {
-			int x, y;
-
 			(*s->activateWindow) (w);
-
-			defaultViewportForWindow (w, &x, &y);
-
-			if (x != s->x || y != s->y)
-			    sendViewportMoveRequest (s,
-						     x * s->width,
-						     y * s->height);
-		    }
 		}
 
 		ss->state = SCALE_STATE_IN;
