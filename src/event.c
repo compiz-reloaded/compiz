@@ -1549,7 +1549,7 @@ handleEvent (CompDisplay *d,
 		if (event->xclient.data.l[0] != 1 ||
 		    allowWindowFocus (w, 0, event->xclient.data.l[1]))
 		{
-		    activateWindow (w);
+		    (*w->screen->activateWindow) (w);
 		}
 	    }
 	}

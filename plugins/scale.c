@@ -1102,7 +1102,7 @@ scaleTerminate (CompDisplay     *d,
 		    {
 			int x, y;
 
-			activateWindow (w);
+			(*s->activateWindow) (w);
 
 			defaultViewportForWindow (w, &x, &y);
 

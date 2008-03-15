@@ -1755,6 +1755,7 @@ addScreen (CompDisplay *display,
     s->getOutputExtentsForWindow   = getOutputExtentsForWindow;
     s->getAllowedActionsForWindow  = getAllowedActionsForWindow;
     s->focusWindow		   = focusWindow;
+    s->activateWindow              = activateWindow;
     s->placeWindow                 = placeWindow;
     s->validateWindowResizeRequest = validateWindowResizeRequest;
 

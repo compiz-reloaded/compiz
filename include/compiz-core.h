@@ -1843,6 +1843,8 @@ typedef void (*GetAllowedActionsForWindowProc) (CompWindow   *w,
 
 typedef Bool (*FocusWindowProc) (CompWindow *window);
 
+typedef void (*ActivateWindowProc) (CompWindow *window);
+
 typedef Bool (*PlaceWindowProc) (CompWindow *window,
 				 int        x,
 				 int        y,
@@ -2180,6 +2182,7 @@ struct _CompScreen {
     GetOutputExtentsForWindowProc   getOutputExtentsForWindow;
     GetAllowedActionsForWindowProc  getAllowedActionsForWindow;
     FocusWindowProc		    focusWindow;
+    ActivateWindowProc              activateWindow;
     PlaceWindowProc                 placeWindow;
     ValidateWindowResizeRequestProc validateWindowResizeRequest;
 
