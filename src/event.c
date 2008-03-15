@@ -604,7 +604,7 @@ isEdgeAction (CompOption      *option,
 static Bool
 isEdgeEnterAction (CompOption      *option,
 		   CompActionState state,
-		   CompActionState ignoreState,
+		   CompActionState delayState,
 		   unsigned int    edge,
 		   CompAction      **action)
 {
@@ -617,13 +617,13 @@ isEdgeEnterAction (CompOption      *option,
     if (!option->value.action.initiate)
 	return FALSE;
 
-    if (ignoreState)
+    if (delayState)
     {
 	if ((option->value.action.state & CompActionStateNoEdgeDelay) !=
-	    (ignoreState & CompActionStateNoEdgeDelay))
+	    (delayState & CompActionStateNoEdgeDelay))
 	{
 	    /* ignore edge actions which shouldn't be delayed when invoking
-	       undelayed edges */
+	       undelayed edges (or vice versa) */
 	    return FALSE;
 	}
     }
@@ -656,7 +656,7 @@ triggerEdgeEnterBindings (CompDisplay	  *d,
 			  CompOption	  *option,
 			  int		  nOption,
 			  CompActionState state,
-			  CompActionState ignoreState,
+			  CompActionState delayState,
 			  unsigned int	  edge,
 			  CompOption	  *argument,
 			  int		  nArgument)
@@ -665,7 +665,7 @@ triggerEdgeEnterBindings (CompDisplay	  *d,
 
     while (nOption--)
     {
-	if (isEdgeEnterAction (option, state, ignoreState, edge, &action))
+	if (isEdgeEnterAction (option, state, delayState, edge, &action))
 	{
 	    if ((*action->initiate) (d, action, state, argument, nArgument))
 		return TRUE;
@@ -705,7 +705,7 @@ triggerEdgeLeaveBindings (CompDisplay	  *d,
 static Bool
 triggerAllEdgeEnterBindings (CompDisplay     *d,
 			     CompActionState state,
-			     CompActionState ignoreState,
+			     CompActionState delayState,
 			     unsigned int    edge,
 			     CompOption	     *argument,
 			     int	     nArgument)
@@ -721,7 +721,7 @@ triggerAllEdgeEnterBindings (CompDisplay     *d,
 	    option = (*p->vTable->getObjectOptions) (p, &d->base, &nOption);
 	    if (triggerEdgeEnterBindings (d,
 					  option, nOption,
-					  state, ignoreState, edge,
+					  state, delayState, edge,
 					  argument, nArgument))
 	    {
 		return TRUE;
@@ -777,7 +777,7 @@ triggerEdgeEnter (CompDisplay     *d,
 
     if (delayedSettings)
     {
-	CompActionState ignoreState;
+	CompActionState delayState;
 	int             i;
 
 	for (i = 0; i < nArgument; i++)
@@ -787,8 +787,8 @@ triggerEdgeEnter (CompDisplay     *d,
 					     delayedEdgeTimeout,
 					     delayedSettings);
 
-	ignoreState = CompActionStateNoEdgeDelay;
-	if (triggerAllEdgeEnterBindings (d, state, ignoreState,
+	delayState = CompActionStateNoEdgeDelay;
+	if (triggerAllEdgeEnterBindings (d, state, delayState,
 					 edge, argument, nArgument))
 	    return TRUE;
     }
