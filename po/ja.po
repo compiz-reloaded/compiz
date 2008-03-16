@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:25+0530\n"
-"PO-Revision-Date: 2008-02-09 13:28+0100\n"
+"POT-Creation-Date: 2008-03-15 20:19+0530\n"
+"PO-Revision-Date: 2008-03-07 12:55+0100\n"
 "Last-Translator: jiro kawada <jiro.kawada@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -88,6 +88,70 @@ msgstr "Metacity テーマを使用"
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr "ウィンドウ装飾を描画する際に Metacity テーマを使用"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr "ウィンドウを閉じる"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr "ウィンドウの最大化解除"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr "ウィンドウを最大化"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr "ウィンドウを最小化"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr "ウィンドウメニュー"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+msgid "Shade"
+msgstr "シェード"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr "最前面へ"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr "スティック"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr "シェード解除"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr "最前面表示解除"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr "スティック解除"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr "ウィンドウ \"%s\" は応答していません。"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+"このアプリケーションを強制的に終了すると、未保存の変更はすべて失われます。"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr "強制終了(_F)"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -430,10 +494,6 @@ msgstr "クリックでフォーカス"
 msgid "Click on window moves input focus to it"
 msgstr "ウィンドウのクリックで入力フォーカスがそのウィンドウに移動"
 
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr "ウィンドウを閉じる"
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr "アクティブなウィンドウを閉じる"
@@ -644,10 +704,6 @@ msgstr "ウィンドウを下げる"
 msgid "Lower window beneath other windows"
 msgstr "他のウィンドウの下にウィンドウを下げる"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr "ウィンドウを最大化"
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr "水平方向にウィンドウを最大化"
@@ -667,10 +723,6 @@ msgstr "アクティブなウィンドウを水平方向に最大化"
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr "アクティブなウィンドウを垂直方向に最大化"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
-msgstr "ウィンドウを最小化"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -717,218 +769,231 @@ msgid "Outputs"
 msgstr "出力"
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 msgid "Ping Delay"
 msgstr "Ping の待ち時間"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 msgid "Raise On Click"
 msgstr "クリックで上げる"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 msgid "Raise Window"
 msgstr "ウィンドウを上げる"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr "指定時間間隔後に選択ウィンドウを最前面に上げる"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr "ウィンドウを他のウィンドウの前面に上げる"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr "クリックでウィンドウを最前面に上げる"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 msgid "Refresh Rate"
 msgstr "リフレッシュレート"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr "アプリケーション実行ダイアログ"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 msgid "Run command 0"
 msgstr "コマンド 0 を実行"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 msgid "Run command 1"
 msgstr "コマンド 1 を実行"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 10"
 msgstr "コマンド 10 を実行"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 11"
 msgstr "コマンド 11 を実行"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 2"
 msgstr "コマンド 2 を実行"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 3"
 msgstr "コマンド 3 を実行"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 4"
 msgstr "コマンド 4 を実行"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 5"
 msgstr "コマンド 5 を実行"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 6"
 msgstr "コマンド 6 を実行"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 7"
 msgstr "コマンド 7 を実行"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 8"
 msgstr "コマンド 8 を実行"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 9"
 msgstr "コマンド 9 を実行"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "水平仮想サイズ指定のための、画面サイズに対する乗数"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "垂直仮想サイズ指定のための、画面サイズに対する乗数"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 msgid "Screenshot command line"
 msgstr "スクリーンショットのコマンドライン"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 msgid "Show Desktop"
 msgstr "デスクトップの表示"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr "メインメニューの表示"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr "\"アプリケーションの実行\"ダイアログの表示"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr "メインメニューの表示"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 msgid "Slow Animations"
 msgstr "アニメーションのスロー再生"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Smart mode"
+msgstr "スマート"
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr "垂直ブランクに同期化"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr "スクリーンショットを撮る"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr "ウィンドウのスクリーンショットを撮る"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 msgid "Terminal command line"
 msgstr "端末起動コマンドライン"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 msgid "Texture Filter"
 msgstr "テクスチャ・フィルタ"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 msgid "Texture filtering"
 msgstr "テクスチャ・フィルタ"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "画面の再描画レート(回/秒)"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr "ウィンドウの最大化/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr "ウィンドウの水平方向最大化/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr "ウィンドウの垂直方向最大化/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr "ウィンドウのシェード/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr "アクティブ・ウィンドウの最大化/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr "アクティブ・ウィンドウの水平方向最大化/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr "アクティブ・ウィンドウの垂直方向最大化/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr "アクティブ・ウィンドウのシェード/解除の切り替え"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr "スロー再生アニメーション使用のオンオフ"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr "ウィンドウの最大化解除"
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr "アクティブ・ウィンドウの最大化解除"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr "全画面ウィンドウのリダイレクトを解除"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr "画面の変換時に拡散反射光を使用"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 msgid "Vertical Virtual Size"
 msgstr "垂直仮想サイズ"
 
-#: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
-msgstr "ウィンドウメニュー"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr "ウィンドウメニューのボタン割り当て"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr "ウィンドウメニューのキー割り当て"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr "ウィンドウ・スクリーンショットのコマンドライン"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr "デフォルトで半透明化の対象にするウィンドウ"
 
@@ -2674,59 +2739,14 @@ msgstr "ズーム係数"
 msgid "Zoom pan"
 msgstr "ズーム域の移動"
 
-#~ msgid "Open window menu"
-#~ msgstr "ウィンドウメニューを開く"
-
-#~ msgid "Select next window"
-#~ msgstr "次のウィンドウを選択"
-
-#~ msgid "Select previous window"
-#~ msgstr "前のウィンドウを選択"
-
-#~ msgid "Dock"
-#~ msgstr "ドック"
-
-#~ msgid "Toolbar"
-#~ msgstr "ツールバー"
-
-#~ msgid "Menu"
-#~ msgstr "メニュー"
-
-#~ msgid "Utility"
-#~ msgstr "ユーティリティ"
-
-#~ msgid "Splash"
-#~ msgstr "スプラッシュ"
-
-#~ msgid "Dialog"
-#~ msgstr "ダイアログ"
-
-#~ msgid "DropdownMenu"
-#~ msgstr "ドロップダウンメニュー"
-
-#~ msgid "PopupMenu"
-#~ msgstr "ポップアップメニュー"
-
-#~ msgid "Tooltip"
-#~ msgstr "ツールヒント"
-
-#~ msgid "Notification"
-#~ msgstr "通知"
-
-#~ msgid "Combo"
-#~ msgstr "コンボ"
-
-#~ msgid "Dnd"
-#~ msgstr "Dnd"
-
-#~ msgid "ModalDialog"
-#~ msgstr "モーダルダイアログ"
-
-#~ msgid "Fullscreen"
-#~ msgstr "フルスクリーン"
-
-#~ msgid "Unknown"
-#~ msgstr "不明"
+#~ msgid ""
+#~ "Open window menuSelect next windowSelect previous "
+#~ "windowDockToolbarMenuUtilitySplashDialogDropdownMenuPopupMenuTooltipNotificationComboDndModalDialogFullscreenUnknown"
+#~ msgstr ""
+#~ "ウィンドウメニューを開く次のウィンドウを選択前のウィンドウを選択ドックツー"
+#~ "ルバーメニューユーティリティスプラッシュダイアログドロップダウンメニュー"
+#~ "ポップアップメニューツールヒント通知コンボDndモーダルダイアログフルスク"
+#~ "リーン不明"
 
 #, fuzzy
 #~ msgid ""
@@ -2894,11 +2914,10 @@ msgstr "ズーム域の移動"
 
 #, fuzzy
 #~ msgid ""
-#~ "Distance desktop should be zoom out while switching windows (0.0-5.0)"
-#~ msgstr "ウィンドウ切り替え中デスクトップ距離をズームアウト"
-
-#~ msgid "Do not modify"
-#~ msgstr "変更しないでください"
+#~ "Distance desktop should be zoom out while switching windows (0.0-5.0)Do "
+#~ "not modify"
+#~ msgstr ""
+#~ "ウィンドウ切り替え中デスクトップ距離をズームアウト変更しないでください"
 
 #, fuzzy
 #~ msgid ""
@@ -2943,20 +2962,15 @@ msgstr "ズーム域の移動"
 #, fuzzy
 #~ msgid ""
 #~ "Flip to right viewport and warp pointer (Left, Right, Top, Bottom, "
-#~ "TopLeft, TopRight, BottomLeft, BottomRight)"
+#~ "TopLeft, TopRight, BottomLeft, BottomRight)Focus Window Effect (None, "
+#~ "Shiver)"
 #~ msgstr ""
 #~ "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
-#~ "BottomRight)"
-
-#~ msgid "Focus Window Effect (None, Shiver)"
-#~ msgstr "ウィンドウ効果をフォーカス(なし、震動)"
+#~ "BottomRight)ウィンドウ効果をフォーカス(なし、震動)"
 
 #, fuzzy
-#~ msgid "Focus prevention windows (match)"
-#~ msgstr "前のウィンドウを選択"
-
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "アクセラレーションをフォールド(1.0-20.0)"
+#~ msgid "Focus prevention windows (match)Fold Acceleration (1.0-20.0)"
+#~ msgstr "前のウィンドウを選択アクセラレーションをフォールド(1.0-20.0)"
 
 #, fuzzy
 #~ msgid "Fold Speed (0.0-50.0)"
@@ -3075,13 +3089,10 @@ msgstr "ズーム域の移動"
 #, fuzzy
 #~ msgid ""
 #~ "Make window shiver (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
+#~ "BottomLeft, BottomRight)Map Window Effect (None, Shiver)"
 #~ msgstr ""
 #~ "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
-#~ "BottomRight)"
-
-#~ msgid "Map Window Effect (None, Shiver)"
-#~ msgstr "ウィンドウ効果のマップ(なし、震動)"
+#~ "BottomRight)ウィンドウ効果のマップ(なし、震動)"
 
 #, fuzzy
 #~ msgid ""
@@ -3286,16 +3297,10 @@ msgstr "ズーム域の移動"
 #, fuzzy
 #~ msgid ""
 #~ "Plane up (Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, "
-#~ "BottomRight)"
+#~ "BottomRight)Plugins that this must load beforePlugins that this requires"
 #~ msgstr ""
 #~ "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
-#~ "BottomRight)"
-
-#~ msgid "Plugins that this must load before"
-#~ msgstr "これを前にロードする必要のあるプラグイン"
-
-#~ msgid "Plugins that this requires"
-#~ msgstr "これが必要なプラグイン"
+#~ "BottomRight)これを前にロードする必要のあるプラグインこれが必要なプラグイン"
 
 #, fuzzy
 #~ msgid ""
@@ -3631,11 +3636,9 @@ msgstr "ズーム域の移動"
 #~ "BottomRight)"
 
 #, fuzzy
-#~ msgid "Sensitivity of pointer movement (0.01-100.00)"
-#~ msgstr "ポインタの移動感度"
-
-#~ msgid "Shade resistance (0-100)"
-#~ msgstr "シェード耐性（0-100）"
+#~ msgid ""
+#~ "Sensitivity of pointer movement (0.01-100.00)Shade resistance (0-100)"
+#~ msgstr "ポインタの移動感度シェード耐性（0-100）"
 
 #, fuzzy
 #~ msgid ""
@@ -3708,13 +3711,10 @@ msgstr "ズーム域の移動"
 #, fuzzy
 #~ msgid ""
 #~ "Take a screenshot of a window (Left, Right, Top, Bottom, TopLeft, "
-#~ "TopRight, BottomLeft, BottomRight)"
+#~ "TopRight, BottomLeft, BottomRight)Texture filtering (Fast, Good, Best)"
 #~ msgstr ""
 #~ "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
-#~ "BottomRight)"
-
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "テクスチャフィルタ(高速、良、最高)"
+#~ "BottomRight)テクスチャフィルタ(高速、良、最高)"
 
 #, fuzzy
 #~ msgid "The rate at which the screen is redrawn (times/second) (1-200)"
@@ -3789,13 +3789,10 @@ msgstr "ズーム域の移動"
 #, fuzzy
 #~ msgid ""
 #~ "Toggle wiper effect (Left, Right, Top, Bottom, TopLeft, TopRight, "
-#~ "BottomLeft, BottomRight)"
+#~ "BottomLeft, BottomRight)USe linear filter when zoomed in"
 #~ msgstr ""
 #~ "スケールモードを開始するホットコーナー(TopLeft、TopRight、BottomLeft、"
-#~ "BottomRight)"
-
-#~ msgid "USe linear filter when zoomed in"
-#~ msgstr "ズームイン時に線形フィルタを使用"
+#~ "BottomRight)ズームイン時に線形フィルタを使用"
 
 #, fuzzy
 #~ msgid ""
@@ -3910,11 +3907,8 @@ msgstr "ズーム域の移動"
 #~ msgstr "タイムステップのズーム(0.1-50.0)"
 
 #, fuzzy
-#~ msgid "Zoom factor (1.01-3.00)"
-#~ msgstr "ズーム要素"
-
-#~ msgid "."
-#~ msgstr "."
+#~ msgid "Zoom factor (1.01-3.00)."
+#~ msgstr "ズーム要素."
 
 #, fuzzy
 #~ msgid "Plane To Face %d"
@@ -3929,149 +3923,66 @@ msgstr "ズーム域の移動"
 #~ msgstr "%d がウィンドウに向かうように回転"
 
 #, fuzzy
-#~ msgid "Plane to face %d and bring active window along"
-#~ msgstr "%d に向かうように回転し、アクティブウィンドウを揃えます"
-
-#~ msgid "Rotate To Face %d"
-#~ msgstr "%d に向かうように回転"
-
-#~ msgid "Rotate to face %d"
-#~ msgstr "%d に向かうように回転"
-
-#~ msgid "Rotate To Face %d with Window"
-#~ msgstr "%d がウィンドウに向かうように回転"
-
-#~ msgid "Rotate to face %d and bring active window along"
-#~ msgstr "%d に向かうように回転し、アクティブウィンドウを揃えます"
-
-#~ msgid "Command line %d"
-#~ msgstr "コマンドライン %d"
-
-#~ msgid "Command line to be executed in shell when run_command%d is invoked"
-#~ msgstr "run_command%d の起動時にシェルで実行されるコマンドライン"
-
-#~ msgid "Run command %d"
-#~ msgstr "コマンド %d の実行"
-
 #~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command%d"
+#~ "Plane to face %d and bring active window alongRotate To Face %dRotate to "
+#~ "face %dRotate To Face %d with WindowRotate to face %d and bring active "
+#~ "window alongCommand line %dCommand line to be executed in shell when "
+#~ "run_command%d is invokedRun command %dA keybinding that when invoked, "
+#~ "will run the shell command identified by command%dWindow TypesMove Window "
+#~ "Types"
 #~ msgstr ""
-#~ "呼び出し時にcommand%d で指定されたシェルコマンドを実行するキーバインド"
-
-#~ msgid "Window Types"
-#~ msgstr "ウィンドウタイプ"
-
-#~ msgid "Move Window Types"
-#~ msgstr "ウィンドウタイプを移動"
+#~ "%d に向かうように回転し、アクティブウィンドウを揃えます%d に向かうように回"
+#~ "転%d に向かうように回転%d がウィンドウに向かうように回転%d に向かうように"
+#~ "回転し、アクティブウィンドウを揃えますコマンドライン %drun_command%d の起"
+#~ "動時にシェルで実行されるコマンドラインコマンド %d の実行呼び出し時に"
+#~ "command%d で指定されたシェルコマンドを実行するキーバインドウィンドウタイプ"
+#~ "ウィンドウタイプを移動"
 
 #, fuzzy
-#~ msgid "Enable focus prevention"
-#~ msgstr "ZENパーティションを有効にする"
-
-#~ msgid "Corners"
-#~ msgstr "コーナー"
-
-#~ msgid "Focus window when mouse moves over them"
-#~ msgstr "マウスの移動時にウィンドウをフォーカス"
-
-#~ msgid "Initiate All Windows"
-#~ msgstr "すべてのウィンドウを開始"
-
-#~ msgid "Initiate Keyboard Window Move"
-#~ msgstr "キーボードによるウィンドウの移動を開始する"
-
-#~ msgid "Initiate Keyboard Window Resize"
-#~ msgstr "キーボードによるウィンドウのサイズ変更を開始する"
-
-#~ msgid "Initiate Window Switcher"
-#~ msgstr "ウィンドウスイッチャを起動"
-
-#~ msgid "Modifier to show switcher for all windows"
-#~ msgstr "すべてのウィンドウでスイッチャを表示する修飾子"
-
-#~ msgid "Return from scale view"
-#~ msgstr "スケールビューから戻る"
-
-#~ msgid "Show switcher"
-#~ msgstr "スイッチャの表示"
-
-#~ msgid "Sloppy Focus"
-#~ msgstr "スロッピフォーカス"
-
-#~ msgid "Start moving window using keyboard"
-#~ msgstr "キーボードを使ったウィンドウの移動を開始"
-
-#~ msgid "Terminate"
-#~ msgstr "終了"
-
-#~ msgid "Water effect on system beep"
-#~ msgstr "システムビープ音の水効果"
-
 #~ msgid ""
-#~ "Window types that should be fading (Desktop, Dock, Toolbar, Menu, "
-#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
+#~ "Enable focus preventionCornersFocus window when mouse moves over "
+#~ "themInitiate All WindowsInitiate Keyboard Window MoveInitiate Keyboard "
+#~ "Window ResizeInitiate Window SwitcherModifier to show switcher for all "
+#~ "windowsReturn from scale viewShow switcherSloppy FocusStart moving window "
+#~ "using keyboardTerminateWater effect on system beepWindow types that "
+#~ "should be fading (Desktop, Dock, Toolbar, Menu, Utility, Splash, Dialog, "
+#~ "ModalDialog, Normal, Fullscreen, Unknown)Window types that should be "
+#~ "transformed when minimized (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Window types "
+#~ "that should scaled in scale mode (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Window types "
+#~ "that should shown in switcher (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Window types "
+#~ "that should wobble when focused (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Window types "
+#~ "that should wobble when grabbed (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Window types "
+#~ "that should wobble when mapped (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Window types "
+#~ "that should wobble when moved (Desktop, Dock, Toolbar, Menu, Utility, "
+#~ "Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)Wobble effect on "
+#~ "system beep"
 #~ msgstr ""
-#~ "フェードするウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、"
-#~ "ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、"
-#~ "不明)"
-
-#~ msgid ""
-#~ "Window types that should be transformed when minimized (Desktop, Dock, "
-#~ "Toolbar, Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, "
-#~ "Unknown)"
-#~ msgstr ""
-#~ "最小化時に変換するウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
-#~ "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、"
-#~ "全画面、不明)"
-
-#~ msgid ""
-#~ "Window types that should scaled in scale mode (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "スケールモードでスケールするウィンドウタイプ(デスクトップ、ドック、ツール"
-#~ "バー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアロ"
-#~ "グ、標準、全画面、不明)"
-
-#~ msgid ""
-#~ "Window types that should shown in switcher (Desktop, Dock, Toolbar, Menu, "
-#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "スイッチャで表示するウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
-#~ "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、"
-#~ "全画面、不明)"
-
-#~ msgid ""
-#~ "Window types that should wobble when focused (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "フォーカス時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
-#~ "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、"
-#~ "全画面、不明)"
-
-#~ msgid ""
-#~ "Window types that should wobble when grabbed (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "取得時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
-#~ "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、"
-#~ "全画面、不明)"
-
-#~ msgid ""
-#~ "Window types that should wobble when mapped (Desktop, Dock, Toolbar, "
-#~ "Menu, Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "マップ時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
-#~ "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、"
-#~ "全画面、不明)"
-
-#~ msgid ""
-#~ "Window types that should wobble when moved (Desktop, Dock, Toolbar, Menu, "
-#~ "Utility, Splash, Dialog, ModalDialog, Normal, Fullscreen, Unknown)"
-#~ msgstr ""
-#~ "移動時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、メ"
-#~ "ニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、"
-#~ "全画面、不明)"
-
-#~ msgid "Wobble effect on system beep"
-#~ msgstr "システムビープ音の揺れる効果"
+#~ "ZENパーティションを有効にするコーナーマウスの移動時にウィンドウをフォーカ"
+#~ "スすべてのウィンドウを開始キーボードによるウィンドウの移動を開始するキー"
+#~ "ボードによるウィンドウのサイズ変更を開始するウィンドウスイッチャを起動すべ"
+#~ "てのウィンドウでスイッチャを表示する修飾子スケールビューから戻るスイッチャ"
+#~ "の表示スロッピフォーカスキーボードを使ったウィンドウの移動を開始終了システ"
+#~ "ムビープ音の水効果フェードするウィンドウタイプ(デスクトップ、ドック、ツー"
+#~ "ルバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアロ"
+#~ "グ、標準、全画面、不明)最小化時に変換するウィンドウタイプ(デスクトップ、"
+#~ "ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モ"
+#~ "デルダイアログ、標準、全画面、不明)スケールモードでスケールするウィンドウ"
+#~ "タイプ(デスクトップ、ドック、ツールバー、メニュー、ユーティリティ、スプ"
+#~ "ラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不明)スイッチャで表"
+#~ "示するウィンドウタイプ(デスクトップ、ドック、ツールバー、メニュー、ユー"
+#~ "ティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標準、全画面、不"
+#~ "明)フォーカス時に揺れるウィンドウタイプ(デスクトップ、ドック、ツールバー、"
+#~ "メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアログ、標"
+#~ "準、全画面、不明)取得時に揺れるウィンドウタイプ(デスクトップ、ドック、ツー"
+#~ "ルバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデルダイアロ"
+#~ "グ、標準、全画面、不明)マップ時に揺れるウィンドウタイプ(デスクトップ、ドッ"
+#~ "ク、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアログ、モデル"
+#~ "ダイアログ、標準、全画面、不明)移動時に揺れるウィンドウタイプ(デスクトッ"
+#~ "プ、ドック、ツールバー、メニュー、ユーティリティ、スプラッシュ、ダイアロ"
+#~ "グ、モデルダイアログ、標準、全画面、不明)システムビープ音の揺れる効果"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:24+0530\n"
+"POT-Creation-Date: 2008-03-15 20:18+0530\n"
 "PO-Revision-Date: 2002-07-18 14:04+0200\n"
 "Last-Translator: proofreader <i18n@suse.de>\n"
 "Language-Team: English <i18n@suse.de>\n"
@@ -84,6 +84,69 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
+msgid "Close Window"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+msgid "Minimize Window"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+msgid "Window Menu"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+msgid "Shade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
 msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
@@ -409,10 +472,6 @@ msgstr ""
 msgid "Click on window moves input focus to it"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:24
-msgid "Close Window"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
 msgstr ""
@@ -623,10 +682,6 @@ msgstr ""
 msgid "Lower window beneath other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:78
 msgid "Maximize Window Horizontally"
 msgstr ""
@@ -645,10 +700,6 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:83
-msgid "Minimize Window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:84
@@ -696,218 +747,230 @@ msgid "Outputs"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:95
-msgid "Ping Delay"
+msgid "Overlapping Output Handling"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:96
-msgid "Raise On Click"
+msgid "Ping Delay"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:97
-msgid "Raise Window"
+msgid "Prefer larger output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:98
-msgid "Raise selected windows after interval"
+msgid "Prefer smaller output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:99
-msgid "Raise window above other windows"
+msgid "Raise On Click"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:100
-msgid "Raise windows when clicked"
+msgid "Raise Window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:101
-msgid "Refresh Rate"
+msgid "Raise selected windows after interval"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:102
-msgid "Run Dialog"
+msgid "Raise window above other windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:103
-msgid "Run command 0"
+msgid "Raise windows when clicked"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:104
-msgid "Run command 1"
+msgid "Refresh Rate"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:105
-msgid "Run command 10"
+msgid "Run Dialog"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:106
-msgid "Run command 11"
+msgid "Run command 0"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:107
-msgid "Run command 2"
+msgid "Run command 1"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:108
-msgid "Run command 3"
+msgid "Run command 10"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:109
-msgid "Run command 4"
+msgid "Run command 11"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:110
-msgid "Run command 5"
+msgid "Run command 2"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:111
-msgid "Run command 6"
+msgid "Run command 3"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:112
-msgid "Run command 7"
+msgid "Run command 4"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:113
-msgid "Run command 8"
+msgid "Run command 5"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:114
-msgid "Run command 9"
+msgid "Run command 6"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:115
-msgid "Screen size multiplier for horizontal virtual size"
+msgid "Run command 7"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:116
-msgid "Screen size multiplier for vertical virtual size"
+msgid "Run command 8"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:117
-msgid "Screenshot command line"
+msgid "Run command 9"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:118
-msgid "Show Desktop"
+msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:119
-msgid "Show Main Menu"
+msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:120
-msgid "Show Run Application dialog"
+msgid "Screenshot command line"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:121
-msgid "Show the main menu"
+msgid "Show Desktop"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:122
-msgid "Slow Animations"
+msgid "Show Main Menu"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:123
-msgid "Sync To VBlank"
+msgid "Show Run Application dialog"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:124
-msgid "Take a screenshot"
+msgid "Show the main menu"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:125
-msgid "Take a screenshot of a window"
+msgid "Slow Animations"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:126
-msgid "Terminal command line"
+msgid "Smart mode"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:127
-msgid "Texture Filter"
+msgid "Sync To VBlank"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:128
-msgid "Texture filtering"
+msgid "Take a screenshot"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:129
-msgid "The rate at which the screen is redrawn (times/second)"
+msgid "Take a screenshot of a window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:130
-msgid "Toggle Window Maximized"
+msgid "Terminal command line"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:131
-msgid "Toggle Window Maximized Horizontally"
+msgid "Texture Filter"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:132
-msgid "Toggle Window Maximized Vertically"
+msgid "Texture filtering"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:133
-msgid "Toggle Window Shaded"
+msgid "The rate at which the screen is redrawn (times/second)"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:134
-msgid "Toggle active window maximized"
+msgid "Toggle Window Maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:135
-msgid "Toggle active window maximized horizontally"
+msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:136
-msgid "Toggle active window maximized vertically"
+msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:137
-msgid "Toggle active window shaded"
+msgid "Toggle Window Shaded"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:138
-msgid "Toggle use of slow animations"
+msgid "Toggle active window maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
+msgid "Toggle active window maximized horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:140
-msgid "Unmaximize active window"
+msgid "Toggle active window maximized vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:141
-msgid "Unredirect Fullscreen Windows"
+msgid "Toggle active window shaded"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:142
-msgid "Use diffuse light when screen is transformed"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:143
-msgid "Vertical Virtual Size"
+msgid "Toggle use of slow animations"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:144
-msgid "Window Menu"
+msgid "Unmaximize active window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:145
-msgid "Window menu button binding"
+msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:146
-msgid "Window menu key binding"
+msgid "Use diffuse light when screen is transformed"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:147
-msgid "Window screenshot command line"
+msgid "Vertical Virtual Size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:150
+msgid "Window menu button binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:151
+msgid "Window menu key binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:152
+msgid "Window screenshot command line"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr ""
 

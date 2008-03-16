@@ -8,56 +8,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST2 (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:26+0530\n"
-"PO-Revision-Date: 2004-03-31 11:34+0200\n"
-"Last-Translator: Bojan Jovanovic <bojov@fon.bg.ac.yu>\n"
+"POT-Creation-Date: 2008-03-15 20:20+0530\n"
+"PO-Revision-Date: 2008-03-05 03:56+0100\n"
+"Last-Translator: Branislav Stojanovic <mephistofeluss@hotmail.com>\n"
 "Language-Team: Serbian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : (n%10>=2 && n%"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 1.0.2\n"
 
 #  Headline for X11 configuration screen:
 #  The user selects screen resolution and color depth.
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-#, fuzzy
 msgid "Desktop"
-msgstr "Setovanja Desktop-a"
+msgstr "Radna površina"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
 msgid "Window Management"
-msgstr "Window Manager"
+msgstr "Opcije Prozora"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr ""
+"Efekat koji će imati pokretanje točkića na miše u naslovnoj traci prozora."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
 msgid "Blur type"
-msgstr "Suspend"
+msgstr "Tip blura"
 
 #  Radio button for using an entire (Windows) partition for Linux
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
-#, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "&Obriši Windows kompletno"
+msgstr "Prozirnost aktivnog prozora \"metacity\" teme"
 
 #  Radio button for using an entire (Windows) partition for Linux
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
-#, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "&Obriši Windows kompletno"
+msgstr "Nijansa aktivnog prozora \"Metacity\" teme"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "Prozirnost \"Metacity\" teme"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
@@ -84,24 +81,94 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Akcija točkića miša u naslovnoj traci"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Vrsta blura za dekoraciju prozora"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Koristi \"metacity\" temu"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:1
+#  button text
+#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../metadata/core.xml.in.h:24
 #, fuzzy
+msgid "Close Window"
+msgstr "&Obriši Windowse"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4369
+#: ../metadata/core.xml.in.h:143
+msgid "Unmaximize Window"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4372
+#: ../metadata/core.xml.in.h:77
+msgid "Maximize Window"
+msgstr ""
+
+#  button text
+#  button text
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.h:83
+#, fuzzy
+msgid "Minimize Window"
+msgstr "&Smanji Windowse"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4531
+#: ../metadata/core.xml.in.h:149
+#, fuzzy
+msgid "Window Menu"
+msgstr "Window Manager"
+
+#  label of an output field
+#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#, fuzzy
+msgid "Shade"
+msgstr "Skener"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+msgid "Make Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+msgid "Stick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+msgid "Unshade"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+msgid "Unmake Above"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+msgid "Unstick"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+msgid "_Force Quit"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
-msgstr "хетски"
+msgstr "naglasi"
 
 #: ../metadata/annotate.xml.in.h:2
 #, fuzzy
@@ -119,17 +186,16 @@ msgid "Annotate plugin"
 msgstr "Aktivan profil"
 
 #: ../metadata/annotate.xml.in.h:5
-#, fuzzy
 msgid "Clear"
-msgstr "XF86Clear"
+msgstr "očisti"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "nacrtaj"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "nacrtaj koristeći alat"
 
 #: ../metadata/annotate.xml.in.h:8
 msgid "Fill color for annotations"
@@ -138,28 +204,24 @@ msgstr ""
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
-#, fuzzy
 msgid "Initiate"
-msgstr "хетски"
+msgstr "pokreni"
 
 #: ../metadata/annotate.xml.in.h:10
-#, fuzzy
 msgid "Initiate annotate drawing"
-msgstr "хетски"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "хетски"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "хетски"
+msgstr "pokreni brisanje"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "Širina linije"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
@@ -178,28 +240,24 @@ msgid "Stroke width for annotations"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
 msgid "4xBilinear"
-msgstr "Filter: "
+msgstr "4x Bilinearni filter"
 
 #  button text
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
 msgid "Alpha Blur"
-msgstr "&Obriši Windowse"
+msgstr "alfa blur"
 
 #  button text
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "&Obriši Windowse"
+msgstr "Alfa blur prozora"
 
 #  MenuButton label
 #  menubutton label
 #: ../metadata/blur.xml.in.h:4
-#, fuzzy
 msgid "Blur Filter"
-msgstr "&Podesite filter"
+msgstr "Filter blura"
 
 #: ../metadata/blur.xml.in.h:5
 #, fuzzy
@@ -224,7 +282,7 @@ msgstr "&Obriši Windowse"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Blur iza prozirnih dijelova prozora"
 
 #: ../metadata/blur.xml.in.h:10
 #, fuzzy
@@ -233,13 +291,12 @@ msgstr "Trajanje"
 
 #  button text
 #: ../metadata/blur.xml.in.h:11
-#, fuzzy
 msgid "Blur windows"
-msgstr "&Obriši Windowse"
+msgstr "Blur prozora"
 
 #: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
-msgstr ""
+msgstr "Blur na prozorima van fokusa"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
@@ -459,12 +516,6 @@ msgstr ""
 #: ../metadata/core.xml.in.h:23
 msgid "Click on window moves input focus to it"
 msgstr ""
-
-#  button text
-#: ../metadata/core.xml.in.h:24
-#, fuzzy
-msgid "Close Window"
-msgstr "&Obriši Windowse"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
@@ -700,10 +751,6 @@ msgstr ""
 msgid "Lower window beneath other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:77
-msgid "Maximize Window"
-msgstr ""
-
 #  button text
 #  button text
 #: ../metadata/core.xml.in.h:78
@@ -729,13 +776,6 @@ msgstr ""
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize active window vertically"
 msgstr ""
-
-#  button text
-#  button text
-#: ../metadata/core.xml.in.h:83
-#, fuzzy
-msgid "Minimize Window"
-msgstr "&Smanji Windowse"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Minimize active window"
@@ -786,258 +826,269 @@ msgid "Outputs"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:95
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
 #, fuzzy
 msgid "Ping Delay"
 msgstr "Čekanje"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:98
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:99
 #, fuzzy
 msgid "Raise On Click"
 msgstr "&Radio Clock"
 
 #  button text
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:100
 #, fuzzy
 msgid "Raise Window"
 msgstr "&Obriši Windowse"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:101
 msgid "Raise selected windows after interval"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:102
 msgid "Raise window above other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:103
 msgid "Raise windows when clicked"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:104
 #, fuzzy
 msgid "Refresh Rate"
 msgstr "&Osveži Listu"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:105
 msgid "Run Dialog"
 msgstr ""
 
 #  Process <command> "help"
 #  translators: %1 is the command name
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:106
 #, fuzzy
 msgid "Run command 0"
 msgstr "Komanda  '%1'"
 
 #  Process <command> "help"
 #  translators: %1 is the command name
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:107
 #, fuzzy
 msgid "Run command 1"
 msgstr "Komanda  '%1'"
 
 #  Process <command> "help"
 #  translators: %1 is the command name
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:108
 #, fuzzy
 msgid "Run command 10"
 msgstr "Komanda  '%1'"
 
 #  Process <command> "help"
 #  translators: %1 is the command name
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:109
 #, fuzzy
 msgid "Run command 11"
 msgstr "Komanda  '%1'"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:110
 #, fuzzy
 msgid "Run command 2"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:111
 #, fuzzy
 msgid "Run command 3"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:112
 #, fuzzy
 msgid "Run command 4"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:113
 #, fuzzy
 msgid "Run command 5"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:114
 #, fuzzy
 msgid "Run command 6"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:115
 #, fuzzy
 msgid "Run command 7"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:116
 #, fuzzy
 msgid "Run command 8"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:117
 #, fuzzy
 msgid "Run command 9"
 msgstr "Komanda :"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:118
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:120
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "Greška, niste uneli ispravno komandu."
 
 #  Headline for X11 configuration screen:
 #  The user selects screen resolution and color depth.
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:121
 #, fuzzy
 msgid "Show Desktop"
 msgstr "Setovanja Desktop-a"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:122
 msgid "Show Main Menu"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:123
 msgid "Show Run Application dialog"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:124
 msgid "Show the main menu"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:125
 #, fuzzy
 msgid "Slow Animations"
 msgstr "Prikaži sve Particije"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:126
+msgid "Smart mode"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:127
 msgid "Sync To VBlank"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:128
 msgid "Take a screenshot"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot of a window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:130
 #, fuzzy
 msgid "Terminal command line"
 msgstr "Greška, niste uneli ispravno komandu."
 
 #  MenuButton label
 #  menubutton label
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:131
 #, fuzzy
 msgid "Texture Filter"
 msgstr "&Podesite filter"
 
 #  MenuButton label
 #  menubutton label
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:132
 #, fuzzy
 msgid "Texture filtering"
 msgstr "&Podesite filter"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:133
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:134
 msgid "Toggle Window Maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:135
 msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle active window maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle active window maximized horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle use of slow animations"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:139
-msgid "Unmaximize Window"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:144
 msgid "Unmaximize active window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:145
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:146
 msgid "Use diffuse light when screen is transformed"
 msgstr ""
 
 #  Aliases dialog caption
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:147
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "Virtuelni alias-i"
 
-#: ../metadata/core.xml.in.h:144
-#, fuzzy
-msgid "Window Menu"
-msgstr "Window Manager"
+#: ../metadata/core.xml.in.h:148
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:150
 msgid "Window menu button binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:151
 msgid "Window menu key binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:152
 msgid "Window screenshot command line"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:153
 msgid "Windows that should be translucent by default"
 msgstr ""
 
@@ -3113,45 +3164,39 @@ msgstr ""
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:31
-#, fuzzy
 msgid "Wobbly Windows"
-msgstr "&Obriši Windowse"
+msgstr "\"Želatinasti\" prozori"
 
 #: ../metadata/zoom.xml.in.h:1
-#, fuzzy
 msgid "Filter Linear"
-msgstr "Filter: "
+msgstr "Filter: Linearni "
 
 #: ../metadata/zoom.xml.in.h:5
 msgid "Use linear filter when zoomed in"
-msgstr ""
+msgstr "Koristi linearni filter kada povećaš"
 
 #  Headline for X11 configuration screen:
 #  The user selects screen resolution and color depth.
 #: ../metadata/zoom.xml.in.h:6
-#, fuzzy
 msgid "Zoom Desktop"
-msgstr "Setovanja Desktop-a"
+msgstr "povećaj radnu površinu"
 
 #: ../metadata/zoom.xml.in.h:7
-#, fuzzy
 msgid "Zoom In"
-msgstr "Odjavi se"
+msgstr "povećaj"
 
 #: ../metadata/zoom.xml.in.h:8
-#, fuzzy
 msgid "Zoom Out"
-msgstr "Odjavi se"
+msgstr "smanji"
 
 #: ../metadata/zoom.xml.in.h:9
 #, fuzzy
 msgid "Zoom Pan"
-msgstr "Odjavi se"
+msgstr "povecaj po širini"
 
 #: ../metadata/zoom.xml.in.h:10
-#, fuzzy
 msgid "Zoom Speed"
-msgstr "Suspend"
+msgstr "brzina povećanja"
 
 #: ../metadata/zoom.xml.in.h:11
 #, fuzzy
