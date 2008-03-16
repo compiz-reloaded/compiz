@@ -3589,28 +3589,28 @@ addWindowSizeChanges (CompWindow     *w,
 	}
 
 	/* constrain window width if smaller than minimum width */
-	if (!(mask & CWWidth) && w->serverWidth < w->sizeHints.min_width)
+	if (!(mask & CWWidth) && oldWidth < w->sizeHints.min_width)
 	{
 	    xwc->width = w->sizeHints.min_width;
 	    mask |= CWWidth;
 	}
 
 	/* constrain window width if greater than maximum width */
-	if (!(mask & CWWidth) && w->serverWidth > w->sizeHints.max_width)
+	if (!(mask & CWWidth) && oldWidth > w->sizeHints.max_width)
 	{
 	    xwc->width = w->sizeHints.max_width;
 	    mask |= CWWidth;
 	}
 
 	/* constrain window height if smaller than minimum height */
-	if (!(mask & CWHeight) && w->serverHeight < w->sizeHints.min_height)
+	if (!(mask & CWHeight) && oldHeight < w->sizeHints.min_height)
 	{
 	    xwc->height = w->sizeHints.min_height;
 	    mask |= CWHeight;
 	}
 
 	/* constrain window height if greater than maximum height */
-	if (!(mask & CWHeight) && w->serverHeight > w->sizeHints.max_height)
+	if (!(mask & CWHeight) && oldHeight > w->sizeHints.max_height)
 	{
 	    xwc->height = w->sizeHints.max_height;
 	    mask |= CWHeight;
