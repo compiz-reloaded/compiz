@@ -1747,18 +1747,8 @@ handleEvent (CompDisplay *d,
 				  CompWindowStateMaximizedVertMask))
 			stackingUpdateMode = CompStackingUpdateModeNormal;
 
-		    /* plugins that wrap into the state change notification
-		       probably are interested in an updated window type as
-		       well, so temporarily switch to the new window state for
-		       recalcWindowType and switch back afterwards so that
-		       changeWindowState picks up the correct old state */
-		    w->state = wState;
-		    recalcWindowType (w);
-		    w->state = wState ^ dState;
-
 		    changeWindowState (w, wState);
 
-		    recalcWindowActions (w);
 		    updateWindowAttributes (w, stackingUpdateMode);
 		}
 	    }

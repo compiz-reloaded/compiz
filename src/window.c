@@ -636,18 +636,22 @@ void
 changeWindowState (CompWindow   *w,
 		   unsigned int newState)
 {
-    if (w->state != newState)
-    {
-	CompDisplay  *d = w->screen->display;
-	unsigned int oldState = w->state;
+    CompDisplay  *d = w->screen->display;
+    unsigned int oldState;
 
-	w->state = newState;
+    if (w->state == newState)
+	return;
 
-	setWindowState (d, w->state, w->id);
+    oldState = w->state;
+    w->state = newState;
 
-	(*w->screen->windowStateChangeNotify) (w, oldState);
-	(*d->matchPropertyChanged) (d, w);
-    }
+    recalcWindowType (w);
+    recalcWindowActions (w);
+
+    setWindowState (d, w->state, w->id);
+
+    (*w->screen->windowStateChangeNotify) (w, oldState);
+    (*d->matchPropertyChanged) (d, w);
 }
 
 static void
@@ -4643,11 +4647,7 @@ maximizeWindow (CompWindow *w,
 
     state |= (w->state & ~MAXIMIZE_STATE);
 
-    recalcWindowType (w);
-    recalcWindowActions (w);
-
     changeWindowState (w, state);
-
     updateWindowAttributes (w, CompStackingUpdateModeNone);
 }
 
