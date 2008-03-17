@@ -3707,6 +3707,18 @@ addWindowSizeChanges (CompWindow     *w,
 	}
     }
 
+    if (xwc->x == oldX)
+	mask &= ~CWX;
+
+    if (xwc->y == oldY)
+	mask &= ~CWY;
+
+    if (xwc->width == oldWidth)
+	mask &= ~CWWidth;
+
+    if (xwc->height == oldHeight)
+	mask &= ~CWHeight;
+
     return mask;
 }
 
@@ -4162,12 +4174,6 @@ updateWindowAttributes (CompWindow             *w,
 				  w->serverX, w->serverY,
 				  w->serverWidth, w->serverHeight,
 				  w->serverBorderWidth);
-
-    if (xwc.width == w->serverWidth)
-	mask &= ~CWWidth;
-
-    if (xwc.height == w->serverHeight)
-	mask &= ~CWHeight;
 
     if (w->mapNum && (mask & (CWWidth | CWHeight)))
 	sendSyncRequest (w);
