@@ -3754,6 +3754,13 @@ moveResizeWindow (CompWindow     *w,
     if (xwcm & (CWX | CWWidth))
     {
 	switch (gravity) {
+	case NorthWestGravity:
+	case WestGravity:
+	case SouthWestGravity:
+	    if (xwcm & CWX)
+		xwc->x += w->input.left;
+	    break;
+
 	case NorthGravity:
 	case CenterGravity:
 	case SouthGravity:
@@ -3781,6 +3788,13 @@ moveResizeWindow (CompWindow     *w,
     if (xwcm & (CWY | CWHeight))
     {
 	switch (gravity) {
+	case NorthWestGravity:
+	case NorthGravity:
+	case NorthEastGravity:
+	    if (xwcm & CWY)
+		xwc->y += w->input.top;
+	    break;
+
 	case WestGravity:
 	case CenterGravity:
 	case EastGravity:
