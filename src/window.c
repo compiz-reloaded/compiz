@@ -4163,6 +4163,12 @@ updateWindowAttributes (CompWindow             *w,
 				  w->serverWidth, w->serverHeight,
 				  w->serverBorderWidth);
 
+    if (xwc.width == w->serverWidth)
+	mask &= ~CWWidth;
+
+    if (xwc.height == w->serverHeight)
+	mask &= ~CWHeight;
+
     if (w->mapNum && (mask & (CWWidth | CWHeight)))
 	sendSyncRequest (w);
 
