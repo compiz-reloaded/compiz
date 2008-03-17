@@ -4163,6 +4163,9 @@ updateWindowAttributes (CompWindow             *w,
 				  w->serverWidth, w->serverHeight,
 				  w->serverBorderWidth);
 
+    if (w->mapNum && (mask & (CWWidth | CWHeight)))
+	sendSyncRequest (w);
+
     if (mask)
 	configureXWindow (w, mask, &xwc);
 }
