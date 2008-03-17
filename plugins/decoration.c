@@ -848,6 +848,12 @@ decorWindowUpdate (CompWindow *w,
 	if (w->state & CompWindowStateMaximizedVertMask)
 	    mask &= ~CWY;
 
+	if (w->saveMask & CWX)
+	    w->saveWc.x += moveDx;
+
+	if (w->saveMask & CWY)
+	    w->saveWc.y += moveDy;
+
 	if (mask)
 	    configureXWindow (w, mask, &xwc);
     }
