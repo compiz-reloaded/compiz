@@ -3383,9 +3383,6 @@ reconfigureXWindow (CompWindow	   *w,
     if (valueMask & CWBorderWidth)
 	w->serverBorderWidth = xwc->border_width;
 
-    if (w->mapNum && (valueMask & (CWWidth | CWHeight)))
-	sendSyncRequest (w);
-
     XConfigureWindow (w->screen->display->display, w->id, valueMask, xwc);
 
     if (w->frame && (valueMask & (CWSibling | CWStackMode)))
