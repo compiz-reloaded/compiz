@@ -1255,18 +1255,10 @@ handleEvent (CompDisplay *d,
 
 	    if (s->nExpose == s->sizeExpose)
 	    {
-		if (s->exposeRects)
-		{
-		    s->exposeRects = realloc (s->exposeRects,
+		s->exposeRects = realloc (s->exposeRects,
 					      (s->sizeExpose + more) *
 					      sizeof (XRectangle));
-		    s->sizeExpose += more;
-		}
-		else
-		{
-		    s->exposeRects = malloc (more * sizeof (XRectangle));
-		    s->sizeExpose = more;
-		}
+		s->sizeExpose += more;
 	    }
 
 	    s->exposeRects[s->nExpose].x      = event->xexpose.x;
@@ -2229,18 +2221,10 @@ handleEvent (CompDisplay *d,
 		{
 		    if (w->nDamage == w->sizeDamage)
 		    {
-			if (w->damageRects)
-			{
-			    w->damageRects = realloc (w->damageRects,
-						      (w->sizeDamage + 1) *
-						      sizeof (XRectangle));
-			    w->sizeDamage += 1;
-			}
-			else
-			{
-			    w->damageRects = malloc (sizeof (XRectangle));
-			    w->sizeDamage  = 1;
-			}
+			w->damageRects = realloc (w->damageRects,
+						  (w->sizeDamage + 1) *
+						  sizeof (XRectangle));
+			w->sizeDamage += 1;
 		    }
 
 		    w->damageRects[w->nDamage].x      = de->area.x;
