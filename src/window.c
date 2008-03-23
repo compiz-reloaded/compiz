@@ -4580,14 +4580,7 @@ minimizeTransients (CompWindow *w,
     if (w->transientFor == ancestor->id ||
 	isGroupTransient (w, ancestor->clientLeader))
     {
-	if (!w->minimized)
-	{
-	    w->minimized = TRUE;
-
-	    forEachWindowOnScreen (w->screen, minimizeTransients, (void *) w);
-
-	    hideWindow (w);
-	}
+	minimizeWindow (w);
     }
 }
 
