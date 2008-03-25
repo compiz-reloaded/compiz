@@ -222,13 +222,8 @@ clonePreparePaintScreen (CompScreen *s,
 	{
 	    cs->offset += msSinceLastPaint * 0.005f;
 	    if (cs->offset >= 1.0f)
-	    {
 		cs->offset = 1.0f;
-		cloneFinish (s);
-	    }
 	}
-
-	damageScreen (s);
     }
 
     UNWRAP (cs, s, preparePaintScreen);
@@ -275,8 +270,13 @@ cloneDonePaintScreen (CompScreen *s)
 {
     CLONE_SCREEN (s);
 
-    if (cs->grab && cs->offset)
+    if (cs->grab)
+    {
+	if (cs->offset == 1.0f)
+	    cloneFinish (s);
+
 	damageScreen (s);
+    }
 
     UNWRAP (cs, s, donePaintScreen);
     (*s->donePaintScreen) (s);
