@@ -809,7 +809,12 @@ static void
 cloneFiniScreen (CompPlugin *p,
 		 CompScreen *s)
 {
+    int i;
+
     CLONE_SCREEN (s);
+
+    for (i = 0; i < cs->nClone; i++)
+	cloneRemove (s, i);
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);
