@@ -4713,6 +4713,22 @@ setWindowUserTime (CompWindow *w,
 	)
 
 static Bool
+getUsageTimestampForWindow (CompWindow *w,
+			    Time       *timestamp)
+{
+    if (getWindowUserTime (w, timestamp))
+	return TRUE;
+
+    if (w->initialTimestampSet)
+    {
+	*timestamp = w->initialTimestamp;
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+static Bool
 isWindowFocusAllowed (CompWindow *w,
 		      Time       timestamp)
 {
@@ -4743,15 +4759,18 @@ isWindowFocusAllowed (CompWindow *w,
     }
     else
     {
-	if (getWindowUserTime (w, &wUserTime))
-	{
-	    gotTimestamp = TRUE;
-	}
-	else if (w->initialTimestampSet)
-	{
-	    wUserTime = w->initialTimestamp;
-	    gotTimestamp = TRUE;
-	}
+	gotTimestamp = getUsageTimestampForWindow (w, &wUserTime);
+    }
+
+    /* if we got no timestamp for the window, try to get at least a timestamp
+       for its transient parent, if any */
+    if (!gotTimestamp && w->transientFor)
+    {
+	CompWindow *parent;
+
+	parent = findWindowAtScreen (w->screen, w->transientFor);
+	if (parent)
+	    gotTimestamp = getUsageTimestampForWindow (parent, &wUserTime);
     }
 
     if (gotTimestamp && !wUserTime)
