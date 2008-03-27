@@ -740,7 +740,7 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionChangeDesktopMask;
 
 	/* allow minimization for dialog windows if they
-	   a) are not a transient (transients can be minimized 
+	   a) are not a transient (transients can be minimized
 	      with their parent)
 	   b) don't have the skip taskbar hint set (as those
 	      have no target to be minimized to)
@@ -758,7 +758,8 @@ recalcWindowActions (CompWindow *w)
 
     switch (w->wmType) {
     case CompWindowTypeNormalMask:
-	actions |= CompWindowActionFullscreenMask;
+	actions |= CompWindowActionFullscreenMask |
+	           CompWindowActionMinimizeMask;
     default:
 	break;
     }
