@@ -1292,6 +1292,7 @@ setWindowFrameExtents (CompWindow	 *w,
 
 	updateWindowSize (w);
 	updateFrameWindow (w);
+	recalcWindowActions (w);
 
 	XChangeProperty (w->screen->display->display, w->id,
 			 w->screen->display->frameExtentsAtom,
