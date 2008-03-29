@@ -1904,6 +1904,7 @@ rotateFiniScreen (CompPlugin *p,
     UNWRAP (rs, s, paintOutput);
     UNWRAP (rs, s, windowGrabNotify);
     UNWRAP (rs, s, windowUngrabNotify);
+    UNWRAP (rs, s, activateWindow);
 
     compFiniScreenOptions (s, rs->opt, ROTATE_SCREEN_OPTION_NUM);
 

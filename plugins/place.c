@@ -1318,22 +1318,6 @@ placeWin (CompWindow *window,
 	}
     }
 
-    /* Maximize windows if they are too big for their work area (bit of
-     * a hack here). Assume undecorated windows probably don't intend to
-     * be maximized.
-     */
-    if ((window->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
-	(window->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
-	!(window->state & CompWindowStateFullscreenMask))
-    {
-	XRectangle outer;
-
-	get_outer_rect_of_window (window, &outer);
-
-	if (outer.width >= work_area.width && outer.height >= work_area.height)
-	    maximizeWindow (window, MAXIMIZE_STATE);
-    }
-
 done_check_denied_focus:
     /* If the window is being denied focus and isn't a transient of the
      * focus window, we do NOT want it to overlap with the focus window
@@ -1388,6 +1372,22 @@ done_check_denied_focus:
     g_list_free (windows);
 
 done:
+    /* Maximize windows if they are too big for their work area (bit of
+     * a hack here). Assume undecorated windows probably don't intend to
+     * be maximized.
+     */
+    if ((window->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
+	(window->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
+	!(window->state & CompWindowStateFullscreenMask))
+    {
+	XRectangle outer;
+
+	get_outer_rect_of_window (window, &outer);
+
+	if (outer.width >= work_area.width && outer.height >= work_area.height)
+	    maximizeWindow (window, MAXIMIZE_STATE);
+    }
+
     if (x + window_width + window->input.right > work_area.x + work_area.width)
 	x = work_area.x + work_area.width - window_width - window->input.right;
 

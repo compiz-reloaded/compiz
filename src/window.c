@@ -740,7 +740,7 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionChangeDesktopMask;
 
 	/* allow minimization for dialog windows if they
-	   a) are not a transient (transients can be minimized 
+	   a) are not a transient (transients can be minimized
 	      with their parent)
 	   b) don't have the skip taskbar hint set (as those
 	      have no target to be minimized to)
@@ -758,7 +758,8 @@ recalcWindowActions (CompWindow *w)
 
     switch (w->wmType) {
     case CompWindowTypeNormalMask:
-	actions |= CompWindowActionFullscreenMask;
+	actions |= CompWindowActionFullscreenMask |
+	           CompWindowActionMinimizeMask;
     default:
 	break;
     }
@@ -1291,6 +1292,7 @@ setWindowFrameExtents (CompWindow	 *w,
 
 	updateWindowSize (w);
 	updateFrameWindow (w);
+	recalcWindowActions (w);
 
 	XChangeProperty (w->screen->display->display, w->id,
 			 w->screen->display->frameExtentsAtom,
@@ -4713,6 +4715,22 @@ setWindowUserTime (CompWindow *w,
 	)
 
 static Bool
+getUsageTimestampForWindow (CompWindow *w,
+			    Time       *timestamp)
+{
+    if (getWindowUserTime (w, timestamp))
+	return TRUE;
+
+    if (w->initialTimestampSet)
+    {
+	*timestamp = w->initialTimestamp;
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+static Bool
 isWindowFocusAllowed (CompWindow *w,
 		      Time       timestamp)
 {
@@ -4743,15 +4761,18 @@ isWindowFocusAllowed (CompWindow *w,
     }
     else
     {
-	if (getWindowUserTime (w, &wUserTime))
-	{
-	    gotTimestamp = TRUE;
-	}
-	else if (w->initialTimestampSet)
-	{
-	    wUserTime = w->initialTimestamp;
-	    gotTimestamp = TRUE;
-	}
+	gotTimestamp = getUsageTimestampForWindow (w, &wUserTime);
+    }
+
+    /* if we got no timestamp for the window, try to get at least a timestamp
+       for its transient parent, if any */
+    if (!gotTimestamp && w->transientFor)
+    {
+	CompWindow *parent;
+
+	parent = findWindowAtScreen (w->screen, w->transientFor);
+	if (parent)
+	    gotTimestamp = getUsageTimestampForWindow (parent, &wUserTime);
     }
 
     if (gotTimestamp && !wUserTime)

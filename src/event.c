@@ -1520,7 +1520,10 @@ handleEvent (CompDisplay *d,
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
+	    {
 		updateTransientHint (w);
+		recalcWindowActions (w);
+	    }
 	}
 	else if (event->xproperty.atom == d->wmClientLeaderAtom)
 	{
