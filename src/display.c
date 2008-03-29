@@ -925,17 +925,23 @@ updatePlugins (CompDisplay *d)
     d->dirtyPluginList = FALSE;
 
     o = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
-    for (i = 0; i < d->plugin.list.nValue && i < o->value.list.nValue; i++)
+
+    /* The old plugin list always begins with the core plugin. To make sure
+       we don't unnecessarily unload plugins if the new plugin list does not
+       contain the core plugin, we have to use an offset */
+    if (o->value.list.nValue > 0 && strcmp (o->value.list.value[0].s, "core"))
+	i = 0;
+    else
+	i = 1;
+
+    /* j is initialized to 1 to make sure we never pop the core plugin */
+    for (j = 1; j < d->plugin.list.nValue && i < o->value.list.nValue; i++, j++)
     {
-	if (strcmp (d->plugin.list.value[i].s, o->value.list.value[i].s))
+	if (strcmp (d->plugin.list.value[j].s, o->value.list.value[i].s))
 	    break;
     }
 
-    /* never pop the core plugin */
-    if (i)
-	nPop = d->plugin.list.nValue - i;
-    else
-	nPop = d->plugin.list.nValue - 1;
+    nPop = d->plugin.list.nValue - j;
 
     if (nPop)
     {
