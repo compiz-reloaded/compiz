@@ -1726,7 +1726,8 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH 14
 #define COMP_SCREEN_OPTION_OPACITY_MATCHES	  15
 #define COMP_SCREEN_OPTION_OPACITY_VALUES	  16
-#define COMP_SCREEN_OPTION_NUM		          17
+#define COMP_SCREEN_OPTION_TEXTURE_COMPRESSION	  17
+#define COMP_SCREEN_OPTION_NUM		          18
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -2056,6 +2057,7 @@ struct _CompScreen {
     int		      textureEnvCombine;
     int		      textureEnvCrossbar;
     int		      textureBorderClamp;
+    int		      textureCompression;
     GLint	      maxTextureSize;
     int		      fbo;
     int		      fragmentProgram;

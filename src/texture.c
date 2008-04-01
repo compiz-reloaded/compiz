@@ -104,6 +104,7 @@ imageToTexture (CompScreen   *screen,
 {
     char *data;
     int	 i;
+    GLint internalFormat;
 
     data = malloc (4 * width * height);
     if (!data)
@@ -138,7 +139,12 @@ imageToTexture (CompScreen   *screen,
 
     glBindTexture (texture->target, texture->name);
 
-    glTexImage2D (texture->target, 0, GL_RGBA, width, height, 0,
+    internalFormat =
+	(screen->opt[COMP_SCREEN_OPTION_TEXTURE_COMPRESSION].value.b &&
+	 screen->textureCompression ?
+	 GL_COMPRESSED_RGBA_ARB : GL_RGBA);
+
+    glTexImage2D (texture->target, 0, internalFormat, width, height, 0,
 		  format, type, data);
 
     texture->filter = GL_NEAREST;

@@ -645,7 +645,8 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
       RESTOSTRING (0, FOCUS_PREVENTION_LEVEL_LAST), 0, 0 },
     { "focus_prevention_match", "match", 0, 0, 0 },
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
-    { "opacity_values", "list", "<type>int</type>", 0, 0 }
+    { "opacity_values", "list", "<type>int</type>", 0, 0 },
+    { "texture_compression", "bool", 0, 0, 0 }
 };
 
 static void
@@ -2059,6 +2060,10 @@ addScreen (CompDisplay *display,
 	    s->generateMipmap)
 	    s->fbo = 1;
     }
+
+    s->textureCompression = 0;
+    if (strstr (glExtensions, "GL_ARB_texture_compression"))
+	s->textureCompression = 1;
 
     fbConfigs = (*s->getFBConfigs) (dpy,
 				    screenNum,
