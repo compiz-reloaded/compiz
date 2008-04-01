@@ -1351,7 +1351,7 @@ loadFragmentProgram (CompScreen *s,
 }
 
 static Bool
-loadFilterProgram (CompScreen *s)
+loadFilterProgram (CompScreen *s, int numITC)
 {
     char  buffer[2048];
     char  *targetString;
@@ -1380,7 +1380,16 @@ loadFilterProgram (CompScreen *s)
 		    "MUL sum, sum, %f;",
 		    bs->amp[bs->numTexop]);
 
-    for (i = 0; i < bs->numTexop; i++)
+    for (i = 0; i < numITC; i++)
+	str += sprintf (str,
+			"TEX pix, fragment.texcoord[%d], texture[0], %s;"
+			"MAD sum, pix, %f, sum;"
+			"TEX pix, fragment.texcoord[%d], texture[0], %s;"
+			"MAD sum, pix, %f, sum;",
+			(i * 2) + 1, targetString, bs->amp[i],
+			(i * 2) + 2, targetString, bs->amp[i]);
+
+    for (i = numITC; i < bs->numTexop; i++)
 	str += sprintf (str,
 			"ADD tCoord, texcoord, program.local[%d];"
 			"TEX pix, tCoord, texture[0], %s;"
@@ -1388,8 +1397,8 @@ loadFilterProgram (CompScreen *s)
 			"SUB tCoord, texcoord, program.local[%d];"
 			"TEX pix, tCoord, texture[0], %s;"
 			"MAD sum, pix, %f, sum;",
-			i, targetString, bs->amp[i],
-			i, targetString, bs->amp[i]);
+			i - numITC, targetString, bs->amp[i],
+			i - numITC, targetString, bs->amp[i]);
 
     str += sprintf (str,
 		    "MOV result.color, sum;"
@@ -1484,12 +1493,15 @@ fboUpdate (CompScreen *s,
 	   BoxPtr     pBox,
 	   int	      nBox)
 {
-    int i, y;
+    int i, y, iTC = 0;
 
     BLUR_SCREEN (s);
 
+    if (s->maxTextureUnits)
+	iTC = MIN ((s->maxTextureUnits - 1) / 2, bs->numTexop);
+
     if (!bs->program)
-	if (!loadFilterProgram (s))
+	if (!loadFilterProgram (s, iTC))
 	    return FALSE;
 
     if (!fboPrologue (s))
@@ -1502,8 +1514,8 @@ fboUpdate (CompScreen *s,
     glEnable (GL_FRAGMENT_PROGRAM_ARB);
     (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, bs->program);
 
-    for (i = 0; i < bs->numTexop; i++)
-	(*s->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, i,
+    for (i = iTC; i < bs->numTexop; i++)
+	(*s->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, i - iTC,
 				       bs->tx * bs->pos[i],
 				       0.0f, 0.0f, 0.0f);
 
@@ -1513,15 +1525,57 @@ fboUpdate (CompScreen *s,
     {
 	y = s->height - pBox->y2;
 
+	for (i = 0; i < iTC; i++)
+	{
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2),
+				   bs->tx * (pBox->x1 + bs->pos[i]),
+				   bs->ty * y);
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2) + 1,
+				   bs->tx * (pBox->x1 - bs->pos[i]),
+				   bs->ty * y);
+	}
+
 	glTexCoord2f (bs->tx * pBox->x1, bs->ty * y);
 	glVertex2i   (pBox->x1, y);
+
+	for (i = 0; i < iTC; i++)
+	{
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2),
+				   bs->tx * (pBox->x2 + bs->pos[i]),
+				   bs->ty * y);
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2) + 1,
+				   bs->tx * (pBox->x2 - bs->pos[i]),
+				   bs->ty * y);
+	}
+
 	glTexCoord2f (bs->tx * pBox->x2, bs->ty * y);
 	glVertex2i   (pBox->x2, y);
 
 	y = s->height - pBox->y1;
 
+	for (i = 0; i < iTC; i++)
+	{
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2),
+				   bs->tx * (pBox->x2 + bs->pos[i]),
+				   bs->ty * y);
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2) + 1,
+				   bs->tx * (pBox->x2 - bs->pos[i]),
+				   bs->ty * y);
+	}
+
 	glTexCoord2f (bs->tx * pBox->x2, bs->ty * y);
 	glVertex2i   (pBox->x2, y);
+
+	for (i = 0; i < iTC; i++)
+	{
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2),
+				   bs->tx * (pBox->x1 + bs->pos[i]),
+				   bs->ty * y);
+	    (*s->multiTexCoord2f) (GL_TEXTURE1_ARB + (i * 2) + 1,
+				   bs->tx * (pBox->x1 - bs->pos[i]),
+				   bs->ty * y);
+	}
+
 	glTexCoord2f (bs->tx * pBox->x1, bs->ty * y);
 	glVertex2i   (pBox->x1, y);
 
