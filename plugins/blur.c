@@ -1191,6 +1191,18 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    for (i = 0; i < sizeof (filterTemp) / sizeof (filterTemp[0]); i++)
 		ok &= addTempHeaderOpToFunctionData (data, filterTemp[i]);
 
+	    for (i = 0; i < bs->numTexop * 2; i++)
+	    {
+		snprintf (str, 1024, "pix_%d", i);
+		ok &= addTempHeaderOpToFunctionData (data, str);
+	    }
+
+	    for (i = numITC * 2; i < bs->numTexop * 2; i++)
+	    {
+		snprintf (str, 1024, "coord_%d", i);
+		ok &= addTempHeaderOpToFunctionData (data, str);
+	    }
+
 	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
 	    ok &= addColorOpToFunctionData (data, "output", "output");
 
@@ -1238,19 +1250,26 @@ getDstBlurFragmentFunction (CompScreen  *s,
 
 	    ok &= addDataOpToFunctionData (data, str);
 
+	    for (i = numITC; i < bs->numTexop; i++)
+	    {
+		snprintf (str, 1024,
+			  "ADD coord_%d, fCoord, {0.0, %g, 0.0, 0.0};"
+			  "SUB coord_%d, fCoord, {0.0, %g, 0.0, 0.0};",
+			  i * 2, bs->pos[i] * bs->ty,
+			  (i * 2) + 1, bs->pos[i] * bs->ty);
+
+		ok &= addDataOpToFunctionData (data, str);
+	    }
+	    
 	    for (i = 0; i < numITC; i++)
 	    {
 		snprintf (str, 1024,
-			  "TXP pix, fragment.texcoord[%d], texture[%d], %s;"
-			  "MAD sum, pix, %f, sum;"
-			  "TXP pix, fragment.texcoord[%d], texture[%d], %s;"
-			  "MAD sum, pix, %f, sum;",
-			  startTC + 1 + (i * 2),
+			  "TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;"
+			  "TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;",
+			  i * 2, startTC + 1 + (i * 2),
 			  unit + 1, targetString,
-			  bs->amp[i],
-			  startTC + 2 + (i * 2),
-			  unit + 1, targetString,
-			  bs->amp[i]);
+			  (i * 2) + 1, startTC + 2 + (i * 2),
+			  unit + 1, targetString);
 
 		ok &= addDataOpToFunctionData (data, str);
 	    }
@@ -1258,18 +1277,21 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    for (i = numITC; i < bs->numTexop; i++)
 	    {
 		snprintf (str, 1024,
-			  "ADD tCoord, fCoord, {0.0, %g, 0.0, 0.0};"
-			  "TEX pix, tCoord, texture[%d], %s;"
-			  "MAD sum, pix, %f, sum;"
-			  "SUB tCoord, fCoord, {0.0, %g, 0.0, 0.0};"
-			  "TEX pix, tCoord, texture[%d], %s;"
-			  "MAD sum, pix, %f, sum;",
-			  bs->pos[i] * bs->ty,
+			  "TEX pix_%d, coord_%d, texture[%d], %s;"
+			  "TEX pix_%d, coord_%d, texture[%d], %s;",
+			  i * 2, i * 2,
 			  unit + 1, targetString,
-			  bs->amp[i],
-			  bs->pos[i] * bs->ty,
-			  unit + 1, targetString,
-			  bs->amp[i]);
+			  (i * 2) + 1, (i * 2) + 1,
+			  unit + 1, targetString);
+
+		ok &= addDataOpToFunctionData (data, str);
+	    }
+
+	    for (i = 0; i < bs->numTexop * 2; i++)
+	    {
+		snprintf (str, 1024,
+			  "MAD sum, pix_%d, %f, sum;",
+			  i, bs->amp[i / 2]);
 
 		ok &= addDataOpToFunctionData (data, str);
 	    }
@@ -1436,6 +1458,12 @@ loadFilterProgram (CompScreen *s, int numITC)
 
     str += sprintf (str, "TEMP tCoord, pix;");
 
+    for (i = 0; i < bs->numTexop; i++)
+	str += sprintf (str,"TEMP pix_%d, pix_%d;", i * 2, (i * 2) + 1);
+
+    for (i = numITC; i < bs->numTexop; i++)
+	str += sprintf (str,"TEMP coord_%d, coord_%d;", i * 2, (i * 2) + 1);
+
     str += sprintf (str,
 		    "TEX sum, texcoord, texture[0], %s;",
 		    targetString);
@@ -1443,27 +1471,33 @@ loadFilterProgram (CompScreen *s, int numITC)
     str += sprintf (str,
 		    "MUL sum, sum, %f;",
 		    bs->amp[bs->numTexop]);
+    
+    for (i = numITC; i < bs->numTexop; i++)
+	str += sprintf (str,
+			"ADD coord_%d, texcoord, {%g, 0.0, 0.0, 0.0};"
+			"SUB coord_%d, texcoord, {%g, 0.0, 0.0, 0.0};",
+			i * 2, bs->pos[i] * bs->tx,
+			(i * 2) + 1, bs->pos[i] * bs->tx);
 
     for (i = 0; i < numITC; i++)
 	str += sprintf (str,
-			"TEX pix, fragment.texcoord[%d], texture[0], %s;"
-			"MAD sum, pix, %f, sum;"
-			"TEX pix, fragment.texcoord[%d], texture[0], %s;"
-			"MAD sum, pix, %f, sum;",
-			(i * 2) + 1, targetString, bs->amp[i],
-			(i * 2) + 2, targetString, bs->amp[i]);
+			"TEX pix_%d, fragment.texcoord[%d], texture[0], %s;"
+			"TEX pix_%d, fragment.texcoord[%d], texture[0], %s;",
+			i * 2, (i * 2) + 1, targetString,
+			(i * 2) + 1, (i * 2) + 2, targetString);
 
     for (i = numITC; i < bs->numTexop; i++)
 	str += sprintf (str,
-			"ADD tCoord, texcoord, {%g, 0.0, 0.0, 0.0};"
-			"TEX pix, tCoord, texture[0], %s;"
-			"MAD sum, pix, %f, sum;"
-			"SUB tCoord, texcoord, {%g, 0.0, 0.0, 0.0};"
-			"TEX pix, tCoord, texture[0], %s;"
-			"MAD sum, pix, %f, sum;",
-			bs->pos[i] * bs->tx, targetString, bs->amp[i],
-			bs->pos[i] * bs->tx, targetString, bs->amp[i]);
+			"TEX pix_%d, coord_%d, texture[0], %s;"
+			"TEX pix_%d, coord_%d, texture[0], %s;",
+			i * 2, i * 2, targetString,
+			(i * 2) + 1, (i * 2) + 1, targetString);
 
+    for (i = 0; i < bs->numTexop * 2; i++)
+	str += sprintf (str,
+			"MAD sum, pix_%d, %f, sum;",
+			i, bs->amp[i / 2]);
+    
     str += sprintf (str,
 		    "MOV result.color, sum;"
 		    "END");
