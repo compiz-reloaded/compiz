@@ -103,7 +103,8 @@ typedef struct _BlurDisplay {
 #define BLUR_SCREEN_OPTION_MIPMAP_LOD        8
 #define BLUR_SCREEN_OPTION_SATURATION        9
 #define BLUR_SCREEN_OPTION_BLUR_OCCLUSION    10
-#define BLUR_SCREEN_OPTION_NUM		     11
+#define BLUR_SCREEN_OPTION_INDEPENDENT_TEX   11
+#define BLUR_SCREEN_OPTION_NUM		     12
 
 typedef struct _BlurScreen {
     int	windowPrivateIndex;
@@ -673,6 +674,17 @@ blurSetScreenOption (CompPlugin      *plugin,
 	    bs->blurOcclusion = o->value.b;
 	    blurReset (screen);
 	    damageScreen (screen);
+	    return TRUE;
+	}
+    case BLUR_SCREEN_OPTION_INDEPENDENT_TEX:
+	if (compSetBoolOption (o, value))
+	{
+	    filter = bs->opt[BLUR_SCREEN_OPTION_FILTER].value.i;
+	    if (filter == BLUR_FILTER_GAUSSIAN)
+	    {
+		blurReset (screen);
+		damageScreen (screen);
+	    }
 	    return TRUE;
 	}
     default:
@@ -1549,7 +1561,8 @@ fboUpdate (CompScreen *s,
 
     BLUR_SCREEN (s);
 
-    if (s->maxTextureUnits)
+    if (s->maxTextureUnits && 
+	bs->opt[BLUR_SCREEN_OPTION_INDEPENDENT_TEX].value.b)
 	iTC = MIN ((s->maxTextureUnits - 1) / 2, bs->numTexop);
 
     if (!bs->program)
@@ -2238,9 +2251,12 @@ blurDrawWindowTexture (CompWindow	    *w,
 		}
 		break;
 	    case BLUR_FILTER_GAUSSIAN:
-		iTC = MAX (0, s->maxTextureUnits - w->texUnits);
-		if (iTC)
-		    iTC = MIN (((iTC - 1) / 2), bs->numTexop);
+		if (bs->opt[BLUR_SCREEN_OPTION_INDEPENDENT_TEX].value.b)
+		{
+		    iTC = MAX (0, s->maxTextureUnits - w->texUnits);
+		    if (iTC)
+			iTC = MIN (((iTC - 1) / 2), bs->numTexop);
+		}
 
 		param = allocFragmentParameters (&dstFa, 2);
 		unit  = allocFragmentTextureUnits (&dstFa, 2);
@@ -2823,7 +2839,8 @@ static const CompMetadataOptionInfo blurScreenOptionInfo[] = {
     { "gaussian_strength", "float", "<min>0.0</min><max>1.0</max>", 0, 0 },
     { "mipmap_lod", "float", "<min>0.1</min><max>5.0</max>", 0, 0 },
     { "saturation", "int", "<min>0</min><max>100</max>", 0, 0 },
-    { "occlusion", "bool", 0, 0, 0 }
+    { "occlusion", "bool", 0, 0, 0 },
+    { "independent_tex", "bool", 0, 0, 0 }
 };
 
 static Bool

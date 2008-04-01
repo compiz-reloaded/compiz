@@ -100,6 +100,11 @@
 		<_long>Disable blurring of screen regions obscured by other windows.</_long>
 		<default>true</default>
 	    </option>
+	    <option name="independent_tex" type="bool">
+		<_short>Independent texture fetch</_short>
+		<_long>Use the available texture units to do as many as possible independent texture fetches.</_long>
+		<default>false</default>
+	    </option>
 	</screen>
     </plugin>
 </compiz>
