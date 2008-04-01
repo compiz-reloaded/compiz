@@ -1246,16 +1246,16 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    for (i = numITC; i < bs->numTexop; i++)
 	    {
 		snprintf (str, 1024,
-			  "ADD tCoord, fCoord, program.env[%d];"
+			  "ADD tCoord, fCoord, {0.0, %g, 0.0, 0.0};"
 			  "TEX pix, tCoord, texture[%d], %s;"
 			  "MAD sum, pix, %f, sum;"
-			  "SUB tCoord, fCoord, program.env[%d];"
+			  "SUB tCoord, fCoord, {0.0, %g, 0.0, 0.0};"
 			  "TEX pix, tCoord, texture[%d], %s;"
 			  "MAD sum, pix, %f, sum;",
-			  param + 2 + i - numITC,
+			  bs->pos[i] * bs->ty,
 			  unit + 1, targetString,
 			  bs->amp[i],
-			  param + 2 + i - numITC,
+			  bs->pos[i] * bs->ty,
 			  unit + 1, targetString,
 			  bs->amp[i]);
 
@@ -1443,14 +1443,14 @@ loadFilterProgram (CompScreen *s, int numITC)
 
     for (i = numITC; i < bs->numTexop; i++)
 	str += sprintf (str,
-			"ADD tCoord, texcoord, program.local[%d];"
+			"ADD tCoord, texcoord, {%g, 0.0, 0.0, 0.0};"
 			"TEX pix, tCoord, texture[0], %s;"
 			"MAD sum, pix, %f, sum;"
-			"SUB tCoord, texcoord, program.local[%d];"
+			"SUB tCoord, texcoord, {%g, 0.0, 0.0, 0.0};"
 			"TEX pix, tCoord, texture[0], %s;"
 			"MAD sum, pix, %f, sum;",
-			i - numITC, targetString, bs->amp[i],
-			i - numITC, targetString, bs->amp[i]);
+			bs->pos[i] * bs->tx, targetString, bs->amp[i],
+			bs->pos[i] * bs->tx, targetString, bs->amp[i]);
 
     str += sprintf (str,
 		    "MOV result.color, sum;"
@@ -1565,11 +1565,6 @@ fboUpdate (CompScreen *s,
 
     glEnable (GL_FRAGMENT_PROGRAM_ARB);
     (*s->bindProgram) (GL_FRAGMENT_PROGRAM_ARB, bs->program);
-
-    for (i = iTC; i < bs->numTexop; i++)
-	(*s->programLocalParameter4f) (GL_FRAGMENT_PROGRAM_ARB, i - iTC,
-				       bs->tx * bs->pos[i],
-				       0.0f, 0.0f, 0.0f);
 
     glBegin (GL_QUADS);
 
@@ -2247,10 +2242,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 		if (iTC)
 		    iTC = MIN (((iTC - 1) / 2), bs->numTexop);
 
-		iTC = 0;
-
-		param = allocFragmentParameters (&dstFa, 2 + 
-						 bs->numTexop - iTC);
+		param = allocFragmentParameters (&dstFa, 2);
 		unit  = allocFragmentTextureUnits (&dstFa, 2);
 
 		function = 
@@ -2277,12 +2269,6 @@ blurDrawWindowTexture (CompWindow	    *w,
 						 param + 1,
 						 threshold, threshold,
 						 threshold, threshold);
-
-		    for (i = iTC; i < bs->numTexop; i++)
-			(*s->programEnvParameter4f) (GL_FRAGMENT_PROGRAM_ARB,
-						     param + 2 + i - iTC,
-						     0.0f, bs->ty * bs->pos[i],
-						     0.0f, 0.0f);
 
 		    if (iTC)
 		    {
