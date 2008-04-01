@@ -78,7 +78,8 @@ typedef struct _CubeDisplay {
 
 typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
-				     float      *v);
+				     float      *v,
+				     float      *progress);
 
 typedef void (*CubeClearTargetOutputProc) (CompScreen *s,
 					   float      xRotate,

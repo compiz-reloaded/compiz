@@ -533,17 +533,19 @@ rotateDonePaintScreen (CompScreen *s)
 static void
 rotateGetRotation (CompScreen *s,
 		   float      *x,
-		   float      *v)
+		   float      *v,
+		   float      *progress)
 {
     CUBE_SCREEN (s);
     ROTATE_SCREEN (s);
 
     UNWRAP (rs, cs, getRotation);
-    (*cs->getRotation) (s, x, v);
+    (*cs->getRotation) (s, x, v, progress);
     WRAP (rs, cs, getRotation, rotateGetRotation);
 
     *x += rs->baseXrot + rs->xrot;
     *v += rs->yrot;
+    *progress = MAX (*progress, rs->progress);
 }
 
 static void

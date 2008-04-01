@@ -1160,10 +1160,12 @@ cubePaintAllViewports (CompScreen          *s,
 static void
 cubeGetRotation (CompScreen *s,
 		 float	    *x,
-		 float	    *v)
+		 float	    *v,
+		 float      *progress)
 {
-    *x = 0.0f;
-    *v = 0.0f;
+    *x        = 0.0f;
+    *v        = 0.0f;
+    *progress = 0.0f;
 }
 
 static void
@@ -1390,7 +1392,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
-    float	      xRotate, vRotate, rRotate;
+    float	      xRotate, vRotate, rRotate, progress;
     int		      hsize, xMove = 0;
     float	      size;
     GLenum            filter = s->display->textureFilter;
@@ -1442,7 +1444,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	cs->outputYOffset = 0.0f;
     }
 
-    (*cs->getRotation) (s, &xRotate, &vRotate);
+    (*cs->getRotation) (s, &xRotate, &vRotate, &progress);
 
     sa.xRotate += xRotate;
     sa.vRotate += vRotate;
