@@ -142,8 +142,10 @@ typedef struct _RotateScreen {
     unsigned int      grabMask;
     CompWindow	      *grabWindow;
 
+    float progress;
+    float progressVelocity;
+
     GLfloat zoomTranslate;
-    GLfloat zoomVelocity;
 } RotateScreen;
 
 #define GET_ROTATE_DISPLAY(d)					    \
@@ -428,33 +430,27 @@ rotatePreparePaintScreen (CompScreen *s,
 	}
     }
 
-    if (rs->moving && cs->invert == 1 && !cs->unfolded)
+    if (rs->moving)
     {
 	if (fabs (rs->xrot + rs->baseXrot + rs->moveTo) <=
 	    (360.0 / (s->hsize * 2.0)))
 	{
-	    rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
-		fabs (rs->xrot + rs->baseXrot + rs->moveTo) /
-		(360.0 / (s->hsize * 2.0));
+	    rs->progress = fabs (rs->xrot + rs->baseXrot + rs->moveTo) /
+			   (360.0 / (s->hsize * 2.0));
 	}
 	else if (fabs (rs->xrot + rs->baseXrot) <= (360.0 / (s->hsize * 2.0)))
 	{
-	    rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
-		fabs (rs->xrot + rs->baseXrot) /
-		(360.0 / (s->hsize * 2.0));
+	    rs->progress = fabs (rs->xrot + rs->baseXrot) /
+			   (360.0 / (s->hsize * 2.0));
 	}
 	else
 	{
-	    rs->zoomTranslate += fabs (rs->xrot + rs->baseXrot - oldXrot) /
-		(360.0 / (s->hsize * 2.0)) *
-		rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f;
-	    rs->zoomTranslate =
-		MIN (rs->zoomTranslate,
-		     rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f);
+	    rs->progress += fabs (rs->xrot + rs->baseXrot - oldXrot) /
+			    (360.0 / (s->hsize * 2.0));
+	    rs->progress = MIN (rs->progress, 1.0);
 	}
     }
-    else if ((rs->zoomTranslate != 0.0f || rs->grabbed) && cs->invert == 1 &&
-	     !cs->unfolded)
+    else if (rs->progress != 0.0f || rs->grabbed)
     {
 	int   steps;
 	float amount, chunk;
@@ -473,10 +469,9 @@ rotatePreparePaintScreen (CompScreen *s,
 	    float dt, adjust, tamount;
 
 	    if (rs->grabbed)
-		dt = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f -
-		     rs->zoomTranslate;
+		dt = 1.0 - rs->progress;
 	    else
-		dt = 0.0f - rs->zoomTranslate;
+		dt = 0.0f - rs->progress;
 
 	    adjust = dt * 0.15f;
 	    tamount = fabs (dt) * 1.5f;
@@ -485,21 +480,30 @@ rotatePreparePaintScreen (CompScreen *s,
 	    else if (tamount > 2.0f)
 		tamount = 2.0f;
 
-	    rs->zoomVelocity = (tamount * rs->zoomVelocity + adjust) /
-			       (tamount + 1.0f);
+	    rs->progressVelocity = (tamount * rs->progressVelocity + adjust) /
+				   (tamount + 1.0f);
 
-	    if (fabs (dt) < 0.1f && fabs (rs->zoomVelocity) < 0.0005f)
+	    if (fabs (dt) < 0.1f && fabs (rs->progressVelocity) < 0.0005f)
 	    {
 		if (rs->grabbed)
-		    rs->zoomTranslate =
-			rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f;
+		    rs->progress = 1.0f;
 		else
-		    rs->zoomTranslate = 0.0f;
+		    rs->progress = 0.0f;
 
 		break;
 	    }
-	    rs->zoomTranslate += rs->zoomVelocity * chunk;
+	    rs->progress += rs->progressVelocity * chunk;
 	}
+    }
+
+    if (cs->invert == 1 && !cs->unfolded)
+    {
+	rs->zoomTranslate = rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f *
+			    rs->progress;
+    }
+    else
+    {
+	rs->progress = 0.0;
     }
 
     UNWRAP (rs, s, preparePaintScreen);
@@ -515,15 +519,11 @@ rotateDonePaintScreen (CompScreen *s)
     if (rs->grabIndex || rs->moving)
     {
 	if ((!rs->grabbed && !rs->snapTop && !rs->snapBottom) ||
-	    rs->xVelocity || rs->yVelocity)
+	    rs->xVelocity || rs->yVelocity || rs->progressVelocity)
 	{
 	    damageScreen (s);
 	}
     }
-
-    if (rs->zoomTranslate > 0.0f &&
-	rs->zoomTranslate < rs->opt[ROTATE_SCREEN_OPTION_ZOOM].value.f)
-	damageScreen (s);
 
     UNWRAP (rs, s, donePaintScreen);
     (*s->donePaintScreen) (s);
@@ -576,7 +576,7 @@ rotatePaintOutput (CompScreen		   *s,
 
     ROTATE_SCREEN (s);
 
-    if (rs->grabIndex || rs->moving || rs->zoomTranslate != 0.0f)
+    if (rs->grabIndex || rs->moving || rs->progress != 0.0f)
     {
 	CompTransform sTransform = *transform;
 
@@ -1871,8 +1871,10 @@ rotateInitScreen (CompPlugin *p,
 
     rs->rotateHandle = 0;
 
+    rs->progress          = 0.0;
+    rs->progressVelocity  = 0.0;
+
     rs->zoomTranslate = 0.0;
-    rs->zoomVelocity  = 0.0;
 
     WRAP (rs, s, preparePaintScreen, rotatePreparePaintScreen);
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
