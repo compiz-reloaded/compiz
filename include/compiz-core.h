@@ -1805,6 +1805,7 @@ typedef GLXPixmap (*GLXCreatePixmapProc) (Display     *display,
 
 typedef void (*GLActiveTextureProc) (GLenum texture);
 typedef void (*GLClientActiveTextureProc) (GLenum texture);
+typedef void (*GLMultiTexCoord2fProc) (GLenum, GLfloat, GLfloat);
 
 typedef void (*GLGenProgramsProc) (GLsizei n,
 				   GLuint  *programs);
@@ -2168,6 +2169,7 @@ struct _CompScreen {
 
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;
+    GLMultiTexCoord2fProc     multiTexCoord2f;
 
     GLGenProgramsProc	     genPrograms;
     GLDeleteProgramsProc     deletePrograms;

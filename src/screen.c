@@ -2003,8 +2003,10 @@ addScreen (CompDisplay *display,
 	    getProcAddress (s, "glActiveTexture");
 	s->clientActiveTexture = (GLClientActiveTextureProc)
 	    getProcAddress (s, "glClientActiveTexture");
+	s->multiTexCoord2f = (GLMultiTexCoord2fProc)
+	    getProcAddress (s, "glMultiTexCoord2f");
 
-	if (s->activeTexture && s->clientActiveTexture)
+	if (s->activeTexture && s->clientActiveTexture && s->multiTexCoord2f)
 	    glGetIntegerv (GL_MAX_TEXTURE_UNITS_ARB, &s->maxTextureUnits);
     }
 
