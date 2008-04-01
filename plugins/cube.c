@@ -792,7 +792,8 @@ static void
 cubePreparePaintScreen (CompScreen *s,
 			int	   msSinceLastPaint)
 {
-    int opt;
+    int   opt;
+    float x, progress;
 
     CUBE_SCREEN (s);
 
@@ -838,7 +839,11 @@ cubePreparePaintScreen (CompScreen *s,
 	(cs->rotationState == RotationChange &&
 	 !cs->opt[CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY].value.b))
     {
-	opt = CUBE_SCREEN_OPTION_ACTIVE_OPACITY;
+	opt = cs->lastOpacityIndex = CUBE_SCREEN_OPTION_ACTIVE_OPACITY;
+    }
+    else if (cs->rotationState == RotationChange)
+    {
+	opt = cs->lastOpacityIndex = CUBE_SCREEN_OPTION_INACTIVE_OPACITY;
     }
     else
     {
@@ -847,30 +852,20 @@ cubePreparePaintScreen (CompScreen *s,
 
     cs->toOpacity = (cs->opt[opt].value.f / 100.0f) * OPAQUE;
 
-    if (cs->opt[CUBE_SCREEN_OPTION_FADE_TIME].value.f == 0.0f)
-	cs->desktopOpacity = cs->toOpacity;
-    else if (cs->desktopOpacity != cs->toOpacity)
+    if (cs->desktopOpacity != cs->toOpacity)
     {
-	float steps = (msSinceLastPaint * OPAQUE / 1000.0) /
-	    cs->opt[CUBE_SCREEN_OPTION_FADE_TIME].value.f;
+	(*cs->getRotation) (s, &x, &x, &progress);
+	x = cs->desktopOpacity;
+	cs->desktopOpacity = 
+	    (cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f - 
+	    ((cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f -
+	    cs->opt[cs->lastOpacityIndex].value.f) * progress))
+	    / 100.0f * OPAQUE;
 
-	if (steps < 12)
-	    steps = 12;
-
-	if (cs->toOpacity > cs->desktopOpacity)
-	{
-	    cs->desktopOpacity += steps;
-	    cs->desktopOpacity = MIN (cs->toOpacity, cs->desktopOpacity);
-	}
-	if (cs->toOpacity < cs->desktopOpacity)
-	{
-	    cs->desktopOpacity -= steps;
-	    cs->desktopOpacity = MAX (cs->toOpacity, cs->desktopOpacity);
-	}
     }
 
     cs->paintAllViewports = (cs->desktopOpacity != OPAQUE);
-
+ 
     UNWRAP (cs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
@@ -2170,7 +2165,6 @@ static const CompMetadataOptionInfo cubeScreenOptionInfo[] = {
     { "adjust_image", "bool", 0, 0, 0 },
     { "active_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
     { "inactive_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
-    { "fade_time", "float", "<min>0.0</min>", 0, 0 },
     { "transparent_manual_only", "bool", 0, 0, 0 },
     { "multioutput_mode", "int", "<min>0</min><max>2</max>", 0, 0 }
 };
@@ -2251,6 +2245,8 @@ cubeInitScreen (CompPlugin *p,
     cs->rotationState = RotationNone;
 
     cs->desktopOpacity = OPAQUE;
+
+    cs->lastOpacityIndex = CUBE_SCREEN_OPTION_INACTIVE_OPACITY;
 
     cs->moMode = cs->opt[CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
 

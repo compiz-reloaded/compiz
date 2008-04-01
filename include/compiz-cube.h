@@ -71,10 +71,9 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_ADJUST_IMAGE	           14
 #define CUBE_SCREEN_OPTION_ACTIVE_OPACITY          15
 #define CUBE_SCREEN_OPTION_INACTIVE_OPACITY        16
-#define CUBE_SCREEN_OPTION_FADE_TIME               17
-#define CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY 18
-#define CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE        19
-#define CUBE_SCREEN_OPTION_NUM                     20
+#define CUBE_SCREEN_OPTION_TRANSPARENT_MANUAL_ONLY 17
+#define CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE        18
+#define CUBE_SCREEN_OPTION_NUM                     19
 
 typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
@@ -195,6 +194,7 @@ typedef struct _CubeScreen {
 
     float desktopOpacity;
     float toOpacity;
+    int   lastOpacityIndex;
 
     CompTexture *bg;
     int		nBg;
