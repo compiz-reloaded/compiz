@@ -106,7 +106,6 @@ typedef struct _RotateDisplay {
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
-    PaintScreenProc		 paintScreen;
     PaintOutputProc		 paintOutput;
     WindowGrabNotifyProc	 windowGrabNotify;
     WindowUngrabNotifyProc	 windowUngrabNotify;
@@ -546,24 +545,6 @@ rotateGetRotation (CompScreen *s,
     *x += rs->baseXrot + rs->xrot;
     *v += rs->yrot;
     *progress = MAX (*progress, rs->progress);
-}
-
-static void
-rotatePaintScreen (CompScreen   *s,
-		   CompOutput   *outputs,
-		   int          numOutputs,
-		   unsigned int mask)
-{
-    ROTATE_SCREEN (s);
-    CUBE_SCREEN (s);
-
-    UNWRAP (rs, s, paintScreen);
-    if ((rs->grabIndex || rs->moving || rs->zoomTranslate || cs->grabIndex) &&
-	cs->moMode == CUBE_MOMODE_ONE && s->nOutputDev)
-	(*s->paintScreen) (s, &s->fullscreenOutput, 1, mask);
-    else
-	(*s->paintScreen) (s, outputs, numOutputs, mask);
-    WRAP (rs, s, paintScreen, rotatePaintScreen);
 }
 
 static Bool
@@ -1880,7 +1861,6 @@ rotateInitScreen (CompPlugin *p,
 
     WRAP (rs, s, preparePaintScreen, rotatePreparePaintScreen);
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
-    WRAP (rs, s, paintScreen, rotatePaintScreen);
     WRAP (rs, s, paintOutput, rotatePaintOutput);
     WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
     WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
@@ -1904,7 +1884,6 @@ rotateFiniScreen (CompPlugin *p,
 
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);
-    UNWRAP (rs, s, paintScreen);
     UNWRAP (rs, s, paintOutput);
     UNWRAP (rs, s, windowGrabNotify);
     UNWRAP (rs, s, windowUngrabNotify);

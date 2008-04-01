@@ -128,6 +128,7 @@ typedef enum _RotationState {
 typedef struct _CubeScreen {
     PreparePaintScreenProc       preparePaintScreen;
     DonePaintScreenProc	         donePaintScreen;
+    PaintScreenProc		 paintScreen;
     PaintOutputProc	         paintOutput;
     PaintTransformedOutputProc   paintTransformedOutput;
     EnableOutputClippingProc     enableOutputClipping;

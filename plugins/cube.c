@@ -871,6 +871,27 @@ cubePreparePaintScreen (CompScreen *s,
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
 }
 
+static void
+cubePaintScreen (CompScreen   *s,
+		 CompOutput   *outputs,
+		 int          numOutputs,
+		 unsigned int mask)
+{
+    float x, progress;
+
+    CUBE_SCREEN (s);
+
+    (*cs->getRotation) (s, &x, &x, &progress);
+
+    UNWRAP (cs, s, paintScreen);
+    if (cs->moMode == CUBE_MOMODE_ONE && s->nOutputDev &&
+        (progress > 0.0f || cs->desktopOpacity != OPAQUE))
+	(*s->paintScreen) (s, &s->fullscreenOutput, 1, mask);
+    else
+	(*s->paintScreen) (s, outputs, numOutputs, mask);
+    WRAP (cs, s, paintScreen, cubePaintScreen);
+}
+
 static Bool
 cubePaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
@@ -2271,6 +2292,7 @@ cubeInitScreen (CompPlugin *p,
 
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
     WRAP (cs, s, donePaintScreen, cubeDonePaintScreen);
+    WRAP (cs, s, paintScreen, cubePaintScreen);
     WRAP (cs, s, paintOutput, cubePaintOutput);
     WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
     WRAP (cs, s, enableOutputClipping, cubeEnableOutputClipping);
@@ -2297,6 +2319,7 @@ cubeFiniScreen (CompPlugin *p,
 
     UNWRAP (cs, s, preparePaintScreen);
     UNWRAP (cs, s, donePaintScreen);
+    UNWRAP (cs, s, paintScreen);
     UNWRAP (cs, s, paintOutput);
     UNWRAP (cs, s, paintTransformedOutput);
     UNWRAP (cs, s, enableOutputClipping);
