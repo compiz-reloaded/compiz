@@ -76,6 +76,8 @@ typedef struct _MoveDisplay {
     int        status;
     KeyCode    key[NUM_KEYS];
 
+    int releaseButton;
+
     GLushort moveOpacity;
 } MoveDisplay;
 
@@ -125,7 +127,7 @@ moveInitiate (CompDisplay     *d,
     {
 	XRectangle   workArea;
 	unsigned int mods;
-	int          x, y;
+	int          x, y, button;
 
 	MOVE_SCREEN (w->screen);
 
@@ -135,6 +137,8 @@ moveInitiate (CompDisplay     *d,
 			       w->attrib.x + (w->width / 2));
 	y = getIntOptionNamed (option, nOption, "y",
 			       w->attrib.y + (w->height / 2));
+
+	button = getIntOptionNamed (option, nOption, "button", -1);
 
 	if (otherScreenGrabExist (w->screen, "move", 0))
 	    return FALSE;
@@ -185,6 +189,8 @@ moveInitiate (CompDisplay     *d,
 	if (ms->grabIndex)
 	{
 	    md->w = w;
+
+	    md->releaseButton = button;
 
 	    (w->screen->windowGrabNotify) (w, x, y, mods,
 					   CompWindowGrabMoveMask |
@@ -245,7 +251,8 @@ moveTerminate (CompDisplay     *d,
 	if (md->moveOpacity != OPAQUE)
 	    addWindowDamage (md->w);
 
-	md->w = 0;
+	md->w             = 0;
+	md->releaseButton = 0;
     }
 
     action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
@@ -569,12 +576,16 @@ moveHandleEvent (CompDisplay *d,
 
 	    if (ms->grabIndex)
 	    {
-		CompAction *action;
-		int        opt = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
+		if (md->releaseButton == -1 ||
+		    md->releaseButton == event->xbutton.button)
+		{
+		    CompAction *action;
+		    int        opt = MOVE_DISPLAY_OPTION_INITIATE_BUTTON;
 
-		action = &md->opt[opt].value.action;
-		if (action->state & CompActionStateTermButton)
-		    moveTerminate (d, action, 0, NULL, 0);
+		    action = &md->opt[opt].value.action;
+		    moveTerminate (d, action, CompActionStateTermButton,
+				   NULL, 0);
+		}
 	    }
 	}
 	break;
@@ -624,7 +635,7 @@ moveHandleEvent (CompDisplay *d,
 		w = findWindowAtDisplay (d, event->xclient.window);
 		if (w)
 		{
-		    CompOption o[4];
+		    CompOption o[5];
 		    int	       xRoot, yRoot;
 		    int	       option;
 
@@ -667,10 +678,15 @@ moveHandleEvent (CompDisplay *d,
 			    o[3].name	 = "y";
 			    o[3].value.i = event->xclient.data.l[1];
 
+			    o[4].type    = CompOptionTypeInt;
+			    o[4].name    = "button";
+			    o[4].value.i = event->xclient.data.l[3] ?
+				           event->xclient.data.l[3] : -1;
+
 			    moveInitiate (d,
 					  &md->opt[option].value.action,
 					  CompActionStateInitButton,
-					  o, 4);
+					  o, 5);
 
 			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
 			}
@@ -836,9 +852,10 @@ moveInitDisplay (CompPlugin  *p,
     md->moveOpacity =
 	(md->opt[MOVE_DISPLAY_OPTION_OPACITY].value.i * OPAQUE) / 100;
 
-    md->w      = 0;
-    md->region = NULL;
-    md->status = RectangleOut;
+    md->w             = 0;
+    md->region        = NULL;
+    md->status        = RectangleOut;
+    md->releaseButton = 0;
 
     for (i = 0; i < NUM_KEYS; i++)
 	md->key[i] = XKeysymToKeycode (d->display,

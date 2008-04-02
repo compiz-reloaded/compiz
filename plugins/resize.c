@@ -815,24 +815,26 @@ resizeHandleEvent (CompDisplay *d,
 	break;
     case KeyRelease:
 	break;
-    case ButtonRelease: {
-	CompAction *action =
-	    &rd->opt[RESIZE_DISPLAY_OPTION_INITIATE_BUTTON].value.action;
-
-	if (action->state & CompActionStateTermButton)
+    case ButtonRelease:
+	s = findScreenAtDisplay (d, event->xbutton.root);
+	if (s)
 	{
-	    if (event->type == ButtonRelease &&
-		(rd->releaseButton     == -1 ||
-		 event->xbutton.button == rd->releaseButton))
+	    RESIZE_SCREEN (s);
+
+	    if (rs->grabIndex)
 	    {
-		resizeTerminate (d,
-				 action,
-				 CompActionStateTermButton,
-				 NULL,
-				 0);
+		if (rd->releaseButton     == -1 ||
+		    event->xbutton.button == rd->releaseButton)
+		{
+		    int        opt = RESIZE_DISPLAY_OPTION_INITIATE_BUTTON;
+		    CompAction *action = &rd->opt[opt].value.action;
+
+		    resizeTerminate (d, action, CompActionStateTermButton,
+				     NULL, 0);
+		}
 	    }
 	}
-    } break;
+	break;
     case MotionNotify:
 	s = findScreenAtDisplay (d, event->xmotion.root);
 	if (s)
