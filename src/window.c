@@ -711,9 +711,6 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionMinimizeMask     |
 	    CompWindowActionCloseMask	     |
 	    CompWindowActionChangeDesktopMask;
-
-	if (w->input.top)
-	    actions |= CompWindowActionShadeMask;
 	break;
     case CompWindowTypeUtilMask:
     case CompWindowTypeMenuMask:
@@ -724,9 +721,6 @@ recalcWindowActions (CompWindow *w)
 	    CompWindowActionStickMask  |
 	    CompWindowActionCloseMask  |
 	    CompWindowActionChangeDesktopMask;
-
-	if (w->input.top)
-	    actions |= CompWindowActionShadeMask;
 	break;
     case CompWindowTypeDialogMask:
     case CompWindowTypeModalDialogMask:
@@ -753,6 +747,9 @@ recalcWindowActions (CompWindow *w)
     default:
 	break;
     }
+
+    if (w->input.top)
+	actions |= CompWindowActionShadeMask;
 
     actions |= (CompWindowActionAboveMask | CompWindowActionBelowMask);
 
