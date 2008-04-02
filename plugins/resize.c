@@ -813,8 +813,6 @@ resizeHandleEvent (CompDisplay *d,
 	if (s)
 	    resizeHandleKeyEvent (s, event->xkey.keycode);
 	break;
-    case KeyRelease:
-	break;
     case ButtonRelease:
 	s = findScreenAtDisplay (d, event->xbutton.root);
 	if (s)

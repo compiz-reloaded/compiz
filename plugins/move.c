@@ -590,13 +590,12 @@ moveHandleEvent (CompDisplay *d,
 	}
 	break;
     case KeyPress:
-    case KeyRelease:
 	s = findScreenAtDisplay (d, event->xkey.root);
 	if (s)
 	{
 	    MOVE_SCREEN (s);
 
-	    if (ms->grabIndex && event->type == KeyPress)
+	    if (ms->grabIndex)
 	    {
 		int i;
 
