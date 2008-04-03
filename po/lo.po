@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-15 20:19+0530\n"
+"POT-Creation-Date: 2008-04-03 14:30+0530\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Lao <i18n@suse.de>\n"
@@ -91,22 +91,22 @@ msgid "Close Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:152
 msgid "Unmaximize Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:90
 msgid "Minimize Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:159
 msgid "Window Menu"
 msgstr ""
 
@@ -302,36 +302,46 @@ msgstr ""
 msgid "Gaussian strength"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:23
+#: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:24
+#: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:25
+#: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:26
+#: ../metadata/blur.xml.in.h:27
 msgid "Pulse effect"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:27
-msgid "Window blur speed"
-msgstr ""
-
 #: ../metadata/blur.xml.in.h:28
-msgid "Windows that should be affected by focus blur"
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:29
+msgid "Window blur speed"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:30
+msgid "Windows that should be affected by focus blur"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:31
 msgid "Windows that should be use alpha blur by default"
 msgstr ""
 
@@ -589,378 +599,420 @@ msgid "Detect Refresh Rate"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:56
-msgid "Fast"
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
 msgstr ""
 
 #: ../metadata/core.xml.in.h:57
-msgid "Focus Prevention Windows"
+msgid "Edge Trigger Delay"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:58
-msgid "Focus prevention windows"
+msgid "Fast"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:59
-msgid "General Options"
+msgid "Focus Prevention Level"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:60
-msgid "General compiz options"
+msgid "Focus Prevention Windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:61
-msgid "Good"
+msgid "Focus prevention windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:62
-msgid "Hide Skip Taskbar Windows"
+msgid "General Options"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:63
-msgid "Hide all windows and focus desktop"
+msgid "General compiz options"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:64
-msgid "Hide windows not in taskbar when entering show desktop mode"
+msgid "Good"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:65
-msgid "Horizontal Virtual Size"
+msgid "Hide Skip Taskbar Windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:66
-msgid "Ignore Hints When Maximized"
+msgid "Hide all windows and focus desktop"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:67
-msgid "Ignore size increment and aspect hints when window is maximized"
+msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:68
-msgid "Increase Opacity"
+msgid "High"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:69
-msgid "Increase window opacity"
+msgid "Horizontal Virtual Size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:70
-msgid "Interval before raising selected windows"
+msgid "If available use compression for textures converted from images"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:71
-msgid "Interval between ping messages"
+msgid "Ignore Hints When Maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:72
-msgid "Lighting"
+msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:73
-msgid "List of currently active plugins"
+msgid "Increase Opacity"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:74
-msgid "List of strings describing output devices"
+msgid "Increase window opacity"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:75
-msgid "Lower Window"
+msgid "Interval before raising selected windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:76
-msgid "Lower window beneath other windows"
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:77
+msgid "Level of focus stealing prevention"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:78
-msgid "Maximize Window Horizontally"
+msgid "Lighting"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:79
-msgid "Maximize Window Vertically"
+msgid "List of currently active plugins"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:80
-msgid "Maximize active window"
+msgid "List of strings describing output devices"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:81
-msgid "Maximize active window horizontally"
+msgid "Low"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:82
-msgid "Maximize active window vertically"
+msgid "Lower Window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:84
-msgid "Minimize active window"
+#: ../metadata/core.xml.in.h:83
+msgid "Lower window beneath other windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:85
-msgid "Number of Desktops"
+msgid "Maximize Window Horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:86
-msgid "Number of virtual desktops"
+msgid "Maximize Window Vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:87
-msgid "Only perform screen updates during vertical blanking period"
+msgid "Maximize active window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:88
-msgid "Opacity Step"
+msgid "Maximize active window horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:89
-msgid "Opacity change step"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:90
-msgid "Opacity values for windows that should be translucent by default"
+msgid "Maximize active window vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:91
-msgid "Opacity window values"
+msgid "Minimize active window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:92
-msgid "Opacity windows"
+msgid "Number of Desktops"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:93
-msgid "Open a terminal"
+msgid "Number of virtual desktops"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:94
-msgid "Outputs"
+msgid "Off"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:95
-msgid "Overlapping Output Handling"
+msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:96
-msgid "Ping Delay"
+msgid "Opacity Step"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:97
-msgid "Prefer larger output"
+msgid "Opacity change step"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:98
-msgid "Prefer smaller output"
+msgid "Opacity values for windows that should be translucent by default"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:99
-msgid "Raise On Click"
+msgid "Opacity window values"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:100
-msgid "Raise Window"
+msgid "Opacity windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:101
-msgid "Raise selected windows after interval"
+msgid "Open a terminal"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:102
-msgid "Raise window above other windows"
+msgid "Outputs"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:103
-msgid "Raise windows when clicked"
+msgid "Overlapping Output Handling"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:104
-msgid "Refresh Rate"
+msgid "Ping Delay"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:105
-msgid "Run Dialog"
+msgid "Prefer larger output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:106
-msgid "Run command 0"
+msgid "Prefer smaller output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:107
-msgid "Run command 1"
+msgid "Raise On Click"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:108
-msgid "Run command 10"
+msgid "Raise Window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:109
-msgid "Run command 11"
+msgid "Raise selected windows after interval"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:110
-msgid "Run command 2"
+msgid "Raise window above other windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:111
-msgid "Run command 3"
+msgid "Raise windows when clicked"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:112
-msgid "Run command 4"
+msgid "Refresh Rate"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:113
-msgid "Run command 5"
+msgid "Run Dialog"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:114
-msgid "Run command 6"
+msgid "Run command 0"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:115
-msgid "Run command 7"
+msgid "Run command 1"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:116
-msgid "Run command 8"
+msgid "Run command 10"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:117
-msgid "Run command 9"
+msgid "Run command 11"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:118
-msgid "Screen size multiplier for horizontal virtual size"
+msgid "Run command 2"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:119
-msgid "Screen size multiplier for vertical virtual size"
+msgid "Run command 3"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:120
-msgid "Screenshot command line"
+msgid "Run command 4"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:121
-msgid "Show Desktop"
+msgid "Run command 5"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:122
-msgid "Show Main Menu"
+msgid "Run command 6"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:123
-msgid "Show Run Application dialog"
+msgid "Run command 7"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:124
-msgid "Show the main menu"
+msgid "Run command 8"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:125
-msgid "Slow Animations"
+msgid "Run command 9"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:126
-msgid "Smart mode"
+msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:127
-msgid "Sync To VBlank"
+msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:128
-msgid "Take a screenshot"
+msgid "Screenshot command line"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:129
-msgid "Take a screenshot of a window"
+msgid "Show Desktop"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:130
-msgid "Terminal command line"
+msgid "Show Main Menu"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:131
-msgid "Texture Filter"
+msgid "Show Run Application dialog"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:132
-msgid "Texture filtering"
+msgid "Show the main menu"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:133
-msgid "The rate at which the screen is redrawn (times/second)"
+msgid "Slow Animations"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:134
-msgid "Toggle Window Maximized"
+msgid "Smart mode"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:135
-msgid "Toggle Window Maximized Horizontally"
+msgid "Sync To VBlank"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:136
-msgid "Toggle Window Maximized Vertically"
+msgid "Take a screenshot"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:137
-msgid "Toggle Window Shaded"
+msgid "Take a screenshot of a window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:138
-msgid "Toggle active window maximized"
+msgid "Terminal command line"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:139
-msgid "Toggle active window maximized horizontally"
+msgid "Texture Compression"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:140
-msgid "Toggle active window maximized vertically"
+msgid "Texture Filter"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:141
-msgid "Toggle active window shaded"
+msgid "Texture filtering"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:142
-msgid "Toggle use of slow animations"
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:143
+msgid "Toggle Window Maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:144
-msgid "Unmaximize active window"
+msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:145
-msgid "Unredirect Fullscreen Windows"
+msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:146
-msgid "Use diffuse light when screen is transformed"
+msgid "Toggle Window Shaded"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:147
-msgid "Vertical Virtual Size"
+msgid "Toggle active window maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:148
-msgid "Which one of overlapping output devices should be preferred"
+msgid "Toggle active window maximized horizontally"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:149
+msgid "Toggle active window maximized vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:150
-msgid "Window menu button binding"
+msgid "Toggle active window shaded"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:151
-msgid "Window menu key binding"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:152
-msgid "Window screenshot command line"
+msgid "Toggle use of slow animations"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:153
+msgid "Unmaximize active window"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:154
+msgid "Unredirect Fullscreen Windows"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:155
+msgid "Use diffuse light when screen is transformed"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:156
+msgid "Vertical Virtual Size"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:157
+msgid "Very High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:158
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:160
+msgid "Window menu button binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:161
+msgid "Window menu key binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:162
+msgid "Window screenshot command line"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:163
 msgid "Windows that should be translucent by default"
 msgstr ""
 
@@ -1021,150 +1073,142 @@ msgid "Desktop Cube"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:15
-msgid "Desktop Window Opacity Fade Time."
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:16
-msgid "Fade Time"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:17
 msgid "Fold Acceleration"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:18
+#: ../metadata/cube.xml.in.h:16
 msgid "Fold Speed"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 msgid "Fold Timestep"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 msgid "Go back to previous slide"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 msgid "Image files"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Image to use as texture for the skydome"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "Inside Cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:26
+#: ../metadata/cube.xml.in.h:24
 msgid "Inside cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:27
+#: ../metadata/cube.xml.in.h:25
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:28
 msgid "Multiple cubes"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 msgid "Next Slide"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:32
-msgid "On big cube"
+#: ../metadata/cube.xml.in.h:30
+msgid "One big cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity During Rotation"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity When Not Rotating"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Opacity of desktop window during rotation."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:34
 msgid "Opacity of desktop window when not rotating."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 msgid "Place windows on cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 msgid "Prev Slide"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Render skydome"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 msgid "Scale image"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Scale images to cover top face of cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Gradient End Color"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:45
+#: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient Start Color"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:46
+#: ../metadata/cube.xml.in.h:44
 msgid "Skydome Image"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Transparency Only on Mouse Rotate"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:50
+#: ../metadata/cube.xml.in.h:48
 msgid "Unfold"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:51
+#: ../metadata/cube.xml.in.h:49
 msgid "Unfold cube"
 msgstr ""
 

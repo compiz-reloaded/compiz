@@ -1,4 +1,4 @@
-# translation of compiz.po to Galician
+# translation of compiz.po to
 # traducción de gl-compiz.po to Galician
 # Compiz Core Galician Translation.
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-15 20:18+0530\n"
-"PO-Revision-Date: 2007-12-20 01:29+0100\n"
-"Last-Translator: Fran Diéguez (GLUG) <fran.dieguez@glug.es>\n"
-"Language-Team: Galician <en@li.org>\n"
+"POT-Creation-Date: 2008-04-03 14:29+0530\n"
+"PO-Revision-Date: 2008-03-19 13:17+0100\n"
+"Last-Translator: \n"
+"Language-Team: <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +27,7 @@ msgstr "Escritorio"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
 msgid "Window Management"
-msgstr "Xestión de fiestras"
+msgstr "Xestión de Fiestras"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
@@ -103,22 +103,22 @@ msgid "Close Window"
 msgstr "Pechar Fiestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:152
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Fiestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize Window"
 msgstr "Maximizar Fiestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:90
 msgid "Minimize Window"
 msgstr "Minimizar Fiestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:159
 msgid "Window Menu"
 msgstr "Menú da Fiestra"
 
@@ -129,37 +129,38 @@ msgstr "Dimensionar"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4570
 msgid "Make Above"
-msgstr ""
+msgstr "Facer sempre enriba"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4596
 msgid "Stick"
-msgstr ""
+msgstr "Fixar"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4616
 msgid "Unshade"
-msgstr ""
+msgstr "Desdegradar"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4636
 msgid "Unmake Above"
-msgstr ""
+msgstr "Desfacer Sempre Enriba"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4662
 msgid "Unstick"
-msgstr ""
+msgstr "Desfixar"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5019
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "A fiestra \"%s\" non está respondendo."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5028
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Forzar a saída desta aplicación causará a perda dos cambios non gardados."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5043
 msgid "_Force Quit"
-msgstr ""
+msgstr "_Forzar Saída"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -201,7 +202,7 @@ msgstr "Iniciar"
 
 #: ../metadata/annotate.xml.in.h:10
 msgid "Initiate annotate drawing"
-msgstr "Iniciar debuxado de anotación"
+msgstr "Iniciar debuxo de anotación"
 
 #: ../metadata/annotate.xml.in.h:11
 msgid "Initiate annotate erasing"
@@ -229,7 +230,7 @@ msgstr "Ancho do pincel"
 
 #: ../metadata/annotate.xml.in.h:17
 msgid "Stroke width for annotations"
-msgstr "Ancho do pincel para anotacións"
+msgstr "Ancho do pincel para as anotacións"
 
 #: ../metadata/blur.xml.in.h:1
 msgid "4xBilinear"
@@ -319,36 +320,46 @@ msgstr "Radio gausiano"
 msgid "Gaussian strength"
 msgstr "Forza gausiana"
 
-#: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "MipMap"
 
-#: ../metadata/blur.xml.in.h:23
+#: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
 msgstr "Mipmap LOD"
 
-#: ../metadata/blur.xml.in.h:24
+#: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
 msgstr "Nivel de detalle mipmap"
 
-#: ../metadata/blur.xml.in.h:25
+#: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
 msgstr "Pulso"
 
-#: ../metadata/blur.xml.in.h:26
+#: ../metadata/blur.xml.in.h:27
 msgid "Pulse effect"
 msgstr "Efecto de pulso"
 
-#: ../metadata/blur.xml.in.h:27
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
 msgstr "Velocidade de desenfoque das fiestras"
 
-#: ../metadata/blur.xml.in.h:28
+#: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
 msgstr "Fiestras que deben ser afectadas por desenfoque de foco"
 
-#: ../metadata/blur.xml.in.h:29
+#: ../metadata/blur.xml.in.h:31
 msgid "Windows that should be use alpha blur by default"
 msgstr "Fiestras que deben empregar alfa-desenfoque por omisión"
 
@@ -644,383 +655,427 @@ msgid "Detect Refresh Rate"
 msgstr "Detectar Taxa de Actualización"
 
 #: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "Rápido"
 
-#: ../metadata/core.xml.in.h:57
+#: ../metadata/core.xml.in.h:59
+#, fuzzy
+msgid "Focus Prevention Level"
+msgstr "Fiestras en Prevención de Destaque"
+
+#: ../metadata/core.xml.in.h:60
 msgid "Focus Prevention Windows"
 msgstr "Fiestras en Prevención de Destaque"
 
-#: ../metadata/core.xml.in.h:58
+#: ../metadata/core.xml.in.h:61
 msgid "Focus prevention windows"
 msgstr "Fiestras en prevención de destaque"
 
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.h:62
 msgid "General Options"
 msgstr "Opcións xerais"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.h:63
 msgid "General compiz options"
 msgstr "Opcións xerais do compiz"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.h:64
 msgid "Good"
 msgstr "Boa"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:65
 msgid "Hide Skip Taskbar Windows"
 msgstr "Ocultar Fiestras Ignorando Barra de Tarefas"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:66
 msgid "Hide all windows and focus desktop"
 msgstr "Ocultar todas as fiestras e enfocar escritorio"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:67
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Ocultar as fiestras que non están na barra de tarefas ao entrar no modo "
 "mostrar escritorio"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:68
+msgid "High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:69
 msgid "Horizontal Virtual Size"
 msgstr "Tamaño Virtual Horizontal"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:70
+msgid "If available use compression for textures converted from images"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:71
 msgid "Ignore Hints When Maximized"
 msgstr "Ignorar axudas cando maximizada"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:72
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Ignorar incremento de tamaño e aspecto cando a fiestra é maximizada"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:73
 msgid "Increase Opacity"
 msgstr "Aumentar Opacidade"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:74
 msgid "Increase window opacity"
 msgstr "Aumentar opacidade da fiestra"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:75
 msgid "Interval before raising selected windows"
 msgstr "Intervalo antes da elevación das fiestras selecionadas"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:76
 msgid "Interval between ping messages"
 msgstr "Intervalo entre mensaxes ping"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:77
+msgid "Level of focus stealing prevention"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:78
 msgid "Lighting"
 msgstr "Iluminación"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:79
 msgid "List of currently active plugins"
 msgstr "Lista de plugins actualmente activos"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:80
 msgid "List of strings describing output devices"
 msgstr "Lista de cadeas descrevendo os dispositivos de saída"
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:81
+msgid "Low"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:82
 msgid "Lower Window"
 msgstr "Fiestra Máis Baixa"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:83
 msgid "Lower window beneath other windows"
 msgstr "Fiestra máis baixa baixo as demais fiestras"
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window Horizontally"
 msgstr "Maximizar Fiestra Horizontalmente"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize Window Vertically"
 msgstr "Maximizar Fiestra Verticalmente"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:87
 msgid "Maximize active window"
 msgstr "Maximizar fiestra activa"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:88
 msgid "Maximize active window horizontally"
 msgstr "Maximizar fiestra activa horizontalmente"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:89
 msgid "Maximize active window vertically"
 msgstr "Maximizar fiestra activa verticalmente"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize active window"
 msgstr "Minimizar fiestra activa"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:92
 msgid "Number of Desktops"
 msgstr "Número de escritorios"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:93
 msgid "Number of virtual desktops"
 msgstr "Número de escritorios virtuais"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:94
+msgid "Off"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:95
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Só efectuar actualizacións de pantalla durante o período de limpeza vertical"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:96
 msgid "Opacity Step"
 msgstr "Etapa de Opacidade"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:97
 msgid "Opacity change step"
 msgstr "Etapa de mudanza de opacidade"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:98
 msgid "Opacity values for windows that should be translucent by default"
 msgstr ""
 "Valores de opacidade para fiestras que deben ser translúcidas por omisión"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:99
 msgid "Opacity window values"
 msgstr "Valores de opacidade da fiestra"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:100
 msgid "Opacity windows"
 msgstr "Opacidade de fiestras"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:101
 msgid "Open a terminal"
 msgstr "Abrir un terminal"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:102
 msgid "Outputs"
 msgstr "Saídas"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:103
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Mantemento das Saídas Superpostas"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:104
 msgid "Ping Delay"
 msgstr "Atraso de ping"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:105
 msgid "Prefer larger output"
-msgstr ""
+msgstr "Preferir saída máis grande"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:106
 msgid "Prefer smaller output"
-msgstr ""
+msgstr "Preferir saída máis pequena"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:107
 msgid "Raise On Click"
 msgstr "Elevar cun clic"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:108
 msgid "Raise Window"
 msgstr "Elevar fiestra"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:109
 msgid "Raise selected windows after interval"
 msgstr "Elevar fiestras selecionadas despois dun intervalo"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:110
 msgid "Raise window above other windows"
 msgstr "Elevar fiestra enriba das restantes"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:111
 msgid "Raise windows when clicked"
 msgstr "Elevar fiestras cando sexan clicadas"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:112
 msgid "Refresh Rate"
 msgstr "Taxa de Actualización"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:113
 msgid "Run Dialog"
 msgstr "Caixa de Diálogo Executar"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 0"
 msgstr "Executar comando 0"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 1"
 msgstr "Executar comando 1"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 10"
 msgstr "Executar comando 10"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 11"
 msgstr "Executar comando 11"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 2"
 msgstr "Executar comando 2"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 3"
 msgstr "Executar comando 3"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:120
 msgid "Run command 4"
 msgstr "Executar comando 4"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:121
 msgid "Run command 5"
 msgstr "Executar comando 5"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:122
 msgid "Run command 6"
 msgstr "Executar comando 6"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:123
 msgid "Run command 7"
 msgstr "Executar comando 7"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:124
 msgid "Run command 8"
 msgstr "Executar comando 8"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:125
 msgid "Run command 9"
 msgstr "Executar comando 9"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplicador de tamaño horizontal de pantalla para tamaño virtual"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:127
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicador de tamaño vertical de pantalla para tamaño virtual"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:128
 msgid "Screenshot command line"
 msgstr "Capturar pantalla da liña de comando"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:129
 msgid "Show Desktop"
 msgstr "Mostrar Área de Traballo"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:130
 msgid "Show Main Menu"
 msgstr "Mostrar Menú Principal"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:131
 msgid "Show Run Application dialog"
 msgstr "Mostrar caixa de diálogo Executar Aplicativo"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:132
 msgid "Show the main menu"
 msgstr "Mostrar o menú principal"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:133
 msgid "Slow Animations"
 msgstr "Animacións Lentas"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:134
 #, fuzzy
 msgid "Smart mode"
 msgstr "Intelixente"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:135
 msgid "Sync To VBlank"
 msgstr "Sincronizar a VBlank"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:136
 msgid "Take a screenshot"
 msgstr "Efetuar unha captura de pantalla"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:137
 msgid "Take a screenshot of a window"
 msgstr "Efetuar captura de pantalla dunha fiestra"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:138
 msgid "Terminal command line"
 msgstr "Liña de comando do terminal"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:139
+#, fuzzy
+msgid "Texture Compression"
+msgstr "Filtro de Texturas"
+
+#: ../metadata/core.xml.in.h:140
 msgid "Texture Filter"
 msgstr "Filtro de Textura"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:141
 msgid "Texture filtering"
 msgstr "Filtro de Texturas"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:142
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Taxa en que a pantalla é redeseñado (veces/segundo) "
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle Window Maximized"
 msgstr "Alternar Fiestra Maximizada"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Alternar Fiestra Maximizada Horizontalmente"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized Vertically"
 msgstr "Alternar Fiestra Maximizada Verticalmente"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:146
 msgid "Toggle Window Shaded"
 msgstr "Alternar Fiestra Sombreada"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:147
 msgid "Toggle active window maximized"
 msgstr "Alternar fiestra activa maximizada"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:148
 msgid "Toggle active window maximized horizontally"
 msgstr "Alternar fiestra activa maximizada horizontalmente"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized vertically"
 msgstr "Alternar fiestra activa maximizada verticalmente"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:150
 msgid "Toggle active window shaded"
 msgstr "Alternar fiestra activa sombreada"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:151
 msgid "Toggle use of slow animations"
 msgstr "Alternar uso de animacións lentas"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:153
 msgid "Unmaximize active window"
 msgstr "Desmaximizar fiestra activa"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:154
 msgid "Unredirect Fullscreen Windows"
 msgstr "Anular redirecionamento de fiestras de pantalla inteira"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:155
 msgid "Use diffuse light when screen is transformed"
 msgstr "Empregar luz difusa cando a pantalla sexa transformada"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:156
 msgid "Vertical Virtual Size"
 msgstr "Tamaño Vertical Virtual"
 
-#: ../metadata/core.xml.in.h:148
-msgid "Which one of overlapping output devices should be preferred"
+#: ../metadata/core.xml.in.h:157
+msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:158
+msgid "Which one of overlapping output devices should be preferred"
+msgstr "Cal dos dispositivos de saída de sobreposición debería ser preferido"
+
+#: ../metadata/core.xml.in.h:160
 msgid "Window menu button binding"
 msgstr "Botón de atallo para menú da fiestra"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:161
 msgid "Window menu key binding"
 msgstr "Tecla de atallo para menú da fiestra"
 
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:162
 msgid "Window screenshot command line"
 msgstr "Liña de comando para captura de pantalla de fiestras"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:163
 msgid "Windows that should be translucent by default"
 msgstr "Fiestras que deben ser translúcidas por omisión"
 
@@ -1081,154 +1136,147 @@ msgid "Desktop Cube"
 msgstr "Cubo do escritorio"
 
 #: ../metadata/cube.xml.in.h:15
-msgid "Desktop Window Opacity Fade Time."
-msgstr "Tempo de desvanecemento da opacidade do escritorio"
-
-#: ../metadata/cube.xml.in.h:16
-msgid "Fade Time"
-msgstr "Tempo de desvanecemento"
-
-#: ../metadata/cube.xml.in.h:17
 msgid "Fold Acceleration"
 msgstr "Aceleración de dobraxe"
 
-#: ../metadata/cube.xml.in.h:18
+#: ../metadata/cube.xml.in.h:16
 msgid "Fold Speed"
 msgstr "Velocidade de dobraxe"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 msgid "Fold Timestep"
 msgstr "Timestep de dobraxe"
 
-#: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Xerar mapas cando sexa posíbel para dimensionamento de mellor calidade"
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 msgid "Go back to previous slide"
 msgstr "Volver ao slide anterior"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 msgid "Image files"
 msgstr "Arquivos de imaxe"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Image to use as texture for the skydome"
 msgstr "Imaxe a empregar como textura no skydome"
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr "Iniciar transparencia do cubo só se a rotación pé feita polo rato."
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "Inside Cube"
 msgstr "Dentro do Cubo"
 
-#: ../metadata/cube.xml.in.h:26
+#: ../metadata/cube.xml.in.h:24
 msgid "Inside cube"
 msgstr "Dentro do cubo"
 
-#: ../metadata/cube.xml.in.h:27
+#: ../metadata/cube.xml.in.h:25
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Lista de arquivos PNG e SVG que deben ser renderizados na cara superior do "
 "cubo"
 
-#: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "Modo de Multí Saída"
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:28
 msgid "Multiple cubes"
 msgstr "Múltiples cubos"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 msgid "Next Slide"
 msgstr "Próximo Slide"
 
-#: ../metadata/cube.xml.in.h:32
-msgid "On big cube"
+#: ../metadata/cube.xml.in.h:30
+#, fuzzy
+msgid "One big cube"
 msgstr "Cubo grande"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity During Rotation"
 msgstr "Opacidade durante a Rotación"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity When Not Rotating"
 msgstr "Opacidade mentres Non Roda"
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Opacity of desktop window during rotation."
 msgstr "Opacidade do escritorio ao rodar."
 
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:34
 msgid "Opacity of desktop window when not rotating."
 msgstr "Opacidade do escritorio cando estea estático."
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 msgid "Place windows on cube"
 msgstr "Colocar fiestras no cubo"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 msgid "Prev Slide"
 msgstr "Slide Anterior"
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Render skydome"
 msgstr "Renderizar skydome"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 msgid "Scale image"
 msgstr "Dimensionar imaxe"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Scale images to cover top face of cube"
 msgstr "Dimensionar imaxes para cobertura da face superior do cubo"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
 "Selecciona como o cubo é mostrado se existiren múltiplos dispositivos de  "
 "saída."
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome"
 msgstr "Skydome"
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Gradient End Color"
 msgstr "Cor Final do gradiente Skydome"
 
-#: ../metadata/cube.xml.in.h:45
+#: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient Start Color"
 msgstr "Cor Inicial do gradiente Skydome"
 
-#: ../metadata/cube.xml.in.h:46
+#: ../metadata/cube.xml.in.h:44
 msgid "Skydome Image"
 msgstr "Imaxe do Skydome"
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Velocidade"
 
-#: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Timestep"
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Transparency Only on Mouse Rotate"
 msgstr "Transparencia só ao rodar co rato"
 
-#: ../metadata/cube.xml.in.h:50
+#: ../metadata/cube.xml.in.h:48
 msgid "Unfold"
 msgstr "Desdobrar"
 
-#: ../metadata/cube.xml.in.h:51
+#: ../metadata/cube.xml.in.h:49
 msgid "Unfold cube"
 msgstr "Desdobrar cubo"
 
@@ -2784,3 +2832,9 @@ msgstr "Factor de zoom"
 #: ../metadata/zoom.xml.in.h:14
 msgid "Zoom pan"
 msgstr "Colocación do Zoom"
+
+#~ msgid "Desktop Window Opacity Fade Time."
+#~ msgstr "Tempo de desvanecemento da opacidade do escritorio"
+
+#~ msgid "Fade Time"
+#~ msgstr "Tempo de desvanecemento"

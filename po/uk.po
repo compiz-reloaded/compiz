@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-15 20:20+0530\n"
-"PO-Revision-Date: 2008-01-19 11:48+0100\n"
-"Last-Translator: Kornyeyev Oleksandr <o.kornyeyev@kmgas.com.ua>\n"
+"POT-Creation-Date: 2008-04-03 14:31+0530\n"
+"PO-Revision-Date: 2008-04-02 18:46+0200\n"
+"Last-Translator: Pavlo Slavynsky <pavloslav@gmail.com>\n"
 "Language-Team: Ukrainian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "Дія коли крутять колесо миші"
+msgstr "Дія коли крутять колесо миші на заголовку вікна"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 #, fuzzy
@@ -101,22 +101,22 @@ msgid "Close Window"
 msgstr "Закрити вікно"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:152
 msgid "Unmaximize Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize Window"
-msgstr ""
+msgstr "Розгорнути вікно"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:90
 msgid "Minimize Window"
 msgstr "Згорнути вікно"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:159
 #, fuzzy
 msgid "Window Menu"
 msgstr "Віконний менеджер"
@@ -128,11 +128,12 @@ msgstr "Сканер"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4570
 msgid "Make Above"
-msgstr ""
+msgstr "Винести нагору"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4596
+#, fuzzy
 msgid "Stick"
-msgstr ""
+msgstr "Липнути"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4616
 msgid "Unshade"
@@ -149,16 +150,17 @@ msgstr ""
 #: ../gtk/window-decorator/gtk-window-decorator.c:5019
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "Вікно \"%s\" не відкликається."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5028
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Примусове завершення додатку призведе до втрати всіх незбережених змін."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5043
 msgid "_Force Quit"
-msgstr ""
+msgstr "_Примусове завершення"
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
@@ -190,7 +192,7 @@ msgstr "Малювати"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr "Малювати з використання інструменту"
+msgstr "Малювати з використанням інструменту"
 
 #: ../metadata/annotate.xml.in.h:8
 msgid "Fill color for annotations"
@@ -211,7 +213,7 @@ msgstr "Початок малювання анотації"
 #: ../metadata/annotate.xml.in.h:11
 #, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Ініціювати видалення підказки"
+msgstr "Початок видалення анотації"
 
 #: ../metadata/annotate.xml.in.h:12
 #, fuzzy
@@ -341,39 +343,49 @@ msgstr "Гаусові радіуси"
 msgid "Gaussian strength"
 msgstr "Gaussian Strength"
 
-#: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 #, fuzzy
 msgid "Mipmap"
 msgstr "Mipmap"
 
-#: ../metadata/blur.xml.in.h:23
+#: ../metadata/blur.xml.in.h:24
 #, fuzzy
 msgid "Mipmap LOD"
 msgstr "Рівень деталізації Mipmap"
 
-#: ../metadata/blur.xml.in.h:24
+#: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
 msgstr "Деталізація Mipmap"
 
-#: ../metadata/blur.xml.in.h:25
+#: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
 msgstr "Пульс"
 
-#: ../metadata/blur.xml.in.h:26
+#: ../metadata/blur.xml.in.h:27
 msgid "Pulse effect"
 msgstr "Ефект пульсації"
 
-#: ../metadata/blur.xml.in.h:27
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:29
 #, fuzzy
 msgid "Window blur speed"
 msgstr "Швидкість розмивання вікна"
 
-#: ../metadata/blur.xml.in.h:28
+#: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
 msgstr "Вікна, на які впливає ефект розмивання"
 
-#: ../metadata/blur.xml.in.h:29
+#: ../metadata/blur.xml.in.h:31
 msgid "Windows that should be use alpha blur by default"
 msgstr "Вікна, для який використовується альфа розмивання за замовчуванням "
 
@@ -396,77 +408,101 @@ msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command0"
 
 #: ../metadata/core.xml.in.h:2
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command1"
 
 #: ../metadata/core.xml.in.h:3
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command10"
 
 #: ../metadata/core.xml.in.h:4
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command11"
 
 #: ../metadata/core.xml.in.h:5
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command2"
 
 #: ../metadata/core.xml.in.h:6
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command3"
 
 #: ../metadata/core.xml.in.h:7
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command4"
 
 #: ../metadata/core.xml.in.h:8
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command5"
 
 #: ../metadata/core.xml.in.h:9
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command6"
 
 #: ../metadata/core.xml.in.h:10
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command7"
 
 #: ../metadata/core.xml.in.h:11
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command8"
 
 #: ../metadata/core.xml.in.h:12
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
+"Комбінація клавіш, при натисненні якої буде виконана команда оболонки, "
+"визначена як command9"
 
+# Додаток - це application, plugin, IMHO - це модуль
 #: ../metadata/core.xml.in.h:13
-#, fuzzy
 msgid "Active Plugins"
-msgstr "Активні додатки"
+msgstr "Активні модулі"
 
 #: ../metadata/core.xml.in.h:14
 msgid ""
@@ -652,417 +688,461 @@ msgstr "Стислий вивід"
 #: ../metadata/core.xml.in.h:55
 #, fuzzy
 msgid "Detect Refresh Rate"
-msgstr "Вибрати для оновлення"
+msgstr "Визначити швидкість оновлення"
 
 #: ../metadata/core.xml.in.h:56
-msgid "Fast"
-msgstr "Швидко"
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
 
 #: ../metadata/core.xml.in.h:57
-msgid "Focus Prevention Windows"
+msgid "Edge Trigger Delay"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:58
+msgid "Fast"
+msgstr "Швидко"
+
+#: ../metadata/core.xml.in.h:59
+#, fuzzy
+msgid "Focus Prevention Level"
+msgstr "Увімкнути автоперехід в режим сну"
+
+#: ../metadata/core.xml.in.h:60
+msgid "Focus Prevention Windows"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:61
 #, fuzzy
 msgid "Focus prevention windows"
 msgstr "Увімкнути автоперехід в режим сну"
 
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.h:62
 msgid "General Options"
 msgstr "Головні налаштунки"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.h:63
 msgid "General compiz options"
 msgstr "Головні налаштунки Compiz"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.h:64
 msgid "Good"
 msgstr "Добре"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:65
 msgid "Hide Skip Taskbar Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:66
 msgid "Hide all windows and focus desktop"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:67
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:68
+msgid "High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:69
 #, fuzzy
 msgid "Horizontal Virtual Size"
 msgstr "Уявний розмір за горизонталлю"
 
-#: ../metadata/core.xml.in.h:66
-msgid "Ignore Hints When Maximized"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:67
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:68
-msgid "Increase Opacity"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:69
-msgid "Increase window opacity"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:70
-msgid "Interval before raising selected windows"
+msgid "If available use compression for textures converted from images"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:71
-msgid "Interval between ping messages"
+msgid "Ignore Hints When Maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:72
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:73
+msgid "Increase Opacity"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:74
+msgid "Increase window opacity"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:75
+msgid "Interval before raising selected windows"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:76
+msgid "Interval between ping messages"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:77
+msgid "Level of focus stealing prevention"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:78
 #, fuzzy
 msgid "Lighting"
 msgstr "Журнал"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:79
 #, fuzzy
 msgid "List of currently active plugins"
 msgstr "Перелічити тільки виявлені принтери"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:80
 msgid "List of strings describing output devices"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:81
+msgid "Low"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:82
 #, fuzzy
 msgid "Lower Window"
 msgstr "Windows"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:83
 msgid "Lower window beneath other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window Horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize Window Vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:87
 msgid "Maximize active window"
 msgstr "Розгорнути активне вікно"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:88
 msgid "Maximize active window horizontally"
 msgstr "Розгорнути активне вікно за горизонталлю"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:89
 msgid "Maximize active window vertically"
 msgstr "Розгорнути активне вікно за вертикаллю"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize active window"
 msgstr "Згорнути активне вікно"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:92
 #, fuzzy
 msgid "Number of Desktops"
 msgstr "Номер стільниці"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:93
 #, fuzzy
 msgid "Number of virtual desktops"
 msgstr "Віддалена стільниця"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:94
+msgid "Off"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:95
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:96
 msgid "Opacity Step"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:97
 msgid "Opacity change step"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:98
 msgid "Opacity values for windows that should be translucent by default"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:91
-msgid "Opacity window values"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:92
-#, fuzzy
-msgid "Opacity windows"
-msgstr "Windows"
-
-#: ../metadata/core.xml.in.h:93
-#, fuzzy
-msgid "Open a terminal"
-msgstr "Виконати в терміналі"
-
-#: ../metadata/core.xml.in.h:94
-#, fuzzy
-msgid "Outputs"
-msgstr "Вивід був"
-
-#: ../metadata/core.xml.in.h:95
-msgid "Overlapping Output Handling"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:96
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Затримка"
-
-#: ../metadata/core.xml.in.h:97
-msgid "Prefer larger output"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:98
-msgid "Prefer smaller output"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:99
-msgid "Raise On Click"
+msgid "Opacity window values"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:100
 #, fuzzy
-msgid "Raise Window"
+msgid "Opacity windows"
 msgstr "Windows"
 
 #: ../metadata/core.xml.in.h:101
-msgid "Raise selected windows after interval"
-msgstr ""
+#, fuzzy
+msgid "Open a terminal"
+msgstr "Виконати в терміналі"
 
 #: ../metadata/core.xml.in.h:102
-msgid "Raise window above other windows"
-msgstr "Викликати вікно зверху інших вікон"
+#, fuzzy
+msgid "Outputs"
+msgstr "Вивід був"
 
 #: ../metadata/core.xml.in.h:103
-msgid "Raise windows when clicked"
+msgid "Overlapping Output Handling"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:104
 #, fuzzy
+msgid "Ping Delay"
+msgstr "Затримка"
+
+#: ../metadata/core.xml.in.h:105
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:106
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:107
+msgid "Raise On Click"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:108
+#, fuzzy
+msgid "Raise Window"
+msgstr "Windows"
+
+#: ../metadata/core.xml.in.h:109
+msgid "Raise selected windows after interval"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:110
+msgid "Raise window above other windows"
+msgstr "Викликати вікно зверху інших вікон"
+
+#: ../metadata/core.xml.in.h:111
+msgid "Raise windows when clicked"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:112
+#, fuzzy
 msgid "Refresh Rate"
 msgstr "Оновити"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:113
 #, fuzzy
 msgid "Run Dialog"
 msgstr "&Тонове набирання"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:114
 #, fuzzy
 msgid "Run command 0"
 msgstr "Команда \"%1\""
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:115
 #, fuzzy
 msgid "Run command 1"
 msgstr "Команда \"%1\""
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:116
 #, fuzzy
 msgid "Run command 10"
 msgstr "Команда \"%1\""
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:117
 #, fuzzy
 msgid "Run command 11"
 msgstr "Команда \"%1\""
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:118
 #, fuzzy
 msgid "Run command 2"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:119
 #, fuzzy
 msgid "Run command 3"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:120
 #, fuzzy
 msgid "Run command 4"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:121
 #, fuzzy
 msgid "Run command 5"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:122
 #, fuzzy
 msgid "Run command 6"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:123
 #, fuzzy
 msgid "Run command 7"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:124
 #, fuzzy
 msgid "Run command 8"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:125
 #, fuzzy
 msgid "Run command 9"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:127
 msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:128
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "Помилка розбору командного рядка."
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:129
 #, fuzzy
 msgid "Show Desktop"
 msgstr "Робоча станція"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:130
 #, fuzzy
 msgid "Show Main Menu"
 msgstr "&Показувати меню завантаження"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:131
 msgid "Show Run Application dialog"
 msgstr "Показати діалог запуску додатків"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:132
 #, fuzzy
 msgid "Show the main menu"
 msgstr "&Показувати меню завантаження"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:133
 #, fuzzy
 msgid "Slow Animations"
 msgstr "Показати всі розділи дисків"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:134
 #, fuzzy
 msgid "Smart mode"
 msgstr "Розумний"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:135
 msgid "Sync To VBlank"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:136
 msgid "Take a screenshot"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:137
 msgid "Take a screenshot of a window"
 msgstr "Взяти відбиток екрану з вікна"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:138
 #, fuzzy
 msgid "Terminal command line"
 msgstr "Помилка розбору командного рядка."
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:139
+#, fuzzy
+msgid "Texture Compression"
+msgstr "&Вказати фільтр"
+
+#: ../metadata/core.xml.in.h:140
 #, fuzzy
 msgid "Texture Filter"
 msgstr "&Вказати фільтр"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:141
 #, fuzzy
 msgid "Texture filtering"
 msgstr "&Вказати фільтр"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:142
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle Window Maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:146
 msgid "Toggle Window Shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:147
 msgid "Toggle active window maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:148
 msgid "Toggle active window maximized horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:150
 msgid "Toggle active window shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:151
 msgid "Toggle use of slow animations"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:153
 msgid "Unmaximize active window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:154
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:155
 msgid "Use diffuse light when screen is transformed"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:156
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "Віртуальні користувачі"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:157
+msgid "Very High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:158
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:160
 msgid "Window menu button binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:161
 msgid "Window menu key binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:162
 msgid "Window screenshot command line"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:163
 msgid "Windows that should be translucent by default"
 msgstr ""
 
@@ -1128,164 +1208,156 @@ msgid "Desktop Cube"
 msgstr "Робоча станція"
 
 #: ../metadata/cube.xml.in.h:15
-msgid "Desktop Window Opacity Fade Time."
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:16
-#, fuzzy
-msgid "Fade Time"
-msgstr "Реальний час"
-
-#: ../metadata/cube.xml.in.h:17
 #, fuzzy
 msgid "Fold Acceleration"
 msgstr "Прискорення 3D:"
 
-#: ../metadata/cube.xml.in.h:18
+#: ../metadata/cube.xml.in.h:16
 #, fuzzy
 msgid "Fold Speed"
 msgstr "Вибрано"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 #, fuzzy
 msgid "Fold Timestep"
 msgstr "Тест"
 
-#: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 #, fuzzy
 msgid "Go back to previous slide"
 msgstr "&Попередн."
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 #, fuzzy
 msgid "Image files"
 msgstr "Файл ISO-штампа"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Image to use as texture for the skydome"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "Inside Cube"
 msgstr "Всередині куба"
 
-#: ../metadata/cube.xml.in.h:26
+#: ../metadata/cube.xml.in.h:24
 msgid "Inside cube"
 msgstr "Всередині куба"
 
-#: ../metadata/cube.xml.in.h:27
+#: ../metadata/cube.xml.in.h:25
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:28
 msgid "Multiple cubes"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 #, fuzzy
 msgid "Next Slide"
 msgstr "Наступне оновлення"
 
-#: ../metadata/cube.xml.in.h:32
-msgid "On big cube"
-msgstr ""
+#: ../metadata/cube.xml.in.h:30
+#, fuzzy
+msgid "One big cube"
+msgstr "Всередині куба"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity During Rotation"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity When Not Rotating"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Opacity of desktop window during rotation."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:34
 msgid "Opacity of desktop window when not rotating."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 #, fuzzy
 msgid "Place windows on cube"
 msgstr "Windows"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 #, fuzzy
 msgid "Prev Slide"
 msgstr "&Попередн."
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Render skydome"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 #, fuzzy
 msgid "Scale image"
 msgstr "місцевий час"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Scale images to cover top face of cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 #, fuzzy
 msgid "Skydome"
 msgstr "ISO-штамп"
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Gradient End Color"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:45
+#: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient Start Color"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:46
+#: ../metadata/cube.xml.in.h:44
 #, fuzzy
 msgid "Skydome Image"
 msgstr "ISO-штамп"
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "Вибрано"
 
-#: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
 msgstr "Тест"
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Transparency Only on Mouse Rotate"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:50
+#: ../metadata/cube.xml.in.h:48
 msgid "Unfold"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:51
+#: ../metadata/cube.xml.in.h:49
 msgid "Unfold cube"
 msgstr ""
 
@@ -3058,6 +3130,10 @@ msgstr "Робоча станція"
 #, fuzzy
 msgid "Zoom pan"
 msgstr "Вибрано"
+
+#, fuzzy
+#~ msgid "Fade Time"
+#~ msgstr "Реальний час"
 
 #, fuzzy
 #~ msgid "Select next window"

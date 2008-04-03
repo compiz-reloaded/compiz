@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Oriya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-15 20:19+0530\n"
+"POT-Creation-Date: 2008-04-03 14:30+0530\n"
 "PO-Revision-Date: 2007-12-16 01:13+0530\n"
 "Last-Translator: jayashree pujari <sspujari@hotmail.com>\n"
 "Language-Team: gisti <info.gist@cdac.in>\n"
@@ -94,22 +94,22 @@ msgid "Close Window"
 msgstr "ଉଇଣ୍ଡୋ ବନ୍ଦକର"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:152
 msgid "Unmaximize Window"
 msgstr "ଅଣ-ସର୍ବାଧିକ ଉଇଣ୍ଡୋ"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:90
 msgid "Minimize Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:159
 msgid "Window Menu"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ"
 
@@ -306,36 +306,46 @@ msgstr "ଗୌସିଆନ ବ୍ଯାସାର୍ଦ୍ଧ"
 msgid "Gaussian strength"
 msgstr "ଗୌସିଆନ ଶକ୍ତି"
 
-#: ../metadata/blur.xml.in.h:22 ../metadata/cube.xml.in.h:28
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "ମିପ୍ ମ୍ଯାପ"
 
-#: ../metadata/blur.xml.in.h:23
+#: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
 msgstr "ମିପ୍ ମ୍ଯାପ LOD"
 
-#: ../metadata/blur.xml.in.h:24
+#: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
 msgstr "ମିପ୍‌ମ୍ଯାପ ବିବରଣୀର-ସ୍ତର"
 
-#: ../metadata/blur.xml.in.h:25
+#: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
 msgstr "ପଲ୍ସ(ଗତି)"
 
-#: ../metadata/blur.xml.in.h:26
+#: ../metadata/blur.xml.in.h:27
 msgid "Pulse effect"
 msgstr "ପଲ୍ସ ପ୍ରଭାବ"
 
-#: ../metadata/blur.xml.in.h:27
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
 msgstr "ଉଇଣ୍ଡୋ ଅସ୍ପଷ୍ଟ ଗତି"
 
-#: ../metadata/blur.xml.in.h:28
+#: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଲକ୍ଷ୍ଯ ଅସ୍ପଷ୍ଟ ଦ୍ବାରା ପ୍ରଭାବିତ ହେବା ଉଚିତ"
 
-#: ../metadata/blur.xml.in.h:29
+#: ../metadata/blur.xml.in.h:31
 msgid "Windows that should be use alpha blur by default"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଅଲ୍ଫା ଅସ୍ପଷ୍ଟତା ଡିଫଲ୍ଟରେ ଉପୟୋଗ କରିବା ଉଚିତ"
 
@@ -605,379 +615,423 @@ msgid "Detect Refresh Rate"
 msgstr "ରିଫ୍ରେସ ଦର ଚିହ୍ନଟକର"
 
 #: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "ଶୀଘ୍ର"
 
-#: ../metadata/core.xml.in.h:57
+#: ../metadata/core.xml.in.h:59
+#, fuzzy
+msgid "Focus Prevention Level"
+msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
+
+#: ../metadata/core.xml.in.h:60
 msgid "Focus Prevention Windows"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:58
+#: ../metadata/core.xml.in.h:61
 msgid "Focus prevention windows"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.h:62
 msgid "General Options"
 msgstr "ସାଧାରଣ ବିକଳ୍ପଗୁଡିକ"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.h:63
 msgid "General compiz options"
 msgstr "ସାଧାରଣ କମ୍ପିଜ ବିକଳ୍ପଗୁଡିକ"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.h:64
 msgid "Good"
 msgstr "ଉତ୍ତମ"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:65
 msgid "Hide Skip Taskbar Windows"
 msgstr "ବାଦଦେବା ଟାସ୍କବାର ଉଇଣ୍ଡୋକୁ ଲୁଚାଅ"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:66
 msgid "Hide all windows and focus desktop"
 msgstr "ସବୁ ଉଇଣ୍ଡୋକୁ ଲୁଚାଅ ଏବଂ ଡେସ୍କଟପକୁ ଲକ୍ଷ୍ଯକର"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:67
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "ଡେସ୍କଟପ ମୋଡକୁ ଦେଖାଅ କୁ ପ୍ରବେଶ କରିବା ବେଳେ ଉଇଣ୍ଡୋଗୁଡିକୁ ଲୁଚାଅ ଟାସ୍କବାରରେ ନୁହେଁ"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:68
+msgid "High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:69
 msgid "Horizontal Virtual Size"
 msgstr "ଦିଗବଳୀଯ କଳ୍ପିତ ଆକାର"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:70
+msgid "If available use compression for textures converted from images"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:71
 msgid "Ignore Hints When Maximized"
 msgstr "ୟେବେ ସର୍ବାଧିକ ହୋଇଥାଏ, ସଂକେତସୂଚନାକୁ ଅବହେଳାକର"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:72
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "ୟେବେ ଉଇଣ୍ଡୋ ସର୍ବାଧିକ ହୋଇଥାଏ ଆକାର ବୃଦ୍ଧିକରିବା ଏବଂ ଉଦ୍ଦେଶ୍ଯ ସଂକେତସୂଚନାକୁ ଅବହେଳାକର"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:73
 msgid "Increase Opacity"
 msgstr "ଅସ୍ବଚ୍ଛତାକୁ ବୃଦ୍ଧିକର"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:74
 msgid "Increase window opacity"
 msgstr "ଉଇଣ୍ଡୋ ଅସ୍ବଚ୍ଛତା ବୃଦ୍ଧିକର"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:75
 msgid "Interval before raising selected windows"
 msgstr "ମନୋନୀତ ଉଇଣ୍ଡୋ ଉତ୍ଥାନ ପୂର୍ବରୁ ବ୍ଯବଧାନ"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:76
 msgid "Interval between ping messages"
 msgstr "ପିଙ୍ଗ ସଂଦେଶଗୁଡିକ ମଧ୍ଯରେ ବ୍ଯବଧାନ"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:77
+msgid "Level of focus stealing prevention"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:78
 msgid "Lighting"
 msgstr "ଆଲୋକିତକରିବା"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:79
 msgid "List of currently active plugins"
 msgstr "ବର୍ତ୍ତମାନ ସକ୍ରିଯ ଥିବା ପ୍ଲଗଇନଗୁଡିକର ତାଲିକା"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:80
 msgid "List of strings describing output devices"
 msgstr "ଆଉଟପୁଟ ଉପକରଣଗୁଡିକୁ ବର୍ଣ୍ଣନା କରୁଥିବା ସ୍ଟ୍ରିଙ୍ଗଗୁଡିକର ତାଲିକା"
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:81
+msgid "Low"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:82
 msgid "Lower Window"
 msgstr "ନିମ୍ନତର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:83
 msgid "Lower window beneath other windows"
 msgstr "ଅନ୍ଯ ଉଇଣ୍ଡୋ ତଳକୁ ଉଇଣ୍ଡୋକୁ ନିମ୍ନତର କର"
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window Horizontally"
 msgstr "ଉଇଣ୍ଡୋକୁ ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize Window Vertically"
 msgstr "ଦଣ୍ଡରୁପରେ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:87
 msgid "Maximize active window"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:88
 msgid "Maximize active window horizontally"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଦିଗବଳୀଯ ଭାବରେ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:89
 msgid "Maximize active window vertically"
 msgstr "ଦଣ୍ଡରୂପରେ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize active window"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:92
 msgid "Number of Desktops"
 msgstr "ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:93
 msgid "Number of virtual desktops"
 msgstr "କଳ୍ପିତ ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:94
+msgid "Off"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:95
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "ଦଣ୍ଡରୂପ ଖାଲିକରିବା ଅବଧି ସମଯରେ କେବଳ ସ୍କ୍ରିନ ଅପଡେଟଗୁଡିକୁ କର"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:96
 msgid "Opacity Step"
 msgstr "ଅସ୍ବଚ୍ଛତା ସୋପାନ"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:97
 msgid "Opacity change step"
 msgstr "ଅସ୍ବଚ୍ଛତା ପରିବର୍ତ୍ତନ ସୋପାନ"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:98
 msgid "Opacity values for windows that should be translucent by default"
 msgstr "ଉଇଣ୍ଡୋ ପାଇଁ ଅସ୍ବଚ୍ଛତା ମୂଲ୍ଯଗୁଡିକ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ବଚ୍ଛ ହେବା ଉଚିତ"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:99
 msgid "Opacity window values"
 msgstr "ଅସ୍ବଚ୍ଛତା ଉଇଣ୍ଡୋ ମୂଲ୍ଯଗୁଡିକ"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:100
 msgid "Opacity windows"
 msgstr "ଅସ୍ବଚ୍ଛତା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:101
 msgid "Open a terminal"
 msgstr "ଗୋଟିଏ ଟର୍ମିନାଲ ଖୋଲ"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:102
 msgid "Outputs"
 msgstr "ଆଉଟପୁଟଗୁଡିକ"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:103
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:104
 msgid "Ping Delay"
 msgstr "ପିଙ୍ଗ ବିଳମ୍ବ"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:105
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:106
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:107
 msgid "Raise On Click"
 msgstr "କ୍ଲିକରେ ଉତ୍ଥାନକର"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:108
 msgid "Raise Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଉଠାଅ"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:109
 msgid "Raise selected windows after interval"
 msgstr "ବ୍ଯବଧାନ ପରେ ମନୋନୀତ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନ କର"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:110
 msgid "Raise window above other windows"
 msgstr "ଅନ୍ଯ ଉଇଣ୍ଡୋ ଗୁଡିକ ଉପରକୁ ଉଠାଅ"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:111
 msgid "Raise windows when clicked"
 msgstr "ୟେବେ କ୍ଲିକ ହୁଏ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନକର"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:112
 msgid "Refresh Rate"
 msgstr "ରିଫ୍ରେସ ଦର"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:113
 msgid "Run Dialog"
 msgstr "ଚଳାଅ ଡାଏଲଗ"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 0"
 msgstr "ଚଳାଅ ଆଦେଶ ୦"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 1"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 10"
 msgstr "ଚଳାଅ ଆଦେଶ ୧୦"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 11"
 msgstr "ଚଳାଅ ଆଦେଶ ୧୧"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 2"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 3"
 msgstr "ଚଳାଅ ଆଦେଶ ୩"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:120
 msgid "Run command 4"
 msgstr "ଚଳାଅ ଆଦେଶ ୪"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:121
 msgid "Run command 5"
 msgstr "ଚଳାଅ ଆଦେଶ ୫"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:122
 msgid "Run command 6"
 msgstr "ଚଳାଅ ଆଦେଶ ୬"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:123
 msgid "Run command 7"
 msgstr "ଚଳାଅ ଆଦେଶ ୭"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:124
 msgid "Run command 8"
 msgstr "ଚଳାଅ ଆଦେଶ ୮"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:125
 msgid "Run command 9"
 msgstr "ଚଳାଅ ଆଦେଶ ୯"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "ଦିଗବଳୀଯ କଳ୍ପିତ ଆକାର ପାଇଁ ସ୍କ୍ରିନ ଆକାର ଗୁଣକ"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:127
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "ଦଣ୍ଡରୂପୀ କଳ୍ପିତ ଆକାର ପାଇଁ ସ୍କ୍ରିନ ଆକାର ଗୁଣକ"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:128
 msgid "Screenshot command line"
 msgstr "ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:129
 msgid "Show Desktop"
 msgstr "ଡେସ୍କଟପ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:130
 msgid "Show Main Menu"
 msgstr "ମୂଖ୍ଯ ମେନୁ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:131
 msgid "Show Run Application dialog"
 msgstr "ଚାଳାଅ ପ୍ରଯୋଗ ଡାଏଲଗକୁ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:132
 msgid "Show the main menu"
 msgstr "ମୂଖ୍ଯ ମେନୁକୁ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:133
 msgid "Slow Animations"
 msgstr "ଧୀର ଚଳଚ୍ଚିତ୍ର  "
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:134
 #, fuzzy
 msgid "Smart mode"
 msgstr "ସ୍ଫୁର୍ତ୍ତି"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:135
 msgid "Sync To VBlank"
 msgstr "ସିଙ୍କ Vଖାଲିକୁ"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:136
 msgid "Take a screenshot"
 msgstr "ଗୋଟିଏ ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:137
 msgid "Take a screenshot of a window"
 msgstr "ଗୋଟିଏ ଉଇଣ୍ଡୋର ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:138
 msgid "Terminal command line"
 msgstr "ଟର୍ମିନାଲ ଆଦେଶ ରେଖା"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:139
+#, fuzzy
+msgid "Texture Compression"
+msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
+
+#: ../metadata/core.xml.in.h:140
 msgid "Texture Filter"
 msgstr "ଟେକ୍ସଚର ଫିଲ୍ଟର"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:141
 msgid "Texture filtering"
 msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:142
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "ଦର ୟେଉଁଥିରେ ସ୍କ୍ରିନ ପୁନଃଅଂକିତ ହୋଇଛି (ସମଯ/ସେକେଣ୍ଡ)"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle Window Maximized"
 msgstr "ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle Window Maximized Horizontally"
 msgstr "ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized Vertically"
 msgstr "ଦଣ୍ଡ ଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:146
 msgid "Toggle Window Shaded"
 msgstr "ଛାଯାୟୁକ୍ତ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:147
 msgid "Toggle active window maximized"
 msgstr "ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:148
 msgid "Toggle active window maximized horizontally"
 msgstr "ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized vertically"
 msgstr "ଦଣ୍ଡ ଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:150
 msgid "Toggle active window shaded"
 msgstr "ଛାଯାୟୁକ୍ତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:151
 msgid "Toggle use of slow animations"
 msgstr "ଧୀର ଚଳଚିତ୍ରଗୁଡିକର ଉପୟୋଗକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:153
 msgid "Unmaximize active window"
 msgstr "ଅଣ-ସର୍ବାଧିକ ସକ୍ରିଯ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:154
 msgid "Unredirect Fullscreen Windows"
 msgstr "ଅଣ-ପୁନଃନିର୍ଦ୍ଦେଶିତ ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:155
 msgid "Use diffuse light when screen is transformed"
 msgstr "ୟେବେ ସ୍କ୍ରିନ ରୂପାନ୍ତରିତ ହୋଇଥାଏ, ବିକ୍ଷିପ୍ତ ଆଲୋକ ଉପୟୋଗ କର"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:156
 msgid "Vertical Virtual Size"
 msgstr "ଦଣ୍ଡରୂପୀ କଳ୍ପିତ ଆକାର"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:157
+msgid "Very High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:158
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:160
 msgid "Window menu button binding"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ ବଟନ ବନ୍ଧନ"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:161
 msgid "Window menu key binding"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ କି ବନ୍ଧନ"
 
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:162
 msgid "Window screenshot command line"
 msgstr "ଉଇଣ୍ଡୋ ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:163
 msgid "Windows that should be translucent by default"
 msgstr "ଉଇଣ୍ଡୋଗୁଡିକ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ବଚ୍ଛ ହେବା ଉଚିତ"
 
@@ -1038,150 +1092,143 @@ msgid "Desktop Cube"
 msgstr "ଡେସ୍କଟପ ଘନକ୍ଷେତ୍ର"
 
 #: ../metadata/cube.xml.in.h:15
-msgid "Desktop Window Opacity Fade Time."
-msgstr "ଡେସ୍କଟପ ଉଇଣ୍ଡୋ ଅସ୍ବଚ୍ଛାତା ଫିକା ହେବା ସମଯ ।"
-
-#: ../metadata/cube.xml.in.h:16
-msgid "Fade Time"
-msgstr "ଫିକାହେବା ସମଯ"
-
-#: ../metadata/cube.xml.in.h:17
 msgid "Fold Acceleration"
 msgstr "ବେଗବର୍ଦ୍ଧନ ଭାଙ୍ଗକର"
 
-#: ../metadata/cube.xml.in.h:18
+#: ../metadata/cube.xml.in.h:16
 msgid "Fold Speed"
 msgstr "ଗତି ଭାଙ୍ଗକର"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 msgid "Fold Timestep"
 msgstr "ସମଯସୋପାନ ଭାଙ୍ଗକର"
 
-#: ../metadata/cube.xml.in.h:20 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "ଉଚ୍ଚତର ଗୁଣବତ୍ତା ମାପିବା ପାଇଁ ୟେବେ ସମ୍ଭବ ମିପ୍ ମ୍ଯାପଗୁଡିକୁ ଉତ୍ପାଦନକର"
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 msgid "Go back to previous slide"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡକୁ ୟାଅ"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 msgid "Image files"
 msgstr "ଚିତ୍ର ଫାଇଲଗୁଡିକ"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Image to use as texture for the skydome"
 msgstr "ସ୍କାଇଡୋମ ପାଇଁ ଟେକ୍ସଚର ପରି ଉପୟୋଗ ହେବାକୁ ଥିବା ଚିତ୍ର"
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr "ୟଦି ଘୂର୍ଣ୍ଣନ କେବଳ ମାଉସ ଦ୍ବାରା ଟଣାୟାଇଥାଏ ଘନକ୍ଷେତ୍ରର ସ୍ବଚ୍ଛତାକୁ ପ୍ରାରମ୍ଭ କରେ ।"
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "Inside Cube"
 msgstr "ଘନକ୍ଷେତ୍ର ଭିତରେ"
 
-#: ../metadata/cube.xml.in.h:26
+#: ../metadata/cube.xml.in.h:24
 msgid "Inside cube"
 msgstr "ଘନକ୍ଷେତ୍ର ଭିତରେ"
 
-#: ../metadata/cube.xml.in.h:27
+#: ../metadata/cube.xml.in.h:25
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr " PNG ଏବଂ SVG ଫାଇଲଗୁଡିକର ତାଲିକା ୟାହାକି ଘନକ୍ଷେତ୍ରର ଉପର ମୁହଁରେ ପ୍ରଦାନ ହେବା ଉଚିତ"
 
-#: ../metadata/cube.xml.in.h:29 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "ବହୁ-ଆଉଟପୁଟ ମୋଡ"
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:28
 msgid "Multiple cubes"
 msgstr "ବହୁବିଧ ଘନକ୍ଷେତ୍ରଗୁଡିକ"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 msgid "Next Slide"
 msgstr "ପରବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#: ../metadata/cube.xml.in.h:32
-msgid "On big cube"
+#: ../metadata/cube.xml.in.h:30
+#, fuzzy
+msgid "One big cube"
 msgstr "ବଡ ଘନକ୍ଷେତ୍ରରେ"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity During Rotation"
 msgstr "ଘୁର୍ଣ୍ଣନ ସମଯରେ ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity When Not Rotating"
 msgstr "ଘୂରା ନୟିବା ବେଳେ ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Opacity of desktop window during rotation."
 msgstr "ଘୂର୍ଣ୍ଣନ ସମଯରେ ଡେସ୍କଟପ ଉଇଣ୍ଡୋର ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:34
 msgid "Opacity of desktop window when not rotating."
 msgstr "ଘୁରା ନୟିବା ବେଳେ ଡେସ୍କଟପ ଉଇଣ୍ଡୋର ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 msgid "Place windows on cube"
 msgstr "ଘନକ୍ଷେତ୍ରରେ ଉଇଣ୍ଡୋକୁ ସ୍ଥାପିତ କର"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 msgid "Prev Slide"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Render skydome"
 msgstr "ସ୍କାଇଡୋମ ପ୍ରଦାନକର"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 msgid "Scale image"
 msgstr "ଚିତ୍ର ମାପ"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Scale images to cover top face of cube"
 msgstr "ଘନକ୍ଷେତ୍ରର ଉପ ମୂହଁକୁ ଆବୃତ କରିବା ପାଇଁ ଚିତ୍ରଗୁଡିକୁ ମାପ"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr "ୟଦି ବହୁବିଧ ଆଉଟପୁଟ ଉପକରଣଗୁଡିକ ଉପୟୋଗ ହୁଅନ୍ତି, ଘନକ୍ଷେତ୍ର କିପରି ପ୍ରଦର୍ଶିତ ହେବ ମନୋନୀତ କରେ ।"
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome"
 msgstr "ସ୍କାଇଡୋମ"
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Gradient End Color"
 msgstr "ସ୍କାଇଡୋମ କ୍ରମାବନତି ଶେଷ ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:45
+#: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient Start Color"
 msgstr "ସ୍କାଇଡୋମ କ୍ରମାବନତି ଆରମ୍ଭ ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:46
+#: ../metadata/cube.xml.in.h:44
 msgid "Skydome Image"
 msgstr "ସ୍କାଇଡୋମ ଚିତ୍ର"
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
 #: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "ଗତି"
 
-#: ../metadata/cube.xml.in.h:48 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "ସମଯସୋପାନ"
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Transparency Only on Mouse Rotate"
 msgstr "କେବଳ ମାଉସ ଘୁରାଇବାରେ ସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:50
+#: ../metadata/cube.xml.in.h:48
 msgid "Unfold"
 msgstr "ଭାଙ୍ଗହୋଇନଥିବା"
 
-#: ../metadata/cube.xml.in.h:51
+#: ../metadata/cube.xml.in.h:49
 msgid "Unfold cube"
 msgstr "ଭାଙ୍ଗହୋଇନଥିବା ଘନକ୍ଷେତ୍ର"
 
@@ -2714,6 +2761,12 @@ msgstr "ଜୁମ କାରଣ"
 #: ../metadata/zoom.xml.in.h:14
 msgid "Zoom pan"
 msgstr "ଜୁମ ପାନ "
+
+#~ msgid "Desktop Window Opacity Fade Time."
+#~ msgstr "ଡେସ୍କଟପ ଉଇଣ୍ଡୋ ଅସ୍ବଚ୍ଛାତା ଫିକା ହେବା ସମଯ ।"
+
+#~ msgid "Fade Time"
+#~ msgstr "ଫିକାହେବା ସମଯ"
 
 #, fuzzy
 #~ msgid "Select next window"
