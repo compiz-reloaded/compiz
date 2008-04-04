@@ -3004,11 +3004,17 @@ meta_get_button_position (decor_t *d,
     }
 
 #ifdef HAVE_METACITY_2_15_21
+    if (!space->clickable.width && !space->clickable.height)
+	return FALSE;
+
     *x = space->clickable.x;
     *y = space->clickable.y;
     *w = space->clickable.width;
     *h = space->clickable.height;
 #else
+    if (!space->width && !space->height)
+	return FALSE;
+
     *x = space->x;
     *y = space->y;
     *w = space->width;
