@@ -3710,16 +3710,16 @@ addWindowSizeChanges (CompWindow     *w,
 	}
     }
 
-    if (xwc->x == oldX)
+    if ((mask & CWX) && (xwc->x == oldX))
 	mask &= ~CWX;
 
-    if (xwc->y == oldY)
+    if ((mask & CWY) && (xwc->y == oldY))
 	mask &= ~CWY;
 
-    if (xwc->width == oldWidth)
+    if ((mask & CWWidth) && (xwc->width == oldWidth))
 	mask &= ~CWWidth;
 
-    if (xwc->height == oldHeight)
+    if ((mask & CWHeight) && (xwc->height == oldHeight))
 	mask &= ~CWHeight;
 
     return mask;
