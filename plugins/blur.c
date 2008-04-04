@@ -2262,7 +2262,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 	    case BLUR_FILTER_GAUSSIAN:
 		if (bs->opt[BLUR_SCREEN_OPTION_INDEPENDENT_TEX].value.b)
 		{
-		    // leave one free texture unit for fragment position
+		    /* leave one free texture unit for fragment position */
 		    iTC = MAX (0, s->maxTextureUnits - (w->texUnits + 1));
 		    if (iTC)
 			iTC = MIN (iTC / 2, bs->numTexop);
