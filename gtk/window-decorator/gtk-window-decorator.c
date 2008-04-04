@@ -1834,6 +1834,9 @@ meta_get_decoration_geometry (decor_t		*d,
     if (d->state & WNCK_WINDOW_STATE_FULLSCREEN)
 	*flags |= META_FRAME_FULLSCREEN;
 
+    if (d->state & WNCK_WINDOW_STATE_SHADED)
+	*flags |= META_FRAME_SHADED;
+
 #ifdef HAVE_METACITY_2_17_0
     if (d->state & WNCK_WINDOW_STATE_ABOVE)
 	*flags |= META_FRAME_ABOVE;
