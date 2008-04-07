@@ -37,6 +37,8 @@ typedef struct _FadeDisplay {
     HandleEventProc	       handleEvent;
     MatchExpHandlerChangedProc matchExpHandlerChanged;
     int			       displayModals;
+    Bool		       suppressMinimizeOpenClose;
+    CompMatch		       alwaysFadeWindowMatch;
 } FadeDisplay;
 
 #define FADE_SCREEN_OPTION_FADE_MODE		   0
@@ -463,6 +465,22 @@ fadeRemoveDisplayModal (CompDisplay *d,
     }
 }
 
+/* Returns whether this window should be faded
+ * on open and close events. */
+static Bool
+isFadeWinForOpenClose (CompWindow *w)
+{
+    FADE_DISPLAY (w->screen->display);
+    FADE_SCREEN (w->screen);
+
+    if (fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b &&
+	!fd->suppressMinimizeOpenClose)
+    {
+	return TRUE;
+    }
+    return matchEval (&fd->alwaysFadeWindowMatch, w);
+}
+
 static void
 fadeHandleEvent (CompDisplay *d,
 		 XEvent      *event)
@@ -478,10 +496,8 @@ fadeHandleEvent (CompDisplay *d,
 	{
 	    FADE_SCREEN (w->screen);
 
-	    if (!fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
-		break;
-
-	    if (w->texture->pixmap && matchEval (&fs->match, w))
+	    if (w->texture->pixmap && isFadeWinForOpenClose (w) &&
+		matchEval (&fs->match, w))
 	    {
 		FADE_WINDOW (w);
 
@@ -508,10 +524,10 @@ fadeHandleEvent (CompDisplay *d,
 
 	    fw->shaded = w->shaded;
 
-	    if (!fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
-		break;
-
-	    if (!fw->shaded && w->texture->pixmap && matchEval (&fs->match, w))
+	    if (fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b &&
+		!fd->suppressMinimizeOpenClose &&
+		!fw->shaded && w->texture->pixmap &&
+		matchEval (&fs->match, w))
 	    {
 		if (fw->opacity == 0xffff)
 		    fw->opacity = 0xfffe;
@@ -531,13 +547,13 @@ fadeHandleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
-	    FADE_SCREEN(w->screen);
+	    FADE_SCREEN (w->screen);
 
-	    if (!fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
-		break;
-
-	    fadeWindowStop (w);
-
+	    if (fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b &&
+		!fd->suppressMinimizeOpenClose)
+	    {
+		fadeWindowStop (w);
+	    }
 	    if (w->state & CompWindowStateDisplayModalMask)
 		fadeAddDisplayModal (d, w);
 	}
@@ -660,7 +676,7 @@ fadeDamageWindowRect (CompWindow *w,
 	}
 	else if (matchEval (&fs->match, w))
 	{
-	    if (fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
+	    if (isFadeWinForOpenClose (w))
 	    {
 		fw->opacity       = 0;
 		fw->targetOpacity = 0;
@@ -747,6 +763,16 @@ fadeInitDisplay (CompPlugin  *p,
 
     fd->displayModals = 0;
 
+    fd->suppressMinimizeOpenClose = (findActivePlugin ("animation") != NULL);
+
+    /* Always fade opening and closing of screen-dimming layer of 
+       logout window and gksu. */
+    matchInit (&fd->alwaysFadeWindowMatch);
+    matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=gksu");
+    matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=x-session-manager");
+    matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=gnome-session");
+    matchUpdate (d, &fd->alwaysFadeWindowMatch);
+
     WRAP (fd, d, handleEvent, fadeHandleEvent);
     WRAP (fd, d, matchExpHandlerChanged, fadeMatchExpHandlerChanged);
 
@@ -762,6 +788,8 @@ fadeFiniDisplay (CompPlugin  *p,
     FADE_DISPLAY (d);
 
     freeScreenPrivateIndex (d, fd->screenPrivateIndex);
+
+    matchFini (&fd->alwaysFadeWindowMatch);
 
     UNWRAP (fd, d, handleEvent);
     UNWRAP (fd, d, matchExpHandlerChanged);
