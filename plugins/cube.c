@@ -852,10 +852,11 @@ cubePreparePaintScreen (CompScreen *s,
 
     cs->toOpacity = (cs->opt[opt].value.f / 100.0f) * OPAQUE;
 
-    if (cs->desktopOpacity != cs->toOpacity)
+    (*cs->getRotation) (s, &x, &x, &progress);
+
+    if (cs->desktopOpacity != cs->toOpacity ||
+	(progress > 0.0 && progress < 1.0))
     {
-	(*cs->getRotation) (s, &x, &x, &progress);
-	x = cs->desktopOpacity;
 	cs->desktopOpacity = 
 	    (cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f - 
 	    ((cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f -
