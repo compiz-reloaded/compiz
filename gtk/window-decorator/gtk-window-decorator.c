@@ -5848,6 +5848,7 @@ meta_button_opposite_function (MetaButtonFunction ofwhat)
 {
     switch (ofwhat)
     {
+#ifdef HAVE_METACITY_2_17_0
     case META_BUTTON_FUNCTION_SHADE:
 	return META_BUTTON_FUNCTION_UNSHADE;
     case META_BUTTON_FUNCTION_UNSHADE:
@@ -5862,6 +5863,7 @@ meta_button_opposite_function (MetaButtonFunction ofwhat)
 	return META_BUTTON_FUNCTION_UNSTICK;
     case META_BUTTON_FUNCTION_UNSTICK:
 	return META_BUTTON_FUNCTION_STICK;
+#endif
 
     default:
 	return META_BUTTON_FUNCTION_LAST;
