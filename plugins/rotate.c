@@ -482,7 +482,9 @@ rotatePreparePaintScreen (CompScreen *s,
 	    rs->progressVelocity = (tamount * rs->progressVelocity + adjust) /
 				   (tamount + 1.0f);
 
-	    if (fabs (dt) < 0.1f && fabs (rs->progressVelocity) < 0.0005f)
+	    rs->progress += rs->progressVelocity * chunk;
+
+	    if (fabs (dt) < 0.01f && fabs (rs->progressVelocity) < 0.0001f)
 	    {
 		if (rs->grabbed)
 		    rs->progress = 1.0f;
@@ -491,7 +493,6 @@ rotatePreparePaintScreen (CompScreen *s,
 
 		break;
 	    }
-	    rs->progress += rs->progressVelocity * chunk;
 	}
     }
 
@@ -515,7 +516,8 @@ rotateDonePaintScreen (CompScreen *s)
 {
     ROTATE_SCREEN (s);
 
-    if (rs->grabIndex || rs->moving)
+    if (rs->grabIndex || rs->moving ||
+	(rs->progress != 0.0 && rs->progress != 1.0))
     {
 	if ((!rs->grabbed && !rs->snapTop && !rs->snapBottom) ||
 	    rs->xVelocity || rs->yVelocity || rs->progressVelocity)
