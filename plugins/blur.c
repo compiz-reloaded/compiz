@@ -1206,42 +1206,17 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
 	    ok &= addColorOpToFunctionData (data, "output", "output");
 
-	    if (!numITC)
-	    {
-	        snprintf (str, 1024,
-			  "MUL fCoord, fragment.position, program.env[%d];",
-			  param);
+	    snprintf (str, 1024,
+		      "MUL fCoord, fragment.position, program.env[%d];",
+		      param);
 
-		ok &= addDataOpToFunctionData (data, str);
-	    }
-	    /* some drivers implement fragment.position as texture coordinate
-	       and we might already use them all */
-	    else if (numITC < bs->numTexop)
-	    {
-	        snprintf (str, 1024,
-			  "RCP fCoord, fragment.texcoord[%d].w;"
-			  "MUL fCoord, fCoord, fragment.texcoord[%d];",
-			  startTC, startTC);
+	    ok &= addDataOpToFunctionData (data, str);
 
-		ok &= addDataOpToFunctionData (data, str);
-	    }
+	    snprintf (str, 1024,
+		      "TEX sum, fCoord, texture[%d], %s;",
+		       unit + 1, targetString);
 
-	    if (numITC)
-	    {
-		snprintf (str, 1024,
-			  "TXP sum, fragment.texcoord[%d], texture[%d], %s;",
-			  startTC, unit + 1, targetString);
-
-		ok &= addDataOpToFunctionData (data, str);
-	    }
-	    else
-	    {
-		snprintf (str, 1024,
-			  "TEX sum, fCoord, texture[%d], %s;",
-			  unit + 1, targetString);
-
-		ok &= addDataOpToFunctionData (data, str);
-	    }
+	    ok &= addDataOpToFunctionData (data, str);
 
 	    snprintf (str, 1024,
 		      "MUL_SAT mask, output.a, program.env[%d];"
@@ -1266,9 +1241,9 @@ getDstBlurFragmentFunction (CompScreen  *s,
 		snprintf (str, 1024,
 			  "TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;"
 			  "TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;",
-			  i * 2, startTC + 1 + (i * 2),
+			  i * 2, startTC + (i * 2),
 			  unit + 1, targetString,
-			  (i * 2) + 1, startTC + 2 + (i * 2),
+			  (i * 2) + 1, startTC + 1 + (i * 2),
 			  unit + 1, targetString);
 
 		ok &= addDataOpToFunctionData (data, str);
@@ -2287,9 +2262,10 @@ blurDrawWindowTexture (CompWindow	    *w,
 	    case BLUR_FILTER_GAUSSIAN:
 		if (bs->opt[BLUR_SCREEN_OPTION_INDEPENDENT_TEX].value.b)
 		{
-		    iTC = MAX (0, s->maxTextureUnits - w->texUnits);
+		    /* leave one free texture unit for fragment position */
+		    iTC = MAX (0, s->maxTextureUnits - (w->texUnits + 1));
 		    if (iTC)
-			iTC = MIN (((iTC - 1) / 2), bs->numTexop);
+			iTC = MIN (iTC / 2, bs->numTexop);
 		}
 
 		param = allocFragmentParameters (&dstFa, 2);
@@ -2340,37 +2316,10 @@ blurDrawWindowTexture (CompWindow	    *w,
 
 			matrixMultiply (&tm, &tm, &bs->mvp);
 
-			s_gen[0] = tm.m[0];
-			s_gen[1] = tm.m[4];
-			s_gen[2] = tm.m[8];
-			s_gen[3] = tm.m[12];
-			t_gen[0] = tm.m[1];
-			t_gen[1] = tm.m[5];
-			t_gen[2] = tm.m[9];
-			t_gen[3] = tm.m[13];
-			q_gen[0] = tm.m[3];
-			q_gen[1] = tm.m[7];
-			q_gen[2] = tm.m[11];
-			q_gen[3] = tm.m[15];
-
-			(*s->activeTexture) (GL_TEXTURE0_ARB + w->texUnits);
-
-			glTexGenfv(GL_T, GL_OBJECT_PLANE, t_gen);
-			glTexGenfv(GL_S, GL_OBJECT_PLANE, s_gen);
-			glTexGenfv(GL_Q, GL_OBJECT_PLANE, q_gen);
-
-			glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-			glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-			glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-
-			glEnable(GL_TEXTURE_GEN_S);
-			glEnable(GL_TEXTURE_GEN_T);
-			glEnable(GL_TEXTURE_GEN_Q);
-
 			for (i = 0; i < iTC; i++)
 			{
 			    (*s->activeTexture) (GL_TEXTURE0_ARB + w->texUnits
-						 + 1 + (i * 2));
+						 + (i * 2));
 
 			    matrixGetIdentity (&rm);
 			    rm.m[13] = bs->ty * bs->pos[i];
@@ -2404,7 +2353,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 			    glEnable(GL_TEXTURE_GEN_Q);
 
 			    (*s->activeTexture) (GL_TEXTURE0_ARB + w->texUnits
-						 + 2 + (i * 2));
+						 + 1 + (i * 2));
 
 			    matrixGetIdentity (&rm);
 			    rm.m[13] = -bs->ty * bs->pos[i];
@@ -2519,7 +2468,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 	if (iTC)
 	{
 	    int i;
-	    for (i = w->texUnits; i < w->texUnits + 1 + (2 * iTC); i++)
+	    for (i = w->texUnits; i < w->texUnits + (2 * iTC); i++)
 	    {
 		(*s->activeTexture) (GL_TEXTURE0_ARB + i);
 		glDisable(GL_TEXTURE_GEN_S);
