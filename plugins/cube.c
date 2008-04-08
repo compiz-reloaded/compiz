@@ -1417,7 +1417,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     Bool	      capsPainted;
     Bool              wasCulled = FALSE;
     Bool              topDir, bottomDir, allCaps;
-    int output = 0;
+    int               cullNorm, cullInv;
+    int               output = 0;
 
     CUBE_SCREEN (s);
 
@@ -1434,6 +1435,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     hsize = s->hsize * cs->nOutput;
     size  = hsize;
 
+    glGetIntegerv (GL_CULL_FACE_MODE, &cullNorm);
+    cullInv   = (cullNorm == GL_BACK)? GL_FRONT : GL_BACK;
     wasCulled = glIsEnabled (GL_CULL_FACE);
 
     if (!cs->fullscreenOutput)
@@ -1522,8 +1525,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
     {
 	/* Outside cube - start with FTB faces */
 	paintOrder = FTB;
-	if (wasCulled && cs->paintAllViewports)
-	    glDisable (GL_CULL_FACE);
+	glCullFace (cullInv);
     }
     else
     {
@@ -1534,6 +1536,8 @@ cubePaintTransformedOutput (CompScreen		    *s,
     if (cs->invert == -1 || cs->paintAllViewports)
 	cubePaintAllViewports (s, &sa, transform, region, outputPtr,
 			       mask, xMove, size, hsize, paintOrder);
+
+    glCullFace (cullNorm);
 
     if (wasCulled && cs->paintAllViewports)
 	glDisable (GL_CULL_FACE);
@@ -1594,17 +1598,19 @@ cubePaintTransformedOutput (CompScreen		    *s,
 	glNormal3f (0.0f, 0.0f, -1.0f);
     }
 
+    if (wasCulled)
+	glEnable (GL_CULL_FACE);
+
     if (cs->invert == 1)
     {
 	/* Outside cube - continue with BTF faces */
 	paintOrder = BTF;
-	if (wasCulled && cs->paintAllViewports)
-	    glEnable (GL_CULL_FACE);
     }
     else
     {
 	/* Inside cube - continue with FTB faces */
 	paintOrder = FTB;
+	glCullFace (cullInv);
     }
 
     if (cs->invert == 1 || cs->paintAllViewports)
@@ -1612,10 +1618,9 @@ cubePaintTransformedOutput (CompScreen		    *s,
 			       outputPtr, mask, xMove,
 			       size, hsize, paintOrder);
 
-    s->display->textureFilter = filter;
+    glCullFace (cullNorm);
 
-    if (wasCulled)
-	glEnable (GL_CULL_FACE);
+    s->display->textureFilter = filter;
 
     WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
 }
