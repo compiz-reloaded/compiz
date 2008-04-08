@@ -1441,7 +1441,7 @@ loadFragmentProgram (CompScreen *s,
 static Bool
 loadFilterProgram (CompScreen *s, int numITC)
 {
-    char  buffer[2048];
+    char  buffer[4096];
     char  *targetString;
     char  *str = buffer;
     int   i, j;
