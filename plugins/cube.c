@@ -991,17 +991,14 @@ cubeCheckOrientation (CompScreen              *s,
     return rv;
 }
 
-static void
-cubeMoveViewportAndPaint (CompScreen		  *s,
-			  const ScreenPaintAttrib *sAttrib,
-			  const CompTransform	  *transform,
-			  CompOutput		  *outputPtr,
-			  unsigned int		  mask,
-			  PaintOrder              paintOrder,
-			  int			  dx)
+static Bool
+cubeShouldPaintViewport (CompScreen              *s,
+			 const ScreenPaintAttrib *sAttrib,
+			 const CompTransform     *transform,
+			 CompOutput              *outputPtr,
+			 PaintOrder              order)
 {
     Bool  ftb;
-    int   output;
     float pointZ;
 
     CUBE_SCREEN (s);
@@ -1013,7 +1010,27 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
     ftb = (*cs->checkOrientation) (s, sAttrib, transform, outputPtr, vPoints);
 
-    if ((paintOrder == FTB && !ftb) || (paintOrder == BTF && ftb))
+    return (order == FTB && ftb) || (order == BTF && !ftb);
+}
+
+static void
+cubeMoveViewportAndPaint (CompScreen		  *s,
+			  const ScreenPaintAttrib *sAttrib,
+			  const CompTransform	  *transform,
+			  CompOutput		  *outputPtr,
+			  unsigned int		  mask,
+			  PaintOrder              paintOrder,
+			  int			  dx)
+{
+    int   output;
+
+    CUBE_SCREEN (s);
+
+    if (!(*cs->shouldPaintViewport) (s,
+				     sAttrib,
+				     transform,
+				     outputPtr,
+				     paintOrder))
 	return;
 
     output = (outputPtr->id != ~0) ? outputPtr->id : 0;
@@ -2238,13 +2255,14 @@ cubeInitScreen (CompPlugin *p,
 
     cs->skyListId = 0;
 
-    cs->getRotation	  = cubeGetRotation;
-    cs->clearTargetOutput = cubeClearTargetOutput;
-    cs->paintTop          = cubePaintTop;
-    cs->paintBottom       = cubePaintBottom;
-    cs->paintInside       = cubePaintInside;
-    cs->checkOrientation  = cubeCheckOrientation;
-    cs->postPaintViewport = cubePostPaintViewport;
+    cs->getRotation	    = cubeGetRotation;
+    cs->clearTargetOutput   = cubeClearTargetOutput;
+    cs->paintTop            = cubePaintTop;
+    cs->paintBottom         = cubePaintBottom;
+    cs->paintInside         = cubePaintInside;
+    cs->checkOrientation    = cubeCheckOrientation;
+    cs->postPaintViewport   = cubePostPaintViewport;
+    cs->shouldPaintViewport = cubeShouldPaintViewport;
 
     s->base.privates[cd->screenPrivateIndex].ptr = cs;
 

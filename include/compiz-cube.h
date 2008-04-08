@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define CUBE_ABIVERSION 20080401
+#define CUBE_ABIVERSION 20080408
 
 typedef struct _CubeCore {
     SetOptionForPluginProc setOptionForPlugin;
@@ -75,6 +75,17 @@ typedef struct _CubeDisplay {
 #define CUBE_SCREEN_OPTION_MULTIOUTPUT_MODE        18
 #define CUBE_SCREEN_OPTION_NUM                     19
 
+typedef enum _PaintOrder {
+    BTF = 0,
+    FTB
+} PaintOrder;
+
+typedef enum _RotationState {
+    RotationNone = 0,
+    RotationChange,
+    RotationManual
+} RotationState;
+
 typedef void (*CubeGetRotationProc) (CompScreen *s,
 				     float      *x,
 				     float      *v,
@@ -114,16 +125,11 @@ typedef void (*CubePostPaintViewportProc) (CompScreen              *s,
 					   CompOutput              *output,
 					   Region                  region);
 
-typedef enum _PaintOrder {
-    BTF = 0,
-    FTB
-} PaintOrder;
-
-typedef enum _RotationState {
-    RotationNone = 0,
-    RotationChange,
-    RotationManual
-} RotationState;
+typedef Bool (*CubeShouldPaintViewportProc) (CompScreen              *s,
+					     const ScreenPaintAttrib *sAttrib,
+					     const CompTransform     *transform,
+					     CompOutput              *output,
+					     PaintOrder              order);
 
 typedef struct _CubeScreen {
     PreparePaintScreenProc       preparePaintScreen;
@@ -138,13 +144,14 @@ typedef struct _CubeScreen {
     OutputChangeNotifyProc       outputChangeNotify;
     InitWindowWalkerProc         initWindowWalker;
 
-    CubeGetRotationProc	      getRotation;
-    CubeClearTargetOutputProc clearTargetOutput;
-    CubePaintTopProc          paintTop;
-    CubePaintBottomProc       paintBottom;
-    CubePaintInsideProc       paintInside;
-    CubeCheckOrientationProc  checkOrientation;
-    CubePostPaintViewportProc postPaintViewport;
+    CubeGetRotationProc	         getRotation;
+    CubeClearTargetOutputProc    clearTargetOutput;
+    CubePaintTopProc             paintTop;
+    CubePaintBottomProc          paintBottom;
+    CubePaintInsideProc          paintInside;
+    CubeCheckOrientationProc     checkOrientation;
+    CubePostPaintViewportProc    postPaintViewport;
+    CubeShouldPaintViewportProc  shouldPaintViewport;
 
     CompOption opt[CUBE_SCREEN_OPTION_NUM];
 
