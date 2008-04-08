@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080401
+#define CORE_ABIVERSION 20080408
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1824,6 +1824,9 @@ typedef void (*GLProgramParameter4fProc) (GLenum  target,
 					  GLfloat y,
 					  GLfloat z,
 					  GLfloat w);
+typedef void (*GLGetProgramivProc) (GLenum target,
+				    GLenum pname,
+				    int    *params);
 
 typedef void (*GLGenFramebuffersProc) (GLsizei n,
 				       GLuint  *framebuffers);
@@ -2179,6 +2182,7 @@ struct _CompScreen {
     GLProgramStringProc	     programString;
     GLProgramParameter4fProc programEnvParameter4f;
     GLProgramParameter4fProc programLocalParameter4f;
+    GLGetProgramivProc       getProgramiv;
 
     GLGenFramebuffersProc        genFramebuffers;
     GLDeleteFramebuffersProc     deleteFramebuffers;

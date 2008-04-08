@@ -2026,13 +2026,16 @@ addScreen (CompDisplay *display,
 	    getProcAddress (s, "glProgramEnvParameter4fARB");
 	s->programLocalParameter4f = (GLProgramParameter4fProc)
 	    getProcAddress (s, "glProgramLocalParameter4fARB");
+	s->getProgramiv = (GLGetProgramivProc)
+	    getProcAddress (s, "glGetProgramivARB");
 
-	if (s->genPrograms	     &&
-	    s->deletePrograms	     &&
-	    s->bindProgram	     &&
-	    s->programString	     &&
-	    s->programEnvParameter4f &&
-	    s->programLocalParameter4f)
+	if (s->genPrograms	       &&
+	    s->deletePrograms	       &&
+	    s->bindProgram	       &&
+	    s->programString	       &&
+	    s->programEnvParameter4f   &&
+	    s->programLocalParameter4f &&
+	    s->getProgramiv)
 	    s->fragmentProgram = 1;
     }
 
