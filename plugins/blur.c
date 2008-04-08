@@ -155,6 +155,7 @@ typedef struct _BlurScreen {
     int    height;
 
     GLuint program;
+    int    maxTemp;
     GLuint fbo;
     Bool   fboStatus;
 
@@ -1125,10 +1126,13 @@ getDstBlurFragmentFunction (CompScreen  *s,
     if (data)
     {
 	static char *temp[] = { "fCoord", "mask", "sum", "dst" };
-	int	    i, handle = 0;
+	int	    i, j, handle = 0;
 	char	    str[1024];
 	int	    saturation = bs->opt[BLUR_SCREEN_OPTION_SATURATION].value.i;
 	Bool	    ok = TRUE;
+	int	    numIndirect;
+	int	    numIndirectOp;
+	int	    base, end, ITCbase;
 
 	for (i = 0; i < sizeof (temp) / sizeof (temp[0]); i++)
 	    ok &= addTempHeaderOpToFunctionData (data, temp[i]);
@@ -1184,25 +1188,39 @@ getDstBlurFragmentFunction (CompScreen  *s,
 	    ok &= addDataOpToFunctionData (data, str);
 	} break;
 	case BLUR_FILTER_GAUSSIAN: {
-	    static char *filterTemp[] = {
-		"tCoord", "pix"
-	    };
 
-	    for (i = 0; i < sizeof (filterTemp) / sizeof (filterTemp[0]); i++)
-		ok &= addTempHeaderOpToFunctionData (data, filterTemp[i]);
+	    /* try to use only half of the available temporaries to keep
+	       other plugins working */
+	    if ((bs->maxTemp / 2) - 4 >
+		 (bs->numTexop + (bs->numTexop - numITC)) * 2)
+	    {
+		numIndirect   = 1;
+		numIndirectOp = bs->numTexop;
+	    }
+	    else
+	    {
+		i = MAX(((bs->maxTemp / 2) - 4) / 4, 1);
+		numIndirect = ceil ((float)bs->numTexop / (float)i);
+		numIndirectOp = ceil ((float)bs->numTexop / (float)numIndirect);
+	    }
 
-	    for (i = 0; i < bs->numTexop * 2; i++)
+	    /* we need to define all coordinate temporaries if we have
+	       multiple indirection steps */
+	    j = (numIndirect > 1) ? 0 : numITC;
+
+	    for (i = 0; i < numIndirectOp * 2; i++)
 	    {
 		snprintf (str, 1024, "pix_%d", i);
 		ok &= addTempHeaderOpToFunctionData (data, str);
 	    }
 
-	    for (i = numITC * 2; i < bs->numTexop * 2; i++)
+	    for (i = j * 2; i < numIndirectOp * 2; i++)
 	    {
 		snprintf (str, 1024, "coord_%d", i);
 		ok &= addTempHeaderOpToFunctionData (data, str);
 	    }
 
+	    
 	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
 	    ok &= addColorOpToFunctionData (data, "output", "output");
 
@@ -1225,51 +1243,60 @@ getDstBlurFragmentFunction (CompScreen  *s,
 
 	    ok &= addDataOpToFunctionData (data, str);
 
-	    for (i = numITC; i < bs->numTexop; i++)
+	    for (j = 0; j < numIndirect; j++)
 	    {
-		snprintf (str, 1024,
-			  "ADD coord_%d, fCoord, {0.0, %g, 0.0, 0.0};"
-			  "SUB coord_%d, fCoord, {0.0, %g, 0.0, 0.0};",
-			  i * 2, bs->pos[i] * bs->ty,
-			  (i * 2) + 1, bs->pos[i] * bs->ty);
+		base = j * numIndirectOp;
+		end  = MIN ((j + 1) * numIndirectOp, bs->numTexop) - base;
+		
+		ITCbase = MAX (numITC - base, 0);
 
-		ok &= addDataOpToFunctionData (data, str);
+		for (i = ITCbase; i < end; i++)
+		{
+		    snprintf (str, 1024,
+			      "ADD coord_%d, fCoord, {0.0, %g, 0.0, 0.0};"
+			      "SUB coord_%d, fCoord, {0.0, %g, 0.0, 0.0};",
+			      i * 2, bs->pos[base + i] * bs->ty,
+			      (i * 2) + 1, bs->pos[base + i] * bs->ty);
+
+		    ok &= addDataOpToFunctionData (data, str);
+		}
+
+		for (i = 0; i < ITCbase; i++)
+		{
+		    snprintf (str, 1024,
+			"TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;"
+			"TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;",
+			i * 2, startTC + ((i + base) * 2),
+			unit + 1, targetString,
+			(i * 2) + 1, startTC + 1 + ((i + base) * 2),
+			unit + 1, targetString);
+
+		    ok &= addDataOpToFunctionData (data, str);
+		}
+
+		for (i = ITCbase; i < end; i++)
+		{
+		    snprintf (str, 1024,
+			      "TEX pix_%d, coord_%d, texture[%d], %s;"
+			      "TEX pix_%d, coord_%d, texture[%d], %s;",
+			      i * 2, i * 2,
+			      unit + 1, targetString,
+			      (i * 2) + 1, (i * 2) + 1,
+			      unit + 1, targetString);
+
+		    ok &= addDataOpToFunctionData (data, str);
+		}
+
+		for (i = 0; i < end * 2; i++)
+		{
+		    snprintf (str, 1024,
+			      "MAD sum, pix_%d, %f, sum;",
+			      i, bs->amp[base + (i / 2)]);
+
+		    ok &= addDataOpToFunctionData (data, str);
+		}
 	    }
-	    
-	    for (i = 0; i < numITC; i++)
-	    {
-		snprintf (str, 1024,
-			  "TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;"
-			  "TXP pix_%d, fragment.texcoord[%d], texture[%d], %s;",
-			  i * 2, startTC + (i * 2),
-			  unit + 1, targetString,
-			  (i * 2) + 1, startTC + 1 + (i * 2),
-			  unit + 1, targetString);
 
-		ok &= addDataOpToFunctionData (data, str);
-	    }
-
-	    for (i = numITC; i < bs->numTexop; i++)
-	    {
-		snprintf (str, 1024,
-			  "TEX pix_%d, coord_%d, texture[%d], %s;"
-			  "TEX pix_%d, coord_%d, texture[%d], %s;",
-			  i * 2, i * 2,
-			  unit + 1, targetString,
-			  (i * 2) + 1, (i * 2) + 1,
-			  unit + 1, targetString);
-
-		ok &= addDataOpToFunctionData (data, str);
-	    }
-
-	    for (i = 0; i < bs->numTexop * 2; i++)
-	    {
-		snprintf (str, 1024,
-			  "MAD sum, pix_%d, %f, sum;",
-			  i, bs->amp[i / 2]);
-
-		ok &= addDataOpToFunctionData (data, str);
-	    }
 	} break;
 	case BLUR_FILTER_MIPMAP:
 	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
@@ -1400,7 +1427,7 @@ loadFragmentProgram (CompScreen *s,
     if (glGetError () != GL_NO_ERROR || errorPos != -1)
     {
 	compLogMessage (s->display, "blur", CompLogLevelError,
-			"Failed to load blur program");
+			"Failed to load blur program %s", string);
 
 	(*s->deletePrograms) (1, program);
 	*program = 0;
@@ -1417,7 +1444,10 @@ loadFilterProgram (CompScreen *s, int numITC)
     char  buffer[2048];
     char  *targetString;
     char  *str = buffer;
-    int   i;
+    int   i, j;
+    int   numIndirect;
+    int   numIndirectOp;
+    int   base, end, ITCbase;
 
     BLUR_SCREEN (s);
 
@@ -1431,12 +1461,26 @@ loadFilterProgram (CompScreen *s, int numITC)
 		    "ATTRIB texcoord = fragment.texcoord[0];"
 		    "TEMP sum;");
 
-    str += sprintf (str, "TEMP tCoord, pix;");
+    if (bs->maxTemp - 1 > (bs->numTexop + (bs->numTexop - numITC)) * 2)
+    {
+	numIndirect   = 1;
+	numIndirectOp = bs->numTexop;
+    }
+    else
+    {
+	i = (bs->maxTemp - 1) / 4;
+	numIndirect = ceil ((float)bs->numTexop / (float)i);
+	numIndirectOp = ceil ((float)bs->numTexop / (float)numIndirect);
+    }
 
-    for (i = 0; i < bs->numTexop; i++)
+    /* we need to define all coordinate temporaries if we have
+       multiple indirection steps */
+    j = (numIndirect > 1) ? 0 : numITC;
+
+    for (i = 0; i < numIndirectOp; i++)
 	str += sprintf (str,"TEMP pix_%d, pix_%d;", i * 2, (i * 2) + 1);
 
-    for (i = numITC; i < bs->numTexop; i++)
+    for (i = j; i < numIndirectOp; i++)
 	str += sprintf (str,"TEMP coord_%d, coord_%d;", i * 2, (i * 2) + 1);
 
     str += sprintf (str,
@@ -1446,33 +1490,41 @@ loadFilterProgram (CompScreen *s, int numITC)
     str += sprintf (str,
 		    "MUL sum, sum, %f;",
 		    bs->amp[bs->numTexop]);
-    
-    for (i = numITC; i < bs->numTexop; i++)
-	str += sprintf (str,
-			"ADD coord_%d, texcoord, {%g, 0.0, 0.0, 0.0};"
-			"SUB coord_%d, texcoord, {%g, 0.0, 0.0, 0.0};",
-			i * 2, bs->pos[i] * bs->tx,
-			(i * 2) + 1, bs->pos[i] * bs->tx);
 
-    for (i = 0; i < numITC; i++)
-	str += sprintf (str,
-			"TEX pix_%d, fragment.texcoord[%d], texture[0], %s;"
-			"TEX pix_%d, fragment.texcoord[%d], texture[0], %s;",
-			i * 2, (i * 2) + 1, targetString,
-			(i * 2) + 1, (i * 2) + 2, targetString);
+    for (j = 0; j < numIndirect; j++)
+    {
+	base = j * numIndirectOp;
+	end  = MIN ((j + 1) * numIndirectOp, bs->numTexop) - base;
+	
+	ITCbase = MAX (numITC - base, 0);
 
-    for (i = numITC; i < bs->numTexop; i++)
-	str += sprintf (str,
-			"TEX pix_%d, coord_%d, texture[0], %s;"
-			"TEX pix_%d, coord_%d, texture[0], %s;",
-			i * 2, i * 2, targetString,
-			(i * 2) + 1, (i * 2) + 1, targetString);
+	for (i = ITCbase; i < end; i++)
+	    str += sprintf (str,
+			    "ADD coord_%d, texcoord, {%g, 0.0, 0.0, 0.0};"
+			    "SUB coord_%d, texcoord, {%g, 0.0, 0.0, 0.0};",
+			    i * 2, bs->pos[base + i] * bs->tx,
+			    (i * 2) + 1, bs->pos[base + i] * bs->tx);
 
-    for (i = 0; i < bs->numTexop * 2; i++)
-	str += sprintf (str,
-			"MAD sum, pix_%d, %f, sum;",
-			i, bs->amp[i / 2]);
-    
+	for (i = 0; i < ITCbase; i++)
+	    str += sprintf (str,
+		"TEX pix_%d, fragment.texcoord[%d], texture[0], %s;"
+		"TEX pix_%d, fragment.texcoord[%d], texture[0], %s;",
+		i * 2, ((i + base) * 2) + 1, targetString,
+		(i * 2) + 1, ((i + base) * 2) + 2, targetString);
+
+	for (i = ITCbase; i < end; i++)
+	    str += sprintf (str,
+			    "TEX pix_%d, coord_%d, texture[0], %s;"
+			    "TEX pix_%d, coord_%d, texture[0], %s;",
+			    i * 2, i * 2, targetString,
+			    (i * 2) + 1, (i * 2) + 1, targetString);
+
+	for (i = 0; i < end * 2; i++)
+	    str += sprintf (str,
+			    "MAD sum, pix_%d, %f, sum;",
+			    i, bs->amp[base + (i / 2)]);
+    }
+
     str += sprintf (str,
 		    "MOV result.color, sum;"
 		    "END");
@@ -2930,6 +2982,7 @@ blurInitScreen (CompPlugin *p,
 	bs->texture[i] = 0;
 
     bs->program   = 0;
+    bs->maxTemp   = 32;
     bs->fbo	  = 0;
     bs->fboStatus = FALSE;
 
@@ -2943,6 +2996,15 @@ blurInitScreen (CompPlugin *p,
 	bs->alphaBlur = bs->opt[BLUR_SCREEN_OPTION_ALPHA_BLUR].value.b;
     else
 	bs->alphaBlur = FALSE;
+
+    if (s->fragmentProgram)
+    {
+	int tmp[4];
+	s->getProgramiv (GL_FRAGMENT_PROGRAM_ARB,
+			 GL_MAX_PROGRAM_NATIVE_TEMPORARIES_ARB,
+			 tmp);
+	bs->maxTemp = tmp[0];
+    }
 
     WRAP (bs, s, preparePaintScreen, blurPreparePaintScreen);
     WRAP (bs, s, donePaintScreen, blurDonePaintScreen);
