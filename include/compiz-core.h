@@ -1370,6 +1370,7 @@ typedef void (*DonePaintScreenProc) (CompScreen *screen);
 #define PAINT_SCREEN_TRANSFORMED_MASK		   (1 << 2)
 #define PAINT_SCREEN_WITH_TRANSFORMED_WINDOWS_MASK (1 << 3)
 #define PAINT_SCREEN_CLEAR_MASK			   (1 << 4)
+#define PAINT_SCREEN_NO_OCCLUSION_DETECTION_MASK   (1 << 5)
 
 typedef void (*PaintScreenProc) (CompScreen   *screen,
 				 CompOutput   *outputs,
