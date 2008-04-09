@@ -1618,7 +1618,8 @@ fboUpdate (CompScreen *s,
 	   BoxPtr     pBox,
 	   int	      nBox)
 {
-    int i, y, iTC = 0;
+    int  i, y, iTC = 0;
+    Bool wasCulled = glIsEnabled (GL_CULL_FACE);
 
     BLUR_SCREEN (s);
 
@@ -1632,6 +1633,8 @@ fboUpdate (CompScreen *s,
 
     if (!fboPrologue (s))
 	return FALSE;
+
+    glDisable (GL_CULL_FACE);
 
     glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 
@@ -1708,6 +1711,9 @@ fboUpdate (CompScreen *s,
     glDisable (GL_FRAGMENT_PROGRAM_ARB);
 
     glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+
+    if (wasCulled)
+	glEnable (GL_CULL_FACE);
 
     fboEpilogue (s);
 
