@@ -1730,7 +1730,7 @@ blurProjectRegion (CompWindow	       *w,
     CompScreen *s = w->screen;
     float      screen[MAX_VERTEX_PROJECT_COUNT * 2];
     float      vertices[MAX_VERTEX_PROJECT_COUNT * 3];
-    int	       nVertices;
+    int	       nVertices, nQuadCombine;
     int        i, j, stride;
     float      *v, *vert;
     float      minX, maxX, minY, maxY, minZ, maxZ;
@@ -1746,7 +1746,8 @@ blurProjectRegion (CompWindow	       *w,
     if (!w->vCount)
 	return;
 
-    nVertices = (w->indexCount) ? w->indexCount: w->vCount;
+    nVertices    = (w->indexCount) ? w->indexCount: w->vCount;
+    nQuadCombine = 1;
 
     stride = w->vertexStride;
     vert = w->vertices + (stride - 3);
@@ -1809,11 +1810,9 @@ blurProjectRegion (CompWindow	       *w,
 	vertices[2] = vertices[5]  = maxZ;
 	vertices[8] = vertices[11] = maxZ;
 
-	if (maxZ == minZ)
-	{
-	    nVertices = 4;
-	}
-	else
+	nVertices = 4;
+
+	if (maxZ != minZ)
 	{
 	    vertices[12] = vertices[21] = minX;
 	    vertices[13] = vertices[16] = minY;
@@ -1821,12 +1820,13 @@ blurProjectRegion (CompWindow	       *w,
 	    vertices[19] = vertices[22] = maxY;
 	    vertices[14] = vertices[17] = minZ;
 	    vertices[20] = vertices[23] = minZ;
-	    nVertices = 8;
+	    nQuadCombine = 2;
 	}
     }
 
+
     if (!projectVertices (w->screen, output, transform, vertices, screen,
-			  nVertices))
+			  nVertices * nQuadCombine))
 	return;
 
     region.rects    = &region.extents;
@@ -1841,7 +1841,7 @@ blurProjectRegion (CompWindow	       *w,
 	minY = s->height;
 	maxY = 0;
 
-	for (j = 0; j < 8; j += 2)
+	for (j = 0; j < 8 * nQuadCombine; j += 2)
 	{
 	    if (scr[j] < minX)
 		minX = scr[j];
