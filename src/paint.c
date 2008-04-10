@@ -477,37 +477,45 @@ paintOutput (CompScreen		     *screen,
     for (it = 0; it < n; it++)			   \
     {						   \
 	*(data)++ = COMP_TEX_COORD_X (&m[it], x1); \
-	*(data)++ = COMP_TEX_COORD_Y (&m[it], y2); \
-    }						   \
-    *(data)++ = (x1);				   \
-    *(data)++ = (y2);				   \
-    *(data)++ = 0.0;				   \
-    for (it = 0; it < n; it++)			   \
-    {						   \
-	*(data)++ = COMP_TEX_COORD_X (&m[it], x2); \
-	*(data)++ = COMP_TEX_COORD_Y (&m[it], y2); \
-    }						   \
-    *(data)++ = (x2);				   \
-    *(data)++ = (y2);				   \
-    *(data)++ = 0.0;				   \
-    for (it = 0; it < n; it++)			   \
-    {						   \
-	*(data)++ = COMP_TEX_COORD_X (&m[it], x2); \
 	*(data)++ = COMP_TEX_COORD_Y (&m[it], y1); \
     }						   \
-    *(data)++ = (x2);				   \
+    *(data)++ = (x1);				   \
     *(data)++ = (y1);				   \
     *(data)++ = 0.0;				   \
     for (it = 0; it < n; it++)			   \
     {						   \
 	*(data)++ = COMP_TEX_COORD_X (&m[it], x1); \
-	*(data)++ = COMP_TEX_COORD_Y (&m[it], y1); \
+	*(data)++ = COMP_TEX_COORD_Y (&m[it], y2); \
     }						   \
     *(data)++ = (x1);				   \
+    *(data)++ = (y2);				   \
+    *(data)++ = 0.0;				   \
+    for (it = 0; it < n; it++)			   \
+    {						   \
+	*(data)++ = COMP_TEX_COORD_X (&m[it], x2); \
+	*(data)++ = COMP_TEX_COORD_Y (&m[it], y2); \
+    }						   \
+    *(data)++ = (x2);				   \
+    *(data)++ = (y2);				   \
+    *(data)++ = 0.0;				   \
+    for (it = 0; it < n; it++)			   \
+    {						   \
+	*(data)++ = COMP_TEX_COORD_X (&m[it], x2); \
+	*(data)++ = COMP_TEX_COORD_Y (&m[it], y1); \
+    }						   \
+    *(data)++ = (x2);				   \
     *(data)++ = (y1);				   \
     *(data)++ = 0.0
 
 #define ADD_QUAD(data, m, n, x1, y1, x2, y2)		\
+    for (it = 0; it < n; it++)				\
+    {							\
+	*(data)++ = COMP_TEX_COORD_XY (&m[it], x1, y1);	\
+	*(data)++ = COMP_TEX_COORD_YX (&m[it], x1, y1);	\
+    }							\
+    *(data)++ = (x1);					\
+    *(data)++ = (y1);					\
+    *(data)++ = 0.0;					\
     for (it = 0; it < n; it++)				\
     {							\
 	*(data)++ = COMP_TEX_COORD_XY (&m[it], x1, y2);	\
@@ -530,14 +538,6 @@ paintOutput (CompScreen		     *screen,
 	*(data)++ = COMP_TEX_COORD_YX (&m[it], x2, y1);	\
     }							\
     *(data)++ = (x2);					\
-    *(data)++ = (y1);					\
-    *(data)++ = 0.0;					\
-    for (it = 0; it < n; it++)				\
-    {							\
-	*(data)++ = COMP_TEX_COORD_XY (&m[it], x1, y1);	\
-	*(data)++ = COMP_TEX_COORD_YX (&m[it], x1, y1);	\
-    }							\
-    *(data)++ = (x1);					\
     *(data)++ = (y1);					\
     *(data)++ = 0.0;
 
