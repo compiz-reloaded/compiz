@@ -2091,7 +2091,13 @@ handleEvent (CompDisplay *d,
 	    xwc.border_width = event->xconfigurerequest.border_width;
 
 	    if (w)
+	    {
+		int gravity = w->sizeHints.win_gravity;
+
+		xwcm = adjustConfigureRequestForGravity (w, &xwc, xwcm,
+							 gravity);
 		configureXWindow (w, xwcm, &xwc);
+	    }
 	    else
 		XConfigureWindow (d->display, event->xconfigurerequest.window,
 				  xwcm, &xwc);

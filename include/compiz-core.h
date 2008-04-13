@@ -2890,6 +2890,12 @@ configureXWindow (CompWindow	 *w,
 		  unsigned int	 valueMask,
 		  XWindowChanges *xwc);
 
+unsigned int
+adjustConfigureRequestForGravity (CompWindow     *w,
+				  XWindowChanges *xwc,
+				  unsigned int   xwcm,
+				  int            gravity);
+
 void
 moveResizeWindow (CompWindow     *w,
 		  XWindowChanges *xwc,

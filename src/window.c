@@ -3725,47 +3725,12 @@ addWindowSizeChanges (CompWindow     *w,
     return mask;
 }
 
-void
-moveResizeWindow (CompWindow     *w,
-		  XWindowChanges *xwc,
-		  unsigned int   xwcm,
-		  int            gravity)
+unsigned int
+adjustConfigureRequestForGravity (CompWindow     *w,
+				  XWindowChanges *xwc,
+				  unsigned int   xwcm,
+				  int            gravity)
 {
-    Bool placed = xwcm & (CWX | CWY);
-
-    xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
-
-    if (gravity == 0)
-	gravity = w->sizeHints.win_gravity;
-
-    if (!(xwcm & CWX))
-	xwc->x = w->serverX;
-    if (!(xwcm & CWY))
-	xwc->y = w->serverY;
-    if (!(xwcm & CWWidth))
-	xwc->width = w->serverWidth;
-    if (!(xwcm & CWHeight))
-	xwc->height = w->serverHeight;
-
-    if (xwcm & (CWWidth | CWHeight))
-    {
-	int width, height;
-
-	if (constrainNewWindowSize (w,
-				    xwc->width, xwc->height,
-				    &width, &height))
-	{
-	    if (width != xwc->width)
-		xwcm |= CWWidth;
-
-	    if (height != xwc->height)
-		xwcm |= CWHeight;
-
-	    xwc->width = width;
-	    xwc->height = height;
-	}
-    }
-
     if (xwcm & (CWX | CWWidth))
     {
 	switch (gravity) {
@@ -3833,6 +3798,52 @@ moveResizeWindow (CompWindow     *w,
 
 	xwcm |= CWY;
     }
+
+    return xwcm;
+}
+
+void
+moveResizeWindow (CompWindow     *w,
+		  XWindowChanges *xwc,
+		  unsigned int   xwcm,
+		  int            gravity)
+{
+    Bool placed = xwcm & (CWX | CWY);
+
+    xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+
+    if (gravity == 0)
+	gravity = w->sizeHints.win_gravity;
+
+    if (!(xwcm & CWX))
+	xwc->x = w->serverX;
+    if (!(xwcm & CWY))
+	xwc->y = w->serverY;
+    if (!(xwcm & CWWidth))
+	xwc->width = w->serverWidth;
+    if (!(xwcm & CWHeight))
+	xwc->height = w->serverHeight;
+
+    if (xwcm & (CWWidth | CWHeight))
+    {
+	int width, height;
+
+	if (constrainNewWindowSize (w,
+				    xwc->width, xwc->height,
+				    &width, &height))
+	{
+	    if (width != xwc->width)
+		xwcm |= CWWidth;
+
+	    if (height != xwc->height)
+		xwcm |= CWHeight;
+
+	    xwc->width = width;
+	    xwc->height = height;
+	}
+    }
+
+    xwcm = adjustConfigureRequestForGravity (w, xwc, xwcm, gravity);
 
     if (!(w->type & (CompWindowTypeDockMask       |
 		     CompWindowTypeFullscreenMask |
