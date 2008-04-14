@@ -738,6 +738,9 @@ placeSmart (CompWindow *w,
 		if (!wi->shaded && wi->attrib.map_state != IsViewable)
 		    continue;
 
+		if (w->attrib.override_redirect)
+		    continue;
+
 		if (wi == w)
 		    continue;
 
@@ -803,6 +806,9 @@ placeSmart (CompWindow *w,
 		if (!wi->shaded && wi->attrib.map_state != IsViewable)
 		    continue;
 
+		if (w->attrib.override_redirect)
+		    continue;
+
 		if (wi == w)
 		    continue;
 
@@ -843,6 +849,9 @@ placeSmart (CompWindow *w,
 	    for (wi = w->screen->windows; wi ; wi = wi->next)
 	    {
 		if (!wi->shaded && wi->attrib.map_state != IsViewable)
+		    continue;
+
+		if (w->attrib.override_redirect)
 		    continue;
 
 		if (wi == w)
