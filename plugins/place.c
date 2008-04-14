@@ -191,12 +191,28 @@ placeSetScreenOption (CompPlugin      *plugin,
     return FALSE;
 }
 
-typedef enum {
-    PlaceLeft,
-    PlaceRight,
-    PlaceTop,
-    PlaceBottom
-} PlaceWindowDirection;
+static void
+placeSendWindowMaximizationRequest (CompWindow *w)
+{
+    XEvent      xev;
+    CompDisplay *d = w->screen->display;
+
+    xev.xclient.type    = ClientMessage;
+    xev.xclient.display = d->display;
+    xev.xclient.format  = 32;
+
+    xev.xclient.message_type = d->winStateAtom;
+    xev.xclient.window	     = w->id;
+
+    xev.xclient.data.l[0] = 1;
+    xev.xclient.data.l[1] = d->winStateMaximizedHorzAtom;
+    xev.xclient.data.l[2] = d->winStateMaximizedVertAtom;
+    xev.xclient.data.l[3] = 0;
+    xev.xclient.data.l[4] = 0;
+
+    XSendEvent (d->display, w->screen->root, FALSE,
+		SubstructureRedirectMask | SubstructureNotifyMask, &xev);
+}
 
 static Bool
 rectangleIntersect (XRectangle *src1,
@@ -235,35 +251,6 @@ rectangleIntersect (XRectangle *src1,
     return return_val;
 }
 
-static gint
-northwestcmp (gconstpointer a,
-	      gconstpointer b)
-{
-    CompWindow *aw = (gpointer) a;
-    CompWindow *bw = (gpointer) b;
-    int	       from_origin_a;
-    int	       from_origin_b;
-    int	       ax, ay, bx, by;
-
-    ax = aw->serverX - aw->input.left;
-    ay = aw->serverY - aw->input.top;
-
-    bx = bw->serverX - bw->input.left;
-    by = bw->serverY - bw->input.top;
-
-    /* probably there's a fast good-enough-guess we could use here. */
-    from_origin_a = sqrt (ax * ax + ay * ay);
-    from_origin_b = sqrt (bx * bx + by * by);
-
-    if (from_origin_a < from_origin_b)
-	return -1;
-    else if (from_origin_a > from_origin_b)
-	return 1;
-    else
-	return 0;
-}
-
-
 static void
 get_workarea_of_current_output_device (CompScreen *s,
 				       XRectangle *area)
@@ -291,132 +278,6 @@ get_outer_rect_of_window (CompWindow *w,
     r->y      = w->serverY - w->input.top;
     r->width  = get_window_width (w)  + w->input.left + w->input.right;
     r->height = get_window_height (w) + w->input.top  + w->input.bottom;
-}
-
-static void
-find_next_cascade (CompWindow *window,
-		   GList      *windows,
-		   int        x,
-		   int        y,
-		   int        *new_x,
-		   int        *new_y)
-{
-    GList      *tmp;
-    GList      *sorted;
-    int	       cascade_x, cascade_y;
-    int	       x_threshold, y_threshold;
-    int	       window_width, window_height;
-    int	       cascade_stage;
-    XRectangle work_area;
-
-    sorted = g_list_copy (windows);
-    sorted = g_list_sort (sorted, northwestcmp);
-
-    /* This is a "fuzzy" cascade algorithm.
-     * For each window in the list, we find where we'd cascade a
-     * new window after it. If a window is already nearly at that
-     * position, we move on.
-     */
-
-    /* arbitrary-ish threshold, honors user attempts to
-     * manually cascade.
-     */
-#define CASCADE_FUZZ 15
-
-    x_threshold = MAX (window->input.left, CASCADE_FUZZ);
-    y_threshold = MAX (window->input.top, CASCADE_FUZZ);
-
-    /* Find furthest-SE origin of all workspaces.
-     * cascade_x, cascade_y are the target position
-     * of NW corner of window frame.
-     */
-
-    get_workarea_of_current_output_device (window->screen, &work_area);
-
-    cascade_x = MAX (0, work_area.x);
-    cascade_y = MAX (0, work_area.y);
-
-    /* Find first cascade position that's not used. */
-
-    window_width = get_window_width (window) + window->input.left +
-	window->input.right;
-    window_height = get_window_height (window) + window->input.top +
-	window->input.bottom;
-
-    cascade_stage = 0;
-    tmp = sorted;
-    while (tmp != NULL)
-    {
-	CompWindow *w;
-	int	   wx, wy;
-
-	w = tmp->data;
-
-	/* we want frame position, not window position */
-	wx = w->serverX - w->input.left;
-	wy = w->serverY - w->input.top;
-
-	if (ABS (wx - cascade_x) < x_threshold &&
-	    ABS (wy - cascade_y) < y_threshold)
-	{
-	    /* This window is "in the way", move to next cascade
-	     * point. The new window frame should go at the origin
-	     * of the client window we're stacking above.
-	     */
-	    wx = w->serverX;
-	    wy = w->serverY;
-
-	    cascade_x = wx;
-	    cascade_y = wy;
-
-	    /* If we go off the screen, start over with a new cascade */
-	    if (((cascade_x + window_width) >
-		 (work_area.x + work_area.width)) ||
-		((cascade_y + window_height) >
-		 (work_area.y + work_area.height)))
-	    {
-		cascade_x = MAX (0, work_area.x);
-		cascade_y = MAX (0, work_area.y);
-
-#define CASCADE_INTERVAL 50 /* space between top-left corners of cascades */
-
-		cascade_stage += 1;
-		cascade_x += CASCADE_INTERVAL * cascade_stage;
-
-		/* start over with a new cascade translated to the right,
-		 * unless we are out of space
-		 */
-		if ((cascade_x + window_width) <
-		    (work_area.x + work_area.width))
-		{
-		    tmp = sorted;
-		    continue;
-		}
-		else
-		{
-		    /* All out of space, this cascade_x won't work */
-		    cascade_x = MAX (0, work_area.x);
-		    break;
-		}
-	    }
-	}
-	else
-	{
-	    /* Keep searching for a further-down-the-diagonal window. */
-	}
-
-	tmp = tmp->next;
-    }
-
-    /* cascade_x and cascade_y will match the last window in the list
-     * that was "in the way" (in the approximate cascade diagonal)
-     */
-
-    g_list_free (sorted);
-
-    /* Convert coords to position of window, not position of frame. */
-    *new_x = cascade_x + window->input.left;
-    *new_y = cascade_y + window->input.top;
 }
 
 static gboolean
@@ -491,6 +352,34 @@ topmost_cmp (gconstpointer a,
     if (ay < by)
 	return -1;
     else if (ay > by)
+	return 1;
+    else
+	return 0;
+}
+
+static gint
+northwestcmp (gconstpointer a,
+	      gconstpointer b)
+{
+    CompWindow *aw = (gpointer) a;
+    CompWindow *bw = (gpointer) b;
+    int	       from_origin_a;
+    int	       from_origin_b;
+    int	       ax, ay, bx, by;
+
+    ax = aw->serverX - aw->input.left;
+    ay = aw->serverY - aw->input.top;
+
+    bx = bw->serverX - bw->input.left;
+    by = bw->serverY - bw->input.top;
+
+    /* probably there's a fast good-enough-guess we could use here. */
+    from_origin_a = sqrt (ax * ax + ay * ay);
+    from_origin_b = sqrt (bx * bx + by * by);
+
+    if (from_origin_a < from_origin_b)
+	return -1;
+    else if (from_origin_a > from_origin_b)
 	return 1;
     else
 	return 0;
@@ -645,6 +534,132 @@ out:
     g_list_free (right_sorted);
 
     return retval;
+}
+
+static void
+find_next_cascade (CompWindow *window,
+		   GList      *windows,
+		   int        x,
+		   int        y,
+		   int        *new_x,
+		   int        *new_y)
+{
+    GList      *tmp;
+    GList      *sorted;
+    int	       cascade_x, cascade_y;
+    int	       x_threshold, y_threshold;
+    int	       window_width, window_height;
+    int	       cascade_stage;
+    XRectangle work_area;
+
+    sorted = g_list_copy (windows);
+    sorted = g_list_sort (sorted, northwestcmp);
+
+    /* This is a "fuzzy" cascade algorithm.
+     * For each window in the list, we find where we'd cascade a
+     * new window after it. If a window is already nearly at that
+     * position, we move on.
+     */
+
+    /* arbitrary-ish threshold, honors user attempts to
+     * manually cascade.
+     */
+#define CASCADE_FUZZ 15
+
+    x_threshold = MAX (window->input.left, CASCADE_FUZZ);
+    y_threshold = MAX (window->input.top, CASCADE_FUZZ);
+
+    /* Find furthest-SE origin of all workspaces.
+     * cascade_x, cascade_y are the target position
+     * of NW corner of window frame.
+     */
+
+    get_workarea_of_current_output_device (window->screen, &work_area);
+
+    cascade_x = MAX (0, work_area.x);
+    cascade_y = MAX (0, work_area.y);
+
+    /* Find first cascade position that's not used. */
+
+    window_width = get_window_width (window) + window->input.left +
+	window->input.right;
+    window_height = get_window_height (window) + window->input.top +
+	window->input.bottom;
+
+    cascade_stage = 0;
+    tmp = sorted;
+    while (tmp != NULL)
+    {
+	CompWindow *w;
+	int	   wx, wy;
+
+	w = tmp->data;
+
+	/* we want frame position, not window position */
+	wx = w->serverX - w->input.left;
+	wy = w->serverY - w->input.top;
+
+	if (ABS (wx - cascade_x) < x_threshold &&
+	    ABS (wy - cascade_y) < y_threshold)
+	{
+	    /* This window is "in the way", move to next cascade
+	     * point. The new window frame should go at the origin
+	     * of the client window we're stacking above.
+	     */
+	    wx = w->serverX;
+	    wy = w->serverY;
+
+	    cascade_x = wx;
+	    cascade_y = wy;
+
+	    /* If we go off the screen, start over with a new cascade */
+	    if (((cascade_x + window_width) >
+		 (work_area.x + work_area.width)) ||
+		((cascade_y + window_height) >
+		 (work_area.y + work_area.height)))
+	    {
+		cascade_x = MAX (0, work_area.x);
+		cascade_y = MAX (0, work_area.y);
+
+#define CASCADE_INTERVAL 50 /* space between top-left corners of cascades */
+
+		cascade_stage += 1;
+		cascade_x += CASCADE_INTERVAL * cascade_stage;
+
+		/* start over with a new cascade translated to the right,
+		 * unless we are out of space
+		 */
+		if ((cascade_x + window_width) <
+		    (work_area.x + work_area.width))
+		{
+		    tmp = sorted;
+		    continue;
+		}
+		else
+		{
+		    /* All out of space, this cascade_x won't work */
+		    cascade_x = MAX (0, work_area.x);
+		    break;
+		}
+	    }
+	}
+	else
+	{
+	    /* Keep searching for a further-down-the-diagonal window. */
+	}
+
+	tmp = tmp->next;
+    }
+
+    /* cascade_x and cascade_y will match the last window in the list
+     * that was "in the way" (in the approximate cascade diagonal)
+     */
+
+    g_list_free (sorted);
+
+    /* Convert coords to position of window, not position of frame. */
+    *new_x = cascade_x + window->input.left;
+    *new_y = cascade_y + window->input.top;
 }
 
 static void
@@ -875,30 +890,6 @@ placeSmart (CompWindow *window,
     *x = xOptimal + window->input.left;
     *y = yOptimal + window->input.top;
 }
-
-static void
-placeSendWindowMaximizationRequest (CompWindow *w)
-{
-    XEvent      xev;
-    CompDisplay *d = w->screen->display;
-
-    xev.xclient.type    = ClientMessage;
-    xev.xclient.display = d->display;
-    xev.xclient.format  = 32;
-
-    xev.xclient.message_type = d->winStateAtom;
-    xev.xclient.window	     = w->id;
-
-    xev.xclient.data.l[0] = 1;
-    xev.xclient.data.l[1] = d->winStateMaximizedHorzAtom;
-    xev.xclient.data.l[2] = d->winStateMaximizedVertAtom;
-    xev.xclient.data.l[3] = 0;
-    xev.xclient.data.l[4] = 0;
-
-    XSendEvent (d->display, w->screen->root, FALSE,
-		SubstructureRedirectMask | SubstructureNotifyMask, &xev);
-}
-
 
 static void
 placeWin (CompWindow *window,
