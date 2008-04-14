@@ -30,23 +30,18 @@
 
 static CompMetadata placeMetadata;
 
+static int displayPrivateIndex;
+
+typedef struct _PlaceDisplay {
+    int		    screenPrivateIndex;
+} PlaceDisplay;
+
 #define PLACE_MODE_CASCADE  0
 #define PLACE_MODE_CENTERED 1
 #define PLACE_MODE_SMART    2
 #define PLACE_MODE_MAXIMIZE 3
 #define PLACE_MODE_RANDOM   4
 #define PLACE_MODE_LAST     PLACE_MODE_RANDOM
-
-/* overlap types */
-#define NONE    0
-#define H_WRONG -1
-#define W_WRONG -2
-
-static int displayPrivateIndex;
-
-typedef struct _PlaceDisplay {
-    int		    screenPrivateIndex;
-} PlaceDisplay;
 
 #define PLACE_SCREEN_OPTION_WORKAROUND        0
 #define PLACE_SCREEN_OPTION_MODE              1
@@ -691,6 +686,11 @@ placeRandom (CompWindow *window,
     if (remainY > 0)
 	*y += rand () % remainY;
 }
+
+/* overlap types */
+#define NONE    0
+#define H_WRONG -1
+#define W_WRONG -2
 
 static void
 placeSmart (CompWindow *window,
