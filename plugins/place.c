@@ -41,15 +41,20 @@ typedef struct _PlaceDisplay {
 #define PLACE_MODE_RANDOM   4
 #define PLACE_MODE_LAST     PLACE_MODE_RANDOM
 
+#define PLACE_MOMODE_CURRENT 0
+#define PLACE_MOMODE_POINTER 1
+#define PLACE_MOMODE_LAST    PLACE_MOMODE_POINTER
+
 #define PLACE_SCREEN_OPTION_WORKAROUND        0
 #define PLACE_SCREEN_OPTION_MODE              1
-#define PLACE_SCREEN_OPTION_POSITION_MATCHES  2
-#define PLACE_SCREEN_OPTION_POSITION_X_VALUES 3
-#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES 4
-#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES  5
-#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES 6
-#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES 7
-#define PLACE_SCREEN_OPTION_NUM               8
+#define PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE  2
+#define PLACE_SCREEN_OPTION_POSITION_MATCHES  3
+#define PLACE_SCREEN_OPTION_POSITION_X_VALUES 4
+#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES 5
+#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES  6
+#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES 7
+#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES 8
+#define PLACE_SCREEN_OPTION_NUM               9
 
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
@@ -964,21 +969,47 @@ placeGetPlacementOutput (CompWindow        *w,
 			 int               x,
 			 int               y)
 {
+    CompScreen *s = w->screen;
+
+    PLACE_SCREEN (s);
+
     if (strategy == PlaceOverParent)
     {
 	CompWindow *parent;
-	parent = findWindowAtScreen (w->screen, w->transientFor);
+	parent = findWindowAtScreen (s, w->transientFor);
 	if (parent)
 	    return outputDeviceForWindow (parent);
     }
     else if (strategy == ConstrainOnly)
     {
-	return outputDeviceForGeometry (w->screen, x, y, w->serverWidth,
+	return outputDeviceForGeometry (s, x, y, w->serverWidth,
 					w->serverHeight, w->serverBorderWidth);
     }
 
-    /* FIXME */
-    return w->screen->currentOutputDev;
+    switch (ps->opt[PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i) {
+    case PLACE_MOMODE_CURRENT:
+	return s->currentOutputDev;
+	break;
+    case PLACE_MOMODE_POINTER:
+	{
+	    Window wDummy;
+	    int    dummy, xPointer, yPointer;
+
+	    /* this means a server roundtrip, which kind of sucks; thus
+	       this code should be replaced as soon as we have software
+	       cursor rendering and thus have a cached pointer coordinate */
+	    if (XQueryPointer (s->display->display, s->root,
+			       &wDummy, &wDummy, &xPointer, &yPointer,
+			       &dummy, &dummy, &dummy))
+	    {
+		return outputDeviceForPoint (s, xPointer, yPointer);
+	    }
+	}
+	break;
+    }
+
+    /* should never happen */
+    return s->currentOutputDev;
 }
 
 static void
@@ -1340,6 +1371,7 @@ placeFiniDisplay (CompPlugin  *p,
 static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
     { "workarounds", "bool", 0, 0, 0 },
     { "mode", "int", RESTOSTRING (0, PLACE_MODE_LAST), 0, 0 },
+    { "multioutput_mode", "int", RESTOSTRING (0, PLACE_MOMODE_LAST), 0, 0 },
     { "position_matches", "list", "<type>match</type>", 0, 0 },
     { "position_x_values", "list", "<type>int</type>", 0, 0 },
     { "position_y_values", "list", "<type>int</type>", 0, 0 },
