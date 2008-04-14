@@ -74,6 +74,15 @@ typedef struct _PlaceScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+/* helper macros to get the full dimensions of a window,
+   including decorations */
+#define WIN_FULL_X(w) ((w)->serverX - (w)->input.left)
+#define WIN_FULL_Y(w) ((w)->serverY - (w)->input.top)
+#define WIN_FULL_W(w) ((w)->serverWidth + 2 * (w)->serverBorderWidth + \
+		       (w)->input.left + (w)->input.right)
+#define WIN_FULL_H(w) ((w)->serverHeight + 2 * (w)->serverBorderWidth + \
+		       (w)->input.top + (w)->input.bottom)
+
 static Bool
 placeMatchXYValue (CompWindow *w,
 		   CompOption *matches,
@@ -253,26 +262,14 @@ get_workarea_of_current_output_device (CompScreen *s,
     getWorkareaForOutput (s, s->currentOutputDev, area);
 }
 
-static int
-get_window_width (CompWindow *window)
-{
-    return window->serverWidth + window->serverBorderWidth * 2;
-}
-
-static int
-get_window_height (CompWindow *window)
-{
-    return window->serverHeight + window->serverBorderWidth * 2;
-}
-
 static void
 get_outer_rect_of_window (CompWindow *w,
 			  XRectangle *r)
 {
-    r->x      = w->serverX - w->input.left;
-    r->y      = w->serverY - w->input.top;
-    r->width  = get_window_width (w)  + w->input.left + w->input.right;
-    r->height = get_window_height (w) + w->input.top  + w->input.bottom;
+    r->x      = WIN_FULL_X (w);
+    r->y      = WIN_FULL_Y (w);
+    r->width  = WIN_FULL_W (w);
+    r->height = WIN_FULL_H (w);
 }
 
 static gboolean
@@ -576,10 +573,8 @@ find_next_cascade (CompWindow *window,
 
     /* Find first cascade position that's not used. */
 
-    window_width = get_window_width (window) + window->input.left +
-	window->input.right;
-    window_height = get_window_height (window) + window->input.top +
-	window->input.bottom;
+    window_width = WIN_FULL_W (window);
+    window_height = WIN_FULL_H (window);
 
     cascade_stage = 0;
     tmp = sorted;
@@ -663,8 +658,8 @@ placeCentered (CompWindow *window,
 	       int	  *x,
 	       int	  *y)
 {
-    *x = workarea->x + (workarea->width - get_window_width (window)) / 2;
-    *y = workarea->y + (workarea->height - get_window_height (window)) / 2;
+    *x = workarea->x + (workarea->width - window->serverWidth) / 2;
+    *y = workarea->y + (workarea->height - window->serverHeight) / 2;
 }
 
 static void
@@ -678,11 +673,11 @@ placeRandom (CompWindow *window,
     *x = workarea->x;
     *y = workarea->y;
 
-    remainX = workarea->width - get_window_width (window);
+    remainX = workarea->width - window->serverWidth;
     if (remainX > 0)
 	*x += rand () % remainX;
 
-    remainY = workarea->height - get_window_height (window);
+    remainY = workarea->height - window->serverHeight;
     if (remainY > 0)
 	*y += rand () % remainY;
 }
@@ -728,10 +723,8 @@ placeSmart (CompWindow *window,
     xOptimal = xTmp; yOptimal = yTmp;
 
     /* client gabarit */
-    int ch = get_window_height (window) + window->input.top +
-	     window->input.bottom - 1;
-    int cw = get_window_width (window) + window->input.left +
-	     window->input.right - 1;
+    int cw = WIN_FULL_W (window) - 1;
+    int ch = WIN_FULL_H (window) - 1;
 
     /* loop over possible positions */
     do
@@ -759,12 +752,10 @@ placeSmart (CompWindow *window,
 				    CompWindowTypeDesktopMask)))
 		{
 
-		    xl = wi->attrib.x - wi->input.left;
-		    yt = wi->attrib.y - wi->input.top;
-		    xr = xl + get_window_width (wi) + window->input.left
-			+ wi->input.right;
-		    yb = yt + get_window_height (wi) + window->input.top
-			+ wi->input.bottom;
+		    xl = WIN_FULL_X (wi);
+		    yt = WIN_FULL_Y (wi);
+		    xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
+		    yb = WIN_FULL_Y (wi) + WIN_FULL_H (wi);
 
 		    /* if windows overlap, calc the overall overlapping */
 		    if ((cxl < xr) && (cxr > xl) &&
@@ -821,12 +812,10 @@ placeSmart (CompWindow *window,
 				    CompWindowTypeDesktopMask)))
 		{
 
-		    xl = wi->attrib.x - wi->input.left;
-		    yt = wi->attrib.y - wi->input.top;
-		    xr = xl + get_window_width (wi) + wi->input.left
-			+ wi->input.right;
-		    yb = yt + get_window_height (wi) + wi->input.top
-			+ wi->input.bottom;
+		    xl = WIN_FULL_X (wi);
+		    yt = WIN_FULL_Y (wi);
+		    xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
+		    yb = WIN_FULL_X (wi) + WIN_FULL_H (wi);
 
 		    /* if not enough room above or under the current
 		     * client determine the first non-overlapped x position
@@ -860,12 +849,10 @@ placeSmart (CompWindow *window,
 		    !(wi->wmType & (CompWindowTypeDockMask |
 				    CompWindowTypeDesktopMask)))
 		{
-		    xl = wi->attrib.x - wi->input.left;
-		    yt = wi->attrib.y - wi->input.top;
-		    xr = xl + get_window_width (wi) + wi->input.left
-			+ wi->input.right;
-		    yb = yt + get_window_height (wi) + wi->input.top
-			+ wi->input.bottom;
+		    xl = WIN_FULL_X (wi);
+		    yt = WIN_FULL_Y (wi);
+		    xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
+		    yb = WIN_FULL_X (wi) + WIN_FULL_H (wi);
 
 		    /* if not enough room to the left or right of the current
 		     * client determine the first non-overlapped y position
@@ -905,12 +892,8 @@ placeWin (CompWindow *window,
 	window->screen->width;
     int	       y0 = (window->initialViewportY - window->screen->y) *
 	window->screen->height;
-    int	       window_width, window_height;
 
     PLACE_SCREEN (window->screen);
-
-    window_width = get_window_width (window);
-    window_height = get_window_height (window);
 
     get_workarea_of_current_output_device (window->screen, &work_area);
 
@@ -1026,18 +1009,18 @@ placeWin (CompWindow *window,
 	    x = parent->serverX;
 	    y = parent->serverY;
 
-	    w = get_window_width (parent);
+	    w = parent->serverWidth;
 
 	    /* center of parent */
 	    x = x + w / 2;
 
 	    /* center of child over center of parent */
-	    x -= window_width / 2;
+	    x -= window->serverWidth / 2;
 
 	    /* "visually" center window over parent, leaving twice as
 	     * much space below as on top.
 	     */
-	    y += (get_window_height (parent) - window_height) / 3;
+	    y += (parent->serverHeight - window->serverHeight) / 3;
 
 	    /* put top of child's frame, not top of child's client */
 	    y += window->input.top;
@@ -1057,8 +1040,9 @@ placeWin (CompWindow *window,
 
 		extents.left   = x - window->input.left;
 		extents.top    = y - window->input.top;
-		extents.right  = x + window_width + window->input.right;
-		extents.bottom = y + window_height + window->input.bottom;
+		extents.right  = x + window->serverWidth + window->input.right;
+		extents.bottom = y + window->serverHeight +
+		                 window->input.bottom;
 
 		if (extents.left < area.x)
 		    x += area.x - extents.left;
@@ -1088,8 +1072,8 @@ placeWin (CompWindow *window,
 	w = window->screen->width;
 	h = window->screen->height;
 
-	x = (w - window_width) / 2;
-	y = (h - window_height) / 2;
+	x = (w - window->serverWidth) / 2;
+	y = (h - window->serverHeight) / 2;
 
 	goto done_check_denied_focus;
     }
@@ -1104,9 +1088,9 @@ placeWin (CompWindow *window,
 	    continue;
 
 	if (wi->serverX >= work_area.x + work_area.width       ||
-	    wi->serverY + get_window_width (wi) <= work_area.x ||
+	    wi->serverY + wi->serverWidth <= work_area.x       ||
 	    wi->serverY >= work_area.y + work_area.height      ||
-	    wi->serverY + get_window_height (wi) <= work_area.y)
+	    wi->serverY + wi->serverHeight <= work_area.y)
 	    continue;
 
 	if (wi->attrib.override_redirect)
@@ -1131,7 +1115,8 @@ placeWin (CompWindow *window,
 	int output;
 
 	output = outputDeviceForGeometry (window->screen, x, y,
-					  window_width, window_height,
+					  window->serverWidth,
+					  window->serverHeight,
 					  window->serverBorderWidth);
 
 	getWorkareaForOutput (window->screen, output, &work_area);
@@ -1187,16 +1172,18 @@ done:
 	    maximizeWindow (window, MAXIMIZE_STATE);
     }
 
-    if (x + window_width + window->input.right > work_area.x + work_area.width)
-	x = work_area.x + work_area.width - window_width - window->input.right;
+    if (x + window->serverWidth + window->input.right >
+	work_area.x + work_area.width)
+	x = work_area.x + work_area.width -
+	    window->serverWidth - window->input.right;
 
     if (x - window->input.left < work_area.x)
 	x = work_area.x + window->input.left;
 
-    if (y + window_height + window->input.bottom >
+    if (y + window->serverHeight + window->input.bottom >
 	work_area.y + work_area.height)
 	y = work_area.y + work_area.height
-	    - window_height - window->input.bottom;
+	    - window->serverHeight - window->input.bottom;
 
     if (y - window->input.top < work_area.y)
 	y = work_area.y + window->input.top;
