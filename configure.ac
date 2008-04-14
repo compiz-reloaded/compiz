@@ -204,19 +204,6 @@ fi
 stylesheetdir=$datadir/compiz
 AC_SUBST(stylesheetdir)
 
-AC_ARG_ENABLE(place,
-  [  --disable-place         Disable window placement plugin],
-  [use_place=$enableval], [use_place=yes])
-
-if test "x$use_place" = "xyes"; then
-  PKG_CHECK_MODULES(PLACE, glib-2.0, [use_place=yes], [use_place=no])
-fi
-
-AM_CONDITIONAL(PLACE_PLUGIN, test "x$use_place" = "xyes")
-if test "$use_place" = yes; then
-  AC_DEFINE(USE_PLACE, 1, [Build placement plugin])
-fi
-
 AC_ARG_ENABLE(dbus,
   [  --disable-dbus          Disable dbus plugin],
   [use_dbus=$enableval], [use_dbus=yes])
@@ -647,7 +634,6 @@ echo "the following optional plugins will be compiled:"
 echo "  glib:     $use_glib"
 echo "  gconf:    $use_gconf"
 echo "  kconfig:  $use_kconfig"
-echo "  place:    $use_place"
 echo "  dbus:     $use_dbus"
 echo "  annotate: $use_annotate"
 echo "  svg:      $use_librsvg"

@@ -25,6 +25,9 @@ libmove_la_SOURCES = move.c
 libresize_la_LDFLAGS = -module -avoid-version -no-undefined
 libresize_la_SOURCES = resize.c
 
+libplace_la_LDFLAGS = -module -avoid-version -no-undefined
+libplace_la_SOURCES = place.c
+
 libdecoration_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libdecoration_la_LDFLAGS = -module -avoid-version -no-undefined
 libdecoration_la_LIBADD = $(top_builddir)/libdecoration/libdecoration.la
@@ -103,13 +106,6 @@ libkconfig_la_SOURCES = kconfig.cpp
 libkconfig_module = libkconfig.la
 endif
 
-if PLACE_PLUGIN
-libplace_la_LDFLAGS = -module -avoid-version -no-undefined
-libplace_la_LIBADD = @PLACE_LIBS@
-libplace_la_SOURCES = place.c
-libplace_module = libplace.la
-endif
-
 if DBUS_PLUGIN
 libdbus_la_LDFLAGS = -module -avoid-version -no-undefined
 libdbus_la_LIBADD = @DBUS_LIBS@
@@ -137,7 +133,6 @@ INCLUDES =					\
 	@ANNOTATE_CFLAGS@			\
 	@GCONF_CFLAGS@				\
 	@KCONFIG_CFLAGS@			\
-	@PLACE_CFLAGS@				\
 	@DBUS_CFLAGS@				\
 	@FUSE_CFLAGS@				\
 	-DFUSE_USE_VERSION=26			\
@@ -165,7 +160,7 @@ module_LTLIBRARIES =		\
 	libscale.la		\
 	libmove.la		\
 	libresize.la		\
-	$(libplace_module)	\
+	libplace.la             \
 	$(libdbus_module)	\
 	libswitcher.la		\
 	libwater.la		\

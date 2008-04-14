@@ -26,8 +26,6 @@
 
 #include <compiz-core.h>
 
-#include <glib.h>
-
 static CompMetadata placeMetadata;
 
 static int displayPrivateIndex;
@@ -226,10 +224,6 @@ rectangleIntersect (XRectangle *src1,
     int destX, destY;
     int destW, destH;
 
-    g_return_val_if_fail (src1 != NULL, FALSE);
-    g_return_val_if_fail (src2 != NULL, FALSE);
-    g_return_val_if_fail (dest != NULL, FALSE);
-
     destX = MAX (src1->x, src2->x);
     destY = MAX (src1->y, src2->y);
     destW = MIN (src1->x + src1->width, src2->x + src2->width) - destX;
@@ -260,17 +254,17 @@ getWindowExtentsRect (CompWindow *w,
     rect->height = WIN_FULL_H (w);
 }
 
-static gboolean
-rectOverlapsWindow (XRectangle *rect,
-		    GList      *windows)
+static Bool
+rectOverlapsWindow (XRectangle   *rect,
+		    CompWindow   **windows,
+		    unsigned int winCount)
 {
-    GList      *tmp;
-    XRectangle dest;
+    unsigned int i;
+    XRectangle   dest;
 
-    tmp = windows;
-    while (tmp)
+    for (i = 0; i < winCount; i++)
     {
-	CompWindow *other = tmp->data;
+	CompWindow *other = windows[i];
 	XRectangle otherRect;
 
 	switch (other->type) {
@@ -292,19 +286,17 @@ rectOverlapsWindow (XRectangle *rect,
 		return TRUE;
 	    break;
 	}
-
-	tmp = tmp->next;
     }
 
     return FALSE;
 }
 
-static gint
-compareLeftmost (gconstpointer a,
-		 gconstpointer b)
+static int
+compareLeftmost (const void *a,
+		 const void *b)
 {
-    CompWindow *aw = (gpointer) a;
-    CompWindow *bw = (gpointer) b;
+    CompWindow *aw = *((CompWindow **) a);
+    CompWindow *bw = *((CompWindow **) b);
     int	       ax, bx;
 
     ax = WIN_FULL_X (aw);
@@ -318,12 +310,12 @@ compareLeftmost (gconstpointer a,
 	return 0;
 }
 
-static gint
-compareTopmost (gconstpointer a,
-		gconstpointer b)
+static int
+compareTopmost (const void *a,
+		const void *b)
 {
-    CompWindow *aw = (gpointer) a;
-    CompWindow *bw = (gpointer) b;
+    CompWindow *aw = *((CompWindow **) a);
+    CompWindow *bw = *((CompWindow **) b);
     int	       ay, by;
 
     ay = WIN_FULL_X (aw);
@@ -337,12 +329,12 @@ compareTopmost (gconstpointer a,
 	return 0;
 }
 
-static gint
-compareNorthWestCorner (gconstpointer a,
-			gconstpointer b)
+static int
+compareNorthWestCorner (const void *a,
+			const void *b)
 {
-    CompWindow *aw = (gpointer) a;
-    CompWindow *bw = (gpointer) b;
+    CompWindow *aw = *((CompWindow **) a);
+    CompWindow *bw = *((CompWindow **) b);
     int	       fromOriginA;
     int	       fromOriginB;
     int	       ax, ay, bx, by;
@@ -384,7 +376,7 @@ centerTileRectInArea (XRectangle *rect,
     rect->y = workArea->y + fluff;
 }
 
-static gboolean
+static Bool
 rectFitsInWorkarea (XRectangle *workArea,
 		    XRectangle *rect)
 {
@@ -412,12 +404,13 @@ rectFitsInWorkarea (XRectangle *workArea,
  * don't want to create a 1x1 Emacs.
  */
 static Bool
-placeCascadeFindFirstFit (CompWindow *w,
-			  GList      *windows,
-			  int        x,
-			  int        y,
-			  int        *newX,
-			  int        *newY)
+placeCascadeFindFirstFit (CompWindow   *w,
+			  CompWindow   **windows,
+			  unsigned int winCount,
+			  int          x,
+			  int          y,
+			  int          *newX,
+			  int          *newY)
 {
     /* This algorithm is limited - it just brute-force tries
      * to fit the window in a small number of locations that are aligned
@@ -426,24 +419,32 @@ placeCascadeFindFirstFit (CompWindow *w,
      * of each existing window, aligned with the left/top of the
      * existing window in each of those cases.
      */
-    Bool       retval;
-    GList      *belowSorted;
-    GList      *rightSorted;
-    GList      *tmp;
-    XRectangle rect;
-    XRectangle workArea;
+    Bool         retval = FALSE;
+    unsigned int i, allocSize = winCount * sizeof (CompWindow *);
+    CompWindow   **belowSorted, **rightSorted;
+    XRectangle   rect;
+    XRectangle   workArea;
 
-    retval = FALSE;
+    belowSorted = malloc (allocSize);
+    if (!belowSorted)
+	return FALSE;
+
+    rightSorted = malloc (allocSize);
+    if (!rightSorted)
+    {
+	free (belowSorted);
+	return FALSE;
+    }
 
     /* Below each window */
-    belowSorted = g_list_copy (windows);
-    belowSorted = g_list_sort (belowSorted, compareLeftmost);
-    belowSorted = g_list_sort (belowSorted, compareTopmost);
+    memcpy (belowSorted, windows, allocSize);
+    qsort (belowSorted, winCount, sizeof (CompWindow *), compareLeftmost);
+    qsort (belowSorted, winCount, sizeof (CompWindow *), compareTopmost);
 
     /* To the right of each window */
-    rightSorted = g_list_copy (windows);
-    rightSorted = g_list_sort (rightSorted, compareTopmost);
-    rightSorted = g_list_sort (rightSorted, compareLeftmost);
+    memcpy (rightSorted, windows, allocSize);
+    qsort (rightSorted, winCount, sizeof (CompWindow *), compareTopmost);
+    qsort (rightSorted, winCount, sizeof (CompWindow *), compareLeftmost);
 
     getWindowExtentsRect (w, &rect);
 
@@ -455,7 +456,7 @@ placeCascadeFindFirstFit (CompWindow *w,
     centerTileRectInArea (&rect, &workArea);
 
     if (rectFitsInWorkarea (&workArea, &rect) &&
-	!rectOverlapsWindow (&rect, windows))
+	!rectOverlapsWindow (&rect, windows, winCount))
     {
 	*newX = rect.x + w->input.left;
 	*newY = rect.y + w->input.top;
@@ -466,81 +467,76 @@ placeCascadeFindFirstFit (CompWindow *w,
     if (!retval)
     {
 	/* try below each window */
-	tmp = belowSorted;
-	while (tmp)
+	for (i = 0; i < winCount && !retval; i++)
 	{
-	    CompWindow *wi = tmp->data;
 	    XRectangle outerRect;
 
-	    getWindowExtentsRect (wi, &outerRect);
+	    getWindowExtentsRect (belowSorted[i], &outerRect);
 
 	    rect.x = outerRect.x;
 	    rect.y = outerRect.y + outerRect.height;
 
 	    if (rectFitsInWorkarea (&workArea, &rect) &&
-		!rectOverlapsWindow (&rect, belowSorted))
+		!rectOverlapsWindow (&rect, belowSorted, winCount))
 	    {
 		*newX = rect.x + w->input.left;
 		*newY = rect.y + w->input.top;
-
 		retval = TRUE;
 	    }
-
-	    tmp = tmp->next;
 	}
     }
 
     if (!retval)
     {
 	/* try to the right of each window */
-	tmp = rightSorted;
-	while (tmp)
+	for (i = 0; i < winCount && !retval; i++)
 	{
-	    CompWindow *wi = tmp->data;
 	    XRectangle outerRect;
 
-	    getWindowExtentsRect (wi, &outerRect);
+	    getWindowExtentsRect (rightSorted[i], &outerRect);
 
 	    rect.x = outerRect.x + outerRect.width;
 	    rect.y = outerRect.y;
 
 	    if (rectFitsInWorkarea (&workArea, &rect) &&
-		!rectOverlapsWindow (&rect, rightSorted))
+		!rectOverlapsWindow (&rect, rightSorted, winCount))
 	    {
 		*newX = rect.x + w->input.left;
 		*newY = rect.y + w->input.top;
-
 		retval = TRUE;
 	    }
-
-	    tmp = tmp->next;
 	}
     }
 
-    g_list_free (belowSorted);
-    g_list_free (rightSorted);
+    free (belowSorted);
+    free (rightSorted);
 
     return retval;
 }
 
 static void
-placeCascadeFindNext (CompWindow *w,
-		      GList      *windows,
-		      int        x,
-		      int        y,
-		      int        *newX,
-		      int        *newY)
+placeCascadeFindNext (CompWindow   *w,
+		      CompWindow   **windows,
+		      unsigned int winCount,
+		      int          x,
+		      int          y,
+		      int          *newX,
+		      int          *newY)
 {
-    GList      *tmp;
-    GList      *sorted;
-    int	       cascadeX, cascadeY;
-    int	       xThreshold, yThreshold;
-    int	       winWidth, winHeight;
-    int	       cascadeStage;
-    XRectangle workArea;
+    CompWindow   **sorted;
+    unsigned int allocSize = winCount * sizeof (CompWindow *);
+    int          cascadeX, cascadeY;
+    int          xThreshold, yThreshold;
+    int          winWidth, winHeight;
+    int          i, cascadeStage;
+    XRectangle   workArea;
 
-    sorted = g_list_copy (windows);
-    sorted = g_list_sort (sorted, compareNorthWestCorner);
+    sorted = malloc (allocSize);
+    if (!sorted)
+	return;
+
+    memcpy (sorted, windows, allocSize);
+    qsort (sorted, winCount, sizeof (CompWindow *), compareNorthWestCorner);
 
     /* This is a "fuzzy" cascade algorithm.
      * For each window in the list, we find where we'd cascade a
@@ -572,20 +568,17 @@ placeCascadeFindNext (CompWindow *w,
     winHeight = WIN_FULL_H (w);
 
     cascadeStage = 0;
-    tmp = sorted;
-    while (tmp)
+    for (i = 0; i < winCount; i++)
     {
-	CompWindow *wi;
+	CompWindow *wi = sorted[i];
 	int	   wx, wy;
-
-	wi = tmp->data;
 
 	/* we want frame position, not window position */
 	wx = WIN_FULL_X (wi);
 	wy = WIN_FULL_Y (wi);
 
-	if (ABS (wx - cascadeX) < xThreshold &&
-	    ABS (wy - cascadeY) < yThreshold)
+	if (abs (wx - cascadeX) < xThreshold &&
+	    abs (wy - cascadeY) < yThreshold)
 	{
 	    /* This window is "in the way", move to next cascade
 	     * point. The new window frame should go at the origin
@@ -611,7 +604,7 @@ placeCascadeFindNext (CompWindow *w,
 		 */
 		if (cascadeX + winWidth < workArea.x + workArea.width)
 		{
-		    tmp = sorted;
+		    i = 0;
 		    continue;
 		}
 		else
@@ -626,15 +619,13 @@ placeCascadeFindNext (CompWindow *w,
 	{
 	    /* Keep searching for a further-down-the-diagonal window. */
 	}
-
-	tmp = tmp->next;
     }
 
     /* cascade_x and cascade_y will match the last window in the list
      * that was "in the way" (in the approximate cascade diagonal)
      */
 
-    g_list_free (sorted);
+    free (sorted);
 
     /* Convert coords to position of window, not position of frame. */
     *newX = cascadeX + w->input.left;
@@ -647,8 +638,17 @@ placeCascade (CompWindow *w,
 	      int        *x,
 	      int        *y)
 {
-    CompWindow *wi;
-    GList      *windows = NULL;
+    CompWindow   **windows;
+    CompWindow   *wi;
+    unsigned int count = 0;
+
+    /* get the total window count */
+    for (wi = w->screen->windows; wi; wi = wi->next)
+	count++;
+
+    windows = malloc (sizeof (CompWindow *) * count);
+    if (!windows)
+	return;
 
     /* Find windows that matter (not minimized, on same workspace
      * as placed window, may be shaded - if shaded we pretend it isn't
@@ -675,18 +675,18 @@ placeCascade (CompWindow *w,
 	    continue;
 
 	if (wi != w)
-	    windows = g_list_prepend (windows, wi);
+	    windows[count++] = wi;
     }
 
-    if (!placeCascadeFindFirstFit (w, windows, *x, *y, x, y))
+    if (!placeCascadeFindFirstFit (w, windows, count, *x, *y, x, y))
     {
 	/* if the window wasn't placed at the origin of screen,
 	 * cascade it onto the current screen
 	 */
-	placeCascadeFindNext (w, windows, *x, *y, x, y);
+	placeCascadeFindNext (w, windows, count, *x, *y, x, y);
     }
 
-    g_list_free (windows);
+    free (windows);
 }
 
 static void
