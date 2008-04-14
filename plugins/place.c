@@ -746,30 +746,33 @@ placeSmart (CompWindow *w,
 
 	    for (wi = w->screen->windows; wi; wi = wi->next)
 	    {
-		if (!wi->invisible &&
-		    wi != w &&
-		    !(wi->wmType & (CompWindowTypeDockMask |
-				    CompWindowTypeDesktopMask)))
+		if (!wi->shaded && wi->attrib.map_state != IsViewable)
+		    continue;
+
+		if (wi == w)
+		    continue;
+
+		if (wi->wmType & (CompWindowTypeDockMask |
+				  CompWindowTypeDesktopMask))
+		    continue;
+
+		xl = WIN_FULL_X (wi);
+		yt = WIN_FULL_Y (wi);
+		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
+		yb = WIN_FULL_Y (wi) + WIN_FULL_H (wi);
+
+		/* if windows overlap, calc the overall overlapping */
+		if ((cxl < xr) && (cxr > xl) &&
+		    (cyt < yb) && (cyb > yt))
 		{
-
-		    xl = WIN_FULL_X (wi);
-		    yt = WIN_FULL_Y (wi);
-		    xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
-		    yb = WIN_FULL_Y (wi) + WIN_FULL_H (wi);
-
-		    /* if windows overlap, calc the overall overlapping */
-		    if ((cxl < xr) && (cxr > xl) &&
-			(cyt < yb) && (cyb > yt))
-		    {
-			xl = MAX (cxl, xl); xr = MIN (cxr, xr);
-			yt = MAX (cyt, yt); yb = MIN (cyb, yb);
-			if (wi->state & CompWindowStateAboveMask)
-			    overlap += 16 * (xr - xl) * (yb - yt);
-			else if (wi->state & CompWindowStateBelowMask)
-			    overlap += 0;
-			else
-			    overlap += (xr - xl) * (yb - yt);
-		    }
+		    xl = MAX (cxl, xl); xr = MIN (cxr, xr);
+		    yt = MAX (cyt, yt); yb = MIN (cyb, yb);
+		    if (wi->state & CompWindowStateAboveMask)
+			overlap += 16 * (xr - xl) * (yb - yt);
+		    else if (wi->state & CompWindowStateBelowMask)
+			overlap += 0;
+		    else
+			overlap += (xr - xl) * (yb - yt);
 		}
 	    }
 	}
@@ -805,34 +808,35 @@ placeSmart (CompWindow *w,
 	    /* compare to the position of each client on the same desk */
 	    for (wi = w->screen->windows; wi; wi = wi->next)
 	    {
+		if (!wi->shaded && wi->attrib.map_state != IsViewable)
+		    continue;
 
-		if (!wi->invisible &&
-		    wi != w &&
-		    !(wi->wmType & (CompWindowTypeDockMask |
-				    CompWindowTypeDesktopMask)))
+		if (wi == w)
+		    continue;
+
+		if (wi->wmType & (CompWindowTypeDockMask |
+				  CompWindowTypeDesktopMask))
+		    continue;
+
+		xl = WIN_FULL_X (wi);
+		yt = WIN_FULL_Y (wi);
+		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
+		yb = WIN_FULL_X (wi) + WIN_FULL_H (wi);
+
+		/* if not enough room above or under the current
+		 * client determine the first non-overlapped x position
+		 */
+		if ((yTmp < yb) && (yt < ch + yTmp))
 		{
+		    if ((xr > xTmp) && (possible > xr)) possible = xr;
 
-		    xl = WIN_FULL_X (wi);
-		    yt = WIN_FULL_Y (wi);
-		    xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
-		    yb = WIN_FULL_X (wi) + WIN_FULL_H (wi);
-
-		    /* if not enough room above or under the current
-		     * client determine the first non-overlapped x position
-		     */
-		    if ((yTmp < yb) && (yt < ch + yTmp))
-		    {
-			if ((xr > xTmp) && (possible > xr)) possible = xr;
-
-			basket = xl - cw;
-			if ((basket > xTmp) && (possible > basket))
-			    possible = basket;
-		    }
+		    basket = xl - cw;
+		    if ((basket > xTmp) && (possible > basket))
+			possible = basket;
 		}
 	    }
 	    xTmp = possible;
 	}
-
 	/* else ==> not enough x dimension (overlap was wrong on horizontal) */
 	else if (overlap == W_WRONG)
 	{
@@ -844,26 +848,30 @@ placeSmart (CompWindow *w,
 	    /* test the position of each window on the desk */
 	    for (wi = w->screen->windows; wi ; wi = wi->next)
 	    {
-		if (!wi->invisible &&
-		    wi != w &&
-		    !(wi->wmType & (CompWindowTypeDockMask |
-				    CompWindowTypeDesktopMask)))
-		{
-		    xl = WIN_FULL_X (wi);
-		    yt = WIN_FULL_Y (wi);
-		    xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
-		    yb = WIN_FULL_X (wi) + WIN_FULL_H (wi);
+		if (!wi->shaded && wi->attrib.map_state != IsViewable)
+		    continue;
 
-		    /* if not enough room to the left or right of the current
-		     * client determine the first non-overlapped y position
-		     */
-		    if ((yb > yTmp) && (possible > yb))
-			possible = yb;
+		if (wi == w)
+		    continue;
 
-		    basket = yt - ch;
-		    if ((basket > yTmp) && (possible > basket))
-			possible = basket;
-		}
+		if (wi->wmType & (CompWindowTypeDockMask |
+				  CompWindowTypeDesktopMask))
+		    continue;
+
+		xl = WIN_FULL_X (wi);
+		yt = WIN_FULL_Y (wi);
+		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
+		yb = WIN_FULL_X (wi) + WIN_FULL_H (wi);
+
+		/* if not enough room to the left or right of the current
+		 * client determine the first non-overlapped y position
+		 */
+		if ((yb > yTmp) && (possible > yb))
+		    possible = yb;
+
+		basket = yt - ch;
+		if ((basket > yTmp) && (possible > basket))
+		    possible = basket;
 	    }
 	    yTmp = possible;
 	}
