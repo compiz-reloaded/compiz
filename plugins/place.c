@@ -419,144 +419,6 @@ find_next_cascade (CompWindow *window,
     *new_y = cascade_y + window->input.top;
 }
 
-static void
-find_most_freespace (CompWindow *window,
-		     CompWindow *focus_window,
-		     int        x,
-		     int        y,
-		     int        *new_x,
-		     int        *new_y)
-{
-    PlaceWindowDirection side;
-    int			 max_area;
-    int			 max_width, max_height, left, right, top, bottom;
-    int			 left_space, right_space, top_space, bottom_space;
-    int			 frame_size_left, frame_size_top;
-    XRectangle		 work_area;
-    XRectangle		 avoid;
-    XRectangle		 outer;
-
-    frame_size_left = window->input.left;
-    frame_size_top  = window->input.top;
-
-    get_workarea_of_current_output_device (window->screen, &work_area);
-
-    get_outer_rect_of_window (focus_window, &avoid);
-    get_outer_rect_of_window (window, &outer);
-
-    /* Find the areas of choosing the various sides of the focus window */
-    max_width  = MIN (avoid.width, outer.width);
-    max_height = MIN (avoid.height, outer.height);
-    left_space   = avoid.x - work_area.x;
-    right_space  = work_area.width - (avoid.x + avoid.width - work_area.x);
-    top_space    = avoid.y - work_area.y;
-    bottom_space = work_area.height - (avoid.y + avoid.height - work_area.y);
-    left   = MIN (left_space,   outer.width);
-    right  = MIN (right_space,  outer.width);
-    top    = MIN (top_space,    outer.height);
-    bottom = MIN (bottom_space, outer.height);
-
-    /* Find out which side of the focus_window can show the most of the
-     * window
-     */
-    side = PlaceLeft;
-    max_area = left * max_height;
-    if (right * max_height > max_area)
-    {
-	side = PlaceRight;
-	max_area = right * max_height;
-    }
-    if (top * max_width > max_area)
-    {
-	side = PlaceTop;
-	max_area = top * max_width;
-    }
-    if (bottom * max_width > max_area)
-    {
-	side = PlaceBottom;
-	max_area = bottom * max_width;
-    }
-
-    /* Give up if there's no where to put it
-     * (i.e. focus window is maximized)
-     */
-    if (max_area == 0)
-	return;
-
-    /* Place the window on the relevant side; if the whole window fits,
-     * make it adjacent to the focus window; if not, make sure the
-     * window doesn't go off the edge of the screen.
-     */
-    switch (side) {
-    case PlaceLeft:
-	*new_y = avoid.y + frame_size_top;
-	if (left_space > outer.width)
-	    *new_x = avoid.x - outer.width + frame_size_left;
-	else
-	    *new_x = work_area.x + frame_size_left;
-	break;
-    case PlaceRight:
-	*new_y = avoid.y + frame_size_top;
-	if (right_space > outer.width)
-	    *new_x = avoid.x + avoid.width + frame_size_left;
-	else
-	    *new_x = work_area.x + work_area.width - outer.width +
-		frame_size_left;
-	break;
-    case PlaceTop:
-	*new_x = avoid.x + frame_size_left;
-	if (top_space > outer.height)
-	    *new_y = avoid.y - outer.height + frame_size_top;
-	else
-	    *new_y = work_area.y + frame_size_top;
-	break;
-    case PlaceBottom:
-	*new_x = avoid.x + frame_size_left;
-	if (bottom_space > outer.height)
-	    *new_y = avoid.y + avoid.height + frame_size_top;
-	else
-	    *new_y = work_area.y + work_area.height - outer.height +
-		frame_size_top;
-	break;
-    }
-}
-
-static void
-avoid_being_obscured_as_second_modal_dialog (CompWindow *window,
-					     int        *x,
-					     int        *y)
-{
-    /* We can't center this dialog if it was denied focus and it
-     * overlaps with the focus window and this dialog is modal and this
-     * dialog is in the same app as the focus window (*phew*...please
-     * don't make me say that ten times fast). See bug 307875 comment 11
-     * and 12 for details, but basically it means this is probably a
-     * second modal dialog for some app while the focus window is the
-     * first modal dialog.  We should probably make them simultaneously
-     * visible in general, but it becomes mandatory to do so due to
-     * buggy apps (e.g. those using gtk+ *sigh*) because in those cases
-     * this second modal dialog also happens to be modal to the first
-     * dialog in addition to the main window, while it has only let us
-     * know about the modal-to-the-main-window part.
-     */
-
-    CompWindow *focus_window;
-
-    focus_window =
-	findWindowAtDisplay (window->screen->display,
-			     window->screen->display->activeWindow);
-
-    if (focus_window				   &&
-	(window->state & CompWindowStateModalMask) &&
-	0 /* window->denied_focus_and_not_transient	       &&
-	window_same_application (window, focus_window) &&
-	window_intersect (window, focus_window) */
-	)
-    {
-	find_most_freespace (window, focus_window, *x, *y, x, y);
-    }
-}
-
 static gboolean
 rectangle_overlaps_some_window (XRectangle *rect,
 				GList      *windows)
@@ -1119,7 +981,6 @@ placeWin (CompWindow *window,
 	if ((window->sizeHints.flags & PPosition) ||
 	    (window->sizeHints.flags & USPosition))
 	{
-	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
 	    goto done;
 	}
     }
@@ -1219,8 +1080,6 @@ placeWin (CompWindow *window,
 		    y += area.y + area.height - extents.bottom;
 	    }
 
-	    avoid_being_obscured_as_second_modal_dialog (window, &x, &y);
-
 	    goto done_no_constraints;
 	}
     }
@@ -1319,57 +1178,6 @@ placeWin (CompWindow *window,
     }
 
 done_check_denied_focus:
-    /* If the window is being denied focus and isn't a transient of the
-     * focus window, we do NOT want it to overlap with the focus window
-     * if at all possible.  This is guaranteed to only be called if the
-     * focus_window is non-NULL, and we try to avoid that window.
-     */
-    if (0 /* window->denied_focus_and_not_transient */)
-    {
-	gboolean    found_fit = FALSE;
-	CompWindow  *focus_window;
-
-	focus_window =
-	    findWindowAtDisplay (window->screen->display,
-				 window->screen->display->activeWindow);
-	if (focus_window)
-	{
-	    XRectangle wr, fwr, overlap;
-
-	    get_outer_rect_of_window (window, &wr);
-	    get_outer_rect_of_window (focus_window, &fwr);
-
-	    /* No need to do anything if the window doesn't overlap at all */
-	    found_fit = !rectangleIntersect (&wr, &fwr, &overlap);
-
-	    /* Try to do a first fit again, this time only taking into
-	     * account the focus window.
-	     */
-	    if (!found_fit)
-	    {
-		GList *focus_window_list;
-
-		focus_window_list = g_list_prepend (NULL, focus_window);
-
-		/* Reset x and y ("origin" placement algorithm) */
-		x = 0;
-		y = 0;
-
-		found_fit = find_first_fit (window, focus_window_list,
-					    x, y, &x, &y);
-
-		g_list_free (focus_window_list);
-	    }
-	}
-
-	/* If that still didn't work, just place it where we can see as much
-	 * as possible.
-	 */
-	if (!found_fit)
-	    find_most_freespace (window, focus_window, x, y, &x, &y);
-    }
-
-    g_list_free (windows);
 
 done:
     /* Maximize windows if they are too big for their work area (bit of
