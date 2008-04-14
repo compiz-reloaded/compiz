@@ -412,6 +412,7 @@ static Bool
 placeCascadeFindFirstFit (CompWindow   *w,
 			  CompWindow   **windows,
 			  unsigned int winCount,
+			  XRectangle   *workArea,
 			  int          x,
 			  int          y,
 			  int          *newX,
@@ -428,7 +429,6 @@ placeCascadeFindFirstFit (CompWindow   *w,
     unsigned int i, allocSize = winCount * sizeof (CompWindow *);
     CompWindow   **belowSorted, **rightSorted;
     XRectangle   rect;
-    XRectangle   workArea;
 
     belowSorted = malloc (allocSize);
     if (!belowSorted)
@@ -453,14 +453,9 @@ placeCascadeFindFirstFit (CompWindow   *w,
 
     getWindowExtentsRect (w, &rect);
 
-    getWorkareaForOutput (w->screen, w->screen->currentOutputDev, &workArea);
+    centerTileRectInArea (&rect, workArea);
 
-    workArea.x += (w->initialViewportX - w->screen->x) * w->screen->width;
-    workArea.y += (w->initialViewportY - w->screen->y) * w->screen->height;
-
-    centerTileRectInArea (&rect, &workArea);
-
-    if (rectFitsInWorkarea (&workArea, &rect) &&
+    if (rectFitsInWorkarea (workArea, &rect) &&
 	!rectOverlapsWindow (&rect, windows, winCount))
     {
 	*newX = rect.x + w->input.left;
@@ -481,7 +476,7 @@ placeCascadeFindFirstFit (CompWindow   *w,
 	    rect.x = outerRect.x;
 	    rect.y = outerRect.y + outerRect.height;
 
-	    if (rectFitsInWorkarea (&workArea, &rect) &&
+	    if (rectFitsInWorkarea (workArea, &rect) &&
 		!rectOverlapsWindow (&rect, belowSorted, winCount))
 	    {
 		*newX = rect.x + w->input.left;
@@ -503,7 +498,7 @@ placeCascadeFindFirstFit (CompWindow   *w,
 	    rect.x = outerRect.x + outerRect.width;
 	    rect.y = outerRect.y;
 
-	    if (rectFitsInWorkarea (&workArea, &rect) &&
+	    if (rectFitsInWorkarea (workArea, &rect) &&
 		!rectOverlapsWindow (&rect, rightSorted, winCount))
 	    {
 		*newX = rect.x + w->input.left;
@@ -523,6 +518,7 @@ static void
 placeCascadeFindNext (CompWindow   *w,
 		      CompWindow   **windows,
 		      unsigned int winCount,
+		      XRectangle   *workArea,
 		      int          x,
 		      int          y,
 		      int          *newX,
@@ -534,7 +530,6 @@ placeCascadeFindNext (CompWindow   *w,
     int          xThreshold, yThreshold;
     int          winWidth, winHeight;
     int          i, cascadeStage;
-    XRectangle   workArea;
 
     sorted = malloc (allocSize);
     if (!sorted)
@@ -562,10 +557,8 @@ placeCascadeFindNext (CompWindow   *w,
      * of NW corner of window frame.
      */
 
-    getWorkareaForOutput (w->screen, w->screen->currentOutputDev, &workArea);
-
-    cascadeX = MAX (0, workArea.x);
-    cascadeY = MAX (0, workArea.y);
+    cascadeX = MAX (0, workArea->x);
+    cascadeY = MAX (0, workArea->y);
 
     /* Find first cascade position that's not used. */
 
@@ -593,11 +586,11 @@ placeCascadeFindNext (CompWindow   *w,
 	    wy = cascadeY = wi->serverY;
 
 	    /* If we go off the screen, start over with a new cascade */
-	    if ((cascadeX + winWidth > workArea.x + workArea.width) ||
-		(cascadeY + winHeight > workArea.y + workArea.height))
+	    if ((cascadeX + winWidth > workArea->x + workArea->width) ||
+		(cascadeY + winHeight > workArea->y + workArea->height))
 	    {
-		cascadeX = MAX (0, workArea.x);
-		cascadeY = MAX (0, workArea.y);
+		cascadeX = MAX (0, workArea->x);
+		cascadeY = MAX (0, workArea->y);
 
 #define CASCADE_INTERVAL 50 /* space between top-left corners of cascades */
 
@@ -607,7 +600,7 @@ placeCascadeFindNext (CompWindow   *w,
 		/* start over with a new cascade translated to the right,
 		 * unless we are out of space
 		 */
-		if (cascadeX + winWidth < workArea.x + workArea.width)
+		if (cascadeX + winWidth < workArea->x + workArea->width)
 		{
 		    i = 0;
 		    continue;
@@ -615,7 +608,7 @@ placeCascadeFindNext (CompWindow   *w,
 		else
 		{
 		    /* All out of space, this cascade_x won't work */
-		    cascadeX = MAX (0, workArea.x);
+		    cascadeX = MAX (0, workArea->x);
 		    break;
 		}
 	    }
@@ -683,12 +676,12 @@ placeCascade (CompWindow *w,
 	    windows[count++] = wi;
     }
 
-    if (!placeCascadeFindFirstFit (w, windows, count, *x, *y, x, y))
+    if (!placeCascadeFindFirstFit (w, windows, count, workArea, *x, *y, x, y))
     {
 	/* if the window wasn't placed at the origin of screen,
 	 * cascade it onto the current screen
 	 */
-	placeCascadeFindNext (w, windows, count, *x, *y, x, y);
+	placeCascadeFindNext (w, windows, count, workArea, *x, *y, x, y);
     }
 
     free (windows);
