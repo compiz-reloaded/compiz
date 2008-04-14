@@ -177,10 +177,6 @@ placeSetScreenOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
-    case PLACE_SCREEN_OPTION_MODE:
-	if (compSetIntOption (o, value))
-	    return TRUE;
-	break;
     case PLACE_SCREEN_OPTION_POSITION_MATCHES:
     case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
 	if (compSetOptionList (o, value))
@@ -1309,13 +1305,14 @@ placePlaceWindow (CompWindow *w,
 		  int        *newX,
 		  int        *newY)
 {
-    Bool status;
+    CompScreen *s = w->screen;
+    Bool       status;
 
-    PLACE_SCREEN (w->screen);
+    PLACE_SCREEN (s);
 
-    UNWRAP (ps, w->screen, placeWindow);
-    status = (*w->screen->placeWindow) (w, x, y, newX, newY);
-    WRAP (ps, w->screen, placeWindow, placePlaceWindow);
+    UNWRAP (ps, s, placeWindow);
+    status = (*s->placeWindow) (w, x, y, newX, newY);
+    WRAP (ps, s, placeWindow, placePlaceWindow);
 
     if (!status)
     {
@@ -1329,11 +1326,11 @@ placePlaceWindow (CompWindow *w,
 
 	if (placeMatchViewport (w, &viewportX, &viewportY))
 	{
-	    viewportX = MAX (MIN (viewportX, w->screen->hsize), 0);
-	    viewportY = MAX (MIN (viewportY, w->screen->vsize), 0);
+	    viewportX = MAX (MIN (viewportX, s->hsize), 0);
+	    viewportY = MAX (MIN (viewportY, s->vsize), 0);
 
-	    *newX += (viewportX - w->screen->x) * w->screen->width;
-	    *newY += (viewportY - w->screen->y) * w->screen->height;
+	    *newX += (viewportX - s->x) * s->width;
+	    *newY += (viewportY - s->y) * s->height;
 	}
     }
 
