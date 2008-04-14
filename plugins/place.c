@@ -946,7 +946,7 @@ placeGetStrategyForWindow (CompWindow *w)
 	}
     }
 
-   if (w->transientFor && 
+   if (w->transientFor &&
 	(w->type & (CompWindowTypeDialogMask |
 		    CompWindowTypeModalDialogMask)))
     {
@@ -1138,7 +1138,7 @@ placeDoWindowPlacement (CompWindow *w,
 
     if (strategy == PlaceOnly || strategy == PlaceAndConstrain)
     {
-    	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
+	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
 	case PLACE_MODE_CASCADE:
 	    placeCascade (w, &workArea, &x, &y);
 	    break;
@@ -1164,7 +1164,7 @@ placeDoWindowPlacement (CompWindow *w,
 	    (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
 	    !(w->state & CompWindowStateFullscreenMask))
 	{
-    	    if (WIN_FULL_W (w) >= workArea.width &&
+	    if (WIN_FULL_W (w) >= workArea.width &&
 		WIN_FULL_H (w) >= workArea.height)
 	    {
 		placeSendWindowMaximizationRequest (w);
