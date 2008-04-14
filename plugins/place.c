@@ -82,18 +82,11 @@ typedef enum {
 } PlacementStrategy;
 
 /* helper macro that filters out windows irrelevant for placement */
-#define FOR_EACH_PLACEMENT_WIN(w, wi)                          \
-    for (wi = (w)->screen->windows; wi; wi = wi->next)         \
-    {                                                          \
-        if (!wi->shaded && wi->attrib.map_state != IsViewable) \
-            continue;                                          \
-        if (w->attrib.override_redirect)                       \
-            continue;                                          \
-        if (wi == w)                                           \
-            continue;                                          \
-        if (wi->wmType & (CompWindowTypeDockMask |             \
-			  CompWindowTypeDesktopMask))          \
-            continue;
+#define IS_PLACE_RELEVANT(wi, w)                                        \
+    ((w != wi) &&                                                       \
+     (wi->attrib.map_state == IsViewable || wi->shaded) &&              \
+     (!wi->attrib.override_redirect) &&                                 \
+     (!(wi->wmType & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))))
 
 /* helper macros to get the full dimensions of a window,
    including decorations */
@@ -666,8 +659,11 @@ placeCascade (CompWindow *w,
      * as placed window, may be shaded - if shaded we pretend it isn't
      * for placement purposes)
      */
-    count = 0;
-    FOR_EACH_PLACEMENT_WIN (w, wi)
+    for (wi = w->screen->windows, count = 0; wi; wi = wi->next)
+    {
+	if (!IS_PLACE_RELEVANT (wi, w))
+	    continue;
+
 	if (wi->type & (CompWindowTypeFullscreenMask |
 			CompWindowTypeUnknownMask))
 	    continue;
@@ -784,7 +780,11 @@ placeSmart (CompWindow *w,
 	    cyt = yTmp;
 	    cyb = yTmp + ch;
 
-	    FOR_EACH_PLACEMENT_WIN (w, wi)
+	    for (wi = w->screen->windows; wi; wi = wi->next)
+	    {
+		if (!IS_PLACE_RELEVANT (wi, w))
+		    continue;
+
 		xl = WIN_FULL_X (wi);
 		yt = WIN_FULL_Y (wi);
 		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
@@ -838,7 +838,11 @@ placeSmart (CompWindow *w,
 		possible -= cw;
 
 	    /* compare to the position of each client on the same desk */
-	    FOR_EACH_PLACEMENT_WIN (w, wi)
+	    for (wi = w->screen->windows; wi; wi = wi->next)
+	    {
+		if (!IS_PLACE_RELEVANT (wi, w))
+		    continue;
+
 		xl = WIN_FULL_X (wi);
 		yt = WIN_FULL_Y (wi);
 		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
@@ -869,7 +873,11 @@ placeSmart (CompWindow *w,
 		possible -= ch;
 
 	    /* test the position of each window on the desk */
-	    FOR_EACH_PLACEMENT_WIN (w, wi)
+	    for (wi = w->screen->windows; wi; wi = wi->next)
+	    {
+		if (!IS_PLACE_RELEVANT (wi, w))
+		    continue;
+
 		xl = WIN_FULL_X (wi);
 		yt = WIN_FULL_Y (wi);
 		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
