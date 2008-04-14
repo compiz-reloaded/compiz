@@ -1105,8 +1105,14 @@ placeDoWindowPlacement (CompWindow *w,
 
     if (strategy == PlaceCenteredOnScreen)
     {
-	x = (s->width - w->serverWidth) / 2;
-	y = (s->height - w->serverHeight) / 2;
+	/* center window on current output device */
+	CompOutput *currOutput = &s->outputDev[s->currentOutputDev];
+
+	x = currOutput->region.extents.x1;
+	y = currOutput->region.extents.y1;
+
+	x += (currOutput->width - w->serverWidth) / 2;
+	y += (currOutput->height - w->serverHeight) / 2;
 
 	strategy = ConstrainOnly;
     }
