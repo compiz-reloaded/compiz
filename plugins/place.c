@@ -666,6 +666,7 @@ placeCascade (CompWindow *w,
      * as placed window, may be shaded - if shaded we pretend it isn't
      * for placement purposes)
      */
+    count = 0;
     FOR_EACH_PLACEMENT_WIN (w, wi)
 	if (wi->type & (CompWindowTypeFullscreenMask |
 			CompWindowTypeUnknownMask))
