@@ -963,32 +963,43 @@ placeGetStrategyForWindow (CompWindow *w)
     return PlaceAndConstrain;
 }
 
-static int
+static CompOutput *
 placeGetPlacementOutput (CompWindow        *w,
 			 PlacementStrategy strategy,
 			 int               x,
 			 int               y)
 {
     CompScreen *s = w->screen;
+    int        output = -1;
 
     PLACE_SCREEN (s);
 
     if (strategy == PlaceOverParent)
     {
 	CompWindow *parent;
+
 	parent = findWindowAtScreen (s, w->transientFor);
 	if (parent)
-	    return outputDeviceForWindow (parent);
+	    output = outputDeviceForWindow (parent);
+    }
+    else if (strategy == PlaceCenteredOnScreen)
+    {
+	output = s->currentOutputDev;
     }
     else if (strategy == ConstrainOnly)
     {
-	return outputDeviceForGeometry (s, x, y, w->serverWidth,
-					w->serverHeight, w->serverBorderWidth);
+	output = outputDeviceForGeometry (s, x, y,
+					  w->serverWidth,
+					  w->serverHeight,
+					  w->serverBorderWidth);
     }
+
+    if (output >= 0)
+	return &s->outputDev[output];
 
     switch (ps->opt[PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i) {
     case PLACE_MOMODE_CURRENT:
-	return s->currentOutputDev;
+	output = s->currentOutputDev;
 	break;
     case PLACE_MOMODE_POINTER:
 	{
@@ -1003,14 +1014,19 @@ placeGetPlacementOutput (CompWindow        *w,
 			       &wDummy, &wDummy, &xPointer, &yPointer,
 			       &iDummy, &iDummy, &uiDummy))
 	    {
-		return outputDeviceForPoint (s, xPointer, yPointer);
+		output = outputDeviceForPoint (s, xPointer, yPointer);
 	    }
 	}
 	break;
     }
 
-    /* should never happen */
-    return s->currentOutputDev;
+    if (output < 0)
+    {
+	/* should never happen */
+	output = s->currentOutputDev;
+    }
+
+    return &s->outputDev[output];
 }
 
 static void
@@ -1047,7 +1063,7 @@ placeDoWindowPlacement (CompWindow *w,
     CompScreen        *s = w->screen;
     XRectangle        workArea;
     int               targetVpX, targetVpY;
-    int               output;
+    CompOutput        *output;
     PlacementStrategy strategy;
 
     PLACE_SCREEN (s);
@@ -1063,8 +1079,8 @@ placeDoWindowPlacement (CompWindow *w,
 	strategy = NoPlacement;
     }
 
-    output = placeGetPlacementOutput (w, strategy, x, y);
-    getWorkareaForOutput (s, output, &workArea);
+    output   = placeGetPlacementOutput (w, strategy, x, y);
+    workArea = output->workArea;
 
     targetVpX = w->initialViewportX;
     targetVpY = w->initialViewportY;
@@ -1107,13 +1123,12 @@ placeDoWindowPlacement (CompWindow *w,
     if (strategy == PlaceCenteredOnScreen)
     {
 	/* center window on current output device */
-	CompOutput *currOutput = &s->outputDev[s->currentOutputDev];
 
-	x = currOutput->region.extents.x1;
-	y = currOutput->region.extents.y1;
+	x = output->region.extents.x1;
+	y = output->region.extents.y1;
 
-	x += (currOutput->width - w->serverWidth) / 2;
-	y += (currOutput->height - w->serverHeight) / 2;
+	x += (output->width - w->serverWidth) / 2;
+	y += (output->height - w->serverHeight) / 2;
 
 	strategy = ConstrainOnly;
     }
