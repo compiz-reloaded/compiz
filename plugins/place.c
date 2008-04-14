@@ -673,7 +673,7 @@ placeCascade (CompWindow *w,
 	    continue;
 
 	if (wi->serverX >= workArea->x + workArea->width  ||
-	    wi->serverY + wi->serverWidth <= workArea->x  ||
+	    wi->serverX + wi->serverWidth <= workArea->x  ||
 	    wi->serverY >= workArea->y + workArea->height ||
 	    wi->serverY + wi->serverHeight <= workArea->y)
 	    continue;
