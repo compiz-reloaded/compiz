@@ -411,8 +411,8 @@ rectFitsInWorkarea (XRectangle *workArea,
  * beware windows such as Emacs with no sane minimum size, we
  * don't want to create a 1x1 Emacs.
  */
-static gboolean
-placeCascadefindFirstFit (CompWindow *w,
+static Bool
+placeCascadeFindFirstFit (CompWindow *w,
 			  GList      *windows,
 			  int        x,
 			  int        y,
@@ -639,6 +639,54 @@ placeCascadeFindNext (CompWindow *w,
     /* Convert coords to position of window, not position of frame. */
     *newX = cascadeX + w->input.left;
     *newY = cascadeY + w->input.top;
+}
+
+static void
+placeCascade (CompWindow *w,
+	      XRectangle *workArea,
+	      int        *x,
+	      int        *y)
+{
+    CompWindow *wi;
+    GList      *windows = NULL;
+
+    /* Find windows that matter (not minimized, on same workspace
+     * as placed window, may be shaded - if shaded we pretend it isn't
+     * for placement purposes)
+     */
+    for (wi = w->screen->windows; wi; wi = wi->next)
+    {
+	if (!wi->shaded && wi->attrib.map_state != IsViewable)
+	    continue;
+
+	if (wi->attrib.override_redirect)
+	    continue;
+
+	if (wi->serverX >= workArea->x + workArea->width  ||
+	    wi->serverY + wi->serverWidth <= workArea->x  ||
+	    wi->serverY >= workArea->y + workArea->height ||
+	    wi->serverY + wi->serverHeight <= workArea->y)
+	    continue;
+
+	if (wi->type & (CompWindowTypeDesktopMask    |
+			CompWindowTypeDockMask       |
+			CompWindowTypeFullscreenMask |
+			CompWindowTypeUnknownMask))
+	    continue;
+
+	if (wi != w)
+	    windows = g_list_prepend (windows, wi);
+    }
+
+    if (!placeCascadeFindFirstFit (w, windows, *x, *y, x, y))
+    {
+	/* if the window wasn't placed at the origin of screen,
+	 * cascade it onto the current screen
+	 */
+	placeCascadeFindNext (w, windows, *x, *y, x, y);
+    }
+
+    g_list_free (windows);
 }
 
 static void
@@ -897,8 +945,6 @@ placeWin (CompWindow *w,
 	  int        *newY)
 {
     CompScreen *s = w->screen;
-    CompWindow *wi;
-    GList      *windows;
     XRectangle workArea;
     int	       x0 = (w->initialViewportX - s->x) * s->width;
     int	       y0 = (w->initialViewportY - s->y) * s->height;
@@ -909,8 +955,6 @@ placeWin (CompWindow *w,
 
     workArea.x += x0;
     workArea.y += y0;
-
-    windows = NULL;
 
     switch (w->type) {
     case CompWindowTypeSplashMask:
@@ -1087,34 +1131,6 @@ placeWin (CompWindow *w,
 	goto done_check_denied_focus;
     }
 
-    /* Find windows that matter (not minimized, on same workspace
-     * as placed window, may be shaded - if shaded we pretend it isn't
-     * for placement purposes)
-     */
-    for (wi = s->windows; wi; wi = wi->next)
-    {
-	if (!wi->shaded && wi->attrib.map_state != IsViewable)
-	    continue;
-
-	if (wi->serverX >= workArea.x + workArea.width  ||
-	    wi->serverY + wi->serverWidth <= workArea.x ||
-	    wi->serverY >= workArea.y + workArea.height ||
-	    wi->serverY + wi->serverHeight <= workArea.y)
-	    continue;
-
-	if (wi->attrib.override_redirect)
-	    continue;
-
-	if (wi->state & (CompWindowTypeDesktopMask    |
-			 CompWindowTypeDockMask       |
-			 CompWindowTypeFullscreenMask |
-			 CompWindowTypeUnknownMask))
-	    continue;
-
-	if (wi != w)
-	    windows = g_list_prepend (windows, wi);
-    }
-
     /* "Origin" placement algorithm */
     x = x0;
     y = y0;
@@ -1137,13 +1153,7 @@ placeWin (CompWindow *w,
     {
 	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
 	case PLACE_MODE_CASCADE:
-	    if (placeCascadeFindFirstFit (w, windows, x, y, &x, &y))
-		goto done_check_denied_focus;
-
-	    /* if the window wasn't placed at the origin of screen,
-	     * cascade it onto the current screen
-	     */
-	    placeCascadeFindNext (w, windows, x, y, &x, &y);
+	    placeCascade (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_CENTERED:
 	    placeCentered (w, &workArea, &x, &y);
