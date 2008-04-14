@@ -223,67 +223,55 @@ rectangleIntersect (XRectangle *src1,
 		    XRectangle *src2,
 		    XRectangle *dest)
 {
-    int dest_x, dest_y;
-    int dest_w, dest_h;
-    int return_val;
+    int destX, destY;
+    int destW, destH;
 
     g_return_val_if_fail (src1 != NULL, FALSE);
     g_return_val_if_fail (src2 != NULL, FALSE);
     g_return_val_if_fail (dest != NULL, FALSE);
 
-    return_val = FALSE;
+    destX = MAX (src1->x, src2->x);
+    destY = MAX (src1->y, src2->y);
+    destW = MIN (src1->x + src1->width, src2->x + src2->width) - destX;
+    destH = MIN (src1->y + src1->height, src2->y + src2->height) - destY;
 
-    dest_x = MAX (src1->x, src2->x);
-    dest_y = MAX (src1->y, src2->y);
-    dest_w = MIN (src1->x + src1->width, src2->x + src2->width) - dest_x;
-    dest_h = MIN (src1->y + src1->height, src2->y + src2->height) - dest_y;
-
-    if (dest_w > 0 && dest_h > 0)
+    if (destW <= 0 || destH <= 0)
     {
-	dest->x = dest_x;
-	dest->y = dest_y;
-	dest->width = dest_w;
-	dest->height = dest_h;
-	return_val = TRUE;
-    }
-    else
-    {
-	dest->width = 0;
+	dest->width  = 0;
 	dest->height = 0;
+	return FALSE;
     }
 
-    return return_val;
+    dest->x = destX;
+    dest->y = destY;
+    dest->width = destW;
+    dest->height = destH;
+
+    return TRUE;
 }
 
 static void
-get_workarea_of_current_output_device (CompScreen *s,
-				       XRectangle *area)
+getWindowExtentsRect (CompWindow *w,
+		      XRectangle *rect)
 {
-    getWorkareaForOutput (s, s->currentOutputDev, area);
-}
-
-static void
-get_outer_rect_of_window (CompWindow *w,
-			  XRectangle *r)
-{
-    r->x      = WIN_FULL_X (w);
-    r->y      = WIN_FULL_Y (w);
-    r->width  = WIN_FULL_W (w);
-    r->height = WIN_FULL_H (w);
+    rect->x      = WIN_FULL_X (w);
+    rect->y      = WIN_FULL_Y (w);
+    rect->width  = WIN_FULL_W (w);
+    rect->height = WIN_FULL_H (w);
 }
 
 static gboolean
-rectangle_overlaps_some_window (XRectangle *rect,
-				GList      *windows)
+rectOverlapsWindow (XRectangle *rect,
+		    GList      *windows)
 {
-    GList *tmp;
+    GList      *tmp;
     XRectangle dest;
 
     tmp = windows;
-    while (tmp != NULL)
+    while (tmp)
     {
 	CompWindow *other = tmp->data;
-	XRectangle other_rect;
+	XRectangle otherRect;
 
 	switch (other->type) {
 	case CompWindowTypeDockMask:
@@ -298,9 +286,9 @@ rectangle_overlaps_some_window (XRectangle *rect,
 	case CompWindowTypeUtilMask:
 	case CompWindowTypeToolbarMask:
 	case CompWindowTypeMenuMask:
-	    get_outer_rect_of_window (other, &other_rect);
+	    getWindowExtentsRect (other, &otherRect);
 
-	    if (rectangleIntersect (rect, &other_rect, &dest))
+	    if (rectangleIntersect (rect, &otherRect, &dest))
 		return TRUE;
 	    break;
 	}
@@ -312,8 +300,8 @@ rectangle_overlaps_some_window (XRectangle *rect,
 }
 
 static gint
-leftmost_cmp (gconstpointer a,
-	      gconstpointer b)
+compareLeftmost (gconstpointer a,
+		 gconstpointer b)
 {
     CompWindow *aw = (gpointer) a;
     CompWindow *bw = (gpointer) b;
@@ -331,8 +319,8 @@ leftmost_cmp (gconstpointer a,
 }
 
 static gint
-topmost_cmp (gconstpointer a,
-	     gconstpointer b)
+compareTopmost (gconstpointer a,
+		gconstpointer b)
 {
     CompWindow *aw = (gpointer) a;
     CompWindow *bw = (gpointer) b;
@@ -350,13 +338,13 @@ topmost_cmp (gconstpointer a,
 }
 
 static gint
-northwestcmp (gconstpointer a,
-	      gconstpointer b)
+compareNorthWestCorner (gconstpointer a,
+			gconstpointer b)
 {
     CompWindow *aw = (gpointer) a;
     CompWindow *bw = (gpointer) b;
-    int	       from_origin_a;
-    int	       from_origin_b;
+    int	       fromOriginA;
+    int	       fromOriginB;
     int	       ax, ay, bx, by;
 
     ax = WIN_FULL_X (aw);
@@ -366,20 +354,20 @@ northwestcmp (gconstpointer a,
     by = WIN_FULL_Y (bw);
 
     /* probably there's a fast good-enough-guess we could use here. */
-    from_origin_a = sqrt (ax * ax + ay * ay);
-    from_origin_b = sqrt (bx * bx + by * by);
+    fromOriginA = sqrt (ax * ax + ay * ay);
+    fromOriginB = sqrt (bx * bx + by * by);
 
-    if (from_origin_a < from_origin_b)
+    if (fromOriginA < fromOriginB)
 	return -1;
-    else if (from_origin_a > from_origin_b)
+    else if (fromOriginA > fromOriginB)
 	return 1;
     else
 	return 0;
 }
 
 static void
-center_tile_rect_in_area (XRectangle *rect,
-			  XRectangle *work_area)
+centerTileRectInArea (XRectangle *rect,
+		      XRectangle *workArea)
 {
     int fluff;
 
@@ -389,20 +377,30 @@ center_tile_rect_in_area (XRectangle *rect,
      * as a group)
      */
 
-    fluff = (work_area->width % (rect->width + 1)) / 2;
-    rect->x = work_area->x + fluff;
-    fluff = (work_area->height % (rect->height + 1)) / 3;
-    rect->y = work_area->y + fluff;
+    fluff   = (workArea->width % (rect->width + 1)) / 2;
+    rect->x = workArea->x + fluff;
+
+    fluff   = (workArea->height % (rect->height + 1)) / 3;
+    rect->y = workArea->y + fluff;
 }
 
 static gboolean
-rect_fits_in_work_area (XRectangle *work_area,
-			XRectangle *rect)
+rectFitsInWorkarea (XRectangle *workArea,
+		    XRectangle *rect)
 {
-    return ((rect->x >= work_area->x) &&
-	    (rect->y >= work_area->y) &&
-	    (rect->x + rect->width <= work_area->x + work_area->width) &&
-	    (rect->y + rect->height <= work_area->y + work_area->height));
+    if (rect->x < workArea->x)
+	return FALSE;
+
+    if (rect->y < workArea->y)
+	return FALSE;
+
+    if (rect->x + rect->width > workArea->x + workArea->width)
+	return FALSE;
+
+    if (rect->y + rect->height > workArea->y + workArea->height)
+	return FALSE;
+
+    return TRUE;
 }
 
 /* Find the leftmost, then topmost, empty area on the workspace
@@ -414,12 +412,12 @@ rect_fits_in_work_area (XRectangle *work_area,
  * don't want to create a 1x1 Emacs.
  */
 static gboolean
-find_first_fit (CompWindow *w,
-		GList      *windows,
-		int        x,
-		int        y,
-		int        *new_x,
-		int        *new_y)
+placeCascadefindFirstFit (CompWindow *w,
+			  GList      *windows,
+			  int        x,
+			  int        y,
+			  int        *newX,
+			  int        *newY)
 {
     /* This algorithm is limited - it just brute-force tries
      * to fit the window in a small number of locations that are aligned
@@ -428,124 +426,121 @@ find_first_fit (CompWindow *w,
      * of each existing window, aligned with the left/top of the
      * existing window in each of those cases.
      */
-    int	       retval;
-    GList      *below_sorted;
-    GList      *right_sorted;
+    Bool       retval;
+    GList      *belowSorted;
+    GList      *rightSorted;
     GList      *tmp;
     XRectangle rect;
-    XRectangle work_area;
+    XRectangle workArea;
 
     retval = FALSE;
 
     /* Below each window */
-    below_sorted = g_list_copy (windows);
-    below_sorted = g_list_sort (below_sorted, leftmost_cmp);
-    below_sorted = g_list_sort (below_sorted, topmost_cmp);
+    belowSorted = g_list_copy (windows);
+    belowSorted = g_list_sort (belowSorted, compareLeftmost);
+    belowSorted = g_list_sort (belowSorted, compareTopmost);
 
     /* To the right of each window */
-    right_sorted = g_list_copy (windows);
-    right_sorted = g_list_sort (right_sorted, topmost_cmp);
-    right_sorted = g_list_sort (right_sorted, leftmost_cmp);
+    rightSorted = g_list_copy (windows);
+    rightSorted = g_list_sort (rightSorted, compareTopmost);
+    rightSorted = g_list_sort (rightSorted, compareLeftmost);
 
-    get_outer_rect_of_window (w, &rect);
+    getWindowExtentsRect (w, &rect);
 
-    get_workarea_of_current_output_device (w->screen, &work_area);
+    getWorkareaForOutput (w->screen, w->screen->currentOutputDev, &workArea);
 
-    work_area.x += (w->initialViewportX - w->screen->x) *
-	w->screen->width;
-    work_area.y += (w->initialViewportY - w->screen->y) *
-	w->screen->height;
+    workArea.x += (w->initialViewportX - w->screen->x) * w->screen->width;
+    workArea.y += (w->initialViewportY - w->screen->y) * w->screen->height;
 
-    center_tile_rect_in_area (&rect, &work_area);
+    centerTileRectInArea (&rect, &workArea);
 
-    if (rect_fits_in_work_area (&work_area, &rect) &&
-	!rectangle_overlaps_some_window (&rect, windows))
+    if (rectFitsInWorkarea (&workArea, &rect) &&
+	!rectOverlapsWindow (&rect, windows))
     {
-	*new_x = rect.x + w->input.left;
-	*new_y = rect.y + w->input.top;
+	*newX = rect.x + w->input.left;
+	*newY = rect.y + w->input.top;
 
 	retval = TRUE;
-
-	goto out;
     }
 
-    /* try below each window */
-    tmp = below_sorted;
-    while (tmp != NULL)
+    if (!retval)
     {
-	CompWindow *wi = tmp->data;
-	XRectangle outer_rect;
-
-	get_outer_rect_of_window (wi, &outer_rect);
-
-	rect.x = outer_rect.x;
-	rect.y = outer_rect.y + outer_rect.height;
-
-	if (rect_fits_in_work_area (&work_area, &rect) &&
-	    !rectangle_overlaps_some_window (&rect, below_sorted))
+	/* try below each window */
+	tmp = belowSorted;
+	while (tmp)
 	{
-	    *new_x = rect.x + w->input.left;
-	    *new_y = rect.y + w->input.top;
+	    CompWindow *wi = tmp->data;
+	    XRectangle outerRect;
 
-	    retval = TRUE;
+	    getWindowExtentsRect (wi, &outerRect);
 
-	    goto out;
+	    rect.x = outerRect.x;
+	    rect.y = outerRect.y + outerRect.height;
+
+	    if (rectFitsInWorkarea (&workArea, &rect) &&
+		!rectOverlapsWindow (&rect, belowSorted))
+	    {
+		*newX = rect.x + w->input.left;
+		*newY = rect.y + w->input.top;
+
+		retval = TRUE;
+	    }
+
+	    tmp = tmp->next;
 	}
-
-	tmp = tmp->next;
     }
 
-    /* try to the right of each window */
-    tmp = right_sorted;
-    while (tmp != NULL)
+    if (!retval)
     {
-	CompWindow *wi = tmp->data;
-	XRectangle outer_rect;
-
-	get_outer_rect_of_window (wi, &outer_rect);
-
-	rect.x = outer_rect.x + outer_rect.width;
-	rect.y = outer_rect.y;
-
-	if (rect_fits_in_work_area (&work_area, &rect) &&
-	    !rectangle_overlaps_some_window (&rect, right_sorted))
+	/* try to the right of each window */
+	tmp = rightSorted;
+	while (tmp)
 	{
-	    *new_x = rect.x + w->input.left;
-	    *new_y = rect.y + w->input.top;
+	    CompWindow *wi = tmp->data;
+	    XRectangle outerRect;
 
-	    retval = TRUE;
+	    getWindowExtentsRect (wi, &outerRect);
 
-	    goto out;
+	    rect.x = outerRect.x + outerRect.width;
+	    rect.y = outerRect.y;
+
+	    if (rectFitsInWorkarea (&workArea, &rect) &&
+		!rectOverlapsWindow (&rect, rightSorted))
+	    {
+		*newX = rect.x + w->input.left;
+		*newY = rect.y + w->input.top;
+
+		retval = TRUE;
+	    }
+
+	    tmp = tmp->next;
 	}
-
-	tmp = tmp->next;
     }
 
-out:
-    g_list_free (below_sorted);
-    g_list_free (right_sorted);
+    g_list_free (belowSorted);
+    g_list_free (rightSorted);
 
     return retval;
 }
 
 static void
-find_next_cascade (CompWindow *w,
-		   GList      *windows,
-		   int        x,
-		   int        y,
-		   int        *new_x,
-		   int        *new_y)
+placeCascadeFindNext (CompWindow *w,
+		      GList      *windows,
+		      int        x,
+		      int        y,
+		      int        *newX,
+		      int        *newY)
 {
     GList      *tmp;
     GList      *sorted;
-    int	       cascade_x, cascade_y;
-    int	       x_threshold, y_threshold;
-    int	       window_width, window_height;
-    int	       cascade_stage;
-    XRectangle work_area;
+    int	       cascadeX, cascadeY;
+    int	       xThreshold, yThreshold;
+    int	       winWidth, winHeight;
+    int	       cascadeStage;
+    XRectangle workArea;
 
     sorted = g_list_copy (windows);
-    sorted = g_list_sort (sorted, northwestcmp);
+    sorted = g_list_sort (sorted, compareNorthWestCorner);
 
     /* This is a "fuzzy" cascade algorithm.
      * For each window in the list, we find where we'd cascade a
@@ -558,27 +553,27 @@ find_next_cascade (CompWindow *w,
      */
 #define CASCADE_FUZZ 15
 
-    x_threshold = MAX (w->input.left, CASCADE_FUZZ);
-    y_threshold = MAX (w->input.top, CASCADE_FUZZ);
+    xThreshold = MAX (w->input.left, CASCADE_FUZZ);
+    yThreshold = MAX (w->input.top, CASCADE_FUZZ);
 
     /* Find furthest-SE origin of all workspaces.
      * cascade_x, cascade_y are the target position
      * of NW corner of window frame.
      */
 
-    get_workarea_of_current_output_device (w->screen, &work_area);
+    getWorkareaForOutput (w->screen, w->screen->currentOutputDev, &workArea);
 
-    cascade_x = MAX (0, work_area.x);
-    cascade_y = MAX (0, work_area.y);
+    cascadeX = MAX (0, workArea.x);
+    cascadeY = MAX (0, workArea.y);
 
     /* Find first cascade position that's not used. */
 
-    window_width = WIN_FULL_W (w);
-    window_height = WIN_FULL_H (w);
+    winWidth = WIN_FULL_W (w);
+    winHeight = WIN_FULL_H (w);
 
-    cascade_stage = 0;
+    cascadeStage = 0;
     tmp = sorted;
-    while (tmp != NULL)
+    while (tmp)
     {
 	CompWindow *wi;
 	int	   wx, wy;
@@ -589,38 +584,32 @@ find_next_cascade (CompWindow *w,
 	wx = WIN_FULL_X (wi);
 	wy = WIN_FULL_Y (wi);
 
-	if (ABS (wx - cascade_x) < x_threshold &&
-	    ABS (wy - cascade_y) < y_threshold)
+	if (ABS (wx - cascadeX) < xThreshold &&
+	    ABS (wy - cascadeY) < yThreshold)
 	{
 	    /* This window is "in the way", move to next cascade
 	     * point. The new window frame should go at the origin
 	     * of the client window we're stacking above.
 	     */
-	    wx = wi->serverX;
-	    wy = wi->serverY;
-
-	    cascade_x = wx;
-	    cascade_y = wy;
+	    wx = cascadeX = wi->serverX;
+	    wy = cascadeY = wi->serverY;
 
 	    /* If we go off the screen, start over with a new cascade */
-	    if (((cascade_x + window_width) >
-		 (work_area.x + work_area.width)) ||
-		((cascade_y + window_height) >
-		 (work_area.y + work_area.height)))
+	    if ((cascadeX + winWidth > workArea.x + workArea.width) ||
+		(cascadeY + winHeight > workArea.y + workArea.height))
 	    {
-		cascade_x = MAX (0, work_area.x);
-		cascade_y = MAX (0, work_area.y);
+		cascadeX = MAX (0, workArea.x);
+		cascadeY = MAX (0, workArea.y);
 
 #define CASCADE_INTERVAL 50 /* space between top-left corners of cascades */
 
-		cascade_stage += 1;
-		cascade_x += CASCADE_INTERVAL * cascade_stage;
+		cascadeStage += 1;
+		cascadeX += CASCADE_INTERVAL * cascadeStage;
 
 		/* start over with a new cascade translated to the right,
 		 * unless we are out of space
 		 */
-		if ((cascade_x + window_width) <
-		    (work_area.x + work_area.width))
+		if (cascadeX + winWidth < workArea.x + workArea.width)
 		{
 		    tmp = sorted;
 		    continue;
@@ -628,7 +617,7 @@ find_next_cascade (CompWindow *w,
 		else
 		{
 		    /* All out of space, this cascade_x won't work */
-		    cascade_x = MAX (0, work_area.x);
+		    cascadeX = MAX (0, workArea.x);
 		    break;
 		}
 	    }
@@ -648,36 +637,36 @@ find_next_cascade (CompWindow *w,
     g_list_free (sorted);
 
     /* Convert coords to position of window, not position of frame. */
-    *new_x = cascade_x + w->input.left;
-    *new_y = cascade_y + w->input.top;
+    *newX = cascadeX + w->input.left;
+    *newY = cascadeY + w->input.top;
 }
 
 static void
 placeCentered (CompWindow *w,
-	       XRectangle *workarea,
+	       XRectangle *workArea,
 	       int	  *x,
 	       int	  *y)
 {
-    *x = workarea->x + (workarea->width - w->serverWidth) / 2;
-    *y = workarea->y + (workarea->height - w->serverHeight) / 2;
+    *x = workArea->x + (workArea->width - w->serverWidth) / 2;
+    *y = workArea->y + (workArea->height - w->serverHeight) / 2;
 }
 
 static void
 placeRandom (CompWindow *w,
-	     XRectangle *workarea,
+	     XRectangle *workArea,
 	     int	*x,
 	     int	*y)
 {
     int remainX, remainY;
 
-    *x = workarea->x;
-    *y = workarea->y;
+    *x = workArea->x;
+    *y = workArea->y;
 
-    remainX = workarea->width - w->serverWidth;
+    remainX = workArea->width - w->serverWidth;
     if (remainX > 0)
 	*x += rand () % remainX;
 
-    remainY = workarea->height - w->serverHeight;
+    remainY = workArea->height - w->serverHeight;
     if (remainY > 0)
 	*y += rand () % remainY;
 }
@@ -689,7 +678,7 @@ placeRandom (CompWindow *w,
 
 static void
 placeSmart (CompWindow *w,
-	    XRectangle *workarea,
+	    XRectangle *workArea,
 	    int        *x,
 	    int        *y)
 {
@@ -703,37 +692,37 @@ placeSmart (CompWindow *w,
      * adapted for Compiz by Bellegarde Cedric (gnumdk(at)gmail.com)
      */
     CompWindow *wi;
-    long int overlap, minOverlap = 0;
-    int xOptimal, yOptimal;
-    int possible;
+    int        overlap, minOverlap = 0;
+    int        xOptimal, yOptimal;
+    int        possible;
 
     /* temp coords */
     int cxl, cxr, cyt, cyb;
     /* temp coords */
-    int  xl,  xr,  yt,  yb;
+    int xl,  xr,  yt,  yb;
     /* temp holder */
     int basket;
     /* CT lame flag. Don't like it. What else would do? */
     Bool firstPass = TRUE;
 
     /* get the maximum allowed windows space */
-    int xTmp = workarea->x;
-    int yTmp = workarea->y;
-
-    xOptimal = xTmp; yOptimal = yTmp;
+    int xTmp = workArea->x;
+    int yTmp = workArea->y;
 
     /* client gabarit */
     int cw = WIN_FULL_W (w) - 1;
     int ch = WIN_FULL_H (w) - 1;
 
+    xOptimal = xTmp;
+    yOptimal = yTmp;
+
     /* loop over possible positions */
     do
     {
 	/* test if enough room in x and y directions */
-	if (yTmp + ch > (workarea->y + workarea->height) &&
-	    ch < workarea->height)
+	if (yTmp + ch > workArea->y + workArea->height && ch < workArea->height)
 	    overlap = H_WRONG; /* this throws the algorithm to an exit */
-	else if (xTmp + cw > (workarea->x + workarea->width))
+	else if (xTmp + cw > workArea->x + workArea->width)
 	    overlap = W_WRONG;
 	else
 	{
@@ -762,11 +751,13 @@ placeSmart (CompWindow *w,
 		yb = WIN_FULL_Y (wi) + WIN_FULL_H (wi);
 
 		/* if windows overlap, calc the overall overlapping */
-		if ((cxl < xr) && (cxr > xl) &&
-		    (cyt < yb) && (cyb > yt))
+		if (cxl < xr && cxr > xl && cyt < yb && cyb > yt)
 		{
-		    xl = MAX (cxl, xl); xr = MIN (cxr, xr);
-		    yt = MAX (cyt, yt); yb = MIN (cyb, yb);
+		    xl = MAX (cxl, xl);
+		    xr = MIN (cxr, xr);
+		    yt = MAX (cyt, yt);
+		    yb = MIN (cyb, yb);
+
 		    if (wi->state & CompWindowStateAboveMask)
 			overlap += 16 * (xr - xl) * (yb - yt);
 		    else if (wi->state & CompWindowStateBelowMask)
@@ -787,7 +778,7 @@ placeSmart (CompWindow *w,
 
 	if (firstPass)
 	{
-	    firstPass = FALSE;
+	    firstPass  = FALSE;
 	    minOverlap = overlap;
 	}
 	/* CT save the best position and the minimum overlap up to now */
@@ -801,9 +792,10 @@ placeSmart (CompWindow *w,
 	/* really need to loop? test if there's any overlap */
 	if (overlap > NONE)
 	{
-	    possible = workarea->x + workarea->width;
+	    possible = workArea->x + workArea->width;
 
-	    if (possible - cw > xTmp) possible -= cw;
+	    if (possible - cw > xTmp)
+		possible -= cw;
 
 	    /* compare to the position of each client on the same desk */
 	    for (wi = w->screen->windows; wi; wi = wi->next)
@@ -826,12 +818,13 @@ placeSmart (CompWindow *w,
 		/* if not enough room above or under the current
 		 * client determine the first non-overlapped x position
 		 */
-		if ((yTmp < yb) && (yt < ch + yTmp))
+		if (yTmp < yb && yt < ch + yTmp)
 		{
-		    if ((xr > xTmp) && (possible > xr)) possible = xr;
+		    if (xr > xTmp && possible > xr)
+			possible = xr;
 
 		    basket = xl - cw;
-		    if ((basket > xTmp) && (possible > basket))
+		    if (basket > xTmp && possible > basket)
 			possible = basket;
 		}
 	    }
@@ -840,10 +833,11 @@ placeSmart (CompWindow *w,
 	/* else ==> not enough x dimension (overlap was wrong on horizontal) */
 	else if (overlap == W_WRONG)
 	{
-	    xTmp = workarea->x;
-	    possible = workarea->y + workarea->height;
+	    xTmp     = workArea->x;
+	    possible = workArea->y + workArea->height;
 
-	    if (possible - ch > yTmp) possible -= ch;
+	    if (possible - ch > yTmp)
+		possible -= ch;
 
 	    /* test the position of each window on the desk */
 	    for (wi = w->screen->windows; wi ; wi = wi->next)
@@ -866,21 +860,21 @@ placeSmart (CompWindow *w,
 		/* if not enough room to the left or right of the current
 		 * client determine the first non-overlapped y position
 		 */
-		if ((yb > yTmp) && (possible > yb))
+		if (yb > yTmp && possible > yb)
 		    possible = yb;
 
 		basket = yt - ch;
-		if ((basket > yTmp) && (possible > basket))
+		if (basket > yTmp && possible > basket)
 		    possible = basket;
 	    }
 	    yTmp = possible;
 	}
     }
-    while ((overlap != NONE) && (overlap != H_WRONG) && yTmp <
-	   (workarea->y + workarea->height));
+    while (overlap != NONE && overlap != H_WRONG &&
+	   yTmp < workArea->y + workArea->height);
 
-    if (ch >= workarea->height)
-	yOptimal = workarea->y;
+    if (ch >= workArea->height)
+	yOptimal = workArea->y;
 
     *x = xOptimal + w->input.left;
     *y = yOptimal + w->input.top;
@@ -890,23 +884,22 @@ static void
 placeWin (CompWindow *w,
      	  int        x,
 	  int        y,
-	  int        *new_x,
-	  int        *new_y)
+	  int        *newX,
+	  int        *newY)
 {
+    CompScreen *s = w->screen;
     CompWindow *wi;
     GList      *windows;
-    XRectangle work_area;
-    int	       x0 = (w->initialViewportX - w->screen->x) *
-	w->screen->width;
-    int	       y0 = (w->initialViewportY - w->screen->y) *
-	w->screen->height;
+    XRectangle workArea;
+    int	       x0 = (w->initialViewportX - s->x) * s->width;
+    int	       y0 = (w->initialViewportY - s->y) * s->height;
 
-    PLACE_SCREEN (w->screen);
+    PLACE_SCREEN (s);
 
-    get_workarea_of_current_output_device (w->screen, &work_area);
+    getWorkareaForOutput (s, s->currentOutputDev, &workArea);
 
-    work_area.x += x0;
-    work_area.y += y0;
+    workArea.x += x0;
+    workArea.y += y0;
 
     windows = NULL;
 
@@ -948,10 +941,10 @@ placeWin (CompWindow *w,
 			 CompWindowStateMaximizedHorzMask))
     {
 	if (w->state & CompWindowStateMaximizedVertMask)
-	    y = work_area.y + w->input.top;
+	    y = workArea.y + w->input.top;
 
 	if (w->state & CompWindowStateMaximizedHorzMask)
-	    x = work_area.x + w->input.left;
+	    x = workArea.x + w->input.left;
 
 	goto done;
     }
@@ -1008,8 +1001,7 @@ placeWin (CompWindow *w,
 
 	CompWindow *parent;
 
-	parent = findWindowAtDisplay (w->screen->display,
-				      w->transientFor);
+	parent = findWindowAtDisplay (s->display, w->transientFor);
 	if (parent)
 	{
 	    int	width;
@@ -1044,7 +1036,7 @@ placeWin (CompWindow *w,
 		CompWindowExtents extents;
 
 		output = outputDeviceForWindow (parent);
-		getWorkareaForOutput (w->screen, output, &area);
+		getWorkareaForOutput (s, output, &area);
 
 		extents.left   = x - w->input.left;
 		extents.top    = y - w->input.top;
@@ -1077,8 +1069,8 @@ placeWin (CompWindow *w,
 	/* Center on screen */
 	int width, height;
 
-	width  = w->screen->width;
-	height = w->screen->height;
+	width  = s->width;
+	height = s->height;
 
 	x = (width - w->serverWidth) / 2;
 	y = (height - w->serverHeight) / 2;
@@ -1090,15 +1082,15 @@ placeWin (CompWindow *w,
      * as placed window, may be shaded - if shaded we pretend it isn't
      * for placement purposes)
      */
-    for (wi = w->screen->windows; wi; wi = wi->next)
+    for (wi = s->windows; wi; wi = wi->next)
     {
 	if (!wi->shaded && wi->attrib.map_state != IsViewable)
 	    continue;
 
-	if (wi->serverX >= work_area.x + work_area.width       ||
-	    wi->serverY + wi->serverWidth <= work_area.x       ||
-	    wi->serverY >= work_area.y + work_area.height      ||
-	    wi->serverY + wi->serverHeight <= work_area.y)
+	if (wi->serverX >= workArea.x + workArea.width  ||
+	    wi->serverY + wi->serverWidth <= workArea.x ||
+	    wi->serverY >= workArea.y + workArea.height ||
+	    wi->serverY + wi->serverHeight <= workArea.y)
 	    continue;
 
 	if (wi->attrib.override_redirect)
@@ -1122,36 +1114,36 @@ placeWin (CompWindow *w,
     {
 	int output;
 
-	output = outputDeviceForGeometry (w->screen, x, y,
+	output = outputDeviceForGeometry (s, x, y,
 					  w->serverWidth,
 					  w->serverHeight,
 					  w->serverBorderWidth);
 
-	getWorkareaForOutput (w->screen, output, &work_area);
+	getWorkareaForOutput (s, output, &workArea);
 
-	work_area.x += x0;
-	work_area.y += y0;
+	workArea.x += x0;
+	workArea.y += y0;
     }
     else
     {
 	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
 	case PLACE_MODE_CASCADE:
-	    if (find_first_fit (w, windows, x, y, &x, &y))
+	    if (placeCascadeFindFirstFit (w, windows, x, y, &x, &y))
 		goto done_check_denied_focus;
 
 	    /* if the window wasn't placed at the origin of screen,
 	     * cascade it onto the current screen
 	     */
-	    find_next_cascade (w, windows, x, y, &x, &y);
+	    placeCascadeFindNext (w, windows, x, y, &x, &y);
 	    break;
 	case PLACE_MODE_CENTERED:
-	    placeCentered (w, &work_area, &x, &y);
+	    placeCentered (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_RANDOM:
-	    placeRandom (w, &work_area, &x, &y);
+	    placeRandom (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_SMART:
-	    placeSmart (w, &work_area, &x, &y);
+	    placeSmart (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_MAXIMIZE:
 	    maximizeWindow (w, MAXIMIZE_STATE);
@@ -1174,27 +1166,27 @@ done:
     {
 	XRectangle outer;
 
-	get_outer_rect_of_window (w, &outer);
+	getWindowExtentsRect (w, &outer);
 
-	if (outer.width >= work_area.width && outer.height >= work_area.height)
+	if (outer.width >= workArea.width && outer.height >= workArea.height)
 	    maximizeWindow (w, MAXIMIZE_STATE);
     }
 
-    if (x + w->serverWidth + w->input.right > work_area.x + work_area.width)
-	x = work_area.x + work_area.width - w->serverWidth - w->input.right;
+    if (x + w->serverWidth + w->input.right > workArea.x + workArea.width)
+	x = workArea.x + workArea.width - w->serverWidth - w->input.right;
 
-    if (x - w->input.left < work_area.x)
-	x = work_area.x + w->input.left;
+    if (x - w->input.left < workArea.x)
+	x = workArea.x + w->input.left;
 
-    if (y + w->serverHeight + w->input.bottom > work_area.y + work_area.height)
-	y = work_area.y + work_area.height - w->serverHeight - w->input.bottom;
+    if (y + w->serverHeight + w->input.bottom > workArea.y + workArea.height)
+	y = workArea.y + workArea.height - w->serverHeight - w->input.bottom;
 
-    if (y - w->input.top < work_area.y)
-	y = work_area.y + w->input.top;
+    if (y - w->input.top < workArea.y)
+	y = workArea.y + w->input.top;
 
 done_no_constraints:
-    *new_x = x;
-    *new_y = y;
+    *newX = x;
+    *newY = y;
 }
 
 static void
