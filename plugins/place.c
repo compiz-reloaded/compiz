@@ -1346,8 +1346,15 @@ placePlaceWindow (CompWindow *w,
 	    viewportX = MAX (MIN (viewportX, s->hsize), 0);
 	    viewportY = MAX (MIN (viewportY, s->vsize), 0);
 
-	    *newX += (viewportX - s->x) * s->width;
-	    *newY += (viewportY - s->y) * s->height;
+	    x = *newX % s->width;
+	    if (x < 0)
+		x += s->width;
+	    y = *newY % s->height;
+	    if (y < 0)
+		y += s->height;
+
+	    *newX = x + (viewportX - s->x) * s->width;
+	    *newY = y + (viewportY - s->y) * s->height;
 	}
     }
 
