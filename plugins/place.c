@@ -81,6 +81,20 @@ typedef enum {
     PlaceCenteredOnScreen
 } PlacementStrategy;
 
+/* helper macro that filters out windows irrelevant for placement */
+#define FOR_EACH_PLACEMENT_WIN(w, wi)                          \
+    for (wi = (w)->screen->windows; wi; wi = wi->next)         \
+    {                                                          \
+        if (!wi->shaded && wi->attrib.map_state != IsViewable) \
+            continue;                                          \
+        if (w->attrib.override_redirect)                       \
+            continue;                                          \
+        if (wi == w)                                           \
+            continue;                                          \
+        if (wi->wmType & (CompWindowTypeDockMask |             \
+			  CompWindowTypeDesktopMask))          \
+            continue;
+
 /* helper macros to get the full dimensions of a window,
    including decorations */
 #define WIN_FULL_X(w) ((w)->serverX - (w)->input.left)
@@ -652,12 +666,9 @@ placeCascade (CompWindow *w,
      * as placed window, may be shaded - if shaded we pretend it isn't
      * for placement purposes)
      */
-    for (wi = w->screen->windows; wi; wi = wi->next)
-    {
-	if (!wi->shaded && wi->attrib.map_state != IsViewable)
-	    continue;
-
-	if (wi->attrib.override_redirect)
+    FOR_EACH_PLACEMENT_WIN (w, wi)
+	if (wi->type & (CompWindowTypeFullscreenMask |
+			CompWindowTypeUnknownMask))
 	    continue;
 
 	if (wi->serverX >= workArea->x + workArea->width  ||
@@ -666,14 +677,7 @@ placeCascade (CompWindow *w,
 	    wi->serverY + wi->serverHeight <= workArea->y)
 	    continue;
 
-	if (wi->type & (CompWindowTypeDesktopMask    |
-			CompWindowTypeDockMask       |
-			CompWindowTypeFullscreenMask |
-			CompWindowTypeUnknownMask))
-	    continue;
-
-	if (wi != w)
-	    windows[count++] = wi;
+	windows[count++] = wi;
     }
 
     if (!placeCascadeFindFirstFit (w, windows, count, workArea, *x, *y, x, y))
@@ -779,21 +783,7 @@ placeSmart (CompWindow *w,
 	    cyt = yTmp;
 	    cyb = yTmp + ch;
 
-	    for (wi = w->screen->windows; wi; wi = wi->next)
-	    {
-		if (!wi->shaded && wi->attrib.map_state != IsViewable)
-		    continue;
-
-		if (w->attrib.override_redirect)
-		    continue;
-
-		if (wi == w)
-		    continue;
-
-		if (wi->wmType & (CompWindowTypeDockMask |
-				  CompWindowTypeDesktopMask))
-		    continue;
-
+	    FOR_EACH_PLACEMENT_WIN (w, wi)
 		xl = WIN_FULL_X (wi);
 		yt = WIN_FULL_Y (wi);
 		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
@@ -847,21 +837,7 @@ placeSmart (CompWindow *w,
 		possible -= cw;
 
 	    /* compare to the position of each client on the same desk */
-	    for (wi = w->screen->windows; wi; wi = wi->next)
-	    {
-		if (!wi->shaded && wi->attrib.map_state != IsViewable)
-		    continue;
-
-		if (w->attrib.override_redirect)
-		    continue;
-
-		if (wi == w)
-		    continue;
-
-		if (wi->wmType & (CompWindowTypeDockMask |
-				  CompWindowTypeDesktopMask))
-		    continue;
-
+	    FOR_EACH_PLACEMENT_WIN (w, wi)
 		xl = WIN_FULL_X (wi);
 		yt = WIN_FULL_Y (wi);
 		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
@@ -892,21 +868,7 @@ placeSmart (CompWindow *w,
 		possible -= ch;
 
 	    /* test the position of each window on the desk */
-	    for (wi = w->screen->windows; wi ; wi = wi->next)
-	    {
-		if (!wi->shaded && wi->attrib.map_state != IsViewable)
-		    continue;
-
-		if (w->attrib.override_redirect)
-		    continue;
-
-		if (wi == w)
-		    continue;
-
-		if (wi->wmType & (CompWindowTypeDockMask |
-				  CompWindowTypeDesktopMask))
-		    continue;
-
+	    FOR_EACH_PLACEMENT_WIN (w, wi)
 		xl = WIN_FULL_X (wi);
 		yt = WIN_FULL_Y (wi);
 		xr = WIN_FULL_X (wi) + WIN_FULL_W (wi);
