@@ -319,8 +319,8 @@ leftmost_cmp (gconstpointer a,
     CompWindow *bw = (gpointer) b;
     int	       ax, bx;
 
-    ax = aw->serverX - aw->input.left;
-    bx = bw->serverX - bw->input.left;
+    ax = WIN_FULL_X (aw);
+    bx = WIN_FULL_X (bw);
 
     if (ax < bx)
 	return -1;
@@ -338,8 +338,8 @@ topmost_cmp (gconstpointer a,
     CompWindow *bw = (gpointer) b;
     int	       ay, by;
 
-    ay = aw->serverY - aw->input.top;
-    by = bw->serverY - bw->input.top;
+    ay = WIN_FULL_X (aw);
+    by = WIN_FULL_X (bw);
 
     if (ay < by)
 	return -1;
@@ -359,11 +359,11 @@ northwestcmp (gconstpointer a,
     int	       from_origin_b;
     int	       ax, ay, bx, by;
 
-    ax = aw->serverX - aw->input.left;
-    ay = aw->serverY - aw->input.top;
+    ax = WIN_FULL_X (aw);
+    ay = WIN_FULL_Y (aw);
 
-    bx = bw->serverX - bw->input.left;
-    by = bw->serverY - bw->input.top;
+    bx = WIN_FULL_X (bw);
+    by = WIN_FULL_Y (bw);
 
     /* probably there's a fast good-enough-guess we could use here. */
     from_origin_a = sqrt (ax * ax + ay * ay);
@@ -586,8 +586,8 @@ find_next_cascade (CompWindow *window,
 	w = tmp->data;
 
 	/* we want frame position, not window position */
-	wx = w->serverX - w->input.left;
-	wy = w->serverY - w->input.top;
+	wx = WIN_FULL_X (w);
+	wy = WIN_FULL_Y (w);
 
 	if (ABS (wx - cascade_x) < x_threshold &&
 	    ABS (wy - cascade_y) < y_threshold)
