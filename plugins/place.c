@@ -992,15 +992,16 @@ placeGetPlacementOutput (CompWindow        *w,
 	break;
     case PLACE_MOMODE_POINTER:
 	{
-	    Window wDummy;
-	    int    dummy, xPointer, yPointer;
+	    Window       wDummy;
+	    int          iDummy, xPointer, yPointer;
+	    unsigned int uiDummy;
 
 	    /* this means a server roundtrip, which kind of sucks; thus
 	       this code should be replaced as soon as we have software
 	       cursor rendering and thus have a cached pointer coordinate */
 	    if (XQueryPointer (s->display->display, s->root,
 			       &wDummy, &wDummy, &xPointer, &yPointer,
-			       &dummy, &dummy, &dummy))
+			       &iDummy, &iDummy, &uiDummy))
 	    {
 		return outputDeviceForPoint (s, xPointer, yPointer);
 	    }
