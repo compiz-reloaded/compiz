@@ -441,6 +441,7 @@ typedef void (*event_callback) (WnckWindow *win, XEvent *event);
 static char *program_name;
 
 static GtkWidget     *style_window;
+static GtkWidget     *switcher_label;
 
 static GHashTable    *frame_table;
 static GtkWidget     *action_menu = NULL;
@@ -3667,12 +3668,18 @@ update_switcher_window (WnckWindow *win,
 
 		if (d->layout)
 		    pango_layout_set_text (d->layout, d->name, name_length);
+
+		gtk_label_set_text (GTK_LABEL (switcher_label), d->name);
 	    }
 	}
-	else if (d->layout)
+	else
 	{
-	    g_object_unref (G_OBJECT (d->layout));
-	    d->layout = NULL;
+	    if (d->layout)
+	    {
+		g_object_unref (G_OBJECT (d->layout));
+		d->layout = NULL;
+	    }
+	    gtk_label_set_text (GTK_LABEL (switcher_label), "");
 	}
     }
 
@@ -6585,6 +6592,7 @@ init_settings (WnckScreen *screen)
     GtkSettings	   *settings;
     GdkScreen	   *gdkscreen;
     GdkColormap	   *colormap;
+    AtkObject	   *switcher_label_obj;
 
 #ifdef USE_GCONF
     GConfClient	   *gconf;
@@ -6709,6 +6717,14 @@ init_settings (WnckScreen *screen)
 	gtk_widget_set_colormap (style_window, colormap);
 
     gtk_widget_realize (style_window);
+
+    switcher_label = gtk_label_new ("");
+    switcher_label_obj = gtk_widget_get_accessible (switcher_label);
+    atk_object_set_role (switcher_label_obj, ATK_ROLE_STATUSBAR);
+    gtk_container_add (GTK_CONTAINER (style_window), switcher_label);
+
+    gtk_widget_set_size_request (style_window, 0, 0);
+    gtk_widget_show (style_window);
 
     g_signal_connect_object (style_window, "style-set",
 			     G_CALLBACK (style_changed),
