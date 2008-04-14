@@ -72,6 +72,15 @@ typedef struct _PlaceScreen {
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
+typedef enum {
+    NoPlacement = 0,
+    PlaceOnly,
+    ConstrainOnly,
+    PlaceAndConstrain,
+    PlaceOverParent,
+    PlaceCenteredOnScreen
+} PlacementStrategy;
+
 /* helper macros to get the full dimensions of a window,
    including decorations */
 #define WIN_FULL_X(w) ((w)->serverX - (w)->input.left)
@@ -937,221 +946,186 @@ placeSmart (CompWindow *w,
     *y = yOptimal + w->input.top;
 }
 
-static void
-placeWin (CompWindow *w,
-     	  int        x,
-	  int        y,
-	  int        *newX,
-	  int        *newY)
+static PlacementStrategy
+placeGetStrategyForWindow (CompWindow *w)
 {
-    CompScreen *s = w->screen;
-    XRectangle workArea;
-    int	       x0 = (w->initialViewportX - s->x) * s->width;
-    int	       y0 = (w->initialViewportY - s->y) * s->height;
+    PLACE_SCREEN (w->screen);
 
-    PLACE_SCREEN (s);
-
-    getWorkareaForOutput (s, s->currentOutputDev, &workArea);
-
-    workArea.x += x0;
-    workArea.y += y0;
-
-    switch (w->type) {
-    case CompWindowTypeSplashMask:
-    case CompWindowTypeDialogMask:
-    case CompWindowTypeModalDialogMask:
-    case CompWindowTypeNormalMask:
-	/* Run placement algorithm on these. */
-	break;
-    case CompWindowTypeDockMask:
-    case CompWindowTypeDesktopMask:
-    case CompWindowTypeUtilMask:
-    case CompWindowTypeToolbarMask:
-    case CompWindowTypeMenuMask:
-    case CompWindowTypeFullscreenMask:
-    case CompWindowTypeUnknownMask:
-	/* Assume the app knows best how to place these, no placement
-	 * algorithm ever (other than "leave them as-is")
-	 */
-	goto done_no_constraints;
-	break;
+    if (w->type & (CompWindowTypeDockMask | CompWindowTypeDesktopMask    |
+		   CompWindowTypeUtilMask | CompWindowTypeToolbarMask    |
+		   CompWindowTypeMenuMask | CompWindowTypeFullscreenMask |
+		   CompWindowTypeUnknownMask))
+    {
+	/* assume the app knows best how to place these */
+	return NoPlacement;
     }
 
-    /* don't run placement algorithm on windows that can't be moved */
+    /* no placement for unmovable windows */
     if (!(w->actions & CompWindowActionMoveMask))
-    {
-	goto done_no_constraints;
-    }
-
-    if (w->type & CompWindowTypeFullscreenMask)
-    {
-	x = x0;
-	y = y0;
-	goto done_no_constraints;
-    }
-
-    if (w->state & (CompWindowStateMaximizedVertMask |
-			 CompWindowStateMaximizedHorzMask))
-    {
-	if (w->state & CompWindowStateMaximizedVertMask)
-	    y = workArea.y + w->input.top;
-
-	if (w->state & CompWindowStateMaximizedHorzMask)
-	    x = workArea.x + w->input.left;
-
-	goto done;
-    }
+	return NoPlacement;
 
     if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
     {
-	/* workarounds enabled */
-
-	if ((w->sizeHints.flags & PPosition) ||
-	    (w->sizeHints.flags & USPosition))
-	{
-	    goto done;
-	}
+	if (w->sizeHints.flags & (PPosition | USPosition))
+	    return ConstrainOnly;
     }
     else
     {
-	switch (w->type) {
-	case CompWindowTypeNormalMask:
-	    /* Only accept USPosition on normal windows because the app is full
-	     * of shit claiming the user set -geometry for a dialog or dock
-	     */
-	    if (w->sizeHints.flags & USPosition)
-	    {
-		/* don't constrain with placement algorithm */
-		goto done;
-	    }
-	    break;
-	case CompWindowTypeSplashMask:
-	case CompWindowTypeDialogMask:
-	case CompWindowTypeModalDialogMask:
-	    /* Ignore even USPosition on dialogs, splashscreen */
-	    break;
-	case CompWindowTypeDockMask:
-	case CompWindowTypeDesktopMask:
-	case CompWindowTypeUtilMask:
-	case CompWindowTypeToolbarMask:
-	case CompWindowTypeMenuMask:
-	case CompWindowTypeFullscreenMask:
-	case CompWindowTypeUnknownMask:
-	    /* Assume the app knows best how to place these. */
-	    if (w->sizeHints.flags & PPosition)
-	    {
-		goto done_no_constraints;
-	    }
-	    break;
+	/* Only accept USPosition on normal windows because the app is full
+	 * of shit claiming the user set -geometry for a dialog or dock
+	 */
+	if (w->type & CompWindowTypeNormalMask &&
+	    (w->sizeHints.flags & USPosition))
+	{
+	    return ConstrainOnly;
 	}
     }
 
-    if (w->transientFor &&
+   if (w->transientFor && 
 	(w->type & (CompWindowTypeDialogMask |
 		    CompWindowTypeModalDialogMask)))
     {
-	/* Center horizontally, at top of parent vertically */
+	return PlaceOverParent;
+    }
 
+    if (w->type & (CompWindowTypeDialogMask |
+		   CompWindowTypeModalDialogMask |
+		   CompWindowTypeSplashMask))
+    {
+	return PlaceCenteredOnScreen;
+    }
+
+    return PlaceAndConstrain;
+}
+
+static int
+placeGetPlacementOutput (CompWindow        *w,
+			 PlacementStrategy strategy,
+			 int               x,
+			 int               y)
+{
+    if (strategy == PlaceOverParent)
+    {
+	CompWindow *parent;
+	parent = findWindowAtScreen (w->screen, w->transientFor);
+	if (parent)
+	    return outputDeviceForWindow (parent);
+    }
+    else if (strategy == ConstrainOnly)
+    {
+	return outputDeviceForGeometry (w->screen, x, y, w->serverWidth,
+					w->serverHeight, w->serverBorderWidth);
+    }
+
+    /* FIXME */
+    return w->screen->currentOutputDev;
+}
+
+static void
+placeConstrainToWorkarea (CompWindow *w,
+			  XRectangle *workArea,
+			  int        *x,
+			  int        *y)
+{
+    CompWindowExtents extents;
+
+    extents.left   = *x - w->input.left;
+    extents.top    = *y - w->input.top;
+    extents.right  = *x + w->serverWidth + w->input.right;
+    extents.bottom = *y + w->serverHeight + w->input.bottom;
+
+    if (extents.left < workArea->x)
+	*x += workArea->x - extents.left;
+    else if (extents.right > workArea->x + workArea->width)
+	*x += workArea->x + workArea->width - extents.right;
+
+    if (extents.top < workArea->y)
+	*y += workArea->y - extents.top;
+    else if (extents.bottom > workArea->y + workArea->height)
+	*y += workArea->y + workArea->height - extents.bottom;
+}
+
+static Bool
+placeDoWindowPlacement (CompWindow *w,
+			int        x,
+			int        y,
+			int        *newX,
+			int        *newY)
+{
+    CompScreen        *s = w->screen;
+    XRectangle        workArea;
+    int               targetVpX, targetVpY;
+    int               output;
+    PlacementStrategy strategy;
+
+    PLACE_SCREEN (s);
+
+    strategy = placeGetStrategyForWindow (w);
+
+    if (strategy == NoPlacement)
+	return FALSE;
+
+    if (placeMatchPosition (w, &x, &y))
+    {
+	/* FIXME: perhaps ConstrainOnly? */
+	strategy = NoPlacement;
+    }
+
+    output = placeGetPlacementOutput (w, strategy, x, y);
+    getWorkareaForOutput (s, output, &workArea);
+
+    targetVpX = w->initialViewportX;
+    targetVpY = w->initialViewportY;
+
+    if (strategy == PlaceOverParent)
+    {
 	CompWindow *parent;
 
-	parent = findWindowAtDisplay (s->display, w->transientFor);
+	parent = findWindowAtScreen (s, w->transientFor);
 	if (parent)
 	{
-	    int	width;
+	    /* center over parent horizontally */
+	    x = parent->serverX + (parent->serverWidth / 2) -
+		(w->serverWidth / 2);
 
-	    x = parent->serverX;
-	    y = parent->serverY;
-
-	    width = parent->serverWidth;
-
-	    /* center of parent */
-	    x = x + width / 2;
-
-	    /* center of child over center of parent */
-	    x -= w->serverWidth / 2;
-
-	    /* "visually" center window over parent, leaving twice as
-	     * much space below as on top.
-	     */
-	    y += (parent->serverHeight - w->serverHeight) / 3;
+	    /* "visually" center vertically, leaving twice as much space below
+	       as on top */
+	    y = parent->serverY + (parent->serverHeight - w->serverHeight) / 3;
 
 	    /* put top of child's frame, not top of child's client */
 	    y += w->input.top;
 
-	    /* clip to screen if parent is visible in current viewport */
+	    /* if parent is visible on current viewport, clip to work area;
+	       don't constrain further otherwise */
 	    if (parent->serverX < parent->screen->width   &&
 		parent->serverX + parent->serverWidth > 0 &&
 		parent->serverY < parent->screen->height  &&
 		parent->serverY + parent->serverHeight > 0)
 	    {
-		XRectangle        area;
-		int               output;
-		CompWindowExtents extents;
-
-		output = outputDeviceForWindow (parent);
-		getWorkareaForOutput (s, output, &area);
-
-		extents.left   = x - w->input.left;
-		extents.top    = y - w->input.top;
-		extents.right  = x + w->serverWidth + w->input.right;
-		extents.bottom = y + w->serverHeight +
-		                 w->input.bottom;
-
-		if (extents.left < area.x)
-		    x += area.x - extents.left;
-		else if (extents.right > area.x + area.width)
-		    x += area.x + area.width - extents.right;
-
-		if (extents.top < area.y)
-		    y += area.y - extents.top;
-		else if (extents.bottom > area.y + area.height)
-		    y += area.y + area.height - extents.bottom;
+		defaultViewportForWindow (parent, &targetVpX, &targetVpY);
+		strategy = ConstrainOnly;
 	    }
-
-	    goto done_no_constraints;
+	    else
+	    {
+		strategy = NoPlacement;
+	    }
 	}
     }
 
-    /* FIXME UTILITY with transient set should be stacked up
-     * on the sides of the parent window or something.
-     */
-    if (w->type == CompWindowTypeDialogMask      ||
-	w->type == CompWindowTypeModalDialogMask ||
-	w->type == CompWindowTypeSplashMask)
+    if (strategy == PlaceCenteredOnScreen)
     {
-	/* Center on screen */
-	int width, height;
+	x = (s->width - w->serverWidth) / 2;
+	y = (s->height - w->serverHeight) / 2;
 
-	width  = s->width;
-	height = s->height;
-
-	x = (width - w->serverWidth) / 2;
-	y = (height - w->serverHeight) / 2;
-
-	goto done_check_denied_focus;
+	strategy = ConstrainOnly;
     }
 
-    /* "Origin" placement algorithm */
-    x = x0;
-    y = y0;
+    workArea.x += (targetVpX - s->x) * s->width;
+    workArea.y += (targetVpY - s->y) * s->height;
 
-    if (placeMatchPosition (w, &x, &y))
+    if (strategy == PlaceOnly || strategy == PlaceAndConstrain)
     {
-	int output;
-
-	output = outputDeviceForGeometry (s, x, y,
-					  w->serverWidth,
-					  w->serverHeight,
-					  w->serverBorderWidth);
-
-	getWorkareaForOutput (s, output, &workArea);
-
-	workArea.x += x0;
-	workArea.y += y0;
-    }
-    else
-    {
-	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
+    	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
 	case PLACE_MODE_CASCADE:
 	    placeCascade (w, &workArea, &x, &y);
 	    break;
@@ -1161,51 +1135,37 @@ placeWin (CompWindow *w,
 	case PLACE_MODE_RANDOM:
 	    placeRandom (w, &workArea, &x, &y);
 	    break;
+	case PLACE_MODE_MAXIMIZE:
+	    placeSendWindowMaximizationRequest (w);
+	    break;
 	case PLACE_MODE_SMART:
 	    placeSmart (w, &workArea, &x, &y);
 	    break;
-	case PLACE_MODE_MAXIMIZE:
-	    maximizeWindow (w, MAXIMIZE_STATE);
-	    break;
-	default:
-	    break;
+	}
+
+	/* Maximize windows if they are too big for their work area (bit of
+	 * a hack here). Assume undecorated windows probably don't intend to
+	 * be maximized.
+	 */
+	if ((w->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
+	    (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
+	    !(w->state & CompWindowStateFullscreenMask))
+	{
+    	    if (WIN_FULL_W (w) >= workArea.width &&
+		WIN_FULL_H (w) >= workArea.height)
+	    {
+		placeSendWindowMaximizationRequest (w);
+	    }
 	}
     }
 
-done_check_denied_focus:
+    if (strategy == ConstrainOnly || strategy == PlaceAndConstrain)
+	placeConstrainToWorkarea (w, &workArea, &x, &y);
 
-done:
-    /* Maximize windows if they are too big for their work area (bit of
-     * a hack here). Assume undecorated windows probably don't intend to
-     * be maximized.
-     */
-    if ((w->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
-	(w->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
-	!(w->state & CompWindowStateFullscreenMask))
-    {
-	XRectangle outer;
-
-	getWindowExtentsRect (w, &outer);
-
-	if (outer.width >= workArea.width && outer.height >= workArea.height)
-	    maximizeWindow (w, MAXIMIZE_STATE);
-    }
-
-    if (x + w->serverWidth + w->input.right > workArea.x + workArea.width)
-	x = workArea.x + workArea.width - w->serverWidth - w->input.right;
-
-    if (x - w->input.left < workArea.x)
-	x = workArea.x + w->input.left;
-
-    if (y + w->serverHeight + w->input.bottom > workArea.y + workArea.height)
-	y = workArea.y + workArea.height - w->serverHeight - w->input.bottom;
-
-    if (y - w->input.top < workArea.y)
-	y = workArea.y + w->input.top;
-
-done_no_constraints:
     *newX = x;
     *newY = y;
+
+    return TRUE;
 }
 
 static void
@@ -1361,7 +1321,11 @@ placePlaceWindow (CompWindow *w,
     {
 	int viewportX, viewportY;
 
-	placeWin (w, x, y, newX, newY);
+	if (!placeDoWindowPlacement (w, x, y, newX, newY))
+	{
+	    *newX = x;
+	    *newY = y;
+	}
 
 	if (placeMatchViewport (w, &viewportX, &viewportY))
 	{
