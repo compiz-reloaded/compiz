@@ -6724,6 +6724,7 @@ init_settings (WnckScreen *screen)
     gtk_container_add (GTK_CONTAINER (style_window), switcher_label);
 
     gtk_widget_set_size_request (style_window, 0, 0);
+    gtk_window_move (GTK_WINDOW (style_window), -100, -100);
     gtk_widget_show (style_window);
 
     g_signal_connect_object (style_window, "style-set",
