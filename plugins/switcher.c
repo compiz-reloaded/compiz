@@ -2001,6 +2001,9 @@ switchFiniScreen (CompPlugin *p,
     UNWRAP (ss, s, paintBackground);
     UNWRAP (ss, s, damageWindowRect);
 
+    if (ss->popupWindow)
+	XDestroyWindow (s->display->display, ss->popupWindow);
+
     if (ss->windowsSize)
 	free (ss->windows);
 
