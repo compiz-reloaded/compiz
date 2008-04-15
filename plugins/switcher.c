@@ -590,7 +590,8 @@ switchInitiate (CompScreen            *s,
     if (otherScreenGrabExist (s, "switcher", "scale", "cube", 0))
 	return;
 
-    ss->selection = selection;
+    ss->selection      = selection;
+    ss->selectedWindow = None;
 
     count = switchCountWindows (s);
     if (count < 1)
@@ -660,6 +661,8 @@ switchInitiate (CompScreen            *s,
 	setWindowProp (s->display, ss->popupWindow,
 		       s->display->winDesktopAtom,
 		       0xffffffff);
+
+	setSelectedWindowHint (s);
     }
 
     if (!ss->grabIndex)
@@ -690,8 +693,6 @@ switchInitiate (CompScreen            *s,
 		    XMapWindow (s->display->display, ss->popupWindow);
 		}
 	    }
-
-	    setSelectedWindowHint (s);
 
 	    switchActivateEvent (s, TRUE);
 	}
@@ -769,6 +770,9 @@ switchTerminate (CompDisplay     *d,
 	    {
 		ss->moreAdjust = 1;
 	    }
+
+	    ss->selectedWindow = None;
+	    setSelectedWindowHint (s);
 
 	    ss->lastActiveNum = 0;
 
