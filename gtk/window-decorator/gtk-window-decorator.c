@@ -3668,8 +3668,6 @@ update_switcher_window (WnckWindow *win,
 
 		if (d->layout)
 		    pango_layout_set_text (d->layout, d->name, name_length);
-
-		gtk_label_set_text (GTK_LABEL (switcher_label), d->name);
 	    }
 	}
 	else
@@ -3679,9 +3677,10 @@ update_switcher_window (WnckWindow *win,
 		g_object_unref (G_OBJECT (d->layout));
 		d->layout = NULL;
 	    }
-	    gtk_label_set_text (GTK_LABEL (switcher_label), "");
 	}
     }
+
+    gtk_label_set_text (GTK_LABEL (switcher_label), d->name ? d->name : "");
 
     if (width == d->width && height == d->height)
     {
