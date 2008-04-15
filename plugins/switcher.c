@@ -783,11 +783,14 @@ switchTerminate (CompDisplay     *d,
 }
 
 static Bool
-switchNext (CompDisplay     *d,
-	    CompAction      *action,
-	    CompActionState state,
-	    CompOption      *option,
-	    int	            nOption)
+switchInitiateCommon (CompDisplay           *d,
+		      CompAction            *action,
+		      CompActionState       state,
+		      CompOption            *option,
+		      int                   nOption,
+		      SwitchWindowSelection selection,
+		      Bool                  showPopup,
+		      Bool                  nextWindow)
 {
     CompScreen *s;
     Window     xid;
@@ -801,7 +804,7 @@ switchNext (CompDisplay     *d,
 
 	if (!ss->switching)
 	{
-	    switchInitiate (s, CurrentViewport, TRUE);
+	    switchInitiate (s, selection, showPopup);
 
 	    if (state & CompActionStateInitKey)
 		action->state |= CompActionStateTermKey;
@@ -814,10 +817,21 @@ switchNext (CompDisplay     *d,
 
 	}
 
-	switchToWindow (s, TRUE);
+	switchToWindow (s, nextWindow);
     }
 
     return FALSE;
+}
+
+static Bool
+switchNext (CompDisplay     *d,
+	    CompAction      *action,
+	    CompActionState state,
+	    CompOption      *option,
+	    int	            nOption)
+{
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 CurrentViewport, TRUE, TRUE);
 }
 
 static Bool
@@ -827,34 +841,8 @@ switchPrev (CompDisplay     *d,
 	    CompOption      *option,
 	    int	            nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, CurrentViewport, TRUE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-	}
-
-	switchToWindow (s, FALSE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 CurrentViewport, TRUE, FALSE);
 }
 
 static Bool
@@ -864,34 +852,8 @@ switchNextAll (CompDisplay     *d,
 	       CompOption      *option,
 	       int	       nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, AllViewports, TRUE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-	}
-
-	switchToWindow (s, TRUE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 AllViewports, TRUE, TRUE);
 }
 
 static Bool
@@ -901,34 +863,8 @@ switchPrevAll (CompDisplay     *d,
 	       CompOption      *option,
 	       int	       nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, AllViewports, TRUE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-	}
-
-	switchToWindow (s, FALSE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 AllViewports, TRUE, FALSE);
 }
 
 static Bool
@@ -938,35 +874,8 @@ switchNextNoPopup (CompDisplay     *d,
 		   CompOption      *option,
 		   int	           nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, CurrentViewport, FALSE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-
-	}
-
-	switchToWindow (s, TRUE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 CurrentViewport, FALSE, TRUE);
 }
 
 static Bool
@@ -976,34 +885,8 @@ switchPrevNoPopup (CompDisplay     *d,
 		   CompOption      *option,
 		   int	           nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, CurrentViewport, FALSE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-	}
-
-	switchToWindow (s, FALSE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 CurrentViewport, FALSE, FALSE);
 }
 
 static Bool
@@ -1013,34 +896,8 @@ switchNextPanel (CompDisplay     *d,
 		 CompOption      *option,
 		 int	         nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, Panels, FALSE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-	}
-
-	switchToWindow (s, TRUE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 Panels, FALSE, TRUE);
 }
 
 static Bool
@@ -1050,34 +907,8 @@ switchPrevPanel (CompDisplay     *d,
 		 CompOption      *option,
 		 int	         nOption)
 {
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	SWITCH_SCREEN (s);
-
-	if (!ss->switching)
-	{
-	    switchInitiate (s, Panels, FALSE);
-
-	    if (state & CompActionStateInitKey)
-		action->state |= CompActionStateTermKey;
-
-	    if (state & CompActionStateInitButton)
-		action->state |= CompActionStateTermButton;
-
-	    if (state & CompActionStateInitEdge)
-		action->state |= CompActionStateTermEdge;
-	}
-
-	switchToWindow (s, FALSE);
-    }
-
-    return FALSE;
+    return switchInitiateCommon (d, action, state, option, nOption,
+				 Panels, FALSE, FALSE);
 }
 
 static void
