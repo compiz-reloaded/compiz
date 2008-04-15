@@ -472,6 +472,7 @@ static GdkPixmap *switcher_pixmap = NULL;
 static GdkPixmap *switcher_buffer_pixmap = NULL;
 static gint      switcher_width;
 static gint      switcher_height;
+static Window    switcher_selected_window = None;
 
 static XRenderPictFormat *xformat;
 
@@ -3677,7 +3678,12 @@ update_switcher_window (WnckWindow *win,
 	}
     }
 
-    gtk_label_set_text (GTK_LABEL (switcher_label), d->name ? d->name : "");
+    if (selected != switcher_selected_window)
+    {
+	gtk_label_set_text (GTK_LABEL (switcher_label),
+			    (selected_win && d->name) ? d->name : "");
+	switcher_selected_window = selected;
+    }
 
     if (width == d->width && height == d->height)
     {
@@ -6721,7 +6727,7 @@ init_settings (WnckScreen *screen)
 
     gtk_widget_set_size_request (style_window, 0, 0);
     gtk_window_move (GTK_WINDOW (style_window), -100, -100);
-    gtk_widget_show (style_window);
+    gtk_widget_show_all (style_window);
 
     g_signal_connect_object (style_window, "style-set",
 			     G_CALLBACK (style_changed),
