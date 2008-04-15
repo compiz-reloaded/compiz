@@ -1186,8 +1186,10 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 				  unsigned int   *mask,
 				  XWindowChanges *xwc)
 {
-    Bool       checkPlacement = FALSE;
     CompScreen *s = w->screen;
+    XRectangle workArea;
+    int        x, y, left, right, top, bottom;
+    int        output;
 
     PLACE_SCREEN (s);
 
@@ -1196,122 +1198,123 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     WRAP (ps, s, validateWindowResizeRequest,
 	  placeValidateWindowResizeRequest);
 
-    if (w->type & (CompWindowTypeSplashMask      |
-		   CompWindowTypeDialogMask      |
-		   CompWindowTypeModalDialogMask |
-		   CompWindowTypeNormalMask))
+    if (w->state & CompWindowStateFullscreenMask)
+	return;
+
+    if (!(w->type & (CompWindowTypeNormalMask |
+		     CompWindowTypeSplashMask |
+		     CompWindowTypeDialogMask |
+		     CompWindowTypeModalDialogMask)))
+	return;
+
+    if (w->sizeHints.flags & USPosition)
     {
-	if (!(w->state & CompWindowStateFullscreenMask))
+	/* only respect USPosition on normal windows if
+	   workarounds are disabled, reason see above */
+	if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b ||
+	    (w->type & CompWindowTypeNormalMask))
 	{
-	    if (!(w->sizeHints.flags & USPosition))
-		checkPlacement = TRUE;
+	    return;
 	}
     }
 
-    if (checkPlacement)
+    /* left, right, top, bottom target coordinates, clamped to viewport
+       sizes as we don't need to validate movements to other viewports;
+       we are only interested in inner-viewport movements */
+    x = xwc->x % s->width;
+    if (x < 0)
+	x += s->width;
+
+    y = xwc->y % s->height;
+    if (y < 0)
+	y += s->height;
+
+    left   = x - w->input.left;
+    right  = x + xwc->width + w->input.right;
+    top    = y - w->input.top;
+    bottom = y + xwc->height + w->input.bottom;
+
+    output = outputDeviceForGeometry (s,
+				      xwc->x, xwc->y,
+				      xwc->width, xwc->height,
+				      w->serverBorderWidth);
+
+    getWorkareaForOutput (s, output, &workArea);
+
+    if (xwc->width >= workArea.width &&
+	xwc->height >= workArea.height)
     {
-	XRectangle workArea;
-	int        x, y, left, right, top, bottom;
-	int        output;
+	placeSendWindowMaximizationRequest (w);
+    }
 
-	/* left, right, top, bottom target coordinates, clamped to viewport
-	   sizes as we don't need to validate movements to other viewports;
-	   we are only interested in inner-viewport movements */
-	x = xwc->x % s->width;
-	if (x < 0)
-	    x += s->width;
-
-	y = xwc->y % s->height;
-	if (y < 0)
-	    y += s->height;
-
-	left   = x - w->input.left;
-	right  = x + xwc->width + w->input.right;
-	top    = y - w->input.top;
-	bottom = y + xwc->height + w->input.bottom;
-
-	output = outputDeviceForGeometry (s,
-					  xwc->x, xwc->y,
-					  xwc->width, xwc->height,
-					  w->serverBorderWidth);
-
-	getWorkareaForOutput (s, output, &workArea);
-
-	if (xwc->width >= workArea.width &&
-	    xwc->height >= workArea.height)
+    if ((right - left) > workArea.width)
+    {
+	left  = workArea.x;
+	right = left + workArea.width;
+    }
+    else
+    {
+	if (left < workArea.x)
 	{
-	    placeSendWindowMaximizationRequest (w);
-	}
-
-	if ((right - left) > workArea.width)
-	{
+	    right += workArea.x - left;
 	    left  = workArea.x;
-	    right = left + workArea.width;
-	}
-	else
-	{
-	    if (left < workArea.x)
-	    {
-		right += workArea.x - left;
-		left  = workArea.x;
-	    }
-
-	    if (right > (workArea.x + workArea.width))
-	    {
-		left -= right - (workArea.x + workArea.width);
-		right = workArea.x + workArea.width;
-	    }
 	}
 
-	if ((bottom - top) > workArea.height)
+	if (right > (workArea.x + workArea.width))
 	{
+	    left -= right - (workArea.x + workArea.width);
+	    right = workArea.x + workArea.width;
+	}
+    }
+
+    if ((bottom - top) > workArea.height)
+    {
+	top    = workArea.y;
+	bottom = top + workArea.height;
+    }
+    else
+    {
+	if (top < workArea.y)
+	{
+	    bottom += workArea.y - top;
 	    top    = workArea.y;
-	    bottom = top + workArea.height;
 	}
-	else
+
+	if (bottom > (workArea.y + workArea.height))
 	{
-	    if (top < workArea.y)
-	    {
-		bottom += workArea.y - top;
-		top    = workArea.y;
-	    }
-
-	    if (bottom > (workArea.y + workArea.height))
-	    {
-		top   -= bottom - (workArea.y + workArea.height);
-		bottom = workArea.y + workArea.height;
-	    }
+	    top   -= bottom - (workArea.y + workArea.height);
+	    bottom = workArea.y + workArea.height;
 	}
+    }
 
-	/* bring left/right/top/bottom to actual window coordinates */
-	left   += w->input.left;
-	right  -= w->input.right;
-	top    += w->input.top;
-	bottom -= w->input.bottom;
+    /* bring left/right/top/bottom to actual window coordinates */
+    left   += w->input.left;
+    right  -= w->input.right;
+    top    += w->input.top;
+    bottom -= w->input.bottom;
 
-	if (left != x)
-	{
-	    xwc->x += left - x;
-	    *mask  |= CWX;
-	}
+    if (left != x)
+    {
+	xwc->x += left - x;
+	*mask  |= CWX;
+    }
 
-	if (top != y)
-	{
-	    xwc->y += top - y;
-	    *mask  |= CWY;
-	}
+    if (top != y)
+    {
+	xwc->y += top - y;
+	*mask  |= CWY;
+    }
 
-	if ((right - left) != xwc->width)
-	{
-	    xwc->width = right - left;
-	    *mask      |= CWWidth;
-	}
+    if ((right - left) != xwc->width)
+    {
+	xwc->width = right - left;
+	*mask      |= CWWidth;
+    }
 
-	if ((bottom - top) != xwc->height)
-	{
-	    xwc->height = bottom - top;
-	    *mask       |= CWHeight;
-	}
+    if ((bottom - top) != xwc->height)
+    {
+	xwc->height = bottom - top;
+	*mask       |= CWHeight;
     }
 }
 
