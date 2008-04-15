@@ -982,10 +982,6 @@ placeGetPlacementOutput (CompWindow        *w,
 	if (parent)
 	    output = outputDeviceForWindow (parent);
     }
-    else if (strategy == PlaceCenteredOnScreen)
-    {
-	output = s->currentOutputDev;
-    }
     else if (strategy == ConstrainOnly)
     {
 	output = outputDeviceForGeometry (s, x, y,
