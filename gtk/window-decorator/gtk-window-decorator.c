@@ -3670,13 +3670,10 @@ update_switcher_window (WnckWindow *win,
 		    pango_layout_set_text (d->layout, d->name, name_length);
 	    }
 	}
-	else
+	else if (d->layout)
 	{
-	    if (d->layout)
-	    {
-		g_object_unref (G_OBJECT (d->layout));
-		d->layout = NULL;
-	    }
+	    g_object_unref (G_OBJECT (d->layout));
+	    d->layout = NULL;
 	}
     }
 
