@@ -1062,12 +1062,9 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	output = cs->srcOutput = cs->output[cubeOutput];
 
 	setWindowPaintOffset (s, -dView * s->width, 0);
-	(*s->paintTransformedOutput) (s, sAttrib, transform,
-				      &s->outputDev[output].region,
-				      &s->outputDev[output], mask);
-	(*cs->postPaintViewport) (s, sAttrib, transform,
-				  &s->outputDev[output],
-				  &s->outputDev[output].region);
+	(*cs->paintViewport) (s, sAttrib, transform,
+			      &s->outputDev[output].region, 
+			      &s->outputDev[output], mask);
 	setWindowPaintOffset (s, 0, 0);
     }
     else
@@ -1081,9 +1078,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 	else
 	    region = &s->region;
 
-	(*s->paintTransformedOutput) (s, sAttrib, transform, region,
-				      outputPtr, mask);
-	(*cs->postPaintViewport) (s, sAttrib, transform, outputPtr, region);
+	(*cs->paintViewport) (s, sAttrib, transform, region, outputPtr, mask);
 
 	setWindowPaintOffset (s, 0, 0);
     }
@@ -1409,12 +1404,14 @@ cubeEnableOutputClipping (CompScreen 	      *s,
 }
 
 static void
-cubePostPaintViewport (CompScreen              *s,
-		       const ScreenPaintAttrib *sAttrib,
-		       const CompTransform     *transform,
-		       CompOutput              *output,
-		       Region                  region)
+cubePaintViewport (CompScreen              *s,
+		   const ScreenPaintAttrib *sAttrib,
+		   const CompTransform     *transform,
+		   Region                  region,
+		   CompOutput              *output,
+		   unsigned int            mask)
 {
+    (*s->paintTransformedOutput) (s, sAttrib, transform, region, output, mask);
 }
 
 static void
@@ -2261,7 +2258,7 @@ cubeInitScreen (CompPlugin *p,
     cs->paintBottom         = cubePaintBottom;
     cs->paintInside         = cubePaintInside;
     cs->checkOrientation    = cubeCheckOrientation;
-    cs->postPaintViewport   = cubePostPaintViewport;
+    cs->paintViewport       = cubePaintViewport;
     cs->shouldPaintViewport = cubeShouldPaintViewport;
 
     s->base.privates[cd->screenPrivateIndex].ptr = cs;
