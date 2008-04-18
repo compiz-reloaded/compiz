@@ -4600,6 +4600,9 @@ minimizeWindow (CompWindow *w)
     if (!(w->actions & CompWindowActionMinimizeMask))
 	return;
 
+    if (!w->managed)
+	return;
+
     if (!w->minimized)
     {
 	w->minimized = TRUE;
