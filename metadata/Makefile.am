@@ -17,7 +17,6 @@ xml_in_files =		  \
 	minimize.xml.in	  \
 	move.xml.in	  \
 	place.xml.in	  \
-	plane.xml.in	  \
 	png.xml.in	  \
 	regex.xml.in	  \
 	resize.xml.in	  \
