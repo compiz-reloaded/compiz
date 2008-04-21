@@ -1808,8 +1808,10 @@ meta_get_decoration_geometry (decor_t		*d,
 
     if (d->actions & WNCK_WINDOW_ACTION_RESIZE)
     {
-	*flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
-	*flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
+	if (!(d->state & WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY))
+	    *flags |= META_FRAME_ALLOWS_VERTICAL_RESIZE;
+	if (!(d->state & WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY))
+	    *flags |= META_FRAME_ALLOWS_HORIZONTAL_RESIZE;
     }
 
     if (d->actions & WNCK_WINDOW_ACTION_MOVE)
@@ -2751,9 +2753,27 @@ get_event_window_position (decor_t *d,
     *x = pos[i][j].x + pos[i][j].xw * width;
     *y = pos[i][j].y + pos[i][j].yh * height + pos[i][j].yth *
 	(titlebar_height - 17);
-    *w = pos[i][j].w + pos[i][j].ww * width;
-    *h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth *
+
+    if ((d->state & WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY) &&
+	(j == 0 || j == 2))
+    {
+	*w = 0;
+    }
+    else
+    {
+	*w = pos[i][j].w + pos[i][j].ww * width;
+    }
+
+    if ((d->state & WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY) &&
+	(i == 0 || i == 2))
+    {
+	*h = 0;
+    }
+    else
+    {
+	*h = pos[i][j].h + pos[i][j].hh * height + pos[i][j].hth *
 	(titlebar_height - 17);
+    }
 }
 
 static gboolean
@@ -2881,6 +2901,20 @@ meta_get_event_window_position (decor_t *d,
 	    *h = fgeom.top_height;
 	    break;
 	}
+    }
+
+    if (!(flags & META_FRAME_ALLOWS_VERTICAL_RESIZE))
+    {
+	/* turn off top and bottom event windows */
+	if (i == 0 || i == 2)
+	    *w = *h = 0;
+    }
+
+    if (!(flags & META_FRAME_ALLOWS_HORIZONTAL_RESIZE))
+    {
+	/* turn off left and right event windows */
+	if (j == 0 || j == 2)
+	    *w = *h = 0;
     }
 }
 
@@ -3074,11 +3108,15 @@ update_event_windows (WnckWindow *win)
 
 	for (j = 0; j < 3; j++)
 	{
+	    w = 0;
+	    h = 0;
+
 	    if (actions & event_window_actions[i][j] && i >= k && i <= l)
-	    {
 		(*theme_get_event_window_position) (d, i, j, width, height,
 						    &x, &y, &w, &h);
 
+	    if (w != 0 && h != 0)
+	    {
 		XMapWindow (xdisplay, d->event_windows[i][j]);
 		XMoveResizeWindow (xdisplay, d->event_windows[i][j],
 				   x, y, w, h);

@@ -1431,7 +1431,8 @@ enterShowDesktopMode (CompScreen *s)
 	if ((s->showingDesktopMask & w->wmType) &&
 	    (!(w->state & CompWindowStateSkipTaskbarMask) || st->value.b))
 	{
-	    if (!w->inShowDesktopMode && !w->grabbed && (*s->focusWindow) (w))
+	    if (!w->inShowDesktopMode && !w->grabbed &&
+		w->managed && (*s->focusWindow) (w))
 	    {
 		w->inShowDesktopMode = TRUE;
 		hideWindow (w);

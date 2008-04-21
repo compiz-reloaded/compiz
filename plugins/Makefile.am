@@ -42,9 +42,6 @@ libwater_la_SOURCES = water.c
 libscreenshot_la_LDFLAGS = -module -avoid-version -no-undefined
 libscreenshot_la_SOURCES = screenshot.c
 
-libplane_la_LDFLAGS = -module -avoid-version -no-undefined
-libplane_la_SOURCES = plane.c
-
 libclone_la_LDFLAGS = -module -avoid-version -no-undefined
 libclone_la_SOURCES = clone.c
 
@@ -165,7 +162,6 @@ module_LTLIBRARIES =		\
 	libswitcher.la		\
 	libwater.la		\
 	libscreenshot.la	\
-	libplane.la		\
 	libclone.la		\
 	libpng.la		\
 	libblur.la		\
