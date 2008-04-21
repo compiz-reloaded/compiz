@@ -4755,11 +4755,6 @@ isWindowFocusAllowed (CompWindow *w,
     if (level == FOCUS_PREVENTION_LEVEL_NONE)
 	return TRUE;
 
-    /* not in current viewport */
-    defaultViewportForWindow (w, &vx, &vy);
-    if (vx != s->x || vy != s->y)
-	return FALSE;
-
     if (timestamp)
     {
 	/* the caller passed a timestamp, so use that
@@ -4795,6 +4790,11 @@ isWindowFocusAllowed (CompWindow *w,
 	return TRUE;
 
     if (level == FOCUS_PREVENTION_LEVEL_VERYHIGH)
+	return FALSE;
+
+    /* not in current viewport */
+    defaultViewportForWindow (w, &vx, &vy);
+    if (vx != s->x || vy != s->y)
 	return FALSE;
 
     if (!gotTimestamp)
