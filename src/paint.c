@@ -1071,11 +1071,13 @@ drawWindowTexture (CompWindow		*w,
     else
 	filter = w->screen->filter[NOTHING_TRANS_FILTER];
 
-    if (!attrib->nFunction || !enableFragmentProgramAndDrawGeometry (w,
-								     texture,
-								     attrib,
-								     filter,
-								     mask))
+    if ((!attrib->nFunction && (!w->screen->lighting ||
+	 attrib->saturation == COLOR || attrib->saturation == 0)) ||
+	!enableFragmentProgramAndDrawGeometry (w,
+					       texture,
+					       attrib,
+					       filter,
+					       mask))
     {
 	enableFragmentOperationsAndDrawGeometry (w,
 						 texture,
