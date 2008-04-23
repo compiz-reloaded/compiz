@@ -154,12 +154,21 @@ placeMatchViewport (CompWindow *w,
 {
     PLACE_SCREEN (w->screen);
 
-    return placeMatchXYValue (w,
-			      &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_MATCHES],
-			      &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES],
-			      &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES],
-			      x,
-			      y);
+    if (placeMatchXYValue (w,
+			   &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_MATCHES],
+			   &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES],
+			   &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES],
+			   x,
+			   y))
+    {
+	/* Viewport matches are given 1-based, so we need to adjust that */
+	*x -= 1;
+	*y -= 1;
+
+	return TRUE;
+    }
+
+    return FALSE;
 }
 
 static CompOption *
