@@ -3731,6 +3731,11 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 				  unsigned int   xwcm,
 				  int            gravity)
 {
+    int newX, newY;
+
+    newX = xwc->x;
+    newY = xwc->y;
+
     if (xwcm & (CWX | CWWidth))
     {
 	switch (gravity) {
@@ -3738,31 +3743,29 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case WestGravity:
 	case SouthWestGravity:
 	    if (xwcm & CWX)
-		xwc->x += w->input.left;
+		newX += w->input.left;
 	    break;
 
 	case NorthGravity:
 	case CenterGravity:
 	case SouthGravity:
 	    if (!(xwcm & CWX))
-		xwc->x += (w->serverWidth - xwc->width) / 2;
+		newX += (w->serverWidth - xwc->width) / 2;
 	    break;
 
 	case NorthEastGravity:
 	case EastGravity:
 	case SouthEastGravity:
 	    if (xwcm & CWX)
-		xwc->x -= w->input.right;
+		newX -= w->input.right;
 	    else
-		xwc->x += w->serverWidth - xwc->width;
+		newX += w->serverWidth - xwc->width;
 	    break;
 
 	case StaticGravity:
 	default:
 	    break;
 	}
-
-	xwcm |= CWX;
     }
 
     if (xwcm & (CWY | CWHeight))
@@ -3772,30 +3775,40 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case NorthGravity:
 	case NorthEastGravity:
 	    if (xwcm & CWY)
-		xwc->y += w->input.top;
+		newY += w->input.top;
 	    break;
 
 	case WestGravity:
 	case CenterGravity:
 	case EastGravity:
 	    if (!(xwcm & CWY))
-		xwc->y += (w->serverHeight - xwc->height) / 2;
+		newY += (w->serverHeight - xwc->height) / 2;
 	    break;
 
 	case SouthWestGravity:
 	case SouthGravity:
 	case SouthEastGravity:
 	    if (xwcm & CWY)
-		xwc->y -= w->input.bottom;
+		newY -= w->input.bottom;
 	    else
-		xwc->y += w->serverHeight - xwc->height;
+		newY += w->serverHeight - xwc->height;
 	    break;
 
 	case StaticGravity:
 	default:
 	    break;
 	}
+    }
 
+    if (newX != xwc->x)
+    {
+	xwc->x = newX;
+	xwcm |= CWX;
+    }
+
+    if (newY != xwc->y)
+    {
+	xwc->y = newY;
 	xwcm |= CWY;
     }
 
