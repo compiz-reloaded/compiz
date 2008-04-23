@@ -1974,17 +1974,31 @@ handleEvent (CompDisplay *d,
 
 		if (!w->placed)
 		{
-		    int newX, newY;
+		    int            newX, newY;
+		    int            gravity = w->sizeHints.win_gravity;
+		    XWindowChanges xwc;
+		    unsigned int   xwcm;
 
-		    if ((*w->screen->placeWindow) (w, w->serverX, w->serverY,
+		    /* adjust for gravity */
+		    xwc.x      = w->serverX;
+		    xwc.y      = w->serverY;
+		    xwc.width  = w->serverWidth;
+		    xwc.height = w->serverHeight;
+
+		    xwcm = adjustConfigureRequestForGravity (w, &xwc,
+							     CWX | CWY,
+							     gravity);
+
+		    if ((*w->screen->placeWindow) (w, xwc.x, xwc.y,
 						   &newX, &newY))
 		    {
-			moveWindow (w,
-				    newX - w->attrib.x,
-				    newY - w->attrib.y,
-				    FALSE, TRUE);
-			syncWindowPosition (w);
+			xwc.x = newX;
+			xwc.y = newY;
+			xwcm |= CWX | CWY;
 		    }
+
+		    if (xwcm)
+			configureXWindow (w, xwcm, &xwc);
 
 		    w->placed   = TRUE;
 		}
@@ -2091,13 +2105,7 @@ handleEvent (CompDisplay *d,
 	    xwc.border_width = event->xconfigurerequest.border_width;
 
 	    if (w)
-	    {
-		int gravity = w->sizeHints.win_gravity;
-
-		xwcm = adjustConfigureRequestForGravity (w, &xwc, xwcm,
-							 gravity);
 		configureXWindow (w, xwcm, &xwc);
-	    }
 	    else
 		XConfigureWindow (d->display, event->xconfigurerequest.window,
 				  xwcm, &xwc);
