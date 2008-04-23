@@ -74,11 +74,15 @@
 		<_short>X Viewport Positions</_short>
 		<_long>Horizontal viewport positions</_long>
 		<type>int</type>
+		<min>1</min>
+		<max>32</max>
 	    </option>
 	    <option name="viewport_y_values" type="list">
 		<_short>Y Viewport Positions</_short>
 		<_long>Vertical viewport positions</_long>
 		<type>int</type>
+		<min>1</min>
+		<max>32</max>
 	    </option>
 	</screen>
     </plugin>

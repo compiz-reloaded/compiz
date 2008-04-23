@@ -1404,8 +1404,10 @@ static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
     { "position_x_values", "list", "<type>int</type>", 0, 0 },
     { "position_y_values", "list", "<type>int</type>", 0, 0 },
     { "viewport_matches", "list", "<type>match</type>", 0, 0 },
-    { "viewport_x_values", "list", "<type>int</type>", 0, 0 },
-    { "viewport_y_values", "list", "<type>int</type>", 0, 0 }
+    { "viewport_x_values", "list",
+	"<type>int</type><min>1</min><max>32</max>", 0, 0 },
+    { "viewport_y_values", "list",
+	"<type>int</type><min>1</min><max>32</max>", 0, 0 },
 };
 
 static Bool
