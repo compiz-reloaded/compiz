@@ -258,14 +258,15 @@ bindPixmapToTexture (CompScreen  *screen,
     attribs[i++] = GLX_MIPMAP_TEXTURE_EXT;
     attribs[i++] = config->mipmap;
 
-    /* If only one two-dimensional texture target is supported,
-       then use that target and avoid a possible round trip in
-       glXQueryDrawable. Allow the server to choose texture target
-       when it supports more than one for this fbconfig. */
-    if (!(config->textureTargets & GLX_TEXTURE_2D_BIT_EXT))
-	target = GLX_TEXTURE_RECTANGLE_EXT;
-    else if (!(config->textureTargets & GLX_TEXTURE_RECTANGLE_BIT_EXT))
+    /* If no texture target is specified in the fbconfig, or only the
+       TEXTURE_2D target is specified and GL_texture_non_power_of_two
+       is not supported, then allow the server to choose the texture target. */
+    if (config->textureTargets & GLX_TEXTURE_2D_BIT_EXT &&
+       (screen->textureNonPowerOfTwo ||
+       (POWER_OF_TWO (width) && POWER_OF_TWO (height))))
 	target = GLX_TEXTURE_2D_EXT;
+    else if (config->textureTargets & GLX_TEXTURE_RECTANGLE_BIT_EXT)
+	target = GLX_TEXTURE_RECTANGLE_EXT;
 
     if (target)
     {
