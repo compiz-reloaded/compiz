@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080408
+#define CORE_ABIVERSION 20080424
 
 #include <stdio.h>
 #include <sys/time.h>
