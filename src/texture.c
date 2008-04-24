@@ -125,6 +125,7 @@ imageToTexture (CompScreen   *screen,
 	texture->matrix.xx = 1.0f / width;
 	texture->matrix.yy = -1.0f / height;
 	texture->matrix.y0 = 1.0f;
+	texture->mipmap = TRUE;
     }
     else
     {
@@ -132,6 +133,7 @@ imageToTexture (CompScreen   *screen,
 	texture->matrix.xx = 1.0f;
 	texture->matrix.yy = -1.0f;
 	texture->matrix.y0 = height;
+	texture->mipmap = FALSE;
     }
 
     if (!texture->name)
@@ -156,7 +158,6 @@ imageToTexture (CompScreen   *screen,
     glTexParameteri (texture->target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     texture->wrap = GL_CLAMP_TO_EDGE;
-    texture->mipmap = TRUE;
 
     glBindTexture (texture->target, 0);
 
@@ -286,8 +287,6 @@ bindPixmapToTexture (CompScreen  *screen,
 	return FALSE;
     }
 
-    texture->mipmap = config->mipmap;
-
     if (!target)
 	(*screen->queryDrawable) (screen->display->display,
 				  texture->pixmap,
@@ -309,6 +308,7 @@ bindPixmapToTexture (CompScreen  *screen,
 	    texture->matrix.yy = -1.0f / height;
 	    texture->matrix.y0 = 1.0f;
 	}
+	texture->mipmap = config->mipmap;
 	break;
     case GLX_TEXTURE_RECTANGLE_EXT:
 	texture->target = GL_TEXTURE_RECTANGLE_ARB;
@@ -324,6 +324,7 @@ bindPixmapToTexture (CompScreen  *screen,
 	    texture->matrix.yy = -1.0f;
 	    texture->matrix.y0 = height;
 	}
+	texture->mipmap = FALSE;
 	break;
     default:
 	compLogMessage (NULL, "core", CompLogLevelWarn,
