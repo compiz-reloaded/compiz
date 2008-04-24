@@ -144,6 +144,99 @@ paintCursor (CompCursor		 *c,
     glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 }
 
+static void
+paintBackground (CompScreen   *s,
+		 Region	      region,
+		 Bool	      transformed)
+{
+    CompTexture *bg = &s->backgroundTexture;
+    BoxPtr      pBox = region->rects;
+    int	        n, nBox = region->numRects;
+    GLfloat     *d, *data;
+
+    if (!nBox)
+	return;
+
+    if (s->desktopWindowCount)
+    {
+	if (bg->name)
+	{
+	    finiTexture (s, bg);
+	    initTexture (s, bg);
+	}
+
+	s->backgroundLoaded = FALSE;
+
+	return;
+    }
+    else
+    {
+	if (!s->backgroundLoaded)
+	    updateScreenBackground (s, bg);
+
+	s->backgroundLoaded = TRUE;
+    }
+
+    data = malloc (sizeof (GLfloat) * nBox * 16);
+    if (!data)
+	return;
+
+    d = data;
+    n = nBox;
+    while (n--)
+    {
+	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
+	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
+
+	*d++ = pBox->x1;
+	*d++ = pBox->y2;
+
+	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
+	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
+
+	*d++ = pBox->x2;
+	*d++ = pBox->y2;
+
+	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
+	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
+
+	*d++ = pBox->x2;
+	*d++ = pBox->y1;
+
+	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
+	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
+
+	*d++ = pBox->x1;
+	*d++ = pBox->y1;
+
+	pBox++;
+    }
+
+    glTexCoordPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data);
+    glVertexPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data + 2);
+
+    if (bg->name)
+    {
+	if (transformed)
+	    enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);
+	else
+	    enableTexture (s, bg, COMP_TEXTURE_FILTER_FAST);
+
+	glDrawArrays (GL_QUADS, 0, nBox * 4);
+
+	disableTexture (s, bg);
+    }
+    else
+    {
+	glColor4us (0, 0, 0, 0);
+	glDrawArrays (GL_QUADS, 0, nBox * 4);
+	glColor4usv (defaultColor);
+    }
+
+    free (data);
+}
+
+
 /* This function currently always performs occlusion detection to
    minimize paint regions. OpenGL precision requirements are no good
    enough to guarantee that the results from using occlusion detection
@@ -161,7 +254,7 @@ paintOutputRegion (CompScreen	       *screen,
     static Region tmpRegion = NULL;
     CompWindow    *w;
     CompCursor	  *c;
-    int		  count, windowMask, backgroundMask, odMask, i;
+    int		  count, windowMask, odMask, i;
     CompWindow	  *fullscreenWindow = NULL;
     CompWalker    walk;
     Bool          status;
@@ -179,13 +272,11 @@ paintOutputRegion (CompScreen	       *screen,
 
     if (mask & PAINT_SCREEN_TRANSFORMED_MASK)
     {
-	backgroundMask = PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK;
 	windowMask     = PAINT_WINDOW_ON_TRANSFORMED_SCREEN_MASK;
 	count	       = 1;
     }
     else
     {
-	backgroundMask = 0;
 	windowMask     = 0;
 	count	       = 0;
     }
@@ -275,7 +366,9 @@ paintOutputRegion (CompScreen	       *screen,
     if (fullscreenWindow)
 	unredirectWindow (fullscreenWindow);
 
-    (*screen->paintBackground) (screen, tmpRegion, backgroundMask);
+    if (!(mask & PAINT_SCREEN_NO_BACKGROUND_MASK))
+	paintBackground (screen, tmpRegion,
+			 (mask & PAINT_SCREEN_TRANSFORMED_MASK));
 
     /* paint all windows from bottom to top */
     for (w = (*walk.first) (screen); w; w = (*walk.next) (w))
@@ -1170,103 +1263,4 @@ paintWindow (CompWindow		     *w,
 	glPopMatrix ();
 
     return status;
-}
-
-void
-paintBackground (CompScreen   *s,
-		 Region	      region,
-		 unsigned int mask)
-{
-    CompTexture *bg = &s->backgroundTexture;
-    BoxPtr      pBox = region->rects;
-    int	        n, nBox = region->numRects;
-    GLfloat     *d, *data;
-
-    if (!nBox)
-	return;
-
-    if (s->desktopWindowCount)
-    {
-	if (bg->name)
-	{
-	    finiTexture (s, bg);
-	    initTexture (s, bg);
-	}
-
-	s->backgroundLoaded = FALSE;
-
-	return;
-    }
-    else
-    {
-	if (!s->backgroundLoaded)
-	    updateScreenBackground (s, bg);
-
-	s->backgroundLoaded = TRUE;
-    }
-
-    data = malloc (sizeof (GLfloat) * nBox * 16);
-    if (!data)
-	return;
-
-    d = data;
-    n = nBox;
-    while (n--)
-    {
-	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
-	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
-
-	*d++ = pBox->x1;
-	*d++ = pBox->y2;
-
-	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
-	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y2);
-
-	*d++ = pBox->x2;
-	*d++ = pBox->y2;
-
-	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x2);
-	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
-
-	*d++ = pBox->x2;
-	*d++ = pBox->y1;
-
-	*d++ = COMP_TEX_COORD_X (&bg->matrix, pBox->x1);
-	*d++ = COMP_TEX_COORD_Y (&bg->matrix, pBox->y1);
-
-	*d++ = pBox->x1;
-	*d++ = pBox->y1;
-
-	pBox++;
-    }
-
-    glTexCoordPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data);
-    glVertexPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data + 2);
-
-    if (s->desktopWindowCount)
-    {
-	glDrawArrays (GL_QUADS, 0, nBox * 4);
-    }
-    else
-    {
-	if (bg->name)
-	{
-	    if (mask & PAINT_BACKGROUND_ON_TRANSFORMED_SCREEN_MASK)
-		enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);
-	    else
-		enableTexture (s, bg, COMP_TEXTURE_FILTER_FAST);
-
-	    glDrawArrays (GL_QUADS, 0, nBox * 4);
-
-	    disableTexture (s, bg);
-	}
-	else
-	{
-	    glColor4us (0, 0, 0, 0);
-	    glDrawArrays (GL_QUADS, 0, nBox * 4);
-	    glColor4usv (defaultColor);
-	}
-    }
-
-    free (data);
 }
