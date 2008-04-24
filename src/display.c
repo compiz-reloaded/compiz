@@ -1735,9 +1735,14 @@ eventLoop (void)
 				glClear (GL_COLOR_BUFFER_BIT);
 			}
 
-			(*s->paintScreen) (s, s->outputDev,
-					   s->nOutputDev,
-					   mask);
+			if (s->opt[COMP_SCREEN_OPTION_FORCE_INDEPENDENT].value.b
+			    || !s->hasOverlappingOutputs)
+			    (*s->paintScreen) (s, s->outputDev,
+					       s->nOutputDev,
+					       mask);
+			else
+			    (*s->paintScreen) (s, &s->fullscreenOutput, 1,
+					       mask);
 
 			targetScreen = NULL;
 			targetOutput = &s->outputDev[0];

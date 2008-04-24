@@ -1717,7 +1717,8 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_OPACITY_MATCHES	  15
 #define COMP_SCREEN_OPTION_OPACITY_VALUES	  16
 #define COMP_SCREEN_OPTION_TEXTURE_COMPRESSION	  17
-#define COMP_SCREEN_OPTION_NUM		          18
+#define COMP_SCREEN_OPTION_FORCE_INDEPENDENT      18
+#define COMP_SCREEN_OPTION_NUM		          19
 
 #ifndef GLX_EXT_texture_from_pixmap
 #define GLX_BIND_TO_TEXTURE_RGB_EXT        0x20D0
@@ -2070,6 +2071,7 @@ struct _CompScreen {
     int	       nOutputDev;
     int	       currentOutputDev;
     CompOutput fullscreenOutput;
+    Bool       hasOverlappingOutputs;
 
     int windowOffsetX;
     int windowOffsetY;

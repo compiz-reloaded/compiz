@@ -267,7 +267,7 @@ updateOutputDevices (CompScreen	*s)
     CompOutput	  *o, *output = NULL;
     CompListValue *list = &s->opt[COMP_SCREEN_OPTION_OUTPUTS].value.list;
     int		  nOutput = 0;
-    int		  x, y, i, bits;
+    int		  x, y, i, j, bits;
     unsigned int  width, height;
     int		  x1, y1, x2, y2;
     Region	  region;
@@ -367,8 +367,9 @@ updateOutputDevices (CompScreen	*s)
 	free (s->outputDev);
     }
 
-    s->outputDev  = output;
-    s->nOutputDev = nOutput;
+    s->outputDev             = output;
+    s->nOutputDev            = nOutput;
+    s->hasOverlappingOutputs = FALSE;
 
     setCurrentOutput (s, s->currentOutputDev);
 
@@ -385,6 +386,17 @@ updateOutputDevices (CompScreen	*s)
 	r.rects = &r.extents;
 	r.numRects = 1;
 
+	for (i = 0; i < nOutput - 1; i++)
+	    for (j = i + 1; j < nOutput; j++)
+            {
+		XIntersectRegion (&output[i].region,
+				  &output[j].region,
+				  region);
+		if (REGION_NOT_EMPTY (region))
+		    s->hasOverlappingOutputs = TRUE;
+	    }
+	XSubtractRegion (&emptyRegion, &emptyRegion, region);
+	
 	if (s->display->nScreenInfo)
 	{
 	    for (i = 0; i < s->display->nScreenInfo; i++)
@@ -617,6 +629,13 @@ setScreenOption (CompPlugin	 *plugin,
 	    return TRUE;
 	}
 	break;
+     case COMP_SCREEN_OPTION_FORCE_INDEPENDENT:
+	if (compSetBoolOption (o, value))
+	{
+	    updateOutputDevices (screen);
+	    return TRUE;
+	}
+	break;
     default:
 	if (compSetScreenOption (screen, o, value))
 	    return TRUE;
@@ -646,7 +665,8 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "focus_prevention_match", "match", 0, 0, 0 },
     { "opacity_matches", "list", "<type>match</type>", 0, 0 },
     { "opacity_values", "list", "<type>int</type>", 0, 0 },
-    { "texture_compression", "bool", 0, 0, 0 }
+    { "texture_compression", "bool", 0, 0, 0 },
+    { "force_independent_output_painting", "bool", 0, 0, 0 }
 };
 
 static void
