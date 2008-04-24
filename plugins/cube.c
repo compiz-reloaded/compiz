@@ -580,72 +580,6 @@ cubeUpdateSkyDomeList (CompScreen *s,
     free (cost2);
 }
 
-static void
-cubeUnloadBackgrounds (CompScreen *s)
-{
-    CUBE_SCREEN (s);
-
-    if (cs->nBg)
-    {
-	int i;
-
-	for (i = 0; i < cs->nBg; i++)
-	    finiTexture (s, &cs->bg[i]);
-
-	free (cs->bg);
-
-	cs->bg  = NULL;
-	cs->nBg = 0;
-    }
-}
-
-static void
-cubeLoadBackground (CompScreen *s,
-		    int	       n)
-{
-    CompOptionValue *value;
-    unsigned int    width, height;
-    int		    i;
-
-    CUBE_SCREEN (s);
-
-    value = &cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value;
-
-    if (!cs->bg)
-    {
-	cs->bg = malloc (sizeof (CompTexture) * value->list.nValue);
-	if (!cs->bg)
-	    return;
-
-	for (i = 0; i < value->list.nValue; i++)
-	    initTexture (s, &cs->bg[i]);
-
-	cs->nBg = value->list.nValue;
-    }
-
-    if (cs->bg[n].target)
-    {
-	if (readImageToTexture (s, &cs->bg[n], value->list.value[n].s,
-				&width, &height))
-	{
-	    if (cs->fullscreenOutput)
-	    {
-		cs->bg[n].matrix.xx *= (float) width  / s->outputDev[0].width;
-		cs->bg[n].matrix.yy *= (float) height / s->outputDev[0].height;
-	    }
-	    else
-	    {
-		cs->bg[n].matrix.xx *= (float) width  / s->width;
-		cs->bg[n].matrix.yy *= (float) height / s->height;
-	    }
-	}
-	else
-	{
-	    cs->bg[n].target = 0;
-	}
-    }
-}
-
 static Bool
 cubeSetScreenOption (CompPlugin      *plugin,
 		     CompScreen      *screen,
@@ -736,14 +670,6 @@ cubeSetScreenOption (CompPlugin      *plugin,
 	{
 	    cubeUpdateSkyDomeTexture (screen);
 	    cubeUpdateSkyDomeList (screen, 1.0f);
-	    damageScreen (screen);
-	    return TRUE;
-	}
-	break;
-    case CUBE_SCREEN_OPTION_BACKGROUNDS:
-	if (compSetOptionList (o, value))
-	{
-	    cubeUnloadBackgrounds (screen);
 	    damageScreen (screen);
 	    return TRUE;
 	}
@@ -1639,165 +1565,6 @@ cubePaintTransformedOutput (CompScreen		    *s,
     WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
 }
 
-static void
-cubeSetBackgroundOpacity (CompScreen* s)
-{
-    CUBE_SCREEN (s);
-
-    if (cs->desktopOpacity != OPAQUE)
-    {
-	if (s->desktopWindowCount)
-	{
-	    glColor4us (0, 0, 0, 0);
-	    glEnable (GL_BLEND);
-	}
-	else
-	{
-	    glColor4us (0xffff, 0xffff, 0xffff, cs->desktopOpacity);
-	    glEnable (GL_BLEND);
-	    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	    glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	}
-    }
-}
-
-static void
-cubeUnSetBackgroundOpacity (CompScreen* s)
-{
-    CUBE_SCREEN (s);
-
-    if (cs->desktopOpacity != OPAQUE)
-    {
-	if (s->desktopWindowCount)
-	{
-	    glColor3usv (defaultColor);
-	    glDisable (GL_BLEND);
-	}
-	else
-	{
-	    glColor3usv (defaultColor);
-	    glDisable (GL_BLEND);
-	    glBlendFunc (GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	    screenTexEnvMode (s, GL_REPLACE);
-	}
-    }
-}
-
-static void
-cubePaintBackground (CompScreen   *s,
-		     Region	  region,
-		     unsigned int mask)
-{
-    int numBg;
-
-    CUBE_SCREEN (s);
-
-    cubeSetBackgroundOpacity (s);
-
-    numBg = cs->opt[CUBE_SCREEN_OPTION_BACKGROUNDS].value.list.nValue;
-    if (numBg)
-    {
-	CompTexture *bg;
-	CompMatrix  matrix;
-	BoxPtr      pBox = region->rects;
-	int	    nBox = region->numRects;
-	GLfloat     *d, *data;
-	int         n;
-
-	if (!nBox)
-	{
-	    cubeUnSetBackgroundOpacity (s);
-	    return;
-	}
-
-	n = (s->x - (s->windowOffsetX / s->width)) % s->hsize;
-	if (n < 0)
-	    n += s->hsize;
-	n = (n * cs->nOutput + cs->srcOutput) % numBg;
-
-	if (s->desktopWindowCount)
-	{
-	    cubeUnloadBackgrounds (s);
-	    cubeUnSetBackgroundOpacity (s);
-	    return;
-	}
-	else
-	{
-	    if (!cs->nBg || !cs->bg[n].name)
-		cubeLoadBackground (s, n);
-	}
-
-	bg = &cs->bg[n];
-
-	matrix = bg->matrix;
-	matrix.x0 -= (cs->srcOutput * s->outputDev[0].width) * matrix.xx;
-
-	data = malloc (sizeof (GLfloat) * nBox * 16);
-	if (!data)
-	{
-	    cubeUnSetBackgroundOpacity (s);
-	    return;
-	}
-
-	d = data;
-	n = nBox;
-	while (n--)
-	{
-	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x1);
-	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y2);
-
-	    *d++ = pBox->x1;
-	    *d++ = pBox->y2;
-
-	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x2);
-	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y2);
-
-	    *d++ = pBox->x2;
-	    *d++ = pBox->y2;
-
-	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x2);
-	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y1);
-
-	    *d++ = pBox->x2;
-	    *d++ = pBox->y1;
-
-	    *d++ = COMP_TEX_COORD_X (&matrix, pBox->x1);
-	    *d++ = COMP_TEX_COORD_Y (&matrix, pBox->y1);
-
-	    *d++ = pBox->x1;
-	    *d++ = pBox->y1;
-
-	    pBox++;
-	}
-
-	glTexCoordPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data);
-	glVertexPointer (2, GL_FLOAT, sizeof (GLfloat) * 4, data + 2);
-
-	if (bg->name)
-	{
-	    enableTexture (s, bg, COMP_TEXTURE_FILTER_GOOD);
-	    glDrawArrays (GL_QUADS, 0, nBox * 4);
-	    disableTexture (s, bg);
-	}
-	else
-	{
-	    glColor4us (0, 0, 0, 0);
-	    glDrawArrays (GL_QUADS, 0, nBox * 4);
-	    glColor4usv (defaultColor);
-	}
-
-	free (data);
-    }
-    else
-    {
-	UNWRAP (cs, s, paintBackground);
-	(*s->paintBackground) (s, region, mask);
-	WRAP (cs, s, paintBackground, cubePaintBackground);
-    }
-
-    cubeUnSetBackgroundOpacity (s);
-}
-
 static Bool
 cubePaintWindow (CompWindow		  *w,
 		 const WindowPaintAttrib  *attrib,
@@ -2011,7 +1778,6 @@ cubeOutputChangeNotify (CompScreen *s)
     CUBE_SCREEN (s);
 
     cubeUpdateOutputs (s);
-    cubeUnloadBackgrounds (s);
     cubeUpdateGeometry (s, s->hsize, cs->invert);
 
     if (cs->opt[CUBE_SCREEN_OPTION_IMAGES].value.list.nValue)
@@ -2045,7 +1811,6 @@ cubeSetOptionForPlugin (CompObject      *o,
 	    CUBE_SCREEN (s);
 
 	    cubeUpdateGeometry (s, s->hsize, cs->invert);
-	    cubeUnloadBackgrounds (s);
 	}
     }
 
@@ -2202,7 +1967,6 @@ static const CompMetadataOptionInfo cubeScreenOptionInfo[] = {
     { "speed", "float", "<min>0.1</min>", 0, 0 },
     { "timestep", "float", "<min>0.1</min>", 0, 0 },
     { "mipmap", "bool", 0, 0, 0 },
-    { "backgrounds", "list", "<type>string</type>", 0, 0 },
     { "adjust_image", "bool", 0, 0, 0 },
     { "active_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
     { "inactive_opacity", "float", "<min>0.0</min><max>100.0</max>", 0, 0 },
@@ -2276,9 +2040,6 @@ cubeInitScreen (CompPlugin *p,
     cs->paintAllViewports = FALSE;
     cs->fullscreenOutput  = TRUE;
 
-    cs->bg  = NULL;
-    cs->nBg = 0;
-
     cs->outputXScale  = 1.0f;
     cs->outputYScale  = 1.0f;
     cs->outputXOffset = 0.0f;
@@ -2317,7 +2078,6 @@ cubeInitScreen (CompPlugin *p,
     WRAP (cs, s, paintOutput, cubePaintOutput);
     WRAP (cs, s, paintTransformedOutput, cubePaintTransformedOutput);
     WRAP (cs, s, enableOutputClipping, cubeEnableOutputClipping);
-    WRAP (cs, s, paintBackground, cubePaintBackground);
     WRAP (cs, s, paintWindow, cubePaintWindow);
     WRAP (cs, s, applyScreenTransform, cubeApplyScreenTransform);
     WRAP (cs, s, outputChangeNotify, cubeOutputChangeNotify);
@@ -2344,7 +2104,6 @@ cubeFiniScreen (CompPlugin *p,
     UNWRAP (cs, s, paintOutput);
     UNWRAP (cs, s, paintTransformedOutput);
     UNWRAP (cs, s, enableOutputClipping);
-    UNWRAP (cs, s, paintBackground);
     UNWRAP (cs, s, paintWindow);
     UNWRAP (cs, s, applyScreenTransform);
     UNWRAP (cs, s, outputChangeNotify);
@@ -2352,8 +2111,6 @@ cubeFiniScreen (CompPlugin *p,
 
     finiTexture (s, &cs->texture);
     finiTexture (s, &cs->sky);
-
-    cubeUnloadBackgrounds (s);
 
     compFiniScreenOptions (s, cs->opt, CUBE_SCREEN_OPTION_NUM);
 
