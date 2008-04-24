@@ -3731,7 +3731,8 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 				  unsigned int   xwcm,
 				  int            gravity)
 {
-    int newX, newY;
+    int          newX, newY;
+    unsigned int mask = 0;
 
     newX = xwc->x;
     newY = xwc->y;
@@ -3803,16 +3804,16 @@ adjustConfigureRequestForGravity (CompWindow     *w,
     if (newX != xwc->x)
     {
 	xwc->x = newX;
-	xwcm |= CWX;
+	mask |= CWX;
     }
 
     if (newY != xwc->y)
     {
 	xwc->y = newY;
-	xwcm |= CWY;
+	mask |= CWY;
     }
 
-    return xwcm;
+    return mask;
 }
 
 void
@@ -3856,7 +3857,7 @@ moveResizeWindow (CompWindow     *w,
 	}
     }
 
-    xwcm = adjustConfigureRequestForGravity (w, xwc, xwcm, gravity);
+    xwcm |= adjustConfigureRequestForGravity (w, xwc, xwcm, gravity);
 
     if (!(w->type & (CompWindowTypeDockMask       |
 		     CompWindowTypeFullscreenMask |
