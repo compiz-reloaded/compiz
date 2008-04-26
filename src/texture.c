@@ -268,6 +268,16 @@ bindPixmapToTexture (CompScreen  *screen,
     else if (config->textureTargets & GLX_TEXTURE_RECTANGLE_BIT_EXT)
 	target = GLX_TEXTURE_RECTANGLE_EXT;
 
+    /* Workaround for broken texture from pixmap implementations, 
+       that don't advertise any texture target in the fbconfig. */
+    if (!target)
+    {
+	if (!(config->textureTargets & GLX_TEXTURE_2D_BIT_EXT))
+	    target = GLX_TEXTURE_RECTANGLE_EXT;
+	else if (!(config->textureTargets & GLX_TEXTURE_RECTANGLE_BIT_EXT))
+	    target = GLX_TEXTURE_2D_EXT;
+    }
+
     if (target)
     {
 	attribs[i++] = GLX_TEXTURE_TARGET_EXT;
