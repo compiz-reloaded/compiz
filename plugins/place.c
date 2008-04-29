@@ -938,22 +938,19 @@ placeGetStrategyForWindow (CompWindow *w)
     if (!(w->actions & CompWindowActionMoveMask))
 	return NoPlacement;
 
-    if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
+    if ((w->type & CompWindowTypeNormalMask) ||
+	ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
     {
-	if (w->sizeHints.flags & (PPosition | USPosition))
-	    return ConstrainOnly;
-    }
-    else
-    {
-	/* Only accept USPosition on normal windows because the app is full
-	 * of shit claiming the user set -geometry for a dialog or dock
+	/* Only accept USPosition on non-normal windows if workarounds are
+	 * enabled because apps claiming the user set -geometry for a dialog
+	 * or dock are most likely wrong
 	 */
-	if (w->type & CompWindowTypeNormalMask &&
-	    (w->sizeHints.flags & USPosition))
-	{
+	if (w->sizeHints.flags & USPosition)
 	    return ConstrainOnly;
-	}
     }
+
+    if (w->sizeHints.flags & PPosition)
+	return ConstrainOnly;
 
    if (w->transientFor &&
 	(w->type & (CompWindowTypeDialogMask |
