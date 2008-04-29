@@ -50,6 +50,11 @@
 		    <_name>Use output device with pointer</_name>
 		</desc>
 	    </option>
+	    <option name="force_placement_match" type="match">
+		<_short>Force Placement Windows</_short>
+		<_long>Windows that should forcedly be placed, even if they indicate the window manager should avoid placing them.</_long>
+		<default></default>
+	    </option>
 	    <option name="position_matches" type="list">
 		<_short>Positioned windows</_short>
 		<_long>Windows that should be positioned by default</_long>

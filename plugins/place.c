@@ -48,13 +48,14 @@ typedef struct _PlaceDisplay {
 #define PLACE_SCREEN_OPTION_WORKAROUND        0
 #define PLACE_SCREEN_OPTION_MODE              1
 #define PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE  2
-#define PLACE_SCREEN_OPTION_POSITION_MATCHES  3
-#define PLACE_SCREEN_OPTION_POSITION_X_VALUES 4
-#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES 5
-#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES  6
-#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES 7
-#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES 8
-#define PLACE_SCREEN_OPTION_NUM               9
+#define PLACE_SCREEN_OPTION_FORCE_PLACEMENT   3
+#define PLACE_SCREEN_OPTION_POSITION_MATCHES  4
+#define PLACE_SCREEN_OPTION_POSITION_X_VALUES 5
+#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES 6
+#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES  7
+#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES 8
+#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES 9
+#define PLACE_SCREEN_OPTION_NUM               10
 
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
@@ -923,6 +924,8 @@ placeSmart (CompWindow *w,
 static PlacementStrategy
 placeGetStrategyForWindow (CompWindow *w)
 {
+    CompMatch *match;
+
     PLACE_SCREEN (w->screen);
 
     if (w->type & (CompWindowTypeDockMask | CompWindowTypeDesktopMask    |
@@ -938,19 +941,23 @@ placeGetStrategyForWindow (CompWindow *w)
     if (!(w->actions & CompWindowActionMoveMask))
 	return NoPlacement;
 
-    if ((w->type & CompWindowTypeNormalMask) ||
-	ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
+    match = &ps->opt[PLACE_SCREEN_OPTION_FORCE_PLACEMENT].value.match;
+    if (!matchEval (match, w))
     {
-	/* Only accept USPosition on non-normal windows if workarounds are
-	 * enabled because apps claiming the user set -geometry for a dialog
-	 * or dock are most likely wrong
-	 */
-	if (w->sizeHints.flags & USPosition)
+	if ((w->type & CompWindowTypeNormalMask) ||
+	    ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
+	{
+	    /* Only accept USPosition on non-normal windows if workarounds are
+	     * enabled because apps claiming the user set -geometry for a
+	     * dialog or dock are most likely wrong
+	     */
+	    if (w->sizeHints.flags & USPosition)
+		return ConstrainOnly;
+	}
+
+	if (w->sizeHints.flags & PPosition)
 	    return ConstrainOnly;
     }
-
-    if (w->sizeHints.flags & PPosition)
-	return ConstrainOnly;
 
    if (w->transientFor &&
 	(w->type & (CompWindowTypeDialogMask |
@@ -1406,6 +1413,7 @@ static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
     { "workarounds", "bool", 0, 0, 0 },
     { "mode", "int", RESTOSTRING (0, PLACE_MODE_LAST), 0, 0 },
     { "multioutput_mode", "int", RESTOSTRING (0, PLACE_MOMODE_LAST), 0, 0 },
+    { "force_placement_match", "match", 0, 0, 0 },
     { "position_matches", "list", "<type>match</type>", 0, 0 },
     { "position_x_values", "list", "<type>int</type>", 0, 0 },
     { "position_y_values", "list", "<type>int</type>", 0, 0 },
