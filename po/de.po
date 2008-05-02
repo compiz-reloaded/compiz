@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-03 11:01+0200\n"
+"POT-Creation-Date: 2008-05-02 14:02+0530\n"
 "PO-Revision-Date: 2008-04-03 13:19+0200\n"
 "Last-Translator: Danny Baumann <dannybaumann@web.de>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -96,68 +96,68 @@ msgstr "Metacity-Thema verwenden"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Metacity-Thema für das Zeichnen der Fensterdekoration verwenden"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../gtk/window-decorator/gtk-window-decorator.c:4403
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Fenster schließen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:152
+#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Maximierung aufheben"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:84
+#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Fenster maximieren"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:90
+#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Fenster minimieren"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:159
+#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Fenstermenü"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 msgid "Shade"
 msgstr "Aufrollen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+#: ../gtk/window-decorator/gtk-window-decorator.c:4626
 msgid "Make Above"
 msgstr "Über anderen Fenstern anordnen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+#: ../gtk/window-decorator/gtk-window-decorator.c:4652
 msgid "Stick"
 msgstr "Immer auf der sichtbaren Arbeitsfläche"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4672
 msgid "Unshade"
 msgstr "Abrollen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4692
 msgid "Unmake Above"
 msgstr "Nicht mehr über anderen Fenstern anordnen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4718
 msgid "Unstick"
 msgstr "Nur auf aktueller Arbeitsfläche"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#: ../gtk/window-decorator/gtk-window-decorator.c:5075
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Das Fenster \"%s\" reagiert nicht mehr."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+#: ../gtk/window-decorator/gtk-window-decorator.c:5084
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Das Erzwingen des Beendens dieser Anwendung wird den Verlust von "
 "ungespeicherten Daten zur Folge haben."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid "_Force Quit"
 msgstr "_Beenden erzwingen"
 
@@ -319,7 +319,7 @@ msgstr "Stärke des Gaußfilters"
 msgid "Independent texture fetch"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "Mipmaps"
@@ -693,405 +693,414 @@ msgstr ""
 "zu diesem Zeitpunkt mit anderen Fenstern gearbeitet wird."
 
 #: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr ""
+
+#: ../metadata/core.xml.in.h:63
 msgid "General Options"
 msgstr "Allgemeine Optionen"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:64
 msgid "General compiz options"
 msgstr "Allgemeine Compiz Optionen"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:65
 msgid "Good"
 msgstr "Gut"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:66
 msgid "Hide Skip Taskbar Windows"
 msgstr "Programmleistenfenster ausblenden"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:67
 msgid "Hide all windows and focus desktop"
 msgstr "Alle Fenster ausblenden und Desktop fokussieren"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:68
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Fenster ausblenden, die sich bei Wechsel in Modus \"Desktop anzeigen\" nicht "
 "in Programmleiste befanden"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:69
 msgid "High"
 msgstr "Hoch"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:70
 msgid "Horizontal Virtual Size"
 msgstr "Virtuelle horizontale Größe"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:71
 msgid "If available use compression for textures converted from images"
 msgstr "Benutze Kompression für aus Bildern generierte Texturen, wenn möglich."
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:72
 msgid "Ignore Hints When Maximized"
 msgstr "Bei maximierter Anzeige Tipps ignorieren"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:73
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Bei maximierter Anzeige Größensteigerung und Aspekttipps ignorieren"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:74
 msgid "Increase Opacity"
 msgstr "Deckkraft erhöhen"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:75
 msgid "Increase window opacity"
 msgstr "Fensterdeckkraft erhöhen"
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:76
 msgid "Interval before raising selected windows"
 msgstr ""
 "Zeit, die vergehen soll, bevor das ausgewählte Fenster in den Vordergrund "
 "gehoben wird"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:77
 msgid "Interval between ping messages"
 msgstr "Intervall zwischen Ping-Meldungen"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Level of focus stealing prevention"
-msgstr "Legt fest, wie strikt die \"Focus Stealing Prevention\" angewandt wird."
-
 #: ../metadata/core.xml.in.h:78
+msgid "Level of focus stealing prevention"
+msgstr ""
+"Legt fest, wie strikt die \"Focus Stealing Prevention\" angewandt wird."
+
+#: ../metadata/core.xml.in.h:79
 msgid "Lighting"
 msgstr "Beleuchtung"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:80
 msgid "List of currently active plugins"
 msgstr "Liste der aktiven Plugins"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:81
 msgid "List of strings describing output devices"
 msgstr "Liste mit Zeichenketten zur Erläuterung von Ausgabegeräten"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:82
 msgid "Low"
 msgstr "Niedrig"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:83
 msgid "Lower Window"
 msgstr "Fenster nach unten verschieben"
 
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:84
 msgid "Lower window beneath other windows"
 msgstr "Fenster unter andere Fenster verschieben"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize Window Horizontally"
 msgstr "Fenster horizontal maximieren"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:87
 msgid "Maximize Window Vertically"
 msgstr "Fenster vertikal maximieren"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:88
 msgid "Maximize active window"
 msgstr "Aktives Fenster maximieren"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:89
 msgid "Maximize active window horizontally"
 msgstr "Aktives Fenster horizontal maximieren"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:90
 msgid "Maximize active window vertically"
 msgstr "Aktives Fenster vertikal maximieren"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Minimize active window"
 msgstr "Aktives Fenster minimieren"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Number of Desktops"
 msgstr "Anzahl der Desktops"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Number of virtual desktops"
 msgstr "Anzahl der virtuellen Desktops"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Off"
 msgstr "Aus"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Bildschirmaktualisierungen nur während inaktiver vertikaler Anzeige "
 "durchführen"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Opacity Step"
 msgstr "Schrittweite für Opazität"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Opacity change step"
 msgstr ""
 "Die Schrittweite für Einstellungen der Opazität/Durchsichtigkeit ändern"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Opacity values for windows that should be translucent by default"
 msgstr "Wert der Opazität für grundsätzlich transluzente Fenster"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Opacity window values"
 msgstr "Opazitätswert"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Opacity windows"
 msgstr "Transluzente Fenster"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Open a terminal"
 msgstr "Einen Terminalemulator öffnen"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Outputs"
 msgstr "Ausgaben"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Overlapping Output Handling"
 msgstr "Behandlung von überlappenden Ausgabegeräten"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
 msgstr "Pingverzögerung"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:107
 msgid "Prefer larger output"
 msgstr "Größeres Ausgabegerät bevorzugen"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:108
 msgid "Prefer smaller output"
 msgstr "Kleineres Ausgabegerät bevorzugen"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:109
 msgid "Raise On Click"
 msgstr "Durch Klicken in den Vordergrund"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:110
 msgid "Raise Window"
 msgstr "Fenster nach vorn verlagern"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:111
 msgid "Raise selected windows after interval"
 msgstr "Ausgewählte Fenster nach Zeitintervall in Vordergrund verschieben"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:112
 msgid "Raise window above other windows"
 msgstr "Fenster vor andere Fenster verlagern"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:113
 msgid "Raise windows when clicked"
 msgstr "Fenster durch Anklicken in Vordergrund verschieben"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:114
 msgid "Refresh Rate"
 msgstr "Aktualisierungsrate"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:115
 msgid "Run Dialog"
 msgstr "Dialogfeld Ausführen"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 0"
 msgstr "Befehl 0 ausführen"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 1"
 msgstr "Befehl 1 ausführen"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 10"
 msgstr "Befehl 10 ausführen"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 11"
 msgstr "Befehl 11 ausführen"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:120
 msgid "Run command 2"
 msgstr "Befehl 12 ausführen"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:121
 msgid "Run command 3"
 msgstr "Befehl 3 ausführen"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:122
 msgid "Run command 4"
 msgstr "Befehl 4 ausführen"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:123
 msgid "Run command 5"
 msgstr "Befehl 5 ausführen"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:124
 msgid "Run command 6"
 msgstr "Befehl 6 ausführen"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:125
 msgid "Run command 7"
 msgstr "Befehl 7 ausführen"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:126
 msgid "Run command 8"
 msgstr "Befehl 8 ausführen"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:127
 msgid "Run command 9"
 msgstr "Befehl 9 ausführen"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:128
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 "Anzahl der virtuellen Darstellungsfelder in horizontaler Richtung (z. B. 4 "
 "für einen Würfel)"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:129
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Anzahl der virtuellen Darstellungsfelder in vertikaler Richtung"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:130
 msgid "Screenshot command line"
 msgstr "Kommandozeile für Bildschirmfoto"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:131
 msgid "Show Desktop"
 msgstr "Desktop anzeigen"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:132
 msgid "Show Main Menu"
 msgstr "Hauptmenü anzeigen"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:133
 msgid "Show Run Application dialog"
 msgstr "Dialogfeld 'Anwendung ausführen' anzeigen"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:134
 msgid "Show the main menu"
 msgstr "Hauptmenü anzeigen"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:135
 msgid "Slow Animations"
 msgstr "Langsame Animationen"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:136
 msgid "Smart mode"
 msgstr "Intelligent"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:137
 msgid "Sync To VBlank"
 msgstr "Mit VBlank synchronisieren"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:138
 msgid "Take a screenshot"
 msgstr "Bildschirmfoto aufnehmen"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:139
 msgid "Take a screenshot of a window"
 msgstr "Bildschirmfoto von Fenster aufnehmen"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:140
 msgid "Terminal command line"
 msgstr "Kommandozeile für Terminal"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:141
 msgid "Texture Compression"
 msgstr "Texturkompression"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:142
 msgid "Texture Filter"
 msgstr "Strukturfilter"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:143
 msgid "Texture filtering"
 msgstr "Texturfilter"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:144
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Bildwiederholungsrate (Häufigkeit/Sekunde)"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized"
 msgstr "Fenster maximieren ein/aus"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:146
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Fenster horizontal maximieren ein/aus"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:147
 msgid "Toggle Window Maximized Vertically"
 msgstr "Fenster vertikal maximieren ein/aus"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:148
 msgid "Toggle Window Shaded"
 msgstr "Fenster schattieren ein/aus"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized"
 msgstr "Aktives Fenster maximieren ein/aus"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:150
 msgid "Toggle active window maximized horizontally"
 msgstr "Aktives Fenster horizontal maximieren ein/aus"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:151
 msgid "Toggle active window maximized vertically"
 msgstr "Aktives Fenster vertikal maximieren ein/aus"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:152
 msgid "Toggle active window shaded"
 msgstr "Aktives Fenster schattieren ein/aus"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:153
 msgid "Toggle use of slow animations"
 msgstr "Verwenden langsamer Animationen ein/aus"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:155
 msgid "Unmaximize active window"
 msgstr "Maximierung des aktiven Fensters aufheben"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:156
 msgid "Unredirect Fullscreen Windows"
 msgstr "Umleitung von Vollbildfenstern aufheben"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:157
 msgid "Use diffuse light when screen is transformed"
 msgstr "Beim Umwandeln des Bildschirms diffuses Licht verwenden"
 
-#: ../metadata/core.xml.in.h:156
+#: ../metadata/core.xml.in.h:158
 msgid "Vertical Virtual Size"
 msgstr "Vertikale virtuelle Größe"
 
-#: ../metadata/core.xml.in.h:157
+#: ../metadata/core.xml.in.h:159
 msgid "Very High"
 msgstr "Sehr hoch"
 
-#: ../metadata/core.xml.in.h:158
+#: ../metadata/core.xml.in.h:160
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 "Legt fest, welches der überlappenden Ausgabegeräte z.B. beim Maximieren von "
 "Fenstern bevorzugt werden soll."
 
-#: ../metadata/core.xml.in.h:160
+#: ../metadata/core.xml.in.h:162
 msgid "Window menu button binding"
 msgstr "Maustastenkombination für Fenstermenü"
 
-#: ../metadata/core.xml.in.h:161
+#: ../metadata/core.xml.in.h:163
 msgid "Window menu key binding"
 msgstr "Tastenkombination für Fenstermenü"
 
-#: ../metadata/core.xml.in.h:162
+#: ../metadata/core.xml.in.h:164
 msgid "Window screenshot command line"
 msgstr "Kommandozeile für Fenster-Bildschirmfoto "
 
-#: ../metadata/core.xml.in.h:163
+#: ../metadata/core.xml.in.h:165
 msgid "Windows that should be translucent by default"
 msgstr "Fenstertypen, die standardmäßig transparent sein sollen"
 
@@ -1124,175 +1133,168 @@ msgid "Automatic"
 msgstr "Automatisch"
 
 #: ../metadata/cube.xml.in.h:8
-msgid "Background Images"
-msgstr "Hintergrundbilder"
-
-#: ../metadata/cube.xml.in.h:9
-msgid "Background images"
-msgstr "Hintergrundbilder"
-
-#: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
 msgstr "Farbe der Ober- und Unterseite des Würfels"
 
-#: ../metadata/cube.xml.in.h:11
+#: ../metadata/cube.xml.in.h:9
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr "Farbe, die unten im Skydome-Fallback-Verlauf verwendet werden soll"
 
-#: ../metadata/cube.xml.in.h:12
+#: ../metadata/cube.xml.in.h:10
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Farbe, die oben im Skydome-Fallback-Verlauf verwendet werden soll"
 
-#: ../metadata/cube.xml.in.h:13
+#: ../metadata/cube.xml.in.h:11
 msgid "Cube Color"
 msgstr "Würfelfarbe"
 
-#: ../metadata/cube.xml.in.h:14
+#: ../metadata/cube.xml.in.h:12
 msgid "Desktop Cube"
 msgstr "Desktop-Würfel"
 
-#: ../metadata/cube.xml.in.h:15
+#: ../metadata/cube.xml.in.h:13
 msgid "Fold Acceleration"
 msgstr "Beschleunigung beim Falten"
 
-#: ../metadata/cube.xml.in.h:16
+#: ../metadata/cube.xml.in.h:14
 msgid "Fold Speed"
 msgstr "Faltgeschwindigkeit"
 
-#: ../metadata/cube.xml.in.h:17
+#: ../metadata/cube.xml.in.h:15
 msgid "Fold Timestep"
 msgstr "Faltzeitintervall"
 
-#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Wenn möglich für präzise Skalierung Mipmaps erstellen"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 msgid "Go back to previous slide"
 msgstr "Zurück zum vorherigen Dia"
 
-#: ../metadata/cube.xml.in.h:20
+#: ../metadata/cube.xml.in.h:18
 msgid "Image files"
 msgstr "Bilddateien"
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 msgid "Image to use as texture for the skydome"
 msgstr "Bild für die Struktur des Skydome"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr "Würfel nur transparent, wenn er mit der Maus rotiert wird"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Inside Cube"
 msgstr "In Würfel"
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Inside cube"
 msgstr "Virtueller Standpunkt befindet sich innerhalb des Würfels"
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Liste der PNG- und SVG-Dateien, die auf der Oberseite des Würfels angezeigt "
 "werden sollen"
 
-#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "Modus für Mehrfachausgabe"
 
-#: ../metadata/cube.xml.in.h:28
+#: ../metadata/cube.xml.in.h:26
 msgid "Multiple cubes"
 msgstr "Mehrere Würfel"
 
-#: ../metadata/cube.xml.in.h:29
+#: ../metadata/cube.xml.in.h:27
 msgid "Next Slide"
 msgstr "Nächstes Dia"
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:28
 msgid "One big cube"
 msgstr "Auf großem Würfel"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 msgid "Opacity During Rotation"
 msgstr "Opazität bei Rotation"
 
-#: ../metadata/cube.xml.in.h:32
+#: ../metadata/cube.xml.in.h:30
 msgid "Opacity When Not Rotating"
 msgstr "Opazität bei Stillstand"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity of desktop window during rotation."
 msgstr ""
 "Durchsichtigkeit des Desktop-Hintergrundes während der Rotation des Würfels"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity of desktop window when not rotating."
 msgstr "Durchsichtigkeit des Desktop-Hintergrundes bei Stillstand des Würfels"
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Place windows on cube"
 msgstr "Fenster auf Würfel platzieren"
 
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:34
 msgid "Prev Slide"
 msgstr "Vorheriges Dia"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 msgid "Render skydome"
 msgstr "Skydome anzeigen"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 msgid "Scale image"
 msgstr "Bild skalieren"
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Scale images to cover top face of cube"
 msgstr "Fenstergröße an Oberseite des Würfels anpassen"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
 "Bestimmt wie der Würfel angezeigt wird, wenn mehrere Ausgabegeräte verwendet "
 "werden"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Skydome"
 msgstr "Skydome"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Skydome Gradient End Color"
 msgstr "Endfarbe für Skydome-Verlauf"
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome Gradient Start Color"
 msgstr "Anfangsfarbe für Skydome-Verlauf"
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Image"
 msgstr "Skydome-Bild"
 
-#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Geschwindigkeit"
 
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Zeitintervall"
 
-#: ../metadata/cube.xml.in.h:47
+#: ../metadata/cube.xml.in.h:45
 msgid "Transparency Only on Mouse Rotate"
 msgstr "Transparenz nur bei Maus-Rotation"
 
-#: ../metadata/cube.xml.in.h:48
+#: ../metadata/cube.xml.in.h:46
 msgid "Unfold"
 msgstr "Auffalten"
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Unfold cube"
 msgstr "Würfel auffalten"
 
@@ -1551,7 +1553,7 @@ msgid "Move window"
 msgstr "Fenster verschieben"
 
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
-#: ../metadata/switcher.xml.in.h:17
+#: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Opazität"
 
@@ -1583,222 +1585,115 @@ msgstr "Kaskadenförmig"
 msgid "Centered"
 msgstr "Zentriert"
 
+# Sinnvoller Ersatz für "Focus Stealing Prevention"?
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
+msgid "Force Placement Windows"
+msgstr "Fenster mit \"Focus Stealing Prevention\""
+
+#: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
 msgstr "Horizontale Viewport-Position"
 
-#: ../metadata/place.xml.in.h:5
+#: ../metadata/place.xml.in.h:6
 msgid "Maximize"
 msgstr "Maximieren"
 
-#: ../metadata/place.xml.in.h:6
+#: ../metadata/place.xml.in.h:8
 msgid "Place Windows"
 msgstr "Fenster platzieren"
 
-#: ../metadata/place.xml.in.h:7
+#: ../metadata/place.xml.in.h:9
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Fenster bei Zuordnung ungefähr platzieren"
 
-#: ../metadata/place.xml.in.h:8
+#: ../metadata/place.xml.in.h:10
 msgid "Placement Mode"
 msgstr "Platzierungsmodus"
 
-#: ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:11
 msgid "Positioned windows"
 msgstr "Positionierte Fenster"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:12
 msgid "Random"
 msgstr "Zufällig"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:13
+#, fuzzy
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"Legt fest, wohin skalierte Fenster platziert werden, wenn mehrere "
+"Ausgabegeräte verwendet werden."
+
+#: ../metadata/place.xml.in.h:14
 msgid "Smart"
 msgstr "Intelligent"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:15
+#, fuzzy
+msgid "Use active output device"
+msgstr "Auf allen Ausgabegeräten"
+
+#: ../metadata/place.xml.in.h:16
+msgid "Use output device with pointer"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:17
 msgid "Vertical viewport positions"
 msgstr "Vertikale Viewport-Position"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:18
 msgid "Viewport positioned windows"
 msgstr "Auf Viewport platzierte Fenster"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:19
 msgid "Window placement workarounds"
 msgstr "Fensterplatzierungs-Workarounds"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:20
 msgid "Windows that should be positioned by default"
 msgstr "Fenstertypen, die an eine bestimmte Position platziert werden sollen"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:21
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
 "Fenstertypen, die auf einen bestimmten Viewport platziert werden sollen"
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:22
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+
+#: ../metadata/place.xml.in.h:23
 msgid "Workarounds"
 msgstr "Workarounds"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:24
 msgid "X Positions"
 msgstr "X-Position"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:25
 msgid "X Viewport Positions"
 msgstr "Viewport-X-Position"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:26
 msgid "X position values"
 msgstr "Horizontale Position"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:27
 msgid "Y Positions"
 msgstr "Y-Position"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:28
 msgid "Y Viewport Positions"
 msgstr "Viewport-Y-Position"
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:29
 msgid "Y position values"
 msgstr "Vertikale Position"
-
-#: ../metadata/plane.xml.in.h:1
-msgid "Desktop Plane"
-msgstr "Desktop-Fläche"
-
-#: ../metadata/plane.xml.in.h:2
-msgid "Place windows on a plane"
-msgstr "Fenster auf einer Fläche platzieren"
-
-#: ../metadata/plane.xml.in.h:3
-msgid "Plane Down"
-msgstr "Nach unten"
-
-#: ../metadata/plane.xml.in.h:4
-msgid "Plane Left"
-msgstr "Nach links"
-
-#: ../metadata/plane.xml.in.h:5
-msgid "Plane Right"
-msgstr "Nach rechts"
-
-#: ../metadata/plane.xml.in.h:6
-msgid "Plane To Face 1"
-msgstr "Zu Arbeitsfäche 1 wechseln"
-
-#: ../metadata/plane.xml.in.h:7
-msgid "Plane To Face 10"
-msgstr "Zu Arbeitsfäche 10 wechseln"
-
-#: ../metadata/plane.xml.in.h:8
-msgid "Plane To Face 11"
-msgstr "Zu Arbeitsfäche 11 wechseln"
-
-#: ../metadata/plane.xml.in.h:9
-msgid "Plane To Face 12"
-msgstr "Zu Arbeitsfäche 12 wechseln"
-
-#: ../metadata/plane.xml.in.h:10
-msgid "Plane To Face 2"
-msgstr "Zu Arbeitsfäche 2 wechseln"
-
-#: ../metadata/plane.xml.in.h:11
-msgid "Plane To Face 3"
-msgstr "Zu Arbeitsfäche 3 wechseln"
-
-#: ../metadata/plane.xml.in.h:12
-msgid "Plane To Face 4"
-msgstr "Zu Arbeitsfäche 4 wechseln"
-
-#: ../metadata/plane.xml.in.h:13
-msgid "Plane To Face 5"
-msgstr "Zu Arbeitsfäche 5 wechseln"
-
-#: ../metadata/plane.xml.in.h:14
-msgid "Plane To Face 6"
-msgstr "Zu Arbeitsfäche 6 wechseln"
-
-#: ../metadata/plane.xml.in.h:15
-msgid "Plane To Face 7"
-msgstr "Zu Arbeitsfäche 7 wechseln"
-
-#: ../metadata/plane.xml.in.h:16
-msgid "Plane To Face 8"
-msgstr "Zu Arbeitsfäche 8 wechseln"
-
-#: ../metadata/plane.xml.in.h:17
-msgid "Plane To Face 9"
-msgstr "Zu Arbeitsfäche 9 wechseln"
-
-#: ../metadata/plane.xml.in.h:18
-msgid "Plane Up"
-msgstr "Nach oben"
-
-#: ../metadata/plane.xml.in.h:19
-msgid "Plane down"
-msgstr "Nach unten"
-
-#: ../metadata/plane.xml.in.h:20
-msgid "Plane left"
-msgstr "Nach links"
-
-#: ../metadata/plane.xml.in.h:21
-msgid "Plane right"
-msgstr "Nach rechts"
-
-#: ../metadata/plane.xml.in.h:22
-msgid "Plane to face 1"
-msgstr "Zu Arbeitsfäche 1 wechseln"
-
-#: ../metadata/plane.xml.in.h:23
-msgid "Plane to face 10"
-msgstr "Zu Arbeitsfäche 10 wechseln"
-
-#: ../metadata/plane.xml.in.h:24
-msgid "Plane to face 11"
-msgstr "Zu Arbeitsfäche 11 wechseln"
-
-#: ../metadata/plane.xml.in.h:25
-msgid "Plane to face 12"
-msgstr "Zu Arbeitsfäche 12 wechseln"
-
-#: ../metadata/plane.xml.in.h:26
-msgid "Plane to face 2"
-msgstr "Zu Arbeitsfäche 2 wechseln"
-
-#: ../metadata/plane.xml.in.h:27
-msgid "Plane to face 3"
-msgstr "Zu Arbeitsfäche 3 wechseln"
-
-#: ../metadata/plane.xml.in.h:28
-msgid "Plane to face 4"
-msgstr "Zu Arbeitsfäche 4 wechseln"
-
-#: ../metadata/plane.xml.in.h:29
-msgid "Plane to face 5"
-msgstr "Zu Arbeitsfäche 5 wechseln"
-
-#: ../metadata/plane.xml.in.h:30
-msgid "Plane to face 6"
-msgstr "Zu Arbeitsfäche 6 wechseln"
-
-#: ../metadata/plane.xml.in.h:31
-msgid "Plane to face 7"
-msgstr "Zu Arbeitsfäche 7 wechseln"
-
-#: ../metadata/plane.xml.in.h:32
-msgid "Plane to face 8"
-msgstr "Zu Arbeitsfäche 8 wechseln"
-
-#: ../metadata/plane.xml.in.h:33
-msgid "Plane to face 9"
-msgstr "Zu Arbeitsfäche 9 wechseln"
-
-#: ../metadata/plane.xml.in.h:34
-msgid "Plane up"
-msgstr "Nach oben"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -2302,7 +2197,7 @@ msgstr "Drehung starten"
 msgid "Timeout before flipping viewport"
 msgstr "Zeitüberschreitung vor Viewport-Wechsel"
 
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -2516,90 +2411,109 @@ msgid "Minimized"
 msgstr "Minimiert"
 
 #: ../metadata/switcher.xml.in.h:14
+#, fuzzy
+msgid "Next Panel"
+msgstr "Desktop-Fläche"
+
+#: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
 msgstr "Nächstes Fenster"
 
-#: ../metadata/switcher.xml.in.h:15
+#: ../metadata/switcher.xml.in.h:16
 msgid "Next window (All windows)"
 msgstr "Nächstes Fenster (Alle Arbeitsflächen)"
 
-#: ../metadata/switcher.xml.in.h:16
+#: ../metadata/switcher.xml.in.h:17
 msgid "Next window (No popup)"
 msgstr "Nächstes Fenster (Keine Vorschau)"
 
-#: ../metadata/switcher.xml.in.h:18
+#: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window"
 msgstr "Vorschaufenster anzeigen und nächstes Fenster auswählen"
 
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 "Vorschaufenster anzeigen und nächstes Fenster (von allen Arbeitsflächen) "
 "auswählen"
 
-#: ../metadata/switcher.xml.in.h:20
+#: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select previous window"
 msgstr "Vorschaufenster anzeigen und vorheriges Fenster auswählen"
 
-#: ../metadata/switcher.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:22
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 "Vorschaufenster anzeigen und vorheriges Fenster (von allen Arbeitsflächen) "
 "auswählen"
 
-#: ../metadata/switcher.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:23
+#, fuzzy
+msgid "Prev Panel"
+msgstr "Vorheriges Dia"
+
+#: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
 msgstr "Vorheriges Fenster"
 
-#: ../metadata/switcher.xml.in.h:23
+#: ../metadata/switcher.xml.in.h:25
 msgid "Prev window (All windows)"
 msgstr "Vorheriges Fenster (Alle Arbeitsflächen)"
 
-#: ../metadata/switcher.xml.in.h:24
+#: ../metadata/switcher.xml.in.h:26
 msgid "Prev window (No popup)"
 msgstr "Vorheriges Fenster (Keine Vorschau)"
 
-#: ../metadata/switcher.xml.in.h:25
+#: ../metadata/switcher.xml.in.h:27
 msgid "Rotate to the selected window while switching"
 msgstr ""
-"Während des Umschaltens zur Arbeitsfläche des selektierten Fensters "
-"wechseln."
+"Während des Umschaltens zur Arbeitsfläche des selektierten Fensters wechseln."
 
-#: ../metadata/switcher.xml.in.h:26
+#: ../metadata/switcher.xml.in.h:28
 msgid "Saturation"
 msgstr "Sättigung"
 
-#: ../metadata/switcher.xml.in.h:27
+#: ../metadata/switcher.xml.in.h:29
+#, fuzzy
+msgid "Select next panel type window."
+msgstr "Nächstes Fenster auswählen"
+
+#: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Nächstes Fenster auswählen, ohne dabei das Vorschaufenster anzuzeigen."
 
-#: ../metadata/switcher.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:31
+#, fuzzy
+msgid "Select previous panel type window."
+msgstr "Vorheriges Fenster auswählen"
+
+#: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
 msgstr ""
 "Vorheriges Fenster auswählen, ohne dabei das Vorschaufenster anzuzeigen."
 
-#: ../metadata/switcher.xml.in.h:29
+#: ../metadata/switcher.xml.in.h:33
 msgid "Show icon next to thumbnail"
 msgstr "Neben Miniaturbild Symbol anzeigen"
 
-#: ../metadata/switcher.xml.in.h:30
+#: ../metadata/switcher.xml.in.h:34
 msgid "Show minimized windows"
 msgstr "Minimierte Fenster anzeigen"
 
-#: ../metadata/switcher.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:36
 msgid "Switcher speed"
 msgstr "Schaltergeschwindigkeit"
 
-#: ../metadata/switcher.xml.in.h:33
+#: ../metadata/switcher.xml.in.h:37
 msgid "Switcher timestep"
 msgstr "Schalterzeitintervall"
 
-#: ../metadata/switcher.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:38
 msgid "Switcher windows"
 msgstr "Fenster in Umschaltauswahl"
 
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:40
 msgid "Windows that should be shown in switcher"
 msgstr "Fenster, die beim Umschalten auswählbar sein sollen."
 
@@ -2861,6 +2775,111 @@ msgstr "Zoomfaktor"
 msgid "Zoom pan"
 msgstr "Ansicht verschieben"
 
+#~ msgid "Background Images"
+#~ msgstr "Hintergrundbilder"
+
+#~ msgid "Background images"
+#~ msgstr "Hintergrundbilder"
+
+#~ msgid "Place windows on a plane"
+#~ msgstr "Fenster auf einer Fläche platzieren"
+
+#~ msgid "Plane Down"
+#~ msgstr "Nach unten"
+
+#~ msgid "Plane Left"
+#~ msgstr "Nach links"
+
+#~ msgid "Plane Right"
+#~ msgstr "Nach rechts"
+
+#~ msgid "Plane To Face 1"
+#~ msgstr "Zu Arbeitsfäche 1 wechseln"
+
+#~ msgid "Plane To Face 10"
+#~ msgstr "Zu Arbeitsfäche 10 wechseln"
+
+#~ msgid "Plane To Face 11"
+#~ msgstr "Zu Arbeitsfäche 11 wechseln"
+
+#~ msgid "Plane To Face 12"
+#~ msgstr "Zu Arbeitsfäche 12 wechseln"
+
+#~ msgid "Plane To Face 2"
+#~ msgstr "Zu Arbeitsfäche 2 wechseln"
+
+#~ msgid "Plane To Face 3"
+#~ msgstr "Zu Arbeitsfäche 3 wechseln"
+
+#~ msgid "Plane To Face 4"
+#~ msgstr "Zu Arbeitsfäche 4 wechseln"
+
+#~ msgid "Plane To Face 5"
+#~ msgstr "Zu Arbeitsfäche 5 wechseln"
+
+#~ msgid "Plane To Face 6"
+#~ msgstr "Zu Arbeitsfäche 6 wechseln"
+
+#~ msgid "Plane To Face 7"
+#~ msgstr "Zu Arbeitsfäche 7 wechseln"
+
+#~ msgid "Plane To Face 8"
+#~ msgstr "Zu Arbeitsfäche 8 wechseln"
+
+#~ msgid "Plane To Face 9"
+#~ msgstr "Zu Arbeitsfäche 9 wechseln"
+
+#~ msgid "Plane Up"
+#~ msgstr "Nach oben"
+
+#~ msgid "Plane down"
+#~ msgstr "Nach unten"
+
+#~ msgid "Plane left"
+#~ msgstr "Nach links"
+
+#~ msgid "Plane right"
+#~ msgstr "Nach rechts"
+
+#~ msgid "Plane to face 1"
+#~ msgstr "Zu Arbeitsfäche 1 wechseln"
+
+#~ msgid "Plane to face 10"
+#~ msgstr "Zu Arbeitsfäche 10 wechseln"
+
+#~ msgid "Plane to face 11"
+#~ msgstr "Zu Arbeitsfäche 11 wechseln"
+
+#~ msgid "Plane to face 12"
+#~ msgstr "Zu Arbeitsfäche 12 wechseln"
+
+#~ msgid "Plane to face 2"
+#~ msgstr "Zu Arbeitsfäche 2 wechseln"
+
+#~ msgid "Plane to face 3"
+#~ msgstr "Zu Arbeitsfäche 3 wechseln"
+
+#~ msgid "Plane to face 4"
+#~ msgstr "Zu Arbeitsfäche 4 wechseln"
+
+#~ msgid "Plane to face 5"
+#~ msgstr "Zu Arbeitsfäche 5 wechseln"
+
+#~ msgid "Plane to face 6"
+#~ msgstr "Zu Arbeitsfäche 6 wechseln"
+
+#~ msgid "Plane to face 7"
+#~ msgstr "Zu Arbeitsfäche 7 wechseln"
+
+#~ msgid "Plane to face 8"
+#~ msgstr "Zu Arbeitsfäche 8 wechseln"
+
+#~ msgid "Plane to face 9"
+#~ msgstr "Zu Arbeitsfäche 9 wechseln"
+
+#~ msgid "Plane up"
+#~ msgstr "Nach oben"
+
 #~ msgid "Desktop Window Opacity Fade Time."
 #~ msgstr "Dauer der Fensterausblendung"
 
@@ -2869,12 +2888,6 @@ msgstr "Ansicht verschieben"
 
 #~ msgid "Open window menu"
 #~ msgstr "Fenstermenü öffnen"
-
-#~ msgid "Select next window"
-#~ msgstr "Nächstes Fenster auswählen"
-
-#~ msgid "Select previous window"
-#~ msgstr "Vorheriges Fenster auswählen"
 
 #~ msgid "Dock"
 #~ msgstr "Andocken"

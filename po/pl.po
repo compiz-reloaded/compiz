@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-03 14:31+0530\n"
-"PO-Revision-Date: 2008-03-27 00:09+0100\n"
-"Last-Translator: lukasz deren <lukaszderen@gmail.com>\n"
+"POT-Creation-Date: 2008-05-02 14:04+0530\n"
+"PO-Revision-Date: 2008-04-15 02:50+0200\n"
+"Last-Translator: Jarek Sobolewski <r@sledinmay.com>\n"
 "Language-Team: <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 1.0.2\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -94,71 +94,67 @@ msgstr "Używaj motywu Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Używaj motywu Metacity podczas rysowania dekoracji okien"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../gtk/window-decorator/gtk-window-decorator.c:4403
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Zamknij okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:152
+#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Cofnij maksymalizację okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:84
+#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Maksymalizuj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:90
+#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Zminimalizuj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:159
+#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Menu okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4550
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 msgid "Shade"
 msgstr "Cieniuj"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4570
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4626
 msgid "Make Above"
 msgstr "Stwórz powyżej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4596
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4652
 msgid "Stick"
 msgstr "Przyklej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4672
 #, fuzzy
 msgid "Unshade"
 msgstr "Brak Cieni"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4692
 msgid "Unmake Above"
 msgstr "Nie twórz powyżej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4718
 msgid "Unstick"
 msgstr "Odklej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#: ../gtk/window-decorator/gtk-window-decorator.c:5075
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Okno \"%s\" nie odpowiada."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+#: ../gtk/window-decorator/gtk-window-decorator.c:5084
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "Wymuszenie zamknięcia aplikacji spowoduje utratę niezapisanych zmian."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid "_Force Quit"
 msgstr "_Wymuś Zamknięcie"
 
@@ -241,27 +237,25 @@ msgid "Alpha Blur"
 msgstr "Rozmycie alfa"
 
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "Rozmywanie okien"
+msgstr "Rozmycie alfa okien"
 
 #: ../metadata/blur.xml.in.h:4
 msgid "Blur Filter"
-msgstr "Filtr rozmywania"
+msgstr "Filtr rozmycia"
 
 #: ../metadata/blur.xml.in.h:5
 #, fuzzy
 msgid "Blur Occlusion"
-msgstr "Nasycenie"
+msgstr "Zamknięcie rozmycia"
 
 #: ../metadata/blur.xml.in.h:6
-#, fuzzy
 msgid "Blur Saturation"
 msgstr "Nasycenie rozmycia"
 
 #: ../metadata/blur.xml.in.h:7
 msgid "Blur Speed"
-msgstr "Rozmywanie z prędkością"
+msgstr "Prędkość rozmycia"
 
 #: ../metadata/blur.xml.in.h:8
 msgid "Blur Windows"
@@ -272,9 +266,8 @@ msgid "Blur behind translucent parts of windows"
 msgstr "Rozmycie za przezroczystymi częściami okien"
 
 #: ../metadata/blur.xml.in.h:10
-#, fuzzy
 msgid "Blur saturation"
-msgstr "Nasycenie"
+msgstr "Nasycenie rozmycia"
 
 #: ../metadata/blur.xml.in.h:11
 msgid "Blur windows"
@@ -297,43 +290,42 @@ msgid "Focus Blur"
 msgstr "Rozmycie ostrości"
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "Rozmywanie okien"
+msgstr "Rozmycie ostrości okien"
 
 #: ../metadata/blur.xml.in.h:17
 msgid "Gaussian"
-msgstr "Rozmywanie gaussowskie"
+msgstr "Rozmycie Gaussa"
 
 #: ../metadata/blur.xml.in.h:18
 msgid "Gaussian Radius"
-msgstr "Promień rozmycia gaussowskiego"
+msgstr "Promień rozmycia Gaussa"
 
 #: ../metadata/blur.xml.in.h:19
 msgid "Gaussian Strength"
-msgstr "Siła rozmycia gaussowskiego"
+msgstr "Siła rozmycia Gaussa"
 
 #: ../metadata/blur.xml.in.h:20
 msgid "Gaussian radius"
-msgstr "Promień dla rozmycia gaussowskiego"
+msgstr "Promień rozmycia Gaussa"
 
 #: ../metadata/blur.xml.in.h:21
-#, fuzzy
 msgid "Gaussian strength"
-msgstr "Rozmywanie gaussowskie"
+msgstr "Siła rozmycia Gaussa"
 
 #: ../metadata/blur.xml.in.h:22
+#, fuzzy
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Uzyskaj niezależne tekstury"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "Mipmapa"
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
-msgstr "LOD mipmapy"
+msgstr "Poziom szczegółów mipmapy"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
@@ -348,10 +340,13 @@ msgid "Pulse effect"
 msgstr "Efekt pulsowania"
 
 #: ../metadata/blur.xml.in.h:28
+#, fuzzy
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Używaj dostępnych jednostek tekstur, by uzyskać jak najwięcej niezależnych "
+"tekstur"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -359,12 +354,11 @@ msgstr "Szybkość rozmywania okien"
 
 #: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Okna, które mają być poddane rozmyciu ostrości"
 
 #: ../metadata/blur.xml.in.h:31
-#, fuzzy
 msgid "Windows that should be use alpha blur by default"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Okna, które mają używać rozmycia alfa"
 
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
@@ -459,7 +453,7 @@ msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Zezwól na to, by rysowanie okien pełnoekranowych nie było przekierowywane do "
-"map obrazu poza ekranem"
+"obrazków rastrowych poza ekranem"
 
 #: ../metadata/core.xml.in.h:15
 msgid "Audible Bell"
@@ -487,7 +481,7 @@ msgstr "Automatyczne wykrywanie częstotliwości odświeżania"
 
 #: ../metadata/core.xml.in.h:21
 msgid "Best"
-msgstr "Najlepiej"
+msgstr "Najlepszy"
 
 #: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
@@ -495,7 +489,7 @@ msgstr "Kliknij by wybrać"
 
 #: ../metadata/core.xml.in.h:23
 msgid "Click on window moves input focus to it"
-msgstr "Klinkięcie okna ogniskuje na nim wprowadzanie"
+msgstr "Kliknięcie okna ogniskuje na nim wprowadzanie"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
@@ -586,17 +580,14 @@ msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
 
 #: ../metadata/core.xml.in.h:47
-#, fuzzy
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
 
 #: ../metadata/core.xml.in.h:48
-#, fuzzy
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
 
 #: ../metadata/core.xml.in.h:49
-#, fuzzy
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
 
@@ -629,442 +620,444 @@ msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"Czas jaki musi spędzić wskaźnik na krawędzi ekranu zanim zostanie wykonana "
+"akcja"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Opóźnienie zapadki krawędzi"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Fast"
-msgstr "Szybko"
+msgstr "Szybki"
 
 #: ../metadata/core.xml.in.h:59
 #, fuzzy
 msgid "Focus Prevention Level"
-msgstr "Zapobieganie uaktywnianiu"
+msgstr "Stopień zapobiegania skupienia"
 
 #: ../metadata/core.xml.in.h:60
 #, fuzzy
 msgid "Focus Prevention Windows"
-msgstr "Zapobieganie uaktywnianiu"
+msgstr "Zapobieganie skupieniu okien"
 
 #: ../metadata/core.xml.in.h:61
 #, fuzzy
 msgid "Focus prevention windows"
-msgstr "Zapobieganie uaktywnianiu"
+msgstr "Zapobieganie skupieniu okien"
 
 #: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr ""
+
+#: ../metadata/core.xml.in.h:63
 msgid "General Options"
 msgstr "Opcje Ogólne"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:64
 msgid "General compiz options"
 msgstr "Ogólne opcje Compiza"
 
-#: ../metadata/core.xml.in.h:64
-msgid "Good"
-msgstr "Dobrze"
-
 #: ../metadata/core.xml.in.h:65
+msgid "Good"
+msgstr "Dobry"
+
+#: ../metadata/core.xml.in.h:66
 msgid "Hide Skip Taskbar Windows"
 msgstr "Ukryj okna spoza paska zadań"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:67
 msgid "Hide all windows and focus desktop"
 msgstr "Schowaj wszystkie okna i wybierz pulpit"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:68
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "Ukrywa okna spoza paska zadań w trybie pokazywania pulpitu"
 
-#: ../metadata/core.xml.in.h:68
-msgid "High"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:69
+msgid "High"
+msgstr "Wysokość"
+
+#: ../metadata/core.xml.in.h:70
 msgid "Horizontal Virtual Size"
 msgstr "Poziomy rozmiar wirtualny"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:71
 msgid "If available use compression for textures converted from images"
 msgstr ""
+"Jeśli możliwe używaj kompresji dla tekstur przekonwertowanych z obrazków"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:72
 msgid "Ignore Hints When Maximized"
 msgstr "Ignoruj podpowiedzi dla zmaksymalizowanych okien"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:73
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 "Ignorowanie podpowiedzi zwiększenia rozmiaru i proporcji gdy okno jest "
 "zmaksymalizowane"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:74
 msgid "Increase Opacity"
 msgstr "Zwiększ nieprzezroczystość"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:75
 msgid "Increase window opacity"
 msgstr "Zwiększ nieprzezroczystość okna"
 
-#: ../metadata/core.xml.in.h:75
-#, fuzzy
-msgid "Interval before raising selected windows"
-msgstr "Interwał przed podnoszeniem wskazanych okien"
-
 #: ../metadata/core.xml.in.h:76
-#, fuzzy
-msgid "Interval between ping messages"
-msgstr "Czas pomiędzy wiadomościami ping"
+msgid "Interval before raising selected windows"
+msgstr "Odstęp czasu przed podniesieniem wskazanych okien"
 
 #: ../metadata/core.xml.in.h:77
+msgid "Interval between ping messages"
+msgstr "Odstęp czasu pomiędzy wiadomościami ping"
+
+#: ../metadata/core.xml.in.h:78
 #, fuzzy
 msgid "Level of focus stealing prevention"
-msgstr "Włącza zapobieganie uaktywnianiu"
+msgstr "Stopień zapobiegania wykradania ostrości"
 
 # Zmieniłem z "Błyskawica" na "Oświetlenie":
 # lightNing=Błyskawica
 # lighting=Oświetlenie, cieniowanie
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:79
 msgid "Lighting"
 msgstr "Oświetlenie"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:80
 msgid "List of currently active plugins"
 msgstr "Lista aktualnie włączonych wtyczek"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:81
 msgid "List of strings describing output devices"
 msgstr "Lista opisów urządzeń wyjściowych"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:82
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:83
 msgid "Lower Window"
 msgstr "Obniż okno"
 
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:84
 msgid "Lower window beneath other windows"
 msgstr "Przenieś okno pod pozostałe"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize Window Horizontally"
 msgstr "Maksymalizuj okno w poziomie"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:87
 msgid "Maximize Window Vertically"
 msgstr "Maksymalizuj okno w pionie"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:88
 msgid "Maximize active window"
 msgstr "Maksymalizuj aktywne okno"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:89
 msgid "Maximize active window horizontally"
 msgstr "Maksymalizuj aktywne okno w poziomie"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:90
 msgid "Maximize active window vertically"
 msgstr "Maksymalizuj aktywne okno w pionie"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Minimize active window"
 msgstr "Minimalizuj aktywne okno"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Number of Desktops"
 msgstr "Ilość pulpitów"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Number of virtual desktops"
 msgstr "Ilość wirtualnych pulpitów"
 
-#: ../metadata/core.xml.in.h:94
-msgid "Off"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:95
+msgid "Off"
+msgstr "Wyłączenie"
+
+#: ../metadata/core.xml.in.h:96
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Odświeżaj ekran tylko podczas okresu poziomego wygaszania"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Opacity Step"
 msgstr "Krok nieprzezroczystości"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Opacity change step"
 msgstr "Krok zmiany nieprzezroczystości"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Opacity values for windows that should be translucent by default"
 msgstr ""
 "Wartości nieprzezroczystości okien które powinny być domyślnie "
 "półprzezroczyste"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Opacity window values"
 msgstr "Wartości nieprzezroczystości okien"
 
-#: ../metadata/core.xml.in.h:100
-#, fuzzy
-msgid "Opacity windows"
-msgstr "Przezroczystość okien"
-
 #: ../metadata/core.xml.in.h:101
+msgid "Opacity windows"
+msgstr "Nieprzezroczystość okien"
+
+#: ../metadata/core.xml.in.h:102
 msgid "Open a terminal"
 msgstr "Otwiera terminal"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Outputs"
 msgstr "Wyjścia"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
+#, fuzzy
 msgid "Overlapping Output Handling"
+msgstr "Radzenie sobie z zachodzącymi na siebie wyjściami"
+
+#: ../metadata/core.xml.in.h:105
+msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
 msgstr "Opóźnienie ping"
 
-#: ../metadata/core.xml.in.h:105
-#, fuzzy
+#: ../metadata/core.xml.in.h:107
 msgid "Prefer larger output"
 msgstr "Preferuj większe wyjście"
 
-#: ../metadata/core.xml.in.h:106
-#, fuzzy
+#: ../metadata/core.xml.in.h:108
 msgid "Prefer smaller output"
 msgstr "Preferuj mniejsze wyjście"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:109
 msgid "Raise On Click"
 msgstr "Podnieś przy kliknięciu"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:110
 msgid "Raise Window"
 msgstr "Podnieś okno"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:111
 msgid "Raise selected windows after interval"
 msgstr "Podnieś wskazane okno po interwale"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:112
 msgid "Raise window above other windows"
 msgstr "Podnosi okno ponad pozostałe"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:113
 msgid "Raise windows when clicked"
 msgstr "Podnieś okna po kliknięciu"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:114
 msgid "Refresh Rate"
 msgstr "Częstotliwość odświeżania"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:115
 msgid "Run Dialog"
 msgstr "Dialog Uruchom"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 0"
 msgstr "Wykonaj polecenie 0"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 1"
 msgstr "Wykonaj polecenie 1"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 10"
 msgstr "Wykonaj polecenie 10"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 11"
 msgstr "Wykonaj polecenie 11"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:120
 msgid "Run command 2"
 msgstr "Wykonaj polecenie 2"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:121
 msgid "Run command 3"
 msgstr "Wykonaj polecenie 3"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:122
 msgid "Run command 4"
 msgstr "Wykonaj polecenie 4"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:123
 msgid "Run command 5"
 msgstr "Wykonaj polecenie 5"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:124
 msgid "Run command 6"
 msgstr "Wykonaj polecenie 6"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:125
 msgid "Run command 7"
 msgstr "Wykonaj polecenie 7"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:126
 msgid "Run command 8"
 msgstr "Wykonaj polecenie 8"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:127
 msgid "Run command 9"
 msgstr "Wykonaj polecenie 9"
 
-#: ../metadata/core.xml.in.h:126
-#, fuzzy
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Mnożnik poziomego rozmiaru ekranu dla rozmiaru wirtualnego"
-
-#: ../metadata/core.xml.in.h:127
-#, fuzzy
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "Mnożnik pionowego rozmiaru ekranu dla rozmiaru wirtualnego"
-
 #: ../metadata/core.xml.in.h:128
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Mnożnik rozmiaru ekranu dla poziomego wirtualnego rozmiaru"
+
+#: ../metadata/core.xml.in.h:129
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Mnożnik rozmiaru ekranu dla pionowego wirtualnego rozmiaru"
+
+#: ../metadata/core.xml.in.h:130
 msgid "Screenshot command line"
 msgstr "Polecenie zrzutu ekranu"
 
-#: ../metadata/core.xml.in.h:129
-#, fuzzy
+#: ../metadata/core.xml.in.h:131
 msgid "Show Desktop"
 msgstr "Pokaż pulpit"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:132
 msgid "Show Main Menu"
 msgstr "Wyświetl menu główne"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:133
 msgid "Show Run Application dialog"
 msgstr "Wyświetl okno dialogowe \"Uruchom program\""
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:134
 msgid "Show the main menu"
 msgstr "Wyświetl menu główne"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:135
 msgid "Slow Animations"
 msgstr "Powolne animacje"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:136
 msgid "Smart mode"
-msgstr ""
+msgstr "\"sprytny\" tryb"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:137
 msgid "Sync To VBlank"
 msgstr "Synchronizuj z VBlank"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:138
 msgid "Take a screenshot"
 msgstr "Pobierz zrzut ekranu"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:139
 msgid "Take a screenshot of a window"
 msgstr "Pobierz zrzut okna"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:140
 msgid "Terminal command line"
 msgstr "Polecenie terminala"
 
-#: ../metadata/core.xml.in.h:139
-#, fuzzy
+#: ../metadata/core.xml.in.h:141
 msgid "Texture Compression"
-msgstr "Filtrowanie tekstur"
+msgstr "Kompresja tekstur"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:142
 msgid "Texture Filter"
 msgstr "Filtr tekstury"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:143
 msgid "Texture filtering"
 msgstr "Filtrowanie tekstur"
 
-#: ../metadata/core.xml.in.h:142
-#, fuzzy
+#: ../metadata/core.xml.in.h:144
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Częstotliwość przerysowywania ekranu (razy na sekundę)"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized"
 msgstr "Przełącz maksymalizację okna"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:146
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Przełącz maksymalizację poziomą okna"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:147
 msgid "Toggle Window Maximized Vertically"
 msgstr "Przełącz maksymalizację pionową okna"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:148
 msgid "Toggle Window Shaded"
 msgstr "Przełącz przyciemnianie okna"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized"
 msgstr "Przełącza maksymalizację aktywnego okna"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:150
 msgid "Toggle active window maximized horizontally"
 msgstr "Przełącz maksymalizację poziomą aktywnego okna"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:151
 msgid "Toggle active window maximized vertically"
 msgstr "Przełącz maksymalizację poziomą aktywnego okna"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:152
 msgid "Toggle active window shaded"
 msgstr "Przełącza przyciemnianie aktywnego okna"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:153
 msgid "Toggle use of slow animations"
 msgstr "Wyłącz powolne animacje"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:155
 msgid "Unmaximize active window"
 msgstr "Cofnij maksymalizację aktywnego okna"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:156
 msgid "Unredirect Fullscreen Windows"
 msgstr "Cofnij przekierowanie okien pełnoekranowych"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:157
 msgid "Use diffuse light when screen is transformed"
 msgstr "Używaj rozproszonego światła podczas przekształceń ekranu"
 
-#: ../metadata/core.xml.in.h:156
+#: ../metadata/core.xml.in.h:158
 msgid "Vertical Virtual Size"
 msgstr "Pionowy rozmiar wirtualny"
 
-#: ../metadata/core.xml.in.h:157
+#: ../metadata/core.xml.in.h:159
 msgid "Very High"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:158
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Bardzo wysoko"
 
 #: ../metadata/core.xml.in.h:160
 #, fuzzy
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
+"Które z zachodzących na siebie urządzonych wyjściowych powinny być "
+"preferowne?"
+
+#: ../metadata/core.xml.in.h:162
 msgid "Window menu button binding"
 msgstr "Przypisanie przycisku do menu okien"
 
-#: ../metadata/core.xml.in.h:161
-#, fuzzy
+#: ../metadata/core.xml.in.h:163
 msgid "Window menu key binding"
 msgstr "Przypisanie klawisza do menu okien"
 
-#: ../metadata/core.xml.in.h:162
+#: ../metadata/core.xml.in.h:164
 msgid "Window screenshot command line"
 msgstr "Polecenie zrzutu okna"
 
-#: ../metadata/core.xml.in.h:163
-#, fuzzy
+#: ../metadata/core.xml.in.h:165
 msgid "Windows that should be translucent by default"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Typy okien, które standardowo mają być półprzezroczyste"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1095,176 +1088,167 @@ msgid "Automatic"
 msgstr "Automatycznie"
 
 #: ../metadata/cube.xml.in.h:8
-msgid "Background Images"
-msgstr "Obrazki tła"
-
-#: ../metadata/cube.xml.in.h:9
-msgid "Background images"
-msgstr "Obrazki tła"
-
-#: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
 msgstr "Kolor górnej i dolnej ściany kostki"
 
-#: ../metadata/cube.xml.in.h:11
+#: ../metadata/cube.xml.in.h:9
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr "Dolny kolor przejścia tonalnego w tle kostki pulpitów"
 
-#: ../metadata/cube.xml.in.h:12
+#: ../metadata/cube.xml.in.h:10
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Góny kolor przejścia tonalnego w tle kostki pulpitów"
 
-#: ../metadata/cube.xml.in.h:13
+#: ../metadata/cube.xml.in.h:11
 msgid "Cube Color"
 msgstr "Kolor kostki"
 
-#: ../metadata/cube.xml.in.h:14
+#: ../metadata/cube.xml.in.h:12
 msgid "Desktop Cube"
 msgstr "Kostka pulpitu"
 
-#: ../metadata/cube.xml.in.h:15
+#: ../metadata/cube.xml.in.h:13
 msgid "Fold Acceleration"
 msgstr "Przyspieszenie zwijania"
 
-#: ../metadata/cube.xml.in.h:16
+#: ../metadata/cube.xml.in.h:14
 msgid "Fold Speed"
 msgstr "Szybkość zwijania"
 
-#: ../metadata/cube.xml.in.h:17
+#: ../metadata/cube.xml.in.h:15
 msgid "Fold Timestep"
 msgstr "Opóźnienie zwijania"
 
-#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "O ile to możliwe, generuj mitmapy dla lepszej jakości skalowania"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 msgid "Go back to previous slide"
 msgstr "Przejdź do poprzedniej klatki"
 
-#: ../metadata/cube.xml.in.h:20
+#: ../metadata/cube.xml.in.h:18
 msgid "Image files"
 msgstr "Pliki obrazków"
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 msgid "Image to use as texture for the skydome"
 msgstr "Obrazek, który ma być używany jako tekstura tła dla kostki"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr ""
 "Kostka będzie przezroczysta tylko jeśli jest obracana za pomocą kursora"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Inside Cube"
 msgstr "Wewnątrz kostki"
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Inside cube"
 msgstr "Wewnątrz kostki"
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Lista plików PNG i SVG, które mają być wyświetlane na górnej ścianie kostki"
 
-#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "Tryb wielu urządzeń wyjściowych"
 
-#: ../metadata/cube.xml.in.h:28
+#: ../metadata/cube.xml.in.h:26
 msgid "Multiple cubes"
 msgstr "Wiele kostek"
 
-#: ../metadata/cube.xml.in.h:29
+#: ../metadata/cube.xml.in.h:27
 msgid "Next Slide"
 msgstr "Następna klatka"
 
-#: ../metadata/cube.xml.in.h:30
-#, fuzzy
+#: ../metadata/cube.xml.in.h:28
 msgid "One big cube"
-msgstr "Wewnątrz kostki"
+msgstr "Jedna duża kostka"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 msgid "Opacity During Rotation"
 msgstr "Nieprzezroczystość kostki podczas obracania "
 
-#: ../metadata/cube.xml.in.h:32
+#: ../metadata/cube.xml.in.h:30
 msgid "Opacity When Not Rotating"
 msgstr "Nieprzezroczystość kostki kiedy nie jest obracana"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity of desktop window during rotation."
 msgstr "Nieprzezroczystość pulpitu podczas obracania kostki"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity of desktop window when not rotating."
 msgstr "Nieprzezroczystość pulpitu kiedy kostka nie jest obracana"
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Place windows on cube"
 msgstr "Umieszczaj okna na kostce"
 
-#: ../metadata/cube.xml.in.h:36
-#, fuzzy
+#: ../metadata/cube.xml.in.h:34
 msgid "Prev Slide"
 msgstr "Poprzednia klatka"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 msgid "Render skydome"
 msgstr "Wyświetlaj tło dla kostki"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 msgid "Scale image"
 msgstr "Skaluj obrazek"
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Scale images to cover top face of cube"
 msgstr "Skaluj obrazki przykrywające górną ścianę kostki"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
 "Decyduje jak kostka jest wyświetlana jeśli używanych jest kilka uzrądzeń "
 "wyjściowych"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Skydome"
 msgstr "Tło dla kostki"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Skydome Gradient End Color"
 msgstr "Końcowy kolor gradientu tła kostki"
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome Gradient Start Color"
 msgstr "Początkowy kolor gradientu tła kostki"
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Image"
 msgstr "Obrazek tła dla kostki"
 
-#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Szybkość"
 
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Opóźnienie"
 
-#: ../metadata/cube.xml.in.h:47
+#: ../metadata/cube.xml.in.h:45
 msgid "Transparency Only on Mouse Rotate"
 msgstr "Przezroczystość tylko podczas obracania kursora"
 
-#: ../metadata/cube.xml.in.h:48
+#: ../metadata/cube.xml.in.h:46
 msgid "Unfold"
 msgstr "Odsłoń"
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Unfold cube"
 msgstr "Odsłoń kostkę"
 
@@ -1302,9 +1286,8 @@ msgid "Drop shadow Y offset"
 msgstr "Przesunięcie cienia w osi Y"
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "Promień cienia"
+msgstr "Kolor cienia"
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
@@ -1347,45 +1330,44 @@ msgid "Window decorations"
 msgstr "Dekoracje okna"
 
 #: ../metadata/decoration.xml.in.h:19
-#, fuzzy
 msgid "Windows that should be decorated"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Typy okien, które mają być dekorowane"
 
 #: ../metadata/decoration.xml.in.h:20
-#, fuzzy
 msgid "Windows that should have a shadow"
-msgstr "Typy okien, które mają zanikać"
+msgstr "Typy okien, które mają posiadać cień"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
-msgstr "Zanikanie podczas minimalizacji/otwierania/zamykania"
+msgstr "Ściemnianie podczas minimalizacji/otwierania/zamykania"
 
 #: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
-msgstr "Szybkość pojawiania się/zanikania"
+msgstr "Szybkość rozjaśniania /ściemniania"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
-msgstr "Efekt zanikania podczas minimalizacji/otwarcia/zamknięcia"
+msgstr ""
+"Efekt rozjaśniania/ściemniania podczas minimalizacji/otwarcia/zamknięcia "
+"okien"
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
-msgstr "Efekt zaciemnienia przy dzwonku systemowym"
+msgstr "Efekt ściemniania przy dzwonku systemowym"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
-"Okna powinny pojawiać się płynnie podczas mapowania i płynnie zanikać "
-"podczas odmapowania."
+"Okna powinny płynnie rozjaśniać się podczas mapowania i płynnie przyciemniać "
+"się podczas odmapowania."
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "Skaluj okna"
+msgstr "Przyciemniaj/rozjaśniaj okna"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
-msgstr "Płynne pojawianie się/zanikanie okien"
+msgstr "Płynne rozjaśnianie/przyciemnianie okien"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fullscreen Visual Bell"
@@ -1404,19 +1386,16 @@ msgid "Window fade speed"
 msgstr "Szybkość płynnego pojawiania się/zanikania okien"
 
 #: ../metadata/fade.xml.in.h:12
-#, fuzzy
 msgid "Windows that should be fading"
-msgstr "Typy okien, które mają zanikać"
+msgstr "Typy okien, które powinny być poddawane rozjaśnieniu/ściemnieniu"
 
 #: ../metadata/fs.xml.in.h:1
-#, fuzzy
 msgid "Mount Point"
-msgstr "Punkt mountowania"
+msgstr "Punkt montowania"
 
 #: ../metadata/fs.xml.in.h:2
-#, fuzzy
 msgid "Mount point"
-msgstr "Punkt mountowania"
+msgstr "Punkt montowania"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
@@ -1439,13 +1418,13 @@ msgid "GLib"
 msgstr "Glib"
 
 #: ../metadata/glib.xml.in.h:2
+#, fuzzy
 msgid "GLib main loop support"
-msgstr ""
+msgstr "Główne wsparcie węzła GLib"
 
 #: ../metadata/ini.xml.in.h:1
-#, fuzzy
 msgid "Ini"
-msgstr "Bez zmian"
+msgstr "Ini"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
@@ -1458,7 +1437,7 @@ msgstr "Wtyczka powiadamiania o zmianie pliku"
 #: ../metadata/inotify.xml.in.h:2
 #, fuzzy
 msgid "Inotify"
-msgstr "Bez zmian"
+msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
@@ -1497,7 +1476,6 @@ msgid "Transform windows when they are minimized and unminimized"
 msgstr "Przekształcaj okna podczas minimalizacji i cofania minimalizacji"
 
 #: ../metadata/minimize.xml.in.h:10
-#, fuzzy
 msgid "Windows that should be transformed when minimized"
 msgstr "Typy okien, które mają być transformowane podczas minimalizacji"
 
@@ -1532,7 +1510,7 @@ msgid "Move window"
 msgstr "Przenieś okno"
 
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
-#: ../metadata/switcher.xml.in.h:17
+#: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Nieprzezroczystość"
 
@@ -1567,253 +1545,114 @@ msgstr "Wyśrodkowany"
 
 #: ../metadata/place.xml.in.h:4
 #, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Poziomy rozmiar wirtualny"
+msgid "Force Placement Windows"
+msgstr "Zapobieganie skupieniu okien"
 
 #: ../metadata/place.xml.in.h:5
+msgid "Horizontal viewport positions"
+msgstr "Pozycja poziomego obszaru roboczego"
+
+#: ../metadata/place.xml.in.h:6
 msgid "Maximize"
 msgstr "Maksymalizuj"
 
-#: ../metadata/place.xml.in.h:6
+#: ../metadata/place.xml.in.h:8
 msgid "Place Windows"
 msgstr "Rozmieść okna"
 
-#: ../metadata/place.xml.in.h:7
+#: ../metadata/place.xml.in.h:9
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Podczas mapowania umieszczaj okna we właściwych miejscach"
 
-#: ../metadata/place.xml.in.h:8
+#: ../metadata/place.xml.in.h:10
 msgid "Placement Mode"
 msgstr "Try rozmieszczenia"
 
-#: ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:11
 #, fuzzy
 msgid "Positioned windows"
-msgstr "Wyświetl zminimalizowan okna"
+msgstr "Ułożone okna"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:12
 msgid "Random"
 msgstr "Losowy"
 
-#: ../metadata/place.xml.in.h:11
-msgid "Smart"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:12
-#, fuzzy
-msgid "Vertical viewport positions"
-msgstr "Poziomy rozmiar wirtualny"
-
 #: ../metadata/place.xml.in.h:13
 #, fuzzy
-msgid "Viewport positioned windows"
-msgstr "Wyświetl zminimalizowan okna"
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"Decyduje gdzie okna są Skalowane jeśli jest używanych wiele urządzeń wyjścia."
 
 #: ../metadata/place.xml.in.h:14
-msgid "Window placement workarounds"
-msgstr "Obejścia problemów z rozmieszczeniem okien"
+msgid "Smart"
+msgstr "Inteligentny"
 
 #: ../metadata/place.xml.in.h:15
 #, fuzzy
-msgid "Windows that should be positioned by default"
-msgstr "Typy okien, które mają zanikać"
+msgid "Use active output device"
+msgstr "Na wszystkich urządzeniach wyjściowych"
 
 #: ../metadata/place.xml.in.h:16
-#, fuzzy
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Typy okien, które mają być skalowane w trybie skalowania"
+msgid "Use output device with pointer"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:17
-msgid "Workarounds"
-msgstr "Obejścia problemów"
+msgid "Vertical viewport positions"
+msgstr "Pozycje pionowych obszarów roboczych"
 
 #: ../metadata/place.xml.in.h:18
 #, fuzzy
+msgid "Viewport positioned windows"
+msgstr "Ułożone okna obszarów roboczych"
+
+#: ../metadata/place.xml.in.h:19
+msgid "Window placement workarounds"
+msgstr "Obejścia problemów z rozmieszczeniem okien"
+
+#: ../metadata/place.xml.in.h:20
+msgid "Windows that should be positioned by default"
+msgstr "Typy okien, które powinny być standardowo ułożone"
+
+#: ../metadata/place.xml.in.h:21
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr ""
+"Typy okien, które powinny być standardowo ułożone w specyficznych obszarach "
+"roboczych"
+
+#: ../metadata/place.xml.in.h:22
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+
+#: ../metadata/place.xml.in.h:23
+msgid "Workarounds"
+msgstr "Obejścia problemów"
+
+#: ../metadata/place.xml.in.h:24
 msgid "X Positions"
 msgstr "Pozycje X"
 
-#: ../metadata/place.xml.in.h:19
-#, fuzzy
+#: ../metadata/place.xml.in.h:25
 msgid "X Viewport Positions"
-msgstr "Poziomy rozmiar wirtualny"
+msgstr "Pozycje obszarów roboczych osi X"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:26
 msgid "X position values"
 msgstr "Wartości dla pozycji X"
 
-#: ../metadata/place.xml.in.h:21
-#, fuzzy
+#: ../metadata/place.xml.in.h:27
 msgid "Y Positions"
 msgstr "Pozycje Y"
 
-#: ../metadata/place.xml.in.h:22
-#, fuzzy
+#: ../metadata/place.xml.in.h:28
 msgid "Y Viewport Positions"
-msgstr "Poziomy rozmiar wirtualny"
+msgstr "Pozycje obszarów roboczych osi Y"
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:29
 msgid "Y position values"
 msgstr "Wartości dla pozycji Y"
-
-#: ../metadata/plane.xml.in.h:1
-msgid "Desktop Plane"
-msgstr "Płaszczyzna pulpitu"
-
-#: ../metadata/plane.xml.in.h:2
-msgid "Place windows on a plane"
-msgstr "Umieszczaj okna na płaszczyźnie"
-
-#: ../metadata/plane.xml.in.h:3
-msgid "Plane Down"
-msgstr "Płaszczyzna dolna"
-
-#: ../metadata/plane.xml.in.h:4
-msgid "Plane Left"
-msgstr "Lewa płaszczyzna"
-
-#: ../metadata/plane.xml.in.h:5
-msgid "Plane Right"
-msgstr "Prawa płaszczyzna"
-
-#: ../metadata/plane.xml.in.h:6
-#, fuzzy
-msgid "Plane To Face 1"
-msgstr "Płaszczyzna do ściany 1"
-
-#: ../metadata/plane.xml.in.h:7
-#, fuzzy
-msgid "Plane To Face 10"
-msgstr "Płaszczyzna do ściany 10"
-
-#: ../metadata/plane.xml.in.h:8
-#, fuzzy
-msgid "Plane To Face 11"
-msgstr "Płaszczyzna do ściany 11"
-
-#: ../metadata/plane.xml.in.h:9
-#, fuzzy
-msgid "Plane To Face 12"
-msgstr "Płaszczyzna do ściany 12"
-
-#: ../metadata/plane.xml.in.h:10
-#, fuzzy
-msgid "Plane To Face 2"
-msgstr "Płaszczyzna do ściany 2"
-
-#: ../metadata/plane.xml.in.h:11
-#, fuzzy
-msgid "Plane To Face 3"
-msgstr "Płaszczyzna do ściany 3"
-
-#: ../metadata/plane.xml.in.h:12
-#, fuzzy
-msgid "Plane To Face 4"
-msgstr "Płaszczyzna do ściany 4"
-
-#: ../metadata/plane.xml.in.h:13
-#, fuzzy
-msgid "Plane To Face 5"
-msgstr "Płaszczyzna do ściany 5"
-
-#: ../metadata/plane.xml.in.h:14
-#, fuzzy
-msgid "Plane To Face 6"
-msgstr "Płaszczyzna do ściany 6"
-
-#: ../metadata/plane.xml.in.h:15
-#, fuzzy
-msgid "Plane To Face 7"
-msgstr "Płaszczyzna do ściany 7"
-
-#: ../metadata/plane.xml.in.h:16
-#, fuzzy
-msgid "Plane To Face 8"
-msgstr "Płaszczyzna do ściany 8"
-
-#: ../metadata/plane.xml.in.h:17
-#, fuzzy
-msgid "Plane To Face 9"
-msgstr "Płaszczyzna do ściany 9"
-
-#: ../metadata/plane.xml.in.h:18
-msgid "Plane Up"
-msgstr "Płaszczyzna górna"
-
-#: ../metadata/plane.xml.in.h:19
-msgid "Plane down"
-msgstr "Płaszczyzna u dołu"
-
-#: ../metadata/plane.xml.in.h:20
-msgid "Plane left"
-msgstr "Płaszczyzna z lewej strony"
-
-#: ../metadata/plane.xml.in.h:21
-msgid "Plane right"
-msgstr "Płaszczyzna z prawej strony"
-
-#: ../metadata/plane.xml.in.h:22
-#, fuzzy
-msgid "Plane to face 1"
-msgstr "Płaszczyzna do ściany 1"
-
-#: ../metadata/plane.xml.in.h:23
-#, fuzzy
-msgid "Plane to face 10"
-msgstr "Płaszczyzna do ściany 10"
-
-#: ../metadata/plane.xml.in.h:24
-#, fuzzy
-msgid "Plane to face 11"
-msgstr "Płaszczyzna do ściany 11"
-
-#: ../metadata/plane.xml.in.h:25
-#, fuzzy
-msgid "Plane to face 12"
-msgstr "Płaszczyzna do ściany 12"
-
-#: ../metadata/plane.xml.in.h:26
-#, fuzzy
-msgid "Plane to face 2"
-msgstr "Płaszczyzna do ściany 2"
-
-#: ../metadata/plane.xml.in.h:27
-#, fuzzy
-msgid "Plane to face 3"
-msgstr "Płaszczyzna do ściany 3"
-
-#: ../metadata/plane.xml.in.h:28
-#, fuzzy
-msgid "Plane to face 4"
-msgstr "Płaszczyzna do ściany 4"
-
-#: ../metadata/plane.xml.in.h:29
-#, fuzzy
-msgid "Plane to face 5"
-msgstr "Płaszczyzna do ściany 5"
-
-#: ../metadata/plane.xml.in.h:30
-#, fuzzy
-msgid "Plane to face 6"
-msgstr "Płaszczyzna do ściany 6"
-
-#: ../metadata/plane.xml.in.h:31
-#, fuzzy
-msgid "Plane to face 7"
-msgstr "Płaszczyzna do ściany 7"
-
-#: ../metadata/plane.xml.in.h:32
-#, fuzzy
-msgid "Plane to face 8"
-msgstr "Płaszczyzna do ściany 8"
-
-#: ../metadata/plane.xml.in.h:33
-#, fuzzy
-msgid "Plane to face 9"
-msgstr "Płaszczyzna do ściany 9"
-
-#: ../metadata/plane.xml.in.h:34
-msgid "Plane up"
-msgstr "Płaszczyzna u góry"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -1834,9 +1673,8 @@ msgid "Regex window matching"
 msgstr "Przełącz przypinanie okien"
 
 #: ../metadata/resize.xml.in.h:1
-#, fuzzy
 msgid "Border Color"
-msgstr "Kolor kostki"
+msgstr "Kolor brzegów"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
@@ -1857,29 +1695,24 @@ msgid "Fill Color"
 msgstr "Kolor wypełniania"
 
 #: ../metadata/resize.xml.in.h:6
-#, fuzzy
 msgid "Fill color used for rectangle resize mode"
-msgstr "Kolor wypełnienia dla rysowania"
+msgstr "Kolor wypełnienia dla prostokątnego trybu zmiany wielkości"
 
 #: ../metadata/resize.xml.in.h:7
-#, fuzzy
 msgid "Initiate Normal Window Resize"
-msgstr "Rozpocznij zmianę rozmiarów okna"
+msgstr "Rozpocznij normalną zmianę rozmiarów okna"
 
 #: ../metadata/resize.xml.in.h:8
-#, fuzzy
 msgid "Initiate Outline Window Resize"
-msgstr "Rozpocznij zmianę rozmiarów okna"
+msgstr "Rozpocznij zmianę rozmiarów zewnętrznego okna"
 
 #: ../metadata/resize.xml.in.h:9
-#, fuzzy
 msgid "Initiate Rectangle Window Resize"
-msgstr "Rozpocznij zmianę rozmiarów okna"
+msgstr "Rozpocznij prostokątną zmianę rozmiarów okna"
 
 #: ../metadata/resize.xml.in.h:10
-#, fuzzy
 msgid "Initiate Stretch Window Resize"
-msgstr "Rozpocznij zmianę rozmiarów okna"
+msgstr "Rozpocznij zmianę rozmiarów okna poprzez rozciąganie"
 
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
@@ -1890,28 +1723,24 @@ msgid "Normal"
 msgstr "Normalne"
 
 #: ../metadata/resize.xml.in.h:13
-#, fuzzy
 msgid "Normal Resize Windows"
-msgstr "Zmień rozmiar okna"
+msgstr "Normalna zmiana rozmiaru okna"
 
 #: ../metadata/resize.xml.in.h:14
-#, fuzzy
 msgid "Outline"
-msgstr "Kolor kostki"
+msgstr "Kontur"
 
 #: ../metadata/resize.xml.in.h:15
-#, fuzzy
 msgid "Outline Resize Windows"
-msgstr "Zmień rozmiar okna"
+msgstr "Zmiana rozmiaru konturu okna"
 
 #: ../metadata/resize.xml.in.h:16
 msgid "Rectangle"
-msgstr "Obrys i wypełnienie"
+msgstr "Prostokąt"
 
 #: ../metadata/resize.xml.in.h:17
-#, fuzzy
 msgid "Rectangle Resize Windows"
-msgstr "Zmień rozmiar okna"
+msgstr "Prostokątna zmiana rozmiaru okna"
 
 #: ../metadata/resize.xml.in.h:18
 msgid "Resize Window"
@@ -1923,57 +1752,47 @@ msgstr "Zmień rozmiar okna"
 
 #: ../metadata/resize.xml.in.h:20
 msgid "Start resizing window"
-msgstr "Rozpocznij przenoszenie okna"
+msgstr "Rozpocznij zmianę rozmiaru okna"
 
 #: ../metadata/resize.xml.in.h:21
-#, fuzzy
 msgid "Start resizing window by stretching it"
-msgstr "Rozpocznij przenoszenie okna"
+msgstr "Rozpocznij zmianę rozmiaru okna poprzez rozciąganie"
 
 #: ../metadata/resize.xml.in.h:22
-#, fuzzy
 msgid "Start resizing window normally"
-msgstr "Rozpocznij przenoszenie okna"
+msgstr "Rozpocznij normalną zmianę rozmiarów okna"
 
 #: ../metadata/resize.xml.in.h:23
-#, fuzzy
 msgid "Start resizing window with outline"
-msgstr "Rozpocznij przenoszenie okna"
+msgstr "Rozpocznij zmianę rozmiaru okna poprzez kontur okna"
 
 #: ../metadata/resize.xml.in.h:24
-#, fuzzy
 msgid "Start resizing window with rectangle"
-msgstr "Rozpocznij przenoszenie okna"
+msgstr "Rozpocznij prostokątną zmianę rozmiaru okna"
 
 #: ../metadata/resize.xml.in.h:25
-#, fuzzy
 msgid "Stretch"
-msgstr "Szerokość pędzla"
+msgstr "Rozciągnij"
 
 #: ../metadata/resize.xml.in.h:26
-#, fuzzy
 msgid "Stretch Resize Windows"
-msgstr "Zmień rozmiar okna"
+msgstr "Zmień rozmiar okna poprzez rozciąganie"
 
 #: ../metadata/resize.xml.in.h:27
-#, fuzzy
 msgid "Windows that normal resize should be used for"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Typy okien, których rozmiar ma być zmieniany w standardowy sposób"
 
 #: ../metadata/resize.xml.in.h:28
-#, fuzzy
 msgid "Windows that outline resize should be used for"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Typy okien, których rozmiar ma być zmieniany poprzez kontur okna"
 
 #: ../metadata/resize.xml.in.h:29
-#, fuzzy
 msgid "Windows that rectangle resize should be used for"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Typy okien, których rozmiar ma być zmieniany w prostokątny sposób"
 
 #: ../metadata/resize.xml.in.h:30
-#, fuzzy
 msgid "Windows that stretch resize should be used for"
-msgstr "Typy okien, które mają być rozmywane"
+msgstr "Typy okien, których rozmiar ma być zmieniany poprzez rozciąganie"
 
 #: ../metadata/rotate.xml.in.h:2
 msgid "Edge Flip DnD"
@@ -2031,9 +1850,8 @@ msgid "Raise on rotate"
 msgstr "Podnoś podczas obracania "
 
 #: ../metadata/rotate.xml.in.h:16
-#, fuzzy
 msgid "Raise window when rotating"
-msgstr "Podnieś okna po kliknięciu"
+msgstr "Podnoś okna podczas obracania"
 
 #: ../metadata/rotate.xml.in.h:17
 msgid "Rotate Cube"
@@ -2312,18 +2130,16 @@ msgid "Sensitivity of pointer movement"
 msgstr "Czułość ruchu wskaźnika"
 
 #: ../metadata/rotate.xml.in.h:86
-#, fuzzy
 msgid "Snap Cube Rotation to Bottom Face"
-msgstr "Przyciągnij obrót kostki do górnej ściany"
+msgstr "Przypnij obrót kostki do dolnej ściany"
 
 #: ../metadata/rotate.xml.in.h:87
 msgid "Snap Cube Rotation to Top Face"
-msgstr "Przyciągnij obrót kostki do górnej ściany"
+msgstr "Przypnij obrót kostki do górnej ściany"
 
 #: ../metadata/rotate.xml.in.h:88
-#, fuzzy
 msgid "Snap To Bottom Face"
-msgstr "Przypnij do górnej ściany"
+msgstr "Przypnij do dolnej ściany"
 
 #: ../metadata/rotate.xml.in.h:89
 msgid "Snap To Top Face"
@@ -2337,7 +2153,7 @@ msgstr "Rozpocznij obrót"
 msgid "Timeout before flipping viewport"
 msgstr "Czas przed przełączeniem widoku"
 
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
 msgid "Zoom"
 msgstr "Powiększenie"
 
@@ -2546,89 +2362,106 @@ msgid "Minimized"
 msgstr "Zminimalizowane"
 
 #: ../metadata/switcher.xml.in.h:14
+#, fuzzy
+msgid "Next Panel"
+msgstr "Płaszczyzna pulpitu"
+
+#: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
 msgstr "Następne okno"
 
-#: ../metadata/switcher.xml.in.h:15
+#: ../metadata/switcher.xml.in.h:16
 msgid "Next window (All windows)"
 msgstr "Następne okno (wszystkie okna)"
 
-#: ../metadata/switcher.xml.in.h:16
+#: ../metadata/switcher.xml.in.h:17
 msgid "Next window (No popup)"
 msgstr "Następne okno (bez pop-upów)"
 
-#: ../metadata/switcher.xml.in.h:18
+#: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window"
 msgstr "Okno przełączania gdy niewidoczne i wybór następnego okna"
 
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 "Okno przełączania gdy niewidoczne i wybór następnego okna spośród wszystkich"
 
-#: ../metadata/switcher.xml.in.h:20
+#: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select previous window"
 msgstr "Okno przełączania gdy niewidoczne i wybór poprzedniego okna"
 
-#: ../metadata/switcher.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:22
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 "Okno przełączania gdy niewidoczne i wybór poprzedniego okna spośród "
 "wszystkich"
 
-#: ../metadata/switcher.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:23
+#, fuzzy
+msgid "Prev Panel"
+msgstr "Poprzednia klatka"
+
+#: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
 msgstr "Poprzednie okno"
 
-#: ../metadata/switcher.xml.in.h:23
+#: ../metadata/switcher.xml.in.h:25
 msgid "Prev window (All windows)"
 msgstr "Poprzednie okno (wszystkie okna)"
 
-#: ../metadata/switcher.xml.in.h:24
+#: ../metadata/switcher.xml.in.h:26
 msgid "Prev window (No popup)"
 msgstr "Poprzednie okno (bez pop-upów)"
 
-#: ../metadata/switcher.xml.in.h:25
-#, fuzzy
+#: ../metadata/switcher.xml.in.h:27
 msgid "Rotate to the selected window while switching"
-msgstr "Obracaj wybrane okno podczas przełączania"
+msgstr "Obracaj do wybranego okna podczas przełączania"
 
-#: ../metadata/switcher.xml.in.h:26
+#: ../metadata/switcher.xml.in.h:28
 msgid "Saturation"
 msgstr "Nasycenie"
 
-#: ../metadata/switcher.xml.in.h:27
+#: ../metadata/switcher.xml.in.h:29
 #, fuzzy
+msgid "Select next panel type window."
+msgstr "Wybierz następne okno"
+
+#: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Wybierz następne okno bez pokazywania wyskakującego okienka."
 
-#: ../metadata/switcher.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:31
 #, fuzzy
+msgid "Select previous panel type window."
+msgstr "Wybierz poprzednie okno"
+
+#: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
 msgstr "Wybierz poprzednie okno bez pokazywania wyskakującego okienka."
 
-#: ../metadata/switcher.xml.in.h:29
+#: ../metadata/switcher.xml.in.h:33
 msgid "Show icon next to thumbnail"
 msgstr "Wyświetl ikonę obok miniaturki"
 
-#: ../metadata/switcher.xml.in.h:30
+#: ../metadata/switcher.xml.in.h:34
 msgid "Show minimized windows"
 msgstr "Wyświetl zminimalizowan okna"
 
-#: ../metadata/switcher.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:36
 msgid "Switcher speed"
 msgstr "Szybkość przełącznika"
 
-#: ../metadata/switcher.xml.in.h:33
+#: ../metadata/switcher.xml.in.h:37
 msgid "Switcher timestep"
 msgstr "Opóźnienie przełącznika"
 
-#: ../metadata/switcher.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:38
 msgid "Switcher windows"
 msgstr "Zmieniacz okien"
 
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:40
 msgid "Windows that should be shown in switcher"
 msgstr "Typy okien, które mają być pokazywane w zmieniaczu"
 
@@ -2714,7 +2547,7 @@ msgstr "Skala przesunięcia wody"
 
 #: ../metadata/water.xml.in.h:18
 msgid "Wave effect from window title"
-msgstr "Efekt fali os tytułu okna"
+msgstr "Efekt fali od tytułu okna"
 
 #: ../metadata/wobbly.xml.in.h:1
 msgid "Focus Effect"
@@ -2881,6 +2714,123 @@ msgstr "Współczynnik przybliżania"
 msgid "Zoom pan"
 msgstr "Powiększ"
 
+#~ msgid "Background Images"
+#~ msgstr "Obrazki tła"
+
+#~ msgid "Background images"
+#~ msgstr "Obrazki tła"
+
+#~ msgid "Place windows on a plane"
+#~ msgstr "Umieszczaj okna na płaszczyźnie"
+
+#~ msgid "Plane Down"
+#~ msgstr "Płaszczyzna dolna"
+
+#~ msgid "Plane Left"
+#~ msgstr "Lewa płaszczyzna"
+
+#~ msgid "Plane Right"
+#~ msgstr "Prawa płaszczyzna"
+
+#~ msgid "Plane To Face 1"
+#~ msgstr "Płaszczyzna do ściany 1"
+
+#~ msgid "Plane To Face 10"
+#~ msgstr "Płaszczyzna do ściany 10"
+
+#~ msgid "Plane To Face 11"
+#~ msgstr "Płaszczyzna do ściany 11"
+
+#~ msgid "Plane To Face 12"
+#~ msgstr "Płaszczyzna do ściany 12"
+
+#~ msgid "Plane To Face 2"
+#~ msgstr "Płaszczyzna do ściany 2"
+
+#~ msgid "Plane To Face 3"
+#~ msgstr "Płaszczyzna do ściany 3"
+
+#~ msgid "Plane To Face 4"
+#~ msgstr "Płaszczyzna do ściany 4"
+
+#~ msgid "Plane To Face 5"
+#~ msgstr "Płaszczyzna do ściany 5"
+
+#~ msgid "Plane To Face 6"
+#~ msgstr "Płaszczyzna do ściany 6"
+
+#~ msgid "Plane To Face 7"
+#~ msgstr "Płaszczyzna do ściany 7"
+
+#~ msgid "Plane To Face 8"
+#~ msgstr "Płaszczyzna do ściany 8"
+
+#~ msgid "Plane To Face 9"
+#~ msgstr "Płaszczyzna do ściany 9"
+
+#~ msgid "Plane Up"
+#~ msgstr "Płaszczyzna górna"
+
+#~ msgid "Plane down"
+#~ msgstr "Płaszczyzna u dołu"
+
+#~ msgid "Plane left"
+#~ msgstr "Płaszczyzna z lewej strony"
+
+#~ msgid "Plane right"
+#~ msgstr "Płaszczyzna z prawej strony"
+
+#, fuzzy
+#~ msgid "Plane to face 1"
+#~ msgstr "Płaszczyzna do ściany 1"
+
+#, fuzzy
+#~ msgid "Plane to face 10"
+#~ msgstr "Płaszczyzna do ściany 10"
+
+#, fuzzy
+#~ msgid "Plane to face 11"
+#~ msgstr "Płaszczyzna do ściany 11"
+
+#, fuzzy
+#~ msgid "Plane to face 12"
+#~ msgstr "Płaszczyzna do ściany 12"
+
+#, fuzzy
+#~ msgid "Plane to face 2"
+#~ msgstr "Płaszczyzna do ściany 2"
+
+#, fuzzy
+#~ msgid "Plane to face 3"
+#~ msgstr "Płaszczyzna do ściany 3"
+
+#, fuzzy
+#~ msgid "Plane to face 4"
+#~ msgstr "Płaszczyzna do ściany 4"
+
+#, fuzzy
+#~ msgid "Plane to face 5"
+#~ msgstr "Płaszczyzna do ściany 5"
+
+#, fuzzy
+#~ msgid "Plane to face 6"
+#~ msgstr "Płaszczyzna do ściany 6"
+
+#, fuzzy
+#~ msgid "Plane to face 7"
+#~ msgstr "Płaszczyzna do ściany 7"
+
+#, fuzzy
+#~ msgid "Plane to face 8"
+#~ msgstr "Płaszczyzna do ściany 8"
+
+#, fuzzy
+#~ msgid "Plane to face 9"
+#~ msgstr "Płaszczyzna do ściany 9"
+
+#~ msgid "Plane up"
+#~ msgstr "Płaszczyzna u góry"
+
 #~ msgid "Desktop Window Opacity Fade Time."
 #~ msgstr "Czas zanikania nieprzezroczystości okna pulpitu"
 
@@ -2889,12 +2839,6 @@ msgstr "Powiększ"
 
 #~ msgid "Open window menu"
 #~ msgstr "Otwórz menu okna"
-
-#~ msgid "Select next window"
-#~ msgstr "Wybierz następne okno"
-
-#~ msgid "Select previous window"
-#~ msgstr "Wybierz poprzednie okno"
 
 #~ msgid "Dock"
 #~ msgstr "Obszar dokowania"

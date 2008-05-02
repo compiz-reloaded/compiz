@@ -1,26 +1,26 @@
 # translation of compiz.po to Finnish
-# translation of compiz.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
-# Finnish message file for YaST2 (@memory@).
 # Copyright (C) 2003 SuSE Linux AG.
 #
 # Michael Hintsala <mhintsa@fi.ibm.com>, 2003. 2001.
 # Jyri Palokangas <jmp@netti.fi>, 2006.
 # Jouni Hätinen <jounihat@iki.fi>, 2006.
 # Jani-Matti Hätinen <jani-matti.hatinen@iki.fi>, 2006.
+# Jani Hyytiäinen <janihy@gmail.com>, 2008.
+# Timo Jyrinki <timo.jyrinki@iki.fi>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-03 14:29+0530\n"
-"PO-Revision-Date: 2008-02-10 13:05+0100\n"
-"Last-Translator: Birunthan Mohanathas <biru@inbox.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"POT-Creation-Date: 2008-05-02 14:02+0530\n"
+"PO-Revision-Date: 2008-04-17 10:51+0200\n"
+"Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
+"Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.0.2\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -28,7 +28,7 @@ msgstr "Työpöytä"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
 msgid "Window Management"
-msgstr "Ikkunanhallinta"
+msgstr "Ikkunoiden hallinta"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
-msgstr "Sumennuksen tyyppi"
+msgstr "Sumennustyyppi"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
@@ -95,69 +95,70 @@ msgstr "Käytä Metacity teemaa"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Käytä Metacity teemaa ikkunan kehystä piirtäessä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4347
+#: ../gtk/window-decorator/gtk-window-decorator.c:4403
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4369
-#: ../metadata/core.xml.in.h:152
+#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Palauta suurenettu ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4372
-#: ../metadata/core.xml.in.h:84
+#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Suurenna ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.h:90
+#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4531
-#: ../metadata/core.xml.in.h:159
+#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Ikkunavalikko"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4550
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 msgid "Shade"
-msgstr "Skaalaus"
+msgstr "Näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4570
+#: ../gtk/window-decorator/gtk-window-decorator.c:4626
 msgid "Make Above"
-msgstr ""
+msgstr "Näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4596
+#: ../gtk/window-decorator/gtk-window-decorator.c:4652
 msgid "Stick"
-msgstr ""
+msgstr "Näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4672
 msgid "Unshade"
-msgstr ""
+msgstr "Älä näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4692
 msgid "Unmake Above"
-msgstr ""
+msgstr "Älä näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4718
 msgid "Unstick"
-msgstr ""
+msgstr "Älä näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5019
+#: ../gtk/window-decorator/gtk-window-decorator.c:5075
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "Ikkuna \"%s\" ei vastaa."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5028
+#: ../gtk/window-decorator/gtk-window-decorator.c:5084
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Tämän sovelluksen sulkeminen väkisin saa tallentamattomat muutokset "
+"katoamaan."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5043
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid "_Force Quit"
-msgstr ""
+msgstr "Sulje _väkisin"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -317,9 +318,9 @@ msgstr "Gaussin voimakkuus"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Riippumaton tekstuurien nouto"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:26
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "Mipmap"
@@ -345,6 +346,8 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Käytä käytettävissä olevia teksturointiyksiköitä tekemään mahdollisimman "
+"monta riippumatonta tekstuurien noutoa."
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -616,19 +619,20 @@ msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"Osoittimen paikallaanoloaika näytön reunalla, ennen kuin reunatoiminto "
+"suoritetaan."
 
 #: ../metadata/core.xml.in.h:57
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Reunaliipaisimen viive"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "Nopea"
 
 #: ../metadata/core.xml.in.h:59
-#, fuzzy
 msgid "Focus Prevention Level"
-msgstr "Keskityksen estäminen ikkunoissa"
+msgstr "Kohdistuksen eston taso"
 
 #: ../metadata/core.xml.in.h:60
 msgid "Focus Prevention Windows"
@@ -639,400 +643,406 @@ msgid "Focus prevention windows"
 msgstr "Keskityksen estäminen ikkunoissa"
 
 #: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr ""
+
+#: ../metadata/core.xml.in.h:63
 msgid "General Options"
 msgstr "Yleiset asetukset"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:64
 msgid "General compiz options"
 msgstr "Yleiset Compiz asetukset"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:65
 msgid "Good"
 msgstr "Hyvä"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:66
 msgid "Hide Skip Taskbar Windows"
 msgstr "Piilota tehtäväpalkissa näkymättömät ikkunat"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:67
 msgid "Hide all windows and focus desktop"
 msgstr "Piilota kaikki ikkunat ja näytä työpöytä"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:68
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Piilota tehtäväpalkissa näkymättömät ikkunat työpöydän näyttötilaan "
 "siirryttäessä"
 
-#: ../metadata/core.xml.in.h:68
-msgid "High"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:69
+msgid "High"
+msgstr "Korkea"
+
+#: ../metadata/core.xml.in.h:70
 msgid "Horizontal Virtual Size"
 msgstr "Virtuaalinen vaakatasokoko"
 
-#: ../metadata/core.xml.in.h:70
-msgid "If available use compression for textures converted from images"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:71
+msgid "If available use compression for textures converted from images"
+msgstr "Käytä pakkausta kuvista muunnetuille tekstuureille, jos mahdollista"
+
+#: ../metadata/core.xml.in.h:72
 msgid "Ignore Hints When Maximized"
 msgstr "Ohita vihjeet suurennettaessa"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:73
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Ohita kokolisäys- ja kuvasuhdevihjeet ikkunaa suurennettaessa"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:74
 msgid "Increase Opacity"
 msgstr "Vähennä läpinäkyvyyttä"
 
-#: ../metadata/core.xml.in.h:74
+#: ../metadata/core.xml.in.h:75
 msgid "Increase window opacity"
 msgstr "Vähennä ikkunan läpinäkyvyyttä"
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.h:76
 msgid "Interval before raising selected windows"
 msgstr "Aikaväli ennen valittujen ikkunoiden nostamista"
 
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:77
 msgid "Interval between ping messages"
 msgstr "Aikaväli ping-viestien välissä"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Level of focus stealing prevention"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:78
+msgid "Level of focus stealing prevention"
+msgstr "Kohdistuksen nappaamisen eston taso"
+
+#: ../metadata/core.xml.in.h:79
 msgid "Lighting"
 msgstr "Valaistus"
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:80
 msgid "List of currently active plugins"
 msgstr "Lista tällä hetkellä aktiivisista liitännäisistä"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:81
 msgid "List of strings describing output devices"
 msgstr "Ulostulolaitteita kuvaavien merkkijonojen luettelo"
 
-#: ../metadata/core.xml.in.h:81
-msgid "Low"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:82
+msgid "Low"
+msgstr "Matala"
+
+#: ../metadata/core.xml.in.h:83
 msgid "Lower Window"
 msgstr "Laske ikkuna"
 
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:84
 msgid "Lower window beneath other windows"
 msgstr "Laske ikkuna taka-alalle"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize Window Horizontally"
 msgstr "Suurenna ikkunaa vaakatasossa"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:87
 msgid "Maximize Window Vertically"
 msgstr "Suurenna ikkunaa pystytasossa"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:88
 msgid "Maximize active window"
 msgstr "Suurenna aktiivinen ikkuna"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:89
 msgid "Maximize active window horizontally"
 msgstr "Suurenna aktiivista ikkunaa vaakatasossa"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:90
 msgid "Maximize active window vertically"
 msgstr "Suurenna aktiivista ikkunaa pystytasossa"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Minimize active window"
 msgstr "Pienennä aktiivinen ikkuna"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Number of Desktops"
 msgstr "Työpöytien määrä"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Number of virtual desktops"
 msgstr "Virtuaalisten työpöytien määrä"
 
-#: ../metadata/core.xml.in.h:94
-msgid "Off"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:95
+msgid "Off"
+msgstr "Pois päältä"
+
+#: ../metadata/core.xml.in.h:96
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Suorita vain näyttöpäivitykset pystytasossa tehtävän tyhjäyksen aikana"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Opacity Step"
 msgstr "Läpinäkyvyyden muutos"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Opacity change step"
 msgstr "Läpinäkyvyyden muutosväli kun näppäinyhdistelmiä suoritetaan"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Opacity values for windows that should be translucent by default"
 msgstr "Läpinäkyvyyden arvot ikkunoille, jotka ovat läpinäkyviä oletuksena"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Opacity window values"
 msgstr "Läpinäkyvien ikkunoiden arvot"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Opacity windows"
 msgstr "Ikkunoiden läpinäkyvyys"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Open a terminal"
 msgstr "Avaa Pääte"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Outputs"
 msgstr "Ulostulot"
 
-#: ../metadata/core.xml.in.h:103
-msgid "Overlapping Output Handling"
-msgstr ""
-
 #: ../metadata/core.xml.in.h:104
-msgid "Ping Delay"
-msgstr "Ikkunoiden tummentamisen viive"
+msgid "Overlapping Output Handling"
+msgstr "Päällekkäisten ulostulojen käsittely"
 
 #: ../metadata/core.xml.in.h:105
-msgid "Prefer larger output"
+msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:106
-msgid "Prefer smaller output"
-msgstr ""
+msgid "Ping Delay"
+msgstr "Ikkunoiden tummentamisen viive"
 
 #: ../metadata/core.xml.in.h:107
+msgid "Prefer larger output"
+msgstr "Suosi suurempaa ulostuloa"
+
+#: ../metadata/core.xml.in.h:108
+msgid "Prefer smaller output"
+msgstr "Suosi pienempää ulostuloa"
+
+#: ../metadata/core.xml.in.h:109
 msgid "Raise On Click"
 msgstr "Nosta napsautuksesta"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:110
 msgid "Raise Window"
 msgstr "Nosta ikkunaa"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:111
 msgid "Raise selected windows after interval"
 msgstr "Nosta valittu ikkuna tietyn ajan jälkeen"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:112
 msgid "Raise window above other windows"
 msgstr "Nosta ikkuna muiden ikkunoiden yläpuolelle"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:113
 msgid "Raise windows when clicked"
 msgstr "Nosta ikkuna napsautuksesta"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:114
 msgid "Refresh Rate"
 msgstr "Virkistystaajuus"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:115
 msgid "Run Dialog"
 msgstr "Suorita komento -valintaikkuna"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 0"
 msgstr "Suorita komento 0"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 1"
 msgstr "Suorita komento 1"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 10"
 msgstr "Suorita komento 10"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 11"
 msgstr "Suorita komento 11"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:120
 msgid "Run command 2"
 msgstr "Suorita komento 2"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:121
 msgid "Run command 3"
 msgstr "Suorita komento 3"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:122
 msgid "Run command 4"
 msgstr "Suorita komento 4"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:123
 msgid "Run command 5"
 msgstr "Suorita komento 5"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:124
 msgid "Run command 6"
 msgstr "Suorita komento 6"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:125
 msgid "Run command 7"
 msgstr "Suorita komento 7"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:126
 msgid "Run command 8"
 msgstr "Suorita komento 8"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:127
 msgid "Run command 9"
 msgstr "Suorita komento 9"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:128
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Virtuaalisen vaakatasokoon näyttökokokerroin"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:129
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Virtuaalisen pystytasokoon näyttökokokerroin"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:130
 msgid "Screenshot command line"
 msgstr "Kuvakaappauksen komento"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:131
 msgid "Show Desktop"
 msgstr "Näytä työpöytä"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:132
 msgid "Show Main Menu"
 msgstr "Näytä päävalikko"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:133
 msgid "Show Run Application dialog"
 msgstr "Näytä Suorita komento -valintaikkuna"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:134
 msgid "Show the main menu"
 msgstr "Näytä päävalikko"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:135
 msgid "Slow Animations"
 msgstr "Hitaat animaatiot"
 
-#: ../metadata/core.xml.in.h:134
-#, fuzzy
+#: ../metadata/core.xml.in.h:136
 msgid "Smart mode"
-msgstr "Älykäs"
+msgstr "Älykäs tila"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:137
 msgid "Sync To VBlank"
 msgstr "Synkronoi VBlankiin"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:138
 msgid "Take a screenshot"
 msgstr "Ota kuvankaappaus"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:139
 msgid "Take a screenshot of a window"
 msgstr "Ota kuvankaappaus ikkunasta"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:140
 msgid "Terminal command line"
 msgstr "Päätteen komentorivi"
 
-#: ../metadata/core.xml.in.h:139
-#, fuzzy
+#: ../metadata/core.xml.in.h:141
 msgid "Texture Compression"
-msgstr "Tekstuurisuodatus"
+msgstr "Tekstuurien pakkaus"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:142
 msgid "Texture Filter"
 msgstr "Tekstuurisuodatin"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:143
 msgid "Texture filtering"
 msgstr "Tekstuurisuodatus"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:144
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Nopeus, jolla näyttö piirretään uudelleen (kertaa/sekunnissa)"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized"
 msgstr "Suurenna ikkuna"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:146
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Suurenna ikkuna vaakatasossa"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:147
 msgid "Toggle Window Maximized Vertically"
 msgstr "Suurenna ikkuna pystytasossa"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:148
 msgid "Toggle Window Shaded"
 msgstr "Pienennä ikkuna kehystilaan"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized"
 msgstr "Suurenna aktiivinen ikkuna"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:150
 msgid "Toggle active window maximized horizontally"
 msgstr "Suurenna aktiivinen ikkuna vaakatasossa"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:151
 msgid "Toggle active window maximized vertically"
 msgstr "Suurenna aktiivinen ikkuna pystytasossa"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:152
 msgid "Toggle active window shaded"
 msgstr "Pienennä aktiivinen ikkuna kehystilaan"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:153
 msgid "Toggle use of slow animations"
 msgstr "Ota käyttöön hitaat animaatiot"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:155
 msgid "Unmaximize active window"
 msgstr "Palauta suurenettu aktiivinen ikkuna"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:156
 msgid "Unredirect Fullscreen Windows"
 msgstr "Kokoruutuikkunoita ei uudelleenohjata"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:157
 msgid "Use diffuse light when screen is transformed"
 msgstr "Käytä hajavaloa ruudun muuttuessa"
 
-#: ../metadata/core.xml.in.h:156
+#: ../metadata/core.xml.in.h:158
 msgid "Vertical Virtual Size"
 msgstr "Virtuaalinen pystytasokoko"
 
-#: ../metadata/core.xml.in.h:157
+#: ../metadata/core.xml.in.h:159
 msgid "Very High"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:158
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Hyvin korkea"
 
 #: ../metadata/core.xml.in.h:160
+msgid "Which one of overlapping output devices should be preferred"
+msgstr "Mitä päällekkäisistä ulostulolaitteista suositaan"
+
+#: ../metadata/core.xml.in.h:162
 msgid "Window menu button binding"
 msgstr "Ikkunavalikon näppäinyhdistelmä"
 
-#: ../metadata/core.xml.in.h:161
+#: ../metadata/core.xml.in.h:163
 msgid "Window menu key binding"
 msgstr ""
 "Määrittää näppäinyhdistelmän ikkunavalikolle, joka saadaan myös klikkaamalla "
 "ikkunan kehystä vasemmalla hiiren painikkeella"
 
-#: ../metadata/core.xml.in.h:162
+#: ../metadata/core.xml.in.h:164
 msgid "Window screenshot command line"
 msgstr "Ikkunan kuvakaappauksen komento"
 
-#: ../metadata/core.xml.in.h:163
+#: ../metadata/core.xml.in.h:165
 msgid "Windows that should be translucent by default"
 msgstr "Ikkunatyypit, jotka tulisi häivyttää"
 
@@ -1067,175 +1077,167 @@ msgid "Automatic"
 msgstr "Automaattinen"
 
 #: ../metadata/cube.xml.in.h:8
-msgid "Background Images"
-msgstr "Taustakuvat"
-
-#: ../metadata/cube.xml.in.h:9
-msgid "Background images"
-msgstr "Taustakuvat"
-
-#: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
 msgstr "Kuution pohjan ja kannen väri"
 
-#: ../metadata/cube.xml.in.h:11
+#: ../metadata/cube.xml.in.h:9
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr "Alin väri taivaankannen liukuvärissä"
 
-#: ../metadata/cube.xml.in.h:12
+#: ../metadata/cube.xml.in.h:10
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Ylin väri taivaankannen liukuvärissä"
 
-#: ../metadata/cube.xml.in.h:13
+#: ../metadata/cube.xml.in.h:11
 msgid "Cube Color"
 msgstr "Kuution väri"
 
-#: ../metadata/cube.xml.in.h:14
+#: ../metadata/cube.xml.in.h:12
 msgid "Desktop Cube"
 msgstr "Työpöytäkuutio"
 
 # workflow: "3D Beschleunigung aktivieren"
 # -ke-
-#: ../metadata/cube.xml.in.h:15
+#: ../metadata/cube.xml.in.h:13
 msgid "Fold Acceleration"
 msgstr "Kiihdytyskerroin"
 
-#: ../metadata/cube.xml.in.h:16
+#: ../metadata/cube.xml.in.h:14
 msgid "Fold Speed"
 msgstr "Nopeuskerroin"
 
-#: ../metadata/cube.xml.in.h:17
+#: ../metadata/cube.xml.in.h:15
 msgid "Fold Timestep"
 msgstr "Aikaviivekerroin"
 
-#: ../metadata/cube.xml.in.h:18 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Luo mipmap skaalauksen laadun parantamiseksi mikäli se on mahdollista"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:17
 msgid "Go back to previous slide"
 msgstr "Takaisin edelliseen diaan"
 
-#: ../metadata/cube.xml.in.h:20
+#: ../metadata/cube.xml.in.h:18
 msgid "Image files"
 msgstr "Kuvatiedostot"
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:19
 msgid "Image to use as texture for the skydome"
 msgstr "Taivaankannen tekstuurina käytettävä kuva"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:20
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr "Kuutio on läpinäkyvä vain kun sitä käännetään hiirellä"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:21
 msgid "Inside Cube"
 msgstr "Kuution sisäpinta"
 
-#: ../metadata/cube.xml.in.h:24
+#: ../metadata/cube.xml.in.h:22
 msgid "Inside cube"
 msgstr "Näyttää kuution sisäpinnan"
 
-#: ../metadata/cube.xml.in.h:25
+#: ../metadata/cube.xml.in.h:23
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "Lista kuution päälle asetettavista PNG- ja SVG-tiedostoista"
 
-#: ../metadata/cube.xml.in.h:27 ../metadata/scale.xml.in.h:17
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "Moni-ulostulo moodi"
 
-#: ../metadata/cube.xml.in.h:28
+#: ../metadata/cube.xml.in.h:26
 msgid "Multiple cubes"
 msgstr "Useammalla kuutiolla"
 
-#: ../metadata/cube.xml.in.h:29
+#: ../metadata/cube.xml.in.h:27
 msgid "Next Slide"
 msgstr "Seuraava dia"
 
-#: ../metadata/cube.xml.in.h:30
-#, fuzzy
+#: ../metadata/cube.xml.in.h:28
 msgid "One big cube"
-msgstr "Isolla kuutiolla"
+msgstr "Yksi iso kuutio"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:29
 msgid "Opacity During Rotation"
 msgstr "Läpikuultavuus pyörityksen aikana"
 
-#: ../metadata/cube.xml.in.h:32
+#: ../metadata/cube.xml.in.h:30
 msgid "Opacity When Not Rotating"
 msgstr "Läpikuultavuus kun kuutiota ei pyöritetä"
 
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:31
 msgid "Opacity of desktop window during rotation."
 msgstr "Työpöytien läpinäkyvyys pyörityksen aikana"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity of desktop window when not rotating."
 msgstr "Työpöytien läpinäkyvyys kun kuutiota ei pyöritetä"
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:33
 msgid "Place windows on cube"
 msgstr "Asettele ikkunat työpöytäkuution pinnalle"
 
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:34
 msgid "Prev Slide"
 msgstr "Edellinen dia"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:35
 msgid "Render skydome"
 msgstr "Piirrä taivas"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:36
 msgid "Scale image"
 msgstr "Skaalaa kuvaa"
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:37
 msgid "Scale images to cover top face of cube"
 msgstr "Skaalaa kuva kuution katon kokoiseksi"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:38
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
 "Valitsee miten kuutio näyetään jos käyettään usempaa kuin yhtä ulostulo "
 "laitetta (näyttöä)"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:39
 msgid "Skydome"
 msgstr "Taivas"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:40
 msgid "Skydome Gradient End Color"
 msgstr "Liukuvärin lopetusväri"
 
-#: ../metadata/cube.xml.in.h:43
+#: ../metadata/cube.xml.in.h:41
 msgid "Skydome Gradient Start Color"
 msgstr "Liukuvärin aloitusväri"
 
-#: ../metadata/cube.xml.in.h:44
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome Image"
 msgstr "Taivaan kuva"
 
-#: ../metadata/cube.xml.in.h:45 ../metadata/minimize.xml.in.h:7
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:31 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Nopeus"
 
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:8
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Aikaviive"
 
-#: ../metadata/cube.xml.in.h:47
+#: ../metadata/cube.xml.in.h:45
 msgid "Transparency Only on Mouse Rotate"
 msgstr "Läpinäkyvä vain hiirellä pyörittäessä"
 
-#: ../metadata/cube.xml.in.h:48
+#: ../metadata/cube.xml.in.h:46
 msgid "Unfold"
 msgstr "Avaa"
 
-#: ../metadata/cube.xml.in.h:49
+#: ../metadata/cube.xml.in.h:47
 msgid "Unfold cube"
 msgstr "Avaa kuutio"
 
@@ -1490,7 +1492,7 @@ msgid "Move window"
 msgstr "Ikkunan siirtäminen"
 
 #: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
-#: ../metadata/switcher.xml.in.h:17
+#: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Läpinäkyvyys"
 
@@ -1523,220 +1525,111 @@ msgid "Centered"
 msgstr "Keskitetty"
 
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
+msgid "Force Placement Windows"
+msgstr "Keskityksen estäminen ikkunoissa"
+
+#: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
 msgstr "Työpöytien vaakataso-sijainti"
 
-#: ../metadata/place.xml.in.h:5
+#: ../metadata/place.xml.in.h:6
 msgid "Maximize"
 msgstr "Suurenna"
 
-#: ../metadata/place.xml.in.h:6
+#: ../metadata/place.xml.in.h:8
 msgid "Place Windows"
 msgstr "Sijoita ikkunat"
 
-#: ../metadata/place.xml.in.h:7
+#: ../metadata/place.xml.in.h:9
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Sijoita ikkunat sopiville paikoille niiden ilmestyessä"
 
-#: ../metadata/place.xml.in.h:8
+#: ../metadata/place.xml.in.h:10
 msgid "Placement Mode"
 msgstr "Käyetettävä metodi sijoittamisessa"
 
-#: ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:11
 msgid "Positioned windows"
 msgstr "Sijoitetut ikkunat"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:12
 msgid "Random"
 msgstr "Satunnainen"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:13
+#, fuzzy
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"Määrittää missä ikkunat skaalataan jos käytössä on useampi ulostulo laite"
+
+#: ../metadata/place.xml.in.h:14
 msgid "Smart"
 msgstr "Älykäs"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:15
+#, fuzzy
+msgid "Use active output device"
+msgstr "Kaikissa ulostulo laitteissa"
+
+#: ../metadata/place.xml.in.h:16
+msgid "Use output device with pointer"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:17
 msgid "Vertical viewport positions"
 msgstr "Työpöytien pystytaso-sijainti"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:18
 msgid "Viewport positioned windows"
 msgstr "Tiettyyn työpöytään sijoitettavat ikkunat"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:19
 msgid "Window placement workarounds"
 msgstr "Poikkeukset ikkunoiden sijoittamisessa"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:20
 msgid "Windows that should be positioned by default"
 msgstr "Ikkunatyypit, jotka tulisi sijoittaa oletuksena"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:21
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "Ikkunatyypit, jotka tulisi sijoittaa tiettyyn työpöytään oletuksena"
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:22
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+
+#: ../metadata/place.xml.in.h:23
 msgid "Workarounds"
 msgstr "Poikkeukset"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:24
 msgid "X Positions"
 msgstr "X sijainnit"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:25
 msgid "X Viewport Positions"
 msgstr "Näkymän X sijainnit"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:26
 msgid "X position values"
 msgstr "X sijainnin arvot"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:27
 msgid "Y Positions"
 msgstr "Y sijainnit"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:28
 msgid "Y Viewport Positions"
 msgstr "Näkymän Y sijainnit"
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:29
 msgid "Y position values"
 msgstr "Y sijainnin arvot"
-
-#: ../metadata/plane.xml.in.h:1
-msgid "Desktop Plane"
-msgstr "Työpöytätaso"
-
-#: ../metadata/plane.xml.in.h:2
-msgid "Place windows on a plane"
-msgstr "Asettele ikkunat työpöytätason pinnalle"
-
-#: ../metadata/plane.xml.in.h:3
-msgid "Plane Down"
-msgstr "Siirry alas"
-
-#: ../metadata/plane.xml.in.h:4
-msgid "Plane Left"
-msgstr "Siirry vasemmalle"
-
-#: ../metadata/plane.xml.in.h:5
-msgid "Plane Right"
-msgstr "Siirry oikealle"
-
-#: ../metadata/plane.xml.in.h:6
-msgid "Plane To Face 1"
-msgstr "Siirry tasolle 1"
-
-#: ../metadata/plane.xml.in.h:7
-msgid "Plane To Face 10"
-msgstr "Siirry tasolle 10"
-
-#: ../metadata/plane.xml.in.h:8
-msgid "Plane To Face 11"
-msgstr "Siirry tasolle 11"
-
-#: ../metadata/plane.xml.in.h:9
-msgid "Plane To Face 12"
-msgstr "Siirry tasolle 12"
-
-#: ../metadata/plane.xml.in.h:10
-msgid "Plane To Face 2"
-msgstr "Siirry tasolle 2"
-
-#: ../metadata/plane.xml.in.h:11
-msgid "Plane To Face 3"
-msgstr "Siirry tasolle 3"
-
-#: ../metadata/plane.xml.in.h:12
-msgid "Plane To Face 4"
-msgstr "Siirry tasolle 4"
-
-#: ../metadata/plane.xml.in.h:13
-msgid "Plane To Face 5"
-msgstr "Siirry tasolle 5"
-
-#: ../metadata/plane.xml.in.h:14
-msgid "Plane To Face 6"
-msgstr "Siirry tasolle 6"
-
-#: ../metadata/plane.xml.in.h:15
-msgid "Plane To Face 7"
-msgstr "Siirry tasolle 7"
-
-#: ../metadata/plane.xml.in.h:16
-msgid "Plane To Face 8"
-msgstr "Siirry tasolle 8"
-
-#: ../metadata/plane.xml.in.h:17
-msgid "Plane To Face 9"
-msgstr "Siirry tasolle 9"
-
-#: ../metadata/plane.xml.in.h:18
-msgid "Plane Up"
-msgstr "Siirry ylös"
-
-#: ../metadata/plane.xml.in.h:19
-msgid "Plane down"
-msgstr "Siirry alas"
-
-#: ../metadata/plane.xml.in.h:20
-msgid "Plane left"
-msgstr "Siirry vasemmalle"
-
-#: ../metadata/plane.xml.in.h:21
-msgid "Plane right"
-msgstr "Siirry oikealle"
-
-#: ../metadata/plane.xml.in.h:22
-msgid "Plane to face 1"
-msgstr "Siirry tasolle 1"
-
-#: ../metadata/plane.xml.in.h:23
-msgid "Plane to face 10"
-msgstr "Siirry tasolle 10"
-
-#: ../metadata/plane.xml.in.h:24
-msgid "Plane to face 11"
-msgstr "Siirry tasolle 11"
-
-#: ../metadata/plane.xml.in.h:25
-msgid "Plane to face 12"
-msgstr "Siirry tasolle 12"
-
-#: ../metadata/plane.xml.in.h:26
-msgid "Plane to face 2"
-msgstr "Siirry tasolle 2"
-
-#: ../metadata/plane.xml.in.h:27
-msgid "Plane to face 3"
-msgstr "Siirry tasolle 3"
-
-#: ../metadata/plane.xml.in.h:28
-msgid "Plane to face 4"
-msgstr "Siirry tasolle 4"
-
-#: ../metadata/plane.xml.in.h:29
-msgid "Plane to face 5"
-msgstr "Siirry tasolle 5"
-
-#: ../metadata/plane.xml.in.h:30
-msgid "Plane to face 6"
-msgstr "Siirry tasolle 6"
-
-#: ../metadata/plane.xml.in.h:31
-msgid "Plane to face 7"
-msgstr "Siirry tasolle 7"
-
-#: ../metadata/plane.xml.in.h:32
-msgid "Plane to face 8"
-msgstr "Siirry tasolle 8"
-
-#: ../metadata/plane.xml.in.h:33
-msgid "Plane to face 9"
-msgstr "Siirry tasolle 9"
-
-#: ../metadata/plane.xml.in.h:34
-msgid "Plane up"
-msgstr "Siirry ylös"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -2233,7 +2126,7 @@ msgstr "Aloita kääntäminen"
 msgid "Timeout before flipping viewport"
 msgstr "Aikakatkaisu ennen näkymän vaihtamista"
 
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -2444,91 +2337,111 @@ msgid "Minimized"
 msgstr "Pienennetty"
 
 #: ../metadata/switcher.xml.in.h:14
+#, fuzzy
+msgid "Next Panel"
+msgstr "Työpöytätaso"
+
+#: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
 msgstr "Seuraava ikkuna"
 
-#: ../metadata/switcher.xml.in.h:15
+#: ../metadata/switcher.xml.in.h:16
 msgid "Next window (All windows)"
 msgstr "Siirry viimeiseen ikkunaan"
 
-#: ../metadata/switcher.xml.in.h:16
+#: ../metadata/switcher.xml.in.h:17
 msgid "Next window (No popup)"
 msgstr "Siirry viimeiseen ikkunaan ilman vaihtajaa"
 
-#: ../metadata/switcher.xml.in.h:18
+#: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 "Tuo vaihtaja ponnahdusikkunaan, jos se ei ole näkyvissä, ja valitse seuraava "
 "ikkuna"
 
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 "Tuo vaihtaja ponnahdusikkunaan, jos se ei ole näkyvissä, ja valitse seuraava "
 "ikkuna kaikista ikkunoista"
 
-#: ../metadata/switcher.xml.in.h:20
+#: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select previous window"
 msgstr ""
 "Tuo vaihtaja ponnahdusikkunaan, jos se ei ole näkyvissä, ja valitse "
 "edellinen ikkuna"
 
-#: ../metadata/switcher.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:22
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 "Tuo vaihtaja ponnahdusikkunaan, jos se ei ole näkyvissä, ja valitse "
 "edellinen ikkuna kaikista ikkunoista"
 
-#: ../metadata/switcher.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:23
+#, fuzzy
+msgid "Prev Panel"
+msgstr "Edellinen dia"
+
+#: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
 msgstr "Edellinen ikkuna"
 
-#: ../metadata/switcher.xml.in.h:23
+#: ../metadata/switcher.xml.in.h:25
 msgid "Prev window (All windows)"
 msgstr "Siirry ensimmäiseen ikkunaan"
 
-#: ../metadata/switcher.xml.in.h:24
+#: ../metadata/switcher.xml.in.h:26
 msgid "Prev window (No popup)"
 msgstr "Siirry ensimmäiseen ikkunaan ilman vaihtajaa"
 
-#: ../metadata/switcher.xml.in.h:25
+#: ../metadata/switcher.xml.in.h:27
 msgid "Rotate to the selected window while switching"
 msgstr "Kierrä valittuun ikkunaan vaihtaessa"
 
-#: ../metadata/switcher.xml.in.h:26
+#: ../metadata/switcher.xml.in.h:28
 msgid "Saturation"
 msgstr "Kylläisyys"
 
-#: ../metadata/switcher.xml.in.h:27
+#: ../metadata/switcher.xml.in.h:29
+#, fuzzy
+msgid "Select next panel type window."
+msgstr "Valitse seuraava ikkuna"
+
+#: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Siirry seuraavaan ikkunaan ilman vaihtajan ponnahdusikkunaa"
 
-#: ../metadata/switcher.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:31
+#, fuzzy
+msgid "Select previous panel type window."
+msgstr "Valitse edellinen ikkuna"
+
+#: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
 msgstr "Siirry edelliseen ikkunaan ilman vaihtajaa ponnahdusikkunaa"
 
-#: ../metadata/switcher.xml.in.h:29
+#: ../metadata/switcher.xml.in.h:33
 msgid "Show icon next to thumbnail"
 msgstr "Näytä kuvake esikatselukuvan vieressä"
 
-#: ../metadata/switcher.xml.in.h:30
+#: ../metadata/switcher.xml.in.h:34
 msgid "Show minimized windows"
 msgstr "Näytä pienennetyt ikkunat"
 
-#: ../metadata/switcher.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:36
 msgid "Switcher speed"
 msgstr "Vaihtajanopeus"
 
-#: ../metadata/switcher.xml.in.h:33
+#: ../metadata/switcher.xml.in.h:37
 msgid "Switcher timestep"
 msgstr "Vaihtaja-aikaväli"
 
-#: ../metadata/switcher.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:38
 msgid "Switcher windows"
 msgstr "Ikkunoiden vaihtajassa näkyvät ikkunatyypit"
 
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:40
 msgid "Windows that should be shown in switcher"
 msgstr "Määrittää ikkunatyypit, jotka näkyvät ikkunoiden vaihtajassa"
 
@@ -2782,6 +2695,111 @@ msgid "Zoom pan"
 msgstr ""
 "Määrittää kuinka paljon nuolinäppäiment liikuttavat zoomia nuolien suuntaan"
 
+#~ msgid "Background Images"
+#~ msgstr "Taustakuvat"
+
+#~ msgid "Background images"
+#~ msgstr "Taustakuvat"
+
+#~ msgid "Place windows on a plane"
+#~ msgstr "Asettele ikkunat työpöytätason pinnalle"
+
+#~ msgid "Plane Down"
+#~ msgstr "Siirry alas"
+
+#~ msgid "Plane Left"
+#~ msgstr "Siirry vasemmalle"
+
+#~ msgid "Plane Right"
+#~ msgstr "Siirry oikealle"
+
+#~ msgid "Plane To Face 1"
+#~ msgstr "Siirry tasolle 1"
+
+#~ msgid "Plane To Face 10"
+#~ msgstr "Siirry tasolle 10"
+
+#~ msgid "Plane To Face 11"
+#~ msgstr "Siirry tasolle 11"
+
+#~ msgid "Plane To Face 12"
+#~ msgstr "Siirry tasolle 12"
+
+#~ msgid "Plane To Face 2"
+#~ msgstr "Siirry tasolle 2"
+
+#~ msgid "Plane To Face 3"
+#~ msgstr "Siirry tasolle 3"
+
+#~ msgid "Plane To Face 4"
+#~ msgstr "Siirry tasolle 4"
+
+#~ msgid "Plane To Face 5"
+#~ msgstr "Siirry tasolle 5"
+
+#~ msgid "Plane To Face 6"
+#~ msgstr "Siirry tasolle 6"
+
+#~ msgid "Plane To Face 7"
+#~ msgstr "Siirry tasolle 7"
+
+#~ msgid "Plane To Face 8"
+#~ msgstr "Siirry tasolle 8"
+
+#~ msgid "Plane To Face 9"
+#~ msgstr "Siirry tasolle 9"
+
+#~ msgid "Plane Up"
+#~ msgstr "Siirry ylös"
+
+#~ msgid "Plane down"
+#~ msgstr "Siirry alas"
+
+#~ msgid "Plane left"
+#~ msgstr "Siirry vasemmalle"
+
+#~ msgid "Plane right"
+#~ msgstr "Siirry oikealle"
+
+#~ msgid "Plane to face 1"
+#~ msgstr "Siirry tasolle 1"
+
+#~ msgid "Plane to face 10"
+#~ msgstr "Siirry tasolle 10"
+
+#~ msgid "Plane to face 11"
+#~ msgstr "Siirry tasolle 11"
+
+#~ msgid "Plane to face 12"
+#~ msgstr "Siirry tasolle 12"
+
+#~ msgid "Plane to face 2"
+#~ msgstr "Siirry tasolle 2"
+
+#~ msgid "Plane to face 3"
+#~ msgstr "Siirry tasolle 3"
+
+#~ msgid "Plane to face 4"
+#~ msgstr "Siirry tasolle 4"
+
+#~ msgid "Plane to face 5"
+#~ msgstr "Siirry tasolle 5"
+
+#~ msgid "Plane to face 6"
+#~ msgstr "Siirry tasolle 6"
+
+#~ msgid "Plane to face 7"
+#~ msgstr "Siirry tasolle 7"
+
+#~ msgid "Plane to face 8"
+#~ msgstr "Siirry tasolle 8"
+
+#~ msgid "Plane to face 9"
+#~ msgstr "Siirry tasolle 9"
+
+#~ msgid "Plane up"
+#~ msgstr "Siirry ylös"
+
 #~ msgid "Desktop Window Opacity Fade Time."
 #~ msgstr "Kuution läpinäkyvyyden katoamiseen kestävä aika"
 
@@ -2790,12 +2808,6 @@ msgstr ""
 
 #~ msgid "Open window menu"
 #~ msgstr "Avaa ikkunavalikko"
-
-#~ msgid "Select next window"
-#~ msgstr "Valitse seuraava ikkuna"
-
-#~ msgid "Select previous window"
-#~ msgstr "Valitse edellinen ikkuna"
 
 #~ msgid "Dock"
 #~ msgstr "Telakointi"
@@ -4290,5 +4302,7 @@ msgstr ""
 #~ "valintaikkuna = ModalDialog, tavallinen ikkuna = Normal, kokoruutuikkuna "
 #~ "= Fullscreen, tuntematon = Unknown)"
 
+# workflow: "3D Beschleunigung aktivieren"
+# -ke-
 #~ msgid "Wobble effect on system beep"
 #~ msgstr "Huojumistehoste järjestelmän huomautuksesta"
