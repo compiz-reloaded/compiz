@@ -577,7 +577,7 @@ windowMenu (CompDisplay     *d,
     xid = getIntOptionNamed (option, nOption, "window", 0);
 
     w = findTopLevelWindowAtDisplay (d, xid);
-    if (w)
+    if (w && !w->screen->maxGrab)
     {
 	int  x, y, button;
 	Time time;
