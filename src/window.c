@@ -4611,9 +4611,6 @@ minimizeTransients (CompWindow *w,
 void
 minimizeWindow (CompWindow *w)
 {
-    if (!(w->actions & CompWindowActionMinimizeMask))
-	return;
-
     if (!w->managed)
 	return;
 

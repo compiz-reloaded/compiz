@@ -255,7 +255,7 @@ minimize (CompDisplay     *d,
     xid = getIntOptionNamed (option, nOption, "window", 0);
 
     w = findTopLevelWindowAtDisplay (d, xid);
-    if (w)
+    if (w && (w->actions & CompWindowActionMinimizeMask))
 	minimizeWindow (w);
 
     return TRUE;

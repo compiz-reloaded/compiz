@@ -1876,7 +1876,10 @@ handleEvent (CompDisplay *d,
 	    if (w)
 	    {
 		if (event->xclient.data.l[0] == IconicState)
-		    minimizeWindow (w);
+		{
+		    if (w->actions & CompWindowActionMinimizeMask)
+			minimizeWindow (w);
+		}
 		else if (event->xclient.data.l[0] == NormalState)
 		    unminimizeWindow (w);
 	    }
