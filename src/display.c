@@ -173,7 +173,7 @@ closeWin (CompDisplay     *d,
     time = getIntOptionNamed (option, nOption, "time", CurrentTime);
 
     w = findTopLevelWindowAtDisplay (d, xid);
-    if (w)
+    if (w && (w->actions & CompWindowActionCloseMask))
 	closeWindow (w, time);
 
     return TRUE;
