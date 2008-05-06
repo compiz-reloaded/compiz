@@ -503,7 +503,7 @@ rotatePreparePaintScreen (CompScreen *s,
     }
     else
     {
-	rs->progress = 0.0;
+	rs->zoomTranslate = 0.0;
     }
 
     UNWRAP (rs, s, preparePaintScreen);
