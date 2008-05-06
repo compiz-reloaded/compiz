@@ -30,7 +30,7 @@
 
 namespace Plasma
 {
-class Svg;
+class PanelSvg;
 }
 
 class QSpacerItem;
@@ -70,7 +70,7 @@ class Switcher
 
 	QRect mGeometry;
 
-	Plasma::Svg *mBackground;
+	Plasma::PanelSvg *mBackground;
 	QPixmap mPixmap;
 	QPixmap mBackgroundPixmap;
 

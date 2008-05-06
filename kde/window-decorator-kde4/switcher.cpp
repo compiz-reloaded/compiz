@@ -30,7 +30,7 @@
 
 #include <fixx11h.h>
 
-#include <KDE/Plasma/Svg>
+#include <KDE/Plasma/PanelSvg>
 #include <KDE/Plasma/Theme>
 
 #include <kwindowsystem.h>
@@ -43,15 +43,20 @@ mId (id)
 {
     QPalette palette;
     long     prop[4];
-    QColor   color = Plasma::Theme::self ()->textColor ();
+    QColor   color;
+    color = Plasma::Theme::defaultTheme ()->color (Plasma::Theme::TextColor);
 
-    mBackground = new Plasma::Svg("widgets/background");
+    mBackground = new Plasma::PanelSvg();
+    mBackground->setImagePath ("dialogs/background");
+    mBackground->setEnabledBorders(Plasma::PanelSvg::AllBorders);
 
-    mBorder.left   = mBackground->elementSize ("left").width ();
-    mBorder.right  = mBackground->elementSize ("right").width ();
-    mBorder.top    = mBackground->elementSize ("top").height ();
-    mBorder.bottom = mBackground->elementSize ("bottom").height () +
-		     Plasma::Theme::self ()->fontMetrics ().height () + 10;
+    kDebug() << Plasma::Theme::defaultTheme ()->themeName();
+    kDebug () << KGlobal::mainComponent().componentName();
+    mBorder.left   = mBackground->marginSize(Plasma::LeftMargin);
+    mBorder.right  = mBackground->marginSize(Plasma::RightMargin);
+    mBorder.top    = mBackground->marginSize(Plasma::TopMargin);
+    mBorder.bottom = mBackground->marginSize(Plasma::BottomMargin) +
+		     Plasma::Theme::defaultTheme ()->fontMetrics ().height () + 10;
 
     mContext.extents.left   = mBorder.left;
     mContext.extents.right  = mBorder.right;
@@ -115,14 +120,6 @@ KWD::Switcher::updateGeometry ()
     updateWindowProperties ();
 }
 
-/*
- * This code is taken from KDE/kdebase/workspace/libs/plasma/dialog.cpp
- *
- *   Copyright (C) 2007 by Alexis Ménard <darktears31@gmail.com>
- *   Copyright (C) 2007 Sebastian Kuegler <sebas@kde.org>
- *   Copyright (C) 2006 Aaron Seigo <aseigo@kde.org>
- */
-
 void
 KWD::Switcher::redrawPixmap ()
 {
@@ -131,92 +128,14 @@ KWD::Switcher::redrawPixmap ()
     const int contentWidth  = mPixmap.width ();
     const int contentHeight = mPixmap.height ();
 
-    const int topHeight    = mBackground->elementSize ("top").height ();
-    const int topWidth     = mBackground->elementSize ("top").width ();
-    const int leftWidth    = mBackground->elementSize ("left").width ();
-    const int leftHeight   = mBackground->elementSize ("left").height ();
-    const int rightHeight  = mBackground->elementSize ("right").height ();
-    const int rightWidth   = mBackground->elementSize ("right").width ();
-    const int bottomHeight = mBackground->elementSize ("bottom").height ();
-    const int bottomWidth  = mBackground->elementSize ("bottom").width ();
-
-    const int topOffset    = 0;
-    const int leftOffset   = 0;
-    const int rightOffset  = contentWidth - rightWidth;
-    const int bottomOffset = contentHeight - bottomHeight;
-    const int contentTop   = topHeight;
-    const int contentLeft  = leftWidth;
-
     mPixmap.fill (Qt::transparent);
 
     p.setCompositionMode (QPainter::CompositionMode_Source);
     p.setRenderHint (QPainter::SmoothPixmapTransform);
 
-    mBackground->resize (contentWidth, contentHeight);
-    mBackground->paint (&p, QRect (contentLeft, contentTop, contentWidth,
-			contentHeight), "center");
-    mBackground->resize ();
-
-    mBackground->paint (&p, QRect (leftOffset, topOffset,
-			leftWidth, topHeight), "topleft");
-    mBackground->paint (&p, QRect (rightOffset, topOffset,
-			rightWidth, topHeight), "topright");
-    mBackground->paint (&p, QRect (leftOffset, bottomOffset,
-			leftWidth, bottomHeight), "bottomleft");
-    mBackground->paint (&p, QRect (rightOffset, bottomOffset,
-			rightWidth, bottomHeight), "bottomright");
-
-    if (mBackground->elementExists ("hint-stretch-borders")) {
-	mBackground->paint (&p, QRect (leftOffset, contentTop,
-			    leftWidth, contentHeight), "left");
-	mBackground->paint (&p, QRect (rightOffset, contentTop,
-			    rightWidth, contentHeight), "right");
-	mBackground->paint (&p, QRect (contentLeft, topOffset,
-			    contentWidth, topHeight), "top");
-	mBackground->paint (&p, QRect (contentLeft, bottomOffset,
-			    contentWidth, bottomHeight), "bottom");
-    } else {
-	QPixmap left (leftWidth, leftHeight);
-	QPixmap right (rightWidth, rightHeight);
-	QPixmap top (topWidth, topHeight);
-	QPixmap bottom (bottomWidth, bottomHeight);
-	
-	left.fill (Qt::transparent);
-	{
-	    QPainter sidePainter (&left);
-	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
-	    mBackground->paint (&sidePainter, QPoint (0, 0), "left");
-	}
-	p.drawTiledPixmap (QRect (leftOffset, contentTop, leftWidth,
-			   contentHeight - topHeight - bottomHeight), left);
-
-	right.fill (Qt::transparent);
-	{
-	    QPainter sidePainter (&right);
-	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
-	    mBackground->paint (&sidePainter, QPoint (0, 0), "right");
-	}
-	p.drawTiledPixmap (QRect (rightOffset, contentTop, rightWidth,
-			   contentHeight - topHeight - bottomHeight), right);
-
-	top.fill (Qt::transparent);
-	{
-	    QPainter sidePainter (&top);
-	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
-	    mBackground->paint (&sidePainter, QPoint (0, 0), "top");
-	}
-	p.drawTiledPixmap (QRect (contentLeft, topOffset, contentWidth -
-			   rightWidth - leftWidth, topHeight), top);
-
-	bottom.fill (Qt::transparent);
-	{
-	    QPainter sidePainter (&bottom);
-	    sidePainter.setCompositionMode (QPainter::CompositionMode_Source);
-	    mBackground->paint (&sidePainter, QPoint (0, 0), "bottom");
-	}
-	p.drawTiledPixmap (QRect (contentLeft, bottomOffset, contentWidth -
-			   rightWidth - leftWidth, bottomHeight), bottom);
-    }
+    mBackground->resizePanel (QSizeF (contentWidth, contentHeight));
+    mBackground->paintPanel (&p, QRect (0, 0, contentWidth,
+			contentHeight));
 
     mBackgroundPixmap = mPixmap.copy (mBorder.left, mBorder.top,
 				      mGeometry.width (),
@@ -230,8 +149,9 @@ KWD::Switcher::redrawPixmap ()
 void
 KWD::Switcher::update ()
 {
-    QFontMetrics fm = Plasma::Theme::self ()->fontMetrics ();
-    QFont font (Plasma::Theme::self ()->font ());
+    QFontMetrics fm = Plasma::Theme::defaultTheme ()->fontMetrics ();
+    QFont font (Plasma::Theme::defaultTheme ()->
+		font (Plasma::Theme::DefaultFont));
     QString name;
     QPainter p (&mPixmap);
 
@@ -249,15 +169,12 @@ KWD::Switcher::update ()
 
     p.setCompositionMode (QPainter::CompositionMode_Source);
 
-    mBackground->resize (mPixmap.width (), mPixmap.height ());
     mBackground->paint (&p, QRect (mBorder.left, mBorder.top +
 			mGeometry.height () + 5, mGeometry.width (),
 			fm.height ()), "center");
-    mBackground->resize ();
-
 
     p.setFont (font);
-    p.setBrush (QBrush (Plasma::Theme::self()->backgroundColor()));
+    p.setPen (Plasma::Theme::defaultTheme ()->color(Plasma::Theme::TextColor));
 
     p.drawText ((mPixmap.width () - fm.width (name)) / 2,
                 mBorder.top + mGeometry.height () + 5 + fm.ascent (), name);
