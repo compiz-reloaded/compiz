@@ -1486,7 +1486,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     if (cs->grabIndex == 0 && hsize > 2 && !capsPainted &&
 	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
-	 sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
+	 cs->paintAllViewports || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
     {
 	static CompVector top[3] = { { .v = { 0.5, 0.5,  0.0, 1.0} },
 				     { .v = { 0.0, 0.5, -0.5, 1.0} },
