@@ -1725,6 +1725,8 @@ handleEvent (CompDisplay *d,
 		}
 
 		wState = constrainWindowState (wState, w->actions);
+		if (w->id == d->activeWindow)
+		    wState &= ~CompWindowStateDemandsAttentionMask;
 
 		if (wState != w->state)
 		{
