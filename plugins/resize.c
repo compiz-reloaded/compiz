@@ -864,13 +864,9 @@ resizeHandleEvent (CompDisplay *d,
 		    {
 			option = RESIZE_DISPLAY_OPTION_INITIATE_KEY;
 
-			o[1].type    = CompOptionTypeInt;
-			o[1].name    = "button";
-			o[1].value.i = 0;
-
 			resizeInitiate (d, &rd->opt[option].value.action,
 					CompActionStateInitKey,
-					o, 2);
+					o, 1);
 		    }
 		    else
 		    {
