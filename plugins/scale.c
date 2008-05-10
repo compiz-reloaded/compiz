@@ -1183,8 +1183,11 @@ scaleInitiateCommon (CompScreen      *s,
 	damageScreen (s);
     }
 
-    if (state & CompActionStateInitButton)
+    if ((state & (CompActionStateInitButton | EDGE_STATE)) ==
+	CompActionStateInitButton)
+    {
 	action->state |= CompActionStateTermButton;
+    }
 
     if (state & CompActionStateInitKey)
 	action->state |= CompActionStateTermKey;
