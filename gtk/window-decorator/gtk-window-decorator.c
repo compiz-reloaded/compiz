@@ -2806,6 +2806,8 @@ get_button_position (decor_t *d,
 #ifdef USE_METACITY
 
 #define TOP_RESIZE_HEIGHT 2
+#define RESIZE_EXTENDS 15
+
 static void
 meta_get_event_window_position (decor_t *d,
 				gint    i,
@@ -2835,23 +2837,24 @@ meta_get_event_window_position (decor_t *d,
     case 2: /* bottom */
 	switch (j) {
 	case 2: /* bottom right */
-	    *x = width - fgeom.right_width;
-	    *y = height - fgeom.bottom_height;
-	    *w = fgeom.right_width;
-	    *h = fgeom.bottom_height;
+	    *x = width - fgeom.right_width - RESIZE_EXTENDS;
+	    *y = height - fgeom.bottom_height - RESIZE_EXTENDS;
+	    *w = fgeom.right_width + RESIZE_EXTENDS;
+	    *h = fgeom.bottom_height + RESIZE_EXTENDS;
 	    break;
 	case 1: /* bottom */
-	    *x = fgeom.left_width;
+	    *x = fgeom.left_width + RESIZE_EXTENDS;
 	    *y = height - fgeom.bottom_height;
-	    *w = width - fgeom.left_width - fgeom.right_width;
+	    *w = width - fgeom.left_width - fgeom.right_width -
+		 (2 * RESIZE_EXTENDS);
 	    *h = fgeom.bottom_height;
 	    break;
 	case 0: /* bottom left */
 	default:
 	    *x = 0;
-	    *y = height - fgeom.bottom_height;
-	    *w = fgeom.left_width;
-	    *h = fgeom.bottom_height;
+	    *y = height - fgeom.bottom_height - RESIZE_EXTENDS;
+	    *w = fgeom.left_width + RESIZE_EXTENDS;
+	    *h = fgeom.bottom_height + RESIZE_EXTENDS;
 	    break;
 	}
 	break;
@@ -2859,9 +2862,10 @@ meta_get_event_window_position (decor_t *d,
 	switch (j) {
 	case 2: /* right */
 	    *x = width - fgeom.right_width;
-	    *y = fgeom.top_height;
+	    *y = fgeom.top_height + RESIZE_EXTENDS;
 	    *w = fgeom.right_width;
-	    *h = height - fgeom.top_height - fgeom.bottom_height;
+	    *h = height - fgeom.top_height - fgeom.bottom_height -
+		 (2 * RESIZE_EXTENDS);
 	    break;
 	case 1: /* middle */
 	    *x = fgeom.left_width;
@@ -2872,9 +2876,10 @@ meta_get_event_window_position (decor_t *d,
 	case 0: /* left */
 	default:
 	    *x = 0;
-	    *y = fgeom.top_height;
+	    *y = fgeom.top_height + RESIZE_EXTENDS;
 	    *w = fgeom.left_width;
-	    *h = height - fgeom.top_height - fgeom.bottom_height;
+	    *h = height - fgeom.top_height - fgeom.bottom_height -
+		 (2 * RESIZE_EXTENDS);
 	    break;
 	}
 	break;
@@ -2882,23 +2887,24 @@ meta_get_event_window_position (decor_t *d,
     default:
 	switch (j) {
 	case 2: /* top right */
-	    *x = width - fgeom.right_width;
+	    *x = width - fgeom.right_width - RESIZE_EXTENDS;
 	    *y = 0;
-	    *w = fgeom.right_width;
-	    *h = fgeom.top_height;
+	    *w = fgeom.right_width + RESIZE_EXTENDS;
+	    *h = fgeom.top_height + RESIZE_EXTENDS;
 	    break;
 	case 1: /* top */
-	    *x = fgeom.left_width;
+	    *x = fgeom.left_width + RESIZE_EXTENDS;
 	    *y = 0;
-	    *w = width - fgeom.left_width - fgeom.right_width;
+	    *w = width - fgeom.left_width - fgeom.right_width -
+		 (2 * RESIZE_EXTENDS);
 	    *h = fgeom.title_rect.y + TOP_RESIZE_HEIGHT;
 	    break;
 	case 0: /* top left */
 	default:
 	    *x = 0;
 	    *y = 0;
-	    *w = fgeom.left_width;
-	    *h = fgeom.top_height;
+	    *w = fgeom.left_width + RESIZE_EXTENDS;
+	    *h = fgeom.top_height + RESIZE_EXTENDS;
 	    break;
 	}
     }

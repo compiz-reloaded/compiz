@@ -331,10 +331,8 @@ resizeInitiate (CompDisplay     *d,
 
 	RESIZE_SCREEN (w->screen);
 
-	x = getIntOptionNamed (option, nOption, "x",
-			       w->serverX + (w->serverWidth / 2));
-	y = getIntOptionNamed (option, nOption, "y",
-			       w->serverY + (w->serverHeight / 2));
+	x = getIntOptionNamed (option, nOption, "x", pointerX);
+	y = getIntOptionNamed (option, nOption, "y", pointerY);
 
 	button = getIntOptionNamed (option, nOption, "button", -1);
 
@@ -866,13 +864,9 @@ resizeHandleEvent (CompDisplay *d,
 		    {
 			option = RESIZE_DISPLAY_OPTION_INITIATE_KEY;
 
-			o[1].type    = CompOptionTypeInt;
-			o[1].name    = "button";
-			o[1].value.i = 0;
-
 			resizeInitiate (d, &rd->opt[option].value.action,
 					CompActionStateInitKey,
-					o, 2);
+					o, 1);
 		    }
 		    else
 		    {
