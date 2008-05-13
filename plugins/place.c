@@ -937,6 +937,12 @@ placeGetStrategyForWindow (CompWindow *w)
 	return NoPlacement;
     }
 
+    if (w->wmType & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
+    {
+	/* see above */
+	return NoPlacement;
+    }
+
     /* no placement for unmovable windows */
     if (!(w->actions & CompWindowActionMoveMask))
 	return NoPlacement;
