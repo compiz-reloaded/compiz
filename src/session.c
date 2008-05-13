@@ -117,7 +117,8 @@ setCloneRestartCommands (SmcConn connection)
 }
 
 static void
-setRestartStyle (SmcConn connection, char hint)
+setRestartStyle (SmcConn connection,
+		 char    hint)
 {
     SmProp	prop, *pProp;
     SmPropValue propVal;
@@ -135,7 +136,8 @@ setRestartStyle (SmcConn connection, char hint)
 }
 
 static void
-setProgram (SmcConn connection, const char* program)
+setProgram (SmcConn    connection,
+	    const char *program)
 {
     SmProp	prop, *pProp;
     SmPropValue propVal;
