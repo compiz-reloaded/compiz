@@ -1210,6 +1210,10 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     if (w->state & CompWindowStateFullscreenMask)
 	return;
 
+    if (w->wmType & (CompWindowTypeDockMask |
+		     CompWindowTypeDesktopMask))
+	return;
+
     if (!(w->type & (CompWindowTypeNormalMask |
 		     CompWindowTypeSplashMask |
 		     CompWindowTypeDialogMask |
