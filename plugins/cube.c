@@ -1140,7 +1140,7 @@ cubeClearTargetOutput (CompScreen *s,
 	    cs->grabIndex == 0)
 	{
 	    glRotatef (vRotate / 5.0f + 90.0f, 1.0f, 0.0f, 0.0f);
-	    glRotatef (xRotate, 0.0f, 1.0f, 0.0f);
+	    glRotatef (xRotate, 0.0f, 0.0f, -1.0f);
 	}
 	else
 	{
