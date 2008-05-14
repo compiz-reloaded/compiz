@@ -41,9 +41,10 @@ typedef struct _PlaceDisplay {
 #define PLACE_MODE_RANDOM   4
 #define PLACE_MODE_LAST     PLACE_MODE_RANDOM
 
-#define PLACE_MOMODE_CURRENT 0
-#define PLACE_MOMODE_POINTER 1
-#define PLACE_MOMODE_LAST    PLACE_MOMODE_POINTER
+#define PLACE_MOMODE_CURRENT    0
+#define PLACE_MOMODE_POINTER    1
+#define PLACE_MOMODE_FULLSCREEN 2
+#define PLACE_MOMODE_LAST    PLACE_MOMODE_FULLSCREEN
 
 #define PLACE_SCREEN_OPTION_WORKAROUND        0
 #define PLACE_SCREEN_OPTION_MODE              1
@@ -993,20 +994,27 @@ placeGetPlacementOutput (CompWindow        *w,
 
     PLACE_SCREEN (s);
 
-    if (strategy == PlaceOverParent)
-    {
-	CompWindow *parent;
+    switch (strategy) {
+    case PlaceCenteredOnScreen:
+	output = s->currentOutputDev;
+	break;
+    case PlaceOverParent:
+	{
+	    CompWindow *parent;
 
-	parent = findWindowAtScreen (s, w->transientFor);
-	if (parent)
-	    output = outputDeviceForWindow (parent);
-    }
-    else if (strategy == ConstrainOnly)
-    {
+	    parent = findWindowAtScreen (s, w->transientFor);
+	    if (parent)
+		output = outputDeviceForWindow (parent);
+	}
+	break;
+    case ConstrainOnly:
 	output = outputDeviceForGeometry (s, x, y,
 					  w->serverWidth,
 					  w->serverHeight,
 					  w->serverBorderWidth);
+	break;
+    default:
+	break;
     }
 
     if (output >= 0)
@@ -1032,6 +1040,9 @@ placeGetPlacementOutput (CompWindow        *w,
 		output = outputDeviceForPoint (s, xPointer, yPointer);
 	    }
 	}
+	break;
+    case PLACE_MOMODE_FULLSCREEN:
+	return &s->fullscreenOutput;
 	break;
     }
 
@@ -1169,6 +1180,22 @@ placeDoWindowPlacement (CompWindow *w,
 	case PLACE_MODE_SMART:
 	    placeSmart (w, &workArea, &x, &y);
 	    break;
+	}
+
+	/* When placing to the fullscreen output, constrain to one
+	   output nevertheless */
+	if (output->id == ~0)
+	{
+	    int id;
+
+	    id = outputDeviceForGeometry (s, x, y,
+					  w->serverWidth,
+					  w->serverHeight,
+					  w->serverBorderWidth);
+	    getWorkareaForOutput (s, id, &workArea);
+
+	    workArea.x += (targetVpX - s->x) * s->width;
+	    workArea.y += (targetVpY - s->y) * s->height;
 	}
 
 	/* Maximize windows if they are too big for their work area (bit of
