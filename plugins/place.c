@@ -996,9 +996,6 @@ placeGetPlacementOutput (CompWindow        *w,
     PLACE_SCREEN (s);
 
     switch (strategy) {
-    case PlaceCenteredOnScreen:
-	output = s->currentOutputDev;
-	break;
     case PlaceOverParent:
 	{
 	    CompWindow *parent;
@@ -1052,15 +1049,15 @@ placeGetPlacementOutput (CompWindow        *w,
 	}
 	break;
     case PLACE_MOMODE_FULLSCREEN:
-	return &s->fullscreenOutput;
+	/* only place on fullscreen output if not placing centered, as the
+	   constraining will move the window away from the center otherwise */
+	if (strategy != PlaceCenteredOnScreen)
+	    return &s->fullscreenOutput;
 	break;
     }
 
     if (output < 0)
-    {
-	/* should never happen */
 	output = s->currentOutputDev;
-    }
 
     return &s->outputDev[output];
 }
