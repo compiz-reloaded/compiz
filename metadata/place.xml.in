@@ -39,7 +39,7 @@
 		<_short>Multi Output Mode</_short>
 		<_long>Selects how window placement should behave if multiple outputs are selected</_long>
 		<min>0</min>
-		<max>2</max>
+		<max>3</max>
 		<default>0</default>
 		<desc>
 		    <value>0</value>
@@ -51,6 +51,10 @@
 		</desc>
 		<desc>
 		    <value>2</value>
+		    <_name>Use output device of focussed window</_name>
+		</desc>
+		<desc>
+		    <value>3</value>
 		    <_name>Place across all outputs</_name>
 		</desc>
 	    </option>

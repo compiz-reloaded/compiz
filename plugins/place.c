@@ -43,8 +43,9 @@ typedef struct _PlaceDisplay {
 
 #define PLACE_MOMODE_CURRENT    0
 #define PLACE_MOMODE_POINTER    1
-#define PLACE_MOMODE_FULLSCREEN 2
-#define PLACE_MOMODE_LAST    PLACE_MOMODE_FULLSCREEN
+#define PLACE_MOMODE_ACTIVEWIN  2
+#define PLACE_MOMODE_FULLSCREEN 3
+#define PLACE_MOMODE_LAST       PLACE_MOMODE_FULLSCREEN
 
 #define PLACE_SCREEN_OPTION_WORKAROUND        0
 #define PLACE_SCREEN_OPTION_MODE              1
@@ -1039,6 +1040,15 @@ placeGetPlacementOutput (CompWindow        *w,
 	    {
 		output = outputDeviceForPoint (s, xPointer, yPointer);
 	    }
+	}
+	break;
+    case PLACE_MOMODE_ACTIVEWIN:
+	{
+	    CompWindow *active;
+
+	    active = findWindowAtScreen (s, s->display->activeWindow);
+	    if (active)
+		output = outputDeviceForWindow (active);
 	}
 	break;
     case PLACE_MOMODE_FULLSCREEN:
