@@ -1349,14 +1349,13 @@ cubePaintTransformedOutput (CompScreen		    *s,
 			    unsigned int	    mask)
 {
     ScreenPaintAttrib sa = *sAttrib;
-    float	      xRotate, vRotate, rRotate, progress;
-    int		      hsize, xMove = 0;
+    float	      xRotate, vRotate, progress;
+    int		      hsize;
     float	      size;
     GLenum            filter = s->display->textureFilter;
     PaintOrder        paintOrder;
-    Bool	      capsPainted;
     Bool              wasCulled = FALSE;
-    Bool              topDir, bottomDir, allCaps;
+    Bool              paintCaps;
     int               cullNorm, cullInv;
     int               output = 0;
 
@@ -1411,7 +1410,10 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     if (!cs->cleared[output])
     {
-	rRotate = xRotate - ((360.0f / hsize) * (s->x * cs->nOutput));
+	float rRotate;
+
+	rRotate = xRotate - ((s->x *360.0f) / s->hsize);
+
 	(*cs->clearTargetOutput) (s, rRotate, vRotate);
 	cs->cleared[output] = TRUE;
     }
@@ -1456,8 +1458,6 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     sa.xRotate = sa.xRotate / size * hsize;
 
-    xMove = cs->xRotations;
-
     if (cs->grabIndex && cs->opt[CUBE_SCREEN_OPTION_MIPMAP].value.b)
 	s->display->textureFilter = GL_LINEAR_MIPMAP_LINEAR;
 
@@ -1475,25 +1475,29 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     if (cs->invert == -1 || cs->paintAllViewports)
 	cubePaintAllViewports (s, &sa, transform, region, outputPtr,
-			       mask, xMove, size, hsize, paintOrder);
+			       mask, cs->xRotations, size, hsize, paintOrder);
 
     glCullFace (cullNorm);
 
     if (wasCulled && cs->paintAllViewports)
 	glDisable (GL_CULL_FACE);
 
-    capsPainted = cs->capsPainted[output];
+    paintCaps = !cs->grabIndex && (hsize > 2) && !cs->capsPainted[output] &&
+	        (cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
+		 cs->paintAllViewports || sa.vRotate != 0.0f ||
+		 sa.yTranslate != 0.0f);
 
-    if (cs->grabIndex == 0 && hsize > 2 && !capsPainted &&
-	(cs->invert != 1 || cs->desktopOpacity != OPAQUE ||
-	 cs->paintAllViewports || sa.vRotate != 0.0f || sa.yTranslate != 0.0f))
+    if (paintCaps)
     {
+	Bool topDir, bottomDir, allCaps;
+
 	static CompVector top[3] = { { .v = { 0.5, 0.5,  0.0, 1.0} },
 				     { .v = { 0.0, 0.5, -0.5, 1.0} },
 				     { .v = { 0.0, 0.5,  0.0, 1.0} } };
 	static CompVector bottom[3] = { { .v = { 0.5, -0.5,  0.0, 1.0} },
 			                { .v = { 0.0, -0.5, -0.5, 1.0} },
 					{ .v = { 0.0, -0.5,  0.0, 1.0} } };
+
 	topDir    = (*cs->checkOrientation) (s, &sa, transform, outputPtr, top);
 	bottomDir = (*cs->checkOrientation) (s, &sa, transform,
 					     outputPtr, bottom);
@@ -1555,7 +1559,7 @@ cubePaintTransformedOutput (CompScreen		    *s,
 
     if (cs->invert == 1 || cs->paintAllViewports)
 	cubePaintAllViewports (s, &sa, transform, region,
-			       outputPtr, mask, xMove,
+			       outputPtr, mask, cs->xRotations,
 			       size, hsize, paintOrder);
 
     glCullFace (cullNorm);
