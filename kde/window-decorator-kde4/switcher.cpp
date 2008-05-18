@@ -50,8 +50,6 @@ mId (id)
     mBackground->setImagePath ("dialogs/background");
     mBackground->setEnabledBorders(Plasma::PanelSvg::AllBorders);
 
-    kDebug() << Plasma::Theme::defaultTheme ()->themeName();
-    kDebug () << KGlobal::mainComponent().componentName();
     mBorder.left   = mBackground->marginSize(Plasma::LeftMargin);
     mBorder.right  = mBackground->marginSize(Plasma::RightMargin);
     mBorder.top    = mBackground->marginSize(Plasma::TopMargin);
