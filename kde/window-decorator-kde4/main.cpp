@@ -126,6 +126,9 @@ main (int argc, char **argv)
 	}
     }
 
+    // Disable window less child widgets
+    QApplication::setAttribute(Qt::AA_NativeWindows, true);
+
     app = new KWD::Decorator (dpy, visual ? Qt::HANDLE(visual) : 0,
 			      colormap ? Qt::HANDLE(colormap) : 0);
 
