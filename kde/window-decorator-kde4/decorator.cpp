@@ -603,7 +603,16 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 		xbe2.y = xbe->y - child->pos ().y ();
 	    }
 
+	    client->setFakeRelease (false);
 	    QApplication::x11ProcessEvent ((XEvent *) &xbe2);
+
+	    /* We won't get a button release event, because of the screengrabs
+	       in compiz */
+	    if (client->getFakeRelease () && xevent->type == ButtonPress)
+	    {
+		xbe2.type = ButtonRelease;
+		QApplication::x11ProcessEvent ((XEvent *) &xbe2);
+	    }
 
 	    return true;
 	}

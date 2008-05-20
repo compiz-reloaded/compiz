@@ -174,6 +174,17 @@ class Window:public QWidget, public KDecorationBridge {
 	void showKillProcessDialog (Time timestamp);
 	void hideKillProcessDialog (void);
 
+	void setFakeRelease (bool fakeRelease)
+	{
+	    mFakeRelease = fakeRelease;
+	}
+
+	bool getFakeRelease ()
+	{
+	    return mFakeRelease;
+	}
+	
+
     private:
 	void createDecoration (void);
 	void updateShadow (void);
@@ -240,6 +251,7 @@ class Window:public QWidget, public KDecorationBridge {
 	QSize mSize;
 	QProcess *mProcessKiller;
 	KActionCollection mKeys;
+	bool mFakeRelease;
 
 	QAction *mResizeOpAction;
         QAction *mMoveOpAction;

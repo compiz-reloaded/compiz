@@ -1881,6 +1881,8 @@ KWD::Window::moveWindow (QMouseEvent *qme)
 					       qme->globalX (),
 					       qme->globalY (),
 					       direction);
+    mFakeRelease = true;
+
 }
 
 #define OPACITY_STEP (0xffff / 10)
