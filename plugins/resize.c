@@ -995,13 +995,16 @@ resizePaintRectangle (CompScreen              *s,
 		      unsigned short	      *borderColor,
 		      unsigned short	      *fillColor)
 {
-    BoxRec box;
+    BoxRec        box;
+    CompTransform sTransform = *transform;
 
     resizeGetPaintRectangle (s->display, &box);
 
     glPushMatrix ();
 
-    prepareXCoords (s, output, -DEFAULT_Z_CAMERA);
+    transformToScreenSpace (s, output, -DEFAULT_Z_CAMERA, &sTransform);
+    
+    glLoadMatrixf (sTransform.m);
 
     glDisableClientState (GL_TEXTURE_COORD_ARRAY);
     glEnable (GL_BLEND);
