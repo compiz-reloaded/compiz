@@ -2155,33 +2155,6 @@ addWindow (CompScreen *screen,
 		if (w->desktop >= screen->nDesktop)
 		    w->desktop = screen->currentDesktop;
 	    }
-
-	    if (!(w->type & CompWindowTypeDesktopMask))
-		w->opacityPropSet =
-		    readWindowProp32 (screen->display, w->id,
-				      screen->display->winOpacityAtom,
-				      &w->opacity);
-	}
-
-	w->brightness =
-	    getWindowProp32 (screen->display, w->id,
-			     screen->display->winBrightnessAtom,
-			     BRIGHT);
-
-	if (w->alive)
-	{
-	    w->paint.opacity    = w->opacity;
-	    w->paint.brightness = w->brightness;
-	}
-
-	if (screen->canDoSaturated)
-	{
-	    w->saturation =
-		getWindowProp32 (screen->display, w->id,
-				 screen->display->winSaturationAtom,
-				 COLOR);
-	    if (w->alive)
-		w->paint.saturation = w->saturation;
 	}
     }
     else
@@ -2189,6 +2162,32 @@ addWindow (CompScreen *screen,
 	recalcWindowType (w);
     }
 
+    if (!(w->type & CompWindowTypeDesktopMask))
+	w->opacityPropSet =
+	    readWindowProp32 (screen->display, w->id,
+			      screen->display->winOpacityAtom,
+			      &w->opacity);
+    
+    w->brightness =
+	getWindowProp32 (screen->display, w->id,
+			 screen->display->winBrightnessAtom,
+			 BRIGHT);
+
+    if (w->alive)
+    {
+	w->paint.opacity    = w->opacity;
+	w->paint.brightness = w->brightness;
+    }
+    
+    if (screen->canDoSaturated) {
+	w->saturation =
+	    getWindowProp32 (screen->display, w->id,
+			     screen->display->winSaturationAtom,
+			     COLOR);
+	if (w->alive)
+	    w->paint.saturation = w->saturation;
+    }
+	
     if (w->attrib.map_state == IsViewable)
     {
 	w->placed = TRUE;
