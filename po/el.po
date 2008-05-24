@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:02+0530\n"
-"PO-Revision-Date: 2008-02-18 10:25+0100\n"
+"POT-Creation-Date: 2008-05-24 22:22+0530\n"
+"PO-Revision-Date: 2008-05-17 23:58+0200\n"
 "Last-Translator: Jim Dusis <jimdusis@yahoo.gr>\n"
 "Language-Team: Greek <jimdusis@yahoo.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.0.2\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -97,69 +97,70 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 "Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Κλείσιμο Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Απομεγιστοποίηση Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Μεγιστοποίηση Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Ελαχιστοποίηση Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Μενού Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
-msgstr "Κλιμάκωση"
+msgstr "Σκίαση"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
-msgstr ""
+msgstr "Επικάλυψη"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
-msgstr ""
+msgstr "Καρφίτσωμα"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
-msgstr ""
+msgstr "Αποσκίαση"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
-msgstr ""
+msgstr "Μη Επικάλυψη"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
-msgstr ""
+msgstr "Ξεκαρφίτσωμα"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "Το παράθυρο \"%s\" δεν ανταποκρίνεται."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Ο εξαναγκασμός αυτής της εφαρμογής να τερματιστεί θα προκαλέσει απώλεια των "
+"μη σωσμένων αλλαγών."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
-msgstr ""
+msgstr "_Εξαναγκασμός Τερματισμού"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -318,7 +319,7 @@ msgstr "Ισχύς gaussian"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Τέχνασμα ανεξάρτητης υφής"
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
@@ -346,6 +347,8 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Χρήση των διαθέσιμων μονάδων υφών για πραγματοποίηση όσο το δυνατό "
+"περισσότερων τεχνασμάτων ανεξάρτητης υφής."
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -655,19 +658,21 @@ msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"Διάρκεια χρόνου που πρέπει ο δείκτης του ποντικιού να παραμείνει σε μια "
+"γωνία της οθόνης πριν η ενέργεια που έχει οριστεί σ αυτή την άκρη να "
+"πραγματοποιηθεί."
 
 #: ../metadata/core.xml.in.h:57
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Καθυστέρηση Διακόπτη 'Ακρης"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "Γρήγορο"
 
 #: ../metadata/core.xml.in.h:59
-#, fuzzy
 msgid "Focus Prevention Level"
-msgstr "Εστίαση Προστατευμένων Παραθύρων"
+msgstr "Εστίαση Προληπτικού Επιπέδου"
 
 #: ../metadata/core.xml.in.h:60
 msgid "Focus Prevention Windows"
@@ -679,7 +684,7 @@ msgstr "Εστίαση προστατευμένων παραθύρων"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Εξαναγκασμός ανεξάρτητης απεικόνισης."
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -709,7 +714,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:69
 msgid "High"
-msgstr ""
+msgstr "Υψηλό"
 
 #: ../metadata/core.xml.in.h:70
 msgid "Horizontal Virtual Size"
@@ -718,6 +723,7 @@ msgstr "Οριζόντιο Εικονικό Μέγεθος"
 #: ../metadata/core.xml.in.h:71
 msgid "If available use compression for textures converted from images"
 msgstr ""
+"Εαν είναι διαθέσιμο χρήση συμπίεσης για υφές που έχουν προέλθει από εικόνες"
 
 #: ../metadata/core.xml.in.h:72
 msgid "Ignore Hints When Maximized"
@@ -747,7 +753,7 @@ msgstr "Διάστημα μεταξύ των μηνυμάτων ping"
 
 #: ../metadata/core.xml.in.h:78
 msgid "Level of focus stealing prevention"
-msgstr ""
+msgstr "Επίπεδο αποφυγής απόσπασης εστίασης"
 
 #: ../metadata/core.xml.in.h:79
 msgid "Lighting"
@@ -763,7 +769,7 @@ msgstr "Λίστα με προσδιοριστικά στρινγκ για τι�
 
 #: ../metadata/core.xml.in.h:82
 msgid "Low"
-msgstr ""
+msgstr "Χαμηλό"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Lower Window"
@@ -807,7 +813,7 @@ msgstr "Αριθμός ψεύτικων επιφανειών εργασίας"
 
 #: ../metadata/core.xml.in.h:95
 msgid "Off"
-msgstr ""
+msgstr "Κλειστό"
 
 #: ../metadata/core.xml.in.h:96
 msgid "Only perform screen updates during vertical blanking period"
@@ -1593,22 +1599,26 @@ msgid "Place Windows"
 msgstr "Τοποθέτηση Παραθύρων"
 
 #: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Τοποθέτηση παραθύρων στις κατάλληλες θέσεις όταν ταξινομούνται"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "Τρόπος τοποθέτησης"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Positioned windows"
 msgstr "Τοποθετημένα παράθυρα"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "Τυχαία"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
@@ -1616,72 +1626,76 @@ msgstr ""
 "Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
 "εξόδου."
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Έξυπνο"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:16
 #, fuzzy
 msgid "Use active output device"
 msgstr "Σε όλες τις συσκευές εξόδου"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
 msgstr "Κάθετες θέσεις εικονικών επιφανειών εργασίας"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
 msgstr "Τοποθετημένα παράθυρα στις εικονικές επιφάνειες εργασίας"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "Μοντίφες για τοποθέτηση παραθύρων"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "Παράθυρα που πρέπει να τοποθετηθούν εξ' ορισμού"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
 "Παράθυρα που θα τοποθετηθούν σε συγκεκριμένες εικονικές επιφάνειες εργασίας "
 "εξ' ορισμού"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "Μοντίφες"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid "X Positions"
 msgstr "Θέσεις Χ"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "X Viewport Positions"
 msgstr "Θέσεις Χ Εικονικών Επιφανειών Εργασίας"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "Τιμές θέσης Χ"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "Y Positions"
 msgstr "Θέσεις Υ"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "Y Viewport Positions"
 msgstr "Θέσεις Υ Εικονικών Επιφανειών Εργασίας"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "Τιμές θέσης Υ"
 

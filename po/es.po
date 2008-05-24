@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:02+0530\n"
-"PO-Revision-Date: 2008-04-26 16:04+0200\n"
-"Last-Translator: Nuria Fernández Mingo <nuria.fernandezm@gmail.com>\n"
+"POT-Creation-Date: 2008-05-24 22:22+0530\n"
+"PO-Revision-Date: 2008-05-09 19:49+0200\n"
+"Last-Translator: ESTEBAN DE JESUS RODRIGUEZ BUJAIDAR <KORN_B8S@HOTMAIL.COM>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,69 +93,69 @@ msgstr "Usar el tema Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usar el tema Metacity para dibujar las decoraciones de ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Cerrar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Desmaximizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Maximizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Minimizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Menú de ventanas"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "Tonalidad"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 #, fuzzy
 msgid "Make Above"
 msgstr "Marcar arriba"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
-msgstr ""
+msgstr "Anular sombra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
-msgstr ""
+msgstr "Desmarcar Sobre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La ventana \"%s\" no responde."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forzando la salida de la aplicación puede causar la pérdida de los datos que "
 "no haya guardado."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "Forzar salida"
 
@@ -1599,92 +1599,100 @@ msgid "Place Windows"
 msgstr "Colocar ventanas"
 
 #: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Coloca las ventanas en sus lugares adecuados en la asignación"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "Modo de Posicionamiento"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Positioned windows"
 msgstr "Ventanas Posicionadas"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "Aleatorio"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 "Seleccionar qué ventanas escalar si se usan múltiples dispositivos de salida"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Inteligente"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:16
 #, fuzzy
 msgid "Use active output device"
 msgstr "En todos los dispositivos de salida"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
 msgstr "Posiciones de viewport verticales"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
 msgstr "ventanas posicionadas en Viewport"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "Procedimientos para posicionamiento de ventanas"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "Ventanas que deben posicionarse por defecto"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "Ventanas que deben posicionarse en viewports específicos por defecto"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "Soluciones alternativas"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid "X Positions"
 msgstr "Posiciones X"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "X Viewport Positions"
 msgstr "Posiciones de Viewport X"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "valores de posicion X"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "Y Positions"
 msgstr "Posiciones Y"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "Y Viewport Positions"
 msgstr "Posiciones de Viewport Y"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "valores de posicion Y"
 

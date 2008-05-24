@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:04+0530\n"
-"PO-Revision-Date: 2008-04-04 09:08+0200\n"
+"POT-Creation-Date: 2008-05-24 22:23+0530\n"
+"PO-Revision-Date: 2008-05-03 00:06+0200\n"
 "Last-Translator: Nicolau Gonçalves <excentriko@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -92,67 +92,67 @@ msgstr "Usar tema metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usar tema metacity ao desenhar as decorações das janelas"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Fechar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Maximizar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Minimizar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Menu da Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "Encolher"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "Colocar no Topo"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "Stick"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "Desencolher"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "Retirar do Topo"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "Unstick"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "A janela \"%s\" não está a responder."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forçar a aplicação a terminar causará perda de alterações não guardadas."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_Forçar saída"
 
@@ -679,7 +679,7 @@ msgstr "Janelas em prevenção de destaque"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Forçar desenho independente dos dispositivos de saída."
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -848,6 +848,8 @@ msgstr "Gestão Saídas Sobrepostas"
 #: ../metadata/core.xml.in.h:105
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Desenhar cada dispositivo de saída independentemente, mesmo que os "
+"dispositivos de saída se sobreponham"
 
 #: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
@@ -1562,9 +1564,8 @@ msgid "Centered"
 msgstr "Centrado"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "Janelas em Prevenção de Destaque"
+msgstr "Forçar Colacação Janelas"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
@@ -1579,94 +1580,104 @@ msgid "Place Windows"
 msgstr "Colocar Janelas"
 
 #: ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Place across all outputs"
+msgstr "Preferir saída menor"
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Colocar janelas nas posições apropriadas quando houver mapeamento"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "Modo de disposição"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Positioned windows"
 msgstr "Janelas posicionadas"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "Aleatório"
 
-#: ../metadata/place.xml.in.h:13
-#, fuzzy
+#: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Selecciona onde as janelas são dimensionadas se existirem múltiplos "
-"dispositivos de saída."
+"Selecciona como a colocação de janelas se deve comportar se estiverem "
+"seleccionados múltiplos dispositivos de saída."
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Inteligente"
 
-#: ../metadata/place.xml.in.h:15
-#, fuzzy
-msgid "Use active output device"
-msgstr "Em todos os dispositivos de saída"
-
 #: ../metadata/place.xml.in.h:16
-msgid "Use output device with pointer"
-msgstr ""
+msgid "Use active output device"
+msgstr "Usar dispositivo de saída activo"
 
 #: ../metadata/place.xml.in.h:17
+#, fuzzy
+msgid "Use output device of focussed window"
+msgstr "Usar dispositivo de saída com cursor"
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr "Usar dispositivo de saída com cursor"
+
+#: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
 msgstr "Posições verticais"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
 msgstr "Janelas posicionadas no viewport"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "Soluções para colocação de janelas"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "Janelas que devem ser posicionadas por omissão"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
 "Janelas que devem ser posicionadas em viewports específicos por omissão"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
+"Janelas que devem ser posicionadas, mesmo que indiquem que o gestor de "
+"janelas deve evitar posicioná-las."
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "Soluções"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid "X Positions"
 msgstr "Posições X"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "X Viewport Positions"
 msgstr "Posições X do viewport"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "Valores de posição X"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "Y Positions"
 msgstr "Posições Y"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "Y Viewport Positions"
 msgstr "Posições Y do viewport"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "Valores de posição Y"
 
@@ -2379,9 +2390,8 @@ msgid "Minimized"
 msgstr "Minimizado"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next Panel"
-msgstr "Plano da área de trabalho"
+msgstr "Painel Seguinte"
 
 #: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
@@ -2418,9 +2428,8 @@ msgstr ""
 "todas"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "Slide Anterior"
+msgstr "Painel Anterior"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
@@ -2444,16 +2453,15 @@ msgstr "Saturação"
 
 #: ../metadata/switcher.xml.in.h:29
 msgid "Select next panel type window."
-msgstr ""
+msgstr "Seleccionar tipo de janela do painel seguinte."
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Seleccionar próxima janela sem mostrar o popup de janelas."
 
 #: ../metadata/switcher.xml.in.h:31
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Seleccionar janela anterior sem mostrar o popup de janelas."
+msgstr "Seleccionar tipo de janela do painel anterior."
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."

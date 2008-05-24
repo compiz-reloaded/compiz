@@ -1,4 +1,4 @@
-# translation of compiz.po to Russian
+# translation of compiz_new.po to Russian
 # Copyright (C) 2005, 2006 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
 # Copyright (C) 1999, 2000, 2001 SuSE GmbH.
@@ -9,10 +9,10 @@
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: compiz\n"
+"Project-Id-Version: compiz_new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:04+0530\n"
-"PO-Revision-Date: 2008-04-29 23:33+0300\n"
+"POT-Creation-Date: 2008-05-24 22:24+0530\n"
+"PO-Revision-Date: 2008-05-11 13:42+0300\n"
 "Last-Translator: Dimitriy Ryazantcev <DJm00n@mail.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
@@ -99,67 +99,67 @@ msgstr "Использовать тему metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Использовать тему metacity для отрисовки оформлений окна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Закрыть окно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Отменить полное развертывание окна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Развернуть окно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Свернуть окно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Меню окна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "Свернуть в заголовок"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "Поверх всех"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "Приклеить"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "Развернуть из заголовка"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "Не делать поверх всех"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "Отклеить"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Окно \"%s\" не отвечает."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ускоренное закрытие приложения приведет к потере не сохраненных изменений."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_Ускоренный выход"
 
@@ -690,7 +690,7 @@ msgstr "Упреждающая фокусировка окон"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Принудительная независимая отрисовка вывода."
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -865,6 +865,8 @@ msgstr "Обработка перекрывающегося вывода"
 #: ../metadata/core.xml.in.h:105
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Отрисовывать каждое устройство вывода независимо, даже если устройства "
+"вывода перекрываются"
 
 #: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
@@ -1598,9 +1600,8 @@ msgid "Centered"
 msgstr "По центру"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "Упреждающая фокусировка окон"
+msgstr "Принудительное позиционирование окон"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
@@ -1615,95 +1616,105 @@ msgid "Place Windows"
 msgstr "Размещение окон"
 
 #: ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Place across all outputs"
+msgstr "Предпочтение меньшему выводу"
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "При отображении разместите окна в нужных местах"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "Режим размещения"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Positioned windows"
 msgstr "Спозиционированные окна"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "Случайно"
 
-#: ../metadata/place.xml.in.h:13
-#, fuzzy
+#: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Выбрать, где масштабировать окна если используются устройства множественного "
-"вывода."
+"Выбор как должно себя вести позиционирование окон, если используется "
+"несколько выводов"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Умный"
 
-#: ../metadata/place.xml.in.h:15
-#, fuzzy
-msgid "Use active output device"
-msgstr "На все устройства вывода"
-
 #: ../metadata/place.xml.in.h:16
-msgid "Use output device with pointer"
-msgstr ""
+msgid "Use active output device"
+msgstr "Использовать активное устройство вывода"
 
 #: ../metadata/place.xml.in.h:17
+#, fuzzy
+msgid "Use output device of focussed window"
+msgstr "Использовать устройство вывода с курсором"
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr "Использовать устройство вывода с курсором"
+
+#: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
 msgstr "Вертикальные позиции видовых окон"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
 msgstr "Спозиционированные окна видового окна"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "Обходные пути при размещении окна"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "Окна, которые должны быть спозиционированны по умолчанию"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
 "Окна, которые должны быть спозиционированны в определенном экране по "
 "умолчанию"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
+"Окна, которые должны быть спозиционированы, даже если они указывают, что "
+"этого делать не нужно."
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "Обходные пути"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid "X Positions"
 msgstr "Положения по X"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "X Viewport Positions"
 msgstr "Положения видового окна по X"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "Значения положения по X"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "Y Positions"
 msgstr "Положения по Y"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "Y Viewport Positions"
 msgstr "Положения видового окна по Y"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "Значения положения по Y"
 
@@ -2426,9 +2437,8 @@ msgid "Minimized"
 msgstr "Свернутые"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next Panel"
-msgstr "Плоскость рабочего стола"
+msgstr "Следующая панель"
 
 #: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
@@ -2464,9 +2474,8 @@ msgstr ""
 "имеющихся"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "Предыдущий слайд"
+msgstr "Предыдущая панель"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
@@ -2491,16 +2500,15 @@ msgstr "Насыщенность"
 
 #: ../metadata/switcher.xml.in.h:29
 msgid "Select next panel type window."
-msgstr ""
+msgstr "Выбрать следующее окно типа панель."
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Выбрать следующее окно без показа всплывающего окна."
 
 #: ../metadata/switcher.xml.in.h:31
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Выбрать предыдущее окно без показа всплывающего окна."
+msgstr "Выбрать предыдущее окно типа панель."
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
@@ -2787,108 +2795,3 @@ msgstr "Коэффициент масштабирования"
 #: ../metadata/zoom.xml.in.h:14
 msgid "Zoom pan"
 msgstr "Панорамирование масштабирования"
-
-#~ msgid "Background Images"
-#~ msgstr "Изображения заднего плана"
-
-#~ msgid "Background images"
-#~ msgstr "Изображения заднего плана"
-
-#~ msgid "Place windows on a plane"
-#~ msgstr "Размещение окон на плоскости"
-
-#~ msgid "Plane Down"
-#~ msgstr "Плоскость вниз"
-
-#~ msgid "Plane Left"
-#~ msgstr "Плоскость влево"
-
-#~ msgid "Plane Right"
-#~ msgstr "Плоскость вправо"
-
-#~ msgid "Plane To Face 1"
-#~ msgstr "Плоскость на лицевую сторону 1"
-
-#~ msgid "Plane To Face 10"
-#~ msgstr "Плоскость на лицевую сторону 10"
-
-#~ msgid "Plane To Face 11"
-#~ msgstr "Плоскость на лицевую сторону 11"
-
-#~ msgid "Plane To Face 12"
-#~ msgstr "Плоскость на лицевую сторону 12"
-
-#~ msgid "Plane To Face 2"
-#~ msgstr "Плоскость на лицевую сторону 2"
-
-#~ msgid "Plane To Face 3"
-#~ msgstr "Плоскость на лицевую сторону 3"
-
-#~ msgid "Plane To Face 4"
-#~ msgstr "Плоскость на лицевую сторону 4"
-
-#~ msgid "Plane To Face 5"
-#~ msgstr "Плоскость на лицевую сторону 5"
-
-#~ msgid "Plane To Face 6"
-#~ msgstr "Плоскость на лицевую сторону 6"
-
-#~ msgid "Plane To Face 7"
-#~ msgstr "Плоскость на лицевую сторону 7"
-
-#~ msgid "Plane To Face 8"
-#~ msgstr "Плоскость на лицевую сторону 8"
-
-#~ msgid "Plane To Face 9"
-#~ msgstr "Плоскость на лицевую сторону 9"
-
-#~ msgid "Plane Up"
-#~ msgstr "Плоскость вверх"
-
-#~ msgid "Plane down"
-#~ msgstr "Плоскость вниз"
-
-#~ msgid "Plane left"
-#~ msgstr "Плоскость влево"
-
-#~ msgid "Plane right"
-#~ msgstr "Плоскость вправо"
-
-#~ msgid "Plane to face 1"
-#~ msgstr "Плоскость на лицевую сторону 1"
-
-#~ msgid "Plane to face 10"
-#~ msgstr "Плоскость на лицевую сторону 10"
-
-#~ msgid "Plane to face 11"
-#~ msgstr "Плоскость на лицевую сторону 11"
-
-#~ msgid "Plane to face 12"
-#~ msgstr "Плоскость на лицевую сторону 12"
-
-#~ msgid "Plane to face 2"
-#~ msgstr "Плоскость на лицевую сторону 2"
-
-#~ msgid "Plane to face 3"
-#~ msgstr "Плоскость на лицевую сторону 3"
-
-#~ msgid "Plane to face 4"
-#~ msgstr "Плоскость на лицевую сторону 4"
-
-#~ msgid "Plane to face 5"
-#~ msgstr "Плоскость на лицевую сторону 5"
-
-#~ msgid "Plane to face 6"
-#~ msgstr "Плоскость на лицевую сторону 6"
-
-#~ msgid "Plane to face 7"
-#~ msgstr "Плоскость на лицевую сторону 7"
-
-#~ msgid "Plane to face 8"
-#~ msgstr "Плоскость на лицевую сторону 8"
-
-#~ msgid "Plane to face 9"
-#~ msgstr "Плоскость на лицевую сторону 9"
-
-#~ msgid "Plane up"
-#~ msgstr "Плоскость вверх"

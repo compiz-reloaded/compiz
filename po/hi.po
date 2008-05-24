@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:03+0530\n"
+"POT-Creation-Date: 2008-05-24 22:22+0530\n"
 "PO-Revision-Date: 2007-12-16 17:03+0530\n"
 "Last-Translator: Sangeeta Kumari\n"
 "Language-Team: <en@li.org>\n"
@@ -91,69 +91,69 @@ msgstr "मेटासिटी थीम का उपयोग करें"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "विंडो सजवाट खींचने के दौरान मेटासिटी थीम का उपयोग करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 #, fuzzy
 msgid "Close Window"
 msgstr "windows"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "विंडो अधिकतम खत्म करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "विंडो अधिकतम करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "विंडो न्यूनतम करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 #, fuzzy
 msgid "Window Menu"
 msgstr "विन्डो मैनेजर"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 #, fuzzy
 msgid "Shade"
 msgstr "स्कैनर"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr ""
 
@@ -1679,101 +1679,109 @@ msgid "Place Windows"
 msgstr "windows"
 
 #: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "मैप किए जाने पर उचित स्थिति पर विंडो रखें"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "नियोजन प्रकार"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 #, fuzzy
 msgid "Positioned windows"
 msgstr "windows"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "क्रमहीन"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 "चुनें कि कहां विंडो को स्केल किया जाता है यदि बहुल आउटपुट डिवायस प्रयोग किया जाता है."
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "स्मार्ट"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:16
 #, fuzzy
 msgid "Use active output device"
 msgstr "सभी आउटपुट डिवायस पर"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 #, fuzzy
 msgid "Vertical viewport positions"
 msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 #, fuzzy
 msgid "Viewport positioned windows"
 msgstr "windows"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 #, fuzzy
 msgid "Window placement workarounds"
 msgstr "ypbind विकल्प"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "विंडोज़ जिसे मूलभूत रूप से स्थिति पर रखा जाना चाहिए"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "विंडोज़ जिसे मूलभूत रूप से विशेष व्यूपोर्ट में रखा जाना चाहिए"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 #, fuzzy
 msgid "Workarounds"
 msgstr "वर्कग्रुप "
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 #, fuzzy
 msgid "X Positions"
 msgstr "windows"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 #, fuzzy
 msgid "X Viewport Positions"
 msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "X स्थिति मान"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 #, fuzzy
 msgid "Y Positions"
 msgstr "windows"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 #, fuzzy
 msgid "Y Viewport Positions"
 msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "Y स्थिति मान"
 

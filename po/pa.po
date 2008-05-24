@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:04+0530\n"
+"POT-Creation-Date: 2008-05-24 22:23+0530\n"
 "PO-Revision-Date: 2007-12-15 09:26+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@users.sf.net>\n"
 "Language-Team: American English <punjabi-users@llist.sf.net>\n"
@@ -95,70 +95,70 @@ msgstr "ਮੇਟਾਸਿਟੀ ਥੀਮ ਵਰਤੋਂ"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "ਵਿੰਡੋ ਸਜਾਵਟ ਡਰਾਇੰਗ ਦੌਰਾਨ ਮੇਟਾਸਿਟੀ ਥੀਮ ਵਰਤੋਂ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 #, fuzzy
 msgid "Close Window"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "ਵਿੰਡੋ ਅਧਿਕਤਮ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 #, fuzzy
 msgid "Minimize Window"
 msgstr "Window&s ਸਮੇਟੋ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 #, fuzzy
 msgid "Window Menu"
 msgstr "ਝਰੋਖਾ ਪਰਬੰਧਕ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 #, fuzzy
 msgid "Shade"
 msgstr "ਸੰਭਾਲੋ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr ""
 
@@ -1688,100 +1688,108 @@ msgid "Place Windows"
 msgstr "Win&dows ਹਟਾਓ"
 
 #: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "ਜਦੋਂ ਮੈਪ ਕੀਤਾ ਜਾਵੇ ਤਾਂ ਵਿੰਡੋ ਨੂੰ ਢੁੱਕਵੀਆਂ ਥਾਵਾਂ ਉੱਤੇ ਰੱਖੋ"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "ਸਥਿਤੀ ਰੱਖਣ ਮੋਡ"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 #, fuzzy
 msgid "Positioned windows"
 msgstr "ਮੁੜ-ਆਕਾਰ(&s)"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "ਰੈਂਡਮ"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr "ਚੁਣੋ, ਜਿੱਥੇ ਵਿੰਡੋ ਸਕੇਲ ਕਰਨੀ ਹੈ, ਜਦੋਂ ਕਿ ਕਈ ਆਉਟਪੁੱਟ ਜੰਤਰ ਚੁਣੇ ਜਾਂਦੇ ਹਨ।"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "ਸਮਾਰਟ"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:16
 #, fuzzy
 msgid "Use active output device"
 msgstr "ਸਭ ਆਉਟਪੁੱਟ ਜੰਤਰਾਂ ਉੱਤੇ"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 #, fuzzy
 msgid "Vertical viewport positions"
 msgstr "ਫ਼ਰਜ਼ੀ ਜੰਤਰ"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 #, fuzzy
 msgid "Viewport positioned windows"
 msgstr "ਮੁੜ-ਆਕਾਰ(&s)"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 #, fuzzy
 msgid "Window placement workarounds"
 msgstr "ypbind ਚੋਣ"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "ਵਿੰਡੋ. ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਸਥਿਤ ਕੀਤੀ ਜਾਵੇ"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "ਵਿੰਡੋ, ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਖਾਸ ਵਿਊਪੋਰਟ ਵਿੱਚ ਰੱਖੀ ਜਾਣੀ ਚਾਹੀਦੀ ਹੈ"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 #, fuzzy
 msgid "Workarounds"
 msgstr "ਵਰਕਸਮੂਹ(&W)"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 #, fuzzy
 msgid "X Positions"
 msgstr "ਮੁੜ-ਆਕਾਰ(&s)"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 #, fuzzy
 msgid "X Viewport Positions"
 msgstr "ਫ਼ਰਜ਼ੀ ਜੰਤਰ"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "X ਸਥਿਤੀ ਮੁੱਲ"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 #, fuzzy
 msgid "Y Positions"
 msgstr "ਮੁੜ-ਆਕਾਰ(&s)"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 #, fuzzy
 msgid "Y Viewport Positions"
 msgstr "ਫ਼ਰਜ਼ੀ ਜੰਤਰ"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "Y ਸਥਿਤੀ ਮੁੱਲ"
 

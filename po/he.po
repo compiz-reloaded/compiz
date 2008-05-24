@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:03+0530\n"
-"PO-Revision-Date: 2008-05-01 03:17+0200\n"
+"POT-Creation-Date: 2008-05-24 22:22+0530\n"
+"PO-Revision-Date: 2008-05-05 20:49+0200\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -91,68 +91,68 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "השתמש בערכת הנושא של Metacity בעת ציור מסגרות חלון"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "סגור חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "שחזר גודל חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "הגדל חלון למקסימום"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "מזער חלון"
 
 #  Label text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "תפריט חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "גלול"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "העבר למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "נעל במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "פרוס גלילה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "בטל העברה למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "בטל נעילה במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "החלון \"%s\" אינו מגיב."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "סגירה כפויה של היישום תביא לאובדן שינויים שלא נשמרו."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_סגור יישום"
 
@@ -655,7 +655,7 @@ msgstr "חלונות מניעת מיקוד"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "כפה צביעת פלט עצמאית."
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -824,7 +824,7 @@ msgstr "טיפול בחפיפת פלט"
 
 #: ../metadata/core.xml.in.h:105
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
+msgstr "צבע כל פלט כשלעצמו, אפילו אם התקני הפלט חופפים"
 
 #: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
@@ -1257,7 +1257,7 @@ msgstr "פרוש את הקוביה"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr "Dbus"
+msgstr "Dbus "
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
@@ -1424,7 +1424,7 @@ msgstr "מערכת קבצים במרחב המשתמש"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr "GConf"
+msgstr "GConf "
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
@@ -1432,7 +1432,7 @@ msgstr "תשתית בקרה של Gconf"
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr "GLib"
+msgstr "GLib "
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
@@ -1440,7 +1440,7 @@ msgstr "תמיכה בלולאה ראשית של GLib"
 
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
-msgstr "Ini"
+msgstr "Ini "
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
@@ -1456,7 +1456,7 @@ msgstr "הודעות"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr "Kconfig"
+msgstr "Kconfig "
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
@@ -1554,7 +1554,7 @@ msgstr "שחזר חלונות שהוגדלו למקסימום"
 #  heading text
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
-msgstr "הצחל להזיז חלון"
+msgstr "התחל להזיז חלון"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1569,9 +1569,8 @@ msgid "Centered"
 msgstr "ממורכז"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "חלונות מניעת מיקוד"
+msgstr "כפה מיקום על חלונות"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
@@ -1588,95 +1587,103 @@ msgid "Place Windows"
 msgstr "מקם חלונות"
 
 #: ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Place across all outputs"
+msgstr "העדף פלט קטן יותר"
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "מקם חלונות במקום המתאים בעת מיפוי"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "מצב קביעת מיקום"
 
 #  heading text
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Positioned windows"
 msgstr "חלונות ממוקמים"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "אקראי"
 
-#: ../metadata/place.xml.in.h:13
-#, fuzzy
+#: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
-msgstr "קובע היכן יש להציג חלונות במבט על אם יש יותר מהתקן פלט אחד."
+msgstr "קובע כיצד יש למקם חלונות אם נבחר יותר מהתקן פלט אחד"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "חכם"
 
-#: ../metadata/place.xml.in.h:15
-#, fuzzy
-msgid "Use active output device"
-msgstr "בכל התקני הפלט"
-
 #: ../metadata/place.xml.in.h:16
-msgid "Use output device with pointer"
-msgstr ""
+msgid "Use active output device"
+msgstr "השתמש בהתקן פלט פעיל"
 
 #: ../metadata/place.xml.in.h:17
+#, fuzzy
+msgid "Use output device of focussed window"
+msgstr "השתמש בהתקן הפלט עם הסמן"
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr "השתמש בהתקן הפלט עם הסמן"
+
+#: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
 msgstr "מיקומי משטח אנכיים"
 
 #  heading text
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
 msgstr "חלונות הממוקמים על משטח"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "פתרונות מעקף למיקום"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "חלונות שיש למקמם כברירת מחדל"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "חלונות שיש למקמם במשטח ספציפי כברירת מחדל"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
-msgstr ""
+msgstr "חלונות שיש למקמם בכפייה, גם אם הם מבקשים ממנהל החלונות שלא לעשות זאת."
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "פתרונות מעקף"
 
 #  heading text
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid "X Positions"
 msgstr "מיקום ב-X"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "X Viewport Positions"
 msgstr "מיקומי משטח ב-X"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "ערכי מיקום ב-X"
 
 #  heading text
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "Y Positions"
 msgstr "מיקום ב-Y"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "Y Viewport Positions"
 msgstr "מיקומי משטח ב-Y"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "ערכי מיקום ב-Y"
 
@@ -2249,7 +2256,7 @@ msgstr "פסק זמן לפני עלעול למשטח"
 
 #: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
 msgid "Zoom"
-msgstr "זום"
+msgstr "תקריב"
 
 #: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
@@ -2314,7 +2321,7 @@ msgstr "סדר את החלונות והתחל לשנות את גודלם"
 
 #: ../metadata/scale.xml.in.h:16
 msgid "Layout and start transforming windows on current output"
-msgstr "סדר את החלונות בהתקן הפלט הנוכחי והתחל לשנות את גודם"
+msgstr "סדר את החלונות בהתקן הפלט הנוכחי והתחל לשנות את גודלם"
 
 #: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
 msgid "None"
@@ -2416,7 +2423,7 @@ msgstr "התקן צילום מסך"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
-msgstr "Svg"
+msgstr "Svg "
 
 #: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
@@ -2465,9 +2472,8 @@ msgid "Minimized"
 msgstr "ממוזערים"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next Panel"
-msgstr "מישור שולחן העבודה"
+msgstr "הפאנל הבא"
 
 #  button text
 #: ../metadata/switcher.xml.in.h:15
@@ -2503,9 +2509,8 @@ msgstr "הקפץ את המעביר אם הוא מוסתר ובחר את החלו
 
 #  label text 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "השקופית הקודמת"
+msgstr "הפאנל הקודם"
 
 #  label text 
 #: ../metadata/switcher.xml.in.h:24
@@ -2532,9 +2537,8 @@ msgstr "רווייה"
 
 #  button text
 #: ../metadata/switcher.xml.in.h:29
-#, fuzzy
 msgid "Select next panel type window."
-msgstr "&מחק את חלונות"
+msgstr "בחר את חלון הפאנל הבא."
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
@@ -2542,9 +2546,8 @@ msgstr "בחר את החלון הבא בלי להראות את החלון הקו
 
 #  heading text
 #: ../metadata/switcher.xml.in.h:31
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "שינוי גודל נכשל."
+msgstr "בחר את חלון הפאנל הקודם."
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
@@ -2618,250 +2621,229 @@ msgstr "אפשר אפקטי מים לסמן"
 
 #: ../metadata/water.xml.in.h:7
 msgid "Line"
-msgstr ""
+msgstr "קו"
 
 #: ../metadata/water.xml.in.h:8
 msgid "Offset Scale"
-msgstr ""
+msgstr "השפעה על הרקע"
 
 #: ../metadata/water.xml.in.h:9
 msgid "Point"
-msgstr ""
+msgstr "נקודה"
 
 #: ../metadata/water.xml.in.h:10
 msgid "Rain Delay"
-msgstr ""
+msgstr "השהיית טפטוף"
 
 #: ../metadata/water.xml.in.h:11
 msgid "Title wave"
-msgstr ""
+msgstr "גל כותרת"
 
 #: ../metadata/water.xml.in.h:12
 msgid "Toggle rain"
-msgstr ""
+msgstr "הורד\\עצור גשם"
 
 #: ../metadata/water.xml.in.h:13
 msgid "Toggle rain effect"
-msgstr ""
+msgstr "הפעל\\הפסק אפקט גשם"
 
 #: ../metadata/water.xml.in.h:14
 msgid "Toggle wiper"
-msgstr ""
+msgstr "הפעל\\הפסק מגב"
 
 #: ../metadata/water.xml.in.h:15
 msgid "Toggle wiper effect"
-msgstr ""
+msgstr "הפעל\\הפסק אפקט מגב"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
-msgstr ""
+msgstr "אפקט מים"
 
 #: ../metadata/water.xml.in.h:17
 msgid "Water offset scale"
-msgstr ""
+msgstr "השפעת המים על הרקע מאחוריהם"
 
 #: ../metadata/water.xml.in.h:18
 msgid "Wave effect from window title"
-msgstr ""
+msgstr "אפקט גל הבוקע ממסגרת החלון"
 
 #: ../metadata/wobbly.xml.in.h:1
 msgid "Focus Effect"
-msgstr ""
+msgstr "אפקט מיקוד"
 
 #  label text 
 #: ../metadata/wobbly.xml.in.h:2
-#, fuzzy
 msgid "Focus Window Effect"
-msgstr "חלונות"
+msgstr "אפקט מיקוד חלון"
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:3
-#, fuzzy
 msgid "Focus Windows"
-msgstr "&מחק את חלונות"
+msgstr "מיקוד חלונות"
 
 #: ../metadata/wobbly.xml.in.h:4
-#, fuzzy
 msgid "Friction"
-msgstr "פעולה"
+msgstr "חיכוך"
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:5
-#, fuzzy
 msgid "Grab Windows"
-msgstr "&מחק את חלונות"
+msgstr "תפוס חלונות"
 
 #: ../metadata/wobbly.xml.in.h:6
 msgid "Grid Resolution"
-msgstr ""
+msgstr "אבחנת רשת"
 
 #: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
-msgstr ""
+msgstr "מגנוט הפוך"
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:8
-#, fuzzy
 msgid "Make window shiver"
-msgstr "&מחק את חלונות"
+msgstr "הרעד את החלון"
 
 #  label text 
 #: ../metadata/wobbly.xml.in.h:9
-#, fuzzy
 msgid "Map Effect"
-msgstr "חלונות"
+msgstr "אפקט מיפוי"
 
 #  label text 
 #: ../metadata/wobbly.xml.in.h:10
-#, fuzzy
 msgid "Map Window Effect"
-msgstr "חלונות"
+msgstr "אפקט בעת מיפוי החלון"
 
 #  label text 
 #: ../metadata/wobbly.xml.in.h:11
-#, fuzzy
 msgid "Map Windows"
-msgstr "חלונות"
+msgstr "מיפוי חלונות"
 
 #  label text 
 #: ../metadata/wobbly.xml.in.h:12
-#, fuzzy
 msgid "Maximize Effect"
-msgstr "חלונות"
+msgstr "אפקט הגדלה למקסימום"
 
 #: ../metadata/wobbly.xml.in.h:13
 msgid "Minimum Grid Size"
-msgstr ""
+msgstr "גודל רשת מזערי"
 
 #: ../metadata/wobbly.xml.in.h:14
 msgid "Minimum Vertex Grid Size"
-msgstr ""
+msgstr "גודל מזערי של רשת קודקודים"
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:15
-#, fuzzy
 msgid "Move Windows"
-msgstr "לעבור &למטה"
+msgstr "הזזת חלונות"
 
 #: ../metadata/wobbly.xml.in.h:17
 msgid "Shiver"
-msgstr ""
+msgstr "רעידה"
 
 #: ../metadata/wobbly.xml.in.h:18
 msgid "Snap Inverted"
-msgstr ""
+msgstr "מיגנוט הפוך"
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:19
-#, fuzzy
 msgid "Snap windows"
-msgstr "&כווץ את חלונות"
+msgstr "מיגנוט חלונות"
 
 #: ../metadata/wobbly.xml.in.h:20
-#, fuzzy
 msgid "Spring Friction"
-msgstr "פעולה"
+msgstr "חיכוך קפיץ"
 
 # ES
 #: ../metadata/wobbly.xml.in.h:21
-#, fuzzy
 msgid "Spring K"
-msgstr "ספרד"
+msgstr "קבוע קפיץ"
 
 # ES
 #: ../metadata/wobbly.xml.in.h:22
-#, fuzzy
 msgid "Spring Konstant"
-msgstr "ספרד"
+msgstr "קבוע הקפיץ"
 
 #  button text
 #: ../metadata/wobbly.xml.in.h:23
-#, fuzzy
 msgid "Toggle window snapping"
-msgstr "&מחק את חלונות"
+msgstr "הפעל\\הפסק מיגנוט חלון"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
-msgstr ""
+msgstr "השתמש במודל קפיצים עבור אפקט חלון מתנדנד"
 
 #: ../metadata/wobbly.xml.in.h:25
 msgid "Vertex Grid Resolution"
-msgstr ""
+msgstr "אבחנת רשת קודקודים"
 
 #: ../metadata/wobbly.xml.in.h:26
 msgid "Windows that should wobble when focused"
-msgstr ""
+msgstr "חלונות האמורים להתנדנד בעת מיקוד"
 
 #: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
-msgstr ""
+msgstr "חלונות האמורים להתנדנד בעת תפיסתם"
 
 #: ../metadata/wobbly.xml.in.h:28
 msgid "Windows that should wobble when mapped"
-msgstr ""
+msgstr "חלונות האמורים להתנדנד בעת מיפוים"
 
 #: ../metadata/wobbly.xml.in.h:29
 msgid "Windows that should wobble when moved"
-msgstr ""
+msgstr "חלונות האמורים להתנדנד בעת הזזתם"
 
 #: ../metadata/wobbly.xml.in.h:30
 msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
+msgstr "אפקט נדנוד בעת הגדלה למקסימום ומזעור חלונות"
 
 #  label text 
 #: ../metadata/wobbly.xml.in.h:31
-#, fuzzy
 msgid "Wobbly Windows"
-msgstr "חלונות"
+msgstr "חלונות מתנדנדים"
 
 #: ../metadata/zoom.xml.in.h:1
-#, fuzzy
 msgid "Filter Linear"
-msgstr "פילטר:"
+msgstr "פילטר לינארי"
 
 #: ../metadata/zoom.xml.in.h:5
 msgid "Use linear filter when zoomed in"
-msgstr ""
+msgstr "השתמש בפילטר לינארי בזמן תקריב הגדלה"
 
 #: ../metadata/zoom.xml.in.h:6
-#, fuzzy
 msgid "Zoom Desktop"
-msgstr "&בחינה"
+msgstr "תקריב"
 
 #: ../metadata/zoom.xml.in.h:7
 msgid "Zoom In"
-msgstr ""
+msgstr "תקריב הגדלה"
 
 #: ../metadata/zoom.xml.in.h:8
 msgid "Zoom Out"
-msgstr ""
+msgstr "תקריב הקטנה"
 
 #: ../metadata/zoom.xml.in.h:9
 msgid "Zoom Pan"
-msgstr ""
+msgstr "הטיית תקריב"
 
 #: ../metadata/zoom.xml.in.h:10
-#, fuzzy
 msgid "Zoom Speed"
-msgstr "איות"
+msgstr "מהירות תקריב"
 
 #: ../metadata/zoom.xml.in.h:11
-#, fuzzy
 msgid "Zoom Timestep"
-msgstr "&בחינה"
+msgstr "יחידת זמן לתקריב"
 
 #: ../metadata/zoom.xml.in.h:12
 msgid "Zoom and pan desktop cube"
-msgstr ""
+msgstr "תקריב והטיה אל קובית שולחן העבודה"
 
 #: ../metadata/zoom.xml.in.h:13
 msgid "Zoom factor"
-msgstr ""
+msgstr "מקדם תקריב"
 
 #: ../metadata/zoom.xml.in.h:14
-#, fuzzy
 msgid "Zoom pan"
-msgstr "איות"
+msgstr "הטיית תקריב"
 
 #~ msgid "Background Images"
 #~ msgstr "תמונות רקע"

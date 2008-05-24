@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:04+0530\n"
+"POT-Creation-Date: 2008-05-24 22:24+0530\n"
 "PO-Revision-Date: 2008-04-24 17:14+0200\n"
 "Last-Translator: Volodymyr Gladky <vovglad@yandex.ru>\n"
 "Language-Team: Ukrainian <i18n@suse.de>\n"
@@ -91,68 +91,68 @@ msgstr "Використовувати теми metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Використовувати теми metacity для малювання декорації вікна "
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Закрити вікно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Відновити розмір вікна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Розгорнути вікно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Згорнути вікно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Меню вікна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 #, fuzzy
 msgid "Shade"
 msgstr "Сканер"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "Винести нагору"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "Приклеїти"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "Відклеїти"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Вікно \"%s\" не відкликається."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Примусове завершення додатку призведе до втрати всіх незбережених змін."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_Примусове завершення"
 
@@ -1685,98 +1685,106 @@ msgid "Place Windows"
 msgstr "Windows"
 
 #: ../metadata/place.xml.in.h:9
-msgid "Place windows at appropriate positions when mapped"
+msgid "Place across all outputs"
 msgstr ""
 
 #: ../metadata/place.xml.in.h:10
-msgid "Placement Mode"
+msgid "Place windows at appropriate positions when mapped"
 msgstr ""
 
 #: ../metadata/place.xml.in.h:11
+msgid "Placement Mode"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:12
 #, fuzzy
 msgid "Positioned windows"
 msgstr "Пересунути в&низ"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "Випадковий"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Розумний"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:16
 msgid "Use active output device"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 #, fuzzy
 msgid "Vertical viewport positions"
 msgstr "Віртуальні користувачі"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 #, fuzzy
 msgid "Viewport positioned windows"
 msgstr "Пересунути в&низ"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 #, fuzzy
 msgid "Window placement workarounds"
 msgstr "Параметри ypbind"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 #, fuzzy
 msgid "Workarounds"
 msgstr "&Робоча група"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 #, fuzzy
 msgid "X Positions"
 msgstr "Пересунути в&низ"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 #, fuzzy
 msgid "X Viewport Positions"
 msgstr "Віртуальні користувачі"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 #, fuzzy
 msgid "Y Positions"
 msgstr "Пересунути в&низ"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 #, fuzzy
 msgid "Y Viewport Positions"
 msgstr "Віртуальні користувачі"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr ""
 

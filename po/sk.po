@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 14:04+0530\n"
-"PO-Revision-Date: 2008-04-08 16:29+0100\n"
-"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"POT-Creation-Date: 2008-05-24 22:24+0530\n"
+"PO-Revision-Date: 2008-05-17 10:28+0200\n"
+"Last-Translator: Brusnica P <pepino@pobox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -89,66 +90,66 @@ msgstr "Použiť tému metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Použiť tému metacity pri vykresľovaní dekorácií okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4403
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Zatvoriť okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4425
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Zrušiť maximalizáciu okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4428
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Maximalizovať okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4470
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Minimalizovať Okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4587
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Menu Okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "Tieň"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4626
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "Vykonať vyššie uvedené"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "Prilepiť"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4672
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "Netieňovať"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4692
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "Odvolať vyššie uvedené"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "Odlepiť"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5075
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Okno „%s“ neodpovedá."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5084
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "Vynútené ukončenie tejto aplikácie spôsobí stratu neuložených zmien."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_Vynútiť ukončenie"
 
@@ -636,7 +637,7 @@ msgstr "Predchádzať zameraniu okien"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Vynútenie vykreslenia nezávislého výstupu"
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -805,6 +806,8 @@ msgstr "Obsluha prekrývajúceho sa výstupu"
 #: ../metadata/core.xml.in.h:105
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Vykresli každý výstup zariadenia nezávisle aj keď sa výstupy zariadení "
+"prekrývajú"
 
 #: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
@@ -1525,9 +1528,8 @@ msgid "Centered"
 msgstr "Vystrednené"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "Predchádzať zameraniu okien"
+msgstr "Vynútené umiestnenie okien"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
@@ -1542,91 +1544,103 @@ msgid "Place Windows"
 msgstr "Rozmiestniť okná"
 
 #: ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Place across all outputs"
+msgstr "Uprednostniť menší výstup"
+
+#: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Umiestniť mapované okná na zodpovedajúce pozície"
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
 msgstr "Spôsob rozmiestnenia"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Positioned windows"
 msgstr "Umiestnené okná"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Random"
 msgstr "Náhodné"
 
-#: ../metadata/place.xml.in.h:13
-#, fuzzy
+#: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
-msgstr "Či sa mení veľkosť okien pri použití viacerých výstupných zariadení."
+msgstr ""
+"Označuje ako by sa malo správať umiestňovanie okien ak je označených viacero "
+"výstupov"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Inteligentné"
 
-#: ../metadata/place.xml.in.h:15
-#, fuzzy
-msgid "Use active output device"
-msgstr "Na všetkých výstupných zariadeniach"
-
 #: ../metadata/place.xml.in.h:16
-msgid "Use output device with pointer"
-msgstr ""
+msgid "Use active output device"
+msgstr "Použiť aktívne výstupné zariadenie"
 
 #: ../metadata/place.xml.in.h:17
+#, fuzzy
+msgid "Use output device of focussed window"
+msgstr "Použiť výstupné zariadenie s ukazovateľom"
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr "Použiť výstupné zariadenie s ukazovateľom"
+
+#: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
 msgstr "Zvislé pozície pohľadov"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
 msgstr "Okná umiestnené v pohľadoch"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "Núdzové riešenia umiestnenia okna"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Windows that should be positioned by default"
 msgstr "Okná, ktoré by mali byť štandardne umiestnené"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "Okná, ktoré by mali byť štandardne umiestnené na konkrétnu plochu"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
+"Okná ktoré by mali byť nútene umiestnené aj keď by sa okenný manažér mal "
+"vyhnúť takémuto umiestneniu."
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "Núdzové riešenia"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid "X Positions"
 msgstr "Pozície X"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "X Viewport Positions"
 msgstr "Pozície plochy na osi X"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X position values"
 msgstr "Hodnoty pozíce na osi X"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "Y Positions"
 msgstr "Pozície Y"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "Y Viewport Positions"
 msgstr "Pozície plochy na osi Y"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y position values"
 msgstr "Hodnoty pozíce na osi Y"
 
@@ -2340,9 +2354,8 @@ msgid "Minimized"
 msgstr "Minimalizované"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next Panel"
-msgstr "Rovina pracovnej plochy"
+msgstr "Nasledujúca výplň"
 
 #: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
@@ -2378,9 +2391,8 @@ msgstr ""
 "všetkých okien"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "Predchádzajúca snímka"
+msgstr "Predchádzajúca výplň"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
@@ -2404,16 +2416,15 @@ msgstr "Sýtosť"
 
 #: ../metadata/switcher.xml.in.h:29
 msgid "Select next panel type window."
-msgstr ""
+msgstr "Označ nasledujúci typ výplne okna"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Vybrať ďalšie okno bez ukázania vyskakovacieho okna"
 
 #: ../metadata/switcher.xml.in.h:31
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Vybrať predchádzajúce okno bez ukázania vyskakovacieho okna"
+msgstr "Vybrať predchádzajúci typ výplne okna"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
