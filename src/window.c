@@ -2173,11 +2173,8 @@ addWindow (CompScreen *screen,
 			 screen->display->winBrightnessAtom,
 			 BRIGHT);
 
-    if (w->alive)
-    {
-	w->paint.opacity    = w->opacity;
-	w->paint.brightness = w->brightness;
-    }
+    w->paint.opacity    = w->opacity;
+    w->paint.brightness = w->brightness;
 
     if (screen->canDoSaturated)
     {
@@ -2185,8 +2182,8 @@ addWindow (CompScreen *screen,
 	    getWindowProp32 (screen->display, w->id,
 			     screen->display->winSaturationAtom,
 			     COLOR);
-	if (w->alive)
-	    w->paint.saturation = w->saturation;
+	
+	w->paint.saturation = w->saturation;
     }
 
     if (w->attrib.map_state == IsViewable)
