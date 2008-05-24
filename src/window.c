@@ -1894,6 +1894,7 @@ addWindow (CompScreen *screen,
 {
     CompWindow  *w;
     CompPrivate	*privates;
+    CompDisplay *d = screen->display;
 
     w = (CompWindow *) malloc (sizeof (CompWindow));
     if (!w)
@@ -1979,9 +1980,6 @@ addWindow (CompScreen *screen,
     w->output.top    = 0;
     w->output.bottom = 0;
 
-    w->paint.opacity	= w->opacity    = OPAQUE;
-    w->paint.brightness = w->brightness = 0xffff;
-    w->paint.saturation = w->saturation = COLOR;
     w->paint.xScale	= 1.0f;
     w->paint.yScale	= 1.0f;
     w->paint.xTranslate	= 0.0f;
@@ -2040,7 +2038,7 @@ addWindow (CompScreen *screen,
        window to the window list as we might get configure requests which
        require us to stack other windows relative to it. Setting some default
        values if this is the case. */
-    if (!XGetWindowAttributes (screen->display->display, id, &w->attrib))
+    if (!XGetWindowAttributes (d->display, id, &w->attrib))
 	setDefaultWindowAttributes (&w->attrib);
 
     w->serverWidth	 = w->attrib.width;
@@ -2069,16 +2067,15 @@ addWindow (CompScreen *screen,
 
     w->saveMask = 0;
 
-    XSelectInput (screen->display->display, id,
+    XSelectInput (d->display, id,
 		  PropertyChangeMask |
 		  EnterWindowMask    |
 		  FocusChangeMask);
 
     w->id = id;
 
-    XGrabButton (screen->display->display, AnyButton,
-		 AnyModifier, w->id, TRUE, ButtonPressMask |
-		 ButtonReleaseMask | ButtonMotionMask,
+    XGrabButton (d->display, AnyButton, AnyModifier, w->id, TRUE,
+		 ButtonPressMask | ButtonReleaseMask | ButtonMotionMask,
 		 GrabModeSync, GrabModeSync, None, None);
 
     w->inputHint = TRUE;
@@ -2088,10 +2085,10 @@ addWindow (CompScreen *screen,
     w->actions   = 0;
     w->protocols = 0;
     w->type      = CompWindowTypeUnknownMask;
-    w->lastPong  = screen->display->lastPing;
+    w->lastPong  = d->lastPing;
 
-    if (screen->display->shapeExtension)
-	XShapeSelectInput (screen->display->display, id, ShapeNotifyMask);
+    if (d->shapeExtension)
+	XShapeSelectInput (d->display, id, ShapeNotifyMask);
 
     insertWindowIntoScreen (screen, w, aboveId);
 
@@ -2111,11 +2108,11 @@ addWindow (CompScreen *screen,
 
 	XUnionRegion (&rect, w->region, w->region);
 
-	w->damage = XDamageCreate (screen->display->display, id,
+	w->damage = XDamageCreate (d->display, id,
 				   XDamageReportRawRectangles);
 
 	/* need to check for DisplayModal state on all windows */
-	w->state = getWindowState (screen->display, w->id);
+	w->state = getWindowState (d, w->id);
 
 	updateWindowClassHints (w);
     }
@@ -2127,8 +2124,8 @@ addWindow (CompScreen *screen,
 
     w->invisible = TRUE;
 
-    w->wmType    = getWindowType (screen->display, w->id);
-    w->protocols = getProtocols (screen->display, w->id);
+    w->wmType    = getWindowType (d, w->id);
+    w->protocols = getProtocols (d, w->id);
 
     if (!w->attrib.override_redirect)
     {
@@ -2143,12 +2140,11 @@ addWindow (CompScreen *screen,
 
 	recalcWindowType (w);
 
-	getMwmHints (screen->display, w->id, &w->mwmFunc, &w->mwmDecor);
+	getMwmHints (d, w->id, &w->mwmFunc, &w->mwmDecor);
 
 	if (!(w->type & (CompWindowTypeDesktopMask | CompWindowTypeDockMask)))
 	{
-	    w->desktop = getWindowProp (screen->display, w->id,
-					screen->display->winDesktopAtom,
+	    w->desktop = getWindowProp (d, w->id, d->winDesktopAtom,
 					w->desktop);
 	    if (w->desktop != 0xffffffff)
 	    {
@@ -2162,29 +2158,21 @@ addWindow (CompScreen *screen,
 	recalcWindowType (w);
     }
 
+    w->opacity = OPAQUE;
     if (!(w->type & CompWindowTypeDesktopMask))
-	w->opacityPropSet =
-	    readWindowProp32 (screen->display, w->id,
-			      screen->display->winOpacityAtom,
-			      &w->opacity);
+	w->opacityPropSet = readWindowProp32 (d, w->id, d->winOpacityAtom,
+					      &w->opacity);
 
-    w->brightness =
-	getWindowProp32 (screen->display, w->id,
-			 screen->display->winBrightnessAtom,
-			 BRIGHT);
-
-    w->paint.opacity    = w->opacity;
-    w->paint.brightness = w->brightness;
+    w->brightness = getWindowProp32 (d, w->id, d->winBrightnessAtom, BRIGHT);
 
     if (screen->canDoSaturated)
-    {
-	w->saturation =
-	    getWindowProp32 (screen->display, w->id,
-			     screen->display->winSaturationAtom,
-			     COLOR);
+	w->saturation = getWindowProp32 (d, w->id, d->winSaturationAtom, COLOR);
+    else
+	w->saturation = COLOR;
 	
-	w->paint.saturation = w->saturation;
-    }
+    w->paint.opacity    = w->opacity;
+    w->paint.brightness = w->brightness;
+    w->paint.saturation = w->saturation;
 
     if (w->attrib.map_state == IsViewable)
     {
@@ -2194,7 +2182,7 @@ addWindow (CompScreen *screen,
 	{
 	    w->managed = TRUE;
 
-	    if (getWmState (screen->display, w->id) == IconicState)
+	    if (getWmState (d, w->id) == IconicState)
 	    {
 		if (w->state & CompWindowStateShadedMask)
 		    w->shaded = TRUE;
@@ -2213,9 +2201,7 @@ addWindow (CompScreen *screen,
 		    if (w->desktop != 0xffffffff)
 			w->desktop = screen->currentDesktop;
 
-		    setWindowProp (screen->display, w->id,
-				   screen->display->winDesktopAtom,
-				   w->desktop);
+		    setWindowProp (d, w->id, d->winDesktopAtom, w->desktop);
 		}
 	    }
 	}
@@ -2233,14 +2219,14 @@ addWindow (CompScreen *screen,
 
 	    w->pendingUnmaps++;
 
-	    XUnmapWindow (screen->display->display, w->id);
+	    XUnmapWindow (d->display, w->id);
 
-	    setWindowState (screen->display, w->state, w->id);
+	    setWindowState (d, w->state, w->id);
 	}
     }
     else if (!w->attrib.override_redirect)
     {
-	if (getWmState (screen->display, w->id) == IconicState)
+	if (getWmState (d, w->id) == IconicState)
 	{
 	    w->managed = TRUE;
 	    w->placed  = TRUE;
