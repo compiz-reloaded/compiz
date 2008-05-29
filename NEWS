@@ -1,3 +1,33 @@
+Release 0.7.6 (2008-05-29 Dennis Kasprzyk <onestone@opencompositing.org>)
+=========================================================================
+Development release.
+
+Rewrite of place plugin, which significantly improves multi-output
+behaviour.
+
+Configurable multi-output behaviour in place.
+
+Removed plane plugin. Former plane plugin users are encouraged to use
+the wall plugin of Compiz Fusion.
+
+Removed cube wallpaper painting. Users are encouraged to use the Compiz
+Fusion wallpaper plugin instead.
+
+Place plugin viewport placement viewport numbers are now 1-based.
+
+Panel and desktop selection mode in switcher plugin.
+
+Improved painting behaviour when using overlapping outputs.
+
+Gtk-window-decorator now emits accessibility events when switching.
+
+Gtk-window-decorator behaviour when using Metacity themes has been
+improved to match Metacity better.
+
+KDE4-window-decorator has been adapted to current KDE4 API.
+
+Various bugfixes.
+
 Release 0.7.4 (2008-03-04 Dennis Kasprzyk <onestone@opencompositing.org>)
 =========================================================================
 Development release.
