@@ -1998,15 +1998,17 @@ meta_draw_window_decoration (decor_t *d)
 
 	    top_region = meta_get_top_border_region (&fgeom, clip.width);
 
-	    decor_blend_top_border_picture (xdisplay,
-					    d->context,
-					    src,
-					    0, 0,
-					    d->picture,
-					    &d->border_layout,
-					    top_region,
-					    alpha * 0xffff,
-					    shade_alpha);
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, 0,
+					d->picture,
+					&d->border_layout,
+					BORDER_TOP,
+					top_region,
+					alpha * 0xffff,
+					shade_alpha,
+				        0);
 	}
 
 	if (fgeom.bottom_height)
@@ -2036,15 +2038,17 @@ meta_draw_window_decoration (decor_t *d)
 
 	    bottom_region = meta_get_bottom_border_region (&fgeom, clip.width);
 
-	    decor_blend_bottom_border_picture (xdisplay,
-					       d->context,
-					       src,
-					       0, 0,
-					       d->picture,
-					       &d->border_layout,
-					       bottom_region,
-					       alpha * 0xffff,
-					       shade_alpha);
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, 0,
+					d->picture,
+					&d->border_layout,
+					BORDER_BOTTOM,
+					bottom_region,
+					alpha * 0xffff,
+					shade_alpha,
+					0);
 	}
 
 	cairo_destroy (cr);
@@ -2097,15 +2101,17 @@ meta_draw_window_decoration (decor_t *d)
 
 	    left_region = meta_get_left_border_region (&fgeom, clip.height);
 
-	    decor_blend_left_border_picture (xdisplay,
-					     d->context,
-					     src,
-					     0, 0,
-					     d->picture,
-					     &d->border_layout,
-					     left_region,
-					     alpha * 0xffff,
-					     shade_alpha);
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, 0,
+					d->picture,
+					&d->border_layout,
+					BORDER_LEFT,
+					left_region,
+					alpha * 0xffff,
+					shade_alpha,
+				        0);
 	}
 
 	if (fgeom.right_width)
@@ -2135,15 +2141,17 @@ meta_draw_window_decoration (decor_t *d)
 
 	    right_region = meta_get_right_border_region (&fgeom, clip.height);
 
-	    decor_blend_right_border_picture (xdisplay,
-					      d->context,
-					      src,
-					      0, 0,
-					      d->picture,
-					      &d->border_layout,
-					      right_region,
-					      alpha * 0xffff,
-					      shade_alpha);
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, 0,
+					d->picture,
+					&d->border_layout,
+					BORDER_RIGHT,
+					right_region,
+					alpha * 0xffff,
+					shade_alpha,
+				        0);
 	}
 
 	cairo_destroy (cr);
