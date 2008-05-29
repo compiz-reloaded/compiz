@@ -2061,13 +2061,15 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
 				  int		  x2,
 				  int		  y2,
 				  int		  dy,
-				  int		  direction)
+				  int		  direction,
+				  int             ignore_src_alpha)
 {
     XRenderColor color[3] = {
 	{ 0xffff, 0xffff, 0xffff, 0xffff },
-	{  alpha,  alpha,  alpha,  alpha }
+	{  alpha,  alpha,  alpha,  alpha },
+	{    0x0,    0x0,    0x0, 0xffff }
     };
-    int		 op = PictOpSrc;
+    int		 op = PictOpSrc, gop = PictOpSrc;
     int		 left, right;
 
     left   = context->extents.left;
@@ -2076,6 +2078,18 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
     XOffsetRegion (region, x1, y1);
     XRenderSetPictureClipRegion (xdisplay, dst, region);
     XOffsetRegion (region, -x1, -y1);
+
+    if (ignore_src_alpha)
+    {
+	XRenderComposite (xdisplay, PictOpSrc, src, None, dst,
+			  xSrc, ySrc,
+			  0, 0,
+			  x1, y1,
+			  x2 - x1, y2 - y1);
+	XRenderFillRectangle (xdisplay, PictOpAdd, dst, &color[2], x1, y1,
+			      x2 - x1, y2 - y1);
+	gop = PictOpInReverse;
+    }
 
     if (alpha != 0xffff)
     {
@@ -2122,7 +2136,7 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
 	    XRenderSetPictureTransform (xdisplay, grad, &transform);
 	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
 
-	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+	    XRenderComposite (xdisplay, gop, grad, None, dst,
 			      0, 0,
 			      0, 0,
 			      x1, y1,
@@ -2153,7 +2167,7 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
 
 	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
 
-	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+	    XRenderComposite (xdisplay, gop, grad, None, dst,
 			      0, 0,
 			      0, 0,
 			      x1 + left, y1,
@@ -2179,7 +2193,7 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
 	    XRenderSetPictureTransform (xdisplay, grad, &transform);
 	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
 
-	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+	    XRenderComposite (xdisplay, gop, grad, None, dst,
 			      0, 0,
 			      0, 0,
 			      x2 - right, y1,
@@ -2189,106 +2203,19 @@ _decor_blend_horz_border_picture (Display	  *xdisplay,
 	}
 	else
 	{
-	    XRenderFillRectangle (xdisplay, PictOpSrc, dst, &color[1],
+	    XRenderFillRectangle (xdisplay, gop, dst, &color[1],
 				  x1, y1, x2 - x1, y2 - y1);
 	}
     }
 
-    XRenderComposite (xdisplay, op, src, None, dst,
-		      xSrc, ySrc,
-		      0, 0,
-		      x1, y1,
-		      x2 - x1, y2 - y1);
+    if (!ignore_src_alpha)
+	XRenderComposite (xdisplay, op, src, None, dst,
+			  xSrc, ySrc,
+			  0, 0,
+			  x1, y1,
+			  x2 - x1, y2 - y1);
 
     set_no_picture_clip (xdisplay, dst);
-}
-
-void
-decor_blend_top_border_picture (Display	        *xdisplay,
-				decor_context_t *context,
-				Picture	        src,
-				int	        xSrc,
-				int	        ySrc,
-				Picture	        dst,
-				decor_layout_t  *layout,
-				Region	        region,
-				unsigned short  alpha,
-				int	        shade_alpha)
-{
-    int left, right, top;
-    int x1, y1, x2, y2;
-
-    left  = context->extents.left;
-    right = context->extents.right;
-    top   = context->extents.top;
-
-    x1 = layout->top.x1 + context->left_space - left;
-    y1 = layout->top.y1 + context->top_space - top;
-    x2 = layout->top.x2 - context->right_space + right;
-    y2 = layout->top.y2;
-
-    _decor_blend_horz_border_picture (xdisplay,
-				      context,
-				      src,
-				      xSrc,
-				      ySrc,
-				      dst,
-				      layout,
-				      region,
-				      alpha,
-				      shade_alpha,
-				      x1,
-				      y1,
-				      x2,
-				      y2,
-				      top,
-				      -1);
-
-    _decor_pad_border_picture (xdisplay, dst, &layout->top);
-}
-
-void
-decor_blend_bottom_border_picture (Display	   *xdisplay,
-				   decor_context_t *context,
-				   Picture	   src,
-				   int	           xSrc,
-				   int	           ySrc,
-				   Picture	   dst,
-				   decor_layout_t  *layout,
-				   Region	   region,
-				   unsigned short  alpha,
-				   int	           shade_alpha)
-{
-    int left, right, bottom;
-    int x1, y1, x2, y2;
-
-    left   = context->extents.left;
-    right  = context->extents.right;
-    bottom = context->extents.bottom;
-
-    x1 = layout->bottom.x1 + context->left_space - left;
-    y1 = layout->bottom.y1;
-    x2 = layout->bottom.x2 - context->right_space + right;
-    y2 = layout->bottom.y1 + bottom;
-
-    _decor_blend_horz_border_picture (xdisplay,
-				      context,
-				      src,
-				      xSrc,
-				      ySrc,
-				      dst,
-				      layout,
-				      region,
-				      alpha,
-				      shade_alpha,
-				      x1,
-				      y1,
-				      x2,
-				      y2,
-				      bottom,
-				      1);
-
-    _decor_pad_border_picture (xdisplay, dst, &layout->bottom);
 }
 
 static void
@@ -2306,13 +2233,15 @@ _decor_blend_vert_border_picture (Display	  *xdisplay,
 				  int		  y1,
 				  int		  x2,
 				  int		  y2,
-				  int		  direction)
+				  int		  direction,
+				  int             ignore_src_alpha)
 {
     XRenderColor color[3] = {
 	{ 0xffff, 0xffff, 0xffff, 0xffff },
-	{  alpha,  alpha,  alpha,  alpha }
+	{  alpha,  alpha,  alpha,  alpha },
+	{    0x0,    0x0,    0x0, 0xffff }
     };
-    int		 op = PictOpSrc;
+    int		 op = PictOpSrc, gop = PictOpSrc;
 
     if (layout->rotation)
     {
@@ -2345,6 +2274,44 @@ _decor_blend_vert_border_picture (Display	  *xdisplay,
 	XOffsetRegion (region, -x1, -y1);
     }
 
+    if (ignore_src_alpha)
+    {
+	if (layout->rotation)
+	{
+	    XTransform t = {
+		{
+		    {       0, 1 << 16,       0 },
+		    { 1 << 16,       0,       0 },
+		    {       0,       0, 1 << 16 }
+		}
+	    };
+
+	    t.matrix[0][2] = xSrc << 16;
+	    t.matrix[1][2] = ySrc << 16;
+
+	    XRenderSetPictureTransform (xdisplay, src, &t);
+
+	    XRenderComposite (xdisplay, PictOpSrc, src, None, dst,
+			      0, 0,
+			      0, 0,
+			      x1, y1, x2 - x1, y2 - y1);
+	    XRenderFillRectangle (xdisplay, PictOpAdd, dst, &color[2], x1, y1,
+			          x2 - x1, y2 - y1);
+
+	    XRenderSetPictureTransform (xdisplay, src, &xident);
+	}
+	else
+	{
+	    XRenderComposite (xdisplay, PictOpSrc, src, None, dst,
+			      xSrc, ySrc,
+			      0, 0,
+			      x1, y1, x2 - x1, y2 - y1);
+	    XRenderFillRectangle (xdisplay, PictOpAdd, dst, &color[2], x1, y1,
+			      x2 - x1, y2 - y1);
+	}
+	gop = PictOpInReverse;
+    }
+    
     if (alpha != 0xffff)
     {
 	op = PictOpIn;
@@ -2399,7 +2366,7 @@ _decor_blend_vert_border_picture (Display	  *xdisplay,
 
 	    XRenderChangePicture (xdisplay, grad, CPRepeat, &attrib);
 
-	    XRenderComposite (xdisplay, PictOpSrc, grad, None, dst,
+	    XRenderComposite (xdisplay, gop, grad, None, dst,
 			      0, 0,
 			      0, 0,
 			      x1, y1,
@@ -2409,128 +2376,186 @@ _decor_blend_vert_border_picture (Display	  *xdisplay,
 	}
 	else
 	{
-	    XRenderFillRectangle (xdisplay, PictOpSrc, dst, &color[1],
+	    XRenderFillRectangle (xdisplay, gop, dst, &color[1],
 				  x1, y1, x2 - x1, y2 - y1);
 	}
     }
 
-    if (layout->rotation)
+    if (!ignore_src_alpha)
     {
-	XTransform t = {
-	    {
-		{       0, 1 << 16,       0 },
-		{ 1 << 16,       0,       0 },
-		{       0,       0, 1 << 16 }
-	    }
-	};
+	if (layout->rotation)
+	{
+	    XTransform t = {
+		{
+		    {       0, 1 << 16,       0 },
+		    { 1 << 16,       0,       0 },
+		    {       0,       0, 1 << 16 }
+		}
+	    };
 
-	t.matrix[0][2] = xSrc << 16;
-	t.matrix[1][2] = ySrc << 16;
+	    t.matrix[0][2] = xSrc << 16;
+	    t.matrix[1][2] = ySrc << 16;
 
-	XRenderSetPictureTransform (xdisplay, src, &t);
+	    XRenderSetPictureTransform (xdisplay, src, &t);
 
-	XRenderComposite (xdisplay, op, src, None, dst,
-			  0, 0,
-			  0, 0,
-			  x1, y1, x2 - x1, y2 - y1);
+	    XRenderComposite (xdisplay, op, src, None, dst,
+			    0, 0,
+			    0, 0,
+			    x1, y1, x2 - x1, y2 - y1);
 
-	XRenderSetPictureTransform (xdisplay, src, &xident);
-    }
-    else
-    {
-	XRenderComposite (xdisplay, op, src, None, dst,
-			  xSrc, ySrc,
-			  0, 0,
-			  x1, y1, x2 - x1, y2 - y1);
+	    XRenderSetPictureTransform (xdisplay, src, &xident);
+	}
+	else
+	{
+	    XRenderComposite (xdisplay, op, src, None, dst,
+			    xSrc, ySrc,
+			    0, 0,
+			    x1, y1, x2 - x1, y2 - y1);
+	}
     }
 
     set_no_picture_clip (xdisplay, dst);
 }
 
 void
-decor_blend_left_border_picture (Display	 *xdisplay,
-				 decor_context_t *context,
-				 Picture	 src,
-				 int	         xSrc,
-				 int	         ySrc,
-				 Picture	 dst,
-				 decor_layout_t  *layout,
-				 Region		 region,
-				 unsigned short  alpha,
-				 int	         shade_alpha)
+decor_blend_border_picture (Display	    *xdisplay,
+			    decor_context_t *context,
+			    Picture	    src,
+			    int	            xSrc,
+			    int	            ySrc,
+			    Picture	    dst,
+			    decor_layout_t  *layout,
+			    unsigned int    border,
+			    Region	    region,
+			    unsigned short  alpha,
+			    int	            shade_alpha,
+			    int             ignore_src_alpha)
 {
+    int left, right, bottom, top;
     int x1, y1, x2, y2;
 
-    x1 = layout->left.x1;
-    y1 = layout->left.y1;
-    x2 = layout->left.x2;
-    y2 = layout->left.y2;
+    left   = context->extents.left;
+    right  = context->extents.right;
+    top    = context->extents.top;
+    bottom = context->extents.bottom;
 
-    if (layout->rotation)
-	y1 += context->left_space - context->extents.left;
-    else
-	x1 += context->left_space - context->extents.left;
+    switch (border)
+    {
+    case BORDER_TOP:
+	x1 = layout->top.x1 + context->left_space - left;
+	y1 = layout->top.y1 + context->top_space - top;
+	x2 = layout->top.x2 - context->right_space + right;
+	y2 = layout->top.y2;
 
-    _decor_blend_vert_border_picture (xdisplay,
-				      context,
-				      src,
-				      xSrc,
-				      ySrc,
-				      dst,
-				      layout,
-				      region,
-				      alpha,
-				      shade_alpha,
-				      x1,
-				      y1,
-				      x2,
-				      y2,
-				      1);
+	_decor_blend_horz_border_picture (xdisplay,
+					context,
+					src,
+					xSrc,
+					ySrc,
+					dst,
+					layout,
+					region,
+					alpha,
+					shade_alpha,
+					x1,
+					y1,
+					x2,
+					y2,
+					top,
+					-1,
+					ignore_src_alpha);
 
-    _decor_pad_border_picture (xdisplay, dst, &layout->left);
-}
+	_decor_pad_border_picture (xdisplay, dst, &layout->top);
+	break;
+    case BORDER_BOTTOM:
+	x1 = layout->bottom.x1 + context->left_space - left;
+	y1 = layout->bottom.y1;
+	x2 = layout->bottom.x2 - context->right_space + right;
+	y2 = layout->bottom.y1 + bottom;
 
-void
-decor_blend_right_border_picture (Display	  *xdisplay,
-				  decor_context_t *context,
-				  Picture	  src,
-				  int	          xSrc,
-				  int	          ySrc,
-				  Picture	  dst,
-				  decor_layout_t  *layout,
-				  Region	  region,
-				  unsigned short  alpha,
-				  int	          shade_alpha)
-{
-    int x1, y1, x2, y2;
+	_decor_blend_horz_border_picture (xdisplay,
+					context,
+					src,
+					xSrc,
+					ySrc,
+					dst,
+					layout,
+					region,
+					alpha,
+					shade_alpha,
+					x1,
+					y1,
+					x2,
+					y2,
+					bottom,
+					1,
+					ignore_src_alpha);
 
-    x1 = layout->right.x1;
-    y1 = layout->right.y1;
-    x2 = layout->right.x2;
-    y2 = layout->right.y2;
+	_decor_pad_border_picture (xdisplay, dst, &layout->bottom);
+	break;
+    case BORDER_LEFT:
+	x1 = layout->left.x1;
+	y1 = layout->left.y1;
+	x2 = layout->left.x2;
+	y2 = layout->left.y2;
 
-    if (layout->rotation)
-	y2 -= context->right_space - context->extents.right;
-    else
-	x2 -= context->right_space - context->extents.right;
+	if (layout->rotation)
+	    y1 += context->left_space - context->extents.left;
+	else
+	    x1 += context->left_space - context->extents.left;
 
-    _decor_blend_vert_border_picture (xdisplay,
-				      context,
-				      src,
-				      xSrc,
-				      ySrc,
-				      dst,
-				      layout,
-				      region,
-				      alpha,
-				      shade_alpha,
-				      x1,
-				      y1,
-				      x2,
-				      y2,
-				      -1);
+	_decor_blend_vert_border_picture (xdisplay,
+					context,
+					src,
+					xSrc,
+					ySrc,
+					dst,
+					layout,
+					region,
+					alpha,
+					shade_alpha,
+					x1,
+					y1,
+					x2,
+					y2,
+					1,
+					ignore_src_alpha);
 
-    _decor_pad_border_picture (xdisplay, dst, &layout->right);
+	_decor_pad_border_picture (xdisplay, dst, &layout->left);
+	break;
+    case BORDER_RIGHT:
+	x1 = layout->right.x1;
+	y1 = layout->right.y1;
+	x2 = layout->right.x2;
+	y2 = layout->right.y2;
+
+	if (layout->rotation)
+	    y2 -= context->right_space - context->extents.right;
+	else
+	    x2 -= context->right_space - context->extents.right;
+
+	_decor_blend_vert_border_picture (xdisplay,
+					context,
+					src,
+					xSrc,
+					ySrc,
+					dst,
+					layout,
+					region,
+					alpha,
+					shade_alpha,
+					x1,
+					y1,
+					x2,
+					y2,
+					-1,
+					ignore_src_alpha);
+
+	_decor_pad_border_picture (xdisplay, dst, &layout->right);
+	break;
+    default:
+	break;
+    }
 }
 
 int

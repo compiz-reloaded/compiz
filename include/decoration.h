@@ -71,6 +71,11 @@ extern "C" {
 #define PAD_LEFT   (1 << 2)
 #define PAD_RIGHT  (1 << 3)
 
+#define BORDER_TOP    0
+#define BORDER_BOTTOM 1
+#define BORDER_LEFT   2
+#define BORDER_RIGHT  3
+
 typedef struct _decor_point {
     int x;
     int y;
@@ -346,52 +351,18 @@ decor_blend_transform_picture (Display	       *xdisplay,
 			       int	       shade_alpha);
 
 void
-decor_blend_top_border_picture (Display	        *xdisplay,
-				decor_context_t *context,
-				Picture	        src,
-				int	        xSrc,
-				int	        ySrc,
-				Picture	        dst,
-				decor_layout_t  *layout,
-				Region	        region,
-				unsigned short  alpha,
-				int	        shade_alpha);
-
-void
-decor_blend_bottom_border_picture (Display	   *xdisplay,
-				   decor_context_t *context,
-				   Picture	   src,
-				   int	           xSrc,
-				   int	           ySrc,
-				   Picture	   dst,
-				   decor_layout_t  *layout,
-				   Region	   region,
-				   unsigned short  alpha,
-				   int	           shade_alpha);
-
-void
-decor_blend_left_border_picture (Display	 *xdisplay,
-				 decor_context_t *context,
-				 Picture	 src,
-				 int	         xSrc,
-				 int	         ySrc,
-				 Picture	 dst,
-				 decor_layout_t  *layout,
-				 Region		 region,
-				 unsigned short  alpha,
-				 int	         shade_alpha);
-
-void
-decor_blend_right_border_picture (Display	  *xdisplay,
-				  decor_context_t *context,
-				  Picture	  src,
-				  int	          xSrc,
-				  int	          ySrc,
-				  Picture	  dst,
-				  decor_layout_t  *layout,
-				  Region	  region,
-				  unsigned short  alpha,
-				  int	          shade_alpha);
+decor_blend_border_picture (Display	    *xdisplay,
+			    decor_context_t *context,
+			    Picture	    src,
+			    int	            xSrc,
+			    int	            ySrc,
+			    Picture	    dst,
+			    decor_layout_t  *layout,
+			    unsigned int    border,
+			    Region	    region,
+			    unsigned short  alpha,
+			    int	            shade_alpha,
+			    int             ignore_src_alpha);
 
 #define DECOR_ACQUIRE_STATUS_SUCCESS	      0
 #define DECOR_ACQUIRE_STATUS_FAILED	      1
