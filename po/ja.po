@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-29 14:02+0200\n"
+"POT-Creation-Date: 2008-05-24 22:23+0530\n"
 "PO-Revision-Date: 2008-05-22 02:01+0900\n"
 "Last-Translator: jiro kawada <jiro.kawada@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -16,2055 +16,2685 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "デスクトップ"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+msgid "Window Management"
+msgstr "ウィンドウ管理"
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr "Compiz"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+msgid "Action to take when scrolling the mouse wheel on a window title bar."
+msgstr ""
+"ウィンドウのタイトルバー上でマウスホイールをスクロールさせたときのアクション"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+msgid "Blur type"
+msgstr "ブラーの種類"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+msgid "Metacity theme active window opacity"
+msgstr "Metacity テーマのアクティブ・ウィンドウの不透明度"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+msgid "Metacity theme active window opacity shade"
+msgstr "Metacity テーマのアクティブ・ウィンドウの半透明シェード"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity"
+msgstr "Metacity テーマの不透明度"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Metacity theme opacity shade"
+msgstr "Metacity テーマの半透明シェード"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr "Metacity テーマ装飾のアクティブ・ウィンドウに使用する不透明度"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid "Opacity to use for metacity theme decorations"
+msgstr "Metacity テーマ装飾に使用する不透明度"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+"Metacity テーマ装飾のアクティブ・ウィンドウを不透明から透明にシェードさせる"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr "Metacity テーマ装飾のウィンドウを不透明から透明にシェードさせる"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Title bar mouse wheel action"
+msgstr "タイトルバーのマウスホイール・アクション"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Type of blur used for window decorations"
+msgstr "ウィンドウ装飾用のブラーの種類"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:13
+msgid "Use metacity theme"
+msgstr "Metacity テーマを使用"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:14
+msgid "Use metacity theme when drawing window decorations"
+msgstr "ウィンドウ装飾を描画する際に Metacity テーマを使用"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "ウィンドウを閉じる"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "ウィンドウの最大化解除"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "ウィンドウを最大化"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "ウィンドウを最小化"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "ウィンドウメニュー"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "シェード"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "最前面に表示"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "スティック"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "シェード解除"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "最前面表示解除"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "スティッキー解除"
 
-#: gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "ウィンドウ \"%s\" は応答していません。"
 
-#: gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "このアプリケーションを強制的に終了させると、未保存の変更はすべて失われます。"
 
-#: gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "強制終了(_F)"
 
-#~ msgid "Desktop"
-#~ msgstr "デスクトップ"
-
-#~ msgid "Window Management"
-#~ msgstr "ウィンドウ管理"
-
-#~ msgid "Compiz"
-#~ msgstr "Compiz"
-
-#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
-#~ msgstr ""
-#~ "ウィンドウのタイトルバー上でマウスホイールをスクロールさせたときのアクショ"
-#~ "ン"
-
-#~ msgid "Blur type"
-#~ msgstr "ブラーの種類"
-
-#~ msgid "Metacity theme active window opacity"
-#~ msgstr "Metacity テーマのアクティブ・ウィンドウの不透明度"
-
-#~ msgid "Metacity theme active window opacity shade"
-#~ msgstr "Metacity テーマのアクティブ・ウィンドウの半透明シェード"
-
-#~ msgid "Metacity theme opacity"
-#~ msgstr "Metacity テーマの不透明度"
-
-#~ msgid "Metacity theme opacity shade"
-#~ msgstr "Metacity テーマの半透明シェード"
-
-#~ msgid "Opacity to use for active windows with metacity theme decorations"
-#~ msgstr "Metacity テーマ装飾のアクティブ・ウィンドウに使用する不透明度"
-
-#~ msgid "Opacity to use for metacity theme decorations"
-#~ msgstr "Metacity テーマ装飾に使用する不透明度"
-
-#~ msgid ""
-#~ "Shade active windows with metacity theme decorations from opaque to "
-#~ "translucent"
-#~ msgstr ""
-#~ "Metacity テーマ装飾のアクティブ・ウィンドウを不透明から透明にシェードさせ"
-#~ "る"
-
-#~ msgid ""
-#~ "Shade windows with metacity theme decorations from opaque to translucent"
-#~ msgstr "Metacity テーマ装飾のウィンドウを不透明から透明にシェードさせる"
-
-#~ msgid "Title bar mouse wheel action"
-#~ msgstr "タイトルバーのマウスホイール・アクション"
-
-#~ msgid "Type of blur used for window decorations"
-#~ msgstr "ウィンドウ装飾用のブラーの種類"
-
-#~ msgid "Use metacity theme"
-#~ msgstr "Metacity テーマを使用"
-
-#~ msgid "Use metacity theme when drawing window decorations"
-#~ msgstr "ウィンドウ装飾を描画する際に Metacity テーマを使用"
-
-#~ msgid "Annotate"
-#~ msgstr "注釈"
-
-#~ msgid "Annotate Fill Color"
-#~ msgstr "注釈の塗り色"
-
-#~ msgid "Annotate Stroke Color"
-#~ msgstr "注釈のストロークの色"
-
-#~ msgid "Annotate plugin"
-#~ msgstr "注釈プラグイン"
-
-#~ msgid "Clear"
-#~ msgstr "消去"
-
-#~ msgid "Draw"
-#~ msgstr "描画"
-
-#~ msgid "Draw using tool"
-#~ msgstr "ツールを使用して描画"
-
-#~ msgid "Fill color for annotations"
-#~ msgstr "注釈の塗り色"
-
-#~ msgid "Initiate"
-#~ msgstr "開始"
-
-#~ msgid "Initiate annotate drawing"
-#~ msgstr "注釈の描画を開始"
-
-#~ msgid "Initiate annotate erasing"
-#~ msgstr "注釈の削除を開始"
-
-#~ msgid "Initiate erase"
-#~ msgstr "削除開始"
-
-#~ msgid "Line width"
-#~ msgstr "線幅"
-
-#~ msgid "Line width for annotations"
-#~ msgstr "注釈の線幅"
-
-#~ msgid "Stroke color for annotations"
-#~ msgstr "注釈のストロークの色"
-
-#~ msgid "Stroke width"
-#~ msgstr "ストロークの幅"
-
-#~ msgid "Stroke width for annotations"
-#~ msgstr "注釈のストロークの幅"
-
-#~ msgid "4xBilinear"
-#~ msgstr "4x バイリニア"
-
-#~ msgid "Alpha Blur"
-#~ msgstr "アルファ・ブラー"
-
-#~ msgid "Alpha blur windows"
-#~ msgstr "アルファ・ブラー対象ウィンドウ"
-
-#~ msgid "Blur Filter"
-#~ msgstr "ブラーフィルタ"
-
-#~ msgid "Blur Occlusion"
-#~ msgstr "ブラー遮蔽"
-
-#~ msgid "Blur Saturation"
-#~ msgstr "ブラー彩度"
-
-#~ msgid "Blur Speed"
-#~ msgstr "ブラー速度"
-
-#~ msgid "Blur Windows"
-#~ msgstr "ウィンドウのブラー"
-
-#~ msgid "Blur behind translucent parts of windows"
-#~ msgstr "ウィンドウの透過部分の背後をぼかす"
-
-#~ msgid "Blur saturation"
-#~ msgstr "ぼかしの彩度"
-
-#~ msgid "Blur windows"
-#~ msgstr "ウィンドウをぼかす"
-
-#~ msgid "Blur windows that doesn't have focus"
-#~ msgstr "フォーカスがないウィンドウをぼかす"
-
-#~ msgid "Disable blurring of screen regions obscured by other windows."
-#~ msgstr "他のウィンドウで覆い隠された画面域のブラーを無効化"
-
-#~ msgid "Filter method used for blurring"
-#~ msgstr "ブラーに使用するフィルタ方法"
-
-#~ msgid "Focus Blur"
-#~ msgstr "フォーカス・ブラー"
-
-#~ msgid "Focus blur windows"
-#~ msgstr "フォーカス・ブラー対象ウィンドウ"
-
-#~ msgid "Gaussian"
-#~ msgstr "ガウス"
-
-#~ msgid "Gaussian Radius"
-#~ msgstr "ガウス半径"
-
-#~ msgid "Gaussian Strength"
-#~ msgstr "ガウス強度"
-
-#~ msgid "Gaussian radius"
-#~ msgstr "ガウス半径"
-
-#~ msgid "Gaussian strength"
-#~ msgstr "ガウス強度"
-
-#~ msgid "Independent texture fetch"
-#~ msgstr "テクスチャの独立読み出し"
-
-#~ msgid "Mipmap"
-#~ msgstr "ミップマップ"
-
-#~ msgid "Mipmap LOD"
-#~ msgstr "ミップマップ詳細レベル"
-
-#~ msgid "Mipmap level-of-detail"
-#~ msgstr "ミップマップの詳細レベル"
-
-#~ msgid "Pulse"
-#~ msgstr "点滅"
-
-#~ msgid "Pulse effect"
-#~ msgstr "点滅効果"
-
-#~ msgid ""
-#~ "Use the available texture units to do as many as possible independent "
-#~ "texture fetches."
-#~ msgstr ""
-#~ "利用可能なテクスチャ・ユニットを使用してテクスチャを可能な限り多く独立読み"
-#~ "出しさせる"
-
-#~ msgid "Window blur speed"
-#~ msgstr "ウィンドウ・ブラーの速度"
-
-#~ msgid "Windows that should be affected by focus blur"
-#~ msgstr "フォーカス・ブラーの効果対象ウィンドウ"
-
-#~ msgid "Windows that should be use alpha blur by default"
-#~ msgstr "デフォルトでアルファ・ブラー使用対象にするウィンドウ"
-
-#~ msgid "Clone Output"
-#~ msgstr "クローン出力"
-
-#~ msgid "Initiate clone selection"
-#~ msgstr "複製選択の開始"
-
-#~ msgid "Output clone handler"
-#~ msgstr "クローン出力ハンドラ"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command0"
-#~ msgstr ""
-#~ "呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当"
-#~ "て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割"
-#~ "り当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割"
-#~ "り当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9"
-#~ msgstr ""
-#~ "呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り"
-#~ "当て"
-
-#~ msgid "Active Plugins"
-#~ msgstr "アクティブなプラグイン"
-
-#~ msgid ""
-#~ "Allow drawing of fullscreen windows to not be redirected to offscreen "
-#~ "pixmaps"
-#~ msgstr ""
-#~ "オフスクリーン・ピクスマップにリダイレクトしない直接の全画面ウィンドウ描画"
-#~ "を許可"
-
-#~ msgid "Audible Bell"
-#~ msgstr "音響ベル"
-
-#~ msgid "Audible system beep"
-#~ msgstr "音響システムビープ音"
-
-#~ msgid "Auto-Raise"
-#~ msgstr "自動で最前面に上げる"
-
-#~ msgid "Auto-Raise Delay"
-#~ msgstr "自動最前面移動の待ち時間"
-
-#~ msgid "Automatic detection of output devices"
-#~ msgstr "出力デバイスの自動検出"
-
-#~ msgid "Automatic detection of refresh rate"
-#~ msgstr "リフレッシュレートの自動検出"
-
-#~ msgid "Best"
-#~ msgstr "最高"
-
-#~ msgid "Click To Focus"
-#~ msgstr "クリックでフォーカス"
-
-#~ msgid "Click on window moves input focus to it"
-#~ msgstr "ウィンドウのクリックで入力フォーカスがそのウィンドウに移動"
-
-#~ msgid "Close active window"
-#~ msgstr "アクティブなウィンドウを閉じる"
-
-#~ msgid "Command line 0"
-#~ msgstr "コマンドライン 0"
-
-#~ msgid "Command line 1"
-#~ msgstr "コマンドライン 1"
-
-#~ msgid "Command line 10"
-#~ msgstr "コマンドライン 10"
-
-#~ msgid "Command line 11"
-#~ msgstr "コマンドライン 11"
-
-#~ msgid "Command line 2"
-#~ msgstr "コマンドライン 2"
-
-#~ msgid "Command line 3"
-#~ msgstr "コマンドライン 3"
-
-#~ msgid "Command line 4"
-#~ msgstr "コマンドライン 4"
-
-#~ msgid "Command line 5"
-#~ msgstr "コマンドライン 5"
-
-#~ msgid "Command line 6"
-#~ msgstr "コマンドライン 6"
-
-#~ msgid "Command line 7"
-#~ msgstr "コマンドライン 7"
-
-#~ msgid "Command line 8"
-#~ msgstr "コマンドライン 8"
-
-#~ msgid "Command line 9"
-#~ msgstr "コマンドライン 9"
-
-#~ msgid "Command line to be executed in shell when run_command0 is invoked"
-#~ msgstr "コマンド 0 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command1 is invoked"
-#~ msgstr "コマンド 1 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command10 is invoked"
-#~ msgstr "コマンド 10 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command11 is invoked"
-#~ msgstr "コマンド 11 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command2 is invoked"
-#~ msgstr "コマンド 2 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command3 is invoked"
-#~ msgstr "コマンド 3 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command4 is invoked"
-#~ msgstr "コマンド 4 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command5 is invoked"
-#~ msgstr "コマンド 5 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command6 is invoked"
-#~ msgstr "コマンド 6 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command7 is invoked"
-#~ msgstr "コマンド 7 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command8 is invoked"
-#~ msgstr "コマンド 8 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Command line to be executed in shell when run_command9 is invoked"
-#~ msgstr "コマンド 9 を実行 の呼び出し時にシェルで実行されるコマンドライン"
-
-#~ msgid "Decrease Opacity"
-#~ msgstr "不透明度を下げる"
-
-#~ msgid "Decrease window opacity"
-#~ msgstr "ウィンドウの不透明度を下げる"
-
-#~ msgid "Default Icon"
-#~ msgstr "デフォルトのアイコン"
-
-#~ msgid "Default window icon image"
-#~ msgstr "デフォルトのウィンドウアイコン画像"
-
-#~ msgid "Detect Outputs"
-#~ msgstr "出力検出"
-
-#~ msgid "Detect Refresh Rate"
-#~ msgstr "リフレッシュレートの検出"
-
-#~ msgid ""
-#~ "Duration the pointer must rest in a screen edge before an edge action is "
-#~ "taken."
-#~ msgstr ""
-#~ "エッジ・アクションの開始に必要なスクリーンエッジへのポインタ配置の継続時間"
-
-#~ msgid "Edge Trigger Delay"
-#~ msgstr "エッジ開始遅延時間"
-
-#~ msgid "Fast"
-#~ msgstr "速さ重視"
-
-#~ msgid "Focus Prevention Level"
-#~ msgstr "フォーカス奪取防止レベル"
-
-#~ msgid "Focus Prevention Windows"
-#~ msgstr "フォーカス奪取防止ウィンドウ"
-
-#~ msgid "Focus prevention windows"
-#~ msgstr "フォーカスを奪われないようにするウィンドウ"
-
-#~ msgid "Force independent output painting."
-#~ msgstr "各出力別に独立した描画を強制"
-
-#~ msgid "General Options"
-#~ msgstr "一般オプション"
-
-#~ msgid "General compiz options"
-#~ msgstr "Compiz の一般オプション"
-
-#~ msgid "Good"
-#~ msgstr "良"
-
-#~ msgid "Hide Skip Taskbar Windows"
-#~ msgstr "タスクバー省略ウィンドウを隠す"
-
-#~ msgid "Hide all windows and focus desktop"
-#~ msgstr "全ウィンドウを隠してデスクトップにフォーカス"
-
-#~ msgid "Hide windows not in taskbar when entering show desktop mode"
-#~ msgstr ""
-#~ "\"デスクトップの表示\"モード移行時にタスクバーにないウィンドウ（ウィジェッ"
-#~ "ト等）を隠す"
-
-#~ msgid "High"
-#~ msgstr "高"
-
-#~ msgid "Horizontal Virtual Size"
-#~ msgstr "水平仮想サイズ"
-
-#~ msgid "If available use compression for textures converted from images"
-#~ msgstr "利用可能な場合は画像から変換されたテクスチャに圧縮を使用する"
-
-#~ msgid "Ignore Hints When Maximized"
-#~ msgstr "最大化時にヒントを無視"
-
-#~ msgid "Ignore size increment and aspect hints when window is maximized"
-#~ msgstr ""
-#~ "ウィンドウ最大化時に、サイズ加算分と縦横比のジオメトリ・ヒントを無視"
-
-#~ msgid "Increase Opacity"
-#~ msgstr "不透明度を上げる"
-
-#~ msgid "Increase window opacity"
-#~ msgstr "ウィンドウの不透明度を上げる"
-
-#~ msgid "Interval before raising selected windows"
-#~ msgstr "選択ウィンドウの最前面への持ち上げを開始するまでの時間間隔"
-
-#~ msgid "Interval between ping messages"
-#~ msgstr "Ping メッセージ間の間隔"
-
-#~ msgid "Level of focus stealing prevention"
-#~ msgstr "フォーカス奪取防止のレベル"
-
-#~ msgid "Lighting"
-#~ msgstr "照明"
-
-#~ msgid "List of currently active plugins"
-#~ msgstr "現在アクティブなプラグインのリスト"
-
-#~ msgid "List of strings describing output devices"
-#~ msgstr "出力デバイスを表す文字列リスト"
-
-#~ msgid "Low"
-#~ msgstr "低"
-
-#~ msgid "Lower Window"
-#~ msgstr "ウィンドウを下げる"
-
-#~ msgid "Lower window beneath other windows"
-#~ msgstr "他のウィンドウの下にウィンドウを下げる"
-
-#~ msgid "Maximize Window Horizontally"
-#~ msgstr "水平方向にウィンドウを最大化"
-
-#~ msgid "Maximize Window Vertically"
-#~ msgstr "垂直方向にウィンドウを最大化"
-
-#~ msgid "Maximize active window"
-#~ msgstr "アクティブなウィンドウを最大化"
-
-#~ msgid "Maximize active window horizontally"
-#~ msgstr "アクティブなウィンドウを水平方向に最大化"
-
-#~ msgid "Maximize active window vertically"
-#~ msgstr "アクティブなウィンドウを垂直方向に最大化"
-
-#~ msgid "Minimize active window"
-#~ msgstr "アクティブなウィンドウを最小化"
-
-#~ msgid "Number of Desktops"
-#~ msgstr "デスクトップ数"
-
-#~ msgid "Number of virtual desktops"
-#~ msgstr "仮想デスクトップ数"
-
-#~ msgid "Off"
-#~ msgstr "オフ"
-
-#~ msgid "Only perform screen updates during vertical blanking period"
-#~ msgstr "垂直帰線期間にのみ画面を更新する"
-
-#~ msgid "Opacity Step"
-#~ msgstr "不透明度の変化刻み"
-
-#~ msgid "Opacity change step"
-#~ msgstr "不透明度の変化刻み"
-
-#~ msgid "Opacity values for windows that should be translucent by default"
-#~ msgstr "デフォルトで半透明化の対象にするウィンドウの不透明度"
-
-#~ msgid "Opacity window values"
-#~ msgstr "ウィンドウの不透明度"
-
-#~ msgid "Opacity windows"
-#~ msgstr "半透明対象ウィンドウ"
-
-#~ msgid "Open a terminal"
-#~ msgstr "端末を開く"
-
-#~ msgid "Outputs"
-#~ msgstr "出力"
-
-#~ msgid "Overlapping Output Handling"
-#~ msgstr "重なった出力の取扱い"
-
-#~ msgid ""
-#~ "Paint each output device independly, even if the output devices overlap"
-#~ msgstr "出力デバイス同士に重なりがある場合でも、それぞれを別個に描画"
-
-#~ msgid "Ping Delay"
-#~ msgstr "Ping の待ち時間"
-
-#~ msgid "Prefer larger output"
-#~ msgstr "大きい方の出力を選好"
-
-#~ msgid "Prefer smaller output"
-#~ msgstr "小さい方の出力を選好"
-
-#~ msgid "Raise On Click"
-#~ msgstr "クリックで上げる"
-
-#~ msgid "Raise Window"
-#~ msgstr "ウィンドウを上げる"
-
-#~ msgid "Raise selected windows after interval"
-#~ msgstr "指定時間間隔後に選択ウィンドウを最前面に上げる"
-
-#~ msgid "Raise window above other windows"
-#~ msgstr "ウィンドウを他のウィンドウの前面に上げる"
-
-#~ msgid "Raise windows when clicked"
-#~ msgstr "クリックでウィンドウを最前面に上げる"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "リフレッシュレート"
-
-#~ msgid "Run Dialog"
-#~ msgstr "アプリケーション実行ダイアログ"
-
-#~ msgid "Run command 0"
-#~ msgstr "コマンド 0 を実行"
-
-#~ msgid "Run command 1"
-#~ msgstr "コマンド 1 を実行"
-
-#~ msgid "Run command 10"
-#~ msgstr "コマンド 10 を実行"
-
-#~ msgid "Run command 11"
-#~ msgstr "コマンド 11 を実行"
-
-#~ msgid "Run command 2"
-#~ msgstr "コマンド 2 を実行"
-
-#~ msgid "Run command 3"
-#~ msgstr "コマンド 3 を実行"
-
-#~ msgid "Run command 4"
-#~ msgstr "コマンド 4 を実行"
-
-#~ msgid "Run command 5"
-#~ msgstr "コマンド 5 を実行"
-
-#~ msgid "Run command 6"
-#~ msgstr "コマンド 6 を実行"
-
-#~ msgid "Run command 7"
-#~ msgstr "コマンド 7 を実行"
-
-#~ msgid "Run command 8"
-#~ msgstr "コマンド 8 を実行"
-
-#~ msgid "Run command 9"
-#~ msgstr "コマンド 9 を実行"
-
-#~ msgid "Screen size multiplier for horizontal virtual size"
-#~ msgstr "水平仮想サイズ指定のための、画面サイズに対する乗数"
-
-#~ msgid "Screen size multiplier for vertical virtual size"
-#~ msgstr "垂直仮想サイズ指定のための、画面サイズに対する乗数"
-
-#~ msgid "Screenshot command line"
-#~ msgstr "スクリーンショットのコマンドライン"
-
-#~ msgid "Show Desktop"
-#~ msgstr "デスクトップの表示"
-
-#~ msgid "Show Main Menu"
-#~ msgstr "メインメニューの表示"
-
-#~ msgid "Show Run Application dialog"
-#~ msgstr "\"アプリケーションの実行\"ダイアログの表示"
-
-#~ msgid "Show the main menu"
-#~ msgstr "メインメニューの表示"
-
-#~ msgid "Slow Animations"
-#~ msgstr "アニメーションのスロー再生"
-
-#~ msgid "Smart mode"
-#~ msgstr "スマートモード"
-
-#~ msgid "Sync To VBlank"
-#~ msgstr "垂直ブランクに同期化"
-
-#~ msgid "Take a screenshot"
-#~ msgstr "スクリーンショットを撮る"
-
-#~ msgid "Take a screenshot of a window"
-#~ msgstr "ウィンドウのスクリーンショットを撮る"
-
-#~ msgid "Terminal command line"
-#~ msgstr "端末起動コマンドライン"
-
-#~ msgid "Texture Compression"
-#~ msgstr "テクスチャ圧縮"
-
-#~ msgid "Texture Filter"
-#~ msgstr "テクスチャ・フィルタ"
-
-#~ msgid "Texture filtering"
-#~ msgstr "テクスチャ・フィルタ"
-
-#~ msgid "The rate at which the screen is redrawn (times/second)"
-#~ msgstr "画面の再描画レート(回/秒)"
-
-#~ msgid "Toggle Window Maximized"
-#~ msgstr "ウィンドウの最大化/解除の切り替え"
-
-#~ msgid "Toggle Window Maximized Horizontally"
-#~ msgstr "ウィンドウの水平方向最大化/解除の切り替え"
-
-#~ msgid "Toggle Window Maximized Vertically"
-#~ msgstr "ウィンドウの垂直方向最大化/解除の切り替え"
-
-#~ msgid "Toggle Window Shaded"
-#~ msgstr "ウィンドウのシェード/解除の切り替え"
-
-#~ msgid "Toggle active window maximized"
-#~ msgstr "アクティブ・ウィンドウの最大化/解除の切り替え"
-
-#~ msgid "Toggle active window maximized horizontally"
-#~ msgstr "アクティブ・ウィンドウの水平方向最大化/解除の切り替え"
-
-#~ msgid "Toggle active window maximized vertically"
-#~ msgstr "アクティブ・ウィンドウの垂直方向最大化/解除の切り替え"
-
-#~ msgid "Toggle active window shaded"
-#~ msgstr "アクティブ・ウィンドウのシェード/解除の切り替え"
-
-#~ msgid "Toggle use of slow animations"
-#~ msgstr "スロー再生アニメーション使用のオンオフ"
-
-#~ msgid "Unmaximize active window"
-#~ msgstr "アクティブ・ウィンドウの最大化解除"
-
-#~ msgid "Unredirect Fullscreen Windows"
-#~ msgstr "全画面ウィンドウのリダイレクトを解除"
-
-#~ msgid "Use diffuse light when screen is transformed"
-#~ msgstr "画面の変換時に拡散反射光を使用"
-
-#~ msgid "Vertical Virtual Size"
-#~ msgstr "垂直仮想サイズ"
-
-#~ msgid "Very High"
-#~ msgstr "非常に高"
-
-#~ msgid "Which one of overlapping output devices should be preferred"
-#~ msgstr "出力に重なり部分がある場合にどちらのデバイスが選好されるべきか"
-
-#~ msgid "Window menu button binding"
-#~ msgstr "ウィンドウメニューのボタン割り当て"
-
-#~ msgid "Window menu key binding"
-#~ msgstr "ウィンドウメニューのキー割り当て"
-
-#~ msgid "Window screenshot command line"
-#~ msgstr "ウィンドウ・スクリーンショットのコマンドライン"
-
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "デフォルトで半透明化の対象にするウィンドウ"
-
-#~ msgid "Acceleration"
-#~ msgstr "加速度"
-
-#~ msgid "Adjust Image"
-#~ msgstr "画像の調整"
-
-#~ msgid "Adjust top face image to rotation"
-#~ msgstr "上面画像を回転に合わせる"
-
-#~ msgid "Advance to next slide"
-#~ msgstr "次のスライドに進む"
-
-#~ msgid "Animate Skydome"
-#~ msgstr "スカイドームをアニメーション化"
-
-#~ msgid "Animate skydome when rotating cube"
-#~ msgstr "キューブの回転時にスカイドームをアニメーション化"
-
-#~ msgid "Automatic"
-#~ msgstr "自動調整"
-
-#~ msgid "Color of top and bottom sides of the cube"
-#~ msgstr "キューブの上部および下部の面のカラー"
-
-#~ msgid ""
-#~ "Color to use for the bottom color-stop of the skydome-fallback gradient"
-#~ msgstr ""
-#~ "スカイドームフォールバックグラデーションの下部カラーストップに使用する色"
-
-#~ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-#~ msgstr ""
-#~ "スカイドームフォールバックグラデーションの上部カラーストップに使用する色"
-
-#~ msgid "Cube Color"
-#~ msgstr "キューブの色"
-
-#~ msgid "Desktop Cube"
-#~ msgstr "デスクトップ・キューブ"
-
-#~ msgid "Fold Acceleration"
-#~ msgstr "展開加速度"
-
-#~ msgid "Fold Speed"
-#~ msgstr "展開速度"
-
-#~ msgid "Fold Timestep"
-#~ msgstr "展開描画の刻み時間"
-
-#~ msgid "Generate mipmaps when possible for higher quality scaling"
-#~ msgstr "高品質スケーリングが可能な場合ミップマップを生成"
-
-#~ msgid "Go back to previous slide"
-#~ msgstr "前のスライドに戻る"
-
-#~ msgid "Image files"
-#~ msgstr "画像ファイル"
-
-#~ msgid "Image to use as texture for the skydome"
-#~ msgstr "スカイドームのテクスチャとして使用する画像"
-
-#~ msgid "Initiates Cube transparency only if rotation is mouse driven."
-#~ msgstr "マウスによる回転時のみキューブの透明化を開始"
-
-#~ msgid "Inside Cube"
-#~ msgstr "キューブ内部"
-
-#~ msgid "Inside cube"
-#~ msgstr "キューブ内部"
-
-#~ msgid ""
-#~ "List of PNG and SVG files that should be rendered on top face of cube"
-#~ msgstr "キューブの上面に描画するPNGおよびSVGファイルのリスト"
-
-#~ msgid "Multi Output Mode"
-#~ msgstr "マルチ出力の形式"
-
-#~ msgid "Multiple cubes"
-#~ msgstr "複数のキューブ"
-
-#~ msgid "Next Slide"
-#~ msgstr "次のスライド"
-
-#~ msgid "One big cube"
-#~ msgstr "１つの大きなキューブ"
-
-#~ msgid "Opacity During Rotation"
-#~ msgstr "回転時の不透明度"
-
-#~ msgid "Opacity When Not Rotating"
-#~ msgstr "非回転時の不透明度"
-
-#~ msgid "Opacity of desktop window during rotation."
-#~ msgstr "回転時のデスクトップ・ウィンドウの不透明度"
-
-#~ msgid "Opacity of desktop window when not rotating."
-#~ msgstr "非回転時のデスクトップ・ウィンドウの不透明度"
-
-#~ msgid "Place windows on cube"
-#~ msgstr "ウィンドウをキューブに配置"
-
-#~ msgid "Prev Slide"
-#~ msgstr "前のスライド"
-
-#~ msgid "Render skydome"
-#~ msgstr "スカイドームの描画"
-
-#~ msgid "Scale image"
-#~ msgstr "画像を拡大"
-
-#~ msgid "Scale images to cover top face of cube"
-#~ msgstr "キューブの上面を覆うように画像を拡大"
-
-#~ msgid ""
-#~ "Selects how the cube is displayed if multiple output devices are used."
-#~ msgstr "複数の出力デバイス使用の場合におけるキューブ表示方法の選択"
-
-#~ msgid "Skydome"
-#~ msgstr "スカイドーム"
-
-#~ msgid "Skydome Gradient End Color"
-#~ msgstr "スカイドームグラデーション終了色"
-
-#~ msgid "Skydome Gradient Start Color"
-#~ msgstr "スカイドームグラデーション開始色"
-
-#~ msgid "Skydome Image"
-#~ msgstr "スカイドーム画像"
-
-#~ msgid "Speed"
-#~ msgstr "速度"
-
-#~ msgid "Timestep"
-#~ msgstr "描画の刻み時間"
-
-#~ msgid "Transparency Only on Mouse Rotate"
-#~ msgstr "マウスによる回転時のみ透明化を使用"
-
-#~ msgid "Unfold"
-#~ msgstr "展開"
-
-#~ msgid "Unfold cube"
-#~ msgstr "キューブを展開"
-
-#~ msgid "Dbus"
-#~ msgstr "Dbus"
-
-#~ msgid "Dbus Control Backend"
-#~ msgstr "Dbus 制御バックエンド"
-
-#~ msgid "Allow mipmaps to be generated for decoration textures"
-#~ msgstr "装飾テキスチャ用ミップマップの生成を許可"
-
-#~ msgid "Command"
-#~ msgstr "コマンド"
-
-#~ msgid "Decoration windows"
-#~ msgstr "装飾適用ウィンドウ"
-
-#~ msgid ""
-#~ "Decorator command line that is executed if no decorator is already running"
-#~ msgstr "デコレータ未動作の場合に実行されるデコレータ起動コマンドライン"
-
-#~ msgid "Drop shadow X offset"
-#~ msgstr "落とす影のオフセット X 座標"
-
-#~ msgid "Drop shadow Y offset"
-#~ msgstr "落とす影のオフセット Y 座標"
-
-#~ msgid "Drop shadow color"
-#~ msgstr "落とす影の色"
-
-#~ msgid "Drop shadow opacity"
-#~ msgstr "落とす影の不透明度"
-
-#~ msgid "Drop shadow radius"
-#~ msgstr "落とす影の半径"
-
-#~ msgid "Shadow Color"
-#~ msgstr "影の色"
-
-#~ msgid "Shadow Offset X"
-#~ msgstr "影オフセット X 座標"
-
-#~ msgid "Shadow Offset Y"
-#~ msgstr "影オフセット Y 座標"
-
-#~ msgid "Shadow Opacity"
-#~ msgstr "影の不透明度"
-
-#~ msgid "Shadow Radius"
-#~ msgstr "影の半径"
-
-#~ msgid "Shadow windows"
-#~ msgstr "影付けウィンドウ"
-
-#~ msgid "Window Decoration"
-#~ msgstr "ウィンドウの装飾"
-
-#~ msgid "Window decorations"
-#~ msgstr "ウィンドウを装飾"
-
-#~ msgid "Windows that should be decorated"
-#~ msgstr "装飾の適用対象ウィンドウ"
-
-#~ msgid "Windows that should have a shadow"
-#~ msgstr "影を付ける対象ウィンドウ"
-
-#~ msgid "Fade On Minimize/Open/Close"
-#~ msgstr "最小化/開く/閉じる 時にフェード"
-
-#~ msgid "Fade Speed"
-#~ msgstr "フェード速度"
-
-#~ msgid "Fade effect on minimize/open/close window events"
-#~ msgstr "最小化/開く/閉じる イベント時のフェード効果"
-
-#~ msgid "Fade effect on system beep"
-#~ msgstr "システムビープ音時のフェード効果"
-
-#~ msgid "Fade in windows when mapped and fade out windows when unmapped"
-#~ msgstr "ウィンドウが開かれた時フェードイン、閉じた時フェードアウト"
-
-#~ msgid "Fade windows"
-#~ msgstr "フェード・ウィンドウ"
-
-#~ msgid "Fading Windows"
-#~ msgstr "ウィンドウのフェード"
-
-#~ msgid "Fullscreen Visual Bell"
-#~ msgstr "全画面効果による視覚ベル"
-
-#~ msgid "Fullscreen fade effect on system beep"
-#~ msgstr "システムビープ音イベント時の全画面フェード効果"
-
-#~ msgid "Visual Bell"
-#~ msgstr "視覚ベル"
-
-#~ msgid "Window fade speed"
-#~ msgstr "ウィンドウのフェード速度"
-
-#~ msgid "Windows that should be fading"
-#~ msgstr "フェードさせる対象ウィンドウ"
-
-#~ msgid "Mount Point"
-#~ msgstr "マウントポイント"
-
-#~ msgid "Mount point"
-#~ msgstr "マウントポイント"
-
-#~ msgid "Userspace File System"
-#~ msgstr "ユーザ空間ファイルシステム"
-
-#~ msgid "Userspace file system"
-#~ msgstr "ユーザ空間ファイルシステム"
-
-#~ msgid "GConf"
-#~ msgstr "GConf"
-
-#~ msgid "GConf Control Backend"
-#~ msgstr "GConf 制御バックエンド"
-
-#~ msgid "GLib"
-#~ msgstr "GLib"
-
-#~ msgid "GLib main loop support"
-#~ msgstr "GLib main loop サポート"
-
+#: ../metadata/annotate.xml.in.h:1
+msgid "Annotate"
+msgstr "注釈"
+
+#: ../metadata/annotate.xml.in.h:2
+msgid "Annotate Fill Color"
+msgstr "注釈の塗り色"
+
+#: ../metadata/annotate.xml.in.h:3
+msgid "Annotate Stroke Color"
+msgstr "注釈のストロークの色"
+
+#: ../metadata/annotate.xml.in.h:4
+msgid "Annotate plugin"
+msgstr "注釈プラグイン"
+
+#: ../metadata/annotate.xml.in.h:5
+msgid "Clear"
+msgstr "消去"
+
+#: ../metadata/annotate.xml.in.h:6
+msgid "Draw"
+msgstr "描画"
+
+#: ../metadata/annotate.xml.in.h:7
+msgid "Draw using tool"
+msgstr "ツールを使用して描画"
+
+#: ../metadata/annotate.xml.in.h:8
+msgid "Fill color for annotations"
+msgstr "注釈の塗り色"
+
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+msgid "Initiate"
+msgstr "開始"
+
+#: ../metadata/annotate.xml.in.h:10
+msgid "Initiate annotate drawing"
+msgstr "注釈の描画を開始"
+
+#: ../metadata/annotate.xml.in.h:11
+msgid "Initiate annotate erasing"
+msgstr "注釈の削除を開始"
+
+#: ../metadata/annotate.xml.in.h:12
+msgid "Initiate erase"
+msgstr "削除開始"
+
+#: ../metadata/annotate.xml.in.h:13
+msgid "Line width"
+msgstr "線幅"
+
+#: ../metadata/annotate.xml.in.h:14
+msgid "Line width for annotations"
+msgstr "注釈の線幅"
+
+#: ../metadata/annotate.xml.in.h:15
+msgid "Stroke color for annotations"
+msgstr "注釈のストロークの色"
+
+#: ../metadata/annotate.xml.in.h:16
+msgid "Stroke width"
+msgstr "ストロークの幅"
+
+#: ../metadata/annotate.xml.in.h:17
+msgid "Stroke width for annotations"
+msgstr "注釈のストロークの幅"
+
+#: ../metadata/blur.xml.in.h:1
+msgid "4xBilinear"
+msgstr "4x バイリニア"
+
+#: ../metadata/blur.xml.in.h:2
+msgid "Alpha Blur"
+msgstr "アルファ・ブラー"
+
+#: ../metadata/blur.xml.in.h:3
+msgid "Alpha blur windows"
+msgstr "アルファ・ブラー対象ウィンドウ"
+
+#: ../metadata/blur.xml.in.h:4
+msgid "Blur Filter"
+msgstr "ブラーフィルタ"
+
+#: ../metadata/blur.xml.in.h:5
+msgid "Blur Occlusion"
+msgstr "ブラー遮蔽"
+
+#: ../metadata/blur.xml.in.h:6
+msgid "Blur Saturation"
+msgstr "ブラー彩度"
+
+#: ../metadata/blur.xml.in.h:7
+msgid "Blur Speed"
+msgstr "ブラー速度"
+
+#: ../metadata/blur.xml.in.h:8
+msgid "Blur Windows"
+msgstr "ウィンドウのブラー"
+
+#: ../metadata/blur.xml.in.h:9
+msgid "Blur behind translucent parts of windows"
+msgstr "ウィンドウの透過部分の背後をぼかす"
+
+#: ../metadata/blur.xml.in.h:10
+msgid "Blur saturation"
+msgstr "ぼかしの彩度"
+
+#: ../metadata/blur.xml.in.h:11
+msgid "Blur windows"
+msgstr "ウィンドウをぼかす"
+
+#: ../metadata/blur.xml.in.h:12
+msgid "Blur windows that doesn't have focus"
+msgstr "フォーカスがないウィンドウをぼかす"
+
+#: ../metadata/blur.xml.in.h:13
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr "他のウィンドウで覆い隠された画面域のブラーを無効化"
+
+#: ../metadata/blur.xml.in.h:14
+msgid "Filter method used for blurring"
+msgstr "ブラーに使用するフィルタ方法"
+
+#: ../metadata/blur.xml.in.h:15
+msgid "Focus Blur"
+msgstr "フォーカス・ブラー"
+
+#: ../metadata/blur.xml.in.h:16
+msgid "Focus blur windows"
+msgstr "フォーカス・ブラー対象ウィンドウ"
+
+#: ../metadata/blur.xml.in.h:17
+msgid "Gaussian"
+msgstr "ガウス"
+
+#: ../metadata/blur.xml.in.h:18
+msgid "Gaussian Radius"
+msgstr "ガウス半径"
+
+#: ../metadata/blur.xml.in.h:19
+msgid "Gaussian Strength"
+msgstr "ガウス強度"
+
+#: ../metadata/blur.xml.in.h:20
+msgid "Gaussian radius"
+msgstr "ガウス半径"
+
+#: ../metadata/blur.xml.in.h:21
+msgid "Gaussian strength"
+msgstr "ガウス強度"
+
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr "テクスチャの独立読み出し"
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "ミップマップ"
+
+#: ../metadata/blur.xml.in.h:24
+msgid "Mipmap LOD"
+msgstr "ミップマップ詳細レベル"
+
+#: ../metadata/blur.xml.in.h:25
+msgid "Mipmap level-of-detail"
+msgstr "ミップマップの詳細レベル"
+
+#: ../metadata/blur.xml.in.h:26
+msgid "Pulse"
+msgstr "点滅"
+
+#: ../metadata/blur.xml.in.h:27
+msgid "Pulse effect"
+msgstr "点滅効果"
+
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+"利用可能なテクスチャ・ユニットを使用してテクスチャを可能な限り多く独立読み出"
+"しさせる"
+
+#: ../metadata/blur.xml.in.h:29
+msgid "Window blur speed"
+msgstr "ウィンドウ・ブラーの速度"
+
+#: ../metadata/blur.xml.in.h:30
+msgid "Windows that should be affected by focus blur"
+msgstr "フォーカス・ブラーの効果対象ウィンドウ"
+
+#: ../metadata/blur.xml.in.h:31
+msgid "Windows that should be use alpha blur by default"
+msgstr "デフォルトでアルファ・ブラー使用対象にするウィンドウ"
+
+#: ../metadata/clone.xml.in.h:1
+msgid "Clone Output"
+msgstr "クローン出力"
+
+#: ../metadata/clone.xml.in.h:3
+msgid "Initiate clone selection"
+msgstr "複製選択の開始"
+
+#: ../metadata/clone.xml.in.h:4
+msgid "Output clone handler"
+msgstr "クローン出力ハンドラ"
+
+#: ../metadata/core.xml.in.h:1
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当て"
+
+#: ../metadata/core.xml.in.h:2
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:3
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:4
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:5
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:6
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:7
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:8
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:9
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:10
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:11
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:12
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り当"
+"て"
+
+#: ../metadata/core.xml.in.h:13
+msgid "Active Plugins"
+msgstr "アクティブなプラグイン"
+
+#: ../metadata/core.xml.in.h:14
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"オフスクリーン・ピクスマップにリダイレクトしない直接の全画面ウィンドウ描画を"
+"許可"
+
+#: ../metadata/core.xml.in.h:15
+msgid "Audible Bell"
+msgstr "音響ベル"
+
+#: ../metadata/core.xml.in.h:16
+msgid "Audible system beep"
+msgstr "音響システムビープ音"
+
+#: ../metadata/core.xml.in.h:17
+msgid "Auto-Raise"
+msgstr "自動で最前面に上げる"
+
+#: ../metadata/core.xml.in.h:18
+msgid "Auto-Raise Delay"
+msgstr "自動最前面移動の待ち時間"
+
+#: ../metadata/core.xml.in.h:19
+msgid "Automatic detection of output devices"
+msgstr "出力デバイスの自動検出"
+
+#: ../metadata/core.xml.in.h:20
+msgid "Automatic detection of refresh rate"
+msgstr "リフレッシュレートの自動検出"
+
+#: ../metadata/core.xml.in.h:21
+msgid "Best"
+msgstr "最高"
+
+#: ../metadata/core.xml.in.h:22
+msgid "Click To Focus"
+msgstr "クリックでフォーカス"
+
+#: ../metadata/core.xml.in.h:23
+msgid "Click on window moves input focus to it"
+msgstr "ウィンドウのクリックで入力フォーカスがそのウィンドウに移動"
+
+#: ../metadata/core.xml.in.h:25
+msgid "Close active window"
+msgstr "アクティブなウィンドウを閉じる"
+
+#: ../metadata/core.xml.in.h:26
+msgid "Command line 0"
+msgstr "コマンドライン 0"
+
+#: ../metadata/core.xml.in.h:27
+msgid "Command line 1"
+msgstr "コマンドライン 1"
+
+#: ../metadata/core.xml.in.h:28
+msgid "Command line 10"
+msgstr "コマンドライン 10"
+
+#: ../metadata/core.xml.in.h:29
+msgid "Command line 11"
+msgstr "コマンドライン 11"
+
+#: ../metadata/core.xml.in.h:30
+msgid "Command line 2"
+msgstr "コマンドライン 2"
+
+#: ../metadata/core.xml.in.h:31
+msgid "Command line 3"
+msgstr "コマンドライン 3"
+
+#: ../metadata/core.xml.in.h:32
+msgid "Command line 4"
+msgstr "コマンドライン 4"
+
+#: ../metadata/core.xml.in.h:33
+msgid "Command line 5"
+msgstr "コマンドライン 5"
+
+#: ../metadata/core.xml.in.h:34
+msgid "Command line 6"
+msgstr "コマンドライン 6"
+
+#: ../metadata/core.xml.in.h:35
+msgid "Command line 7"
+msgstr "コマンドライン 7"
+
+#: ../metadata/core.xml.in.h:36
+msgid "Command line 8"
+msgstr "コマンドライン 8"
+
+#: ../metadata/core.xml.in.h:37
+msgid "Command line 9"
+msgstr "コマンドライン 9"
+
+#: ../metadata/core.xml.in.h:38
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "コマンド 0 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:39
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "コマンド 1 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:40
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "コマンド 10 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:41
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "コマンド 11 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:42
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "コマンド 2 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:43
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "コマンド 3 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:44
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "コマンド 4 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:45
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "コマンド 5 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:46
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "コマンド 6 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:47
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "コマンド 7 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:48
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "コマンド 8 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:49
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "コマンド 9 を実行 の呼び出し時にシェルで実行されるコマンドライン"
+
+#: ../metadata/core.xml.in.h:50
+msgid "Decrease Opacity"
+msgstr "不透明度を下げる"
+
+#: ../metadata/core.xml.in.h:51
+msgid "Decrease window opacity"
+msgstr "ウィンドウの不透明度を下げる"
+
+#: ../metadata/core.xml.in.h:52
+msgid "Default Icon"
+msgstr "デフォルトのアイコン"
+
+#: ../metadata/core.xml.in.h:53
+msgid "Default window icon image"
+msgstr "デフォルトのウィンドウアイコン画像"
+
+#: ../metadata/core.xml.in.h:54
+msgid "Detect Outputs"
+msgstr "出力検出"
+
+#: ../metadata/core.xml.in.h:55
+msgid "Detect Refresh Rate"
+msgstr "リフレッシュレートの検出"
+
+#: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+"エッジ・アクションの開始に必要なスクリーンエッジへのポインタ配置の継続時間"
+
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr "エッジ開始遅延時間"
+
+#: ../metadata/core.xml.in.h:58
+msgid "Fast"
+msgstr "速さ重視"
+
+#: ../metadata/core.xml.in.h:59
+msgid "Focus Prevention Level"
+msgstr "フォーカス奪取防止レベル"
+
+#: ../metadata/core.xml.in.h:60
+msgid "Focus Prevention Windows"
+msgstr "フォーカス奪取防止ウィンドウ"
+
+#: ../metadata/core.xml.in.h:61
+msgid "Focus prevention windows"
+msgstr "フォーカスを奪われないようにするウィンドウ"
+
+#: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr "各出力別に独立した描画を強制"
+
+#: ../metadata/core.xml.in.h:63
+msgid "General Options"
+msgstr "一般オプション"
+
+#: ../metadata/core.xml.in.h:64
+msgid "General compiz options"
+msgstr "Compiz の一般オプション"
+
+#: ../metadata/core.xml.in.h:65
+msgid "Good"
+msgstr "良"
+
+#: ../metadata/core.xml.in.h:66
+msgid "Hide Skip Taskbar Windows"
+msgstr "タスクバー省略ウィンドウを隠す"
+
+#: ../metadata/core.xml.in.h:67
+msgid "Hide all windows and focus desktop"
+msgstr "全ウィンドウを隠してデスクトップにフォーカス"
+
+#: ../metadata/core.xml.in.h:68
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"\"デスクトップの表示\"モード移行時にタスクバーにないウィンドウ（ウィジェット"
+"等）を隠す"
+
+#: ../metadata/core.xml.in.h:69
+msgid "High"
+msgstr "高"
+
+#: ../metadata/core.xml.in.h:70
+msgid "Horizontal Virtual Size"
+msgstr "水平仮想サイズ"
+
+#: ../metadata/core.xml.in.h:71
+msgid "If available use compression for textures converted from images"
+msgstr "利用可能な場合は画像から変換されたテクスチャに圧縮を使用する"
+
+#: ../metadata/core.xml.in.h:72
+msgid "Ignore Hints When Maximized"
+msgstr "最大化時にヒントを無視"
+
+#: ../metadata/core.xml.in.h:73
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr "ウィンドウ最大化時に、サイズ加算分と縦横比のジオメトリ・ヒントを無視"
+
+#: ../metadata/core.xml.in.h:74
+msgid "Increase Opacity"
+msgstr "不透明度を上げる"
+
+#: ../metadata/core.xml.in.h:75
+msgid "Increase window opacity"
+msgstr "ウィンドウの不透明度を上げる"
+
+#: ../metadata/core.xml.in.h:76
+msgid "Interval before raising selected windows"
+msgstr "選択ウィンドウの最前面への持ち上げを開始するまでの時間間隔"
+
+#: ../metadata/core.xml.in.h:77
+msgid "Interval between ping messages"
+msgstr "Ping メッセージ間の間隔"
+
+#: ../metadata/core.xml.in.h:78
+msgid "Level of focus stealing prevention"
+msgstr "フォーカス奪取防止のレベル"
+
+#: ../metadata/core.xml.in.h:79
+msgid "Lighting"
+msgstr "照明"
+
+#: ../metadata/core.xml.in.h:80
+msgid "List of currently active plugins"
+msgstr "現在アクティブなプラグインのリスト"
+
+#: ../metadata/core.xml.in.h:81
+msgid "List of strings describing output devices"
+msgstr "出力デバイスを表す文字列リスト"
+
+#: ../metadata/core.xml.in.h:82
+msgid "Low"
+msgstr "低"
+
+#: ../metadata/core.xml.in.h:83
+msgid "Lower Window"
+msgstr "ウィンドウを下げる"
+
+#: ../metadata/core.xml.in.h:84
+msgid "Lower window beneath other windows"
+msgstr "他のウィンドウの下にウィンドウを下げる"
+
+#: ../metadata/core.xml.in.h:86
+msgid "Maximize Window Horizontally"
+msgstr "水平方向にウィンドウを最大化"
+
+#: ../metadata/core.xml.in.h:87
+msgid "Maximize Window Vertically"
+msgstr "垂直方向にウィンドウを最大化"
+
+#: ../metadata/core.xml.in.h:88
+msgid "Maximize active window"
+msgstr "アクティブなウィンドウを最大化"
+
+#: ../metadata/core.xml.in.h:89
+msgid "Maximize active window horizontally"
+msgstr "アクティブなウィンドウを水平方向に最大化"
+
+#: ../metadata/core.xml.in.h:90
+msgid "Maximize active window vertically"
+msgstr "アクティブなウィンドウを垂直方向に最大化"
+
+#: ../metadata/core.xml.in.h:92
+msgid "Minimize active window"
+msgstr "アクティブなウィンドウを最小化"
+
+#: ../metadata/core.xml.in.h:93
+msgid "Number of Desktops"
+msgstr "デスクトップ数"
+
+#: ../metadata/core.xml.in.h:94
+msgid "Number of virtual desktops"
+msgstr "仮想デスクトップ数"
+
+#: ../metadata/core.xml.in.h:95
+msgid "Off"
+msgstr "オフ"
+
+#: ../metadata/core.xml.in.h:96
+msgid "Only perform screen updates during vertical blanking period"
+msgstr "垂直帰線期間にのみ画面を更新する"
+
+#: ../metadata/core.xml.in.h:97
+msgid "Opacity Step"
+msgstr "不透明度の変化刻み"
+
+#: ../metadata/core.xml.in.h:98
+msgid "Opacity change step"
+msgstr "不透明度の変化刻み"
+
+#: ../metadata/core.xml.in.h:99
+msgid "Opacity values for windows that should be translucent by default"
+msgstr "デフォルトで半透明化の対象にするウィンドウの不透明度"
+
+#: ../metadata/core.xml.in.h:100
+msgid "Opacity window values"
+msgstr "ウィンドウの不透明度"
+
+#: ../metadata/core.xml.in.h:101
+msgid "Opacity windows"
+msgstr "半透明対象ウィンドウ"
+
+#: ../metadata/core.xml.in.h:102
+msgid "Open a terminal"
+msgstr "端末を開く"
+
+#: ../metadata/core.xml.in.h:103
+msgid "Outputs"
+msgstr "出力"
+
+#: ../metadata/core.xml.in.h:104
+msgid "Overlapping Output Handling"
+msgstr "重なった出力の取扱い"
+
+#: ../metadata/core.xml.in.h:105
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr "出力デバイス同士に重なりがある場合でも、それぞれを別個に描画"
+
+#: ../metadata/core.xml.in.h:106
+msgid "Ping Delay"
+msgstr "Ping の待ち時間"
+
+#: ../metadata/core.xml.in.h:107
+msgid "Prefer larger output"
+msgstr "大きい方の出力を選好"
+
+#: ../metadata/core.xml.in.h:108
+msgid "Prefer smaller output"
+msgstr "小さい方の出力を選好"
+
+#: ../metadata/core.xml.in.h:109
+msgid "Raise On Click"
+msgstr "クリックで上げる"
+
+#: ../metadata/core.xml.in.h:110
+msgid "Raise Window"
+msgstr "ウィンドウを上げる"
+
+#: ../metadata/core.xml.in.h:111
+msgid "Raise selected windows after interval"
+msgstr "指定時間間隔後に選択ウィンドウを最前面に上げる"
+
+#: ../metadata/core.xml.in.h:112
+msgid "Raise window above other windows"
+msgstr "ウィンドウを他のウィンドウの前面に上げる"
+
+#: ../metadata/core.xml.in.h:113
+msgid "Raise windows when clicked"
+msgstr "クリックでウィンドウを最前面に上げる"
+
+#: ../metadata/core.xml.in.h:114
+msgid "Refresh Rate"
+msgstr "リフレッシュレート"
+
+#: ../metadata/core.xml.in.h:115
+msgid "Run Dialog"
+msgstr "アプリケーション実行ダイアログ"
+
+#: ../metadata/core.xml.in.h:116
+msgid "Run command 0"
+msgstr "コマンド 0 を実行"
+
+#: ../metadata/core.xml.in.h:117
+msgid "Run command 1"
+msgstr "コマンド 1 を実行"
+
+#: ../metadata/core.xml.in.h:118
+msgid "Run command 10"
+msgstr "コマンド 10 を実行"
+
+#: ../metadata/core.xml.in.h:119
+msgid "Run command 11"
+msgstr "コマンド 11 を実行"
+
+#: ../metadata/core.xml.in.h:120
+msgid "Run command 2"
+msgstr "コマンド 2 を実行"
+
+#: ../metadata/core.xml.in.h:121
+msgid "Run command 3"
+msgstr "コマンド 3 を実行"
+
+#: ../metadata/core.xml.in.h:122
+msgid "Run command 4"
+msgstr "コマンド 4 を実行"
+
+#: ../metadata/core.xml.in.h:123
+msgid "Run command 5"
+msgstr "コマンド 5 を実行"
+
+#: ../metadata/core.xml.in.h:124
+msgid "Run command 6"
+msgstr "コマンド 6 を実行"
+
+#: ../metadata/core.xml.in.h:125
+msgid "Run command 7"
+msgstr "コマンド 7 を実行"
+
+#: ../metadata/core.xml.in.h:126
+msgid "Run command 8"
+msgstr "コマンド 8 を実行"
+
+#: ../metadata/core.xml.in.h:127
+msgid "Run command 9"
+msgstr "コマンド 9 を実行"
+
+#: ../metadata/core.xml.in.h:128
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "水平仮想サイズ指定のための、画面サイズに対する乗数"
+
+#: ../metadata/core.xml.in.h:129
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "垂直仮想サイズ指定のための、画面サイズに対する乗数"
+
+#: ../metadata/core.xml.in.h:130
+msgid "Screenshot command line"
+msgstr "スクリーンショットのコマンドライン"
+
+#: ../metadata/core.xml.in.h:131
+msgid "Show Desktop"
+msgstr "デスクトップの表示"
+
+#: ../metadata/core.xml.in.h:132
+msgid "Show Main Menu"
+msgstr "メインメニューの表示"
+
+#: ../metadata/core.xml.in.h:133
+msgid "Show Run Application dialog"
+msgstr "\"アプリケーションの実行\"ダイアログの表示"
+
+#: ../metadata/core.xml.in.h:134
+msgid "Show the main menu"
+msgstr "メインメニューの表示"
+
+#: ../metadata/core.xml.in.h:135
+msgid "Slow Animations"
+msgstr "アニメーションのスロー再生"
+
+#: ../metadata/core.xml.in.h:136
+msgid "Smart mode"
+msgstr "スマートモード"
+
+#: ../metadata/core.xml.in.h:137
+msgid "Sync To VBlank"
+msgstr "垂直ブランクに同期化"
+
+#: ../metadata/core.xml.in.h:138
+msgid "Take a screenshot"
+msgstr "スクリーンショットを撮る"
+
+#: ../metadata/core.xml.in.h:139
+msgid "Take a screenshot of a window"
+msgstr "ウィンドウのスクリーンショットを撮る"
+
+#: ../metadata/core.xml.in.h:140
+msgid "Terminal command line"
+msgstr "端末起動コマンドライン"
+
+#: ../metadata/core.xml.in.h:141
+msgid "Texture Compression"
+msgstr "テクスチャ圧縮"
+
+#: ../metadata/core.xml.in.h:142
+msgid "Texture Filter"
+msgstr "テクスチャ・フィルタ"
+
+#: ../metadata/core.xml.in.h:143
+msgid "Texture filtering"
+msgstr "テクスチャ・フィルタ"
+
+#: ../metadata/core.xml.in.h:144
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "画面の再描画レート(回/秒)"
+
+#: ../metadata/core.xml.in.h:145
+msgid "Toggle Window Maximized"
+msgstr "ウィンドウの最大化/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:146
+msgid "Toggle Window Maximized Horizontally"
+msgstr "ウィンドウの水平方向最大化/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:147
+msgid "Toggle Window Maximized Vertically"
+msgstr "ウィンドウの垂直方向最大化/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:148
+msgid "Toggle Window Shaded"
+msgstr "ウィンドウのシェード/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:149
+msgid "Toggle active window maximized"
+msgstr "アクティブ・ウィンドウの最大化/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:150
+msgid "Toggle active window maximized horizontally"
+msgstr "アクティブ・ウィンドウの水平方向最大化/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:151
+msgid "Toggle active window maximized vertically"
+msgstr "アクティブ・ウィンドウの垂直方向最大化/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:152
+msgid "Toggle active window shaded"
+msgstr "アクティブ・ウィンドウのシェード/解除の切り替え"
+
+#: ../metadata/core.xml.in.h:153
+msgid "Toggle use of slow animations"
+msgstr "スロー再生アニメーション使用のオンオフ"
+
+#: ../metadata/core.xml.in.h:155
+msgid "Unmaximize active window"
+msgstr "アクティブ・ウィンドウの最大化解除"
+
+#: ../metadata/core.xml.in.h:156
+msgid "Unredirect Fullscreen Windows"
+msgstr "全画面ウィンドウのリダイレクトを解除"
+
+#: ../metadata/core.xml.in.h:157
+msgid "Use diffuse light when screen is transformed"
+msgstr "画面の変換時に拡散反射光を使用"
+
+#: ../metadata/core.xml.in.h:158
+msgid "Vertical Virtual Size"
+msgstr "垂直仮想サイズ"
+
+#: ../metadata/core.xml.in.h:159
+msgid "Very High"
+msgstr "非常に高"
+
+#: ../metadata/core.xml.in.h:160
+msgid "Which one of overlapping output devices should be preferred"
+msgstr "出力に重なり部分がある場合にどちらのデバイスが選好されるべきか"
+
+#: ../metadata/core.xml.in.h:162
+msgid "Window menu button binding"
+msgstr "ウィンドウメニューのボタン割り当て"
+
+#: ../metadata/core.xml.in.h:163
+msgid "Window menu key binding"
+msgstr "ウィンドウメニューのキー割り当て"
+
+#: ../metadata/core.xml.in.h:164
+msgid "Window screenshot command line"
+msgstr "ウィンドウ・スクリーンショットのコマンドライン"
+
+#: ../metadata/core.xml.in.h:165
+msgid "Windows that should be translucent by default"
+msgstr "デフォルトで半透明化の対象にするウィンドウ"
+
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+msgid "Acceleration"
+msgstr "加速度"
+
+#: ../metadata/cube.xml.in.h:2
+msgid "Adjust Image"
+msgstr "画像の調整"
+
+#: ../metadata/cube.xml.in.h:3
+msgid "Adjust top face image to rotation"
+msgstr "上面画像を回転に合わせる"
+
+#: ../metadata/cube.xml.in.h:4
+msgid "Advance to next slide"
+msgstr "次のスライドに進む"
+
+#: ../metadata/cube.xml.in.h:5
+msgid "Animate Skydome"
+msgstr "スカイドームをアニメーション化"
+
+#: ../metadata/cube.xml.in.h:6
+msgid "Animate skydome when rotating cube"
+msgstr "キューブの回転時にスカイドームをアニメーション化"
+
+#: ../metadata/cube.xml.in.h:7
+msgid "Automatic"
+msgstr "自動調整"
+
+#: ../metadata/cube.xml.in.h:8
+msgid "Color of top and bottom sides of the cube"
+msgstr "キューブの上部および下部の面のカラー"
+
+#: ../metadata/cube.xml.in.h:9
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+"スカイドームフォールバックグラデーションの下部カラーストップに使用する色"
+
+#: ../metadata/cube.xml.in.h:10
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+"スカイドームフォールバックグラデーションの上部カラーストップに使用する色"
+
+#: ../metadata/cube.xml.in.h:11
+msgid "Cube Color"
+msgstr "キューブの色"
+
+#: ../metadata/cube.xml.in.h:12
+msgid "Desktop Cube"
+msgstr "デスクトップ・キューブ"
+
+#: ../metadata/cube.xml.in.h:13
+msgid "Fold Acceleration"
+msgstr "展開加速度"
+
+#: ../metadata/cube.xml.in.h:14
+msgid "Fold Speed"
+msgstr "展開速度"
+
+#: ../metadata/cube.xml.in.h:15
+msgid "Fold Timestep"
+msgstr "展開描画の刻み時間"
+
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "高品質スケーリングが可能な場合ミップマップを生成"
+
+#: ../metadata/cube.xml.in.h:17
+msgid "Go back to previous slide"
+msgstr "前のスライドに戻る"
+
+#: ../metadata/cube.xml.in.h:18
+msgid "Image files"
+msgstr "画像ファイル"
+
+#: ../metadata/cube.xml.in.h:19
+msgid "Image to use as texture for the skydome"
+msgstr "スカイドームのテクスチャとして使用する画像"
+
+#: ../metadata/cube.xml.in.h:20
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr "マウスによる回転時のみキューブの透明化を開始"
+
+#: ../metadata/cube.xml.in.h:21
+msgid "Inside Cube"
+msgstr "キューブ内部"
+
+#: ../metadata/cube.xml.in.h:22
+msgid "Inside cube"
+msgstr "キューブ内部"
+
+#: ../metadata/cube.xml.in.h:23
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "キューブの上面に描画するPNGおよびSVGファイルのリスト"
+
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
+msgid "Multi Output Mode"
+msgstr "マルチ出力の形式"
+
+#: ../metadata/cube.xml.in.h:26
+msgid "Multiple cubes"
+msgstr "複数のキューブ"
+
+#: ../metadata/cube.xml.in.h:27
+msgid "Next Slide"
+msgstr "次のスライド"
+
+#: ../metadata/cube.xml.in.h:28
+msgid "One big cube"
+msgstr "１つの大きなキューブ"
+
+#: ../metadata/cube.xml.in.h:29
+msgid "Opacity During Rotation"
+msgstr "回転時の不透明度"
+
+#: ../metadata/cube.xml.in.h:30
+msgid "Opacity When Not Rotating"
+msgstr "非回転時の不透明度"
+
+#: ../metadata/cube.xml.in.h:31
+msgid "Opacity of desktop window during rotation."
+msgstr "回転時のデスクトップ・ウィンドウの不透明度"
+
+#: ../metadata/cube.xml.in.h:32
+msgid "Opacity of desktop window when not rotating."
+msgstr "非回転時のデスクトップ・ウィンドウの不透明度"
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Place windows on cube"
+msgstr "ウィンドウをキューブに配置"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Prev Slide"
+msgstr "前のスライド"
+
+#: ../metadata/cube.xml.in.h:35
+msgid "Render skydome"
+msgstr "スカイドームの描画"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Scale image"
+msgstr "画像を拡大"
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Scale images to cover top face of cube"
+msgstr "キューブの上面を覆うように画像を拡大"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr "複数の出力デバイス使用の場合におけるキューブ表示方法の選択"
+
+#: ../metadata/cube.xml.in.h:39
+msgid "Skydome"
+msgstr "スカイドーム"
+
+#: ../metadata/cube.xml.in.h:40
+msgid "Skydome Gradient End Color"
+msgstr "スカイドームグラデーション終了色"
+
+#: ../metadata/cube.xml.in.h:41
+msgid "Skydome Gradient Start Color"
+msgstr "スカイドームグラデーション開始色"
+
+#: ../metadata/cube.xml.in.h:42
+msgid "Skydome Image"
+msgstr "スカイドーム画像"
+
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
+msgid "Speed"
+msgstr "速度"
+
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
+msgid "Timestep"
+msgstr "描画の刻み時間"
+
+#: ../metadata/cube.xml.in.h:45
+msgid "Transparency Only on Mouse Rotate"
+msgstr "マウスによる回転時のみ透明化を使用"
+
+#: ../metadata/cube.xml.in.h:46
+msgid "Unfold"
+msgstr "展開"
+
+#: ../metadata/cube.xml.in.h:47
+msgid "Unfold cube"
+msgstr "キューブを展開"
+
+#: ../metadata/dbus.xml.in.h:1
+msgid "Dbus"
+msgstr "Dbus"
+
+#: ../metadata/dbus.xml.in.h:2
+msgid "Dbus Control Backend"
+msgstr "Dbus 制御バックエンド"
+
+#: ../metadata/decoration.xml.in.h:1
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr "装飾テキスチャ用ミップマップの生成を許可"
+
+#: ../metadata/decoration.xml.in.h:2
+msgid "Command"
+msgstr "コマンド"
+
+#: ../metadata/decoration.xml.in.h:3
+msgid "Decoration windows"
+msgstr "装飾適用ウィンドウ"
+
+#: ../metadata/decoration.xml.in.h:4
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr "デコレータ未動作の場合に実行されるデコレータ起動コマンドライン"
+
+#: ../metadata/decoration.xml.in.h:5
+msgid "Drop shadow X offset"
+msgstr "落とす影のオフセット X 座標"
+
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow Y offset"
+msgstr "落とす影のオフセット Y 座標"
+
+#: ../metadata/decoration.xml.in.h:7
+msgid "Drop shadow color"
+msgstr "落とす影の色"
+
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow opacity"
+msgstr "落とす影の不透明度"
+
+#: ../metadata/decoration.xml.in.h:9
+msgid "Drop shadow radius"
+msgstr "落とす影の半径"
+
+#: ../metadata/decoration.xml.in.h:11
+msgid "Shadow Color"
+msgstr "影の色"
+
+#: ../metadata/decoration.xml.in.h:12
+msgid "Shadow Offset X"
+msgstr "影オフセット X 座標"
+
+#: ../metadata/decoration.xml.in.h:13
+msgid "Shadow Offset Y"
+msgstr "影オフセット Y 座標"
+
+#: ../metadata/decoration.xml.in.h:14
+msgid "Shadow Opacity"
+msgstr "影の不透明度"
+
+#: ../metadata/decoration.xml.in.h:15
+msgid "Shadow Radius"
+msgstr "影の半径"
+
+#: ../metadata/decoration.xml.in.h:16
+msgid "Shadow windows"
+msgstr "影付けウィンドウ"
+
+#: ../metadata/decoration.xml.in.h:17
+msgid "Window Decoration"
+msgstr "ウィンドウの装飾"
+
+#: ../metadata/decoration.xml.in.h:18
+msgid "Window decorations"
+msgstr "ウィンドウを装飾"
+
+#: ../metadata/decoration.xml.in.h:19
+msgid "Windows that should be decorated"
+msgstr "装飾の適用対象ウィンドウ"
+
+#: ../metadata/decoration.xml.in.h:20
+msgid "Windows that should have a shadow"
+msgstr "影を付ける対象ウィンドウ"
+
+#: ../metadata/fade.xml.in.h:1
+msgid "Fade On Minimize/Open/Close"
+msgstr "最小化/開く/閉じる 時にフェード"
+
+#: ../metadata/fade.xml.in.h:2
+msgid "Fade Speed"
+msgstr "フェード速度"
+
+#: ../metadata/fade.xml.in.h:3
+msgid "Fade effect on minimize/open/close window events"
+msgstr "最小化/開く/閉じる イベント時のフェード効果"
+
+#: ../metadata/fade.xml.in.h:4
+msgid "Fade effect on system beep"
+msgstr "システムビープ音時のフェード効果"
+
+#: ../metadata/fade.xml.in.h:5
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr "ウィンドウが開かれた時フェードイン、閉じた時フェードアウト"
+
+#: ../metadata/fade.xml.in.h:6
+msgid "Fade windows"
+msgstr "フェード・ウィンドウ"
+
+#: ../metadata/fade.xml.in.h:7
+msgid "Fading Windows"
+msgstr "ウィンドウのフェード"
+
+#: ../metadata/fade.xml.in.h:8
+msgid "Fullscreen Visual Bell"
+msgstr "全画面効果による視覚ベル"
+
+#: ../metadata/fade.xml.in.h:9
+msgid "Fullscreen fade effect on system beep"
+msgstr "システムビープ音イベント時の全画面フェード効果"
+
+#: ../metadata/fade.xml.in.h:10
+msgid "Visual Bell"
+msgstr "視覚ベル"
+
+#: ../metadata/fade.xml.in.h:11
+msgid "Window fade speed"
+msgstr "ウィンドウのフェード速度"
+
+#: ../metadata/fade.xml.in.h:12
+msgid "Windows that should be fading"
+msgstr "フェードさせる対象ウィンドウ"
+
+#: ../metadata/fs.xml.in.h:1
+msgid "Mount Point"
+msgstr "マウントポイント"
+
+#: ../metadata/fs.xml.in.h:2
+msgid "Mount point"
+msgstr "マウントポイント"
+
+#: ../metadata/fs.xml.in.h:3
+msgid "Userspace File System"
+msgstr "ユーザ空間ファイルシステム"
+
+#: ../metadata/fs.xml.in.h:4
+msgid "Userspace file system"
+msgstr "ユーザ空間ファイルシステム"
+
+#: ../metadata/gconf.xml.in.h:1
+msgid "GConf"
+msgstr "GConf"
+
+#: ../metadata/gconf.xml.in.h:2
+msgid "GConf Control Backend"
+msgstr "GConf 制御バックエンド"
+
+#: ../metadata/glib.xml.in.h:1
+msgid "GLib"
+msgstr "GLib"
+
+#: ../metadata/glib.xml.in.h:2
+msgid "GLib main loop support"
+msgstr "GLib main loop サポート"
+
+#: ../metadata/ini.xml.in.h:1
 #, fuzzy
-#~ msgid "Ini"
-#~ msgstr "Ini"
-
-#~ msgid "Ini Flat File Backend"
-#~ msgstr "Flat File バックエンドの開始"
-
-#~ msgid "File change notification plugin"
-#~ msgstr "ファイル変更通知プラグイン"
-
-#~ msgid "Inotify"
-#~ msgstr "Inotify"
-
-#~ msgid "Kconfig"
-#~ msgstr "Kconfig"
-
-#~ msgid "Kconfig Control Backend"
-#~ msgstr "Kconfig 制御バックエンド"
-
-#~ msgid "Minimize Effect"
-#~ msgstr "最小化時の効果"
-
-#~ msgid "Minimize Windows"
-#~ msgstr "最小化時効果ウィンドウ"
-
-#~ msgid "Minimize speed"
-#~ msgstr "最小化速度"
-
-#~ msgid "Minimize timestep"
-#~ msgstr "最小化の描画刻み時間"
-
-#~ msgid "Shade Resistance"
-#~ msgstr "シェード抵抗"
-
-#~ msgid "Shade resistance"
-#~ msgstr "シェード抵抗"
-
-#~ msgid "Transform windows when they are minimized and unminimized"
-#~ msgstr "最小化および最小化解除時のウィンドウの拡縮"
-
-#~ msgid "Windows that should be transformed when minimized"
-#~ msgstr "最小化の際に縮尺させる対象ウィンドウ"
-
-#~ msgid "Constrain Y"
-#~ msgstr "Ｙ 座標制約"
-
-#~ msgid "Constrain Y coordinate to workspace area"
-#~ msgstr "Y 座標をワークスペースエリアに制約"
-
-#~ msgid ""
-#~ "Do not update the server-side position of windows until finished moving"
-#~ msgstr "ウィンドウの移動完了までXサーバ側での配置位置を更新しない"
-
-#~ msgid "Initiate Window Move"
-#~ msgstr "ウィンドウの移動開始"
-
-#~ msgid "Lazy Positioning"
-#~ msgstr "緩慢な位置取り"
-
-#~ msgid "Move Window"
-#~ msgstr "ウィンドウの移動"
-
-#~ msgid "Move window"
-#~ msgstr "ウィンドウの移動"
-
-#~ msgid "Opacity"
-#~ msgstr "不透明度"
-
-#~ msgid "Opacity level of moving windows"
-#~ msgstr "移動ウィンドウの不透明度"
-
-#~ msgid "Snapoff and auto unmaximized maximized windows when dragging"
-#~ msgstr "最大化ウィンドウのドラッグ時、スナップを解除して最大化を自動解除"
-
-#~ msgid "Snapoff maximized windows"
-#~ msgstr "最大化したウィンドウのスナップ解除"
-
-#~ msgid "Start moving window"
-#~ msgstr "ウィンドウの移動を開始"
-
-#~ msgid "Algorithm to use for window placement"
-#~ msgstr "ウィンドウ配置に使用するアルゴリズム"
-
-#~ msgid "Cascade"
-#~ msgstr "カスケード"
-
-#~ msgid "Centered"
-#~ msgstr "中央"
-
-#~ msgid "Force Placement Windows"
-#~ msgstr "強制配置ウィンドウ"
-
-#~ msgid "Horizontal viewport positions"
-#~ msgstr "水平ビューポート位置"
-
-#~ msgid "Maximize"
-#~ msgstr "最大化"
-
-#~ msgid "Place Windows"
-#~ msgstr "ウィンドウの配置"
-
-#~ msgid "Place across all outputs"
-#~ msgstr "すべての出力デバイスにわたって配置"
-
-#~ msgid "Place windows at appropriate positions when mapped"
-#~ msgstr "ウィンドウが開かれた際の適切な位置への配置"
-
-#~ msgid "Placement Mode"
-#~ msgstr "配置形式"
-
-#~ msgid "Positioned windows"
-#~ msgstr "固定位置ウィンドウ"
-
-#~ msgid "Random"
-#~ msgstr "ランダム"
-
-#~ msgid ""
-#~ "Selects how window placement should behave if multiple outputs are "
-#~ "selected"
-#~ msgstr "マルチ出力が選択されている場合の、ウィンドウ配置の振る舞いの選択"
-
-#~ msgid "Smart"
-#~ msgstr "スマート"
-
-#~ msgid "Use active output device"
-#~ msgstr "アクティブ状態の出力デバイスを使用"
-
-#~ msgid "Use output device of focussed window"
-#~ msgstr "フォーカス・ウィンドウの出力デバイスを使用"
-
-#~ msgid "Use output device with pointer"
-#~ msgstr "ポインタが置かれている出力デバイスを使用"
-
-#~ msgid "Vertical viewport positions"
-#~ msgstr "垂直ビューポート位置"
-
-#~ msgid "Viewport positioned windows"
-#~ msgstr "固定ビューポート・ウィンドウ"
-
-#~ msgid "Window placement workarounds"
-#~ msgstr "モーダルダイアログ向けの配置問題回避策"
-
-#~ msgid "Windows that should be positioned by default"
-#~ msgstr "デフォルトで特定位置に配置するウィンドウ"
-
-#~ msgid "Windows that should be positioned in specific viewports by default"
-#~ msgstr "デフォルトで特定ビューポートに配置するウィンドウ"
-
-#~ msgid ""
-#~ "Windows that should forcedly be placed, even if they indicate the window "
-#~ "manager should avoid placing them."
-#~ msgstr ""
-#~ "強制的に配置させるウィンドウ。ウィンドウ・マネージャに配置の対象外とするよ"
-#~ "うにウィンドウが指示している場合でも配置します。"
-
-#~ msgid "Workarounds"
-#~ msgstr "回避策"
-
-#~ msgid "X Positions"
-#~ msgstr "X 位置"
-
-#~ msgid "X Viewport Positions"
-#~ msgstr "X ビューポート位置"
-
-#~ msgid "X position values"
-#~ msgstr "X 位置の値"
-
-#~ msgid "Y Positions"
-#~ msgstr "Y 位置"
-
-#~ msgid "Y Viewport Positions"
-#~ msgstr "Y ビューポート位置"
-
-#~ msgid "Y position values"
-#~ msgstr "Y 位置の値"
-
-#~ msgid "Png"
-#~ msgstr "Png"
-
-#~ msgid "Png image loader"
-#~ msgstr "Png 画像読み込み"
-
-#~ msgid "Regex Matching"
-#~ msgstr "正規表現マッチング"
-
-#~ msgid "Regex window matching"
-#~ msgstr "正規表現による対象ウィンドウのマッチング"
-
-#~ msgid "Border Color"
-#~ msgstr "境界線の色"
-
-#~ msgid "Border color used for outline and rectangle resize modes"
-#~ msgstr "輪郭や矩形のサイズ変更描画形式で使用する境界線の色"
-
-#~ msgid "Default Resize Mode"
-#~ msgstr "デフォルトのサイズ変更形式"
-
-#~ msgid "Default mode used for window resizing"
-#~ msgstr "ウィンドウのサイズ変更に使用するデフォルトの描画形式"
-
-#~ msgid "Fill Color"
-#~ msgstr "塗り色"
-
-#~ msgid "Fill color used for rectangle resize mode"
-#~ msgstr "矩形のサイズ変更描画形式に使用する塗り色"
-
-#~ msgid "Initiate Normal Window Resize"
-#~ msgstr "通常形式のサイズ変更開始"
-
-#~ msgid "Initiate Outline Window Resize"
-#~ msgstr "輪郭形式のサイズ変更開始"
-
-#~ msgid "Initiate Rectangle Window Resize"
-#~ msgstr "矩形形式のサイズ変更開始"
-
-#~ msgid "Initiate Stretch Window Resize"
-#~ msgstr "伸縮形式のサイズ変更を開始"
-
-#~ msgid "Initiate Window Resize"
-#~ msgstr "ウィンドウのサイズ変更開始"
-
-#~ msgid "Normal"
-#~ msgstr "通常"
-
-#~ msgid "Normal Resize Windows"
-#~ msgstr "通常サイズ変更ウィンドウ"
-
-#~ msgid "Outline"
-#~ msgstr "輪郭"
-
-#~ msgid "Outline Resize Windows"
-#~ msgstr "輪郭サイズ変更ウィンドウ"
-
-#~ msgid "Rectangle"
-#~ msgstr "矩形"
-
-#~ msgid "Rectangle Resize Windows"
-#~ msgstr "矩形サイズ変更ウィンドウ"
-
-#~ msgid "Resize Window"
-#~ msgstr "ウィンドウのサイズ変更"
-
-#~ msgid "Resize window"
-#~ msgstr "ウィンドウのサイズ変更"
-
-#~ msgid "Start resizing window"
-#~ msgstr "ウィンドウのサイズ変更を開始"
-
-#~ msgid "Start resizing window by stretching it"
-#~ msgstr "伸縮形式のウィンドウのサイズ変更を開始"
-
-#~ msgid "Start resizing window normally"
-#~ msgstr "通常形式のウィンドウのサイズ変更を開始"
-
-#~ msgid "Start resizing window with outline"
-#~ msgstr "輪郭形式のウィンドウのサイズ変更を開始"
-
-#~ msgid "Start resizing window with rectangle"
-#~ msgstr "矩形形式のウィンドウのサイズ変更を開始"
-
-#~ msgid "Stretch"
-#~ msgstr "伸縮"
-
-#~ msgid "Stretch Resize Windows"
-#~ msgstr "伸縮サイズ変更ウィンドウ"
-
-#~ msgid "Windows that normal resize should be used for"
-#~ msgstr "サイズ変更描画に通常形式を使用するウィンドウ"
-
-#~ msgid "Windows that outline resize should be used for"
-#~ msgstr "サイズ変更描画に輪郭形式を使用するウィンドウ"
-
-#~ msgid "Windows that rectangle resize should be used for"
-#~ msgstr "サイズ変更描画に矩形形式を使用するウィンドウ"
-
-#~ msgid "Windows that stretch resize should be used for"
-#~ msgstr "サイズ変更描画に伸縮形式を使用するウィンドウ"
-
-#~ msgid "Edge Flip DnD"
-#~ msgstr "エッジへのドラッグ＆ドロップでめくる"
-
-#~ msgid "Edge Flip Move"
-#~ msgstr "エッジへの移動でめくる"
-
-#~ msgid "Edge Flip Pointer"
-#~ msgstr "エッジへのポインタ移動でめくる"
-
-#~ msgid "Flip Time"
-#~ msgstr "めくり開始時間"
-
-#~ msgid "Flip to left viewport and warp pointer"
-#~ msgstr "左ビューポートにめくり、ポインタをワープ"
-
-#~ msgid "Flip to next viewport when dragging object to screen edge"
-#~ msgstr "オブジェクトを画面端にドラッグした際に、次のビューポートにめくる"
-
-#~ msgid "Flip to next viewport when moving pointer to screen edge"
-#~ msgstr "ポインタを画面端に移動した際に、次のビューポートにめくる"
-
-#~ msgid "Flip to next viewport when moving window to screen edge"
-#~ msgstr "ウィンドウを画面端に移動した際に、次のビューポートにめくる"
-
-#~ msgid "Flip to right viewport and warp pointer"
-#~ msgstr "右ビューポートにめくり、ポインタをワープ"
-
-#~ msgid "Invert Y axis for pointer movement"
-#~ msgstr "ポインタ移動の Y 軸を反転"
-
-#~ msgid "Pointer Invert Y"
-#~ msgstr "ポインタ操作の Y 反転"
-
-#~ msgid "Pointer Sensitivity"
-#~ msgstr "ポインタ感度"
-
-#~ msgid "Raise on rotate"
-#~ msgstr "回転時に前面に上げる"
-
-#~ msgid "Raise window when rotating"
-#~ msgstr "回転時にウィンドウを上げる"
-
-#~ msgid "Rotate Cube"
-#~ msgstr "キューブの回転"
-
-#~ msgid "Rotate Flip Left"
-#~ msgstr "左にめくり回転"
-
-#~ msgid "Rotate Flip Right"
-#~ msgstr "右にめくり回転"
-
-#~ msgid "Rotate Left"
-#~ msgstr "左に回転"
-
-#~ msgid "Rotate Left with Window"
-#~ msgstr "左に回転（ウィンドウと一緒に）"
-
-#~ msgid "Rotate Right"
-#~ msgstr "右に回転"
-
-#~ msgid "Rotate Right with Window"
-#~ msgstr "右に回転（ウィンドウと一緒に）"
+msgid "Ini"
+msgstr "Ini"
+
+#: ../metadata/ini.xml.in.h:2
+msgid "Ini Flat File Backend"
+msgstr "Flat File バックエンドの開始"
+
+#: ../metadata/inotify.xml.in.h:1
+msgid "File change notification plugin"
+msgstr "ファイル変更通知プラグイン"
+
+#: ../metadata/inotify.xml.in.h:2
+msgid "Inotify"
+msgstr "Inotify"
+
+#: ../metadata/kconfig.xml.in.h:1
+msgid "Kconfig"
+msgstr "Kconfig"
+
+#: ../metadata/kconfig.xml.in.h:2
+msgid "Kconfig Control Backend"
+msgstr "Kconfig 制御バックエンド"
+
+#: ../metadata/minimize.xml.in.h:1
+msgid "Minimize Effect"
+msgstr "最小化時の効果"
+
+#: ../metadata/minimize.xml.in.h:2
+msgid "Minimize Windows"
+msgstr "最小化時効果ウィンドウ"
+
+#: ../metadata/minimize.xml.in.h:3
+msgid "Minimize speed"
+msgstr "最小化速度"
+
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize timestep"
+msgstr "最小化の描画刻み時間"
+
+#: ../metadata/minimize.xml.in.h:5
+msgid "Shade Resistance"
+msgstr "シェード抵抗"
+
+#: ../metadata/minimize.xml.in.h:6
+msgid "Shade resistance"
+msgstr "シェード抵抗"
+
+#: ../metadata/minimize.xml.in.h:9
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "最小化および最小化解除時のウィンドウの拡縮"
+
+#: ../metadata/minimize.xml.in.h:10
+msgid "Windows that should be transformed when minimized"
+msgstr "最小化の際に縮尺させる対象ウィンドウ"
+
+#: ../metadata/move.xml.in.h:1
+msgid "Constrain Y"
+msgstr "Ｙ 座標制約"
+
+#: ../metadata/move.xml.in.h:2
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Y 座標をワークスペースエリアに制約"
+
+#: ../metadata/move.xml.in.h:3
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr "ウィンドウの移動完了までXサーバ側での配置位置を更新しない"
+
+#: ../metadata/move.xml.in.h:4
+msgid "Initiate Window Move"
+msgstr "ウィンドウの移動開始"
+
+#: ../metadata/move.xml.in.h:5
+msgid "Lazy Positioning"
+msgstr "緩慢な位置取り"
+
+#: ../metadata/move.xml.in.h:6
+msgid "Move Window"
+msgstr "ウィンドウの移動"
+
+#: ../metadata/move.xml.in.h:7
+msgid "Move window"
+msgstr "ウィンドウの移動"
+
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:18
+msgid "Opacity"
+msgstr "不透明度"
+
+#: ../metadata/move.xml.in.h:9
+msgid "Opacity level of moving windows"
+msgstr "移動ウィンドウの不透明度"
+
+#: ../metadata/move.xml.in.h:10
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr "最大化ウィンドウのドラッグ時、スナップを解除して最大化を自動解除"
+
+#: ../metadata/move.xml.in.h:11
+msgid "Snapoff maximized windows"
+msgstr "最大化したウィンドウのスナップ解除"
+
+#: ../metadata/move.xml.in.h:12
+msgid "Start moving window"
+msgstr "ウィンドウの移動を開始"
+
+#: ../metadata/place.xml.in.h:1
+msgid "Algorithm to use for window placement"
+msgstr "ウィンドウ配置に使用するアルゴリズム"
+
+#: ../metadata/place.xml.in.h:2
+msgid "Cascade"
+msgstr "カスケード"
+
+#: ../metadata/place.xml.in.h:3
+msgid "Centered"
+msgstr "中央"
+
+#: ../metadata/place.xml.in.h:4
+msgid "Force Placement Windows"
+msgstr "強制配置ウィンドウ"
+
+#: ../metadata/place.xml.in.h:5
+msgid "Horizontal viewport positions"
+msgstr "水平ビューポート位置"
+
+#: ../metadata/place.xml.in.h:6
+msgid "Maximize"
+msgstr "最大化"
+
+#: ../metadata/place.xml.in.h:8
+msgid "Place Windows"
+msgstr "ウィンドウの配置"
+
+#: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr "すべての出力デバイスにわたって配置"
+
+#: ../metadata/place.xml.in.h:10
+msgid "Place windows at appropriate positions when mapped"
+msgstr "ウィンドウが開かれた際の適切な位置への配置"
+
+#: ../metadata/place.xml.in.h:11
+msgid "Placement Mode"
+msgstr "配置形式"
+
+#: ../metadata/place.xml.in.h:12
+msgid "Positioned windows"
+msgstr "固定位置ウィンドウ"
+
+#: ../metadata/place.xml.in.h:13
+msgid "Random"
+msgstr "ランダム"
+
+#: ../metadata/place.xml.in.h:14
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr "マルチ出力が選択されている場合の、ウィンドウ配置の振る舞いの選択"
+
+#: ../metadata/place.xml.in.h:15
+msgid "Smart"
+msgstr "スマート"
+
+#: ../metadata/place.xml.in.h:16
+msgid "Use active output device"
+msgstr "アクティブ状態の出力デバイスを使用"
+
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr "フォーカス・ウィンドウの出力デバイスを使用"
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr "ポインタが置かれている出力デバイスを使用"
+
+#: ../metadata/place.xml.in.h:19
+msgid "Vertical viewport positions"
+msgstr "垂直ビューポート位置"
+
+#: ../metadata/place.xml.in.h:20
+msgid "Viewport positioned windows"
+msgstr "固定ビューポート・ウィンドウ"
+
+#: ../metadata/place.xml.in.h:21
+msgid "Window placement workarounds"
+msgstr "モーダルダイアログ向けの配置問題回避策"
+
+#: ../metadata/place.xml.in.h:22
+msgid "Windows that should be positioned by default"
+msgstr "デフォルトで特定位置に配置するウィンドウ"
+
+#: ../metadata/place.xml.in.h:23
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr "デフォルトで特定ビューポートに配置するウィンドウ"
+
+#: ../metadata/place.xml.in.h:24
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+"強制的に配置させるウィンドウ。ウィンドウ・マネージャに配置の対象外とするよう"
+"にウィンドウが指示している場合でも配置します。"
+
+#: ../metadata/place.xml.in.h:25
+msgid "Workarounds"
+msgstr "回避策"
+
+#: ../metadata/place.xml.in.h:26
+msgid "X Positions"
+msgstr "X 位置"
+
+#: ../metadata/place.xml.in.h:27
+msgid "X Viewport Positions"
+msgstr "X ビューポート位置"
+
+#: ../metadata/place.xml.in.h:28
+msgid "X position values"
+msgstr "X 位置の値"
+
+#: ../metadata/place.xml.in.h:29
+msgid "Y Positions"
+msgstr "Y 位置"
+
+#: ../metadata/place.xml.in.h:30
+msgid "Y Viewport Positions"
+msgstr "Y ビューポート位置"
+
+#: ../metadata/place.xml.in.h:31
+msgid "Y position values"
+msgstr "Y 位置の値"
+
+#: ../metadata/png.xml.in.h:1
+msgid "Png"
+msgstr "Png"
+
+#: ../metadata/png.xml.in.h:2
+msgid "Png image loader"
+msgstr "Png 画像読み込み"
+
+#: ../metadata/regex.xml.in.h:1
+msgid "Regex Matching"
+msgstr "正規表現マッチング"
+
+#: ../metadata/regex.xml.in.h:2
+msgid "Regex window matching"
+msgstr "正規表現による対象ウィンドウのマッチング"
+
+#: ../metadata/resize.xml.in.h:1
+msgid "Border Color"
+msgstr "境界線の色"
+
+#: ../metadata/resize.xml.in.h:2
+msgid "Border color used for outline and rectangle resize modes"
+msgstr "輪郭や矩形のサイズ変更描画形式で使用する境界線の色"
+
+#: ../metadata/resize.xml.in.h:3
+msgid "Default Resize Mode"
+msgstr "デフォルトのサイズ変更形式"
+
+#: ../metadata/resize.xml.in.h:4
+msgid "Default mode used for window resizing"
+msgstr "ウィンドウのサイズ変更に使用するデフォルトの描画形式"
+
+#: ../metadata/resize.xml.in.h:5
+msgid "Fill Color"
+msgstr "塗り色"
+
+#: ../metadata/resize.xml.in.h:6
+msgid "Fill color used for rectangle resize mode"
+msgstr "矩形のサイズ変更描画形式に使用する塗り色"
+
+#: ../metadata/resize.xml.in.h:7
+msgid "Initiate Normal Window Resize"
+msgstr "通常形式のサイズ変更開始"
+
+#: ../metadata/resize.xml.in.h:8
+msgid "Initiate Outline Window Resize"
+msgstr "輪郭形式のサイズ変更開始"
+
+#: ../metadata/resize.xml.in.h:9
+msgid "Initiate Rectangle Window Resize"
+msgstr "矩形形式のサイズ変更開始"
+
+#: ../metadata/resize.xml.in.h:10
+msgid "Initiate Stretch Window Resize"
+msgstr "伸縮形式のサイズ変更を開始"
+
+#: ../metadata/resize.xml.in.h:11
+msgid "Initiate Window Resize"
+msgstr "ウィンドウのサイズ変更開始"
+
+#: ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "通常"
+
+#: ../metadata/resize.xml.in.h:13
+msgid "Normal Resize Windows"
+msgstr "通常サイズ変更ウィンドウ"
+
+#: ../metadata/resize.xml.in.h:14
+msgid "Outline"
+msgstr "輪郭"
+
+#: ../metadata/resize.xml.in.h:15
+msgid "Outline Resize Windows"
+msgstr "輪郭サイズ変更ウィンドウ"
+
+#: ../metadata/resize.xml.in.h:16
+msgid "Rectangle"
+msgstr "矩形"
+
+#: ../metadata/resize.xml.in.h:17
+msgid "Rectangle Resize Windows"
+msgstr "矩形サイズ変更ウィンドウ"
+
+#: ../metadata/resize.xml.in.h:18
+msgid "Resize Window"
+msgstr "ウィンドウのサイズ変更"
+
+#: ../metadata/resize.xml.in.h:19
+msgid "Resize window"
+msgstr "ウィンドウのサイズ変更"
+
+#: ../metadata/resize.xml.in.h:20
+msgid "Start resizing window"
+msgstr "ウィンドウのサイズ変更を開始"
+
+#: ../metadata/resize.xml.in.h:21
+msgid "Start resizing window by stretching it"
+msgstr "伸縮形式のウィンドウのサイズ変更を開始"
+
+#: ../metadata/resize.xml.in.h:22
+msgid "Start resizing window normally"
+msgstr "通常形式のウィンドウのサイズ変更を開始"
+
+#: ../metadata/resize.xml.in.h:23
+msgid "Start resizing window with outline"
+msgstr "輪郭形式のウィンドウのサイズ変更を開始"
+
+#: ../metadata/resize.xml.in.h:24
+msgid "Start resizing window with rectangle"
+msgstr "矩形形式のウィンドウのサイズ変更を開始"
+
+#: ../metadata/resize.xml.in.h:25
+msgid "Stretch"
+msgstr "伸縮"
+
+#: ../metadata/resize.xml.in.h:26
+msgid "Stretch Resize Windows"
+msgstr "伸縮サイズ変更ウィンドウ"
+
+#: ../metadata/resize.xml.in.h:27
+msgid "Windows that normal resize should be used for"
+msgstr "サイズ変更描画に通常形式を使用するウィンドウ"
+
+#: ../metadata/resize.xml.in.h:28
+msgid "Windows that outline resize should be used for"
+msgstr "サイズ変更描画に輪郭形式を使用するウィンドウ"
+
+#: ../metadata/resize.xml.in.h:29
+msgid "Windows that rectangle resize should be used for"
+msgstr "サイズ変更描画に矩形形式を使用するウィンドウ"
+
+#: ../metadata/resize.xml.in.h:30
+msgid "Windows that stretch resize should be used for"
+msgstr "サイズ変更描画に伸縮形式を使用するウィンドウ"
+
+#: ../metadata/rotate.xml.in.h:2
+msgid "Edge Flip DnD"
+msgstr "エッジへのドラッグ＆ドロップでめくる"
+
+#: ../metadata/rotate.xml.in.h:3
+msgid "Edge Flip Move"
+msgstr "エッジへの移動でめくる"
+
+#: ../metadata/rotate.xml.in.h:4
+msgid "Edge Flip Pointer"
+msgstr "エッジへのポインタ移動でめくる"
+
+#: ../metadata/rotate.xml.in.h:5
+msgid "Flip Time"
+msgstr "めくり開始時間"
+
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to left viewport and warp pointer"
+msgstr "左ビューポートにめくり、ポインタをワープ"
+
+#: ../metadata/rotate.xml.in.h:7
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr "オブジェクトを画面端にドラッグした際に、次のビューポートにめくる"
+
+#: ../metadata/rotate.xml.in.h:8
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr "ポインタを画面端に移動した際に、次のビューポートにめくる"
+
+#: ../metadata/rotate.xml.in.h:9
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr "ウィンドウを画面端に移動した際に、次のビューポートにめくる"
+
+#: ../metadata/rotate.xml.in.h:10
+msgid "Flip to right viewport and warp pointer"
+msgstr "右ビューポートにめくり、ポインタをワープ"
+
+#: ../metadata/rotate.xml.in.h:12
+msgid "Invert Y axis for pointer movement"
+msgstr "ポインタ移動の Y 軸を反転"
+
+#: ../metadata/rotate.xml.in.h:13
+msgid "Pointer Invert Y"
+msgstr "ポインタ操作の Y 反転"
+
+#: ../metadata/rotate.xml.in.h:14
+msgid "Pointer Sensitivity"
+msgstr "ポインタ感度"
+
+#: ../metadata/rotate.xml.in.h:15
+msgid "Raise on rotate"
+msgstr "回転時に前面に上げる"
+
+#: ../metadata/rotate.xml.in.h:16
+msgid "Raise window when rotating"
+msgstr "回転時にウィンドウを上げる"
+
+#: ../metadata/rotate.xml.in.h:17
+msgid "Rotate Cube"
+msgstr "キューブの回転"
+
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate Flip Left"
+msgstr "左にめくり回転"
+
+#: ../metadata/rotate.xml.in.h:19
+msgid "Rotate Flip Right"
+msgstr "右にめくり回転"
+
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate Left"
+msgstr "左に回転"
+
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Left with Window"
+msgstr "左に回転（ウィンドウと一緒に）"
+
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate Right"
+msgstr "右に回転"
+
+#: ../metadata/rotate.xml.in.h:23
+msgid "Rotate Right with Window"
+msgstr "右に回転（ウィンドウと一緒に）"
 
 # ※ バインドそのものではなく単なるその見出し。CCSMはアルファベットでソートして表示するので日本語だと変な位置に表示され紛らわしい。
-#~ msgid "Rotate To"
-#~ msgstr "指定先に回転"
+#: ../metadata/rotate.xml.in.h:24
+msgid "Rotate To"
+msgstr "指定先に回転"
 
-#~ msgid "Rotate To Face 1"
-#~ msgstr "面 1 に回転"
+#: ../metadata/rotate.xml.in.h:25
+msgid "Rotate To Face 1"
+msgstr "面 1 に回転"
 
-#~ msgid "Rotate To Face 1 with Window"
-#~ msgstr "面 1 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:26
+msgid "Rotate To Face 1 with Window"
+msgstr "面 1 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 10"
-#~ msgstr "面 10 に回転"
+#: ../metadata/rotate.xml.in.h:27
+msgid "Rotate To Face 10"
+msgstr "面 10 に回転"
 
-#~ msgid "Rotate To Face 10 with Window"
-#~ msgstr "面 10 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:28
+msgid "Rotate To Face 10 with Window"
+msgstr "面 10 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 11"
-#~ msgstr "面 11 に回転"
+#: ../metadata/rotate.xml.in.h:29
+msgid "Rotate To Face 11"
+msgstr "面 11 に回転"
 
-#~ msgid "Rotate To Face 11 with Window"
-#~ msgstr "面 11 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:30
+msgid "Rotate To Face 11 with Window"
+msgstr "面 11 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 12"
-#~ msgstr "面 12 に回転"
+#: ../metadata/rotate.xml.in.h:31
+msgid "Rotate To Face 12"
+msgstr "面 12 に回転"
 
-#~ msgid "Rotate To Face 12 with Window"
-#~ msgstr "面 12 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:32
+msgid "Rotate To Face 12 with Window"
+msgstr "面 12 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 2"
-#~ msgstr "面 2 に回転"
+#: ../metadata/rotate.xml.in.h:33
+msgid "Rotate To Face 2"
+msgstr "面 2 に回転"
 
-#~ msgid "Rotate To Face 2 with Window"
-#~ msgstr "面 2 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:34
+msgid "Rotate To Face 2 with Window"
+msgstr "面 2 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 3"
-#~ msgstr "面 3 に回転"
+#: ../metadata/rotate.xml.in.h:35
+msgid "Rotate To Face 3"
+msgstr "面 3 に回転"
 
-#~ msgid "Rotate To Face 3 with Window"
-#~ msgstr "面 3 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:36
+msgid "Rotate To Face 3 with Window"
+msgstr "面 3 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 4"
-#~ msgstr "面 4 に回転"
+#: ../metadata/rotate.xml.in.h:37
+msgid "Rotate To Face 4"
+msgstr "面 4 に回転"
 
-#~ msgid "Rotate To Face 4 with Window"
-#~ msgstr "面 4 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:38
+msgid "Rotate To Face 4 with Window"
+msgstr "面 4 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 5"
-#~ msgstr "面 5 に回転"
+#: ../metadata/rotate.xml.in.h:39
+msgid "Rotate To Face 5"
+msgstr "面 5 に回転"
 
-#~ msgid "Rotate To Face 5 with Window"
-#~ msgstr "面 5 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:40
+msgid "Rotate To Face 5 with Window"
+msgstr "面 5 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 6"
-#~ msgstr "面 6 に回転"
+#: ../metadata/rotate.xml.in.h:41
+msgid "Rotate To Face 6"
+msgstr "面 6 に回転"
 
-#~ msgid "Rotate To Face 6 with Window"
-#~ msgstr "面 6 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:42
+msgid "Rotate To Face 6 with Window"
+msgstr "面 6 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 7"
-#~ msgstr "面 7 に回転"
+#: ../metadata/rotate.xml.in.h:43
+msgid "Rotate To Face 7"
+msgstr "面 7 に回転"
 
-#~ msgid "Rotate To Face 7 with Window"
-#~ msgstr "面 7 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:44
+msgid "Rotate To Face 7 with Window"
+msgstr "面 7 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 8"
-#~ msgstr "面 8 に回転"
+#: ../metadata/rotate.xml.in.h:45
+msgid "Rotate To Face 8"
+msgstr "面 8 に回転"
 
-#~ msgid "Rotate To Face 8 with Window"
-#~ msgstr "面 8 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:46
+msgid "Rotate To Face 8 with Window"
+msgstr "面 8 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate To Face 9"
-#~ msgstr "面 9 に回転"
+#: ../metadata/rotate.xml.in.h:47
+msgid "Rotate To Face 9"
+msgstr "面 9 に回転"
 
-#~ msgid "Rotate To Face 9 with Window"
-#~ msgstr "面 9 に回転（ウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:48
+msgid "Rotate To Face 9 with Window"
+msgstr "面 9 に回転（ウィンドウと一緒に）"
 
-#~ msgid "Rotate desktop cube"
-#~ msgstr "デスクトップ・キューブの回転"
+#: ../metadata/rotate.xml.in.h:49
+msgid "Rotate desktop cube"
+msgstr "デスクトップ・キューブの回転"
 
-#~ msgid "Rotate left"
-#~ msgstr "左に回転"
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate left"
+msgstr "左に回転"
 
-#~ msgid "Rotate left and bring active window along"
-#~ msgstr "左に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:51
+msgid "Rotate left and bring active window along"
+msgstr "左に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate right"
-#~ msgstr "右に回転"
+#: ../metadata/rotate.xml.in.h:52
+msgid "Rotate right"
+msgstr "右に回転"
 
-#~ msgid "Rotate right and bring active window along"
-#~ msgstr "右に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:53
+msgid "Rotate right and bring active window along"
+msgstr "右に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 1"
-#~ msgstr "面 1 に回転"
+#: ../metadata/rotate.xml.in.h:54
+msgid "Rotate to face 1"
+msgstr "面 1 に回転"
 
-#~ msgid "Rotate to face 1 and bring active window along"
-#~ msgstr "面 1 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:55
+msgid "Rotate to face 1 and bring active window along"
+msgstr "面 1 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 10"
-#~ msgstr "面 10 に回転"
+#: ../metadata/rotate.xml.in.h:56
+msgid "Rotate to face 10"
+msgstr "面 10 に回転"
 
-#~ msgid "Rotate to face 10 and bring active window along"
-#~ msgstr "面 10 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:57
+msgid "Rotate to face 10 and bring active window along"
+msgstr "面 10 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 11"
-#~ msgstr "面 11 に回転"
+#: ../metadata/rotate.xml.in.h:58
+msgid "Rotate to face 11"
+msgstr "面 11 に回転"
 
-#~ msgid "Rotate to face 11 and bring active window along"
-#~ msgstr "面 11 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:59
+msgid "Rotate to face 11 and bring active window along"
+msgstr "面 11 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 12"
-#~ msgstr "面 12 に回転"
+#: ../metadata/rotate.xml.in.h:60
+msgid "Rotate to face 12"
+msgstr "面 12 に回転"
 
-#~ msgid "Rotate to face 12 and bring active window along"
-#~ msgstr "面 12 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:61
+msgid "Rotate to face 12 and bring active window along"
+msgstr "面 12 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 2"
-#~ msgstr "面 2 に回転"
+#: ../metadata/rotate.xml.in.h:62
+msgid "Rotate to face 2"
+msgstr "面 2 に回転"
 
-#~ msgid "Rotate to face 2 and bring active window along"
-#~ msgstr "面 2 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:63
+msgid "Rotate to face 2 and bring active window along"
+msgstr "面 2 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 3"
-#~ msgstr "面 3 に回転"
+#: ../metadata/rotate.xml.in.h:64
+msgid "Rotate to face 3"
+msgstr "面 3 に回転"
 
-#~ msgid "Rotate to face 3 and bring active window along"
-#~ msgstr "面 3 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:65
+msgid "Rotate to face 3 and bring active window along"
+msgstr "面 3 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 4"
-#~ msgstr "面 4 に回転"
+#: ../metadata/rotate.xml.in.h:66
+msgid "Rotate to face 4"
+msgstr "面 4 に回転"
 
-#~ msgid "Rotate to face 4 and bring active window along"
-#~ msgstr "面 4 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:67
+msgid "Rotate to face 4 and bring active window along"
+msgstr "面 4 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 5"
-#~ msgstr "面 5 に回転"
+#: ../metadata/rotate.xml.in.h:68
+msgid "Rotate to face 5"
+msgstr "面 5 に回転"
 
-#~ msgid "Rotate to face 5 and bring active window along"
-#~ msgstr "面 5 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:69
+msgid "Rotate to face 5 and bring active window along"
+msgstr "面 5 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 6"
-#~ msgstr "面 6 に回転"
+#: ../metadata/rotate.xml.in.h:70
+msgid "Rotate to face 6"
+msgstr "面 6 に回転"
 
-#~ msgid "Rotate to face 6 and bring active window along"
-#~ msgstr "面 6 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:71
+msgid "Rotate to face 6 and bring active window along"
+msgstr "面 6 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 7"
-#~ msgstr "面 7 に回転"
+#: ../metadata/rotate.xml.in.h:72
+msgid "Rotate to face 7"
+msgstr "面 7 に回転"
 
-#~ msgid "Rotate to face 7 and bring active window along"
-#~ msgstr "面 7 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:73
+msgid "Rotate to face 7 and bring active window along"
+msgstr "面 7 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 8"
-#~ msgstr "面 8 に回転"
+#: ../metadata/rotate.xml.in.h:74
+msgid "Rotate to face 8"
+msgstr "面 8 に回転"
 
-#~ msgid "Rotate to face 8 and bring active window along"
-#~ msgstr "面 8 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:75
+msgid "Rotate to face 8 and bring active window along"
+msgstr "面 8 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to face 9"
-#~ msgstr "面 9 に回転"
+#: ../metadata/rotate.xml.in.h:76
+msgid "Rotate to face 9"
+msgstr "面 9 に回転"
 
-#~ msgid "Rotate to face 9 and bring active window along"
-#~ msgstr "面 9 に回転（アクティブなウィンドウと一緒に）"
+#: ../metadata/rotate.xml.in.h:77
+msgid "Rotate to face 9 and bring active window along"
+msgstr "面 9 に回転（アクティブなウィンドウと一緒に）"
 
-#~ msgid "Rotate to viewport"
-#~ msgstr "ビューポートに回転"
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate to viewport"
+msgstr "ビューポートに回転"
 
 # ※ ”Rotate to” の翻訳者コメント参照のこと
-#~ msgid "Rotate window"
-#~ msgstr "指定先にウィンドウと一緒に回転"
-
-#~ msgid "Rotate with window"
-#~ msgstr "ウィンドウと一緒に回転"
-
-#~ msgid "Rotation Acceleration"
-#~ msgstr "回転の加速度"
-
-#~ msgid "Rotation Speed"
-#~ msgstr "回転速度"
-
-#~ msgid "Rotation Timestep"
-#~ msgstr "回転の刻み時間"
-
-#~ msgid "Rotation Zoom"
-#~ msgstr "回転時のズーム距離"
-
-#~ msgid "Sensitivity of pointer movement"
-#~ msgstr "ポインタの移動感度"
-
-#~ msgid "Snap Cube Rotation to Bottom Face"
-#~ msgstr "キューブ回転をキューブ下面にスナップ"
-
-#~ msgid "Snap Cube Rotation to Top Face"
-#~ msgstr "キューブ回転をキューブ上面にスナップ"
-
-#~ msgid "Snap To Bottom Face"
-#~ msgstr "キューブ下面にスナップ"
-
-#~ msgid "Snap To Top Face"
-#~ msgstr "キューブ上面にスナップ"
-
-#~ msgid "Start Rotation"
-#~ msgstr "回転の開始"
-
-#~ msgid "Timeout before flipping viewport"
-#~ msgstr "ビューポートのめくり移動を開始する前のタイムアウト"
-
-#~ msgid "Zoom"
-#~ msgstr "ズーム"
-
-#~ msgid "Amount of opacity in percent"
-#~ msgstr "不透明度(%)"
-
-#~ msgid "Big"
-#~ msgstr "大きい"
-
-#~ msgid "Click Desktop to Show Desktop"
-#~ msgstr "デスクトップのクリックでデスクトップの表示"
-
-#~ msgid "Darken Background"
-#~ msgstr "背景を暗くする"
-
-#~ msgid "Darken background when scaling windows"
-#~ msgstr "ウィンドウのスクロール時に背景を暗くする"
-
-#~ msgid "Emblem"
-#~ msgstr "エンブレム"
-
-#~ msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-#~ msgstr ""
-#~ "スケール中にデスクトップがクリックされたとき\"デスクトップの表示\"モードに"
-#~ "入る"
-
-#~ msgid "Hover Time"
-#~ msgstr "ホバー時間"
-
-#~ msgid "Initiate Window Picker"
-#~ msgstr "ウィンドウピッカー起動"
-
-#~ msgid "Initiate Window Picker For All Windows"
-#~ msgstr "すべてのウィンドウ対象のウィンドウピッカー起動"
-
-#~ msgid "Initiate Window Picker For Window Group"
-#~ msgstr "ウィンドウグループ対象のウィンドウピッカー起動"
-
-#~ msgid "Initiate Window Picker For Windows on Current Output"
-#~ msgstr "現在の出力上ウィンドウ対象のウィンドウピッカー起動"
-
-#~ msgid "Layout and start transforming all windows"
-#~ msgstr "すべてのウィンドウを配列して変換を開始"
-
-#~ msgid "Layout and start transforming window group"
-#~ msgstr "ウィンドウグループを配列して変換を開始"
-
-#~ msgid "Layout and start transforming windows"
-#~ msgstr "ウィンドウを配列して変換を開始"
-
-#~ msgid "Layout and start transforming windows on current output"
-#~ msgstr "現在の出力デバイス上のウィンドウを配列して変換を開始"
-
-#~ msgid "None"
-#~ msgstr "なし"
-
-#~ msgid "On all output devices"
-#~ msgstr "すべての出力デバイス上に"
-
-#~ msgid "On current output device"
-#~ msgstr "現在の出力デバイス上に"
-
-#~ msgid "Overlay Icon"
-#~ msgstr "重ね表示アイコン"
-
-#~ msgid "Overlay an icon on windows once they are scaled"
-#~ msgstr "ウィンドウ調整後にアイコンを重ね表示"
-
-#~ msgid "Scale"
-#~ msgstr "スケール"
-
-#~ msgid "Scale Windows"
-#~ msgstr "スケール・ウィンドウ"
-
-#~ msgid "Scale speed"
-#~ msgstr "スケール速度"
-
-#~ msgid "Scale timestep"
-#~ msgstr "スケール位置算出の刻み時間"
-
-#~ msgid "Scale windows"
-#~ msgstr "ウィンドウのスケール"
-
-#~ msgid ""
-#~ "Selects where windows are scaled if multiple output devices are used."
-#~ msgstr ""
-#~ "複数の出力デバイスを使用している場合に、ウィンドウをどこにスケールするかの"
-#~ "選択"
-
-#~ msgid "Space between windows"
-#~ msgstr "ウィンドウ間の間隔の大きさ"
-
-#~ msgid "Spacing"
-#~ msgstr "間隔"
-
-#~ msgid ""
-#~ "Time (in ms) before scale mode is terminated when hovering over a window"
-#~ msgstr ""
-#~ "ウィンドウ上でのホバー時に、スケールモードを終了するまでの時間(ミリ秒)"
-
-#~ msgid "Windows that should be scaled in scale mode"
-#~ msgstr "スケールモードでスケールされる対象ウィンドウ"
-
-#~ msgid "Automatically open screenshot in this application"
-#~ msgstr "スクリーンショット画像をこのアプリケーションで自動的に開く"
-
-#~ msgid "Directory"
-#~ msgstr "ディレクトリ"
-
-#~ msgid "Initiate rectangle screenshot"
-#~ msgstr "矩形選択スクリーンショットを開始"
-
-#~ msgid "Launch Application"
-#~ msgstr "起動アプリケーション"
-
-#~ msgid "Put screenshot images in this directory"
-#~ msgstr "スクリーンショット画像をこのディレクトリに置く"
-
-#~ msgid "Screenshot"
-#~ msgstr "スクリーンショット"
-
-#~ msgid "Screenshot plugin"
-#~ msgstr "スクリーンショット・プラグイン"
-
-#~ msgid "Svg"
-#~ msgstr "Svg"
-
-#~ msgid "Svg image loader"
-#~ msgstr "Svg 画像読み込み"
-
-#~ msgid "Amount of brightness in percent"
-#~ msgstr "明るさの量(%)"
-
-#~ msgid "Amount of saturation in percent"
-#~ msgstr "鮮やかさの量(%)"
-
-#~ msgid "Application Switcher"
-#~ msgstr "アプリケーション・スイッチャー"
-
-#~ msgid "Auto Rotate"
-#~ msgstr "自動回転"
-
-#~ msgid "Brightness"
-#~ msgstr "明度"
-
-#~ msgid "Bring To Front"
-#~ msgstr "手前に提示"
-
-#~ msgid "Bring selected window to front"
-#~ msgstr "選択ウィンドウを手前に提示"
-
-#~ msgid "Distance desktop should be zoom out while switching windows"
-#~ msgstr "ウィンドウのスイッチ中にデスクトップがズームアウトされる距離"
-
-#~ msgid "Icon"
-#~ msgstr "アイコン"
-
-#~ msgid "Minimized"
-#~ msgstr "最小化"
-
-#~ msgid "Next Panel"
-#~ msgstr "次のパネル"
-
-#~ msgid "Next window"
-#~ msgstr "次のウィンドウ"
-
-#~ msgid "Next window (All windows)"
-#~ msgstr "次のウィンドウ（全ウィンドウから）"
-
-#~ msgid "Next window (No popup)"
-#~ msgstr "次のウィンドウ（ポップアップなし）"
-
-#~ msgid "Popup switcher if not visible and select next window"
-#~ msgstr "スイッチャーが非表示の場合ポップアップして、次のウィンドウを選択"
-
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window out of all windows"
-#~ msgstr ""
-#~ "スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから次のウィ"
-#~ "ンドウを選択"
-
-#~ msgid "Popup switcher if not visible and select previous window"
-#~ msgstr "スイッチャーが非表示の場合ポップアップして、前のウィンドウを選択"
-
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window out of all "
-#~ "windows"
-#~ msgstr ""
-#~ "スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから前のウィ"
-#~ "ンドウを選択"
-
-#~ msgid "Prev Panel"
-#~ msgstr "前のパネル"
-
-#~ msgid "Prev window"
-#~ msgstr "前のウィンドウ"
-
-#~ msgid "Prev window (All windows)"
-#~ msgstr "前のウィンドウ（全ウィンドウから）"
-
-#~ msgid "Prev window (No popup)"
-#~ msgstr "前のウィンドウ（ポップアップなし）"
-
-#~ msgid "Rotate to the selected window while switching"
-#~ msgstr "スイッチ中に選択ウィンドウへ回転"
-
-#~ msgid "Saturation"
-#~ msgstr "彩度"
-
-#~ msgid "Select next panel type window."
-#~ msgstr "次のパネルタイプのウィンドウを選択"
-
-#~ msgid "Select next window without showing the popup window."
-#~ msgstr "ポップアップウィンドウ表示なしで次のウィンドウを選択"
-
-#~ msgid "Select previous panel type window."
-#~ msgstr "前のパネルタイプのウィンドウを選択"
-
-#~ msgid "Select previous window without showing the popup window."
-#~ msgstr "ポップアップウィンドウ表示なしで前のウィンドウを選択"
-
-#~ msgid "Show icon next to thumbnail"
-#~ msgstr "サムネイルの隣にアイコンを表示"
-
-#~ msgid "Show minimized windows"
-#~ msgstr "最小化されているウィンドウも表示"
-
-#~ msgid "Switcher speed"
-#~ msgstr "スイッチャー速度"
-
-#~ msgid "Switcher timestep"
-#~ msgstr "スイッチャー描画の刻み時間"
-
-#~ msgid "Switcher windows"
-#~ msgstr "スイッチャー・ウィンドウ"
-
-#~ msgid "Windows that should be shown in switcher"
-#~ msgstr "スイッチャーに表示する対象ウィンドウ"
-
-#~ msgid "Provide YV12 colorspace support"
-#~ msgstr "YV12 色空間のサポートを提供"
-
-#~ msgid "Video Playback"
-#~ msgstr "動画再生"
-
-#~ msgid "Video playback"
-#~ msgstr "動画再生"
-
-#~ msgid "YV12 colorspace"
-#~ msgstr "YV12 色空間"
-
-#~ msgid "Add line"
-#~ msgstr "線を追加"
-
-#~ msgid "Add point"
-#~ msgstr "点を追加"
-
-#~ msgid "Adds water effects to different desktop actions"
-#~ msgstr "異なるデスクトップアクションに水効果を追加"
-
-#~ msgid "Delay (in ms) between each rain-drop"
-#~ msgstr "各水滴間の遅延時間（ミリ秒）"
-
-#~ msgid "Enable pointer water effects"
-#~ msgstr "ポインタの水効果を有効にする"
-
-#~ msgid "Line"
-#~ msgstr "線"
-
-#~ msgid "Offset Scale"
-#~ msgstr "オフセットスケール"
-
-#~ msgid "Point"
-#~ msgstr "点"
-
-#~ msgid "Rain Delay"
-#~ msgstr "雨の待ち時間"
-
-#~ msgid "Title wave"
-#~ msgstr "タイトルの波"
-
-#~ msgid "Toggle rain"
-#~ msgstr "雨の切り替え"
-
-#~ msgid "Toggle rain effect"
-#~ msgstr "雨効果の切り替え"
-
-#~ msgid "Toggle wiper"
-#~ msgstr "ワイパーの切り替え"
-
-#~ msgid "Toggle wiper effect"
-#~ msgstr "ワイパー効果の切り替え"
-
-#~ msgid "Water Effect"
-#~ msgstr "水効果"
-
-#~ msgid "Water offset scale"
-#~ msgstr "水オフセットスケール"
-
-#~ msgid "Wave effect from window title"
-#~ msgstr "ウィンドウタイトルからウェーブ効果"
-
-#~ msgid "Focus Effect"
-#~ msgstr "フォーカス時の効果"
-
-#~ msgid "Focus Window Effect"
-#~ msgstr "ウィンドウがフォーカスされた時の効果"
-
-#~ msgid "Focus Windows"
-#~ msgstr "フォーカス時効果ウィンドウ"
-
-#~ msgid "Friction"
-#~ msgstr "摩擦"
-
-#~ msgid "Grab Windows"
-#~ msgstr "つかみ時効果ウィンドウ"
-
-#~ msgid "Grid Resolution"
-#~ msgstr "グリッド解像度"
-
-#~ msgid "Inverted window snapping"
-#~ msgstr "ウィンドウ・スナップの切り替え"
-
-#~ msgid "Make window shiver"
-#~ msgstr "ウィンドウを震動させる"
-
-#~ msgid "Map Effect"
-#~ msgstr "開いた時の効果"
-
-#~ msgid "Map Window Effect"
-#~ msgstr "ウィンドウが開かれた時の効果"
-
-#~ msgid "Map Windows"
-#~ msgstr "開く時効果ウィンドウ"
-
-#~ msgid "Maximize Effect"
-#~ msgstr "最大化時の効果"
-
-#~ msgid "Minimum Grid Size"
-#~ msgstr "最小グリッドサイズ"
-
-#~ msgid "Minimum Vertex Grid Size"
-#~ msgstr "最小頂点グリッドサイズ"
-
-#~ msgid "Move Windows"
-#~ msgstr "移動時効果ウィンドウ"
+#: ../metadata/rotate.xml.in.h:79
+msgid "Rotate window"
+msgstr "指定先にウィンドウと一緒に回転"
+
+#: ../metadata/rotate.xml.in.h:80
+msgid "Rotate with window"
+msgstr "ウィンドウと一緒に回転"
+
+#: ../metadata/rotate.xml.in.h:81
+msgid "Rotation Acceleration"
+msgstr "回転の加速度"
+
+#: ../metadata/rotate.xml.in.h:82
+msgid "Rotation Speed"
+msgstr "回転速度"
+
+#: ../metadata/rotate.xml.in.h:83
+msgid "Rotation Timestep"
+msgstr "回転の刻み時間"
+
+#: ../metadata/rotate.xml.in.h:84
+msgid "Rotation Zoom"
+msgstr "回転時のズーム距離"
+
+#: ../metadata/rotate.xml.in.h:85
+msgid "Sensitivity of pointer movement"
+msgstr "ポインタの移動感度"
+
+#: ../metadata/rotate.xml.in.h:86
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr "キューブ回転をキューブ下面にスナップ"
+
+#: ../metadata/rotate.xml.in.h:87
+msgid "Snap Cube Rotation to Top Face"
+msgstr "キューブ回転をキューブ上面にスナップ"
+
+#: ../metadata/rotate.xml.in.h:88
+msgid "Snap To Bottom Face"
+msgstr "キューブ下面にスナップ"
+
+#: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "キューブ上面にスナップ"
+
+#: ../metadata/rotate.xml.in.h:91
+msgid "Start Rotation"
+msgstr "回転の開始"
+
+#: ../metadata/rotate.xml.in.h:92
+msgid "Timeout before flipping viewport"
+msgstr "ビューポートのめくり移動を開始する前のタイムアウト"
+
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
+msgid "Zoom"
+msgstr "ズーム"
+
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+msgid "Amount of opacity in percent"
+msgstr "不透明度(%)"
+
+#: ../metadata/scale.xml.in.h:2
+msgid "Big"
+msgstr "大きい"
+
+#: ../metadata/scale.xml.in.h:3
+msgid "Click Desktop to Show Desktop"
+msgstr "デスクトップのクリックでデスクトップの表示"
+
+#: ../metadata/scale.xml.in.h:4
+msgid "Darken Background"
+msgstr "背景を暗くする"
+
+#: ../metadata/scale.xml.in.h:5
+msgid "Darken background when scaling windows"
+msgstr "ウィンドウのスクロール時に背景を暗くする"
+
+#: ../metadata/scale.xml.in.h:6
+msgid "Emblem"
+msgstr "エンブレム"
+
+#: ../metadata/scale.xml.in.h:7
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr ""
+"スケール中にデスクトップがクリックされたとき\"デスクトップの表示\"モードに入"
+"る"
+
+#: ../metadata/scale.xml.in.h:8
+msgid "Hover Time"
+msgstr "ホバー時間"
+
+#: ../metadata/scale.xml.in.h:9
+msgid "Initiate Window Picker"
+msgstr "ウィンドウピッカー起動"
+
+#: ../metadata/scale.xml.in.h:10
+msgid "Initiate Window Picker For All Windows"
+msgstr "すべてのウィンドウ対象のウィンドウピッカー起動"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Initiate Window Picker For Window Group"
+msgstr "ウィンドウグループ対象のウィンドウピッカー起動"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "現在の出力上ウィンドウ対象のウィンドウピッカー起動"
+
+#: ../metadata/scale.xml.in.h:13
+msgid "Layout and start transforming all windows"
+msgstr "すべてのウィンドウを配列して変換を開始"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Layout and start transforming window group"
+msgstr "ウィンドウグループを配列して変換を開始"
+
+#: ../metadata/scale.xml.in.h:15
+msgid "Layout and start transforming windows"
+msgstr "ウィンドウを配列して変換を開始"
+
+#: ../metadata/scale.xml.in.h:16
+msgid "Layout and start transforming windows on current output"
+msgstr "現在の出力デバイス上のウィンドウを配列して変換を開始"
+
+#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "なし"
+
+#: ../metadata/scale.xml.in.h:19
+msgid "On all output devices"
+msgstr "すべての出力デバイス上に"
+
+#: ../metadata/scale.xml.in.h:20
+msgid "On current output device"
+msgstr "現在の出力デバイス上に"
+
+#: ../metadata/scale.xml.in.h:22
+msgid "Overlay Icon"
+msgstr "重ね表示アイコン"
+
+#: ../metadata/scale.xml.in.h:23
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "ウィンドウ調整後にアイコンを重ね表示"
+
+#: ../metadata/scale.xml.in.h:24
+msgid "Scale"
+msgstr "スケール"
+
+#: ../metadata/scale.xml.in.h:25
+msgid "Scale Windows"
+msgstr "スケール・ウィンドウ"
+
+#: ../metadata/scale.xml.in.h:26
+msgid "Scale speed"
+msgstr "スケール速度"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Scale timestep"
+msgstr "スケール位置算出の刻み時間"
+
+#: ../metadata/scale.xml.in.h:28
+msgid "Scale windows"
+msgstr "ウィンドウのスケール"
+
+#: ../metadata/scale.xml.in.h:29
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+"複数の出力デバイスを使用している場合に、ウィンドウをどこにスケールするかの選"
+"択"
+
+#: ../metadata/scale.xml.in.h:30
+msgid "Space between windows"
+msgstr "ウィンドウ間の間隔の大きさ"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Spacing"
+msgstr "間隔"
+
+#: ../metadata/scale.xml.in.h:33
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr "ウィンドウ上でのホバー時に、スケールモードを終了するまでの時間(ミリ秒)"
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Windows that should be scaled in scale mode"
+msgstr "スケールモードでスケールされる対象ウィンドウ"
+
+#: ../metadata/screenshot.xml.in.h:1
+msgid "Automatically open screenshot in this application"
+msgstr "スクリーンショット画像をこのアプリケーションで自動的に開く"
+
+#: ../metadata/screenshot.xml.in.h:2
+msgid "Directory"
+msgstr "ディレクトリ"
+
+#: ../metadata/screenshot.xml.in.h:4
+msgid "Initiate rectangle screenshot"
+msgstr "矩形選択スクリーンショットを開始"
+
+#: ../metadata/screenshot.xml.in.h:5
+msgid "Launch Application"
+msgstr "起動アプリケーション"
+
+#: ../metadata/screenshot.xml.in.h:6
+msgid "Put screenshot images in this directory"
+msgstr "スクリーンショット画像をこのディレクトリに置く"
+
+#: ../metadata/screenshot.xml.in.h:7
+msgid "Screenshot"
+msgstr "スクリーンショット"
+
+#: ../metadata/screenshot.xml.in.h:8
+msgid "Screenshot plugin"
+msgstr "スクリーンショット・プラグイン"
+
+#: ../metadata/svg.xml.in.h:1
+msgid "Svg"
+msgstr "Svg"
+
+#: ../metadata/svg.xml.in.h:2
+msgid "Svg image loader"
+msgstr "Svg 画像読み込み"
+
+#: ../metadata/switcher.xml.in.h:1
+msgid "Amount of brightness in percent"
+msgstr "明るさの量(%)"
+
+#: ../metadata/switcher.xml.in.h:3
+msgid "Amount of saturation in percent"
+msgstr "鮮やかさの量(%)"
+
+#: ../metadata/switcher.xml.in.h:4
+msgid "Application Switcher"
+msgstr "アプリケーション・スイッチャー"
+
+#: ../metadata/switcher.xml.in.h:5
+msgid "Auto Rotate"
+msgstr "自動回転"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Brightness"
+msgstr "明度"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Bring To Front"
+msgstr "手前に提示"
+
+#: ../metadata/switcher.xml.in.h:8
+msgid "Bring selected window to front"
+msgstr "選択ウィンドウを手前に提示"
+
+#: ../metadata/switcher.xml.in.h:9
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr "ウィンドウのスイッチ中にデスクトップがズームアウトされる距離"
+
+#: ../metadata/switcher.xml.in.h:11
+msgid "Icon"
+msgstr "アイコン"
+
+#: ../metadata/switcher.xml.in.h:12
+msgid "Minimized"
+msgstr "最小化"
+
+#: ../metadata/switcher.xml.in.h:14
+msgid "Next Panel"
+msgstr "次のパネル"
+
+#: ../metadata/switcher.xml.in.h:15
+msgid "Next window"
+msgstr "次のウィンドウ"
+
+#: ../metadata/switcher.xml.in.h:16
+msgid "Next window (All windows)"
+msgstr "次のウィンドウ（全ウィンドウから）"
+
+#: ../metadata/switcher.xml.in.h:17
+msgid "Next window (No popup)"
+msgstr "次のウィンドウ（ポップアップなし）"
+
+#: ../metadata/switcher.xml.in.h:19
+msgid "Popup switcher if not visible and select next window"
+msgstr "スイッチャーが非表示の場合ポップアップして、次のウィンドウを選択"
+
+#: ../metadata/switcher.xml.in.h:20
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから次のウィン"
+"ドウを選択"
+
+#: ../metadata/switcher.xml.in.h:21
+msgid "Popup switcher if not visible and select previous window"
+msgstr "スイッチャーが非表示の場合ポップアップして、前のウィンドウを選択"
+
+#: ../metadata/switcher.xml.in.h:22
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから前のウィン"
+"ドウを選択"
+
+#: ../metadata/switcher.xml.in.h:23
+msgid "Prev Panel"
+msgstr "前のパネル"
+
+#: ../metadata/switcher.xml.in.h:24
+msgid "Prev window"
+msgstr "前のウィンドウ"
+
+#: ../metadata/switcher.xml.in.h:25
+msgid "Prev window (All windows)"
+msgstr "前のウィンドウ（全ウィンドウから）"
+
+#: ../metadata/switcher.xml.in.h:26
+msgid "Prev window (No popup)"
+msgstr "前のウィンドウ（ポップアップなし）"
+
+#: ../metadata/switcher.xml.in.h:27
+msgid "Rotate to the selected window while switching"
+msgstr "スイッチ中に選択ウィンドウへ回転"
+
+#: ../metadata/switcher.xml.in.h:28
+msgid "Saturation"
+msgstr "彩度"
+
+#: ../metadata/switcher.xml.in.h:29
+msgid "Select next panel type window."
+msgstr "次のパネルタイプのウィンドウを選択"
+
+#: ../metadata/switcher.xml.in.h:30
+msgid "Select next window without showing the popup window."
+msgstr "ポップアップウィンドウ表示なしで次のウィンドウを選択"
+
+#: ../metadata/switcher.xml.in.h:31
+msgid "Select previous panel type window."
+msgstr "前のパネルタイプのウィンドウを選択"
+
+#: ../metadata/switcher.xml.in.h:32
+msgid "Select previous window without showing the popup window."
+msgstr "ポップアップウィンドウ表示なしで前のウィンドウを選択"
+
+#: ../metadata/switcher.xml.in.h:33
+msgid "Show icon next to thumbnail"
+msgstr "サムネイルの隣にアイコンを表示"
+
+#: ../metadata/switcher.xml.in.h:34
+msgid "Show minimized windows"
+msgstr "最小化されているウィンドウも表示"
+
+#: ../metadata/switcher.xml.in.h:36
+msgid "Switcher speed"
+msgstr "スイッチャー速度"
+
+#: ../metadata/switcher.xml.in.h:37
+msgid "Switcher timestep"
+msgstr "スイッチャー描画の刻み時間"
+
+#: ../metadata/switcher.xml.in.h:38
+msgid "Switcher windows"
+msgstr "スイッチャー・ウィンドウ"
+
+#: ../metadata/switcher.xml.in.h:40
+msgid "Windows that should be shown in switcher"
+msgstr "スイッチャーに表示する対象ウィンドウ"
+
+#: ../metadata/video.xml.in.h:1
+msgid "Provide YV12 colorspace support"
+msgstr "YV12 色空間のサポートを提供"
+
+#: ../metadata/video.xml.in.h:2
+msgid "Video Playback"
+msgstr "動画再生"
+
+#: ../metadata/video.xml.in.h:3
+msgid "Video playback"
+msgstr "動画再生"
+
+#: ../metadata/video.xml.in.h:4
+msgid "YV12 colorspace"
+msgstr "YV12 色空間"
+
+#: ../metadata/water.xml.in.h:1
+msgid "Add line"
+msgstr "線を追加"
+
+#: ../metadata/water.xml.in.h:2
+msgid "Add point"
+msgstr "点を追加"
+
+#: ../metadata/water.xml.in.h:3
+msgid "Adds water effects to different desktop actions"
+msgstr "異なるデスクトップアクションに水効果を追加"
+
+#: ../metadata/water.xml.in.h:4
+msgid "Delay (in ms) between each rain-drop"
+msgstr "各水滴間の遅延時間（ミリ秒）"
+
+#: ../metadata/water.xml.in.h:5
+msgid "Enable pointer water effects"
+msgstr "ポインタの水効果を有効にする"
+
+#: ../metadata/water.xml.in.h:7
+msgid "Line"
+msgstr "線"
+
+#: ../metadata/water.xml.in.h:8
+msgid "Offset Scale"
+msgstr "オフセットスケール"
+
+#: ../metadata/water.xml.in.h:9
+msgid "Point"
+msgstr "点"
+
+#: ../metadata/water.xml.in.h:10
+msgid "Rain Delay"
+msgstr "雨の待ち時間"
+
+#: ../metadata/water.xml.in.h:11
+msgid "Title wave"
+msgstr "タイトルの波"
+
+#: ../metadata/water.xml.in.h:12
+msgid "Toggle rain"
+msgstr "雨の切り替え"
+
+#: ../metadata/water.xml.in.h:13
+msgid "Toggle rain effect"
+msgstr "雨効果の切り替え"
+
+#: ../metadata/water.xml.in.h:14
+msgid "Toggle wiper"
+msgstr "ワイパーの切り替え"
+
+#: ../metadata/water.xml.in.h:15
+msgid "Toggle wiper effect"
+msgstr "ワイパー効果の切り替え"
+
+#: ../metadata/water.xml.in.h:16
+msgid "Water Effect"
+msgstr "水効果"
+
+#: ../metadata/water.xml.in.h:17
+msgid "Water offset scale"
+msgstr "水オフセットスケール"
+
+#: ../metadata/water.xml.in.h:18
+msgid "Wave effect from window title"
+msgstr "ウィンドウタイトルからウェーブ効果"
+
+#: ../metadata/wobbly.xml.in.h:1
+msgid "Focus Effect"
+msgstr "フォーカス時の効果"
+
+#: ../metadata/wobbly.xml.in.h:2
+msgid "Focus Window Effect"
+msgstr "ウィンドウがフォーカスされた時の効果"
+
+#: ../metadata/wobbly.xml.in.h:3
+msgid "Focus Windows"
+msgstr "フォーカス時効果ウィンドウ"
+
+#: ../metadata/wobbly.xml.in.h:4
+msgid "Friction"
+msgstr "摩擦"
+
+#: ../metadata/wobbly.xml.in.h:5
+msgid "Grab Windows"
+msgstr "つかみ時効果ウィンドウ"
+
+#: ../metadata/wobbly.xml.in.h:6
+msgid "Grid Resolution"
+msgstr "グリッド解像度"
+
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Inverted window snapping"
+msgstr "ウィンドウ・スナップの切り替え"
+
+#: ../metadata/wobbly.xml.in.h:8
+msgid "Make window shiver"
+msgstr "ウィンドウを震動させる"
+
+#: ../metadata/wobbly.xml.in.h:9
+msgid "Map Effect"
+msgstr "開いた時の効果"
+
+#: ../metadata/wobbly.xml.in.h:10
+msgid "Map Window Effect"
+msgstr "ウィンドウが開かれた時の効果"
+
+#: ../metadata/wobbly.xml.in.h:11
+msgid "Map Windows"
+msgstr "開く時効果ウィンドウ"
+
+#: ../metadata/wobbly.xml.in.h:12
+msgid "Maximize Effect"
+msgstr "最大化時の効果"
+
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Minimum Grid Size"
+msgstr "最小グリッドサイズ"
+
+#: ../metadata/wobbly.xml.in.h:14
+msgid "Minimum Vertex Grid Size"
+msgstr "最小頂点グリッドサイズ"
+
+#: ../metadata/wobbly.xml.in.h:15
+msgid "Move Windows"
+msgstr "移動時効果ウィンドウ"
 
 # 'driver' as in '(hardware) driver update'
-#~ msgid "Shiver"
-#~ msgstr "震動"
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Shiver"
+msgstr "震動"
 
-#~ msgid "Snap Inverted"
-#~ msgstr "スナップの切り替え"
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Snap Inverted"
+msgstr "スナップの切り替え"
 
-#~ msgid "Snap windows"
-#~ msgstr "ウィンドウをスナップ"
+#: ../metadata/wobbly.xml.in.h:19
+msgid "Snap windows"
+msgstr "ウィンドウをスナップ"
 
-#~ msgid "Spring Friction"
-#~ msgstr "バネ摩擦"
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Spring Friction"
+msgstr "バネ摩擦"
 
-#~ msgid "Spring K"
-#~ msgstr "バネ定数"
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Spring K"
+msgstr "バネ定数"
 
-#~ msgid "Spring Konstant"
-#~ msgstr "バネ定数"
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Spring Konstant"
+msgstr "バネ定数"
 
-#~ msgid "Toggle window snapping"
-#~ msgstr "ウィンドウスナップの切り替え"
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Toggle window snapping"
+msgstr "ウィンドウスナップの切り替え"
 
-#~ msgid "Use spring model for wobbly window effect"
-#~ msgstr "揺れるウィンドウ効果用にバネモデルを使用"
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Use spring model for wobbly window effect"
+msgstr "揺れるウィンドウ効果用にバネモデルを使用"
 
-#~ msgid "Vertex Grid Resolution"
-#~ msgstr "頂点グリッド解像度"
+#: ../metadata/wobbly.xml.in.h:25
+msgid "Vertex Grid Resolution"
+msgstr "頂点グリッド解像度"
 
-#~ msgid "Windows that should wobble when focused"
-#~ msgstr "フォーカス時に揺ゆらす対象ウィンドウ"
+#: ../metadata/wobbly.xml.in.h:26
+msgid "Windows that should wobble when focused"
+msgstr "フォーカス時に揺ゆらす対象ウィンドウ"
 
-#~ msgid "Windows that should wobble when grabbed"
-#~ msgstr "つかまれた時に揺らす対象ウィンドウ"
+#: ../metadata/wobbly.xml.in.h:27
+msgid "Windows that should wobble when grabbed"
+msgstr "つかまれた時に揺らす対象ウィンドウ"
 
-#~ msgid "Windows that should wobble when mapped"
-#~ msgstr "開いた時に揺らす対象ウィンドウ"
+#: ../metadata/wobbly.xml.in.h:28
+msgid "Windows that should wobble when mapped"
+msgstr "開いた時に揺らす対象ウィンドウ"
 
-#~ msgid "Windows that should wobble when moved"
-#~ msgstr "移動時に揺らす対象ウィンドウ"
+#: ../metadata/wobbly.xml.in.h:29
+msgid "Windows that should wobble when moved"
+msgstr "移動時に揺らす対象ウィンドウ"
 
-#~ msgid "Wobble effect when maximizing and unmaximizing windows"
-#~ msgstr "ウィンドウの最大化および最大化解除時に揺れる効果"
+#: ../metadata/wobbly.xml.in.h:30
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "ウィンドウの最大化および最大化解除時に揺れる効果"
 
-#~ msgid "Wobbly Windows"
-#~ msgstr "揺れるウィンドウ"
+#: ../metadata/wobbly.xml.in.h:31
+msgid "Wobbly Windows"
+msgstr "揺れるウィンドウ"
 
-#~ msgid "Filter Linear"
-#~ msgstr "線形フィルタ"
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "線形フィルタ"
 
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "ズームイン時に線形フィルタを使用"
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "ズームイン時に線形フィルタを使用"
 
-#~ msgid "Zoom Desktop"
-#~ msgstr "デスクトップのズーム"
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "デスクトップのズーム"
 
-#~ msgid "Zoom In"
-#~ msgstr "ズームイン"
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "ズームイン"
 
-#~ msgid "Zoom Out"
-#~ msgstr "ズームアウト"
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "ズームアウト"
 
-#~ msgid "Zoom Pan"
-#~ msgstr "ズーム域の移動"
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "ズーム域の移動"
 
-#~ msgid "Zoom Speed"
-#~ msgstr "ズーム速度"
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "ズーム速度"
 
-#~ msgid "Zoom Timestep"
-#~ msgstr "ズーム描画刻み時間"
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "ズーム描画刻み時間"
 
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "デスクトップ・キューブのズームとズーム域移動"
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "デスクトップ・キューブのズームとズーム域移動"
 
-#~ msgid "Zoom factor"
-#~ msgstr "ズーム係数"
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "ズーム係数"
 
-#~ msgid "Zoom pan"
-#~ msgstr "ズーム域の移動"
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "ズーム域の移動"

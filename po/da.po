@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-29 14:02+0200\n"
+"POT-Creation-Date: 2008-05-24 22:22+0530\n"
 "PO-Revision-Date: 2007-11-27 03:25+0100\n"
 "Last-Translator: Rudolf Randal <rudolf.randal@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -18,1952 +18,2939 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Skrivebord"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+#, fuzzy
+msgid "Window Management"
+msgstr "Vinduesmenu"
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+msgid "Action to take when scrolling the mouse wheel on a window title bar."
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+#, fuzzy
+msgid "Blur type"
+msgstr "Foldehastighed"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+#, fuzzy
+msgid "Metacity theme active window opacity"
+msgstr "Formindsk vinduets uigennemsigtighed"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+#, fuzzy
+msgid "Metacity theme active window opacity shade"
+msgstr "Maksimer det aktive vindue i bredden"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Metacity theme opacity shade"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid "Opacity to use for metacity theme decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Title bar mouse wheel action"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Type of blur used for window decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:13
+msgid "Use metacity theme"
+msgstr ""
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:14
+msgid "Use metacity theme when drawing window decorations"
+msgstr ""
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Luk vindue"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Gendan vindue"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Maksimer vindue"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Minimer vindue"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Vinduesmenu"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 #, fuzzy
 msgid "Shade"
 msgstr "Skaler"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr ""
 
-#~ msgid "Desktop"
-#~ msgstr "Skrivebord"
-
+#: ../metadata/annotate.xml.in.h:1
 #, fuzzy
-#~ msgid "Window Management"
-#~ msgstr "Vinduesmenu"
+msgid "Annotate"
+msgstr "Start"
 
+#: ../metadata/annotate.xml.in.h:2
 #, fuzzy
-#~ msgid "Blur type"
-#~ msgstr "Foldehastighed"
+msgid "Annotate Fill Color"
+msgstr "Kubusfarve"
 
-#, fuzzy
-#~ msgid "Metacity theme active window opacity"
-#~ msgstr "Formindsk vinduets uigennemsigtighed"
-
-#, fuzzy
-#~ msgid "Metacity theme active window opacity shade"
-#~ msgstr "Maksimer det aktive vindue i bredden"
-
-#, fuzzy
-#~ msgid "Annotate"
-#~ msgstr "Start"
-
-#, fuzzy
-#~ msgid "Annotate Fill Color"
-#~ msgstr "Kubusfarve"
+#: ../metadata/annotate.xml.in.h:3
+msgid "Annotate Stroke Color"
+msgstr ""
 
 #
+#: ../metadata/annotate.xml.in.h:4
 #, fuzzy
-#~ msgid "Annotate plugin"
-#~ msgstr "Aktive plugins"
+msgid "Annotate plugin"
+msgstr "Aktive plugins"
 
-#~ msgid "Initiate"
-#~ msgstr "Start"
+#: ../metadata/annotate.xml.in.h:5
+msgid "Clear"
+msgstr ""
 
+#: ../metadata/annotate.xml.in.h:6
+msgid "Draw"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:7
+msgid "Draw using tool"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:8
+msgid "Fill color for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+msgid "Initiate"
+msgstr "Start"
+
+#: ../metadata/annotate.xml.in.h:10
 #, fuzzy
-#~ msgid "Initiate annotate drawing"
-#~ msgstr "Start tilpasning af vinduets størrelse"
+msgid "Initiate annotate drawing"
+msgstr "Start tilpasning af vinduets størrelse"
 
+#: ../metadata/annotate.xml.in.h:11
 #, fuzzy
-#~ msgid "Initiate annotate erasing"
-#~ msgstr "Start tilpasning af vinduets størrelse"
+msgid "Initiate annotate erasing"
+msgstr "Start tilpasning af vinduets størrelse"
 
+#: ../metadata/annotate.xml.in.h:12
 #, fuzzy
-#~ msgid "Initiate erase"
-#~ msgstr "Start"
+msgid "Initiate erase"
+msgstr "Start"
 
+#: ../metadata/annotate.xml.in.h:13
+msgid "Line width"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:14
+msgid "Line width for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:15
+msgid "Stroke color for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:16
+msgid "Stroke width"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:17
+msgid "Stroke width for annotations"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:1
 #, fuzzy
-#~ msgid "4xBilinear"
-#~ msgstr "Lineært filter"
+msgid "4xBilinear"
+msgstr "Lineært filter"
 
+#: ../metadata/blur.xml.in.h:2
 #, fuzzy
-#~ msgid "Alpha Blur"
-#~ msgstr "Skaler vinduer"
+msgid "Alpha Blur"
+msgstr "Skaler vinduer"
 
+#: ../metadata/blur.xml.in.h:3
 #, fuzzy
-#~ msgid "Alpha blur windows"
-#~ msgstr "Skaler vinduer"
+msgid "Alpha blur windows"
+msgstr "Skaler vinduer"
 
+#: ../metadata/blur.xml.in.h:4
 #, fuzzy
-#~ msgid "Blur Filter"
-#~ msgstr "Teksturfilter"
+msgid "Blur Filter"
+msgstr "Teksturfilter"
 
+#: ../metadata/blur.xml.in.h:5
 #, fuzzy
-#~ msgid "Blur Occlusion"
-#~ msgstr "Farvemætning"
+msgid "Blur Occlusion"
+msgstr "Farvemætning"
 
+#: ../metadata/blur.xml.in.h:6
 #, fuzzy
-#~ msgid "Blur Saturation"
-#~ msgstr "Farvemætning"
+msgid "Blur Saturation"
+msgstr "Farvemætning"
 
+#: ../metadata/blur.xml.in.h:7
 #, fuzzy
-#~ msgid "Blur Speed"
-#~ msgstr "Foldehastighed"
+msgid "Blur Speed"
+msgstr "Foldehastighed"
 
+#: ../metadata/blur.xml.in.h:8
 #, fuzzy
-#~ msgid "Blur Windows"
-#~ msgstr "Placer vinduer"
+msgid "Blur Windows"
+msgstr "Placer vinduer"
 
+#: ../metadata/blur.xml.in.h:9
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:10
 #, fuzzy
-#~ msgid "Blur saturation"
-#~ msgstr "Farvemætning"
+msgid "Blur saturation"
+msgstr "Farvemætning"
 
+#: ../metadata/blur.xml.in.h:11
 #, fuzzy
-#~ msgid "Blur windows"
-#~ msgstr "Skaler vinduer"
+msgid "Blur windows"
+msgstr "Skaler vinduer"
 
+#: ../metadata/blur.xml.in.h:12
 #, fuzzy
-#~ msgid "Blur windows that doesn't have focus"
-#~ msgstr "Vinduestyper, der skal \"slingre\", når de får fokus"
+msgid "Blur windows that doesn't have focus"
+msgstr "Vinduestyper, der skal \"slingre\", når de får fokus"
 
+#: ../metadata/blur.xml.in.h:13
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:14
+msgid "Filter method used for blurring"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:15
 #, fuzzy
-#~ msgid "Focus Blur"
-#~ msgstr "Skaler vinduer"
+msgid "Focus Blur"
+msgstr "Skaler vinduer"
 
+#: ../metadata/blur.xml.in.h:16
 #, fuzzy
-#~ msgid "Focus blur windows"
-#~ msgstr "Skaler vinduer"
+msgid "Focus blur windows"
+msgstr "Skaler vinduer"
 
-#~ msgid "Mipmap"
-#~ msgstr "Mipmap"
+#: ../metadata/blur.xml.in.h:17
+msgid "Gaussian"
+msgstr ""
 
+#: ../metadata/blur.xml.in.h:18
+msgid "Gaussian Radius"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:19
+msgid "Gaussian Strength"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:20
+msgid "Gaussian radius"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:21
+msgid "Gaussian strength"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../metadata/blur.xml.in.h:24
 #, fuzzy
-#~ msgid "Mipmap LOD"
-#~ msgstr "Mipmap"
+msgid "Mipmap LOD"
+msgstr "Mipmap"
 
-#, fuzzy
-#~ msgid "Pulse effect"
-#~ msgstr "Fokuseffekt"
+#: ../metadata/blur.xml.in.h:25
+msgid "Mipmap level-of-detail"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Window blur speed"
-#~ msgstr "Fadehastighed for vindue"
+#: ../metadata/blur.xml.in.h:26
+msgid "Pulse"
+msgstr ""
 
+#: ../metadata/blur.xml.in.h:27
 #, fuzzy
-#~ msgid "Windows that should be affected by focus blur"
-#~ msgstr "Vinduestyper, der skal fades"
+msgid "Pulse effect"
+msgstr "Fokuseffekt"
 
-#, fuzzy
-#~ msgid "Windows that should be use alpha blur by default"
-#~ msgstr "Vinduestyper, der skal fades"
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
 
+#: ../metadata/blur.xml.in.h:29
 #, fuzzy
-#~ msgid "Clone Output"
-#~ msgstr "Udgange"
+msgid "Window blur speed"
+msgstr "Fadehastighed for vindue"
 
+#: ../metadata/blur.xml.in.h:30
 #, fuzzy
-#~ msgid "Initiate clone selection"
-#~ msgstr "Tag et skærmbillede"
+msgid "Windows that should be affected by focus blur"
+msgstr "Vinduestyper, der skal fades"
 
+#: ../metadata/blur.xml.in.h:31
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command0"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid "Windows that should be use alpha blur by default"
+msgstr "Vinduestyper, der skal fades"
 
+#: ../metadata/clone.xml.in.h:1
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid "Clone Output"
+msgstr "Udgange"
 
+#: ../metadata/clone.xml.in.h:3
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid "Initiate clone selection"
+msgstr "Tag et skærmbillede"
 
-#, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+#: ../metadata/clone.xml.in.h:4
+msgid "Output clone handler"
+msgstr ""
 
+#: ../metadata/core.xml.in.h:1
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:2
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:3
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:4
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:5
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:6
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:7
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
+#: ../metadata/core.xml.in.h:8
 #, fuzzy
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9"
-#~ msgstr ""
-#~ "En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
-#~ "kommandoen identificeres af kommando%d"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
+
+#: ../metadata/core.xml.in.h:9
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
+
+#: ../metadata/core.xml.in.h:10
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
+
+#: ../metadata/core.xml.in.h:11
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
+
+#: ../metadata/core.xml.in.h:12
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"En tastaturgenvej, der kører Shell-kommandoen, når den aktiveres. Shell-"
+"kommandoen identificeres af kommando%d"
 
 #
-#~ msgid "Active Plugins"
-#~ msgstr "Aktive plugins"
+#: ../metadata/core.xml.in.h:13
+msgid "Active Plugins"
+msgstr "Aktive plugins"
 
-#~ msgid ""
-#~ "Allow drawing of fullscreen windows to not be redirected to offscreen "
-#~ "pixmaps"
-#~ msgstr ""
-#~ "Tillad trækning af fuldskærmsvinduer, uden at der omdirrigeres til "
-#~ "pixmaps uden for skærmbilledet"
+#: ../metadata/core.xml.in.h:14
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Tillad trækning af fuldskærmsvinduer, uden at der omdirrigeres til pixmaps "
+"uden for skærmbilledet"
 
-#~ msgid "Audible Bell"
-#~ msgstr "Hørbar klokke"
+#: ../metadata/core.xml.in.h:15
+msgid "Audible Bell"
+msgstr "Hørbar klokke"
 
-#~ msgid "Audible system beep"
-#~ msgstr "Hørbar systemtone"
+#: ../metadata/core.xml.in.h:16
+msgid "Audible system beep"
+msgstr "Hørbar systemtone"
 
-#~ msgid "Auto-Raise"
-#~ msgstr "Automatisk hævning"
+#: ../metadata/core.xml.in.h:17
+msgid "Auto-Raise"
+msgstr "Automatisk hævning"
 
-#~ msgid "Auto-Raise Delay"
-#~ msgstr "Forsinkelse ved automatisk hævning"
+#: ../metadata/core.xml.in.h:18
+msgid "Auto-Raise Delay"
+msgstr "Forsinkelse ved automatisk hævning"
 
-#~ msgid "Automatic detection of output devices"
-#~ msgstr "Automatisk registrering af udgangsenheder"
+#: ../metadata/core.xml.in.h:19
+msgid "Automatic detection of output devices"
+msgstr "Automatisk registrering af udgangsenheder"
 
-#~ msgid "Automatic detection of refresh rate"
-#~ msgstr "Automatisk registrering af opdateringshastighed"
+#: ../metadata/core.xml.in.h:20
+msgid "Automatic detection of refresh rate"
+msgstr "Automatisk registrering af opdateringshastighed"
 
-#~ msgid "Best"
-#~ msgstr "Bedste"
+#: ../metadata/core.xml.in.h:21
+msgid "Best"
+msgstr "Bedste"
 
-#~ msgid "Click To Focus"
-#~ msgstr "Klik for at fokusere"
+#: ../metadata/core.xml.in.h:22
+msgid "Click To Focus"
+msgstr "Klik for at fokusere"
 
-#~ msgid "Click on window moves input focus to it"
-#~ msgstr "Fokus flyttes til vinduet, når der klikkes på det."
+#: ../metadata/core.xml.in.h:23
+msgid "Click on window moves input focus to it"
+msgstr "Fokus flyttes til vinduet, når der klikkes på det."
 
-#~ msgid "Close active window"
-#~ msgstr "Luk det aktive vindue"
+#: ../metadata/core.xml.in.h:25
+msgid "Close active window"
+msgstr "Luk det aktive vindue"
 
+#: ../metadata/core.xml.in.h:26
 #, fuzzy
-#~ msgid "Command line 0"
-#~ msgstr "Kommando: "
+msgid "Command line 0"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:27
 #, fuzzy
-#~ msgid "Command line 1"
-#~ msgstr "Kommando: "
+msgid "Command line 1"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:28
 #, fuzzy
-#~ msgid "Command line 10"
-#~ msgstr "Kommando: "
+msgid "Command line 10"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:29
 #, fuzzy
-#~ msgid "Command line 11"
-#~ msgstr "Kommando: "
+msgid "Command line 11"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:30
 #, fuzzy
-#~ msgid "Command line 2"
-#~ msgstr "Kommando: "
+msgid "Command line 2"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:31
 #, fuzzy
-#~ msgid "Command line 3"
-#~ msgstr "Kommando: "
+msgid "Command line 3"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:32
 #, fuzzy
-#~ msgid "Command line 4"
-#~ msgstr "Kommando: "
+msgid "Command line 4"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:33
 #, fuzzy
-#~ msgid "Command line 5"
-#~ msgstr "Kommando: "
+msgid "Command line 5"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:34
 #, fuzzy
-#~ msgid "Command line 6"
-#~ msgstr "Kommando: "
+msgid "Command line 6"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:35
 #, fuzzy
-#~ msgid "Command line 7"
-#~ msgstr "Kommando: "
+msgid "Command line 7"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:36
 #, fuzzy
-#~ msgid "Command line 8"
-#~ msgstr "Kommando: "
+msgid "Command line 8"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:37
 #, fuzzy
-#~ msgid "Command line 9"
-#~ msgstr "Kommando: "
+msgid "Command line 9"
+msgstr "Kommando: "
 
+#: ../metadata/core.xml.in.h:38
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command0 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:39
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command1 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:40
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command10 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:41
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command11 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:42
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command2 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:43
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command3 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:44
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command4 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:45
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command5 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:46
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command6 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:47
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command7 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:48
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command8 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
+#: ../metadata/core.xml.in.h:49
 #, fuzzy
-#~ msgid "Command line to be executed in shell when run_command9 is invoked"
-#~ msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "Kommandolinje, der skal køres i Shell, når kør_kommando%d aktiveres"
 
-#~ msgid "Decrease Opacity"
-#~ msgstr "Formindsk uigennemsigtighed"
+#: ../metadata/core.xml.in.h:50
+msgid "Decrease Opacity"
+msgstr "Formindsk uigennemsigtighed"
 
-#~ msgid "Decrease window opacity"
-#~ msgstr "Formindsk vinduets uigennemsigtighed"
+#: ../metadata/core.xml.in.h:51
+msgid "Decrease window opacity"
+msgstr "Formindsk vinduets uigennemsigtighed"
 
-#~ msgid "Default Icon"
-#~ msgstr "Standardikon"
+#: ../metadata/core.xml.in.h:52
+msgid "Default Icon"
+msgstr "Standardikon"
 
-#~ msgid "Default window icon image"
-#~ msgstr "Standardbillede til vinduesikon"
+#: ../metadata/core.xml.in.h:53
+msgid "Default window icon image"
+msgstr "Standardbillede til vinduesikon"
 
-#~ msgid "Detect Outputs"
-#~ msgstr "Registrer udgange"
+#: ../metadata/core.xml.in.h:54
+msgid "Detect Outputs"
+msgstr "Registrer udgange"
 
-#~ msgid "Detect Refresh Rate"
-#~ msgstr "Registrer opdateringshastighed"
+#: ../metadata/core.xml.in.h:55
+msgid "Detect Refresh Rate"
+msgstr "Registrer opdateringshastighed"
 
-#~ msgid "Fast"
-#~ msgstr "Hurtig"
+#: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
 
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:58
+msgid "Fast"
+msgstr "Hurtig"
+
+#: ../metadata/core.xml.in.h:59
 #, fuzzy
-#~ msgid "Focus Prevention Level"
-#~ msgstr "Vinduestyper til fokuseffekt"
+msgid "Focus Prevention Level"
+msgstr "Vinduestyper til fokuseffekt"
 
+#: ../metadata/core.xml.in.h:60
 #, fuzzy
-#~ msgid "Focus Prevention Windows"
-#~ msgstr "Vinduestyper til fokuseffekt"
+msgid "Focus Prevention Windows"
+msgstr "Vinduestyper til fokuseffekt"
 
+#: ../metadata/core.xml.in.h:61
 #, fuzzy
-#~ msgid "Focus prevention windows"
-#~ msgstr "Vinduestyper til fokuseffekt"
+msgid "Focus prevention windows"
+msgstr "Vinduestyper til fokuseffekt"
 
-#~ msgid "General Options"
-#~ msgstr "Generelle muligheder"
+#: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr ""
 
-#~ msgid "General compiz options"
-#~ msgstr "Generelle compiz muligheder"
+#: ../metadata/core.xml.in.h:63
+msgid "General Options"
+msgstr "Generelle muligheder"
 
-#~ msgid "Good"
-#~ msgstr "God"
+#: ../metadata/core.xml.in.h:64
+msgid "General compiz options"
+msgstr "Generelle compiz muligheder"
 
-#~ msgid "Hide Skip Taskbar Windows"
-#~ msgstr "Skjul vinduer, der ikke er på opgavelinjen"
+#: ../metadata/core.xml.in.h:65
+msgid "Good"
+msgstr "God"
 
-#~ msgid "Hide all windows and focus desktop"
-#~ msgstr "Skjul alle vinduer, og flyt fokus til skrivebord"
+#: ../metadata/core.xml.in.h:66
+msgid "Hide Skip Taskbar Windows"
+msgstr "Skjul vinduer, der ikke er på opgavelinjen"
 
-#~ msgid "Hide windows not in taskbar when entering show desktop mode"
-#~ msgstr "Skjul vinduer, der ikke er på opgavelinjen, når skrivebordet vises"
+#: ../metadata/core.xml.in.h:67
+msgid "Hide all windows and focus desktop"
+msgstr "Skjul alle vinduer, og flyt fokus til skrivebord"
 
-#~ msgid "Horizontal Virtual Size"
-#~ msgstr "Vandret virtuel størrelse"
+#: ../metadata/core.xml.in.h:68
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr "Skjul vinduer, der ikke er på opgavelinjen, når skrivebordet vises"
 
-#~ msgid "Ignore Hints When Maximized"
-#~ msgstr "Ignorer vink, når maksimeret"
+#: ../metadata/core.xml.in.h:69
+msgid "High"
+msgstr ""
 
-#~ msgid "Ignore size increment and aspect hints when window is maximized"
-#~ msgstr ""
-#~ "Ignorer vink om størrelsesforøgning og -aspekter, når vinduet er "
-#~ "maksimeret"
+#: ../metadata/core.xml.in.h:70
+msgid "Horizontal Virtual Size"
+msgstr "Vandret virtuel størrelse"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "Forøg uigennemsigtighed"
+#: ../metadata/core.xml.in.h:71
+msgid "If available use compression for textures converted from images"
+msgstr ""
 
-#~ msgid "Increase window opacity"
-#~ msgstr "Forøg vinduets uigennemsigtighed"
+#: ../metadata/core.xml.in.h:72
+msgid "Ignore Hints When Maximized"
+msgstr "Ignorer vink, når maksimeret"
 
+#: ../metadata/core.xml.in.h:73
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Ignorer vink om størrelsesforøgning og -aspekter, når vinduet er maksimeret"
+
+#: ../metadata/core.xml.in.h:74
+msgid "Increase Opacity"
+msgstr "Forøg uigennemsigtighed"
+
+#: ../metadata/core.xml.in.h:75
+msgid "Increase window opacity"
+msgstr "Forøg vinduets uigennemsigtighed"
+
+#: ../metadata/core.xml.in.h:76
 #, fuzzy
-#~ msgid "Interval before raising selected windows"
-#~ msgstr "Interval inden de valgte vinduer hæves"
+msgid "Interval before raising selected windows"
+msgstr "Interval inden de valgte vinduer hæves"
 
-#~ msgid "Interval between ping messages"
-#~ msgstr "Interval mellem ping beskeder"
+#: ../metadata/core.xml.in.h:77
+msgid "Interval between ping messages"
+msgstr "Interval mellem ping beskeder"
 
-#~ msgid "Lighting"
-#~ msgstr "Belysning"
+#: ../metadata/core.xml.in.h:78
+msgid "Level of focus stealing prevention"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:79
+msgid "Lighting"
+msgstr "Belysning"
 
 #
-#~ msgid "List of currently active plugins"
-#~ msgstr "Liste over aktive plugins"
+#: ../metadata/core.xml.in.h:80
+msgid "List of currently active plugins"
+msgstr "Liste over aktive plugins"
 
-#~ msgid "List of strings describing output devices"
-#~ msgstr "Liste over strenge, der beskriver udgangsenheder"
+#: ../metadata/core.xml.in.h:81
+msgid "List of strings describing output devices"
+msgstr "Liste over strenge, der beskriver udgangsenheder"
 
-#
-#~ msgid "Lower Window"
-#~ msgstr "Sænk vindue"
-
-#~ msgid "Lower window beneath other windows"
-#~ msgstr "Placer vinduet under de andre vinduer"
-
-#~ msgid "Maximize Window Horizontally"
-#~ msgstr "Maksimer vindue vandret"
-
-#~ msgid "Maximize Window Vertically"
-#~ msgstr "Maksimer vindue lodret"
-
-#~ msgid "Maximize active window"
-#~ msgstr "Maksimer det aktive vindue"
-
-#~ msgid "Maximize active window horizontally"
-#~ msgstr "Maksimer det aktive vindue i bredden"
-
-#~ msgid "Maximize active window vertically"
-#~ msgstr "Maksimer det aktive vindue i højden"
-
-#~ msgid "Minimize active window"
-#~ msgstr "Minimer det aktive vindue"
-
-#~ msgid "Number of Desktops"
-#~ msgstr "Antal skriveborde"
-
-#, fuzzy
-#~ msgid "Number of virtual desktops"
-#~ msgstr "Antal virtuelle skriveborde"
-
-#~ msgid "Only perform screen updates during vertical blanking period"
-#~ msgstr "Udfør kun skærmopdatering i den lodrette slukkeperiode"
-
-#~ msgid "Opacity Step"
-#~ msgstr "Uigennemsigtighedstrin"
-
-#, fuzzy
-#~ msgid "Opacity change step"
-#~ msgstr "Trin i den trinvise ændring af uigennemsigtigheden"
-
-#, fuzzy
-#~ msgid "Opacity windows"
-#~ msgstr "Mellemrum mellem vinduer"
-
-#~ msgid "Outputs"
-#~ msgstr "Udgange"
-
-#, fuzzy
-#~ msgid "Ping Delay"
-#~ msgstr "Regnforsinkelse"
-
-#~ msgid "Raise On Click"
-#~ msgstr "Hæv ved klik"
+#: ../metadata/core.xml.in.h:82
+msgid "Low"
+msgstr ""
 
 #
-#~ msgid "Raise Window"
-#~ msgstr "Hæv vindue"
+#: ../metadata/core.xml.in.h:83
+msgid "Lower Window"
+msgstr "Sænk vindue"
 
-#~ msgid "Raise selected windows after interval"
-#~ msgstr "Hæv de valgte vinduer efter interval"
+#: ../metadata/core.xml.in.h:84
+msgid "Lower window beneath other windows"
+msgstr "Placer vinduet under de andre vinduer"
 
-#~ msgid "Raise window above other windows"
-#~ msgstr "Hæv vinduet over de andre vinduer"
+#: ../metadata/core.xml.in.h:86
+msgid "Maximize Window Horizontally"
+msgstr "Maksimer vindue vandret"
 
-#~ msgid "Raise windows when clicked"
-#~ msgstr "Hæv vinduerne, når der klikkes"
+#: ../metadata/core.xml.in.h:87
+msgid "Maximize Window Vertically"
+msgstr "Maksimer vindue lodret"
 
-#~ msgid "Refresh Rate"
-#~ msgstr "Opdateringshastighed"
+#: ../metadata/core.xml.in.h:88
+msgid "Maximize active window"
+msgstr "Maksimer det aktive vindue"
 
-#~ msgid "Run Dialog"
-#~ msgstr "Dialogboksen Kør"
+#: ../metadata/core.xml.in.h:89
+msgid "Maximize active window horizontally"
+msgstr "Maksimer det aktive vindue i bredden"
 
+#: ../metadata/core.xml.in.h:90
+msgid "Maximize active window vertically"
+msgstr "Maksimer det aktive vindue i højden"
+
+#: ../metadata/core.xml.in.h:92
+msgid "Minimize active window"
+msgstr "Minimer det aktive vindue"
+
+#: ../metadata/core.xml.in.h:93
+msgid "Number of Desktops"
+msgstr "Antal skriveborde"
+
+#: ../metadata/core.xml.in.h:94
 #, fuzzy
-#~ msgid "Run command 0"
-#~ msgstr "Kommando '%1'"
+msgid "Number of virtual desktops"
+msgstr "Antal virtuelle skriveborde"
 
+#: ../metadata/core.xml.in.h:95
+msgid "Off"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:96
+msgid "Only perform screen updates during vertical blanking period"
+msgstr "Udfør kun skærmopdatering i den lodrette slukkeperiode"
+
+#: ../metadata/core.xml.in.h:97
+msgid "Opacity Step"
+msgstr "Uigennemsigtighedstrin"
+
+#: ../metadata/core.xml.in.h:98
 #, fuzzy
-#~ msgid "Run command 1"
-#~ msgstr "Kommando '%1'"
+msgid "Opacity change step"
+msgstr "Trin i den trinvise ændring af uigennemsigtigheden"
 
+#: ../metadata/core.xml.in.h:99
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:100
+msgid "Opacity window values"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:101
 #, fuzzy
-#~ msgid "Run command 10"
-#~ msgstr "Kommando '%1'"
+msgid "Opacity windows"
+msgstr "Mellemrum mellem vinduer"
 
+#: ../metadata/core.xml.in.h:102
+msgid "Open a terminal"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:103
+msgid "Outputs"
+msgstr "Udgange"
+
+#: ../metadata/core.xml.in.h:104
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:105
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:106
 #, fuzzy
-#~ msgid "Run command 11"
-#~ msgstr "Kommando '%1'"
+msgid "Ping Delay"
+msgstr "Regnforsinkelse"
 
-#, fuzzy
-#~ msgid "Run command 2"
-#~ msgstr "Kommando: "
+#: ../metadata/core.xml.in.h:107
+msgid "Prefer larger output"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Run command 3"
-#~ msgstr "Kommando: "
+#: ../metadata/core.xml.in.h:108
+msgid "Prefer smaller output"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Run command 4"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 5"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 6"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 7"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 8"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Run command 9"
-#~ msgstr "Kommando: "
-
-#, fuzzy
-#~ msgid "Screen size multiplier for horizontal virtual size"
-#~ msgstr "Skærmstørrelsesmultiplikator til den vandrette virtuelle størrelse"
-
-#, fuzzy
-#~ msgid "Screen size multiplier for vertical virtual size"
-#~ msgstr "Skærmstørrelsesmultiplikator til den lodrette virtuelle størrelse"
-
-#~ msgid "Screenshot command line"
-#~ msgstr "Kommandolinje til skærmbillede"
-
-#, fuzzy
-#~ msgid "Show Desktop"
-#~ msgstr "Zoom på skrivebord"
-
-#~ msgid "Show Main Menu"
-#~ msgstr "Vis hovedmenu"
-
-#~ msgid "Show Run Application dialog"
-#~ msgstr "Vis dialogboksen til kørsel af program"
-
-#~ msgid "Show the main menu"
-#~ msgstr "Vis hovedmenuen"
-
-#~ msgid "Slow Animations"
-#~ msgstr "Langsomme animationer"
-
-#~ msgid "Sync To VBlank"
-#~ msgstr "Synkroniser med lodret slukning"
-
-#~ msgid "Take a screenshot"
-#~ msgstr "Tag et skærmbillede"
-
-#~ msgid "Take a screenshot of a window"
-#~ msgstr "Tag et skærmbillede af et vindue"
-
-#, fuzzy
-#~ msgid "Terminal command line"
-#~ msgstr "Kommandolinje til skærmbillede"
-
-#, fuzzy
-#~ msgid "Texture Compression"
-#~ msgstr "Teksturfilter"
-
-#~ msgid "Texture Filter"
-#~ msgstr "Teksturfilter"
-
-#, fuzzy
-#~ msgid "Texture filtering"
-#~ msgstr "Teksturfilter"
-
-#, fuzzy
-#~ msgid "The rate at which the screen is redrawn (times/second)"
-#~ msgstr ""
-#~ "Den hastighed, der anvendes til at tegne skærmbilledet igen (antal gange/"
-#~ "sekund)"
-
-#~ msgid "Toggle Window Maximized"
-#~ msgstr "Slå maksimering af vindue til/fra"
-
-#~ msgid "Toggle Window Maximized Horizontally"
-#~ msgstr "Slå vandret maksimering af vindue til/fra"
-
-#~ msgid "Toggle Window Maximized Vertically"
-#~ msgstr "Slå lodret maksimering af vindue til/fra"
-
-#~ msgid "Toggle Window Shaded"
-#~ msgstr "Slå medtoning af vindue til/fra"
-
-#~ msgid "Toggle active window maximized"
-#~ msgstr "Slå maksimering af det aktive vindue til/fra"
-
-#~ msgid "Toggle active window maximized horizontally"
-#~ msgstr "Slå den vandrette maksimering af det aktive vindue til/fra"
-
-#~ msgid "Toggle active window maximized vertically"
-#~ msgstr "Slå lodret maksimering af det aktive vindue til/fra"
-
-#~ msgid "Toggle active window shaded"
-#~ msgstr "Slå nedtoning af det aktive vindue til/fra"
-
-#~ msgid "Toggle use of slow animations"
-#~ msgstr "Slå brugen af langsomme animationer til/fra"
-
-#~ msgid "Unmaximize active window"
-#~ msgstr "Ophæv maksimeringen af det aktive vindue"
-
-#~ msgid "Unredirect Fullscreen Windows"
-#~ msgstr "Omdiriger ikke fuldskærmsvinduer"
-
-#~ msgid "Use diffuse light when screen is transformed"
-#~ msgstr "Brug spredt lys, når skærmbilledet omdannes"
-
-#~ msgid "Vertical Virtual Size"
-#~ msgstr "Lodret virtuel størrelse"
-
-#~ msgid "Window screenshot command line"
-#~ msgstr "Kommandolinje til vindueskærmbillede"
-
-#, fuzzy
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#~ msgid "Acceleration"
-#~ msgstr "Acceleration"
-
-#~ msgid "Advance to next slide"
-#~ msgstr "Gå til næste dias"
-
-#~ msgid "Animate Skydome"
-#~ msgstr "Animer himmelkuppel"
-
-#~ msgid "Animate skydome when rotating cube"
-#~ msgstr "Animer himmelkuplen, når kubussen roteres"
-
-#, fuzzy
-#~ msgid "Automatic"
-#~ msgstr "Automatisk hævning"
-
-#~ msgid "Color of top and bottom sides of the cube"
-#~ msgstr "Farve til kubussens top og bund"
-
-#~ msgid ""
-#~ "Color to use for the bottom color-stop of the skydome-fallback gradient"
-#~ msgstr ""
-#~ "Farve til det nederste farvestop i himmelkuplens aftagende farveforløb"
-
-#~ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-#~ msgstr ""
-#~ "Farve til det øverste farvestop i himmelkuplens aftagende farveforløb"
-
-#~ msgid "Cube Color"
-#~ msgstr "Kubusfarve"
-
-#~ msgid "Desktop Cube"
-#~ msgstr "Skrivebordskubus"
-
-#~ msgid "Fold Acceleration"
-#~ msgstr "Foldeaccelaration"
-
-#~ msgid "Fold Speed"
-#~ msgstr "Foldehastighed"
-
-#~ msgid "Fold Timestep"
-#~ msgstr "Tidstrin for foldning"
-
-#~ msgid "Generate mipmaps when possible for higher quality scaling"
-#~ msgstr ""
-#~ "Generer mipmaps, når det er muligt, for at opnå en højere "
-#~ "kvalitetsskalering"
-
-#~ msgid "Go back to previous slide"
-#~ msgstr "Gå tilbage til forrige dias"
+#: ../metadata/core.xml.in.h:109
+msgid "Raise On Click"
+msgstr "Hæv ved klik"
 
 #
-#~ msgid "Image files"
-#~ msgstr "Billedfiler"
+#: ../metadata/core.xml.in.h:110
+msgid "Raise Window"
+msgstr "Hæv vindue"
 
-#~ msgid "Image to use as texture for the skydome"
-#~ msgstr "Billede, der skal bruges som tekstur til himmelkuplen"
+#: ../metadata/core.xml.in.h:111
+msgid "Raise selected windows after interval"
+msgstr "Hæv de valgte vinduer efter interval"
 
-#~ msgid "Inside Cube"
-#~ msgstr "Kubus indvendig"
+#: ../metadata/core.xml.in.h:112
+msgid "Raise window above other windows"
+msgstr "Hæv vinduet over de andre vinduer"
 
-#~ msgid "Inside cube"
-#~ msgstr "Kubus indvendig"
+#: ../metadata/core.xml.in.h:113
+msgid "Raise windows when clicked"
+msgstr "Hæv vinduerne, når der klikkes"
 
-#~ msgid ""
-#~ "List of PNG and SVG files that should be rendered on top face of cube"
-#~ msgstr ""
-#~ "Liste over PNG- og SVG-filer, der skal gengives på toppen af kubussen"
+#: ../metadata/core.xml.in.h:114
+msgid "Refresh Rate"
+msgstr "Opdateringshastighed"
+
+#: ../metadata/core.xml.in.h:115
+msgid "Run Dialog"
+msgstr "Dialogboksen Kør"
+
+#: ../metadata/core.xml.in.h:116
+#, fuzzy
+msgid "Run command 0"
+msgstr "Kommando '%1'"
+
+#: ../metadata/core.xml.in.h:117
+#, fuzzy
+msgid "Run command 1"
+msgstr "Kommando '%1'"
+
+#: ../metadata/core.xml.in.h:118
+#, fuzzy
+msgid "Run command 10"
+msgstr "Kommando '%1'"
+
+#: ../metadata/core.xml.in.h:119
+#, fuzzy
+msgid "Run command 11"
+msgstr "Kommando '%1'"
+
+#: ../metadata/core.xml.in.h:120
+#, fuzzy
+msgid "Run command 2"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:121
+#, fuzzy
+msgid "Run command 3"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:122
+#, fuzzy
+msgid "Run command 4"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:123
+#, fuzzy
+msgid "Run command 5"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:124
+#, fuzzy
+msgid "Run command 6"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:125
+#, fuzzy
+msgid "Run command 7"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:126
+#, fuzzy
+msgid "Run command 8"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:127
+#, fuzzy
+msgid "Run command 9"
+msgstr "Kommando: "
+
+#: ../metadata/core.xml.in.h:128
+#, fuzzy
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Skærmstørrelsesmultiplikator til den vandrette virtuelle størrelse"
+
+#: ../metadata/core.xml.in.h:129
+#, fuzzy
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Skærmstørrelsesmultiplikator til den lodrette virtuelle størrelse"
+
+#: ../metadata/core.xml.in.h:130
+msgid "Screenshot command line"
+msgstr "Kommandolinje til skærmbillede"
+
+#: ../metadata/core.xml.in.h:131
+#, fuzzy
+msgid "Show Desktop"
+msgstr "Zoom på skrivebord"
+
+#: ../metadata/core.xml.in.h:132
+msgid "Show Main Menu"
+msgstr "Vis hovedmenu"
+
+#: ../metadata/core.xml.in.h:133
+msgid "Show Run Application dialog"
+msgstr "Vis dialogboksen til kørsel af program"
+
+#: ../metadata/core.xml.in.h:134
+msgid "Show the main menu"
+msgstr "Vis hovedmenuen"
+
+#: ../metadata/core.xml.in.h:135
+msgid "Slow Animations"
+msgstr "Langsomme animationer"
+
+#: ../metadata/core.xml.in.h:136
+msgid "Smart mode"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:137
+msgid "Sync To VBlank"
+msgstr "Synkroniser med lodret slukning"
+
+#: ../metadata/core.xml.in.h:138
+msgid "Take a screenshot"
+msgstr "Tag et skærmbillede"
+
+#: ../metadata/core.xml.in.h:139
+msgid "Take a screenshot of a window"
+msgstr "Tag et skærmbillede af et vindue"
+
+#: ../metadata/core.xml.in.h:140
+#, fuzzy
+msgid "Terminal command line"
+msgstr "Kommandolinje til skærmbillede"
+
+#: ../metadata/core.xml.in.h:141
+#, fuzzy
+msgid "Texture Compression"
+msgstr "Teksturfilter"
+
+#: ../metadata/core.xml.in.h:142
+msgid "Texture Filter"
+msgstr "Teksturfilter"
+
+#: ../metadata/core.xml.in.h:143
+#, fuzzy
+msgid "Texture filtering"
+msgstr "Teksturfilter"
+
+#: ../metadata/core.xml.in.h:144
+#, fuzzy
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr ""
+"Den hastighed, der anvendes til at tegne skærmbilledet igen (antal gange/"
+"sekund)"
+
+#: ../metadata/core.xml.in.h:145
+msgid "Toggle Window Maximized"
+msgstr "Slå maksimering af vindue til/fra"
+
+#: ../metadata/core.xml.in.h:146
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Slå vandret maksimering af vindue til/fra"
+
+#: ../metadata/core.xml.in.h:147
+msgid "Toggle Window Maximized Vertically"
+msgstr "Slå lodret maksimering af vindue til/fra"
+
+#: ../metadata/core.xml.in.h:148
+msgid "Toggle Window Shaded"
+msgstr "Slå medtoning af vindue til/fra"
+
+#: ../metadata/core.xml.in.h:149
+msgid "Toggle active window maximized"
+msgstr "Slå maksimering af det aktive vindue til/fra"
+
+#: ../metadata/core.xml.in.h:150
+msgid "Toggle active window maximized horizontally"
+msgstr "Slå den vandrette maksimering af det aktive vindue til/fra"
+
+#: ../metadata/core.xml.in.h:151
+msgid "Toggle active window maximized vertically"
+msgstr "Slå lodret maksimering af det aktive vindue til/fra"
+
+#: ../metadata/core.xml.in.h:152
+msgid "Toggle active window shaded"
+msgstr "Slå nedtoning af det aktive vindue til/fra"
+
+#: ../metadata/core.xml.in.h:153
+msgid "Toggle use of slow animations"
+msgstr "Slå brugen af langsomme animationer til/fra"
+
+#: ../metadata/core.xml.in.h:155
+msgid "Unmaximize active window"
+msgstr "Ophæv maksimeringen af det aktive vindue"
+
+#: ../metadata/core.xml.in.h:156
+msgid "Unredirect Fullscreen Windows"
+msgstr "Omdiriger ikke fuldskærmsvinduer"
+
+#: ../metadata/core.xml.in.h:157
+msgid "Use diffuse light when screen is transformed"
+msgstr "Brug spredt lys, når skærmbilledet omdannes"
+
+#: ../metadata/core.xml.in.h:158
+msgid "Vertical Virtual Size"
+msgstr "Lodret virtuel størrelse"
+
+#: ../metadata/core.xml.in.h:159
+msgid "Very High"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:160
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:162
+msgid "Window menu button binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:163
+msgid "Window menu key binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:164
+msgid "Window screenshot command line"
+msgstr "Kommandolinje til vindueskærmbillede"
+
+#: ../metadata/core.xml.in.h:165
+#, fuzzy
+msgid "Windows that should be translucent by default"
+msgstr "Vinduestyper, der skal fades"
+
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+msgid "Acceleration"
+msgstr "Acceleration"
+
+#: ../metadata/cube.xml.in.h:2
+msgid "Adjust Image"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:3
+msgid "Adjust top face image to rotation"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:4
+msgid "Advance to next slide"
+msgstr "Gå til næste dias"
+
+#: ../metadata/cube.xml.in.h:5
+msgid "Animate Skydome"
+msgstr "Animer himmelkuppel"
+
+#: ../metadata/cube.xml.in.h:6
+msgid "Animate skydome when rotating cube"
+msgstr "Animer himmelkuplen, når kubussen roteres"
+
+#: ../metadata/cube.xml.in.h:7
+#, fuzzy
+msgid "Automatic"
+msgstr "Automatisk hævning"
+
+#: ../metadata/cube.xml.in.h:8
+msgid "Color of top and bottom sides of the cube"
+msgstr "Farve til kubussens top og bund"
+
+#: ../metadata/cube.xml.in.h:9
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "Farve til det nederste farvestop i himmelkuplens aftagende farveforløb"
+
+#: ../metadata/cube.xml.in.h:10
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "Farve til det øverste farvestop i himmelkuplens aftagende farveforløb"
+
+#: ../metadata/cube.xml.in.h:11
+msgid "Cube Color"
+msgstr "Kubusfarve"
+
+#: ../metadata/cube.xml.in.h:12
+msgid "Desktop Cube"
+msgstr "Skrivebordskubus"
+
+#: ../metadata/cube.xml.in.h:13
+msgid "Fold Acceleration"
+msgstr "Foldeaccelaration"
+
+#: ../metadata/cube.xml.in.h:14
+msgid "Fold Speed"
+msgstr "Foldehastighed"
+
+#: ../metadata/cube.xml.in.h:15
+msgid "Fold Timestep"
+msgstr "Tidstrin for foldning"
+
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"Generer mipmaps, når det er muligt, for at opnå en højere kvalitetsskalering"
+
+#: ../metadata/cube.xml.in.h:17
+msgid "Go back to previous slide"
+msgstr "Gå tilbage til forrige dias"
 
 #
-#~ msgid "Next Slide"
-#~ msgstr "Næste dias"
-
-#, fuzzy
-#~ msgid "One big cube"
-#~ msgstr "Kubus indvendig"
-
-#~ msgid "Place windows on cube"
-#~ msgstr "Placer vinduer på kubus"
-
-#, fuzzy
-#~ msgid "Prev Slide"
-#~ msgstr "Forrige dias"
-
-#~ msgid "Render skydome"
-#~ msgstr "Vis himmelkuppel"
-
-#~ msgid "Scale image"
-#~ msgstr "Tilpas billede"
-
-#~ msgid "Scale images to cover top face of cube"
-#~ msgstr "Tilpas billederne, så de dækker toppen af kubussen"
-
-#~ msgid "Skydome"
-#~ msgstr "Himmelkuppel"
-
-#~ msgid "Skydome Gradient End Color"
-#~ msgstr "Slutfarve til himmelkuplens farvegraduering"
-
-#~ msgid "Skydome Gradient Start Color"
-#~ msgstr "Startfarve til himmelkuplens farvegraduering"
-
-#~ msgid "Skydome Image"
-#~ msgstr "Billede til himmelkuppel"
-
-#~ msgid "Speed"
-#~ msgstr "Hastighed"
-
-#~ msgid "Timestep"
-#~ msgstr "Tidstrin"
-
-#~ msgid "Unfold"
-#~ msgstr "Fold ud"
-
-#~ msgid "Unfold cube"
-#~ msgstr "Fold kubussen ud"
-
-#, fuzzy
-#~ msgid "Allow mipmaps to be generated for decoration textures"
-#~ msgstr "Tillad mipmaps at blive skabt til dekorations texturer"
-
-#~ msgid "Command"
-#~ msgstr "Kommando"
-
-#, fuzzy
-#~ msgid "Decoration windows"
-#~ msgstr "Skaler vinduer"
-
-#~ msgid ""
-#~ "Decorator command line that is executed if no decorator is already running"
-#~ msgstr ""
-#~ "Dekoratørkommandolinje, som udføres, hvis der ikke allerede kører en "
-#~ "dekoratør"
-
-#~ msgid "Drop shadow X offset"
-#~ msgstr "Slagskyggeforskydning X"
-
-#~ msgid "Drop shadow Y offset"
-#~ msgstr "Slagskyggeforskydning Y"
-
-#, fuzzy
-#~ msgid "Drop shadow color"
-#~ msgstr "Slagskyggeradius"
-
-#~ msgid "Drop shadow opacity"
-#~ msgstr "Slagskyggens uigennemsigtighed"
-
-#~ msgid "Drop shadow radius"
-#~ msgstr "Slagskyggeradius"
-
-#, fuzzy
-#~ msgid "Shadow Color"
-#~ msgstr "Fastgør vinduer"
-
-#~ msgid "Shadow Offset X"
-#~ msgstr "Skyggeforskydning X"
-
-#~ msgid "Shadow Offset Y"
-#~ msgstr "Skyggeforskydning Y"
-
-#~ msgid "Shadow Opacity"
-#~ msgstr "Skyggens uigennemsigtighed"
-
-#~ msgid "Shadow Radius"
-#~ msgstr "Skyggeradius"
-
-#, fuzzy
-#~ msgid "Shadow windows"
-#~ msgstr "Fastgør vinduer"
-
-#~ msgid "Window Decoration"
-#~ msgstr "Vinduesdekoration"
-
-#~ msgid "Window decorations"
-#~ msgstr "Vinduesdekorationer"
-
-#, fuzzy
-#~ msgid "Windows that should be decorated"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#, fuzzy
-#~ msgid "Windows that should have a shadow"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#~ msgid "Fade Speed"
-#~ msgstr "Fadehastighed"
-
-#~ msgid "Fade effect on system beep"
-#~ msgstr "Fadeeffekt ved systemtone"
-
-#~ msgid "Fade in windows when mapped and fade out windows when unmapped"
-#~ msgstr ""
-#~ "Vinduerne tones ind, når de tilknyttes, og tones ud, når tilknytningen "
-#~ "ophæves."
-
-#, fuzzy
-#~ msgid "Fade windows"
-#~ msgstr "Skaler vinduer"
-
-#~ msgid "Fading Windows"
-#~ msgstr "Fading af vinduer"
-
-#~ msgid "Fullscreen Visual Bell"
-#~ msgstr "Visuel klokke i fuld skærm"
-
-#~ msgid "Fullscreen fade effect on system beep"
-#~ msgstr "Fadeeffekt i fuld skærm ved systemtone"
-
-#~ msgid "Visual Bell"
-#~ msgstr "Visuel klokke"
-
-#~ msgid "Window fade speed"
-#~ msgstr "Fadehastighed for vindue"
-
-#, fuzzy
-#~ msgid "Windows that should be fading"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#, fuzzy
-#~ msgid "Mount Point"
-#~ msgstr "Punkt"
-
-#, fuzzy
-#~ msgid "Mount point"
-#~ msgstr "Tilføj punkt"
-
-#, fuzzy
-#~ msgid "Ini"
-#~ msgstr "Må ikke ændres"
-
-#, fuzzy
-#~ msgid "Inotify"
-#~ msgstr "Må ikke ændres"
-
-#~ msgid "Minimize Effect"
-#~ msgstr "Minimer effekt"
-
-#, fuzzy
-#~ msgid "Minimize Windows"
-#~ msgstr "Minimer vinduer"
-
-#~ msgid "Minimize speed"
-#~ msgstr "Sænk hastighed"
-
-#~ msgid "Minimize timestep"
-#~ msgstr "Minimer tidstrin"
-
-#~ msgid "Shade Resistance"
-#~ msgstr "Skyggemodstand"
-
-#~ msgid "Shade resistance"
-#~ msgstr "Skyggemodstand"
-
-#~ msgid "Transform windows when they are minimized and unminimized"
-#~ msgstr "Vinduer skal ændres, når de minimeres og gendannes"
-
-#, fuzzy
-#~ msgid "Windows that should be transformed when minimized"
-#~ msgstr "Vinduestyper, der skal ændres, når de minimeres"
-
-#~ msgid "Constrain Y"
-#~ msgstr "Begræns Y"
-
-#~ msgid "Constrain Y coordinate to workspace area"
-#~ msgstr "Begræns Y-koordinaten til arbejdsområdet"
-
-#~ msgid "Initiate Window Move"
-#~ msgstr "Start vinduesflytning"
-
-#, fuzzy
-#~ msgid "Lazy Positioning"
-#~ msgstr "Vis minimerede vinduer"
-
-#~ msgid "Move Window"
-#~ msgstr "Flyt vindue"
-
-#~ msgid "Move window"
-#~ msgstr "Flyt vindue"
-
-#~ msgid "Opacity"
-#~ msgstr "Uigennemsigtighed"
-
-#~ msgid "Opacity level of moving windows"
-#~ msgstr "Uigennemsigtighedsniveau ved flytning af vinduer"
-
-#~ msgid "Snapoff and auto unmaximized maximized windows when dragging"
-#~ msgstr "Frigør og gendan automatisk maksimerede vinduer, når de trækkes"
-
-#~ msgid "Snapoff maximized windows"
-#~ msgstr "Frigør maksimerede vinduer"
-
-#~ msgid "Start moving window"
-#~ msgstr "Start flytning af vindue"
-
-#, fuzzy
-#~ msgid "Force Placement Windows"
-#~ msgstr "Vinduestyper til fokuseffekt"
-
-#, fuzzy
-#~ msgid "Horizontal viewport positions"
-#~ msgstr "Vandret virtuel størrelse"
-
-#, fuzzy
-#~ msgid "Maximize"
-#~ msgstr "Minimeret"
-
-#~ msgid "Place Windows"
-#~ msgstr "Placer vinduer"
-
-#~ msgid "Place windows at appropriate positions when mapped"
-#~ msgstr "Placer vinduerne på de korrekte positioner, når de er tilknyttet"
-
-#, fuzzy
-#~ msgid "Positioned windows"
-#~ msgstr "Vis minimerede vinduer"
-
-#, fuzzy
-#~ msgid "Use active output device"
-#~ msgstr "På alle udgangs enheder"
-
-#, fuzzy
-#~ msgid "Vertical viewport positions"
-#~ msgstr "Vandret virtuel størrelse"
-
-#, fuzzy
-#~ msgid "Viewport positioned windows"
-#~ msgstr "Vis minimerede vinduer"
-
-#~ msgid "Window placement workarounds"
-#~ msgstr "Løsninger til vinduesplaceringer"
-
-#, fuzzy
-#~ msgid "Windows that should be positioned by default"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#, fuzzy
-#~ msgid "Windows that should be positioned in specific viewports by default"
-#~ msgstr "Vinduestyper, der skal skaleres i skaleringstilstand"
-
-#~ msgid "Workarounds"
-#~ msgstr "Løsninger"
-
-#, fuzzy
-#~ msgid "X Positions"
-#~ msgstr "Vis minimerede vinduer"
-
-#, fuzzy
-#~ msgid "X Viewport Positions"
-#~ msgstr "Vandret virtuel størrelse"
-
-#, fuzzy
-#~ msgid "Y Positions"
-#~ msgstr "Vis minimerede vinduer"
-
-#, fuzzy
-#~ msgid "Y Viewport Positions"
-#~ msgstr "Vandret virtuel størrelse"
-
-#, fuzzy
-#~ msgid "Regex Matching"
-#~ msgstr "Slå fastgøring af vinduer til/fra"
-
-#, fuzzy
-#~ msgid "Regex window matching"
-#~ msgstr "Slå fastgøring af vinduer til/fra"
-
-#, fuzzy
-#~ msgid "Border Color"
-#~ msgstr "Kubusfarve"
-
-#, fuzzy
-#~ msgid "Fill Color"
-#~ msgstr "Kubusfarve"
-
-#, fuzzy
-#~ msgid "Initiate Normal Window Resize"
-#~ msgstr "Start tilpasning af vinduets størrelse"
-
-#, fuzzy
-#~ msgid "Initiate Outline Window Resize"
-#~ msgstr "Start tilpasning af vinduets størrelse"
-
-#, fuzzy
-#~ msgid "Initiate Rectangle Window Resize"
-#~ msgstr "Start tilpasning af vinduets størrelse"
-
-#, fuzzy
-#~ msgid "Initiate Stretch Window Resize"
-#~ msgstr "Start tilpasning af vinduets størrelse"
-
-#~ msgid "Initiate Window Resize"
-#~ msgstr "Start tilpasning af vinduets størrelse"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
+#: ../metadata/cube.xml.in.h:18
+msgid "Image files"
+msgstr "Billedfiler"
+
+#: ../metadata/cube.xml.in.h:19
+msgid "Image to use as texture for the skydome"
+msgstr "Billede, der skal bruges som tekstur til himmelkuplen"
+
+#: ../metadata/cube.xml.in.h:20
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:21
+msgid "Inside Cube"
+msgstr "Kubus indvendig"
+
+#: ../metadata/cube.xml.in.h:22
+msgid "Inside cube"
+msgstr "Kubus indvendig"
+
+#: ../metadata/cube.xml.in.h:23
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "Liste over PNG- og SVG-filer, der skal gengives på toppen af kubussen"
+
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
+msgid "Multi Output Mode"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:26
+msgid "Multiple cubes"
+msgstr ""
 
 #
-#, fuzzy
-#~ msgid "Normal Resize Windows"
-#~ msgstr "Tilpas vinduets størrelse"
+#: ../metadata/cube.xml.in.h:27
+msgid "Next Slide"
+msgstr "Næste dias"
 
+#: ../metadata/cube.xml.in.h:28
 #, fuzzy
-#~ msgid "Outline"
-#~ msgstr "Kubusfarve"
+msgid "One big cube"
+msgstr "Kubus indvendig"
+
+#: ../metadata/cube.xml.in.h:29
+msgid "Opacity During Rotation"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:30
+msgid "Opacity When Not Rotating"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:31
+msgid "Opacity of desktop window during rotation."
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:32
+msgid "Opacity of desktop window when not rotating."
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Place windows on cube"
+msgstr "Placer vinduer på kubus"
+
+#: ../metadata/cube.xml.in.h:34
+#, fuzzy
+msgid "Prev Slide"
+msgstr "Forrige dias"
+
+#: ../metadata/cube.xml.in.h:35
+msgid "Render skydome"
+msgstr "Vis himmelkuppel"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Scale image"
+msgstr "Tilpas billede"
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Scale images to cover top face of cube"
+msgstr "Tilpas billederne, så de dækker toppen af kubussen"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:39
+msgid "Skydome"
+msgstr "Himmelkuppel"
+
+#: ../metadata/cube.xml.in.h:40
+msgid "Skydome Gradient End Color"
+msgstr "Slutfarve til himmelkuplens farvegraduering"
+
+#: ../metadata/cube.xml.in.h:41
+msgid "Skydome Gradient Start Color"
+msgstr "Startfarve til himmelkuplens farvegraduering"
+
+#: ../metadata/cube.xml.in.h:42
+msgid "Skydome Image"
+msgstr "Billede til himmelkuppel"
+
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
+msgid "Speed"
+msgstr "Hastighed"
+
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
+msgid "Timestep"
+msgstr "Tidstrin"
+
+#: ../metadata/cube.xml.in.h:45
+msgid "Transparency Only on Mouse Rotate"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:46
+msgid "Unfold"
+msgstr "Fold ud"
+
+#: ../metadata/cube.xml.in.h:47
+msgid "Unfold cube"
+msgstr "Fold kubussen ud"
+
+#: ../metadata/dbus.xml.in.h:1
+msgid "Dbus"
+msgstr ""
+
+#: ../metadata/dbus.xml.in.h:2
+msgid "Dbus Control Backend"
+msgstr ""
+
+#: ../metadata/decoration.xml.in.h:1
+#, fuzzy
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr "Tillad mipmaps at blive skabt til dekorations texturer"
+
+#: ../metadata/decoration.xml.in.h:2
+msgid "Command"
+msgstr "Kommando"
+
+#: ../metadata/decoration.xml.in.h:3
+#, fuzzy
+msgid "Decoration windows"
+msgstr "Skaler vinduer"
+
+#: ../metadata/decoration.xml.in.h:4
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"Dekoratørkommandolinje, som udføres, hvis der ikke allerede kører en "
+"dekoratør"
+
+#: ../metadata/decoration.xml.in.h:5
+msgid "Drop shadow X offset"
+msgstr "Slagskyggeforskydning X"
+
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow Y offset"
+msgstr "Slagskyggeforskydning Y"
+
+#: ../metadata/decoration.xml.in.h:7
+#, fuzzy
+msgid "Drop shadow color"
+msgstr "Slagskyggeradius"
+
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow opacity"
+msgstr "Slagskyggens uigennemsigtighed"
+
+#: ../metadata/decoration.xml.in.h:9
+msgid "Drop shadow radius"
+msgstr "Slagskyggeradius"
+
+#: ../metadata/decoration.xml.in.h:11
+#, fuzzy
+msgid "Shadow Color"
+msgstr "Fastgør vinduer"
+
+#: ../metadata/decoration.xml.in.h:12
+msgid "Shadow Offset X"
+msgstr "Skyggeforskydning X"
+
+#: ../metadata/decoration.xml.in.h:13
+msgid "Shadow Offset Y"
+msgstr "Skyggeforskydning Y"
+
+#: ../metadata/decoration.xml.in.h:14
+msgid "Shadow Opacity"
+msgstr "Skyggens uigennemsigtighed"
+
+#: ../metadata/decoration.xml.in.h:15
+msgid "Shadow Radius"
+msgstr "Skyggeradius"
+
+#: ../metadata/decoration.xml.in.h:16
+#, fuzzy
+msgid "Shadow windows"
+msgstr "Fastgør vinduer"
+
+#: ../metadata/decoration.xml.in.h:17
+msgid "Window Decoration"
+msgstr "Vinduesdekoration"
+
+#: ../metadata/decoration.xml.in.h:18
+msgid "Window decorations"
+msgstr "Vinduesdekorationer"
+
+#: ../metadata/decoration.xml.in.h:19
+#, fuzzy
+msgid "Windows that should be decorated"
+msgstr "Vinduestyper, der skal fades"
+
+#: ../metadata/decoration.xml.in.h:20
+#, fuzzy
+msgid "Windows that should have a shadow"
+msgstr "Vinduestyper, der skal fades"
+
+#: ../metadata/fade.xml.in.h:1
+msgid "Fade On Minimize/Open/Close"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:2
+msgid "Fade Speed"
+msgstr "Fadehastighed"
+
+#: ../metadata/fade.xml.in.h:3
+msgid "Fade effect on minimize/open/close window events"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:4
+msgid "Fade effect on system beep"
+msgstr "Fadeeffekt ved systemtone"
+
+#: ../metadata/fade.xml.in.h:5
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Vinduerne tones ind, når de tilknyttes, og tones ud, når tilknytningen "
+"ophæves."
+
+#: ../metadata/fade.xml.in.h:6
+#, fuzzy
+msgid "Fade windows"
+msgstr "Skaler vinduer"
+
+#: ../metadata/fade.xml.in.h:7
+msgid "Fading Windows"
+msgstr "Fading af vinduer"
+
+#: ../metadata/fade.xml.in.h:8
+msgid "Fullscreen Visual Bell"
+msgstr "Visuel klokke i fuld skærm"
+
+#: ../metadata/fade.xml.in.h:9
+msgid "Fullscreen fade effect on system beep"
+msgstr "Fadeeffekt i fuld skærm ved systemtone"
+
+#: ../metadata/fade.xml.in.h:10
+msgid "Visual Bell"
+msgstr "Visuel klokke"
+
+#: ../metadata/fade.xml.in.h:11
+msgid "Window fade speed"
+msgstr "Fadehastighed for vindue"
+
+#: ../metadata/fade.xml.in.h:12
+#, fuzzy
+msgid "Windows that should be fading"
+msgstr "Vinduestyper, der skal fades"
+
+#: ../metadata/fs.xml.in.h:1
+#, fuzzy
+msgid "Mount Point"
+msgstr "Punkt"
+
+#: ../metadata/fs.xml.in.h:2
+#, fuzzy
+msgid "Mount point"
+msgstr "Tilføj punkt"
+
+#: ../metadata/fs.xml.in.h:3
+msgid "Userspace File System"
+msgstr ""
+
+#: ../metadata/fs.xml.in.h:4
+msgid "Userspace file system"
+msgstr ""
+
+#: ../metadata/gconf.xml.in.h:1
+msgid "GConf"
+msgstr ""
+
+#: ../metadata/gconf.xml.in.h:2
+msgid "GConf Control Backend"
+msgstr ""
+
+#: ../metadata/glib.xml.in.h:1
+msgid "GLib"
+msgstr ""
+
+#: ../metadata/glib.xml.in.h:2
+msgid "GLib main loop support"
+msgstr ""
+
+#: ../metadata/ini.xml.in.h:1
+#, fuzzy
+msgid "Ini"
+msgstr "Må ikke ændres"
+
+#: ../metadata/ini.xml.in.h:2
+msgid "Ini Flat File Backend"
+msgstr ""
+
+#: ../metadata/inotify.xml.in.h:1
+msgid "File change notification plugin"
+msgstr ""
+
+#: ../metadata/inotify.xml.in.h:2
+#, fuzzy
+msgid "Inotify"
+msgstr "Må ikke ændres"
+
+#: ../metadata/kconfig.xml.in.h:1
+msgid "Kconfig"
+msgstr ""
+
+#: ../metadata/kconfig.xml.in.h:2
+msgid "Kconfig Control Backend"
+msgstr ""
+
+#: ../metadata/minimize.xml.in.h:1
+msgid "Minimize Effect"
+msgstr "Minimer effekt"
+
+#: ../metadata/minimize.xml.in.h:2
+#, fuzzy
+msgid "Minimize Windows"
+msgstr "Minimer vinduer"
+
+#: ../metadata/minimize.xml.in.h:3
+msgid "Minimize speed"
+msgstr "Sænk hastighed"
+
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize timestep"
+msgstr "Minimer tidstrin"
+
+#: ../metadata/minimize.xml.in.h:5
+msgid "Shade Resistance"
+msgstr "Skyggemodstand"
+
+#: ../metadata/minimize.xml.in.h:6
+msgid "Shade resistance"
+msgstr "Skyggemodstand"
+
+#: ../metadata/minimize.xml.in.h:9
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Vinduer skal ændres, når de minimeres og gendannes"
+
+#: ../metadata/minimize.xml.in.h:10
+#, fuzzy
+msgid "Windows that should be transformed when minimized"
+msgstr "Vinduestyper, der skal ændres, når de minimeres"
+
+#: ../metadata/move.xml.in.h:1
+msgid "Constrain Y"
+msgstr "Begræns Y"
+
+#: ../metadata/move.xml.in.h:2
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Begræns Y-koordinaten til arbejdsområdet"
+
+#: ../metadata/move.xml.in.h:3
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+
+#: ../metadata/move.xml.in.h:4
+msgid "Initiate Window Move"
+msgstr "Start vinduesflytning"
+
+#: ../metadata/move.xml.in.h:5
+#, fuzzy
+msgid "Lazy Positioning"
+msgstr "Vis minimerede vinduer"
+
+#: ../metadata/move.xml.in.h:6
+msgid "Move Window"
+msgstr "Flyt vindue"
+
+#: ../metadata/move.xml.in.h:7
+msgid "Move window"
+msgstr "Flyt vindue"
+
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:18
+msgid "Opacity"
+msgstr "Uigennemsigtighed"
+
+#: ../metadata/move.xml.in.h:9
+msgid "Opacity level of moving windows"
+msgstr "Uigennemsigtighedsniveau ved flytning af vinduer"
+
+#: ../metadata/move.xml.in.h:10
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr "Frigør og gendan automatisk maksimerede vinduer, når de trækkes"
+
+#: ../metadata/move.xml.in.h:11
+msgid "Snapoff maximized windows"
+msgstr "Frigør maksimerede vinduer"
+
+#: ../metadata/move.xml.in.h:12
+msgid "Start moving window"
+msgstr "Start flytning af vindue"
+
+#: ../metadata/place.xml.in.h:1
+msgid "Algorithm to use for window placement"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:2
+msgid "Cascade"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:3
+msgid "Centered"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:4
+#, fuzzy
+msgid "Force Placement Windows"
+msgstr "Vinduestyper til fokuseffekt"
+
+#: ../metadata/place.xml.in.h:5
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Vandret virtuel størrelse"
+
+#: ../metadata/place.xml.in.h:6
+#, fuzzy
+msgid "Maximize"
+msgstr "Minimeret"
+
+#: ../metadata/place.xml.in.h:8
+msgid "Place Windows"
+msgstr "Placer vinduer"
+
+#: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:10
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Placer vinduerne på de korrekte positioner, når de er tilknyttet"
+
+#: ../metadata/place.xml.in.h:11
+msgid "Placement Mode"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:12
+#, fuzzy
+msgid "Positioned windows"
+msgstr "Vis minimerede vinduer"
+
+#: ../metadata/place.xml.in.h:13
+msgid "Random"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:14
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:15
+msgid "Smart"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:16
+#, fuzzy
+msgid "Use active output device"
+msgstr "På alle udgangs enheder"
+
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:19
+#, fuzzy
+msgid "Vertical viewport positions"
+msgstr "Vandret virtuel størrelse"
+
+#: ../metadata/place.xml.in.h:20
+#, fuzzy
+msgid "Viewport positioned windows"
+msgstr "Vis minimerede vinduer"
+
+#: ../metadata/place.xml.in.h:21
+msgid "Window placement workarounds"
+msgstr "Løsninger til vinduesplaceringer"
+
+#: ../metadata/place.xml.in.h:22
+#, fuzzy
+msgid "Windows that should be positioned by default"
+msgstr "Vinduestyper, der skal fades"
+
+#: ../metadata/place.xml.in.h:23
+#, fuzzy
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr "Vinduestyper, der skal skaleres i skaleringstilstand"
+
+#: ../metadata/place.xml.in.h:24
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+
+#: ../metadata/place.xml.in.h:25
+msgid "Workarounds"
+msgstr "Løsninger"
+
+#: ../metadata/place.xml.in.h:26
+#, fuzzy
+msgid "X Positions"
+msgstr "Vis minimerede vinduer"
+
+#: ../metadata/place.xml.in.h:27
+#, fuzzy
+msgid "X Viewport Positions"
+msgstr "Vandret virtuel størrelse"
+
+#: ../metadata/place.xml.in.h:28
+msgid "X position values"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:29
+#, fuzzy
+msgid "Y Positions"
+msgstr "Vis minimerede vinduer"
+
+#: ../metadata/place.xml.in.h:30
+#, fuzzy
+msgid "Y Viewport Positions"
+msgstr "Vandret virtuel størrelse"
+
+#: ../metadata/place.xml.in.h:31
+msgid "Y position values"
+msgstr ""
+
+#: ../metadata/png.xml.in.h:1
+msgid "Png"
+msgstr ""
+
+#: ../metadata/png.xml.in.h:2
+msgid "Png image loader"
+msgstr ""
+
+#: ../metadata/regex.xml.in.h:1
+#, fuzzy
+msgid "Regex Matching"
+msgstr "Slå fastgøring af vinduer til/fra"
+
+#: ../metadata/regex.xml.in.h:2
+#, fuzzy
+msgid "Regex window matching"
+msgstr "Slå fastgøring af vinduer til/fra"
+
+#: ../metadata/resize.xml.in.h:1
+#, fuzzy
+msgid "Border Color"
+msgstr "Kubusfarve"
+
+#: ../metadata/resize.xml.in.h:2
+msgid "Border color used for outline and rectangle resize modes"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:3
+msgid "Default Resize Mode"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:4
+msgid "Default mode used for window resizing"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:5
+#, fuzzy
+msgid "Fill Color"
+msgstr "Kubusfarve"
+
+#: ../metadata/resize.xml.in.h:6
+msgid "Fill color used for rectangle resize mode"
+msgstr ""
+
+#: ../metadata/resize.xml.in.h:7
+#, fuzzy
+msgid "Initiate Normal Window Resize"
+msgstr "Start tilpasning af vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:8
+#, fuzzy
+msgid "Initiate Outline Window Resize"
+msgstr "Start tilpasning af vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:9
+#, fuzzy
+msgid "Initiate Rectangle Window Resize"
+msgstr "Start tilpasning af vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:10
+#, fuzzy
+msgid "Initiate Stretch Window Resize"
+msgstr "Start tilpasning af vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:11
+msgid "Initiate Window Resize"
+msgstr "Start tilpasning af vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normal"
 
 #
+#: ../metadata/resize.xml.in.h:13
 #, fuzzy
-#~ msgid "Outline Resize Windows"
-#~ msgstr "Tilpas vinduets størrelse"
+msgid "Normal Resize Windows"
+msgstr "Tilpas vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:14
+#, fuzzy
+msgid "Outline"
+msgstr "Kubusfarve"
 
 #
+#: ../metadata/resize.xml.in.h:15
 #, fuzzy
-#~ msgid "Rectangle Resize Windows"
-#~ msgstr "Tilpas vinduets størrelse"
+msgid "Outline Resize Windows"
+msgstr "Tilpas vinduets størrelse"
+
+#: ../metadata/resize.xml.in.h:16
+msgid "Rectangle"
+msgstr ""
 
 #
-#~ msgid "Resize Window"
-#~ msgstr "Tilpas vinduets størrelse"
+#: ../metadata/resize.xml.in.h:17
+#, fuzzy
+msgid "Rectangle Resize Windows"
+msgstr "Tilpas vinduets størrelse"
 
 #
-#~ msgid "Resize window"
-#~ msgstr "Tilpas størrelsen på vinduet"
-
-#~ msgid "Start resizing window"
-#~ msgstr "Start tilpasning af vinduesstørrelsen"
-
-#, fuzzy
-#~ msgid "Start resizing window by stretching it"
-#~ msgstr "Start tilpasning af vinduesstørrelsen"
-
-#, fuzzy
-#~ msgid "Start resizing window normally"
-#~ msgstr "Start tilpasning af vinduesstørrelsen"
-
-#, fuzzy
-#~ msgid "Start resizing window with outline"
-#~ msgstr "Start tilpasning af vinduesstørrelsen"
-
-#, fuzzy
-#~ msgid "Start resizing window with rectangle"
-#~ msgstr "Start tilpasning af vinduesstørrelsen"
+#: ../metadata/resize.xml.in.h:18
+msgid "Resize Window"
+msgstr "Tilpas vinduets størrelse"
 
 #
+#: ../metadata/resize.xml.in.h:19
+msgid "Resize window"
+msgstr "Tilpas størrelsen på vinduet"
+
+#: ../metadata/resize.xml.in.h:20
+msgid "Start resizing window"
+msgstr "Start tilpasning af vinduesstørrelsen"
+
+#: ../metadata/resize.xml.in.h:21
 #, fuzzy
-#~ msgid "Stretch Resize Windows"
-#~ msgstr "Tilpas vinduets størrelse"
+msgid "Start resizing window by stretching it"
+msgstr "Start tilpasning af vinduesstørrelsen"
 
+#: ../metadata/resize.xml.in.h:22
 #, fuzzy
-#~ msgid "Windows that normal resize should be used for"
-#~ msgstr "Vinduestyper, der skal fades"
+msgid "Start resizing window normally"
+msgstr "Start tilpasning af vinduesstørrelsen"
 
+#: ../metadata/resize.xml.in.h:23
 #, fuzzy
-#~ msgid "Windows that outline resize should be used for"
-#~ msgstr "Vinduestyper, der skal fades"
+msgid "Start resizing window with outline"
+msgstr "Start tilpasning af vinduesstørrelsen"
 
+#: ../metadata/resize.xml.in.h:24
 #, fuzzy
-#~ msgid "Windows that rectangle resize should be used for"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#, fuzzy
-#~ msgid "Windows that stretch resize should be used for"
-#~ msgstr "Vinduestyper, der skal fades"
-
-#~ msgid "Edge Flip DnD"
-#~ msgstr "Træk-og-slip til kant, vend"
-
-#~ msgid "Edge Flip Move"
-#~ msgstr "Flyt til kant, vend"
-
-#~ msgid "Edge Flip Pointer"
-#~ msgstr "Markør til kant, vend"
-
-#~ msgid "Flip Time"
-#~ msgstr "Vendingstid"
-
-#~ msgid "Flip to left viewport and warp pointer"
-#~ msgstr ""
-#~ "Vend til venstre visningsområde, og bevar markøren på dens nuværende "
-#~ "relative placering på skærmen"
-
-#~ msgid "Flip to next viewport when dragging object to screen edge"
-#~ msgstr ""
-#~ "Vend til næste visningsområde, når et objekt trækkes til skærmens kant"
-
-#~ msgid "Flip to next viewport when moving pointer to screen edge"
-#~ msgstr ""
-#~ "Vend til næste visningsområde, når markøren flyttes til skærmens kant"
-
-#~ msgid "Flip to next viewport when moving window to screen edge"
-#~ msgstr ""
-#~ "Vend til næste visningsområde, når vinduet flyttes til skærmens kant"
-
-#~ msgid "Flip to right viewport and warp pointer"
-#~ msgstr ""
-#~ "Vend til højre visningsområde, og bevar markøren på dens nuværende "
-#~ "relative placering på skærmen"
-
-#~ msgid "Invert Y axis for pointer movement"
-#~ msgstr "Vend Y-aksen for markørbevægelser"
-
-#~ msgid "Pointer Invert Y"
-#~ msgstr "Omvendt Y-akse for markør"
-
-#~ msgid "Pointer Sensitivity"
-#~ msgstr "Markørfølsomhed"
-
-#, fuzzy
-#~ msgid "Raise window when rotating"
-#~ msgstr "Hæv vinduerne, når der klikkes"
-
-#~ msgid "Rotate Cube"
-#~ msgstr "Roter kubus"
-
-#~ msgid "Rotate Flip Left"
-#~ msgstr "Roter og vend til venstre"
-
-#~ msgid "Rotate Flip Right"
-#~ msgstr "Roter og vend til højre"
-
-#~ msgid "Rotate Left"
-#~ msgstr "Roter venstre"
-
-#~ msgid "Rotate Left with Window"
-#~ msgstr "Roter til venstre med vindue"
-
-#~ msgid "Rotate Right"
-#~ msgstr "Roter højre"
-
-#~ msgid "Rotate Right with Window"
-#~ msgstr "Roter til højre med vindue"
-
-#~ msgid "Rotate To"
-#~ msgstr "Roter til"
-
-#, fuzzy
-#~ msgid "Rotate To Face 1"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 1 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 10"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 10 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 11"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 11 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 12"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 12 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 2"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 2 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 3"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 3 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 4"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 4 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 5"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 5 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 6"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 6 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 7"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 7 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 8"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 8 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#, fuzzy
-#~ msgid "Rotate To Face 9"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate To Face 9 with Window"
-#~ msgstr "Roter til side %d med vindue"
-
-#~ msgid "Rotate desktop cube"
-#~ msgstr "Roter skrivebordskubus"
-
-#~ msgid "Rotate left"
-#~ msgstr "Roter til venstre"
-
-#, fuzzy
-#~ msgid "Rotate left and bring active window along"
-#~ msgstr "Roter til venstre, og lad det aktive vindue følge med"
-
-#~ msgid "Rotate right"
-#~ msgstr "Roter til højre"
-
-#, fuzzy
-#~ msgid "Rotate right and bring active window along"
-#~ msgstr "Roter til højre, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 1"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 1 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 10"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 10 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 11"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 11 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 12"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 12 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 2"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 2 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 3"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 3 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 4"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 4 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 5"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 5 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 6"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 6 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 7"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 7 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 8"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 8 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#, fuzzy
-#~ msgid "Rotate to face 9"
-#~ msgstr "Roter til side %d"
-
-#, fuzzy
-#~ msgid "Rotate to face 9 and bring active window along"
-#~ msgstr "Roter til side %d, og lad det aktive vindue følge med"
-
-#~ msgid "Rotate to viewport"
-#~ msgstr "Roter til visningsområde"
-
-#, fuzzy
-#~ msgid "Rotate window"
-#~ msgstr "Roter vindue"
-
-#~ msgid "Rotate with window"
-#~ msgstr "Roter med vindue"
-
-#~ msgid "Rotation Acceleration"
-#~ msgstr "Rotationsacceleration"
-
-#~ msgid "Rotation Speed"
-#~ msgstr "Rotationshastighed"
-
-#~ msgid "Rotation Timestep"
-#~ msgstr "Tidstrin for rotation"
-
-#, fuzzy
-#~ msgid "Rotation Zoom"
-#~ msgstr "Rotations Zoom"
-
-#~ msgid "Sensitivity of pointer movement"
-#~ msgstr "Det følsomhedsniveau, der skal anvendes til markørbevægelserne"
-
-#, fuzzy
-#~ msgid "Snap Cube Rotation to Bottom Face"
-#~ msgstr "Fastgør kubusrotation til oversiden"
-
-#~ msgid "Snap Cube Rotation to Top Face"
-#~ msgstr "Fastgør kubusrotation til oversiden"
-
-#, fuzzy
-#~ msgid "Snap To Bottom Face"
-#~ msgstr "Fastgør til oversiden"
-
-#~ msgid "Snap To Top Face"
-#~ msgstr "Fastgør til oversiden"
+msgid "Start resizing window with rectangle"
+msgstr "Start tilpasning af vinduesstørrelsen"
+
+#: ../metadata/resize.xml.in.h:25
+msgid "Stretch"
+msgstr ""
 
 #
-#~ msgid "Start Rotation"
-#~ msgstr "Start rotation"
-
-#~ msgid "Timeout before flipping viewport"
-#~ msgstr "Den tid, der går, inden visningsområdet skifter"
-
-#~ msgid "Zoom"
-#~ msgstr "Zoom"
-
-#~ msgid "Amount of opacity in percent"
-#~ msgstr "Uigennemsigtighed i procent"
-
-#~ msgid "Big"
-#~ msgstr "Stor"
-
-#~ msgid "Darken Background"
-#~ msgstr "Gør baggrund mørkere"
-
-#~ msgid "Darken background when scaling windows"
-#~ msgstr "Gør baggrunden mørkere, når vinduerne skaleres"
-
-#~ msgid "Emblem"
-#~ msgstr "Emblem"
-
+#: ../metadata/resize.xml.in.h:26
 #, fuzzy
-#~ msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-#~ msgstr ""
-#~ "Start Vis Skrivebord hvis der klikkes på skrivebordet når Skaler køres"
+msgid "Stretch Resize Windows"
+msgstr "Tilpas vinduets størrelse"
 
-#~ msgid "Hover Time"
-#~ msgstr "Markørens pegetid"
-
-#~ msgid "Initiate Window Picker"
-#~ msgstr "Start vinduesvælger"
-
-#~ msgid "Initiate Window Picker For All Windows"
-#~ msgstr "Start vinduesvælger for alle vinduer"
-
-#~ msgid "Initiate Window Picker For Window Group"
-#~ msgstr "Start vinduesvælger for vinduesgruppe"
-
-#~ msgid "Initiate Window Picker For Windows on Current Output"
-#~ msgstr "Start vinduesvælgeren for vinduer i det aktuelle outputområde"
-
-#~ msgid "Layout and start transforming all windows"
-#~ msgstr "Arranger og start omdannelsen af alle vinduerne"
-
-#~ msgid "Layout and start transforming window group"
-#~ msgstr "Arranger og start omdannelsen af vinduesgruppen"
-
-#~ msgid "Layout and start transforming windows"
-#~ msgstr "Arranger og start omdannelsen af vinduerne"
-
-#~ msgid "Layout and start transforming windows on current output"
-#~ msgstr ""
-#~ "Arranger og start omdannelsen af vinduer i det aktuelle outputområde"
-
-#~ msgid "None"
-#~ msgstr "Ingen"
-
-#~ msgid "On all output devices"
-#~ msgstr "På alle udgangs enheder"
-
-#~ msgid "On current output device"
-#~ msgstr "På nuværende udgangs enhed"
-
-#~ msgid "Overlay Icon"
-#~ msgstr "Overlejringsikon"
-
-#~ msgid "Overlay an icon on windows once they are scaled"
-#~ msgstr "Sæt et ikon på vinduerne, når de er skaleret"
-
-#~ msgid "Scale"
-#~ msgstr "Skaler"
-
+#: ../metadata/resize.xml.in.h:27
 #, fuzzy
-#~ msgid "Scale Windows"
-#~ msgstr "Skaler vinduer"
+msgid "Windows that normal resize should be used for"
+msgstr "Vinduestyper, der skal fades"
 
-#~ msgid "Scale speed"
-#~ msgstr "Skaleringshastighed"
-
-#~ msgid "Scale timestep"
-#~ msgstr "Tidstrin for skalering"
-
-#~ msgid "Scale windows"
-#~ msgstr "Skaler vinduer"
-
-#~ msgid "Space between windows"
-#~ msgstr "Mellemrum mellem vinduer"
-
-#~ msgid "Spacing"
-#~ msgstr "Mellemrum"
-
-#~ msgid ""
-#~ "Time (in ms) before scale mode is terminated when hovering over a window"
-#~ msgstr ""
-#~ "Den tid (i ms), der går, inden skaleringstilstanden afsluttes, når "
-#~ "markøren peger på et vindue"
-
+#: ../metadata/resize.xml.in.h:28
 #, fuzzy
-#~ msgid "Windows that should be scaled in scale mode"
-#~ msgstr "Vinduestyper, der skal skaleres i skaleringstilstand"
+msgid "Windows that outline resize should be used for"
+msgstr "Vinduestyper, der skal fades"
 
+#: ../metadata/resize.xml.in.h:29
 #, fuzzy
-#~ msgid "Directory"
-#~ msgstr "Bibliotek"
+msgid "Windows that rectangle resize should be used for"
+msgstr "Vinduestyper, der skal fades"
 
+#: ../metadata/resize.xml.in.h:30
 #, fuzzy
-#~ msgid "Initiate rectangle screenshot"
-#~ msgstr "Tag et skærmbillede"
+msgid "Windows that stretch resize should be used for"
+msgstr "Vinduestyper, der skal fades"
 
+#: ../metadata/rotate.xml.in.h:2
+msgid "Edge Flip DnD"
+msgstr "Træk-og-slip til kant, vend"
+
+#: ../metadata/rotate.xml.in.h:3
+msgid "Edge Flip Move"
+msgstr "Flyt til kant, vend"
+
+#: ../metadata/rotate.xml.in.h:4
+msgid "Edge Flip Pointer"
+msgstr "Markør til kant, vend"
+
+#: ../metadata/rotate.xml.in.h:5
+msgid "Flip Time"
+msgstr "Vendingstid"
+
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to left viewport and warp pointer"
+msgstr ""
+"Vend til venstre visningsområde, og bevar markøren på dens nuværende "
+"relative placering på skærmen"
+
+#: ../metadata/rotate.xml.in.h:7
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr "Vend til næste visningsområde, når et objekt trækkes til skærmens kant"
+
+#: ../metadata/rotate.xml.in.h:8
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr "Vend til næste visningsområde, når markøren flyttes til skærmens kant"
+
+#: ../metadata/rotate.xml.in.h:9
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr "Vend til næste visningsområde, når vinduet flyttes til skærmens kant"
+
+#: ../metadata/rotate.xml.in.h:10
+msgid "Flip to right viewport and warp pointer"
+msgstr ""
+"Vend til højre visningsområde, og bevar markøren på dens nuværende relative "
+"placering på skærmen"
+
+#: ../metadata/rotate.xml.in.h:12
+msgid "Invert Y axis for pointer movement"
+msgstr "Vend Y-aksen for markørbevægelser"
+
+#: ../metadata/rotate.xml.in.h:13
+msgid "Pointer Invert Y"
+msgstr "Omvendt Y-akse for markør"
+
+#: ../metadata/rotate.xml.in.h:14
+msgid "Pointer Sensitivity"
+msgstr "Markørfølsomhed"
+
+#: ../metadata/rotate.xml.in.h:15
+msgid "Raise on rotate"
+msgstr ""
+
+#: ../metadata/rotate.xml.in.h:16
 #, fuzzy
-#~ msgid "Launch Application"
-#~ msgstr "Vis dialogboksen til kørsel af program"
+msgid "Raise window when rotating"
+msgstr "Hæv vinduerne, når der klikkes"
 
+#: ../metadata/rotate.xml.in.h:17
+msgid "Rotate Cube"
+msgstr "Roter kubus"
+
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate Flip Left"
+msgstr "Roter og vend til venstre"
+
+#: ../metadata/rotate.xml.in.h:19
+msgid "Rotate Flip Right"
+msgstr "Roter og vend til højre"
+
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate Left"
+msgstr "Roter venstre"
+
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Left with Window"
+msgstr "Roter til venstre med vindue"
+
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate Right"
+msgstr "Roter højre"
+
+#: ../metadata/rotate.xml.in.h:23
+msgid "Rotate Right with Window"
+msgstr "Roter til højre med vindue"
+
+#: ../metadata/rotate.xml.in.h:24
+msgid "Rotate To"
+msgstr "Roter til"
+
+#: ../metadata/rotate.xml.in.h:25
 #, fuzzy
-#~ msgid "Screenshot"
-#~ msgstr "Tag et skærmbillede"
+msgid "Rotate To Face 1"
+msgstr "Roter til side %d"
 
+#: ../metadata/rotate.xml.in.h:26
 #, fuzzy
-#~ msgid "Screenshot plugin"
-#~ msgstr "Kommandolinje til skærmbillede"
+msgid "Rotate To Face 1 with Window"
+msgstr "Roter til side %d med vindue"
 
-#~ msgid "Amount of brightness in percent"
-#~ msgstr "Lysstyrken angivet i procent"
-
-#~ msgid "Amount of saturation in percent"
-#~ msgstr "Farvemætningen angivet i procent"
-
-#~ msgid "Application Switcher"
-#~ msgstr "Programskifter"
-
+#: ../metadata/rotate.xml.in.h:27
 #, fuzzy
-#~ msgid "Auto Rotate"
-#~ msgstr "Automatisk hævning"
+msgid "Rotate To Face 10"
+msgstr "Roter til side %d"
 
-#~ msgid "Brightness"
-#~ msgstr "Lysstyrke"
-
-#~ msgid "Bring To Front"
-#~ msgstr "Placer forrest"
-
-#~ msgid "Bring selected window to front"
-#~ msgstr "Placer det valgte vindue forrest"
-
-#~ msgid "Distance desktop should be zoom out while switching windows"
-#~ msgstr "Fjernskrivebord zoomes ud, når der skiftes til et andet vindue"
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Minimized"
-#~ msgstr "Minimeret"
-
+#: ../metadata/rotate.xml.in.h:28
 #, fuzzy
-#~ msgid "Next Panel"
-#~ msgstr "Skrivebordskubus"
+msgid "Rotate To Face 10 with Window"
+msgstr "Roter til side %d med vindue"
 
-#~ msgid "Next window"
-#~ msgstr "Næste vindue"
-
+#: ../metadata/rotate.xml.in.h:29
 #, fuzzy
-#~ msgid "Next window (All windows)"
-#~ msgstr "Næste vindue"
+msgid "Rotate To Face 11"
+msgstr "Roter til side %d"
 
+#: ../metadata/rotate.xml.in.h:30
 #, fuzzy
-#~ msgid "Next window (No popup)"
-#~ msgstr "Næste vindue"
+msgid "Rotate To Face 11 with Window"
+msgstr "Roter til side %d med vindue"
 
-#~ msgid "Popup switcher if not visible and select next window"
-#~ msgstr "Vis opgaveskifteren, hvis den ikke er synlig, og vælg næste vindue"
-
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window out of all windows"
-#~ msgstr ""
-#~ "Vis opgaveskifteren, hvis den ikke er synlig, og vælg næste vindue blandt "
-#~ "alle vinduer"
-
-#~ msgid "Popup switcher if not visible and select previous window"
-#~ msgstr ""
-#~ "Vis opgaveskifteren, hvis den ikke er synlig, og vælg forrige vindue"
-
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window out of all "
-#~ "windows"
-#~ msgstr ""
-#~ "Vis opgaveskifteren, hvis den ikke er synlig, og vælg forrige vindue "
-#~ "blandt alle vinduer"
-
+#: ../metadata/rotate.xml.in.h:31
 #, fuzzy
-#~ msgid "Prev Panel"
-#~ msgstr "Forrige dias"
+msgid "Rotate To Face 12"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:32
+#, fuzzy
+msgid "Rotate To Face 12 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:33
+#, fuzzy
+msgid "Rotate To Face 2"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:34
+#, fuzzy
+msgid "Rotate To Face 2 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:35
+#, fuzzy
+msgid "Rotate To Face 3"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:36
+#, fuzzy
+msgid "Rotate To Face 3 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:37
+#, fuzzy
+msgid "Rotate To Face 4"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:38
+#, fuzzy
+msgid "Rotate To Face 4 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:39
+#, fuzzy
+msgid "Rotate To Face 5"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:40
+#, fuzzy
+msgid "Rotate To Face 5 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:41
+#, fuzzy
+msgid "Rotate To Face 6"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:42
+#, fuzzy
+msgid "Rotate To Face 6 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:43
+#, fuzzy
+msgid "Rotate To Face 7"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:44
+#, fuzzy
+msgid "Rotate To Face 7 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:45
+#, fuzzy
+msgid "Rotate To Face 8"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:46
+#, fuzzy
+msgid "Rotate To Face 8 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:47
+#, fuzzy
+msgid "Rotate To Face 9"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:48
+#, fuzzy
+msgid "Rotate To Face 9 with Window"
+msgstr "Roter til side %d med vindue"
+
+#: ../metadata/rotate.xml.in.h:49
+msgid "Rotate desktop cube"
+msgstr "Roter skrivebordskubus"
+
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate left"
+msgstr "Roter til venstre"
+
+#: ../metadata/rotate.xml.in.h:51
+#, fuzzy
+msgid "Rotate left and bring active window along"
+msgstr "Roter til venstre, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:52
+msgid "Rotate right"
+msgstr "Roter til højre"
+
+#: ../metadata/rotate.xml.in.h:53
+#, fuzzy
+msgid "Rotate right and bring active window along"
+msgstr "Roter til højre, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:54
+#, fuzzy
+msgid "Rotate to face 1"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:55
+#, fuzzy
+msgid "Rotate to face 1 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:56
+#, fuzzy
+msgid "Rotate to face 10"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:57
+#, fuzzy
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:58
+#, fuzzy
+msgid "Rotate to face 11"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:59
+#, fuzzy
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:60
+#, fuzzy
+msgid "Rotate to face 12"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:61
+#, fuzzy
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:62
+#, fuzzy
+msgid "Rotate to face 2"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:63
+#, fuzzy
+msgid "Rotate to face 2 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:64
+#, fuzzy
+msgid "Rotate to face 3"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:65
+#, fuzzy
+msgid "Rotate to face 3 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:66
+#, fuzzy
+msgid "Rotate to face 4"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:67
+#, fuzzy
+msgid "Rotate to face 4 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:68
+#, fuzzy
+msgid "Rotate to face 5"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:69
+#, fuzzy
+msgid "Rotate to face 5 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:70
+#, fuzzy
+msgid "Rotate to face 6"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:71
+#, fuzzy
+msgid "Rotate to face 6 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:72
+#, fuzzy
+msgid "Rotate to face 7"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:73
+#, fuzzy
+msgid "Rotate to face 7 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:74
+#, fuzzy
+msgid "Rotate to face 8"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:75
+#, fuzzy
+msgid "Rotate to face 8 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:76
+#, fuzzy
+msgid "Rotate to face 9"
+msgstr "Roter til side %d"
+
+#: ../metadata/rotate.xml.in.h:77
+#, fuzzy
+msgid "Rotate to face 9 and bring active window along"
+msgstr "Roter til side %d, og lad det aktive vindue følge med"
+
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate to viewport"
+msgstr "Roter til visningsområde"
+
+#: ../metadata/rotate.xml.in.h:79
+#, fuzzy
+msgid "Rotate window"
+msgstr "Roter vindue"
+
+#: ../metadata/rotate.xml.in.h:80
+msgid "Rotate with window"
+msgstr "Roter med vindue"
+
+#: ../metadata/rotate.xml.in.h:81
+msgid "Rotation Acceleration"
+msgstr "Rotationsacceleration"
+
+#: ../metadata/rotate.xml.in.h:82
+msgid "Rotation Speed"
+msgstr "Rotationshastighed"
+
+#: ../metadata/rotate.xml.in.h:83
+msgid "Rotation Timestep"
+msgstr "Tidstrin for rotation"
+
+#: ../metadata/rotate.xml.in.h:84
+#, fuzzy
+msgid "Rotation Zoom"
+msgstr "Rotations Zoom"
+
+#: ../metadata/rotate.xml.in.h:85
+msgid "Sensitivity of pointer movement"
+msgstr "Det følsomhedsniveau, der skal anvendes til markørbevægelserne"
+
+#: ../metadata/rotate.xml.in.h:86
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr "Fastgør kubusrotation til oversiden"
+
+#: ../metadata/rotate.xml.in.h:87
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Fastgør kubusrotation til oversiden"
+
+#: ../metadata/rotate.xml.in.h:88
+#, fuzzy
+msgid "Snap To Bottom Face"
+msgstr "Fastgør til oversiden"
+
+#: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Fastgør til oversiden"
 
 #
-#~ msgid "Prev window"
-#~ msgstr "Forrige vindue"
+#: ../metadata/rotate.xml.in.h:91
+msgid "Start Rotation"
+msgstr "Start rotation"
+
+#: ../metadata/rotate.xml.in.h:92
+msgid "Timeout before flipping viewport"
+msgstr "Den tid, der går, inden visningsområdet skifter"
+
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+msgid "Amount of opacity in percent"
+msgstr "Uigennemsigtighed i procent"
+
+#: ../metadata/scale.xml.in.h:2
+msgid "Big"
+msgstr "Stor"
+
+#: ../metadata/scale.xml.in.h:3
+msgid "Click Desktop to Show Desktop"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid "Darken Background"
+msgstr "Gør baggrund mørkere"
+
+#: ../metadata/scale.xml.in.h:5
+msgid "Darken background when scaling windows"
+msgstr "Gør baggrunden mørkere, når vinduerne skaleres"
+
+#: ../metadata/scale.xml.in.h:6
+msgid "Emblem"
+msgstr "Emblem"
+
+#: ../metadata/scale.xml.in.h:7
+#, fuzzy
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr "Start Vis Skrivebord hvis der klikkes på skrivebordet når Skaler køres"
+
+#: ../metadata/scale.xml.in.h:8
+msgid "Hover Time"
+msgstr "Markørens pegetid"
+
+#: ../metadata/scale.xml.in.h:9
+msgid "Initiate Window Picker"
+msgstr "Start vinduesvælger"
+
+#: ../metadata/scale.xml.in.h:10
+msgid "Initiate Window Picker For All Windows"
+msgstr "Start vinduesvælger for alle vinduer"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Initiate Window Picker For Window Group"
+msgstr "Start vinduesvælger for vinduesgruppe"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Start vinduesvælgeren for vinduer i det aktuelle outputområde"
+
+#: ../metadata/scale.xml.in.h:13
+msgid "Layout and start transforming all windows"
+msgstr "Arranger og start omdannelsen af alle vinduerne"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Layout and start transforming window group"
+msgstr "Arranger og start omdannelsen af vinduesgruppen"
+
+#: ../metadata/scale.xml.in.h:15
+msgid "Layout and start transforming windows"
+msgstr "Arranger og start omdannelsen af vinduerne"
+
+#: ../metadata/scale.xml.in.h:16
+msgid "Layout and start transforming windows on current output"
+msgstr "Arranger og start omdannelsen af vinduer i det aktuelle outputområde"
+
+#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Ingen"
+
+#: ../metadata/scale.xml.in.h:19
+msgid "On all output devices"
+msgstr "På alle udgangs enheder"
+
+#: ../metadata/scale.xml.in.h:20
+msgid "On current output device"
+msgstr "På nuværende udgangs enhed"
+
+#: ../metadata/scale.xml.in.h:22
+msgid "Overlay Icon"
+msgstr "Overlejringsikon"
+
+#: ../metadata/scale.xml.in.h:23
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Sæt et ikon på vinduerne, når de er skaleret"
+
+#: ../metadata/scale.xml.in.h:24
+msgid "Scale"
+msgstr "Skaler"
+
+#: ../metadata/scale.xml.in.h:25
+#, fuzzy
+msgid "Scale Windows"
+msgstr "Skaler vinduer"
+
+#: ../metadata/scale.xml.in.h:26
+msgid "Scale speed"
+msgstr "Skaleringshastighed"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Scale timestep"
+msgstr "Tidstrin for skalering"
+
+#: ../metadata/scale.xml.in.h:28
+msgid "Scale windows"
+msgstr "Skaler vinduer"
+
+#: ../metadata/scale.xml.in.h:29
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:30
+msgid "Space between windows"
+msgstr "Mellemrum mellem vinduer"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Spacing"
+msgstr "Mellemrum"
+
+#: ../metadata/scale.xml.in.h:33
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Den tid (i ms), der går, inden skaleringstilstanden afsluttes, når markøren "
+"peger på et vindue"
+
+#: ../metadata/scale.xml.in.h:35
+#, fuzzy
+msgid "Windows that should be scaled in scale mode"
+msgstr "Vinduestyper, der skal skaleres i skaleringstilstand"
+
+#: ../metadata/screenshot.xml.in.h:1
+msgid "Automatically open screenshot in this application"
+msgstr ""
+
+#: ../metadata/screenshot.xml.in.h:2
+#, fuzzy
+msgid "Directory"
+msgstr "Bibliotek"
+
+#: ../metadata/screenshot.xml.in.h:4
+#, fuzzy
+msgid "Initiate rectangle screenshot"
+msgstr "Tag et skærmbillede"
+
+#: ../metadata/screenshot.xml.in.h:5
+#, fuzzy
+msgid "Launch Application"
+msgstr "Vis dialogboksen til kørsel af program"
+
+#: ../metadata/screenshot.xml.in.h:6
+msgid "Put screenshot images in this directory"
+msgstr ""
+
+#: ../metadata/screenshot.xml.in.h:7
+#, fuzzy
+msgid "Screenshot"
+msgstr "Tag et skærmbillede"
+
+#: ../metadata/screenshot.xml.in.h:8
+#, fuzzy
+msgid "Screenshot plugin"
+msgstr "Kommandolinje til skærmbillede"
+
+#: ../metadata/svg.xml.in.h:1
+msgid "Svg"
+msgstr ""
+
+#: ../metadata/svg.xml.in.h:2
+msgid "Svg image loader"
+msgstr ""
+
+#: ../metadata/switcher.xml.in.h:1
+msgid "Amount of brightness in percent"
+msgstr "Lysstyrken angivet i procent"
+
+#: ../metadata/switcher.xml.in.h:3
+msgid "Amount of saturation in percent"
+msgstr "Farvemætningen angivet i procent"
+
+#: ../metadata/switcher.xml.in.h:4
+msgid "Application Switcher"
+msgstr "Programskifter"
+
+#: ../metadata/switcher.xml.in.h:5
+#, fuzzy
+msgid "Auto Rotate"
+msgstr "Automatisk hævning"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Brightness"
+msgstr "Lysstyrke"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Bring To Front"
+msgstr "Placer forrest"
+
+#: ../metadata/switcher.xml.in.h:8
+msgid "Bring selected window to front"
+msgstr "Placer det valgte vindue forrest"
+
+#: ../metadata/switcher.xml.in.h:9
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr "Fjernskrivebord zoomes ud, når der skiftes til et andet vindue"
+
+#: ../metadata/switcher.xml.in.h:11
+msgid "Icon"
+msgstr "Ikon"
+
+#: ../metadata/switcher.xml.in.h:12
+msgid "Minimized"
+msgstr "Minimeret"
+
+#: ../metadata/switcher.xml.in.h:14
+#, fuzzy
+msgid "Next Panel"
+msgstr "Skrivebordskubus"
+
+#: ../metadata/switcher.xml.in.h:15
+msgid "Next window"
+msgstr "Næste vindue"
+
+#: ../metadata/switcher.xml.in.h:16
+#, fuzzy
+msgid "Next window (All windows)"
+msgstr "Næste vindue"
+
+#: ../metadata/switcher.xml.in.h:17
+#, fuzzy
+msgid "Next window (No popup)"
+msgstr "Næste vindue"
+
+#: ../metadata/switcher.xml.in.h:19
+msgid "Popup switcher if not visible and select next window"
+msgstr "Vis opgaveskifteren, hvis den ikke er synlig, og vælg næste vindue"
+
+#: ../metadata/switcher.xml.in.h:20
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Vis opgaveskifteren, hvis den ikke er synlig, og vælg næste vindue blandt "
+"alle vinduer"
+
+#: ../metadata/switcher.xml.in.h:21
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Vis opgaveskifteren, hvis den ikke er synlig, og vælg forrige vindue"
+
+#: ../metadata/switcher.xml.in.h:22
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Vis opgaveskifteren, hvis den ikke er synlig, og vælg forrige vindue blandt "
+"alle vinduer"
+
+#: ../metadata/switcher.xml.in.h:23
+#, fuzzy
+msgid "Prev Panel"
+msgstr "Forrige dias"
 
 #
-#, fuzzy
-#~ msgid "Prev window (All windows)"
-#~ msgstr "Forrige vindue"
+#: ../metadata/switcher.xml.in.h:24
+msgid "Prev window"
+msgstr "Forrige vindue"
 
 #
+#: ../metadata/switcher.xml.in.h:25
 #, fuzzy
-#~ msgid "Prev window (No popup)"
-#~ msgstr "Forrige vindue"
-
-#~ msgid "Saturation"
-#~ msgstr "Farvemætning"
-
-#, fuzzy
-#~ msgid "Select next panel type window."
-#~ msgstr "Vælg næste vindue"
-
-#, fuzzy
-#~ msgid "Select previous panel type window."
-#~ msgstr "Vælg forrige vindue"
-
-#~ msgid "Show icon next to thumbnail"
-#~ msgstr "Vis ikon ud for miniaturebillede"
-
-#~ msgid "Show minimized windows"
-#~ msgstr "Vis minimerede vinduer"
-
-#~ msgid "Switcher speed"
-#~ msgstr "Hastighed for programskifter"
-
-#~ msgid "Switcher timestep"
-#~ msgstr "Tidstrin for programskifter"
-
-#, fuzzy
-#~ msgid "Switcher windows"
-#~ msgstr "Skaler vinduer"
-
-#, fuzzy
-#~ msgid "Windows that should be shown in switcher"
-#~ msgstr "Vinduestyper, der skal vises i programskifteren"
-
-#~ msgid "Add line"
-#~ msgstr "Tilføj linje"
-
-#~ msgid "Add point"
-#~ msgstr "Tilføj punkt"
-
-#~ msgid "Adds water effects to different desktop actions"
-#~ msgstr "Tilføjer vandeffekter til forskellige skrivebordshandlinger"
-
-#~ msgid "Delay (in ms) between each rain-drop"
-#~ msgstr "Forsinkelse (i ms) mellem hver regndråbe"
-
-#~ msgid "Enable pointer water effects"
-#~ msgstr "Aktiver markørvandeffekter"
-
-#~ msgid "Line"
-#~ msgstr "Line"
-
-#~ msgid "Offset Scale"
-#~ msgstr "Forskydningsstørrelse"
-
-#~ msgid "Point"
-#~ msgstr "Punkt"
-
-#~ msgid "Rain Delay"
-#~ msgstr "Regnforsinkelse"
-
-#~ msgid "Title wave"
-#~ msgstr "Titelbølge"
-
-#~ msgid "Toggle rain"
-#~ msgstr "Regn til/fra"
-
-#~ msgid "Toggle rain effect"
-#~ msgstr "Slå regneffekten til/fra"
-
-#~ msgid "Toggle wiper"
-#~ msgstr "Visker til/fra"
-
-#~ msgid "Toggle wiper effect"
-#~ msgstr "Slå viskereffekten til/fra"
-
-#~ msgid "Water Effect"
-#~ msgstr "Vandeffekt"
-
-#~ msgid "Water offset scale"
-#~ msgstr "Størrelse på vandforskydning"
-
-#~ msgid "Wave effect from window title"
-#~ msgstr "Bølgeeffekt til vinduestitel"
-
-#~ msgid "Focus Effect"
-#~ msgstr "Fokuseffekt"
-
-#~ msgid "Focus Window Effect"
-#~ msgstr "Effekt ved fokus på vinduer"
-
-#, fuzzy
-#~ msgid "Focus Windows"
-#~ msgstr "Vinduestyper til fokuseffekt"
-
-#~ msgid "Friction"
-#~ msgstr "Friktion"
-
-#, fuzzy
-#~ msgid "Grab Windows"
-#~ msgstr "Vinduestyper til gribeeffekt"
-
-#~ msgid "Grid Resolution"
-#~ msgstr "Gitteropløsning"
-
-#~ msgid "Inverted window snapping"
-#~ msgstr "Omvendt fastgøring af vinduer"
-
-#~ msgid "Make window shiver"
-#~ msgstr "Lad vinduer dirre"
-
-#~ msgid "Map Effect"
-#~ msgstr "Tilknytningseffekt"
+msgid "Prev window (All windows)"
+msgstr "Forrige vindue"
 
 #
-#~ msgid "Map Window Effect"
-#~ msgstr "Effekt ved tilknytning af vinduer"
+#: ../metadata/switcher.xml.in.h:26
+#, fuzzy
+msgid "Prev window (No popup)"
+msgstr "Forrige vindue"
+
+#: ../metadata/switcher.xml.in.h:27
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+#: ../metadata/switcher.xml.in.h:28
+msgid "Saturation"
+msgstr "Farvemætning"
+
+#: ../metadata/switcher.xml.in.h:29
+#, fuzzy
+msgid "Select next panel type window."
+msgstr "Vælg næste vindue"
+
+#: ../metadata/switcher.xml.in.h:30
+msgid "Select next window without showing the popup window."
+msgstr ""
+
+#: ../metadata/switcher.xml.in.h:31
+#, fuzzy
+msgid "Select previous panel type window."
+msgstr "Vælg forrige vindue"
+
+#: ../metadata/switcher.xml.in.h:32
+msgid "Select previous window without showing the popup window."
+msgstr ""
+
+#: ../metadata/switcher.xml.in.h:33
+msgid "Show icon next to thumbnail"
+msgstr "Vis ikon ud for miniaturebillede"
+
+#: ../metadata/switcher.xml.in.h:34
+msgid "Show minimized windows"
+msgstr "Vis minimerede vinduer"
+
+#: ../metadata/switcher.xml.in.h:36
+msgid "Switcher speed"
+msgstr "Hastighed for programskifter"
+
+#: ../metadata/switcher.xml.in.h:37
+msgid "Switcher timestep"
+msgstr "Tidstrin for programskifter"
+
+#: ../metadata/switcher.xml.in.h:38
+#, fuzzy
+msgid "Switcher windows"
+msgstr "Skaler vinduer"
+
+#: ../metadata/switcher.xml.in.h:40
+#, fuzzy
+msgid "Windows that should be shown in switcher"
+msgstr "Vinduestyper, der skal vises i programskifteren"
+
+#: ../metadata/video.xml.in.h:1
+msgid "Provide YV12 colorspace support"
+msgstr ""
+
+#: ../metadata/video.xml.in.h:2
+msgid "Video Playback"
+msgstr ""
+
+#: ../metadata/video.xml.in.h:3
+msgid "Video playback"
+msgstr ""
+
+#: ../metadata/video.xml.in.h:4
+msgid "YV12 colorspace"
+msgstr ""
+
+#: ../metadata/water.xml.in.h:1
+msgid "Add line"
+msgstr "Tilføj linje"
+
+#: ../metadata/water.xml.in.h:2
+msgid "Add point"
+msgstr "Tilføj punkt"
+
+#: ../metadata/water.xml.in.h:3
+msgid "Adds water effects to different desktop actions"
+msgstr "Tilføjer vandeffekter til forskellige skrivebordshandlinger"
+
+#: ../metadata/water.xml.in.h:4
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Forsinkelse (i ms) mellem hver regndråbe"
+
+#: ../metadata/water.xml.in.h:5
+msgid "Enable pointer water effects"
+msgstr "Aktiver markørvandeffekter"
+
+#: ../metadata/water.xml.in.h:7
+msgid "Line"
+msgstr "Line"
+
+#: ../metadata/water.xml.in.h:8
+msgid "Offset Scale"
+msgstr "Forskydningsstørrelse"
+
+#: ../metadata/water.xml.in.h:9
+msgid "Point"
+msgstr "Punkt"
+
+#: ../metadata/water.xml.in.h:10
+msgid "Rain Delay"
+msgstr "Regnforsinkelse"
+
+#: ../metadata/water.xml.in.h:11
+msgid "Title wave"
+msgstr "Titelbølge"
+
+#: ../metadata/water.xml.in.h:12
+msgid "Toggle rain"
+msgstr "Regn til/fra"
+
+#: ../metadata/water.xml.in.h:13
+msgid "Toggle rain effect"
+msgstr "Slå regneffekten til/fra"
+
+#: ../metadata/water.xml.in.h:14
+msgid "Toggle wiper"
+msgstr "Visker til/fra"
+
+#: ../metadata/water.xml.in.h:15
+msgid "Toggle wiper effect"
+msgstr "Slå viskereffekten til/fra"
+
+#: ../metadata/water.xml.in.h:16
+msgid "Water Effect"
+msgstr "Vandeffekt"
+
+#: ../metadata/water.xml.in.h:17
+msgid "Water offset scale"
+msgstr "Størrelse på vandforskydning"
+
+#: ../metadata/water.xml.in.h:18
+msgid "Wave effect from window title"
+msgstr "Bølgeeffekt til vinduestitel"
+
+#: ../metadata/wobbly.xml.in.h:1
+msgid "Focus Effect"
+msgstr "Fokuseffekt"
+
+#: ../metadata/wobbly.xml.in.h:2
+msgid "Focus Window Effect"
+msgstr "Effekt ved fokus på vinduer"
+
+#: ../metadata/wobbly.xml.in.h:3
+#, fuzzy
+msgid "Focus Windows"
+msgstr "Vinduestyper til fokuseffekt"
+
+#: ../metadata/wobbly.xml.in.h:4
+msgid "Friction"
+msgstr "Friktion"
+
+#: ../metadata/wobbly.xml.in.h:5
+#, fuzzy
+msgid "Grab Windows"
+msgstr "Vinduestyper til gribeeffekt"
+
+#: ../metadata/wobbly.xml.in.h:6
+msgid "Grid Resolution"
+msgstr "Gitteropløsning"
+
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Inverted window snapping"
+msgstr "Omvendt fastgøring af vinduer"
+
+#: ../metadata/wobbly.xml.in.h:8
+msgid "Make window shiver"
+msgstr "Lad vinduer dirre"
+
+#: ../metadata/wobbly.xml.in.h:9
+msgid "Map Effect"
+msgstr "Tilknytningseffekt"
 
 #
+#: ../metadata/wobbly.xml.in.h:10
+msgid "Map Window Effect"
+msgstr "Effekt ved tilknytning af vinduer"
+
+#
+#: ../metadata/wobbly.xml.in.h:11
 #, fuzzy
-#~ msgid "Map Windows"
-#~ msgstr "Vinduestyper til tilknytningseffekt"
+msgid "Map Windows"
+msgstr "Vinduestyper til tilknytningseffekt"
 
-#~ msgid "Maximize Effect"
-#~ msgstr "Maksimeringseffekt"
+#: ../metadata/wobbly.xml.in.h:12
+msgid "Maximize Effect"
+msgstr "Maksimeringseffekt"
 
-#~ msgid "Minimum Grid Size"
-#~ msgstr "Mindste gitterstørrelse"
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Minimum Grid Size"
+msgstr "Mindste gitterstørrelse"
 
-#~ msgid "Minimum Vertex Grid Size"
-#~ msgstr "Knudernes minimumstørrelse i gitteret"
+#: ../metadata/wobbly.xml.in.h:14
+msgid "Minimum Vertex Grid Size"
+msgstr "Knudernes minimumstørrelse i gitteret"
 
+#: ../metadata/wobbly.xml.in.h:15
 #, fuzzy
-#~ msgid "Move Windows"
-#~ msgstr "Flyt vindue"
+msgid "Move Windows"
+msgstr "Flyt vindue"
 
 # 'driver' as in '(hardware) driver update'
-#~ msgid "Shiver"
-#~ msgstr "Rysten"
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Shiver"
+msgstr "Rysten"
 
-#~ msgid "Snap Inverted"
-#~ msgstr "Omvendt fastgøring"
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Snap Inverted"
+msgstr "Omvendt fastgøring"
 
-#~ msgid "Snap windows"
-#~ msgstr "Fastgør vinduer"
+#: ../metadata/wobbly.xml.in.h:19
+msgid "Snap windows"
+msgstr "Fastgør vinduer"
 
-#~ msgid "Spring Friction"
-#~ msgstr "Fjerderfriktion"
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Spring Friction"
+msgstr "Fjerderfriktion"
 
-#~ msgid "Spring K"
-#~ msgstr "Fjeder-K"
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Spring K"
+msgstr "Fjeder-K"
 
-#~ msgid "Spring Konstant"
-#~ msgstr "Fjederkonstant"
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Spring Konstant"
+msgstr "Fjederkonstant"
 
-#~ msgid "Toggle window snapping"
-#~ msgstr "Slå fastgøring af vinduer til/fra"
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Toggle window snapping"
+msgstr "Slå fastgøring af vinduer til/fra"
 
-#~ msgid "Use spring model for wobbly window effect"
-#~ msgstr "Brug fjedermodel til \"slingrende\" vinduer"
-
-#
-#~ msgid "Vertex Grid Resolution"
-#~ msgstr "Opløsning for knuder i gitteret"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when focused"
-#~ msgstr "Vinduestyper, der skal \"slingre\", når de får fokus"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when grabbed"
-#~ msgstr ""
-#~ "Vinduestyper, der skal \"slingre\", når der tages fat i dem med markøren"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when mapped"
-#~ msgstr "Vinduestyper, der skal \"slingre\", når de tilknyttes"
-
-#, fuzzy
-#~ msgid "Windows that should wobble when moved"
-#~ msgstr "Vinduestyper, der skal \"slingre\", når de flyttes"
-
-#~ msgid "Wobble effect when maximizing and unmaximizing windows"
-#~ msgstr "Vinduerne \"slingrer\", når de maksimeres eller gendannes"
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Use spring model for wobbly window effect"
+msgstr "Brug fjedermodel til \"slingrende\" vinduer"
 
 #
-#~ msgid "Wobbly Windows"
-#~ msgstr "\"Slingrende\" vinduer"
+#: ../metadata/wobbly.xml.in.h:25
+msgid "Vertex Grid Resolution"
+msgstr "Opløsning for knuder i gitteret"
 
-#~ msgid "Filter Linear"
-#~ msgstr "Lineært filter"
-
+#: ../metadata/wobbly.xml.in.h:26
 #, fuzzy
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Brug lineært filter, når der er zoomet ind"
+msgid "Windows that should wobble when focused"
+msgstr "Vinduestyper, der skal \"slingre\", når de får fokus"
 
-#~ msgid "Zoom Desktop"
-#~ msgstr "Zoom på skrivebord"
-
-#~ msgid "Zoom In"
-#~ msgstr "Zoom ind"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Zoom ud"
-
+#: ../metadata/wobbly.xml.in.h:27
 #, fuzzy
-#~ msgid "Zoom Pan"
-#~ msgstr "Zoom ind"
+msgid "Windows that should wobble when grabbed"
+msgstr ""
+"Vinduestyper, der skal \"slingre\", når der tages fat i dem med markøren"
 
-#~ msgid "Zoom Speed"
-#~ msgstr "Zoomhastighed"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Tidstrin for zoom"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Zoom og panorer på skrivebordskubus"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Zoomfaktor"
-
+#: ../metadata/wobbly.xml.in.h:28
 #, fuzzy
-#~ msgid "Zoom pan"
-#~ msgstr "Zoom ind"
+msgid "Windows that should wobble when mapped"
+msgstr "Vinduestyper, der skal \"slingre\", når de tilknyttes"
+
+#: ../metadata/wobbly.xml.in.h:29
+#, fuzzy
+msgid "Windows that should wobble when moved"
+msgstr "Vinduestyper, der skal \"slingre\", når de flyttes"
+
+#: ../metadata/wobbly.xml.in.h:30
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Vinduerne \"slingrer\", når de maksimeres eller gendannes"
+
+#
+#: ../metadata/wobbly.xml.in.h:31
+msgid "Wobbly Windows"
+msgstr "\"Slingrende\" vinduer"
+
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Lineært filter"
+
+#: ../metadata/zoom.xml.in.h:5
+#, fuzzy
+msgid "Use linear filter when zoomed in"
+msgstr "Brug lineært filter, når der er zoomet ind"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Zoom på skrivebord"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Zoom ind"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Zoom ud"
+
+#: ../metadata/zoom.xml.in.h:9
+#, fuzzy
+msgid "Zoom Pan"
+msgstr "Zoom ind"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "Zoomhastighed"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Tidstrin for zoom"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "Zoom og panorer på skrivebordskubus"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "Zoomfaktor"
+
+#: ../metadata/zoom.xml.in.h:14
+#, fuzzy
+msgid "Zoom pan"
+msgstr "Zoom ind"
 
 #~ msgid "Background Images"
 #~ msgstr "Baggrunds Billeder"

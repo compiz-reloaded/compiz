@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-29 14:02+0200\n"
+"POT-Creation-Date: 2008-05-24 22:22+0530\n"
 "PO-Revision-Date: 2008-05-17 23:58+0200\n"
 "Last-Translator: Jim Dusis <jimdusis@yahoo.gr>\n"
 "Language-Team: Greek <jimdusis@yahoo.gr>\n"
@@ -19,2108 +19,2751 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.1.0\n"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Επιφάνεια εργασίας"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+msgid "Window Management"
+msgstr "Διαχείρηση Παραθύρου"
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr "Compiz"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+msgid "Action to take when scrolling the mouse wheel on a window title bar."
+msgstr ""
+"Ενέργεια που θα λάβει χώρα όταν περιστρέφετε τη ρόδα του ποντικιού πάνω σε "
+"μια μπάρα τίτλου ενός παραθύρου."
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+msgid "Blur type"
+msgstr "Είδος θολώματος"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+msgid "Metacity theme active window opacity"
+msgstr "Αδιαφάνεια θέματος ενεργού παραθύρου του Metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+msgid "Metacity theme active window opacity shade"
+msgstr "Σκίαση αδιαφάνειας θέματος ενεργού παραθύρου του Metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity"
+msgstr "Αδιαφάνεια θέματος του Metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Metacity theme opacity shade"
+msgstr "Σκίαση αδιαφάνειας θέματος του Metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr ""
+"Αδιαφάνεια για χρήση στα ενεργά παράθυρα με θέματα διακοσμήσεων του metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid "Opacity to use for metacity theme decorations"
+msgstr "Αδιαφάνεια για χρήση στα θέματα διακοσμήσεων του metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+"Σκίαση ενεργών παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές "
+"σε διάφανο"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+"Σκίαση παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές σε διάφανο"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Title bar mouse wheel action"
+msgstr "Ενέργεια ρόδας ποντικιού στην μπάρα τίτλου"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Type of blur used for window decorations"
+msgstr "Είδος θολώματος για χρήση στις διακοσμήσεις παραθύρων"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:13
+msgid "Use metacity theme"
+msgstr "Χρήση θέματος του metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:14
+msgid "Use metacity theme when drawing window decorations"
+msgstr ""
+"Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Κλείσιμο Παραθύρου"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Απομεγιστοποίηση Παραθύρου"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Μεγιστοποίηση Παραθύρου"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Ελαχιστοποίηση Παραθύρου"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Μενού Παραθύρου"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "Σκίαση"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "Επικάλυψη"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "Καρφίτσωμα"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "Αποσκίαση"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "Μη Επικάλυψη"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "Ξεκαρφίτσωμα"
 
-#: gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Το παράθυρο \"%s\" δεν ανταποκρίνεται."
 
-#: gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ο εξαναγκασμός αυτής της εφαρμογής να τερματιστεί θα προκαλέσει απώλεια των "
 "μη σωσμένων αλλαγών."
 
-#: gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_Εξαναγκασμός Τερματισμού"
 
-#~ msgid "Desktop"
-#~ msgstr "Επιφάνεια εργασίας"
-
-#~ msgid "Window Management"
-#~ msgstr "Διαχείρηση Παραθύρου"
-
-#~ msgid "Compiz"
-#~ msgstr "Compiz"
-
-#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
-#~ msgstr ""
-#~ "Ενέργεια που θα λάβει χώρα όταν περιστρέφετε τη ρόδα του ποντικιού πάνω "
-#~ "σε μια μπάρα τίτλου ενός παραθύρου."
-
-#~ msgid "Blur type"
-#~ msgstr "Είδος θολώματος"
-
-#~ msgid "Metacity theme active window opacity"
-#~ msgstr "Αδιαφάνεια θέματος ενεργού παραθύρου του Metacity"
-
-#~ msgid "Metacity theme active window opacity shade"
-#~ msgstr "Σκίαση αδιαφάνειας θέματος ενεργού παραθύρου του Metacity"
-
-#~ msgid "Metacity theme opacity"
-#~ msgstr "Αδιαφάνεια θέματος του Metacity"
-
-#~ msgid "Metacity theme opacity shade"
-#~ msgstr "Σκίαση αδιαφάνειας θέματος του Metacity"
-
-#~ msgid "Opacity to use for active windows with metacity theme decorations"
-#~ msgstr ""
-#~ "Αδιαφάνεια για χρήση στα ενεργά παράθυρα με θέματα διακοσμήσεων του "
-#~ "metacity"
-
-#~ msgid "Opacity to use for metacity theme decorations"
-#~ msgstr "Αδιαφάνεια για χρήση στα θέματα διακοσμήσεων του metacity"
-
-#~ msgid ""
-#~ "Shade active windows with metacity theme decorations from opaque to "
-#~ "translucent"
-#~ msgstr ""
-#~ "Σκίαση ενεργών παραθύρων με θέματα διακοσμήσεων του metacity από "
-#~ "αδιαφανές σε διάφανο"
-
-#~ msgid ""
-#~ "Shade windows with metacity theme decorations from opaque to translucent"
-#~ msgstr ""
-#~ "Σκίαση παραθύρων με θέματα διακοσμήσεων του metacity από αδιαφανές σε "
-#~ "διάφανο"
-
-#~ msgid "Title bar mouse wheel action"
-#~ msgstr "Ενέργεια ρόδας ποντικιού στην μπάρα τίτλου"
-
-#~ msgid "Type of blur used for window decorations"
-#~ msgstr "Είδος θολώματος για χρήση στις διακοσμήσεις παραθύρων"
-
-#~ msgid "Use metacity theme"
-#~ msgstr "Χρήση θέματος του metacity"
-
-#~ msgid "Use metacity theme when drawing window decorations"
-#~ msgstr ""
-#~ "Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
-
-#~ msgid "Annotate"
-#~ msgstr "Επισημείωση"
-
-#~ msgid "Annotate Fill Color"
-#~ msgstr "Χρώμα Γεμίσματος Επισημείωσης"
-
-#~ msgid "Annotate Stroke Color"
-#~ msgstr "Χρώμα Πινελιάς Επισημείωσης"
-
-#~ msgid "Annotate plugin"
-#~ msgstr "Πρόσθετο επισημείωση"
-
-#~ msgid "Clear"
-#~ msgstr "Καθάρισμα"
-
-#~ msgid "Draw"
-#~ msgstr "Σχεδίαση"
-
-#~ msgid "Draw using tool"
-#~ msgstr "Σχεδίαση με εργαλείο"
-
-#~ msgid "Fill color for annotations"
-#~ msgstr "Γέμισμα χρώματος για επισημειώσεις"
-
-#~ msgid "Initiate"
-#~ msgstr "Εκκίνηση"
-
-#~ msgid "Initiate annotate drawing"
-#~ msgstr "Εκκίνηση ζωγραφίσματος επισημείωσης"
-
-#~ msgid "Initiate annotate erasing"
-#~ msgstr "Εκκίνηση σβησίματος επισημείωσης"
-
-#~ msgid "Initiate erase"
-#~ msgstr "Εκκίνηση σβησίματος"
-
-#~ msgid "Line width"
-#~ msgstr "Πλάτος γραμμής"
-
-#~ msgid "Line width for annotations"
-#~ msgstr "Πλάτος γραμμής για επισημειώσεις"
-
-#~ msgid "Stroke color for annotations"
-#~ msgstr "Χρώμα πινελιάς για επισημειώσεις"
-
-#~ msgid "Stroke width"
-#~ msgstr "Πλάτος πινελιάς"
-
-#~ msgid "Stroke width for annotations"
-#~ msgstr "Πλάτος πινελιάς για επισημειώσεις"
-
-#~ msgid "4xBilinear"
-#~ msgstr "4xBilinear"
-
-#~ msgid "Alpha Blur"
-#~ msgstr "Θόλωμα Άλφα"
-
-#~ msgid "Alpha blur windows"
-#~ msgstr "Θόλωμα άλφα παραθύρων"
-
-#~ msgid "Blur Filter"
-#~ msgstr "Φίλτρο Θολώματος"
-
-#~ msgid "Blur Occlusion"
-#~ msgstr "Φράξιμο Θολώματος"
-
-#~ msgid "Blur Saturation"
-#~ msgstr "Κορεσμός Θολώματος"
-
-#~ msgid "Blur Speed"
-#~ msgstr "Ταχύτητα Θολώματος"
-
-#~ msgid "Blur Windows"
-#~ msgstr "Θόλωμα Παραθύρων"
-
-#~ msgid "Blur behind translucent parts of windows"
-#~ msgstr "Θόλωμα πίσω απ τα διάφανα τμήματα των παραθύρων"
-
-#~ msgid "Blur saturation"
-#~ msgstr "Κορεσμός θολώματος"
-
-#~ msgid "Blur windows"
-#~ msgstr "Θόλωμα παραθύρων"
-
-#~ msgid "Blur windows that doesn't have focus"
-#~ msgstr "Θόλωμα μη εστιασμένων παραθύρων"
-
-#~ msgid "Disable blurring of screen regions obscured by other windows."
-#~ msgstr ""
-#~ "Απενεργοποίηση του θολώματος των περιοχών που καλυπτονται απο άλλα "
-#~ "παραθυρα"
-
-#~ msgid "Filter method used for blurring"
-#~ msgstr "Μέθοδος φιλταρίσματος που χρησιμοποιείται για θόλωμα"
-
-#~ msgid "Focus Blur"
-#~ msgstr "Θόλωμα εστίασης"
-
-#~ msgid "Focus blur windows"
-#~ msgstr "Θόλωμα εστίασης"
-
-#~ msgid "Gaussian"
-#~ msgstr "Gaussian"
-
-#~ msgid "Gaussian Radius"
-#~ msgstr "Ακτίνα Gaussian"
-
-#~ msgid "Gaussian Strength"
-#~ msgstr "Ισχύς Gaussian"
-
-#~ msgid "Gaussian radius"
-#~ msgstr "Ακτίνα gaussian"
-
-#~ msgid "Gaussian strength"
-#~ msgstr "Ισχύς gaussian"
-
-#~ msgid "Independent texture fetch"
-#~ msgstr "Τέχνασμα ανεξάρτητης υφής"
-
-#~ msgid "Mipmap"
-#~ msgstr "Mipmap"
-
-#~ msgid "Mipmap LOD"
-#~ msgstr "ΕΛ Mipmap"
-
-#~ msgid "Mipmap level-of-detail"
-#~ msgstr "Επίπεδο-λεπτομέρειας mipmap"
-
-#~ msgid "Pulse"
-#~ msgstr "Παλμός"
-
-#~ msgid "Pulse effect"
-#~ msgstr "Εφέ παλμού"
-
-#~ msgid ""
-#~ "Use the available texture units to do as many as possible independent "
-#~ "texture fetches."
-#~ msgstr ""
-#~ "Χρήση των διαθέσιμων μονάδων υφών για πραγματοποίηση όσο το δυνατό "
-#~ "περισσότερων τεχνασμάτων ανεξάρτητης υφής."
-
-#~ msgid "Window blur speed"
-#~ msgstr "Ταχύτητα θολώματος παραθύρων"
-
-#~ msgid "Windows that should be affected by focus blur"
-#~ msgstr "Παράθυρα που πρέπει να επηρεαστούν απο το θολωμα εστίασης"
-
-#~ msgid "Windows that should be use alpha blur by default"
-#~ msgstr "Παράθυρα που πρέπει να χρησιμοποιήσουν ως προεπιλογή το θόλωμα αλφα"
-
-#~ msgid "Clone Output"
-#~ msgstr "Αποτέλεσμα Εξόδου Κλωνοποίησης"
-
-#~ msgid "Initiate clone selection"
-#~ msgstr "Εκκίνηση επιλογής κλωνοποίησης"
-
-#~ msgid "Output clone handler"
-#~ msgstr "Χειριστής αποτελέσματος εξόδου κλωνοποίησης"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command0"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή0"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή1"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή10"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή11"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή2"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή3"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή4"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή5"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή6"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή7"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή8"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9"
-#~ msgstr ""
-#~ "Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή "
-#~ "κέλυφους αναγνωρισμένη ως εντολή9"
-
-#~ msgid "Active Plugins"
-#~ msgstr "Ενεργά Πρόσθετα"
-
-#~ msgid ""
-#~ "Allow drawing of fullscreen windows to not be redirected to offscreen "
-#~ "pixmaps"
-#~ msgstr ""
-#~ "Επέτρεψε τη σχεδίαση πλήρους οθόνης παραθύρων να μην επανακατευθύνονται "
-#~ "στα εκτός οθόνης pixmaps"
-
-#~ msgid "Audible Bell"
-#~ msgstr "Ηχητικό Καμπανάκι"
-
-#~ msgid "Audible system beep"
-#~ msgstr "Ηχητικό μπιπ συστήματος"
-
-#~ msgid "Auto-Raise"
-#~ msgstr "Αυτόματη Ανύψωση"
-
-#~ msgid "Auto-Raise Delay"
-#~ msgstr "Καθυστέρηση Αυτόματης Ανύψωσης"
-
-#~ msgid "Automatic detection of output devices"
-#~ msgstr "Αυτόματος εντοπισμός των συσκευών εξόδου"
-
-#~ msgid "Automatic detection of refresh rate"
-#~ msgstr "Αυτόματος εντοπισμός του ρυθμού ανανέωσης"
-
-#~ msgid "Best"
-#~ msgstr "Βέλτιστο"
-
-#~ msgid "Click To Focus"
-#~ msgstr "Κλικ Για Εστίαση"
-
-#~ msgid "Click on window moves input focus to it"
-#~ msgstr "Κλικ σε παράθυρο μεταφέρει την εστίαση εισόδου σε αυτό"
-
-#~ msgid "Close active window"
-#~ msgstr "Κλείσιμο ενεργού παραθύρου"
-
-#~ msgid "Command line 0"
-#~ msgstr "Γραμμή εντολών 0"
-
-#~ msgid "Command line 1"
-#~ msgstr "Γραμμή εντολών 1"
-
-#~ msgid "Command line 10"
-#~ msgstr "Γραμμή εντολών 10"
-
-#~ msgid "Command line 11"
-#~ msgstr "Γραμμή εντολών 11"
-
-#~ msgid "Command line 2"
-#~ msgstr "Γραμμή εντολών 2"
-
-#~ msgid "Command line 3"
-#~ msgstr "Γραμμή εντολών 3"
-
-#~ msgid "Command line 4"
-#~ msgstr "Γραμμή εντολών 4"
-
-#~ msgid "Command line 5"
-#~ msgstr "Γραμμή εντολών 5"
-
-#~ msgid "Command line 6"
-#~ msgstr "Γραμμή εντολών 6"
-
-#~ msgid "Command line 7"
-#~ msgstr "Γραμμή εντολών 7"
-
-#~ msgid "Command line 8"
-#~ msgstr "Γραμμή εντολών 8"
-
-#~ msgid "Command line 9"
-#~ msgstr "Γραμμή εντολών 9"
-
-#~ msgid "Command line to be executed in shell when run_command0 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής0"
-
-#~ msgid "Command line to be executed in shell when run_command1 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής1"
-
-#~ msgid "Command line to be executed in shell when run_command10 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής10"
-
-#~ msgid "Command line to be executed in shell when run_command11 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής11"
-
-#~ msgid "Command line to be executed in shell when run_command2 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής2"
-
-#~ msgid "Command line to be executed in shell when run_command3 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής3"
-
-#~ msgid "Command line to be executed in shell when run_command4 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής4"
-
-#~ msgid "Command line to be executed in shell when run_command5 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής5"
-
-#~ msgid "Command line to be executed in shell when run_command6 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής6"
-
-#~ msgid "Command line to be executed in shell when run_command7 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής7"
-
-#~ msgid "Command line to be executed in shell when run_command8 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής8"
-
-#~ msgid "Command line to be executed in shell when run_command9 is invoked"
-#~ msgstr ""
-#~ "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το "
-#~ "τρέξιμο_εντολής9"
-
-#~ msgid "Decrease Opacity"
-#~ msgstr "Μείωση Αδιαφάνειας"
-
-#~ msgid "Decrease window opacity"
-#~ msgstr "Μείωση αδιαφάνειας παραθύρου"
-
-#~ msgid "Default Icon"
-#~ msgstr "Προεπιλεγμένο Εικονίδιο"
-
-#~ msgid "Default window icon image"
-#~ msgstr "Προεπιλεγμένη εικόνα εικονιδίου παραθύρου"
-
-#~ msgid "Detect Outputs"
-#~ msgstr "Ανίχνευση Εξόδων"
-
-#~ msgid "Detect Refresh Rate"
-#~ msgstr "Ανίχνευση Ρυθμού Ανανέωσης"
-
-#~ msgid ""
-#~ "Duration the pointer must rest in a screen edge before an edge action is "
-#~ "taken."
-#~ msgstr ""
-#~ "Διάρκεια χρόνου που πρέπει ο δείκτης του ποντικιού να παραμείνει σε μια "
-#~ "γωνία της οθόνης πριν η ενέργεια που έχει οριστεί σ αυτή την άκρη να "
-#~ "πραγματοποιηθεί."
-
-#~ msgid "Edge Trigger Delay"
-#~ msgstr "Καθυστέρηση Διακόπτη 'Ακρης"
-
-#~ msgid "Fast"
-#~ msgstr "Γρήγορο"
-
-#~ msgid "Focus Prevention Level"
-#~ msgstr "Εστίαση Προληπτικού Επιπέδου"
-
-#~ msgid "Focus Prevention Windows"
-#~ msgstr "Εστίαση Προστατευμένων Παραθύρων"
-
-#~ msgid "Focus prevention windows"
-#~ msgstr "Εστίαση προστατευμένων παραθύρων"
-
-#~ msgid "Force independent output painting."
-#~ msgstr "Εξαναγκασμός ανεξάρτητης απεικόνισης."
-
-#~ msgid "General Options"
-#~ msgstr "Γενικές Επιλογές"
-
-#~ msgid "General compiz options"
-#~ msgstr "Γενικές επιλογές του compiz"
-
-#~ msgid "Good"
-#~ msgstr "Καλό"
-
-#~ msgid "Hide Skip Taskbar Windows"
-#~ msgstr "Απόκρυψη Αγνοημένων Παραθύρων Γραμμής Εργασιών"
-
-#~ msgid "Hide all windows and focus desktop"
-#~ msgstr "Απόκρυψη όλων των παραθύρων και εστίαση στην επιφάνεια εργασίας"
-
-#~ msgid "Hide windows not in taskbar when entering show desktop mode"
-#~ msgstr ""
-#~ "Απόκρυψη παραθύρων που δεν βρίσκονται στην γραμμή εργασιων κατα την "
-#~ "μετάβαση στην κατάσταση εμφάνισης επιφάνειας εργασίας"
-
-#~ msgid "High"
-#~ msgstr "Υψηλό"
-
-#~ msgid "Horizontal Virtual Size"
-#~ msgstr "Οριζόντιο Εικονικό Μέγεθος"
-
-#~ msgid "If available use compression for textures converted from images"
-#~ msgstr ""
-#~ "Εαν είναι διαθέσιμο χρήση συμπίεσης για υφές που έχουν προέλθει από "
-#~ "εικόνες"
-
-#~ msgid "Ignore Hints When Maximized"
-#~ msgstr "Αγνόηση Υποδείξεων Στη Μεγιστοποίηση"
-
-#~ msgid "Ignore size increment and aspect hints when window is maximized"
-#~ msgstr ""
-#~ "Αγνόηση αύξησης μεγέθους και υποδείξεων αναλογίας όταν το παράθυρο "
-#~ "μεγιστοποιείται"
-
-#~ msgid "Increase Opacity"
-#~ msgstr "Αύξηση Αδιαφάνειας"
-
-#~ msgid "Increase window opacity"
-#~ msgstr "Αύξηση αδιαφάνειας παραθύρου"
-
-#~ msgid "Interval before raising selected windows"
-#~ msgstr "Διάστημα πριν την ανύψωση των επιλεγμένων παραθύρων"
-
-#~ msgid "Interval between ping messages"
-#~ msgstr "Διάστημα μεταξύ των μηνυμάτων ping"
-
-#~ msgid "Level of focus stealing prevention"
-#~ msgstr "Επίπεδο αποφυγής απόσπασης εστίασης"
-
-#~ msgid "Lighting"
-#~ msgstr "Φωτισμός"
-
-#~ msgid "List of currently active plugins"
-#~ msgstr "Λίστα των τρέχοντων ενεργών προσθέτων"
-
-#~ msgid "List of strings describing output devices"
-#~ msgstr "Λίστα με προσδιοριστικά στρινγκ για τις συσκευές εξόδου"
-
-#~ msgid "Low"
-#~ msgstr "Χαμηλό"
-
-#~ msgid "Lower Window"
-#~ msgstr "Κατέβασμα Παραθύρου"
-
-#~ msgid "Lower window beneath other windows"
-#~ msgstr "Κατέβασμα παραθύρου κάτω απ τα άλλα παράθυρα"
-
-#~ msgid "Maximize Window Horizontally"
-#~ msgstr "Μεγιστοποίηση Παραθύρου Οριζόντια"
-
-#~ msgid "Maximize Window Vertically"
-#~ msgstr "Μεγιστοποίηση Παραθύρου Κάθετα"
-
-#~ msgid "Maximize active window"
-#~ msgstr "Μεγιστοποίηση ενεργού παραθύρου"
-
-#~ msgid "Maximize active window horizontally"
-#~ msgstr "Μεγιστοποίηση ενεργού παραθύρου οριζόντια"
-
-#~ msgid "Maximize active window vertically"
-#~ msgstr "Μεγιστοποίηση ενεργού παραθύρου κάθετα"
-
-#~ msgid "Minimize active window"
-#~ msgstr "Ελαχιστοποίηση ενεργού παραθύρου"
-
-#~ msgid "Number of Desktops"
-#~ msgstr "Αριθμός Επιφανειών Εργασίας"
-
-#~ msgid "Number of virtual desktops"
-#~ msgstr "Αριθμός ψεύτικων επιφανειών εργασίας"
-
-#~ msgid "Off"
-#~ msgstr "Κλειστό"
-
-#~ msgid "Only perform screen updates during vertical blanking period"
-#~ msgstr ""
-#~ "Πραγματοποίηση ανανεώσεων οθόνης μόνο κατα τη διάρκεια της κάθετης "
-#~ "περιοδικής ανανέωσης"
-
-#~ msgid "Opacity Step"
-#~ msgstr "Βήμα Αδιαφάνειας"
-
-#~ msgid "Opacity change step"
-#~ msgstr "Αλλαγή βήματος αδιαφάνειας"
-
-#~ msgid "Opacity values for windows that should be translucent by default"
-#~ msgstr ""
-#~ "Τιμές αδιαφάνειας για παράθυρα που πρέπει να είναι διάφανα απο προεπιλογή"
-
-#~ msgid "Opacity window values"
-#~ msgstr "Τιμές αδιαφάνειας παραθύρων"
-
-#~ msgid "Opacity windows"
-#~ msgstr "Αδιαφάνεια παραθύρων"
-
-#~ msgid "Open a terminal"
-#~ msgstr "Ανοιγμα ενός τερματικού"
-
-#~ msgid "Outputs"
-#~ msgstr "Αποτελέσματα-Εξοδοι"
-
-#~ msgid "Ping Delay"
-#~ msgstr "Καθυστέρηση Ping"
-
-#~ msgid "Raise On Click"
-#~ msgstr "Ανύψωση Με Κλικ"
-
-#~ msgid "Raise Window"
-#~ msgstr "Ανύψωση Παραθύρου"
-
-#~ msgid "Raise selected windows after interval"
-#~ msgstr "Ανύψωση επιλεγμένων παραθύρων μετα απ το διάστημα"
-
-#~ msgid "Raise window above other windows"
-#~ msgstr "Ανύψωση παραθύρου πάνω απ τα άλλα παράθυρα"
-
-#~ msgid "Raise windows when clicked"
-#~ msgstr "Ανύψωση παραθύρων όταν κλικαριστούν"
-
-#~ msgid "Refresh Rate"
-#~ msgstr "Ρυθμός Ανανέωσης"
-
-#~ msgid "Run Dialog"
-#~ msgstr "Τρέξιμο Διαλόγου"
-
-#~ msgid "Run command 0"
-#~ msgstr "Τρέξιμο εντολής 0"
-
-#~ msgid "Run command 1"
-#~ msgstr "Τρέξιμο εντολής 1"
-
-#~ msgid "Run command 10"
-#~ msgstr "Τρέξιμο εντολής 10"
-
-#~ msgid "Run command 11"
-#~ msgstr "Τρέξιμο εντολής 11"
-
-#~ msgid "Run command 2"
-#~ msgstr "Τρέξιμο εντολής 2"
-
-#~ msgid "Run command 3"
-#~ msgstr "Τρέξιμο εντολής 3"
-
-#~ msgid "Run command 4"
-#~ msgstr "Τρέξιμο εντολής 4"
-
-#~ msgid "Run command 5"
-#~ msgstr "Τρέξιμο εντολής 5"
-
-#~ msgid "Run command 6"
-#~ msgstr "Τρέξιμο εντολής 6"
-
-#~ msgid "Run command 7"
-#~ msgstr "Τρέξιμο εντολής 7"
-
-#~ msgid "Run command 8"
-#~ msgstr "Τρέξιμο εντολής 8"
-
-#~ msgid "Run command 9"
-#~ msgstr "Τρέξιμο εντολής 9"
-
-#~ msgid "Screen size multiplier for horizontal virtual size"
-#~ msgstr "Πολλαπλασιαστής μεγέθους οθόνης για οριζόντιο εικονικό μέγεθος"
-
-#~ msgid "Screen size multiplier for vertical virtual size"
-#~ msgstr "Πολλαπλασιαστής μεγέθους οθόνης για κάθετο εικονικό μέγεθος"
-
-#~ msgid "Screenshot command line"
-#~ msgstr "Γραμμή εντολών αρπαγής οθόνης"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Εμφάνιση Επιφάνειας Εργασίας"
-
-#~ msgid "Show Main Menu"
-#~ msgstr "Εμφάνιση Κύριου Μενού"
-
-#~ msgid "Show Run Application dialog"
-#~ msgstr "Εμφάνιση διαλόγου Τρεξίματος Εφαρμογής"
-
-#~ msgid "Show the main menu"
-#~ msgstr "Εμφάνιση του κύριου μενού"
-
-#~ msgid "Slow Animations"
-#~ msgstr "Αργές Γραφικές Απεικονίσεις"
-
+#: ../metadata/annotate.xml.in.h:1
+msgid "Annotate"
+msgstr "Επισημείωση"
+
+#: ../metadata/annotate.xml.in.h:2
+msgid "Annotate Fill Color"
+msgstr "Χρώμα Γεμίσματος Επισημείωσης"
+
+#: ../metadata/annotate.xml.in.h:3
+msgid "Annotate Stroke Color"
+msgstr "Χρώμα Πινελιάς Επισημείωσης"
+
+#: ../metadata/annotate.xml.in.h:4
+msgid "Annotate plugin"
+msgstr "Πρόσθετο επισημείωση"
+
+#: ../metadata/annotate.xml.in.h:5
+msgid "Clear"
+msgstr "Καθάρισμα"
+
+#: ../metadata/annotate.xml.in.h:6
+msgid "Draw"
+msgstr "Σχεδίαση"
+
+#: ../metadata/annotate.xml.in.h:7
+msgid "Draw using tool"
+msgstr "Σχεδίαση με εργαλείο"
+
+#: ../metadata/annotate.xml.in.h:8
+msgid "Fill color for annotations"
+msgstr "Γέμισμα χρώματος για επισημειώσεις"
+
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+msgid "Initiate"
+msgstr "Εκκίνηση"
+
+#: ../metadata/annotate.xml.in.h:10
+msgid "Initiate annotate drawing"
+msgstr "Εκκίνηση ζωγραφίσματος επισημείωσης"
+
+#: ../metadata/annotate.xml.in.h:11
+msgid "Initiate annotate erasing"
+msgstr "Εκκίνηση σβησίματος επισημείωσης"
+
+#: ../metadata/annotate.xml.in.h:12
+msgid "Initiate erase"
+msgstr "Εκκίνηση σβησίματος"
+
+#: ../metadata/annotate.xml.in.h:13
+msgid "Line width"
+msgstr "Πλάτος γραμμής"
+
+#: ../metadata/annotate.xml.in.h:14
+msgid "Line width for annotations"
+msgstr "Πλάτος γραμμής για επισημειώσεις"
+
+#: ../metadata/annotate.xml.in.h:15
+msgid "Stroke color for annotations"
+msgstr "Χρώμα πινελιάς για επισημειώσεις"
+
+#: ../metadata/annotate.xml.in.h:16
+msgid "Stroke width"
+msgstr "Πλάτος πινελιάς"
+
+#: ../metadata/annotate.xml.in.h:17
+msgid "Stroke width for annotations"
+msgstr "Πλάτος πινελιάς για επισημειώσεις"
+
+#: ../metadata/blur.xml.in.h:1
+msgid "4xBilinear"
+msgstr "4xBilinear"
+
+#: ../metadata/blur.xml.in.h:2
+msgid "Alpha Blur"
+msgstr "Θόλωμα Άλφα"
+
+#: ../metadata/blur.xml.in.h:3
+msgid "Alpha blur windows"
+msgstr "Θόλωμα άλφα παραθύρων"
+
+#: ../metadata/blur.xml.in.h:4
+msgid "Blur Filter"
+msgstr "Φίλτρο Θολώματος"
+
+#: ../metadata/blur.xml.in.h:5
+msgid "Blur Occlusion"
+msgstr "Φράξιμο Θολώματος"
+
+#: ../metadata/blur.xml.in.h:6
+msgid "Blur Saturation"
+msgstr "Κορεσμός Θολώματος"
+
+#: ../metadata/blur.xml.in.h:7
+msgid "Blur Speed"
+msgstr "Ταχύτητα Θολώματος"
+
+#: ../metadata/blur.xml.in.h:8
+msgid "Blur Windows"
+msgstr "Θόλωμα Παραθύρων"
+
+#: ../metadata/blur.xml.in.h:9
+msgid "Blur behind translucent parts of windows"
+msgstr "Θόλωμα πίσω απ τα διάφανα τμήματα των παραθύρων"
+
+#: ../metadata/blur.xml.in.h:10
+msgid "Blur saturation"
+msgstr "Κορεσμός θολώματος"
+
+#: ../metadata/blur.xml.in.h:11
+msgid "Blur windows"
+msgstr "Θόλωμα παραθύρων"
+
+#: ../metadata/blur.xml.in.h:12
+msgid "Blur windows that doesn't have focus"
+msgstr "Θόλωμα μη εστιασμένων παραθύρων"
+
+#: ../metadata/blur.xml.in.h:13
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr ""
+"Απενεργοποίηση του θολώματος των περιοχών που καλυπτονται απο άλλα παραθυρα"
+
+#: ../metadata/blur.xml.in.h:14
+msgid "Filter method used for blurring"
+msgstr "Μέθοδος φιλταρίσματος που χρησιμοποιείται για θόλωμα"
+
+#: ../metadata/blur.xml.in.h:15
+msgid "Focus Blur"
+msgstr "Θόλωμα εστίασης"
+
+#: ../metadata/blur.xml.in.h:16
+msgid "Focus blur windows"
+msgstr "Θόλωμα εστίασης"
+
+#: ../metadata/blur.xml.in.h:17
+msgid "Gaussian"
+msgstr "Gaussian"
+
+#: ../metadata/blur.xml.in.h:18
+msgid "Gaussian Radius"
+msgstr "Ακτίνα Gaussian"
+
+#: ../metadata/blur.xml.in.h:19
+msgid "Gaussian Strength"
+msgstr "Ισχύς Gaussian"
+
+#: ../metadata/blur.xml.in.h:20
+msgid "Gaussian radius"
+msgstr "Ακτίνα gaussian"
+
+#: ../metadata/blur.xml.in.h:21
+msgid "Gaussian strength"
+msgstr "Ισχύς gaussian"
+
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr "Τέχνασμα ανεξάρτητης υφής"
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../metadata/blur.xml.in.h:24
+msgid "Mipmap LOD"
+msgstr "ΕΛ Mipmap"
+
+#: ../metadata/blur.xml.in.h:25
+msgid "Mipmap level-of-detail"
+msgstr "Επίπεδο-λεπτομέρειας mipmap"
+
+#: ../metadata/blur.xml.in.h:26
+msgid "Pulse"
+msgstr "Παλμός"
+
+#: ../metadata/blur.xml.in.h:27
+msgid "Pulse effect"
+msgstr "Εφέ παλμού"
+
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+"Χρήση των διαθέσιμων μονάδων υφών για πραγματοποίηση όσο το δυνατό "
+"περισσότερων τεχνασμάτων ανεξάρτητης υφής."
+
+#: ../metadata/blur.xml.in.h:29
+msgid "Window blur speed"
+msgstr "Ταχύτητα θολώματος παραθύρων"
+
+#: ../metadata/blur.xml.in.h:30
+msgid "Windows that should be affected by focus blur"
+msgstr "Παράθυρα που πρέπει να επηρεαστούν απο το θολωμα εστίασης"
+
+#: ../metadata/blur.xml.in.h:31
+msgid "Windows that should be use alpha blur by default"
+msgstr "Παράθυρα που πρέπει να χρησιμοποιήσουν ως προεπιλογή το θόλωμα αλφα"
+
+#: ../metadata/clone.xml.in.h:1
+msgid "Clone Output"
+msgstr "Αποτέλεσμα Εξόδου Κλωνοποίησης"
+
+#: ../metadata/clone.xml.in.h:3
+msgid "Initiate clone selection"
+msgstr "Εκκίνηση επιλογής κλωνοποίησης"
+
+#: ../metadata/clone.xml.in.h:4
+msgid "Output clone handler"
+msgstr "Χειριστής αποτελέσματος εξόδου κλωνοποίησης"
+
+#: ../metadata/core.xml.in.h:1
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή0"
+
+#: ../metadata/core.xml.in.h:2
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή1"
+
+#: ../metadata/core.xml.in.h:3
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή10"
+
+#: ../metadata/core.xml.in.h:4
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή11"
+
+#: ../metadata/core.xml.in.h:5
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή2"
+
+#: ../metadata/core.xml.in.h:6
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή3"
+
+#: ../metadata/core.xml.in.h:7
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή4"
+
+#: ../metadata/core.xml.in.h:8
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή5"
+
+#: ../metadata/core.xml.in.h:9
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή6"
+
+#: ../metadata/core.xml.in.h:10
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή7"
+
+#: ../metadata/core.xml.in.h:11
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή8"
+
+#: ../metadata/core.xml.in.h:12
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
+"αναγνωρισμένη ως εντολή9"
+
+#: ../metadata/core.xml.in.h:13
+msgid "Active Plugins"
+msgstr "Ενεργά Πρόσθετα"
+
+#: ../metadata/core.xml.in.h:14
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Επέτρεψε τη σχεδίαση πλήρους οθόνης παραθύρων να μην επανακατευθύνονται στα "
+"εκτός οθόνης pixmaps"
+
+#: ../metadata/core.xml.in.h:15
+msgid "Audible Bell"
+msgstr "Ηχητικό Καμπανάκι"
+
+#: ../metadata/core.xml.in.h:16
+msgid "Audible system beep"
+msgstr "Ηχητικό μπιπ συστήματος"
+
+#: ../metadata/core.xml.in.h:17
+msgid "Auto-Raise"
+msgstr "Αυτόματη Ανύψωση"
+
+#: ../metadata/core.xml.in.h:18
+msgid "Auto-Raise Delay"
+msgstr "Καθυστέρηση Αυτόματης Ανύψωσης"
+
+#: ../metadata/core.xml.in.h:19
+msgid "Automatic detection of output devices"
+msgstr "Αυτόματος εντοπισμός των συσκευών εξόδου"
+
+#: ../metadata/core.xml.in.h:20
+msgid "Automatic detection of refresh rate"
+msgstr "Αυτόματος εντοπισμός του ρυθμού ανανέωσης"
+
+#: ../metadata/core.xml.in.h:21
+msgid "Best"
+msgstr "Βέλτιστο"
+
+#: ../metadata/core.xml.in.h:22
+msgid "Click To Focus"
+msgstr "Κλικ Για Εστίαση"
+
+#: ../metadata/core.xml.in.h:23
+msgid "Click on window moves input focus to it"
+msgstr "Κλικ σε παράθυρο μεταφέρει την εστίαση εισόδου σε αυτό"
+
+#: ../metadata/core.xml.in.h:25
+msgid "Close active window"
+msgstr "Κλείσιμο ενεργού παραθύρου"
+
+#: ../metadata/core.xml.in.h:26
+msgid "Command line 0"
+msgstr "Γραμμή εντολών 0"
+
+#: ../metadata/core.xml.in.h:27
+msgid "Command line 1"
+msgstr "Γραμμή εντολών 1"
+
+#: ../metadata/core.xml.in.h:28
+msgid "Command line 10"
+msgstr "Γραμμή εντολών 10"
+
+#: ../metadata/core.xml.in.h:29
+msgid "Command line 11"
+msgstr "Γραμμή εντολών 11"
+
+#: ../metadata/core.xml.in.h:30
+msgid "Command line 2"
+msgstr "Γραμμή εντολών 2"
+
+#: ../metadata/core.xml.in.h:31
+msgid "Command line 3"
+msgstr "Γραμμή εντολών 3"
+
+#: ../metadata/core.xml.in.h:32
+msgid "Command line 4"
+msgstr "Γραμμή εντολών 4"
+
+#: ../metadata/core.xml.in.h:33
+msgid "Command line 5"
+msgstr "Γραμμή εντολών 5"
+
+#: ../metadata/core.xml.in.h:34
+msgid "Command line 6"
+msgstr "Γραμμή εντολών 6"
+
+#: ../metadata/core.xml.in.h:35
+msgid "Command line 7"
+msgstr "Γραμμή εντολών 7"
+
+#: ../metadata/core.xml.in.h:36
+msgid "Command line 8"
+msgstr "Γραμμή εντολών 8"
+
+#: ../metadata/core.xml.in.h:37
+msgid "Command line 9"
+msgstr "Γραμμή εντολών 9"
+
+#: ../metadata/core.xml.in.h:38
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής0"
+
+#: ../metadata/core.xml.in.h:39
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής1"
+
+#: ../metadata/core.xml.in.h:40
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής10"
+
+#: ../metadata/core.xml.in.h:41
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής11"
+
+#: ../metadata/core.xml.in.h:42
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής2"
+
+#: ../metadata/core.xml.in.h:43
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής3"
+
+#: ../metadata/core.xml.in.h:44
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής4"
+
+#: ../metadata/core.xml.in.h:45
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής5"
+
+#: ../metadata/core.xml.in.h:46
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής6"
+
+#: ../metadata/core.xml.in.h:47
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής7"
+
+#: ../metadata/core.xml.in.h:48
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής8"
+
+#: ../metadata/core.xml.in.h:49
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+"Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής9"
+
+#: ../metadata/core.xml.in.h:50
+msgid "Decrease Opacity"
+msgstr "Μείωση Αδιαφάνειας"
+
+#: ../metadata/core.xml.in.h:51
+msgid "Decrease window opacity"
+msgstr "Μείωση αδιαφάνειας παραθύρου"
+
+#: ../metadata/core.xml.in.h:52
+msgid "Default Icon"
+msgstr "Προεπιλεγμένο Εικονίδιο"
+
+#: ../metadata/core.xml.in.h:53
+msgid "Default window icon image"
+msgstr "Προεπιλεγμένη εικόνα εικονιδίου παραθύρου"
+
+#: ../metadata/core.xml.in.h:54
+msgid "Detect Outputs"
+msgstr "Ανίχνευση Εξόδων"
+
+#: ../metadata/core.xml.in.h:55
+msgid "Detect Refresh Rate"
+msgstr "Ανίχνευση Ρυθμού Ανανέωσης"
+
+#: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+"Διάρκεια χρόνου που πρέπει ο δείκτης του ποντικιού να παραμείνει σε μια "
+"γωνία της οθόνης πριν η ενέργεια που έχει οριστεί σ αυτή την άκρη να "
+"πραγματοποιηθεί."
+
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr "Καθυστέρηση Διακόπτη 'Ακρης"
+
+#: ../metadata/core.xml.in.h:58
+msgid "Fast"
+msgstr "Γρήγορο"
+
+#: ../metadata/core.xml.in.h:59
+msgid "Focus Prevention Level"
+msgstr "Εστίαση Προληπτικού Επιπέδου"
+
+#: ../metadata/core.xml.in.h:60
+msgid "Focus Prevention Windows"
+msgstr "Εστίαση Προστατευμένων Παραθύρων"
+
+#: ../metadata/core.xml.in.h:61
+msgid "Focus prevention windows"
+msgstr "Εστίαση προστατευμένων παραθύρων"
+
+#: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr "Εξαναγκασμός ανεξάρτητης απεικόνισης."
+
+#: ../metadata/core.xml.in.h:63
+msgid "General Options"
+msgstr "Γενικές Επιλογές"
+
+#: ../metadata/core.xml.in.h:64
+msgid "General compiz options"
+msgstr "Γενικές επιλογές του compiz"
+
+#: ../metadata/core.xml.in.h:65
+msgid "Good"
+msgstr "Καλό"
+
+#: ../metadata/core.xml.in.h:66
+msgid "Hide Skip Taskbar Windows"
+msgstr "Απόκρυψη Αγνοημένων Παραθύρων Γραμμής Εργασιών"
+
+#: ../metadata/core.xml.in.h:67
+msgid "Hide all windows and focus desktop"
+msgstr "Απόκρυψη όλων των παραθύρων και εστίαση στην επιφάνεια εργασίας"
+
+#: ../metadata/core.xml.in.h:68
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Απόκρυψη παραθύρων που δεν βρίσκονται στην γραμμή εργασιων κατα την μετάβαση "
+"στην κατάσταση εμφάνισης επιφάνειας εργασίας"
+
+#: ../metadata/core.xml.in.h:69
+msgid "High"
+msgstr "Υψηλό"
+
+#: ../metadata/core.xml.in.h:70
+msgid "Horizontal Virtual Size"
+msgstr "Οριζόντιο Εικονικό Μέγεθος"
+
+#: ../metadata/core.xml.in.h:71
+msgid "If available use compression for textures converted from images"
+msgstr ""
+"Εαν είναι διαθέσιμο χρήση συμπίεσης για υφές που έχουν προέλθει από εικόνες"
+
+#: ../metadata/core.xml.in.h:72
+msgid "Ignore Hints When Maximized"
+msgstr "Αγνόηση Υποδείξεων Στη Μεγιστοποίηση"
+
+#: ../metadata/core.xml.in.h:73
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Αγνόηση αύξησης μεγέθους και υποδείξεων αναλογίας όταν το παράθυρο "
+"μεγιστοποιείται"
+
+#: ../metadata/core.xml.in.h:74
+msgid "Increase Opacity"
+msgstr "Αύξηση Αδιαφάνειας"
+
+#: ../metadata/core.xml.in.h:75
+msgid "Increase window opacity"
+msgstr "Αύξηση αδιαφάνειας παραθύρου"
+
+#: ../metadata/core.xml.in.h:76
+msgid "Interval before raising selected windows"
+msgstr "Διάστημα πριν την ανύψωση των επιλεγμένων παραθύρων"
+
+#: ../metadata/core.xml.in.h:77
+msgid "Interval between ping messages"
+msgstr "Διάστημα μεταξύ των μηνυμάτων ping"
+
+#: ../metadata/core.xml.in.h:78
+msgid "Level of focus stealing prevention"
+msgstr "Επίπεδο αποφυγής απόσπασης εστίασης"
+
+#: ../metadata/core.xml.in.h:79
+msgid "Lighting"
+msgstr "Φωτισμός"
+
+#: ../metadata/core.xml.in.h:80
+msgid "List of currently active plugins"
+msgstr "Λίστα των τρέχοντων ενεργών προσθέτων"
+
+#: ../metadata/core.xml.in.h:81
+msgid "List of strings describing output devices"
+msgstr "Λίστα με προσδιοριστικά στρινγκ για τις συσκευές εξόδου"
+
+#: ../metadata/core.xml.in.h:82
+msgid "Low"
+msgstr "Χαμηλό"
+
+#: ../metadata/core.xml.in.h:83
+msgid "Lower Window"
+msgstr "Κατέβασμα Παραθύρου"
+
+#: ../metadata/core.xml.in.h:84
+msgid "Lower window beneath other windows"
+msgstr "Κατέβασμα παραθύρου κάτω απ τα άλλα παράθυρα"
+
+#: ../metadata/core.xml.in.h:86
+msgid "Maximize Window Horizontally"
+msgstr "Μεγιστοποίηση Παραθύρου Οριζόντια"
+
+#: ../metadata/core.xml.in.h:87
+msgid "Maximize Window Vertically"
+msgstr "Μεγιστοποίηση Παραθύρου Κάθετα"
+
+#: ../metadata/core.xml.in.h:88
+msgid "Maximize active window"
+msgstr "Μεγιστοποίηση ενεργού παραθύρου"
+
+#: ../metadata/core.xml.in.h:89
+msgid "Maximize active window horizontally"
+msgstr "Μεγιστοποίηση ενεργού παραθύρου οριζόντια"
+
+#: ../metadata/core.xml.in.h:90
+msgid "Maximize active window vertically"
+msgstr "Μεγιστοποίηση ενεργού παραθύρου κάθετα"
+
+#: ../metadata/core.xml.in.h:92
+msgid "Minimize active window"
+msgstr "Ελαχιστοποίηση ενεργού παραθύρου"
+
+#: ../metadata/core.xml.in.h:93
+msgid "Number of Desktops"
+msgstr "Αριθμός Επιφανειών Εργασίας"
+
+#: ../metadata/core.xml.in.h:94
+msgid "Number of virtual desktops"
+msgstr "Αριθμός ψεύτικων επιφανειών εργασίας"
+
+#: ../metadata/core.xml.in.h:95
+msgid "Off"
+msgstr "Κλειστό"
+
+#: ../metadata/core.xml.in.h:96
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+"Πραγματοποίηση ανανεώσεων οθόνης μόνο κατα τη διάρκεια της κάθετης "
+"περιοδικής ανανέωσης"
+
+#: ../metadata/core.xml.in.h:97
+msgid "Opacity Step"
+msgstr "Βήμα Αδιαφάνειας"
+
+#: ../metadata/core.xml.in.h:98
+msgid "Opacity change step"
+msgstr "Αλλαγή βήματος αδιαφάνειας"
+
+#: ../metadata/core.xml.in.h:99
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+"Τιμές αδιαφάνειας για παράθυρα που πρέπει να είναι διάφανα απο προεπιλογή"
+
+#: ../metadata/core.xml.in.h:100
+msgid "Opacity window values"
+msgstr "Τιμές αδιαφάνειας παραθύρων"
+
+#: ../metadata/core.xml.in.h:101
+msgid "Opacity windows"
+msgstr "Αδιαφάνεια παραθύρων"
+
+#: ../metadata/core.xml.in.h:102
+msgid "Open a terminal"
+msgstr "Ανοιγμα ενός τερματικού"
+
+#: ../metadata/core.xml.in.h:103
+msgid "Outputs"
+msgstr "Αποτελέσματα-Εξοδοι"
+
+#: ../metadata/core.xml.in.h:104
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:105
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:106
+msgid "Ping Delay"
+msgstr "Καθυστέρηση Ping"
+
+#: ../metadata/core.xml.in.h:107
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:108
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:109
+msgid "Raise On Click"
+msgstr "Ανύψωση Με Κλικ"
+
+#: ../metadata/core.xml.in.h:110
+msgid "Raise Window"
+msgstr "Ανύψωση Παραθύρου"
+
+#: ../metadata/core.xml.in.h:111
+msgid "Raise selected windows after interval"
+msgstr "Ανύψωση επιλεγμένων παραθύρων μετα απ το διάστημα"
+
+#: ../metadata/core.xml.in.h:112
+msgid "Raise window above other windows"
+msgstr "Ανύψωση παραθύρου πάνω απ τα άλλα παράθυρα"
+
+#: ../metadata/core.xml.in.h:113
+msgid "Raise windows when clicked"
+msgstr "Ανύψωση παραθύρων όταν κλικαριστούν"
+
+#: ../metadata/core.xml.in.h:114
+msgid "Refresh Rate"
+msgstr "Ρυθμός Ανανέωσης"
+
+#: ../metadata/core.xml.in.h:115
+msgid "Run Dialog"
+msgstr "Τρέξιμο Διαλόγου"
+
+#: ../metadata/core.xml.in.h:116
+msgid "Run command 0"
+msgstr "Τρέξιμο εντολής 0"
+
+#: ../metadata/core.xml.in.h:117
+msgid "Run command 1"
+msgstr "Τρέξιμο εντολής 1"
+
+#: ../metadata/core.xml.in.h:118
+msgid "Run command 10"
+msgstr "Τρέξιμο εντολής 10"
+
+#: ../metadata/core.xml.in.h:119
+msgid "Run command 11"
+msgstr "Τρέξιμο εντολής 11"
+
+#: ../metadata/core.xml.in.h:120
+msgid "Run command 2"
+msgstr "Τρέξιμο εντολής 2"
+
+#: ../metadata/core.xml.in.h:121
+msgid "Run command 3"
+msgstr "Τρέξιμο εντολής 3"
+
+#: ../metadata/core.xml.in.h:122
+msgid "Run command 4"
+msgstr "Τρέξιμο εντολής 4"
+
+#: ../metadata/core.xml.in.h:123
+msgid "Run command 5"
+msgstr "Τρέξιμο εντολής 5"
+
+#: ../metadata/core.xml.in.h:124
+msgid "Run command 6"
+msgstr "Τρέξιμο εντολής 6"
+
+#: ../metadata/core.xml.in.h:125
+msgid "Run command 7"
+msgstr "Τρέξιμο εντολής 7"
+
+#: ../metadata/core.xml.in.h:126
+msgid "Run command 8"
+msgstr "Τρέξιμο εντολής 8"
+
+#: ../metadata/core.xml.in.h:127
+msgid "Run command 9"
+msgstr "Τρέξιμο εντολής 9"
+
+#: ../metadata/core.xml.in.h:128
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Πολλαπλασιαστής μεγέθους οθόνης για οριζόντιο εικονικό μέγεθος"
+
+#: ../metadata/core.xml.in.h:129
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Πολλαπλασιαστής μεγέθους οθόνης για κάθετο εικονικό μέγεθος"
+
+#: ../metadata/core.xml.in.h:130
+msgid "Screenshot command line"
+msgstr "Γραμμή εντολών αρπαγής οθόνης"
+
+#: ../metadata/core.xml.in.h:131
+msgid "Show Desktop"
+msgstr "Εμφάνιση Επιφάνειας Εργασίας"
+
+#: ../metadata/core.xml.in.h:132
+msgid "Show Main Menu"
+msgstr "Εμφάνιση Κύριου Μενού"
+
+#: ../metadata/core.xml.in.h:133
+msgid "Show Run Application dialog"
+msgstr "Εμφάνιση διαλόγου Τρεξίματος Εφαρμογής"
+
+#: ../metadata/core.xml.in.h:134
+msgid "Show the main menu"
+msgstr "Εμφάνιση του κύριου μενού"
+
+#: ../metadata/core.xml.in.h:135
+msgid "Slow Animations"
+msgstr "Αργές Γραφικές Απεικονίσεις"
+
+#: ../metadata/core.xml.in.h:136
 #, fuzzy
-#~ msgid "Smart mode"
-#~ msgstr "Έξυπνο"
+msgid "Smart mode"
+msgstr "Έξυπνο"
 
-#~ msgid "Sync To VBlank"
-#~ msgstr "Συγχρονισμός Στην Καθετη Ανανέωση"
+#: ../metadata/core.xml.in.h:137
+msgid "Sync To VBlank"
+msgstr "Συγχρονισμός Στην Καθετη Ανανέωση"
 
-#~ msgid "Take a screenshot"
-#~ msgstr "Τράβα μια αρπαγή οθόνης"
+#: ../metadata/core.xml.in.h:138
+msgid "Take a screenshot"
+msgstr "Τράβα μια αρπαγή οθόνης"
 
-#~ msgid "Take a screenshot of a window"
-#~ msgstr "Τράβα μια αρπαγή οθόνης ενός παραθύρου"
+#: ../metadata/core.xml.in.h:139
+msgid "Take a screenshot of a window"
+msgstr "Τράβα μια αρπαγή οθόνης ενός παραθύρου"
 
-#~ msgid "Terminal command line"
-#~ msgstr "Γραμμή εντολών τερματικού"
+#: ../metadata/core.xml.in.h:140
+msgid "Terminal command line"
+msgstr "Γραμμή εντολών τερματικού"
 
+#: ../metadata/core.xml.in.h:141
 #, fuzzy
-#~ msgid "Texture Compression"
-#~ msgstr "Φιλτράρισμα υφών"
+msgid "Texture Compression"
+msgstr "Φιλτράρισμα υφών"
 
-#~ msgid "Texture Filter"
-#~ msgstr "Φίλτρο Υφών"
+#: ../metadata/core.xml.in.h:142
+msgid "Texture Filter"
+msgstr "Φίλτρο Υφών"
 
-#~ msgid "Texture filtering"
-#~ msgstr "Φιλτράρισμα υφών"
+#: ../metadata/core.xml.in.h:143
+msgid "Texture filtering"
+msgstr "Φιλτράρισμα υφών"
 
-#~ msgid "The rate at which the screen is redrawn (times/second)"
-#~ msgstr ""
-#~ "Ο ρυθμός κατα τον οποίο η οθόνη επανασχεδιάζεται (φορές/δευτερόλεπτο)"
+#: ../metadata/core.xml.in.h:144
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Ο ρυθμός κατα τον οποίο η οθόνη επανασχεδιάζεται (φορές/δευτερόλεπτο)"
 
-#~ msgid "Toggle Window Maximized"
-#~ msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου"
+#: ../metadata/core.xml.in.h:145
+msgid "Toggle Window Maximized"
+msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου"
 
-#~ msgid "Toggle Window Maximized Horizontally"
-#~ msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Οριζόντια"
+#: ../metadata/core.xml.in.h:146
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Οριζόντια"
 
-#~ msgid "Toggle Window Maximized Vertically"
-#~ msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Κάθετα"
+#: ../metadata/core.xml.in.h:147
+msgid "Toggle Window Maximized Vertically"
+msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Κάθετα"
 
-#~ msgid "Toggle Window Shaded"
-#~ msgstr "Εκκίνηση Σκίασης Παραθύρου"
+#: ../metadata/core.xml.in.h:148
+msgid "Toggle Window Shaded"
+msgstr "Εκκίνηση Σκίασης Παραθύρου"
 
-#~ msgid "Toggle active window maximized"
-#~ msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου"
+#: ../metadata/core.xml.in.h:149
+msgid "Toggle active window maximized"
+msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου"
 
-#~ msgid "Toggle active window maximized horizontally"
-#~ msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου οριζόντια"
+#: ../metadata/core.xml.in.h:150
+msgid "Toggle active window maximized horizontally"
+msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου οριζόντια"
 
-#~ msgid "Toggle active window maximized vertically"
-#~ msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου κάθετα"
+#: ../metadata/core.xml.in.h:151
+msgid "Toggle active window maximized vertically"
+msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου κάθετα"
 
-#~ msgid "Toggle active window shaded"
-#~ msgstr "Εκκίνηση σκίασης ενεργού παραθύρου"
+#: ../metadata/core.xml.in.h:152
+msgid "Toggle active window shaded"
+msgstr "Εκκίνηση σκίασης ενεργού παραθύρου"
 
-#~ msgid "Toggle use of slow animations"
-#~ msgstr "Εκκίνηση της χρήσης των αργών γραφικών απεικονίσεων"
+#: ../metadata/core.xml.in.h:153
+msgid "Toggle use of slow animations"
+msgstr "Εκκίνηση της χρήσης των αργών γραφικών απεικονίσεων"
 
-#~ msgid "Unmaximize active window"
-#~ msgstr "Απομεγιστοποίηση ενεργού παραθύρου"
+#: ../metadata/core.xml.in.h:155
+msgid "Unmaximize active window"
+msgstr "Απομεγιστοποίηση ενεργού παραθύρου"
 
-#~ msgid "Unredirect Fullscreen Windows"
-#~ msgstr "Μη-επανακατεύθυνση Παραθύρων Πλήρους Οθόνης"
+#: ../metadata/core.xml.in.h:156
+msgid "Unredirect Fullscreen Windows"
+msgstr "Μη-επανακατεύθυνση Παραθύρων Πλήρους Οθόνης"
 
-#~ msgid "Use diffuse light when screen is transformed"
-#~ msgstr "Χρήση διάχυτου φωτός όταν η οθόνη μεταμορφώνεται"
+#: ../metadata/core.xml.in.h:157
+msgid "Use diffuse light when screen is transformed"
+msgstr "Χρήση διάχυτου φωτός όταν η οθόνη μεταμορφώνεται"
 
-#~ msgid "Vertical Virtual Size"
-#~ msgstr "Κάθετο Εικονικό Μέγεθος"
+#: ../metadata/core.xml.in.h:158
+msgid "Vertical Virtual Size"
+msgstr "Κάθετο Εικονικό Μέγεθος"
 
-#~ msgid "Window menu button binding"
-#~ msgstr "Συνδυασμός κουμπιών μενού παραθύρου"
+#: ../metadata/core.xml.in.h:159
+msgid "Very High"
+msgstr ""
 
-#~ msgid "Window menu key binding"
-#~ msgstr "Συνδυασμός πλήκτρων μενού παραθύρου"
+#: ../metadata/core.xml.in.h:160
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
 
-#~ msgid "Window screenshot command line"
-#~ msgstr "Γραμμή εντολών αρπαγής οθόνης παραθύρου"
+#: ../metadata/core.xml.in.h:162
+msgid "Window menu button binding"
+msgstr "Συνδυασμός κουμπιών μενού παραθύρου"
 
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "Παράθυρα που πρέπει να είναι διάφανα εξ' ορισμού"
+#: ../metadata/core.xml.in.h:163
+msgid "Window menu key binding"
+msgstr "Συνδυασμός πλήκτρων μενού παραθύρου"
 
-#~ msgid "Acceleration"
-#~ msgstr "Επιτάχυνση"
+#: ../metadata/core.xml.in.h:164
+msgid "Window screenshot command line"
+msgstr "Γραμμή εντολών αρπαγής οθόνης παραθύρου"
 
-#~ msgid "Adjust Image"
-#~ msgstr "Ρύθμιση Εικόνας"
+#: ../metadata/core.xml.in.h:165
+msgid "Windows that should be translucent by default"
+msgstr "Παράθυρα που πρέπει να είναι διάφανα εξ' ορισμού"
 
-#~ msgid "Adjust top face image to rotation"
-#~ msgstr "Ρύθμιση εικόνας πάνω όψης για περιστροφή"
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+msgid "Acceleration"
+msgstr "Επιτάχυνση"
 
-#~ msgid "Advance to next slide"
-#~ msgstr "Προχώρημα στο επόμενο σλάιντ"
+#: ../metadata/cube.xml.in.h:2
+msgid "Adjust Image"
+msgstr "Ρύθμιση Εικόνας"
 
-#~ msgid "Animate Skydome"
-#~ msgstr "Κίνηση Skydome"
+#: ../metadata/cube.xml.in.h:3
+msgid "Adjust top face image to rotation"
+msgstr "Ρύθμιση εικόνας πάνω όψης για περιστροφή"
 
-#~ msgid "Animate skydome when rotating cube"
-#~ msgstr "Κίνηση skydome όταν περιστρέφεται ο κύβος"
+#: ../metadata/cube.xml.in.h:4
+msgid "Advance to next slide"
+msgstr "Προχώρημα στο επόμενο σλάιντ"
 
-#~ msgid "Automatic"
-#~ msgstr "Αυτόματα"
+#: ../metadata/cube.xml.in.h:5
+msgid "Animate Skydome"
+msgstr "Κίνηση Skydome"
 
-#~ msgid "Color of top and bottom sides of the cube"
-#~ msgstr "Χρώμα των πάνω κ κάτω πλευρών του κύβου"
+#: ../metadata/cube.xml.in.h:6
+msgid "Animate skydome when rotating cube"
+msgstr "Κίνηση skydome όταν περιστρέφεται ο κύβος"
 
-#~ msgid ""
-#~ "Color to use for the bottom color-stop of the skydome-fallback gradient"
-#~ msgstr ""
-#~ "Χρώμα για χρήση με το κάτω στοπ-χρώματος της διαβάθμισης του skydome-"
-#~ "fallback"
+#: ../metadata/cube.xml.in.h:7
+msgid "Automatic"
+msgstr "Αυτόματα"
 
-#~ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-#~ msgstr ""
-#~ "Χρώμα για χρήση με το κορυφαίο στοπ-χρώματος της διαβάθμισης του skydome-"
-#~ "fallback"
+#: ../metadata/cube.xml.in.h:8
+msgid "Color of top and bottom sides of the cube"
+msgstr "Χρώμα των πάνω κ κάτω πλευρών του κύβου"
 
-#~ msgid "Cube Color"
-#~ msgstr "Χρώμα Κύβου"
+#: ../metadata/cube.xml.in.h:9
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+"Χρώμα για χρήση με το κάτω στοπ-χρώματος της διαβάθμισης του skydome-fallback"
 
-#~ msgid "Desktop Cube"
-#~ msgstr "Κύβος Επιφάνειας Εργασίας"
+#: ../metadata/cube.xml.in.h:10
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+"Χρώμα για χρήση με το κορυφαίο στοπ-χρώματος της διαβάθμισης του skydome-"
+"fallback"
 
-#~ msgid "Fold Acceleration"
-#~ msgstr "Επιτάχυνση Διπλώματος"
+#: ../metadata/cube.xml.in.h:11
+msgid "Cube Color"
+msgstr "Χρώμα Κύβου"
 
-#~ msgid "Fold Speed"
-#~ msgstr "Ταχύτητα Διπλώματος"
+#: ../metadata/cube.xml.in.h:12
+msgid "Desktop Cube"
+msgstr "Κύβος Επιφάνειας Εργασίας"
 
-#~ msgid "Fold Timestep"
-#~ msgstr "Χρονικό Βήμα Διπλώματος"
+#: ../metadata/cube.xml.in.h:13
+msgid "Fold Acceleration"
+msgstr "Επιτάχυνση Διπλώματος"
 
-#~ msgid "Generate mipmaps when possible for higher quality scaling"
-#~ msgstr "Δημιουργία mipmaps όταν γίνεται για ανώτερη ποιότητα κλιμάκωσης"
+#: ../metadata/cube.xml.in.h:14
+msgid "Fold Speed"
+msgstr "Ταχύτητα Διπλώματος"
 
-#~ msgid "Go back to previous slide"
-#~ msgstr "Πήγαινε πίσω στο προηγούμενο σλάιντ"
+#: ../metadata/cube.xml.in.h:15
+msgid "Fold Timestep"
+msgstr "Χρονικό Βήμα Διπλώματος"
 
-#~ msgid "Image files"
-#~ msgstr "Αρχεία εικόνας"
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "Δημιουργία mipmaps όταν γίνεται για ανώτερη ποιότητα κλιμάκωσης"
 
-#~ msgid "Image to use as texture for the skydome"
-#~ msgstr "Εικόνα για χρήση ως υφή για το skydome"
+#: ../metadata/cube.xml.in.h:17
+msgid "Go back to previous slide"
+msgstr "Πήγαινε πίσω στο προηγούμενο σλάιντ"
 
-#~ msgid "Initiates Cube transparency only if rotation is mouse driven."
-#~ msgstr ""
-#~ "Εκκινεί την διαφάνεια του Κύβου μόνο όταν η περιστροφή οδηγηθεί από το "
-#~ "ποντίκι"
+#: ../metadata/cube.xml.in.h:18
+msgid "Image files"
+msgstr "Αρχεία εικόνας"
 
-#~ msgid "Inside Cube"
-#~ msgstr "Εσωτερικός Κύβος"
+#: ../metadata/cube.xml.in.h:19
+msgid "Image to use as texture for the skydome"
+msgstr "Εικόνα για χρήση ως υφή για το skydome"
 
-#~ msgid "Inside cube"
-#~ msgstr "Εσωτερικός κύβος"
+#: ../metadata/cube.xml.in.h:20
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr ""
+"Εκκινεί την διαφάνεια του Κύβου μόνο όταν η περιστροφή οδηγηθεί από το "
+"ποντίκι"
 
-#~ msgid ""
-#~ "List of PNG and SVG files that should be rendered on top face of cube"
-#~ msgstr ""
-#~ "Λίστα από αρχεία PNG και SVG που πρέπει να εμφανίζονται στην πάνω όψη του "
-#~ "κύβου"
+#: ../metadata/cube.xml.in.h:21
+msgid "Inside Cube"
+msgstr "Εσωτερικός Κύβος"
 
-#~ msgid "Multi Output Mode"
-#~ msgstr "Μέθοδος Πολλαπλών Οθονών"
+#: ../metadata/cube.xml.in.h:22
+msgid "Inside cube"
+msgstr "Εσωτερικός κύβος"
 
-#~ msgid "Multiple cubes"
-#~ msgstr "Πολλαπλοί κύβοι"
+#: ../metadata/cube.xml.in.h:23
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"Λίστα από αρχεία PNG και SVG που πρέπει να εμφανίζονται στην πάνω όψη του "
+"κύβου"
 
-#~ msgid "Next Slide"
-#~ msgstr "Απόμενο Σλάιντ"
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
+msgid "Multi Output Mode"
+msgstr "Μέθοδος Πολλαπλών Οθονών"
 
+#: ../metadata/cube.xml.in.h:26
+msgid "Multiple cubes"
+msgstr "Πολλαπλοί κύβοι"
+
+#: ../metadata/cube.xml.in.h:27
+msgid "Next Slide"
+msgstr "Απόμενο Σλάιντ"
+
+#: ../metadata/cube.xml.in.h:28
 #, fuzzy
-#~ msgid "One big cube"
-#~ msgstr "Ένας μεγάλος κύβος"
-
-#~ msgid "Opacity During Rotation"
-#~ msgstr "Αδιαφάνεια Kατα την Περιστροφή"
-
-#~ msgid "Opacity When Not Rotating"
-#~ msgstr "Αδιαφάνεια Όταν Δεν Γίνεται Περιστροφή"
-
-#~ msgid "Opacity of desktop window during rotation."
-#~ msgstr ""
-#~ "Αδιαφάνεια του παραθύρου στην επιφάνεια εργασίας κατα την περιστροφή."
-
-#~ msgid "Opacity of desktop window when not rotating."
-#~ msgstr ""
-#~ "Αδιαφάνεια του παραθύρου στην επιφάνεια εργασίας όταν δεν γίνεται "
-#~ "περιστροφή."
-
-#~ msgid "Place windows on cube"
-#~ msgstr "Τοποθέτηση παραθύρων στον κύβο"
-
-#~ msgid "Prev Slide"
-#~ msgstr "Προηγούμενο Σλάιντ"
-
-#~ msgid "Render skydome"
-#~ msgstr "Εμφάνιση skydome"
-
-#~ msgid "Scale image"
-#~ msgstr "Κλιμάκωση εικόνας"
-
-#~ msgid "Scale images to cover top face of cube"
-#~ msgstr "Κλιμάκωση εικόνων για κάλυψη της πάνω όψης του κύβου"
-
-#~ msgid ""
-#~ "Selects how the cube is displayed if multiple output devices are used."
-#~ msgstr ""
-#~ "Επιλεγει το πως ο κύβος θα εμφανίζεται εαν χρησιμοποιηθούν πολλαπλές "
-#~ "οθόνες."
-
-#~ msgid "Skydome"
-#~ msgstr "Skydome"
-
-#~ msgid "Skydome Gradient End Color"
-#~ msgstr "Τελικό Χρώμα Διαβάθμισης Skydome"
-
-#~ msgid "Skydome Gradient Start Color"
-#~ msgstr "Αρχικό Χρώμα Διαβάθμισης Skydome"
-
-#~ msgid "Skydome Image"
-#~ msgstr "Εικόνα Skydome"
-
-#~ msgid "Speed"
-#~ msgstr "Ταχύτητα"
-
-#~ msgid "Timestep"
-#~ msgstr "Χρονικό Βήμα"
-
-#~ msgid "Transparency Only on Mouse Rotate"
-#~ msgstr "Διαφάνεια Μόνο στην Περιστροφή με το Ποντίκι"
-
-#~ msgid "Unfold"
-#~ msgstr "Ξεδίπλωμα"
-
-#~ msgid "Unfold cube"
-#~ msgstr "Ξεδίπλωμα κύβου"
-
-#~ msgid "Dbus"
-#~ msgstr "Dbus"
-
-#~ msgid "Dbus Control Backend"
-#~ msgstr "Κύρια Εφαρμογή Ελέγχου του Dbus"
-
-#~ msgid "Allow mipmaps to be generated for decoration textures"
-#~ msgstr "Επιτρέπει στα mipmaps να δημιουργούνται για υφές διακοσμήσεων"
-
-#~ msgid "Command"
-#~ msgstr "Εντολή"
-
-#~ msgid "Decoration windows"
-#~ msgstr "Διακοσμήσεις παραθύρων"
-
-#~ msgid ""
-#~ "Decorator command line that is executed if no decorator is already running"
-#~ msgstr ""
-#~ "Γραμμή εντολών διακοσμητή που θα εκτελείται αν κανένας διακοσμητής δεν "
-#~ "τρέχει ήδη"
-
-#~ msgid "Drop shadow X offset"
-#~ msgstr "Απόρριψη μετάθεσης αρχής σκιάς Χ"
-
-#~ msgid "Drop shadow Y offset"
-#~ msgstr "Απόρριψη μετάθεσης αρχής σκιάς Υ"
-
-#~ msgid "Drop shadow color"
-#~ msgstr "Απόρριψη χρώματος σκιάς"
-
-#~ msgid "Drop shadow opacity"
-#~ msgstr "Απόρριψη αδιαφάνειας σκιάς"
-
-#~ msgid "Drop shadow radius"
-#~ msgstr "Απόρριψη ακτίνας σκιάς"
-
-#~ msgid "Shadow Color"
-#~ msgstr "Χρώμα Σκιάς"
-
-#~ msgid "Shadow Offset X"
-#~ msgstr "Μετάθεση Αρχής X της Σκιάς"
-
-#~ msgid "Shadow Offset Y"
-#~ msgstr "Μετάθεση Αρχής Υ της Σκιάς"
-
-#~ msgid "Shadow Opacity"
-#~ msgstr "Αδιαφάνεια Σκιάς"
-
-#~ msgid "Shadow Radius"
-#~ msgstr "Ακτίνα Σκιάς"
-
-#~ msgid "Shadow windows"
-#~ msgstr "Παράθυρα με σκιά"
-
-#~ msgid "Window Decoration"
-#~ msgstr "Διακοσμησή Παραθύρου"
-
-#~ msgid "Window decorations"
-#~ msgstr "Διακοσμήσεις παραθύρου"
-
-#~ msgid "Windows that should be decorated"
-#~ msgstr "Παράθυρα που πρέπει να διακοσμηθούν"
-
-#~ msgid "Windows that should have a shadow"
-#~ msgstr "Παράθυρα που πρέπει να έχουν σκιά"
-
-#~ msgid "Fade On Minimize/Open/Close"
-#~ msgstr "Ξεθώριασμα στο Άνοιγμα/Κλείσιμο/Ελαχιστοποίηση"
-
-#~ msgid "Fade Speed"
-#~ msgstr "Ταχύτητα Ξεθωριάσματος"
-
-#~ msgid "Fade effect on minimize/open/close window events"
-#~ msgstr "Εφέ ξεθωριάσματος στο άνοιγμα/κλείσιμο/ελαχιστοποίηση παραθύρων"
-
-#~ msgid "Fade effect on system beep"
-#~ msgstr "Εφέ ξεθωριάσματος στο μπίπ συστήματος"
-
-#~ msgid "Fade in windows when mapped and fade out windows when unmapped"
-#~ msgstr ""
-#~ "Ξεθώριασμα μέσα παραθύρων όταν χαρτογραφούνται και ξεθώριασμα έξω όταν τα "
-#~ "παράθυρα αποχαρτογραφούνται"
-
-#~ msgid "Fade windows"
-#~ msgstr "Ξεθώριασμα παραθύρων"
-
-#~ msgid "Fading Windows"
-#~ msgstr "Ξεθωριάζοντας Παράθυρα"
-
-#~ msgid "Fullscreen Visual Bell"
-#~ msgstr "Οπτικό Κουδούνι Πλήρους Οθόνης"
-
-#~ msgid "Fullscreen fade effect on system beep"
-#~ msgstr "Εφέ ξεθωριάσματος πλήρους οθόνης στο μπίπ συστήματος"
-
-#~ msgid "Visual Bell"
-#~ msgstr "Οπτικό Κουδούνι"
-
-#~ msgid "Window fade speed"
-#~ msgstr "Ταχυτητα ξεθωριάσματος παραθύρου"
-
-#~ msgid "Windows that should be fading"
-#~ msgstr "Παράθυρα που πρέπει να ξεθωριάζουν"
-
-#~ msgid "Mount Point"
-#~ msgstr "Σημείο Προσάρτησης"
-
-#~ msgid "Mount point"
-#~ msgstr "Σημείο προσάρτησης"
-
-#~ msgid "Userspace File System"
-#~ msgstr "Σύστημα Αρχείων Userspace"
-
-#~ msgid "Userspace file system"
-#~ msgstr "Σύστημα αρχείων χρήστη"
-
-#~ msgid "GConf"
-#~ msgstr "GConf"
-
-#~ msgid "GConf Control Backend"
-#~ msgstr "Κύρια Εφαρμογή Ελέγχου του GConf"
-
-#~ msgid "GLib"
-#~ msgstr "GLib"
-
-#~ msgid "GLib main loop support"
-#~ msgstr "Κύριος βρόγχος υποστήριξης GLib"
-
-#~ msgid "Ini"
-#~ msgstr "Ini"
-
-#~ msgid "Ini Flat File Backend"
-#~ msgstr "Εφαρμογή Ελέγχου των Ini Αρχείων"
-
-#~ msgid "File change notification plugin"
-#~ msgstr "Πρόσθετο ειδοποίησης αλλαγής αρχείου"
-
-#~ msgid "Inotify"
-#~ msgstr "Inotify"
-
-#~ msgid "Kconfig"
-#~ msgstr "Kconfig"
-
-#~ msgid "Kconfig Control Backend"
-#~ msgstr "Κύρια Εφαρμογή ελέγχου του KConfig"
-
-#~ msgid "Minimize Effect"
-#~ msgstr "Εφέ Ελαχιστοποίησης"
-
-#~ msgid "Minimize Windows"
-#~ msgstr "Ελαχιστοποίηση Παραθύρων"
-
-#~ msgid "Minimize speed"
-#~ msgstr "Ταχύτητα ελαχιστοποίησης"
-
-#~ msgid "Minimize timestep"
-#~ msgstr "Χρονικό βήμα ελαχιστοποίησης"
-
-#~ msgid "Shade Resistance"
-#~ msgstr "Αντίσταση στη Σκίαση"
-
-#~ msgid "Shade resistance"
-#~ msgstr "Αντίσταση στη σκίαση"
-
-#~ msgid "Transform windows when they are minimized and unminimized"
-#~ msgstr ""
-#~ "Μετατροπή παραθύρων όταν είναι ελαχιστοποιημένα και μή-ελαχιστοποιημένα"
-
-#~ msgid "Windows that should be transformed when minimized"
-#~ msgstr "Παράθυρα που θα μετατραπούν οταν ελαχιστοποιηθούν"
-
-#~ msgid "Constrain Y"
-#~ msgstr "Περιορισμός Y"
-
-#~ msgid "Constrain Y coordinate to workspace area"
-#~ msgstr "Περιορισμός Υ συντεταγμένης στην περιοχή της επιφάνειας εργασίας"
-
-#~ msgid ""
-#~ "Do not update the server-side position of windows until finished moving"
-#~ msgstr ""
-#~ "Μην ενημερώνεις την θέση των παραθύρων στoν server μέχρι το τέλος της "
-#~ "μετακίνησης"
-
-#~ msgid "Initiate Window Move"
-#~ msgstr "Έναρξη Μετακίνησης Παραθύρου"
-
-#~ msgid "Lazy Positioning"
-#~ msgstr "Οκνηρός Προσδιορισμός Θεσης"
-
-#~ msgid "Move Window"
-#~ msgstr "Μετακίνηση Παραθύρου"
-
-#~ msgid "Move window"
-#~ msgstr "Μετακίνηση παραθύρου"
-
-#~ msgid "Opacity"
-#~ msgstr "Αδιαφάνεια"
-
-#~ msgid "Opacity level of moving windows"
-#~ msgstr "Επίπεδο αδιαφάνειας των παραθύρων που μετακινούνται"
-
-#~ msgid "Snapoff and auto unmaximized maximized windows when dragging"
-#~ msgstr ""
-#~ "Αρπαγή και αυτομάτως απομεγιστοποίηση μεγιστοποιημένων παραθύρων στο "
-#~ "τράβηγμα"
-
-#~ msgid "Snapoff maximized windows"
-#~ msgstr "Αρπαγή μεγιστοποιημένων παραθύρων"
-
-#~ msgid "Start moving window"
-#~ msgstr "Έναρξη μετακίνησης παραθύρου"
-
-#~ msgid "Algorithm to use for window placement"
-#~ msgstr "Αλγόριθμος για τοποθέτηση των παραθύρων"
-
-#~ msgid "Cascade"
-#~ msgstr "Κατταράκτης"
-
-#~ msgid "Centered"
-#~ msgstr "Στο Κέντρο"
-
+msgid "One big cube"
+msgstr "Ένας μεγάλος κύβος"
+
+#: ../metadata/cube.xml.in.h:29
+msgid "Opacity During Rotation"
+msgstr "Αδιαφάνεια Kατα την Περιστροφή"
+
+#: ../metadata/cube.xml.in.h:30
+msgid "Opacity When Not Rotating"
+msgstr "Αδιαφάνεια Όταν Δεν Γίνεται Περιστροφή"
+
+#: ../metadata/cube.xml.in.h:31
+msgid "Opacity of desktop window during rotation."
+msgstr "Αδιαφάνεια του παραθύρου στην επιφάνεια εργασίας κατα την περιστροφή."
+
+#: ../metadata/cube.xml.in.h:32
+msgid "Opacity of desktop window when not rotating."
+msgstr ""
+"Αδιαφάνεια του παραθύρου στην επιφάνεια εργασίας όταν δεν γίνεται περιστροφή."
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Place windows on cube"
+msgstr "Τοποθέτηση παραθύρων στον κύβο"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Prev Slide"
+msgstr "Προηγούμενο Σλάιντ"
+
+#: ../metadata/cube.xml.in.h:35
+msgid "Render skydome"
+msgstr "Εμφάνιση skydome"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Scale image"
+msgstr "Κλιμάκωση εικόνας"
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Scale images to cover top face of cube"
+msgstr "Κλιμάκωση εικόνων για κάλυψη της πάνω όψης του κύβου"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr ""
+"Επιλεγει το πως ο κύβος θα εμφανίζεται εαν χρησιμοποιηθούν πολλαπλές οθόνες."
+
+#: ../metadata/cube.xml.in.h:39
+msgid "Skydome"
+msgstr "Skydome"
+
+#: ../metadata/cube.xml.in.h:40
+msgid "Skydome Gradient End Color"
+msgstr "Τελικό Χρώμα Διαβάθμισης Skydome"
+
+#: ../metadata/cube.xml.in.h:41
+msgid "Skydome Gradient Start Color"
+msgstr "Αρχικό Χρώμα Διαβάθμισης Skydome"
+
+#: ../metadata/cube.xml.in.h:42
+msgid "Skydome Image"
+msgstr "Εικόνα Skydome"
+
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
+msgid "Speed"
+msgstr "Ταχύτητα"
+
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
+msgid "Timestep"
+msgstr "Χρονικό Βήμα"
+
+#: ../metadata/cube.xml.in.h:45
+msgid "Transparency Only on Mouse Rotate"
+msgstr "Διαφάνεια Μόνο στην Περιστροφή με το Ποντίκι"
+
+#: ../metadata/cube.xml.in.h:46
+msgid "Unfold"
+msgstr "Ξεδίπλωμα"
+
+#: ../metadata/cube.xml.in.h:47
+msgid "Unfold cube"
+msgstr "Ξεδίπλωμα κύβου"
+
+#: ../metadata/dbus.xml.in.h:1
+msgid "Dbus"
+msgstr "Dbus"
+
+#: ../metadata/dbus.xml.in.h:2
+msgid "Dbus Control Backend"
+msgstr "Κύρια Εφαρμογή Ελέγχου του Dbus"
+
+#: ../metadata/decoration.xml.in.h:1
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr "Επιτρέπει στα mipmaps να δημιουργούνται για υφές διακοσμήσεων"
+
+#: ../metadata/decoration.xml.in.h:2
+msgid "Command"
+msgstr "Εντολή"
+
+#: ../metadata/decoration.xml.in.h:3
+msgid "Decoration windows"
+msgstr "Διακοσμήσεις παραθύρων"
+
+#: ../metadata/decoration.xml.in.h:4
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"Γραμμή εντολών διακοσμητή που θα εκτελείται αν κανένας διακοσμητής δεν "
+"τρέχει ήδη"
+
+#: ../metadata/decoration.xml.in.h:5
+msgid "Drop shadow X offset"
+msgstr "Απόρριψη μετάθεσης αρχής σκιάς Χ"
+
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow Y offset"
+msgstr "Απόρριψη μετάθεσης αρχής σκιάς Υ"
+
+#: ../metadata/decoration.xml.in.h:7
+msgid "Drop shadow color"
+msgstr "Απόρριψη χρώματος σκιάς"
+
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow opacity"
+msgstr "Απόρριψη αδιαφάνειας σκιάς"
+
+#: ../metadata/decoration.xml.in.h:9
+msgid "Drop shadow radius"
+msgstr "Απόρριψη ακτίνας σκιάς"
+
+#: ../metadata/decoration.xml.in.h:11
+msgid "Shadow Color"
+msgstr "Χρώμα Σκιάς"
+
+#: ../metadata/decoration.xml.in.h:12
+msgid "Shadow Offset X"
+msgstr "Μετάθεση Αρχής X της Σκιάς"
+
+#: ../metadata/decoration.xml.in.h:13
+msgid "Shadow Offset Y"
+msgstr "Μετάθεση Αρχής Υ της Σκιάς"
+
+#: ../metadata/decoration.xml.in.h:14
+msgid "Shadow Opacity"
+msgstr "Αδιαφάνεια Σκιάς"
+
+#: ../metadata/decoration.xml.in.h:15
+msgid "Shadow Radius"
+msgstr "Ακτίνα Σκιάς"
+
+#: ../metadata/decoration.xml.in.h:16
+msgid "Shadow windows"
+msgstr "Παράθυρα με σκιά"
+
+#: ../metadata/decoration.xml.in.h:17
+msgid "Window Decoration"
+msgstr "Διακοσμησή Παραθύρου"
+
+#: ../metadata/decoration.xml.in.h:18
+msgid "Window decorations"
+msgstr "Διακοσμήσεις παραθύρου"
+
+#: ../metadata/decoration.xml.in.h:19
+msgid "Windows that should be decorated"
+msgstr "Παράθυρα που πρέπει να διακοσμηθούν"
+
+#: ../metadata/decoration.xml.in.h:20
+msgid "Windows that should have a shadow"
+msgstr "Παράθυρα που πρέπει να έχουν σκιά"
+
+#: ../metadata/fade.xml.in.h:1
+msgid "Fade On Minimize/Open/Close"
+msgstr "Ξεθώριασμα στο Άνοιγμα/Κλείσιμο/Ελαχιστοποίηση"
+
+#: ../metadata/fade.xml.in.h:2
+msgid "Fade Speed"
+msgstr "Ταχύτητα Ξεθωριάσματος"
+
+#: ../metadata/fade.xml.in.h:3
+msgid "Fade effect on minimize/open/close window events"
+msgstr "Εφέ ξεθωριάσματος στο άνοιγμα/κλείσιμο/ελαχιστοποίηση παραθύρων"
+
+#: ../metadata/fade.xml.in.h:4
+msgid "Fade effect on system beep"
+msgstr "Εφέ ξεθωριάσματος στο μπίπ συστήματος"
+
+#: ../metadata/fade.xml.in.h:5
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Ξεθώριασμα μέσα παραθύρων όταν χαρτογραφούνται και ξεθώριασμα έξω όταν τα "
+"παράθυρα αποχαρτογραφούνται"
+
+#: ../metadata/fade.xml.in.h:6
+msgid "Fade windows"
+msgstr "Ξεθώριασμα παραθύρων"
+
+#: ../metadata/fade.xml.in.h:7
+msgid "Fading Windows"
+msgstr "Ξεθωριάζοντας Παράθυρα"
+
+#: ../metadata/fade.xml.in.h:8
+msgid "Fullscreen Visual Bell"
+msgstr "Οπτικό Κουδούνι Πλήρους Οθόνης"
+
+#: ../metadata/fade.xml.in.h:9
+msgid "Fullscreen fade effect on system beep"
+msgstr "Εφέ ξεθωριάσματος πλήρους οθόνης στο μπίπ συστήματος"
+
+#: ../metadata/fade.xml.in.h:10
+msgid "Visual Bell"
+msgstr "Οπτικό Κουδούνι"
+
+#: ../metadata/fade.xml.in.h:11
+msgid "Window fade speed"
+msgstr "Ταχυτητα ξεθωριάσματος παραθύρου"
+
+#: ../metadata/fade.xml.in.h:12
+msgid "Windows that should be fading"
+msgstr "Παράθυρα που πρέπει να ξεθωριάζουν"
+
+#: ../metadata/fs.xml.in.h:1
+msgid "Mount Point"
+msgstr "Σημείο Προσάρτησης"
+
+#: ../metadata/fs.xml.in.h:2
+msgid "Mount point"
+msgstr "Σημείο προσάρτησης"
+
+#: ../metadata/fs.xml.in.h:3
+msgid "Userspace File System"
+msgstr "Σύστημα Αρχείων Userspace"
+
+#: ../metadata/fs.xml.in.h:4
+msgid "Userspace file system"
+msgstr "Σύστημα αρχείων χρήστη"
+
+#: ../metadata/gconf.xml.in.h:1
+msgid "GConf"
+msgstr "GConf"
+
+#: ../metadata/gconf.xml.in.h:2
+msgid "GConf Control Backend"
+msgstr "Κύρια Εφαρμογή Ελέγχου του GConf"
+
+#: ../metadata/glib.xml.in.h:1
+msgid "GLib"
+msgstr "GLib"
+
+#: ../metadata/glib.xml.in.h:2
+msgid "GLib main loop support"
+msgstr "Κύριος βρόγχος υποστήριξης GLib"
+
+#: ../metadata/ini.xml.in.h:1
+msgid "Ini"
+msgstr "Ini"
+
+#: ../metadata/ini.xml.in.h:2
+msgid "Ini Flat File Backend"
+msgstr "Εφαρμογή Ελέγχου των Ini Αρχείων"
+
+#: ../metadata/inotify.xml.in.h:1
+msgid "File change notification plugin"
+msgstr "Πρόσθετο ειδοποίησης αλλαγής αρχείου"
+
+#: ../metadata/inotify.xml.in.h:2
+msgid "Inotify"
+msgstr "Inotify"
+
+#: ../metadata/kconfig.xml.in.h:1
+msgid "Kconfig"
+msgstr "Kconfig"
+
+#: ../metadata/kconfig.xml.in.h:2
+msgid "Kconfig Control Backend"
+msgstr "Κύρια Εφαρμογή ελέγχου του KConfig"
+
+#: ../metadata/minimize.xml.in.h:1
+msgid "Minimize Effect"
+msgstr "Εφέ Ελαχιστοποίησης"
+
+#: ../metadata/minimize.xml.in.h:2
+msgid "Minimize Windows"
+msgstr "Ελαχιστοποίηση Παραθύρων"
+
+#: ../metadata/minimize.xml.in.h:3
+msgid "Minimize speed"
+msgstr "Ταχύτητα ελαχιστοποίησης"
+
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize timestep"
+msgstr "Χρονικό βήμα ελαχιστοποίησης"
+
+#: ../metadata/minimize.xml.in.h:5
+msgid "Shade Resistance"
+msgstr "Αντίσταση στη Σκίαση"
+
+#: ../metadata/minimize.xml.in.h:6
+msgid "Shade resistance"
+msgstr "Αντίσταση στη σκίαση"
+
+#: ../metadata/minimize.xml.in.h:9
+msgid "Transform windows when they are minimized and unminimized"
+msgstr ""
+"Μετατροπή παραθύρων όταν είναι ελαχιστοποιημένα και μή-ελαχιστοποιημένα"
+
+#: ../metadata/minimize.xml.in.h:10
+msgid "Windows that should be transformed when minimized"
+msgstr "Παράθυρα που θα μετατραπούν οταν ελαχιστοποιηθούν"
+
+#: ../metadata/move.xml.in.h:1
+msgid "Constrain Y"
+msgstr "Περιορισμός Y"
+
+#: ../metadata/move.xml.in.h:2
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Περιορισμός Υ συντεταγμένης στην περιοχή της επιφάνειας εργασίας"
+
+#: ../metadata/move.xml.in.h:3
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+"Μην ενημερώνεις την θέση των παραθύρων στoν server μέχρι το τέλος της "
+"μετακίνησης"
+
+#: ../metadata/move.xml.in.h:4
+msgid "Initiate Window Move"
+msgstr "Έναρξη Μετακίνησης Παραθύρου"
+
+#: ../metadata/move.xml.in.h:5
+msgid "Lazy Positioning"
+msgstr "Οκνηρός Προσδιορισμός Θεσης"
+
+#: ../metadata/move.xml.in.h:6
+msgid "Move Window"
+msgstr "Μετακίνηση Παραθύρου"
+
+#: ../metadata/move.xml.in.h:7
+msgid "Move window"
+msgstr "Μετακίνηση παραθύρου"
+
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:18
+msgid "Opacity"
+msgstr "Αδιαφάνεια"
+
+#: ../metadata/move.xml.in.h:9
+msgid "Opacity level of moving windows"
+msgstr "Επίπεδο αδιαφάνειας των παραθύρων που μετακινούνται"
+
+#: ../metadata/move.xml.in.h:10
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"Αρπαγή και αυτομάτως απομεγιστοποίηση μεγιστοποιημένων παραθύρων στο τράβηγμα"
+
+#: ../metadata/move.xml.in.h:11
+msgid "Snapoff maximized windows"
+msgstr "Αρπαγή μεγιστοποιημένων παραθύρων"
+
+#: ../metadata/move.xml.in.h:12
+msgid "Start moving window"
+msgstr "Έναρξη μετακίνησης παραθύρου"
+
+#: ../metadata/place.xml.in.h:1
+msgid "Algorithm to use for window placement"
+msgstr "Αλγόριθμος για τοποθέτηση των παραθύρων"
+
+#: ../metadata/place.xml.in.h:2
+msgid "Cascade"
+msgstr "Κατταράκτης"
+
+#: ../metadata/place.xml.in.h:3
+msgid "Centered"
+msgstr "Στο Κέντρο"
+
+#: ../metadata/place.xml.in.h:4
 #, fuzzy
-#~ msgid "Force Placement Windows"
-#~ msgstr "Εστίαση Προστατευμένων Παραθύρων"
+msgid "Force Placement Windows"
+msgstr "Εστίαση Προστατευμένων Παραθύρων"
 
-#~ msgid "Horizontal viewport positions"
-#~ msgstr "Οριζόντιες θέσεις εικονικών επιφανειών εργασίας"
+#: ../metadata/place.xml.in.h:5
+msgid "Horizontal viewport positions"
+msgstr "Οριζόντιες θέσεις εικονικών επιφανειών εργασίας"
 
-#~ msgid "Maximize"
-#~ msgstr "Μεγιστοποίησε"
+#: ../metadata/place.xml.in.h:6
+msgid "Maximize"
+msgstr "Μεγιστοποίησε"
 
-#~ msgid "Place Windows"
-#~ msgstr "Τοποθέτηση Παραθύρων"
+#: ../metadata/place.xml.in.h:8
+msgid "Place Windows"
+msgstr "Τοποθέτηση Παραθύρων"
 
-#~ msgid "Place windows at appropriate positions when mapped"
-#~ msgstr "Τοποθέτηση παραθύρων στις κατάλληλες θέσεις όταν ταξινομούνται"
+#: ../metadata/place.xml.in.h:9
+msgid "Place across all outputs"
+msgstr ""
 
-#~ msgid "Placement Mode"
-#~ msgstr "Τρόπος τοποθέτησης"
+#: ../metadata/place.xml.in.h:10
+msgid "Place windows at appropriate positions when mapped"
+msgstr "Τοποθέτηση παραθύρων στις κατάλληλες θέσεις όταν ταξινομούνται"
 
-#~ msgid "Positioned windows"
-#~ msgstr "Τοποθετημένα παράθυρα"
+#: ../metadata/place.xml.in.h:11
+msgid "Placement Mode"
+msgstr "Τρόπος τοποθέτησης"
 
-#~ msgid "Random"
-#~ msgstr "Τυχαία"
+#: ../metadata/place.xml.in.h:12
+msgid "Positioned windows"
+msgstr "Τοποθετημένα παράθυρα"
 
+#: ../metadata/place.xml.in.h:13
+msgid "Random"
+msgstr "Τυχαία"
+
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
-#~ msgid ""
-#~ "Selects how window placement should behave if multiple outputs are "
-#~ "selected"
-#~ msgstr ""
-#~ "Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
-#~ "εξόδου."
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
+"εξόδου."
 
-#~ msgid "Smart"
-#~ msgstr "Έξυπνο"
+#: ../metadata/place.xml.in.h:15
+msgid "Smart"
+msgstr "Έξυπνο"
 
+#: ../metadata/place.xml.in.h:16
 #, fuzzy
-#~ msgid "Use active output device"
-#~ msgstr "Σε όλες τις συσκευές εξόδου"
-
-#~ msgid "Vertical viewport positions"
-#~ msgstr "Κάθετες θέσεις εικονικών επιφανειών εργασίας"
-
-#~ msgid "Viewport positioned windows"
-#~ msgstr "Τοποθετημένα παράθυρα στις εικονικές επιφάνειες εργασίας"
-
-#~ msgid "Window placement workarounds"
-#~ msgstr "Μοντίφες για τοποθέτηση παραθύρων"
-
-#~ msgid "Windows that should be positioned by default"
-#~ msgstr "Παράθυρα που πρέπει να τοποθετηθούν εξ' ορισμού"
-
-#~ msgid "Windows that should be positioned in specific viewports by default"
-#~ msgstr ""
-#~ "Παράθυρα που θα τοποθετηθούν σε συγκεκριμένες εικονικές επιφάνειες "
-#~ "εργασίας εξ' ορισμού"
-
-#~ msgid "Workarounds"
-#~ msgstr "Μοντίφες"
-
-#~ msgid "X Positions"
-#~ msgstr "Θέσεις Χ"
-
-#~ msgid "X Viewport Positions"
-#~ msgstr "Θέσεις Χ Εικονικών Επιφανειών Εργασίας"
-
-#~ msgid "X position values"
-#~ msgstr "Τιμές θέσης Χ"
-
-#~ msgid "Y Positions"
-#~ msgstr "Θέσεις Υ"
-
-#~ msgid "Y Viewport Positions"
-#~ msgstr "Θέσεις Υ Εικονικών Επιφανειών Εργασίας"
-
-#~ msgid "Y position values"
-#~ msgstr "Τιμές θέσης Υ"
-
-#~ msgid "Png"
-#~ msgstr "Png"
-
-#~ msgid "Png image loader"
-#~ msgstr "Φορτωτής εικόνων Png"
-
-#~ msgid "Regex Matching"
-#~ msgstr "Ταίριαγμα Regex"
-
-#~ msgid "Regex window matching"
-#~ msgstr "Ταίριαγμα παραθύρου regex"
-
-#~ msgid "Border Color"
-#~ msgstr "Χρώμα Ορίου"
-
-#~ msgid "Border color used for outline and rectangle resize modes"
-#~ msgstr "Χρώμα ορίου για την μορφές μορφοποίησης τετράγωνο και περίγραμμα"
-
-#~ msgid "Default Resize Mode"
-#~ msgstr "Προκαθορισμένη μορφή μορφοποίησης"
-
-#~ msgid "Default mode used for window resizing"
-#~ msgstr "Προκαθορισμένη μορφή για μορφοποιήση παραθύρου"
-
-#~ msgid "Fill Color"
-#~ msgstr "Χρώμα Γεμίσματος"
-
-#~ msgid "Fill color used for rectangle resize mode"
-#~ msgstr "Χρώμα για χρήση στην τετράγωνη μορφή μορφοποίησης"
-
-#~ msgid "Initiate Normal Window Resize"
-#~ msgstr "Εκκίνηση Κανονικής Μορφοποίησης Παραθύρου"
-
-#~ msgid "Initiate Outline Window Resize"
-#~ msgstr "Εκκίνηση Μορφής Μορφοποίησης Περιγράμματος"
-
-#~ msgid "Initiate Rectangle Window Resize"
-#~ msgstr "Εκκίνηση Τετράγωνης Μορφής Μορφοποίησης"
-
-#~ msgid "Initiate Stretch Window Resize"
-#~ msgstr "Εκκίνηση Μορφής Μορφοποίησης Παραμορφώσεως"
-
-#~ msgid "Initiate Window Resize"
-#~ msgstr "Εκκίνηση Μορφοποίησης Παραθύρου"
-
-#~ msgid "Normal"
-#~ msgstr "Κανονική"
-
-#~ msgid "Normal Resize Windows"
-#~ msgstr "Κανονική Μορφοποίηση Παραθύρων"
-
-#~ msgid "Outline"
-#~ msgstr "Περίγραμμα"
-
-#~ msgid "Outline Resize Windows"
-#~ msgstr "Μορφοποίηση Περίγράμματος"
-
-#~ msgid "Rectangle"
-#~ msgstr "Τετράγωνο"
-
-#~ msgid "Rectangle Resize Windows"
-#~ msgstr "Τετράγωνη Μορφοποίηση Παραθύρων"
-
-#~ msgid "Resize Window"
-#~ msgstr "Μορφοποίηση Παραθύρου"
-
-#~ msgid "Resize window"
-#~ msgstr "Μορφοποίηση παραθύρου"
-
-#~ msgid "Start resizing window"
-#~ msgstr "Έναρξη μορφοποίησης παραθύρου"
-
-#~ msgid "Start resizing window by stretching it"
-#~ msgstr "Έναρξη μορφοποίησης παραθύρου παραμορφώνοντάς το"
-
-#~ msgid "Start resizing window normally"
-#~ msgstr "Έναρξη μορφοποίησης παραθύρου κανονικά"
-
-#~ msgid "Start resizing window with outline"
-#~ msgstr "Έναρξη μορφοποίησης παραθύρου με περίγραμμα"
-
-#~ msgid "Start resizing window with rectangle"
-#~ msgstr "Έναρξη μορφοποίησης παραθύρου με το τετράγωνο"
-
-#~ msgid "Stretch"
-#~ msgstr "Παραμόρφωση"
-
-#~ msgid "Stretch Resize Windows"
-#~ msgstr "Μορφοποίηση Παραθύρου με Παραμόρφωση"
-
-#~ msgid "Windows that normal resize should be used for"
-#~ msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί κανονική μορφοποίηση"
-
-#~ msgid "Windows that outline resize should be used for"
-#~ msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί μορφοποίηση περιγράμματος"
-
-#~ msgid "Windows that rectangle resize should be used for"
-#~ msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί τετραγωνική μορφοποίηση"
-
-#~ msgid "Windows that stretch resize should be used for"
-#~ msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί μορφοποίηση με παραμόρφωση"
-
-#~ msgid "Edge Flip DnD"
-#~ msgstr "Γύρισμα Άκρης DnD"
-
-#~ msgid "Edge Flip Move"
-#~ msgstr "Γύρισμα Άκρης με Μετακίνηση"
-
-#~ msgid "Edge Flip Pointer"
-#~ msgstr "Γύρισμα Άκρης με Δείκτη"
-
-#~ msgid "Flip Time"
-#~ msgstr "Χρόνος Γυρίσματος"
-
-#~ msgid "Flip to left viewport and warp pointer"
-#~ msgstr ""
-#~ "Γύρισμα στην αριστερή εικονική επιφάνεια εργασίας και τύλιγμα δείκτη"
-
-#~ msgid "Flip to next viewport when dragging object to screen edge"
-#~ msgstr ""
-#~ "Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν τραβιέται "
-#~ "αντικείμενο στην άκρη της οθόνης"
-
-#~ msgid "Flip to next viewport when moving pointer to screen edge"
-#~ msgstr ""
-#~ "Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν μετακινείται ο "
-#~ "δείκτης στην άκρη της οθόνης"
-
-#~ msgid "Flip to next viewport when moving window to screen edge"
-#~ msgstr ""
-#~ "Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν μετακινείται "
-#~ "παράθυροστην άκρη της οθόνης"
-
-#~ msgid "Flip to right viewport and warp pointer"
-#~ msgstr "Γύρισμα στην δεξιά εικονική επιφάνεια εργασίας και τύλιγμα δείκτη"
-
-#~ msgid "Invert Y axis for pointer movement"
-#~ msgstr "Αναστροφή στον Υ άξονα για μετακίνηση του δείκτη"
-
-#~ msgid "Pointer Invert Y"
-#~ msgstr "Αναστροφή Υ Δείκτη"
-
-#~ msgid "Pointer Sensitivity"
-#~ msgstr "Ευαισθησία Δείκτη"
-
-#~ msgid "Raise on rotate"
-#~ msgstr "Ανύψωση στην περιστροφή"
-
-#~ msgid "Raise window when rotating"
-#~ msgstr "Ανύψωση παραθύρου στην περιστροφή"
-
-#~ msgid "Rotate Cube"
-#~ msgstr "Περιστροφή Κύβου"
-
-#~ msgid "Rotate Flip Left"
-#~ msgstr "Περιστροφή Γύρισμα Αριστερά"
-
-#~ msgid "Rotate Flip Right"
-#~ msgstr "Περιστροφή Γύρισμα Δεξιά"
-
-#~ msgid "Rotate Left"
-#~ msgstr "Περιστροφή Αριστερά"
-
-#~ msgid "Rotate Left with Window"
-#~ msgstr "Περιστροφή Αριστερά με Παράθυρο"
-
-#~ msgid "Rotate Right"
-#~ msgstr "Περιστροφή Δεξιά"
-
-#~ msgid "Rotate Right with Window"
-#~ msgstr "Περιστροφή Δεξιά με Παράθυρο"
-
-#~ msgid "Rotate To"
-#~ msgstr "Περιστροφή Στο"
-
-#~ msgid "Rotate To Face 1"
-#~ msgstr "Περιστροφή Στην Όψη 1"
-
-#~ msgid "Rotate To Face 1 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 1 με Παράθυρο"
-
-#~ msgid "Rotate To Face 10"
-#~ msgstr "Περιστροφή Στην Όψη 10"
-
-#~ msgid "Rotate To Face 10 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 10 με Παράθυρο"
-
-#~ msgid "Rotate To Face 11"
-#~ msgstr "Περιστροφή Στην Όψη 11"
-
-#~ msgid "Rotate To Face 11 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 11 με Παράθυρο"
-
-#~ msgid "Rotate To Face 12"
-#~ msgstr "Περιστροφή Στην Όψη 12"
-
-#~ msgid "Rotate To Face 12 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 12 με Παράθυρο"
-
-#~ msgid "Rotate To Face 2"
-#~ msgstr "Περιστροφή Στην Όψη 2"
-
-#~ msgid "Rotate To Face 2 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 2 με Παράθυρο"
-
-#~ msgid "Rotate To Face 3"
-#~ msgstr "Περιστροφή Στην Όψη 3"
-
-#~ msgid "Rotate To Face 3 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 3 με Παράθυρο"
-
-#~ msgid "Rotate To Face 4"
-#~ msgstr "Περιστροφή Στην Όψη 4"
-
-#~ msgid "Rotate To Face 4 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 4 με Παράθυρο"
-
-#~ msgid "Rotate To Face 5"
-#~ msgstr "Περιστροφή Στην Όψη 5"
-
-#~ msgid "Rotate To Face 5 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 5 με Παράθυρο"
-
-#~ msgid "Rotate To Face 6"
-#~ msgstr "Περιστροφή Στην Όψη 6"
-
-#~ msgid "Rotate To Face 6 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 6 με Παράθυρο"
-
-#~ msgid "Rotate To Face 7"
-#~ msgstr "Περιστροφή Στην Όψη 7"
-
-#~ msgid "Rotate To Face 7 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 7 με Παράθυρο"
-
-#~ msgid "Rotate To Face 8"
-#~ msgstr "Περιστροφή Στην Όψη 8"
-
-#~ msgid "Rotate To Face 8 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 8 με Παράθυρο"
-
-#~ msgid "Rotate To Face 9"
-#~ msgstr "Περιστροφή Στην Όψη 9"
-
-#~ msgid "Rotate To Face 9 with Window"
-#~ msgstr "Περιστροφή Στην Όψη 9 με Παράθυρο"
-
-#~ msgid "Rotate desktop cube"
-#~ msgstr "Περιστροφή κύβου επιφάνειας εργασίας"
-
-#~ msgid "Rotate left"
-#~ msgstr "Περιστροφή αριστερά"
-
-#~ msgid "Rotate left and bring active window along"
-#~ msgstr "Περιστροφή αριστερά και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate right"
-#~ msgstr "Περιστροφή δεξιά"
-
-#~ msgid "Rotate right and bring active window along"
-#~ msgstr "Περιστροφή δεξιά και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 1"
-#~ msgstr "Περιστροφή στην όψη 1"
-
-#~ msgid "Rotate to face 1 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 1 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 10"
-#~ msgstr "Περιστροφή στην όψη 10"
-
-#~ msgid "Rotate to face 10 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 10 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 11"
-#~ msgstr "Περιστροφή στην όψη 11"
-
-#~ msgid "Rotate to face 11 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 11 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 12"
-#~ msgstr "Περιστροφή στην όψη 12"
-
-#~ msgid "Rotate to face 12 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 12 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 2"
-#~ msgstr "Περιστροφή στην όψη 2"
-
-#~ msgid "Rotate to face 2 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 2 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 3"
-#~ msgstr "Περιστροφή στην όψη 3"
-
-#~ msgid "Rotate to face 3 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 3 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 4"
-#~ msgstr "Περιστροφή στην όψη 4"
-
-#~ msgid "Rotate to face 4 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 4 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 5"
-#~ msgstr "Περιστροφή στην όψη 5"
-
-#~ msgid "Rotate to face 5 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 5 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 6"
-#~ msgstr "Περιστροφή στην όψη 6"
-
-#~ msgid "Rotate to face 6 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 6 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 7"
-#~ msgstr "Περιστροφή στην όψη 7"
-
-#~ msgid "Rotate to face 7 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 7 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 8"
-#~ msgstr "Περιστροφή στην όψη 8"
-
-#~ msgid "Rotate to face 8 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 8 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to face 9"
-#~ msgstr "Περιστροφή στην όψη 9"
-
-#~ msgid "Rotate to face 9 and bring active window along"
-#~ msgstr "Περιστροφή στην όψη 9 και μεταφορά ενεργού παραθύρου κατα μήκος"
-
-#~ msgid "Rotate to viewport"
-#~ msgstr "Περιστροφή στην εικονική επιφάνεια εργασίας"
-
-#~ msgid "Rotate window"
-#~ msgstr "Περιστροφή παραθύρου"
-
-#~ msgid "Rotate with window"
-#~ msgstr "Περιστροφή με παράθυρο"
-
-#~ msgid "Rotation Acceleration"
-#~ msgstr "Επιτάχυνση Περιστροφής"
-
-#~ msgid "Rotation Speed"
-#~ msgstr "Ταχύτητα Περιστροφής"
-
-#~ msgid "Rotation Timestep"
-#~ msgstr "Χρονικό Βήμα Περιστροφής"
-
-#~ msgid "Rotation Zoom"
-#~ msgstr "Ζουμ Περιστροφής"
-
-#~ msgid "Sensitivity of pointer movement"
-#~ msgstr "Ευαισθησία της μετακίνησης του δείκτη"
-
-#~ msgid "Snap Cube Rotation to Bottom Face"
-#~ msgstr "Αρπαγή Περιστροφής Κύβου στην Κάτω Όψη"
-
-#~ msgid "Snap Cube Rotation to Top Face"
-#~ msgstr "Αρπαγή Περιστροφής Κύβου στην Πάνω Όψη"
-
-#~ msgid "Snap To Bottom Face"
-#~ msgstr "Αρπαγή Στην Κάτω Όψη"
-
-#~ msgid "Snap To Top Face"
-#~ msgstr "Αρπαγή Στην Πάνω Όψη"
-
-#~ msgid "Start Rotation"
-#~ msgstr "Έναρξη Περιστροφής"
-
-#~ msgid "Timeout before flipping viewport"
-#~ msgstr "Τέλος χρόνου πριν το γύρισμα της εικονικής επιφάνειας εργασίας"
-
-#~ msgid "Zoom"
-#~ msgstr "Ζουμ"
-
-#~ msgid "Amount of opacity in percent"
-#~ msgstr "Ποσοστό αδιαφάνειας επι της εκατό"
-
-#~ msgid "Big"
-#~ msgstr "Μεγάλο"
-
-#~ msgid "Click Desktop to Show Desktop"
-#~ msgstr "Κλικ στην Επιφάνεια Εργασίας για να Εμφανιστεί η Επιφάνεια Εργασίας"
-
-#~ msgid "Darken Background"
-#~ msgstr "Σκοτείνιασμα Φόντου"
-
-#~ msgid "Darken background when scaling windows"
-#~ msgstr "Σκοτείνιασμα φόντου στην κλιμάκωση παραθύρων"
-
-#~ msgid "Emblem"
-#~ msgstr "Έμβλημα"
-
-#~ msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-#~ msgstr ""
-#~ "Είσοδος Στην Εμφάνιση Επιφάνειας Εργασίας όταν η Επιφάνεια Εργασίας "
-#~ "κλικαριστεί κατα τη διάρκεια της Κλιμάκωσης"
-
-#~ msgid "Hover Time"
-#~ msgstr "Χρόνος Αιώρησης"
-
-#~ msgid "Initiate Window Picker"
-#~ msgstr "Εκκίνηση Διαλογέα Παραθύρου"
-
-#~ msgid "Initiate Window Picker For All Windows"
-#~ msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Όλα τα Παράθυρα"
-
-#~ msgid "Initiate Window Picker For Window Group"
-#~ msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Ομάδα Παραθύρων"
-
-#~ msgid "Initiate Window Picker For Windows on Current Output"
-#~ msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Παράθυρα στην Τρέχουσα Έξοδο"
-
-#~ msgid "Layout and start transforming all windows"
-#~ msgstr "Διάταξη και μεταμόρφωση όλων των παραθύρων"
-
-#~ msgid "Layout and start transforming window group"
-#~ msgstr "Διάταξη και έναρξη μεταμόρφωσης ομάδας παραθύρων"
-
-#~ msgid "Layout and start transforming windows"
-#~ msgstr "Διάταξη και έναρξη μεταμόρφωσης παραθύρων"
-
-#~ msgid "Layout and start transforming windows on current output"
-#~ msgstr "Διάταξη και έναρξη μεταμόρφωσης παραθύρων στην τρέχουσα έξοδο"
-
-#~ msgid "None"
-#~ msgstr "Κανένα"
-
-#~ msgid "On all output devices"
-#~ msgstr "Σε όλες τις συσκευές εξόδου"
-
-#~ msgid "On current output device"
-#~ msgstr "Στην τρέχουσα συσκευή εξόδου"
-
-#~ msgid "Overlay Icon"
-#~ msgstr "Επίστρωση Εικονιδίου"
-
-#~ msgid "Overlay an icon on windows once they are scaled"
-#~ msgstr "Επίστρωση ενός εικονιδίου στα παράθυρα μόλις αυτά κλιμακωθούν"
-
-#~ msgid "Scale"
-#~ msgstr "Κλιμάκωση"
-
-#~ msgid "Scale Windows"
-#~ msgstr "Κλιμάκωση Παραθύρων"
-
-#~ msgid "Scale speed"
-#~ msgstr "Ταχύτητα κλιμάκωσης"
-
-#~ msgid "Scale timestep"
-#~ msgstr "Χρονικό βήμα κλιμάκωσης"
-
-#~ msgid "Scale windows"
-#~ msgstr "Κλιμάκωση παραθύρων"
-
-#~ msgid ""
-#~ "Selects where windows are scaled if multiple output devices are used."
-#~ msgstr ""
-#~ "Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
-#~ "εξόδου."
-
-#~ msgid "Space between windows"
-#~ msgstr "Χώρος μεταξύ των παραθύρων"
-
-#~ msgid "Spacing"
-#~ msgstr "Χωροταξία"
-
-#~ msgid ""
-#~ "Time (in ms) before scale mode is terminated when hovering over a window"
-#~ msgstr ""
-#~ "Χρόνος (σε ms) πρίν να τερματιστεί η κλιμάκωση κατά τη διάρκεια της "
-#~ "αιώρησης πάνω από ένα παράθυρο"
-
-#~ msgid "Windows that should be scaled in scale mode"
-#~ msgstr "Παράθυρα που πρέπει να κλιμακωθούν στην μέθοδο κλιμάκωσης"
-
-#~ msgid "Automatically open screenshot in this application"
-#~ msgstr "Αυτόματο άνοιγμα αρπαγής οθόνης σε αυτή την εφαρμογή"
-
-#~ msgid "Directory"
-#~ msgstr "Διαδρομή"
-
-#~ msgid "Initiate rectangle screenshot"
-#~ msgstr "Εκκίνηση τετράγωνης αρπαγής οθόνης"
-
-#~ msgid "Launch Application"
-#~ msgstr "Εκκίνηση Εφαρμογής"
-
-#~ msgid "Put screenshot images in this directory"
-#~ msgstr "Τοποθέτηση των εικόνων αρπαγής οθόνης σε αυτή τη διαδρομή"
-
-#~ msgid "Screenshot"
-#~ msgstr "Αρπαγή Οθόνης"
-
-#~ msgid "Screenshot plugin"
-#~ msgstr "Πρόσθετο αρπαγής οθόνης"
-
-#~ msgid "Svg"
-#~ msgstr "Svg"
-
-#~ msgid "Svg image loader"
-#~ msgstr "Φορτωτής εικόνας svg"
-
-#~ msgid "Amount of brightness in percent"
-#~ msgstr "Ποσό φωτεινότητας σε ποσοστό επι της εκατό"
-
-#~ msgid "Amount of saturation in percent"
-#~ msgstr "Ποσό κορεσμού σε ποσοστό επι της εκατό"
-
-#~ msgid "Application Switcher"
-#~ msgstr "Επιλογέας Εφαρμογών"
-
-#~ msgid "Auto Rotate"
-#~ msgstr "Αυτόματη Περιστροφή"
-
-#~ msgid "Brightness"
-#~ msgstr "Φωτεινότητα"
-
-#~ msgid "Bring To Front"
-#~ msgstr "Μεταφορά Μπροστά"
-
-#~ msgid "Bring selected window to front"
-#~ msgstr "Μεταφορά επιλεγμένου παράθυρου μπροστά"
-
-#~ msgid "Distance desktop should be zoom out while switching windows"
-#~ msgstr ""
-#~ "Η απόσταση της επιφάνειας εργασίας που πρέπει να ζουμαριστεί έξω κατα την "
-#~ "εναλλαγή παραθύρων"
-
-#~ msgid "Icon"
-#~ msgstr "Εικονίδιο"
-
-#~ msgid "Minimized"
-#~ msgstr "Ελαχιστοποιημένο"
-
+msgid "Use active output device"
+msgstr "Σε όλες τις συσκευές εξόδου"
+
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:19
+msgid "Vertical viewport positions"
+msgstr "Κάθετες θέσεις εικονικών επιφανειών εργασίας"
+
+#: ../metadata/place.xml.in.h:20
+msgid "Viewport positioned windows"
+msgstr "Τοποθετημένα παράθυρα στις εικονικές επιφάνειες εργασίας"
+
+#: ../metadata/place.xml.in.h:21
+msgid "Window placement workarounds"
+msgstr "Μοντίφες για τοποθέτηση παραθύρων"
+
+#: ../metadata/place.xml.in.h:22
+msgid "Windows that should be positioned by default"
+msgstr "Παράθυρα που πρέπει να τοποθετηθούν εξ' ορισμού"
+
+#: ../metadata/place.xml.in.h:23
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr ""
+"Παράθυρα που θα τοποθετηθούν σε συγκεκριμένες εικονικές επιφάνειες εργασίας "
+"εξ' ορισμού"
+
+#: ../metadata/place.xml.in.h:24
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+
+#: ../metadata/place.xml.in.h:25
+msgid "Workarounds"
+msgstr "Μοντίφες"
+
+#: ../metadata/place.xml.in.h:26
+msgid "X Positions"
+msgstr "Θέσεις Χ"
+
+#: ../metadata/place.xml.in.h:27
+msgid "X Viewport Positions"
+msgstr "Θέσεις Χ Εικονικών Επιφανειών Εργασίας"
+
+#: ../metadata/place.xml.in.h:28
+msgid "X position values"
+msgstr "Τιμές θέσης Χ"
+
+#: ../metadata/place.xml.in.h:29
+msgid "Y Positions"
+msgstr "Θέσεις Υ"
+
+#: ../metadata/place.xml.in.h:30
+msgid "Y Viewport Positions"
+msgstr "Θέσεις Υ Εικονικών Επιφανειών Εργασίας"
+
+#: ../metadata/place.xml.in.h:31
+msgid "Y position values"
+msgstr "Τιμές θέσης Υ"
+
+#: ../metadata/png.xml.in.h:1
+msgid "Png"
+msgstr "Png"
+
+#: ../metadata/png.xml.in.h:2
+msgid "Png image loader"
+msgstr "Φορτωτής εικόνων Png"
+
+#: ../metadata/regex.xml.in.h:1
+msgid "Regex Matching"
+msgstr "Ταίριαγμα Regex"
+
+#: ../metadata/regex.xml.in.h:2
+msgid "Regex window matching"
+msgstr "Ταίριαγμα παραθύρου regex"
+
+#: ../metadata/resize.xml.in.h:1
+msgid "Border Color"
+msgstr "Χρώμα Ορίου"
+
+#: ../metadata/resize.xml.in.h:2
+msgid "Border color used for outline and rectangle resize modes"
+msgstr "Χρώμα ορίου για την μορφές μορφοποίησης τετράγωνο και περίγραμμα"
+
+#: ../metadata/resize.xml.in.h:3
+msgid "Default Resize Mode"
+msgstr "Προκαθορισμένη μορφή μορφοποίησης"
+
+#: ../metadata/resize.xml.in.h:4
+msgid "Default mode used for window resizing"
+msgstr "Προκαθορισμένη μορφή για μορφοποιήση παραθύρου"
+
+#: ../metadata/resize.xml.in.h:5
+msgid "Fill Color"
+msgstr "Χρώμα Γεμίσματος"
+
+#: ../metadata/resize.xml.in.h:6
+msgid "Fill color used for rectangle resize mode"
+msgstr "Χρώμα για χρήση στην τετράγωνη μορφή μορφοποίησης"
+
+#: ../metadata/resize.xml.in.h:7
+msgid "Initiate Normal Window Resize"
+msgstr "Εκκίνηση Κανονικής Μορφοποίησης Παραθύρου"
+
+#: ../metadata/resize.xml.in.h:8
+msgid "Initiate Outline Window Resize"
+msgstr "Εκκίνηση Μορφής Μορφοποίησης Περιγράμματος"
+
+#: ../metadata/resize.xml.in.h:9
+msgid "Initiate Rectangle Window Resize"
+msgstr "Εκκίνηση Τετράγωνης Μορφής Μορφοποίησης"
+
+#: ../metadata/resize.xml.in.h:10
+msgid "Initiate Stretch Window Resize"
+msgstr "Εκκίνηση Μορφής Μορφοποίησης Παραμορφώσεως"
+
+#: ../metadata/resize.xml.in.h:11
+msgid "Initiate Window Resize"
+msgstr "Εκκίνηση Μορφοποίησης Παραθύρου"
+
+#: ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Κανονική"
+
+#: ../metadata/resize.xml.in.h:13
+msgid "Normal Resize Windows"
+msgstr "Κανονική Μορφοποίηση Παραθύρων"
+
+#: ../metadata/resize.xml.in.h:14
+msgid "Outline"
+msgstr "Περίγραμμα"
+
+#: ../metadata/resize.xml.in.h:15
+msgid "Outline Resize Windows"
+msgstr "Μορφοποίηση Περίγράμματος"
+
+#: ../metadata/resize.xml.in.h:16
+msgid "Rectangle"
+msgstr "Τετράγωνο"
+
+#: ../metadata/resize.xml.in.h:17
+msgid "Rectangle Resize Windows"
+msgstr "Τετράγωνη Μορφοποίηση Παραθύρων"
+
+#: ../metadata/resize.xml.in.h:18
+msgid "Resize Window"
+msgstr "Μορφοποίηση Παραθύρου"
+
+#: ../metadata/resize.xml.in.h:19
+msgid "Resize window"
+msgstr "Μορφοποίηση παραθύρου"
+
+#: ../metadata/resize.xml.in.h:20
+msgid "Start resizing window"
+msgstr "Έναρξη μορφοποίησης παραθύρου"
+
+#: ../metadata/resize.xml.in.h:21
+msgid "Start resizing window by stretching it"
+msgstr "Έναρξη μορφοποίησης παραθύρου παραμορφώνοντάς το"
+
+#: ../metadata/resize.xml.in.h:22
+msgid "Start resizing window normally"
+msgstr "Έναρξη μορφοποίησης παραθύρου κανονικά"
+
+#: ../metadata/resize.xml.in.h:23
+msgid "Start resizing window with outline"
+msgstr "Έναρξη μορφοποίησης παραθύρου με περίγραμμα"
+
+#: ../metadata/resize.xml.in.h:24
+msgid "Start resizing window with rectangle"
+msgstr "Έναρξη μορφοποίησης παραθύρου με το τετράγωνο"
+
+#: ../metadata/resize.xml.in.h:25
+msgid "Stretch"
+msgstr "Παραμόρφωση"
+
+#: ../metadata/resize.xml.in.h:26
+msgid "Stretch Resize Windows"
+msgstr "Μορφοποίηση Παραθύρου με Παραμόρφωση"
+
+#: ../metadata/resize.xml.in.h:27
+msgid "Windows that normal resize should be used for"
+msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί κανονική μορφοποίηση"
+
+#: ../metadata/resize.xml.in.h:28
+msgid "Windows that outline resize should be used for"
+msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί μορφοποίηση περιγράμματος"
+
+#: ../metadata/resize.xml.in.h:29
+msgid "Windows that rectangle resize should be used for"
+msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί τετραγωνική μορφοποίηση"
+
+#: ../metadata/resize.xml.in.h:30
+msgid "Windows that stretch resize should be used for"
+msgstr "Παράθυρα στα οποία θα χρησιμοποιηθεί μορφοποίηση με παραμόρφωση"
+
+#: ../metadata/rotate.xml.in.h:2
+msgid "Edge Flip DnD"
+msgstr "Γύρισμα Άκρης DnD"
+
+#: ../metadata/rotate.xml.in.h:3
+msgid "Edge Flip Move"
+msgstr "Γύρισμα Άκρης με Μετακίνηση"
+
+#: ../metadata/rotate.xml.in.h:4
+msgid "Edge Flip Pointer"
+msgstr "Γύρισμα Άκρης με Δείκτη"
+
+#: ../metadata/rotate.xml.in.h:5
+msgid "Flip Time"
+msgstr "Χρόνος Γυρίσματος"
+
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to left viewport and warp pointer"
+msgstr "Γύρισμα στην αριστερή εικονική επιφάνεια εργασίας και τύλιγμα δείκτη"
+
+#: ../metadata/rotate.xml.in.h:7
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν τραβιέται αντικείμενο "
+"στην άκρη της οθόνης"
+
+#: ../metadata/rotate.xml.in.h:8
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν μετακινείται ο δείκτης "
+"στην άκρη της οθόνης"
+
+#: ../metadata/rotate.xml.in.h:9
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Γύρισμα στην επόμενη εικονική επιφάνεια εργασίας όταν μετακινείται "
+"παράθυροστην άκρη της οθόνης"
+
+#: ../metadata/rotate.xml.in.h:10
+msgid "Flip to right viewport and warp pointer"
+msgstr "Γύρισμα στην δεξιά εικονική επιφάνεια εργασίας και τύλιγμα δείκτη"
+
+#: ../metadata/rotate.xml.in.h:12
+msgid "Invert Y axis for pointer movement"
+msgstr "Αναστροφή στον Υ άξονα για μετακίνηση του δείκτη"
+
+#: ../metadata/rotate.xml.in.h:13
+msgid "Pointer Invert Y"
+msgstr "Αναστροφή Υ Δείκτη"
+
+#: ../metadata/rotate.xml.in.h:14
+msgid "Pointer Sensitivity"
+msgstr "Ευαισθησία Δείκτη"
+
+#: ../metadata/rotate.xml.in.h:15
+msgid "Raise on rotate"
+msgstr "Ανύψωση στην περιστροφή"
+
+#: ../metadata/rotate.xml.in.h:16
+msgid "Raise window when rotating"
+msgstr "Ανύψωση παραθύρου στην περιστροφή"
+
+#: ../metadata/rotate.xml.in.h:17
+msgid "Rotate Cube"
+msgstr "Περιστροφή Κύβου"
+
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate Flip Left"
+msgstr "Περιστροφή Γύρισμα Αριστερά"
+
+#: ../metadata/rotate.xml.in.h:19
+msgid "Rotate Flip Right"
+msgstr "Περιστροφή Γύρισμα Δεξιά"
+
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate Left"
+msgstr "Περιστροφή Αριστερά"
+
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Left with Window"
+msgstr "Περιστροφή Αριστερά με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate Right"
+msgstr "Περιστροφή Δεξιά"
+
+#: ../metadata/rotate.xml.in.h:23
+msgid "Rotate Right with Window"
+msgstr "Περιστροφή Δεξιά με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:24
+msgid "Rotate To"
+msgstr "Περιστροφή Στο"
+
+#: ../metadata/rotate.xml.in.h:25
+msgid "Rotate To Face 1"
+msgstr "Περιστροφή Στην Όψη 1"
+
+#: ../metadata/rotate.xml.in.h:26
+msgid "Rotate To Face 1 with Window"
+msgstr "Περιστροφή Στην Όψη 1 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:27
+msgid "Rotate To Face 10"
+msgstr "Περιστροφή Στην Όψη 10"
+
+#: ../metadata/rotate.xml.in.h:28
+msgid "Rotate To Face 10 with Window"
+msgstr "Περιστροφή Στην Όψη 10 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:29
+msgid "Rotate To Face 11"
+msgstr "Περιστροφή Στην Όψη 11"
+
+#: ../metadata/rotate.xml.in.h:30
+msgid "Rotate To Face 11 with Window"
+msgstr "Περιστροφή Στην Όψη 11 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:31
+msgid "Rotate To Face 12"
+msgstr "Περιστροφή Στην Όψη 12"
+
+#: ../metadata/rotate.xml.in.h:32
+msgid "Rotate To Face 12 with Window"
+msgstr "Περιστροφή Στην Όψη 12 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:33
+msgid "Rotate To Face 2"
+msgstr "Περιστροφή Στην Όψη 2"
+
+#: ../metadata/rotate.xml.in.h:34
+msgid "Rotate To Face 2 with Window"
+msgstr "Περιστροφή Στην Όψη 2 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:35
+msgid "Rotate To Face 3"
+msgstr "Περιστροφή Στην Όψη 3"
+
+#: ../metadata/rotate.xml.in.h:36
+msgid "Rotate To Face 3 with Window"
+msgstr "Περιστροφή Στην Όψη 3 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:37
+msgid "Rotate To Face 4"
+msgstr "Περιστροφή Στην Όψη 4"
+
+#: ../metadata/rotate.xml.in.h:38
+msgid "Rotate To Face 4 with Window"
+msgstr "Περιστροφή Στην Όψη 4 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:39
+msgid "Rotate To Face 5"
+msgstr "Περιστροφή Στην Όψη 5"
+
+#: ../metadata/rotate.xml.in.h:40
+msgid "Rotate To Face 5 with Window"
+msgstr "Περιστροφή Στην Όψη 5 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:41
+msgid "Rotate To Face 6"
+msgstr "Περιστροφή Στην Όψη 6"
+
+#: ../metadata/rotate.xml.in.h:42
+msgid "Rotate To Face 6 with Window"
+msgstr "Περιστροφή Στην Όψη 6 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:43
+msgid "Rotate To Face 7"
+msgstr "Περιστροφή Στην Όψη 7"
+
+#: ../metadata/rotate.xml.in.h:44
+msgid "Rotate To Face 7 with Window"
+msgstr "Περιστροφή Στην Όψη 7 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:45
+msgid "Rotate To Face 8"
+msgstr "Περιστροφή Στην Όψη 8"
+
+#: ../metadata/rotate.xml.in.h:46
+msgid "Rotate To Face 8 with Window"
+msgstr "Περιστροφή Στην Όψη 8 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:47
+msgid "Rotate To Face 9"
+msgstr "Περιστροφή Στην Όψη 9"
+
+#: ../metadata/rotate.xml.in.h:48
+msgid "Rotate To Face 9 with Window"
+msgstr "Περιστροφή Στην Όψη 9 με Παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:49
+msgid "Rotate desktop cube"
+msgstr "Περιστροφή κύβου επιφάνειας εργασίας"
+
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate left"
+msgstr "Περιστροφή αριστερά"
+
+#: ../metadata/rotate.xml.in.h:51
+msgid "Rotate left and bring active window along"
+msgstr "Περιστροφή αριστερά και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:52
+msgid "Rotate right"
+msgstr "Περιστροφή δεξιά"
+
+#: ../metadata/rotate.xml.in.h:53
+msgid "Rotate right and bring active window along"
+msgstr "Περιστροφή δεξιά και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:54
+msgid "Rotate to face 1"
+msgstr "Περιστροφή στην όψη 1"
+
+#: ../metadata/rotate.xml.in.h:55
+msgid "Rotate to face 1 and bring active window along"
+msgstr "Περιστροφή στην όψη 1 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:56
+msgid "Rotate to face 10"
+msgstr "Περιστροφή στην όψη 10"
+
+#: ../metadata/rotate.xml.in.h:57
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Περιστροφή στην όψη 10 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:58
+msgid "Rotate to face 11"
+msgstr "Περιστροφή στην όψη 11"
+
+#: ../metadata/rotate.xml.in.h:59
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Περιστροφή στην όψη 11 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:60
+msgid "Rotate to face 12"
+msgstr "Περιστροφή στην όψη 12"
+
+#: ../metadata/rotate.xml.in.h:61
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Περιστροφή στην όψη 12 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:62
+msgid "Rotate to face 2"
+msgstr "Περιστροφή στην όψη 2"
+
+#: ../metadata/rotate.xml.in.h:63
+msgid "Rotate to face 2 and bring active window along"
+msgstr "Περιστροφή στην όψη 2 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:64
+msgid "Rotate to face 3"
+msgstr "Περιστροφή στην όψη 3"
+
+#: ../metadata/rotate.xml.in.h:65
+msgid "Rotate to face 3 and bring active window along"
+msgstr "Περιστροφή στην όψη 3 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:66
+msgid "Rotate to face 4"
+msgstr "Περιστροφή στην όψη 4"
+
+#: ../metadata/rotate.xml.in.h:67
+msgid "Rotate to face 4 and bring active window along"
+msgstr "Περιστροφή στην όψη 4 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:68
+msgid "Rotate to face 5"
+msgstr "Περιστροφή στην όψη 5"
+
+#: ../metadata/rotate.xml.in.h:69
+msgid "Rotate to face 5 and bring active window along"
+msgstr "Περιστροφή στην όψη 5 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:70
+msgid "Rotate to face 6"
+msgstr "Περιστροφή στην όψη 6"
+
+#: ../metadata/rotate.xml.in.h:71
+msgid "Rotate to face 6 and bring active window along"
+msgstr "Περιστροφή στην όψη 6 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:72
+msgid "Rotate to face 7"
+msgstr "Περιστροφή στην όψη 7"
+
+#: ../metadata/rotate.xml.in.h:73
+msgid "Rotate to face 7 and bring active window along"
+msgstr "Περιστροφή στην όψη 7 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:74
+msgid "Rotate to face 8"
+msgstr "Περιστροφή στην όψη 8"
+
+#: ../metadata/rotate.xml.in.h:75
+msgid "Rotate to face 8 and bring active window along"
+msgstr "Περιστροφή στην όψη 8 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:76
+msgid "Rotate to face 9"
+msgstr "Περιστροφή στην όψη 9"
+
+#: ../metadata/rotate.xml.in.h:77
+msgid "Rotate to face 9 and bring active window along"
+msgstr "Περιστροφή στην όψη 9 και μεταφορά ενεργού παραθύρου κατα μήκος"
+
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate to viewport"
+msgstr "Περιστροφή στην εικονική επιφάνεια εργασίας"
+
+#: ../metadata/rotate.xml.in.h:79
+msgid "Rotate window"
+msgstr "Περιστροφή παραθύρου"
+
+#: ../metadata/rotate.xml.in.h:80
+msgid "Rotate with window"
+msgstr "Περιστροφή με παράθυρο"
+
+#: ../metadata/rotate.xml.in.h:81
+msgid "Rotation Acceleration"
+msgstr "Επιτάχυνση Περιστροφής"
+
+#: ../metadata/rotate.xml.in.h:82
+msgid "Rotation Speed"
+msgstr "Ταχύτητα Περιστροφής"
+
+#: ../metadata/rotate.xml.in.h:83
+msgid "Rotation Timestep"
+msgstr "Χρονικό Βήμα Περιστροφής"
+
+#: ../metadata/rotate.xml.in.h:84
+msgid "Rotation Zoom"
+msgstr "Ζουμ Περιστροφής"
+
+#: ../metadata/rotate.xml.in.h:85
+msgid "Sensitivity of pointer movement"
+msgstr "Ευαισθησία της μετακίνησης του δείκτη"
+
+#: ../metadata/rotate.xml.in.h:86
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr "Αρπαγή Περιστροφής Κύβου στην Κάτω Όψη"
+
+#: ../metadata/rotate.xml.in.h:87
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Αρπαγή Περιστροφής Κύβου στην Πάνω Όψη"
+
+#: ../metadata/rotate.xml.in.h:88
+msgid "Snap To Bottom Face"
+msgstr "Αρπαγή Στην Κάτω Όψη"
+
+#: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Αρπαγή Στην Πάνω Όψη"
+
+#: ../metadata/rotate.xml.in.h:91
+msgid "Start Rotation"
+msgstr "Έναρξη Περιστροφής"
+
+#: ../metadata/rotate.xml.in.h:92
+msgid "Timeout before flipping viewport"
+msgstr "Τέλος χρόνου πριν το γύρισμα της εικονικής επιφάνειας εργασίας"
+
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
+msgid "Zoom"
+msgstr "Ζουμ"
+
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+msgid "Amount of opacity in percent"
+msgstr "Ποσοστό αδιαφάνειας επι της εκατό"
+
+#: ../metadata/scale.xml.in.h:2
+msgid "Big"
+msgstr "Μεγάλο"
+
+#: ../metadata/scale.xml.in.h:3
+msgid "Click Desktop to Show Desktop"
+msgstr "Κλικ στην Επιφάνεια Εργασίας για να Εμφανιστεί η Επιφάνεια Εργασίας"
+
+#: ../metadata/scale.xml.in.h:4
+msgid "Darken Background"
+msgstr "Σκοτείνιασμα Φόντου"
+
+#: ../metadata/scale.xml.in.h:5
+msgid "Darken background when scaling windows"
+msgstr "Σκοτείνιασμα φόντου στην κλιμάκωση παραθύρων"
+
+#: ../metadata/scale.xml.in.h:6
+msgid "Emblem"
+msgstr "Έμβλημα"
+
+#: ../metadata/scale.xml.in.h:7
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr ""
+"Είσοδος Στην Εμφάνιση Επιφάνειας Εργασίας όταν η Επιφάνεια Εργασίας "
+"κλικαριστεί κατα τη διάρκεια της Κλιμάκωσης"
+
+#: ../metadata/scale.xml.in.h:8
+msgid "Hover Time"
+msgstr "Χρόνος Αιώρησης"
+
+#: ../metadata/scale.xml.in.h:9
+msgid "Initiate Window Picker"
+msgstr "Εκκίνηση Διαλογέα Παραθύρου"
+
+#: ../metadata/scale.xml.in.h:10
+msgid "Initiate Window Picker For All Windows"
+msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Όλα τα Παράθυρα"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Initiate Window Picker For Window Group"
+msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Ομάδα Παραθύρων"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Παράθυρα στην Τρέχουσα Έξοδο"
+
+#: ../metadata/scale.xml.in.h:13
+msgid "Layout and start transforming all windows"
+msgstr "Διάταξη και μεταμόρφωση όλων των παραθύρων"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Layout and start transforming window group"
+msgstr "Διάταξη και έναρξη μεταμόρφωσης ομάδας παραθύρων"
+
+#: ../metadata/scale.xml.in.h:15
+msgid "Layout and start transforming windows"
+msgstr "Διάταξη και έναρξη μεταμόρφωσης παραθύρων"
+
+#: ../metadata/scale.xml.in.h:16
+msgid "Layout and start transforming windows on current output"
+msgstr "Διάταξη και έναρξη μεταμόρφωσης παραθύρων στην τρέχουσα έξοδο"
+
+#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Κανένα"
+
+#: ../metadata/scale.xml.in.h:19
+msgid "On all output devices"
+msgstr "Σε όλες τις συσκευές εξόδου"
+
+#: ../metadata/scale.xml.in.h:20
+msgid "On current output device"
+msgstr "Στην τρέχουσα συσκευή εξόδου"
+
+#: ../metadata/scale.xml.in.h:22
+msgid "Overlay Icon"
+msgstr "Επίστρωση Εικονιδίου"
+
+#: ../metadata/scale.xml.in.h:23
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Επίστρωση ενός εικονιδίου στα παράθυρα μόλις αυτά κλιμακωθούν"
+
+#: ../metadata/scale.xml.in.h:24
+msgid "Scale"
+msgstr "Κλιμάκωση"
+
+#: ../metadata/scale.xml.in.h:25
+msgid "Scale Windows"
+msgstr "Κλιμάκωση Παραθύρων"
+
+#: ../metadata/scale.xml.in.h:26
+msgid "Scale speed"
+msgstr "Ταχύτητα κλιμάκωσης"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Scale timestep"
+msgstr "Χρονικό βήμα κλιμάκωσης"
+
+#: ../metadata/scale.xml.in.h:28
+msgid "Scale windows"
+msgstr "Κλιμάκωση παραθύρων"
+
+#: ../metadata/scale.xml.in.h:29
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+"Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
+"εξόδου."
+
+#: ../metadata/scale.xml.in.h:30
+msgid "Space between windows"
+msgstr "Χώρος μεταξύ των παραθύρων"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Spacing"
+msgstr "Χωροταξία"
+
+#: ../metadata/scale.xml.in.h:33
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Χρόνος (σε ms) πρίν να τερματιστεί η κλιμάκωση κατά τη διάρκεια της αιώρησης "
+"πάνω από ένα παράθυρο"
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Windows that should be scaled in scale mode"
+msgstr "Παράθυρα που πρέπει να κλιμακωθούν στην μέθοδο κλιμάκωσης"
+
+#: ../metadata/screenshot.xml.in.h:1
+msgid "Automatically open screenshot in this application"
+msgstr "Αυτόματο άνοιγμα αρπαγής οθόνης σε αυτή την εφαρμογή"
+
+#: ../metadata/screenshot.xml.in.h:2
+msgid "Directory"
+msgstr "Διαδρομή"
+
+#: ../metadata/screenshot.xml.in.h:4
+msgid "Initiate rectangle screenshot"
+msgstr "Εκκίνηση τετράγωνης αρπαγής οθόνης"
+
+#: ../metadata/screenshot.xml.in.h:5
+msgid "Launch Application"
+msgstr "Εκκίνηση Εφαρμογής"
+
+#: ../metadata/screenshot.xml.in.h:6
+msgid "Put screenshot images in this directory"
+msgstr "Τοποθέτηση των εικόνων αρπαγής οθόνης σε αυτή τη διαδρομή"
+
+#: ../metadata/screenshot.xml.in.h:7
+msgid "Screenshot"
+msgstr "Αρπαγή Οθόνης"
+
+#: ../metadata/screenshot.xml.in.h:8
+msgid "Screenshot plugin"
+msgstr "Πρόσθετο αρπαγής οθόνης"
+
+#: ../metadata/svg.xml.in.h:1
+msgid "Svg"
+msgstr "Svg"
+
+#: ../metadata/svg.xml.in.h:2
+msgid "Svg image loader"
+msgstr "Φορτωτής εικόνας svg"
+
+#: ../metadata/switcher.xml.in.h:1
+msgid "Amount of brightness in percent"
+msgstr "Ποσό φωτεινότητας σε ποσοστό επι της εκατό"
+
+#: ../metadata/switcher.xml.in.h:3
+msgid "Amount of saturation in percent"
+msgstr "Ποσό κορεσμού σε ποσοστό επι της εκατό"
+
+#: ../metadata/switcher.xml.in.h:4
+msgid "Application Switcher"
+msgstr "Επιλογέας Εφαρμογών"
+
+#: ../metadata/switcher.xml.in.h:5
+msgid "Auto Rotate"
+msgstr "Αυτόματη Περιστροφή"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Brightness"
+msgstr "Φωτεινότητα"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Bring To Front"
+msgstr "Μεταφορά Μπροστά"
+
+#: ../metadata/switcher.xml.in.h:8
+msgid "Bring selected window to front"
+msgstr "Μεταφορά επιλεγμένου παράθυρου μπροστά"
+
+#: ../metadata/switcher.xml.in.h:9
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"Η απόσταση της επιφάνειας εργασίας που πρέπει να ζουμαριστεί έξω κατα την "
+"εναλλαγή παραθύρων"
+
+#: ../metadata/switcher.xml.in.h:11
+msgid "Icon"
+msgstr "Εικονίδιο"
+
+#: ../metadata/switcher.xml.in.h:12
+msgid "Minimized"
+msgstr "Ελαχιστοποιημένο"
+
+#: ../metadata/switcher.xml.in.h:14
 #, fuzzy
-#~ msgid "Next Panel"
-#~ msgstr "Πλάνο Επιφάνειας Εργασίας"
+msgid "Next Panel"
+msgstr "Πλάνο Επιφάνειας Εργασίας"
 
-#~ msgid "Next window"
-#~ msgstr "Επόμενο παράθυρο"
+#: ../metadata/switcher.xml.in.h:15
+msgid "Next window"
+msgstr "Επόμενο παράθυρο"
 
-#~ msgid "Next window (All windows)"
-#~ msgstr "Επόμενο παράθυρο (Όλα τα παράθυρα)"
+#: ../metadata/switcher.xml.in.h:16
+msgid "Next window (All windows)"
+msgstr "Επόμενο παράθυρο (Όλα τα παράθυρα)"
 
-#~ msgid "Next window (No popup)"
-#~ msgstr "Επόμενο παράθυρο (Οχι popup)"
+#: ../metadata/switcher.xml.in.h:17
+msgid "Next window (No popup)"
+msgstr "Επόμενο παράθυρο (Οχι popup)"
 
-#~ msgid "Popup switcher if not visible and select next window"
-#~ msgstr ""
-#~ "Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το επόμενο "
-#~ "παράθυρο"
+#: ../metadata/switcher.xml.in.h:19
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+"Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το επόμενο παράθυρο"
 
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window out of all windows"
-#~ msgstr ""
-#~ "Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το επόμενο "
-#~ "παράθυρο απο όλα τα παράθυρα"
+#: ../metadata/switcher.xml.in.h:20
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το επόμενο "
+"παράθυρο απο όλα τα παράθυρα"
 
-#~ msgid "Popup switcher if not visible and select previous window"
-#~ msgstr ""
-#~ "Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το προηγούμενο "
-#~ "παράθυρο"
+#: ../metadata/switcher.xml.in.h:21
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+"Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το προηγούμενο "
+"παράθυρο"
 
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window out of all "
-#~ "windows"
-#~ msgstr ""
-#~ "Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το προηγούμενο "
-#~ "παράθυρο απο όλα τα παράθυρα"
+#: ../metadata/switcher.xml.in.h:22
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Κάνει popup τον επιλογέα αν δεν είναι ορατός και επιλέγει το προηγούμενο "
+"παράθυρο απο όλα τα παράθυρα"
 
+#: ../metadata/switcher.xml.in.h:23
 #, fuzzy
-#~ msgid "Prev Panel"
-#~ msgstr "Προηγούμενο Σλάιντ"
+msgid "Prev Panel"
+msgstr "Προηγούμενο Σλάιντ"
 
-#~ msgid "Prev window"
-#~ msgstr "Προηγούμενο παράθυρο"
+#: ../metadata/switcher.xml.in.h:24
+msgid "Prev window"
+msgstr "Προηγούμενο παράθυρο"
 
-#~ msgid "Prev window (All windows)"
-#~ msgstr "Προηγούμενο παράθυρο (Όλα τα παράθυρα)"
+#: ../metadata/switcher.xml.in.h:25
+msgid "Prev window (All windows)"
+msgstr "Προηγούμενο παράθυρο (Όλα τα παράθυρα)"
 
-#~ msgid "Prev window (No popup)"
-#~ msgstr "Προηγούμενο παράθυρο (Οχι popup)"
+#: ../metadata/switcher.xml.in.h:26
+msgid "Prev window (No popup)"
+msgstr "Προηγούμενο παράθυρο (Οχι popup)"
 
-#~ msgid "Rotate to the selected window while switching"
-#~ msgstr "Περιστροφή στο επιλεγμένο παράθυρο κατα την εναλλαγή"
+#: ../metadata/switcher.xml.in.h:27
+msgid "Rotate to the selected window while switching"
+msgstr "Περιστροφή στο επιλεγμένο παράθυρο κατα την εναλλαγή"
 
-#~ msgid "Saturation"
-#~ msgstr "Κορεσμός"
+#: ../metadata/switcher.xml.in.h:28
+msgid "Saturation"
+msgstr "Κορεσμός"
 
-#~ msgid "Select next window without showing the popup window."
-#~ msgstr "Επιλογή του επόμενου παραθύρου χωρίς εμφάνιση του παραθύρου popup."
+#: ../metadata/switcher.xml.in.h:29
+msgid "Select next panel type window."
+msgstr ""
 
+#: ../metadata/switcher.xml.in.h:30
+msgid "Select next window without showing the popup window."
+msgstr "Επιλογή του επόμενου παραθύρου χωρίς εμφάνιση του παραθύρου popup."
+
+#: ../metadata/switcher.xml.in.h:31
 #, fuzzy
-#~ msgid "Select previous panel type window."
-#~ msgstr ""
-#~ "Επιλογή του προηγούμενου παραθύρου χωρίς εμφάνιση του παραθύρου popup."
-
-#~ msgid "Select previous window without showing the popup window."
-#~ msgstr ""
-#~ "Επιλογή του προηγούμενου παραθύρου χωρίς εμφάνιση του παραθύρου popup."
-
-#~ msgid "Show icon next to thumbnail"
-#~ msgstr "Εμφάνιση εικονιδίου δίπλα στη μικρογραφία"
-
-#~ msgid "Show minimized windows"
-#~ msgstr "Εμφάνιση ελαχιστοποιημένων παραθύρων"
-
-#~ msgid "Switcher speed"
-#~ msgstr "Ταχύτητα επιλογέα"
-
-#~ msgid "Switcher timestep"
-#~ msgstr "Χρονικό βήμα επιλογέα"
-
-#~ msgid "Switcher windows"
-#~ msgstr "Επιλογέας παραθύρων"
-
-#~ msgid "Windows that should be shown in switcher"
-#~ msgstr "Παράθυρα που δεν πρέπει να εμφανίζονται στον επιλογέα"
-
-#~ msgid "Provide YV12 colorspace support"
-#~ msgstr "Χορήγηση υποστήριξης YV12 χρωματικού μοντέλου"
-
-#~ msgid "Video Playback"
-#~ msgstr "Παίξιμο Βίντεο"
-
-#~ msgid "Video playback"
-#~ msgstr "Παίξιμο βίντεο"
-
-#~ msgid "YV12 colorspace"
-#~ msgstr "Χρωματικό μοντέλο YV12"
-
-#~ msgid "Add line"
-#~ msgstr "Προσθήκη γραμμής"
-
-#~ msgid "Add point"
-#~ msgstr "Προσθήκη σημείου"
-
-#~ msgid "Adds water effects to different desktop actions"
-#~ msgstr ""
-#~ "Προσθέτει τα εφέ νερού σε διαφορετικές ενέργειες επιφάνειας εργασίας"
-
-#~ msgid "Delay (in ms) between each rain-drop"
-#~ msgstr "Καθυστέρηση (σε χιλ.δευτερολέπτου) μεταξύ κάθε σταγόνας βροχής"
-
-#~ msgid "Enable pointer water effects"
-#~ msgstr "Ενεργοποίηση των εφέ νερού για τον δείκτη"
-
-#~ msgid "Line"
-#~ msgstr "Γραμμή"
-
-#~ msgid "Offset Scale"
-#~ msgstr "Κλιμάκωση Μετάθεσης Αρχής"
-
-#~ msgid "Point"
-#~ msgstr "Σημείο"
-
-#~ msgid "Rain Delay"
-#~ msgstr "Καθυστέρηση Βροχής"
-
-#~ msgid "Title wave"
-#~ msgstr "Τίτλος κύματος"
-
-#~ msgid "Toggle rain"
-#~ msgstr "Εκκίνηση βροχής"
-
-#~ msgid "Toggle rain effect"
-#~ msgstr "Εκκίνηση εφέ βροχής"
-
-#~ msgid "Toggle wiper"
-#~ msgstr "Εκκίνηση γυαλοκαθαριστήρα"
-
-#~ msgid "Toggle wiper effect"
-#~ msgstr "Εκκίνηση εφέ γυαλοκαθαριστήρα"
-
-#~ msgid "Water Effect"
-#~ msgstr "Εφέ Νερού"
-
-#~ msgid "Water offset scale"
-#~ msgstr "Κλιμάκωση μετάθεσης αρχής νερού"
-
-#~ msgid "Wave effect from window title"
-#~ msgstr "Εφέ κύματος από τον τίτλο παραθύρου"
-
-#~ msgid "Focus Effect"
-#~ msgstr "Εφέ Εστίασης"
-
-#~ msgid "Focus Window Effect"
-#~ msgstr "Εφέ Εστίασης Παραθύρου"
-
-#~ msgid "Focus Windows"
-#~ msgstr "Εστιάζει Παράθυρα"
-
-#~ msgid "Friction"
-#~ msgstr "Τριβή"
-
-#~ msgid "Grab Windows"
-#~ msgstr "Πιάσιμο Παραθύρων"
-
-#~ msgid "Grid Resolution"
-#~ msgstr "Ανάλυση Πλέγματος"
-
-#~ msgid "Inverted window snapping"
-#~ msgstr "Αντίστροφο άρπαγμα παραθύρου"
-
-#~ msgid "Make window shiver"
-#~ msgstr "Κάνει το παράθυρο να τρέμει"
-
-#~ msgid "Map Effect"
-#~ msgstr "Εφέ Χαρτογράφησης"
-
-#~ msgid "Map Window Effect"
-#~ msgstr "Εφέ Χαρτογράφησης Παραθύρου"
-
-#~ msgid "Map Windows"
-#~ msgstr "Χαρτογράφηση Παραθύρων"
-
-#~ msgid "Maximize Effect"
-#~ msgstr "Εφέ Μεγιστοποίησης"
-
-#~ msgid "Minimum Grid Size"
-#~ msgstr "Ελάχιστο Μέγεθος Πλέγματος"
-
-#~ msgid "Minimum Vertex Grid Size"
-#~ msgstr "Ελάχιστο Μέγεθος Κορυφαίου Πλέγματος"
-
-#~ msgid "Move Windows"
-#~ msgstr "Μετακίνηση Παραθύρων"
-
-#~ msgid "Shiver"
-#~ msgstr "Τρεμούλιασμα"
-
-#~ msgid "Snap Inverted"
-#~ msgstr "Αντίστροφο Άρπαγμα"
-
-#~ msgid "Snap windows"
-#~ msgstr "Άρπαγμα παραθύρων"
-
-#~ msgid "Spring Friction"
-#~ msgstr "Τριβή Ελατηρίου"
-
-#~ msgid "Spring K"
-#~ msgstr "Κ Ελατηρίου"
-
-#~ msgid "Spring Konstant"
-#~ msgstr "Σταθερά Ελατηρίου"
-
-#~ msgid "Toggle window snapping"
-#~ msgstr "Εκκίνηση αρπάγματος παραθύρου"
-
-#~ msgid "Use spring model for wobbly window effect"
-#~ msgstr "Χρήση μοντέλου ελατηρίου για το εφέ ταλάντωσης παραθύρου"
-
-#~ msgid "Vertex Grid Resolution"
-#~ msgstr "Ανάλυση Κορυφαίου Πλέγματος"
-
-#~ msgid "Windows that should wobble when focused"
-#~ msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν εστιαστούν"
-
-#~ msgid "Windows that should wobble when grabbed"
-#~ msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν πιαστούν"
-
-#~ msgid "Windows that should wobble when mapped"
-#~ msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν χαρτογραφηθούν"
-
-#~ msgid "Windows that should wobble when moved"
-#~ msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν μετακινηθούν"
-
-#~ msgid "Wobble effect when maximizing and unmaximizing windows"
-#~ msgstr ""
-#~ "Εφέ ταλάντευσης όταν μεγιστοποιούνται και απομεγιστοποιούνται παράθυρα"
-
-#~ msgid "Wobbly Windows"
-#~ msgstr "Ταλαντευόμενα Παράθυρα"
-
-#~ msgid "Filter Linear"
-#~ msgstr "Γραμμικό Φιλτράρισμα"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Χρήση γραμμικού φιλτραρίσματος όταν ζουμάρεται μέσα"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "Ζουμάρισμα Επιφάνειας Εργασίας"
-
-#~ msgid "Zoom In"
-#~ msgstr "Ζουμ Μέσα"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Ζουμ Έξω"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "Pan του Ζούμ"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "Ταχύτητα Ζουμ"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Χρονικό Βήμα Ζουμ"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Pan και ζούμ του κύβου"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Παράγοντας ζουμ"
-
-#~ msgid "Zoom pan"
-#~ msgstr "Pan του ζούμ"
+msgid "Select previous panel type window."
+msgstr "Επιλογή του προηγούμενου παραθύρου χωρίς εμφάνιση του παραθύρου popup."
+
+#: ../metadata/switcher.xml.in.h:32
+msgid "Select previous window without showing the popup window."
+msgstr "Επιλογή του προηγούμενου παραθύρου χωρίς εμφάνιση του παραθύρου popup."
+
+#: ../metadata/switcher.xml.in.h:33
+msgid "Show icon next to thumbnail"
+msgstr "Εμφάνιση εικονιδίου δίπλα στη μικρογραφία"
+
+#: ../metadata/switcher.xml.in.h:34
+msgid "Show minimized windows"
+msgstr "Εμφάνιση ελαχιστοποιημένων παραθύρων"
+
+#: ../metadata/switcher.xml.in.h:36
+msgid "Switcher speed"
+msgstr "Ταχύτητα επιλογέα"
+
+#: ../metadata/switcher.xml.in.h:37
+msgid "Switcher timestep"
+msgstr "Χρονικό βήμα επιλογέα"
+
+#: ../metadata/switcher.xml.in.h:38
+msgid "Switcher windows"
+msgstr "Επιλογέας παραθύρων"
+
+#: ../metadata/switcher.xml.in.h:40
+msgid "Windows that should be shown in switcher"
+msgstr "Παράθυρα που δεν πρέπει να εμφανίζονται στον επιλογέα"
+
+#: ../metadata/video.xml.in.h:1
+msgid "Provide YV12 colorspace support"
+msgstr "Χορήγηση υποστήριξης YV12 χρωματικού μοντέλου"
+
+#: ../metadata/video.xml.in.h:2
+msgid "Video Playback"
+msgstr "Παίξιμο Βίντεο"
+
+#: ../metadata/video.xml.in.h:3
+msgid "Video playback"
+msgstr "Παίξιμο βίντεο"
+
+#: ../metadata/video.xml.in.h:4
+msgid "YV12 colorspace"
+msgstr "Χρωματικό μοντέλο YV12"
+
+#: ../metadata/water.xml.in.h:1
+msgid "Add line"
+msgstr "Προσθήκη γραμμής"
+
+#: ../metadata/water.xml.in.h:2
+msgid "Add point"
+msgstr "Προσθήκη σημείου"
+
+#: ../metadata/water.xml.in.h:3
+msgid "Adds water effects to different desktop actions"
+msgstr "Προσθέτει τα εφέ νερού σε διαφορετικές ενέργειες επιφάνειας εργασίας"
+
+#: ../metadata/water.xml.in.h:4
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Καθυστέρηση (σε χιλ.δευτερολέπτου) μεταξύ κάθε σταγόνας βροχής"
+
+#: ../metadata/water.xml.in.h:5
+msgid "Enable pointer water effects"
+msgstr "Ενεργοποίηση των εφέ νερού για τον δείκτη"
+
+#: ../metadata/water.xml.in.h:7
+msgid "Line"
+msgstr "Γραμμή"
+
+#: ../metadata/water.xml.in.h:8
+msgid "Offset Scale"
+msgstr "Κλιμάκωση Μετάθεσης Αρχής"
+
+#: ../metadata/water.xml.in.h:9
+msgid "Point"
+msgstr "Σημείο"
+
+#: ../metadata/water.xml.in.h:10
+msgid "Rain Delay"
+msgstr "Καθυστέρηση Βροχής"
+
+#: ../metadata/water.xml.in.h:11
+msgid "Title wave"
+msgstr "Τίτλος κύματος"
+
+#: ../metadata/water.xml.in.h:12
+msgid "Toggle rain"
+msgstr "Εκκίνηση βροχής"
+
+#: ../metadata/water.xml.in.h:13
+msgid "Toggle rain effect"
+msgstr "Εκκίνηση εφέ βροχής"
+
+#: ../metadata/water.xml.in.h:14
+msgid "Toggle wiper"
+msgstr "Εκκίνηση γυαλοκαθαριστήρα"
+
+#: ../metadata/water.xml.in.h:15
+msgid "Toggle wiper effect"
+msgstr "Εκκίνηση εφέ γυαλοκαθαριστήρα"
+
+#: ../metadata/water.xml.in.h:16
+msgid "Water Effect"
+msgstr "Εφέ Νερού"
+
+#: ../metadata/water.xml.in.h:17
+msgid "Water offset scale"
+msgstr "Κλιμάκωση μετάθεσης αρχής νερού"
+
+#: ../metadata/water.xml.in.h:18
+msgid "Wave effect from window title"
+msgstr "Εφέ κύματος από τον τίτλο παραθύρου"
+
+#: ../metadata/wobbly.xml.in.h:1
+msgid "Focus Effect"
+msgstr "Εφέ Εστίασης"
+
+#: ../metadata/wobbly.xml.in.h:2
+msgid "Focus Window Effect"
+msgstr "Εφέ Εστίασης Παραθύρου"
+
+#: ../metadata/wobbly.xml.in.h:3
+msgid "Focus Windows"
+msgstr "Εστιάζει Παράθυρα"
+
+#: ../metadata/wobbly.xml.in.h:4
+msgid "Friction"
+msgstr "Τριβή"
+
+#: ../metadata/wobbly.xml.in.h:5
+msgid "Grab Windows"
+msgstr "Πιάσιμο Παραθύρων"
+
+#: ../metadata/wobbly.xml.in.h:6
+msgid "Grid Resolution"
+msgstr "Ανάλυση Πλέγματος"
+
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Inverted window snapping"
+msgstr "Αντίστροφο άρπαγμα παραθύρου"
+
+#: ../metadata/wobbly.xml.in.h:8
+msgid "Make window shiver"
+msgstr "Κάνει το παράθυρο να τρέμει"
+
+#: ../metadata/wobbly.xml.in.h:9
+msgid "Map Effect"
+msgstr "Εφέ Χαρτογράφησης"
+
+#: ../metadata/wobbly.xml.in.h:10
+msgid "Map Window Effect"
+msgstr "Εφέ Χαρτογράφησης Παραθύρου"
+
+#: ../metadata/wobbly.xml.in.h:11
+msgid "Map Windows"
+msgstr "Χαρτογράφηση Παραθύρων"
+
+#: ../metadata/wobbly.xml.in.h:12
+msgid "Maximize Effect"
+msgstr "Εφέ Μεγιστοποίησης"
+
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Minimum Grid Size"
+msgstr "Ελάχιστο Μέγεθος Πλέγματος"
+
+#: ../metadata/wobbly.xml.in.h:14
+msgid "Minimum Vertex Grid Size"
+msgstr "Ελάχιστο Μέγεθος Κορυφαίου Πλέγματος"
+
+#: ../metadata/wobbly.xml.in.h:15
+msgid "Move Windows"
+msgstr "Μετακίνηση Παραθύρων"
+
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Shiver"
+msgstr "Τρεμούλιασμα"
+
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Snap Inverted"
+msgstr "Αντίστροφο Άρπαγμα"
+
+#: ../metadata/wobbly.xml.in.h:19
+msgid "Snap windows"
+msgstr "Άρπαγμα παραθύρων"
+
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Spring Friction"
+msgstr "Τριβή Ελατηρίου"
+
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Spring K"
+msgstr "Κ Ελατηρίου"
+
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Spring Konstant"
+msgstr "Σταθερά Ελατηρίου"
+
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Toggle window snapping"
+msgstr "Εκκίνηση αρπάγματος παραθύρου"
+
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Use spring model for wobbly window effect"
+msgstr "Χρήση μοντέλου ελατηρίου για το εφέ ταλάντωσης παραθύρου"
+
+#: ../metadata/wobbly.xml.in.h:25
+msgid "Vertex Grid Resolution"
+msgstr "Ανάλυση Κορυφαίου Πλέγματος"
+
+#: ../metadata/wobbly.xml.in.h:26
+msgid "Windows that should wobble when focused"
+msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν εστιαστούν"
+
+#: ../metadata/wobbly.xml.in.h:27
+msgid "Windows that should wobble when grabbed"
+msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν πιαστούν"
+
+#: ../metadata/wobbly.xml.in.h:28
+msgid "Windows that should wobble when mapped"
+msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν χαρτογραφηθούν"
+
+#: ../metadata/wobbly.xml.in.h:29
+msgid "Windows that should wobble when moved"
+msgstr "Παράθυρα που πρέπει να ταλαντευτούν όταν μετακινηθούν"
+
+#: ../metadata/wobbly.xml.in.h:30
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Εφέ ταλάντευσης όταν μεγιστοποιούνται και απομεγιστοποιούνται παράθυρα"
+
+#: ../metadata/wobbly.xml.in.h:31
+msgid "Wobbly Windows"
+msgstr "Ταλαντευόμενα Παράθυρα"
+
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Γραμμικό Φιλτράρισμα"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "Χρήση γραμμικού φιλτραρίσματος όταν ζουμάρεται μέσα"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Ζουμάρισμα Επιφάνειας Εργασίας"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Ζουμ Μέσα"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Ζουμ Έξω"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "Pan του Ζούμ"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "Ταχύτητα Ζουμ"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Χρονικό Βήμα Ζουμ"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "Pan και ζούμ του κύβου"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "Παράγοντας ζουμ"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "Pan του ζούμ"
 
 #~ msgid "Background Images"
 #~ msgstr "Εικόνες Φόντου"

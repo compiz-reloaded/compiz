@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz_new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-29 14:02+0200\n"
+"POT-Creation-Date: 2008-05-24 22:24+0530\n"
 "PO-Revision-Date: 2008-05-11 13:42+0300\n"
 "Last-Translator: Dimitriy Ryazantcev <DJm00n@mail.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -22,2159 +22,2776 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+msgid "Window Management"
+msgstr "Управление Окнами"
+
+#: ../gtk/gnome/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr "Compiz"
+
+# Действие при прокрутке колесика мыши на заголовке окна
+#: ../gtk/window-decorator/gwd.schemas.in.h:1
+msgid "Action to take when scrolling the mouse wheel on a window title bar."
+msgstr "Действие при прокрутке колесика мыши на заголовке окна."
+
+#  combo box item
+#: ../gtk/window-decorator/gwd.schemas.in.h:2
+msgid "Blur type"
+msgstr "Тип размытия"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:3
+msgid "Metacity theme active window opacity"
+msgstr "Прозрачность активного окна темы metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:4
+msgid "Metacity theme active window opacity shade"
+msgstr "Затенение прозрачности активного окна темы metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:5
+msgid "Metacity theme opacity"
+msgstr "Прозрачность темы metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:6
+msgid "Metacity theme opacity shade"
+msgstr "Затенение прозрачности темы metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:7
+msgid "Opacity to use for active windows with metacity theme decorations"
+msgstr "Прозрачность активных окон с оформлением темы metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:8
+msgid "Opacity to use for metacity theme decorations"
+msgstr "Прозрачность оформления окон темы metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:9
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+"Затенять активные окна с оформлением темы для metacity от непрозрачного до "
+"полупрозрачного"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:10
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+"Затенять окна с оформлением темы для metacity от непрозрачного до "
+"полупрозрачного"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:11
+msgid "Title bar mouse wheel action"
+msgstr "Действие, на колёсико мыши на заголовке окна"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:12
+msgid "Type of blur used for window decorations"
+msgstr "Тип размытия, используемый для оформлений окна"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:13
+msgid "Use metacity theme"
+msgstr "Использовать тему metacity"
+
+#: ../gtk/window-decorator/gwd.schemas.in.h:14
+msgid "Use metacity theme when drawing window decorations"
+msgstr "Использовать тему metacity для отрисовки оформлений окна"
+
+#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Закрыть окно"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Отменить полное развертывание окна"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Развернуть окно"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Свернуть окно"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Меню окна"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
 msgid "Shade"
 msgstr "Свернуть в заголовок"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Make Above"
 msgstr "Поверх всех"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Stick"
 msgstr "Приклеить"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Unshade"
 msgstr "Развернуть из заголовка"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unmake Above"
 msgstr "Не делать поверх всех"
 
-#: gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unstick"
 msgstr "Отклеить"
 
-#: gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5081
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Окно \"%s\" не отвечает."
 
-#: gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ускоренное закрытие приложения приведет к потере не сохраненных изменений."
 
-#: gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5105
 msgid "_Force Quit"
 msgstr "_Ускоренный выход"
 
-#~ msgid "Desktop"
-#~ msgstr "Рабочий стол"
+#: ../metadata/annotate.xml.in.h:1
+msgid "Annotate"
+msgstr "Заметка"
 
-#~ msgid "Window Management"
-#~ msgstr "Управление Окнами"
+#: ../metadata/annotate.xml.in.h:2
+msgid "Annotate Fill Color"
+msgstr "Цвет заполнения заметки"
 
-#~ msgid "Compiz"
-#~ msgstr "Compiz"
+#: ../metadata/annotate.xml.in.h:3
+msgid "Annotate Stroke Color"
+msgstr "Цвет черты заметки"
 
-# Действие при прокрутке колесика мыши на заголовке окна
-#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
-#~ msgstr "Действие при прокрутке колесика мыши на заголовке окна."
+#: ../metadata/annotate.xml.in.h:4
+msgid "Annotate plugin"
+msgstr "Модуль заметки"
 
-#  combo box item
-#~ msgid "Blur type"
-#~ msgstr "Тип размытия"
+#: ../metadata/annotate.xml.in.h:5
+msgid "Clear"
+msgstr "Очистить"
 
-#~ msgid "Metacity theme active window opacity"
-#~ msgstr "Прозрачность активного окна темы metacity"
+#: ../metadata/annotate.xml.in.h:6
+msgid "Draw"
+msgstr "Рисовать"
 
-#~ msgid "Metacity theme active window opacity shade"
-#~ msgstr "Затенение прозрачности активного окна темы metacity"
+#: ../metadata/annotate.xml.in.h:7
+msgid "Draw using tool"
+msgstr "Рисовать, используя инструмент"
 
-#~ msgid "Metacity theme opacity"
-#~ msgstr "Прозрачность темы metacity"
+#: ../metadata/annotate.xml.in.h:8
+msgid "Fill color for annotations"
+msgstr "Цвет заливки для заметок"
 
-#~ msgid "Metacity theme opacity shade"
-#~ msgstr "Затенение прозрачности темы metacity"
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+msgid "Initiate"
+msgstr "Инициировать"
 
-#~ msgid "Opacity to use for active windows with metacity theme decorations"
-#~ msgstr "Прозрачность активных окон с оформлением темы metacity"
+#: ../metadata/annotate.xml.in.h:10
+msgid "Initiate annotate drawing"
+msgstr "Инициировать рисование заметки"
 
-#~ msgid "Opacity to use for metacity theme decorations"
-#~ msgstr "Прозрачность оформления окон темы metacity"
+#: ../metadata/annotate.xml.in.h:11
+msgid "Initiate annotate erasing"
+msgstr "Инициировать стирание заметки"
 
-#~ msgid ""
-#~ "Shade active windows with metacity theme decorations from opaque to "
-#~ "translucent"
-#~ msgstr ""
-#~ "Затенять активные окна с оформлением темы для metacity от непрозрачного "
-#~ "до полупрозрачного"
+#: ../metadata/annotate.xml.in.h:12
+msgid "Initiate erase"
+msgstr "Инициировать стирание"
 
-#~ msgid ""
-#~ "Shade windows with metacity theme decorations from opaque to translucent"
-#~ msgstr ""
-#~ "Затенять окна с оформлением темы для metacity от непрозрачного до "
-#~ "полупрозрачного"
+#: ../metadata/annotate.xml.in.h:13
+msgid "Line width"
+msgstr "Ширина линии"
 
-#~ msgid "Title bar mouse wheel action"
-#~ msgstr "Действие, на колёсико мыши на заголовке окна"
+#: ../metadata/annotate.xml.in.h:14
+msgid "Line width for annotations"
+msgstr "Ширина линии для заметок"
 
-#~ msgid "Type of blur used for window decorations"
-#~ msgstr "Тип размытия, используемый для оформлений окна"
+#: ../metadata/annotate.xml.in.h:15
+msgid "Stroke color for annotations"
+msgstr "Цвет черты для заметок"
 
-#~ msgid "Use metacity theme"
-#~ msgstr "Использовать тему metacity"
+#: ../metadata/annotate.xml.in.h:16
+msgid "Stroke width"
+msgstr "Ширина черты"
 
-#~ msgid "Use metacity theme when drawing window decorations"
-#~ msgstr "Использовать тему metacity для отрисовки оформлений окна"
+#: ../metadata/annotate.xml.in.h:17
+msgid "Stroke width for annotations"
+msgstr "Ширина черты для заметок"
 
-#~ msgid "Annotate"
-#~ msgstr "Заметка"
+#: ../metadata/blur.xml.in.h:1
+msgid "4xBilinear"
+msgstr "4-кратная билинейная фильтрация"
 
-#~ msgid "Annotate Fill Color"
-#~ msgstr "Цвет заполнения заметки"
+#: ../metadata/blur.xml.in.h:2
+msgid "Alpha Blur"
+msgstr "Размытие по альфа-каналу"
 
-#~ msgid "Annotate Stroke Color"
-#~ msgstr "Цвет черты заметки"
-
-#~ msgid "Annotate plugin"
-#~ msgstr "Модуль заметки"
-
-#~ msgid "Clear"
-#~ msgstr "Очистить"
-
-#~ msgid "Draw"
-#~ msgstr "Рисовать"
-
-#~ msgid "Draw using tool"
-#~ msgstr "Рисовать, используя инструмент"
-
-#~ msgid "Fill color for annotations"
-#~ msgstr "Цвет заливки для заметок"
-
-#~ msgid "Initiate"
-#~ msgstr "Инициировать"
-
-#~ msgid "Initiate annotate drawing"
-#~ msgstr "Инициировать рисование заметки"
-
-#~ msgid "Initiate annotate erasing"
-#~ msgstr "Инициировать стирание заметки"
-
-#~ msgid "Initiate erase"
-#~ msgstr "Инициировать стирание"
-
-#~ msgid "Line width"
-#~ msgstr "Ширина линии"
-
-#~ msgid "Line width for annotations"
-#~ msgstr "Ширина линии для заметок"
-
-#~ msgid "Stroke color for annotations"
-#~ msgstr "Цвет черты для заметок"
-
-#~ msgid "Stroke width"
-#~ msgstr "Ширина черты"
-
-#~ msgid "Stroke width for annotations"
-#~ msgstr "Ширина черты для заметок"
-
-#~ msgid "4xBilinear"
-#~ msgstr "4-кратная билинейная фильтрация"
-
-#~ msgid "Alpha Blur"
-#~ msgstr "Размытие по альфа-каналу"
-
-#~ msgid "Alpha blur windows"
-#~ msgstr "Размытие окон по альфа-каналу"
+#: ../metadata/blur.xml.in.h:3
+msgid "Alpha blur windows"
+msgstr "Размытие окон по альфа-каналу"
 
 #  MenuButton label
 #  menubutton label
-#~ msgid "Blur Filter"
-#~ msgstr "Фильтр размытия"
+#: ../metadata/blur.xml.in.h:4
+msgid "Blur Filter"
+msgstr "Фильтр размытия"
 
 #  Table header 4/5
-#~ msgid "Blur Occlusion"
-#~ msgstr "Преграждение размытия"
+#: ../metadata/blur.xml.in.h:5
+msgid "Blur Occlusion"
+msgstr "Преграждение размытия"
 
 #  Table header 4/5
-#~ msgid "Blur Saturation"
-#~ msgstr "Насыщенность размытия"
+#: ../metadata/blur.xml.in.h:6
+msgid "Blur Saturation"
+msgstr "Насыщенность размытия"
 
 #  combo box item
-#~ msgid "Blur Speed"
-#~ msgstr "Скорость размытия"
+#: ../metadata/blur.xml.in.h:7
+msgid "Blur Speed"
+msgstr "Скорость размытия"
 
-#~ msgid "Blur Windows"
-#~ msgstr "Размытие окон"
+#: ../metadata/blur.xml.in.h:8
+msgid "Blur Windows"
+msgstr "Размытие окон"
 
-#~ msgid "Blur behind translucent parts of windows"
-#~ msgstr "Размытие за прозрачными частями окон"
+#: ../metadata/blur.xml.in.h:9
+msgid "Blur behind translucent parts of windows"
+msgstr "Размытие за прозрачными частями окон"
 
 #  Table header 4/5
-#~ msgid "Blur saturation"
-#~ msgstr "Насыщенность размытия"
-
-#~ msgid "Blur windows"
-#~ msgstr "Размытие окон"
-
-#~ msgid "Blur windows that doesn't have focus"
-#~ msgstr "Размытие окон, которые не активны"
-
-#~ msgid "Disable blurring of screen regions obscured by other windows."
-#~ msgstr "Отключить размытие областей экрана, скрытых другими окнами."
-
-#~ msgid "Filter method used for blurring"
-#~ msgstr "Метод фильтра, используемый для размывания границ"
-
-#~ msgid "Focus Blur"
-#~ msgstr "Размытие активного"
-
-#~ msgid "Focus blur windows"
-#~ msgstr "Размытие активных окон"
-
-#~ msgid "Gaussian"
-#~ msgstr "Гауссово размытие"
-
-#~ msgid "Gaussian Radius"
-#~ msgstr "Радиус размытия"
-
-#~ msgid "Gaussian Strength"
-#~ msgstr "Сила размытия"
-
-#~ msgid "Gaussian radius"
-#~ msgstr "Радиус размытия"
-
-#~ msgid "Gaussian strength"
-#~ msgstr "Сила размытия"
-
-#~ msgid "Independent texture fetch"
-#~ msgstr "Независимое получение текстур"
-
-#~ msgid "Mipmap"
-#~ msgstr "Мипмэппинг"
-
-#~ msgid "Mipmap LOD"
-#~ msgstr "Уровень детализации мипмэппинга"
-
-#~ msgid "Mipmap level-of-detail"
-#~ msgstr "Детализация мипмэппинга"
-
-#~ msgid "Pulse"
-#~ msgstr "Пульс"
-
-#~ msgid "Pulse effect"
-#~ msgstr "Эффект пульсации"
-
-#~ msgid ""
-#~ "Use the available texture units to do as many as possible independent "
-#~ "texture fetches."
-#~ msgstr ""
-#~ "Использовать доступное количество элементов текстур для получения как "
-#~ "можно большего количества независимых текстур."
-
-#~ msgid "Window blur speed"
-#~ msgstr "Скорость размытия окна"
-
-#~ msgid "Windows that should be affected by focus blur"
-#~ msgstr "Окна, на которые действует размытие"
-
-#~ msgid "Windows that should be use alpha blur by default"
-#~ msgstr "Окна, на которые действует размытие по умолчанию"
-
-#~ msgid "Clone Output"
-#~ msgstr "Дублирование вывода"
-
-#~ msgid "Initiate clone selection"
-#~ msgstr "Инициировать выбор дублирования"
-
-#~ msgid "Output clone handler"
-#~ msgstr "Обработчик дублированного вывода"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command0"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда0"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command1"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда1"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command10"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда10"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command11"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда11"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command2"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда2"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command3"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда3"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command4"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда4"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command5"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда5"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command6"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда6"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command7"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда7"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command8"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда8"
-
-#~ msgid ""
-#~ "A keybinding that when invoked, will run the shell command identified by "
-#~ "command9"
-#~ msgstr ""
-#~ "Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
-#~ "идентифицируемую как команда9"
-
-#~ msgid "Active Plugins"
-#~ msgstr "Активные модули"
-
-#~ msgid ""
-#~ "Allow drawing of fullscreen windows to not be redirected to offscreen "
-#~ "pixmaps"
-#~ msgstr ""
-#~ "Позволяет рисовать окна в полноэкранном режиме без перенаправления в "
-#~ "области растрового отображения за пределами экрана"
-
-#~ msgid "Audible Bell"
-#~ msgstr "Слышимый сигнал"
-
-#~ msgid "Audible system beep"
-#~ msgstr "Слышимый системный звуковой сигнал"
-
-#~ msgid "Auto-Raise"
-#~ msgstr "Автораскрытие"
-
-#~ msgid "Auto-Raise Delay"
-#~ msgstr "Задержка автораскрытия"
-
-#~ msgid "Automatic detection of output devices"
-#~ msgstr "Автоматическое определение устройств вывода"
-
-#~ msgid "Automatic detection of refresh rate"
-#~ msgstr "Автоматическое определение частоты обновления"
-
-#~ msgid "Best"
-#~ msgstr "Наилучшее"
-
-#~ msgid "Click To Focus"
-#~ msgstr "Щелкните для выделения"
-
-#~ msgid "Click on window moves input focus to it"
-#~ msgstr "Щелкните окно, чтобы передать ему фокус ввода"
-
-#~ msgid "Close active window"
-#~ msgstr "Закрытие активного окна"
-
-#~ msgid "Command line 0"
-#~ msgstr "Командная строка 0"
-
-#~ msgid "Command line 1"
-#~ msgstr "Командная строка 1"
-
-#~ msgid "Command line 10"
-#~ msgstr "Командная строка 10"
-
-#~ msgid "Command line 11"
-#~ msgstr "Командная строка 11"
-
-#~ msgid "Command line 2"
-#~ msgstr "Командная строка 2"
-
-#~ msgid "Command line 3"
-#~ msgstr "Командная строка 3"
-
-#~ msgid "Command line 4"
-#~ msgstr "Командная строка 4"
-
-#~ msgid "Command line 5"
-#~ msgstr "Командная строка 5"
-
-#~ msgid "Command line 6"
-#~ msgstr "Командная строка 6"
-
-#~ msgid "Command line 7"
-#~ msgstr "Командная строка 7"
-
-#~ msgid "Command line 8"
-#~ msgstr "Командная строка 8"
-
-#~ msgid "Command line 9"
-#~ msgstr "Командная строка 9"
-
-#~ msgid "Command line to be executed in shell when run_command0 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command0"
-
-#~ msgid "Command line to be executed in shell when run_command1 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command1"
-
-#~ msgid "Command line to be executed in shell when run_command10 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command10"
-
-#~ msgid "Command line to be executed in shell when run_command11 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command11"
-
-#~ msgid "Command line to be executed in shell when run_command2 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command2"
-
-#~ msgid "Command line to be executed in shell when run_command3 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command3"
-
-#~ msgid "Command line to be executed in shell when run_command4 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command4"
-
-#~ msgid "Command line to be executed in shell when run_command5 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command5"
-
-#~ msgid "Command line to be executed in shell when run_command6 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command6"
-
-#~ msgid "Command line to be executed in shell when run_command7 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command7"
-
-#~ msgid "Command line to be executed in shell when run_command8 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command8"
-
-#~ msgid "Command line to be executed in shell when run_command9 is invoked"
-#~ msgstr ""
-#~ "Командная строка, которая будет выполнена в оболочке при вызове "
-#~ "run_command9"
-
-#~ msgid "Decrease Opacity"
-#~ msgstr "Уменьшить прозрачность"
-
-#~ msgid "Decrease window opacity"
-#~ msgstr "Уменьшить прозрачность окна"
-
-#~ msgid "Default Icon"
-#~ msgstr "Значок по умолчанию"
-
-#~ msgid "Default window icon image"
-#~ msgstr "Значок окна по умолчанию"
-
-#~ msgid "Detect Outputs"
-#~ msgstr "Определить устройства вывода"
+#: ../metadata/blur.xml.in.h:10
+msgid "Blur saturation"
+msgstr "Насыщенность размытия"
+
+#: ../metadata/blur.xml.in.h:11
+msgid "Blur windows"
+msgstr "Размытие окон"
+
+#: ../metadata/blur.xml.in.h:12
+msgid "Blur windows that doesn't have focus"
+msgstr "Размытие окон, которые не активны"
+
+#: ../metadata/blur.xml.in.h:13
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr "Отключить размытие областей экрана, скрытых другими окнами."
+
+#: ../metadata/blur.xml.in.h:14
+msgid "Filter method used for blurring"
+msgstr "Метод фильтра, используемый для размывания границ"
+
+#: ../metadata/blur.xml.in.h:15
+msgid "Focus Blur"
+msgstr "Размытие активного"
+
+#: ../metadata/blur.xml.in.h:16
+msgid "Focus blur windows"
+msgstr "Размытие активных окон"
+
+#: ../metadata/blur.xml.in.h:17
+msgid "Gaussian"
+msgstr "Гауссово размытие"
+
+#: ../metadata/blur.xml.in.h:18
+msgid "Gaussian Radius"
+msgstr "Радиус размытия"
+
+#: ../metadata/blur.xml.in.h:19
+msgid "Gaussian Strength"
+msgstr "Сила размытия"
+
+#: ../metadata/blur.xml.in.h:20
+msgid "Gaussian radius"
+msgstr "Радиус размытия"
+
+#: ../metadata/blur.xml.in.h:21
+msgid "Gaussian strength"
+msgstr "Сила размытия"
+
+#: ../metadata/blur.xml.in.h:22
+msgid "Independent texture fetch"
+msgstr "Независимое получение текстур"
+
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+msgid "Mipmap"
+msgstr "Мипмэппинг"
+
+#: ../metadata/blur.xml.in.h:24
+msgid "Mipmap LOD"
+msgstr "Уровень детализации мипмэппинга"
+
+#: ../metadata/blur.xml.in.h:25
+msgid "Mipmap level-of-detail"
+msgstr "Детализация мипмэппинга"
+
+#: ../metadata/blur.xml.in.h:26
+msgid "Pulse"
+msgstr "Пульс"
+
+#: ../metadata/blur.xml.in.h:27
+msgid "Pulse effect"
+msgstr "Эффект пульсации"
+
+#: ../metadata/blur.xml.in.h:28
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+"Использовать доступное количество элементов текстур для получения как можно "
+"большего количества независимых текстур."
+
+#: ../metadata/blur.xml.in.h:29
+msgid "Window blur speed"
+msgstr "Скорость размытия окна"
+
+#: ../metadata/blur.xml.in.h:30
+msgid "Windows that should be affected by focus blur"
+msgstr "Окна, на которые действует размытие"
+
+#: ../metadata/blur.xml.in.h:31
+msgid "Windows that should be use alpha blur by default"
+msgstr "Окна, на которые действует размытие по умолчанию"
+
+#: ../metadata/clone.xml.in.h:1
+msgid "Clone Output"
+msgstr "Дублирование вывода"
+
+#: ../metadata/clone.xml.in.h:3
+msgid "Initiate clone selection"
+msgstr "Инициировать выбор дублирования"
+
+#: ../metadata/clone.xml.in.h:4
+msgid "Output clone handler"
+msgstr "Обработчик дублированного вывода"
+
+#: ../metadata/core.xml.in.h:1
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда0"
+
+#: ../metadata/core.xml.in.h:2
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда1"
+
+#: ../metadata/core.xml.in.h:3
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда10"
+
+#: ../metadata/core.xml.in.h:4
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда11"
+
+#: ../metadata/core.xml.in.h:5
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда2"
+
+#: ../metadata/core.xml.in.h:6
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда3"
+
+#: ../metadata/core.xml.in.h:7
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда4"
+
+#: ../metadata/core.xml.in.h:8
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда5"
+
+#: ../metadata/core.xml.in.h:9
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда6"
+
+#: ../metadata/core.xml.in.h:10
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда7"
+
+#: ../metadata/core.xml.in.h:11
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда8"
+
+#: ../metadata/core.xml.in.h:12
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Комбинация клавиш, которая при вызове, выполнит команду оболочки, "
+"идентифицируемую как команда9"
+
+#: ../metadata/core.xml.in.h:13
+msgid "Active Plugins"
+msgstr "Активные модули"
+
+#: ../metadata/core.xml.in.h:14
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Позволяет рисовать окна в полноэкранном режиме без перенаправления в области "
+"растрового отображения за пределами экрана"
+
+#: ../metadata/core.xml.in.h:15
+msgid "Audible Bell"
+msgstr "Слышимый сигнал"
+
+#: ../metadata/core.xml.in.h:16
+msgid "Audible system beep"
+msgstr "Слышимый системный звуковой сигнал"
+
+#: ../metadata/core.xml.in.h:17
+msgid "Auto-Raise"
+msgstr "Автораскрытие"
+
+#: ../metadata/core.xml.in.h:18
+msgid "Auto-Raise Delay"
+msgstr "Задержка автораскрытия"
+
+#: ../metadata/core.xml.in.h:19
+msgid "Automatic detection of output devices"
+msgstr "Автоматическое определение устройств вывода"
+
+#: ../metadata/core.xml.in.h:20
+msgid "Automatic detection of refresh rate"
+msgstr "Автоматическое определение частоты обновления"
+
+#: ../metadata/core.xml.in.h:21
+msgid "Best"
+msgstr "Наилучшее"
+
+#: ../metadata/core.xml.in.h:22
+msgid "Click To Focus"
+msgstr "Щелкните для выделения"
+
+#: ../metadata/core.xml.in.h:23
+msgid "Click on window moves input focus to it"
+msgstr "Щелкните окно, чтобы передать ему фокус ввода"
+
+#: ../metadata/core.xml.in.h:25
+msgid "Close active window"
+msgstr "Закрытие активного окна"
+
+#: ../metadata/core.xml.in.h:26
+msgid "Command line 0"
+msgstr "Командная строка 0"
+
+#: ../metadata/core.xml.in.h:27
+msgid "Command line 1"
+msgstr "Командная строка 1"
+
+#: ../metadata/core.xml.in.h:28
+msgid "Command line 10"
+msgstr "Командная строка 10"
+
+#: ../metadata/core.xml.in.h:29
+msgid "Command line 11"
+msgstr "Командная строка 11"
+
+#: ../metadata/core.xml.in.h:30
+msgid "Command line 2"
+msgstr "Командная строка 2"
+
+#: ../metadata/core.xml.in.h:31
+msgid "Command line 3"
+msgstr "Командная строка 3"
+
+#: ../metadata/core.xml.in.h:32
+msgid "Command line 4"
+msgstr "Командная строка 4"
+
+#: ../metadata/core.xml.in.h:33
+msgid "Command line 5"
+msgstr "Командная строка 5"
+
+#: ../metadata/core.xml.in.h:34
+msgid "Command line 6"
+msgstr "Командная строка 6"
+
+#: ../metadata/core.xml.in.h:35
+msgid "Command line 7"
+msgstr "Командная строка 7"
+
+#: ../metadata/core.xml.in.h:36
+msgid "Command line 8"
+msgstr "Командная строка 8"
+
+#: ../metadata/core.xml.in.h:37
+msgid "Command line 9"
+msgstr "Командная строка 9"
+
+#: ../metadata/core.xml.in.h:38
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command0"
+
+#: ../metadata/core.xml.in.h:39
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command1"
+
+#: ../metadata/core.xml.in.h:40
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command10"
+
+#: ../metadata/core.xml.in.h:41
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command11"
+
+#: ../metadata/core.xml.in.h:42
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command2"
+
+#: ../metadata/core.xml.in.h:43
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command3"
+
+#: ../metadata/core.xml.in.h:44
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command4"
+
+#: ../metadata/core.xml.in.h:45
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command5"
+
+#: ../metadata/core.xml.in.h:46
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command6"
+
+#: ../metadata/core.xml.in.h:47
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command7"
+
+#: ../metadata/core.xml.in.h:48
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command8"
+
+#: ../metadata/core.xml.in.h:49
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+"Командная строка, которая будет выполнена в оболочке при вызове run_command9"
+
+#: ../metadata/core.xml.in.h:50
+msgid "Decrease Opacity"
+msgstr "Уменьшить прозрачность"
+
+#: ../metadata/core.xml.in.h:51
+msgid "Decrease window opacity"
+msgstr "Уменьшить прозрачность окна"
+
+#: ../metadata/core.xml.in.h:52
+msgid "Default Icon"
+msgstr "Значок по умолчанию"
+
+#: ../metadata/core.xml.in.h:53
+msgid "Default window icon image"
+msgstr "Значок окна по умолчанию"
+
+#: ../metadata/core.xml.in.h:54
+msgid "Detect Outputs"
+msgstr "Определить устройства вывода"
 
 #  headline for dialog "Select for update"
-#~ msgid "Detect Refresh Rate"
-#~ msgstr "Определить частоту обновления"
+#: ../metadata/core.xml.in.h:55
+msgid "Detect Refresh Rate"
+msgstr "Определить частоту обновления"
 
-#~ msgid ""
-#~ "Duration the pointer must rest in a screen edge before an edge action is "
-#~ "taken."
-#~ msgstr ""
-#~ "Задержка указателя мыши на краю экрана перед тем, как будет совершено "
-#~ "действие края экрана."
+#: ../metadata/core.xml.in.h:56
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+"Задержка указателя мыши на краю экрана перед тем, как будет совершено "
+"действие края экрана."
 
-#~ msgid "Edge Trigger Delay"
-#~ msgstr "Задержка срабатывания на краю"
+#: ../metadata/core.xml.in.h:57
+msgid "Edge Trigger Delay"
+msgstr "Задержка срабатывания на краю"
 
-#~ msgid "Fast"
-#~ msgstr "Быстрое"
+#: ../metadata/core.xml.in.h:58
+msgid "Fast"
+msgstr "Быстрое"
 
-#~ msgid "Focus Prevention Level"
-#~ msgstr "Уровень упреждающей фокусировки"
+#: ../metadata/core.xml.in.h:59
+msgid "Focus Prevention Level"
+msgstr "Уровень упреждающей фокусировки"
 
-#~ msgid "Focus Prevention Windows"
-#~ msgstr "Упреждающая фокусировка окон"
+#: ../metadata/core.xml.in.h:60
+msgid "Focus Prevention Windows"
+msgstr "Упреждающая фокусировка окон"
 
-#~ msgid "Focus prevention windows"
-#~ msgstr "Упреждающая фокусировка окон"
+#: ../metadata/core.xml.in.h:61
+msgid "Focus prevention windows"
+msgstr "Упреждающая фокусировка окон"
 
-#~ msgid "Force independent output painting."
-#~ msgstr "Принудительная независимая отрисовка вывода."
+#: ../metadata/core.xml.in.h:62
+msgid "Force independent output painting."
+msgstr "Принудительная независимая отрисовка вывода."
 
-#~ msgid "General Options"
-#~ msgstr "Общие настройки"
+#: ../metadata/core.xml.in.h:63
+msgid "General Options"
+msgstr "Общие настройки"
 
-#~ msgid "General compiz options"
-#~ msgstr "Общие настройки Compiz"
+#: ../metadata/core.xml.in.h:64
+msgid "General compiz options"
+msgstr "Общие настройки Compiz"
 
-#~ msgid "Good"
-#~ msgstr "Хорошее"
+#: ../metadata/core.xml.in.h:65
+msgid "Good"
+msgstr "Хорошее"
 
-#~ msgid "Hide Skip Taskbar Windows"
-#~ msgstr "Скрыть все, кроме окон панели задач"
+#: ../metadata/core.xml.in.h:66
+msgid "Hide Skip Taskbar Windows"
+msgstr "Скрыть все, кроме окон панели задач"
 
-#~ msgid "Hide all windows and focus desktop"
-#~ msgstr "Скрыть все окна и передать фокус рабочему столу"
+#: ../metadata/core.xml.in.h:67
+msgid "Hide all windows and focus desktop"
+msgstr "Скрыть все окна и передать фокус рабочему столу"
 
-#~ msgid "Hide windows not in taskbar when entering show desktop mode"
-#~ msgstr ""
-#~ "При переходе в режим отображения рабочего стола окна, отсутствующие на "
-#~ "панели задач, не отображаются"
+#: ../metadata/core.xml.in.h:68
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"При переходе в режим отображения рабочего стола окна, отсутствующие на "
+"панели задач, не отображаются"
 
-#~ msgid "High"
-#~ msgstr "Высокий"
+#: ../metadata/core.xml.in.h:69
+msgid "High"
+msgstr "Высокий"
 
-#~ msgid "Horizontal Virtual Size"
-#~ msgstr "Виртуальный размер по горизонтали"
+#: ../metadata/core.xml.in.h:70
+msgid "Horizontal Virtual Size"
+msgstr "Виртуальный размер по горизонтали"
 
 # думаю так должно быть верно.
-#~ msgid "If available use compression for textures converted from images"
-#~ msgstr ""
-#~ "Использовать сжатие для текстур, конвертированных от изображений, если "
-#~ "доступно"
+#: ../metadata/core.xml.in.h:71
+msgid "If available use compression for textures converted from images"
+msgstr ""
+"Использовать сжатие для текстур, конвертированных от изображений, если "
+"доступно"
 
-#~ msgid "Ignore Hints When Maximized"
-#~ msgstr "Игнорировать подсказки в развернутом состоянии"
+#: ../metadata/core.xml.in.h:72
+msgid "Ignore Hints When Maximized"
+msgstr "Игнорировать подсказки в развернутом состоянии"
 
-#~ msgid "Ignore size increment and aspect hints when window is maximized"
-#~ msgstr ""
-#~ "Игнорирование подсказок увеличения размеров и соотношения сторон для "
-#~ "развернутого окна"
+#: ../metadata/core.xml.in.h:73
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Игнорирование подсказок увеличения размеров и соотношения сторон для "
+"развернутого окна"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "Увеличить прозрачность"
+#: ../metadata/core.xml.in.h:74
+msgid "Increase Opacity"
+msgstr "Увеличить прозрачность"
 
-#~ msgid "Increase window opacity"
-#~ msgstr "Увеличение прозрачности окна"
+#: ../metadata/core.xml.in.h:75
+msgid "Increase window opacity"
+msgstr "Увеличение прозрачности окна"
 
-#~ msgid "Interval before raising selected windows"
-#~ msgstr "Интервал времени до автораскрытия выбранных окон"
+#: ../metadata/core.xml.in.h:76
+msgid "Interval before raising selected windows"
+msgstr "Интервал времени до автораскрытия выбранных окон"
 
-#~ msgid "Interval between ping messages"
-#~ msgstr "Интервал между сообщениями отклика"
+#: ../metadata/core.xml.in.h:77
+msgid "Interval between ping messages"
+msgstr "Интервал между сообщениями отклика"
 
-#~ msgid "Level of focus stealing prevention"
-#~ msgstr "Уровень предотвращения хищения фокуса"
+#: ../metadata/core.xml.in.h:78
+msgid "Level of focus stealing prevention"
+msgstr "Уровень предотвращения хищения фокуса"
 
-#~ msgid "Lighting"
-#~ msgstr "Освещение"
+#: ../metadata/core.xml.in.h:79
+msgid "Lighting"
+msgstr "Освещение"
 
 #  command line help text for the 'list detected only' option
-#~ msgid "List of currently active plugins"
-#~ msgstr "Список активных в данный момент модулей"
+#: ../metadata/core.xml.in.h:80
+msgid "List of currently active plugins"
+msgstr "Список активных в данный момент модулей"
 
-#~ msgid "List of strings describing output devices"
-#~ msgstr "Список строк, описывающих устройства вывода"
+#: ../metadata/core.xml.in.h:81
+msgid "List of strings describing output devices"
+msgstr "Список строк, описывающих устройства вывода"
 
-#~ msgid "Low"
-#~ msgstr "Низкий"
+#: ../metadata/core.xml.in.h:82
+msgid "Low"
+msgstr "Низкий"
 
-#~ msgid "Lower Window"
-#~ msgstr "Переместить окно на задний план"
+#: ../metadata/core.xml.in.h:83
+msgid "Lower Window"
+msgstr "Переместить окно на задний план"
 
-#~ msgid "Lower window beneath other windows"
-#~ msgstr "Расположение окна позади других окон"
+#: ../metadata/core.xml.in.h:84
+msgid "Lower window beneath other windows"
+msgstr "Расположение окна позади других окон"
 
-#~ msgid "Maximize Window Horizontally"
-#~ msgstr "Развернуть окно горизонтально"
+#: ../metadata/core.xml.in.h:86
+msgid "Maximize Window Horizontally"
+msgstr "Развернуть окно горизонтально"
 
-#~ msgid "Maximize Window Vertically"
-#~ msgstr "Развернуть окно вертикально"
+#: ../metadata/core.xml.in.h:87
+msgid "Maximize Window Vertically"
+msgstr "Развернуть окно вертикально"
 
-#~ msgid "Maximize active window"
-#~ msgstr "Развертывание активного окна"
+#: ../metadata/core.xml.in.h:88
+msgid "Maximize active window"
+msgstr "Развертывание активного окна"
 
-#~ msgid "Maximize active window horizontally"
-#~ msgstr "Развертывание активного окна горизонтально"
+#: ../metadata/core.xml.in.h:89
+msgid "Maximize active window horizontally"
+msgstr "Развертывание активного окна горизонтально"
 
-#~ msgid "Maximize active window vertically"
-#~ msgstr "Развертывание активного окна вертикально"
+#: ../metadata/core.xml.in.h:90
+msgid "Maximize active window vertically"
+msgstr "Развертывание активного окна вертикально"
 
-#~ msgid "Minimize active window"
-#~ msgstr "Свертывание активного окна"
+#: ../metadata/core.xml.in.h:92
+msgid "Minimize active window"
+msgstr "Свертывание активного окна"
 
-#~ msgid "Number of Desktops"
-#~ msgstr "Число рабочих столов"
+#: ../metadata/core.xml.in.h:93
+msgid "Number of Desktops"
+msgstr "Число рабочих столов"
 
-#~ msgid "Number of virtual desktops"
-#~ msgstr "Число виртуальных рабочих столов"
+#: ../metadata/core.xml.in.h:94
+msgid "Number of virtual desktops"
+msgstr "Число виртуальных рабочих столов"
 
-#~ msgid "Off"
-#~ msgstr "Отключить"
+#: ../metadata/core.xml.in.h:95
+msgid "Off"
+msgstr "Отключить"
 
-#~ msgid "Only perform screen updates during vertical blanking period"
-#~ msgstr ""
-#~ "Обновлять экран во время гашения обратного хода луча кадровой развертки"
+#: ../metadata/core.xml.in.h:96
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+"Обновлять экран во время гашения обратного хода луча кадровой развертки"
 
-#~ msgid "Opacity Step"
-#~ msgstr "Шаг прозрачности"
+#: ../metadata/core.xml.in.h:97
+msgid "Opacity Step"
+msgstr "Шаг прозрачности"
 
-#~ msgid "Opacity change step"
-#~ msgstr "Шаг изменения прозрачности"
+#: ../metadata/core.xml.in.h:98
+msgid "Opacity change step"
+msgstr "Шаг изменения прозрачности"
 
-#~ msgid "Opacity values for windows that should be translucent by default"
-#~ msgstr ""
-#~ "Значение прозрачности, для окон которые должны быть прозрачными по "
-#~ "умолчанию"
+#: ../metadata/core.xml.in.h:99
+msgid "Opacity values for windows that should be translucent by default"
+msgstr ""
+"Значение прозрачности, для окон которые должны быть прозрачными по умолчанию"
 
-#~ msgid "Opacity window values"
-#~ msgstr "Значение прозрачности окна"
+#: ../metadata/core.xml.in.h:100
+msgid "Opacity window values"
+msgstr "Значение прозрачности окна"
 
-#~ msgid "Opacity windows"
-#~ msgstr "Прозрачность окон"
+#: ../metadata/core.xml.in.h:101
+msgid "Opacity windows"
+msgstr "Прозрачность окон"
 
-#~ msgid "Open a terminal"
-#~ msgstr "Открыть в терминале"
+#: ../metadata/core.xml.in.h:102
+msgid "Open a terminal"
+msgstr "Открыть в терминале"
 
-#~ msgid "Outputs"
-#~ msgstr "Устройства вывода"
+#: ../metadata/core.xml.in.h:103
+msgid "Outputs"
+msgstr "Устройства вывода"
 
-#~ msgid "Overlapping Output Handling"
-#~ msgstr "Обработка перекрывающегося вывода"
+#: ../metadata/core.xml.in.h:104
+msgid "Overlapping Output Handling"
+msgstr "Обработка перекрывающегося вывода"
 
-#~ msgid ""
-#~ "Paint each output device independly, even if the output devices overlap"
-#~ msgstr ""
-#~ "Отрисовывать каждое устройство вывода независимо, даже если устройства "
-#~ "вывода перекрываются"
+#: ../metadata/core.xml.in.h:105
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+"Отрисовывать каждое устройство вывода независимо, даже если устройства "
+"вывода перекрываются"
 
-#~ msgid "Ping Delay"
-#~ msgstr "Задержка отклика"
+#: ../metadata/core.xml.in.h:106
+msgid "Ping Delay"
+msgstr "Задержка отклика"
 
-#~ msgid "Prefer larger output"
-#~ msgstr "Предпочтение большему выводу"
+#: ../metadata/core.xml.in.h:107
+msgid "Prefer larger output"
+msgstr "Предпочтение большему выводу"
 
-#~ msgid "Prefer smaller output"
-#~ msgstr "Предпочтение меньшему выводу"
+#: ../metadata/core.xml.in.h:108
+msgid "Prefer smaller output"
+msgstr "Предпочтение меньшему выводу"
 
-#~ msgid "Raise On Click"
-#~ msgstr "Вызвать щелчком"
+#: ../metadata/core.xml.in.h:109
+msgid "Raise On Click"
+msgstr "Вызвать щелчком"
 
-#~ msgid "Raise Window"
-#~ msgstr "Вызвать окно"
+#: ../metadata/core.xml.in.h:110
+msgid "Raise Window"
+msgstr "Вызвать окно"
 
-#~ msgid "Raise selected windows after interval"
-#~ msgstr "Вызов выбранных окон по истечении интервала времени"
+#: ../metadata/core.xml.in.h:111
+msgid "Raise selected windows after interval"
+msgstr "Вызов выбранных окон по истечении интервала времени"
 
-#~ msgid "Raise window above other windows"
-#~ msgstr "Вызов и размещение окна поверх других окон"
+#: ../metadata/core.xml.in.h:112
+msgid "Raise window above other windows"
+msgstr "Вызов и размещение окна поверх других окон"
 
-#~ msgid "Raise windows when clicked"
-#~ msgstr "Вызов окон щелчком"
+#: ../metadata/core.xml.in.h:113
+msgid "Raise windows when clicked"
+msgstr "Вызов окон щелчком"
 
-#~ msgid "Refresh Rate"
-#~ msgstr "Частота обновления"
+#: ../metadata/core.xml.in.h:114
+msgid "Refresh Rate"
+msgstr "Частота обновления"
 
-#~ msgid "Run Dialog"
-#~ msgstr "Диалоговое окно запуска"
+#: ../metadata/core.xml.in.h:115
+msgid "Run Dialog"
+msgstr "Диалоговое окно запуска"
 
-#~ msgid "Run command 0"
-#~ msgstr "Выполнить команду 0"
+#: ../metadata/core.xml.in.h:116
+msgid "Run command 0"
+msgstr "Выполнить команду 0"
 
-#~ msgid "Run command 1"
-#~ msgstr "Выполнить команду 1"
+#: ../metadata/core.xml.in.h:117
+msgid "Run command 1"
+msgstr "Выполнить команду 1"
 
-#~ msgid "Run command 10"
-#~ msgstr "Выполнить команду 10"
+#: ../metadata/core.xml.in.h:118
+msgid "Run command 10"
+msgstr "Выполнить команду 10"
 
-#~ msgid "Run command 11"
-#~ msgstr "Выполнить команду 11"
+#: ../metadata/core.xml.in.h:119
+msgid "Run command 11"
+msgstr "Выполнить команду 11"
 
-#~ msgid "Run command 2"
-#~ msgstr "Выполнить команду 2"
+#: ../metadata/core.xml.in.h:120
+msgid "Run command 2"
+msgstr "Выполнить команду 2"
 
-#~ msgid "Run command 3"
-#~ msgstr "Выполнить команду 3"
+#: ../metadata/core.xml.in.h:121
+msgid "Run command 3"
+msgstr "Выполнить команду 3"
 
-#~ msgid "Run command 4"
-#~ msgstr "Выполнить команду 4"
+#: ../metadata/core.xml.in.h:122
+msgid "Run command 4"
+msgstr "Выполнить команду 4"
 
-#~ msgid "Run command 5"
-#~ msgstr "Выполнить команду 5"
+#: ../metadata/core.xml.in.h:123
+msgid "Run command 5"
+msgstr "Выполнить команду 5"
 
-#~ msgid "Run command 6"
-#~ msgstr "Выполнить команду 6"
+#: ../metadata/core.xml.in.h:124
+msgid "Run command 6"
+msgstr "Выполнить команду 6"
 
-#~ msgid "Run command 7"
-#~ msgstr "Выполнить команду 7"
+#: ../metadata/core.xml.in.h:125
+msgid "Run command 7"
+msgstr "Выполнить команду 7"
 
-#~ msgid "Run command 8"
-#~ msgstr "Выполнить команду 8"
+#: ../metadata/core.xml.in.h:126
+msgid "Run command 8"
+msgstr "Выполнить команду 8"
 
-#~ msgid "Run command 9"
-#~ msgstr "Выполнить команду 9"
+#: ../metadata/core.xml.in.h:127
+msgid "Run command 9"
+msgstr "Выполнить команду 9"
 
-#~ msgid "Screen size multiplier for horizontal virtual size"
-#~ msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
+#: ../metadata/core.xml.in.h:128
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Коэффициент размера экрана для виртуального размера по горизонтали"
 
-#~ msgid "Screen size multiplier for vertical virtual size"
-#~ msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
+#: ../metadata/core.xml.in.h:129
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Коэффициент размера экрана для виртуального размера по вертикали"
 
-#~ msgid "Screenshot command line"
-#~ msgstr "Командная строка снимка экрана"
+#: ../metadata/core.xml.in.h:130
+msgid "Screenshot command line"
+msgstr "Командная строка снимка экрана"
 
-#~ msgid "Show Desktop"
-#~ msgstr "Показать рабочий стол"
+#: ../metadata/core.xml.in.h:131
+msgid "Show Desktop"
+msgstr "Показать рабочий стол"
 
-#~ msgid "Show Main Menu"
-#~ msgstr "Отобразить главное меню"
+#: ../metadata/core.xml.in.h:132
+msgid "Show Main Menu"
+msgstr "Отобразить главное меню"
 
-#~ msgid "Show Run Application dialog"
-#~ msgstr "Отображение диалогового окна запуска приложения"
+#: ../metadata/core.xml.in.h:133
+msgid "Show Run Application dialog"
+msgstr "Отображение диалогового окна запуска приложения"
 
-#~ msgid "Show the main menu"
-#~ msgstr "Отображение главного меню"
+#: ../metadata/core.xml.in.h:134
+msgid "Show the main menu"
+msgstr "Отображение главного меню"
 
-#~ msgid "Slow Animations"
-#~ msgstr "Замедлить анимацию"
+#: ../metadata/core.xml.in.h:135
+msgid "Slow Animations"
+msgstr "Замедлить анимацию"
 
-#~ msgid "Smart mode"
-#~ msgstr "Умный режим"
+#: ../metadata/core.xml.in.h:136
+msgid "Smart mode"
+msgstr "Умный режим"
 
-#~ msgid "Sync To VBlank"
-#~ msgstr "Синхронизировать с VBlank"
+#: ../metadata/core.xml.in.h:137
+msgid "Sync To VBlank"
+msgstr "Синхронизировать с VBlank"
 
-#~ msgid "Take a screenshot"
-#~ msgstr "Сделать снимок экрана"
+#: ../metadata/core.xml.in.h:138
+msgid "Take a screenshot"
+msgstr "Сделать снимок экрана"
 
-#~ msgid "Take a screenshot of a window"
-#~ msgstr "Сделать снимок окна"
+#: ../metadata/core.xml.in.h:139
+msgid "Take a screenshot of a window"
+msgstr "Сделать снимок окна"
 
-#~ msgid "Terminal command line"
-#~ msgstr "Командная строка терминала"
+#: ../metadata/core.xml.in.h:140
+msgid "Terminal command line"
+msgstr "Командная строка терминала"
 
 #  MenuButton label
 #  menubutton label
-#~ msgid "Texture Compression"
-#~ msgstr "Компрессия текстур"
+#: ../metadata/core.xml.in.h:141
+msgid "Texture Compression"
+msgstr "Компрессия текстур"
 
 #  MenuButton label
 #  menubutton label
-#~ msgid "Texture Filter"
-#~ msgstr "Фильтр текстур"
+#: ../metadata/core.xml.in.h:142
+msgid "Texture Filter"
+msgstr "Фильтр текстур"
 
 #  MenuButton label
 #  menubutton label
-#~ msgid "Texture filtering"
-#~ msgstr "Фильтрация текстур"
+#: ../metadata/core.xml.in.h:143
+msgid "Texture filtering"
+msgstr "Фильтрация текстур"
 
-#~ msgid "The rate at which the screen is redrawn (times/second)"
-#~ msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
+#: ../metadata/core.xml.in.h:144
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Частота, с которой перерисовывается содержимое экрана (раз/сек)"
 
-#~ msgid "Toggle Window Maximized"
-#~ msgstr "Развертывать окно"
+#: ../metadata/core.xml.in.h:145
+msgid "Toggle Window Maximized"
+msgstr "Развертывать окно"
 
-#~ msgid "Toggle Window Maximized Horizontally"
-#~ msgstr "Развертывать окно по горизонтали"
+#: ../metadata/core.xml.in.h:146
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Развертывать окно по горизонтали"
 
-#~ msgid "Toggle Window Maximized Vertically"
-#~ msgstr "Развертывать окно по вертикали"
+#: ../metadata/core.xml.in.h:147
+msgid "Toggle Window Maximized Vertically"
+msgstr "Развертывать окно по вертикали"
 
-#~ msgid "Toggle Window Shaded"
-#~ msgstr "Переключить свертывание окна в полоску"
+#: ../metadata/core.xml.in.h:148
+msgid "Toggle Window Shaded"
+msgstr "Переключить свертывание окна в полоску"
 
-#~ msgid "Toggle active window maximized"
-#~ msgstr "Развертывание активного окна"
+#: ../metadata/core.xml.in.h:149
+msgid "Toggle active window maximized"
+msgstr "Развертывание активного окна"
 
-#~ msgid "Toggle active window maximized horizontally"
-#~ msgstr "Развертывание активного окна по горизонтали"
+#: ../metadata/core.xml.in.h:150
+msgid "Toggle active window maximized horizontally"
+msgstr "Развертывание активного окна по горизонтали"
 
-#~ msgid "Toggle active window maximized vertically"
-#~ msgstr "Развертывание активного окна по вертикали"
+#: ../metadata/core.xml.in.h:151
+msgid "Toggle active window maximized vertically"
+msgstr "Развертывание активного окна по вертикали"
 
-#~ msgid "Toggle active window shaded"
-#~ msgstr "Переключение свертывания активного окна в полоску"
+#: ../metadata/core.xml.in.h:152
+msgid "Toggle active window shaded"
+msgstr "Переключение свертывания активного окна в полоску"
 
-#~ msgid "Toggle use of slow animations"
-#~ msgstr "Переключатель для использования медленной анимации"
+#: ../metadata/core.xml.in.h:153
+msgid "Toggle use of slow animations"
+msgstr "Переключатель для использования медленной анимации"
 
-#~ msgid "Unmaximize active window"
-#~ msgstr "Отмена полного развертывания активного окна"
+#: ../metadata/core.xml.in.h:155
+msgid "Unmaximize active window"
+msgstr "Отмена полного развертывания активного окна"
 
-#~ msgid "Unredirect Fullscreen Windows"
-#~ msgstr "Отменить перенаправление окон в полноэкранном режиме"
+#: ../metadata/core.xml.in.h:156
+msgid "Unredirect Fullscreen Windows"
+msgstr "Отменить перенаправление окон в полноэкранном режиме"
 
-#~ msgid "Use diffuse light when screen is transformed"
-#~ msgstr "Использование рассеянного света при преобразовании экрана"
+#: ../metadata/core.xml.in.h:157
+msgid "Use diffuse light when screen is transformed"
+msgstr "Использование рассеянного света при преобразовании экрана"
 
-#~ msgid "Vertical Virtual Size"
-#~ msgstr "Виртуальный размер по вертикали"
+#: ../metadata/core.xml.in.h:158
+msgid "Vertical Virtual Size"
+msgstr "Виртуальный размер по вертикали"
 
-#~ msgid "Very High"
-#~ msgstr "Очень высокий"
+#: ../metadata/core.xml.in.h:159
+msgid "Very High"
+msgstr "Очень высокий"
 
-#~ msgid "Which one of overlapping output devices should be preferred"
-#~ msgstr "Которое из перекрывающихся устройств вывода должно быть выбрано"
+#: ../metadata/core.xml.in.h:160
+msgid "Which one of overlapping output devices should be preferred"
+msgstr "Которое из перекрывающихся устройств вывода должно быть выбрано"
 
-#~ msgid "Window menu button binding"
-#~ msgstr "Сочетание кнопок меню окна"
+#: ../metadata/core.xml.in.h:162
+msgid "Window menu button binding"
+msgstr "Сочетание кнопок меню окна"
 
-#~ msgid "Window menu key binding"
-#~ msgstr "Сочетание клавиш меню окна"
+#: ../metadata/core.xml.in.h:163
+msgid "Window menu key binding"
+msgstr "Сочетание клавиш меню окна"
 
-#~ msgid "Window screenshot command line"
-#~ msgstr "Командная строка снимка окна"
+#: ../metadata/core.xml.in.h:164
+msgid "Window screenshot command line"
+msgstr "Командная строка снимка окна"
 
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "Окна, прозрачные по умолчанию"
+#: ../metadata/core.xml.in.h:165
+msgid "Windows that should be translucent by default"
+msgstr "Окна, прозрачные по умолчанию"
 
 # workflow: "3D Beschleunigung aktivieren"
 # -ke-
-#~ msgid "Acceleration"
-#~ msgstr "Ускорение"
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+msgid "Acceleration"
+msgstr "Ускорение"
 
-#~ msgid "Adjust Image"
-#~ msgstr "Настройка изображения"
+#: ../metadata/cube.xml.in.h:2
+msgid "Adjust Image"
+msgstr "Настройка изображения"
 
-#~ msgid "Adjust top face image to rotation"
-#~ msgstr "Настройка изображения на верхней грани куба"
+#: ../metadata/cube.xml.in.h:3
+msgid "Adjust top face image to rotation"
+msgstr "Настройка изображения на верхней грани куба"
 
 #  this is a menu entry
-#~ msgid "Advance to next slide"
-#~ msgstr "Переход к следующему слайду"
+#: ../metadata/cube.xml.in.h:4
+msgid "Advance to next slide"
+msgstr "Переход к следующему слайду"
 
-#~ msgid "Animate Skydome"
-#~ msgstr "Анимировать фон"
+#: ../metadata/cube.xml.in.h:5
+msgid "Animate Skydome"
+msgstr "Анимировать фон"
 
-#~ msgid "Animate skydome when rotating cube"
-#~ msgstr "Анимирование фона при вращении куба"
+#: ../metadata/cube.xml.in.h:6
+msgid "Animate skydome when rotating cube"
+msgstr "Анимирование фона при вращении куба"
 
-#~ msgid "Automatic"
-#~ msgstr "Автоматический"
+#: ../metadata/cube.xml.in.h:7
+msgid "Automatic"
+msgstr "Автоматический"
 
-#~ msgid "Color of top and bottom sides of the cube"
-#~ msgstr "Цвет верхней и нижней граней куба"
+#: ../metadata/cube.xml.in.h:8
+msgid "Color of top and bottom sides of the cube"
+msgstr "Цвет верхней и нижней граней куба"
 
-#~ msgid ""
-#~ "Color to use for the bottom color-stop of the skydome-fallback gradient"
-#~ msgstr "Цвет, используемый для нижней границы градиента фона"
+#: ../metadata/cube.xml.in.h:9
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "Цвет, используемый для нижней границы градиента фона"
 
-#~ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-#~ msgstr "Цвет, используемый для верхней границы градиента фона"
+#: ../metadata/cube.xml.in.h:10
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "Цвет, используемый для верхней границы градиента фона"
 
-#~ msgid "Cube Color"
-#~ msgstr "Цвета куба"
+#: ../metadata/cube.xml.in.h:11
+msgid "Cube Color"
+msgstr "Цвета куба"
 
-#~ msgid "Desktop Cube"
-#~ msgstr "Куб рабочего стола"
+#: ../metadata/cube.xml.in.h:12
+msgid "Desktop Cube"
+msgstr "Куб рабочего стола"
 
 # workflow: "3D Beschleunigung aktivieren"
 # -ke-
-#~ msgid "Fold Acceleration"
-#~ msgstr "Ускорение свертывания"
+#: ../metadata/cube.xml.in.h:13
+msgid "Fold Acceleration"
+msgstr "Ускорение свертывания"
 
 #  combo box item
-#~ msgid "Fold Speed"
-#~ msgstr "Скорость свертывания"
+#: ../metadata/cube.xml.in.h:14
+msgid "Fold Speed"
+msgstr "Скорость свертывания"
 
-#~ msgid "Fold Timestep"
-#~ msgstr "Шаг времени свертывания"
+#: ../metadata/cube.xml.in.h:15
+msgid "Fold Timestep"
+msgstr "Шаг времени свертывания"
 
-#~ msgid "Generate mipmaps when possible for higher quality scaling"
-#~ msgstr ""
-#~ "По возможности применять множественное отображение для масштабирования "
-#~ "качества изображения"
+#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"По возможности применять множественное отображение для масштабирования "
+"качества изображения"
 
-#~ msgid "Go back to previous slide"
-#~ msgstr "Возврат к предыдущему слайду"
+#: ../metadata/cube.xml.in.h:17
+msgid "Go back to previous slide"
+msgstr "Возврат к предыдущему слайду"
 
 #  summary information text - header
-#~ msgid "Image files"
-#~ msgstr "Файлы изображений"
+#: ../metadata/cube.xml.in.h:18
+msgid "Image files"
+msgstr "Файлы изображений"
 
-#~ msgid "Image to use as texture for the skydome"
-#~ msgstr "Изображение, используемое в качестве текстуры для фона"
+#: ../metadata/cube.xml.in.h:19
+msgid "Image to use as texture for the skydome"
+msgstr "Изображение, используемое в качестве текстуры для фона"
 
-#~ msgid "Initiates Cube transparency only if rotation is mouse driven."
-#~ msgstr "Прозрачность куба только во время вращения мышью."
+#: ../metadata/cube.xml.in.h:20
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr "Прозрачность куба только во время вращения мышью."
 
-#~ msgid "Inside Cube"
-#~ msgstr "Внутренняя поверхность куба"
+#: ../metadata/cube.xml.in.h:21
+msgid "Inside Cube"
+msgstr "Внутренняя поверхность куба"
 
-#~ msgid "Inside cube"
-#~ msgstr "Внутренняя поверхность куба"
+#: ../metadata/cube.xml.in.h:22
+msgid "Inside cube"
+msgstr "Внутренняя поверхность куба"
 
-#~ msgid ""
-#~ "List of PNG and SVG files that should be rendered on top face of cube"
-#~ msgstr ""
-#~ "Список PNG- и SVG-файлов, которые следует отобразить на верхней грани куба"
+#: ../metadata/cube.xml.in.h:23
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"Список PNG- и SVG-файлов, которые следует отобразить на верхней грани куба"
 
-#~ msgid "Multi Output Mode"
-#~ msgstr "Режим множественного вывода"
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/scale.xml.in.h:17
+msgid "Multi Output Mode"
+msgstr "Режим множественного вывода"
 
-#~ msgid "Multiple cubes"
-#~ msgstr "Несколько кубов"
+#: ../metadata/cube.xml.in.h:26
+msgid "Multiple cubes"
+msgstr "Несколько кубов"
 
-#~ msgid "Next Slide"
-#~ msgstr "Следующий слайд"
+#: ../metadata/cube.xml.in.h:27
+msgid "Next Slide"
+msgstr "Следующий слайд"
 
-#~ msgid "One big cube"
-#~ msgstr "Один большой куб"
+#: ../metadata/cube.xml.in.h:28
+msgid "One big cube"
+msgstr "Один большой куб"
 
-#~ msgid "Opacity During Rotation"
-#~ msgstr "Прозрачность во время вращения"
+#: ../metadata/cube.xml.in.h:29
+msgid "Opacity During Rotation"
+msgstr "Прозрачность во время вращения"
 
-#~ msgid "Opacity When Not Rotating"
-#~ msgstr "Прозрачность в статичном положении"
+#: ../metadata/cube.xml.in.h:30
+msgid "Opacity When Not Rotating"
+msgstr "Прозрачность в статичном положении"
 
-#~ msgid "Opacity of desktop window during rotation."
-#~ msgstr "Прозрачность рабочего стола во время вращения."
+#: ../metadata/cube.xml.in.h:31
+msgid "Opacity of desktop window during rotation."
+msgstr "Прозрачность рабочего стола во время вращения."
 
-#~ msgid "Opacity of desktop window when not rotating."
-#~ msgstr "Прозрачность окон на рабочем столе в статичном положении."
+#: ../metadata/cube.xml.in.h:32
+msgid "Opacity of desktop window when not rotating."
+msgstr "Прозрачность окон на рабочем столе в статичном положении."
 
-#~ msgid "Place windows on cube"
-#~ msgstr "Размещение окон на кубе"
+#: ../metadata/cube.xml.in.h:33
+msgid "Place windows on cube"
+msgstr "Размещение окон на кубе"
 
-#~ msgid "Prev Slide"
-#~ msgstr "Предыдущий слайд"
+#: ../metadata/cube.xml.in.h:34
+msgid "Prev Slide"
+msgstr "Предыдущий слайд"
 
-#~ msgid "Render skydome"
-#~ msgstr "Отрисовка фона"
+#: ../metadata/cube.xml.in.h:35
+msgid "Render skydome"
+msgstr "Отрисовка фона"
 
-#~ msgid "Scale image"
-#~ msgstr "Масштабировать изображение"
+#: ../metadata/cube.xml.in.h:36
+msgid "Scale image"
+msgstr "Масштабировать изображение"
 
-#~ msgid "Scale images to cover top face of cube"
-#~ msgstr "Масштабировать изображения для покрытия верхней грани куба"
+#: ../metadata/cube.xml.in.h:37
+msgid "Scale images to cover top face of cube"
+msgstr "Масштабировать изображения для покрытия верхней грани куба"
 
-#~ msgid ""
-#~ "Selects how the cube is displayed if multiple output devices are used."
-#~ msgstr "Выбор отображения куба при множественном выводе."
+#: ../metadata/cube.xml.in.h:38
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr "Выбор отображения куба при множественном выводе."
 
-#~ msgid "Skydome"
-#~ msgstr "Фон"
+#: ../metadata/cube.xml.in.h:39
+msgid "Skydome"
+msgstr "Фон"
 
-#~ msgid "Skydome Gradient End Color"
-#~ msgstr "Конечный цвет градиента для фона"
+#: ../metadata/cube.xml.in.h:40
+msgid "Skydome Gradient End Color"
+msgstr "Конечный цвет градиента для фона"
 
-#~ msgid "Skydome Gradient Start Color"
-#~ msgstr "Начальный цвет градиента для фона"
+#: ../metadata/cube.xml.in.h:41
+msgid "Skydome Gradient Start Color"
+msgstr "Начальный цвет градиента для фона"
 
-#~ msgid "Skydome Image"
-#~ msgstr "Изображение для фона"
+#: ../metadata/cube.xml.in.h:42
+msgid "Skydome Image"
+msgstr "Изображение для фона"
 
 #  combo box item
-#~ msgid "Speed"
-#~ msgstr "Скорость"
+#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
+msgid "Speed"
+msgstr "Скорость"
 
-#~ msgid "Timestep"
-#~ msgstr "Шаг времени"
+#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
+msgid "Timestep"
+msgstr "Шаг времени"
 
-#~ msgid "Transparency Only on Mouse Rotate"
-#~ msgstr "Прозрачность только при вращении мышью"
+#: ../metadata/cube.xml.in.h:45
+msgid "Transparency Only on Mouse Rotate"
+msgstr "Прозрачность только при вращении мышью"
 
-#~ msgid "Unfold"
-#~ msgstr "Развертывание"
+#: ../metadata/cube.xml.in.h:46
+msgid "Unfold"
+msgstr "Развертывание"
 
-#~ msgid "Unfold cube"
-#~ msgstr "Развертывание куба"
+#: ../metadata/cube.xml.in.h:47
+msgid "Unfold cube"
+msgstr "Развертывание куба"
 
-#~ msgid "Dbus"
-#~ msgstr "Dbus"
+#: ../metadata/dbus.xml.in.h:1
+msgid "Dbus"
+msgstr "Dbus"
 
-#~ msgid "Dbus Control Backend"
-#~ msgstr "Управление Dbus"
+#: ../metadata/dbus.xml.in.h:2
+msgid "Dbus Control Backend"
+msgstr "Управление Dbus"
 
-#~ msgid "Allow mipmaps to be generated for decoration textures"
-#~ msgstr "Разрешить генерацию мипмэпов для текстур оформления"
+#: ../metadata/decoration.xml.in.h:1
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr "Разрешить генерацию мипмэпов для текстур оформления"
 
-#~ msgid "Command"
-#~ msgstr "Команда"
+#: ../metadata/decoration.xml.in.h:2
+msgid "Command"
+msgstr "Команда"
 
-#~ msgid "Decoration windows"
-#~ msgstr "Декорация окон"
+#: ../metadata/decoration.xml.in.h:3
+msgid "Decoration windows"
+msgstr "Декорация окон"
 
-#~ msgid ""
-#~ "Decorator command line that is executed if no decorator is already running"
-#~ msgstr ""
-#~ "Командная строка декоратора, которая выполняется, если декоратор еще не "
-#~ "запущен"
+#: ../metadata/decoration.xml.in.h:4
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"Командная строка декоратора, которая выполняется, если декоратор еще не "
+"запущен"
 
-#~ msgid "Drop shadow X offset"
-#~ msgstr "Смещение отбрасываемой тени по оси X"
+#: ../metadata/decoration.xml.in.h:5
+msgid "Drop shadow X offset"
+msgstr "Смещение отбрасываемой тени по оси X"
 
-#~ msgid "Drop shadow Y offset"
-#~ msgstr "Смещение отбрасываемой тени по оси Y"
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow Y offset"
+msgstr "Смещение отбрасываемой тени по оси Y"
 
-#~ msgid "Drop shadow color"
-#~ msgstr "Цвет отбрасываемой тени"
+#: ../metadata/decoration.xml.in.h:7
+msgid "Drop shadow color"
+msgstr "Цвет отбрасываемой тени"
 
 #  int field
-#~ msgid "Drop shadow opacity"
-#~ msgstr "Прозрачность отбрасываемой тени"
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow opacity"
+msgstr "Прозрачность отбрасываемой тени"
 
-#~ msgid "Drop shadow radius"
-#~ msgstr "Радиус отбрасываемой тени"
+#: ../metadata/decoration.xml.in.h:9
+msgid "Drop shadow radius"
+msgstr "Радиус отбрасываемой тени"
 
-#~ msgid "Shadow Color"
-#~ msgstr "Цвет тени"
+#: ../metadata/decoration.xml.in.h:11
+msgid "Shadow Color"
+msgstr "Цвет тени"
 
-#~ msgid "Shadow Offset X"
-#~ msgstr "Смещение тени по оси X"
+#: ../metadata/decoration.xml.in.h:12
+msgid "Shadow Offset X"
+msgstr "Смещение тени по оси X"
 
-#~ msgid "Shadow Offset Y"
-#~ msgstr "Смещение тени по оси Y"
-
-#  int field
-#~ msgid "Shadow Opacity"
-#~ msgstr "Прозрачность тени"
-
-#~ msgid "Shadow Radius"
-#~ msgstr "Радиус тени"
-
-#~ msgid "Shadow windows"
-#~ msgstr "Тень окон"
-
-#~ msgid "Window Decoration"
-#~ msgstr "Оформление окна"
-
-#~ msgid "Window decorations"
-#~ msgstr "Оформление окна"
-
-#~ msgid "Windows that should be decorated"
-#~ msgstr "Окна к которым будет применено оформление"
-
-#~ msgid "Windows that should have a shadow"
-#~ msgstr "Окна которые будут отбрасывать тень"
-
-#~ msgid "Fade On Minimize/Open/Close"
-#~ msgstr "Затенять при свертывании/открытии/закрытии"
-
-#~ msgid "Fade Speed"
-#~ msgstr "Скорость затенения"
-
-#~ msgid "Fade effect on minimize/open/close window events"
-#~ msgstr "Эффект затенения при свертывании/открытии/закрытии окон"
-
-#~ msgid "Fade effect on system beep"
-#~ msgstr "Эффект затенения при системном звуковом сигнале"
-
-#~ msgid "Fade in windows when mapped and fade out windows when unmapped"
-#~ msgstr ""
-#~ "Постепенное проявление окон при отображении и постепенное исчезновение "
-#~ "при отмене отображения"
-
-#~ msgid "Fade windows"
-#~ msgstr "Затенение окон"
-
-#~ msgid "Fading Windows"
-#~ msgstr "Проявление/исчезание окон"
-
-#~ msgid "Fullscreen Visual Bell"
-#~ msgstr "Полноэкранная визуализация звукового сигнала"
-
-#~ msgid "Fullscreen fade effect on system beep"
-#~ msgstr ""
-#~ "Полноэкранный эффект проявления/исчезания при системном звуковом сигнале"
-
-#~ msgid "Visual Bell"
-#~ msgstr "Визуализация звукового сигнала"
-
-#~ msgid "Window fade speed"
-#~ msgstr "Скорость проявления/исчезания окна"
-
-#~ msgid "Windows that should be fading"
-#~ msgstr "Окна, к которым следует применять эффект проявления/исчезания"
-
-#~ msgid "Mount Point"
-#~ msgstr "Точка монтирования"
-
-#~ msgid "Mount point"
-#~ msgstr "Точка монтирования"
-
-#~ msgid "Userspace File System"
-#~ msgstr "Файловая система в пользовательском пространстве (fuse)"
-
-#~ msgid "Userspace file system"
-#~ msgstr "Файловая система в пользовательском пространстве (fuse)"
-
-#~ msgid "GConf"
-#~ msgstr "GConf"
-
-#~ msgid "GConf Control Backend"
-#~ msgstr "Управление GConf"
-
-#~ msgid "GLib"
-#~ msgstr "GLib"
-
-#~ msgid "GLib main loop support"
-#~ msgstr "Поддержка основного цикла GLib"
-
-#~ msgid "Ini"
-#~ msgstr "Ini"
-
-#~ msgid "Ini Flat File Backend"
-#~ msgstr "Формат хранения в простом ini-файле"
-
-#~ msgid "File change notification plugin"
-#~ msgstr "Модуль извещения об изменении файла"
-
-#~ msgid "Inotify"
-#~ msgstr "Inotify"
-
-#~ msgid "Kconfig"
-#~ msgstr "Kconfig"
-
-#~ msgid "Kconfig Control Backend"
-#~ msgstr "Управление Kconfig"
-
-#~ msgid "Minimize Effect"
-#~ msgstr "Эффект свертывания"
-
-#~ msgid "Minimize Windows"
-#~ msgstr "Свернуть окна"
-
-#~ msgid "Minimize speed"
-#~ msgstr "Скорость свертывания"
-
-#~ msgid "Minimize timestep"
-#~ msgstr "Квант времени свертывания"
-
-#~ msgid "Shade Resistance"
-#~ msgstr "Устойчивость тени"
-
-#~ msgid "Shade resistance"
-#~ msgstr "Устойчивость тени"
-
-#~ msgid "Transform windows when they are minimized and unminimized"
-#~ msgstr "Преобразовывать окна при свертывании и отмене свертывания"
-
-#~ msgid "Windows that should be transformed when minimized"
-#~ msgstr "Окна, которые должны быть преобразованы при свертывании"
-
-#~ msgid "Constrain Y"
-#~ msgstr "Ограничить Y"
-
-#~ msgid "Constrain Y coordinate to workspace area"
-#~ msgstr "Ограничение координаты Y пределами рабочей области"
-
-#~ msgid ""
-#~ "Do not update the server-side position of windows until finished moving"
-#~ msgstr ""
-#~ "Не обновлять со стороны сервера положение окон до окончания перемещения"
-
-#~ msgid "Initiate Window Move"
-#~ msgstr "Инициировать движение окна"
-
-#~ msgid "Lazy Positioning"
-#~ msgstr "\"Ленивое\" позиционирование"
-
-#~ msgid "Move Window"
-#~ msgstr "Переместить окно"
-
-#~ msgid "Move window"
-#~ msgstr "Переместить окно"
+#: ../metadata/decoration.xml.in.h:13
+msgid "Shadow Offset Y"
+msgstr "Смещение тени по оси Y"
 
 #  int field
-#~ msgid "Opacity"
-#~ msgstr "Прозрачность"
+#: ../metadata/decoration.xml.in.h:14
+msgid "Shadow Opacity"
+msgstr "Прозрачность тени"
 
-#~ msgid "Opacity level of moving windows"
-#~ msgstr "Степень прозрачности движущихся окон"
+#: ../metadata/decoration.xml.in.h:15
+msgid "Shadow Radius"
+msgstr "Радиус тени"
 
-#~ msgid "Snapoff and auto unmaximized maximized windows when dragging"
-#~ msgstr ""
-#~ "Отмена привязки и автоматическая отмена развертывания полностью "
-#~ "развернутых окон при перетаскивании"
+#: ../metadata/decoration.xml.in.h:16
+msgid "Shadow windows"
+msgstr "Тень окон"
 
-#~ msgid "Snapoff maximized windows"
-#~ msgstr "Отменить привязку полностью развернутых окон"
+#: ../metadata/decoration.xml.in.h:17
+msgid "Window Decoration"
+msgstr "Оформление окна"
 
-#~ msgid "Start moving window"
-#~ msgstr "Запуск перемещения окна"
+#: ../metadata/decoration.xml.in.h:18
+msgid "Window decorations"
+msgstr "Оформление окна"
 
-#~ msgid "Algorithm to use for window placement"
-#~ msgstr "Алгоритм, используемый для размещения окна"
+#: ../metadata/decoration.xml.in.h:19
+msgid "Windows that should be decorated"
+msgstr "Окна к которым будет применено оформление"
 
-#~ msgid "Cascade"
-#~ msgstr "Каскадом"
+#: ../metadata/decoration.xml.in.h:20
+msgid "Windows that should have a shadow"
+msgstr "Окна которые будут отбрасывать тень"
 
-#~ msgid "Centered"
-#~ msgstr "По центру"
+#: ../metadata/fade.xml.in.h:1
+msgid "Fade On Minimize/Open/Close"
+msgstr "Затенять при свертывании/открытии/закрытии"
 
-#~ msgid "Force Placement Windows"
-#~ msgstr "Принудительное позиционирование окон"
+#: ../metadata/fade.xml.in.h:2
+msgid "Fade Speed"
+msgstr "Скорость затенения"
 
-#~ msgid "Horizontal viewport positions"
-#~ msgstr "Горизонтальные позиции видовых окон"
+#: ../metadata/fade.xml.in.h:3
+msgid "Fade effect on minimize/open/close window events"
+msgstr "Эффект затенения при свертывании/открытии/закрытии окон"
 
-#~ msgid "Maximize"
-#~ msgstr "Развернуть"
+#: ../metadata/fade.xml.in.h:4
+msgid "Fade effect on system beep"
+msgstr "Эффект затенения при системном звуковом сигнале"
 
-#~ msgid "Place Windows"
-#~ msgstr "Размещение окон"
+#: ../metadata/fade.xml.in.h:5
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"Постепенное проявление окон при отображении и постепенное исчезновение при "
+"отмене отображения"
 
+#: ../metadata/fade.xml.in.h:6
+msgid "Fade windows"
+msgstr "Затенение окон"
+
+#: ../metadata/fade.xml.in.h:7
+msgid "Fading Windows"
+msgstr "Проявление/исчезание окон"
+
+#: ../metadata/fade.xml.in.h:8
+msgid "Fullscreen Visual Bell"
+msgstr "Полноэкранная визуализация звукового сигнала"
+
+#: ../metadata/fade.xml.in.h:9
+msgid "Fullscreen fade effect on system beep"
+msgstr ""
+"Полноэкранный эффект проявления/исчезания при системном звуковом сигнале"
+
+#: ../metadata/fade.xml.in.h:10
+msgid "Visual Bell"
+msgstr "Визуализация звукового сигнала"
+
+#: ../metadata/fade.xml.in.h:11
+msgid "Window fade speed"
+msgstr "Скорость проявления/исчезания окна"
+
+#: ../metadata/fade.xml.in.h:12
+msgid "Windows that should be fading"
+msgstr "Окна, к которым следует применять эффект проявления/исчезания"
+
+#: ../metadata/fs.xml.in.h:1
+msgid "Mount Point"
+msgstr "Точка монтирования"
+
+#: ../metadata/fs.xml.in.h:2
+msgid "Mount point"
+msgstr "Точка монтирования"
+
+#: ../metadata/fs.xml.in.h:3
+msgid "Userspace File System"
+msgstr "Файловая система в пользовательском пространстве (fuse)"
+
+#: ../metadata/fs.xml.in.h:4
+msgid "Userspace file system"
+msgstr "Файловая система в пользовательском пространстве (fuse)"
+
+#: ../metadata/gconf.xml.in.h:1
+msgid "GConf"
+msgstr "GConf"
+
+#: ../metadata/gconf.xml.in.h:2
+msgid "GConf Control Backend"
+msgstr "Управление GConf"
+
+#: ../metadata/glib.xml.in.h:1
+msgid "GLib"
+msgstr "GLib"
+
+#: ../metadata/glib.xml.in.h:2
+msgid "GLib main loop support"
+msgstr "Поддержка основного цикла GLib"
+
+#: ../metadata/ini.xml.in.h:1
+msgid "Ini"
+msgstr "Ini"
+
+#: ../metadata/ini.xml.in.h:2
+msgid "Ini Flat File Backend"
+msgstr "Формат хранения в простом ini-файле"
+
+#: ../metadata/inotify.xml.in.h:1
+msgid "File change notification plugin"
+msgstr "Модуль извещения об изменении файла"
+
+#: ../metadata/inotify.xml.in.h:2
+msgid "Inotify"
+msgstr "Inotify"
+
+#: ../metadata/kconfig.xml.in.h:1
+msgid "Kconfig"
+msgstr "Kconfig"
+
+#: ../metadata/kconfig.xml.in.h:2
+msgid "Kconfig Control Backend"
+msgstr "Управление Kconfig"
+
+#: ../metadata/minimize.xml.in.h:1
+msgid "Minimize Effect"
+msgstr "Эффект свертывания"
+
+#: ../metadata/minimize.xml.in.h:2
+msgid "Minimize Windows"
+msgstr "Свернуть окна"
+
+#: ../metadata/minimize.xml.in.h:3
+msgid "Minimize speed"
+msgstr "Скорость свертывания"
+
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize timestep"
+msgstr "Квант времени свертывания"
+
+#: ../metadata/minimize.xml.in.h:5
+msgid "Shade Resistance"
+msgstr "Устойчивость тени"
+
+#: ../metadata/minimize.xml.in.h:6
+msgid "Shade resistance"
+msgstr "Устойчивость тени"
+
+#: ../metadata/minimize.xml.in.h:9
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "Преобразовывать окна при свертывании и отмене свертывания"
+
+#: ../metadata/minimize.xml.in.h:10
+msgid "Windows that should be transformed when minimized"
+msgstr "Окна, которые должны быть преобразованы при свертывании"
+
+#: ../metadata/move.xml.in.h:1
+msgid "Constrain Y"
+msgstr "Ограничить Y"
+
+#: ../metadata/move.xml.in.h:2
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Ограничение координаты Y пределами рабочей области"
+
+#: ../metadata/move.xml.in.h:3
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+"Не обновлять со стороны сервера положение окон до окончания перемещения"
+
+#: ../metadata/move.xml.in.h:4
+msgid "Initiate Window Move"
+msgstr "Инициировать движение окна"
+
+#: ../metadata/move.xml.in.h:5
+msgid "Lazy Positioning"
+msgstr "\"Ленивое\" позиционирование"
+
+#: ../metadata/move.xml.in.h:6
+msgid "Move Window"
+msgstr "Переместить окно"
+
+#: ../metadata/move.xml.in.h:7
+msgid "Move window"
+msgstr "Переместить окно"
+
+#  int field
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:18
+msgid "Opacity"
+msgstr "Прозрачность"
+
+#: ../metadata/move.xml.in.h:9
+msgid "Opacity level of moving windows"
+msgstr "Степень прозрачности движущихся окон"
+
+#: ../metadata/move.xml.in.h:10
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"Отмена привязки и автоматическая отмена развертывания полностью развернутых "
+"окон при перетаскивании"
+
+#: ../metadata/move.xml.in.h:11
+msgid "Snapoff maximized windows"
+msgstr "Отменить привязку полностью развернутых окон"
+
+#: ../metadata/move.xml.in.h:12
+msgid "Start moving window"
+msgstr "Запуск перемещения окна"
+
+#: ../metadata/place.xml.in.h:1
+msgid "Algorithm to use for window placement"
+msgstr "Алгоритм, используемый для размещения окна"
+
+#: ../metadata/place.xml.in.h:2
+msgid "Cascade"
+msgstr "Каскадом"
+
+#: ../metadata/place.xml.in.h:3
+msgid "Centered"
+msgstr "По центру"
+
+#: ../metadata/place.xml.in.h:4
+msgid "Force Placement Windows"
+msgstr "Принудительное позиционирование окон"
+
+#: ../metadata/place.xml.in.h:5
+msgid "Horizontal viewport positions"
+msgstr "Горизонтальные позиции видовых окон"
+
+#: ../metadata/place.xml.in.h:6
+msgid "Maximize"
+msgstr "Развернуть"
+
+#: ../metadata/place.xml.in.h:8
+msgid "Place Windows"
+msgstr "Размещение окон"
+
+#: ../metadata/place.xml.in.h:9
 #, fuzzy
-#~ msgid "Place across all outputs"
-#~ msgstr "Предпочтение меньшему выводу"
+msgid "Place across all outputs"
+msgstr "Предпочтение меньшему выводу"
 
-#~ msgid "Place windows at appropriate positions when mapped"
-#~ msgstr "При отображении разместите окна в нужных местах"
+#: ../metadata/place.xml.in.h:10
+msgid "Place windows at appropriate positions when mapped"
+msgstr "При отображении разместите окна в нужных местах"
 
-#~ msgid "Placement Mode"
-#~ msgstr "Режим размещения"
+#: ../metadata/place.xml.in.h:11
+msgid "Placement Mode"
+msgstr "Режим размещения"
 
-#~ msgid "Positioned windows"
-#~ msgstr "Спозиционированные окна"
+#: ../metadata/place.xml.in.h:12
+msgid "Positioned windows"
+msgstr "Спозиционированные окна"
 
-#~ msgid "Random"
-#~ msgstr "Случайно"
+#: ../metadata/place.xml.in.h:13
+msgid "Random"
+msgstr "Случайно"
 
-#~ msgid ""
-#~ "Selects how window placement should behave if multiple outputs are "
-#~ "selected"
-#~ msgstr ""
-#~ "Выбор как должно себя вести позиционирование окон, если используется "
-#~ "несколько выводов"
+#: ../metadata/place.xml.in.h:14
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"Выбор как должно себя вести позиционирование окон, если используется "
+"несколько выводов"
 
-#~ msgid "Smart"
-#~ msgstr "Умный"
+#: ../metadata/place.xml.in.h:15
+msgid "Smart"
+msgstr "Умный"
 
-#~ msgid "Use active output device"
-#~ msgstr "Использовать активное устройство вывода"
+#: ../metadata/place.xml.in.h:16
+msgid "Use active output device"
+msgstr "Использовать активное устройство вывода"
 
+#: ../metadata/place.xml.in.h:17
 #, fuzzy
-#~ msgid "Use output device of focussed window"
-#~ msgstr "Использовать устройство вывода с курсором"
+msgid "Use output device of focussed window"
+msgstr "Использовать устройство вывода с курсором"
 
-#~ msgid "Use output device with pointer"
-#~ msgstr "Использовать устройство вывода с курсором"
+#: ../metadata/place.xml.in.h:18
+msgid "Use output device with pointer"
+msgstr "Использовать устройство вывода с курсором"
 
-#~ msgid "Vertical viewport positions"
-#~ msgstr "Вертикальные позиции видовых окон"
+#: ../metadata/place.xml.in.h:19
+msgid "Vertical viewport positions"
+msgstr "Вертикальные позиции видовых окон"
 
-#~ msgid "Viewport positioned windows"
-#~ msgstr "Спозиционированные окна видового окна"
+#: ../metadata/place.xml.in.h:20
+msgid "Viewport positioned windows"
+msgstr "Спозиционированные окна видового окна"
 
-#~ msgid "Window placement workarounds"
-#~ msgstr "Обходные пути при размещении окна"
+#: ../metadata/place.xml.in.h:21
+msgid "Window placement workarounds"
+msgstr "Обходные пути при размещении окна"
 
-#~ msgid "Windows that should be positioned by default"
-#~ msgstr "Окна, которые должны быть спозиционированны по умолчанию"
+#: ../metadata/place.xml.in.h:22
+msgid "Windows that should be positioned by default"
+msgstr "Окна, которые должны быть спозиционированны по умолчанию"
 
-#~ msgid "Windows that should be positioned in specific viewports by default"
-#~ msgstr ""
-#~ "Окна, которые должны быть спозиционированны в определенном экране по "
-#~ "умолчанию"
+#: ../metadata/place.xml.in.h:23
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr ""
+"Окна, которые должны быть спозиционированны в определенном экране по "
+"умолчанию"
 
-#~ msgid ""
-#~ "Windows that should forcedly be placed, even if they indicate the window "
-#~ "manager should avoid placing them."
-#~ msgstr ""
-#~ "Окна, которые должны быть спозиционированы, даже если они указывают, что "
-#~ "этого делать не нужно."
+#: ../metadata/place.xml.in.h:24
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+"Окна, которые должны быть спозиционированы, даже если они указывают, что "
+"этого делать не нужно."
 
-#~ msgid "Workarounds"
-#~ msgstr "Обходные пути"
+#: ../metadata/place.xml.in.h:25
+msgid "Workarounds"
+msgstr "Обходные пути"
 
-#~ msgid "X Positions"
-#~ msgstr "Положения по X"
+#: ../metadata/place.xml.in.h:26
+msgid "X Positions"
+msgstr "Положения по X"
 
-#~ msgid "X Viewport Positions"
-#~ msgstr "Положения видового окна по X"
+#: ../metadata/place.xml.in.h:27
+msgid "X Viewport Positions"
+msgstr "Положения видового окна по X"
 
-#~ msgid "X position values"
-#~ msgstr "Значения положения по X"
+#: ../metadata/place.xml.in.h:28
+msgid "X position values"
+msgstr "Значения положения по X"
 
-#~ msgid "Y Positions"
-#~ msgstr "Положения по Y"
+#: ../metadata/place.xml.in.h:29
+msgid "Y Positions"
+msgstr "Положения по Y"
 
-#~ msgid "Y Viewport Positions"
-#~ msgstr "Положения видового окна по Y"
+#: ../metadata/place.xml.in.h:30
+msgid "Y Viewport Positions"
+msgstr "Положения видового окна по Y"
 
-#~ msgid "Y position values"
-#~ msgstr "Значения положения по Y"
+#: ../metadata/place.xml.in.h:31
+msgid "Y position values"
+msgstr "Значения положения по Y"
 
-#~ msgid "Png"
-#~ msgstr "Png"
+#: ../metadata/png.xml.in.h:1
+msgid "Png"
+msgstr "Png"
 
-#~ msgid "Png image loader"
-#~ msgstr "Загрузчик изображений Png"
+#: ../metadata/png.xml.in.h:2
+msgid "Png image loader"
+msgstr "Загрузчик изображений Png"
 
-#~ msgid "Regex Matching"
-#~ msgstr "Соответствие регулярными выражениями"
+#: ../metadata/regex.xml.in.h:1
+msgid "Regex Matching"
+msgstr "Соответствие регулярными выражениями"
 
-#~ msgid "Regex window matching"
-#~ msgstr "Соответствие окон с помощью регулярных выражений"
+#: ../metadata/regex.xml.in.h:2
+msgid "Regex window matching"
+msgstr "Соответствие окон с помощью регулярных выражений"
 
-#~ msgid "Border Color"
-#~ msgstr "Цвет границы"
+#: ../metadata/resize.xml.in.h:1
+msgid "Border Color"
+msgstr "Цвет границы"
 
-#~ msgid "Border color used for outline and rectangle resize modes"
-#~ msgstr ""
-#~ "Цвет границы, используемый для обрисовки контура и режимов изменения "
-#~ "размеров прямоугольника"
+#: ../metadata/resize.xml.in.h:2
+msgid "Border color used for outline and rectangle resize modes"
+msgstr ""
+"Цвет границы, используемый для обрисовки контура и режимов изменения "
+"размеров прямоугольника"
 
-#~ msgid "Default Resize Mode"
-#~ msgstr "Режим изменения размера по умолчанию"
+#: ../metadata/resize.xml.in.h:3
+msgid "Default Resize Mode"
+msgstr "Режим изменения размера по умолчанию"
 
-#~ msgid "Default mode used for window resizing"
-#~ msgstr "Режим по умолчанию, используемый для изменения размера окна"
+#: ../metadata/resize.xml.in.h:4
+msgid "Default mode used for window resizing"
+msgstr "Режим по умолчанию, используемый для изменения размера окна"
 
-#~ msgid "Fill Color"
-#~ msgstr "Цвет заливки"
+#: ../metadata/resize.xml.in.h:5
+msgid "Fill Color"
+msgstr "Цвет заливки"
 
-#~ msgid "Fill color used for rectangle resize mode"
-#~ msgstr ""
-#~ "Цвет заливки, используемый для режима изменения размеров прямоугольника"
+#: ../metadata/resize.xml.in.h:6
+msgid "Fill color used for rectangle resize mode"
+msgstr ""
+"Цвет заливки, используемый для режима изменения размеров прямоугольника"
 
-#~ msgid "Initiate Normal Window Resize"
-#~ msgstr "Инициировать обычное изменение размеров окна"
+#: ../metadata/resize.xml.in.h:7
+msgid "Initiate Normal Window Resize"
+msgstr "Инициировать обычное изменение размеров окна"
 
-#~ msgid "Initiate Outline Window Resize"
-#~ msgstr "Инициировать изменение размеров окна Граница"
+#: ../metadata/resize.xml.in.h:8
+msgid "Initiate Outline Window Resize"
+msgstr "Инициировать изменение размеров окна Граница"
 
-#~ msgid "Initiate Rectangle Window Resize"
-#~ msgstr "Инициировать изменение размеров окна Прямоугольник"
+#: ../metadata/resize.xml.in.h:9
+msgid "Initiate Rectangle Window Resize"
+msgstr "Инициировать изменение размеров окна Прямоугольник"
 
-#~ msgid "Initiate Stretch Window Resize"
-#~ msgstr "Инициировать изменение размеров окна Растяжение"
+#: ../metadata/resize.xml.in.h:10
+msgid "Initiate Stretch Window Resize"
+msgstr "Инициировать изменение размеров окна Растяжение"
 
-#~ msgid "Initiate Window Resize"
-#~ msgstr "Инициировать изменение размеров окна"
+#: ../metadata/resize.xml.in.h:11
+msgid "Initiate Window Resize"
+msgstr "Инициировать изменение размеров окна"
 
-#~ msgid "Normal"
-#~ msgstr "Нормальное"
+#: ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Нормальное"
 
-#~ msgid "Normal Resize Windows"
-#~ msgstr "Нормальное изменение размеров окна"
+#: ../metadata/resize.xml.in.h:13
+msgid "Normal Resize Windows"
+msgstr "Нормальное изменение размеров окна"
 
-#~ msgid "Outline"
-#~ msgstr "Граница"
+#: ../metadata/resize.xml.in.h:14
+msgid "Outline"
+msgstr "Граница"
 
-#~ msgid "Outline Resize Windows"
-#~ msgstr "Граница изменение размеров окна"
+#: ../metadata/resize.xml.in.h:15
+msgid "Outline Resize Windows"
+msgstr "Граница изменение размеров окна"
 
-#~ msgid "Rectangle"
-#~ msgstr "Прямоугольник"
+#: ../metadata/resize.xml.in.h:16
+msgid "Rectangle"
+msgstr "Прямоугольник"
 
-#~ msgid "Rectangle Resize Windows"
-#~ msgstr "Прямоугольник изменение размеров окна"
+#: ../metadata/resize.xml.in.h:17
+msgid "Rectangle Resize Windows"
+msgstr "Прямоугольник изменение размеров окна"
 
-#~ msgid "Resize Window"
-#~ msgstr "Изменение размеров окна"
+#: ../metadata/resize.xml.in.h:18
+msgid "Resize Window"
+msgstr "Изменение размеров окна"
 
-#~ msgid "Resize window"
-#~ msgstr "Изменение размеров окна"
+#: ../metadata/resize.xml.in.h:19
+msgid "Resize window"
+msgstr "Изменение размеров окна"
 
-#~ msgid "Start resizing window"
-#~ msgstr "Запуск изменения размеров окна"
+#: ../metadata/resize.xml.in.h:20
+msgid "Start resizing window"
+msgstr "Запуск изменения размеров окна"
 
-#~ msgid "Start resizing window by stretching it"
-#~ msgstr "Запуск изменения размеров окна его растяжением"
+#: ../metadata/resize.xml.in.h:21
+msgid "Start resizing window by stretching it"
+msgstr "Запуск изменения размеров окна его растяжением"
 
-#~ msgid "Start resizing window normally"
-#~ msgstr "Запуск обычного изменения размеров окна"
+#: ../metadata/resize.xml.in.h:22
+msgid "Start resizing window normally"
+msgstr "Запуск обычного изменения размеров окна"
 
-#~ msgid "Start resizing window with outline"
-#~ msgstr "Запуск изменения размеров окна с показом границы"
+#: ../metadata/resize.xml.in.h:23
+msgid "Start resizing window with outline"
+msgstr "Запуск изменения размеров окна с показом границы"
 
-#~ msgid "Start resizing window with rectangle"
-#~ msgstr "Запуск изменения размеров окна с показом прямоугольника"
+#: ../metadata/resize.xml.in.h:24
+msgid "Start resizing window with rectangle"
+msgstr "Запуск изменения размеров окна с показом прямоугольника"
 
-#~ msgid "Stretch"
-#~ msgstr "Растянуть"
+#: ../metadata/resize.xml.in.h:25
+msgid "Stretch"
+msgstr "Растянуть"
 
-#~ msgid "Stretch Resize Windows"
-#~ msgstr "Растяжение изменение размеров окна"
+#: ../metadata/resize.xml.in.h:26
+msgid "Stretch Resize Windows"
+msgstr "Растяжение изменение размеров окна"
 
-#~ msgid "Windows that normal resize should be used for"
-#~ msgstr ""
-#~ "Типы окон, которым следует применять эффект нормального изменения размера"
+#: ../metadata/resize.xml.in.h:27
+msgid "Windows that normal resize should be used for"
+msgstr ""
+"Типы окон, которым следует применять эффект нормального изменения размера"
 
-#~ msgid "Windows that outline resize should be used for"
-#~ msgstr ""
-#~ "Типы окон, которым следует применять эффект изменения размера граница"
+#: ../metadata/resize.xml.in.h:28
+msgid "Windows that outline resize should be used for"
+msgstr "Типы окон, которым следует применять эффект изменения размера граница"
 
-#~ msgid "Windows that rectangle resize should be used for"
-#~ msgstr ""
-#~ "Типы окон, которым следует применять эффект изменения размера "
-#~ "прямоугольник"
+#: ../metadata/resize.xml.in.h:29
+msgid "Windows that rectangle resize should be used for"
+msgstr ""
+"Типы окон, которым следует применять эффект изменения размера прямоугольник"
 
-#~ msgid "Windows that stretch resize should be used for"
-#~ msgstr ""
-#~ "Типы окон, которым следует применять эффект изменения размера растяжение"
+#: ../metadata/resize.xml.in.h:30
+msgid "Windows that stretch resize should be used for"
+msgstr ""
+"Типы окон, которым следует применять эффект изменения размера растяжение"
 
-#~ msgid "Edge Flip DnD"
-#~ msgstr "Отражение при перетаскивании к краю"
+#: ../metadata/rotate.xml.in.h:2
+msgid "Edge Flip DnD"
+msgstr "Отражение при перетаскивании к краю"
 
-#~ msgid "Edge Flip Move"
-#~ msgstr "Отражение при перемещении к краю"
+#: ../metadata/rotate.xml.in.h:3
+msgid "Edge Flip Move"
+msgstr "Отражение при перемещении к краю"
 
-#~ msgid "Edge Flip Pointer"
-#~ msgstr "Отражение при курсоре на краю"
+#: ../metadata/rotate.xml.in.h:4
+msgid "Edge Flip Pointer"
+msgstr "Отражение при курсоре на краю"
 
-#~ msgid "Flip Time"
-#~ msgstr "Время отражения"
+#: ../metadata/rotate.xml.in.h:5
+msgid "Flip Time"
+msgstr "Время отражения"
 
-#~ msgid "Flip to left viewport and warp pointer"
-#~ msgstr "Отражение в левое кадровое окно и искажение курсора"
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to left viewport and warp pointer"
+msgstr "Отражение в левое кадровое окно и искажение курсора"
 
-#~ msgid "Flip to next viewport when dragging object to screen edge"
-#~ msgstr ""
-#~ "Отражение на следующее кадровое окно при перетаскивании объекта к краю "
-#~ "экрана"
+#: ../metadata/rotate.xml.in.h:7
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при перетаскивании объекта к краю экрана"
 
-#~ msgid "Flip to next viewport when moving pointer to screen edge"
-#~ msgstr ""
-#~ "Отражение на следующее кадровое окно при смещении курсора к краю экрана"
+#: ../metadata/rotate.xml.in.h:8
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при смещении курсора к краю экрана"
 
-#~ msgid "Flip to next viewport when moving window to screen edge"
-#~ msgstr ""
-#~ "Отражение на следующее кадровое окно при перемещении окна к краю экрана"
+#: ../metadata/rotate.xml.in.h:9
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"Отражение на следующее кадровое окно при перемещении окна к краю экрана"
 
-#~ msgid "Flip to right viewport and warp pointer"
-#~ msgstr "Отражение в правое кадровое окно и искажение курсора"
+#: ../metadata/rotate.xml.in.h:10
+msgid "Flip to right viewport and warp pointer"
+msgstr "Отражение в правое кадровое окно и искажение курсора"
 
-#~ msgid "Invert Y axis for pointer movement"
-#~ msgstr "Инвертировать ось Y для перемещений курсора"
+#: ../metadata/rotate.xml.in.h:12
+msgid "Invert Y axis for pointer movement"
+msgstr "Инвертировать ось Y для перемещений курсора"
 
-#~ msgid "Pointer Invert Y"
-#~ msgstr "Инвертировать для курсора ось Y"
+#: ../metadata/rotate.xml.in.h:13
+msgid "Pointer Invert Y"
+msgstr "Инвертировать для курсора ось Y"
 
 #  dialog caption
-#~ msgid "Pointer Sensitivity"
-#~ msgstr "Чувствительность курсора"
+#: ../metadata/rotate.xml.in.h:14
+msgid "Pointer Sensitivity"
+msgstr "Чувствительность курсора"
 
-#~ msgid "Raise on rotate"
-#~ msgstr "Поднимать при вращении"
+#: ../metadata/rotate.xml.in.h:15
+msgid "Raise on rotate"
+msgstr "Поднимать при вращении"
 
-#~ msgid "Raise window when rotating"
-#~ msgstr "Поднимать окна при вращении"
-
-#  Translators: text entry label
-#~ msgid "Rotate Cube"
-#~ msgstr "Вращать куб"
-
-#~ msgid "Rotate Flip Left"
-#~ msgstr "Вращать с отражением влево"
-
-#~ msgid "Rotate Flip Right"
-#~ msgstr "Вращать с отражением вправо"
-
-#~ msgid "Rotate Left"
-#~ msgstr "Вращать влево"
-
-#~ msgid "Rotate Left with Window"
-#~ msgstr "Вращать влево вместе с окном"
-
-#~ msgid "Rotate Right"
-#~ msgstr "Вращать вправо"
-
-#~ msgid "Rotate Right with Window"
-#~ msgstr "Вращать вправо вместе с окном"
+#: ../metadata/rotate.xml.in.h:16
+msgid "Raise window when rotating"
+msgstr "Поднимать окна при вращении"
 
 #  Translators: text entry label
-#~ msgid "Rotate To"
-#~ msgstr "Вращать до"
+#: ../metadata/rotate.xml.in.h:17
+msgid "Rotate Cube"
+msgstr "Вращать куб"
 
-#~ msgid "Rotate To Face 1"
-#~ msgstr "Вращать до грани 1"
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate Flip Left"
+msgstr "Вращать с отражением влево"
 
-#~ msgid "Rotate To Face 1 with Window"
-#~ msgstr "Вращать до грани 1 вместе с окном"
+#: ../metadata/rotate.xml.in.h:19
+msgid "Rotate Flip Right"
+msgstr "Вращать с отражением вправо"
 
-#~ msgid "Rotate To Face 10"
-#~ msgstr "Вращать до грани 10"
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate Left"
+msgstr "Вращать влево"
 
-#~ msgid "Rotate To Face 10 with Window"
-#~ msgstr "Вращать до грани 10 вместе с окном"
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Left with Window"
+msgstr "Вращать влево вместе с окном"
 
-#~ msgid "Rotate To Face 11"
-#~ msgstr "Вращать до грани 11"
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate Right"
+msgstr "Вращать вправо"
 
-#~ msgid "Rotate To Face 11 with Window"
-#~ msgstr "Вращать до грани 11 вместе с окном"
+#: ../metadata/rotate.xml.in.h:23
+msgid "Rotate Right with Window"
+msgstr "Вращать вправо вместе с окном"
 
-#~ msgid "Rotate To Face 12"
-#~ msgstr "Вращать до грани 12"
+#  Translators: text entry label
+#: ../metadata/rotate.xml.in.h:24
+msgid "Rotate To"
+msgstr "Вращать до"
 
-#~ msgid "Rotate To Face 12 with Window"
-#~ msgstr "Вращать до грани 12 вместе с окном"
+#: ../metadata/rotate.xml.in.h:25
+msgid "Rotate To Face 1"
+msgstr "Вращать до грани 1"
 
-#~ msgid "Rotate To Face 2"
-#~ msgstr "Вращать до грани 2"
+#: ../metadata/rotate.xml.in.h:26
+msgid "Rotate To Face 1 with Window"
+msgstr "Вращать до грани 1 вместе с окном"
 
-#~ msgid "Rotate To Face 2 with Window"
-#~ msgstr "Вращать до грани 2 вместе с окном"
+#: ../metadata/rotate.xml.in.h:27
+msgid "Rotate To Face 10"
+msgstr "Вращать до грани 10"
 
-#~ msgid "Rotate To Face 3"
-#~ msgstr "Вращать до грани 3"
+#: ../metadata/rotate.xml.in.h:28
+msgid "Rotate To Face 10 with Window"
+msgstr "Вращать до грани 10 вместе с окном"
 
-#~ msgid "Rotate To Face 3 with Window"
-#~ msgstr "Вращать до грани 3 вместе с окном"
+#: ../metadata/rotate.xml.in.h:29
+msgid "Rotate To Face 11"
+msgstr "Вращать до грани 11"
 
-#~ msgid "Rotate To Face 4"
-#~ msgstr "Вращать до грани 4"
+#: ../metadata/rotate.xml.in.h:30
+msgid "Rotate To Face 11 with Window"
+msgstr "Вращать до грани 11 вместе с окном"
 
-#~ msgid "Rotate To Face 4 with Window"
-#~ msgstr "Вращать до грани 4 вместе с окном"
+#: ../metadata/rotate.xml.in.h:31
+msgid "Rotate To Face 12"
+msgstr "Вращать до грани 12"
 
-#~ msgid "Rotate To Face 5"
-#~ msgstr "Вращать до грани 5"
+#: ../metadata/rotate.xml.in.h:32
+msgid "Rotate To Face 12 with Window"
+msgstr "Вращать до грани 12 вместе с окном"
 
-#~ msgid "Rotate To Face 5 with Window"
-#~ msgstr "Вращать до грани 5 вместе с окном"
+#: ../metadata/rotate.xml.in.h:33
+msgid "Rotate To Face 2"
+msgstr "Вращать до грани 2"
 
-#~ msgid "Rotate To Face 6"
-#~ msgstr "Вращать до грани 6"
+#: ../metadata/rotate.xml.in.h:34
+msgid "Rotate To Face 2 with Window"
+msgstr "Вращать до грани 2 вместе с окном"
 
-#~ msgid "Rotate To Face 6 with Window"
-#~ msgstr "Вращать до грани 6 вместе с окном"
+#: ../metadata/rotate.xml.in.h:35
+msgid "Rotate To Face 3"
+msgstr "Вращать до грани 3"
 
-#~ msgid "Rotate To Face 7"
-#~ msgstr "Вращать до грани 7"
+#: ../metadata/rotate.xml.in.h:36
+msgid "Rotate To Face 3 with Window"
+msgstr "Вращать до грани 3 вместе с окном"
 
-#~ msgid "Rotate To Face 7 with Window"
-#~ msgstr "Вращать до грани 7 вместе с окном"
+#: ../metadata/rotate.xml.in.h:37
+msgid "Rotate To Face 4"
+msgstr "Вращать до грани 4"
 
-#~ msgid "Rotate To Face 8"
-#~ msgstr "Вращать до грани 8"
+#: ../metadata/rotate.xml.in.h:38
+msgid "Rotate To Face 4 with Window"
+msgstr "Вращать до грани 4 вместе с окном"
 
-#~ msgid "Rotate To Face 8 with Window"
-#~ msgstr "Вращать до грани 8 вместе с окном"
+#: ../metadata/rotate.xml.in.h:39
+msgid "Rotate To Face 5"
+msgstr "Вращать до грани 5"
 
-#~ msgid "Rotate To Face 9"
-#~ msgstr "Вращать до грани 9"
+#: ../metadata/rotate.xml.in.h:40
+msgid "Rotate To Face 5 with Window"
+msgstr "Вращать до грани 5 вместе с окном"
 
-#~ msgid "Rotate To Face 9 with Window"
-#~ msgstr "Вращать до грани 9 вместе с окном"
+#: ../metadata/rotate.xml.in.h:41
+msgid "Rotate To Face 6"
+msgstr "Вращать до грани 6"
 
-#~ msgid "Rotate desktop cube"
-#~ msgstr "Вращение куба рабочего стола"
+#: ../metadata/rotate.xml.in.h:42
+msgid "Rotate To Face 6 with Window"
+msgstr "Вращать до грани 6 вместе с окном"
 
-#~ msgid "Rotate left"
-#~ msgstr "Вращение влево"
+#: ../metadata/rotate.xml.in.h:43
+msgid "Rotate To Face 7"
+msgstr "Вращать до грани 7"
 
-#~ msgid "Rotate left and bring active window along"
-#~ msgstr "Вращение влево вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:44
+msgid "Rotate To Face 7 with Window"
+msgstr "Вращать до грани 7 вместе с окном"
 
-#~ msgid "Rotate right"
-#~ msgstr "Вращение вправо"
+#: ../metadata/rotate.xml.in.h:45
+msgid "Rotate To Face 8"
+msgstr "Вращать до грани 8"
 
-#~ msgid "Rotate right and bring active window along"
-#~ msgstr "Вращение вправо вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:46
+msgid "Rotate To Face 8 with Window"
+msgstr "Вращать до грани 8 вместе с окном"
 
-#~ msgid "Rotate to face 1"
-#~ msgstr "Вращение до грани 1"
+#: ../metadata/rotate.xml.in.h:47
+msgid "Rotate To Face 9"
+msgstr "Вращать до грани 9"
 
-#~ msgid "Rotate to face 1 and bring active window along"
-#~ msgstr "Вращение до грани 1 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:48
+msgid "Rotate To Face 9 with Window"
+msgstr "Вращать до грани 9 вместе с окном"
 
-#~ msgid "Rotate to face 10"
-#~ msgstr "Вращение до грани 10"
+#: ../metadata/rotate.xml.in.h:49
+msgid "Rotate desktop cube"
+msgstr "Вращение куба рабочего стола"
 
-#~ msgid "Rotate to face 10 and bring active window along"
-#~ msgstr "Вращение до грани 10 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate left"
+msgstr "Вращение влево"
 
-#~ msgid "Rotate to face 11"
-#~ msgstr "Вращение до грани 11"
+#: ../metadata/rotate.xml.in.h:51
+msgid "Rotate left and bring active window along"
+msgstr "Вращение влево вместе с активным окном"
 
-#~ msgid "Rotate to face 11 and bring active window along"
-#~ msgstr "Вращение до грани 11 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:52
+msgid "Rotate right"
+msgstr "Вращение вправо"
 
-#~ msgid "Rotate to face 12"
-#~ msgstr "Вращение до грани 12"
+#: ../metadata/rotate.xml.in.h:53
+msgid "Rotate right and bring active window along"
+msgstr "Вращение вправо вместе с активным окном"
 
-#~ msgid "Rotate to face 12 and bring active window along"
-#~ msgstr "Вращение до грани 12 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:54
+msgid "Rotate to face 1"
+msgstr "Вращение до грани 1"
 
-#~ msgid "Rotate to face 2"
-#~ msgstr "Вращение до грани 2"
+#: ../metadata/rotate.xml.in.h:55
+msgid "Rotate to face 1 and bring active window along"
+msgstr "Вращение до грани 1 вместе с активным окном"
 
-#~ msgid "Rotate to face 2 and bring active window along"
-#~ msgstr "Вращение до грани 2 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:56
+msgid "Rotate to face 10"
+msgstr "Вращение до грани 10"
 
-#~ msgid "Rotate to face 3"
-#~ msgstr "Вращение до грани 3"
+#: ../metadata/rotate.xml.in.h:57
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Вращение до грани 10 вместе с активным окном"
 
-#~ msgid "Rotate to face 3 and bring active window along"
-#~ msgstr "Вращение до грани 3 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:58
+msgid "Rotate to face 11"
+msgstr "Вращение до грани 11"
 
-#~ msgid "Rotate to face 4"
-#~ msgstr "Вращение до грани 4"
+#: ../metadata/rotate.xml.in.h:59
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Вращение до грани 11 вместе с активным окном"
 
-#~ msgid "Rotate to face 4 and bring active window along"
-#~ msgstr "Вращение до грани 4 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:60
+msgid "Rotate to face 12"
+msgstr "Вращение до грани 12"
 
-#~ msgid "Rotate to face 5"
-#~ msgstr "Вращение до грани 5"
+#: ../metadata/rotate.xml.in.h:61
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Вращение до грани 12 вместе с активным окном"
 
-#~ msgid "Rotate to face 5 and bring active window along"
-#~ msgstr "Вращение до грани 5 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:62
+msgid "Rotate to face 2"
+msgstr "Вращение до грани 2"
 
-#~ msgid "Rotate to face 6"
-#~ msgstr "Вращение до грани 6"
+#: ../metadata/rotate.xml.in.h:63
+msgid "Rotate to face 2 and bring active window along"
+msgstr "Вращение до грани 2 вместе с активным окном"
 
-#~ msgid "Rotate to face 6 and bring active window along"
-#~ msgstr "Вращение до грани 6 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:64
+msgid "Rotate to face 3"
+msgstr "Вращение до грани 3"
 
-#~ msgid "Rotate to face 7"
-#~ msgstr "Вращение до грани 7"
+#: ../metadata/rotate.xml.in.h:65
+msgid "Rotate to face 3 and bring active window along"
+msgstr "Вращение до грани 3 вместе с активным окном"
 
-#~ msgid "Rotate to face 7 and bring active window along"
-#~ msgstr "Вращение до грани 7 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:66
+msgid "Rotate to face 4"
+msgstr "Вращение до грани 4"
 
-#~ msgid "Rotate to face 8"
-#~ msgstr "Вращение до грани 8"
+#: ../metadata/rotate.xml.in.h:67
+msgid "Rotate to face 4 and bring active window along"
+msgstr "Вращение до грани 4 вместе с активным окном"
 
-#~ msgid "Rotate to face 8 and bring active window along"
-#~ msgstr "Вращение до грани 8 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:68
+msgid "Rotate to face 5"
+msgstr "Вращение до грани 5"
 
-#~ msgid "Rotate to face 9"
-#~ msgstr "Вращение до грани 9"
+#: ../metadata/rotate.xml.in.h:69
+msgid "Rotate to face 5 and bring active window along"
+msgstr "Вращение до грани 5 вместе с активным окном"
 
-#~ msgid "Rotate to face 9 and bring active window along"
-#~ msgstr "Вращение до грани 9 вместе с активным окном"
+#: ../metadata/rotate.xml.in.h:70
+msgid "Rotate to face 6"
+msgstr "Вращение до грани 6"
 
-#~ msgid "Rotate to viewport"
-#~ msgstr "Вращение до кадрового окна"
+#: ../metadata/rotate.xml.in.h:71
+msgid "Rotate to face 6 and bring active window along"
+msgstr "Вращение до грани 6 вместе с активным окном"
 
-#~ msgid "Rotate window"
-#~ msgstr "Вращать окно"
+#: ../metadata/rotate.xml.in.h:72
+msgid "Rotate to face 7"
+msgstr "Вращение до грани 7"
 
-#~ msgid "Rotate with window"
-#~ msgstr "Вращение вместе с окном"
+#: ../metadata/rotate.xml.in.h:73
+msgid "Rotate to face 7 and bring active window along"
+msgstr "Вращение до грани 7 вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:74
+msgid "Rotate to face 8"
+msgstr "Вращение до грани 8"
+
+#: ../metadata/rotate.xml.in.h:75
+msgid "Rotate to face 8 and bring active window along"
+msgstr "Вращение до грани 8 вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:76
+msgid "Rotate to face 9"
+msgstr "Вращение до грани 9"
+
+#: ../metadata/rotate.xml.in.h:77
+msgid "Rotate to face 9 and bring active window along"
+msgstr "Вращение до грани 9 вместе с активным окном"
+
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate to viewport"
+msgstr "Вращение до кадрового окна"
+
+#: ../metadata/rotate.xml.in.h:79
+msgid "Rotate window"
+msgstr "Вращать окно"
+
+#: ../metadata/rotate.xml.in.h:80
+msgid "Rotate with window"
+msgstr "Вращение вместе с окном"
 
 # workflow: "3D Beschleunigung aktivieren"
 # -ke-
-#~ msgid "Rotation Acceleration"
-#~ msgstr "Ускорение вращения"
-
-#~ msgid "Rotation Speed"
-#~ msgstr "Скорость вращения"
-
-#~ msgid "Rotation Timestep"
-#~ msgstr "Квант времени вращения"
-
-#~ msgid "Rotation Zoom"
-#~ msgstr "Масштабирование вращения"
-
-#~ msgid "Sensitivity of pointer movement"
-#~ msgstr "Чувствительность к перемещениям курсора"
-
-#~ msgid "Snap Cube Rotation to Bottom Face"
-#~ msgstr "Привязка вращения куба к нижней грани"
-
-#~ msgid "Snap Cube Rotation to Top Face"
-#~ msgstr "Привязка вращения куба к верхней грани"
-
-#~ msgid "Snap To Bottom Face"
-#~ msgstr "Привязать к нижней грани"
-
-#~ msgid "Snap To Top Face"
-#~ msgstr "Привязать к верхней грани"
-
-#~ msgid "Start Rotation"
-#~ msgstr "Запуск вращения"
-
-#~ msgid "Timeout before flipping viewport"
-#~ msgstr "Задержка во времени до отражения кадрового окна"
-
-#~ msgid "Zoom"
-#~ msgstr "Изменить масштаб"
-
-#~ msgid "Amount of opacity in percent"
-#~ msgstr "Степень прозрачности в процентах"
-
-#~ msgid "Big"
-#~ msgstr "Большой"
-
-#~ msgid "Click Desktop to Show Desktop"
-#~ msgstr "Щелкнуть на рабочем столе для отображения рабочего стола"
-
-#~ msgid "Darken Background"
-#~ msgstr "Затемнить фон"
-
-#~ msgid "Darken background when scaling windows"
-#~ msgstr "Затемнение фона при масштабировании окон"
-
-#~ msgid "Emblem"
-#~ msgstr "Эмблема"
-
-#~ msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-#~ msgstr ""
-#~ "Переход в режим отображения рабочего стола при щелчке мышью на рабочем "
-#~ "столе во время масштабирования"
-
-#~ msgid "Hover Time"
-#~ msgstr "Время задержки при наведении"
-
-#~ msgid "Initiate Window Picker"
-#~ msgstr "Инициировать средство выбора окна"
-
-#~ msgid "Initiate Window Picker For All Windows"
-#~ msgstr "Инициировать средство выбора окна для всех окон"
-
-#~ msgid "Initiate Window Picker For Window Group"
-#~ msgstr "Инициировать средство выбора окна для группы окон"
-
-#~ msgid "Initiate Window Picker For Windows on Current Output"
-#~ msgstr ""
-#~ "Инициировать средство выбора окна для окон текущего устройства вывода"
-
-#~ msgid "Layout and start transforming all windows"
-#~ msgstr "Компоновка и запуск преобразования всех окон"
-
-#~ msgid "Layout and start transforming window group"
-#~ msgstr "Компоновка и запуск преобразования группы окон"
-
-#~ msgid "Layout and start transforming windows"
-#~ msgstr "Компоновка и запуск преобразования окон"
-
-#~ msgid "Layout and start transforming windows on current output"
-#~ msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
-
-#~ msgid "None"
-#~ msgstr "Никакой"
-
-#~ msgid "On all output devices"
-#~ msgstr "На все устройства вывода"
-
-#~ msgid "On current output device"
-#~ msgstr "На текущее устройство вывода"
-
-#~ msgid "Overlay Icon"
-#~ msgstr "Наложить значок"
-
-#~ msgid "Overlay an icon on windows once they are scaled"
-#~ msgstr "Наложение значка на окна при их масштабировании"
-
-#~ msgid "Scale"
-#~ msgstr "Масштабировать"
-
-#~ msgid "Scale Windows"
-#~ msgstr "Масштабирование окон"
-
-#~ msgid "Scale speed"
-#~ msgstr "Скорость масштабирования"
-
-#~ msgid "Scale timestep"
-#~ msgstr "Квант времени масштабирования"
-
-#~ msgid "Scale windows"
-#~ msgstr "Масштабирование окон"
-
-#~ msgid ""
-#~ "Selects where windows are scaled if multiple output devices are used."
-#~ msgstr ""
-#~ "Выбрать, где масштабировать окна если используются устройства "
-#~ "множественного вывода."
-
-#~ msgid "Space between windows"
-#~ msgstr "Расстояние между окнами"
-
-#~ msgid "Spacing"
-#~ msgstr "Интервал"
-
-#~ msgid ""
-#~ "Time (in ms) before scale mode is terminated when hovering over a window"
-#~ msgstr ""
-#~ "Время (в мс) до завершения режима масштабирования при наведении указателя "
-#~ "на окно"
-
-#~ msgid "Windows that should be scaled in scale mode"
-#~ msgstr "Типы окон, для которых следует применять режим масштабирования"
-
-#~ msgid "Automatically open screenshot in this application"
-#~ msgstr "Автоматически снимок экрана в этой программе"
-
-#~ msgid "Directory"
-#~ msgstr "Каталог"
-
-#~ msgid "Initiate rectangle screenshot"
-#~ msgstr "Сделать снимок области"
-
-#~ msgid "Launch Application"
-#~ msgstr "Запустить приложение"
-
-#~ msgid "Put screenshot images in this directory"
-#~ msgstr "Помещать изображения снимков экрана в этот каталог"
-
-#~ msgid "Screenshot"
-#~ msgstr "Снимок экрана"
-
-#~ msgid "Screenshot plugin"
-#~ msgstr "Модуль снимка экрана"
-
-#~ msgid "Svg"
-#~ msgstr "Svg"
-
-#~ msgid "Svg image loader"
-#~ msgstr "Загрузчик изображений Svg"
-
-#~ msgid "Amount of brightness in percent"
-#~ msgstr "Уровень яркости в процентах"
-
-#~ msgid "Amount of saturation in percent"
-#~ msgstr "Уровень насыщенности в процентах"
-
-#~ msgid "Application Switcher"
-#~ msgstr "Переключатель приложений"
-
-#~ msgid "Auto Rotate"
-#~ msgstr "Автоматическое вращение"
-
-#~ msgid "Brightness"
-#~ msgstr "Яркость"
-
-#~ msgid "Bring To Front"
-#~ msgstr "Переместить на передний план"
-
-#~ msgid "Bring selected window to front"
-#~ msgstr "Перемещение выбранного окна на передний план"
-
-#~ msgid "Distance desktop should be zoom out while switching windows"
-#~ msgstr ""
-#~ "При переключении окон рабочий стол на заднем плане должен быть уменьшен"
-
-#~ msgid "Icon"
-#~ msgstr "Значок"
-
-#~ msgid "Minimized"
-#~ msgstr "Свернутые"
-
-#~ msgid "Next Panel"
-#~ msgstr "Следующая панель"
-
-#~ msgid "Next window"
-#~ msgstr "Следующее окно"
-
-#~ msgid "Next window (All windows)"
-#~ msgstr "Следующее окно (Все окна)"
-
-#~ msgid "Next window (No popup)"
-#~ msgstr "Следующее окно (Не активируя)"
-
-#~ msgid "Popup switcher if not visible and select next window"
-#~ msgstr "Отображение переключателя (если он невидим) и выбор следующего окна"
-
-#~ msgid ""
-#~ "Popup switcher if not visible and select next window out of all windows"
-#~ msgstr ""
-#~ "Отображение переключателя (если он невидим) и выбор следующего окна из "
-#~ "всех имеющихся"
-
-#~ msgid "Popup switcher if not visible and select previous window"
-#~ msgstr ""
-#~ "Отображение переключателя (если он невидим) и выбор предыдущего окна"
-
-#~ msgid ""
-#~ "Popup switcher if not visible and select previous window out of all "
-#~ "windows"
-#~ msgstr ""
-#~ "Отображение переключателя (если он невидим) и выбор предыдущего окна из "
-#~ "всех имеющихся"
-
-#~ msgid "Prev Panel"
-#~ msgstr "Предыдущая панель"
-
-#~ msgid "Prev window"
-#~ msgstr "Предыдущее окно"
-
-#~ msgid "Prev window (All windows)"
-#~ msgstr "Предыдущее окно (Все окна)"
-
-#~ msgid "Prev window (No popup)"
-#~ msgstr "Предыдущее окно (Не активируя)"
-
-#~ msgid "Rotate to the selected window while switching"
-#~ msgstr "Вращать к выбранному окну при переключении"
+#: ../metadata/rotate.xml.in.h:81
+msgid "Rotation Acceleration"
+msgstr "Ускорение вращения"
+
+#: ../metadata/rotate.xml.in.h:82
+msgid "Rotation Speed"
+msgstr "Скорость вращения"
+
+#: ../metadata/rotate.xml.in.h:83
+msgid "Rotation Timestep"
+msgstr "Квант времени вращения"
+
+#: ../metadata/rotate.xml.in.h:84
+msgid "Rotation Zoom"
+msgstr "Масштабирование вращения"
+
+#: ../metadata/rotate.xml.in.h:85
+msgid "Sensitivity of pointer movement"
+msgstr "Чувствительность к перемещениям курсора"
+
+#: ../metadata/rotate.xml.in.h:86
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr "Привязка вращения куба к нижней грани"
+
+#: ../metadata/rotate.xml.in.h:87
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Привязка вращения куба к верхней грани"
+
+#: ../metadata/rotate.xml.in.h:88
+msgid "Snap To Bottom Face"
+msgstr "Привязать к нижней грани"
+
+#: ../metadata/rotate.xml.in.h:89
+msgid "Snap To Top Face"
+msgstr "Привязать к верхней грани"
+
+#: ../metadata/rotate.xml.in.h:91
+msgid "Start Rotation"
+msgstr "Запуск вращения"
+
+#: ../metadata/rotate.xml.in.h:92
+msgid "Timeout before flipping viewport"
+msgstr "Задержка во времени до отражения кадрового окна"
+
+#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
+msgid "Zoom"
+msgstr "Изменить масштаб"
+
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+msgid "Amount of opacity in percent"
+msgstr "Степень прозрачности в процентах"
+
+#: ../metadata/scale.xml.in.h:2
+msgid "Big"
+msgstr "Большой"
+
+#: ../metadata/scale.xml.in.h:3
+msgid "Click Desktop to Show Desktop"
+msgstr "Щелкнуть на рабочем столе для отображения рабочего стола"
+
+#: ../metadata/scale.xml.in.h:4
+msgid "Darken Background"
+msgstr "Затемнить фон"
+
+#: ../metadata/scale.xml.in.h:5
+msgid "Darken background when scaling windows"
+msgstr "Затемнение фона при масштабировании окон"
+
+#: ../metadata/scale.xml.in.h:6
+msgid "Emblem"
+msgstr "Эмблема"
+
+#: ../metadata/scale.xml.in.h:7
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr ""
+"Переход в режим отображения рабочего стола при щелчке мышью на рабочем столе "
+"во время масштабирования"
+
+#: ../metadata/scale.xml.in.h:8
+msgid "Hover Time"
+msgstr "Время задержки при наведении"
+
+#: ../metadata/scale.xml.in.h:9
+msgid "Initiate Window Picker"
+msgstr "Инициировать средство выбора окна"
+
+#: ../metadata/scale.xml.in.h:10
+msgid "Initiate Window Picker For All Windows"
+msgstr "Инициировать средство выбора окна для всех окон"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Initiate Window Picker For Window Group"
+msgstr "Инициировать средство выбора окна для группы окон"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Инициировать средство выбора окна для окон текущего устройства вывода"
+
+#: ../metadata/scale.xml.in.h:13
+msgid "Layout and start transforming all windows"
+msgstr "Компоновка и запуск преобразования всех окон"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Layout and start transforming window group"
+msgstr "Компоновка и запуск преобразования группы окон"
+
+#: ../metadata/scale.xml.in.h:15
+msgid "Layout and start transforming windows"
+msgstr "Компоновка и запуск преобразования окон"
+
+#: ../metadata/scale.xml.in.h:16
+msgid "Layout and start transforming windows on current output"
+msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
+
+#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Никакой"
+
+#: ../metadata/scale.xml.in.h:19
+msgid "On all output devices"
+msgstr "На все устройства вывода"
+
+#: ../metadata/scale.xml.in.h:20
+msgid "On current output device"
+msgstr "На текущее устройство вывода"
+
+#: ../metadata/scale.xml.in.h:22
+msgid "Overlay Icon"
+msgstr "Наложить значок"
+
+#: ../metadata/scale.xml.in.h:23
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Наложение значка на окна при их масштабировании"
+
+#: ../metadata/scale.xml.in.h:24
+msgid "Scale"
+msgstr "Масштабировать"
+
+#: ../metadata/scale.xml.in.h:25
+msgid "Scale Windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/scale.xml.in.h:26
+msgid "Scale speed"
+msgstr "Скорость масштабирования"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Scale timestep"
+msgstr "Квант времени масштабирования"
+
+#: ../metadata/scale.xml.in.h:28
+msgid "Scale windows"
+msgstr "Масштабирование окон"
+
+#: ../metadata/scale.xml.in.h:29
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+"Выбрать, где масштабировать окна если используются устройства множественного "
+"вывода."
+
+#: ../metadata/scale.xml.in.h:30
+msgid "Space between windows"
+msgstr "Расстояние между окнами"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Spacing"
+msgstr "Интервал"
+
+#: ../metadata/scale.xml.in.h:33
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Время (в мс) до завершения режима масштабирования при наведении указателя на "
+"окно"
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Windows that should be scaled in scale mode"
+msgstr "Типы окон, для которых следует применять режим масштабирования"
+
+#: ../metadata/screenshot.xml.in.h:1
+msgid "Automatically open screenshot in this application"
+msgstr "Автоматически снимок экрана в этой программе"
+
+#: ../metadata/screenshot.xml.in.h:2
+msgid "Directory"
+msgstr "Каталог"
+
+#: ../metadata/screenshot.xml.in.h:4
+msgid "Initiate rectangle screenshot"
+msgstr "Сделать снимок области"
+
+#: ../metadata/screenshot.xml.in.h:5
+msgid "Launch Application"
+msgstr "Запустить приложение"
+
+#: ../metadata/screenshot.xml.in.h:6
+msgid "Put screenshot images in this directory"
+msgstr "Помещать изображения снимков экрана в этот каталог"
+
+#: ../metadata/screenshot.xml.in.h:7
+msgid "Screenshot"
+msgstr "Снимок экрана"
+
+#: ../metadata/screenshot.xml.in.h:8
+msgid "Screenshot plugin"
+msgstr "Модуль снимка экрана"
+
+#: ../metadata/svg.xml.in.h:1
+msgid "Svg"
+msgstr "Svg"
+
+#: ../metadata/svg.xml.in.h:2
+msgid "Svg image loader"
+msgstr "Загрузчик изображений Svg"
+
+#: ../metadata/switcher.xml.in.h:1
+msgid "Amount of brightness in percent"
+msgstr "Уровень яркости в процентах"
+
+#: ../metadata/switcher.xml.in.h:3
+msgid "Amount of saturation in percent"
+msgstr "Уровень насыщенности в процентах"
+
+#: ../metadata/switcher.xml.in.h:4
+msgid "Application Switcher"
+msgstr "Переключатель приложений"
+
+#: ../metadata/switcher.xml.in.h:5
+msgid "Auto Rotate"
+msgstr "Автоматическое вращение"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Brightness"
+msgstr "Яркость"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Bring To Front"
+msgstr "Переместить на передний план"
+
+#: ../metadata/switcher.xml.in.h:8
+msgid "Bring selected window to front"
+msgstr "Перемещение выбранного окна на передний план"
+
+#: ../metadata/switcher.xml.in.h:9
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+"При переключении окон рабочий стол на заднем плане должен быть уменьшен"
+
+#: ../metadata/switcher.xml.in.h:11
+msgid "Icon"
+msgstr "Значок"
+
+#: ../metadata/switcher.xml.in.h:12
+msgid "Minimized"
+msgstr "Свернутые"
+
+#: ../metadata/switcher.xml.in.h:14
+msgid "Next Panel"
+msgstr "Следующая панель"
+
+#: ../metadata/switcher.xml.in.h:15
+msgid "Next window"
+msgstr "Следующее окно"
+
+#: ../metadata/switcher.xml.in.h:16
+msgid "Next window (All windows)"
+msgstr "Следующее окно (Все окна)"
+
+#: ../metadata/switcher.xml.in.h:17
+msgid "Next window (No popup)"
+msgstr "Следующее окно (Не активируя)"
+
+#: ../metadata/switcher.xml.in.h:19
+msgid "Popup switcher if not visible and select next window"
+msgstr "Отображение переключателя (если он невидим) и выбор следующего окна"
+
+#: ../metadata/switcher.xml.in.h:20
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Отображение переключателя (если он невидим) и выбор следующего окна из всех "
+"имеющихся"
+
+#: ../metadata/switcher.xml.in.h:21
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Отображение переключателя (если он невидим) и выбор предыдущего окна"
+
+#: ../metadata/switcher.xml.in.h:22
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Отображение переключателя (если он невидим) и выбор предыдущего окна из всех "
+"имеющихся"
+
+#: ../metadata/switcher.xml.in.h:23
+msgid "Prev Panel"
+msgstr "Предыдущая панель"
+
+#: ../metadata/switcher.xml.in.h:24
+msgid "Prev window"
+msgstr "Предыдущее окно"
+
+#: ../metadata/switcher.xml.in.h:25
+msgid "Prev window (All windows)"
+msgstr "Предыдущее окно (Все окна)"
+
+#: ../metadata/switcher.xml.in.h:26
+msgid "Prev window (No popup)"
+msgstr "Предыдущее окно (Не активируя)"
+
+#: ../metadata/switcher.xml.in.h:27
+msgid "Rotate to the selected window while switching"
+msgstr "Вращать к выбранному окну при переключении"
 
 #  Table header 4/5
-#~ msgid "Saturation"
-#~ msgstr "Насыщенность"
+#: ../metadata/switcher.xml.in.h:28
+msgid "Saturation"
+msgstr "Насыщенность"
 
-#~ msgid "Select next panel type window."
-#~ msgstr "Выбрать следующее окно типа панель."
+#: ../metadata/switcher.xml.in.h:29
+msgid "Select next panel type window."
+msgstr "Выбрать следующее окно типа панель."
 
-#~ msgid "Select next window without showing the popup window."
-#~ msgstr "Выбрать следующее окно без показа всплывающего окна."
+#: ../metadata/switcher.xml.in.h:30
+msgid "Select next window without showing the popup window."
+msgstr "Выбрать следующее окно без показа всплывающего окна."
 
-#~ msgid "Select previous panel type window."
-#~ msgstr "Выбрать предыдущее окно типа панель."
+#: ../metadata/switcher.xml.in.h:31
+msgid "Select previous panel type window."
+msgstr "Выбрать предыдущее окно типа панель."
 
-#~ msgid "Select previous window without showing the popup window."
-#~ msgstr "Выбрать предыдущее окно без показа всплывающего окна."
+#: ../metadata/switcher.xml.in.h:32
+msgid "Select previous window without showing the popup window."
+msgstr "Выбрать предыдущее окно без показа всплывающего окна."
 
-#~ msgid "Show icon next to thumbnail"
-#~ msgstr "Отображение значка рядом с эскизом"
+#: ../metadata/switcher.xml.in.h:33
+msgid "Show icon next to thumbnail"
+msgstr "Отображение значка рядом с эскизом"
 
-#~ msgid "Show minimized windows"
-#~ msgstr "Отображение свернутых окон"
+#: ../metadata/switcher.xml.in.h:34
+msgid "Show minimized windows"
+msgstr "Отображение свернутых окон"
 
-#~ msgid "Switcher speed"
-#~ msgstr "Скорость переключателя"
+#: ../metadata/switcher.xml.in.h:36
+msgid "Switcher speed"
+msgstr "Скорость переключателя"
 
-#~ msgid "Switcher timestep"
-#~ msgstr "Квант времени переключателя"
+#: ../metadata/switcher.xml.in.h:37
+msgid "Switcher timestep"
+msgstr "Квант времени переключателя"
 
-#~ msgid "Switcher windows"
-#~ msgstr "Переключатель окон"
+#: ../metadata/switcher.xml.in.h:38
+msgid "Switcher windows"
+msgstr "Переключатель окон"
 
-#~ msgid "Windows that should be shown in switcher"
-#~ msgstr "Окна, которые должны быть отображены в переключателе"
+#: ../metadata/switcher.xml.in.h:40
+msgid "Windows that should be shown in switcher"
+msgstr "Окна, которые должны быть отображены в переключателе"
 
-#~ msgid "Provide YV12 colorspace support"
-#~ msgstr "Обеспечить поддержку цветового пространства YV12"
+#: ../metadata/video.xml.in.h:1
+msgid "Provide YV12 colorspace support"
+msgstr "Обеспечить поддержку цветового пространства YV12"
 
-#~ msgid "Video Playback"
-#~ msgstr "Воспроизведение видео"
+#: ../metadata/video.xml.in.h:2
+msgid "Video Playback"
+msgstr "Воспроизведение видео"
 
-#~ msgid "Video playback"
-#~ msgstr "Воспроизведение видео"
+#: ../metadata/video.xml.in.h:3
+msgid "Video playback"
+msgstr "Воспроизведение видео"
 
-#~ msgid "YV12 colorspace"
-#~ msgstr "Цветовое пространство YV12"
+#: ../metadata/video.xml.in.h:4
+msgid "YV12 colorspace"
+msgstr "Цветовое пространство YV12"
 
-#~ msgid "Add line"
-#~ msgstr "Добавить линию"
+#: ../metadata/water.xml.in.h:1
+msgid "Add line"
+msgstr "Добавить линию"
 
-#~ msgid "Add point"
-#~ msgstr "Добавить точку"
+#: ../metadata/water.xml.in.h:2
+msgid "Add point"
+msgstr "Добавить точку"
 
-#~ msgid "Adds water effects to different desktop actions"
-#~ msgstr "Добавление эффектов воды к различным действиям рабочего стола"
+#: ../metadata/water.xml.in.h:3
+msgid "Adds water effects to different desktop actions"
+msgstr "Добавление эффектов воды к различным действиям рабочего стола"
 
-#~ msgid "Delay (in ms) between each rain-drop"
-#~ msgstr "Задержка (в мс) между каплями дождя"
+#: ../metadata/water.xml.in.h:4
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Задержка (в мс) между каплями дождя"
 
-#~ msgid "Enable pointer water effects"
-#~ msgstr "Включить для курсора эффекты воды"
+#: ../metadata/water.xml.in.h:5
+msgid "Enable pointer water effects"
+msgstr "Включить для курсора эффекты воды"
 
-#~ msgid "Line"
-#~ msgstr "Линия"
+#: ../metadata/water.xml.in.h:7
+msgid "Line"
+msgstr "Линия"
 
-#~ msgid "Offset Scale"
-#~ msgstr "Масштаб смещения"
+#: ../metadata/water.xml.in.h:8
+msgid "Offset Scale"
+msgstr "Масштаб смещения"
 
-#~ msgid "Point"
-#~ msgstr "Точка"
+#: ../metadata/water.xml.in.h:9
+msgid "Point"
+msgstr "Точка"
 
-#~ msgid "Rain Delay"
-#~ msgstr "Задержка дождя"
+#: ../metadata/water.xml.in.h:10
+msgid "Rain Delay"
+msgstr "Задержка дождя"
 
-#~ msgid "Title wave"
-#~ msgstr "Волны заголовка"
+#: ../metadata/water.xml.in.h:11
+msgid "Title wave"
+msgstr "Волны заголовка"
 
 #  translators: toggle button label
-#~ msgid "Toggle rain"
-#~ msgstr "Переключить дождь"
+#: ../metadata/water.xml.in.h:12
+msgid "Toggle rain"
+msgstr "Переключить дождь"
 
-#~ msgid "Toggle rain effect"
-#~ msgstr "Включение или отключение эффекта дождя"
+#: ../metadata/water.xml.in.h:13
+msgid "Toggle rain effect"
+msgstr "Включение или отключение эффекта дождя"
 
 #  translators: toggle button label
-#~ msgid "Toggle wiper"
-#~ msgstr "Переключить стеклоочиститель"
+#: ../metadata/water.xml.in.h:14
+msgid "Toggle wiper"
+msgstr "Переключить стеклоочиститель"
 
-#~ msgid "Toggle wiper effect"
-#~ msgstr "Включение или отключение эффекта стеклоочистителя"
+#: ../metadata/water.xml.in.h:15
+msgid "Toggle wiper effect"
+msgstr "Включение или отключение эффекта стеклоочистителя"
 
-#~ msgid "Water Effect"
-#~ msgstr "Эффект воды"
+#: ../metadata/water.xml.in.h:16
+msgid "Water Effect"
+msgstr "Эффект воды"
 
-#~ msgid "Water offset scale"
-#~ msgstr "Масштаб смещения воды"
+#: ../metadata/water.xml.in.h:17
+msgid "Water offset scale"
+msgstr "Масштаб смещения воды"
 
-#~ msgid "Wave effect from window title"
-#~ msgstr "Эффект волн в заголовке окна"
+#: ../metadata/water.xml.in.h:18
+msgid "Wave effect from window title"
+msgstr "Эффект волн в заголовке окна"
 
-#~ msgid "Focus Effect"
-#~ msgstr "Эффект фокусировки"
+#: ../metadata/wobbly.xml.in.h:1
+msgid "Focus Effect"
+msgstr "Эффект фокусировки"
 
-#~ msgid "Focus Window Effect"
-#~ msgstr "Эффект фокусировки окна"
+#: ../metadata/wobbly.xml.in.h:2
+msgid "Focus Window Effect"
+msgstr "Эффект фокусировки окна"
 
-#~ msgid "Focus Windows"
-#~ msgstr "Типы окон с фокусом"
+#: ../metadata/wobbly.xml.in.h:3
+msgid "Focus Windows"
+msgstr "Типы окон с фокусом"
 
 #  Table header 5/5
-#~ msgid "Friction"
-#~ msgstr "Трение"
+#: ../metadata/wobbly.xml.in.h:4
+msgid "Friction"
+msgstr "Трение"
 
-#~ msgid "Grab Windows"
-#~ msgstr "Типы окон при захвате"
+#: ../metadata/wobbly.xml.in.h:5
+msgid "Grab Windows"
+msgstr "Типы окон при захвате"
 
-#~ msgid "Grid Resolution"
-#~ msgstr "Разрешение решетки"
+#: ../metadata/wobbly.xml.in.h:6
+msgid "Grid Resolution"
+msgstr "Разрешение решетки"
 
-#~ msgid "Inverted window snapping"
-#~ msgstr "Инвертированная привязка окна"
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Inverted window snapping"
+msgstr "Инвертированная привязка окна"
 
-#~ msgid "Make window shiver"
-#~ msgstr "Включить дрожание окна"
+#: ../metadata/wobbly.xml.in.h:8
+msgid "Make window shiver"
+msgstr "Включить дрожание окна"
 
-#~ msgid "Map Effect"
-#~ msgstr "Эффект отражения"
+#: ../metadata/wobbly.xml.in.h:9
+msgid "Map Effect"
+msgstr "Эффект отражения"
 
-#~ msgid "Map Window Effect"
-#~ msgstr "Эффект отражения окна"
+#: ../metadata/wobbly.xml.in.h:10
+msgid "Map Window Effect"
+msgstr "Эффект отражения окна"
 
-#~ msgid "Map Windows"
-#~ msgstr "Типы отражения окна"
+#: ../metadata/wobbly.xml.in.h:11
+msgid "Map Windows"
+msgstr "Типы отражения окна"
 
-#~ msgid "Maximize Effect"
-#~ msgstr "Эффект развертывания"
+#: ../metadata/wobbly.xml.in.h:12
+msgid "Maximize Effect"
+msgstr "Эффект развертывания"
 
 #  combo box item
-#~ msgid "Minimum Grid Size"
-#~ msgstr "Минимальный размер решетки"
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Minimum Grid Size"
+msgstr "Минимальный размер решетки"
 
 #  combo box item
-#~ msgid "Minimum Vertex Grid Size"
-#~ msgstr "Минимальный размер решетки на вершинах"
+#: ../metadata/wobbly.xml.in.h:14
+msgid "Minimum Vertex Grid Size"
+msgstr "Минимальный размер решетки на вершинах"
 
-#~ msgid "Move Windows"
-#~ msgstr "Переместить окна"
+#: ../metadata/wobbly.xml.in.h:15
+msgid "Move Windows"
+msgstr "Переместить окна"
 
 # 'driver' as in '(hardware) driver update'
-#~ msgid "Shiver"
-#~ msgstr "Дрожание"
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Shiver"
+msgstr "Дрожание"
 
-#~ msgid "Snap Inverted"
-#~ msgstr "Инвертированная привязка"
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Snap Inverted"
+msgstr "Инвертированная привязка"
 
-#~ msgid "Snap windows"
-#~ msgstr "Привязка окон"
+#: ../metadata/wobbly.xml.in.h:19
+msgid "Snap windows"
+msgstr "Привязка окон"
 
 #  Table header 5/5
-#~ msgid "Spring Friction"
-#~ msgstr "Упругое трение"
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Spring Friction"
+msgstr "Упругое трение"
 
-#~ msgid "Spring K"
-#~ msgstr "K упругости"
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Spring K"
+msgstr "K упругости"
 
-#~ msgid "Spring Konstant"
-#~ msgstr "Константа упругости"
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Spring Konstant"
+msgstr "Константа упругости"
 
-#~ msgid "Toggle window snapping"
-#~ msgstr "Переключение привязки окон"
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Toggle window snapping"
+msgstr "Переключение привязки окон"
 
-#~ msgid "Use spring model for wobbly window effect"
-#~ msgstr "Использовать модель пружины в эффекте вязкого окна"
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Use spring model for wobbly window effect"
+msgstr "Использовать модель пружины в эффекте вязкого окна"
 
-#~ msgid "Vertex Grid Resolution"
-#~ msgstr "Разрешение решетки на вершинах"
+#: ../metadata/wobbly.xml.in.h:25
+msgid "Vertex Grid Resolution"
+msgstr "Разрешение решетки на вершинах"
 
-#~ msgid "Windows that should wobble when focused"
-#~ msgstr "Окна, становящиеся вязкими при фокусе"
+#: ../metadata/wobbly.xml.in.h:26
+msgid "Windows that should wobble when focused"
+msgstr "Окна, становящиеся вязкими при фокусе"
 
-#~ msgid "Windows that should wobble when grabbed"
-#~ msgstr "Окна, становящиеся вязкими при захвате"
+#: ../metadata/wobbly.xml.in.h:27
+msgid "Windows that should wobble when grabbed"
+msgstr "Окна, становящиеся вязкими при захвате"
 
-#~ msgid "Windows that should wobble when mapped"
-#~ msgstr "Окна, становящиеся вязкими при назначении"
+#: ../metadata/wobbly.xml.in.h:28
+msgid "Windows that should wobble when mapped"
+msgstr "Окна, становящиеся вязкими при назначении"
 
-#~ msgid "Windows that should wobble when moved"
-#~ msgstr "Окна, становящиеся вязкими при перемещении"
+#: ../metadata/wobbly.xml.in.h:29
+msgid "Windows that should wobble when moved"
+msgstr "Окна, становящиеся вязкими при перемещении"
 
-#~ msgid "Wobble effect when maximizing and unmaximizing windows"
-#~ msgstr "Эффект вязкости при развертывании и свертывании окон"
+#: ../metadata/wobbly.xml.in.h:30
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "Эффект вязкости при развертывании и свертывании окон"
 
-#~ msgid "Wobbly Windows"
-#~ msgstr "Вязкие окна"
+#: ../metadata/wobbly.xml.in.h:31
+msgid "Wobbly Windows"
+msgstr "Вязкие окна"
 
-#~ msgid "Filter Linear"
-#~ msgstr "Линейная фильтрация"
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Линейная фильтрация"
 
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Использовать линейную фильтрацию при приближении"
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "Использовать линейную фильтрацию при приближении"
 
-#~ msgid "Zoom Desktop"
-#~ msgstr "Изменить масштаб рабочего стола"
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Изменить масштаб рабочего стола"
 
-#~ msgid "Zoom In"
-#~ msgstr "Уменьшить"
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Уменьшить"
 
 #  combo box item
-#~ msgid "Zoom Out"
-#~ msgstr "Увеличить"
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Увеличить"
 
-#~ msgid "Zoom Pan"
-#~ msgstr "Панорамирование"
-
-#  combo box item
-#~ msgid "Zoom Speed"
-#~ msgstr "Скорость изменения масштаба"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Квант времени изменения масштаба"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Изменение масштаба и сдвига куба рабочего стола"
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "Панорамирование"
 
 #  combo box item
-#~ msgid "Zoom factor"
-#~ msgstr "Коэффициент масштабирования"
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "Скорость изменения масштаба"
 
-#~ msgid "Zoom pan"
-#~ msgstr "Панорамирование масштабирования"
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Квант времени изменения масштаба"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "Изменение масштаба и сдвига куба рабочего стола"
+
+#  combo box item
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "Коэффициент масштабирования"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "Панорамирование масштабирования"
